@@ -66,24 +66,24 @@ namespace Pinta.Core
 			fact.Add ("Menu.Edit.Addins.png", new Gtk.IconSet (PintaCore.Resources.GetIcon ("Menu.Edit.Addins.png")));
 			fact.AddDefault ();
 			
-			Undo = new Gtk.Action ("Undo", Catalog.GetString ("Undo"), null, Stock.Undo);
-			Redo = new Gtk.Action ("Redo", Catalog.GetString ("Redo"), null, Stock.Redo);
-			Cut = new Gtk.Action ("Cut", Catalog.GetString ("Cut"), null, Stock.Cut);
-			Copy = new Gtk.Action ("Copy", Catalog.GetString ("Copy"), null, Stock.Copy);
-			CopyMerged = new Gtk.Action ("CopyMerged", Catalog.GetString ("Copy Merged"), null, Stock.Copy);
-			Paste = new Gtk.Action ("Paste", Catalog.GetString ("Paste"), null, Stock.Paste);
-			PasteIntoNewLayer = new Gtk.Action ("PasteIntoNewLayer", Catalog.GetString ("Paste Into New Layer"), null, Stock.Paste);
-			PasteIntoNewImage = new Gtk.Action ("PasteIntoNewImage", Catalog.GetString ("Paste Into New Image"), null, Stock.Paste);
-			EraseSelection = new Gtk.Action ("EraseSelection", Catalog.GetString ("Erase Selection"), null, "Menu.Edit.EraseSelection.png");
-			FillSelection = new Gtk.Action ("FillSelection", Catalog.GetString ("Fill Selection"), null, "Menu.Edit.FillSelection.png");
-			InvertSelection = new Gtk.Action ("InvertSelection", Catalog.GetString ("Invert Selection"), null, "Menu.Edit.InvertSelection.png");
-			SelectAll = new Gtk.Action ("SelectAll", Catalog.GetString ("Select All"), null, Stock.SelectAll);
-			Deselect = new Gtk.Action ("Deselect", Catalog.GetString ("Deselect All"), null, "Menu.Edit.Deselect.png");
+			Undo = new Gtk.Action ("Undo", Catalog.GetString ("_Undo"), null, Stock.Undo);
+			Redo = new Gtk.Action ("Redo", Catalog.GetString ("_Redo"), null, Stock.Redo);
+			Cut = new Gtk.Action ("Cut", Catalog.GetString ("C_ut"), null, Stock.Cut);
+			Copy = new Gtk.Action ("Copy", Catalog.GetString ("_Copy"), null, Stock.Copy);
+			CopyMerged = new Gtk.Action ("CopyMerged", Catalog.GetString ("C_opy Merged"), null, Stock.Copy);
+			Paste = new Gtk.Action ("Paste", Catalog.GetString ("_Paste"), null, Stock.Paste);
+			PasteIntoNewLayer = new Gtk.Action ("PasteIntoNewLayer", Catalog.GetString ("Paste Into New _Layer"), null, Stock.Paste);
+			PasteIntoNewImage = new Gtk.Action ("PasteIntoNewImage", Catalog.GetString ("P_aste Into New Image"), null, Stock.Paste);
+			EraseSelection = new Gtk.Action ("EraseSelection", Catalog.GetString ("_Erase Selection"), null, "Menu.Edit.EraseSelection.png");
+			FillSelection = new Gtk.Action ("FillSelection", Catalog.GetString ("_Fill Selection"), null, "Menu.Edit.FillSelection.png");
+			InvertSelection = new Gtk.Action ("InvertSelection", Catalog.GetString ("_Invert Selection"), null, "Menu.Edit.InvertSelection.png");
+			SelectAll = new Gtk.Action ("SelectAll", Catalog.GetString ("_Select All"), null, Stock.SelectAll);
+			Deselect = new Gtk.Action ("Deselect", Catalog.GetString ("_Deselect All"), null, "Menu.Edit.Deselect.png");
 			
-			LoadPalette = new Gtk.Action ("LoadPalette", Catalog.GetString ("Open..."), null, Stock.Open);
-			SavePalette = new Gtk.Action ("SavePalette", Catalog.GetString ("Save As..."), null, Stock.Save);
-			ResetPalette = new Gtk.Action ("ResetPalette", Catalog.GetString ("Reset to Default"), null, Stock.RevertToSaved);
-			ResizePalette = new Gtk.Action ("ResizePalette", Catalog.GetString ("Set Number of Colors"), null, "Menu.Image.Resize.png");
+			LoadPalette = new Gtk.Action ("LoadPalette", Catalog.GetString ("_Open..."), null, Stock.Open);
+			SavePalette = new Gtk.Action ("SavePalette", Catalog.GetString ("_Save As..."), null, Stock.Save);
+			ResetPalette = new Gtk.Action ("ResetPalette", Catalog.GetString ("_Reset to Default"), null, Stock.RevertToSaved);
+			ResizePalette = new Gtk.Action ("ResizePalette", Catalog.GetString ("Set _Number of Colors"), null, "Menu.Image.Resize.png");
 
 			Undo.IsImportant = true;
 			Undo.Sensitive = false;
@@ -124,7 +124,7 @@ namespace Pinta.Core
 			menu.Append (InvertSelection.CreateAcceleratedMenuItem (Gdk.Key.I, Gdk.ModifierType.ControlMask));
 			
 			menu.AppendSeparator ();
-			Gtk.Action menu_action = new Gtk.Action ("Palette", Mono.Unix.Catalog.GetString ("Palette"), null, null);
+			Gtk.Action menu_action = new Gtk.Action ("Palette", Mono.Unix.Catalog.GetString ("Pa_lette"), null, null);
 			Menu palette_menu = (Menu) menu.AppendItem (menu_action.CreateSubMenuItem ()).Submenu;
 			palette_menu.Append (LoadPalette.CreateMenuItem ());
 			palette_menu.Append (SavePalette.CreateMenuItem ());

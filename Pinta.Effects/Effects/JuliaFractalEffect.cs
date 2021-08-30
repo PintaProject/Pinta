@@ -22,7 +22,7 @@ namespace Pinta.Effects
 		}
 
 		public override string Name {
-			get { return Catalog.GetString ("Julia Fractal"); }
+			get { return Catalog.GetString ("_Julia Fractal"); }
 		}
 
 		public override bool IsConfigurable {

@@ -22,7 +22,7 @@ namespace Pinta.Effects
 		}
 
 		public override string Name {
-			get { return Catalog.GetString ("Motion Blur"); }
+			get { return Catalog.GetString ("_Motion Blur"); }
 		}
 
 		public override bool IsConfigurable {

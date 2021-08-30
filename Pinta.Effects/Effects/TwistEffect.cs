@@ -22,7 +22,7 @@ namespace Pinta.Effects
 		}
 
 		public override string Name {
-			get { return Catalog.GetString ("Twist"); }
+			get { return Catalog.GetString ("_Twist"); }
 		}
 
 		public override bool IsConfigurable {

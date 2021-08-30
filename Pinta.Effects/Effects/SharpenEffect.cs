@@ -22,7 +22,7 @@ namespace Pinta.Effects
 		}
 
 		public override string Name {
-			get { return Catalog.GetString ("Sharpen"); }
+			get { return Catalog.GetString ("_Sharpen"); }
 		}
 
 		public override bool IsConfigurable {

@@ -41,7 +41,7 @@ namespace Pinta.Effects
 		}
 
 		public override string Name {
-			get { return Catalog.GetString ("Relief"); }
+			get { return Catalog.GetString ("_Relief"); }
 		}
 
 		#region Algorithm Code Ported From PDN

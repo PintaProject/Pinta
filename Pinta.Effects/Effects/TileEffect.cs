@@ -22,7 +22,7 @@ namespace Pinta.Effects
 		}
 
 		public override string Name {
-			get { return Catalog.GetString ("Tile Reflection"); }
+			get { return Catalog.GetString ("Tile _Reflection"); }
 		}
 
 		public override bool IsConfigurable {

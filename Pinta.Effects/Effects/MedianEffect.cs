@@ -25,7 +25,7 @@ namespace Pinta.Effects
 		}
 
 		public override string Name {
-			get { return Catalog.GetString ("Median"); }
+			get { return Catalog.GetString ("_Median"); }
 		}
 
 		public override bool IsConfigurable {

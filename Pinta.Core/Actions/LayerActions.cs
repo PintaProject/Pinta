@@ -62,17 +62,17 @@ namespace Pinta.Core
 			fact.Add ("Menu.Layers.RotateZoom.png", new Gtk.IconSet (PintaCore.Resources.GetIcon ("Menu.Layers.RotateZoom.png")));
 			fact.AddDefault ();
 			
-			AddNewLayer = new Gtk.Action ("AddNewLayer", Catalog.GetString ("Add New Layer"), null, "Menu.Layers.AddNewLayer.png");
-			DeleteLayer = new Gtk.Action ("DeleteLayer", Catalog.GetString ("Delete Layer"), null, "Menu.Layers.DeleteLayer.png");
-			DuplicateLayer = new Gtk.Action ("DuplicateLayer", Catalog.GetString ("Duplicate Layer"), null, "Menu.Layers.DuplicateLayer.png");
-			MergeLayerDown = new Gtk.Action ("MergeLayerDown", Catalog.GetString ("Merge Layer Down"), null, "Menu.Layers.MergeLayerDown.png");
-			ImportFromFile = new Gtk.Action ("ImportFromFile", Catalog.GetString ("Import from File..."), null, "Menu.Layers.ImportFromFile.png");
-			FlipHorizontal = new Gtk.Action ("FlipHorizontal", Catalog.GetString ("Flip Horizontal"), null, "Menu.Layers.FlipHorizontal.png");
-			FlipVertical = new Gtk.Action ("FlipVertical", Catalog.GetString ("Flip Vertical"), null, "Menu.Layers.FlipVertical.png");
-			RotateZoom = new Gtk.Action ("RotateZoom", Catalog.GetString ("Rotate / Zoom Layer..."), null, "Menu.Layers.RotateZoom.png");
+			AddNewLayer = new Gtk.Action ("AddNewLayer", Catalog.GetString ("Add _New Layer"), null, "Menu.Layers.AddNewLayer.png");
+			DeleteLayer = new Gtk.Action ("DeleteLayer", Catalog.GetString ("_Delete Layer"), null, "Menu.Layers.DeleteLayer.png");
+			DuplicateLayer = new Gtk.Action ("DuplicateLayer", Catalog.GetString ("Du_plicate Layer"), null, "Menu.Layers.DuplicateLayer.png");
+			MergeLayerDown = new Gtk.Action ("MergeLayerDown", Catalog.GetString ("_Merge Layer Down"), null, "Menu.Layers.MergeLayerDown.png");
+			ImportFromFile = new Gtk.Action ("ImportFromFile", Catalog.GetString ("_Import from File..."), null, "Menu.Layers.ImportFromFile.png");
+			FlipHorizontal = new Gtk.Action ("FlipHorizontal", Catalog.GetString ("Flip _Horizontal"), null, "Menu.Layers.FlipHorizontal.png");
+			FlipVertical = new Gtk.Action ("FlipVertical", Catalog.GetString ("Flip _Vertical"), null, "Menu.Layers.FlipVertical.png");
+			RotateZoom = new Gtk.Action ("RotateZoom", Catalog.GetString ("_Rotate / Zoom Layer..."), null, "Menu.Layers.RotateZoom.png");
 			MoveLayerUp = new Gtk.Action ("MoveLayerUp", Catalog.GetString ("Move Layer Up"), null, "Menu.Layers.MoveLayerUp.png");
-			MoveLayerDown = new Gtk.Action ("MoveLayerDown", Catalog.GetString ("Move Layer Down"), null, "Menu.Layers.MoveLayerDown.png");
-			Properties = new Gtk.Action ("Properties", Catalog.GetString ("Layer Properties..."), null, "Menu.Layers.LayerProperties.png");
+			MoveLayerDown = new Gtk.Action ("MoveLayerDown", Catalog.GetString ("Mo_ve Layer Down"), null, "Menu.Layers.MoveLayerDown.png");
+			Properties = new Gtk.Action ("Properties", Catalog.GetString ("Layer _Properties..."), null, "Menu.Layers.LayerProperties.png");
 
 			RotateZoom.Sensitive = false;
 		}

@@ -24,7 +24,7 @@ namespace Pinta.Effects
 		}
 
 		public override string Name {
-			get { return Catalog.GetString ("Unfocus"); }
+			get { return Catalog.GetString ("_Unfocus"); }
 		}
 
 		public override bool IsConfigurable {

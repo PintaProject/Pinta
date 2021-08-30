@@ -22,7 +22,7 @@ namespace Pinta.Effects
         }
 
         public override string Name {
-            get { return Catalog.GetString ("Gaussian Blur"); }
+            get { return Catalog.GetString ("_Gaussian Blur"); }
         }
 
         public override bool IsConfigurable {

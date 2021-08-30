@@ -42,8 +42,8 @@ namespace Pinta.Core
 
 		public WindowActions ()
 		{
-			SaveAll = new Gtk.Action ("SaveAll", Catalog.GetString ("Save All"), null, Stock.Save);
-			CloseAll = new Gtk.Action ("CloseAll", Catalog.GetString ("Close All"), null, Stock.Close);
+			SaveAll = new Gtk.Action ("SaveAll", Catalog.GetString ("_Save All"), null, Stock.Save);
+			CloseAll = new Gtk.Action ("CloseAll", Catalog.GetString ("_Close All"), null, Stock.Close);
 
 			OpenWindows = new List<RadioAction> ();
 			action_menu_items = new Dictionary<RadioAction,CheckMenuItem> ();

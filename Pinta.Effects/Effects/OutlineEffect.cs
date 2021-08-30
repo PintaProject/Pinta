@@ -25,7 +25,7 @@ namespace Pinta.Effects
 		}
 
 		public override string Name {
-			get { return Catalog.GetString ("Outline"); }
+			get { return Catalog.GetString ("_Outline"); }
 		}
 
 		public override bool IsConfigurable {

@@ -23,7 +23,7 @@ namespace Pinta.Effects
 		}
 
 		public override string Name {
-			get { return Mono.Unix.Catalog.GetString ("Sepia"); }
+			get { return Mono.Unix.Catalog.GetString ("_Sepia"); }
 		}
 
 		public override Gdk.Key AdjustmentMenuKey {

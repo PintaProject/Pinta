@@ -22,7 +22,7 @@ namespace Pinta.Effects
 		}
 
 		public override string Name {
-			get { return Catalog.GetString ("Frosted Glass"); }
+			get { return Catalog.GetString ("_Frosted Glass"); }
 		}
 
 		public override bool IsConfigurable {

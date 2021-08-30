@@ -23,7 +23,7 @@ namespace Pinta.Effects
 		}
 
 		public override string Name {
-			get { return Mono.Unix.Catalog.GetString ("Hue / Saturation"); }
+			get { return Mono.Unix.Catalog.GetString ("_Hue / Saturation"); }
 		}
 
 		public override bool IsConfigurable {

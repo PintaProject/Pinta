@@ -74,19 +74,19 @@ namespace Pinta.Core
 			fact.Add ("Menu.View.ZoomToWindow.png", new Gtk.IconSet (PintaCore.Resources.GetIcon ("Menu.View.ZoomToWindow.png")));
 			fact.AddDefault ();
 			
-			ZoomIn = new Gtk.Action ("ZoomIn", Catalog.GetString ("Zoom In"), null, Stock.ZoomIn);
-			ZoomOut = new Gtk.Action ("ZoomOut", Catalog.GetString ("Zoom Out"), null, Stock.ZoomOut);
-			ZoomToWindow = new Gtk.Action ("ZoomToWindow", Catalog.GetString ("Best Fit"), null, Stock.ZoomFit);
-			ZoomToSelection = new Gtk.Action ("ZoomToSelection", Catalog.GetString ("Zoom to Selection"), null, "Menu.View.ZoomToSelection.png");
-			ActualSize = new Gtk.Action ("ActualSize", Catalog.GetString ("Normal Size"), null, Stock.Zoom100);
-            ToolBar = new Gtk.ToggleAction ("Toolbar", Catalog.GetString ("Toolbar"), null, null);
-            ImageTabs = new Gtk.ToggleAction ("ImageTabs", Catalog.GetString ("Image Tabs"), null, null);
-            PixelGrid = new Gtk.ToggleAction ("PixelGrid", Catalog.GetString ("Pixel Grid"), null, "Menu.View.Grid.png");
-			Rulers = new Gtk.ToggleAction ("Rulers", Catalog.GetString ("Rulers"), null, "Menu.View.Rulers.png");
-			Pixels = new Gtk.RadioAction ("Pixels", Catalog.GetString ("Pixels"), null, null, 0);
-			Inches = new Gtk.RadioAction ("Inches", Catalog.GetString ("Inches"), null, null, 1);
-			Centimeters = new Gtk.RadioAction ("Centimeters", Catalog.GetString ("Centimeters"), null, null, 2);
-			Fullscreen = new Gtk.Action ("Fullscreen", Catalog.GetString ("Fullscreen"), null, Stock.Fullscreen);
+			ZoomIn = new Gtk.Action ("ZoomIn", Catalog.GetString ("Zoom _In"), null, Stock.ZoomIn);
+			ZoomOut = new Gtk.Action ("ZoomOut", Catalog.GetString ("Zoom _Out"), null, Stock.ZoomOut);
+			ZoomToWindow = new Gtk.Action ("ZoomToWindow", Catalog.GetString ("_Best Fit"), null, Stock.ZoomFit);
+			ZoomToSelection = new Gtk.Action ("ZoomToSelection", Catalog.GetString ("_Zoom to Selection"), null, "Menu.View.ZoomToSelection.png");
+			ActualSize = new Gtk.Action ("ActualSize", Catalog.GetString ("_Normal Size"), null, Stock.Zoom100);
+			ToolBar = new Gtk.ToggleAction ("Toolbar", Catalog.GetString ("_Toolbar"), null, null);
+			ImageTabs = new Gtk.ToggleAction ("ImageTabs", Catalog.GetString ("I_mage Tabs"), null, null);
+			PixelGrid = new Gtk.ToggleAction ("PixelGrid", Catalog.GetString ("_Pixel Grid"), null, "Menu.View.Grid.png");
+			Rulers = new Gtk.ToggleAction ("Rulers", Catalog.GetString ("_Rulers"), null, "Menu.View.Rulers.png");
+			Pixels = new Gtk.RadioAction ("Pixels", Catalog.GetString ("_Pixels"), null, null, 0);
+			Inches = new Gtk.RadioAction ("Inches", Catalog.GetString ("_Inches"), null, null, 1);
+			Centimeters = new Gtk.RadioAction ("Centimeters", Catalog.GetString ("_Centimeters"), null, null, 2);
+			Fullscreen = new Gtk.Action ("Fullscreen", Catalog.GetString ("_Fullscreen"), null, Stock.Fullscreen);
 
 			ZoomCollection = new string[] {
 				ToPercent (36),

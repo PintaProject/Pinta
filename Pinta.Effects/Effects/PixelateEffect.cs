@@ -22,7 +22,7 @@ namespace Pinta.Effects
 		}
 
 		public override string Name {
-			get { return Catalog.GetString ("Pixelate"); }
+			get { return Catalog.GetString ("Pi_xelate"); }
 		}
 
 		public override bool IsConfigurable {

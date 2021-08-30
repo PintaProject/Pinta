@@ -27,7 +27,7 @@ namespace Pinta.Effects
 		}
 
 		public override string Name {
-			get { return Catalog.GetString ("Clouds"); }
+			get { return Catalog.GetString ("_Clouds"); }
 		}
 
 		public override bool IsConfigurable {

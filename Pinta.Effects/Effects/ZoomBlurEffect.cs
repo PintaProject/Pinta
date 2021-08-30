@@ -22,7 +22,7 @@ namespace Pinta.Effects
 		}
 
 		public override string Name {
-			get { return Catalog.GetString ("Zoom Blur"); }
+			get { return Catalog.GetString ("_Zoom Blur"); }
 		}
 
 		public override bool IsConfigurable {

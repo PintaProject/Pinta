@@ -27,7 +27,7 @@ namespace Pinta.Effects
 		}
 
 		public override string Name {
-			get { return Catalog.GetString ("Glow"); }
+			get { return Catalog.GetString ("_Glow"); }
 		}
 
 		public override bool IsConfigurable {

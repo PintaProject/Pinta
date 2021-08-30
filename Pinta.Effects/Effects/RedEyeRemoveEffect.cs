@@ -25,7 +25,7 @@ namespace Pinta.Effects
 		}
 
 		public override string Name {
-			get { return Catalog.GetString ("Red Eye Removal"); }
+			get { return Catalog.GetString ("_Red Eye Removal"); }
 		}
 
 		public override bool IsConfigurable {

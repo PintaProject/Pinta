@@ -26,7 +26,7 @@ namespace Pinta.Effects
 		}
 
 		public override string Name {
-			get { return Catalog.GetString ("Add Noise"); }
+			get { return Catalog.GetString ("_Add Noise"); }
 		}
 
 		public override bool IsConfigurable {

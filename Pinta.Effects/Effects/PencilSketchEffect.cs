@@ -29,7 +29,7 @@ namespace Pinta.Effects
 		}
 
 		public override string Name {
-			get { return Catalog.GetString ("Pencil Sketch"); }
+			get { return Catalog.GetString ("_Pencil Sketch"); }
 		}
 
 		public override bool IsConfigurable {
