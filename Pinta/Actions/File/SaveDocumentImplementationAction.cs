@@ -81,11 +81,7 @@ namespace Pinta.Actions
 			};
 
 			fcd.SetCurrentFolder (PintaCore.System.GetDialogDirectory ());
-
-			bool hasFile = document.HasFile;
-
-			if (hasFile)
-				fcd.SetFilename (document.PathAndFileName);
+			fcd.SetFilename (document.PathAndFileName);
 
 			var filetypes = new Dictionary<FileFilter, FormatDescriptor> ();
 
@@ -105,7 +101,7 @@ namespace Pinta.Actions
 			// If not, default to jpeg
 			FormatDescriptor? format_desc = null;
 
-			if (hasFile)
+			if (document.HasFile)
 				format_desc = PintaCore.System.ImageFormats.GetFormatByFile (document.Filename);
 
 			if (format_desc == null) {
@@ -113,7 +109,7 @@ namespace Pinta.Actions
 
 				// Gtk doesn't like it if we set the file name to an extension that we don't have
 				// a filter for, so we change the extension to our default extension.
-				if (hasFile)
+				if (document.HasFile)
 					fcd.SetFilename (Path.ChangeExtension (document.PathAndFileName, format_desc.Extensions[0]));
 			}
 

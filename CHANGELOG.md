@@ -18,7 +18,7 @@ Thanks to the following contributors who worked on this release:
 - Ported to GTK3 and .NET 5
   - Many changes to the appearance of standard GTK widgets and dialogs (e.g. the color picker and file dialogs). GTK3 themes should also now be supported.
   - Improved support for high-DPI displays.
-  - The platform-native file dialogs are now used ([#1909807](https://bugs.launchpad.net/pinta/+bug/1909807)).
+  - The platform-native file dialogs are now used ([#1909807](https://bugs.launchpad.net/pinta/+bug/1909807), [#1909664](https://bugs.launchpad.net/pinta/+bug/1909664)).
   - The Open Recent menu item was deprecated in GTK3 and has been removed, but similar functionality is available in the file dialog's Recent section.
   - On macOS, the menu now appears in the global menu bar instead of the application window.
   - On macOS, keyboard shortcuts now use Command instead of Ctrl.
