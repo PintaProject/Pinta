@@ -81,7 +81,11 @@ namespace Pinta.Actions
 			};
 
 			fcd.SetCurrentFolder (PintaCore.System.GetDialogDirectory ());
-			fcd.SetFilename (document.PathAndFileName);
+
+			if (document.HasFile)
+				fcd.SetFilename (document.PathAndFileName);
+			else
+				fcd.CurrentName = document.Filename;
 
 			var filetypes = new Dictionary<FileFilter, FormatDescriptor> ();
 
