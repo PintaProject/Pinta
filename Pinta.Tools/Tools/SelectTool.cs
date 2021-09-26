@@ -97,6 +97,12 @@ namespace Pinta.Tools
 				active_control = 3;
 			}
 
+			// Do a full redraw for modes that can wipe existing selections outside the rectangle being drawn.
+			if (combine_mode == CombineMode.Replace || combine_mode == CombineMode.Intersect) {
+				var size = document.ImageSize;
+				last_dirty = new Gdk.Rectangle (0, 0, size.Width, size.Height);
+			}
+
 			is_drawing = true;
 		}
 
