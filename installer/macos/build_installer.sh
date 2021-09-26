@@ -1,4 +1,5 @@
 #!/bin/sh
+set -e
 set -x
 
 MAC_APP_DIR=Pinta.app
