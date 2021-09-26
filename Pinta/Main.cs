@@ -125,8 +125,13 @@ namespace Pinta
 
 			if (extra.Count > 0)
 			{
-				foreach (var file in extra)
-					PintaCore.Workspace.OpenFile (file);
+				foreach (var file in extra) {
+					string path = file;
+					if (path.StartsWith ("file://"))
+						path = new Uri (path).LocalPath;
+
+					PintaCore.Workspace.OpenFile (path);
+				}
 			}
 			else
 			{
