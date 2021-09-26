@@ -263,5 +263,24 @@ namespace Pinta.Core
 				};
             }
         }
+		/// <summary>
+		/// Returns the platform-specific label for the Ctrl key.
+		/// For example, this is the Cmd key on macOS.
+		/// </summary>
+		public static string CtrlLabel ()
+		{
+			Accelerator.Parse ("<Primary>", out var key, out var mods);
+			return Accelerator.GetLabel (key, mods);
+		}
+
+		/// <summary>
+		/// Returns the platform-specific label for the Alt key.
+		/// For example, this is the Option key on macOS.
+		/// </summary>
+		public static string AltLabel ()
+		{
+			Accelerator.Parse ("<Alt>", out var key, out var mods);
+			return Accelerator.GetLabel (key, mods);
+		}
 	}
 }

@@ -45,10 +45,13 @@ namespace Pinta.Core
         {
             combine_modes = new Dictionary<string, CombineMode>() {
                 { Translations.GetString ("Replace"), CombineMode.Replace},
-                { Translations.GetString ("Union (+) (Ctrl + Left Click)"), CombineMode.Union},
+                // Translators: {0} is 'Ctrl', or a platform-specific key such as 'Command' on macOS.
+                { Translations.GetString ("Union (+) ({0} + Left Click)", GtkExtensions.CtrlLabel ()), CombineMode.Union},
                 { Translations.GetString ("Exclude (-) (Right Click)"), CombineMode.Exclude},
-                { Translations.GetString ("Xor (Ctrl + Right Click)"), CombineMode.Xor},
-                { Translations.GetString ("Intersect (Alt + Left Click)"), CombineMode.Intersect},
+                // Translators: {0} is 'Ctrl', or a platform-specific key such as 'Command' on macOS.
+                { Translations.GetString ("Xor ({0} + Right Click)", GtkExtensions.CtrlLabel ()), CombineMode.Xor},
+                // Translators: {0} is 'Alt', or a platform-specific key such as 'Option' on macOS.
+                { Translations.GetString ("Intersect ({0} + Left Click)", GtkExtensions.AltLabel ()), CombineMode.Intersect},
             };
         }
 
