@@ -37,27 +37,27 @@ namespace Pinta.Core
 		/// <summary>
 		/// Specifies whether the Alt key is currently pressed.
 		/// </summary>
-		public bool IsAltPressed => State.HasFlag (ModifierType.Mod1Mask);
+		public bool IsAltPressed => State.IsAltPressed ();
 
 		/// <summary>
 		/// Specifies whether the Control key is currently pressed.
 		/// </summary>
-		public bool IsControlPressed => State.HasFlag (ModifierType.ControlMask);
+		public bool IsControlPressed => State.IsControlPressed ();
 
 		/// <summary>
 		/// Specifies whether the left mouse button is currently pressed.
 		/// </summary>
-		public bool IsLeftMousePressed => State.HasFlag (ModifierType.Button1Mask);
+		public bool IsLeftMousePressed => State.IsLeftMousePressed ();
 
 		/// <summary>
 		/// Specifies whether the right mouse button is currently pressed.
 		/// </summary>
-		public bool IsRightMousePressed => State.HasFlag (ModifierType.Button3Mask);
+		public bool IsRightMousePressed => State.IsRightMousePressed ();
 
 		/// <summary>
 		/// Specifies whether the Shift key is currently pressed.
 		/// </summary>
-		public bool IsShiftPressed => State.HasFlag (ModifierType.ShiftMask);
+		public bool IsShiftPressed => State.IsShiftPressed ();
 
 		/// <summary>
 		/// Specifies the key that has been pressed or released.

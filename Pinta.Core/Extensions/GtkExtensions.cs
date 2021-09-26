@@ -263,11 +263,5 @@ namespace Pinta.Core
 				};
             }
         }
-
-		public static bool IsShiftPressed (this MotionNotifyEventArgs? args) => args?.Event.State.IsShiftPressed () ?? false;
-		public static bool IsControlPressed (this MotionNotifyEventArgs? args) => args?.Event.State.IsControlPressed () ?? false;
-		public static bool IsAltPressed (this MotionNotifyEventArgs? args) => args?.Event.State.IsAltPressed () ?? false;
-		public static bool IsButton1Pressed (this MotionNotifyEventArgs? args) => args?.Event.State.HasFlag (Gdk.ModifierType.Button1Mask) ?? false;
-		public static bool IsButton3Pressed (this MotionNotifyEventArgs? args) => args?.Event.State.HasFlag (Gdk.ModifierType.Button3Mask) ?? false;
 	}
 }

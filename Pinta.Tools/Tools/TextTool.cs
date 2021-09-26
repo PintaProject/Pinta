@@ -649,7 +649,7 @@ namespace Pinta.Tools
 			if (e.IsAltPressed)
 				return false;
 
-			ctrlKey = (e.Key == Gdk.Key.Control_L || e.Key == Gdk.Key.Control_R);
+			ctrlKey = e.Key.IsControlKey ();
 			UpdateMouseCursor (document);
 
 			// Assume that we are going to handle the key
@@ -781,8 +781,7 @@ namespace Pinta.Tools
 
 		protected override bool OnKeyUp(Document document, ToolKeyEventArgs e)
 		{
-			if (e.Key == Gdk.Key.Control_L || e.Key == Gdk.Key.Control_R ||
-					e.IsControlPressed)
+			if (e.Key.IsControlKey () || e.IsControlPressed)
 			{
 				ctrlKey = false;
 

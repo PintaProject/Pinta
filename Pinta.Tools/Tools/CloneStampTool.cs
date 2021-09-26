@@ -139,7 +139,7 @@ namespace Pinta.Tools
 		protected override bool OnKeyDown (Document document, ToolKeyEventArgs e)
 		{
 			// Note that this WON'T work if user presses control key and THEN selects the tool!
-			if (e.Key == Key.Control_L || e.Key == Key.Control_R) {
+			if (e.Key.IsControlKey ()) {
 				var icon = Resources.GetIcon ("Cursor.CloneStampSetSource.png");
 				var setSourceCursor = new Cursor (Display.Default, icon, 16, 26);
 				SetCursor (setSourceCursor);
@@ -150,7 +150,7 @@ namespace Pinta.Tools
 
 		protected override bool OnKeyUp (Document document, ToolKeyEventArgs e)
 		{
-			if (e.Key == Key.Control_L || e.Key == Key.Control_R)
+			if (e.Key.IsControlKey ())
 				SetCursor (DefaultCursor);
 
 			return false;

@@ -69,17 +69,33 @@ namespace Pinta.Core
 
 		public static bool IsShiftPressed(this ModifierType m)
 		{
-			return (m & ModifierType.ShiftMask) == ModifierType.ShiftMask;
+			return m.HasFlag (ModifierType.ShiftMask);
 		}
 
-		public static bool IsControlPressed(this ModifierType m)
+		/// <summary>
+		/// Returns whether a Ctrl modifier is pressed (or the Cmd key on macOS).
+		/// </summary>
+		public static bool IsControlPressed (this ModifierType m)
 		{
-			return (m & ModifierType.ControlMask) == ModifierType.ControlMask;
+			if (PintaCore.System.OperatingSystem == OS.Mac)
+				return m.HasFlag (ModifierType.Mod2Mask);
+			else
+				return m.HasFlag (ModifierType.ControlMask);
 		}
 
 		public static bool IsAltPressed (this ModifierType m)
 		{
-			return (m & ModifierType.Mod1Mask) == ModifierType.Mod1Mask;
+			return m.HasFlag (ModifierType.Mod1Mask);
+		}
+
+		public static bool IsLeftMousePressed (this ModifierType m)
+		{
+			return m.HasFlag (ModifierType.Button1Mask);
+		}
+
+		public static bool IsRightMousePressed (this ModifierType m)
+		{
+			return m.HasFlag (ModifierType.Button3Mask);
 		}
 
 		public static bool IsShiftPressed(this EventButton ev)
@@ -98,6 +114,17 @@ namespace Pinta.Core
 		}
 
 		/// <summary>
+		/// Returns whether this key is a Ctrl key (or the Cmd key on macOS).
+		/// </summary>
+		public static bool IsControlKey (this Key key)
+		{
+			if (PintaCore.System.OperatingSystem == OS.Mac)
+				return key == Key.Meta_L || key == Key.Meta_R;
+			else
+				return key == Key.Control_L || key == Key.Control_R;
+		}
+
+		/// <summary>
 		/// Filters out all modifier keys except Ctrl/Shift/Alt. This prevents Caps Lock, Num Lock, etc
 		/// from appearing as active modifier keys.
 		/// </summary>
@@ -108,7 +135,7 @@ namespace Pinta.Core
 			state |= (current_state & Gdk.ModifierType.ControlMask);
 			state |= (current_state & Gdk.ModifierType.ShiftMask);
 			state |= (current_state & Gdk.ModifierType.Mod1Mask);
-			state |= (current_state & Gdk.ModifierType.MetaMask); // Command key on macOS.
+			state |= (current_state & Gdk.ModifierType.Mod2Mask); // Command key on macOS.
 
 			return state;
 		}
