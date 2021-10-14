@@ -119,6 +119,8 @@ namespace Pinta.Actions
 
 			fcd.Filter = format_desc.Filter;
 
+			fcd.AddNotification ("filter", OnFilterChanged);
+
 			// Replace GTK's ConfirmOverwrite with our own, for UI consistency
 			fcd.ConfirmOverwrite += (eventSender, eventArgs) => {
 				if (this.ConfirmOverwrite (fcd, fcd.Filename))
@@ -263,6 +265,26 @@ namespace Pinta.Actions
 			int response = md.Run ();
 
 			return response == (int)ResponseType.Ok;
+		}
+
+		private void OnFilterChanged (object o, GLib.NotifyArgs args)
+		{
+			var fcd = (IFileChooser) o;
+
+			// Ensure that the file filter is never blank.
+			if (fcd.Filter == null)
+			{
+				fcd.Filter = PintaCore.System.ImageFormats.GetDefaultSaveFormat ().Filter;
+				return;
+			}
+
+			// find the FormatDescriptor
+			FormatDescriptor format_desc = PintaCore.System.ImageFormats.Formats.Single (f => f.Filter == fcd.Filter);
+
+			// adjust the filename
+			var p = fcd.Filename ?? fcd.CurrentName;
+			p = Path.ChangeExtension (Path.GetFileName (p), format_desc.Extensions[0]);
+			fcd.CurrentName = p;
 		}
 	}
 }
