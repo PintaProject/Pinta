@@ -282,7 +282,7 @@ namespace Pinta.Actions
 			FormatDescriptor format_desc = PintaCore.System.ImageFormats.Formats.Single (f => f.Filter == fcd.Filter);
 
 			// adjust the filename
-			var p = fcd.Filename;
+			var p = fcd.Filename ?? fcd.CurrentName;
 			p = Path.ChangeExtension (Path.GetFileName (p), format_desc.Extensions[0]);
 			fcd.CurrentName = p;
 		}
