@@ -45,6 +45,7 @@ Thanks to the following contributors who worked on this release:
 - Performance improvements for the selection tools when interactively adjusting the selection.
 - The appdata file is now installed to `/usr/share/metainfo` instead of the legacy path `/usr/share/appdata` (#186).
 - Minor changes to the default settings of the Resize Image and Resize Canvas dialogs (#184, #185).
+- Improved error messages when the user does not have read or write permissions for a file ([#1715150](https://bugs.launchpad.net/pinta/+bug/1715150)).
 
 ### Fixed
 - Fixed a bug where Auto Crop could incorrectly remove an additional pixel on the bottom and right side of the image. ([#1191390](https://bugs.launchpad.net/pinta/+bug/1191390)).

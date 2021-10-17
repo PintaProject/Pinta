@@ -234,8 +234,8 @@ namespace Pinta.Core
                 });
 
 				fileOpened = true;
-			} catch (UnauthorizedAccessException e) {
-				ShowOpenFileErrorDialog (parent, file, Translations.GetString ("Permission denied"), e.ToString ());
+			} catch (UnauthorizedAccessException) {
+				ShowFilePermissionErrorDialog (parent, file);
 			} catch (FormatException e) {
 				ShowUnsupportedFormatDialog (parent, file, e.Message, e.ToString());
 			} catch (Exception e) {
@@ -395,6 +395,18 @@ namespace Pinta.Core
 
 			string message = string.Format (markup, primaryText, secondaryText);
 			PintaCore.Chrome.ShowUnsupportedFormatDialog(parent, message, details);
+		}
+
+		private void ShowFilePermissionErrorDialog (Window parent, string filename)
+		{
+			string markup = "<span weight=\"bold\" size=\"larger\">{0}</span>\n\n{1}";
+			string primary = Translations.GetString ("Failed to open image");
+			// Translators: {0} is the name of a file that the user does not have permission to open.
+			string secondary = Translations.GetString ("You do not have access to '{0}'.", filename);
+			string message = string.Format (markup, primary, secondary);
+
+			using var md = new MessageDialog (parent, DialogFlags.Modal, MessageType.Error, ButtonsType.Ok, message);
+			md.Run ();
 		}
 
 		#region Public Events

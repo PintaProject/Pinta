@@ -192,17 +192,6 @@ namespace Pinta.Actions
 				return false;
 			}
 
-			// If the user tries to save over a read only file, give a more informative error message than "Unhandled Exception"
-			FileInfo file_info = new FileInfo (file);
-			if (file_info.Exists && file_info.IsReadOnly) {
-				using var md = new MessageDialog (parent, DialogFlags.Modal, MessageType.Error,
-					ButtonsType.Ok, Translations.GetString ("Cannot save read only file."));
-				md.Title = Translations.GetString ("Error");
-
-				md.Run ();
-				return false;
-			}
-
 			// Commit any pending changes
 			PintaCore.Tools.Commit ();
 
@@ -216,6 +205,16 @@ namespace Pinta.Actions
 
 					using var md = new MessageDialog (parent, DialogFlags.Modal, MessageType.Error,
 					ButtonsType.Ok, message);
+
+					md.Run ();
+					return false;
+				} else if (e.Message.Contains ("Permission denied") && e.Message.Contains ("Failed to open")) {
+					string primary = Translations.GetString ("Failed to save image");
+					// Translators: {0} is the name of a file that the user does not have write permission for.
+					string secondary = Translations.GetString ("You do not have access to modify '{0}'. The file or folder may be read-only.", file);
+					string message = string.Format (markup, primary, secondary);
+
+					using var md = new MessageDialog (parent, DialogFlags.Modal, MessageType.Error, ButtonsType.Ok, message);
 
 					md.Run ();
 					return false;
