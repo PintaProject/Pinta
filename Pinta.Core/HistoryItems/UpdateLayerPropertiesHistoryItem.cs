@@ -56,6 +56,8 @@ namespace Pinta.Core
 			layer.Hidden = initial_properties.Hidden;
 			layer.Name = initial_properties.Name;
 			layer.BlendMode = initial_properties.BlendMode;
+
+			UpdateSelectionLayer (doc, layer);
 		}
 
 		public override void Redo ()
@@ -67,10 +69,19 @@ namespace Pinta.Core
 			layer.Hidden = updated_properties.Hidden;
 			layer.Name = updated_properties.Name;
 			layer.BlendMode = updated_properties.BlendMode;
+
+			UpdateSelectionLayer (doc, layer);
 		}
 
 		public override void Dispose ()
 		{
+		}
+
+		private void UpdateSelectionLayer(Document doc, Layer layer)
+		{
+			// Keep the selection layer's visibility in sync with the current layer.
+			if (doc.Layers.CurrentUserLayer == layer)
+				doc.Layers.SelectionLayer.Hidden = layer.Hidden;
 		}
 	}
 }

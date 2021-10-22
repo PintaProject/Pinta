@@ -278,8 +278,6 @@ namespace Pinta.Gui.Widgets
 		{
 			var doc = PintaCore.Workspace.ActiveDocument;
 
-			layer.Hidden = !visibility;
-
 			var initial = new LayerProperties (layer.Name, visibility, layer.Opacity, layer.BlendMode);
 			var updated = new LayerProperties (layer.Name, !visibility, layer.Opacity, layer.BlendMode);
 
@@ -289,6 +287,7 @@ namespace Pinta.Gui.Widgets
 				doc.Layers.IndexOf (layer),
 				initial,
 				updated);
+			historyItem.Redo ();
 
 			doc.History.PushNewItem (historyItem);
 		}
