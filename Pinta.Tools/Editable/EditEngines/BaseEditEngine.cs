@@ -245,6 +245,11 @@ namespace Pinta.Tools
 			}
 		}
 
+		private void OnFillStyleChanged(object? sender, EventArgs e)
+		{
+			DrawActiveShape (false, false, true, false, false);
+		}
+
         #endregion ToolbarEventHandlers
 
 
@@ -317,6 +322,7 @@ namespace Pinta.Tools
                 fill_button.AddItem(Translations.GetString("Fill and Outline Shape"), Resources.Icons.FillStyleOutlineFill, 2);
 
 				fill_button.SelectedIndex = settings.GetSetting (FILL_TYPE_SETTING (toolPrefix), 0);
+				fill_button.SelectedItemChanged += OnFillStyleChanged;
             }
 
             tb.AppendItem(fill_button);
