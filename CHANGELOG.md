@@ -5,13 +5,17 @@ All notable changes to this project (beginning with version 1.7) will be documen
 
 Thanks to the following contributors who worked on this release:
 - @cameronwhite
+- @jpobst
 - @darkdragon-001
 - @JamiKettunen
 - @thekolian1996
 - @tdgroot
-- @Nikitayfh
+- @nikita-yfh
 - @pikachuiscool2
 - @yaminb
+- @dandv
+- @City-busz
+- @jefetienne
 
 ### Added
 - The canvas can now be scrolled horizontally by holding Shift while using the mouse wheel (#141)
@@ -19,11 +23,14 @@ Thanks to the following contributors who worked on this release:
 - Added a more user-friendly dialog when attempting to open an unsupported file format (#143, [#1856821](https://bugs.launchpad.net/pinta/+bug/1856821))
 - Zooming in and out can now be done without pressing the Ctrl key (#150).
 - Arrow keys can be used to move by a single pixel in the Move Selected Pixels and Move Selection tools ([#1906141](https://bugs.launchpad.net/pinta/+bug/1906141)).
+- Shift can now be used to constrain to a uniform scale when scaling using the Move Selected Pixels tool (#138).
 - The About dialog now allows easily copying the version information to the clipboard for use when reporting bugs ([#1924249](https://bugs.launchpad.net/pinta/+bug/1924249)).
 
 ### Changed
 - Fixed inconsistent behavior when switching between tools that share the same shortcut, such as the selection tools (#144, [#1558767](https://bugs.launchpad.net/pinta/+bug/1558767))
 - Improved error messages when the user does not have read or write permissions for a file ([#1715150](https://bugs.launchpad.net/pinta/+bug/1715150)).
+- The appdata file is now installed to `/usr/share/metainfo` instead of the legacy path `/usr/share/appdata` (#186).
+- Tooltips for tabs now show the full file path instead of only the file name (#187).
 
 ### Fixed
 - Fixed a bug where Auto Crop could incorrectly remove an additional pixel on the bottom and right side of the image. ([#1191390](https://bugs.launchpad.net/pinta/+bug/1191390)).
@@ -31,7 +38,6 @@ Thanks to the following contributors who worked on this release:
 - Fixed issues with the zoom controls when using a French locale ([#1464855](https://bugs.launchpad.net/pinta/+bug/1464855))
 - Fixed invalid URLs in `pinta.appdata.xml` (#140, #145)
 - Added missing release notes to `pinta.appdata.xml` (#142)
-- Shift can now be used to constrain to a uniform scale when scaling using the Move Selected Pixels tool (#138).
 - Fixed a regression introduced in Pinta 1.7 that could produce blurred pixels when using the Move Selected Pixels tool ([#1904304](https://bugs.launchpad.net/pinta/+bug/1904304)).
 - Fixed a bug where the Rotate / Zoom Layer dialog could leave the layer in a state where all future actions were also transformed ([#1905176](https://bugs.launchpad.net/pinta/+bug/1905176)).
 - Fixed a bug where the document might not be marked as modified after certain undo / redo actions ([#1905165](https://bugs.launchpad.net/pinta/+bug/1905165)).
@@ -41,6 +47,7 @@ Thanks to the following contributors who worked on this release:
 - Fixed a bug where the text tool was not correctly clipped against the selection ([#1910511](https://bugs.launchpad.net/pinta/+bug/1910511)).
 - Improved handling of memory allocation failures for large images ([#776346](https://bugs.launchpad.net/pinta/+bug/776346)).
 - Fixed a bug where the shape tools did not redraw after changes to the fill style until the cursor entered the canvas ([#1937921](https://bugs.launchpad.net/pinta/+bug/1937921)).
+- Fixed a crash when opening an invalid palette file (#146, [#1890450](https://bugs.launchpad.net/pinta/+bug/1890450)).
 
 ## [1.7](https://github.com/PintaProject/Pinta/releases/tag/1.7) - 2020/08/04
 
