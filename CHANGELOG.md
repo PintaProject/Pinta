@@ -10,9 +10,10 @@ Thanks to the following contributors who worked on this release:
 - @JamiKettunen
 - @thekolian1996
 - @tdgroot
-- @Nikitayfh
+- @nikita-yfh
 - @pikachuiscool2
 - @yaminb
+- @dandv
 
 ### Added
 - Ported to GTK3 and .NET 5
@@ -35,6 +36,7 @@ Thanks to the following contributors who worked on this release:
 - Zooming in and out can now be done without pressing the Ctrl key (#150).
 - Arrow keys can be used to move by a single pixel in the Move Selected Pixels and Move Selection tools ([#1906141](https://bugs.launchpad.net/pinta/+bug/1906141)).
 - The primary and secondary palette colors are now saved in the application settings (#171).
+- Shift can now be used to constrain to a uniform scale when scaling using the Move Selected Pixels tool (#138).
 - Tools now save their settings for the next time Pinta is opened (#178).
 - The About dialog now allows easily copying the version information to the clipboard for use when reporting bugs ([#1924249](https://bugs.launchpad.net/pinta/+bug/1924249)).
 
@@ -52,7 +54,6 @@ Thanks to the following contributors who worked on this release:
 - Fixed issues with the zoom controls when using a French locale ([#1464855](https://bugs.launchpad.net/pinta/+bug/1464855))
 - Fixed invalid URLs in `pinta.appdata.xml` (#140, #145)
 - Added missing release notes to `pinta.appdata.xml` (#142)
-- Shift can now be used to constrain to a uniform scale when scaling using the Move Selected Pixels tool (#138).
 - Fixed a regression introduced in Pinta 1.7 that could produce blurred pixels when using the Move Selected Pixels tool ([#1904304](https://bugs.launchpad.net/pinta/+bug/1904304)).
 - Fixed a bug where the Rotate / Zoom Layer dialog could leave the layer in a state where all future actions were also transformed ([#1905176](https://bugs.launchpad.net/pinta/+bug/1905176)).
 - Fixed a bug where the document might not be marked as modified after certain undo / redo actions ([#1905165](https://bugs.launchpad.net/pinta/+bug/1905165)).
@@ -69,6 +70,7 @@ Thanks to the following contributors who worked on this release:
 - Fixed an issue where opening a file URI from the command line did not work ([#1908806](https://bugs.launchpad.net/pinta/+bug/1908806)).
 - Fixed an issue where hiding a layer could leave the selection still visible ([#1907987](https://bugs.launchpad.net/pinta/+bug/1907987)).
 - Fixed a bug where the shape tools did not redraw after changes to the fill style until the cursor entered the canvas ([#1937921](https://bugs.launchpad.net/pinta/+bug/1937921)).
+- Fixed a crash when opening an invalid palette file (#146, [#1890450](https://bugs.launchpad.net/pinta/+bug/1890450)).
 
 ## [1.7](https://github.com/PintaProject/Pinta/releases/tag/1.7) - 2020/08/04
 
