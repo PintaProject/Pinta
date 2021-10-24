@@ -32,7 +32,7 @@ jobs:
       uses: actions/upload-artifact@v2
       with:
         name: Pinta-${{ matrix.platform }}.zip
-        path: pinta-1.8.zip
+        path: pinta-1.7.1.zip
         if-no-files-found: error
 
   build-macos:
