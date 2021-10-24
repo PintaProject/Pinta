@@ -48,25 +48,40 @@ namespace Pinta.Core
 		}
 
 		public override void Undo ()
-		{			
-			var layer = PintaCore.Layers[layer_index];
+		{
+			var doc = PintaCore.Workspace.ActiveDocument;
+
+			var layer = doc.Layers[layer_index];
 			layer.Opacity = initial_properties.Opacity;
 			layer.Hidden = initial_properties.Hidden;
 			layer.Name = initial_properties.Name;
 			layer.BlendMode = initial_properties.BlendMode;
+
+			UpdateSelectionLayer (doc, layer);
 		}
 
 		public override void Redo ()
 		{
-			var layer = PintaCore.Layers[layer_index];
+			var doc = PintaCore.Workspace.ActiveDocument;
+
+			var layer = doc.Layers[layer_index];
 			layer.Opacity = updated_properties.Opacity;
 			layer.Hidden = updated_properties.Hidden;
 			layer.Name = updated_properties.Name;
 			layer.BlendMode = updated_properties.BlendMode;
+
+			UpdateSelectionLayer (doc, layer);
 		}
 
 		public override void Dispose ()
 		{
+		}
+
+		private void UpdateSelectionLayer(Document doc, Layer layer)
+		{
+			// Keep the selection layer's visibility in sync with the current layer.
+			if (doc.Layers.CurrentUserLayer == layer)
+				doc.Layers.SelectionLayer.Hidden = layer.Hidden;
 		}
 	}
 }

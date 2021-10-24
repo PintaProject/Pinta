@@ -34,7 +34,7 @@ namespace Pinta.Tools.Brushes
 	public class PlainBrush : BasePaintBrush
 	{
 		public override string Name {
-			get { return Mono.Unix.Catalog.GetString ("Normal"); }
+			get { return Translations.GetString ("Normal"); }
 		}
 
 		public override int Priority {
@@ -56,7 +56,7 @@ namespace Pinta.Tools.Brushes
 				g.StrokePreserve ();
 			}
 
-			Gdk.Rectangle dirty = g.FixedStrokeExtents ().ToGdkRectangle ();
+			Gdk.Rectangle dirty = g.StrokeExtents ().ToGdkRectangle ();
 
 			// For some reason (?!) we need to inflate the dirty
 			// rectangle for small brush widths in zoomed images

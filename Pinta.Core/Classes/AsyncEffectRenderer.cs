@@ -49,9 +49,9 @@ namespace Pinta.Core
 			internal ThreadPriority ThreadPriority { get; set; }
 		}		
 		
-		BaseEffect effect;
-		Cairo.ImageSurface source_surface;
-		Cairo.ImageSurface dest_surface;
+		BaseEffect? effect;
+		Cairo.ImageSurface? source_surface;
+		Cairo.ImageSurface? dest_surface;
 		Gdk.Rectangle render_bounds;
 		
 		bool is_rendering;
@@ -164,7 +164,7 @@ namespace Pinta.Core
 		
 		protected abstract void OnUpdate (double progress, Gdk.Rectangle updatedBounds);
 		
-		protected abstract void OnCompletion (bool canceled, Exception[] exceptions);
+		protected abstract void OnCompletion (bool canceled, Exception[]? exceptions);
 		
 		internal void Dispose ()
 		{
@@ -248,22 +248,23 @@ namespace Pinta.Core
 		// Runs on a background thread.
 		void RenderTile (int renderId, int threadId, int tileIndex)
 		{
-			Exception exception = null;
+			Exception? exception = null;
 			Gdk.Rectangle bounds = new Gdk.Rectangle ();
 			
 			try {
 				
 				bounds = GetTileBounds (tileIndex);
-				
+
+				// NRT - These are set in Start () before getting here
 				if (!cancel_render_flag) {
-					dest_surface.Flush ();
-					effect.Render (source_surface, dest_surface, new [] { bounds });
+					dest_surface!.Flush ();
+					effect!.Render (source_surface!, dest_surface, new [] { bounds });
 					dest_surface.MarkDirty (bounds.ToCairoRectangle ());
 				}
 				
 			} catch (Exception ex) {		
 				exception = ex;
-				Debug.WriteLine ("AsyncEffectRenderer Error while rendering effect: " + effect.Name + " exception: " + ex.Message + "\n" + ex.StackTrace);
+				Debug.WriteLine ("AsyncEffectRenderer Error while rendering effect: " + effect!.Name + " exception: " + ex.Message + "\n" + ex.StackTrace);
 			}
 			
 			// Ignore completions of tiles after a cancel or from a previous render.

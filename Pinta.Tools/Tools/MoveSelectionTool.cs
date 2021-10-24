@@ -27,80 +27,71 @@
 using System;
 using Cairo;
 using Pinta.Core;
-using Mono.Unix;
-using ClipperLibrary;
-using System.Collections.Generic;
 
 namespace Pinta.Tools
 {
 	public class MoveSelectionTool : BaseTransformTool
 	{
-		private SelectionHistoryItem hist;
-		private DocumentSelection original_selection;
-		
-		public override string Name {
-			get { return Catalog.GetString ("Move Selection"); }
-		}
-		public override string Icon {
-			get { return "Tools.MoveSelection.png"; }
-		}
-		public override string StatusBarText {
-			get { return Catalog.GetString ("Left click and drag the selection to move selection outline. Hold Ctrl to scale instead of move. Right click and drag the selection to rotate selection outline. Hold Shift to rotate in steps. Use arrow keys to move selection outline by a single pixel."); }
-		}
-		public override Gdk.Cursor DefaultCursor {
-            get { return new Gdk.Cursor (Gdk.Display.Default, PintaCore.Resources.GetIcon ("Tools.MoveSelection.png"), 0, 0); }
-		}
-		public override Gdk.Key ShortcutKey { get { return Gdk.Key.M; } }
-		public override int Priority { get { return 11; } }
+		private SelectionHistoryItem? hist;
+		private DocumentSelection? original_selection;
 
-		#region Mouse Handlers
-
-		protected override Rectangle GetSourceRectangle ()
+		public MoveSelectionTool (IServiceManager service) : base (service)
 		{
-			Document doc = PintaCore.Workspace.ActiveDocument;
-			return doc.Selection.SelectionPath.GetBounds().ToCairoRectangle();
 		}
 
-		protected override void OnStartTransform ()
-		{
-			base.OnStartTransform ();
+		public override string Name => Translations.GetString ("Move Selection");
+		public override string Icon => Pinta.Resources.Icons.ToolMoveSelection;
+		// Translators: {0} is 'Ctrl', or a platform-specific key such as 'Command' on macOS.
+		public override string StatusBarText => Translations.GetString ("Left click and drag the selection to move selection outline. Hold {0} to scale instead of move. Right click and drag the selection to rotate selection outline. Hold Shift to rotate in steps. Use arrow keys to move selection outline by a single pixel.", GtkExtensions.CtrlLabel ());
+		public override Gdk.Cursor DefaultCursor => new Gdk.Cursor (Gdk.Display.Default, Gtk.IconTheme.Default.LoadIcon (Pinta.Resources.Icons.ToolMoveSelection, 16), 0, 0);
+		public override Gdk.Key ShortcutKey => Gdk.Key.M;
+		public override int Priority => 7;
 
-			Document doc = PintaCore.Workspace.ActiveDocument;
-			original_selection = doc.Selection.Clone ();
+		protected override Rectangle GetSourceRectangle (Document document)
+		{
+			return document.Selection.SelectionPath.GetBounds ().ToCairoRectangle ();
+		}
+
+		protected override void OnStartTransform (Document document)
+		{
+			base.OnStartTransform (document);
+
+			original_selection = document.Selection.Clone ();
 
 			hist = new SelectionHistoryItem (Icon, Name);
 			hist.TakeSnapshot ();
 		}
 
-		protected override void OnUpdateTransform (Matrix transform)
+		protected override void OnUpdateTransform (Document document, Matrix transform)
 		{
-			base.OnUpdateTransform (transform);
+			base.OnUpdateTransform (document, transform);
 
-			Document doc = PintaCore.Workspace.ActiveDocument;
-			doc.Selection.Dispose ();
-			doc.Selection = original_selection.Transform (transform);
-			doc.Selection.Visible = true;
+			// Should never be null, set in OnStartTransform
+			if (original_selection is null)
+				return;
 
-			PintaCore.Workspace.Invalidate ();
+			document.Selection.Dispose ();
+			document.Selection = original_selection.Transform (transform);
+			document.Selection.Visible = true;
+
+			document.Workspace.Invalidate ();
 		}
 
-		protected override void OnFinishTransform (Matrix transform)
+		protected override void OnFinishTransform (Document document, Matrix transform)
 		{
-			base.OnFinishTransform (transform);
+			base.OnFinishTransform (document, transform);
 
 			// Also transform the base selection used for the various select modes.
-			var doc = PintaCore.Workspace.ActiveDocument;
-			using (var prev_selection = doc.PreviousSelection)
-				doc.PreviousSelection = prev_selection.Transform (transform);
+			using (var prev_selection = document.PreviousSelection)
+				document.PreviousSelection = prev_selection.Transform (transform);
 
 			if (hist != null)
-				PintaCore.Workspace.ActiveDocument.History.PushNewItem (hist);
+				document.History.PushNewItem (hist);
 
 			hist = null;
 
-			original_selection.Dispose ();
+			original_selection?.Dispose ();
 			original_selection = null;
 		}
-		#endregion
 	}
 }

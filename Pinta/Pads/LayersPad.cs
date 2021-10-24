@@ -25,7 +25,6 @@
 // THE SOFTWARE.
 
 using Gtk;
-using Mono.Unix;
 using Pinta.Docking;
 using Pinta.Core;
 using Pinta.Gui.Widgets;
@@ -34,32 +33,40 @@ namespace Pinta
 {
 	public class LayersPad : IDockPad
 	{
-		public void Initialize (DockFrame workspace, Menu padMenu)
+		public void Initialize (Dock workspace, Application app, GLib.Menu padMenu)
 		{
 			var layers = new LayersListWidget ();
-			DockItem layers_item = workspace.AddItem ("Layers");
-			DockItemToolbar layers_tb = layers_item.GetToolbar (PositionType.Bottom);
+			DockItem layers_item = new DockItem(layers, "Layers")
+			{
+				Label = Translations.GetString("Layers")
+			};
 
-			layers_item.Label = Catalog.GetString ("Layers");
-			layers_item.Content = layers;
-			layers_item.Icon = PintaCore.Resources.GetIcon ("Menu.Layers.MergeLayerDown.png");
-            layers_item.DefaultWidth = 100;
+			var layers_tb = layers_item.AddToolBar();
+			layers_tb.Add(PintaCore.Actions.Layers.AddNewLayer.CreateDockToolBarItem());
+			layers_tb.Add(PintaCore.Actions.Layers.DeleteLayer.CreateDockToolBarItem());
+			layers_tb.Add(PintaCore.Actions.Layers.DuplicateLayer.CreateDockToolBarItem());
+			layers_tb.Add(PintaCore.Actions.Layers.MergeLayerDown.CreateDockToolBarItem());
+			layers_tb.Add(PintaCore.Actions.Layers.MoveLayerUp.CreateDockToolBarItem());
+			layers_tb.Add(PintaCore.Actions.Layers.MoveLayerDown.CreateDockToolBarItem());
+
+			// TODO-GTK3 (docking)
+#if false
+
+			layers_item.Icon = Gtk.IconTheme.Default.LoadIcon(Resources.Icons.LayerMergeDown, 16);
+			layers_item.DefaultWidth = 100;
 			layers_item.Behavior |= DockItemBehavior.CantClose;
+#endif
+			workspace.AddItem(layers_item, DockPlacement.Right);
 
-			layers_tb.Add (PintaCore.Actions.Layers.AddNewLayer.CreateDockToolBarItem ());
-			layers_tb.Add (PintaCore.Actions.Layers.DeleteLayer.CreateDockToolBarItem ());
-			layers_tb.Add (PintaCore.Actions.Layers.DuplicateLayer.CreateDockToolBarItem ());
-			layers_tb.Add (PintaCore.Actions.Layers.MergeLayerDown.CreateDockToolBarItem ());
-			layers_tb.Add (PintaCore.Actions.Layers.MoveLayerUp.CreateDockToolBarItem ());
-			layers_tb.Add (PintaCore.Actions.Layers.MoveLayerDown.CreateDockToolBarItem ());
+			var show_layers = new ToggleCommand("layers", Translations.GetString("Layers"), null, Resources.Icons.LayerMergeDown)
+			{
+				Value = true
+			};
+			app.AddAction(show_layers);
+			padMenu.AppendItem(show_layers.CreateMenuItem());
 
-			Gtk.ToggleAction show_layers = padMenu.AppendToggleAction ("Layers", Catalog.GetString ("Layers"), null, "Menu.Layers.MergeLayerDown.png");
-			show_layers.Activated += delegate { layers_item.Visible = show_layers.Active; };
-			layers_item.VisibleChanged += delegate { show_layers.Active = layers_item.Visible; };
-
-			show_layers.Active = layers_item.Visible;
-
-			PintaCore.Workspace.ActiveDocumentChanged += delegate { layers.Reset (); };
+			show_layers.Toggled += (val) => { layers_item.Visible = val; };
+			layers_item.VisibilityNotifyEvent += (o, args) => { show_layers.Value = layers_item.Visible; };
 		}
 	}
 }

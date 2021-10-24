@@ -33,8 +33,8 @@ namespace Pinta.Core
 
 	public class BaseHistoryItem : IDisposable
 	{
-		public string Icon { get; set; }
-		public string Text { get; set; }
+		public string? Icon { get; set; }
+		public string? Text { get; set; }
 		public HistoryItemState State { get; set; }
 		public TreeIter Id;
 		public virtual bool CausesDirty { get { return true; } }

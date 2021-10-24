@@ -27,81 +27,72 @@
 using System;
 using Cairo;
 using Pinta.Core;
-using Mono.Unix;
-using ClipperLibrary;
-using System.Collections.Generic;
+using Gtk;
 
 namespace Pinta.Tools
 {
 	public class MagicWandTool : FloodTool
 	{
-		private Gtk.ToolItem selection_sep;
-        private CombineMode combine_mode;
+		private readonly IWorkspaceService workspace;
 
-		public override Gdk.Key ShortcutKey { get { return Gdk.Key.S; } }
+		private CombineMode combine_mode;
 
-		public MagicWandTool()
+		public MagicWandTool (IServiceManager services) : base (services)
 		{
+			workspace = services.GetService<IWorkspaceService> ();
+
 			LimitToSelection = false;
 		}
 
-		protected override void OnBuildToolBar(Gtk.Toolbar tb)
+		public override Gdk.Key ShortcutKey => Gdk.Key.S;
+		public override string Name => Translations.GetString ("Magic Wand Select");
+		public override string Icon => Pinta.Resources.Icons.ToolSelectMagicWand;
+		public override string StatusBarText => Translations.GetString ("Click to select region of similar color.");
+		public override Gdk.Cursor DefaultCursor => new Gdk.Cursor (Gdk.Display.Default, Resources.GetIcon ("Cursor.MagicWand.png"), 21, 10);
+		public override int Priority => 19;
+
+		protected override void OnBuildToolBar (Gtk.Toolbar tb)
 		{
-			base.OnBuildToolBar(tb);
+			base.OnBuildToolBar (tb);
 
-			if (selection_sep == null)
-				selection_sep = new Gtk.SeparatorToolItem();
+			tb.AppendItem (SelectionSeparator);
 
-			tb.AppendItem(selection_sep);
-
-			PintaCore.Workspace.SelectionHandler.BuildToolbar(tb);
+			workspace.SelectionHandler.BuildToolbar (tb, Settings);
 		}
 
-		public override string Name
+
+		protected override void OnMouseDown (Document document, ToolMouseEventArgs e)
 		{
-			get { return Catalog.GetString("Magic Wand Select"); }
+			combine_mode = workspace.SelectionHandler.DetermineCombineMode (e);
+
+			base.OnMouseDown (document, e);
+
+			document.Selection.Visible = true;
 		}
 
-		public override string Icon
+		protected override void OnFillRegionComputed (Document document, Point[][] polygonSet)
 		{
-			get { return "Tools.MagicWand.png"; }
+			var undoAction = new SelectionHistoryItem (Icon, Name);
+			undoAction.TakeSnapshot ();
+
+			document.PreviousSelection.Dispose ();
+			document.PreviousSelection = document.Selection.Clone ();
+
+			document.Selection.SelectionPolygons.Clear ();
+			SelectionModeHandler.PerformSelectionMode (combine_mode, DocumentSelection.ConvertToPolygons (polygonSet));
+
+			document.History.PushNewItem (undoAction);
+			document.Workspace.Invalidate ();
 		}
 
-		public override string StatusBarText
+		protected override void OnSaveSettings (ISettingsService settings)
 		{
-			get { return Catalog.GetString("Click to select region of similar color."); }
+			base.OnSaveSettings (settings);
+
+			workspace.SelectionHandler.OnSaveSettings (settings);
 		}
 
-		public override Gdk.Cursor DefaultCursor
-		{
-            get { return new Gdk.Cursor (Gdk.Display.Default, PintaCore.Resources.GetIcon ("Cursor.MagicWand.png"), 21, 10); }
-		}
-		public override int Priority { get { return 17; } }
-
-		protected override void OnMouseDown(Gtk.DrawingArea canvas, Gtk.ButtonPressEventArgs args, Cairo.PointD point)
-		{
-			Document doc = PintaCore.Workspace.ActiveDocument;
-            combine_mode = PintaCore.Workspace.SelectionHandler.DetermineCombineMode (args);
-
-			base.OnMouseDown(canvas, args, point);
-			doc.Selection.Visible = true;
-		}
-
-		protected override void OnFillRegionComputed(Point[][] polygonSet)
-		{
-			Document doc = PintaCore.Workspace.ActiveDocument;
-
-			SelectionHistoryItem undoAction = new SelectionHistoryItem(this.Icon, this.Name);
-			undoAction.TakeSnapshot();
-
-            doc.PreviousSelection.Dispose ();
-            doc.PreviousSelection = doc.Selection.Clone ();
-
-            doc.Selection.SelectionPolygons.Clear ();
-            SelectionModeHandler.PerformSelectionMode (combine_mode, DocumentSelection.ConvertToPolygons (polygonSet));
-
-			doc.History.PushNewItem(undoAction);
-			doc.Workspace.Invalidate();
-		}
+		private SeparatorToolItem? selection_sep;
+		private SeparatorToolItem SelectionSeparator => selection_sep ??= new SeparatorToolItem ();
 	}
 }

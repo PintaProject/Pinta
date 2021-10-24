@@ -36,7 +36,7 @@ namespace Pinta.Tools.Brushes
 		private static double theta = Math.PI / 2;
 
 		public override string Name {
-			get { return Mono.Unix.Catalog.GetString ("Squares"); }
+			get { return Translations.GetString ("Squares"); }
 		}
 
 		protected override Gdk.Rectangle OnMouseMove (Context g, Color strokeColor, ImageSurface surface,
@@ -55,7 +55,7 @@ namespace Pinta.Tools.Brushes
 
 			g.StrokePreserve ();
 
-			return g.FixedStrokeExtents ().ToGdkRectangle ();
+			return g.StrokeExtents ().ToGdkRectangle ();
 		}
 	}
 }

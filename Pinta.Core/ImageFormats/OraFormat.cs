@@ -47,8 +47,10 @@ namespace Pinta.Core
 			ZipFile file = new ZipFile (fileName);
 			XmlDocument stackXml = new XmlDocument ();
 			stackXml.Load (file.GetInputStream (file.GetEntry ("stack.xml")));
-			
-			XmlElement imageElement = stackXml.DocumentElement;
+
+			// NRT - This makes a lot of assumptions that the file will be perfectly
+			// valid that we need to guard against.
+			XmlElement imageElement = stackXml.DocumentElement!;
 			int width = int.Parse (imageElement.GetAttribute ("w"));
 			int height = int.Parse (imageElement.GetAttribute ("h"));
 
@@ -57,7 +59,7 @@ namespace Pinta.Core
 			Document doc = PintaCore.Workspace.CreateAndActivateDocument (fileName, imagesize);
 			doc.HasFile = true;
 			
-			XmlElement stackElement = (XmlElement) stackXml.GetElementsByTagName ("stack")[0];
+			XmlElement stackElement = (XmlElement) stackXml.GetElementsByTagName ("stack")[0]!;
 			XmlNodeList layerElements = stackElement.GetElementsByTagName ("layer");
 			
 			if (layerElements.Count == 0)
@@ -67,7 +69,7 @@ namespace Pinta.Core
 			doc.Workspace.CanvasSize = imagesize;
 
 			for (int i = 0; i < layerElements.Count; i++) {
-				XmlElement layerElement = (XmlElement) layerElements[i];
+				XmlElement layerElement = (XmlElement) layerElements[i]!;
 				int x = int.Parse (GetAttribute (layerElement, "x", "0"));
 				int y = int.Parse (GetAttribute (layerElement, "y", "0"));
 				string name = GetAttribute (layerElement, "name", string.Format ("Layer {0}", i));
@@ -92,8 +94,8 @@ namespace Pinta.Core
 						}
 					}
 
-					UserLayer layer = doc.CreateLayer(name);
-					doc.Insert (layer, 0);
+					UserLayer layer = doc.Layers.CreateLayer (name);
+					doc.Layers.Insert (layer, 0);
 
 					layer.Opacity = double.Parse (GetAttribute (layerElement, "opacity", "1"), GetFormat ());
 					layer.BlendMode = StandardToBlendMode (GetAttribute (layerElement, "composite-op", "svg:src-over"));
@@ -101,7 +103,7 @@ namespace Pinta.Core
 					using (var fs = new FileStream (tmp_file, FileMode.Open))
 						using (Pixbuf pb = new Pixbuf (fs)) {
 							using (Context g = new Context (layer.Surface)) {
-								CairoHelper.SetSourcePixbuf (g, pb, x, y);
+								Gdk.CairoHelper.SetSourcePixbuf (g, pb, x, y);
 								g.Paint ();
 							}
 						}
@@ -110,11 +112,12 @@ namespace Pinta.Core
 						File.Delete (tmp_file);
 					} catch { }
 				} catch {
-					MessageDialog md = new MessageDialog (parent, DialogFlags.Modal, MessageType.Error, ButtonsType.Ok, "Could not import layer \"{0}\" from {0}", name, file);
-					md.Title = "Error";
-				
-					md.Run ();
-					md.Destroy ();
+					using (var md = new MessageDialog(parent, DialogFlags.Modal, MessageType.Error, ButtonsType.Ok, "Could not import layer \"{0}\" from {0}", name, file))
+                    {
+						md.Title = "Error";
+
+						md.Run();
+					}
 				}
 			}
 			
@@ -155,7 +158,7 @@ namespace Pinta.Core
 				return new Size ((int) ((double)width / height * ThumbMaxSize), ThumbMaxSize);
 		}
 
-		private byte[] GetLayerXmlData(List<UserLayer> layers)
+		private byte[] GetLayerXmlData(IReadOnlyList<UserLayer> layers)
 		{
 			MemoryStream ms = new MemoryStream ();
 			XmlTextWriter writer = new XmlTextWriter (ms, System.Text.Encoding.UTF8);
@@ -188,7 +191,9 @@ namespace Pinta.Core
 
 		public void Export (Document document, string fileName, Gtk.Window parent)
 		{
-			ZipOutputStream stream = new ZipOutputStream (new FileStream (fileName, FileMode.Create));
+			ZipOutputStream stream = new ZipOutputStream (new FileStream (fileName, FileMode.Create)) {
+				UseZip64 = UseZip64.Off // For backwards compatibility with older versions.
+			};
 			ZipEntry mimetype = new ZipEntry ("mimetype");
 			mimetype.CompressionMethod = CompressionMethod.Stored;
 			stream.PutNextEntry (mimetype);
@@ -196,8 +201,8 @@ namespace Pinta.Core
 			byte[] databytes = System.Text.Encoding.ASCII.GetBytes ("image/openraster");
 			stream.Write (databytes, 0, databytes.Length);
 
-			for (int i = 0; i < document.UserLayers.Count; i++) {
-				Pixbuf pb = document.UserLayers[i].Surface.ToPixbuf ();
+			for (int i = 0; i < document.Layers.UserLayers.Count; i++) {
+				Pixbuf pb = document.Layers.UserLayers[i].Surface.ToPixbuf ();
 				byte[] buf = pb.SaveToBuffer ("png");
 				(pb as IDisposable).Dispose ();
 
@@ -206,7 +211,7 @@ namespace Pinta.Core
 			}
 
 			stream.PutNextEntry (new ZipEntry ("stack.xml"));
-			databytes = GetLayerXmlData (document.UserLayers);
+			databytes = GetLayerXmlData (document.Layers.UserLayers);
 			stream.Write (databytes, 0, databytes.Length);
 
 			ImageSurface flattened = document.GetFlattenedImage ();

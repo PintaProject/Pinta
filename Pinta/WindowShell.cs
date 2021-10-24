@@ -25,20 +25,20 @@
 // THE SOFTWARE.
 
 using System;
+using System.Linq;
 using Gtk;
 
 namespace Pinta
 {
-	public class WindowShell : Window
+	public class WindowShell : ApplicationWindow
 	{
 		private VBox shell_layout;
 		private VBox menu_layout;
-		private HBox workspace_layout;
+		private HBox? workspace_layout;
 
-		private MenuBar main_menu;
-		private Toolbar main_toolbar;
+		private Toolbar? main_toolbar;
 
-		public WindowShell (string name, string title, int width, int height, bool maximize) : base (WindowType.Toplevel)
+		public WindowShell (Application app, string name, string title, int width, int height, bool maximize) : base(app)
 		{
 			Name = name;
 			Title = title;
@@ -46,7 +46,7 @@ namespace Pinta
 			DefaultHeight = height;
 
 			WindowPosition = WindowPosition.Center;
-			AllowShrink = true;
+			Resizable = true;
 
 			if (maximize)
 				Maximize ();
@@ -61,17 +61,6 @@ namespace Pinta
 			shell_layout.ShowAll ();
 		}
 
-		public MenuBar CreateMainMenu (string name)
-		{
-			main_menu = new MenuBar ();
-			main_menu.Name = name;
-
-			menu_layout.PackStart (main_menu, false, false, 0);
-			main_menu.Show ();
-
-			return main_menu;
-		}
-
 		public Toolbar CreateToolBar (string name)
 		{
 			main_toolbar = new Toolbar ();
@@ -83,12 +72,32 @@ namespace Pinta
 			return main_toolbar;
 		}
 
+		public Statusbar CreateStatusBar (string name)
+		{
+			var statusbar = new Statusbar {
+				Name = name,
+				Padding = 0,
+				Margin = 0
+			};
+
+			// Remove the default text area
+			var child = statusbar.Children.FirstOrDefault ();
+
+			if (child != null)
+				statusbar.Remove (child);
+
+			shell_layout.PackEnd (statusbar, false, false, 0);
+			statusbar.Show ();
+
+			return statusbar;
+		}
+
 		public HBox CreateWorkspace ()
 		{
 			workspace_layout = new HBox ();
 			workspace_layout.Name = "workspace_layout";
 
-			shell_layout.PackStart (workspace_layout);
+			shell_layout.PackStart (workspace_layout, true, true, 0);
 			workspace_layout.ShowAll ();
 
 			return workspace_layout;

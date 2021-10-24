@@ -26,18 +26,18 @@
 
 using System;
 using Gtk;
-using Mono.Unix;
 using System.Collections.Generic;
 using Cairo;
 
 using Pinta.Core;
+using System.Diagnostics.CodeAnalysis;
 
 namespace Pinta.Effects
 {
 
 	public class CurvesDialog : Gtk.Dialog
 	{
-		private ComboBox comboMap;
+		private ComboBoxText comboMap;
 		private Label labelPoint;
 		private DrawingArea drawing;
 		private CheckButton checkRed;
@@ -48,7 +48,7 @@ namespace Pinta.Effects
 
 		private class ControlPointDrawingInfo 
 		{
-			public Color Color { get; set; }
+			public Cairo.Color Color { get; set; }
 			public bool IsActive { get; set; }
 		}
 		
@@ -62,9 +62,9 @@ namespace Pinta.Effects
 		private int last_cpx;
 		
 		//control points for luminosity transfer mode
-		private SortedList<int, int>[] luminosity_cps;
+		private SortedList<int, int>[] luminosity_cps = null!; // NRT - Set via code flow
 		//control points for rg transfer mode
-		private SortedList<int, int>[] rgb_cps;
+		private SortedList<int, int>[] rgb_cps = null!;
 		
 		public SortedList<int, int>[] ControlPoints { 
 			get { 
@@ -88,29 +88,25 @@ namespace Pinta.Effects
 
 		public CurvesData EffectData { get; private set; }
 		
-		public CurvesDialog (CurvesData effectData) : base (Catalog.GetString ("Curves"), PintaCore.Chrome.MainWindow,
+		public CurvesDialog (CurvesData effectData) : base (Translations.GetString ("Curves"), PintaCore.Chrome.MainWindow,
 		                                                    DialogFlags.Modal,
-															Gtk.Stock.Cancel, Gtk.ResponseType.Cancel,
-															Gtk.Stock.Ok, Gtk.ResponseType.Ok)
+															GtkExtensions.DialogButtonsCancelOk())
 		{
 			Build ();
 			
 			EffectData = effectData;
-		
-			drawing.DoubleBuffered = true;
 			
 			comboMap.Changed += HandleComboMapChanged;
 			buttonReset.Clicked += HandleButtonResetClicked;
 			checkRed.Toggled += HandleCheckToggled;
 			checkGreen.Toggled += HandleCheckToggled;
 			checkBlue.Toggled += HandleCheckToggled;
-			drawing.ExposeEvent += HandleDrawingExposeEvent;
+			drawing.Drawn += HandleDrawingDrawnEvent;
 			drawing.MotionNotifyEvent += HandleDrawingMotionNotifyEvent;
 			drawing.LeaveNotifyEvent += HandleDrawingLeaveNotifyEvent;
 			drawing.ButtonPressEvent += HandleDrawingButtonPressEvent;
 			
 			ResetControlPoints ();
-			AlternativeButtonOrder = new int[] { (int) Gtk.ResponseType.Ok, (int) Gtk.ResponseType.Cancel };
 		}
 		
 		private void UpdateLivePreview (string propertyName)
@@ -122,12 +118,12 @@ namespace Pinta.Effects
 			}
 		}		
 		
-		private void HandleCheckToggled (object o, EventArgs args)
+		private void HandleCheckToggled (object? o, EventArgs args)
 		{
 			InvalidateDrawing ();
 		}
 
-		void HandleButtonResetClicked (object sender, EventArgs e)
+		void HandleButtonResetClicked (object? sender, EventArgs e)
 		{
 			ResetControlPoints ();
 			InvalidateDrawing ();
@@ -149,7 +145,7 @@ namespace Pinta.Effects
 			UpdateLivePreview ("ControlPoints");
 		}
 		
-		private void HandleComboMapChanged (object sender, EventArgs e)
+		private void HandleComboMapChanged (object? sender, EventArgs e)
 		{
 			if (ControlPoints == null)
 				ResetControlPoints ();
@@ -165,10 +161,10 @@ namespace Pinta.Effects
 		private void InvalidateDrawing ()
 		{
 			//to invalidate whole drawing area
-			drawing.GdkWindow.Invalidate();		
+			drawing.Window.Invalidate();		
 		}
 		
-		private void HandleDrawingLeaveNotifyEvent (object o, Gtk.LeaveNotifyEventArgs args)
+		private void HandleDrawingLeaveNotifyEvent (object? o, Gtk.LeaveNotifyEventArgs args)
 		{
 			InvalidateDrawing ();
 		}
@@ -204,8 +200,7 @@ namespace Pinta.Effects
 		{	
 			int x, y;
 			Gdk.ModifierType mask;
-			drawing.GdkWindow.GetPointer (out x, out y, out mask); 
-			
+			GdkExtensions.GetWindowPointer (drawing.Window, out x, out y, out mask); 			
 			
 			if (x < 0 || x >= size || y < 0 || y >=size)
 				return;
@@ -229,7 +224,7 @@ namespace Pinta.Effects
 		{
 			int x, y;
 			Gdk.ModifierType mask;
-			drawing.GdkWindow.GetPointer (out x, out y, out mask); 
+			GdkExtensions.GetWindowPointer (drawing.Window, out x, out y, out mask); 
 			
 			if (args.Event.Button == 1) {
 				AddControlPoint (x, y);
@@ -270,7 +265,7 @@ namespace Pinta.Effects
 		{
 			int x, y;
 			Gdk.ModifierType mask;
-			drawing.GdkWindow.GetPointer (out x, out y, out mask); 
+			GdkExtensions.GetWindowPointer (drawing.Window, out x, out y, out mask); 
 			
 			if (x >= 0 && x < size && y >= 0 && y < size) {
 				g.LineWidth = 0.5;
@@ -335,7 +330,7 @@ namespace Pinta.Effects
 		{
 			int x, y;
 			Gdk.ModifierType mask;
-			drawing.GdkWindow.GetPointer (out x, out y, out mask); 
+			GdkExtensions.GetWindowPointer (drawing.Window, out x, out y, out mask); 
 			
 			var infos = GetDrawingInfos ();
 			
@@ -407,34 +402,32 @@ namespace Pinta.Effects
 			}
 		}
 		
-		private void HandleDrawingExposeEvent (object o, Gtk.ExposeEventArgs args)
-		{	
-			using (Context g = Gdk.CairoHelper.Create (drawing.GdkWindow)) {
-				
-				DrawBorder (g);
-				DrawPointerCross (g);
-				DrawSpline (g);
-				DrawGrid (g);
-				DrawControlPoints (g);
-			}
-		}
+		private void HandleDrawingDrawnEvent (object o, Gtk.DrawnArgs args)
+		{
+            Context g = args.Cr;
+            DrawBorder(g);
+            DrawPointerCross(g);
+            DrawSpline(g);
+            DrawGrid(g);
+            DrawControlPoints(g);
+        }
 
+		[MemberNotNull (nameof (comboMap), nameof (labelPoint), nameof (labelTip), nameof (checkRed), nameof (checkGreen), nameof (checkBlue), nameof (buttonReset), nameof (drawing))]
 		private void Build ()
         {
 			WindowPosition = WindowPosition.CenterOnParent;
 			Resizable = false;
-			AllowGrow = false;
 
 			const int spacing = 6;
 			var hbox1 = new HBox () { Spacing = spacing };
-			hbox1.PackStart (new Label (Catalog.GetString ("Transfer Map")), false, false, 0);
+			hbox1.PackStart (new Label (Translations.GetString ("Transfer Map")), false, false, 0);
 			hbox1.PackStart (new HSeparator (), true, true, 0);
-			VBox.PackStart (hbox1, false, false, 0);
+			ContentArea.PackStart (hbox1, false, false, 0);
 
 			var hbox2 = new HBox () { Spacing = spacing };
-			comboMap = ComboBox.NewText ();
-			comboMap.AppendText (Catalog.GetString ("RGB"));
-			comboMap.AppendText (Catalog.GetString ("Luminosity"));
+			comboMap = new ComboBoxText();
+			comboMap.AppendText (Translations.GetString ("RGB"));
+			comboMap.AppendText (Translations.GetString ("Luminosity"));
 			comboMap.Active = 1;
 			hbox2.PackStart (comboMap, false, false, 0);
 
@@ -442,7 +435,7 @@ namespace Pinta.Effects
 			var labelAlign = new Alignment (1, 0.5f, 1, 0);
 			labelAlign.Add (labelPoint);
 			hbox2.PackEnd (labelAlign, false, false, 0);
-			VBox.PackStart (hbox2, false, false, 0);
+			ContentArea.PackStart (hbox2, false, false, 0);
 
 			drawing = new DrawingArea () {
 				WidthRequest = 256,
@@ -450,12 +443,12 @@ namespace Pinta.Effects
 				Events = (Gdk.EventMask)795646,
 				CanFocus = true
 			};
-			VBox.PackStart (drawing, false, false, 8);
+			ContentArea.PackStart (drawing, false, false, 8);
 
 			var hbox3 = new HBox ();
-			checkRed = new CheckButton (Catalog.GetString ("Red  ")) { Active = true };
-			checkGreen = new CheckButton (Catalog.GetString ("Green")) { Active = true };
-			checkBlue = new CheckButton (Catalog.GetString ("Blue ")) { Active = true };
+			checkRed = new CheckButton (Translations.GetString ("Red  ")) { Active = true };
+			checkGreen = new CheckButton (Translations.GetString ("Green")) { Active = true };
+			checkBlue = new CheckButton (Translations.GetString ("Blue ")) { Active = true };
 			hbox3.PackStart (checkRed, false, false, 0);
 			hbox3.PackStart (checkGreen, false, false, 0);
 			hbox3.PackStart (checkBlue, false, false, 0);
@@ -463,15 +456,15 @@ namespace Pinta.Effects
 			buttonReset = new Button () {
 				WidthRequest = 81,
 				HeightRequest = 30,
-				Label = Catalog.GetString ("Reset")
+				Label = Translations.GetString ("Reset")
 			};
 			hbox3.PackEnd (buttonReset, false, false, 0);
-			VBox.PackStart (hbox3, false, false, 0);
+			ContentArea.PackStart (hbox3, false, false, 0);
 
-			labelTip = new Label (Catalog.GetString ("Tip: Right-click to remove control points."));
-			VBox.PackStart (labelTip, false, false, 0);
+			labelTip = new Label (Translations.GetString ("Tip: Right-click to remove control points."));
+			ContentArea.PackStart (labelTip, false, false, 0);
 
-			VBox.ShowAll ();
+			ContentArea.ShowAll ();
 			checkRed.Hide ();
 			checkGreen.Hide ();
 			checkBlue.Hide ();

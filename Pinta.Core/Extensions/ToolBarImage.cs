@@ -31,13 +31,20 @@ namespace Pinta.Core
 {
 	public class ToolBarImage : ToolItem
 	{
-		public ToolBarImage (string image)
+		private Image image;
+
+		public ToolBarImage (string icon_name)
 		{
-			Image i = new Image (PintaCore.Resources.GetIcon (image));
-			i.Show ();
+			image = Image.NewFromIconName(icon_name, IconSize.Button);
+			image.Show ();
 			
-			Add (i);
+			Add (image);
 			Show ();
+		}
+
+		public void Set (string icon_name)
+		{
+			image.SetFromIconName (icon_name, IconSize.Button);
 		}
 	}
 }

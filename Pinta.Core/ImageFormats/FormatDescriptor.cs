@@ -25,10 +25,10 @@
 // THE SOFTWARE.
 
 using System;
+using System.Diagnostics.CodeAnalysis;
 using System.Text;
 
 using Gtk;
-using Mono.Unix;
 
 namespace Pinta.Core
 {
@@ -47,13 +47,13 @@ namespace Pinta.Core
 		/// The importer for this file format. This may be null if only exporting
 		/// is supported for this format.
 		/// </summary>
-		public IImageImporter Importer { get; private set; }
+		public IImageImporter? Importer { get; private set; }
 
 		/// <summary>
 		/// The exporter for this file format. This may be null if only importing
 		/// is supported for this format.
 		/// </summary>
-		public IImageExporter Exporter { get; private set; }
+		public IImageExporter? Exporter { get; private set; }
 
 		/// <summary>
 		/// A file filter for use in the file dialog.
@@ -68,7 +68,7 @@ namespace Pinta.Core
 		/// <param name="importer">The importer for this file format, or null if importing is not supported.</param>
 		/// <param name="exporter">The exporter for this file format, or null if exporting is not supported.</param>
 		public FormatDescriptor (string displayPrefix, string[] extensions,
-		                         IImageImporter importer, IImageExporter exporter)
+		                         IImageImporter? importer, IImageExporter? exporter)
 		{
 			if (extensions == null || (importer == null && exporter == null)) {
 				throw new ArgumentNullException ("Format descriptor is initialized incorrectly");
@@ -90,15 +90,17 @@ namespace Pinta.Core
 				formatNames.Append (wildcard);
 			}
 
-			ff.Name = string.Format (Catalog.GetString ("{0} image ({1})"), displayPrefix, formatNames);
+			ff.Name = string.Format (Translations.GetString ("{0} image ({1})"), displayPrefix, formatNames);
 			this.Filter = ff;
 		}
-		
+
+		[MemberNotNullWhen (returnValue: false, member: nameof (Exporter))]
 		public bool IsReadOnly ()
 		{
 			return Exporter == null;
 		}
 
+		[MemberNotNullWhen (returnValue: false, member: nameof (Importer))]
 		public bool IsWriteOnly ()
 		{
 			return Importer == null;

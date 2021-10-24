@@ -63,7 +63,7 @@ namespace Pinta.Actions
                 using_clipboard = false;
             }
 
-			var dialog = new NewImageDialog (imgWidth, imgHeight, bg_type, using_clipboard);
+			using var dialog = new NewImageDialog (imgWidth, imgHeight, bg_type, using_clipboard);
 
 			int response = dialog.Run ();
 
@@ -73,10 +73,7 @@ namespace Pinta.Actions
 				PintaCore.Settings.PutSetting ("new-image-width", dialog.NewImageWidth);
 				PintaCore.Settings.PutSetting ("new-image-height", dialog.NewImageHeight);
 				PintaCore.Settings.PutSetting ("new-image-bg", dialog.NewImageBackgroundType);
-				PintaCore.Settings.SaveSettings ();
 			}
-
-			dialog.Destroy ();
 		}
 
 		/// <summary>

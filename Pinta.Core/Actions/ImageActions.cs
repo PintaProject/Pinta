@@ -26,67 +26,77 @@
 
 using System;
 using Cairo;
-using Mono.Unix;
 
 namespace Pinta.Core
 {
 	public class ImageActions
 	{
-		public Gtk.Action CropToSelection { get; private set; }
-		public Gtk.Action AutoCrop { get; private set; }
-		public Gtk.Action Resize { get; private set; }
-		public Gtk.Action CanvasSize { get; private set; }
-		public Gtk.Action FlipHorizontal { get; private set; }
-		public Gtk.Action FlipVertical { get; private set; }
-		public Gtk.Action RotateCW { get; private set; }
-		public Gtk.Action RotateCCW { get; private set; }
-		public Gtk.Action Rotate180 { get; private set; }
-		public Gtk.Action Flatten { get; private set; }
+		public Command CropToSelection { get; private set; }
+		public Command AutoCrop { get; private set; }
+		public Command Resize { get; private set; }
+		public Command CanvasSize { get; private set; }
+		public Command FlipHorizontal { get; private set; }
+		public Command FlipVertical { get; private set; }
+		public Command RotateCW { get; private set; }
+		public Command RotateCCW { get; private set; }
+		public Command Rotate180 { get; private set; }
+		public Command Flatten { get; private set; }
 
 		public ImageActions ()
 		{
-			Gtk.IconFactory fact = new Gtk.IconFactory ();
-			fact.Add ("Menu.Image.CanvasSize.png", new Gtk.IconSet (PintaCore.Resources.GetIcon ("Menu.Image.CanvasSize.png")));
-			fact.Add ("Menu.Image.Crop.png", new Gtk.IconSet (PintaCore.Resources.GetIcon ("Menu.Image.Crop.png")));
-			fact.Add ("Menu.Image.Flatten.png", new Gtk.IconSet (PintaCore.Resources.GetIcon ("Menu.Image.Flatten.png")));
-			fact.Add ("Menu.Image.FlipHorizontal.png", new Gtk.IconSet (PintaCore.Resources.GetIcon ("Menu.Image.FlipHorizontal.png")));
-			fact.Add ("Menu.Image.FlipVertical.png", new Gtk.IconSet (PintaCore.Resources.GetIcon ("Menu.Image.FlipVertical.png")));
-			fact.Add ("Menu.Image.Resize.png", new Gtk.IconSet (PintaCore.Resources.GetIcon ("Menu.Image.Resize.png")));
-			fact.Add ("Menu.Image.Rotate180CW.png", new Gtk.IconSet (PintaCore.Resources.GetIcon ("Menu.Image.Rotate180CW.png")));
-			fact.Add ("Menu.Image.Rotate90CCW.png", new Gtk.IconSet (PintaCore.Resources.GetIcon ("Menu.Image.Rotate90CCW.png")));
-			fact.Add ("Menu.Image.Rotate90CW.png", new Gtk.IconSet (PintaCore.Resources.GetIcon ("Menu.Image.Rotate90CW.png")));
-			fact.AddDefault ();
-			
-			CropToSelection = new Gtk.Action ("CropToSelection", Catalog.GetString ("Crop to Selection"), null, "Menu.Image.Crop.png");
-			AutoCrop = new Gtk.Action ("AutoCrop", Catalog.GetString ("Auto Crop"), null, "Menu.Image.Crop.png");
-			Resize = new Gtk.Action ("Resize", Catalog.GetString ("Resize Image..."), null, "Menu.Image.Resize.png");
-			CanvasSize = new Gtk.Action ("CanvasSize", Catalog.GetString ("Resize Canvas..."), null, "Menu.Image.CanvasSize.png");
-			FlipHorizontal = new Gtk.Action ("FlipHorizontal", Catalog.GetString ("Flip Horizontal"), null, "Menu.Image.FlipHorizontal.png");
-			FlipVertical = new Gtk.Action ("FlipVertical", Catalog.GetString ("Flip Vertical"), null, "Menu.Image.FlipVertical.png");
-			RotateCW = new Gtk.Action ("RotateCW", Catalog.GetString ("Rotate 90° Clockwise"), null, "Menu.Image.Rotate90CW.png");
-			RotateCCW = new Gtk.Action ("RotateCCW", Catalog.GetString ("Rotate 90° Counter-Clockwise"), null, "Menu.Image.Rotate90CCW.png");
-			Rotate180 = new Gtk.Action ("Rotate180", Catalog.GetString ("Rotate 180°"), null, "Menu.Image.Rotate180CW.png");
-			Flatten = new Gtk.Action ("Flatten", Catalog.GetString ("Flatten"), null, "Menu.Image.Flatten.png");
-			
-			CropToSelection.Sensitive = false;
+			CropToSelection = new Command ("croptoselection", Translations.GetString ("Crop to Selection"), null, Resources.Icons.ImageCrop);
+			AutoCrop = new Command ("autocrop", Translations.GetString ("Auto Crop"), null, Resources.Icons.ImageCrop);
+			Resize = new Command ("resize", Translations.GetString ("Resize Image..."), null, Resources.Icons.ImageResize);
+			CanvasSize = new Command ("canvassize", Translations.GetString ("Resize Canvas..."), null, Resources.Icons.ImageResizeCanvas);
+			FlipHorizontal = new Command ("fliphorizontal", Translations.GetString ("Flip Horizontal"), null, Resources.Icons.ImageFlipHorizontal);
+			FlipVertical = new Command ("flipvertical", Translations.GetString ("Flip Vertical"), null, Resources.Icons.ImageFlipVertical);
+			RotateCW = new Command ("rotatecw", Translations.GetString ("Rotate 90° Clockwise"), null, Resources.Icons.ImageRotate90CW);
+			RotateCCW = new Command ("rotateccw", Translations.GetString ("Rotate 90° Counter-Clockwise"), null, Resources.Icons.ImageRotate90CCW);
+			Rotate180 = new Command ("rotate180", Translations.GetString ("Rotate 180°"), null, Resources.Icons.ImageRotate180);
+			Flatten = new Command ("flatten", Translations.GetString ("Flatten"), null, Resources.Icons.ImageFlatten);
 		}
 
 		#region Initialization
-		public void CreateMainMenu (Gtk.Menu menu)
+		public void RegisterActions(Gtk.Application app, GLib.Menu menu)
 		{
-			menu.Append (CropToSelection.CreateAcceleratedMenuItem (Gdk.Key.X, Gdk.ModifierType.ControlMask | Gdk.ModifierType.ShiftMask));
-			menu.Append (AutoCrop.CreateAcceleratedMenuItem (Gdk.Key.X, Gdk.ModifierType.Mod1Mask | Gdk.ModifierType.ControlMask));
-			menu.Append (Resize.CreateAcceleratedMenuItem (Gdk.Key.R, Gdk.ModifierType.ControlMask));
-			menu.Append (CanvasSize.CreateAcceleratedMenuItem (Gdk.Key.R, Gdk.ModifierType.ControlMask | Gdk.ModifierType.ShiftMask));
-			menu.AppendSeparator ();
-			menu.Append (FlipHorizontal.CreateMenuItem ());
-			menu.Append (FlipVertical.CreateMenuItem ());
-			menu.AppendSeparator ();
-			menu.Append (RotateCW.CreateAcceleratedMenuItem (Gdk.Key.H, Gdk.ModifierType.ControlMask));
-			menu.Append (RotateCCW.CreateAcceleratedMenuItem (Gdk.Key.G, Gdk.ModifierType.ControlMask));
-			menu.Append (Rotate180.CreateAcceleratedMenuItem (Gdk.Key.J, Gdk.ModifierType.ControlMask));
-			menu.AppendSeparator ();
-			menu.Append (Flatten.CreateAcceleratedMenuItem (Gdk.Key.F, Gdk.ModifierType.ControlMask | Gdk.ModifierType.ShiftMask));
+			app.AddAccelAction(CropToSelection, "<Primary><Shift>X");
+			menu.AppendItem(CropToSelection.CreateMenuItem());
+
+			app.AddAccelAction(AutoCrop, "<Ctrl><Alt>X");
+			menu.AppendItem(AutoCrop.CreateMenuItem());
+
+			app.AddAccelAction(Resize, "<Primary>R");
+			menu.AppendItem(Resize.CreateMenuItem());
+
+			app.AddAccelAction(CanvasSize, "<Primary><Shift>R");
+			menu.AppendItem(CanvasSize.CreateMenuItem());
+
+			var flip_section = new GLib.Menu();
+			menu.AppendSection(null, flip_section);
+
+			app.AddAction(FlipHorizontal);
+			flip_section.AppendItem(FlipHorizontal.CreateMenuItem());
+
+			app.AddAction(FlipVertical);
+			flip_section.AppendItem(FlipVertical.CreateMenuItem());
+
+			var rotate_section = new GLib.Menu();
+			menu.AppendSection(null, rotate_section);
+
+			app.AddAccelAction(RotateCW, "<Primary>H");
+			rotate_section.AppendItem(RotateCW.CreateMenuItem());
+
+			app.AddAccelAction(RotateCCW, "<Primary>G");
+			rotate_section.AppendItem(RotateCCW.CreateMenuItem());
+
+			app.AddAccelAction(Rotate180, "<Primary>J");
+			rotate_section.AppendItem(Rotate180.CreateMenuItem());
+
+			var flatten_section = new GLib.Menu();
+			menu.AppendSection(null, flatten_section);
+
+			app.AddAccelAction(Flatten, "<Primary><Shift>F");
+			flatten_section.AppendItem(Flatten.CreateMenuItem());
 		}
 				
 		public void RegisterHandlers ()
@@ -141,14 +151,14 @@ namespace Pinta.Core
 
 			PintaCore.Tools.Commit ();
 
-			var oldBottomSurface = doc.UserLayers[0].Surface.Clone ();
+			var oldBottomSurface = doc.Layers.UserLayers[0].Surface.Clone ();
 
-			CompoundHistoryItem hist = new CompoundHistoryItem ("Menu.Image.Flatten.png", Catalog.GetString ("Flatten"));
+			CompoundHistoryItem hist = new CompoundHistoryItem (Resources.Icons.ImageFlatten, Translations.GetString ("Flatten"));
 
-			for (int i = doc.UserLayers.Count - 1; i >= 1; i--)
-				hist.Push (new DeleteLayerHistoryItem (string.Empty, string.Empty, doc.UserLayers[i], i));
+			for (int i = doc.Layers.UserLayers.Count - 1; i >= 1; i--)
+				hist.Push (new DeleteLayerHistoryItem (string.Empty, string.Empty, doc.Layers.UserLayers[i], i));
 
-			doc.FlattenImage ();
+			doc.Layers.FlattenLayers ();
 
 			hist.Push (new SimpleHistoryItem (string.Empty, string.Empty, oldBottomSurface, 0));
 			doc.History.PushNewItem (hist);
@@ -274,18 +284,18 @@ namespace Pinta.Core
 		}
 #endregion
 
-		static void CropImageToRectangle (Document doc, Gdk.Rectangle rect, Path selection)
+		static void CropImageToRectangle (Document doc, Gdk.Rectangle rect, Path? selection)
 		{
 			if (rect.Width > 0 && rect.Height > 0)
 			{
 				ResizeHistoryItem hist = new ResizeHistoryItem(doc.ImageSize);
 
-				hist.Icon = "Menu.Image.Crop.png";
-				hist.Text = Catalog.GetString("Crop to Selection");
+				hist.Icon = Resources.Icons.ImageCrop;
+				hist.Text = Translations.GetString("Crop to Selection");
 				hist.StartSnapshotOfImage();
 				hist.RestoreSelection = doc.Selection.Clone();
 
-				doc.Workspace.Canvas.GdkWindow.FreezeUpdates();
+				doc.Workspace.Canvas.Window.FreezeUpdates();
 
 				double original_scale = doc.Workspace.Scale;
 				doc.ImageSize = rect.Size;
@@ -294,9 +304,9 @@ namespace Pinta.Core
 
 				PintaCore.Actions.View.UpdateCanvasScale();
 
-				doc.Workspace.Canvas.GdkWindow.ThawUpdates();
+				doc.Workspace.Canvas.Window.ThawUpdates();
 
-				foreach (var layer in doc.UserLayers)
+				foreach (var layer in doc.Layers.UserLayers)
                     layer.Crop (rect, selection);
 
 				hist.FinishSnapshotOfImage();

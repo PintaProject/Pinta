@@ -1,4 +1,4 @@
-﻿// 
+// 
 // ArrowedEditEngine.cs
 //  
 // Author:
@@ -27,700 +27,332 @@
 using System;
 using Cairo;
 using Pinta.Core;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using Mono.Unix;
+using Gtk;
 
 namespace Pinta.Tools
 {
 	public abstract class ArrowedEditEngine : BaseEditEngine
 	{
-		private Gtk.SeparatorToolItem arrowSep;
-		private ToolBarLabel arrowLabel;
-		private Gtk.CheckButton showArrowOneBox, showArrowTwoBox;
-		private bool showOtherArrowOptions;
+		private SeparatorToolItem? arrowSep;
+		private ToolBarLabel? arrowLabel;
+		private ToolBarWidget<CheckButton>? showArrowOneBox, showArrowTwoBox;
 
-		private ToolBarComboBox arrowSize;
-		private ToolBarLabel arrowSizeLabel;
-		private ToolBarButton arrowSizeMinus, arrowSizePlus;
+		private ToolBarWidget<SpinButton>? arrowSize;
+		private ToolBarLabel? arrowSizeLabel;
 
-		private ToolBarComboBox arrowAngleOffset;
-		private ToolBarLabel arrowAngleOffsetLabel;
-		private ToolBarButton arrowAngleOffsetMinus, arrowAngleOffsetPlus;
+		private ToolBarWidget<SpinButton>? arrowAngleOffset;
+		private ToolBarLabel? arrowAngleOffsetLabel;
 
-		private ToolBarComboBox arrowLengthOffset;
-		private ToolBarLabel arrowLengthOffsetLabel;
-		private ToolBarButton arrowLengthOffsetMinus, arrowLengthOffsetPlus;
+		private ToolBarWidget<SpinButton>? arrowLengthOffset;
+		private ToolBarLabel? arrowLengthOffsetLabel;
 
-		private Arrow previousSettings1 = new Arrow();
-		private Arrow previousSettings2 = new Arrow();
+		private Arrow previousSettings1 = new Arrow ();
+		private Arrow previousSettings2 = new Arrow ();
 
+		// NRT - These are all set by HandleBuildToolBar
+		private ISettingsService settings = null!;
+		private string tool_prefix = null!;
+		private Toolbar toolbar = null!;
+		private bool extra_toolbar_items_added = false;
 
-		#region ToolbarEventHandlers
+		private string ARROW1_SETTING (string prefix) => $"{prefix}-arrow1";
+		private string ARROW2_SETTING (string prefix) => $"{prefix}-arrow2";
+		private string ARROW_SIZE_SETTING (string prefix) => $"{prefix}-arrow-size";
+		private string ARROW_ANGLE_SETTING (string prefix) => $"{prefix}-arrow-angle";
+		private string ARROW_LENGTH_SETTING (string prefix) => $"{prefix}-arrow-length";
 
-		void arrowSizeMinus_Clicked(object sender, EventArgs e)
+		private bool ArrowOneEnabled => ArrowOneEnabledCheckBox.Widget.Active;
+		private bool ArrowTwoEnabled => ArrowTwoEnabledCheckBox.Widget.Active;
+
+		public ArrowedEditEngine (ShapeTool passedOwner) : base (passedOwner)
 		{
-			double newSize = 10d;
-
-			if (Double.TryParse(arrowSize.ComboBox.ActiveText, out newSize))
-			{
-				--newSize;
-
-				if (newSize < 1d)
-				{
-					newSize = 1d;
-				}
-			}
-			else
-			{
-				newSize = 10d;
-			}
-
-			(arrowSize.ComboBox as Gtk.ComboBoxEntry).Entry.Text = newSize.ToString();
 		}
 
-		void arrowSizePlus_Clicked(object sender, EventArgs e)
+		public override void OnSaveSettings (ISettingsService settings, string toolPrefix)
 		{
-			double newSize = 10d;
+			base.OnSaveSettings (settings, toolPrefix);
 
-			if (Double.TryParse(arrowSize.ComboBox.ActiveText, out newSize))
-			{
-				++newSize;
-
-				if (newSize > 100d)
-				{
-					newSize = 100d;
-				}
-			}
-			else
-			{
-				newSize = 10d;
-			}
-
-			(arrowSize.ComboBox as Gtk.ComboBoxEntry).Entry.Text = newSize.ToString();
+			if (showArrowOneBox is not null)
+				settings.PutSetting (ARROW1_SETTING (toolPrefix), showArrowOneBox.Widget.Active);
+			if (showArrowTwoBox is not null)
+				settings.PutSetting (ARROW2_SETTING (toolPrefix), showArrowTwoBox.Widget.Active);
+			if (arrowSize is not null)
+				settings.PutSetting (ARROW_SIZE_SETTING (toolPrefix), arrowSize.Widget.ValueAsInt);
+			if (arrowAngleOffset is not null)
+				settings.PutSetting (ARROW_ANGLE_SETTING (toolPrefix), arrowAngleOffset.Widget.ValueAsInt);
+			if (arrowLengthOffset is not null)
+				settings.PutSetting (ARROW_LENGTH_SETTING (toolPrefix), arrowLengthOffset.Widget.ValueAsInt);
 		}
 
-		void arrowAngleOffsetMinus_Clicked(object sender, EventArgs e)
+		public override void HandleBuildToolBar (Toolbar tb, ISettingsService settings, string toolPrefix)
 		{
-			double newAngle = 0d;
+			base.HandleBuildToolBar (tb, settings, toolPrefix);
 
-			if (Double.TryParse(arrowAngleOffset.ComboBox.ActiveText, out newAngle))
-			{
-				--newAngle;
+			this.settings = settings;
+			tool_prefix = toolPrefix;
+			toolbar = tb;
 
-				if (newAngle < -89d)
-				{
-					newAngle = -89d;
-				}
-			}
-			else
-			{
-				newAngle = 0d;
-			}
+			tb.AppendItem (ArrowSeparator);
+			tb.AppendItem (ArrowLabel);
+			tb.AppendItem (ArrowOneEnabledCheckBox);
+			tb.AppendItem (ArrowTwoEnabledCheckBox);
 
-			(arrowAngleOffset.ComboBox as Gtk.ComboBoxEntry).Entry.Text = newAngle.ToString();
+			extra_toolbar_items_added = false;
+
+			UpdateArrowOptionToolbarItems (true);
 		}
 
-		void arrowAngleOffsetPlus_Clicked(object sender, EventArgs e)
+		private void ArrowEnabledToggled (bool arrow1)
 		{
-			double newAngle = 0d;
+			UpdateArrowOptionToolbarItems ();
 
-			if (Double.TryParse(arrowAngleOffset.ComboBox.ActiveText, out newAngle))
-			{
-				++newAngle;
+			var activeEngine = (LineCurveSeriesEngine?) ActiveShapeEngine;
 
-				if (newAngle > 89d)
-				{
-					newAngle = 89d;
-				}
-			}
-			else
-			{
-				newAngle = 0d;
-			}
-
-			(arrowAngleOffset.ComboBox as Gtk.ComboBoxEntry).Entry.Text = newAngle.ToString();
-		}
-
-		void arrowLengthOffsetMinus_Clicked(object sender, EventArgs e)
-		{
-			double newLength = 10d;
-
-			if (Double.TryParse(arrowLengthOffset.ComboBox.ActiveText, out newLength))
-			{
-				--newLength;
-
-				if (newLength < -100d)
-				{
-					newLength = -100d;
-				}
-			}
-			else
-			{
-				newLength = 10d;
-			}
-
-			(arrowLengthOffset.ComboBox as Gtk.ComboBoxEntry).Entry.Text = newLength.ToString();
-		}
-
-		void arrowLengthOffsetPlus_Clicked(object sender, EventArgs e)
-		{
-			double newLength = 10d;
-
-			if (Double.TryParse(arrowLengthOffset.ComboBox.ActiveText, out newLength))
-			{
-				++newLength;
-
-				if (newLength > 100d)
-				{
-					newLength = 100d;
-				}
-			}
-			else
-			{
-				newLength = 10d;
-			}
-
-			(arrowLengthOffset.ComboBox as Gtk.ComboBoxEntry).Entry.Text = newLength.ToString();
-		}
-
-		#endregion ToolbarEventHandlers
-
-
-		public override void HandleBuildToolBar(Gtk.Toolbar tb)
-		{
-			base.HandleBuildToolBar(tb);
-
-
-			#region Show Arrows
-
-			//Arrow separator.
-
-			if (arrowSep == null)
-			{
-				arrowSep = new Gtk.SeparatorToolItem();
-
-				showOtherArrowOptions = false;
-			}
-
-			tb.AppendItem(arrowSep);
-
-
-			if (arrowLabel == null)
-			{
-				arrowLabel = new ToolBarLabel(string.Format(" {0}: ", Catalog.GetString("Arrow")));
-			}
-
-			tb.AppendItem(arrowLabel);
-
-
-			//Show arrow 1.
-
-			showArrowOneBox = new Gtk.CheckButton("1");
-			showArrowOneBox.Active = previousSettings1.Show;
-
-			showArrowOneBox.Toggled += (o, e) =>
-			{
-				//Determine whether to change the visibility of Arrow options in the toolbar based on the updated Arrow showing/hiding.
-				if (!showArrowOneBox.Active && !showArrowTwoBox.Active)
-				{
-					if (showOtherArrowOptions)
-					{
-						tb.Remove(arrowSizeLabel);
-						tb.Remove(arrowSizeMinus);
-						tb.Remove(arrowSize);
-						tb.Remove(arrowSizePlus);
-						tb.Remove(arrowAngleOffsetLabel);
-						tb.Remove(arrowAngleOffsetMinus);
-						tb.Remove(arrowAngleOffset);
-						tb.Remove(arrowAngleOffsetPlus);
-						tb.Remove(arrowLengthOffsetLabel);
-						tb.Remove(arrowLengthOffsetMinus);
-						tb.Remove(arrowLengthOffset);
-						tb.Remove(arrowLengthOffsetPlus);
-
-						showOtherArrowOptions = false;
-					}
-				}
+			if (activeEngine != null) {
+				if (arrow1)
+					activeEngine.Arrow1.Show = ArrowOneEnabled;
 				else
-				{
-					if (!showOtherArrowOptions)
-					{
-						tb.Add(arrowSizeLabel);
-						tb.Add(arrowSizeMinus);
-						tb.Add(arrowSize);
-						tb.Add(arrowSizePlus);
-						tb.Add(arrowAngleOffsetLabel);
-						tb.Add(arrowAngleOffsetMinus);
-						tb.Add(arrowAngleOffset);
-						tb.Add(arrowAngleOffsetPlus);
-						tb.Add(arrowLengthOffsetLabel);
-						tb.Add(arrowLengthOffsetMinus);
-						tb.Add(arrowLengthOffset);
-						tb.Add(arrowLengthOffsetPlus);
+					activeEngine.Arrow2.Show = ArrowTwoEnabled;
 
-						showOtherArrowOptions = true;
-					}
-				}
+				DrawActiveShape (false, false, true, false, false);
 
-				LineCurveSeriesEngine activeEngine = (LineCurveSeriesEngine)ActiveShapeEngine;
-
-				if (activeEngine != null)
-				{
-					activeEngine.Arrow1.Show = showArrowOneBox.Active;
-
-					DrawActiveShape(false, false, true, false, false);
-
-					StorePreviousSettings();
-				}
-			};
-
-			tb.AddWidgetItem(showArrowOneBox);
-
-
-			//Show arrow 2.
-
-			showArrowTwoBox = new Gtk.CheckButton("2");
-			showArrowTwoBox.Active = previousSettings2.Show;
-
-			showArrowTwoBox.Toggled += (o, e) =>
-			{
-				//Determine whether to change the visibility of Arrow options in the toolbar based on the updated Arrow showing/hiding.
-				if (!showArrowOneBox.Active && !showArrowTwoBox.Active)
-				{
-					if (showOtherArrowOptions)
-					{
-						tb.Remove(arrowSizeLabel);
-						tb.Remove(arrowSizeMinus);
-						tb.Remove(arrowSize);
-						tb.Remove(arrowSizePlus);
-						tb.Remove(arrowAngleOffsetLabel);
-						tb.Remove(arrowAngleOffsetMinus);
-						tb.Remove(arrowAngleOffset);
-						tb.Remove(arrowAngleOffsetPlus);
-						tb.Remove(arrowLengthOffsetLabel);
-						tb.Remove(arrowLengthOffsetMinus);
-						tb.Remove(arrowLengthOffset);
-						tb.Remove(arrowLengthOffsetPlus);
-
-						showOtherArrowOptions = false;
-					}
-				}
-				else
-				{
-					if (!showOtherArrowOptions)
-					{
-						tb.Add(arrowSizeLabel);
-						tb.Add(arrowSizeMinus);
-						tb.Add(arrowSize);
-						tb.Add(arrowSizePlus);
-						tb.Add(arrowAngleOffsetLabel);
-						tb.Add(arrowAngleOffsetMinus);
-						tb.Add(arrowAngleOffset);
-						tb.Add(arrowAngleOffsetPlus);
-						tb.Add(arrowLengthOffsetLabel);
-						tb.Add(arrowLengthOffsetMinus);
-						tb.Add(arrowLengthOffset);
-						tb.Add(arrowLengthOffsetPlus);
-
-						showOtherArrowOptions = true;
-					}
-				}
-
-				LineCurveSeriesEngine activeEngine = (LineCurveSeriesEngine)ActiveShapeEngine;
-
-				if (activeEngine != null)
-				{
-					activeEngine.Arrow2.Show = showArrowTwoBox.Active;
-
-					DrawActiveShape(false, false, true, false, false);
-
-					StorePreviousSettings();
-				}
-			};
-
-			tb.AddWidgetItem(showArrowTwoBox);
-
-			#endregion Show Arrows
-
-
-			#region Arrow Size
-
-			if (arrowSizeLabel == null)
-			{
-				arrowSizeLabel = new ToolBarLabel(string.Format(" {0}: ", Catalog.GetString("Size")));
-			}
-
-			if (arrowSizeMinus == null)
-			{
-				arrowSizeMinus = new ToolBarButton("Toolbar.MinusButton.png", "", Catalog.GetString("Decrease arrow size"));
-				arrowSizeMinus.Clicked += new EventHandler(arrowSizeMinus_Clicked);
-			}
-
-			if (arrowSize == null)
-			{
-				arrowSize = new ToolBarComboBox(65, 7, true,
-					"3", "4", "5", "6", "7", "8", "9", "10", "12", "15", "18",
-					"20", "25", "30", "40", "50", "60", "70", "80", "90", "100");
-
-				arrowSize.ComboBox.Changed += (o, e) =>
-				{
-					if (arrowSize.ComboBox.ActiveText.Length < 1)
-					{
-						//Ignore the change until the user enters something.
-						return;
-					}
-					else
-					{
-						double newSize = 10d;
-
-						if (arrowSize.ComboBox.ActiveText == "-")
-						{
-							//The user is trying to enter a negative value: change it to 1.
-							newSize = 1d;
-						}
-						else
-						{
-							if (Double.TryParse(arrowSize.ComboBox.ActiveText, out newSize))
-							{
-								if (newSize < 1d)
-								{
-									//Less than 1: change it to 1.
-									newSize = 1d;
-								}
-								else if (newSize > 100d)
-								{
-									//Greater than 100: change it to 100.
-									newSize = 100d;
-								}
-							}
-							else
-							{
-								//Not a number: wait until the user enters something.
-								return;
-							}
-						}
-
-						(arrowSize.ComboBox as Gtk.ComboBoxEntry).Entry.Text = newSize.ToString();
-
-						LineCurveSeriesEngine activeEngine = (LineCurveSeriesEngine)ActiveShapeEngine;
-
-						if (activeEngine != null)
-						{
-							activeEngine.Arrow1.ArrowSize = newSize;
-							activeEngine.Arrow2.ArrowSize = newSize;
-
-							DrawActiveShape(false, false, true, false, false);
-
-							StorePreviousSettings();
-						}
-					}
-				};
-			}
-
-			if (arrowSizePlus == null)
-			{
-				arrowSizePlus = new ToolBarButton("Toolbar.PlusButton.png", "", Catalog.GetString("Increase arrow size"));
-				arrowSizePlus.Clicked += new EventHandler(arrowSizePlus_Clicked);
-			}
-
-			#endregion Arrow Size
-
-
-			#region Angle Offset
-
-			if (arrowAngleOffsetLabel == null)
-			{
-				arrowAngleOffsetLabel = new ToolBarLabel(string.Format(" {0}: ", Catalog.GetString("Angle")));
-			}
-
-			if (arrowAngleOffsetMinus == null)
-			{
-				arrowAngleOffsetMinus = new ToolBarButton("Toolbar.MinusButton.png", "", Catalog.GetString("Decrease angle offset"));
-				arrowAngleOffsetMinus.Clicked += new EventHandler(arrowAngleOffsetMinus_Clicked);
-			}
-
-			if (arrowAngleOffset == null)
-			{
-				arrowAngleOffset = new ToolBarComboBox(65, 9, true,
-					"-30", "-25", "-20", "-15", "-10", "-5", "0", "5", "10", "15", "20", "25", "30");
-
-				arrowAngleOffset.ComboBox.Changed += (o, e) =>
-				{
-					if (arrowAngleOffset.ComboBox.ActiveText.Length < 1)
-					{
-						//Ignore the change until the user enters something.
-						return;
-					}
-					else if (arrowAngleOffset.ComboBox.ActiveText == "-")
-					{
-						//The user is trying to enter a negative value: ignore the change until the user enters more.
-						return;
-					}
-					else
-					{
-						double newAngle = 15d;
-
-						if (Double.TryParse(arrowAngleOffset.ComboBox.ActiveText, out newAngle))
-						{
-							if (newAngle < -89d)
-							{
-								//Less than -89: change it to -89.
-								newAngle = -89d;
-							}
-							else if (newAngle > 89d)
-							{
-								//Greater than 89: change it to 89.
-								newAngle = 89d;
-							}
-						}
-						else
-						{
-							//Not a number: wait until the user enters something.
-							return;
-						}
-
-						(arrowAngleOffset.ComboBox as Gtk.ComboBoxEntry).Entry.Text = newAngle.ToString();
-
-						LineCurveSeriesEngine activeEngine = (LineCurveSeriesEngine)ActiveShapeEngine;
-
-						if (activeEngine != null)
-						{
-							activeEngine.Arrow1.AngleOffset = newAngle;
-							activeEngine.Arrow2.AngleOffset = newAngle;
-
-							DrawActiveShape(false, false, true, false, false);
-
-							StorePreviousSettings();
-						}
-					}
-				};
-			}
-
-			if (arrowAngleOffsetPlus == null)
-			{
-				arrowAngleOffsetPlus = new ToolBarButton("Toolbar.PlusButton.png", "", Catalog.GetString("Increase angle offset"));
-				arrowAngleOffsetPlus.Clicked += new EventHandler(arrowAngleOffsetPlus_Clicked);
-			}
-
-			#endregion Angle Offset
-
-
-			#region Length Offset
-
-			if (arrowLengthOffsetLabel == null)
-			{
-				arrowLengthOffsetLabel = new ToolBarLabel(string.Format(" {0}: ", Catalog.GetString("Length")));
-			}
-
-			if (arrowLengthOffsetMinus == null)
-			{
-				arrowLengthOffsetMinus = new ToolBarButton("Toolbar.MinusButton.png", "", Catalog.GetString("Decrease length offset"));
-				arrowLengthOffsetMinus.Clicked += new EventHandler(arrowLengthOffsetMinus_Clicked);
-			}
-
-			if (arrowLengthOffset == null)
-			{
-				arrowLengthOffset = new ToolBarComboBox(65, 8, true,
-					"-30", "-25", "-20", "-15", "-10", "-5", "0", "5", "10", "15", "20", "25", "30");
-
-				arrowLengthOffset.ComboBox.Changed += (o, e) =>
-				{
-					if (arrowLengthOffset.ComboBox.ActiveText.Length < 1)
-					{
-						//Ignore the change until the user enters something.
-						return;
-					}
-					else if (arrowLengthOffset.ComboBox.ActiveText == "-")
-					{
-						//The user is trying to enter a negative value: ignore the change until the user enters more.
-						return;
-					}
-					else
-					{
-						double newLength = 10d;
-
-						if (Double.TryParse(arrowLengthOffset.ComboBox.ActiveText, out newLength))
-						{
-							if (newLength < -100d)
-							{
-								//Less than -100: change it to -100.
-								newLength = -100d;
-							}
-							else if (newLength > 100d)
-							{
-								//Greater than 100: change it to 100.
-								newLength = 100d;
-							}
-						}
-						else
-						{
-							//Not a number: wait until the user enters something.
-							return;
-						}
-
-						(arrowLengthOffset.ComboBox as Gtk.ComboBoxEntry).Entry.Text = newLength.ToString();
-
-						LineCurveSeriesEngine activeEngine = (LineCurveSeriesEngine)ActiveShapeEngine;
-
-						if (activeEngine != null)
-						{
-							activeEngine.Arrow1.LengthOffset = newLength;
-							activeEngine.Arrow2.LengthOffset = newLength;
-
-							DrawActiveShape(false, false, true, false, false);
-
-							StorePreviousSettings();
-						}
-					}
-				};
-			}
-
-			if (arrowLengthOffsetPlus == null)
-			{
-				arrowLengthOffsetPlus = new ToolBarButton("Toolbar.PlusButton.png", "", Catalog.GetString("Increase length offset"));
-				arrowLengthOffsetPlus.Clicked += new EventHandler(arrowLengthOffsetPlus_Clicked);
-			}
-
-			#endregion Length Offset
-
-			
-			if (showOtherArrowOptions)
-			{
-				tb.Add(arrowSizeLabel);
-				tb.Add(arrowSizeMinus);
-				tb.Add(arrowSize);
-				tb.Add(arrowSizePlus);
-				tb.Add(arrowAngleOffsetLabel);
-				tb.Add(arrowAngleOffsetMinus);
-				tb.Add(arrowAngleOffset);
-				tb.Add(arrowAngleOffsetPlus);
-				tb.Add(arrowLengthOffsetLabel);
-				tb.Add(arrowLengthOffsetMinus);
-				tb.Add(arrowLengthOffset);
-				tb.Add(arrowLengthOffsetPlus);
+				StorePreviousSettings ();
 			}
 		}
 
-
-		public ArrowedEditEngine(ShapeTool passedOwner): base(passedOwner)
+		private void UpdateArrowOptionToolbarItems (bool initial = false)
 		{
-			
-		}
+			// We have to do some hackery to get around the fact that the Antialiasing
+			// dropdown is added after our inital toolbar build. As we
+			// add and remove these extra toolbar items we always want them to be before
+			// the Antialiasing dropdown.
+			var offset = initial ? 0 : 2;
 
+			if (ArrowOneEnabled || ArrowTwoEnabled) {
+				if (extra_toolbar_items_added)
+					return;
+
+				toolbar.Insert (ArrowSizeLabel, toolbar.NItems - offset);
+				toolbar.Insert (ArrowSize, toolbar.NItems - offset);
+				toolbar.Insert (ArrowAngleOffsetLabel, toolbar.NItems - offset);
+				toolbar.Insert (ArrowAngleOffset, toolbar.NItems - offset);
+				toolbar.Insert (ArrowLengthOffsetLabel, toolbar.NItems - offset);
+				toolbar.Insert (ArrowLengthOffset, toolbar.NItems - offset);
+
+				extra_toolbar_items_added = true;
+			} else {
+				toolbar.Remove (ArrowSizeLabel);
+				toolbar.Remove (ArrowSize);
+				toolbar.Remove (ArrowAngleOffsetLabel);
+				toolbar.Remove (ArrowAngleOffset);
+				toolbar.Remove (ArrowLengthOffsetLabel);
+				toolbar.Remove (ArrowLengthOffset);
+
+				extra_toolbar_items_added = false;
+			}
+		}
 
 		/// <summary>
 		/// Set the new arrow's settings to be the same as what's in the toolbar settings.
 		/// </summary>
-		protected void setNewArrowSettings(LineCurveSeriesEngine newEngine)
+		protected void setNewArrowSettings (LineCurveSeriesEngine newEngine)
 		{
-			if (showArrowOneBox != null)
-			{
-				newEngine.Arrow1.Show = showArrowOneBox.Active;
-				newEngine.Arrow2.Show = showArrowTwoBox.Active;
+			if (showArrowOneBox != null) {
+				newEngine.Arrow1.Show = ArrowOneEnabled;
+				newEngine.Arrow2.Show = ArrowTwoEnabled;
 
-				Double.TryParse((arrowSize.ComboBox as Gtk.ComboBoxEntry).Entry.Text, out newEngine.Arrow1.ArrowSize);
-				Double.TryParse((arrowAngleOffset.ComboBox as Gtk.ComboBoxEntry).Entry.Text, out newEngine.Arrow1.AngleOffset);
-				Double.TryParse((arrowLengthOffset.ComboBox as Gtk.ComboBoxEntry).Entry.Text, out newEngine.Arrow1.LengthOffset);
+				newEngine.Arrow1.ArrowSize = ArrowSize.Widget.Value;
+				newEngine.Arrow1.AngleOffset = ArrowAngleOffset.Widget.Value;
+				newEngine.Arrow1.LengthOffset = ArrowLengthOffset.Widget.Value;
 
-				newEngine.Arrow1.ArrowSize = Utility.Clamp(newEngine.Arrow1.ArrowSize, 1d, 100d);
 				newEngine.Arrow2.ArrowSize = newEngine.Arrow1.ArrowSize;
-				newEngine.Arrow1.AngleOffset = Utility.Clamp(newEngine.Arrow1.AngleOffset, -89d, 89d);
 				newEngine.Arrow2.AngleOffset = newEngine.Arrow1.AngleOffset;
-				newEngine.Arrow1.LengthOffset = Utility.Clamp(newEngine.Arrow1.LengthOffset, -100d, 100d);
 				newEngine.Arrow2.LengthOffset = newEngine.Arrow1.LengthOffset;
 			}
 		}
 
 
-		public override void UpdateToolbarSettings(ShapeEngine engine)
+		public override void UpdateToolbarSettings (ShapeEngine engine)
 		{
-			if (engine != null && engine.ShapeType == ShapeTypes.OpenLineCurveSeries)
-			{
-				if (showArrowOneBox != null)
-				{
-					LineCurveSeriesEngine lCSEngine = (LineCurveSeriesEngine)engine;
+			if (engine != null && engine.ShapeType == ShapeTypes.OpenLineCurveSeries) {
+				if (showArrowOneBox != null) {
+					LineCurveSeriesEngine lCSEngine = (LineCurveSeriesEngine) engine;
 
-					showArrowOneBox.Active = lCSEngine.Arrow1.Show;
-					showArrowTwoBox.Active = lCSEngine.Arrow2.Show;
-					
-					if (showOtherArrowOptions)
-					{
-						(arrowSize.ComboBox as Gtk.ComboBoxEntry).Entry.Text = lCSEngine.Arrow1.ArrowSize.ToString();
-						(arrowAngleOffset.ComboBox as Gtk.ComboBoxEntry).Entry.Text = lCSEngine.Arrow1.AngleOffset.ToString();
-						(arrowLengthOffset.ComboBox as Gtk.ComboBoxEntry).Entry.Text = lCSEngine.Arrow1.LengthOffset.ToString();
+					ArrowOneEnabledCheckBox.Widget.Active = lCSEngine.Arrow1.Show;
+					ArrowTwoEnabledCheckBox.Widget.Active = lCSEngine.Arrow2.Show;
+
+					if (ArrowOneEnabled || ArrowTwoEnabled) {
+						ArrowSize.Widget.Value = lCSEngine.Arrow1.ArrowSize;
+						ArrowAngleOffset.Widget.Value = lCSEngine.Arrow1.AngleOffset;
+						ArrowLengthOffset.Widget.Value = lCSEngine.Arrow1.LengthOffset;
 					}
 				}
 
-				base.UpdateToolbarSettings(engine);
+				base.UpdateToolbarSettings (engine);
 			}
 		}
 
-		protected override void RecallPreviousSettings()
+		protected override void RecallPreviousSettings ()
 		{
-			if (showArrowOneBox != null)
-			{
-				showArrowOneBox.Active = previousSettings1.Show;
-				showArrowTwoBox.Active = previousSettings2.Show;
+			if (showArrowOneBox != null) {
+				ArrowOneEnabledCheckBox.Widget.Active = previousSettings1.Show;
+				ArrowTwoEnabledCheckBox.Widget.Active = previousSettings2.Show;
 
-				if (showOtherArrowOptions)
-				{
-					(arrowSize.ComboBox as Gtk.ComboBoxEntry).Entry.Text = previousSettings1.ArrowSize.ToString();
-					(arrowAngleOffset.ComboBox as Gtk.ComboBoxEntry).Entry.Text = previousSettings1.AngleOffset.ToString();
-					(arrowLengthOffset.ComboBox as Gtk.ComboBoxEntry).Entry.Text = previousSettings1.LengthOffset.ToString();
+				if (ArrowOneEnabled || ArrowTwoEnabled) {
+					ArrowSize.Widget.Value = previousSettings1.ArrowSize;
+					ArrowAngleOffset.Widget.Value = previousSettings1.AngleOffset;
+					ArrowLengthOffset.Widget.Value = previousSettings1.LengthOffset;
 				}
 			}
 
-			base.RecallPreviousSettings();
+			base.RecallPreviousSettings ();
 		}
 
-		protected override void StorePreviousSettings()
+		protected override void StorePreviousSettings ()
 		{
-			if (showArrowOneBox != null)
-			{
-				previousSettings1.Show = showArrowOneBox.Active;
-				previousSettings2.Show = showArrowTwoBox.Active;
+			if (showArrowOneBox != null) {
+				previousSettings1.Show = ArrowOneEnabled;
+				previousSettings2.Show = ArrowTwoEnabled;
 
-				Double.TryParse((arrowSize.ComboBox as Gtk.ComboBoxEntry).Entry.Text, out previousSettings1.ArrowSize);
-				Double.TryParse((arrowAngleOffset.ComboBox as Gtk.ComboBoxEntry).Entry.Text, out previousSettings1.AngleOffset);
-				Double.TryParse((arrowLengthOffset.ComboBox as Gtk.ComboBoxEntry).Entry.Text, out previousSettings1.LengthOffset);
+				previousSettings1.ArrowSize = ArrowSize.Widget.Value;
+				previousSettings1.AngleOffset = ArrowAngleOffset.Widget.Value;
+				previousSettings1.LengthOffset = ArrowLengthOffset.Widget.Value;
 
 				//Other Arrow2 settings are unnecessary since they are the same as Arrow1's.
 			}
 
-			base.StorePreviousSettings();
+			base.StorePreviousSettings ();
 		}
 
 
-		protected override void DrawExtras(ref Rectangle? dirty, Context g, ShapeEngine engine)
+		protected override void DrawExtras (ref Rectangle? dirty, Context g, ShapeEngine engine)
 		{
-            LineCurveSeriesEngine lCSEngine = engine as LineCurveSeriesEngine;
-			if (lCSEngine != null && engine.ControlPoints.Count > 0)
-			{
+			LineCurveSeriesEngine? lCSEngine = engine as LineCurveSeriesEngine;
+			if (lCSEngine != null && engine.ControlPoints.Count > 0) {
 				// Draw the arrows for the currently active shape.
 				GeneratedPoint[] genPoints = engine.GeneratedPoints;
 
-                if (lCSEngine.Arrow1.Show)
-                {
-                    if (genPoints.Length > 1)
-                    {
-                        dirty = dirty.UnionRectangles(lCSEngine.Arrow1.Draw(g, lCSEngine.OutlineColor,
-                            genPoints[0].Position, genPoints[1].Position));
-                    }
-                }
+				if (lCSEngine.Arrow1.Show) {
+					if (genPoints.Length > 1) {
+						dirty = dirty.UnionRectangles (lCSEngine.Arrow1.Draw (g, lCSEngine.OutlineColor,
+						    genPoints[0].Position, genPoints[1].Position));
+					}
+				}
 
-                if (lCSEngine.Arrow2.Show)
-                {
-                    if (genPoints.Length > 1)
-                    {
-                        dirty = dirty.UnionRectangles(lCSEngine.Arrow2.Draw(g, lCSEngine.OutlineColor,
-                            genPoints[genPoints.Length - 1].Position, genPoints[genPoints.Length - 2].Position));
-                    }
-                }
+				if (lCSEngine.Arrow2.Show) {
+					if (genPoints.Length > 1) {
+						dirty = dirty.UnionRectangles (lCSEngine.Arrow2.Draw (g, lCSEngine.OutlineColor,
+						    genPoints[genPoints.Length - 1].Position, genPoints[genPoints.Length - 2].Position));
+					}
+				}
 			}
 
-			base.DrawExtras(ref dirty, g, engine);
+			base.DrawExtras (ref dirty, g, engine);
+		}
+
+		private SeparatorToolItem ArrowSeparator => arrowSep ??= new SeparatorToolItem ();
+		private ToolBarLabel ArrowLabel => arrowLabel ??= new ToolBarLabel (string.Format (" {0}: ", Translations.GetString ("Arrow")));
+
+		private ToolBarWidget<CheckButton> ArrowOneEnabledCheckBox {
+			get {
+				if (showArrowOneBox is null) {
+					showArrowOneBox = new (new CheckButton ("1"));
+					showArrowOneBox.Widget.Active = settings.GetSetting (ARROW1_SETTING (tool_prefix), previousSettings1.Show);
+					showArrowOneBox.Widget.Toggled += (o, e) => ArrowEnabledToggled (true);
+				}
+
+				return showArrowOneBox;
+			}
+		}
+
+		private ToolBarWidget<CheckButton> ArrowTwoEnabledCheckBox {
+			get {
+				if (showArrowTwoBox is null) {
+					showArrowTwoBox = new (new CheckButton ("2"));
+					showArrowTwoBox.Widget.Active = settings.GetSetting (ARROW2_SETTING (tool_prefix), previousSettings2.Show);
+					showArrowTwoBox.Widget.Toggled += (o, e) => ArrowEnabledToggled (false);
+				}
+
+				return showArrowTwoBox;
+			}
+		}
+
+		private ToolBarLabel ArrowSizeLabel => arrowSizeLabel ??= new ToolBarLabel (string.Format (" {0}: ", Translations.GetString ("Size")));
+
+		private ToolBarWidget<SpinButton> ArrowSize {
+			get {
+				if (arrowSize == null) {
+					arrowSize = new (new SpinButton (1, 100, 1) { Value = settings.GetSetting (ARROW_SIZE_SETTING (tool_prefix), 10) });
+
+					arrowSize.Widget.ValueChanged += (o, e) => {
+						var activeEngine = (LineCurveSeriesEngine?) ActiveShapeEngine;
+
+						if (activeEngine != null) {
+							var size = arrowSize.Widget.Value;
+							activeEngine.Arrow1.ArrowSize = size;
+							activeEngine.Arrow2.ArrowSize = size;
+
+							DrawActiveShape (false, false, true, false, false);
+
+							StorePreviousSettings ();
+						}
+					};
+				}
+
+				return arrowSize;
+			}
+		}
+
+		private ToolBarLabel ArrowAngleOffsetLabel => arrowAngleOffsetLabel ??= new ToolBarLabel (string.Format (" {0}: ", Translations.GetString ("Angle")));
+
+		private ToolBarWidget<SpinButton> ArrowAngleOffset {
+			get {
+				if (arrowAngleOffset == null) {
+					arrowAngleOffset = new (new SpinButton (-89, 89, 1) { Value = settings.GetSetting (ARROW_ANGLE_SETTING (tool_prefix), 15) });
+
+					arrowAngleOffset.Widget.ValueChanged += (o, e) => {
+
+						var activeEngine = (LineCurveSeriesEngine?) ActiveShapeEngine;
+						if (activeEngine != null) {
+							var angle = arrowAngleOffset.Widget.Value;
+							activeEngine.Arrow1.AngleOffset = angle;
+							activeEngine.Arrow2.AngleOffset = angle;
+
+							DrawActiveShape (false, false, true, false, false);
+
+							StorePreviousSettings ();
+						}
+					};
+				}
+
+				return arrowAngleOffset;
+			}
+		}
+
+		private ToolBarLabel ArrowLengthOffsetLabel => arrowLengthOffsetLabel ??= new ToolBarLabel (string.Format (" {0}: ", Translations.GetString ("Length")));
+
+		private ToolBarWidget<SpinButton> ArrowLengthOffset {
+			get {
+				if (arrowLengthOffset == null) {
+					arrowLengthOffset = new (new SpinButton (-100, 100, 1) { Value = settings.GetSetting (ARROW_LENGTH_SETTING (tool_prefix), 10) });
+
+					arrowLengthOffset.Widget.ValueChanged += (o, e) => {
+
+						var activeEngine = (LineCurveSeriesEngine?) ActiveShapeEngine;
+						if (activeEngine != null) {
+							var length = arrowLengthOffset.Widget.Value;
+							activeEngine.Arrow1.LengthOffset = length;
+							activeEngine.Arrow2.LengthOffset = length;
+
+							DrawActiveShape (false, false, true, false, false);
+
+							StorePreviousSettings ();
+						}
+					};
+				}
+
+				return arrowLengthOffset;
+			}
 		}
 	}
 }

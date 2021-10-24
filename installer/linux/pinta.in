@@ -1,0 +1,5 @@
+#!/bin/sh
+prefix=@prefix@
+exec_prefix=@exec_prefix@
+
+exec dotnet @libdir@/@PACKAGE@/Pinta.dll "$@"

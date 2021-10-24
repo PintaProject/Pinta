@@ -26,7 +26,6 @@
 
 using System;
 using Gtk;
-using Mono.Unix;
 using Pinta.Core;
 
 namespace Pinta.Actions
@@ -47,7 +46,7 @@ namespace Pinta.Actions
 
 		private void Activated (object sender, EventArgs e)
 		{
-			ResizeCanvasDialog dialog = new ResizeCanvasDialog ();
+			using var dialog = new ResizeCanvasDialog ();
 
 			dialog.WindowPosition = Gtk.WindowPosition.CenterOnParent;
 
@@ -55,8 +54,6 @@ namespace Pinta.Actions
 
 			if (response == (int)Gtk.ResponseType.Ok)
 				dialog.SaveChanges ();
-
-			dialog.Destroy ();
 		}
 	}
 }

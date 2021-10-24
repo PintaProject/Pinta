@@ -44,9 +44,12 @@ namespace Pinta.Actions
 		}
 		#endregion
 
-		private void Activated (object sender, EventArgs e)
+		private void Activated (bool value)
 		{
-			Pinta.Docking.DockNotebook.DockNotebookManager.TabStripVisible = ((ToggleAction)sender).Active;
+			// TODO-GTK3 (docking)
+#if false
+			Pinta.Docking.DockNotebook.DockNotebookManager.TabStripVisible = value;
+#endif
 		}
 	}
 }

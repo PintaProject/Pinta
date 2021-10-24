@@ -26,7 +26,6 @@
 
 using System;
 using System.Collections.Generic;
-using Mono.Unix;
 using Gdk;
 
 namespace Pinta.Core
@@ -39,20 +38,22 @@ namespace Pinta.Core
 		{
 			old_size = oldSize;
 
-			Icon = "Menu.Image.Resize.png";
-			Text = Catalog.GetString ("Resize Image");
+			Icon = Resources.Icons.ImageResize;
+			Text = Translations.GetString ("Resize Image");
 		}
 
-		public DocumentSelection RestoreSelection;
+		public DocumentSelection? RestoreSelection;
 		
 		public override void Undo ()
 		{
+			var doc = PintaCore.Workspace.ActiveDocument;
+
 			// maintain the current scaling setting after the operation
 			double scale = PintaCore.Workspace.Scale;
 
 			Size swap = PintaCore.Workspace.ImageSize;
 
-			var window = PintaCore.Workspace.ActiveWorkspace.Canvas.GdkWindow;
+			var window = PintaCore.Workspace.ActiveWorkspace.Canvas.Window;
 			window.FreezeUpdates ();
 
 			PintaCore.Workspace.ImageSize = old_size;
@@ -64,13 +65,13 @@ namespace Pinta.Core
 			
 			if (RestoreSelection != null) {
 				DocumentSelection old = PintaCore.Workspace.ActiveDocument.Selection;
-				PintaCore.Workspace.ActiveDocument.Selection = RestoreSelection.Clone();
+				doc.Selection = RestoreSelection.Clone();
 
 				if (old != null) {
 					old.Dispose ();
 				}
 			} else {
-				PintaCore.Layers.ResetSelectionPath ();
+				doc.ResetSelectionPaths ();
 			}
 			
 			PintaCore.Workspace.Invalidate ();
@@ -83,12 +84,14 @@ namespace Pinta.Core
 
 		public override void Redo ()
 		{
+			var doc = PintaCore.Workspace.ActiveDocument;
+
 			// maintain the current scaling setting after the operation
 			double scale = PintaCore.Workspace.Scale;
 
 			Size swap = PintaCore.Workspace.ImageSize;
 
-			var window = PintaCore.Workspace.ActiveWorkspace.Canvas.GdkWindow;
+			var window = PintaCore.Workspace.ActiveWorkspace.Canvas.Window;
 			window.FreezeUpdates ();
 
 			PintaCore.Workspace.ImageSize = old_size;
@@ -98,7 +101,7 @@ namespace Pinta.Core
 
 			base.Redo ();
 
-			PintaCore.Layers.ResetSelectionPath ();
+			doc.ResetSelectionPaths ();
 			PintaCore.Workspace.Invalidate ();
 
 			PintaCore.Workspace.Scale = scale;

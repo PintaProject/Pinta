@@ -38,7 +38,6 @@ using Gtk;
 using GLib;
 using Pango;
 using System.IO;
-using Mono.Unix;
 using Pinta.Core;
 
 namespace Pinta
@@ -49,12 +48,11 @@ namespace Pinta
 		Pixbuf image_top;
 		Pixbuf monoPowered;
 		int scroll;
-		Pango.Layout layout;
+		Pango.Layout layout = null!; // NRT - Set by OnRealized
 		int monoLogoSpacing = 5;
 		int textTop;
 		int scrollPause;
 		int scrollStart;
-		Gdk.GC backGc;
 
 		internal uint TimerHandle;
 
@@ -126,7 +124,6 @@ namespace Pinta
 		public ScrollBox ()
 		{
 			this.Realized += new EventHandler (OnRealized);
-			this.ModifyBg (Gtk.StateType.Normal, new Gdk.Color (49, 49, 74));
 
 			image = PintaCore.Resources.GetIcon ("About.Image.png");
 			image_top = PintaCore.Resources.GetIcon ("About.ImageTop.png");
@@ -140,7 +137,7 @@ namespace Pinta
 		string CreditText {
 			get {
 				StringBuilder sb = new StringBuilder ();
-				sb.AppendFormat ("<b>{0}</b>\n\n", Catalog.GetString ("Contributors to this release:"));
+				sb.AppendFormat ("<b>{0}</b>\n\n", Translations.GetString ("Contributors to this release:"));
 
 				for (int n = 0; n < authors.Length; n++) {
 					sb.Append (authors[n]);
@@ -152,7 +149,7 @@ namespace Pinta
 
 				sb.AppendLine ();
 
-				sb.Append ("\n\n<b>" + Catalog.GetString ("Previous contributors:") + "</b>\n\n");
+				sb.Append ("\n\n<b>" + Translations.GetString ("Previous contributors:") + "</b>\n\n");
 				for (int n = 0; n < oldAuthors.Length; n++) {
 					sb.Append (oldAuthors[n]);
 					if (n % 2 == 1)
@@ -163,23 +160,23 @@ namespace Pinta
 
 				sb.AppendLine ();
 
-				string trans = Catalog.GetString ("translator-credits");
+				string trans = Translations.GetString ("translator-credits");
 
 				if (trans != "translator-credits") {
-					sb.AppendFormat ("\n\n<b>{0}</b>\n\n", Catalog.GetString ("Translated by:"));
+					sb.AppendFormat ("\n\n<b>{0}</b>\n\n", Translations.GetString ("Translated by:"));
 					sb.Append (trans);
 				}
 
 				sb.AppendLine ();
 				sb.AppendLine ();
-				sb.AppendFormat ("<b>{0}</b>\n", Catalog.GetString ("Based on the work of Paint.NET:"));
+				sb.AppendFormat ("<b>{0}</b>\n", Translations.GetString ("Based on the work of Paint.NET:"));
 				sb.AppendLine ();
 				sb.Append ("http://www.getpaint.net/");
 
 				sb.AppendLine ();
 				sb.AppendLine ();
 				sb.AppendLine ();
-				sb.AppendFormat ("<b>{0}</b>\n", Catalog.GetString ("Using some icons from:"));
+				sb.AppendFormat ("<b>{0}</b>\n", Translations.GetString ("Using some icons from:"));
 				sb.AppendLine ();
 				sb.AppendLine ("Silk - http://www.famfamfam.com/lab/icons/silk");
 				sb.Append ("Fugue - http://pinvoke.com/");
@@ -187,7 +184,7 @@ namespace Pinta
 				sb.AppendLine ();
 				sb.AppendLine ();
 				sb.AppendLine ();
-				sb.AppendFormat ("<b>{0}</b>\n", Catalog.GetString ("Powered by Mono:"));
+				sb.AppendFormat ("<b>{0}</b>\n", Translations.GetString ("Powered by Mono:"));
 
 				return sb.ToString ();
 			}
@@ -200,42 +197,42 @@ namespace Pinta
 			//                ++scroll;
 			//} else
 				++scroll;
-			int w, h;
-			this.GdkWindow.GetSize (out w, out h);
-			this.QueueDrawArea (0, 0, w, image.Height);
+			
+			this.QueueDrawArea (0, 0, Window.FrameExtents.Width, image.Height);
 			return true;
 		}
 
-		private void DrawImage ()
+		private void DrawImage (Cairo.Context ctx)
 		{
 			if (image != null) {
-				int w, h;
-				this.GdkWindow.GetSize (out w, out h);
-				this.GdkWindow.DrawPixbuf (backGc, image, 0, 0, (w - image.Width) / 2, 0, -1, -1, RgbDither.Normal, 0,
-				0);
+				Gdk.CairoHelper.SetSourcePixbuf(ctx, image, 0, 0);
+				ctx.Paint();
 			}
 		}
 
-		private void DrawImageTop ()
+		private void DrawImageTop (Cairo.Context ctx)
 		{
-			if (image_top != null) {
-				int w, h;
-				this.GdkWindow.GetSize (out w, out h);
-				this.GdkWindow.DrawPixbuf (backGc, image_top, 0, 0, (w - image.Width) / 2, 0, -1, -1, RgbDither.Normal, 0,
-				0);
+			if (image != null)
+			{
+				Gdk.CairoHelper.SetSourcePixbuf(ctx, image_top, 0, 0);
+				ctx.Paint();
 			}
 		}
 
-		private void DrawText ()
+		private void DrawText (Cairo.Context ctx)
 		{
-			int width, height;
-			GdkWindow.GetSize (out width, out height);
+			int width = Window.FrameExtents.Width;
+			int height = Window.FrameExtents.Height;
 
 			int widthPixel, heightPixel;
-			layout.GetPixelSize (out widthPixel, out heightPixel);
+			layout.GetPixelSize(out widthPixel, out heightPixel);
 
-			GdkWindow.DrawLayout (Style.WhiteGC, 0, textTop - scroll, layout);
-			GdkWindow.DrawPixbuf (backGc, monoPowered, 0, 0, (width / 2) - (monoPowered.Width / 2), textTop - scroll + heightPixel + monoLogoSpacing, -1, -1, RgbDither.Normal, 0, 0);
+			ctx.SetSourceColor(new Cairo.Color(1, 1, 1));
+			ctx.MoveTo(0, textTop - scroll);
+			Pango.CairoHelper.ShowLayout(ctx, layout);
+
+			Gdk.CairoHelper.SetSourcePixbuf(ctx, monoPowered, (width / 2) - (monoPowered.Width / 2), textTop - scroll + heightPixel + monoLogoSpacing);
+			ctx.Paint();
 
 			heightPixel = heightPixel - 80 + image.Height;
 
@@ -245,24 +242,22 @@ namespace Pinta
 				scroll = scrollStart;
 		}
 
-		protected override bool OnExposeEvent (Gdk.EventExpose evnt)
+        protected override bool OnDrawn(Cairo.Context ctx)
 		{
-			int w, h;
-
-			this.GdkWindow.GetSize (out w, out h);
-			this.DrawImage ();
-			this.DrawText ();
-			this.DrawImageTop ();
+			this.DrawImage (ctx);
+			this.DrawText (ctx);
+			this.DrawImageTop (ctx);
 			
 			return false;
 		}
 
-		protected void OnRealized (object o, EventArgs args)
+		protected void OnRealized (object? o, EventArgs args)
 		{
 			int x, y;
 			int w, h;
-			GdkWindow.GetOrigin (out x, out y);
-			GdkWindow.GetSize (out w, out h);
+			Window.GetOrigin (out x, out y);
+			w = Window.FrameExtents.Width;
+			h = Window.FrameExtents.Height;
 
 			textTop = y + image.Height - 30;
 			scrollStart = -(image.Height - textTop);
@@ -274,15 +269,6 @@ namespace Pinta
 			layout.Wrap = Pango.WrapMode.Word;
 			layout.Alignment = Pango.Alignment.Center;
 			layout.SetMarkup (CreditText);
-
-			backGc = new Gdk.GC (GdkWindow);
-			backGc.RgbBgColor = new Gdk.Color (49, 49, 74);
-		}
-
-		protected override void OnDestroyed ()
-		{
-			base.OnDestroyed ();
-			backGc.Dispose ();
 		}
 
 	}
@@ -294,49 +280,32 @@ namespace Pinta
 
 		public AboutDialog () : base (string.Empty, PintaCore.Chrome.MainWindow, DialogFlags.Modal)
 		{
-			Title = Catalog.GetString ("About Pinta");
+			Title = Translations.GetString ("About Pinta");
 			//TransientFor = IdeApp.Workbench.RootWindow;
-			AllowGrow = false;
-			HasSeparator = false;
-			Icon = PintaCore.Resources.GetIcon ("Pinta.png");
+			Resizable = false;
+			IconName = Pinta.Resources.Icons.AboutPinta;
 
-			VBox.BorderWidth = 0;
+			ContentArea.BorderWidth = 0;
 
 			aboutPictureScrollBox = new ScrollBox ();
 
-			VBox.PackStart (aboutPictureScrollBox, false, false, 0);
+			ContentArea.PackStart (aboutPictureScrollBox, false, false, 0);
 			imageSep = PintaCore.Resources.GetIcon ("About.ImageSep.png");
 
-			VBox.PackStart (new Gtk.Image (imageSep), false, false, 0);
+			ContentArea.PackStart (new Gtk.Image (imageSep), false, false, 0);
 
 			Notebook notebook = new Notebook ();
 			notebook.BorderWidth = 6;
 			notebook.AppendPage (new AboutPintaTabPage (), new Label (Title));
-			notebook.AppendPage (new VersionInformationTabPage (), new Label (Catalog.GetString ("Version Info")));
-			
-			VBox.PackStart (notebook, true, true, 4);
+			notebook.AppendPage (new VersionInformationTabPage (), new Label (Translations.GetString ("Version Info")));
+
+			ContentArea.PackStart (notebook, true, true, 4);
 
 			AddButton (Gtk.Stock.Close, (int)ResponseType.Close);
 
 			this.Resizable = true;
 
 			ShowAll ();
-		}
-
-		void ChangeColor (Gtk.Widget w)
-		{
-			w.ModifyBg (Gtk.StateType.Normal, new Gdk.Color (69, 69, 94));
-			w.ModifyBg (Gtk.StateType.Active, new Gdk.Color (69, 69, 94));
-			w.ModifyFg (Gtk.StateType.Normal, new Gdk.Color (255, 255, 255));
-			w.ModifyFg (Gtk.StateType.Active, new Gdk.Color (255, 255, 255));
-			w.ModifyFg (Gtk.StateType.Prelight, new Gdk.Color (255, 255, 255));
-
-			Gtk.Container c = w as Gtk.Container;
-
-			if (c != null) {
-				foreach (Widget cw in c.Children)
-					ChangeColor (cw);
-			}
 		}
 
 		public new int Run ()

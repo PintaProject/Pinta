@@ -18,7 +18,7 @@ namespace Pinta.Effects
 	{
 		private int multiply;
 		private int divide;
-		private byte[] rgbTable;
+		private byte[]? rgbTable;
 		private bool table_calculated;
 		
 		public override string Icon {
@@ -26,18 +26,18 @@ namespace Pinta.Effects
 		}
 
 		public override string Name {
-			get { return Mono.Unix.Catalog.GetString ("Brightness / Contrast"); }
+			get { return Translations.GetString ("Brightness / Contrast"); }
 		}
 
 		public override bool IsConfigurable {
 			get { return true; }
 		}
 
-		public override Gdk.Key AdjustmentMenuKey {
-			get { return Gdk.Key.B; }
+		public override string AdjustmentMenuKey {
+			get { return "B"; }
 		}
 
-		public BrightnessContrastData Data { get { return EffectData as BrightnessContrastData; } }
+		public BrightnessContrastData Data { get { return (BrightnessContrastData)EffectData!; } } // NRT - Set in constructor
 		
 		public BrightnessContrastEffect ()
 		{
@@ -48,7 +48,7 @@ namespace Pinta.Effects
 		/// <summary>
 		/// If any of the effect data was changed, we need to recalculate the rgb table before rendering
 		/// </summary>
-		void HandleEffectDataPropertyChanged (object sender, System.ComponentModel.PropertyChangedEventArgs e)
+		void HandleEffectDataPropertyChanged (object? sender, System.ComponentModel.PropertyChangedEventArgs e)
 		{
 			table_calculated = false;
 		}
@@ -73,7 +73,7 @@ namespace Pinta.Effects
 						while (dstRowPtr < dstRowEndPtr) {
 							ColorBgra col = *srcRowPtr;
 							int i = col.GetIntensityByte ();
-							uint c = rgbTable[i];
+							uint c = rgbTable![i]; // NRT - Set in Calculate
 							dstRowPtr->Bgra = (col.Bgra & 0xff000000) | c | (c << 8) | (c << 16);
 
 							++dstRowPtr;
@@ -85,7 +85,7 @@ namespace Pinta.Effects
 							int i = col.GetIntensityByte ();
 							int shiftIndex = i * 256;
 
-							col.R = rgbTable[shiftIndex + col.R];
+							col.R = rgbTable![shiftIndex + col.R];
 							col.G = rgbTable[shiftIndex + col.G];
 							col.B = rgbTable[shiftIndex + col.B];
 

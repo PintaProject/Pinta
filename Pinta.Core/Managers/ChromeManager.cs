@@ -31,22 +31,28 @@ namespace Pinta.Core
 {
 	public class ChromeManager
 	{
-		private Toolbar tool_toolbar;
-		private Window main_window;
-		private IProgressDialog progress_dialog;
+		// NRT - These are all initialized via the Initialize* functions
+		// but it would be nice to rewrite it to provably non-null.
+		private Toolbar tool_toolbar = null!;
+		private Window main_window = null!;
+		private IProgressDialog progress_dialog = null!;
 		private bool main_window_busy;
 		private Gdk.Point last_canvas_cursor_point;
-		private MenuBar main_menu;
-		private Toolbar main_toolbar;
-		private ErrorDialogHandler error_dialog_handler;
-		private UnsupportedFormatDialogHandler unsupported_format_dialog_handler;
+		private Toolbar main_toolbar = null!;
+		private ErrorDialogHandler error_dialog_handler = null!;
+		private UnsupportedFormatDialogHandler unsupported_format_dialog_handler = null!;
 
+		public Application Application { get; private set; } = null!;
 		public Toolbar ToolToolBar { get { return tool_toolbar; } }
 		public Toolbar MainToolBar { get { return main_toolbar; } }
 		public Window MainWindow { get { return main_window; } }
+		public Statusbar StatusBar { get; private set; } = null!;
+		public Toolbar ToolBox { get; private set; } = null!;
+
 		public IProgressDialog ProgressDialog { get { return progress_dialog; } }
-		public MenuBar MainMenu { get { return main_menu; } }
-		
+		public GLib.Menu AdjustmentsMenu { get; private set; } = null!;
+		public GLib.Menu EffectsMenu { get; private set; } = null!;
+
 		public ChromeManager ()
 		{
 		}
@@ -68,14 +74,19 @@ namespace Pinta.Core
 				main_window_busy = value;
 				
 				if (main_window_busy)
-					main_window.GdkWindow.Cursor = new Gdk.Cursor(Gdk.CursorType.Watch);
+					main_window.Window.Cursor = new Gdk.Cursor(Gdk.CursorType.Watch);
 				else
-					main_window.GdkWindow.Cursor = new Gdk.Cursor(Gdk.CursorType.Arrow);
+					main_window.Window.Cursor = new Gdk.Cursor(Gdk.CursorType.Arrow);
 			}
 		}
 		#endregion
 
 		#region Public Methods
+		public void InitializeApplication (Gtk.Application application)
+        {
+			Application = application;
+        }
+
 		public void InitializeToolToolBar (Toolbar toolToolBar)
 		{
 			tool_toolbar = toolToolBar;
@@ -86,14 +97,25 @@ namespace Pinta.Core
 			main_toolbar = mainToolBar;
 		}
 
+		public void InitializeStatusBar (Statusbar statusbar)
+		{
+			StatusBar = statusbar;
+		}
+
+		public void InitializeToolBox (Toolbar toolbox)
+		{
+			ToolBox = toolbox;
+		}
+
 		public void InitializeWindowShell (Window shell)
 		{
 			main_window = shell;
 		}
 
-		public void InitializeMainMenu (MenuBar menu)
+		public void InitializeMainMenu (GLib.Menu adj_menu, GLib.Menu effects_menu)
 		{
-			main_menu = menu;
+			AdjustmentsMenu = adj_menu;
+			EffectsMenu = effects_menu;
 		}
 
 		public void InitializeProgessDialog (IProgressDialog progressDialog)
@@ -145,8 +167,8 @@ namespace Pinta.Core
 #endregion
 		
 		#region Public Events
-		public event EventHandler LastCanvasCursorPointChanged;
-		public event EventHandler<TextChangedEventArgs> StatusBarTextChanged;
+		public event EventHandler? LastCanvasCursorPointChanged;
+		public event EventHandler<TextChangedEventArgs>? StatusBarTextChanged;
 		#endregion
 	}
 		

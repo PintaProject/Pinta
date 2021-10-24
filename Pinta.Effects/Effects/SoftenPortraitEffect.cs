@@ -39,7 +39,6 @@ using Cairo;
 using Pinta.Gui.Widgets;
 using Pinta.Effects;
 using Pinta.Core;
-using Mono.Unix;
 
 namespace Pinta.Effects
 {
@@ -55,7 +54,7 @@ namespace Pinta.Effects
 		}
 
 		public override string Name {
-			get { return Catalog.GetString ("Soften Portrait"); }
+			get { return Translations.GetString ("Soften Portrait"); }
 		}
 
 		public override bool IsConfigurable {
@@ -63,10 +62,10 @@ namespace Pinta.Effects
 		}
 
 		public override string EffectMenuCategory {
-			get { return Catalog.GetString ("Photo"); }
+			get { return Translations.GetString ("Photo"); }
 		}
 
-		public SoftenPortraitData Data { get { return EffectData as SoftenPortraitData; } }
+		public SoftenPortraitData Data { get { return (SoftenPortraitData)EffectData!; } } // NRT - Set in constructor
 		
 		public SoftenPortraitEffect ()
 		{

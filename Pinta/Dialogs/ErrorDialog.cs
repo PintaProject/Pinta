@@ -25,9 +25,9 @@
 // THE SOFTWARE.
 
 using System;
+using System.Diagnostics.CodeAnalysis;
 using Gtk;
 using Pinta.Core;
-using Mono.Unix;
 
 namespace Pinta
 {
@@ -75,7 +75,8 @@ namespace Pinta
 			Resize (w, 1);
 			return false;
 		}
-		
+
+		[MemberNotNull (nameof (expander), nameof (bug_report_button), nameof (description_label), nameof (details_text))]
 		private void Build ()
 		{
 			var hbox = new HBox ();
@@ -83,7 +84,7 @@ namespace Pinta
 			hbox.BorderWidth = 12;
 
 			var error_icon = new Image ();
-			error_icon.Pixbuf = PintaCore.Resources.GetIcon (Stock.DialogError, 32);
+			error_icon.Pixbuf = Gtk.IconTheme.Default.LoadIcon(Resources.StandardIcons.DialogError, 32);
 			error_icon.Yalign = 0;
 			hbox.PackStart (error_icon, false, false, 0);
 
@@ -95,7 +96,7 @@ namespace Pinta
 			description_label.Xalign = 0;
 			vbox.PackStart (description_label, false, false, 0);
 
-			expander = new Expander (Catalog.GetString ("Details"));
+			expander = new Expander (Translations.GetString ("Details"));
 			details_text = new TextView ();
 			var scroll = new ScrolledWindow ();
 			scroll.Add (details_text);
@@ -104,11 +105,11 @@ namespace Pinta
 			vbox.Add (expander);
 
 			hbox.Add (vbox);
-			this.VBox.Add (hbox);
+			this.ContentArea.Add (hbox);
 			
-			bug_report_button = new Button (Catalog.GetString ("Report Bug...."));
+			bug_report_button = new Button (Translations.GetString ("Report Bug...."));
 			bug_report_button.CanFocus = false;
-			ActionArea.Add (bug_report_button);
+			AddActionWidget(bug_report_button, ResponseType.Help);
 
 			var ok_button = new Button (Gtk.Stock.Ok);
 			ok_button.CanDefault = true;

@@ -48,11 +48,11 @@ namespace Pinta.MacInterop
 		public static extern void Release (IntPtr cfRef);
 		
 		struct CFRange {
-			public int Location, Length;
+			public IntPtr Location, Length;
 			public CFRange (int l, int len)
 			{
-				Location = l;
-				Length = len;
+				Location = (IntPtr)l;
+				Length = (IntPtr)len;
 			}
 		}
 		
@@ -64,8 +64,8 @@ namespace Pinta.MacInterop
 		
 		[DllImport (CFLib, CharSet=CharSet.Unicode)]
 		extern static IntPtr CFStringGetCharacters (IntPtr handle, CFRange range, IntPtr buffer);
-		
-		public static string FetchString (IntPtr handle)
+
+		public static string? FetchString (IntPtr handle)
 		{
 			if (handle == IntPtr.Zero)
 				return null;
@@ -91,7 +91,7 @@ namespace Pinta.MacInterop
 			return str;
 		}
 		
-		public static string FSRefToString (ref FSRef fsref)
+		public static string? FSRefToString (ref FSRef fsref)
 		{
 			IntPtr url = IntPtr.Zero;
 			IntPtr str = IntPtr.Zero;
@@ -149,76 +149,6 @@ namespace Pinta.MacInterop
 			Editor = 0x00000004,
 			Shell = 0x00000008,
 			All = 0xFFFFFFFF
-		}
-		
-		static IntPtr CreatePathUrl (string path)
-		{
-			IntPtr str = IntPtr.Zero;
-			IntPtr url = IntPtr.Zero;
-			try {
-				str = CreateString (path);
-				if (str == IntPtr.Zero)
-					throw new Exception ("CreateString failed");
-				url = CFURLCreateWithFileSystemPath (IntPtr.Zero, str, CFUrlPathStyle.Posix, false);
-				if (url == IntPtr.Zero)
-					throw new Exception ("CFURLCreateWithFileSystemPath failed");
-				return url;
-			} finally {
-				if (str != IntPtr.Zero)
-					Release (str);
-			}
-		}
-		
-		public static string UrlToPath (IntPtr url)
-		{
-			IntPtr str = IntPtr.Zero;
-			try {
-				str = CFURLCopyFileSystemPath (url, CFUrlPathStyle.Posix);
-				return str == IntPtr.Zero? null : FetchString (str);
-			} finally {
-				if (str != IntPtr.Zero)
-					Release (str);
-			}
-		}
-		
-		public static string GetApplicationUrl (string filePath, LSRolesMask roles)
-		{
-			IntPtr url = IntPtr.Zero;
-			try {
-				url = CreatePathUrl (filePath);
-				IntPtr appUrl = IntPtr.Zero;
-				if (LSGetApplicationForURL (url, roles, IntPtr.Zero, ref appUrl) == 0 && appUrl != IntPtr.Zero)
-					return UrlToPath (appUrl);
-				return null;
-			} finally {
-				if (url != IntPtr.Zero)
-					Release (url);
-			}
-		}
-		
-		public static string[] GetApplicationUrls (string filePath, LSRolesMask roles)
-		{
-			IntPtr url = IntPtr.Zero;
-			IntPtr arr = IntPtr.Zero;
-			try {
-				url = CreatePathUrl (filePath);
-				arr = LSCopyApplicationURLsForURL (url, roles);
-				if (arr == IntPtr.Zero)
-					return new string[0];
-				int count = CFArrayGetCount (arr);
-				string[] values = new string [count];
-				for (int i = 0; i < values.Length; i++ ) {
-					var u = CFArrayGetValueAtIndex (arr, i);
-					if (u != IntPtr.Zero)
-						values[i] = UrlToPath (u);
-				}
-				return values;
-			} finally {
-				if (url != IntPtr.Zero)
-					Release (url);
-				if (arr != IntPtr.Zero)
-					Release (arr);
-			}
 		}
 	}
 }

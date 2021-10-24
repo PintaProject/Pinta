@@ -36,8 +36,8 @@ namespace Pinta.Tools
 
 		private UserLayer userLayer;
 
-		private SurfaceDiff userSurfaceDiff;
-		private ImageSurface userSurface;
+		private SurfaceDiff? userSurfaceDiff;
+		private ImageSurface? userSurface;
 
 		private ShapeEngineCollection sEngines;
 
@@ -107,7 +107,7 @@ namespace Pinta.Tools
 			else
 			{
 				// Undo to the "old" surface
-				userLayer.Surface = userSurface;
+				userLayer.Surface = userSurface!; // NRT - userSurface will be not-null in this branch
 
 				// Store the original surface for Redo
 				userSurface = surf;
@@ -149,7 +149,7 @@ namespace Pinta.Tools
 
 				if (redraw)
 				{
-					((ShapeTool)PintaCore.Tools.CurrentTool).EditEngine.DrawAllShapes();
+					((ShapeTool?)PintaCore.Tools.CurrentTool)?.EditEngine.DrawAllShapes();
 				}
 			}
 		}

@@ -11,7 +11,6 @@ using System;
 using Cairo;
 using Pinta.Gui.Widgets;
 using Pinta.Core;
-using Mono.Unix;
 
 namespace Pinta.Effects
 {
@@ -22,7 +21,7 @@ namespace Pinta.Effects
 		}
 
 		public override string Name {
-			get { return Catalog.GetString ("Frosted Glass"); }
+			get { return Translations.GetString ("Frosted Glass"); }
 		}
 
 		public override bool IsConfigurable {
@@ -30,11 +29,11 @@ namespace Pinta.Effects
 		}
 
 		public override string EffectMenuCategory {
-			get { return Catalog.GetString ("Distort"); }
+			get { return Translations.GetString ("Distort"); }
 		}
 
 		public FrostedGlassData Data {
-			get { return EffectData as FrostedGlassData; }
+			get { return (FrostedGlassData)EffectData!; } // NRT - Set in constructor
 		}
 
 		private Random random = new Random ();

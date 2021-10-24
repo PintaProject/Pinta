@@ -25,8 +25,8 @@
 // THE SOFTWARE.
 
 using System;
+using System.Diagnostics.CodeAnalysis;
 using Gtk;
-using Mono.Unix;
 using Pinta.Core;
 using Pinta.Gui.Widgets;
 
@@ -51,10 +51,11 @@ namespace Pinta.Effects
             get { return blue_spinbox.ValueAsInt; }
 		}
 
-		public PosterizeData EffectData { get; set; }
+		public PosterizeData? EffectData { get; set; }
 
-		public PosterizeDialog () : base (Catalog.GetString ("Posterize"),
-		                                  PintaCore.Chrome.MainWindow, DialogFlags.Modal)
+		public PosterizeDialog () : base (Translations.GetString ("Posterize"),
+		                                  PintaCore.Chrome.MainWindow, DialogFlags.Modal,
+										  GtkExtensions.DialogButtonsCancelOk())
 		{
 			Build ();
 			
@@ -62,14 +63,16 @@ namespace Pinta.Effects
 			green_spinbox.ValueChanged += HandleValueChanged;
 			blue_spinbox.ValueChanged += HandleValueChanged;
 
-			AlternativeButtonOrder = new int[] { (int) Gtk.ResponseType.Ok, (int) Gtk.ResponseType.Cancel };
 			DefaultResponse = Gtk.ResponseType.Ok;
 		}
 		
-		private void HandleValueChanged (object sender, EventArgs e)
+		private void HandleValueChanged (object? sender, EventArgs e)
 		{
 			var widget = sender as HScaleSpinButtonWidget;
-			
+
+			if (widget is null)
+				return;
+
 			if (link_button.Active)
 				green_spinbox.Value = blue_spinbox.Value = red_spinbox.Value = widget.Value;
 			
@@ -94,35 +97,33 @@ namespace Pinta.Effects
 			spinbox.DefaultValue = 16;
 			spinbox.MaximumValue = 64;
 			spinbox.MinimumValue = 2;
-			VBox.Add (spinbox);
+			ContentArea.Add (spinbox);
 		}
 
+		[MemberNotNull (nameof (red_spinbox), nameof (green_spinbox), nameof (blue_spinbox), nameof (link_button))]
 		private void Build ()
 		{
 			Resizable = false;
 
-			VBox.WidthRequest = 400;
-			VBox.BorderWidth = 6;
-			VBox.Spacing = 6;
+			ContentArea.WidthRequest = 400;
+			ContentArea.BorderWidth = 6;
+			ContentArea.Spacing = 6;
 
 			red_spinbox = new HScaleSpinButtonWidget ();
-			red_spinbox.Label = Catalog.GetString ("Red");
+			red_spinbox.Label = Translations.GetString ("Red");
 			InitSpinBox (red_spinbox);
 
 			green_spinbox = new HScaleSpinButtonWidget ();
-			green_spinbox.Label = Catalog.GetString ("Green");
+			green_spinbox.Label = Translations.GetString ("Green");
 			InitSpinBox (green_spinbox);
 
 			blue_spinbox = new HScaleSpinButtonWidget ();
-			blue_spinbox.Label = Catalog.GetString ("Blue");
+			blue_spinbox.Label = Translations.GetString ("Blue");
 			InitSpinBox (blue_spinbox);
 
-			link_button = new CheckButton (Catalog.GetString ("Linked"));
+			link_button = new CheckButton (Translations.GetString ("Linked"));
 			link_button.Active = true;
-			VBox.Add (link_button);
-
-			AddButton (Stock.Cancel, ResponseType.Cancel);
-			AddButton (Stock.Ok, ResponseType.Ok);
+			ContentArea.Add (link_button);
 
 			DefaultWidth = 400;
 			DefaultHeight = 300;

@@ -30,7 +30,6 @@ using System.Linq;
 using System.Text;
 using Gtk;
 using Pinta.Core;
-using Mono.Unix;
 
 namespace Pinta.Tools
 {
@@ -42,10 +41,10 @@ namespace Pinta.Tools
 		//This makes it easier to set the standard size of a single dash or space.
 		private static double dashFactor = 1.0;
 
-		private ToolBarLabel dashPatternLabel;
-		private ToolItem dashPatternSep;
+		private ToolBarLabel? dashPatternLabel;
+		private ToolItem? dashPatternSep;
 
-		public ToolBarComboBox comboBox;
+		public ToolBarComboBox? comboBox;
 
 
 
@@ -60,7 +59,7 @@ namespace Pinta.Tools
 		/// </summary>
 		/// <param name="tb">The Toolbar to add the DashPatternBox to.</param>
 		/// <returns>null if the DashPatternBox has already been setup; otherwise, returns the DashPatternBox itself.</returns>
-		public Gtk.ComboBox SetupToolbar(Toolbar tb)
+		public Gtk.ComboBoxText? SetupToolbar(Toolbar tb)
 		{
 			if (dashPatternSep == null)
 			{
@@ -71,14 +70,14 @@ namespace Pinta.Tools
 
 			if (dashPatternLabel == null)
 			{
-				dashPatternLabel = new ToolBarLabel(string.Format(" {0}: ", Catalog.GetString("Dash")));
+				dashPatternLabel = new ToolBarLabel(string.Format(" {0}: ", Translations.GetString("Dash")));
 			}
 
 			tb.AppendItem(dashPatternLabel);
 
 			if (comboBox == null)
 			{
-				comboBox = new ToolBarComboBox(100, 0, true,
+				comboBox = new ToolBarComboBox(50, 0, true,
 					"-", " -", " --", " ---", "  -", "   -", " - --", " - - --------", " - - ---- - ----");
 			}
 

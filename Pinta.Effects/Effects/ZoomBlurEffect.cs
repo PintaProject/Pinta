@@ -11,7 +11,6 @@ using System;
 using Cairo;
 using Pinta.Gui.Widgets;
 using Pinta.Core;
-using Mono.Unix;
 
 namespace Pinta.Effects
 {
@@ -22,7 +21,7 @@ namespace Pinta.Effects
 		}
 
 		public override string Name {
-			get { return Catalog.GetString ("Zoom Blur"); }
+			get { return Translations.GetString ("Zoom Blur"); }
 		}
 
 		public override bool IsConfigurable {
@@ -30,10 +29,10 @@ namespace Pinta.Effects
 		}
 
 		public override string EffectMenuCategory {
-			get { return Catalog.GetString ("Blurs"); }
+			get { return Translations.GetString ("Blurs"); }
 		}
 
-		public ZoomBlurData Data { get { return EffectData as ZoomBlurData; } }
+		public ZoomBlurData Data { get { return (ZoomBlurData)EffectData!; } } // NRT - Set in constructor
 
 		public ZoomBlurEffect ()
 		{

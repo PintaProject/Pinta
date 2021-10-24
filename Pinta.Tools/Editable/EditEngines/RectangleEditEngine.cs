@@ -30,7 +30,6 @@ using Pinta.Core;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
-using Mono.Unix;
 
 namespace Pinta.Tools
 {
@@ -40,7 +39,7 @@ namespace Pinta.Tools
 		{
 			get
 			{
-				return Catalog.GetString("Closed Curve Shape");
+				return Translations.GetString("Closed Curve Shape");
 			}
 		}
 
@@ -53,13 +52,13 @@ namespace Pinta.Tools
 		{
 			Document doc = PintaCore.Workspace.ActiveDocument;
 
-			ShapeEngine newEngine = new LineCurveSeriesEngine(doc.CurrentUserLayer, null, BaseEditEngine.ShapeTypes.ClosedLineCurveSeries,
+			ShapeEngine newEngine = new LineCurveSeriesEngine(doc.Layers.CurrentUserLayer, null, BaseEditEngine.ShapeTypes.ClosedLineCurveSeries,
 				owner.UseAntialiasing, true, BaseEditEngine.OutlineColor, BaseEditEngine.FillColor, owner.EditEngine.BrushWidth);
 
 			AddRectanglePoints(ctrlKey, clickedOnControlPoint, newEngine, prevSelPoint);
 
 			//Set the new shape's DashPattern option.
-			newEngine.DashPattern = dash_pattern_box.comboBox.ComboBox.ActiveText;
+			newEngine.DashPattern = dash_pattern_box.comboBox!.ComboBox.ActiveText; // NRT - Code assumes this is not-null
 
 			return newEngine;
 		}

@@ -8,59 +8,56 @@
 /////////////////////////////////////////////////////////////////////////////////
 
 using System;
+using Cairo;
 using Gdk;
 using Pinta.Core;
 
 namespace Pinta.Gui.Widgets
 {
-	[System.ComponentModel.ToolboxItem (true)]
 	public class AnglePickerGraphic : Gtk.DrawingArea
 	{
 		private bool tracking = false;
-		private Point lastMouseXY;
-		private double angleValue;
+		private Gdk.Point last_mouse_xy;
+		private double angle_value;
 
 		public AnglePickerGraphic ()
 		{
-			Events = ((Gdk.EventMask)(16134));
-			
+			Events = ((EventMask) (16134));
+
 			ButtonPressEvent += HandleHandleButtonPressEvent;
 			ButtonReleaseEvent += HandleHandleButtonReleaseEvent;
 			MotionNotifyEvent += HandleHandleMotionNotifyEvent;
 		}
 
-		#region Public Properties
 		public int Value {
-			get { return (int)angleValue; }
+			get => (int) angle_value;
 			set {
-				double v = value % 360;
-				if (angleValue != v) {
-					angleValue = v;
+				var v = value % 360;
+				if (angle_value != v) {
+					angle_value = v;
 					OnValueChanged ();
-					this.GdkWindow.Invalidate ();
+					Window.Invalidate ();
 				}
 			}
 		}
 
 		public double ValueDouble {
-			get { return angleValue; }
+			get => angle_value;
 			set {
 				//double v = Math.IEEERemainder (value, 360.0);
-				if (angleValue != value) {
-					angleValue = value;
+				if (angle_value != value) {
+					angle_value = value;
 					OnValueChanged ();
 
-					if (GdkWindow != null)
-						GdkWindow.Invalidate ();
+					if (Window != null)
+						Window.Invalidate ();
 				}
 			}
 		}
-		#endregion
 
-		#region Mouse Handlers
 		private void HandleHandleMotionNotifyEvent (object o, Gtk.MotionNotifyEventArgs args)
 		{
-			ProcessMouseEvent (new Point ((int)args.Event.X, (int)args.Event.Y), (args.Event.State & ModifierType.ShiftMask) == ModifierType.ShiftMask);
+			ProcessMouseEvent (new Gdk.Point ((int) args.Event.X, (int) args.Event.Y), (args.Event.State & ModifierType.ShiftMask) == ModifierType.ShiftMask);
 		}
 
 		private void HandleHandleButtonReleaseEvent (object o, Gtk.ButtonReleaseEventArgs args)
@@ -72,108 +69,99 @@ namespace Pinta.Gui.Widgets
 		{
 			tracking = true;
 
-			ProcessMouseEvent (new Point ((int)args.Event.X, (int)args.Event.Y), args.Event.IsShiftPressed ());
+			ProcessMouseEvent (new Gdk.Point ((int) args.Event.X, (int) args.Event.Y), args.Event.IsShiftPressed ());
 		}
-		
-		private void ProcessMouseEvent (Point pt, bool constrainAngle)
+
+		private void ProcessMouseEvent (Gdk.Point pt, bool constrainAngle)
 		{
-			lastMouseXY = pt;
+			last_mouse_xy = pt;
 
 			if (tracking) {
-				Rectangle ourRect = Rectangle.Inflate (GdkWindow.GetBounds (), -2, -2);
-				int diameter = Math.Min (ourRect.Width, ourRect.Height);
-				Point center = new Point (ourRect.X + (diameter / 2), ourRect.Y + (diameter / 2));
+				var ourRect = Gdk.Rectangle.Inflate (Window.GetBounds (), -2, -2);
+				var diameter = Math.Min (ourRect.Width, ourRect.Height);
+				var center = new Gdk.Point (ourRect.X + (diameter / 2), ourRect.Y + (diameter / 2));
 
-				int dx = lastMouseXY.X - center.X;
-				int dy = lastMouseXY.Y - center.Y;
-				double theta = Math.Atan2 (-dy, dx);
+				var dx = last_mouse_xy.X - center.X;
+				var dy = last_mouse_xy.Y - center.Y;
+				var theta = Math.Atan2 (-dy, dx);
 
-				double newAngle = (theta * 360) / (2 * Math.PI);
+				var newAngle = (theta * 360) / (2 * Math.PI);
 
 				if (newAngle < 0)
-					newAngle = newAngle + 360;
+					newAngle += 360;
 
 				if (constrainAngle) {
 					const double constraintAngle = 15.0;
 
-					double multiple = newAngle / constraintAngle;
-					double top = Math.Floor (multiple);
-					double topDelta = Math.Abs (top - multiple);
-					double bottom = Math.Ceiling (multiple);
-					double bottomDelta = Math.Abs (bottom - multiple);
+					var multiple = newAngle / constraintAngle;
+					var top = Math.Floor (multiple);
+					var topDelta = Math.Abs (top - multiple);
+					var bottom = Math.Ceiling (multiple);
+					var bottomDelta = Math.Abs (bottom - multiple);
 
 					double bestMultiple;
-					if (bottomDelta < topDelta) {
+
+					if (bottomDelta < topDelta)
 						bestMultiple = bottom;
-					} else {
+					else
 						bestMultiple = top;
-					}
 
 					newAngle = bestMultiple * constraintAngle;
 				}
 
-				this.ValueDouble = newAngle;
+				ValueDouble = newAngle;
 
-				GdkWindow.Invalidate ();
+				Window.Invalidate ();
 			}
 		}
-		#endregion
 
-		#region Drawing Code
-		protected override bool OnExposeEvent (Gdk.EventExpose ev)
+		protected override bool OnDrawn (Context g)
 		{
-			base.OnExposeEvent (ev);
+			base.OnDrawn (g);
 
-			using (Cairo.Context g = CairoHelper.Create (GdkWindow)) {
-				Cairo.Rectangle ourRect = Rectangle.Inflate (GdkWindow.GetBounds (), -1, -1).ToCairoRectangle ();
-				double diameter = Math.Min (ourRect.Width, ourRect.Height);
+			var ourRect = Gdk.Rectangle.Inflate (Window.GetBounds (), -1, -1).ToCairoRectangle ();
 
-				double radius = (diameter / 2.0);
+			var diameter = Math.Min (ourRect.Width, ourRect.Height);
+			var radius = (diameter / 2.0);
 
-				Cairo.PointD center = new Cairo.PointD (
-				    (float)(ourRect.X + radius),
-				    (float)(ourRect.Y + radius));
+			var center = new PointD (
+			    (float) (ourRect.X + radius),
+			    (float) (ourRect.Y + radius));
 
-				double theta = (this.angleValue * 2.0 * Math.PI) / 360.0;
+			var theta = (angle_value * 2.0 * Math.PI) / 360.0;
 
-				Cairo.Rectangle ellipseRect = new Cairo.Rectangle (ourRect.Location (), diameter, diameter);
-				Cairo.Rectangle ellipseOutlineRect = ellipseRect;
+			var ellipseRect = new Cairo.Rectangle (ourRect.Location (), diameter, diameter);
+			var ellipseOutlineRect = ellipseRect;
 
-				g.DrawEllipse (ellipseOutlineRect, new Cairo.Color (.1, .1, .1), 1);
+			g.DrawEllipse (ellipseOutlineRect, new Cairo.Color (.1, .1, .1), 1);
 
-				double endPointRadius = radius - 2;
-				
-				Cairo.PointD endPoint = new Cairo.PointD (
-				    (float)(center.X + (endPointRadius * Math.Cos (theta))),
-				    (float)(center.Y - (endPointRadius * Math.Sin (theta))));
+			var endPointRadius = radius - 2;
 
-				float gripSize = 2.5f;
-				Cairo.Rectangle gripEllipseRect = new Cairo.Rectangle (center.X - gripSize, center.Y - gripSize, gripSize * 2, gripSize * 2);
-				
-				g.FillEllipse (gripEllipseRect, new Cairo.Color (.1, .1, .1));
-				g.DrawLine (center, endPoint, new Cairo.Color (.1, .1, .1), 1);
-			}
-			
+			var endPoint = new PointD (
+			    (float) (center.X + (endPointRadius * Math.Cos (theta))),
+			    (float) (center.Y - (endPointRadius * Math.Sin (theta))));
+
+			var gripSize = 2.5f;
+			var gripEllipseRect = new Cairo.Rectangle (center.X - gripSize, center.Y - gripSize, gripSize * 2, gripSize * 2);
+
+			g.FillEllipse (gripEllipseRect, new Cairo.Color (.1, .1, .1));
+			g.DrawLine (center, endPoint, new Cairo.Color (.1, .1, .1), 1);
+
 			return true;
 		}
 
-		protected override void OnSizeRequested (ref Gtk.Requisition requisition)
+		protected override void OnGetPreferredHeight (out int minimum_height, out int natural_height)
 		{
-			// Calculate desired size here.
-			requisition.Height = 50;
-			requisition.Width = 50;
+			minimum_height = natural_height = 50;
 		}
-		#endregion
-		
-		#region Public Events
-		public event EventHandler ValueChanged;
-		
-		protected virtual void OnValueChanged ()
+
+		protected override void OnGetPreferredWidth (out int minimum_width, out int natural_width)
 		{
-			if (ValueChanged != null) {
-				ValueChanged (this, EventArgs.Empty);
-			}
+			minimum_width = natural_width = 50;
 		}
-		#endregion
+
+		public event EventHandler? ValueChanged;
+
+		protected virtual void OnValueChanged () => ValueChanged?.Invoke (this, EventArgs.Empty);
 	}
 }

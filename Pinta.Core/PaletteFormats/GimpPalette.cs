@@ -39,21 +39,21 @@ namespace Pinta.Core
 		{
 			List<Color> colors = new List<Color> ();
 			StreamReader reader = new StreamReader (fileName);
-			string line = reader.ReadLine ();
+			string? line = reader.ReadLine ();
 
-			if (!line.StartsWith ("GIMP"))
+			if (line is null || !line.StartsWith ("GIMP"))
 				throw new InvalidDataException("Not a valid GIMP palette file.");
 
 			// skip everything until the first color
 			while (!char.IsDigit(line[0]))
-				line = reader.ReadLine ();
+				line = reader.ReadLine ()!; // NRT - This assumes a valid formed file
 
 			// then read the palette
 			do {
 				if (line.IndexOf ('#') == 0)
 					continue;
 
-				string[] split = line.Split ((char[]) null, StringSplitOptions.RemoveEmptyEntries);
+				string[] split = line.Split ((char[]?) null, StringSplitOptions.RemoveEmptyEntries);
 				double r = int.Parse (split[0]) / 255f;
 				double g = int.Parse (split[1]) / 255f;
 				double b = int.Parse (split[2]) / 255f;

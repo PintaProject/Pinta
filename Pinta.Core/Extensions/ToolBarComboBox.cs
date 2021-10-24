@@ -31,23 +31,18 @@ namespace Pinta.Core
 {
 	public class ToolBarComboBox : ToolItem
 	{
-		public ComboBox ComboBox { get; private set; }
-		public ListStore Model { get; private set; }
+		public ComboBoxText ComboBox { get; private set; }
 
 		public ToolBarComboBox (int width, int activeIndex, bool allowEntry, params string[] contents)
 		{
 			if (allowEntry)
-				ComboBox = new ComboBoxEntry (contents);
-			else {
-				Model = new ListStore (typeof(string), typeof (object));
+				ComboBox = ComboBoxText.NewWithEntry();
+			else
+				ComboBox = new ComboBoxText();
 
-				if (contents != null)
-					foreach (string entry in contents)
-						Model.AppendValues (entry, null);
 
-				ComboBox = CreateComboBox ();
-				ComboBox.Model = Model;
-			}
+			foreach (string entry in contents)
+				ComboBox.AppendText(entry);
 
 			ComboBox.AddEvents ((int)Gdk.EventMask.ButtonPressMask);
 			ComboBox.WidthRequest = width;
@@ -59,11 +54,6 @@ namespace Pinta.Core
 			
 			Add (ComboBox);
 			Show ();
-		}
-
-		protected virtual ComboBox CreateComboBox ()
-		{
-			return ComboBox.NewText ();
 		}
 	}
 }

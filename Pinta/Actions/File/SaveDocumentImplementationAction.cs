@@ -1,4 +1,4 @@
-﻿// 
+// 
 // SaveDocumentImplmentationAction.cs
 //  
 // Author:
@@ -27,7 +27,6 @@
 using System;
 using System.Linq;
 using Gtk;
-using Mono.Unix;
 using Pinta.Core;
 using System.IO;
 using System.Collections.Generic;
@@ -50,7 +49,7 @@ namespace Pinta.Actions
 		}
 		#endregion
 
-		private void Activated (object sender, DocumentCancelEventArgs e)
+		private void Activated (object? sender, DocumentCancelEventArgs e)
 		{
 			// Prompt for a new filename for "Save As", or a document that hasn't been saved before
 			if (e.SaveAs || !e.Document.HasFile)
@@ -72,23 +71,23 @@ namespace Pinta.Actions
 		// been saved before.  Either way, we need to prompt for a filename.
 		private bool SaveFileAs (Document document)
 		{
-			var fcd = new FileChooserDialog (Mono.Unix.Catalog.GetString ("Save Image File"),
-									       PintaCore.Chrome.MainWindow,
-									       FileChooserAction.Save,
-									       Gtk.Stock.Cancel,
-									       Gtk.ResponseType.Cancel,
-									       Gtk.Stock.Save, Gtk.ResponseType.Ok);
+			using var fcd = new FileChooserNative (
+				Translations.GetString ("Save Image File"),
+				PintaCore.Chrome.MainWindow,
+				FileChooserAction.Save,
+				Translations.GetString ("Save"),
+				Translations.GetString ("Cancel")) {
+				DoOverwriteConfirmation = true
+			};
 
-			fcd.DoOverwriteConfirmation = true;
-            fcd.SetCurrentFolder (PintaCore.System.GetDialogDirectory ());
-			fcd.AlternativeButtonOrder = new int[] { (int)ResponseType.Ok, (int)ResponseType.Cancel };
+			fcd.SetCurrentFolder (PintaCore.System.GetDialogDirectory ());
 
-			bool hasFile = document.HasFile;
-
-			if (hasFile)
+			if (document.HasFile)
 				fcd.SetFilename (document.PathAndFileName);
+			else
+				fcd.CurrentName = document.Filename;
 
-			Dictionary<FileFilter, FormatDescriptor> filetypes = new Dictionary<FileFilter, FormatDescriptor> ();
+			var filetypes = new Dictionary<FileFilter, FormatDescriptor> ();
 
 			// Add all the formats we support to the save dialog
 			foreach (var format in PintaCore.System.ImageFormats.Formats) {
@@ -104,9 +103,9 @@ namespace Pinta.Actions
 
 			// If we already have a format, set it to the default.
 			// If not, default to jpeg
-			FormatDescriptor format_desc = null;
+			FormatDescriptor? format_desc = null;
 
-			if (hasFile)
+			if (document.HasFile)
 				format_desc = PintaCore.System.ImageFormats.GetFormatByFile (document.Filename);
 
 			if (format_desc == null) {
@@ -114,13 +113,13 @@ namespace Pinta.Actions
 
 				// Gtk doesn't like it if we set the file name to an extension that we don't have
 				// a filter for, so we change the extension to our default extension.
-				if (hasFile)
+				if (document.HasFile)
 					fcd.SetFilename (Path.ChangeExtension (document.PathAndFileName, format_desc.Extensions[0]));
 			}
 
 			fcd.Filter = format_desc.Filter;
 
-            fcd.AddNotification("filter", this.OnFilterChanged);
+			fcd.AddNotification ("filter", OnFilterChanged);
 
 			// Replace GTK's ConfirmOverwrite with our own, for UI consistency
 			fcd.ConfirmOverwrite += (eventSender, eventArgs) => {
@@ -130,7 +129,7 @@ namespace Pinta.Actions
 					eventArgs.RetVal = FileChooserConfirmation.SelectAgain;
 			};
 
-			while (fcd.Run () == (int)Gtk.ResponseType.Ok) {
+			while ((ResponseType)fcd.Run () == ResponseType.Accept) {
 				FormatDescriptor format = filetypes[fcd.Filter];
 				string file = fcd.Filename;
 
@@ -153,11 +152,13 @@ namespace Pinta.Actions
 				if (format_type != null)
 					format = format_type;
 
-				PintaCore.System.LastDialogDirectory = fcd.CurrentFolder;
+				var directory = System.IO.Path.GetDirectoryName (file);
+				if (directory is not null)
+					PintaCore.System.LastDialogDirectory = directory;
 
 				// If saving the file failed or was cancelled, let the user select
 				// a different file type.
-				if (!SaveFile (document, file, format, fcd))
+				if (!SaveFile (document, file, format, PintaCore.Chrome.MainWindow))
 					continue;
 
 				//The user is saving the Document to a new file, so technically it
@@ -169,16 +170,13 @@ namespace Pinta.Actions
 
 				document.HasFile = true;
 				document.PathAndFileName = file;
-
-				fcd.Destroy ();
 				return true;
 			}
 
-			fcd.Destroy ();
 			return false;
 		}
 
-		private bool SaveFile (Document document, string file, FormatDescriptor format, Window parent)
+		private bool SaveFile (Document document, string? file, FormatDescriptor? format, Window parent)
 		{
 			if (string.IsNullOrEmpty (file))
 				file = document.PathAndFileName;
@@ -187,11 +185,10 @@ namespace Pinta.Actions
 				format = PintaCore.System.ImageFormats.GetFormatByFile (file);
 
 			if (format == null || format.IsReadOnly ()) {
-				MessageDialog md = new MessageDialog (parent, DialogFlags.Modal, MessageType.Error, ButtonsType.Ok, Catalog.GetString ("Pinta does not support saving images in this file format."), file);
-				md.Title = Catalog.GetString ("Error");
+				using var md = new MessageDialog (parent, DialogFlags.Modal, MessageType.Error, ButtonsType.Ok, Translations.GetString ("Pinta does not support saving images in this file format."), file);
+				md.Title = Translations.GetString ("Error");
 
 				md.Run ();
-				md.Destroy ();
 				return false;
 			}
 
@@ -202,38 +199,35 @@ namespace Pinta.Actions
 				format.Exporter.Export (document, file, parent);
 			} catch (GLib.GException e) { // Errors from GDK
 				if (e.Message == "Image too large to be saved as ICO") {
-					string primary = Catalog.GetString ("Image too large");
-					string secondary = Catalog.GetString ("ICO files can not be larger than 255 x 255 pixels.");
+					string primary = Translations.GetString ("Image too large");
+					string secondary = Translations.GetString ("ICO files can not be larger than 255 x 255 pixels.");
 					string message = string.Format (markup, primary, secondary);
 
-					MessageDialog md = new MessageDialog (parent, DialogFlags.Modal, MessageType.Error,
+					using var md = new MessageDialog (parent, DialogFlags.Modal, MessageType.Error,
 					ButtonsType.Ok, message);
 
 					md.Run ();
-					md.Destroy ();
 					return false;
 				} else if (e.Message.Contains ("Permission denied") && e.Message.Contains ("Failed to open")) {
-					string primary = Catalog.GetString ("Failed to save image");
+					string primary = Translations.GetString ("Failed to save image");
 					// Translators: {0} is the name of a file that the user does not have write permission for.
-					string secondary = string.Format(Catalog.GetString ("You do not have access to modify '{0}'. The file or folder may be read-only."), file);
+					string secondary = Translations.GetString ("You do not have access to modify '{0}'. The file or folder may be read-only.", file);
 					string message = string.Format (markup, primary, secondary);
 
-					var md = new MessageDialog (parent, DialogFlags.Modal, MessageType.Error, ButtonsType.Ok, message);
-					md.Run ();
-					md.Destroy ();
+					using var md = new MessageDialog (parent, DialogFlags.Modal, MessageType.Error, ButtonsType.Ok, message);
 
+					md.Run ();
 					return false;
 				} else {
-					throw e; // Only catch exceptions we know the reason for
+					throw; // Only catch exceptions we know the reason for
 				}
 			} catch (OperationCanceledException) {
 				return false;
 			}
 
-			// Set Pathname and Filename properties which triggers the document.Renamed event
-			document.PathAndFileName = file;
+			document.Filename = Path.GetFileName (file);
 
-			PintaCore.Tools.CurrentTool.DoAfterSave();
+			PintaCore.Tools.DoAfterSave(document);
 
 			// Mark the document as clean following the tool's after-save handler, which might
 			// adjust history (e.g. undo changes that were committed before saving).
@@ -245,30 +239,36 @@ namespace Pinta.Actions
 			return true;
 		}
 
-		private bool ConfirmOverwrite (FileChooserDialog fcd, string file)
+		private bool ConfirmOverwrite (IFileChooser fcd, string file)
 		{
-			string primary = Catalog.GetString ("A file named \"{0}\" already exists. Do you want to replace it?");
-			string secondary = Catalog.GetString ("The file already exists in \"{1}\". Replacing it will overwrite its contents.");
+			string primary = Translations.GetString ("A file named \"{0}\" already exists. Do you want to replace it?");
+			string secondary = Translations.GetString ("The file already exists in \"{1}\". Replacing it will overwrite its contents.");
 			string message = string.Format (markup, primary, secondary);
 
-			MessageDialog md = new MessageDialog (fcd, DialogFlags.Modal | DialogFlags.DestroyWithParent,
+			using var md = new MessageDialog (PintaCore.Chrome.MainWindow, DialogFlags.Modal | DialogFlags.DestroyWithParent,
 				MessageType.Question, ButtonsType.None,
 				true, message, System.IO.Path.GetFileName (file), fcd.CurrentFolder);
 
-			md.AddButton (Stock.Cancel, ResponseType.Cancel);
-			md.AddButton (Stock.Save, ResponseType.Ok);
+			// Use the standard button order for each OS.
+			if (PintaCore.System.OperatingSystem == OS.Windows) {
+				md.AddButton (Translations.GetString ("Replace"), ResponseType.Ok);
+				md.AddButton (Stock.Cancel, ResponseType.Cancel);
+			}
+			else {
+				md.AddButton (Stock.Cancel, ResponseType.Cancel);
+				md.AddButton (Translations.GetString ("Replace"), ResponseType.Ok);
+			}
+
 			md.DefaultResponse = ResponseType.Cancel;
-			md.AlternativeButtonOrder = new int[] { (int)ResponseType.Ok, (int)ResponseType.Cancel };
 
 			int response = md.Run ();
-			md.Destroy ();
 
 			return response == (int)ResponseType.Ok;
 		}
 
 		private void OnFilterChanged (object o, GLib.NotifyArgs args)
 		{
-			FileChooserDialog fcd = (FileChooserDialog)o;
+			var fcd = (IFileChooser) o;
 
 			// Ensure that the file filter is never blank.
 			if (fcd.Filter == null)
@@ -281,7 +281,7 @@ namespace Pinta.Actions
 			FormatDescriptor format_desc = PintaCore.System.ImageFormats.Formats.Single (f => f.Filter == fcd.Filter);
 
 			// adjust the filename
-			var p = fcd.Filename;
+			var p = fcd.Filename ?? fcd.CurrentName;
 			p = Path.ChangeExtension (Path.GetFileName (p), format_desc.Extensions[0]);
 			fcd.CurrentName = p;
 		}

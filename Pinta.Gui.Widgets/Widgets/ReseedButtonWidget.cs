@@ -25,67 +25,59 @@
 // THE SOFTWARE.
 
 using System;
+using System.Diagnostics.CodeAnalysis;
 using Gtk;
 
 namespace Pinta.Gui.Widgets
 {
-	[System.ComponentModel.ToolboxItem(true)]
 	public class ReseedButtonWidget : FilledAreaBin
 	{
-        private Button button1;
+		private Button button;
+
+		public event EventHandler? Clicked;
 
 		public ReseedButtonWidget ()
 		{
 			Build ();
-			
-			button1.Clicked += delegate (object sender, EventArgs e) {
-				OnClicked ();
-			};
+
+			button.Clicked += (_, _) => Clicked?.Invoke (this, EventArgs.Empty);
 		}
 
-		#region Protected Methods
-		protected void OnClicked ()
+		[MemberNotNull (nameof (button))]
+		private void Build ()
 		{
-			if (Clicked != null)
-				Clicked (this, EventArgs.Empty);
+			// Section label + line
+			var hbox1 = new HBox (false, 6);
+
+			var label = new Label {
+				LabelProp = Pinta.Core.Translations.GetString ("Random Noise")
+			};
+
+			hbox1.PackStart (label, false, false, 0);
+			hbox1.PackStart (new HSeparator (), true, true, 0);
+
+			// Reseed button
+			button = new Button {
+				WidthRequest = 88,
+				CanFocus = true,
+				UseUnderline = true,
+				Label = Pinta.Core.Translations.GetString ("Reseed")
+			};
+
+			var hbox2 = new HBox (false, 6);
+
+			hbox2.PackStart (button, false, false, 0);
+
+			// Main layout
+			var vbox = new VBox (false, 6) {
+				hbox1,
+				hbox2
+			};
+
+			Add (vbox);
+
+			vbox.ShowAll ();
 		}
-		#endregion
-
-		#region Public Events
-		public event EventHandler Clicked;
-        #endregion
-
-        private void Build ()
-        {
-            // Section label + line
-            var hbox1 = new HBox (false, 6);
-
-            var label = new Label ();
-            label.LabelProp = Mono.Unix.Catalog.GetString ("Random Noise");
-
-            hbox1.PackStart (label, false, false, 0);
-            hbox1.PackStart (new HSeparator (), true, true, 0);
-
-            // Reseed button
-            button1 = new Button ();
-            button1.WidthRequest = 88;
-            button1.CanFocus = true;
-            button1.UseUnderline = true;
-            button1.Label = Mono.Unix.Catalog.GetString ("Reseed");
-
-            var hbox2 = new HBox (false, 6);
-            hbox2.PackStart (button1, false, false, 0);
-
-            // Main layout
-            var vbox = new VBox (false, 6);
-
-            vbox.Add (hbox1);
-            vbox.Add (hbox2);
-
-            Add (vbox);
-
-            vbox.ShowAll ();
-        }
-    }
+	}
 }
 

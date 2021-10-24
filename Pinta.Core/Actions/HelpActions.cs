@@ -29,49 +29,56 @@ using System.Diagnostics;
 using System.IO;
 using System.Reflection;
 using Gtk;
-using Mono.Unix;
 
 namespace Pinta.Core
 {
 	public class HelpActions
 	{
-		public Gtk.Action Contents { get; private set; }
-		public Gtk.Action Website { get; private set; }
-		public Gtk.Action Bugs { get; private set; }
-		public Gtk.Action Translate { get; private set; }
-		public Gtk.Action About { get; private set; }
+		public Command Contents { get; private set; }
+		public Command Website { get; private set; }
+		public Command Bugs { get; private set; }
+		public Command Translate { get; private set; }
 
 		public HelpActions ()
 		{
-			Gtk.IconFactory fact = new Gtk.IconFactory ();
-			fact.Add ("Menu.Help.Bug.png", new Gtk.IconSet (PintaCore.Resources.GetIcon ("Menu.Help.Bug.png")));
-			fact.Add ("Menu.Help.Website.png", new Gtk.IconSet (PintaCore.Resources.GetIcon ("Menu.Help.Website.png")));
-			fact.Add ("Menu.Help.Translate.png", new Gtk.IconSet (PintaCore.Resources.GetIcon ("Menu.Help.Translate.png")));
-			fact.AddDefault ();
-
-			Contents = new Gtk.Action ("Contents", Catalog.GetString ("Contents"), null, Stock.Help);
-			Website = new Gtk.Action ("Website", Catalog.GetString ("Pinta Website"), null, "Menu.Help.Website.png");
-			Bugs = new Gtk.Action ("Bugs", Catalog.GetString ("File a Bug"), null, "Menu.Help.Bug.png");
-			Translate = new Gtk.Action ("Translate", Catalog.GetString ("Translate This Application"), null, "Menu.Help.Translate.png");
-			About = new Gtk.Action ("About", Catalog.GetString ("About"), null, Stock.About);
+			Contents = new Command ("contents", Translations.GetString ("Contents"), null, Resources.StandardIcons.HelpBrowser);
+			Website = new Command ("website", Translations.GetString ("Pinta Website"), null, Resources.Icons.HelpWebsite);
+			Bugs = new Command ("bugs", Translations.GetString ("File a Bug"), null, Resources.Icons.HelpBug);
+			Translate = new Command ("translate", Translations.GetString ("Translate This Application"), null, Resources.Icons.HelpTranslate);
 		}
 
 		#region Initialization
-		public void CreateMainMenu (Gtk.Menu menu)
-		{
-			menu.Append (Contents.CreateAcceleratedMenuItem (Gdk.Key.F1, Gdk.ModifierType.None));
-			menu.Append (Website.CreateMenuItem ());
-			menu.Append (Bugs.CreateMenuItem ());
-			menu.Append (Translate.CreateMenuItem ());
-			menu.AppendSeparator ();
-			menu.Append (About.CreateMenuItem ());
+		public void RegisterActions(Gtk.Application app, GLib.Menu menu)
+        {
+			app.AddAccelAction(Contents, "F1");
+			menu.AppendItem(Contents.CreateMenuItem());
+
+			app.AddAction(Website);
+			menu.AppendItem(Website.CreateMenuItem());
+
+			app.AddAction(Bugs);
+			menu.AppendItem(Bugs.CreateMenuItem());
+
+			app.AddAction(Translate);
+			menu.AppendItem(Translate.CreateMenuItem());
+
+			// This is part of the application menu on macOS.
+			if (PintaCore.System.OperatingSystem != OS.Mac)
+            {
+				var about_section = new GLib.Menu();
+				menu.AppendSection(null, about_section);
+
+				var about = PintaCore.Actions.App.About;
+				app.AddAction(about);
+				about_section.AppendItem(about.CreateMenuItem());
+			}
 		}
 		
 		public void RegisterHandlers ()
 		{
 			Contents.Activated += DisplayHelp;
-			Website.Activated += new EventHandler (Website_Activated);
-			Bugs.Activated += new EventHandler (Bugs_Activated);
+			Website.Activated += Website_Activated;
+			Bugs.Activated += Bugs_Activated;
 			Translate.Activated += Translate_Activated;
 		}
 
@@ -97,19 +104,8 @@ namespace Pinta.Core
 
 		private void OpenUrl(string url)
         {
-			try {
-				Process.Start (url);
-            } catch (System.ComponentModel.Win32Exception) {
-				// See bug #1888883. Newer mono versions (e.g. 6.10) throw an
-				// error instead of opening the default browser, so explicitly
-				// try opening via xdg-open if the simple approach fails.
-				if (PintaCore.System.OperatingSystem == OS.X11) {
-					Process.Start ("xdg-open", url);
-				} else {
-					throw;
-                }
-            }
-        }
-		#endregion
+			Gtk.Global.ShowUriOnWindow(PintaCore.Chrome.MainWindow, url, Gtk.Global.CurrentEventTime);
+		}
+#endregion
 	}
 }

@@ -12,7 +12,6 @@ using System.Collections.Generic;
 using Pinta.Gui.Widgets;
 using Cairo;
 using Pinta.Core;
-using Mono.Unix;
 
 namespace Pinta.Effects
 {
@@ -27,7 +26,7 @@ namespace Pinta.Effects
 		}
 
 		public override string Name {
-			get { return Catalog.GetString ("Clouds"); }
+			get { return Translations.GetString ("Clouds"); }
 		}
 
 		public override bool IsConfigurable {
@@ -35,10 +34,10 @@ namespace Pinta.Effects
 		}
 
 		public override string EffectMenuCategory {
-			get { return Catalog.GetString ("Render"); }
+			get { return Translations.GetString ("Render"); }
 		}
 
-		public CloudsData Data { get { return EffectData as CloudsData; } }
+		public CloudsData Data { get { return (CloudsData)EffectData!; } } // NRT - Set in constructor
 
 		public CloudsEffect ()
 		{

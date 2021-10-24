@@ -53,21 +53,23 @@ namespace Pinta.Core
 
 		private void Swap ()
 		{
-			int selected = PintaCore.Layers.CurrentLayerIndex;
+			var doc = PintaCore.Workspace.ActiveDocument;
+
+			int selected = doc.Layers.CurrentUserLayerIndex;
 			
 			int l1 = Math.Min (layer_index_1, layer_index_2);
 			int l2 = Math.Max (layer_index_1, layer_index_2);
 
-			UserLayer layer1 = PintaCore.Layers[l1];
-			UserLayer layer2 = PintaCore.Layers[l2];
+			UserLayer layer1 = doc.Layers[l1];
+			UserLayer layer2 = doc.Layers[l2];
 
-			PintaCore.Layers.DeleteLayer (l1, false);
-			PintaCore.Layers.DeleteLayer (l2 - 1, false);
+			doc.Layers.DeleteLayer (l1, false);
+			doc.Layers.DeleteLayer (l2 - 1, false);
 
-			PintaCore.Layers.Insert (layer2, l1);
-			PintaCore.Layers.Insert (layer1, l2);
+			doc.Layers.Insert (layer2, l1);
+			doc.Layers.Insert (layer1, l2);
 			
-			PintaCore.Layers.SetCurrentLayer (selected);
+			doc.Layers.SetCurrentUserLayer (selected);
 		}
 	}
 }

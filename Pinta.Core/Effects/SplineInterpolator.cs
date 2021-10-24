@@ -14,7 +14,7 @@ namespace Pinta.Core
     public sealed class SplineInterpolator
     {
         private SortedList<double, double> points = new SortedList<double, double>();
-        private double[] y2;
+        private double[]? y2;
 
         public int Count
         {
@@ -74,7 +74,7 @@ namespace Pinta.Core
             
             // Cubic spline polynomial is now evaluated.
             return a * ya[klo] + b * ya[khi] + 
-                ((a * a * a - a) * y2[klo] + (b * b * b - b) * y2[khi]) * (h * h) / 6.0;
+                ((a * a * a - a) * y2![klo] + (b * b * b - b) * y2[khi]) * (h * h) / 6.0; // NRT - y2 is set above by PreCompute ()
         }
 
         private void PreCompute()

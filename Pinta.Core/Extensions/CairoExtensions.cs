@@ -35,8 +35,8 @@
 
 using System;
 using Cairo;
-using System.Collections.Generic;
 using System.Runtime.InteropServices;
+using System.Threading.Tasks;
 
 namespace Pinta.Core
 {
@@ -64,7 +64,7 @@ namespace Pinta.Core
 			g.LineWidth = lineWidth;
 			g.LineCap = LineCap.Square;
 
-			Rectangle dirty = g.FixedStrokeExtents ();
+			Rectangle dirty = g.StrokeExtents ();
 			g.Stroke ();
 
 			g.Restore ();
@@ -89,7 +89,7 @@ namespace Pinta.Core
 			g.SetSourceColor (color);
 			g.LineWidth = lineWidth;
 
-			Rectangle dirty = g.FixedStrokeExtents();
+			Rectangle dirty = g.StrokeExtents();
 			g.Stroke();
 
 			g.Restore();
@@ -125,7 +125,7 @@ namespace Pinta.Core
 
 			g.SetSourceColor (color);
 
-			Rectangle dirty = g.FixedStrokeExtents ();
+			Rectangle dirty = g.StrokeExtents();
 
 			g.Fill ();
 			g.Restore ();
@@ -145,7 +145,7 @@ namespace Pinta.Core
 
 			g.SetSource (pattern);
 
-			Rectangle dirty = g.FixedStrokeExtents ();
+			Rectangle dirty = g.StrokeExtents();
 			g.Fill ();
 
 			g.Restore ();
@@ -166,7 +166,7 @@ namespace Pinta.Core
             pattern.Matrix.Translate (-patternOffset.X, -patternOffset.Y);
             g.SetSource (pattern);
 
-            Rectangle dirty = g.FixedStrokeExtents ();
+            Rectangle dirty = g.StrokeExtents();
             g.Fill ();
 
             g.Restore ();
@@ -185,7 +185,7 @@ namespace Pinta.Core
 			g.SetSourceColor (color);
 			g.LineCap = LineCap.Square;
 
-			Rectangle dirty = g.FixedStrokeExtents ();
+			Rectangle dirty = g.StrokeExtents();
 			g.Stroke ();
 
 			g.Restore ();
@@ -203,7 +203,7 @@ namespace Pinta.Core
 
 			g.SetSourceColor (color);
 
-			Rectangle dirty = g.FixedStrokeExtents ();
+			Rectangle dirty = g.StrokeExtents();
 			g.Fill ();
 
 			g.Restore ();
@@ -237,7 +237,7 @@ namespace Pinta.Core
 			g.LineWidth = lineWidth;
 			g.LineCap = LineCap.Square;
 
-			Rectangle dirty = g.FixedStrokeExtents ();
+			Rectangle dirty = g.StrokeExtents();
 
 			g.Stroke ();
 			g.Restore ();
@@ -271,7 +271,7 @@ namespace Pinta.Core
 			g.SetSourceColor (stroke);
 			g.LineWidth = lineWidth;
 
-			Rectangle dirty = g.FixedStrokeExtents();
+			Rectangle dirty = g.StrokeExtents();
 
 			g.Stroke();
 			g.Restore();
@@ -301,7 +301,7 @@ namespace Pinta.Core
 			g.SetSourceColor (color);
 			g.LineWidth = lineWidth;
 
-			Rectangle dirty = g.FixedStrokeExtents ();
+			Rectangle dirty = g.StrokeExtents();
 
 			g.Stroke ();
 			g.Restore ();
@@ -330,7 +330,7 @@ namespace Pinta.Core
 
 			g.SetSourceColor (color);
 
-			Rectangle dirty = g.FixedStrokeExtents ();
+			Rectangle dirty = g.StrokeExtents();
 
 			g.Fill ();
 			g.Restore ();
@@ -389,7 +389,7 @@ namespace Pinta.Core
 			g.SetSourceColor (stroke);
 			g.LineWidth = lineWidth;
 
-			Rectangle dirty = g.FixedStrokeExtents ();
+			Rectangle dirty = g.StrokeExtents();
 
 			g.Stroke ();
 			g.Restore ();
@@ -420,7 +420,7 @@ namespace Pinta.Core
 			g.SetSourceColor (stroke);
 			g.LineWidth = lineWidth;
 
-			Rectangle dirty = g.FixedStrokeExtents ();
+			Rectangle dirty = g.StrokeExtents();
 
 			g.Stroke ();
 			g.Restore ();
@@ -447,34 +447,12 @@ namespace Pinta.Core
 
 			g.SetSourceColor (fill);
 
-			Rectangle dirty = g.FixedStrokeExtents ();
+			Rectangle dirty = g.StrokeExtents();
 
 			g.Fill ();
 			g.Restore ();
 
 			return dirty;
-		}
-
-		public static void FillRegion (this Context g, Gdk.Region region, Color color)
-		{
-			g.Save ();
-
-			g.SetSourceColor (color);
-
-			foreach (Gdk.Rectangle r in region.GetRectangles ()) {
-				g.MoveTo (r.X, r.Y);
-				g.LineTo (r.X + r.Width, r.Y);
-				g.LineTo (r.X + r.Width, r.Y + r.Height);
-				g.LineTo (r.X, r.Y + r.Height);
-				g.LineTo (r.X, r.Y);
-
-				g.SetSourceColor (color);
-
-				g.FixedStrokeExtents ();
-				g.Fill ();
-			}
-
-			g.Restore ();
 		}
 
 		public static Rectangle DrawRoundedRectangle (this Context g, Rectangle r, double radius, Color stroke, int lineWidth)
@@ -488,7 +466,7 @@ namespace Pinta.Core
 			g.SetSourceColor (stroke);
 			g.LineWidth = lineWidth;
 
-			Rectangle dirty = g.FixedStrokeExtents ();
+			Rectangle dirty = g.StrokeExtents();
 
 			g.Stroke ();
 			g.Restore ();
@@ -549,59 +527,13 @@ namespace Pinta.Core
 			g.LineWidth = lineWidth;
 			g.LineCap = LineCap.Square;
 
-			Rectangle dirty = g.FixedStrokeExtents ();
+			Rectangle dirty = g.StrokeExtents();
 			g.Stroke ();
 
 			g.Restore ();
 
 			return dirty;
 		}
-
-		/// <summary>
-		/// Computes a bounding box in user coordinates covering the
-		/// area that would be affected by a call to Context.Stroke()
-		/// using the current stroke parameters.
-		/// 
-		/// The rectangle returned by Cairo.Context.StrokeExtents()
-		/// incorrectly specifies the X and Y coordinates of the
-		/// bottom-right corner of the Rectangle in the width and
-		/// height members. This method corrects the rectangle to
-		/// contain the width and height in the width and height members.
-		/// 
-		/// This can be removed once we port to GTK3.
-		/// </summary>
-		/// <returns>
-		/// The rectangle describing the area that would be
-		/// affected.
-		/// </returns>
-		public static Rectangle FixedStrokeExtents (this Context g)
-		{
-			double x1, y1, x2, y2;
-			cairo_stroke_extents (g.Handle, out x1, out y1, out x2, out y2);
-			return new Rectangle (x1, y1, x2 - x1, y2 - y1);
-		}
-
-		/// <summary>
-		/// The Pattern property is now deprecated in favour of the SetSource (pattern) method,
-		/// but that method doesn't exist in older versions of Mono.Cairo. This extension method
-		/// provides an implementation of that functionality.
-		/// 
-		/// This can be removed once we port to GTK3.
-		/// </summary>
-		public static void SetSource (this Context g, Pattern source)
-		{
-#pragma warning disable 612
-			cairo_set_source (g.Handle, source.Pointer);
-#pragma warning restore 612
-		}
-
-		private const string CairoLib = "libcairo-2.dll";
-
-		[DllImport (CairoLib, CallingConvention=CallingConvention.Cdecl)]
-		private static extern void cairo_stroke_extents (IntPtr cr, out double x1, out double y1, out double x2, out double y2);
-
-		[DllImport (CairoLib, CallingConvention=CallingConvention.Cdecl)]
-		private static extern void cairo_set_source (IntPtr cr, IntPtr pattern);
 
 		private static Pango.Style CairoToPangoSlant (FontSlant slant)
 		{
@@ -745,6 +677,11 @@ namespace Pinta.Core
 			return new Cairo.Rectangle (r.X, r.Y, r.Width, r.Height);
 		}
 
+		public static RectangleInt ToCairoRectangleInt(this Gdk.Rectangle r)
+        {
+			return CreateRectangleInt(r.X, r.Y, r.Width, r.Height);
+        }
+
 		public static Cairo.Point Location (this Cairo.Rectangle r)
 		{
 			return new Cairo.Point ((int)r.X, (int)r.Y);
@@ -794,21 +731,7 @@ namespace Pinta.Core
 
 		public unsafe static Gdk.Pixbuf ToPixbuf (this Cairo.ImageSurface surfSource)
 		{
-			using (Cairo.ImageSurface surf = surfSource.Clone ()) {
-				surf.Flush ();
-
-				ColorBgra* dstPtr = (ColorBgra*)surf.DataPtr;
-				int len = surf.Data.Length / 4;
-
-				for (int i = 0; i < len; i++) {
-					if (dstPtr->A != 0)
-						*dstPtr = (ColorBgra.FromBgra ((byte)(dstPtr->R * 255 / dstPtr->A), (byte)(dstPtr->G * 255 / dstPtr->A), (byte)(dstPtr->B * 255 / dstPtr->A), dstPtr->A));
-					dstPtr++;
-				}
-
-				Gdk.Pixbuf pb = new Gdk.Pixbuf (surf.Data, true, 8, surf.Width, surf.Height, surf.Stride);
-				return pb;
-			}
+			return new Gdk.Pixbuf(surfSource, 0, 0, surfSource.Width, surfSource.Height);
 		}
 
 		public unsafe static Color GetPixel (this Cairo.ImageSurface surf, int x, int y)
@@ -938,7 +861,7 @@ namespace Pinta.Core
 			return new Gdk.Size (point.X, point.Y);
 		}
 
-		public static ImageSurface Clone (this ImageSurface surf) 
+		public static ImageSurface Clone (this ImageSurface surf)
 		{
 			if (PintaCore.Workspace.HasOpenDocuments)
 				PintaCore.Workspace.ActiveDocument.SignalSurfaceCloned ();
@@ -958,7 +881,6 @@ namespace Pinta.Core
 			bool ret = false;
 
 			ColorBgra* ptr = (ColorBgra*)surf.DataPtr;
-
 			int width = surf.Width;
 
 			for (int x = 0; x < width; x++)
@@ -976,9 +898,11 @@ namespace Pinta.Core
 
 		public static Path Clone (this Path path)
 		{
+			var doc = PintaCore.Workspace.ActiveDocument;
+
 			Path newpath;
 
-			using (Context g = new Context (PintaCore.Layers.CurrentLayer.Surface)) {
+			using (Context g = new Context (doc.Layers.CurrentUserLayer.Surface)) {
 				g.AppendPath (path);
 				newpath = g.CopyPath ();
 			}
@@ -1004,21 +928,17 @@ namespace Pinta.Core
             g.Restore ();
         }
 
-        [DllImport(CairoLib, CallingConvention = CallingConvention.Cdecl)]
-        private static extern void cairo_path_extents(IntPtr cr, out double x1, out double y1, out double x2, out double y2);
-
         public static Gdk.Rectangle GetBounds(this Path path)
         {
             Rectangle rect;
+		var doc = PintaCore.Workspace.ActiveDocument;
 
-            using (Context g = new Context(PintaCore.Layers.CurrentLayer.Surface))
+
+            using (Context g = new Context(doc.Layers.CurrentUserLayer.Surface))
             {
                 g.AppendPath(path);
-
-                double x1, y1, x2, y2;
-                cairo_path_extents(g.Handle, out x1, out y1, out x2, out y2);
-                rect = new Rectangle(x1, y1, x2 - x1, y2 - y1);
-            }
+				rect = g.PathExtents();
+			}
 
             int x = (int)Math.Round(rect.X);
             int y = (int)Math.Round(rect.Y);
@@ -1043,10 +963,10 @@ namespace Pinta.Core
 			return c;
 		}
 
-		public static ushort GdkColorAlpha (this Cairo.Color color)
-		{
-			return (ushort)(color.A * ushort.MaxValue);
-		}
+		public static Gdk.RGBA ToGdkRGBA(this Cairo.Color color)
+        {
+			return new Gdk.RGBA() { Red = color.R, Green = color.G, Blue = color.B, Alpha = color.A };
+        }
 
 		public static double GetBottom (this Rectangle rect)
 		{
@@ -1072,6 +992,16 @@ namespace Pinta.Core
 		{
 			return new Rectangle(rect.X - dx, rect.Y - dy, rect.Width + 2 * dx, rect.Height + 2 * dy);
 		}
+
+		public static RectangleInt CreateRectangleInt(int x,int y, int w, int h)
+        {
+			return new RectangleInt() { X = x, Y = y, Width = w, Height = h };
+        }
+
+		public static Gdk.Rectangle ToGdkRectangle(this RectangleInt r)
+        {
+			return new Gdk.Rectangle(r.X, r.Y, r.Width, r.Height);
+        }
 
 		/// <summary>
 		/// Determines if the requested pixel coordinate is within bounds.
@@ -1672,7 +1602,33 @@ namespace Pinta.Core
 			}
 		}
 
-        public static Pattern ToTiledPattern (this Surface surface)
+		public static Pattern CreateTransparentBackgroundPattern (int size)
+		{
+			using (var surface = CreateTransparentBackgroundSurface (size))
+				return surface.ToTiledPattern ();
+		}
+
+		public static ImageSurface CreateTransparentBackgroundSurface (int size)
+		{
+			var surface = CreateImageSurface (Format.Argb32, size, size);
+
+			// Draw the checkerboard
+			using (var g = new Context (surface)) {
+				// Fill white
+				g.FillRectangle (new Rectangle (0, 0, size, size), new Color (1, 1, 1));
+
+				var color = new Color (0.78, 0.78, 0.78);
+				var half_size = size / 2;
+
+				// Draw gray squares
+				g.FillRectangle (new Rectangle (0, 0, half_size, half_size), color);
+				g.FillRectangle (new Rectangle (half_size, half_size, half_size, half_size), color);
+			}
+
+			return surface;
+		}
+
+		public static Pattern ToTiledPattern (this Surface surface)
         {
             var pattern = new Cairo.SurfacePattern (surface);
             pattern.Extend = Extend.Repeat;
@@ -1764,25 +1720,238 @@ namespace Pinta.Core
             }
         }
 
-
-	/*
-         * CreateImageSurface
-         * Utility function used to create new ImageSurface
-         * The internal creation can fail if the image is too large / not enough memory
-         * This condition is detected and an exception is thrown at the application level
-         */ 
-        public static ImageSurface CreateImageSurface(Cairo.Format format, int width, int height)
+	public static Gdk.Rectangle GetRectangleFromPoints (Point a, Point b, int inflate)
 	{
-	    ImageSurface surf = new Cairo.ImageSurface (format, width, height);
-	    if (surf == null || surf.Status == Cairo.Status.NoMemory) 
-	    {
-		throw new OutOfMemoryException ("Unable to allocate memory for Image");
-	    }
+		var x = Math.Min (a.X, b.X);
+		var y = Math.Min (a.Y, b.Y);
+		var w = Math.Max (a.X, b.X);
+		var h = Math.Max (a.Y, b.Y);
 
-            return surf;
+		var rect = new Gdk.Rectangle (x, y, w, h);
+		rect.Inflate (inflate, inflate);
+
+		return rect;
 	}
 
-        public enum ExtendedOperators
+	public static Rectangle PointsToRectangle (PointD p1, PointD p2)
+	{
+		double x, y, w, h;
+
+		if (p1.Y <= p2.Y) {
+			y = p1.Y;
+			h = p2.Y - y;
+		} else {
+			y = p2.Y;
+			h = p1.Y - y;
+		}
+
+		if (p1.X <= p2.X) {
+			x = p1.X;
+			w = p2.X - x;
+		} else {
+			x = p2.X;
+			w = p1.X - x;
+		}
+
+		return new Rectangle (x, y, w, h);
+	}
+
+		// Ported from PDN.
+		public unsafe static void FillStencilFromPoint (ImageSurface surface, BitMask stencil, Point start, int tolerance,
+								out Rectangle boundingBox, Cairo.Region limitRegion, bool limitToSelection)
+		{
+			ColorBgra cmp = surface.GetColorBgraUnchecked (start.X, start.Y);
+			int top = int.MaxValue;
+			int bottom = int.MinValue;
+			int left = int.MaxValue;
+			int right = int.MinValue;
+			Cairo.RectangleInt[] scans;
+
+			stencil.Clear (false);
+
+			if (limitToSelection) {
+				using (Cairo.Region excluded = new Cairo.Region (CairoExtensions.CreateRectangleInt (0, 0, stencil.Width, stencil.Height))) {
+					excluded.Xor (limitRegion);
+					scans = new Cairo.RectangleInt[excluded.NumRectangles];
+					for (int i = 0, n = excluded.NumRectangles; i < n; ++i)
+						scans[i] = excluded.GetRectangle (i);
+				}
+			} else {
+				scans = new Cairo.RectangleInt[0];
+			}
+
+			foreach (var rect in scans) {
+				stencil.Set (rect.ToGdkRectangle (), true);
+			}
+
+			var queue = new System.Collections.Generic.Queue<Point> (16);
+			queue.Enqueue (start);
+
+			while (queue.Count > 0) {
+				Point pt = queue.Dequeue ();
+
+				ColorBgra* rowPtr = surface.GetRowAddressUnchecked (pt.Y);
+				int localLeft = pt.X - 1;
+				int localRight = pt.X;
+
+				while (localLeft >= 0 &&
+				       !stencil.Get (localLeft, pt.Y) &&
+				       ColorBgra.ColorsWithinTolerance (cmp, rowPtr[localLeft], tolerance)) {
+					stencil.Set (localLeft, pt.Y, true);
+					--localLeft;
+				}
+
+				int surfaceWidth = surface.Width;
+				while (localRight < surfaceWidth &&
+				       !stencil.Get (localRight, pt.Y) &&
+				       ColorBgra.ColorsWithinTolerance (cmp, rowPtr[localRight], tolerance)) {
+					stencil.Set (localRight, pt.Y, true);
+					++localRight;
+				}
+
+				++localLeft;
+				--localRight;
+
+				Action<int> checkRow = (row) => {
+					int sleft = localLeft;
+					int sright = localLeft;
+					ColorBgra* otherRowPtr = surface.GetRowAddressUnchecked (row);
+
+					for (int sx = localLeft; sx <= localRight; ++sx) {
+						if (!stencil.Get (sx, row) &&
+						    ColorBgra.ColorsWithinTolerance (cmp, otherRowPtr[sx], tolerance)) {
+							++sright;
+						} else {
+							if (sright - sleft > 0) {
+								queue.Enqueue (new Point (sleft, row));
+							}
+
+							++sright;
+							sleft = sright;
+						}
+					}
+
+					if (sright - sleft > 0) {
+						queue.Enqueue (new Point (sleft, row));
+					}
+				};
+
+				if (pt.Y > 0) {
+					checkRow (pt.Y - 1);
+				}
+
+				if (pt.Y < surface.Height - 1) {
+					checkRow (pt.Y + 1);
+				}
+
+				if (localLeft < left) {
+					left = localLeft;
+				}
+
+				if (localRight > right) {
+					right = localRight;
+				}
+
+				if (pt.Y < top) {
+					top = pt.Y;
+				}
+
+				if (pt.Y > bottom) {
+					bottom = pt.Y;
+				}
+			}
+
+			foreach (var rect in scans)
+				stencil.Set (rect.ToGdkRectangle (), false);
+
+			boundingBox = new Rectangle (left, top, right - left + 1, bottom - top + 1);
+		}
+
+		// Ported from PDN
+		public unsafe static void FillStencilByColor (ImageSurface surface, BitMask stencil, ColorBgra cmp, int tolerance,
+							      out Rectangle boundingBox, Cairo.Region limitRegion, bool limitToSelection)
+		{
+			int top = int.MaxValue;
+			int bottom = int.MinValue;
+			int left = int.MaxValue;
+			int right = int.MinValue;
+			Cairo.RectangleInt[] scans;
+
+			stencil.Clear (false);
+
+			if (limitToSelection) {
+				using (var excluded = new Cairo.Region (CairoExtensions.CreateRectangleInt (0, 0, stencil.Width, stencil.Height))) {
+					excluded.Xor (limitRegion);
+					scans = new Cairo.RectangleInt[excluded.NumRectangles];
+					for (int i = 0, n = excluded.NumRectangles; i < n; ++i)
+						scans[i] = excluded.GetRectangle (i);
+				}
+			} else {
+				scans = new Cairo.RectangleInt[0];
+			}
+
+			foreach (var rect in scans)
+				stencil.Set (rect.ToGdkRectangle (), true);
+
+			Parallel.For (0, surface.Height, y => {
+				bool foundPixelInRow = false;
+				ColorBgra* ptr = surface.GetRowAddressUnchecked (y);
+
+				int surfaceWidth = surface.Width;
+				for (int x = 0; x < surfaceWidth; ++x) {
+					if (ColorBgra.ColorsWithinTolerance (cmp, *ptr, tolerance)) {
+						stencil.Set (x, y, true);
+
+						if (x < left) {
+							left = x;
+						}
+
+						if (x > right) {
+							right = x;
+						}
+
+						foundPixelInRow = true;
+					}
+
+					++ptr;
+				}
+
+				if (foundPixelInRow) {
+					if (y < top) {
+						top = y;
+					}
+
+					if (y >= bottom) {
+						bottom = y;
+					}
+				}
+			});
+
+			foreach (var rect in scans)
+				stencil.Set (rect.ToGdkRectangle (), false);
+
+			boundingBox = new Rectangle (left, top, right - left + 1, bottom - top + 1);
+		}
+
+		public static bool IsNotSet (this Point p)
+		{
+			return p.X == int.MinValue && p.Y == int.MinValue;
+		}
+
+		/// <summary>
+		/// Wrapper method to create an ImageSurface and handle allocation failures.
+		/// </summary>
+		public static ImageSurface CreateImageSurface (Cairo.Format format, int width, int height)
+		{
+			ImageSurface surf = new Cairo.ImageSurface (format, width, height);
+			if (surf == null || surf.Status == Cairo.Status.NoMemory) {
+				throw new OutOfMemoryException ("Unable to allocate memory for image");
+			}
+
+			return surf;
+		}
+
+		public enum ExtendedOperators
         {
             Clear = 0,
 

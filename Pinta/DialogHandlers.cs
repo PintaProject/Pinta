@@ -41,7 +41,6 @@ namespace Pinta
 			action_handlers.Add (new NewDocumentAction ());
 			action_handlers.Add (new NewScreenshotAction ());
 			action_handlers.Add (new OpenDocumentAction ());
-			action_handlers.Add (new OpenRecentAction ());
 			action_handlers.Add (new SaveDocumentAction ());
 			action_handlers.Add (new SaveDocumentAsAction ());
 			action_handlers.Add (new PrintDocumentAction ());
@@ -68,6 +67,8 @@ namespace Pinta
 			// View
             action_handlers.Add (new ToolBarToggledAction ());
             action_handlers.Add (new ImageTabsToggledAction ());
+			action_handlers.Add (new StatusBarToggledAction ());
+			action_handlers.Add (new ToolBoxToggledAction ());
 
 			// Window
 			action_handlers.Add (new CloseAllDocumentsAction ());
@@ -84,9 +85,12 @@ namespace Pinta
 			// when there isn't an open document
 			PintaCore.Workspace.DocumentCreated += Workspace_DocumentCreated;
 			PintaCore.Workspace.DocumentClosed += Workspace_DocumentClosed;
+
+			// Initially, no documents are open.
+			ToggleActions(false);
 		}
 
-		private void Workspace_DocumentClosed (object sender, DocumentEventArgs e)
+		private void Workspace_DocumentClosed (object? sender, DocumentEventArgs e)
 		{
 			PintaCore.Actions.Window.RemoveDocument (e.Document);
 
@@ -95,7 +99,7 @@ namespace Pinta
 			}
 		}
 
-		private void Workspace_DocumentCreated (object sender, DocumentEventArgs e)
+		private void Workspace_DocumentCreated (object? sender, DocumentEventArgs e)
 		{
 			PintaCore.Actions.Window.AddDocument (e.Document);
 

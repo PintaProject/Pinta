@@ -28,108 +28,126 @@ using System;
 using System.IO;
 using Gtk;
 using Cairo;
-using Mono.Unix;
 using System.Linq;
 
 namespace Pinta.Core
 {
 	public class EditActions
 	{
-		public Gtk.Action Undo { get; private set; }
-		public Gtk.Action Redo { get; private set; }
-		public Gtk.Action Cut { get; private set; }
-		public Gtk.Action Copy { get; private set; }
-		public Gtk.Action CopyMerged { get; private set; }
-		public Gtk.Action Paste { get; private set; }
-		public Gtk.Action PasteIntoNewLayer { get; private set; }
-		public Gtk.Action PasteIntoNewImage { get; private set; }
-		public Gtk.Action EraseSelection { get; private set; }
-		public Gtk.Action FillSelection { get; private set; }
-		public Gtk.Action InvertSelection { get; private set; }
-		public Gtk.Action SelectAll { get; private set; }
-		public Gtk.Action Deselect { get; private set; }
-		public Gtk.Action LoadPalette { get; private set; }
-		public Gtk.Action SavePalette { get; private set; }
-		public Gtk.Action ResetPalette { get; private set; }
-		public Gtk.Action ResizePalette { get; private set; }
+		public Command Undo { get; private set; }
+		public Command Redo { get; private set; }
+		public Command Cut { get; private set; }
+		public Command Copy { get; private set; }
+		public Command CopyMerged { get; private set; }
+		public Command Paste { get; private set; }
+		public Command PasteIntoNewLayer { get; private set; }
+		public Command PasteIntoNewImage { get; private set; }
+		public Command EraseSelection { get; private set; }
+		public Command FillSelection { get; private set; }
+		public Command InvertSelection { get; private set; }
+		public Command SelectAll { get; private set; }
+		public Command Deselect { get; private set; }
+		public Command LoadPalette { get; private set; }
+		public Command SavePalette { get; private set; }
+		public Command ResetPalette { get; private set; }
+		public Command ResizePalette { get; private set; }
 		
-		private string lastPaletteDir = null;
+		private string? lastPaletteDir = null;
 		
 		public EditActions ()
 		{
-			Gtk.IconFactory fact = new Gtk.IconFactory ();
-			fact.Add ("Menu.Edit.Deselect.png", new Gtk.IconSet (PintaCore.Resources.GetIcon ("Menu.Edit.Deselect.png")));
-			fact.Add ("Menu.Edit.EraseSelection.png", new Gtk.IconSet (PintaCore.Resources.GetIcon ("Menu.Edit.EraseSelection.png")));
-			fact.Add ("Menu.Edit.FillSelection.png", new Gtk.IconSet (PintaCore.Resources.GetIcon ("Menu.Edit.FillSelection.png")));
-			fact.Add ("Menu.Edit.InvertSelection.png", new Gtk.IconSet (PintaCore.Resources.GetIcon ("Menu.Edit.InvertSelection.png")));
-			fact.Add ("Menu.Edit.SelectAll.png", new Gtk.IconSet (PintaCore.Resources.GetIcon ("Menu.Edit.SelectAll.png")));
-			fact.Add ("Menu.Edit.Addins.png", new Gtk.IconSet (PintaCore.Resources.GetIcon ("Menu.Edit.Addins.png")));
-			fact.AddDefault ();
+			Undo = new Command ("undo", Translations.GetString ("Undo"), null, Resources.StandardIcons.EditUndo);
+			Redo = new Command ("redo", Translations.GetString ("Redo"), null, Resources.StandardIcons.EditRedo);
+			Cut = new Command ("cut", Translations.GetString ("Cut"), null, Resources.StandardIcons.EditCut);
+			Copy = new Command ("copy", Translations.GetString ("Copy"), null, Resources.StandardIcons.EditCopy);
+			CopyMerged = new Command ("copymerged", Translations.GetString ("Copy Merged"), null, Resources.StandardIcons.EditCopy);
+			Paste = new Command ("paste", Translations.GetString ("Paste"), null, Resources.StandardIcons.EditPaste);
+			PasteIntoNewLayer = new Command ("pasteintonewlayer", Translations.GetString ("Paste Into New Layer"), null, Resources.StandardIcons.EditPaste);
+			PasteIntoNewImage = new Command ("pasteintonewimage", Translations.GetString ("Paste Into New Image"), null, Resources.StandardIcons.EditPaste);
+			EraseSelection = new Command ("eraseselection", Translations.GetString ("Erase Selection"), null, Resources.Icons.EditSelectionErase);
+			FillSelection = new Command ("fillselection", Translations.GetString ("Fill Selection"), null, Resources.Icons.EditSelectionFill);
+			InvertSelection = new Command ("invertselection", Translations.GetString ("Invert Selection"), null, Resources.Icons.EditSelectionFill);
+			SelectAll = new Command ("selectall", Translations.GetString ("Select All"), null, Resources.StandardIcons.EditSelectAll);
+			Deselect = new Command ("deselect", Translations.GetString ("Deselect All"), null, Resources.Icons.EditSelectionNone);
 			
-			Undo = new Gtk.Action ("Undo", Catalog.GetString ("Undo"), null, Stock.Undo);
-			Redo = new Gtk.Action ("Redo", Catalog.GetString ("Redo"), null, Stock.Redo);
-			Cut = new Gtk.Action ("Cut", Catalog.GetString ("Cut"), null, Stock.Cut);
-			Copy = new Gtk.Action ("Copy", Catalog.GetString ("Copy"), null, Stock.Copy);
-			CopyMerged = new Gtk.Action ("CopyMerged", Catalog.GetString ("Copy Merged"), null, Stock.Copy);
-			Paste = new Gtk.Action ("Paste", Catalog.GetString ("Paste"), null, Stock.Paste);
-			PasteIntoNewLayer = new Gtk.Action ("PasteIntoNewLayer", Catalog.GetString ("Paste Into New Layer"), null, Stock.Paste);
-			PasteIntoNewImage = new Gtk.Action ("PasteIntoNewImage", Catalog.GetString ("Paste Into New Image"), null, Stock.Paste);
-			EraseSelection = new Gtk.Action ("EraseSelection", Catalog.GetString ("Erase Selection"), null, "Menu.Edit.EraseSelection.png");
-			FillSelection = new Gtk.Action ("FillSelection", Catalog.GetString ("Fill Selection"), null, "Menu.Edit.FillSelection.png");
-			InvertSelection = new Gtk.Action ("InvertSelection", Catalog.GetString ("Invert Selection"), null, "Menu.Edit.InvertSelection.png");
-			SelectAll = new Gtk.Action ("SelectAll", Catalog.GetString ("Select All"), null, Stock.SelectAll);
-			Deselect = new Gtk.Action ("Deselect", Catalog.GetString ("Deselect All"), null, "Menu.Edit.Deselect.png");
-			
-			LoadPalette = new Gtk.Action ("LoadPalette", Catalog.GetString ("Open..."), null, Stock.Open);
-			SavePalette = new Gtk.Action ("SavePalette", Catalog.GetString ("Save As..."), null, Stock.Save);
-			ResetPalette = new Gtk.Action ("ResetPalette", Catalog.GetString ("Reset to Default"), null, Stock.RevertToSaved);
-			ResizePalette = new Gtk.Action ("ResizePalette", Catalog.GetString ("Set Number of Colors"), null, "Menu.Image.Resize.png");
+			LoadPalette = new Command ("loadpalette", Translations.GetString ("Open..."), null, Resources.StandardIcons.DocumentOpen);
+			SavePalette = new Command ("savepalette", Translations.GetString ("Save As..."), null, Resources.StandardIcons.DocumentSave);
+			ResetPalette = new Command ("resetpalette", Translations.GetString ("Reset to Default"), null, Resources.StandardIcons.DocumentRevert);
+			ResizePalette = new Command ("resizepalette", Translations.GetString ("Set Number of Colors"), null, Resources.Icons.ImageResize);
 
 			Undo.IsImportant = true;
 			Undo.Sensitive = false;
 			Redo.Sensitive = false;
-			InvertSelection.Sensitive = false;
-			Deselect.Sensitive = false;
-			EraseSelection.Sensitive = false;
-			FillSelection.Sensitive = false;
 		}
 
 		#region Initialization
-		public void CreateMainMenu (Gtk.Menu menu)
+		public void RegisterActions(Gtk.Application app, GLib.Menu menu)
 		{
-			menu.Append (Undo.CreateAcceleratedMenuItem (Gdk.Key.Z, Gdk.ModifierType.ControlMask));
+			app.AddAccelAction(Undo, "<Primary>Z");
+			menu.AppendItem(Undo.CreateMenuItem());
 
-			ImageMenuItem redo = Redo.CreateAcceleratedMenuItem (Gdk.Key.Z, Gdk.ModifierType.ControlMask | Gdk.ModifierType.ShiftMask);
-			redo.AddAccelerator ("activate", PintaCore.Actions.AccelGroup, new AccelKey (Gdk.Key.Y, Gdk.ModifierType.ControlMask, AccelFlags.Visible));
-			menu.Append (redo);
+			app.AddAccelAction(Redo, new[] { "<Primary><Shift>Z", "<Ctrl>Y" });
+			menu.AppendItem(Redo.CreateMenuItem());
 
-			menu.AppendSeparator ();
-			menu.Append (Cut.CreateAcceleratedMenuItem (Gdk.Key.X, Gdk.ModifierType.ControlMask));
-			menu.Append (Copy.CreateAcceleratedMenuItem (Gdk.Key.C, Gdk.ModifierType.ControlMask));
-			menu.Append (CopyMerged.CreateAcceleratedMenuItem (Gdk.Key.C, Gdk.ModifierType.ControlMask | Gdk.ModifierType.ShiftMask));
-			menu.Append (Paste.CreateAcceleratedMenuItem (Gdk.Key.V, Gdk.ModifierType.ControlMask));
-			menu.Append (PasteIntoNewLayer.CreateAcceleratedMenuItem (Gdk.Key.V, Gdk.ModifierType.ShiftMask | Gdk.ModifierType.ControlMask));
-			menu.Append (PasteIntoNewImage.CreateAcceleratedMenuItem (Gdk.Key.V, Gdk.ModifierType.Mod1Mask | Gdk.ModifierType.ControlMask));
-			
-			menu.AppendSeparator ();
-			menu.Append (SelectAll.CreateAcceleratedMenuItem (Gdk.Key.A, Gdk.ModifierType.ControlMask));
+			var paste_section = new GLib.Menu();
+			menu.AppendSection(null, paste_section);
 
-			ImageMenuItem deslect = Deselect.CreateAcceleratedMenuItem (Gdk.Key.A, Gdk.ModifierType.ControlMask | Gdk.ModifierType.ShiftMask);
-			deslect.AddAccelerator ("activate", PintaCore.Actions.AccelGroup, new AccelKey (Gdk.Key.D, Gdk.ModifierType.ControlMask, AccelFlags.Visible));
-			menu.Append (deslect);
+			app.AddAccelAction(Cut, "<Primary>X");
+			paste_section.AppendItem(Cut.CreateMenuItem());
 
-			menu.AppendSeparator ();
-			menu.Append (EraseSelection.CreateAcceleratedMenuItem (Gdk.Key.Delete, Gdk.ModifierType.None));
-			menu.Append (FillSelection.CreateAcceleratedMenuItem (Gdk.Key.BackSpace, Gdk.ModifierType.None));
-			menu.Append (InvertSelection.CreateAcceleratedMenuItem (Gdk.Key.I, Gdk.ModifierType.ControlMask));
-			
-			menu.AppendSeparator ();
-			Gtk.Action menu_action = new Gtk.Action ("Palette", Mono.Unix.Catalog.GetString ("Palette"), null, null);
-			Menu palette_menu = (Menu) menu.AppendItem (menu_action.CreateSubMenuItem ()).Submenu;
-			palette_menu.Append (LoadPalette.CreateMenuItem ());
-			palette_menu.Append (SavePalette.CreateMenuItem ());
-			palette_menu.Append (ResetPalette.CreateMenuItem ());
-			palette_menu.Append (ResizePalette.CreateMenuItem ());
+			app.AddAccelAction(Copy, "<Primary>C");
+			paste_section.AppendItem(Copy.CreateMenuItem());
+
+			app.AddAccelAction(CopyMerged, "<Primary><Shift>C");
+			paste_section.AppendItem(CopyMerged.CreateMenuItem());
+
+			app.AddAccelAction(Paste, "<Primary>V");
+			paste_section.AppendItem(Paste.CreateMenuItem());
+
+			app.AddAccelAction(PasteIntoNewLayer, "<Primary><Shift>V");
+			paste_section.AppendItem(PasteIntoNewLayer.CreateMenuItem());
+
+			app.AddAccelAction(PasteIntoNewImage, "<Primary><Alt>V");
+			paste_section.AppendItem(PasteIntoNewImage.CreateMenuItem());
+
+			var sel_section = new GLib.Menu();
+			menu.AppendSection(null, sel_section);
+
+			app.AddAccelAction(SelectAll, "<Primary>A");
+			sel_section.AppendItem(SelectAll.CreateMenuItem());
+
+			app.AddAccelAction(Deselect, new[] { "<Primary><Shift>A", "<Ctrl>D" });
+			sel_section.AppendItem(Deselect.CreateMenuItem());
+
+			var edit_sel_section = new GLib.Menu();
+			menu.AppendSection(null, edit_sel_section);
+
+			app.AddAccelAction(EraseSelection, "Delete");
+			edit_sel_section.AppendItem(EraseSelection.CreateMenuItem());
+
+			app.AddAccelAction(FillSelection, "BackSpace");
+			edit_sel_section.AppendItem(FillSelection.CreateMenuItem());
+
+			app.AddAccelAction(InvertSelection, "<Primary>I");
+			edit_sel_section.AppendItem(InvertSelection.CreateMenuItem());
+
+			var palette_section = new GLib.Menu();
+			menu.AppendSection(null, palette_section);
+
+			var palette_menu = new GLib.Menu();
+			menu.AppendSubmenu(Translations.GetString("Palette"), palette_menu);
+
+			app.AddAction(LoadPalette);
+			palette_menu.AppendItem(LoadPalette.CreateMenuItem());
+
+			app.AddAction(SavePalette);
+			palette_menu.AppendItem(SavePalette.CreateMenuItem());
+
+			app.AddAction(ResetPalette);
+			palette_menu.AppendItem(ResetPalette.CreateMenuItem());
+
+			app.AddAction(ResizePalette);
+			palette_menu.AppendItem(ResizePalette.CreateMenuItem());
 		}
 
 		public void CreateHistoryWindowToolBar (Gtk.Toolbar toolbar)
@@ -177,9 +195,9 @@ namespace Pinta.Core
 
 			PintaCore.Tools.Commit ();
 
-			Cairo.ImageSurface old = doc.CurrentUserLayer.Surface.Clone ();
+			Cairo.ImageSurface old = doc.Layers.CurrentUserLayer.Surface.Clone ();
 
-			using (var g = new Cairo.Context (doc.CurrentUserLayer.Surface)) {
+			using (var g = new Cairo.Context (doc.Layers.CurrentUserLayer.Surface)) {
 				g.AppendPath (doc.Selection.SelectionPath);
 				g.FillRule = FillRule.EvenOdd;
 
@@ -188,7 +206,7 @@ namespace Pinta.Core
 			}
 
 			doc.Workspace.Invalidate ();
-			doc.History.PushNewItem (new SimpleHistoryItem ("Menu.Edit.FillSelection.png", Catalog.GetString ("Fill Selection"), old, doc.CurrentUserLayerIndex));
+			doc.History.PushNewItem (new SimpleHistoryItem (Resources.Icons.EditSelectionFill, Translations.GetString ("Fill Selection"), old, doc.Layers.CurrentUserLayerIndex));
 		}
 
 		private void HandlePintaCoreActionsEditSelectAllActivated (object sender, EventArgs e)
@@ -197,7 +215,7 @@ namespace Pinta.Core
 
 			PintaCore.Tools.Commit ();
 
-			SelectionHistoryItem hist = new SelectionHistoryItem (Stock.SelectAll, Catalog.GetString ("Select All"));
+			SelectionHistoryItem hist = new SelectionHistoryItem (Resources.StandardIcons.EditSelectAll, Translations.GetString ("Select All"));
 			hist.TakeSnapshot ();
 
 			doc.ResetSelectionPaths ();
@@ -213,9 +231,9 @@ namespace Pinta.Core
 
 			PintaCore.Tools.Commit ();
 
-			Cairo.ImageSurface old = doc.CurrentUserLayer.Surface.Clone ();
+			Cairo.ImageSurface old = doc.Layers.CurrentUserLayer.Surface.Clone ();
 
-			using (var g = new Cairo.Context (doc.CurrentUserLayer.Surface)) {
+			using (var g = new Cairo.Context (doc.Layers.CurrentUserLayer.Surface)) {
 				g.AppendPath (doc.Selection.SelectionPath);
 				g.FillRule = FillRule.EvenOdd;
 
@@ -226,9 +244,9 @@ namespace Pinta.Core
 			doc.Workspace.Invalidate ();
 
 			if (sender is string && (sender as string) == "Cut")
-				doc.History.PushNewItem (new SimpleHistoryItem (Stock.Cut, Catalog.GetString ("Cut"), old, doc.CurrentUserLayerIndex));
+				doc.History.PushNewItem (new SimpleHistoryItem (Resources.StandardIcons.EditCut, Translations.GetString ("Cut"), old, doc.Layers.CurrentUserLayerIndex));
 			else
-				doc.History.PushNewItem (new SimpleHistoryItem ("Menu.Edit.EraseSelection.png", Catalog.GetString ("Erase Selection"), old, doc.CurrentUserLayerIndex));
+				doc.History.PushNewItem (new SimpleHistoryItem (Resources.Icons.EditSelectionErase, Translations.GetString ("Erase Selection"), old, doc.Layers.CurrentUserLayerIndex));
 		}
 
 		private void HandlePintaCoreActionsEditDeselectActivated (object sender, EventArgs e)
@@ -237,7 +255,7 @@ namespace Pinta.Core
 
 			PintaCore.Tools.Commit ();
 
-			SelectionHistoryItem hist = new SelectionHistoryItem ("Menu.Edit.Deselect.png", Catalog.GetString ("Deselect"));
+			SelectionHistoryItem hist = new SelectionHistoryItem (Resources.Icons.EditSelectionNone, Translations.GetString ("Deselect"));
 			hist.TakeSnapshot ();
 
             doc.ResetSelectionPaths ();
@@ -248,15 +266,15 @@ namespace Pinta.Core
 
 		private void HandlerPintaCoreActionsEditCopyActivated (object sender, EventArgs e)
 		{
-			Gtk.Clipboard cb = Gtk.Clipboard.Get (Gdk.Atom.Intern ("CLIPBOARD", false));
-			if (PintaCore.Tools.CurrentTool.TryHandleCopy (cb))
-				return;
-
 			Document doc = PintaCore.Workspace.ActiveDocument;
+
+			Gtk.Clipboard cb = Gtk.Clipboard.Get (Gdk.Atom.Intern ("CLIPBOARD", false));
+			if (PintaCore.Tools.CurrentTool?.DoHandleCopy (doc, cb) == true)
+				return;
 
 			PintaCore.Tools.Commit ();
 
-			using (ImageSurface src = doc.GetClippedLayer (doc.CurrentUserLayerIndex)) {
+			using (ImageSurface src = doc.Layers.GetClippedLayer (doc.Layers.CurrentUserLayerIndex)) {
 
 				Gdk.Rectangle rect = doc.GetSelectedBounds (true);
 				if (rect.Width == 0 || rect.Height == 0)
@@ -302,8 +320,10 @@ namespace Pinta.Core
 		
 		private void HandlerPintaCoreActionsEditCutActivated (object sender, EventArgs e)
 		{
+			var doc = PintaCore.Workspace.ActiveDocument;
+
 			Gtk.Clipboard cb = Gtk.Clipboard.Get (Gdk.Atom.Intern ("CLIPBOARD", false));
-			if (PintaCore.Tools.CurrentTool.TryHandleCut (cb))
+			if (PintaCore.Tools.CurrentTool?.DoHandleCut (doc, cb) == true)
 				return;
 			PintaCore.Tools.Commit ();
 			
@@ -316,64 +336,73 @@ namespace Pinta.Core
 
 		private void HandlerPintaCoreActionsEditUndoActivated (object sender, EventArgs e)
 		{
-			if (PintaCore.Tools.CurrentTool.TryHandleUndo ())
-				return;
 			Document doc = PintaCore.Workspace.ActiveDocument;
+			if (PintaCore.Tools.CurrentTool?.DoHandleUndo (doc) == true)
+				return;
 			doc.History.Undo ();
-			PintaCore.Tools.CurrentTool.AfterUndo();
+			PintaCore.Tools.CurrentTool?.DoAfterUndo(doc);
 		}
 
 		private void HandlerPintaCoreActionsEditRedoActivated (object sender, EventArgs e)
 		{
-			if (PintaCore.Tools.CurrentTool.TryHandleRedo ())
-				return;
 			Document doc = PintaCore.Workspace.ActiveDocument;
+			if (PintaCore.Tools.CurrentTool?.DoHandleRedo (doc) == true)
+				return;
 			doc.History.Redo ();
-			PintaCore.Tools.CurrentTool.AfterRedo();
+			PintaCore.Tools.CurrentTool?.DoAfterRedo(doc);
 		}
 
 		private void HandlerPintaCoreActionsEditLoadPaletteActivated (object sender, EventArgs e)
 		{
-			var fcd = new Gtk.FileChooserDialog (Catalog.GetString ("Open Palette File"), PintaCore.Chrome.MainWindow,
-				FileChooserAction.Open, Gtk.Stock.Cancel, Gtk.ResponseType.Cancel,
-				Gtk.Stock.Open, Gtk.ResponseType.Ok);
+			using var fcd = new FileChooserNative (
+				Translations.GetString ("Open Palette File"),
+				PintaCore.Chrome.MainWindow,
+				FileChooserAction.Open,
+				Translations.GetString ("Open"),
+				Translations.GetString ("Cancel"));
 
-			FileFilter ff = new FileFilter ();
+			var ff = new FileFilter {
+				Name = Translations.GetString ("Palette files")
+			};
+
 			foreach (var format in PintaCore.System.PaletteFormats.Formats) {
 				if (!format.IsWriteOnly ()) {
 					foreach (var ext in format.Extensions)
-						ff.AddPattern (string.Format("*.{0}", ext));
+						ff.AddPattern (string.Format ("*.{0}", ext));
 				}
 			}
 
-			ff.Name = Catalog.GetString ("Palette files");
 			fcd.AddFilter (ff);
 
-			FileFilter ff2 = new FileFilter ();
-			ff2.Name = Catalog.GetString ("All files");
+			FileFilter ff2 = new FileFilter {
+				Name = Translations.GetString ("All files")
+			};
 			ff2.AddPattern ("*.*");
 			fcd.AddFilter (ff2);
 
-			fcd.AlternativeButtonOrder = new int[] { (int) ResponseType.Ok, (int) ResponseType.Cancel };
-
 			if (lastPaletteDir != null)
 				fcd.SetCurrentFolder (lastPaletteDir);
-			
-			int response = fcd.Run ();
-		
-			if (response == (int) Gtk.ResponseType.Ok) {
-				lastPaletteDir = fcd.CurrentFolder;
-				PintaCore.Palette.CurrentPalette.Load (fcd.Filename);
+
+			var response = (ResponseType) fcd.Run ();
+
+			if (response == ResponseType.Accept) {
+				var filename = fcd.Filename;
+				lastPaletteDir = System.IO.Path.GetDirectoryName (filename);
+				PintaCore.Palette.CurrentPalette.Load (filename);
 			}
 
-			fcd.Destroy ();
 		}
 
 		private void HandlerPintaCoreActionsEditSavePaletteActivated (object sender, EventArgs e)
 		{
-			var fcd = new Gtk.FileChooserDialog (Catalog.GetString ("Save Palette File"), PintaCore.Chrome.MainWindow,
-				FileChooserAction.Save, Gtk.Stock.Cancel, Gtk.ResponseType.Cancel,
-				Gtk.Stock.Save, Gtk.ResponseType.Ok);
+			using var fcd = new FileChooserNative (
+				Translations.GetString ("Save Palette File"),
+				PintaCore.Chrome.MainWindow,
+				FileChooserAction.Save,
+				Translations.GetString ("Save"),
+				Translations.GetString ("Cancel")) {
+				DoOverwriteConfirmation = true
+			};
 
 			foreach (var format in PintaCore.System.PaletteFormats.Formats) {
 				if (!format.IsReadOnly ()) {
@@ -382,26 +411,31 @@ namespace Pinta.Core
 				}
 			}
 
-			fcd.AlternativeButtonOrder = new int[] { (int) ResponseType.Ok, (int) ResponseType.Cancel };
-
 			if (lastPaletteDir != null)
 				fcd.SetCurrentFolder (lastPaletteDir);
 
-			int response = fcd.Run ();
+			var response = (ResponseType)fcd.Run ();
 
-			if (response == (int) Gtk.ResponseType.Ok) {
-				var format = PintaCore.System.PaletteFormats.Formats.FirstOrDefault (f => f.Filter == fcd.Filter);
+			if (response == Gtk.ResponseType.Accept) {
+				string filename = fcd.Filename;
 
-				string finalFileName = fcd.Filename;
+				// Add in the extension if necessary, based on the current selected file filter.
+				// Note: on macOS, fcd.Filter doesn't seem to properly update to the current filter.
+				// However, on macOS the dialog always adds the extension automatically, so this issue doesn't matter.
+				string extension = System.IO.Path.GetExtension (filename);
+				if (string.IsNullOrEmpty(extension)) {
+					var currentFormat = PintaCore.System.PaletteFormats.Formats.First (f => f.Filter == fcd.Filter);
+					filename += "." + currentFormat.Extensions.First ();
+				}
 
-				string extension = System.IO.Path.GetExtension (fcd.Filename);
-				if (string.IsNullOrEmpty(extension))
-					finalFileName += "." + format.Extensions.First ();
+				var format = PintaCore.System.PaletteFormats.GetFormatByFilename (filename);
+				if (format is null)
+					throw new FormatException ();
 
-				PintaCore.Palette.CurrentPalette.Save(finalFileName, format.Saver);
+				PintaCore.Palette.CurrentPalette.Save (filename, format.Saver);
+				lastPaletteDir = System.IO.Path.GetDirectoryName (filename);
 			}
 
-			fcd.Destroy ();
 		}
 
 		private void HandlerPintaCoreActionsEditResetPaletteActivated (object sender, EventArgs e)
@@ -416,19 +450,19 @@ namespace Pinta.Core
 			Document doc = PintaCore.Workspace.ActiveDocument;
 
 			// Clear the selection resize handles if necessary.
-			doc.ToolLayer.Clear ();
+			doc.Layers.ToolLayer.Clear ();
 
-			SelectionHistoryItem historyItem = new SelectionHistoryItem ("Menu.Edit.InvertSelection.png",
-			                                                             Catalog.GetString ("Invert Selection"));
+			SelectionHistoryItem historyItem = new SelectionHistoryItem (Resources.Icons.EditSelectionInvert,
+			                                                             Translations.GetString ("Invert Selection"));
 			historyItem.TakeSnapshot ();
 
-			doc.Selection.Invert (doc.SelectionLayer.Surface, doc.ImageSize);
+			doc.Selection.Invert (doc.Layers.SelectionLayer.Surface, doc.ImageSize);
 
 			doc.History.PushNewItem (historyItem);
 			doc.Workspace.Invalidate ();
 		}
 
-		private void WorkspaceActiveDocumentChanged (object sender, EventArgs e)
+		private void WorkspaceActiveDocumentChanged (object? sender, EventArgs e)
 		{
 			if (!PintaCore.Workspace.HasOpenDocuments) {
 				Undo.Sensitive = false;
@@ -439,6 +473,6 @@ namespace Pinta.Core
 			Redo.Sensitive = PintaCore.Workspace.ActiveWorkspace.History.CanRedo;
 			Undo.Sensitive = PintaCore.Workspace.ActiveWorkspace.History.CanUndo;
 		}
-		#endregion
+#endregion
 	}
 }

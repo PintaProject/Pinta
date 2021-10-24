@@ -11,7 +11,6 @@ using System;
 using Cairo;
 using Pinta.Gui.Widgets;
 using Pinta.Core;
-using Mono.Unix;
 
 namespace Pinta.Effects
 {
@@ -22,7 +21,7 @@ namespace Pinta.Effects
         }
 
         public override string Name {
-            get { return Catalog.GetString ("Gaussian Blur"); }
+            get { return Translations.GetString ("Gaussian Blur"); }
         }
 
         public override bool IsConfigurable {
@@ -30,10 +29,10 @@ namespace Pinta.Effects
         }
 
         public override string EffectMenuCategory {
-            get { return Catalog.GetString ("Blurs"); }
+            get { return Translations.GetString ("Blurs"); }
         }
 
-        public GaussianBlurData Data { get { return EffectData as GaussianBlurData; } }
+        public GaussianBlurData Data { get { return (GaussianBlurData)EffectData!; } } // NRT - Set in constructor
 
         public GaussianBlurEffect ()
         {

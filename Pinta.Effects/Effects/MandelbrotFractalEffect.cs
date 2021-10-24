@@ -11,7 +11,6 @@ using System;
 using Pinta.Gui.Widgets;
 using Cairo;
 using Pinta.Core;
-using Mono.Unix;
 
 namespace Pinta.Effects
 {
@@ -22,7 +21,7 @@ namespace Pinta.Effects
 		}
 
 		public override string Name {
-			get { return Catalog.GetString ("Mandelbrot Fractal"); }
+			get { return Translations.GetString ("Mandelbrot Fractal"); }
 		}
 
 		public override bool IsConfigurable {
@@ -30,10 +29,10 @@ namespace Pinta.Effects
 		}
 
 		public override string EffectMenuCategory {
-			get { return Catalog.GetString ("Render"); }
+			get { return Translations.GetString ("Render"); }
 		}
 
-		public MandelbrotFractalData Data { get { return EffectData as MandelbrotFractalData; } }
+		public MandelbrotFractalData Data { get { return (MandelbrotFractalData)EffectData!; } } // NRT - Set in constructor
 
 		public MandelbrotFractalEffect ()
 		{

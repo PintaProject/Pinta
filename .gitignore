@@ -2,6 +2,8 @@
 *.suo
 *.swp
 *.userprefs
+*.pubxml
+.DS_Store
 aclocal.m4
 autom4te.cache
 bin
@@ -10,6 +12,9 @@ config.log
 config.status
 configure
 install-sh
+installer/macos/Pinta.app
+installer/macos/Pinta.app.zip
+installer/linux/pinta
 intltool-extract.in
 intltool-merge.in
 intltool-update.in
@@ -17,11 +22,11 @@ Makefile
 Makefile.in
 missing
 obj
-pinta
 pinta.pc
 po/.intltool-merge-cache
 po/Makefile.in.in
 po/POTFILES
 po/stamp-it
 xdg/pinta.desktop
+xdg/pinta.appdata.xml
 .vs

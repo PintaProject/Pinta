@@ -11,7 +11,7 @@ using System;
 using Cairo;
 using Pinta.Gui.Widgets;
 using Pinta.Core;
-using Mono.Unix;
+using System.Diagnostics.CodeAnalysis;
 
 namespace Pinta.Effects
 {
@@ -26,7 +26,7 @@ namespace Pinta.Effects
 		}
 
 		public override string Name {
-			get { return Catalog.GetString ("Add Noise"); }
+			get { return Translations.GetString ("Add Noise"); }
 		}
 
 		public override bool IsConfigurable {
@@ -34,10 +34,10 @@ namespace Pinta.Effects
 		}
 
 		public override string EffectMenuCategory {
-			get { return Catalog.GetString ("Noise"); }
+			get { return Translations.GetString ("Noise"); }
 		}
 
-		public NoiseData Data { get { return EffectData as NoiseData; } }
+		public NoiseData Data { get { return (NoiseData)EffectData!; } } // NRT - Set in constructor
 
 		static AddNoiseEffect ()
 		{
@@ -65,6 +65,7 @@ namespace Pinta.Effects
 			return scale * Math.Exp (-x * x / 2);
 		}
 
+		[MemberNotNull (nameof (lookup))]
 		private static void InitLookup ()
 		{
 			double l = 5;

@@ -12,20 +12,20 @@ using Cairo;
 
 using Pinta.Gui.Widgets;
 using Pinta.Core;
-using Mono.Unix;
+using System.Diagnostics.CodeAnalysis;
 
 namespace Pinta.Effects
 {
 	public class EdgeDetectEffect : ColorDifferenceEffect
 	{
-		private double[][] weights;
+		private double[][]? weights;
 		
 		public override string Icon {
 			get { return "Menu.Effects.Stylize.EdgeDetect.png"; }
 		}
 
 		public override string Name {
-			get { return Catalog.GetString ("Edge Detect"); }
+			get { return Translations.GetString ("Edge Detect"); }
 		}
 
 		public override bool IsConfigurable {
@@ -33,10 +33,10 @@ namespace Pinta.Effects
 		}
 
 		public override string EffectMenuCategory {
-			get { return Catalog.GetString ("Stylize"); }
+			get { return Translations.GetString ("Stylize"); }
 		}
 
-		public EdgeDetectData Data { get { return EffectData as EdgeDetectData; } }
+		public EdgeDetectData Data { get { return (EdgeDetectData)EffectData!; } } // NRT - Set in constructor
 		
 		public EdgeDetectEffect ()
 		{
@@ -53,7 +53,8 @@ namespace Pinta.Effects
 			SetWeights ();
 			base.RenderColorDifferenceEffect (weights, src, dest, rois);
 		}
-		
+
+		[MemberNotNull (nameof (weights))]
 		private void SetWeights ()
 		{
 			weights = new double[3][];

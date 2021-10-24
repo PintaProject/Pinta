@@ -26,261 +26,318 @@
 
 using System;
 using System.Collections.Generic;
+using System.Diagnostics.CodeAnalysis;
 using System.Linq;
+using Gdk;
 using Gtk;
 
 namespace Pinta.Core
 {
-	public class ToolManager : IEnumerable<BaseTool>
+	public interface IToolService
 	{
-		int index = -1;
-		int prev_index = -1;
-		
-		private List<BaseTool> Tools;
-		private Dictionary<Gdk.Key, List<BaseTool>> groupedTools;
-		private Gdk.Key LastUsedKey;
-		private int PressedShortcutCounter;
+		/// <summary>
+		/// Adds a new tool to the tool box.
+		/// </summary>
+		void AddTool (BaseTool tool);
 
-		public event EventHandler<ToolEventArgs> ToolAdded;
-		public event EventHandler<ToolEventArgs> ToolRemoved;
+		/// <summary>
+		/// Instructs the current tool to commit any work that is in a temporary state.
+		/// </summary>
+		void Commit ();
 
-		public ToolManager ()
-		{
-			Tools = new List<BaseTool> ();
-			groupedTools = new Dictionary<Gdk.Key, List<BaseTool>>();
-			PressedShortcutCounter = 0;
-		}
+		/// <summary>
+		/// Gets the currently selected tool.
+		/// </summary>
+		BaseTool? CurrentTool { get; }
+
+		/// <summary>
+		/// Performs the mouse down event for the currently selected tool.
+		/// </summary>
+		void DoMouseDown (Document document, ToolMouseEventArgs e);
+
+		/// <summary>
+		/// Gets the previously selected tool.
+		/// </summary>
+		BaseTool? PreviousTool { get; }
+
+		/// <summary>
+		/// Removes the first found tool of the specified type from tool box.
+		/// </summary>
+		void RemoveInstanceOfTool<T> () where T : BaseTool;
+
+		/// <summary>
+		/// Sets the current tool to the specified tool.
+		/// </summary>
+		void SetCurrentTool (BaseTool tool);
+
+		/// <summary>
+		/// Sets the current tool to the first tool with the specified tool type name, like
+		/// 'PencilTool'. Returns a value indicating if tool was successfully changed.
+		/// </summary>
+		bool SetCurrentTool (string tool);
+
+		/// <summary>
+		/// Sets the current tool to the next tool with the specified shortcut.
+		/// </summary>
+		void SetCurrentTool (Gdk.Key shortcut);
+	}
+
+	public class ToolManager : IEnumerable<BaseTool>, IToolService
+	{
+		private readonly SortedSet<BaseTool> tools = new (new ToolSorter ());
+
+		private bool is_panning;
+		private Cursor? stored_cursor;
+
+		public event EventHandler<ToolEventArgs>? ToolAdded;
+		public event EventHandler<ToolEventArgs>? ToolRemoved;
+
+		public BaseTool? CurrentTool { get; private set; }
+
+		public BaseTool? PreviousTool { get; private set; }
 
 		public void AddTool (BaseTool tool)
 		{
-			tool.ToolItem.Clicked += HandlePbToolItemClicked;
-			tool.ToolItem.Sensitive = tool.Enabled;
-			
-			Tools.Add (tool);
-			Tools.Sort (new ToolSorter ());
+			tool.ToolItem.Clicked += HandleToolBoxToolItemClicked;
 
-			OnToolAdded (tool);
+			tools.Add (tool);
 
-			if (CurrentTool == null)
+			ToolAdded?.Invoke (this, new ToolEventArgs (tool));
+
+			if (CurrentTool is null)
 				SetCurrentTool (tool);
-
-			if (!groupedTools.ContainsKey(tool.ShortcutKey))
-				groupedTools.Add(tool.ShortcutKey, new List<BaseTool>());
-
-			groupedTools[tool.ShortcutKey].Add(tool);
 		}
 
-		public void RemoveInstanceOfTool (System.Type tool_type)
+		public void RemoveInstanceOfTool<T> () where T : BaseTool
 		{
-			foreach (BaseTool tool in Tools) {
-				if (tool.GetType () == tool_type) {
-					tool.ToolItem.Clicked -= HandlePbToolItemClicked;
-					tool.ToolItem.Active = false;
-					tool.ToolItem.Sensitive = false;
+			var tool = tools.OfType<T> ().FirstOrDefault ();
 
-					Tools.Remove (tool);
-					Tools.Sort (new ToolSorter ());
+			if (tool is null)
+				return;
 
-					SetCurrentTool(new DummyTool());
-					OnToolRemoved (tool);
+			tool.ToolItem.Clicked -= HandleToolBoxToolItemClicked;
+			tool.ToolItem.Active = false;
+			tool.ToolItem.Sensitive = false;
 
-					if (groupedTools[tool.ShortcutKey].Count > 1)
-						groupedTools[tool.ShortcutKey].Remove(tool);
-					else
-						groupedTools.Remove(tool.ShortcutKey);
+			tools.Remove (tool);
 
-					return;
+			// Are we trying to remove the current tool?
+			if (CurrentTool == tool) {
+				// Can we set it back to the previous tool?
+				if (PreviousTool is not null && PreviousTool != CurrentTool)
+					SetCurrentTool (PreviousTool);
+				else if (tools.Any ())  // Any tool?
+					SetCurrentTool (tools.First ());
+				else {
+					// There are no tools left.
+					DeactivateTool (tool, null);
+					PreviousTool = null;
+					CurrentTool = null;
 				}
 			}
+
+			ToolRemoved?.Invoke (this, new ToolEventArgs (tool));
 		}
 
-		void HandlePbToolItemClicked (object sender, EventArgs e)
+		private void HandleToolBoxToolItemClicked (object? sender, EventArgs e)
 		{
-			ToggleToolButton tb = (ToggleToolButton)sender;
+			if (sender is not ToolBoxButton tb)
+				return;
 
-			BaseTool t = FindTool (tb.Label);
+			var new_tool = tb.Tool;
 
 			// Don't let the user unselect the current tool	
-			if (CurrentTool != null && t.Name == CurrentTool.Name) {
-				if (prev_index != index)
+			if (CurrentTool != null && new_tool.GetType ().Name == CurrentTool.GetType ().Name) {
+				if (PreviousTool != CurrentTool)
 					tb.Active = true;
+
 				return;
 			}
 
-			SetCurrentTool(t);
+			SetCurrentTool (new_tool);
 		}
 
-		private BaseTool FindTool (string name)
+		private BaseTool? FindTool (string name)
 		{
-			name = name.ToLowerInvariant ();
-			
-			foreach (BaseTool tool in Tools) {
-				if (tool.Name.ToLowerInvariant () == name) {
-					return tool;
-				}
-			}
-			
-			return null;
-		}
-		
-		public BaseTool CurrentTool {
-			get { if (index >= 0) {
-					return Tools[index];}
-				else {
-					DummyTool dummy = new DummyTool ();
-					SetCurrentTool(dummy);
-					return dummy;
-				}
-			}
-		}
-		
-		public BaseTool PreviousTool {
-			get { return Tools[prev_index]; }
+			return tools.FirstOrDefault (t => string.Compare (name, t.GetType ().Name, true) == 0);
 		}
 
 		public void Commit ()
 		{
-			if (CurrentTool != null)
-				CurrentTool.DoCommit ();
+			CurrentTool?.DoCommit (PintaCore.Workspace.ActiveDocumentOrDefault);
 		}
 
-		public void SetCurrentTool(BaseTool tool)
+		public void SetCurrentTool (BaseTool tool)
 		{
-			int i = Tools.IndexOf (tool);
-			
-			if (index == i)
+			// Bail if this is already the current tool
+			if (CurrentTool == tool)
 				return;
 
 			// Unload previous tool if needed
-			if (index >= 0) {
-				prev_index = index;
-				Tools[index].DoClearToolBar (PintaCore.Chrome.ToolToolBar);
-				Tools[index].DoDeactivated(tool);
-				Tools[index].ToolItem.Active = false;
+			if (CurrentTool is not null) {
+				PreviousTool = CurrentTool;
+				DeactivateTool (PreviousTool, tool);
 			}
-			
+
 			// Load new tool
-			index = i;
+			CurrentTool = tool;
+
 			tool.ToolItem.Active = true;
-			tool.DoActivated();
+			tool.DoActivated (PintaCore.Workspace.ActiveDocumentOrDefault);
+
+			ToolImage.Set (tool.Icon);
+
+			PintaCore.Chrome.ToolToolBar.AppendItem (ToolLabel);
+			PintaCore.Chrome.ToolToolBar.AppendItem (ToolImage);
+			PintaCore.Chrome.ToolToolBar.AppendItem (ToolSeparator);
+
 			tool.DoBuildToolBar (PintaCore.Chrome.ToolToolBar);
-			
+
 			PintaCore.Workspace.Invalidate ();
-			PintaCore.Chrome.SetStatusBarText (string.Format (" {0}: {1}", tool.Name, tool.StatusBarText));
+			PintaCore.Chrome.SetStatusBarText ($" {tool.Name}: {tool.StatusBarText}");
 		}
 
 		public bool SetCurrentTool (string tool)
 		{
-			BaseTool t = FindTool (tool);
-			
-			if (t != null) {
-				SetCurrentTool(t);
+			if (FindTool (tool) is BaseTool t) {
+				SetCurrentTool (t);
 				return true;
 			}
-			
+
 			return false;
 		}
-		
+
 		public void SetCurrentTool (Gdk.Key shortcut)
 		{
-			BaseTool tool = FindNextTool (shortcut);
-			
-			if (tool != null)
-				SetCurrentTool(tool);
+			if (FindNextTool (shortcut) is BaseTool tool)
+				SetCurrentTool (tool);
 		}
 
-		private BaseTool FindNextTool (Gdk.Key shortcut)
+		private BaseTool? FindNextTool (Gdk.Key shortcut)
 		{
-			shortcut = shortcut.ToUpper();
+			// Find all tools with this shortcut
+			var shortcut_tools = tools.Where (t => t.ShortcutKey.ToUpper () == shortcut.ToUpper ()).ToList ();
 
-			if (groupedTools.ContainsKey(shortcut))
-			{
-				for (int i = 0; i < groupedTools[shortcut].Count; i++)
-				{
-					if (LastUsedKey != shortcut)
-					{
-						// Return first tool in group.
-						PressedShortcutCounter = (1 % groupedTools[shortcut].Count);
-						LastUsedKey = shortcut;
-						return groupedTools[shortcut][0];
-					}
-					else if(i == PressedShortcutCounter)
-					{
-						var tool = groupedTools[shortcut][PressedShortcutCounter];
-						PressedShortcutCounter = (i + 1) % groupedTools[shortcut].Count;
-						return tool;
-					}
-				}
+			// No tools with this shortcut, bail
+			if (!shortcut_tools.Any ())
+				return null;
+
+			// Only one option, return it
+			if (shortcut_tools.Count == 1 || CurrentTool is null)
+				return shortcut_tools.First ();
+
+			// Get the tool after the currently selected tool
+			var next_index = shortcut_tools.IndexOf (CurrentTool) + 1;
+
+			// Wrap if we're past the final tool
+			if (next_index >= shortcut_tools.Count)
+				next_index = 0;
+			return shortcut_tools[next_index];
+		}
+
+		private void DeactivateTool (BaseTool tool, BaseTool? newTool)
+		{
+			var toolbar = PintaCore.Chrome.ToolToolBar;
+
+			while (toolbar.NItems > 0)
+				toolbar.Remove (toolbar.Children[toolbar.NItems - 1]);
+
+			tool.DoDeactivated (PintaCore.Workspace.ActiveDocumentOrDefault, newTool);
+			tool.ToolItem.Active = false;
+		}
+
+		public void DoMouseDown (Document document, ButtonPressEventArgs args)
+		{
+			if (!TryMouseDownPanOverride (document, args))
+				CurrentTool?.DoMouseDown (document, args);
+		}
+
+		public void DoMouseMove (Document document, MotionNotifyEventArgs args)
+		{
+			if (!TryMouseMovePanOverride (document, args))
+				CurrentTool?.DoMouseMove (document, args);
+		}
+
+		public void DoMouseUp (Document document, ButtonReleaseEventArgs args)
+		{
+			if (!TryMouseUpPanOverride (document, args))
+				CurrentTool?.DoMouseUp (document, args);
+		}
+
+		public void DoMouseDown (Document document, ToolMouseEventArgs e) => CurrentTool?.DoMouseDown (document, e);
+		public void DoKeyDown (Document document, KeyPressEventArgs args) => CurrentTool?.DoKeyDown (document, args);
+		public void DoKeyUp (Document document, KeyReleaseEventArgs args) => CurrentTool?.DoKeyUp (document, args);
+		public void DoAfterSave (Document document) => CurrentTool?.DoAfterSave (document);
+		public bool DoHandlePaste (Document document, Clipboard clipboard) => CurrentTool?.DoHandlePaste (document, clipboard) ?? false;
+
+		public IEnumerator<BaseTool> GetEnumerator () => tools.GetEnumerator ();
+
+		System.Collections.IEnumerator System.Collections.IEnumerable.GetEnumerator () => tools.GetEnumerator ();
+
+		private bool TryMouseDownPanOverride (Document document, ButtonPressEventArgs args)
+		{
+			if (is_panning)
+				return true;
+
+			if (args.Event.Button == GtkExtensions.MouseMiddleButton && TryGetPanTool (out var pan)) {
+				is_panning = true;
+				stored_cursor = document.Workspace.Canvas.Window.Cursor;
+				document.Workspace.Canvas.Window.Cursor = pan.DefaultCursor;
+				pan.DoMouseDown (document, args);
+				return true;
 			}
 
-            return null;
-		}
-		
-		private void OnToolAdded (BaseTool tool)
-		{
-			if (ToolAdded != null)
-				ToolAdded (this, new ToolEventArgs (tool));
+			return false;
 		}
 
-		private void OnToolRemoved (BaseTool tool)
+		private bool TryMouseMovePanOverride (Document document, MotionNotifyEventArgs args)
 		{
-			if (ToolRemoved != null)
-				ToolRemoved (this, new ToolEventArgs (tool));
+			if (is_panning && TryGetPanTool (out var pan)) {
+				pan.DoMouseMove (document, args);
+				return true;
+			}
+
+			return false;
 		}
 
-		#region IEnumerable<BaseTool> implementation
-		public IEnumerator<BaseTool> GetEnumerator ()
+		private bool TryMouseUpPanOverride (Document document, ButtonReleaseEventArgs args)
 		{
-			return Tools.GetEnumerator ();
-		}
-		#endregion
+			if (is_panning && TryGetPanTool (out var pan)) {
+				// Ignore any mouse button releases that aren't Middle
+				if (args.Event.Button != GtkExtensions.MouseMiddleButton)
+					return true;
 
-		#region IEnumerable implementation
-		System.Collections.IEnumerator System.Collections.IEnumerable.GetEnumerator ()
-		{
-			return Tools.GetEnumerator ();
+				is_panning = false;
+				pan.DoMouseUp (document, args);
+				document.Workspace.Canvas.Window.Cursor = stored_cursor;
+				return true;
+			}
+
+			return false;
 		}
-		#endregion
+
+		private bool TryGetPanTool ([NotNullWhen (true)] out BaseTool? tool)
+		{
+			tool = FindTool ("PanTool");
+
+			return tool is not null;
+		}
 
 		class ToolSorter : Comparer<BaseTool>
 		{
-			public override int Compare (BaseTool x, BaseTool y)
+			public override int Compare (BaseTool? x, BaseTool? y)
 			{
-				return x.Priority - y.Priority;
+
+				return (x?.Priority ?? 0) - (y?.Priority ?? 0);
 			}
 		}
-	}
 
-	//This tool does nothing, is used when no tools are in toolbox. If used seriously will probably
-	// throw a zillion exceptions due to missing overrides
-	public class DummyTool : BaseTool
-	{
-		public override string Name { get { return Mono.Unix.Catalog.GetString ("No tool selected."); } }
-		public override string Icon { get { return Gtk.Stock.MissingImage; } }
-		public override string StatusBarText { get { return Mono.Unix.Catalog.GetString ("No tool selected."); } }
+		private ToolBarLabel? tool_label;
+		private ToolBarImage? tool_image;
+		private SeparatorToolItem? tool_sep;
 
-		protected override void OnBuildToolBar (Toolbar tb)
-		{
-			tool_label = null;
-			tool_image = null;
-			tool_sep = null;
-		}
-	}
-
-	//Key extensions for more convenient usage of Gdk key enumerator
-	public static class KeyExtensions
-    {
-		public static Gdk.Key ToUpper(this Gdk.Key k1)
-		{
-            try
-            {
-				return (Gdk.Key)Enum.Parse(typeof(Gdk.Key), k1.ToString().ToUpperInvariant());
-			}
-            catch (ArgumentException)
-            {
-				//there is a need to catch argument exception because some buttons have not its UpperCase variant
-				return k1;
-            }
-		}
+		private ToolBarLabel ToolLabel => tool_label ??= new ToolBarLabel ($" {Translations.GetString ("Tool")}:  ");
+		private ToolBarImage ToolImage => tool_image ??= new ToolBarImage (string.Empty);
+		private SeparatorToolItem ToolSeparator => tool_sep ??= new SeparatorToolItem ();
 	}
 }

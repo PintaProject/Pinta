@@ -20,22 +20,22 @@ namespace Pinta.Effects
 		}
 
 		public override string Name {
-			get { return Mono.Unix.Catalog.GetString ("Levels"); }
+			get { return Translations.GetString ("Levels"); }
 		}
 
 		public override bool IsConfigurable {
 			get { return true; }
 		}
 
-		public override Gdk.Key AdjustmentMenuKey {
-			get { return Gdk.Key.L; }
+		public override string AdjustmentMenuKey {
+			get { return "L"; }
 		}
 
-		public override Gdk.ModifierType AdjustmentMenuKeyModifiers {
-			get { return Gdk.ModifierType.ControlMask; }
+		public override string AdjustmentMenuKeyModifiers {
+			get { return "<Primary>"; }
 		}
 		
-		public LevelsData Data { get { return EffectData as LevelsData; } }
+		public LevelsData Data { get { return (LevelsData)EffectData!; } } // NRT - Set in constructor
 		
 		public LevelsEffect ()
 		{
@@ -43,16 +43,19 @@ namespace Pinta.Effects
 		}
 		
 		public override bool LaunchConfiguration ()
-		{			
-			var dialog = new LevelsDialog (Data);
-			dialog.Title = Name;
-			dialog.Icon = PintaCore.Resources.GetIcon (Icon);
-			
-			int response = dialog.Run ();
+		{
+			using (var dialog = new LevelsDialog(Data))
+			{
+				dialog.Title = Name;
+				dialog.Icon = PintaCore.Resources.GetIcon(Icon);
 
-			dialog.Destroy ();
-			
-			return (response == (int)Gtk.ResponseType.Ok);
+				var response = Gtk.ResponseType.None;
+				while (response == Gtk.ResponseType.None) {
+					response = (Gtk.ResponseType) dialog.Run ();
+				}
+
+				return response == Gtk.ResponseType.Ok;
+			}
 		}
 		
 		public override void Render (ImageSurface src, ImageSurface dest, Gdk.Rectangle[] rois)

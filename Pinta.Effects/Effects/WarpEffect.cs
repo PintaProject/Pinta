@@ -36,7 +36,7 @@ namespace Pinta.Effects
 	{
 
 		public WarpData Data {
-			get { return EffectData as WarpData; }
+			get { return (WarpData)EffectData!; } // NRT - Set in constructor
 		}
 		
 		public WarpEffect ()

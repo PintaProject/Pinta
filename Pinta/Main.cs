@@ -29,7 +29,6 @@ using Gtk;
 using Mono.Options;
 using System.Collections.Generic;
 using Pinta.Core;
-using Mono.Unix;
 using System.IO;
 using System.Reflection;
 using System.Runtime.InteropServices;
@@ -44,7 +43,7 @@ namespace Pinta
 			string locale_dir = Path.Combine (SystemManager.GetDataRootDirectory (), "locale");
 
 			try {
-				Catalog.Init ("pinta", locale_dir);
+				Translations.Init ("pinta", locale_dir);
 			} catch (Exception ex) {
 				Console.WriteLine (ex);
 			}
@@ -54,9 +53,9 @@ namespace Pinta
                         bool show_version = false;
 			
 			var p = new OptionSet () {
-                                { "h|help", Catalog.GetString("Show this message and exit."), v => show_help = v != null },
-                                { "v|version", Catalog.GetString("Display the application version."), v => show_version = v != null },
-				{ "rt|render-threads=", Catalog.GetString ("number of threads to use for rendering"), (int v) => threads = v }
+                                { "h|help", Translations.GetString("Show this message and exit."), v => show_help = v != null },
+                                { "v|version", Translations.GetString("Display the application version."), v => show_version = v != null },
+				{ "rt|render-threads=", Translations.GetString ("number of threads to use for rendering"), (int v) => threads = v }
 			};
 
 			List<string> extra;
@@ -83,13 +82,16 @@ namespace Pinta
 
 			GLib.ExceptionManager.UnhandledException += new GLib.UnhandledExceptionHandler (ExceptionManager_UnhandledException);
 
-			if (SystemManager.GetOperatingSystem () == OS.Windows) {
-				SetWindowsGtkPath ();
-			}
-			
 			Application.Init ();
-			new MainWindow ();
-			
+
+			// For testing a dark variant of the theme.
+			//Gtk.Settings.Default.SetProperty("gtk-application-prefer-dark-theme", new GLib.Value(true));
+
+			// Add our icons to the search path.
+			Gtk.IconTheme.Default.AppendSearchPath(Pinta.Core.SystemManager.GetDataRootDirectory() + "/icons");
+
+			var app = new MainWindow();
+
 			if (threads != -1)
 				Pinta.Core.PintaCore.System.RenderThreads = threads;
 
@@ -97,16 +99,16 @@ namespace Pinta
 				RegisterForAppleEvents ();
 			}
 
-			OpenFilesFromCommandLine (extra);
-			
-			Application.Run ();
+			// TODO-GTK3 - try using the GTK command line parsing once GtkSharp supports it.
+			app.Activated += (_, _) => OpenFilesFromCommandLine (extra);
+			app.Run ("pinta", Array.Empty<string> ());
 		}
 
                 private static void ShowHelp (OptionSet p)
                 {
-                    Console.WriteLine (Catalog.GetString ("Usage: pinta [files]"));
+                    Console.WriteLine (Translations.GetString ("Usage: pinta [files]"));
                     Console.WriteLine ();
-                    Console.WriteLine (Catalog.GetString ("Options: "));
+                    Console.WriteLine (Translations.GetString ("Options: "));
                     p.WriteOptionDescriptions (Console.Out);
                 }
 
@@ -123,8 +125,13 @@ namespace Pinta
 
 			if (extra.Count > 0)
 			{
-				foreach (var file in extra)
-					PintaCore.Workspace.OpenFile (file);
+				foreach (var file in extra) {
+					string path = file;
+					if (path.StartsWith ("file://"))
+						path = new Uri (path).LocalPath;
+
+					PintaCore.Workspace.OpenFile (path);
+				}
 			}
 			else
 			{
@@ -148,7 +155,7 @@ namespace Pinta
 		{
 			MacInterop.ApplicationEvents.Quit += (sender, e) => {
 				GLib.Timeout.Add (10, delegate {
-					PintaCore.Actions.File.Exit.Activate ();
+					PintaCore.Actions.App.Exit.Activate();
 					return false;
 				});
 				e.Handled = true;
@@ -175,40 +182,6 @@ namespace Pinta
 				}
 				e.Handled = true;
 			};
-		}
-
-		[DllImport ("kernel32.dll", CharSet = CharSet.Unicode, SetLastError = true)]
-		[return: MarshalAs (UnmanagedType.Bool)]
-		static extern bool SetDllDirectory (string lpPathName);
-
-		/// <summary>
-		/// Explicitly add GTK+ to the search path.
-		/// From MonoDevelop: https://bugzilla.xamarin.com/show_bug.cgi?id=10558
-		/// </summary>
-		private static void SetWindowsGtkPath ()
-		{
-			string location = null;
-			using (var key = Microsoft.Win32.Registry.LocalMachine.OpenSubKey (@"SOFTWARE\Xamarin\GtkSharp\InstallFolder")) {
-				if (key != null) {
-					location = key.GetValue (null) as string;
-				}
-			}
-
-			if (location == null || !File.Exists (Path.Combine (location, "bin", "libgtk-win32-2.0-0.dll"))) {
-				System.Console.Error.WriteLine ("Did not find registered GTK# installation");
-				return;
-			}
-
-			var path = Path.Combine (location, @"bin");
-			try {
-				if (SetDllDirectory (path)) {
-					return;
-				}
-			}
-			catch (EntryPointNotFoundException) {
-			}
-
-			System.Console.Error.WriteLine ("Unable to set GTK# dll directory");
 		}
 	}
 }

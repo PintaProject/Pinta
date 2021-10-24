@@ -15,25 +15,25 @@ namespace Pinta.Effects
 {
 	public class PosterizeEffect : BaseEffect
 	{
-		UnaryPixelOps.PosterizePixel op = null;
+		UnaryPixelOps.PosterizePixel? op = null;
 		
 		public override string Icon {
 			get { return "Menu.Adjustments.Posterize.png"; }
 		}
 
 		public override string Name {
-			get { return Mono.Unix.Catalog.GetString ("Posterize"); }
+			get { return Translations.GetString ("Posterize"); }
 		}
 
 		public override bool IsConfigurable {
 			get { return true; }
 		}
 
-		public override Gdk.Key AdjustmentMenuKey {
-			get { return Gdk.Key.P; }
+		public override string AdjustmentMenuKey {
+			get { return "P"; }
 		}
 
-		public PosterizeData Data { get { return EffectData as PosterizeData; } }
+		public PosterizeData Data { get { return (PosterizeData)EffectData!; } } // NRT - Set in constructor
 		
 		public PosterizeEffect ()
 		{
@@ -42,16 +42,15 @@ namespace Pinta.Effects
 
 		public override bool LaunchConfiguration ()
 		{
-			var dialog = new PosterizeDialog ();
-			dialog.Title = Name;
-			dialog.Icon = PintaCore.Resources.GetIcon (Icon);
-			dialog.EffectData = Data;
-			
-			int response = dialog.Run ();
-			
-			dialog.Destroy ();
+			using (var dialog = new PosterizeDialog())
+			{
+				dialog.Title = Name;
+				dialog.Icon = PintaCore.Resources.GetIcon(Icon);
+				dialog.EffectData = Data;
 
-			return (response == (int)Gtk.ResponseType.Ok);
+				int response = dialog.Run();
+				return (response == (int)Gtk.ResponseType.Ok);
+			}
 		}
 
 		public override void Render (ImageSurface src, ImageSurface dest, Gdk.Rectangle[] rois)

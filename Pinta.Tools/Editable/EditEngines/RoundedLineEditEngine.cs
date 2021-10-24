@@ -1,4 +1,4 @@
-﻿// 
+// 
 // RoundedLineEditEngine.cs
 //  
 // Author:
@@ -30,7 +30,6 @@ using Pinta.Core;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
-using Mono.Unix;
 
 namespace Pinta.Tools
 {
@@ -40,7 +39,7 @@ namespace Pinta.Tools
 		{
 			get
 			{
-				return Catalog.GetString("Rounded Line Shape");
+				return Translations.GetString("Rounded Line Shape");
 			}
 		}
 
@@ -48,55 +47,28 @@ namespace Pinta.Tools
 
 		protected double previousRadius = DefaultRadius;
 
-		protected ToolBarComboBox radius;
-		protected ToolBarLabel radius_label;
-		protected ToolBarButton radius_minus;
-		protected ToolBarButton radius_plus;
-		protected Gtk.SeparatorToolItem radius_sep;
+		// NRT - Created in HandleBuildToolBar
+		protected ToolBarWidget<Gtk.SpinButton> radius = null!;
+		protected ToolBarLabel radius_label = null!;
+		protected Gtk.SeparatorToolItem radius_sep = null!;
 
 		public double Radius
 		{
 			get
 			{
-				double rad;
-
 				if (radius != null)
-				{
-					if (Double.TryParse(radius.ComboBox.ActiveText, out rad))
-					{
-						if (rad >= 0)
-						{
-							(radius.ComboBox as Gtk.ComboBoxEntry).Entry.Text = rad.ToString();
-
-							return rad;
-						}
-						else
-						{
-							(radius.ComboBox as Gtk.ComboBoxEntry).Entry.Text = BrushWidth.ToString();
-
-							return BrushWidth;
-						}
-					}
-					else
-					{
-						(radius.ComboBox as Gtk.ComboBoxEntry).Entry.Text = BrushWidth.ToString();
-
-						return BrushWidth;
-					}
-				}
+					return radius.Widget.Value;
 				else
-				{
 					return BrushWidth;
-				}
 			}
 
 			set
 			{
 				if (radius != null)
 				{
-					(radius.ComboBox as Gtk.ComboBoxEntry).Entry.Text = value.ToString();
+					radius.Widget.Value = value;
 
-					ShapeEngine selEngine = SelectedShapeEngine;
+					ShapeEngine? selEngine = SelectedShapeEngine;
 
 					if (selEngine != null && selEngine.ShapeType == ShapeTypes.RoundedLineSeries)
 					{
@@ -110,10 +82,19 @@ namespace Pinta.Tools
 			}
 		}
 
+		private string RADIUS_SETTING (string prefix) => $"{prefix}-radius";
 
-		public override void HandleBuildToolBar(Gtk.Toolbar tb)
+		public override void OnSaveSettings (ISettingsService settings, string toolPrefix)
 		{
-			base.HandleBuildToolBar(tb);
+			base.OnSaveSettings (settings, toolPrefix);
+
+			if (radius is not null)
+				settings.PutSetting (RADIUS_SETTING (toolPrefix), (int) radius.Widget.Value);
+		}
+
+		public override void HandleBuildToolBar(Gtk.Toolbar tb, ISettingsService settings, string toolPrefix)
+		{
+			base.HandleBuildToolBar(tb, settings, toolPrefix);
 
 
 			if (radius_sep == null)
@@ -122,25 +103,15 @@ namespace Pinta.Tools
 			tb.AppendItem(radius_sep);
 
 			if (radius_label == null)
-				radius_label = new ToolBarLabel(string.Format("  {0}: ", Catalog.GetString("Radius")));
+				radius_label = new ToolBarLabel(string.Format("  {0}: ", Translations.GetString("Radius")));
 
 			tb.AppendItem(radius_label);
 
-			if (radius_minus == null)
-			{
-				radius_minus = new ToolBarButton("Toolbar.MinusButton.png", "", Catalog.GetString("Decrease shape's corner radius"));
-				radius_minus.Clicked += RadiusMinusButtonClickedEvent;
-			}
-
-			tb.AppendItem(radius_minus);
-
 			if (radius == null)
 			{
-				radius = new ToolBarComboBox(65, 16, true, "0", "1", "2", "3", "4", "5", "6", "7", "8", "9",
-				"10", "11", "12", "13", "14", "15", "20", "25", "30", "40",
-				"50", "60", "70", "80");
+				radius = new (new Gtk.SpinButton (0, 1e5, 1) { Value = settings.GetSetting (RADIUS_SETTING (toolPrefix), 20) });
 
-				radius.ComboBox.Changed += (o, e) =>
+				radius.Widget.ValueChanged += (o, e) =>
 				{
 					//Go through the Get/Set routine.
 					Radius = Radius;
@@ -148,27 +119,6 @@ namespace Pinta.Tools
 			}
 
 			tb.AppendItem(radius);
-
-			if (radius_plus == null)
-			{
-				radius_plus = new ToolBarButton("Toolbar.PlusButton.png", "", Catalog.GetString("Increase shape's corner radius"));
-				radius_plus.Clicked += RadiusPlusButtonClickedEvent;
-			}
-
-			tb.AppendItem(radius_plus);
-		}
-
-		private void RadiusMinusButtonClickedEvent(object o, EventArgs args)
-		{
-			if (Math.Truncate(Radius) > 0)
-			{
-				Radius = Math.Truncate(Radius) - 1;
-			}
-		}
-
-		private void RadiusPlusButtonClickedEvent(object o, EventArgs args)
-		{
-			Radius = Math.Truncate(Radius) + 1;
 		}
 
 
@@ -181,13 +131,13 @@ namespace Pinta.Tools
 		{
 			Document doc = PintaCore.Workspace.ActiveDocument;
 
-			ShapeEngine newEngine = new RoundedLineEngine(doc.CurrentUserLayer, null, Radius, owner.UseAntialiasing,
+			ShapeEngine newEngine = new RoundedLineEngine(doc.Layers.CurrentUserLayer, null, Radius, owner.UseAntialiasing,
 				BaseEditEngine.OutlineColor, BaseEditEngine.FillColor, owner.EditEngine.BrushWidth);
 
 			AddRectanglePoints(ctrlKey, clickedOnControlPoint, newEngine, prevSelPoint);
 
 			//Set the new shape's DashPattern option.
-			newEngine.DashPattern = dash_pattern_box.comboBox.ComboBox.ActiveText;
+			newEngine.DashPattern = dash_pattern_box.comboBox!.ComboBox.ActiveText; // NRT - Code assumes this is not-null
 
 			return newEngine;
 		}

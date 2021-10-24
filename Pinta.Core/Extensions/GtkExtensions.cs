@@ -34,183 +34,92 @@ namespace Pinta.Core
 		public const int MouseLeftButton = 1;
 		public const int MouseMiddleButton = 2;
 		public const int MouseRightButton = 3;
-
-		public static void AddWidgetItem (this Toolbar tb, Widget w)
-		{
-			w.Show ();
-			ToolItem ti = new ToolItem ();
-			ti.Add (w);
-			ti.Show ();
-			tb.Insert (ti, tb.NItems);
-		}
 		
 		public static void AppendItem (this Toolbar tb, ToolItem item)
 		{
 			item.Show ();
 			tb.Insert (item, tb.NItems);
 		}
-		
-		public static void AppendSeparator (this Menu menu)
+
+		public static void AppendItem (this Statusbar tb, ToolItem item, uint padding = 0)
 		{
-			SeparatorMenuItem smi = new SeparatorMenuItem ();
-			smi.Show ();
-			menu.Append (smi);
+			item.Show ();
+			tb.PackEnd (item, false, false, padding);
 		}
 
-		public static MenuItem AppendItem (this Menu menu, MenuItem item)
-		{
-			menu.Append (item);
-			return item;
-		}
-		
-		public static Gtk.Action AppendAction (this Menu menu, string actionName, string actionLabel, string actionTooltip, string actionIcon)
-		{
-			Gtk.Action action = new Gtk.Action (actionName, actionLabel, actionTooltip, actionIcon);
-			menu.AppendItem ((MenuItem)action.CreateMenuItem ());
-			return action;
-		}
+		public static Gtk.ToolButton CreateToolBarItem (this Command action)
+        {
+			var item = new ToolButton(null, action.ShortLabel ?? action.Label)
+			{
+				ActionName = action.FullName,
+				TooltipText = action.Tooltip ?? action.Label,
+				IsImportant = action.IsImportant,
+				IconName = action.IconName
+			};
+            return item;
+        }
 
-		public static Gtk.ToggleAction AppendToggleAction (this Menu menu, string actionName, string actionLabel, string actionTooltip, string actionIcon)
+		public static void AddAction(this Gtk.Application app, Command action)
 		{
-			Gtk.ToggleAction action = new Gtk.ToggleAction (actionName, actionLabel, actionTooltip, actionIcon);
-			menu.AppendItem ((MenuItem)action.CreateMenuItem ());
-			return action;
+			app.AddAction(action.Action);
 		}
 
-		public static MenuItem AppendMenuItemSorted (this Menu menu, MenuItem item)
-		{
-			var text = item.GetText ();
+		public static void AddAccelAction(this Gtk.Application app, Command action, string accel)
+        {
+			app.AddAction(action);
+			app.SetAccelsForAction(action.FullName, new string[] { accel });
+		}
 
-			for (int i = 0; i < menu.Children.Length; i++)
-				if (string.Compare (((menu.Children[i]) as MenuItem).GetText (), text) > 0) {
-					menu.Insert (item, i);
-					return item;
+		public static void AddAccelAction(this Gtk.Application app, Command action, string[] accels)
+		{
+			app.AddAction(action);
+			app.SetAccelsForAction(action.FullName, accels);
+		}
+
+		public static void Remove(this GLib.Menu menu, Command action)
+        {
+			for (int i = 0; i < menu.NItems; ++i)
+			{
+				var name_attr = (string)menu.GetItemAttributeValue(i, "action", GLib.VariantType.String);
+				if (name_attr == action.FullName)
+				{
+					menu.Remove(i);
+					return;
 				}
-
-			menu.AppendItem (item);
-			return item;
+			}
 		}
 
-		public static string GetText (this MenuItem item)
+		public static void AppendMenuItemSorted(this GLib.Menu menu, GLib.MenuItem item)
 		{
-			foreach (var child in item.AllChildren)
-				if (child is Label)
-					return (child as Label).Text;
+			var new_label = (string)item.GetAttributeValue("label", GLib.VariantType.String);
 
-			return string.Empty;
+			for (int i = 0; i < menu.NItems; i++)
+			{
+				var label = (string)menu.GetItemAttributeValue(i, "label", GLib.VariantType.String);
+				if (string.Compare(label, new_label) > 0)
+				{
+					menu.InsertItem(i, item);
+					return;
+				}
+			}
+
+			menu.AppendItem(item);
 		}
 
-		public static Gtk.ToolItem CreateToolBarItem (this Gtk.Action action)
-		{
-			Gtk.ToolItem item = (Gtk.ToolItem)action.CreateToolItem ();
-			item.TooltipText = action.Label;
-			return item;
-		}
-		
-		public static Gtk.ImageMenuItem CreateAcceleratedMenuItem (this Gtk.Action action, Gdk.Key key, Gdk.ModifierType mods)
-		{
-			ImageMenuItem item = (ImageMenuItem)action.CreateMenuItem ();
-			
-			(item.Child as AccelLabel).AccelWidget = item;
-			item.AddAccelerator ("activate", PintaCore.Actions.AccelGroup, new AccelKey (key, mods, AccelFlags.Visible));
-
-			return item;
-		}
-
-		public static Gtk.CheckMenuItem CreateAcceleratedMenuItem (this Gtk.ToggleAction action, Gdk.Key key, Gdk.ModifierType mods)
-		{
-			CheckMenuItem item = (CheckMenuItem)action.CreateMenuItem ();
-
-			(item.Child as AccelLabel).AccelWidget = item;
-			item.AddAccelerator ("activate", PintaCore.Actions.AccelGroup, new AccelKey (key, mods, AccelFlags.Visible));
-
-			return item;
-		}
-
-		public static Gtk.MenuItem CreateSubMenuItem (this Gtk.Action action)
-		{
-			MenuItem item = (MenuItem)action.CreateMenuItem ();
-			
-			Menu sub_menu = new Menu ();
-			item.Submenu = sub_menu;
-
-			return item;
-		}
-
-        public static void Toggle (this Gtk.ToggleToolButton button)
+		public static void Toggle (this Gtk.ToggleToolButton button)
         {
             button.Active = !button.Active;
         }
 
-		/// <summary>
-		/// Initialize an image preview widget for the dialog
-		/// </summary>
-		public static void AddImagePreview (this FileChooserDialog dialog)
-		{
-			dialog.PreviewWidget = new Image ();
-			dialog.UpdatePreview += new EventHandler (OnUpdateImagePreview);
-		}
-
-		private const int MaxPreviewWidth = 256;
-		private const int MaxPreviewHeight = 512;
-
-		/// <summary>
-		/// Update the image preview widget of a FileChooserDialog
-		/// </summary>
-		private static void OnUpdateImagePreview (object sender, EventArgs e)
-		{
-			FileChooserDialog dialog = (FileChooserDialog)sender;
-			Image preview = (Image)dialog.PreviewWidget;
-
-			if (preview.Pixbuf != null) {
-				preview.Pixbuf.Dispose ();
-			}
-
-			try {
-				Gdk.Pixbuf pixbuf = null;
-				string filename = dialog.PreviewFilename;
-
-				IImageImporter importer = PintaCore.System.ImageFormats.GetImporterByFile (filename);
-
-				if (importer != null) {
-					pixbuf = importer.LoadThumbnail (filename, MaxPreviewWidth, MaxPreviewHeight, dialog);
-				}
-
-				if (pixbuf == null) {
-					dialog.PreviewWidgetActive = false;
-					return;
-				}
-
-				// Resize the thumbnail in case the importer didn't.
-				if (pixbuf.Width > MaxPreviewWidth || pixbuf.Width > MaxPreviewHeight) {
-					double ratio = Math.Min ((double)MaxPreviewWidth / pixbuf.Width,
-					                         (double)MaxPreviewHeight / pixbuf.Height);
-					var old_pixbuf = pixbuf;
-					pixbuf = pixbuf.ScaleSimple ((int)(ratio * pixbuf.Width),
-					                             (int)(ratio * pixbuf.Height),
-					                             Gdk.InterpType.Bilinear);
-					old_pixbuf.Dispose ();
-				}
-
-				// add padding so that small images don't cause the dialog to shrink
-				preview.Xpad = (MaxPreviewWidth - pixbuf.Width) / 2;
-				preview.Pixbuf = pixbuf;
-				dialog.PreviewWidgetActive = true;
-			} catch (GLib.GException) {
-				// if the image preview failed, don't show the preview widget
-				dialog.PreviewWidgetActive = false;
-			}
-		}
-
         public static int GetItemCount (this ComboBox combo)
         {
-            return (combo.Model as ListStore).IterNChildren ();
+            return ((ListStore)combo.Model).IterNChildren ();
         }
 
         public static int FindValue<T> (this ComboBox combo, T value)
         {
             for (var i = 0; i < combo.GetItemCount (); i++)
-                if (combo.GetValueAt<T> (i).Equals (value))
+                if (combo.GetValueAt<T> (i)?.Equals (value) == true)
                     return i;
 
             return -1;
@@ -221,7 +130,7 @@ namespace Pinta.Core
             TreeIter iter;
             
             // Set the tree iter to the correct row
-            (combo.Model as ListStore).IterNthChild (out iter, index);
+            ((ListStore)combo.Model).IterNthChild (out iter, index);
 
             // Retrieve the value of the first column at that row
             return (T)combo.Model.GetValue (iter, 0);
@@ -232,10 +141,146 @@ namespace Pinta.Core
             TreeIter iter;
 
             // Set the tree iter to the correct row
-            (combo.Model as ListStore).IterNthChild (out iter, index);
+            ((ListStore)combo.Model).IterNthChild (out iter, index);
 
             // Set the value of the first column at that row
             combo.Model.SetValue (iter, 0, value);
         }
+
+		/// <summary>
+		/// Gets the value in the specified column in the first selected row in a TreeView.
+		/// </summary>
+		public static T? GetSelectedValueAt<T> (this TreeView treeView, int column) where T : class
+		{
+			var paths = treeView.Selection.GetSelectedRows ();
+
+			if (paths != null && paths.Length > 0 && treeView.Model.GetIter (out var iter, paths[0]))
+				return treeView.Model.GetValue (iter, column) as T;
+
+			return null;
+		}
+
+		/// <summary>
+		/// Gets the value in the specified column in the specified row in a TreeView.
+		/// </summary>
+		public static T? GetValueAt<T> (this TreeView treeView, string path, int column) where T : class
+		{
+			if (treeView.Model.GetIter (out var iter, new TreePath (path)))
+				return treeView.Model.GetValue (iter, column) as T;
+
+			return null;
+		}
+
+		/// <summary>
+		/// Sets the specified row(s) as selected in a TreeView.
+		/// </summary>
+		public static void SetSelectedRows (this TreeView treeView, params int[] indices)
+		{
+			var path = new TreePath (indices);
+			treeView.Selection.SelectPath (path);
+		}
+
+		public static Gdk.Pixbuf LoadIcon(this Gtk.IconTheme theme, string icon_name, int size)
+        {
+			// Simple wrapper to avoid the verbose IconLookupFlags parameter.
+			return theme.LoadIcon(icon_name, size, Gtk.IconLookupFlags.ForceSize);
+		}
+
+		/// <summary>
+		/// Returns the Cancel / Open button pair in the correct order for the current platform.
+		/// This can be used with the Gtk.Dialog constructor.
+		/// </summary>
+		public static object[] DialogButtonsCancelOpen()
+		{
+			if (PintaCore.System.OperatingSystem == OS.Windows)
+            {
+				return new object[] {
+                    Gtk.Stock.Open,
+                    Gtk.ResponseType.Ok,
+                    Gtk.Stock.Cancel,
+                    Gtk.ResponseType.Cancel
+				};
+            }
+			else
+            {
+				return new object[] {
+                    Gtk.Stock.Cancel,
+                    Gtk.ResponseType.Cancel,
+                    Gtk.Stock.Open,
+                    Gtk.ResponseType.Ok
+				};
+            }
+        }
+
+		/// <summary>
+		/// Returns the Cancel / Save button pair in the correct order for the current platform.
+		/// This can be used with the Gtk.Dialog constructor.
+		/// </summary>
+		public static object[] DialogButtonsCancelSave()
+		{
+			if (PintaCore.System.OperatingSystem == OS.Windows)
+            {
+				return new object[] {
+                    Gtk.Stock.Save,
+                    Gtk.ResponseType.Ok,
+                    Gtk.Stock.Cancel,
+                    Gtk.ResponseType.Cancel
+				};
+            }
+			else
+            {
+				return new object[] {
+                    Gtk.Stock.Cancel,
+                    Gtk.ResponseType.Cancel,
+                    Gtk.Stock.Save,
+                    Gtk.ResponseType.Ok
+				};
+            }
+        }
+
+		/// <summary>
+		/// Returns the Cancel / Ok button pair in the correct order for the current platform.
+		/// This can be used with the Gtk.Dialog constructor.
+		/// </summary>
+		public static object[] DialogButtonsCancelOk()
+		{
+			if (PintaCore.System.OperatingSystem == OS.Windows)
+            {
+				return new object[] {
+                    Gtk.Stock.Ok,
+                    Gtk.ResponseType.Ok,
+                    Gtk.Stock.Cancel,
+                    Gtk.ResponseType.Cancel
+				};
+            }
+			else
+            {
+				return new object[] {
+                    Gtk.Stock.Cancel,
+                    Gtk.ResponseType.Cancel,
+                    Gtk.Stock.Ok,
+                    Gtk.ResponseType.Ok
+				};
+            }
+        }
+		/// <summary>
+		/// Returns the platform-specific label for the Ctrl key.
+		/// For example, this is the Cmd key on macOS.
+		/// </summary>
+		public static string CtrlLabel ()
+		{
+			Accelerator.Parse ("<Primary>", out var key, out var mods);
+			return Accelerator.GetLabel (key, mods);
+		}
+
+		/// <summary>
+		/// Returns the platform-specific label for the Alt key.
+		/// For example, this is the Option key on macOS.
+		/// </summary>
+		public static string AltLabel ()
+		{
+			Accelerator.Parse ("<Alt>", out var key, out var mods);
+			return Accelerator.GetLabel (key, mods);
+		}
 	}
 }

@@ -25,7 +25,6 @@
 // THE SOFTWARE.
 
 using System;
-using Mono.Addins.Gui;
 using Pinta.Core;
 
 namespace Pinta.Actions
@@ -46,9 +45,14 @@ namespace Pinta.Actions
 
 		private void Activated (object sender, EventArgs e)
 		{
+			// TODO-GTK3 (addins)
+#if false
 			AddinManagerWindow.AllowInstall = true;
 
 			AddinManagerWindow.Run (PintaCore.Chrome.MainWindow);
+#else
+			throw new NotImplementedException();
+#endif
 
 			//dlg.DeleteEvent += delegate { dlg.Destroy (); };
 		}

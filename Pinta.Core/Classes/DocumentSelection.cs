@@ -28,13 +28,13 @@ using System;
 using System.Linq;
 using System.Collections.Generic;
 using Cairo;
-using ClipperLibrary;
+using ClipperLib;
 
 namespace Pinta.Core
 {
 	public class DocumentSelection : IDisposable
 	{
-		private Path selection_path;
+		private Path? selection_path;
 
 		public List<List<IntPoint>> SelectionPolygons = new List<List<IntPoint>>();
 		public Clipper SelectionClipper = new Clipper();
@@ -62,7 +62,9 @@ namespace Pinta.Core
 		    {
 		        if (selection_path == null)
 		        {
-		            using (var g = new Context (PintaCore.Layers.CurrentLayer.Surface))
+				var doc = PintaCore.Workspace.ActiveDocument;
+
+		            using (var g = new Context (doc.Layers.CurrentUserLayer.Surface))
 		                selection_path = g.CreatePolygonPath (ConvertToPolygonSet (SelectionPolygons));
 		        }
 
@@ -70,7 +72,7 @@ namespace Pinta.Core
 		    }
 		}
 
-	    public event EventHandler SelectionModified;
+	    public event EventHandler? SelectionModified;
 
         /// <summary>
         /// Indicate that the selection has changed.
@@ -393,8 +395,8 @@ namespace Pinta.Core
 
 			// Create a rectangle that is the size of the entire image,
 			// and subtract all of the polygons in the current selection from it.
-			SelectionClipper.AddPolygon (documentPolygon, PolyType.ptSubject);
-			SelectionClipper.AddPolygons (SelectionPolygons, PolyType.ptClip);
+			SelectionClipper.AddPath (documentPolygon, PolyType.ptSubject, true);
+			SelectionClipper.AddPaths (SelectionPolygons, PolyType.ptClip, true);
 			SelectionClipper.Execute (ClipType.ctDifference, resultingPolygons);
 			
 			SelectionClipper.Clear ();
@@ -442,5 +444,35 @@ namespace Pinta.Core
             End = new PointD(0, 0);
             MarkDirty ();
         }
-    }
+
+		/// <summary>
+		/// Returns a rectangle that encloses the entire selection.
+		/// </summary>
+		public Rectangle GetBounds ()
+		{
+			var minX = double.MaxValue;
+			var minY = double.MaxValue;
+			var maxX = double.MinValue;
+			var maxY = double.MinValue;
+
+			// Calculate the minimum rectangular bounds that surround the current selection.
+			foreach (var li in PintaCore.Workspace.ActiveDocument.Selection.SelectionPolygons) {
+				foreach (var ip in li) {
+					if (minX > ip.X)
+						minX = ip.X;
+
+					if (minY > ip.Y)
+						minY = ip.Y;
+
+					if (maxX < ip.X)
+						maxX = ip.X;
+
+					if (maxY < ip.Y)
+						maxY = ip.Y;
+				}
+			}
+
+			return new Rectangle (minX, minY, maxX - minX, maxY - minY);
+		}
+	}
 }

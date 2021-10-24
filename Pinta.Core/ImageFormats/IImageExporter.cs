@@ -25,11 +25,11 @@
 // THE SOFTWARE.
 
 using System;
-using Mono.Addins;
 
 namespace Pinta.Core
 {
-	[TypeExtensionPoint]
+	// TODO-GTK3 (addins)
+	// [TypeExtensionPoint]
 	public interface IImageExporter
 	{
 		/// <summary>

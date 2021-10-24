@@ -25,140 +25,146 @@
 // THE SOFTWARE.
 
 using System;
-using Cairo;
 using Pinta.Core;
-using Mono.Unix;
-using System.Collections.Generic;
 
 namespace Pinta.Tools
 {
-	public class ShapeTool : BaseTool
+	public abstract class ShapeTool : BaseTool
 	{
-		public BaseEditEngine EditEngine;
+		public BaseEditEngine EditEngine { get; }
 
-		public ShapeTool()
+		public ShapeTool (IServiceManager services) : base (services)
 		{
+			EditEngine = CreateEditEngine ();
 		}
 
-		static ShapeTool()
-		{
-			Gtk.IconFactory fact = new Gtk.IconFactory ();
-			fact.Add ("ShapeTool.Outline.png", new Gtk.IconSet (PintaCore.Resources.GetIcon ("ShapeTool.Outline.png")));
-			fact.Add ("ShapeTool.Fill.png", new Gtk.IconSet (PintaCore.Resources.GetIcon ("ShapeTool.Fill.png")));
-			fact.Add ("ShapeTool.OutlineFill.png", new Gtk.IconSet (PintaCore.Resources.GetIcon ("ShapeTool.OutlineFill.png")));
-			fact.AddDefault ();
-		}
-        
-		#region Properties
-		public override Gdk.Key ShortcutKey { get { return Gdk.Key.O; } }
-        
-		protected override bool ShowAntialiasingButton { get { return true; } }
+		public override Gdk.Key ShortcutKey => Gdk.Key.O;
+		protected override bool ShowAntialiasingButton => true;
+		public virtual BaseEditEngine.ShapeTypes ShapeType => BaseEditEngine.ShapeTypes.ClosedLineCurveSeries;
+		public override bool IsEditableShapeTool => true;
 
-		public virtual BaseEditEngine.ShapeTypes ShapeType { get { return BaseEditEngine.ShapeTypes.ClosedLineCurveSeries; } }
-		#endregion
-
-        protected override void OnBuildToolBar(Gtk.Toolbar tb)
-        {
-            base.OnBuildToolBar(tb);
-
-            EditEngine.HandleBuildToolBar(tb);
-        }
-
-		protected override void OnMouseDown(Gtk.DrawingArea canvas, Gtk.ButtonPressEventArgs args, Cairo.PointD point)
-		{
-            EditEngine.HandleMouseDown(canvas, args, point);
-		}
-
-		protected override void OnMouseUp(Gtk.DrawingArea canvas, Gtk.ButtonReleaseEventArgs args, Cairo.PointD point)
-		{
-            EditEngine.HandleMouseUp(canvas, args, point);
-		}
-
-		protected override void OnMouseMove(object o, Gtk.MotionNotifyEventArgs args, Cairo.PointD point)
-		{
-            EditEngine.HandleMouseMove(o, args, point);
-		}
-
-        protected override void OnActivated()
-        {
-            EditEngine.HandleActivated();
-
-            base.OnActivated();
-        }
-
-		protected override void OnDeactivated(BaseTool newTool)
-        {
-            EditEngine.HandleDeactivated(newTool);
-
-            base.OnDeactivated(newTool);
-        }
-
-		protected override void AfterSave()
-		{
-			EditEngine.HandleAfterSave();
-
-			base.AfterSave();
-		}
-
-        protected override void OnCommit()
-        {
-            EditEngine.HandleCommit();
-
-            base.OnCommit();
-        }
-
-        protected override void OnKeyDown(Gtk.DrawingArea canvas, Gtk.KeyPressEventArgs args)
-        {
-            if (!EditEngine.HandleKeyDown(canvas, args))
-            {
-                base.OnKeyDown(canvas, args);
-            }
-        }
-
-        protected override void OnKeyUp(Gtk.DrawingArea canvas, Gtk.KeyReleaseEventArgs args)
-        {
-            if (!EditEngine.HandleKeyUp(canvas, args))
-            {
-                base.OnKeyUp(canvas, args);
-            }
-        }
-
-		public override bool TryHandleUndo()
-		{
-			if (!EditEngine.HandleBeforeUndo())
-			{
-				return base.TryHandleUndo();
+		public override string StatusBarText {
+			get {
+				// Translators: {0} is 'Ctrl', or a platform-specific key such as 'Command' on macOS.
+				return Translations.GetString ("Left click to draw a shape with the primary color." +
+				    "\nLeft click on a shape to add a control point." +
+				    "\nLeft click on a control point and drag to move it." +
+				    "\nRight click on a control point and drag to change its tension." +
+				    "\nHold Shift to snap to angles." +
+				    "\nUse arrow keys to move the selected control point." +
+				    "\nPress {0} + left/right arrows to select control points by order." +
+				    "\nPress Delete to delete the selected control point." +
+				    "\nPress Space to add a new control point at the mouse position." +
+				    "\nHold {0} while pressing Space to create the control point at the exact same position." +
+				    "\nHold {0} while left clicking on a control point to create a new shape at the exact same position." +
+				    "\nHold {0} while clicking outside of the image bounds to create a new shape starting at the edge." +
+				    "\nPress Enter to finalize the shape.", GtkExtensions.CtrlLabel ());
 			}
-			else
-			{
+		}
+
+		protected abstract BaseEditEngine CreateEditEngine ();
+
+		protected override void OnBuildToolBar (Gtk.Toolbar tb)
+		{
+			base.OnBuildToolBar (tb);
+
+			EditEngine.HandleBuildToolBar (tb, Settings, GetType ().Name.ToLowerInvariant ());
+		}
+
+		protected override void OnMouseDown (Document document, ToolMouseEventArgs e)
+		{
+			EditEngine.HandleMouseDown (document, e);
+		}
+
+		protected override void OnMouseUp (Document document, ToolMouseEventArgs e)
+		{
+			EditEngine.HandleMouseUp (document, e);
+		}
+
+		protected override void OnMouseMove (Document document, ToolMouseEventArgs e)
+		{
+			EditEngine.HandleMouseMove (document, e);
+		}
+
+		protected override void OnActivated (Document? document)
+		{
+			EditEngine.HandleActivated ();
+
+			base.OnActivated (document);
+		}
+
+		protected override void OnDeactivated (Document? document, BaseTool? newTool)
+		{
+			EditEngine.HandleDeactivated (newTool);
+
+			base.OnDeactivated (document, newTool);
+		}
+
+		protected override void OnAfterSave (Document document)
+		{
+			EditEngine.HandleAfterSave ();
+
+			base.OnAfterSave (document);
+		}
+
+		protected override void OnCommit (Document? document)
+		{
+			EditEngine.HandleCommit ();
+
+			base.OnCommit (document);
+		}
+
+		protected override bool OnKeyDown (Document document, ToolKeyEventArgs e)
+		{
+			if (EditEngine.HandleKeyDown (document, e))
 				return true;
-			}
+
+			return base.OnKeyDown (document, e);
 		}
 
-		public override bool TryHandleRedo()
+		protected override bool OnKeyUp (Document document, ToolKeyEventArgs e)
 		{
-			if (!EditEngine.HandleBeforeRedo())
-			{
-				return base.TryHandleRedo();
-			}
-			else
-			{
+			if (EditEngine.HandleKeyUp (document, e))
 				return true;
-			}
+
+			return base.OnKeyUp (document, e);
 		}
 
-        public override void AfterUndo()
-        {
-            EditEngine.HandleAfterUndo();
+		protected override bool OnHandleUndo (Document document)
+		{
+			if (!EditEngine.HandleBeforeUndo ())
+				return base.OnHandleUndo (document);
+			else
+				return true;
+		}
 
-            base.AfterUndo();
-        }
+		protected override bool OnHandleRedo (Document document)
+		{
+			if (!EditEngine.HandleBeforeRedo ())
+				return base.OnHandleRedo (document);
+			else
+				return true;
+		}
 
-        public override void AfterRedo()
-        {
-            EditEngine.HandleAfterRedo();
+		protected override void OnAfterUndo (Document document)
+		{
+			EditEngine.HandleAfterUndo ();
 
-            base.AfterRedo();
-        }
+			base.OnAfterUndo (document);
+		}
+
+		protected override void OnAfterRedo (Document document)
+		{
+			EditEngine.HandleAfterRedo ();
+
+			base.OnAfterRedo (document);
+		}
+
+		protected override void OnSaveSettings (ISettingsService settings)
+		{
+			base.OnSaveSettings (settings);
+
+			EditEngine.OnSaveSettings (settings, GetType ().Name.ToLowerInvariant ());
+		}
 	}
 }

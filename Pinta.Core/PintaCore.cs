@@ -40,31 +40,48 @@ namespace Pinta.Core
 		public static ResourceManager Resources { get; private set; }
 		public static ActionManager Actions { get; private set; }
 		public static WorkspaceManager Workspace { get; private set; }
-		public static HistoryManager History { get; private set; }
 		public static SystemManager System { get; private set; }
 		public static LivePreviewManager LivePreview { get; private set; }
 		public static SettingsManager Settings { get; private set; }
 		public static EffectsManager Effects { get; private set; }
+		public static IServiceManager Services { get; }
 
         public const string ApplicationVersion = "1.8";
 
 		static PintaCore ()
 		{
+			// Resources and Settings are intialized first so later
+			// Managers can access them as needed.
 			Resources = new ResourceManager ();
+			Settings = new SettingsManager ();
+
 			Actions = new ActionManager ();
 			Workspace = new WorkspaceManager ();
 			Layers = new LayerManager ();
 			PaintBrushes = new PaintBrushManager ();
 			Tools = new ToolManager ();
-			History = new HistoryManager ();
 			System = new SystemManager ();
 			LivePreview = new LivePreviewManager ();
 			Palette = new PaletteManager ();
-			Settings = new SettingsManager ();
 			Chrome = new ChromeManager ();
 			Effects = new EffectsManager ();
+
+			Services = new ServiceManager ();
+
+			Services.AddService<IResourceService> (Resources);
+			Services.AddService<ISettingsService> (Settings);
+			Services.AddService (Actions);
+			Services.AddService<IWorkspaceService> (Workspace);
+			Services.AddService (Layers);
+			Services.AddService<IPaintBrushService> (PaintBrushes);
+			Services.AddService<IToolService> (Tools);
+			Services.AddService (System);
+			Services.AddService (LivePreview);
+			Services.AddService<IPaletteService> (Palette);
+			Services.AddService (Chrome);
+			Services.AddService (Effects);
 		}
-		
+
 		public static void Initialize ()
 		{
 			Actions.RegisterHandlers ();

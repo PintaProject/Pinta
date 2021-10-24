@@ -110,7 +110,7 @@ namespace Pinta.Core
 			return (lhs.numerator * rhs.denominator) >= (rhs.numerator * lhs.denominator);
 		}
 
-		public override bool Equals (object obj)
+		public override bool Equals (object? obj)
 		{
 			if (obj is ScaleFactor) {
 				ScaleFactor rhs = (ScaleFactor)obj;

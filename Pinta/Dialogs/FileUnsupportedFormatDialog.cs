@@ -25,6 +25,7 @@
 // THE SOFTWARE.
 
 using System;
+using System.Diagnostics.CodeAnalysis;
 using Gtk;
 using Pinta.Core;
 
@@ -46,6 +47,7 @@ namespace Pinta
 			description_label.Markup = message;
 		}
 
+		[MemberNotNull (nameof (description_label))]
 		private void Build()
 		{
 			var hbox = new HBox();
@@ -66,9 +68,7 @@ namespace Pinta
 			vbox.PackStart(description_label, false, false, 0);
 
 			hbox.Add(vbox);
-			this.VBox.Add(hbox);
-
-			//PintaCore.System.ImageFormats.Formats
+			ContentArea.Add(hbox);
 
 			var ok_button = new Button(Gtk.Stock.Ok);
 			ok_button.CanDefault = true;

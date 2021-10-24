@@ -30,7 +30,6 @@ using Pinta.Core;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
-using Mono.Unix;
 
 namespace Pinta.Tools
 {
@@ -40,7 +39,7 @@ namespace Pinta.Tools
 		{
 			get
 			{
-				return Catalog.GetString("Open Curve Shape");
+				return Translations.GetString("Open Curve Shape");
 			}
 		}
 
@@ -53,13 +52,13 @@ namespace Pinta.Tools
 		{
 			Document doc = PintaCore.Workspace.ActiveDocument;
 
-			LineCurveSeriesEngine newEngine = new LineCurveSeriesEngine(doc.CurrentUserLayer, null, BaseEditEngine.ShapeTypes.OpenLineCurveSeries,
+			LineCurveSeriesEngine newEngine = new LineCurveSeriesEngine(doc.Layers.CurrentUserLayer, null, BaseEditEngine.ShapeTypes.OpenLineCurveSeries,
 				owner.UseAntialiasing, false, BaseEditEngine.OutlineColor, BaseEditEngine.FillColor, owner.EditEngine.BrushWidth);
 
 			AddLinePoints(ctrlKey, clickedOnControlPoint, newEngine, prevSelPoint);
 
 			//Set the new shape's DashPattern option.
-			newEngine.DashPattern = dash_pattern_box.comboBox.ComboBox.ActiveText;
+			newEngine.DashPattern = dash_pattern_box.comboBox!.ComboBox.ActiveText; // NRT - Code assumes this is not-null
 
 			//Set the new arrow's settings to be the same as what's in the toolbar settings.
 			setNewArrowSettings(newEngine);

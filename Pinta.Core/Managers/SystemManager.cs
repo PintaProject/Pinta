@@ -30,7 +30,6 @@ using System.Linq;
 using System.Text;
 using System.IO;
 using System.Runtime.InteropServices;
-using Mono.Addins;
 using Gtk;
 
 namespace Pinta.Core
@@ -44,7 +43,6 @@ namespace Pinta.Core
 
 		public ImageConverterManager ImageFormats { get; private set; }
 		public PaletteFormats PaletteFormats { get; private set; }
-		public FontManager Fonts { get; private set; }
 		public int RenderThreads { get; set; }
 		public OS OperatingSystem { get { return operating_system; } }
 		
@@ -53,7 +51,6 @@ namespace Pinta.Core
 			ImageFormats = new ImageConverterManager ();
 			PaletteFormats = new PaletteFormats ();
 			RenderThreads = Environment.ProcessorCount;
-			Fonts = new FontManager ();
 
 			last_dialog_directory = DefaultDialogDirectory;
 
@@ -112,7 +109,8 @@ namespace Pinta.Core
 
 		public static string GetExecutableDirectory ()
 		{
-			return Path.GetDirectoryName (GetExecutablePathName ());
+			// NRT - We use Path.GetFullPath so it should contain a directory
+			return Path.GetDirectoryName (GetExecutablePathName ())!;
 		}
 
 		/// <summary>
@@ -121,19 +119,19 @@ namespace Pinta.Core
 		public static string GetDataRootDirectory ()
 		{
 			string app_dir = SystemManager.GetExecutableDirectory ();
-			bool devel_mode = File.Exists (Path.Combine (Path.Combine (app_dir, ".."), "Pinta.sln"));
 
-			if (GetOperatingSystem () != OS.X11 || devel_mode)
-				return app_dir;
-			else {
-				// From MonoDevelop:
-				// Pinta is located at $prefix/lib/pinta
-				// adding "../.." should give us $prefix
-				string prefix = Path.Combine (Path.Combine (app_dir, ".."), "..");
-				//normalise it
-				prefix = Path.GetFullPath (prefix);
-				return Path.Combine (prefix, "share");
+			// If Pinta is located at $prefix/lib/pinta, we want to use $prefix/share.
+			if (GetOperatingSystem () == OS.X11) {
+				var lib_dir = Directory.GetParent (app_dir);
+				if (lib_dir?.Name == "lib") {
+					var prefix = lib_dir.Parent;
+					if (prefix is not null)
+						return Path.Combine (prefix.FullName, "share");
+				}
 			}
+
+			// Otherwise, translations etc are contained under the executable's folder.
+			return app_dir;
 		}
 
 		public static OS GetOperatingSystem ()
@@ -143,7 +141,12 @@ namespace Pinta.Core
 
 		public T[] GetExtensions<T> ()
 		{
+			// TODO-GTK3 (addins)
+#if false
 			return AddinManager.GetExtensionObjects<T> ();
+#else
+			return new T[0];
+#endif
 		}
 
 		//From Managed.Windows.Forms/XplatUI
@@ -157,7 +160,7 @@ namespace Pinta.Core
 				buf = Marshal.AllocHGlobal (8192);
 				// This is a hacktastic way of getting sysname from uname ()
 				if (uname (buf) == 0) {
-					string os = Marshal.PtrToStringAnsi (buf);
+					string? os = Marshal.PtrToStringAnsi (buf);
 					if (os == "Darwin")
 						return true;
 				}

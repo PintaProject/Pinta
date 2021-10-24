@@ -18,19 +18,37 @@ Thanks to the following contributors who worked on this release:
 - @jefetienne
 
 ### Added
+- Ported to GTK3 and .NET 5
+  - Many changes to the appearance of standard GTK widgets and dialogs (e.g. the color picker and file dialogs). GTK3 themes should also now be supported.
+  - Improved support for high-DPI displays.
+  - The platform-native file dialogs are now used ([#1909807](https://bugs.launchpad.net/pinta/+bug/1909807), [#1909664](https://bugs.launchpad.net/pinta/+bug/1909664)).
+  - The Open Recent menu item was deprecated in GTK3 and has been removed, but similar functionality is available in the file dialog's Recent section.
+  - On macOS, the menu now appears in the global menu bar instead of the application window.
+  - On macOS, keyboard shortcuts now use Command instead of Ctrl.
+  - Removed the Images pad, which is obsolete now that tabs are used (#153).
+  - Added recently used colors to the color palette widget (#154)
+  - Added a status bar widget containing the position / selection information, zoom, and the color palette (#154)
+  - Changed the tool palette to be a single column (#155)
+  - Changed the text tool to use the standard GTK font chooser widget ([#1311873](https://bugs.launchpad.net/pinta/+bug/1311873), [#1866653](https://bugs.launchpad.net/pinta/+bug/1866653), [#890589](https://bugs.launchpad.net/pinta/+bug/890589))
+  - Changed several tools to use spin buttons rather than editable combo boxes for e.g. selecting brush sizes ([#1186516](https://bugs.launchpad.net/pinta/+bug/1186516)).
 - The canvas can now be scrolled horizontally by holding Shift while using the mouse wheel (#141)
+- The canvas can now be panned by clicking and dragging with the middle mouse button (#176, [#419](https://communiroo.com/PintaProject/pinta/suggestions/419)).
 - The primary and secondary palette colors can now be swapped by pressing X (#147)
 - Added a more user-friendly dialog when attempting to open an unsupported file format (#143, [#1856821](https://bugs.launchpad.net/pinta/+bug/1856821))
 - Zooming in and out can now be done without pressing the Ctrl key (#150).
 - Arrow keys can be used to move by a single pixel in the Move Selected Pixels and Move Selection tools ([#1906141](https://bugs.launchpad.net/pinta/+bug/1906141)).
+- The primary and secondary palette colors are now saved in the application settings (#171).
 - Shift can now be used to constrain to a uniform scale when scaling using the Move Selected Pixels tool (#138).
+- Tools now save their settings for the next time Pinta is opened (#178).
 - The About dialog now allows easily copying the version information to the clipboard for use when reporting bugs ([#1924249](https://bugs.launchpad.net/pinta/+bug/1924249)).
 
 ### Changed
 - Fixed inconsistent behavior when switching between tools that share the same shortcut, such as the selection tools (#144, [#1558767](https://bugs.launchpad.net/pinta/+bug/1558767))
-- Improved error messages when the user does not have read or write permissions for a file ([#1715150](https://bugs.launchpad.net/pinta/+bug/1715150)).
+- The Paste Into New Image action no longer creates several unnecessary history items (#170).
+- Performance improvements for the paint bucket and magic wand tools (#159).
+- Performance improvements for the selection tools when interactively adjusting the selection.
 - The appdata file is now installed to `/usr/share/metainfo` instead of the legacy path `/usr/share/appdata` (#186).
-- Tooltips for tabs now show the full file path instead of only the file name (#187).
+- Improved error messages when the user does not have read or write permissions for a file ([#1715150](https://bugs.launchpad.net/pinta/+bug/1715150)).
 
 ### Fixed
 - Fixed a bug where Auto Crop could incorrectly remove an additional pixel on the bottom and right side of the image. ([#1191390](https://bugs.launchpad.net/pinta/+bug/1191390)).
@@ -43,9 +61,16 @@ Thanks to the following contributors who worked on this release:
 - Fixed a bug where the document might not be marked as modified after certain undo / redo actions ([#1905165](https://bugs.launchpad.net/pinta/+bug/1905165)).
 - Fixed a bug where the Move Selected Pixels tool did not handle transparent pixels correctly ([#1905706](https://bugs.launchpad.net/pinta/+bug/1905706)).
 - Fixed a bug where deselecting via a single click in the select tool could cause bugs with undoing earlier history items ([#1905719](https://bugs.launchpad.net/pinta/+bug/1905719)).
+- Fixed several Unicode-related issues in the text tool ([#1422445](https://bugs.launchpad.net/pinta/+bug/1422445)).
+- Fixed issue on macOS where Pinta could launch in the wrong language ([#1900310](https://bugs.launchpad.net/pinta/+bug/1900310)).
+- Improved the UX of the Close and Save As confirmation dialogs ([#1909576](https://bugs.launchpad.net/pinta/+bug/1909576), [#1909688](https://bugs.launchpad.net/pinta/+bug/1909688)).
+- Fixed a bug where the Pan tool did not work if scrolling could only occur in the Y direction ([#1909910](https://bugs.launchpad.net/pinta/+bug/1909910)).
+- Fixed issues where the zoom level was not maintained when resizing an image ([#1889673](https://bugs.launchpad.net/pinta/+bug/1889673)).
 - Fixed a bug where the initial corner of a rectangle shape could be cut off ([#1922470](https://bugs.launchpad.net/pinta/+bug/1922470)).
 - Fixed a bug where the text tool was not correctly clipped against the selection ([#1910511](https://bugs.launchpad.net/pinta/+bug/1910511)).
 - Improved handling of memory allocation failures for large images ([#776346](https://bugs.launchpad.net/pinta/+bug/776346)).
+- Fixed an issue where opening a file URI from the command line did not work ([#1908806](https://bugs.launchpad.net/pinta/+bug/1908806)).
+- Fixed an issue where hiding a layer could leave the selection still visible ([#1907987](https://bugs.launchpad.net/pinta/+bug/1907987)).
 - Fixed a bug where the shape tools did not redraw after changes to the fill style until the cursor entered the canvas ([#1937921](https://bugs.launchpad.net/pinta/+bug/1937921)).
 - Fixed a crash when opening an invalid palette file (#146, [#1890450](https://bugs.launchpad.net/pinta/+bug/1890450)).
 

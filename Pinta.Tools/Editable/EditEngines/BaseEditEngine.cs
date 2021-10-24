@@ -1,4 +1,4 @@
-﻿// 
+// 
 // BaseEditEngine.cs
 //  
 // Author:
@@ -30,7 +30,6 @@ using Pinta.Core;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
-using Mono.Unix;
 
 namespace Pinta.Tools
 {
@@ -39,16 +38,6 @@ namespace Pinta.Tools
     //a protected instance of the EditEngine inside the class and then utilize it in a similar fashion to any of the editable tools.
     public abstract class BaseEditEngine
     {
-		static BaseEditEngine ()
-		{
-			Gtk.IconFactory fact = new Gtk.IconFactory ();
-			fact.Add ("Tools.Line.png", new Gtk.IconSet (PintaCore.Resources.GetIcon ("Tools.Line.png")));
-			fact.Add ("Tools.Rectangle.png", new Gtk.IconSet (PintaCore.Resources.GetIcon ("Tools.Rectangle.png")));
-			fact.Add ("Tools.Ellipse.png", new Gtk.IconSet (PintaCore.Resources.GetIcon ("Tools.Ellipse.png")));
-			fact.Add ("Tools.RoundedRectangle.png", new Gtk.IconSet (PintaCore.Resources.GetIcon ("Tools.RoundedRectangle.png")));
-			fact.AddDefault ();
-		}
-
 		public enum ShapeTypes
 		{
 			OpenLineCurveSeries,
@@ -85,66 +74,54 @@ namespace Pinta.Tools
 			set { PintaCore.Palette.SecondaryColor = value; }
 		}
 
-        protected ToolBarComboBox brush_width;
-        protected ToolBarLabel brush_width_label;
-        protected ToolBarButton brush_width_minus;
-        protected ToolBarButton brush_width_plus;
-        protected ToolBarLabel fill_label;
-        protected ToolBarDropDownButton fill_button;
-        protected Gtk.SeparatorToolItem fill_sep;
+	// NRT - Created by HandleBuildToolBar
+        protected ToolBarWidget<Gtk.SpinButton> brush_width = null!;
+        protected ToolBarLabel brush_width_label = null!;
+        protected ToolBarLabel fill_label = null!;
+        protected ToolBarDropDownButton fill_button = null!;
+        protected Gtk.SeparatorToolItem fill_sep = null!;
 
-		protected ToolBarLabel shape_type_label;
-		protected ToolBarDropDownButton shape_type_button;
-		protected Gtk.SeparatorToolItem shape_type_sep;
+		protected ToolBarLabel shape_type_label = null!;
+		protected ToolBarDropDownButton shape_type_button = null!;
+		protected Gtk.SeparatorToolItem shape_type_sep = null!;
 
         protected DashPatternBox dash_pattern_box = new DashPatternBox();
 		private string prev_dash_pattern = "-";
 
 		private bool prev_antialiasing = true;
 
-        public int BrushWidth
-        {
-            get
-            {
-				if (brush_width != null)
-				{
-					int width;
-
-					if (Int32.TryParse(brush_width.ComboBox.ActiveText, out width))
-					{
-						if (width > 0)
-						{
-							(brush_width.ComboBox as Gtk.ComboBoxEntry).Entry.Text = width.ToString();
-
-							return width;
-						}
-					}
-
-					(brush_width.ComboBox as Gtk.ComboBoxEntry).Entry.Text = BaseTool.DEFAULT_BRUSH_WIDTH.ToString();
-				}
-
-                return BaseTool.DEFAULT_BRUSH_WIDTH;
-            }
-            
-			set
-			{
-				if (brush_width != null)
-				{
-					(brush_width.ComboBox as Gtk.ComboBoxEntry).Entry.Text = value.ToString();
-				}
+		public int BrushWidth {
+			get => brush_width?.Widget.ValueAsInt ?? BaseTool.DEFAULT_BRUSH_WIDTH;
+			set {
+				if (brush_width is not null)
+					brush_width.Widget.Value = value;
 			}
-        }
+		}
 
 		private int prev_brush_width = BaseTool.DEFAULT_BRUSH_WIDTH;
 
-        private bool StrokeShape { get { return (int)fill_button.SelectedItem.Tag % 2 == 0; } }
-        private bool FillShape { get { return (int)fill_button.SelectedItem.Tag >= 1; } }
+        private bool StrokeShape { get {
+				if (fill_button.SelectedItem?.Tag is int value)
+					return value % 2 == 0;
+
+				return true;
+			} }
+
+        private bool FillShape { get {
+				if (fill_button.SelectedItem?.Tag is int value)
+					return value >= 1;
+
+				return false;
+			} }
 
 		private ShapeTypes ShapeType
 		{
 			get
 			{
-				return (ShapeTypes)(int)shape_type_button.SelectedItem.Tag;
+				if (shape_type_button.SelectedItem?.Tag is int value)
+					return (ShapeTypes) value;
+
+				return 0;
 			}
 		}
 
@@ -162,11 +139,11 @@ namespace Pinta.Tools
         /// <summary>
         /// The selected ControlPoint.
         /// </summary>
-		public ControlPoint SelectedPoint
+		public ControlPoint? SelectedPoint
         {
             get
             {
-                ShapeEngine selEngine = SelectedShapeEngine;
+                ShapeEngine? selEngine = SelectedShapeEngine;
 
                 if (selEngine != null && selEngine.ControlPoints.Count > SelectedPointIndex)
                 {
@@ -177,22 +154,12 @@ namespace Pinta.Tools
                     return null;
                 }
             }
-
-            set
-            {
-                ShapeEngine selEngine = SelectedShapeEngine;
-
-                if (selEngine != null && selEngine.ControlPoints.Count > SelectedPointIndex)
-                {
-                    selEngine.ControlPoints[SelectedPointIndex] = value;
-                }
-            }
         }
 
 		/// <summary>
 		/// The active shape's ShapeEngine. A point does not have to be selected here, only a shape. This can be null.
 		/// </summary>
-		public ShapeEngine ActiveShapeEngine
+		public ShapeEngine? ActiveShapeEngine
 		{
 			get
 			{
@@ -210,7 +177,7 @@ namespace Pinta.Tools
 		/// <summary>
 		/// The selected shape's ShapeEngine. This requires that a point in the shape be selected and should be used in most cases. This can be null.
 		/// </summary>
-		public ShapeEngine SelectedShapeEngine
+		public ShapeEngine? SelectedShapeEngine
 		{
 			get
 			{
@@ -239,7 +206,7 @@ namespace Pinta.Tools
 
         #region ToolbarEventHandlers
 
-        protected virtual void BrushMinusButtonClickedEvent(object o, EventArgs args)
+        protected virtual void BrushMinusButtonClickedEvent(object? o, EventArgs args)
         {
             if (BrushWidth > 1)
                 BrushWidth--;
@@ -247,16 +214,16 @@ namespace Pinta.Tools
 			//No need to store previous settings or redraw, as this is done in the Changed event handler.
         }
 
-        protected virtual void BrushPlusButtonClickedEvent(object o, EventArgs args)
+        protected virtual void BrushPlusButtonClickedEvent(object? o, EventArgs args)
         {
             BrushWidth++;
 
 			//No need to store previous settings or redraw, as this is done in the Changed event handler.
         }
 
-		protected void Palette_PrimaryColorChanged(object sender, EventArgs e)
+		protected void Palette_PrimaryColorChanged(object? sender, EventArgs e)
 		{
-			ShapeEngine activeEngine = ActiveShapeEngine;
+			ShapeEngine? activeEngine = ActiveShapeEngine;
 
 			if (activeEngine != null)
 			{
@@ -266,9 +233,9 @@ namespace Pinta.Tools
 			}
 		}
 
-		protected void Palette_SecondaryColorChanged(object sender, EventArgs e)
+		protected void Palette_SecondaryColorChanged(object? sender, EventArgs e)
 		{
-			ShapeEngine activeEngine = ActiveShapeEngine;
+			ShapeEngine? activeEngine = ActiveShapeEngine;
 
 			if (activeEngine != null)
 			{
@@ -278,7 +245,7 @@ namespace Pinta.Tools
 			}
 		}
 
-		private void OnFillStyleChanged(object sender, EventArgs e)
+		private void OnFillStyleChanged(object? sender, EventArgs e)
 		{
 			DrawActiveShape (false, false, true, false, false);
 		}
@@ -290,34 +257,40 @@ namespace Pinta.Tools
         {
             owner = passedOwner;
 
-			owner.IsEditableShapeTool = true;
-
 			ResetShapes();
         }
 
-        public virtual void HandleBuildToolBar(Gtk.Toolbar tb)
+		private string BRUSH_WIDTH_SETTING (string prefix) => $"{prefix}-brush-width";
+		private string FILL_TYPE_SETTING (string prefix) => $"{prefix}-fill-style";
+		private string SHAPE_TYPE_SETTING (string prefix) => $"{prefix}-shape-type";
+		private string DASH_PATTERN_SETTING (string prefix) => $"{prefix}-dash-pattern";
+
+		public virtual void OnSaveSettings (ISettingsService settings, string toolPrefix)
+		{
+			if (brush_width is not null)
+				settings.PutSetting (BRUSH_WIDTH_SETTING (toolPrefix), (int)brush_width.Widget.Value);
+			if (fill_button is not null)
+				settings.PutSetting (FILL_TYPE_SETTING (toolPrefix), fill_button.SelectedIndex);
+			if (shape_type_button is not null)
+				settings.PutSetting (SHAPE_TYPE_SETTING (toolPrefix), shape_type_button.SelectedIndex);
+			if (dash_pattern_box?.comboBox is not null)
+				settings.PutSetting (DASH_PATTERN_SETTING (toolPrefix), dash_pattern_box.comboBox.ComboBox.ActiveText);
+		}
+
+		public virtual void HandleBuildToolBar(Gtk.Toolbar tb, ISettingsService settings, string toolPrefix)
         {
             if (brush_width_label == null)
-                brush_width_label = new ToolBarLabel(string.Format(" {0}: ", Catalog.GetString("Brush width")));
+                brush_width_label = new ToolBarLabel(string.Format(" {0}: ", Translations.GetString("Brush width")));
 
             tb.AppendItem(brush_width_label);
 
-            if (brush_width_minus == null)
-            {
-                brush_width_minus = new ToolBarButton("Toolbar.MinusButton.png", "", Catalog.GetString("Decrease brush size"));
-                brush_width_minus.Clicked += BrushMinusButtonClickedEvent;
-            }
-
-            tb.AppendItem(brush_width_minus);
-
 			if (brush_width == null)
 			{
-				brush_width = new ToolBarComboBox(65, 1, true, "1", "2", "3", "4", "5", "6", "7", "8", "9",
-					"10", "11", "12", "13", "14", "15", "20", "25", "30", "35", "40", "45", "50", "55");
+				brush_width = new (new Gtk.SpinButton (1, 1e5, 1) { Value = settings.GetSetting (BRUSH_WIDTH_SETTING (toolPrefix), BaseTool.DEFAULT_BRUSH_WIDTH) });
 
-				brush_width.ComboBox.Changed += (o, e) =>
+				brush_width.Widget.ValueChanged += (o, e) =>
 				{
-					ShapeEngine selEngine = SelectedShapeEngine;
+					ShapeEngine? selEngine = SelectedShapeEngine;
 
 					if (selEngine != null)
 					{
@@ -330,21 +303,13 @@ namespace Pinta.Tools
 
             tb.AppendItem(brush_width);
 
-            if (brush_width_plus == null)
-            {
-                brush_width_plus = new ToolBarButton("Toolbar.PlusButton.png", "", Catalog.GetString("Increase brush size"));
-                brush_width_plus.Clicked += BrushPlusButtonClickedEvent;
-            }
-
-            tb.AppendItem(brush_width_plus);
-
             if (fill_sep == null)
                 fill_sep = new Gtk.SeparatorToolItem();
 
             tb.AppendItem(fill_sep);
 
             if (fill_label == null)
-                fill_label = new ToolBarLabel(string.Format(" {0}: ", Catalog.GetString("Fill Style")));
+                fill_label = new ToolBarLabel(string.Format(" {0}: ", Translations.GetString("Fill Style")));
 
             tb.AppendItem(fill_label);
 
@@ -352,10 +317,12 @@ namespace Pinta.Tools
             {
                 fill_button = new ToolBarDropDownButton();
 
-                fill_button.AddItem(Catalog.GetString("Outline Shape"), "ShapeTool.Outline.png", 0);
-                fill_button.AddItem(Catalog.GetString("Fill Shape"), "ShapeTool.Fill.png", 1);
-                fill_button.AddItem(Catalog.GetString("Fill and Outline Shape"), "ShapeTool.OutlineFill.png", 2);
-		fill_button.SelectedItemChanged += OnFillStyleChanged;
+                fill_button.AddItem(Translations.GetString("Outline Shape"), Resources.Icons.FillStyleOutline, 0);
+                fill_button.AddItem(Translations.GetString("Fill Shape"), Resources.Icons.FillStyleFill, 1);
+                fill_button.AddItem(Translations.GetString("Fill and Outline Shape"), Resources.Icons.FillStyleOutlineFill, 2);
+
+				fill_button.SelectedIndex = settings.GetSetting (FILL_TYPE_SETTING (toolPrefix), 0);
+				fill_button.SelectedItemChanged += OnFillStyleChanged;
             }
 
             tb.AppendItem(fill_button);
@@ -366,7 +333,7 @@ namespace Pinta.Tools
 			tb.AppendItem(shape_type_sep);
 
 			if (shape_type_label == null)
-				shape_type_label = new ToolBarLabel(string.Format(" {0}: ", Catalog.GetString("Shape Type")));
+				shape_type_label = new ToolBarLabel(string.Format(" {0}: ", Translations.GetString("Shape Type")));
 
 			tb.AppendItem(shape_type_label);
 
@@ -374,15 +341,17 @@ namespace Pinta.Tools
 			{
 				shape_type_button = new ToolBarDropDownButton();
 
-				shape_type_button.AddItem(Catalog.GetString("Open Line/Curve Series"), "Tools.Line.png", 0);
-				shape_type_button.AddItem(Catalog.GetString("Closed Line/Curve Series"), "Tools.Rectangle.png", 1);
-				shape_type_button.AddItem(Catalog.GetString("Ellipse"), "Tools.Ellipse.png", 2);
-				shape_type_button.AddItem(Catalog.GetString("Rounded Line Series"), "Tools.RoundedRectangle.png", 3);
+				shape_type_button.AddItem(Translations.GetString("Open Line/Curve Series"), Resources.Icons.ToolLine, 0);
+				shape_type_button.AddItem(Translations.GetString("Closed Line/Curve Series"), Resources.Icons.ToolRectangle, 1);
+				shape_type_button.AddItem(Translations.GetString("Ellipse"), Resources.Icons.ToolEllipse, 2);
+				shape_type_button.AddItem(Translations.GetString("Rounded Line Series"), Resources.Icons.ToolRectangleRounded, 3);
+
+				shape_type_button.SelectedIndex = settings.GetSetting (SHAPE_TYPE_SETTING (toolPrefix), 0);
 
 				shape_type_button.SelectedItemChanged += (o, e) =>
 				{
 					ShapeTypes newShapeType = ShapeType;
-					ShapeEngine selEngine = SelectedShapeEngine;
+					ShapeEngine? selEngine = SelectedShapeEngine;
 
 					if (selEngine != null)
 					{
@@ -391,7 +360,7 @@ namespace Pinta.Tools
 						{
 							//Create a new ShapesModifyHistoryItem so that the changing of the shape type can be undone.
 							PintaCore.Workspace.ActiveDocument.History.PushNewItem(new ShapesModifyHistoryItem(
-								this, owner.Icon, Catalog.GetString("Changed Shape Type")));
+								this, owner.Icon, Translations.GetString("Changed Shape Type")));
 
 							//Clone the old shape; it should be automatically garbage-collected. newShapeType already has the updated value.
 							selEngine = selEngine.Convert(newShapeType, SelectedShapeIndex);
@@ -414,13 +383,16 @@ namespace Pinta.Tools
 			tb.AppendItem(shape_type_button);
 
 
-            Gtk.ComboBox dpbBox = dash_pattern_box.SetupToolbar(tb);
+            Gtk.ComboBoxText? dpbBox = dash_pattern_box.SetupToolbar(tb);
 
             if (dpbBox != null)
             {
+				dpbBox.Entry.Text = settings.GetSetting (DASH_PATTERN_SETTING (toolPrefix), "-");
+
+
                 dpbBox.Changed += (o, e) =>
                 {
-					ShapeEngine selEngine = SelectedShapeEngine;
+					ShapeEngine? selEngine = SelectedShapeEngine;
 
 					if (selEngine != null)
 					{
@@ -440,7 +412,7 @@ namespace Pinta.Tools
             PintaCore.Palette.SecondaryColorChanged += new EventHandler(Palette_SecondaryColorChanged);
         }
 
-		public virtual void HandleDeactivated(BaseTool newTool)
+		public virtual void HandleDeactivated(BaseTool? newTool)
 		{
 			SelectedPointIndex = -1;
 			SelectedShapeIndex = -1;
@@ -448,7 +420,7 @@ namespace Pinta.Tools
 			StorePreviousSettings();
 
 			//Determine if the tool being switched to will be another editable tool.
-			if (PintaCore.Workspace.HasOpenDocuments && !newTool.IsEditableShapeTool)
+			if (PintaCore.Workspace.HasOpenDocuments && !(newTool?.IsEditableShapeTool == true))
 			{
 				//The tool being switched to is not editable. Finalize every editable shape not yet finalized.
 				FinalizeAllShapes();
@@ -486,7 +458,7 @@ namespace Pinta.Tools
 
         public virtual void HandleAfterUndo()
         {
-            ShapeEngine activeEngine = ActiveShapeEngine;
+            ShapeEngine? activeEngine = ActiveShapeEngine;
 
             if (activeEngine != null)
             {
@@ -499,7 +471,7 @@ namespace Pinta.Tools
 
         public virtual void HandleAfterRedo()
         {
-            ShapeEngine activeEngine = ActiveShapeEngine;
+            ShapeEngine? activeEngine = ActiveShapeEngine;
 
             if (activeEngine != null)
             {
@@ -510,22 +482,22 @@ namespace Pinta.Tools
 			DrawActiveShape(true, false, true, false, false);
         }
 
-        public virtual bool HandleKeyDown(Gtk.DrawingArea canvas, Gtk.KeyPressEventArgs args)
+        public virtual bool HandleKeyDown(Document document, ToolKeyEventArgs e)
         {
-			Gdk.Key keyPressed = args.Event.Key;
+			Gdk.Key keyPressed = e.Key;
 
 			if (keyPressed == Gdk.Key.Delete)
             {
                 if (SelectedPointIndex > -1)
                 {
-                    List<ControlPoint> controlPoints = SelectedShapeEngine.ControlPoints;
+                    List<ControlPoint> controlPoints = SelectedShapeEngine!.ControlPoints; // NRT - Code assumes this is not-null
 
 					//Either delete a ControlPoint or an entire shape (if there's only 1 ControlPoint left).
                     if (controlPoints.Count > 1)
                     {
 						//Create a new ShapesModifyHistoryItem so that the deletion of a control point can be undone.
 						PintaCore.Workspace.ActiveDocument.History.PushNewItem(
-							new ShapesModifyHistoryItem(this, owner.Icon, ShapeName + " " + Catalog.GetString("Point Deleted")));
+							new ShapesModifyHistoryItem(this, owner.Icon, ShapeName + " " + Translations.GetString("Point Deleted")));
 
 						//Delete the selected point from the shape.
 						controlPoints.RemoveAt(SelectedPointIndex);
@@ -542,8 +514,8 @@ namespace Pinta.Tools
 
 						//Create a new ShapesHistoryItem so that the deletion of a shape can be undone.
 						doc.History.PushNewItem(
-							new ShapesHistoryItem(this, owner.Icon, ShapeName + " " + Catalog.GetString("Deleted"),
-								doc.CurrentUserLayer.Surface.Clone(), doc.CurrentUserLayer, SelectedPointIndex, SelectedShapeIndex, false));
+							new ShapesHistoryItem(this, owner.Icon, ShapeName + " " + Translations.GetString("Deleted"),
+								doc.Layers.CurrentUserLayer.Surface.Clone(), doc.Layers.CurrentUserLayer, SelectedPointIndex, SelectedShapeIndex, false));
 
 
 						//Since the shape itself will be deleted, remove its ReEditableLayer from the drawing loop.
@@ -571,31 +543,31 @@ namespace Pinta.Tools
 					DrawActiveShape(true, false, true, false, false);
                 }
 
-                args.RetVal = true;
+                return true;
             }
             else if (keyPressed == Gdk.Key.Return)
             {
                 //Finalize every editable shape not yet finalized.
 				FinalizeAllShapes();
 
-                args.RetVal = true;
+                return true;
             }
             else if (keyPressed == Gdk.Key.space)
             {
-                ControlPoint selPoint = SelectedPoint;
+                ControlPoint? selPoint = SelectedPoint;
 
                 if (selPoint != null)
                 {
                     //This can be assumed not to be null since selPoint was not null.
-                    ShapeEngine selEngine = SelectedShapeEngine;
+                    ShapeEngine selEngine = SelectedShapeEngine!; // NRT - ^^
 
                     //Create a new ShapesModifyHistoryItem so that the adding of a control point can be undone.
                     PintaCore.Workspace.ActiveDocument.History.PushNewItem(
-						new ShapesModifyHistoryItem(this, owner.Icon, ShapeName + " " + Catalog.GetString("Point Added")));
+						new ShapesModifyHistoryItem(this, owner.Icon, ShapeName + " " + Translations.GetString("Point Added")));
 
 
-                    bool shiftKey = (args.Event.State & Gdk.ModifierType.ShiftMask) == Gdk.ModifierType.ShiftMask;
-                    bool ctrlKey = (args.Event.State & Gdk.ModifierType.ControlMask) == Gdk.ModifierType.ControlMask;
+                    bool shiftKey = e.IsShiftPressed;
+                    bool ctrlKey = e.IsControlPressed;
 
                     PointD newPointPos;
 
@@ -620,12 +592,12 @@ namespace Pinta.Tools
                     //Place the new point on the outside-most end, order-wise.
                     if ((double)SelectedPointIndex < (double)selEngine.ControlPoints.Count / 2d)
                     {
-                        SelectedShapeEngine.ControlPoints.Insert(SelectedPointIndex,
+                        selEngine.ControlPoints.Insert(SelectedPointIndex,
                             new ControlPoint(new PointD(newPointPos.X, newPointPos.Y), DefaultMidPointTension));
                     }
                     else
                     {
-                        SelectedShapeEngine.ControlPoints.Insert(SelectedPointIndex + 1,
+                        selEngine.ControlPoints.Insert(SelectedPointIndex + 1,
                             new ControlPoint(new PointD(newPointPos.X, newPointPos.Y), DefaultMidPointTension));
 
                         ++SelectedPointIndex;
@@ -634,7 +606,7 @@ namespace Pinta.Tools
 					DrawActiveShape(true, false, true, shiftKey, false);
                 }
 
-                args.RetVal = true;
+                return true;
             }
             else if (keyPressed == Gdk.Key.Up)
             {
@@ -642,12 +614,12 @@ namespace Pinta.Tools
                 if (SelectedPointIndex > -1)
                 {
                     //Move the selected control point.
-                    SelectedPoint.Position.Y -= 1d;
+                    SelectedPoint!.Position.Y -= 1d; // NRT - Checked by SelectedPointIndex
 
 					DrawActiveShape(true, false, true, false, false);
                 }
 
-                args.RetVal = true;
+                return true;
             }
             else if (keyPressed == Gdk.Key.Down)
             {
@@ -655,19 +627,19 @@ namespace Pinta.Tools
                 if (SelectedPointIndex > -1)
                 {
                     //Move the selected control point.
-                    SelectedPoint.Position.Y += 1d;
+                    SelectedPoint!.Position.Y += 1d; // NRT - Checked by SelectedPointIndex
 
 					DrawActiveShape(true, false, true, false, false);
                 }
 
-                args.RetVal = true;
+                return true;
             }
             else if (keyPressed == Gdk.Key.Left)
             {
                 //Make sure a control point is selected.
                 if (SelectedPointIndex > -1)
                 {
-                    if ((args.Event.State & Gdk.ModifierType.ControlMask) == Gdk.ModifierType.ControlMask)
+                    if (e.IsControlPressed)
                     {
                         //Change the selected control point to be the previous one.
 						
@@ -675,7 +647,7 @@ namespace Pinta.Tools
 
                         if (SelectedPointIndex < 0)
                         {
-							ShapeEngine activeEngine = ActiveShapeEngine;
+							ShapeEngine? activeEngine = ActiveShapeEngine;
 
 							if (activeEngine != null)
 							{
@@ -686,24 +658,24 @@ namespace Pinta.Tools
                     else
                     {
                         //Move the selected control point.
-                        SelectedPoint.Position.X -= 1d;
+                        SelectedPoint!.Position.X -= 1d; // NRT - Checked by SelectedPointIndex
                     }
 
 					DrawActiveShape(true, false, true, false, false);
                 }
 
-                args.RetVal = true;
+                return true;
             }
             else if (keyPressed == Gdk.Key.Right)
             {
                 //Make sure a control point is selected.
                 if (SelectedPointIndex > -1)
                 {
-                    if ((args.Event.State & Gdk.ModifierType.ControlMask) == Gdk.ModifierType.ControlMask)
+                    if (e.IsControlPressed)
                     {
 						//Change the selected control point to be the following one.
 
-						ShapeEngine activeEngine = ActiveShapeEngine;
+						ShapeEngine? activeEngine = ActiveShapeEngine;
 
 						if (activeEngine != null)
 						{
@@ -718,31 +690,11 @@ namespace Pinta.Tools
                     else
                     {
                         //Move the selected control point.
-                        SelectedPoint.Position.X += 1d;
+                        SelectedPoint!.Position.X += 1d; // NRT - Checked by SelectedPointIndex
                     }
 
 					DrawActiveShape(true, false, true, false, false);
                 }
-
-                args.RetVal = true;
-            }
-            else
-            {
-                return false;
-            }
-
-            return true;
-        }
-
-        public virtual bool HandleKeyUp(Gtk.DrawingArea canvas, Gtk.KeyReleaseEventArgs args)
-        {
-			Gdk.Key keyReleased = args.Event.Key;
-
-            if (keyReleased == Gdk.Key.Delete || keyReleased == Gdk.Key.Return || keyReleased == Gdk.Key.space
-                || keyReleased == Gdk.Key.Up || keyReleased == Gdk.Key.Down
-                || keyReleased == Gdk.Key.Left || keyReleased == Gdk.Key.Right)
-            {
-                args.RetVal = true;
 
                 return true;
             }
@@ -752,8 +704,26 @@ namespace Pinta.Tools
             }
         }
 
-        public virtual void HandleMouseDown(Gtk.DrawingArea canvas, Gtk.ButtonPressEventArgs args, Cairo.PointD point)
+        public virtual bool HandleKeyUp(Document document, ToolKeyEventArgs e)
         {
+			Gdk.Key keyReleased = e.Key;
+
+            if (keyReleased == Gdk.Key.Delete || keyReleased == Gdk.Key.Return || keyReleased == Gdk.Key.space
+                || keyReleased == Gdk.Key.Up || keyReleased == Gdk.Key.Down
+                || keyReleased == Gdk.Key.Left || keyReleased == Gdk.Key.Right)
+            {
+                return true;
+            }
+            else
+            {
+                return false;
+            }
+        }
+
+        public virtual void HandleMouseDown(Document document, ToolMouseEventArgs e)
+        {
+			var point = e.PointDouble;
+
             //If we are already drawing, ignore any additional mouse down events.
 			if (is_drawing)
 			{
@@ -768,7 +738,7 @@ namespace Pinta.Tools
             shape_origin = new PointD(Utility.Clamp(point.X, 0, doc.ImageSize.Width - 1), Utility.Clamp(point.Y, 0, doc.ImageSize.Height - 1));
             current_point = shape_origin;
 
-            bool shiftKey = (args.Event.State & Gdk.ModifierType.ShiftMask) == Gdk.ModifierType.ShiftMask;
+            bool shiftKey = e.IsShiftPressed;
 
             if (shiftKey)
             {
@@ -779,7 +749,7 @@ namespace Pinta.Tools
 
 
             //Right clicking changes tension.
-            if (args.Event.Button == 1)
+            if (e.MouseButton == MouseButton.Left)
             {
                 changing_tension = false;
             }
@@ -789,11 +759,11 @@ namespace Pinta.Tools
             }
 
 
-			bool ctrlKey = (args.Event.State & Gdk.ModifierType.ControlMask) == Gdk.ModifierType.ControlMask;
+			bool ctrlKey = e.IsControlPressed;
 
 
 			int closestCPIndex, closestCPShapeIndex;
-			ControlPoint closestControlPoint;
+			ControlPoint? closestControlPoint;
 			double closestCPDistance;
 
 			SEngines.FindClosestControlPoint(current_point,
@@ -875,7 +845,7 @@ namespace Pinta.Tools
 					if (ActivateCorrespondingTool(closestShapeIndex, true) != null)
 					{
 						//Pass on the event and its data to the newly activated tool.
-						PintaCore.Tools.CurrentTool.DoMouseDown(canvas, args, point);
+						PintaCore.Tools.DoMouseDown(document, e);
 
 						//Don't do anything else here once the tool is switched and the event is passed on.
 						return;
@@ -887,7 +857,7 @@ namespace Pinta.Tools
 					if (!ctrlKey)
 					{
 						//Create a new ShapesModifyHistoryItem so that the adding of a control point can be undone.
-						doc.History.PushNewItem(new ShapesModifyHistoryItem(this, owner.Icon, ShapeName + " " + Catalog.GetString("Point Added")));
+						doc.History.PushNewItem(new ShapesModifyHistoryItem(this, owner.Icon, ShapeName + " " + Translations.GetString("Point Added")));
 
 						controlPoints.Insert(closestPointIndex,
 							new ControlPoint(new PointD(current_point.X, current_point.Y), DefaultMidPointTension));
@@ -897,7 +867,7 @@ namespace Pinta.Tools
 					SelectedPointIndex = closestPointIndex;
 					SelectedShapeIndex = closestShapeIndex;
 
-					ShapeEngine activeEngine = ActiveShapeEngine;
+					ShapeEngine? activeEngine = ActiveShapeEngine;
 
 					if (activeEngine != null)
 					{
@@ -927,8 +897,8 @@ namespace Pinta.Tools
 					}
 
 					//Create a new ShapesHistoryItem so that the creation of a new shape can be undone.
-					doc.History.PushNewItem(new ShapesHistoryItem(this, owner.Icon, ShapeName + " " + Catalog.GetString("Added"),
-						doc.CurrentUserLayer.Surface.Clone(), doc.CurrentUserLayer, SelectedPointIndex, SelectedShapeIndex, false));
+					doc.History.PushNewItem(new ShapesHistoryItem(this, owner.Icon, ShapeName + " " + Translations.GetString("Added"),
+						doc.Layers.CurrentUserLayer.Surface.Clone(), doc.Layers.CurrentUserLayer, SelectedPointIndex, SelectedShapeIndex, false));
 
 					//Create the shape, add its starting points, and add it to SEngines.
 					SEngines.Add(CreateShape(ctrlKey, clickedOnControlPoint, prevSelPoint));
@@ -936,7 +906,7 @@ namespace Pinta.Tools
 					//Select the new shape.
 					SelectedShapeIndex = SEngines.Count - 1;
 
-					ShapeEngine activeEngine = ActiveShapeEngine;
+					ShapeEngine? activeEngine = ActiveShapeEngine;
 
 					if (activeEngine != null)
 					{
@@ -954,7 +924,7 @@ namespace Pinta.Tools
 				if (ActivateCorrespondingTool(SelectedShapeIndex, true) != null)
 				{
 					//Pass on the event and its data to the newly activated tool.
-					PintaCore.Tools.CurrentTool.DoMouseDown(canvas, args, point);
+					PintaCore.Tools.DoMouseDown(document, e);
 
 					//Don't do anything else here once the tool is switched and the event is passed on.
 					return;
@@ -962,7 +932,7 @@ namespace Pinta.Tools
 
 				//The currently active tool matches the clicked on shape's corresponding tool.
 
-				ShapeEngine activeEngine = ActiveShapeEngine;
+				ShapeEngine? activeEngine = ActiveShapeEngine;
 
 				if (activeEngine != null)
 				{
@@ -979,22 +949,23 @@ namespace Pinta.Tools
 			DrawActiveShape(false, false, true, shiftKey, false);
         }
 
-        public virtual void HandleMouseUp(Gtk.DrawingArea canvas, Gtk.ButtonReleaseEventArgs args, Cairo.PointD point)
+        public virtual void HandleMouseUp(Document document, ToolMouseEventArgs e)
         {
             is_drawing = false;
 
             changing_tension = false;
 
-			DrawActiveShape(true, false, true, args.Event.IsShiftPressed(), false);
+			DrawActiveShape(true, false, true, e.IsShiftPressed, false);
         }
 
-        public virtual void HandleMouseMove(object o, Gtk.MotionNotifyEventArgs args, Cairo.PointD point)
+        public virtual void HandleMouseMove(Document document, ToolMouseEventArgs e)
         {
-            Document doc = PintaCore.Workspace.ActiveDocument;
+            Document doc = document;
+			var point = e.PointDouble;
 
             current_point = new PointD(Utility.Clamp(point.X, 0, doc.ImageSize.Width - 1), Utility.Clamp(point.Y, 0, doc.ImageSize.Height - 1));
 
-            bool shiftKey = (args.Event.State & Gdk.ModifierType.ShiftMask) == Gdk.ModifierType.ShiftMask;
+            bool shiftKey = e.IsShiftPressed;
 
             if (shiftKey)
             {
@@ -1008,7 +979,7 @@ namespace Pinta.Tools
             }
             else
             {
-				ControlPoint selPoint = SelectedPoint;
+				ControlPoint? selPoint = SelectedPoint;
 
                 //Make sure a control point is selected.
 				if (selPoint != null)
@@ -1017,12 +988,12 @@ namespace Pinta.Tools
                     {
                         //Create a new ShapesModifyHistoryItem so that the modification of the shape can be undone.
                         doc.History.PushNewItem(
-							new ShapesModifyHistoryItem(this, owner.Icon, ShapeName + " " + Catalog.GetString("Modified")));
+							new ShapesModifyHistoryItem(this, owner.Icon, ShapeName + " " + Translations.GetString("Modified")));
 
                         clicked_without_modifying = false;
                     }
 
-                    List<ControlPoint> controlPoints = SelectedShapeEngine.ControlPoints;
+                    List<ControlPoint> controlPoints = SelectedShapeEngine!.ControlPoints; // NRT - Code assumes this is not-null
 
                     if (!changing_tension)
                     {
@@ -1129,13 +1100,14 @@ namespace Pinta.Tools
 		/// <param name="preventSwitchBack">Whether to prevent switching back to the old tool if a tool change is necessary.</param>
 		public void DrawActiveShape(bool calculateOrganizedPoints, bool finalize, bool drawHoverSelection, bool shiftKey, bool preventSwitchBack)
 		{
-			ShapeTool oldTool = BaseEditEngine.ActivateCorrespondingTool(SelectedShapeIndex, calculateOrganizedPoints);
+			ShapeTool? oldTool = BaseEditEngine.ActivateCorrespondingTool(SelectedShapeIndex, calculateOrganizedPoints);
 
 			//First, determine if the currently active tool matches the shape's corresponding tool, and if not, switch to it.
 			if (oldTool != null)
 			{
 				//The tool has switched, so call DrawActiveShape again but inside that tool.
-				((ShapeTool)PintaCore.Tools.CurrentTool).EditEngine.DrawActiveShape(
+				if (PintaCore.Tools.CurrentTool is ShapeTool tool)
+					tool.EditEngine.DrawActiveShape(
 					calculateOrganizedPoints, finalize, drawHoverSelection, shiftKey, preventSwitchBack);
 
 				//Afterwards, switch back to the old tool, unless specified otherwise.
@@ -1151,7 +1123,7 @@ namespace Pinta.Tools
 
 			BeforeDraw();
 
-			ShapeEngine activeEngine = ActiveShapeEngine;
+			ShapeEngine? activeEngine = ActiveShapeEngine;
 
 			if (activeEngine == null)
 			{
@@ -1194,7 +1166,7 @@ namespace Pinta.Tools
 		private void BeforeDraw()
 		{
 			//Clear the ToolLayer if it was used previously (e.g. for hover points when there was no active shape).
-			PintaCore.Workspace.ActiveDocument.ToolLayer.Clear();
+			PintaCore.Workspace.ActiveDocument.Layers.ToolLayer.Clear();
 
 			//Invalidate the old hover point bounds, if any.
 			if (last_hover != null)
@@ -1222,7 +1194,7 @@ namespace Pinta.Tools
 			Document doc = PintaCore.Workspace.ActiveDocument;
 
 			//Since there is no active ShapeEngine, the ToolLayer's surface will be used to draw the hover point on.
-			using (Context g = new Context(doc.ToolLayer.Surface))
+			using (Context g = new Context(doc.Layers.ToolLayer.Surface))
 			{
 				g.AppendPath(doc.Selection.SelectionPath);
 				g.FillRule = FillRule.EvenOdd;
@@ -1234,7 +1206,7 @@ namespace Pinta.Tools
 				DrawHoverPoint(g);
 			}
 
-			doc.ToolLayer.Hidden = false;
+			doc.Layers.ToolLayer.Hidden = false;
 		}
 
 		/// <summary>
@@ -1249,19 +1221,19 @@ namespace Pinta.Tools
 
 			//Finalize the shape onto the CurrentUserLayer.
 
-			ImageSurface undoSurface = null;
+			ImageSurface? undoSurface = null;
 
 			if (createHistoryItem)
 			{
 				//We only need to create a history item if there was a previous shape.
 				if (engine.ControlPoints.Count > 0)
 				{
-					undoSurface = doc.CurrentUserLayer.Surface.Clone();
+					undoSurface = doc.Layers.CurrentUserLayer.Surface.Clone();
 				}
 			}
 
 			//Draw the finalized shape.
-			Rectangle dirty = DrawShape(engine, doc.CurrentUserLayer, false, false);
+			Rectangle dirty = DrawShape(engine, doc.Layers.CurrentUserLayer, false, false);
 
 			if (createHistoryItem)
 			{
@@ -1269,8 +1241,8 @@ namespace Pinta.Tools
 				if (undoSurface != null)
 				{
 					//Create a new ShapesHistoryItem so that the finalization of the shape can be undone.
-					doc.History.PushNewItem(new ShapesHistoryItem(this, owner.Icon, ShapeName + " " + Catalog.GetString("Finalized"),
-						undoSurface, doc.CurrentUserLayer, SelectedPointIndex, SelectedShapeIndex, false));
+					doc.History.PushNewItem(new ShapesHistoryItem(this, owner.Icon, ShapeName + " " + Translations.GetString("Finalized"),
+						undoSurface, doc.Layers.CurrentUserLayer, SelectedPointIndex, SelectedShapeIndex, false));
 				}
 			}
 
@@ -1321,7 +1293,7 @@ namespace Pinta.Tools
 				hover_point = new PointD(-1d, -1d);
 
 				int closestCPIndex, closestCPShapeIndex;
-				ControlPoint closestControlPoint;
+				ControlPoint? closestControlPoint;
 				double closestCPDistance;
 
 				SEngines.FindClosestControlPoint(current_point,
@@ -1427,7 +1399,9 @@ namespace Pinta.Tools
 			}
 
 			//Combine, clamp, and invalidate the dirty Rectangle.
-			dirty = ((Rectangle?)dirty).UnionRectangles(last_dirty).Value;
+			if (((Rectangle?) dirty).UnionRectangles (last_dirty) is Rectangle r)
+				dirty = r;
+
 			dirty = dirty.Clamp();
 			doc.Workspace.Invalidate(dirty.ToGdkRectangle());
 
@@ -1441,7 +1415,7 @@ namespace Pinta.Tools
 
 			Rectangle? dirty = null;
 
-			ShapeEngine activeEngine = ActiveShapeEngine;
+			ShapeEngine? activeEngine = ActiveShapeEngine;
 
 			if (activeEngine != null)
 			{
@@ -1497,7 +1471,7 @@ namespace Pinta.Tools
 
 		protected void DrawControlPoints(Context g, bool drawHoverSelection)
 		{
-			ShapeEngine activeEngine = ActiveShapeEngine;
+			ShapeEngine? activeEngine = ActiveShapeEngine;
 
 			if (activeEngine != null)
 			{
@@ -1516,7 +1490,7 @@ namespace Pinta.Tools
 
 				if (drawHoverSelection)
 				{
-					ControlPoint selPoint = SelectedPoint;
+					ControlPoint? selPoint = SelectedPoint;
 
 					if (selPoint != null)
 					{
@@ -1568,7 +1542,7 @@ namespace Pinta.Tools
 		/// <param name="g"></param>
 		protected void DrawHoverPoint(Context g)
 		{
-			ShapeEngine activeEngine = ActiveShapeEngine;
+			ShapeEngine? activeEngine = ActiveShapeEngine;
 
 			if (activeEngine != null)
 			{
@@ -1643,7 +1617,7 @@ namespace Pinta.Tools
 
 			Document doc = PintaCore.Workspace.ActiveDocument;
 
-			ImageSurface undoSurface = doc.CurrentUserLayer.Surface.Clone();
+			ImageSurface undoSurface = doc.Layers.CurrentUserLayer.Surface.Clone();
 			
 			int previousSelectedPointIndex = SelectedPointIndex;
 
@@ -1653,7 +1627,7 @@ namespace Pinta.Tools
 			for (SelectedShapeIndex = 0; SelectedShapeIndex < SEngines.Count; ++SelectedShapeIndex)
 			{
 				//Get a reference to each shape's corresponding tool.
-				ShapeTool correspondingTool = GetCorrespondingTool(SEngines[SelectedShapeIndex].ShapeType);
+				ShapeTool? correspondingTool = GetCorrespondingTool(SEngines[SelectedShapeIndex].ShapeType);
 
 				if (correspondingTool != null)
 				{
@@ -1678,8 +1652,8 @@ namespace Pinta.Tools
 			if (undoSurface != null)
 			{
 				//Create a new ShapesHistoryItem so that the finalization of the shapes can be undone.
-				doc.History.PushNewItem(new ShapesHistoryItem(this, owner.Icon, Catalog.GetString("Finalized"),
-					undoSurface, doc.CurrentUserLayer, previousSelectedPointIndex, prev_selected_shape_index, true));
+				doc.History.PushNewItem(new ShapesHistoryItem(this, owner.Icon, Translations.GetString("Finalized"),
+					undoSurface, doc.Layers.CurrentUserLayer, previousSelectedPointIndex, prev_selected_shape_index, true));
 			}
 
 			if (dirty.HasValue)
@@ -1688,7 +1662,7 @@ namespace Pinta.Tools
 			}
 
             // Ensure the ToolLayer gets hidden now that we're done with it
-            doc.ToolLayer.Hidden = true;
+            doc.Layers.ToolLayer.Hidden = true;
 
 			//Clear out all of the data.
 			ResetShapes();
@@ -1700,7 +1674,7 @@ namespace Pinta.Tools
 		/// </summary>
 		protected void CalculateModifiedCurrentPoint()
 		{
-			ShapeEngine selEngine = SelectedShapeEngine;
+			ShapeEngine? selEngine = SelectedShapeEngine;
 
 			//Don't bother calculating a modified point if there is no selected shape.
 			if (selEngine != null)
@@ -1765,7 +1739,7 @@ namespace Pinta.Tools
 		/// <param name="shapeIndex">The index of the shape in SEngines to find the corresponding tool to and switch to.</param>
 		/// <param name="permanentSwitch">Whether the tool switch is permanent or just temporary (for drawing).</param>
 		/// <returns>The *previous* tool if a tool switch has occurred or null otherwise.</returns>
-		public static ShapeTool ActivateCorrespondingTool(int shapeIndex, bool permanentSwitch)
+		public static ShapeTool? ActivateCorrespondingTool(int shapeIndex, bool permanentSwitch)
 		{
 			//First make sure that there is a validly selectable tool.
 			if (shapeIndex > -1 && SEngines.Count > shapeIndex)
@@ -1785,19 +1759,23 @@ namespace Pinta.Tools
 		/// <param name="shapeType">The index of the shape in SEngines to find the corresponding tool to and switch to.</param>
 		/// <param name="permanentSwitch">Whether the tool switch is permanent or just temporary (for drawing).</param>
 		/// <returns>The *previous* tool if a tool switch has occurred or null otherwise.</returns>
-		public static ShapeTool ActivateCorrespondingTool(ShapeTypes shapeType, bool permanentSwitch)
+		public static ShapeTool? ActivateCorrespondingTool(ShapeTypes shapeType, bool permanentSwitch)
 		{
-			ShapeTool correspondingTool = GetCorrespondingTool(shapeType);
+			ShapeTool? correspondingTool = GetCorrespondingTool(shapeType);
 
 			//Verify that the corresponding tool is valid and that it doesn't match the currently active tool.
 			if (correspondingTool != null && PintaCore.Tools.CurrentTool != correspondingTool)
 			{
-				ShapeTool oldTool = PintaCore.Tools.CurrentTool as ShapeTool;
+				ShapeTool? oldTool = PintaCore.Tools.CurrentTool as ShapeTool;
 
 				//The active tool needs to be switched to the corresponding tool.
 				PintaCore.Tools.SetCurrentTool(correspondingTool);
 
-				ShapeTool newTool = (ShapeTool)PintaCore.Tools.CurrentTool;
+				var newTool = (ShapeTool?)PintaCore.Tools.CurrentTool;
+
+				// This shouldn't be possible, but we need a null check.
+				if (newTool is null)
+					return null;
 
 				//What happens next depends on whether the old tool was an editable ShapeTool.
 				if (oldTool != null && oldTool.IsEditableShapeTool)
@@ -1813,7 +1791,7 @@ namespace Pinta.Tools
 						oldTool.EditEngine.is_drawing = false;
 					}
 
-					ShapeEngine activeEngine = newTool.EditEngine.ActiveShapeEngine;
+					ShapeEngine? activeEngine = newTool.EditEngine.ActiveShapeEngine;
 
 					if (activeEngine != null)
 					{
@@ -1842,9 +1820,9 @@ namespace Pinta.Tools
 		/// </summary>
 		/// <param name="ShapeType">The shape type to find the corresponding tool to.</param>
 		/// <returns>The corresponding tool to the given shape type.</returns>
-		public static ShapeTool GetCorrespondingTool(ShapeTypes shapeType)
+		public static ShapeTool? GetCorrespondingTool(ShapeTypes shapeType)
 		{
-			ShapeTool correspondingTool = null;
+			ShapeTool? correspondingTool = null;
 			
 			//Get the corresponding BaseTool reference to the shape type.
 			CorrespondingTools.TryGetValue(shapeType, out correspondingTool);
@@ -1864,7 +1842,7 @@ namespace Pinta.Tools
 				owner.UseAntialiasing = engine.AntiAliasing;
 
 				//Update the DashPatternBox to represent the current shape's DashPattern.
-				(dash_pattern_box.comboBox.ComboBox as Gtk.ComboBoxEntry).Entry.Text = engine.DashPattern;
+				dash_pattern_box.comboBox!.ComboBox.Entry.Text = engine.DashPattern; // NRT - Code assumes this is not-null
 
 				OutlineColor = engine.OutlineColor.Clone();
 				FillColor = engine.FillColor.Clone();
@@ -1882,7 +1860,7 @@ namespace Pinta.Tools
 		{
 			if (dash_pattern_box.comboBox != null)
 			{
-				(dash_pattern_box.comboBox.ComboBox as Gtk.ComboBoxEntry).Entry.Text = prev_dash_pattern;
+				dash_pattern_box.comboBox.ComboBox.Entry.Text = prev_dash_pattern;
 			}
 
 			owner.UseAntialiasing = prev_antialiasing;
@@ -1896,7 +1874,7 @@ namespace Pinta.Tools
 		{
 			if (dash_pattern_box.comboBox != null)
 			{
-				prev_dash_pattern = (dash_pattern_box.comboBox.ComboBox as Gtk.ComboBoxEntry).Entry.Text;
+				prev_dash_pattern = dash_pattern_box.comboBox.ComboBox.Entry.Text;
 			}
 
 			prev_antialiasing = owner.UseAntialiasing;
@@ -1980,7 +1958,7 @@ namespace Pinta.Tools
 
 		protected void MoveRectangularPoint(List<ControlPoint> controlPoints)
 		{
-			ShapeEngine selEngine = SelectedShapeEngine;
+			ShapeEngine? selEngine = SelectedShapeEngine;
 
 			if (selEngine != null && selEngine.Closed && controlPoints.Count == 4)
 			{

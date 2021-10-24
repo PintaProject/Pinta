@@ -25,11 +25,11 @@
 // THE SOFTWARE.
 
 using System;
-using Mono.Addins;
 
 namespace Pinta.Core
 {
-	[TypeExtensionPoint]
+	// TODO-GTK3 (addins)
+	// [TypeExtensionPoint]
 	public interface IImageImporter
 	{
 		/// <summary>
@@ -56,7 +56,7 @@ namespace Pinta.Core
 		/// Window to be used as a parent for any dialogs that are shown.
 		/// </param>
 		/// <returns>The thumbnail, or null if the image could not be loaded.</returns>
-		Gdk.Pixbuf LoadThumbnail (string filename, int maxWidth, int maxHeight,
+		Gdk.Pixbuf? LoadThumbnail (string filename, int maxWidth, int maxHeight,
 		                          Gtk.Window parent);
 	}
 }

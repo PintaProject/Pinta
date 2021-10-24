@@ -2,6 +2,7 @@ xdg/pinta.desktop.in
 xdg/pinta.appdata.xml.in
 
 Pinta.Core/Actions/AddinActions.cs
+Pinta.Core/Actions/AppActions.cs
 Pinta.Core/Actions/EditActions.cs
 Pinta.Core/Actions/FileActions.cs
 Pinta.Core/Actions/HelpActions.cs
@@ -25,8 +26,6 @@ Pinta.Core/Managers/LivePreviewManager.cs
 Pinta.Core/Managers/ToolManager.cs
 Pinta.Core/Managers/WorkspaceManager.cs
 Pinta.Core/PaletteFormats/PaletteDescriptor.cs
-Pinta.Docking/DockLibrary/DockItem.cs
-Pinta.Docking/DockLibrary/DockItemTitleTab.cs
 Pinta.Effects/Adjustments/AutoLevelEffect.cs
 Pinta.Effects/Adjustments/BlackAndWhiteEffect.cs
 Pinta.Effects/Adjustments/BrightnessContrastEffect.cs
@@ -69,10 +68,9 @@ Pinta.Effects/Effects/TwistEffect.cs
 Pinta.Effects/Effects/UnfocusEffect.cs
 Pinta.Effects/Effects/WarpEffect.cs
 Pinta.Effects/Effects/ZoomBlurEffect.cs
-Pinta.Effects/gtk-gui/Pinta.Effects.LevelsDialog.cs
-Pinta.Gui.Widgets/Widgets/ColorPaletteWidget.cs
 Pinta.Gui.Widgets/Widgets/ReseedButtonWidget.cs
 Pinta.Gui.Widgets/Widgets/Layers/LayersListWidget.cs
+Pinta.Gui.Widgets/Widgets/StatusBarColorPaletteWidget.cs
 Pinta.Tools/Brushes/CircleBrush.cs
 Pinta.Tools/Brushes/GridBrush.cs
 Pinta.Tools/Brushes/PlainBrush.cs
@@ -107,11 +105,11 @@ Pinta.Tools/Tools/RecolorTool.cs
 Pinta.Tools/Tools/RectangleSelectTool.cs
 Pinta.Tools/Tools/RectangleTool.cs
 Pinta.Tools/Tools/RoundedRectangleTool.cs
-Pinta.Tools/Tools/SelectShapeTool.cs
 Pinta.Tools/Tools/ShapeTool.cs
 Pinta.Tools/Tools/TextTool.cs
 Pinta.Tools/Tools/ZoomTool.cs
 Pinta/Actions/Edit/ResizePaletteAction.cs
+Pinta/Actions/Edit/PasteAction.cs
 Pinta/Actions/File/CloseDocumentAction.cs
 Pinta/Actions/File/NewScreenshotAction.cs
 Pinta/Actions/File/OpenDocumentAction.cs
@@ -132,8 +130,5 @@ Pinta/Main.cs
 Pinta/MainWindow.cs
 Pinta/Options.cs
 Pinta/Pads/CanvasPad.cs
-Pinta/Pads/ColorPalettePad.cs
 Pinta/Pads/HistoryPad.cs
 Pinta/Pads/LayersPad.cs
-Pinta/Pads/OpenImagesPad.cs
-Pinta/Pads/ToolBoxPad.cs

@@ -27,132 +27,97 @@
 using System;
 using System.Linq;
 using Gtk;
-using Mono.Unix;
 using System.Collections.Generic;
 
 namespace Pinta.Core
 {
 	public class WindowActions
 	{
-		private Menu window_menu;
-		private Dictionary<RadioAction, CheckMenuItem> action_menu_items;
+		private GLib.Menu doc_section = null!; // NRT - Set in RegisterActions
+		private static readonly string doc_action_id = "active_document";
+		private GLib.SimpleAction active_doc_action;
 
-		public Gtk.Action SaveAll { get; private set; }
-		public Gtk.Action CloseAll { get; private set; }
+		public Command SaveAll { get; private set; }
+		public Command CloseAll { get; private set; }
 
 		public WindowActions ()
 		{
-			SaveAll = new Gtk.Action ("SaveAll", Catalog.GetString ("Save All"), null, Stock.Save);
-			CloseAll = new Gtk.Action ("CloseAll", Catalog.GetString ("Close All"), null, Stock.Close);
+			SaveAll = new Command ("SaveAll", Translations.GetString ("Save All"), null, Resources.StandardIcons.DocumentSave);
+			CloseAll = new Command ("CloseAll", Translations.GetString ("Close All"), null, Resources.StandardIcons.WindowClose);
 
-			OpenWindows = new List<RadioAction> ();
-			action_menu_items = new Dictionary<RadioAction,CheckMenuItem> ();
+			active_doc_action = new GLib.SimpleAction(doc_action_id, GLib.VariantType.Int32, new GLib.Variant(-1));
+
+			active_doc_action.Activated += (o, e) =>
+			{
+				var idx = (int)e.P0;
+				if (idx < PintaCore.Workspace.OpenDocuments.Count)
+				{
+					PintaCore.Workspace.SetActiveDocumentInternal(PintaCore.Workspace.OpenDocuments[idx]);
+					active_doc_action.ChangeState(e.P0);
+				}
+			};
 		}
-
-		public List<RadioAction> OpenWindows { get; private set; }
 
 		#region Initialization
-		public void CreateMainMenu (Gtk.Menu menu)
+		public void RegisterActions(Gtk.Application app, GLib.Menu menu)
 		{
-			window_menu = menu;
+			app.AddAccelAction(SaveAll, "<Ctrl><Alt>A");
+			menu.AppendItem(SaveAll.CreateMenuItem());
 
-			menu.Append (SaveAll.CreateAcceleratedMenuItem (Gdk.Key.A, Gdk.ModifierType.Mod1Mask | Gdk.ModifierType.ControlMask));
-			menu.Append (CloseAll.CreateAcceleratedMenuItem (Gdk.Key.W, Gdk.ModifierType.ControlMask | Gdk.ModifierType.ShiftMask));
-			menu.AppendSeparator ();
+			app.AddAccelAction(CloseAll, "<Primary><Shift>W");
+			menu.AppendItem(CloseAll.CreateMenuItem());
+
+			doc_section = new GLib.Menu();
+			menu.AppendSection(null, doc_section);
+			
+			app.AddAction(active_doc_action);
 		}
-		#endregion
+#endregion
 
-		#region Public Methods
-		public RadioAction AddDocument (Document doc)
+#region Public Methods
+
+		public void SetActiveDocument(Document doc)
+        {
+			var idx = PintaCore.Workspace.OpenDocuments.IndexOf(doc);
+			active_doc_action.Activate(new GLib.Variant(idx));
+        }
+
+		public void AddDocument (Document doc)
 		{
-			RadioAction action = new RadioAction (doc.Guid.ToString (), doc.Filename, string.Empty, null, 0);
-			
-			// Tie these all together as a radio group
-			if (OpenWindows.Count > 0)
-				action.Group = OpenWindows[0].Group;
+			doc.Renamed += (o, e) => { RebuildDocumentMenu(); };
+			doc.IsDirtyChanged += (o, e) => { RebuildDocumentMenu(); };
 
-			action.Active = true;
-			action.Activated += (o, e) => { if ((o as Gtk.ToggleAction).Active) PintaCore.Workspace.SetActiveDocumentInternal (doc); };
-			
-			OpenWindows.Add (action);
-			CheckMenuItem menuitem;
-
-			// We only assign accelerators up to Alt-9
-			if (OpenWindows.Count < 10)
-				menuitem = action.CreateAcceleratedMenuItem (IntegerToNumKey (OpenWindows.Count), Gdk.ModifierType.Mod1Mask);
-			else
-				menuitem = (CheckMenuItem)action.CreateMenuItem ();
-
-			action_menu_items.Add (action, menuitem);
-			window_menu.Add (menuitem);
-
-			doc.Renamed += (o, e) => { UpdateMenuLabel (action, o as Document); };
-			doc.IsDirtyChanged += (o, e) => { UpdateMenuLabel (action, o as Document); };
-
-			return action;
+			AddDocumentMenuItem(PintaCore.Workspace.OpenDocuments.IndexOf(doc));
 		}
 
 		public void RemoveDocument (Document doc)
 		{
-			// Remove from our list of actions
-			RadioAction act = OpenWindows.Where (p => p.Name == doc.Guid.ToString ()).FirstOrDefault ();
-			OpenWindows.Remove (act);
-            		act.Dispose ();
-
-			window_menu.HideAll ();
-
-			// Remove all the menu items from the menu
-			foreach (var item in action_menu_items.Values) {
-				window_menu.Remove (item);
-				item.Dispose ();
-			}
-
-			action_menu_items.Clear ();
-
-			// Recreate all of our menu items
-			// I tried simply changing the accelerators, but could
-			// no get it to work.
-			CheckMenuItem menuitem;
-
-			for (int i = 0; i < OpenWindows.Count; i++) {
-				RadioAction action = OpenWindows[i];
-
-				if (i < 9)
-					menuitem = action.CreateAcceleratedMenuItem (IntegerToNumKey (i + 1), Gdk.ModifierType.Mod1Mask);
-				else
-					menuitem = (CheckMenuItem)action.CreateMenuItem ();
-
-				action_menu_items.Add (action, menuitem);
-				window_menu.Add (menuitem);
-			}
-
-			window_menu.ShowAll ();
+			RebuildDocumentMenu();
 		}
-		#endregion
+#endregion
 
-		#region Private Methods
-		private Gdk.Key IntegerToNumKey (int i)
+#region Private Methods
+		private void AddDocumentMenuItem(int idx)
+        {
+			var doc = PintaCore.Workspace.OpenDocuments[idx];
+			var action_id = string.Format("app.{0}({1})", doc_action_id, idx);
+			var label = string.Format("{0}{1}", doc.Filename, doc.IsDirty ? "*" : string.Empty);
+			var menu_item = new GLib.MenuItem(label, action_id);
+			doc_section.AppendItem(menu_item);
+
+			// We only assign accelerators up to Alt-9
+			if (idx < 9)
+				PintaCore.Chrome.Application.SetAccelsForAction(action_id, new[] { string.Format("<Alt>{0}", idx + 1) });
+		}
+
+		private void RebuildDocumentMenu()
 		{
-			switch (i) {
-				case 1: return Gdk.Key.Key_1;
-				case 2: return Gdk.Key.Key_2;
-				case 3: return Gdk.Key.Key_3;
-				case 4: return Gdk.Key.Key_4;
-				case 5: return Gdk.Key.Key_5;
-				case 6: return Gdk.Key.Key_6;
-				case 7: return Gdk.Key.Key_7;
-				case 8: return Gdk.Key.Key_8;
-				case 9: return Gdk.Key.Key_9;
-			}
+			doc_section.RemoveAll();
+			for (int i = 0; i < PintaCore.Workspace.OpenDocuments.Count; ++i)
+				AddDocumentMenuItem(i);
 
-			throw new ArgumentOutOfRangeException (string.Format ("IntegerToNumKey does not support: {0}", i));
+			PintaCore.Workspace.ResetTitle();
 		}
-
-		private void UpdateMenuLabel (RadioAction action, Document doc)
-		{
-			action.Label = string.Format ("{0}{1}", doc.Filename, doc.IsDirty ? "*" : string.Empty);
-			PintaCore.Workspace.ResetTitle ();
-		}
-		#endregion
+#endregion
 	}
 }

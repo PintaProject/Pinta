@@ -27,139 +27,119 @@
 using System;
 using Cairo;
 using Pinta.Core;
-using Mono.Unix;
-using ClipperLibrary;
-using System.Collections.Generic;
 
 namespace Pinta.Tools
 {
 	public class MoveSelectedTool : BaseTransformTool
 	{
-		private MovePixelsHistoryItem hist;
-		private DocumentSelection original_selection;
+		private MovePixelsHistoryItem? hist;
+		private DocumentSelection? original_selection;
 		private readonly Matrix original_transform = new Matrix ();
 
-		public override string Name {
-			get { return Catalog.GetString ("Move Selected Pixels"); }
-		}
-		public override string Icon {
-			get { return "Tools.Move.png"; }
-		}
-		public override string StatusBarText {
-			get { return Catalog.GetString ("Left click and drag the selection to move selected content. Hold Ctrl to scale instead of move. Right click and drag the selection to rotate selected content. Hold Shift to rotate in steps. Use arrow keys to move selected content by a single pixel."); }
-		}
-		public override Gdk.Cursor DefaultCursor {
-			get { return new Gdk.Cursor (Gdk.Display.Default, PintaCore.Resources.GetIcon ("Tools.Move.png"), 0, 0); }
-		}
-		public override Gdk.Key ShortcutKey { get { return Gdk.Key.M; } }
-		public override int Priority { get { return 7; } }
-
-		#region Mouse Handlers
-
-		protected override Rectangle GetSourceRectangle ()
+		public MoveSelectedTool (IServiceManager services) : base (services)
 		{
-			Document doc = PintaCore.Workspace.ActiveDocument;
-			return doc.Selection.SelectionPath.GetBounds().ToCairoRectangle();
 		}
 
-		protected override void OnStartTransform ()
-		{
-			base.OnStartTransform ();
+		public override string Name => Translations.GetString ("Move Selected Pixels");
+		public override string Icon => Pinta.Resources.Icons.ToolMove;
+		// Translators: {0} is 'Ctrl', or a platform-specific key such as 'Command' on macOS.
+		public override string StatusBarText => Translations.GetString ("Left click and drag the selection to move selected content. Hold {0} to scale instead of move. Right click and drag the selection to rotate selected content. Hold Shift to rotate in steps. Use arrow keys to move selected content by a single pixel.", GtkExtensions.CtrlLabel ());
+		public override Gdk.Cursor DefaultCursor => new Gdk.Cursor (Gdk.Display.Default, Gtk.IconTheme.Default.LoadIcon (Pinta.Resources.Icons.ToolMove, 16), 0, 0);
+		public override Gdk.Key ShortcutKey => Gdk.Key.M;
+		public override int Priority => 5;
 
-			Document doc = PintaCore.Workspace.ActiveDocument;
+		protected override Rectangle GetSourceRectangle (Document document)
+		{
+			return document.Selection.SelectionPath.GetBounds ().ToCairoRectangle ();
+		}
+
+		protected override void OnStartTransform (Document document)
+		{
+			base.OnStartTransform (document);
 
 			// If there is no selection, select the whole image.
-			if (doc.Selection.SelectionPolygons.Count == 0) {
-				doc.Selection.CreateRectangleSelection (
-					new Cairo.Rectangle (0, 0, doc.ImageSize.Width, doc.ImageSize.Height));
+			if (document.Selection.SelectionPolygons.Count == 0) {
+				document.Selection.CreateRectangleSelection (
+					new Rectangle (0, 0, document.ImageSize.Width, document.ImageSize.Height));
 			}
 
-			original_selection = doc.Selection.Clone ();
-			original_transform.InitMatrix (doc.SelectionLayer.Transform);
+			original_selection = document.Selection.Clone ();
+			original_transform.InitMatrix (document.Layers.SelectionLayer.Transform);
 
-			hist = new MovePixelsHistoryItem (Icon, Name, doc);
-			hist.TakeSnapshot (!doc.ShowSelectionLayer);
+			hist = new MovePixelsHistoryItem (Icon, Name, document);
+			hist.TakeSnapshot (!document.Layers.ShowSelectionLayer);
 
-			if (!doc.ShowSelectionLayer) {
+			if (!document.Layers.ShowSelectionLayer) {
 				// Copy the selection to the temp layer
-				doc.CreateSelectionLayer ();
-				doc.ShowSelectionLayer = true;
-				//Use same BlendMode, Opacity and Visibility for SelectionLayer
-				doc.SelectionLayer.BlendMode = doc.CurrentUserLayer.BlendMode;
-				doc.SelectionLayer.Opacity = doc.CurrentUserLayer.Opacity;
-				doc.SelectionLayer.Hidden = doc.CurrentUserLayer.Hidden;					
+				document.Layers.CreateSelectionLayer ();
+				document.Layers.ShowSelectionLayer = true;
+				// Use same BlendMode, Opacity and Visibility for SelectionLayer
+				document.Layers.SelectionLayer.BlendMode = document.Layers.CurrentUserLayer.BlendMode;
+				document.Layers.SelectionLayer.Opacity = document.Layers.CurrentUserLayer.Opacity;
+				document.Layers.SelectionLayer.Hidden = document.Layers.CurrentUserLayer.Hidden;
 
-				using (Cairo.Context g = new Cairo.Context (doc.SelectionLayer.Surface)) {
-					g.AppendPath (doc.Selection.SelectionPath);
+				using (var g = new Context (document.Layers.SelectionLayer.Surface)) {
+					g.AppendPath (document.Selection.SelectionPath);
 					g.FillRule = FillRule.EvenOdd;
-					g.SetSource (doc.CurrentUserLayer.Surface);
+					g.SetSource (document.Layers.CurrentUserLayer.Surface);
 					g.Clip ();
 					g.Paint ();
 				}
 
-				Cairo.ImageSurface surf = doc.CurrentUserLayer.Surface;
-				
-				using (Cairo.Context g = new Cairo.Context (surf)) {
-					g.AppendPath (doc.Selection.SelectionPath);
+				var surf = document.Layers.CurrentUserLayer.Surface;
+
+				using (var g = new Context (surf)) {
+					g.AppendPath (document.Selection.SelectionPath);
 					g.FillRule = FillRule.EvenOdd;
 					g.Operator = Cairo.Operator.Clear;
 					g.Fill ();
 				}
 			}
-			
-			PintaCore.Workspace.Invalidate ();
+
+			document.Workspace.Invalidate ();
 		}
 
-		protected override void OnUpdateTransform (Matrix transform)
+		protected override void OnUpdateTransform (Document document, Matrix transform)
 		{
-			base.OnUpdateTransform (transform);
+			base.OnUpdateTransform (document, transform);
 
-			Document doc = PintaCore.Workspace.ActiveDocument;
-			doc.Selection.Dispose ();
-			doc.Selection = original_selection.Transform (transform);
-			doc.Selection.Visible = true;
+			document.Selection.Dispose ();
+			document.Selection = original_selection!.Transform (transform); // NRT - Set in OnStartTransform
+			document.Selection.Visible = true;
 
-			doc.SelectionLayer.Transform.InitMatrix (original_transform);
-			doc.SelectionLayer.Transform.Multiply (transform);
+			document.Layers.SelectionLayer.Transform.InitMatrix (original_transform);
+			document.Layers.SelectionLayer.Transform.Multiply (transform);
 
-			PintaCore.Workspace.Invalidate ();
+			document.Workspace.Invalidate ();
 		}
 
-		protected override void OnFinishTransform (Matrix transform)
+		protected override void OnFinishTransform (Document document, Matrix transform)
 		{
-			base.OnFinishTransform (transform);
+			base.OnFinishTransform (document, transform);
 
 			// Also transform the base selection used for the various select modes.
-			var doc = PintaCore.Workspace.ActiveDocument;
-			using (var prev_selection = doc.PreviousSelection)
-				doc.PreviousSelection = prev_selection.Transform (transform);
+			using (var prev_selection = document.PreviousSelection)
+				document.PreviousSelection = prev_selection.Transform (transform);
 
 			if (hist != null)
-				PintaCore.History.PushNewItem (hist);
+				document.History.PushNewItem (hist);
 
 			hist = null;
-			original_selection.Dispose ();
+			original_selection?.Dispose ();
 			original_selection = null;
 			original_transform.InitIdentity ();
 		}
-		#endregion
 
-		protected override void OnCommit ()
+		protected override void OnCommit (Document? document)
 		{
-			try {
-				PintaCore.Workspace.ActiveDocument.FinishSelection ();
-			} catch (Exception) {
-				// Ignore an error where ActiveDocument fails.
-			}
+			document?.FinishSelection ();
 		}
 
-		protected override void OnDeactivated(BaseTool newTool)
+		protected override void OnDeactivated (Document? document, BaseTool? newTool)
 		{
-			base.OnDeactivated (newTool);
+			base.OnDeactivated (document, newTool);
 
-			if (PintaCore.Workspace.HasOpenDocuments) {
-				PintaCore.Workspace.ActiveDocument.FinishSelection ();
-			}
+			document?.FinishSelection ();
 		}
 	}
 }

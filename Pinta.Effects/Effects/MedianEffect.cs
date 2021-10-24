@@ -11,7 +11,6 @@ using System;
 using Cairo;
 using Pinta.Gui.Widgets;
 using Pinta.Core;
-using Mono.Unix;
 
 namespace Pinta.Effects
 {
@@ -25,7 +24,7 @@ namespace Pinta.Effects
 		}
 
 		public override string Name {
-			get { return Catalog.GetString ("Median"); }
+			get { return Translations.GetString ("Median"); }
 		}
 
 		public override bool IsConfigurable {
@@ -33,10 +32,10 @@ namespace Pinta.Effects
 		}
 
 		public override string EffectMenuCategory {
-			get { return Catalog.GetString ("Noise"); }
+			get { return Translations.GetString ("Noise"); }
 		}
 
-		public MedianData Data { get { return EffectData as MedianData; } }
+		public MedianData Data { get { return (MedianData)EffectData!; } } // NRT - Set in constructor
 
 		public MedianEffect ()
 		{

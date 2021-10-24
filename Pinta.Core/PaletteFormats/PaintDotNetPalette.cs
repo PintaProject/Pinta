@@ -41,9 +41,9 @@ namespace Pinta.Core
 			StreamReader reader = new StreamReader (fileName);
 
 			try {
-				string line = reader.ReadLine ();
+				string? line = reader.ReadLine ();
 				do {
-					if (line.IndexOf (';') == 0)
+					if (line is null || line.IndexOf (';') == 0)
 						continue;
 
 					uint color = uint.Parse (line.Substring (0, 8), NumberStyles.HexNumber);

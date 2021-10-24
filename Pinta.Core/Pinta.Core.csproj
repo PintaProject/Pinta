@@ -1,218 +1,23 @@
-﻿<?xml version="1.0" encoding="utf-8"?>
-<Project DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003" ToolsVersion="4.5">
-  <!-- Common configuration -->
+﻿<Project Sdk="Microsoft.NET.Sdk">
   <PropertyGroup>
-    <ProjectGuid>{30091528-6EC1-40F8-B4BF-8EB41CBE8A8B}</ProjectGuid>
-    <OutputType>Library</OutputType>
-    <AssemblyName>Pinta.Core</AssemblyName>
+    <TargetFramework>net5.0</TargetFramework>
     <RootNamespace>Pinta.Core</RootNamespace>
-    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
-
+    <AssemblyName>Pinta.Core</AssemblyName>
     <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
-    <ErrorReport>prompt</ErrorReport>
-    <GenerateDocumentation>true</GenerateDocumentation>
-    <NoWarn>1591</NoWarn>
-    <OutputPath>..\bin</OutputPath>
-    <Platform>AnyCPU</Platform>
-    <WarningLevel>4</WarningLevel>
-    <NoStdLib>false</NoStdLib>
-    <ProductVersion>8.0.30703</ProductVersion>
-    <SchemaVersion>2.0</SchemaVersion>
+    <Nullable>enable</Nullable>
+
+    <Version>1.8.0.0</Version>
+    <Authors>PintaProject</Authors>
+    <Company />
+    <Product />
   </PropertyGroup>
-
-  <!-- Debug configuration -->
-  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
-    <DebugSymbols>true</DebugSymbols>
-    <DebugType>full</DebugType>
-    <DefineConstants>DEBUG</DefineConstants>
-    <Optimize>false</Optimize>
-  </PropertyGroup>
-
-  <!-- Release configuration -->
-  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
-    <DebugSymbols>false</DebugSymbols>
-    <DebugType>pdbonly</DebugType>
-    <Optimize>true</Optimize>
-  </PropertyGroup>
-
-  <!-- References -->
   <ItemGroup>
-    <Reference Condition=" '$(PINTA_MONO_POSIX_2)' == '' " Include="Mono.Posix" />
-    <Reference Condition=" '$(PINTA_MONO_POSIX_2)' != '' " Include="Mono.Posix, Version=2.0.0.0, Culture=neutral, PublicKeyToken=0738eb9f132ed756, processorArchitecture=MSIL" />
-
-    <Reference Include="atk-sharp, Version=2.12.0.0, Culture=neutral, PublicKeyToken=35e10195dab3c99f">
-      <Package>gtk-sharp-2.0</Package>
-    </Reference>
-    <Reference Include="gdk-sharp, Version=2.12.0.0, Culture=neutral, PublicKeyToken=35e10195dab3c99f">
-      <Package>gtk-sharp-2.0</Package>
-    </Reference>
-    <Reference Include="glib-sharp, Version=2.12.0.0, Culture=neutral, PublicKeyToken=35e10195dab3c99f">
-      <Package>glib-sharp-2.0</Package>
-    </Reference>
-    <Reference Include="gtk-sharp, Version=2.12.0.0, Culture=neutral, PublicKeyToken=35e10195dab3c99f">
-      <Package>gtk-sharp-2.0</Package>
-    </Reference>
-    <Reference Include="ICSharpCode.SharpZipLib">
-      <HintPath>..\lib\ICSharpCode.SharpZipLib.dll</HintPath>
-    </Reference>
-    <Reference Include="Mono.Addins, Culture=neutral, PublicKeyToken=0738eb9f132ed756">
-      <HintPath>..\lib\Mono.Addins.dll</HintPath>
-    </Reference>
-    <Reference Include="Mono.Cairo" />
-    <Reference Include="pango-sharp, Version=2.12.0.0, Culture=neutral, PublicKeyToken=35e10195dab3c99f">
-      <Package>gtk-sharp-2.0</Package>
-    </Reference>
-    <Reference Include="System" />
-    <Reference Include="System.Core" />
-    <Reference Include="System.Data" />
-    <Reference Include="System.Xml" />
-
+    <PackageReference Include="GtkSharp" Version="3.24.24.4" />
+    <PackageReference Include="NGettext" Version="0.6.6" />
+    <PackageReference Include="SharpZipLib" Version="1.3.1" />
+    <PackageReference Include="ParagonClipper" Version="6.4.2" />
   </ItemGroup>
-  <!-- Source files -->
   <ItemGroup>
-    <Compile Include="Actions\AddinActions.cs" />
-    <Compile Include="Actions\AdjustmentsActions.cs" />
-    <Compile Include="Actions\EditActions.cs" />
-    <Compile Include="Actions\EffectsActions.cs" />
-    <Compile Include="Actions\FileActions.cs" />
-    <Compile Include="Actions\HelpActions.cs" />
-    <Compile Include="Actions\ImageActions.cs" />
-    <Compile Include="Actions\LayerActions.cs" />
-    <Compile Include="Actions\ViewActions.cs" />
-    <Compile Include="Actions\WindowActions.cs" />
-    <Compile Include="Classes\Anchor.cs" />
-    <Compile Include="Classes\AsyncEffectRenderer.cs" />
-    <Compile Include="Classes\BasePaintBrush.cs" />
-    <Compile Include="Classes\BaseTool.cs" />
-    <Compile Include="Classes\Document.cs" />
-    <Compile Include="Classes\DocumentSelection.cs" />
-    <Compile Include="Classes\DocumentWorkspace.cs" />
-    <Compile Include="Classes\DocumentWorkspaceHistory.cs" />
-    <Compile Include="Classes\GradientRenderer.cs" />
-    <Compile Include="Classes\GradientRenderers.cs" />
-    <Compile Include="Classes\IExtension.cs" />
-    <Compile Include="Classes\IndexEventArgs.cs" />
-    <Compile Include="Classes\IndexEventHandler.cs" />
-    <Compile Include="Classes\Layer.cs" />
-    <Compile Include="Classes\LayerProperties.cs" />
-    <Compile Include="Classes\ObservableObject.cs" />
-    <Compile Include="Classes\Palette.cs" />
-    <Compile Include="Classes\Re-editable\ReEditableLayer.cs" />
-    <Compile Include="Classes\Re-editable\Text\TextEngine.cs" />
-    <Compile Include="Classes\Re-editable\Text\TextLayout.cs" />
-    <Compile Include="Classes\Re-editable\Text\TextPosition.cs" />
-    <Compile Include="Classes\ScaleFactor.cs" />
-    <Compile Include="Classes\SelectionModeHandler.cs" />
-    <Compile Include="Classes\SurfaceDiff.cs" />
-    <Compile Include="Classes\UserLayer.cs" />
-    <Compile Include="Clipper\Clipper.cs" />
-    <Compile Include="Effects\BaseEffect.cs" />
-    <Compile Include="Effects\BinaryPixelOp.cs" />
-    <Compile Include="Effects\BitVector2DSurfaceAdapter.cs" />
-    <Compile Include="Effects\ColorBgra.cs" />
-    <Compile Include="Effects\ColorDifferenceEffect.cs" />
-    <Compile Include="Effects\ColorTransferMode.cs" />
-    <Compile Include="Effects\Histogram.cs" />
-    <Compile Include="Effects\HistogramRGB.cs" />
-    <Compile Include="Effects\HsvColor.cs" />
-    <Compile Include="Effects\IBitVector2D.cs" />
-    <Compile Include="Effects\LocalHistogramEffect.cs" />
-    <Compile Include="Effects\PixelOp.cs" />
-    <Compile Include="Effects\RgbColor.cs" />
-    <Compile Include="Effects\Scanline.cs" />
-    <Compile Include="Effects\SplineInterpolator.cs" />
-    <Compile Include="Effects\UnaryPixelOp.cs" />
-    <Compile Include="Effects\UnaryPixelOps.cs" />
-    <Compile Include="Effects\UserBlendOp.cs" />
-    <Compile Include="Effects\UserBlendOps.cs" />
-    <Compile Include="Effects\UserBlendOps.Generated.cs" />
-    <Compile Include="Effects\Utility.cs" />
-    <Compile Include="Enumerations\BlendMode.cs" />
-    <Compile Include="Enumerations\CursorShape.cs" />
-    <Compile Include="Enumerations\EffectAdjustment.cs" />
-    <Compile Include="Enumerations\GradientColorMode.cs" />
-    <Compile Include="Enumerations\TextAlignment.cs" />
-    <Compile Include="Enumerations\TextMode.cs" />
-    <Compile Include="EventArgs\BrushEventArgs.cs" />
-    <Compile Include="EventArgs\CanvasInvalidatedEventArgs.cs" />
-    <Compile Include="EventArgs\DocumentCancelEventArgs.cs" />
-    <Compile Include="EventArgs\DocumentEventArgs.cs" />
-    <Compile Include="EventArgs\HistoryItemAddedEventArgs.cs" />
-    <Compile Include="EventArgs\HistoryItemRemovedEventArgs.cs" />
-    <Compile Include="EventArgs\LivePreviewEndedEventArgs.cs" />
-    <Compile Include="EventArgs\LivePreviewRenderUpdatedEventArgs.cs" />
-    <Compile Include="EventArgs\LivePreviewStartedEventArgs.cs" />
-    <Compile Include="EventArgs\ModifyCompressionEventArgs.cs" />
-    <Compile Include="EventArgs\TextChangedEventArgs.cs" />
-    <Compile Include="EventArgs\ToolEventArgs.cs" />
-    <Compile Include="Extensions\CairoExtensions.cs" />
-    <Compile Include="Extensions\GdkExtensions.cs" />
-    <Compile Include="Extensions\GtkExtensions.cs" />
-    <Compile Include="Extensions\OtherExtensions.cs" />
-    <Compile Include="Extensions\ToolBarButton.cs" />
-    <Compile Include="Extensions\ToolBarComboBox.cs" />
-    <Compile Include="Extensions\ToolBarFontComboBox.cs" />
-    <Compile Include="Extensions\ToolBarImage.cs" />
-    <Compile Include="Extensions\ToolBarLabel.cs" />
-    <Compile Include="Extensions\ToolBarSlider.cs" />
-    <Compile Include="Extensions\ToolBarToggleButton.cs" />
-    <Compile Include="HistoryItems\AddLayerHistoryItem.cs" />
-    <Compile Include="HistoryItems\BaseHistoryItem.cs" />
-    <Compile Include="HistoryItems\CompoundHistoryItem.cs" />
-    <Compile Include="HistoryItems\DeleteLayerHistoryItem.cs" />
-    <Compile Include="HistoryItems\FinishPixelsHistoryItem.cs" />
-    <Compile Include="HistoryItems\InvertHistoryItem.cs" />
-    <Compile Include="HistoryItems\MovePixelsHistoryItem.cs" />
-    <Compile Include="HistoryItems\PasteHistoryItem.cs" />
-    <Compile Include="HistoryItems\ResizeHistoryItem.cs" />
-    <Compile Include="HistoryItems\SelectionHistoryItem.cs" />
-    <Compile Include="HistoryItems\SimpleHistoryItem.cs" />
-    <Compile Include="HistoryItems\SwapLayersHistoryItem.cs" />
-    <Compile Include="HistoryItems\TextHistoryItem.cs" />
-    <Compile Include="HistoryItems\UpdateLayerPropertiesHistoryItem.cs" />
-    <Compile Include="ImageFormats\FormatDescriptor.cs" />
-    <Compile Include="ImageFormats\GdkPixbufFormat.cs" />
-    <Compile Include="ImageFormats\IImageExporter.cs" />
-    <Compile Include="ImageFormats\IImageImporter.cs" />
-    <Compile Include="ImageFormats\JpegFormat.cs" />
-    <Compile Include="ImageFormats\OraFormat.cs" />
-    <Compile Include="ImageFormats\TgaExporter.cs" />
-    <Compile Include="Managers\ActionManager.cs" />
-    <Compile Include="Managers\ChromeManager.cs" />
-    <Compile Include="Managers\EffectsManager.cs" />
-    <Compile Include="Managers\FontManager.cs" />
-    <Compile Include="Managers\HistoryManager.cs" />
-    <Compile Include="Managers\ImageConverterManager.cs" />
-    <Compile Include="Managers\LayerManager.cs" />
-    <Compile Include="Managers\LivePreviewManager.cs" />
-    <Compile Include="Managers\PaintBrushManager.cs" />
-    <Compile Include="Managers\PaletteManager.cs" />
-    <Compile Include="Managers\ResourceManager.cs" />
-    <Compile Include="Managers\SettingsManager.cs" />
-    <Compile Include="Managers\SystemManager.cs" />
-    <Compile Include="Managers\ToolManager.cs" />
-    <Compile Include="Managers\WorkspaceManager.cs" />
-    <Compile Include="PintaCore.cs" />
-    <Compile Include="PixelOperations\CheckerBoardOperation.cs" />
-    <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Widgets\MenuButton.cs" />
-    <Compile Include="Widgets\ToolBarDropDownButton.cs" />
-    <Compile Include="PaletteFormats\PaletteDescriptor.cs" />
-    <Compile Include="PaletteFormats\IPaletteLoader.cs" />
-    <Compile Include="PaletteFormats\IPaletteSaver.cs" />
-    <Compile Include="PaletteFormats\PaintDotNetPalette.cs" />
-    <Compile Include="PaletteFormats\GimpPalette.cs" />
-    <Compile Include="PaletteFormats\PaletteFormats.cs" />
-    <Compile Include="PaletteFormats\PaintShopProPalette.cs" />
+    <ProjectReference Include="..\Pinta.Resources\Pinta.Resources.csproj" />
   </ItemGroup>
-
-  <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
-
-  <ItemGroup>
-    <ProjectReference Include="..\Pinta.Resources\Pinta.Resources.csproj">
-      <Project>{50AFF341-655E-45EF-83CA-58F8254E4C8B}</Project>
-      <Name>Pinta.Resources</Name>
-    </ProjectReference>
-  </ItemGroup>
-
 </Project>

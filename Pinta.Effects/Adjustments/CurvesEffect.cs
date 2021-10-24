@@ -17,25 +17,25 @@ namespace Pinta.Effects
 {
 	public class CurvesEffect : BaseEffect
 	{
-		UnaryPixelOp op = null;
+		UnaryPixelOp? op = null;
 		
 		public override string Icon {
 			get { return "Menu.Adjustments.Curves.png"; }
 		}
 
 		public override string Name {
-			get { return Mono.Unix.Catalog.GetString ("Curves"); }
+			get { return Translations.GetString ("Curves"); }
 		}
 
 		public override bool IsConfigurable {
 			get { return true; }
 		}
 
-		public override Gdk.Key AdjustmentMenuKey {
-			get { return Gdk.Key.M; }
+		public override string AdjustmentMenuKey {
+			get { return "M"; }
 		}
 
-		public CurvesData Data { get { return EffectData as CurvesData; } }
+		public CurvesData Data { get { return (CurvesData)EffectData!; } } // NRT - Set in constructor
 		
 		public CurvesEffect ()
 		{
@@ -44,15 +44,15 @@ namespace Pinta.Effects
 		
 		public override bool LaunchConfiguration ()
 		{
-			var dialog = new CurvesDialog (Data);
-			dialog.Title = Name;
-			dialog.Icon = PintaCore.Resources.GetIcon (Icon);
-			
-			int response = dialog.Run ();
-			
-			dialog.Destroy ();
-			
-			return (response == (int)Gtk.ResponseType.Ok);
+			using (var dialog = new CurvesDialog(Data))
+			{
+				dialog.Title = Name;
+				dialog.Icon = PintaCore.Resources.GetIcon(Icon);
+
+				int response = dialog.Run();
+
+				return (response == (int)Gtk.ResponseType.Ok);
+			}
 		}
 		
 		public override void Render (ImageSurface src, ImageSurface dest, Gdk.Rectangle[] rois)
@@ -95,7 +95,7 @@ namespace Pinta.Effects
             int channels = transferCurves.Length;
 
             for (int channel = 0; channel < channels; channel++) {
-                SortedList<int, int> channelControlPoints = Data.ControlPoints[channel];
+                SortedList<int, int> channelControlPoints = Data.ControlPoints![channel]; // NRT - Code expects this to be not-null
                 IList<int> xa = channelControlPoints.Keys;
                 IList<int> ya = channelControlPoints.Values;
                 SplineInterpolator interpolator = new SplineInterpolator();
@@ -116,7 +116,7 @@ namespace Pinta.Effects
 	
 	public class CurvesData : EffectData
 	{
-		public SortedList<int, int>[] ControlPoints { get; set; }
+		public SortedList<int, int>[]? ControlPoints { get; set; }
 		
 		public ColorTransferMode Mode { get; set; }
 		

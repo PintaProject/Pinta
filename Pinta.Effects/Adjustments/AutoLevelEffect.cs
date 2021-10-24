@@ -15,18 +15,18 @@ namespace Pinta.Effects
 {
 	public class AutoLevelEffect : BaseEffect
 	{
-		UnaryPixelOps.Level op;
+		UnaryPixelOps.Level? op;
 
 		public override string Icon {
 			get { return "Menu.Adjustments.AutoLevel.png"; }
 		}
 
 		public override string Name {
-			get { return Mono.Unix.Catalog.GetString ("Auto Level"); }
+			get { return Translations.GetString ("Auto Level"); }
 		}
 
-		public override Gdk.Key AdjustmentMenuKey {
-			get { return Gdk.Key.L; }
+		public override string AdjustmentMenuKey {
+			get { return "L"; }
 		}
 
 		public override void Render (ImageSurface src, ImageSurface dest, Gdk.Rectangle[] rois)

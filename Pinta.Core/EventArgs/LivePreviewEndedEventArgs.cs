@@ -36,7 +36,7 @@ namespace Pinta.Core
 	
 	public class LivePreviewEndedEventArgs : EventArgs
 	{
-		public LivePreviewEndedEventArgs (RenderStatus status, Exception exception)
+		public LivePreviewEndedEventArgs (RenderStatus status, Exception? exception)
 		{
 			this.Status = status;
 			this.Exception = exception;
@@ -44,6 +44,6 @@ namespace Pinta.Core
 		
 		public RenderStatus Status { get; private set; }
 		
-		public Exception Exception { get; private set; }
+		public Exception? Exception { get; private set; }
 	}	
 }

@@ -28,7 +28,6 @@ using System;
 using Cairo;
 using Gtk;
 using Pinta.Core;
-using Mono.Unix;
 
 namespace Pinta.Tools
 {
@@ -36,130 +35,101 @@ namespace Pinta.Tools
 	{
 		private Point last_point = point_empty;
 
-		protected ToolBarLabel fill_label;
-		protected ToolBarDropDownButton fill_button;
-		protected Gtk.SeparatorToolItem fill_sep;
-
-		private Path path;
+		private Path? path;
 		private Color fill_color;
 		private Color outline_color;
 
-		private DashPatternBox dashPBox = new DashPatternBox();
+		private DashPatternBox dashPBox = new DashPatternBox ();
 
-		private string dashPattern = "-";
+		private string dash_pattern = "-";
 
-		public FreeformShapeTool ()
+		private const string FILL_TYPE_SETTING = "freeform-shape-fill-type";
+		private const string DASH_PATTERN_SETTING = "freeform-shape-dash_pattern";
+
+		public FreeformShapeTool (IServiceManager services) : base (services)
 		{
 		}
 
-		#region Properties
-		public override string Name { get { return Catalog.GetString ("Freeform Shape"); } }
-		public override string Icon { get { return "Tools.FreeformShape.png"; } }
-		public override string StatusBarText { get { return Catalog.GetString ("Left click to draw with primary color, right click to draw with secondary color."); } }
-        public override Gdk.Cursor DefaultCursor { get { return new Gdk.Cursor (Gdk.Display.Default, PintaCore.Resources.GetIcon ("Cursor.FreeformShape.png"), 9, 18); } }
-		public override Gdk.Key ShortcutKey { get { return Gdk.Key.O; } }
-		public override int Priority { get { return 47; } }
-		#endregion
+		public override string Name => Translations.GetString ("Freeform Shape");
+		public override string Icon => Pinta.Resources.Icons.ToolFreeformShape;
+		public override string StatusBarText => Translations.GetString ("Left click to draw with primary color, right click to draw with secondary color.");
+		public override Gdk.Cursor DefaultCursor => new Gdk.Cursor (Gdk.Display.Default, Resources.GetIcon ("Cursor.FreeformShape.png"), 9, 18);
+		public override Gdk.Key ShortcutKey => Gdk.Key.O;
+		public override int Priority => 45;
 
-		#region ToolBar
 		protected override void OnBuildToolBar (Toolbar tb)
 		{
-			base.OnBuildToolBar(tb);
+			base.OnBuildToolBar (tb);
 
+			tb.AppendItem (Separator);
+			tb.AppendItem (FillLabel);
+			tb.AppendItem (FillDropDown);
 
-			if (fill_sep == null)
-				fill_sep = new Gtk.SeparatorToolItem ();
+			// TODO: This could be cleaner.
+			// This will only return an item on the first setup so we only add the handler once.
+			var dash_pattern_box = dashPBox.SetupToolbar (tb);
 
-			tb.AppendItem (fill_sep);
+			if (dash_pattern_box != null) {
+				dash_pattern_box.Entry.Text = Settings.GetSetting (DASH_PATTERN_SETTING, "-");
 
-			if (fill_label == null)
-				fill_label = new ToolBarLabel (string.Format (" {0}: ", Catalog.GetString ("Fill Style")));
-
-			tb.AppendItem (fill_label);
-
-			if (fill_button == null) {
-				fill_button = new ToolBarDropDownButton ();
-
-				fill_button.AddItem (Catalog.GetString ("Outline Shape"), "ShapeTool.Outline.png", 0);
-				fill_button.AddItem (Catalog.GetString ("Fill Shape"), "ShapeTool.Fill.png", 1);
-				fill_button.AddItem (Catalog.GetString ("Fill and Outline Shape"), "ShapeTool.OutlineFill.png", 2);
-			}
-
-			tb.AppendItem (fill_button);
-
-
-			Gtk.ComboBox dpbBox = dashPBox.SetupToolbar(tb);
-
-			if (dpbBox != null)
-			{
-				dpbBox.Changed += (o, e) =>
-				{
-					dashPattern = dpbBox.ActiveText;
+				dash_pattern_box.Changed += (o, e) => {
+					dash_pattern = dash_pattern_box.ActiveText;
 				};
 			}
 		}
-		#endregion
 
-		#region Mouse Handlers
-		protected override void OnMouseDown (Gtk.DrawingArea canvas, Gtk.ButtonPressEventArgs args, Cairo.PointD point)
+		protected override void OnMouseDown (Document document, ToolMouseEventArgs e)
 		{
-			Document doc = PintaCore.Workspace.ActiveDocument;
-
 			surface_modified = false;
-			undo_surface = doc.CurrentUserLayer.Surface.Clone ();
+			undo_surface = document.Layers.CurrentUserLayer.Surface.Clone ();
 			path = null;
 
-			doc.ToolLayer.Clear ();
-			doc.ToolLayer.Hidden = false;
+			document.Layers.ToolLayer.Clear ();
+			document.Layers.ToolLayer.Hidden = false;
 		}
 
-		protected override void OnMouseMove (object o, Gtk.MotionNotifyEventArgs args, Cairo.PointD point)
+		protected override void OnMouseMove (Document document, ToolMouseEventArgs e)
 		{
-			Document doc = PintaCore.Workspace.ActiveDocument;
-
-			if ((args.Event.State & Gdk.ModifierType.Button1Mask) == Gdk.ModifierType.Button1Mask) {
-				outline_color = PintaCore.Palette.PrimaryColor;
-				fill_color = PintaCore.Palette.SecondaryColor;
-			} else if ((args.Event.State & Gdk.ModifierType.Button3Mask) == Gdk.ModifierType.Button3Mask) {
-				outline_color = PintaCore.Palette.SecondaryColor;
-				fill_color = PintaCore.Palette.PrimaryColor;
+			if (e.IsLeftMousePressed) {
+				outline_color = Palette.PrimaryColor;
+				fill_color = Palette.SecondaryColor;
+			} else if (e.IsRightMousePressed) {
+				outline_color = Palette.SecondaryColor;
+				fill_color = Palette.PrimaryColor;
 			} else {
 				last_point = point_empty;
 				return;
 			}
 
-			int x = (int)point.X;
-			int y = (int)point.Y;
+			var x = e.Point.X;
+			var y = e.Point.Y;
 
 			if (last_point.Equals (point_empty)) {
-				last_point = new Point (x, y);
+				last_point = e.Point;
 				return;
 			}
 
-			if (doc.Workspace.PointInCanvas (point))
+			if (document.Workspace.PointInCanvas (e.PointDouble))
 				surface_modified = true;
 
-			doc.ToolLayer.Clear ();
-			ImageSurface surf = doc.ToolLayer.Surface;
+			document.Layers.ToolLayer.Clear ();
 
-			using (Context g = new Context (surf)) {
-				doc.Selection.Clip(g);
-
+			using (var g = document.CreateClippedToolContext ()) {
 				g.Antialias = UseAntialiasing ? Antialias.Subpixel : Antialias.None;
 
-				g.SetDash(DashPatternBox.GenerateDashArray(dashPattern, BrushWidth), 0.0);
+				g.SetDash (DashPatternBox.GenerateDashArray (dash_pattern, BrushWidth), 0.0);
 
 				if (path != null) {
 					g.AppendPath (path);
-					(path as IDisposable).Dispose ();
+					path.Dispose ();
 				} else {
 					g.MoveTo (x, y);
 				}
-					
+
 				g.LineTo (x, y);
 
 				path = g.CopyPath ();
-				
+
 				g.ClosePath ();
 				g.LineWidth = BrushWidth;
 				g.FillRule = FillRule.EvenOdd;
@@ -171,39 +141,33 @@ namespace Pinta.Tools
 					g.Stroke ();
 				} else if (FillShape) {
 					g.SetSourceColor (outline_color);
-					g.FillPreserve();
+					g.FillPreserve ();
 					g.SetSourceColor (outline_color);
-					g.Stroke();
+					g.Stroke ();
 				} else {
 					g.SetSourceColor (outline_color);
 					g.Stroke ();
 				}
 			}
 
-			doc.Workspace.Invalidate ();
+			document.Workspace.Invalidate ();
 
 			last_point = new Point (x, y);
 		}
 
-		protected override void OnMouseUp (Gtk.DrawingArea canvas, Gtk.ButtonReleaseEventArgs args, Cairo.PointD point)
+		protected override void OnMouseUp (Document document, ToolMouseEventArgs e)
 		{
-			Document doc = PintaCore.Workspace.ActiveDocument;
-            doc.ToolLayer.Clear ();
-			doc.ToolLayer.Hidden = true;
+			document.Layers.ToolLayer.Clear ();
+			document.Layers.ToolLayer.Hidden = true;
 
-			ImageSurface surf = doc.CurrentUserLayer.Surface;
-			using (Context g = new Context (surf)) {
-				g.AppendPath (doc.Selection.SelectionPath);
-				g.FillRule = FillRule.EvenOdd;
-				g.Clip ();
-
+			using (Context g = document.CreateClippedContext ()) {
 				g.Antialias = UseAntialiasing ? Antialias.Subpixel : Antialias.None;
 
-				g.SetDash(DashPatternBox.GenerateDashArray(dashPattern, BrushWidth), 0.0);
+				g.SetDash (DashPatternBox.GenerateDashArray (dash_pattern, BrushWidth), 0.0);
 
 				if (path != null) {
 					g.AppendPath (path);
-					(path as IDisposable).Dispose ();
+					path.Dispose ();
 					path = null;
 				}
 
@@ -218,29 +182,58 @@ namespace Pinta.Tools
 					g.Stroke ();
 				} else if (FillShape) {
 					g.SetSourceColor (outline_color);
-					g.FillPreserve();
+					g.FillPreserve ();
 					g.SetSourceColor (outline_color);
-					g.Stroke();
+					g.Stroke ();
 				} else {
 					g.SetSourceColor (outline_color);
 					g.Stroke ();
 				}
 			}
 
-			if (surface_modified)
-				PintaCore.History.PushNewItem (new SimpleHistoryItem (Icon, Name, undo_surface, doc.CurrentUserLayerIndex));
+			if (surface_modified && undo_surface != null)
+				document.History.PushNewItem (new SimpleHistoryItem (Icon, Name, undo_surface, document.Layers.CurrentUserLayerIndex));
 			else if (undo_surface != null)
-				(undo_surface as IDisposable).Dispose ();
+				undo_surface.Dispose ();
 
 			surface_modified = false;
 
-			doc.Workspace.Invalidate ();
+			document.Workspace.Invalidate ();
 		}
-		#endregion
 
-		#region Private Methods
-		protected bool StrokeShape { get { return (int)fill_button.SelectedItem.Tag % 2 == 0; } }
-		protected bool FillShape { get { return (int)fill_button.SelectedItem.Tag >= 1; } }
-		#endregion
+		protected override void OnSaveSettings (ISettingsService settings)
+		{
+			base.OnSaveSettings (settings);
+
+			if (fill_button is not null)
+				settings.PutSetting (FILL_TYPE_SETTING, fill_button.SelectedIndex);
+			if (dashPBox?.comboBox is not null)
+				settings.PutSetting (DASH_PATTERN_SETTING, dashPBox.comboBox.ComboBox.ActiveText);
+		}
+
+		private bool StrokeShape => FillDropDown.SelectedItem.GetTagOrDefault (0) % 2 == 0;
+		private bool FillShape => FillDropDown.SelectedItem.GetTagOrDefault (0) >= 1;
+
+		private ToolBarLabel? fill_label;
+		private ToolBarDropDownButton? fill_button;
+		private SeparatorToolItem? fill_sep;
+
+		private SeparatorToolItem Separator => fill_sep ??= new SeparatorToolItem ();
+		private ToolBarLabel FillLabel => fill_label ??= new ToolBarLabel ($" {Translations.GetString ("Fill Style")}: ");
+		private ToolBarDropDownButton FillDropDown {
+			get {
+				if (fill_button == null) {
+					fill_button = new ToolBarDropDownButton ();
+
+					fill_button.AddItem (Translations.GetString ("Outline Shape"), Pinta.Resources.Icons.FillStyleOutline, 0);
+					fill_button.AddItem (Translations.GetString ("Fill Shape"), Pinta.Resources.Icons.FillStyleFill, 1);
+					fill_button.AddItem (Translations.GetString ("Fill and Outline Shape"), Pinta.Resources.Icons.FillStyleOutlineFill, 2);
+
+					fill_button.SelectedIndex = Settings.GetSetting (FILL_TYPE_SETTING, 0);
+				}
+
+				return fill_button;
+			}
+		}
 	}
 }

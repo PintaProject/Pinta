@@ -26,7 +26,6 @@
 
 using System;
 using Cairo;
-using Mono.Unix;
 using Gtk;
 
 namespace Pinta.Core
@@ -40,8 +39,8 @@ namespace Pinta.Core
 
 		public PasteHistoryItem (Gdk.Pixbuf pasteImage, DocumentSelection oldSelection)
 		{
-			Text = Catalog.GetString ("Paste");
-			Icon = Stock.Paste;
+			Text = Translations.GetString ("Paste");
+			Icon = Resources.StandardIcons.EditPaste;
 
 			paste_image = pasteImage;
 			old_selection = oldSelection;
@@ -52,24 +51,26 @@ namespace Pinta.Core
 			Document doc = PintaCore.Workspace.ActiveDocument;
 
 			// Copy the paste to the temp layer
-			doc.CreateSelectionLayer ();
-			doc.ShowSelectionLayer = true;
+			doc.Layers.CreateSelectionLayer ();
+			doc.Layers.ShowSelectionLayer = true;
 
-			using (Cairo.Context g = new Cairo.Context (doc.SelectionLayer.Surface)) {
+			using (Cairo.Context g = new Cairo.Context (doc.Layers.SelectionLayer.Surface)) {
 				g.DrawPixbuf (paste_image, new Cairo.Point (0, 0));
 			}
 
 			Swap ();
 
 			PintaCore.Workspace.Invalidate ();
-			PintaCore.Tools.SetCurrentTool (Catalog.GetString ("Move Selected Pixels"));
+			PintaCore.Tools.SetCurrentTool ("MoveSelectedTool");
 		}
 
 		public override void Undo ()
 		{
+			var doc = PintaCore.Workspace.ActiveDocument;
+
 			Swap ();
 
-			PintaCore.Layers.DestroySelectionLayer ();
+			doc.Layers.DestroySelectionLayer ();
 			PintaCore.Workspace.Invalidate ();
 		}
 

@@ -26,7 +26,6 @@
 
 using System;
 using Gtk;
-using Mono.Unix;
 using Pinta.Core;
 
 namespace Pinta.Actions
@@ -58,31 +57,34 @@ namespace Pinta.Actions
 				return;
 			}
 
-			var primary = Catalog.GetString ("Save the changes to image \"{0}\" before closing?");
-			var secondary = Catalog.GetString ("If you don't save, all changes will be permanently lost.");
+			var primary = Translations.GetString ("Save changes to image \"{0}\" before closing?");
+			var secondary = Translations.GetString ("If you don't save, all changes will be permanently lost.");
 			var message = string.Format (markup, primary, secondary);
 
-			var md = new MessageDialog (PintaCore.Chrome.MainWindow, DialogFlags.Modal,
-						    MessageType.Warning, ButtonsType.None, true,
+			using var md = new MessageDialog (PintaCore.Chrome.MainWindow, DialogFlags.Modal,
+						    MessageType.Question, ButtonsType.None, true,
 						    message, System.IO.Path.GetFileName (PintaCore.Workspace.ActiveDocument.Filename));
 
 			// Use the standard button order for each OS.
+			Widget closeButton;
 			if (PintaCore.System.OperatingSystem == OS.Windows) {
 				md.AddButton (Stock.Save, ResponseType.Yes);
-				md.AddButton (Catalog.GetString ("Close _without saving"), ResponseType.No);
+				closeButton = md.AddButton (Translations.GetString ("Close _without Saving"), ResponseType.No);
 				md.AddButton (Stock.Cancel, ResponseType.Cancel);
 			}
 			else {
-				md.AddButton (Catalog.GetString ("Close _without saving"), ResponseType.No);
+				closeButton = md.AddButton (Translations.GetString ("Close _without Saving"), ResponseType.No);
 				md.AddButton (Stock.Cancel, ResponseType.Cancel);
 				md.AddButton (Stock.Save, ResponseType.Yes);
 			}
 
-			// so that user won't accidentally overwrite
-			md.DefaultResponse = ResponseType.Cancel;
+			// Style the close button as being a destructive action.
+			// (https://developer.gnome.org/hig/stable/buttons.html.en)
+			closeButton.StyleContext.AddClass ("destructive-action");
+
+			md.DefaultResponse = ResponseType.Yes;
 
 			ResponseType response = (ResponseType)md.Run ();
-			md.Destroy ();
 
 			if (response == ResponseType.Yes) {
 				PintaCore.Workspace.ActiveDocument.Save (false);

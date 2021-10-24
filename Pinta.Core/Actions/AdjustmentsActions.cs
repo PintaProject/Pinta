@@ -33,23 +33,17 @@ namespace Pinta.Core
 {
 	public class AdjustmentsActions
 	{
-		public List<Gtk.Action> Actions { get; private set; }
+		public List<Command> Actions { get; private set; }
 		
 		public AdjustmentsActions ()
 		{
-			Actions = new List<Gtk.Action> ();
+			Actions = new List<Command> ();
 		}
-
-		#region Initialization
-		public void CreateMainMenu (Gtk.Menu menu)
-		{
-		}
-		#endregion
 
 		#region Public Methods
 		public void ToggleActionsSensitive (bool sensitive)
 		{
-			foreach (Gtk.Action a in Actions)
+			foreach (var a in Actions)
 				a.Sensitive = sensitive;
 		}
 		#endregion

@@ -30,13 +30,12 @@ using Pinta.Core;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
-using Mono.Unix;
 
 namespace Pinta.Tools
 {
     public class EllipseEditEngine: BaseEditEngine
     {
-        protected override string ShapeName { get { return Catalog.GetString ("Ellipse"); } }
+        protected override string ShapeName { get { return Translations.GetString ("Ellipse"); } }
 
         public EllipseEditEngine (ShapeTool owner)
             : base (owner)
@@ -47,13 +46,13 @@ namespace Pinta.Tools
 		{
 			Document doc = PintaCore.Workspace.ActiveDocument;
 
-			ShapeEngine newEngine = new EllipseEngine(doc.CurrentUserLayer, null, owner.UseAntialiasing,
+			ShapeEngine newEngine = new EllipseEngine(doc.Layers.CurrentUserLayer, null, owner.UseAntialiasing,
 				BaseEditEngine.OutlineColor, BaseEditEngine.FillColor, owner.EditEngine.BrushWidth);
 
 			AddRectanglePoints(ctrlKey, clickedOnControlPoint, newEngine, prevSelPoint);
 
 			//Set the new shape's DashPattern option.
-			newEngine.DashPattern = dash_pattern_box.comboBox.ComboBox.ActiveText;
+			newEngine.DashPattern = dash_pattern_box.comboBox!.ComboBox.ActiveText; // NRT - Code assumes this is not-null
 
 			return newEngine;
 		}

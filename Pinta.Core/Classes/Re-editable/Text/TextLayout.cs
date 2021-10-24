@@ -33,43 +33,41 @@ using Gdk;
 
 namespace Pinta.Core
 {
-    public class TextLayout
-    {
-        private TextEngine engine;
+	public class TextLayout
+	{
+		private TextEngine engine = null!; // NRT - Not sure how this is set, but all callers assume it is not-null
 
-        public TextEngine Engine {
-            get { return engine; }
-            set {
-                if (engine != null)
-                    engine.Modified -= OnEngineModified;
-                engine = value;
-                engine.Modified += OnEngineModified;
-                OnEngineModified (this, EventArgs.Empty);
-            }
-        }
+		public TextEngine Engine {
+			get { return engine; }
+			set {
+				if (engine != null)
+					engine.Modified -= OnEngineModified;
+				engine = value;
+				engine.Modified += OnEngineModified;
+				OnEngineModified (this, EventArgs.Empty);
+			}
+		}
 
-        public Pango.Layout Layout { get; private set; }
-        public int FontHeight { get { return GetCursorLocation ().Height; } }
+		public Pango.Layout Layout { get; private set; }
+		public int FontHeight { get { return GetCursorLocation ().Height; } }
 
-        public TextLayout ()
-        {
-            Layout = new Pango.Layout (PintaCore.Chrome.MainWindow.PangoContext);
-        }
-
-		public Rectangle[] SelectionRectangles
+		public TextLayout ()
 		{
+			Layout = new Pango.Layout (PintaCore.Chrome.MainWindow.PangoContext);
+		}
+
+		public Rectangle[] SelectionRectangles {
 			get {
-                var regions = engine.SelectionRegions;
-                List<Rectangle> rects = new List<Rectangle> ();
+				var regions = engine.SelectionRegions;
+				List<Rectangle> rects = new List<Rectangle> ();
 
-                foreach (var region in regions)
-                {
-                    Point p1 = TextPositionToPoint (region.Key);
-                    Point p2 = TextPositionToPoint (region.Value);
-                    rects.Add (new Rectangle (p1, new Size (p2.X - p1.X, FontHeight)));
-                }
+				foreach (var region in regions) {
+					Point p1 = TextPositionToPoint (region.Key);
+					Point p2 = TextPositionToPoint (region.Value);
+					rects.Add (new Rectangle (p1, new Size (p2.X - p1.X, FontHeight)));
+				}
 
-                return rects.ToArray ();
+				return rects.ToArray ();
 			}
 		}
 
@@ -77,7 +75,7 @@ namespace Pinta.Core
 		{
 			Pango.Rectangle weak, strong;
 
-			int index = engine.PositionToIndex (engine.CurrentPosition);
+			int index = engine.PositionToUTF8Index (engine.CurrentPosition);
 
 			Layout.GetCursorPos (index, out strong, out weak);
 
@@ -98,8 +96,8 @@ namespace Pinta.Core
 			// GetPixelExtents() doesn't really return a very sensible height.
 			// Instead of doing some hacky arithmetic to correct it, the height will just
 			// be the cursor's height times the number of lines.
-            return new Rectangle (engine.Origin.X, engine.Origin.Y,
-                                  ink.Width, cursor.Height * engine.LineCount);
+			return new Rectangle (engine.Origin.X, engine.Origin.Y,
+					      ink.Width, cursor.Height * engine.LineCount);
 		}
 
 		public TextPosition PointToTextPosition (Point point)
@@ -110,12 +108,12 @@ namespace Pinta.Core
 
 			Layout.XyToIndex (x, y, out index, out trailing);
 
-			return engine.IndexToPosition (index + trailing);
+			return engine.UTF8IndexToPosition (index + trailing);
 		}
 
 		public Point TextPositionToPoint (TextPosition p)
 		{
-			int index = engine.PositionToIndex (p);
+			int index = engine.PositionToUTF8Index (p);
 
 			var rect = Layout.IndexToPos (index);
 
@@ -125,9 +123,9 @@ namespace Pinta.Core
 			return new Point (x, y);
 		}
 
-        private void OnEngineModified (object sender, EventArgs e)
-        {
-			string markup = SecurityElement.Escape (engine.ToString ());
+		private void OnEngineModified (object? sender, EventArgs e)
+		{
+			string? markup = SecurityElement.Escape (engine.ToString ());
 
 			if (engine.Underline)
 				markup = string.Format ("<u>{0}</u>", markup);
@@ -144,16 +142,9 @@ namespace Pinta.Core
 					break;
 			}
 
-			var font = Pango.FontDescription.FromString (
-                string.Format ("{0} {1}", engine.FontFace, engine.FontSize));
-			// Forces font variants to be rendered properly
-			// (e.g. this will use "Ubuntu Condensed" instead of "Ubuntu").
-			font.Family = engine.FontFace;
-			font.Weight = engine.Bold ? Pango.Weight.Bold : Pango.Weight.Normal;
-			font.Style = engine.Italic ? Pango.Style.Italic : Pango.Style.Normal;
-			Layout.FontDescription = font;
+			Layout.FontDescription = engine.Font;
 
 			Layout.SetMarkup (markup);
-        }
-    }
+		}
+	}
 }

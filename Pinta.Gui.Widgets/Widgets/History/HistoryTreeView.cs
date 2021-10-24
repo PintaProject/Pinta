@@ -1,4 +1,4 @@
-﻿// 
+// 
 // HistoryTreeView.cs
 //  
 // Author:
@@ -26,9 +26,7 @@
 // THE SOFTWARE.
 
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
+using System.Diagnostics.CodeAnalysis;
 using Gtk;
 using Pinta.Core;
 
@@ -37,102 +35,133 @@ namespace Pinta.Gui.Widgets
 	public class HistoryTreeView : ScrolledWindow
 	{
 		private TreeView tree;
-		
+		private Document? active_document;
+
 		public HistoryTreeView ()
+		{
+			Build ();
+
+			PintaCore.Workspace.ActiveDocumentChanged += Workspace_ActiveDocumentChanged;
+		}
+
+		[MemberNotNull (nameof (tree))]
+		private void Build ()
 		{
 			CanFocus = false;
 			SetSizeRequest (200, 200);
 
 			SetPolicy (PolicyType.Automatic, PolicyType.Automatic);
 
-			tree = new TreeView ();
-			tree.CanFocus = false;
+			tree = new TreeView {
+				CanFocus = false,
 
-			tree.HeadersVisible = false;
-			tree.EnableGridLines = TreeViewGridLines.None;
-			tree.EnableTreeLines = false;
+				HeadersVisible = false,
+				EnableGridLines = TreeViewGridLines.None,
+				EnableTreeLines = false
+			};
+
 			tree.Selection.Mode = SelectionMode.Single;
 			tree.Selection.SelectFunction = HistoryItemSelected;
 
-			Gtk.TreeViewColumn icon_column = new Gtk.TreeViewColumn ();
-			Gtk.CellRendererPixbuf icon_cell = new Gtk.CellRendererPixbuf ();
+			var icon_column = new TreeViewColumn ();
+			var icon_cell = new CellRendererPixbuf ();
 			icon_column.PackStart (icon_cell, true);
 
-			Gtk.TreeViewColumn text_column = new Gtk.TreeViewColumn ();
-			Gtk.CellRendererText text_cell = new Gtk.CellRendererText ();
+			var text_column = new TreeViewColumn ();
+			var text_cell = new CellRendererText ();
 			text_column.PackStart (text_cell, true);
 
-			text_column.SetCellDataFunc (text_cell, new Gtk.TreeCellDataFunc (HistoryRenderText));
-			icon_column.SetCellDataFunc (icon_cell, new Gtk.TreeCellDataFunc (HistoryRenderIcon));
+			text_column.SetCellDataFunc (text_cell, new TreeCellDataFunc (HistoryRenderText));
+			icon_column.SetCellDataFunc (icon_cell, new TreeCellDataFunc (HistoryRenderIcon));
 
 			tree.AppendColumn (icon_column);
 			tree.AppendColumn (text_column);
 
-			PintaCore.Workspace.ActiveDocumentChanged += Workspace_ActiveDocumentChanged;
-			
-			PintaCore.History.HistoryItemAdded += new EventHandler<HistoryItemAddedEventArgs> (OnHistoryItemsChanged);
-			PintaCore.History.ActionUndone += new EventHandler (OnHistoryItemsChanged);
-			PintaCore.History.ActionRedone += new EventHandler (OnHistoryItemsChanged);
-
 			Add (tree);
+
 			ShowAll ();
 		}
 
-		private void Workspace_ActiveDocumentChanged (object sender, EventArgs e)
+		private void Workspace_ActiveDocumentChanged (object? sender, EventArgs e)
 		{
-			if (PintaCore.Workspace.HasOpenDocuments)
-				tree.Model = PintaCore.Workspace.ActiveWorkspace.History.ListStore;
-			else
-				tree.Model = null;
-				
+			var doc = PintaCore.Workspace.HasOpenDocuments ? PintaCore.Workspace.ActiveDocument : null;
+
+			if (active_document == doc)
+				return;
+
+			if (active_document is not null) {
+				active_document.History.HistoryItemAdded -= new EventHandler<HistoryItemAddedEventArgs> (OnHistoryItemsChanged);
+				active_document.History.ActionUndone -= new EventHandler (OnHistoryItemsChanged);
+				active_document.History.ActionRedone -= new EventHandler (OnHistoryItemsChanged);
+			}
+
+			tree.Model = doc?.History.ListStore;
+
+			if (doc is not null) {
+				doc.History.HistoryItemAdded += new EventHandler<HistoryItemAddedEventArgs> (OnHistoryItemsChanged);
+				doc.History.ActionUndone += new EventHandler (OnHistoryItemsChanged);
+				doc.History.ActionRedone += new EventHandler (OnHistoryItemsChanged);
+			}
+
+			active_document = doc;
+
 			OnHistoryItemsChanged (this, EventArgs.Empty);
 		}
 
-		#region History
-		public bool HistoryItemSelected (TreeSelection selection, TreeModel model, TreePath path, bool path_currently_selected)
+		public bool HistoryItemSelected (TreeSelection selection, ITreeModel model, TreePath path, bool path_currently_selected)
 		{
-			int current = path.Indices[0];
+			if (active_document is null)
+				return true;
+
+			var current = path.Indices[0];
+
 			if (!path_currently_selected) {
-				while (PintaCore.History.Pointer < current) {
-					PintaCore.History.Redo ();
-				}
-				while (PintaCore.History.Pointer > current) {
-					PintaCore.History.Undo ();
-				}
+				while (active_document.History.Pointer < current)
+					active_document.History.Redo ();
+
+				while (active_document.History.Pointer > current)
+					active_document.History.Undo ();
 			}
+
 			return true;
 		}
 
-		private void HistoryRenderText (Gtk.TreeViewColumn column, Gtk.CellRenderer cell, Gtk.TreeModel model, Gtk.TreeIter iter)
+		private void HistoryRenderText (TreeViewColumn column, CellRenderer cell, ITreeModel model, TreeIter iter)
 		{
-			BaseHistoryItem item = (BaseHistoryItem)model.GetValue (iter, 0);
+			var item = (BaseHistoryItem) model.GetValue (iter, 0);
+
 			if (item.State == HistoryItemState.Undo) {
-				(cell as Gtk.CellRendererText).Style = Pango.Style.Normal;
-				(cell as Gtk.CellRendererText).Foreground = "black";
-				(cell as Gtk.CellRendererText).Text = item.Text;
+				((CellRendererText) cell).Style = Pango.Style.Normal;
+				((CellRendererText) cell).Foreground = "black";
+				((CellRendererText) cell).Text = item.Text;
 			} else if (item.State == HistoryItemState.Redo) {
-				(cell as Gtk.CellRendererText).Style = Pango.Style.Oblique;
-				(cell as Gtk.CellRendererText).Foreground = "gray";
-				(cell as Gtk.CellRendererText).Text = item.Text;
+				((CellRendererText) cell).Style = Pango.Style.Oblique;
+				((CellRendererText) cell).Foreground = "gray";
+				((CellRendererText) cell).Text = item.Text;
 			}
 		}
 
-		private void HistoryRenderIcon (Gtk.TreeViewColumn column, Gtk.CellRenderer cell, Gtk.TreeModel model, Gtk.TreeIter iter)
+		private void HistoryRenderIcon (TreeViewColumn column, CellRenderer cell, ITreeModel model, TreeIter iter)
 		{
-			BaseHistoryItem item = (BaseHistoryItem)model.GetValue (iter, 0);
-			var pixbuf_cell = cell as Gtk.CellRendererPixbuf;
+			var item = (BaseHistoryItem) model.GetValue (iter, 0);
+			var pixbuf_cell = (CellRendererPixbuf) cell;
+
 			if (pixbuf_cell.Pixbuf != null)
 				pixbuf_cell.Pixbuf.Dispose ();
-			pixbuf_cell.Pixbuf = PintaCore.Resources.GetIcon (item.Icon);
+
+			if (item.Icon != null)
+				pixbuf_cell.Pixbuf = PintaCore.Resources.GetIcon (item.Icon);
 		}
 
-		private void OnHistoryItemsChanged (object o, EventArgs args)
+		private void OnHistoryItemsChanged (object? o, EventArgs args)
 		{
-			if (tree.Model != null && PintaCore.History.Current != null) {
-				tree.Selection.SelectIter (PintaCore.History.Current.Id);
-				tree.ScrollToCell (tree.Model.GetPath (PintaCore.History.Current.Id), tree.Columns[1], true, (float)0.9, 0);
+			if (active_document is null)
+				return;
+
+			if (tree.Model != null && active_document.History.Current != null) {
+				tree.Selection.SelectIter (active_document.History.Current.Id);
+				tree.ScrollToCell (tree.Model.GetPath (active_document.History.Current.Id), tree.Columns[1], true, (float) 0.9, 0);
 			}
 		}
-		#endregion
 	}
 }

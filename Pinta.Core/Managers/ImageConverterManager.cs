@@ -59,7 +59,7 @@ namespace Pinta.Core
 				}
 				
 				GdkPixbufFormat importer = new GdkPixbufFormat (format.Name.ToLowerInvariant ());
-				IImageExporter exporter;
+				IImageExporter? exporter;
 
 				if (formatName == "jpeg")
 					exporter = importer = new JpegFormat ();
@@ -125,7 +125,7 @@ namespace Pinta.Core
 		/// Finds the correct exporter to use for opening the given file, or null
 		/// if no exporter exists for the file.
 		/// </summary>
-		public IImageExporter GetExporterByFile (string file)
+		public IImageExporter? GetExporterByFile (string file)
 		{
 			string extension = Path.GetExtension (file);
 			return GetExporterByExtension (extension);
@@ -135,7 +135,7 @@ namespace Pinta.Core
 		/// Finds the file format for the given file name, or null
 		/// if no file format exists for that file.
 		/// </summary>
-		public FormatDescriptor GetFormatByFile (string file)
+		public FormatDescriptor? GetFormatByFile (string file)
 		{
 			string extension = Path.GetExtension (file);
 
@@ -148,7 +148,7 @@ namespace Pinta.Core
 		/// Finds the correct importer to use for opening the given file, or null
 		/// if no importer exists for the file.
 		/// </summary>
-		public IImageImporter GetImporterByFile (string file)
+		public IImageImporter? GetImporterByFile (string file)
 		{
 			string extension = Path.GetExtension (file);
 
@@ -167,16 +167,15 @@ namespace Pinta.Core
 			extension = NormalizeExtension (extension);
 
 			PintaCore.Settings.PutSetting ("default-image-type", extension);
-			PintaCore.Settings.SaveSettings ();
 		}
 
 		/// <summary>
 		/// Finds the correct exporter to use for the given file extension, or null
 		/// if no exporter exists for that extension.
 		/// </summary>
-		private IImageExporter GetExporterByExtension (string extension)
+		private IImageExporter? GetExporterByExtension (string extension)
 		{
-			FormatDescriptor format = GetFormatByExtension (extension);
+			FormatDescriptor? format = GetFormatByExtension (extension);
 
 			if (format == null)
 				return null;
@@ -188,9 +187,9 @@ namespace Pinta.Core
 		/// Finds the correct importer to use for the given file extension, or null
 		/// if no importer exists for that extension.
 		/// </summary>
-		private IImageImporter GetImporterByExtension (string extension)
+		private IImageImporter? GetImporterByExtension (string extension)
 		{
-			FormatDescriptor format = GetFormatByExtension (extension);
+			FormatDescriptor? format = GetFormatByExtension (extension);
 
 			if (format == null)
 				return null;
@@ -202,7 +201,7 @@ namespace Pinta.Core
 		/// Finds the file format for the given file extension, or null
 		/// if no file format exists for that extension.
 		/// </summary>
-		private FormatDescriptor GetFormatByExtension (string extension)
+		private FormatDescriptor? GetFormatByExtension (string extension)
 		{
 			extension = NormalizeExtension (extension);
 

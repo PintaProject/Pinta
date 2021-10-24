@@ -16,22 +16,22 @@ namespace Pinta.Effects
 {
 	public class HueSaturationEffect : BaseEffect
 	{		
-		UnaryPixelOp op;
+		UnaryPixelOp? op;
 
 		public override string Icon {
 			get { return "Menu.Adjustments.HueAndSaturation.png"; }
 		}
 
 		public override string Name {
-			get { return Mono.Unix.Catalog.GetString ("Hue / Saturation"); }
+			get { return Translations.GetString ("Hue / Saturation"); }
 		}
 
 		public override bool IsConfigurable {
 			get { return true; }
 		}
 
-		public override Gdk.Key AdjustmentMenuKey {
-			get { return Gdk.Key.U; }
+		public override string AdjustmentMenuKey {
+			get { return "U"; }
 		}
 
 		public HueSaturationEffect ()
@@ -60,7 +60,7 @@ namespace Pinta.Effects
 			op.Apply (dest, src, rois);
 		}
 
-		private HueSaturationData Data { get { return EffectData as HueSaturationData; } }
+		private HueSaturationData Data { get { return (HueSaturationData)EffectData!; } } // NRT - Set in constructor
 		
 		private class HueSaturationData : EffectData
 		{

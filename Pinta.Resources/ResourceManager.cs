@@ -25,114 +25,119 @@
 // THE SOFTWARE.
 
 using System;
+using System.Diagnostics.CodeAnalysis;
 using System.IO;
-using Gdk;
+using System.Linq;
 using System.Reflection;
 using System.Runtime.CompilerServices;
+using Gdk;
 
 namespace Pinta.Resources
 {
 	public static class ResourceLoader
 	{
-
-		private static bool HasResource(Assembly asm, string name)
-		{
-			string[] resources = asm.GetManifestResourceNames ();
-
-			if (Array.IndexOf (resources, name) > -1)
-				return true;
-			else
-				return false;
-		}
-
-		[MethodImpl(MethodImplOptions.NoInlining)]
+		[MethodImpl (MethodImplOptions.NoInlining)]
 		public static Pixbuf GetIcon (string name, int size)
 		{
-			Gdk.Pixbuf result = null;
-			try {
-				// First see if it's a built-in gtk icon, like gtk-new.
-				// This will also load any icons added by Gtk.IconFactory.AddDefault() . 
-				using (var icon_set = Gtk.Widget.DefaultStyle.LookupIconSet (name)) {
-					if (icon_set != null) {
-						result = icon_set.RenderIcon (Gtk.Widget.DefaultStyle, Gtk.Widget.DefaultDirection,
-							Gtk.StateType.Normal, GetIconSize (size), null, null);
-					}
-				}
-				// Otherwise, get it from our embedded resources.
-				if (result == null) {
+			// First see if it's a built-in gtk icon, like gtk-new.
+			if (TryGetIconFromTheme (name, size, out var theme_result))
+				return theme_result;
 
-					if (HasResource(Assembly.GetExecutingAssembly(), name)) //Assembly.GetCallingAssembly() is wrong here!
-						result = Gdk.Pixbuf.LoadFromResource (name);
-				}
+			// Otherwise, get it from our embedded resources.
+			if (TryGetIconFromResources (name, out var resource_result))
+				return resource_result;
 
-				//Maybe we can find the icon in the resource of a different assembly (e.g. Plugin)
-				if (result == null) {
-					foreach (System.Reflection.Assembly asm in AppDomain.CurrentDomain.GetAssemblies())
-					{
-						if (HasResource(asm, name))
-							result = new Pixbuf(asm, name);
-					}
-				}
-			}
-			catch (Exception ex) {
-				System.Console.Error.WriteLine (ex.Message);
-			}
+			// We can't find this image, but we are going to return *some* image rather than null to prevent crashes
+			// Try to return GTK's default "missing image" image
+			if (name != Gtk.Stock.MissingImage)
+				return GetIcon (Gtk.Stock.MissingImage, size);
 
-			// Ensure that we don't crash if an icon is missing for some reason.
-			if (result == null) {
-				try
-				{
-					// Try to return gtk's default missing image
-					if (name != Gtk.Stock.MissingImage) {
-						result = GetIcon (Gtk.Stock.MissingImage, size);
-					} else {
-						// If gtk is missing it's "missing image", we'll create one on the fly
-						result = CreateMissingImage (size);
-					}
-				}
-				catch (Exception ex) {
-					System.Console.Error.WriteLine (ex.Message);
-				}
-			}
-			return result;
+			// If even the "missing image" is missing, make one on the fly
+			return CreateMissingImage (size);
 		}
 
-		public static Stream GetResourceIconStream (string name)
+		public static Stream? GetResourceIconStream (string name)
 		{
-			var ass = typeof (Pinta.Resources.ResourceLoader).Assembly;
+			var asm = typeof (ResourceLoader).Assembly;
 
-			return ass.GetManifestResourceStream (name);
+			return asm.GetManifestResourceStream (name);
+		}
+
+		private static bool TryGetIconFromTheme (string name, int size, [NotNullWhen (true)] out Pixbuf? image)
+		{
+			image = null;
+
+			try {
+				// This will also load any icons added by Gtk.IconFactory.AddDefault() . 
+				using (var icon = Gtk.IconTheme.Default.LookupIcon (name, size, Gtk.IconLookupFlags.ForceSize)) {
+					if (icon != null)
+						image = icon.LoadIcon ();
+				}
+
+			} catch (Exception ex) {
+				Console.Error.WriteLine (ex.Message);
+			}
+
+			return image != null;
+		}
+
+		private static bool TryGetIconFromResources (string name, [NotNullWhen (true)] out Pixbuf? image)
+		{
+			// Check 'Pinta.Resources' for our image
+			if (TryGetIconFromAssembly (Assembly.GetExecutingAssembly (), name, out image))
+				return true;
+
+			// Maybe we can find the icon in the resource of a different assembly (e.g. Plugin)
+			foreach (var asm in AppDomain.CurrentDomain.GetAssemblies ())
+				if (TryGetIconFromAssembly (asm, name, out image))
+					return true;
+
+			return false;
+		}
+
+		private static bool TryGetIconFromAssembly (Assembly assembly, string name, [NotNullWhen (true)] out Pixbuf? image)
+		{
+			image = null;
+
+			try {
+				if (HasResource (assembly, name))
+					image = new Pixbuf (assembly, name);
+			} catch (Exception ex) {
+				Console.Error.WriteLine (ex.Message);
+			}
+
+			return image != null;
+		}
+
+		private static bool HasResource (Assembly asm, string name)
+		{
+			return asm.GetManifestResourceNames ().Any (n => n == name);
 		}
 
 		// From MonoDevelop:
 		// https://github.com/mono/monodevelop/blob/master/main/src/core/MonoDevelop.Ide/gtk-gui/generated.cs
 		private static Pixbuf CreateMissingImage (int size)
 		{
-			var pmap = new Gdk.Pixmap (Gdk.Screen.Default.RootWindow, size, size);
-			var gc = new Gdk.GC (pmap);
+			using (var surf = new Cairo.ImageSurface (Cairo.Format.Argb32, size, size))
+			using (var g = new Cairo.Context (surf)) {
+				g.SetSourceColor (new Cairo.Color (1, 1, 1));
+				g.Rectangle (0, 0, size, size);
+				g.Fill ();
 
-			gc.RgbFgColor = new Gdk.Color (255, 255, 255);
-			pmap.DrawRectangle (gc, true, 0, 0, size, size);
-			gc.RgbFgColor = new Gdk.Color (0, 0, 0);
-			pmap.DrawRectangle (gc, false, 0, 0, (size - 1), (size - 1));
+				g.SetSourceColor (new Cairo.Color (0, 0, 0));
+				g.Rectangle (0, 0, size - 1, size - 1);
+				g.Fill ();
 
-			gc.SetLineAttributes (3, Gdk.LineStyle.Solid, Gdk.CapStyle.Round, Gdk.JoinStyle.Round);
-			gc.RgbFgColor = new Gdk.Color (255, 0, 0);
-			pmap.DrawLine (gc, (size / 4), (size / 4), ((size - 1) - (size / 4)), ((size - 1) - (size / 4)));
-			pmap.DrawLine (gc, ((size - 1) - (size / 4)), (size / 4), (size / 4), ((size - 1) - (size / 4)));
+				g.LineWidth = 3;
+				g.LineCap = Cairo.LineCap.Round;
+				g.LineJoin = Cairo.LineJoin.Round;
+				g.SetSourceColor (new Cairo.Color (1, 0, 0));
+				g.MoveTo (size / 4, size / 4);
+				g.LineTo ((size - 1) - (size / 4), (size - 1) - (size / 4));
+				g.MoveTo ((size - 1) - (size / 4), size / 4);
+				g.LineTo (size / 4, (size - 1) - (size / 4));
 
-			return Gdk.Pixbuf.FromDrawable (pmap, pmap.Colormap, 0, 0, 0, 0, size, size);
-		}
-
-		private static Gtk.IconSize GetIconSize(int size)
-		{
-			switch (size) {
-				case 16:
-					return Gtk.IconSize.SmallToolbar;
-				case 32:
-					return Gtk.IconSize.Dnd;
-				default:
-					return Gtk.IconSize.Invalid;
+				return new Pixbuf (surf, 0, 0, surf.Width, surf.Height);
 			}
 		}
 	}

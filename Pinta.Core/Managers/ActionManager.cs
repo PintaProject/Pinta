@@ -27,14 +27,15 @@
 using System;
 using Gtk;
 using System.Collections.Generic;
-using ClipperLibrary;
+using ClipperLib;
 
 namespace Pinta.Core
 {
 	public class ActionManager
 	{
 		public AccelGroup AccelGroup { get; private set; }
-		
+
+		public AppActions App { get; private set; }
 		public FileActions File { get; private set; }
 		public EditActions Edit { get; private set; }
 		public ViewActions View { get; private set; }
@@ -49,7 +50,8 @@ namespace Pinta.Core
 		public ActionManager ()
 		{
 			AccelGroup = new AccelGroup ();
-			
+
+			App = new AppActions();
 			File = new FileActions ();
 			Edit = new EditActions ();
 			View = new ViewActions ();
@@ -60,58 +62,6 @@ namespace Pinta.Core
 			Addins = new AddinActions ();
 			Window = new WindowActions ();
 			Help = new HelpActions ();
-		}
-		
-		public void CreateMainMenu (Gtk.MenuBar menu)
-		{
-			// File menu
-			ImageMenuItem file = (ImageMenuItem)menu.Children[0];
-			file.Submenu = new Menu ();
-			File.CreateMainMenu ((Menu)file.Submenu);
-			
-			//Edit menu
-			ImageMenuItem edit = (ImageMenuItem)menu.Children[1];
-			edit.Submenu = new Menu ();
-			Edit.CreateMainMenu ((Menu)edit.Submenu);
-			
-			// View menu
-			ImageMenuItem view = (ImageMenuItem)menu.Children[2];
-			View.CreateMainMenu ((Menu)view.Submenu);
-			
-			// Image menu
-			ImageMenuItem image = (ImageMenuItem)menu.Children[3];
-			image.Submenu = new Menu ();
-			Image.CreateMainMenu ((Menu)image.Submenu);
-			
-			//Layers menu
-			ImageMenuItem layer = (ImageMenuItem)menu.Children[4];
-			layer.Submenu = new Menu ();
-			Layers.CreateMainMenu ((Menu)layer.Submenu);
-			
-			//Adjustments menu
-			ImageMenuItem adj = (ImageMenuItem)menu.Children[5];
-			adj.Submenu = new Menu ();
-			Adjustments.CreateMainMenu ((Menu)adj.Submenu);
-
-			// Effects menu
-			ImageMenuItem eff = (ImageMenuItem)menu.Children[6];
-			eff.Submenu = new Menu ();
-			Effects.CreateMainMenu ((Menu)eff.Submenu);
-
-			// Add-ins menu
-			ImageMenuItem addins = (ImageMenuItem)menu.Children[7];
-			addins.Submenu = new Menu ();
-			Addins.CreateMainMenu ((Menu)addins.Submenu);
-
-			// Window menu
-			ImageMenuItem window = (ImageMenuItem)menu.Children[8];
-			window.Submenu = new Menu ();
-			Window.CreateMainMenu ((Menu)window.Submenu);
-			
-			//Help menu
-			ImageMenuItem help = (ImageMenuItem)menu.Children[9];
-			help.Submenu = new Menu ();
-			Help.CreateMainMenu ((Menu)help.Submenu);
 		}
 		
 		public void CreateToolBar (Gtk.Toolbar toolbar)
@@ -145,86 +95,38 @@ namespace Pinta.Core
 			toolbar.AppendItem (new SeparatorToolItem ());
 			toolbar.AppendItem (Image.CropToSelection.CreateToolBarItem ());
 			toolbar.AppendItem (Edit.Deselect.CreateToolBarItem ());
-			View.CreateToolBar (toolbar);
+		}
 
+		public void CreateStatusBar (Statusbar statusbar)
+		{
+			// Document zoom widget
+			View.CreateStatusBar (statusbar);
 
-			toolbar.AppendItem (new SeparatorToolItem ());
-			toolbar.AppendItem (new ToolBarImage ("StatusBar.CursorXY.png"));
+			// Selection size widget
+			var SelectionSize = new ToolBarLabel ("  0, 0");
 
-			ToolBarLabel cursor = new ToolBarLabel ("  0, 0");
+			statusbar.AppendItem (SelectionSize);
+			statusbar.AppendItem (new ToolBarImage (Resources.Icons.ToolSelectRectangle));
 
-			toolbar.AppendItem (cursor);
+			PintaCore.Workspace.SelectionChanged += delegate {
+				var bounds = PintaCore.Workspace.HasOpenDocuments ? PintaCore.Workspace.ActiveDocument.Selection.GetBounds () : new Cairo.Rectangle ();
+				SelectionSize.Text = string.Format ("  {0}, {1}", bounds.Width, bounds.Height);
+			};
+
+			statusbar.AppendItem (new SeparatorToolItem { Margin = 6 }, 6);
+
+			// Cursor position widget
+			var cursor = new ToolBarLabel ("  0, 0");
+
+			statusbar.AppendItem (cursor);
+			statusbar.AppendItem (new ToolBarImage (Resources.Icons.CursorPosition));
 
 			PintaCore.Chrome.LastCanvasCursorPointChanged += delegate {
-				Gdk.Point pt = PintaCore.Chrome.LastCanvasCursorPoint;
+				var pt = PintaCore.Chrome.LastCanvasCursorPoint;
 				cursor.Text = string.Format ("  {0}, {1}", pt.X, pt.Y);
 			};
-
-
-			toolbar.AppendItem(new SeparatorToolItem());
-			toolbar.AppendItem(new ToolBarImage("Tools.RectangleSelect.png"));
-
-			ToolBarLabel SelectionSize = new ToolBarLabel("  0, 0");
-
-			toolbar.AppendItem(SelectionSize);
-
-			PintaCore.Workspace.SelectionChanged += delegate
-			{
-			    if (!PintaCore.Workspace.HasOpenDocuments)
-			    {
-			        SelectionSize.Text = "  0, 0";
-                    return;
-                }
-
-                double minX = double.MaxValue;
-				double minY = double.MaxValue;
-				double maxX = double.MinValue;
-				double maxY = double.MinValue;
-
-				//Calculate the minimum rectangular bounds that surround the current selection.
-				foreach (List<IntPoint> li in PintaCore.Workspace.ActiveDocument.Selection.SelectionPolygons)
-				{
-					foreach (IntPoint ip in li)
-					{
-						if (minX > ip.X)
-						{
-							minX = ip.X;
-						}
-
-						if (minY > ip.Y)
-						{
-							minY = ip.Y;
-						}
-
-						if (maxX < ip.X)
-						{
-							maxX = ip.X;
-						}
-
-						if (maxY < ip.Y)
-						{
-							maxY = ip.Y;
-						}
-					}
-				}
-
-				double xDiff = maxX - minX;
-				double yDiff = maxY - minY;
-
-				if (double.IsNegativeInfinity(xDiff))
-				{
-					xDiff = 0d;
-				}
-
-				if (double.IsNegativeInfinity(yDiff))
-				{
-					yDiff = 0d;
-				}
-
-				SelectionSize.Text = string.Format("  {0}, {1}", xDiff, yDiff);
-			};
 		}
-		
+
 		public void RegisterHandlers ()
 		{
 			File.RegisterHandlers ();

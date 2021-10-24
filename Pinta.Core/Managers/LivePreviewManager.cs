@@ -33,26 +33,26 @@ using System.Collections.Generic;
 using System.Threading;
 using System.ComponentModel;
 using Debug = System.Diagnostics.Debug;
-using Mono.Unix;
 
 namespace Pinta.Core
 {
 
 	public class LivePreviewManager
 	{
+		// NRT - These are set in Start(). This should be rewritten to be provably non-null.
 		bool live_preview_enabled;		
-		Layer layer;
-		BaseEffect effect;
-		Cairo.Path selection_path;
+		Layer layer = null!;
+		BaseEffect effect = null!;
+		Cairo.Path? selection_path;
 		
 		bool apply_live_preview_flag;
 		bool cancel_live_preview_flag;
 		
-		Cairo.ImageSurface live_preview_surface;
+		Cairo.ImageSurface live_preview_surface = null!;
 		Gdk.Rectangle render_bounds;
-		SimpleHistoryItem history_item;
+		SimpleHistoryItem history_item = null!;
 		
-		AsyncEffectRenderer renderer;
+		AsyncEffectRenderer renderer = null!;
 		
 		internal LivePreviewManager ()
 		{
@@ -65,9 +65,9 @@ namespace Pinta.Core
 		public Cairo.ImageSurface LivePreviewSurface { get { return live_preview_surface; } }
 		public Gdk.Rectangle RenderBounds { get { return render_bounds; } }
 		
-		public event EventHandler<LivePreviewStartedEventArgs> Started;
-		public event EventHandler<LivePreviewRenderUpdatedEventArgs> RenderUpdated;
-		public event EventHandler<LivePreviewEndedEventArgs> Ended;
+		public event EventHandler<LivePreviewStartedEventArgs>? Started;
+		public event EventHandler<LivePreviewRenderUpdatedEventArgs>? RenderUpdated;
+		public event EventHandler<LivePreviewEndedEventArgs>? Ended;
 		
 		public void Start (BaseEffect effect)
 		{			
@@ -78,11 +78,13 @@ namespace Pinta.Core
 			// Start rendering.
 			// Listen for changes to effectConfiguration object, and restart render if needed.
 
+			var doc = PintaCore.Workspace.ActiveDocument;
+
 			live_preview_enabled = true;
 			apply_live_preview_flag = false;
 			cancel_live_preview_flag = false;
 			
-			layer = PintaCore.Layers.CurrentLayer;
+			layer = doc.Layers.CurrentUserLayer;
 			this.effect = effect;
 
 			//TODO Use the current tool layer instead.
@@ -92,13 +94,13 @@ namespace Pinta.Core
 
 			// Handle selection path.
 			PintaCore.Tools.Commit ();
-			var selection = PintaCore.Workspace.ActiveDocument.Selection;
+			var selection = doc.Selection;
 			selection_path = (selection.Visible) ? selection.SelectionPath : null;
 			render_bounds = (selection_path != null) ? selection_path.GetBounds () : live_preview_surface.GetBounds ();
 			render_bounds = PintaCore.Workspace.ClampToImageSize (render_bounds);	
 
 			history_item = new SimpleHistoryItem (effect.Icon, effect.Name);
-			history_item.TakeSnapshotOfLayer (PintaCore.Layers.CurrentLayerIndex);	
+			history_item.TakeSnapshotOfLayer (doc.Layers.CurrentUserLayerIndex);	
 			
 			// Paint the pre-effect layer surface into into the working surface.
 			using (var ctx = new Cairo.Context (live_preview_surface)) {
@@ -219,7 +221,7 @@ namespace Pinta.Core
 				HandleApply ();
 			} else  {
 				var dialog = PintaCore.Chrome.ProgressDialog;
-				dialog.Title = Catalog.GetString ("Rendering Effect");
+				dialog.Title = Translations.GetString ("Rendering Effect");
 				dialog.Text = effect.Name;
 				dialog.Progress = renderer.Progress;
 				dialog.Canceled += HandleProgressDialogCancel;
@@ -227,7 +229,7 @@ namespace Pinta.Core
 			}
 		}
 		
-		void HandleProgressDialogCancel (object o, EventArgs e)
+		void HandleProgressDialogCancel (object? o, EventArgs e)
 		{
 			Cancel();
 		}
@@ -245,9 +247,9 @@ namespace Pinta.Core
 				layer.DrawWithOperator(ctx, live_preview_surface, Cairo.Operator.Source);
 				ctx.Restore ();
 			}
-			
-			PintaCore.History.PushNewItem (history_item);
-			history_item = null;
+
+			PintaCore.Workspace.ActiveDocument.History.PushNewItem (history_item);
+			history_item = null!;
 			
 			FireLivePreviewEndedEvent(RenderStatus.Completed, null);
 			
@@ -267,19 +269,19 @@ namespace Pinta.Core
 			if (effect != null) {
 				if (effect.EffectData != null)
 					effect.EffectData.PropertyChanged -= EffectData_PropertyChanged;
-				effect = null;
+				effect = null!;
 			}
 							
-			live_preview_surface = null;
+			live_preview_surface = null!;
 			
 			if (renderer != null) {
 				renderer.Dispose ();
-				renderer = null;
+				renderer = null!;
 			}
 
 			if (history_item != null) {
 				history_item.Dispose ();
-				history_item = null;
+				history_item = null!;
 			}
 			
 			// Hide progress dialog and clean up events.
@@ -290,7 +292,7 @@ namespace Pinta.Core
 			PintaCore.Chrome.MainWindowBusy = false;
 		}
 		
-		void EffectData_PropertyChanged (object sender, PropertyChangedEventArgs e)
+		void EffectData_PropertyChanged (object? sender, PropertyChangedEventArgs e)
 		{
 			//TODO calculate bounds.
 			renderer.Start (effect, layer.Surface, live_preview_surface, render_bounds);
@@ -313,7 +315,7 @@ namespace Pinta.Core
 				manager.FireLivePreviewRenderUpdatedEvent (progress, updatedBounds);
 			}	
 			
-			protected override void OnCompletion (bool cancelled, Exception[] exceptions)
+			protected override void OnCompletion (bool cancelled, Exception[]? exceptions)
 			{
 				Debug.WriteLine (DateTime.Now.ToString("HH:mm:ss:ffff") + " LivePreviewManager.OnCompletion() cancelled: " + cancelled);
 				
@@ -327,7 +329,7 @@ namespace Pinta.Core
 			}
 		}
 		
-		void FireLivePreviewEndedEvent (RenderStatus status, Exception ex)
+		void FireLivePreviewEndedEvent (RenderStatus status, Exception? ex)
 		{
 			if (Ended != null) {
 				var args = new LivePreviewEndedEventArgs (status, ex);
@@ -343,7 +345,7 @@ namespace Pinta.Core
 			}			
 		}
 
-		private void LivePreview_RenderUpdated (object o, LivePreviewRenderUpdatedEventArgs args)
+		private void LivePreview_RenderUpdated (object? o, LivePreviewRenderUpdatedEventArgs args)
 		{
 			double scale = PintaCore.Workspace.Scale;
 			var offset = PintaCore.Workspace.Offset;

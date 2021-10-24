@@ -26,33 +26,24 @@
 
 using System;
 using Gtk;
-using Mono.Unix;
 using Pinta.Docking;
-using Pinta.Docking.DockNotebook;
+using Pinta.Core;
 
 namespace Pinta
 {
 	public class CanvasPad : IDockPad
 	{
-        public DockNotebookContainer NotebookContainer { get; private set; }
+		public DockNotebook Notebook { get; private set; } = null!; // NRT - Set in Initialize
 
-		public void Initialize (DockFrame workspace, Menu padMenu)
+		public void Initialize (Dock workspace)
 		{
-            var tab = new DockNotebook () {
-                NavigationButtonsVisible = false
+            Notebook = new DockNotebook();
+
+            var canvas_dock = new DockItem(Notebook, "Canvas", locked: true)
+            {
+                Label = Translations.GetString("Canvas")
             };
-
-            NotebookContainer = new DockNotebookContainer (tab, true);
-
-            tab.InitSize ();
-
-            var canvas_dock = workspace.AddItem ("Canvas");
-            canvas_dock.Behavior = DockItemBehavior.Locked;
-            canvas_dock.Expand = true;
-
-            canvas_dock.DrawFrame = false;
-            canvas_dock.Label = Catalog.GetString ("Canvas");
-            canvas_dock.Content = NotebookContainer;
+            workspace.AddItem(canvas_dock, DockPlacement.Center);
         }
-	}
+    }
 }

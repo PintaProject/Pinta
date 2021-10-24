@@ -27,13 +27,23 @@
 using System;
 using System.Linq;
 using Cairo;
-using Mono.Unix;
 using System.Collections.Generic;
 using Gtk;
 
 namespace Pinta.Core
 {
-	public class WorkspaceManager
+	public interface IWorkspaceService
+	{
+		Document ActiveDocument { get; }
+		DocumentWorkspace ActiveWorkspace { get; }
+		event EventHandler? ActiveDocumentChanged;
+		Gdk.Rectangle ClampToImageSize (Gdk.Rectangle r);
+		bool HasOpenDocuments { get; }
+		event EventHandler? SelectionChanged;
+		SelectionModeHandler SelectionHandler { get; }
+	}
+
+	public class WorkspaceManager : IWorkspaceService
 	{
 		private int active_document_index = -1;
 		private int new_file_name = 1;
@@ -58,6 +68,8 @@ namespace Pinta.Core
 				throw new InvalidOperationException ("Tried to get WorkspaceManager.ActiveDocument when there are no open Documents.  Check HasOpenDocuments first.");
 			}
 		}
+
+		public Document? ActiveDocumentOrDefault => HasOpenDocuments ? OpenDocuments[active_document_index] : null;
 
         public SelectionModeHandler SelectionHandler { get; private set; }
 
@@ -92,12 +104,12 @@ namespace Pinta.Core
 		public List<Document> OpenDocuments { get; private set; }
 		public bool HasOpenDocuments { get { return OpenDocuments.Count > 0; } }
 		
-		public Document CreateAndActivateDocument (string filename, Gdk.Size size)
+		public Document CreateAndActivateDocument (string? filename, Gdk.Size size)
 		{
 			Document doc = new Document (size);
 			
 			if (string.IsNullOrEmpty (filename))
-				doc.Filename = string.Format (Catalog.GetString ("Unsaved Image {0}"), new_file_name++);
+				doc.Filename = string.Format (Translations.GetString ("Unsaved Image {0}"), new_file_name++);
 			else
 				doc.PathAndFileName = filename;
 			
@@ -154,7 +166,7 @@ namespace Pinta.Core
 			doc.Workspace.CanvasSize = imageSize;
 
 			// Start with an empty white layer
-			Layer background = doc.AddNewLayer (Catalog.GetString ("Background"));
+			Layer background = doc.Layers.AddNewLayer (Translations.GetString ("Background"));
 
 			if (backgroundColor.A != 0) {
 				using (Cairo.Context g = new Cairo.Context (background.Surface)) {
@@ -163,7 +175,7 @@ namespace Pinta.Core
 				}
 			}
 
-			doc.Workspace.History.PushNewItem (new BaseHistoryItem (Stock.New, Catalog.GetString ("New Image")));
+			doc.Workspace.History.PushNewItem (new BaseHistoryItem (Resources.StandardIcons.DocumentNew, Translations.GetString ("New Image")));
 			doc.Workspace.History.SetClean();
 
 			// This ensures these are called after the window is done being created and sized.
@@ -175,8 +187,26 @@ namespace Pinta.Core
 			return doc;
 		}
 
+		/// <summary>
+		/// Creates a new Document with a specified image as content.
+		/// Primarily used for Paste Into New Image.
+		/// </summary>
+		public Document NewDocumentFromImage (Gdk.Pixbuf image)
+		{
+			var doc = NewDocument (new Gdk.Size (image.Width, image.Height), new Color (0, 0, 0, 0));
+
+			using (var g = new Context (doc.Layers[0].Surface))
+				g.DrawPixbuf (image, new Point (0, 0));
+
+			// A normal document considers the "New Image" history to not be dirty, as it's just a
+			// blank background. We put an image there, so we should try to save if the user closes it.
+			doc.Workspace.History.SetDirty ();
+
+			return doc;
+		}
+
 		// TODO: Standardize add to recent files
-		public bool OpenFile (string file, Window parent = null)
+		public bool OpenFile (string file, Window? parent = null)
 		{
 			bool fileOpened = false;
 
@@ -185,14 +215,14 @@ namespace Pinta.Core
 
 			try {
 				// Open the image and add it to the layers
-				IImageImporter importer = PintaCore.System.ImageFormats.GetImporterByFile (file);
+				IImageImporter? importer = PintaCore.System.ImageFormats.GetImporterByFile (file);
 				if (importer == null)
-					throw new FormatException( Catalog.GetString ("Unsupported file format"));
+					throw new FormatException( Translations.GetString ("Unsupported file format"));
 
 				importer.Import (file, parent);
 
 				PintaCore.Workspace.ActiveDocument.PathAndFileName = file;
-				PintaCore.Workspace.ActiveWorkspace.History.PushNewItem (new BaseHistoryItem (Stock.Open, Catalog.GetString ("Open Image")));
+				PintaCore.Workspace.ActiveWorkspace.History.PushNewItem (new BaseHistoryItem (Resources.StandardIcons.DocumentOpen, Translations.GetString ("Open Image")));
 				PintaCore.Workspace.ActiveDocument.History.SetClean();
 				PintaCore.Workspace.ActiveDocument.HasFile = true;
 
@@ -220,7 +250,7 @@ namespace Pinta.Core
 			ActiveDocument.ResizeImage (width, height);
 		}
 		
-		public void ResizeCanvas (int width, int height, Anchor anchor, CompoundHistoryItem compoundAction)
+		public void ResizeCanvas (int width, int height, Anchor anchor, CompoundHistoryItem? compoundAction)
 		{
 			ActiveDocument.ResizeCanvas (width, height, anchor, compoundAction);
 		}
@@ -284,12 +314,7 @@ namespace Pinta.Core
 		
 		public void SetActiveDocument (Document document)
 		{
-			RadioAction action = PintaCore.Actions.Window.OpenWindows.Where (p => p.Name == document.Guid.ToString ()).FirstOrDefault ();
-
-			if (action == null)
-				throw new ArgumentOutOfRangeException ("Tried to WorkspaceManager.SetActiveDocument.  Could not find document.");
-
-			action.Activate ();
+			PintaCore.Actions.Window.SetActiveDocument(document);
 		}
 
 		internal void SetActiveDocumentInternal (Document document)
@@ -348,7 +373,7 @@ namespace Pinta.Core
         private void ShowOpenFileErrorDialog (Window parent, string filename, string primaryText, string details)
 		{
 			string markup = "<span weight=\"bold\" size=\"larger\">{0}</span>\n\n{1}";
-			string secondaryText = string.Format (Catalog.GetString ("Could not open file: {0}"), filename);
+			string secondaryText = string.Format (Translations.GetString ("Could not open file: {0}"), filename);
 			string message = string.Format (markup, primaryText, secondaryText);
 			PintaCore.Chrome.ShowErrorDialog(parent, message, details);
 		}
@@ -357,8 +382,8 @@ namespace Pinta.Core
 		{
 			string markup = "<span weight=\"bold\" size=\"larger\">{0}</span>\n\n{1}";
 
-			string secondaryText = string.Format(Catalog.GetString("Could not open file: {0}"), filename);
-			secondaryText += string.Format("\n\n{0}\n", Catalog.GetString("Pinta supports the following file formats:"));
+			string secondaryText = Translations.GetString("Could not open file: {0}", filename);
+			secondaryText += string.Format("\n\n{0}\n", Translations.GetString("Pinta supports the following file formats:"));
 			var extensions = from format in PintaCore.System.ImageFormats.Formats
 							 where format.Importer != null
 							 from extension in format.Extensions
@@ -375,22 +400,21 @@ namespace Pinta.Core
 		private void ShowFilePermissionErrorDialog (Window parent, string filename)
 		{
 			string markup = "<span weight=\"bold\" size=\"larger\">{0}</span>\n\n{1}";
-			string primary = Catalog.GetString ("Failed to open image");
+			string primary = Translations.GetString ("Failed to open image");
 			// Translators: {0} is the name of a file that the user does not have permission to open.
-			string secondary = string.Format(Catalog.GetString ("You do not have access to '{0}'."), filename);
+			string secondary = Translations.GetString ("You do not have access to '{0}'.", filename);
 			string message = string.Format (markup, primary, secondary);
 
-			var md = new MessageDialog (parent, DialogFlags.Modal, MessageType.Error, ButtonsType.Ok, message);
+			using var md = new MessageDialog (parent, DialogFlags.Modal, MessageType.Error, ButtonsType.Ok, message);
 			md.Run ();
-			md.Destroy ();
 		}
 
 		#region Public Events
-		public event EventHandler ActiveDocumentChanged;
-		public event EventHandler<DocumentEventArgs> DocumentCreated;
-		public event EventHandler<DocumentEventArgs> DocumentOpened;
-		public event EventHandler<DocumentEventArgs> DocumentClosed;
-		public event EventHandler SelectionChanged;
+		public event EventHandler? ActiveDocumentChanged;
+		public event EventHandler<DocumentEventArgs>? DocumentCreated;
+		public event EventHandler<DocumentEventArgs>? DocumentOpened;
+		public event EventHandler<DocumentEventArgs>? DocumentClosed;
+		public event EventHandler? SelectionChanged;
 #endregion
 		
 	}

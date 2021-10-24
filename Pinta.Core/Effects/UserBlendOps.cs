@@ -12,7 +12,6 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
-using Mono.Unix;
 
 namespace Pinta.Core
 {
@@ -31,22 +30,22 @@ namespace Pinta.Core
 
 		static UserBlendOps ()
 		{
-			blend_modes.Add (Catalog.GetString ("Normal"), BlendMode.Normal);
-			blend_modes.Add (Catalog.GetString ("Multiply"), BlendMode.Multiply);
-			blend_modes.Add (Catalog.GetString ("Color Burn"), BlendMode.ColorBurn);
-			blend_modes.Add (Catalog.GetString ("Color Dodge"), BlendMode.ColorDodge);
-			blend_modes.Add (Catalog.GetString ("Overlay"), BlendMode.Overlay);
-			blend_modes.Add (Catalog.GetString ("Difference"), BlendMode.Difference);
-			blend_modes.Add (Catalog.GetString ("Lighten"), BlendMode.Lighten);
-			blend_modes.Add (Catalog.GetString ("Darken"), BlendMode.Darken);
-			blend_modes.Add (Catalog.GetString ("Screen"), BlendMode.Screen);
-            blend_modes.Add (Catalog.GetString ("Xor"), BlendMode.Xor);
-            blend_modes.Add (Catalog.GetString ("Hard Light"), BlendMode.HardLight);
-            blend_modes.Add (Catalog.GetString ("Soft Light"), BlendMode.SoftLight);
-            blend_modes.Add (Catalog.GetString ("Color"), BlendMode.Color);
-            blend_modes.Add (Catalog.GetString ("Luminosity"), BlendMode.Luminosity);
-            blend_modes.Add (Catalog.GetString ("Hue"), BlendMode.Hue);
-            blend_modes.Add (Catalog.GetString ("Saturation"), BlendMode.Saturation);
+			blend_modes.Add (Translations.GetString ("Normal"), BlendMode.Normal);
+			blend_modes.Add (Translations.GetString ("Multiply"), BlendMode.Multiply);
+			blend_modes.Add (Translations.GetString ("Color Burn"), BlendMode.ColorBurn);
+			blend_modes.Add (Translations.GetString ("Color Dodge"), BlendMode.ColorDodge);
+			blend_modes.Add (Translations.GetString ("Overlay"), BlendMode.Overlay);
+			blend_modes.Add (Translations.GetString ("Difference"), BlendMode.Difference);
+			blend_modes.Add (Translations.GetString ("Lighten"), BlendMode.Lighten);
+			blend_modes.Add (Translations.GetString ("Darken"), BlendMode.Darken);
+			blend_modes.Add (Translations.GetString ("Screen"), BlendMode.Screen);
+            blend_modes.Add (Translations.GetString ("Xor"), BlendMode.Xor);
+            blend_modes.Add (Translations.GetString ("Hard Light"), BlendMode.HardLight);
+            blend_modes.Add (Translations.GetString ("Soft Light"), BlendMode.SoftLight);
+            blend_modes.Add (Translations.GetString ("Color"), BlendMode.Color);
+            blend_modes.Add (Translations.GetString ("Luminosity"), BlendMode.Luminosity);
+            blend_modes.Add (Translations.GetString ("Hue"), BlendMode.Hue);
+            blend_modes.Add (Translations.GetString ("Saturation"), BlendMode.Saturation);
         }
 
 		private UserBlendOps ()

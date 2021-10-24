@@ -25,7 +25,6 @@
 // THE SOFTWARE.
 
 using Gtk;
-using Mono.Unix;
 using Pinta.Docking;
 using Pinta.Core;
 using Pinta.Gui.Widgets;
@@ -34,26 +33,36 @@ namespace Pinta
 {
 	public class HistoryPad : IDockPad
 	{
-		public void Initialize (DockFrame workspace, Menu padMenu)
+		public void Initialize (Dock workspace, Application app, GLib.Menu padMenu)
 		{
 			var history = new HistoryTreeView ();
-			DockItem history_item = workspace.AddItem ("History");
-			DockItemToolbar history_tb = history_item.GetToolbar (PositionType.Bottom);
+			DockItem history_item = new DockItem(history, "History")
+			{
+				Label = Translations.GetString("History")
+			};
 
-			history_item.Label = Catalog.GetString ("History");
+			// TODO-GTK3 (docking)
+#if false
 			history_item.DefaultLocation = "Images/Bottom";
-			history_item.Content = history;
-			history_item.Icon = PintaCore.Resources.GetIcon ("Menu.Layers.DuplicateLayer.png");
-            history_item.DefaultWidth = 100;
+			history_item.Icon = Gtk.IconTheme.Default.LoadIcon(Resources.Icons.LayerDuplicate, 16);
+			history_item.DefaultWidth = 100;
 			history_item.Behavior |= DockItemBehavior.CantClose;
+#endif
+			var history_tb = history_item.AddToolBar();
+			history_tb.Add (PintaCore.Actions.Edit.Undo.CreateDockToolBarItem());
+			history_tb.Add (PintaCore.Actions.Edit.Redo.CreateDockToolBarItem());
 
-			history_tb.Add (PintaCore.Actions.Edit.Undo.CreateDockToolBarItem ());
-			history_tb.Add (PintaCore.Actions.Edit.Redo.CreateDockToolBarItem ());
-			Gtk.ToggleAction show_history = padMenu.AppendToggleAction ("History", Catalog.GetString ("History"), null, "Menu.Layers.DuplicateLayer.png");
-			show_history.Activated += delegate { history_item.Visible = show_history.Active; };
-			history_item.VisibleChanged += delegate { show_history.Active = history_item.Visible; };
+			workspace.AddItem(history_item, DockPlacement.Right);
 
-			show_history.Active = history_item.Visible;
+			var show_history = new ToggleCommand("history", Translations.GetString("History"), null, Resources.Icons.LayerDuplicate)
+			{
+				Value = true
+			};
+			app.AddAction(show_history);
+			padMenu.AppendItem(show_history.CreateMenuItem());
+
+			show_history.Toggled += (val) => { history_item.Visible = val; };
+			history_item.VisibilityNotifyEvent += (o, args) => { show_history.Value = history_item.Visible; };
 		}
 	}
 }

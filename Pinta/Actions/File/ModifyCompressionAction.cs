@@ -26,7 +26,6 @@
 
 using System;
 using Gtk;
-using Mono.Unix;
 using Pinta.Core;
 
 namespace Pinta.Actions
@@ -45,18 +44,13 @@ namespace Pinta.Actions
 		}
 		#endregion
 
-		private void Activated (object sender, ModifyCompressionEventArgs e)
-		{
-			JpegCompressionDialog dlg = new JpegCompressionDialog (e.Quality, e.ParentWindow);
-
-			try {
-				if (dlg.Run () == (int)Gtk.ResponseType.Ok)
-					e.Quality = dlg.GetCompressionLevel ();
-				else
-					e.Cancel = true;
-			} finally {
-				dlg.Destroy ();
-			}
-		}
+		private void Activated (object? sender, ModifyCompressionEventArgs e)
+        {
+            using var dlg = new JpegCompressionDialog(e.Quality, e.ParentWindow);
+            if (dlg.Run() == (int)Gtk.ResponseType.Ok)
+                e.Quality = dlg.GetCompressionLevel();
+            else
+                e.Cancel = true;
+        }
 	}
 }

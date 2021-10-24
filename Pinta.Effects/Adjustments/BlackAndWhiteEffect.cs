@@ -22,11 +22,11 @@ namespace Pinta.Effects
 		}
 
 		public override string Name {
-			get { return Mono.Unix.Catalog.GetString ("Black and White"); }
+			get { return Translations.GetString ("Black and White"); }
 		}
 
-		public override Gdk.Key AdjustmentMenuKey {
-			get { return Gdk.Key.G; }
+		public override string AdjustmentMenuKey {
+			get { return "G"; }
 		}
 		
 		public override void Render (ImageSurface src, ImageSurface dest, Gdk.Rectangle[] rois)

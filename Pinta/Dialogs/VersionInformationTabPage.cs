@@ -28,35 +28,30 @@
 using System;
 using Gtk;
 using System.Reflection;
-using Mono.Unix;
 using System.Text;
-using System.Diagnostics;
+using Pinta.Core;
 
 namespace Pinta
 {
 	internal class VersionInformationTabPage : VBox
 	{
-		private ListStore data = null;
+		private ListStore? data = null;
 		private CellRenderer cellRenderer = new CellRendererText ();
-		TreeView treeView = null;
+		private TreeView treeView = new TreeView ();
 
 		public VersionInformationTabPage ()
 		{
-			treeView = new TreeView ();
-
-			TreeViewColumn treeViewColumnTitle = new TreeViewColumn (Catalog.GetString ("Title"), cellRenderer, "text", 0);
+			TreeViewColumn treeViewColumnTitle = new TreeViewColumn (Translations.GetString ("Title"), cellRenderer, "text", 0);
 			treeViewColumnTitle.FixedWidth = 200;
 			treeViewColumnTitle.Sizing = TreeViewColumnSizing.Fixed;
 			treeViewColumnTitle.Resizable = true;
 			treeView.AppendColumn (treeViewColumnTitle);
 
-			TreeViewColumn treeViewColumnVersion = new TreeViewColumn (Catalog.GetString ("Version"), cellRenderer, "text", 1);
+			TreeViewColumn treeViewColumnVersion = new TreeViewColumn (Translations.GetString ("Version"), cellRenderer, "text", 1);
 			treeView.AppendColumn (treeViewColumnVersion);
 
-			TreeViewColumn treeViewColumnPath = new TreeViewColumn (Catalog.GetString ("Path"), cellRenderer, "text", 2);
+			TreeViewColumn treeViewColumnPath = new TreeViewColumn (Translations.GetString ("Path"), cellRenderer, "text", 2);
 			treeView.AppendColumn (treeViewColumnPath);
-
-			treeView.RulesHint = true;
 
 			data = new ListStore (typeof (string), typeof (string), typeof (string));
 			treeView.Model = data;
@@ -69,7 +64,7 @@ namespace Pinta
 
 
 			var toplayout = new VBox();
-			var copyButton = new Button (Catalog.GetString ("Copy Version Info"));
+			var copyButton = new Button (Translations.GetString ("Copy Version Info"));
 			copyButton.Clicked += CopyButton_Clicked;
 
 
@@ -84,7 +79,7 @@ namespace Pinta
 			foreach (Assembly assembly in AppDomain.CurrentDomain.GetAssemblies ()) {
 				try {
 					AssemblyName assemblyName = assembly.GetName ();
-					data.AppendValues (assemblyName.Name, assemblyName.Version.ToString (), System.IO.Path.GetFullPath (assembly.Location));
+					data.AppendValues (assemblyName.Name, assemblyName.Version?.ToString (), System.IO.Path.GetFullPath (assembly.Location));
 				} catch { }
 			}
 
@@ -95,11 +90,6 @@ namespace Pinta
 
 		protected override void OnDestroyed ()
 		{
-			if (cellRenderer != null) {
-				cellRenderer.Destroy ();
-				cellRenderer = null;
-			}
-
 			if (data != null) {
 				data.Dispose ();
 				data = null;
@@ -108,7 +98,7 @@ namespace Pinta
 			base.OnDestroyed ();
 		}
 
-		void CopyButton_Clicked (object sender, EventArgs e)
+		void CopyButton_Clicked (object? sender, EventArgs e)
 		{
 			String delimeter = ",";
 			String linesep = Environment.NewLine;

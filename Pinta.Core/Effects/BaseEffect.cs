@@ -26,18 +26,18 @@
 
 using System;
 using Cairo;
-using Mono.Unix;
-using Mono.Addins;
 using Pinta.Core;
 
-[assembly: AddinRoot ("Pinta", PintaCore.ApplicationVersion)]
+// TODO-GTK3 (addins)
+// [assembly: AddinRoot ("Pinta", PintaCore.ApplicationVersion)]
 
 namespace Pinta.Core
 {
 	/// <summary>
 	/// The base class for all effects and adjustments.
 	/// </summary>
-	[TypeExtensionPoint]
+	// TODO-GTK3 (addins)
+	// [TypeExtensionPoint]
 	public abstract class BaseEffect
 	{
 		/// <summary>
@@ -58,12 +58,12 @@ namespace Pinta.Core
 		/// <summary>
 		/// Returns the keyboard shortcut for this adjustment. Only affects adjustments, not effects. Default is no shortcut.
 		/// </summary>
-		public virtual Gdk.Key AdjustmentMenuKey { get { return (Gdk.Key)0; } }
+		public virtual string? AdjustmentMenuKey { get { return null; } }
 
 		/// <summary>
-		/// Returns the modifier(s) to the keyboard shortcut. Only affects adjustments, not effects. Default is Ctrl+Shift.
+		/// Returns the modifier(s) to the keyboard shortcut. Only affects adjustments, not effects. Default is Primary+Shift.
 		/// </summary>
-		public virtual Gdk.ModifierType AdjustmentMenuKeyModifiers { get { return Gdk.ModifierType.ControlMask | Gdk.ModifierType.ShiftMask; } }
+		public virtual string AdjustmentMenuKeyModifiers { get { return "<Primary><Shift>"; } }
 
 		/// <summary>
 		/// Returns the menu category for an effect. Only affects effects, not adjustments. Default is "General".
@@ -73,7 +73,7 @@ namespace Pinta.Core
 		/// <summary>
 		/// The user configurable data this effect uses.
 		/// </summary>
-		public EffectData EffectData { get; protected set; }
+		public EffectData? EffectData { get; protected set; }
 
 		/// <summary>
 		/// Launches the configuration dialog for this effect/adjustment.
@@ -161,7 +161,7 @@ namespace Pinta.Core
 			var effect = (BaseEffect) this.MemberwiseClone ();
 
 			if (effect.EffectData != null)
-				effect.EffectData = EffectData.Clone ();
+				effect.EffectData = EffectData?.Clone ();
 
 			return effect;
 		}		
@@ -187,7 +187,7 @@ namespace Pinta.Core
 		/// Fires the PropertyChanged event for this ObservableObject.
 		/// </summary>
 		/// <param name="propertyName">The name of the property that changed.</param>
-		public new void FirePropertyChanged (string propertyName)
+		public new void FirePropertyChanged (string? propertyName)
 		{
 			base.FirePropertyChanged (propertyName);
 		}

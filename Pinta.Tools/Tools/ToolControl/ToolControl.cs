@@ -79,7 +79,7 @@ namespace Pinta.Tools
             g.Restore ();
         }
 
-	    private Rectangle GetHandleRect ()
+	    public Rectangle GetHandleRect ()
 	    {
 	        var scale_factor = (1.0/PintaCore.Workspace.ActiveWorkspace.Scale);
 	        return new Cairo.Rectangle (Position.X - scale_factor*Size/2,

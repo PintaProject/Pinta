@@ -25,34 +25,44 @@
 // THE SOFTWARE.
 
 using System;
-using System.ComponentModel;
+using System.Diagnostics.CodeAnalysis;
 using Gtk;
 using Pinta.Core;
 
 namespace Pinta.Gui.Widgets
 {
-	[System.ComponentModel.ToolboxItem(true)]
 	public class HScaleSpinButtonWidget : FilledAreaBin
 	{
-        private HScale hscale;
-        private SpinButton spin;
-        private Button button;
-        private Label label;
+		private HScale hscale;
+		private SpinButton spin;
+		private Button button;
+		private Label label;
 
-        [Category ("Custom Properties")]
-		public string Label {
-			get { return label.Text; }
-			set { label.Text = value; }
+		private int max_value;
+		private int min_value;
+		private int digits_value;
+		private double inc_value;
+
+		public HScaleSpinButtonWidget ()
+		{
+			Build ();
+
+			hscale.ValueChanged += HandleHscaleValueChanged;
+			spin.ValueChanged += HandleSpinValueChanged;
+			button.Clicked += HandleButtonClicked;
+
+			spin.ActivatesDefault = true;
 		}
 
-		[Category("Custom Properties")]
+		public string Label {
+			get => label.Text;
+			set => label.Text = value;
+		}
+
 		public double DefaultValue { get; set; }
 
-        private int max_value;
-		[Category("Custom Properties")]
-        public int MaximumValue
-        {
-			get { return max_value; }
+		public int MaximumValue {
+			get => max_value;
 			set {
 				max_value = value;
 				hscale.Adjustment.Upper = value;
@@ -60,55 +70,39 @@ namespace Pinta.Gui.Widgets
 			}
 		}
 
-        private int min_value;
-		[Category("Custom Properties")]
 		public int MinimumValue {
-			get { return min_value; }
+			get => min_value;
 			set {
 				min_value = value;
 				hscale.Adjustment.Lower = value;
 				spin.Adjustment.Lower = value;
 			}
 		}
-        private int digits_value;
-        [Category("Custom Properties")]
-        public int DigitsValue
-        {
-            get { return digits_value; }
-            set
-            {
-                if (value > 0)
-                {
-                    
-                    digits_value = value;
-                    hscale.Digits = value;
-                    spin.Digits = Convert.ToUInt32(value);
-                }
-            }
-        }
 
-        private double inc_value;
-        [Category("Custom Properties")]
-        public double IncrementValue
-        {
-            get { return inc_value; }
-            set
-            {
-                inc_value = value;
-                hscale.Adjustment.StepIncrement = value;
-                spin.Adjustment.StepIncrement = value;
-            }
-        }
-        
-        [Category("Custom Properties")]
-        public int ValueAsInt
-        {
-            get { return spin.ValueAsInt; }
-        }
+		public int DigitsValue {
+			get => digits_value;
+			set {
+				if (value > 0) {
+					digits_value = value;
+					hscale.Digits = value;
+					spin.Digits = Convert.ToUInt32 (value);
+				}
+			}
+		}
 
-		[Category("Custom Properties")]
+		public double IncrementValue {
+			get => inc_value;
+			set {
+				inc_value = value;
+				hscale.Adjustment.StepIncrement = value;
+				spin.Adjustment.StepIncrement = value;
+			}
+		}
+
+		public int ValueAsInt => spin.ValueAsInt;
+
 		public double Value {
-			get { return spin.Value; }
+			get => spin.Value;
 			set {
 				if (spin.Value != value) {
 					spin.Value = value;
@@ -117,25 +111,14 @@ namespace Pinta.Gui.Widgets
 			}
 		}
 
-		public HScaleSpinButtonWidget ()
-		{
-			this.Build ();
-			
-			hscale.ValueChanged += HandleHscaleValueChanged;
-			spin.ValueChanged += HandleSpinValueChanged;
-			button.Clicked += HandleButtonClicked;
-
-			spin.ActivatesDefault = true;
-		}
-
 		protected override void OnShown ()
 		{
 			base.OnShown ();
-			
+
 			Value = DefaultValue;
 		}
 
-		private void HandleHscaleValueChanged (object sender, EventArgs e)
+		private void HandleHscaleValueChanged (object? sender, EventArgs e)
 		{
 			if (spin.Value != hscale.Value) {
 				spin.Value = hscale.Value;
@@ -143,7 +126,7 @@ namespace Pinta.Gui.Widgets
 			}
 		}
 
-		private void HandleSpinValueChanged (object sender, EventArgs e)
+		private void HandleSpinValueChanged (object? sender, EventArgs e)
 		{
 			if (hscale.Value != spin.Value) {
 				hscale.Value = spin.Value;
@@ -151,73 +134,72 @@ namespace Pinta.Gui.Widgets
 			}
 		}
 
-		private void HandleButtonClicked (object sender, EventArgs e)
+		private void HandleButtonClicked (object? sender, EventArgs e)
 		{
 			Value = DefaultValue;
 		}
 
-		#region Protected Methods
-		protected void OnValueChanged ()
+		protected void OnValueChanged () => ValueChanged?.Invoke (this, EventArgs.Empty);
+
+		public event EventHandler? ValueChanged;
+
+		[MemberNotNull (nameof (label), nameof (hscale), nameof (spin), nameof (button))]
+		private void Build ()
 		{
-			if (ValueChanged != null)
-				ValueChanged (this, EventArgs.Empty);
+			// Section label + line
+			var hbox1 = new HBox (false, 6);
+
+			label = new Label ();
+			hbox1.PackStart (label, false, false, 0);
+			hbox1.PackStart (new HSeparator (), true, true, 0);
+
+			// Slider + spinner + reset button
+			var hbox2 = new HBox (false, 6);
+
+			hscale = new HScale (2, 64, 1) {
+				CanFocus = true,
+				DrawValue = false,
+				Digits = 0,
+				ValuePos = PositionType.Top
+			};
+
+			hbox2.PackStart (hscale, true, true, 0);
+
+			spin = new SpinButton (0, 100, 1) {
+				CanFocus = true,
+				ClimbRate = 1,
+				Numeric = true
+			};
+			spin.Adjustment.PageIncrement = 10;
+
+			hbox2.PackStart (spin, false, false, 0);
+
+			// Reset button
+			button = new Button {
+				WidthRequest = 28,
+				HeightRequest = 24,
+				CanFocus = true,
+				UseUnderline = true
+			};
+
+			var button_image = new Image (IconTheme.Default.LoadIcon (Resources.StandardIcons.GoPrevious, 16));
+			button.Add (button_image);
+
+			var alignment2 = new Alignment (0.5F, 0F, 1F, 0F) {
+				button
+			};
+
+			hbox2.PackStart (alignment2, false, false, 0);
+
+			// Main layout
+			var vbox = new VBox (false, 6) {
+				hbox1,
+				hbox2
+			};
+
+			Add (vbox);
+
+			vbox.ShowAll ();
 		}
-		#endregion
-
-		#region Public Events
-		public event EventHandler ValueChanged;
-        #endregion
-
-        private void Build ()
-        {
-            // Section label + line
-            var hbox1 = new HBox (false, 6);
-
-            label = new Label ();
-            hbox1.PackStart (label, false, false, 0);
-            hbox1.PackStart (new HSeparator (), true, true, 0);
-
-            // Slider + spinner + reset button
-            var hbox2 = new HBox (false, 6);
-
-            hscale = new HScale (2, 64, 1);
-            hscale.CanFocus = true;
-            hscale.DrawValue = false;
-            hscale.Digits = 0;
-            hscale.ValuePos = PositionType.Top;
-            hbox2.PackStart (hscale, true, true, 0);
-
-            spin = new SpinButton (0, 100, 1);
-            spin.CanFocus = true;
-            spin.Adjustment.PageIncrement = 10;
-            spin.ClimbRate = 1;
-            spin.Numeric = true;
-            hbox2.PackStart (spin, false, false, 0);
-
-            // Reset button
-            button = new Button ();
-            button.WidthRequest = 28;
-            button.HeightRequest = 24;
-            button.CanFocus = true;
-            button.UseUnderline = true;
-
-            var button_image = new Image (PintaCore.Resources.GetIcon (Stock.GoBack, 16));
-            button.Add (button_image);
-
-            var alignment2 = new Alignment (0.5F, 0F, 1F, 0F);
-            alignment2.Add (button);
-
-            hbox2.PackStart (alignment2, false, false, 0);
-
-            // Main layout
-            var vbox = new VBox (false, 6);
-
-            vbox.Add (hbox1);
-            vbox.Add (hbox2);
-
-            Add (vbox);
-
-            vbox.ShowAll ();
-        }
-    }
+	}
 }

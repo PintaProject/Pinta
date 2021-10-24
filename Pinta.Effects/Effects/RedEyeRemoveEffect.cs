@@ -12,20 +12,19 @@ using Cairo;
 
 using Pinta.Gui.Widgets;
 using Pinta.Core;
-using Mono.Unix;
 
 namespace Pinta.Effects
 {
 	public class RedEyeRemoveEffect : BaseEffect
 	{
-		private UnaryPixelOp op;
+		private UnaryPixelOp? op;
 		
 		public override string Icon {
 			get { return "Menu.Effects.Photo.RedEyeRemove.png"; }
 		}
 
 		public override string Name {
-			get { return Catalog.GetString ("Red Eye Removal"); }
+			get { return Translations.GetString ("Red Eye Removal"); }
 		}
 
 		public override bool IsConfigurable {
@@ -33,10 +32,10 @@ namespace Pinta.Effects
 		}
 
 		public override string EffectMenuCategory {
-			get { return Catalog.GetString ("Photo"); }
+			get { return Translations.GetString ("Photo"); }
 		}
 
-		public RedEyeRemoveData Data { get { return EffectData as RedEyeRemoveData; } }
+		public RedEyeRemoveData Data { get { return (RedEyeRemoveData)EffectData!; } } // NRT - Set in constructor
 		
 		public RedEyeRemoveEffect ()
 		{
@@ -44,28 +43,29 @@ namespace Pinta.Effects
 		}
 		
 		public override bool LaunchConfiguration ()
-		{
-			SimpleEffectDialog dialog = new SimpleEffectDialog (Name, PintaCore.Resources.GetIcon (Icon), Data,
-			                                                    new PintaLocalizer ());
+        {
+            using (var dialog = new SimpleEffectDialog(Name, PintaCore.Resources.GetIcon(Icon), Data, new PintaLocalizer()))
+            {
+                // Hookup event handling for live preview.
+                dialog.EffectDataChanged += (o, e) =>
+                {
+                    if (EffectData != null)
+                    {
+                        op = new UnaryPixelOps.RedEyeRemove(Data.Tolerance, Data.Saturation);
+                        EffectData.FirePropertyChanged(e.PropertyName);
+                    }
+                };
 
-			// Hookup event handling for live preview.
-			dialog.EffectDataChanged += (o, e) => {
-				if (EffectData != null) {
-					op = new UnaryPixelOps.RedEyeRemove (Data.Tolerance, Data.Saturation);
-					EffectData.FirePropertyChanged (e.PropertyName);
-				}
-			};
-			
-			int response = dialog.Run ();
-			bool ret = (response == (int)Gtk.ResponseType.Ok);
-			dialog.Destroy ();
-			
-			return ret;
-		}
-		
-		public unsafe override void Render (ImageSurface src, ImageSurface dest, Gdk.Rectangle[] rois)
+                int response = dialog.Run();
+                bool ret = (response == (int)Gtk.ResponseType.Ok);
+
+                return ret;
+            }
+        }
+
+        public unsafe override void Render (ImageSurface src, ImageSurface dest, Gdk.Rectangle[] rois)
 		{
-			op.Apply (dest, src, rois);
+			op?.Apply (dest, src, rois);
 		}
 	}
 	

@@ -1,4 +1,4 @@
-﻿// 
+// 
 // SelectionModeHandler.cs
 //  
 // Author:
@@ -26,35 +26,39 @@
 
 using System;
 using Cairo;
-using Mono.Unix;
-using ClipperLibrary;
+using ClipperLib;
 using System.Collections.Generic;
 
 namespace Pinta.Core
 {
     public class SelectionModeHandler
     {
-        private ToolBarLabel selection_label;
-        private ToolBarComboBox selection_combo_box;
+        private ToolBarLabel? selection_label;
+        private ToolBarComboBox? selection_combo_box;
 
         private CombineMode selected_mode;
-        private Dictionary<CombineMode, string> combine_modes;
+        private Dictionary<string, CombineMode> combine_modes;
+
+		private const string COMBINE_MODE_SETTING = "selection-combine-mode";
 
         public SelectionModeHandler ()
         {
-            combine_modes = new Dictionary<CombineMode, string> () {
-                { CombineMode.Replace, Catalog.GetString ("Replace") },
-                { CombineMode.Union, Catalog.GetString ("Union (+) (Ctrl + Left Click)") },
-                { CombineMode.Exclude, Catalog.GetString ("Exclude (-) (Right Click)") },
-                { CombineMode.Xor, Catalog.GetString ("Xor (Ctrl + Right Click)") },
-                { CombineMode.Intersect, Catalog.GetString ("Intersect (Alt + Left Click)") },
+            combine_modes = new Dictionary<string, CombineMode>() {
+                { Translations.GetString ("Replace"), CombineMode.Replace},
+                // Translators: {0} is 'Ctrl', or a platform-specific key such as 'Command' on macOS.
+                { Translations.GetString ("Union (+) ({0} + Left Click)", GtkExtensions.CtrlLabel ()), CombineMode.Union},
+                { Translations.GetString ("Exclude (-) (Right Click)"), CombineMode.Exclude},
+                // Translators: {0} is 'Ctrl', or a platform-specific key such as 'Command' on macOS.
+                { Translations.GetString ("Xor ({0} + Right Click)", GtkExtensions.CtrlLabel ()), CombineMode.Xor},
+                // Translators: {0} is 'Alt', or a platform-specific key such as 'Option' on macOS.
+                { Translations.GetString ("Intersect ({0} + Left Click)", GtkExtensions.AltLabel ()), CombineMode.Intersect},
             };
         }
 
-        public void BuildToolbar (Gtk.Toolbar tb)
+	public void BuildToolbar (Gtk.Toolbar tb, ISettingsService settings)
         {
             if (selection_label == null)
-                selection_label = new ToolBarLabel (Catalog.GetString (" Selection Mode: "));
+                selection_label = new ToolBarLabel (Translations.GetString (" Selection Mode: "));
 
             tb.AppendItem (selection_label);
 
@@ -64,15 +68,13 @@ namespace Pinta.Core
 
                 selection_combo_box.ComboBox.Changed += (o, e) =>
                 {
-                    Gtk.TreeIter iter;
-                    if (selection_combo_box.ComboBox.GetActiveIter (out iter))
-                        selected_mode = (CombineMode)selection_combo_box.Model.GetValue (iter, 1);
+                    selected_mode = combine_modes[selection_combo_box.ComboBox.ActiveText];
                 };
 
                 foreach (var mode in combine_modes)
-                    selection_combo_box.Model.AppendValues (mode.Value, mode.Key);
+                    selection_combo_box.ComboBox.AppendText(mode.Key);
 
-                selection_combo_box.ComboBox.Active = 0;
+                selection_combo_box.ComboBox.Active = settings.GetSetting (COMBINE_MODE_SETTING, 0);
             }
 
             tb.AppendItem (selection_combo_box);
@@ -82,20 +84,20 @@ namespace Pinta.Core
         /// Determine the current combine mode - various combinations of left/right click
         /// and Ctrl/Shift can override the selected mode from the toolbar.
         /// </summary>
-        public CombineMode DetermineCombineMode (Gtk.ButtonPressEventArgs args)
+        public CombineMode DetermineCombineMode (ToolMouseEventArgs args)
         {
             CombineMode mode = selected_mode;
 
-            if (args.Event.Button == GtkExtensions.MouseLeftButton)
+            if (args.MouseButton == MouseButton.Left)
             {
-                if (args.Event.IsControlPressed ())
+                if (args.IsControlPressed)
                     mode = CombineMode.Union;
-                else if (args.Event.IsAltPressed ())
+                else if (args.IsAltPressed)
                     mode = CombineMode.Intersect;
             }
-            else if (args.Event.Button == GtkExtensions.MouseRightButton)
+            else if (args.MouseButton == MouseButton.Right)
             {
-                if (args.Event.IsControlPressed ())
+                if (args.IsControlPressed)
                     mode = CombineMode.Xor;
                 else
                     mode = CombineMode.Exclude;
@@ -111,7 +113,7 @@ namespace Pinta.Core
             doc.Selection = doc.PreviousSelection.Clone ();
             doc.Selection.Visible = true;
 
-            using (Context g = new Context (PintaCore.Layers.CurrentLayer.Surface))
+            using (Context g = new Context (doc.Layers.CurrentUserLayer.Surface))
             {
                 //Make sure time isn't wasted if the CombineMode is Replace - Replace is much simpler than the other 4 selection modes.
                 if (mode == CombineMode.Replace)
@@ -128,8 +130,8 @@ namespace Pinta.Core
 
                     //Specify the Clipper Subject (the previous Polygons) and the Clipper Clip (the new Polygons).
                     //Note: for Union, ignore the Clipper Library instructions - the new polygon(s) should be Clips, not Subjects!
-                    doc.Selection.SelectionClipper.AddPolygons (doc.Selection.SelectionPolygons, PolyType.ptSubject);
-                    doc.Selection.SelectionClipper.AddPolygons (polygons, PolyType.ptClip);
+                    doc.Selection.SelectionClipper.AddPaths (doc.Selection.SelectionPolygons, PolyType.ptSubject, true);
+                    doc.Selection.SelectionClipper.AddPaths (polygons, PolyType.ptClip, true);
 
                     switch (mode)
                     {
@@ -165,6 +167,12 @@ namespace Pinta.Core
                 doc.Selection.MarkDirty ();
             }
         }
+
+		public void OnSaveSettings (ISettingsService settings)
+		{
+			if (selection_combo_box is not null)
+				settings.PutSetting (COMBINE_MODE_SETTING, selection_combo_box.ComboBox.Active);
+		}
     }
 
     public enum CombineMode

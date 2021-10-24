@@ -24,10 +24,11 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 // THE SOFTWARE.
 
+#if false
+// TODO - GTK3
 using Mono.Addins;
 using Mono.Addins.Setup;
 using Pinta.Core;
-using Mono.Unix;
 
 namespace Pinta
 {
@@ -46,11 +47,11 @@ namespace Pinta
 		public void RegisterRepositories (bool enable)
 		{
 			RegisterRepository (GetPlatformRepositoryUrl (),
-			                    Catalog.GetString ("Pinta Community Addins - Platform-Specific"),
+			                    Translations.GetString ("Pinta Community Addins - Platform-Specific"),
 			                    enable);
 
 			RegisterRepository (GetAllRepositoryUrl (),
-			                    Catalog.GetString ("Pinta Community Addins - Cross-Platform"),
+			                    Translations.GetString ("Pinta Community Addins - Cross-Platform"),
 			                    enable);
 		}
 
@@ -85,3 +86,4 @@ namespace Pinta
 		}
 	}
 }
+#endif

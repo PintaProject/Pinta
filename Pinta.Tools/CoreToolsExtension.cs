@@ -1,4 +1,4 @@
-﻿// 
+// 
 // CoreToolsExtension.cs
 //  
 // Author:
@@ -32,8 +32,13 @@ using Pinta.Core;
 
 namespace Pinta.Tools
 {
+	// TODO-GTK3 (addins)
+#if false
 	[Mono.Addins.Extension]
 	class CoreToolsExtension : IExtension
+#else
+	public class CoreToolsExtension : IExtension
+#endif
 	{
 		#region IExtension Members
 		public void Initialize ()
@@ -44,28 +49,28 @@ namespace Pinta.Tools
 			PintaCore.PaintBrushes.AddPaintBrush (new Brushes.SplatterBrush ());
 			PintaCore.PaintBrushes.AddPaintBrush (new Brushes.SquaresBrush ());
 
-			PintaCore.Tools.AddTool (new RectangleSelectTool ());
-			PintaCore.Tools.AddTool (new MoveSelectedTool ());
-			PintaCore.Tools.AddTool (new LassoSelectTool ());
-			PintaCore.Tools.AddTool (new MoveSelectionTool ());
-			PintaCore.Tools.AddTool (new EllipseSelectTool ());
-			PintaCore.Tools.AddTool (new ZoomTool ());
-			PintaCore.Tools.AddTool (new MagicWandTool ());
-			PintaCore.Tools.AddTool (new PanTool ());
-			PintaCore.Tools.AddTool (new PaintBucketTool ());
-			PintaCore.Tools.AddTool (new GradientTool ());
-			PintaCore.Tools.AddTool (new PaintBrushTool ());
-			PintaCore.Tools.AddTool (new EraserTool ());
-			PintaCore.Tools.AddTool (new PencilTool ());
-			PintaCore.Tools.AddTool (new ColorPickerTool ());
-			PintaCore.Tools.AddTool (new CloneStampTool ());
-			PintaCore.Tools.AddTool (new RecolorTool ());
-			PintaCore.Tools.AddTool (new TextTool ());
-			PintaCore.Tools.AddTool (new LineCurveTool ());
-			PintaCore.Tools.AddTool (new RectangleTool ());
-			PintaCore.Tools.AddTool (new RoundedRectangleTool ());
-			PintaCore.Tools.AddTool (new EllipseTool ());
-			PintaCore.Tools.AddTool (new FreeformShapeTool ());
+			PintaCore.Tools.AddTool (new MoveSelectedTool (PintaCore.Services));
+			PintaCore.Tools.AddTool (new MoveSelectionTool (PintaCore.Services));
+			PintaCore.Tools.AddTool (new ZoomTool (PintaCore.Services));
+			PintaCore.Tools.AddTool (new PanTool (PintaCore.Services));
+			PintaCore.Tools.AddTool (new RectangleSelectTool (PintaCore.Services));
+			PintaCore.Tools.AddTool (new EllipseSelectTool (PintaCore.Services));
+			PintaCore.Tools.AddTool (new LassoSelectTool (PintaCore.Services));
+			PintaCore.Tools.AddTool (new MagicWandTool (PintaCore.Services));
+			PintaCore.Tools.AddTool (new PaintBrushTool (PintaCore.Services));
+			PintaCore.Tools.AddTool (new PencilTool (PintaCore.Services));
+			PintaCore.Tools.AddTool (new EraserTool (PintaCore.Services));
+			PintaCore.Tools.AddTool (new PaintBucketTool (PintaCore.Services));
+			PintaCore.Tools.AddTool (new GradientTool (PintaCore.Services));
+			PintaCore.Tools.AddTool (new ColorPickerTool (PintaCore.Services));
+			PintaCore.Tools.AddTool (new TextTool (PintaCore.Services));
+			PintaCore.Tools.AddTool (new LineCurveTool (PintaCore.Services));
+			PintaCore.Tools.AddTool (new RectangleTool (PintaCore.Services));
+			PintaCore.Tools.AddTool (new RoundedRectangleTool (PintaCore.Services));
+			PintaCore.Tools.AddTool (new EllipseTool (PintaCore.Services));
+			PintaCore.Tools.AddTool (new FreeformShapeTool (PintaCore.Services));
+			PintaCore.Tools.AddTool (new CloneStampTool (PintaCore.Services));
+			PintaCore.Tools.AddTool (new RecolorTool (PintaCore.Services));
 		}
 
 		public void Uninitialize ()
@@ -76,29 +81,31 @@ namespace Pinta.Tools
 			PintaCore.PaintBrushes.RemoveInstanceOfPaintBrush (typeof (Brushes.SplatterBrush));
 			PintaCore.PaintBrushes.RemoveInstanceOfPaintBrush (typeof (Brushes.SquaresBrush));
 
-			PintaCore.Tools.RemoveInstanceOfTool (typeof (RectangleSelectTool));
-			PintaCore.Tools.RemoveInstanceOfTool (typeof (MoveSelectedTool));
-			PintaCore.Tools.RemoveInstanceOfTool (typeof (LassoSelectTool));
-			PintaCore.Tools.RemoveInstanceOfTool (typeof (MoveSelectionTool));
-			PintaCore.Tools.RemoveInstanceOfTool (typeof (EllipseSelectTool));
-			PintaCore.Tools.RemoveInstanceOfTool (typeof (ZoomTool));
-			PintaCore.Tools.RemoveInstanceOfTool (typeof (MagicWandTool));
-			PintaCore.Tools.RemoveInstanceOfTool (typeof (PanTool));
-			PintaCore.Tools.RemoveInstanceOfTool (typeof (PaintBucketTool));
-			PintaCore.Tools.RemoveInstanceOfTool (typeof (GradientTool));
-			PintaCore.Tools.RemoveInstanceOfTool (typeof (PaintBrushTool));
-			PintaCore.Tools.RemoveInstanceOfTool (typeof (EraserTool));
-			PintaCore.Tools.RemoveInstanceOfTool (typeof (PencilTool));
-			PintaCore.Tools.RemoveInstanceOfTool (typeof (ColorPickerTool));
-			PintaCore.Tools.RemoveInstanceOfTool (typeof (CloneStampTool));
-			PintaCore.Tools.RemoveInstanceOfTool (typeof (RecolorTool));
-			PintaCore.Tools.RemoveInstanceOfTool (typeof (TextTool));
-			PintaCore.Tools.RemoveInstanceOfTool (typeof (LineCurveTool));
-			PintaCore.Tools.RemoveInstanceOfTool (typeof (RectangleTool));
-			PintaCore.Tools.RemoveInstanceOfTool (typeof (RoundedRectangleTool));
-			PintaCore.Tools.RemoveInstanceOfTool (typeof (EllipseTool));
-			PintaCore.Tools.RemoveInstanceOfTool (typeof (FreeformShapeTool));
+			PintaCore.Tools.RemoveInstanceOfTool<RectangleSelectTool> ();
+			PintaCore.Tools.RemoveInstanceOfTool<MoveSelectedTool> ();
+			PintaCore.Tools.RemoveInstanceOfTool<LassoSelectTool> ();
+			PintaCore.Tools.RemoveInstanceOfTool<MoveSelectionTool> ();
+			PintaCore.Tools.RemoveInstanceOfTool<EllipseSelectTool> ();
+			PintaCore.Tools.RemoveInstanceOfTool<ZoomTool> ();
+			PintaCore.Tools.RemoveInstanceOfTool<MagicWandTool> ();
+			PintaCore.Tools.RemoveInstanceOfTool<PanTool> ();
+			PintaCore.Tools.RemoveInstanceOfTool<PaintBucketTool> ();
+			PintaCore.Tools.RemoveInstanceOfTool<GradientTool> ();
+			PintaCore.Tools.RemoveInstanceOfTool<PaintBrushTool> ();
+			PintaCore.Tools.RemoveInstanceOfTool<EraserTool> ();
+			PintaCore.Tools.RemoveInstanceOfTool<PencilTool> ();
+			PintaCore.Tools.RemoveInstanceOfTool<ColorPickerTool> ();
+			PintaCore.Tools.RemoveInstanceOfTool<CloneStampTool> ();
+			PintaCore.Tools.RemoveInstanceOfTool<RecolorTool> ();
+			PintaCore.Tools.RemoveInstanceOfTool<TextTool> ();
+			PintaCore.Tools.RemoveInstanceOfTool<LineCurveTool> ();
+			PintaCore.Tools.RemoveInstanceOfTool<RectangleTool> ();
+			PintaCore.Tools.RemoveInstanceOfTool<RoundedRectangleTool> ();
+			PintaCore.Tools.RemoveInstanceOfTool<EllipseTool> ();
+			PintaCore.Tools.RemoveInstanceOfTool<FreeformShapeTool> ();
 		}
 		#endregion
 	}
+
+	public delegate void MouseHandler (double x, double y, Gdk.ModifierType state);
 }

@@ -25,8 +25,6 @@
 // THE SOFTWARE.
 
 using System;
-using Mono.Addins;
-using Mono.Addins.Localization;
 using Pinta.Core;
 using Pinta.Gui.Widgets;
 using System.ComponentModel;
@@ -36,22 +34,25 @@ namespace Pinta
 
 	public static class EffectHelper
 	{
-		/// <summary>
-		/// Launchs an effect dialog.
-		/// </summary>
-		/// <param name="localizer">
-		/// The localizer for the effect add-in. This is used to fetch translations for the
-		/// strings in the dialog.
-		/// </param>
+        /// <summary>
+        /// Launchs an effect dialog.
+        /// </summary>
+        /// <param name="localizer">
+        /// The localizer for the effect add-in. This is used to fetch translations for the
+        /// strings in the dialog.
+        /// </param>
+        // TODO-GTK3 (addins)
+#if false
 		public static bool LaunchSimpleEffectDialog (BaseEffect effect, AddinLocalizer localizer)
 		{
 			return LaunchSimpleEffectDialog (effect, new AddinLocalizerWrapper (localizer));
 		}
+#endif
 
-		/// <summary>
-		/// Launchs an effect dialog using Pinta's translation template.
-		/// </summary>
-		internal static bool LaunchSimpleEffectDialog (BaseEffect effect)
+        /// <summary>
+        /// Launchs an effect dialog using Pinta's translation template.
+        /// </summary>
+        internal static bool LaunchSimpleEffectDialog (BaseEffect effect)
 		{
 			return LaunchSimpleEffectDialog (effect, new PintaLocalizer ());
 		}
@@ -60,38 +61,40 @@ namespace Pinta
 		/// Helper function for the above methods. The IAddinLocalizer provides a generic way to
 		/// get translated strings both for Pinta's effects and for effect add-ins.
 		/// </summary>
-		private static bool LaunchSimpleEffectDialog (BaseEffect effect, IAddinLocalizer localizer)
+		private static bool LaunchSimpleEffectDialog(BaseEffect effect, IAddinLocalizer localizer)
 		{
 			if (effect == null)
-				throw new ArgumentNullException ("effect");
-			
+				throw new ArgumentNullException("effect");
+
 			if (effect.EffectData == null)
-				throw new ArgumentException ("effect.EffectData is null.");
-			
-			var dialog = new SimpleEffectDialog (effect.Name,
-			                                     PintaCore.Resources.GetIcon (effect.Icon),
-			                                     effect.EffectData, localizer);
-			
-			// Hookup event handling for live preview.
-			dialog.EffectDataChanged += (o, e) => {
-				if (effect.EffectData != null)
-					effect.EffectData.FirePropertyChanged (e.PropertyName);
-			};
-			
-			int response = dialog.Run ();
+				throw new ArgumentException("effect.EffectData is null.");
 
-			bool ret = false;
-			if (response == (int)Gtk.ResponseType.Ok && effect.EffectData != null)
-				ret = !effect.EffectData.IsDefault;
+			using (var dialog = new SimpleEffectDialog(effect.Name,
+												 PintaCore.Resources.GetIcon(effect.Icon),
+												 effect.EffectData, localizer))
+			{
+				// Hookup event handling for live preview.
+				dialog.EffectDataChanged += (o, e) =>
+				{
+					if (effect.EffectData != null)
+						effect.EffectData.FirePropertyChanged(e.PropertyName);
+				};
 
-			dialog.Destroy ();
+				int response = dialog.Run();
 
-			return ret;
+				bool ret = false;
+				if (response == (int)Gtk.ResponseType.Ok && effect.EffectData != null)
+					ret = !effect.EffectData.IsDefault;
+
+				return ret;
+			}
 		}
 
 		/// <summary>
 		/// Wrapper around the AddinLocalizer of an add-in.
 		/// </summary>
+		// TODO-GTK3 (addins)
+#if false
 		private class AddinLocalizerWrapper : IAddinLocalizer
 		{
 			private AddinLocalizer localizer;
@@ -106,5 +109,6 @@ namespace Pinta
 				return localizer.GetString (msgid);
 			}
 		};
+#endif
 	}
 }

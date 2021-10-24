@@ -26,7 +26,6 @@
 
 using System;
 using Pinta.Core;
-using Mono.Unix;
 using Gdk;
 
 namespace Pinta.Tools
@@ -34,146 +33,133 @@ namespace Pinta.Tools
 	public class CloneStampTool : BaseBrushTool
 	{
 		private bool painting;
-		private Point origin = new Point (int.MinValue, int.MinValue);
-		private Point offset = new Point (int.MinValue, int.MinValue);
-		private Point last_point = new Point (int.MinValue, int.MinValue);
+		private Cairo.Point origin = new Cairo.Point (int.MinValue, int.MinValue);
+		private Cairo.Point offset = new Cairo.Point (int.MinValue, int.MinValue);
+		private Cairo.Point last_point = new Cairo.Point (int.MinValue, int.MinValue);
 
-		public override string Name {
-			get { return Catalog.GetString ("Clone Stamp"); }
+		public CloneStampTool (IServiceManager services) : base (services)
+		{
 		}
-		public override string Icon {
-			get { return "Tools.CloneStamp.png"; }
-		}
-		public override string StatusBarText { get { return Catalog.GetString ("Ctrl-left click to set origin, left click to paint."); } }
 
-		public override Gdk.Cursor DefaultCursor {
+		public override string Name => Translations.GetString ("Clone Stamp");
+		public override string Icon => Pinta.Resources.Icons.ToolCloneStamp;
+		// Translators: {0} is 'Ctrl', or a platform-specific key such as 'Command' on macOS.
+		public override string StatusBarText => Translations.GetString ("{0} + left click to set origin, left click to paint.", GtkExtensions.CtrlLabel ());
+		public override bool CursorChangesOnZoom => true;
+		public override Key ShortcutKey { get { return Key.L; } }
+		public override int Priority => 47;
+		protected override bool ShowAntialiasingButton => true;
+
+		public override Cursor DefaultCursor {
 			get {
-				int iconOffsetX, iconOffsetY;
-				var icon = CreateIconWithShape ("Cursor.CloneStamp.png",
-				                                CursorShape.Ellipse, BrushWidth, 16, 26,
-				                                out iconOffsetX, out iconOffsetY);
-                return new Gdk.Cursor (Gdk.Display.Default, icon, iconOffsetX, iconOffsetY);
+				var icon = GdkExtensions.CreateIconWithShape ("Cursor.CloneStamp.png",
+								CursorShape.Ellipse, BrushWidth, 16, 26,
+								out var iconOffsetX, out var iconOffsetY);
+				return new Cursor (Display.Default, icon, iconOffsetX, iconOffsetY);
 			}
 		}
-		public override bool CursorChangesOnZoom { get { return true; } }
 
-		public override Gdk.Key ShortcutKey { get { return Gdk.Key.L; } }
-		public override int Priority { get { return 33; } }
-		protected override bool ShowAntialiasingButton { get { return true; } }
-
-		protected override void OnBuildToolBar(Gtk.Toolbar tb)
+		protected override void OnMouseDown (Document document, ToolMouseEventArgs e)
 		{
-			base.OnBuildToolBar(tb);
-
-			// Change the cursor when the BrushWidth is changed.
-			brush_width.ComboBox.Changed += (sender, e) => SetCursor (DefaultCursor);
-		}
-
-		protected override void OnMouseDown (Gtk.DrawingArea canvas, Gtk.ButtonPressEventArgs args, Cairo.PointD point)
-		{
-			Document doc = PintaCore.Workspace.ActiveDocument;
-
 			// We only do stuff with the left mouse button
-			if (args.Event.Button != 1)
+			if (e.MouseButton != MouseButton.Left)
 				return;
-				
+
 			// Ctrl click is set origin, regular click is begin drawing
-			if (!args.Event.IsControlPressed ()) {
+			if (!e.IsControlPressed) {
 				if (origin.IsNotSet ())
 					return;
-					
-				painting = true;
-				
-				if (offset.IsNotSet ())
-					offset = new Point ((int)point.X - origin.X, (int)point.Y - origin.Y);
 
-				doc.ToolLayer.Clear ();
-				doc.ToolLayer.Hidden = false;
+				painting = true;
+
+				if (offset.IsNotSet ())
+					offset = new Cairo.Point (e.Point.X - origin.X, e.Point.Y - origin.Y);
+
+				document.Layers.ToolLayer.Clear ();
+				document.Layers.ToolLayer.Hidden = false;
 
 				surface_modified = false;
-				undo_surface = doc.CurrentUserLayer.Surface.Clone ();
+				undo_surface = document.Layers.CurrentUserLayer.Surface.Clone ();
 			} else {
-				origin = point.ToGdkPoint ();
+				origin = e.Point;
 			}
 		}
 
-		protected override void OnMouseMove (object o, Gtk.MotionNotifyEventArgs args, Cairo.PointD point)
+		protected override void OnMouseMove (Document document, ToolMouseEventArgs e)
 		{
-			Document doc = PintaCore.Workspace.ActiveDocument;
-
 			if (!painting || offset.IsNotSet ())
 				return;
-				
-			int x = (int)point.X;
-			int y = (int)point.Y;
+
+			var x = e.Point.X;
+			var y = e.Point.Y;
 
 			if (last_point.IsNotSet ()) {
-				last_point = new Point (x, y);
+				last_point = e.Point;
 				return;
 			}
 
-			using (var g = doc.CreateClippedToolContext ()) {
+			using (var g = document.CreateClippedToolContext ()) {
 				g.Antialias = UseAntialiasing ? Cairo.Antialias.Subpixel : Cairo.Antialias.None;
 
 				g.MoveTo (last_point.X, last_point.Y);
 				g.LineTo (x, y);
 
-				g.SetSource (doc.CurrentUserLayer.Surface, offset.X, offset.Y);
+				g.SetSource (document.Layers.CurrentUserLayer.Surface, offset.X, offset.Y);
 				g.LineWidth = BrushWidth;
 				g.LineCap = Cairo.LineCap.Round;
 
 				g.Stroke ();
 			}
 
-			var dirty_rect = GetRectangleFromPoints (last_point, new Point (x, y));
-			
-			last_point = new Point (x, y);
+			var dirty_rect = CairoExtensions.GetRectangleFromPoints (last_point, e.Point, BrushWidth + 2);
+
+			last_point = e.Point;
 			surface_modified = true;
-			doc.Workspace.Invalidate (dirty_rect);
+			document.Workspace.Invalidate (dirty_rect);
 		}
 
-		protected override void OnMouseUp (Gtk.DrawingArea canvas, Gtk.ButtonReleaseEventArgs args, Cairo.PointD point)
+		protected override void OnMouseUp (Document document, ToolMouseEventArgs e)
 		{
-			Document doc = PintaCore.Workspace.ActiveDocument;
-
 			painting = false;
 
-			using (Cairo.Context g = new Cairo.Context (doc.CurrentUserLayer.Surface)) {
-				g.SetSource (doc.ToolLayer.Surface);
+			using (var g = new Cairo.Context (document.Layers.CurrentUserLayer.Surface)) {
+				g.SetSource (document.Layers.ToolLayer.Surface);
 				g.Paint ();
 			}
-			
-			base.OnMouseUp (canvas, args, point);
-			
-			offset = new Point (int.MinValue, int.MinValue);
-			last_point = new Point (int.MinValue, int.MinValue);
 
-			doc.ToolLayer.Clear ();
-			doc.ToolLayer.Hidden = true;
-			doc.Workspace.Invalidate ();
+			base.OnMouseUp (document, e);
+
+			offset = new Cairo.Point (int.MinValue, int.MinValue);
+			last_point = new Cairo.Point (int.MinValue, int.MinValue);
+
+			document.Layers.ToolLayer.Clear ();
+			document.Layers.ToolLayer.Hidden = true;
+			document.Workspace.Invalidate ();
 		}
 
-		protected override void OnKeyDown (Gtk.DrawingArea canvas, Gtk.KeyPressEventArgs args)
+		protected override bool OnKeyDown (Document document, ToolKeyEventArgs e)
 		{
-			base.OnKeyDown(canvas, args);
-			//note that this WONT work if user presses control key and THEN selects the tool!
-			if (args.Event.Key == Key.Control_L || args.Event.Key == Key.Control_R) {
-				Gdk.Pixbuf icon = PintaCore.Resources.GetIcon ("Cursor.CloneStampSetSource.png");
-				Gdk.Cursor setSourceCursor = new Gdk.Cursor (Gdk.Display.Default, icon, 16, 26);
-				SetCursor(setSourceCursor);
+			// Note that this WON'T work if user presses control key and THEN selects the tool!
+			if (e.Key.IsControlKey ()) {
+				var icon = Resources.GetIcon ("Cursor.CloneStampSetSource.png");
+				var setSourceCursor = new Cursor (Display.Default, icon, 16, 26);
+				SetCursor (setSourceCursor);
 			}
+
+			return false;
 		}
 
-		protected override void OnKeyUp (Gtk.DrawingArea canvas, Gtk.KeyReleaseEventArgs args)
+		protected override bool OnKeyUp (Document document, ToolKeyEventArgs e)
 		{
-			base.OnKeyUp(canvas, args);
-			if (args.Event.Key == Key.Control_L || args.Event.Key == Key.Control_R)
-				SetCursor(DefaultCursor);
+			if (e.Key.IsControlKey ())
+				SetCursor (DefaultCursor);
+
+			return false;
 		}
 
-		protected override void OnDeactivated(BaseTool newTool)
+		protected override void OnDeactivated (Document? document, BaseTool? newTool)
 		{
-			origin = new Point (int.MinValue, int.MinValue);
+			origin = new Cairo.Point (int.MinValue, int.MinValue);
 		}
 	}
 }

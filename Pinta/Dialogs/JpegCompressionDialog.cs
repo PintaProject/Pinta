@@ -25,7 +25,7 @@
 // THE SOFTWARE.
 
 using Gtk;
-using Mono.Unix;
+using Pinta.Core;
 using Pinta.Gui.Widgets;
 
 namespace Pinta
@@ -35,17 +35,17 @@ namespace Pinta
 		private HScale compressionLevel;
 	
 		public JpegCompressionDialog (int defaultQuality, Gtk.Window parent)
-			: base (Catalog.GetString ("JPEG Quality"), parent, DialogFlags.Modal | DialogFlags.DestroyWithParent,
-				Stock.Cancel, ResponseType.Cancel, Stock.Ok, ResponseType.Ok)
+			: base (Translations.GetString ("JPEG Quality"), parent, DialogFlags.Modal | DialogFlags.DestroyWithParent,
+				Core.GtkExtensions.DialogButtonsCancelOk())
 		{
 			this.BorderWidth = 6;
-			this.VBox.Spacing = 3;
+			this.ContentArea.Spacing = 3;
 			VBox content = new VBox ();
 			content.Spacing = 5;
 
 			DefaultResponse = ResponseType.Ok;
 			
-			Label label = new Label (Catalog.GetString ("Quality: "));
+			Label label = new Label (Translations.GetString ("Quality: "));
 			label.Xalign = 0;
 			content.PackStart (label, false, false, 0);
 			
@@ -54,8 +54,7 @@ namespace Pinta
 			content.PackStart (compressionLevel, false, false, 0);
 
 			content.ShowAll ();
-			this.VBox.Add (content);
-			AlternativeButtonOrder = new int[] { (int) ResponseType.Ok, (int) ResponseType.Cancel };
+			this.ContentArea.Add (content);
 		}
 		
 		public int GetCompressionLevel ()

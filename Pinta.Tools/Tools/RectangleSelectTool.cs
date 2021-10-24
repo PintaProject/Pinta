@@ -27,32 +27,24 @@
 using System;
 using Cairo;
 using Pinta.Core;
-using Mono.Unix;
 
 namespace Pinta.Tools
 {
 	public class RectangleSelectTool : SelectTool
 	{
-		public override string Name {
-			get { return Catalog.GetString ("Rectangle Select"); }
-		}
-		public override string Icon {
-			get { return "Tools.RectangleSelect.png"; }
-		}
-		public override string StatusBarText {
-			get { return Catalog.GetString ("Click and drag to draw a rectangular selection. Hold Shift to constrain to a square."); }
-		}
-        public override Gdk.Cursor DefaultCursor { get { return new Gdk.Cursor (Gdk.Display.Default, PintaCore.Resources.GetIcon ("Cursor.RectangleSelect.png"), 9, 18); } }
-		public override int Priority { get { return 5; } }
-
-		protected override Rectangle DrawShape (Rectangle r, Layer l)
+		public RectangleSelectTool (IServiceManager services) : base (services)
 		{
-			Document doc = PintaCore.Workspace.ActiveDocument;
+		}
 
-			doc.Selection.CreateRectangleSelection(r);
-			
-			// Add some padding for invalidation
-			return new Rectangle (r.X, r.Y, r.Width + 2, r.Height + 2);
+		public override string Name => Translations.GetString ("Rectangle Select");
+		public override string Icon => Pinta.Resources.Icons.ToolSelectRectangle;
+		public override string StatusBarText => Translations.GetString ("Click and drag to draw a rectangular selection. Hold Shift to constrain to a square.");
+		public override Gdk.Cursor DefaultCursor => new Gdk.Cursor (Gdk.Display.Default, Resources.GetIcon ("Cursor.RectangleSelect.png"), 9, 18);
+		public override int Priority => 13;
+
+		protected override void DrawShape (Document document, Rectangle r, Layer l)
+		{
+			document.Selection.CreateRectangleSelection (r);
 		}
 	}
 }

@@ -33,56 +33,50 @@ using System.Text;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Collections;
-using Mono.Addins.Localization;
-using Mono.Unix;
 
 namespace Pinta.Gui.Widgets
 {
 	public class SimpleEffectDialog : Gtk.Dialog
 	{
 		[ThreadStatic]
-		Random random = new Random ();
+		readonly Random random = new Random ();
 
 		const uint event_delay_millis = 100;
 		uint event_delay_timeout_id;
-		GLib.TimeoutHandler timeout_func;
+		GLib.TimeoutHandler? timeout_func;
 
 		/// Since this dialog is used by add-ins, the IAddinLocalizer allows for translations to be
 		/// fetched from the appropriate place.
 		/// </param>
-		public SimpleEffectDialog (string title, Gdk.Pixbuf icon, object effectData,
-		                           IAddinLocalizer localizer)
-			: base (title, Pinta.Core.PintaCore.Chrome.MainWindow, Gtk.DialogFlags.Modal,
-				Gtk.Stock.Cancel, Gtk.ResponseType.Cancel, Gtk.Stock.Ok, Gtk.ResponseType.Ok)
+		public SimpleEffectDialog (string title, Gdk.Pixbuf icon, object effectData, IAddinLocalizer localizer)
+			: base (title, Core.PintaCore.Chrome.MainWindow, Gtk.DialogFlags.Modal, Core.GtkExtensions.DialogButtonsCancelOk ())
 		{
 			Icon = icon;
 			EffectData = effectData;
 
 			BorderWidth = 6;
-			VBox.Spacing = 12;
+			ContentArea.Spacing = 12;
 			WidthRequest = 400;
 			Resizable = false;
 			DefaultResponse = Gtk.ResponseType.Ok;
-			AlternativeButtonOrder = new int[] { (int)Gtk.ResponseType.Ok, (int)Gtk.ResponseType.Cancel };
 
 			BuildDialog (localizer);
 		}
 
 		public object EffectData { get; private set; }
 
-		public event PropertyChangedEventHandler EffectDataChanged;
+		public event PropertyChangedEventHandler? EffectDataChanged;
 
-		public override void Destroy ()
-        {
-            // If there is a timeout that hasn't been invoked yet, run it before closing the dialog.
-            if (event_delay_timeout_id != 0)
-            {
-                GLib.Source.Remove (event_delay_timeout_id);
-                timeout_func.Invoke ();
-            }
+		protected override void Dispose (bool disposing)
+		{
+			// If there is a timeout that hasn't been invoked yet, run it before closing the dialog.
+			if (disposing && event_delay_timeout_id != 0) {
+				GLib.Source.Remove (event_delay_timeout_id);
+				timeout_func?.Invoke ();
+			}
 
-            base.Destroy ();
-        }
+			base.Dispose (disposing);
+		}
 
 		#region EffectData Parser
 		private void BuildDialog (IAddinLocalizer localizer)
@@ -90,25 +84,25 @@ namespace Pinta.Gui.Widgets
 			var members = EffectData.GetType ().GetMembers ();
 
 			foreach (var mi in members) {
-				Type mType = GetTypeForMember (mi);
+				var mType = GetTypeForMember (mi);
 
 				if (mType == null)
 					continue;
 
-				string caption = null;
-				string hint = null;
-				bool skip = false;
-				bool combo = false;
+				string? caption = null;
+				string? hint = null;
+				var skip = false;
+				var combo = false;
 
-				object[] attrs = mi.GetCustomAttributes (false);
+				var attrs = mi.GetCustomAttributes (false);
 
 				foreach (var attr in attrs) {
 					if (attr is SkipAttribute)
 						skip = true;
 					else if (attr is CaptionAttribute)
-						caption = ((CaptionAttribute)attr).Caption;
+						caption = ((CaptionAttribute) attr).Caption;
 					else if (attr is HintAttribute)
-						hint = ((HintAttribute)attr).Hint;
+						hint = ((HintAttribute) attr).Hint;
 					else if (attr is StaticListAttribute)
 						combo = true;
 
@@ -147,103 +141,113 @@ namespace Pinta.Gui.Widgets
 		private void AddWidget (Gtk.Widget widget)
 		{
 			widget.Show ();
-			this.VBox.Add (widget);
+			ContentArea.Add (widget);
 		}
 		#endregion
 
 		#region Control Builders
-		private ComboBoxWidget CreateEnumComboBox (string caption, object o, System.Reflection.MemberInfo member, System.Object[] attributes)
+		private ComboBoxWidget CreateEnumComboBox (string caption, object o, MemberInfo member, object[] attributes)
 		{
-			Type myType = GetTypeForMember (member);
+			var myType = GetTypeForMember (member)!; // NRT - We're looping through members we got from reflection
 
-			string[] member_names = Enum.GetNames (myType);
+			var member_names = Enum.GetNames (myType);
 			var labels = new List<string> ();
 			var label_to_member = new Dictionary<string, string> ();
 
-			foreach (var member_name in member_names)
-			{
+			foreach (var member_name in member_names) {
 				var members = myType.GetMember (member_name);
 
 				// Look for a Caption attribute that provides a (translated) description.
 				string label;
-				var attrs = members [0].GetCustomAttributes (typeof (CaptionAttribute), false);
-				if (attrs.Length > 0)
-					label = Catalog.GetString (((CaptionAttribute)attrs [0]).Caption);
-				else
-					label = Catalog.GetString (member_name);
+				var attrs = members[0].GetCustomAttributes (typeof (CaptionAttribute), false);
 
-				label_to_member [label] = member_name;
+				if (attrs.Length > 0)
+					label = Core.Translations.GetString (((CaptionAttribute) attrs[0]).Caption);
+				else
+					label = Core.Translations.GetString (member_name);
+
+				label_to_member[label] = member_name;
 				labels.Add (label);
 			}
 
-			ComboBoxWidget widget = new ComboBoxWidget (labels.ToArray ());
+			var widget = new ComboBoxWidget (labels.ToArray ()) {
+				Label = caption
+			};
 
-			widget.Label = caption;
-			widget.AddEvents ((int)Gdk.EventMask.ButtonPressMask);
-			widget.Active = ((IList)member_names).IndexOf (GetValue (member, o).ToString ());
+			widget.AddEvents ((int) Gdk.EventMask.ButtonPressMask);
 
-			widget.Changed += delegate (object sender, EventArgs e) {
-				SetValue (member, o, Enum.Parse (myType, label_to_member [widget.ActiveText]));
+			if (GetValue (member, o) is object obj)
+				widget.Active = ((IList) member_names).IndexOf (obj.ToString ());
+
+			widget.Changed += delegate (object? sender, EventArgs e) {
+				SetValue (member, o, Enum.Parse (myType, label_to_member[widget.ActiveText]));
 			};
 
 			return widget;
 		}
 
-		private ComboBoxWidget CreateComboBox (string caption, object o, System.Reflection.MemberInfo member, System.Object [] attributes)
+		private ComboBoxWidget CreateComboBox (string caption, object o, MemberInfo member, object[] attributes)
 		{
-			Dictionary<string, object> dict = null;
+			Dictionary<string, object>? dict = null;
 
 			foreach (var attr in attributes) {
-				if (attr is StaticListAttribute)
-					dict = (Dictionary<string, object>)GetValue (((StaticListAttribute)attr).dictionaryName, o);
+				if (attr is StaticListAttribute attribute && GetValue (attribute.DictionaryName, o) is Dictionary<string, object> d)
+					dict = d;
 			}
 
-			List<string> entries = new List<string> ();
-			foreach (string str in dict.Keys)
-				entries.Add (str);
+			var entries = new List<string> ();
 
-			ComboBoxWidget widget = new ComboBoxWidget (entries.ToArray ());
+			if (dict != null)
+				foreach (var str in dict.Keys)
+					entries.Add (str);
 
-			widget.Label = caption;
-			widget.AddEvents ((int)Gdk.EventMask.ButtonPressMask);
-			widget.Active = entries.IndexOf ((string)GetValue (member, o));
+			var widget = new ComboBoxWidget (entries.ToArray ()) {
+				Label = caption
+			};
 
-			widget.Changed += delegate (object sender, EventArgs e) {
+			widget.AddEvents ((int) Gdk.EventMask.ButtonPressMask);
+
+			if (GetValue (member, o) is string s)
+				widget.Active = entries.IndexOf (s);
+
+			widget.Changed += delegate (object? sender, EventArgs e) {
 				SetValue (member, o, widget.ActiveText);
 			};
 
 			return widget;
 		}
 
-		private HScaleSpinButtonWidget CreateDoubleSlider (string caption, object o, MemberInfo member, object [] attributes)
+		private HScaleSpinButtonWidget CreateDoubleSlider (string caption, object o, MemberInfo member, object[] attributes)
 		{
-			HScaleSpinButtonWidget widget = new HScaleSpinButtonWidget ();
-
-			int min_value = -100;
-			int max_value = 100;
-			double inc_value = 0.01;
-			int digits_value = 2;
+			var min_value = -100;
+			var max_value = 100;
+			var inc_value = 0.01;
+			var digits_value = 2;
 
 			foreach (var attr in attributes) {
-				if (attr is MinimumValueAttribute)
-					min_value = ((MinimumValueAttribute)attr).Value;
-				else if (attr is MaximumValueAttribute)
-					max_value = ((MaximumValueAttribute)attr).Value;
-				else if (attr is IncrementValueAttribute)
-					inc_value = ((IncrementValueAttribute)attr).Value;
-				else if (attr is DigitsValueAttribute)
-					digits_value = ((DigitsValueAttribute)attr).Value;
+				if (attr is MinimumValueAttribute min)
+					min_value = min.Value;
+				else if (attr is MaximumValueAttribute max)
+					max_value = max.Value;
+				else if (attr is IncrementValueAttribute inc)
+					inc_value = inc.Value;
+				else if (attr is DigitsValueAttribute digits)
+					digits_value = digits.Value;
 			}
 
-			widget.Label = caption;
-			widget.MinimumValue = min_value;
-			widget.MaximumValue = max_value;
-			widget.IncrementValue = inc_value;
-			widget.DigitsValue = digits_value;
-			widget.DefaultValue = (double)GetValue (member, o);
+			var widget = new HScaleSpinButtonWidget {
+				Label = caption,
+				MinimumValue = min_value,
+				MaximumValue = max_value,
+				IncrementValue = inc_value,
+				DigitsValue = digits_value
+			};
 
-			widget.ValueChanged += delegate (object sender, EventArgs e) {
-				DelayedUpdate( () => {
+			if (GetValue (member, o) is double d)
+				widget.DefaultValue = d;
+
+			widget.ValueChanged += delegate (object? sender, EventArgs e) {
+				DelayedUpdate (() => {
 					SetValue (member, o, widget.Value);
 					return false;
 				});
@@ -252,35 +256,37 @@ namespace Pinta.Gui.Widgets
 			return widget;
 		}
 
-		private HScaleSpinButtonWidget CreateSlider (string caption, object o, MemberInfo member, object [] attributes)
+		private HScaleSpinButtonWidget CreateSlider (string caption, object o, MemberInfo member, object[] attributes)
 		{
-			HScaleSpinButtonWidget widget = new HScaleSpinButtonWidget ();
-
-			int min_value = -100;
-			int max_value = 100;
-			double inc_value = 1.0;
-			int digits_value = 0;
+			var min_value = -100;
+			var max_value = 100;
+			var inc_value = 1.0;
+			var digits_value = 0;
 
 			foreach (var attr in attributes) {
-				if (attr is MinimumValueAttribute)
-					min_value = ((MinimumValueAttribute)attr).Value;
-				else if (attr is MaximumValueAttribute)
-					max_value = ((MaximumValueAttribute)attr).Value;
-				else if (attr is IncrementValueAttribute)
-					inc_value = ((IncrementValueAttribute)attr).Value;
-				else if (attr is DigitsValueAttribute)
-					digits_value = ((DigitsValueAttribute)attr).Value;
+				if (attr is MinimumValueAttribute min)
+					min_value = min.Value;
+				else if (attr is MaximumValueAttribute max)
+					max_value = max.Value;
+				else if (attr is IncrementValueAttribute inc)
+					inc_value = inc.Value;
+				else if (attr is DigitsValueAttribute digits)
+					digits_value = digits.Value;
 			}
 
-			widget.Label = caption;
-			widget.MinimumValue = min_value;
-			widget.MaximumValue = max_value;
-			widget.IncrementValue = inc_value;
-			widget.DigitsValue = digits_value;
-			widget.DefaultValue = (int)GetValue (member, o);
+			var widget = new HScaleSpinButtonWidget {
+				Label = caption,
+				MinimumValue = min_value,
+				MaximumValue = max_value,
+				IncrementValue = inc_value,
+				DigitsValue = digits_value
+			};
 
-			widget.ValueChanged += delegate (object sender, EventArgs e) {
-				DelayedUpdate( () => {
+			if (GetValue (member, o) is int i)
+				widget.DefaultValue = i;
+
+			widget.ValueChanged += delegate (object? sender, EventArgs e) {
+				DelayedUpdate (() => {
 					SetValue (member, o, widget.ValueAsInt);
 					return false;
 				});
@@ -289,57 +295,65 @@ namespace Pinta.Gui.Widgets
 			return widget;
 		}
 
-		private Gtk.CheckButton CreateCheckBox (string caption, object o, MemberInfo member, object [] attributes)
+		private Gtk.CheckButton CreateCheckBox (string caption, object o, MemberInfo member, object[] attributes)
 		{
-			Gtk.CheckButton widget = new Gtk.CheckButton ();
+			var widget = new Gtk.CheckButton {
+				Label = caption
+			};
 
-			widget.Label = caption;
-			widget.Active = (bool)GetValue (member, o);
+			if (GetValue (member, o) is bool b)
+				widget.Active = b;
 
-			widget.Toggled += delegate (object sender, EventArgs e) {
+			widget.Toggled += delegate (object? sender, EventArgs e) {
 				SetValue (member, o, widget.Active);
 			};
 
 			return widget;
 		}
 
-		private PointPickerWidget CreateOffsetPicker (string caption, object o, MemberInfo member, object [] attributes)
+		private PointPickerWidget CreateOffsetPicker (string caption, object o, MemberInfo member, object[] attributes)
 		{
-			PointPickerWidget widget = new PointPickerWidget ();
+			var widget = new PointPickerWidget {
+				Label = caption
+			};
 
-			widget.Label = caption;
-			widget.DefaultOffset = (Cairo.PointD)GetValue (member, o);
+			if (GetValue (member, o) is Cairo.PointD p)
+				widget.DefaultOffset = p;
 
-			widget.PointPicked += delegate (object sender, EventArgs e) {
+			widget.PointPicked += delegate (object? sender, EventArgs e) {
 				SetValue (member, o, widget.Offset);
 			};
 
 			return widget;
 		}
 
-		private PointPickerWidget CreatePointPicker (string caption, object o, MemberInfo member, object [] attributes)
+		private PointPickerWidget CreatePointPicker (string caption, object o, MemberInfo member, object[] attributes)
 		{
-			PointPickerWidget widget = new PointPickerWidget ();
+			var widget = new PointPickerWidget {
+				Label = caption
+			};
 
-			widget.Label = caption;
-			widget.DefaultPoint = (Gdk.Point)GetValue (member, o);
+			if (GetValue (member, o) is Gdk.Point p)
+				widget.DefaultPoint = p;
 
-			widget.PointPicked += delegate (object sender, EventArgs e) {
+			widget.PointPicked += delegate (object? sender, EventArgs e) {
 				SetValue (member, o, widget.Point);
 			};
 
 			return widget;
 		}
 
-		private AnglePickerWidget CreateAnglePicker (string caption, object o, MemberInfo member, object [] attributes)
+		private AnglePickerWidget CreateAnglePicker (string caption, object o, MemberInfo member, object[] attributes)
 		{
-			AnglePickerWidget widget = new AnglePickerWidget ();
+			var widget = new AnglePickerWidget {
+				Label = caption
+			};
 
-			widget.Label = caption;
-			widget.DefaultValue = (double)GetValue (member, o);
+			if (GetValue (member, o) is double d)
+				widget.DefaultValue = d;
 
-			widget.ValueChanged += delegate (object sender, EventArgs e) {
-				DelayedUpdate( () => {
+			widget.ValueChanged += delegate (object? sender, EventArgs e) {
+				DelayedUpdate (() => {
 					SetValue (member, o, widget.Value);
 					return false;
 				});
@@ -350,17 +364,18 @@ namespace Pinta.Gui.Widgets
 
 		private Gtk.Label CreateHintLabel (string hint)
 		{
-			Gtk.Label label = new Gtk.Label (hint);
-			label.LineWrap = true;
+			var label = new Gtk.Label (hint) {
+				LineWrap = true
+			};
 
 			return label;
 		}
 
-		private ReseedButtonWidget CreateSeed (string caption, object o, MemberInfo member, object [] attributes)
+		private ReseedButtonWidget CreateSeed (string caption, object o, MemberInfo member, object[] attributes)
 		{
-			ReseedButtonWidget widget = new ReseedButtonWidget ();
+			var widget = new ReseedButtonWidget ();
 
-			widget.Clicked += delegate (object sender, EventArgs e) {
+			widget.Clicked += delegate (object? sender, EventArgs e) {
 				SetValue (member, o, random.Next ());
 			};
 
@@ -369,43 +384,38 @@ namespace Pinta.Gui.Widgets
 		#endregion
 
 		#region Static Reflection Methods
-		private static object GetValue (MemberInfo mi, object o)
+		private static object? GetValue (MemberInfo mi, object o)
 		{
-			var fi = mi as FieldInfo;
-			if (fi != null)
+			if (mi is FieldInfo fi)
 				return fi.GetValue (o);
+
 			var pi = mi as PropertyInfo;
 
-			var getMethod = pi.GetGetMethod ();
-			return getMethod.Invoke (o, new object [0]);
+			return pi?.GetGetMethod ()?.Invoke (o, Array.Empty<object> ());
 		}
 
 		private void SetValue (MemberInfo mi, object o, object val)
 		{
-			var fi = mi as FieldInfo;
-			var pi = mi as PropertyInfo;
-			string fieldName = null;
+			string? fieldName = null;
 
-			if (fi != null) {
+			if (mi is FieldInfo fi) {
 				fi.SetValue (o, val);
 				fieldName = fi.Name;
-			} else if (pi != null) {
-				var setMethod = pi.GetSetMethod ();
-				setMethod.Invoke (o, new object [] { val });
+			} else if (mi is PropertyInfo pi) {
+				pi.GetSetMethod ()?.Invoke (o, new object[] { val });
 				fieldName = pi.Name;
 			}
 
-			if (EffectDataChanged != null)
-				EffectDataChanged (this, new PropertyChangedEventArgs (fieldName));
+			EffectDataChanged?.Invoke (this, new PropertyChangedEventArgs (fieldName));
 		}
 
 		// Returns the type for fields and properties and null for everything else
-		private static Type GetTypeForMember (MemberInfo mi)
+		private static Type? GetTypeForMember (MemberInfo mi)
 		{
-			if (mi is FieldInfo)
-				return ((FieldInfo)mi).FieldType;
-			else if (mi is PropertyInfo)
-				return ((PropertyInfo)mi).PropertyType;
+			if (mi is FieldInfo fi)
+				return fi.FieldType;
+			else if (mi is PropertyInfo pi)
+				return pi.PropertyType;
 
 			return null;
 		}
@@ -413,11 +423,11 @@ namespace Pinta.Gui.Widgets
 		private static string MakeCaption (string name)
 		{
 			var sb = new StringBuilder (name.Length);
-			bool nextUp = true;
+			var nextUp = true;
 
-			foreach (char c in name) {
+			foreach (var c in name) {
 				if (nextUp) {
-					sb.Append (Char.ToUpper (c));
+					sb.Append (char.ToUpper (c));
 					nextUp = false;
 				} else {
 					if (c == '_') {
@@ -425,7 +435,7 @@ namespace Pinta.Gui.Widgets
 						nextUp = true;
 						continue;
 					}
-					if (Char.IsUpper (c))
+					if (char.IsUpper (c))
 						sb.Append (' ');
 					sb.Append (c);
 				}
@@ -434,25 +444,23 @@ namespace Pinta.Gui.Widgets
 			return sb.ToString ();
 		}
 
-		private object GetValue (string name, object o)
+		private object? GetValue (string name, object o)
 		{
-			var fi = o.GetType ().GetField (name);
-			if (fi != null)
+			if (o.GetType ().GetField (name) is FieldInfo fi)
 				return fi.GetValue (o);
-			var pi = o.GetType ().GetProperty (name);
-			if (pi == null)
-				return null;
-			var getMethod = pi.GetGetMethod ();
-			return getMethod.Invoke (o, new object [0]);
+
+			if (o.GetType ().GetProperty (name) is PropertyInfo pi)
+				return pi.GetGetMethod ()?.Invoke (o, Array.Empty<object> ());
+
+			return null;
 		}
 
-        private void DelayedUpdate (GLib.TimeoutHandler handler)
-        {
-            if (event_delay_timeout_id != 0)
-			{
+		private void DelayedUpdate (GLib.TimeoutHandler handler)
+		{
+			if (event_delay_timeout_id != 0) {
 				GLib.Source.Remove (event_delay_timeout_id);
 				if (handler != timeout_func)
-					timeout_func.Invoke ();
+					timeout_func?.Invoke ();
 			}
 
 			timeout_func = handler;
@@ -462,9 +470,16 @@ namespace Pinta.Gui.Widgets
 				timeout_func = null;
 				return false;
 			});
-        }
-        #endregion
-    }
+		}
+		#endregion
+	}
+
+	// TODO-GTK3 (addins)
+	// This is a temporary replacement for IAddinLocalizer from Mono.Addins.
+	public interface IAddinLocalizer
+	{
+		string GetString (string msgid);
+	}
 
 	/// <summary>
 	/// Wrapper around Pinta's translation template.
@@ -473,7 +488,7 @@ namespace Pinta.Gui.Widgets
 	{
 		public string GetString (string msgid)
 		{
-			return Mono.Unix.Catalog.GetString (msgid);
+			return Pinta.Core.Translations.GetString (msgid);
 		}
 	};
 }

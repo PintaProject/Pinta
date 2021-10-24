@@ -26,7 +26,6 @@
 
 using System;
 using Gdk;
-using Mono.Unix;
 
 namespace Pinta.Core
 {
@@ -44,24 +43,24 @@ namespace Pinta.Core
 		internal DocumentWorkspace (Document document)
 		{
 			this.document = document;
-			History = new DocumentWorkspaceHistory (document);
+			History = new DocumentHistory (document);
 		}
 
         #region Public Events
-        public event EventHandler<CanvasInvalidatedEventArgs> CanvasInvalidated;
-        public event EventHandler CanvasSizeChanged;
-        #endregion
+        public event EventHandler<CanvasInvalidatedEventArgs>? CanvasInvalidated;
+        public event EventHandler? CanvasSizeChanged;
+		#endregion
 
 		#region Public Properties
-        public Gtk.DrawingArea Canvas { get; set; }
+		public Gtk.DrawingArea Canvas { get; set; } = null!; // NRT - This is set soon after creation
 
 		public bool CanvasFitsInWindow {
 			get {
 				Gtk.Viewport view = (Gtk.Viewport)Canvas.Parent;
 				
 				int window_x = view.Allocation.Width;
-				int window_y = view.Children[0].Allocation.Height;
-				
+				int window_y = view.Allocation.Height;
+
 				if (CanvasSize.Width <= window_x && CanvasSize.Height <= window_y)
 					return true;
 				
@@ -79,7 +78,7 @@ namespace Pinta.Core
 			}
 		}
 
-		public DocumentWorkspaceHistory History { get; private set; }
+		public DocumentHistory History { get; private set; }
 
 		public bool ImageFitsInWindow {
 			get {
@@ -119,7 +118,7 @@ namespace Pinta.Core
 					CanvasSize = new Gdk.Size (new_x, new_y);
 					Invalidate ();
 
-					if (PintaCore.Tools.CurrentTool.CursorChangesOnZoom)
+					if (PintaCore.Tools.CurrentTool?.CursorChangesOnZoom == true)
 					{
 						//The current tool's cursor changes when the zoom changes.
 						PintaCore.Tools.CurrentTool.SetCursor(PintaCore.Tools.CurrentTool.DefaultCursor);
@@ -258,7 +257,7 @@ namespace Pinta.Core
 			else
 				ratio = document.ImageSize.Height / rect.Height;
 			
-			(PintaCore.Actions.View.ZoomComboBox.ComboBox as Gtk.ComboBoxEntry).Entry.Text = ViewActions.ToPercent (ratio);
+			PintaCore.Actions.View.ZoomComboBox.ComboBox.Entry.Text = ViewActions.ToPercent (ratio);
 			Gtk.Main.Iteration (); //Force update of scrollbar upper before recenter
 			RecenterView (rect.X + rect.Width / 2, rect.Y + rect.Height / 2);
 		}
@@ -289,8 +288,8 @@ namespace Pinta.Core
 			
 			zoom = Math.Min (zoom, 3600);
 			
-            if (Canvas.GdkWindow != null)
-			    Canvas.GdkWindow.FreezeUpdates ();
+            if (Canvas.Window != null)
+			    Canvas.Window.FreezeUpdates ();
 
 			PintaCore.Actions.View.SuspendZoomUpdate ();
 			
@@ -317,7 +316,7 @@ namespace Pinta.Core
 
 					switch (zoomType) {
 					case ZoomType.ZoomIn:
-						if (zoomInList == Catalog.GetString ("Window") || zoom_level <= zoom) {
+						if (zoomInList == Translations.GetString ("Window") || zoom_level <= zoom) {
 							PintaCore.Actions.View.ZoomComboBox.ComboBox.Active = i - 1;
 							return true;
 						}
@@ -325,7 +324,7 @@ namespace Pinta.Core
 						break;
 					
 					case ZoomType.ZoomOut:
-						if (zoomInList == Catalog.GetString ("Window"))
+						if (zoomInList == Translations.GetString ("Window"))
 							return true;
 						
 						if (zoom_level < zoom) {
@@ -357,8 +356,8 @@ namespace Pinta.Core
 			RecenterView (center_x, center_y);
 			
 			PintaCore.Actions.View.ResumeZoomUpdate ();
-            if (Canvas.GdkWindow != null)
-                Canvas.GdkWindow.ThawUpdates ();
+            if (Canvas.Window != null)
+                Canvas.Window.ThawUpdates ();
 		}
 		#endregion
 	}
