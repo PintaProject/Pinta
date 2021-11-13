@@ -7,16 +7,16 @@ msgid ""
 msgstr ""
 "Project-Id-Version: pinta\n"
 "Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
-"POT-Creation-Date: 2020-07-27 21:13-0400\n"
-"PO-Revision-Date: 2020-07-31 12:23+0000\n"
+"POT-Creation-Date: 2021-10-17 10:55-0400\n"
+"PO-Revision-Date: 2021-10-26 19:17+0000\n"
 "Last-Translator: VPablo <villumar@gmail.com>\n"
 "Language-Team: Catalan <ca@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Launchpad-Export-Date: 2020-08-04 20:56+0000\n"
-"X-Generator: Launchpad (build a24057fea7e4c6a98c0220d5f878da0f3c783699)\n"
+"X-Launchpad-Export-Date: 2021-11-12 20:36+0000\n"
+"X-Generator: Launchpad (build 57dd9ea1b48fdf744e285d99fb34fa0c21646cd0)\n"
 
 #: ../xdg/pinta.desktop.in.h:1
 msgid "Pinta"
@@ -78,13 +78,13 @@ msgid "Copy Merged"
 msgstr "Copia visible"
 
 #: ../Pinta.Core/Actions/EditActions.cs:74
-#: ../Pinta.Core/Classes/Document.cs:780
+#: ../Pinta.Core/Classes/Document.cs:787
 #: ../Pinta.Core/HistoryItems/PasteHistoryItem.cs:43
 msgid "Paste"
 msgstr "Enganxa"
 
 #: ../Pinta.Core/Actions/EditActions.cs:75
-#: ../Pinta.Core/Classes/Document.cs:776
+#: ../Pinta.Core/Classes/Document.cs:783
 msgid "Paste Into New Layer"
 msgstr "Enganxa en una capa nova"
 
@@ -103,7 +103,7 @@ msgid "Fill Selection"
 msgstr "Omple la selecció"
 
 #: ../Pinta.Core/Actions/EditActions.cs:79
-#: ../Pinta.Core/Actions/EditActions.cs:421
+#: ../Pinta.Core/Actions/EditActions.cs:422
 msgid "Invert Selection"
 msgstr "Inverteix la selecció"
 
@@ -122,7 +122,7 @@ msgid "Open..."
 msgstr "Obre…"
 
 #: ../Pinta.Core/Actions/EditActions.cs:84
-#: ../Pinta.Core/Actions/FileActions.cs:66
+#: ../Pinta.Core/Actions/FileActions.cs:68
 msgid "Save As..."
 msgstr "Anomena i desa..."
 
@@ -143,20 +143,20 @@ msgstr "Paleta"
 msgid "Deselect"
 msgstr "Desselecciona"
 
-#: ../Pinta.Core/Actions/EditActions.cs:336
+#: ../Pinta.Core/Actions/EditActions.cs:337
 msgid "Open Palette File"
 msgstr "Obre el fitxer de paleta"
 
-#: ../Pinta.Core/Actions/EditActions.cs:348
+#: ../Pinta.Core/Actions/EditActions.cs:349
 msgid "Palette files"
 msgstr "Fitxers de paleta"
 
-#: ../Pinta.Core/Actions/EditActions.cs:352
+#: ../Pinta.Core/Actions/EditActions.cs:353
 #: ../Pinta/Actions/File/OpenDocumentAction.cs:67
 msgid "All files"
 msgstr "Tots els fitxers"
 
-#: ../Pinta.Core/Actions/EditActions.cs:373
+#: ../Pinta.Core/Actions/EditActions.cs:374
 msgid "Save Palette File"
 msgstr "Desa el fitxer de paleta"
 
@@ -170,30 +170,30 @@ msgstr "Captura de pantalla nova…"
 
 #: ../Pinta.Core/Actions/FileActions.cs:57
 msgid "Open Recent"
-msgstr "Obre recents"
+msgstr "Obre recent"
 
-#: ../Pinta.Core/Actions/FileActions.cs:64
+#: ../Pinta.Core/Actions/FileActions.cs:66
 #: ../Pinta.Docking/DockLibrary/DockItemTitleTab.cs:175
 msgid "Close"
 msgstr "Tanca"
 
-#: ../Pinta.Core/Actions/FileActions.cs:65
+#: ../Pinta.Core/Actions/FileActions.cs:67
 msgid "Save"
 msgstr "Desa"
 
-#: ../Pinta.Core/Actions/FileActions.cs:67
+#: ../Pinta.Core/Actions/FileActions.cs:69
 msgid "Print"
 msgstr "Imprimeix"
 
-#: ../Pinta.Core/Actions/FileActions.cs:68
+#: ../Pinta.Core/Actions/FileActions.cs:70
 msgid "Quit"
 msgstr "Surt"
 
-#: ../Pinta.Core/Actions/FileActions.cs:70
+#: ../Pinta.Core/Actions/FileActions.cs:72
 msgid "New"
 msgstr "Nou"
 
-#: ../Pinta.Core/Actions/FileActions.cs:71
+#: ../Pinta.Core/Actions/FileActions.cs:73
 msgid "Open"
 msgstr "Obre"
 
@@ -213,12 +213,12 @@ msgstr "Informa d'un error"
 msgid "Translate This Application"
 msgstr "Traduïu aquesta aplicació"
 
-#: ../Pinta.Core/Actions/HelpActions.cs:56 ../Pinta/MainWindow.cs:347
+#: ../Pinta.Core/Actions/HelpActions.cs:56 ../Pinta/MainWindow.cs:368
 msgid "About"
 msgstr "Quant a"
 
 #: ../Pinta.Core/Actions/ImageActions.cs:60
-#: ../Pinta.Core/Actions/ImageActions.cs:291
+#: ../Pinta.Core/Actions/ImageActions.cs:284
 msgid "Crop to Selection"
 msgstr "Escapça la selecció"
 
@@ -266,7 +266,7 @@ msgstr "Aplana"
 
 #: ../Pinta.Core/Actions/LayerActions.cs:65
 #: ../Pinta.Core/Actions/LayerActions.cs:292
-#: ../Pinta.Core/Classes/Document.cs:839
+#: ../Pinta.Core/Classes/Document.cs:846
 msgid "Add New Layer"
 msgstr "Afegeix una capa nova"
 
@@ -369,19 +369,19 @@ msgid "Fullscreen"
 msgstr "Pantalla completa"
 
 #: ../Pinta.Core/Actions/ViewActions.cs:115
-#: ../Pinta.Core/Actions/ViewActions.cs:277
+#: ../Pinta.Core/Actions/ViewActions.cs:284
 #: ../Pinta.Core/Classes/DocumentWorkspace.cs:320
 #: ../Pinta.Core/Classes/DocumentWorkspace.cs:328
 msgid "Window"
 msgstr "Finestra"
 
-#: ../Pinta.Core/Actions/ViewActions.cs:159
+#: ../Pinta.Core/Actions/ViewActions.cs:163
 msgid "Ruler Units"
 msgstr "Unitats del regle"
 
 #. Translators: This specifies the format of the zoom percentage choices
 #. in the toolbar.
-#: ../Pinta.Core/Actions/ViewActions.cs:258
+#: ../Pinta.Core/Actions/ViewActions.cs:265
 #, csharp-format
 msgid "{0}%"
 msgstr "{0} %"
@@ -394,56 +394,57 @@ msgstr "Desa-ho tot"
 msgid "Close All"
 msgstr "Tanca-ho tot"
 
-#: ../Pinta.Core/Classes/BaseTool.cs:261
+#: ../Pinta.Core/Classes/BaseTool.cs:262
 msgid "Tool"
 msgstr "Eina"
 
-#: ../Pinta.Core/Classes/BaseTool.cs:333
+#: ../Pinta.Core/Classes/BaseTool.cs:334
+#: ../Pinta.Gui.Widgets/Widgets/ColorPaletteWidget.cs:316
 msgid "Shortcut key"
 msgstr "Drecera de teclat"
 
-#: ../Pinta.Core/Classes/BaseTool.cs:445
+#: ../Pinta.Core/Classes/BaseTool.cs:446
 msgid "Normal Blending"
 msgstr "Barreja normal"
 
-#: ../Pinta.Core/Classes/BaseTool.cs:446
+#: ../Pinta.Core/Classes/BaseTool.cs:447
 msgid "Overwrite"
 msgstr "Sobreescriu"
 
-#: ../Pinta.Core/Classes/BaseTool.cs:460
+#: ../Pinta.Core/Classes/BaseTool.cs:461
 msgid "Antialiasing On"
 msgstr "Antialiàsing activat"
 
-#: ../Pinta.Core/Classes/BaseTool.cs:461
+#: ../Pinta.Core/Classes/BaseTool.cs:462
 msgid "Antialiasing Off"
 msgstr "Antialiàsing desactivat"
 
-#: ../Pinta.Core/Classes/Document.cs:291 ../Pinta.Core/Classes/Document.cs:296
+#: ../Pinta.Core/Classes/Document.cs:296 ../Pinta.Core/Classes/Document.cs:301
 #: ../Pinta.Tools/Tools/ColorPickerTool.cs:135
 msgid "Layer"
 msgstr "Capa"
 
-#: ../Pinta.Core/Classes/Document.cs:378
+#: ../Pinta.Core/Classes/Document.cs:384
 msgid "copy"
-msgstr "copia"
+msgstr "còpia"
 
-#: ../Pinta.Core/Classes/Document.cs:654
+#: ../Pinta.Core/Classes/Document.cs:661
 #: ../Pinta/Dialogs/ResizeCanvasDialog.cs:56
 msgid "Resize Canvas"
 msgstr "Redimensiona el llenç"
 
-#: ../Pinta.Core/Classes/Document.cs:855
+#: ../Pinta.Core/Classes/Document.cs:862
 #: ../Pinta.Core/HistoryItems/FinishPixelsHistoryItem.cs:65
 #: ../Pinta.Core/HistoryItems/PasteHistoryItem.cs:65
 #: ../Pinta.Tools/Tools/MoveSelectedTool.cs:43
 msgid "Move Selected Pixels"
 msgstr "Desplaça els píxels seleccionats"
 
-#: ../Pinta.Core/Classes/Document.cs:871
+#: ../Pinta.Core/Classes/Document.cs:878
 msgid "Image larger than canvas"
 msgstr "La imatge és més gran que el llenç"
 
-#: ../Pinta.Core/Classes/Document.cs:872
+#: ../Pinta.Core/Classes/Document.cs:879
 msgid ""
 "The image being pasted is larger than the canvas size. What would you like "
 "to do?"
@@ -451,21 +452,32 @@ msgstr ""
 "La imatge que voleu enganxar és més gran que la mida del llenç. Què voleu "
 "fer?"
 
-#: ../Pinta.Core/Classes/Document.cs:876
+#: ../Pinta.Core/Classes/Document.cs:883
 msgid "Expand canvas"
 msgstr "Expandeix el llenç"
 
-#: ../Pinta.Core/Classes/Document.cs:877
+#: ../Pinta.Core/Classes/Document.cs:884
 msgid "Don't change canvas size"
 msgstr "No canviïs la mida del llenç"
 
-#: ../Pinta.Core/Classes/Document.cs:890
+#: ../Pinta.Core/Classes/Document.cs:897
 msgid "Image cannot be pasted"
 msgstr "No s’ha pogut enganxar la imatge"
 
-#: ../Pinta.Core/Classes/Document.cs:891
+#: ../Pinta.Core/Classes/Document.cs:898
 msgid "The clipboard does not contain an image."
 msgstr "El porta-retalls no conté cap imatge."
+
+#: ../Pinta.Core/Classes/Palette.cs:191
+#: ../Pinta.Core/Managers/WorkspaceManager.cs:351
+#: ../Pinta.Core/Managers/WorkspaceManager.cs:360
+#, csharp-format
+msgid "Could not open file: {0}"
+msgstr "No s'ha pogut obrir el fitxer: {0}"
+
+#: ../Pinta.Core/Classes/Palette.cs:192
+msgid "Pinta supports the following palette formats:"
+msgstr "Pinta admet els formats de paleta següents:"
 
 #: ../Pinta.Core/Classes/SelectionModeHandler.cs:46
 msgid "Replace"
@@ -599,8 +611,8 @@ msgstr "…"
 msgid "Rendering Effect"
 msgstr "Efecte de renderització"
 
-#: ../Pinta.Core/Managers/ToolManager.cs:234
-#: ../Pinta.Core/Managers/ToolManager.cs:236
+#: ../Pinta.Core/Managers/ToolManager.cs:258
+#: ../Pinta.Core/Managers/ToolManager.cs:260
 msgid "No tool selected."
 msgstr "No s’ha seleccionat cap eina."
 
@@ -618,22 +630,27 @@ msgstr "Fons"
 msgid "New Image"
 msgstr "Imatge nova"
 
-#: ../Pinta.Core/Managers/WorkspaceManager.cs:186
+#: ../Pinta.Core/Managers/WorkspaceManager.cs:190
 msgid "Unsupported file format"
 msgstr "El format del fitxer no és compatible"
 
-#: ../Pinta.Core/Managers/WorkspaceManager.cs:191
+#: ../Pinta.Core/Managers/WorkspaceManager.cs:195
 msgid "Open Image"
 msgstr "Obre una imatge"
 
-#: ../Pinta.Core/Managers/WorkspaceManager.cs:204
-msgid "Permission denied"
-msgstr "S’ha denegat el permís"
+#: ../Pinta.Core/Managers/WorkspaceManager.cs:361
+msgid "Pinta supports the following file formats:"
+msgstr "Pinta admet els formats de fitxer següents:"
 
-#: ../Pinta.Core/Managers/WorkspaceManager.cs:345
+#: ../Pinta.Core/Managers/WorkspaceManager.cs:378
+msgid "Failed to open image"
+msgstr "Ha fallat la apertura de la imatge"
+
+#. Translators: {0} is the name of a file that the user does not have permission to open.
+#: ../Pinta.Core/Managers/WorkspaceManager.cs:380
 #, csharp-format
-msgid "Could not open file: {0}"
-msgstr "No s'ha pogut obrir el fitxer: {0}"
+msgid "You do not have access to '{0}'."
+msgstr "No té accés a '{0}'."
 
 #. Translators: {0} is the palette format (e.g. "GIMP") and {1} is a list of file extensions.
 #: ../Pinta.Core/PaletteFormats/PaletteDescriptor.cs:67
@@ -643,11 +660,11 @@ msgstr "{0} paleta ({1})"
 
 #: ../Pinta.Docking/DockLibrary/DockItem.cs:541
 msgid "Hide"
-msgstr "Amaga"
+msgstr "Amagar"
 
 #: ../Pinta.Docking/DockLibrary/DockItem.cs:550
 msgid "Minimize"
-msgstr "Minimitza"
+msgstr "MInimitza"
 
 #: ../Pinta.Docking/DockLibrary/DockItem.cs:557
 #: ../Pinta.Docking/DockLibrary/DockItemTitleTab.cs:250
@@ -661,7 +678,7 @@ msgstr "Desancora"
 #: ../Pinta.Docking/DockLibrary/DockItemTitleTab.cs:165
 #: ../Pinta.Docking/DockLibrary/DockItemTitleTab.cs:254
 msgid "Auto Hide"
-msgstr "Oculta automàticament"
+msgstr "Amaga automàticament"
 
 #: ../Pinta.Effects/Adjustments/AutoLevelEffect.cs:25
 msgid "Auto Level"
@@ -1179,23 +1196,23 @@ msgstr "Tria el color secundari"
 msgid "Choose Palette Color"
 msgstr "Tria la paleta de colors"
 
-#: ../Pinta.Gui.Widgets/Widgets/ColorPaletteWidget.cs:313
-msgid "Click to switch between primary and secondary color."
-msgstr "Feu clic per canviar entre el color primari i el secundari"
-
 #: ../Pinta.Gui.Widgets/Widgets/ColorPaletteWidget.cs:315
+msgid "Click to switch between primary and secondary color."
+msgstr "Faça click per intercanviar entre el color primari i el secundari."
+
+#: ../Pinta.Gui.Widgets/Widgets/ColorPaletteWidget.cs:320
 msgid "Click to reset primary and secondary color."
 msgstr "Feu clic per reinicialitzar els colors primari i secundari."
 
-#: ../Pinta.Gui.Widgets/Widgets/ColorPaletteWidget.cs:317
+#: ../Pinta.Gui.Widgets/Widgets/ColorPaletteWidget.cs:322
 msgid "Click to select primary color."
 msgstr "Feu clic per seleccionar el color primari."
 
-#: ../Pinta.Gui.Widgets/Widgets/ColorPaletteWidget.cs:319
+#: ../Pinta.Gui.Widgets/Widgets/ColorPaletteWidget.cs:324
 msgid "Click to select secondary color."
 msgstr "Feu clic per seleccionar el color secundari."
 
-#: ../Pinta.Gui.Widgets/Widgets/ColorPaletteWidget.cs:321
+#: ../Pinta.Gui.Widgets/Widgets/ColorPaletteWidget.cs:326
 msgid ""
 "Left click to set primary color. Right click to set secondary color. Middle "
 "click to choose palette color."
@@ -1250,19 +1267,19 @@ msgstr "Mida"
 
 #: ../Pinta.Tools/Editable/EditEngines/ArrowedEditEngine.cs:357
 msgid "Decrease arrow size"
-msgstr "Disminueix la mida de la fletxa"
+msgstr "Decrementa la mida de la fletxa."
 
 #: ../Pinta.Tools/Editable/EditEngines/ArrowedEditEngine.cs:424
 msgid "Increase arrow size"
-msgstr "Augmenta la mida de la fletxa"
+msgstr "Incrementa la mida de la fletxa."
 
 #: ../Pinta.Tools/Editable/EditEngines/ArrowedEditEngine.cs:440
 msgid "Decrease angle offset"
-msgstr "Disminueix el desplaçament de l'angle"
+msgstr "Decrementa el desplaçament de l'angle"
 
 #: ../Pinta.Tools/Editable/EditEngines/ArrowedEditEngine.cs:503
 msgid "Increase angle offset"
-msgstr "Augmenta el desplaçament de l'angle"
+msgstr "Incrementa el desplaçament de l'angle"
 
 #: ../Pinta.Tools/Editable/EditEngines/ArrowedEditEngine.cs:514
 msgid "Length"
@@ -1270,11 +1287,11 @@ msgstr "Longitud"
 
 #: ../Pinta.Tools/Editable/EditEngines/ArrowedEditEngine.cs:519
 msgid "Decrease length offset"
-msgstr "Disminueix el desplaçament de la longitud"
+msgstr "Decrementa el desplaçament de la longitud"
 
 #: ../Pinta.Tools/Editable/EditEngines/ArrowedEditEngine.cs:582
 msgid "Increase length offset"
-msgstr "Augmenta el desplaçament de la longitud"
+msgstr "Incrementa el desplaçament de la longitud"
 
 #: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:296
 #: ../Pinta.Tools/Tools/BaseBrushTool.cs:76
@@ -1286,13 +1303,13 @@ msgstr "Amplada del pinzell"
 #: ../Pinta.Tools/Tools/BaseBrushTool.cs:81
 #: ../Pinta.Tools/Tools/SelectShapeTool.cs:104
 msgid "Decrease brush size"
-msgstr "Redueix la mida del pinzell"
+msgstr "Decrementa la mida del pinzell"
 
 #: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:330
 #: ../Pinta.Tools/Tools/BaseBrushTool.cs:95
 #: ../Pinta.Tools/Tools/SelectShapeTool.cs:118
 msgid "Increase brush size"
-msgstr "Augmenta la mida del pinzell"
+msgstr "Incrementa la mida del pinzell"
 
 #: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:342
 #: ../Pinta.Tools/Tools/FreeformShapeTool.cs:76
@@ -1384,11 +1401,11 @@ msgstr "Forma de línia arrodonida"
 
 #: ../Pinta.Tools/Editable/EditEngines/RoundedLineEditEngine.cs:131
 msgid "Decrease shape's corner radius"
-msgstr "Disminueix el radi de la cantonada de la forma"
+msgstr "Decrementa el radi del cantó de la forma"
 
 #: ../Pinta.Tools/Editable/EditEngines/RoundedLineEditEngine.cs:154
 msgid "Increase shape's corner radius"
-msgstr "Augmenta el radi de la cantonada de la forma"
+msgstr "Incrementa el radi del cantó de la forma"
 
 #: ../Pinta.Tools/Tools/CloneStampTool.cs:42
 msgid "Clone Stamp"
@@ -1617,12 +1634,14 @@ msgstr "Feu clic per triar una regió de color similar"
 msgid ""
 "Left click and drag the selection to move selected content. Hold Ctrl to "
 "scale instead of move. Right click and drag the selection to rotate selected "
-"content. Hold Shift to rotate in steps."
+"content. Hold Shift to rotate in steps. Use arrow keys to move selected "
+"content by a single pixel."
 msgstr ""
-"Click esquerre i arrossegue la selecció per moure el contingut seleccionat. "
-"Mantinga Ctrl per escalar en compte de moure. Click dret i arrossegue la "
-"selecció per rotar el contingut seleccionat. Mantinga Ctrl per rotar per "
-"passos."
+"Feu clic esquerre i arrossegueu la selecció per moure el contingut "
+"seleccionat. Manteniu premuda la tecla Ctrl per escalar en comptes de moure. "
+"Feu clic dret i arrossegueu la selecció per girar el contingut seleccionat. "
+"Manteniu premuda la tecla Majús per girar per passos. Utilitza les tecles de "
+"cursor per moure el contingut seleccionat un sol píxel."
 
 #: ../Pinta.Tools/Tools/MoveSelectionTool.cs:42
 msgid "Move Selection"
@@ -1632,14 +1651,16 @@ msgstr "Mou la selecció"
 msgid ""
 "Left click and drag the selection to move selection outline. Hold Ctrl to "
 "scale instead of move. Right click and drag the selection to rotate "
-"selection outline. Hold Shift to rotate in steps."
+"selection outline. Hold Shift to rotate in steps. Use arrow keys to move "
+"selection outline by a single pixel."
 msgstr ""
-"Click esquerre i arrossegue la selecció per moure el contorn de la selecció. "
-"Mantinga Ctrl per escalar en compte de moure. Click dret i arrossegue la "
-"selecció per rotar el contorn de la selecció. Mantinga Ctrl per rotar per "
-"passos."
+"Feu clic esquerre i arrossegueu la selecció per moure el contorn de la "
+"selecció. Manteniu premuda la tecla Ctrl per escalar en comptes de moure. "
+"Feu clic dret i arrossegueu la selecció per girar el contorn de la selecció. "
+"Manteniu premuda la tecla Majús per girar per passos. Utilitza les tecles de "
+"cursor per moure el contorn de la selecció un sol píxel."
 
-#: ../Pinta.Tools/Tools/PaintBrushTool.cs:40 ../Pinta/MainWindow.cs:89
+#: ../Pinta.Tools/Tools/PaintBrushTool.cs:40 ../Pinta/MainWindow.cs:104
 msgid "Paintbrush"
 msgstr "Pinzell"
 
@@ -1766,11 +1787,11 @@ msgstr "Amplada del contorn"
 
 #: ../Pinta.Tools/Tools/TextTool.cs:269
 msgid "Decrease outline size"
-msgstr "Redueix la mida del contorn"
+msgstr "Decrementa la mida del contorn"
 
 #: ../Pinta.Tools/Tools/TextTool.cs:286
 msgid "Increase outline size"
-msgstr "Augmenta la mida del contorn"
+msgstr "Incrementa la mida del contorn"
 
 #: ../Pinta.Tools/Tools/ZoomTool.cs:54
 msgid ""
@@ -1791,7 +1812,7 @@ msgstr "Nova mida de paleta:"
 #: ../Pinta/Actions/File/CloseDocumentAction.cs:61
 #, csharp-format
 msgid "Save the changes to image \"{0}\" before closing?"
-msgstr "Voleu desar els canvis a la imatge \"{0}\" abans de tancar?"
+msgstr "Vol desar els canvis a la imatge \"{0}\" abans de tancar?"
 
 #: ../Pinta/Actions/File/CloseDocumentAction.cs:62
 msgid "If you don't save, all changes will be permanently lost."
@@ -1823,28 +1844,36 @@ msgid "Pinta does not support saving images in this file format."
 msgstr "El Pinta no permet desar imatges en aquest format."
 
 #: ../Pinta/Actions/File/SaveDocumentImplementationAction.cs:191
-#: ../Pinta/Actions/File/SaveDocumentImplementationAction.cs:203
 msgid "Error"
 msgstr "Hi ha hagut un error"
 
-#: ../Pinta/Actions/File/SaveDocumentImplementationAction.cs:202
-msgid "Cannot save read only file."
-msgstr "No es pot guardar un fitxer només de lectura."
-
-#: ../Pinta/Actions/File/SaveDocumentImplementationAction.cs:217
+#: ../Pinta/Actions/File/SaveDocumentImplementationAction.cs:205
 msgid "Image too large"
 msgstr "La imatge és massa gran"
 
-#: ../Pinta/Actions/File/SaveDocumentImplementationAction.cs:218
+#: ../Pinta/Actions/File/SaveDocumentImplementationAction.cs:206
 msgid "ICO files can not be larger than 255 x 255 pixels."
 msgstr "Els fitxers ICO no poden excedir 255 × 255 píxels."
 
-#: ../Pinta/Actions/File/SaveDocumentImplementationAction.cs:247
+#: ../Pinta/Actions/File/SaveDocumentImplementationAction.cs:216
+msgid "Failed to save image"
+msgstr "Ha fallat en desar la imatge"
+
+#. Translators: {0} is the name of a file that the user does not have write permission for.
+#: ../Pinta/Actions/File/SaveDocumentImplementationAction.cs:218
+#, csharp-format
+msgid ""
+"You do not have access to modify '{0}'. The file or folder may be read-only."
+msgstr ""
+"No té accés a modificar '{0}'. El fitxer o la carpeta possiblement siga de "
+"només lectura."
+
+#: ../Pinta/Actions/File/SaveDocumentImplementationAction.cs:250
 #, csharp-format
 msgid "A file named \"{0}\" already exists. Do you want to replace it?"
 msgstr "Ja existeix un fitxer anomenat «{0}». Voleu reemplaçar-lo?"
 
-#: ../Pinta/Actions/File/SaveDocumentImplementationAction.cs:248
+#: ../Pinta/Actions/File/SaveDocumentImplementationAction.cs:251
 #, csharp-format
 msgid ""
 "The file already exists in \"{1}\". Replacing it will overwrite its contents."
@@ -1886,15 +1915,15 @@ msgstr "Connectors de la comunitat de Pinta: específics d’una plataforma"
 msgid "Pinta Community Addins - Cross-Platform"
 msgstr "Connectors de la comunitat de Pinta: multiplataforma"
 
-#: ../Pinta/Dialogs/AboutDialog.cs:126
+#: ../Pinta/Dialogs/AboutDialog.cs:143
 msgid "Contributors to this release:"
 msgstr "Col·laboradors d’aquesta versió:"
 
-#: ../Pinta/Dialogs/AboutDialog.cs:138
+#: ../Pinta/Dialogs/AboutDialog.cs:155
 msgid "Previous contributors:"
 msgstr "Col·laboradors anteriors:"
 
-#: ../Pinta/Dialogs/AboutDialog.cs:149
+#: ../Pinta/Dialogs/AboutDialog.cs:166
 msgid "translator-credits"
 msgstr ""
 "Launchpad Contributions:\n"
@@ -1910,48 +1939,48 @@ msgstr ""
 "  thor9216 https://launchpad.net/~thor9216\n"
 "  tot3lmon https://launchpad.net/~tot3lmon"
 
-#: ../Pinta/Dialogs/AboutDialog.cs:152
+#: ../Pinta/Dialogs/AboutDialog.cs:169
 msgid "Translated by:"
 msgstr "Traduït per:"
 
-#: ../Pinta/Dialogs/AboutDialog.cs:158
+#: ../Pinta/Dialogs/AboutDialog.cs:175
 msgid "Based on the work of Paint.NET:"
 msgstr "Basat en el treball de Paint.NET:"
 
-#: ../Pinta/Dialogs/AboutDialog.cs:165
+#: ../Pinta/Dialogs/AboutDialog.cs:182
 msgid "Using some icons from:"
 msgstr "S'han utilitzat algunes icones de:"
 
-#: ../Pinta/Dialogs/AboutDialog.cs:173
+#: ../Pinta/Dialogs/AboutDialog.cs:190
 msgid "Powered by Mono:"
 msgstr "Impulsat per Mono:"
 
-#: ../Pinta/Dialogs/AboutDialog.cs:280
+#: ../Pinta/Dialogs/AboutDialog.cs:297
 msgid "About Pinta"
 msgstr "Quant al Pinta"
 
-#: ../Pinta/Dialogs/AboutDialog.cs:298
+#: ../Pinta/Dialogs/AboutDialog.cs:315
 msgid "Version Info"
 msgstr "Informació de la versió"
 
-#: ../Pinta/Dialogs/AboutPintaTabPage.cs:42
-#: ../Pinta/Dialogs/VersionInformationTabPage.cs:50
+#: ../Pinta/Dialogs/AboutPintaTabPage.cs:43
+#: ../Pinta/Dialogs/VersionInformationTabPage.cs:53
 msgid "Version"
 msgstr "Versió"
 
-#: ../Pinta/Dialogs/AboutPintaTabPage.cs:51
+#: ../Pinta/Dialogs/AboutPintaTabPage.cs:52
 msgid "License"
 msgstr "Llicència"
 
-#: ../Pinta/Dialogs/AboutPintaTabPage.cs:51
+#: ../Pinta/Dialogs/AboutPintaTabPage.cs:52
 msgid "Released under the MIT X11 License."
 msgstr "Publicat sota la llicència MIT X11"
 
-#: ../Pinta/Dialogs/AboutPintaTabPage.cs:58
+#: ../Pinta/Dialogs/AboutPintaTabPage.cs:59
 msgid "Copyright"
 msgstr "Copyright"
 
-#: ../Pinta/Dialogs/AboutPintaTabPage.cs:58
+#: ../Pinta/Dialogs/AboutPintaTabPage.cs:59
 msgid "by Pinta contributors"
 msgstr "per contribuents del Pinta"
 
@@ -2008,23 +2037,23 @@ msgid "Preset:"
 msgstr "Valors predefinits:"
 
 #: ../Pinta/Dialogs/NewImageDialog.cs:211
-#: ../Pinta/Dialogs/ResizeCanvasDialog.cs:334
-#: ../Pinta/Dialogs/ResizeImageDialog.cs:170
+#: ../Pinta/Dialogs/ResizeCanvasDialog.cs:331
+#: ../Pinta/Dialogs/ResizeImageDialog.cs:169
 msgid "Width:"
 msgstr "Amplada:"
 
 #: ../Pinta/Dialogs/NewImageDialog.cs:218
 #: ../Pinta/Dialogs/NewImageDialog.cs:235
-#: ../Pinta/Dialogs/ResizeCanvasDialog.cs:336
-#: ../Pinta/Dialogs/ResizeCanvasDialog.cs:342
-#: ../Pinta/Dialogs/ResizeImageDialog.cs:172
-#: ../Pinta/Dialogs/ResizeImageDialog.cs:178
+#: ../Pinta/Dialogs/ResizeCanvasDialog.cs:333
+#: ../Pinta/Dialogs/ResizeCanvasDialog.cs:339
+#: ../Pinta/Dialogs/ResizeImageDialog.cs:171
+#: ../Pinta/Dialogs/ResizeImageDialog.cs:177
 msgid "pixels"
 msgstr "píxels"
 
 #: ../Pinta/Dialogs/NewImageDialog.cs:228
-#: ../Pinta/Dialogs/ResizeCanvasDialog.cs:340
-#: ../Pinta/Dialogs/ResizeImageDialog.cs:176
+#: ../Pinta/Dialogs/ResizeCanvasDialog.cs:337
+#: ../Pinta/Dialogs/ResizeImageDialog.cs:175
 msgid "Height:"
 msgstr "Alçada:"
 
@@ -2056,32 +2085,36 @@ msgstr "Color del fons"
 msgid "Preview"
 msgstr "Vista prèvia"
 
-#: ../Pinta/Dialogs/ResizeCanvasDialog.cs:313
+#: ../Pinta/Dialogs/ResizeCanvasDialog.cs:311
 #: ../Pinta/Dialogs/ResizeImageDialog.cs:149
-msgid "By percentage:"
-msgstr "Per percentage:"
-
-#: ../Pinta/Dialogs/ResizeCanvasDialog.cs:314
-#: ../Pinta/Dialogs/ResizeImageDialog.cs:150
 msgid "By absolute size:"
 msgstr "Per mida absoluta:"
 
-#: ../Pinta/Dialogs/ResizeCanvasDialog.cs:320
+#: ../Pinta/Dialogs/ResizeCanvasDialog.cs:312
+#: ../Pinta/Dialogs/ResizeImageDialog.cs:150
+msgid "By percentage:"
+msgstr "Per percentage:"
+
+#: ../Pinta/Dialogs/ResizeCanvasDialog.cs:318
 #: ../Pinta/Dialogs/ResizeImageDialog.cs:156
 msgid "Maintain aspect ratio"
 msgstr "Mantingues la relació d'aspecte"
 
-#: ../Pinta/Dialogs/ResizeCanvasDialog.cs:348
+#: ../Pinta/Dialogs/ResizeCanvasDialog.cs:346
 msgid "Anchor:"
 msgstr "Àncora:"
 
-#: ../Pinta/Dialogs/VersionInformationTabPage.cs:44
+#: ../Pinta/Dialogs/VersionInformationTabPage.cs:47
 msgid "Title"
 msgstr "Títol"
 
-#: ../Pinta/Dialogs/VersionInformationTabPage.cs:53
+#: ../Pinta/Dialogs/VersionInformationTabPage.cs:56
 msgid "Path"
 msgstr "Ruta"
+
+#: ../Pinta/Dialogs/VersionInformationTabPage.cs:72
+msgid "Copy Version Info"
+msgstr "Informació de la Versió de Còpia"
 
 #: ../Pinta/Main.cs:57
 msgid "Show this message and exit."
@@ -2103,59 +2136,59 @@ msgstr "Ús: pinta [fitxers]"
 msgid "Options: "
 msgstr "Opcions: "
 
-#: ../Pinta/MainWindow.cs:309
+#: ../Pinta/MainWindow.cs:330
 msgid "_File"
 msgstr "_Fitxer"
 
-#: ../Pinta/MainWindow.cs:310
+#: ../Pinta/MainWindow.cs:331
 msgid "_Edit"
 msgstr "_Edita"
 
-#: ../Pinta/MainWindow.cs:312
+#: ../Pinta/MainWindow.cs:333
 msgid "_View"
 msgstr "_Mostra"
 
-#: ../Pinta/MainWindow.cs:315
+#: ../Pinta/MainWindow.cs:336
 msgid "_Image"
 msgstr "_Imatge"
 
-#: ../Pinta/MainWindow.cs:316
+#: ../Pinta/MainWindow.cs:337
 msgid "_Layers"
 msgstr "_Capes"
 
-#: ../Pinta/MainWindow.cs:317
+#: ../Pinta/MainWindow.cs:338
 msgid "_Adjustments"
 msgstr "_Ajustaments"
 
-#: ../Pinta/MainWindow.cs:318
+#: ../Pinta/MainWindow.cs:339
 msgid "Effe_cts"
 msgstr "Efec_tes"
 
-#: ../Pinta/MainWindow.cs:319
+#: ../Pinta/MainWindow.cs:340
 msgid "A_dd-ins"
 msgstr "_Complements"
 
-#: ../Pinta/MainWindow.cs:321
+#: ../Pinta/MainWindow.cs:342
 msgid "_Window"
 msgstr "Fi_nestra"
 
-#: ../Pinta/MainWindow.cs:325
+#: ../Pinta/MainWindow.cs:346
 msgid "Tool Windows"
 msgstr "Finestres d'eines"
 
-#: ../Pinta/MainWindow.cs:329
+#: ../Pinta/MainWindow.cs:350
 msgid "_Help"
 msgstr "A_juda"
 
-#: ../Pinta/MainWindow.cs:551
+#: ../Pinta/MainWindow.cs:572
 msgid "Downloading Image"
 msgstr "Descarregant Imatge"
 
-#: ../Pinta/MainWindow.cs:569
+#: ../Pinta/MainWindow.cs:590
 msgid "Download failed"
 msgstr "La descàrrega ha fallat"
 
-#: ../Pinta/MainWindow.cs:570
+#: ../Pinta/MainWindow.cs:591
 #, csharp-format
 msgid ""
 "Unable to download image from {0}.\n"

@@ -1,23 +1,22 @@
 # Serbian translation for pinta
 # Copyright (c) 2010 Rosetta Contributors and Canonical Ltd 2010
 # This file is distributed under the same license as the pinta package.
-# Мирослав Николић <miroslavnikolic@rocketmail.com>, 2012—2016.
-#
+# Мирослав Николић <miroslavnikolic@rocketmail.com>, 2012—2016, 2021.
 msgid ""
 msgstr ""
 "Project-Id-Version: pinta\n"
 "Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
-"POT-Creation-Date: 2020-07-27 21:13-0400\n"
-"PO-Revision-Date: 2016-02-03 03:48+0000\n"
+"POT-Creation-Date: 2021-10-17 10:55-0400\n"
+"PO-Revision-Date: 2021-01-24 20:30+0000\n"
 "Last-Translator: Мирослав Николић <miroslavnikolic@rocketmail.com>\n"
-"Language-Team: Serbian translators\n"
+"Language-Team: српски <gnome-sr@googlegroups.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=3; plural=n%10==1 && n%100!=11 ? 0 : n%10>=2 && "
 "n%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2;\n"
-"X-Launchpad-Export-Date: 2020-08-04 20:56+0000\n"
-"X-Generator: Launchpad (build a24057fea7e4c6a98c0220d5f878da0f3c783699)\n"
+"X-Launchpad-Export-Date: 2021-11-12 20:36+0000\n"
+"X-Generator: Launchpad (build 57dd9ea1b48fdf744e285d99fb34fa0c21646cd0)\n"
 "Language: sr\n"
 
 #: ../xdg/pinta.desktop.in.h:1
@@ -39,6 +38,8 @@ msgstr "Уређивач слика Пинта"
 #: ../xdg/pinta.desktop.in.h:5
 msgid "draw;drawing;paint;painting;graphics;raster;2d;"
 msgstr ""
+"цртај;цртање;цртеж;цртање;графика;2д;draw;drawing;paint;painting;graphics;ras"
+"ter;2d;"
 
 #: ../xdg/pinta.appdata.xml.in.h:1
 msgid ""
@@ -48,6 +49,11 @@ msgid ""
 "apply to your images, and also has the ability to create unlimited layers to "
 "help organize your creativity."
 msgstr ""
+"Пинта је програм за уређивање слика, цртање и сликање са једноставним, али "
+"моћним сучељем. Пинта има широк спектар алата за цртање, укључујући: "
+"слободну руку, правоугаонике, кругове и линије. Такође има преко 35 ефеката "
+"за примењивање на вашим сликама, а такође има способност да створи "
+"неограничене слојеве који помажу у организацији ваше креативности."
 
 #: ../Pinta.Core/Actions/AddinActions.cs:40
 msgid "Add-in Manager"
@@ -75,13 +81,13 @@ msgid "Copy Merged"
 msgstr "Умножи стопљено"
 
 #: ../Pinta.Core/Actions/EditActions.cs:74
-#: ../Pinta.Core/Classes/Document.cs:780
+#: ../Pinta.Core/Classes/Document.cs:787
 #: ../Pinta.Core/HistoryItems/PasteHistoryItem.cs:43
 msgid "Paste"
 msgstr "Убаци"
 
 #: ../Pinta.Core/Actions/EditActions.cs:75
-#: ../Pinta.Core/Classes/Document.cs:776
+#: ../Pinta.Core/Classes/Document.cs:783
 msgid "Paste Into New Layer"
 msgstr "Убаци у нови слој"
 
@@ -100,7 +106,7 @@ msgid "Fill Selection"
 msgstr "Попуни изабрано"
 
 #: ../Pinta.Core/Actions/EditActions.cs:79
-#: ../Pinta.Core/Actions/EditActions.cs:421
+#: ../Pinta.Core/Actions/EditActions.cs:422
 msgid "Invert Selection"
 msgstr "Обрни избор"
 
@@ -119,7 +125,7 @@ msgid "Open..."
 msgstr "Отвори..."
 
 #: ../Pinta.Core/Actions/EditActions.cs:84
-#: ../Pinta.Core/Actions/FileActions.cs:66
+#: ../Pinta.Core/Actions/FileActions.cs:68
 msgid "Save As..."
 msgstr "Сачувај као..."
 
@@ -140,20 +146,20 @@ msgstr "Палета"
 msgid "Deselect"
 msgstr "Поништи избор"
 
-#: ../Pinta.Core/Actions/EditActions.cs:336
+#: ../Pinta.Core/Actions/EditActions.cs:337
 msgid "Open Palette File"
 msgstr "Отвори датотеку палете"
 
-#: ../Pinta.Core/Actions/EditActions.cs:348
+#: ../Pinta.Core/Actions/EditActions.cs:349
 msgid "Palette files"
-msgstr ""
+msgstr "Датотеке палете"
 
-#: ../Pinta.Core/Actions/EditActions.cs:352
+#: ../Pinta.Core/Actions/EditActions.cs:353
 #: ../Pinta/Actions/File/OpenDocumentAction.cs:67
 msgid "All files"
 msgstr "Све датотеке"
 
-#: ../Pinta.Core/Actions/EditActions.cs:373
+#: ../Pinta.Core/Actions/EditActions.cs:374
 msgid "Save Palette File"
 msgstr "Сачувај датотеку палете"
 
@@ -167,30 +173,30 @@ msgstr "Нови снимак екрана..."
 
 #: ../Pinta.Core/Actions/FileActions.cs:57
 msgid "Open Recent"
-msgstr "Отвори скорашње"
+msgstr ""
 
-#: ../Pinta.Core/Actions/FileActions.cs:64
+#: ../Pinta.Core/Actions/FileActions.cs:66
 #: ../Pinta.Docking/DockLibrary/DockItemTitleTab.cs:175
 msgid "Close"
 msgstr "Затвори"
 
-#: ../Pinta.Core/Actions/FileActions.cs:65
+#: ../Pinta.Core/Actions/FileActions.cs:67
 msgid "Save"
 msgstr "Сачувај"
 
-#: ../Pinta.Core/Actions/FileActions.cs:67
+#: ../Pinta.Core/Actions/FileActions.cs:69
 msgid "Print"
 msgstr "Штампај"
 
-#: ../Pinta.Core/Actions/FileActions.cs:68
+#: ../Pinta.Core/Actions/FileActions.cs:70
 msgid "Quit"
 msgstr "Изађи"
 
-#: ../Pinta.Core/Actions/FileActions.cs:70
+#: ../Pinta.Core/Actions/FileActions.cs:72
 msgid "New"
 msgstr "Нова"
 
-#: ../Pinta.Core/Actions/FileActions.cs:71
+#: ../Pinta.Core/Actions/FileActions.cs:73
 msgid "Open"
 msgstr "Отвори"
 
@@ -210,12 +216,12 @@ msgstr "Пријавите грешку"
 msgid "Translate This Application"
 msgstr "Преведите овај програм"
 
-#: ../Pinta.Core/Actions/HelpActions.cs:56 ../Pinta/MainWindow.cs:347
+#: ../Pinta.Core/Actions/HelpActions.cs:56 ../Pinta/MainWindow.cs:368
 msgid "About"
 msgstr "О програму"
 
 #: ../Pinta.Core/Actions/ImageActions.cs:60
-#: ../Pinta.Core/Actions/ImageActions.cs:291
+#: ../Pinta.Core/Actions/ImageActions.cs:284
 msgid "Crop to Selection"
 msgstr "Исеци на изабрано"
 
@@ -263,7 +269,7 @@ msgstr "Изравнај"
 
 #: ../Pinta.Core/Actions/LayerActions.cs:65
 #: ../Pinta.Core/Actions/LayerActions.cs:292
-#: ../Pinta.Core/Classes/Document.cs:839
+#: ../Pinta.Core/Classes/Document.cs:846
 msgid "Add New Layer"
 msgstr "Додај нови слој"
 
@@ -366,19 +372,19 @@ msgid "Fullscreen"
 msgstr "Преко целог екрана"
 
 #: ../Pinta.Core/Actions/ViewActions.cs:115
-#: ../Pinta.Core/Actions/ViewActions.cs:277
+#: ../Pinta.Core/Actions/ViewActions.cs:284
 #: ../Pinta.Core/Classes/DocumentWorkspace.cs:320
 #: ../Pinta.Core/Classes/DocumentWorkspace.cs:328
 msgid "Window"
 msgstr "Прозор"
 
-#: ../Pinta.Core/Actions/ViewActions.cs:159
+#: ../Pinta.Core/Actions/ViewActions.cs:163
 msgid "Ruler Units"
 msgstr "Јединице лењира"
 
 #. Translators: This specifies the format of the zoom percentage choices
 #. in the toolbar.
-#: ../Pinta.Core/Actions/ViewActions.cs:258
+#: ../Pinta.Core/Actions/ViewActions.cs:265
 #, csharp-format
 msgid "{0}%"
 msgstr "{0}%"
@@ -391,76 +397,88 @@ msgstr "Сачувај све"
 msgid "Close All"
 msgstr "Затвори све"
 
-#: ../Pinta.Core/Classes/BaseTool.cs:261
+#: ../Pinta.Core/Classes/BaseTool.cs:262
 msgid "Tool"
 msgstr "Алатка"
 
-#: ../Pinta.Core/Classes/BaseTool.cs:333
+#: ../Pinta.Core/Classes/BaseTool.cs:334
+#: ../Pinta.Gui.Widgets/Widgets/ColorPaletteWidget.cs:316
 msgid "Shortcut key"
 msgstr "Тастер пречице"
 
-#: ../Pinta.Core/Classes/BaseTool.cs:445
+#: ../Pinta.Core/Classes/BaseTool.cs:446
 msgid "Normal Blending"
 msgstr "Обично стапање"
 
-#: ../Pinta.Core/Classes/BaseTool.cs:446
+#: ../Pinta.Core/Classes/BaseTool.cs:447
 msgid "Overwrite"
 msgstr "Препиши"
 
-#: ../Pinta.Core/Classes/BaseTool.cs:460
+#: ../Pinta.Core/Classes/BaseTool.cs:461
 msgid "Antialiasing On"
 msgstr "Умекшавање је укључено"
 
-#: ../Pinta.Core/Classes/BaseTool.cs:461
+#: ../Pinta.Core/Classes/BaseTool.cs:462
 msgid "Antialiasing Off"
 msgstr "Умекшавање је искључено"
 
-#: ../Pinta.Core/Classes/Document.cs:291 ../Pinta.Core/Classes/Document.cs:296
+#: ../Pinta.Core/Classes/Document.cs:296 ../Pinta.Core/Classes/Document.cs:301
 #: ../Pinta.Tools/Tools/ColorPickerTool.cs:135
 msgid "Layer"
 msgstr "Слој"
 
-#: ../Pinta.Core/Classes/Document.cs:378
+#: ../Pinta.Core/Classes/Document.cs:384
 msgid "copy"
-msgstr "умножи"
+msgstr ""
 
-#: ../Pinta.Core/Classes/Document.cs:654
+#: ../Pinta.Core/Classes/Document.cs:661
 #: ../Pinta/Dialogs/ResizeCanvasDialog.cs:56
 msgid "Resize Canvas"
 msgstr "Промените величину платна"
 
-#: ../Pinta.Core/Classes/Document.cs:855
+#: ../Pinta.Core/Classes/Document.cs:862
 #: ../Pinta.Core/HistoryItems/FinishPixelsHistoryItem.cs:65
 #: ../Pinta.Core/HistoryItems/PasteHistoryItem.cs:65
 #: ../Pinta.Tools/Tools/MoveSelectedTool.cs:43
 msgid "Move Selected Pixels"
 msgstr "Преместите изабране тачкице"
 
-#: ../Pinta.Core/Classes/Document.cs:871
+#: ../Pinta.Core/Classes/Document.cs:878
 msgid "Image larger than canvas"
 msgstr "Слика је већа од платна"
 
-#: ../Pinta.Core/Classes/Document.cs:872
+#: ../Pinta.Core/Classes/Document.cs:879
 msgid ""
 "The image being pasted is larger than the canvas size. What would you like "
 "to do?"
 msgstr "Убачена слика је већа од платна. Шта желите да урадите?"
 
-#: ../Pinta.Core/Classes/Document.cs:876
+#: ../Pinta.Core/Classes/Document.cs:883
 msgid "Expand canvas"
 msgstr "Рашири платно"
 
-#: ../Pinta.Core/Classes/Document.cs:877
+#: ../Pinta.Core/Classes/Document.cs:884
 msgid "Don't change canvas size"
 msgstr "Не мењај величину платна"
 
-#: ../Pinta.Core/Classes/Document.cs:890
+#: ../Pinta.Core/Classes/Document.cs:897
 msgid "Image cannot be pasted"
 msgstr "Слика не може бити убачена"
 
-#: ../Pinta.Core/Classes/Document.cs:891
+#: ../Pinta.Core/Classes/Document.cs:898
 msgid "The clipboard does not contain an image."
 msgstr "Остава не садржи слику."
+
+#: ../Pinta.Core/Classes/Palette.cs:191
+#: ../Pinta.Core/Managers/WorkspaceManager.cs:351
+#: ../Pinta.Core/Managers/WorkspaceManager.cs:360
+#, csharp-format
+msgid "Could not open file: {0}"
+msgstr "Не могу да отворим датотеку: {0}"
+
+#: ../Pinta.Core/Classes/Palette.cs:192
+msgid "Pinta supports the following palette formats:"
+msgstr "Пинта подржава следеће формате палете:"
 
 #: ../Pinta.Core/Classes/SelectionModeHandler.cs:46
 msgid "Replace"
@@ -480,7 +498,7 @@ msgstr "Иксор (ктрл + десни клик)"
 
 #: ../Pinta.Core/Classes/SelectionModeHandler.cs:50
 msgid "Intersect (Alt + Left Click)"
-msgstr ""
+msgstr "Пресек (Алт + леви клик)"
 
 #: ../Pinta.Core/Classes/SelectionModeHandler.cs:57
 msgid " Selection Mode: "
@@ -530,15 +548,15 @@ msgstr "Иксор"
 
 #: ../Pinta.Core/Effects/UserBlendOps.cs:44
 msgid "Hard Light"
-msgstr ""
+msgstr "Јако светла"
 
 #: ../Pinta.Core/Effects/UserBlendOps.cs:45
 msgid "Soft Light"
-msgstr ""
+msgstr "Слабо светла"
 
 #: ../Pinta.Core/Effects/UserBlendOps.cs:46
 msgid "Color"
-msgstr ""
+msgstr "Боја"
 
 #: ../Pinta.Core/Effects/UserBlendOps.cs:47
 #: ../Pinta.Effects/Dialogs/Effects.CurvesDialog.cs:437
@@ -594,8 +612,8 @@ msgstr "..."
 msgid "Rendering Effect"
 msgstr "Дејство исцртавања"
 
-#: ../Pinta.Core/Managers/ToolManager.cs:234
-#: ../Pinta.Core/Managers/ToolManager.cs:236
+#: ../Pinta.Core/Managers/ToolManager.cs:258
+#: ../Pinta.Core/Managers/ToolManager.cs:260
 msgid "No tool selected."
 msgstr "Није изабран ниједан алат."
 
@@ -613,50 +631,55 @@ msgstr "Позадина"
 msgid "New Image"
 msgstr "Нова слика"
 
-#: ../Pinta.Core/Managers/WorkspaceManager.cs:186
+#: ../Pinta.Core/Managers/WorkspaceManager.cs:190
 msgid "Unsupported file format"
 msgstr "Неподржан запис датотеке"
 
-#: ../Pinta.Core/Managers/WorkspaceManager.cs:191
+#: ../Pinta.Core/Managers/WorkspaceManager.cs:195
 msgid "Open Image"
 msgstr "Отвори слику"
 
-#: ../Pinta.Core/Managers/WorkspaceManager.cs:204
-msgid "Permission denied"
-msgstr "Приступ је одбијен"
+#: ../Pinta.Core/Managers/WorkspaceManager.cs:361
+msgid "Pinta supports the following file formats:"
+msgstr "Пинта подржава следеће формате датотека:"
 
-#: ../Pinta.Core/Managers/WorkspaceManager.cs:345
+#: ../Pinta.Core/Managers/WorkspaceManager.cs:378
+msgid "Failed to open image"
+msgstr ""
+
+#. Translators: {0} is the name of a file that the user does not have permission to open.
+#: ../Pinta.Core/Managers/WorkspaceManager.cs:380
 #, csharp-format
-msgid "Could not open file: {0}"
-msgstr "Не могу да отворим датотеку: {0}"
+msgid "You do not have access to '{0}'."
+msgstr ""
 
 #. Translators: {0} is the palette format (e.g. "GIMP") and {1} is a list of file extensions.
 #: ../Pinta.Core/PaletteFormats/PaletteDescriptor.cs:67
 #, csharp-format
 msgid "{0} palette ({1})"
-msgstr ""
+msgstr "„{0}“ палета ({1})"
 
 #: ../Pinta.Docking/DockLibrary/DockItem.cs:541
 msgid "Hide"
-msgstr "Сакриј"
+msgstr ""
 
 #: ../Pinta.Docking/DockLibrary/DockItem.cs:550
 msgid "Minimize"
-msgstr "Умањи"
+msgstr ""
 
 #: ../Pinta.Docking/DockLibrary/DockItem.cs:557
 #: ../Pinta.Docking/DockLibrary/DockItemTitleTab.cs:250
 msgid "Dock"
-msgstr "Прикачи"
+msgstr ""
 
 #: ../Pinta.Docking/DockLibrary/DockItem.cs:564
 msgid "Undock"
-msgstr "Откачи"
+msgstr ""
 
 #: ../Pinta.Docking/DockLibrary/DockItemTitleTab.cs:165
 #: ../Pinta.Docking/DockLibrary/DockItemTitleTab.cs:254
 msgid "Auto Hide"
-msgstr "Сам сакриј"
+msgstr ""
 
 #: ../Pinta.Effects/Adjustments/AutoLevelEffect.cs:25
 msgid "Auto Level"
@@ -1174,23 +1197,23 @@ msgstr "Изаберите споредну боју"
 msgid "Choose Palette Color"
 msgstr "Изаберите боју палете"
 
-#: ../Pinta.Gui.Widgets/Widgets/ColorPaletteWidget.cs:313
-msgid "Click to switch between primary and secondary color."
-msgstr "Притисните да се пребаците између основне и споредне боје."
-
 #: ../Pinta.Gui.Widgets/Widgets/ColorPaletteWidget.cs:315
+msgid "Click to switch between primary and secondary color."
+msgstr ""
+
+#: ../Pinta.Gui.Widgets/Widgets/ColorPaletteWidget.cs:320
 msgid "Click to reset primary and secondary color."
 msgstr "Притисните да повратите основну и споредну боју."
 
-#: ../Pinta.Gui.Widgets/Widgets/ColorPaletteWidget.cs:317
+#: ../Pinta.Gui.Widgets/Widgets/ColorPaletteWidget.cs:322
 msgid "Click to select primary color."
 msgstr "Притисните да изаберете основну боју."
 
-#: ../Pinta.Gui.Widgets/Widgets/ColorPaletteWidget.cs:319
+#: ../Pinta.Gui.Widgets/Widgets/ColorPaletteWidget.cs:324
 msgid "Click to select secondary color."
 msgstr "Притисните да изаберете споредну боју."
 
-#: ../Pinta.Gui.Widgets/Widgets/ColorPaletteWidget.cs:321
+#: ../Pinta.Gui.Widgets/Widgets/ColorPaletteWidget.cs:326
 msgid ""
 "Left click to set primary color. Right click to set secondary color. Middle "
 "click to choose palette color."
@@ -1244,19 +1267,19 @@ msgstr "Величина"
 
 #: ../Pinta.Tools/Editable/EditEngines/ArrowedEditEngine.cs:357
 msgid "Decrease arrow size"
-msgstr "Смањите величину стрелице"
+msgstr ""
 
 #: ../Pinta.Tools/Editable/EditEngines/ArrowedEditEngine.cs:424
 msgid "Increase arrow size"
-msgstr "Повећајте величину стрелице"
+msgstr ""
 
 #: ../Pinta.Tools/Editable/EditEngines/ArrowedEditEngine.cs:440
 msgid "Decrease angle offset"
-msgstr "Смањите угаони померај"
+msgstr ""
 
 #: ../Pinta.Tools/Editable/EditEngines/ArrowedEditEngine.cs:503
 msgid "Increase angle offset"
-msgstr "Повећајте угаони померај"
+msgstr ""
 
 #: ../Pinta.Tools/Editable/EditEngines/ArrowedEditEngine.cs:514
 msgid "Length"
@@ -1264,11 +1287,11 @@ msgstr "Дужина"
 
 #: ../Pinta.Tools/Editable/EditEngines/ArrowedEditEngine.cs:519
 msgid "Decrease length offset"
-msgstr "Смањите померај дужине"
+msgstr ""
 
 #: ../Pinta.Tools/Editable/EditEngines/ArrowedEditEngine.cs:582
 msgid "Increase length offset"
-msgstr "Повећајте померај дужине"
+msgstr ""
 
 #: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:296
 #: ../Pinta.Tools/Tools/BaseBrushTool.cs:76
@@ -1280,13 +1303,13 @@ msgstr "Ширина четкице"
 #: ../Pinta.Tools/Tools/BaseBrushTool.cs:81
 #: ../Pinta.Tools/Tools/SelectShapeTool.cs:104
 msgid "Decrease brush size"
-msgstr "Смањите величину четкице"
+msgstr ""
 
 #: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:330
 #: ../Pinta.Tools/Tools/BaseBrushTool.cs:95
 #: ../Pinta.Tools/Tools/SelectShapeTool.cs:118
 msgid "Increase brush size"
-msgstr "Повећајте величину четкице"
+msgstr ""
 
 #: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:342
 #: ../Pinta.Tools/Tools/FreeformShapeTool.cs:76
@@ -1378,11 +1401,11 @@ msgstr "Облик заобљене линије"
 
 #: ../Pinta.Tools/Editable/EditEngines/RoundedLineEditEngine.cs:131
 msgid "Decrease shape's corner radius"
-msgstr "Смањите полупречник ћошка облика"
+msgstr ""
 
 #: ../Pinta.Tools/Editable/EditEngines/RoundedLineEditEngine.cs:154
 msgid "Increase shape's corner radius"
-msgstr "Повећајте полупречник ћошка облика"
+msgstr ""
 
 #: ../Pinta.Tools/Tools/CloneStampTool.cs:42
 msgid "Clone Stamp"
@@ -1509,7 +1532,7 @@ msgstr "Врста"
 
 #: ../Pinta.Tools/Tools/EraserTool.cs:189
 msgid "Smooth"
-msgstr ""
+msgstr "Углађено"
 
 #: ../Pinta.Tools/Tools/EraserTool.cs:203
 msgid "Eraser"
@@ -1603,8 +1626,14 @@ msgstr "Притисните да изаберете област сличне �
 msgid ""
 "Left click and drag the selection to move selected content. Hold Ctrl to "
 "scale instead of move. Right click and drag the selection to rotate selected "
-"content. Hold Shift to rotate in steps."
+"content. Hold Shift to rotate in steps. Use arrow keys to move selected "
+"content by a single pixel."
 msgstr ""
+"Кликните левим тастером и превуците избор да преместите изабрани садржај. "
+"Држите Ктрл да промените сразмеру уместо да преместтие. Кликните десним "
+"тастером миша и превуците избор да заокренете изабрани садржај. Држите Шифт "
+"да заокрећете у корацима. Користите тастере стрелица да преместите изабрани "
+"садржај за један пиксел."
 
 #: ../Pinta.Tools/Tools/MoveSelectionTool.cs:42
 msgid "Move Selection"
@@ -1614,10 +1643,16 @@ msgstr "Преместите избор"
 msgid ""
 "Left click and drag the selection to move selection outline. Hold Ctrl to "
 "scale instead of move. Right click and drag the selection to rotate "
-"selection outline. Hold Shift to rotate in steps."
+"selection outline. Hold Shift to rotate in steps. Use arrow keys to move "
+"selection outline by a single pixel."
 msgstr ""
+"Кликните левим тастером и превуците избор да преместите контуру избора. "
+"Држите Ктрл да промените сразмеру уместо да преместтие. Кликните десним "
+"тастером миша и превуците избор да заокренете контуру избора. Држите Шифт да "
+"заокрећете у корацима. Користите тастере стрелица да преместите контуру "
+"избора за један пиксел."
 
-#: ../Pinta.Tools/Tools/PaintBrushTool.cs:40 ../Pinta/MainWindow.cs:89
+#: ../Pinta.Tools/Tools/PaintBrushTool.cs:40 ../Pinta/MainWindow.cs:104
 msgid "Paintbrush"
 msgstr "Четкица"
 
@@ -1743,11 +1778,11 @@ msgstr "Ширина контуре"
 
 #: ../Pinta.Tools/Tools/TextTool.cs:269
 msgid "Decrease outline size"
-msgstr "Смањите величину контуре"
+msgstr ""
 
 #: ../Pinta.Tools/Tools/TextTool.cs:286
 msgid "Increase outline size"
-msgstr "Повећајте величину контуре"
+msgstr ""
 
 #: ../Pinta.Tools/Tools/ZoomTool.cs:54
 msgid ""
@@ -1768,7 +1803,7 @@ msgstr "Нова величина палете:"
 #: ../Pinta/Actions/File/CloseDocumentAction.cs:61
 #, csharp-format
 msgid "Save the changes to image \"{0}\" before closing?"
-msgstr "Да сачувам измене на слици „{0}“ пре затварања?"
+msgstr ""
 
 #: ../Pinta/Actions/File/CloseDocumentAction.cs:62
 msgid "If you don't save, all changes will be permanently lost."
@@ -1777,7 +1812,7 @@ msgstr "Уколико не сачувате, све измене ће бити 
 #: ../Pinta/Actions/File/CloseDocumentAction.cs:72
 #: ../Pinta/Actions/File/CloseDocumentAction.cs:76
 msgid "Close _without saving"
-msgstr "Затвори _без чувања"
+msgstr ""
 
 #: ../Pinta/Actions/File/NewScreenshotAction.cs:52
 msgid "Take Screenshot"
@@ -1800,28 +1835,34 @@ msgid "Pinta does not support saving images in this file format."
 msgstr "Пинта не подржава чување слика у овом запису."
 
 #: ../Pinta/Actions/File/SaveDocumentImplementationAction.cs:191
-#: ../Pinta/Actions/File/SaveDocumentImplementationAction.cs:203
 msgid "Error"
 msgstr "Грешкa"
 
-#: ../Pinta/Actions/File/SaveDocumentImplementationAction.cs:202
-msgid "Cannot save read only file."
-msgstr "Не могу да сачувам датотеку само за читање."
-
-#: ../Pinta/Actions/File/SaveDocumentImplementationAction.cs:217
+#: ../Pinta/Actions/File/SaveDocumentImplementationAction.cs:205
 msgid "Image too large"
 msgstr "Слика је превелика"
 
-#: ../Pinta/Actions/File/SaveDocumentImplementationAction.cs:218
+#: ../Pinta/Actions/File/SaveDocumentImplementationAction.cs:206
 msgid "ICO files can not be larger than 255 x 255 pixels."
 msgstr "ИКО датотеке не могу бити веће од 255 x 255 тачкица."
 
-#: ../Pinta/Actions/File/SaveDocumentImplementationAction.cs:247
+#: ../Pinta/Actions/File/SaveDocumentImplementationAction.cs:216
+msgid "Failed to save image"
+msgstr ""
+
+#. Translators: {0} is the name of a file that the user does not have write permission for.
+#: ../Pinta/Actions/File/SaveDocumentImplementationAction.cs:218
+#, csharp-format
+msgid ""
+"You do not have access to modify '{0}'. The file or folder may be read-only."
+msgstr ""
+
+#: ../Pinta/Actions/File/SaveDocumentImplementationAction.cs:250
 #, csharp-format
 msgid "A file named \"{0}\" already exists. Do you want to replace it?"
 msgstr "Датотека под називом „{0}“ већ постоји. Да ли желите да је замените?"
 
-#: ../Pinta/Actions/File/SaveDocumentImplementationAction.cs:248
+#: ../Pinta/Actions/File/SaveDocumentImplementationAction.cs:251
 #, csharp-format
 msgid ""
 "The file already exists in \"{1}\". Replacing it will overwrite its contents."
@@ -1862,15 +1903,15 @@ msgstr "Додаци Пинтине заједнице — за посебну �
 msgid "Pinta Community Addins - Cross-Platform"
 msgstr "Додаци Пинтине заједнице — за све платформе"
 
-#: ../Pinta/Dialogs/AboutDialog.cs:126
+#: ../Pinta/Dialogs/AboutDialog.cs:143
 msgid "Contributors to this release:"
 msgstr "Доприносиоци овом издању:"
 
-#: ../Pinta/Dialogs/AboutDialog.cs:138
+#: ../Pinta/Dialogs/AboutDialog.cs:155
 msgid "Previous contributors:"
 msgstr "Претходни доприносиоци:"
 
-#: ../Pinta/Dialogs/AboutDialog.cs:149
+#: ../Pinta/Dialogs/AboutDialog.cs:166
 msgid "translator-credits"
 msgstr ""
 "Launchpad Contributions:\n"
@@ -1881,48 +1922,48 @@ msgstr ""
 "  Мирослав Николић https://launchpad.net/~lipek\n"
 "  Никола Павловић https://launchpad.net/~nikola825"
 
-#: ../Pinta/Dialogs/AboutDialog.cs:152
+#: ../Pinta/Dialogs/AboutDialog.cs:169
 msgid "Translated by:"
 msgstr "Преводиоци:"
 
-#: ../Pinta/Dialogs/AboutDialog.cs:158
+#: ../Pinta/Dialogs/AboutDialog.cs:175
 msgid "Based on the work of Paint.NET:"
 msgstr "Засновано на раду „Paint.NET“-а:"
 
-#: ../Pinta/Dialogs/AboutDialog.cs:165
+#: ../Pinta/Dialogs/AboutDialog.cs:182
 msgid "Using some icons from:"
 msgstr "Користи неке иконице из:"
 
-#: ../Pinta/Dialogs/AboutDialog.cs:173
+#: ../Pinta/Dialogs/AboutDialog.cs:190
 msgid "Powered by Mono:"
 msgstr "Погони га Моно:"
 
-#: ../Pinta/Dialogs/AboutDialog.cs:280
+#: ../Pinta/Dialogs/AboutDialog.cs:297
 msgid "About Pinta"
 msgstr "О Пинти"
 
-#: ../Pinta/Dialogs/AboutDialog.cs:298
+#: ../Pinta/Dialogs/AboutDialog.cs:315
 msgid "Version Info"
 msgstr "Подаци о издању"
 
-#: ../Pinta/Dialogs/AboutPintaTabPage.cs:42
-#: ../Pinta/Dialogs/VersionInformationTabPage.cs:50
+#: ../Pinta/Dialogs/AboutPintaTabPage.cs:43
+#: ../Pinta/Dialogs/VersionInformationTabPage.cs:53
 msgid "Version"
 msgstr "Издање"
 
-#: ../Pinta/Dialogs/AboutPintaTabPage.cs:51
+#: ../Pinta/Dialogs/AboutPintaTabPage.cs:52
 msgid "License"
 msgstr "Дозвола"
 
-#: ../Pinta/Dialogs/AboutPintaTabPage.cs:51
+#: ../Pinta/Dialogs/AboutPintaTabPage.cs:52
 msgid "Released under the MIT X11 License."
 msgstr "Програм је издат под МИТ-овом дозволом Икс11."
 
-#: ../Pinta/Dialogs/AboutPintaTabPage.cs:58
+#: ../Pinta/Dialogs/AboutPintaTabPage.cs:59
 msgid "Copyright"
 msgstr "Ауторска права"
 
-#: ../Pinta/Dialogs/AboutPintaTabPage.cs:58
+#: ../Pinta/Dialogs/AboutPintaTabPage.cs:59
 msgid "by Pinta contributors"
 msgstr "доприносиоци Пинте"
 
@@ -1979,23 +2020,23 @@ msgid "Preset:"
 msgstr "Подешеност:"
 
 #: ../Pinta/Dialogs/NewImageDialog.cs:211
-#: ../Pinta/Dialogs/ResizeCanvasDialog.cs:334
-#: ../Pinta/Dialogs/ResizeImageDialog.cs:170
+#: ../Pinta/Dialogs/ResizeCanvasDialog.cs:331
+#: ../Pinta/Dialogs/ResizeImageDialog.cs:169
 msgid "Width:"
 msgstr "Ширина:"
 
 #: ../Pinta/Dialogs/NewImageDialog.cs:218
 #: ../Pinta/Dialogs/NewImageDialog.cs:235
-#: ../Pinta/Dialogs/ResizeCanvasDialog.cs:336
-#: ../Pinta/Dialogs/ResizeCanvasDialog.cs:342
-#: ../Pinta/Dialogs/ResizeImageDialog.cs:172
-#: ../Pinta/Dialogs/ResizeImageDialog.cs:178
+#: ../Pinta/Dialogs/ResizeCanvasDialog.cs:333
+#: ../Pinta/Dialogs/ResizeCanvasDialog.cs:339
+#: ../Pinta/Dialogs/ResizeImageDialog.cs:171
+#: ../Pinta/Dialogs/ResizeImageDialog.cs:177
 msgid "pixels"
 msgstr "тачкица"
 
 #: ../Pinta/Dialogs/NewImageDialog.cs:228
-#: ../Pinta/Dialogs/ResizeCanvasDialog.cs:340
-#: ../Pinta/Dialogs/ResizeImageDialog.cs:176
+#: ../Pinta/Dialogs/ResizeCanvasDialog.cs:337
+#: ../Pinta/Dialogs/ResizeImageDialog.cs:175
 msgid "Height:"
 msgstr "Висина:"
 
@@ -2025,34 +2066,38 @@ msgstr "Боја позадине"
 
 #: ../Pinta/Dialogs/NewImageDialog.cs:319
 msgid "Preview"
-msgstr ""
+msgstr "Претпреглед"
 
-#: ../Pinta/Dialogs/ResizeCanvasDialog.cs:313
+#: ../Pinta/Dialogs/ResizeCanvasDialog.cs:311
 #: ../Pinta/Dialogs/ResizeImageDialog.cs:149
-msgid "By percentage:"
-msgstr "У процентима:"
-
-#: ../Pinta/Dialogs/ResizeCanvasDialog.cs:314
-#: ../Pinta/Dialogs/ResizeImageDialog.cs:150
 msgid "By absolute size:"
 msgstr "Према апсолутној величини:"
 
-#: ../Pinta/Dialogs/ResizeCanvasDialog.cs:320
+#: ../Pinta/Dialogs/ResizeCanvasDialog.cs:312
+#: ../Pinta/Dialogs/ResizeImageDialog.cs:150
+msgid "By percentage:"
+msgstr "У процентима:"
+
+#: ../Pinta/Dialogs/ResizeCanvasDialog.cs:318
 #: ../Pinta/Dialogs/ResizeImageDialog.cs:156
 msgid "Maintain aspect ratio"
 msgstr "Задржи однос размере"
 
-#: ../Pinta/Dialogs/ResizeCanvasDialog.cs:348
+#: ../Pinta/Dialogs/ResizeCanvasDialog.cs:346
 msgid "Anchor:"
 msgstr "Усидри:"
 
-#: ../Pinta/Dialogs/VersionInformationTabPage.cs:44
+#: ../Pinta/Dialogs/VersionInformationTabPage.cs:47
 msgid "Title"
 msgstr "Наслов"
 
-#: ../Pinta/Dialogs/VersionInformationTabPage.cs:53
+#: ../Pinta/Dialogs/VersionInformationTabPage.cs:56
 msgid "Path"
 msgstr "Путања"
+
+#: ../Pinta/Dialogs/VersionInformationTabPage.cs:72
+msgid "Copy Version Info"
+msgstr ""
 
 #: ../Pinta/Main.cs:57
 msgid "Show this message and exit."
@@ -2074,64 +2119,66 @@ msgstr "Употреба: pinta [датотеке]"
 msgid "Options: "
 msgstr "Опције: "
 
-#: ../Pinta/MainWindow.cs:309
+#: ../Pinta/MainWindow.cs:330
 msgid "_File"
 msgstr "_Датотека"
 
-#: ../Pinta/MainWindow.cs:310
+#: ../Pinta/MainWindow.cs:331
 msgid "_Edit"
 msgstr "_Уређивање"
 
-#: ../Pinta/MainWindow.cs:312
+#: ../Pinta/MainWindow.cs:333
 msgid "_View"
 msgstr "_Преглед"
 
-#: ../Pinta/MainWindow.cs:315
+#: ../Pinta/MainWindow.cs:336
 msgid "_Image"
 msgstr "_Слика"
 
-#: ../Pinta/MainWindow.cs:316
+#: ../Pinta/MainWindow.cs:337
 msgid "_Layers"
 msgstr "Сл_ојеви"
 
-#: ../Pinta/MainWindow.cs:317
+#: ../Pinta/MainWindow.cs:338
 msgid "_Adjustments"
 msgstr "Доте_ривања"
 
-#: ../Pinta/MainWindow.cs:318
+#: ../Pinta/MainWindow.cs:339
 msgid "Effe_cts"
 msgstr "Дејст_ва"
 
-#: ../Pinta/MainWindow.cs:319
+#: ../Pinta/MainWindow.cs:340
 msgid "A_dd-ins"
 msgstr "_Додаци"
 
-#: ../Pinta/MainWindow.cs:321
+#: ../Pinta/MainWindow.cs:342
 msgid "_Window"
 msgstr "_Прозор"
 
-#: ../Pinta/MainWindow.cs:325
+#: ../Pinta/MainWindow.cs:346
 msgid "Tool Windows"
 msgstr "Прозор алата"
 
-#: ../Pinta/MainWindow.cs:329
+#: ../Pinta/MainWindow.cs:350
 msgid "_Help"
 msgstr "По_моћ"
 
-#: ../Pinta/MainWindow.cs:551
+#: ../Pinta/MainWindow.cs:572
 msgid "Downloading Image"
-msgstr ""
+msgstr "Преузимам слику"
 
-#: ../Pinta/MainWindow.cs:569
+#: ../Pinta/MainWindow.cs:590
 msgid "Download failed"
-msgstr ""
+msgstr "Преузимање није успело"
 
-#: ../Pinta/MainWindow.cs:570
+#: ../Pinta/MainWindow.cs:591
 #, csharp-format
 msgid ""
 "Unable to download image from {0}.\n"
 "Details: {1}"
 msgstr ""
+"Не могу да преузмем слику са „{0}“.\n"
+"Детаљи: {1}"
 
 #: ../Pinta/Options.cs:486
 msgid "OptionName"
@@ -2151,11 +2198,11 @@ msgstr "Слојеви"
 
 #: ../Pinta/Pads/OpenImagesPad.cs:41 ../Pinta/Pads/OpenImagesPad.cs:48
 msgid "Images"
-msgstr "Слике"
+msgstr ""
 
 #: ../Pinta/Pads/ToolBoxPad.cs:42 ../Pinta/Pads/ToolBoxPad.cs:49
 msgid "Tools"
-msgstr "Алати"
+msgstr ""
 
 #: Polar Inversion dialog
 msgid "Edge Behavior"

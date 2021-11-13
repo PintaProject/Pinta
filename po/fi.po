@@ -7,16 +7,16 @@ msgid ""
 msgstr ""
 "Project-Id-Version: pinta\n"
 "Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
-"POT-Creation-Date: 2020-07-27 21:13-0400\n"
-"PO-Revision-Date: 2016-10-03 13:04+0000\n"
-"Last-Translator: Elias Ojala <Unknown>\n"
+"POT-Creation-Date: 2021-10-17 10:55-0400\n"
+"PO-Revision-Date: 2021-10-25 16:05+0000\n"
+"Last-Translator: Jiri Grönroos <Unknown>\n"
 "Language-Team: Finnish <fi@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Launchpad-Export-Date: 2020-08-04 20:56+0000\n"
-"X-Generator: Launchpad (build a24057fea7e4c6a98c0220d5f878da0f3c783699)\n"
+"X-Launchpad-Export-Date: 2021-11-12 20:36+0000\n"
+"X-Generator: Launchpad (build 57dd9ea1b48fdf744e285d99fb34fa0c21646cd0)\n"
 
 #: ../xdg/pinta.desktop.in.h:1
 msgid "Pinta"
@@ -37,6 +37,8 @@ msgstr "Pinta-kuvankäsittely"
 #: ../xdg/pinta.desktop.in.h:5
 msgid "draw;drawing;paint;painting;graphics;raster;2d;"
 msgstr ""
+"draw;drawing;paint;painting;graphics;raster;2d;kuva;piirros;maalaus;grafiikka"
+";rasteri;"
 
 #: ../xdg/pinta.appdata.xml.in.h:1
 msgid ""
@@ -46,6 +48,12 @@ msgid ""
 "apply to your images, and also has the ability to create unlimited layers to "
 "help organize your creativity."
 msgstr ""
+"Pinta on sovellus kuvankäsittelyyn, piirtämiseen ja maalaamiseen. Pinta "
+"sisältää yksinkertaisen mutta tehokkaan käyttöliittymän sekä laajan "
+"valikoiman piirrostyökaluja mukaan lukien vapaan muodon, suorakulmiot, "
+"ellipsit ja viivat. Tarjolla on myös yli 35 kuviin liitettävää tehostetta "
+"sekä rajoittamaton määrä tasoja, joiden avulla pidät luovuutesi "
+"järjestyksessä."
 
 #: ../Pinta.Core/Actions/AddinActions.cs:40
 msgid "Add-in Manager"
@@ -73,13 +81,13 @@ msgid "Copy Merged"
 msgstr "Kopioi yhdistettynä"
 
 #: ../Pinta.Core/Actions/EditActions.cs:74
-#: ../Pinta.Core/Classes/Document.cs:780
+#: ../Pinta.Core/Classes/Document.cs:787
 #: ../Pinta.Core/HistoryItems/PasteHistoryItem.cs:43
 msgid "Paste"
 msgstr "Liitä"
 
 #: ../Pinta.Core/Actions/EditActions.cs:75
-#: ../Pinta.Core/Classes/Document.cs:776
+#: ../Pinta.Core/Classes/Document.cs:783
 msgid "Paste Into New Layer"
 msgstr "Liitä uuteen tasoon"
 
@@ -98,7 +106,7 @@ msgid "Fill Selection"
 msgstr "Täytä valinta"
 
 #: ../Pinta.Core/Actions/EditActions.cs:79
-#: ../Pinta.Core/Actions/EditActions.cs:421
+#: ../Pinta.Core/Actions/EditActions.cs:422
 msgid "Invert Selection"
 msgstr "Käännä valinta"
 
@@ -117,7 +125,7 @@ msgid "Open..."
 msgstr "Avaa..."
 
 #: ../Pinta.Core/Actions/EditActions.cs:84
-#: ../Pinta.Core/Actions/FileActions.cs:66
+#: ../Pinta.Core/Actions/FileActions.cs:68
 msgid "Save As..."
 msgstr "Tallenna nimellä..."
 
@@ -138,20 +146,20 @@ msgstr "Paletti"
 msgid "Deselect"
 msgstr "Poista valinta"
 
-#: ../Pinta.Core/Actions/EditActions.cs:336
+#: ../Pinta.Core/Actions/EditActions.cs:337
 msgid "Open Palette File"
 msgstr "Avaa palettitiedosto"
 
-#: ../Pinta.Core/Actions/EditActions.cs:348
+#: ../Pinta.Core/Actions/EditActions.cs:349
 msgid "Palette files"
-msgstr ""
+msgstr "Palettitiedostot"
 
-#: ../Pinta.Core/Actions/EditActions.cs:352
+#: ../Pinta.Core/Actions/EditActions.cs:353
 #: ../Pinta/Actions/File/OpenDocumentAction.cs:67
 msgid "All files"
 msgstr "Kaikki tiedostot"
 
-#: ../Pinta.Core/Actions/EditActions.cs:373
+#: ../Pinta.Core/Actions/EditActions.cs:374
 msgid "Save Palette File"
 msgstr "Tallenna palettitiedosto"
 
@@ -165,30 +173,30 @@ msgstr "Uusi kuvakaappaus..."
 
 #: ../Pinta.Core/Actions/FileActions.cs:57
 msgid "Open Recent"
-msgstr "Avaa viimeisin"
+msgstr "Avaa viimeaikainen"
 
-#: ../Pinta.Core/Actions/FileActions.cs:64
+#: ../Pinta.Core/Actions/FileActions.cs:66
 #: ../Pinta.Docking/DockLibrary/DockItemTitleTab.cs:175
 msgid "Close"
 msgstr "Sulje"
 
-#: ../Pinta.Core/Actions/FileActions.cs:65
+#: ../Pinta.Core/Actions/FileActions.cs:67
 msgid "Save"
 msgstr "Tallenna"
 
-#: ../Pinta.Core/Actions/FileActions.cs:67
+#: ../Pinta.Core/Actions/FileActions.cs:69
 msgid "Print"
 msgstr "Tulosta"
 
-#: ../Pinta.Core/Actions/FileActions.cs:68
+#: ../Pinta.Core/Actions/FileActions.cs:70
 msgid "Quit"
 msgstr "Lopeta"
 
-#: ../Pinta.Core/Actions/FileActions.cs:70
+#: ../Pinta.Core/Actions/FileActions.cs:72
 msgid "New"
 msgstr "Uusi"
 
-#: ../Pinta.Core/Actions/FileActions.cs:71
+#: ../Pinta.Core/Actions/FileActions.cs:73
 msgid "Open"
 msgstr "Avaa"
 
@@ -208,12 +216,12 @@ msgstr "Ilmoita virheestä"
 msgid "Translate This Application"
 msgstr "Käännä tämä ohjelma"
 
-#: ../Pinta.Core/Actions/HelpActions.cs:56 ../Pinta/MainWindow.cs:347
+#: ../Pinta.Core/Actions/HelpActions.cs:56 ../Pinta/MainWindow.cs:368
 msgid "About"
 msgstr "Tietoja"
 
 #: ../Pinta.Core/Actions/ImageActions.cs:60
-#: ../Pinta.Core/Actions/ImageActions.cs:291
+#: ../Pinta.Core/Actions/ImageActions.cs:284
 msgid "Crop to Selection"
 msgstr "Rajaa valintaan"
 
@@ -261,7 +269,7 @@ msgstr "Yhdistä tasot"
 
 #: ../Pinta.Core/Actions/LayerActions.cs:65
 #: ../Pinta.Core/Actions/LayerActions.cs:292
-#: ../Pinta.Core/Classes/Document.cs:839
+#: ../Pinta.Core/Classes/Document.cs:846
 msgid "Add New Layer"
 msgstr "Uusi taso"
 
@@ -364,19 +372,19 @@ msgid "Fullscreen"
 msgstr "Koko näyttö"
 
 #: ../Pinta.Core/Actions/ViewActions.cs:115
-#: ../Pinta.Core/Actions/ViewActions.cs:277
+#: ../Pinta.Core/Actions/ViewActions.cs:284
 #: ../Pinta.Core/Classes/DocumentWorkspace.cs:320
 #: ../Pinta.Core/Classes/DocumentWorkspace.cs:328
 msgid "Window"
 msgstr "Ikkuna"
 
-#: ../Pinta.Core/Actions/ViewActions.cs:159
+#: ../Pinta.Core/Actions/ViewActions.cs:163
 msgid "Ruler Units"
 msgstr "Mitta-asteikko"
 
 #. Translators: This specifies the format of the zoom percentage choices
 #. in the toolbar.
-#: ../Pinta.Core/Actions/ViewActions.cs:258
+#: ../Pinta.Core/Actions/ViewActions.cs:265
 #, csharp-format
 msgid "{0}%"
 msgstr "{0} %"
@@ -389,76 +397,88 @@ msgstr "Tallenna kaikki"
 msgid "Close All"
 msgstr "Sulje kaikki"
 
-#: ../Pinta.Core/Classes/BaseTool.cs:261
+#: ../Pinta.Core/Classes/BaseTool.cs:262
 msgid "Tool"
 msgstr "Työkalu"
 
-#: ../Pinta.Core/Classes/BaseTool.cs:333
+#: ../Pinta.Core/Classes/BaseTool.cs:334
+#: ../Pinta.Gui.Widgets/Widgets/ColorPaletteWidget.cs:316
 msgid "Shortcut key"
 msgstr "Pikanäppäin"
 
-#: ../Pinta.Core/Classes/BaseTool.cs:445
+#: ../Pinta.Core/Classes/BaseTool.cs:446
 msgid "Normal Blending"
 msgstr "Normaali sekoitus"
 
-#: ../Pinta.Core/Classes/BaseTool.cs:446
+#: ../Pinta.Core/Classes/BaseTool.cs:447
 msgid "Overwrite"
 msgstr "Ylikirjoitus"
 
-#: ../Pinta.Core/Classes/BaseTool.cs:460
+#: ../Pinta.Core/Classes/BaseTool.cs:461
 msgid "Antialiasing On"
 msgstr "Reunojen pehmennys päällä"
 
-#: ../Pinta.Core/Classes/BaseTool.cs:461
+#: ../Pinta.Core/Classes/BaseTool.cs:462
 msgid "Antialiasing Off"
 msgstr "Reunojen pehmennys pois päältä"
 
-#: ../Pinta.Core/Classes/Document.cs:291 ../Pinta.Core/Classes/Document.cs:296
+#: ../Pinta.Core/Classes/Document.cs:296 ../Pinta.Core/Classes/Document.cs:301
 #: ../Pinta.Tools/Tools/ColorPickerTool.cs:135
 msgid "Layer"
 msgstr "Taso"
 
-#: ../Pinta.Core/Classes/Document.cs:378
+#: ../Pinta.Core/Classes/Document.cs:384
 msgid "copy"
-msgstr "kopioi"
+msgstr ""
 
-#: ../Pinta.Core/Classes/Document.cs:654
+#: ../Pinta.Core/Classes/Document.cs:661
 #: ../Pinta/Dialogs/ResizeCanvasDialog.cs:56
 msgid "Resize Canvas"
 msgstr "Pohjan koko"
 
-#: ../Pinta.Core/Classes/Document.cs:855
+#: ../Pinta.Core/Classes/Document.cs:862
 #: ../Pinta.Core/HistoryItems/FinishPixelsHistoryItem.cs:65
 #: ../Pinta.Core/HistoryItems/PasteHistoryItem.cs:65
 #: ../Pinta.Tools/Tools/MoveSelectedTool.cs:43
 msgid "Move Selected Pixels"
 msgstr "Siirrä valittuja pikseleitä"
 
-#: ../Pinta.Core/Classes/Document.cs:871
+#: ../Pinta.Core/Classes/Document.cs:878
 msgid "Image larger than canvas"
 msgstr "Kuva on suurempi kuin pohja"
 
-#: ../Pinta.Core/Classes/Document.cs:872
+#: ../Pinta.Core/Classes/Document.cs:879
 msgid ""
 "The image being pasted is larger than the canvas size. What would you like "
 "to do?"
 msgstr "Tuotava kuva on suurempi kuin pohjan koko. Mitä haluat tehdä?"
 
-#: ../Pinta.Core/Classes/Document.cs:876
+#: ../Pinta.Core/Classes/Document.cs:883
 msgid "Expand canvas"
 msgstr "Laajenna pohjaa"
 
-#: ../Pinta.Core/Classes/Document.cs:877
+#: ../Pinta.Core/Classes/Document.cs:884
 msgid "Don't change canvas size"
 msgstr "Pidä pohjan koko"
 
-#: ../Pinta.Core/Classes/Document.cs:890
+#: ../Pinta.Core/Classes/Document.cs:897
 msgid "Image cannot be pasted"
 msgstr "Kuvaa ei voi liittää"
 
-#: ../Pinta.Core/Classes/Document.cs:891
+#: ../Pinta.Core/Classes/Document.cs:898
 msgid "The clipboard does not contain an image."
 msgstr "Leikepöytä ei sisällä kuvaa."
+
+#: ../Pinta.Core/Classes/Palette.cs:191
+#: ../Pinta.Core/Managers/WorkspaceManager.cs:351
+#: ../Pinta.Core/Managers/WorkspaceManager.cs:360
+#, csharp-format
+msgid "Could not open file: {0}"
+msgstr "Tiedostoa ei voitu avata: {0}"
+
+#: ../Pinta.Core/Classes/Palette.cs:192
+msgid "Pinta supports the following palette formats:"
+msgstr "Pinta tukee seuraavia palettimuotoja:"
 
 #: ../Pinta.Core/Classes/SelectionModeHandler.cs:46
 msgid "Replace"
@@ -478,7 +498,7 @@ msgstr "Xor (Ctrl + Oikea hiiri)"
 
 #: ../Pinta.Core/Classes/SelectionModeHandler.cs:50
 msgid "Intersect (Alt + Left Click)"
-msgstr ""
+msgstr "Leikkaus (Alt + Vasen napsautus)"
 
 #: ../Pinta.Core/Classes/SelectionModeHandler.cs:57
 msgid " Selection Mode: "
@@ -592,8 +612,8 @@ msgstr "..."
 msgid "Rendering Effect"
 msgstr "Renderointi"
 
-#: ../Pinta.Core/Managers/ToolManager.cs:234
-#: ../Pinta.Core/Managers/ToolManager.cs:236
+#: ../Pinta.Core/Managers/ToolManager.cs:258
+#: ../Pinta.Core/Managers/ToolManager.cs:260
 msgid "No tool selected."
 msgstr "Työkalua ei ole valittu."
 
@@ -611,28 +631,33 @@ msgstr "Tausta"
 msgid "New Image"
 msgstr "Uusi kuva"
 
-#: ../Pinta.Core/Managers/WorkspaceManager.cs:186
+#: ../Pinta.Core/Managers/WorkspaceManager.cs:190
 msgid "Unsupported file format"
 msgstr "Tiedostomuotoa ei tueta"
 
-#: ../Pinta.Core/Managers/WorkspaceManager.cs:191
+#: ../Pinta.Core/Managers/WorkspaceManager.cs:195
 msgid "Open Image"
 msgstr "Avaa kuva"
 
-#: ../Pinta.Core/Managers/WorkspaceManager.cs:204
-msgid "Permission denied"
-msgstr "Lupa evätty"
+#: ../Pinta.Core/Managers/WorkspaceManager.cs:361
+msgid "Pinta supports the following file formats:"
+msgstr "Pinta tukee seuraavia tiedostomuotoja:"
 
-#: ../Pinta.Core/Managers/WorkspaceManager.cs:345
+#: ../Pinta.Core/Managers/WorkspaceManager.cs:378
+msgid "Failed to open image"
+msgstr "Kuvan avaaminen epäonnistui"
+
+#. Translators: {0} is the name of a file that the user does not have permission to open.
+#: ../Pinta.Core/Managers/WorkspaceManager.cs:380
 #, csharp-format
-msgid "Could not open file: {0}"
-msgstr "Tiedostoa ei voitu avata: {0}"
+msgid "You do not have access to '{0}'."
+msgstr "Sinulla ei ole käyttöoikeutta tiedostoon '{0}'."
 
 #. Translators: {0} is the palette format (e.g. "GIMP") and {1} is a list of file extensions.
 #: ../Pinta.Core/PaletteFormats/PaletteDescriptor.cs:67
 #, csharp-format
 msgid "{0} palette ({1})"
-msgstr ""
+msgstr "{0}-paletti ({1})"
 
 #: ../Pinta.Docking/DockLibrary/DockItem.cs:541
 msgid "Hide"
@@ -645,7 +670,7 @@ msgstr "Pienennä"
 #: ../Pinta.Docking/DockLibrary/DockItem.cs:557
 #: ../Pinta.Docking/DockLibrary/DockItemTitleTab.cs:250
 msgid "Dock"
-msgstr "Telakka"
+msgstr "Telakoi"
 
 #: ../Pinta.Docking/DockLibrary/DockItem.cs:564
 msgid "Undock"
@@ -654,7 +679,7 @@ msgstr "Irrota"
 #: ../Pinta.Docking/DockLibrary/DockItemTitleTab.cs:165
 #: ../Pinta.Docking/DockLibrary/DockItemTitleTab.cs:254
 msgid "Auto Hide"
-msgstr "Automaattinen piilotus"
+msgstr "Piilota automaattisesti"
 
 #: ../Pinta.Effects/Adjustments/AutoLevelEffect.cs:25
 msgid "Auto Level"
@@ -1172,23 +1197,23 @@ msgstr "Valitse taustaväri"
 msgid "Choose Palette Color"
 msgstr "Valitse palettiväri"
 
-#: ../Pinta.Gui.Widgets/Widgets/ColorPaletteWidget.cs:313
-msgid "Click to switch between primary and secondary color."
-msgstr "Klikkaa vaihtaaksesi ensi- ja toissijaisen värin välillä."
-
 #: ../Pinta.Gui.Widgets/Widgets/ColorPaletteWidget.cs:315
+msgid "Click to switch between primary and secondary color."
+msgstr "Napsauta vaihtaaksesi ensi- ja toissijaisen värin välillä."
+
+#: ../Pinta.Gui.Widgets/Widgets/ColorPaletteWidget.cs:320
 msgid "Click to reset primary and secondary color."
 msgstr "Paina palauttaksesi edusta- ja taustavärin"
 
-#: ../Pinta.Gui.Widgets/Widgets/ColorPaletteWidget.cs:317
+#: ../Pinta.Gui.Widgets/Widgets/ColorPaletteWidget.cs:322
 msgid "Click to select primary color."
 msgstr "Klikkaa valitaksesi ensisijaisen värin."
 
-#: ../Pinta.Gui.Widgets/Widgets/ColorPaletteWidget.cs:319
+#: ../Pinta.Gui.Widgets/Widgets/ColorPaletteWidget.cs:324
 msgid "Click to select secondary color."
 msgstr "Klikkaa valitaksesi toissijaisen värin."
 
-#: ../Pinta.Gui.Widgets/Widgets/ColorPaletteWidget.cs:321
+#: ../Pinta.Gui.Widgets/Widgets/ColorPaletteWidget.cs:326
 msgid ""
 "Left click to set primary color. Right click to set secondary color. Middle "
 "click to choose palette color."
@@ -1278,13 +1303,13 @@ msgstr "Siveltimen koko"
 #: ../Pinta.Tools/Tools/BaseBrushTool.cs:81
 #: ../Pinta.Tools/Tools/SelectShapeTool.cs:104
 msgid "Decrease brush size"
-msgstr "Pienennä sivellintä"
+msgstr "Pienennä siveltimen kokoa"
 
 #: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:330
 #: ../Pinta.Tools/Tools/BaseBrushTool.cs:95
 #: ../Pinta.Tools/Tools/SelectShapeTool.cs:118
 msgid "Increase brush size"
-msgstr "Suurenna sivellintä"
+msgstr "Suurenna siveltimen kokoa"
 
 #: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:342
 #: ../Pinta.Tools/Tools/FreeformShapeTool.cs:76
@@ -1376,11 +1401,11 @@ msgstr "Pyöristetty viiva"
 
 #: ../Pinta.Tools/Editable/EditEngines/RoundedLineEditEngine.cs:131
 msgid "Decrease shape's corner radius"
-msgstr "Vähennä muodon kulmasädettä"
+msgstr ""
 
 #: ../Pinta.Tools/Editable/EditEngines/RoundedLineEditEngine.cs:154
 msgid "Increase shape's corner radius"
-msgstr "Kasvata muodon kulmasädettä"
+msgstr ""
 
 #: ../Pinta.Tools/Tools/CloneStampTool.cs:42
 msgid "Clone Stamp"
@@ -1585,7 +1610,8 @@ msgstr "Napsauta valitaksesi samanvärisen alueen."
 msgid ""
 "Left click and drag the selection to move selected content. Hold Ctrl to "
 "scale instead of move. Right click and drag the selection to rotate selected "
-"content. Hold Shift to rotate in steps."
+"content. Hold Shift to rotate in steps. Use arrow keys to move selected "
+"content by a single pixel."
 msgstr ""
 
 #: ../Pinta.Tools/Tools/MoveSelectionTool.cs:42
@@ -1596,10 +1622,11 @@ msgstr "Siirrä valintaa"
 msgid ""
 "Left click and drag the selection to move selection outline. Hold Ctrl to "
 "scale instead of move. Right click and drag the selection to rotate "
-"selection outline. Hold Shift to rotate in steps."
+"selection outline. Hold Shift to rotate in steps. Use arrow keys to move "
+"selection outline by a single pixel."
 msgstr ""
 
-#: ../Pinta.Tools/Tools/PaintBrushTool.cs:40 ../Pinta/MainWindow.cs:89
+#: ../Pinta.Tools/Tools/PaintBrushTool.cs:40 ../Pinta/MainWindow.cs:104
 msgid "Paintbrush"
 msgstr "Sivellin"
 
@@ -1726,11 +1753,11 @@ msgstr "Ääriviivan paksuus"
 
 #: ../Pinta.Tools/Tools/TextTool.cs:269
 msgid "Decrease outline size"
-msgstr "Pienennä ääriviivaa"
+msgstr "Pienennä ääriviivan kokoa"
 
 #: ../Pinta.Tools/Tools/TextTool.cs:286
 msgid "Increase outline size"
-msgstr "Suurenna ääriviivaa"
+msgstr "Suurenna ääriviivan kokoa"
 
 #: ../Pinta.Tools/Tools/ZoomTool.cs:54
 msgid ""
@@ -1783,28 +1810,36 @@ msgid "Pinta does not support saving images in this file format."
 msgstr "Pinta ei tue kuvien tallentamista tässä muodossa."
 
 #: ../Pinta/Actions/File/SaveDocumentImplementationAction.cs:191
-#: ../Pinta/Actions/File/SaveDocumentImplementationAction.cs:203
 msgid "Error"
 msgstr "Virhe"
 
-#: ../Pinta/Actions/File/SaveDocumentImplementationAction.cs:202
-msgid "Cannot save read only file."
-msgstr "Vain luku -tiedostoon ei voi tallentaa."
-
-#: ../Pinta/Actions/File/SaveDocumentImplementationAction.cs:217
+#: ../Pinta/Actions/File/SaveDocumentImplementationAction.cs:205
 msgid "Image too large"
 msgstr "Kuva on liian iso"
 
-#: ../Pinta/Actions/File/SaveDocumentImplementationAction.cs:218
+#: ../Pinta/Actions/File/SaveDocumentImplementationAction.cs:206
 msgid "ICO files can not be larger than 255 x 255 pixels."
 msgstr "ICO-tiedostot voivat olla korkeintaan 255x255 pikselin kokoisia"
 
-#: ../Pinta/Actions/File/SaveDocumentImplementationAction.cs:247
+#: ../Pinta/Actions/File/SaveDocumentImplementationAction.cs:216
+msgid "Failed to save image"
+msgstr "Kuvan tallentaminen epäonnistui"
+
+#. Translators: {0} is the name of a file that the user does not have write permission for.
+#: ../Pinta/Actions/File/SaveDocumentImplementationAction.cs:218
+#, csharp-format
+msgid ""
+"You do not have access to modify '{0}'. The file or folder may be read-only."
+msgstr ""
+"Käyttöoikeutesi eivät riitä kohteen '{0}' muokkaamiseen. Tiedosto tai kansio "
+"voi olla \"vain luku\"-tilassa."
+
+#: ../Pinta/Actions/File/SaveDocumentImplementationAction.cs:250
 #, csharp-format
 msgid "A file named \"{0}\" already exists. Do you want to replace it?"
 msgstr "Tiedosto nimeltä \"{0}\" on olemassa. Haluatko korvata sen?"
 
-#: ../Pinta/Actions/File/SaveDocumentImplementationAction.cs:248
+#: ../Pinta/Actions/File/SaveDocumentImplementationAction.cs:251
 #, csharp-format
 msgid ""
 "The file already exists in \"{1}\". Replacing it will overwrite its contents."
@@ -1844,15 +1879,15 @@ msgstr "Pinta-yhteisön lisäosat - alustariippuvaiset"
 msgid "Pinta Community Addins - Cross-Platform"
 msgstr "Pinta-yhteisön lisäosat - alustariippumattomat"
 
-#: ../Pinta/Dialogs/AboutDialog.cs:126
+#: ../Pinta/Dialogs/AboutDialog.cs:143
 msgid "Contributors to this release:"
 msgstr "Tämän julkaisun osallistujat:"
 
-#: ../Pinta/Dialogs/AboutDialog.cs:138
+#: ../Pinta/Dialogs/AboutDialog.cs:155
 msgid "Previous contributors:"
 msgstr "Aiemmat osallistujat:"
 
-#: ../Pinta/Dialogs/AboutDialog.cs:149
+#: ../Pinta/Dialogs/AboutDialog.cs:166
 msgid "translator-credits"
 msgstr ""
 "Launchpad Contributions:\n"
@@ -1867,48 +1902,48 @@ msgstr ""
 "  Tommi Saira https://launchpad.net/~tommisaira\n"
 "  Urmas https://launchpad.net/~urmas-2006"
 
-#: ../Pinta/Dialogs/AboutDialog.cs:152
+#: ../Pinta/Dialogs/AboutDialog.cs:169
 msgid "Translated by:"
 msgstr "Käännöksen tehnyt:"
 
-#: ../Pinta/Dialogs/AboutDialog.cs:158
+#: ../Pinta/Dialogs/AboutDialog.cs:175
 msgid "Based on the work of Paint.NET:"
 msgstr "Perustuu ohjelmaan Paint.NET:"
 
-#: ../Pinta/Dialogs/AboutDialog.cs:165
+#: ../Pinta/Dialogs/AboutDialog.cs:182
 msgid "Using some icons from:"
 msgstr "Käyttää kuvakkeita kokoelmista:"
 
-#: ../Pinta/Dialogs/AboutDialog.cs:173
+#: ../Pinta/Dialogs/AboutDialog.cs:190
 msgid "Powered by Mono:"
 msgstr "Käyttää Monoa:"
 
-#: ../Pinta/Dialogs/AboutDialog.cs:280
+#: ../Pinta/Dialogs/AboutDialog.cs:297
 msgid "About Pinta"
 msgstr "Tietoja Pintasta"
 
-#: ../Pinta/Dialogs/AboutDialog.cs:298
+#: ../Pinta/Dialogs/AboutDialog.cs:315
 msgid "Version Info"
 msgstr "Versiotiedot"
 
-#: ../Pinta/Dialogs/AboutPintaTabPage.cs:42
-#: ../Pinta/Dialogs/VersionInformationTabPage.cs:50
+#: ../Pinta/Dialogs/AboutPintaTabPage.cs:43
+#: ../Pinta/Dialogs/VersionInformationTabPage.cs:53
 msgid "Version"
 msgstr "Versio"
 
-#: ../Pinta/Dialogs/AboutPintaTabPage.cs:51
+#: ../Pinta/Dialogs/AboutPintaTabPage.cs:52
 msgid "License"
 msgstr "Lisenssi"
 
-#: ../Pinta/Dialogs/AboutPintaTabPage.cs:51
+#: ../Pinta/Dialogs/AboutPintaTabPage.cs:52
 msgid "Released under the MIT X11 License."
 msgstr "Julkaistaan MIT X11 -lisenssin alaisena."
 
-#: ../Pinta/Dialogs/AboutPintaTabPage.cs:58
+#: ../Pinta/Dialogs/AboutPintaTabPage.cs:59
 msgid "Copyright"
 msgstr "Tekijänoikeus"
 
-#: ../Pinta/Dialogs/AboutPintaTabPage.cs:58
+#: ../Pinta/Dialogs/AboutPintaTabPage.cs:59
 msgid "by Pinta contributors"
 msgstr "Pinta-tekijöiden"
 
@@ -1965,23 +2000,23 @@ msgid "Preset:"
 msgstr "Esiasetus:"
 
 #: ../Pinta/Dialogs/NewImageDialog.cs:211
-#: ../Pinta/Dialogs/ResizeCanvasDialog.cs:334
-#: ../Pinta/Dialogs/ResizeImageDialog.cs:170
+#: ../Pinta/Dialogs/ResizeCanvasDialog.cs:331
+#: ../Pinta/Dialogs/ResizeImageDialog.cs:169
 msgid "Width:"
 msgstr "Leveys:"
 
 #: ../Pinta/Dialogs/NewImageDialog.cs:218
 #: ../Pinta/Dialogs/NewImageDialog.cs:235
-#: ../Pinta/Dialogs/ResizeCanvasDialog.cs:336
-#: ../Pinta/Dialogs/ResizeCanvasDialog.cs:342
-#: ../Pinta/Dialogs/ResizeImageDialog.cs:172
-#: ../Pinta/Dialogs/ResizeImageDialog.cs:178
+#: ../Pinta/Dialogs/ResizeCanvasDialog.cs:333
+#: ../Pinta/Dialogs/ResizeCanvasDialog.cs:339
+#: ../Pinta/Dialogs/ResizeImageDialog.cs:171
+#: ../Pinta/Dialogs/ResizeImageDialog.cs:177
 msgid "pixels"
 msgstr "pikseliä"
 
 #: ../Pinta/Dialogs/NewImageDialog.cs:228
-#: ../Pinta/Dialogs/ResizeCanvasDialog.cs:340
-#: ../Pinta/Dialogs/ResizeImageDialog.cs:176
+#: ../Pinta/Dialogs/ResizeCanvasDialog.cs:337
+#: ../Pinta/Dialogs/ResizeImageDialog.cs:175
 msgid "Height:"
 msgstr "Korkeus:"
 
@@ -2013,32 +2048,36 @@ msgstr "Taustaväri"
 msgid "Preview"
 msgstr "Esikatsele"
 
-#: ../Pinta/Dialogs/ResizeCanvasDialog.cs:313
+#: ../Pinta/Dialogs/ResizeCanvasDialog.cs:311
 #: ../Pinta/Dialogs/ResizeImageDialog.cs:149
-msgid "By percentage:"
-msgstr "Prosentin mukaan:"
-
-#: ../Pinta/Dialogs/ResizeCanvasDialog.cs:314
-#: ../Pinta/Dialogs/ResizeImageDialog.cs:150
 msgid "By absolute size:"
 msgstr "Koon mukaan:"
 
-#: ../Pinta/Dialogs/ResizeCanvasDialog.cs:320
+#: ../Pinta/Dialogs/ResizeCanvasDialog.cs:312
+#: ../Pinta/Dialogs/ResizeImageDialog.cs:150
+msgid "By percentage:"
+msgstr "Prosentin mukaan:"
+
+#: ../Pinta/Dialogs/ResizeCanvasDialog.cs:318
 #: ../Pinta/Dialogs/ResizeImageDialog.cs:156
 msgid "Maintain aspect ratio"
 msgstr "Säilytä kuvasuhde"
 
-#: ../Pinta/Dialogs/ResizeCanvasDialog.cs:348
+#: ../Pinta/Dialogs/ResizeCanvasDialog.cs:346
 msgid "Anchor:"
 msgstr "Ankkuri:"
 
-#: ../Pinta/Dialogs/VersionInformationTabPage.cs:44
+#: ../Pinta/Dialogs/VersionInformationTabPage.cs:47
 msgid "Title"
 msgstr "Nimi"
 
-#: ../Pinta/Dialogs/VersionInformationTabPage.cs:53
+#: ../Pinta/Dialogs/VersionInformationTabPage.cs:56
 msgid "Path"
 msgstr "Polku"
+
+#: ../Pinta/Dialogs/VersionInformationTabPage.cs:72
+msgid "Copy Version Info"
+msgstr "Kopioi versiotiedot"
 
 #: ../Pinta/Main.cs:57
 msgid "Show this message and exit."
@@ -2060,64 +2099,66 @@ msgstr "Käyttö: pinta [tiedostot]"
 msgid "Options: "
 msgstr "Asetukset: "
 
-#: ../Pinta/MainWindow.cs:309
+#: ../Pinta/MainWindow.cs:330
 msgid "_File"
 msgstr "_Tiedosto"
 
-#: ../Pinta/MainWindow.cs:310
+#: ../Pinta/MainWindow.cs:331
 msgid "_Edit"
 msgstr "_Muokkaa"
 
-#: ../Pinta/MainWindow.cs:312
+#: ../Pinta/MainWindow.cs:333
 msgid "_View"
 msgstr "_Näytä"
 
-#: ../Pinta/MainWindow.cs:315
+#: ../Pinta/MainWindow.cs:336
 msgid "_Image"
 msgstr "_Kuva"
 
-#: ../Pinta/MainWindow.cs:316
+#: ../Pinta/MainWindow.cs:337
 msgid "_Layers"
 msgstr "T_asot"
 
-#: ../Pinta/MainWindow.cs:317
+#: ../Pinta/MainWindow.cs:338
 msgid "_Adjustments"
 msgstr "_Säädöt"
 
-#: ../Pinta/MainWindow.cs:318
+#: ../Pinta/MainWindow.cs:339
 msgid "Effe_cts"
 msgstr "T_ehosteet"
 
-#: ../Pinta/MainWindow.cs:319
+#: ../Pinta/MainWindow.cs:340
 msgid "A_dd-ins"
 msgstr "A_dd-ins"
 
-#: ../Pinta/MainWindow.cs:321
+#: ../Pinta/MainWindow.cs:342
 msgid "_Window"
 msgstr "_Ikkuna"
 
-#: ../Pinta/MainWindow.cs:325
+#: ../Pinta/MainWindow.cs:346
 msgid "Tool Windows"
 msgstr "Työkaluikkunat"
 
-#: ../Pinta/MainWindow.cs:329
+#: ../Pinta/MainWindow.cs:350
 msgid "_Help"
 msgstr "_Ohje"
 
-#: ../Pinta/MainWindow.cs:551
+#: ../Pinta/MainWindow.cs:572
 msgid "Downloading Image"
-msgstr ""
+msgstr "Ladataan kuvaa"
 
-#: ../Pinta/MainWindow.cs:569
+#: ../Pinta/MainWindow.cs:590
 msgid "Download failed"
-msgstr ""
+msgstr "Lataus epäonnistui"
 
-#: ../Pinta/MainWindow.cs:570
+#: ../Pinta/MainWindow.cs:591
 #, csharp-format
 msgid ""
 "Unable to download image from {0}.\n"
 "Details: {1}"
 msgstr ""
+"Ei voitu ladata kuvaa osoitteesta {0}.\n"
+"Tiedot: {1}"
 
 #: ../Pinta/Options.cs:486
 msgid "OptionName"

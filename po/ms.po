@@ -7,16 +7,16 @@ msgid ""
 msgstr ""
 "Project-Id-Version: pinta\n"
 "Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
-"POT-Creation-Date: 2020-07-27 21:13-0400\n"
-"PO-Revision-Date: 2015-03-19 18:44+0000\n"
+"POT-Creation-Date: 2021-10-17 10:55-0400\n"
+"PO-Revision-Date: 2021-10-27 03:58+0000\n"
 "Last-Translator: abuyop <Unknown>\n"
 "Language-Team: Malay <ms@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Launchpad-Export-Date: 2020-08-04 20:56+0000\n"
-"X-Generator: Launchpad (build a24057fea7e4c6a98c0220d5f878da0f3c783699)\n"
+"X-Launchpad-Export-Date: 2021-11-12 20:36+0000\n"
+"X-Generator: Launchpad (build 57dd9ea1b48fdf744e285d99fb34fa0c21646cd0)\n"
 
 #: ../xdg/pinta.desktop.in.h:1
 msgid "Pinta"
@@ -36,7 +36,7 @@ msgstr "Penyunting Imej Pinta"
 
 #: ../xdg/pinta.desktop.in.h:5
 msgid "draw;drawing;paint;painting;graphics;raster;2d;"
-msgstr ""
+msgstr "lukis;lukisan;cat;grafik;raster;2d;"
 
 #: ../xdg/pinta.appdata.xml.in.h:1
 msgid ""
@@ -46,6 +46,12 @@ msgid ""
 "apply to your images, and also has the ability to create unlimited layers to "
 "help organize your creativity."
 msgstr ""
+"Pinta merupakan sebuah aplikasi menyunting, melukis dan mengecat imej yang "
+"ringkas tetapi dengan antara muka yang berguna. Pinta mempunyai sejumlah "
+"alatan melukis yang luas, termasuklah: bebas tangan, segi empat, bulatan dan "
+"garisan. Ia juga tersedia dengan 35 kesan yang boleh diterap kepada imej "
+"anda, serta berupaya mencipta lapisan-lapisan tanpa had yang dapat membantu "
+"pengurusan kreativiti anda."
 
 #: ../Pinta.Core/Actions/AddinActions.cs:40
 msgid "Add-in Manager"
@@ -73,19 +79,19 @@ msgid "Copy Merged"
 msgstr "Salin Bergabung"
 
 #: ../Pinta.Core/Actions/EditActions.cs:74
-#: ../Pinta.Core/Classes/Document.cs:780
+#: ../Pinta.Core/Classes/Document.cs:787
 #: ../Pinta.Core/HistoryItems/PasteHistoryItem.cs:43
 msgid "Paste"
 msgstr "Tampal"
 
 #: ../Pinta.Core/Actions/EditActions.cs:75
-#: ../Pinta.Core/Classes/Document.cs:776
+#: ../Pinta.Core/Classes/Document.cs:783
 msgid "Paste Into New Layer"
-msgstr "Tampal dalam Lapisan Baru"
+msgstr "Tampal dalam Lapisan Baharu"
 
 #: ../Pinta.Core/Actions/EditActions.cs:76
 msgid "Paste Into New Image"
-msgstr "Tampal ke Imej Baru"
+msgstr "Tampal ke Imej Baharu"
 
 #: ../Pinta.Core/Actions/EditActions.cs:77
 #: ../Pinta.Core/Actions/EditActions.cs:231
@@ -98,9 +104,9 @@ msgid "Fill Selection"
 msgstr "Isi Pemilihan"
 
 #: ../Pinta.Core/Actions/EditActions.cs:79
-#: ../Pinta.Core/Actions/EditActions.cs:421
+#: ../Pinta.Core/Actions/EditActions.cs:422
 msgid "Invert Selection"
-msgstr "Songsangkan Pemilihan"
+msgstr "Songsang Pemilihan"
 
 #: ../Pinta.Core/Actions/EditActions.cs:80
 #: ../Pinta.Core/Actions/EditActions.cs:200
@@ -117,13 +123,13 @@ msgid "Open..."
 msgstr "Buka..."
 
 #: ../Pinta.Core/Actions/EditActions.cs:84
-#: ../Pinta.Core/Actions/FileActions.cs:66
+#: ../Pinta.Core/Actions/FileActions.cs:68
 msgid "Save As..."
 msgstr "Simpan Sebagai..."
 
 #: ../Pinta.Core/Actions/EditActions.cs:85
 msgid "Reset to Default"
-msgstr "Tetap ke Lalai"
+msgstr "Tetap Semula ke Lalai"
 
 #: ../Pinta.Core/Actions/EditActions.cs:86
 msgid "Set Number of Colors"
@@ -138,57 +144,57 @@ msgstr "Palet"
 msgid "Deselect"
 msgstr "Nyahpilih"
 
-#: ../Pinta.Core/Actions/EditActions.cs:336
+#: ../Pinta.Core/Actions/EditActions.cs:337
 msgid "Open Palette File"
 msgstr "Buka Fail Palet"
 
-#: ../Pinta.Core/Actions/EditActions.cs:348
+#: ../Pinta.Core/Actions/EditActions.cs:349
 msgid "Palette files"
-msgstr ""
+msgstr "Fail palet"
 
-#: ../Pinta.Core/Actions/EditActions.cs:352
+#: ../Pinta.Core/Actions/EditActions.cs:353
 #: ../Pinta/Actions/File/OpenDocumentAction.cs:67
 msgid "All files"
-msgstr "Semua fail-fail"
+msgstr "Semua fail"
 
-#: ../Pinta.Core/Actions/EditActions.cs:373
+#: ../Pinta.Core/Actions/EditActions.cs:374
 msgid "Save Palette File"
 msgstr "Simpan Fail Palet"
 
 #: ../Pinta.Core/Actions/FileActions.cs:54
 msgid "New..."
-msgstr "Baru..."
+msgstr "Baharu..."
 
 #: ../Pinta.Core/Actions/FileActions.cs:55
 msgid "New Screenshot..."
-msgstr "Cekupan Skrin Baru..."
+msgstr "Tangkap Layar Baharu..."
 
 #: ../Pinta.Core/Actions/FileActions.cs:57
 msgid "Open Recent"
-msgstr "Buka Terkini"
+msgstr "Buka Terbaharu"
 
-#: ../Pinta.Core/Actions/FileActions.cs:64
+#: ../Pinta.Core/Actions/FileActions.cs:66
 #: ../Pinta.Docking/DockLibrary/DockItemTitleTab.cs:175
 msgid "Close"
 msgstr "Tutup"
 
-#: ../Pinta.Core/Actions/FileActions.cs:65
+#: ../Pinta.Core/Actions/FileActions.cs:67
 msgid "Save"
 msgstr "Simpan"
 
-#: ../Pinta.Core/Actions/FileActions.cs:67
+#: ../Pinta.Core/Actions/FileActions.cs:69
 msgid "Print"
 msgstr "Cetak"
 
-#: ../Pinta.Core/Actions/FileActions.cs:68
-msgid "Quit"
-msgstr "Berhenti"
-
 #: ../Pinta.Core/Actions/FileActions.cs:70
-msgid "New"
-msgstr "Baru"
+msgid "Quit"
+msgstr "Keluar"
 
-#: ../Pinta.Core/Actions/FileActions.cs:71
+#: ../Pinta.Core/Actions/FileActions.cs:72
+msgid "New"
+msgstr "Baharu"
+
+#: ../Pinta.Core/Actions/FileActions.cs:73
 msgid "Open"
 msgstr "Buka"
 
@@ -198,28 +204,28 @@ msgstr "Kandungan"
 
 #: ../Pinta.Core/Actions/HelpActions.cs:53
 msgid "Pinta Website"
-msgstr "Laman web Pinta"
+msgstr "Tapak Sesawang Pinta"
 
 #: ../Pinta.Core/Actions/HelpActions.cs:54
 msgid "File a Bug"
-msgstr "Adukan Ralat"
+msgstr "Laporkan Pepijat"
 
 #: ../Pinta.Core/Actions/HelpActions.cs:55
 msgid "Translate This Application"
 msgstr "Terjemah Aplikasi Ini"
 
-#: ../Pinta.Core/Actions/HelpActions.cs:56 ../Pinta/MainWindow.cs:347
+#: ../Pinta.Core/Actions/HelpActions.cs:56 ../Pinta/MainWindow.cs:368
 msgid "About"
 msgstr "Perihal"
 
 #: ../Pinta.Core/Actions/ImageActions.cs:60
-#: ../Pinta.Core/Actions/ImageActions.cs:291
+#: ../Pinta.Core/Actions/ImageActions.cs:284
 msgid "Crop to Selection"
 msgstr "Kerat ke Pemilihan"
 
 #: ../Pinta.Core/Actions/ImageActions.cs:61
 msgid "Auto Crop"
-msgstr "Kerat-Sendiri"
+msgstr "Auto Kerat"
 
 #: ../Pinta.Core/Actions/ImageActions.cs:62
 msgid "Resize Image..."
@@ -242,28 +248,28 @@ msgstr "Kalih Menegak"
 #: ../Pinta.Core/Actions/ImageActions.cs:66
 #: ../Pinta.Core/HistoryItems/InvertHistoryItem.cs:62
 msgid "Rotate 90° Clockwise"
-msgstr "Pusing 90° Arah Jam"
+msgstr "Putar 90° Ikut Jam"
 
 #: ../Pinta.Core/Actions/ImageActions.cs:67
 #: ../Pinta.Core/HistoryItems/InvertHistoryItem.cs:66
 msgid "Rotate 90° Counter-Clockwise"
-msgstr "Pusing 90° Lawan Arah Jam"
+msgstr "Putar 90° Lawan Jam"
 
 #: ../Pinta.Core/Actions/ImageActions.cs:68
 #: ../Pinta.Core/HistoryItems/InvertHistoryItem.cs:50
 msgid "Rotate 180°"
-msgstr "Pusing 180°"
+msgstr "Putar 180°"
 
 #: ../Pinta.Core/Actions/ImageActions.cs:69
 #: ../Pinta.Core/Actions/ImageActions.cs:146
 msgid "Flatten"
-msgstr "Meratakan"
+msgstr "Ratakan"
 
 #: ../Pinta.Core/Actions/LayerActions.cs:65
 #: ../Pinta.Core/Actions/LayerActions.cs:292
-#: ../Pinta.Core/Classes/Document.cs:839
+#: ../Pinta.Core/Classes/Document.cs:846
 msgid "Add New Layer"
-msgstr "Tambah Lapisan Baru"
+msgstr "Tambah Lapisan Baharu"
 
 #: ../Pinta.Core/Actions/LayerActions.cs:66
 #: ../Pinta.Core/Actions/LayerActions.cs:275
@@ -273,12 +279,12 @@ msgstr "Padam Lapisan"
 #: ../Pinta.Core/Actions/LayerActions.cs:67
 #: ../Pinta.Core/Actions/LayerActions.cs:266
 msgid "Duplicate Layer"
-msgstr "Gandakan Lapisan"
+msgstr "Duplikasi Lapisan"
 
 #: ../Pinta.Core/Actions/LayerActions.cs:68
 #: ../Pinta.Core/Actions/LayerActions.cs:244
 msgid "Merge Layer Down"
-msgstr "Gabungkan Lapisan Bawah"
+msgstr "Gabung Lapisan Bawah"
 
 #: ../Pinta.Core/Actions/LayerActions.cs:69
 msgid "Import from File..."
@@ -300,12 +306,12 @@ msgstr "Alih Lapisan Ke bawah"
 
 #: ../Pinta.Core/Actions/LayerActions.cs:75
 msgid "Layer Properties..."
-msgstr "Ciri-ciri Lapisan..."
+msgstr "Sifat Lapisan..."
 
 #: ../Pinta.Core/Actions/LayerActions.cs:157
 #: ../Pinta/Actions/File/OpenDocumentAction.cs:50
 msgid "Open Image File"
-msgstr "Buka Fail Gambar"
+msgstr "Buka Fail Imej"
 
 #: ../Pinta.Core/Actions/LayerActions.cs:185
 msgid "Import From File"
@@ -321,7 +327,7 @@ msgstr "Zum Keluar"
 
 #: ../Pinta.Core/Actions/ViewActions.cs:79
 msgid "Best Fit"
-msgstr "Sesuai Muat"
+msgstr "Suai Muat"
 
 #: ../Pinta.Core/Actions/ViewActions.cs:80
 msgid "Zoom to Selection"
@@ -329,7 +335,7 @@ msgstr "Zum ke Pemilihan"
 
 #: ../Pinta.Core/Actions/ViewActions.cs:81
 msgid "Normal Size"
-msgstr "Saiz Normal"
+msgstr "Saiz Biasa"
 
 #: ../Pinta.Core/Actions/ViewActions.cs:82
 msgid "Toolbar"
@@ -364,19 +370,19 @@ msgid "Fullscreen"
 msgstr "Skrin Penuh"
 
 #: ../Pinta.Core/Actions/ViewActions.cs:115
-#: ../Pinta.Core/Actions/ViewActions.cs:277
+#: ../Pinta.Core/Actions/ViewActions.cs:284
 #: ../Pinta.Core/Classes/DocumentWorkspace.cs:320
 #: ../Pinta.Core/Classes/DocumentWorkspace.cs:328
 msgid "Window"
 msgstr "Tetingkap"
 
-#: ../Pinta.Core/Actions/ViewActions.cs:159
+#: ../Pinta.Core/Actions/ViewActions.cs:163
 msgid "Ruler Units"
 msgstr "Unit Pembaris"
 
 #. Translators: This specifies the format of the zoom percentage choices
 #. in the toolbar.
-#: ../Pinta.Core/Actions/ViewActions.cs:258
+#: ../Pinta.Core/Actions/ViewActions.cs:265
 #, csharp-format
 msgid "{0}%"
 msgstr "{0}%"
@@ -389,77 +395,89 @@ msgstr "Simpan Semua"
 msgid "Close All"
 msgstr "Tutup Semua"
 
-#: ../Pinta.Core/Classes/BaseTool.cs:261
+#: ../Pinta.Core/Classes/BaseTool.cs:262
 msgid "Tool"
 msgstr "Alat"
 
-#: ../Pinta.Core/Classes/BaseTool.cs:333
+#: ../Pinta.Core/Classes/BaseTool.cs:334
+#: ../Pinta.Gui.Widgets/Widgets/ColorPaletteWidget.cs:316
 msgid "Shortcut key"
 msgstr "Kekunci pintasan"
 
-#: ../Pinta.Core/Classes/BaseTool.cs:445
+#: ../Pinta.Core/Classes/BaseTool.cs:446
 msgid "Normal Blending"
 msgstr "Pengadunan Normal"
 
-#: ../Pinta.Core/Classes/BaseTool.cs:446
+#: ../Pinta.Core/Classes/BaseTool.cs:447
 msgid "Overwrite"
 msgstr "Tulis-Ganti"
 
-#: ../Pinta.Core/Classes/BaseTool.cs:460
+#: ../Pinta.Core/Classes/BaseTool.cs:461
 msgid "Antialiasing On"
 msgstr "Antialias Hidup"
 
-#: ../Pinta.Core/Classes/BaseTool.cs:461
+#: ../Pinta.Core/Classes/BaseTool.cs:462
 msgid "Antialiasing Off"
 msgstr "Antialias Mati"
 
-#: ../Pinta.Core/Classes/Document.cs:291 ../Pinta.Core/Classes/Document.cs:296
+#: ../Pinta.Core/Classes/Document.cs:296 ../Pinta.Core/Classes/Document.cs:301
 #: ../Pinta.Tools/Tools/ColorPickerTool.cs:135
 msgid "Layer"
 msgstr "Lapisan"
 
-#: ../Pinta.Core/Classes/Document.cs:378
+#: ../Pinta.Core/Classes/Document.cs:384
 msgid "copy"
 msgstr "salin"
 
-#: ../Pinta.Core/Classes/Document.cs:654
+#: ../Pinta.Core/Classes/Document.cs:661
 #: ../Pinta/Dialogs/ResizeCanvasDialog.cs:56
 msgid "Resize Canvas"
-msgstr "Ubah Saiz Kanvas"
+msgstr "Saiz Semula Kanvas"
 
-#: ../Pinta.Core/Classes/Document.cs:855
+#: ../Pinta.Core/Classes/Document.cs:862
 #: ../Pinta.Core/HistoryItems/FinishPixelsHistoryItem.cs:65
 #: ../Pinta.Core/HistoryItems/PasteHistoryItem.cs:65
 #: ../Pinta.Tools/Tools/MoveSelectedTool.cs:43
 msgid "Move Selected Pixels"
-msgstr "Alih Piksel Pilihan"
+msgstr "Alih Piksel Terpilih"
 
-#: ../Pinta.Core/Classes/Document.cs:871
+#: ../Pinta.Core/Classes/Document.cs:878
 msgid "Image larger than canvas"
-msgstr "Imej lebih besar dari kanvas"
+msgstr "Imej lebih besar berbanding kanvas"
 
-#: ../Pinta.Core/Classes/Document.cs:872
+#: ../Pinta.Core/Classes/Document.cs:879
 msgid ""
 "The image being pasted is larger than the canvas size. What would you like "
 "to do?"
 msgstr ""
-"Imej yang ditampal lebih besar dari saiz kanvas. Apa yang anda ingin lakukan?"
+"Imej ditampal lebih besar berbanding saiz kanvas. Apa yang anda mahu lakukan?"
 
-#: ../Pinta.Core/Classes/Document.cs:876
+#: ../Pinta.Core/Classes/Document.cs:883
 msgid "Expand canvas"
 msgstr "Kembangkan kanvas"
 
-#: ../Pinta.Core/Classes/Document.cs:877
+#: ../Pinta.Core/Classes/Document.cs:884
 msgid "Don't change canvas size"
 msgstr "Jangan ubah saiz kanvas"
 
-#: ../Pinta.Core/Classes/Document.cs:890
+#: ../Pinta.Core/Classes/Document.cs:897
 msgid "Image cannot be pasted"
 msgstr "Imej tidak boleh ditampal"
 
-#: ../Pinta.Core/Classes/Document.cs:891
+#: ../Pinta.Core/Classes/Document.cs:898
 msgid "The clipboard does not contain an image."
-msgstr "Papan keratan tidak mengandungi imej."
+msgstr "Papan keratan tidak mengandungi satu imej."
+
+#: ../Pinta.Core/Classes/Palette.cs:191
+#: ../Pinta.Core/Managers/WorkspaceManager.cs:351
+#: ../Pinta.Core/Managers/WorkspaceManager.cs:360
+#, csharp-format
+msgid "Could not open file: {0}"
+msgstr "Tidak dapat buka fail: {0}"
+
+#: ../Pinta.Core/Classes/Palette.cs:192
+msgid "Pinta supports the following palette formats:"
+msgstr "Pinta menyokong format palet berikut:"
 
 #: ../Pinta.Core/Classes/SelectionModeHandler.cs:46
 msgid "Replace"
@@ -479,7 +497,7 @@ msgstr "Xor (Ctrl + Klik Kanan)"
 
 #: ../Pinta.Core/Classes/SelectionModeHandler.cs:50
 msgid "Intersect (Alt + Left Click)"
-msgstr ""
+msgstr "Silang (Alt + Klik Kiri)"
 
 #: ../Pinta.Core/Classes/SelectionModeHandler.cs:57
 msgid " Selection Mode: "
@@ -529,20 +547,20 @@ msgstr "Xor"
 
 #: ../Pinta.Core/Effects/UserBlendOps.cs:44
 msgid "Hard Light"
-msgstr ""
+msgstr "Cahaya Terang"
 
 #: ../Pinta.Core/Effects/UserBlendOps.cs:45
 msgid "Soft Light"
-msgstr ""
+msgstr "Cahaya Lembut"
 
 #: ../Pinta.Core/Effects/UserBlendOps.cs:46
 msgid "Color"
-msgstr ""
+msgstr "Warna"
 
 #: ../Pinta.Core/Effects/UserBlendOps.cs:47
 #: ../Pinta.Effects/Dialogs/Effects.CurvesDialog.cs:437
 msgid "Luminosity"
-msgstr "Luminans"
+msgstr "Kekilauan"
 
 #: ../Pinta.Core/Effects/UserBlendOps.cs:48
 #: ../Pinta.Effects/Adjustments/HueSaturationEffect.cs:67
@@ -560,15 +578,15 @@ msgstr "Piksel Selesai"
 
 #: ../Pinta.Core/HistoryItems/InvertHistoryItem.cs:54
 msgid "Flip Image Horizontal"
-msgstr "Pusing Mendatar"
+msgstr "Kalih Imej Secara Mengufuk"
 
 #: ../Pinta.Core/HistoryItems/InvertHistoryItem.cs:58
 msgid "Flip Image Vertical"
-msgstr "Pusing Menegak"
+msgstr "Kalih Imej Secara Menegak"
 
 #: ../Pinta.Core/HistoryItems/InvertHistoryItem.cs:79
 msgid "Flip Layer Horizontal"
-msgstr "Kalih Lapisan Secara Melintang"
+msgstr "Kalih Lapisan Secara Mengufuk"
 
 #: ../Pinta.Core/HistoryItems/InvertHistoryItem.cs:83
 msgid "Flip Layer Vertical"
@@ -577,7 +595,7 @@ msgstr "Kalih Lapisan Secara Menegak"
 #: ../Pinta.Core/HistoryItems/ResizeHistoryItem.cs:43
 #: ../Pinta/Dialogs/ResizeImageDialog.cs:45
 msgid "Resize Image"
-msgstr "Ubah Saiz Gambar"
+msgstr "Saiz Semula Imej"
 
 #: ../Pinta.Core/ImageFormats/FormatDescriptor.cs:93
 #, csharp-format
@@ -591,17 +609,17 @@ msgstr "..."
 
 #: ../Pinta.Core/Managers/LivePreviewManager.cs:222
 msgid "Rendering Effect"
-msgstr "Kesan Penerapan"
+msgstr "Kesan Pengemasgabungan"
 
-#: ../Pinta.Core/Managers/ToolManager.cs:234
-#: ../Pinta.Core/Managers/ToolManager.cs:236
+#: ../Pinta.Core/Managers/ToolManager.cs:258
+#: ../Pinta.Core/Managers/ToolManager.cs:260
 msgid "No tool selected."
 msgstr "Tiada alat dipilih."
 
 #: ../Pinta.Core/Managers/WorkspaceManager.cs:100
 #, csharp-format
 msgid "Unsaved Image {0}"
-msgstr "Gambar Belum Simpan {0}"
+msgstr "Imej Belum Simpan {0}"
 
 #: ../Pinta.Core/Managers/WorkspaceManager.cs:157
 msgid "Background"
@@ -610,38 +628,43 @@ msgstr "Latar Belakang"
 #: ../Pinta.Core/Managers/WorkspaceManager.cs:166
 #: ../Pinta/Dialogs/NewImageDialog.cs:68
 msgid "New Image"
-msgstr "Gambar Baru"
+msgstr "Imej Baharu"
 
-#: ../Pinta.Core/Managers/WorkspaceManager.cs:186
+#: ../Pinta.Core/Managers/WorkspaceManager.cs:190
 msgid "Unsupported file format"
 msgstr "Format fail tidak disokong"
 
-#: ../Pinta.Core/Managers/WorkspaceManager.cs:191
+#: ../Pinta.Core/Managers/WorkspaceManager.cs:195
 msgid "Open Image"
-msgstr "Buka Gambar"
+msgstr "Buka Imej"
 
-#: ../Pinta.Core/Managers/WorkspaceManager.cs:204
-msgid "Permission denied"
-msgstr "Keizinan dinafikan"
+#: ../Pinta.Core/Managers/WorkspaceManager.cs:361
+msgid "Pinta supports the following file formats:"
+msgstr "Pinta menyokong format fail berikut:"
 
-#: ../Pinta.Core/Managers/WorkspaceManager.cs:345
+#: ../Pinta.Core/Managers/WorkspaceManager.cs:378
+msgid "Failed to open image"
+msgstr "Gagal membuka imej"
+
+#. Translators: {0} is the name of a file that the user does not have permission to open.
+#: ../Pinta.Core/Managers/WorkspaceManager.cs:380
 #, csharp-format
-msgid "Could not open file: {0}"
-msgstr "Gagal buka fail: {0}"
+msgid "You do not have access to '{0}'."
+msgstr "Anda tidak capaian ke '{0}'."
 
 #. Translators: {0} is the palette format (e.g. "GIMP") and {1} is a list of file extensions.
 #: ../Pinta.Core/PaletteFormats/PaletteDescriptor.cs:67
 #, csharp-format
 msgid "{0} palette ({1})"
-msgstr ""
+msgstr "Palet {0} ({1})"
 
 #: ../Pinta.Docking/DockLibrary/DockItem.cs:541
 msgid "Hide"
-msgstr "Sorok"
+msgstr "Sembunyi"
 
 #: ../Pinta.Docking/DockLibrary/DockItem.cs:550
 msgid "Minimize"
-msgstr "Minimumkan"
+msgstr "Minimum"
 
 #: ../Pinta.Docking/DockLibrary/DockItem.cs:557
 #: ../Pinta.Docking/DockLibrary/DockItemTitleTab.cs:250
@@ -650,7 +673,7 @@ msgstr "Labuh"
 
 #: ../Pinta.Docking/DockLibrary/DockItem.cs:564
 msgid "Undock"
-msgstr "Tanggalkan"
+msgstr "Tanggal"
 
 #: ../Pinta.Docking/DockLibrary/DockItemTitleTab.cs:165
 #: ../Pinta.Docking/DockLibrary/DockItemTitleTab.cs:254
@@ -659,11 +682,11 @@ msgstr "Auto Sembunyi"
 
 #: ../Pinta.Effects/Adjustments/AutoLevelEffect.cs:25
 msgid "Auto Level"
-msgstr "Aras Automatik"
+msgstr "Auto Aras"
 
 #: ../Pinta.Effects/Adjustments/BlackAndWhiteEffect.cs:25
 msgid "Black and White"
-msgstr "Hitam Putih"
+msgstr "Hitam dan Putih"
 
 #: ../Pinta.Effects/Adjustments/BrightnessContrastEffect.cs:29
 msgid "Brightness / Contrast"
@@ -686,7 +709,7 @@ msgstr "Lengkung"
 
 #: ../Pinta.Effects/Adjustments/HueSaturationEffect.cs:26
 msgid "Hue / Saturation"
-msgstr "Hue / Ketepuan"
+msgstr "Rona / Ketepuan"
 
 #: ../Pinta.Effects/Adjustments/HueSaturationEffect.cs:73
 msgid "Lightness"
@@ -695,11 +718,11 @@ msgstr "Kecerahan"
 #: ../Pinta.Effects/Adjustments/InvertColorsEffect.cs:25
 #: ../Pinta.Effects/Effects/MandelbrotFractalEffect.cs:167
 msgid "Invert Colors"
-msgstr "Songsangkan Warna"
+msgstr "Songsang Warna"
 
 #: ../Pinta.Effects/Adjustments/LevelsEffect.cs:23
 msgid "Levels"
-msgstr "Paras-paras"
+msgstr "Aras"
 
 #: ../Pinta.Effects/Adjustments/PosterizeEffect.cs:25
 #: ../Pinta.Effects/Dialogs/Effects.PosterizeDialog.cs:56
@@ -739,12 +762,12 @@ msgstr "Tetap semula"
 
 #: ../Pinta.Effects/Dialogs/Effects.CurvesDialog.cs:471
 msgid "Tip: Right-click to remove control points."
-msgstr "Klu: Klik kanan untuk buang titik kawalan"
+msgstr "Petua: Klik kanan untuk buang titik-titik kawalan."
 
 #: ../Pinta.Effects/Dialogs/Effects.LevelsDialog.cs:53
 #: ../Pinta.Effects/gtk-gui/Pinta.Effects.LevelsDialog.cs:59
 msgid "Levels Adjustment"
-msgstr "Pelarasan Paras"
+msgstr "Pelarasan Aras"
 
 #: ../Pinta.Effects/Dialogs/Effects.PosterizeDialog.cs:109
 #: ../Pinta.Effects/gtk-gui/Pinta.Effects.LevelsDialog.cs:434
@@ -819,7 +842,7 @@ msgstr "Awan"
 #: ../Pinta.Effects/Effects/JuliaFractalEffect.cs:33
 #: ../Pinta.Effects/Effects/MandelbrotFractalEffect.cs:33
 msgid "Render"
-msgstr "Jadikan"
+msgstr "Kemas Gabung"
 
 #: ../Pinta.Effects/Effects/CloudsEffect.cs:205
 msgid "Scale"
@@ -835,7 +858,7 @@ msgstr "Benih"
 
 #: ../Pinta.Effects/Effects/EdgeDetectEffect.cs:28
 msgid "Edge Detect"
-msgstr "Kesan Tepi"
+msgstr "Kesan Pinggir"
 
 #: ../Pinta.Effects/Effects/EdgeDetectEffect.cs:36
 #: ../Pinta.Effects/Effects/EmbossEffect.cs:33
@@ -862,7 +885,7 @@ msgstr "Cetak Timbul"
 
 #: ../Pinta.Effects/Effects/FragmentEffect.cs:25
 msgid "Fragment"
-msgstr "Serpihan"
+msgstr "Cebisan"
 
 #: ../Pinta.Effects/Effects/FragmentEffect.cs:33
 #: ../Pinta.Effects/Effects/GaussianBlurEffect.cs:33
@@ -889,11 +912,11 @@ msgstr "Putaran"
 
 #: ../Pinta.Effects/Effects/FrostedGlassEffect.cs:25
 msgid "Frosted Glass"
-msgstr "Gelas Beku"
+msgstr "Kaca Berkabut"
 
 #: ../Pinta.Effects/Effects/GaussianBlurEffect.cs:25
 msgid "Gaussian Blur"
-msgstr "Kabur Gaussian"
+msgstr "Kabur Gauss"
 
 #: ../Pinta.Effects/Effects/GaussianBlurEffect.cs:264
 #: ../Pinta.Effects/Effects/GlowEffect.cs:80
@@ -906,7 +929,7 @@ msgstr "Jejari"
 
 #: ../Pinta.Effects/Effects/GlowEffect.cs:30
 msgid "Glow"
-msgstr "Bersinar"
+msgstr "Teja"
 
 #: ../Pinta.Effects/Effects/GlowEffect.cs:38
 #: ../Pinta.Effects/Effects/RedEyeRemoveEffect.cs:36
@@ -923,11 +946,11 @@ msgstr "Lakaran Dakwat"
 #: ../Pinta.Effects/Effects/OilPaintingEffect.cs:33
 #: ../Pinta.Effects/Effects/PencilSketchEffect.cs:40
 msgid "Artistic"
-msgstr "Artistik"
+msgstr "Seni"
 
 #: ../Pinta.Effects/Effects/InkSketchEffect.cs:165
 msgid "Ink Outline"
-msgstr "Garis Luar Dakwat"
+msgstr "Rangka Dakwat"
 
 #: ../Pinta.Effects/Effects/InkSketchEffect.cs:168
 msgid "Coloring"
@@ -970,7 +993,7 @@ msgstr "Persentil"
 
 #: ../Pinta.Effects/Effects/MotionBlurEffect.cs:25
 msgid "Motion Blur"
-msgstr "Kabur Gerakan"
+msgstr "Kabur Pergerakan"
 
 #: ../Pinta.Effects/Effects/MotionBlurEffect.cs:117
 msgid "Centered"
@@ -991,7 +1014,7 @@ msgstr "Kekasaran"
 #: ../Pinta.Effects/Effects/OutlineEffect.cs:28
 #: ../Pinta.Tools/Tools/TextTool.cs:250
 msgid "Outline"
-msgstr "Garis Luar"
+msgstr "Rangka"
 
 #: ../Pinta.Effects/Effects/OutlineEffect.cs:142
 msgid "Thickness"
@@ -1049,8 +1072,8 @@ msgstr "Peratus Ketepuan"
 #: ../Pinta.Effects/Effects/RedEyeRemoveEffect.cs:79
 msgid "Hint: For best results, first use selection tools to select each eye."
 msgstr ""
-"Pembayang: Untuk hasil yang terbaik, mula-mula sila gunakan alat pemilihan "
-"untuk memilih setiap mata."
+"Pembayang: Untuk hasil terbaik, mula-mula guna alat pemilihan untuk memilih "
+"setiap mata."
 
 #: ../Pinta.Effects/Effects/ReduceNoiseEffect.cs:28
 msgid "Reduce Noise"
@@ -1058,7 +1081,7 @@ msgstr "Kurangkan Hingar"
 
 #: ../Pinta.Effects/Effects/ReduceNoiseEffect.cs:97
 msgid "Strength"
-msgstr "Kelembutan"
+msgstr "Kekuatan"
 
 #: ../Pinta.Effects/Effects/ReliefEffect.cs:44
 msgid "Relief"
@@ -1086,7 +1109,7 @@ msgstr "Kehangatan"
 
 #: ../Pinta.Effects/Effects/TileEffect.cs:25
 msgid "Tile Reflection"
-msgstr "Pantulan Genting"
+msgstr "Pantulan Jubin"
 
 #: ../Pinta.Effects/Effects/TileEffect.cs:140
 msgid "Tile Size"
@@ -1094,7 +1117,7 @@ msgstr "Saiz Jubin"
 
 #: ../Pinta.Effects/Effects/TwistEffect.cs:25
 msgid "Twist"
-msgstr "Putar"
+msgstr "Pulas"
 
 #: ../Pinta.Effects/Effects/TwistEffect.cs:133
 msgid "Antialias"
@@ -1167,29 +1190,29 @@ msgstr "Pilih Warna Utama"
 
 #: ../Pinta.Gui.Widgets/Widgets/ColorPaletteWidget.cs:121
 msgid "Choose Secondary Color"
-msgstr "Pilih Warna Kedua"
+msgstr "Pilih Warna Sekunder"
 
 #: ../Pinta.Gui.Widgets/Widgets/ColorPaletteWidget.cs:145
 msgid "Choose Palette Color"
 msgstr "Pilih Warna Palet"
 
-#: ../Pinta.Gui.Widgets/Widgets/ColorPaletteWidget.cs:313
-msgid "Click to switch between primary and secondary color."
-msgstr "Klik untuk tukar diantara warna utama dan sekunder."
-
 #: ../Pinta.Gui.Widgets/Widgets/ColorPaletteWidget.cs:315
+msgid "Click to switch between primary and secondary color."
+msgstr "Klik untuk tukar antara warna utama dengan sekunder."
+
+#: ../Pinta.Gui.Widgets/Widgets/ColorPaletteWidget.cs:320
 msgid "Click to reset primary and secondary color."
 msgstr "Klik untuk tetap semula warna utama dan sekunder."
 
-#: ../Pinta.Gui.Widgets/Widgets/ColorPaletteWidget.cs:317
+#: ../Pinta.Gui.Widgets/Widgets/ColorPaletteWidget.cs:322
 msgid "Click to select primary color."
 msgstr "Klik untuk pilih warna utama."
 
-#: ../Pinta.Gui.Widgets/Widgets/ColorPaletteWidget.cs:319
+#: ../Pinta.Gui.Widgets/Widgets/ColorPaletteWidget.cs:324
 msgid "Click to select secondary color."
 msgstr "Klik untuk pilih warna sekunder."
 
-#: ../Pinta.Gui.Widgets/Widgets/ColorPaletteWidget.cs:321
+#: ../Pinta.Gui.Widgets/Widgets/ColorPaletteWidget.cs:326
 msgid ""
 "Left click to set primary color. Right click to set secondary color. Middle "
 "click to choose palette color."
@@ -1207,7 +1230,7 @@ msgstr "Benih Semula"
 
 #: ../Pinta.Gui.Widgets/Widgets/Layers/LayersListWidget.cs:244
 msgid "Layer Shown"
-msgstr "Lapisan Dipaparkan"
+msgstr "Lapisan Ditunjukkan"
 
 #: ../Pinta.Gui.Widgets/Widgets/Layers/LayersListWidget.cs:244
 msgid "Layer Hidden"
@@ -1223,7 +1246,7 @@ msgstr "Grid"
 
 #: ../Pinta.Tools/Brushes/SplatterBrush.cs:37
 msgid "Splatter"
-msgstr "Splatter"
+msgstr "Percikan"
 
 #: ../Pinta.Tools/Brushes/SquaresBrush.cs:39
 msgid "Squares"
@@ -1243,19 +1266,19 @@ msgstr "Saiz"
 
 #: ../Pinta.Tools/Editable/EditEngines/ArrowedEditEngine.cs:357
 msgid "Decrease arrow size"
-msgstr "Kurangkan saiz anak panah"
+msgstr "Kecilkan saiz anak panah"
 
 #: ../Pinta.Tools/Editable/EditEngines/ArrowedEditEngine.cs:424
 msgid "Increase arrow size"
-msgstr "Tingkatkan saiz anak panah"
+msgstr "Besarkan saiz anak panah"
 
 #: ../Pinta.Tools/Editable/EditEngines/ArrowedEditEngine.cs:440
 msgid "Decrease angle offset"
-msgstr "Kurangkan ofset sudut"
+msgstr "Kecilkan ofset sudut"
 
 #: ../Pinta.Tools/Editable/EditEngines/ArrowedEditEngine.cs:503
 msgid "Increase angle offset"
-msgstr "Tingkatkan ofset sudut"
+msgstr "Besarkan ofset sudut"
 
 #: ../Pinta.Tools/Editable/EditEngines/ArrowedEditEngine.cs:514
 msgid "Length"
@@ -1263,11 +1286,11 @@ msgstr "Panjang"
 
 #: ../Pinta.Tools/Editable/EditEngines/ArrowedEditEngine.cs:519
 msgid "Decrease length offset"
-msgstr "Kurangkan ofset panjang"
+msgstr "Kecilkan ofset panjang"
 
 #: ../Pinta.Tools/Editable/EditEngines/ArrowedEditEngine.cs:582
 msgid "Increase length offset"
-msgstr "Tingkatkan ofset panjang"
+msgstr "Besarkan ofset panjang"
 
 #: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:296
 #: ../Pinta.Tools/Tools/BaseBrushTool.cs:76
@@ -1279,13 +1302,13 @@ msgstr "Lebar Berus"
 #: ../Pinta.Tools/Tools/BaseBrushTool.cs:81
 #: ../Pinta.Tools/Tools/SelectShapeTool.cs:104
 msgid "Decrease brush size"
-msgstr "Kurangkan saiz berus"
+msgstr "Kecilkan saiz berus"
 
 #: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:330
 #: ../Pinta.Tools/Tools/BaseBrushTool.cs:95
 #: ../Pinta.Tools/Tools/SelectShapeTool.cs:118
 msgid "Increase brush size"
-msgstr "Tingkatkan saiz berus"
+msgstr "Besarkan saiz berus"
 
 #: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:342
 #: ../Pinta.Tools/Tools/FreeformShapeTool.cs:76
@@ -1297,7 +1320,7 @@ msgstr "Gaya Isi"
 #: ../Pinta.Tools/Tools/FreeformShapeTool.cs:83
 #: ../Pinta.Tools/Tools/SelectShapeTool.cs:138
 msgid "Outline Shape"
-msgstr "Bentuk Garis Luar"
+msgstr "Bentuk Rangka"
 
 #: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:351
 #: ../Pinta.Tools/Tools/FreeformShapeTool.cs:84
@@ -1309,7 +1332,7 @@ msgstr "Bentuk Isi"
 #: ../Pinta.Tools/Tools/FreeformShapeTool.cs:85
 #: ../Pinta.Tools/Tools/SelectShapeTool.cs:140
 msgid "Fill and Outline Shape"
-msgstr "Isi dan Bentuk Garis Luar"
+msgstr "IBentuk Rangka dan Berisi"
 
 #: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:363
 msgid "Shape Type"
@@ -1339,11 +1362,11 @@ msgstr "Jenis Bentuk Berubah"
 
 #: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:522
 msgid "Point Deleted"
-msgstr "Titik Dipadam"
+msgstr "Titik Terpadam"
 
 #: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:539
 msgid "Deleted"
-msgstr "Dipadam"
+msgstr "Dipadamkan"
 
 #: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:588
 #: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:884
@@ -1356,7 +1379,7 @@ msgstr "Ditambah"
 
 #: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:1014
 msgid "Modified"
-msgstr "Diubahsuai"
+msgstr "Diubah suai"
 
 #: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:1266
 #: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:1675
@@ -1377,11 +1400,11 @@ msgstr "Bentuk Garis Bundar"
 
 #: ../Pinta.Tools/Editable/EditEngines/RoundedLineEditEngine.cs:131
 msgid "Decrease shape's corner radius"
-msgstr "Kurangkan radius bucu bentuk"
+msgstr "Kecilkan jejari bucu bentuk"
 
 #: ../Pinta.Tools/Editable/EditEngines/RoundedLineEditEngine.cs:154
 msgid "Increase shape's corner radius"
-msgstr "Tingkatkan radius bucu bentuk"
+msgstr "Besarkan jejari bucu bentuk"
 
 #: ../Pinta.Tools/Tools/CloneStampTool.cs:42
 msgid "Clone Stamp"
@@ -1389,7 +1412,7 @@ msgstr "Setem Klon"
 
 #: ../Pinta.Tools/Tools/CloneStampTool.cs:47
 msgid "Ctrl-left click to set origin, left click to paint."
-msgstr "Ctrl+klik kiri untuk tetapkan asalan, klik kiri untuk cat"
+msgstr "Ctrl+klik kiri untuk tetapkan asalan, klik kiri untuk cat."
 
 #: ../Pinta.Tools/Tools/ColorPickerTool.cs:63
 msgid "Color Picker"
@@ -1448,7 +1471,7 @@ msgstr "Tukar ke alat Pensel"
 #: ../Pinta.Tools/Tools/ColorPickerTool.cs:209
 #: ../Pinta.Tools/Tools/PencilTool.cs:50
 msgid "Pencil"
-msgstr "Pensil"
+msgstr "Pensel"
 
 #: ../Pinta.Tools/Tools/EllipseSelectTool.cs:37
 msgid "Ellipse Select"
@@ -1459,8 +1482,8 @@ msgid ""
 "Click and drag to draw an elliptical selection. Hold Shift to constrain to a "
 "circle."
 msgstr ""
-"Klik dan seret untuk lukis pemilihan eliptik. Tahan Shift untuk kekang "
-"menjadi bulatan."
+"Klik dan seret untuk lukis pemilihan eliptik. Tahan Shift untuk dikekang "
+"menjadi satu bulatan."
 
 #: ../Pinta.Tools/Tools/EllipseTool.cs:43
 #: ../Pinta.Tools/Tools/LineCurveTool.cs:46
@@ -1510,7 +1533,7 @@ msgstr "Jenis"
 
 #: ../Pinta.Tools/Tools/EraserTool.cs:189
 msgid "Smooth"
-msgstr ""
+msgstr "Licin"
 
 #: ../Pinta.Tools/Tools/EraserTool.cs:203
 msgid "Eraser"
@@ -1557,11 +1580,11 @@ msgid ""
 "click to reverse."
 msgstr ""
 "Klik dan seret untuk lukis gradien dari warna utama ke warna sekunder. Klik "
-"kanan untuk songsangkan."
+"kanan untuk disongsangkan."
 
 #: ../Pinta.Tools/Tools/GradientTool.cs:176
 msgid "Linear Gradient"
-msgstr "Gredien Linear"
+msgstr "Gradien Linear"
 
 #: ../Pinta.Tools/Tools/GradientTool.cs:177
 msgid "Linear Reflected Gradient"
@@ -1585,7 +1608,7 @@ msgstr "Pilih Lasso"
 
 #: ../Pinta.Tools/Tools/LassoSelectTool.cs:54
 msgid "Click and drag to draw the outline for a selection area."
-msgstr "Klik dan seret untuk lukis garis luar kawasan pemilihan."
+msgstr "Klik dan seret untuk lukis rangka kawasan pemilihan."
 
 #: ../Pinta.Tools/Tools/LineCurveTool.cs:40
 msgid "Line/Curve"
@@ -1597,14 +1620,19 @@ msgstr "Pilih Tongkat Ajaib"
 
 #: ../Pinta.Tools/Tools/MagicWandTool.cs:72
 msgid "Click to select region of similar color."
-msgstr "Klik untuk pilih kawasan yang sama warna"
+msgstr "Klik untuk pilih kawasan sama warna."
 
 #: ../Pinta.Tools/Tools/MoveSelectedTool.cs:49
 msgid ""
 "Left click and drag the selection to move selected content. Hold Ctrl to "
 "scale instead of move. Right click and drag the selection to rotate selected "
-"content. Hold Shift to rotate in steps."
+"content. Hold Shift to rotate in steps. Use arrow keys to move selected "
+"content by a single pixel."
 msgstr ""
+"Klik kiri dan seret pemilihan untuk mengalih kandungan terpilih. Tahan Ctrl "
+"untuk diskalakan berbanding alih. Klik kanan dan seret pemilihan untuk "
+"memutar kandungan terpilih. Tahan Shift untuk memutar mengikut langkah. Guna "
+"kekunci anak panah untuk mengalih kandungan sebanyak satu piksel."
 
 #: ../Pinta.Tools/Tools/MoveSelectionTool.cs:42
 msgid "Move Selection"
@@ -1614,12 +1642,18 @@ msgstr "Alih Pilihan"
 msgid ""
 "Left click and drag the selection to move selection outline. Hold Ctrl to "
 "scale instead of move. Right click and drag the selection to rotate "
-"selection outline. Hold Shift to rotate in steps."
+"selection outline. Hold Shift to rotate in steps. Use arrow keys to move "
+"selection outline by a single pixel."
 msgstr ""
+"Klik kiri dan seret pemilihan untuk mengalih garis bentuk terpilih. Tahan "
+"Ctrl untuk diskalakan berbanding alih. Klik kanan dan seret pemilihan untuk "
+"memutar garis bentuk pemilihan. Tahan Shift untuk memutar mengikut langkah. "
+"Guna kekunci anak panah untuk mengalih garis bentuk pemilihan sebanyak satu "
+"piksel."
 
-#: ../Pinta.Tools/Tools/PaintBrushTool.cs:40 ../Pinta/MainWindow.cs:89
+#: ../Pinta.Tools/Tools/PaintBrushTool.cs:40 ../Pinta/MainWindow.cs:104
 msgid "Paintbrush"
-msgstr "Berus cat"
+msgstr "Berus Cat"
 
 #: ../Pinta.Tools/Tools/PaintBucketTool.cs:40
 msgid "Paint Bucket"
@@ -1636,7 +1670,7 @@ msgstr ""
 #: ../Pinta.Tools/Tools/PanTool.cs:37
 #: ../Pinta/Actions/Layers/RotateZoomLayerAction.cs:115
 msgid "Pan"
-msgstr "Pan"
+msgstr "Lata"
 
 #: ../Pinta.Tools/Tools/PanTool.cs:43
 msgid "Click and drag to navigate image."
@@ -1671,16 +1705,16 @@ msgid ""
 "Click and drag to draw a rectangular selection. Hold Shift to constrain to a "
 "square."
 msgstr ""
-"Klik dan seret untuk lukis pemilihan segiempat. Tahan Shift untuk kekang "
-"menjadi segiempat sama."
+"Klik dan seret untuk lukis pemilihan segi empat tepat. Tahan Shift untuk "
+"kekang menjadi segiempat sama."
 
 #: ../Pinta.Tools/Tools/RectangleTool.cs:37
 msgid "Rectangle"
-msgstr "Segiempat Tepat"
+msgstr "Segi Empat Tepat"
 
 #: ../Pinta.Tools/Tools/RoundedRectangleTool.cs:37
 msgid "Rounded Rectangle"
-msgstr "Segi Empat Tepat Bundar"
+msgstr "Segi Empat Tepat Terbundar"
 
 #: ../Pinta.Tools/Tools/TextTool.cs:94
 msgid "Text"
@@ -1688,7 +1722,7 @@ msgstr "Teks"
 
 #: ../Pinta.Tools/Tools/TextTool.cs:95
 msgid "Text - Finalize"
-msgstr "Teks - Muktamatkan"
+msgstr "Teks - Muktamadkan"
 
 #: ../Pinta.Tools/Tools/TextTool.cs:101
 msgid ""
@@ -1732,7 +1766,7 @@ msgstr "Gaya Teks"
 
 #: ../Pinta.Tools/Tools/TextTool.cs:249
 msgid "Normal and Outline"
-msgstr "Biasa dan Garis Luar"
+msgstr "Biasa dan Rangka"
 
 #: ../Pinta.Tools/Tools/TextTool.cs:251
 msgid "Fill Background"
@@ -1740,15 +1774,15 @@ msgstr "Isi Latar Belakang"
 
 #: ../Pinta.Tools/Tools/TextTool.cs:264
 msgid "Outline width"
-msgstr "Lebar garis luar"
+msgstr "Lebar rangka"
 
 #: ../Pinta.Tools/Tools/TextTool.cs:269
 msgid "Decrease outline size"
-msgstr "Kurangkan saiz garis luar"
+msgstr "Kecilkan saiz rangka"
 
 #: ../Pinta.Tools/Tools/TextTool.cs:286
 msgid "Increase outline size"
-msgstr "Tingkatkan saiz garis luar"
+msgstr "Besarkan saiz rangka"
 
 #: ../Pinta.Tools/Tools/ZoomTool.cs:54
 msgid ""
@@ -1760,11 +1794,11 @@ msgstr ""
 
 #: ../Pinta/Actions/Edit/ResizePaletteAction.cs:50
 msgid "Resize Palette"
-msgstr "Ubah Saiz Palet"
+msgstr "Saiz Semula Palet"
 
 #: ../Pinta/Actions/Edit/ResizePaletteAction.cs:51
 msgid "New palette size:"
-msgstr "Saiz baru palet:"
+msgstr "Saiz palet baharu:"
 
 #: ../Pinta/Actions/File/CloseDocumentAction.cs:61
 #, csharp-format
@@ -1773,7 +1807,7 @@ msgstr "Simpan perubahan ke imej \"{0}\" sebelum menutup?"
 
 #: ../Pinta/Actions/File/CloseDocumentAction.cs:62
 msgid "If you don't save, all changes will be permanently lost."
-msgstr "Jika anda tidak simpan, semua perubahan akan hilang."
+msgstr "Jika anda tidak simpan, semua perubahan akan kekal hilang."
 
 #: ../Pinta/Actions/File/CloseDocumentAction.cs:72
 #: ../Pinta/Actions/File/CloseDocumentAction.cs:76
@@ -1782,53 +1816,61 @@ msgstr "Tutup ta_npa menyimpan"
 
 #: ../Pinta/Actions/File/NewScreenshotAction.cs:52
 msgid "Take Screenshot"
-msgstr "Ambil Cekupan Skrin"
+msgstr "Ambil Tangkap Layar"
 
 #: ../Pinta/Actions/File/NewScreenshotAction.cs:53
 msgid "Delay before taking a screenshot (seconds):"
-msgstr "Lengahan sebelum mengambil cekupan skrin (saat):"
+msgstr "Lengah sebelum mengambil tangkap skrin (saat):"
 
 #: ../Pinta/Actions/File/OpenDocumentAction.cs:63
 msgid "Image files"
-msgstr "Fail-fail Gambar"
+msgstr "Fail imej"
 
 #: ../Pinta/Actions/File/SaveDocumentImplementationAction.cs:75
 msgid "Save Image File"
-msgstr "Simpan fail Gambar"
+msgstr "Simpan fail Imej"
 
 #: ../Pinta/Actions/File/SaveDocumentImplementationAction.cs:190
 msgid "Pinta does not support saving images in this file format."
-msgstr "Pinta tidak boleh menyimpan gambar dalam format fail ini."
+msgstr "Pinta tidak menyokong penyimpanan imej dalam format fail ini."
 
 #: ../Pinta/Actions/File/SaveDocumentImplementationAction.cs:191
-#: ../Pinta/Actions/File/SaveDocumentImplementationAction.cs:203
 msgid "Error"
 msgstr "Ralat"
 
-#: ../Pinta/Actions/File/SaveDocumentImplementationAction.cs:202
-msgid "Cannot save read only file."
-msgstr "Tidak dapat simpan fail baca-sahaja"
-
-#: ../Pinta/Actions/File/SaveDocumentImplementationAction.cs:217
+#: ../Pinta/Actions/File/SaveDocumentImplementationAction.cs:205
 msgid "Image too large"
 msgstr "Imej terlalu besar"
 
-#: ../Pinta/Actions/File/SaveDocumentImplementationAction.cs:218
+#: ../Pinta/Actions/File/SaveDocumentImplementationAction.cs:206
 msgid "ICO files can not be larger than 255 x 255 pixels."
-msgstr "Fail ICo tidak boleh besar dari 255  x 255 piksel."
+msgstr "Fail ICO tidak boleh besar dari 255  x 255 piksel."
 
-#: ../Pinta/Actions/File/SaveDocumentImplementationAction.cs:247
+#: ../Pinta/Actions/File/SaveDocumentImplementationAction.cs:216
+msgid "Failed to save image"
+msgstr "Gagal menyimpan imej"
+
+#. Translators: {0} is the name of a file that the user does not have write permission for.
+#: ../Pinta/Actions/File/SaveDocumentImplementationAction.cs:218
+#, csharp-format
+msgid ""
+"You do not have access to modify '{0}'. The file or folder may be read-only."
+msgstr ""
+"Anda tiada capaian untuk mengubah suai '{0}'. Fail atau folder ini bersifat "
+"baca-sahaja."
+
+#: ../Pinta/Actions/File/SaveDocumentImplementationAction.cs:250
 #, csharp-format
 msgid "A file named \"{0}\" already exists. Do you want to replace it?"
-msgstr "Fail bertajuk \"{0}\" sudah pun ada. Anda mahu gantikan ia?"
+msgstr "Satu fail bernama \"{0}\" sudah wujud. Anda mahu gantikannya?"
 
-#: ../Pinta/Actions/File/SaveDocumentImplementationAction.cs:248
+#: ../Pinta/Actions/File/SaveDocumentImplementationAction.cs:251
 #, csharp-format
 msgid ""
 "The file already exists in \"{1}\". Replacing it will overwrite its contents."
 msgstr ""
-"Fail sudah pun wujud dalam \"{1}\". Semua kandungan sedia ada akan ditindan "
-"jika anda pilih gantikan."
+"Fail sudah wujud dalam \"{1}\". Sekiranya diganti semua kandungannya akan "
+"ditulis-ganti."
 
 #: ../Pinta/Actions/Layers/LayerPropertiesAction.cs:95
 msgid "Layer Opacity"
@@ -1844,7 +1886,7 @@ msgstr "Sembunyi Lapisan"
 
 #: ../Pinta/Actions/Layers/LayerPropertiesAction.cs:105
 msgid "Show Layer"
-msgstr "Papar Lapisan"
+msgstr "Tunjuk Lapisan"
 
 #: ../Pinta/Actions/Layers/LayerPropertiesAction.cs:110
 #: ../Pinta/Dialogs/LayerPropertiesDialog.cs:50
@@ -1858,21 +1900,21 @@ msgstr "Putar / Zum Lapisan"
 
 #: ../Pinta/AddinSetupService.cs:49
 msgid "Pinta Community Addins - Platform-Specific"
-msgstr "Tambahan Komuniti Pinta - Spesifik-Platform"
+msgstr "Tambahan-Khusus-Platform Komuniti Pinta"
 
 #: ../Pinta/AddinSetupService.cs:53
 msgid "Pinta Community Addins - Cross-Platform"
-msgstr "Tambahan Komuniti Pinta - Platform-Berbilang"
+msgstr "Tambahan-Platform-Silang Komuniti Pinta"
 
-#: ../Pinta/Dialogs/AboutDialog.cs:126
+#: ../Pinta/Dialogs/AboutDialog.cs:143
 msgid "Contributors to this release:"
 msgstr "Penyumbang keluaran ini:"
 
-#: ../Pinta/Dialogs/AboutDialog.cs:138
+#: ../Pinta/Dialogs/AboutDialog.cs:155
 msgid "Previous contributors:"
 msgstr "Penyumbang terdahulu:"
 
-#: ../Pinta/Dialogs/AboutDialog.cs:149
+#: ../Pinta/Dialogs/AboutDialog.cs:166
 msgid "translator-credits"
 msgstr ""
 "Launchpad Contributions:\n"
@@ -1881,50 +1923,50 @@ msgstr ""
 "  abuyop https://launchpad.net/~abuyop\n"
 "  lcdvirgo https://launchpad.net/~lcdvirgo"
 
-#: ../Pinta/Dialogs/AboutDialog.cs:152
+#: ../Pinta/Dialogs/AboutDialog.cs:169
 msgid "Translated by:"
 msgstr "Diterjemah oleh:"
 
-#: ../Pinta/Dialogs/AboutDialog.cs:158
+#: ../Pinta/Dialogs/AboutDialog.cs:175
 msgid "Based on the work of Paint.NET:"
-msgstr "Berasaskan Paint.NET"
+msgstr "Berasaskan hasil kerja Paint.NET"
 
-#: ../Pinta/Dialogs/AboutDialog.cs:165
+#: ../Pinta/Dialogs/AboutDialog.cs:182
 msgid "Using some icons from:"
-msgstr "Menggunakan beberapa ikon dari:"
+msgstr "Menggunakan beberapa ikon daripada:"
 
-#: ../Pinta/Dialogs/AboutDialog.cs:173
+#: ../Pinta/Dialogs/AboutDialog.cs:190
 msgid "Powered by Mono:"
-msgstr "Dikuasakan oleh Mono:"
+msgstr "Diperkasakan oleh Mono:"
 
-#: ../Pinta/Dialogs/AboutDialog.cs:280
+#: ../Pinta/Dialogs/AboutDialog.cs:297
 msgid "About Pinta"
-msgstr "Berkenaan Pinta"
+msgstr "Perihal Pinta"
 
-#: ../Pinta/Dialogs/AboutDialog.cs:298
+#: ../Pinta/Dialogs/AboutDialog.cs:315
 msgid "Version Info"
 msgstr "Maklumat Versi"
 
-#: ../Pinta/Dialogs/AboutPintaTabPage.cs:42
-#: ../Pinta/Dialogs/VersionInformationTabPage.cs:50
+#: ../Pinta/Dialogs/AboutPintaTabPage.cs:43
+#: ../Pinta/Dialogs/VersionInformationTabPage.cs:53
 msgid "Version"
 msgstr "Versi"
 
-#: ../Pinta/Dialogs/AboutPintaTabPage.cs:51
+#: ../Pinta/Dialogs/AboutPintaTabPage.cs:52
 msgid "License"
 msgstr "Lesen"
 
-#: ../Pinta/Dialogs/AboutPintaTabPage.cs:51
+#: ../Pinta/Dialogs/AboutPintaTabPage.cs:52
 msgid "Released under the MIT X11 License."
-msgstr "Dilepaskan dibawah Lesen X11 MIT."
+msgstr "Dikeluarkan bawah Lesen X11 MIT."
 
-#: ../Pinta/Dialogs/AboutPintaTabPage.cs:58
+#: ../Pinta/Dialogs/AboutPintaTabPage.cs:59
 msgid "Copyright"
-msgstr "Hakcipta"
+msgstr "Hak Cipta"
 
-#: ../Pinta/Dialogs/AboutPintaTabPage.cs:58
+#: ../Pinta/Dialogs/AboutPintaTabPage.cs:59
 msgid "by Pinta contributors"
-msgstr "oleh penyumbang Pinta"
+msgstr "oleh para penyumbang Pinta"
 
 #: ../Pinta/Dialogs/ErrorDialog.cs:98
 #: Mono.Addins.Gui/gtk-gui/Mono.Addins.Gui.ErrorDialog.cs:92
@@ -1950,11 +1992,11 @@ msgstr "Nama:"
 
 #: ../Pinta/Dialogs/LayerPropertiesDialog.cs:182
 msgid "Visible"
-msgstr "Boleh Dilihat"
+msgstr "Tampak"
 
 #: ../Pinta/Dialogs/LayerPropertiesDialog.cs:193
 msgid "Blend Mode"
-msgstr "Mod Adunan"
+msgstr "Mod Adun"
 
 #: ../Pinta/Dialogs/LayerPropertiesDialog.cs:204
 msgid "Opacity:"
@@ -1979,23 +2021,23 @@ msgid "Preset:"
 msgstr "Praset:"
 
 #: ../Pinta/Dialogs/NewImageDialog.cs:211
-#: ../Pinta/Dialogs/ResizeCanvasDialog.cs:334
-#: ../Pinta/Dialogs/ResizeImageDialog.cs:170
+#: ../Pinta/Dialogs/ResizeCanvasDialog.cs:331
+#: ../Pinta/Dialogs/ResizeImageDialog.cs:169
 msgid "Width:"
 msgstr "Lebar:"
 
 #: ../Pinta/Dialogs/NewImageDialog.cs:218
 #: ../Pinta/Dialogs/NewImageDialog.cs:235
-#: ../Pinta/Dialogs/ResizeCanvasDialog.cs:336
-#: ../Pinta/Dialogs/ResizeCanvasDialog.cs:342
-#: ../Pinta/Dialogs/ResizeImageDialog.cs:172
-#: ../Pinta/Dialogs/ResizeImageDialog.cs:178
+#: ../Pinta/Dialogs/ResizeCanvasDialog.cs:333
+#: ../Pinta/Dialogs/ResizeCanvasDialog.cs:339
+#: ../Pinta/Dialogs/ResizeImageDialog.cs:171
+#: ../Pinta/Dialogs/ResizeImageDialog.cs:177
 msgid "pixels"
 msgstr "piksel"
 
 #: ../Pinta/Dialogs/NewImageDialog.cs:228
-#: ../Pinta/Dialogs/ResizeCanvasDialog.cs:340
-#: ../Pinta/Dialogs/ResizeImageDialog.cs:176
+#: ../Pinta/Dialogs/ResizeCanvasDialog.cs:337
+#: ../Pinta/Dialogs/ResizeImageDialog.cs:175
 msgid "Height:"
 msgstr "Tinggi:"
 
@@ -2025,34 +2067,38 @@ msgstr "Warna Latar Belakang"
 
 #: ../Pinta/Dialogs/NewImageDialog.cs:319
 msgid "Preview"
-msgstr ""
+msgstr "Pratonton"
 
-#: ../Pinta/Dialogs/ResizeCanvasDialog.cs:313
+#: ../Pinta/Dialogs/ResizeCanvasDialog.cs:311
 #: ../Pinta/Dialogs/ResizeImageDialog.cs:149
-msgid "By percentage:"
-msgstr "Ikut peratus:"
-
-#: ../Pinta/Dialogs/ResizeCanvasDialog.cs:314
-#: ../Pinta/Dialogs/ResizeImageDialog.cs:150
 msgid "By absolute size:"
 msgstr "Mengikut saiz mutlak:"
 
-#: ../Pinta/Dialogs/ResizeCanvasDialog.cs:320
+#: ../Pinta/Dialogs/ResizeCanvasDialog.cs:312
+#: ../Pinta/Dialogs/ResizeImageDialog.cs:150
+msgid "By percentage:"
+msgstr "Mengikut peratus:"
+
+#: ../Pinta/Dialogs/ResizeCanvasDialog.cs:318
 #: ../Pinta/Dialogs/ResizeImageDialog.cs:156
 msgid "Maintain aspect ratio"
-msgstr "Kekalkan nisbah aspek"
+msgstr "Kekal nisbah bidang"
 
-#: ../Pinta/Dialogs/ResizeCanvasDialog.cs:348
+#: ../Pinta/Dialogs/ResizeCanvasDialog.cs:346
 msgid "Anchor:"
-msgstr "Sauh:"
+msgstr "Penambat:"
 
-#: ../Pinta/Dialogs/VersionInformationTabPage.cs:44
+#: ../Pinta/Dialogs/VersionInformationTabPage.cs:47
 msgid "Title"
 msgstr "Tajuk"
 
-#: ../Pinta/Dialogs/VersionInformationTabPage.cs:53
+#: ../Pinta/Dialogs/VersionInformationTabPage.cs:56
 msgid "Path"
 msgstr "Laluan"
+
+#: ../Pinta/Dialogs/VersionInformationTabPage.cs:72
+msgid "Copy Version Info"
+msgstr "Salin Maklumat Versi"
 
 #: ../Pinta/Main.cs:57
 msgid "Show this message and exit."
@@ -2064,7 +2110,7 @@ msgstr "Papar versi aplikasi."
 
 #: ../Pinta/Main.cs:59
 msgid "number of threads to use for rendering"
-msgstr "bilangan bebenang yang digunakan untuk penerapan"
+msgstr "bilangan jaluran digunakan untuk pengemasgabungan"
 
 #: ../Pinta/Main.cs:107
 msgid "Usage: pinta [files]"
@@ -2074,64 +2120,66 @@ msgstr "Penggunaan: pinta [files]"
 msgid "Options: "
 msgstr "Pilihan: "
 
-#: ../Pinta/MainWindow.cs:309
+#: ../Pinta/MainWindow.cs:330
 msgid "_File"
 msgstr "_Fail"
 
-#: ../Pinta/MainWindow.cs:310
+#: ../Pinta/MainWindow.cs:331
 msgid "_Edit"
 msgstr "_Sunting"
 
-#: ../Pinta/MainWindow.cs:312
+#: ../Pinta/MainWindow.cs:333
 msgid "_View"
-msgstr "_Paparan"
+msgstr "L_ihat"
 
-#: ../Pinta/MainWindow.cs:315
+#: ../Pinta/MainWindow.cs:336
 msgid "_Image"
 msgstr "_Imej"
 
-#: ../Pinta/MainWindow.cs:316
+#: ../Pinta/MainWindow.cs:337
 msgid "_Layers"
 msgstr "_Lapisan"
 
-#: ../Pinta/MainWindow.cs:317
+#: ../Pinta/MainWindow.cs:338
 msgid "_Adjustments"
 msgstr "_Pelarasan"
 
-#: ../Pinta/MainWindow.cs:318
+#: ../Pinta/MainWindow.cs:339
 msgid "Effe_cts"
 msgstr "Kes_an"
 
-#: ../Pinta/MainWindow.cs:319
+#: ../Pinta/MainWindow.cs:340
 msgid "A_dd-ins"
 msgstr "Tam_bahan"
 
-#: ../Pinta/MainWindow.cs:321
+#: ../Pinta/MainWindow.cs:342
 msgid "_Window"
 msgstr "_Tetingkap"
 
-#: ../Pinta/MainWindow.cs:325
+#: ../Pinta/MainWindow.cs:346
 msgid "Tool Windows"
 msgstr "Tetingkap Alat"
 
-#: ../Pinta/MainWindow.cs:329
+#: ../Pinta/MainWindow.cs:350
 msgid "_Help"
 msgstr "_Bantuan"
 
-#: ../Pinta/MainWindow.cs:551
+#: ../Pinta/MainWindow.cs:572
 msgid "Downloading Image"
-msgstr ""
+msgstr "Memuat Turun Imej"
 
-#: ../Pinta/MainWindow.cs:569
+#: ../Pinta/MainWindow.cs:590
 msgid "Download failed"
-msgstr ""
+msgstr "Muat turun gagal"
 
-#: ../Pinta/MainWindow.cs:570
+#: ../Pinta/MainWindow.cs:591
 #, csharp-format
 msgid ""
 "Unable to download image from {0}.\n"
 "Details: {1}"
 msgstr ""
+"Gagal memuat turun imej daripada {0}.\n"
+"Butiran: {1}"
 
 #: ../Pinta/Options.cs:486
 msgid "OptionName"
@@ -2188,11 +2236,11 @@ msgstr "Tersedia dalam repositori:"
 
 #: Mono.Addins.Gui/Mono.Addins.Gui/AddinInfoView.cs:256
 msgid "Update available"
-msgstr "Kemaskini tersedia"
+msgstr "Kemas kini tersedia"
 
 #: Mono.Addins.Gui/Mono.Addins.Gui/AddinInfoView.cs:263
 msgid "This add-in can't be loaded due to missing dependencies"
-msgstr "Tambahan ini tidak boleh dimuatkan kerana kehilangan dependensi"
+msgstr "Tambahan ini tidak boleh dimuatkan kerana ketiadaan dependensi"
 
 #: Mono.Addins.Gui/Mono.Addins.Gui/AddinInfoView.cs:270
 #, csharp-format
@@ -2206,7 +2254,7 @@ msgstr "Hilang: {0} v{1}"
 
 #: Mono.Addins.Gui/Mono.Addins.Gui/AddinInfoView.cs:286
 msgid "Installed version"
-msgstr "Versi pemasangan"
+msgstr "Versi terpasang"
 
 #: Mono.Addins.Gui/Mono.Addins.Gui/AddinInfoView.cs:287
 msgid "Repository version"
@@ -2218,7 +2266,8 @@ msgstr "Saiz muat turun"
 
 #: Mono.Addins.Gui/Mono.Addins.Gui/AddinInfoView.cs:295
 msgid "The following depedencies required by this add-in are not available:"
-msgstr "Dependensi berikut diperlukan oleh tambahan ini tidak tersedia:"
+msgstr ""
+"Dependensi berikut diperlukan oleh tambahan ini tetapi tidak tersedia:"
 
 #: Mono.Addins.Gui/Mono.Addins.Gui/AddinInstaller.cs:16
 msgid "Installation cancelled"
@@ -2242,7 +2291,7 @@ msgstr "Dipasang"
 #: Mono.Addins.Gui/Mono.Addins.Gui/AddinManagerDialog.cs:364
 #: Mono.Addins.Gui/gtk-gui/Mono.Addins.Gui.AddinManagerDialog.cs:247
 msgid "Updates"
-msgstr "Kemaskini"
+msgstr "Kemas Kini"
 
 #: Mono.Addins.Gui/Mono.Addins.Gui/AddinManagerDialog.cs:131
 #: Mono.Addins.Gui/Mono.Addins.Gui/AddinManagerDialog.cs:325
@@ -2262,12 +2311,12 @@ msgstr "Urus Repositori..."
 #, csharp-format
 msgid "{0} update available"
 msgid_plural "{0} updates available"
-msgstr[0] "{0} kemaskini tersedia"
-msgstr[1] "{0} kemaskini tersedia"
+msgstr[0] "{0} kemas kini tersedia"
+msgstr[1] "{0} kemas kini tersedia"
 
 #: Mono.Addins.Gui/Mono.Addins.Gui/AddinManagerDialog.cs:419
 msgid "Updating repository"
-msgstr "Mengemaskini repositori"
+msgstr "Mengemas kini repositori"
 
 #: Mono.Addins.Gui/Mono.Addins.Gui/AddinManagerDialog.cs:513
 msgid "Install Add-in Package"
@@ -2295,26 +2344,26 @@ msgstr "Nyahpasang"
 
 #: Mono.Addins.Gui/Mono.Addins.Gui/InstallDialog.cs:82
 msgid "The following packages will be uninstalled:"
-msgstr "Pakej berikut akan dibuang:"
+msgstr "Pakej-pakej berikut akan dibuang:"
 
 #: Mono.Addins.Gui/Mono.Addins.Gui/InstallDialog.cs:89
 msgid ""
 "There are other add-ins that depend on the previous ones which will also be "
 "uninstalled:"
 msgstr ""
-"Terdapat tambahan lain yang bergantung pada yang terdahulu juga akan dibuang:"
+"Terdapat beberapa tambahan lain yang bergantung pada yang terdahulu juga "
+"akan dibuang:"
 
 #: Mono.Addins.Gui/Mono.Addins.Gui/InstallDialog.cs:124
 msgid ""
 "The selected add-ins can't be installed because there are dependency "
 "conflicts."
 msgstr ""
-"Tambahan yang dipilih tidak dapat dipasang kerana terdapat konflik "
-"dependensi."
+"Tambahan terpilih tidak dapat dipasang kerana ada konflik dependensi."
 
 #: Mono.Addins.Gui/Mono.Addins.Gui/InstallDialog.cs:138
 msgid "The following packages will be installed:"
-msgstr "Pakej berikut akan dipasang:"
+msgstr "Pakej-pakej berikut akan dipasang:"
 
 #: Mono.Addins.Gui/Mono.Addins.Gui/InstallDialog.cs:142
 msgid " (in user directory)"
@@ -2322,7 +2371,7 @@ msgstr " (dalam direktori pengguna)"
 
 #: Mono.Addins.Gui/Mono.Addins.Gui/InstallDialog.cs:148
 msgid "The following packages need to be uninstalled:"
-msgstr "Pakej tersebut perlu dibuang:"
+msgstr "Pakej-pakej berikut perlu dibuang:"
 
 #: Mono.Addins.Gui/Mono.Addins.Gui/InstallDialog.cs:156
 msgid "The following dependencies could not be resolved:"
@@ -2330,7 +2379,7 @@ msgstr "Dependensi berikut tidak dapat dileraikan:"
 
 #: Mono.Addins.Gui/Mono.Addins.Gui/InstallDialog.cs:190
 msgid "Are you sure you want to cancel the installation?"
-msgstr "Anda pasti ingin membatalkan proses pemasangan?"
+msgstr "Anda pasti mahu membatalkan proses pemasangan?"
 
 #: Mono.Addins.Gui/Mono.Addins.Gui/InstallDialog.cs:209
 msgid "Installing Add-ins"
@@ -2342,7 +2391,7 @@ msgstr "Pemasangan gagal!"
 
 #: Mono.Addins.Gui/Mono.Addins.Gui/InstallDialog.cs:212
 msgid "The installation has completed with warnings."
-msgstr "Pemasangan selesai tetapi berserta amaran."
+msgstr "Pemasangan selesai tetapi dengan amaran."
 
 #: Mono.Addins.Gui/Mono.Addins.Gui/InstallDialog.cs:214
 msgid "Uninstalling Add-ins"
@@ -2354,7 +2403,7 @@ msgstr "Penyahpasangan gagal!"
 
 #: Mono.Addins.Gui/Mono.Addins.Gui/InstallDialog.cs:217
 msgid "The uninstallation has completed with warnings."
-msgstr "Penyahpasangan telah selesai berserta amaran."
+msgstr "Penyahpasangan telah selesai dengan amaran."
 
 #: Mono.Addins.Gui/Mono.Addins.Gui/ManageSitesDialog.cs:98
 msgid "Registering repository"
@@ -2376,7 +2425,7 @@ msgstr "Pasang..."
 
 #: Mono.Addins.Gui/gtk-gui/Mono.Addins.Gui.AddinInfoView.cs:255
 msgid "Update"
-msgstr "Kemaskini"
+msgstr "Kemas Kini"
 
 #: Mono.Addins.Gui/gtk-gui/Mono.Addins.Gui.AddinInfoView.cs:281
 msgid "_Uninstall..."
@@ -2384,7 +2433,7 @@ msgstr "_Nyahpasang..."
 
 #: Mono.Addins.Gui/gtk-gui/Mono.Addins.Gui.AddinInstallerDialog.cs:38
 msgid "Additional extensions are required to perform this operation."
-msgstr "Sambungan tambahan diperlukan untuk melakukan operasi ini."
+msgstr "Sambungan tambahan diperlukan untuk menjalankan operasi ini."
 
 #: Mono.Addins.Gui/gtk-gui/Mono.Addins.Gui.AddinInstallerDialog.cs:48
 msgid "The following add-ins will be installed:"
@@ -2392,7 +2441,7 @@ msgstr "Tambahan berikut akan dipasang:"
 
 #: Mono.Addins.Gui/gtk-gui/Mono.Addins.Gui.AddinManagerDialog.cs:143
 msgid "No updates found"
-msgstr "Tiada kemaskini ditemui"
+msgstr "Tiada kemas kini ditemui"
 
 #: Mono.Addins.Gui/gtk-gui/Mono.Addins.Gui.AddinManagerDialog.cs:166
 msgid "Refresh"
@@ -2400,7 +2449,7 @@ msgstr "Segar Semula"
 
 #: Mono.Addins.Gui/gtk-gui/Mono.Addins.Gui.AddinManagerDialog.cs:194
 msgid "Update All"
-msgstr "Kemaskini Semua"
+msgstr "Kemas Kini Semua"
 
 #: Mono.Addins.Gui/gtk-gui/Mono.Addins.Gui.AddinManagerDialog.cs:268
 msgid "Repository:"
@@ -2408,7 +2457,7 @@ msgstr "Repositori:"
 
 #: Mono.Addins.Gui/gtk-gui/Mono.Addins.Gui.AddinManagerDialog.cs:373
 msgid "Install from file..."
-msgstr "Pasang dari fail..."
+msgstr "Pasang melalui fail..."
 
 #: Mono.Addins.Gui/gtk-gui/Mono.Addins.Gui.InstallDialog.cs:126
 msgid "Install"
@@ -2420,15 +2469,15 @@ msgstr "Pengurusan Repositori Tambahan"
 
 #: Mono.Addins.Gui/gtk-gui/Mono.Addins.Gui.NewSiteDialog.cs:29
 msgid "Add New Repository"
-msgstr "Tambah Repositori Baru"
+msgstr "Tambah Repositori Baharu"
 
 #: Mono.Addins.Gui/gtk-gui/Mono.Addins.Gui.NewSiteDialog.cs:47
 msgid "Select the location of the repository you want to register:"
-msgstr "Pilih lokasi repositori yang ingin didaftar:"
+msgstr "Pilih lokasi repositori yang ingin didaftarkan:"
 
 #: Mono.Addins.Gui/gtk-gui/Mono.Addins.Gui.NewSiteDialog.cs:54
 msgid "Register an on-line repository"
-msgstr "Daftar repositori atas talian"
+msgstr "Daftar repositori dalam talian"
 
 #: Mono.Addins.Gui/gtk-gui/Mono.Addins.Gui.NewSiteDialog.cs:82
 msgid "Url:"
@@ -2436,7 +2485,7 @@ msgstr "Url:"
 
 #: Mono.Addins.Gui/gtk-gui/Mono.Addins.Gui.NewSiteDialog.cs:103
 msgid "Register a local repository"
-msgstr "Daftar repositori setempat"
+msgstr "Daftar satu repositori setempat"
 
 #: Mono.Addins.Gui/gtk-gui/Mono.Addins.Gui.NewSiteDialog.cs:130
 msgid "Path:"
