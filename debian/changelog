@@ -1,3 +1,9 @@
+pinta (1.7.1-0ppa1~focal1) focal; urgency=medium
+
+  * New upstream release.
+
+ -- Cameron White <cameronwhite91@gmail.com>  Sat, 20 Nov 2021 12:26:00 -0400
+
 pinta (1.7-0ppa1~focal1) focal; urgency=medium
 
   * New upstream release.
