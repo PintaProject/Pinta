@@ -38,6 +38,46 @@
     <binary>pinta</binary>
   </provides>
   <releases>
+    <release version="1.7.1" date="2021-11-20">
+      <url>https://github.com/PintaProject/Pinta/releases/tag/1.7.1</url>
+      <description>
+        <p>New Features / Improvements</p>
+        <ul>
+          <li>The canvas can now be scrolled horizontally by holding Shift while using the mouse wheel (#141)</li>
+          <li>The primary and secondary palette colors can now be swapped by pressing X (#147)</li>
+          <li>Added a more user-friendly dialog when attempting to open an unsupported file format (#143, #1856821)</li>
+          <li>Zooming in and out can now be done without pressing the Ctrl key (#150)</li>
+          <li>Arrow keys can be used to move by a single pixel in the Move Selected Pixels and Move Selection tools (#1906141)</li>
+          <li>Shift can now be used to constrain to a uniform scale when scaling using the Move Selected Pixels tool (#138)</li>
+          <li>The About dialog now allows easily copying the version information to the clipboard for use when reporting bugs (#1924249)</li>
+        </ul>
+        <p>Changes</p>
+        <ul>
+          <li>Fixed inconsistent behavior when switching between tools that share the same shortcut, such as the selection tools (#144, #1558767)</li>
+          <li>Improved error messages when the user does not have read or write permissions for a file (#1715150)</li>
+          <li>The appdata file is now installed to `/usr/share/metainfo` instead of the legacy path `/usr/share/appdata` (#186)</li>
+          <li>Tooltips for tabs now show the full file path instead of only the file name (#187)</li>
+        </ul>
+        <p>Bug Fixes</p>
+        <ul>
+          <li>Fixed a bug where Auto Crop could incorrectly remove an additional pixel on the bottom and right side of the image. (#1191390)</li>
+          <li>Fixed a bug where drawing a single pixel with the Pencil tool used black instead of the palette color (#1897245)</li>
+          <li>Fixed issues with the zoom controls when using a French locale (#1464855)</li>
+          <li>Fixed invalid URLs in `pinta.appdata.xml` (#140, #145)</li>
+          <li>Added missing release notes to `pinta.appdata.xml` (#142)</li>
+          <li>Fixed a regression introduced in Pinta 1.7 that could produce blurred pixels when using the Move Selected Pixels tool (#1904304).</li>
+          <li>Fixed a bug where the Rotate / Zoom Layer dialog could leave the layer in a state where all future actions were also transformed (#1905176).</li>
+          <li>Fixed a bug where the document might not be marked as modified after certain undo / redo actions (#1905165).</li>
+          <li>Fixed a bug where the Move Selected Pixels tool did not handle transparent pixels correctly (#1905706).</li>
+          <li>Fixed a bug where deselecting via a single click in the select tool could cause bugs with undoing earlier history items (#1905719).</li>
+          <li>Fixed a bug where the initial corner of a rectangle shape could be cut off (#1922470).</li>
+          <li>Fixed a bug where the text tool was not correctly clipped against the selection (#1910511).</li>
+          <li>Improved handling of memory allocation failures for large images (#776346).</li>
+          <li>Fixed a bug where the shape tools did not redraw after changes to the fill style until the cursor entered the canvas (#1937921).</li>
+          <li>Fixed a crash when opening an invalid palette file (#146, #1890450).</li>
+        </ul>
+      </description>
+    </release>
     <release version="1.7" date="2020-08-04">
       <url>https://github.com/PintaProject/Pinta/releases/tag/1.7</url>
       <description>
