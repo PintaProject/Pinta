@@ -21,7 +21,7 @@ jobs:
 
     steps:
     - uses: actions/checkout@v2
-    - name: Setup .NET Core
+    - name: Setup .NET
       uses: actions/setup-dotnet@v1
       with:
         dotnet-version: ${{env.DOTNET_VERSION}}
@@ -51,7 +51,7 @@ jobs:
 
     steps:
     - uses: actions/checkout@v2
-    - name: Setup .NET Core
+    - name: Setup .NET
       uses: actions/setup-dotnet@v1
       with:
         dotnet-version: ${{env.DOTNET_VERSION}}
@@ -78,7 +78,7 @@ jobs:
     steps:
     - uses: actions/checkout@v2
     - uses: microsoft/setup-msbuild@v1.0.2
-    - name: Setup .NET Core
+    - name: Setup .NET
       uses: actions/setup-dotnet@v1
       with:
         dotnet-version: ${{env.DOTNET_VERSION}}
@@ -90,7 +90,7 @@ jobs:
     # Note that msgfmt is already available from the Git for Windows installation!
     - name: Build Installer
       run: |
-        dotnet publish Pinta.sln -p:BuildTranslations=true --configuration Release -r win-x64
+        dotnet publish Pinta.sln -p:BuildTranslations=true --configuration Release -r win-x64 --self-contained true
         iscc installer/windows/installer.iss
 
     - name: Upload Installer

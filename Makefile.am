@@ -85,7 +85,7 @@ uninstall-hook:
 
 # target: releasezip - Make a self-contained release zip file.
 releasezip:
-	$(DOTNET) publish Pinta.sln $(PINTA_BUILD_OPTS) -r linux-x64 -o $(srcdir)/release
+	$(DOTNET) publish Pinta.sln $(PINTA_BUILD_OPTS) -r linux-x64 --self-contained true -o $(srcdir)/release
 	cd $(srcdir)/release && zip -r ../$(RELEASE_FILE).zip * -x "*.pdb"
 
 EXTRA_DIST = Pinta Pinta.Core Pinta.Docking Pinta.Effects Pinta.Gui.Widgets Pinta.Resources Pinta.Tools po xdg tests license-mit.txt \
