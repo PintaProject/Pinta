@@ -29,10 +29,10 @@ Used under [Creative Commons Attribution 3.0 License](http://creativecommons.org
 ## Building on Windows
 
 Pinta can be built by opening `Pinta.sln` in [Visual Studio](https://visualstudio.microsoft.com/).
-Ensure that .NET 5 is installed via the Visual Studio installer.
+Ensure that .NET 6 is installed via the Visual Studio installer.
 
 For building on the command line:
-- [Install the .NET 5 SDK](https://dotnet.microsoft.com/).
+- [Install the .NET 6 SDK](https://dotnet.microsoft.com/).
 - Build:
   - `dotnet build`
 - Run:
@@ -40,7 +40,7 @@ For building on the command line:
 
 ## Building on macOS
 
-- Install .NET 5 and GTK
+- Install .NET 6 and GTK
   - `brew install dotnet-sdk gtk+3 adwaita-icon-theme gettext`
 - Build:
   - `dotnet build`
@@ -51,7 +51,7 @@ Alternatively, Pinta can be built by opening `Pinta.sln` in [Visual Studio for M
 
 ## Building on Linux
 
-- Install [.NET 5](https://dotnet.microsoft.com/) following the instructions for your Linux distribution.
+- Install [.NET 6](https://dotnet.microsoft.com/) following the instructions for your Linux distribution.
 - Install other dependencies (instructions are for Ubuntu 20.04, but should be similar for other distros):
   - `sudo apt install autotools-dev autoconf-archive gettext intltool libgtk-3-dev`
 - Build (option 1, for development and testing):

@@ -9,7 +9,7 @@ on:
     - cron: '0 0 * * 0'
 
 env:
-  DOTNET_VERSION: 5.0.x
+  DOTNET_VERSION: 6.0.x
 
 jobs:
   build-ubuntu:

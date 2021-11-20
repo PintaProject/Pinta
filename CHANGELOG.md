@@ -18,7 +18,7 @@ Thanks to the following contributors who worked on this release:
 - @jefetienne
 
 ### Added
-- Ported to GTK3 and .NET 5
+- Ported to GTK3 and .NET 6
   - Many changes to the appearance of standard GTK widgets and dialogs (e.g. the color picker and file dialogs). GTK3 themes should also now be supported.
   - Improved support for high-DPI displays.
   - The platform-native file dialogs are now used ([#1909807](https://bugs.launchpad.net/pinta/+bug/1909807), [#1909664](https://bugs.launchpad.net/pinta/+bug/1909664)).
