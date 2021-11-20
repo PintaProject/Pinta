@@ -44,6 +44,8 @@ namespace Pinta
 
 		CanvasPad canvas_pad = null!;
 
+		private readonly System.Net.Http.HttpClient http_client = new();
+
 		public MainWindow () : base ("com.github.PintaProject.Pinta", GLib.ApplicationFlags.NonUnique)
 		{
 			Register (GLib.Cancellable.Current);
@@ -513,7 +515,7 @@ namespace Pinta
 			PintaCore.Actions.App.Exit.Activate ();
 		}
 
-		private void MainWindow_DragDataReceived (object o, DragDataReceivedArgs args)
+		private async void MainWindow_DragDataReceived (object o, DragDataReceivedArgs args)
 		{
 			// TODO: Generate random name for the picture being downloaded
 
@@ -527,7 +529,6 @@ namespace Pinta
 				string file = individualFile.Trim ();
 
 				if (file.StartsWith ("http") || file.StartsWith ("ftp")) {
-					var client = new System.Net.WebClient ();
 					string tempFilePath = System.IO.Path.GetTempPath () + System.IO.Path.GetFileName (file);
 
 					var progressDialog = PintaCore.Chrome.ProgressDialog;
@@ -539,11 +540,12 @@ namespace Pinta
 						progressDialog.Text = "";
 						progressDialog.Show ();
 
-						client.DownloadProgressChanged += (sender, e) => {
-							progressDialog.Progress = e.ProgressPercentage;
-						};
-
-						client.DownloadFile (file, tempFilePath);
+						{
+							using var response = await http_client.GetAsync (file, System.Net.Http.HttpCompletionOption.ResponseHeadersRead);
+							using var contentStream = response.Content.ReadAsStream ();
+							using var fileStream = System.IO.File.Create (tempFilePath);
+							contentStream.CopyTo (fileStream);
+						}
 
 						if (PintaCore.Workspace.OpenFile (tempFilePath)) {
 							// Mark as not having a file, so that the user doesn't unintentionally
@@ -556,7 +558,6 @@ namespace Pinta
 							Translations.GetString ("Download failed"),
 							string.Format (Translations.GetString ("Unable to download image from {0}.\nDetails: {1}"), file, e.Message));
 					} finally {
-						client.Dispose ();
 						progressDialog.Hide ();
 						PintaCore.Chrome.MainWindowBusy = false;
 					}
