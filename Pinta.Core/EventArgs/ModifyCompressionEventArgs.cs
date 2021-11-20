@@ -28,12 +28,12 @@ using System;
 
 namespace Pinta.Core
 {
-	public class ModifyCompressionEventArgs: EventArgs
+	public class ModifyCompressionEventArgs : EventArgs
 	{
 		public int Quality { get; set; }
 		public bool Cancel { get; set; }
 		public Gtk.Window ParentWindow { get; set; }
-		
+
 		public ModifyCompressionEventArgs (int quality, Gtk.Window parent)
 		{
 			this.Quality = quality;

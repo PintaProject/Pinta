@@ -1,4 +1,4 @@
-﻿// 
+// 
 // GradientColorMode.cs
 //  
 // Author:

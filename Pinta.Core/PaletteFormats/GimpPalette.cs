@@ -1,4 +1,4 @@
-﻿//
+//
 // PaintDotNetPalette.cs
 //
 // Author:
@@ -26,10 +26,10 @@
 // THE SOFTWARE.
 
 using System;
-using System.IO;
-using Cairo;
 using System.Collections.Generic;
 using System.Globalization;
+using System.IO;
+using Cairo;
 
 namespace Pinta.Core
 {
@@ -42,10 +42,10 @@ namespace Pinta.Core
 			string? line = reader.ReadLine ();
 
 			if (line is null || !line.StartsWith ("GIMP"))
-				throw new InvalidDataException("Not a valid GIMP palette file.");
+				throw new InvalidDataException ("Not a valid GIMP palette file.");
 
 			// skip everything until the first color
-			while (!char.IsDigit(line[0]))
+			while (!char.IsDigit (line[0]))
 				line = reader.ReadLine ()!; // NRT - This assumes a valid formed file
 
 			// then read the palette

@@ -1,4 +1,4 @@
-﻿// 
+// 
 // CanvasPad.cs
 //  
 // Author:
@@ -26,8 +26,8 @@
 
 using System;
 using Gtk;
-using Pinta.Docking;
 using Pinta.Core;
+using Pinta.Docking;
 
 namespace Pinta
 {
@@ -37,13 +37,12 @@ namespace Pinta
 
 		public void Initialize (Dock workspace)
 		{
-            Notebook = new DockNotebook();
+			Notebook = new DockNotebook ();
 
-            var canvas_dock = new DockItem(Notebook, "Canvas", locked: true)
-            {
-                Label = Translations.GetString("Canvas")
-            };
-            workspace.AddItem(canvas_dock, DockPlacement.Center);
-        }
-    }
+			var canvas_dock = new DockItem (Notebook, "Canvas", locked: true) {
+				Label = Translations.GetString ("Canvas")
+			};
+			workspace.AddItem (canvas_dock, DockPlacement.Center);
+		}
+	}
 }

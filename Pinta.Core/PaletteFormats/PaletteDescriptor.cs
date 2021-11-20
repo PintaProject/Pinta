@@ -1,4 +1,4 @@
-﻿//
+//
 // PaletteDescriptor.cs
 //
 // Author:
@@ -25,8 +25,8 @@
 // THE SOFTWARE.
 
 using System;
-using Gtk;
 using System.Text;
+using Gtk;
 
 namespace Pinta.Core
 {

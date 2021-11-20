@@ -1,4 +1,4 @@
-﻿// 
+// 
 // Command.cs
 //  
 // Author:
@@ -29,70 +29,66 @@ using GLib;
 
 namespace Pinta.Core
 {
-    /// <summary>
-    /// Wrapper around a Glib.SimpleAction to store additional data such as the label.
-    /// </summary>
-    public class Command
-    {
-        public GLib.SimpleAction Action { get; private set; }
-        public string Name
-        {
-            get { return Action.Name; }
-        }
-        public ActivatedHandler? Activated;
-        public void Activate()
-        {
-            Action.Activate(null);
-        }
+	/// <summary>
+	/// Wrapper around a Glib.SimpleAction to store additional data such as the label.
+	/// </summary>
+	public class Command
+	{
+		public GLib.SimpleAction Action { get; private set; }
+		public string Name {
+			get { return Action.Name; }
+		}
+		public ActivatedHandler? Activated;
+		public void Activate ()
+		{
+			Action.Activate (null);
+		}
 
-        public string Label { get; private set; }
-        public string? ShortLabel { get; set; }
-        public string? Tooltip { get; private set; }
-        public string? IconName { get; private set; }
-        public string FullName { get { return string.Format("app.{0}", Name); } }
-        public bool IsImportant { get; set; } = false;
+		public string Label { get; private set; }
+		public string? ShortLabel { get; set; }
+		public string? Tooltip { get; private set; }
+		public string? IconName { get; private set; }
+		public string FullName { get { return string.Format ("app.{0}", Name); } }
+		public bool IsImportant { get; set; } = false;
 
-        public bool Sensitive { get { return Action.Enabled; } set { Action.Enabled = value; } }
+		public bool Sensitive { get { return Action.Enabled; } set { Action.Enabled = value; } }
 
-        public Command(string name, string label, string? tooltip, string? icon_name, GLib.Variant? state = null)
-        {
-            Action = new SimpleAction(name, null, state);
-            Action.Activated += (o, args) =>
-            {
-                Activated?.Invoke(o, args);
-            };
+		public Command (string name, string label, string? tooltip, string? icon_name, GLib.Variant? state = null)
+		{
+			Action = new SimpleAction (name, null, state);
+			Action.Activated += (o, args) => {
+				Activated?.Invoke (o, args);
+			};
 
-            Label = label;
-            Tooltip = tooltip;
-            IconName = icon_name;
-        }
+			Label = label;
+			Tooltip = tooltip;
+			IconName = icon_name;
+		}
 
-        public GLib.MenuItem CreateMenuItem()
-        {
-            return new GLib.MenuItem(Label, FullName);
-        }
-    }
+		public GLib.MenuItem CreateMenuItem ()
+		{
+			return new GLib.MenuItem (Label, FullName);
+		}
+	}
 
-    public class ToggleCommand : Command
-    {
-        public ToggleCommand(string name, string label, string? tooltip, string? stock_id)
-            : base(name, label, tooltip, stock_id, new GLib.Variant(false))
-        {
-            Activated += (o, args) =>
-            {
-                var active = !(bool)Action.State;
-                Toggled?.Invoke(active);
-                Action.ChangeState(new GLib.Variant(active));
-            };
-        }
+	public class ToggleCommand : Command
+	{
+		public ToggleCommand (string name, string label, string? tooltip, string? stock_id)
+		    : base (name, label, tooltip, stock_id, new GLib.Variant (false))
+		{
+			Activated += (o, args) => {
+				var active = !(bool) Action.State;
+				Toggled?.Invoke (active);
+				Action.ChangeState (new GLib.Variant (active));
+			};
+		}
 
-        public bool Value
-        {
-            get { return (bool)Action.State; }
-            set { Action.ChangeState(new Variant(value)); }
-        }
+		public bool Value {
+			get { return (bool) Action.State; }
+			set { Action.ChangeState (new Variant (value)); }
+		}
 
-        public delegate void ToggledHandler(bool value);
-        public ToggledHandler? Toggled;
-    }
+		public delegate void ToggledHandler (bool value);
+		public ToggledHandler? Toggled;
+	}
 }

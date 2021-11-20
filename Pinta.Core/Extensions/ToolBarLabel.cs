@@ -35,14 +35,14 @@ namespace Pinta.Core
 		{
 			Label l = new Label (text);
 			l.Show ();
-			
+
 			Add (l);
 			Show ();
 		}
 
 		public string Text {
-			get { return ((Label)Child).Text; }
-			set { ((Label)Child).Text = value; }
+			get { return ((Label) Child).Text; }
+			set { ((Label) Child).Text = value; }
 		}
 	}
 }

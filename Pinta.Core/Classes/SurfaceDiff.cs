@@ -1,4 +1,4 @@
-﻿// 
+// 
 // SurfaceDiff.cs
 //  
 // Author:
@@ -97,49 +97,49 @@ namespace Pinta.Core
 #endif
 
 			// STEP 1 - Find the bounds of the changed pixels.
-			var orig_ptr = (int*)original.DataPtr;
-			var updated_ptr = (int*)updated_surf.DataPtr;
+			var orig_ptr = (int*) original.DataPtr;
+			var updated_ptr = (int*) updated_surf.DataPtr;
 
 			DiffBounds diff_bounds = new DiffBounds (orig_width, orig_height);
-			object diff_bounds_lock = new Object();
+			object diff_bounds_lock = new Object ();
 
 			// Split up the work among several threads, each of which processes one row at a time
 			// and updates the bounds of the changed pixels it has seen so far. At the end, the
 			// results from each thread are merged together to find the overall bounds of the changed
 			// pixels.
-			Parallel.For<DiffBounds>(0, orig_height, () => new DiffBounds (orig_width, orig_height),
-                     		(row, loop, my_bounds) => {
+			Parallel.For<DiffBounds> (0, orig_height, () => new DiffBounds (orig_width, orig_height),
+				     (row, loop, my_bounds) => {
 
-					var offset = row * orig_width;
-					var orig = orig_ptr + offset;
-					var updated = updated_ptr + offset;
-					bool change_in_row = false;
+					     var offset = row * orig_width;
+					     var orig = orig_ptr + offset;
+					     var updated = updated_ptr + offset;
+					     bool change_in_row = false;
 
-					for (int i = 0; i < orig_width; ++i) {
-						if (*(orig++) != *(updated++)) {
-							change_in_row = true;
-							my_bounds.left = System.Math.Min(my_bounds.left, i);
-							my_bounds.right = System.Math.Max(my_bounds.right, i);
-						}				
-					}
+					     for (int i = 0; i < orig_width; ++i) {
+						     if (*(orig++) != *(updated++)) {
+							     change_in_row = true;
+							     my_bounds.left = System.Math.Min (my_bounds.left, i);
+							     my_bounds.right = System.Math.Max (my_bounds.right, i);
+						     }
+					     }
 
-					if (change_in_row) {
-						my_bounds.top = System.Math.Min(my_bounds.top, row);
-						my_bounds.bottom = System.Math.Max(my_bounds.bottom, row);
-					}
+					     if (change_in_row) {
+						     my_bounds.top = System.Math.Min (my_bounds.top, row);
+						     my_bounds.bottom = System.Math.Max (my_bounds.bottom, row);
+					     }
 
-					return my_bounds;
+					     return my_bounds;
 
-			},	(my_bounds) => {
-					lock (diff_bounds_lock) {
-						diff_bounds.Merge (my_bounds);
-					}
-					return;
-			});
+				     }, (my_bounds) => {
+					     lock (diff_bounds_lock) {
+						     diff_bounds.Merge (my_bounds);
+					     }
+					     return;
+				     });
 
 			var bounds = new Gdk.Rectangle (diff_bounds.left, diff_bounds.top,
-			                                diff_bounds.right - diff_bounds.left + 1,
-			                                diff_bounds.bottom - diff_bounds.top + 1);
+							diff_bounds.right - diff_bounds.left + 1,
+							diff_bounds.bottom - diff_bounds.top + 1);
 
 #if DEBUG_DIFF
 			Console.WriteLine ("Truncated surface size: {0}x{1}", bounds.Width, bounds.Height);
@@ -168,9 +168,9 @@ namespace Pinta.Core
 						num_changed++;
 					}
 				}
-			}			
+			}
 
-			var savings = 100 - (float)num_changed / (float)(orig_width * orig_height) * 100;
+			var savings = 100 - (float) num_changed / (float) (orig_width * orig_height) * 100;
 #if DEBUG_DIFF
 			Console.WriteLine ("Compressed bitmask: {0}/{1} = {2}%", num_changed, orig_height * orig_width, 100 - savings);
 #endif
@@ -184,7 +184,7 @@ namespace Pinta.Core
 
 			// Store the old pixels.
 			var pixels = new ColorBgra[num_changed];
-			var new_ptr = (ColorBgra*)original.DataPtr;
+			var new_ptr = (ColorBgra*) original.DataPtr;
 			int mask_index = 0;
 
 			fixed (ColorBgra* fixed_ptr = pixels) {
@@ -235,7 +235,7 @@ namespace Pinta.Core
 			dst.Flush ();
 
 			var dest_width = dst.Width;
-			var dst_ptr = (ColorBgra*)dst.DataPtr;
+			var dst_ptr = (ColorBgra*) dst.DataPtr;
 			var mask_index = 0;
 			ColorBgra swap_pixel;
 
@@ -260,7 +260,7 @@ namespace Pinta.Core
 					dst_ptr += dest_width - bounds.Width;
 				}
 			}
-			
+
 			dst.MarkDirty ();
 		}
 		#endregion

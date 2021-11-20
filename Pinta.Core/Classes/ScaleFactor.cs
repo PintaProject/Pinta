@@ -24,7 +24,7 @@ namespace Pinta.Core
 
 		public int Denominator { get { return denominator; } }
 		public int Numerator { get { return numerator; } }
-		public double Ratio { get { return (double)numerator / (double)denominator; } }
+		public double Ratio { get { return (double) numerator / (double) denominator; } }
 
 		public static readonly ScaleFactor OneToOne = new ScaleFactor (1, 1);
 		public static readonly ScaleFactor MinValue = new ScaleFactor (1, 100);
@@ -113,7 +113,7 @@ namespace Pinta.Core
 		public override bool Equals (object? obj)
 		{
 			if (obj is ScaleFactor) {
-				ScaleFactor rhs = (ScaleFactor)obj;
+				ScaleFactor rhs = (ScaleFactor) obj;
 				return this == rhs;
 			} else {
 				return false;
@@ -141,32 +141,32 @@ namespace Pinta.Core
 
 		public int ScaleScalar (int x)
 		{
-			return (int)(((long)x * numerator) / denominator);
+			return (int) (((long) x * numerator) / denominator);
 		}
 
 		public int UnscaleScalar (int x)
 		{
-			return (int)(((long)x * denominator) / numerator);
+			return (int) (((long) x * denominator) / numerator);
 		}
 
 		public float ScaleScalar (float x)
 		{
-			return (x * (float)numerator) / (float)denominator;
+			return (x * (float) numerator) / (float) denominator;
 		}
 
 		public float UnscaleScalar (float x)
 		{
-			return (x * (float)denominator) / (float)numerator;
+			return (x * (float) denominator) / (float) numerator;
 		}
 
 		public double ScaleScalar (double x)
 		{
-			return (x * (double)numerator) / (double)denominator;
+			return (x * (double) numerator) / (double) denominator;
 		}
 
 		public double UnscaleScalar (double x)
 		{
-			return (x * (double)denominator) / (double)numerator;
+			return (x * (double) denominator) / (double) numerator;
 		}
 
 		public Point ScalePoint (Point p)
@@ -269,11 +269,11 @@ namespace Pinta.Core
 			return new Rectangle (UnscalePoint (rect.Location), UnscaleSize (rect.Size));
 		}
 
-		private static readonly double[] scales = 
-            { 
-                0.01, 0.02, 0.03, 0.04, 0.05, 0.06, 0.08, 0.12, 0.16, 0.25, 0.33, 0.50, 0.66, 1,
-                2, 3, 4, 5, 6, 7, 8, 12, 16, 24, 32
-            };
+		private static readonly double[] scales =
+	    {
+		0.01, 0.02, 0.03, 0.04, 0.05, 0.06, 0.08, 0.12, 0.16, 0.25, 0.33, 0.50, 0.66, 1,
+		2, 3, 4, 5, 6, 7, 8, 12, 16, 24, 32
+	    };
 
 		/// <summary>
 		/// Gets a list of values that GetNextLarger() and GetNextSmaller() will cycle through.
@@ -282,10 +282,8 @@ namespace Pinta.Core
 		/// 1.0 is guaranteed to be in the array returned by this property. This list is also
 		/// sorted in ascending order.
 		/// </remarks>
-		public static double[] PresetValues
-		{
-			get
-			{
+		public static double[] PresetValues {
+			get {
 				double[] returnValue = new double[scales.Length];
 				scales.CopyTo (returnValue, 0);
 				return returnValue;
@@ -354,7 +352,7 @@ namespace Pinta.Core
 
 		public static ScaleFactor FromDouble (double scalar)
 		{
-			int numerator = (int)(Math.Floor (scalar * 1000.0));
+			int numerator = (int) (Math.Floor (scalar * 1000.0));
 			int denominator = 1000;
 			return Reduce (numerator, denominator);
 		}

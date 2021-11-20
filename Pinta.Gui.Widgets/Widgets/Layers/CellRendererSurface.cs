@@ -25,8 +25,8 @@
 // THE SOFTWARE.
 
 using System;
-using Gtk;
 using Cairo;
+using Gtk;
 using Pinta.Core;
 
 namespace Pinta.Gui.Widgets

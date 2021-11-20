@@ -1,4 +1,4 @@
-﻿// 
+// 
 // HistoryItemAddedEventArgs.cs
 //  
 // Author:

@@ -1,4 +1,4 @@
-﻿// 
+// 
 // DeleteLayerHistoryItem.cs
 //  
 // Author:
@@ -33,7 +33,7 @@ namespace Pinta.Core
 		private int layer_index;
 		private UserLayer? layer;
 
-		public DeleteLayerHistoryItem(string icon, string text, UserLayer layer, int layerIndex) : base(icon, text)
+		public DeleteLayerHistoryItem (string icon, string text, UserLayer layer, int layerIndex) : base (icon, text)
 		{
 			layer_index = layerIndex;
 			this.layer = layer;
@@ -57,7 +57,7 @@ namespace Pinta.Core
 
 			// Store the layer for "undo"
 			layer = doc.Layers[layer_index];
-			
+
 			doc.Layers.DeleteLayer (layer_index, false);
 		}
 

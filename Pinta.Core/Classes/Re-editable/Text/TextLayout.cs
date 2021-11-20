@@ -1,4 +1,4 @@
-﻿// 
+// 
 // TextLayout.cs
 //  
 // Author:
@@ -27,8 +27,8 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
 using System.Security;
+using System.Text;
 using Gdk;
 
 namespace Pinta.Core

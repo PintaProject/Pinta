@@ -1,4 +1,4 @@
-﻿// 
+// 
 // ResizeCanvasAction.cs
 //  
 // Author:
@@ -52,7 +52,7 @@ namespace Pinta.Actions
 
 			int response = dialog.Run ();
 
-			if (response == (int)Gtk.ResponseType.Ok)
+			if (response == (int) Gtk.ResponseType.Ok)
 				dialog.SaveChanges ();
 		}
 	}

@@ -25,11 +25,11 @@
 // THE SOFTWARE.
 
 using System;
+using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using Gtk;
 using Pinta.Core;
-using System.IO;
-using System.Collections.Generic;
 
 namespace Pinta.Actions
 {
@@ -52,12 +52,9 @@ namespace Pinta.Actions
 		private void Activated (object? sender, DocumentCancelEventArgs e)
 		{
 			// Prompt for a new filename for "Save As", or a document that hasn't been saved before
-			if (e.SaveAs || !e.Document.HasFile)
-			{
+			if (e.SaveAs || !e.Document.HasFile) {
 				e.Cancel = !SaveFileAs (e.Document);
-			}
-			else
-			{
+			} else {
 				// Document hasn't changed, don't re-save it
 				if (!e.Document.IsDirty)
 					return;
@@ -129,7 +126,7 @@ namespace Pinta.Actions
 					eventArgs.RetVal = FileChooserConfirmation.SelectAgain;
 			};
 
-			while ((ResponseType)fcd.Run () == ResponseType.Accept) {
+			while ((ResponseType) fcd.Run () == ResponseType.Accept) {
 				FormatDescriptor format = filetypes[fcd.Filter];
 				string file = fcd.Filename;
 
@@ -227,7 +224,7 @@ namespace Pinta.Actions
 
 			document.Filename = Path.GetFileName (file);
 
-			PintaCore.Tools.DoAfterSave(document);
+			PintaCore.Tools.DoAfterSave (document);
 
 			// Mark the document as clean following the tool's after-save handler, which might
 			// adjust history (e.g. undo changes that were committed before saving).
@@ -253,8 +250,7 @@ namespace Pinta.Actions
 			if (PintaCore.System.OperatingSystem == OS.Windows) {
 				md.AddButton (Translations.GetString ("Replace"), ResponseType.Ok);
 				md.AddButton (Stock.Cancel, ResponseType.Cancel);
-			}
-			else {
+			} else {
 				md.AddButton (Stock.Cancel, ResponseType.Cancel);
 				md.AddButton (Translations.GetString ("Replace"), ResponseType.Ok);
 			}
@@ -263,7 +259,7 @@ namespace Pinta.Actions
 
 			int response = md.Run ();
 
-			return response == (int)ResponseType.Ok;
+			return response == (int) ResponseType.Ok;
 		}
 
 		private void OnFilterChanged (object o, GLib.NotifyArgs args)
@@ -271,8 +267,7 @@ namespace Pinta.Actions
 			var fcd = (IFileChooser) o;
 
 			// Ensure that the file filter is never blank.
-			if (fcd.Filter == null)
-			{
+			if (fcd.Filter == null) {
 				fcd.Filter = PintaCore.System.ImageFormats.GetDefaultSaveFormat ().Filter;
 				return;
 			}

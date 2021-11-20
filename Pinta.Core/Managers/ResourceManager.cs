@@ -49,9 +49,9 @@ namespace Pinta
 			return ResourceLoader.GetIcon (name, size);
 		}
 
-        public Stream? GetResourceIconStream (string name)
-        {
-            return ResourceLoader.GetResourceIconStream (name);
-        }
-    }
+		public Stream? GetResourceIconStream (string name)
+		{
+			return ResourceLoader.GetResourceIconStream (name);
+		}
+	}
 }

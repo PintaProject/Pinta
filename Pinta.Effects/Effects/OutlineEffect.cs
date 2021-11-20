@@ -9,8 +9,8 @@
 
 using System;
 using Cairo;
-using Pinta.Gui.Widgets;
 using Pinta.Core;
+using Pinta.Gui.Widgets;
 
 namespace Pinta.Effects
 {
@@ -35,7 +35,7 @@ namespace Pinta.Effects
 			get { return Translations.GetString ("Stylize"); }
 		}
 
-		public OutlineData Data { get { return (OutlineData)EffectData!; } } // NRT - Set in constructor
+		public OutlineData Data { get { return (OutlineData) EffectData!; } } // NRT - Set in constructor
 
 		public OutlineEffect ()
 		{
@@ -55,7 +55,7 @@ namespace Pinta.Effects
 
 			int bCount = 0;
 			int b1 = 0;
-			
+
 			while (b1 < 255 && hb[b1] == 0)
 				++b1;
 
@@ -119,10 +119,10 @@ namespace Pinta.Effects
 			}
 
 			return ColorBgra.FromBgra (
-			    (byte)(255 - (b2 - b1)),
-			    (byte)(255 - (g2 - g1)),
-			    (byte)(255 - (r2 - r1)),
-			    (byte)(a2));
+			    (byte) (255 - (b2 - b1)),
+			    (byte) (255 - (g2 - g1)),
+			    (byte) (255 - (r2 - r1)),
+			    (byte) (a2));
 		}
 
 		public unsafe override void Render (ImageSurface src, ImageSurface dest, Gdk.Rectangle[] rois)

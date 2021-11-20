@@ -1,4 +1,4 @@
-﻿// 
+// 
 // CloseDocumentAction.cs
 //  
 // Author:
@@ -71,8 +71,7 @@ namespace Pinta.Actions
 				md.AddButton (Stock.Save, ResponseType.Yes);
 				closeButton = md.AddButton (Translations.GetString ("Close _without Saving"), ResponseType.No);
 				md.AddButton (Stock.Cancel, ResponseType.Cancel);
-			}
-			else {
+			} else {
 				closeButton = md.AddButton (Translations.GetString ("Close _without Saving"), ResponseType.No);
 				md.AddButton (Stock.Cancel, ResponseType.Cancel);
 				md.AddButton (Stock.Save, ResponseType.Yes);
@@ -84,7 +83,7 @@ namespace Pinta.Actions
 
 			md.DefaultResponse = ResponseType.Yes;
 
-			ResponseType response = (ResponseType)md.Run ();
+			ResponseType response = (ResponseType) md.Run ();
 
 			if (response == ResponseType.Yes) {
 				PintaCore.Workspace.ActiveDocument.Save (false);

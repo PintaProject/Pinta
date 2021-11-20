@@ -28,8 +28,8 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using Gtk;
-using Pinta.Docking;
 using Pinta.Core;
+using Pinta.Docking;
 using Pinta.Gui.Widgets;
 using Pinta.MacInterop;
 
@@ -44,7 +44,7 @@ namespace Pinta
 
 		CanvasPad canvas_pad = null!;
 
-		private readonly System.Net.Http.HttpClient http_client = new();
+		private readonly System.Net.Http.HttpClient http_client = new ();
 
 		public MainWindow () : base ("com.github.PintaProject.Pinta", GLib.ApplicationFlags.NonUnique)
 		{

@@ -9,8 +9,8 @@
 
 using System;
 using Cairo;
-using Pinta.Gui.Widgets;
 using Pinta.Core;
+using Pinta.Gui.Widgets;
 
 namespace Pinta.Effects
 {
@@ -34,7 +34,7 @@ namespace Pinta.Effects
 			get { return Translations.GetString ("Blurs"); }
 		}
 
-		public UnfocusData Data { get { return (UnfocusData)EffectData!; } } // NRT - Set in constructor
+		public UnfocusData Data { get { return (UnfocusData) EffectData!; } } // NRT - Set in constructor
 
 		public UnfocusEffect ()
 		{
@@ -73,7 +73,7 @@ namespace Pinta.Effects
 				int div = area * 255;
 
 				return ColorBgra.FromBgraClamped (b / div, g / div, r / div, alpha);
-			} else {	//use a long if an int will overflow.
+			} else {        //use a long if an int will overflow.
 				long b = 0;
 				long g = 0;
 				long r = 0;

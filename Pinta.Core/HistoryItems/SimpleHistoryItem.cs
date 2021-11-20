@@ -1,4 +1,4 @@
-﻿// 
+// 
 // SimpleHistoryItem.cs
 //  
 // Author:
@@ -99,7 +99,7 @@ namespace Pinta.Core
 			old_surface = doc.Layers[layerIndex].Surface.Clone ();
 		}
 
-		public void TakeSnapshotOfLayer(UserLayer layer)
+		public void TakeSnapshotOfLayer (UserLayer layer)
 		{
 			var doc = PintaCore.Workspace.ActiveDocument;
 

@@ -34,7 +34,7 @@ namespace Pinta.Core
 		public const int MouseLeftButton = 1;
 		public const int MouseMiddleButton = 2;
 		public const int MouseRightButton = 3;
-		
+
 		public static void AppendItem (this Toolbar tb, ToolItem item)
 		{
 			item.Show ();
@@ -48,104 +48,99 @@ namespace Pinta.Core
 		}
 
 		public static Gtk.ToolButton CreateToolBarItem (this Command action)
-        {
-			var item = new ToolButton(null, action.ShortLabel ?? action.Label)
-			{
+		{
+			var item = new ToolButton (null, action.ShortLabel ?? action.Label) {
 				ActionName = action.FullName,
 				TooltipText = action.Tooltip ?? action.Label,
 				IsImportant = action.IsImportant,
 				IconName = action.IconName
 			};
-            return item;
-        }
+			return item;
+		}
 
-		public static void AddAction(this Gtk.Application app, Command action)
+		public static void AddAction (this Gtk.Application app, Command action)
 		{
-			app.AddAction(action.Action);
+			app.AddAction (action.Action);
 		}
 
-		public static void AddAccelAction(this Gtk.Application app, Command action, string accel)
-        {
-			app.AddAction(action);
-			app.SetAccelsForAction(action.FullName, new string[] { accel });
-		}
-
-		public static void AddAccelAction(this Gtk.Application app, Command action, string[] accels)
+		public static void AddAccelAction (this Gtk.Application app, Command action, string accel)
 		{
-			app.AddAction(action);
-			app.SetAccelsForAction(action.FullName, accels);
+			app.AddAction (action);
+			app.SetAccelsForAction (action.FullName, new string[] { accel });
 		}
 
-		public static void Remove(this GLib.Menu menu, Command action)
-        {
-			for (int i = 0; i < menu.NItems; ++i)
-			{
-				var name_attr = (string)menu.GetItemAttributeValue(i, "action", GLib.VariantType.String);
-				if (name_attr == action.FullName)
-				{
-					menu.Remove(i);
+		public static void AddAccelAction (this Gtk.Application app, Command action, string[] accels)
+		{
+			app.AddAction (action);
+			app.SetAccelsForAction (action.FullName, accels);
+		}
+
+		public static void Remove (this GLib.Menu menu, Command action)
+		{
+			for (int i = 0; i < menu.NItems; ++i) {
+				var name_attr = (string) menu.GetItemAttributeValue (i, "action", GLib.VariantType.String);
+				if (name_attr == action.FullName) {
+					menu.Remove (i);
 					return;
 				}
 			}
 		}
 
-		public static void AppendMenuItemSorted(this GLib.Menu menu, GLib.MenuItem item)
+		public static void AppendMenuItemSorted (this GLib.Menu menu, GLib.MenuItem item)
 		{
-			var new_label = (string)item.GetAttributeValue("label", GLib.VariantType.String);
+			var new_label = (string) item.GetAttributeValue ("label", GLib.VariantType.String);
 
-			for (int i = 0; i < menu.NItems; i++)
-			{
-				var label = (string)menu.GetItemAttributeValue(i, "label", GLib.VariantType.String);
-				if (string.Compare(label, new_label) > 0)
-				{
-					menu.InsertItem(i, item);
+			for (int i = 0; i < menu.NItems; i++) {
+				var label = (string) menu.GetItemAttributeValue (i, "label", GLib.VariantType.String);
+				if (string.Compare (label, new_label) > 0) {
+					menu.InsertItem (i, item);
 					return;
 				}
 			}
 
-			menu.AppendItem(item);
+			menu.AppendItem (item);
 		}
 
 		public static void Toggle (this Gtk.ToggleToolButton button)
-        {
-            button.Active = !button.Active;
-        }
+		{
+			button.Active = !button.Active;
+		}
 
-        public static int GetItemCount (this ComboBox combo)
-        {
-            return ((ListStore)combo.Model).IterNChildren ();
-        }
+		public static int GetItemCount (this ComboBox combo)
+		{
+			return ((ListStore) combo.Model).IterNChildren ();
+		}
 
-        public static int FindValue<T> (this ComboBox combo, T value)
-        {
-            for (var i = 0; i < combo.GetItemCount (); i++)
-                if (combo.GetValueAt<T> (i)?.Equals (value) == true)
-                    return i;
+		public static int FindValue<T> (this ComboBox combo, T value)
+		{
+			for (var i = 0; i < combo.GetItemCount (); i++)
+				if (combo.GetValueAt<T> (i)?.Equals (value) == true)
+					return i;
 
-            return -1;
-        }
+			return -1;
+		}
 
-        public static T GetValueAt<T> (this ComboBox combo, int index)
-        {
-            TreeIter iter;
-            
-            // Set the tree iter to the correct row
-            ((ListStore)combo.Model).IterNthChild (out iter, index);
+		public static T GetValueAt<T> (this ComboBox combo, int index)
+		{
+			TreeIter iter;
 
-            // Retrieve the value of the first column at that row
-            return (T)combo.Model.GetValue (iter, 0);
-        }
+			// Set the tree iter to the correct row
+			((ListStore) combo.Model).IterNthChild (out iter, index);
 
-        public static void SetValueAt (this ComboBox combo, int index, object value)
-        {
-            TreeIter iter;
+			// Retrieve the value of the first column at that row
+			return (T) combo.Model.GetValue (iter, 0);
+		}
 
-            // Set the tree iter to the correct row
-            ((ListStore)combo.Model).IterNthChild (out iter, index);
+		public static void SetValueAt (this ComboBox combo, int index, object value)
+		{
+			TreeIter iter;
 
-            // Set the value of the first column at that row
-            combo.Model.SetValue (iter, 0, value);
-        }
+			// Set the tree iter to the correct row
+			((ListStore) combo.Model).IterNthChild (out iter, index);
+
+			// Set the value of the first column at that row
+			combo.Model.SetValue (iter, 0, value);
+		}
 
 		/// <summary>
 		/// Gets the value in the specified column in the first selected row in a TreeView.
@@ -180,89 +175,80 @@ namespace Pinta.Core
 			treeView.Selection.SelectPath (path);
 		}
 
-		public static Gdk.Pixbuf LoadIcon(this Gtk.IconTheme theme, string icon_name, int size)
-        {
+		public static Gdk.Pixbuf LoadIcon (this Gtk.IconTheme theme, string icon_name, int size)
+		{
 			// Simple wrapper to avoid the verbose IconLookupFlags parameter.
-			return theme.LoadIcon(icon_name, size, Gtk.IconLookupFlags.ForceSize);
+			return theme.LoadIcon (icon_name, size, Gtk.IconLookupFlags.ForceSize);
 		}
 
 		/// <summary>
 		/// Returns the Cancel / Open button pair in the correct order for the current platform.
 		/// This can be used with the Gtk.Dialog constructor.
 		/// </summary>
-		public static object[] DialogButtonsCancelOpen()
+		public static object[] DialogButtonsCancelOpen ()
 		{
-			if (PintaCore.System.OperatingSystem == OS.Windows)
-            {
+			if (PintaCore.System.OperatingSystem == OS.Windows) {
 				return new object[] {
-                    Gtk.Stock.Open,
-                    Gtk.ResponseType.Ok,
-                    Gtk.Stock.Cancel,
-                    Gtk.ResponseType.Cancel
+		    Gtk.Stock.Open,
+		    Gtk.ResponseType.Ok,
+		    Gtk.Stock.Cancel,
+		    Gtk.ResponseType.Cancel
 				};
-            }
-			else
-            {
+			} else {
 				return new object[] {
-                    Gtk.Stock.Cancel,
-                    Gtk.ResponseType.Cancel,
-                    Gtk.Stock.Open,
-                    Gtk.ResponseType.Ok
+		    Gtk.Stock.Cancel,
+		    Gtk.ResponseType.Cancel,
+		    Gtk.Stock.Open,
+		    Gtk.ResponseType.Ok
 				};
-            }
-        }
+			}
+		}
 
 		/// <summary>
 		/// Returns the Cancel / Save button pair in the correct order for the current platform.
 		/// This can be used with the Gtk.Dialog constructor.
 		/// </summary>
-		public static object[] DialogButtonsCancelSave()
+		public static object[] DialogButtonsCancelSave ()
 		{
-			if (PintaCore.System.OperatingSystem == OS.Windows)
-            {
+			if (PintaCore.System.OperatingSystem == OS.Windows) {
 				return new object[] {
-                    Gtk.Stock.Save,
-                    Gtk.ResponseType.Ok,
-                    Gtk.Stock.Cancel,
-                    Gtk.ResponseType.Cancel
+		    Gtk.Stock.Save,
+		    Gtk.ResponseType.Ok,
+		    Gtk.Stock.Cancel,
+		    Gtk.ResponseType.Cancel
 				};
-            }
-			else
-            {
+			} else {
 				return new object[] {
-                    Gtk.Stock.Cancel,
-                    Gtk.ResponseType.Cancel,
-                    Gtk.Stock.Save,
-                    Gtk.ResponseType.Ok
+		    Gtk.Stock.Cancel,
+		    Gtk.ResponseType.Cancel,
+		    Gtk.Stock.Save,
+		    Gtk.ResponseType.Ok
 				};
-            }
-        }
+			}
+		}
 
 		/// <summary>
 		/// Returns the Cancel / Ok button pair in the correct order for the current platform.
 		/// This can be used with the Gtk.Dialog constructor.
 		/// </summary>
-		public static object[] DialogButtonsCancelOk()
+		public static object[] DialogButtonsCancelOk ()
 		{
-			if (PintaCore.System.OperatingSystem == OS.Windows)
-            {
+			if (PintaCore.System.OperatingSystem == OS.Windows) {
 				return new object[] {
-                    Gtk.Stock.Ok,
-                    Gtk.ResponseType.Ok,
-                    Gtk.Stock.Cancel,
-                    Gtk.ResponseType.Cancel
+		    Gtk.Stock.Ok,
+		    Gtk.ResponseType.Ok,
+		    Gtk.Stock.Cancel,
+		    Gtk.ResponseType.Cancel
 				};
-            }
-			else
-            {
+			} else {
 				return new object[] {
-                    Gtk.Stock.Cancel,
-                    Gtk.ResponseType.Cancel,
-                    Gtk.Stock.Ok,
-                    Gtk.ResponseType.Ok
+		    Gtk.Stock.Cancel,
+		    Gtk.ResponseType.Cancel,
+		    Gtk.Stock.Ok,
+		    Gtk.ResponseType.Ok
 				};
-            }
-        }
+			}
+		}
 		/// <summary>
 		/// Returns the platform-specific label for the Ctrl key.
 		/// For example, this is the Cmd key on macOS.

@@ -35,10 +35,10 @@ namespace Pinta.Core
 		{
 			Image i = new Image (PintaCore.Resources.GetIcon (image));
 			i.Show ();
-			this.IconWidget = i;			
-			
+			this.IconWidget = i;
+
 			TooltipText = tooltip;
-			
+
 			Show ();
 		}
 	}

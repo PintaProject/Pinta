@@ -1,4 +1,4 @@
-﻿// 
+// 
 // CloseAllDocumentsAction.cs
 //  
 // Author:

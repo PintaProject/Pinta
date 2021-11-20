@@ -1,4 +1,4 @@
-﻿// 
+// 
 // BlendMode.cs
 //  
 // Author:
@@ -40,11 +40,11 @@ namespace Pinta.Core
 		Darken,
 		Screen,
 		Xor,
-        HardLight,
-        SoftLight,
-        Color,
-        Luminosity,
-        Hue,
-        Saturation
+		HardLight,
+		SoftLight,
+		Color,
+		Luminosity,
+		Hue,
+		Saturation
 	}
 }

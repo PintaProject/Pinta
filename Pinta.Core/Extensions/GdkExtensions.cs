@@ -32,42 +32,42 @@ namespace Pinta.Core
 	public static class GdkExtensions
 	{
 		// Invalidate the whole thing
-		public static void Invalidate(this Window w)
+		public static void Invalidate (this Window w)
 		{
-			w.InvalidateRect(new Rectangle(0, 0, w.Width, w.Height), true);
+			w.InvalidateRect (new Rectangle (0, 0, w.Width, w.Height), true);
 		}
 
-		public static Rectangle GetBounds(this Window w)
+		public static Rectangle GetBounds (this Window w)
 		{
-			return new Rectangle(0, 0, w.Width, w.Height);
+			return new Rectangle (0, 0, w.Width, w.Height);
 		}
 
-		public static Size GetSize(this Window w)
+		public static Size GetSize (this Window w)
 		{
-			return new Size(w.Width, w.Height);
+			return new Size (w.Width, w.Height);
 		}
 
-		public static Cairo.Color ToCairoColor(this Gdk.Color color)
+		public static Cairo.Color ToCairoColor (this Gdk.Color color)
 		{
-			return new Cairo.Color((double)color.Red / ushort.MaxValue, (double)color.Green / ushort.MaxValue, (double)color.Blue / ushort.MaxValue);
+			return new Cairo.Color ((double) color.Red / ushort.MaxValue, (double) color.Green / ushort.MaxValue, (double) color.Blue / ushort.MaxValue);
 		}
 
-		public static Gdk.Point Center(this Gdk.Rectangle rect)
+		public static Gdk.Point Center (this Gdk.Rectangle rect)
 		{
-			return new Gdk.Point(rect.X + rect.Width / 2, rect.Y + rect.Height / 2);
+			return new Gdk.Point (rect.X + rect.Width / 2, rect.Y + rect.Height / 2);
 		}
 
-		public static ColorBgra ToBgraColor(this Gdk.Color color)
+		public static ColorBgra ToBgraColor (this Gdk.Color color)
 		{
-			return ColorBgra.FromBgr((byte)(color.Blue * 255 / ushort.MaxValue), (byte)(color.Green * 255 / ushort.MaxValue), (byte)(color.Red * 255 / ushort.MaxValue));
+			return ColorBgra.FromBgr ((byte) (color.Blue * 255 / ushort.MaxValue), (byte) (color.Green * 255 / ushort.MaxValue), (byte) (color.Red * 255 / ushort.MaxValue));
 		}
 
-		public static bool IsNotSet(this Point p)
+		public static bool IsNotSet (this Point p)
 		{
 			return p.X == int.MinValue && p.Y == int.MinValue;
 		}
 
-		public static bool IsShiftPressed(this ModifierType m)
+		public static bool IsShiftPressed (this ModifierType m)
 		{
 			return m.HasFlag (ModifierType.ShiftMask);
 		}
@@ -98,14 +98,14 @@ namespace Pinta.Core
 			return m.HasFlag (ModifierType.Button3Mask);
 		}
 
-		public static bool IsShiftPressed(this EventButton ev)
+		public static bool IsShiftPressed (this EventButton ev)
 		{
-			return ev.State.IsShiftPressed();
+			return ev.State.IsShiftPressed ();
 		}
 
-		public static bool IsControlPressed(this EventButton ev)
+		public static bool IsControlPressed (this EventButton ev)
 		{
-			return ev.State.IsControlPressed();
+			return ev.State.IsControlPressed ();
 		}
 
 		public static bool IsAltPressed (this EventButton ev)
@@ -129,8 +129,8 @@ namespace Pinta.Core
 		/// from appearing as active modifier keys.
 		/// </summary>
 		public static ModifierType FilterModifierKeys (this ModifierType current_state)
-        {
-            var state = Gdk.ModifierType.None;
+		{
+			var state = Gdk.ModifierType.None;
 
 			state |= (current_state & Gdk.ModifierType.ControlMask);
 			state |= (current_state & Gdk.ModifierType.ShiftMask);
@@ -140,16 +140,16 @@ namespace Pinta.Core
 			return state;
 		}
 
-		public static Cairo.PointD GetPoint(this EventButton ev)
+		public static Cairo.PointD GetPoint (this EventButton ev)
 		{
-			return new Cairo.PointD(ev.X, ev.Y);
+			return new Cairo.PointD (ev.X, ev.Y);
 		}
 
 		/// <summary>
 		/// The implementation of Rectangle.Bottom was changed in 2.12.11 to fix an off-by-one error,
 		/// and this function provides the newer behaviour for backwards compatibility with older versions.
 		/// </summary>
-		public static int GetBottom(this Rectangle r)
+		public static int GetBottom (this Rectangle r)
 		{
 			return r.Y + r.Height - 1;
 		}
@@ -158,37 +158,35 @@ namespace Pinta.Core
 		/// The implementation of Rectangle.Right was changed in 2.12.11 to fix an off-by-one error,
 		/// and this function provides the newer behaviour for backwards compatibility with older versions.
 		/// </summary>
-		public static int GetRight(this Rectangle r)
+		public static int GetRight (this Rectangle r)
 		{
 			return r.X + r.Width - 1;
 		}
 
-		public static Cairo.Surface ToSurface(this Pixbuf pixbuf)
+		public static Cairo.Surface ToSurface (this Pixbuf pixbuf)
 		{
 			var surface = CairoExtensions.CreateImageSurface (Cairo.Format.ARGB32, pixbuf.Width, pixbuf.Height);
 
-			using (var g = new Cairo.Context(surface))
-			{
-				Gdk.CairoHelper.SetSourcePixbuf(g, pixbuf, 0, 0);
-				g.Paint();
+			using (var g = new Cairo.Context (surface)) {
+				Gdk.CairoHelper.SetSourcePixbuf (g, pixbuf, 0, 0);
+				g.Paint ();
 			}
 
 			return surface;
 		}
 
-		public static Cairo.Color ToCairoColor(this Gdk.RGBA color)
-        {
-			return new Cairo.Color(color.Red, color.Green, color.Blue, color.Alpha);
-        }
+		public static Cairo.Color ToCairoColor (this Gdk.RGBA color)
+		{
+			return new Cairo.Color (color.Red, color.Green, color.Blue, color.Alpha);
+		}
 
-		public static Pixbuf CreateColorSwatch(int size, Color color)
+		public static Pixbuf CreateColorSwatch (int size, Color color)
 		{
 			using (var surf = CairoExtensions.CreateImageSurface (Cairo.Format.Argb32, size, size))
-			using (var g = new Cairo.Context(surf))
-			{
-				g.FillRectangle(new Cairo.Rectangle(0, 0, size, size), color.ToCairoColor());
-				g.DrawRectangle(new Cairo.Rectangle(0, 0, size, size), new Cairo.Color(0, 0, 0), 1);
-				return surf.ToPixbuf();
+			using (var g = new Cairo.Context (surf)) {
+				g.FillRectangle (new Cairo.Rectangle (0, 0, size, size), color.ToCairoColor ());
+				g.DrawRectangle (new Cairo.Rectangle (0, 0, size, size), new Cairo.Color (0, 0, 0), 1);
+				return surf.ToPixbuf ();
 			}
 		}
 

@@ -1,4 +1,4 @@
-﻿// 
+// 
 // CanvasInvalidatedEventArgs.cs
 //  
 // Author:
@@ -38,7 +38,7 @@ namespace Pinta.Core
 		{
 			EntireSurface = true;
 		}
-		
+
 		public CanvasInvalidatedEventArgs (Rectangle rect)
 		{
 			EntireSurface = false;

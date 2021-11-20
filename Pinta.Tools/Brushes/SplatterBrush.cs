@@ -40,20 +40,17 @@ namespace Pinta.Tools.Brushes
 		public override double StrokeAlphaMultiplier {
 			get { return 0.5; }
 		}
-		
+
 		protected override Gdk.Rectangle OnMouseMove (Context g, Color strokeColor, ImageSurface surface,
-		                                              int x, int y, int lastX, int lastY)
+							      int x, int y, int lastX, int lastY)
 		{
-			int line_width = (int)g.LineWidth;
+			int line_width = (int) g.LineWidth;
 			int size;
 
 			// we want a minimum size of 2 for the splatter (except for when the brush width is 1), since a splatter of size 1 is very small
-			if (line_width == 1)
-			{
+			if (line_width == 1) {
 				size = 1;
-			}
-			else
-			{
+			} else {
 				size = Random.Next (2, line_width);
 			}
 

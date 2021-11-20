@@ -15,518 +15,470 @@ namespace Pinta.Core
 		public LocalHistogramEffect ()
 		{
 		}
-		
-		protected static int GetMaxAreaForRadius(int radius)
-        {
-            int area = 0;
-            int cutoff = ((radius * 2 + 1) * (radius * 2 + 1) + 2) / 4;
 
-            for (int v = -radius; v <= radius; ++v) {
-                for (int u = -radius; u <= radius; ++u) {
-                    if (u * u + v * v <= cutoff)
-                        ++area;
-                }
-            }
+		protected static int GetMaxAreaForRadius (int radius)
+		{
+			int area = 0;
+			int cutoff = ((radius * 2 + 1) * (radius * 2 + 1) + 2) / 4;
 
-            return area;
-        }
-		
-		public virtual unsafe ColorBgra Apply(ColorBgra src, int area, int* hb, int* hg, int* hr, int* ha)
-        {
-            return src;
-        }
+			for (int v = -radius; v <= radius; ++v) {
+				for (int u = -radius; u <= radius; ++u) {
+					if (u * u + v * v <= cutoff)
+						++area;
+				}
+			}
 
-        //same as Aply, except the histogram is alpha-weighted instead of keeping a separate alpha channel histogram.
-        public virtual unsafe ColorBgra ApplyWithAlpha(ColorBgra src, int area, int sum, int* hb, int* hg, int* hr)
-        {
-            return src;
-        }
-		
-		public static unsafe ColorBgra GetPercentile(int percentile, int area, int* hb, int* hg, int* hr, int* ha)
-        {
-            int minCount = area * percentile / 100;
+			return area;
+		}
 
-            int b = 0;
-            int bCount = 0;
+		public virtual unsafe ColorBgra Apply (ColorBgra src, int area, int* hb, int* hg, int* hr, int* ha)
+		{
+			return src;
+		}
 
-            while (b < 255 && hb[b] == 0)
-            {
-                ++b;
-            }
+		//same as Aply, except the histogram is alpha-weighted instead of keeping a separate alpha channel histogram.
+		public virtual unsafe ColorBgra ApplyWithAlpha (ColorBgra src, int area, int sum, int* hb, int* hg, int* hr)
+		{
+			return src;
+		}
 
-            while (b < 255 && bCount < minCount)
-            {
-                bCount += hb[b];
-                ++b;
-            }
+		public static unsafe ColorBgra GetPercentile (int percentile, int area, int* hb, int* hg, int* hr, int* ha)
+		{
+			int minCount = area * percentile / 100;
 
-            int g = 0;
-            int gCount = 0;
+			int b = 0;
+			int bCount = 0;
 
-            while (g < 255 && hg[g] == 0)
-            {
-                ++g;
-            }
+			while (b < 255 && hb[b] == 0) {
+				++b;
+			}
 
-            while (g < 255 && gCount < minCount)
-            {
-                gCount += hg[g];
-                ++g;
-            }
+			while (b < 255 && bCount < minCount) {
+				bCount += hb[b];
+				++b;
+			}
 
-            int r = 0;
-            int rCount = 0;
+			int g = 0;
+			int gCount = 0;
 
-            while (r < 255 && hr[r] == 0)
-            {
-                ++r;
-            }
+			while (g < 255 && hg[g] == 0) {
+				++g;
+			}
 
-            while (r < 255 && rCount < minCount)
-            {
-                rCount += hr[r];
-                ++r;
-            }
+			while (g < 255 && gCount < minCount) {
+				gCount += hg[g];
+				++g;
+			}
 
-            int a = 0;
-            int aCount = 0;
+			int r = 0;
+			int rCount = 0;
 
-            while (a < 255 && ha[a] == 0)
-            {
-                ++a;
-            }
+			while (r < 255 && hr[r] == 0) {
+				++r;
+			}
 
-            while (a < 255 && aCount < minCount)
-            {
-                aCount += ha[a];
-                ++a;
-            }
+			while (r < 255 && rCount < minCount) {
+				rCount += hr[r];
+				++r;
+			}
 
-            return ColorBgra.FromBgra((byte)b, (byte)g, (byte)r, (byte)a);
-        }
-		
-		 public unsafe void RenderRect(
-            int rad,
-            ImageSurface src,
-            ImageSurface dst,
-            Rectangle rect)
-        {
-            int width = src.Width;
-            int height = src.Height;
+			int a = 0;
+			int aCount = 0;
 
-            int* leadingEdgeX = stackalloc int[rad + 1];
-            int stride = src.Stride / sizeof(ColorBgra);
+			while (a < 255 && ha[a] == 0) {
+				++a;
+			}
 
-            // approximately (rad + 0.5)^2
-            int cutoff = ((rad * 2 + 1) * (rad * 2 + 1) + 2) / 4;
+			while (a < 255 && aCount < minCount) {
+				aCount += ha[a];
+				++a;
+			}
 
-            for (int v = 0; v <= rad; ++v)
-            {
-                for (int u = 0; u <= rad; ++u)
-                {
-                    if (u * u + v * v <= cutoff)
-                    {
-                        leadingEdgeX[v] = u;
-                    }
-                }
-            }
+			return ColorBgra.FromBgra ((byte) b, (byte) g, (byte) r, (byte) a);
+		}
 
-            const int hLength = 256;
-            int* hb = stackalloc int[hLength];
-            int* hg = stackalloc int[hLength];
-            int* hr = stackalloc int[hLength];
-            int* ha = stackalloc int[hLength];
+		public unsafe void RenderRect (
+	   int rad,
+	   ImageSurface src,
+	   ImageSurface dst,
+	   Rectangle rect)
+		{
+			int width = src.Width;
+			int height = src.Height;
 
-            for (int y = (int)rect.Y; y < rect.Y + rect.Height; y++)
-            {
+			int* leadingEdgeX = stackalloc int[rad + 1];
+			int stride = src.Stride / sizeof (ColorBgra);
+
+			// approximately (rad + 0.5)^2
+			int cutoff = ((rad * 2 + 1) * (rad * 2 + 1) + 2) / 4;
+
+			for (int v = 0; v <= rad; ++v) {
+				for (int u = 0; u <= rad; ++u) {
+					if (u * u + v * v <= cutoff) {
+						leadingEdgeX[v] = u;
+					}
+				}
+			}
+
+			const int hLength = 256;
+			int* hb = stackalloc int[hLength];
+			int* hg = stackalloc int[hLength];
+			int* hr = stackalloc int[hLength];
+			int* ha = stackalloc int[hLength];
+
+			for (int y = (int) rect.Y; y < rect.Y + rect.Height; y++) {
 				MemorySetToZero (hb, hLength);
 				MemorySetToZero (hg, hLength);
 				MemorySetToZero (hr, hLength);
 				MemorySetToZero (ha, hLength);
 
-                int area = 0;
+				int area = 0;
 
-				ColorBgra* ps = src.GetPointAddressUnchecked((int)rect.X, y);
-				ColorBgra* pd = dst.GetPointAddressUnchecked((int)rect.X, y);
-                // assert: v + y >= 0
-                int top = -Math.Min(rad, y);
+				ColorBgra* ps = src.GetPointAddressUnchecked ((int) rect.X, y);
+				ColorBgra* pd = dst.GetPointAddressUnchecked ((int) rect.X, y);
+				// assert: v + y >= 0
+				int top = -Math.Min (rad, y);
 
-                // assert: v + y <= height - 1
-                int bottom = Math.Min(rad, height - 1 - y);
+				// assert: v + y <= height - 1
+				int bottom = Math.Min (rad, height - 1 - y);
 
-                // assert: u + x >= 0
-				int left = -Math.Min(rad, (int)rect.X);
+				// assert: u + x >= 0
+				int left = -Math.Min (rad, (int) rect.X);
 
-                // assert: u + x <= width - 1
-				int right = Math.Min(rad, width - 1 - (int)rect.X);
+				// assert: u + x <= width - 1
+				int right = Math.Min (rad, width - 1 - (int) rect.X);
 
-                for (int v = top; v <= bottom; ++v)
-                {
-					ColorBgra* psamp = src.GetPointAddressUnchecked((int)rect.X + left, y + v);
+				for (int v = top; v <= bottom; ++v) {
+					ColorBgra* psamp = src.GetPointAddressUnchecked ((int) rect.X + left, y + v);
 
-                    for (int u = left; u <= right; ++u)
-                    {
-                        if ((u * u + v * v) <= cutoff)
-                        {
-                            ++area;
-                            ++hb[psamp->B];
-                            ++hg[psamp->G];
-                            ++hr[psamp->R];
-                            ++ha[psamp->A];
-                        }
+					for (int u = left; u <= right; ++u) {
+						if ((u * u + v * v) <= cutoff) {
+							++area;
+							++hb[psamp->B];
+							++hg[psamp->G];
+							++hr[psamp->R];
+							++ha[psamp->A];
+						}
 
-                        ++psamp;
-                    }
-                }
+						++psamp;
+					}
+				}
 
-				for (int x = (int)rect.X; x < rect.X + rect.Width; x++)
-                {
-                    *pd = Apply(*ps, area, hb, hg, hr, ha);
+				for (int x = (int) rect.X; x < rect.X + rect.Width; x++) {
+					*pd = Apply (*ps, area, hb, hg, hr, ha);
 
-                    // assert: u + x >= 0
-                    left = -Math.Min(rad, x);
+					// assert: u + x >= 0
+					left = -Math.Min (rad, x);
 
-                    // assert: u + x <= width - 1
-                    right = Math.Min(rad + 1, width - 1 - x);
+					// assert: u + x <= width - 1
+					right = Math.Min (rad + 1, width - 1 - x);
 
-                    // Subtract trailing edge top half
-                    int v = -1;
+					// Subtract trailing edge top half
+					int v = -1;
 
-                    while (v >= top)
-                    {
-                        int u = leadingEdgeX[-v];
+					while (v >= top) {
+						int u = leadingEdgeX[-v];
 
-                        if (-u >= left)
-                        {
-                            break;
-                        }
+						if (-u >= left) {
+							break;
+						}
 
-                        --v;
-                    }
+						--v;
+					}
 
-                    while (v >= top)
-                    {
-                        int u = leadingEdgeX[-v];
-                        ColorBgra* p = unchecked(ps + (v * stride)) - u;
+					while (v >= top) {
+						int u = leadingEdgeX[-v];
+						ColorBgra* p = unchecked(ps + (v * stride)) - u;
 
-                        --hb[p->B];
-                        --hg[p->G];
-                        --hr[p->R];
-                        --ha[p->A];
-                        --area;
+						--hb[p->B];
+						--hg[p->G];
+						--hr[p->R];
+						--ha[p->A];
+						--area;
 
-                        --v;
-                    }
+						--v;
+					}
 
-                    // add leading edge top half
-                    v = -1;
-                    while (v >= top)
-                    {
-                        int u = leadingEdgeX[-v];
+					// add leading edge top half
+					v = -1;
+					while (v >= top) {
+						int u = leadingEdgeX[-v];
 
-                        if (u + 1 <= right)
-                        {
-                            break;
-                        }
+						if (u + 1 <= right) {
+							break;
+						}
 
-                        --v;
-                    }
+						--v;
+					}
 
-                    while (v >= top)
-                    {
-                        int u = leadingEdgeX[-v];
-                        ColorBgra* p = unchecked(ps + (v * stride)) + u + 1;
+					while (v >= top) {
+						int u = leadingEdgeX[-v];
+						ColorBgra* p = unchecked(ps + (v * stride)) + u + 1;
 
-                        ++hb[p->B];
-                        ++hg[p->G];
-                        ++hr[p->R];
-                        ++ha[p->A];
-                        ++area;
+						++hb[p->B];
+						++hg[p->G];
+						++hr[p->R];
+						++ha[p->A];
+						++area;
 
-                        --v;
-                    }
+						--v;
+					}
 
-                    // Subtract trailing edge bottom half
-                    v = 0;
+					// Subtract trailing edge bottom half
+					v = 0;
 
-                    while (v <= bottom)
-                    {
-                        int u = leadingEdgeX[v];
+					while (v <= bottom) {
+						int u = leadingEdgeX[v];
 
-                        if (-u >= left)
-                        {
-                            break;
-                        }
+						if (-u >= left) {
+							break;
+						}
 
-                        ++v;
-                    }
+						++v;
+					}
 
-                    while (v <= bottom)
-                    {
-                        int u = leadingEdgeX[v];
-                        ColorBgra* p = ps + v * stride - u;
+					while (v <= bottom) {
+						int u = leadingEdgeX[v];
+						ColorBgra* p = ps + v * stride - u;
 
-                        --hb[p->B];
-                        --hg[p->G];
-                        --hr[p->R];
-                        --ha[p->A];
-                        --area;
+						--hb[p->B];
+						--hg[p->G];
+						--hr[p->R];
+						--ha[p->A];
+						--area;
 
-                        ++v;
-                    }
+						++v;
+					}
 
-                    // add leading edge bottom half
-                    v = 0;
+					// add leading edge bottom half
+					v = 0;
 
-                    while (v <= bottom)
-                    {
-                        int u = leadingEdgeX[v];
+					while (v <= bottom) {
+						int u = leadingEdgeX[v];
 
-                        if (u + 1 <= right)
-                        {
-                            break;
-                        }
+						if (u + 1 <= right) {
+							break;
+						}
 
-                        ++v;
-                    }
+						++v;
+					}
 
-                    while (v <= bottom)
-                    {
-                        int u = leadingEdgeX[v];
-                        ColorBgra* p = ps + v * stride + u + 1;
+					while (v <= bottom) {
+						int u = leadingEdgeX[v];
+						ColorBgra* p = ps + v * stride + u + 1;
 
-                        ++hb[p->B];
-                        ++hg[p->G];
-                        ++hr[p->R];
-                        ++ha[p->A];
-                        ++area;
+						++hb[p->B];
+						++hg[p->G];
+						++hr[p->R];
+						++ha[p->A];
+						++area;
 
-                        ++v;
-                    }
+						++v;
+					}
 
-                    ++ps;
-                    ++pd;
-                }
-            }
-        }
-		
-		
-        //same as RenderRect, except the histogram is alpha-weighted instead of keeping a separate alpha channel histogram.
-        public unsafe void RenderRectWithAlpha(
-            int rad,
-            ImageSurface src,
-            ImageSurface dst,
-            Rectangle rect)
-        {
-            int width = src.Width;
-            int height = src.Height;
+					++ps;
+					++pd;
+				}
+			}
+		}
 
-            int* leadingEdgeX = stackalloc int[rad + 1];
-            int stride = src.Stride / sizeof(ColorBgra);
 
-            // approximately (rad + 0.5)^2
-            int cutoff = ((rad * 2 + 1) * (rad * 2 + 1) + 2) / 4;
+		//same as RenderRect, except the histogram is alpha-weighted instead of keeping a separate alpha channel histogram.
+		public unsafe void RenderRectWithAlpha (
+		    int rad,
+		    ImageSurface src,
+		    ImageSurface dst,
+		    Rectangle rect)
+		{
+			int width = src.Width;
+			int height = src.Height;
 
-            for (int v = 0; v <= rad; ++v)
-            {
-                for (int u = 0; u <= rad; ++u)
-                {
-                    if (u * u + v * v <= cutoff)
-                    {
-                        leadingEdgeX[v] = u;
-                    }
-                }
-            }
+			int* leadingEdgeX = stackalloc int[rad + 1];
+			int stride = src.Stride / sizeof (ColorBgra);
 
-            const int hLength = 256;
-            int* hb = stackalloc int[hLength];
-            int* hg = stackalloc int[hLength];
-            int* hr = stackalloc int[hLength];
+			// approximately (rad + 0.5)^2
+			int cutoff = ((rad * 2 + 1) * (rad * 2 + 1) + 2) / 4;
 
-			for (int y = (int)rect.Y; y < rect.Y + rect.Height; y++)
-            {
+			for (int v = 0; v <= rad; ++v) {
+				for (int u = 0; u <= rad; ++u) {
+					if (u * u + v * v <= cutoff) {
+						leadingEdgeX[v] = u;
+					}
+				}
+			}
+
+			const int hLength = 256;
+			int* hb = stackalloc int[hLength];
+			int* hg = stackalloc int[hLength];
+			int* hr = stackalloc int[hLength];
+
+			for (int y = (int) rect.Y; y < rect.Y + rect.Height; y++) {
 				MemorySetToZero (hb, hLength);
 				MemorySetToZero (hg, hLength);
 				MemorySetToZero (hr, hLength);
 
-                int area = 0;
-                int sum = 0;
+				int area = 0;
+				int sum = 0;
 
-                ColorBgra* ps = src.GetPointAddressUnchecked((int)rect.X, y);
-                ColorBgra* pd = dst.GetPointAddressUnchecked((int)rect.X, y);
+				ColorBgra* ps = src.GetPointAddressUnchecked ((int) rect.X, y);
+				ColorBgra* pd = dst.GetPointAddressUnchecked ((int) rect.X, y);
 
-                // assert: v + y >= 0
-                int top = -Math.Min(rad, y);
+				// assert: v + y >= 0
+				int top = -Math.Min (rad, y);
 
-                // assert: v + y <= height - 1
-                int bottom = Math.Min(rad, height - 1 - y);
+				// assert: v + y <= height - 1
+				int bottom = Math.Min (rad, height - 1 - y);
 
-                // assert: u + x >= 0
-				int left = -Math.Min(rad, (int)rect.X);
+				// assert: u + x >= 0
+				int left = -Math.Min (rad, (int) rect.X);
 
-                // assert: u + x <= width - 1
-				int right = Math.Min(rad, width - 1 - (int)rect.Y);
+				// assert: u + x <= width - 1
+				int right = Math.Min (rad, width - 1 - (int) rect.Y);
 
-                for (int v = top; v <= bottom; ++v)
-                {
-					ColorBgra* psamp = src.GetPointAddressUnchecked((int)rect.Y + left, y + v);
+				for (int v = top; v <= bottom; ++v) {
+					ColorBgra* psamp = src.GetPointAddressUnchecked ((int) rect.Y + left, y + v);
 
-                    for (int u = left; u <= right; ++u)
-                    {
-                        byte w = psamp->A;
-                        if ((u * u + v * v) <= cutoff)
-                        {
-                            ++area;
-                            sum += w;
-                            hb[psamp->B] += w;
-                            hg[psamp->G] += w;
-                            hr[psamp->R] += w;
-                        }
+					for (int u = left; u <= right; ++u) {
+						byte w = psamp->A;
+						if ((u * u + v * v) <= cutoff) {
+							++area;
+							sum += w;
+							hb[psamp->B] += w;
+							hg[psamp->G] += w;
+							hr[psamp->R] += w;
+						}
 
-                        ++psamp;
-                    }
-                }
+						++psamp;
+					}
+				}
 
-                for (int x = (int)rect.X; x < rect.X + rect.Width; x++)
-                {
-                    *pd = ApplyWithAlpha(*ps, area, sum, hb, hg, hr);
+				for (int x = (int) rect.X; x < rect.X + rect.Width; x++) {
+					*pd = ApplyWithAlpha (*ps, area, sum, hb, hg, hr);
 
-                    // assert: u + x >= 0
-                    left = -Math.Min(rad, x);
+					// assert: u + x >= 0
+					left = -Math.Min (rad, x);
 
-                    // assert: u + x <= width - 1
-                    right = Math.Min(rad + 1, width - 1 - x);
+					// assert: u + x <= width - 1
+					right = Math.Min (rad + 1, width - 1 - x);
 
-                    // Subtract trailing edge top half
-                    int v = -1;
+					// Subtract trailing edge top half
+					int v = -1;
 
-                    while (v >= top)
-                    {
-                        int u = leadingEdgeX[-v];
+					while (v >= top) {
+						int u = leadingEdgeX[-v];
 
-                        if (-u >= left)
-                        {
-                            break;
-                        }
+						if (-u >= left) {
+							break;
+						}
 
-                        --v;
-                    }
+						--v;
+					}
 
-                    while (v >= top)
-                    {
-                        int u = leadingEdgeX[-v];
-                        ColorBgra* p = unchecked(ps + (v * stride)) - u;
-                        byte w = p->A;
+					while (v >= top) {
+						int u = leadingEdgeX[-v];
+						ColorBgra* p = unchecked(ps + (v * stride)) - u;
+						byte w = p->A;
 
-                        hb[p->B] -= w;
-                        hg[p->G] -= w;
-                        hr[p->R] -= w;
-                        sum -= w;
-                        --area;
+						hb[p->B] -= w;
+						hg[p->G] -= w;
+						hr[p->R] -= w;
+						sum -= w;
+						--area;
 
-                        --v;
-                    }
+						--v;
+					}
 
-                    // add leading edge top half
-                    v = -1;
-                    while (v >= top)
-                    {
-                        int u = leadingEdgeX[-v];
+					// add leading edge top half
+					v = -1;
+					while (v >= top) {
+						int u = leadingEdgeX[-v];
 
-                        if (u + 1 <= right)
-                        {
-                            break;
-                        }
+						if (u + 1 <= right) {
+							break;
+						}
 
-                        --v;
-                    }
+						--v;
+					}
 
-                    while (v >= top)
-                    {
-                        int u = leadingEdgeX[-v];
-                        ColorBgra* p = unchecked(ps + (v * stride)) + u + 1;
-                        byte w = p->A;
+					while (v >= top) {
+						int u = leadingEdgeX[-v];
+						ColorBgra* p = unchecked(ps + (v * stride)) + u + 1;
+						byte w = p->A;
 
-                        hb[p->B] += w;
-                        hg[p->G] += w;
-                        hr[p->R] += w;
-                        sum += w;
-                        ++area;
+						hb[p->B] += w;
+						hg[p->G] += w;
+						hr[p->R] += w;
+						sum += w;
+						++area;
 
-                        --v;
-                    }
+						--v;
+					}
 
-                    // Subtract trailing edge bottom half
-                    v = 0;
+					// Subtract trailing edge bottom half
+					v = 0;
 
-                    while (v <= bottom)
-                    {
-                        int u = leadingEdgeX[v];
+					while (v <= bottom) {
+						int u = leadingEdgeX[v];
 
-                        if (-u >= left)
-                        {
-                            break;
-                        }
+						if (-u >= left) {
+							break;
+						}
 
-                        ++v;
-                    }
+						++v;
+					}
 
-                    while (v <= bottom)
-                    {
-                        int u = leadingEdgeX[v];
-                        ColorBgra* p = ps + v * stride - u;
-                        byte w = p->A;
+					while (v <= bottom) {
+						int u = leadingEdgeX[v];
+						ColorBgra* p = ps + v * stride - u;
+						byte w = p->A;
 
-                        hb[p->B] -= w;
-                        hg[p->G] -= w;
-                        hr[p->R] -= w;
-                        sum -= w;
-                        --area;
+						hb[p->B] -= w;
+						hg[p->G] -= w;
+						hr[p->R] -= w;
+						sum -= w;
+						--area;
 
-                        ++v;
-                    }
+						++v;
+					}
 
-                    // add leading edge bottom half
-                    v = 0;
+					// add leading edge bottom half
+					v = 0;
 
-                    while (v <= bottom)
-                    {
-                        int u = leadingEdgeX[v];
+					while (v <= bottom) {
+						int u = leadingEdgeX[v];
 
-                        if (u + 1 <= right)
-                        {
-                            break;
-                        }
+						if (u + 1 <= right) {
+							break;
+						}
 
-                        ++v;
-                    }
+						++v;
+					}
 
-                    while (v <= bottom)
-                    {
-                        int u = leadingEdgeX[v];
-                        ColorBgra* p = ps + v * stride + u + 1;
-                        byte w = p->A;
+					while (v <= bottom) {
+						int u = leadingEdgeX[v];
+						ColorBgra* p = ps + v * stride + u + 1;
+						byte w = p->A;
 
-                        hb[p->B] += w;
-                        hg[p->G] += w;
-                        hr[p->R] += w;
-                        sum += w;
-                        ++area;
+						hb[p->B] += w;
+						hg[p->G] += w;
+						hr[p->R] += w;
+						sum += w;
+						++area;
 
-                        ++v;
-                    }
+						++v;
+					}
 
-                    ++ps;
-                    ++pd;
-                }
-            }
+					++ps;
+					++pd;
+				}
+			}
 		}
-	
+
 		//must be more efficient way to zero memory array
-		private unsafe void MemorySetToZero(int* ptr, int size)
+		private unsafe void MemorySetToZero (int* ptr, int size)
 		{
-			for (int i = 0; i < size; i++) 
-				ptr [i] = 0;
+			for (int i = 0; i < size; i++)
+				ptr[i] = 0;
 		}
 	}
 }

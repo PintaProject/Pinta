@@ -25,9 +25,9 @@
 // THE SOFTWARE.
 
 using System;
-using Gtk;
 using System.Collections.Generic;
 using ClipperLib;
+using Gtk;
 
 namespace Pinta.Core
 {
@@ -46,12 +46,12 @@ namespace Pinta.Core
 		public AddinActions Addins { get; private set; }
 		public WindowActions Window { get; private set; }
 		public HelpActions Help { get; private set; }
-		
+
 		public ActionManager ()
 		{
 			AccelGroup = new AccelGroup ();
 
-			App = new AppActions();
+			App = new AppActions ();
 			File = new FileActions ();
 			Edit = new EditActions ();
 			View = new ViewActions ();
@@ -63,7 +63,7 @@ namespace Pinta.Core
 			Window = new WindowActions ();
 			Help = new HelpActions ();
 		}
-		
+
 		public void CreateToolBar (Gtk.Toolbar toolbar)
 		{
 			toolbar.AppendItem (File.New.CreateToolBarItem ());

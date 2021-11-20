@@ -8,9 +8,9 @@
 /////////////////////////////////////////////////////////////////////////////////
 
 using System;
-using Pinta.Gui.Widgets;
 using Cairo;
 using Pinta.Core;
+using Pinta.Gui.Widgets;
 
 namespace Pinta.Effects
 {
@@ -32,7 +32,7 @@ namespace Pinta.Effects
 			get { return Translations.GetString ("Blurs"); }
 		}
 
-		public MotionBlurData Data { get { return (MotionBlurData)EffectData!; } } // NRT - Set in constructor
+		public MotionBlurData Data { get { return (MotionBlurData) EffectData!; } } // NRT - Set in constructor
 
 		public MotionBlurEffect ()
 		{
@@ -48,9 +48,9 @@ namespace Pinta.Effects
 		public unsafe override void Render (ImageSurface src, ImageSurface dst, Gdk.Rectangle[] rois)
 		{
 			PointD start = new PointD (0, 0);
-			double theta = ((double)(Data.Angle + 180) * 2 * Math.PI) / 360.0;
-			double alpha = (double)Data.Distance;
-			PointD end = new PointD ((float)alpha * Math.Cos (theta), (float)(-alpha * Math.Sin (theta)));
+			double theta = ((double) (Data.Angle + 180) * 2 * Math.PI) / 360.0;
+			double alpha = (double) Data.Distance;
+			PointD end = new PointD ((float) alpha * Math.Cos (theta), (float) (-alpha * Math.Sin (theta)));
 
 			if (Data.Centered) {
 				start.X = -end.X / 2.0f;
@@ -66,14 +66,14 @@ namespace Pinta.Effects
 				points[0] = new PointD (0, 0);
 			} else {
 				for (int i = 0; i < points.Length; ++i) {
-					float frac = (float)i / (float)(points.Length - 1);
+					float frac = (float) i / (float) (points.Length - 1);
 					points[i] = Utility.Lerp (start, end, frac);
 				}
 			}
 
 			ColorBgra* samples = stackalloc ColorBgra[points.Length];
 
-			ColorBgra* src_dataptr = (ColorBgra*)src.DataPtr;
+			ColorBgra* src_dataptr = (ColorBgra*) src.DataPtr;
 			int src_width = src.Width;
 			int src_height = src.Height;
 
@@ -86,10 +86,10 @@ namespace Pinta.Effects
 						int sampleCount = 0;
 
 						for (int j = 0; j < points.Length; ++j) {
-							PointD pt = new PointD (points[j].X + (float)x, points[j].Y + (float)y);
+							PointD pt = new PointD (points[j].X + (float) x, points[j].Y + (float) y);
 
 							if (pt.X >= 0 && pt.Y >= 0 && pt.X <= (src_width - 1) && pt.Y <= (src_height - 1)) {
-								samples[sampleCount] = src.GetBilinearSample (src_dataptr, src_width, src_height, (float)pt.X, (float)pt.Y);
+								samples[sampleCount] = src.GetBilinearSample (src_dataptr, src_width, src_height, (float) pt.X, (float) pt.Y);
 								++sampleCount;
 							}
 						}

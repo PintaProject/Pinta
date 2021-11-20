@@ -42,7 +42,7 @@ using Cairo;
 
 namespace Pinta.Core
 {
-	public class TgaExporter: IImageExporter
+	public class TgaExporter : IImageExporter
 	{
 		private struct TgaHeader
 		{
@@ -86,15 +86,16 @@ namespace Pinta.Core
 		/// value is 0 (see bug #987641).
 		/// </summary>
 		private const string ImageIdField = "Created by Pinta";
-		
+
 		// For now, we only export in uncompressed ARGB32 format. If someone requests this functionality,
 		// we can always add more through an export dialog.
-		public void Export (Document document, string fileName, Gtk.Window parent) {
+		public void Export (Document document, string fileName, Gtk.Window parent)
+		{
 			ImageSurface surf = document.GetFlattenedImage (); // Assumes the surface is in ARGB32 format
 			BinaryWriter writer = new BinaryWriter (new FileStream (fileName, FileMode.Create, FileAccess.Write));
-	
+
 			try {
-				TgaHeader header = new TgaHeader();
+				TgaHeader header = new TgaHeader ();
 
 				header.idLength = (byte) (ImageIdField.Length + 1);
 				header.cmapType = 0;
@@ -110,10 +111,10 @@ namespace Pinta.Core
 				header.imageDesc = 8; // 32-bit, lower-left origin, which is weird but hey...
 				header.WriteTo (writer);
 
-				writer.Write(ImageIdField);
-				
+				writer.Write (ImageIdField);
+
 				byte[] data = surf.Data;
-				
+
 				// It just so happens that the Cairo ARGB32 internal representation matches
 				// the TGA format, except vertically-flipped. In little-endian, of course.
 				for (int y = surf.Height - 1; y >= 0; y--)

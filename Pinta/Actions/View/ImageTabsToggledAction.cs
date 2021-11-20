@@ -1,4 +1,4 @@
-﻿// 
+// 
 // ImageTabsToggledAction.cs
 //  
 // Author:
@@ -25,12 +25,12 @@
 // THE SOFTWARE.
 
 using System;
-using Pinta.Core;
 using Gtk;
+using Pinta.Core;
 
 namespace Pinta.Actions
 {
-    class ImageTabsToggledAction : IActionHandler
+	class ImageTabsToggledAction : IActionHandler
 	{
 		#region IActionHandler Members
 		public void Initialize ()
@@ -40,7 +40,7 @@ namespace Pinta.Actions
 
 		public void Uninitialize ()
 		{
-            PintaCore.Actions.View.ImageTabs.Toggled -= Activated;
+			PintaCore.Actions.View.ImageTabs.Toggled -= Activated;
 		}
 		#endregion
 

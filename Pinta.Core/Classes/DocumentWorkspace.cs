@@ -1,4 +1,4 @@
-﻿//
+//
 // DocumentWorkspace.cs
 //  
 // Author:
@@ -46,9 +46,9 @@ namespace Pinta.Core
 			History = new DocumentHistory (document);
 		}
 
-        #region Public Events
-        public event EventHandler<CanvasInvalidatedEventArgs>? CanvasInvalidated;
-        public event EventHandler? CanvasSizeChanged;
+		#region Public Events
+		public event EventHandler<CanvasInvalidatedEventArgs>? CanvasInvalidated;
+		public event EventHandler? CanvasSizeChanged;
 		#endregion
 
 		#region Public Properties
@@ -56,14 +56,14 @@ namespace Pinta.Core
 
 		public bool CanvasFitsInWindow {
 			get {
-				Gtk.Viewport view = (Gtk.Viewport)Canvas.Parent;
-				
+				Gtk.Viewport view = (Gtk.Viewport) Canvas.Parent;
+
 				int window_x = view.Allocation.Width;
 				int window_y = view.Allocation.Height;
 
 				if (CanvasSize.Width <= window_x && CanvasSize.Height <= window_y)
 					return true;
-				
+
 				return false;
 			}
 		}
@@ -82,14 +82,14 @@ namespace Pinta.Core
 
 		public bool ImageFitsInWindow {
 			get {
-				Gtk.Viewport view = (Gtk.Viewport)Canvas.Parent;
-				
+				Gtk.Viewport view = (Gtk.Viewport) Canvas.Parent;
+
 				int window_x = view.Allocation.Width;
 				int window_y = view.Children[0].Allocation.Height;
-				
+
 				if (document.ImageSize.Width <= window_x && document.ImageSize.Height <= window_y)
 					return true;
-				
+
 				return false;
 			}
 		}
@@ -99,29 +99,26 @@ namespace Pinta.Core
 		}
 
 		public double Scale {
-			get { return (double)CanvasSize.Width / (double)document.ImageSize.Width; }
+			get { return (double) CanvasSize.Width / (double) document.ImageSize.Width; }
 			set {
-				if (value != (double)CanvasSize.Width / (double)document.ImageSize.Width || value != (double)CanvasSize.Height / (double)document.ImageSize.Height) {
-					if (document.ImageSize.Width == 0)
-					{
-						document.ImageSize = new Size(1, document.ImageSize.Height);
+				if (value != (double) CanvasSize.Width / (double) document.ImageSize.Width || value != (double) CanvasSize.Height / (double) document.ImageSize.Height) {
+					if (document.ImageSize.Width == 0) {
+						document.ImageSize = new Size (1, document.ImageSize.Height);
 					}
 
-					if (document.ImageSize.Height == 0)
-					{
-						document.ImageSize = new Size(document.ImageSize.Width, 1);
+					if (document.ImageSize.Height == 0) {
+						document.ImageSize = new Size (document.ImageSize.Width, 1);
 					}
 
-					int new_x = Math.Max ((int)(document.ImageSize.Width * value), 1);
-					int new_y = Math.Max ((int)(((long)new_x * document.ImageSize.Height) / document.ImageSize.Width), 1);
+					int new_x = Math.Max ((int) (document.ImageSize.Width * value), 1);
+					int new_y = Math.Max ((int) (((long) new_x * document.ImageSize.Height) / document.ImageSize.Width), 1);
 
 					CanvasSize = new Gdk.Size (new_x, new_y);
 					Invalidate ();
 
-					if (PintaCore.Tools.CurrentTool?.CursorChangesOnZoom == true)
-					{
+					if (PintaCore.Tools.CurrentTool?.CursorChangesOnZoom == true) {
 						//The current tool's cursor changes when the zoom changes.
-						PintaCore.Tools.CurrentTool.SetCursor(PintaCore.Tools.CurrentTool.DefaultCursor);
+						PintaCore.Tools.CurrentTool.SetCursor (PintaCore.Tools.CurrentTool.DefaultCursor);
 					}
 				}
 			}
@@ -143,13 +140,13 @@ namespace Pinta.Core
 		/// </param>
 		public void Invalidate (Gdk.Rectangle canvasRect)
 		{
-			Cairo.PointD canvasTopLeft = new Cairo.PointD(canvasRect.Left, canvasRect.Top);
-			Cairo.PointD canvasBtmRight = new Cairo.PointD(canvasRect.Right + 1, canvasRect.Bottom + 1);
+			Cairo.PointD canvasTopLeft = new Cairo.PointD (canvasRect.Left, canvasRect.Top);
+			Cairo.PointD canvasBtmRight = new Cairo.PointD (canvasRect.Right + 1, canvasRect.Bottom + 1);
 
-			Cairo.PointD winTopLeft = CanvasPointToWindow(canvasTopLeft.X, canvasTopLeft.Y);
-			Cairo.PointD winBtmRight = CanvasPointToWindow(canvasBtmRight.X, canvasBtmRight.Y);
+			Cairo.PointD winTopLeft = CanvasPointToWindow (canvasTopLeft.X, canvasTopLeft.Y);
+			Cairo.PointD winBtmRight = CanvasPointToWindow (canvasBtmRight.X, canvasBtmRight.Y);
 
-			Gdk.Rectangle winRect = Utility.PointsToRectangle(winTopLeft, winBtmRight, false).ToGdkRectangle();
+			Gdk.Rectangle winRect = Utility.PointsToRectangle (winTopLeft, winBtmRight, false).ToGdkRectangle ();
 
 			OnCanvasInvalidated (new CanvasInvalidatedEventArgs (winRect));
 		}
@@ -166,25 +163,25 @@ namespace Pinta.Core
 		{
 			if (point.X < 0 || point.Y < 0)
 				return false;
-			
+
 			if (point.X >= document.ImageSize.Width || point.Y >= document.ImageSize.Height)
 				return false;
-			
+
 			return true;
 		}
 
 		public void RecenterView (double x, double y)
 		{
-			Gtk.Viewport view = (Gtk.Viewport)Canvas.Parent;
-			
+			Gtk.Viewport view = (Gtk.Viewport) Canvas.Parent;
+
 			view.Hadjustment.Value = Utility.Clamp (x * Scale - view.Hadjustment.PageSize / 2, view.Hadjustment.Lower, view.Hadjustment.Upper);
 			view.Vadjustment.Value = Utility.Clamp (y * Scale - view.Vadjustment.PageSize / 2, view.Vadjustment.Lower, view.Vadjustment.Upper);
 		}
 
 		public void ScrollCanvas (int dx, int dy)
 		{
-			Gtk.Viewport view = (Gtk.Viewport)Canvas.Parent;
-			
+			Gtk.Viewport view = (Gtk.Viewport) Canvas.Parent;
+
 			view.Hadjustment.Value = Utility.Clamp (dx + view.Hadjustment.Value, view.Hadjustment.Lower, view.Hadjustment.Upper - view.Hadjustment.PageSize);
 			view.Vadjustment.Value = Utility.Clamp (dy + view.Vadjustment.Value, view.Vadjustment.Lower, view.Vadjustment.Upper - view.Vadjustment.PageSize);
 		}
@@ -201,9 +198,9 @@ namespace Pinta.Core
 		public Cairo.PointD WindowPointToCanvas (double x, double y)
 		{
 			ScaleFactor sf = new ScaleFactor (PintaCore.Workspace.ImageSize.Width,
-			                                  PintaCore.Workspace.CanvasSize.Width);
+							  PintaCore.Workspace.CanvasSize.Width);
 			Cairo.PointD pt = sf.ScalePoint (new Cairo.PointD (x - Offset.X, y - Offset.Y));
-			return new Cairo.PointD(pt.X, pt.Y);
+			return new Cairo.PointD (pt.X, pt.Y);
 		}
 
 		/// <summary>
@@ -218,9 +215,9 @@ namespace Pinta.Core
 		public Cairo.PointD CanvasPointToWindow (double x, double y)
 		{
 			ScaleFactor sf = new ScaleFactor (PintaCore.Workspace.ImageSize.Width,
-			                                  PintaCore.Workspace.CanvasSize.Width);
+							  PintaCore.Workspace.CanvasSize.Width);
 			Cairo.PointD pt = sf.UnscalePoint (new Cairo.PointD (x, y));
-			return new Cairo.PointD(pt.X + Offset.X, pt.Y + Offset.Y);
+			return new Cairo.PointD (pt.X + Offset.X, pt.Y + Offset.Y);
 		}
 
 		public void ZoomIn ()
@@ -251,12 +248,12 @@ namespace Pinta.Core
 		public void ZoomToRectangle (Cairo.Rectangle rect)
 		{
 			double ratio;
-			
+
 			if (document.ImageSize.Width / rect.Width <= document.ImageSize.Height / rect.Height)
 				ratio = document.ImageSize.Width / rect.Width;
 			else
 				ratio = document.ImageSize.Height / rect.Height;
-			
+
 			PintaCore.Actions.View.ZoomComboBox.ComboBox.Entry.Text = ViewActions.ToPercent (ratio);
 			Gtk.Main.Iteration (); //Force update of scrollbar upper before recenter
 			RecenterView (rect.X + rect.Width / 2, rect.Y + rect.Height / 2);
@@ -264,100 +261,99 @@ namespace Pinta.Core
 		#endregion
 
 		#region Private Methods
-        protected internal void OnCanvasInvalidated (CanvasInvalidatedEventArgs e)
-        {
-            if (CanvasInvalidated != null)
-                CanvasInvalidated (this, e);
-        }
-
-        public void OnCanvasSizeChanged ()
-        {
-            if (CanvasSizeChanged != null)
-                CanvasSizeChanged (this, EventArgs.Empty);
-        }
-
-        private void ZoomAndRecenterView (ZoomType zoomType, Cairo.PointD point)
+		protected internal void OnCanvasInvalidated (CanvasInvalidatedEventArgs e)
 		{
-			if (zoomType == ZoomType.ZoomOut && (CanvasSize.Width == 1 || CanvasSize.Height ==1))
+			if (CanvasInvalidated != null)
+				CanvasInvalidated (this, e);
+		}
+
+		public void OnCanvasSizeChanged ()
+		{
+			if (CanvasSizeChanged != null)
+				CanvasSizeChanged (this, EventArgs.Empty);
+		}
+
+		private void ZoomAndRecenterView (ZoomType zoomType, Cairo.PointD point)
+		{
+			if (zoomType == ZoomType.ZoomOut && (CanvasSize.Width == 1 || CanvasSize.Height == 1))
 				return; //Can't zoom in past a 1x1 px canvas
 
 			double zoom;
-			
+
 			if (!ViewActions.TryParsePercent (PintaCore.Actions.View.ZoomComboBox.ComboBox.ActiveText, out zoom))
 				zoom = Scale * 100;
-			
+
 			zoom = Math.Min (zoom, 3600);
-			
-            if (Canvas.Window != null)
-			    Canvas.Window.FreezeUpdates ();
+
+			if (Canvas.Window != null)
+				Canvas.Window.FreezeUpdates ();
 
 			PintaCore.Actions.View.SuspendZoomUpdate ();
-			
-			Gtk.Viewport view = (Gtk.Viewport)Canvas.Parent;
-			
+
+			Gtk.Viewport view = (Gtk.Viewport) Canvas.Parent;
+
 			bool adjustOnMousePosition = point.X >= 0.0 && point.Y >= 0.0;
-			
+
 			double center_x = adjustOnMousePosition ?
 				point.X : view.Hadjustment.Value + (view.Hadjustment.PageSize / 2.0);
 			double center_y = adjustOnMousePosition ?
 				point.Y : view.Vadjustment.Value + (view.Vadjustment.PageSize / 2.0);
-			
+
 			center_x = (center_x - Offset.X) / Scale;
 			center_y = (center_y - Offset.Y) / Scale;
 
 			if (zoomType == ZoomType.ZoomIn || zoomType == ZoomType.ZoomOut) {
 				int i = 0;
-				
-				Predicate<string> UpdateZoomLevel = zoomInList =>
-				{
+
+				Predicate<string> UpdateZoomLevel = zoomInList => {
 					double zoom_level;
 					if (!ViewActions.TryParsePercent (zoomInList, out zoom_level))
 						return false;
 
 					switch (zoomType) {
-					case ZoomType.ZoomIn:
-						if (zoomInList == Translations.GetString ("Window") || zoom_level <= zoom) {
-							PintaCore.Actions.View.ZoomComboBox.ComboBox.Active = i - 1;
-							return true;
-						}
-						
-						break;
-					
-					case ZoomType.ZoomOut:
-						if (zoomInList == Translations.GetString ("Window"))
-							return true;
-						
-						if (zoom_level < zoom) {
-							PintaCore.Actions.View.ZoomComboBox.ComboBox.Active = i;
-							return true;
-						}
-						
-						break;
+						case ZoomType.ZoomIn:
+							if (zoomInList == Translations.GetString ("Window") || zoom_level <= zoom) {
+								PintaCore.Actions.View.ZoomComboBox.ComboBox.Active = i - 1;
+								return true;
+							}
+
+							break;
+
+						case ZoomType.ZoomOut:
+							if (zoomInList == Translations.GetString ("Window"))
+								return true;
+
+							if (zoom_level < zoom) {
+								PintaCore.Actions.View.ZoomComboBox.ComboBox.Active = i;
+								return true;
+							}
+
+							break;
 					}
-					
+
 					return false;
 				};
-				
+
 				foreach (string item in PintaCore.Actions.View.ZoomCollection) {
 					if (UpdateZoomLevel (item))
 						break;
-					
+
 					i++;
 				}
 			}
 
 			PintaCore.Actions.View.UpdateCanvasScale ();
-			
+
 			// Quick fix : need to manually update Upper limit because the value is not changing after updating the canvas scale.
 			// TODO : I think there is an event need to be fired so that those values updated automatically.
 			view.Hadjustment.Upper = CanvasSize.Width < view.Hadjustment.PageSize ? view.Hadjustment.PageSize : CanvasSize.Width;
 			view.Vadjustment.Upper = CanvasSize.Height < view.Vadjustment.PageSize ? view.Vadjustment.PageSize : CanvasSize.Height;
-			
+
 			RecenterView (center_x, center_y);
-			
+
 			PintaCore.Actions.View.ResumeZoomUpdate ();
-            if (Canvas.Window != null)
-                Canvas.Window.ThawUpdates ();
+			if (Canvas.Window != null)
+				Canvas.Window.ThawUpdates ();
 		}
 		#endregion
 	}

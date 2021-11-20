@@ -8,9 +8,9 @@
 /////////////////////////////////////////////////////////////////////////////////
 
 using System;
-using Pinta.Gui.Widgets;
 using Cairo;
 using Pinta.Core;
+using Pinta.Gui.Widgets;
 
 namespace Pinta.Effects
 {
@@ -32,7 +32,7 @@ namespace Pinta.Effects
 			get { return Translations.GetString ("Blurs"); }
 		}
 
-		public FragmentData Data { get { return (FragmentData)EffectData!; } } // NRT - Set in constructor
+		public FragmentData Data { get { return (FragmentData) EffectData!; } } // NRT - Set in constructor
 
 		public FragmentEffect ()
 		{
@@ -47,7 +47,7 @@ namespace Pinta.Effects
 		#region Algorithm Code Ported From PDN
 		private Gdk.Point[] RecalcPointOffsets (int fragments, double rotationAngle, int distance)
 		{
-			double pointStep = 2 * Math.PI / (double)fragments;
+			double pointStep = 2 * Math.PI / (double) fragments;
 			double rotationRadians = ((rotationAngle - 90.0) * Math.PI) / 180.0;
 
 			Gdk.Point[] pointOffsets = new Gdk.Point[fragments];
@@ -56,10 +56,10 @@ namespace Pinta.Effects
 				double currentRadians = rotationRadians + (pointStep * i);
 
 				pointOffsets[i] = new Gdk.Point (
-				    (int)Math.Round (distance * -Math.Sin (currentRadians), MidpointRounding.AwayFromZero),
-				    (int)Math.Round (distance * -Math.Cos (currentRadians), MidpointRounding.AwayFromZero));
+				    (int) Math.Round (distance * -Math.Sin (currentRadians), MidpointRounding.AwayFromZero),
+				    (int) Math.Round (distance * -Math.Cos (currentRadians), MidpointRounding.AwayFromZero));
 			}
-			
+
 			return pointOffsets;
 		}
 
@@ -69,7 +69,7 @@ namespace Pinta.Effects
 
 			int poLength = pointOffsets.Length;
 			Gdk.Point* pointOffsetsPtr = stackalloc Gdk.Point[poLength];
-			
+
 			for (int i = 0; i < poLength; ++i)
 				pointOffsetsPtr[i] = pointOffsets[i];
 
@@ -78,7 +78,7 @@ namespace Pinta.Effects
 			// Cache these for a massive performance boost
 			int src_width = src.Width;
 			int src_height = src.Height;
-			ColorBgra* src_data_ptr = (ColorBgra*)src.DataPtr;
+			ColorBgra* src_data_ptr = (ColorBgra*) src.DataPtr;
 
 			foreach (Gdk.Rectangle rect in rois) {
 				for (int y = rect.Top; y <= rect.GetBottom (); y++) {

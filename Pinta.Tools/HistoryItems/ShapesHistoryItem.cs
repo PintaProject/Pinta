@@ -1,4 +1,4 @@
-﻿// 
+// 
 // ShapesHistoryItem.cs
 //  
 // Author:
@@ -25,14 +25,14 @@
 // THE SOFTWARE.
 
 using System;
-using Pinta.Core;
 using Cairo;
+using Pinta.Core;
 
 namespace Pinta.Tools
 {
 	public class ShapesHistoryItem : BaseHistoryItem
 	{
-        private BaseEditEngine ee;
+		private BaseEditEngine ee;
 
 		private UserLayer userLayer;
 
@@ -48,7 +48,7 @@ namespace Pinta.Tools
 		/// <summary>
 		/// A history item for when shapes are finalized.
 		/// </summary>
-        /// <param name="passedEE">The EditEngine being used.</param>
+		/// <param name="passedEE">The EditEngine being used.</param>
 		/// <param name="icon">The history item's icon.</param>
 		/// <param name="text">The history item's title.</param>
 		/// <param name="passedUserSurface">The stored UserLayer surface.</param>
@@ -56,56 +56,50 @@ namespace Pinta.Tools
 		/// <param name="passedSelectedPointIndex">The selected point's index.</param>
 		/// <param name="passedSelectedShapeIndex">The selected point's shape index.</param>
 		/// <param name="passedRedrawEverything">Whether every shape should be redrawn when undoing (e.g. finalization).</param>
-        public ShapesHistoryItem(BaseEditEngine passedEE, string icon, string text, ImageSurface passedUserSurface, UserLayer passedUserLayer,
-			int passedSelectedPointIndex, int passedSelectedShapeIndex, bool passedRedrawEverything) : base(icon, text)
+		public ShapesHistoryItem (BaseEditEngine passedEE, string icon, string text, ImageSurface passedUserSurface, UserLayer passedUserLayer,
+				int passedSelectedPointIndex, int passedSelectedShapeIndex, bool passedRedrawEverything) : base (icon, text)
 		{
-            ee = passedEE;
+			ee = passedEE;
 
 			userLayer = passedUserLayer;
 
 
-			userSurfaceDiff = SurfaceDiff.Create(passedUserSurface, userLayer.Surface, true);
+			userSurfaceDiff = SurfaceDiff.Create (passedUserSurface, userLayer.Surface, true);
 
-			if (userSurfaceDiff == null)
-			{
+			if (userSurfaceDiff == null) {
 				userSurface = passedUserSurface;
-			}
-			else
-			{
-				(passedUserSurface as IDisposable).Dispose();
+			} else {
+				(passedUserSurface as IDisposable).Dispose ();
 			}
 
 
-			sEngines = BaseEditEngine.SEngines.PartialClone();
+			sEngines = BaseEditEngine.SEngines.PartialClone ();
 			selectedPointIndex = passedSelectedPointIndex;
 			selectedShapeIndex = passedSelectedShapeIndex;
 
 			redrawEverything = passedRedrawEverything;
 		}
 
-		public override void Undo()
+		public override void Undo ()
 		{
-			Swap(redrawEverything);
+			Swap (redrawEverything);
 		}
 
-		public override void Redo()
+		public override void Redo ()
 		{
-			Swap(false);
+			Swap (false);
 		}
 
-		private void Swap(bool redraw)
+		private void Swap (bool redraw)
 		{
 			// Grab the original surface
 			ImageSurface surf = userLayer.Surface;
 
-			if (userSurfaceDiff != null)
-			{
-				userSurfaceDiff.ApplyAndSwap(surf);
+			if (userSurfaceDiff != null) {
+				userSurfaceDiff.ApplyAndSwap (surf);
 
-				PintaCore.Workspace.Invalidate(userSurfaceDiff.GetBounds());
-			}
-			else
-			{
+				PintaCore.Workspace.Invalidate (userSurfaceDiff.GetBounds ());
+			} else {
 				// Undo to the "old" surface
 				userLayer.Surface = userSurface!; // NRT - userSurface will be not-null in this branch
 
@@ -113,52 +107,46 @@ namespace Pinta.Tools
 				userSurface = surf;
 
 				//Redraw everything since surfaces were swapped.
-				PintaCore.Workspace.Invalidate();
+				PintaCore.Workspace.Invalidate ();
 			}
 
-            Swap (ref sEngines, ref BaseEditEngine.SEngines);
+			Swap (ref sEngines, ref BaseEditEngine.SEngines);
 
 			//Ensure that all of the shapes that should no longer be drawn have their ReEditableLayer removed from the drawing loop.
-			foreach (ShapeEngine se in sEngines)
-			{
+			foreach (ShapeEngine se in sEngines) {
 				//Determine if it is currently in the drawing loop and should no longer be. Note: a DrawingLayer could be both removed and then
 				//later added in the same swap operation, but this is faster than looping through each ShapeEngine in BaseEditEngine.SEngines.
-				if (se.DrawingLayer.InTheLoop && !BaseEditEngine.SEngines.Contains(se))
-				{
-					se.DrawingLayer.TryRemoveLayer();
+				if (se.DrawingLayer.InTheLoop && !BaseEditEngine.SEngines.Contains (se)) {
+					se.DrawingLayer.TryRemoveLayer ();
 				}
 			}
 
 			//Ensure that all of the shapes that should now be drawn have their ReEditableLayer in the drawing loop.
-			foreach (ShapeEngine se in BaseEditEngine.SEngines)
-			{
+			foreach (ShapeEngine se in BaseEditEngine.SEngines) {
 				//Determine if it is currently out of the drawing loop; if not, it should be.
-				if (!se.DrawingLayer.InTheLoop)
-				{
-					se.DrawingLayer.TryAddLayer();
+				if (!se.DrawingLayer.InTheLoop) {
+					se.DrawingLayer.TryAddLayer ();
 				}
 			}
 
-            Swap (ref selectedPointIndex, ref ee.SelectedPointIndex);
-            Swap (ref selectedShapeIndex, ref ee.SelectedShapeIndex);
+			Swap (ref selectedPointIndex, ref ee.SelectedPointIndex);
+			Swap (ref selectedShapeIndex, ref ee.SelectedShapeIndex);
 
 			//Determine if the currently active tool matches the shape's corresponding tool, and if not, switch to it.
-			if (BaseEditEngine.ActivateCorrespondingTool(ee.SelectedShapeIndex, true) != null)
-			{
+			if (BaseEditEngine.ActivateCorrespondingTool (ee.SelectedShapeIndex, true) != null) {
 				//The currently active tool now matches the shape's corresponding tool.
 
-				if (redraw)
-				{
-					((ShapeTool?)PintaCore.Tools.CurrentTool)?.EditEngine.DrawAllShapes();
+				if (redraw) {
+					((ShapeTool?) PintaCore.Tools.CurrentTool)?.EditEngine.DrawAllShapes ();
 				}
 			}
 		}
 
-		public override void Dispose()
+		public override void Dispose ()
 		{
 			// Free up native surface
 			if (userSurface != null)
-				(userSurface as IDisposable).Dispose();
+				(userSurface as IDisposable).Dispose ();
 		}
 	}
 }

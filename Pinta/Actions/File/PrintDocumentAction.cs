@@ -44,7 +44,7 @@ namespace Pinta.Actions
 		}
 
 		#endregion
-		
+
 		void HandleActivated (object sender, EventArgs e)
 		{
 			// Commit any pending changes.
@@ -80,7 +80,7 @@ namespace Pinta.Actions
 
 		void HandleBeginPrint (object o, BeginPrintArgs args)
 		{
-			PrintOperation op = (PrintOperation)o;
+			PrintOperation op = (PrintOperation) o;
 			op.NPages = 1;
 		}
 	}

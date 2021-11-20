@@ -27,11 +27,11 @@
 using System;
 
 namespace Pinta.Core
-{	
+{
 	public class LivePreviewStartedEventArgs : EventArgs
 	{
 		public LivePreviewStartedEventArgs ()
 		{
 		}
-	}	
+	}
 }

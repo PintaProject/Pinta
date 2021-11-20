@@ -1,4 +1,4 @@
-﻿// 
+// 
 // EffectAdjustment.cs
 //  
 // Author:

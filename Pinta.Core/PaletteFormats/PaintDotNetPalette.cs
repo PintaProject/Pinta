@@ -1,4 +1,4 @@
-﻿//
+//
 // PaintDotNetPalette.cs
 //
 // Author:
@@ -26,10 +26,10 @@
 // THE SOFTWARE.
 
 using System;
-using System.IO;
-using Cairo;
 using System.Collections.Generic;
 using System.Globalization;
+using System.IO;
+using Cairo;
 
 namespace Pinta.Core
 {
@@ -66,10 +66,10 @@ namespace Pinta.Core
 			writer.WriteLine ("; Hexadecimal format: aarrggbb");
 
 			foreach (Color color in colors) {
-				byte a = (byte)(color.A * 255);
-				byte r = (byte)(color.R * 255);
-				byte g = (byte)(color.G * 255);
-				byte b = (byte)(color.B * 255);
+				byte a = (byte) (color.A * 255);
+				byte r = (byte) (color.R * 255);
+				byte g = (byte) (color.G * 255);
+				byte b = (byte) (color.B * 255);
 				writer.WriteLine ("{0:X}", (a << 24) | (r << 16) | (g << 8) | b);
 			}
 			writer.Close ();

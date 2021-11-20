@@ -1,4 +1,4 @@
-﻿// 
+// 
 // GeneratedPoint.cs
 //  
 // Author:
@@ -43,7 +43,7 @@ namespace Pinta.Tools
 		/// </summary>
 		/// <param name="passedPosition">The position of the PointD on the Canvas.</param>
 		/// <param name="passedControlPointIndex">The index of the previous ControlPoint to the new GeneratedPoint.</param>
-		public GeneratedPoint(PointD passedPosition, int passedControlPointIndex)
+		public GeneratedPoint (PointD passedPosition, int passedControlPointIndex)
 		{
 			Position = passedPosition;
 			ControlPointIndex = passedControlPointIndex;

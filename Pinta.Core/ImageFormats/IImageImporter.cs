@@ -57,6 +57,6 @@ namespace Pinta.Core
 		/// </param>
 		/// <returns>The thumbnail, or null if the image could not be loaded.</returns>
 		Gdk.Pixbuf? LoadThumbnail (string filename, int maxWidth, int maxHeight,
-		                          Gtk.Window parent);
+					  Gtk.Window parent);
 	}
 }

@@ -1,4 +1,4 @@
-﻿// 
+// 
 // CoreEffectsExtension.cs
 //  
 // Author:
@@ -40,7 +40,7 @@ namespace Pinta.Effects
 	public class CoreEffectsExtension : IExtension
 #endif
 	{
-#region IExtension Members
+		#region IExtension Members
 		public void Initialize ()
 		{
 			// Add the adjustments
@@ -130,6 +130,6 @@ namespace Pinta.Effects
 			PintaCore.Effects.UnregisterInstanceOfEffect (typeof (UnfocusEffect));
 			PintaCore.Effects.UnregisterInstanceOfEffect (typeof (ZoomBlurEffect));
 		}
-#endregion
+		#endregion
 	}
 }

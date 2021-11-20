@@ -1,4 +1,4 @@
-﻿// 
+// 
 // DocumentViewContent.cs
 //  
 // Author:
@@ -30,25 +30,25 @@ using Pinta.Docking;
 
 namespace Pinta
 {
-    class DocumentViewContent : IDockNotebookItem
-    {
-        private CanvasWindow canvas_window;
+	class DocumentViewContent : IDockNotebookItem
+	{
+		private CanvasWindow canvas_window;
 
-        public Document Document { get; private set; }
+		public Document Document { get; private set; }
 
-        public DocumentViewContent (Document document, CanvasWindow canvasWindow)
-        {
-            this.Document = document;
-            this.canvas_window = canvasWindow;
+		public DocumentViewContent (Document document, CanvasWindow canvasWindow)
+		{
+			this.Document = document;
+			this.canvas_window = canvasWindow;
 
-            document.IsDirtyChanged += (o, e) => LabelChanged?.Invoke (this, EventArgs.Empty);
-            document.Renamed += (o, e) => { LabelChanged?.Invoke(this, EventArgs.Empty); };
-        }
+			document.IsDirtyChanged += (o, e) => LabelChanged?.Invoke (this, EventArgs.Empty);
+			document.Renamed += (o, e) => { LabelChanged?.Invoke (this, EventArgs.Empty); };
+		}
 
-        public event EventHandler? LabelChanged;
+		public event EventHandler? LabelChanged;
 
-        public string Label => Document.Filename + (Document.IsDirty ? "*" : string.Empty);
+		public string Label => Document.Filename + (Document.IsDirty ? "*" : string.Empty);
 
-        public Gtk.Widget Widget { get { return canvas_window; } }
-    }
+		public Gtk.Widget Widget { get { return canvas_window; } }
+	}
 }

@@ -1,4 +1,4 @@
-﻿// 
+// 
 // LineCurveEditEngine.cs
 //  
 // Author:
@@ -25,50 +25,48 @@
 // THE SOFTWARE.
 
 using System;
-using Cairo;
-using Pinta.Core;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using Cairo;
+using Pinta.Core;
 
 namespace Pinta.Tools
 {
-    public class LineCurveEditEngine: ArrowedEditEngine
+	public class LineCurveEditEngine : ArrowedEditEngine
 	{
-		protected override string ShapeName
-		{
-			get
-			{
-				return Translations.GetString("Open Curve Shape");
+		protected override string ShapeName {
+			get {
+				return Translations.GetString ("Open Curve Shape");
 			}
 		}
 
-        public LineCurveEditEngine(ShapeTool passedOwner): base(passedOwner)
-        {
+		public LineCurveEditEngine (ShapeTool passedOwner) : base (passedOwner)
+		{
 
-        }
+		}
 
-		protected override ShapeEngine CreateShape(bool ctrlKey, bool clickedOnControlPoint, PointD prevSelPoint)
+		protected override ShapeEngine CreateShape (bool ctrlKey, bool clickedOnControlPoint, PointD prevSelPoint)
 		{
 			Document doc = PintaCore.Workspace.ActiveDocument;
 
-			LineCurveSeriesEngine newEngine = new LineCurveSeriesEngine(doc.Layers.CurrentUserLayer, null, BaseEditEngine.ShapeTypes.OpenLineCurveSeries,
+			LineCurveSeriesEngine newEngine = new LineCurveSeriesEngine (doc.Layers.CurrentUserLayer, null, BaseEditEngine.ShapeTypes.OpenLineCurveSeries,
 				owner.UseAntialiasing, false, BaseEditEngine.OutlineColor, BaseEditEngine.FillColor, owner.EditEngine.BrushWidth);
 
-			AddLinePoints(ctrlKey, clickedOnControlPoint, newEngine, prevSelPoint);
+			AddLinePoints (ctrlKey, clickedOnControlPoint, newEngine, prevSelPoint);
 
 			//Set the new shape's DashPattern option.
 			newEngine.DashPattern = dash_pattern_box.comboBox!.ComboBox.ActiveText; // NRT - Code assumes this is not-null
 
 			//Set the new arrow's settings to be the same as what's in the toolbar settings.
-			setNewArrowSettings(newEngine);
+			setNewArrowSettings (newEngine);
 
 			return newEngine;
 		}
 
-        protected override void MovePoint(List<ControlPoint> controlPoints)
-        {
-			base.MovePoint(controlPoints);
-        }
-    }
+		protected override void MovePoint (List<ControlPoint> controlPoints)
+		{
+			base.MovePoint (controlPoints);
+		}
+	}
 }

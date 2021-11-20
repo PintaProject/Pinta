@@ -1,4 +1,4 @@
-﻿/////////////////////////////////////////////////////////////////////////////////
+/////////////////////////////////////////////////////////////////////////////////
 // Paint.NET                                                                   //
 // Copyright (C) dotPDN LLC, Rick Brewster, Tom Jackson, and contributors.     //
 // Portions Copyright (C) Microsoft Corporation. All Rights Reserved.          //
@@ -34,10 +34,10 @@ namespace Pinta.Effects
 			if (op == null) {
 				HistogramRgb histogram = new HistogramRgb ();
 				histogram.UpdateHistogram (src, new Gdk.Rectangle (0, 0, src.Width, src.Height));
-				
+
 				op = histogram.MakeLevelsAuto ();
 			}
-			
+
 			if (op.isValid)
 				op.Apply (dest, src, rois);
 		}

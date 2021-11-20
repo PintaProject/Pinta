@@ -57,48 +57,48 @@ namespace Pinta.Core
 		}
 
 		#region Initialization
-		public void RegisterActions(Gtk.Application app, GLib.Menu menu)
+		public void RegisterActions (Gtk.Application app, GLib.Menu menu)
 		{
-			app.AddAccelAction(CropToSelection, "<Primary><Shift>X");
-			menu.AppendItem(CropToSelection.CreateMenuItem());
+			app.AddAccelAction (CropToSelection, "<Primary><Shift>X");
+			menu.AppendItem (CropToSelection.CreateMenuItem ());
 
-			app.AddAccelAction(AutoCrop, "<Ctrl><Alt>X");
-			menu.AppendItem(AutoCrop.CreateMenuItem());
+			app.AddAccelAction (AutoCrop, "<Ctrl><Alt>X");
+			menu.AppendItem (AutoCrop.CreateMenuItem ());
 
-			app.AddAccelAction(Resize, "<Primary>R");
-			menu.AppendItem(Resize.CreateMenuItem());
+			app.AddAccelAction (Resize, "<Primary>R");
+			menu.AppendItem (Resize.CreateMenuItem ());
 
-			app.AddAccelAction(CanvasSize, "<Primary><Shift>R");
-			menu.AppendItem(CanvasSize.CreateMenuItem());
+			app.AddAccelAction (CanvasSize, "<Primary><Shift>R");
+			menu.AppendItem (CanvasSize.CreateMenuItem ());
 
-			var flip_section = new GLib.Menu();
-			menu.AppendSection(null, flip_section);
+			var flip_section = new GLib.Menu ();
+			menu.AppendSection (null, flip_section);
 
-			app.AddAction(FlipHorizontal);
-			flip_section.AppendItem(FlipHorizontal.CreateMenuItem());
+			app.AddAction (FlipHorizontal);
+			flip_section.AppendItem (FlipHorizontal.CreateMenuItem ());
 
-			app.AddAction(FlipVertical);
-			flip_section.AppendItem(FlipVertical.CreateMenuItem());
+			app.AddAction (FlipVertical);
+			flip_section.AppendItem (FlipVertical.CreateMenuItem ());
 
-			var rotate_section = new GLib.Menu();
-			menu.AppendSection(null, rotate_section);
+			var rotate_section = new GLib.Menu ();
+			menu.AppendSection (null, rotate_section);
 
-			app.AddAccelAction(RotateCW, "<Primary>H");
-			rotate_section.AppendItem(RotateCW.CreateMenuItem());
+			app.AddAccelAction (RotateCW, "<Primary>H");
+			rotate_section.AppendItem (RotateCW.CreateMenuItem ());
 
-			app.AddAccelAction(RotateCCW, "<Primary>G");
-			rotate_section.AppendItem(RotateCCW.CreateMenuItem());
+			app.AddAccelAction (RotateCCW, "<Primary>G");
+			rotate_section.AppendItem (RotateCCW.CreateMenuItem ());
 
-			app.AddAccelAction(Rotate180, "<Primary>J");
-			rotate_section.AppendItem(Rotate180.CreateMenuItem());
+			app.AddAccelAction (Rotate180, "<Primary>J");
+			rotate_section.AppendItem (Rotate180.CreateMenuItem ());
 
-			var flatten_section = new GLib.Menu();
-			menu.AppendSection(null, flatten_section);
+			var flatten_section = new GLib.Menu ();
+			menu.AppendSection (null, flatten_section);
 
-			app.AddAccelAction(Flatten, "<Primary><Shift>F");
-			flatten_section.AppendItem(Flatten.CreateMenuItem());
+			app.AddAccelAction (Flatten, "<Primary><Shift>F");
+			flatten_section.AppendItem (Flatten.CreateMenuItem ());
 		}
-				
+
 		public void RegisterHandlers ()
 		{
 			FlipHorizontal.Activated += HandlePintaCoreActionsImageFlipHorizontalActivated;
@@ -208,17 +208,17 @@ namespace Pinta.Core
 		}
 
 		/// <summary>
-        /// Checks if all of the pixels in the row match the specified color.
-        /// </summary>
-        private static bool IsConstantRow (ImageSurface surf, Cairo.Color color, int y)
-        {
-            for (int x = 0; x < surf.Width; ++x) {
-                if (!color.Equals (surf.GetPixel (x, y)))
-                    return false;
-            }
+		/// Checks if all of the pixels in the row match the specified color.
+		/// </summary>
+		private static bool IsConstantRow (ImageSurface surf, Cairo.Color color, int y)
+		{
+			for (int x = 0; x < surf.Width; ++x) {
+				if (!color.Equals (surf.GetPixel (x, y)))
+					return false;
+			}
 
-            return true;
-        }
+			return true;
+		}
 
 		/// <summary>
 		/// Checks if all of the pixels in the column (within the bounds of the rectangle) match the specified color.
@@ -239,19 +239,18 @@ namespace Pinta.Core
 
 			PintaCore.Tools.Commit ();
 
-            using (var image = doc.GetFlattenedImage ())
-            {
+			using (var image = doc.GetFlattenedImage ()) {
 				Gdk.Rectangle rect = image.GetBounds ();
-                Cairo.Color border_color = image.GetPixel (0, 0);
+				Cairo.Color border_color = image.GetPixel (0, 0);
 
 				// Top down.
-                for (int y = 0; y < image.Height; ++y) {
-                    if (!IsConstantRow (image, border_color, y))
-                        break;
+				for (int y = 0; y < image.Height; ++y) {
+					if (!IsConstantRow (image, border_color, y))
+						break;
 
-                    ++rect.Y;
-                    --rect.Height;
-                }
+					++rect.Y;
+					--rect.Height;
+				}
 
 				// Bottom up.
 				for (int y = rect.Bottom; y >= rect.Top; --y) {
@@ -280,41 +279,40 @@ namespace Pinta.Core
 
 				// Ignore the current selection when auto-cropping.
 				CropImageToRectangle (doc, rect, /*selection*/ null);
-            }
+			}
 		}
-#endregion
+		#endregion
 
 		static void CropImageToRectangle (Document doc, Gdk.Rectangle rect, Path? selection)
 		{
-			if (rect.Width > 0 && rect.Height > 0)
-			{
-				ResizeHistoryItem hist = new ResizeHistoryItem(doc.ImageSize);
+			if (rect.Width > 0 && rect.Height > 0) {
+				ResizeHistoryItem hist = new ResizeHistoryItem (doc.ImageSize);
 
 				hist.Icon = Resources.Icons.ImageCrop;
-				hist.Text = Translations.GetString("Crop to Selection");
-				hist.StartSnapshotOfImage();
-				hist.RestoreSelection = doc.Selection.Clone();
+				hist.Text = Translations.GetString ("Crop to Selection");
+				hist.StartSnapshotOfImage ();
+				hist.RestoreSelection = doc.Selection.Clone ();
 
-				doc.Workspace.Canvas.Window.FreezeUpdates();
+				doc.Workspace.Canvas.Window.FreezeUpdates ();
 
 				double original_scale = doc.Workspace.Scale;
 				doc.ImageSize = rect.Size;
 				doc.Workspace.CanvasSize = rect.Size;
 				doc.Workspace.Scale = original_scale;
 
-				PintaCore.Actions.View.UpdateCanvasScale();
+				PintaCore.Actions.View.UpdateCanvasScale ();
 
-				doc.Workspace.Canvas.Window.ThawUpdates();
+				doc.Workspace.Canvas.Window.ThawUpdates ();
 
 				foreach (var layer in doc.Layers.UserLayers)
-                    layer.Crop (rect, selection);
+					layer.Crop (rect, selection);
 
-				hist.FinishSnapshotOfImage();
+				hist.FinishSnapshotOfImage ();
 
-				doc.History.PushNewItem(hist);
-				doc.ResetSelectionPaths();
+				doc.History.PushNewItem (hist);
+				doc.ResetSelectionPaths ();
 
-				doc.Workspace.Invalidate();
+				doc.Workspace.Invalidate ();
 			}
 		}
 	}

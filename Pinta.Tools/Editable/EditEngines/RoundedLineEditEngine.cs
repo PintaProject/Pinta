@@ -25,21 +25,19 @@
 // THE SOFTWARE.
 
 using System;
-using Cairo;
-using Pinta.Core;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using Cairo;
+using Pinta.Core;
 
 namespace Pinta.Tools
 {
-    public class RoundedLineEditEngine: BaseEditEngine
-    {
-		protected override string ShapeName
-		{
-			get
-			{
-				return Translations.GetString("Rounded Line Shape");
+	public class RoundedLineEditEngine : BaseEditEngine
+	{
+		protected override string ShapeName {
+			get {
+				return Translations.GetString ("Rounded Line Shape");
 			}
 		}
 
@@ -52,31 +50,26 @@ namespace Pinta.Tools
 		protected ToolBarLabel radius_label = null!;
 		protected Gtk.SeparatorToolItem radius_sep = null!;
 
-		public double Radius
-		{
-			get
-			{
+		public double Radius {
+			get {
 				if (radius != null)
 					return radius.Widget.Value;
 				else
 					return BrushWidth;
 			}
 
-			set
-			{
-				if (radius != null)
-				{
+			set {
+				if (radius != null) {
 					radius.Widget.Value = value;
 
 					ShapeEngine? selEngine = SelectedShapeEngine;
 
-					if (selEngine != null && selEngine.ShapeType == ShapeTypes.RoundedLineSeries)
-					{
-						((RoundedLineEngine)selEngine).Radius = Radius;
+					if (selEngine != null && selEngine.ShapeType == ShapeTypes.RoundedLineSeries) {
+						((RoundedLineEngine) selEngine).Radius = Radius;
 
-						StorePreviousSettings();
+						StorePreviousSettings ();
 
-						DrawActiveShape(false, false, true, false, false);
+						DrawActiveShape (false, false, true, false, false);
 					}
 				}
 			}
@@ -92,49 +85,47 @@ namespace Pinta.Tools
 				settings.PutSetting (RADIUS_SETTING (toolPrefix), (int) radius.Widget.Value);
 		}
 
-		public override void HandleBuildToolBar(Gtk.Toolbar tb, ISettingsService settings, string toolPrefix)
+		public override void HandleBuildToolBar (Gtk.Toolbar tb, ISettingsService settings, string toolPrefix)
 		{
-			base.HandleBuildToolBar(tb, settings, toolPrefix);
+			base.HandleBuildToolBar (tb, settings, toolPrefix);
 
 
 			if (radius_sep == null)
-				radius_sep = new Gtk.SeparatorToolItem();
+				radius_sep = new Gtk.SeparatorToolItem ();
 
-			tb.AppendItem(radius_sep);
+			tb.AppendItem (radius_sep);
 
 			if (radius_label == null)
-				radius_label = new ToolBarLabel(string.Format("  {0}: ", Translations.GetString("Radius")));
+				radius_label = new ToolBarLabel (string.Format ("  {0}: ", Translations.GetString ("Radius")));
 
-			tb.AppendItem(radius_label);
+			tb.AppendItem (radius_label);
 
-			if (radius == null)
-			{
+			if (radius == null) {
 				radius = new (new Gtk.SpinButton (0, 1e5, 1) { Value = settings.GetSetting (RADIUS_SETTING (toolPrefix), 20) });
 
-				radius.Widget.ValueChanged += (o, e) =>
-				{
+				radius.Widget.ValueChanged += (o, e) => {
 					//Go through the Get/Set routine.
 					Radius = Radius;
 				};
 			}
 
-			tb.AppendItem(radius);
+			tb.AppendItem (radius);
 		}
 
 
-		public RoundedLineEditEngine(ShapeTool passedOwner): base(passedOwner)
-        {
+		public RoundedLineEditEngine (ShapeTool passedOwner) : base (passedOwner)
+		{
 
-        }
+		}
 
-		protected override ShapeEngine CreateShape(bool ctrlKey, bool clickedOnControlPoint, PointD prevSelPoint)
+		protected override ShapeEngine CreateShape (bool ctrlKey, bool clickedOnControlPoint, PointD prevSelPoint)
 		{
 			Document doc = PintaCore.Workspace.ActiveDocument;
 
-			ShapeEngine newEngine = new RoundedLineEngine(doc.Layers.CurrentUserLayer, null, Radius, owner.UseAntialiasing,
+			ShapeEngine newEngine = new RoundedLineEngine (doc.Layers.CurrentUserLayer, null, Radius, owner.UseAntialiasing,
 				BaseEditEngine.OutlineColor, BaseEditEngine.FillColor, owner.EditEngine.BrushWidth);
 
-			AddRectanglePoints(ctrlKey, clickedOnControlPoint, newEngine, prevSelPoint);
+			AddRectanglePoints (ctrlKey, clickedOnControlPoint, newEngine, prevSelPoint);
 
 			//Set the new shape's DashPattern option.
 			newEngine.DashPattern = dash_pattern_box.comboBox!.ComboBox.ActiveText; // NRT - Code assumes this is not-null
@@ -142,38 +133,37 @@ namespace Pinta.Tools
 			return newEngine;
 		}
 
-		protected override void MovePoint(List<ControlPoint> controlPoints)
+		protected override void MovePoint (List<ControlPoint> controlPoints)
 		{
-			MoveRectangularPoint(controlPoints);
+			MoveRectangularPoint (controlPoints);
 
-			base.MovePoint(controlPoints);
+			base.MovePoint (controlPoints);
 		}
 
 
-		public override void UpdateToolbarSettings(ShapeEngine engine)
+		public override void UpdateToolbarSettings (ShapeEngine engine)
 		{
-			if (engine != null && engine.ShapeType == ShapeTypes.RoundedLineSeries)
-			{
-				RoundedLineEngine rLEngine = (RoundedLineEngine)engine;
+			if (engine != null && engine.ShapeType == ShapeTypes.RoundedLineSeries) {
+				RoundedLineEngine rLEngine = (RoundedLineEngine) engine;
 
 				Radius = rLEngine.Radius;
 
-				base.UpdateToolbarSettings(engine);
+				base.UpdateToolbarSettings (engine);
 			}
 		}
 
-		protected override void RecallPreviousSettings()
+		protected override void RecallPreviousSettings ()
 		{
 			Radius = previousRadius;
 
-			base.RecallPreviousSettings();
+			base.RecallPreviousSettings ();
 		}
 
-		protected override void StorePreviousSettings()
+		protected override void StorePreviousSettings ()
 		{
 			previousRadius = Radius;
 
-			base.StorePreviousSettings();
+			base.StorePreviousSettings ();
 		}
-    }
+	}
 }

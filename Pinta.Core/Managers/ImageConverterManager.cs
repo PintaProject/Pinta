@@ -1,4 +1,4 @@
-﻿// 
+// 
 // ImageConverterManager.cs
 //  
 // Author:
@@ -26,9 +26,9 @@
 
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using Gdk;
-using System.IO;
 
 namespace Pinta.Core
 {
@@ -57,7 +57,7 @@ namespace Pinta.Core
 						extensions = new string[] { formatName, formatNameUpperCase };
 						break;
 				}
-				
+
 				GdkPixbufFormat importer = new GdkPixbufFormat (format.Name.ToLowerInvariant ());
 				IImageExporter? exporter;
 
@@ -95,7 +95,7 @@ namespace Pinta.Core
 		{
 			extension = NormalizeExtension (extension);
 
-			formats.RemoveAll (f => f.Extensions.Contains (extension));			
+			formats.RemoveAll (f => f.Extensions.Contains (extension));
 		}
 
 		/// <summary>

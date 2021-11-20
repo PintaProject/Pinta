@@ -1,4 +1,4 @@
-﻿// 
+// 
 // OrganizedPointCollection.cs
 //  
 // Author:
@@ -39,112 +39,107 @@ namespace Pinta.Tools
 		public const double SectionSize = 15;
 
 		//Don't change this; it's automatically calculated.
-        public static readonly int BorderingSectionRange = (int)Math.Ceiling(BaseEditEngine.ShapeClickStartingRange / SectionSize);
+		public static readonly int BorderingSectionRange = (int) Math.Ceiling (BaseEditEngine.ShapeClickStartingRange / SectionSize);
 
 		private Dictionary<int, Dictionary<int, List<OrganizedPoint>>> collection;
 
 		/// <summary>
 		/// A collection of points that is organized using spatial hashing to optimize and speed up nearest point detection.
 		/// </summary>
-		public OrganizedPointCollection()
+		public OrganizedPointCollection ()
 		{
-			collection = new Dictionary<int, Dictionary<int, List<OrganizedPoint>>>();
+			collection = new Dictionary<int, Dictionary<int, List<OrganizedPoint>>> ();
 		}
 
 		/// <summary>
 		/// Clone the collection of organized points.
 		/// </summary>
 		/// <returns>A clone of the organized points.</returns>
-		public OrganizedPointCollection Clone()
+		public OrganizedPointCollection Clone ()
 		{
-			OrganizedPointCollection clonedOPC = new OrganizedPointCollection();
+			OrganizedPointCollection clonedOPC = new OrganizedPointCollection ();
 
-			foreach (KeyValuePair<int, Dictionary<int, List<OrganizedPoint>>> xSection in collection)
-			{
+			foreach (KeyValuePair<int, Dictionary<int, List<OrganizedPoint>>> xSection in collection) {
 				//This must be created each time to ensure that it is fresh for each loop iteration.
-				Dictionary<int, List<OrganizedPoint>> tempSection = new Dictionary<int, List<OrganizedPoint>>();
+				Dictionary<int, List<OrganizedPoint>> tempSection = new Dictionary<int, List<OrganizedPoint>> ();
 
-				foreach (KeyValuePair<int, List<OrganizedPoint>> section in xSection.Value)
-				{
-					tempSection.Add(section.Key,
-						section.Value.Select(i => new OrganizedPoint(new PointD(i.Position.X, i.Position.Y), i.Index)).ToList());
+				foreach (KeyValuePair<int, List<OrganizedPoint>> section in xSection.Value) {
+					tempSection.Add (section.Key,
+						section.Value.Select (i => new OrganizedPoint (new PointD (i.Position.X, i.Position.Y), i.Index)).ToList ());
 				}
 
-				clonedOPC.collection.Add(xSection.Key, tempSection);
+				clonedOPC.collection.Add (xSection.Key, tempSection);
 			}
 
 			return clonedOPC;
 		}
 
-		
+
 		/// <summary>
 		/// Store the given OrganizedPoint in an organized (spatially hashed) manner.
 		/// </summary>
 		/// <param name="op">The OrganizedPoint to store.</param>
-		public void StoreAndOrganizePoint(OrganizedPoint op)
+		public void StoreAndOrganizePoint (OrganizedPoint op)
 		{
-			int sX = (int)((op.Position.X - op.Position.X % SectionSize) / SectionSize);
-			int sY = (int)((op.Position.Y - op.Position.Y % SectionSize) / SectionSize);
+			int sX = (int) ((op.Position.X - op.Position.X % SectionSize) / SectionSize);
+			int sY = (int) ((op.Position.Y - op.Position.Y % SectionSize) / SectionSize);
 
 			Dictionary<int, List<OrganizedPoint>>? xSection;
 			List<OrganizedPoint>? ySection;
 
 			//Ensure that the xSection for this particular point exists.
-			if (!collection.TryGetValue(sX, out xSection))
-			{
+			if (!collection.TryGetValue (sX, out xSection)) {
 				//This particular X section does not exist yet; create it.
-				xSection = new Dictionary<int, List<OrganizedPoint>>();
-				collection.Add(sX, xSection);
+				xSection = new Dictionary<int, List<OrganizedPoint>> ();
+				collection.Add (sX, xSection);
 			}
 
 			//Ensure that the ySection (which is contained within the respective xSection) for this particular point exists.
-			if (!xSection.TryGetValue(sY, out ySection))
-			{
+			if (!xSection.TryGetValue (sY, out ySection)) {
 				//This particular Y section does not exist yet; create it.
-				ySection = new List<OrganizedPoint>();
-				xSection.Add(sY, ySection);
+				ySection = new List<OrganizedPoint> ();
+				xSection.Add (sY, ySection);
 			}
 
 			//Now that both the corresponding xSection and ySection for this particular point exist, add the point to the list.
-			ySection.Add(op);
+			ySection.Add (op);
 		}
 
 		/// <summary>
 		/// Clear the collection of organized points.
 		/// </summary>
-		public void ClearCollection()
+		public void ClearCollection ()
 		{
-			collection.Clear();
+			collection.Clear ();
 		}
 
 
 		/// <summary>
 		/// Efficiently calculate the closest point (to currentPoint) on the shapes.
 		/// </summary>
-        /// <param name="SEL">The List of ShapeEngines to search through.</param>
+		/// <param name="SEL">The List of ShapeEngines to search through.</param>
 		/// <param name="currentPoint">The point to calculate the closest point to.</param>
 		/// <param name="closestShapeIndex">The index of the shape with the closest point.</param>
 		/// <param name="closestPointIndex">The index of the closest point (in the closest shape).</param>
 		/// <param name="closestPoint">The position of the closest point.</param>
 		/// <param name="closestDistance">The closest point's distance away from currentPoint.</param>
-		public static void FindClosestPoint(
-            List<ShapeEngine> SEL, PointD currentPoint,
+		public static void FindClosestPoint (
+	    List<ShapeEngine> SEL, PointD currentPoint,
 			out int closestShapeIndex, out int closestPointIndex, out PointD closestPoint, out double closestDistance)
 		{
 			closestShapeIndex = 0;
 			closestPointIndex = 0;
-			closestPoint = new PointD(0d, 0d);
+			closestPoint = new PointD (0d, 0d);
 			closestDistance = double.MaxValue;
 
 			double currentDistance = double.MaxValue;
 
-			for (int n = 0; n < SEL.Count; ++n)
-			{
+			for (int n = 0; n < SEL.Count; ++n) {
 				Dictionary<int, Dictionary<int, List<OrganizedPoint>>> oP = SEL[n].OrganizedPoints.collection;
 
 				//Calculate the current_point's corresponding *center* section.
-				int sX = (int)((currentPoint.X - currentPoint.X % SectionSize) / SectionSize);
-				int sY = (int)((currentPoint.Y - currentPoint.Y % SectionSize) / SectionSize);
+				int sX = (int) ((currentPoint.X - currentPoint.X % SectionSize) / SectionSize);
+				int sY = (int) ((currentPoint.Y - currentPoint.Y % SectionSize) / SectionSize);
 
 				int xMin = sX - BorderingSectionRange;
 				int xMax = sX + BorderingSectionRange;
@@ -153,29 +148,23 @@ namespace Pinta.Tools
 
 				//Since the mouse and/or shape points can be close to the edge of a section,
 				//the points in the surrounding sections must also be checked.
-				for (int x = xMin; x <= xMax; ++x)
-				{
+				for (int x = xMin; x <= xMax; ++x) {
 					//This must be created each time to ensure that it is fresh for each loop iteration.
 					Dictionary<int, List<OrganizedPoint>>? xSection;
 
 					//If the xSection doesn't exist, move on.
-					if (oP.TryGetValue(x, out xSection))
-					{
+					if (oP.TryGetValue (x, out xSection)) {
 						//Since the mouse and/or shape points can be close to the edge of a section,
 						//the points in the surrounding sections must also be checked.
-						for (int y = yMin; y <= yMax; ++y)
-						{
+						for (int y = yMin; y <= yMax; ++y) {
 							List<OrganizedPoint>? ySection;
 
 							//If the ySection doesn't exist, move on.
-							if (xSection.TryGetValue(y, out ySection))
-							{
-								foreach (OrganizedPoint p in ySection)
-								{
-									currentDistance = p.Position.Distance(currentPoint);
+							if (xSection.TryGetValue (y, out ySection)) {
+								foreach (OrganizedPoint p in ySection) {
+									currentDistance = p.Position.Distance (currentPoint);
 
-									if (currentDistance < closestDistance)
-									{
+									if (currentDistance < closestDistance) {
 										closestDistance = currentDistance;
 
 										closestPointIndex = p.Index;
@@ -203,7 +192,7 @@ namespace Pinta.Tools
 		/// </summary>
 		/// <param name="passedPosition">The position of the PointD on the Canvas.</param>
 		/// <param name="passedIndex">The index within the generated points of the shape that it's in.</param>
-		public OrganizedPoint(PointD passedPosition, int passedIndex)
+		public OrganizedPoint (PointD passedPosition, int passedIndex)
 		{
 			Position = passedPosition;
 			Index = passedIndex;

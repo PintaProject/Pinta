@@ -31,15 +31,15 @@ namespace Pinta.MacInterop
 	public static class ApplicationEvents
 	{
 		static object lockObj = new object ();
-		
+
 		#region Quit
-		
+
 		static EventHandler<ApplicationQuitEventArgs>? quit;
 		// Create a delegate instance with static lifetime to avoid the GC destroying it.
 		// The delegate can be invoked by native code at any point.
 		private static EventDelegate quit_delegate = HandleQuit;
 		static IntPtr quitHandlerRef = IntPtr.Zero;
-		
+
 		public static event EventHandler<ApplicationQuitEventArgs> Quit {
 			add {
 				lock (lockObj) {
@@ -58,22 +58,22 @@ namespace Pinta.MacInterop
 				}
 			}
 		}
-		
+
 		static CarbonEventHandlerStatus HandleQuit (IntPtr callRef, IntPtr eventRef, IntPtr user_data)
 		{
 			var args = new ApplicationQuitEventArgs ();
 			quit?.Invoke (null, args);
-			return args.UserCancelled? CarbonEventHandlerStatus.UserCancelled : args.HandledStatus;
+			return args.UserCancelled ? CarbonEventHandlerStatus.UserCancelled : args.HandledStatus;
 		}
-		
+
 		#endregion
-		
+
 		#region Reopen
-		
+
 		static EventHandler<ApplicationEventArgs>? reopen;
 		private static EventDelegate reopen_delegate = HandleReopen;
 		static IntPtr reopenHandlerRef = IntPtr.Zero;
-		
+
 		public static event EventHandler<ApplicationEventArgs> Reopen {
 			add {
 				lock (lockObj) {
@@ -92,22 +92,22 @@ namespace Pinta.MacInterop
 				}
 			}
 		}
-		
+
 		static CarbonEventHandlerStatus HandleReopen (IntPtr callRef, IntPtr eventRef, IntPtr user_data)
 		{
 			var args = new ApplicationEventArgs ();
 			reopen?.Invoke (null, args);
 			return args.HandledStatus;
 		}
-		
+
 		#endregion
-		
+
 		#region OpenDocuments
-		
+
 		static EventHandler<ApplicationDocumentEventArgs>? openDocuments;
 		private static EventDelegate open_delegate = HandleOpenDocuments;
 		static IntPtr openDocumentsHandlerRef = IntPtr.Zero;
-		
+
 		public static event EventHandler<ApplicationDocumentEventArgs> OpenDocuments {
 			add {
 				lock (lockObj) {
@@ -126,7 +126,7 @@ namespace Pinta.MacInterop
 				}
 			}
 		}
-		
+
 		static CarbonEventHandlerStatus HandleOpenDocuments (IntPtr callRef, IntPtr eventRef, IntPtr user_data)
 		{
 			try {
@@ -139,15 +139,15 @@ namespace Pinta.MacInterop
 				return CarbonEventHandlerStatus.NotHandled;
 			}
 		}
-		
+
 		#endregion
-		
+
 		#region OpenUrls
-		
+
 		static EventHandler<ApplicationUrlEventArgs>? openUrls;
 		private static EventDelegate open_urls_delegate = HandleOpenUrls;
 		static IntPtr openUrlsHandlerRef = IntPtr.Zero;
-		
+
 		public static event EventHandler<ApplicationUrlEventArgs> OpenUrls {
 			add {
 				lock (lockObj) {
@@ -172,7 +172,7 @@ namespace Pinta.MacInterop
 				}
 			}
 		}
-		
+
 		static CarbonEventHandlerStatus HandleOpenUrls (IntPtr callRef, IntPtr eventRef, IntPtr user_data)
 		{
 			try {
@@ -185,43 +185,43 @@ namespace Pinta.MacInterop
 				return CarbonEventHandlerStatus.NotHandled;
 			}
 		}
-		
+
 		#endregion
 	}
-	
+
 	public class ApplicationEventArgs : EventArgs
 	{
 		public bool Handled { get; set; }
-		
+
 		internal CarbonEventHandlerStatus HandledStatus {
 			get {
-				return Handled? CarbonEventHandlerStatus.Handled : CarbonEventHandlerStatus.NotHandled;
+				return Handled ? CarbonEventHandlerStatus.Handled : CarbonEventHandlerStatus.NotHandled;
 			}
 		}
 	}
-	
+
 	public class ApplicationQuitEventArgs : ApplicationEventArgs
 	{
 		public bool UserCancelled { get; set; }
 	}
-	
+
 	public class ApplicationDocumentEventArgs : ApplicationEventArgs
 	{
-		public ApplicationDocumentEventArgs (IDictionary<string,int> documents)
+		public ApplicationDocumentEventArgs (IDictionary<string, int> documents)
 		{
 			this.Documents = documents;
-		}		
-		
-		public IDictionary<string,int> Documents { get; private set; }
+		}
+
+		public IDictionary<string, int> Documents { get; private set; }
 	}
-	
+
 	public class ApplicationUrlEventArgs : ApplicationEventArgs
 	{
 		public ApplicationUrlEventArgs (IList<string> urls)
 		{
 			this.Urls = urls;
-		}		
-		
+		}
+
 		public IList<string> Urls { get; private set; }
 	}
 }

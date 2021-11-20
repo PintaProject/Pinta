@@ -1,4 +1,4 @@
-﻿// 
+// 
 // Anchor.cs
 //  
 // Author:

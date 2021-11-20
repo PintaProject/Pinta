@@ -16,7 +16,7 @@ namespace Pinta.Effects
 	public class PosterizeEffect : BaseEffect
 	{
 		UnaryPixelOps.PosterizePixel? op = null;
-		
+
 		public override string Icon {
 			get { return "Menu.Adjustments.Posterize.png"; }
 		}
@@ -33,8 +33,8 @@ namespace Pinta.Effects
 			get { return "P"; }
 		}
 
-		public PosterizeData Data { get { return (PosterizeData)EffectData!; } } // NRT - Set in constructor
-		
+		public PosterizeData Data { get { return (PosterizeData) EffectData!; } } // NRT - Set in constructor
+
 		public PosterizeEffect ()
 		{
 			EffectData = new PosterizeData ();
@@ -42,14 +42,13 @@ namespace Pinta.Effects
 
 		public override bool LaunchConfiguration ()
 		{
-			using (var dialog = new PosterizeDialog())
-			{
+			using (var dialog = new PosterizeDialog ()) {
 				dialog.Title = Name;
-				dialog.Icon = PintaCore.Resources.GetIcon(Icon);
+				dialog.Icon = PintaCore.Resources.GetIcon (Icon);
 				dialog.EffectData = Data;
 
-				int response = dialog.Run();
-				return (response == (int)Gtk.ResponseType.Ok);
+				int response = dialog.Run ();
+				return (response == (int) Gtk.ResponseType.Ok);
 			}
 		}
 
@@ -57,11 +56,11 @@ namespace Pinta.Effects
 		{
 			if (op == null)
 				op = new UnaryPixelOps.PosterizePixel (Data.Red, Data.Green, Data.Blue);
-				
+
 			op.Apply (dest, src, rois);
-		}		
+		}
 	}
-	
+
 	public class PosterizeData : EffectData
 	{
 		public int Red = 16;

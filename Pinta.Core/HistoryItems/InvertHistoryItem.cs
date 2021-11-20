@@ -1,4 +1,4 @@
-﻿// 
+// 
 // InvertHistoryItem.cs
 //  
 // Author:
@@ -34,7 +34,7 @@ namespace Pinta.Core
 	{
 		private InvertType type;
 		private int layer_index;
-		
+
 		public InvertHistoryItem (InvertType type)
 		{
 			this.type = type;
@@ -84,7 +84,7 @@ namespace Pinta.Core
 					break;
 			}
 		}
-		
+
 		public override void Undo ()
 		{
 			var doc = PintaCore.Workspace.ActiveDocument;
@@ -153,7 +153,7 @@ namespace Pinta.Core
 			}
 		}
 	}
-	
+
 	public enum InvertType
 	{
 		InvertColors,

@@ -25,23 +25,23 @@
 // THE SOFTWARE.
 
 using System;
+using System.ComponentModel;
 using Pinta.Core;
 using Pinta.Gui.Widgets;
-using System.ComponentModel;
 
 namespace Pinta
 {
 
 	public static class EffectHelper
 	{
-        /// <summary>
-        /// Launchs an effect dialog.
-        /// </summary>
-        /// <param name="localizer">
-        /// The localizer for the effect add-in. This is used to fetch translations for the
-        /// strings in the dialog.
-        /// </param>
-        // TODO-GTK3 (addins)
+		/// <summary>
+		/// Launchs an effect dialog.
+		/// </summary>
+		/// <param name="localizer">
+		/// The localizer for the effect add-in. This is used to fetch translations for the
+		/// strings in the dialog.
+		/// </param>
+		// TODO-GTK3 (addins)
 #if false
 		public static bool LaunchSimpleEffectDialog (BaseEffect effect, AddinLocalizer localizer)
 		{
@@ -49,10 +49,10 @@ namespace Pinta
 		}
 #endif
 
-        /// <summary>
-        /// Launchs an effect dialog using Pinta's translation template.
-        /// </summary>
-        internal static bool LaunchSimpleEffectDialog (BaseEffect effect)
+		/// <summary>
+		/// Launchs an effect dialog using Pinta's translation template.
+		/// </summary>
+		internal static bool LaunchSimpleEffectDialog (BaseEffect effect)
 		{
 			return LaunchSimpleEffectDialog (effect, new PintaLocalizer ());
 		}
@@ -61,29 +61,27 @@ namespace Pinta
 		/// Helper function for the above methods. The IAddinLocalizer provides a generic way to
 		/// get translated strings both for Pinta's effects and for effect add-ins.
 		/// </summary>
-		private static bool LaunchSimpleEffectDialog(BaseEffect effect, IAddinLocalizer localizer)
+		private static bool LaunchSimpleEffectDialog (BaseEffect effect, IAddinLocalizer localizer)
 		{
 			if (effect == null)
-				throw new ArgumentNullException("effect");
+				throw new ArgumentNullException ("effect");
 
 			if (effect.EffectData == null)
-				throw new ArgumentException("effect.EffectData is null.");
+				throw new ArgumentException ("effect.EffectData is null.");
 
-			using (var dialog = new SimpleEffectDialog(effect.Name,
-												 PintaCore.Resources.GetIcon(effect.Icon),
-												 effect.EffectData, localizer))
-			{
+			using (var dialog = new SimpleEffectDialog (effect.Name,
+												 PintaCore.Resources.GetIcon (effect.Icon),
+												 effect.EffectData, localizer)) {
 				// Hookup event handling for live preview.
-				dialog.EffectDataChanged += (o, e) =>
-				{
+				dialog.EffectDataChanged += (o, e) => {
 					if (effect.EffectData != null)
-						effect.EffectData.FirePropertyChanged(e.PropertyName);
+						effect.EffectData.FirePropertyChanged (e.PropertyName);
 				};
 
-				int response = dialog.Run();
+				int response = dialog.Run ();
 
 				bool ret = false;
-				if (response == (int)Gtk.ResponseType.Ok && effect.EffectData != null)
+				if (response == (int) Gtk.ResponseType.Ok && effect.EffectData != null)
 					ret = !effect.EffectData.IsDefault;
 
 				return ret;

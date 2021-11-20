@@ -35,12 +35,11 @@
 // THE SOFTWARE.
 
 using System;
-using Gtk;
+using System.Diagnostics.CodeAnalysis;
 using Cairo;
-
+using Gtk;
 using Pinta.Core;
 using Pinta.Gui.Widgets;
-using System.Diagnostics.CodeAnalysis;
 
 namespace Pinta.Effects
 {
@@ -534,8 +533,8 @@ namespace Pinta.Effects
 			AddActionWidget (hboxChecks, ResponseType.None);
 
 			var buttons = GtkExtensions.DialogButtonsCancelOk ();
-			AddButton ((string)buttons[0], (Gtk.ResponseType)buttons[1]);
-			AddButton ((string)buttons[2], (Gtk.ResponseType)buttons[3]);
+			AddButton ((string) buttons[0], (Gtk.ResponseType) buttons[1]);
+			AddButton ((string) buttons[2], (Gtk.ResponseType) buttons[3]);
 
 			spinInLow = new SpinButton (0, 254, 1);
 			spinInHigh = new SpinButton (1, 255, 1) { Value = 255 };
@@ -558,7 +557,7 @@ namespace Pinta.Effects
 
 			var hboxLayout = new HBox () { Spacing = spacing, BorderWidth = spacing };
 
-			static VBox CreateLabelledWidget(Widget widget, string label)
+			static VBox CreateLabelledWidget (Widget widget, string label)
 			{
 				var hbox = new HBox () { Spacing = spacing };
 				hbox.PackStart (new Label (label), false, false, 0);
@@ -571,7 +570,7 @@ namespace Pinta.Effects
 				return vbox;
 			}
 
-			hboxLayout.PackStart (CreateLabelledWidget(histogramInput, Translations.GetString("Input Histogram")), false, false, 0);
+			hboxLayout.PackStart (CreateLabelledWidget (histogramInput, Translations.GetString ("Input Histogram")), false, false, 0);
 
 			var vboxInput = new VBox () { Spacing = spacing };
 			vboxInput.PackStart (spinInHigh, false, false, 0);

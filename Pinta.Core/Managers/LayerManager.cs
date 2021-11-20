@@ -26,8 +26,8 @@
 
 using System;
 using System.Collections.Generic;
-using System.ComponentModel;
 using System.Collections.Specialized;
+using System.ComponentModel;
 using System.Linq;
 using Cairo;
 
@@ -52,7 +52,7 @@ namespace Pinta.Core
 		{
 			if (SelectedLayerChanged != null)
 				SelectedLayerChanged.Invoke (this, EventArgs.Empty);
-		}	
+		}
 		#endregion
 
 		#region Private Methods
@@ -60,7 +60,7 @@ namespace Pinta.Core
 		{
 			if (LayerPropertyChanged != null)
 				LayerPropertyChanged (sender, e);
-			
+
 			//TODO Get the workspace to subscribe to this event, and invalidate itself.
 			PintaCore.Workspace.Invalidate ();
 		}

@@ -26,9 +26,9 @@
 
 using System;
 using System.IO;
-using Gdk;
 using System.Reflection;
 using System.Runtime.CompilerServices;
+using Gdk;
 
 namespace Pinta.Resources
 {

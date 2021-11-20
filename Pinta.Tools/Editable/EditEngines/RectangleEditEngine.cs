@@ -1,4 +1,4 @@
-﻿// 
+// 
 // RectangleEditEngine.cs
 //  
 // Author:
@@ -25,37 +25,35 @@
 // THE SOFTWARE.
 
 using System;
-using Cairo;
-using Pinta.Core;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using Cairo;
+using Pinta.Core;
 
 namespace Pinta.Tools
 {
-    public class RectangleEditEngine: BaseEditEngine
-    {
-		protected override string ShapeName
-		{
-			get
-			{
-				return Translations.GetString("Closed Curve Shape");
+	public class RectangleEditEngine : BaseEditEngine
+	{
+		protected override string ShapeName {
+			get {
+				return Translations.GetString ("Closed Curve Shape");
 			}
 		}
 
-		public RectangleEditEngine(ShapeTool passedOwner): base(passedOwner)
-        {
+		public RectangleEditEngine (ShapeTool passedOwner) : base (passedOwner)
+		{
 
-        }
+		}
 
-		protected override ShapeEngine CreateShape(bool ctrlKey, bool clickedOnControlPoint, PointD prevSelPoint)
+		protected override ShapeEngine CreateShape (bool ctrlKey, bool clickedOnControlPoint, PointD prevSelPoint)
 		{
 			Document doc = PintaCore.Workspace.ActiveDocument;
 
-			ShapeEngine newEngine = new LineCurveSeriesEngine(doc.Layers.CurrentUserLayer, null, BaseEditEngine.ShapeTypes.ClosedLineCurveSeries,
+			ShapeEngine newEngine = new LineCurveSeriesEngine (doc.Layers.CurrentUserLayer, null, BaseEditEngine.ShapeTypes.ClosedLineCurveSeries,
 				owner.UseAntialiasing, true, BaseEditEngine.OutlineColor, BaseEditEngine.FillColor, owner.EditEngine.BrushWidth);
 
-			AddRectanglePoints(ctrlKey, clickedOnControlPoint, newEngine, prevSelPoint);
+			AddRectanglePoints (ctrlKey, clickedOnControlPoint, newEngine, prevSelPoint);
 
 			//Set the new shape's DashPattern option.
 			newEngine.DashPattern = dash_pattern_box.comboBox!.ComboBox.ActiveText; // NRT - Code assumes this is not-null
@@ -63,11 +61,11 @@ namespace Pinta.Tools
 			return newEngine;
 		}
 
-        protected override void MovePoint(List<ControlPoint> controlPoints)
-        {
-			MoveRectangularPoint(controlPoints);
+		protected override void MovePoint (List<ControlPoint> controlPoints)
+		{
+			MoveRectangularPoint (controlPoints);
 
-			base.MovePoint(controlPoints);
-        }
-    }
+			base.MovePoint (controlPoints);
+		}
+	}
 }

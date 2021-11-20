@@ -28,11 +28,11 @@
 // http://github.com/migueldeicaza/MonoTouch.Dialog
 
 using System;
-using System.Reflection;
-using System.Text;
+using System.Collections;
 using System.Collections.Generic;
 using System.ComponentModel;
-using System.Collections;
+using System.Reflection;
+using System.Text;
 
 namespace Pinta.Gui.Widgets
 {

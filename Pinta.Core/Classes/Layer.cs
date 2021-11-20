@@ -25,108 +25,108 @@
 // THE SOFTWARE.
 
 using System;
-using System.ComponentModel;
 using System.Collections.Specialized;
+using System.ComponentModel;
 using Cairo;
 using Gdk;
 
 namespace Pinta.Core
 {
 	public class Layer : ObservableObject
-	{	
+	{
 		private double opacity;
 		private bool hidden;
 		private string name;
 		private BlendMode blend_mode;
-		private Matrix transform = new Matrix();
-		
+		private Matrix transform = new Matrix ();
+
 		public Layer (ImageSurface surface) : this (surface, false, 1f, "")
 		{
 		}
-		
+
 		public Layer (ImageSurface surface, bool hidden, double opacity, string name)
 		{
 			Surface = surface;
 
 			this.hidden = hidden;
 			this.opacity = opacity;
-			this.name = name;			
+			this.name = name;
 			this.blend_mode = BlendMode.Normal;
 		}
-		
+
 		public ImageSurface Surface { get; set; }
-		public bool Tiled { get; set; }	
+		public bool Tiled { get; set; }
 		public Matrix Transform { get { return transform; } }
-		
+
 		public static readonly string OpacityProperty = "Opacity";
 		public static readonly string HiddenProperty = "Hidden";
-		public static readonly string NameProperty = "Name";		
+		public static readonly string NameProperty = "Name";
 		public static readonly string BlendModeProperty = "BlendMode";
 
 		public double Opacity {
 			get { return opacity; }
 			set { if (opacity != value) SetValue (OpacityProperty, ref opacity, value); }
 		}
-		
+
 		public bool Hidden {
 			get { return hidden; }
 			set { if (hidden != value) SetValue (HiddenProperty, ref hidden, value); }
 		}
-		
+
 		public string Name {
 			get { return name; }
 			set { if (name != value) SetValue (NameProperty, ref name, value); }
-		}				
-			
+		}
+
 		public BlendMode BlendMode {
 			get { return blend_mode; }
 			set { if (blend_mode != value) SetValue (BlendModeProperty, ref blend_mode, value); }
-		}				
-		
+		}
+
 		public void Clear ()
 		{
 			Surface.Clear ();
 		}
-		
+
 		public void FlipHorizontal ()
 		{
 			var doc = PintaCore.Workspace.ActiveDocument;
 
 			Layer dest = doc.Layers.CreateLayer ();
-			
+
 			using (Cairo.Context g = new Cairo.Context (dest.Surface)) {
 				g.Matrix = new Matrix (-1, 0, 0, 1, Surface.Width, 0);
 				g.SetSource (Surface);
-				
+
 				g.Paint ();
 			}
-			
+
 			Surface old = Surface;
 			Surface = dest.Surface;
 			(old as IDisposable).Dispose ();
 		}
-		
+
 		public void FlipVertical ()
 		{
 			var doc = PintaCore.Workspace.ActiveDocument;
 
 			Layer dest = doc.Layers.CreateLayer ();
-			
+
 			using (Cairo.Context g = new Cairo.Context (dest.Surface)) {
 				g.Matrix = new Matrix (1, 0, 0, -1, 0, Surface.Height);
 				g.SetSource (Surface);
-				
+
 				g.Paint ();
 			}
-			
+
 			Surface old = Surface;
 			Surface = dest.Surface;
 			(old as IDisposable).Dispose ();
 		}
 
-		public void Draw(Context ctx)
+		public void Draw (Context ctx)
 		{
-			Draw(ctx, Surface, Opacity);
+			Draw (ctx, Surface, Opacity);
 		}
 
 		public void Draw (Context ctx, ImageSurface surface, double opacity, bool transform = true)
@@ -151,23 +151,22 @@ namespace Pinta.Core
 			ctx.SetSourceSurface (surface, 0, 0);
 			if (opacity >= 1.0)
 				ctx.Paint ();
-			else 
+			else
 				ctx.PaintWithAlpha (opacity);
 			ctx.Restore ();
 		}
-		
+
 		public virtual void ApplyTransform (Matrix xform, Size new_size)
 		{
 			var old_size = PintaCore.Workspace.ImageSize;
 			var dest = CairoExtensions.CreateImageSurface (Format.ARGB32, new_size.Width, new_size.Height);
 
-			using (var g = new Context (dest))
-			{
+			using (var g = new Context (dest)) {
 				g.Transform (xform);
 				g.SetSource (Surface);
 				g.Paint ();
 			}
-			
+
 			Surface old = Surface;
 			Surface = dest;
 			old.Dispose ();
@@ -181,29 +180,29 @@ namespace Pinta.Core
 			int w = originalSize.Width;
 			int h = originalSize.Height;
 
-			return new Gdk.Size ((int)(w * cos + h * sin), (int)(w * sin + h * cos));
+			return new Gdk.Size ((int) (w * cos + h * sin), (int) (w * sin + h * cos));
 		}
-		
+
 		public unsafe void HueSaturation (int hueDelta, int satDelta, int lightness)
 		{
 			ImageSurface dest = Surface.Clone ();
-			ColorBgra* dstPtr = (ColorBgra*)dest.DataPtr;
-			
+			ColorBgra* dstPtr = (ColorBgra*) dest.DataPtr;
+
 			int len = Surface.Data.Length / 4;
-			
+
 			// map the range [0,100] -> [0,100] and the range [101,200] -> [103,400]
-			if (satDelta > 100) 
+			if (satDelta > 100)
 				satDelta = ((satDelta - 100) * 3) + 100;
-			
+
 			UnaryPixelOp op;
-			
+
 			if (hueDelta == 0 && satDelta == 100 && lightness == 0)
 				op = new UnaryPixelOps.Identity ();
 			else
 				op = new UnaryPixelOps.HueSaturationLightness (hueDelta, satDelta, lightness);
-			
+
 			op.Apply (dstPtr, len);
-			
+
 			using (Context g = new Context (Surface)) {
 				g.AppendPath (PintaCore.Workspace.ActiveDocument.Selection.SelectionPath);
 				g.FillRule = Cairo.FillRule.EvenOdd;
@@ -220,7 +219,7 @@ namespace Pinta.Core
 		{
 			ImageSurface dest = CairoExtensions.CreateImageSurface (Format.Argb32, width, height);
 
-			Pixbuf pb = Surface.ToPixbuf();
+			Pixbuf pb = Surface.ToPixbuf ();
 			Pixbuf pbScaled = pb.ScaleSimple (width, height, InterpType.Bilinear);
 
 			using (Context g = new Context (dest)) {
@@ -240,7 +239,7 @@ namespace Pinta.Core
 
 			int delta_x = Surface.Width - width;
 			int delta_y = Surface.Height - height;
-			
+
 			using (Context g = new Context (dest)) {
 				switch (anchor) {
 					case Anchor.NW:
@@ -271,7 +270,7 @@ namespace Pinta.Core
 						g.SetSourceSurface (Surface, -delta_x / 2, -delta_y / 2);
 						break;
 				}
-				
+
 				g.Paint ();
 			}
 
@@ -291,8 +290,7 @@ namespace Pinta.Core
 				g.Antialias = Antialias.None;
 
 				// Optionally, respect the given path.
-				if (selection != null)
-				{
+				if (selection != null) {
 					g.AppendPath (selection);
 					g.FillRule = Cairo.FillRule.EvenOdd;
 					g.Clip ();

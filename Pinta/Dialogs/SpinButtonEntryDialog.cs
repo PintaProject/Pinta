@@ -28,33 +28,33 @@ using Gtk;
 
 namespace Pinta
 {
-	public class SpinButtonEntryDialog: Dialog
+	public class SpinButtonEntryDialog : Dialog
 	{
 		private SpinButton spinButton;
-	
+
 		public SpinButtonEntryDialog (string title, Window parent, string label, int min, int max, int current)
-			: base (title, parent, DialogFlags.Modal, Core.GtkExtensions.DialogButtonsCancelOk())
+			: base (title, parent, DialogFlags.Modal, Core.GtkExtensions.DialogButtonsCancelOk ())
 		{
 			BorderWidth = 6;
 			ContentArea.Spacing = 3;
 			HBox hbox = new HBox ();
 			hbox.Spacing = 6;
-			
+
 			Label lbl = new Label (label);
 			lbl.Xalign = 0;
 			hbox.PackStart (lbl, true, true, 0);
-			
+
 			spinButton = new SpinButton (min, max, 1);
 			spinButton.Value = current;
 			hbox.PackStart (spinButton, true, true, 0);
-			
+
 			hbox.ShowAll ();
 			ContentArea.Add (hbox);
 
 			DefaultResponse = ResponseType.Ok;
 			spinButton.ActivatesDefault = true;
 		}
-		
+
 		public int GetValue ()
 		{
 			return spinButton.ValueAsInt;

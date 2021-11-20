@@ -25,10 +25,10 @@
 // THE SOFTWARE.
 
 using System;
-using Gtk;
-using Cairo;
 using System.Collections.Generic;
 using System.Linq;
+using Cairo;
+using Gtk;
 
 namespace Pinta.Core
 {
@@ -67,17 +67,17 @@ namespace Pinta.Core
 			get => secondary;
 			set => SetColor (false, value, true);
 		}
-		
+
 		public Palette CurrentPalette {
 			get {
 				if (palette == null) {
 					palette = Palette.GetDefault ();
 				}
-				
+
 				return palette;
 			}
 		}
-		
+
 		public PaletteManager ()
 		{
 			PopulateSavedPalette ();
@@ -91,7 +91,7 @@ namespace Pinta.Core
 
 		public void DoKeyPress (object o, KeyPressEventArgs e)
 		{
-			if (e.Event.State.FilterModifierKeys() == Gdk.ModifierType.None && e.Event.Key.ToUpper() == Gdk.Key.X) {
+			if (e.Event.State.FilterModifierKeys () == Gdk.ModifierType.None && e.Event.Key.ToUpper () == Gdk.Key.X) {
 				Color temp = PintaCore.Palette.PrimaryColor;
 				PintaCore.Palette.PrimaryColor = PintaCore.Palette.SecondaryColor;
 				PintaCore.Palette.SecondaryColor = temp;
@@ -210,7 +210,7 @@ namespace Pinta.Core
 				SecondaryColorChanged.Invoke (this, EventArgs.Empty);
 		}
 		#endregion
-		
+
 		#region Events
 		public event EventHandler? PrimaryColorChanged;
 		public event EventHandler? SecondaryColorChanged;

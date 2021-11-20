@@ -9,8 +9,8 @@
 
 using System;
 using Cairo;
-using Pinta.Gui.Widgets;
 using Pinta.Core;
+using Pinta.Gui.Widgets;
 
 namespace Pinta.Effects
 {
@@ -32,7 +32,7 @@ namespace Pinta.Effects
 			get { return Translations.GetString ("Artistic"); }
 		}
 
-		public OilPaintingData Data { get { return (OilPaintingData)EffectData!; } } // NRT - Set in constructor
+		public OilPaintingData Data { get { return (OilPaintingData) EffectData!; } } // NRT - Set in constructor
 
 		public OilPaintingEffect ()
 		{
@@ -57,22 +57,22 @@ namespace Pinta.Effects
 			byte* localStore = stackalloc byte[localStoreSize];
 			byte* p = localStore;
 
-			int* intensityCount = (int*)p;
+			int* intensityCount = (int*) p;
 			p += arrayLens * sizeof (int);
 
-			uint* avgRed = (uint*)p;
+			uint* avgRed = (uint*) p;
 			p += arrayLens * sizeof (uint);
 
-			uint* avgGreen = (uint*)p;
+			uint* avgGreen = (uint*) p;
 			p += arrayLens * sizeof (uint);
 
-			uint* avgBlue = (uint*)p;
+			uint* avgBlue = (uint*) p;
 			p += arrayLens * sizeof (uint);
 
-			uint* avgAlpha = (uint*)p;
+			uint* avgAlpha = (uint*) p;
 			p += arrayLens * sizeof (uint);
 
-			byte maxIntensity = (byte)Data.Coarseness;
+			byte maxIntensity = (byte) Data.Coarseness;
 
 			foreach (Gdk.Rectangle rect in rois) {
 
@@ -81,11 +81,11 @@ namespace Pinta.Effects
 				int rectLeft = rect.Left;
 				int rectRight = rect.GetRight ();
 
-				ColorBgra* dst_dataptr = (ColorBgra*)dest.DataPtr;
+				ColorBgra* dst_dataptr = (ColorBgra*) dest.DataPtr;
 				int dst_width = dest.Width;
-				ColorBgra* src_dataptr = (ColorBgra*)src.DataPtr;
+				ColorBgra* src_dataptr = (ColorBgra*) src.DataPtr;
 				int src_width = src.Width;
-				
+
 				for (int y = rectTop; y <= rectBottom; ++y) {
 					ColorBgra* dstPtr = dest.GetPointAddressUnchecked (dst_dataptr, dst_width, rect.Left, y);
 
@@ -101,7 +101,7 @@ namespace Pinta.Effects
 					}
 
 					for (int x = rectLeft; x <= rectRight; ++x) {
-						SetToZero (localStore, (ulong)localStoreSize);
+						SetToZero (localStore, (ulong) localStoreSize);
 
 						int left = x - Data.BrushSize;
 						int right = x + Data.BrushSize + 1;
@@ -139,17 +139,17 @@ namespace Pinta.Effects
 
 						for (int i = 0; i <= maxIntensity; ++i) {
 							if (intensityCount[i] > maxInstance) {
-								chosenIntensity = (byte)i;
+								chosenIntensity = (byte) i;
 								maxInstance = intensityCount[i];
 							}
 						}
 
 						// TODO: correct handling of alpha values?
 
-						byte R = (byte)(avgRed[chosenIntensity] / maxInstance);
-						byte G = (byte)(avgGreen[chosenIntensity] / maxInstance);
-						byte B = (byte)(avgBlue[chosenIntensity] / maxInstance);
-						byte A = (byte)(avgAlpha[chosenIntensity] / maxInstance);
+						byte R = (byte) (avgRed[chosenIntensity] / maxInstance);
+						byte G = (byte) (avgGreen[chosenIntensity] / maxInstance);
+						byte B = (byte) (avgBlue[chosenIntensity] / maxInstance);
+						byte A = (byte) (avgAlpha[chosenIntensity] / maxInstance);
 
 						*dstPtr = ColorBgra.FromBgra (B, G, R, A);
 						++dstPtr;
@@ -157,12 +157,12 @@ namespace Pinta.Effects
 				}
 			}
 		}
-		
+
 		// This is slow, and gets called a lot
 		private unsafe static void SetToZero (byte* dst, ulong length)
 		{
-			int* ptr = (int*)dst;
-			
+			int* ptr = (int*) dst;
+
 			for (ulong i = 0; i < length / 4; i++) {
 				*ptr = 0;
 				ptr++;

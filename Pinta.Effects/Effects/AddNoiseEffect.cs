@@ -8,10 +8,10 @@
 /////////////////////////////////////////////////////////////////////////////////
 
 using System;
-using Cairo;
-using Pinta.Gui.Widgets;
-using Pinta.Core;
 using System.Diagnostics.CodeAnalysis;
+using Cairo;
+using Pinta.Core;
+using Pinta.Gui.Widgets;
 
 namespace Pinta.Effects
 {
@@ -37,7 +37,7 @@ namespace Pinta.Effects
 			get { return Translations.GetString ("Noise"); }
 		}
 
-		public NoiseData Data { get { return (NoiseData)EffectData!; } } // NRT - Set in constructor
+		public NoiseData Data { get { return (NoiseData) EffectData!; } } // NRT - Set in constructor
 
 		static AddNoiseEffect ()
 		{
@@ -78,7 +78,7 @@ namespace Pinta.Effects
 				scale = (l + r) * 0.5;
 
 				for (int i = 0; i < tableSize; ++i) {
-					sum += NormalCurve (16.0 * ((double)i - tableSize / 2) / tableSize, scale);
+					sum += NormalCurve (16.0 * ((double) i - tableSize / 2) / tableSize, scale);
 
 					if (sum > 1000000) {
 						break;
@@ -99,9 +99,9 @@ namespace Pinta.Effects
 			int roundedSum = 0, lastRoundedSum;
 
 			for (int i = 0; i < tableSize; ++i) {
-				sum += NormalCurve (16.0 * ((double)i - tableSize / 2) / tableSize, scale);
+				sum += NormalCurve (16.0 * ((double) i - tableSize / 2) / tableSize, scale);
 				lastRoundedSum = roundedSum;
-				roundedSum = (int)sum;
+				roundedSum = (int) sum;
 
 				for (int j = lastRoundedSum; j < roundedSum; ++j) {
 					lookup[j] = (i - tableSize / 2) * 65536 / tableSize;
@@ -119,8 +119,8 @@ namespace Pinta.Effects
 			int sat = this.colorSaturation * 4096 / 100;
 
 			if (threadRand == null) {
-				threadRand = new Random (unchecked (System.Threading.Thread.CurrentThread.GetHashCode () ^
-				    unchecked ((int)DateTime.Now.Ticks)));
+				threadRand = new Random (unchecked(System.Threading.Thread.CurrentThread.GetHashCode () ^
+				    unchecked((int) DateTime.Now.Ticks)));
 			}
 
 			Random localRand = threadRand;

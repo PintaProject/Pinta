@@ -1,4 +1,4 @@
-﻿// 
+// 
 // MovePixelsHistoryItem.cs
 //  
 // Author:
@@ -38,11 +38,11 @@ namespace Pinta.Core
 		//   around the temporary layer
 		private Document doc;
 		private DocumentSelection? old_selection;
-		private readonly Matrix old_transform = new Matrix();
+		private readonly Matrix old_transform = new Matrix ();
 		private ImageSurface? old_surface;
 		private int layer_index;
-		private bool lifted;		// Whether this item has lift
-		private bool is_lifted;		// Track state of undo/redo lift
+		private bool lifted;            // Whether this item has lift
+		private bool is_lifted;         // Track state of undo/redo lift
 
 		public MovePixelsHistoryItem (string icon, string text, Document document) : base (icon, text)
 		{
@@ -61,7 +61,7 @@ namespace Pinta.Core
 
 		public override void Dispose ()
 		{
-            old_selection?.Dispose ();
+			old_selection?.Dispose ();
 
 			if (old_surface != null)
 				(old_surface as IDisposable).Dispose ();
@@ -75,10 +75,10 @@ namespace Pinta.Core
 			doc.Selection = old_selection!; // NRT - Set in TakeSnapshot
 			old_selection = swap_selection;
 
-			Matrix swap_transform = new Matrix();
-			swap_transform.InitMatrix(doc.Layers.SelectionLayer.Transform);
-			doc.Layers.SelectionLayer.Transform.InitMatrix(old_transform);
-			old_transform.InitMatrix(swap_transform);
+			Matrix swap_transform = new Matrix ();
+			swap_transform.InitMatrix (doc.Layers.SelectionLayer.Transform);
+			doc.Layers.SelectionLayer.Transform.InitMatrix (old_transform);
+			old_transform.InitMatrix (swap_transform);
 
 			if (lifted) {
 				// Grab the original surface
@@ -96,7 +96,7 @@ namespace Pinta.Core
 
 			PintaCore.Workspace.Invalidate ();
 		}
-		
+
 		public void TakeSnapshot (bool lift)
 		{
 			var doc = PintaCore.Workspace.ActiveDocument;
@@ -108,9 +108,9 @@ namespace Pinta.Core
 				layer_index = doc.Layers.CurrentUserLayerIndex;
 				old_surface = doc.Layers.CurrentUserLayer.Surface.Clone ();
 			}
-				
+
 			old_selection = doc.Selection.Clone ();
-			old_transform.InitMatrix(doc.Layers.SelectionLayer.Transform);
+			old_transform.InitMatrix (doc.Layers.SelectionLayer.Transform);
 		}
 	}
 }

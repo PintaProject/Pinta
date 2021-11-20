@@ -1,4 +1,4 @@
-﻿// 
+// 
 // Arrow.cs
 //  
 // Author:
@@ -40,14 +40,14 @@ namespace Pinta.Tools
 
 		private const double radiansToDegrees = Math.PI / 180d;
 		private const double invRadiansToDegrees = 180d / Math.PI;
-		
+
 		/// <summary>
 		/// Returns a clone of the Arrow.
 		/// </summary>
 		/// <returns>A clone of the Arrow.</returns>
-		public Arrow Clone()
+		public Arrow Clone ()
 		{
-			Arrow clonedA = new Arrow();
+			Arrow clonedA = new Arrow ();
 
 			clonedA.Show = Show;
 			clonedA.ArrowSize = ArrowSize;
@@ -63,27 +63,20 @@ namespace Pinta.Tools
 		/// <param name="g">The drawing context.</param>
 		/// <param name="endPoint">The end point of a shape.</param>
 		/// <param name="almostEndPoint">The point right before the end point.</param>
-		public Rectangle? Draw(Context g, Color outlineColor, PointD endPoint, PointD almostEndPoint)
+		public Rectangle? Draw (Context g, Color outlineColor, PointD endPoint, PointD almostEndPoint)
 		{
 			//First, calculate the ending angle.
-			double endingAngle = Math.Atan(Math.Abs(endPoint.Y - almostEndPoint.Y) / Math.Abs(endPoint.X - almostEndPoint.X)) * invRadiansToDegrees;
+			double endingAngle = Math.Atan (Math.Abs (endPoint.Y - almostEndPoint.Y) / Math.Abs (endPoint.X - almostEndPoint.X)) * invRadiansToDegrees;
 
 			//This is necessary to have a properly calculated ending angle.
-			if (endPoint.Y - almostEndPoint.Y > 0)
-			{
-				if (endPoint.X - almostEndPoint.X > 0)
-				{
+			if (endPoint.Y - almostEndPoint.Y > 0) {
+				if (endPoint.X - almostEndPoint.X > 0) {
 					endingAngle = 180d - endingAngle;
 				}
-			}
-			else
-			{
-				if (endPoint.X - almostEndPoint.X > 0)
-				{
+			} else {
+				if (endPoint.X - almostEndPoint.X > 0) {
 					endingAngle += 180d;
-				}
-				else
-				{
+				} else {
 					endingAngle = 360d - endingAngle;
 				}
 			}
@@ -104,18 +97,18 @@ namespace Pinta.Tools
 							};
 
 			//Draw the arrow.
-			g.FillPolygonal(arrowPoints, outlineColor);
+			g.FillPolygonal (arrowPoints, outlineColor);
 
 
-            //Calculate the minimum bounding rectangle for the arrowhead and return it so
-            //that it can be unioned with the existing invalidation rectangle.
+			//Calculate the minimum bounding rectangle for the arrowhead and return it so
+			//that it can be unioned with the existing invalidation rectangle.
 
-			double minX = Math.Min(Math.Min(arrowPoints[1].X, arrowPoints[2].X), arrowPoints[3].X);
-			double minY = Math.Min(Math.Min(arrowPoints[1].Y, arrowPoints[2].Y), arrowPoints[3].Y);
+			double minX = Math.Min (Math.Min (arrowPoints[1].X, arrowPoints[2].X), arrowPoints[3].X);
+			double minY = Math.Min (Math.Min (arrowPoints[1].Y, arrowPoints[2].Y), arrowPoints[3].Y);
 
-			return new Rectangle(minX, minY,
-				Math.Max(Math.Max(arrowPoints[1].X, arrowPoints[2].X), arrowPoints[3].X) - minX,
-				Math.Max(Math.Max(arrowPoints[1].Y, arrowPoints[2].Y), arrowPoints[3].Y) - minY);
+			return new Rectangle (minX, minY,
+				Math.Max (Math.Max (arrowPoints[1].X, arrowPoints[2].X), arrowPoints[3].X) - minX,
+				Math.Max (Math.Max (arrowPoints[1].Y, arrowPoints[2].Y), arrowPoints[3].Y) - minY);
 		}
 	}
 }

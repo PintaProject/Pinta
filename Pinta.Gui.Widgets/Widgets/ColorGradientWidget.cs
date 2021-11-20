@@ -36,7 +36,7 @@ namespace Pinta.Gui.Widgets
 	public class ColorGradientWidget : FilledAreaBin
 	{
 		private EventBox eventbox;
-		
+
 		private const double xpad = 0.15;       // gradient horizontal padding							
 		private const double ypad = 0.03;       // gradient vertical padding
 
@@ -71,7 +71,7 @@ namespace Pinta.Gui.Widgets
 			get => vals.Length;
 			[MemberNotNull (nameof (vals))]
 			set {
-				if (value < 2 || value > 3) 
+				if (value < 2 || value > 3)
 					throw new ArgumentOutOfRangeException ("value", value, "Count must be 2 or 3");
 
 				vals = new double[value];

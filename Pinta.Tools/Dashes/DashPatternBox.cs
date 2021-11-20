@@ -1,4 +1,4 @@
-﻿// 
+// 
 // DashPatternBox.cs
 // 
 // Author:
@@ -59,36 +59,30 @@ namespace Pinta.Tools
 		/// </summary>
 		/// <param name="tb">The Toolbar to add the DashPatternBox to.</param>
 		/// <returns>null if the DashPatternBox has already been setup; otherwise, returns the DashPatternBox itself.</returns>
-		public Gtk.ComboBoxText? SetupToolbar(Toolbar tb)
+		public Gtk.ComboBoxText? SetupToolbar (Toolbar tb)
 		{
-			if (dashPatternSep == null)
-			{
-				dashPatternSep = new SeparatorToolItem();
+			if (dashPatternSep == null) {
+				dashPatternSep = new SeparatorToolItem ();
 			}
 
-			tb.AppendItem(dashPatternSep);
+			tb.AppendItem (dashPatternSep);
 
-			if (dashPatternLabel == null)
-			{
-				dashPatternLabel = new ToolBarLabel(string.Format(" {0}: ", Translations.GetString("Dash")));
+			if (dashPatternLabel == null) {
+				dashPatternLabel = new ToolBarLabel (string.Format (" {0}: ", Translations.GetString ("Dash")));
 			}
 
-			tb.AppendItem(dashPatternLabel);
+			tb.AppendItem (dashPatternLabel);
 
-			if (comboBox == null)
-			{
-				comboBox = new ToolBarComboBox(50, 0, true,
+			if (comboBox == null) {
+				comboBox = new ToolBarComboBox (50, 0, true,
 					"-", " -", " --", " ---", "  -", "   -", " - --", " - - --------", " - - ---- - ----");
 			}
 
-			tb.AppendItem(comboBox);
+			tb.AppendItem (comboBox);
 
-			if (dashChangeSetup)
-			{
+			if (dashChangeSetup) {
 				return null;
-			}
-			else
-			{
+			} else {
 				dashChangeSetup = true;
 
 				return comboBox.ComboBox;
@@ -103,9 +97,9 @@ namespace Pinta.Tools
 		/// <param name="dashPattern">The dash pattern string.</param>
 		/// <param name="brush_width">The width of the brush.</param>
 		/// <returns>The double[] generated.</returns>
-		public static double[] GenerateDashArray(string dashPattern, double brushWidth)
+		public static double[] GenerateDashArray (string dashPattern, double brushWidth)
 		{
-			List<double> dashList = new List<double>();
+			List<double> dashList = new List<double> ();
 
 			//For each consecutive dash character, extent will increase by 1.
 			//For each consecutive space character, extent will dicrease by 1.
@@ -133,44 +127,32 @@ namespace Pinta.Tools
 			 * 
 			 * Note: "extent" is only ever 0 at the very beginning; otherwise, it will always be > 0 or < 0. After the foreach loop, "extent" will
 			 * never be equal to 0, and the final series must be added onto the dash pattern array outside of the loop, thus tying off the loose end. */
-			foreach (char c in dashPattern)
-			{
-				if (c == '-')
-				{
+			foreach (char c in dashPattern) {
+				if (c == '-') {
 					//Dash character.
 
-					if (extent >= 0)
-					{
+					if (extent >= 0) {
 						++extent;
-					}
-					else
-					{
+					} else {
 						//There were previously one or more non-dash characters.
-						dashList.Add((double)-extent * brushWidth * dashFactor);
+						dashList.Add ((double) -extent * brushWidth * dashFactor);
 
 						extent = 1;
 					}
-				}
-				else
-				{
+				} else {
 					//Non-dash character.
 
-					if (extent == 0)
-					{
+					if (extent == 0) {
 						//Pattern is starting with a non-dash character. Resulting double[] pattern must end
 						//with a dash representation for this to be accurate: 0.0 is merely a placeholder.
-						dashList.Add(0.0);
+						dashList.Add (0.0);
 
 						--extent;
-					}
-					else if (extent < 0)
-					{
+					} else if (extent < 0) {
 						--extent;
-					}
-					else
-					{
+					} else {
 						//There were previously one or more dash characters.
-						dashList.Add((double)extent * brushWidth * dashFactor);
+						dashList.Add ((double) extent * brushWidth * dashFactor);
 
 						extent = -1;
 					}
@@ -178,21 +160,18 @@ namespace Pinta.Tools
 			}
 
 			//At this point, extent != 0.
-			if (extent > 0)
-			{
+			if (extent > 0) {
 				//extent > 0. Pattern ended with a dash character.
-				dashList.Add((double)extent * brushWidth * dashFactor);
+				dashList.Add ((double) extent * brushWidth * dashFactor);
 
 				//Resulting double[] pattern must end with a space representation for this to be accurate: 0.0 is merely a placeholder.
-				dashList.Add(0.0);
-			}
-			else
-			{
+				dashList.Add (0.0);
+			} else {
 				//extent < 0. Pattern ended with a non-dash character.
-				dashList.Add((double)-extent * brushWidth * dashFactor);
+				dashList.Add ((double) -extent * brushWidth * dashFactor);
 			}
 
-			return dashList.ToArray();
+			return dashList.ToArray ();
 		}
 	}
 }

@@ -25,11 +25,11 @@
 // THE SOFTWARE.
 
 using System;
+using System.Linq;
 using Cairo;
+using Gdk;
 using Gtk;
 using Pinta.Core;
-using System.Linq;
-using Gdk;
 
 namespace Pinta.Tools
 {

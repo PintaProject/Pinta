@@ -37,9 +37,9 @@ namespace Pinta.Core
 		public Command ZoomToWindow { get; private set; }
 		public Command ZoomToSelection { get; private set; }
 		public Command ActualSize { get; private set; }
-        public ToggleCommand ToolBar { get; private set; }
-        public ToggleCommand ImageTabs { get; private set; }
-        public ToggleCommand PixelGrid { get; private set; }
+		public ToggleCommand ToolBar { get; private set; }
+		public ToggleCommand ImageTabs { get; private set; }
+		public ToggleCommand PixelGrid { get; private set; }
 		public ToggleCommand StatusBar { get; private set; }
 		public ToggleCommand ToolBox { get; private set; }
 		public ToggleCommand Rulers { get; private set; }
@@ -52,15 +52,14 @@ namespace Pinta.Core
 		private string old_zoom_text = "";
 		private bool zoom_to_window_activated = false;
 
-		public bool ZoomToWindowActivated { 
+		public bool ZoomToWindowActivated {
 			get { return zoom_to_window_activated; }
-			set
-			{
+			set {
 				zoom_to_window_activated = value;
 				old_zoom_text = ZoomComboBox.ComboBox.ActiveText;
 			}
 		}
-		
+
 		public ViewActions ()
 		{
 			ZoomIn = new Command ("ZoomIn", Translations.GetString ("Zoom In"), null, Resources.StandardIcons.ZoomIn);
@@ -68,13 +67,13 @@ namespace Pinta.Core
 			ZoomToWindow = new Command ("ZoomToWindow", Translations.GetString ("Best Fit"), null, Resources.StandardIcons.ZoomFitBest);
 			ZoomToSelection = new Command ("ZoomToSelection", Translations.GetString ("Zoom to Selection"), null, Resources.Icons.ViewZoomSelection);
 			ActualSize = new Command ("ActualSize", Translations.GetString ("Normal Size"), null, Resources.StandardIcons.ZoomOriginal);
-            ToolBar = new ToggleCommand ("Toolbar", Translations.GetString ("Toolbar"), null, null);
-            ImageTabs = new ToggleCommand ("ImageTabs", Translations.GetString ("Image Tabs"), null, null);
-            PixelGrid = new ToggleCommand ("PixelGrid", Translations.GetString ("Pixel Grid"), null, Resources.Icons.ViewGrid);
+			ToolBar = new ToggleCommand ("Toolbar", Translations.GetString ("Toolbar"), null, null);
+			ImageTabs = new ToggleCommand ("ImageTabs", Translations.GetString ("Image Tabs"), null, null);
+			PixelGrid = new ToggleCommand ("PixelGrid", Translations.GetString ("Pixel Grid"), null, Resources.Icons.ViewGrid);
 			StatusBar = new ToggleCommand ("Statusbar", Translations.GetString ("Status Bar"), null, null);
 			ToolBox = new ToggleCommand ("ToolBox", Translations.GetString ("Tool Box"), null, null);
 			Rulers = new ToggleCommand ("Rulers", Translations.GetString ("Rulers"), null, Resources.Icons.ViewRulers);
-			RulerMetric = new GLib.SimpleAction("rulermetric", GLib.VariantType.Int32, new GLib.Variant(0));
+			RulerMetric = new GLib.SimpleAction ("rulermetric", GLib.VariantType.Int32, new GLib.Variant (0));
 			Fullscreen = new Command ("Fullscreen", Translations.GetString ("Fullscreen"), null, Resources.StandardIcons.DocumentNew);
 
 			ZoomCollection = new string[] {
@@ -105,18 +104,18 @@ namespace Pinta.Core
 			};
 			ZoomComboBox = new ToolBarComboBox (90, DefaultZoomIndex (), true, ZoomCollection) { Margin = 4 };
 
-            // The toolbar is shown by default.
-            ToolBar.Value = true;
-            ImageTabs.Value = true;
+			// The toolbar is shown by default.
+			ToolBar.Value = true;
+			ImageTabs.Value = true;
 			StatusBar.Value = true;
 			ToolBox.Value = true;
 		}
 
 		#region Initialization
-		public void RegisterActions(Gtk.Application app, GLib.Menu menu)
+		public void RegisterActions (Gtk.Application app, GLib.Menu menu)
 		{
-			app.AddAction(ToolBar);
-			menu.AppendItem(ToolBar.CreateMenuItem());
+			app.AddAction (ToolBar);
+			menu.AppendItem (ToolBar.CreateMenuItem ());
 
 			app.AddAction (StatusBar);
 			menu.AppendItem (StatusBar.CreateMenuItem ());
@@ -124,43 +123,43 @@ namespace Pinta.Core
 			app.AddAction (ToolBox);
 			menu.AppendItem (ToolBox.CreateMenuItem ());
 
-			app.AddAction(PixelGrid);
-			menu.AppendItem(PixelGrid.CreateMenuItem());
+			app.AddAction (PixelGrid);
+			menu.AppendItem (PixelGrid.CreateMenuItem ());
 
-			app.AddAction(Rulers);
-			menu.AppendItem(Rulers.CreateMenuItem());
+			app.AddAction (Rulers);
+			menu.AppendItem (Rulers.CreateMenuItem ());
 
-			app.AddAction(ImageTabs);
-			menu.AppendItem(ImageTabs.CreateMenuItem());
+			app.AddAction (ImageTabs);
+			menu.AppendItem (ImageTabs.CreateMenuItem ());
 
-			var zoom_section = new GLib.Menu();
-			menu.AppendSection(null, zoom_section);
+			var zoom_section = new GLib.Menu ();
+			menu.AppendSection (null, zoom_section);
 
-			app.AddAccelAction(ZoomIn, new[] { "<Primary>plus", "<Primary>equal", "equal", "<Primary>KP_Add", "KP_Add" });
-			zoom_section.AppendItem(ZoomIn.CreateMenuItem());
+			app.AddAccelAction (ZoomIn, new[] { "<Primary>plus", "<Primary>equal", "equal", "<Primary>KP_Add", "KP_Add" });
+			zoom_section.AppendItem (ZoomIn.CreateMenuItem ());
 
-			app.AddAccelAction(ZoomOut, new[] { "<Primary>minus", "<Primary>underscore", "minus", "<Primary>KP_Subtract", "KP_Subtract" });
-			zoom_section.AppendItem(ZoomOut.CreateMenuItem());
+			app.AddAccelAction (ZoomOut, new[] { "<Primary>minus", "<Primary>underscore", "minus", "<Primary>KP_Subtract", "KP_Subtract" });
+			zoom_section.AppendItem (ZoomOut.CreateMenuItem ());
 
-			app.AddAccelAction(ActualSize, new[] { "<Primary>0", "<Primary><Shift>A" });
-			zoom_section.AppendItem(ActualSize.CreateMenuItem());
+			app.AddAccelAction (ActualSize, new[] { "<Primary>0", "<Primary><Shift>A" });
+			zoom_section.AppendItem (ActualSize.CreateMenuItem ());
 
-			app.AddAccelAction(ZoomToWindow, "<Primary>B");
-			zoom_section.AppendItem(ZoomToWindow.CreateMenuItem());
+			app.AddAccelAction (ZoomToWindow, "<Primary>B");
+			zoom_section.AppendItem (ZoomToWindow.CreateMenuItem ());
 
-			app.AddAccelAction(Fullscreen, "F11");
-			zoom_section.AppendItem(Fullscreen.CreateMenuItem());
+			app.AddAccelAction (Fullscreen, "F11");
+			zoom_section.AppendItem (Fullscreen.CreateMenuItem ());
 
-			var metric_section = new GLib.Menu();
-			menu.AppendSection(null, metric_section);
+			var metric_section = new GLib.Menu ();
+			menu.AppendSection (null, metric_section);
 
-			var metric_menu = new GLib.Menu();
-			metric_section.AppendSubmenu(Translations.GetString("Ruler Units"), metric_menu);
+			var metric_menu = new GLib.Menu ();
+			metric_section.AppendSubmenu (Translations.GetString ("Ruler Units"), metric_menu);
 
-			app.AddAction(RulerMetric);
-			metric_menu.Append(Translations.GetString("Pixels"), $"app.{RulerMetric.Name}(0)");
-			metric_menu.Append(Translations.GetString("Inches"), $"app.{RulerMetric.Name}(1)");
-			metric_menu.Append(Translations.GetString("Centimeters"), $"app.{RulerMetric.Name}(2)");
+			app.AddAction (RulerMetric);
+			metric_menu.Append (Translations.GetString ("Pixels"), $"app.{RulerMetric.Name}(0)");
+			metric_menu.Append (Translations.GetString ("Inches"), $"app.{RulerMetric.Name}(1)");
+			metric_menu.Append (Translations.GetString ("Centimeters"), $"app.{RulerMetric.Name}(2)");
 		}
 
 		public void CreateStatusBar (Statusbar statusbar)
@@ -170,7 +169,7 @@ namespace Pinta.Core
 			statusbar.AppendItem (ZoomOut.CreateToolBarItem ());
 			statusbar.AppendItem (new SeparatorToolItem { Margin = 6 }, 6);
 		}
-		
+
 		public void RegisterHandlers ()
 		{
 			ZoomIn.Activated += HandlePintaCoreActionsViewZoomInActivated;
@@ -198,7 +197,7 @@ namespace Pinta.Core
 
 		private string? temp_zoom;
 		private bool suspend_zoom_change;
-		
+
 		private void Entry_FocusInEvent (object o, Gtk.FocusInEventArgs args)
 		{
 			temp_zoom = PintaCore.Actions.View.ZoomComboBox.ComboBox.ActiveText;
@@ -213,11 +212,11 @@ namespace Pinta.Core
 				PintaCore.Actions.View.ZoomComboBox.ComboBox.Entry.Text = temp_zoom;
 				return;
 			}
-			
+
 			if (percent > 3600)
 				PintaCore.Actions.View.ZoomComboBox.ComboBox.Active = 0;
 		}
-#endregion
+		#endregion
 
 		/// <summary>
 		/// Converts the string representation of a percent (with or without a '%' sign) to a numeric value
@@ -238,13 +237,13 @@ namespace Pinta.Core
 			text = text.Replace (format.PercentSymbol, string.Empty);
 			text = text.Replace ("%", string.Empty);
 			text = text.Replace (format.PercentDecimalSeparator, format.NumberDecimalSeparator);
-			text = text.Trim();
+			text = text.Trim ();
 
 			return double.TryParse (text,
-			                        NumberStyles.AllowDecimalPoint |
-			                        NumberStyles.AllowLeadingWhite |
-			                        NumberStyles.AllowTrailingWhite,
-			                        culture, out percent);
+						NumberStyles.AllowDecimalPoint |
+						NumberStyles.AllowLeadingWhite |
+						NumberStyles.AllowTrailingWhite,
+						culture, out percent);
 		}
 
 		/// <summary>
@@ -255,7 +254,7 @@ namespace Pinta.Core
 			var percent = (n * 100).ToString ("N0", CultureInfo.CurrentCulture);
 			// Translators: This specifies the format of the zoom percentage choices
 			// in the toolbar.
-			return Translations.GetString("{0}%", percent);
+			return Translations.GetString ("{0}%", percent);
 		}
 
 		public void SuspendZoomUpdate ()
@@ -274,14 +273,11 @@ namespace Pinta.Core
 
 			// stay in "Zoom to Window" mode if this function was called without the zoom level being changed by the user (e.g. if the 
 			// image was rotated or cropped) and "Zoom to Window" mode is active
-			if (text == Translations.GetString ("Window") || (ZoomToWindowActivated && old_zoom_text == text))
-			{
+			if (text == Translations.GetString ("Window") || (ZoomToWindowActivated && old_zoom_text == text)) {
 				PintaCore.Actions.View.ZoomToWindow.Activate ();
 				ZoomToWindowActivated = true;
 				return;
-			}
-			else
-			{
+			} else {
 				ZoomToWindowActivated = false;
 			}
 
@@ -295,13 +291,12 @@ namespace Pinta.Core
 
 			PintaCore.Workspace.Scale = percent;
 		}
-		
-#region Action Handlers
+
+		#region Action Handlers
 		private void HandlePintaCoreActionsViewActualSizeActivated (object sender, EventArgs e)
 		{
 			int default_zoom = DefaultZoomIndex ();
-			if (ZoomComboBox.ComboBox.Active != default_zoom)
-			{
+			if (ZoomComboBox.ComboBox.Active != default_zoom) {
 				ZoomComboBox.ComboBox.Active = default_zoom;
 				UpdateCanvasScale ();
 			}
@@ -324,12 +319,12 @@ namespace Pinta.Core
 		{
 			PintaCore.Workspace.ActiveDocument.Workspace.ZoomIn ();
 		}
-#endregion
+		#endregion
 
 		/// <summary>
 		/// Returns the index in the ZoomCollection of the default zoom level
 		/// </summary>
-		private int DefaultZoomIndex()
+		private int DefaultZoomIndex ()
 		{
 			return Array.IndexOf (ZoomCollection, ToPercent (1));
 		}

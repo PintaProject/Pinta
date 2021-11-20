@@ -9,9 +9,9 @@
 
 using System;
 using Cairo;
-using Pinta.Gui.Widgets;
-using Pinta.Effects;
 using Pinta.Core;
+using Pinta.Effects;
+using Pinta.Gui.Widgets;
 
 namespace Pinta.Effects
 {
@@ -20,7 +20,7 @@ namespace Pinta.Effects
 		private GaussianBlurEffect blurEffect;
 		private BrightnessContrastEffect contrastEffect;
 		private UserBlendOps.ScreenBlendOp screenBlendOp;
-		
+
 		public override string Icon {
 			get { return "Menu.Effects.Photo.Glow.png"; }
 		}
@@ -37,17 +37,17 @@ namespace Pinta.Effects
 			get { return Translations.GetString ("Photo"); }
 		}
 
-		public GlowData Data { get { return (GlowData)EffectData!; } } // NRT - Set in constructor
-		
+		public GlowData Data { get { return (GlowData) EffectData!; } } // NRT - Set in constructor
+
 		public GlowEffect ()
 		{
 			EffectData = new GlowData ();
-			
+
 			blurEffect = new GaussianBlurEffect ();
 			contrastEffect = new BrightnessContrastEffect ();
 			screenBlendOp = new UserBlendOps.ScreenBlendOp ();
 		}
-		
+
 		public override bool LaunchConfiguration ()
 		{
 			return EffectHelper.LaunchSimpleEffectDialog (this);

@@ -1,4 +1,4 @@
-﻿// 
+// 
 // ResizeHistoryItem.cs
 //  
 // Author:
@@ -43,7 +43,7 @@ namespace Pinta.Core
 		}
 
 		public DocumentSelection? RestoreSelection;
-		
+
 		public override void Undo ()
 		{
 			var doc = PintaCore.Workspace.ActiveDocument;
@@ -58,14 +58,14 @@ namespace Pinta.Core
 
 			PintaCore.Workspace.ImageSize = old_size;
 			PintaCore.Workspace.CanvasSize = old_size;
-			
+
 			old_size = swap;
-			
+
 			base.Undo ();
-			
+
 			if (RestoreSelection != null) {
 				DocumentSelection old = PintaCore.Workspace.ActiveDocument.Selection;
-				doc.Selection = RestoreSelection.Clone();
+				doc.Selection = RestoreSelection.Clone ();
 
 				if (old != null) {
 					old.Dispose ();
@@ -73,7 +73,7 @@ namespace Pinta.Core
 			} else {
 				doc.ResetSelectionPaths ();
 			}
-			
+
 			PintaCore.Workspace.Invalidate ();
 
 			PintaCore.Workspace.Scale = scale;

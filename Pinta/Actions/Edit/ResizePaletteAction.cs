@@ -1,4 +1,4 @@
-﻿// 
+// 
 // ResizePaletteAction.cs
 //  
 // Author:
@@ -50,7 +50,7 @@ namespace Pinta.Actions
 					PintaCore.Chrome.MainWindow, Translations.GetString ("New palette size:"), 1, 96,
 					PintaCore.Palette.CurrentPalette.Count);
 
-			if (dialog.Run () == (int)ResponseType.Ok) {
+			if (dialog.Run () == (int) ResponseType.Ok) {
 				PintaCore.Palette.CurrentPalette.Resize (dialog.GetValue ());
 			}
 		}

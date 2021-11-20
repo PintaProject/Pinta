@@ -1,4 +1,4 @@
-﻿// 
+// 
 // DocumentEventArgs.cs
 //  
 // Author:

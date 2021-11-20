@@ -1,4 +1,4 @@
-﻿/////////////////////////////////////////////////////////////////////////////////
+/////////////////////////////////////////////////////////////////////////////////
 // Paint.NET                                                                   //
 // Copyright (C) dotPDN LLC, Rick Brewster, Tom Jackson, and contributors.     //
 // Portions Copyright (C) Microsoft Corporation. All Rights Reserved.          //
@@ -24,11 +24,11 @@ namespace Pinta.Effects
 		public override string Name {
 			get { return Translations.GetString ("Invert Colors"); }
 		}
-		
+
 		public override string AdjustmentMenuKey {
 			get { return "I"; }
 		}
-		
+
 		public override void Render (ImageSurface src, ImageSurface dest, Gdk.Rectangle[] rois)
 		{
 			op.Apply (dest, src, rois);

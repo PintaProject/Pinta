@@ -25,80 +25,78 @@
 // THE SOFTWARE.
 
 using System;
-using Pinta.Core;
-using Gtk;
 using System.Diagnostics.CodeAnalysis;
+using Gtk;
+using Pinta.Core;
 
 namespace Pinta
 {
-    public class ProgressDialog : Dialog, IProgressDialog
-    {
-        private Label label;
-        private ProgressBar progress_bar;
-        uint timeout_id;
+	public class ProgressDialog : Dialog, IProgressDialog
+	{
+		private Label label;
+		private ProgressBar progress_bar;
+		uint timeout_id;
 
-        public ProgressDialog ()
-            : base (string.Empty, PintaCore.Chrome.MainWindow, DialogFlags.Modal)
-        {
-            WindowPosition = WindowPosition.CenterOnParent;
+		public ProgressDialog ()
+		    : base (string.Empty, PintaCore.Chrome.MainWindow, DialogFlags.Modal)
+		{
+			WindowPosition = WindowPosition.CenterOnParent;
 
-            this.Build ();
-            timeout_id = 0;
-            Hide ();
-        }
+			this.Build ();
+			timeout_id = 0;
+			Hide ();
+		}
 
-        public string Text
-        {
-            get { return label.Text; }
-            set { label.Text = value; }
-        }
+		public string Text {
+			get { return label.Text; }
+			set { label.Text = value; }
+		}
 
-        public double Progress
-        {
-            get { return progress_bar.Fraction; }
-            set { progress_bar.Fraction = value; }
-        }
+		public double Progress {
+			get { return progress_bar.Fraction; }
+			set { progress_bar.Fraction = value; }
+		}
 
-        public event EventHandler<EventArgs>? Canceled;
+		public event EventHandler<EventArgs>? Canceled;
 
-        void IProgressDialog.Show ()
-        {
-            timeout_id = GLib.Timeout.Add (500, () => {
-                this.ShowAll ();
-                timeout_id = 0;
-                return false;
-            });
-        }
+		void IProgressDialog.Show ()
+		{
+			timeout_id = GLib.Timeout.Add (500, () => {
+				this.ShowAll ();
+				timeout_id = 0;
+				return false;
+			});
+		}
 
-        void IProgressDialog.Hide ()
-        {
-            if (timeout_id != 0)
-                GLib.Source.Remove (timeout_id);
-            this.Hide ();
-        }
+		void IProgressDialog.Hide ()
+		{
+			if (timeout_id != 0)
+				GLib.Source.Remove (timeout_id);
+			this.Hide ();
+		}
 
-        protected override void OnResponse (Gtk.ResponseType response_id)
-        {
-            if (Canceled != null)
-                Canceled (this, EventArgs.Empty);
-        }
+		protected override void OnResponse (Gtk.ResponseType response_id)
+		{
+			if (Canceled != null)
+				Canceled (this, EventArgs.Empty);
+		}
 
-	[MemberNotNull (nameof (label), nameof (progress_bar))]
-        private void Build ()
-        {
-            ContentArea.BorderWidth = 2;
-            ContentArea.Spacing = 6;
+		[MemberNotNull (nameof (label), nameof (progress_bar))]
+		private void Build ()
+		{
+			ContentArea.BorderWidth = 2;
+			ContentArea.Spacing = 6;
 
-            label = new Label ();
-            ContentArea.Add (label);
+			label = new Label ();
+			ContentArea.Add (label);
 
-            progress_bar = new ProgressBar ();
-            ContentArea.Add (progress_bar);
+			progress_bar = new ProgressBar ();
+			ContentArea.Add (progress_bar);
 
-            AddButton (Gtk.Stock.Cancel, Gtk.ResponseType.Cancel);
+			AddButton (Gtk.Stock.Cancel, Gtk.ResponseType.Cancel);
 
-            DefaultWidth = 400;
-            DefaultHeight = 114;
-        }
-    }
+			DefaultWidth = 400;
+			DefaultHeight = 114;
+		}
+	}
 }

@@ -9,8 +9,8 @@
 
 using System;
 using Cairo;
-using Pinta.Gui.Widgets;
 using Pinta.Core;
+using Pinta.Gui.Widgets;
 
 namespace Pinta.Effects
 {
@@ -32,31 +32,31 @@ namespace Pinta.Effects
 			get { return Translations.GetString ("Photo"); }
 		}
 
-		public SharpenData Data { get { return (SharpenData)EffectData!; } } // NRT - Set in constructor
-		
+		public SharpenData Data { get { return (SharpenData) EffectData!; } } // NRT - Set in constructor
+
 		public SharpenEffect ()
 		{
 			EffectData = new SharpenData ();
 		}
-		
+
 		public override bool LaunchConfiguration ()
 		{
 			return EffectHelper.LaunchSimpleEffectDialog (this);
 		}
-		
+
 		public unsafe override void Render (ImageSurface src, ImageSurface dest, Gdk.Rectangle[] rois)
 		{
 			foreach (Gdk.Rectangle rect in rois)
 				RenderRect (Data.Amount, src, dest, rect);
 		}
-		
+
 		public unsafe override ColorBgra Apply (ColorBgra src, int area, int* hb, int* hg, int* hr, int* ha)
 		{
-			ColorBgra median = GetPercentile(50, area, hb, hg, hr, ha);
-			return ColorBgra.Lerp(src, median, -0.5f);
+			ColorBgra median = GetPercentile (50, area, hb, hg, hr, ha);
+			return ColorBgra.Lerp (src, median, -0.5f);
 		}
 	}
-	
+
 	public class SharpenData : EffectData
 	{
 		[Caption ("Amount"), MinimumValue (1), MaximumValue (20)]

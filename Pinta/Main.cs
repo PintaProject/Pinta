@@ -25,13 +25,13 @@
 // THE SOFTWARE.
 
 using System;
-using Gtk;
-using Mono.Options;
 using System.Collections.Generic;
-using Pinta.Core;
 using System.IO;
 using System.Reflection;
 using System.Runtime.InteropServices;
+using Gtk;
+using Mono.Options;
+using Pinta.Core;
 
 namespace Pinta
 {
@@ -49,36 +49,34 @@ namespace Pinta
 			}
 
 			int threads = -1;
-                        bool show_help = false;
-                        bool show_version = false;
-			
+			bool show_help = false;
+			bool show_version = false;
+
 			var p = new OptionSet () {
-                                { "h|help", Translations.GetString("Show this message and exit."), v => show_help = v != null },
-                                { "v|version", Translations.GetString("Display the application version."), v => show_version = v != null },
+				{ "h|help", Translations.GetString("Show this message and exit."), v => show_help = v != null },
+				{ "v|version", Translations.GetString("Display the application version."), v => show_version = v != null },
 				{ "rt|render-threads=", Translations.GetString ("number of threads to use for rendering"), (int v) => threads = v }
 			};
 
 			List<string> extra;
-			
+
 			try {
 				extra = p.Parse (args);
 			} catch (OptionException e) {
 				Console.WriteLine (e.Message);
-                                ShowHelp (p);
+				ShowHelp (p);
 				return;
 			}
 
-                        if (show_version)
-                        {
-                            Console.WriteLine (PintaCore.ApplicationVersion);
-                            return;
-                        }
+			if (show_version) {
+				Console.WriteLine (PintaCore.ApplicationVersion);
+				return;
+			}
 
-                        if (show_help)
-                        {
-                            ShowHelp (p);
-                            return;
-                        }
+			if (show_help) {
+				ShowHelp (p);
+				return;
+			}
 
 			GLib.ExceptionManager.UnhandledException += new GLib.UnhandledExceptionHandler (ExceptionManager_UnhandledException);
 
@@ -88,9 +86,9 @@ namespace Pinta
 			//Gtk.Settings.Default.SetProperty("gtk-application-prefer-dark-theme", new GLib.Value(true));
 
 			// Add our icons to the search path.
-			Gtk.IconTheme.Default.AppendSearchPath(Pinta.Core.SystemManager.GetDataRootDirectory() + "/icons");
+			Gtk.IconTheme.Default.AppendSearchPath (Pinta.Core.SystemManager.GetDataRootDirectory () + "/icons");
 
-			var app = new MainWindow();
+			var app = new MainWindow ();
 
 			if (threads != -1)
 				Pinta.Core.PintaCore.System.RenderThreads = threads;
@@ -104,27 +102,24 @@ namespace Pinta
 			app.Run ("pinta", Array.Empty<string> ());
 		}
 
-                private static void ShowHelp (OptionSet p)
-                {
-                    Console.WriteLine (Translations.GetString ("Usage: pinta [files]"));
-                    Console.WriteLine ();
-                    Console.WriteLine (Translations.GetString ("Options: "));
-                    p.WriteOptionDescriptions (Console.Out);
-                }
+		private static void ShowHelp (OptionSet p)
+		{
+			Console.WriteLine (Translations.GetString ("Usage: pinta [files]"));
+			Console.WriteLine ();
+			Console.WriteLine (Translations.GetString ("Options: "));
+			p.WriteOptionDescriptions (Console.Out);
+		}
 
 		private static void OpenFilesFromCommandLine (List<string> extra)
 		{
 			// Ignore the process serial number parameter on Mac OS X
-			if (PintaCore.System.OperatingSystem == OS.Mac && extra.Count > 0)
-			{
-				if (extra[0].StartsWith ("-psn_"))
-				{
+			if (PintaCore.System.OperatingSystem == OS.Mac && extra.Count > 0) {
+				if (extra[0].StartsWith ("-psn_")) {
 					extra.RemoveAt (0);
 				}
 			}
 
-			if (extra.Count > 0)
-			{
+			if (extra.Count > 0) {
 				foreach (var file in extra) {
 					string path = file;
 					if (path.StartsWith ("file://"))
@@ -132,9 +127,7 @@ namespace Pinta
 
 					PintaCore.Workspace.OpenFile (path);
 				}
-			}
-			else
-			{
+			} else {
 				// Create a blank document
 				PintaCore.Workspace.NewDocument (new Gdk.Size (800, 600), new Cairo.Color (1, 1, 1));
 			}
@@ -142,10 +135,10 @@ namespace Pinta
 
 		private static void ExceptionManager_UnhandledException (GLib.UnhandledExceptionArgs args)
 		{
-			Exception ex = (Exception)args.ExceptionObject;
+			Exception ex = (Exception) args.ExceptionObject;
 			PintaCore.Chrome.ShowErrorDialog (PintaCore.Chrome.MainWindow,
-			                                  string.Format ("{0}:\n{1}", "Unhandled exception", ex.Message),
-			                                  ex.ToString ());
+							  string.Format ("{0}:\n{1}", "Unhandled exception", ex.Message),
+							  ex.ToString ());
 		}
 
 		/// <summary>
@@ -155,7 +148,7 @@ namespace Pinta
 		{
 			MacInterop.ApplicationEvents.Quit += (sender, e) => {
 				GLib.Timeout.Add (10, delegate {
-					PintaCore.Actions.App.Exit.Activate();
+					PintaCore.Actions.App.Exit.Activate ();
 					return false;
 				});
 				e.Handled = true;

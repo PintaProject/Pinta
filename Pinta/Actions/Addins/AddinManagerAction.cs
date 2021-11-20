@@ -1,4 +1,4 @@
-﻿// 
+// 
 // AddinManagerAction.cs
 //  
 // Author:
@@ -51,7 +51,7 @@ namespace Pinta.Actions
 
 			AddinManagerWindow.Run (PintaCore.Chrome.MainWindow);
 #else
-			throw new NotImplementedException();
+			throw new NotImplementedException ();
 #endif
 
 			//dlg.DeleteEvent += delegate { dlg.Destroy (); };

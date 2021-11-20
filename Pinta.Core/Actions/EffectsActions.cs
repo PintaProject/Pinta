@@ -25,8 +25,8 @@
 // THE SOFTWARE.
 
 using System;
-using Gtk;
 using System.Collections.Generic;
+using Gtk;
 
 namespace Pinta.Core
 {
@@ -40,22 +40,22 @@ namespace Pinta.Core
 			Actions = new List<Command> ();
 			Menus = new Dictionary<string, GLib.Menu> ();
 		}
-		
+
 		#region Initialization
 		public void AddEffect (string category, Command action)
 		{
 			var effects_menu = PintaCore.Chrome.EffectsMenu;
 
 			if (!Menus.ContainsKey (category)) {
-				var category_menu = new GLib.Menu();
-				effects_menu.AppendMenuItemSorted(GLib.MenuItem.NewSubmenu(Translations.GetString(category), category_menu));
+				var category_menu = new GLib.Menu ();
+				effects_menu.AppendMenuItemSorted (GLib.MenuItem.NewSubmenu (Translations.GetString (category), category_menu));
 				Menus.Add (category, category_menu);
 			}
-			
+
 			Actions.Add (action);
 
 			GLib.Menu m = Menus[category];
-			m.AppendMenuItemSorted (action.CreateMenuItem());
+			m.AppendMenuItemSorted (action.CreateMenuItem ());
 		}
 
 		// TODO: Remove menu category if empty

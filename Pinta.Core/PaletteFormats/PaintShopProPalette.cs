@@ -1,4 +1,4 @@
-﻿//
+//
 // PaintShopProPalette.cs
 //
 // Author:
@@ -25,10 +25,10 @@
 // THE SOFTWARE.
 
 using System;
-using System.IO;
-using Cairo;
 using System.Collections.Generic;
 using System.Globalization;
+using System.IO;
+using Cairo;
 
 namespace Pinta.Core
 {
@@ -41,11 +41,11 @@ namespace Pinta.Core
 			string? line = reader.ReadLine ();
 
 			if (line is null || !line.StartsWith ("JASC-PAL"))
-				throw new InvalidDataException("Not a valid PaintShopPro palette file.");
+				throw new InvalidDataException ("Not a valid PaintShopPro palette file.");
 
 			line = reader.ReadLine (); // version
 
-			int numberOfColors = int.Parse(reader.ReadLine()!); // NRT - Assumes valid formatted file
+			int numberOfColors = int.Parse (reader.ReadLine ()!); // NRT - Assumes valid formatted file
 			PintaCore.Palette.CurrentPalette.Resize (numberOfColors);
 
 			while (!reader.EndOfStream) {
@@ -69,7 +69,7 @@ namespace Pinta.Core
 			StreamWriter writer = new StreamWriter (fileName);
 			writer.WriteLine ("JASC-PAL");
 			writer.WriteLine ("0100");
-			writer.WriteLine (colors.Count.ToString());
+			writer.WriteLine (colors.Count.ToString ());
 
 			foreach (Color color in colors) {
 				writer.WriteLine ("{0} {1} {2}", (int) (color.R * 255), (int) (color.G * 255), (int) (color.B * 255));

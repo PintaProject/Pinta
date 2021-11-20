@@ -1,4 +1,4 @@
-﻿// 
+// 
 // ReEditableLayer.cs
 //  
 // Author:
@@ -45,28 +45,22 @@ namespace Pinta.Core
 
 		public bool InTheLoop { get { return inTheLoop; } }
 
-		public Layer Layer
-		{
-			get
-			{
-				if (!isLayerSetup)
-				{
-					SetupLayer();
+		public Layer Layer {
+			get {
+				if (!isLayerSetup) {
+					SetupLayer ();
 				}
 
 				return actualLayer!; // NRT - Set in SetupLayer
 			}
 
-			set
-			{
+			set {
 				actualLayer = value;
 			}
 		}
 
-		public bool IsLayerSetup
-		{
-			get
-			{
+		public bool IsLayerSetup {
+			get {
 				return isLayerSetup;
 			}
 		}
@@ -75,11 +69,11 @@ namespace Pinta.Core
 		/// Creates a new ReEditableLayer for drawing and editing on separately from the rest of the image.
 		/// </summary>
 		/// <param name="passedParent">The parent UserLayer that the ReEditableLayer will be associated with.</param>
-		public ReEditableLayer(UserLayer passedParent)
+		public ReEditableLayer (UserLayer passedParent)
 		{
 			parent = passedParent;
 
-			TryAddLayer();
+			TryAddLayer ();
 		}
 
 		/// <summary>
@@ -88,12 +82,11 @@ namespace Pinta.Core
 		/// Due to history, cloning, etc. of editable shapes, ReEditableLayers need to be able to be removed from
 		/// and added back into the system of drawn layers.
 		/// </summary>
-		public void TryRemoveLayer()
+		public void TryRemoveLayer ()
 		{
 			//Safely remove it by checking to make sure it is indeed in the loop first.
-			if (parent.ReEditableLayers.Contains(this))
-			{
-				parent.ReEditableLayers.Remove(this);
+			if (parent.ReEditableLayers.Contains (this)) {
+				parent.ReEditableLayers.Remove (this);
 			}
 
 			inTheLoop = false;
@@ -105,12 +98,11 @@ namespace Pinta.Core
 		/// Due to history, cloning, etc. of editable shapes, ReEditableLayers need to be able to be removed from
 		/// and added back into the system of drawn layers.
 		/// </summary>
-		public void TryAddLayer()
+		public void TryAddLayer ()
 		{
 			//Avoid duplicates.
-			if (!parent.ReEditableLayers.Contains(this))
-			{
-				parent.ReEditableLayers.Add(this);
+			if (!parent.ReEditableLayers.Contains (this)) {
+				parent.ReEditableLayers.Add (this);
 			}
 
 			inTheLoop = true;
@@ -119,11 +111,11 @@ namespace Pinta.Core
 		/// <summary>
 		/// Setup the Layer based on the parent UserLayer's Surface.
 		/// </summary>
-		private void SetupLayer()
+		private void SetupLayer ()
 		{
 			var surface = CairoExtensions.CreateImageSurface (parent.Surface.Format, parent.Surface.Width, parent.Surface.Height);
 
-			actualLayer = new Layer(surface);
+			actualLayer = new Layer (surface);
 
 
 			isLayerSetup = true;

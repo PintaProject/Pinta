@@ -26,8 +26,8 @@
 
 using System;
 using Cairo;
-using Pinta.Core;
 using Gtk;
+using Pinta.Core;
 
 namespace Pinta.Tools
 {

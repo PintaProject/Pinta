@@ -64,7 +64,7 @@ namespace Pinta.Core
 		public void PushNewItem (BaseHistoryItem newItem)
 		{
 			// Remove all old redos starting from the end of the list
-			for (var i = history.Count - 1; i >= 0; i--) {				
+			for (var i = history.Count - 1; i >= 0; i--) {
 				var item = history[i];
 
 				if (item.State == HistoryItemState.Redo) {

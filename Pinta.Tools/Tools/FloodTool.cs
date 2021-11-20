@@ -117,7 +117,7 @@ namespace Pinta.Tools
 			if (mode_button is not null)
 				settings.PutSetting (FILL_MODE_SETTING, mode_button.SelectedIndex);
 			if (tolerance_slider is not null)
-				settings.PutSetting (FILL_TOLERANCE_SETTING, (int)tolerance_slider.Slider.Value);
+				settings.PutSetting (FILL_TOLERANCE_SETTING, (int) tolerance_slider.Slider.Value);
 		}
 
 		protected virtual void OnFillRegionComputed (Document document, Point[][] polygonSet) { }

@@ -42,15 +42,14 @@ namespace Pinta.Tools.Brushes
 		}
 
 		protected override Gdk.Rectangle OnMouseMove (Context g, Color strokeColor, ImageSurface surface,
-		                                              int x, int y, int lastX, int lastY)
+							      int x, int y, int lastX, int lastY)
 		{
 			// Cairo does not support a single-pixel-long single-pixel-wide line
 			if (x == lastX && y == lastY && g.LineWidth == 1 &&
-			    PintaCore.Workspace.ActiveWorkspace.PointInCanvas (new PointD(x,y))) {
+			    PintaCore.Workspace.ActiveWorkspace.PointInCanvas (new PointD (x, y))) {
 				g.Rectangle (x, y, 1.0, 1.0);
 				g.Fill ();
-			}
-            else {
+			} else {
 				g.MoveTo (lastX + 0.5, lastY + 0.5);
 				g.LineTo (x + 0.5, y + 0.5);
 				g.StrokePreserve ();

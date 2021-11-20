@@ -25,12 +25,12 @@
 // THE SOFTWARE.
 
 using System;
+using System.Collections.Generic;
+using System.ComponentModel;
 using System.Linq;
+using Cairo;
 using Gdk;
 using Gtk;
-using System.Collections.Generic;
-using Cairo;
-using System.ComponentModel;
 using Pinta;
 
 namespace Pinta.Core
@@ -45,11 +45,9 @@ namespace Pinta.Core
 		private bool is_dirty;
 
 		private DocumentSelection selection = null!; // NRT - Set by constructor via Selection property
-		public DocumentSelection Selection
-		{
+		public DocumentSelection Selection {
 			get { return selection; }
-			set
-			{
+			set {
 				selection = value;
 
 				// Listen for any changes to this selection.
@@ -58,7 +56,7 @@ namespace Pinta.Core
 				};
 
 				// Notify listeners that our selection has been modified.
-				OnSelectionChanged();
+				OnSelectionChanged ();
 			}
 		}
 
@@ -93,20 +91,20 @@ namespace Pinta.Core
 				}
 			}
 		}
-		
+
 		public Guid Guid { get; private set; }
-		
+
 		public bool HasFile { get; set; }
 
 		//Determines whether or not the Document has been saved to the file that it is currently associated with in the
 		//current session. This should be false if the Document has not yet been saved, if it was just loaded into
 		//Pinta from a file, or if the user just clicked Save As.
 		public bool HasBeenSavedInSession { get; set; }
-		
+
 		public DocumentHistory History { get { return Workspace.History; } }
 
 		public Gdk.Size ImageSize { get; set; }
-		
+
 		public bool IsDirty {
 			get { return is_dirty; }
 			set {
@@ -142,7 +140,7 @@ namespace Pinta.Core
 
 		public DocumentWorkspace Workspace { get; private set; }
 
-		public delegate void LayerCloneEvent();
+		public delegate void LayerCloneEvent ();
 		#endregion
 
 		#region Public Methods
@@ -156,7 +154,7 @@ namespace Pinta.Core
 
 			return new Gdk.Rectangle (x, y, width, height);
 		}
-		
+
 		// Clean up any native resources we had
 		public void Close ()
 		{
@@ -265,15 +263,15 @@ namespace Pinta.Core
 		/// <param name="canvasOnly">false for the whole selection, true for the part only on our canvas</param>
 		public Gdk.Rectangle GetSelectedBounds (bool canvasOnly)
 		{
-			var bounds = Selection.SelectionPath.GetBounds();
+			var bounds = Selection.SelectionPath.GetBounds ();
 
 			if (canvasOnly)
 				bounds = ClampToImageSize (bounds);
 
 			return bounds;
 		}
-		
-		public void ResetSelectionPaths()
+
+		public void ResetSelectionPaths ()
 		{
 			var rect = new Cairo.Rectangle (0, 0, ImageSize.Width, ImageSize.Height);
 			Selection.CreateRectangleSelection (rect);
@@ -325,7 +323,7 @@ namespace Pinta.Core
 
 			Workspace.Scale = scale;
 		}
-		
+
 		public void ResizeImage (int width, int height)
 		{
 			double scale;
@@ -398,11 +396,10 @@ namespace Pinta.Core
 		/// <summary>
 		/// Signal to the TextTool that an ImageSurface was cloned.
 		/// </summary>
-		public void SignalSurfaceCloned()
+		public void SignalSurfaceCloned ()
 		{
-			if (LayerCloned != null)
-			{
-				LayerCloned();
+			if (LayerCloned != null) {
+				LayerCloned ();
 			}
 		}
 		#endregion
@@ -425,7 +422,7 @@ namespace Pinta.Core
 		private void OnSelectionChanged ()
 		{
 			if (SelectionChanged != null)
-				SelectionChanged.Invoke(this, EventArgs.Empty);
+				SelectionChanged.Invoke (this, EventArgs.Empty);
 		}
 		#endregion
 

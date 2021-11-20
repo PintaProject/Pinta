@@ -1,4 +1,4 @@
-﻿// 
+// 
 // CompoundHistoryItem.cs
 //  
 // Author:
@@ -24,9 +24,9 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 // THE SOFTWARE.
 
-using Cairo;
 using System;
 using System.Collections.Generic;
+using Cairo;
 
 namespace Pinta.Core
 {
@@ -38,16 +38,16 @@ namespace Pinta.Core
 		public CompoundHistoryItem () : base ()
 		{
 		}
-		
+
 		public CompoundHistoryItem (string icon, string text) : base (icon, text)
 		{
 		}
-		
+
 		public void Push (BaseHistoryItem item)
 		{
 			history_stack.Add (item);
 		}
-		
+
 		public override void Undo ()
 		{
 			for (int i = history_stack.Count - 1; i >= 0; i--)

@@ -9,8 +9,8 @@
 
 using System;
 using Cairo;
-using Pinta.Gui.Widgets;
 using Pinta.Core;
+using Pinta.Gui.Widgets;
 
 namespace Pinta.Effects
 {
@@ -35,7 +35,7 @@ namespace Pinta.Effects
 			get { return Translations.GetString ("Noise"); }
 		}
 
-		public ReduceNoiseData Data { get { return (ReduceNoiseData)EffectData!; } } // NRT - Set in constructor
+		public ReduceNoiseData Data { get { return (ReduceNoiseData) EffectData!; } } // NRT - Set in constructor
 
 		public ReduceNoiseEffect ()
 		{
@@ -75,7 +75,7 @@ namespace Pinta.Effects
 			gc = (gc * 255) / area;
 			bc = (bc * 255) / area;
 
-			return ColorBgra.FromBgr ((byte)bc, (byte)gc, (byte)rc);
+			return ColorBgra.FromBgr ((byte) bc, (byte) gc, (byte) rc);
 		}
 
 		public unsafe override void Render (ImageSurface src, ImageSurface dest, Gdk.Rectangle[] rois)

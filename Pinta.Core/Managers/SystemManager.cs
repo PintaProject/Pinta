@@ -1,4 +1,4 @@
-﻿// 
+// 
 // SystemManager.cs
 //  
 // Author:
@@ -26,10 +26,10 @@
 
 using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using System.IO;
+using System.Linq;
 using System.Runtime.InteropServices;
+using System.Text;
 using Gtk;
 
 namespace Pinta.Core
@@ -45,7 +45,7 @@ namespace Pinta.Core
 		public PaletteFormats PaletteFormats { get; private set; }
 		public int RenderThreads { get; set; }
 		public OS OperatingSystem { get { return operating_system; } }
-		
+
 		public SystemManager ()
 		{
 			ImageFormats = new ImageConverterManager ();
@@ -90,14 +90,14 @@ namespace Pinta.Core
 		public RecentData RecentData { get { return recent_data; } }
 		#endregion
 
-        /// <summary>
-        /// Returns a directory for use in a dialog. The last dialog directory is
-        /// returned if it exists, otherwise the default directory is used.
-        /// </summary>
-        public string GetDialogDirectory ()
-        {
-            return Directory.Exists (LastDialogDirectory) ? LastDialogDirectory : DefaultDialogDirectory;
-        }
+		/// <summary>
+		/// Returns a directory for use in a dialog. The last dialog directory is
+		/// returned if it exists, otherwise the default directory is used.
+		/// </summary>
+		public string GetDialogDirectory ()
+		{
+			return Directory.Exists (LastDialogDirectory) ? LastDialogDirectory : DefaultDialogDirectory;
+		}
 
 		public static string GetExecutablePathName ()
 		{

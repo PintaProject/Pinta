@@ -1,4 +1,4 @@
-﻿// 
+// 
 // ExitProgramAction.cs
 //  
 // Author:

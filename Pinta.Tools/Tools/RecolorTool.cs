@@ -166,7 +166,7 @@ namespace Pinta.Tools
 			base.OnSaveSettings (settings);
 
 			if (tolerance_slider is not null)
-				settings.PutSetting (TOLERANCE_SETTING, (int)tolerance_slider.Slider.Value);
+				settings.PutSetting (TOLERANCE_SETTING, (int) tolerance_slider.Slider.Value);
 		}
 
 		#region Private PDN Methods

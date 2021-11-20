@@ -25,25 +25,24 @@
 // THE SOFTWARE.
 
 using System;
+using System.Collections.Generic;
 using System.IO;
 using System.Xml;
-
-using Gtk;
-using Gdk;
 using Cairo;
-
+using Gdk;
+using Gtk;
 using ICSharpCode.SharpZipLib.Zip;
-using System.Collections.Generic;
 
 namespace Pinta.Core
 {
-	public class OraFormat: IImageImporter, IImageExporter
+	public class OraFormat : IImageImporter, IImageExporter
 	{
 		private const int ThumbMaxSize = 256;
 
 		#region IImageImporter implementation
-		
-		public void Import (string fileName, Gtk.Window parent) {
+
+		public void Import (string fileName, Gtk.Window parent)
+		{
 			ZipFile file = new ZipFile (fileName);
 			XmlDocument stackXml = new XmlDocument ();
 			stackXml.Load (file.GetInputStream (file.GetEntry ("stack.xml")));
@@ -58,10 +57,10 @@ namespace Pinta.Core
 
 			Document doc = PintaCore.Workspace.CreateAndActivateDocument (fileName, imagesize);
 			doc.HasFile = true;
-			
+
 			XmlElement stackElement = (XmlElement) stackXml.GetElementsByTagName ("stack")[0]!;
 			XmlNodeList layerElements = stackElement.GetElementsByTagName ("layer");
-			
+
 			if (layerElements.Count == 0)
 				throw new XmlException ("No layers found in OpenRaster file");
 
@@ -73,24 +72,24 @@ namespace Pinta.Core
 				int x = int.Parse (GetAttribute (layerElement, "x", "0"));
 				int y = int.Parse (GetAttribute (layerElement, "y", "0"));
 				string name = GetAttribute (layerElement, "name", string.Format ("Layer {0}", i));
-				
+
 				try {
 					// Write the file to a temporary file first
 					// Fixes a bug when running on .Net
 					ZipEntry zf = file.GetEntry (layerElement.GetAttribute ("src"));
 					Stream s = file.GetInputStream (zf);
 					string tmp_file = System.IO.Path.GetTempFileName ();
-					
+
 					using (Stream stream_out = File.Open (tmp_file, FileMode.OpenOrCreate)) {
 						byte[] buffer = new byte[2048];
-						
+
 						while (true) {
 							int len = s.Read (buffer, 0, buffer.Length);
-							
+
 							if (len > 0)
 								stream_out.Write (buffer, 0, len);
 							else
-								break;					
+								break;
 						}
 					}
 
@@ -101,26 +100,25 @@ namespace Pinta.Core
 					layer.BlendMode = StandardToBlendMode (GetAttribute (layerElement, "composite-op", "svg:src-over"));
 
 					using (var fs = new FileStream (tmp_file, FileMode.Open))
-						using (Pixbuf pb = new Pixbuf (fs)) {
-							using (Context g = new Context (layer.Surface)) {
-								Gdk.CairoHelper.SetSourcePixbuf (g, pb, x, y);
-								g.Paint ();
-							}
+					using (Pixbuf pb = new Pixbuf (fs)) {
+						using (Context g = new Context (layer.Surface)) {
+							Gdk.CairoHelper.SetSourcePixbuf (g, pb, x, y);
+							g.Paint ();
 						}
+					}
 
 					try {
 						File.Delete (tmp_file);
 					} catch { }
 				} catch {
-					using (var md = new MessageDialog(parent, DialogFlags.Modal, MessageType.Error, ButtonsType.Ok, "Could not import layer \"{0}\" from {0}", name, file))
-                    {
+					using (var md = new MessageDialog (parent, DialogFlags.Modal, MessageType.Error, ButtonsType.Ok, "Could not import layer \"{0}\" from {0}", name, file)) {
 						md.Title = "Error";
 
-						md.Run();
+						md.Run ();
 					}
 				}
 			}
-			
+
 			file.Close ();
 		}
 
@@ -138,27 +136,30 @@ namespace Pinta.Core
 		}
 
 		#endregion
-		
-		private static IFormatProvider GetFormat () {
+
+		private static IFormatProvider GetFormat ()
+		{
 			return System.Globalization.CultureInfo.CreateSpecificCulture ("en");
 		}
 
-		private static string GetAttribute (XmlElement element, string attribute, string defValue) {
+		private static string GetAttribute (XmlElement element, string attribute, string defValue)
+		{
 			string ret = element.GetAttribute (attribute);
 			return string.IsNullOrEmpty (ret) ? defValue : ret;
 		}
 
-		private Size GetThumbDimensions (int width, int height) {
+		private Size GetThumbDimensions (int width, int height)
+		{
 			if (width <= ThumbMaxSize && height <= ThumbMaxSize)
 				return new Size (width, height);
 
 			if (width > height)
-				return new Size (ThumbMaxSize, (int) ((double)height / width * ThumbMaxSize));
+				return new Size (ThumbMaxSize, (int) ((double) height / width * ThumbMaxSize));
 			else
-				return new Size ((int) ((double)width / height * ThumbMaxSize), ThumbMaxSize);
+				return new Size ((int) ((double) width / height * ThumbMaxSize), ThumbMaxSize);
 		}
 
-		private byte[] GetLayerXmlData(IReadOnlyList<UserLayer> layers)
+		private byte[] GetLayerXmlData (IReadOnlyList<UserLayer> layers)
 		{
 			MemoryStream ms = new MemoryStream ();
 			XmlTextWriter writer = new XmlTextWriter (ms, System.Text.Encoding.UTF8);
@@ -223,9 +224,9 @@ namespace Pinta.Core
 			databytes = thumb.SaveToBuffer ("png");
 			stream.Write (databytes, 0, databytes.Length);
 
-			(flattened as IDisposable).Dispose();
-			(flattenedPb as IDisposable).Dispose();
-			(thumb as IDisposable).Dispose();
+			(flattened as IDisposable).Dispose ();
+			(flattenedPb as IDisposable).Dispose ();
+			(thumb as IDisposable).Dispose ();
 
 			stream.Close ();
 		}
@@ -254,25 +255,25 @@ namespace Pinta.Core
 					return "svg:screen";
 				case BlendMode.Xor:
 					return "svg:xor";
-                case BlendMode.HardLight:
-                    return "svg:hard-light";
-                case BlendMode.SoftLight:
-                    return "svg:soft-light";
-                case BlendMode.Color:
-                    return "svg:color";
-                case BlendMode.Luminosity:
-                    return "svg:luminosity";
-                case BlendMode.Hue:
-                    return "svg:hue";
-                case BlendMode.Saturation:
-                    return "svg:saturation";
+				case BlendMode.HardLight:
+					return "svg:hard-light";
+				case BlendMode.SoftLight:
+					return "svg:soft-light";
+				case BlendMode.Color:
+					return "svg:color";
+				case BlendMode.Luminosity:
+					return "svg:luminosity";
+				case BlendMode.Hue:
+					return "svg:hue";
+				case BlendMode.Saturation:
+					return "svg:saturation";
 			}
 		}
 
 		private BlendMode StandardToBlendMode (string mode)
 		{
-			switch (mode) {				
-				case "svg:src-over":				
+			switch (mode) {
+				case "svg:src-over":
 					return BlendMode.Normal;
 				case "svg:multiply":
 					return BlendMode.Multiply;
@@ -292,18 +293,18 @@ namespace Pinta.Core
 					return BlendMode.Screen;
 				case "svg:xor":
 					return BlendMode.Xor;
-                case "svg:hard-light":
-                    return BlendMode.HardLight;
-                case "svg:soft-light":
-                    return BlendMode.SoftLight;
-                case "svg:color":
-                    return BlendMode.Color;
-                case "svg:luminosity":
-                    return BlendMode.Luminosity;
-                case "svg:hue":
-                    return BlendMode.Hue;
-                case "svg:saturation":
-                    return BlendMode.Saturation;
+				case "svg:hard-light":
+					return BlendMode.HardLight;
+				case "svg:soft-light":
+					return BlendMode.SoftLight;
+				case "svg:color":
+					return BlendMode.Color;
+				case "svg:luminosity":
+					return BlendMode.Luminosity;
+				case "svg:hue":
+					return BlendMode.Hue;
+				case "svg:saturation":
+					return BlendMode.Saturation;
 				default:
 					Console.WriteLine ("Unrecognized composite-op: {0}, using Normal.", mode);
 					return BlendMode.Normal;

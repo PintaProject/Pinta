@@ -9,9 +9,9 @@
 
 using System;
 using Cairo;
-using Pinta.Gui.Widgets;
-using Pinta.Effects;
 using Pinta.Core;
+using Pinta.Effects;
+using Pinta.Gui.Widgets;
 
 namespace Pinta.Effects
 {
@@ -22,7 +22,7 @@ namespace Pinta.Effects
 		private InvertColorsEffect invertEffect;
 		private BrightnessContrastEffect bacAdjustment;
 		private UserBlendOps.ColorDodgeBlendOp colorDodgeOp;
-		
+
 		public override string Icon {
 			get { return "Menu.Effects.Artistic.PencilSketch.png"; }
 		}
@@ -39,8 +39,8 @@ namespace Pinta.Effects
 			get { return Translations.GetString ("Artistic"); }
 		}
 
-		public PencilSketchData Data { get { return (PencilSketchData)EffectData!; } } // NRT - Set in constructor
-		
+		public PencilSketchData Data { get { return (PencilSketchData) EffectData!; } } // NRT - Set in constructor
+
 		public PencilSketchEffect ()
 		{
 			EffectData = new PencilSketchData ();
@@ -70,11 +70,11 @@ namespace Pinta.Effects
 			invertEffect.Render (dest, dest, rois);
 			desaturateOp.Apply (dest, dest, rois);
 
-			ColorBgra* dst_dataptr = (ColorBgra*)dest.DataPtr;
+			ColorBgra* dst_dataptr = (ColorBgra*) dest.DataPtr;
 			int dst_width = dest.Width;
-			ColorBgra* src_dataptr = (ColorBgra*)src.DataPtr;
+			ColorBgra* src_dataptr = (ColorBgra*) src.DataPtr;
 			int src_width = src.Width;
-		
+
 			foreach (Gdk.Rectangle roi in rois) {
 				for (int y = roi.Top; y <= roi.GetBottom (); ++y) {
 					ColorBgra* srcPtr = src.GetPointAddressUnchecked (src_dataptr, src_width, roi.X, y);
@@ -97,7 +97,7 @@ namespace Pinta.Effects
 		{
 			[Caption ("Pencil Tip Size"), MinimumValue (1), MaximumValue (20)]
 			public int PencilTipSize = 2;
-			
+
 			[Caption ("Color Range"), MinimumValue (-20), MaximumValue (20)]
 			public int ColorRange = 0;
 		}

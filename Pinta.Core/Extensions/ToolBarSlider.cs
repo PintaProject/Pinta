@@ -32,7 +32,7 @@ namespace Pinta.Core
 	public class ToolBarSlider : ToolItem
 	{
 		private HScale hscale;
-		
+
 		public ToolBarSlider (int min, int max, int step, int value)
 		{
 			hscale = new HScale (min, max, step);
@@ -45,7 +45,7 @@ namespace Pinta.Core
 			Add (hscale);
 			Show ();
 		}
-		
+
 		public HScale Slider { get { return hscale; } }
 	}
 }

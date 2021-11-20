@@ -23,7 +23,7 @@ namespace Pinta.Core
 		/// </summary>
 		public static byte ComputeAlpha (byte la, byte ra)
 		{
-			return (byte)(((la * (256 - (ra + (ra >> 7)))) >> 8) + ra);
+			return (byte) (((la * (256 - (ra + (ra >> 7)))) >> 8) + ra);
 		}
 
 		public void Apply (ImageSurface dst, ImageSurface src, Gdk.Rectangle[] rois, int startIndex, int length)

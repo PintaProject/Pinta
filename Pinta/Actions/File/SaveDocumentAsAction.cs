@@ -1,4 +1,4 @@
-﻿// 
+// 
 // SaveDocumentAsAction.cs
 //  
 // Author:

@@ -9,8 +9,8 @@
 
 using System;
 using Cairo;
-using Pinta.Gui.Widgets;
 using Pinta.Core;
+using Pinta.Gui.Widgets;
 
 namespace Pinta.Effects
 {
@@ -33,26 +33,29 @@ namespace Pinta.Effects
 		}
 
 		public EmbossData Data {
-			get { return (EmbossData)EffectData!; } // NRT - Set in constructor
+			get { return (EmbossData) EffectData!; } // NRT - Set in constructor
 		}
 
-		public EmbossEffect () {
+		public EmbossEffect ()
+		{
 			EffectData = new EmbossData ();
 		}
 
-		public override bool LaunchConfiguration () {
+		public override bool LaunchConfiguration ()
+		{
 			return EffectHelper.LaunchSimpleEffectDialog (this);
 		}
 
 		#region Algorithm Code Ported From PDN
-		unsafe public override void Render (ImageSurface src, ImageSurface dst, Gdk.Rectangle[] rois) {
+		unsafe public override void Render (ImageSurface src, ImageSurface dst, Gdk.Rectangle[] rois)
+		{
 			double[,] weights = Weights;
 
 			var srcWidth = src.Width;
 			var srcHeight = src.Height;
 
-			ColorBgra* src_data_ptr = (ColorBgra*)src.DataPtr;
-			
+			ColorBgra* src_data_ptr = (ColorBgra*) src.DataPtr;
+
 			foreach (var rect in rois) {
 				// loop through each line of target rectangle
 				for (int y = rect.Top; y <= rect.GetBottom (); ++y) {
@@ -64,7 +67,7 @@ namespace Pinta.Effects
 
 					if (y == srcHeight - 1)
 						fyEnd = 2;
-					
+
 					// loop through each point in the line 
 					ColorBgra* dstPtr = dst.GetPointAddress (rect.Left, y);
 
@@ -85,12 +88,12 @@ namespace Pinta.Effects
 							for (int fx = fxStart; fx < fxEnd; ++fx) {
 								double weight = weights[fy, fx];
 								ColorBgra c = src.GetPointUnchecked (src_data_ptr, srcWidth, x - 1 + fx, y - 1 + fy);
-								double intensity = (double)c.GetIntensityByte ();
+								double intensity = (double) c.GetIntensityByte ();
 								sum += weight * intensity;
 							}
 						}
 
-						int iSum = (int)sum;
+						int iSum = (int) sum;
 						iSum += 128;
 
 						if (iSum > 255)
@@ -99,7 +102,7 @@ namespace Pinta.Effects
 						if (iSum < 0)
 							iSum = 0;
 
-						*dstPtr = ColorBgra.FromBgra ((byte)iSum, (byte)iSum, (byte)iSum, 255);
+						*dstPtr = ColorBgra.FromBgra ((byte) iSum, (byte) iSum, (byte) iSum, 255);
 
 						++dstPtr;
 					}
@@ -111,7 +114,7 @@ namespace Pinta.Effects
 		public double[,] Weights {
 			get {
 				// adjust and convert angle to radians
-				double r = (double)Data.Angle * 2.0 * Math.PI / 360.0;
+				double r = (double) Data.Angle * 2.0 * Math.PI / 360.0;
 
 				// angle delta for each weight
 				double dr = Math.PI / 4.0;

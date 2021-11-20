@@ -1,4 +1,4 @@
-﻿// 
+// 
 // HistoryPad.cs
 //  
 // Author:
@@ -25,8 +25,8 @@
 // THE SOFTWARE.
 
 using Gtk;
-using Pinta.Docking;
 using Pinta.Core;
+using Pinta.Docking;
 using Pinta.Gui.Widgets;
 
 namespace Pinta
@@ -36,9 +36,8 @@ namespace Pinta
 		public void Initialize (Dock workspace, Application app, GLib.Menu padMenu)
 		{
 			var history = new HistoryTreeView ();
-			DockItem history_item = new DockItem(history, "History")
-			{
-				Label = Translations.GetString("History")
+			DockItem history_item = new DockItem (history, "History") {
+				Label = Translations.GetString ("History")
 			};
 
 			// TODO-GTK3 (docking)
@@ -48,18 +47,17 @@ namespace Pinta
 			history_item.DefaultWidth = 100;
 			history_item.Behavior |= DockItemBehavior.CantClose;
 #endif
-			var history_tb = history_item.AddToolBar();
-			history_tb.Add (PintaCore.Actions.Edit.Undo.CreateDockToolBarItem());
-			history_tb.Add (PintaCore.Actions.Edit.Redo.CreateDockToolBarItem());
+			var history_tb = history_item.AddToolBar ();
+			history_tb.Add (PintaCore.Actions.Edit.Undo.CreateDockToolBarItem ());
+			history_tb.Add (PintaCore.Actions.Edit.Redo.CreateDockToolBarItem ());
 
-			workspace.AddItem(history_item, DockPlacement.Right);
+			workspace.AddItem (history_item, DockPlacement.Right);
 
-			var show_history = new ToggleCommand("history", Translations.GetString("History"), null, Resources.Icons.LayerDuplicate)
-			{
+			var show_history = new ToggleCommand ("history", Translations.GetString ("History"), null, Resources.Icons.LayerDuplicate) {
 				Value = true
 			};
-			app.AddAction(show_history);
-			padMenu.AppendItem(show_history.CreateMenuItem());
+			app.AddAction (show_history);
+			padMenu.AppendItem (show_history.CreateMenuItem ());
 
 			show_history.Toggled += (val) => { history_item.Visible = val; };
 			history_item.VisibilityNotifyEvent += (o, args) => { show_history.Value = history_item.Visible; };

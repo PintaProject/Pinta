@@ -1,4 +1,4 @@
-﻿// 
+// 
 // NewScreenshotAction.cs
 //  
 // Author:
@@ -25,8 +25,8 @@
 // THE SOFTWARE.
 
 using System;
-using Pinta.Core;
 using Gdk;
+using Pinta.Core;
 
 namespace Pinta.Actions
 {
@@ -51,12 +51,12 @@ namespace Pinta.Actions
 			using var dialog = new SpinButtonEntryDialog (Translations.GetString ("Take Screenshot"),
 					PintaCore.Chrome.MainWindow, Translations.GetString ("Delay before taking a screenshot (seconds):"), 0, 300, delay);
 
-			if (dialog.Run () == (int)Gtk.ResponseType.Ok) {
+			if (dialog.Run () == (int) Gtk.ResponseType.Ok) {
 				delay = dialog.GetValue ();
 
 				PintaCore.Settings.PutSetting ("screenshot-delay", delay);
 
-				GLib.Timeout.Add ((uint)delay * 1000, () => {
+				GLib.Timeout.Add ((uint) delay * 1000, () => {
 					Screen screen = Screen.Default;
 					var root_window = screen.RootWindow;
 					Document doc = PintaCore.Workspace.NewDocument (new Size (root_window.Width, root_window.Height), new Cairo.Color (1, 1, 1));

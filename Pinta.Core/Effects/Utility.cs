@@ -6,9 +6,9 @@
 /////////////////////////////////////////////////////////////////////////////////
 
 using System;
-using System.Reflection;
 using System.Collections;
 using System.Collections.Generic;
+using System.Reflection;
 
 namespace Pinta.Core
 {
@@ -93,7 +93,7 @@ namespace Pinta.Core
 			} else if (x < 0) {
 				return 0;
 			} else {
-				return (byte)x;
+				return (byte) x;
 			}
 		}
 
@@ -104,7 +104,7 @@ namespace Pinta.Core
 			} else if (x < 0) {
 				return 0;
 			} else {
-				return (byte)x;
+				return (byte) x;
 			}
 		}
 
@@ -115,7 +115,7 @@ namespace Pinta.Core
 			} else if (x < 0) {
 				return 0;
 			} else {
-				return (byte)x;
+				return (byte) x;
 			}
 		}
 
@@ -134,41 +134,41 @@ namespace Pinta.Core
 			return new Cairo.PointD (Lerp (from.X, to.X, frac), Lerp (from.Y, to.Y, frac));
 		}
 
-		public static void Swap(ref int a, ref int b)
-        {
-            int t;
+		public static void Swap (ref int a, ref int b)
+		{
+			int t;
 
-            t = a;
-            a = b;
-            b = t;
-        }
+			t = a;
+			a = b;
+			b = t;
+		}
 
-		 /// <summary>
-        /// Smoothly blends between two colors.
-        /// </summary>
-        public static ColorBgra Blend(ColorBgra ca, ColorBgra cb, byte cbAlpha)
-        {
-            uint caA = (uint)Utility.FastScaleByteByByte((byte)(255 - cbAlpha), ca.A);
-            uint cbA = (uint)Utility.FastScaleByteByByte(cbAlpha, cb.A);
-            uint cbAT = caA + cbA;
+		/// <summary>
+		/// Smoothly blends between two colors.
+		/// </summary>
+		public static ColorBgra Blend (ColorBgra ca, ColorBgra cb, byte cbAlpha)
+		{
+			uint caA = (uint) Utility.FastScaleByteByByte ((byte) (255 - cbAlpha), ca.A);
+			uint cbA = (uint) Utility.FastScaleByteByByte (cbAlpha, cb.A);
+			uint cbAT = caA + cbA;
 
-            uint r;
-            uint g;
-            uint b;
+			uint r;
+			uint g;
+			uint b;
 
-            if (cbAT == 0) {
-                r = 0;
-                g = 0;
-                b = 0;
-            } else {
-                r = ((ca.R * caA) + (cb.R * cbA)) / cbAT;
-                g = ((ca.G * caA) + (cb.G * cbA)) / cbAT;
-                b = ((ca.B * caA) + (cb.B * cbA)) / cbAT;
-            }
+			if (cbAT == 0) {
+				r = 0;
+				g = 0;
+				b = 0;
+			} else {
+				r = ((ca.R * caA) + (cb.R * cbA)) / cbAT;
+				g = ((ca.G * caA) + (cb.G * cbA)) / cbAT;
+				b = ((ca.B * caA) + (cb.B * cbA)) / cbAT;
+			}
 
-            return ColorBgra.FromBgra((byte)b, (byte)g, (byte)r, (byte)cbAT);
-        }
-	
+			return ColorBgra.FromBgra ((byte) b, (byte) g, (byte) r, (byte) cbAT);
+		}
+
 		/// <summary>
 		/// Allows you to find the bounding box for a "region" that is described as an
 		/// array of bounding boxes.
@@ -213,7 +213,7 @@ namespace Pinta.Core
 
 		public static int ColorDifference (ColorBgra a, ColorBgra b)
 		{
-			return (int)Math.Ceiling (Math.Sqrt (ColorDifferenceSquared (a, b)));
+			return (int) Math.Ceiling (Math.Sqrt (ColorDifferenceSquared (a, b)));
 		}
 
 		public static int ColorDifferenceSquared (ColorBgra a, ColorBgra b)
@@ -235,15 +235,15 @@ namespace Pinta.Core
 			Gdk.Rectangle[] inflated = new Gdk.Rectangle[rects.Length];
 
 			for (int i = 0; i < rects.Length; ++i)
-				inflated[i] = new Gdk.Rectangle(rects[i].X-len, rects[i].Y-len, rects[i].Width + 2 * len, rects[i].Height + 2 * len);
+				inflated[i] = new Gdk.Rectangle (rects[i].X - len, rects[i].Y - len, rects[i].Width + 2 * len, rects[i].Height + 2 * len);
 
 			return inflated;
 		}
-		
+
 		public static string GetStaticName (Type type)
 		{
 			var pi = type.GetProperty ("StaticName", BindingFlags.Static | BindingFlags.Public | BindingFlags.GetProperty);
-			
+
 			if (pi != null)
 				return (pi.GetValue (null, null) as string) ?? type.Name;
 
@@ -254,130 +254,114 @@ namespace Pinta.Core
 		{
 			int r1 = a * b + 0x80;
 			int r2 = ((r1 >> 8) + r1) >> 8;
-			return (byte)r2;
+			return (byte) r2;
 		}
 
-		public static Gdk.Point[] GetLinePoints(Gdk.Point first, Gdk.Point second)
-        {
-            Gdk.Point[]? coords = null;
+		public static Gdk.Point[] GetLinePoints (Gdk.Point first, Gdk.Point second)
+		{
+			Gdk.Point[]? coords = null;
 
-            int x1 = first.X;
-            int y1 = first.Y;
-            int x2 = second.X;
-            int y2 = second.Y;
-            int dx = x2 - x1;
-            int dy = y2 - y1;
-            int dxabs = Math.Abs(dx);
-            int dyabs = Math.Abs(dy);
-            int px = x1;
-            int py = y1;
-            int sdx = Math.Sign(dx);
-            int sdy = Math.Sign(dy);
-            int x = 0;
-            int y = 0;
+			int x1 = first.X;
+			int y1 = first.Y;
+			int x2 = second.X;
+			int y2 = second.Y;
+			int dx = x2 - x1;
+			int dy = y2 - y1;
+			int dxabs = Math.Abs (dx);
+			int dyabs = Math.Abs (dy);
+			int px = x1;
+			int py = y1;
+			int sdx = Math.Sign (dx);
+			int sdy = Math.Sign (dy);
+			int x = 0;
+			int y = 0;
 
-            if (dxabs > dyabs)
-            {
-                coords = new Gdk.Point[dxabs + 1];
+			if (dxabs > dyabs) {
+				coords = new Gdk.Point[dxabs + 1];
 
-                for (int i = 0; i <= dxabs; i++)
-                {
-                    y += dyabs;
+				for (int i = 0; i <= dxabs; i++) {
+					y += dyabs;
 
-                    if (y >= dxabs)
-                    {
-                        y -= dxabs;
-                        py += sdy;
-                    }
+					if (y >= dxabs) {
+						y -= dxabs;
+						py += sdy;
+					}
 
-                    coords[i] = new Gdk.Point(px, py);
-                    px += sdx;
-                }
-            }
-            else 
-                // had to add in this cludge for slopes of 1 ... wasn't drawing half the line
-                if (dxabs == dyabs)
-            {
-                coords = new Gdk.Point[dxabs + 1];
+					coords[i] = new Gdk.Point (px, py);
+					px += sdx;
+				}
+			} else
+			    // had to add in this cludge for slopes of 1 ... wasn't drawing half the line
+			    if (dxabs == dyabs) {
+				coords = new Gdk.Point[dxabs + 1];
 
-                for (int i = 0; i <= dxabs; i++)
-                {
-                    coords[i] = new Gdk.Point(px, py);
-                    px += sdx;
-                    py += sdy;
-                }
-            }
-            else
-            {
-                coords = new Gdk.Point[dyabs + 1];
+				for (int i = 0; i <= dxabs; i++) {
+					coords[i] = new Gdk.Point (px, py);
+					px += sdx;
+					py += sdy;
+				}
+			} else {
+				coords = new Gdk.Point[dyabs + 1];
 
-                for (int i = 0; i <= dyabs; i++)
-                {
-                    x += dxabs;
+				for (int i = 0; i <= dyabs; i++) {
+					x += dxabs;
 
-                    if (x >= dyabs)
-                    {
-                        x -= dyabs;
-                        px += sdx;
-                    }
+					if (x >= dyabs) {
+						x -= dyabs;
+						px += sdx;
+					}
 
-                    coords[i] = new Gdk.Point(px, py);
-                    py += sdy;
-                }
-            }
+					coords[i] = new Gdk.Point (px, py);
+					py += sdy;
+				}
+			}
 
-            return coords;
-        }
+			return coords;
+		}
 
 		public static unsafe void GetRgssOffsets (Cairo.PointD* samplesArray, int sampleCount, int quality)
-        {
-            if (sampleCount < 1)
-            {
-                throw new ArgumentOutOfRangeException("sampleCount", "sampleCount must be [0, int.MaxValue]");
-            }
+		{
+			if (sampleCount < 1) {
+				throw new ArgumentOutOfRangeException ("sampleCount", "sampleCount must be [0, int.MaxValue]");
+			}
 
-            if (sampleCount != quality * quality)
-            {
-                throw new ArgumentOutOfRangeException("sampleCount != (quality * quality)");
-            }
+			if (sampleCount != quality * quality) {
+				throw new ArgumentOutOfRangeException ("sampleCount != (quality * quality)");
+			}
 
-            if (sampleCount == 1)
-            {
-                samplesArray[0] = new Cairo.PointD (0.0, 0.0);
-            }
-            else
-            {
-                for (int i = 0; i < sampleCount; ++i)
-                {
-                    double y = (i + 1d) / (sampleCount + 1d);
-                    double x = y * quality;
+			if (sampleCount == 1) {
+				samplesArray[0] = new Cairo.PointD (0.0, 0.0);
+			} else {
+				for (int i = 0; i < sampleCount; ++i) {
+					double y = (i + 1d) / (sampleCount + 1d);
+					double x = y * quality;
 
-                    x -= (int)x;
+					x -= (int) x;
 
-                    samplesArray[i] = new Cairo.PointD (x - 0.5d, y - 0.5d);
-                }
-            }
-        }
+					samplesArray[i] = new Cairo.PointD (x - 0.5d, y - 0.5d);
+				}
+			}
+		}
 
-		public static int FastDivideShortByByte(ushort n, byte d)
-        {
-            int i = d * 3;
-            uint m = masTable[i];
-            uint a = masTable[i + 1];
-            uint s = masTable[i + 2];
+		public static int FastDivideShortByByte (ushort n, byte d)
+		{
+			int i = d * 3;
+			uint m = masTable[i];
+			uint a = masTable[i + 1];
+			uint s = masTable[i + 2];
 
-            uint nTimesMPlusA = unchecked((n * m) + a);
-            uint shifted = nTimesMPlusA >> (int)s;
-            int r = (int)shifted;
+			uint nTimesMPlusA = unchecked((n * m) + a);
+			uint shifted = nTimesMPlusA >> (int) s;
+			int r = (int) shifted;
 
-            return r;
-        }
+			return r;
+		}
 
-        // i = z * 3;
-        // (x / z) = ((x * masTable[i]) + masTable[i + 1]) >> masTable[i + 2)
-        private static readonly uint[] masTable = 
-        {
-            0x00000000, 0x00000000, 0,  // 0
+		// i = z * 3;
+		// (x / z) = ((x * masTable[i]) + masTable[i + 1]) >> masTable[i + 2)
+		private static readonly uint[] masTable =
+		{
+	    0x00000000, 0x00000000, 0,  // 0
             0x00000001, 0x00000000, 0,  // 1
             0x00000001, 0x00000000, 1,  // 2
             0xAAAAAAAB, 0x00000000, 33, // 3
@@ -635,26 +619,26 @@ namespace Pinta.Core
             0x80808081, 0x00000000, 39  // 255
         };
 
-         /// <summary>
-         /// Gets the nearest step angle in radians.
-         /// </summary>
-         /// <returns>The nearest step angle in radians.</returns>
-         /// <param name="angle">Angle in radians.</param>
-         /// <param name="steps">Number of steps to divide the circle.</param>
-        public static double GetNearestStepAngle (double angle, int steps)
-        {
-            double fullTurn = 2 * Math.PI;
-            double stepAngle = fullTurn / steps;
-            double normalizedAngle = angle % fullTurn;
-            int sector = Convert.ToInt32 (Math.Truncate ((normalizedAngle % fullTurn) / stepAngle));
+		/// <summary>
+		/// Gets the nearest step angle in radians.
+		/// </summary>
+		/// <returns>The nearest step angle in radians.</returns>
+		/// <param name="angle">Angle in radians.</param>
+		/// <param name="steps">Number of steps to divide the circle.</param>
+		public static double GetNearestStepAngle (double angle, int steps)
+		{
+			double fullTurn = 2 * Math.PI;
+			double stepAngle = fullTurn / steps;
+			double normalizedAngle = angle % fullTurn;
+			int sector = Convert.ToInt32 (Math.Truncate ((normalizedAngle % fullTurn) / stepAngle));
 
-            var leftStepAngle = sector * stepAngle;
-            var rightStepAngle = (sector + 1) * stepAngle;
+			var leftStepAngle = sector * stepAngle;
+			var rightStepAngle = (sector + 1) * stepAngle;
 
-            if ((angle - leftStepAngle) < (rightStepAngle - angle))
-                return leftStepAngle;
-            else
-                return rightStepAngle;
-        }
-    }
+			if ((angle - leftStepAngle) < (rightStepAngle - angle))
+				return leftStepAngle;
+			else
+				return rightStepAngle;
+		}
+	}
 }

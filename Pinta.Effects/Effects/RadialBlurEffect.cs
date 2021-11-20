@@ -8,9 +8,9 @@
 /////////////////////////////////////////////////////////////////////////////////
 
 using System;
-using Pinta.Gui.Widgets;
 using Cairo;
 using Pinta.Core;
+using Pinta.Gui.Widgets;
 
 namespace Pinta.Effects
 {
@@ -32,7 +32,7 @@ namespace Pinta.Effects
 			get { return Translations.GetString ("Blurs"); }
 		}
 
-		public RadialBlurData Data { get { return (RadialBlurData)EffectData!; } } // NRT - Set in constructor
+		public RadialBlurData Data { get { return (RadialBlurData) EffectData!; } } // NRT - Set in constructor
 
 		public RadialBlurEffect ()
 		{
@@ -65,12 +65,12 @@ namespace Pinta.Effects
 
 			int w = dst.Width;
 			int h = dst.Height;
-			int fcx = (w << 15) + (int)(Data.Offset.X * (w << 15));
-			int fcy = (h << 15) + (int)(Data.Offset.Y * (h << 15));
+			int fcx = (w << 15) + (int) (Data.Offset.X * (w << 15));
+			int fcy = (h << 15) + (int) (Data.Offset.Y * (h << 15));
 
 			int n = (Data.Quality * Data.Quality) * (30 + Data.Quality * Data.Quality);
 
-			int fr = (int)(Data.Angle * Math.PI * 65536.0 / 181.0);
+			int fr = (int) (Data.Angle * Math.PI * 65536.0 / 181.0);
 
 			foreach (Gdk.Rectangle rect in rois) {
 				for (int y = rect.Top; y <= rect.GetBottom (); ++y) {
@@ -100,7 +100,7 @@ namespace Pinta.Effects
 						int oy1 = fy;
 						int oy2 = fy;
 
-						ColorBgra* src_dataptr = (ColorBgra*)src.DataPtr;
+						ColorBgra* src_dataptr = (ColorBgra*) src.DataPtr;
 						int src_width = src.Width;
 
 						for (int i = 0; i < n; ++i) {
@@ -163,7 +163,7 @@ namespace Pinta.Effects
 			[Caption ("Quality"), MinimumValue (1), MaximumValue (5)]
 			[Hint ("Use low quality for previews, small images, and small angles.  Use high quality for final quality, large images, and large angles.")]
 			public int Quality = 2;
-			
+
 			[Skip]
 			public override bool IsDefault { get { return Angle == 0; } }
 		}

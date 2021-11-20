@@ -56,36 +56,36 @@ namespace Pinta.Core
 		public ChromeManager ()
 		{
 		}
-		
+
 		#region Public Properties
 		public Gdk.Point LastCanvasCursorPoint {
 			get { return last_canvas_cursor_point; }
 			set {
 				if (last_canvas_cursor_point != value) {
 					last_canvas_cursor_point = value;
-					OnLastCanvasCursorPointChanged ();				
+					OnLastCanvasCursorPointChanged ();
 				}
 			}
 		}
-		
+
 		public bool MainWindowBusy {
 			get { return main_window_busy; }
 			set {
 				main_window_busy = value;
-				
+
 				if (main_window_busy)
-					main_window.Window.Cursor = new Gdk.Cursor(Gdk.CursorType.Watch);
+					main_window.Window.Cursor = new Gdk.Cursor (Gdk.CursorType.Watch);
 				else
-					main_window.Window.Cursor = new Gdk.Cursor(Gdk.CursorType.Arrow);
+					main_window.Window.Cursor = new Gdk.Cursor (Gdk.CursorType.Arrow);
 			}
 		}
 		#endregion
 
 		#region Public Methods
 		public void InitializeApplication (Gtk.Application application)
-        {
+		{
 			Application = application;
-        }
+		}
 
 		public void InitializeToolToolBar (Toolbar toolToolBar)
 		{
@@ -164,14 +164,14 @@ namespace Pinta.Core
 			if (StatusBarTextChanged != null)
 				StatusBarTextChanged (this, new TextChangedEventArgs (text));
 		}
-#endregion
-		
+		#endregion
+
 		#region Public Events
 		public event EventHandler? LastCanvasCursorPointChanged;
 		public event EventHandler<TextChangedEventArgs>? StatusBarTextChanged;
 		#endregion
 	}
-		
+
 	public interface IProgressDialog
 	{
 		void Show ();
@@ -182,6 +182,6 @@ namespace Pinta.Core
 		event EventHandler<EventArgs> Canceled;
 	}
 
-	public delegate void ErrorDialogHandler(Window parent, string message, string details);
-	public delegate void UnsupportedFormatDialogHandler(Window parent, string message, string details);
+	public delegate void ErrorDialogHandler (Window parent, string message, string details);
+	public delegate void UnsupportedFormatDialogHandler (Window parent, string message, string details);
 }

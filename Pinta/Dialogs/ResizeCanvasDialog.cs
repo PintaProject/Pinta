@@ -40,27 +40,27 @@ namespace Pinta
 		private SpinButton heightSpinner;
 		private CheckButton aspectCheckbox;
 
-        private Button NWButton;
-        private Button NButton;
-        private Button NEButton;
-        private Button WButton;
-        private Button EButton;
-        private Button CenterButton;
-        private Button SWButton;
-        private Button SButton;
-        private Button SEButton;
+		private Button NWButton;
+		private Button NButton;
+		private Button NEButton;
+		private Button WButton;
+		private Button EButton;
+		private Button CenterButton;
+		private Button SWButton;
+		private Button SButton;
+		private Button SEButton;
 
 		private bool value_changing;
 		private Anchor anchor;
-		
+
 		public ResizeCanvasDialog () : base (Translations.GetString ("Resize Canvas"), PintaCore.Chrome.MainWindow,
-		                                     DialogFlags.Modal,
-											 Core.GtkExtensions.DialogButtonsCancelOk())
+						     DialogFlags.Modal,
+											 Core.GtkExtensions.DialogButtonsCancelOk ())
 		{
 			Build ();
 
 			aspectCheckbox.Active = true;
-			
+
 			widthSpinner.Value = PintaCore.Workspace.ImageSize.Width;
 			heightSpinner.Value = PintaCore.Workspace.ImageSize.Height;
 
@@ -73,7 +73,7 @@ namespace Pinta
 
 			widthSpinner.ValueChanged += new EventHandler (widthSpinner_ValueChanged);
 			heightSpinner.ValueChanged += new EventHandler (heightSpinner_ValueChanged);
-			
+
 			NWButton.Clicked += HandleNWButtonClicked;
 			NButton.Clicked += HandleNButtonClicked;
 			NEButton.Clicked += HandleNEButtonClicked;
@@ -83,14 +83,14 @@ namespace Pinta
 			SWButton.Clicked += HandleSWButtonClicked;
 			SButton.Clicked += HandleSButtonClicked;
 			SEButton.Clicked += HandleSEButtonClicked;
-			
+
 			SetAnchor (Anchor.Center);
 			DefaultResponse = Gtk.ResponseType.Ok;
 
 			widthSpinner.ActivatesDefault = true;
 			heightSpinner.ActivatesDefault = true;
 			percentageSpinner.ActivatesDefault = true;
-			percentageSpinner.GrabFocus();
+			percentageSpinner.GrabFocus ();
 		}
 
 		#region Public Methods
@@ -105,10 +105,10 @@ namespace Pinta
 		{
 			if (value_changing)
 				return;
-			
+
 			if (aspectCheckbox.Active) {
 				value_changing = true;
-				widthSpinner.Value = (int)((heightSpinner.Value * PintaCore.Workspace.ImageSize.Width) / PintaCore.Workspace.ImageSize.Height);
+				widthSpinner.Value = (int) ((heightSpinner.Value * PintaCore.Workspace.ImageSize.Width) / PintaCore.Workspace.ImageSize.Height);
 				value_changing = false;
 			}
 		}
@@ -117,18 +117,18 @@ namespace Pinta
 		{
 			if (value_changing)
 				return;
-			
+
 			if (aspectCheckbox.Active) {
 				value_changing = true;
-				heightSpinner.Value = (int)((widthSpinner.Value * PintaCore.Workspace.ImageSize.Height) / PintaCore.Workspace.ImageSize.Width);
+				heightSpinner.Value = (int) ((widthSpinner.Value * PintaCore.Workspace.ImageSize.Height) / PintaCore.Workspace.ImageSize.Width);
 				value_changing = false;
 			}
 		}
 
 		private void percentageSpinner_ValueChanged (object? sender, EventArgs e)
 		{
-			widthSpinner.Value = (int)(PintaCore.Workspace.ImageSize.Width * (percentageSpinner.ValueAsInt / 100f));
-			heightSpinner.Value = (int)(PintaCore.Workspace.ImageSize.Height * (percentageSpinner.ValueAsInt / 100f));
+			widthSpinner.Value = (int) (PintaCore.Workspace.ImageSize.Width * (percentageSpinner.ValueAsInt / 100f));
+			heightSpinner.Value = (int) (PintaCore.Workspace.ImageSize.Height * (percentageSpinner.ValueAsInt / 100f));
 		}
 
 		private void absoluteRadio_Toggled (object? sender, EventArgs e)
@@ -145,13 +145,13 @@ namespace Pinta
 		{
 			if (percentageRadio.Active) {
 				percentageSpinner.Sensitive = true;
-				
+
 				widthSpinner.Sensitive = false;
 				heightSpinner.Sensitive = false;
 				aspectCheckbox.Sensitive = false;
 			} else {
 				percentageSpinner.Sensitive = false;
-				
+
 				widthSpinner.Sensitive = true;
 				heightSpinner.Sensitive = true;
 				aspectCheckbox.Sensitive = true;
@@ -202,11 +202,11 @@ namespace Pinta
 		{
 			SetAnchor (Anchor.NW);
 		}
-		
+
 		private void SetAnchor (Anchor anchor)
 		{
 			this.anchor = anchor;
-			
+
 			NWButton.Image = null;
 			NButton.Image = null;
 			NEButton.Image = null;
@@ -216,92 +216,92 @@ namespace Pinta
 			SWButton.Image = null;
 			SButton.Image = null;
 			SEButton.Image = null;
-			
+
 			switch (anchor) {
-				
-			case Anchor.NW:
-				NWButton.Image = Image.NewFromIconName(Resources.Icons.ResizeCanvasBase, IconSize.Button);
-				NButton.Image = Image.NewFromIconName(Resources.Icons.ResizeCanvasRight, IconSize.Button);
-				WButton.Image = Image.NewFromIconName(Resources.Icons.ResizeCanvasDown, IconSize.Button);
-				CenterButton.Image = Image.NewFromIconName(Resources.Icons.ResizeCanvasSE, IconSize.Button);
-				break;
-			
-			case Anchor.N:
-				NWButton.Image = Image.NewFromIconName(Resources.Icons.ResizeCanvasLeft, IconSize.Button);
-				NButton.Image = Image.NewFromIconName(Resources.Icons.ResizeCanvasBase, IconSize.Button);
-				NEButton.Image = Image.NewFromIconName(Resources.Icons.ResizeCanvasRight, IconSize.Button);
-				WButton.Image = Image.NewFromIconName(Resources.Icons.ResizeCanvasSW, IconSize.Button);
-				EButton.Image = Image.NewFromIconName(Resources.Icons.ResizeCanvasSE, IconSize.Button);
-				CenterButton.Image = Image.NewFromIconName(Resources.Icons.ResizeCanvasDown, IconSize.Button);
-					break;			
 
-			case Anchor.NE:
-				NEButton.Image = Image.NewFromIconName(Resources.Icons.ResizeCanvasBase, IconSize.Button);
-				NButton.Image = Image.NewFromIconName(Resources.Icons.ResizeCanvasLeft, IconSize.Button);
-				EButton.Image = Image.NewFromIconName(Resources.Icons.ResizeCanvasDown, IconSize.Button);
-				CenterButton.Image = Image.NewFromIconName(Resources.Icons.ResizeCanvasSW, IconSize.Button);
-				break;
-				
-			case Anchor.W:
-				NWButton.Image = Image.NewFromIconName(Resources.Icons.ResizeCanvasUp, IconSize.Button);
-				NButton.Image = Image.NewFromIconName(Resources.Icons.ResizeCanvasNE, IconSize.Button);
-				SWButton.Image = Image.NewFromIconName(Resources.Icons.ResizeCanvasDown, IconSize.Button);
-				WButton.Image = Image.NewFromIconName(Resources.Icons.ResizeCanvasBase, IconSize.Button);
-				SButton.Image = Image.NewFromIconName(Resources.Icons.ResizeCanvasSE, IconSize.Button);
-				CenterButton.Image = Image.NewFromIconName(Resources.Icons.ResizeCanvasRight, IconSize.Button);
-				break;
+				case Anchor.NW:
+					NWButton.Image = Image.NewFromIconName (Resources.Icons.ResizeCanvasBase, IconSize.Button);
+					NButton.Image = Image.NewFromIconName (Resources.Icons.ResizeCanvasRight, IconSize.Button);
+					WButton.Image = Image.NewFromIconName (Resources.Icons.ResizeCanvasDown, IconSize.Button);
+					CenterButton.Image = Image.NewFromIconName (Resources.Icons.ResizeCanvasSE, IconSize.Button);
+					break;
 
-			case Anchor.Center:
-				NWButton.Image = Image.NewFromIconName(Resources.Icons.ResizeCanvasNW, IconSize.Button);
-				NButton.Image = Image.NewFromIconName(Resources.Icons.ResizeCanvasUp, IconSize.Button);
-				NEButton.Image = Image.NewFromIconName(Resources.Icons.ResizeCanvasNE, IconSize.Button);
-				WButton.Image = Image.NewFromIconName(Resources.Icons.ResizeCanvasLeft, IconSize.Button);
-				EButton.Image = Image.NewFromIconName(Resources.Icons.ResizeCanvasRight, IconSize.Button);
-				SWButton.Image = Image.NewFromIconName(Resources.Icons.ResizeCanvasSW, IconSize.Button);
-				SButton.Image = Image.NewFromIconName(Resources.Icons.ResizeCanvasDown, IconSize.Button);
-				SEButton.Image = Image.NewFromIconName(Resources.Icons.ResizeCanvasSE, IconSize.Button);
-				CenterButton.Image = Image.NewFromIconName(Resources.Icons.ResizeCanvasBase, IconSize.Button);
-				break;
-			
-			case Anchor.E:
-				NEButton.Image = Image.NewFromIconName(Resources.Icons.ResizeCanvasUp, IconSize.Button);
-				NButton.Image = Image.NewFromIconName(Resources.Icons.ResizeCanvasNW, IconSize.Button);
-				SEButton.Image = Image.NewFromIconName(Resources.Icons.ResizeCanvasDown, IconSize.Button);
-				EButton.Image = Image.NewFromIconName(Resources.Icons.ResizeCanvasBase, IconSize.Button);
-				SButton.Image = Image.NewFromIconName(Resources.Icons.ResizeCanvasSW, IconSize.Button);
-				CenterButton.Image = Image.NewFromIconName(Resources.Icons.ResizeCanvasLeft, IconSize.Button);
-				break;
-				
-			case Anchor.SW:
-				SWButton.Image = Image.NewFromIconName(Resources.Icons.ResizeCanvasBase, IconSize.Button);
-				SButton.Image = Image.NewFromIconName(Resources.Icons.ResizeCanvasRight, IconSize.Button);
-				WButton.Image = Image.NewFromIconName(Resources.Icons.ResizeCanvasUp, IconSize.Button);
-				CenterButton.Image = Image.NewFromIconName(Resources.Icons.ResizeCanvasNE, IconSize.Button);
-				break;
-			
-			case Anchor.S:
-				SWButton.Image = Image.NewFromIconName(Resources.Icons.ResizeCanvasLeft, IconSize.Button);
-				SButton.Image = Image.NewFromIconName(Resources.Icons.ResizeCanvasBase, IconSize.Button);
-				SEButton.Image = Image.NewFromIconName(Resources.Icons.ResizeCanvasRight, IconSize.Button);
-				WButton.Image = Image.NewFromIconName(Resources.Icons.ResizeCanvasNW, IconSize.Button);
-				EButton.Image = Image.NewFromIconName(Resources.Icons.ResizeCanvasNE, IconSize.Button);
-				CenterButton.Image = Image.NewFromIconName(Resources.Icons.ResizeCanvasUp, IconSize.Button);
-				break;			
+				case Anchor.N:
+					NWButton.Image = Image.NewFromIconName (Resources.Icons.ResizeCanvasLeft, IconSize.Button);
+					NButton.Image = Image.NewFromIconName (Resources.Icons.ResizeCanvasBase, IconSize.Button);
+					NEButton.Image = Image.NewFromIconName (Resources.Icons.ResizeCanvasRight, IconSize.Button);
+					WButton.Image = Image.NewFromIconName (Resources.Icons.ResizeCanvasSW, IconSize.Button);
+					EButton.Image = Image.NewFromIconName (Resources.Icons.ResizeCanvasSE, IconSize.Button);
+					CenterButton.Image = Image.NewFromIconName (Resources.Icons.ResizeCanvasDown, IconSize.Button);
+					break;
 
-			case Anchor.SE:
-				SEButton.Image = Image.NewFromIconName(Resources.Icons.ResizeCanvasBase, IconSize.Button);
-				SButton.Image = Image.NewFromIconName(Resources.Icons.ResizeCanvasLeft, IconSize.Button);
-				EButton.Image = Image.NewFromIconName(Resources.Icons.ResizeCanvasUp, IconSize.Button);
-				CenterButton.Image = Image.NewFromIconName(Resources.Icons.ResizeCanvasNW, IconSize.Button);
-				break;
+				case Anchor.NE:
+					NEButton.Image = Image.NewFromIconName (Resources.Icons.ResizeCanvasBase, IconSize.Button);
+					NButton.Image = Image.NewFromIconName (Resources.Icons.ResizeCanvasLeft, IconSize.Button);
+					EButton.Image = Image.NewFromIconName (Resources.Icons.ResizeCanvasDown, IconSize.Button);
+					CenterButton.Image = Image.NewFromIconName (Resources.Icons.ResizeCanvasSW, IconSize.Button);
+					break;
+
+				case Anchor.W:
+					NWButton.Image = Image.NewFromIconName (Resources.Icons.ResizeCanvasUp, IconSize.Button);
+					NButton.Image = Image.NewFromIconName (Resources.Icons.ResizeCanvasNE, IconSize.Button);
+					SWButton.Image = Image.NewFromIconName (Resources.Icons.ResizeCanvasDown, IconSize.Button);
+					WButton.Image = Image.NewFromIconName (Resources.Icons.ResizeCanvasBase, IconSize.Button);
+					SButton.Image = Image.NewFromIconName (Resources.Icons.ResizeCanvasSE, IconSize.Button);
+					CenterButton.Image = Image.NewFromIconName (Resources.Icons.ResizeCanvasRight, IconSize.Button);
+					break;
+
+				case Anchor.Center:
+					NWButton.Image = Image.NewFromIconName (Resources.Icons.ResizeCanvasNW, IconSize.Button);
+					NButton.Image = Image.NewFromIconName (Resources.Icons.ResizeCanvasUp, IconSize.Button);
+					NEButton.Image = Image.NewFromIconName (Resources.Icons.ResizeCanvasNE, IconSize.Button);
+					WButton.Image = Image.NewFromIconName (Resources.Icons.ResizeCanvasLeft, IconSize.Button);
+					EButton.Image = Image.NewFromIconName (Resources.Icons.ResizeCanvasRight, IconSize.Button);
+					SWButton.Image = Image.NewFromIconName (Resources.Icons.ResizeCanvasSW, IconSize.Button);
+					SButton.Image = Image.NewFromIconName (Resources.Icons.ResizeCanvasDown, IconSize.Button);
+					SEButton.Image = Image.NewFromIconName (Resources.Icons.ResizeCanvasSE, IconSize.Button);
+					CenterButton.Image = Image.NewFromIconName (Resources.Icons.ResizeCanvasBase, IconSize.Button);
+					break;
+
+				case Anchor.E:
+					NEButton.Image = Image.NewFromIconName (Resources.Icons.ResizeCanvasUp, IconSize.Button);
+					NButton.Image = Image.NewFromIconName (Resources.Icons.ResizeCanvasNW, IconSize.Button);
+					SEButton.Image = Image.NewFromIconName (Resources.Icons.ResizeCanvasDown, IconSize.Button);
+					EButton.Image = Image.NewFromIconName (Resources.Icons.ResizeCanvasBase, IconSize.Button);
+					SButton.Image = Image.NewFromIconName (Resources.Icons.ResizeCanvasSW, IconSize.Button);
+					CenterButton.Image = Image.NewFromIconName (Resources.Icons.ResizeCanvasLeft, IconSize.Button);
+					break;
+
+				case Anchor.SW:
+					SWButton.Image = Image.NewFromIconName (Resources.Icons.ResizeCanvasBase, IconSize.Button);
+					SButton.Image = Image.NewFromIconName (Resources.Icons.ResizeCanvasRight, IconSize.Button);
+					WButton.Image = Image.NewFromIconName (Resources.Icons.ResizeCanvasUp, IconSize.Button);
+					CenterButton.Image = Image.NewFromIconName (Resources.Icons.ResizeCanvasNE, IconSize.Button);
+					break;
+
+				case Anchor.S:
+					SWButton.Image = Image.NewFromIconName (Resources.Icons.ResizeCanvasLeft, IconSize.Button);
+					SButton.Image = Image.NewFromIconName (Resources.Icons.ResizeCanvasBase, IconSize.Button);
+					SEButton.Image = Image.NewFromIconName (Resources.Icons.ResizeCanvasRight, IconSize.Button);
+					WButton.Image = Image.NewFromIconName (Resources.Icons.ResizeCanvasNW, IconSize.Button);
+					EButton.Image = Image.NewFromIconName (Resources.Icons.ResizeCanvasNE, IconSize.Button);
+					CenterButton.Image = Image.NewFromIconName (Resources.Icons.ResizeCanvasUp, IconSize.Button);
+					break;
+
+				case Anchor.SE:
+					SEButton.Image = Image.NewFromIconName (Resources.Icons.ResizeCanvasBase, IconSize.Button);
+					SButton.Image = Image.NewFromIconName (Resources.Icons.ResizeCanvasLeft, IconSize.Button);
+					EButton.Image = Image.NewFromIconName (Resources.Icons.ResizeCanvasUp, IconSize.Button);
+					CenterButton.Image = Image.NewFromIconName (Resources.Icons.ResizeCanvasNW, IconSize.Button);
+					break;
 			}
 		}
 
 		[MemberNotNull (nameof (percentageRadio), nameof (absoluteRadio), nameof (percentageSpinner), nameof (widthSpinner), nameof (heightSpinner),
-				nameof (aspectCheckbox), nameof (NWButton), nameof (NButton), nameof (NEButton), nameof (EButton), nameof (SEButton), 
+				nameof (aspectCheckbox), nameof (NWButton), nameof (NButton), nameof (NEButton), nameof (EButton), nameof (SEButton),
 				nameof (SButton), nameof (SWButton), nameof (WButton), nameof (CenterButton))]
-		private void Build()
-        {
+		private void Build ()
+		{
 			IconName = Resources.Icons.ImageResizeCanvas;
 
 			WindowPosition = WindowPosition.CenterOnParent;
@@ -379,10 +379,10 @@ namespace Pinta
 			ShowAll ();
 		}
 
-		private Button CreateAnchorButton()
-        {
+		private Button CreateAnchorButton ()
+		{
 			return new Button () { WidthRequest = 30, HeightRequest = 30 };
-        }
+		}
 		#endregion
 	}
 }

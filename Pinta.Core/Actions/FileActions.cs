@@ -41,13 +41,13 @@ namespace Pinta.Core
 		public Command Save { get; private set; }
 		public Command SaveAs { get; private set; }
 		public Command Print { get; private set; }
-		
+
 		public event EventHandler<ModifyCompressionEventArgs>? ModifyCompression;
 		public event EventHandler<DocumentCancelEventArgs>? SaveDocument;
-		
+
 		public FileActions ()
 		{
-			New = new Command("new", Translations.GetString("New..."), null, Resources.StandardIcons.DocumentNew);
+			New = new Command ("new", Translations.GetString ("New..."), null, Resources.StandardIcons.DocumentNew);
 			NewScreenshot = new Command ("NewScreenshot", Translations.GetString ("New Screenshot..."), null, Resources.StandardIcons.ViewFullscreen);
 			Open = new Command ("open", Translations.GetString ("Open..."), null, Resources.StandardIcons.DocumentOpen);
 
@@ -62,39 +62,38 @@ namespace Pinta.Core
 			Save.IsImportant = true;
 		}
 
-#region Initialization
-		public void RegisterActions(Gtk.Application app, GLib.Menu menu)
-        {
-			app.AddAccelAction(New, "<Primary>N");
-			menu.AppendItem(New.CreateMenuItem());
+		#region Initialization
+		public void RegisterActions (Gtk.Application app, GLib.Menu menu)
+		{
+			app.AddAccelAction (New, "<Primary>N");
+			menu.AppendItem (New.CreateMenuItem ());
 
-			app.AddAction(NewScreenshot);
-			menu.AppendItem(NewScreenshot.CreateMenuItem());
+			app.AddAction (NewScreenshot);
+			menu.AppendItem (NewScreenshot.CreateMenuItem ());
 
-			app.AddAccelAction(Open, "<Primary>O");
-			menu.AppendItem(Open.CreateMenuItem());
+			app.AddAccelAction (Open, "<Primary>O");
+			menu.AppendItem (Open.CreateMenuItem ());
 
-			var save_section = new GLib.Menu();
-			menu.AppendSection(null, save_section);
+			var save_section = new GLib.Menu ();
+			menu.AppendSection (null, save_section);
 
-			app.AddAccelAction(Save, "<Primary>S");
-			save_section.AppendItem(Save.CreateMenuItem());
+			app.AddAccelAction (Save, "<Primary>S");
+			save_section.AppendItem (Save.CreateMenuItem ());
 
-			app.AddAccelAction(SaveAs, "<Primary><Shift>S");
-			save_section.AppendItem(SaveAs.CreateMenuItem());
+			app.AddAccelAction (SaveAs, "<Primary><Shift>S");
+			save_section.AppendItem (SaveAs.CreateMenuItem ());
 
-			var close_section = new GLib.Menu();
-			menu.AppendSection(null, close_section);
+			var close_section = new GLib.Menu ();
+			menu.AppendSection (null, close_section);
 
-			app.AddAccelAction(Close, "<Primary>W");
-			close_section.AppendItem(Close.CreateMenuItem());
+			app.AddAccelAction (Close, "<Primary>W");
+			close_section.AppendItem (Close.CreateMenuItem ());
 
 			// This is part of the application menu on macOS.
-			if (PintaCore.System.OperatingSystem != OS.Mac)
-			{
+			if (PintaCore.System.OperatingSystem != OS.Mac) {
 				var exit = PintaCore.Actions.App.Exit;
-				app.AddAccelAction(exit, "<Primary>Q");
-				close_section.AppendItem(exit.CreateMenuItem());
+				app.AddAccelAction (exit, "<Primary>Q");
+				close_section.AppendItem (exit.CreateMenuItem ());
 			}
 
 			// Printing is disabled for now until it is fully functional.
@@ -107,9 +106,9 @@ namespace Pinta.Core
 		public void RegisterHandlers ()
 		{
 		}
-#endregion
+		#endregion
 
-#region Event Invokers
+		#region Event Invokers
 		internal bool RaiseSaveDocument (Document document, bool saveAs)
 		{
 			DocumentCancelEventArgs e = new DocumentCancelEventArgs (document, saveAs);
@@ -125,12 +124,12 @@ namespace Pinta.Core
 		internal int RaiseModifyCompression (int defaultCompression, Gtk.Window parent)
 		{
 			ModifyCompressionEventArgs e = new ModifyCompressionEventArgs (defaultCompression, parent);
-			
+
 			if (ModifyCompression != null)
 				ModifyCompression (this, e);
-				
+
 			return e.Cancel ? -1 : e.Quality;
 		}
-#endregion
+		#endregion
 	}
 }

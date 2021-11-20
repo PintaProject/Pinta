@@ -1,4 +1,4 @@
-﻿// 
+// 
 // SwapLayersHistoryItem.cs
 //  
 // Author:
@@ -40,7 +40,7 @@ namespace Pinta.Core
 			layer_index_1 = layer1;
 			layer_index_2 = layer2;
 		}
-		
+
 		public override void Undo ()
 		{
 			Swap ();
@@ -56,7 +56,7 @@ namespace Pinta.Core
 			var doc = PintaCore.Workspace.ActiveDocument;
 
 			int selected = doc.Layers.CurrentUserLayerIndex;
-			
+
 			int l1 = Math.Min (layer_index_1, layer_index_2);
 			int l2 = Math.Max (layer_index_1, layer_index_2);
 
@@ -68,7 +68,7 @@ namespace Pinta.Core
 
 			doc.Layers.Insert (layer2, l1);
 			doc.Layers.Insert (layer1, l2);
-			
+
 			doc.Layers.SetCurrentUserLayer (selected);
 		}
 	}

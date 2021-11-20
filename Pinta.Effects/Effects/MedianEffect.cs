@@ -9,8 +9,8 @@
 
 using System;
 using Cairo;
-using Pinta.Gui.Widgets;
 using Pinta.Core;
+using Pinta.Gui.Widgets;
 
 namespace Pinta.Effects
 {
@@ -35,7 +35,7 @@ namespace Pinta.Effects
 			get { return Translations.GetString ("Noise"); }
 		}
 
-		public MedianData Data { get { return (MedianData)EffectData!; } } // NRT - Set in constructor
+		public MedianData Data { get { return (MedianData) EffectData!; } } // NRT - Set in constructor
 
 		public MedianEffect ()
 		{

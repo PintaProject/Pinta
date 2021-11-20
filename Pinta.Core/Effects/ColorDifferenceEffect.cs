@@ -27,7 +27,7 @@ namespace Pinta.Core
 
 			// Cache these for a massive performance boost
 			int src_width = src.Width;
-			ColorBgra* src_data_ptr = (ColorBgra*)src.DataPtr;
+			ColorBgra* src_data_ptr = (ColorBgra*) src.DataPtr;
 
 			foreach (Gdk.Rectangle rect in rois) {
 				// loop through each line of target rectangle
@@ -63,15 +63,15 @@ namespace Pinta.Core
 								double weight = weights[fy][fx];
 								ColorBgra c = src.GetPointUnchecked (src_data_ptr, src_width, x - 1 + fx, y - 1 + fy);
 
-								rSum += weight * (double)c.R;
-								gSum += weight * (double)c.G;
-								bSum += weight * (double)c.B;
+								rSum += weight * (double) c.R;
+								gSum += weight * (double) c.G;
+								bSum += weight * (double) c.B;
 							}
 						}
 
-						int iRsum = (int)rSum;
-						int iGsum = (int)gSum;
-						int iBsum = (int)bSum;
+						int iRsum = (int) rSum;
+						int iGsum = (int) gSum;
+						int iBsum = (int) bSum;
 
 						if (iRsum > 255)
 							iRsum = 255;
@@ -91,7 +91,7 @@ namespace Pinta.Core
 						if (iBsum < 0)
 							iBsum = 0;
 
-						*dstPtr = ColorBgra.FromBgra ((byte)iBsum, (byte)iGsum, (byte)iRsum, 255);
+						*dstPtr = ColorBgra.FromBgra ((byte) iBsum, (byte) iGsum, (byte) iRsum, 255);
 						++dstPtr;
 					}
 				}

@@ -14,7 +14,7 @@ using Pinta.Core;
 namespace Pinta.Effects
 {
 	public class LevelsEffect : BaseEffect
-	{		
+	{
 		public override string Icon {
 			get { return "Menu.Adjustments.Levels.png"; }
 		}
@@ -34,20 +34,19 @@ namespace Pinta.Effects
 		public override string AdjustmentMenuKeyModifiers {
 			get { return "<Primary>"; }
 		}
-		
-		public LevelsData Data { get { return (LevelsData)EffectData!; } } // NRT - Set in constructor
-		
+
+		public LevelsData Data { get { return (LevelsData) EffectData!; } } // NRT - Set in constructor
+
 		public LevelsEffect ()
 		{
 			EffectData = new LevelsData ();
 		}
-		
+
 		public override bool LaunchConfiguration ()
 		{
-			using (var dialog = new LevelsDialog(Data))
-			{
+			using (var dialog = new LevelsDialog (Data)) {
 				dialog.Title = Name;
-				dialog.Icon = PintaCore.Resources.GetIcon(Icon);
+				dialog.Icon = PintaCore.Resources.GetIcon (Icon);
 
 				var response = Gtk.ResponseType.None;
 				while (response == Gtk.ResponseType.None) {
@@ -57,22 +56,22 @@ namespace Pinta.Effects
 				return response == Gtk.ResponseType.Ok;
 			}
 		}
-		
+
 		public override void Render (ImageSurface src, ImageSurface dest, Gdk.Rectangle[] rois)
 		{
 			Data.Levels.Apply (dest, src, rois);
 		}
 	}
-	
+
 	public class LevelsData : EffectData
 	{
 		public UnaryPixelOps.Level Levels { get; set; }
-		
+
 		public LevelsData ()
 		{
 			Levels = new UnaryPixelOps.Level ();
 		}
-		
+
 		public override EffectData Clone ()
 		{
 			return new LevelsData () { Levels = (UnaryPixelOps.Level) Levels.Clone () };

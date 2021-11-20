@@ -1,4 +1,4 @@
-﻿// 
+// 
 // DocumentCancelEventArgs.cs
 //  
 // Author:

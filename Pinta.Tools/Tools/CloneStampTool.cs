@@ -25,8 +25,8 @@
 // THE SOFTWARE.
 
 using System;
-using Pinta.Core;
 using Gdk;
+using Pinta.Core;
 
 namespace Pinta.Tools
 {

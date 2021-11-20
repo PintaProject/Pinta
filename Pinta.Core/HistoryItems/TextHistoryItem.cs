@@ -1,4 +1,4 @@
-﻿// 
+// 
 // TextHistoryItem.cs
 //  
 // Author:
@@ -51,64 +51,55 @@ namespace Pinta.Core
 		/// <param name="passedUserSurface">The stored UserLayer surface.</param>
 		/// <param name="passedTextEngine">The text engine being used.</param>
 		/// <param name="passedUserLayer">The UserLayer being modified.</param>
-		public TextHistoryItem(string icon, string text, ImageSurface passedTextSurface,
-		                       ImageSurface passedUserSurface, TextEngine passedTextEngine,
-		                       UserLayer passedUserLayer) : base(icon, text)
+		public TextHistoryItem (string icon, string text, ImageSurface passedTextSurface,
+				       ImageSurface passedUserSurface, TextEngine passedTextEngine,
+				       UserLayer passedUserLayer) : base (icon, text)
 		{
 			userLayer = passedUserLayer;
 
 
-			text_surface_diff = SurfaceDiff.Create(passedTextSurface, userLayer.TextLayer.Layer.Surface, true);
-			
-			if (text_surface_diff == null)
-			{
+			text_surface_diff = SurfaceDiff.Create (passedTextSurface, userLayer.TextLayer.Layer.Surface, true);
+
+			if (text_surface_diff == null) {
 				textSurface = passedTextSurface;
-			}
-			else
-			{
-				(passedTextSurface as IDisposable).Dispose();
+			} else {
+				(passedTextSurface as IDisposable).Dispose ();
 			}
 
 
-			user_surface_diff = SurfaceDiff.Create(passedUserSurface, userLayer.Surface, true);
+			user_surface_diff = SurfaceDiff.Create (passedUserSurface, userLayer.Surface, true);
 
-			if (user_surface_diff == null)
-			{
+			if (user_surface_diff == null) {
 				userSurface = passedUserSurface;
-			}
-			else
-			{
-				(passedUserSurface as IDisposable).Dispose();
+			} else {
+				(passedUserSurface as IDisposable).Dispose ();
 			}
 
 
 			tEngine = passedTextEngine;
 
-			textBounds = new Gdk.Rectangle(userLayer.textBounds.X, userLayer.textBounds.Y, userLayer.textBounds.Width, userLayer.textBounds.Height);
+			textBounds = new Gdk.Rectangle (userLayer.textBounds.X, userLayer.textBounds.Y, userLayer.textBounds.Width, userLayer.textBounds.Height);
 		}
 
-		public override void Undo()
+		public override void Undo ()
 		{
-			Swap();
+			Swap ();
 		}
 
-		public override void Redo()
+		public override void Redo ()
 		{
-			Swap();
+			Swap ();
 		}
 
-		private void Swap()
+		private void Swap ()
 		{
 			// Grab the original surface
 			ImageSurface surf = userLayer.TextLayer.Layer.Surface;
 
-			if (text_surface_diff != null)
-			{
-				text_surface_diff.ApplyAndSwap(surf);
-				PintaCore.Workspace.Invalidate(text_surface_diff.GetBounds());
-			}
-			else
-			{
+			if (text_surface_diff != null) {
+				text_surface_diff.ApplyAndSwap (surf);
+				PintaCore.Workspace.Invalidate (text_surface_diff.GetBounds ());
+			} else {
 				// Undo to the "old" surface
 				userLayer.TextLayer.Layer.Surface = textSurface!; // NRT - Will be not-null if text_surface_diff is null
 
@@ -121,13 +112,10 @@ namespace Pinta.Core
 			// Grab the original surface
 			surf = userLayer.Surface;
 
-			if (user_surface_diff != null)
-			{
-				user_surface_diff.ApplyAndSwap(surf);
-				PintaCore.Workspace.Invalidate(user_surface_diff.GetBounds());
-			}
-			else
-			{
+			if (user_surface_diff != null) {
+				user_surface_diff.ApplyAndSwap (surf);
+				PintaCore.Workspace.Invalidate (user_surface_diff.GetBounds ());
+			} else {
 				// Undo to the "old" surface
 				userLayer.Surface = userSurface!; // NRT - Will be not-null if user_surface_diff is null
 
@@ -138,7 +126,7 @@ namespace Pinta.Core
 
 
 			//Redraw everything since surfaces were swapped.
-			PintaCore.Workspace.Invalidate();
+			PintaCore.Workspace.Invalidate ();
 
 
 
@@ -155,15 +143,15 @@ namespace Pinta.Core
 			userLayer.textBounds = oldTextBounds;
 		}
 
-		public override void Dispose()
+		public override void Dispose ()
 		{
 			// Free up native surface
 			if (textSurface != null)
-				(textSurface as IDisposable).Dispose();
+				(textSurface as IDisposable).Dispose ();
 
 			// Free up native surface
 			if (userSurface != null)
-				(userSurface as IDisposable).Dispose();
+				(userSurface as IDisposable).Dispose ();
 		}
 	}
 }

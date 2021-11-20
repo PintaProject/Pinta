@@ -31,9 +31,9 @@ namespace Pinta
 {
 	public static class GtkExtensions
 	{
-		public static ToolButton CreateDockToolBarItem(this Pinta.Core.Command action)
+		public static ToolButton CreateDockToolBarItem (this Pinta.Core.Command action)
 		{
-			var item = action.CreateToolBarItem();
+			var item = action.CreateToolBarItem ();
 			// Don't show the full text for "Undo" and similar buttons.
 			item.IsImportant = false;
 

@@ -24,10 +24,10 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 // THE SOFTWARE.
 
+using System;
 using Cairo;
 using Gtk;
 using Pinta.Core;
-using System;
 
 namespace Pinta.Gui.Widgets
 {

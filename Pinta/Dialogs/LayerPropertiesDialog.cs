@@ -34,7 +34,7 @@ using Pinta.Core;
 namespace Pinta
 {
 	public class LayerPropertiesDialog : Dialog
-	{		
+	{
 		private LayerProperties initial_properties;
 
 		private double opacity;
@@ -50,29 +50,29 @@ namespace Pinta
 
 		public LayerPropertiesDialog () : base (Translations.GetString ("Layer Properties"),
 			PintaCore.Chrome.MainWindow, DialogFlags.Modal,
-            Core.GtkExtensions.DialogButtonsCancelOk())
-        {
- 			var doc = PintaCore.Workspace.ActiveDocument;
+	    Core.GtkExtensions.DialogButtonsCancelOk ())
+		{
+			var doc = PintaCore.Workspace.ActiveDocument;
 
-           Build ();
+			Build ();
 
 			IconName = Resources.Icons.LayerProperties;
-			
+
 			name = doc.Layers.CurrentUserLayer.Name;
 			hidden = doc.Layers.CurrentUserLayer.Hidden;
 			opacity = doc.Layers.CurrentUserLayer.Opacity;
 			blendmode = doc.Layers.CurrentUserLayer.BlendMode;
 
-			initial_properties = new LayerProperties(
-				name,				
+			initial_properties = new LayerProperties (
+				name,
 				hidden,
 				opacity,
 				blendmode);
-			
+
 			layerNameEntry.Text = initial_properties.Name;
 			visibilityCheckbox.Active = !initial_properties.Hidden;
-			opacitySpinner.Value = (int)(initial_properties.Opacity * 100);
-			opacitySlider.Value = (int)(initial_properties.Opacity * 100);
+			opacitySpinner.Value = (int) (initial_properties.Opacity * 100);
+			opacitySlider.Value = (int) (initial_properties.Opacity * 100);
 
 			var all_blendmodes = UserBlendOps.GetAllBlendModeNames ().ToList ();
 			var index = all_blendmodes.IndexOf (UserBlendOps.GetBlendModeName (blendmode));
@@ -89,7 +89,7 @@ namespace Pinta
 			layerNameEntry.ActivatesDefault = true;
 			opacitySpinner.ActivatesDefault = true;
 		}
-		
+
 		public bool AreLayerPropertiesUpdated {
 			get {
 				return initial_properties.Opacity != opacity
@@ -98,19 +98,19 @@ namespace Pinta
 					|| initial_properties.BlendMode != blendmode;
 			}
 		}
-		
-		public LayerProperties InitialLayerProperties { 
+
+		public LayerProperties InitialLayerProperties {
 			get {
 				return initial_properties;
 			}
-		}		
-		
-		public LayerProperties UpdatedLayerProperties { 
+		}
+
+		public LayerProperties UpdatedLayerProperties {
 			get {
 				return new LayerProperties (name, hidden, opacity, blendmode);
 			}
 		}
-		
+
 		#region Private Methods
 		private void OnLayerNameChanged (object? sender, EventArgs e)
 		{
@@ -119,7 +119,7 @@ namespace Pinta
 			name = layerNameEntry.Text;
 			doc.Layers.CurrentUserLayer.Name = name;
 		}
-		
+
 		private void OnVisibilityToggled (object? sender, EventArgs e)
 		{
 			var doc = PintaCore.Workspace.ActiveDocument;
@@ -132,7 +132,7 @@ namespace Pinta
 			}
 			PintaCore.Workspace.Invalidate ();
 		}
-		
+
 		private void OnOpacitySliderChanged (object? sender, EventArgs e)
 		{
 			opacitySpinner.Value = opacitySlider.Value;
@@ -144,7 +144,7 @@ namespace Pinta
 			opacitySlider.Value = opacitySpinner.Value;
 			UpdateOpacity ();
 		}
-		
+
 		private void UpdateOpacity ()
 		{
 			var doc = PintaCore.Workspace.ActiveDocument;
@@ -156,7 +156,7 @@ namespace Pinta
 				//Update Opacity for SelectionLayer and force redraw			
 				doc.Layers.SelectionLayer.Opacity = doc.Layers.CurrentUserLayer.Opacity;
 			}
-			PintaCore.Workspace.Invalidate ();		
+			PintaCore.Workspace.Invalidate ();
 		}
 
 		private void OnBlendModeChanged (object? sender, EventArgs e)
@@ -167,9 +167,9 @@ namespace Pinta
 			doc.Layers.CurrentUserLayer.BlendMode = blendmode;
 			if (doc.Layers.SelectionLayer != null) {
 				//Update BlendMode for SelectionLayer and force redraw
-				doc.Layers.SelectionLayer.BlendMode = doc.Layers.CurrentUserLayer.BlendMode;	 
+				doc.Layers.SelectionLayer.BlendMode = doc.Layers.CurrentUserLayer.BlendMode;
 			}
-			PintaCore.Workspace.Invalidate ();		
+			PintaCore.Workspace.Invalidate ();
 		}
 
 		[MemberNotNull (nameof (layerNameEntry), nameof (visibilityCheckbox), nameof (blendComboBox), nameof (opacitySpinner), nameof (opacitySlider))]
@@ -179,7 +179,7 @@ namespace Pinta
 			DefaultHeight = 224;
 			BorderWidth = 6;
 			ContentArea.Spacing = 10;
-			
+
 			// Layer name
 			var box1 = new HBox ();
 
@@ -205,9 +205,9 @@ namespace Pinta
 			box2.Spacing = 6;
 			box2.PackStart (new Label (Translations.GetString ("Blend Mode") + ":"), false, false, 0);
 
-			blendComboBox = new ComboBoxText();
-			foreach (string name in UserBlendOps.GetAllBlendModeNames())
-				blendComboBox.AppendText(name);
+			blendComboBox = new ComboBoxText ();
+			foreach (string name in UserBlendOps.GetAllBlendModeNames ())
+				blendComboBox.AppendText (name);
 
 			box2.PackStart (blendComboBox, true, true, 0);
 

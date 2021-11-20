@@ -24,76 +24,76 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 // THE SOFTWARE.
 using System;
-using System.Runtime.InteropServices;
 using System.Collections.Generic;
+using System.Runtime.InteropServices;
 
 namespace Pinta.MacInterop
 {
 	internal static class AppleEvent
 	{
 		const string AELib = Carbon.CarbonLib;
-		
+
 		//FIXME: is "int" correct for size?
 		[DllImport (AELib)]
 		static extern AEDescStatus AECreateDesc (OSType typeCode, IntPtr dataPtr, int dataSize, out AEDesc desc);
-		
+
 		[DllImport (AELib)]
 		static extern AEDescStatus AECreateDesc (OSType typeCode, byte[] data, int dataSize, out AEDesc desc);
-				
+
 		[DllImport (AELib)]
 		static extern AEDescStatus AEGetNthPtr (ref AEDesc descList, int index, OSType desiredType, uint keyword,
-		                                        out CarbonEventParameterType actualType, IntPtr buffer, int bufferSize, out int actualSize);
-		
+							out CarbonEventParameterType actualType, IntPtr buffer, int bufferSize, out int actualSize);
+
 		[DllImport (AELib)]
 		static extern AEDescStatus AEGetNthPtr (ref AEDesc descList, int index, OSType desiredType, uint keyword,
-		                                        uint zero, IntPtr buffer, int bufferSize, int zero2);
-		
+							uint zero, IntPtr buffer, int bufferSize, int zero2);
+
 		[DllImport (AELib)]
 		static extern AEDescStatus AECountItems (ref AEDesc descList, out int count); //return an OSErr
-		
+
 		[DllImport (AELib)]
 		static extern AEDescStatus AEGetNthPtr (ref AEDesc descList, int index, OSType desiredType, uint keyword,
-		                                        uint zero, out IntPtr outPtr, int bufferSize, int zero2);
-		
+							uint zero, out IntPtr outPtr, int bufferSize, int zero2);
+
 		[DllImport (AELib)]
 		public static extern AEDescStatus AEDisposeDesc (ref AEDesc desc);
-		
+
 		[DllImport (AELib)]
-		public static extern AEDescStatus AESizeOfNthItem  (ref AEDesc descList, int index, ref OSType type, out int size);
-		
+		public static extern AEDescStatus AESizeOfNthItem (ref AEDesc descList, int index, ref OSType type, out int size);
+
 		[DllImport (AELib)]
 		static extern AEDescStatus AEGetDescData (ref AEDesc desc, IntPtr ptr, int maximumSize);
-		
+
 		[DllImport (AELib)]
 		static extern int AEGetDescDataSize (ref AEDesc desc);
-		
+
 		[DllImport (AELib)]
 		static extern AEDescStatus AECoerceDesc (ref AEDesc theAEDesc, DescType toType, ref AEDesc result);
-		
+
 		public static void AECreateDesc (OSType typeCode, byte[] data, out AEDesc result)
 		{
 			CheckReturn (AECreateDesc (typeCode, data, data.Length, out result));
 		}
-		
+
 		public static void AECreateDescUtf8 (string value, out AEDesc result)
 		{
-			var type = (OSType)(int)CarbonEventParameterType.UTF8Text;
+			var type = (OSType) (int) CarbonEventParameterType.UTF8Text;
 			var bytes = System.Text.Encoding.UTF8.GetBytes (value);
 			CheckReturn (AECreateDesc (type, bytes, bytes.Length, out result));
 		}
-		
+
 		public static void AECreateDescAscii (string value, out AEDesc result)
 		{
-			var type = (OSType)(int)CarbonEventParameterType.Char;
+			var type = (OSType) (int) CarbonEventParameterType.Char;
 			var bytes = System.Text.Encoding.ASCII.GetBytes (value);
 			CheckReturn (AECreateDesc (type, bytes, bytes.Length, out result));
 		}
-		
+
 		public static void AECreateDescNull (out AEDesc desc)
 		{
-			CheckReturn (AECreateDesc ((OSType)0, IntPtr.Zero, 0, out desc));
+			CheckReturn (AECreateDesc ((OSType) 0, IntPtr.Zero, 0, out desc));
 		}
-		
+
 		public static int AECountItems (ref AEDesc descList)
 		{
 			int count;
@@ -107,25 +107,25 @@ namespace Pinta.MacInterop
 			IntPtr bufferPtr = Marshal.AllocHGlobal (len);
 			try {
 				CheckReturn (AEGetNthPtr (ref descList, index, desiredType, 0, 0, bufferPtr, len, 0));
-				T val = (T)Marshal.PtrToStructure (bufferPtr, typeof (T))!; // NRT - Not sure
+				T val = (T) Marshal.PtrToStructure (bufferPtr, typeof (T))!; // NRT - Not sure
 				return val;
-			} finally{ 
+			} finally {
 				Marshal.FreeHGlobal (bufferPtr);
 			}
 		}
-		
+
 		public static IntPtr AEGetNthPtr (ref AEDesc descList, int index, OSType desiredType)
 		{
 			IntPtr ret;
 			CheckReturn (AEGetNthPtr (ref descList, index, desiredType, 0, 0, out ret, 4, 0));
 			return ret;
 		}
-		
+
 		//FIXME: this might not work in some encodings. need to test more.
 		static string? GetUtf8StringFromAEPtr (ref AEDesc descList, int index)
 		{
 			int size;
-			var type = (OSType)(int)CarbonEventParameterType.UnicodeText;
+			var type = (OSType) (int) CarbonEventParameterType.UnicodeText;
 			if (AESizeOfNthItem (ref descList, index, ref type, out size) == AEDescStatus.Ok) {
 				IntPtr buffer = Marshal.AllocHGlobal (size);
 				try {
@@ -137,7 +137,7 @@ namespace Pinta.MacInterop
 			}
 			return null;
 		}
-		
+
 		public static string? GetStringFromAEDesc (ref AEDesc desc)
 		{
 			int size = AEGetDescDataSize (ref desc);
@@ -152,7 +152,7 @@ namespace Pinta.MacInterop
 			}
 			return null;
 		}
-		
+
 		public static IList<string> GetUtf8StringListFromAEDesc (ref AEDesc list, bool skipEmpty)
 		{
 			long count = AppleEvent.AECountItems (ref list);
@@ -164,35 +164,35 @@ namespace Pinta.MacInterop
 			}
 			return items;
 		}
-		
-		public static T[] GetListFromAEDesc<T,TRef> (ref AEDesc list, AEDescValueSelector<TRef,T> sel, OSType type)
+
+		public static T[] GetListFromAEDesc<T, TRef> (ref AEDesc list, AEDescValueSelector<TRef, T> sel, OSType type)
 			where TRef : struct
 		{
 			long count = AppleEvent.AECountItems (ref list);
 			T[] arr = new T[count];
 			for (int i = 1; i <= count; i++) {
 				TRef r = AppleEvent.AEGetNthPtr<TRef> (ref list, i, type);
-				arr [i - 1] = sel (ref r);
+				arr[i - 1] = sel (ref r);
 			}
 			return arr;
 		}
-		
+
 		static void CheckReturn (AEDescStatus status)
 		{
 			if (status != AEDescStatus.Ok)
-			throw new Exception ("Failed with code " + status.ToString ());
+				throw new Exception ("Failed with code " + status.ToString ());
 		}
 	}
-	
-	public delegate T AEDescValueSelector<TRef,T> (ref TRef desc);
-	
-	[StructLayout(LayoutKind.Sequential, Pack = 2)]
+
+	public delegate T AEDescValueSelector<TRef, T> (ref TRef desc);
+
+	[StructLayout (LayoutKind.Sequential, Pack = 2)]
 	public struct AEDesc
 	{
 		public uint descriptorType;
 		public IntPtr dataHandle;
 	}
-	
+
 	public enum AEDescStatus
 	{
 		Ok = 0,
@@ -203,8 +203,9 @@ namespace Pinta.MacInterop
 		NotAEDesc = -1704,
 		ReplyNotArrived = -1718,
 	}
-	
-	public enum AESendMode {
+
+	public enum AESendMode
+	{
 		NoReply = 0x00000001,
 		QueueReply = 0x00000002,
 		WaitReply = 0x00000003,
@@ -221,8 +222,8 @@ namespace Pinta.MacInterop
 
 	struct DescType
 	{
-		#pragma warning disable 649
+#pragma warning disable 649
 		public OSType Value;
-		#pragma warning disable 649
+#pragma warning disable 649
 	}
 }

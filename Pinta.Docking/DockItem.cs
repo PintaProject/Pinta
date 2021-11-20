@@ -27,81 +27,78 @@ using Gtk;
 
 namespace Pinta.Docking
 {
-    /// <summary>
-    /// A dock item contains a single child widget, and can be docked at
-    /// various locations.
-    /// </summary>
-    public class DockItem : VBox
-    {
-        private Label label_widget;
+	/// <summary>
+	/// A dock item contains a single child widget, and can be docked at
+	/// various locations.
+	/// </summary>
+	public class DockItem : VBox
+	{
+		private Label label_widget;
 
-        /// <summary>
-        /// Unique identifier for the dock item. Used e.g. when saving the dock layout to disk.
-        /// </summary>
-        public string UniqueName { get; private set; }
+		/// <summary>
+		/// Unique identifier for the dock item. Used e.g. when saving the dock layout to disk.
+		/// </summary>
+		public string UniqueName { get; private set; }
 
-        /// <summary>
-        /// Visible label for the dock item.
-        /// </summary>
-        public string Label { get => label_widget.Text; set => label_widget.Text = value; }
+		/// <summary>
+		/// Visible label for the dock item.
+		/// </summary>
+		public string Label { get => label_widget.Text; set => label_widget.Text = value; }
 
-        /// <summary>
-        /// Triggered when the minimize button is pressed.
-        /// </summary>
-        public event EventHandler? Minimized;
+		/// <summary>
+		/// Triggered when the minimize button is pressed.
+		/// </summary>
+		public event EventHandler? Minimized;
 
-        /// <summary>
-        /// Triggered when the maximize button is pressed.
-        /// </summary>
-        public event EventHandler? Maximized;
+		/// <summary>
+		/// Triggered when the maximize button is pressed.
+		/// </summary>
+		public event EventHandler? Maximized;
 
-        public DockItem(Widget child, string unique_name, bool locked = false)
-        {
-            UniqueName = unique_name;
+		public DockItem (Widget child, string unique_name, bool locked = false)
+		{
+			UniqueName = unique_name;
 
-            label_widget = new Label();
-            if (!locked)
-            {
-                const int padding = 8;
-                var title_layout = new HBox();
-                title_layout.PackStart(label_widget, false, false, padding);
+			label_widget = new Label ();
+			if (!locked) {
+				const int padding = 8;
+				var title_layout = new HBox ();
+				title_layout.PackStart (label_widget, false, false, padding);
 
-                var minimize_button = new Button("window-minimize-symbolic", IconSize.Button) { Relief = ReliefStyle.None };
-                var maximize_button = new Button("window-maximize-symbolic", IconSize.Button) { Relief = ReliefStyle.None };
+				var minimize_button = new Button ("window-minimize-symbolic", IconSize.Button) { Relief = ReliefStyle.None };
+				var maximize_button = new Button ("window-maximize-symbolic", IconSize.Button) { Relief = ReliefStyle.None };
 
-                var button_stack = new Stack();
-                button_stack.Add(minimize_button);
-                button_stack.Add(maximize_button);
-                title_layout.PackEnd(button_stack, false, false, 0);
+				var button_stack = new Stack ();
+				button_stack.Add (minimize_button);
+				button_stack.Add (maximize_button);
+				title_layout.PackEnd (button_stack, false, false, 0);
 
-                minimize_button.Clicked += (o, args) =>
-                {
-                    button_stack.VisibleChild = maximize_button;
-                    Minimized?.Invoke(this, new EventArgs());
-                };
+				minimize_button.Clicked += (o, args) => {
+					button_stack.VisibleChild = maximize_button;
+					Minimized?.Invoke (this, new EventArgs ());
+				};
 
-                maximize_button.Clicked += (o, args) =>
-                {
-                    button_stack.VisibleChild = minimize_button;
-                    Maximized?.Invoke(this, new EventArgs());
-                };
+				maximize_button.Clicked += (o, args) => {
+					button_stack.VisibleChild = minimize_button;
+					Maximized?.Invoke (this, new EventArgs ());
+				};
 
-                PackStart(title_layout, false, false, 0);
-            }
+				PackStart (title_layout, false, false, 0);
+			}
 
-            PackStart(child, true, true, 0);
+			PackStart (child, true, true, 0);
 
-            // TODO - support dragging into floating panel?
-        }
+			// TODO - support dragging into floating panel?
+		}
 
-        /// <summary>
-        /// Create a toolbar and add it to the bottom of the dock item.
-        /// </summary>
-        public Toolbar AddToolBar()
-        {
-            var toolbar = new Toolbar();
-            PackStart(toolbar, false, false, 0);
-            return toolbar;
-        }
-    }
+		/// <summary>
+		/// Create a toolbar and add it to the bottom of the dock item.
+		/// </summary>
+		public Toolbar AddToolBar ()
+		{
+			var toolbar = new Toolbar ();
+			PackStart (toolbar, false, false, 0);
+			return toolbar;
+		}
+	}
 }

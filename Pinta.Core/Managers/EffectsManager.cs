@@ -1,4 +1,4 @@
-﻿// 
+// 
 // EffectsManager.cs
 //  
 // Author:
@@ -59,18 +59,17 @@ namespace Pinta.Core
 			// Create a gtk action for each adjustment
 			var act = new Command (adjustment.GetType ().Name, adjustment.Name + (adjustment.IsConfigurable ? Translations.GetString ("...") : ""), string.Empty, adjustment.Icon);
 			act.Activated += (o, args) => { PintaCore.LivePreview.Start (adjustment); };
-			
+
 			PintaCore.Actions.Adjustments.Actions.Add (act);
 
 			// If no key is specified, don't use an accelerated menu item
 			if (adjustment.AdjustmentMenuKey is null)
-				PintaCore.Chrome.Application.AddAction(act);
-			else
-			{
-				PintaCore.Chrome.Application.AddAccelAction(act, adjustment.AdjustmentMenuKeyModifiers + adjustment.AdjustmentMenuKey);
+				PintaCore.Chrome.Application.AddAction (act);
+			else {
+				PintaCore.Chrome.Application.AddAccelAction (act, adjustment.AdjustmentMenuKeyModifiers + adjustment.AdjustmentMenuKey);
 			}
 
-			PintaCore.Chrome.AdjustmentsMenu.AppendMenuItemSorted(act.CreateMenuItem());
+			PintaCore.Chrome.AdjustmentsMenu.AppendMenuItemSorted (act.CreateMenuItem ());
 
 			adjustments.Add (adjustment, act);
 		}
@@ -89,11 +88,11 @@ namespace Pinta.Core
 
 			// Create a gtk action and menu item for each effect
 			var act = new Command (effect.GetType ().Name, effect.Name + (effect.IsConfigurable ? Translations.GetString ("...") : ""), string.Empty, effect.Icon);
-			PintaCore.Chrome.Application.AddAction(act);
+			PintaCore.Chrome.Application.AddAction (act);
 			act.Activated += (o, args) => { PintaCore.LivePreview.Start (effect); };
-			
+
 			PintaCore.Actions.Effects.AddEffect (effect.EffectMenuCategory, act);
-			
+
 			effects.Add (effect, act);
 		}
 
@@ -127,7 +126,7 @@ namespace Pinta.Core
 
 					adjustments.Remove (adjustment);
 					PintaCore.Actions.Adjustments.Actions.Remove (action);
-					PintaCore.Chrome.AdjustmentsMenu.Remove(action);
+					PintaCore.Chrome.AdjustmentsMenu.Remove (action);
 
 					return;
 				}

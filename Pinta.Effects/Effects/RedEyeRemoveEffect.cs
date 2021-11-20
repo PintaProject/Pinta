@@ -9,16 +9,15 @@
 
 using System;
 using Cairo;
-
-using Pinta.Gui.Widgets;
 using Pinta.Core;
+using Pinta.Gui.Widgets;
 
 namespace Pinta.Effects
 {
 	public class RedEyeRemoveEffect : BaseEffect
 	{
 		private UnaryPixelOp? op;
-		
+
 		public override string Icon {
 			get { return "Menu.Effects.Photo.RedEyeRemove.png"; }
 		}
@@ -35,45 +34,42 @@ namespace Pinta.Effects
 			get { return Translations.GetString ("Photo"); }
 		}
 
-		public RedEyeRemoveData Data { get { return (RedEyeRemoveData)EffectData!; } } // NRT - Set in constructor
-		
+		public RedEyeRemoveData Data { get { return (RedEyeRemoveData) EffectData!; } } // NRT - Set in constructor
+
 		public RedEyeRemoveEffect ()
 		{
 			EffectData = new RedEyeRemoveData ();
 		}
-		
+
 		public override bool LaunchConfiguration ()
-        {
-            using (var dialog = new SimpleEffectDialog(Name, PintaCore.Resources.GetIcon(Icon), Data, new PintaLocalizer()))
-            {
-                // Hookup event handling for live preview.
-                dialog.EffectDataChanged += (o, e) =>
-                {
-                    if (EffectData != null)
-                    {
-                        op = new UnaryPixelOps.RedEyeRemove(Data.Tolerance, Data.Saturation);
-                        EffectData.FirePropertyChanged(e.PropertyName);
-                    }
-                };
+		{
+			using (var dialog = new SimpleEffectDialog (Name, PintaCore.Resources.GetIcon (Icon), Data, new PintaLocalizer ())) {
+				// Hookup event handling for live preview.
+				dialog.EffectDataChanged += (o, e) => {
+					if (EffectData != null) {
+						op = new UnaryPixelOps.RedEyeRemove (Data.Tolerance, Data.Saturation);
+						EffectData.FirePropertyChanged (e.PropertyName);
+					}
+				};
 
-                int response = dialog.Run();
-                bool ret = (response == (int)Gtk.ResponseType.Ok);
+				int response = dialog.Run ();
+				bool ret = (response == (int) Gtk.ResponseType.Ok);
 
-                return ret;
-            }
-        }
+				return ret;
+			}
+		}
 
-        public unsafe override void Render (ImageSurface src, ImageSurface dest, Gdk.Rectangle[] rois)
+		public unsafe override void Render (ImageSurface src, ImageSurface dest, Gdk.Rectangle[] rois)
 		{
 			op?.Apply (dest, src, rois);
 		}
 	}
-	
+
 	public class RedEyeRemoveData : EffectData
 	{
 		[Caption ("Tolerance"), MinimumValue (0), MaximumValue (100)]
 		public int Tolerance = 70;
-		
+
 		[MinimumValue (0), MaximumValue (100)]
 		[Caption ("Saturation Percentage")]
 		[Hint ("Hint: For best results, first use selection tools to select each eye.")]

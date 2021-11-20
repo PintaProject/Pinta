@@ -9,8 +9,8 @@
 
 using System;
 using Cairo;
-using Pinta.Gui.Widgets;
 using Pinta.Core;
+using Pinta.Gui.Widgets;
 
 namespace Pinta.Effects
 {
@@ -20,7 +20,7 @@ namespace Pinta.Effects
 		private int divide;
 		private byte[]? rgbTable;
 		private bool table_calculated;
-		
+
 		public override string Icon {
 			get { return "Menu.Adjustments.BrightnessAndContrast.png"; }
 		}
@@ -37,8 +37,8 @@ namespace Pinta.Effects
 			get { return "B"; }
 		}
 
-		public BrightnessContrastData Data { get { return (BrightnessContrastData)EffectData!; } } // NRT - Set in constructor
-		
+		public BrightnessContrastData Data { get { return (BrightnessContrastData) EffectData!; } } // NRT - Set in constructor
+
 		public BrightnessContrastEffect ()
 		{
 			EffectData = new BrightnessContrastData ();
@@ -52,7 +52,7 @@ namespace Pinta.Effects
 		{
 			table_calculated = false;
 		}
-		
+
 		public override bool LaunchConfiguration ()
 		{
 			return EffectHelper.LaunchSimpleEffectDialog (this);
@@ -140,10 +140,10 @@ namespace Pinta.Effects
 					}
 				}
 			}
-			
+
 			table_calculated = true;
 		}
-		
+
 		public class BrightnessContrastData : EffectData
 		{
 			private int brightness = 0;

@@ -1,4 +1,4 @@
-﻿// 
+// 
 // TextMode.cs
 //  
 // Author:

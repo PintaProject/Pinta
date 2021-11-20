@@ -25,12 +25,11 @@
 // THE SOFTWARE.
 
 using System;
-using Gtk;
 using System.Collections.Generic;
-using Cairo;
-
-using Pinta.Core;
 using System.Diagnostics.CodeAnalysis;
+using Cairo;
+using Gtk;
+using Pinta.Core;
 
 namespace Pinta.Effects
 {
@@ -46,28 +45,28 @@ namespace Pinta.Effects
 		private Button buttonReset;
 		private Label labelTip;
 
-		private class ControlPointDrawingInfo 
+		private class ControlPointDrawingInfo
 		{
 			public Cairo.Color Color { get; set; }
 			public bool IsActive { get; set; }
 		}
-		
+
 		//drawing area width and height
 		private const int size = 256;
 		//control point radius
 		private const int radius = 6;
-		
+
 		private int channels;
 		//last added control point x;
 		private int last_cpx;
-		
+
 		//control points for luminosity transfer mode
 		private SortedList<int, int>[] luminosity_cps = null!; // NRT - Set via code flow
-		//control points for rg transfer mode
+								       //control points for rg transfer mode
 		private SortedList<int, int>[] rgb_cps = null!;
-		
-		public SortedList<int, int>[] ControlPoints { 
-			get { 
+
+		public SortedList<int, int>[] ControlPoints {
+			get {
 				return (Mode == ColorTransferMode.Luminosity) ? luminosity_cps : rgb_cps;
 			}
 			set {
@@ -77,25 +76,25 @@ namespace Pinta.Effects
 					rgb_cps = value;
 			}
 		}
-		
+
 		public ColorTransferMode Mode {
-			get { 
-				return (comboMap.Active == 0) ? 
-						ColorTransferMode.Rgb : 
+			get {
+				return (comboMap.Active == 0) ?
+						ColorTransferMode.Rgb :
 						ColorTransferMode.Luminosity;
 			}
 		}
 
 		public CurvesData EffectData { get; private set; }
-		
+
 		public CurvesDialog (CurvesData effectData) : base (Translations.GetString ("Curves"), PintaCore.Chrome.MainWindow,
-		                                                    DialogFlags.Modal,
-															GtkExtensions.DialogButtonsCancelOk())
+								    DialogFlags.Modal,
+															GtkExtensions.DialogButtonsCancelOk ())
 		{
 			Build ();
-			
+
 			EffectData = effectData;
-			
+
 			comboMap.Changed += HandleComboMapChanged;
 			buttonReset.Clicked += HandleButtonResetClicked;
 			checkRed.Toggled += HandleCheckToggled;
@@ -105,10 +104,10 @@ namespace Pinta.Effects
 			drawing.MotionNotifyEvent += HandleDrawingMotionNotifyEvent;
 			drawing.LeaveNotifyEvent += HandleDrawingLeaveNotifyEvent;
 			drawing.ButtonPressEvent += HandleDrawingButtonPressEvent;
-			
+
 			ResetControlPoints ();
 		}
-		
+
 		private void UpdateLivePreview (string propertyName)
 		{
 			if (EffectData != null) {
@@ -116,8 +115,8 @@ namespace Pinta.Effects
 				EffectData.Mode = Mode;
 				EffectData.FirePropertyChanged (propertyName);
 			}
-		}		
-		
+		}
+
 		private void HandleCheckToggled (object? o, EventArgs args)
 		{
 			InvalidateDrawing ();
@@ -129,82 +128,82 @@ namespace Pinta.Effects
 			InvalidateDrawing ();
 		}
 
-		private void ResetControlPoints()
+		private void ResetControlPoints ()
 		{
 			channels = (Mode == ColorTransferMode.Luminosity) ? 1 : 3;
 			ControlPoints = new SortedList<int, int>[channels];
-			
+
 			for (int i = 0; i < channels; i++) {
 				SortedList<int, int> list = new SortedList<int, int> ();
-				
+
 				list.Add (0, 0);
 				list.Add (size - 1, size - 1);
-				ControlPoints [i] = list;
+				ControlPoints[i] = list;
 			}
-			
+
 			UpdateLivePreview ("ControlPoints");
 		}
-		
+
 		private void HandleComboMapChanged (object? sender, EventArgs e)
 		{
 			if (ControlPoints == null)
 				ResetControlPoints ();
 			else
 				UpdateLivePreview ("Mode");
-			
+
 			bool visible = (Mode == ColorTransferMode.Rgb);
 			checkRed.Visible = checkGreen.Visible = checkBlue.Visible = visible;
-			
+
 			InvalidateDrawing ();
 		}
-		
+
 		private void InvalidateDrawing ()
 		{
 			//to invalidate whole drawing area
-			drawing.Window.Invalidate();		
+			drawing.Window.Invalidate ();
 		}
-		
+
 		private void HandleDrawingLeaveNotifyEvent (object? o, Gtk.LeaveNotifyEventArgs args)
 		{
 			InvalidateDrawing ();
 		}
-		
-		private IEnumerable<SortedList<int,int>> GetActiveControlPoints ()
+
+		private IEnumerable<SortedList<int, int>> GetActiveControlPoints ()
 		{
 			if (Mode == ColorTransferMode.Luminosity)
-				yield return ControlPoints [0];
+				yield return ControlPoints[0];
 			else {
 				if (checkRed.Active)
-					yield return ControlPoints [0];
-				
+					yield return ControlPoints[0];
+
 				if (checkGreen.Active)
-					yield return ControlPoints [1];
-				
+					yield return ControlPoints[1];
+
 				if (checkBlue.Active)
-					yield return ControlPoints [2];
+					yield return ControlPoints[2];
 			}
 		}
-				
+
 		private void AddControlPoint (int x, int y)
 		{
 			foreach (var controlPoints in GetActiveControlPoints ()) {
-				controlPoints [x] = size - 1 - y;
+				controlPoints[x] = size - 1 - y;
 			}
-			
+
 			last_cpx = x;
-			
+
 			UpdateLivePreview ("ControlPoints");
 		}
-		
+
 		private void HandleDrawingMotionNotifyEvent (object o, Gtk.MotionNotifyEventArgs args)
-		{	
+		{
 			int x, y;
 			Gdk.ModifierType mask;
-			GdkExtensions.GetWindowPointer (drawing.Window, out x, out y, out mask); 			
-			
-			if (x < 0 || x >= size || y < 0 || y >=size)
+			GdkExtensions.GetWindowPointer (drawing.Window, out x, out y, out mask);
+
+			if (x < 0 || x >= size || y < 0 || y >= size)
 				return;
-			
+
 			if (args.Event.State == Gdk.ModifierType.Button1Mask) {
 				// first and last control point cannot be removed
 				if (last_cpx != 0 && last_cpx != size - 1) {
@@ -212,37 +211,37 @@ namespace Pinta.Effects
 						if (controlPoints.ContainsKey (last_cpx))
 							controlPoints.Remove (last_cpx);
 					}
-				}	
-				
+				}
+
 				AddControlPoint (x, y);
 			}
-			
-			InvalidateDrawing ();	
+
+			InvalidateDrawing ();
 		}
-		
+
 		private void HandleDrawingButtonPressEvent (object o, Gtk.ButtonPressEventArgs args)
 		{
 			int x, y;
 			Gdk.ModifierType mask;
-			GdkExtensions.GetWindowPointer (drawing.Window, out x, out y, out mask); 
-			
+			GdkExtensions.GetWindowPointer (drawing.Window, out x, out y, out mask);
+
 			if (args.Event.Button == 1) {
 				AddControlPoint (x, y);
-			} 
-			
+			}
+
 			// user pressed right button
 			if (args.Event.Button == 3) {
 				foreach (var controlPoints in GetActiveControlPoints ()) {
 					for (int i = 0; i < controlPoints.Count; i++) {
-						int cpx = controlPoints.Keys [i];
-						int cpy = size - 1 - (int)controlPoints.Values [i];
-					
+						int cpx = controlPoints.Keys[i];
+						int cpy = size - 1 - (int) controlPoints.Values[i];
+
 						//we cannot allow user to remove first or last control point
 						if (cpx == 0 && cpy == size - 1)
-							continue;	
-						if (cpx == size -1 && cpy == 0)
 							continue;
-						    
+						if (cpx == size - 1 && cpy == 0)
+							continue;
+
 						if (CheckControlPointProximity (cpx, cpy, x, y)) {
 							controlPoints.RemoveAt (i);
 							break;
@@ -250,8 +249,8 @@ namespace Pinta.Effects
 					}
 				}
 			}
-			
-			InvalidateDrawing();
+
+			InvalidateDrawing ();
 		}
 
 		private void DrawBorder (Context g)
@@ -260,91 +259,95 @@ namespace Pinta.Effects
 			g.LineWidth = 1;
 			g.Stroke ();
 		}
-		
+
 		private void DrawPointerCross (Context g)
 		{
 			int x, y;
 			Gdk.ModifierType mask;
-			GdkExtensions.GetWindowPointer (drawing.Window, out x, out y, out mask); 
-			
+			GdkExtensions.GetWindowPointer (drawing.Window, out x, out y, out mask);
+
 			if (x >= 0 && x < size && y >= 0 && y < size) {
 				g.LineWidth = 0.5;
 				g.MoveTo (x, 0);
 				g.LineTo (x, size);
 				g.MoveTo (0, y);
-				g.LineTo (size , y);
+				g.LineTo (size, y);
 				g.Stroke ();
-				
+
 				this.labelPoint.Text = string.Format ("({0}, {1})", x, y);
 			} else
 				this.labelPoint.Text = string.Empty;
 		}
-		
+
 		private void DrawGrid (Context g)
 		{
 			g.SetSourceColor (new Color (0.05, 0.05, 0.05));
-			g.SetDash (new double[] {4, 4}, 2);
+			g.SetDash (new double[] { 4, 4 }, 2);
 			g.LineWidth = 1;
-			
+
 			for (int i = 1; i < 4; i++) {
 				g.MoveTo (i * size / 4, 0);
 				g.LineTo (i * size / 4, size);
 				g.MoveTo (0, i * size / 4);
 				g.LineTo (size, i * size / 4);
 			}
-			
+
 			g.MoveTo (0, size - 1);
 			g.LineTo (size - 1, 0);
 			g.Stroke ();
-			
-			g.SetDash (new double[] {}, 0);
+
+			g.SetDash (new double[] { }, 0);
 		}
-		
+
 		//cpx, cpyx - control point's x and y coordinates
 		private bool CheckControlPointProximity (int cpx, int cpy, int x, int y)
 		{
 			return (Math.Sqrt (Math.Pow (cpx - x, 2) + Math.Pow (cpy - y, 2)) < radius);
 		}
-		
+
 		private IEnumerator<ControlPointDrawingInfo> GetDrawingInfos ()
 		{
 			if (Mode == ColorTransferMode.Luminosity)
-				yield return new ControlPointDrawingInfo () { 
-					Color = new Color (0.4, 0.4, 0.4), IsActive = true 
+				yield return new ControlPointDrawingInfo () {
+					Color = new Color (0.4, 0.4, 0.4),
+					IsActive = true
 				};
-			
+
 			else {
 				yield return new ControlPointDrawingInfo () {
-					Color = new Color (0.9, 0, 0), IsActive = checkRed.Active
+					Color = new Color (0.9, 0, 0),
+					IsActive = checkRed.Active
 				};
 				yield return new ControlPointDrawingInfo () {
-					Color = new Color (0, 0.9, 0), IsActive = checkGreen.Active
+					Color = new Color (0, 0.9, 0),
+					IsActive = checkGreen.Active
 				};
 				yield return new ControlPointDrawingInfo () {
-					Color = new Color(0, 0, 0.9), IsActive = checkBlue.Active
+					Color = new Color (0, 0, 0.9),
+					IsActive = checkBlue.Active
 				};
 			}
 		}
-		
+
 		private void DrawControlPoints (Context g)
 		{
 			int x, y;
 			Gdk.ModifierType mask;
-			GdkExtensions.GetWindowPointer (drawing.Window, out x, out y, out mask); 
-			
+			GdkExtensions.GetWindowPointer (drawing.Window, out x, out y, out mask);
+
 			var infos = GetDrawingInfos ();
-			
+
 			foreach (var controlPoints in ControlPoints) {
-				
+
 				infos.MoveNext ();
 				var info = infos.Current;
-				
+
 				for (int i = 0; i < controlPoints.Count; i++) {
-					int cpx = controlPoints.Keys [i];
-					int cpy = size - 1 - (int)controlPoints.Values [i];			
+					int cpx = controlPoints.Keys[i];
+					int cpy = size - 1 - (int) controlPoints.Values[i];
 					Rectangle rect;
-	
-					if (info.IsActive)  {
+
+					if (info.IsActive) {
 						if (CheckControlPointProximity (cpx, cpy, x, y)) {
 							rect = new Rectangle (cpx - (radius + 2) / 2, cpy - (radius + 2) / 2, radius + 2, radius + 2);
 							g.DrawEllipse (rect, new Color (0.2, 0.2, 0.2), 2);
@@ -355,66 +358,66 @@ namespace Pinta.Effects
 							g.DrawEllipse (rect, info.Color, 2);
 						}
 					}
-					
-					rect = new Rectangle (cpx - (radius - 2) / 2, cpy - (radius - 2) / 2, radius - 2, radius -2);
+
+					rect = new Rectangle (cpx - (radius - 2) / 2, cpy - (radius - 2) / 2, radius - 2, radius - 2);
 					g.FillEllipse (rect, info.Color);
 				}
 			}
-				
+
 			g.Stroke ();
 		}
-			
+
 		private void DrawSpline (Context g)
 		{
 			var infos = GetDrawingInfos ();
-			
+
 			foreach (var controlPoints in ControlPoints) {
-			
+
 				int points = controlPoints.Count;
 				SplineInterpolator interpolator = new SplineInterpolator ();
 				IList<int> xa = controlPoints.Keys;
 				IList<int> ya = controlPoints.Values;
-				PointD[] line = new PointD [size];
-				
+				PointD[] line = new PointD[size];
+
 				for (int i = 0; i < points; i++) {
-					interpolator.Add (xa [i], ya [i]);
+					interpolator.Add (xa[i], ya[i]);
 				}
-				
+
 				for (int i = 0; i < line.Length; i++) {
-	               			line[i].X = (float)i;
-	                		line[i].Y = (float)(Utility.Clamp(size - 1 - interpolator.Interpolate (i), 0, size - 1));
-					
-	            		}
-				
+					line[i].X = (float) i;
+					line[i].Y = (float) (Utility.Clamp (size - 1 - interpolator.Interpolate (i), 0, size - 1));
+
+				}
+
 				g.LineWidth = 2;
 				g.LineJoin = LineJoin.Round;
-				
-				g.MoveTo (line [0]);		
+
+				g.MoveTo (line[0]);
 				for (int i = 1; i < line.Length; i++)
-					g.LineTo (line [i]);
-				
+					g.LineTo (line[i]);
+
 				infos.MoveNext ();
 				var info = infos.Current;
-					
+
 				g.SetSourceColor (info.Color);
 				g.LineWidth = info.IsActive ? 2 : 1;
 				g.Stroke ();
 			}
 		}
-		
+
 		private void HandleDrawingDrawnEvent (object o, Gtk.DrawnArgs args)
 		{
-            Context g = args.Cr;
-            DrawBorder(g);
-            DrawPointerCross(g);
-            DrawSpline(g);
-            DrawGrid(g);
-            DrawControlPoints(g);
-        }
+			Context g = args.Cr;
+			DrawBorder (g);
+			DrawPointerCross (g);
+			DrawSpline (g);
+			DrawGrid (g);
+			DrawControlPoints (g);
+		}
 
 		[MemberNotNull (nameof (comboMap), nameof (labelPoint), nameof (labelTip), nameof (checkRed), nameof (checkGreen), nameof (checkBlue), nameof (buttonReset), nameof (drawing))]
 		private void Build ()
-        {
+		{
 			WindowPosition = WindowPosition.CenterOnParent;
 			Resizable = false;
 
@@ -425,7 +428,7 @@ namespace Pinta.Effects
 			ContentArea.PackStart (hbox1, false, false, 0);
 
 			var hbox2 = new HBox () { Spacing = spacing };
-			comboMap = new ComboBoxText();
+			comboMap = new ComboBoxText ();
 			comboMap.AppendText (Translations.GetString ("RGB"));
 			comboMap.AppendText (Translations.GetString ("Luminosity"));
 			comboMap.Active = 1;
@@ -440,7 +443,7 @@ namespace Pinta.Effects
 			drawing = new DrawingArea () {
 				WidthRequest = 256,
 				HeightRequest = 256,
-				Events = (Gdk.EventMask)795646,
+				Events = (Gdk.EventMask) 795646,
 				CanFocus = true
 			};
 			ContentArea.PackStart (drawing, false, false, 8);

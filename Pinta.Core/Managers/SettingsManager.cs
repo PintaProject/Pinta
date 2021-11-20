@@ -26,9 +26,9 @@
 
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Text;
-using System.IO;
 using System.Xml;
 using System.Xml.Linq;
 
@@ -75,7 +75,7 @@ namespace Pinta.Core
 		{
 			LoadSettings ();
 		}
-		
+
 		public string GetUserSettingsDirectory ()
 		{
 			var settings_directory = Path.Combine (Environment.GetFolderPath (Environment.SpecialFolder.ApplicationData), "Pinta");
@@ -86,7 +86,7 @@ namespace Pinta.Core
 
 			return settings_directory;
 		}
-		
+
 		public T GetSetting<T> (string key, T defaultValue)
 		{
 			if (settings.TryGetValue (key, out var value))
@@ -94,7 +94,7 @@ namespace Pinta.Core
 
 			return defaultValue;
 		}
-		
+
 		public void PutSetting (string key, object value)
 		{
 			settings[key] = value;

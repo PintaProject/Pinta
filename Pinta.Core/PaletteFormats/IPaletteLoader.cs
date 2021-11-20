@@ -25,8 +25,8 @@
 // THE SOFTWARE.
 
 using System;
-using Cairo;
 using System.Collections.Generic;
+using Cairo;
 
 namespace Pinta.Core
 {

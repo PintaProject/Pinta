@@ -1,4 +1,4 @@
-﻿// 
+// 
 // ToolEventArgs.cs
 //  
 // Author:

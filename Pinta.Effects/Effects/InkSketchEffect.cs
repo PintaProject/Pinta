@@ -9,8 +9,8 @@
 
 using System;
 using Cairo;
-using Pinta.Gui.Widgets;
 using Pinta.Core;
+using Pinta.Gui.Widgets;
 
 namespace Pinta.Effects
 {
@@ -40,8 +40,8 @@ namespace Pinta.Effects
 			get { return Translations.GetString ("Artistic"); }
 		}
 
-		public InkSketchData Data { get { return (InkSketchData)EffectData!; } } // NRT - Set in constructor
-		
+		public InkSketchData Data { get { return (InkSketchData) EffectData!; } } // NRT - Set in constructor
+
 		public InkSketchEffect ()
 		{
 			EffectData = new InkSketchData ();
@@ -50,7 +50,7 @@ namespace Pinta.Effects
 			desaturateOp = new UnaryPixelOps.Desaturate ();
 			darkenOp = new UserBlendOps.DarkenBlendOp ();
 		}
-		
+
 		static InkSketchEffect ()
 		{
 			conv = new int[5][];
@@ -77,7 +77,7 @@ namespace Pinta.Effects
 			glowEffect.Data.Radius = 6;
 			glowEffect.Data.Brightness = -(Data.Coloring - 50) * 2;
 			glowEffect.Data.Contrast = -(Data.Coloring - 50) * 2;
-			
+
 			this.glowEffect.Render (src, dest, rois);
 
 			// Create black outlines by finding the edges of objects 
@@ -114,8 +114,8 @@ namespace Pinta.Effects
 						int b = 0;
 
 						int src_width = src.Width;
-						ColorBgra* src_dataptr = (ColorBgra*)src.DataPtr;
-						
+						ColorBgra* src_dataptr = (ColorBgra*) src.DataPtr;
+
 						for (int v = top; v < bottom; v++) {
 							ColorBgra* pRow = src.GetRowAddressUnchecked (src_dataptr, src_width, v);
 							int j = v - y + radius;
@@ -163,7 +163,7 @@ namespace Pinta.Effects
 		{
 			[Caption ("Ink Outline"), MinimumValue (0), MaximumValue (99)]
 			public int InkOutline = 50;
-			
+
 			[Caption ("Coloring"), MinimumValue (0), MaximumValue (100)]
 			public int Coloring = 50;
 		}

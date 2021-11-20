@@ -32,11 +32,11 @@ using Gdk;
 
 namespace Pinta.Core
 {
-	public class GdkPixbufFormat: IImageImporter, IImageExporter
+	public class GdkPixbufFormat : IImageImporter, IImageExporter
 	{
 		private string filetype;
 
-		public GdkPixbufFormat(string filetype)
+		public GdkPixbufFormat (string filetype)
 		{
 			this.filetype = filetype;
 		}
@@ -93,18 +93,18 @@ namespace Pinta.Core
 		}
 
 		#endregion
-		
+
 		protected virtual void DoSave (Pixbuf pb, string fileName, string fileType, Gtk.Window parent)
 		{
-			pb.SaveUtf8(fileName, fileType);
+			pb.SaveUtf8 (fileName, fileType);
 		}
 
 		public void Export (Document document, string fileName, Gtk.Window parent)
 		{
 			Cairo.ImageSurface surf = document.GetFlattenedImage ();
-	
+
 			Pixbuf pb = surf.ToPixbuf ();
-			DoSave(pb, fileName, filetype, parent);
+			DoSave (pb, fileName, filetype, parent);
 
 			(pb as IDisposable).Dispose ();
 			(surf as IDisposable).Dispose ();
@@ -137,7 +137,7 @@ namespace Pinta.Core
 			}
 		}
 
-        [DllImport("libgdk_pixbuf-2.0-0.dll", CallingConvention = CallingConvention.Cdecl)]
+		[DllImport ("libgdk_pixbuf-2.0-0.dll", CallingConvention = CallingConvention.Cdecl)]
 		private static extern bool gdk_pixbuf_savev_utf8 (IntPtr raw, IntPtr filename, IntPtr type, IntPtr[] option_keys, IntPtr[] option_values, out IntPtr error);
 
 		public static bool SavevUtf8 (this Pixbuf pb, string filename, string type, string?[]? option_keys, string?[]? option_values)

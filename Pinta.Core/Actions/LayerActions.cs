@@ -25,9 +25,9 @@
 // THE SOFTWARE.
 
 using System;
+using System.IO;
 using Gdk;
 using Gtk;
-using System.IO;
 
 namespace Pinta.Core
 {
@@ -44,7 +44,7 @@ namespace Pinta.Core
 		public Command MoveLayerUp { get; private set; }
 		public Command MoveLayerDown { get; private set; }
 		public Command Properties { get; private set; }
-		
+
 		public LayerActions ()
 		{
 			AddNewLayer = new Command ("addnewlayer", Translations.GetString ("Add New Layer"), null, Resources.Icons.LayerNew);
@@ -53,48 +53,48 @@ namespace Pinta.Core
 			MergeLayerDown = new Command ("mergelayerdown", Translations.GetString ("Merge Layer Down"), null, Resources.Icons.LayerMergeDown);
 			ImportFromFile = new Command ("importfromfile", Translations.GetString ("Import from File..."), null, Resources.Icons.LayerImport);
 			FlipHorizontal = new Command ("fliphorizontal", Translations.GetString ("Flip Horizontal"), null, Resources.Icons.LayerFlipHorizontal);
-            FlipVertical = new Command ("flipvertical", Translations.GetString ("Flip Vertical"), null, Resources.Icons.LayerFlipVertical);
-            RotateZoom = new Command ("RotateZoom", Translations.GetString ("Rotate / Zoom Layer..."), null, Resources.Icons.LayerRotateZoom);
-            MoveLayerUp = new Command ("movelayerup", Translations.GetString ("Move Layer Up"), null, Resources.Icons.LayerMoveUp);
+			FlipVertical = new Command ("flipvertical", Translations.GetString ("Flip Vertical"), null, Resources.Icons.LayerFlipVertical);
+			RotateZoom = new Command ("RotateZoom", Translations.GetString ("Rotate / Zoom Layer..."), null, Resources.Icons.LayerRotateZoom);
+			MoveLayerUp = new Command ("movelayerup", Translations.GetString ("Move Layer Up"), null, Resources.Icons.LayerMoveUp);
 			MoveLayerDown = new Command ("movelayerdown", Translations.GetString ("Move Layer Down"), null, Resources.Icons.LayerMoveDown);
 			Properties = new Command ("properties", Translations.GetString ("Layer Properties..."), null, Resources.Icons.LayerProperties);
 		}
 
 		#region Initialization
-		public void RegisterActions(Gtk.Application app, GLib.Menu menu)
+		public void RegisterActions (Gtk.Application app, GLib.Menu menu)
 		{
-			app.AddAccelAction(AddNewLayer, "<Primary><Shift>N");
-			menu.AppendItem(AddNewLayer.CreateMenuItem());
+			app.AddAccelAction (AddNewLayer, "<Primary><Shift>N");
+			menu.AppendItem (AddNewLayer.CreateMenuItem ());
 
-			app.AddAccelAction(DeleteLayer, "<Primary><Shift>Delete");
-			menu.AppendItem(DeleteLayer.CreateMenuItem());
+			app.AddAccelAction (DeleteLayer, "<Primary><Shift>Delete");
+			menu.AppendItem (DeleteLayer.CreateMenuItem ());
 
-			app.AddAccelAction(DuplicateLayer, "<Primary><Shift>D");
-			menu.AppendItem(DuplicateLayer.CreateMenuItem());
+			app.AddAccelAction (DuplicateLayer, "<Primary><Shift>D");
+			menu.AppendItem (DuplicateLayer.CreateMenuItem ());
 
-			app.AddAccelAction(MergeLayerDown, "<Primary>M");
-			menu.AppendItem(MergeLayerDown.CreateMenuItem());
+			app.AddAccelAction (MergeLayerDown, "<Primary>M");
+			menu.AppendItem (MergeLayerDown.CreateMenuItem ());
 
-			app.AddAction(ImportFromFile);
-			menu.AppendItem(ImportFromFile.CreateMenuItem());
+			app.AddAction (ImportFromFile);
+			menu.AppendItem (ImportFromFile.CreateMenuItem ());
 
-			var flip_section = new GLib.Menu();
-			menu.AppendSection(null, flip_section);
+			var flip_section = new GLib.Menu ();
+			menu.AppendSection (null, flip_section);
 
-			app.AddAction(FlipHorizontal);
-			flip_section.AppendItem(FlipHorizontal.CreateMenuItem());
+			app.AddAction (FlipHorizontal);
+			flip_section.AppendItem (FlipHorizontal.CreateMenuItem ());
 
-			app.AddAction(FlipVertical);
-			flip_section.AppendItem(FlipVertical.CreateMenuItem());
+			app.AddAction (FlipVertical);
+			flip_section.AppendItem (FlipVertical.CreateMenuItem ());
 
-			app.AddAction(RotateZoom);
-			flip_section.AppendItem(RotateZoom.CreateMenuItem());
+			app.AddAction (RotateZoom);
+			flip_section.AppendItem (RotateZoom.CreateMenuItem ());
 
-			var prop_section = new GLib.Menu();
-			menu.AppendSection(null, prop_section);
+			var prop_section = new GLib.Menu ();
+			menu.AppendSection (null, prop_section);
 
-			app.AddAccelAction(Properties, "F4");
-			prop_section.AppendItem(Properties.CreateMenuItem());
+			app.AddAccelAction (Properties, "F4");
+			prop_section.AppendItem (Properties.CreateMenuItem ());
 
 			app.AddAction (MoveLayerDown);
 			app.AddAction (MoveLayerUp);
@@ -110,7 +110,7 @@ namespace Pinta.Core
 			toolbar.AppendItem (MoveLayerDown.CreateToolBarItem ());
 			toolbar.AppendItem (Properties.CreateToolBarItem ());
 		}
-		
+
 		public void RegisterHandlers ()
 		{
 			AddNewLayer.Activated += HandlePintaCoreActionsLayersAddNewLayerActivated;
@@ -122,11 +122,11 @@ namespace Pinta.Core
 			FlipHorizontal.Activated += HandlePintaCoreActionsLayersFlipHorizontalActivated;
 			FlipVertical.Activated += HandlePintaCoreActionsLayersFlipVerticalActivated;
 			ImportFromFile.Activated += HandlePintaCoreActionsLayersImportFromFileActivated;
-			
+
 			PintaCore.Layers.LayerAdded += EnableOrDisableLayerActions;
 			PintaCore.Layers.LayerRemoved += EnableOrDisableLayerActions;
 			PintaCore.Layers.SelectedLayerChanged += EnableOrDisableLayerActions;
-			
+
 			EnableOrDisableLayerActions (null, EventArgs.Empty);
 		}
 		#endregion
@@ -278,8 +278,8 @@ namespace Pinta.Core
 			Document doc = PintaCore.Workspace.ActiveDocument;
 			PintaCore.Tools.Commit ();
 
-			UserLayer l = doc.Layers.DuplicateCurrentLayer();
-			
+			UserLayer l = doc.Layers.DuplicateCurrentLayer ();
+
 			// Make new layer the current layer
 			doc.Layers.SetCurrentUserLayer (l);
 

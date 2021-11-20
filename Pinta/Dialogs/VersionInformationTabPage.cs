@@ -26,9 +26,9 @@
 //
 
 using System;
-using Gtk;
 using System.Reflection;
 using System.Text;
+using Gtk;
 using Pinta.Core;
 
 namespace Pinta
@@ -63,7 +63,7 @@ namespace Pinta
 			BorderWidth = 6;
 
 
-			var toplayout = new VBox();
+			var toplayout = new VBox ();
 			var copyButton = new Button (Translations.GetString ("Copy Version Info"));
 			copyButton.Clicked += CopyButton_Clicked;
 
@@ -111,7 +111,7 @@ namespace Pinta
 				return;
 			}
 
-	                //do headers
+			//do headers
 			for (int col = 0; col < treeView.Model.NColumns; col++) {
 				if (col != 0) {
 					vinfo.Append (delimeter);
@@ -143,7 +143,7 @@ namespace Pinta
 				Gtk.Clipboard clipboard = Gtk.Clipboard.Get (Gdk.Atom.Intern ("CLIPBOARD", false));
 				clipboard.Text = vinfo.ToString ();
 			}
-		
+
 
 		}
 

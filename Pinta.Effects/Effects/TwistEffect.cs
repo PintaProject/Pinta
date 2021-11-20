@@ -9,8 +9,8 @@
 
 using System;
 using Cairo;
-using Pinta.Gui.Widgets;
 using Pinta.Core;
+using Pinta.Gui.Widgets;
 
 namespace Pinta.Effects
 {
@@ -32,7 +32,7 @@ namespace Pinta.Effects
 			get { return Translations.GetString ("Distort"); }
 		}
 
-		public TwistData Data { get { return (TwistData)EffectData!; } } // NRT - Set in constructor
+		public TwistData Data { get { return (TwistData) EffectData!; } } // NRT - Set in constructor
 
 		public TwistEffect ()
 		{
@@ -61,15 +61,15 @@ namespace Pinta.Effects
 
 			for (int i = 0; i < aaSamples; ++i) {
 				PointD pt = new PointD (
-				    ((i * aaLevel) / (float)aaSamples),
-				    i / (float)aaSamples);
+				    ((i * aaLevel) / (float) aaSamples),
+				    i / (float) aaSamples);
 
-				pt.X -= (int)pt.X;
+				pt.X -= (int) pt.X;
 				aaPoints[i] = pt;
 			}
 
 			int src_width = src.Width;
-			ColorBgra* src_data_ptr = (ColorBgra*)src.DataPtr;
+			ColorBgra* src_data_ptr = (ColorBgra*) src.DataPtr;
 
 			foreach (var rect in rois) {
 				for (int y = rect.Top; y <= rect.GetBottom (); y++) {
@@ -89,8 +89,8 @@ namespace Pinta.Effects
 							int a = 0;
 
 							for (int p = 0; p < aaSamples; ++p) {
-								float u = i + (float)aaPoints[p].X;
-								float v = j + (float)aaPoints[p].Y;
+								float u = i + (float) aaPoints[p].X;
+								float v = j + (float) aaPoints[p].Y;
 								double rad = Math.Sqrt (u * u + v * v);
 								double theta = Math.Atan2 (v, u);
 
@@ -100,9 +100,9 @@ namespace Pinta.Effects
 
 								theta += (t * twist) / 100;
 
-								ColorBgra sample = src.GetPointUnchecked (src_data_ptr, src_width, 
-								    (int)(hw + (float)(rad * Math.Cos (theta))),
-								    (int)(hh + (float)(rad * Math.Sin (theta))));
+								ColorBgra sample = src.GetPointUnchecked (src_data_ptr, src_width,
+								    (int) (hw + (float) (rad * Math.Cos (theta))),
+								    (int) (hh + (float) (rad * Math.Sin (theta))));
 
 								b += sample.B;
 								g += sample.G;
@@ -111,10 +111,10 @@ namespace Pinta.Effects
 							}
 
 							*dstPtr = ColorBgra.FromBgra (
-							    (byte)(b / aaSamples),
-							    (byte)(g / aaSamples),
-							    (byte)(r / aaSamples),
-							    (byte)(a / aaSamples));
+							    (byte) (b / aaSamples),
+							    (byte) (g / aaSamples),
+							    (byte) (r / aaSamples),
+							    (byte) (a / aaSamples));
 						}
 
 						++dstPtr;

@@ -26,7 +26,7 @@ namespace Pinta.Core
 	/// </summary>
 	public sealed partial class UserBlendOps
 	{
-		private static Dictionary<string, BlendMode> blend_modes = new Dictionary<string,BlendMode> ();
+		private static Dictionary<string, BlendMode> blend_modes = new Dictionary<string, BlendMode> ();
 
 		static UserBlendOps ()
 		{
@@ -39,14 +39,14 @@ namespace Pinta.Core
 			blend_modes.Add (Translations.GetString ("Lighten"), BlendMode.Lighten);
 			blend_modes.Add (Translations.GetString ("Darken"), BlendMode.Darken);
 			blend_modes.Add (Translations.GetString ("Screen"), BlendMode.Screen);
-            blend_modes.Add (Translations.GetString ("Xor"), BlendMode.Xor);
-            blend_modes.Add (Translations.GetString ("Hard Light"), BlendMode.HardLight);
-            blend_modes.Add (Translations.GetString ("Soft Light"), BlendMode.SoftLight);
-            blend_modes.Add (Translations.GetString ("Color"), BlendMode.Color);
-            blend_modes.Add (Translations.GetString ("Luminosity"), BlendMode.Luminosity);
-            blend_modes.Add (Translations.GetString ("Hue"), BlendMode.Hue);
-            blend_modes.Add (Translations.GetString ("Saturation"), BlendMode.Saturation);
-        }
+			blend_modes.Add (Translations.GetString ("Xor"), BlendMode.Xor);
+			blend_modes.Add (Translations.GetString ("Hard Light"), BlendMode.HardLight);
+			blend_modes.Add (Translations.GetString ("Soft Light"), BlendMode.SoftLight);
+			blend_modes.Add (Translations.GetString ("Color"), BlendMode.Color);
+			blend_modes.Add (Translations.GetString ("Luminosity"), BlendMode.Luminosity);
+			blend_modes.Add (Translations.GetString ("Hue"), BlendMode.Hue);
+			blend_modes.Add (Translations.GetString ("Saturation"), BlendMode.Saturation);
+		}
 
 		private UserBlendOps ()
 		{

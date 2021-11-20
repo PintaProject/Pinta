@@ -35,57 +35,57 @@ namespace Pinta.Tools
 		{
 			this.action = moveAction;
 			Position = new PointD (-5, -5);
-		    Cursor = cursor;
+			Cursor = cursor;
 		}
 
-        private const int Size = 6;
+		private const int Size = 6;
 		private const int Tolerance = 10;
 		public static readonly Color FillColor = new Color (0, 0, 1, 0.5);
 		public static readonly Color StrokeColor = new Color (0, 0, 1, 0.7);
 		private readonly MouseHandler action;
 
-		public PointD Position {get; set;}
-        public Gdk.CursorType Cursor { get; private set; }
+		public PointD Position { get; set; }
+		public Gdk.CursorType Cursor { get; private set; }
 
 		public bool IsInside (PointD point)
 		{
 			return (Math.Abs (point.X - Position.X) <= Tolerance) && (Math.Abs (point.Y - Position.Y) <= Tolerance);
 		}
 
-        public void HandleMouseMove (double x, double y, Gdk.ModifierType state)
-        {
-            action (x, y, state);
-        }
+		public void HandleMouseMove (double x, double y, Gdk.ModifierType state)
+		{
+			action (x, y, state);
+		}
 
-        public void Render (Context g)
-        {
-            var rect = GetHandleRect ();
-            g.FillStrokedRectangle (rect, FillColor, StrokeColor, 1);
-        }
+		public void Render (Context g)
+		{
+			var rect = GetHandleRect ();
+			g.FillStrokedRectangle (rect, FillColor, StrokeColor, 1);
+		}
 
-        /// <summary>
-        /// Erase the handle that was drawn in a previous call to Render ().
-        /// </summary>
-        public void Clear (Context g)
-        {
-            g.Save ();
+		/// <summary>
+		/// Erase the handle that was drawn in a previous call to Render ().
+		/// </summary>
+		public void Clear (Context g)
+		{
+			g.Save ();
 
-            var rect = GetHandleRect ().Inflate (2, 2);
-            using (var path = g.CreateRectanglePath (rect))
-                g.AppendPath (path);
-            g.Operator = Operator.Clear;
-            g.Fill ();
+			var rect = GetHandleRect ().Inflate (2, 2);
+			using (var path = g.CreateRectanglePath (rect))
+				g.AppendPath (path);
+			g.Operator = Operator.Clear;
+			g.Fill ();
 
-            g.Restore ();
-        }
+			g.Restore ();
+		}
 
-	    public Rectangle GetHandleRect ()
-	    {
-	        var scale_factor = (1.0/PintaCore.Workspace.ActiveWorkspace.Scale);
-	        return new Cairo.Rectangle (Position.X - scale_factor*Size/2,
-	            Position.Y - scale_factor*Size/2,
-	            scale_factor*Size, scale_factor*Size);
-	    }
-    }
+		public Rectangle GetHandleRect ()
+		{
+			var scale_factor = (1.0 / PintaCore.Workspace.ActiveWorkspace.Scale);
+			return new Cairo.Rectangle (Position.X - scale_factor * Size / 2,
+			    Position.Y - scale_factor * Size / 2,
+			    scale_factor * Size, scale_factor * Size);
+		}
+	}
 }
 

@@ -1,4 +1,4 @@
-﻿// 
+// 
 // BaseEffect.cs
 //  
 // Author:
@@ -83,7 +83,7 @@ namespace Pinta.Core
 		{
 			if (IsConfigurable)
 				throw new NotImplementedException (string.Format ("{0} is marked as configurable, but has not implemented LaunchConfiguration", this.GetType ()));
-				
+
 			return false;
 		}
 
@@ -108,9 +108,9 @@ namespace Pinta.Core
 		/// <param name="roi">A rectangle of interest (roi) specifying the area to modify. Only these areas should be modified</param>
 		protected unsafe virtual void Render (ImageSurface src, ImageSurface dst, Gdk.Rectangle roi)
 		{
-			ColorBgra* src_data_ptr = (ColorBgra*)src.DataPtr;
+			ColorBgra* src_data_ptr = (ColorBgra*) src.DataPtr;
 			int src_width = src.Width;
-			ColorBgra* dst_data_ptr = (ColorBgra*)dst.DataPtr;
+			ColorBgra* dst_data_ptr = (ColorBgra*) dst.DataPtr;
 			int dst_width = dst.Width;
 
 			for (int y = roi.Y; y <= roi.GetBottom (); ++y) {
@@ -146,7 +146,7 @@ namespace Pinta.Core
 			return color;
 		}
 		#endregion
-				
+
 		// Effects that have any configuration state which is changed
 		// during live preview, and this this state is stored in
 		// non-value-type fields should override this method.
@@ -164,9 +164,9 @@ namespace Pinta.Core
 				effect.EffectData = EffectData?.Clone ();
 
 			return effect;
-		}		
+		}
 	}
-	
+
 	/// <summary>
 	/// Holds the user configurable data used by this effect.
 	/// </summary>
@@ -182,7 +182,7 @@ namespace Pinta.Core
 		{
 			return (EffectData) this.MemberwiseClone ();
 		}
-		
+
 		/// <summary>
 		/// Fires the PropertyChanged event for this ObservableObject.
 		/// </summary>
@@ -191,7 +191,7 @@ namespace Pinta.Core
 		{
 			base.FirePropertyChanged (propertyName);
 		}
-		
+
 		/// <summary>
 		/// Returns true if the current values of this EffectData do not modify the image. Returns false if current values modify the image.
 		/// </summary>

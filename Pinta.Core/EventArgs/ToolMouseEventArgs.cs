@@ -68,7 +68,7 @@ namespace Pinta.Core
 		/// <summary>
 		/// The cursor location in canvas coordinates.
 		/// </summary>
-		public Cairo.Point Point => new Cairo.Point ((int)PointDouble.X, (int)PointDouble.Y);
+		public Cairo.Point Point => new Cairo.Point ((int) PointDouble.X, (int) PointDouble.Y);
 
 		/// <summary>
 		/// The cursor location in canvas coordinates.

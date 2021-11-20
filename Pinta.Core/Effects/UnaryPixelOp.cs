@@ -83,15 +83,15 @@ namespace Pinta.Core
 		{
 			Apply (dst.GetPointAddress (dstOffset), src.GetPointAddress (srcOffset), scanLength);
 		}
-		
+
 		public void Apply (ImageSurface dst, ImageSurface src, Gdk.Rectangle roi)
 		{
-			ColorBgra* src_data_ptr = (ColorBgra*)src.DataPtr;
+			ColorBgra* src_data_ptr = (ColorBgra*) src.DataPtr;
 			int src_width = src.Width;
-			ColorBgra* dst_data_ptr = (ColorBgra*)dst.DataPtr;
+			ColorBgra* dst_data_ptr = (ColorBgra*) dst.DataPtr;
 			int dst_width = dst.Width;
 
-			for (int y = roi.Y; y <= roi.GetBottom(); ++y) {
+			for (int y = roi.Y; y <= roi.GetBottom (); ++y) {
 				ColorBgra* dstPtr = dst.GetPointAddressUnchecked (dst_data_ptr, dst_width, roi.X, y);
 				ColorBgra* srcPtr = src.GetPointAddressUnchecked (src_data_ptr, src_width, roi.X, y);
 				Apply (dstPtr, srcPtr, roi.Width);

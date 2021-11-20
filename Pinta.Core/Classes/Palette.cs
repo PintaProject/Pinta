@@ -37,50 +37,48 @@ namespace Pinta.Core
 	public sealed class Palette
 	{
 		public event EventHandler? PaletteChanged;
-	
+
 		private List<Color> colors;
 
 		private Palette ()
 		{
 			colors = new List<Color> ();
 		}
-		
+
 		private void OnPaletteChanged ()
 		{
 			if (PaletteChanged != null)
 				PaletteChanged (this, EventArgs.Empty);
 		}
-		
-		public int Count
-		{
+
+		public int Count {
 			get {
 				return colors.Count;
 			}
 		}
-		
-		public Color this[int index]
-		{
+
+		public Color this[int index] {
 			get {
 				return colors[index];
 			}
-			
+
 			set {
 				colors[index] = value;
 				OnPaletteChanged ();
 			}
 		}
-		
+
 		public void Resize (int newSize)
 		{
 			int difference = newSize - Count;
-			
+
 			if (difference > 0) {
 				for (int i = 0; i < difference; i++)
 					colors.Add (new Color (1, 1, 1));
 			} else {
 				colors.RemoveRange (newSize, -difference);
 			}
-			
+
 			colors.TrimExcess ();
 			OnPaletteChanged ();
 		}
@@ -91,14 +89,14 @@ namespace Pinta.Core
 			p.LoadDefault ();
 			return p;
 		}
-		
+
 		public static Palette FromFile (string fileName)
 		{
 			Palette p = new Palette ();
 			p.Load (fileName);
 			return p;
 		}
-		
+
 		public void LoadDefault ()
 		{
 			colors.Clear ();
@@ -160,46 +158,43 @@ namespace Pinta.Core
 
 		public void Load (string fileName)
 		{
-			try
-			{
+			try {
 				var loader = PintaCore.System.PaletteFormats.GetFormatByFilename (fileName)?.Loader;
 
-                if (loader == null)
-					throw new FormatException();
+				if (loader == null)
+					throw new FormatException ();
 
 				colors = loader.Load (fileName);
 				colors.TrimExcess ();
 				OnPaletteChanged ();
-			}
-			catch (FormatException e)
-			{
+			} catch (FormatException e) {
 				var parent = PintaCore.Chrome.MainWindow;
-				ShowUnsupportedFormatDialog(parent, fileName, "Unsupported palette format", e.ToString());
+				ShowUnsupportedFormatDialog (parent, fileName, "Unsupported palette format", e.ToString ());
 			}
 		}
-		
+
 		public void Save (string fileName, IPaletteSaver saver)
 		{
 			saver.Save (colors, fileName);
 		}
 
-		private void ShowUnsupportedFormatDialog(Window parent, string filename, string primaryText, string details)
+		private void ShowUnsupportedFormatDialog (Window parent, string filename, string primaryText, string details)
 		{
 			string markup = "<span weight=\"bold\" size=\"larger\">{0}</span>\n\n{1}";
 
-			string secondaryText = Translations.GetString("Could not open file: {0}", filename);
-			secondaryText += string.Format("\n\n{0}\n", Translations.GetString("Pinta supports the following palette formats:"));
+			string secondaryText = Translations.GetString ("Could not open file: {0}", filename);
+			secondaryText += string.Format ("\n\n{0}\n", Translations.GetString ("Pinta supports the following palette formats:"));
 			var extensions = from format in PintaCore.System.PaletteFormats.Formats
-							 where format.Loader != null
-							 from extension in format.Extensions
-							 where char.IsLower(extension.FirstOrDefault())
-							 orderby extension
-							 select extension;
+					 where format.Loader != null
+					 from extension in format.Extensions
+					 where char.IsLower (extension.FirstOrDefault ())
+					 orderby extension
+					 select extension;
 
-			secondaryText += String.Join(", ", extensions);
+			secondaryText += String.Join (", ", extensions);
 
-			string message = string.Format(markup, primaryText, secondaryText);
-			PintaCore.Chrome.ShowUnsupportedFormatDialog(parent, message, details);
+			string message = string.Format (markup, primaryText, secondaryText);
+			PintaCore.Chrome.ShowUnsupportedFormatDialog (parent, message, details);
 		}
 	}
 }

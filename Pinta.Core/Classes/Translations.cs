@@ -1,4 +1,4 @@
-﻿// 
+// 
 // TranslationManager.cs
 //  
 // Author:
@@ -28,23 +28,23 @@ using NGettext;
 
 namespace Pinta.Core
 {
-    public static class Translations
-    {
-        private static ICatalog catalog = null!; // NRT - Always set by Init
+	public static class Translations
+	{
+		private static ICatalog catalog = null!; // NRT - Always set by Init
 
-        public static void Init(string domain, string locale_dir)
-        {
-            catalog = new Catalog(domain, locale_dir);
-        }
+		public static void Init (string domain, string locale_dir)
+		{
+			catalog = new Catalog (domain, locale_dir);
+		}
 
-        public static string GetString(string text)
-        {
-            return catalog.GetString(text);
-        }
+		public static string GetString (string text)
+		{
+			return catalog.GetString (text);
+		}
 
-        public static string GetString(string text, params object[] args)
-        {
-            return catalog.GetString(text, args);
-        }
-    }
+		public static string GetString (string text, params object[] args)
+		{
+			return catalog.GetString (text, args);
+		}
+	}
 }

@@ -35,7 +35,7 @@ namespace Pinta.Core
 	public class ToolBarWidget<WidgetT> : ToolItem where WidgetT : Gtk.Widget
 	{
 		public WidgetT Widget { get; private init; }
-		
+
 		public ToolBarWidget (WidgetT widget)
 		{
 			Widget = widget;

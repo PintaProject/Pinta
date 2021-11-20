@@ -1,4 +1,4 @@
-﻿// 
+// 
 // WindowShell.cs
 //  
 // Author:
@@ -38,7 +38,7 @@ namespace Pinta
 
 		private Toolbar? main_toolbar;
 
-		public WindowShell (Application app, string name, string title, int width, int height, bool maximize) : base(app)
+		public WindowShell (Application app, string name, string title, int width, int height, bool maximize) : base (app)
 		{
 			Name = name;
 			Title = title;

@@ -48,32 +48,31 @@ namespace Pinta.Core
 		}
 
 		#region Initialization
-		public void RegisterActions(Gtk.Application app, GLib.Menu menu)
-        {
-			app.AddAccelAction(Contents, "F1");
-			menu.AppendItem(Contents.CreateMenuItem());
+		public void RegisterActions (Gtk.Application app, GLib.Menu menu)
+		{
+			app.AddAccelAction (Contents, "F1");
+			menu.AppendItem (Contents.CreateMenuItem ());
 
-			app.AddAction(Website);
-			menu.AppendItem(Website.CreateMenuItem());
+			app.AddAction (Website);
+			menu.AppendItem (Website.CreateMenuItem ());
 
-			app.AddAction(Bugs);
-			menu.AppendItem(Bugs.CreateMenuItem());
+			app.AddAction (Bugs);
+			menu.AppendItem (Bugs.CreateMenuItem ());
 
-			app.AddAction(Translate);
-			menu.AppendItem(Translate.CreateMenuItem());
+			app.AddAction (Translate);
+			menu.AppendItem (Translate.CreateMenuItem ());
 
 			// This is part of the application menu on macOS.
-			if (PintaCore.System.OperatingSystem != OS.Mac)
-            {
-				var about_section = new GLib.Menu();
-				menu.AppendSection(null, about_section);
+			if (PintaCore.System.OperatingSystem != OS.Mac) {
+				var about_section = new GLib.Menu ();
+				menu.AppendSection (null, about_section);
 
 				var about = PintaCore.Actions.App.About;
-				app.AddAction(about);
-				about_section.AppendItem(about.CreateMenuItem());
+				app.AddAction (about);
+				about_section.AppendItem (about.CreateMenuItem ());
 			}
 		}
-		
+
 		public void RegisterHandlers ()
 		{
 			Contents.Activated += DisplayHelp;
@@ -102,10 +101,10 @@ namespace Pinta.Core
 			OpenUrl ("https://www.pinta-project.com");
 		}
 
-		private void OpenUrl(string url)
-        {
-			Gtk.Global.ShowUriOnWindow(PintaCore.Chrome.MainWindow, url, Gtk.Global.CurrentEventTime);
+		private void OpenUrl (string url)
+		{
+			Gtk.Global.ShowUriOnWindow (PintaCore.Chrome.MainWindow, url, Gtk.Global.CurrentEventTime);
 		}
-#endregion
+		#endregion
 	}
 }

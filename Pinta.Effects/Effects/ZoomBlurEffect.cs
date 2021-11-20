@@ -9,8 +9,8 @@
 
 using System;
 using Cairo;
-using Pinta.Gui.Widgets;
 using Pinta.Core;
+using Pinta.Gui.Widgets;
 
 namespace Pinta.Effects
 {
@@ -32,7 +32,7 @@ namespace Pinta.Effects
 			get { return Translations.GetString ("Blurs"); }
 		}
 
-		public ZoomBlurData Data { get { return (ZoomBlurData)EffectData!; } } // NRT - Set in constructor
+		public ZoomBlurData Data { get { return (ZoomBlurData) EffectData!; } } // NRT - Set in constructor
 
 		public ZoomBlurEffect ()
 		{
@@ -53,21 +53,21 @@ namespace Pinta.Effects
 			}
 
 			int src_width = src.Width;
-			ColorBgra* src_data_ptr = (ColorBgra*)src.DataPtr;
+			ColorBgra* src_data_ptr = (ColorBgra*) src.DataPtr;
 			int dst_width = dst.Width;
-			ColorBgra* dst_data_ptr = (ColorBgra*)dst.DataPtr;
+			ColorBgra* dst_data_ptr = (ColorBgra*) dst.DataPtr;
 			Gdk.Rectangle src_bounds = src.GetBounds ();
-			
+
 			long w = dst.Width;
 			long h = dst.Height;
-			long fox = (long)(dst.Width * Data.Offset.X * 32768.0);
-			long foy = (long)(dst.Height * Data.Offset.Y * 32768.0);
+			long fox = (long) (dst.Width * Data.Offset.X * 32768.0);
+			long foy = (long) (dst.Height * Data.Offset.Y * 32768.0);
 			long fcx = fox + (w << 15);
 			long fcy = foy + (h << 15);
 			long fz = Data.Amount;
 
 			const int n = 64;
-			
+
 			foreach (Gdk.Rectangle rect in rois) {
 				for (int y = rect.Top; y <= rect.GetBottom (); ++y) {
 					ColorBgra* dstPtr = dst.GetPointAddressUnchecked (dst_data_ptr, dst_width, rect.Left, y);
@@ -93,8 +93,8 @@ namespace Pinta.Effects
 							fx -= ((fx >> 4) * fz) >> 10;
 							fy -= ((fy >> 4) * fz) >> 10;
 
-							int u = (int)(fx + fcx + 32768 >> 16);
-							int v = (int)(fy + fcy + 32768 >> 16);
+							int u = (int) (fx + fcx + 32768 >> 16);
+							int v = (int) (fy + fcy + 32768 >> 16);
 
 							if (src_bounds.Contains (u, v)) {
 								ColorBgra* srcPtr2 = src.GetPointAddressUnchecked (src_data_ptr, src_width, u, v);

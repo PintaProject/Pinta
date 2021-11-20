@@ -1,4 +1,4 @@
-﻿// 
+// 
 // LayerPropertiesAction.cs
 //  
 // Author:
@@ -52,7 +52,7 @@ namespace Pinta.Actions
 
 			int response = dialog.Run ();
 
-			if (response == (int)Gtk.ResponseType.Ok
+			if (response == (int) Gtk.ResponseType.Ok
 				&& dialog.AreLayerPropertiesUpdated) {
 
 				var historyMessage = GetLayerPropertyUpdateMessage (
@@ -79,7 +79,7 @@ namespace Pinta.Actions
 				if (selectionLayer != null)
 					initial.SetProperties (selectionLayer);
 
-				if ((layer.Opacity != initial.Opacity) || (layer.BlendMode != initial.BlendMode) || (layer.Hidden != initial.Hidden)) 
+				if ((layer.Opacity != initial.Opacity) || (layer.BlendMode != initial.BlendMode) || (layer.Hidden != initial.Hidden))
 					PintaCore.Workspace.ActiveWorkspace.Invalidate ();
 			}
 		}

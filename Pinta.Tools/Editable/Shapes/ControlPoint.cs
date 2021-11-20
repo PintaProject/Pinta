@@ -1,4 +1,4 @@
-﻿// 
+// 
 // ControlPoint.cs
 //  
 // Author:
@@ -43,15 +43,15 @@ namespace Pinta.Tools
 		/// </summary>
 		/// <param name="passedPosition">The position of the PointD on the Canvas.</param>
 		/// <param name="passedTension">The tension of the ControlPoint on the shape.</param>
-		public ControlPoint(PointD passedPosition, double passedTension)
+		public ControlPoint (PointD passedPosition, double passedTension)
 		{
 			Position = passedPosition;
 			Tension = passedTension;
 		}
 
-		public ControlPoint Clone()
+		public ControlPoint Clone ()
 		{
-			return new ControlPoint(Position, Tension);
+			return new ControlPoint (Position, Tension);
 		}
 	}
 }

@@ -50,7 +50,7 @@ namespace Pinta.Core
 
 						if (start.X >= bounds.GetRight ()) {
 							++start.Y;
-							start.X = (int)bounds.X;
+							start.X = (int) bounds.X;
 
 							if (start.Y >= bounds.GetBottom ()) {
 								break;
@@ -62,7 +62,7 @@ namespace Pinta.Core
 						break;
 
 					pts.Clear ();
-					
+
 					Point last = new Point (start.X, start.Y + 1);
 					Point curr = new Point (start.X, start.Y);
 					Point next = curr;

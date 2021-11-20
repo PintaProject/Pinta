@@ -38,7 +38,7 @@ namespace Pinta
 		private TextView details_text;
 		private Button bug_report_button;
 
-		public ErrorDialog (Window parent) : base("Pinta", parent, DialogFlags.Modal | DialogFlags.DestroyWithParent)
+		public ErrorDialog (Window parent) : base ("Pinta", parent, DialogFlags.Modal | DialogFlags.DestroyWithParent)
 		{
 			Build ();
 
@@ -51,7 +51,7 @@ namespace Pinta
 			};
 
 			TransientFor = parent;
-			
+
 			expander.Visible = false;
 			DefaultResponse = ResponseType.Ok;
 		}
@@ -60,7 +60,7 @@ namespace Pinta
 		{
 			description_label.Markup = message;
 		}
-		
+
 		public void AddDetails (string text)
 		{
 			TextIter it = details_text.Buffer.EndIter;
@@ -84,7 +84,7 @@ namespace Pinta
 			hbox.BorderWidth = 12;
 
 			var error_icon = new Image ();
-			error_icon.Pixbuf = Gtk.IconTheme.Default.LoadIcon(Resources.StandardIcons.DialogError, 32);
+			error_icon.Pixbuf = Gtk.IconTheme.Default.LoadIcon (Resources.StandardIcons.DialogError, 32);
 			error_icon.Yalign = 0;
 			hbox.PackStart (error_icon, false, false, 0);
 
@@ -106,10 +106,10 @@ namespace Pinta
 
 			hbox.Add (vbox);
 			this.ContentArea.Add (hbox);
-			
+
 			bug_report_button = new Button (Translations.GetString ("Report Bug...."));
 			bug_report_button.CanFocus = false;
-			AddActionWidget(bug_report_button, ResponseType.Help);
+			AddActionWidget (bug_report_button, ResponseType.Help);
 
 			var ok_button = new Button (Gtk.Stock.Ok);
 			ok_button.CanDefault = true;

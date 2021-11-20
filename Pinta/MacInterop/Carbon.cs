@@ -26,22 +26,22 @@
 // THE SOFTWARE.
 
 using System;
-using System.Runtime.InteropServices;
 using System.Collections.Generic;
 using System.Diagnostics;
+using System.Runtime.InteropServices;
 
 namespace Pinta.MacInterop
 {
 	internal delegate CarbonEventHandlerStatus EventDelegate (IntPtr callRef, IntPtr eventRef, IntPtr userData);
 	internal delegate CarbonEventHandlerStatus AEHandlerDelegate (IntPtr inEvnt, IntPtr outEvt, uint refConst);
-	
+
 	internal static class Carbon
 	{
 		public const string CarbonLib = "/System/Library/Frameworks/Carbon.framework/Versions/Current/Carbon";
-		
+
 		[DllImport (CarbonLib)]
 		static extern int Gestalt (int selector, out int result);
-		
+
 		public static int Gestalt (string selector)
 		{
 			int cc = ConvertCharCode (selector);
@@ -50,105 +50,105 @@ namespace Pinta.MacInterop
 			CheckReturn (ret);
 			return result;
 		}
-		
+
 		[DllImport (CarbonLib)]
 		public static extern IntPtr GetApplicationEventTarget ();
-		
+
 		[DllImport (CarbonLib)]
 		public static extern IntPtr GetControlEventTarget (IntPtr control);
-		
+
 		[DllImport (CarbonLib)]
 		public static extern IntPtr GetWindowEventTarget (IntPtr window);
-		
+
 		[DllImport (CarbonLib)]
 		public static extern IntPtr GetMenuEventTarget (IntPtr menu);
 
 		[DllImport (CarbonLib)]
 		public static extern CarbonEventClass GetEventClass (IntPtr eventref);
-		
+
 		[DllImport (CarbonLib)]
 		public static extern uint GetEventKind (IntPtr eventref);
-		
+
 		#region Event handler installation
-		
+
 		[DllImport (CarbonLib)]
 		static extern EventStatus InstallEventHandler (IntPtr target, EventDelegate handler, uint count,
-		                                               CarbonEventTypeSpec [] types, IntPtr user_data, out IntPtr handlerRef);
-		
+							       CarbonEventTypeSpec[] types, IntPtr user_data, out IntPtr handlerRef);
+
 		[DllImport (CarbonLib)]
 		public static extern EventStatus RemoveEventHandler (IntPtr handlerRef);
-		
-		public static IntPtr InstallEventHandler (IntPtr target, EventDelegate handler, CarbonEventTypeSpec [] types)
+
+		public static IntPtr InstallEventHandler (IntPtr target, EventDelegate handler, CarbonEventTypeSpec[] types)
 		{
 			IntPtr handlerRef;
-			CheckReturn (InstallEventHandler (target, handler, (uint)types.Length, types, IntPtr.Zero, out handlerRef));
+			CheckReturn (InstallEventHandler (target, handler, (uint) types.Length, types, IntPtr.Zero, out handlerRef));
 			return handlerRef;
 		}
-		
+
 		public static IntPtr InstallEventHandler (IntPtr target, EventDelegate handler, CarbonEventTypeSpec type)
 		{
 			return InstallEventHandler (target, handler, new CarbonEventTypeSpec[] { type });
 		}
-		
-		public static IntPtr InstallApplicationEventHandler (EventDelegate handler, CarbonEventTypeSpec [] types)
+
+		public static IntPtr InstallApplicationEventHandler (EventDelegate handler, CarbonEventTypeSpec[] types)
 		{
 			return InstallEventHandler (GetApplicationEventTarget (), handler, types);
 		}
-		
+
 		public static IntPtr InstallApplicationEventHandler (EventDelegate handler, CarbonEventTypeSpec type)
 		{
 			return InstallEventHandler (GetApplicationEventTarget (), handler, new CarbonEventTypeSpec[] { type });
 		}
-		
+
 		#endregion
-		
+
 		#region Event parameter extraction
-		
+
 		[DllImport (CarbonLib)]
 		public static extern EventStatus GetEventParameter (IntPtr eventRef, CarbonEventParameterName name, CarbonEventParameterType desiredType,
-		                                                    out CarbonEventParameterType actualType, uint size, ref uint outSize, ref IntPtr outPtr);
-		
+								    out CarbonEventParameterType actualType, uint size, ref uint outSize, ref IntPtr outPtr);
+
 		public static IntPtr GetEventParameter (IntPtr eventRef, CarbonEventParameterName name, CarbonEventParameterType desiredType)
 		{
 			CarbonEventParameterType actualType;
 			uint outSize = 0;
 			IntPtr val = IntPtr.Zero;
-			CheckReturn (GetEventParameter (eventRef, name, desiredType, out actualType, (uint)IntPtr.Size, ref outSize, ref val));
+			CheckReturn (GetEventParameter (eventRef, name, desiredType, out actualType, (uint) IntPtr.Size, ref outSize, ref val));
 			return val;
-		} 
-		
+		}
+
 		[DllImport (CarbonLib)]
-		static extern EventStatus GetEventParameter (IntPtr eventRef, CarbonEventParameterName name, CarbonEventParameterType desiredType,	
-		                                             out CarbonEventParameterType actualType, uint size, ref uint outSize, IntPtr dataBuffer);
-		  
+		static extern EventStatus GetEventParameter (IntPtr eventRef, CarbonEventParameterName name, CarbonEventParameterType desiredType,
+							     out CarbonEventParameterType actualType, uint size, ref uint outSize, IntPtr dataBuffer);
+
 		[DllImport (CarbonLib)]
-		static extern EventStatus GetEventParameter (IntPtr eventRef, CarbonEventParameterName name, CarbonEventParameterType desiredType,	
-		                                             uint zero, uint size, uint zero2, IntPtr dataBuffer);
-		
+		static extern EventStatus GetEventParameter (IntPtr eventRef, CarbonEventParameterName name, CarbonEventParameterType desiredType,
+							     uint zero, uint size, uint zero2, IntPtr dataBuffer);
+
 		public static T GetEventParameter<T> (IntPtr eventRef, CarbonEventParameterName name, CarbonEventParameterType desiredType) where T : struct
 		{
 			int len = Marshal.SizeOf (typeof (T));
 			IntPtr bufferPtr = Marshal.AllocHGlobal (len);
-			CheckReturn (GetEventParameter (eventRef, name, desiredType, 0, (uint)len, 0, bufferPtr));
-			T val = (T)Marshal.PtrToStructure (bufferPtr, typeof (T))!; // NRT - Not sure
+			CheckReturn (GetEventParameter (eventRef, name, desiredType, 0, (uint) len, 0, bufferPtr));
+			T val = (T) Marshal.PtrToStructure (bufferPtr, typeof (T))!; // NRT - Not sure
 			Marshal.FreeHGlobal (bufferPtr);
 			return val;
 		}
-		
+
 		#endregion
-		
+
 		#region Sending events
-		
+
 		[DllImport (CarbonLib)]
 		static extern EventStatus SendEventToEventTarget (IntPtr eventRef, IntPtr eventTarget);
-		
+
 		[DllImport (CarbonLib)]
 		static extern EventStatus CreateEvent (IntPtr allocator, CarbonEventClass classID, uint kind, double eventTime,
-		                                       CarbonEventAttributes flags, out IntPtr eventHandle);
-		
+						       CarbonEventAttributes flags, out IntPtr eventHandle);
+
 		[DllImport (CarbonLib)]
 		static extern void ReleaseEvent (IntPtr eventHandle);
-		
+
 		static EventStatus SendApplicationEvent (CarbonEventClass classID, uint kind, CarbonEventAttributes flags)
 		{
 			IntPtr eventHandle;
@@ -159,21 +159,21 @@ namespace Pinta.MacInterop
 			ReleaseEvent (eventHandle);
 			return s;
 		}
-		
+
 		[DllImport (CarbonLib)]
 		public static extern CarbonEventHandlerStatus ProcessHICommand (ref CarbonHICommand command);
-		
+
 		#endregion
-		
+
 		#region Error checking
-		
+
 		public static void CheckReturn (EventStatus status)
 		{
 			int intStatus = (int) status;
 			if (intStatus < 0)
 				throw new EventStatusException (status);
 		}
-		
+
 		public static void CheckReturn (int osErr)
 		{
 			if (osErr != 0) {
@@ -181,21 +181,21 @@ namespace Pinta.MacInterop
 				throw new SystemException ("Unexpected OS error code " + osErr + ": " + s);
 			}
 		}
-		
+
 		[DllImport (CarbonLib)]
 		static extern string GetMacOSStatusCommentString (int osErr);
-		
+
 		#endregion
-		
+
 		#region Char code conversion
-		
+
 		internal static int ConvertCharCode (string fourcc)
 		{
 			Debug.Assert (fourcc != null);
 			Debug.Assert (fourcc.Length == 4);
 			return (fourcc[3]) | (fourcc[2] << 8) | (fourcc[1] << 16) | (fourcc[0] << 24);
 		}
-		
+
 		internal static string UnConvertCharCode (int i)
 		{
 			return new string (new char[] {
@@ -205,55 +205,55 @@ namespace Pinta.MacInterop
 				(char)(0xFF & i),
 			});
 		}
-		
+
 		#endregion
 
-		public static Dictionary<string,int> GetFileListFromEventRef (IntPtr eventRef)
+		public static Dictionary<string, int> GetFileListFromEventRef (IntPtr eventRef)
 		{
 			AEDesc list = GetEventParameter<AEDesc> (eventRef, CarbonEventParameterName.DirectObject, CarbonEventParameterType.AEList);
 			try {
 				int line;
 				try {
 					SelectionRange range = GetEventParameter<SelectionRange> (eventRef, CarbonEventParameterName.AEPosition, CarbonEventParameterType.Char);
-					line = range.lineNum+1;
+					line = range.lineNum + 1;
 				} catch (Exception) {
 					line = 0;
 				}
-				
-				var arr = AppleEvent.GetListFromAEDesc<string?,FSRef> (ref list, CoreFoundation.FSRefToString,
-					(OSType)(int)CarbonEventParameterType.FSRef);
-				var files = new Dictionary<string,int> ();
+
+				var arr = AppleEvent.GetListFromAEDesc<string?, FSRef> (ref list, CoreFoundation.FSRefToString,
+					(OSType) (int) CarbonEventParameterType.FSRef);
+				var files = new Dictionary<string, int> ();
 				foreach (var s in arr) {
 					if (!string.IsNullOrEmpty (s))
 						files[s] = line;
 				}
 				return files;
 			} finally {
-				CheckReturn ((int)AppleEvent.AEDisposeDesc (ref list));
+				CheckReturn ((int) AppleEvent.AEDisposeDesc (ref list));
 			}
 		}
-		
+
 		public static IList<string> GetUrlListFromEventRef (IntPtr eventRef)
 		{
 			AEDesc list = GetEventParameter<AEDesc> (eventRef, CarbonEventParameterName.DirectObject, CarbonEventParameterType.AEList);
 			try {
 				return AppleEvent.GetUtf8StringListFromAEDesc (ref list, true);
 			} finally {
-				Carbon.CheckReturn ((int)AppleEvent.AEDisposeDesc (ref list));
+				Carbon.CheckReturn ((int) AppleEvent.AEDisposeDesc (ref list));
 			}
 		}
 	}
-	
-	[StructLayout(LayoutKind.Sequential, Pack = 2, Size = 80)]
+
+	[StructLayout (LayoutKind.Sequential, Pack = 2, Size = 80)]
 	struct FSRef
 	{
 		//this is an 80-char opaque byte array
-		#pragma warning disable 0169
+#pragma warning disable 0169
 		private byte hidden;
-		#pragma warning restore 0169
+#pragma warning restore 0169
 	}
-	
-	[StructLayout(LayoutKind.Sequential)]
+
+	[StructLayout (LayoutKind.Sequential)]
 	struct SelectionRange
 	{
 		public short unused1; // 0 (not used)
@@ -263,20 +263,20 @@ namespace Pinta.MacInterop
 		public int unused2; // 0 (not used)
 		public int theDate; // modification date/time
 	}
-	
+
 	internal enum CarbonEventHandlerStatus //this is an OSStatus
 	{
 		Handled = 0,
 		NotHandled = -9874,
 		UserCancelled = -128,
 	}
-	
+
 	internal enum CarbonEventParameterName : uint
 	{
 		DirectObject = 757935405, // '----'
 		AEPosition = 1802530675, // 'kpos'
 	}
-	
+
 	internal enum CarbonEventParameterType : uint
 	{
 		HICommand = 1751346532, // 'hcmd'
@@ -290,7 +290,7 @@ namespace Pinta.MacInterop
 		WildCard = 707406378, // '****'
 		FSRef = 1718841958, // 'fsrf' 
 	}
-	
+
 	internal enum CarbonEventClass : uint
 	{
 		Mouse = 1836021107, // 'mous'
@@ -313,7 +313,7 @@ namespace Pinta.MacInterop
 		AppleEvent = 1634039412, // 'aevt'
 		Internet = 1196773964, // 'GURL'
 	}
-	
+
 	public enum CarbonCommandID : uint
 	{
 		OK = 1869291552, // 'ok  '
@@ -337,9 +337,9 @@ namespace Pinta.MacInterop
 		Print = 1886547572, // 'prnt'
 		PageSetup = 1885431653, // 'page',
 		AppHelp = 1634233456, //'ahlp'
-		
+
 		//menu manager handles these automatically
-		
+
 		Hide = 1751737445, // 'hide'
 		HideOthers = 1751737455, // 'hido'
 		ShowAll = 1936220524, // 'shal'
@@ -355,18 +355,18 @@ namespace Pinta.MacInterop
 		RotateFloatingWindowsForward = 1920231031, // 'rtfw'
 		RotateFloatingWindowsBackward = 1920231010, // 'rtfb'
 		QuitAndCloseAllWindows = 1903520631, // 'qukw'
-		
+
 		//created automatically -- used for inserting before/after the default window list
 		WindowListSeparator = 2003592310, // 'wldv'
 		WindowListTerminator = 2003596148, // 'wlst'
 	}
-	
+
 	internal enum CarbonEventCommand : uint
 	{
 		Process = 1,
 		UpdateStatus = 2,
 	}
-	
+
 	internal enum CarbonEventMenu : uint
 	{
 		BeginTracking = 1,
@@ -377,14 +377,14 @@ namespace Pinta.MacInterop
 		TargetItem = 6,
 		MatchKey = 7,
 	}
-	
+
 	internal enum CarbonEventAttributes : uint
 	{
 		None = 0,
 		UserEvent = (1 << 0),
-		Monitored= 1 << 3,
+		Monitored = 1 << 3,
 	}
-	
+
 	internal enum CarbonEventApple
 	{
 		OpenApplication = 1868656752, // 'oapp'
@@ -392,13 +392,13 @@ namespace Pinta.MacInterop
 		OpenDocuments = 1868853091, // 'odoc'
 		PrintDocuments = 188563030, // 'pdoc'
 		OpenContents = 1868787566, // 'ocon'
-		QuitApplication =  1903520116, // 'quit'
+		QuitApplication = 1903520116, // 'quit'
 		ShowPreferences = 1886545254, // 'pref'
 		ApplicationDied = 1868720500, // 'obit'
 		GetUrl = 1196773964, // 'GURL'
 	}
-	
-	[StructLayout(LayoutKind.Sequential, Pack = 2)]
+
+	[StructLayout (LayoutKind.Sequential, Pack = 2)]
 	struct CarbonEventTypeSpec
 	{
 		public CarbonEventClass EventClass;
@@ -409,52 +409,52 @@ namespace Pinta.MacInterop
 			this.EventClass = eventClass;
 			this.EventKind = eventKind;
 		}
-		
+
 		public CarbonEventTypeSpec (CarbonEventMenu kind) : this (CarbonEventClass.Menu, (uint) kind)
 		{
 		}
-		
+
 		public CarbonEventTypeSpec (CarbonEventCommand kind) : this (CarbonEventClass.Command, (uint) kind)
 		{
 		}
-		
-		
+
+
 		public CarbonEventTypeSpec (CarbonEventApple kind) : this (CarbonEventClass.AppleEvent, (uint) kind)
 		{
 		}
-		
+
 		public static implicit operator CarbonEventTypeSpec (CarbonEventMenu kind)
 		{
 			return new CarbonEventTypeSpec (kind);
 		}
-		
+
 		public static implicit operator CarbonEventTypeSpec (CarbonEventCommand kind)
 		{
 			return new CarbonEventTypeSpec (kind);
 		}
-		
+
 		public static implicit operator CarbonEventTypeSpec (CarbonEventApple kind)
 		{
 			return new CarbonEventTypeSpec (kind);
 		}
 	}
-	
+
 	class EventStatusException : SystemException
 	{
 		public EventStatusException (EventStatus status)
 		{
 			StatusCode = status;
 		}
-		
+
 		public EventStatus StatusCode {
 			get; private set;
 		}
 	}
-	
+
 	enum EventStatus // this is an OSStatus
 	{
 		Ok = 0,
-		
+
 		//event manager
 		EventAlreadyPostedErr = -9860,
 		EventTargetBusyErr = -9861,
@@ -471,25 +471,25 @@ namespace Pinta.MacInterop
 		EventHotKeyExistsErr = -9878,
 		EventHotKeyInvalidErr = -9879,
 	}
-	
-	[StructLayout(LayoutKind.Explicit)]
+
+	[StructLayout (LayoutKind.Explicit)]
 	struct CarbonHICommand //technically HICommandExtended, but they're compatible
 	{
-		[FieldOffset(0)]
+		[FieldOffset (0)]
 		CarbonHICommandAttributes attributes;
-		
-		[FieldOffset(4)]
+
+		[FieldOffset (4)]
 		uint commandID;
-		
-		[FieldOffset(8)]
+
+		[FieldOffset (8)]
 		IntPtr controlRef;
-		
-		[FieldOffset(8)]
+
+		[FieldOffset (8)]
 		IntPtr windowRef;
-		
-		[FieldOffset(8)]
+
+		[FieldOffset (8)]
 		HIMenuItem menuItem;
-		
+
 		public CarbonHICommand (uint commandID, HIMenuItem item)
 		{
 			windowRef = controlRef = IntPtr.Zero;
@@ -497,77 +497,78 @@ namespace Pinta.MacInterop
 			this.menuItem = item;
 			this.attributes = CarbonHICommandAttributes.FromMenu;
 		}
-		
+
 		public CarbonHICommandAttributes Attributes { get { return attributes; } }
 		public uint CommandID { get { return commandID; } }
 		public IntPtr ControlRef { get { return controlRef; } }
 		public IntPtr WindowRef { get { return windowRef; } }
 		public HIMenuItem MenuItem { get { return menuItem; } }
-		
+
 		public bool IsFromMenu {
 			get { return attributes == CarbonHICommandAttributes.FromMenu; }
 		}
-		
+
 		public bool IsFromControl {
 			get { return attributes == CarbonHICommandAttributes.FromControl; }
 		}
-		
+
 		public bool IsFromWindow {
 			get { return attributes == CarbonHICommandAttributes.FromWindow; }
 		}
 	}
-	
-	[StructLayout(LayoutKind.Sequential, Pack = 2)]
+
+	[StructLayout (LayoutKind.Sequential, Pack = 2)]
 	struct HIMenuItem
 	{
 		IntPtr menuRef;
 		ushort index;
-		
+
 		public HIMenuItem (IntPtr menuRef, ushort index)
 		{
 			this.index = index;
 			this.menuRef = menuRef;
 		}
-		
+
 		public IntPtr MenuRef { get { return menuRef; } }
 		public ushort Index { get { return index; } }
 	}
-	
+
 	//*NOT* flags
 	enum CarbonHICommandAttributes : uint
 	{
 		FromMenu = 1,
 		FromControl = 1 << 1,
-		FromWindow  = 1 << 2,
+		FromWindow = 1 << 2,
 	}
-	
-	struct OSType {
+
+	struct OSType
+	{
 		int value;
-		
+
 		public int Value {
 			get { return value; }
 		}
-		
+
 		public OSType (int value)
 		{
 			this.value = value;
 		}
-		
+
 		public OSType (string fourcc)
 		{
 			value = Carbon.ConvertCharCode (fourcc);
 		}
-		
+
 		public static explicit operator OSType (string fourcc)
 		{
-			return new OSType (fourcc); 
+			return new OSType (fourcc);
 		}
-		
+
 		public static implicit operator int (OSType o)
 		{
 			return o.value;
 		}
-		
+
 		public static implicit operator OSType (int i)
 		{
 			return new OSType (i);

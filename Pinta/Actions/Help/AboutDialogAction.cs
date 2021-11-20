@@ -1,4 +1,4 @@
-﻿// 
+// 
 // AboutDialogAction.cs
 //  
 // Author:
@@ -47,7 +47,7 @@ namespace Pinta.Actions
 		private void Activated (object sender, EventArgs e)
 		{
 			using var dlg = new AboutDialog ();
-			dlg.Run();
+			dlg.Run ();
 		}
 	}
 }

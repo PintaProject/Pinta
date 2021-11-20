@@ -40,7 +40,7 @@ namespace Pinta.Tools.Brushes
 		}
 
 		protected override Gdk.Rectangle OnMouseMove (Context g, Color strokeColor, ImageSurface surface,
-		                                              int x, int y, int lastX, int lastY)
+							      int x, int y, int lastX, int lastY)
 		{
 			int dx = x - lastX;
 			int dy = y - lastY;

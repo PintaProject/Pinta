@@ -8,9 +8,9 @@
 /////////////////////////////////////////////////////////////////////////////////
 
 using System;
-using Pinta.Gui.Widgets;
 using Cairo;
 using Pinta.Core;
+using Pinta.Gui.Widgets;
 
 namespace Pinta.Effects
 {
@@ -32,7 +32,7 @@ namespace Pinta.Effects
 			get { return Translations.GetString ("Render"); }
 		}
 
-		public MandelbrotFractalData Data { get { return (MandelbrotFractalData)EffectData!; } } // NRT - Set in constructor
+		public MandelbrotFractalData Data { get { return (MandelbrotFractalData) EffectData!; } } // NRT - Set in constructor
 
 		public MandelbrotFractalEffect ()
 		{
@@ -59,16 +59,16 @@ namespace Pinta.Effects
 			int c = 0;
 			double x = 0;
 			double y = 0;
-			
+
 			while ((c * factor) < 1024 && ((x * x) + (y * y)) < max) {
 				double t = x;
-				
+
 				x = x * x - y * y + r;
 				y = 2 * t * y + i;
-				
+
 				++c;
 			}
-			
+
 			return c - Math.Log (y * y + x * x) * invLogMax;
 		}
 
@@ -76,69 +76,69 @@ namespace Pinta.Effects
 		{
 			int w = dst.Width;
 			int h = dst.Height;
-			
+
 			double invH = 1.0 / h;
 			double zoom = 1 + zoomFactor * Data.Zoom;
 			double invZoom = 1.0 / zoom;
-			
-			double invQuality = 1.0 / (double)Data.Quality;
-			
+
+			double invQuality = 1.0 / (double) Data.Quality;
+
 			int count = Data.Quality * Data.Quality + 1;
-			double invCount = 1.0 / (double)count;
+			double invCount = 1.0 / (double) count;
 			double angleTheta = (Data.Angle * 2 * Math.PI) / 360;
-			
-			ColorBgra* dst_dataptr = (ColorBgra*)dst.DataPtr;
+
+			ColorBgra* dst_dataptr = (ColorBgra*) dst.DataPtr;
 			int dst_width = dst.Width;
-			
+
 			foreach (Gdk.Rectangle rect in rois) {
 				for (int y = rect.Top; y <= rect.GetBottom (); y++) {
 					ColorBgra* dstPtr = dst.GetPointAddressUnchecked (dst_dataptr, dst_width, rect.Left, y);
-					
+
 					for (int x = rect.Left; x <= rect.GetRight (); x++) {
 						int r = 0;
 						int g = 0;
 						int b = 0;
 						int a = 0;
-						
+
 						for (double i = 0; i < count; i++) {
 							double u = (2.0 * x - w + (i * invCount)) * invH;
 							double v = (2.0 * y - h + ((i * invQuality) % 1)) * invH;
-							
+
 							double radius = Math.Sqrt ((u * u) + (v * v));
 							double radiusP = radius;
 							double theta = Math.Atan2 (v, u);
 							double thetaP = theta + angleTheta;
-							
+
 							double uP = radiusP * Math.Cos (thetaP);
 							double vP = radiusP * Math.Sin (thetaP);
-							
+
 							double m = Mandelbrot ((uP * invZoom) + this.xOffset, (vP * invZoom) + this.yOffset, Data.Factor);
-							
+
 							double c = 64 + Data.Factor * m;
-							
+
 							r += Utility.ClampToByte (c - 768);
 							g += Utility.ClampToByte (c - 512);
 							b += Utility.ClampToByte (c - 256);
 							a += Utility.ClampToByte (c - 0);
 						}
-						
+
 						*dstPtr = ColorBgra.FromBgra (Utility.ClampToByte (b / count), Utility.ClampToByte (g / count), Utility.ClampToByte (r / count), Utility.ClampToByte (a / count));
-						
+
 						++dstPtr;
 					}
 				}
-				
+
 				if (Data.InvertColors) {
 					for (int y = rect.Top; y <= rect.GetBottom (); y++) {
 						ColorBgra* dstPtr = dst.GetPointAddressUnchecked (dst_dataptr, dst_width, rect.Left, y);
-						
+
 						for (int x = rect.Left; x <= rect.GetRight (); ++x) {
 							ColorBgra c = *dstPtr;
-							
-							c.B = (byte)(255 - c.B);
-							c.G = (byte)(255 - c.G);
-							c.R = (byte)(255 - c.R);
-							
+
+							c.B = (byte) (255 - c.B);
+							c.G = (byte) (255 - c.G);
+							c.R = (byte) (255 - c.R);
+
 							*dstPtr = c;
 							++dstPtr;
 						}
@@ -150,14 +150,14 @@ namespace Pinta.Effects
 
 		public class MandelbrotFractalData : EffectData
 		{
-			[Caption ("Factor"), MinimumValue(1), MaximumValue(10)]
+			[Caption ("Factor"), MinimumValue (1), MaximumValue (10)]
 			public int Factor = 1;
 
-			[Caption ("Quality"), MinimumValue(1), MaximumValue(5)]
+			[Caption ("Quality"), MinimumValue (1), MaximumValue (5)]
 			public int Quality = 2;
 
 			//TODO double
-			[Caption ("Zoom"), MinimumValue(0), MaximumValue(100)]
+			[Caption ("Zoom"), MinimumValue (0), MaximumValue (100)]
 			public int Zoom = 10;
 
 			[Caption ("Angle")]
@@ -165,7 +165,7 @@ namespace Pinta.Effects
 
 			[Caption ("Invert Colors")]
 			public bool InvertColors = false;
-			
+
 		}
 	}
 }

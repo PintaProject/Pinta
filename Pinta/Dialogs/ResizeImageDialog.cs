@@ -41,10 +41,10 @@ namespace Pinta
 		private CheckButton aspectCheckbox;
 
 		private bool value_changing;
-		
+
 		public ResizeImageDialog () : base (Translations.GetString ("Resize Image"), PintaCore.Chrome.MainWindow,
-		                                    DialogFlags.Modal,
-											Core.GtkExtensions.DialogButtonsCancelOk())
+						    DialogFlags.Modal,
+											Core.GtkExtensions.DialogButtonsCancelOk ())
 		{
 			Build ();
 
@@ -62,13 +62,13 @@ namespace Pinta
 
 			widthSpinner.ValueChanged += new EventHandler (widthSpinner_ValueChanged);
 			heightSpinner.ValueChanged += new EventHandler (heightSpinner_ValueChanged);
-			
+
 			DefaultResponse = Gtk.ResponseType.Ok;
 
 			widthSpinner.ActivatesDefault = true;
 			heightSpinner.ActivatesDefault = true;
 			percentageSpinner.ActivatesDefault = true;
-			percentageSpinner.GrabFocus();
+			percentageSpinner.GrabFocus ();
 		}
 
 		#region Public Methods
@@ -77,16 +77,16 @@ namespace Pinta
 			PintaCore.Workspace.ResizeImage (widthSpinner.ValueAsInt, heightSpinner.ValueAsInt);
 		}
 		#endregion
-		
+
 		#region Private Methods
 		private void heightSpinner_ValueChanged (object? sender, EventArgs e)
 		{
 			if (value_changing)
 				return;
-				
+
 			if (aspectCheckbox.Active) {
 				value_changing = true;
-				widthSpinner.Value = (int)((heightSpinner.Value * PintaCore.Workspace.ImageSize.Width) / PintaCore.Workspace.ImageSize.Height);
+				widthSpinner.Value = (int) ((heightSpinner.Value * PintaCore.Workspace.ImageSize.Width) / PintaCore.Workspace.ImageSize.Height);
 				value_changing = false;
 			}
 		}
@@ -98,15 +98,15 @@ namespace Pinta
 
 			if (aspectCheckbox.Active) {
 				value_changing = true;
-				heightSpinner.Value = (int)((widthSpinner.Value * PintaCore.Workspace.ImageSize.Height) / PintaCore.Workspace.ImageSize.Width);
+				heightSpinner.Value = (int) ((widthSpinner.Value * PintaCore.Workspace.ImageSize.Height) / PintaCore.Workspace.ImageSize.Width);
 				value_changing = false;
 			}
 		}
 
 		private void percentageSpinner_ValueChanged (object? sender, EventArgs e)
 		{
-			widthSpinner.Value = (int)(PintaCore.Workspace.ImageSize.Width * (percentageSpinner.ValueAsInt / 100f));
-			heightSpinner.Value = (int)(PintaCore.Workspace.ImageSize.Height * (percentageSpinner.ValueAsInt / 100f));
+			widthSpinner.Value = (int) (PintaCore.Workspace.ImageSize.Width * (percentageSpinner.ValueAsInt / 100f));
+			heightSpinner.Value = (int) (PintaCore.Workspace.ImageSize.Height * (percentageSpinner.ValueAsInt / 100f));
 		}
 
 		private void absoluteRadio_Toggled (object? sender, EventArgs e)
@@ -137,7 +137,7 @@ namespace Pinta
 		}
 
 		[MemberNotNull (nameof (percentageRadio), nameof (absoluteRadio), nameof (percentageSpinner), nameof (widthSpinner), nameof (heightSpinner), nameof (aspectCheckbox))]
-		private void Build()
+		private void Build ()
 		{
 			IconName = Resources.Icons.ImageResize;
 			WindowPosition = WindowPosition.CenterOnParent;

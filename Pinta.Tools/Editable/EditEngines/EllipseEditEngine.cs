@@ -1,4 +1,4 @@
-﻿// 
+// 
 // EllipseEditEngine.cs
 //  
 // Author:
@@ -25,31 +25,31 @@
 // THE SOFTWARE.
 
 using System;
-using Cairo;
-using Pinta.Core;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using Cairo;
+using Pinta.Core;
 
 namespace Pinta.Tools
 {
-    public class EllipseEditEngine: BaseEditEngine
-    {
-        protected override string ShapeName { get { return Translations.GetString ("Ellipse"); } }
+	public class EllipseEditEngine : BaseEditEngine
+	{
+		protected override string ShapeName { get { return Translations.GetString ("Ellipse"); } }
 
-        public EllipseEditEngine (ShapeTool owner)
-            : base (owner)
-        {
-        }
+		public EllipseEditEngine (ShapeTool owner)
+		    : base (owner)
+		{
+		}
 
-        protected override ShapeEngine CreateShape (bool ctrlKey, bool clickedOnControlPoint, PointD prevSelPoint)
+		protected override ShapeEngine CreateShape (bool ctrlKey, bool clickedOnControlPoint, PointD prevSelPoint)
 		{
 			Document doc = PintaCore.Workspace.ActiveDocument;
 
-			ShapeEngine newEngine = new EllipseEngine(doc.Layers.CurrentUserLayer, null, owner.UseAntialiasing,
+			ShapeEngine newEngine = new EllipseEngine (doc.Layers.CurrentUserLayer, null, owner.UseAntialiasing,
 				BaseEditEngine.OutlineColor, BaseEditEngine.FillColor, owner.EditEngine.BrushWidth);
 
-			AddRectanglePoints(ctrlKey, clickedOnControlPoint, newEngine, prevSelPoint);
+			AddRectanglePoints (ctrlKey, clickedOnControlPoint, newEngine, prevSelPoint);
 
 			//Set the new shape's DashPattern option.
 			newEngine.DashPattern = dash_pattern_box.comboBox!.ComboBox.ActiveText; // NRT - Code assumes this is not-null
@@ -57,11 +57,11 @@ namespace Pinta.Tools
 			return newEngine;
 		}
 
-        protected override void MovePoint (List<ControlPoint> controlPoints)
+		protected override void MovePoint (List<ControlPoint> controlPoints)
 		{
-			MoveRectangularPoint(controlPoints);
+			MoveRectangularPoint (controlPoints);
 
-			base.MovePoint(controlPoints);
+			base.MovePoint (controlPoints);
 		}
-    }
+	}
 }

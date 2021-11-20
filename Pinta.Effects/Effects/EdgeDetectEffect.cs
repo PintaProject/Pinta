@@ -8,18 +8,17 @@
 /////////////////////////////////////////////////////////////////////////////////
 
 using System;
-using Cairo;
-
-using Pinta.Gui.Widgets;
-using Pinta.Core;
 using System.Diagnostics.CodeAnalysis;
+using Cairo;
+using Pinta.Core;
+using Pinta.Gui.Widgets;
 
 namespace Pinta.Effects
 {
 	public class EdgeDetectEffect : ColorDifferenceEffect
 	{
 		private double[][]? weights;
-		
+
 		public override string Icon {
 			get { return "Menu.Effects.Stylize.EdgeDetect.png"; }
 		}
@@ -36,18 +35,18 @@ namespace Pinta.Effects
 			get { return Translations.GetString ("Stylize"); }
 		}
 
-		public EdgeDetectData Data { get { return (EdgeDetectData)EffectData!; } } // NRT - Set in constructor
-		
+		public EdgeDetectData Data { get { return (EdgeDetectData) EffectData!; } } // NRT - Set in constructor
+
 		public EdgeDetectEffect ()
 		{
 			EffectData = new EdgeDetectData ();
 		}
-		
+
 		public override bool LaunchConfiguration ()
 		{
 			return EffectHelper.LaunchSimpleEffectDialog (this);
 		}
-		
+
 		public unsafe override void Render (ImageSurface src, ImageSurface dest, Gdk.Rectangle[] rois)
 		{
 			SetWeights ();
@@ -58,32 +57,32 @@ namespace Pinta.Effects
 		private void SetWeights ()
 		{
 			weights = new double[3][];
-            for (int i = 0; i < this.weights.Length; ++i) {
-                this.weights[i] = new double[3];
-            }
+			for (int i = 0; i < this.weights.Length; ++i) {
+				this.weights[i] = new double[3];
+			}
 
-            // adjust and convert angle to radians
-            double r = (double)Data.Angle * 2.0 * Math.PI / 360.0;
+			// adjust and convert angle to radians
+			double r = (double) Data.Angle * 2.0 * Math.PI / 360.0;
 
-            // angle delta for each weight
-            double dr = Math.PI / 4.0;
+			// angle delta for each weight
+			double dr = Math.PI / 4.0;
 
-            // for r = 0 this builds an edge detect filter pointing straight left
+			// for r = 0 this builds an edge detect filter pointing straight left
 
-            this.weights[0][0] = Math.Cos(r + dr);
-            this.weights[0][1] = Math.Cos(r + 2.0 * dr);
-            this.weights[0][2] = Math.Cos(r + 3.0 * dr);
+			this.weights[0][0] = Math.Cos (r + dr);
+			this.weights[0][1] = Math.Cos (r + 2.0 * dr);
+			this.weights[0][2] = Math.Cos (r + 3.0 * dr);
 
-            this.weights[1][0] = Math.Cos(r);
-            this.weights[1][1] = 0;
-            this.weights[1][2] = Math.Cos(r + 4.0 * dr);
+			this.weights[1][0] = Math.Cos (r);
+			this.weights[1][1] = 0;
+			this.weights[1][2] = Math.Cos (r + 4.0 * dr);
 
-            this.weights[2][0] = Math.Cos(r - dr);
-            this.weights[2][1] = Math.Cos(r - 2.0 * dr);
-            this.weights[2][2] = Math.Cos(r - 3.0 * dr);
+			this.weights[2][0] = Math.Cos (r - dr);
+			this.weights[2][1] = Math.Cos (r - 2.0 * dr);
+			this.weights[2][2] = Math.Cos (r - 3.0 * dr);
 		}
 	}
-	
+
 	public class EdgeDetectData : EffectData
 	{
 		[Caption ("Angle")]

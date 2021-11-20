@@ -1,4 +1,4 @@
-﻿// 
+// 
 // PasteIntoNewLayerAction.cs
 //  
 // Author:

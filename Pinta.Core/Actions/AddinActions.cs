@@ -37,7 +37,7 @@ namespace Pinta.Core
 		public AddinActions ()
 		{
 			AddinManager = new Command ("AddinManager", Translations.GetString ("Add-in Manager"),
-			                               null, Resources.Icons.AddinsManage);
+						       null, Resources.Icons.AddinsManage);
 		}
 
 		/// <summary>
@@ -54,20 +54,20 @@ namespace Pinta.Core
 		public void RemoveMenuItem (GLib.MenuItem item)
 		{
 			// TODO-GTK3 (addins)
-			throw new NotImplementedException();
+			throw new NotImplementedException ();
 #if false
 			addins_menu.Remove (item);
 #endif
 		}
 
 		#region Initialization
-		public void RegisterActions(Gtk.Application app, GLib.Menu menu)
+		public void RegisterActions (Gtk.Application app, GLib.Menu menu)
 		{
-			app.AddAction(AddinManager);
-			menu.AppendItem(AddinManager.CreateMenuItem());
+			app.AddAction (AddinManager);
+			menu.AppendItem (AddinManager.CreateMenuItem ());
 
-			addins_menu = new GLib.Menu();
-			menu.AppendSection(null, addins_menu);
+			addins_menu = new GLib.Menu ();
+			menu.AppendSection (null, addins_menu);
 		}
 		#endregion
 	}

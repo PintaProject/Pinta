@@ -96,7 +96,7 @@ namespace Pinta.Gui.Widgets
 		{
 			if (tracking) {
 				// Left mouse button
-				if (args.Event.Button == 1) 
+				if (args.Event.Button == 1)
 					Position = MousePtToPosition (new PointD (args.Event.X, args.Event.Y));
 
 				tracking = false;

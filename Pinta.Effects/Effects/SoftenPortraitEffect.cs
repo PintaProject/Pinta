@@ -35,17 +35,16 @@ THE SOFTWARE.
 */
 using System;
 using Cairo;
-
-using Pinta.Gui.Widgets;
-using Pinta.Effects;
 using Pinta.Core;
+using Pinta.Effects;
+using Pinta.Gui.Widgets;
 
 namespace Pinta.Effects
 {
 	public class SoftenPortraitEffect : BaseEffect
 	{
 		private GaussianBlurEffect blurEffect;
-        private BrightnessContrastEffect bacAdjustment;
+		private BrightnessContrastEffect bacAdjustment;
 		private UnaryPixelOps.Desaturate desaturateOp;
 		private UserBlendOps.OverlayBlendOp overlayOp;
 
@@ -65,62 +64,62 @@ namespace Pinta.Effects
 			get { return Translations.GetString ("Photo"); }
 		}
 
-		public SoftenPortraitData Data { get { return (SoftenPortraitData)EffectData!; } } // NRT - Set in constructor
-		
+		public SoftenPortraitData Data { get { return (SoftenPortraitData) EffectData!; } } // NRT - Set in constructor
+
 		public SoftenPortraitEffect ()
 		{
 			EffectData = new SoftenPortraitData ();
-			
+
 			blurEffect = new GaussianBlurEffect ();
 			bacAdjustment = new BrightnessContrastEffect ();
 			desaturateOp = new UnaryPixelOps.Desaturate ();
 			overlayOp = new UserBlendOps.OverlayBlendOp ();
 		}
-		
+
 		public override bool LaunchConfiguration ()
 		{
 			return EffectHelper.LaunchSimpleEffectDialog (this);
 		}
-		
+
 		public unsafe override void Render (ImageSurface src, ImageSurface dest, Gdk.Rectangle[] rois)
 		{
 			int warmth = Data.Warmth;
 			float redAdjust = 1.0f + (warmth / 100.0f);
-            float blueAdjust = 1.0f - (warmth / 100.0f);
+			float blueAdjust = 1.0f - (warmth / 100.0f);
 
-            this.blurEffect.Render(src, dest, rois);
-            this.bacAdjustment.Render(src, dest, rois);
+			this.blurEffect.Render (src, dest, rois);
+			this.bacAdjustment.Render (src, dest, rois);
 
 			foreach (Gdk.Rectangle roi in rois) {
-                for (int y = roi.Top; y <= roi.GetBottom (); ++y) {
-                    ColorBgra* srcPtr = src.GetPointAddress(roi.X, y);
-                    ColorBgra* dstPtr = dest.GetPointAddress(roi.X, y);
+				for (int y = roi.Top; y <= roi.GetBottom (); ++y) {
+					ColorBgra* srcPtr = src.GetPointAddress (roi.X, y);
+					ColorBgra* dstPtr = dest.GetPointAddress (roi.X, y);
 
-                    for (int x = roi.Left; x <= roi.GetRight (); ++x) {
-                        ColorBgra srcGrey = this.desaturateOp.Apply(*srcPtr);
+					for (int x = roi.Left; x <= roi.GetRight (); ++x) {
+						ColorBgra srcGrey = this.desaturateOp.Apply (*srcPtr);
 
-                        srcGrey.R = Utility.ClampToByte((int)((float)srcGrey.R * redAdjust));
-                        srcGrey.B = Utility.ClampToByte((int)((float)srcGrey.B * blueAdjust));
+						srcGrey.R = Utility.ClampToByte ((int) ((float) srcGrey.R * redAdjust));
+						srcGrey.B = Utility.ClampToByte ((int) ((float) srcGrey.B * blueAdjust));
 
-                        ColorBgra mypixel = this.overlayOp.Apply(srcGrey, *dstPtr);
-                        *dstPtr = mypixel;
+						ColorBgra mypixel = this.overlayOp.Apply (srcGrey, *dstPtr);
+						*dstPtr = mypixel;
 
-                        ++srcPtr;
-                        ++dstPtr;
-                    }
-                }
+						++srcPtr;
+						++dstPtr;
+					}
+				}
 			}
 		}
 	}
-	
+
 	public class SoftenPortraitData : EffectData
 	{
 		[Caption ("Softness"), MinimumValue (0), MaximumValue (10)]
 		public int Softness = 5;
-		
+
 		[Caption ("Lighting"), MinimumValue (-20), MaximumValue (20)]
 		public int Lighting = 0;
-		
+
 		[Caption ("Warmth"), MinimumValue (0), MaximumValue (20)]
 		public int Warmth = 10;
 	}

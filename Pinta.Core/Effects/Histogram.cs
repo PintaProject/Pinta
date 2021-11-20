@@ -10,211 +10,185 @@ using Cairo;
 
 namespace Pinta.Core
 {
-    /// <summary>
-    /// Histogram is used to calculate a histogram for a surface (in a selection,
-    /// if desired). This can then be used to retrieve percentile, average, peak,
-    /// and distribution information.
-    /// </summary>
-    public abstract class Histogram
-    {
-        protected long[][] histogram;
-        public long[][] HistogramValues
-        {
-            get
-            {
-                return this.histogram;
-            }
+	/// <summary>
+	/// Histogram is used to calculate a histogram for a surface (in a selection,
+	/// if desired). This can then be used to retrieve percentile, average, peak,
+	/// and distribution information.
+	/// </summary>
+	public abstract class Histogram
+	{
+		protected long[][] histogram;
+		public long[][] HistogramValues {
+			get {
+				return this.histogram;
+			}
 
-            set
-            {
-                if (value.Length == this.histogram.Length && value[0].Length == this.histogram[0].Length)
-                {
-                    this.histogram = value;
-                    OnHistogramUpdated();
-                }
-                else
-                {
-                    throw new ArgumentException("value muse be an array of arrays of matching size", "value");
-                }
-            }
-        }
-     
-        public int Channels
-        {
-            get
-            {
-                return this.histogram.Length;
-            }
-        }
-     
-        public int Entries
-        {
-            get
-            {
-                return this.histogram[0].Length;
-            }
-        }
+			set {
+				if (value.Length == this.histogram.Length && value[0].Length == this.histogram[0].Length) {
+					this.histogram = value;
+					OnHistogramUpdated ();
+				} else {
+					throw new ArgumentException ("value muse be an array of arrays of matching size", "value");
+				}
+			}
+		}
 
-        protected internal Histogram(int channels, int entries)
-        {
-            this.histogram = new long[channels][];
+		public int Channels {
+			get {
+				return this.histogram.Length;
+			}
+		}
 
-            for (int channel = 0; channel < channels; ++channel)
-            {
-                this.histogram[channel] = new long[entries];
-            }
-        }
+		public int Entries {
+			get {
+				return this.histogram[0].Length;
+			}
+		}
 
-        public event EventHandler? HistogramChanged;
-        protected void OnHistogramUpdated()
-        {
-            if (HistogramChanged != null)
-            {
-                HistogramChanged(this, EventArgs.Empty);
-            }
-        }
+		protected internal Histogram (int channels, int entries)
+		{
+			this.histogram = new long[channels][];
 
-        protected ColorBgra[] visualColors = null!; // NRT - Set by constructor of only subclass
-        public ColorBgra GetVisualColor(int channel)
-        {
-            return visualColors[channel];
-        }
+			for (int channel = 0; channel < channels; ++channel) {
+				this.histogram[channel] = new long[entries];
+			}
+		}
 
-        public long GetOccurrences(int channel, int val) 
-        {
-            return histogram[channel][val];
-        }
+		public event EventHandler? HistogramChanged;
+		protected void OnHistogramUpdated ()
+		{
+			if (HistogramChanged != null) {
+				HistogramChanged (this, EventArgs.Empty);
+			}
+		}
 
-        public long GetMax() 
-        {
-            long max = -1;
+		protected ColorBgra[] visualColors = null!; // NRT - Set by constructor of only subclass
+		public ColorBgra GetVisualColor (int channel)
+		{
+			return visualColors[channel];
+		}
 
-            foreach (long[] channelHistogram in histogram)
-            {
-                foreach (long i in channelHistogram)
-                {
-                    if (i > max)
-                    {
-                        max = i;
-                    }
-                }
-            }
-            
-            return max;
-        }
+		public long GetOccurrences (int channel, int val)
+		{
+			return histogram[channel][val];
+		}
 
-        public long GetMax(int channel)
-        {
-            long max = -1;
+		public long GetMax ()
+		{
+			long max = -1;
 
-            foreach (long i in histogram[channel])
-            {
-                if (i > max)
-                {
-                    max = i;
-                }
-            }
+			foreach (long[] channelHistogram in histogram) {
+				foreach (long i in channelHistogram) {
+					if (i > max) {
+						max = i;
+					}
+				}
+			}
 
-            return max;
-        }
+			return max;
+		}
 
-        public float[] GetMean() 
-        {
-            float[] ret = new float[Channels];
+		public long GetMax (int channel)
+		{
+			long max = -1;
 
-            for (int channel = 0; channel < Channels; ++channel)
-            {
-                long[] channelHistogram = histogram[channel];
-                long avg = 0;
-                long sum = 0;
+			foreach (long i in histogram[channel]) {
+				if (i > max) {
+					max = i;
+				}
+			}
 
-                for (int j = 0; j < channelHistogram.Length; j++)
-                {
-                    avg += j * channelHistogram[j];
-                    sum += channelHistogram[j];
-                }
+			return max;
+		}
 
-                if (sum != 0)
-                {
-                    ret[channel] = (float)avg / (float)sum;
-                }
-                else
-                {
-                    ret[channel] = 0;
-                }
-            }
+		public float[] GetMean ()
+		{
+			float[] ret = new float[Channels];
 
-            return ret;
-        }
+			for (int channel = 0; channel < Channels; ++channel) {
+				long[] channelHistogram = histogram[channel];
+				long avg = 0;
+				long sum = 0;
 
-        public int[] GetPercentile(float fraction) 
-        {
-            int[] ret = new int[Channels];
+				for (int j = 0; j < channelHistogram.Length; j++) {
+					avg += j * channelHistogram[j];
+					sum += channelHistogram[j];
+				}
 
-            for (int channel = 0; channel < Channels; ++channel)
-            {
-                long[] channelHistogram = histogram[channel];
-                long integral = 0;
-                long sum = 0;
+				if (sum != 0) {
+					ret[channel] = (float) avg / (float) sum;
+				} else {
+					ret[channel] = 0;
+				}
+			}
 
-                for (int j = 0; j < channelHistogram.Length; j++) 
-                {
-                    sum += channelHistogram[j];
-                }
+			return ret;
+		}
 
-                for (int j = 0; j < channelHistogram.Length; j++)
-                {
-                    integral += channelHistogram[j];
+		public int[] GetPercentile (float fraction)
+		{
+			int[] ret = new int[Channels];
 
-                    if (integral > sum * fraction) 
-                    {
-                        ret[channel] = j;
-                        break;
-                    }
-                }
-            }
+			for (int channel = 0; channel < Channels; ++channel) {
+				long[] channelHistogram = histogram[channel];
+				long integral = 0;
+				long sum = 0;
 
-            return ret;
-        }
+				for (int j = 0; j < channelHistogram.Length; j++) {
+					sum += channelHistogram[j];
+				}
 
-        public abstract ColorBgra GetMeanColor();
+				for (int j = 0; j < channelHistogram.Length; j++) {
+					integral += channelHistogram[j];
 
-        public abstract ColorBgra GetPercentileColor(float fraction);
+					if (integral > sum * fraction) {
+						ret[channel] = j;
+						break;
+					}
+				}
+			}
 
-        /// <summary>
-        /// Sets the histogram to be all zeros.
-        /// </summary>
-        protected void Clear()
-        {
-            histogram.Initialize();
-        }
+			return ret;
+		}
 
-        protected abstract void AddSurfaceRectangleToHistogram(ImageSurface surface, Gdk.Rectangle rect);
+		public abstract ColorBgra GetMeanColor ();
 
-	//public void UpdateHistogram(Surface surface)
-	//{
-	//    Clear();
-	//    AddSurfaceRectangleToHistogram(surface, surface.Bounds);
-	//    OnHistogramUpdated();
-	//}
+		public abstract ColorBgra GetPercentileColor (float fraction);
 
-	public void UpdateHistogram (ImageSurface surface, Gdk.Rectangle rect)
-        {
-            Clear();
-            AddSurfaceRectangleToHistogram(surface, rect);
-            OnHistogramUpdated();
-        }
+		/// <summary>
+		/// Sets the histogram to be all zeros.
+		/// </summary>
+		protected void Clear ()
+		{
+			histogram.Initialize ();
+		}
 
-	//public void UpdateHistogram(Surface surface, PdnRegion roi)
-	//{
-	//    Clear();
+		protected abstract void AddSurfaceRectangleToHistogram (ImageSurface surface, Gdk.Rectangle rect);
 
-	//    foreach (Rectangle rect in roi.GetRegionScansReadOnlyInt()) 
-	//    {
-	//        AddSurfaceRectangleToHistogram(surface, rect);
-	//    }
+		//public void UpdateHistogram(Surface surface)
+		//{
+		//    Clear();
+		//    AddSurfaceRectangleToHistogram(surface, surface.Bounds);
+		//    OnHistogramUpdated();
+		//}
 
-	//    OnHistogramUpdated();
-	//}
-    }
+		public void UpdateHistogram (ImageSurface surface, Gdk.Rectangle rect)
+		{
+			Clear ();
+			AddSurfaceRectangleToHistogram (surface, rect);
+			OnHistogramUpdated ();
+		}
+
+		//public void UpdateHistogram(Surface surface, PdnRegion roi)
+		//{
+		//    Clear();
+
+		//    foreach (Rectangle rect in roi.GetRegionScansReadOnlyInt()) 
+		//    {
+		//        AddSurfaceRectangleToHistogram(surface, rect);
+		//    }
+
+		//    OnHistogramUpdated();
+		//}
+	}
 }

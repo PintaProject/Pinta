@@ -1,4 +1,4 @@
-﻿//  
+//  
 // Author:
 //       Cameron White <cameronwhite91@gmail.com>
 // 

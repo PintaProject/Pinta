@@ -9,9 +9,9 @@ using System;
 
 namespace Pinta.Core
 {
-    public enum ColorTransferMode
-    {
-        Rgb,
-        Luminosity
-    }
+	public enum ColorTransferMode
+	{
+		Rgb,
+		Luminosity
+	}
 }

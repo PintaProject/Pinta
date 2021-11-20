@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -12,7 +12,7 @@ namespace Pinta.Core.Tests
 	class TextEngineTest
 	{
 		// The string below contains combining characters, so there are fewer text elements than chars.
-		private readonly List<string> testSnippet = new (){
+		private readonly List<string> testSnippet = new () {
 			"a\u0304\u0308bc\u0327",
 			"c\u0327ba\u0304\u0308",
 			"bc\u0327a\u0304\u0308"

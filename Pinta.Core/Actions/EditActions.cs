@@ -26,9 +26,9 @@
 
 using System;
 using System.IO;
-using Gtk;
-using Cairo;
 using System.Linq;
+using Cairo;
+using Gtk;
 
 namespace Pinta.Core
 {
@@ -51,9 +51,9 @@ namespace Pinta.Core
 		public Command SavePalette { get; private set; }
 		public Command ResetPalette { get; private set; }
 		public Command ResizePalette { get; private set; }
-		
+
 		private string? lastPaletteDir = null;
-		
+
 		public EditActions ()
 		{
 			Undo = new Command ("undo", Translations.GetString ("Undo"), null, Resources.StandardIcons.EditUndo);
@@ -69,7 +69,7 @@ namespace Pinta.Core
 			InvertSelection = new Command ("invertselection", Translations.GetString ("Invert Selection"), null, Resources.Icons.EditSelectionFill);
 			SelectAll = new Command ("selectall", Translations.GetString ("Select All"), null, Resources.StandardIcons.EditSelectAll);
 			Deselect = new Command ("deselect", Translations.GetString ("Deselect All"), null, Resources.Icons.EditSelectionNone);
-			
+
 			LoadPalette = new Command ("loadpalette", Translations.GetString ("Open..."), null, Resources.StandardIcons.DocumentOpen);
 			SavePalette = new Command ("savepalette", Translations.GetString ("Save As..."), null, Resources.StandardIcons.DocumentSave);
 			ResetPalette = new Command ("resetpalette", Translations.GetString ("Reset to Default"), null, Resources.StandardIcons.DocumentRevert);
@@ -81,73 +81,73 @@ namespace Pinta.Core
 		}
 
 		#region Initialization
-		public void RegisterActions(Gtk.Application app, GLib.Menu menu)
+		public void RegisterActions (Gtk.Application app, GLib.Menu menu)
 		{
-			app.AddAccelAction(Undo, "<Primary>Z");
-			menu.AppendItem(Undo.CreateMenuItem());
+			app.AddAccelAction (Undo, "<Primary>Z");
+			menu.AppendItem (Undo.CreateMenuItem ());
 
-			app.AddAccelAction(Redo, new[] { "<Primary><Shift>Z", "<Ctrl>Y" });
-			menu.AppendItem(Redo.CreateMenuItem());
+			app.AddAccelAction (Redo, new[] { "<Primary><Shift>Z", "<Ctrl>Y" });
+			menu.AppendItem (Redo.CreateMenuItem ());
 
-			var paste_section = new GLib.Menu();
-			menu.AppendSection(null, paste_section);
+			var paste_section = new GLib.Menu ();
+			menu.AppendSection (null, paste_section);
 
-			app.AddAccelAction(Cut, "<Primary>X");
-			paste_section.AppendItem(Cut.CreateMenuItem());
+			app.AddAccelAction (Cut, "<Primary>X");
+			paste_section.AppendItem (Cut.CreateMenuItem ());
 
-			app.AddAccelAction(Copy, "<Primary>C");
-			paste_section.AppendItem(Copy.CreateMenuItem());
+			app.AddAccelAction (Copy, "<Primary>C");
+			paste_section.AppendItem (Copy.CreateMenuItem ());
 
-			app.AddAccelAction(CopyMerged, "<Primary><Shift>C");
-			paste_section.AppendItem(CopyMerged.CreateMenuItem());
+			app.AddAccelAction (CopyMerged, "<Primary><Shift>C");
+			paste_section.AppendItem (CopyMerged.CreateMenuItem ());
 
-			app.AddAccelAction(Paste, "<Primary>V");
-			paste_section.AppendItem(Paste.CreateMenuItem());
+			app.AddAccelAction (Paste, "<Primary>V");
+			paste_section.AppendItem (Paste.CreateMenuItem ());
 
-			app.AddAccelAction(PasteIntoNewLayer, "<Primary><Shift>V");
-			paste_section.AppendItem(PasteIntoNewLayer.CreateMenuItem());
+			app.AddAccelAction (PasteIntoNewLayer, "<Primary><Shift>V");
+			paste_section.AppendItem (PasteIntoNewLayer.CreateMenuItem ());
 
-			app.AddAccelAction(PasteIntoNewImage, "<Primary><Alt>V");
-			paste_section.AppendItem(PasteIntoNewImage.CreateMenuItem());
+			app.AddAccelAction (PasteIntoNewImage, "<Primary><Alt>V");
+			paste_section.AppendItem (PasteIntoNewImage.CreateMenuItem ());
 
-			var sel_section = new GLib.Menu();
-			menu.AppendSection(null, sel_section);
+			var sel_section = new GLib.Menu ();
+			menu.AppendSection (null, sel_section);
 
-			app.AddAccelAction(SelectAll, "<Primary>A");
-			sel_section.AppendItem(SelectAll.CreateMenuItem());
+			app.AddAccelAction (SelectAll, "<Primary>A");
+			sel_section.AppendItem (SelectAll.CreateMenuItem ());
 
-			app.AddAccelAction(Deselect, new[] { "<Primary><Shift>A", "<Ctrl>D" });
-			sel_section.AppendItem(Deselect.CreateMenuItem());
+			app.AddAccelAction (Deselect, new[] { "<Primary><Shift>A", "<Ctrl>D" });
+			sel_section.AppendItem (Deselect.CreateMenuItem ());
 
-			var edit_sel_section = new GLib.Menu();
-			menu.AppendSection(null, edit_sel_section);
+			var edit_sel_section = new GLib.Menu ();
+			menu.AppendSection (null, edit_sel_section);
 
-			app.AddAccelAction(EraseSelection, "Delete");
-			edit_sel_section.AppendItem(EraseSelection.CreateMenuItem());
+			app.AddAccelAction (EraseSelection, "Delete");
+			edit_sel_section.AppendItem (EraseSelection.CreateMenuItem ());
 
-			app.AddAccelAction(FillSelection, "BackSpace");
-			edit_sel_section.AppendItem(FillSelection.CreateMenuItem());
+			app.AddAccelAction (FillSelection, "BackSpace");
+			edit_sel_section.AppendItem (FillSelection.CreateMenuItem ());
 
-			app.AddAccelAction(InvertSelection, "<Primary>I");
-			edit_sel_section.AppendItem(InvertSelection.CreateMenuItem());
+			app.AddAccelAction (InvertSelection, "<Primary>I");
+			edit_sel_section.AppendItem (InvertSelection.CreateMenuItem ());
 
-			var palette_section = new GLib.Menu();
-			menu.AppendSection(null, palette_section);
+			var palette_section = new GLib.Menu ();
+			menu.AppendSection (null, palette_section);
 
-			var palette_menu = new GLib.Menu();
-			menu.AppendSubmenu(Translations.GetString("Palette"), palette_menu);
+			var palette_menu = new GLib.Menu ();
+			menu.AppendSubmenu (Translations.GetString ("Palette"), palette_menu);
 
-			app.AddAction(LoadPalette);
-			palette_menu.AppendItem(LoadPalette.CreateMenuItem());
+			app.AddAction (LoadPalette);
+			palette_menu.AppendItem (LoadPalette.CreateMenuItem ());
 
-			app.AddAction(SavePalette);
-			palette_menu.AppendItem(SavePalette.CreateMenuItem());
+			app.AddAction (SavePalette);
+			palette_menu.AppendItem (SavePalette.CreateMenuItem ());
 
-			app.AddAction(ResetPalette);
-			palette_menu.AppendItem(ResetPalette.CreateMenuItem());
+			app.AddAction (ResetPalette);
+			palette_menu.AppendItem (ResetPalette.CreateMenuItem ());
 
-			app.AddAction(ResizePalette);
-			palette_menu.AppendItem(ResizePalette.CreateMenuItem());
+			app.AddAction (ResizePalette);
+			palette_menu.AppendItem (ResizePalette.CreateMenuItem ());
 		}
 
 		public void CreateHistoryWindowToolBar (Gtk.Toolbar toolbar)
@@ -258,7 +258,7 @@ namespace Pinta.Core
 			SelectionHistoryItem hist = new SelectionHistoryItem (Resources.Icons.EditSelectionNone, Translations.GetString ("Deselect"));
 			hist.TakeSnapshot ();
 
-            doc.ResetSelectionPaths ();
+			doc.ResetSelectionPaths ();
 
 			doc.History.PushNewItem (hist);
 			doc.Workspace.Invalidate ();
@@ -279,14 +279,14 @@ namespace Pinta.Core
 				Gdk.Rectangle rect = doc.GetSelectedBounds (true);
 				if (rect.Width == 0 || rect.Height == 0)
 					return;
-			
+
 				ImageSurface dest = CairoExtensions.CreateImageSurface (Format.Argb32, rect.Width, rect.Height);
 
 				using (Context g = new Context (dest)) {
 					g.SetSourceSurface (src, -rect.X, -rect.Y);
 					g.Paint ();
 				}
-			
+
 				cb.Image = dest.ToPixbuf ();
 
 				(dest as IDisposable).Dispose ();
@@ -317,7 +317,7 @@ namespace Pinta.Core
 				}
 			}
 		}
-		
+
 		private void HandlerPintaCoreActionsEditCutActivated (object sender, EventArgs e)
 		{
 			var doc = PintaCore.Workspace.ActiveDocument;
@@ -326,7 +326,7 @@ namespace Pinta.Core
 			if (PintaCore.Tools.CurrentTool?.DoHandleCut (doc, cb) == true)
 				return;
 			PintaCore.Tools.Commit ();
-			
+
 			// Copy selection
 			HandlerPintaCoreActionsEditCopyActivated (sender, e);
 
@@ -340,7 +340,7 @@ namespace Pinta.Core
 			if (PintaCore.Tools.CurrentTool?.DoHandleUndo (doc) == true)
 				return;
 			doc.History.Undo ();
-			PintaCore.Tools.CurrentTool?.DoAfterUndo(doc);
+			PintaCore.Tools.CurrentTool?.DoAfterUndo (doc);
 		}
 
 		private void HandlerPintaCoreActionsEditRedoActivated (object sender, EventArgs e)
@@ -349,7 +349,7 @@ namespace Pinta.Core
 			if (PintaCore.Tools.CurrentTool?.DoHandleRedo (doc) == true)
 				return;
 			doc.History.Redo ();
-			PintaCore.Tools.CurrentTool?.DoAfterRedo(doc);
+			PintaCore.Tools.CurrentTool?.DoAfterRedo (doc);
 		}
 
 		private void HandlerPintaCoreActionsEditLoadPaletteActivated (object sender, EventArgs e)
@@ -414,7 +414,7 @@ namespace Pinta.Core
 			if (lastPaletteDir != null)
 				fcd.SetCurrentFolder (lastPaletteDir);
 
-			var response = (ResponseType)fcd.Run ();
+			var response = (ResponseType) fcd.Run ();
 
 			if (response == Gtk.ResponseType.Accept) {
 				string filename = fcd.Filename;
@@ -423,7 +423,7 @@ namespace Pinta.Core
 				// Note: on macOS, fcd.Filter doesn't seem to properly update to the current filter.
 				// However, on macOS the dialog always adds the extension automatically, so this issue doesn't matter.
 				string extension = System.IO.Path.GetExtension (filename);
-				if (string.IsNullOrEmpty(extension)) {
+				if (string.IsNullOrEmpty (extension)) {
 					var currentFormat = PintaCore.System.PaletteFormats.Formats.First (f => f.Filter == fcd.Filter);
 					filename += "." + currentFormat.Extensions.First ();
 				}
@@ -453,7 +453,7 @@ namespace Pinta.Core
 			doc.Layers.ToolLayer.Clear ();
 
 			SelectionHistoryItem historyItem = new SelectionHistoryItem (Resources.Icons.EditSelectionInvert,
-			                                                             Translations.GetString ("Invert Selection"));
+										     Translations.GetString ("Invert Selection"));
 			historyItem.TakeSnapshot ();
 
 			doc.Selection.Invert (doc.Layers.SelectionLayer.Surface, doc.ImageSize);
@@ -473,6 +473,6 @@ namespace Pinta.Core
 			Redo.Sensitive = PintaCore.Workspace.ActiveWorkspace.History.CanRedo;
 			Undo.Sensitive = PintaCore.Workspace.ActiveWorkspace.History.CanUndo;
 		}
-#endregion
+		#endregion
 	}
 }

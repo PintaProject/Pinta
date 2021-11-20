@@ -42,7 +42,7 @@ namespace Pinta.Tools.Brushes
 		}
 
 		protected override Gdk.Rectangle OnMouseMove (Context g, Color strokeColor, ImageSurface surface,
-		                                              int x, int y, int lastX, int lastY)
+							      int x, int y, int lastX, int lastY)
 		{
 			double cx = Math.Round (x / 100.0) * 100.0;
 			double cy = Math.Round (y / 100.0) * 100.0;

@@ -31,13 +31,12 @@
 //
 
 using System;
-using System.Text;
-
-using Gdk;
-using Gtk;
-using GLib;
-using Pango;
 using System.IO;
+using System.Text;
+using Gdk;
+using GLib;
+using Gtk;
+using Pango;
 using Pinta.Core;
 
 namespace Pinta
@@ -57,26 +56,26 @@ namespace Pinta
 		internal uint TimerHandle;
 
 		string[] authors = new string[] {
-            "Cameron White (@cameronwhite)",
-            "Jonathan Pobst (@jpobst)",
-            "@darkdragon-001",
+	    "Cameron White (@cameronwhite)",
+	    "Jonathan Pobst (@jpobst)",
+	    "@darkdragon-001",
 		};
 
 		string[] oldAuthors = new string[] {
-            "A. Karon @akaro2424",
+	    "A. Karon @akaro2424",
 			"Aaron Bockover",
 			"Adam Doppelt",
 			"Adolfo Jayme Barrientos",
 			"Akshara Proddatoori",
-            "Alberto Fanjul (@albfan)",
+	    "Alberto Fanjul (@albfan)",
 			"Anirudh Sanjeev",
-            "Andrija Rajter (@rajter)",
-            "André Veríssimo (@averissimo)",
+	    "Andrija Rajter (@rajter)",
+	    "André Veríssimo (@averissimo)",
 			"Andrew Davis",
 			"Balló György (@City-busz)",
 			"Cameron White (@cameronwhite)",
 			"Ciprian Mustiata",
-            "Dan Dascalescu (@dandv)",
+	    "Dan Dascalescu (@dandv)",
 			"David Nabraczky",
 			"Don McComb (@don-mccomb)",
 			"Elvis Alistar",
@@ -84,47 +83,47 @@ namespace Pinta
 			"Greg Lowe",
 			"Hanh Pham",
 			"James Gifford",
-            "Jami Kettunen (@JamiKettunen)",
-            "Jared Kells (@jkells)",
+	    "Jami Kettunen (@JamiKettunen)",
+	    "Jared Kells (@jkells)",
 			"Jean-Michel Bea",
-            "Jennifer Nguyen (@jeneira94)",
-            "Jeremy Burns (@jaburns)",
+	    "Jennifer Nguyen (@jeneira94)",
+	    "Jeremy Burns (@jaburns)",
 			"Joe Hillenbrand",
 			"John Burak",
 			"Jon Rimmer",
 			"Jonathan Bergknoff",
 			"Jonathan Pobst (@jpobst)",
 			"Juergen Obernolte",
-            "Julian Ospald (@hasufell)",
+	    "Julian Ospald (@hasufell)",
 			"Khairuddin Ni'am",
 			"Krzysztof Marecki",
 			"Maia Kozheva",
 			"Manish Sinha",
 			"Marco Rolappe",
-            "Marius Ungureanu",
+	    "Marius Ungureanu",
 			"Martin Geier",
 			"Mathias Fussenegger",
-            "Matthias Mailänder (@Mailaender)",
-            "Miguel Fazenda (@miguelfazenda)",
+	    "Matthias Mailänder (@Mailaender)",
+	    "Miguel Fazenda (@miguelfazenda)",
 			"Mikhail Makarov",
-            "Mykola Franchuk (@thekolian1996)",
+	    "Mykola Franchuk (@thekolian1996)",
 			"Obinou Conseil",
 			"Olivier Dufour",
 			"Richard Cohn",
 			"Robert Nordan (@robpvn)",
-            "Romain Racamier (@Shuunen)",
-            "Stefan Moebius (@codeprof)",
-            "Timon de Groot (@tdgroot)",
+	    "Romain Racamier (@Shuunen)",
+	    "Stefan Moebius (@codeprof)",
+	    "Timon de Groot (@tdgroot)",
 			"Tom Kadwill",
-            "@aivel",
-            "@anadvu",
-            "@jefetienne",
-            "@nikita-yfh",
-            "@pikachuiscool2",
-            "@scx",
-            "@skkestrel",
-            "@tdaffin",
-            "@yaminb",
+	    "@aivel",
+	    "@anadvu",
+	    "@jefetienne",
+	    "@nikita-yfh",
+	    "@pikachuiscool2",
+	    "@scx",
+	    "@skkestrel",
+	    "@tdaffin",
+	    "@yaminb",
 		};
 
 		public ScrollBox ()
@@ -202,8 +201,8 @@ namespace Pinta
 			//        if (--scrollPause == 0)
 			//                ++scroll;
 			//} else
-				++scroll;
-			
+			++scroll;
+
 			this.QueueDrawArea (0, 0, Window.FrameExtents.Width, image.Height);
 			return true;
 		}
@@ -211,17 +210,16 @@ namespace Pinta
 		private void DrawImage (Cairo.Context ctx)
 		{
 			if (image != null) {
-				Gdk.CairoHelper.SetSourcePixbuf(ctx, image, 0, 0);
-				ctx.Paint();
+				Gdk.CairoHelper.SetSourcePixbuf (ctx, image, 0, 0);
+				ctx.Paint ();
 			}
 		}
 
 		private void DrawImageTop (Cairo.Context ctx)
 		{
-			if (image != null)
-			{
-				Gdk.CairoHelper.SetSourcePixbuf(ctx, image_top, 0, 0);
-				ctx.Paint();
+			if (image != null) {
+				Gdk.CairoHelper.SetSourcePixbuf (ctx, image_top, 0, 0);
+				ctx.Paint ();
 			}
 		}
 
@@ -231,14 +229,14 @@ namespace Pinta
 			int height = Window.FrameExtents.Height;
 
 			int widthPixel, heightPixel;
-			layout.GetPixelSize(out widthPixel, out heightPixel);
+			layout.GetPixelSize (out widthPixel, out heightPixel);
 
-			ctx.SetSourceColor(new Cairo.Color(1, 1, 1));
-			ctx.MoveTo(0, textTop - scroll);
-			Pango.CairoHelper.ShowLayout(ctx, layout);
+			ctx.SetSourceColor (new Cairo.Color (1, 1, 1));
+			ctx.MoveTo (0, textTop - scroll);
+			Pango.CairoHelper.ShowLayout (ctx, layout);
 
-			Gdk.CairoHelper.SetSourcePixbuf(ctx, monoPowered, (width / 2) - (monoPowered.Width / 2), textTop - scroll + heightPixel + monoLogoSpacing);
-			ctx.Paint();
+			Gdk.CairoHelper.SetSourcePixbuf (ctx, monoPowered, (width / 2) - (monoPowered.Width / 2), textTop - scroll + heightPixel + monoLogoSpacing);
+			ctx.Paint ();
 
 			heightPixel = heightPixel - 80 + image.Height;
 
@@ -248,12 +246,12 @@ namespace Pinta
 				scroll = scrollStart;
 		}
 
-        protected override bool OnDrawn(Cairo.Context ctx)
+		protected override bool OnDrawn (Cairo.Context ctx)
 		{
 			this.DrawImage (ctx);
 			this.DrawText (ctx);
 			this.DrawImageTop (ctx);
-			
+
 			return false;
 		}
 
@@ -271,7 +269,7 @@ namespace Pinta
 
 			layout = new Pango.Layout (this.PangoContext);
 			// FIXME: this seems wrong but works
-			layout.Width = w * (int)Pango.Scale.PangoScale;
+			layout.Width = w * (int) Pango.Scale.PangoScale;
 			layout.Wrap = Pango.WrapMode.Word;
 			layout.Alignment = Pango.Alignment.Center;
 			layout.SetMarkup (CreditText);
@@ -307,7 +305,7 @@ namespace Pinta
 
 			ContentArea.PackStart (notebook, true, true, 4);
 
-			AddButton (Gtk.Stock.Close, (int)ResponseType.Close);
+			AddButton (Gtk.Stock.Close, (int) ResponseType.Close);
 
 			this.Resizable = true;
 

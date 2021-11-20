@@ -28,12 +28,13 @@ using System;
 
 namespace Pinta.Core
 {
-	public enum RenderStatus {
+	public enum RenderStatus
+	{
 		Completed,
 		Canceled,
 		Faulted
-	}	
-	
+	}
+
 	public class LivePreviewEndedEventArgs : EventArgs
 	{
 		public LivePreviewEndedEventArgs (RenderStatus status, Exception? exception)
@@ -41,9 +42,9 @@ namespace Pinta.Core
 			this.Status = status;
 			this.Exception = exception;
 		}
-		
+
 		public RenderStatus Status { get; private set; }
-		
+
 		public Exception? Exception { get; private set; }
-	}	
+	}
 }

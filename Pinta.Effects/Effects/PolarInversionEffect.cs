@@ -9,8 +9,8 @@
 
 using System;
 using Cairo;
-using Pinta.Gui.Widgets;
 using Pinta.Core;
+using Pinta.Gui.Widgets;
 
 namespace Pinta.Effects
 {
@@ -29,11 +29,10 @@ namespace Pinta.Effects
 		}
 
 		public new PolarInversionData Data {
-			get { return (PolarInversionData)EffectData!; } // NRT - Set in constructor
+			get { return (PolarInversionData) EffectData!; } // NRT - Set in constructor
 		}
 
-		public override string EffectMenuCategory
-		{
+		public override string EffectMenuCategory {
 			get { return Translations.GetString ("Distort"); }
 		}
 
@@ -47,10 +46,10 @@ namespace Pinta.Effects
 		{
 			double x = transData.X;
 			double y = transData.Y;
-			
+
 			// NOTE: when x and y are zero, this will divide by zero and return NaN
 			double invertDistance = Utility.Lerp (1.0, DefaultRadius2 / ((x * x) + (y * y)), Data.Amount);
-			
+
 			transData.X = x * invertDistance;
 			transData.Y = y * invertDistance;
 		}
@@ -58,14 +57,14 @@ namespace Pinta.Effects
 
 		public class PolarInversionData : WarpEffect.WarpData
 		{
-			[MinimumValue(-4), MaximumValue(4)]
+			[MinimumValue (-4), MaximumValue (4)]
 			public double Amount = 0;
 
-			public PolarInversionData () : base()
+			public PolarInversionData () : base ()
 			{
 				EdgeBehavior = WarpEdgeBehavior.Reflect;
 			}
-			
+
 		}
 	}
 }

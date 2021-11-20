@@ -25,8 +25,8 @@
 // THE SOFTWARE.
 
 using System;
-using Pinta.Core;
 using Gtk;
+using Pinta.Core;
 
 namespace Pinta.Actions
 {

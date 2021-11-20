@@ -68,23 +68,23 @@ namespace Pinta.Core
 		/// <param name="importer">The importer for this file format, or null if importing is not supported.</param>
 		/// <param name="exporter">The exporter for this file format, or null if exporting is not supported.</param>
 		public FormatDescriptor (string displayPrefix, string[] extensions,
-		                         IImageImporter? importer, IImageExporter? exporter)
+					 IImageImporter? importer, IImageExporter? exporter)
 		{
 			if (extensions == null || (importer == null && exporter == null)) {
 				throw new ArgumentNullException ("Format descriptor is initialized incorrectly");
 			}
-		
+
 			this.Extensions = extensions;
 			this.Importer = importer;
 			this.Exporter = exporter;
-			
+
 			FileFilter ff = new FileFilter ();
 			StringBuilder formatNames = new StringBuilder ();
-			
+
 			foreach (string ext in extensions) {
 				if (formatNames.Length > 0)
 					formatNames.Append (", ");
-				
+
 				string wildcard = string.Format ("*.{0}", ext);
 				ff.AddPattern (wildcard);
 				formatNames.Append (wildcard);

@@ -34,7 +34,7 @@ namespace Pinta.Core
 	public class AdjustmentsActions
 	{
 		public List<Command> Actions { get; private set; }
-		
+
 		public AdjustmentsActions ()
 		{
 			Actions = new List<Command> ();

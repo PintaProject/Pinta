@@ -36,36 +36,36 @@ namespace Pinta.Core
 	{
 		public Command About { get; private set; }
 		public Command Exit { get; private set; }
-		
+
 		public event EventHandler? BeforeQuit;
-		
+
 		public AppActions ()
 		{
-			About = new Command("about", Translations.GetString("About"), null, Resources.StandardIcons.HelpAbout);
-			Exit = new Command("quit", Translations.GetString("Quit"), null, Resources.StandardIcons.ApplicationExit);
+			About = new Command ("about", Translations.GetString ("About"), null, Resources.StandardIcons.HelpAbout);
+			Exit = new Command ("quit", Translations.GetString ("Quit"), null, Resources.StandardIcons.ApplicationExit);
 		}
 
-#region Initialization
-		public void RegisterActions(Gtk.Application app, GLib.Menu menu)
-        {
-			app.AddAction(About);
-			menu.AppendItem(About.CreateMenuItem());
+		#region Initialization
+		public void RegisterActions (Gtk.Application app, GLib.Menu menu)
+		{
+			app.AddAction (About);
+			menu.AppendItem (About.CreateMenuItem ());
 
-			app.AddAccelAction(Exit, "<Primary>Q");
-			menu.AppendItem(Exit.CreateMenuItem());
+			app.AddAccelAction (Exit, "<Primary>Q");
+			menu.AppendItem (Exit.CreateMenuItem ());
 		}
 
 		public void RegisterHandlers ()
 		{
 		}
-#endregion
+		#endregion
 
-#region Event Invokers
+		#region Event Invokers
 		public void RaiseBeforeQuit ()
 		{
 			if (BeforeQuit != null)
 				BeforeQuit (this, EventArgs.Empty);
 		}
-#endregion
+		#endregion
 	}
 }

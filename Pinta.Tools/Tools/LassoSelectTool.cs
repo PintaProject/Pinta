@@ -25,12 +25,12 @@
 // THE SOFTWARE.
 
 using System;
-using Cairo;
-using Gtk;
-using Pinta.Core;
-using ClipperLib;
 using System.Collections.Generic;
 using System.Linq;
+using Cairo;
+using ClipperLib;
+using Gtk;
+using Pinta.Core;
 
 namespace Pinta.Tools
 {

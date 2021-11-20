@@ -42,30 +42,30 @@ namespace Pinta.Effects
 		public int Red {
 			get { return red_spinbox.ValueAsInt; }
 		}
-		
-		public int Green { 
+
+		public int Green {
 			get { return green_spinbox.ValueAsInt; }
 		}
-		
+
 		public int Blue {
-            get { return blue_spinbox.ValueAsInt; }
+			get { return blue_spinbox.ValueAsInt; }
 		}
 
 		public PosterizeData? EffectData { get; set; }
 
 		public PosterizeDialog () : base (Translations.GetString ("Posterize"),
-		                                  PintaCore.Chrome.MainWindow, DialogFlags.Modal,
-										  GtkExtensions.DialogButtonsCancelOk())
+						  PintaCore.Chrome.MainWindow, DialogFlags.Modal,
+										  GtkExtensions.DialogButtonsCancelOk ())
 		{
 			Build ();
-			
+
 			red_spinbox.ValueChanged += HandleValueChanged;
 			green_spinbox.ValueChanged += HandleValueChanged;
 			blue_spinbox.ValueChanged += HandleValueChanged;
 
 			DefaultResponse = Gtk.ResponseType.Ok;
 		}
-		
+
 		private void HandleValueChanged (object? sender, EventArgs e)
 		{
 			var widget = sender as HScaleSpinButtonWidget;
@@ -75,19 +75,19 @@ namespace Pinta.Effects
 
 			if (link_button.Active)
 				green_spinbox.Value = blue_spinbox.Value = red_spinbox.Value = widget.Value;
-			
+
 			UpdateEffectData ();
 		}
-		
+
 		private void UpdateEffectData ()
 		{
 			if (EffectData == null)
 				return;
-			
+
 			EffectData.Red = red_spinbox.ValueAsInt;
 			EffectData.Green = green_spinbox.ValueAsInt;
 			EffectData.Blue = blue_spinbox.ValueAsInt;
-			
+
 			// Only fire event once, even if all properties have changed.
 			EffectData.FirePropertyChanged ("_all_");
 		}

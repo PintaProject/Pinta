@@ -1,4 +1,4 @@
-﻿// 
+// 
 // EllipseEngine.cs
 //  
 // Author:
@@ -33,7 +33,7 @@ using Pinta.Core;
 
 namespace Pinta.Tools
 {
-    public class EllipseEngine : ShapeEngine
+	public class EllipseEngine : ShapeEngine
 	{
 		/// <summary>
 		/// Create a new EllipseEngine.
@@ -44,36 +44,35 @@ namespace Pinta.Tools
 		/// <param name="outline_color">The outline color for the shape.</param>
 		/// <param name="fill_color">The fill color for the shape.</param>
 		/// <param name="brush_width">The width of the outline of the shape.</param>
-        public EllipseEngine (UserLayer parent_layer, ReEditableLayer? drawing_layer,
-                              bool antialiasing, Color outline_color, Color fill_color,
-                              int brush_width)
-            : base (parent_layer, drawing_layer, BaseEditEngine.ShapeTypes.Ellipse,
-                    antialiasing, true, outline_color, fill_color, brush_width)
+		public EllipseEngine (UserLayer parent_layer, ReEditableLayer? drawing_layer,
+				      bool antialiasing, Color outline_color, Color fill_color,
+				      int brush_width)
+		    : base (parent_layer, drawing_layer, BaseEditEngine.ShapeTypes.Ellipse,
+			    antialiasing, true, outline_color, fill_color, brush_width)
 		{
-			
+
 		}
 
-        private EllipseEngine (EllipseEngine src)
-            : base (src)
-        {
-        }
-
-        public override ShapeEngine Clone ()
+		private EllipseEngine (EllipseEngine src)
+		    : base (src)
 		{
-            return new EllipseEngine (this);
+		}
+
+		public override ShapeEngine Clone ()
+		{
+			return new EllipseEngine (this);
 		}
 
 		/// <summary>
 		/// Generate each point in an elliptic shape and store the result in GeneratedPoints.
 		/// <param name="brush_width">The width of the brush that will be used to draw the shape.</param>
 		/// </summary>
-        public override void GeneratePoints (int brush_width)
+		public override void GeneratePoints (int brush_width)
 		{
-			List<GeneratedPoint> points = new List<GeneratedPoint>();
+			List<GeneratedPoint> points = new List<GeneratedPoint> ();
 
 			//An ellipse requires exactly 4 control points in order to draw anything.
-			if (ControlPoints.Count == 4)
-			{
+			if (ControlPoints.Count == 4) {
 				//This is mostly for time efficiency/optimization, but it can also help readability.
 				PointD cp0 = ControlPoints[0].Position, cp1 = ControlPoints[1].Position,
 					cp2 = ControlPoints[2].Position, cp3 = ControlPoints[3].Position;
@@ -83,23 +82,17 @@ namespace Pinta.Tools
 
 				bool perfectRectangle = false;
 
-				if (cp0.X == cp1.X)
-				{
-					if (cp0.Y == cp3.Y && cp1.Y == cp2.Y && cp2.X == cp3.X)
-					{
+				if (cp0.X == cp1.X) {
+					if (cp0.Y == cp3.Y && cp1.Y == cp2.Y && cp2.X == cp3.X) {
 						perfectRectangle = true;
 					}
-				}
-				else if (cp0.Y == cp1.Y)
-				{
-					if (cp0.X == cp3.X && cp1.X == cp2.X && cp2.Y == cp3.Y)
-					{
+				} else if (cp0.Y == cp1.Y) {
+					if (cp0.X == cp3.X && cp1.X == cp2.X && cp2.Y == cp3.Y) {
 						perfectRectangle = true;
 					}
 				}
 
-				if (perfectRectangle)
-				{
+				if (perfectRectangle) {
 					//It is expected that the 4 control points always form a perfect rectangle parallel/perpendicular to the window.
 					//However, we must first determine which control point is at the top left and which is at the bottom right.
 					//It is also expected that the 4 control points are adjacent to each other by index and position, e.g.: 0, 1, 2, 3.
@@ -108,46 +101,37 @@ namespace Pinta.Tools
 					PointD bottomRight = cp0;
 
 					//Compare the second point with the first.
-					if (cp1.X < topLeft.X || cp1.Y < topLeft.Y)
-					{
+					if (cp1.X < topLeft.X || cp1.Y < topLeft.Y) {
 						//The second point is either more left or more up than the first.
 
 						topLeft = cp1;
 
 						//Compare the third point with the second.
-						if (cp2.X < topLeft.X || cp2.Y < topLeft.Y)
-						{
+						if (cp2.X < topLeft.X || cp2.Y < topLeft.Y) {
 							//The third point is either more left or more up than the second.
 
 							topLeft = cp2;
 
 							//The first point remains the bottom right.
-						}
-						else
-						{
+						} else {
 							//The third point is neither more left nor more up than the second.
 
 							//The second point remains the top left.
 
 							bottomRight = cp3;
 						}
-					}
-					else
-					{
+					} else {
 						//The second point is neither more left nor more up than the first.
 
 						PointD secondPoint = cp1;
 
 						//Compare the third point with the second.
-						if (cp2.X < secondPoint.X || cp2.Y < secondPoint.Y)
-						{
+						if (cp2.X < secondPoint.X || cp2.Y < secondPoint.Y) {
 							//The third point is either more left or more up than the second.
 
 							topLeft = cp3;
 							bottomRight = cp1;
-						}
-						else
-						{
+						} else {
 							//The third point is neither more left nor more up than the second.
 
 							//The first point remains the top left.
@@ -176,42 +160,41 @@ namespace Pinta.Tools
 					double cy = topLeft.Y + ry; //The middle of the bounding Rectangle, vertically speaking.
 					double c1 = 0.5522847498307933984022516322796d; //tan(pi / 8d) * 4d / 3d ~= 0.5522847498307933984022516322796d
 
-					points.AddRange(calculateCurvePoints(tInterval,
+					points.AddRange (calculateCurvePoints (tInterval,
 						cx + rx, cy,
 						cx + rx, cy - c1 * ry,
 						cx + c1 * rx, cy - ry,
 						cx, cy - ry,
 						3));
 
-					points.AddRange(calculateCurvePoints(tInterval,
+					points.AddRange (calculateCurvePoints (tInterval,
 						cx, cy - ry,
 						cx - c1 * rx, cy - ry,
 						cx - rx, cy - c1 * ry,
 						cx - rx, cy,
 						0));
 
-					points.AddRange(calculateCurvePoints(tInterval,
+					points.AddRange (calculateCurvePoints (tInterval,
 						cx - rx, cy,
 						cx - rx, cy + c1 * ry,
 						cx - c1 * rx, cy + ry,
 						cx, cy + ry,
 						1));
 
-					points.AddRange(calculateCurvePoints(tInterval,
+					points.AddRange (calculateCurvePoints (tInterval,
 						cx, cy + ry,
 						cx + c1 * rx, cy + ry,
 						cx + rx, cy + c1 * ry,
 						cx + rx, cy,
 						2));
 
-                    // Close the curve.
-					points.Add(new GeneratedPoint(new PointD(cx + rx, cy), 3));
+					// Close the curve.
+					points.Add (new GeneratedPoint (new PointD (cx + rx, cy), 3));
 				}
 			}
-			
+
 			//Make sure there are now generated points; otherwise, one of the ellipse conditions was not met.
-			if (points.Count == 0)
-			{
+			if (points.Count == 0) {
 				//Something went wrong. Just copy the control points. Note: it's important that there be many generated points even if
 				//everything is just a linear connection of control points. This is because the generated points are used in the check
 				//that determines if the mouse clicks on the shape.
@@ -221,14 +204,12 @@ namespace Pinta.Tools
 				PointD currentPoint, nextPoint;
 
 				//Go through each control point.
-				for (int currentNum = 0; currentNum < ControlPoints.Count; ++currentNum)
-				{
+				for (int currentNum = 0; currentNum < ControlPoints.Count; ++currentNum) {
 					//Determine the next control point.
 
 					nextNum = currentNum + 1;
 
-					if (nextNum >= ControlPoints.Count)
-					{
+					if (nextNum >= ControlPoints.Count) {
 						nextNum = 0;
 					}
 
@@ -236,14 +217,13 @@ namespace Pinta.Tools
 					nextPoint = ControlPoints[nextNum].Position;
 
 					//Lerp from the current point to the next point.
-					for (float lerpPos = 0.0f; lerpPos < 1.0f; lerpPos += 0.01f)
-					{
-						points.Add(new GeneratedPoint(Utility.Lerp(currentPoint, nextPoint, lerpPos), currentNum));
+					for (float lerpPos = 0.0f; lerpPos < 1.0f; lerpPos += 0.01f) {
+						points.Add (new GeneratedPoint (Utility.Lerp (currentPoint, nextPoint, lerpPos), currentNum));
 					}
 				}
 			}
 
-			GeneratedPoints = points.ToArray();
+			GeneratedPoints = points.ToArray ();
 		}
 
 		/// <summary>
@@ -260,12 +240,12 @@ namespace Pinta.Tools
 		/// <param name="y3">Ending point Y (included in the returned Point(s)).</param>
 		/// <param name="cPIndex">The index of the previous ControlPoint to the generated points.</param>
 		/// <returns></returns>
-		protected List<GeneratedPoint> calculateCurvePoints(
+		protected List<GeneratedPoint> calculateCurvePoints (
 			double tInterval,
 			double x0, double y0, double x1, double y1, double x2, double y2, double x3, double y3,
 			int cPIndex)
 		{
-			List<GeneratedPoint> calculatedPoints = new List<GeneratedPoint>((int)(1d / tInterval));
+			List<GeneratedPoint> calculatedPoints = new List<GeneratedPoint> ((int) (1d / tInterval));
 
 			double oneMinusT;
 			double oneMinusTSquared;
@@ -277,8 +257,7 @@ namespace Pinta.Tools
 			double oneMinusTSquaredTimesTTimesThree;
 			double oneMinusTTimesTSquaredTimesThree;
 
-			for (double t = 0; t < 1d; t += tInterval)
-			{
+			for (double t = 0; t < 1d; t += tInterval) {
 				//There are 3 "layers" in a cubic Bezier curve's calculation. These "layers"
 				//must be calculated for each intermediate Point (for each value of t from
 				//tInterval to 1d). The Points in each "layer" store [the distance between
@@ -300,7 +279,7 @@ namespace Pinta.Tools
 				oneMinusTSquaredTimesTTimesThree = oneMinusTSquared * t * 3d;
 				oneMinusTTimesTSquaredTimesThree = oneMinusT * tSquared * 3d;
 
-				calculatedPoints.Add(new GeneratedPoint(new PointD(
+				calculatedPoints.Add (new GeneratedPoint (new PointD (
 					(oneMinusTCubed * x0 + oneMinusTSquaredTimesTTimesThree * x1 + oneMinusTTimesTSquaredTimesThree * x2 + tCubed * x3),
 					(oneMinusTCubed * y0 + oneMinusTSquaredTimesTTimesThree * y1 + oneMinusTTimesTSquaredTimesThree * y2 + tCubed * y3)),
 					cPIndex));
