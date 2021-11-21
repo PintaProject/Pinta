@@ -35,7 +35,10 @@ namespace Pinta
 	{
 		private Label description_label;
 
-		public FileUnsupportedFormatDialog (Window parent) : base ("Pinta", parent, DialogFlags.Modal | DialogFlags.DestroyWithParent)
+		public FileUnsupportedFormatDialog (Window parent) :
+			base ("Pinta", parent,
+				DialogFlags.Modal | DialogFlags.DestroyWithParent,
+				new object[] { Stock.Ok, ResponseType.Ok })
 		{
 			Build ();
 
@@ -64,18 +67,15 @@ namespace Pinta
 
 			description_label = new Label ();
 			description_label.Wrap = true;
+			description_label.WidthRequest = 500;
 			description_label.Xalign = 0;
 			vbox.PackStart (description_label, false, false, 0);
 
 			hbox.Add (vbox);
 			ContentArea.Add (hbox);
 
-			var ok_button = new Button (Gtk.Stock.Ok);
-			ok_button.CanDefault = true;
-			AddActionWidget (ok_button, ResponseType.Ok);
-
 			DefaultWidth = 600;
-			DefaultHeight = 142;
+			DefaultHeight = 150;
 
 			ShowAll ();
 		}
