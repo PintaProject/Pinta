@@ -73,6 +73,7 @@ Thanks to the following contributors who worked on this release:
 - Fixed an issue where hiding a layer could leave the selection still visible ([#1907987](https://bugs.launchpad.net/pinta/+bug/1907987)).
 - Fixed a bug where the shape tools did not redraw after changes to the fill style until the cursor entered the canvas ([#1937921](https://bugs.launchpad.net/pinta/+bug/1937921)).
 - Fixed a crash when opening an invalid palette file (#146, [#1890450](https://bugs.launchpad.net/pinta/+bug/1890450)).
+- Fixed issues with the text tool and certain input methods (#200, [#1350349](https://bugs.launchpad.net/pinta/+bug/1350349)).
 
 ## [1.7](https://github.com/PintaProject/Pinta/releases/tag/1.7) - 2020/08/04
 
