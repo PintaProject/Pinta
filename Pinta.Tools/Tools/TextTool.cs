@@ -405,7 +405,8 @@ namespace Pinta.Tools
 
 		protected override void OnCommit (Document? document)
 		{
-			StopEditing (false);
+			imContext.FocusOut();
+			StopEditing(false);
 		}
 
 		protected override void OnDeactivated (Document? document, BaseTool? newTool)
@@ -433,7 +434,7 @@ namespace Pinta.Tools
 			Point pt = e.PointDouble.ToGdkPoint ();
 
 			// Grab focus so we can get keystrokes
-			document.Workspace.Canvas.GrabFocus ();
+			imContext.FocusIn();
 
 			if (selection != null)
 				selection.Dispose ();
@@ -714,12 +715,14 @@ namespace Pinta.Tools
 
 						break;
 				}
-
-				// If we processed a key, update the display
 				if (keyHandled) {
+			                imContext.FocusOut();
 					RedrawText (true, true);
+			                imContext.FocusIn();
 				}
-			} else {
+			}
+			else
+			{
 				// If we're not editing, allow the key press to be handled elsewhere (e.g. for selecting another tool).
 				keyHandled = false;
 			}
@@ -734,7 +737,6 @@ namespace Pinta.Tools
 
 				UpdateMouseCursor (document);
 			}
-
 			return false;
 		}
 
