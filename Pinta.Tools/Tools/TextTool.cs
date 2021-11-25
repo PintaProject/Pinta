@@ -373,6 +373,7 @@ namespace Pinta.Tools
 				font.Style = italic_btn.Active ? Pango.Style.Italic : Pango.Style.Normal;
 
 				CurrentTextEngine.SetFont (font, Alignment, underscore_btn.Active);
+				undo_engine = CurrentTextEngine.Clone ();
 			}
 
 			if (is_editing)
