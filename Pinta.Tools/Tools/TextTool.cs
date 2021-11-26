@@ -521,6 +521,7 @@ namespace Pinta.Tools
 						// Start editing at the cursor location
 						clickPoint = pt;
 						CurrentTextEngine.Clear ();
+						UpdateFont ();
 						clickPoint.Offset (0, -CurrentTextLayout.FontHeight / 2);
 						CurrentTextEngine.Origin = clickPoint;
 						StartEditing ();
