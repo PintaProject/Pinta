@@ -373,7 +373,6 @@ namespace Pinta.Tools
 				font.Style = italic_btn.Active ? Pango.Style.Italic : Pango.Style.Normal;
 
 				CurrentTextEngine.SetFont (font, Alignment, underscore_btn.Active);
-				undo_engine = CurrentTextEngine.Clone ();
 			}
 
 			if (is_editing)
@@ -522,6 +521,7 @@ namespace Pinta.Tools
 						// Start editing at the cursor location
 						clickPoint = pt;
 						CurrentTextEngine.Clear ();
+						UpdateFont ();
 						clickPoint.Offset (0, -CurrentTextLayout.FontHeight / 2);
 						CurrentTextEngine.Origin = clickPoint;
 						StartEditing ();
