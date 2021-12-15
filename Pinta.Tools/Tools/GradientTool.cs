@@ -151,7 +151,7 @@ namespace Pinta.Tools
 		private ToolBarLabel? gradient_label;
 		private ToolBarDropDownButton? gradient_button;
 
-		private ToolBarLabel GradientLabel => gradient_label ??= new ToolBarLabel ($" {Translations.GetString ("Gradient")}: ");
+		private ToolBarLabel GradientLabel => gradient_label ??= new ToolBarLabel (string.Format (" {0}: ", Translations.GetString ("Gradient")));
 		private ToolBarDropDownButton GradientDropDown {
 			get {
 				if (gradient_button == null) {

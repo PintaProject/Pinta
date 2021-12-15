@@ -131,7 +131,8 @@ namespace Pinta.Core
 		/// </summary>
 		public UserLayer CreateLayer (string? name = null, int? width = null, int? height = null)
 		{
-			name ??= $"{Translations.GetString ("Layer")} {layer_name_int++}";
+            // Translators: {0} is a unique id for new layers, e.g. "Layer 2".
+			name ??= Translations.GetString ("Layer {0}", layer_name_int++);
 			width ??= document.ImageSize.Width;
 			height ??= document.ImageSize.Height;
 
@@ -228,7 +229,9 @@ namespace Pinta.Core
 		public UserLayer DuplicateCurrentLayer ()
 		{
 			var source = CurrentUserLayer;
-			var layer = CreateLayer ($"{source.Name} {Translations.GetString ("copy")}");
+            // Translators: this is the auto-generated name for a duplicated layer.
+            // {0} is the name of the source layer. Example: "Layer 3 copy".
+			var layer = CreateLayer (Translations.GetString ("{0} copy", source.Name));
 
 			using (var g = new Context (layer.Surface)) {
 				g.SetSource (source.Surface);

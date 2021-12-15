@@ -336,7 +336,7 @@ namespace Pinta.Core
 		private ToolBarImage? tool_image;
 		private SeparatorToolItem? tool_sep;
 
-		private ToolBarLabel ToolLabel => tool_label ??= new ToolBarLabel ($" {Translations.GetString ("Tool")}:  ");
+		private ToolBarLabel ToolLabel => tool_label ??= new ToolBarLabel (string.Format (" {0}:  ", Translations.GetString ("Tool")));
 		private ToolBarImage ToolImage => tool_image ??= new ToolBarImage (string.Empty);
 		private SeparatorToolItem ToolSeparator => tool_sep ??= new SeparatorToolItem ();
 	}

@@ -226,7 +226,9 @@ namespace Pinta.Gui.Widgets
 					text = Translations.GetString ("Click to select secondary color.");
 					break;
 				case WidgetElement.SwapColors:
-					text = $"{Translations.GetString ("Click to switch between primary and secondary color.")} {Translations.GetString ("Shortcut key")}: {"X"}";
+					var label = Translations.GetString ("Click to switch between primary and secondary color.");
+					var shortcut_label = Translations.GetString ("Shortcut key");
+					text = $"{label} {shortcut_label}: {"X"}";
 					break;
 				case WidgetElement.ResetColors:
 					text = Translations.GetString ("Click to reset primary and secondary color.");

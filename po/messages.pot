@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-12-15 10:43-0500\n"
+"POT-Creation-Date: 2021-12-15 11:19-0500\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -104,6 +104,10 @@ msgstr ""
 
 #: Mono.Addins.Gui/gtk-gui/Mono.Addins.Gui.AddinInstallerDialog.cs:38
 msgid "Additional extensions are required to perform this operation."
+msgstr ""
+
+#: ../Pinta.Tools/Tools/ColorPickerTool.cs:197
+msgid "After select"
 msgstr ""
 
 #: ../Pinta/Actions/File/OpenDocumentAction.cs:71
@@ -249,6 +253,7 @@ msgid "Brush Size"
 msgstr ""
 
 #: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:266
+#: ../Pinta.Tools/Tools/BaseBrushTool.cs:104
 msgid "Brush width"
 msgstr ""
 
@@ -352,7 +357,7 @@ msgstr ""
 msgid "Click and drag to navigate image."
 msgstr ""
 
-#: ../Pinta.Gui.Widgets/Widgets/StatusBarColorPaletteWidget.cs:232
+#: ../Pinta.Gui.Widgets/Widgets/StatusBarColorPaletteWidget.cs:234
 msgid "Click to reset primary and secondary color."
 msgstr ""
 
@@ -366,6 +371,10 @@ msgstr ""
 
 #: ../Pinta.Gui.Widgets/Widgets/StatusBarColorPaletteWidget.cs:226
 msgid "Click to select secondary color."
+msgstr ""
+
+#: ../Pinta.Gui.Widgets/Widgets/StatusBarColorPaletteWidget.cs:229
+msgid "Click to switch between primary and secondary color."
 msgstr ""
 
 #: ../Pinta/Dialogs/NewImageDialog.cs:161
@@ -686,6 +695,7 @@ msgid "Fill Shape"
 msgstr ""
 
 #: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:292
+#: ../Pinta.Tools/Tools/FreeformShapeTool.cs:222
 msgid "Fill Style"
 msgstr ""
 
@@ -734,6 +744,10 @@ msgstr ""
 msgid "Flip Vertical"
 msgstr ""
 
+#: ../Pinta.Tools/Tools/FloodTool.cs:126
+msgid "Flood Mode"
+msgstr ""
+
 #: ../Pinta.Tools/Tools/TextTool.cs:143
 msgid "Font"
 msgstr ""
@@ -777,6 +791,7 @@ msgid "Glow"
 msgstr ""
 
 #: ../Pinta.Tools/Tools/GradientTool.cs:50
+#: ../Pinta.Tools/Tools/GradientTool.cs:154
 msgid "Gradient"
 msgstr ""
 
@@ -989,6 +1004,12 @@ msgstr ""
 
 #: ../Pinta.Gui.Widgets/Widgets/Layers/LayersListWidget.cs:286
 msgid "Layer Shown"
+msgstr ""
+
+#. Translators: {0} is a unique id for new layers, e.g. "Layer 2".
+#: ../Pinta.Core/Classes/DocumentLayers.cs:135
+#, csharp-format
+msgid "Layer {0}"
 msgstr ""
 
 #: ../Pinta/Pads/LayersPad.cs:40 ../Pinta/Pads/LayersPad.cs:60
@@ -1776,6 +1797,10 @@ msgstr ""
 msgid "Rulers"
 msgstr ""
 
+#: ../Pinta.Tools/Tools/ColorPickerTool.cs:198
+msgid "Sampling"
+msgstr ""
+
 #: ../Pinta.Core/Effects/UserBlendOps.cs:48
 #: ../Pinta.Effects/Adjustments/HueSaturationEffect.cs:70
 msgid "Saturation"
@@ -1852,6 +1877,11 @@ msgstr ""
 
 #: ../Pinta.Effects/Effects/SharpenEffect.cs:24
 msgid "Sharpen"
+msgstr ""
+
+#: ../Pinta.Core/Extensions/ToolBoxButton.cs:52
+#: ../Pinta.Gui.Widgets/Widgets/StatusBarColorPaletteWidget.cs:230
+msgid "Shortcut key"
 msgstr ""
 
 #: ../Pinta/Actions/Layers/LayerPropertiesAction.cs:104
@@ -2030,7 +2060,13 @@ msgid "Title"
 msgstr ""
 
 #: ../Pinta.Effects/Effects/RedEyeRemoveEffect.cs:70
+#: ../Pinta.Tools/Tools/FloodTool.cs:127
+#: ../Pinta.Tools/Tools/RecolorTool.cs:200
 msgid "Tolerance"
+msgstr ""
+
+#: ../Pinta.Core/Managers/ToolManager.cs:339
+msgid "Tool"
 msgstr ""
 
 #: ../Pinta.Core/Actions/ViewActions.cs:74
@@ -2064,6 +2100,11 @@ msgstr ""
 
 #: ../Pinta.Effects/Effects/TwistEffect.cs:24
 msgid "Twist"
+msgstr ""
+
+#: ../Pinta.Tools/Tools/EraserTool.cs:263
+#: ../Pinta.Tools/Tools/PaintBrushTool.cs:162
+msgid "Type"
 msgstr ""
 
 #: ../Pinta/MainWindow.cs:559
@@ -2297,6 +2338,13 @@ msgstr ""
 #: ../Pinta.Tools/Tools/CloneStampTool.cs:47
 #, csharp-format
 msgid "{0} + left click to set origin, left click to paint."
+msgstr ""
+
+#. Translators: this is the auto-generated name for a duplicated layer.
+#. {0} is the name of the source layer. Example: "Layer 3 copy".
+#: ../Pinta.Core/Classes/DocumentLayers.cs:234
+#, csharp-format
+msgid "{0} copy"
 msgstr ""
 
 #: ../Pinta.Core/ImageFormats/FormatDescriptor.cs:93

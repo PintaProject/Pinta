@@ -159,7 +159,7 @@ namespace Pinta.Tools
 		private SeparatorToolItem? separator;
 
 		private SeparatorToolItem Separator => separator ??= new SeparatorToolItem ();
-		private ToolBarLabel BrushLabel => brush_label ??= new ToolBarLabel ($" {Translations.GetString ("Type")}:  ");
+		private ToolBarLabel BrushLabel => brush_label ??= new ToolBarLabel (string.Format (" {0}:  ", Translations.GetString ("Type")));
 
 		private ToolBarComboBox BrushComboBox {
 			get {

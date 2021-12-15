@@ -197,7 +197,7 @@ namespace Pinta.Tools
 		private ToolBarSlider? tolerance_slider;
 		private SeparatorToolItem? separator;
 
-		private ToolBarLabel ToleranceLabel => tolerance_label ??= new ToolBarLabel ($"  {Translations.GetString ("Tolerance")}: ");
+		private ToolBarLabel ToleranceLabel => tolerance_label ??= new ToolBarLabel (string.Format ("  {0}: ", Translations.GetString ("Tolerance")));
 		private ToolBarSlider ToleranceSlider => tolerance_slider ??= new ToolBarSlider (0, 100, 1, Settings.GetSetting (TOLERANCE_SETTING, 50));
 		private SeparatorToolItem Separator => separator ??= new SeparatorToolItem ();
 	}

@@ -101,6 +101,6 @@ namespace Pinta.Tools
 		private ToolBarLabel? brush_width_label;
 
 		protected ToolBarWidget<SpinButton> BrushWidthSpinButton => brush_width ??= new (new SpinButton (1, 1e5, 1) { Value = Settings.GetSetting (BRUSH_WIDTH_SETTING, DEFAULT_BRUSH_WIDTH) });
-		protected ToolBarLabel BrushWidthLabel => brush_width_label ??= new ToolBarLabel ($" {Translations.GetString ("Brush width")}: ");
+		protected ToolBarLabel BrushWidthLabel => brush_width_label ??= new ToolBarLabel (string.Format (" {0}: ", Translations.GetString ("Brush width")));
 	}
 }

@@ -194,8 +194,8 @@ namespace Pinta.Tools
 		private ToolBarDropDownButton? sample_type;
 		private SeparatorToolItem? sample_sep;
 
-		private ToolBarLabel ToolSelectionLabel => tool_select_label ??= new ToolBarLabel ($" {Translations.GetString ("After select")}: ");
-		private ToolBarLabel SamplingLabel => sampling_label ??= new ToolBarLabel ($" {Translations.GetString ("Sampling")}: ");
+		private ToolBarLabel ToolSelectionLabel => tool_select_label ??= new ToolBarLabel (string.Format (" {0}: ", Translations.GetString ("After select")));
+		private ToolBarLabel SamplingLabel => sampling_label ??= new ToolBarLabel (string.Format (" {0}: ", Translations.GetString ("Sampling")));
 		private SeparatorToolItem Separator => sample_sep ??= new SeparatorToolItem ();
 
 		private ToolBarDropDownButton ToolSelectionDropDown {

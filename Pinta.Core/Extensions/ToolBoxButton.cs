@@ -48,9 +48,10 @@ namespace Pinta.Core
 
 			Show ();
 
-			if (tool.ShortcutKey != 0)
-				TooltipText = $"{tool.Name}\n{Translations.GetString ("Shortcut key")}: {tool.ShortcutKey.ToString ().ToUpperInvariant ()}\n\n{tool.StatusBarText}";
-			else
+			if (tool.ShortcutKey != 0) {
+				var shortcut_label = Translations.GetString ("Shortcut key");
+				TooltipText = $"{tool.Name}\n{shortcut_label}: {tool.ShortcutKey.ToString ().ToUpperInvariant ()}\n\n{tool.StatusBarText}";
+			} else
 				TooltipText = tool.Name;
 		}
 	}

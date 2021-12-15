@@ -219,7 +219,7 @@ namespace Pinta.Tools
 		private SeparatorToolItem? fill_sep;
 
 		private SeparatorToolItem Separator => fill_sep ??= new SeparatorToolItem ();
-		private ToolBarLabel FillLabel => fill_label ??= new ToolBarLabel ($" {Translations.GetString ("Fill Style")}: ");
+		private ToolBarLabel FillLabel => fill_label ??= new ToolBarLabel (string.Format (" {0}: ", Translations.GetString ("Fill Style")));
 		private ToolBarDropDownButton FillDropDown {
 			get {
 				if (fill_button == null) {
