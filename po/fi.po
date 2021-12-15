@@ -8,15 +8,15 @@ msgstr ""
 "Project-Id-Version: pinta\n"
 "Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
 "POT-Creation-Date: 2021-10-17 10:55-0400\n"
-"PO-Revision-Date: 2021-10-25 16:05+0000\n"
-"Last-Translator: Jiri Grönroos <Unknown>\n"
+"PO-Revision-Date: 2021-11-21 23:10+0000\n"
+"Last-Translator: Oi Suomi On! <Unknown>\n"
 "Language-Team: Finnish <fi@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Launchpad-Export-Date: 2021-11-12 20:36+0000\n"
-"X-Generator: Launchpad (build 57dd9ea1b48fdf744e285d99fb34fa0c21646cd0)\n"
+"X-Launchpad-Export-Date: 2021-12-15 03:40+0000\n"
+"X-Generator: Launchpad (build cd8f08e7e7c160b1710e2cad6ba032fb74527860)\n"
 
 #: ../xdg/pinta.desktop.in.h:1
 msgid "Pinta"
@@ -429,7 +429,7 @@ msgstr "Taso"
 
 #: ../Pinta.Core/Classes/Document.cs:384
 msgid "copy"
-msgstr ""
+msgstr "kopioi"
 
 #: ../Pinta.Core/Classes/Document.cs:661
 #: ../Pinta/Dialogs/ResizeCanvasDialog.cs:56
@@ -1134,7 +1134,7 @@ msgstr "Puristin"
 
 #: ../Pinta.Effects/Effects/WarpEffect.cs:21
 msgid "Wrap"
-msgstr ""
+msgstr "Kääri"
 
 #: ../Pinta.Effects/Effects/WarpEffect.cs:23
 msgid "Reflect"
@@ -1275,11 +1275,11 @@ msgstr "Suurenna nuolen kokoa"
 
 #: ../Pinta.Tools/Editable/EditEngines/ArrowedEditEngine.cs:440
 msgid "Decrease angle offset"
-msgstr ""
+msgstr "Vähennä kulmasiirtymää"
 
 #: ../Pinta.Tools/Editable/EditEngines/ArrowedEditEngine.cs:503
 msgid "Increase angle offset"
-msgstr ""
+msgstr "Lisää kulmasiirtymää"
 
 #: ../Pinta.Tools/Editable/EditEngines/ArrowedEditEngine.cs:514
 msgid "Length"
@@ -1287,11 +1287,11 @@ msgstr "Pituus"
 
 #: ../Pinta.Tools/Editable/EditEngines/ArrowedEditEngine.cs:519
 msgid "Decrease length offset"
-msgstr ""
+msgstr "Vähennä pituussiirtymää"
 
 #: ../Pinta.Tools/Editable/EditEngines/ArrowedEditEngine.cs:582
 msgid "Increase length offset"
-msgstr ""
+msgstr "Lisää pituussiirtymää"
 
 #: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:296
 #: ../Pinta.Tools/Tools/BaseBrushTool.cs:76
@@ -1401,11 +1401,11 @@ msgstr "Pyöristetty viiva"
 
 #: ../Pinta.Tools/Editable/EditEngines/RoundedLineEditEngine.cs:131
 msgid "Decrease shape's corner radius"
-msgstr ""
+msgstr "Vähennä kulman sädettä"
 
 #: ../Pinta.Tools/Editable/EditEngines/RoundedLineEditEngine.cs:154
 msgid "Increase shape's corner radius"
-msgstr ""
+msgstr "Lisää kulman sädettä"
 
 #: ../Pinta.Tools/Tools/CloneStampTool.cs:42
 msgid "Clone Stamp"
@@ -1508,6 +1508,27 @@ msgid ""
 "starting at the edge.\n"
 "Press Enter to finalize the shape."
 msgstr ""
+"Napsauta hiiren vasemmalla napilla piirtääksesi muodon vakiovärillä.\n"
+"Napsauta hiiren vasemmalla napilla muodon päällä lisätäksesi "
+"hallintapisteen.\n"
+"Napsauta hiiren vasemmalla napilla hallintapisteen päällä ja raahaa sitä "
+"liikuttaaksesi.\n"
+"Napsauta hiiren oikealla napilla hallintapisteen päällä ja raahaa "
+"muuttaaksesi sen jännitteen \n"
+"Pidä näppäimistön Shift-vaihtonäppäintä napsauttaaksesi muotokohteen eri "
+"kulmiin.\n"
+"Käytä nuolinäppäimiä liikuttaaksesi valittua hallintapistettä.\n"
+"Paina Ctrl + vasen/oikea nuoli valitaksesi hallintapisteen järjestyksen.\n"
+"Paina näppäimistön Delete-nappia poistaaksesi valitun hallintapisteen.\n"
+"Paina Välilyöntiä lisätäksesi uuden hallintapisteen siihen missä hiiren "
+"osoitin on.\n"
+"Pidä alhaalla Ctrl-nappia samalla kun painat Välilyöntiä luodaksesi "
+"hallintapisteen täsmälleen samaan paikkaan.\n"
+"Pidä alhaalla Ctrl-nappia samalla kun painat hiiren vasenta nappia "
+"hallintapisteen luodaksesi uuden muodon samaan paikkaan.\n"
+"Paina Ctrl-nappia samalla kun napsautat hiirellä kuvan ulkopuolella "
+"luodaksesi uuden muodon joka alkaa sen reunasta.\n"
+"Paina Askelpalautinta viimeistelläksesi muodon."
 
 #: ../Pinta.Tools/Tools/EraserTool.cs:187
 #: ../Pinta.Tools/Tools/PaintBrushTool.cs:92
@@ -1613,6 +1634,11 @@ msgid ""
 "content. Hold Shift to rotate in steps. Use arrow keys to move selected "
 "content by a single pixel."
 msgstr ""
+"Napsauta hiiren vasemmalla napilla ja raahaa valinta liikuttaaksesi valittua "
+"sisältöä. Pidä alhaalla Ctrl-nappia skaalataksesi siirtämisen sijasta. "
+"Oikealla hiirennapilla raahaamalla kierrät valittua sisältöä. Pidä alhaalla "
+"Shift-vaihtonäppäintä kiertääksesi askeleittain. Käytä nuolinäppäimiä "
+"liikuttaaksesi valittua sisältöä aina yhden pikselin verran."
 
 #: ../Pinta.Tools/Tools/MoveSelectionTool.cs:42
 msgid "Move Selection"
@@ -1625,6 +1651,11 @@ msgid ""
 "selection outline. Hold Shift to rotate in steps. Use arrow keys to move "
 "selection outline by a single pixel."
 msgstr ""
+"Napsauta hiiren vasemmalla napilla ja raahaa valintaa liikuttaaksesi "
+"valinnan ulkorajaa. Pidä alhaalla Ctrl-nappia skaalataksesi liikuttamisen "
+"sijasta. Paina hiiren oikealla napilla raahataksesi valintaa kiertääksesi "
+"ulkorajaa. Pidä alhaalla SHift-nappia kiertääksesi askeleittain. Käytä "
+"nuolinäppäimiä liikuttaaksesi valinnan ulkorajaa aina yhden pikselin verran."
 
 #: ../Pinta.Tools/Tools/PaintBrushTool.cs:40 ../Pinta/MainWindow.cs:104
 msgid "Paintbrush"
@@ -1898,7 +1929,9 @@ msgstr ""
 "  Jiri Grönroos https://launchpad.net/~jiri-gronroos\n"
 "  Jonathan Pobst https://launchpad.net/~jpobst\n"
 "  Kari Rantanen https://launchpad.net/~kari-rantanen\n"
+"  Kimmo Kujansuu https://launchpad.net/~mahtiankka\n"
 "  Lauri Kohtala https://launchpad.net/~lauri-kohtala-f\n"
+"  Oi Suomi On! https://launchpad.net/~oi-suomi-on\n"
 "  Tommi Saira https://launchpad.net/~tommisaira\n"
 "  Urmas https://launchpad.net/~urmas-2006"
 
