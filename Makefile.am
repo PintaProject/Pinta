@@ -53,11 +53,25 @@ list:
 		git ls-files | grep '\.cs' ;\
 	fi
 
+#target: updatepotfiles - update the POTFILES.in file
+updatepotfiles:
+	echo xdg/pinta.desktop.in > po/POTFILES.in
+	echo xdg/pinta.appdata.xml.in >> po/POTFILES.in
+	find -s \
+		Pinta \
+		Pinta.Core \
+		Pinta.Docking \
+		Pinta.Effects \
+		Pinta.Gui.Widgets \
+		Pinta.Resources \
+		Pinta.Tools \
+		-name \*.cs -not -path '*/obj/*' >> po/POTFILES.in
+
 #target: updatepot - update the messages.pot file
 updatepot:
 	cd po && intltool-update -m && intltool-update -p --gettext-package=messages
 	cat po/messages.in >> po/messages.pot
-	cat po/messages.pot | msguniq -o po/messages.pot
+	cat po/messages.pot | msguniq -s -o po/messages.pot
 
 # target: clean - Default clean command: cleanobj and cleanbin
 clean-local: cleanobj cleanbin
