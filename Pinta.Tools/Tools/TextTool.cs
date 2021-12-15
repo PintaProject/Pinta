@@ -405,8 +405,8 @@ namespace Pinta.Tools
 
 		protected override void OnCommit (Document? document)
 		{
-			imContext.FocusOut();
-			StopEditing(false);
+			imContext.FocusOut ();
+			StopEditing (false);
 		}
 
 		protected override void OnDeactivated (Document? document, BaseTool? newTool)
@@ -434,7 +434,7 @@ namespace Pinta.Tools
 			Point pt = e.PointDouble.ToGdkPoint ();
 
 			// Grab focus so we can get keystrokes
-			imContext.FocusIn();
+			imContext.FocusIn ();
 
 			if (selection != null)
 				selection.Dispose ();
@@ -717,13 +717,11 @@ namespace Pinta.Tools
 						break;
 				}
 				if (keyHandled) {
-			                imContext.FocusOut();
+					imContext.FocusOut ();
 					RedrawText (true, true);
-			                imContext.FocusIn();
+					imContext.FocusIn ();
 				}
-			}
-			else
-			{
+			} else {
 				// If we're not editing, allow the key press to be handled elsewhere (e.g. for selecting another tool).
 				keyHandled = false;
 			}
