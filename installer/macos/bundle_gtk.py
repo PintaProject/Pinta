@@ -50,6 +50,10 @@ for lib, deps in lib_deps.items():
         cmd = ['install_name_tool', '-change', dep_path, dep_lib, lib_copy]
         subprocess.check_output(cmd)
 
+# Add the libgdk symlink that GtkSharp needs.
+os.symlink("libgdk_pixbuf-2.0.0.dylib",
+           os.path.join(args.install_dir, "libgdk_pixbuf-2.0.dylib"))
+
 # Copy translations and icons.
 gtk_root = os.path.join(os.path.dirname(os.path.realpath(ROOT_LIB)), "..")
 shutil.copytree(os.path.join(gtk_root, 'share/locale'),
