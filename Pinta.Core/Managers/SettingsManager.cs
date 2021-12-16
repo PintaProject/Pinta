@@ -78,7 +78,8 @@ namespace Pinta.Core
 
 		public string GetUserSettingsDirectory ()
 		{
-			var settings_directory = Path.Combine (Environment.GetFolderPath (Environment.SpecialFolder.ApplicationData), "Pinta");
+			var appdata_folder = Environment.GetFolderPath (Environment.SpecialFolder.ApplicationData, Environment.SpecialFolderOption.Create);
+			var settings_directory = Path.Combine (appdata_folder, "Pinta");
 
 			// If someone is getting this, they probably are going to need
 			// the directory created, so just handle that here.
