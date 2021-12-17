@@ -62,11 +62,12 @@ namespace Pinta.Core
 
 		static SystemManager ()
 		{
-			if (Path.DirectorySeparatorChar == '\\')
+			if (RuntimeInformation.IsOSPlatform (OSPlatform.Windows))
 				operating_system = OS.Windows;
-			else if (IsRunningOnMac ())
+			else if (RuntimeInformation.IsOSPlatform (OSPlatform.OSX))
 				operating_system = OS.Mac;
-			else if (Environment.OSVersion.Platform == PlatformID.Unix)
+			else if (RuntimeInformation.IsOSPlatform (OSPlatform.Linux) ||
+				 RuntimeInformation.IsOSPlatform (OSPlatform.FreeBSD))
 				operating_system = OS.X11;
 			else
 				operating_system = OS.Other;
@@ -155,29 +156,6 @@ namespace Pinta.Core
 #else
 			return new T[0];
 #endif
-		}
-
-		//From Managed.Windows.Forms/XplatUI
-		[DllImport ("libc")]
-		static extern int uname (IntPtr buf);
-
-		static bool IsRunningOnMac ()
-		{
-			IntPtr buf = IntPtr.Zero;
-			try {
-				buf = Marshal.AllocHGlobal (8192);
-				// This is a hacktastic way of getting sysname from uname ()
-				if (uname (buf) == 0) {
-					string? os = Marshal.PtrToStringAnsi (buf);
-					if (os == "Darwin")
-						return true;
-				}
-			} catch {
-			} finally {
-				if (buf != IntPtr.Zero)
-					Marshal.FreeHGlobal (buf);
-			}
-			return false;
 		}
 	}
 

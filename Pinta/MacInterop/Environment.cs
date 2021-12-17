@@ -39,7 +39,7 @@ namespace Pinta.MacInterop
 		{
 			// XDG_DATA_DIRS is used to find {prefix}/share/glib-2.0/schemas
 			// This either from the system GTK (during development), or the app bundle.
-			SetEnvVar ("XDG_DATA_DIRS", string.Join(':',
+			SetEnvVar ("XDG_DATA_DIRS", string.Join (':',
 				"/usr/local/share",
 				Pinta.Core.SystemManager.GetDataRootDirectory ()));
 		}
