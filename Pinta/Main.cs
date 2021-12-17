@@ -40,6 +40,10 @@ namespace Pinta
 		[STAThread]
 		public static void Main (string[] args)
 		{
+			if (SystemManager.GetOperatingSystem () == OS.Mac) {
+				MacInterop.Environment.Init ();
+			}
+
 			string locale_dir = Path.Combine (SystemManager.GetDataRootDirectory (), "locale");
 
 			try {
