@@ -22,7 +22,7 @@ mv ${MAC_APP_BIN_DIR}/icons ${MAC_APP_SHARE_DIR}/icons
 cp Info.plist ${MAC_APP_DIR}/Contents
 cp pinta.icns ${MAC_APP_DIR}/Contents/Resources
 
-./bundle_gtk.py --install_dir ${MAC_APP_BIN_DIR} --resource_dir ${MAC_APP_RESOURCE_DIR}
+./bundle_gtk.py --resource_dir ${MAC_APP_RESOURCE_DIR}
 
 touch ${MAC_APP_DIR}
 
