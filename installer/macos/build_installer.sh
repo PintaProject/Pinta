@@ -30,7 +30,7 @@ install_name_tool -add_rpath "@executable_path/../Resources/lib" ${MAC_APP_BIN_D
 touch ${MAC_APP_DIR}
 
 # Sign
-#codesign --deep --force --timestamp --sign "Developer ID Application: Cameron White (D5G6C56TBH)" Pinta.app --options=runtime --no-strict --entitlements entitlements.plist
+codesign --deep --force --timestamp --options=runtime --sign "Developer ID Application: Cameron White (D5G6C56TBH)" Pinta.app --entitlements entitlements.plist
 
 # Zip
 zip -r9uq --symlinks ${MAC_APP_DIR}.zip ${MAC_APP_DIR}

@@ -61,10 +61,18 @@ jobs:
       run: dotnet build Pinta.sln --configuration Release
     - name: Test
       run: dotnet test Pinta.sln --configuration Release
+
+    - name: Add Cert to Keychain
+      uses: apple-actions/import-codesign-certs@v1
+      with:
+        p12-file-base64: ${{ secrets.MAC_CERT_BASE64 }}
+        p12-password: ${{ secrets.MAC_CERT_PASSWORD }}
+
     - name: Build Installer
       run: |
         cd installer/macos
         ./build_installer.sh
+
     - name: Upload Installer
       uses: actions/upload-artifact@v2
       with:
