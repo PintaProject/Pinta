@@ -9,9 +9,11 @@ import subprocess
 from stat import S_IREAD, S_IRGRP, S_IROTH, S_IWUSR
 
 PREFIX = "/usr/local"
-ROOT_LIB = "/usr/local/lib/libgtk-3.dylib"
+GTK_LIB = "/usr/local/lib/libgtk-3.dylib"
+RSVG_LIB = "/usr/local/lib/librsvg-2.2.dylib"
+ROOT_LIBS = [GTK_LIB, RSVG_LIB]
 ADWAITA_THEME = "/usr/local/share/icons/Adwaita/index.theme"
-PIXBUF_LOADERS = "lib/gdk-pixbuf-2.0"
+PIXBUF_LOADERS = "lib/gdk-pixbuf-2.0/2.10.0"
 IM_MODULES = "lib/gtk-3.0/3.0.0/immodules"
 GLIB_SCHEMAS = "share/glib-2.0/schemas"
 
@@ -26,8 +28,7 @@ def run_install_name_tool(lib, deps, lib_install_dir):
     # dependencies.
     for dep_path in deps:
         dep_lib_name = os.path.basename(os.path.realpath(dep_path))
-        dep_lib = os.path.relpath(os.path.join(lib_install_dir, dep_lib_name),
-                                  os.path.dirname(lib))
+        dep_lib = "@executable_path/../Resources/lib/" + dep_lib_name
         cmd = ['install_name_tool', '-change', dep_path, dep_lib, lib]
         subprocess.check_output(cmd)
 
@@ -81,6 +82,23 @@ def copy_plugins(res_path, lib_install_dir):
                                   lib_install_dir)
 
 
+def install_plugin_cache(cache_path, resource_dir):
+    """
+    Copy a file such as immodules.cache, and update the library paths to be
+    paths inside the .app bundle.
+    """
+    src_cache = os.path.join(PREFIX, cache_path)
+    dest_cache = os.path.join(resource_dir, cache_path)
+
+    with open(src_cache, 'r') as src_f:
+        contents = src_f.read()
+        contents = re.sub(r"/.*/(lib|share)/",
+                          r"@executable_path/../Resources/\1/", contents)
+
+        with open(dest_cache, 'w') as dest_f:
+            dest_f.write(contents)
+
+
 parser = argparse.ArgumentParser(description='Bundle the GTK libraries.')
 parser.add_argument('--resource_dir',
                     type=pathlib.Path,
@@ -89,7 +107,8 @@ parser.add_argument('--resource_dir',
 args = parser.parse_args()
 
 lib_deps = {}
-collect_libs(os.path.realpath(ROOT_LIB), lib_deps)
+for root_lib in ROOT_LIBS:
+    collect_libs(os.path.realpath(root_lib), lib_deps)
 
 lib_install_dir = os.path.join(args.resource_dir, 'lib')
 os.makedirs(lib_install_dir)
@@ -103,7 +122,7 @@ os.symlink("libgdk_pixbuf-2.0.0.dylib",
            os.path.join(lib_install_dir, "libgdk_pixbuf-2.0.dylib"))
 
 # Copy translations and icons.
-gtk_root = os.path.join(os.path.dirname(os.path.realpath(ROOT_LIB)), "..")
+gtk_root = os.path.join(os.path.dirname(os.path.realpath(GTK_LIB)), "..")
 shutil.copytree(os.path.join(gtk_root, 'share/locale'),
                 os.path.join(args.resource_dir, 'share/locale'),
                 dirs_exist_ok=True)
@@ -115,8 +134,12 @@ shutil.copytree(adwaita_icons,
                 os.path.join(args.resource_dir, 'share/icons'),
                 dirs_exist_ok=True)
 
-# TODO - update immodules.cache and loaders.cache
 copy_plugins(PIXBUF_LOADERS, lib_install_dir)
+install_plugin_cache(os.path.join(PIXBUF_LOADERS, "loaders.cache"),
+                     args.resource_dir)
+
 copy_plugins(IM_MODULES, lib_install_dir)
+install_plugin_cache(os.path.join(IM_MODULES, "../immodules.cache"),
+                     args.resource_dir)
 
 copy_resources(GLIB_SCHEMAS)

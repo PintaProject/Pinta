@@ -42,14 +42,13 @@ namespace Pinta.MacInterop
 			// Set environment variables used to locate the GTK installation in the .app bundle.
 			if (SystemManager.IsExecutableInMacBundle ()) {
 				// XDG_DATA_DIRS is used to find {prefix}/share/glib-2.0/schemas
-				SetEnvVar ("XDG_DATA_DIRS", SystemManager.GetDataRootDirectory ());
+				var share_dir = SystemManager.GetDataRootDirectory ();
+				SetEnvVar ("XDG_DATA_DIRS", share_dir);
 
 				// Set environment variables used for loading pixbuf modules and input method modules.
-				SetEnvVar ("GTK_IM_MODULE_FILE", Path.Combine (
-					SystemManager.GetDataRootDirectory (), "lib/gtk-3.0/3.0.0/immodules.cache"));
-
-				SetEnvVar ("GTK_PIXBUF_MODULE_FILE", Path.Combine (
-					SystemManager.GetDataRootDirectory (), "lib/gdk-pixbuf-2.0/2.10.0/loaders.cache"));
+				var resources_dir = Directory.GetParent (share_dir)!.FullName;
+				SetEnvVar ("GTK_IM_MODULE_FILE", Path.Combine (resources_dir, "lib/gtk-3.0/3.0.0/immodules.cache"));
+				SetEnvVar ("GDK_PIXBUF_MODULE_FILE", Path.Combine (resources_dir, "lib/gdk-pixbuf-2.0/2.10.0/loaders.cache"));
 			}
 		}
 
