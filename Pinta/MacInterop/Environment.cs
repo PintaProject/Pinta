@@ -23,7 +23,9 @@
 // THE SOFTWARE.
 
 using System;
+using System.IO;
 using System.Runtime.InteropServices;
+using Pinta.Core;
 
 namespace Pinta.MacInterop
 {
@@ -37,11 +39,18 @@ namespace Pinta.MacInterop
 		/// </summary>
 		public static void Init ()
 		{
-			// XDG_DATA_DIRS is used to find {prefix}/share/glib-2.0/schemas
-			// This either from the system GTK (during development), or the app bundle.
-			SetEnvVar ("XDG_DATA_DIRS", string.Join (':',
-				"/usr/local/share",
-				Pinta.Core.SystemManager.GetDataRootDirectory ()));
+			// Set environment variables used to locate the GTK installation in the .app bundle.
+			if (SystemManager.IsExecutableInMacBundle ()) {
+				// XDG_DATA_DIRS is used to find {prefix}/share/glib-2.0/schemas
+				SetEnvVar ("XDG_DATA_DIRS", SystemManager.GetDataRootDirectory ());
+
+				// Set environment variables used for loading pixbuf modules and input method modules.
+				SetEnvVar ("GTK_IM_MODULE_FILE", Path.Combine (
+					SystemManager.GetDataRootDirectory (), "lib/gtk-3.0/3.0.0/immodules.cache"));
+
+				SetEnvVar ("GTK_PIXBUF_MODULE_FILE", Path.Combine (
+					SystemManager.GetDataRootDirectory (), "lib/gdk-pixbuf-2.0/2.10.0/loaders.cache"));
+			}
 		}
 
 		private static void SetEnvVar (string name, string value)

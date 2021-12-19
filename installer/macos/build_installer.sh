@@ -22,7 +22,10 @@ mv ${MAC_APP_BIN_DIR}/icons ${MAC_APP_SHARE_DIR}/icons
 cp Info.plist ${MAC_APP_DIR}/Contents
 cp pinta.icns ${MAC_APP_DIR}/Contents/Resources
 
+# Install the GTK dependencies.
 ./bundle_gtk.py --resource_dir ${MAC_APP_RESOURCE_DIR}
+# Add the GTK lib dir to the library search path (for dlopen()), as an alternative to $DYLD_LIBRARY_PATH.
+install_name_tool -add_rpath "@executable_path/../Resources/lib" ${MAC_APP_BIN_DIR}/Pinta
 
 touch ${MAC_APP_DIR}
 

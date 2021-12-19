@@ -132,15 +132,30 @@ namespace Pinta.Core
 			}
 
 			// If Pinta is in Pinta.app/Contents/MacOS, we want Pinta.app/Contents/Resources/share.
-			if (GetOperatingSystem () == OS.Mac) {
+			if (GetOperatingSystem () == OS.Mac && IsExecutableInMacBundle ()) {
 				var contents_dir = Directory.GetParent (app_dir);
-				if (contents_dir?.Name == "Contents") {
-					return Path.Combine (contents_dir.FullName, "Resources", "share");
-				}
+				return Path.Combine (contents_dir!.FullName, "Resources", "share");
 			}
 
 			// Otherwise, translations etc are contained under the executable's folder.
 			return app_dir;
+		}
+
+		/// <summary>
+		/// Returns true if Pinta is executing in a .app bundle (macOS).
+		/// This requires some differents paths to locate resources, GTK libraries, etc
+		/// </summary>
+		public static bool IsExecutableInMacBundle ()
+		{
+			if (GetOperatingSystem () != OS.Mac) {
+				return false;
+			}
+
+			string app_dir = SystemManager.GetExecutableDirectory ();
+
+			// For a bundle, the executable would be Pinta.app/Contents/MacOS/Pinta
+			var contents_dir = Directory.GetParent (app_dir);
+			return contents_dir?.Name == "Contents";
 		}
 
 		public static OS GetOperatingSystem ()

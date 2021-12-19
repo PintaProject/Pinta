@@ -60,7 +60,8 @@ def copy_resources(res_path):
 
 def copy_plugins(res_path, lib_install_dir):
     """
-    Copy a folder from ${PREFIX}/${res_path} to Contents/Resources/${res_path}.
+    Copy a folder of plugins from ${PREFIX}/${res_path} to
+    Contents/Resources/${res_path} and update the library references.
     """
 
     copy_resources(res_path)
@@ -115,7 +116,6 @@ shutil.copytree(adwaita_icons,
                 dirs_exist_ok=True)
 
 # TODO - update immodules.cache and loaders.cache
-# TODO - set GDK_PIXBUF_MODULE_FILE and GTK_IM_MODULE_FILE at runtime
 copy_plugins(PIXBUF_LOADERS, lib_install_dir)
 copy_plugins(IM_MODULES, lib_install_dir)
 
