@@ -7,6 +7,13 @@ MAC_APP_BIN_DIR="${MAC_APP_DIR}/Contents/MacOS/"
 MAC_APP_RESOURCE_DIR="${MAC_APP_DIR}/Contents/Resources/"
 MAC_APP_SHARE_DIR="${MAC_APP_RESOURCE_DIR}/share"
 
+run_codesign()
+{
+    file=$1
+    echo ${file}
+    codesign --deep --force --timestamp --options runtime --sign "Developer ID Application: Cameron White (D5G6C56TBH)" --entitlements entitlements.plist ${file}
+}
+
 mkdir -p ${MAC_APP_BIN_DIR} ${MAC_APP_RESOURCE_DIR} ${MAC_APP_SHARE_DIR}
 
 dotnet publish ../../Pinta.sln -p:BuildTranslations=true --configuration Release -r osx-x64 --self-contained true -o ${MAC_APP_BIN_DIR}
@@ -29,8 +36,14 @@ install_name_tool -add_rpath "@executable_path/../Resources/lib" ${MAC_APP_BIN_D
 
 touch ${MAC_APP_DIR}
 
-# Sign
-codesign --deep --force --timestamp --options=runtime --sign "Developer ID Application: Cameron White (D5G6C56TBH)" Pinta.app --entitlements entitlements.plist
+# Sign the main executable and .NET stuff.
+run_codesign Pinta.app
+
+# Sign the GTK binaries.
+for lib in `find ${MAC_APP_RESOURCE_DIR} -name \*.dylib -or -name \*.so`
+do
+    run_codesign ${lib}
+done
 
 # Zip
 zip -r9uq --symlinks ${MAC_APP_DIR}.zip ${MAC_APP_DIR}
