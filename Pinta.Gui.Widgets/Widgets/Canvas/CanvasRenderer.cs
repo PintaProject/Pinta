@@ -112,7 +112,7 @@ namespace Pinta.Gui.Widgets
 				if (offset_layer.Surface.Width != source_size.Width || offset_layer.Surface.Height != source_size.Height) {
 					(offset_layer.Surface as IDisposable).Dispose ();
 					var surf = CairoExtensions.CreateImageSurface (Cairo.Format.ARGB32, source_size.Width, source_size.Height);
-					offset_layer = new Layer ();
+					offset_layer = new Layer (surf);
 				}
 
 				return offset_layer;

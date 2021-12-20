@@ -11,6 +11,7 @@ Thanks to the following contributors who worked on this release:
 ### Changed
 
 ### Fixed
+- Fixed a potential crash after resizing an image and then transforming a layer or selection ([#1953078](https://bugs.launchpad.net/pinta/+bug/1953078)).
 
 ## [1.7.1](https://github.com/PintaProject/Pinta/releases/tag/1.7.1) - 2021/11/20
 
