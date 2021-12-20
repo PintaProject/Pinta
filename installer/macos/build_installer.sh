@@ -1,8 +1,7 @@
 #!/bin/sh
 set -e
-set -x
 
-MAC_APP_DIR=Pinta.app
+MAC_APP_DIR=package/Pinta.app
 MAC_APP_BIN_DIR="${MAC_APP_DIR}/Contents/MacOS/"
 MAC_APP_RESOURCE_DIR="${MAC_APP_DIR}/Contents/Resources/"
 MAC_APP_SHARE_DIR="${MAC_APP_RESOURCE_DIR}/share"
@@ -30,20 +29,33 @@ cp Info.plist ${MAC_APP_DIR}/Contents
 cp pinta.icns ${MAC_APP_DIR}/Contents/Resources
 
 # Install the GTK dependencies.
+echo "Bundling GTK..."
 ./bundle_gtk.py --resource_dir ${MAC_APP_RESOURCE_DIR}
 # Add the GTK lib dir to the library search path (for dlopen()), as an alternative to $DYLD_LIBRARY_PATH.
 install_name_tool -add_rpath "@executable_path/../Resources/lib" ${MAC_APP_BIN_DIR}/Pinta
 
 touch ${MAC_APP_DIR}
 
-# Sign the main executable and .NET stuff.
-run_codesign Pinta.app
-
 # Sign the GTK binaries.
+echo "Signing..."
 for lib in `find ${MAC_APP_RESOURCE_DIR} -name \*.dylib -or -name \*.so`
 do
     run_codesign ${lib}
 done
 
-# Zip
-zip -r9uq --symlinks ${MAC_APP_DIR}.zip ${MAC_APP_DIR}
+# Sign the main executable and .NET stuff.
+run_codesign ${MAC_APP_DIR}
+
+# Create and sign the .dmg image, and include a link to drag the app into /Applications
+echo "Creating dmg..."
+ln -s /Applications package/Applications
+hdiutil create -quiet -srcFolder package -volname "Pinta Installer" -o Pinta.dmg
+run_codesign Pinta.dmg
+
+# Notarize
+echo "Notarizing..."
+xcrun notarytool submit --wait --apple-id=cameronwhite91@gmail.com --password ${MAC_DEV_PASSWORD} --team-id D5G6C56TBH Pinta.dmg
+
+# Staple the result to the dmg
+echo "Stapling..."
+xcrun stapler staple Pinta.dmg

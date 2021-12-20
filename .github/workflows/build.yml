@@ -65,10 +65,12 @@ jobs:
     - name: Add Cert to Keychain
       uses: apple-actions/import-codesign-certs@v1
       with:
-        p12-file-base64: ${{ secrets.MAC_CERT_BASE64 }}
-        p12-password: ${{ secrets.MAC_CERT_PASSWORD }}
+        p12-file-base64: ${{ secrets.MAC_CERTS_BASE64 }}
+        p12-password: ${{ secrets.MAC_CERTS_PASSWORD }}
 
     - name: Build Installer
+      env:
+        MAC_DEV_PASSWORD: ${{ secrets.MAC_DEV_PASSWORD }}
       run: |
         cd installer/macos
         ./build_installer.sh
@@ -76,8 +78,8 @@ jobs:
     - name: Upload Installer
       uses: actions/upload-artifact@v2
       with:
-        name: "Pinta.app.zip"
-        path: installer/macos/Pinta.app.zip
+        name: "Pinta.dmg"
+        path: installer/macos/Pinta.dmg
         if-no-files-found: error
 
   build-windows:

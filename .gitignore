@@ -12,8 +12,8 @@ config.log
 config.status
 configure
 install-sh
-installer/macos/Pinta.app
-installer/macos/Pinta.app.zip
+installer/macos/Pinta.dmg
+installer/macos/package
 installer/linux/pinta
 intltool-extract.in
 intltool-merge.in
