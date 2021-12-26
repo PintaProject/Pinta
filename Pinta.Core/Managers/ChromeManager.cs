@@ -48,6 +48,7 @@ namespace Pinta.Core
 		public Window MainWindow { get { return main_window; } }
 		public Statusbar StatusBar { get; private set; } = null!;
 		public Toolbar ToolBox { get; private set; } = null!;
+		public Notebook ImageTabsNotebook { get; private set; } = null!;
 
 		public IProgressDialog ProgressDialog { get { return progress_dialog; } }
 		public GLib.Menu AdjustmentsMenu { get; private set; } = null!;
@@ -105,6 +106,11 @@ namespace Pinta.Core
 		public void InitializeToolBox (Toolbar toolbox)
 		{
 			ToolBox = toolbox;
+		}
+
+		public void InitializeImageTabsNotebook (Notebook notebook)
+		{
+			ImageTabsNotebook = notebook;
 		}
 
 		public void InitializeWindowShell (Window shell)

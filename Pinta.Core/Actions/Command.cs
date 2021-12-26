@@ -85,7 +85,12 @@ namespace Pinta.Core
 
 		public bool Value {
 			get { return (bool) Action.State; }
-			set { Action.ChangeState (new Variant (value)); }
+			set {
+				if (value != Value) {
+					Toggled?.Invoke (value);
+					Action.ChangeState (new Variant (value));
+				}
+			}
 		}
 
 		public delegate void ToggledHandler (bool value);
