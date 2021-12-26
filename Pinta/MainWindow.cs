@@ -341,9 +341,13 @@ namespace Pinta
 			var effects_menu = new GLib.Menu ();
 			menu_bar.AppendSubmenu (Translations.GetString ("Effe_cts"), effects_menu);
 
+			// TODO-GTK3 (addins)
+			// Addins are disabled until Mono.Addins (or a replacement) is ported to .NET 6 / GTK3
+#if false
 			var addins_menu = new GLib.Menu ();
 			PintaCore.Actions.Addins.RegisterActions (this, addins_menu);
 			menu_bar.AppendSubmenu (Translations.GetString ("A_dd-ins"), addins_menu);
+#endif
 
 			var window_menu = new GLib.Menu ();
 			PintaCore.Actions.Window.RegisterActions (this, window_menu);

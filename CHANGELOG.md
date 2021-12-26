@@ -32,6 +32,7 @@ Thanks to the following contributors who worked on this release:
   - Changed the tool palette to be a single column (#155)
   - Changed the text tool to use the standard GTK font chooser widget ([#1311873](https://bugs.launchpad.net/pinta/+bug/1311873), [#1866653](https://bugs.launchpad.net/pinta/+bug/1866653), [#890589](https://bugs.launchpad.net/pinta/+bug/890589))
   - Changed several tools to use spin buttons rather than editable combo boxes for e.g. selecting brush sizes ([#1186516](https://bugs.launchpad.net/pinta/+bug/1186516)).
+  - Support for add-ins has been removed, but may return in a future release ([#1918039](https://bugs.launchpad.net/pinta/+bug/1918039)).
 - The canvas can now be scrolled horizontally by holding Shift while using the mouse wheel (#141)
 - The canvas can now be panned by clicking and dragging with the middle mouse button (#176, [#419](https://communiroo.com/PintaProject/pinta/suggestions/419)).
 - The primary and secondary palette colors can now be swapped by pressing X (#147)
