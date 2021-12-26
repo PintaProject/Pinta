@@ -100,18 +100,28 @@ namespace Pinta.Docking
 				Relief = ReliefStyle.None
 			};
 			close_button.Clicked += (sender, args) => {
-				var e = new TabClosedEventArgs (item);
-
-				TabClosed?.Invoke (this, e);
-				if (!e.Cancel && PageNum (item.Widget) >= 0)
-					RemoveTab (item);
+				CloseTab (item);
 			};
 
 			tab_layout.PackStart (label_widget, false, false, 0);
 			tab_layout.PackStart (close_button, false, false, 0);
-			tab_layout.ShowAll ();
 
-			InsertPage (item.Widget, tab_layout, position);
+			// Use an event box to grab mouse events.
+			var tab_box = new EventBox () {
+				Events = Gdk.EventMask.ButtonReleaseMask,
+				VisibleWindow = false
+			};
+			tab_box.Add (tab_layout);
+			tab_box.ShowAll ();
+
+			// Allow closing via MMB-click.
+			tab_box.ButtonReleaseEvent += (o, e) => {
+				if (e.Event.Button == 2) {
+					CloseTab (item);
+				}
+			};
+
+			InsertPage (item.Widget, tab_box, position);
 			SetTabReorderable (item.Widget, true);
 
 			items.Add (item);
@@ -126,6 +136,22 @@ namespace Pinta.Docking
 			RemovePage (idx);
 
 			items.Remove (item);
+		}
+
+		/// <summary>
+		/// Prompts the user to save unsaved changes before closing.
+		/// </summary>
+		private bool CloseTab (IDockNotebookItem item)
+		{
+			var e = new TabClosedEventArgs (item);
+
+			TabClosed?.Invoke (this, e);
+			if (!e.Cancel && PageNum (item.Widget) >= 0) {
+				RemoveTab (item);
+				return true;
+			}
+
+			return false;
 		}
 	}
 }
