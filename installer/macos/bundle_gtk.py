@@ -129,6 +129,7 @@ shutil.copytree(os.path.join(gtk_root, 'share/locale'),
 shutil.copytree(os.path.join(gtk_root, 'share/icons'),
                 os.path.join(args.resource_dir, 'share/icons'),
                 dirs_exist_ok=True)
+# TODO - could probably trim the number of installed icons.
 adwaita_icons = os.path.join(os.path.dirname(os.path.realpath(ADWAITA_THEME)), "..")
 shutil.copytree(adwaita_icons,
                 os.path.join(args.resource_dir, 'share/icons'),
