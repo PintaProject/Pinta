@@ -386,11 +386,7 @@ namespace Pinta
 
 			tool_toolbar.ToolbarStyle = ToolbarStyle.Icons;
 			tool_toolbar.IconSize = IconSize.SmallToolbar;
-
-			if (PintaCore.System.OperatingSystem == OS.Windows)
-				tool_toolbar.HeightRequest = 28;
-			else
-				tool_toolbar.HeightRequest = 32;
+			tool_toolbar.HeightRequest = 42;
 
 			PintaCore.Chrome.InitializeToolToolBar (tool_toolbar);
 		}
