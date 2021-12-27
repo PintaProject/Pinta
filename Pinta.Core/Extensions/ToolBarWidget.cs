@@ -41,6 +41,15 @@ namespace Pinta.Core
 			Widget = widget;
 			Add (Widget);
 			ShowAll ();
+
+			// After a spin button is edited, return focus to the canvas so that
+			// tools can handle subsequent key events.
+			if (widget is SpinButton spin_button) {
+				spin_button.ValueChanged += (o, e) => {
+					if (PintaCore.Workspace.HasOpenDocuments)
+						PintaCore.Workspace.ActiveWorkspace.Canvas.GrabFocus ();
+				};
+			}
 		}
 	}
 }
