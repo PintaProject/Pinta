@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-12-15 11:19-0500\n"
+"POT-Creation-Date: 2021-12-26 22:42-0500\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -56,7 +56,7 @@ msgstr ""
 msgid "A file named \"{0}\" already exists. Do you want to replace it?"
 msgstr ""
 
-#: ../Pinta/MainWindow.cs:346
+#: ../Pinta/MainWindow.cs:349
 msgid "A_dd-ins"
 msgstr ""
 
@@ -482,6 +482,11 @@ msgstr ""
 msgid "Copyright"
 msgstr ""
 
+#: ../Pinta/Actions/File/NewScreenshotAction.cs:70
+#, csharp-format
+msgid "Could not obtain the size of display '{0}'"
+msgstr ""
+
 #: ../Pinta.Core/Classes/Palette.cs:185
 #: ../Pinta.Core/Managers/WorkspaceManager.cs:376
 #: ../Pinta.Core/Managers/WorkspaceManager.cs:385
@@ -559,7 +564,7 @@ msgstr ""
 msgid "Disable"
 msgstr ""
 
-#: ../Pinta/Main.cs:57
+#: ../Pinta/Main.cs:61
 msgid "Display the application version."
 msgstr ""
 
@@ -585,7 +590,7 @@ msgstr ""
 msgid "Don't change canvas size"
 msgstr ""
 
-#: ../Pinta/MainWindow.cs:558
+#: ../Pinta/MainWindow.cs:567
 msgid "Download failed"
 msgstr ""
 
@@ -593,7 +598,7 @@ msgstr ""
 msgid "Download size"
 msgstr ""
 
-#: ../Pinta/MainWindow.cs:539
+#: ../Pinta/MainWindow.cs:548
 msgid "Downloading Image"
 msgstr ""
 
@@ -674,6 +679,10 @@ msgstr ""
 
 #: ../Pinta/Actions/File/SaveDocumentImplementationAction.cs:209
 msgid "Failed to save image"
+msgstr ""
+
+#: ../Pinta/Actions/File/NewScreenshotAction.cs:69
+msgid "Failed to take screenshot"
 msgstr ""
 
 #: ../Pinta.Core/Actions/HelpActions.cs:46
@@ -1351,7 +1360,7 @@ msgstr ""
 msgid "OptionName"
 msgstr ""
 
-#: ../Pinta/Main.cs:109
+#: ../Pinta/Main.cs:113
 msgid "Options: "
 msgstr ""
 
@@ -1888,7 +1897,7 @@ msgstr ""
 msgid "Show Layer"
 msgstr ""
 
-#: ../Pinta/Main.cs:56
+#: ../Pinta/Main.cs:60
 msgid "Show this message and exit."
 msgstr ""
 
@@ -2073,7 +2082,7 @@ msgstr ""
 msgid "Tool Box"
 msgstr ""
 
-#: ../Pinta/MainWindow.cs:360
+#: ../Pinta/MainWindow.cs:364
 msgid "Tool Windows"
 msgstr ""
 
@@ -2107,7 +2116,7 @@ msgstr ""
 msgid "Type"
 msgstr ""
 
-#: ../Pinta/MainWindow.cs:559
+#: ../Pinta/MainWindow.cs:568
 #, csharp-format
 msgid ""
 "Unable to download image from {0}.\n"
@@ -2175,7 +2184,7 @@ msgstr ""
 msgid "Url:"
 msgstr ""
 
-#: ../Pinta/Main.cs:107
+#: ../Pinta/Main.cs:111
 msgid "Usage: pinta [files]"
 msgstr ""
 
@@ -2285,7 +2294,7 @@ msgstr ""
 msgid "_File"
 msgstr ""
 
-#: ../Pinta/MainWindow.cs:354
+#: ../Pinta/MainWindow.cs:358
 msgid "_Help"
 msgstr ""
 
@@ -2305,7 +2314,7 @@ msgstr ""
 msgid "_View"
 msgstr ""
 
-#: ../Pinta/MainWindow.cs:350
+#: ../Pinta/MainWindow.cs:354
 msgid "_Window"
 msgstr ""
 
@@ -2317,7 +2326,7 @@ msgstr ""
 msgid "draw;drawing;paint;painting;graphics;raster;2d;"
 msgstr ""
 
-#: ../Pinta/Main.cs:58
+#: ../Pinta/Main.cs:62
 msgid "number of threads to use for rendering"
 msgstr ""
 

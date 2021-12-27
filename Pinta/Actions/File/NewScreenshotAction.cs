@@ -59,9 +59,21 @@ namespace Pinta.Actions
 				GLib.Timeout.Add ((uint) delay * 1000, () => {
 					Screen screen = Screen.Default;
 					var root_window = screen.RootWindow;
-					Document doc = PintaCore.Workspace.NewDocument (new Size (root_window.Width, root_window.Height), new Cairo.Color (1, 1, 1));
+					int width = root_window.Width;
+					int height = root_window.Height;
 
-					using (var pb = new Pixbuf (screen.RootWindow, 0, 0, root_window.Width, root_window.Height)) {
+					if (width == 0 || height == 0) {
+						// Something went wrong...
+						// This might happen when running under wayland, see bug 1923241
+						PintaCore.Chrome.ShowErrorDialog (PintaCore.Chrome.MainWindow,
+							Translations.GetString ("Failed to take screenshot"),
+							Translations.GetString ("Could not obtain the size of display '{0}'", screen.Display.Name));
+						return false;
+					}
+
+					Document doc = PintaCore.Workspace.NewDocument (new Size (width, height), new Cairo.Color (1, 1, 1));
+
+					using (var pb = new Pixbuf (root_window, 0, 0, width, height)) {
 						using (Cairo.Context g = new Cairo.Context (doc.Layers.UserLayers[0].Surface)) {
 							CairoHelper.SetSourcePixbuf (g, pb, 0, 0);
 							g.Paint ();

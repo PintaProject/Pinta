@@ -47,6 +47,7 @@ Pinta/MacInterop/AppleEvent.cs
 Pinta/MacInterop/ApplicationEvents.cs
 Pinta/MacInterop/Carbon.cs
 Pinta/MacInterop/CoreFoundation.cs
+Pinta/MacInterop/Environment.cs
 Pinta/Main.cs
 Pinta/MainWindow.cs
 Pinta/Options.cs
