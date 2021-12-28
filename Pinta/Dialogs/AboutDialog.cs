@@ -58,7 +58,9 @@ namespace Pinta
 		string[] authors = new string[] {
 	    "Cameron White (@cameronwhite)",
 	    "Jonathan Pobst (@jpobst)",
+	    "Mykola Franchuk (@thekolian1996)",
 	    "@darkdragon-001",
+	    "@iangzh",
 		};
 
 		string[] oldAuthors = new string[] {
