@@ -433,29 +433,6 @@ namespace Pinta
 			history_pad.Initialize (dock, this, show_pad);
 
 			container.PackStart (dock, true, true, 0);
-
-			// TODO-GTK3 (docking)
-#if false
-			string layout_file = Path.Combine (PintaCore.Settings.GetUserSettingsDirectory (), "layouts.xml");
-
-            if (System.IO.File.Exists(layout_file))
-            {
-                try
-                {
-                    dock.LoadLayouts(layout_file);
-                }
-                // If parsing layouts.xml fails for some reason, proceed to create the default layout.
-                catch (Exception e)
-                {
-                    System.Console.Error.WriteLine ("Error reading " + layout_file + ": " + e.ToString());
-                }
-            }
-			
-			if (!dock.HasLayout ("Default"))
-				dock.CreateLayout ("Default", false);
-				
-			dock.CurrentLayout = "Default";
-#endif
 		}
 		#endregion
 
@@ -465,6 +442,8 @@ namespace Pinta
 
 		private void LoadUserSettings ()
 		{
+			dock.LoadSettings (PintaCore.Settings);
+
 			// Set selected tool to last selected or default to the PaintBrush
 			PintaCore.Tools.SetCurrentTool (PintaCore.Settings.GetSetting (LastSelectedToolSettingKey, "PaintBrushTool"));
 
@@ -483,10 +462,7 @@ namespace Pinta
 
 		private void SaveUserSettings ()
 		{
-			// TODO-GTK3 (docking)
-#if false
-			dock.SaveLayouts (Path.Combine (PintaCore.Settings.GetUserSettingsDirectory (), "layouts.xml"));
-#endif
+			dock.SaveSettings (PintaCore.Settings);
 
 			// Don't store the maximized height if the window is maximized
 			if ((window_shell.Window.State & Gdk.WindowState.Maximized) == 0) {

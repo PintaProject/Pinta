@@ -22,7 +22,9 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 // THE SOFTWARE.
 
+using System;
 using Gtk;
+using Pinta.Core;
 
 namespace Pinta.Docking
 {
@@ -50,6 +52,20 @@ namespace Pinta.Docking
 					right_panel.AddItem (item);
 					break;
 			}
+		}
+
+		private const string RightSplitPosKey = "dock-right-splitpos";
+
+		public void SaveSettings (ISettingsService settings)
+		{
+			settings.PutSetting (RightSplitPosKey, pane.Position);
+			right_panel.SaveSettings (settings);
+		}
+
+		public void LoadSettings (ISettingsService settings)
+		{
+			pane.Position = settings.GetSetting<int> (RightSplitPosKey, pane.Position);
+			right_panel.LoadSettings (settings);
 		}
 	}
 }

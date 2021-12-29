@@ -22,9 +22,11 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 // THE SOFTWARE.
 
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using Gtk;
+using Pinta.Core;
 
 namespace Pinta.Docking
 {
@@ -52,6 +54,8 @@ namespace Pinta.Docking
 			public Button ReopenButton { get; private set; }
 			private Popover popover;
 
+			public bool IsMinimized => popover.Child != null;
+
 			public void Maximize (Box dock_bar)
 			{
 				dock_bar.Remove (ReopenButton);
@@ -60,6 +64,8 @@ namespace Pinta.Docking
 					popover.Remove (Item);
 
 				Pane.Pack1 (Item, resize: false, shrink: false);
+
+				Item.Maximize ();
 			}
 
 			public void Minimize (Box dock_bar)
@@ -69,6 +75,8 @@ namespace Pinta.Docking
 
 				dock_bar.PackStart (ReopenButton, false, false, 0);
 				ReopenButton.ShowAll ();
+
+				Item.Minimize ();
 			}
 		}
 
@@ -100,12 +108,36 @@ namespace Pinta.Docking
 			items.Add (panel_item);
 			panel_item.Maximize (dock_bar);
 
-			item.Minimized += (o, args) => {
+			item.MinimizeClicked += (o, args) => {
 				panel_item.Minimize (dock_bar);
 			};
-			item.Maximized += (o, args) => {
+			item.MaximizeClicked += (o, args) => {
 				panel_item.Maximize (dock_bar);
 			};
 		}
+
+		public void SaveSettings (ISettingsService settings)
+		{
+			foreach (var panel_item in items) {
+				settings.PutSetting (MinimizeKey (panel_item), panel_item.IsMinimized);
+				settings.PutSetting (SplitPosKey (panel_item), panel_item.Pane.Position);
+			}
+		}
+
+		public void LoadSettings (ISettingsService settings)
+		{
+			foreach (var panel_item in items) {
+				if (settings.GetSetting<bool> (MinimizeKey (panel_item), false)) {
+					panel_item.Minimize (dock_bar);
+				}
+
+				panel_item.Pane.Position = settings.GetSetting<int> (
+					SplitPosKey (panel_item), panel_item.Pane.Position);
+			}
+		}
+
+		private string BaseSettingKey (DockPanelItem item) => $"dock-{item.Item.UniqueName.ToLower ()}";
+		private string MinimizeKey (DockPanelItem item) => BaseSettingKey (item) + "-minimized";
+		private string SplitPosKey (DockPanelItem item) => BaseSettingKey (item) + "-splitpos";
 	}
 }

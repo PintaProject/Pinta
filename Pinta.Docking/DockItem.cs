@@ -34,6 +34,9 @@ namespace Pinta.Docking
 	public class DockItem : VBox
 	{
 		private Label label_widget;
+		private Stack button_stack;
+		private Button minimize_button;
+		private Button maximize_button;
 
 		/// <summary>
 		/// Unique identifier for the dock item. Used e.g. when saving the dock layout to disk.
@@ -48,16 +51,23 @@ namespace Pinta.Docking
 		/// <summary>
 		/// Triggered when the minimize button is pressed.
 		/// </summary>
-		public event EventHandler? Minimized;
+		public event EventHandler? MinimizeClicked;
 
 		/// <summary>
 		/// Triggered when the maximize button is pressed.
 		/// </summary>
-		public event EventHandler? Maximized;
+		public event EventHandler? MaximizeClicked;
 
 		public DockItem (Widget child, string unique_name, bool locked = false)
 		{
 			UniqueName = unique_name;
+
+			minimize_button = new Button ("window-minimize-symbolic", IconSize.Button) { Relief = ReliefStyle.None };
+			maximize_button = new Button ("window-maximize-symbolic", IconSize.Button) { Relief = ReliefStyle.None };
+
+			button_stack = new Stack ();
+			button_stack.Add (minimize_button);
+			button_stack.Add (maximize_button);
 
 			label_widget = new Label ();
 			if (!locked) {
@@ -65,22 +75,14 @@ namespace Pinta.Docking
 				var title_layout = new HBox ();
 				title_layout.PackStart (label_widget, false, false, padding);
 
-				var minimize_button = new Button ("window-minimize-symbolic", IconSize.Button) { Relief = ReliefStyle.None };
-				var maximize_button = new Button ("window-maximize-symbolic", IconSize.Button) { Relief = ReliefStyle.None };
-
-				var button_stack = new Stack ();
-				button_stack.Add (minimize_button);
-				button_stack.Add (maximize_button);
 				title_layout.PackEnd (button_stack, false, false, 0);
 
 				minimize_button.Clicked += (o, args) => {
-					button_stack.VisibleChild = maximize_button;
-					Minimized?.Invoke (this, new EventArgs ());
+					MinimizeClicked?.Invoke (this, new EventArgs ());
 				};
 
 				maximize_button.Clicked += (o, args) => {
-					button_stack.VisibleChild = minimize_button;
-					Maximized?.Invoke (this, new EventArgs ());
+					MaximizeClicked?.Invoke (this, new EventArgs ());
 				};
 
 				PackStart (title_layout, false, false, 0);
@@ -100,5 +102,15 @@ namespace Pinta.Docking
 			PackStart (toolbar, false, false, 0);
 			return toolbar;
 		}
+
+		/// <summary>
+		/// Update the dock item's state after it is minimized.
+		/// </summary>
+		public void Minimize () => button_stack.VisibleChild = maximize_button;
+
+		/// <summary>
+		/// Update the dock item's state after it is maximized.
+		/// </summary>
+		public void Maximize () => button_stack.VisibleChild = minimize_button;
 	}
 }
