@@ -6,7 +6,7 @@
     <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
     <Nullable>enable</Nullable>
 
-    <Version>1.8.0.0</Version>
+    <Version>2.0.0.0</Version>
     <Authors>PintaProject</Authors>
     <Company />
     <Product />
