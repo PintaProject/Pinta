@@ -506,7 +506,7 @@ namespace Pinta.Tools
 				}
 
 				return true;
-			} else if (keyPressed == Gdk.Key.Return) {
+			} else if (keyPressed == Gdk.Key.Return || keyPressed == Gdk.Key.KP_Enter) {
 				//Finalize every editable shape not yet finalized.
 				FinalizeAllShapes ();
 
@@ -634,8 +634,8 @@ namespace Pinta.Tools
 		{
 			Gdk.Key keyReleased = e.Key;
 
-			if (keyReleased == Gdk.Key.Delete || keyReleased == Gdk.Key.Return || keyReleased == Gdk.Key.space
-			    || keyReleased == Gdk.Key.Up || keyReleased == Gdk.Key.Down
+			if (keyReleased == Gdk.Key.Delete || keyReleased == Gdk.Key.Return || keyReleased == Gdk.Key.KP_Enter
+			    || keyReleased == Gdk.Key.space || keyReleased == Gdk.Key.Up || keyReleased == Gdk.Key.Down
 			    || keyReleased == Gdk.Key.Left || keyReleased == Gdk.Key.Right) {
 				return true;
 			} else {
