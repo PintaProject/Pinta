@@ -76,7 +76,6 @@ namespace Pinta
 		{
 			var statusbar = new Statusbar {
 				Name = name,
-				Padding = 0,
 				Margin = 0
 			};
 
