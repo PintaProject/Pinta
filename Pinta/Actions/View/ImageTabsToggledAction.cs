@@ -46,7 +46,8 @@ namespace Pinta.Actions
 
 		private void Activated (bool value)
 		{
-			PintaCore.Chrome.ImageTabsNotebook.ShowTabs = value;
+			var notebook = (Docking.DockNotebook) PintaCore.Chrome.ImageTabsNotebook;
+			notebook.EnableTabs = value;
 		}
 	}
 }

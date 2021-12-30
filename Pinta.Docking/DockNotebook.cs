@@ -47,8 +47,7 @@ namespace Pinta.Docking
 	public class DockNotebook : Gtk.Notebook
 	{
 		private HashSet<IDockNotebookItem> items = new HashSet<IDockNotebookItem> ();
-
-		// TODO-GTK3 (docking) - add support for dragging tabs into separate notebooks?
+		private bool enable_tabs = true;
 
 		public DockNotebook ()
 		{
@@ -74,6 +73,19 @@ namespace Pinta.Docking
 		/// The items currently in the notebook.
 		/// </summary>
 		public IEnumerable<IDockNotebookItem> Items { get { return items; } }
+
+		/// <summary>
+		/// Whether to show the tab bar.
+		/// </summary>
+		public bool EnableTabs {
+			get => enable_tabs;
+			set {
+				enable_tabs = value;
+				if (items.Count > 0) {
+					ShowTabs = value;
+				}
+			}
+		}
 
 		/// <summary>
 		/// Returns the active notebook item.
@@ -125,6 +137,8 @@ namespace Pinta.Docking
 			SetTabReorderable (item.Widget, true);
 
 			items.Add (item);
+
+			ShowTabs = EnableTabs;
 		}
 
 		public void RemoveTab (IDockNotebookItem item)
@@ -136,6 +150,11 @@ namespace Pinta.Docking
 			RemovePage (idx);
 
 			items.Remove (item);
+
+			// Hide the tab bar when the notebook is empty to avoid extra borders
+			// This also seems to avoid the white background issue from bug #1956030
+			if (items.Count == 0)
+				ShowTabs = false;
 		}
 
 		/// <summary>
