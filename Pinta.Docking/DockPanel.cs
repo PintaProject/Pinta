@@ -120,7 +120,9 @@ namespace Pinta.Docking
 		{
 			foreach (var panel_item in items) {
 				settings.PutSetting (MinimizeKey (panel_item), panel_item.IsMinimized);
+#if false
 				settings.PutSetting (SplitPosKey (panel_item), panel_item.Pane.Position);
+#endif
 			}
 		}
 
@@ -131,8 +133,10 @@ namespace Pinta.Docking
 					panel_item.Minimize (dock_bar);
 				}
 
+#if false
 				panel_item.Pane.Position = settings.GetSetting<int> (
 					SplitPosKey (panel_item), panel_item.Pane.Position);
+#endif
 			}
 		}
 

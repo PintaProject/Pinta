@@ -58,13 +58,18 @@ namespace Pinta.Docking
 
 		public void SaveSettings (ISettingsService settings)
 		{
+#if false
 			settings.PutSetting (RightSplitPosKey, pane.Position);
+#endif
 			right_panel.SaveSettings (settings);
 		}
 
 		public void LoadSettings (ISettingsService settings)
 		{
+			// TODO-GTK3(docking) Disabled for now, as the size isn't quite restored properly (gradually increases over time)
+#if false
 			pane.Position = settings.GetSetting<int> (RightSplitPosKey, pane.Position);
+#endif
 			right_panel.LoadSettings (settings);
 		}
 	}
