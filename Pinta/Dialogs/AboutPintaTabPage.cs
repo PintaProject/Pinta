@@ -53,7 +53,7 @@ namespace Pinta
 			this.PackStart (hBoxLicense, false, true, 5);
 
 			label = new Label ();
-			label.Markup = string.Format ("<b>{0}</b>\n    (c) 2010-2021 {1}", Translations.GetString ("Copyright"), Translations.GetString ("by Pinta contributors"));
+			label.Markup = string.Format ("<b>{0}</b>\n    (c) 2010-2022 {1}", Translations.GetString ("Copyright"), Translations.GetString ("by Pinta contributors"));
 			HBox hBoxCopyright = new HBox ();
 			hBoxCopyright.PackStart (label, false, false, 5);
 			this.PackStart (hBoxCopyright, false, true, 5);
