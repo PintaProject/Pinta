@@ -8,14 +8,14 @@ msgstr ""
 "Project-Id-Version: pinta\n"
 "Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
 "POT-Creation-Date: 2021-12-26 22:42-0500\n"
-"PO-Revision-Date: 2021-10-27 03:58+0000\n"
+"PO-Revision-Date: 2021-12-31 16:38+0000\n"
 "Last-Translator: abuyop <Unknown>\n"
 "Language-Team: Malay <ms@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Launchpad-Export-Date: 2021-12-31 15:28+0000\n"
+"X-Launchpad-Export-Date: 2021-12-31 17:32+0000\n"
 "X-Generator: Launchpad (build adb364d6a74a28e7b95d51cd30446ec16160de6c)\n"
 
 #: Mono.Addins.Gui/Mono.Addins.Gui/InstallDialog.cs:142
@@ -278,7 +278,7 @@ msgstr "Mengikut peratus:"
 #: ../Pinta.Core/Actions/EditActions.cs:403
 #: ../Pinta.Core/Actions/LayerActions.cs:169
 msgid "Cancel"
-msgstr ""
+msgstr "Batal"
 
 #: ../Pinta/Pads/CanvasPad.cs:43
 msgid "Canvas"
@@ -310,7 +310,7 @@ msgstr "Jenis Bentuk Berubah"
 
 #: ../Pinta.Effects/Dialogs/Effects.LevelsDialog.cs:473
 msgid "Choose Color"
-msgstr ""
+msgstr "Pilih Warna"
 
 #: ../Pinta.Gui.Widgets/Widgets/StatusBarColorPaletteWidget.cs:106
 msgid "Choose Palette Color"
@@ -406,7 +406,7 @@ msgstr "Tutup Semua"
 #: ../Pinta/Actions/File/CloseDocumentAction.cs:72
 #: ../Pinta/Actions/File/CloseDocumentAction.cs:75
 msgid "Close _without Saving"
-msgstr ""
+msgstr "Tutup _tanpa Menyimpan"
 
 #: ../Pinta.Tools/Editable/EditEngines/RectangleEditEngine.cs:40
 msgid "Closed Curve Shape"
@@ -492,7 +492,7 @@ msgstr "Hak Cipta"
 #: ../Pinta/Actions/File/NewScreenshotAction.cs:70
 #, csharp-format
 msgid "Could not obtain the size of display '{0}'"
-msgstr ""
+msgstr "Tidak memperoleh saiz paparan '{0}'"
 
 #: ../Pinta.Core/Classes/Palette.cs:185
 #: ../Pinta.Core/Managers/WorkspaceManager.cs:376
@@ -690,7 +690,7 @@ msgstr "Gagal menyimpan imej"
 
 #: ../Pinta/Actions/File/NewScreenshotAction.cs:69
 msgid "Failed to take screenshot"
-msgstr ""
+msgstr "Gagak membuat tangkap layar"
 
 #: ../Pinta.Core/Actions/HelpActions.cs:46
 msgid "File a Bug"
@@ -967,7 +967,7 @@ msgstr "Keamatan"
 #: ../Pinta.Core/Classes/SelectionModeHandler.cs:54
 #, csharp-format
 msgid "Intersect ({0} + Left Click)"
-msgstr ""
+msgstr "Silang ({0} + Klik Kiri)"
 
 #: ../Pinta.Effects/Adjustments/InvertColorsEffect.cs:25
 #: ../Pinta.Effects/Effects/MandelbrotFractalEffect.cs:166
@@ -1028,7 +1028,7 @@ msgstr "Lapisan Ditunjukkan"
 #: ../Pinta.Core/Classes/DocumentLayers.cs:135
 #, csharp-format
 msgid "Layer {0}"
-msgstr ""
+msgstr "Lapisan {0}"
 
 #: ../Pinta/Pads/LayersPad.cs:40 ../Pinta/Pads/LayersPad.cs:60
 msgid "Layers"
@@ -1047,6 +1047,10 @@ msgid ""
 "content. Hold Shift to rotate in steps. Use arrow keys to move selected "
 "content by a single pixel."
 msgstr ""
+"Klik kiri dan seret pemilihan untuk mengalih kandungan terpilih. Tahan {0} "
+"untuk diskalakan. Klik kanan dan seret pemilihan untuk memutarkan kandungan. "
+"Tahan Shift untuk putar secara berlangkah. Guna kunci anak panah untuk "
+"mengalih kandungan sebanyak satu piksel."
 
 #. Translators: {0} is 'Ctrl', or a platform-specific key such as 'Command' on macOS.
 #: ../Pinta.Tools/Tools/MoveSelectionTool.cs:45
@@ -1057,6 +1061,10 @@ msgid ""
 "selection outline. Hold Shift to rotate in steps. Use arrow keys to move "
 "selection outline by a single pixel."
 msgstr ""
+"Klik kiri dan seret pemilihan untuk mengalih rangka pemilihan. Tahan {0} "
+"untuk diskalakan. Klik kanan dan seret pemilihan untuk memutarkan rangka "
+"pemilihan. Tahan Shift untuk putar secara berlangkah. Guna kunci anak panah "
+"untuk mengalih rangka pemilihan sebanyak satu piksel."
 
 #. Translators: {0} is 'Ctrl', or a platform-specific key such as 'Command' on macOS.
 #: ../Pinta.Tools/Tools/ShapeTool.cs:49
@@ -1079,6 +1087,24 @@ msgid ""
 "starting at the edge.\n"
 "Press Enter to finalize the shape."
 msgstr ""
+"Klik kiri untuk melukis bentuk dengan warna utama.\n"
+"Klik kiri pada bentuk untuk menambah titik kawalan.\n"
+"Klik kiri pada titik kawalan dan seret untuk mengalihkannya.\n"
+"Klik kanan pada titik kawalan dan seret untuk mengubah ketegangannya.\n"
+"Tahan Shift untuk lekap mengikut sudut.\n"
+"Guna kekunci anak panah untuk mengalih titik kawalan terpilih.\n"
+"Tekan {0} + anak panah kiri/kanan untuk memilih titik kawalan mengikut "
+"tertib.\n"
+"Tekan Delete untuk memadam titik kawalan terpilih.\n"
+"Tekan Space untuk menambah titik kawalan baharu pada kedudukan kursor "
+"tetikus.\n"
+"Tahan {0} ketika menekan Space untuk mencipta titik kawalan pada kedudukan "
+"yang sama.\n"
+"Tahan {0} ketika mengklik kiri atas titik kawalan untuk mencipta satu bentuk "
+"baru pada kedudukan yang sama.\n"
+"Tahan {0} ketika mengklik luar sempadan imej untuk mencipta satu bentuk "
+"baharu yang bermula pada pinggir.\n"
+"Tekan Enter untuk memuktamadkan bentuk."
 
 #: ../Pinta.Tools/Tools/PencilTool.cs:50
 msgid ""
@@ -1878,7 +1904,7 @@ msgstr "Simpan Fail Palet"
 #: ../Pinta/Actions/File/CloseDocumentAction.cs:60
 #, csharp-format
 msgid "Save changes to image \"{0}\" before closing?"
-msgstr ""
+msgstr "Simpan perubahan yang dibuat ke atas imej \"{0}\" sebelum menutup?"
 
 #: ../Pinta.Effects/Effects/CloudsEffect.cs:200
 msgid "Scale"
@@ -1972,7 +1998,7 @@ msgstr "Segi Empat Sama"
 
 #: ../Pinta.Core/Actions/ViewActions.cs:73
 msgid "Status Bar"
-msgstr ""
+msgstr "Palang Status"
 
 #: ../Pinta.Effects/Effects/ReduceNoiseEffect.cs:96
 msgid "Strength"
@@ -2120,7 +2146,7 @@ msgstr "Alat"
 
 #: ../Pinta.Core/Actions/ViewActions.cs:74
 msgid "Tool Box"
-msgstr ""
+msgstr "Kotak Alat"
 
 #: ../Pinta/MainWindow.cs:364
 msgid "Tool Windows"
@@ -2189,7 +2215,7 @@ msgstr "Menyahpasang Tambahan"
 #: ../Pinta.Core/Classes/SelectionModeHandler.cs:49
 #, csharp-format
 msgid "Union (+) ({0} + Left Click)"
-msgstr ""
+msgstr "Kesatuan (+) ({0} + Klik Kiri)"
 
 #: ../Pinta.Core/Managers/WorkspaceManager.cs:112
 #, csharp-format
@@ -2288,7 +2314,7 @@ msgstr "Xor"
 #: ../Pinta.Core/Classes/SelectionModeHandler.cs:52
 #, csharp-format
 msgid "Xor ({0} + Right Click)"
-msgstr ""
+msgstr "Xor ({0} + Klik Kanan)"
 
 #. Translators: {0} is the name of a file that the user does not have permission to open.
 #: ../Pinta.Core/Managers/WorkspaceManager.cs:405
@@ -2398,14 +2424,14 @@ msgstr ""
 #: ../Pinta.Tools/Tools/CloneStampTool.cs:47
 #, csharp-format
 msgid "{0} + left click to set origin, left click to paint."
-msgstr ""
+msgstr "{0} + klik kiri untuk menetapkan asalan, klik kiri untuk mengecat."
 
 #. Translators: this is the auto-generated name for a duplicated layer.
 #. {0} is the name of the source layer. Example: "Layer 3 copy".
 #: ../Pinta.Core/Classes/DocumentLayers.cs:234
 #, csharp-format
 msgid "{0} copy"
-msgstr ""
+msgstr "{0} salinan"
 
 #: ../Pinta.Core/ImageFormats/FormatDescriptor.cs:93
 #, csharp-format
