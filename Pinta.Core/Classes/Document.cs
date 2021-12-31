@@ -258,7 +258,7 @@ namespace Pinta.Core
 			}
 		}
 
-		public ImageSurface GetFlattenedImage () => Layers.GetFlattenedImage ();
+		public ImageSurface GetFlattenedImage (bool clip_to_selection = false) => Layers.GetFlattenedImage (clip_to_selection);
 
 		/// <param name="canvasOnly">false for the whole selection, true for the part only on our canvas</param>
 		public Gdk.Rectangle GetSelectedBounds (bool canvasOnly)

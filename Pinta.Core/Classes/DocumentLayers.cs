@@ -300,17 +300,22 @@ namespace Pinta.Core
 		}
 
 		/// <summary>
-		/// Returns all layers flattened to a new surface.
+		/// Returns all layers flattened to a new surface, optionally clipped by the selection.
 		/// </summary>
-		internal ImageSurface GetFlattenedImage ()
+		internal ImageSurface GetFlattenedImage (bool clip_to_selection = false)
 		{
 			// Create a new image surface
 			var surf = CairoExtensions.CreateImageSurface (Format.Argb32, document.ImageSize.Width, document.ImageSize.Height);
 
+			using var g = new Context (surf);
+
+			if (clip_to_selection) {
+				document.Selection.Clip (g);
+			}
+
 			// Blend each visible layer onto our surface
 			foreach (var layer in GetLayersToPaint (includeToolLayer: false)) {
-				using (var g = new Context (surf))
-					layer.Draw (g);
+				layer.Draw (g);
 			}
 
 			surf.MarkDirty ();

@@ -301,7 +301,7 @@ namespace Pinta.Core
 			PintaCore.Tools.Commit ();
 
 			// Get our merged ("flattened") image
-			using (var src = doc.GetFlattenedImage ()) {
+			using (var src = doc.GetFlattenedImage (/* clip_to_selection */ true)) {
 				var rect = doc.GetSelectedBounds (true);
 
 				// Copy it to a correctly sized surface 
