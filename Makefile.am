@@ -103,7 +103,7 @@ releasezip:
 	cd $(srcdir)/release && zip -r ../$(RELEASE_FILE).zip * -x "*.pdb"
 
 EXTRA_DIST = Pinta Pinta.Core Pinta.Docking Pinta.Effects Pinta.Gui.Widgets Pinta.Resources Pinta.Tools po xdg tests license-mit.txt \
-           license-pdn.txt Pinta.sln Pinta.Install.proj pinta.pc.in readme.md intltool-extract.in \
+           license-pdn.txt Pinta.sln pinta.pc.in readme.md intltool-extract.in \
            intltool-merge.in intltool-update.in
 
 CLEANFILES = intltool-extract \
