@@ -1,7 +1,18 @@
 # Change Log
 All notable changes to this project (beginning with version 1.7) will be documented in this file.
 
-## [Unreleased](https://github.com/PintaProject/Pinta/compare/1.7...HEAD)
+## [Unreleased](https://github.com/PintaProject/Pinta/compare/2.0...HEAD)
+
+Thanks to the following contributors who worked on this release:
+- @cameronwhite
+
+### Added
+
+### Changed
+
+### Fixed
+
+## [2.0](https://github.com/PintaProject/Pinta/releases/tag/2.0) - 2021/12/31
 
 Thanks to the following contributors who worked on this release:
 - @cameronwhite
@@ -28,7 +39,7 @@ Thanks to the following contributors who worked on this release:
 - Added recently used colors to the color palette widget (#154)
 - Tools now save their settings for the next time Pinta is opened (#178).
 - The primary and secondary palette colors are now saved in the application settings (#171).
-- The canvas can now be panned by clicking and dragging with the middle mouse button (#176, [#419](https://communiroo.com/PintaProject/pinta/suggestions/419)).
+- The canvas can now be panned by clicking and dragging with the middle mouse button (#176, [#419](https://communiroo.com/PintaProject/pinta/suggestions/419), [#1883629](https://bugs.launchpad.net/pinta/+bug/1883629)).
 - On macOS, keyboard shortcuts now use Command instead of Ctrl.
 - The macOS installers are now signed and notarized.
 
@@ -48,6 +59,7 @@ Thanks to the following contributors who worked on this release:
 - Fixed an issue where hiding a layer could leave the selection still visible ([#1907987](https://bugs.launchpad.net/pinta/+bug/1907987)).
 - Fixed issues with the text tool and certain input methods (#200, [#1350349](https://bugs.launchpad.net/pinta/+bug/1350349)).
 - Fixed an issue where the text tool's font settings were incorrect after undo operations (#201, [#1910495](https://bugs.launchpad.net/pinta/+bug/1910495)).
+- Fixed the Copy Merged action's behaviour for non-rectangular selections ([#1363388](https://bugs.launchpad.net/pinta/+bug/1363388)).
 
 ## [1.7.1](https://github.com/PintaProject/Pinta/releases/tag/1.7.1) - 2021/11/20
 

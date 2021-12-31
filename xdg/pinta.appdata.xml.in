@@ -38,8 +38,52 @@
     <binary>pinta</binary>
   </provides>
   <releases>
-    <release version="2.0" date="2022-01-01">
+    <release version="2.0" date="2021-12-31">
       <url>https://github.com/PintaProject/Pinta/releases/tag/2.0</url>
+      <description>
+        <p>New Features / Improvements</p>
+        <ul>
+          <li>Ported to GTK3 and .NET 6</li>
+          <li>Many changes to the appearance of standard GTK widgets and dialogs (e.g. the color picker and file dialogs). GTK3 themes should also now be supported</li>
+          <li>Improved support for high-DPI displays</li>
+          <li>The platform-native file dialogs are now used (#1909807, #1909664)</li>
+          <li>A GTK version of 3.24.21 or higher is recommended. Earlier versions have a bug with changing the file filter in the Save As dialog (#1909807)</li>
+          <li>On macOS, the menu now appears in the global menu bar instead of the application window</li>
+          <li>Changed the text tool to use the standard GTK font chooser widget (#1311873, #1866653, #890589)</li>
+          <li>Changed several tools to use spin buttons rather than editable combo boxes for e.g. selecting brush sizes (#1186516)</li>
+          <li>The Open Recent menu item was deprecated in GTK3 and has been removed, but similar functionality is available in the file dialog's Recent section</li>
+          <li>Support for add-ins has been removed, but may return in a future release (#1918039)</li>
+          <li>The Windows and macOS installers now bundle all necessary dependencies. Separately installing GTK and .NET / Mono is no longer required.</li>
+          <li>Added a status bar widget containing the position / selection information, zoom, and the color palette (#154)</li>
+          <li>Changed the tool palette to be a single column (#155)</li>
+          <li>Added recently used colors to the color palette widget (#154)</li>
+          <li>Tools now save their settings for the next time Pinta is opened (#178)</li>
+          <li>The primary and secondary palette colors are now saved in the application settings (#171)</li>
+          <li>The canvas can now be panned by clicking and dragging with the middle mouse button (#176, #1883629)</li>
+          <li>On macOS, keyboard shortcuts now use Command instead of Ctrl</li>
+          <li>The macOS installers are now signed and notarized</li>
+        </ul>
+        <p>Changes</p>
+        <ul>
+          <li>The Paste Into New Image action no longer creates several unnecessary history items (#170)</li>
+          <li>Performance improvements for the paint bucket and magic wand tools (#159)</li>
+          <li>Performance improvements for the selection tools when interactively adjusting the selection</li>
+          <li>Removed the Images pad, which is obsolete now that tabs are used (#153)</li>
+        </ul>
+        <p>Bug Fixes</p>
+        <ul>
+          <li>Fixed several Unicode-related issues in the text tool (#1422445)</li>
+          <li>Fixed issue on macOS where Pinta could launch in the wrong language (#1900310)</li>
+          <li>Improved the UX of the Close and Save As confirmation dialogs (#1909576, #1909688)</li>
+          <li>Fixed a bug where the Pan tool did not work if scrolling could only occur in the Y direction (#1909910)</li>
+          <li>Fixed issues where the zoom level was not maintained when resizing an image (#1889673)</li>
+          <li>Fixed an issue where opening a file URI from the command line did not work (#1908806)</li>
+          <li>Fixed an issue where hiding a layer could leave the selection still visible (#1907987).</li>
+          <li>Fixed issues with the text tool and certain input methods (#200, #1350349)</li>
+          <li>Fixed an issue where the text tool's font settings were incorrect after undo operations (#201, #1910495)</li>
+          <li>Fixed the Copy Merged action's behaviour for non-rectangular selections (#1363388)</li>
+        </ul>
+      </description>
     </release>
     <release version="1.7.1" date="2021-11-20">
       <url>https://github.com/PintaProject/Pinta/releases/tag/1.7.1</url>
