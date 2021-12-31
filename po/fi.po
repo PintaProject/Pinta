@@ -7,1648 +7,332 @@ msgid ""
 msgstr ""
 "Project-Id-Version: pinta\n"
 "Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
-"POT-Creation-Date: 2020-07-27 21:13-0400\n"
-"PO-Revision-Date: 2016-10-03 13:04+0000\n"
-"Last-Translator: Elias Ojala <Unknown>\n"
+"POT-Creation-Date: 2021-12-26 22:42-0500\n"
+"PO-Revision-Date: 2021-12-29 13:28+0000\n"
+"Last-Translator: Jiri Grönroos <Unknown>\n"
 "Language-Team: Finnish <fi@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Launchpad-Export-Date: 2020-08-04 20:56+0000\n"
-"X-Generator: Launchpad (build a24057fea7e4c6a98c0220d5f878da0f3c783699)\n"
+"X-Launchpad-Export-Date: 2021-12-31 15:28+0000\n"
+"X-Generator: Launchpad (build adb364d6a74a28e7b95d51cd30446ec16160de6c)\n"
 
-#: ../xdg/pinta.desktop.in.h:1
-msgid "Pinta"
-msgstr "Pinta"
+#: Mono.Addins.Gui/Mono.Addins.Gui/InstallDialog.cs:142
+msgid " (in user directory)"
+msgstr " (käyttäjän hakemistossa)"
 
-#: ../xdg/pinta.desktop.in.h:2
-msgid "Easily create and edit images"
-msgstr "Luo ja muokkaa kuvia vaivatta"
-
-#: ../xdg/pinta.desktop.in.h:3
-msgid "Image Editor"
-msgstr "Kuvankäsittely"
-
-#: ../xdg/pinta.desktop.in.h:4
-msgid "Pinta Image Editor"
-msgstr "Pinta-kuvankäsittely"
-
-#: ../xdg/pinta.desktop.in.h:5
-msgid "draw;drawing;paint;painting;graphics;raster;2d;"
-msgstr ""
-
-#: ../xdg/pinta.appdata.xml.in.h:1
-msgid ""
-"Pinta is a image editing, drawing and painting application with a simple yet "
-"powerful interface. Pinta has a wide range of drawing tools, including: "
-"freehand, rectangles, circles and lines. It also has over 35 effects to "
-"apply to your images, and also has the ability to create unlimited layers to "
-"help organize your creativity."
-msgstr ""
-
-#: ../Pinta.Core/Actions/AddinActions.cs:40
-msgid "Add-in Manager"
-msgstr "Lisäosien hallinta"
-
-#: ../Pinta.Core/Actions/EditActions.cs:69
-msgid "Undo"
-msgstr "Kumoa"
-
-#: ../Pinta.Core/Actions/EditActions.cs:70
-msgid "Redo"
-msgstr "Tee uudelleen"
-
-#: ../Pinta.Core/Actions/EditActions.cs:71
-#: ../Pinta.Core/Actions/EditActions.cs:229
-msgid "Cut"
-msgstr "Leikkaa"
-
-#: ../Pinta.Core/Actions/EditActions.cs:72
-msgid "Copy"
-msgstr "Kopioi"
-
-#: ../Pinta.Core/Actions/EditActions.cs:73
-msgid "Copy Merged"
-msgstr "Kopioi yhdistettynä"
-
-#: ../Pinta.Core/Actions/EditActions.cs:74
-#: ../Pinta.Core/Classes/Document.cs:780
-#: ../Pinta.Core/HistoryItems/PasteHistoryItem.cs:43
-msgid "Paste"
-msgstr "Liitä"
-
-#: ../Pinta.Core/Actions/EditActions.cs:75
-#: ../Pinta.Core/Classes/Document.cs:776
-msgid "Paste Into New Layer"
-msgstr "Liitä uuteen tasoon"
-
-#: ../Pinta.Core/Actions/EditActions.cs:76
-msgid "Paste Into New Image"
-msgstr "Liitä uuteen kuvaan"
-
-#: ../Pinta.Core/Actions/EditActions.cs:77
-#: ../Pinta.Core/Actions/EditActions.cs:231
-msgid "Erase Selection"
-msgstr "Poista valinta"
-
-#: ../Pinta.Core/Actions/EditActions.cs:78
-#: ../Pinta.Core/Actions/EditActions.cs:191
-msgid "Fill Selection"
-msgstr "Täytä valinta"
-
-#: ../Pinta.Core/Actions/EditActions.cs:79
-#: ../Pinta.Core/Actions/EditActions.cs:421
-msgid "Invert Selection"
-msgstr "Käännä valinta"
-
-#: ../Pinta.Core/Actions/EditActions.cs:80
-#: ../Pinta.Core/Actions/EditActions.cs:200
-msgid "Select All"
-msgstr "Valitse kaikki"
-
-#: ../Pinta.Core/Actions/EditActions.cs:81
-msgid "Deselect All"
-msgstr "Poista valinnat"
-
-#: ../Pinta.Core/Actions/EditActions.cs:83
-#: ../Pinta.Core/Actions/FileActions.cs:56
-msgid "Open..."
-msgstr "Avaa..."
-
-#: ../Pinta.Core/Actions/EditActions.cs:84
-#: ../Pinta.Core/Actions/FileActions.cs:66
-msgid "Save As..."
-msgstr "Tallenna nimellä..."
-
-#: ../Pinta.Core/Actions/EditActions.cs:85
-msgid "Reset to Default"
-msgstr "Palauta oletus"
-
-#: ../Pinta.Core/Actions/EditActions.cs:86
-msgid "Set Number of Colors"
-msgstr "Aseta värien määrä"
-
-#: ../Pinta.Core/Actions/EditActions.cs:127 ../Pinta/Pads/ColorPalettePad.cs:42
-#: ../Pinta/Pads/ColorPalettePad.cs:49
-msgid "Palette"
-msgstr "Paletti"
-
-#: ../Pinta.Core/Actions/EditActions.cs:240
-msgid "Deselect"
-msgstr "Poista valinta"
-
-#: ../Pinta.Core/Actions/EditActions.cs:336
-msgid "Open Palette File"
-msgstr "Avaa palettitiedosto"
-
-#: ../Pinta.Core/Actions/EditActions.cs:348
-msgid "Palette files"
-msgstr ""
-
-#: ../Pinta.Core/Actions/EditActions.cs:352
-#: ../Pinta/Actions/File/OpenDocumentAction.cs:67
-msgid "All files"
-msgstr "Kaikki tiedostot"
-
-#: ../Pinta.Core/Actions/EditActions.cs:373
-msgid "Save Palette File"
-msgstr "Tallenna palettitiedosto"
-
-#: ../Pinta.Core/Actions/FileActions.cs:54
-msgid "New..."
-msgstr "Uusi..."
-
-#: ../Pinta.Core/Actions/FileActions.cs:55
-msgid "New Screenshot..."
-msgstr "Uusi kuvakaappaus..."
-
-#: ../Pinta.Core/Actions/FileActions.cs:57
-msgid "Open Recent"
-msgstr "Avaa viimeisin"
-
-#: ../Pinta.Core/Actions/FileActions.cs:64
-#: ../Pinta.Docking/DockLibrary/DockItemTitleTab.cs:175
-msgid "Close"
-msgstr "Sulje"
-
-#: ../Pinta.Core/Actions/FileActions.cs:65
-msgid "Save"
-msgstr "Tallenna"
-
-#: ../Pinta.Core/Actions/FileActions.cs:67
-msgid "Print"
-msgstr "Tulosta"
-
-#: ../Pinta.Core/Actions/FileActions.cs:68
-msgid "Quit"
-msgstr "Lopeta"
-
-#: ../Pinta.Core/Actions/FileActions.cs:70
-msgid "New"
-msgstr "Uusi"
-
-#: ../Pinta.Core/Actions/FileActions.cs:71
-msgid "Open"
-msgstr "Avaa"
-
-#: ../Pinta.Core/Actions/HelpActions.cs:52
-msgid "Contents"
-msgstr "Sisältö"
-
-#: ../Pinta.Core/Actions/HelpActions.cs:53
-msgid "Pinta Website"
-msgstr "Pintan verkkosivusto"
-
-#: ../Pinta.Core/Actions/HelpActions.cs:54
-msgid "File a Bug"
-msgstr "Ilmoita virheestä"
-
-#: ../Pinta.Core/Actions/HelpActions.cs:55
-msgid "Translate This Application"
-msgstr "Käännä tämä ohjelma"
-
-#: ../Pinta.Core/Actions/HelpActions.cs:56 ../Pinta/MainWindow.cs:347
-msgid "About"
-msgstr "Tietoja"
-
-#: ../Pinta.Core/Actions/ImageActions.cs:60
-#: ../Pinta.Core/Actions/ImageActions.cs:291
-msgid "Crop to Selection"
-msgstr "Rajaa valintaan"
-
-#: ../Pinta.Core/Actions/ImageActions.cs:61
-msgid "Auto Crop"
-msgstr "Automaattinen rajaus"
-
-#: ../Pinta.Core/Actions/ImageActions.cs:62
-msgid "Resize Image..."
-msgstr "Muuta kokoa..."
-
-#: ../Pinta.Core/Actions/ImageActions.cs:63
-msgid "Resize Canvas..."
-msgstr "Pohjan koko..."
-
-#: ../Pinta.Core/Actions/ImageActions.cs:64
-#: ../Pinta.Core/Actions/LayerActions.cs:70
-msgid "Flip Horizontal"
-msgstr "Käännä vaakatasossa"
-
-#: ../Pinta.Core/Actions/ImageActions.cs:65
-#: ../Pinta.Core/Actions/LayerActions.cs:71
-msgid "Flip Vertical"
-msgstr "Käännä pystytasossa"
-
-#: ../Pinta.Core/Actions/ImageActions.cs:66
-#: ../Pinta.Core/HistoryItems/InvertHistoryItem.cs:62
-msgid "Rotate 90° Clockwise"
-msgstr "Pyöritä 90° myötäpäivään"
-
-#: ../Pinta.Core/Actions/ImageActions.cs:67
-#: ../Pinta.Core/HistoryItems/InvertHistoryItem.cs:66
-msgid "Rotate 90° Counter-Clockwise"
-msgstr "Pyöritä 90° vastapäivään"
-
-#: ../Pinta.Core/Actions/ImageActions.cs:68
-#: ../Pinta.Core/HistoryItems/InvertHistoryItem.cs:50
-msgid "Rotate 180°"
-msgstr "Pyöritä 180°"
-
-#: ../Pinta.Core/Actions/ImageActions.cs:69
-#: ../Pinta.Core/Actions/ImageActions.cs:146
-msgid "Flatten"
-msgstr "Yhdistä tasot"
-
-#: ../Pinta.Core/Actions/LayerActions.cs:65
-#: ../Pinta.Core/Actions/LayerActions.cs:292
-#: ../Pinta.Core/Classes/Document.cs:839
-msgid "Add New Layer"
-msgstr "Uusi taso"
-
-#: ../Pinta.Core/Actions/LayerActions.cs:66
-#: ../Pinta.Core/Actions/LayerActions.cs:275
-msgid "Delete Layer"
-msgstr "Poista taso"
-
-#: ../Pinta.Core/Actions/LayerActions.cs:67
-#: ../Pinta.Core/Actions/LayerActions.cs:266
-msgid "Duplicate Layer"
-msgstr "Monista taso"
-
-#: ../Pinta.Core/Actions/LayerActions.cs:68
-#: ../Pinta.Core/Actions/LayerActions.cs:244
-msgid "Merge Layer Down"
-msgstr "Yhdistä taso alas"
-
-#: ../Pinta.Core/Actions/LayerActions.cs:69
-msgid "Import from File..."
-msgstr "Tuo tiedostosta..."
-
-#: ../Pinta.Core/Actions/LayerActions.cs:72
-msgid "Rotate / Zoom Layer..."
-msgstr "Käännä / lähennä tasoa..."
-
-#: ../Pinta.Core/Actions/LayerActions.cs:73
-#: ../Pinta.Core/Actions/LayerActions.cs:219
-msgid "Move Layer Up"
-msgstr "Siirrä tasoa ylös"
-
-#: ../Pinta.Core/Actions/LayerActions.cs:74
-#: ../Pinta.Core/Actions/LayerActions.cs:230
-msgid "Move Layer Down"
-msgstr "Siirrä tasoa alas"
-
-#: ../Pinta.Core/Actions/LayerActions.cs:75
-msgid "Layer Properties..."
-msgstr "Tason ominaisuudet..."
-
-#: ../Pinta.Core/Actions/LayerActions.cs:157
-#: ../Pinta/Actions/File/OpenDocumentAction.cs:50
-msgid "Open Image File"
-msgstr "Avaa kuvatiedosto"
-
-#: ../Pinta.Core/Actions/LayerActions.cs:185
-msgid "Import From File"
-msgstr "Tuo tiedostosta"
-
-#: ../Pinta.Core/Actions/ViewActions.cs:77
-msgid "Zoom In"
-msgstr "Suurenna"
-
-#: ../Pinta.Core/Actions/ViewActions.cs:78
-msgid "Zoom Out"
-msgstr "Pienennä"
-
-#: ../Pinta.Core/Actions/ViewActions.cs:79
-msgid "Best Fit"
-msgstr "Paras koko"
-
-#: ../Pinta.Core/Actions/ViewActions.cs:80
-msgid "Zoom to Selection"
-msgstr "Tarkenna valintaan"
-
-#: ../Pinta.Core/Actions/ViewActions.cs:81
-msgid "Normal Size"
-msgstr "Normaali koko"
-
-#: ../Pinta.Core/Actions/ViewActions.cs:82
-msgid "Toolbar"
-msgstr "Työkalupalkki"
-
-#: ../Pinta.Core/Actions/ViewActions.cs:83
-msgid "Image Tabs"
-msgstr "Kuvavälilehdet"
-
-#: ../Pinta.Core/Actions/ViewActions.cs:84
-msgid "Pixel Grid"
-msgstr "Pikseliristikko"
-
-#: ../Pinta.Core/Actions/ViewActions.cs:85
-msgid "Rulers"
-msgstr "Viivoitin"
-
-#: ../Pinta.Core/Actions/ViewActions.cs:86
-msgid "Pixels"
-msgstr "Pikseliä"
-
-#: ../Pinta.Core/Actions/ViewActions.cs:87
-msgid "Inches"
-msgstr "Tuumaa"
-
-#: ../Pinta.Core/Actions/ViewActions.cs:88
-msgid "Centimeters"
-msgstr "Senttimetriä"
-
-#: ../Pinta.Core/Actions/ViewActions.cs:89
-msgid "Fullscreen"
-msgstr "Koko näyttö"
-
-#: ../Pinta.Core/Actions/ViewActions.cs:115
-#: ../Pinta.Core/Actions/ViewActions.cs:277
-#: ../Pinta.Core/Classes/DocumentWorkspace.cs:320
-#: ../Pinta.Core/Classes/DocumentWorkspace.cs:328
-msgid "Window"
-msgstr "Ikkuna"
-
-#: ../Pinta.Core/Actions/ViewActions.cs:159
-msgid "Ruler Units"
-msgstr "Mitta-asteikko"
-
-#. Translators: This specifies the format of the zoom percentage choices
-#. in the toolbar.
-#: ../Pinta.Core/Actions/ViewActions.cs:258
-#, csharp-format
-msgid "{0}%"
-msgstr "{0} %"
-
-#: ../Pinta.Core/Actions/WindowActions.cs:45
-msgid "Save All"
-msgstr "Tallenna kaikki"
-
-#: ../Pinta.Core/Actions/WindowActions.cs:46
-msgid "Close All"
-msgstr "Sulje kaikki"
-
-#: ../Pinta.Core/Classes/BaseTool.cs:261
-msgid "Tool"
-msgstr "Työkalu"
-
-#: ../Pinta.Core/Classes/BaseTool.cs:333
-msgid "Shortcut key"
-msgstr "Pikanäppäin"
-
-#: ../Pinta.Core/Classes/BaseTool.cs:445
-msgid "Normal Blending"
-msgstr "Normaali sekoitus"
-
-#: ../Pinta.Core/Classes/BaseTool.cs:446
-msgid "Overwrite"
-msgstr "Ylikirjoitus"
-
-#: ../Pinta.Core/Classes/BaseTool.cs:460
-msgid "Antialiasing On"
-msgstr "Reunojen pehmennys päällä"
-
-#: ../Pinta.Core/Classes/BaseTool.cs:461
-msgid "Antialiasing Off"
-msgstr "Reunojen pehmennys pois päältä"
-
-#: ../Pinta.Core/Classes/Document.cs:291 ../Pinta.Core/Classes/Document.cs:296
-#: ../Pinta.Tools/Tools/ColorPickerTool.cs:135
-msgid "Layer"
-msgstr "Taso"
-
-#: ../Pinta.Core/Classes/Document.cs:378
-msgid "copy"
-msgstr "kopioi"
-
-#: ../Pinta.Core/Classes/Document.cs:654
-#: ../Pinta/Dialogs/ResizeCanvasDialog.cs:56
-msgid "Resize Canvas"
-msgstr "Pohjan koko"
-
-#: ../Pinta.Core/Classes/Document.cs:855
-#: ../Pinta.Core/HistoryItems/FinishPixelsHistoryItem.cs:65
-#: ../Pinta.Core/HistoryItems/PasteHistoryItem.cs:65
-#: ../Pinta.Tools/Tools/MoveSelectedTool.cs:43
-msgid "Move Selected Pixels"
-msgstr "Siirrä valittuja pikseleitä"
-
-#: ../Pinta.Core/Classes/Document.cs:871
-msgid "Image larger than canvas"
-msgstr "Kuva on suurempi kuin pohja"
-
-#: ../Pinta.Core/Classes/Document.cs:872
-msgid ""
-"The image being pasted is larger than the canvas size. What would you like "
-"to do?"
-msgstr "Tuotava kuva on suurempi kuin pohjan koko. Mitä haluat tehdä?"
-
-#: ../Pinta.Core/Classes/Document.cs:876
-msgid "Expand canvas"
-msgstr "Laajenna pohjaa"
-
-#: ../Pinta.Core/Classes/Document.cs:877
-msgid "Don't change canvas size"
-msgstr "Pidä pohjan koko"
-
-#: ../Pinta.Core/Classes/Document.cs:890
-msgid "Image cannot be pasted"
-msgstr "Kuvaa ei voi liittää"
-
-#: ../Pinta.Core/Classes/Document.cs:891
-msgid "The clipboard does not contain an image."
-msgstr "Leikepöytä ei sisällä kuvaa."
-
-#: ../Pinta.Core/Classes/SelectionModeHandler.cs:46
-msgid "Replace"
-msgstr "Korvaa"
-
-#: ../Pinta.Core/Classes/SelectionModeHandler.cs:47
-msgid "Union (+) (Ctrl + Left Click)"
-msgstr "Yhdiste (+) (Ctrl + Vasen hiiri)"
-
-#: ../Pinta.Core/Classes/SelectionModeHandler.cs:48
-msgid "Exclude (-) (Right Click)"
-msgstr "Vähennä (-) (Ctrl + Oikea hiiri)"
-
-#: ../Pinta.Core/Classes/SelectionModeHandler.cs:49
-msgid "Xor (Ctrl + Right Click)"
-msgstr "Xor (Ctrl + Oikea hiiri)"
-
-#: ../Pinta.Core/Classes/SelectionModeHandler.cs:50
-msgid "Intersect (Alt + Left Click)"
-msgstr ""
-
-#: ../Pinta.Core/Classes/SelectionModeHandler.cs:57
+#: ../Pinta.Core/Classes/SelectionModeHandler.cs:61
 msgid " Selection Mode: "
 msgstr " Valintatila: "
 
-#: ../Pinta.Core/Effects/UserBlendOps.cs:34
-#: ../Pinta.Tools/Brushes/PlainBrush.cs:37
-#: ../Pinta.Tools/Tools/EraserTool.cs:189 ../Pinta.Tools/Tools/TextTool.cs:248
-msgid "Normal"
-msgstr "Normaali"
-
-#: ../Pinta.Core/Effects/UserBlendOps.cs:35
-msgid "Multiply"
-msgstr "Kerro"
-
-#: ../Pinta.Core/Effects/UserBlendOps.cs:36
-msgid "Color Burn"
-msgstr "Varjostus"
-
-#: ../Pinta.Core/Effects/UserBlendOps.cs:37
-msgid "Color Dodge"
-msgstr "Valotus"
-
-#: ../Pinta.Core/Effects/UserBlendOps.cs:38
-msgid "Overlay"
-msgstr "Sulauttava"
-
-#: ../Pinta.Core/Effects/UserBlendOps.cs:39
-msgid "Difference"
-msgstr "Erottava"
-
-#: ../Pinta.Core/Effects/UserBlendOps.cs:40
-msgid "Lighten"
-msgstr "Kevennä"
-
-#: ../Pinta.Core/Effects/UserBlendOps.cs:41
-msgid "Darken"
-msgstr "Tummenna"
-
-#: ../Pinta.Core/Effects/UserBlendOps.cs:42
-msgid "Screen"
-msgstr "Näyttö"
-
-#: ../Pinta.Core/Effects/UserBlendOps.cs:43
-msgid "Xor"
-msgstr "Xor"
-
-#: ../Pinta.Core/Effects/UserBlendOps.cs:44
-msgid "Hard Light"
-msgstr "Kova valo"
-
-#: ../Pinta.Core/Effects/UserBlendOps.cs:45
-msgid "Soft Light"
-msgstr "Pehmeä valo"
-
-#: ../Pinta.Core/Effects/UserBlendOps.cs:46
-msgid "Color"
-msgstr "Väri"
-
-#: ../Pinta.Core/Effects/UserBlendOps.cs:47
-#: ../Pinta.Effects/Dialogs/Effects.CurvesDialog.cs:437
-msgid "Luminosity"
-msgstr "Värin kirkkaus"
-
-#: ../Pinta.Core/Effects/UserBlendOps.cs:48
-#: ../Pinta.Effects/Adjustments/HueSaturationEffect.cs:67
-msgid "Hue"
-msgstr "Sävy"
-
-#: ../Pinta.Core/Effects/UserBlendOps.cs:49
-#: ../Pinta.Effects/Adjustments/HueSaturationEffect.cs:70
-msgid "Saturation"
-msgstr "Kylläisyys"
-
-#: ../Pinta.Core/HistoryItems/FinishPixelsHistoryItem.cs:43
-msgid "Finish Pixels"
-msgstr "Viimeistele pikselit"
-
-#: ../Pinta.Core/HistoryItems/InvertHistoryItem.cs:54
-msgid "Flip Image Horizontal"
-msgstr "Käännä kuva vaakatasossa"
-
-#: ../Pinta.Core/HistoryItems/InvertHistoryItem.cs:58
-msgid "Flip Image Vertical"
-msgstr "Käännä kuva pystytasossa"
-
-#: ../Pinta.Core/HistoryItems/InvertHistoryItem.cs:79
-msgid "Flip Layer Horizontal"
-msgstr "Käännä taso vaakatasossa"
-
-#: ../Pinta.Core/HistoryItems/InvertHistoryItem.cs:83
-msgid "Flip Layer Vertical"
-msgstr "Käännä taso pystytasossa"
-
-#: ../Pinta.Core/HistoryItems/ResizeHistoryItem.cs:43
-#: ../Pinta/Dialogs/ResizeImageDialog.cs:45
-msgid "Resize Image"
-msgstr "Muuta kokoa"
-
-#: ../Pinta.Core/ImageFormats/FormatDescriptor.cs:93
+#: Mono.Addins/Mono.Addins.Description/AssemblyDependency.cs:103
 #, csharp-format
-msgid "{0} image ({1})"
-msgstr "{0} kuva ({1})"
+msgid "(provided by {0})"
+msgstr "(tarjoaa {0})"
 
-#: ../Pinta.Core/Managers/EffectsManager.cs:63
-#: ../Pinta.Core/Managers/EffectsManager.cs:98
+#: ../Pinta.Core/Managers/EffectsManager.cs:60
+#: ../Pinta.Core/Managers/EffectsManager.cs:90
 msgid "..."
 msgstr "..."
 
-#: ../Pinta.Core/Managers/LivePreviewManager.cs:222
-msgid "Rendering Effect"
-msgstr "Renderointi"
+#: ../Pinta.Tools/Tools/ColorPickerTool.cs:226
+msgid "3 x 3 Region"
+msgstr "3 x 3 -alue"
 
-#: ../Pinta.Core/Managers/ToolManager.cs:234
-#: ../Pinta.Core/Managers/ToolManager.cs:236
-msgid "No tool selected."
-msgstr "Työkalua ei ole valittu."
+#: ../Pinta.Tools/Tools/ColorPickerTool.cs:227
+msgid "5 x 5 Region"
+msgstr "5 x 5 -alue"
 
-#: ../Pinta.Core/Managers/WorkspaceManager.cs:100
+#: ../Pinta.Tools/Tools/ColorPickerTool.cs:228
+msgid "7 x 7 Region"
+msgstr "7 x 7 -alue"
+
+#: ../Pinta.Tools/Tools/ColorPickerTool.cs:229
+msgid "9 x 9 Region"
+msgstr "9 x 9 -alue"
+
+#: ../Pinta/Actions/File/SaveDocumentImplementationAction.cs:241
 #, csharp-format
-msgid "Unsaved Image {0}"
-msgstr "Tallentamaton kuva {0}"
+msgid "A file named \"{0}\" already exists. Do you want to replace it?"
+msgstr "Tiedosto nimeltä \"{0}\" on olemassa. Haluatko korvata sen?"
 
-#: ../Pinta.Core/Managers/WorkspaceManager.cs:157
-msgid "Background"
-msgstr "Tausta"
+#: ../Pinta/MainWindow.cs:349
+msgid "A_dd-ins"
+msgstr "A_dd-ins"
 
-#: ../Pinta.Core/Managers/WorkspaceManager.cs:166
-#: ../Pinta/Dialogs/NewImageDialog.cs:68
-msgid "New Image"
-msgstr "Uusi kuva"
+#: ../Pinta.Core/Actions/AppActions.cs:44
+msgid "About"
+msgstr "Tietoja"
 
-#: ../Pinta.Core/Managers/WorkspaceManager.cs:186
-msgid "Unsupported file format"
-msgstr "Tiedostomuotoa ei tueta"
+#: ../Pinta/Dialogs/AboutDialog.cs:287
+msgid "About Pinta"
+msgstr "Tietoja Pintasta"
 
-#: ../Pinta.Core/Managers/WorkspaceManager.cs:191
-msgid "Open Image"
-msgstr "Avaa kuva"
+#: ../Pinta/Actions/Edit/PasteAction.cs:130
+#: ../Pinta.Core/Actions/LayerActions.cs:50
+#: ../Pinta.Core/Actions/LayerActions.cs:312
+msgid "Add New Layer"
+msgstr "Uusi taso"
 
-#: ../Pinta.Core/Managers/WorkspaceManager.cs:204
-msgid "Permission denied"
-msgstr "Lupa evätty"
-
-#: ../Pinta.Core/Managers/WorkspaceManager.cs:345
-#, csharp-format
-msgid "Could not open file: {0}"
-msgstr "Tiedostoa ei voitu avata: {0}"
-
-#. Translators: {0} is the palette format (e.g. "GIMP") and {1} is a list of file extensions.
-#: ../Pinta.Core/PaletteFormats/PaletteDescriptor.cs:67
-#, csharp-format
-msgid "{0} palette ({1})"
-msgstr ""
-
-#: ../Pinta.Docking/DockLibrary/DockItem.cs:541
-msgid "Hide"
-msgstr "Piilota"
-
-#: ../Pinta.Docking/DockLibrary/DockItem.cs:550
-msgid "Minimize"
-msgstr "Pienennä"
-
-#: ../Pinta.Docking/DockLibrary/DockItem.cs:557
-#: ../Pinta.Docking/DockLibrary/DockItemTitleTab.cs:250
-msgid "Dock"
-msgstr "Telakka"
-
-#: ../Pinta.Docking/DockLibrary/DockItem.cs:564
-msgid "Undock"
-msgstr "Irrota"
-
-#: ../Pinta.Docking/DockLibrary/DockItemTitleTab.cs:165
-#: ../Pinta.Docking/DockLibrary/DockItemTitleTab.cs:254
-msgid "Auto Hide"
-msgstr "Automaattinen piilotus"
-
-#: ../Pinta.Effects/Adjustments/AutoLevelEffect.cs:25
-msgid "Auto Level"
-msgstr "Automaattinen taso"
-
-#: ../Pinta.Effects/Adjustments/BlackAndWhiteEffect.cs:25
-msgid "Black and White"
-msgstr "Mustavalkoinen"
-
-#: ../Pinta.Effects/Adjustments/BrightnessContrastEffect.cs:29
-msgid "Brightness / Contrast"
-msgstr "Kirkkaus / Kontrasti"
-
-#: ../Pinta.Effects/Adjustments/BrightnessContrastEffect.cs:152
-#: ../Pinta.Effects/Effects/GlowEffect.cs:82
-msgid "Brightness"
-msgstr "Kirkkaus"
-
-#: ../Pinta.Effects/Adjustments/BrightnessContrastEffect.cs:163
-#: ../Pinta.Effects/Effects/GlowEffect.cs:84
-msgid "Contrast"
-msgstr "Kontrasti"
-
-#: ../Pinta.Effects/Adjustments/CurvesEffect.cs:27
-#: ../Pinta.Effects/Dialogs/Effects.CurvesDialog.cs:91
-msgid "Curves"
-msgstr "Käyrät"
-
-#: ../Pinta.Effects/Adjustments/HueSaturationEffect.cs:26
-msgid "Hue / Saturation"
-msgstr "Sävy / Värikylläisyys"
-
-#: ../Pinta.Effects/Adjustments/HueSaturationEffect.cs:73
-msgid "Lightness"
-msgstr "Vaaleus"
-
-#: ../Pinta.Effects/Adjustments/InvertColorsEffect.cs:25
-#: ../Pinta.Effects/Effects/MandelbrotFractalEffect.cs:167
-msgid "Invert Colors"
-msgstr "Käännä värit"
-
-#: ../Pinta.Effects/Adjustments/LevelsEffect.cs:23
-msgid "Levels"
-msgstr "Sävyala"
-
-#: ../Pinta.Effects/Adjustments/PosterizeEffect.cs:25
-#: ../Pinta.Effects/Dialogs/Effects.PosterizeDialog.cs:56
-msgid "Posterize"
-msgstr "Porrasta"
-
-#: ../Pinta.Effects/Adjustments/SepiaEffect.cs:26
-msgid "Sepia"
-msgstr "Seepia"
-
-#: ../Pinta.Effects/Dialogs/Effects.CurvesDialog.cs:430
-msgid "Transfer Map"
-msgstr "Siirtokartta"
-
-#: ../Pinta.Effects/Dialogs/Effects.CurvesDialog.cs:436
-msgid "RGB"
-msgstr "RGB"
-
-#: ../Pinta.Effects/Dialogs/Effects.CurvesDialog.cs:456
-msgid "Red  "
-msgstr "Punainen  "
-
-#: ../Pinta.Effects/Dialogs/Effects.CurvesDialog.cs:457
-#: ../Pinta.Effects/Dialogs/Effects.PosterizeDialog.cs:113
-#: ../Pinta.Effects/gtk-gui/Pinta.Effects.LevelsDialog.cs:445
-msgid "Green"
-msgstr "Vihreä"
-
-#: ../Pinta.Effects/Dialogs/Effects.CurvesDialog.cs:458
-msgid "Blue "
-msgstr "Sininen "
-
-#: ../Pinta.Effects/Dialogs/Effects.CurvesDialog.cs:466
-#: ../Pinta.Effects/gtk-gui/Pinta.Effects.LevelsDialog.cs:424
-msgid "Reset"
-msgstr "Palauta"
-
-#: ../Pinta.Effects/Dialogs/Effects.CurvesDialog.cs:471
-msgid "Tip: Right-click to remove control points."
-msgstr "Vihje: Napsauta oikealla napilla poistaaksesi pisteitä."
-
-#: ../Pinta.Effects/Dialogs/Effects.LevelsDialog.cs:53
-#: ../Pinta.Effects/gtk-gui/Pinta.Effects.LevelsDialog.cs:59
-msgid "Levels Adjustment"
-msgstr "Sävyjen säädöt"
-
-#: ../Pinta.Effects/Dialogs/Effects.PosterizeDialog.cs:109
-#: ../Pinta.Effects/gtk-gui/Pinta.Effects.LevelsDialog.cs:434
-msgid "Red"
-msgstr "Punainen"
-
-#: ../Pinta.Effects/Dialogs/Effects.PosterizeDialog.cs:117
-#: ../Pinta.Effects/gtk-gui/Pinta.Effects.LevelsDialog.cs:484
-msgid "Blue"
-msgstr "Sininen"
-
-#: ../Pinta.Effects/Dialogs/Effects.PosterizeDialog.cs:120
-msgid "Linked"
-msgstr "Kytketty"
+#: Mono.Addins.Gui/gtk-gui/Mono.Addins.Gui.NewSiteDialog.cs:29
+msgid "Add New Repository"
+msgstr "Lisää uusi pakettivarasto"
 
 #: ../Pinta.Effects/Effects/AddNoiseEffect.cs:29
 msgid "Add Noise"
 msgstr "Lisää kohinaa"
 
-#: ../Pinta.Effects/Effects/AddNoiseEffect.cs:37
-#: ../Pinta.Effects/Effects/MedianEffect.cs:36
-#: ../Pinta.Effects/Effects/ReduceNoiseEffect.cs:36
-msgid "Noise"
-msgstr "Kohina"
+#: Mono.Addins.Gui/Mono.Addins.Gui/AddinTreeWidget.cs:120
+msgid "Add-in"
+msgstr "Lisäosa"
 
-#: ../Pinta.Effects/Effects/AddNoiseEffect.cs:169
-#: ../Pinta.Effects/Effects/OutlineEffect.cs:145
-#: ../Pinta.Effects/Effects/TileEffect.cs:142
-msgid "Intensity"
-msgstr "Voimakkuus"
+#: ../Pinta.Core/Actions/AddinActions.cs:39
+msgid "Add-in Manager"
+msgstr "Lisäosien hallinta"
 
-#: ../Pinta.Effects/Effects/AddNoiseEffect.cs:172
-msgid "Color Saturation"
-msgstr "Värikylläisyys"
+#: Mono.Addins.Gui/gtk-gui/Mono.Addins.Gui.ManageSitesDialog.cs:20
+msgid "Add-in Repository Management"
+msgstr "Lisäosien varastohallinta"
 
-#: ../Pinta.Effects/Effects/AddNoiseEffect.cs:175
-msgid "Coverage"
-msgstr "Kattavuus"
+#: Mono.Addins.Gui/Mono.Addins.Gui/AddinManagerDialog.cs:523
+msgid "Add-in packages"
+msgstr "Lisäosapaketit"
 
-#: ../Pinta.Effects/Effects/BulgeEffect.cs:25
-msgid "Bulge"
-msgstr "Pullistuma"
+#: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:801
+msgid "Added"
+msgstr "Lisätty"
 
-#: ../Pinta.Effects/Effects/BulgeEffect.cs:33
-#: ../Pinta.Effects/Effects/FrostedGlassEffect.cs:33
-#: ../Pinta.Effects/Effects/PixelateEffect.cs:37
-#: ../Pinta.Effects/Effects/PolarInversionEffect.cs:38
-#: ../Pinta.Effects/Effects/TileEffect.cs:33
-#: ../Pinta.Effects/Effects/TwistEffect.cs:33
-msgid "Distort"
-msgstr "Vääristä"
+#: Mono.Addins.Gui/gtk-gui/Mono.Addins.Gui.AddinInstallerDialog.cs:38
+msgid "Additional extensions are required to perform this operation."
+msgstr "Tämän toiminnon suorittaminen vaatii lisäosia."
 
-#: ../Pinta.Effects/Effects/BulgeEffect.cs:101
-#: ../Pinta.Effects/Effects/FrostedGlassEffect.cs:161
-#: ../Pinta.Effects/Effects/SharpenEffect.cs:63
-#: ../Pinta.Effects/Effects/TwistEffect.cs:131
-#: ../Pinta.Effects/Effects/ZoomBlurEffect.cs:131
+#: ../Pinta.Tools/Tools/ColorPickerTool.cs:197
+msgid "After select"
+msgstr "Valinnan jälkeen"
+
+#: ../Pinta/Actions/File/OpenDocumentAction.cs:71
+#: ../Pinta.Core/Actions/EditActions.cs:378
+msgid "All files"
+msgstr "Kaikki tiedostot"
+
+#: Mono.Addins.Gui/Mono.Addins.Gui/AddinManagerDialog.cs:261
+msgid "All repositories"
+msgstr "Kaikki pakettivarastot"
+
+#: ../Pinta.Effects/Effects/BulgeEffect.cs:100
+#: ../Pinta.Effects/Effects/FrostedGlassEffect.cs:163
+#: ../Pinta.Effects/Effects/SharpenEffect.cs:62
+#: ../Pinta.Effects/Effects/TwistEffect.cs:130
+#: ../Pinta.Effects/Effects/ZoomBlurEffect.cs:130
 msgid "Amount"
 msgstr "Määrä"
 
-#: ../Pinta.Effects/Effects/BulgeEffect.cs:104
-#: ../Pinta.Effects/Effects/RadialBlurEffect.cs:161
-#: ../Pinta.Effects/Effects/ZoomBlurEffect.cs:134
-msgid "Offset"
-msgstr "Siirtymä"
+#: ../Pinta/Dialogs/ResizeCanvasDialog.cs:347
+msgid "Anchor:"
+msgstr "Ankkuri:"
 
-#: ../Pinta.Effects/Effects/CloudsEffect.cs:30
-msgid "Clouds"
-msgstr "Pilviä"
-
-#: ../Pinta.Effects/Effects/CloudsEffect.cs:38
-#: ../Pinta.Effects/Effects/JuliaFractalEffect.cs:33
-#: ../Pinta.Effects/Effects/MandelbrotFractalEffect.cs:33
-msgid "Render"
-msgstr "Renderointi"
-
-#: ../Pinta.Effects/Effects/CloudsEffect.cs:205
-msgid "Scale"
-msgstr "Skaala"
-
-#: ../Pinta.Effects/Effects/CloudsEffect.cs:208
-msgid "Power"
-msgstr "Voima"
-
-#: ../Pinta.Effects/Effects/CloudsEffect.cs:231
-msgid "Seed"
-msgstr "Siemen"
-
-#: ../Pinta.Effects/Effects/EdgeDetectEffect.cs:28
-msgid "Edge Detect"
-msgstr "Reunan tunnistus"
-
-#: ../Pinta.Effects/Effects/EdgeDetectEffect.cs:36
-#: ../Pinta.Effects/Effects/EmbossEffect.cs:33
-#: ../Pinta.Effects/Effects/OutlineEffect.cs:36
-#: ../Pinta.Effects/Effects/ReliefEffect.cs:32
-msgid "Stylize"
-msgstr "Tyyli"
-
-#: ../Pinta.Effects/Effects/EdgeDetectEffect.cs:88
-#: ../Pinta.Effects/Effects/EmbossEffect.cs:143
-#: ../Pinta.Effects/Effects/JuliaFractalEffect.cs:140
-#: ../Pinta.Effects/Effects/MandelbrotFractalEffect.cs:164
-#: ../Pinta.Effects/Effects/MotionBlurEffect.cs:111
-#: ../Pinta.Effects/Effects/RadialBlurEffect.cs:158
-#: ../Pinta.Effects/Effects/ReliefEffect.cs:88
-#: ../Pinta.Tools/Editable/EditEngines/ArrowedEditEngine.cs:435
 #: ../Pinta/Actions/Layers/RotateZoomLayerAction.cs:112
+#: ../Pinta.Effects/Effects/EdgeDetectEffect.cs:88
+#: ../Pinta.Effects/Effects/EmbossEffect.cs:145
+#: ../Pinta.Effects/Effects/JuliaFractalEffect.cs:139
+#: ../Pinta.Effects/Effects/MandelbrotFractalEffect.cs:163
+#: ../Pinta.Effects/Effects/MotionBlurEffect.cs:110
+#: ../Pinta.Effects/Effects/RadialBlurEffect.cs:157
+#: ../Pinta.Effects/Effects/ReliefEffect.cs:90
+#: ../Pinta.Tools/Editable/EditEngines/ArrowedEditEngine.cs:306
 msgid "Angle"
 msgstr "Kulma"
 
-#: ../Pinta.Effects/Effects/EmbossEffect.cs:25
-msgid "Emboss"
-msgstr "Korkokuva"
-
-#: ../Pinta.Effects/Effects/FragmentEffect.cs:25
-msgid "Fragment"
-msgstr "Pirstaloi"
-
-#: ../Pinta.Effects/Effects/FragmentEffect.cs:33
-#: ../Pinta.Effects/Effects/GaussianBlurEffect.cs:33
-#: ../Pinta.Effects/Effects/MotionBlurEffect.cs:33
-#: ../Pinta.Effects/Effects/RadialBlurEffect.cs:33
-#: ../Pinta.Effects/Effects/UnfocusEffect.cs:35
-#: ../Pinta.Effects/Effects/ZoomBlurEffect.cs:33
-msgid "Blurs"
-msgstr "Sumennus"
-
-#: ../Pinta.Effects/Effects/FragmentEffect.cs:111
-msgid "Fragments"
-msgstr "Pirstaleet"
-
-#: ../Pinta.Effects/Effects/FragmentEffect.cs:114
-#: ../Pinta.Effects/Effects/MotionBlurEffect.cs:114
-msgid "Distance"
-msgstr "Etäisyys"
-
-#: ../Pinta.Effects/Effects/FragmentEffect.cs:117
-#: ../Pinta.Effects/Effects/TileEffect.cs:138
-msgid "Rotation"
-msgstr "Kierto"
-
-#: ../Pinta.Effects/Effects/FrostedGlassEffect.cs:25
-msgid "Frosted Glass"
-msgstr "Jäätynyt lasi"
-
-#: ../Pinta.Effects/Effects/GaussianBlurEffect.cs:25
-msgid "Gaussian Blur"
-msgstr "Gauss-sumennus"
-
-#: ../Pinta.Effects/Effects/GaussianBlurEffect.cs:264
-#: ../Pinta.Effects/Effects/GlowEffect.cs:80
-#: ../Pinta.Effects/Effects/MedianEffect.cs:70
-#: ../Pinta.Effects/Effects/ReduceNoiseEffect.cs:94
-#: ../Pinta.Effects/Effects/UnfocusEffect.cs:98
-#: ../Pinta.Tools/Editable/EditEngines/RoundedLineEditEngine.cs:125
-msgid "Radius"
-msgstr "Säde"
-
-#: ../Pinta.Effects/Effects/GlowEffect.cs:30
-msgid "Glow"
-msgstr "Hehku"
-
-#: ../Pinta.Effects/Effects/GlowEffect.cs:38
-#: ../Pinta.Effects/Effects/RedEyeRemoveEffect.cs:36
-#: ../Pinta.Effects/Effects/SharpenEffect.cs:33
-#: ../Pinta.Effects/Effects/SoftenPortraitEffect.cs:66
-msgid "Photo"
-msgstr "Valokuva"
-
-#: ../Pinta.Effects/Effects/InkSketchEffect.cs:33
-msgid "Ink Sketch"
-msgstr "Musteluonnos"
-
-#: ../Pinta.Effects/Effects/InkSketchEffect.cs:41
-#: ../Pinta.Effects/Effects/OilPaintingEffect.cs:33
-#: ../Pinta.Effects/Effects/PencilSketchEffect.cs:40
-msgid "Artistic"
-msgstr "Artistinen"
-
-#: ../Pinta.Effects/Effects/InkSketchEffect.cs:165
-msgid "Ink Outline"
-msgstr "Mustereunus"
-
-#: ../Pinta.Effects/Effects/InkSketchEffect.cs:168
-msgid "Coloring"
-msgstr "Väritys"
-
-#: ../Pinta.Effects/Effects/JuliaFractalEffect.cs:25
-msgid "Julia Fractal"
-msgstr "Julian joukko"
-
-#: ../Pinta.Effects/Effects/JuliaFractalEffect.cs:131
-#: ../Pinta.Effects/Effects/MandelbrotFractalEffect.cs:154
-msgid "Factor"
-msgstr "Kerroin"
-
-#: ../Pinta.Effects/Effects/JuliaFractalEffect.cs:134
-#: ../Pinta.Effects/Effects/MandelbrotFractalEffect.cs:157
-#: ../Pinta.Effects/Effects/RadialBlurEffect.cs:164
-#: ../Pinta.Effects/Effects/WarpEffect.cs:188
-msgid "Quality"
-msgstr "Laatu"
-
-#: ../Pinta.Effects/Effects/JuliaFractalEffect.cs:137
-#: ../Pinta.Effects/Effects/MandelbrotFractalEffect.cs:161
-#: ../Pinta.Tools/Tools/ZoomTool.cs:48
-#: ../Pinta/Actions/Layers/RotateZoomLayerAction.cs:118
-msgid "Zoom"
-msgstr "Zoomaus"
-
-#: ../Pinta.Effects/Effects/MandelbrotFractalEffect.cs:25
-msgid "Mandelbrot Fractal"
-msgstr "Mandelbrotin joukko"
-
-#: ../Pinta.Effects/Effects/MedianEffect.cs:28
-msgid "Median"
-msgstr "Mediaani"
-
-#: ../Pinta.Effects/Effects/MedianEffect.cs:73
-msgid "Percentile"
-msgstr "Prosenttipiste"
-
-#: ../Pinta.Effects/Effects/MotionBlurEffect.cs:25
-msgid "Motion Blur"
-msgstr "Liike-epäterävyys"
-
-#: ../Pinta.Effects/Effects/MotionBlurEffect.cs:117
-msgid "Centered"
-msgstr "Keskitetty"
-
-#: ../Pinta.Effects/Effects/OilPaintingEffect.cs:25
-msgid "Oil Painting"
-msgstr "Öljymaalaus"
-
-#: ../Pinta.Effects/Effects/OilPaintingEffect.cs:176
-msgid "Brush Size"
-msgstr "Siveltimen koko"
-
-#: ../Pinta.Effects/Effects/OilPaintingEffect.cs:179
-msgid "Coarseness"
-msgstr "Karheus"
-
-#: ../Pinta.Effects/Effects/OutlineEffect.cs:28
-#: ../Pinta.Tools/Tools/TextTool.cs:250
-msgid "Outline"
-msgstr "Ääriviiva"
-
-#: ../Pinta.Effects/Effects/OutlineEffect.cs:142
-msgid "Thickness"
-msgstr "Paksuus"
-
-#: ../Pinta.Effects/Effects/PencilSketchEffect.cs:32
-msgid "Pencil Sketch"
-msgstr "Kynäluonnos"
-
-#: ../Pinta.Effects/Effects/PencilSketchEffect.cs:99
-msgid "Pencil Tip Size"
-msgstr "Kynän kärjen koko"
-
-#: ../Pinta.Effects/Effects/PencilSketchEffect.cs:102
-msgid "Color Range"
-msgstr "Värialue"
-
-#: ../Pinta.Effects/Effects/PixelateEffect.cs:25
-msgid "Pixelate"
-msgstr "Pikselöi"
-
-#: ../Pinta.Effects/Effects/PixelateEffect.cs:119
-msgid "Cell Size"
-msgstr "Solun koko"
-
-#: ../Pinta.Effects/Effects/PolarInversionEffect.cs:25
-msgid "Polar Inversion"
-msgstr "Käänteismuunnos"
-
-#: ../Pinta.Effects/Effects/RadialBlurEffect.cs:25
-msgid "Radial Blur"
-msgstr "Säteittäinen sumennus"
-
-#: ../Pinta.Effects/Effects/RadialBlurEffect.cs:165
-msgid ""
-"Use low quality for previews, small images, and small angles.  Use high "
-"quality for final quality, large images, and large angles."
-msgstr ""
-"Käytä pientä laatua tarkastamiseen, pieniin kuviin ja pieniin kulmiin. Käytä "
-"suurta laatua lopullisiin kuviin, isoihin kuviin ja suuriin kulmiin."
-
-#: ../Pinta.Effects/Effects/RedEyeRemoveEffect.cs:28
-msgid "Red Eye Removal"
-msgstr "Punasilmän poistaja"
-
-#: ../Pinta.Effects/Effects/RedEyeRemoveEffect.cs:74
-#: ../Pinta.Tools/Tools/FloodTool.cs:90 ../Pinta.Tools/Tools/RecolorTool.cs:80
-msgid "Tolerance"
-msgstr "Toleranssi"
-
-#: ../Pinta.Effects/Effects/RedEyeRemoveEffect.cs:78
-msgid "Saturation Percentage"
-msgstr "Kylläisyysprosentti"
-
-#: ../Pinta.Effects/Effects/RedEyeRemoveEffect.cs:79
-msgid "Hint: For best results, first use selection tools to select each eye."
-msgstr ""
-"Vihje: Parhaan tuloksen saamiseksi käytä valintatyökalua ja valitse "
-"kummatkin silmät ennen käyttöä."
-
-#: ../Pinta.Effects/Effects/ReduceNoiseEffect.cs:28
-msgid "Reduce Noise"
-msgstr "Vähennä kohinaa"
-
-#: ../Pinta.Effects/Effects/ReduceNoiseEffect.cs:97
-msgid "Strength"
-msgstr "Voimakkuus"
-
-#: ../Pinta.Effects/Effects/ReliefEffect.cs:44
-msgid "Relief"
-msgstr "Reliefi"
-
-#: ../Pinta.Effects/Effects/SharpenEffect.cs:25
-msgid "Sharpen"
-msgstr "Terävöitä"
-
-#: ../Pinta.Effects/Effects/SoftenPortraitEffect.cs:58
-msgid "Soften Portrait"
-msgstr "Pehmennä"
-
-#: ../Pinta.Effects/Effects/SoftenPortraitEffect.cs:119
-msgid "Softness"
-msgstr "Pehmeys"
-
-#: ../Pinta.Effects/Effects/SoftenPortraitEffect.cs:122
-msgid "Lighting"
-msgstr "Valaistus"
-
-#: ../Pinta.Effects/Effects/SoftenPortraitEffect.cs:125
-msgid "Warmth"
-msgstr "Lämpö"
-
-#: ../Pinta.Effects/Effects/TileEffect.cs:25
-msgid "Tile Reflection"
-msgstr "Tiiliheijastus"
-
-#: ../Pinta.Effects/Effects/TileEffect.cs:140
-msgid "Tile Size"
-msgstr "Tiilin koko"
-
-#: ../Pinta.Effects/Effects/TwistEffect.cs:25
-msgid "Twist"
-msgstr "Kierre"
-
-#: ../Pinta.Effects/Effects/TwistEffect.cs:133
+#: ../Pinta.Effects/Effects/TwistEffect.cs:132
 msgid "Antialias"
 msgstr "Reunanpehmennys"
 
-#: ../Pinta.Effects/Effects/UnfocusEffect.cs:27
-msgid "Unfocus"
-msgstr "Epäkohdistus"
+#: ../Pinta.Core/Classes/BaseTool.cs:346
+msgid "Antialiasing Off"
+msgstr "Reunojen pehmennys pois päältä"
 
-#: ../Pinta.Effects/Effects/WarpEffect.cs:19
-msgid "Clamp"
-msgstr "Puristin"
+#: ../Pinta.Core/Classes/BaseTool.cs:345
+msgid "Antialiasing On"
+msgstr "Reunojen pehmennys päällä"
 
-#: ../Pinta.Effects/Effects/WarpEffect.cs:21
-msgid "Wrap"
-msgstr ""
+#: Mono.Addins.Gui/Mono.Addins.Gui/InstallDialog.cs:190
+msgid "Are you sure you want to cancel the installation?"
+msgstr "Halutko varmasti keskeyttää asennuksen?"
 
-#: ../Pinta.Effects/Effects/WarpEffect.cs:23
-msgid "Reflect"
-msgstr "Heijastettu"
+#: ../Pinta.Tools/Editable/EditEngines/ArrowedEditEngine.cs:254
+msgid "Arrow"
+msgstr "Nuoli"
 
-#: ../Pinta.Effects/Effects/WarpEffect.cs:25
-msgid "Primary"
-msgstr "Ensisijainen"
+#: ../Pinta.Effects/Effects/InkSketchEffect.cs:40
+#: ../Pinta.Effects/Effects/OilPaintingEffect.cs:32
+#: ../Pinta.Effects/Effects/PencilSketchEffect.cs:39
+msgid "Artistic"
+msgstr "Artistinen"
 
-#: ../Pinta.Effects/Effects/WarpEffect.cs:27
-msgid "Secondary"
-msgstr "Toissijainen"
+#: ../Pinta.Effects/Dialogs/Effects.LevelsDialog.cs:529
+msgid "Auto"
+msgstr "Auto"
 
-#: ../Pinta.Effects/Effects/WarpEffect.cs:29
-#: ../Pinta/Dialogs/NewImageDialog.cs:290
-msgid "Transparent"
-msgstr "Läpinäkyvä"
+#: ../Pinta.Core/Actions/ImageActions.cs:48
+msgid "Auto Crop"
+msgstr "Automaattinen rajaus"
 
-#: ../Pinta.Effects/Effects/WarpEffect.cs:31
-msgid "Original"
-msgstr "Alkuperäinen"
+#: ../Pinta.Effects/Adjustments/AutoLevelEffect.cs:25
+msgid "Auto Level"
+msgstr "Automaattinen taso"
+
+#: Mono.Addins.Gui/Mono.Addins.Gui/AddinInfoView.cs:217
+msgid "Available in repository:"
+msgstr "Saatavilla pakettivarastossa:"
+
+#: ../Pinta.Core/Managers/WorkspaceManager.cs:169
+msgid "Background"
+msgstr "Tausta"
+
+#: ../Pinta/Dialogs/NewImageDialog.cs:281
+msgid "Background Color"
+msgstr "Taustaväri"
+
+#: ../Pinta/Dialogs/NewImageDialog.cs:271
+msgid "Background:"
+msgstr "Tausta:"
+
+#: ../Pinta/Dialogs/AboutDialog.cs:177
+msgid "Based on the work of Paint.NET:"
+msgstr "Perustuu ohjelmaan Paint.NET:"
+
+#: ../Pinta.Core/Actions/ViewActions.cs:67
+msgid "Best Fit"
+msgstr "Paras koko"
+
+#: ../Pinta.Effects/Adjustments/BlackAndWhiteEffect.cs:25
+msgid "Black and White"
+msgstr "Mustavalkoinen"
+
+#: ../Pinta/Dialogs/LayerPropertiesDialog.cs:206
+msgid "Blend Mode"
+msgstr "Sekoitustila"
+
+#: ../Pinta.Effects/Dialogs/Effects.LevelsDialog.cs:525
+#: ../Pinta.Effects/Dialogs/Effects.PosterizeDialog.cs:121
+msgid "Blue"
+msgstr "Sininen"
+
+#: ../Pinta.Effects/Dialogs/Effects.CurvesDialog.cs:454
+msgid "Blue "
+msgstr "Sininen "
+
+#: ../Pinta.Effects/Effects/FragmentEffect.cs:32
+#: ../Pinta.Effects/Effects/GaussianBlurEffect.cs:32
+#: ../Pinta.Effects/Effects/MotionBlurEffect.cs:32
+#: ../Pinta.Effects/Effects/RadialBlurEffect.cs:32
+#: ../Pinta.Effects/Effects/UnfocusEffect.cs:34
+#: ../Pinta.Effects/Effects/ZoomBlurEffect.cs:32
+msgid "Blurs"
+msgstr "Sumennus"
+
+#: ../Pinta.Tools/Tools/TextTool.cs:160
+msgid "Bold"
+msgstr "Lihavoitu"
+
+#: ../Pinta.Effects/Adjustments/BrightnessContrastEffect.cs:152
+#: ../Pinta.Effects/Effects/GlowEffect.cs:81
+msgid "Brightness"
+msgstr "Kirkkaus"
+
+#: ../Pinta.Effects/Adjustments/BrightnessContrastEffect.cs:29
+msgid "Brightness / Contrast"
+msgstr "Kirkkaus / Kontrasti"
+
+#: Mono.Addins.Gui/gtk-gui/Mono.Addins.Gui.NewSiteDialog.cs:154
+msgid "Browse..."
+msgstr "Selaa..."
+
+#: ../Pinta.Effects/Effects/OilPaintingEffect.cs:175
+msgid "Brush Size"
+msgstr "Siveltimen koko"
+
+#: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:266
+#: ../Pinta.Tools/Tools/BaseBrushTool.cs:104
+msgid "Brush width"
+msgstr "Siveltimen koko"
+
+#: ../Pinta.Effects/Effects/BulgeEffect.cs:24
+msgid "Bulge"
+msgstr "Pullistuma"
+
+#: ../Pinta/Dialogs/ResizeCanvasDialog.cs:313
+#: ../Pinta/Dialogs/ResizeImageDialog.cs:149
+msgid "By absolute size:"
+msgstr "Koon mukaan:"
+
+#: ../Pinta/Dialogs/ResizeCanvasDialog.cs:312
+#: ../Pinta/Dialogs/ResizeImageDialog.cs:148
+msgid "By percentage:"
+msgstr "Prosentin mukaan:"
+
+#: ../Pinta/Actions/File/OpenDocumentAction.cs:54
+#: ../Pinta/Actions/File/SaveDocumentImplementationAction.cs:76
+#: ../Pinta.Core/Actions/EditActions.cs:362
+#: ../Pinta.Core/Actions/EditActions.cs:403
+#: ../Pinta.Core/Actions/LayerActions.cs:169
+msgid "Cancel"
+msgstr "Peru"
+
+#: ../Pinta/Pads/CanvasPad.cs:43
+msgid "Canvas"
+msgstr "Piirtopohja"
+
+#: ../Pinta.Effects/Effects/PixelateEffect.cs:123
+msgid "Cell Size"
+msgstr "Solun koko"
+
+#: ../Pinta.Tools/Tools/TextTool.cs:196
+msgid "Center Align"
+msgstr "Keskitä"
 
 #: ../Pinta.Effects/Effects/WarpEffect.cs:191
 msgid "Center Offset"
 msgstr "Keskusta"
 
-#: ../Pinta.Effects/Effects/ZoomBlurEffect.cs:25
-msgid "Zoom Blur"
-msgstr "Zoom-sumennus"
+#: ../Pinta.Effects/Effects/MotionBlurEffect.cs:116
+msgid "Centered"
+msgstr "Keskitetty"
 
-#: ../Pinta.Effects/gtk-gui/Pinta.Effects.LevelsDialog.cs:86
-msgid "Input Histogram"
-msgstr "Sisääntulon histogrammi"
+#: ../Pinta.Core/Actions/ViewActions.cs:162
+msgid "Centimeters"
+msgstr "Senttimetriä"
 
-#: ../Pinta.Effects/gtk-gui/Pinta.Effects.LevelsDialog.cs:128
-msgid "Input"
-msgstr "Sisääntulo"
+#: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:338
+msgid "Changed Shape Type"
+msgstr "Vaihda muodon tyyppi"
 
-#: ../Pinta.Effects/gtk-gui/Pinta.Effects.LevelsDialog.cs:241
-msgid "Output"
-msgstr "Ulostulo"
+#: ../Pinta.Effects/Dialogs/Effects.LevelsDialog.cs:473
+msgid "Choose Color"
+msgstr "Valitse väri"
 
-#: ../Pinta.Effects/gtk-gui/Pinta.Effects.LevelsDialog.cs:369
-msgid "Output Histogram"
-msgstr "Ulostulon histogrammi"
-
-#: ../Pinta.Effects/gtk-gui/Pinta.Effects.LevelsDialog.cs:412
-msgid "Auto"
-msgstr "Auto"
-
-#: ../Pinta.Gui.Widgets/Widgets/ColorPaletteWidget.cs:106
-msgid "Choose Primary Color"
-msgstr "Valitse edustaväri"
-
-#: ../Pinta.Gui.Widgets/Widgets/ColorPaletteWidget.cs:121
-msgid "Choose Secondary Color"
-msgstr "Valitse taustaväri"
-
-#: ../Pinta.Gui.Widgets/Widgets/ColorPaletteWidget.cs:145
+#: ../Pinta.Gui.Widgets/Widgets/StatusBarColorPaletteWidget.cs:106
 msgid "Choose Palette Color"
 msgstr "Valitse palettiväri"
 
-#: ../Pinta.Gui.Widgets/Widgets/ColorPaletteWidget.cs:313
-msgid "Click to switch between primary and secondary color."
-msgstr "Klikkaa vaihtaaksesi ensi- ja toissijaisen värin välillä."
+#: ../Pinta.Gui.Widgets/Widgets/StatusBarColorPaletteWidget.cs:76
+msgid "Choose Primary Color"
+msgstr "Valitse edustaväri"
 
-#: ../Pinta.Gui.Widgets/Widgets/ColorPaletteWidget.cs:315
-msgid "Click to reset primary and secondary color."
-msgstr "Paina palauttaksesi edusta- ja taustavärin"
-
-#: ../Pinta.Gui.Widgets/Widgets/ColorPaletteWidget.cs:317
-msgid "Click to select primary color."
-msgstr "Klikkaa valitaksesi ensisijaisen värin."
-
-#: ../Pinta.Gui.Widgets/Widgets/ColorPaletteWidget.cs:319
-msgid "Click to select secondary color."
-msgstr "Klikkaa valitaksesi toissijaisen värin."
-
-#: ../Pinta.Gui.Widgets/Widgets/ColorPaletteWidget.cs:321
-msgid ""
-"Left click to set primary color. Right click to set secondary color. Middle "
-"click to choose palette color."
-msgstr ""
-"Vasemmalla hiirennäppäimellä valitset edustavärin. Oikealla näppäimellä "
-"valitset taustavärin. Keskinapilla valitset paletin värin."
-
-#: ../Pinta.Gui.Widgets/Widgets/ReseedButtonWidget.cs:64
-msgid "Random Noise"
-msgstr "Satunnainen kohina"
-
-#: ../Pinta.Gui.Widgets/Widgets/ReseedButtonWidget.cs:74
-msgid "Reseed"
-msgstr "Uusi siemen"
-
-#: ../Pinta.Gui.Widgets/Widgets/Layers/LayersListWidget.cs:244
-msgid "Layer Shown"
-msgstr "Taso esillä"
-
-#: ../Pinta.Gui.Widgets/Widgets/Layers/LayersListWidget.cs:244
-msgid "Layer Hidden"
-msgstr "Taso piilotettu"
+#: ../Pinta.Gui.Widgets/Widgets/StatusBarColorPaletteWidget.cs:79
+msgid "Choose Secondary Color"
+msgstr "Valitse taustaväri"
 
 #: ../Pinta.Tools/Brushes/CircleBrush.cs:37
 msgid "Circles"
 msgstr "Ympyrät"
 
-#: ../Pinta.Tools/Brushes/GridBrush.cs:37
-msgid "Grid"
-msgstr "Ristikot"
-
-#: ../Pinta.Tools/Brushes/SplatterBrush.cs:37
-msgid "Splatter"
-msgstr "Roiske"
-
-#: ../Pinta.Tools/Brushes/SquaresBrush.cs:39
-msgid "Squares"
-msgstr "Neliöt"
-
-#: ../Pinta.Tools/Dashes/DashPatternBox.cs:74
-msgid "Dash"
-msgstr "Katkoviiva"
-
-#: ../Pinta.Tools/Editable/EditEngines/ArrowedEditEngine.cs:212
-msgid "Arrow"
-msgstr "Nuoli"
-
-#: ../Pinta.Tools/Editable/EditEngines/ArrowedEditEngine.cs:352
-msgid "Size"
-msgstr "Koko"
-
-#: ../Pinta.Tools/Editable/EditEngines/ArrowedEditEngine.cs:357
-msgid "Decrease arrow size"
-msgstr "Pienennä nuolen kokoa"
-
-#: ../Pinta.Tools/Editable/EditEngines/ArrowedEditEngine.cs:424
-msgid "Increase arrow size"
-msgstr "Suurenna nuolen kokoa"
-
-#: ../Pinta.Tools/Editable/EditEngines/ArrowedEditEngine.cs:440
-msgid "Decrease angle offset"
-msgstr ""
-
-#: ../Pinta.Tools/Editable/EditEngines/ArrowedEditEngine.cs:503
-msgid "Increase angle offset"
-msgstr ""
-
-#: ../Pinta.Tools/Editable/EditEngines/ArrowedEditEngine.cs:514
-msgid "Length"
-msgstr "Pituus"
-
-#: ../Pinta.Tools/Editable/EditEngines/ArrowedEditEngine.cs:519
-msgid "Decrease length offset"
-msgstr ""
-
-#: ../Pinta.Tools/Editable/EditEngines/ArrowedEditEngine.cs:582
-msgid "Increase length offset"
-msgstr ""
-
-#: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:296
-#: ../Pinta.Tools/Tools/BaseBrushTool.cs:76
-#: ../Pinta.Tools/Tools/SelectShapeTool.cs:99
-msgid "Brush width"
-msgstr "Siveltimen koko"
-
-#: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:302
-#: ../Pinta.Tools/Tools/BaseBrushTool.cs:81
-#: ../Pinta.Tools/Tools/SelectShapeTool.cs:104
-msgid "Decrease brush size"
-msgstr "Pienennä sivellintä"
-
-#: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:330
-#: ../Pinta.Tools/Tools/BaseBrushTool.cs:95
-#: ../Pinta.Tools/Tools/SelectShapeTool.cs:118
-msgid "Increase brush size"
-msgstr "Suurenna sivellintä"
-
-#: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:342
-#: ../Pinta.Tools/Tools/FreeformShapeTool.cs:76
-#: ../Pinta.Tools/Tools/SelectShapeTool.cs:131
-msgid "Fill Style"
-msgstr "Piirtotyyli"
-
-#: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:350
-#: ../Pinta.Tools/Tools/FreeformShapeTool.cs:83
-#: ../Pinta.Tools/Tools/SelectShapeTool.cs:138
-msgid "Outline Shape"
-msgstr "Reunan muoto"
-
-#: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:351
-#: ../Pinta.Tools/Tools/FreeformShapeTool.cs:84
-#: ../Pinta.Tools/Tools/SelectShapeTool.cs:139
-msgid "Fill Shape"
-msgstr "Täytön muoto"
-
-#: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:352
-#: ../Pinta.Tools/Tools/FreeformShapeTool.cs:85
-#: ../Pinta.Tools/Tools/SelectShapeTool.cs:140
-msgid "Fill and Outline Shape"
-msgstr "Täytön ja reunan muoto"
-
-#: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:363
-msgid "Shape Type"
-msgstr "Muodon tyyppi"
-
-#: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:371
-msgid "Open Line/Curve Series"
-msgstr "Avaa Viiva/Käyrä"
-
-#: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:372
-msgid "Closed Line/Curve Series"
-msgstr "Sulje Viiva/Käyrä"
-
-#: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:373
-#: ../Pinta.Tools/Editable/EditEngines/EllipseEditEngine.cs:39
-#: ../Pinta.Tools/Tools/EllipseTool.cs:37
-msgid "Ellipse"
-msgstr "Ellipsi"
-
-#: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:374
-msgid "Rounded Line Series"
-msgstr "Pyöristetyt viivat"
-
-#: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:388
-msgid "Changed Shape Type"
-msgstr "Vaihda muodon tyyppi"
-
-#: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:522
-msgid "Point Deleted"
-msgstr "Piste poistettu"
-
-#: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:539
-msgid "Deleted"
-msgstr "Poistettu"
-
-#: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:588
-#: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:884
-msgid "Point Added"
-msgstr "Piste lisätty"
-
-#: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:924
-msgid "Added"
-msgstr "Lisätty"
-
-#: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:1014
-msgid "Modified"
-msgstr "Muokattu"
-
-#: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:1266
-#: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:1675
-msgid "Finalized"
-msgstr "Viimeistelty"
-
-#: ../Pinta.Tools/Editable/EditEngines/LineCurveEditEngine.cs:43
-msgid "Open Curve Shape"
-msgstr "Avaa Käyrät"
-
-#: ../Pinta.Tools/Editable/EditEngines/RectangleEditEngine.cs:43
-msgid "Closed Curve Shape"
-msgstr "Sulje Käyrät"
-
-#: ../Pinta.Tools/Editable/EditEngines/RoundedLineEditEngine.cs:43
-msgid "Rounded Line Shape"
-msgstr "Pyöristetty viiva"
-
-#: ../Pinta.Tools/Editable/EditEngines/RoundedLineEditEngine.cs:131
-msgid "Decrease shape's corner radius"
-msgstr "Vähennä muodon kulmasädettä"
-
-#: ../Pinta.Tools/Editable/EditEngines/RoundedLineEditEngine.cs:154
-msgid "Increase shape's corner radius"
-msgstr "Kasvata muodon kulmasädettä"
-
-#: ../Pinta.Tools/Tools/CloneStampTool.cs:42
-msgid "Clone Stamp"
-msgstr "Kloonaus"
-
-#: ../Pinta.Tools/Tools/CloneStampTool.cs:47
-msgid "Ctrl-left click to set origin, left click to paint."
-msgstr "Napsauta oikealla asettaaksesi lähtöpisteen, vasemmalla piirrät."
-
-#: ../Pinta.Tools/Tools/ColorPickerTool.cs:63
-msgid "Color Picker"
-msgstr "Värinpoimija"
-
-#: ../Pinta.Tools/Tools/ColorPickerTool.cs:69
-msgid "Left click to set primary color. Right click to set secondary color."
-msgstr ""
-"Vasemmalla hiiren napilla valitset edustavärin, oikealla valitset "
-"taustavärin."
-
-#: ../Pinta.Tools/Tools/ColorPickerTool.cs:113
-msgid "Sampling"
-msgstr "Näytteistys"
-
-#: ../Pinta.Tools/Tools/ColorPickerTool.cs:123
-msgid "Single Pixel"
-msgstr "Yksittäinen pikseli"
-
-#: ../Pinta.Tools/Tools/ColorPickerTool.cs:124
-msgid "3 x 3 Region"
-msgstr "3 x 3 -alue"
-
-#: ../Pinta.Tools/Tools/ColorPickerTool.cs:125
-msgid "5 x 5 Region"
-msgstr "5 x 5 -alue"
-
-#: ../Pinta.Tools/Tools/ColorPickerTool.cs:126
-msgid "7 x 7 Region"
-msgstr "7 x 7 -alue"
-
-#: ../Pinta.Tools/Tools/ColorPickerTool.cs:127
-msgid "9 x 9 Region"
-msgstr "9 x 9 -alue"
-
-#: ../Pinta.Tools/Tools/ColorPickerTool.cs:136
-msgid "Image"
-msgstr "Kuva"
-
-#: ../Pinta.Tools/Tools/ColorPickerTool.cs:147
-msgid "After select"
-msgstr "Valinnan jälkeen"
-
-#: ../Pinta.Tools/Tools/ColorPickerTool.cs:154
-msgid "Do not switch tool"
-msgstr "Älä vaihda työkalua"
-
-#: ../Pinta.Tools/Tools/ColorPickerTool.cs:155
-msgid "Switch to previous tool"
-msgstr "Vaihda edelliseen työkaluun"
-
-#: ../Pinta.Tools/Tools/ColorPickerTool.cs:156
-msgid "Switch to Pencil tool"
-msgstr "Vaihda kynään"
-
-#: ../Pinta.Tools/Tools/ColorPickerTool.cs:209
-#: ../Pinta.Tools/Tools/PencilTool.cs:50
-msgid "Pencil"
-msgstr "Kynä"
-
-#: ../Pinta.Tools/Tools/EllipseSelectTool.cs:37
-msgid "Ellipse Select"
-msgstr "Ellipsivalinta"
-
-#: ../Pinta.Tools/Tools/EllipseSelectTool.cs:43
-msgid ""
-"Click and drag to draw an elliptical selection. Hold Shift to constrain to a "
-"circle."
-msgstr ""
-"Paina hiirellä ja siirrä hiirtä tehdäksesi elliptisen valinnan. Pidä Vaihto -"
-"näppäin pohjassa tehdäksesi ympyrämuotoisen valinnan."
-
-#: ../Pinta.Tools/Tools/EllipseTool.cs:43
-#: ../Pinta.Tools/Tools/LineCurveTool.cs:46
-#: ../Pinta.Tools/Tools/RectangleTool.cs:43
-#: ../Pinta.Tools/Tools/RoundedRectangleTool.cs:43
-msgid ""
-"Left click to draw a shape with the primary color.\n"
-"Left click on a shape to add a control point.\n"
-"Left click on a control point and drag to move it.\n"
-"Right click on a control point and drag to change its tension.\n"
-"Hold Shift to snap to angles.\n"
-"Use arrow keys to move the selected control point.\n"
-"Press Ctrl + left/right arrows to select control points by order.\n"
-"Press Delete to delete the selected control point.\n"
-"Press Space to add a new control point at the mouse position.\n"
-"Hold Ctrl while pressing Space to create the control point at the exact same "
-"position.\n"
-"Hold Ctrl while left clicking on a control point to create a new shape at "
-"the exact same position.\n"
-"Hold Ctrl while clicking outside of the image bounds to create a new shape "
-"starting at the edge.\n"
-"Press Enter to finalize the shape."
-msgstr ""
-
-#: ../Pinta.Tools/Tools/EraserTool.cs:187
-#: ../Pinta.Tools/Tools/PaintBrushTool.cs:92
-msgid "Type"
-msgstr "Tyyppi"
-
-#: ../Pinta.Tools/Tools/EraserTool.cs:189
-msgid "Smooth"
-msgstr "Tasainen"
-
-#: ../Pinta.Tools/Tools/EraserTool.cs:203
-msgid "Eraser"
-msgstr "Pyyhin"
-
-#: ../Pinta.Tools/Tools/EraserTool.cs:205
-msgid ""
-"Left click to erase to transparent, right click to erase to secondary color. "
-msgstr ""
-"Vasemmalla hiiren napilla pyyhit läpinäkyväksi, oikealla pyyhit "
-"taustavärillä. "
-
-#: ../Pinta.Tools/Tools/FloodTool.cs:71
-msgid "Flood Mode"
-msgstr "Tulvatila"
-
-#: ../Pinta.Tools/Tools/FloodTool.cs:78
-msgid "Contiguous"
-msgstr "Jatkuva"
-
-#: ../Pinta.Tools/Tools/FloodTool.cs:79
-msgid "Global"
-msgstr "Globaali"
-
-#: ../Pinta.Tools/Tools/FreeformShapeTool.cs:56
-msgid "Freeform Shape"
-msgstr "Vapaa muoto"
-
-#: ../Pinta.Tools/Tools/FreeformShapeTool.cs:58
-#: ../Pinta.Tools/Tools/PaintBrushTool.cs:42
-msgid ""
-"Left click to draw with primary color, right click to draw with secondary "
-"color."
-msgstr ""
-"Vasemmalla napilla piirrät edustavärillä, oikealla napilla taustavärillä."
-
-#: ../Pinta.Tools/Tools/GradientTool.cs:55
-#: ../Pinta.Tools/Tools/GradientTool.cs:169
-msgid "Gradient"
-msgstr "Väriliukuma"
-
-#: ../Pinta.Tools/Tools/GradientTool.cs:63
-msgid ""
-"Click and drag to draw gradient from primary to secondary color.  Right "
-"click to reverse."
-msgstr ""
-"Napsauta ja siirrä piirtääksesi liukuman edustaväristä taustaväriin. "
-"Oikealla napilla käänteinen suunta."
-
-#: ../Pinta.Tools/Tools/GradientTool.cs:176
-msgid "Linear Gradient"
-msgstr "Lineaari"
-
-#: ../Pinta.Tools/Tools/GradientTool.cs:177
-msgid "Linear Reflected Gradient"
-msgstr "Lineaari (Peilattu)"
-
-#: ../Pinta.Tools/Tools/GradientTool.cs:178
-msgid "Linear Diamond Gradient"
-msgstr "Timantti"
-
-#: ../Pinta.Tools/Tools/GradientTool.cs:179
-msgid "Radial Gradient"
-msgstr "Säteittäinen"
-
-#: ../Pinta.Tools/Tools/GradientTool.cs:180
-msgid "Conical Gradient"
-msgstr "Kartio"
-
-#: ../Pinta.Tools/Tools/LassoSelectTool.cs:52
-msgid "Lasso Select"
-msgstr "Lassovalinta"
-
-#: ../Pinta.Tools/Tools/LassoSelectTool.cs:54
-msgid "Click and drag to draw the outline for a selection area."
-msgstr "Napsauta ja siirrä hiirtä luodaksesi valittavan alueen reunan."
-
-#: ../Pinta.Tools/Tools/LineCurveTool.cs:40
-msgid "Line/Curve"
-msgstr "Viiva/Käyrä"
-
-#: ../Pinta.Tools/Tools/MagicWandTool.cs:62
-msgid "Magic Wand Select"
-msgstr "Taikasauva"
-
-#: ../Pinta.Tools/Tools/MagicWandTool.cs:72
-msgid "Click to select region of similar color."
-msgstr "Napsauta valitaksesi samanvärisen alueen."
-
-#: ../Pinta.Tools/Tools/MoveSelectedTool.cs:49
-msgid ""
-"Left click and drag the selection to move selected content. Hold Ctrl to "
-"scale instead of move. Right click and drag the selection to rotate selected "
-"content. Hold Shift to rotate in steps."
-msgstr ""
-
-#: ../Pinta.Tools/Tools/MoveSelectionTool.cs:42
-msgid "Move Selection"
-msgstr "Siirrä valintaa"
-
-#: ../Pinta.Tools/Tools/MoveSelectionTool.cs:48
-msgid ""
-"Left click and drag the selection to move selection outline. Hold Ctrl to "
-"scale instead of move. Right click and drag the selection to rotate "
-"selection outline. Hold Shift to rotate in steps."
-msgstr ""
-
-#: ../Pinta.Tools/Tools/PaintBrushTool.cs:40 ../Pinta/MainWindow.cs:89
-msgid "Paintbrush"
-msgstr "Sivellin"
-
-#: ../Pinta.Tools/Tools/PaintBucketTool.cs:40
-msgid "Paint Bucket"
-msgstr "Täyttö"
-
-#: ../Pinta.Tools/Tools/PaintBucketTool.cs:46
-msgid ""
-"Left click to fill a region with the primary color, right click to fill with "
-"the secondary color."
-msgstr ""
-"Vasemmalla napilla täytät alueen edustavärillä, oikealla napilla täytät "
-"taustavärillä."
-
-#: ../Pinta.Tools/Tools/PanTool.cs:37
-#: ../Pinta/Actions/Layers/RotateZoomLayerAction.cs:115
-msgid "Pan"
-msgstr "Pan"
-
-#: ../Pinta.Tools/Tools/PanTool.cs:43
-msgid "Click and drag to navigate image."
-msgstr "Napsauta ja siirrä hiirtä liikkuaksesi kuvalla."
-
-#: ../Pinta.Tools/Tools/PencilTool.cs:52
-msgid ""
-"Left click to draw freeform one-pixel wide lines with the primary color. "
-"Right click to use the secondary color."
-msgstr ""
-"Hiiren vasemmalla piirrät vapaamuotoisia yhden pikselin levyisiä viivoja "
-"edustavärillä. Oikella näppäimellä taustavärin värisiä."
-
-#: ../Pinta.Tools/Tools/RecolorTool.cs:58
-msgid "Recolor"
-msgstr "Väritä uudelleen"
-
-#: ../Pinta.Tools/Tools/RecolorTool.cs:62
-msgid ""
-"Left click to replace the secondary color with the primary color. Right "
-"click to reverse."
-msgstr ""
-"Vasen napsautus toissijaisen värin korvaamiseksi ensisijaisella värillä. "
-"Käänteinen toiminto oikealla napsautuksella."
-
-#: ../Pinta.Tools/Tools/RectangleSelectTool.cs:37
-msgid "Rectangle Select"
-msgstr "Suorakulmainen valinta"
-
-#: ../Pinta.Tools/Tools/RectangleSelectTool.cs:43
+#: ../Pinta.Effects/Effects/WarpEffect.cs:19
+msgid "Clamp"
+msgstr "Puristin"
+
+#: ../Pinta.Tools/Tools/RectangleSelectTool.cs:41
 msgid ""
 "Click and drag to draw a rectangular selection. Hold Shift to constrain to a "
 "square."
@@ -1656,563 +340,604 @@ msgstr ""
 "Paina hiirellä ja siirrä hiirtä tehdäksesi nelikulmaisen valinnan. Pidä "
 "Vaihto -näppäin pohjassa tehdäksesi neliön muotoisen valinnan."
 
-#: ../Pinta.Tools/Tools/RectangleTool.cs:37
-msgid "Rectangle"
-msgstr "Suorakulmio"
-
-#: ../Pinta.Tools/Tools/RoundedRectangleTool.cs:37
-msgid "Rounded Rectangle"
-msgstr "Pyöristetty suorakulmio"
-
-#: ../Pinta.Tools/Tools/TextTool.cs:94
-msgid "Text"
-msgstr "Teksti"
-
-#: ../Pinta.Tools/Tools/TextTool.cs:95
-msgid "Text - Finalize"
-msgstr "Teksti - Tee valmiiksi"
-
-#: ../Pinta.Tools/Tools/TextTool.cs:101
+#: ../Pinta.Tools/Tools/EllipseSelectTool.cs:41
 msgid ""
-"Left click to place cursor, then type desired text. Text color is primary "
-"color."
+"Click and drag to draw an elliptical selection. Hold Shift to constrain to a "
+"circle."
 msgstr ""
-"Napsauta vasemmalla sijoittaaksesi kursorin, ja kirjoita teksti. Väri on "
-"edustaväri."
+"Paina hiirellä ja siirrä hiirtä tehdäksesi elliptisen valinnan. Pidä Vaihto -"
+"näppäin pohjassa tehdäksesi ympyrämuotoisen valinnan."
 
-#: ../Pinta.Tools/Tools/TextTool.cs:158
-msgid "Font"
-msgstr "Kirjasin"
-
-#: ../Pinta.Tools/Tools/TextTool.cs:191
-msgid "Bold"
-msgstr "Lihavoitu"
-
-#: ../Pinta.Tools/Tools/TextTool.cs:198
-msgid "Italic"
-msgstr "Kursivoitu"
-
-#: ../Pinta.Tools/Tools/TextTool.cs:205
-msgid "Underline"
-msgstr "Alleviivattu"
-
-#: ../Pinta.Tools/Tools/TextTool.cs:214
-msgid "Left Align"
-msgstr "Tasaa vasemmalle"
-
-#: ../Pinta.Tools/Tools/TextTool.cs:222
-msgid "Center Align"
-msgstr "Keskitä"
-
-#: ../Pinta.Tools/Tools/TextTool.cs:229
-msgid "Right Align"
-msgstr "Tasaa oikealle"
-
-#: ../Pinta.Tools/Tools/TextTool.cs:241
-msgid "Text Style"
-msgstr "Tekstin tyyli"
-
-#: ../Pinta.Tools/Tools/TextTool.cs:249
-msgid "Normal and Outline"
-msgstr "Normaali ja ääriviiva"
-
-#: ../Pinta.Tools/Tools/TextTool.cs:251
-msgid "Fill Background"
-msgstr "Täytä tausta"
-
-#: ../Pinta.Tools/Tools/TextTool.cs:264
-msgid "Outline width"
-msgstr "Ääriviivan paksuus"
-
-#: ../Pinta.Tools/Tools/TextTool.cs:269
-msgid "Decrease outline size"
-msgstr "Pienennä ääriviivaa"
-
-#: ../Pinta.Tools/Tools/TextTool.cs:286
-msgid "Increase outline size"
-msgstr "Suurenna ääriviivaa"
-
-#: ../Pinta.Tools/Tools/ZoomTool.cs:54
+#: ../Pinta.Tools/Tools/GradientTool.cs:52
 msgid ""
-"Left click to zoom in. Right click to zoom out. Click and drag to zoom in "
-"selection."
+"Click and drag to draw gradient from primary to secondary color.  Right "
+"click to reverse."
 msgstr ""
-"Vasemmalla napilla suurennat, oikealla pienennät. Napsauta ja siirrä "
-"luodaksesi valinnan."
+"Napsauta ja siirrä piirtääksesi liukuman edustaväristä taustaväriin. "
+"Oikealla napilla käänteinen suunta."
 
-#: ../Pinta/Actions/Edit/ResizePaletteAction.cs:50
-msgid "Resize Palette"
-msgstr "Muuta paletin kokoa"
+#: ../Pinta.Tools/Tools/LassoSelectTool.cs:55
+msgid "Click and drag to draw the outline for a selection area."
+msgstr "Napsauta ja siirrä hiirtä luodaksesi valittavan alueen reunan."
 
-#: ../Pinta/Actions/Edit/ResizePaletteAction.cs:51
-msgid "New palette size:"
-msgstr "Paletin uusi koko:"
+#: ../Pinta.Tools/Tools/PanTool.cs:44
+msgid "Click and drag to navigate image."
+msgstr "Napsauta ja siirrä hiirtä liikkuaksesi kuvalla."
 
-#: ../Pinta/Actions/File/CloseDocumentAction.cs:61
-#, csharp-format
-msgid "Save the changes to image \"{0}\" before closing?"
-msgstr "Tallennetaanko muutokset kuvaan \"{0}\" ennen sulkemista?"
+#: ../Pinta.Gui.Widgets/Widgets/StatusBarColorPaletteWidget.cs:234
+msgid "Click to reset primary and secondary color."
+msgstr "Paina palauttaksesi edusta- ja taustavärin"
 
-#: ../Pinta/Actions/File/CloseDocumentAction.cs:62
-msgid "If you don't save, all changes will be permanently lost."
-msgstr "Jos tallennusta ei tehdä, kaikki muutokset häviävät lopullisesti."
+#: ../Pinta.Gui.Widgets/Widgets/StatusBarColorPaletteWidget.cs:223
+msgid "Click to select primary color."
+msgstr "Klikkaa valitaksesi ensisijaisen värin."
+
+#: ../Pinta.Tools/Tools/MagicWandTool.cs:50
+msgid "Click to select region of similar color."
+msgstr "Napsauta valitaksesi samanvärisen alueen."
+
+#: ../Pinta.Gui.Widgets/Widgets/StatusBarColorPaletteWidget.cs:226
+msgid "Click to select secondary color."
+msgstr "Klikkaa valitaksesi toissijaisen värin."
+
+#: ../Pinta.Gui.Widgets/Widgets/StatusBarColorPaletteWidget.cs:229
+msgid "Click to switch between primary and secondary color."
+msgstr "Napsauta vaihtaaksesi ensi- ja toissijaisen värin välillä."
+
+#: ../Pinta/Dialogs/NewImageDialog.cs:161
+#: ../Pinta/Dialogs/NewImageDialog.cs:199
+#: ../Pinta/Dialogs/NewImageDialog.cs:341
+#: ../Pinta/Dialogs/NewImageDialog.cs:431
+msgid "Clipboard"
+msgstr "Leikepöytä"
+
+#: ../Pinta.Tools/Tools/CloneStampTool.cs:44
+msgid "Clone Stamp"
+msgstr "Kloonaus"
+
+#: ../Pinta.Core/Actions/FileActions.cs:54
+msgid "Close"
+msgstr "Sulje"
+
+#: ../Pinta.Core/Actions/WindowActions.cs:46
+msgid "Close All"
+msgstr "Sulje kaikki"
 
 #: ../Pinta/Actions/File/CloseDocumentAction.cs:72
-#: ../Pinta/Actions/File/CloseDocumentAction.cs:76
-msgid "Close _without saving"
+#: ../Pinta/Actions/File/CloseDocumentAction.cs:75
+msgid "Close _without Saving"
 msgstr "Sulje _tallentamatta"
 
-#: ../Pinta/Actions/File/NewScreenshotAction.cs:52
-msgid "Take Screenshot"
-msgstr "Ota kuvankaappaus"
+#: ../Pinta.Tools/Editable/EditEngines/RectangleEditEngine.cs:40
+msgid "Closed Curve Shape"
+msgstr "Sulje Käyrät"
 
-#: ../Pinta/Actions/File/NewScreenshotAction.cs:53
-msgid "Delay before taking a screenshot (seconds):"
-msgstr "Viive ennen kuvankaappauksen ottamista (sekuntteja):"
+#: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:323
+msgid "Closed Line/Curve Series"
+msgstr "Sulje Viiva/Käyrä"
 
-#: ../Pinta/Actions/File/OpenDocumentAction.cs:63
-msgid "Image files"
-msgstr "Kuvatiedostot"
+#: ../Pinta.Effects/Effects/CloudsEffect.cs:29
+msgid "Clouds"
+msgstr "Pilviä"
 
-#: ../Pinta/Actions/File/SaveDocumentImplementationAction.cs:75
-msgid "Save Image File"
-msgstr "Tallenna kuva"
+#: ../Pinta.Effects/Effects/OilPaintingEffect.cs:178
+msgid "Coarseness"
+msgstr "Karheus"
 
-#: ../Pinta/Actions/File/SaveDocumentImplementationAction.cs:190
-msgid "Pinta does not support saving images in this file format."
-msgstr "Pinta ei tue kuvien tallentamista tässä muodossa."
+#: ../Pinta.Core/Effects/UserBlendOps.cs:45
+msgid "Color"
+msgstr "Väri"
 
-#: ../Pinta/Actions/File/SaveDocumentImplementationAction.cs:191
-#: ../Pinta/Actions/File/SaveDocumentImplementationAction.cs:203
-msgid "Error"
-msgstr "Virhe"
+#: ../Pinta.Core/Effects/UserBlendOps.cs:35
+msgid "Color Burn"
+msgstr "Varjostus"
 
-#: ../Pinta/Actions/File/SaveDocumentImplementationAction.cs:202
-msgid "Cannot save read only file."
-msgstr "Vain luku -tiedostoon ei voi tallentaa."
+#: ../Pinta.Core/Effects/UserBlendOps.cs:36
+msgid "Color Dodge"
+msgstr "Valotus"
 
-#: ../Pinta/Actions/File/SaveDocumentImplementationAction.cs:217
-msgid "Image too large"
-msgstr "Kuva on liian iso"
+#: ../Pinta.Tools/Tools/ColorPickerTool.cs:52
+msgid "Color Picker"
+msgstr "Värinpoimija"
 
-#: ../Pinta/Actions/File/SaveDocumentImplementationAction.cs:218
-msgid "ICO files can not be larger than 255 x 255 pixels."
-msgstr "ICO-tiedostot voivat olla korkeintaan 255x255 pikselin kokoisia"
+#: ../Pinta.Effects/Effects/PencilSketchEffect.cs:101
+msgid "Color Range"
+msgstr "Värialue"
 
-#: ../Pinta/Actions/File/SaveDocumentImplementationAction.cs:247
-#, csharp-format
-msgid "A file named \"{0}\" already exists. Do you want to replace it?"
-msgstr "Tiedosto nimeltä \"{0}\" on olemassa. Haluatko korvata sen?"
+#: ../Pinta.Effects/Effects/AddNoiseEffect.cs:173
+msgid "Color Saturation"
+msgstr "Värikylläisyys"
 
-#: ../Pinta/Actions/File/SaveDocumentImplementationAction.cs:248
-#, csharp-format
-msgid ""
-"The file already exists in \"{1}\". Replacing it will overwrite its contents."
-msgstr "Tiedosto on jo olemassa \"{1}\". Korvaaminen ylikirjoittaa sisällön."
+#: ../Pinta.Effects/Effects/InkSketchEffect.cs:167
+msgid "Coloring"
+msgstr "Väritys"
 
-#: ../Pinta/Actions/Layers/LayerPropertiesAction.cs:95
-msgid "Layer Opacity"
-msgstr "Tason peittävyys"
+#: ../Pinta.Tools/Tools/GradientTool.cs:164
+msgid "Conical Gradient"
+msgstr "Kartio"
 
-#: ../Pinta/Actions/Layers/LayerPropertiesAction.cs:100
-msgid "Rename Layer"
-msgstr "Nimeä taso uudelleen"
+#: ../Pinta.Core/Actions/HelpActions.cs:44
+msgid "Contents"
+msgstr "Sisältö"
 
-#: ../Pinta/Actions/Layers/LayerPropertiesAction.cs:105
-msgid "Hide Layer"
-msgstr "Piilota taso"
+#: ../Pinta.Tools/Tools/FloodTool.cs:136
+msgid "Contiguous"
+msgstr "Jatkuva"
 
-#: ../Pinta/Actions/Layers/LayerPropertiesAction.cs:105
-msgid "Show Layer"
-msgstr "Näytä taso"
+#: ../Pinta.Effects/Adjustments/BrightnessContrastEffect.cs:163
+#: ../Pinta.Effects/Effects/GlowEffect.cs:83
+msgid "Contrast"
+msgstr "Kontrasti"
 
-#: ../Pinta/Actions/Layers/LayerPropertiesAction.cs:110
-#: ../Pinta/Dialogs/LayerPropertiesDialog.cs:50
-msgid "Layer Properties"
-msgstr "Tason ominaisuudet"
-
-#: ../Pinta/Actions/Layers/RotateZoomLayerAction.cs:53
-#: ../Pinta/Actions/Layers/RotateZoomLayerAction.cs:107
-msgid "Rotate / Zoom Layer"
-msgstr "Käännä / lähennä tasoa"
-
-#: ../Pinta/AddinSetupService.cs:49
-msgid "Pinta Community Addins - Platform-Specific"
-msgstr "Pinta-yhteisön lisäosat - alustariippuvaiset"
-
-#: ../Pinta/AddinSetupService.cs:53
-msgid "Pinta Community Addins - Cross-Platform"
-msgstr "Pinta-yhteisön lisäosat - alustariippumattomat"
-
-#: ../Pinta/Dialogs/AboutDialog.cs:126
+#: ../Pinta/Dialogs/AboutDialog.cs:145
 msgid "Contributors to this release:"
 msgstr "Tämän julkaisun osallistujat:"
 
-#: ../Pinta/Dialogs/AboutDialog.cs:138
-msgid "Previous contributors:"
-msgstr "Aiemmat osallistujat:"
+#: ../Pinta.Core/Actions/EditActions.cs:62
+msgid "Copy"
+msgstr "Kopioi"
 
-#: ../Pinta/Dialogs/AboutDialog.cs:149
-msgid "translator-credits"
-msgstr ""
-"Launchpad Contributions:\n"
-"  Beluga https://launchpad.net/~beluga\n"
-"  Cameron White https://launchpad.net/~cameronwhite91\n"
-"  Elias Ojala https://launchpad.net/~theel0ja\n"
-"  Jarno Ruokamo https://launchpad.net/~jarno-ruokamo\n"
-"  Jiri Grönroos https://launchpad.net/~jiri-gronroos\n"
-"  Jonathan Pobst https://launchpad.net/~jpobst\n"
-"  Kari Rantanen https://launchpad.net/~kari-rantanen\n"
-"  Lauri Kohtala https://launchpad.net/~lauri-kohtala-f\n"
-"  Tommi Saira https://launchpad.net/~tommisaira\n"
-"  Urmas https://launchpad.net/~urmas-2006"
+#: ../Pinta.Core/Actions/EditActions.cs:63
+msgid "Copy Merged"
+msgstr "Kopioi yhdistettynä"
 
-#: ../Pinta/Dialogs/AboutDialog.cs:152
-msgid "Translated by:"
-msgstr "Käännöksen tehnyt:"
+#: ../Pinta/Dialogs/VersionInformationTabPage.cs:67
+msgid "Copy Version Info"
+msgstr "Kopioi versiotiedot"
 
-#: ../Pinta/Dialogs/AboutDialog.cs:158
-msgid "Based on the work of Paint.NET:"
-msgstr "Perustuu ohjelmaan Paint.NET:"
-
-#: ../Pinta/Dialogs/AboutDialog.cs:165
-msgid "Using some icons from:"
-msgstr "Käyttää kuvakkeita kokoelmista:"
-
-#: ../Pinta/Dialogs/AboutDialog.cs:173
-msgid "Powered by Mono:"
-msgstr "Käyttää Monoa:"
-
-#: ../Pinta/Dialogs/AboutDialog.cs:280
-msgid "About Pinta"
-msgstr "Tietoja Pintasta"
-
-#: ../Pinta/Dialogs/AboutDialog.cs:298
-msgid "Version Info"
-msgstr "Versiotiedot"
-
-#: ../Pinta/Dialogs/AboutPintaTabPage.cs:42
-#: ../Pinta/Dialogs/VersionInformationTabPage.cs:50
-msgid "Version"
-msgstr "Versio"
-
-#: ../Pinta/Dialogs/AboutPintaTabPage.cs:51
-msgid "License"
-msgstr "Lisenssi"
-
-#: ../Pinta/Dialogs/AboutPintaTabPage.cs:51
-msgid "Released under the MIT X11 License."
-msgstr "Julkaistaan MIT X11 -lisenssin alaisena."
-
-#: ../Pinta/Dialogs/AboutPintaTabPage.cs:58
+#: ../Pinta/Dialogs/AboutPintaTabPage.cs:56
 msgid "Copyright"
 msgstr "Tekijänoikeus"
 
-#: ../Pinta/Dialogs/AboutPintaTabPage.cs:58
-msgid "by Pinta contributors"
-msgstr "Pinta-tekijöiden"
+#: ../Pinta/Actions/File/NewScreenshotAction.cs:70
+#, csharp-format
+msgid "Could not obtain the size of display '{0}'"
+msgstr "Näytön '{0}' kokoa ei saatu määritettyä"
 
-#: ../Pinta/Dialogs/ErrorDialog.cs:98
+#: ../Pinta.Core/Classes/Palette.cs:185
+#: ../Pinta.Core/Managers/WorkspaceManager.cs:376
+#: ../Pinta.Core/Managers/WorkspaceManager.cs:385
+#, csharp-format
+msgid "Could not open file: {0}"
+msgstr "Tiedostoa ei voitu avata: {0}"
+
+#: ../Pinta.Effects/Effects/AddNoiseEffect.cs:176
+msgid "Coverage"
+msgstr "Kattavuus"
+
+#: ../Pinta.Core/Actions/ImageActions.cs:47
+#: ../Pinta.Core/Actions/ImageActions.cs:292
+msgid "Crop to Selection"
+msgstr "Rajaa valintaan"
+
+#: ../Pinta.Effects/Adjustments/CurvesEffect.cs:27
+#: ../Pinta.Effects/Dialogs/Effects.CurvesDialog.cs:90
+msgid "Curves"
+msgstr "Käyrät"
+
+#: ../Pinta/Dialogs/NewImageDialog.cs:161
+#: ../Pinta/Dialogs/NewImageDialog.cs:201
+#: ../Pinta/Dialogs/NewImageDialog.cs:343
+#: ../Pinta/Dialogs/NewImageDialog.cs:431
+msgid "Custom"
+msgstr "Omavalintainen"
+
+#: ../Pinta.Core/Actions/EditActions.cs:61
+#: ../Pinta.Core/Actions/EditActions.cs:247
+msgid "Cut"
+msgstr "Leikkaa"
+
+#: ../Pinta.Core/Effects/UserBlendOps.cs:40
+msgid "Darken"
+msgstr "Tummenna"
+
+#: ../Pinta.Tools/Dashes/DashPatternBox.cs:71
+msgid "Dash"
+msgstr "Katkoviiva"
+
+#: ../Pinta/Actions/File/NewScreenshotAction.cs:52
+msgid "Delay before taking a screenshot (seconds):"
+msgstr "Viive ennen kuvankaappauksen ottamista (sekuntteja):"
+
+#: ../Pinta.Core/Actions/LayerActions.cs:51
+#: ../Pinta.Core/Actions/LayerActions.cs:295
+msgid "Delete Layer"
+msgstr "Poista taso"
+
+#: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:480
+msgid "Deleted"
+msgstr "Poistettu"
+
+#: ../Pinta.Core/Actions/EditActions.cs:258
+msgid "Deselect"
+msgstr "Poista valinta"
+
+#: ../Pinta.Core/Actions/EditActions.cs:71
+msgid "Deselect All"
+msgstr "Poista valinnat"
+
+#: ../Pinta/Dialogs/ErrorDialog.cs:99
 #: Mono.Addins.Gui/gtk-gui/Mono.Addins.Gui.ErrorDialog.cs:92
 #: Mono.Addins.Gui/gtk-gui/Mono.Addins.Gui.ProgressDialog.cs:66
 msgid "Details"
 msgstr "Lisätiedot"
 
-#: ../Pinta/Dialogs/ErrorDialog.cs:109
-msgid "Report Bug...."
-msgstr "Ilmoita ongelmasta..."
-
-#: ../Pinta/Dialogs/JpegCompressionDialog.cs:38
-msgid "JPEG Quality"
-msgstr "JPEG-laatu"
-
-#: ../Pinta/Dialogs/JpegCompressionDialog.cs:48
-msgid "Quality: "
-msgstr "Laatu: "
-
-#: ../Pinta/Dialogs/LayerPropertiesDialog.cs:174
-msgid "Name:"
-msgstr "Nimi:"
-
-#: ../Pinta/Dialogs/LayerPropertiesDialog.cs:182
-msgid "Visible"
-msgstr "Näkyvä"
-
-#: ../Pinta/Dialogs/LayerPropertiesDialog.cs:193
-msgid "Blend Mode"
-msgstr "Sekoitustila"
-
-#: ../Pinta/Dialogs/LayerPropertiesDialog.cs:204
-msgid "Opacity:"
-msgstr "Peittävyys:"
-
-#: ../Pinta/Dialogs/NewImageDialog.cs:162
-#: ../Pinta/Dialogs/NewImageDialog.cs:199
-#: ../Pinta/Dialogs/NewImageDialog.cs:342
-#: ../Pinta/Dialogs/NewImageDialog.cs:432
-msgid "Clipboard"
-msgstr "Leikepöytä"
-
-#: ../Pinta/Dialogs/NewImageDialog.cs:162
-#: ../Pinta/Dialogs/NewImageDialog.cs:201
-#: ../Pinta/Dialogs/NewImageDialog.cs:344
-#: ../Pinta/Dialogs/NewImageDialog.cs:432
-msgid "Custom"
-msgstr "Omavalintainen"
-
-#: ../Pinta/Dialogs/NewImageDialog.cs:193
-msgid "Preset:"
-msgstr "Esiasetus:"
-
-#: ../Pinta/Dialogs/NewImageDialog.cs:211
-#: ../Pinta/Dialogs/ResizeCanvasDialog.cs:334
-#: ../Pinta/Dialogs/ResizeImageDialog.cs:170
-msgid "Width:"
-msgstr "Leveys:"
-
-#: ../Pinta/Dialogs/NewImageDialog.cs:218
-#: ../Pinta/Dialogs/NewImageDialog.cs:235
-#: ../Pinta/Dialogs/ResizeCanvasDialog.cs:336
-#: ../Pinta/Dialogs/ResizeCanvasDialog.cs:342
-#: ../Pinta/Dialogs/ResizeImageDialog.cs:172
-#: ../Pinta/Dialogs/ResizeImageDialog.cs:178
-msgid "pixels"
-msgstr "pikseliä"
-
-#: ../Pinta/Dialogs/NewImageDialog.cs:228
-#: ../Pinta/Dialogs/ResizeCanvasDialog.cs:340
-#: ../Pinta/Dialogs/ResizeImageDialog.cs:176
-msgid "Height:"
-msgstr "Korkeus:"
-
-#: ../Pinta/Dialogs/NewImageDialog.cs:245
-msgid "Orientation:"
-msgstr "Suunta:"
-
-#: ../Pinta/Dialogs/NewImageDialog.cs:248
-msgid "Portrait"
-msgstr "Pysty"
-
-#: ../Pinta/Dialogs/NewImageDialog.cs:256
-msgid "Landscape"
-msgstr "Vaaka"
-
-#: ../Pinta/Dialogs/NewImageDialog.cs:271
-msgid "Background:"
-msgstr "Tausta:"
-
-#: ../Pinta/Dialogs/NewImageDialog.cs:274
-msgid "White"
-msgstr "Valkoinen"
-
-#: ../Pinta/Dialogs/NewImageDialog.cs:282
-msgid "Background Color"
-msgstr "Taustaväri"
-
-#: ../Pinta/Dialogs/NewImageDialog.cs:319
-msgid "Preview"
-msgstr "Esikatsele"
-
-#: ../Pinta/Dialogs/ResizeCanvasDialog.cs:313
-#: ../Pinta/Dialogs/ResizeImageDialog.cs:149
-msgid "By percentage:"
-msgstr "Prosentin mukaan:"
-
-#: ../Pinta/Dialogs/ResizeCanvasDialog.cs:314
-#: ../Pinta/Dialogs/ResizeImageDialog.cs:150
-msgid "By absolute size:"
-msgstr "Koon mukaan:"
-
-#: ../Pinta/Dialogs/ResizeCanvasDialog.cs:320
-#: ../Pinta/Dialogs/ResizeImageDialog.cs:156
-msgid "Maintain aspect ratio"
-msgstr "Säilytä kuvasuhde"
-
-#: ../Pinta/Dialogs/ResizeCanvasDialog.cs:348
-msgid "Anchor:"
-msgstr "Ankkuri:"
-
-#: ../Pinta/Dialogs/VersionInformationTabPage.cs:44
-msgid "Title"
-msgstr "Nimi"
-
-#: ../Pinta/Dialogs/VersionInformationTabPage.cs:53
-msgid "Path"
-msgstr "Polku"
-
-#: ../Pinta/Main.cs:57
-msgid "Show this message and exit."
-msgstr "Näytä viesti ja poistu."
-
-#: ../Pinta/Main.cs:58
-msgid "Display the application version."
-msgstr "Näytä ohjelmaversio."
-
-#: ../Pinta/Main.cs:59
-msgid "number of threads to use for rendering"
-msgstr "renderointiin käytettävät säikeet"
-
-#: ../Pinta/Main.cs:107
-msgid "Usage: pinta [files]"
-msgstr "Käyttö: pinta [tiedostot]"
-
-#: ../Pinta/Main.cs:109
-msgid "Options: "
-msgstr "Asetukset: "
-
-#: ../Pinta/MainWindow.cs:309
-msgid "_File"
-msgstr "_Tiedosto"
-
-#: ../Pinta/MainWindow.cs:310
-msgid "_Edit"
-msgstr "_Muokkaa"
-
-#: ../Pinta/MainWindow.cs:312
-msgid "_View"
-msgstr "_Näytä"
-
-#: ../Pinta/MainWindow.cs:315
-msgid "_Image"
-msgstr "_Kuva"
-
-#: ../Pinta/MainWindow.cs:316
-msgid "_Layers"
-msgstr "T_asot"
-
-#: ../Pinta/MainWindow.cs:317
-msgid "_Adjustments"
-msgstr "_Säädöt"
-
-#: ../Pinta/MainWindow.cs:318
-msgid "Effe_cts"
-msgstr "T_ehosteet"
-
-#: ../Pinta/MainWindow.cs:319
-msgid "A_dd-ins"
-msgstr "A_dd-ins"
-
-#: ../Pinta/MainWindow.cs:321
-msgid "_Window"
-msgstr "_Ikkuna"
-
-#: ../Pinta/MainWindow.cs:325
-msgid "Tool Windows"
-msgstr "Työkaluikkunat"
-
-#: ../Pinta/MainWindow.cs:329
-msgid "_Help"
-msgstr "_Ohje"
-
-#: ../Pinta/MainWindow.cs:551
-msgid "Downloading Image"
-msgstr ""
-
-#: ../Pinta/MainWindow.cs:569
-msgid "Download failed"
-msgstr ""
-
-#: ../Pinta/MainWindow.cs:570
-#, csharp-format
-msgid ""
-"Unable to download image from {0}.\n"
-"Details: {1}"
-msgstr ""
-
-#: ../Pinta/Options.cs:486
-msgid "OptionName"
-msgstr "OptionName"
-
-#: ../Pinta/Pads/CanvasPad.cs:54
-msgid "Canvas"
-msgstr "Piirtopohja"
-
-#: ../Pinta/Pads/HistoryPad.cs:43 ../Pinta/Pads/HistoryPad.cs:52
-msgid "History"
-msgstr "Historia"
-
-#: ../Pinta/Pads/LayersPad.cs:43 ../Pinta/Pads/LayersPad.cs:56
-msgid "Layers"
-msgstr "Tasot"
-
-#: ../Pinta/Pads/OpenImagesPad.cs:41 ../Pinta/Pads/OpenImagesPad.cs:48
-msgid "Images"
-msgstr "Kuvat"
-
-#: ../Pinta/Pads/ToolBoxPad.cs:42 ../Pinta/Pads/ToolBoxPad.cs:49
-msgid "Tools"
-msgstr "Työkalut"
-
-#: Polar Inversion dialog
-msgid "Edge Behavior"
-msgstr "Reunan käyttäytyminen"
-
-#: Mono.Addins.Gui/Mono.Addins.Gui/AddinInfoView.cs:123
-msgid ""
-"Multiple selection:\n"
-"\n"
-msgstr ""
-"Usea valinta:\n"
-"\n"
-
-#: Mono.Addins.Gui/Mono.Addins.Gui/AddinInfoView.cs:160
-msgid "Enable"
-msgstr "Ota käyttöön"
+#: ../Pinta.Core/Effects/UserBlendOps.cs:38
+msgid "Difference"
+msgstr "Erottava"
 
 #: Mono.Addins.Gui/Mono.Addins.Gui/AddinInfoView.cs:163
 #: Mono.Addins.Gui/gtk-gui/Mono.Addins.Gui.AddinInfoView.cs:270
 msgid "Disable"
 msgstr "Poista käytöstä"
 
-#: Mono.Addins.Gui/Mono.Addins.Gui/AddinInfoView.cs:178
-msgid "No selection"
-msgstr "Ei valintaa"
+#: ../Pinta/Main.cs:61
+msgid "Display the application version."
+msgstr "Näytä ohjelmaversio."
 
-#: Mono.Addins.Gui/Mono.Addins.Gui/AddinInfoView.cs:217
-msgid "Available in repository:"
-msgstr "Saatavilla pakettivarastossa:"
+#: ../Pinta.Effects/Effects/FragmentEffect.cs:113
+#: ../Pinta.Effects/Effects/MotionBlurEffect.cs:113
+msgid "Distance"
+msgstr "Etäisyys"
 
-#: Mono.Addins.Gui/Mono.Addins.Gui/AddinInfoView.cs:256
-msgid "Update available"
-msgstr "Päivitys saatavilla"
+#: ../Pinta.Effects/Effects/BulgeEffect.cs:32
+#: ../Pinta.Effects/Effects/FrostedGlassEffect.cs:32
+#: ../Pinta.Effects/Effects/PixelateEffect.cs:36
+#: ../Pinta.Effects/Effects/PolarInversionEffect.cs:36
+#: ../Pinta.Effects/Effects/TileEffect.cs:32
+#: ../Pinta.Effects/Effects/TwistEffect.cs:32
+msgid "Distort"
+msgstr "Vääristä"
 
-#: Mono.Addins.Gui/Mono.Addins.Gui/AddinInfoView.cs:263
-msgid "This add-in can't be loaded due to missing dependencies"
-msgstr "Tätä lisäosapekttia ei voi ladata puuttuvien riippuvuiden takia"
+#: ../Pinta.Tools/Tools/ColorPickerTool.cs:206
+msgid "Do not switch tool"
+msgstr "Älä vaihda työkalua"
 
-#: Mono.Addins.Gui/Mono.Addins.Gui/AddinInfoView.cs:270
-#, csharp-format
-msgid "Required: {0} v{1}, found v{2}"
-msgstr "Vaatii: {0} v{1}, löytyi v{2}"
+#: ../Pinta/Actions/Edit/PasteAction.cs:174
+msgid "Don't change canvas size"
+msgstr "Pidä pohjan koko"
 
-#: Mono.Addins.Gui/Mono.Addins.Gui/AddinInfoView.cs:272
-#, csharp-format
-msgid "Missing: {0} v{1}"
-msgstr "Puuttuu: {0} v{1}"
-
-#: Mono.Addins.Gui/Mono.Addins.Gui/AddinInfoView.cs:286
-msgid "Installed version"
-msgstr "Asennettu versio"
-
-#: Mono.Addins.Gui/Mono.Addins.Gui/AddinInfoView.cs:287
-msgid "Repository version"
-msgstr "Pakettivaraston versio"
+#: ../Pinta/MainWindow.cs:567
+msgid "Download failed"
+msgstr "Lataus epäonnistui"
 
 #: Mono.Addins.Gui/Mono.Addins.Gui/AddinInfoView.cs:293
 msgid "Download size"
 msgstr "Latauksen koko"
 
-#: Mono.Addins.Gui/Mono.Addins.Gui/AddinInfoView.cs:295
-msgid "The following depedencies required by this add-in are not available:"
-msgstr "Seuraavia lisäosan riippuvuuksia ei ollut saatavilla:"
+#: ../Pinta/MainWindow.cs:548
+msgid "Downloading Image"
+msgstr "Ladataan kuvaa"
+
+#: ../Pinta.Core/Actions/LayerActions.cs:52
+#: ../Pinta.Core/Actions/LayerActions.cs:286
+msgid "Duplicate Layer"
+msgstr "Monista taso"
+
+#: ../xdg/pinta.desktop.in.h:2
+msgid "Easily create and edit images"
+msgstr "Luo ja muokkaa kuvia vaivatta"
+
+#: Polar Inversion dialog
+msgid "Edge Behavior"
+msgstr "Reunan käyttäytyminen"
+
+#: ../Pinta.Effects/Effects/EdgeDetectEffect.cs:27
+msgid "Edge Detect"
+msgstr "Reunan tunnistus"
+
+#: ../Pinta/MainWindow.cs:342
+msgid "Effe_cts"
+msgstr "T_ehosteet"
+
+#: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:324
+#: ../Pinta.Tools/Editable/EditEngines/EllipseEditEngine.cs:38
+#: ../Pinta.Tools/Tools/EllipseTool.cs:39
+msgid "Ellipse"
+msgstr "Ellipsi"
+
+#: ../Pinta.Tools/Tools/EllipseSelectTool.cs:39
+msgid "Ellipse Select"
+msgstr "Ellipsivalinta"
+
+#: ../Pinta.Effects/Effects/EmbossEffect.cs:24
+msgid "Emboss"
+msgstr "Korkokuva"
+
+#: Mono.Addins.Gui/Mono.Addins.Gui/AddinInfoView.cs:160
+msgid "Enable"
+msgstr "Ota käyttöön"
+
+#: ../Pinta.Core/Actions/EditActions.cs:67
+#: ../Pinta.Core/Actions/EditActions.cs:249
+msgid "Erase Selection"
+msgstr "Poista valinta"
+
+#: ../Pinta.Tools/Tools/EraserTool.cs:55
+msgid "Eraser"
+msgstr "Pyyhin"
+
+#: ../Pinta/Actions/File/SaveDocumentImplementationAction.cs:186
+msgid "Error"
+msgstr "Virhe"
+
+#: Mono.Addins.Gui/Mono.Addins.Gui/Services.cs:64
+#: Mono.Addins.Gui/Mono.Addins.Gui/Services.cs:73
+#, csharp-format
+msgid "Exception occurred: {0}"
+msgstr "Tapahtui poikkeus: {0}"
+
+#: ../Pinta.Core/Classes/SelectionModeHandler.cs:50
+msgid "Exclude (-) (Right Click)"
+msgstr "Vähennä (-) (Ctrl + Oikea hiiri)"
+
+#: ../Pinta/Actions/Edit/PasteAction.cs:173
+msgid "Expand canvas"
+msgstr "Laajenna pohjaa"
+
+#: ../Pinta.Effects/Effects/JuliaFractalEffect.cs:130
+#: ../Pinta.Effects/Effects/MandelbrotFractalEffect.cs:153
+msgid "Factor"
+msgstr "Kerroin"
+
+#: ../Pinta.Core/Managers/WorkspaceManager.cs:403
+msgid "Failed to open image"
+msgstr "Kuvan avaaminen epäonnistui"
+
+#: ../Pinta/Actions/File/SaveDocumentImplementationAction.cs:209
+msgid "Failed to save image"
+msgstr "Kuvan tallentaminen epäonnistui"
+
+#: ../Pinta/Actions/File/NewScreenshotAction.cs:69
+msgid "Failed to take screenshot"
+msgstr "Kuvakaappauksen ottaminen epäonnistui"
+
+#: ../Pinta.Core/Actions/HelpActions.cs:46
+msgid "File a Bug"
+msgstr "Ilmoita virheestä"
+
+#: ../Pinta.Tools/Tools/TextTool.cs:227
+msgid "Fill Background"
+msgstr "Täytä tausta"
+
+#: ../Pinta.Core/Actions/EditActions.cs:68
+#: ../Pinta.Core/Actions/EditActions.cs:209
+msgid "Fill Selection"
+msgstr "Täytä valinta"
+
+#: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:300
+#: ../Pinta.Tools/Tools/FreeformShapeTool.cs:229
+msgid "Fill Shape"
+msgstr "Täytön muoto"
+
+#: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:292
+#: ../Pinta.Tools/Tools/FreeformShapeTool.cs:222
+msgid "Fill Style"
+msgstr "Piirtotyyli"
+
+#: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:301
+#: ../Pinta.Tools/Tools/FreeformShapeTool.cs:230
+msgid "Fill and Outline Shape"
+msgstr "Täytön ja reunan muoto"
+
+#: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:1100
+#: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:1471
+msgid "Finalized"
+msgstr "Viimeistelty"
+
+#: ../Pinta.Core/HistoryItems/FinishPixelsHistoryItem.cs:42
+msgid "Finish Pixels"
+msgstr "Viimeistele pikselit"
+
+#: ../Pinta.Core/Actions/ImageActions.cs:56
+#: ../Pinta.Core/Actions/ImageActions.cs:156
+msgid "Flatten"
+msgstr "Yhdistä tasot"
+
+#: ../Pinta.Core/Actions/ImageActions.cs:51
+#: ../Pinta.Core/Actions/LayerActions.cs:55
+msgid "Flip Horizontal"
+msgstr "Käännä vaakatasossa"
+
+#: ../Pinta.Core/HistoryItems/InvertHistoryItem.cs:53
+msgid "Flip Image Horizontal"
+msgstr "Käännä kuva vaakatasossa"
+
+#: ../Pinta.Core/HistoryItems/InvertHistoryItem.cs:57
+msgid "Flip Image Vertical"
+msgstr "Käännä kuva pystytasossa"
+
+#: ../Pinta.Core/HistoryItems/InvertHistoryItem.cs:78
+msgid "Flip Layer Horizontal"
+msgstr "Käännä taso vaakatasossa"
+
+#: ../Pinta.Core/HistoryItems/InvertHistoryItem.cs:82
+msgid "Flip Layer Vertical"
+msgstr "Käännä taso pystytasossa"
+
+#: ../Pinta.Core/Actions/ImageActions.cs:52
+#: ../Pinta.Core/Actions/LayerActions.cs:56
+msgid "Flip Vertical"
+msgstr "Käännä pystytasossa"
+
+#: ../Pinta.Tools/Tools/FloodTool.cs:126
+msgid "Flood Mode"
+msgstr "Tulvatila"
+
+#: ../Pinta.Tools/Tools/TextTool.cs:143
+msgid "Font"
+msgstr "Kirjasin"
+
+#: ../Pinta.Effects/Effects/FragmentEffect.cs:24
+msgid "Fragment"
+msgstr "Pirstaloi"
+
+#: ../Pinta.Effects/Effects/FragmentEffect.cs:110
+msgid "Fragments"
+msgstr "Pirstaleet"
+
+#: ../Pinta.Tools/Tools/FreeformShapeTool.cs:53
+msgid "Freeform Shape"
+msgstr "Vapaa muoto"
+
+#: ../Pinta.Effects/Effects/FrostedGlassEffect.cs:24
+msgid "Frosted Glass"
+msgstr "Jäätynyt lasi"
+
+#: ../Pinta.Core/Actions/ViewActions.cs:77
+msgid "Fullscreen"
+msgstr "Koko näyttö"
+
+#: Mono.Addins.Gui/Mono.Addins.Gui/AddinManagerDialog.cs:131
+#: Mono.Addins.Gui/Mono.Addins.Gui/AddinManagerDialog.cs:325
+#: Mono.Addins.Gui/gtk-gui/Mono.Addins.Gui.AddinManagerDialog.cs:347
+msgid "Gallery"
+msgstr "Kokoelma"
+
+#: ../Pinta.Effects/Effects/GaussianBlurEffect.cs:24
+msgid "Gaussian Blur"
+msgstr "Gauss-sumennus"
+
+#: ../Pinta.Tools/Tools/FloodTool.cs:137
+msgid "Global"
+msgstr "Globaali"
+
+#: ../Pinta.Effects/Effects/GlowEffect.cs:29
+msgid "Glow"
+msgstr "Hehku"
+
+#: ../Pinta.Tools/Tools/GradientTool.cs:50
+#: ../Pinta.Tools/Tools/GradientTool.cs:154
+msgid "Gradient"
+msgstr "Väriliukuma"
+
+#: ../Pinta.Effects/Dialogs/Effects.CurvesDialog.cs:453
+#: ../Pinta.Effects/Dialogs/Effects.LevelsDialog.cs:523
+#: ../Pinta.Effects/Dialogs/Effects.PosterizeDialog.cs:117
+msgid "Green"
+msgstr "Vihreä"
+
+#: ../Pinta.Tools/Brushes/GridBrush.cs:37
+msgid "Grid"
+msgstr "Ristikot"
+
+#: ../Pinta.Core/Effects/UserBlendOps.cs:43
+msgid "Hard Light"
+msgstr "Kova valo"
+
+#: ../Pinta/Dialogs/NewImageDialog.cs:230
+#: ../Pinta/Dialogs/ResizeCanvasDialog.cs:339
+#: ../Pinta/Dialogs/ResizeImageDialog.cs:175
+msgid "Height:"
+msgstr "Korkeus:"
+
+#: ../Pinta/Actions/Layers/LayerPropertiesAction.cs:104
+msgid "Hide Layer"
+msgstr "Piilota taso"
+
+#: ../Pinta.Effects/Effects/RedEyeRemoveEffect.cs:75
+msgid "Hint: For best results, first use selection tools to select each eye."
+msgstr ""
+"Vihje: Parhaan tuloksen saamiseksi käytä valintatyökalua ja valitse "
+"kummatkin silmät ennen käyttöä."
+
+#: ../Pinta/Pads/HistoryPad.cs:40 ../Pinta/Pads/HistoryPad.cs:56
+msgid "History"
+msgstr "Historia"
+
+#: ../Pinta.Core/Effects/UserBlendOps.cs:47
+#: ../Pinta.Effects/Adjustments/HueSaturationEffect.cs:67
+msgid "Hue"
+msgstr "Sävy"
+
+#: ../Pinta.Effects/Adjustments/HueSaturationEffect.cs:26
+msgid "Hue / Saturation"
+msgstr "Sävy / Värikylläisyys"
+
+#: ../Pinta/Actions/File/SaveDocumentImplementationAction.cs:200
+msgid "ICO files can not be larger than 255 x 255 pixels."
+msgstr "ICO-tiedostot voivat olla korkeintaan 255x255 pikselin kokoisia"
+
+#: ../Pinta/Actions/File/CloseDocumentAction.cs:61
+msgid "If you don't save, all changes will be permanently lost."
+msgstr "Jos tallennusta ei tehdä, kaikki muutokset häviävät lopullisesti."
+
+#: ../Pinta.Tools/Tools/ColorPickerTool.cs:244
+msgid "Image"
+msgstr "Kuva"
+
+#: ../xdg/pinta.desktop.in.h:3
+msgid "Image Editor"
+msgstr "Kuvankäsittely"
+
+#: ../Pinta.Core/Actions/ViewActions.cs:71
+msgid "Image Tabs"
+msgstr "Kuvavälilehdet"
+
+#: ../Pinta/Actions/Edit/PasteAction.cs:159
+msgid "Image cannot be pasted"
+msgstr "Kuvaa ei voi liittää"
+
+#: ../Pinta/Actions/File/OpenDocumentAction.cs:58
+#: ../Pinta.Core/Actions/LayerActions.cs:182
+msgid "Image files"
+msgstr "Kuvatiedostot"
+
+#: ../Pinta/Actions/Edit/PasteAction.cs:168
+msgid "Image larger than canvas"
+msgstr "Kuva on suurempi kuin pohja"
+
+#: ../Pinta/Actions/File/SaveDocumentImplementationAction.cs:199
+msgid "Image too large"
+msgstr "Kuva on liian iso"
+
+#: ../Pinta.Core/Actions/LayerActions.cs:206
+msgid "Import From File"
+msgstr "Tuo tiedostosta"
+
+#: ../Pinta.Core/Actions/LayerActions.cs:54
+msgid "Import from File..."
+msgstr "Tuo tiedostosta..."
+
+#: ../Pinta.Core/Actions/ViewActions.cs:161
+msgid "Inches"
+msgstr "Tuumaa"
+
+#: ../Pinta.Effects/Effects/InkSketchEffect.cs:164
+msgid "Ink Outline"
+msgstr "Mustereunus"
+
+#: ../Pinta.Effects/Effects/InkSketchEffect.cs:32
+msgid "Ink Sketch"
+msgstr "Musteluonnos"
+
+#: ../Pinta.Effects/Dialogs/Effects.LevelsDialog.cs:585
+msgid "Input"
+msgstr "Sisääntulo"
+
+#: ../Pinta.Effects/Dialogs/Effects.LevelsDialog.cs:573
+msgid "Input Histogram"
+msgstr "Sisääntulon histogrammi"
+
+#: Mono.Addins.Gui/gtk-gui/Mono.Addins.Gui.InstallDialog.cs:126
+msgid "Install"
+msgstr "Asenna"
+
+#: Mono.Addins.Gui/Mono.Addins.Gui/AddinManagerDialog.cs:513
+msgid "Install Add-in Package"
+msgstr "Asenna lisäosapaketti"
+
+#: Mono.Addins.Gui/gtk-gui/Mono.Addins.Gui.AddinManagerDialog.cs:373
+msgid "Install from file..."
+msgstr "Asenna tiedostosta..."
+
+#: Mono.Addins.Gui/gtk-gui/Mono.Addins.Gui.AddinInfoView.cs:229
+msgid "Install..."
+msgstr "Asenna..."
 
 #: Mono.Addins.Gui/Mono.Addins.Gui/AddinInstaller.cs:16
 msgid "Installation cancelled"
 msgstr "Asennus peruttiin"
-
-#: Mono.Addins.Gui/Mono.Addins.Gui/AddinInstallerDialog.cs:159
-msgid "Some of the required add-ins were not found"
-msgstr "Joitain tarvittavia lisäosia ei löytynyt"
 
 #: Mono.Addins.Gui/Mono.Addins.Gui/AddinInstallerDialog.cs:171
 msgid "Installation failed"
@@ -2224,102 +949,1106 @@ msgstr "Asennus epäonnistui"
 msgid "Installed"
 msgstr "Asennettu"
 
-#: Mono.Addins.Gui/Mono.Addins.Gui/AddinManagerDialog.cs:123
-#: Mono.Addins.Gui/Mono.Addins.Gui/AddinManagerDialog.cs:364
-#: Mono.Addins.Gui/gtk-gui/Mono.Addins.Gui.AddinManagerDialog.cs:247
-msgid "Updates"
-msgstr "Päivitykset"
+#: Mono.Addins.Gui/Mono.Addins.Gui/AddinInfoView.cs:286
+msgid "Installed version"
+msgstr "Asennettu versio"
 
-#: Mono.Addins.Gui/Mono.Addins.Gui/AddinManagerDialog.cs:131
-#: Mono.Addins.Gui/Mono.Addins.Gui/AddinManagerDialog.cs:325
-#: Mono.Addins.Gui/gtk-gui/Mono.Addins.Gui.AddinManagerDialog.cs:347
-msgid "Gallery"
-msgstr "Kokoelma"
+#: Mono.Addins.Gui/Mono.Addins.Gui/InstallDialog.cs:209
+msgid "Installing Add-ins"
+msgstr "Asennetaan lisäosia"
 
-#: Mono.Addins.Gui/Mono.Addins.Gui/AddinManagerDialog.cs:261
-msgid "All repositories"
-msgstr "Kaikki pakettivarastot"
+#: ../Pinta.Effects/Effects/AddNoiseEffect.cs:170
+#: ../Pinta.Effects/Effects/OutlineEffect.cs:144
+#: ../Pinta.Effects/Effects/TileEffect.cs:144
+msgid "Intensity"
+msgstr "Voimakkuus"
+
+#. Translators: {0} is 'Alt', or a platform-specific key such as 'Option' on macOS.
+#: ../Pinta.Core/Classes/SelectionModeHandler.cs:54
+#, csharp-format
+msgid "Intersect ({0} + Left Click)"
+msgstr ""
+
+#: ../Pinta.Effects/Adjustments/InvertColorsEffect.cs:25
+#: ../Pinta.Effects/Effects/MandelbrotFractalEffect.cs:166
+msgid "Invert Colors"
+msgstr "Käännä värit"
+
+#: ../Pinta.Core/Actions/EditActions.cs:69
+#: ../Pinta.Core/Actions/EditActions.cs:456
+msgid "Invert Selection"
+msgstr "Käännä valinta"
+
+#: ../Pinta.Tools/Tools/TextTool.cs:168
+msgid "Italic"
+msgstr "Kursivoitu"
+
+#: ../Pinta/Dialogs/JpegCompressionDialog.cs:38
+msgid "JPEG Quality"
+msgstr "JPEG-laatu"
+
+#: ../Pinta.Effects/Effects/JuliaFractalEffect.cs:24
+msgid "Julia Fractal"
+msgstr "Julian joukko"
+
+#: ../Pinta/Dialogs/NewImageDialog.cs:256
+msgid "Landscape"
+msgstr "Vaaka"
+
+#: ../Pinta.Tools/Tools/LassoSelectTool.cs:53
+msgid "Lasso Select"
+msgstr "Lassovalinta"
+
+#: ../Pinta.Tools/Tools/ColorPickerTool.cs:243
+msgid "Layer"
+msgstr "Taso"
+
+#: ../Pinta.Gui.Widgets/Widgets/Layers/LayersListWidget.cs:286
+msgid "Layer Hidden"
+msgstr "Taso piilotettu"
+
+#: ../Pinta/Actions/Layers/LayerPropertiesAction.cs:94
+msgid "Layer Opacity"
+msgstr "Tason peittävyys"
+
+#: ../Pinta/Actions/Layers/LayerPropertiesAction.cs:109
+#: ../Pinta/Dialogs/LayerPropertiesDialog.cs:51
+msgid "Layer Properties"
+msgstr "Tason ominaisuudet"
+
+#: ../Pinta.Core/Actions/LayerActions.cs:60
+msgid "Layer Properties..."
+msgstr "Tason ominaisuudet..."
+
+#: ../Pinta.Gui.Widgets/Widgets/Layers/LayersListWidget.cs:286
+msgid "Layer Shown"
+msgstr "Taso esillä"
+
+#. Translators: {0} is a unique id for new layers, e.g. "Layer 2".
+#: ../Pinta.Core/Classes/DocumentLayers.cs:135
+#, csharp-format
+msgid "Layer {0}"
+msgstr "Taso {0}"
+
+#: ../Pinta/Pads/LayersPad.cs:40 ../Pinta/Pads/LayersPad.cs:60
+msgid "Layers"
+msgstr "Tasot"
+
+#: ../Pinta.Tools/Tools/TextTool.cs:188
+msgid "Left Align"
+msgstr "Tasaa vasemmalle"
+
+#. Translators: {0} is 'Ctrl', or a platform-specific key such as 'Command' on macOS.
+#: ../Pinta.Tools/Tools/MoveSelectedTool.cs:46
+#, csharp-format
+msgid ""
+"Left click and drag the selection to move selected content. Hold {0} to "
+"scale instead of move. Right click and drag the selection to rotate selected "
+"content. Hold Shift to rotate in steps. Use arrow keys to move selected "
+"content by a single pixel."
+msgstr ""
+
+#. Translators: {0} is 'Ctrl', or a platform-specific key such as 'Command' on macOS.
+#: ../Pinta.Tools/Tools/MoveSelectionTool.cs:45
+#, csharp-format
+msgid ""
+"Left click and drag the selection to move selection outline. Hold {0} to "
+"scale instead of move. Right click and drag the selection to rotate "
+"selection outline. Hold Shift to rotate in steps. Use arrow keys to move "
+"selection outline by a single pixel."
+msgstr ""
+
+#. Translators: {0} is 'Ctrl', or a platform-specific key such as 'Command' on macOS.
+#: ../Pinta.Tools/Tools/ShapeTool.cs:49
+#, csharp-format
+msgid ""
+"Left click to draw a shape with the primary color.\n"
+"Left click on a shape to add a control point.\n"
+"Left click on a control point and drag to move it.\n"
+"Right click on a control point and drag to change its tension.\n"
+"Hold Shift to snap to angles.\n"
+"Use arrow keys to move the selected control point.\n"
+"Press {0} + left/right arrows to select control points by order.\n"
+"Press Delete to delete the selected control point.\n"
+"Press Space to add a new control point at the mouse position.\n"
+"Hold {0} while pressing Space to create the control point at the exact same "
+"position.\n"
+"Hold {0} while left clicking on a control point to create a new shape at the "
+"exact same position.\n"
+"Hold {0} while clicking outside of the image bounds to create a new shape "
+"starting at the edge.\n"
+"Press Enter to finalize the shape."
+msgstr ""
+
+#: ../Pinta.Tools/Tools/PencilTool.cs:50
+msgid ""
+"Left click to draw freeform one-pixel wide lines with the primary color. "
+"Right click to use the secondary color."
+msgstr ""
+"Hiiren vasemmalla piirrät vapaamuotoisia yhden pikselin levyisiä viivoja "
+"edustavärillä. Oikella näppäimellä taustavärin värisiä."
+
+#: ../Pinta.Tools/Tools/FreeformShapeTool.cs:55
+#: ../Pinta.Tools/Tools/PaintBrushTool.cs:62
+msgid ""
+"Left click to draw with primary color, right click to draw with secondary "
+"color."
+msgstr ""
+"Vasemmalla napilla piirrät edustavärillä, oikealla napilla taustavärillä."
+
+#: ../Pinta.Tools/Tools/EraserTool.cs:57
+msgid ""
+"Left click to erase to transparent, right click to erase to secondary color. "
+msgstr ""
+"Vasemmalla hiiren napilla pyyhit läpinäkyväksi, oikealla pyyhit "
+"taustavärillä. "
+
+#: ../Pinta.Tools/Tools/PaintBucketTool.cs:46
+msgid ""
+"Left click to fill a region with the primary color, right click to fill with "
+"the secondary color."
+msgstr ""
+"Vasemmalla napilla täytät alueen edustavärillä, oikealla napilla täytät "
+"taustavärillä."
+
+#: ../Pinta.Tools/Tools/TextTool.cs:91
+msgid ""
+"Left click to place cursor, then type desired text. Text color is primary "
+"color."
+msgstr ""
+"Napsauta vasemmalla sijoittaaksesi kursorin, ja kirjoita teksti. Väri on "
+"edustaväri."
+
+#: ../Pinta.Tools/Tools/RecolorTool.cs:59
+msgid ""
+"Left click to replace the secondary color with the primary color. Right "
+"click to reverse."
+msgstr ""
+"Vasen napsautus toissijaisen värin korvaamiseksi ensisijaisella värillä. "
+"Käänteinen toiminto oikealla napsautuksella."
+
+#: ../Pinta.Gui.Widgets/Widgets/StatusBarColorPaletteWidget.cs:220
+#: ../Pinta.Tools/Tools/ColorPickerTool.cs:54
+msgid "Left click to set primary color. Right click to set secondary color."
+msgstr ""
+"Vasemmalla hiiren napilla valitset edustavärin, oikealla valitset "
+"taustavärin."
+
+#: ../Pinta.Gui.Widgets/Widgets/StatusBarColorPaletteWidget.cs:216
+msgid ""
+"Left click to set primary color. Right click to set secondary color. Middle "
+"click to choose palette color."
+msgstr ""
+"Vasemmalla hiirennäppäimellä valitset edustavärin. Oikealla näppäimellä "
+"valitset taustavärin. Keskinapilla valitset paletin värin."
+
+#: ../Pinta.Tools/Tools/ZoomTool.cs:58
+msgid ""
+"Left click to zoom in. Right click to zoom out. Click and drag to zoom in "
+"selection."
+msgstr ""
+"Vasemmalla napilla suurennat, oikealla pienennät. Napsauta ja siirrä "
+"luodaksesi valinnan."
+
+#: ../Pinta.Tools/Editable/EditEngines/ArrowedEditEngine.cs:332
+msgid "Length"
+msgstr "Pituus"
+
+#: ../Pinta.Effects/Adjustments/LevelsEffect.cs:23
+msgid "Levels"
+msgstr "Sävyala"
+
+#: ../Pinta.Effects/Dialogs/Effects.LevelsDialog.cs:72
+msgid "Levels Adjustment"
+msgstr "Sävyjen säädöt"
+
+#: ../Pinta/Dialogs/AboutPintaTabPage.cs:50
+msgid "License"
+msgstr "Lisenssi"
+
+#: ../Pinta.Core/Effects/UserBlendOps.cs:39
+msgid "Lighten"
+msgstr "Kevennä"
+
+#: ../Pinta.Effects/Effects/SoftenPortraitEffect.cs:120
+msgid "Lighting"
+msgstr "Valaistus"
+
+#: ../Pinta.Effects/Adjustments/HueSaturationEffect.cs:73
+msgid "Lightness"
+msgstr "Vaaleus"
+
+#: ../Pinta.Tools/Tools/LineCurveTool.cs:39
+msgid "Line/Curve"
+msgstr "Viiva/Käyrä"
+
+#: ../Pinta.Tools/Tools/GradientTool.cs:162
+msgid "Linear Diamond Gradient"
+msgstr "Timantti"
+
+#: ../Pinta.Tools/Tools/GradientTool.cs:160
+msgid "Linear Gradient"
+msgstr "Lineaari"
+
+#: ../Pinta.Tools/Tools/GradientTool.cs:161
+msgid "Linear Reflected Gradient"
+msgstr "Lineaari (Peilattu)"
+
+#: ../Pinta.Effects/Dialogs/Effects.PosterizeDialog.cs:124
+msgid "Linked"
+msgstr "Kytketty"
+
+#: ../Pinta.Core/Effects/UserBlendOps.cs:46
+#: ../Pinta.Effects/Dialogs/Effects.CurvesDialog.cs:433
+msgid "Luminosity"
+msgstr "Värin kirkkaus"
+
+#: ../Pinta.Tools/Tools/MagicWandTool.cs:48
+msgid "Magic Wand Select"
+msgstr "Taikasauva"
+
+#: ../Pinta/Dialogs/ResizeCanvasDialog.cs:319
+#: ../Pinta/Dialogs/ResizeImageDialog.cs:155
+msgid "Maintain aspect ratio"
+msgstr "Säilytä kuvasuhde"
 
 #: Mono.Addins.Gui/Mono.Addins.Gui/AddinManagerDialog.cs:268
 msgid "Manage Repositories..."
 msgstr "Hallitse pakettivarastoja..."
 
-#: Mono.Addins.Gui/Mono.Addins.Gui/AddinManagerDialog.cs:363
+#: ../Pinta.Effects/Effects/MandelbrotFractalEffect.cs:24
+msgid "Mandelbrot Fractal"
+msgstr "Mandelbrotin joukko"
+
+#: ../Pinta.Effects/Effects/MedianEffect.cs:27
+msgid "Median"
+msgstr "Mediaani"
+
+#: ../Pinta.Core/Actions/LayerActions.cs:53
+#: ../Pinta.Core/Actions/LayerActions.cs:264
+msgid "Merge Layer Down"
+msgstr "Yhdistä taso alas"
+
+#: Mono.Addins.Gui/Mono.Addins.Gui/AddinInfoView.cs:272
 #, csharp-format
-msgid "{0} update available"
-msgid_plural "{0} updates available"
-msgstr[0] "{0} päivitys saatavilla"
-msgstr[1] "{0} päivitystä saatavilla"
+msgid "Missing: {0} v{1}"
+msgstr "Puuttuu: {0} v{1}"
 
-#: Mono.Addins.Gui/Mono.Addins.Gui/AddinManagerDialog.cs:419
-msgid "Updating repository"
-msgstr "Päivitetään varastoa"
+#: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:880
+msgid "Modified"
+msgstr "Muokattu"
 
-#: Mono.Addins.Gui/Mono.Addins.Gui/AddinManagerDialog.cs:513
-msgid "Install Add-in Package"
-msgstr "Asenna lisäosapaketti"
+#: Mono.Addins.Gui/gtk-gui/Mono.Addins.Gui.AddinInfoView.cs:181
+msgid "More information"
+msgstr "Lisätietoja"
 
-#: Mono.Addins.Gui/Mono.Addins.Gui/AddinManagerDialog.cs:523
-msgid "Add-in packages"
-msgstr "Lisäosapaketit"
+#: ../Pinta.Effects/Effects/MotionBlurEffect.cs:24
+msgid "Motion Blur"
+msgstr "Liike-epäterävyys"
+
+#: ../Pinta.Core/Actions/LayerActions.cs:59
+#: ../Pinta.Core/Actions/LayerActions.cs:250
+msgid "Move Layer Down"
+msgstr "Siirrä tasoa alas"
+
+#: ../Pinta.Core/Actions/LayerActions.cs:58
+#: ../Pinta.Core/Actions/LayerActions.cs:239
+msgid "Move Layer Up"
+msgstr "Siirrä tasoa ylös"
+
+#: ../Pinta.Tools/Tools/MoveSelectedTool.cs:43
+msgid "Move Selected Pixels"
+msgstr "Siirrä valittuja pikseleitä"
+
+#: ../Pinta.Tools/Tools/MoveSelectionTool.cs:42
+msgid "Move Selection"
+msgstr "Siirrä valintaa"
+
+#: Mono.Addins.Gui/Mono.Addins.Gui/AddinInfoView.cs:123
+msgid ""
+"Multiple selection:\n"
+"\n"
+msgstr ""
+"Usea valinta:\n"
+"\n"
+
+#: ../Pinta.Core/Effects/UserBlendOps.cs:34
+msgid "Multiply"
+msgstr "Kerro"
+
+#: ../Pinta/Dialogs/LayerPropertiesDialog.cs:187
+msgid "Name:"
+msgstr "Nimi:"
+
+#: ../Pinta.Core/Actions/FileActions.cs:59
+msgid "New"
+msgstr "Uusi"
+
+#: ../Pinta/Dialogs/NewImageDialog.cs:68
+#: ../Pinta.Core/Managers/WorkspaceManager.cs:178
+msgid "New Image"
+msgstr "Uusi kuva"
+
+#: ../Pinta.Core/Actions/FileActions.cs:51
+msgid "New Screenshot..."
+msgstr "Uusi kuvakaappaus..."
+
+#: ../Pinta/Actions/Edit/ResizePaletteAction.cs:50
+msgid "New palette size:"
+msgstr "Paletin uusi koko:"
+
+#: ../Pinta.Core/Actions/FileActions.cs:50
+msgid "New..."
+msgstr "Uusi..."
 
 #: Mono.Addins.Gui/Mono.Addins.Gui/AddinTreeWidget.cs:102
 msgid "No add-ins found"
 msgstr "Lisäosia ei löytynyt"
 
-#: Mono.Addins.Gui/Mono.Addins.Gui/AddinTreeWidget.cs:120
-msgid "Add-in"
-msgstr "Lisäosa"
+#: Mono.Addins.Gui/Mono.Addins.Gui/AddinInfoView.cs:178
+msgid "No selection"
+msgstr "Ei valintaa"
+
+#: Mono.Addins.Gui/gtk-gui/Mono.Addins.Gui.AddinManagerDialog.cs:143
+msgid "No updates found"
+msgstr "Päivityksiä ei löytynyt"
+
+#: ../Pinta.Effects/Effects/AddNoiseEffect.cs:37
+#: ../Pinta.Effects/Effects/MedianEffect.cs:35
+#: ../Pinta.Effects/Effects/ReduceNoiseEffect.cs:35
+msgid "Noise"
+msgstr "Kohina"
+
+#: ../Pinta.Core/Effects/UserBlendOps.cs:33
+#: ../Pinta.Tools/Brushes/PlainBrush.cs:37
+#: ../Pinta.Tools/Tools/EraserTool.cs:267 ../Pinta.Tools/Tools/TextTool.cs:224
+msgid "Normal"
+msgstr "Normaali"
+
+#: ../Pinta.Core/Classes/BaseTool.cs:330
+msgid "Normal Blending"
+msgstr "Normaali sekoitus"
+
+#: ../Pinta.Core/Actions/ViewActions.cs:69
+msgid "Normal Size"
+msgstr "Normaali koko"
+
+#: ../Pinta.Tools/Tools/TextTool.cs:225
+msgid "Normal and Outline"
+msgstr "Normaali ja ääriviiva"
+
+#: ../Pinta.Effects/Effects/BulgeEffect.cs:103
+#: ../Pinta.Effects/Effects/RadialBlurEffect.cs:160
+#: ../Pinta.Effects/Effects/ZoomBlurEffect.cs:133
+msgid "Offset"
+msgstr "Siirtymä"
+
+#: ../Pinta.Effects/Effects/OilPaintingEffect.cs:24
+msgid "Oil Painting"
+msgstr "Öljymaalaus"
+
+#: ../Pinta/Dialogs/LayerPropertiesDialog.cs:220
+msgid "Opacity:"
+msgstr "Peittävyys:"
+
+#: ../Pinta/Actions/File/OpenDocumentAction.cs:53
+#: ../Pinta.Core/Actions/EditActions.cs:361
+#: ../Pinta.Core/Actions/FileActions.cs:60
+#: ../Pinta.Core/Actions/LayerActions.cs:168
+msgid "Open"
+msgstr "Avaa"
+
+#: ../Pinta.Tools/Editable/EditEngines/LineCurveEditEngine.cs:40
+msgid "Open Curve Shape"
+msgstr "Avaa Käyrät"
+
+#: ../Pinta.Core/Managers/WorkspaceManager.cs:225
+msgid "Open Image"
+msgstr "Avaa kuva"
+
+#: ../Pinta/Actions/File/OpenDocumentAction.cs:50
+#: ../Pinta.Core/Actions/LayerActions.cs:165
+msgid "Open Image File"
+msgstr "Avaa kuvatiedosto"
+
+#: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:322
+msgid "Open Line/Curve Series"
+msgstr "Avaa Viiva/Käyrä"
+
+#: ../Pinta.Core/Actions/EditActions.cs:358
+msgid "Open Palette File"
+msgstr "Avaa palettitiedosto"
+
+#: ../Pinta.Core/Actions/EditActions.cs:73
+#: ../Pinta.Core/Actions/FileActions.cs:52
+msgid "Open..."
+msgstr "Avaa..."
+
+#: ../Pinta/Options.cs:492
+msgid "OptionName"
+msgstr "OptionName"
+
+#: ../Pinta/Main.cs:113
+msgid "Options: "
+msgstr "Asetukset: "
+
+#: ../Pinta/Dialogs/NewImageDialog.cs:246
+msgid "Orientation:"
+msgstr "Suunta:"
+
+#: ../Pinta.Effects/Effects/WarpEffect.cs:31
+msgid "Original"
+msgstr "Alkuperäinen"
 
 #: Mono.Addins.Gui/Mono.Addins.Gui/AddinTreeWidget.cs:213
 msgid "Other"
 msgstr "Muut"
 
-#: Mono.Addins.Gui/Mono.Addins.Gui/InstallDialog.cs:77
-msgid "Uninstall"
-msgstr "Poista asennus"
+#: ../Pinta.Effects/Effects/OutlineEffect.cs:27
+#: ../Pinta.Tools/Tools/TextTool.cs:226
+msgid "Outline"
+msgstr "Ääriviiva"
 
-#: Mono.Addins.Gui/Mono.Addins.Gui/InstallDialog.cs:82
-msgid "The following packages will be uninstalled:"
-msgstr "Seuraavat paketit poistetaan:"
+#: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:299
+#: ../Pinta.Tools/Tools/FreeformShapeTool.cs:228
+msgid "Outline Shape"
+msgstr "Reunan muoto"
 
-#: Mono.Addins.Gui/Mono.Addins.Gui/InstallDialog.cs:89
+#: ../Pinta.Tools/Tools/TextTool.cs:241
+msgid "Outline width"
+msgstr "Ääriviivan paksuus"
+
+#: ../Pinta.Effects/Dialogs/Effects.LevelsDialog.cs:599
+msgid "Output"
+msgstr "Ulostulo"
+
+#: ../Pinta.Effects/Dialogs/Effects.LevelsDialog.cs:601
+msgid "Output Histogram"
+msgstr "Ulostulon histogrammi"
+
+#: ../Pinta.Core/Effects/UserBlendOps.cs:37
+msgid "Overlay"
+msgstr "Sulauttava"
+
+#: ../Pinta.Core/Classes/BaseTool.cs:331
+msgid "Overwrite"
+msgstr "Ylikirjoitus"
+
+#: ../Pinta.Tools/Tools/PaintBucketTool.cs:44
+msgid "Paint Bucket"
+msgstr "Täyttö"
+
+#: ../Pinta.Tools/Tools/PaintBrushTool.cs:60
+msgid "Paintbrush"
+msgstr "Sivellin"
+
+#: ../Pinta.Core/Actions/EditActions.cs:138
+msgid "Palette"
+msgstr "Paletti"
+
+#: ../Pinta.Core/Actions/EditActions.cs:365
+msgid "Palette files"
+msgstr "Palettitiedostot"
+
+#: ../Pinta/Actions/Layers/RotateZoomLayerAction.cs:115
+#: ../Pinta.Tools/Tools/PanTool.cs:42
+msgid "Pan"
+msgstr "Pan"
+
+#: ../Pinta/Actions/Edit/PasteAction.cs:78
+#: ../Pinta.Core/Actions/EditActions.cs:64
+#: ../Pinta.Core/HistoryItems/PasteHistoryItem.cs:42
+msgid "Paste"
+msgstr "Liitä"
+
+#: ../Pinta.Core/Actions/EditActions.cs:66
+msgid "Paste Into New Image"
+msgstr "Liitä uuteen kuvaan"
+
+#: ../Pinta/Actions/Edit/PasteAction.cs:78
+#: ../Pinta.Core/Actions/EditActions.cs:65
+msgid "Paste Into New Layer"
+msgstr "Liitä uuteen tasoon"
+
+#: ../Pinta/Dialogs/VersionInformationTabPage.cs:53
+msgid "Path"
+msgstr "Polku"
+
+#: Mono.Addins.Gui/gtk-gui/Mono.Addins.Gui.NewSiteDialog.cs:130
+msgid "Path:"
+msgstr "Polku:"
+
+#: ../Pinta.Tools/Tools/PencilTool.cs:48
+msgid "Pencil"
+msgstr "Kynä"
+
+#: ../Pinta.Effects/Effects/PencilSketchEffect.cs:31
+msgid "Pencil Sketch"
+msgstr "Kynäluonnos"
+
+#: ../Pinta.Effects/Effects/PencilSketchEffect.cs:98
+msgid "Pencil Tip Size"
+msgstr "Kynän kärjen koko"
+
+#: ../Pinta.Effects/Effects/MedianEffect.cs:72
+msgid "Percentile"
+msgstr "Prosenttipiste"
+
+#: ../Pinta.Effects/Effects/GlowEffect.cs:37
+#: ../Pinta.Effects/Effects/RedEyeRemoveEffect.cs:34
+#: ../Pinta.Effects/Effects/SharpenEffect.cs:32
+#: ../Pinta.Effects/Effects/SoftenPortraitEffect.cs:64
+msgid "Photo"
+msgstr "Valokuva"
+
+#: ../xdg/pinta.desktop.in.h:1
+msgid "Pinta"
+msgstr "Pinta"
+
+#: ../Pinta/AddinSetupService.cs:54
+msgid "Pinta Community Addins - Cross-Platform"
+msgstr "Pinta-yhteisön lisäosat - alustariippumattomat"
+
+#: ../Pinta/AddinSetupService.cs:50
+msgid "Pinta Community Addins - Platform-Specific"
+msgstr "Pinta-yhteisön lisäosat - alustariippuvaiset"
+
+#: ../xdg/pinta.desktop.in.h:4
+msgid "Pinta Image Editor"
+msgstr "Pinta-kuvankäsittely"
+
+#: ../Pinta.Core/Actions/HelpActions.cs:45
+msgid "Pinta Website"
+msgstr "Pintan verkkosivusto"
+
+#: ../Pinta/Actions/File/SaveDocumentImplementationAction.cs:185
+msgid "Pinta does not support saving images in this file format."
+msgstr "Pinta ei tue kuvien tallentamista tässä muodossa."
+
+#: ../xdg/pinta.appdata.xml.in.h:1
 msgid ""
-"There are other add-ins that depend on the previous ones which will also be "
-"uninstalled:"
+"Pinta is a image editing, drawing and painting application with a simple yet "
+"powerful interface. Pinta has a wide range of drawing tools, including: "
+"freehand, rectangles, circles and lines. It also has over 35 effects to "
+"apply to your images, and also has the ability to create unlimited layers to "
+"help organize your creativity."
 msgstr ""
-"On lisäosia jotka tarvitsevat aiemman version joka tullaan poistamaan:"
+"Pinta on sovellus kuvankäsittelyyn, piirtämiseen ja maalaamiseen. Pinta "
+"sisältää yksinkertaisen mutta tehokkaan käyttöliittymän sekä laajan "
+"valikoiman piirrostyökaluja mukaan lukien vapaan muodon, suorakulmiot, "
+"ellipsit ja viivat. Tarjolla on myös yli 35 kuviin liitettävää tehostetta "
+"sekä rajoittamaton määrä tasoja, joiden avulla pidät luovuutesi "
+"järjestyksessä."
 
-#: Mono.Addins.Gui/Mono.Addins.Gui/InstallDialog.cs:124
+#: ../Pinta.Core/Managers/WorkspaceManager.cs:386
+msgid "Pinta supports the following file formats:"
+msgstr "Pinta tukee seuraavia tiedostomuotoja:"
+
+#: ../Pinta.Core/Classes/Palette.cs:186
+msgid "Pinta supports the following palette formats:"
+msgstr "Pinta tukee seuraavia palettimuotoja:"
+
+#: ../Pinta.Core/Actions/ViewActions.cs:72
+msgid "Pixel Grid"
+msgstr "Pikseliristikko"
+
+#: ../Pinta.Effects/Effects/PixelateEffect.cs:24
+msgid "Pixelate"
+msgstr "Pikselöi"
+
+#: ../Pinta.Core/Actions/ViewActions.cs:160
+msgid "Pixels"
+msgstr "Pikseliä"
+
+#: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:523
+#: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:767
+msgid "Point Added"
+msgstr "Piste lisätty"
+
+#: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:466
+msgid "Point Deleted"
+msgstr "Piste poistettu"
+
+#: ../Pinta.Effects/Effects/PolarInversionEffect.cs:24
+msgid "Polar Inversion"
+msgstr "Käänteismuunnos"
+
+#: ../Pinta/Dialogs/NewImageDialog.cs:248
+msgid "Portrait"
+msgstr "Pysty"
+
+#: ../Pinta.Effects/Adjustments/PosterizeEffect.cs:25
+#: ../Pinta.Effects/Dialogs/Effects.PosterizeDialog.cs:56
+msgid "Posterize"
+msgstr "Porrasta"
+
+#: ../Pinta.Effects/Effects/CloudsEffect.cs:203
+msgid "Power"
+msgstr "Voima"
+
+#: ../Pinta/Dialogs/AboutDialog.cs:192
+msgid "Powered by Mono:"
+msgstr "Käyttää Monoa:"
+
+#: ../Pinta/Dialogs/NewImageDialog.cs:194
+msgid "Preset:"
+msgstr "Esiasetus:"
+
+#: ../Pinta/Dialogs/NewImageDialog.cs:318
+msgid "Preview"
+msgstr "Esikatsele"
+
+#: ../Pinta/Dialogs/AboutDialog.cs:157
+msgid "Previous contributors:"
+msgstr "Aiemmat osallistujat:"
+
+#: ../Pinta.Effects/Effects/WarpEffect.cs:25
+msgid "Primary"
+msgstr "Ensisijainen"
+
+#: ../Pinta.Core/Actions/FileActions.cs:57
+msgid "Print"
+msgstr "Tulosta"
+
+#: Mono.Addins.Gui/gtk-gui/Mono.Addins.Gui.ProgressDialog.cs:21
+msgid "Progress"
+msgstr "Edistyminen"
+
+#: ../Pinta.Effects/Effects/JuliaFractalEffect.cs:133
+#: ../Pinta.Effects/Effects/MandelbrotFractalEffect.cs:156
+#: ../Pinta.Effects/Effects/RadialBlurEffect.cs:163
+#: ../Pinta.Effects/Effects/WarpEffect.cs:188
+msgid "Quality"
+msgstr "Laatu"
+
+#: ../Pinta/Dialogs/JpegCompressionDialog.cs:48
+msgid "Quality: "
+msgstr "Laatu: "
+
+#: ../Pinta.Core/Actions/AppActions.cs:45
+msgid "Quit"
+msgstr "Lopeta"
+
+#: ../Pinta.Effects/Dialogs/Effects.CurvesDialog.cs:432
+msgid "RGB"
+msgstr "RGB"
+
+#: ../Pinta.Effects/Effects/RadialBlurEffect.cs:24
+msgid "Radial Blur"
+msgstr "Säteittäinen sumennus"
+
+#: ../Pinta.Tools/Tools/GradientTool.cs:163
+msgid "Radial Gradient"
+msgstr "Säteittäinen"
+
+#: ../Pinta.Effects/Effects/GaussianBlurEffect.cs:263
+#: ../Pinta.Effects/Effects/GlowEffect.cs:79
+#: ../Pinta.Effects/Effects/MedianEffect.cs:69
+#: ../Pinta.Effects/Effects/ReduceNoiseEffect.cs:93
+#: ../Pinta.Effects/Effects/UnfocusEffect.cs:97
+#: ../Pinta.Tools/Editable/EditEngines/RoundedLineEditEngine.cs:99
+msgid "Radius"
+msgstr "Säde"
+
+#: ../Pinta.Gui.Widgets/Widgets/ReseedButtonWidget.cs:53
+msgid "Random Noise"
+msgstr "Satunnainen kohina"
+
+#: ../Pinta.Tools/Tools/RecolorTool.cs:57
+msgid "Recolor"
+msgstr "Väritä uudelleen"
+
+#: ../Pinta.Tools/Tools/RectangleTool.cs:39
+msgid "Rectangle"
+msgstr "Suorakulmio"
+
+#: ../Pinta.Tools/Tools/RectangleSelectTool.cs:39
+msgid "Rectangle Select"
+msgstr "Suorakulmainen valinta"
+
+#: ../Pinta.Effects/Dialogs/Effects.LevelsDialog.cs:521
+#: ../Pinta.Effects/Dialogs/Effects.PosterizeDialog.cs:113
+msgid "Red"
+msgstr "Punainen"
+
+#: ../Pinta.Effects/Dialogs/Effects.CurvesDialog.cs:452
+msgid "Red  "
+msgstr "Punainen  "
+
+#: ../Pinta.Effects/Effects/RedEyeRemoveEffect.cs:26
+msgid "Red Eye Removal"
+msgstr "Punasilmän poistaja"
+
+#: ../Pinta.Core/Actions/EditActions.cs:60
+msgid "Redo"
+msgstr "Tee uudelleen"
+
+#: ../Pinta.Effects/Effects/ReduceNoiseEffect.cs:27
+msgid "Reduce Noise"
+msgstr "Vähennä kohinaa"
+
+#: ../Pinta.Effects/Effects/WarpEffect.cs:23
+msgid "Reflect"
+msgstr "Heijastettu"
+
+#: Mono.Addins.Gui/gtk-gui/Mono.Addins.Gui.AddinManagerDialog.cs:166
+msgid "Refresh"
+msgstr "Päivitä"
+
+#: Mono.Addins.Gui/gtk-gui/Mono.Addins.Gui.NewSiteDialog.cs:103
+msgid "Register a local repository"
+msgstr "Rekisteröi paikallinen pakettivarasto"
+
+#: Mono.Addins.Gui/gtk-gui/Mono.Addins.Gui.NewSiteDialog.cs:54
+msgid "Register an on-line repository"
+msgstr "Rekisteröi pakettivarasto verkosta"
+
+#: Mono.Addins.Gui/Mono.Addins.Gui/ManageSitesDialog.cs:98
+msgid "Registering repository"
+msgstr "Lisätään pakettivarasto"
+
+#: ../Pinta/Dialogs/AboutPintaTabPage.cs:50
+msgid "Released under the MIT X11 License."
+msgstr "Julkaistaan MIT X11 -lisenssin alaisena."
+
+#: ../Pinta.Effects/Effects/ReliefEffect.cs:45
+msgid "Relief"
+msgstr "Reliefi"
+
+#: ../Pinta/Actions/Layers/LayerPropertiesAction.cs:99
+msgid "Rename Layer"
+msgstr "Nimeä taso uudelleen"
+
+#: ../Pinta.Effects/Effects/CloudsEffect.cs:37
+#: ../Pinta.Effects/Effects/JuliaFractalEffect.cs:32
+#: ../Pinta.Effects/Effects/MandelbrotFractalEffect.cs:32
+msgid "Render"
+msgstr "Renderointi"
+
+#: ../Pinta.Core/Managers/LivePreviewManager.cs:224
+msgid "Rendering Effect"
+msgstr "Renderointi"
+
+#: ../Pinta/Actions/File/SaveDocumentImplementationAction.cs:251
+#: ../Pinta/Actions/File/SaveDocumentImplementationAction.cs:255
+#: ../Pinta.Core/Classes/SelectionModeHandler.cs:47
+msgid "Replace"
+msgstr "Korvaa"
+
+#: ../Pinta/Dialogs/ErrorDialog.cs:110
+msgid "Report Bug...."
+msgstr "Ilmoita ongelmasta..."
+
+#: Mono.Addins.Gui/Mono.Addins.Gui/AddinInfoView.cs:287
+msgid "Repository version"
+msgstr "Pakettivaraston versio"
+
+#: Mono.Addins.Gui/gtk-gui/Mono.Addins.Gui.AddinManagerDialog.cs:268
+msgid "Repository:"
+msgstr "Pakettivarasto:"
+
+#: Mono.Addins.Gui/Mono.Addins.Gui/AddinInfoView.cs:270
+#, csharp-format
+msgid "Required: {0} v{1}, found v{2}"
+msgstr "Vaatii: {0} v{1}, löytyi v{2}"
+
+#: ../Pinta.Gui.Widgets/Widgets/ReseedButtonWidget.cs:64
+msgid "Reseed"
+msgstr "Uusi siemen"
+
+#: ../Pinta.Effects/Dialogs/Effects.CurvesDialog.cs:462
+#: ../Pinta.Effects/Dialogs/Effects.LevelsDialog.cs:528
+msgid "Reset"
+msgstr "Palauta"
+
+#: ../Pinta.Core/Actions/EditActions.cs:75
+msgid "Reset to Default"
+msgstr "Palauta oletus"
+
+#: ../Pinta/Dialogs/ResizeCanvasDialog.cs:56
+#: ../Pinta.Core/Classes/Document.cs:304
+msgid "Resize Canvas"
+msgstr "Pohjan koko"
+
+#: ../Pinta.Core/Actions/ImageActions.cs:50
+msgid "Resize Canvas..."
+msgstr "Pohjan koko..."
+
+#: ../Pinta/Dialogs/ResizeImageDialog.cs:45
+#: ../Pinta.Core/HistoryItems/ResizeHistoryItem.cs:42
+msgid "Resize Image"
+msgstr "Muuta kokoa"
+
+#: ../Pinta.Core/Actions/ImageActions.cs:49
+msgid "Resize Image..."
+msgstr "Muuta kokoa..."
+
+#: ../Pinta/Actions/Edit/ResizePaletteAction.cs:49
+msgid "Resize Palette"
+msgstr "Muuta paletin kokoa"
+
+#: ../Pinta.Tools/Tools/TextTool.cs:204
+msgid "Right Align"
+msgstr "Tasaa oikealle"
+
+#: ../Pinta/Actions/Layers/RotateZoomLayerAction.cs:53
+#: ../Pinta/Actions/Layers/RotateZoomLayerAction.cs:107
+msgid "Rotate / Zoom Layer"
+msgstr "Käännä / lähennä tasoa"
+
+#: ../Pinta.Core/Actions/LayerActions.cs:57
+msgid "Rotate / Zoom Layer..."
+msgstr "Käännä / lähennä tasoa..."
+
+#: ../Pinta.Core/Actions/ImageActions.cs:55
+#: ../Pinta.Core/HistoryItems/InvertHistoryItem.cs:49
+msgid "Rotate 180°"
+msgstr "Pyöritä 180°"
+
+#: ../Pinta.Core/Actions/ImageActions.cs:53
+#: ../Pinta.Core/HistoryItems/InvertHistoryItem.cs:61
+msgid "Rotate 90° Clockwise"
+msgstr "Pyöritä 90° myötäpäivään"
+
+#: ../Pinta.Core/Actions/ImageActions.cs:54
+#: ../Pinta.Core/HistoryItems/InvertHistoryItem.cs:65
+msgid "Rotate 90° Counter-Clockwise"
+msgstr "Pyöritä 90° vastapäivään"
+
+#: ../Pinta.Effects/Effects/FragmentEffect.cs:116
+#: ../Pinta.Effects/Effects/TileEffect.cs:140
+msgid "Rotation"
+msgstr "Kierto"
+
+#: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:325
+msgid "Rounded Line Series"
+msgstr "Pyöristetyt viivat"
+
+#: ../Pinta.Tools/Editable/EditEngines/RoundedLineEditEngine.cs:40
+msgid "Rounded Line Shape"
+msgstr "Pyöristetty viiva"
+
+#: ../Pinta.Tools/Tools/RoundedRectangleTool.cs:39
+msgid "Rounded Rectangle"
+msgstr "Pyöristetty suorakulmio"
+
+#: ../Pinta.Core/Actions/ViewActions.cs:157
+msgid "Ruler Units"
+msgstr "Mitta-asteikko"
+
+#: ../Pinta.Core/Actions/ViewActions.cs:75
+msgid "Rulers"
+msgstr "Viivoitin"
+
+#: ../Pinta.Tools/Tools/ColorPickerTool.cs:198
+msgid "Sampling"
+msgstr "Näytteistys"
+
+#: ../Pinta.Core/Effects/UserBlendOps.cs:48
+#: ../Pinta.Effects/Adjustments/HueSaturationEffect.cs:70
+msgid "Saturation"
+msgstr "Kylläisyys"
+
+#: ../Pinta.Effects/Effects/RedEyeRemoveEffect.cs:74
+msgid "Saturation Percentage"
+msgstr "Kylläisyysprosentti"
+
+#: ../Pinta/Actions/File/SaveDocumentImplementationAction.cs:75
+#: ../Pinta.Core/Actions/EditActions.cs:402
+#: ../Pinta.Core/Actions/FileActions.cs:55
+msgid "Save"
+msgstr "Tallenna"
+
+#: ../Pinta.Core/Actions/WindowActions.cs:45
+msgid "Save All"
+msgstr "Tallenna kaikki"
+
+#: ../Pinta.Core/Actions/EditActions.cs:74
+#: ../Pinta.Core/Actions/FileActions.cs:56
+msgid "Save As..."
+msgstr "Tallenna nimellä..."
+
+#: ../Pinta/Actions/File/SaveDocumentImplementationAction.cs:72
+msgid "Save Image File"
+msgstr "Tallenna kuva"
+
+#: ../Pinta.Core/Actions/EditActions.cs:399
+msgid "Save Palette File"
+msgstr "Tallenna palettitiedosto"
+
+#: ../Pinta/Actions/File/CloseDocumentAction.cs:60
+#, csharp-format
+msgid "Save changes to image \"{0}\" before closing?"
+msgstr "Tallennetaanko muutokset kuvaan \"{0}\" ennen sulkemista?"
+
+#: ../Pinta.Effects/Effects/CloudsEffect.cs:200
+msgid "Scale"
+msgstr "Skaala"
+
+#: ../Pinta.Core/Effects/UserBlendOps.cs:41
+msgid "Screen"
+msgstr "Näyttö"
+
+#: ../Pinta.Effects/Effects/WarpEffect.cs:27
+msgid "Secondary"
+msgstr "Toissijainen"
+
+#: ../Pinta.Effects/Effects/CloudsEffect.cs:225
+msgid "Seed"
+msgstr "Siemen"
+
+#: ../Pinta.Core/Actions/EditActions.cs:70
+#: ../Pinta.Core/Actions/EditActions.cs:218
+msgid "Select All"
+msgstr "Valitse kaikki"
+
+#: Mono.Addins.Gui/gtk-gui/Mono.Addins.Gui.NewSiteDialog.cs:47
+msgid "Select the location of the repository you want to register:"
+msgstr "Valitse rekisteröitävän pakettivaraston sijainti:"
+
+#: ../Pinta.Effects/Adjustments/SepiaEffect.cs:26
+msgid "Sepia"
+msgstr "Seepia"
+
+#: ../Pinta.Core/Actions/EditActions.cs:76
+msgid "Set Number of Colors"
+msgstr "Aseta värien määrä"
+
+#: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:315
+msgid "Shape Type"
+msgstr "Muodon tyyppi"
+
+#: ../Pinta.Effects/Effects/SharpenEffect.cs:24
+msgid "Sharpen"
+msgstr "Terävöitä"
+
+#: ../Pinta.Core/Extensions/ToolBoxButton.cs:52
+#: ../Pinta.Gui.Widgets/Widgets/StatusBarColorPaletteWidget.cs:230
+msgid "Shortcut key"
+msgstr "Pikanäppäin"
+
+#: ../Pinta/Actions/Layers/LayerPropertiesAction.cs:104
+msgid "Show Layer"
+msgstr "Näytä taso"
+
+#: ../Pinta/Main.cs:60
+msgid "Show this message and exit."
+msgstr "Näytä viesti ja poistu."
+
+#: ../Pinta.Tools/Tools/ColorPickerTool.cs:225
+msgid "Single Pixel"
+msgstr "Yksittäinen pikseli"
+
+#: ../Pinta.Tools/Editable/EditEngines/ArrowedEditEngine.cs:280
+msgid "Size"
+msgstr "Koko"
+
+#: ../Pinta.Tools/Tools/EraserTool.cs:267
+msgid "Smooth"
+msgstr "Tasainen"
+
+#: ../Pinta.Core/Effects/UserBlendOps.cs:44
+msgid "Soft Light"
+msgstr "Pehmeä valo"
+
+#: ../Pinta.Effects/Effects/SoftenPortraitEffect.cs:56
+msgid "Soften Portrait"
+msgstr "Pehmennä"
+
+#: ../Pinta.Effects/Effects/SoftenPortraitEffect.cs:117
+msgid "Softness"
+msgstr "Pehmeys"
+
+#: Mono.Addins.Gui/Mono.Addins.Gui/AddinInstallerDialog.cs:159
+msgid "Some of the required add-ins were not found"
+msgstr "Joitain tarvittavia lisäosia ei löytynyt"
+
+#: ../Pinta.Tools/Brushes/SplatterBrush.cs:37
+msgid "Splatter"
+msgstr "Roiske"
+
+#: ../Pinta.Tools/Brushes/SquaresBrush.cs:39
+msgid "Squares"
+msgstr "Neliöt"
+
+#: ../Pinta.Core/Actions/ViewActions.cs:73
+msgid "Status Bar"
+msgstr "Tilapalkki"
+
+#: ../Pinta.Effects/Effects/ReduceNoiseEffect.cs:96
+msgid "Strength"
+msgstr "Voimakkuus"
+
+#: ../Pinta.Effects/Effects/EdgeDetectEffect.cs:35
+#: ../Pinta.Effects/Effects/EmbossEffect.cs:32
+#: ../Pinta.Effects/Effects/OutlineEffect.cs:35
+#: ../Pinta.Effects/Effects/ReliefEffect.cs:32
+msgid "Stylize"
+msgstr "Tyyli"
+
+#: ../Pinta.Tools/Tools/ColorPickerTool.cs:208
+msgid "Switch to Pencil tool"
+msgstr "Vaihda kynään"
+
+#: ../Pinta.Tools/Tools/ColorPickerTool.cs:207
+msgid "Switch to previous tool"
+msgstr "Vaihda edelliseen työkaluun"
+
+#: ../Pinta/Actions/File/NewScreenshotAction.cs:51
+msgid "Take Screenshot"
+msgstr "Ota kuvankaappaus"
+
+#: ../Pinta.Tools/Tools/TextTool.cs:84
+msgid "Text"
+msgstr "Teksti"
+
+#: ../Pinta.Tools/Tools/TextTool.cs:85
+msgid "Text - Finalize"
+msgstr "Teksti - Tee valmiiksi"
+
+#: ../Pinta.Tools/Tools/TextTool.cs:217
+msgid "Text Style"
+msgstr "Tekstin tyyli"
+
+#: ../Pinta/Actions/Edit/PasteAction.cs:160
+msgid "The clipboard does not contain an image."
+msgstr "Leikepöytä ei sisällä kuvaa."
+
+#: ../Pinta/Actions/File/SaveDocumentImplementationAction.cs:242
+#, csharp-format
 msgid ""
-"The selected add-ins can't be installed because there are dependency "
-"conflicts."
-msgstr ""
-"Valittuja lisäosia ei voi asentaa koska riippuvuiden kanssa on ristiriitoja."
+"The file already exists in \"{1}\". Replacing it will overwrite its contents."
+msgstr "Tiedosto on jo olemassa \"{1}\". Korvaaminen ylikirjoittaa sisällön."
 
-#: Mono.Addins.Gui/Mono.Addins.Gui/InstallDialog.cs:138
-msgid "The following packages will be installed:"
-msgstr "Seuraavat paketit asennetaan:"
+#: Mono.Addins.Gui/gtk-gui/Mono.Addins.Gui.AddinInstallerDialog.cs:48
+msgid "The following add-ins will be installed:"
+msgstr "Seuraavat lisäosat asennetaan:"
 
-#: Mono.Addins.Gui/Mono.Addins.Gui/InstallDialog.cs:142
-msgid " (in user directory)"
-msgstr " (käyttäjän hakemistossa)"
-
-#: Mono.Addins.Gui/Mono.Addins.Gui/InstallDialog.cs:148
-msgid "The following packages need to be uninstalled:"
-msgstr "Seuraavat paketit täytyy poistaa:"
+#: Mono.Addins.Gui/Mono.Addins.Gui/AddinInfoView.cs:295
+msgid "The following depedencies required by this add-in are not available:"
+msgstr "Seuraavia lisäosan riippuvuuksia ei ollut saatavilla:"
 
 #: Mono.Addins.Gui/Mono.Addins.Gui/InstallDialog.cs:156
 msgid "The following dependencies could not be resolved:"
 msgstr "Seuraavia riippuvuuksia ei voitu selvittää:"
 
-#: Mono.Addins.Gui/Mono.Addins.Gui/InstallDialog.cs:190
-msgid "Are you sure you want to cancel the installation?"
-msgstr "Halutko varmasti keskeyttää asennuksen?"
+#: Mono.Addins.Gui/Mono.Addins.Gui/InstallDialog.cs:148
+msgid "The following packages need to be uninstalled:"
+msgstr "Seuraavat paketit täytyy poistaa:"
 
-#: Mono.Addins.Gui/Mono.Addins.Gui/InstallDialog.cs:209
-msgid "Installing Add-ins"
-msgstr "Asennetaan lisäosia"
+#: Mono.Addins.Gui/Mono.Addins.Gui/InstallDialog.cs:138
+msgid "The following packages will be installed:"
+msgstr "Seuraavat paketit asennetaan:"
+
+#: Mono.Addins.Gui/Mono.Addins.Gui/InstallDialog.cs:82
+msgid "The following packages will be uninstalled:"
+msgstr "Seuraavat paketit poistetaan:"
+
+#: ../Pinta/Actions/Edit/PasteAction.cs:169
+msgid ""
+"The image being pasted is larger than the canvas size. What would you like "
+"to do?"
+msgstr "Tuotava kuva on suurempi kuin pohjan koko. Mitä haluat tehdä?"
 
 #: Mono.Addins.Gui/Mono.Addins.Gui/InstallDialog.cs:211
 msgid "The installation failed!"
@@ -2329,9 +2058,12 @@ msgstr "Asennus epäonnistui!"
 msgid "The installation has completed with warnings."
 msgstr "Asennus valmistui onnistuneesti, mutta varoituksin."
 
-#: Mono.Addins.Gui/Mono.Addins.Gui/InstallDialog.cs:214
-msgid "Uninstalling Add-ins"
-msgstr "Poistetaan lisäosia"
+#: Mono.Addins.Gui/Mono.Addins.Gui/InstallDialog.cs:124
+msgid ""
+"The selected add-ins can't be installed because there are dependency "
+"conflicts."
+msgstr ""
+"Valittuja lisäosia ei voi asentaa koska riippuvuiden kanssa on ristiriitoja."
 
 #: Mono.Addins.Gui/Mono.Addins.Gui/InstallDialog.cs:216
 msgid "The uninstallation failed!"
@@ -2341,101 +2073,516 @@ msgstr "Poistaminen epäonnistui!"
 msgid "The uninstallation has completed with warnings."
 msgstr "Pakettien poisto valmistui onnistuneesti, mutta varoituksin."
 
-#: Mono.Addins.Gui/Mono.Addins.Gui/ManageSitesDialog.cs:98
-msgid "Registering repository"
-msgstr "Lisätään pakettivarasto"
+#: Mono.Addins.Gui/Mono.Addins.Gui/InstallDialog.cs:89
+msgid ""
+"There are other add-ins that depend on the previous ones which will also be "
+"uninstalled:"
+msgstr ""
+"On lisäosia jotka tarvitsevat aiemman version joka tullaan poistamaan:"
 
-#: Mono.Addins.Gui/Mono.Addins.Gui/Services.cs:64
-#: Mono.Addins.Gui/Mono.Addins.Gui/Services.cs:73
+#: ../Pinta.Effects/Effects/OutlineEffect.cs:141
+msgid "Thickness"
+msgstr "Paksuus"
+
+#: Mono.Addins.Gui/Mono.Addins.Gui/AddinInfoView.cs:263
+msgid "This add-in can't be loaded due to missing dependencies"
+msgstr "Tätä lisäosapekttia ei voi ladata puuttuvien riippuvuiden takia"
+
+#: ../Pinta.Effects/Effects/TileEffect.cs:24
+msgid "Tile Reflection"
+msgstr "Tiiliheijastus"
+
+#: ../Pinta.Effects/Effects/TileEffect.cs:142
+msgid "Tile Size"
+msgstr "Tiilin koko"
+
+#: ../Pinta.Effects/Dialogs/Effects.CurvesDialog.cs:467
+msgid "Tip: Right-click to remove control points."
+msgstr "Vihje: Napsauta oikealla napilla poistaaksesi pisteitä."
+
+#: ../Pinta/Dialogs/VersionInformationTabPage.cs:44
+msgid "Title"
+msgstr "Nimi"
+
+#: ../Pinta.Effects/Effects/RedEyeRemoveEffect.cs:70
+#: ../Pinta.Tools/Tools/FloodTool.cs:127
+#: ../Pinta.Tools/Tools/RecolorTool.cs:200
+msgid "Tolerance"
+msgstr "Toleranssi"
+
+#: ../Pinta.Core/Managers/ToolManager.cs:339
+msgid "Tool"
+msgstr "Työkalu"
+
+#: ../Pinta.Core/Actions/ViewActions.cs:74
+msgid "Tool Box"
+msgstr "Työkalupalkki"
+
+#: ../Pinta/MainWindow.cs:364
+msgid "Tool Windows"
+msgstr "Työkaluikkunat"
+
+#: ../Pinta.Core/Actions/ViewActions.cs:70
+msgid "Toolbar"
+msgstr "Työkalupalkki"
+
+#: ../Pinta.Effects/Dialogs/Effects.CurvesDialog.cs:426
+msgid "Transfer Map"
+msgstr "Siirtokartta"
+
+#: ../Pinta.Core/Actions/HelpActions.cs:47
+msgid "Translate This Application"
+msgstr "Käännä tämä ohjelma"
+
+#: ../Pinta/Dialogs/AboutDialog.cs:171
+msgid "Translated by:"
+msgstr "Käännöksen tehnyt:"
+
+#: ../Pinta/Dialogs/NewImageDialog.cs:289
+#: ../Pinta.Effects/Effects/WarpEffect.cs:29
+msgid "Transparent"
+msgstr "Läpinäkyvä"
+
+#: ../Pinta.Effects/Effects/TwistEffect.cs:24
+msgid "Twist"
+msgstr "Kierre"
+
+#: ../Pinta.Tools/Tools/EraserTool.cs:263
+#: ../Pinta.Tools/Tools/PaintBrushTool.cs:162
+msgid "Type"
+msgstr "Tyyppi"
+
+#: ../Pinta/MainWindow.cs:568
 #, csharp-format
-msgid "Exception occurred: {0}"
-msgstr "Tapahtui poikkeus: {0}"
+msgid ""
+"Unable to download image from {0}.\n"
+"Details: {1}"
+msgstr ""
+"Ei voitu ladata kuvaa osoitteesta {0}.\n"
+"Tiedot: {1}"
 
-#: Mono.Addins.Gui/gtk-gui/Mono.Addins.Gui.AddinInfoView.cs:181
-msgid "More information"
-msgstr "Lisätietoja"
+#: ../Pinta.Tools/Tools/TextTool.cs:176
+msgid "Underline"
+msgstr "Alleviivattu"
 
-#: Mono.Addins.Gui/gtk-gui/Mono.Addins.Gui.AddinInfoView.cs:229
-msgid "Install..."
-msgstr "Asenna..."
+#: ../Pinta.Core/Actions/EditActions.cs:59
+msgid "Undo"
+msgstr "Kumoa"
+
+#: ../Pinta.Effects/Effects/UnfocusEffect.cs:26
+msgid "Unfocus"
+msgstr "Epäkohdistus"
+
+#: Mono.Addins.Gui/Mono.Addins.Gui/InstallDialog.cs:77
+msgid "Uninstall"
+msgstr "Poista asennus"
+
+#: Mono.Addins.Gui/Mono.Addins.Gui/InstallDialog.cs:214
+msgid "Uninstalling Add-ins"
+msgstr "Poistetaan lisäosia"
+
+#. Translators: {0} is 'Ctrl', or a platform-specific key such as 'Command' on macOS.
+#: ../Pinta.Core/Classes/SelectionModeHandler.cs:49
+#, csharp-format
+msgid "Union (+) ({0} + Left Click)"
+msgstr ""
+
+#: ../Pinta.Core/Managers/WorkspaceManager.cs:112
+#, csharp-format
+msgid "Unsaved Image {0}"
+msgstr "Tallentamaton kuva {0}"
+
+#: ../Pinta.Core/Managers/WorkspaceManager.cs:220
+msgid "Unsupported file format"
+msgstr "Tiedostomuotoa ei tueta"
 
 #: Mono.Addins.Gui/gtk-gui/Mono.Addins.Gui.AddinInfoView.cs:255
 msgid "Update"
-msgstr "Päivitä"
-
-#: Mono.Addins.Gui/gtk-gui/Mono.Addins.Gui.AddinInfoView.cs:281
-msgid "_Uninstall..."
-msgstr "Poista asenn_us..."
-
-#: Mono.Addins.Gui/gtk-gui/Mono.Addins.Gui.AddinInstallerDialog.cs:38
-msgid "Additional extensions are required to perform this operation."
-msgstr "Tämän toiminnon suorittaminen vaatii lisäosia."
-
-#: Mono.Addins.Gui/gtk-gui/Mono.Addins.Gui.AddinInstallerDialog.cs:48
-msgid "The following add-ins will be installed:"
-msgstr "Seuraavat lisäosat asennetaan:"
-
-#: Mono.Addins.Gui/gtk-gui/Mono.Addins.Gui.AddinManagerDialog.cs:143
-msgid "No updates found"
-msgstr "Päivityksiä ei löytynyt"
-
-#: Mono.Addins.Gui/gtk-gui/Mono.Addins.Gui.AddinManagerDialog.cs:166
-msgid "Refresh"
 msgstr "Päivitä"
 
 #: Mono.Addins.Gui/gtk-gui/Mono.Addins.Gui.AddinManagerDialog.cs:194
 msgid "Update All"
 msgstr "Päivitä kaikki"
 
-#: Mono.Addins.Gui/gtk-gui/Mono.Addins.Gui.AddinManagerDialog.cs:268
-msgid "Repository:"
-msgstr "Pakettivarasto:"
+#: Mono.Addins.Gui/Mono.Addins.Gui/AddinInfoView.cs:256
+msgid "Update available"
+msgstr "Päivitys saatavilla"
 
-#: Mono.Addins.Gui/gtk-gui/Mono.Addins.Gui.AddinManagerDialog.cs:373
-msgid "Install from file..."
-msgstr "Asenna tiedostosta..."
+#: Mono.Addins.Gui/Mono.Addins.Gui/AddinManagerDialog.cs:123
+#: Mono.Addins.Gui/Mono.Addins.Gui/AddinManagerDialog.cs:364
+#: Mono.Addins.Gui/gtk-gui/Mono.Addins.Gui.AddinManagerDialog.cs:247
+msgid "Updates"
+msgstr "Päivitykset"
 
-#: Mono.Addins.Gui/gtk-gui/Mono.Addins.Gui.InstallDialog.cs:126
-msgid "Install"
-msgstr "Asenna"
-
-#: Mono.Addins.Gui/gtk-gui/Mono.Addins.Gui.ManageSitesDialog.cs:20
-msgid "Add-in Repository Management"
-msgstr "Lisäosien varastohallinta"
-
-#: Mono.Addins.Gui/gtk-gui/Mono.Addins.Gui.NewSiteDialog.cs:29
-msgid "Add New Repository"
-msgstr "Lisää uusi pakettivarasto"
-
-#: Mono.Addins.Gui/gtk-gui/Mono.Addins.Gui.NewSiteDialog.cs:47
-msgid "Select the location of the repository you want to register:"
-msgstr "Valitse rekisteröitävän pakettivaraston sijainti:"
-
-#: Mono.Addins.Gui/gtk-gui/Mono.Addins.Gui.NewSiteDialog.cs:54
-msgid "Register an on-line repository"
-msgstr "Rekisteröi pakettivarasto verkosta"
+#: Mono.Addins.Gui/Mono.Addins.Gui/AddinManagerDialog.cs:419
+msgid "Updating repository"
+msgstr "Päivitetään varastoa"
 
 #: Mono.Addins.Gui/gtk-gui/Mono.Addins.Gui.NewSiteDialog.cs:82
 msgid "Url:"
 msgstr "Osoite:"
 
-#: Mono.Addins.Gui/gtk-gui/Mono.Addins.Gui.NewSiteDialog.cs:103
-msgid "Register a local repository"
-msgstr "Rekisteröi paikallinen pakettivarasto"
+#: ../Pinta/Main.cs:111
+msgid "Usage: pinta [files]"
+msgstr "Käyttö: pinta [tiedostot]"
 
-#: Mono.Addins.Gui/gtk-gui/Mono.Addins.Gui.NewSiteDialog.cs:130
-msgid "Path:"
-msgstr "Polku:"
+#: ../Pinta.Effects/Effects/RadialBlurEffect.cs:164
+msgid ""
+"Use low quality for previews, small images, and small angles.  Use high "
+"quality for final quality, large images, and large angles."
+msgstr ""
+"Käytä pientä laatua tarkastamiseen, pieniin kuviin ja pieniin kulmiin. Käytä "
+"suurta laatua lopullisiin kuviin, isoihin kuviin ja suuriin kulmiin."
 
-#: Mono.Addins.Gui/gtk-gui/Mono.Addins.Gui.NewSiteDialog.cs:154
-msgid "Browse..."
-msgstr "Selaa..."
+#: ../Pinta/Dialogs/AboutDialog.cs:184
+msgid "Using some icons from:"
+msgstr "Käyttää kuvakkeita kokoelmista:"
 
-#: Mono.Addins.Gui/gtk-gui/Mono.Addins.Gui.ProgressDialog.cs:21
-msgid "Progress"
-msgstr "Edistyminen"
+#: ../Pinta/Dialogs/AboutPintaTabPage.cs:42
+#: ../Pinta/Dialogs/VersionInformationTabPage.cs:50
+msgid "Version"
+msgstr "Versio"
 
-#: Mono.Addins/Mono.Addins.Description/AssemblyDependency.cs:103
+#: ../Pinta/Dialogs/AboutDialog.cs:304
+msgid "Version Info"
+msgstr "Versiotiedot"
+
+#: ../Pinta/Dialogs/LayerPropertiesDialog.cs:195
+msgid "Visible"
+msgstr "Näkyvä"
+
+#: ../Pinta.Effects/Effects/SoftenPortraitEffect.cs:123
+msgid "Warmth"
+msgstr "Lämpö"
+
+#: ../Pinta/Dialogs/NewImageDialog.cs:273
+msgid "White"
+msgstr "Valkoinen"
+
+#: ../Pinta/Dialogs/NewImageDialog.cs:214
+#: ../Pinta/Dialogs/ResizeCanvasDialog.cs:333
+#: ../Pinta/Dialogs/ResizeImageDialog.cs:169
+msgid "Width:"
+msgstr "Leveys:"
+
+#: ../Pinta.Core/Actions/ViewActions.cs:103
+#: ../Pinta.Core/Actions/ViewActions.cs:276
+#: ../Pinta.Core/Classes/DocumentWorkspace.cs:315
+#: ../Pinta.Core/Classes/DocumentWorkspace.cs:323
+msgid "Window"
+msgstr "Ikkuna"
+
+#: ../Pinta.Effects/Effects/WarpEffect.cs:21
+msgid "Wrap"
+msgstr "Kääri"
+
+#: ../Pinta.Core/Effects/UserBlendOps.cs:42
+msgid "Xor"
+msgstr "Xor"
+
+#. Translators: {0} is 'Ctrl', or a platform-specific key such as 'Command' on macOS.
+#: ../Pinta.Core/Classes/SelectionModeHandler.cs:52
 #, csharp-format
-msgid "(provided by {0})"
-msgstr "(tarjoaa {0})"
+msgid "Xor ({0} + Right Click)"
+msgstr ""
+
+#. Translators: {0} is the name of a file that the user does not have permission to open.
+#: ../Pinta.Core/Managers/WorkspaceManager.cs:405
+#, csharp-format
+msgid "You do not have access to '{0}'."
+msgstr "Sinulla ei ole käyttöoikeutta tiedostoon '{0}'."
+
+#. Translators: {0} is the name of a file that the user does not have write permission for.
+#: ../Pinta/Actions/File/SaveDocumentImplementationAction.cs:211
+#, csharp-format
+msgid ""
+"You do not have access to modify '{0}'. The file or folder may be read-only."
+msgstr ""
+"Käyttöoikeutesi eivät riitä kohteen '{0}' muokkaamiseen. Tiedosto tai kansio "
+"voi olla \"vain luku\"-tilassa."
+
+#: ../Pinta/Actions/Layers/RotateZoomLayerAction.cs:118
+#: ../Pinta.Effects/Effects/JuliaFractalEffect.cs:136
+#: ../Pinta.Effects/Effects/MandelbrotFractalEffect.cs:160
+#: ../Pinta.Tools/Tools/ZoomTool.cs:56
+msgid "Zoom"
+msgstr "Zoomaus"
+
+#: ../Pinta.Effects/Effects/ZoomBlurEffect.cs:24
+msgid "Zoom Blur"
+msgstr "Zoom-sumennus"
+
+#: ../Pinta.Core/Actions/ViewActions.cs:65
+msgid "Zoom In"
+msgstr "Suurenna"
+
+#: ../Pinta.Core/Actions/ViewActions.cs:66
+msgid "Zoom Out"
+msgstr "Pienennä"
+
+#: ../Pinta.Core/Actions/ViewActions.cs:68
+msgid "Zoom to Selection"
+msgstr "Tarkenna valintaan"
+
+#: ../Pinta/MainWindow.cs:339
+msgid "_Adjustments"
+msgstr "_Säädöt"
+
+#: ../Pinta/MainWindow.cs:324
+msgid "_Edit"
+msgstr "_Muokkaa"
+
+#: ../Pinta/MainWindow.cs:320
+msgid "_File"
+msgstr "_Tiedosto"
+
+#: ../Pinta/MainWindow.cs:358
+msgid "_Help"
+msgstr "_Ohje"
+
+#: ../Pinta/MainWindow.cs:332
+msgid "_Image"
+msgstr "_Kuva"
+
+#: ../Pinta/MainWindow.cs:336
+msgid "_Layers"
+msgstr "T_asot"
+
+#: Mono.Addins.Gui/gtk-gui/Mono.Addins.Gui.AddinInfoView.cs:281
+msgid "_Uninstall..."
+msgstr "Poista asenn_us..."
+
+#: ../Pinta/MainWindow.cs:328
+msgid "_View"
+msgstr "_Näytä"
+
+#: ../Pinta/MainWindow.cs:354
+msgid "_Window"
+msgstr "_Ikkuna"
+
+#: ../Pinta/Dialogs/AboutPintaTabPage.cs:56
+msgid "by Pinta contributors"
+msgstr "Pinta-tekijöiden"
+
+#: ../xdg/pinta.desktop.in.h:5
+msgid "draw;drawing;paint;painting;graphics;raster;2d;"
+msgstr ""
+"draw;drawing;paint;painting;graphics;raster;2d;kuva;piirros;maalaus;grafiikka"
+";rasteri;"
+
+#: ../Pinta/Main.cs:62
+msgid "number of threads to use for rendering"
+msgstr "renderointiin käytettävät säikeet"
+
+#: ../Pinta/Dialogs/NewImageDialog.cs:220
+#: ../Pinta/Dialogs/NewImageDialog.cs:236
+#: ../Pinta/Dialogs/ResizeCanvasDialog.cs:335
+#: ../Pinta/Dialogs/ResizeCanvasDialog.cs:341
+#: ../Pinta/Dialogs/ResizeImageDialog.cs:171
+#: ../Pinta/Dialogs/ResizeImageDialog.cs:177
+msgid "pixels"
+msgstr "pikseliä"
+
+#: ../Pinta/Dialogs/AboutDialog.cs:168
+msgid "translator-credits"
+msgstr ""
+"Launchpad Contributions:\n"
+"  Beluga https://launchpad.net/~beluga\n"
+"  Cameron White https://launchpad.net/~cameronwhite91\n"
+"  Elias Ojala https://launchpad.net/~theel0ja\n"
+"  Jarno Ruokamo https://launchpad.net/~jarno-ruokamo\n"
+"  Jiri Grönroos https://launchpad.net/~jiri-gronroos\n"
+"  Jonathan Pobst https://launchpad.net/~jpobst\n"
+"  Kari Rantanen https://launchpad.net/~kari-rantanen\n"
+"  Kimmo Kujansuu https://launchpad.net/~mahtiankka\n"
+"  Lauri Kohtala https://launchpad.net/~lauri-kohtala-f\n"
+"  Oi Suomi On! https://launchpad.net/~oi-suomi-on\n"
+"  Tommi Saira https://launchpad.net/~tommisaira\n"
+"  Urmas https://launchpad.net/~urmas-2006"
+
+#. Translators: {0} is 'Ctrl', or a platform-specific key such as 'Command' on macOS.
+#: ../Pinta.Tools/Tools/CloneStampTool.cs:47
+#, csharp-format
+msgid "{0} + left click to set origin, left click to paint."
+msgstr ""
+
+#. Translators: this is the auto-generated name for a duplicated layer.
+#. {0} is the name of the source layer. Example: "Layer 3 copy".
+#: ../Pinta.Core/Classes/DocumentLayers.cs:234
+#, csharp-format
+msgid "{0} copy"
+msgstr "{0} kopio"
+
+#: ../Pinta.Core/ImageFormats/FormatDescriptor.cs:93
+#, csharp-format
+msgid "{0} image ({1})"
+msgstr "{0} kuva ({1})"
+
+#. Translators: {0} is the palette format (e.g. "GIMP") and {1} is a list of file extensions.
+#: ../Pinta.Core/PaletteFormats/PaletteDescriptor.cs:62
+#, csharp-format
+msgid "{0} palette ({1})"
+msgstr "{0}-paletti ({1})"
+
+#: Mono.Addins.Gui/Mono.Addins.Gui/AddinManagerDialog.cs:363
+#, csharp-format
+msgid "{0} update available"
+msgid_plural "{0} updates available"
+msgstr[0] "{0} päivitys saatavilla"
+msgstr[1] "{0} päivitystä saatavilla"
+
+#. Translators: This specifies the format of the zoom percentage choices
+#. in the toolbar.
+#: ../Pinta.Core/Actions/ViewActions.cs:257
+#, csharp-format
+msgid "{0}%"
+msgstr "{0} %"
+
+#~ msgid "Ctrl-left click to set origin, left click to paint."
+#~ msgstr "Napsauta oikealla asettaaksesi lähtöpisteen, vasemmalla piirrät."
+
+#~ msgid "No tool selected."
+#~ msgstr "Työkalua ei ole valittu."
+
+#~ msgid "Union (+) (Ctrl + Left Click)"
+#~ msgstr "Yhdiste (+) (Ctrl + Vasen hiiri)"
+
+#~ msgid "Xor (Ctrl + Right Click)"
+#~ msgstr "Xor (Ctrl + Oikea hiiri)"
+
+#~ msgid "Hide"
+#~ msgstr "Piilota"
+
+#~ msgid "Close _without saving"
+#~ msgstr "Sulje _tallentamatta"
+
+#, csharp-format
+#~ msgid "Save the changes to image \"{0}\" before closing?"
+#~ msgstr "Tallennetaanko muutokset kuvaan \"{0}\" ennen sulkemista?"
+
+#~ msgid "Tools"
+#~ msgstr "Työkalut"
+
+#~ msgid "Decrease brush size"
+#~ msgstr "Pienennä siveltimen kokoa"
+
+#~ msgid "Increase brush size"
+#~ msgstr "Suurenna siveltimen kokoa"
+
+#~ msgid "Decrease arrow size"
+#~ msgstr "Pienennä nuolen kokoa"
+
+#~ msgid "Increase arrow size"
+#~ msgstr "Suurenna nuolen kokoa"
+
+#~ msgid "Auto Hide"
+#~ msgstr "Piilota automaattisesti"
+
+#~ msgid "Minimize"
+#~ msgstr "Pienennä"
+
+#~ msgid "Increase outline size"
+#~ msgstr "Suurenna ääriviivan kokoa"
+
+#~ msgid "Decrease outline size"
+#~ msgstr "Pienennä ääriviivan kokoa"
+
+#~ msgid "Open Recent"
+#~ msgstr "Avaa viimeaikainen"
+
+#~ msgid "Images"
+#~ msgstr "Kuvat"
+
+#~ msgid "Intersect (Alt + Left Click)"
+#~ msgstr "Leikkaus (Alt + Vasen napsautus)"
+
+#~ msgid "Undock"
+#~ msgstr "Irrota"
+
+#~ msgid "Dock"
+#~ msgstr "Telakoi"
+
+#~ msgid "Decrease length offset"
+#~ msgstr "Vähennä pituussiirtymää"
+
+#~ msgid "Increase angle offset"
+#~ msgstr "Lisää kulmasiirtymää"
+
+#~ msgid "copy"
+#~ msgstr "kopioi"
+
+#~ msgid "Decrease angle offset"
+#~ msgstr "Vähennä kulmasiirtymää"
+
+#~ msgid "Increase length offset"
+#~ msgstr "Lisää pituussiirtymää"
+
+#~ msgid ""
+#~ "Left click and drag the selection to move selection outline. Hold Ctrl to "
+#~ "scale instead of move. Right click and drag the selection to rotate "
+#~ "selection outline. Hold Shift to rotate in steps. Use arrow keys to move "
+#~ "selection outline by a single pixel."
+#~ msgstr ""
+#~ "Napsauta hiiren vasemmalla napilla ja raahaa valintaa liikuttaaksesi "
+#~ "valinnan ulkorajaa. Pidä alhaalla Ctrl-nappia skaalataksesi liikuttamisen "
+#~ "sijasta. Paina hiiren oikealla napilla raahataksesi valintaa kiertääksesi "
+#~ "ulkorajaa. Pidä alhaalla SHift-nappia kiertääksesi askeleittain. Käytä "
+#~ "nuolinäppäimiä liikuttaaksesi valinnan ulkorajaa aina yhden pikselin verran."
+
+#~ msgid ""
+#~ "Left click and drag the selection to move selected content. Hold Ctrl to "
+#~ "scale instead of move. Right click and drag the selection to rotate selected "
+#~ "content. Hold Shift to rotate in steps. Use arrow keys to move selected "
+#~ "content by a single pixel."
+#~ msgstr ""
+#~ "Napsauta hiiren vasemmalla napilla ja raahaa valinta liikuttaaksesi valittua "
+#~ "sisältöä. Pidä alhaalla Ctrl-nappia skaalataksesi siirtämisen sijasta. "
+#~ "Oikealla hiirennapilla raahaamalla kierrät valittua sisältöä. Pidä alhaalla "
+#~ "Shift-vaihtonäppäintä kiertääksesi askeleittain. Käytä nuolinäppäimiä "
+#~ "liikuttaaksesi valittua sisältöä aina yhden pikselin verran."
+
+#~ msgid ""
+#~ "Left click to draw a shape with the primary color.\n"
+#~ "Left click on a shape to add a control point.\n"
+#~ "Left click on a control point and drag to move it.\n"
+#~ "Right click on a control point and drag to change its tension.\n"
+#~ "Hold Shift to snap to angles.\n"
+#~ "Use arrow keys to move the selected control point.\n"
+#~ "Press Ctrl + left/right arrows to select control points by order.\n"
+#~ "Press Delete to delete the selected control point.\n"
+#~ "Press Space to add a new control point at the mouse position.\n"
+#~ "Hold Ctrl while pressing Space to create the control point at the exact same "
+#~ "position.\n"
+#~ "Hold Ctrl while left clicking on a control point to create a new shape at "
+#~ "the exact same position.\n"
+#~ "Hold Ctrl while clicking outside of the image bounds to create a new shape "
+#~ "starting at the edge.\n"
+#~ "Press Enter to finalize the shape."
+#~ msgstr ""
+#~ "Napsauta hiiren vasemmalla napilla piirtääksesi muodon vakiovärillä.\n"
+#~ "Napsauta hiiren vasemmalla napilla muodon päällä lisätäksesi "
+#~ "hallintapisteen.\n"
+#~ "Napsauta hiiren vasemmalla napilla hallintapisteen päällä ja raahaa sitä "
+#~ "liikuttaaksesi.\n"
+#~ "Napsauta hiiren oikealla napilla hallintapisteen päällä ja raahaa "
+#~ "muuttaaksesi sen jännitteen \n"
+#~ "Pidä näppäimistön Shift-vaihtonäppäintä napsauttaaksesi muotokohteen eri "
+#~ "kulmiin.\n"
+#~ "Käytä nuolinäppäimiä liikuttaaksesi valittua hallintapistettä.\n"
+#~ "Paina Ctrl + vasen/oikea nuoli valitaksesi hallintapisteen järjestyksen.\n"
+#~ "Paina näppäimistön Delete-nappia poistaaksesi valitun hallintapisteen.\n"
+#~ "Paina Välilyöntiä lisätäksesi uuden hallintapisteen siihen missä hiiren "
+#~ "osoitin on.\n"
+#~ "Pidä alhaalla Ctrl-nappia samalla kun painat Välilyöntiä luodaksesi "
+#~ "hallintapisteen täsmälleen samaan paikkaan.\n"
+#~ "Pidä alhaalla Ctrl-nappia samalla kun painat hiiren vasenta nappia "
+#~ "hallintapisteen luodaksesi uuden muodon samaan paikkaan.\n"
+#~ "Paina Ctrl-nappia samalla kun napsautat hiirellä kuvan ulkopuolella "
+#~ "luodaksesi uuden muodon joka alkaa sen reunasta.\n"
+#~ "Paina Askelpalautinta viimeistelläksesi muodon."
+
+#~ msgid "Decrease shape's corner radius"
+#~ msgstr "Vähennä kulman sädettä"
+
+#~ msgid "Increase shape's corner radius"
+#~ msgstr "Lisää kulman sädettä"
