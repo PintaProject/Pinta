@@ -593,7 +593,7 @@ namespace Pinta.Core
 		{
 			g.Save ();
 
-			Gradient gradient = new Cairo.LinearGradient (p1.X, p1.Y, p2.X, p2.Y);
+			using var gradient = new LinearGradient (p1.X, p1.Y, p2.X, p2.Y);
 
 			if (mode == GradientColorMode.Color) {
 				gradient.AddColorStop (0, c1);
@@ -614,7 +614,7 @@ namespace Pinta.Core
 		{
 			g.Save ();
 
-			Gradient gradient = new Cairo.LinearGradient (p1.X, p1.Y, p2.X, p2.Y);
+			using var gradient = new LinearGradient (p1.X, p1.Y, p2.X, p2.Y);
 
 			if (mode == GradientColorMode.Color) {
 				gradient.AddColorStop (0, c1);

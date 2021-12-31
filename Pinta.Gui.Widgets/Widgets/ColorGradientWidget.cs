@@ -216,7 +216,7 @@ namespace Pinta.Gui.Widgets
 		{
 			var rect = GradientRectangle;
 
-			var pat = new LinearGradient (rect.X, rect.Y, rect.X, rect.Y + rect.Height);
+			using var pat = new LinearGradient (rect.X, rect.Y, rect.X, rect.Y + rect.Height);
 			pat.AddColorStop (0, MaxColor);
 			pat.AddColorStop (1, new Cairo.Color (0, 0, 0));
 
