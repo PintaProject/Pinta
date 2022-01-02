@@ -135,7 +135,9 @@ namespace Pinta.Core
 			state |= (current_state & Gdk.ModifierType.ControlMask);
 			state |= (current_state & Gdk.ModifierType.ShiftMask);
 			state |= (current_state & Gdk.ModifierType.Mod1Mask);
-			state |= (current_state & Gdk.ModifierType.Mod2Mask); // Command key on macOS.
+			if (PintaCore.System.OperatingSystem == OS.Mac) {
+				state |= (current_state & Gdk.ModifierType.Mod2Mask); // Command key on macOS.
+			}
 
 			return state;
 		}
