@@ -57,6 +57,8 @@ namespace Pinta.Docking
 				IDockNotebookItem? item = items.Where (i => i.Widget == widget).FirstOrDefault ();
 				ActiveTabChanged?.Invoke (this, new TabEventArgs (item));
 			};
+
+			Scrollable = true;
 		}
 
 		/// <summary>
