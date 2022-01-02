@@ -12,6 +12,7 @@ Thanks to the following contributors who worked on this release:
 
 ### Fixed
 - Fixed a bug where opening a large number of tabs could cause the window's width to expand ([#1956182](https://bugs.launchpad.net/pinta/+bug/1956182))
+- Fixed a bug that could cause a border to appear around the image when zoomed in far enough to require scrolling.
 
 ## [2.0](https://github.com/PintaProject/Pinta/releases/tag/2.0) - 2021/12/31
 

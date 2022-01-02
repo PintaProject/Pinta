@@ -135,13 +135,14 @@ namespace Pinta
 			RowHomogeneous = false;
 
 			scrolled_window = new ScrolledWindow ();
-			var css = new CssProvider ();
-			css.LoadFromData ("* { background-color: @theme_bg_color; }");
-			scrolled_window.StyleContext.AddProvider (css, 0);
 
 			var vp = new Viewport () {
 				ShadowType = ShadowType.None
 			};
+
+			var css = new CssProvider ();
+			css.LoadFromData ("* { background-color: @theme_bg_color; }");
+			vp.StyleContext.AddProvider (css, 0);
 
 			vp.ScrollEvent += ViewPort_ScrollEvent;
 
