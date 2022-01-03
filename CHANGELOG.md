@@ -5,10 +5,12 @@ All notable changes to this project (beginning with version 1.7) will be documen
 
 Thanks to the following contributors who worked on this release:
 - @cameronwhite
+- @jpobst
 
 ### Added
 
 ### Changed
+- Some of the less frequently used items in the View menu (e.g. hiding the toolbar or status bar) are now grouped in their own submenu (#203)
 
 ### Fixed
 - Fixed a bug where opening a large number of tabs could cause the window's width to expand ([#1956182](https://bugs.launchpad.net/pinta/+bug/1956182))

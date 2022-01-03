@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-12-26 22:42-0500\n"
+"POT-Creation-Date: 2022-01-03 00:34-0500\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -64,7 +64,7 @@ msgstr ""
 msgid "About"
 msgstr ""
 
-#: ../Pinta/Dialogs/AboutDialog.cs:287
+#: ../Pinta/Dialogs/AboutDialog.cs:289
 msgid "About Pinta"
 msgstr ""
 
@@ -197,7 +197,7 @@ msgstr ""
 msgid "Background:"
 msgstr ""
 
-#: ../Pinta/Dialogs/AboutDialog.cs:177
+#: ../Pinta/Dialogs/AboutDialog.cs:179
 msgid "Based on the work of Paint.NET:"
 msgstr ""
 
@@ -299,7 +299,7 @@ msgstr ""
 msgid "Centered"
 msgstr ""
 
-#: ../Pinta.Core/Actions/ViewActions.cs:162
+#: ../Pinta.Core/Actions/ViewActions.cs:144
 msgid "Centimeters"
 msgstr ""
 
@@ -462,7 +462,7 @@ msgstr ""
 msgid "Contrast"
 msgstr ""
 
-#: ../Pinta/Dialogs/AboutDialog.cs:145
+#: ../Pinta/Dialogs/AboutDialog.cs:147
 msgid "Contributors to this release:"
 msgstr ""
 
@@ -590,7 +590,7 @@ msgstr ""
 msgid "Don't change canvas size"
 msgstr ""
 
-#: ../Pinta/MainWindow.cs:567
+#: ../Pinta/MainWindow.cs:539
 msgid "Download failed"
 msgstr ""
 
@@ -598,7 +598,7 @@ msgstr ""
 msgid "Download size"
 msgstr ""
 
-#: ../Pinta/MainWindow.cs:548
+#: ../Pinta/MainWindow.cs:520
 msgid "Downloading Image"
 msgstr ""
 
@@ -890,7 +890,7 @@ msgstr ""
 msgid "Import from File..."
 msgstr ""
 
-#: ../Pinta.Core/Actions/ViewActions.cs:161
+#: ../Pinta.Core/Actions/ViewActions.cs:143
 msgid "Inches"
 msgstr ""
 
@@ -1522,7 +1522,7 @@ msgstr ""
 msgid "Pixelate"
 msgstr ""
 
-#: ../Pinta.Core/Actions/ViewActions.cs:160
+#: ../Pinta.Core/Actions/ViewActions.cs:142
 msgid "Pixels"
 msgstr ""
 
@@ -1552,7 +1552,7 @@ msgstr ""
 msgid "Power"
 msgstr ""
 
-#: ../Pinta/Dialogs/AboutDialog.cs:192
+#: ../Pinta/Dialogs/AboutDialog.cs:194
 msgid "Powered by Mono:"
 msgstr ""
 
@@ -1564,7 +1564,7 @@ msgstr ""
 msgid "Preview"
 msgstr ""
 
-#: ../Pinta/Dialogs/AboutDialog.cs:157
+#: ../Pinta/Dialogs/AboutDialog.cs:159
 msgid "Previous contributors:"
 msgstr ""
 
@@ -1798,7 +1798,7 @@ msgstr ""
 msgid "Rounded Rectangle"
 msgstr ""
 
-#: ../Pinta.Core/Actions/ViewActions.cs:157
+#: ../Pinta.Core/Actions/ViewActions.cs:139
 msgid "Ruler Units"
 msgstr ""
 
@@ -1899,6 +1899,10 @@ msgstr ""
 
 #: ../Pinta/Main.cs:60
 msgid "Show this message and exit."
+msgstr ""
+
+#: ../Pinta.Core/Actions/ViewActions.cs:150
+msgid "Show/Hide"
 msgstr ""
 
 #: ../Pinta.Tools/Tools/ColorPickerTool.cs:225
@@ -2098,7 +2102,7 @@ msgstr ""
 msgid "Translate This Application"
 msgstr ""
 
-#: ../Pinta/Dialogs/AboutDialog.cs:171
+#: ../Pinta/Dialogs/AboutDialog.cs:173
 msgid "Translated by:"
 msgstr ""
 
@@ -2116,7 +2120,7 @@ msgstr ""
 msgid "Type"
 msgstr ""
 
-#: ../Pinta/MainWindow.cs:568
+#: ../Pinta/MainWindow.cs:540
 #, csharp-format
 msgid ""
 "Unable to download image from {0}.\n"
@@ -2194,7 +2198,7 @@ msgid ""
 "quality for final quality, large images, and large angles."
 msgstr ""
 
-#: ../Pinta/Dialogs/AboutDialog.cs:184
+#: ../Pinta/Dialogs/AboutDialog.cs:186
 msgid "Using some icons from:"
 msgstr ""
 
@@ -2203,7 +2207,7 @@ msgstr ""
 msgid "Version"
 msgstr ""
 
-#: ../Pinta/Dialogs/AboutDialog.cs:304
+#: ../Pinta/Dialogs/AboutDialog.cs:306
 msgid "Version Info"
 msgstr ""
 
@@ -2226,7 +2230,7 @@ msgid "Width:"
 msgstr ""
 
 #: ../Pinta.Core/Actions/ViewActions.cs:103
-#: ../Pinta.Core/Actions/ViewActions.cs:276
+#: ../Pinta.Core/Actions/ViewActions.cs:282
 #: ../Pinta.Core/Classes/DocumentWorkspace.cs:315
 #: ../Pinta.Core/Classes/DocumentWorkspace.cs:323
 msgid "Window"
@@ -2339,7 +2343,7 @@ msgstr ""
 msgid "pixels"
 msgstr ""
 
-#: ../Pinta/Dialogs/AboutDialog.cs:168
+#: ../Pinta/Dialogs/AboutDialog.cs:170
 msgid "translator-credits"
 msgstr ""
 
@@ -2376,7 +2380,7 @@ msgstr[1] ""
 
 #. Translators: This specifies the format of the zoom percentage choices
 #. in the toolbar.
-#: ../Pinta.Core/Actions/ViewActions.cs:257
+#: ../Pinta.Core/Actions/ViewActions.cs:263
 #, csharp-format
 msgid "{0}%"
 msgstr ""
