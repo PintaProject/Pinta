@@ -63,12 +63,14 @@ jobs:
       run: dotnet test Pinta.sln --configuration Release
 
     - name: Add Cert to Keychain
+      if: github.event_name != 'pull_request'
       uses: apple-actions/import-codesign-certs@v1
       with:
         p12-file-base64: ${{ secrets.MAC_CERTS_BASE64 }}
         p12-password: ${{ secrets.MAC_CERTS_PASSWORD }}
 
     - name: Build Installer
+      if: github.event_name != 'pull_request'
       env:
         MAC_DEV_PASSWORD: ${{ secrets.MAC_DEV_PASSWORD }}
       run: |
@@ -76,6 +78,7 @@ jobs:
         ./build_installer.sh
 
     - name: Upload Installer
+      if: github.event_name != 'pull_request'
       uses: actions/upload-artifact@v2
       with:
         name: "Pinta.dmg"
