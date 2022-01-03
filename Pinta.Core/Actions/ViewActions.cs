@@ -114,24 +114,6 @@ namespace Pinta.Core
 		#region Initialization
 		public void RegisterActions (Gtk.Application app, GLib.Menu menu)
 		{
-			app.AddAction (ToolBar);
-			menu.AppendItem (ToolBar.CreateMenuItem ());
-
-			app.AddAction (StatusBar);
-			menu.AppendItem (StatusBar.CreateMenuItem ());
-
-			app.AddAction (ToolBox);
-			menu.AppendItem (ToolBox.CreateMenuItem ());
-
-			app.AddAction (PixelGrid);
-			menu.AppendItem (PixelGrid.CreateMenuItem ());
-
-			app.AddAction (Rulers);
-			menu.AppendItem (Rulers.CreateMenuItem ());
-
-			app.AddAction (ImageTabs);
-			menu.AppendItem (ImageTabs.CreateMenuItem ());
-
 			var zoom_section = new GLib.Menu ();
 			menu.AppendSection (null, zoom_section);
 
@@ -160,6 +142,30 @@ namespace Pinta.Core
 			metric_menu.Append (Translations.GetString ("Pixels"), $"app.{RulerMetric.Name}(0)");
 			metric_menu.Append (Translations.GetString ("Inches"), $"app.{RulerMetric.Name}(1)");
 			metric_menu.Append (Translations.GetString ("Centimeters"), $"app.{RulerMetric.Name}(2)");
+
+			var show_hide_section = new GLib.Menu ();
+			menu.AppendSection (null, show_hide_section);
+
+			var show_hide_menu = new GLib.Menu ();
+			show_hide_section.AppendSubmenu (Translations.GetString ("Show/Hide"), show_hide_menu);
+
+			app.AddAction (PixelGrid);
+			show_hide_menu.AppendItem (PixelGrid.CreateMenuItem ());
+
+			app.AddAction (Rulers);
+			show_hide_menu.AppendItem (Rulers.CreateMenuItem ());
+
+			app.AddAction (ToolBar);
+			show_hide_menu.AppendItem (ToolBar.CreateMenuItem ());
+
+			app.AddAction (StatusBar);
+			show_hide_menu.AppendItem (StatusBar.CreateMenuItem ());
+
+			app.AddAction (ToolBox);
+			show_hide_menu.AppendItem (ToolBox.CreateMenuItem ());
+
+			app.AddAction (ImageTabs);
+			show_hide_menu.AppendItem (ImageTabs.CreateMenuItem ());
 		}
 
 		public void CreateStatusBar (Statusbar statusbar)
