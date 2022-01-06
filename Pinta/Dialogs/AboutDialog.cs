@@ -48,9 +48,6 @@ namespace Pinta
 		Pixbuf monoPowered;
 		int scroll;
 		Pango.Layout layout = null!; // NRT - Set by OnRealized
-		int monoLogoSpacing = 5;
-		int textTop;
-		int scrollPause;
 		int scrollStart;
 
 		internal uint TimerHandle;
@@ -199,13 +196,9 @@ namespace Pinta
 
 		bool ScrollDown ()
 		{
-			//if (scrollPause > 0) {
-			//        if (--scrollPause == 0)
-			//                ++scroll;
-			//} else
-			++scroll;
+			--scroll;
 
-			this.QueueDrawArea (0, 0, Window.FrameExtents.Width, image.Height);
+			this.QueueDrawArea (0, 0, AllocatedWidth, image.Height);
 			return true;
 		}
 
@@ -227,24 +220,19 @@ namespace Pinta
 
 		private void DrawText (Cairo.Context ctx)
 		{
-			int width = Window.FrameExtents.Width;
-			int height = Window.FrameExtents.Height;
+			const int monoLogoSpacing = 5;
 
-			int widthPixel, heightPixel;
-			layout.GetPixelSize (out widthPixel, out heightPixel);
+			layout.GetPixelSize (out int text_width, out int text_height);
 
 			ctx.SetSourceColor (new Cairo.Color (1, 1, 1));
-			ctx.MoveTo (0, textTop - scroll);
+			ctx.MoveTo (0, scroll);
 			Pango.CairoHelper.ShowLayout (ctx, layout);
 
-			Gdk.CairoHelper.SetSourcePixbuf (ctx, monoPowered, (width / 2) - (monoPowered.Width / 2), textTop - scroll + heightPixel + monoLogoSpacing);
+			Gdk.CairoHelper.SetSourcePixbuf (ctx, monoPowered, (AllocatedWidth / 2) - (monoPowered.Width / 2), scroll + text_height + monoLogoSpacing);
 			ctx.Paint ();
 
-			heightPixel = heightPixel - 80 + image.Height;
-
-			if ((scroll == heightPixel) && (scrollPause == 0))
-				scrollPause = 60;
-			if (scroll > heightPixel + monoLogoSpacing + monoPowered.Height + 200)
+			var scroll_dist = scrollStart - scroll;
+			if (scroll_dist > text_height + monoLogoSpacing + monoPowered.Height + 200)
 				scroll = scrollStart;
 		}
 
@@ -259,21 +247,14 @@ namespace Pinta
 
 		protected void OnRealized (object? o, EventArgs args)
 		{
-			int x, y;
-			int w, h;
-			Window.GetOrigin (out x, out y);
-			w = Window.FrameExtents.Width;
-			h = Window.FrameExtents.Height;
-
-			textTop = y + image.Height - 30;
-			scrollStart = -(image.Height - textTop);
+			scrollStart = image.Height;
 			scroll = scrollStart;
 
-			layout = new Pango.Layout (this.PangoContext);
-			// FIXME: this seems wrong but works
-			layout.Width = w * (int) Pango.Scale.PangoScale;
-			layout.Wrap = Pango.WrapMode.Word;
-			layout.Alignment = Pango.Alignment.Center;
+			layout = new Pango.Layout (PangoContext) {
+				Width = AllocatedWidth * (int) Pango.Scale.PangoScale,
+				Wrap = Pango.WrapMode.Word,
+				Alignment = Pango.Alignment.Center
+			};
 			layout.SetMarkup (CreditText);
 		}
 

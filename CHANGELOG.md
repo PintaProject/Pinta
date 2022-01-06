@@ -14,9 +14,10 @@ Thanks to the following contributors who worked on this release:
 
 ### Fixed
 - Fixed a bug where opening a large number of tabs could cause the window's width to expand ([#1956182](https://bugs.launchpad.net/pinta/+bug/1956182))
-- Fixed a bug that could cause a border to appear around the image when zoomed in far enough to require scrolling.
-- Fixed an issue where tool shortcuts could be affected by Num Lock being enabled ([#1093935](https://bugs.launchpad.net/pinta/+bug/1093935)).
-- Fixed a missing file (`installer/linux/install.proj`) from the release tarball that caused the `install` build step to fail.
+- Fixed a bug that could cause a border to appear around the image when zoomed in far enough to require scrolling
+- Fixed an issue where tool shortcuts could be affected by Num Lock being enabled ([#1093935](https://bugs.launchpad.net/pinta/+bug/1093935))
+- Fixed a missing file (`installer/linux/install.proj`) from the release tarball that caused the `install` build step to fail
+- Fixed an issue where the credits text in the About dialog was aligned incorrectly ([#1956168](https://bugs.launchpad.net/pinta/+bug/1956168))
 
 ## [2.0](https://github.com/PintaProject/Pinta/releases/tag/2.0) - 2021/12/31
 
