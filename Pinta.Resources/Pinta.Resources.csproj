@@ -1,14 +1,7 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
   <PropertyGroup>
     <TargetFramework>net6.0</TargetFramework>
-    <RootNamespace>Pinta.Resources</RootNamespace>
-    <AssemblyName>Pinta.Resources</AssemblyName>
     <Nullable>enable</Nullable>
-
-    <Version>2.0.1.0</Version>
-    <Authors>PintaProject</Authors>
-    <Company />
-    <Product />
   </PropertyGroup>
 
   <ItemGroup>
