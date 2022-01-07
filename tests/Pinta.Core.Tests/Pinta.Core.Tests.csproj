@@ -1,14 +1,7 @@
-﻿<Project Sdk="Microsoft.NET.Sdk">
+<Project Sdk="Microsoft.NET.Sdk">
   <PropertyGroup>
     <TargetFramework>net6.0</TargetFramework>
-    <RootNamespace>Pinta.Core.Tests</RootNamespace>
-    <AssemblyName>Pinta.Core.Tests</AssemblyName>
     <IsPublishable>false</IsPublishable>
-
-    <Version>2.0.1.0</Version>
-    <Authors>PintaProject</Authors>
-    <Company />
-    <Product />
   </PropertyGroup>
 
   <ItemGroup>

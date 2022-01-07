@@ -1,27 +1,21 @@
-﻿<Project Sdk="Microsoft.NET.Sdk">
+<Project Sdk="Microsoft.NET.Sdk">
   <PropertyGroup>
     <TargetFramework>net6.0</TargetFramework>
     <OutputType>WinExe</OutputType>
-    <RootNamespace>Pinta</RootNamespace>
-    <AssemblyName>Pinta</AssemblyName>
     <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
     <Nullable>enable</Nullable>
     <ApplicationIcon>Pinta.ico</ApplicationIcon>
     <OutputPath>..\bin</OutputPath>
     <AppendTargetFrameworkToOutputPath>false</AppendTargetFrameworkToOutputPath>
 
-    <Version>2.0.1.0</Version>
-    <Authors>PintaProject</Authors>
-    <Company />
-    <Product />
-
     <!-- Disabled by default as it requires gettext to be installed. -->
     <BuildTranslations>false</BuildTranslations>
-
   </PropertyGroup>
+
   <ItemGroup>
     <PackageReference Include="GtkSharp" Version="3.24.24.34" />
   </ItemGroup>
+
   <ItemGroup>
     <ProjectReference Include="..\Pinta.Core\Pinta.Core.csproj" />
     <ProjectReference Include="..\Pinta.Docking\Pinta.Docking.csproj" />
@@ -37,6 +31,7 @@
   <ItemGroup>
     <Translation Include="../po/*.po" />
   </ItemGroup>
+
   <Target Name="CompileTranslations" BeforeTargets="Build" Condition="'$(BuildTranslations)' == 'true'" Inputs="@(Translation)" Outputs="$(OutputPath)/locale/%(Translation.Filename)/LC_MESSAGES/pinta.mo">
 
     <MakeDir Directories="$(OutputPath)/locale/%(Translation.Filename)/LC_MESSAGES" />

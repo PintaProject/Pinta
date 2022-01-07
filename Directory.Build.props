@@ -1,0 +1,9 @@
+<Project>
+  <PropertyGroup>
+    <!-- Versioning and assembly info -->
+    <Version>2.0.1.0</Version>
+    <Authors>PintaProject</Authors>
+    <Company />
+    <Product />
+  </PropertyGroup>
+</Project>
