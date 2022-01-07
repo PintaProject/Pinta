@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: pinta\n"
 "Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
-"POT-Creation-Date: 2021-12-26 22:42-0500\n"
+"POT-Creation-Date: 2022-01-03 00:34-0500\n"
 "PO-Revision-Date: 2021-11-29 09:22+0000\n"
 "Last-Translator: Arief Setiadi Wibowo <q_thrynx@yahoo.com>\n"
 "Language-Team: Indonesian <permataharahap@gmail.com>\n"
@@ -15,8 +15,8 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=1; plural=0;\n"
-"X-Launchpad-Export-Date: 2021-12-31 15:28+0000\n"
-"X-Generator: Launchpad (build adb364d6a74a28e7b95d51cd30446ec16160de6c)\n"
+"X-Launchpad-Export-Date: 2022-01-07 03:28+0000\n"
+"X-Generator: Launchpad (build 1682fd44eec4f62371f0bed122a83482daf08e23)\n"
 "X-Poedit-Language: Indonesian\n"
 "X-Poedit-Country: INDONESIA\n"
 
@@ -67,7 +67,7 @@ msgstr ""
 msgid "About"
 msgstr "Tentang"
 
-#: ../Pinta/Dialogs/AboutDialog.cs:287
+#: ../Pinta/Dialogs/AboutDialog.cs:289
 msgid "About Pinta"
 msgstr "Tentang Pinta"
 
@@ -200,7 +200,7 @@ msgstr "Warna Latar Belakang"
 msgid "Background:"
 msgstr "Latar belakang:"
 
-#: ../Pinta/Dialogs/AboutDialog.cs:177
+#: ../Pinta/Dialogs/AboutDialog.cs:179
 msgid "Based on the work of Paint.NET:"
 msgstr "Berdasarkan karya Paint.NET:"
 
@@ -302,7 +302,7 @@ msgstr "Ofset Tengah"
 msgid "Centered"
 msgstr "Ditengahkan"
 
-#: ../Pinta.Core/Actions/ViewActions.cs:162
+#: ../Pinta.Core/Actions/ViewActions.cs:144
 msgid "Centimeters"
 msgstr "Sentimeter"
 
@@ -469,7 +469,7 @@ msgstr "Bersambungan"
 msgid "Contrast"
 msgstr "Kontras"
 
-#: ../Pinta/Dialogs/AboutDialog.cs:145
+#: ../Pinta/Dialogs/AboutDialog.cs:147
 msgid "Contributors to this release:"
 msgstr "Kontributor untuk rilis ini:"
 
@@ -597,7 +597,7 @@ msgstr "Jangan ganti alat"
 msgid "Don't change canvas size"
 msgstr "Jangan ubah ukuran kanvas"
 
-#: ../Pinta/MainWindow.cs:567
+#: ../Pinta/MainWindow.cs:539
 msgid "Download failed"
 msgstr "Gagal mengunduh"
 
@@ -605,7 +605,7 @@ msgstr "Gagal mengunduh"
 msgid "Download size"
 msgstr "Ukuran unduhan"
 
-#: ../Pinta/MainWindow.cs:548
+#: ../Pinta/MainWindow.cs:520
 msgid "Downloading Image"
 msgstr ""
 
@@ -899,7 +899,7 @@ msgstr "Impor Dari Berkas"
 msgid "Import from File..."
 msgstr "Impor dari Berkas..."
 
-#: ../Pinta.Core/Actions/ViewActions.cs:161
+#: ../Pinta.Core/Actions/ViewActions.cs:143
 msgid "Inches"
 msgstr "Inci"
 
@@ -1553,7 +1553,7 @@ msgstr "Kisi Piksel"
 msgid "Pixelate"
 msgstr "Pikselkan"
 
-#: ../Pinta.Core/Actions/ViewActions.cs:160
+#: ../Pinta.Core/Actions/ViewActions.cs:142
 msgid "Pixels"
 msgstr "Piksel"
 
@@ -1583,7 +1583,7 @@ msgstr "Posterkan"
 msgid "Power"
 msgstr "Daya"
 
-#: ../Pinta/Dialogs/AboutDialog.cs:192
+#: ../Pinta/Dialogs/AboutDialog.cs:194
 msgid "Powered by Mono:"
 msgstr "Didukung oleh Mono:"
 
@@ -1595,7 +1595,7 @@ msgstr "Set Awal:"
 msgid "Preview"
 msgstr "Pratinjau"
 
-#: ../Pinta/Dialogs/AboutDialog.cs:157
+#: ../Pinta/Dialogs/AboutDialog.cs:159
 msgid "Previous contributors:"
 msgstr "Kontributor sebelumnya:"
 
@@ -1829,7 +1829,7 @@ msgstr "Bentuk Garis Bulat"
 msgid "Rounded Rectangle"
 msgstr "Persegi Panjang Berlengkung"
 
-#: ../Pinta.Core/Actions/ViewActions.cs:157
+#: ../Pinta.Core/Actions/ViewActions.cs:139
 msgid "Ruler Units"
 msgstr "Satuan Penggaris"
 
@@ -1931,6 +1931,10 @@ msgstr "Tampilkan Lapisan"
 #: ../Pinta/Main.cs:60
 msgid "Show this message and exit."
 msgstr "Tampilkan pesan ini dan keluar."
+
+#: ../Pinta.Core/Actions/ViewActions.cs:150
+msgid "Show/Hide"
+msgstr ""
 
 #: ../Pinta.Tools/Tools/ColorPickerTool.cs:225
 msgid "Single Pixel"
@@ -2133,7 +2137,7 @@ msgstr "Peta Transfer"
 msgid "Translate This Application"
 msgstr "Terjemahkan Aplikasi Ini"
 
-#: ../Pinta/Dialogs/AboutDialog.cs:171
+#: ../Pinta/Dialogs/AboutDialog.cs:173
 msgid "Translated by:"
 msgstr "Diterjemahkan oleh:"
 
@@ -2151,7 +2155,7 @@ msgstr "Pelintir"
 msgid "Type"
 msgstr "Jenis"
 
-#: ../Pinta/MainWindow.cs:568
+#: ../Pinta/MainWindow.cs:540
 #, csharp-format
 msgid ""
 "Unable to download image from {0}.\n"
@@ -2233,7 +2237,7 @@ msgstr ""
 "Gunakan kualitas rendah untuk pratinjau, citra kecil, dan sudut kecil. "
 "Gunakan kualitas tinggi untuk hasil akhir, citra besar, dan sudut besar."
 
-#: ../Pinta/Dialogs/AboutDialog.cs:184
+#: ../Pinta/Dialogs/AboutDialog.cs:186
 msgid "Using some icons from:"
 msgstr "Menggunakan ikon dari:"
 
@@ -2242,7 +2246,7 @@ msgstr "Menggunakan ikon dari:"
 msgid "Version"
 msgstr "Versi"
 
-#: ../Pinta/Dialogs/AboutDialog.cs:304
+#: ../Pinta/Dialogs/AboutDialog.cs:306
 msgid "Version Info"
 msgstr "Info Versi"
 
@@ -2265,7 +2269,7 @@ msgid "Width:"
 msgstr "Lebar:"
 
 #: ../Pinta.Core/Actions/ViewActions.cs:103
-#: ../Pinta.Core/Actions/ViewActions.cs:276
+#: ../Pinta.Core/Actions/ViewActions.cs:282
 #: ../Pinta.Core/Classes/DocumentWorkspace.cs:315
 #: ../Pinta.Core/Classes/DocumentWorkspace.cs:323
 msgid "Window"
@@ -2378,7 +2382,7 @@ msgstr "jumlah ulir yang digunakan untuk melukis"
 msgid "pixels"
 msgstr "piksel"
 
-#: ../Pinta/Dialogs/AboutDialog.cs:168
+#: ../Pinta/Dialogs/AboutDialog.cs:170
 msgid "translator-credits"
 msgstr ""
 "Launchpad Contributions:\n"
@@ -2425,7 +2429,7 @@ msgstr[0] "{0} pembaruan tersedia"
 
 #. Translators: This specifies the format of the zoom percentage choices
 #. in the toolbar.
-#: ../Pinta.Core/Actions/ViewActions.cs:257
+#: ../Pinta.Core/Actions/ViewActions.cs:263
 #, csharp-format
 msgid "{0}%"
 msgstr "{0}%"

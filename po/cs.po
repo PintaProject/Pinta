@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: pinta\n"
 "Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
-"POT-Creation-Date: 2021-12-26 22:42-0500\n"
+"POT-Creation-Date: 2022-01-03 00:34-0500\n"
 "PO-Revision-Date: 2017-11-29 09:06+0000\n"
 "Last-Translator: Pavel Borecki <Unknown>\n"
 "Language-Team: Czech <cs@li.org>\n"
@@ -15,8 +15,8 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=3; plural=(n==1) ? 0 : (n>=2 && n<=4) ? 1 : 2;\n"
-"X-Launchpad-Export-Date: 2021-12-31 15:28+0000\n"
-"X-Generator: Launchpad (build adb364d6a74a28e7b95d51cd30446ec16160de6c)\n"
+"X-Launchpad-Export-Date: 2022-01-07 03:28+0000\n"
+"X-Generator: Launchpad (build 1682fd44eec4f62371f0bed122a83482daf08e23)\n"
 
 #: Mono.Addins.Gui/Mono.Addins.Gui/InstallDialog.cs:142
 msgid " (in user directory)"
@@ -65,7 +65,7 @@ msgstr "D_oplňky"
 msgid "About"
 msgstr "O aplikaci"
 
-#: ../Pinta/Dialogs/AboutDialog.cs:287
+#: ../Pinta/Dialogs/AboutDialog.cs:289
 msgid "About Pinta"
 msgstr "O Pinta"
 
@@ -200,7 +200,7 @@ msgstr "Barva pozadí"
 msgid "Background:"
 msgstr "Pozadí:"
 
-#: ../Pinta/Dialogs/AboutDialog.cs:177
+#: ../Pinta/Dialogs/AboutDialog.cs:179
 msgid "Based on the work of Paint.NET:"
 msgstr "Na základě práce Paint.NET"
 
@@ -302,7 +302,7 @@ msgstr "Středové odsazení"
 msgid "Centered"
 msgstr "Vystředěné"
 
-#: ../Pinta.Core/Actions/ViewActions.cs:162
+#: ../Pinta.Core/Actions/ViewActions.cs:144
 msgid "Centimeters"
 msgstr "Centimetry"
 
@@ -471,7 +471,7 @@ msgstr "Spojité"
 msgid "Contrast"
 msgstr "Kontrast"
 
-#: ../Pinta/Dialogs/AboutDialog.cs:145
+#: ../Pinta/Dialogs/AboutDialog.cs:147
 msgid "Contributors to this release:"
 msgstr "Přispěli k této verzi:"
 
@@ -599,7 +599,7 @@ msgstr "Nepřepínat nástroj"
 msgid "Don't change canvas size"
 msgstr "Neměnit velikost plátna"
 
-#: ../Pinta/MainWindow.cs:567
+#: ../Pinta/MainWindow.cs:539
 msgid "Download failed"
 msgstr ""
 
@@ -607,7 +607,7 @@ msgstr ""
 msgid "Download size"
 msgstr "Velikost ke stažení"
 
-#: ../Pinta/MainWindow.cs:548
+#: ../Pinta/MainWindow.cs:520
 msgid "Downloading Image"
 msgstr ""
 
@@ -901,7 +901,7 @@ msgstr "Vložit ze souboru"
 msgid "Import from File..."
 msgstr "Vložit ze souboru..."
 
-#: ../Pinta.Core/Actions/ViewActions.cs:161
+#: ../Pinta.Core/Actions/ViewActions.cs:143
 msgid "Inches"
 msgstr "Palce"
 
@@ -1546,7 +1546,7 @@ msgstr "Pixelová mřížka"
 msgid "Pixelate"
 msgstr "Rozpixelovat"
 
-#: ../Pinta.Core/Actions/ViewActions.cs:160
+#: ../Pinta.Core/Actions/ViewActions.cs:142
 msgid "Pixels"
 msgstr "Pixely"
 
@@ -1576,7 +1576,7 @@ msgstr "Posterizovat"
 msgid "Power"
 msgstr "Síla"
 
-#: ../Pinta/Dialogs/AboutDialog.cs:192
+#: ../Pinta/Dialogs/AboutDialog.cs:194
 msgid "Powered by Mono:"
 msgstr "Běží na platformě Mono:"
 
@@ -1588,7 +1588,7 @@ msgstr "Předvolba:"
 msgid "Preview"
 msgstr "Náhled"
 
-#: ../Pinta/Dialogs/AboutDialog.cs:157
+#: ../Pinta/Dialogs/AboutDialog.cs:159
 msgid "Previous contributors:"
 msgstr "Přispěli k předchozím verzím:"
 
@@ -1822,7 +1822,7 @@ msgstr "Tvar zakulacené čáry"
 msgid "Rounded Rectangle"
 msgstr "Zakulacený obdélník"
 
-#: ../Pinta.Core/Actions/ViewActions.cs:157
+#: ../Pinta.Core/Actions/ViewActions.cs:139
 msgid "Ruler Units"
 msgstr "Jednotky pravítka"
 
@@ -1924,6 +1924,10 @@ msgstr "Zobrazit vrstvu"
 #: ../Pinta/Main.cs:60
 msgid "Show this message and exit."
 msgstr "Zobrazit tuto zprávu a zavřít."
+
+#: ../Pinta.Core/Actions/ViewActions.cs:150
+msgid "Show/Hide"
+msgstr ""
 
 #: ../Pinta.Tools/Tools/ColorPickerTool.cs:225
 msgid "Single Pixel"
@@ -2124,7 +2128,7 @@ msgstr "Přenosová mapa"
 msgid "Translate This Application"
 msgstr "Přeložit tuto aplikaci"
 
-#: ../Pinta/Dialogs/AboutDialog.cs:171
+#: ../Pinta/Dialogs/AboutDialog.cs:173
 msgid "Translated by:"
 msgstr "Přeložili:"
 
@@ -2142,7 +2146,7 @@ msgstr "Zkroutit"
 msgid "Type"
 msgstr "Typ"
 
-#: ../Pinta/MainWindow.cs:568
+#: ../Pinta/MainWindow.cs:540
 #, csharp-format
 msgid ""
 "Unable to download image from {0}.\n"
@@ -2222,7 +2226,7 @@ msgstr ""
 "Použivejte nízkou kvalitu pro náhledy, malé obrázky a nízké úhly. Vysokou "
 "kvalitu pro finální kvalitu, velké obrázky a úhly."
 
-#: ../Pinta/Dialogs/AboutDialog.cs:184
+#: ../Pinta/Dialogs/AboutDialog.cs:186
 msgid "Using some icons from:"
 msgstr "Použity některé ikonky z:"
 
@@ -2231,7 +2235,7 @@ msgstr "Použity některé ikonky z:"
 msgid "Version"
 msgstr "Verze"
 
-#: ../Pinta/Dialogs/AboutDialog.cs:304
+#: ../Pinta/Dialogs/AboutDialog.cs:306
 msgid "Version Info"
 msgstr "Informace o verzi"
 
@@ -2254,7 +2258,7 @@ msgid "Width:"
 msgstr "Šířka:"
 
 #: ../Pinta.Core/Actions/ViewActions.cs:103
-#: ../Pinta.Core/Actions/ViewActions.cs:276
+#: ../Pinta.Core/Actions/ViewActions.cs:282
 #: ../Pinta.Core/Classes/DocumentWorkspace.cs:315
 #: ../Pinta.Core/Classes/DocumentWorkspace.cs:323
 msgid "Window"
@@ -2367,7 +2371,7 @@ msgstr "počet vláken použitých k vykreslení"
 msgid "pixels"
 msgstr "pixely"
 
-#: ../Pinta/Dialogs/AboutDialog.cs:168
+#: ../Pinta/Dialogs/AboutDialog.cs:170
 msgid "translator-credits"
 msgstr ""
 "Launchpad Contributions:\n"
@@ -2416,7 +2420,7 @@ msgstr[2] "Dostupných {0} aktualizací"
 
 #. Translators: This specifies the format of the zoom percentage choices
 #. in the toolbar.
-#: ../Pinta.Core/Actions/ViewActions.cs:257
+#: ../Pinta.Core/Actions/ViewActions.cs:263
 #, csharp-format
 msgid "{0}%"
 msgstr "{0}%"

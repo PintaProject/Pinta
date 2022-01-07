@@ -7,16 +7,16 @@ msgid ""
 msgstr ""
 "Project-Id-Version: pinta\n"
 "Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
-"POT-Creation-Date: 2021-12-26 22:42-0500\n"
-"PO-Revision-Date: 2021-10-29 16:21+0000\n"
+"POT-Creation-Date: 2022-01-03 00:34-0500\n"
+"PO-Revision-Date: 2022-01-03 12:04+0000\n"
 "Last-Translator: Bernard Stafford <Unknown>\n"
 "Language-Team: Afrikaans <af@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Launchpad-Export-Date: 2021-12-31 15:28+0000\n"
-"X-Generator: Launchpad (build adb364d6a74a28e7b95d51cd30446ec16160de6c)\n"
+"X-Launchpad-Export-Date: 2022-01-07 03:28+0000\n"
+"X-Generator: Launchpad (build 1682fd44eec4f62371f0bed122a83482daf08e23)\n"
 
 #: Mono.Addins.Gui/Mono.Addins.Gui/InstallDialog.cs:142
 msgid " (in user directory)"
@@ -65,7 +65,7 @@ msgstr "V_oeg-ins"
 msgid "About"
 msgstr "Omtrent"
 
-#: ../Pinta/Dialogs/AboutDialog.cs:287
+#: ../Pinta/Dialogs/AboutDialog.cs:289
 msgid "About Pinta"
 msgstr "Omtrent Pinta"
 
@@ -199,7 +199,7 @@ msgstr "Agtergrond Kleur"
 msgid "Background:"
 msgstr "Agtergrond:"
 
-#: ../Pinta/Dialogs/AboutDialog.cs:177
+#: ../Pinta/Dialogs/AboutDialog.cs:179
 msgid "Based on the work of Paint.NET:"
 msgstr "Gebaseer op die werk van Paint.NET:"
 
@@ -279,7 +279,7 @@ msgstr "Deur persentasie:"
 #: ../Pinta.Core/Actions/EditActions.cs:403
 #: ../Pinta.Core/Actions/LayerActions.cs:169
 msgid "Cancel"
-msgstr ""
+msgstr "Kanselleer"
 
 #: ../Pinta/Pads/CanvasPad.cs:43
 msgid "Canvas"
@@ -301,7 +301,7 @@ msgstr "Sentrum Offset"
 msgid "Centered"
 msgstr "Gesentreerde"
 
-#: ../Pinta.Core/Actions/ViewActions.cs:162
+#: ../Pinta.Core/Actions/ViewActions.cs:144
 msgid "Centimeters"
 msgstr "Sentimeters"
 
@@ -311,7 +311,7 @@ msgstr "Veranderde Shape Tipe"
 
 #: ../Pinta.Effects/Dialogs/Effects.LevelsDialog.cs:473
 msgid "Choose Color"
-msgstr ""
+msgstr "Kies Kleur"
 
 #: ../Pinta.Gui.Widgets/Widgets/StatusBarColorPaletteWidget.cs:106
 msgid "Choose Palette Color"
@@ -407,7 +407,7 @@ msgstr "Toemaak Alle"
 #: ../Pinta/Actions/File/CloseDocumentAction.cs:72
 #: ../Pinta/Actions/File/CloseDocumentAction.cs:75
 msgid "Close _without Saving"
-msgstr ""
+msgstr "Sluit _sonder om te stoor"
 
 #: ../Pinta.Tools/Editable/EditEngines/RectangleEditEngine.cs:40
 msgid "Closed Curve Shape"
@@ -470,7 +470,7 @@ msgstr "Contiguous"
 msgid "Contrast"
 msgstr "Kontras"
 
-#: ../Pinta/Dialogs/AboutDialog.cs:145
+#: ../Pinta/Dialogs/AboutDialog.cs:147
 msgid "Contributors to this release:"
 msgstr "Bydraers tot hierdie vrystelling:"
 
@@ -493,7 +493,7 @@ msgstr "Kopiereg"
 #: ../Pinta/Actions/File/NewScreenshotAction.cs:70
 #, csharp-format
 msgid "Could not obtain the size of display '{0}'"
-msgstr ""
+msgstr "Kon nie obtain die grootte van die -vertoon '{0}'"
 
 #: ../Pinta.Core/Classes/Palette.cs:185
 #: ../Pinta.Core/Managers/WorkspaceManager.cs:376
@@ -598,7 +598,7 @@ msgstr "Moenie skakelaar werktuig"
 msgid "Don't change canvas size"
 msgstr "Moenie die doekgrootte verander nie"
 
-#: ../Pinta/MainWindow.cs:567
+#: ../Pinta/MainWindow.cs:539
 msgid "Download failed"
 msgstr "Aflaai mislukte"
 
@@ -606,7 +606,7 @@ msgstr "Aflaai mislukte"
 msgid "Download size"
 msgstr "Aflaai grootte"
 
-#: ../Pinta/MainWindow.cs:548
+#: ../Pinta/MainWindow.cs:520
 msgid "Downloading Image"
 msgstr "Aflaai Beeld"
 
@@ -691,7 +691,7 @@ msgstr "Mislukte om stoor beeld"
 
 #: ../Pinta/Actions/File/NewScreenshotAction.cs:69
 msgid "Failed to take screenshot"
-msgstr ""
+msgstr "Mislukte om neem skermskoot"
 
 #: ../Pinta.Core/Actions/HelpActions.cs:46
 msgid "File a Bug"
@@ -900,7 +900,7 @@ msgstr "Invoer Vanaf Lêer"
 msgid "Import from File..."
 msgstr "Invoer vanaf Lêer..."
 
-#: ../Pinta.Core/Actions/ViewActions.cs:161
+#: ../Pinta.Core/Actions/ViewActions.cs:143
 msgid "Inches"
 msgstr "Inches"
 
@@ -968,7 +968,7 @@ msgstr "Intensiteit"
 #: ../Pinta.Core/Classes/SelectionModeHandler.cs:54
 #, csharp-format
 msgid "Intersect ({0} + Left Click)"
-msgstr ""
+msgstr "kruising ({0} + Links Klick)"
 
 #: ../Pinta.Effects/Adjustments/InvertColorsEffect.cs:25
 #: ../Pinta.Effects/Effects/MandelbrotFractalEffect.cs:166
@@ -1029,7 +1029,7 @@ msgstr "Laagje Getoon"
 #: ../Pinta.Core/Classes/DocumentLayers.cs:135
 #, csharp-format
 msgid "Layer {0}"
-msgstr ""
+msgstr "Layer {0}"
 
 #: ../Pinta/Pads/LayersPad.cs:40 ../Pinta/Pads/LayersPad.cs:60
 msgid "Layers"
@@ -1048,6 +1048,10 @@ msgid ""
 "content. Hold Shift to rotate in steps. Use arrow keys to move selected "
 "content by a single pixel."
 msgstr ""
+"Links klik en sleep die keuse om geselekteerde inhoud te skuif. Hou {0} om "
+"te skaal in plaas van om te beweeg. Regs kliek en sleep die keuse om "
+"geselekteerde inhoud te draai. Hou Shift om roteer in stappe. Gebruik "
+"pyltjie sleutels om geselekteerde inhoud met 'n enkele pixel te skuif."
 
 #. Translators: {0} is 'Ctrl', or a platform-specific key such as 'Command' on macOS.
 #: ../Pinta.Tools/Tools/MoveSelectionTool.cs:45
@@ -1058,6 +1062,10 @@ msgid ""
 "selection outline. Hold Shift to rotate in steps. Use arrow keys to move "
 "selection outline by a single pixel."
 msgstr ""
+"Linkskliek en sleep die keuse om seleksie buitelyn te skuif. Hou {0} om te "
+"skaal in plaas van om te beweeg. Regskliek en sleep die keuse om seleksie "
+"buitelyn te draai. Hou Shift om roteer in stappe. Gebruik pyltjiesleutels om "
+"seleksie buitelyn 'n enkele pixel te skuif."
 
 #. Translators: {0} is 'Ctrl', or a platform-specific key such as 'Command' on macOS.
 #: ../Pinta.Tools/Tools/ShapeTool.cs:49
@@ -1080,6 +1088,22 @@ msgid ""
 "starting at the edge.\n"
 "Press Enter to finalize the shape."
 msgstr ""
+"Linkskliek om 'n vorm met die primêre kleur te teken.\n"
+"Klik met die linkermuisknop op 'n vorm om 'n beheerpunt by te voeg.\n"
+"Linkskliek op 'n beheerpunt en sleep om dit te skuif.\n"
+"Regskliek op 'n beheerpunt en sleep om die tension te verander.\n"
+"Hou Shift vas om na snap -hoeke.\n"
+"Gebruik pyltjie sleutels om die geselekteerde beheerpunt te skuif.\n"
+"Druk {0} + links/regspyltjies om beheerpunte volgens volgorde te kies.\n"
+"Druk Skrap om die geselekteerde beheerpunt uit te vee.\n"
+"Druk Spasie om 'n nuwe beheerpunt by die muisposisie by te voeg.\n"
+"Hou {0} terwyl jy Spasie druk om die beheerpunt op presies dieselfde posisie "
+"te skep.\n"
+"Hou {0} in terwyl jy links op 'n beheerpunt klik om 'n nuwe vorm op presies "
+"dieselfde posisie te skep.\n"
+"Hou {0} vas terwyl jy buite die prentgrense klik om 'n nuwe vorm te skep wat "
+"by die rand begin.\n"
+"Druk Betree om die vorm te finaliseer."
 
 #: ../Pinta.Tools/Tools/PencilTool.cs:50
 msgid ""
@@ -1556,7 +1580,7 @@ msgstr "Beeldpunt Grid"
 msgid "Pixelate"
 msgstr "Pixelate"
 
-#: ../Pinta.Core/Actions/ViewActions.cs:160
+#: ../Pinta.Core/Actions/ViewActions.cs:142
 msgid "Pixels"
 msgstr "Pixels"
 
@@ -1586,7 +1610,7 @@ msgstr "Posterize"
 msgid "Power"
 msgstr "Krag"
 
-#: ../Pinta/Dialogs/AboutDialog.cs:192
+#: ../Pinta/Dialogs/AboutDialog.cs:194
 msgid "Powered by Mono:"
 msgstr "Aangedryf deur Mono:"
 
@@ -1598,7 +1622,7 @@ msgstr "Vooraf ingestelde"
 msgid "Preview"
 msgstr "Voorskou"
 
-#: ../Pinta/Dialogs/AboutDialog.cs:157
+#: ../Pinta/Dialogs/AboutDialog.cs:159
 msgid "Previous contributors:"
 msgstr "Vorige bydraers:"
 
@@ -1832,7 +1856,7 @@ msgstr "Afgeronde Lyn Shape"
 msgid "Rounded Rectangle"
 msgstr "Afgeronde Reghoek"
 
-#: ../Pinta.Core/Actions/ViewActions.cs:157
+#: ../Pinta.Core/Actions/ViewActions.cs:139
 msgid "Ruler Units"
 msgstr "Heersers Eenhede"
 
@@ -1879,7 +1903,7 @@ msgstr "Save Palet Lêer"
 #: ../Pinta/Actions/File/CloseDocumentAction.cs:60
 #, csharp-format
 msgid "Save changes to image \"{0}\" before closing?"
-msgstr ""
+msgstr "Stoor veranderinge aan prent \"{0}\" voordat toemaak?"
 
 #: ../Pinta.Effects/Effects/CloudsEffect.cs:200
 msgid "Scale"
@@ -1935,6 +1959,10 @@ msgstr "Wys Laagje"
 msgid "Show this message and exit."
 msgstr "Wys hierdie boodskap en uitgang."
 
+#: ../Pinta.Core/Actions/ViewActions.cs:150
+msgid "Show/Hide"
+msgstr "Wys/Versteek"
+
 #: ../Pinta.Tools/Tools/ColorPickerTool.cs:225
 msgid "Single Pixel"
 msgstr "Enkel Pixel"
@@ -1973,7 +2001,7 @@ msgstr "Vierkante"
 
 #: ../Pinta.Core/Actions/ViewActions.cs:73
 msgid "Status Bar"
-msgstr ""
+msgstr "Status Balk"
 
 #: ../Pinta.Effects/Effects/ReduceNoiseEffect.cs:96
 msgid "Strength"
@@ -2122,7 +2150,7 @@ msgstr "Werktuig"
 
 #: ../Pinta.Core/Actions/ViewActions.cs:74
 msgid "Tool Box"
-msgstr ""
+msgstr "Gereedskapkas"
 
 #: ../Pinta/MainWindow.cs:364
 msgid "Tool Windows"
@@ -2140,7 +2168,7 @@ msgstr "Oorplasing Karteer"
 msgid "Translate This Application"
 msgstr "Vertaal Hierdie Aansoek"
 
-#: ../Pinta/Dialogs/AboutDialog.cs:171
+#: ../Pinta/Dialogs/AboutDialog.cs:173
 msgid "Translated by:"
 msgstr "Vertaal deur:"
 
@@ -2158,7 +2186,7 @@ msgstr "Twist"
 msgid "Type"
 msgstr "Tipe"
 
-#: ../Pinta/MainWindow.cs:568
+#: ../Pinta/MainWindow.cs:540
 #, csharp-format
 msgid ""
 "Unable to download image from {0}.\n"
@@ -2191,7 +2219,7 @@ msgstr "Die deïnstalleer van Voeg-ins"
 #: ../Pinta.Core/Classes/SelectionModeHandler.cs:49
 #, csharp-format
 msgid "Union (+) ({0} + Left Click)"
-msgstr ""
+msgstr "Uniewording (+) ({0} + Links Klick)"
 
 #: ../Pinta.Core/Managers/WorkspaceManager.cs:112
 #, csharp-format
@@ -2240,7 +2268,7 @@ msgstr ""
 "Gebruik lae gehalte vir voorskoue, klein beelde, en klein hoeke. Gebruik hoë "
 "gehalte vir finale kwaliteit, groot beelde, en groot hoeke."
 
-#: ../Pinta/Dialogs/AboutDialog.cs:184
+#: ../Pinta/Dialogs/AboutDialog.cs:186
 msgid "Using some icons from:"
 msgstr "Met behulp van 'n paar ikone vanaf:"
 
@@ -2249,7 +2277,7 @@ msgstr "Met behulp van 'n paar ikone vanaf:"
 msgid "Version"
 msgstr "Weergawe"
 
-#: ../Pinta/Dialogs/AboutDialog.cs:304
+#: ../Pinta/Dialogs/AboutDialog.cs:306
 msgid "Version Info"
 msgstr "Weergawe Inligting"
 
@@ -2272,7 +2300,7 @@ msgid "Width:"
 msgstr "Wydte:"
 
 #: ../Pinta.Core/Actions/ViewActions.cs:103
-#: ../Pinta.Core/Actions/ViewActions.cs:276
+#: ../Pinta.Core/Actions/ViewActions.cs:282
 #: ../Pinta.Core/Classes/DocumentWorkspace.cs:315
 #: ../Pinta.Core/Classes/DocumentWorkspace.cs:323
 msgid "Window"
@@ -2290,7 +2318,7 @@ msgstr "Xor"
 #: ../Pinta.Core/Classes/SelectionModeHandler.cs:52
 #, csharp-format
 msgid "Xor ({0} + Right Click)"
-msgstr ""
+msgstr "Xor ({0} + Regs Klick)"
 
 #. Translators: {0} is the name of a file that the user does not have permission to open.
 #: ../Pinta.Core/Managers/WorkspaceManager.cs:405
@@ -2387,7 +2415,7 @@ msgstr "aantal drade om te gebruik vir weergawes"
 msgid "pixels"
 msgstr "beeldpunte"
 
-#: ../Pinta/Dialogs/AboutDialog.cs:168
+#: ../Pinta/Dialogs/AboutDialog.cs:170
 msgid "translator-credits"
 msgstr ""
 "Launchpad Contributions:\n"
@@ -2399,14 +2427,14 @@ msgstr ""
 #: ../Pinta.Tools/Tools/CloneStampTool.cs:47
 #, csharp-format
 msgid "{0} + left click to set origin, left click to paint."
-msgstr ""
+msgstr "{0} + linkskliek om oorsprong te stel, linkskliek om te verf."
 
 #. Translators: this is the auto-generated name for a duplicated layer.
 #. {0} is the name of the source layer. Example: "Layer 3 copy".
 #: ../Pinta.Core/Classes/DocumentLayers.cs:234
 #, csharp-format
 msgid "{0} copy"
-msgstr ""
+msgstr "{0} kopieer"
 
 #: ../Pinta.Core/ImageFormats/FormatDescriptor.cs:93
 #, csharp-format
@@ -2428,7 +2456,7 @@ msgstr[1] "{0} opdaterings beskikbaar"
 
 #. Translators: This specifies the format of the zoom percentage choices
 #. in the toolbar.
-#: ../Pinta.Core/Actions/ViewActions.cs:257
+#: ../Pinta.Core/Actions/ViewActions.cs:263
 #, csharp-format
 msgid "{0}%"
 msgstr "{0}%"

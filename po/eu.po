@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: pinta\n"
 "Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
-"POT-Creation-Date: 2021-12-26 22:42-0500\n"
+"POT-Creation-Date: 2022-01-03 00:34-0500\n"
 "PO-Revision-Date: 2020-08-07 18:14+0000\n"
 "Last-Translator: Asier Sarasua Garmendia <Unknown>\n"
 "Language-Team: Basque <eu@li.org>\n"
@@ -15,8 +15,8 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Launchpad-Export-Date: 2021-12-31 15:28+0000\n"
-"X-Generator: Launchpad (build adb364d6a74a28e7b95d51cd30446ec16160de6c)\n"
+"X-Launchpad-Export-Date: 2022-01-07 03:28+0000\n"
+"X-Generator: Launchpad (build 1682fd44eec4f62371f0bed122a83482daf08e23)\n"
 
 #: Mono.Addins.Gui/Mono.Addins.Gui/InstallDialog.cs:142
 msgid " (in user directory)"
@@ -66,7 +66,7 @@ msgstr "_Gehigarriak"
 msgid "About"
 msgstr "Honi buruz"
 
-#: ../Pinta/Dialogs/AboutDialog.cs:287
+#: ../Pinta/Dialogs/AboutDialog.cs:289
 msgid "About Pinta"
 msgstr "Pintari buruz"
 
@@ -199,7 +199,7 @@ msgstr "Atzeko planoaren kolorea"
 msgid "Background:"
 msgstr "Atzeko planoa:"
 
-#: ../Pinta/Dialogs/AboutDialog.cs:177
+#: ../Pinta/Dialogs/AboutDialog.cs:179
 msgid "Based on the work of Paint.NET:"
 msgstr "Paint.NETen lanean oinarritua:"
 
@@ -301,7 +301,7 @@ msgstr "Erdiko desplazamendua"
 msgid "Centered"
 msgstr "Zentratua"
 
-#: ../Pinta.Core/Actions/ViewActions.cs:162
+#: ../Pinta.Core/Actions/ViewActions.cs:144
 msgid "Centimeters"
 msgstr "Zentimetroak"
 
@@ -470,7 +470,7 @@ msgstr "Albokoa"
 msgid "Contrast"
 msgstr "Kontrastea"
 
-#: ../Pinta/Dialogs/AboutDialog.cs:145
+#: ../Pinta/Dialogs/AboutDialog.cs:147
 msgid "Contributors to this release:"
 msgstr "Bertsio honen garatzaileak:"
 
@@ -598,7 +598,7 @@ msgstr "Ez aldatu tresnaz"
 msgid "Don't change canvas size"
 msgstr "Ez aldatu mihisearen tamaina"
 
-#: ../Pinta/MainWindow.cs:567
+#: ../Pinta/MainWindow.cs:539
 msgid "Download failed"
 msgstr "Deskargak huts egin du"
 
@@ -606,7 +606,7 @@ msgstr "Deskargak huts egin du"
 msgid "Download size"
 msgstr "Deskarga-tamaina"
 
-#: ../Pinta/MainWindow.cs:548
+#: ../Pinta/MainWindow.cs:520
 msgid "Downloading Image"
 msgstr "Irudia deskargatzen"
 
@@ -900,7 +900,7 @@ msgstr "Inportatu fitxategitik"
 msgid "Import from File..."
 msgstr "Inportatu fitxategitik..."
 
-#: ../Pinta.Core/Actions/ViewActions.cs:161
+#: ../Pinta.Core/Actions/ViewActions.cs:143
 msgid "Inches"
 msgstr "Hazbeteak"
 
@@ -1559,7 +1559,7 @@ msgstr "Pixel-sareta"
 msgid "Pixelate"
 msgstr "Pixelatu"
 
-#: ../Pinta.Core/Actions/ViewActions.cs:160
+#: ../Pinta.Core/Actions/ViewActions.cs:142
 msgid "Pixels"
 msgstr "Pixelak"
 
@@ -1589,7 +1589,7 @@ msgstr "Posterizatu"
 msgid "Power"
 msgstr "Energia"
 
-#: ../Pinta/Dialogs/AboutDialog.cs:192
+#: ../Pinta/Dialogs/AboutDialog.cs:194
 msgid "Powered by Mono:"
 msgstr "Mono bidez garatua:"
 
@@ -1601,7 +1601,7 @@ msgstr "Aurre-ezarpena:"
 msgid "Preview"
 msgstr "Aurrebista"
 
-#: ../Pinta/Dialogs/AboutDialog.cs:157
+#: ../Pinta/Dialogs/AboutDialog.cs:159
 msgid "Previous contributors:"
 msgstr "Aurreko garatzaileak:"
 
@@ -1835,7 +1835,7 @@ msgstr "Lerro-forma borobildua"
 msgid "Rounded Rectangle"
 msgstr "Laukizuzen biribildua"
 
-#: ../Pinta.Core/Actions/ViewActions.cs:157
+#: ../Pinta.Core/Actions/ViewActions.cs:139
 msgid "Ruler Units"
 msgstr "Erregelen unitateak"
 
@@ -1937,6 +1937,10 @@ msgstr "Erakutsi geruza"
 #: ../Pinta/Main.cs:60
 msgid "Show this message and exit."
 msgstr "Erakutsi mezu hau eta irten"
+
+#: ../Pinta.Core/Actions/ViewActions.cs:150
+msgid "Show/Hide"
+msgstr ""
 
 #: ../Pinta.Tools/Tools/ColorPickerTool.cs:225
 msgid "Single Pixel"
@@ -2145,7 +2149,7 @@ msgstr "Transferentzia-mapa"
 msgid "Translate This Application"
 msgstr "Itzuli aplikazio hau"
 
-#: ../Pinta/Dialogs/AboutDialog.cs:171
+#: ../Pinta/Dialogs/AboutDialog.cs:173
 msgid "Translated by:"
 msgstr "Itzulpena:"
 
@@ -2163,7 +2167,7 @@ msgstr "Bihurritu"
 msgid "Type"
 msgstr "Mota"
 
-#: ../Pinta/MainWindow.cs:568
+#: ../Pinta/MainWindow.cs:540
 #, csharp-format
 msgid ""
 "Unable to download image from {0}.\n"
@@ -2246,7 +2250,7 @@ msgstr ""
 "txikietarako. Erabili kalitate altua behin-betiko irudietarako, irudi "
 "handietarako eta angelu handietarako."
 
-#: ../Pinta/Dialogs/AboutDialog.cs:184
+#: ../Pinta/Dialogs/AboutDialog.cs:186
 msgid "Using some icons from:"
 msgstr "Zenbait ikono hemendik datoz:"
 
@@ -2255,7 +2259,7 @@ msgstr "Zenbait ikono hemendik datoz:"
 msgid "Version"
 msgstr "Bertsioa"
 
-#: ../Pinta/Dialogs/AboutDialog.cs:304
+#: ../Pinta/Dialogs/AboutDialog.cs:306
 msgid "Version Info"
 msgstr "Bertsio-informazioa"
 
@@ -2278,7 +2282,7 @@ msgid "Width:"
 msgstr "Zabalera:"
 
 #: ../Pinta.Core/Actions/ViewActions.cs:103
-#: ../Pinta.Core/Actions/ViewActions.cs:276
+#: ../Pinta.Core/Actions/ViewActions.cs:282
 #: ../Pinta.Core/Classes/DocumentWorkspace.cs:315
 #: ../Pinta.Core/Classes/DocumentWorkspace.cs:323
 msgid "Window"
@@ -2391,7 +2395,7 @@ msgstr "errendatzerako erabiliko den hari-kopurua"
 msgid "pixels"
 msgstr "pixel"
 
-#: ../Pinta/Dialogs/AboutDialog.cs:168
+#: ../Pinta/Dialogs/AboutDialog.cs:170
 msgid "translator-credits"
 msgstr ""
 "Launchpad Contributions:\n"
@@ -2436,7 +2440,7 @@ msgstr[1] "{0} eguneraketa eskuragarri"
 
 #. Translators: This specifies the format of the zoom percentage choices
 #. in the toolbar.
-#: ../Pinta.Core/Actions/ViewActions.cs:257
+#: ../Pinta.Core/Actions/ViewActions.cs:263
 #, csharp-format
 msgid "{0}%"
 msgstr "% {0}"

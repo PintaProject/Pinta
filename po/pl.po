@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: pinta\n"
 "Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
-"POT-Creation-Date: 2021-12-26 22:42-0500\n"
+"POT-Creation-Date: 2022-01-03 00:34-0500\n"
 "PO-Revision-Date: 2021-11-21 04:02+0000\n"
 "Last-Translator: Makabeusz Orban <Unknown>\n"
 "Language-Team: Polish <pl@li.org>\n"
@@ -16,8 +16,8 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=3; plural=n==1 ? 0 : n%10>=2 && n%10<=4 && (n%100<10 "
 "|| n%100>=20) ? 1 : 2;\n"
-"X-Launchpad-Export-Date: 2021-12-31 15:28+0000\n"
-"X-Generator: Launchpad (build adb364d6a74a28e7b95d51cd30446ec16160de6c)\n"
+"X-Launchpad-Export-Date: 2022-01-07 03:28+0000\n"
+"X-Generator: Launchpad (build 1682fd44eec4f62371f0bed122a83482daf08e23)\n"
 
 #: Mono.Addins.Gui/Mono.Addins.Gui/InstallDialog.cs:142
 msgid " (in user directory)"
@@ -66,7 +66,7 @@ msgstr "_Dodatki"
 msgid "About"
 msgstr "O programie…"
 
-#: ../Pinta/Dialogs/AboutDialog.cs:287
+#: ../Pinta/Dialogs/AboutDialog.cs:289
 msgid "About Pinta"
 msgstr "O Pincie"
 
@@ -199,7 +199,7 @@ msgstr "Kolor tła"
 msgid "Background:"
 msgstr "Tło:"
 
-#: ../Pinta/Dialogs/AboutDialog.cs:177
+#: ../Pinta/Dialogs/AboutDialog.cs:179
 msgid "Based on the work of Paint.NET:"
 msgstr "Oparto na pracach nad Paint.NET:"
 
@@ -301,7 +301,7 @@ msgstr "Przesunięcie środka"
 msgid "Centered"
 msgstr "Wyśrodkowany"
 
-#: ../Pinta.Core/Actions/ViewActions.cs:162
+#: ../Pinta.Core/Actions/ViewActions.cs:144
 msgid "Centimeters"
 msgstr "Centymetry"
 
@@ -470,7 +470,7 @@ msgstr "Przylegające"
 msgid "Contrast"
 msgstr "Kontrast"
 
-#: ../Pinta/Dialogs/AboutDialog.cs:145
+#: ../Pinta/Dialogs/AboutDialog.cs:147
 msgid "Contributors to this release:"
 msgstr "Współtwórcy tego wydania:"
 
@@ -598,7 +598,7 @@ msgstr "NIe zmieniaj narzędzia"
 msgid "Don't change canvas size"
 msgstr "Nie zmieniaj rozmiaru płótna"
 
-#: ../Pinta/MainWindow.cs:567
+#: ../Pinta/MainWindow.cs:539
 msgid "Download failed"
 msgstr "Nieudane pobieranie"
 
@@ -606,7 +606,7 @@ msgstr "Nieudane pobieranie"
 msgid "Download size"
 msgstr "Rozmiar pobieranego pakietu"
 
-#: ../Pinta/MainWindow.cs:548
+#: ../Pinta/MainWindow.cs:520
 msgid "Downloading Image"
 msgstr "Pobieranie obrazu"
 
@@ -901,7 +901,7 @@ msgstr "Importuj z pliku"
 msgid "Import from File..."
 msgstr "Importuj z pliku…"
 
-#: ../Pinta.Core/Actions/ViewActions.cs:161
+#: ../Pinta.Core/Actions/ViewActions.cs:143
 msgid "Inches"
 msgstr "Cale"
 
@@ -1560,7 +1560,7 @@ msgstr "Siatka pikseli"
 msgid "Pixelate"
 msgstr "Pikselizacja"
 
-#: ../Pinta.Core/Actions/ViewActions.cs:160
+#: ../Pinta.Core/Actions/ViewActions.cs:142
 msgid "Pixels"
 msgstr "Piksele"
 
@@ -1590,7 +1590,7 @@ msgstr "Redukcja kolorów"
 msgid "Power"
 msgstr "Moc"
 
-#: ../Pinta/Dialogs/AboutDialog.cs:192
+#: ../Pinta/Dialogs/AboutDialog.cs:194
 msgid "Powered by Mono:"
 msgstr "Wykonano na Mono:"
 
@@ -1602,7 +1602,7 @@ msgstr "Ustawienie:"
 msgid "Preview"
 msgstr "Podgląd"
 
-#: ../Pinta/Dialogs/AboutDialog.cs:157
+#: ../Pinta/Dialogs/AboutDialog.cs:159
 msgid "Previous contributors:"
 msgstr "Poprzedni współtworcy:"
 
@@ -1836,7 +1836,7 @@ msgstr "Kształt linii zaokrąglonej"
 msgid "Rounded Rectangle"
 msgstr "Zaokrąglony prostokąt"
 
-#: ../Pinta.Core/Actions/ViewActions.cs:157
+#: ../Pinta.Core/Actions/ViewActions.cs:139
 msgid "Ruler Units"
 msgstr "Jednostki linijki"
 
@@ -1938,6 +1938,10 @@ msgstr "Pokaż warstwę"
 #: ../Pinta/Main.cs:60
 msgid "Show this message and exit."
 msgstr "Pokaż ten komunikat i zakończ."
+
+#: ../Pinta.Core/Actions/ViewActions.cs:150
+msgid "Show/Hide"
+msgstr ""
 
 #: ../Pinta.Tools/Tools/ColorPickerTool.cs:225
 msgid "Single Pixel"
@@ -2140,7 +2144,7 @@ msgstr "Przekształcenie przejścia"
 msgid "Translate This Application"
 msgstr "Przetłumacz tę aplikację"
 
-#: ../Pinta/Dialogs/AboutDialog.cs:171
+#: ../Pinta/Dialogs/AboutDialog.cs:173
 msgid "Translated by:"
 msgstr "Tłumaczenie:"
 
@@ -2158,7 +2162,7 @@ msgstr "Wir"
 msgid "Type"
 msgstr "Typ"
 
-#: ../Pinta/MainWindow.cs:568
+#: ../Pinta/MainWindow.cs:540
 #, csharp-format
 msgid ""
 "Unable to download image from {0}.\n"
@@ -2241,7 +2245,7 @@ msgstr ""
 "wysokiej jakości do obrazów w wersji ostatecznej, do dużych obrazów i dużych "
 "kątów."
 
-#: ../Pinta/Dialogs/AboutDialog.cs:184
+#: ../Pinta/Dialogs/AboutDialog.cs:186
 msgid "Using some icons from:"
 msgstr "Wykorzystano ikony z:"
 
@@ -2250,7 +2254,7 @@ msgstr "Wykorzystano ikony z:"
 msgid "Version"
 msgstr "Wersja"
 
-#: ../Pinta/Dialogs/AboutDialog.cs:304
+#: ../Pinta/Dialogs/AboutDialog.cs:306
 msgid "Version Info"
 msgstr "Informacje o wersji"
 
@@ -2273,7 +2277,7 @@ msgid "Width:"
 msgstr "Szerokość:"
 
 #: ../Pinta.Core/Actions/ViewActions.cs:103
-#: ../Pinta.Core/Actions/ViewActions.cs:276
+#: ../Pinta.Core/Actions/ViewActions.cs:282
 #: ../Pinta.Core/Classes/DocumentWorkspace.cs:315
 #: ../Pinta.Core/Classes/DocumentWorkspace.cs:323
 msgid "Window"
@@ -2388,7 +2392,7 @@ msgstr "liczba wątków używanych do renderowania"
 msgid "pixels"
 msgstr "pikseli"
 
-#: ../Pinta/Dialogs/AboutDialog.cs:168
+#: ../Pinta/Dialogs/AboutDialog.cs:170
 msgid "translator-credits"
 msgstr ""
 "Launchpad Contributions:\n"
@@ -2452,7 +2456,7 @@ msgstr[2] "Dostępnych {0} aktualizacji"
 
 #. Translators: This specifies the format of the zoom percentage choices
 #. in the toolbar.
-#: ../Pinta.Core/Actions/ViewActions.cs:257
+#: ../Pinta.Core/Actions/ViewActions.cs:263
 #, csharp-format
 msgid "{0}%"
 msgstr "{0}%"

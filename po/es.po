@@ -7,16 +7,16 @@ msgid ""
 msgstr ""
 "Project-Id-Version: pinta\n"
 "Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
-"POT-Creation-Date: 2021-12-26 22:42-0500\n"
-"PO-Revision-Date: 2021-12-27 19:18+0000\n"
-"Last-Translator: Toni Estevez <toni.estevez@gmail.com>\n"
+"POT-Creation-Date: 2022-01-03 00:34-0500\n"
+"PO-Revision-Date: 2022-01-02 13:08+0000\n"
+"Last-Translator: Adolfo Jayme <fitoschido@gmail.com>\n"
 "Language-Team: Spanish <es@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Launchpad-Export-Date: 2021-12-31 15:28+0000\n"
-"X-Generator: Launchpad (build adb364d6a74a28e7b95d51cd30446ec16160de6c)\n"
+"X-Launchpad-Export-Date: 2022-01-07 03:28+0000\n"
+"X-Generator: Launchpad (build 1682fd44eec4f62371f0bed122a83482daf08e23)\n"
 
 #: Mono.Addins.Gui/Mono.Addins.Gui/InstallDialog.cs:142
 msgid " (in user directory)"
@@ -65,7 +65,7 @@ msgstr "C_omplementos"
 msgid "About"
 msgstr "Acerca de"
 
-#: ../Pinta/Dialogs/AboutDialog.cs:287
+#: ../Pinta/Dialogs/AboutDialog.cs:289
 msgid "About Pinta"
 msgstr "Acerca de Pinta"
 
@@ -146,19 +146,19 @@ msgstr "Ángulo"
 
 #: ../Pinta.Effects/Effects/TwistEffect.cs:132
 msgid "Antialias"
-msgstr "Suavizado del contorno"
+msgstr "Antidentado"
 
 #: ../Pinta.Core/Classes/BaseTool.cs:346
 msgid "Antialiasing Off"
-msgstr "Suavizado desactivado"
+msgstr "Antidentado desactivado"
 
 #: ../Pinta.Core/Classes/BaseTool.cs:345
 msgid "Antialiasing On"
-msgstr "Suavizado activado"
+msgstr "Antidentado activado"
 
 #: Mono.Addins.Gui/Mono.Addins.Gui/InstallDialog.cs:190
 msgid "Are you sure you want to cancel the installation?"
-msgstr "¿Seguro de que quiere cancelar la instalación?"
+msgstr "¿Confirma que quiere cancelar la instalación?"
 
 #: ../Pinta.Tools/Editable/EditEngines/ArrowedEditEngine.cs:254
 msgid "Arrow"
@@ -198,7 +198,7 @@ msgstr "Color del fondo"
 msgid "Background:"
 msgstr "Fondo:"
 
-#: ../Pinta/Dialogs/AboutDialog.cs:177
+#: ../Pinta/Dialogs/AboutDialog.cs:179
 msgid "Based on the work of Paint.NET:"
 msgstr "Basado en el trabajo de Paint.NET:"
 
@@ -300,7 +300,7 @@ msgstr "Desplazamiento desde el centro"
 msgid "Centered"
 msgstr "Centrado"
 
-#: ../Pinta.Core/Actions/ViewActions.cs:162
+#: ../Pinta.Core/Actions/ViewActions.cs:144
 msgid "Centimeters"
 msgstr "Centímetros"
 
@@ -337,40 +337,40 @@ msgid ""
 "Click and drag to draw a rectangular selection. Hold Shift to constrain to a "
 "square."
 msgstr ""
-"Clic y arrastrar para dibujar una selección rectangular. Mantenga pulsada la "
-"tecla Mayús para restringir a un cuadrado."
+"Pulse y arrastre para dibujar una selección rectangular. Oprima Mayús para "
+"restringir a un cuadrado."
 
 #: ../Pinta.Tools/Tools/EllipseSelectTool.cs:41
 msgid ""
 "Click and drag to draw an elliptical selection. Hold Shift to constrain to a "
 "circle."
 msgstr ""
-"Clic y arrastrar para dibujar una selección elíptica. Mantenga pulsada la "
-"tecla Mayús para restringir a un círculo."
+"Pulse y arrastre para dibujar una selección elíptica. Oprima Mayús para "
+"restringir a un círculo."
 
 #: ../Pinta.Tools/Tools/GradientTool.cs:52
 msgid ""
 "Click and drag to draw gradient from primary to secondary color.  Right "
 "click to reverse."
 msgstr ""
-"Clic y arrastrar para dibujar el degradado del color primario al secundario. "
-"Clic derecho para revertir."
+"Pulse y arrastre para dibujar un degradado del color primario al secundario. "
+"Pulse con el botón derecho para realizar la operación a la inversa."
 
 #: ../Pinta.Tools/Tools/LassoSelectTool.cs:55
 msgid "Click and drag to draw the outline for a selection area."
-msgstr "Clic y arrastrar para dibujar el contorno de un área de selección."
+msgstr "Pulse y arrastre para dibujar el contorno de una zona de selección."
 
 #: ../Pinta.Tools/Tools/PanTool.cs:44
 msgid "Click and drag to navigate image."
-msgstr "Clic y arrastrar para desplazarse por la imagen."
+msgstr "Pulse y arrastre para desplazarse por la imagen."
 
 #: ../Pinta.Gui.Widgets/Widgets/StatusBarColorPaletteWidget.cs:234
 msgid "Click to reset primary and secondary color."
-msgstr "Clic para restablecer el color primario y el secundario."
+msgstr "Pulse para restablecer los colores primario y secundario."
 
 #: ../Pinta.Gui.Widgets/Widgets/StatusBarColorPaletteWidget.cs:223
 msgid "Click to select primary color."
-msgstr "Clic para seleccionar el color primario."
+msgstr "Pulse para seleccionar un color primario."
 
 #: ../Pinta.Tools/Tools/MagicWandTool.cs:50
 msgid "Click to select region of similar color."
@@ -469,7 +469,7 @@ msgstr "Contiguo"
 msgid "Contrast"
 msgstr "Contraste"
 
-#: ../Pinta/Dialogs/AboutDialog.cs:145
+#: ../Pinta/Dialogs/AboutDialog.cs:147
 msgid "Contributors to this release:"
 msgstr "Colaboradores de esta versión:"
 
@@ -537,7 +537,7 @@ msgstr "Trazo"
 
 #: ../Pinta/Actions/File/NewScreenshotAction.cs:52
 msgid "Delay before taking a screenshot (seconds):"
-msgstr "Tiempo de espera antes capturar la pantalla (segundos):"
+msgstr "Demora antes de capturar la pantalla (segundos):"
 
 #: ../Pinta.Core/Actions/LayerActions.cs:51
 #: ../Pinta.Core/Actions/LayerActions.cs:295
@@ -597,7 +597,7 @@ msgstr "No cambiar de herramienta"
 msgid "Don't change canvas size"
 msgstr "No redimensionar el lienzo"
 
-#: ../Pinta/MainWindow.cs:567
+#: ../Pinta/MainWindow.cs:539
 msgid "Download failed"
 msgstr "Descarga fallida"
 
@@ -605,7 +605,7 @@ msgstr "Descarga fallida"
 msgid "Download size"
 msgstr "Tamaño de la descarga"
 
-#: ../Pinta/MainWindow.cs:548
+#: ../Pinta/MainWindow.cs:520
 msgid "Downloading Image"
 msgstr "Descargando la imagen"
 
@@ -899,7 +899,7 @@ msgstr "Importar desde un archivo"
 msgid "Import from File..."
 msgstr "Importar desde un archivo…"
 
-#: ../Pinta.Core/Actions/ViewActions.cs:161
+#: ../Pinta.Core/Actions/ViewActions.cs:143
 msgid "Inches"
 msgstr "Pulgadas"
 
@@ -1585,7 +1585,7 @@ msgstr "Rejilla de píxeles"
 msgid "Pixelate"
 msgstr "Pixelado"
 
-#: ../Pinta.Core/Actions/ViewActions.cs:160
+#: ../Pinta.Core/Actions/ViewActions.cs:142
 msgid "Pixels"
 msgstr "Píxeles"
 
@@ -1615,7 +1615,7 @@ msgstr "Posterizar"
 msgid "Power"
 msgstr "Potencia"
 
-#: ../Pinta/Dialogs/AboutDialog.cs:192
+#: ../Pinta/Dialogs/AboutDialog.cs:194
 msgid "Powered by Mono:"
 msgstr "Funciona con Mono:"
 
@@ -1627,7 +1627,7 @@ msgstr "Preajuste:"
 msgid "Preview"
 msgstr "Vista previa"
 
-#: ../Pinta/Dialogs/AboutDialog.cs:157
+#: ../Pinta/Dialogs/AboutDialog.cs:159
 msgid "Previous contributors:"
 msgstr "Colaboradores anteriores:"
 
@@ -1738,7 +1738,7 @@ msgstr "Registrando el repositorio"
 
 #: ../Pinta/Dialogs/AboutPintaTabPage.cs:50
 msgid "Released under the MIT X11 License."
-msgstr "Publicado con la licencia X11 MIT."
+msgstr "Disponible en virtud de la licencia X11 MIT."
 
 #: ../Pinta.Effects/Effects/ReliefEffect.cs:45
 msgid "Relief"
@@ -1861,7 +1861,7 @@ msgstr "Línea redondeada"
 msgid "Rounded Rectangle"
 msgstr "Rectángulo redondeado"
 
-#: ../Pinta.Core/Actions/ViewActions.cs:157
+#: ../Pinta.Core/Actions/ViewActions.cs:139
 msgid "Ruler Units"
 msgstr "Unidades de las reglas"
 
@@ -1963,6 +1963,10 @@ msgstr "Mostrar la capa"
 #: ../Pinta/Main.cs:60
 msgid "Show this message and exit."
 msgstr "Mostrar este mensaje y salir."
+
+#: ../Pinta.Core/Actions/ViewActions.cs:150
+msgid "Show/Hide"
+msgstr ""
 
 #: ../Pinta.Tools/Tools/ColorPickerTool.cs:225
 msgid "Single Pixel"
@@ -2170,7 +2174,7 @@ msgstr "Mapa de transferencia"
 msgid "Translate This Application"
 msgstr "Traducir esta aplicación"
 
-#: ../Pinta/Dialogs/AboutDialog.cs:171
+#: ../Pinta/Dialogs/AboutDialog.cs:173
 msgid "Translated by:"
 msgstr "Traducido por:"
 
@@ -2188,7 +2192,7 @@ msgstr "Giro"
 msgid "Type"
 msgstr "Tipo"
 
-#: ../Pinta/MainWindow.cs:568
+#: ../Pinta/MainWindow.cs:540
 #, csharp-format
 msgid ""
 "Unable to download image from {0}.\n"
@@ -2270,7 +2274,7 @@ msgstr ""
 "Use la calidad baja para vistas previas, imágenes pequeñas y ángulos "
 "reducidos. Use la calidad alta para imágenes grandes y ángulos amplios."
 
-#: ../Pinta/Dialogs/AboutDialog.cs:184
+#: ../Pinta/Dialogs/AboutDialog.cs:186
 msgid "Using some icons from:"
 msgstr "Se usan algunos iconos de:"
 
@@ -2279,7 +2283,7 @@ msgstr "Se usan algunos iconos de:"
 msgid "Version"
 msgstr "Versión"
 
-#: ../Pinta/Dialogs/AboutDialog.cs:304
+#: ../Pinta/Dialogs/AboutDialog.cs:306
 msgid "Version Info"
 msgstr "Información de la versión"
 
@@ -2302,7 +2306,7 @@ msgid "Width:"
 msgstr "Anchura:"
 
 #: ../Pinta.Core/Actions/ViewActions.cs:103
-#: ../Pinta.Core/Actions/ViewActions.cs:276
+#: ../Pinta.Core/Actions/ViewActions.cs:282
 #: ../Pinta.Core/Classes/DocumentWorkspace.cs:315
 #: ../Pinta.Core/Classes/DocumentWorkspace.cs:323
 msgid "Window"
@@ -2417,7 +2421,7 @@ msgstr "Número de hilos que se usarán al renderizar."
 msgid "pixels"
 msgstr "píxeles"
 
-#: ../Pinta/Dialogs/AboutDialog.cs:168
+#: ../Pinta/Dialogs/AboutDialog.cs:170
 msgid "translator-credits"
 msgstr ""
 "Launchpad Contributions:\n"
@@ -2466,7 +2470,7 @@ msgstr[1] "{0} actualizaciones disponibles"
 
 #. Translators: This specifies the format of the zoom percentage choices
 #. in the toolbar.
-#: ../Pinta.Core/Actions/ViewActions.cs:257
+#: ../Pinta.Core/Actions/ViewActions.cs:263
 #, csharp-format
 msgid "{0}%"
 msgstr "{0}%"

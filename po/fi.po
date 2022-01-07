@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: pinta\n"
 "Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
-"POT-Creation-Date: 2021-12-26 22:42-0500\n"
+"POT-Creation-Date: 2022-01-03 00:34-0500\n"
 "PO-Revision-Date: 2021-12-29 13:28+0000\n"
 "Last-Translator: Jiri Grönroos <Unknown>\n"
 "Language-Team: Finnish <fi@li.org>\n"
@@ -15,8 +15,8 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Launchpad-Export-Date: 2021-12-31 15:28+0000\n"
-"X-Generator: Launchpad (build adb364d6a74a28e7b95d51cd30446ec16160de6c)\n"
+"X-Launchpad-Export-Date: 2022-01-07 03:28+0000\n"
+"X-Generator: Launchpad (build 1682fd44eec4f62371f0bed122a83482daf08e23)\n"
 
 #: Mono.Addins.Gui/Mono.Addins.Gui/InstallDialog.cs:142
 msgid " (in user directory)"
@@ -65,7 +65,7 @@ msgstr "A_dd-ins"
 msgid "About"
 msgstr "Tietoja"
 
-#: ../Pinta/Dialogs/AboutDialog.cs:287
+#: ../Pinta/Dialogs/AboutDialog.cs:289
 msgid "About Pinta"
 msgstr "Tietoja Pintasta"
 
@@ -198,7 +198,7 @@ msgstr "Taustaväri"
 msgid "Background:"
 msgstr "Tausta:"
 
-#: ../Pinta/Dialogs/AboutDialog.cs:177
+#: ../Pinta/Dialogs/AboutDialog.cs:179
 msgid "Based on the work of Paint.NET:"
 msgstr "Perustuu ohjelmaan Paint.NET:"
 
@@ -300,7 +300,7 @@ msgstr "Keskusta"
 msgid "Centered"
 msgstr "Keskitetty"
 
-#: ../Pinta.Core/Actions/ViewActions.cs:162
+#: ../Pinta.Core/Actions/ViewActions.cs:144
 msgid "Centimeters"
 msgstr "Senttimetriä"
 
@@ -469,7 +469,7 @@ msgstr "Jatkuva"
 msgid "Contrast"
 msgstr "Kontrasti"
 
-#: ../Pinta/Dialogs/AboutDialog.cs:145
+#: ../Pinta/Dialogs/AboutDialog.cs:147
 msgid "Contributors to this release:"
 msgstr "Tämän julkaisun osallistujat:"
 
@@ -597,7 +597,7 @@ msgstr "Älä vaihda työkalua"
 msgid "Don't change canvas size"
 msgstr "Pidä pohjan koko"
 
-#: ../Pinta/MainWindow.cs:567
+#: ../Pinta/MainWindow.cs:539
 msgid "Download failed"
 msgstr "Lataus epäonnistui"
 
@@ -605,7 +605,7 @@ msgstr "Lataus epäonnistui"
 msgid "Download size"
 msgstr "Latauksen koko"
 
-#: ../Pinta/MainWindow.cs:548
+#: ../Pinta/MainWindow.cs:520
 msgid "Downloading Image"
 msgstr "Ladataan kuvaa"
 
@@ -899,7 +899,7 @@ msgstr "Tuo tiedostosta"
 msgid "Import from File..."
 msgstr "Tuo tiedostosta..."
 
-#: ../Pinta.Core/Actions/ViewActions.cs:161
+#: ../Pinta.Core/Actions/ViewActions.cs:143
 msgid "Inches"
 msgstr "Tuumaa"
 
@@ -1556,7 +1556,7 @@ msgstr "Pikseliristikko"
 msgid "Pixelate"
 msgstr "Pikselöi"
 
-#: ../Pinta.Core/Actions/ViewActions.cs:160
+#: ../Pinta.Core/Actions/ViewActions.cs:142
 msgid "Pixels"
 msgstr "Pikseliä"
 
@@ -1586,7 +1586,7 @@ msgstr "Porrasta"
 msgid "Power"
 msgstr "Voima"
 
-#: ../Pinta/Dialogs/AboutDialog.cs:192
+#: ../Pinta/Dialogs/AboutDialog.cs:194
 msgid "Powered by Mono:"
 msgstr "Käyttää Monoa:"
 
@@ -1598,7 +1598,7 @@ msgstr "Esiasetus:"
 msgid "Preview"
 msgstr "Esikatsele"
 
-#: ../Pinta/Dialogs/AboutDialog.cs:157
+#: ../Pinta/Dialogs/AboutDialog.cs:159
 msgid "Previous contributors:"
 msgstr "Aiemmat osallistujat:"
 
@@ -1832,7 +1832,7 @@ msgstr "Pyöristetty viiva"
 msgid "Rounded Rectangle"
 msgstr "Pyöristetty suorakulmio"
 
-#: ../Pinta.Core/Actions/ViewActions.cs:157
+#: ../Pinta.Core/Actions/ViewActions.cs:139
 msgid "Ruler Units"
 msgstr "Mitta-asteikko"
 
@@ -1934,6 +1934,10 @@ msgstr "Näytä taso"
 #: ../Pinta/Main.cs:60
 msgid "Show this message and exit."
 msgstr "Näytä viesti ja poistu."
+
+#: ../Pinta.Core/Actions/ViewActions.cs:150
+msgid "Show/Hide"
+msgstr ""
 
 #: ../Pinta.Tools/Tools/ColorPickerTool.cs:225
 msgid "Single Pixel"
@@ -2134,7 +2138,7 @@ msgstr "Siirtokartta"
 msgid "Translate This Application"
 msgstr "Käännä tämä ohjelma"
 
-#: ../Pinta/Dialogs/AboutDialog.cs:171
+#: ../Pinta/Dialogs/AboutDialog.cs:173
 msgid "Translated by:"
 msgstr "Käännöksen tehnyt:"
 
@@ -2152,7 +2156,7 @@ msgstr "Kierre"
 msgid "Type"
 msgstr "Tyyppi"
 
-#: ../Pinta/MainWindow.cs:568
+#: ../Pinta/MainWindow.cs:540
 #, csharp-format
 msgid ""
 "Unable to download image from {0}.\n"
@@ -2234,7 +2238,7 @@ msgstr ""
 "Käytä pientä laatua tarkastamiseen, pieniin kuviin ja pieniin kulmiin. Käytä "
 "suurta laatua lopullisiin kuviin, isoihin kuviin ja suuriin kulmiin."
 
-#: ../Pinta/Dialogs/AboutDialog.cs:184
+#: ../Pinta/Dialogs/AboutDialog.cs:186
 msgid "Using some icons from:"
 msgstr "Käyttää kuvakkeita kokoelmista:"
 
@@ -2243,7 +2247,7 @@ msgstr "Käyttää kuvakkeita kokoelmista:"
 msgid "Version"
 msgstr "Versio"
 
-#: ../Pinta/Dialogs/AboutDialog.cs:304
+#: ../Pinta/Dialogs/AboutDialog.cs:306
 msgid "Version Info"
 msgstr "Versiotiedot"
 
@@ -2266,7 +2270,7 @@ msgid "Width:"
 msgstr "Leveys:"
 
 #: ../Pinta.Core/Actions/ViewActions.cs:103
-#: ../Pinta.Core/Actions/ViewActions.cs:276
+#: ../Pinta.Core/Actions/ViewActions.cs:282
 #: ../Pinta.Core/Classes/DocumentWorkspace.cs:315
 #: ../Pinta.Core/Classes/DocumentWorkspace.cs:323
 msgid "Window"
@@ -2383,7 +2387,7 @@ msgstr "renderointiin käytettävät säikeet"
 msgid "pixels"
 msgstr "pikseliä"
 
-#: ../Pinta/Dialogs/AboutDialog.cs:168
+#: ../Pinta/Dialogs/AboutDialog.cs:170
 msgid "translator-credits"
 msgstr ""
 "Launchpad Contributions:\n"
@@ -2433,7 +2437,7 @@ msgstr[1] "{0} päivitystä saatavilla"
 
 #. Translators: This specifies the format of the zoom percentage choices
 #. in the toolbar.
-#: ../Pinta.Core/Actions/ViewActions.cs:257
+#: ../Pinta.Core/Actions/ViewActions.cs:263
 #, csharp-format
 msgid "{0}%"
 msgstr "{0} %"

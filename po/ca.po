@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: pinta\n"
 "Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
-"POT-Creation-Date: 2021-12-26 22:42-0500\n"
+"POT-Creation-Date: 2022-01-03 00:34-0500\n"
 "PO-Revision-Date: 2021-12-29 14:30+0000\n"
 "Last-Translator: VPablo <villumar@gmail.com>\n"
 "Language-Team: Catalan <ca@li.org>\n"
@@ -15,8 +15,8 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Launchpad-Export-Date: 2021-12-31 15:28+0000\n"
-"X-Generator: Launchpad (build adb364d6a74a28e7b95d51cd30446ec16160de6c)\n"
+"X-Launchpad-Export-Date: 2022-01-07 03:28+0000\n"
+"X-Generator: Launchpad (build 1682fd44eec4f62371f0bed122a83482daf08e23)\n"
 
 #: Mono.Addins.Gui/Mono.Addins.Gui/InstallDialog.cs:142
 msgid " (in user directory)"
@@ -65,7 +65,7 @@ msgstr "_Complements"
 msgid "About"
 msgstr "Quant a"
 
-#: ../Pinta/Dialogs/AboutDialog.cs:287
+#: ../Pinta/Dialogs/AboutDialog.cs:289
 msgid "About Pinta"
 msgstr "Quant al Pinta"
 
@@ -199,7 +199,7 @@ msgstr "Color del fons"
 msgid "Background:"
 msgstr "Fons:"
 
-#: ../Pinta/Dialogs/AboutDialog.cs:177
+#: ../Pinta/Dialogs/AboutDialog.cs:179
 msgid "Based on the work of Paint.NET:"
 msgstr "Basat en el treball de Paint.NET:"
 
@@ -301,7 +301,7 @@ msgstr "Desplaçament des del centre"
 msgid "Centered"
 msgstr "Centrat"
 
-#: ../Pinta.Core/Actions/ViewActions.cs:162
+#: ../Pinta.Core/Actions/ViewActions.cs:144
 msgid "Centimeters"
 msgstr "Centímetres"
 
@@ -471,7 +471,7 @@ msgstr "Contigu"
 msgid "Contrast"
 msgstr "Contrast"
 
-#: ../Pinta/Dialogs/AboutDialog.cs:145
+#: ../Pinta/Dialogs/AboutDialog.cs:147
 msgid "Contributors to this release:"
 msgstr "Col·laboradors d’aquesta versió:"
 
@@ -599,7 +599,7 @@ msgstr "No canviïs d'eina"
 msgid "Don't change canvas size"
 msgstr "No canviïs la mida del llenç"
 
-#: ../Pinta/MainWindow.cs:567
+#: ../Pinta/MainWindow.cs:539
 msgid "Download failed"
 msgstr "La descàrrega ha fallat"
 
@@ -607,7 +607,7 @@ msgstr "La descàrrega ha fallat"
 msgid "Download size"
 msgstr "Mida de la baixada"
 
-#: ../Pinta/MainWindow.cs:548
+#: ../Pinta/MainWindow.cs:520
 msgid "Downloading Image"
 msgstr "Descarregant Imatge"
 
@@ -901,7 +901,7 @@ msgstr "Importa des d'un fitxer"
 msgid "Import from File..."
 msgstr "Importa des del fitxer..."
 
-#: ../Pinta.Core/Actions/ViewActions.cs:161
+#: ../Pinta.Core/Actions/ViewActions.cs:143
 msgid "Inches"
 msgstr "Polzades"
 
@@ -1587,7 +1587,7 @@ msgstr "Graella de píxels"
 msgid "Pixelate"
 msgstr "Pixela"
 
-#: ../Pinta.Core/Actions/ViewActions.cs:160
+#: ../Pinta.Core/Actions/ViewActions.cs:142
 msgid "Pixels"
 msgstr "Píxels"
 
@@ -1617,7 +1617,7 @@ msgstr "Redueix el nombre de colors"
 msgid "Power"
 msgstr "Força"
 
-#: ../Pinta/Dialogs/AboutDialog.cs:192
+#: ../Pinta/Dialogs/AboutDialog.cs:194
 msgid "Powered by Mono:"
 msgstr "Impulsat per Mono:"
 
@@ -1629,7 +1629,7 @@ msgstr "Valors predefinits:"
 msgid "Preview"
 msgstr "Vista prèvia"
 
-#: ../Pinta/Dialogs/AboutDialog.cs:157
+#: ../Pinta/Dialogs/AboutDialog.cs:159
 msgid "Previous contributors:"
 msgstr "Col·laboradors anteriors:"
 
@@ -1863,7 +1863,7 @@ msgstr "Forma de línia arrodonida"
 msgid "Rounded Rectangle"
 msgstr "Rectangle arrodonit"
 
-#: ../Pinta.Core/Actions/ViewActions.cs:157
+#: ../Pinta.Core/Actions/ViewActions.cs:139
 msgid "Ruler Units"
 msgstr "Unitats del regle"
 
@@ -1965,6 +1965,10 @@ msgstr "Mostra la capa"
 #: ../Pinta/Main.cs:60
 msgid "Show this message and exit."
 msgstr "Mostra aquest missatge i surt."
+
+#: ../Pinta.Core/Actions/ViewActions.cs:150
+msgid "Show/Hide"
+msgstr ""
 
 #: ../Pinta.Tools/Tools/ColorPickerTool.cs:225
 msgid "Single Pixel"
@@ -2173,7 +2177,7 @@ msgstr "Transfereix el mapa"
 msgid "Translate This Application"
 msgstr "Traduïu aquesta aplicació"
 
-#: ../Pinta/Dialogs/AboutDialog.cs:171
+#: ../Pinta/Dialogs/AboutDialog.cs:173
 msgid "Translated by:"
 msgstr "Traduït per:"
 
@@ -2191,7 +2195,7 @@ msgstr "Espiral"
 msgid "Type"
 msgstr "Tipus"
 
-#: ../Pinta/MainWindow.cs:568
+#: ../Pinta/MainWindow.cs:540
 #, csharp-format
 msgid ""
 "Unable to download image from {0}.\n"
@@ -2273,7 +2277,7 @@ msgstr ""
 "Feu servir la baixa qualitat per a previsualitzacions, imatges petites i "
 "angles petits. Feu servir l'alta qualitat per a imatges grans i angles grans."
 
-#: ../Pinta/Dialogs/AboutDialog.cs:184
+#: ../Pinta/Dialogs/AboutDialog.cs:186
 msgid "Using some icons from:"
 msgstr "S'han utilitzat algunes icones de:"
 
@@ -2282,7 +2286,7 @@ msgstr "S'han utilitzat algunes icones de:"
 msgid "Version"
 msgstr "Versió"
 
-#: ../Pinta/Dialogs/AboutDialog.cs:304
+#: ../Pinta/Dialogs/AboutDialog.cs:306
 msgid "Version Info"
 msgstr "Informació de la versió"
 
@@ -2305,7 +2309,7 @@ msgid "Width:"
 msgstr "Amplada:"
 
 #: ../Pinta.Core/Actions/ViewActions.cs:103
-#: ../Pinta.Core/Actions/ViewActions.cs:276
+#: ../Pinta.Core/Actions/ViewActions.cs:282
 #: ../Pinta.Core/Classes/DocumentWorkspace.cs:315
 #: ../Pinta.Core/Classes/DocumentWorkspace.cs:323
 msgid "Window"
@@ -2420,7 +2424,7 @@ msgstr "nombre de fils a usar per a la renderització"
 msgid "pixels"
 msgstr "píxels"
 
-#: ../Pinta/Dialogs/AboutDialog.cs:168
+#: ../Pinta/Dialogs/AboutDialog.cs:170
 msgid "translator-credits"
 msgstr ""
 "Launchpad Contributions:\n"
@@ -2469,7 +2473,7 @@ msgstr[1] "{0} actualitzacions disponibles"
 
 #. Translators: This specifies the format of the zoom percentage choices
 #. in the toolbar.
-#: ../Pinta.Core/Actions/ViewActions.cs:257
+#: ../Pinta.Core/Actions/ViewActions.cs:263
 #, csharp-format
 msgid "{0}%"
 msgstr "{0} %"

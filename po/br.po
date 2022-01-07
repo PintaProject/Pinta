@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: pinta\n"
 "Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
-"POT-Creation-Date: 2021-12-26 22:42-0500\n"
+"POT-Creation-Date: 2022-01-03 00:34-0500\n"
 "PO-Revision-Date: 2016-08-19 19:11+0000\n"
 "Last-Translator: Alan <Unknown>\n"
 "Language-Team: Breton <br@li.org>\n"
@@ -15,8 +15,8 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n > 1;\n"
-"X-Launchpad-Export-Date: 2021-12-31 15:28+0000\n"
-"X-Generator: Launchpad (build adb364d6a74a28e7b95d51cd30446ec16160de6c)\n"
+"X-Launchpad-Export-Date: 2022-01-07 03:28+0000\n"
+"X-Generator: Launchpad (build 1682fd44eec4f62371f0bed122a83482daf08e23)\n"
 
 #: Mono.Addins.Gui/Mono.Addins.Gui/InstallDialog.cs:142
 msgid " (in user directory)"
@@ -67,7 +67,7 @@ msgstr "Ouzhpena_dennoù"
 msgid "About"
 msgstr "Diwar-benn"
 
-#: ../Pinta/Dialogs/AboutDialog.cs:287
+#: ../Pinta/Dialogs/AboutDialog.cs:289
 msgid "About Pinta"
 msgstr "A-zivout Pinta"
 
@@ -200,7 +200,7 @@ msgstr "Liv an drekleur"
 msgid "Background:"
 msgstr "Drekleur :"
 
-#: ../Pinta/Dialogs/AboutDialog.cs:177
+#: ../Pinta/Dialogs/AboutDialog.cs:179
 msgid "Based on the work of Paint.NET:"
 msgstr "Diazezet war al labour graet evit Paint.NET :"
 
@@ -302,7 +302,7 @@ msgstr "Linkad ar c'hreiz"
 msgid "Centered"
 msgstr "Kreizet"
 
-#: ../Pinta.Core/Actions/ViewActions.cs:162
+#: ../Pinta.Core/Actions/ViewActions.cs:144
 msgid "Centimeters"
 msgstr "Kentimetroù"
 
@@ -471,7 +471,7 @@ msgstr "Kevelek"
 msgid "Contrast"
 msgstr "Dargemm"
 
-#: ../Pinta/Dialogs/AboutDialog.cs:145
+#: ../Pinta/Dialogs/AboutDialog.cs:147
 msgid "Contributors to this release:"
 msgstr "Tud o deus kemeret perzh en handelv-mañ :"
 
@@ -599,7 +599,7 @@ msgstr "Arabat kemmañ ar benveg"
 msgid "Don't change canvas size"
 msgstr "Arabat kemm ment ar steuenn"
 
-#: ../Pinta/MainWindow.cs:567
+#: ../Pinta/MainWindow.cs:539
 msgid "Download failed"
 msgstr ""
 
@@ -607,7 +607,7 @@ msgstr ""
 msgid "Download size"
 msgstr "Ment ar bellgargadenn"
 
-#: ../Pinta/MainWindow.cs:548
+#: ../Pinta/MainWindow.cs:520
 msgid "Downloading Image"
 msgstr ""
 
@@ -902,7 +902,7 @@ msgstr "Enporzhiañ diouzh ur restr"
 msgid "Import from File..."
 msgstr "Enporzhiañ diouzh ur restr..."
 
-#: ../Pinta.Core/Actions/ViewActions.cs:161
+#: ../Pinta.Core/Actions/ViewActions.cs:143
 msgid "Inches"
 msgstr "Meutadoù"
 
@@ -1554,7 +1554,7 @@ msgstr "Kael ar pikselioù"
 msgid "Pixelate"
 msgstr "Pikselaat"
 
-#: ../Pinta.Core/Actions/ViewActions.cs:160
+#: ../Pinta.Core/Actions/ViewActions.cs:142
 msgid "Pixels"
 msgstr "Pikselioù"
 
@@ -1584,7 +1584,7 @@ msgstr "Skritellaat"
 msgid "Power"
 msgstr "Galloud"
 
-#: ../Pinta/Dialogs/AboutDialog.cs:192
+#: ../Pinta/Dialogs/AboutDialog.cs:194
 msgid "Powered by Mono:"
 msgstr "Enlusket gant Mono :"
 
@@ -1596,7 +1596,7 @@ msgstr "Ragarventenn :"
 msgid "Preview"
 msgstr "Alberz"
 
-#: ../Pinta/Dialogs/AboutDialog.cs:157
+#: ../Pinta/Dialogs/AboutDialog.cs:159
 msgid "Previous contributors:"
 msgstr "Tud o deus kemeret perzh a-raok :"
 
@@ -1830,7 +1830,7 @@ msgstr "Lunioù dre linennoù rontaet"
 msgid "Rounded Rectangle"
 msgstr "Reizhkorn rontaet"
 
-#: ../Pinta.Core/Actions/ViewActions.cs:157
+#: ../Pinta.Core/Actions/ViewActions.cs:139
 msgid "Ruler Units"
 msgstr "Unanennoù ar reolenn"
 
@@ -1932,6 +1932,10 @@ msgstr "Diskouez an dreuzfollenn"
 #: ../Pinta/Main.cs:60
 msgid "Show this message and exit."
 msgstr "Diskouez ar gemennadenn-mañ ha mont kuit."
+
+#: ../Pinta.Core/Actions/ViewActions.cs:150
+msgid "Show/Hide"
+msgstr ""
 
 #: ../Pinta.Tools/Tools/ColorPickerTool.cs:225
 msgid "Single Pixel"
@@ -2139,7 +2143,7 @@ msgstr "Kartenn dreuzkas"
 msgid "Translate This Application"
 msgstr "Treiñ an arload-mañ"
 
-#: ../Pinta/Dialogs/AboutDialog.cs:171
+#: ../Pinta/Dialogs/AboutDialog.cs:173
 msgid "Translated by:"
 msgstr "Troet gant :"
 
@@ -2157,7 +2161,7 @@ msgstr "Gweañ"
 msgid "Type"
 msgstr "Rizh"
 
-#: ../Pinta/MainWindow.cs:568
+#: ../Pinta/MainWindow.cs:540
 #, csharp-format
 msgid ""
 "Unable to download image from {0}.\n"
@@ -2238,7 +2242,7 @@ msgstr ""
 "bihan. Arverañ ur berzhded uhel evit an disoc'h diwezhel, skeudennoù bras ha "
 "kornioù bras."
 
-#: ../Pinta/Dialogs/AboutDialog.cs:184
+#: ../Pinta/Dialogs/AboutDialog.cs:186
 msgid "Using some icons from:"
 msgstr "Arver arlunioù zo digant :"
 
@@ -2247,7 +2251,7 @@ msgstr "Arver arlunioù zo digant :"
 msgid "Version"
 msgstr "Handelv"
 
-#: ../Pinta/Dialogs/AboutDialog.cs:304
+#: ../Pinta/Dialogs/AboutDialog.cs:306
 msgid "Version Info"
 msgstr "Titouroù an handelv"
 
@@ -2270,7 +2274,7 @@ msgid "Width:"
 msgstr "Led :"
 
 #: ../Pinta.Core/Actions/ViewActions.cs:103
-#: ../Pinta.Core/Actions/ViewActions.cs:276
+#: ../Pinta.Core/Actions/ViewActions.cs:282
 #: ../Pinta.Core/Classes/DocumentWorkspace.cs:315
 #: ../Pinta.Core/Classes/DocumentWorkspace.cs:323
 msgid "Window"
@@ -2383,7 +2387,7 @@ msgstr "niver a neudennoù da arverañ evit an deouez"
 msgid "pixels"
 msgstr "a bikselioù"
 
-#: ../Pinta/Dialogs/AboutDialog.cs:168
+#: ../Pinta/Dialogs/AboutDialog.cs:170
 msgid "translator-credits"
 msgstr ""
 "Launchpad Contributions:\n"
@@ -2425,7 +2429,7 @@ msgstr[1] "{0} hizivadenn hegerz"
 
 #. Translators: This specifies the format of the zoom percentage choices
 #. in the toolbar.
-#: ../Pinta.Core/Actions/ViewActions.cs:257
+#: ../Pinta.Core/Actions/ViewActions.cs:263
 #, csharp-format
 msgid "{0}%"
 msgstr "{0}%"

@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: pinta\n"
 "Report-Msgid-Bugs-To: Mikalai Udodau <crom-a@tut.by>\n"
-"POT-Creation-Date: 2021-12-26 22:42-0500\n"
+"POT-Creation-Date: 2022-01-03 00:34-0500\n"
 "PO-Revision-Date: 2021-10-30 17:57+0000\n"
 "Last-Translator: Mikalai Udodau <Unknown>\n"
 "Language-Team: Belarusian <i18n@mova.org>\n"
@@ -16,8 +16,8 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && "
 "n%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2);\n"
-"X-Launchpad-Export-Date: 2021-12-31 15:28+0000\n"
-"X-Generator: Launchpad (build adb364d6a74a28e7b95d51cd30446ec16160de6c)\n"
+"X-Launchpad-Export-Date: 2022-01-07 03:28+0000\n"
+"X-Generator: Launchpad (build 1682fd44eec4f62371f0bed122a83482daf08e23)\n"
 
 #: Mono.Addins.Gui/Mono.Addins.Gui/InstallDialog.cs:142
 msgid " (in user directory)"
@@ -66,7 +66,7 @@ msgstr "Пр_ыстаўкі"
 msgid "About"
 msgstr "Пра праграму"
 
-#: ../Pinta/Dialogs/AboutDialog.cs:287
+#: ../Pinta/Dialogs/AboutDialog.cs:289
 msgid "About Pinta"
 msgstr "Пра Pinta"
 
@@ -199,7 +199,7 @@ msgstr "Колер фону"
 msgid "Background:"
 msgstr "Фон:"
 
-#: ../Pinta/Dialogs/AboutDialog.cs:177
+#: ../Pinta/Dialogs/AboutDialog.cs:179
 msgid "Based on the work of Paint.NET:"
 msgstr "Заснаваны на працы стваральнікаў Paint.NET:"
 
@@ -301,7 +301,7 @@ msgstr "Зрух цэнтра"
 msgid "Centered"
 msgstr "Цэнтраваны"
 
-#: ../Pinta.Core/Actions/ViewActions.cs:162
+#: ../Pinta.Core/Actions/ViewActions.cs:144
 msgid "Centimeters"
 msgstr "Сантыметры"
 
@@ -470,7 +470,7 @@ msgstr "Сумежны"
 msgid "Contrast"
 msgstr "Кантраст"
 
-#: ../Pinta/Dialogs/AboutDialog.cs:145
+#: ../Pinta/Dialogs/AboutDialog.cs:147
 msgid "Contributors to this release:"
 msgstr "Унёскадаўцы гэтага выпуску:"
 
@@ -598,7 +598,7 @@ msgstr "Не пераключаць прыладу"
 msgid "Don't change canvas size"
 msgstr "Не мяняць памер палатна"
 
-#: ../Pinta/MainWindow.cs:567
+#: ../Pinta/MainWindow.cs:539
 msgid "Download failed"
 msgstr "Збой сцягвання"
 
@@ -606,7 +606,7 @@ msgstr "Збой сцягвання"
 msgid "Download size"
 msgstr "Памер сцягвання"
 
-#: ../Pinta/MainWindow.cs:548
+#: ../Pinta/MainWindow.cs:520
 msgid "Downloading Image"
 msgstr "Сцягваецца відарыс"
 
@@ -900,7 +900,7 @@ msgstr "Імпартаваць з файла"
 msgid "Import from File..."
 msgstr "Імпартаваць з файла..."
 
-#: ../Pinta.Core/Actions/ViewActions.cs:161
+#: ../Pinta.Core/Actions/ViewActions.cs:143
 msgid "Inches"
 msgstr "Цалі"
 
@@ -1557,7 +1557,7 @@ msgstr "Сетка пікселаў"
 msgid "Pixelate"
 msgstr "Пікселізацыя"
 
-#: ../Pinta.Core/Actions/ViewActions.cs:160
+#: ../Pinta.Core/Actions/ViewActions.cs:142
 msgid "Pixels"
 msgstr "Пікселы"
 
@@ -1587,7 +1587,7 @@ msgstr "Пастэлізаваць"
 msgid "Power"
 msgstr "Моц"
 
-#: ../Pinta/Dialogs/AboutDialog.cs:192
+#: ../Pinta/Dialogs/AboutDialog.cs:194
 msgid "Powered by Mono:"
 msgstr "Працуе на Mono:"
 
@@ -1599,7 +1599,7 @@ msgstr "Прэсет:"
 msgid "Preview"
 msgstr "Перадпрагляд"
 
-#: ../Pinta/Dialogs/AboutDialog.cs:157
+#: ../Pinta/Dialogs/AboutDialog.cs:159
 msgid "Previous contributors:"
 msgstr "Папярэднія ўкладальнікі:"
 
@@ -1833,7 +1833,7 @@ msgstr "Акругленая форма крывой"
 msgid "Rounded Rectangle"
 msgstr "Акруглены прамавугольнік"
 
-#: ../Pinta.Core/Actions/ViewActions.cs:157
+#: ../Pinta.Core/Actions/ViewActions.cs:139
 msgid "Ruler Units"
 msgstr "Адзінкі на лінейцы"
 
@@ -1935,6 +1935,10 @@ msgstr "Паказаць пласт"
 #: ../Pinta/Main.cs:60
 msgid "Show this message and exit."
 msgstr "Паказаць гэта паведамленне і выйсці."
+
+#: ../Pinta.Core/Actions/ViewActions.cs:150
+msgid "Show/Hide"
+msgstr ""
 
 #: ../Pinta.Tools/Tools/ColorPickerTool.cs:225
 msgid "Single Pixel"
@@ -2135,7 +2139,7 @@ msgstr "Карта нармалей"
 msgid "Translate This Application"
 msgstr "Перакласці гэту праграму"
 
-#: ../Pinta/Dialogs/AboutDialog.cs:171
+#: ../Pinta/Dialogs/AboutDialog.cs:173
 msgid "Translated by:"
 msgstr "Пераклад:"
 
@@ -2153,7 +2157,7 @@ msgstr "Скручванне"
 msgid "Type"
 msgstr "Тып"
 
-#: ../Pinta/MainWindow.cs:568
+#: ../Pinta/MainWindow.cs:540
 #, csharp-format
 msgid ""
 "Unable to download image from {0}.\n"
@@ -2236,7 +2240,7 @@ msgstr ""
 "малых вуглоў. Выкарыстоўвайце высокую якасць для канчатковага варыянта, "
 "вялікіх відарысаў і вялікіх вуглоў."
 
-#: ../Pinta/Dialogs/AboutDialog.cs:184
+#: ../Pinta/Dialogs/AboutDialog.cs:186
 msgid "Using some icons from:"
 msgstr "Выкарыстоўвае некаторыя значкі з:"
 
@@ -2245,7 +2249,7 @@ msgstr "Выкарыстоўвае некаторыя значкі з:"
 msgid "Version"
 msgstr "Версія"
 
-#: ../Pinta/Dialogs/AboutDialog.cs:304
+#: ../Pinta/Dialogs/AboutDialog.cs:306
 msgid "Version Info"
 msgstr "Звесткі пра версію"
 
@@ -2268,7 +2272,7 @@ msgid "Width:"
 msgstr "Шырыня:"
 
 #: ../Pinta.Core/Actions/ViewActions.cs:103
-#: ../Pinta.Core/Actions/ViewActions.cs:276
+#: ../Pinta.Core/Actions/ViewActions.cs:282
 #: ../Pinta.Core/Classes/DocumentWorkspace.cs:315
 #: ../Pinta.Core/Classes/DocumentWorkspace.cs:323
 msgid "Window"
@@ -2383,7 +2387,7 @@ msgstr "колькасць патокаў, што будуць выкарыст�
 msgid "pixels"
 msgstr "пікселаў"
 
-#: ../Pinta/Dialogs/AboutDialog.cs:168
+#: ../Pinta/Dialogs/AboutDialog.cs:170
 msgid "translator-credits"
 msgstr ""
 "Launchpad Contributions:\n"
@@ -2424,7 +2428,7 @@ msgstr[2] "{0} абнаўленняў даступна"
 
 #. Translators: This specifies the format of the zoom percentage choices
 #. in the toolbar.
-#: ../Pinta.Core/Actions/ViewActions.cs:257
+#: ../Pinta.Core/Actions/ViewActions.cs:263
 #, csharp-format
 msgid "{0}%"
 msgstr "{0}%"

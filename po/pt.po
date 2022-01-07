@@ -7,21 +7,21 @@ msgid ""
 msgstr ""
 "Project-Id-Version: pinta\n"
 "Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
-"POT-Creation-Date: 2021-12-26 22:42-0500\n"
-"PO-Revision-Date: 2021-10-29 14:57+0000\n"
-"Last-Translator: Hugo Carvalho <hugokarvalho@hotmail.com>\n"
+"POT-Creation-Date: 2022-01-03 00:34-0500\n"
+"PO-Revision-Date: 2021-12-31 20:31+0000\n"
+"Last-Translator: JL <Unknown>\n"
 "Language-Team: European Portuguese\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Launchpad-Export-Date: 2021-12-31 15:28+0000\n"
-"X-Generator: Launchpad (build adb364d6a74a28e7b95d51cd30446ec16160de6c)\n"
+"X-Launchpad-Export-Date: 2022-01-07 03:28+0000\n"
+"X-Generator: Launchpad (build 1682fd44eec4f62371f0bed122a83482daf08e23)\n"
 "Language: pt_PT\n"
 
 #: Mono.Addins.Gui/Mono.Addins.Gui/InstallDialog.cs:142
 msgid " (in user directory)"
-msgstr " (na pasta do utilizador)"
+msgstr " (no directório do utilizador)"
 
 #: ../Pinta.Core/Classes/SelectionModeHandler.cs:61
 msgid " Selection Mode: "
@@ -64,9 +64,9 @@ msgstr "E_xtras"
 
 #: ../Pinta.Core/Actions/AppActions.cs:44
 msgid "About"
-msgstr "Acerca de"
+msgstr "Sobre"
 
-#: ../Pinta/Dialogs/AboutDialog.cs:287
+#: ../Pinta/Dialogs/AboutDialog.cs:289
 msgid "About Pinta"
 msgstr "Sobre o Pinta"
 
@@ -199,7 +199,7 @@ msgstr "Cor de fundo"
 msgid "Background:"
 msgstr "Fundo:"
 
-#: ../Pinta/Dialogs/AboutDialog.cs:177
+#: ../Pinta/Dialogs/AboutDialog.cs:179
 msgid "Based on the work of Paint.NET:"
 msgstr "Inspirado no Paint.NET:"
 
@@ -279,7 +279,7 @@ msgstr "Em percentagem:"
 #: ../Pinta.Core/Actions/EditActions.cs:403
 #: ../Pinta.Core/Actions/LayerActions.cs:169
 msgid "Cancel"
-msgstr ""
+msgstr "Cancelar"
 
 #: ../Pinta/Pads/CanvasPad.cs:43
 msgid "Canvas"
@@ -301,7 +301,7 @@ msgstr "Centrar rebordo"
 msgid "Centered"
 msgstr "Centrado"
 
-#: ../Pinta.Core/Actions/ViewActions.cs:162
+#: ../Pinta.Core/Actions/ViewActions.cs:144
 msgid "Centimeters"
 msgstr "Centímetros"
 
@@ -311,7 +311,7 @@ msgstr "Tipo de forma alterada"
 
 #: ../Pinta.Effects/Dialogs/Effects.LevelsDialog.cs:473
 msgid "Choose Color"
-msgstr ""
+msgstr "Escolher a Cor"
 
 #: ../Pinta.Gui.Widgets/Widgets/StatusBarColorPaletteWidget.cs:106
 msgid "Choose Palette Color"
@@ -407,7 +407,7 @@ msgstr "Fechar tudo"
 #: ../Pinta/Actions/File/CloseDocumentAction.cs:72
 #: ../Pinta/Actions/File/CloseDocumentAction.cs:75
 msgid "Close _without Saving"
-msgstr ""
+msgstr "Fechar _sem guardar"
 
 #: ../Pinta.Tools/Editable/EditEngines/RectangleEditEngine.cs:40
 msgid "Closed Curve Shape"
@@ -470,7 +470,7 @@ msgstr "Adjacente"
 msgid "Contrast"
 msgstr "Contraste"
 
-#: ../Pinta/Dialogs/AboutDialog.cs:145
+#: ../Pinta/Dialogs/AboutDialog.cs:147
 msgid "Contributors to this release:"
 msgstr "Contributos nesta versão:"
 
@@ -493,7 +493,7 @@ msgstr "Direitos de autor"
 #: ../Pinta/Actions/File/NewScreenshotAction.cs:70
 #, csharp-format
 msgid "Could not obtain the size of display '{0}'"
-msgstr ""
+msgstr "Não conseguiu obter tamanho do ecrã '{0}'"
 
 #: ../Pinta.Core/Classes/Palette.cs:185
 #: ../Pinta.Core/Managers/WorkspaceManager.cs:376
@@ -598,7 +598,7 @@ msgstr "Não trocar ferramenta"
 msgid "Don't change canvas size"
 msgstr "Não alterar o tamanho da tela"
 
-#: ../Pinta/MainWindow.cs:567
+#: ../Pinta/MainWindow.cs:539
 msgid "Download failed"
 msgstr "A transferência falhou"
 
@@ -606,7 +606,7 @@ msgstr "A transferência falhou"
 msgid "Download size"
 msgstr "Tamanho da transferência"
 
-#: ../Pinta/MainWindow.cs:548
+#: ../Pinta/MainWindow.cs:520
 msgid "Downloading Image"
 msgstr "A transferir imagem"
 
@@ -691,7 +691,7 @@ msgstr "Falha ao guardar imagem"
 
 #: ../Pinta/Actions/File/NewScreenshotAction.cs:69
 msgid "Failed to take screenshot"
-msgstr ""
+msgstr "Falhou em fazer captura do ecrã"
 
 #: ../Pinta.Core/Actions/HelpActions.cs:46
 msgid "File a Bug"
@@ -900,7 +900,7 @@ msgstr "Importar do ficheiro"
 msgid "Import from File..."
 msgstr "Importar do ficheiro..."
 
-#: ../Pinta.Core/Actions/ViewActions.cs:161
+#: ../Pinta.Core/Actions/ViewActions.cs:143
 msgid "Inches"
 msgstr "Polegadas"
 
@@ -1029,7 +1029,7 @@ msgstr "Mostrar camada"
 #: ../Pinta.Core/Classes/DocumentLayers.cs:135
 #, csharp-format
 msgid "Layer {0}"
-msgstr ""
+msgstr "Camada {0}"
 
 #: ../Pinta/Pads/LayersPad.cs:40 ../Pinta/Pads/LayersPad.cs:60
 msgid "Layers"
@@ -1048,6 +1048,11 @@ msgid ""
 "content. Hold Shift to rotate in steps. Use arrow keys to move selected "
 "content by a single pixel."
 msgstr ""
+"Clique com o botão esquerdo e arraste a seleção para mover o conteúdo "
+"selecionado. Segure {0} para dimensionar em vez de mover. Clique com o botão "
+"direito e arraste a seleção para girar o conteúdo selecionado. Segure Shift "
+"para girar em etapas. Use as teclas de seta para mover o conteúdo "
+"selecionado em um único pixel."
 
 #. Translators: {0} is 'Ctrl', or a platform-specific key such as 'Command' on macOS.
 #: ../Pinta.Tools/Tools/MoveSelectionTool.cs:45
@@ -1557,7 +1562,7 @@ msgstr "Grelha de pixeis"
 msgid "Pixelate"
 msgstr "Pixelizar"
 
-#: ../Pinta.Core/Actions/ViewActions.cs:160
+#: ../Pinta.Core/Actions/ViewActions.cs:142
 msgid "Pixels"
 msgstr "Pixeis"
 
@@ -1587,7 +1592,7 @@ msgstr "Aplicar gradação"
 msgid "Power"
 msgstr "Energia"
 
-#: ../Pinta/Dialogs/AboutDialog.cs:192
+#: ../Pinta/Dialogs/AboutDialog.cs:194
 msgid "Powered by Mono:"
 msgstr "Desenvolvido em Mono:"
 
@@ -1599,7 +1604,7 @@ msgstr "Pré-ajuste:"
 msgid "Preview"
 msgstr "Prever"
 
-#: ../Pinta/Dialogs/AboutDialog.cs:157
+#: ../Pinta/Dialogs/AboutDialog.cs:159
 msgid "Previous contributors:"
 msgstr "Contributos anteriores:"
 
@@ -1833,7 +1838,7 @@ msgstr "Linha arredondada"
 msgid "Rounded Rectangle"
 msgstr "Retângulo arredondado"
 
-#: ../Pinta.Core/Actions/ViewActions.cs:157
+#: ../Pinta.Core/Actions/ViewActions.cs:139
 msgid "Ruler Units"
 msgstr "Unidades da régua"
 
@@ -1880,7 +1885,7 @@ msgstr "Gravar ficheiro de paleta"
 #: ../Pinta/Actions/File/CloseDocumentAction.cs:60
 #, csharp-format
 msgid "Save changes to image \"{0}\" before closing?"
-msgstr ""
+msgstr "Guardar alterações da imagem para \"{0}\" antes de fechar?"
 
 #: ../Pinta.Effects/Effects/CloudsEffect.cs:200
 msgid "Scale"
@@ -1936,6 +1941,10 @@ msgstr "Mostrar camada"
 msgid "Show this message and exit."
 msgstr "Mostra esta mensagem e sai."
 
+#: ../Pinta.Core/Actions/ViewActions.cs:150
+msgid "Show/Hide"
+msgstr ""
+
 #: ../Pinta.Tools/Tools/ColorPickerTool.cs:225
 msgid "Single Pixel"
 msgstr "Um pixel"
@@ -1974,7 +1983,7 @@ msgstr "Quadrados"
 
 #: ../Pinta.Core/Actions/ViewActions.cs:73
 msgid "Status Bar"
-msgstr ""
+msgstr "Barra de Estado"
 
 #: ../Pinta.Effects/Effects/ReduceNoiseEffect.cs:96
 msgid "Strength"
@@ -2119,7 +2128,7 @@ msgstr "Ferramenta"
 
 #: ../Pinta.Core/Actions/ViewActions.cs:74
 msgid "Tool Box"
-msgstr ""
+msgstr "Caixa de Ferramentas"
 
 #: ../Pinta/MainWindow.cs:364
 msgid "Tool Windows"
@@ -2137,7 +2146,7 @@ msgstr "Mapa de transferência"
 msgid "Translate This Application"
 msgstr "Traduzir esta aplicação"
 
-#: ../Pinta/Dialogs/AboutDialog.cs:171
+#: ../Pinta/Dialogs/AboutDialog.cs:173
 msgid "Translated by:"
 msgstr "Traduzido por:"
 
@@ -2155,7 +2164,7 @@ msgstr "Torção"
 msgid "Type"
 msgstr "Tipo"
 
-#: ../Pinta/MainWindow.cs:568
+#: ../Pinta/MainWindow.cs:540
 #, csharp-format
 msgid ""
 "Unable to download image from {0}.\n"
@@ -2237,7 +2246,7 @@ msgstr ""
 "Utilize uma qualidade baixa para antevisões, imagens e ângulos pequenos. "
 "Utilize uma qualidade alta para trabalho final, imagens e ângulos grandes."
 
-#: ../Pinta/Dialogs/AboutDialog.cs:184
+#: ../Pinta/Dialogs/AboutDialog.cs:186
 msgid "Using some icons from:"
 msgstr "Utiliza alguns ícones de:"
 
@@ -2246,7 +2255,7 @@ msgstr "Utiliza alguns ícones de:"
 msgid "Version"
 msgstr "Versão"
 
-#: ../Pinta/Dialogs/AboutDialog.cs:304
+#: ../Pinta/Dialogs/AboutDialog.cs:306
 msgid "Version Info"
 msgstr "Informações da versão"
 
@@ -2269,7 +2278,7 @@ msgid "Width:"
 msgstr "Largura:"
 
 #: ../Pinta.Core/Actions/ViewActions.cs:103
-#: ../Pinta.Core/Actions/ViewActions.cs:276
+#: ../Pinta.Core/Actions/ViewActions.cs:282
 #: ../Pinta.Core/Classes/DocumentWorkspace.cs:315
 #: ../Pinta.Core/Classes/DocumentWorkspace.cs:323
 msgid "Window"
@@ -2384,7 +2393,7 @@ msgstr "número de processos a utilizar no processamento"
 msgid "pixels"
 msgstr "pixeis"
 
-#: ../Pinta/Dialogs/AboutDialog.cs:168
+#: ../Pinta/Dialogs/AboutDialog.cs:170
 msgid "translator-credits"
 msgstr ""
 "Launchpad Contributions:\n"
@@ -2394,6 +2403,7 @@ msgstr ""
 "  Cameron White https://launchpad.net/~cameronwhite91\n"
 "  Duarte Cunha Leão https://launchpad.net/~duarte-leao\n"
 "  Hugo Carvalho https://launchpad.net/~hugok79\n"
+"  JL https://launchpad.net/~jl2414\n"
 "  Jonathan Pobst https://launchpad.net/~jpobst\n"
 "  Miguel Fazenda https://launchpad.net/~migfaz-71\n"
 "  Pedro Albuquerque https://launchpad.net/~pmralbuquerque\n"
@@ -2415,7 +2425,7 @@ msgstr ""
 #: ../Pinta.Core/Classes/DocumentLayers.cs:234
 #, csharp-format
 msgid "{0} copy"
-msgstr ""
+msgstr "{0} copiar"
 
 #: ../Pinta.Core/ImageFormats/FormatDescriptor.cs:93
 #, csharp-format
@@ -2437,7 +2447,7 @@ msgstr[1] "{0} atualizações disponíveis"
 
 #. Translators: This specifies the format of the zoom percentage choices
 #. in the toolbar.
-#: ../Pinta.Core/Actions/ViewActions.cs:257
+#: ../Pinta.Core/Actions/ViewActions.cs:263
 #, csharp-format
 msgid "{0}%"
 msgstr "{0}%"

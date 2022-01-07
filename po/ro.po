@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: pinta\n"
 "Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
-"POT-Creation-Date: 2021-12-26 22:42-0500\n"
+"POT-Creation-Date: 2022-01-03 00:34-0500\n"
 "PO-Revision-Date: 2020-04-16 09:35+0000\n"
 "Last-Translator: Mircea <mirceanis@gmail.com>\n"
 "Language-Team: Romanian <ro@li.org>\n"
@@ -16,8 +16,8 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=3; plural=(n == 1 ? 0: (((n % 100 > 19) || ((n % 100 "
 "== 0) && (n != 0))) ? 2: 1));\n"
-"X-Launchpad-Export-Date: 2021-12-31 15:28+0000\n"
-"X-Generator: Launchpad (build adb364d6a74a28e7b95d51cd30446ec16160de6c)\n"
+"X-Launchpad-Export-Date: 2022-01-07 03:28+0000\n"
+"X-Generator: Launchpad (build 1682fd44eec4f62371f0bed122a83482daf08e23)\n"
 
 #: Mono.Addins.Gui/Mono.Addins.Gui/InstallDialog.cs:142
 msgid " (in user directory)"
@@ -66,7 +66,7 @@ msgstr "E_xtensii"
 msgid "About"
 msgstr "Despre aplicație"
 
-#: ../Pinta/Dialogs/AboutDialog.cs:287
+#: ../Pinta/Dialogs/AboutDialog.cs:289
 msgid "About Pinta"
 msgstr "Despre Pinta"
 
@@ -199,7 +199,7 @@ msgstr "Culoare de fundal"
 msgid "Background:"
 msgstr "Fundal:"
 
-#: ../Pinta/Dialogs/AboutDialog.cs:177
+#: ../Pinta/Dialogs/AboutDialog.cs:179
 msgid "Based on the work of Paint.NET:"
 msgstr "Bazat pe munca la programul Paint.NET:"
 
@@ -301,7 +301,7 @@ msgstr "Centrare decalaj"
 msgid "Centered"
 msgstr "Centrat"
 
-#: ../Pinta.Core/Actions/ViewActions.cs:162
+#: ../Pinta.Core/Actions/ViewActions.cs:144
 msgid "Centimeters"
 msgstr "Centimetri"
 
@@ -470,7 +470,7 @@ msgstr "Continuu"
 msgid "Contrast"
 msgstr "Contrast"
 
-#: ../Pinta/Dialogs/AboutDialog.cs:145
+#: ../Pinta/Dialogs/AboutDialog.cs:147
 msgid "Contributors to this release:"
 msgstr "Au contribuit la această versiune:"
 
@@ -598,7 +598,7 @@ msgstr "Nu schimba unealta"
 msgid "Don't change canvas size"
 msgstr "Nu schimba dimensiunea spațiului de desen"
 
-#: ../Pinta/MainWindow.cs:567
+#: ../Pinta/MainWindow.cs:539
 msgid "Download failed"
 msgstr ""
 
@@ -606,7 +606,7 @@ msgstr ""
 msgid "Download size"
 msgstr "Dimensiune download"
 
-#: ../Pinta/MainWindow.cs:548
+#: ../Pinta/MainWindow.cs:520
 msgid "Downloading Image"
 msgstr ""
 
@@ -900,7 +900,7 @@ msgstr "Importă din fişier"
 msgid "Import from File..."
 msgstr "Importă din fișier..."
 
-#: ../Pinta.Core/Actions/ViewActions.cs:161
+#: ../Pinta.Core/Actions/ViewActions.cs:143
 msgid "Inches"
 msgstr "Țoli"
 
@@ -1557,7 +1557,7 @@ msgstr "Grilă pixeli"
 msgid "Pixelate"
 msgstr "Pixelează"
 
-#: ../Pinta.Core/Actions/ViewActions.cs:160
+#: ../Pinta.Core/Actions/ViewActions.cs:142
 msgid "Pixels"
 msgstr "Pixeli"
 
@@ -1587,7 +1587,7 @@ msgstr "Posterizează"
 msgid "Power"
 msgstr "Putere"
 
-#: ../Pinta/Dialogs/AboutDialog.cs:192
+#: ../Pinta/Dialogs/AboutDialog.cs:194
 msgid "Powered by Mono:"
 msgstr "Bazat pe Mono:"
 
@@ -1599,7 +1599,7 @@ msgstr "Prestabilit:"
 msgid "Preview"
 msgstr "Previzualizare"
 
-#: ../Pinta/Dialogs/AboutDialog.cs:157
+#: ../Pinta/Dialogs/AboutDialog.cs:159
 msgid "Previous contributors:"
 msgstr "Au contribuit la versiunile anterioare:"
 
@@ -1833,7 +1833,7 @@ msgstr "Formă linie rotunjtă"
 msgid "Rounded Rectangle"
 msgstr "Dreptunghi rotunjit"
 
-#: ../Pinta.Core/Actions/ViewActions.cs:157
+#: ../Pinta.Core/Actions/ViewActions.cs:139
 msgid "Ruler Units"
 msgstr "Unităţi de măsură riglă"
 
@@ -1935,6 +1935,10 @@ msgstr "Arată Strat"
 #: ../Pinta/Main.cs:60
 msgid "Show this message and exit."
 msgstr "Afișează acest mesaj și ieșiți"
+
+#: ../Pinta.Core/Actions/ViewActions.cs:150
+msgid "Show/Hide"
+msgstr ""
 
 #: ../Pinta.Tools/Tools/ColorPickerTool.cs:225
 msgid "Single Pixel"
@@ -2144,7 +2148,7 @@ msgstr "Hartă de transfer"
 msgid "Translate This Application"
 msgstr "Tradu această aplicaţie"
 
-#: ../Pinta/Dialogs/AboutDialog.cs:171
+#: ../Pinta/Dialogs/AboutDialog.cs:173
 msgid "Translated by:"
 msgstr "Tradus de:"
 
@@ -2162,7 +2166,7 @@ msgstr "Răsucește"
 msgid "Type"
 msgstr "Tip"
 
-#: ../Pinta/MainWindow.cs:568
+#: ../Pinta/MainWindow.cs:540
 #, csharp-format
 msgid ""
 "Unable to download image from {0}.\n"
@@ -2242,7 +2246,7 @@ msgstr ""
 "Folosiți calitatea redusă pentru previzualizări, imagini și unghiuri mici. "
 "Folosiți calitatea înaltă pentru calitatea finală, imagini și unghiuri mari."
 
-#: ../Pinta/Dialogs/AboutDialog.cs:184
+#: ../Pinta/Dialogs/AboutDialog.cs:186
 msgid "Using some icons from:"
 msgstr "Sunt utilizate unele pictograme din:"
 
@@ -2251,7 +2255,7 @@ msgstr "Sunt utilizate unele pictograme din:"
 msgid "Version"
 msgstr "Versiune"
 
-#: ../Pinta/Dialogs/AboutDialog.cs:304
+#: ../Pinta/Dialogs/AboutDialog.cs:306
 msgid "Version Info"
 msgstr "Informaţii despre versiune"
 
@@ -2274,7 +2278,7 @@ msgid "Width:"
 msgstr "Lungime:"
 
 #: ../Pinta.Core/Actions/ViewActions.cs:103
-#: ../Pinta.Core/Actions/ViewActions.cs:276
+#: ../Pinta.Core/Actions/ViewActions.cs:282
 #: ../Pinta.Core/Classes/DocumentWorkspace.cs:315
 #: ../Pinta.Core/Classes/DocumentWorkspace.cs:323
 msgid "Window"
@@ -2387,7 +2391,7 @@ msgstr "numărul firelor de execuţie utilizate pentru randare"
 msgid "pixels"
 msgstr "pixeli"
 
-#: ../Pinta/Dialogs/AboutDialog.cs:168
+#: ../Pinta/Dialogs/AboutDialog.cs:170
 msgid "translator-credits"
 msgstr ""
 "Launchpad Contributions:\n"
@@ -2441,7 +2445,7 @@ msgstr[2] ""
 
 #. Translators: This specifies the format of the zoom percentage choices
 #. in the toolbar.
-#: ../Pinta.Core/Actions/ViewActions.cs:257
+#: ../Pinta.Core/Actions/ViewActions.cs:263
 #, csharp-format
 msgid "{0}%"
 msgstr "{0}%"

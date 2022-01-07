@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: pinta\n"
 "Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
-"POT-Creation-Date: 2021-12-26 22:42-0500\n"
+"POT-Creation-Date: 2022-01-03 00:34-0500\n"
 "PO-Revision-Date: 2021-01-24 20:30+0000\n"
 "Last-Translator: Мирослав Николић <miroslavnikolic@rocketmail.com>\n"
 "Language-Team: српски <gnome-sr@googlegroups.org>\n"
@@ -15,8 +15,8 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=3; plural=n%10==1 && n%100!=11 ? 0 : n%10>=2 && "
 "n%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2;\n"
-"X-Launchpad-Export-Date: 2021-12-31 15:28+0000\n"
-"X-Generator: Launchpad (build adb364d6a74a28e7b95d51cd30446ec16160de6c)\n"
+"X-Launchpad-Export-Date: 2022-01-07 03:28+0000\n"
+"X-Generator: Launchpad (build 1682fd44eec4f62371f0bed122a83482daf08e23)\n"
 "Language: sr\n"
 
 #: Mono.Addins.Gui/Mono.Addins.Gui/InstallDialog.cs:142
@@ -66,7 +66,7 @@ msgstr "_Додаци"
 msgid "About"
 msgstr "О програму"
 
-#: ../Pinta/Dialogs/AboutDialog.cs:287
+#: ../Pinta/Dialogs/AboutDialog.cs:289
 msgid "About Pinta"
 msgstr "О Пинти"
 
@@ -199,7 +199,7 @@ msgstr "Боја позадине"
 msgid "Background:"
 msgstr "Позадина:"
 
-#: ../Pinta/Dialogs/AboutDialog.cs:177
+#: ../Pinta/Dialogs/AboutDialog.cs:179
 msgid "Based on the work of Paint.NET:"
 msgstr "Засновано на раду „Paint.NET“-а:"
 
@@ -301,7 +301,7 @@ msgstr "Усредишти помак"
 msgid "Centered"
 msgstr "Усредиштено"
 
-#: ../Pinta.Core/Actions/ViewActions.cs:162
+#: ../Pinta.Core/Actions/ViewActions.cs:144
 msgid "Centimeters"
 msgstr "Центиметри"
 
@@ -470,7 +470,7 @@ msgstr "Непрекидно"
 msgid "Contrast"
 msgstr "Контраст"
 
-#: ../Pinta/Dialogs/AboutDialog.cs:145
+#: ../Pinta/Dialogs/AboutDialog.cs:147
 msgid "Contributors to this release:"
 msgstr "Доприносиоци овом издању:"
 
@@ -598,7 +598,7 @@ msgstr "Не мењај алат"
 msgid "Don't change canvas size"
 msgstr "Не мењај величину платна"
 
-#: ../Pinta/MainWindow.cs:567
+#: ../Pinta/MainWindow.cs:539
 msgid "Download failed"
 msgstr "Преузимање није успело"
 
@@ -606,7 +606,7 @@ msgstr "Преузимање није успело"
 msgid "Download size"
 msgstr "За преузимање"
 
-#: ../Pinta/MainWindow.cs:548
+#: ../Pinta/MainWindow.cs:520
 msgid "Downloading Image"
 msgstr "Преузимам слику"
 
@@ -900,7 +900,7 @@ msgstr "Увези из датотеке"
 msgid "Import from File..."
 msgstr "Увези из датотеке..."
 
-#: ../Pinta.Core/Actions/ViewActions.cs:161
+#: ../Pinta.Core/Actions/ViewActions.cs:143
 msgid "Inches"
 msgstr "Инчи"
 
@@ -1555,7 +1555,7 @@ msgstr "Мрежа тачкица"
 msgid "Pixelate"
 msgstr "Истачкавање"
 
-#: ../Pinta.Core/Actions/ViewActions.cs:160
+#: ../Pinta.Core/Actions/ViewActions.cs:142
 msgid "Pixels"
 msgstr "Тачкице"
 
@@ -1585,7 +1585,7 @@ msgstr "Смањи број боја"
 msgid "Power"
 msgstr "Снага"
 
-#: ../Pinta/Dialogs/AboutDialog.cs:192
+#: ../Pinta/Dialogs/AboutDialog.cs:194
 msgid "Powered by Mono:"
 msgstr "Погони га Моно:"
 
@@ -1597,7 +1597,7 @@ msgstr "Подешеност:"
 msgid "Preview"
 msgstr "Претпреглед"
 
-#: ../Pinta/Dialogs/AboutDialog.cs:157
+#: ../Pinta/Dialogs/AboutDialog.cs:159
 msgid "Previous contributors:"
 msgstr "Претходни доприносиоци:"
 
@@ -1831,7 +1831,7 @@ msgstr "Облик заобљене линије"
 msgid "Rounded Rectangle"
 msgstr "Заобљени правоугаоник"
 
-#: ../Pinta.Core/Actions/ViewActions.cs:157
+#: ../Pinta.Core/Actions/ViewActions.cs:139
 msgid "Ruler Units"
 msgstr "Јединице лењира"
 
@@ -1933,6 +1933,10 @@ msgstr "Прикажи слој"
 #: ../Pinta/Main.cs:60
 msgid "Show this message and exit."
 msgstr "Приказује ову поруку и излази."
+
+#: ../Pinta.Core/Actions/ViewActions.cs:150
+msgid "Show/Hide"
+msgstr ""
 
 #: ../Pinta.Tools/Tools/ColorPickerTool.cs:225
 msgid "Single Pixel"
@@ -2134,7 +2138,7 @@ msgstr "Мапа преноса"
 msgid "Translate This Application"
 msgstr "Преведите овај програм"
 
-#: ../Pinta/Dialogs/AboutDialog.cs:171
+#: ../Pinta/Dialogs/AboutDialog.cs:173
 msgid "Translated by:"
 msgstr "Преводиоци:"
 
@@ -2152,7 +2156,7 @@ msgstr "Увртање"
 msgid "Type"
 msgstr "Врста"
 
-#: ../Pinta/MainWindow.cs:568
+#: ../Pinta/MainWindow.cs:540
 #, csharp-format
 msgid ""
 "Unable to download image from {0}.\n"
@@ -2234,7 +2238,7 @@ msgstr ""
 "Користите мањи квалитет за прегледе, мале слике, и мале углове.  Користите "
 "већи квалитет за крајњи квалитет, велике слике, и велике углове."
 
-#: ../Pinta/Dialogs/AboutDialog.cs:184
+#: ../Pinta/Dialogs/AboutDialog.cs:186
 msgid "Using some icons from:"
 msgstr "Користи неке иконице из:"
 
@@ -2243,7 +2247,7 @@ msgstr "Користи неке иконице из:"
 msgid "Version"
 msgstr "Издање"
 
-#: ../Pinta/Dialogs/AboutDialog.cs:304
+#: ../Pinta/Dialogs/AboutDialog.cs:306
 msgid "Version Info"
 msgstr "Подаци о издању"
 
@@ -2266,7 +2270,7 @@ msgid "Width:"
 msgstr "Ширина:"
 
 #: ../Pinta.Core/Actions/ViewActions.cs:103
-#: ../Pinta.Core/Actions/ViewActions.cs:276
+#: ../Pinta.Core/Actions/ViewActions.cs:282
 #: ../Pinta.Core/Classes/DocumentWorkspace.cs:315
 #: ../Pinta.Core/Classes/DocumentWorkspace.cs:323
 msgid "Window"
@@ -2381,7 +2385,7 @@ msgstr "број нити за исцртавање"
 msgid "pixels"
 msgstr "тачкица"
 
-#: ../Pinta/Dialogs/AboutDialog.cs:168
+#: ../Pinta/Dialogs/AboutDialog.cs:170
 msgid "translator-credits"
 msgstr ""
 "Launchpad Contributions:\n"
@@ -2426,7 +2430,7 @@ msgstr[2] "Доступно је {0} ажурирања"
 
 #. Translators: This specifies the format of the zoom percentage choices
 #. in the toolbar.
-#: ../Pinta.Core/Actions/ViewActions.cs:257
+#: ../Pinta.Core/Actions/ViewActions.cs:263
 #, csharp-format
 msgid "{0}%"
 msgstr "{0}%"

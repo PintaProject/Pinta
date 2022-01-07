@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: pinta\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-12-26 22:42-0500\n"
+"POT-Creation-Date: 2022-01-03 00:34-0500\n"
 "PO-Revision-Date: 2021-12-15 04:00+0000\n"
 "Last-Translator: Åke Engelbrektson <Unknown>\n"
 "Language-Team: \n"
@@ -15,8 +15,8 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Launchpad-Export-Date: 2021-12-31 15:28+0000\n"
-"X-Generator: Launchpad (build adb364d6a74a28e7b95d51cd30446ec16160de6c)\n"
+"X-Launchpad-Export-Date: 2022-01-07 03:28+0000\n"
+"X-Generator: Launchpad (build 1682fd44eec4f62371f0bed122a83482daf08e23)\n"
 "Language: sv\n"
 
 #: Mono.Addins.Gui/Mono.Addins.Gui/InstallDialog.cs:142
@@ -66,7 +66,7 @@ msgstr "T_illägg"
 msgid "About"
 msgstr "Om"
 
-#: ../Pinta/Dialogs/AboutDialog.cs:287
+#: ../Pinta/Dialogs/AboutDialog.cs:289
 msgid "About Pinta"
 msgstr "Om Pinta"
 
@@ -199,7 +199,7 @@ msgstr "Bakgrundsfärg"
 msgid "Background:"
 msgstr "Bakgrund:"
 
-#: ../Pinta/Dialogs/AboutDialog.cs:177
+#: ../Pinta/Dialogs/AboutDialog.cs:179
 msgid "Based on the work of Paint.NET:"
 msgstr "Baserat på arbetet med Paint.NET:"
 
@@ -301,7 +301,7 @@ msgstr "Centrera positionen"
 msgid "Centered"
 msgstr "Centrerad"
 
-#: ../Pinta.Core/Actions/ViewActions.cs:162
+#: ../Pinta.Core/Actions/ViewActions.cs:144
 msgid "Centimeters"
 msgstr "Centimeter"
 
@@ -468,7 +468,7 @@ msgstr "Sammanhängande"
 msgid "Contrast"
 msgstr "Kontrast"
 
-#: ../Pinta/Dialogs/AboutDialog.cs:145
+#: ../Pinta/Dialogs/AboutDialog.cs:147
 msgid "Contributors to this release:"
 msgstr "Bidragsgivare till denna utgåva:"
 
@@ -596,7 +596,7 @@ msgstr "Växla inte verktyg"
 msgid "Don't change canvas size"
 msgstr "Ändra inte arbetsytans storlek"
 
-#: ../Pinta/MainWindow.cs:567
+#: ../Pinta/MainWindow.cs:539
 msgid "Download failed"
 msgstr "Nedladdningen misslyckades"
 
@@ -604,7 +604,7 @@ msgstr "Nedladdningen misslyckades"
 msgid "Download size"
 msgstr "Nedladdningsstorlek"
 
-#: ../Pinta/MainWindow.cs:548
+#: ../Pinta/MainWindow.cs:520
 msgid "Downloading Image"
 msgstr "Laddar ner bild"
 
@@ -898,7 +898,7 @@ msgstr "Importera från fil"
 msgid "Import from File..."
 msgstr "Importera från fil..."
 
-#: ../Pinta.Core/Actions/ViewActions.cs:161
+#: ../Pinta.Core/Actions/ViewActions.cs:143
 msgid "Inches"
 msgstr "Tum"
 
@@ -1584,7 +1584,7 @@ msgstr "Bildpunktsrutnät"
 msgid "Pixelate"
 msgstr "Pixelisera"
 
-#: ../Pinta.Core/Actions/ViewActions.cs:160
+#: ../Pinta.Core/Actions/ViewActions.cs:142
 msgid "Pixels"
 msgstr "Bildpunkter"
 
@@ -1614,7 +1614,7 @@ msgstr "Färgreduktion"
 msgid "Power"
 msgstr "Styrka"
 
-#: ../Pinta/Dialogs/AboutDialog.cs:192
+#: ../Pinta/Dialogs/AboutDialog.cs:194
 msgid "Powered by Mono:"
 msgstr "Drivs av Mono:"
 
@@ -1626,7 +1626,7 @@ msgstr "Förinställning:"
 msgid "Preview"
 msgstr "Förhandsgranska"
 
-#: ../Pinta/Dialogs/AboutDialog.cs:157
+#: ../Pinta/Dialogs/AboutDialog.cs:159
 msgid "Previous contributors:"
 msgstr "Föregående bidragsgivare:"
 
@@ -1860,7 +1860,7 @@ msgstr "Rundad linjefigur"
 msgid "Rounded Rectangle"
 msgstr "Rundad rektangel"
 
-#: ../Pinta.Core/Actions/ViewActions.cs:157
+#: ../Pinta.Core/Actions/ViewActions.cs:139
 msgid "Ruler Units"
 msgstr "Linjalenheter"
 
@@ -1962,6 +1962,10 @@ msgstr "Visa lager"
 #: ../Pinta/Main.cs:60
 msgid "Show this message and exit."
 msgstr "Visa det här meddelandet och avsluta."
+
+#: ../Pinta.Core/Actions/ViewActions.cs:150
+msgid "Show/Hide"
+msgstr ""
 
 #: ../Pinta.Tools/Tools/ColorPickerTool.cs:225
 msgid "Single Pixel"
@@ -2166,7 +2170,7 @@ msgstr "Överföringskarta"
 msgid "Translate This Application"
 msgstr "Översätt detta program"
 
-#: ../Pinta/Dialogs/AboutDialog.cs:171
+#: ../Pinta/Dialogs/AboutDialog.cs:173
 msgid "Translated by:"
 msgstr "Översatt av:"
 
@@ -2184,7 +2188,7 @@ msgstr "Vrid"
 msgid "Type"
 msgstr "Typ"
 
-#: ../Pinta/MainWindow.cs:568
+#: ../Pinta/MainWindow.cs:540
 #, csharp-format
 msgid ""
 "Unable to download image from {0}.\n"
@@ -2266,7 +2270,7 @@ msgstr ""
 "Använd låg kvalitet för förhandsvisningar, små bilder och små vinklar. "
 "Använd hög kvalitet för slutlig kvalitet, stora bilder och stora vinklar."
 
-#: ../Pinta/Dialogs/AboutDialog.cs:184
+#: ../Pinta/Dialogs/AboutDialog.cs:186
 msgid "Using some icons from:"
 msgstr "Använder en del ikoner från:"
 
@@ -2275,7 +2279,7 @@ msgstr "Använder en del ikoner från:"
 msgid "Version"
 msgstr "Version"
 
-#: ../Pinta/Dialogs/AboutDialog.cs:304
+#: ../Pinta/Dialogs/AboutDialog.cs:306
 msgid "Version Info"
 msgstr "Versionsinfo"
 
@@ -2298,7 +2302,7 @@ msgid "Width:"
 msgstr "Bredd:"
 
 #: ../Pinta.Core/Actions/ViewActions.cs:103
-#: ../Pinta.Core/Actions/ViewActions.cs:276
+#: ../Pinta.Core/Actions/ViewActions.cs:282
 #: ../Pinta.Core/Classes/DocumentWorkspace.cs:315
 #: ../Pinta.Core/Classes/DocumentWorkspace.cs:323
 msgid "Window"
@@ -2413,7 +2417,7 @@ msgstr "antal trådar att använda för rendering"
 msgid "pixels"
 msgstr "bildpunkter"
 
-#: ../Pinta/Dialogs/AboutDialog.cs:168
+#: ../Pinta/Dialogs/AboutDialog.cs:170
 msgid "translator-credits"
 msgstr ""
 "Launchpad Contributions:\n"
@@ -2461,7 +2465,7 @@ msgstr[1] "{0} uppdateringar tillgängliga"
 
 #. Translators: This specifies the format of the zoom percentage choices
 #. in the toolbar.
-#: ../Pinta.Core/Actions/ViewActions.cs:257
+#: ../Pinta.Core/Actions/ViewActions.cs:263
 #, csharp-format
 msgid "{0}%"
 msgstr "{0}%"
