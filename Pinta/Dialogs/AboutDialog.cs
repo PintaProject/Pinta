@@ -45,7 +45,6 @@ namespace Pinta
 	{
 		Pixbuf image;
 		Pixbuf image_top;
-		Pixbuf monoPowered;
 		int scroll;
 		Pango.Layout layout = null!; // NRT - Set by OnRealized
 		int scrollStart;
@@ -131,7 +130,6 @@ namespace Pinta
 
 			image = PintaCore.Resources.GetIcon ("About.Image.png");
 			image_top = PintaCore.Resources.GetIcon ("About.ImageTop.png");
-			monoPowered = PintaCore.Resources.GetIcon ("About.MonoPowered.png");
 
 			this.SetSizeRequest (400, image.Height - 1);
 
@@ -183,12 +181,9 @@ namespace Pinta
 				sb.AppendFormat ("<b>{0}</b>\n", Translations.GetString ("Using some icons from:"));
 				sb.AppendLine ();
 				sb.AppendLine ("Silk - http://www.famfamfam.com/lab/icons/silk");
-				sb.Append ("Fugue - http://pinvoke.com/");
-
-				sb.AppendLine ();
-				sb.AppendLine ();
-				sb.AppendLine ();
-				sb.AppendFormat ("<b>{0}</b>\n", Translations.GetString ("Powered by Mono:"));
+				sb.AppendLine ("Fugue - http://pinvoke.com/");
+				sb.AppendLine ("Google Material Icons - https://github.com/google/material-design-icons");
+				sb.Append ("Microsoft Fluent UI System Icons - https://github.com/microsoft/fluentui-system-icons");
 
 				return sb.ToString ();
 			}
@@ -220,19 +215,14 @@ namespace Pinta
 
 		private void DrawText (Cairo.Context ctx)
 		{
-			const int monoLogoSpacing = 5;
-
 			layout.GetPixelSize (out int text_width, out int text_height);
 
 			ctx.SetSourceColor (new Cairo.Color (1, 1, 1));
 			ctx.MoveTo (0, scroll);
 			Pango.CairoHelper.ShowLayout (ctx, layout);
 
-			Gdk.CairoHelper.SetSourcePixbuf (ctx, monoPowered, (AllocatedWidth / 2) - (monoPowered.Width / 2), scroll + text_height + monoLogoSpacing);
-			ctx.Paint ();
-
 			var scroll_dist = scrollStart - scroll;
-			if (scroll_dist > text_height + monoLogoSpacing + monoPowered.Height + 200)
+			if (scroll_dist > text_height + 200)
 				scroll = scrollStart;
 		}
 

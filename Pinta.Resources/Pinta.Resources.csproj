@@ -15,7 +15,7 @@
     <PackageReference Include="GtkSharp" Version="3.24.24.34" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="icons/hicolor/16x16/*/*">
+    <Content Include="icons/hicolor/*/*/*">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
   </ItemGroup>
@@ -241,9 +241,6 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Resources\About.ImageSep.png">
       <LogicalName>About.ImageSep.png</LogicalName>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Resources\About.MonoPowered.png">
-      <LogicalName>About.MonoPowered.png</LogicalName>
     </EmbeddedResource>
     <EmbeddedResource Include="Resources\About.ImageTop.png">
       <LogicalName>About.ImageTop.png</LogicalName>

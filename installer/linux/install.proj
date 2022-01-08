@@ -21,6 +21,7 @@
   <!-- All of our icons -->
   <ItemGroup>
       <Icon Include="$(PublishDir)/icons/**/*.png"/>
+      <Icon Include="$(PublishDir)/icons/**/*.svg"/>
   </ItemGroup>
 
   <!-- Reference all of our assemblies -->
