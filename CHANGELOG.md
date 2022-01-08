@@ -14,6 +14,7 @@ Thanks to the following contributors who worked on this release:
 
 ### Fixed
 - Fixed an issue where the Cairo surface for live effect previews was not always disposed (#206)
+- Fixed errors that could occur if a selection existed but had zero area (e.g. after inverting a full selection) ([#1754440](https://bugs.launchpad.net/pinta/+bug/1754440))
 
 ## [2.0.1](https://github.com/PintaProject/Pinta/releases/tag/2.0.1) - 2022/01/06
 

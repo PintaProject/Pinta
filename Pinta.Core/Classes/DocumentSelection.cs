@@ -443,7 +443,7 @@ namespace Pinta.Core
 			var maxY = double.MinValue;
 
 			// Calculate the minimum rectangular bounds that surround the current selection.
-			foreach (var li in PintaCore.Workspace.ActiveDocument.Selection.SelectionPolygons) {
+			foreach (var li in SelectionPolygons) {
 				foreach (var ip in li) {
 					if (minX > ip.X)
 						minX = ip.X;
@@ -458,6 +458,10 @@ namespace Pinta.Core
 						maxY = ip.Y;
 				}
 			}
+
+			// Invalid (empty) rectangle - avoid overflow from maxX - minX
+			if (minX > maxX || minY > maxY)
+				return new Rectangle ();
 
 			return new Rectangle (minX, minY, maxX - minX, maxY - minY);
 		}

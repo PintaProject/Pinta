@@ -77,10 +77,10 @@ namespace Pinta.Core
 			if (settings.ThreadCount < 1)
 				settings.ThreadCount = 1;
 
-			if (settings.TileWidth < 1)
+			if (settings.TileWidth < 0)
 				throw new ArgumentException ("EffectRenderSettings.TileWidth");
 
-			if (settings.TileHeight < 1)
+			if (settings.TileHeight < 0)
 				throw new ArgumentException ("EffectRenderSettings.TileHeight");
 
 			if (settings.UpdateMillis <= 0)
@@ -130,9 +130,6 @@ namespace Pinta.Core
 
 			if (dest == null)
 				throw new ArgumentNullException ("dest");
-
-			if (renderBounds.IsEmpty)
-				throw new ArgumentException ("renderBounds.IsEmpty");
 
 			// It is important the effect's properties don't change during rendering.
 			// So a copy is made for the render.
