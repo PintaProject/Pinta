@@ -13,11 +13,7 @@ env:
 
 jobs:
   build-ubuntu:
-    strategy:
-      matrix:
-        platform: [ubuntu-18.04, ubuntu-20.04]
-
-    runs-on: ${{ matrix.platform }}
+    runs-on: ubuntu-20.04
 
     steps:
     - uses: actions/checkout@v2
@@ -29,6 +25,10 @@ jobs:
       run: |
         sudo apt update
         sudo apt install autotools-dev autoconf-archive gettext intltool libgtk-3-dev
+    - name: Generate Tarball
+      run: |
+        ./autogen.sh
+        make dist
     - name: Build
       run: |
         ./autogen.sh --prefix ${{ runner.temp }}
@@ -42,7 +42,7 @@ jobs:
     - name: Upload Installer
       uses: actions/upload-artifact@v2
       with:
-        name: Pinta-${{ matrix.platform }}.zip
+        name: Pinta-linux.zip
         path: pinta-2.0.1.zip
         if-no-files-found: error
 
