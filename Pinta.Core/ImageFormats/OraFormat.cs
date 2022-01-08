@@ -96,6 +96,11 @@ namespace Pinta.Core
 					UserLayer layer = doc.Layers.CreateLayer (name);
 					doc.Layers.Insert (layer, 0);
 
+					string visibility = GetAttribute (layerElement, "visibility", "visible");
+					if (visibility == "hidden") {
+						layer.Hidden = true;
+					}
+
 					layer.Opacity = double.Parse (GetAttribute (layerElement, "opacity", "1"), GetFormat ());
 					layer.BlendMode = StandardToBlendMode (GetAttribute (layerElement, "composite-op", "svg:src-over"));
 
@@ -168,18 +173,21 @@ namespace Pinta.Core
 			writer.WriteStartElement ("image");
 			writer.WriteAttributeString ("w", layers[0].Surface.Width.ToString ());
 			writer.WriteAttributeString ("h", layers[0].Surface.Height.ToString ());
+			writer.WriteAttributeString ("version", "0.0.5"); // Current version of the spec.
 
 			writer.WriteStartElement ("stack");
-			writer.WriteAttributeString ("opacity", "1");
-			writer.WriteAttributeString ("name", "root");
 
 			// ORA stores layers top to bottom
 			for (int i = layers.Count - 1; i >= 0; i--) {
+				var layer = layers[i];
 				writer.WriteStartElement ("layer");
-				writer.WriteAttributeString ("opacity", layers[i].Hidden ? "0" : string.Format (GetFormat (), "{0:0.00}", layers[i].Opacity));
-				writer.WriteAttributeString ("name", layers[i].Name);
-				writer.WriteAttributeString ("composite-op", BlendModeToStandard (layers[i].BlendMode));
+				writer.WriteAttributeString ("opacity", string.Format (GetFormat (), "{0:0.00}", layer.Opacity));
+				writer.WriteAttributeString ("name", layer.Name);
+				writer.WriteAttributeString ("composite-op", BlendModeToStandard (layer.BlendMode));
 				writer.WriteAttributeString ("src", "data/layer" + i.ToString () + ".png");
+				if (layer.Hidden) {
+					writer.WriteAttributeString ("visibility", "hidden");
+				}
 				writer.WriteEndElement ();
 			}
 
