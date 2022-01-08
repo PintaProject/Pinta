@@ -204,9 +204,8 @@ namespace Pinta.Core
 			FireLivePreviewEndedEvent (RenderStatus.Canceled, null);
 			live_preview_enabled = false;
 
-			if (live_preview_surface != null) {
-				(live_preview_surface as IDisposable).Dispose ();
-			}
+			live_preview_surface?.Dispose ();
+			live_preview_surface = null!;
 
 			PintaCore.Workspace.Invalidate ();
 			CleanUp ();
@@ -272,6 +271,7 @@ namespace Pinta.Core
 				effect = null!;
 			}
 
+			live_preview_surface?.Dispose ();
 			live_preview_surface = null!;
 
 			if (renderer != null) {
