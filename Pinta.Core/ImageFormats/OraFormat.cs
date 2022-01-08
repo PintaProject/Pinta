@@ -203,9 +203,8 @@ namespace Pinta.Core
 			stream.Write (databytes, 0, databytes.Length);
 
 			for (int i = 0; i < document.Layers.UserLayers.Count; i++) {
-				Pixbuf pb = document.Layers.UserLayers[i].Surface.ToPixbuf ();
+				using Pixbuf pb = document.Layers.UserLayers[i].Surface.ToPixbuf ();
 				byte[] buf = pb.SaveToBuffer ("png");
-				(pb as IDisposable).Dispose ();
 
 				stream.PutNextEntry (new ZipEntry ("data/layer" + i.ToString () + ".png"));
 				stream.Write (buf, 0, buf.Length);
@@ -215,18 +214,20 @@ namespace Pinta.Core
 			databytes = GetLayerXmlData (document.Layers.UserLayers);
 			stream.Write (databytes, 0, databytes.Length);
 
-			ImageSurface flattened = document.GetFlattenedImage ();
-			Pixbuf flattenedPb = flattened.ToPixbuf ();
-			Size newSize = GetThumbDimensions (flattenedPb.Width, flattenedPb.Height);
-			Pixbuf thumb = flattenedPb.ScaleSimple (newSize.Width, newSize.Height, InterpType.Bilinear);
+			using ImageSurface flattened = document.GetFlattenedImage ();
+			using Pixbuf flattenedPb = flattened.ToPixbuf ();
 
+			// Add merged image.
+			stream.PutNextEntry (new ZipEntry ("mergedimage.png"));
+			databytes = flattenedPb.SaveToBuffer ("png");
+			stream.Write (databytes, 0, databytes.Length);
+
+			// Add thumbnail.
+			Size newSize = GetThumbDimensions (flattenedPb.Width, flattenedPb.Height);
+			using Pixbuf thumb = flattenedPb.ScaleSimple (newSize.Width, newSize.Height, InterpType.Bilinear);
 			stream.PutNextEntry (new ZipEntry ("Thumbnails/thumbnail.png"));
 			databytes = thumb.SaveToBuffer ("png");
 			stream.Write (databytes, 0, databytes.Length);
-
-			(flattened as IDisposable).Dispose ();
-			(flattenedPb as IDisposable).Dispose ();
-			(thumb as IDisposable).Dispose ();
 
 			stream.Close ();
 		}
