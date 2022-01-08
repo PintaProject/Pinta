@@ -8,10 +8,12 @@ Thanks to the following contributors who worked on this release:
 - @jpobst
 
 ### Added
+- Updated icons to symbolic SVG icons, which are more usable for dark themes and high-res screens (#204, [#1738106](https://bugs.launchpad.net/pinta/+bug/1738106), [#1909573](https://bugs.launchpad.net/pinta/+bug/1909573))
 
 ### Changed
 
 ### Fixed
+- Fixed an issue where the Cairo surface for live effect previews was not always disposed (#206)
 
 ## [2.0.1](https://github.com/PintaProject/Pinta/releases/tag/2.0.1) - 2022/01/06
 
