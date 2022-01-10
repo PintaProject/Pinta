@@ -32,4 +32,4 @@ Source: "bin\win-x64\publish\*"; DestDir: "{app}"; Flags: ignoreversion recurses
 Source: "{#GetEnv('LOCALAPPDATA')}\Gtk\3.24.24\*"; Excludes: "gtk.zip,*mm-*.dll"; DestDir: "{app}"; Flags: ignoreversion recursesubdirs
 
 [Run]
-Filename: "{app}\Pinta.exe"; Flags: nowait postinstall; Description: "{cm:LaunchProgram,{#ProductName}}"
+Filename: "{app}\Pinta.exe"; Flags: nowait postinstall skipifsilent; Description: "{cm:LaunchProgram,{#ProductName}}"

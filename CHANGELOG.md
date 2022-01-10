@@ -12,6 +12,7 @@ Thanks to the following contributors who worked on this release:
 ### Changed
 
 ### Fixed
+- When the Windows installer is run in silent mode, the option to launch Pinta after installing is now disabled
 
 ## [2.0.1](https://github.com/PintaProject/Pinta/releases/tag/2.0.1) - 2022/01/06
 
