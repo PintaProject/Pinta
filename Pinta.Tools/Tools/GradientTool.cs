@@ -188,7 +188,7 @@ namespace Pinta.Tools
 				return gradient_button;
 			}
 		}
-		
+
 		private ToolBarLabel ModeLabel => color_mode_label ??= new ToolBarLabel (string.Format (" {0}: ", Translations.GetString ("Mode")));
 		private ToolBarDropDownButton ColorModeDropDown {
 			get {
