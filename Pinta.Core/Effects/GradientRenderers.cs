@@ -52,9 +52,9 @@ namespace Pinta.Core
 			{
 			}
 
-			private static byte BoundLerp (double t)
+			protected virtual byte BoundLerp (double t)
 			{
-				return (byte) (Utility.Clamp (Math.Abs (t), 0, 1) * 255f);
+				return (byte) (Utility.Clamp (t, 0, 1) * 255f);
 			}
 
 			public override void BeforeRender ()
@@ -81,6 +81,11 @@ namespace Pinta.Core
 		{
 			public LinearReflected (bool alphaOnly, BinaryPixelOp normalBlendOp) : base (alphaOnly, normalBlendOp)
 			{
+			}
+
+			protected override byte BoundLerp (double t)
+			{
+				return (byte) (Utility.Clamp (Math.Abs (t), 0, 1) * 255f);
 			}
 		}
 
@@ -109,11 +114,6 @@ namespace Pinta.Core
 				var absLerp2 = Math.Abs (lerp2);
 
 				return BoundLerp (absLerp1 + absLerp2);
-			}
-
-			private byte BoundLerp (double t)
-			{
-				return (byte) (Utility.Clamp (t, 0, 1) * 255f);
 			}
 		}
 
