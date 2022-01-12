@@ -8,19 +8,21 @@ Thanks to the following contributors who worked on this release:
 - @jpobst
 
 ### Added
-- Updated icons to symbolic SVG icons, which are more usable for dark themes and high-res screens (#204, [#1738106](https://bugs.launchpad.net/pinta/+bug/1738106), [#1909573](https://bugs.launchpad.net/pinta/+bug/1909573))
+- Updated icons to symbolic SVG icons, which are more usable for dark themes and high-res screens (#204, #207, [#1738106](https://bugs.launchpad.net/pinta/+bug/1738106), [#1909573](https://bugs.launchpad.net/pinta/+bug/1909573))
 - Added "Transparency Mode" to the Gradient tool
+- Improved support for `.ora` files
+  - Hidden layers are now round-tripped correctly for `.ora` files ([#1377566](https://bugs.launchpad.net/pinta/+bug/1377566))
+  - When saving a `.ora` file, a flattened image (`mergedimage.png`) is now included in the archive. This is required by the spec to accomodate viewer software ([#1377566](https://bugs.launchpad.net/pinta/+bug/1377566))
 
 ### Changed
 
 ### Fixed
-- Fixed an issue where the Cairo surface for live effect previews was not always disposed (#206)
-- Fixed errors that could occur if a selection existed but had zero area (e.g. after inverting a full selection) ([#1754440](https://bugs.launchpad.net/pinta/+bug/1754440))
-- Hidden layers are now round-tripped correctly for `.ora` files ([#1377566](https://bugs.launchpad.net/pinta/+bug/1377566))
-- When saving a `.ora` file, a flattened image (`mergedimage.png`) is now included in the archive. This is required by the spec to accomodate viewer software ([#1377566](https://bugs.launchpad.net/pinta/+bug/1377566))
-- When the Windows installer is run in silent mode, the option to launch Pinta after installing is now disabled
 - Fixed a bug where the default linear gradient was reflected rather than clamped.
 - The gradient tool now updates correctly when drawing transparent colors. Previously, old results were visible under the transparent color ([#1937942](https://bugs.launchpad.net/pinta/+bug/1937942))
+- The history panel is now more readable when a dark theme is used (#207)
+- Fixed an issue where the Cairo surface for live effect previews was not always disposed (#206)
+- Fixed errors that could occur if a selection existed but had zero area (e.g. after inverting a full selection) ([#1754440](https://bugs.launchpad.net/pinta/+bug/1754440))
+- When the Windows installer is run in silent mode, the option to launch Pinta after installing is now disabled
 
 ## [2.0.1](https://github.com/PintaProject/Pinta/releases/tag/2.0.1) - 2022/01/06
 
