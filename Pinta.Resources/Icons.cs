@@ -34,39 +34,41 @@ namespace Pinta.Resources
 {
 	public static class StandardIcons
 	{
-		public const string ApplicationExit = "application-exit";
+		public const string ApplicationExit = "application-exit-symbolic";
 
-		public const string DialogError = "dialog-error";
+		public const string DialogError = "dialog-error-symbolic";
 
-		public const string DocumentNew = "document-new";
-		public const string DocumentOpen = "document-open";
-		public const string DocumentPrint = "document-print";
-		public const string DocumentRevert = "document-revert";
-		public const string DocumentSave = "document-save";
-		public const string DocumentSaveAs = "document-save-as";
+		public const string DocumentNew = "document-new-symbolic";
+		public const string DocumentOpen = "document-open-symbolic";
+		public const string DocumentPrint = "document-print-symbolic";
+		public const string DocumentRevert = "document-revert-symbolic";
+		public const string DocumentSave = "document-save-symbolic";
+		public const string DocumentSaveAs = "document-save-as-symbolic";
 
-		public const string EditCopy = "edit-copy";
-		public const string EditCut = "edit-cut";
-		public const string EditPaste = "edit-paste";
-		public const string EditRedo = "edit-redo";
-		public const string EditSelectAll = "edit-select-all";
-		public const string EditUndo = "edit-undo";
+		public const string EditCopy = "edit-copy-symbolic";
+		public const string EditCut = "edit-cut-symbolic";
+		public const string EditPaste = "edit-paste-symbolic";
+		public const string EditRedo = "edit-redo-symbolic";
+		public const string EditSelectAll = "edit-select-all-symbolic";
+		public const string EditUndo = "edit-undo-symbolic";
 
-		public const string GoPrevious = "go-previous";
+		public const string GoPrevious = "go-previous-symbolic";
 
-		public const string HelpAbout = "help-about";
-		public const string HelpBrowser = "help-browser";
+		public const string HelpAbout = "help-about-symbolic";
+		public const string HelpBrowser = "help-browser-symbolic";
 
-		public const string ImageMissing = "image-missing";
+		public const string ImageMissing = "image-missing-symbolic";
 
-		public const string ViewFullscreen = "view-fullscreen";
+		public const string ValueDecrease = "value-decrease-symbolic";
+		public const string ValueIncrease = "value-increase-symbolic";
+		public const string ViewFullscreen = "view-fullscreen-symbolic";
 
-		public const string WindowClose = "window-close";
+		public const string WindowClose = "window-close-symbolic";
 
-		public const string ZoomFitBest = "zoom-fit-best";
-		public const string ZoomIn = "zoom-in";
-		public const string ZoomOut = "zoom-out";
-		public const string ZoomOriginal = "zoom-original";
+		public const string ZoomFitBest = "zoom-fit-best-symbolic";
+		public const string ZoomIn = "zoom-in-symbolic";
+		public const string ZoomOut = "zoom-out-symbolic";
+		public const string ZoomOriginal = "zoom-original-symbolic";
 	}
 
 	public static class Icons
@@ -84,12 +86,12 @@ namespace Pinta.Resources
 		public const string ColorModeColor = "colormode-color";
 		public const string ColorModeTransparency = "colormode-transparency";
 
-		public const string CursorPosition = "cursor-position";
+		public const string CursorPosition = "ui-cursor-location-symbolic";
 
 		public const string EditSelectionErase = "edit-selection-erase";
 		public const string EditSelectionFill = "edit-selection-fill";
 		public const string EditSelectionInvert = "edit-selection-invert";
-		public const string EditSelectionNone = "edit-selection-none";
+		public const string EditSelectionNone = "ui-deselect-symbolic";
 
 		public const string GradientConical = "gradient-conical";
 		public const string GradientDiamond = "gradient-diamond";
@@ -106,7 +108,7 @@ namespace Pinta.Resources
 		public const string HelpTranslate = "help-translate";
 		public const string HelpWebsite = "help-website";
 
-		public const string ImageCrop = "image-crop";
+		public const string ImageCrop = "ui-crop-to-selection-symbolic";
 		public const string ImageResize = "image-resize";
 		public const string ImageResizeCanvas = "image-resize-canvas";
 		public const string ImageFlipHorizontal = "image-flip-horizontal";
@@ -116,15 +118,15 @@ namespace Pinta.Resources
 		public const string ImageRotate180 = "image-rotate-180";
 		public const string ImageFlatten = "image-flatten";
 
-		public const string LayerDelete = "layer-delete";
-		public const string LayerDuplicate = "layer-duplicate";
+		public const string LayerDelete = "layers-remove-layer-symbolic";
+		public const string LayerDuplicate = "layers-duplicate-layer-symbolic";
 		public const string LayerFlipHorizontal = "layer-flip-horizontal";
 		public const string LayerFlipVertical = "layer-flip-vertical";
 		public const string LayerImport = "layer-import";
-		public const string LayerMergeDown = "layer-mergedown";
-		public const string LayerMoveDown = "layer-move-down";
-		public const string LayerMoveUp = "layer-move-up";
-		public const string LayerNew = "layer-new";
+		public const string LayerMergeDown = "layers-merge-down-symbolic";
+		public const string LayerMoveDown = "layers-move-layer-down-symbolic";
+		public const string LayerMoveUp = "layers-move-layer-up-symbolic";
+		public const string LayerNew = "layers-add-layer-symbolic";
 		public const string LayerProperties = "layer-properties";
 		public const string LayerRotateZoom = "layer-rotatezoom";
 

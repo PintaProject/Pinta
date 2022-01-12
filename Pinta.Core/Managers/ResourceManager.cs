@@ -26,27 +26,28 @@
 
 using System;
 using System.IO;
+using Gtk;
 using Pinta.Resources;
 
 namespace Pinta
 {
 	public interface IResourceService
 	{
-		Gdk.Pixbuf GetIcon (string name);
-		Gdk.Pixbuf GetIcon (string name, int size);
+		Gdk.Pixbuf GetIcon (string name, StyleContext? context = null);
+		Gdk.Pixbuf GetIcon (string name, int size, StyleContext? context = null);
 		Stream? GetResourceIconStream (string name);
 	}
 
 	public class ResourceManager : IResourceService
 	{
-		public Gdk.Pixbuf GetIcon (string name)
+		public Gdk.Pixbuf GetIcon (string name, StyleContext? context = null)
 		{
-			return GetIcon (name, 16);
+			return GetIcon (name, 16, context);
 		}
 
-		public Gdk.Pixbuf GetIcon (string name, int size)
+		public Gdk.Pixbuf GetIcon (string name, int size, StyleContext? context = null)
 		{
-			return ResourceLoader.GetIcon (name, size);
+			return ResourceLoader.GetIcon (name, size, context);
 		}
 
 		public Stream? GetResourceIconStream (string name)

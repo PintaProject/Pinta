@@ -132,7 +132,7 @@ namespace Pinta.Gui.Widgets
 
 			if (item.State == HistoryItemState.Undo) {
 				((CellRendererText) cell).Style = Pango.Style.Normal;
-				((CellRendererText) cell).Foreground = "black";
+				((CellRendererText) cell).ForegroundRgba = StyleContext.GetColor (StateFlags);
 				((CellRendererText) cell).Text = item.Text;
 			} else if (item.State == HistoryItemState.Redo) {
 				((CellRendererText) cell).Style = Pango.Style.Oblique;
@@ -150,7 +150,7 @@ namespace Pinta.Gui.Widgets
 				pixbuf_cell.Pixbuf.Dispose ();
 
 			if (item.Icon != null)
-				pixbuf_cell.Pixbuf = PintaCore.Resources.GetIcon (item.Icon);
+				pixbuf_cell.Pixbuf = PintaCore.Resources.GetIcon (item.Icon, StyleContext);
 		}
 
 		private void OnHistoryItemsChanged (object? o, EventArgs args)

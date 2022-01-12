@@ -31,16 +31,17 @@ using System.Linq;
 using System.Reflection;
 using System.Runtime.CompilerServices;
 using Gdk;
+using Gtk;
 
 namespace Pinta.Resources
 {
 	public static class ResourceLoader
 	{
 		[MethodImpl (MethodImplOptions.NoInlining)]
-		public static Pixbuf GetIcon (string name, int size)
+		public static Pixbuf GetIcon (string name, int size, StyleContext? context = null)
 		{
 			// First see if it's a built-in gtk icon, like gtk-new.
-			if (TryGetIconFromTheme (name, size, out var theme_result))
+			if (TryGetIconFromTheme (name, size, context, out var theme_result))
 				return theme_result;
 
 			// Otherwise, get it from our embedded resources.
@@ -63,7 +64,7 @@ namespace Pinta.Resources
 			return asm.GetManifestResourceStream (name);
 		}
 
-		private static bool TryGetIconFromTheme (string name, int size, [NotNullWhen (true)] out Pixbuf? image)
+		private static bool TryGetIconFromTheme (string name, int size, StyleContext? context, [NotNullWhen (true)] out Pixbuf? image)
 		{
 			image = null;
 
@@ -71,7 +72,7 @@ namespace Pinta.Resources
 				// This will also load any icons added by Gtk.IconFactory.AddDefault() . 
 				using (var icon = Gtk.IconTheme.Default.LookupIcon (name, size, Gtk.IconLookupFlags.ForceSize)) {
 					if (icon != null)
-						image = icon.LoadIcon ();
+						image = context != null ? icon.LoadSymbolicForContext (context, out var _) : icon.LoadIcon ();
 				}
 
 			} catch (Exception ex) {

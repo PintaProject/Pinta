@@ -62,8 +62,8 @@ namespace Pinta.Core
 
 		public ViewActions ()
 		{
-			ZoomIn = new Command ("ZoomIn", Translations.GetString ("Zoom In"), null, Resources.StandardIcons.ZoomIn);
-			ZoomOut = new Command ("ZoomOut", Translations.GetString ("Zoom Out"), null, Resources.StandardIcons.ZoomOut);
+			ZoomIn = new Command ("ZoomIn", Translations.GetString ("Zoom In"), null, Resources.StandardIcons.ValueIncrease);
+			ZoomOut = new Command ("ZoomOut", Translations.GetString ("Zoom Out"), null, Resources.StandardIcons.ValueDecrease);
 			ZoomToWindow = new Command ("ZoomToWindow", Translations.GetString ("Best Fit"), null, Resources.StandardIcons.ZoomFitBest);
 			ZoomToSelection = new Command ("ZoomToSelection", Translations.GetString ("Zoom to Selection"), null, Resources.Icons.ViewZoomSelection);
 			ActualSize = new Command ("ActualSize", Translations.GetString ("Normal Size"), null, Resources.StandardIcons.ZoomOriginal);
