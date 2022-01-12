@@ -170,19 +170,29 @@ namespace Pinta.Core
 		{
 			var pixelPtr = surface.GetPointAddressUnchecked (src_data_ptr, src_width, rect.Left, y);
 			var right = rect.GetRight ();
+
+			// Note that Cairo uses premultiplied alpha.
 			if (alphaOnly && alphaBlending) {
 				for (var x = rect.Left; x <= right; ++x) {
 					var lerpByte = ComputeByteLerp (x, y);
 					var lerpAlpha = lerpAlphas[lerpByte];
-					var resultAlpha = Utility.FastScaleByteByByte (pixelPtr->A, lerpAlpha);
-					pixelPtr->A = resultAlpha;
+
+					pixelPtr->B = Utility.FastScaleByteByByte (pixelPtr->B, lerpAlpha);
+					pixelPtr->G = Utility.FastScaleByteByByte (pixelPtr->G, lerpAlpha);
+					pixelPtr->R = Utility.FastScaleByteByByte (pixelPtr->R, lerpAlpha);
+					pixelPtr->A = Utility.FastScaleByteByByte (pixelPtr->A, lerpAlpha);
+
 					++pixelPtr;
 				}
 			} else if (alphaOnly && !alphaBlending) {
 				for (var x = rect.Left; x <= right; ++x) {
 					var lerpByte = ComputeByteLerp (x, y);
 					var lerpAlpha = lerpAlphas[lerpByte];
-					pixelPtr->A = lerpAlpha;
+
+					var color = pixelPtr->ToStraightAlpha ();
+					color.A = lerpAlpha;
+					*pixelPtr = color.ToPremultipliedAlpha ();
+
 					++pixelPtr;
 				}
 			} else if (!alphaOnly && (alphaBlending && (startAlpha != 255 || endAlpha != 255))) {

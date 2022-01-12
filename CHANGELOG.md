@@ -9,6 +9,7 @@ Thanks to the following contributors who worked on this release:
 
 ### Added
 - Updated icons to symbolic SVG icons, which are more usable for dark themes and high-res screens (#204, [#1738106](https://bugs.launchpad.net/pinta/+bug/1738106), [#1909573](https://bugs.launchpad.net/pinta/+bug/1909573))
+- Added "Transparency Mode" to the Gradient tool
 
 ### Changed
 
@@ -19,6 +20,7 @@ Thanks to the following contributors who worked on this release:
 - When saving a `.ora` file, a flattened image (`mergedimage.png`) is now included in the archive. This is required by the spec to accomodate viewer software ([#1377566](https://bugs.launchpad.net/pinta/+bug/1377566))
 - When the Windows installer is run in silent mode, the option to launch Pinta after installing is now disabled
 - Fixed a bug where the default linear gradient was reflected rather than clamped.
+- The gradient tool now updates correctly when drawing transparent colors. Previously, old results were visible under the transparent color ([#1937942](https://bugs.launchpad.net/pinta/+bug/1937942))
 
 ## [2.0.1](https://github.com/PintaProject/Pinta/releases/tag/2.0.1) - 2022/01/06
 

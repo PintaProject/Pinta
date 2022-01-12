@@ -30,8 +30,6 @@ using Pinta.Core;
 
 namespace Pinta.Tools
 {
-	// Note about TransparentMode.  The core issue is we can't just paint it on top of the
-	// current layer because it's transparent.  Will require significant effort to support.
 	public class GradientTool : BaseTool
 	{
 		private readonly IPaletteService palette;
@@ -41,6 +39,7 @@ namespace Pinta.Tools
 		MouseButton button;
 
 		private const string GRADIENT_TYPE_SETTING = "gradient-type";
+		private const string GRADIENT_COLOR_MODE_SETTING = "gradient-color-mode";
 
 		public GradientTool (IServiceManager services) : base (services)
 		{
@@ -53,7 +52,9 @@ namespace Pinta.Tools
 		public override Gdk.Key ShortcutKey => Gdk.Key.G;
 		public override Gdk.Cursor DefaultCursor => new Gdk.Cursor (Gdk.Display.Default, Resources.GetIcon ("Cursor.Gradient.png"), 9, 18);
 		public override int Priority => 31;
+		protected override bool ShowAlphaBlendingButton => true;
 		private GradientType SelectedGradientType => GradientDropDown.SelectedItem.GetTagOrDefault (GradientType.Linear);
+		private GradientColorMode SelectedGradientColorMode => ColorModeDropDown.SelectedItem.GetTagOrDefault (GradientColorMode.Color);
 
 		protected override void OnBuildToolBar (Gtk.Toolbar tb)
 		{
@@ -61,6 +62,9 @@ namespace Pinta.Tools
 
 			tb.AppendItem (GradientLabel);
 			tb.AppendItem (GradientDropDown);
+			tb.AppendItem (new Gtk.SeparatorToolItem ());
+			tb.AppendItem (ModeLabel);
+			tb.AppendItem (ColorModeDropDown);
 		}
 
 		protected override void OnMouseDown (Document document, ToolMouseEventArgs e)
@@ -112,14 +116,24 @@ namespace Pinta.Tools
 				var selection_bounds = document.GetSelectedBounds (true);
 				var scratch_layer = document.Layers.ToolLayer.Surface;
 
-				gr.Render (scratch_layer, new[] { selection_bounds });
-
-				using (var g = document.CreateClippedContext ()) {
-					g.SetSource (scratch_layer);
-					g.Paint ();
+				// Initialize the scratch layer with the (original) current layer, if any blending is required.
+				if (gr.AlphaOnly || (gr.AlphaBlending && (gr.StartColor.A != 255 || gr.EndColor.A != 255))) {
+					using (var g = new Context (scratch_layer)) {
+						document.Selection.Clip (g);
+						g.SetSource (undo_surface);
+						g.Operator = Operator.Source;
+						g.Paint ();
+					}
 				}
 
-				document.Layers.ToolLayer.Clear ();
+				gr.Render (scratch_layer, new[] { selection_bounds });
+
+				// Transfer the result back to the current layer.
+				using (var g = document.CreateClippedContext ()) {
+					g.SetSource (scratch_layer);
+					g.Operator = Operator.Source;
+					g.Paint ();
+				}
 
 				selection_bounds.Inflate (5, 5);
 				document.Workspace.Invalidate (selection_bounds);
@@ -132,24 +146,29 @@ namespace Pinta.Tools
 
 			if (gradient_button is not null)
 				settings.PutSetting (GRADIENT_TYPE_SETTING, gradient_button.SelectedIndex);
+			if (color_mode_button is not null)
+				settings.PutSetting (GRADIENT_COLOR_MODE_SETTING, color_mode_button.SelectedIndex);
 		}
 
 		private GradientRenderer CreateGradientRenderer ()
 		{
 			var op = new UserBlendOps.NormalBlendOp ();
+			bool alpha_only = SelectedGradientColorMode == GradientColorMode.Transparency;
 
 			return SelectedGradientType switch {
-				GradientType.Linear => new GradientRenderers.LinearClamped (false, op),
-				GradientType.LinearReflected => new GradientRenderers.LinearReflected (false, op),
-				GradientType.Radial => new GradientRenderers.Radial (false, op),
-				GradientType.Diamond => new GradientRenderers.LinearDiamond (false, op),
-				GradientType.Conical => new GradientRenderers.Conical (false, op),
+				GradientType.Linear => new GradientRenderers.LinearClamped (alpha_only, op),
+				GradientType.LinearReflected => new GradientRenderers.LinearReflected (alpha_only, op),
+				GradientType.Radial => new GradientRenderers.Radial (alpha_only, op),
+				GradientType.Diamond => new GradientRenderers.LinearDiamond (alpha_only, op),
+				GradientType.Conical => new GradientRenderers.Conical (alpha_only, op),
 				_ => throw new ArgumentOutOfRangeException ("Unknown gradient type."),
 			};
 		}
 
 		private ToolBarLabel? gradient_label;
 		private ToolBarDropDownButton? gradient_button;
+		private ToolBarLabel? color_mode_label;
+		private ToolBarDropDownButton? color_mode_button;
 
 		private ToolBarLabel GradientLabel => gradient_label ??= new ToolBarLabel (string.Format (" {0}: ", Translations.GetString ("Gradient")));
 		private ToolBarDropDownButton GradientDropDown {
@@ -167,6 +186,22 @@ namespace Pinta.Tools
 				}
 
 				return gradient_button;
+			}
+		}
+		
+		private ToolBarLabel ModeLabel => color_mode_label ??= new ToolBarLabel (string.Format (" {0}: ", Translations.GetString ("Mode")));
+		private ToolBarDropDownButton ColorModeDropDown {
+			get {
+				if (color_mode_button == null) {
+					color_mode_button = new ToolBarDropDownButton ();
+
+					color_mode_button.AddItem (Translations.GetString ("Color Mode"), Pinta.Resources.Icons.ColorModeColor, GradientColorMode.Color);
+					color_mode_button.AddItem (Translations.GetString ("Transparency Mode"), Pinta.Resources.Icons.ColorModeTransparency, GradientColorMode.Transparency);
+
+					color_mode_button.SelectedIndex = Settings.GetSetting (GRADIENT_COLOR_MODE_SETTING, 0);
+				}
+
+				return color_mode_button;
 			}
 		}
 
