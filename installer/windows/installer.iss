@@ -1,5 +1,5 @@
 #define ProductName "Pinta"
-#define ProductVersion "2.0.1"
+#define ProductVersion "2.0.2"
 
 [Setup]
 AppId=C0BCDEDA-62E7-4A43-8435-58323E096912

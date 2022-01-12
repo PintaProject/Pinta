@@ -46,7 +46,7 @@ namespace Pinta.Core
 		public static EffectsManager Effects { get; private set; }
 		public static IServiceManager Services { get; }
 
-		public const string ApplicationVersion = "2.0.1";
+		public const string ApplicationVersion = "2.0.2";
 
 		static PintaCore ()
 		{
