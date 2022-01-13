@@ -90,6 +90,10 @@ namespace Pinta.Tools
 
 			tracking = false;
 
+			// Clear the temporary scratch surface, which we don't clear in OnMouseMove
+			// because it's overwritten on subsequent moves
+			document.Layers.ToolLayer.Clear ();
+
 			if (undo_surface != null)
 				document.History.PushNewItem (new SimpleHistoryItem (Icon, Name, undo_surface, document.Layers.CurrentUserLayerIndex));
 		}
@@ -115,6 +119,7 @@ namespace Pinta.Tools
 
 				var selection_bounds = document.GetSelectedBounds (true);
 				var scratch_layer = document.Layers.ToolLayer.Surface;
+				document.Layers.ToolLayer.Hidden = true;
 
 				// Initialize the scratch layer with the (original) current layer, if any blending is required.
 				if (gr.AlphaOnly || (gr.AlphaBlending && (gr.StartColor.A != 255 || gr.EndColor.A != 255))) {
