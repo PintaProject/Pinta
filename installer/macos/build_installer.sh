@@ -24,6 +24,7 @@ rm ${MAC_APP_BIN_DIR}/*.pdb
 # TODO - this could be done in the .csproj publish rule instead?
 mv ${MAC_APP_BIN_DIR}/locale ${MAC_APP_SHARE_DIR}/locale
 mv ${MAC_APP_BIN_DIR}/icons ${MAC_APP_SHARE_DIR}/icons
+cp hicolor.index.theme ${MAC_APP_SHARE_DIR}/icons/hicolor/index.theme
 
 cp Info.plist ${MAC_APP_DIR}/Contents
 cp pinta.icns ${MAC_APP_DIR}/Contents/Resources
