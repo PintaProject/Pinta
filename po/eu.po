@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: pinta\n"
 "Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
-"POT-Creation-Date: 2022-01-03 00:34-0500\n"
+"POT-Creation-Date: 2022-01-11 23:44-0500\n"
 "PO-Revision-Date: 2020-08-07 18:14+0000\n"
 "Last-Translator: Asier Sarasua Garmendia <Unknown>\n"
 "Language-Team: Basque <eu@li.org>\n"
@@ -15,8 +15,8 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Launchpad-Export-Date: 2022-01-07 03:28+0000\n"
-"X-Generator: Launchpad (build 1682fd44eec4f62371f0bed122a83482daf08e23)\n"
+"X-Launchpad-Export-Date: 2022-01-14 01:08+0000\n"
+"X-Generator: Launchpad (build 0072e2709f85567cc6c8d33e98acde9fcc09f491)\n"
 
 #: Mono.Addins.Gui/Mono.Addins.Gui/InstallDialog.cs:142
 msgid " (in user directory)"
@@ -66,7 +66,7 @@ msgstr "_Gehigarriak"
 msgid "About"
 msgstr "Honi buruz"
 
-#: ../Pinta/Dialogs/AboutDialog.cs:289
+#: ../Pinta/Dialogs/AboutDialog.cs:260
 msgid "About Pinta"
 msgstr "Pintari buruz"
 
@@ -199,7 +199,7 @@ msgstr "Atzeko planoaren kolorea"
 msgid "Background:"
 msgstr "Atzeko planoa:"
 
-#: ../Pinta/Dialogs/AboutDialog.cs:179
+#: ../Pinta/Dialogs/AboutDialog.cs:174
 msgid "Based on the work of Paint.NET:"
 msgstr "Paint.NETen lanean oinarritua:"
 
@@ -349,7 +349,7 @@ msgstr ""
 "Klik eta arrastatu hautapen eliptiko bat marrazteko. Mantendu Shift sakatuta "
 "zirkulu bat erabiltzeko."
 
-#: ../Pinta.Tools/Tools/GradientTool.cs:52
+#: ../Pinta.Tools/Tools/GradientTool.cs:53
 msgid ""
 "Click and drag to draw gradient from primary to secondary color.  Right "
 "click to reverse."
@@ -437,6 +437,10 @@ msgstr "Kolorea zuritu"
 msgid "Color Dodge"
 msgstr "Kolorea belztu"
 
+#: ../Pinta.Tools/Tools/GradientTool.cs:200
+msgid "Color Mode"
+msgstr ""
+
 #: ../Pinta.Tools/Tools/ColorPickerTool.cs:52
 msgid "Color Picker"
 msgstr "Kolore-hautatzailea"
@@ -453,7 +457,7 @@ msgstr "Kolore-asetasuna"
 msgid "Coloring"
 msgstr "Koloratzailea"
 
-#: ../Pinta.Tools/Tools/GradientTool.cs:164
+#: ../Pinta.Tools/Tools/GradientTool.cs:185
 msgid "Conical Gradient"
 msgstr "Gradiente konikoa"
 
@@ -470,7 +474,7 @@ msgstr "Albokoa"
 msgid "Contrast"
 msgstr "Kontrastea"
 
-#: ../Pinta/Dialogs/AboutDialog.cs:147
+#: ../Pinta/Dialogs/AboutDialog.cs:142
 msgid "Contributors to this release:"
 msgstr "Bertsio honen garatzaileak:"
 
@@ -807,8 +811,8 @@ msgstr "Globala"
 msgid "Glow"
 msgstr "Dirdira"
 
-#: ../Pinta.Tools/Tools/GradientTool.cs:50
-#: ../Pinta.Tools/Tools/GradientTool.cs:154
+#: ../Pinta.Tools/Tools/GradientTool.cs:51
+#: ../Pinta.Tools/Tools/GradientTool.cs:175
 msgid "Gradient"
 msgstr "Gradientea"
 
@@ -1184,15 +1188,15 @@ msgstr "Argitasuna"
 msgid "Line/Curve"
 msgstr "Lerroa/kurba"
 
-#: ../Pinta.Tools/Tools/GradientTool.cs:162
+#: ../Pinta.Tools/Tools/GradientTool.cs:183
 msgid "Linear Diamond Gradient"
 msgstr "Diamante-formako gradiente lineala"
 
-#: ../Pinta.Tools/Tools/GradientTool.cs:160
+#: ../Pinta.Tools/Tools/GradientTool.cs:181
 msgid "Linear Gradient"
 msgstr "Gradiente lineala"
 
-#: ../Pinta.Tools/Tools/GradientTool.cs:161
+#: ../Pinta.Tools/Tools/GradientTool.cs:182
 msgid "Linear Reflected Gradient"
 msgstr "Gradiente lineal isladatua"
 
@@ -1235,6 +1239,10 @@ msgstr "Batu geruza beherantz"
 #, csharp-format
 msgid "Missing: {0} v{1}"
 msgstr "Falta da: {0} {1} bertsioa"
+
+#: ../Pinta.Tools/Tools/GradientTool.cs:194
+msgid "Mode"
+msgstr ""
 
 #: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:880
 msgid "Modified"
@@ -1589,10 +1597,6 @@ msgstr "Posterizatu"
 msgid "Power"
 msgstr "Energia"
 
-#: ../Pinta/Dialogs/AboutDialog.cs:194
-msgid "Powered by Mono:"
-msgstr "Mono bidez garatua:"
-
 #: ../Pinta/Dialogs/NewImageDialog.cs:194
 msgid "Preset:"
 msgstr "Aurre-ezarpena:"
@@ -1601,7 +1605,7 @@ msgstr "Aurre-ezarpena:"
 msgid "Preview"
 msgstr "Aurrebista"
 
-#: ../Pinta/Dialogs/AboutDialog.cs:159
+#: ../Pinta/Dialogs/AboutDialog.cs:154
 msgid "Previous contributors:"
 msgstr "Aurreko garatzaileak:"
 
@@ -1640,7 +1644,7 @@ msgstr "RGB"
 msgid "Radial Blur"
 msgstr "Lausotze erradiala"
 
-#: ../Pinta.Tools/Tools/GradientTool.cs:163
+#: ../Pinta.Tools/Tools/GradientTool.cs:184
 msgid "Radial Gradient"
 msgstr "Gradiente erradiala"
 
@@ -1728,7 +1732,7 @@ msgstr "Aldatu geruzaren izena"
 msgid "Render"
 msgstr "Errendatu"
 
-#: ../Pinta.Core/Managers/LivePreviewManager.cs:224
+#: ../Pinta.Core/Managers/LivePreviewManager.cs:223
 msgid "Rendering Effect"
 msgstr "Errendatze-efektua"
 
@@ -2149,9 +2153,13 @@ msgstr "Transferentzia-mapa"
 msgid "Translate This Application"
 msgstr "Itzuli aplikazio hau"
 
-#: ../Pinta/Dialogs/AboutDialog.cs:173
+#: ../Pinta/Dialogs/AboutDialog.cs:168
 msgid "Translated by:"
 msgstr "Itzulpena:"
+
+#: ../Pinta.Tools/Tools/GradientTool.cs:201
+msgid "Transparency Mode"
+msgstr ""
 
 #: ../Pinta/Dialogs/NewImageDialog.cs:289
 #: ../Pinta.Effects/Effects/WarpEffect.cs:29
@@ -2250,7 +2258,7 @@ msgstr ""
 "txikietarako. Erabili kalitate altua behin-betiko irudietarako, irudi "
 "handietarako eta angelu handietarako."
 
-#: ../Pinta/Dialogs/AboutDialog.cs:186
+#: ../Pinta/Dialogs/AboutDialog.cs:181
 msgid "Using some icons from:"
 msgstr "Zenbait ikono hemendik datoz:"
 
@@ -2259,7 +2267,7 @@ msgstr "Zenbait ikono hemendik datoz:"
 msgid "Version"
 msgstr "Bertsioa"
 
-#: ../Pinta/Dialogs/AboutDialog.cs:306
+#: ../Pinta/Dialogs/AboutDialog.cs:277
 msgid "Version Info"
 msgstr "Bertsio-informazioa"
 
@@ -2395,7 +2403,7 @@ msgstr "errendatzerako erabiliko den hari-kopurua"
 msgid "pixels"
 msgstr "pixel"
 
-#: ../Pinta/Dialogs/AboutDialog.cs:170
+#: ../Pinta/Dialogs/AboutDialog.cs:165
 msgid "translator-credits"
 msgstr ""
 "Launchpad Contributions:\n"
@@ -2447,6 +2455,9 @@ msgstr "% {0}"
 
 #~ msgid "Ctrl-left click to set origin, left click to paint."
 #~ msgstr "Ctrl-ezkerreko klik jatorria ezartzeko, ezkerreko klik margotzeko."
+
+#~ msgid "Powered by Mono:"
+#~ msgstr "Mono bidez garatua:"
 
 #~ msgid "No tool selected."
 #~ msgstr "Ez da tresnarik hautatu."

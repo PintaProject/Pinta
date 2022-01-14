@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: pinta\n"
 "Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
-"POT-Creation-Date: 2022-01-03 00:34-0500\n"
+"POT-Creation-Date: 2022-01-11 23:44-0500\n"
 "PO-Revision-Date: 2016-08-19 19:11+0000\n"
 "Last-Translator: Alan <Unknown>\n"
 "Language-Team: Breton <br@li.org>\n"
@@ -15,8 +15,8 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n > 1;\n"
-"X-Launchpad-Export-Date: 2022-01-07 03:28+0000\n"
-"X-Generator: Launchpad (build 1682fd44eec4f62371f0bed122a83482daf08e23)\n"
+"X-Launchpad-Export-Date: 2022-01-14 01:08+0000\n"
+"X-Generator: Launchpad (build 0072e2709f85567cc6c8d33e98acde9fcc09f491)\n"
 
 #: Mono.Addins.Gui/Mono.Addins.Gui/InstallDialog.cs:142
 msgid " (in user directory)"
@@ -67,7 +67,7 @@ msgstr "Ouzhpena_dennoù"
 msgid "About"
 msgstr "Diwar-benn"
 
-#: ../Pinta/Dialogs/AboutDialog.cs:289
+#: ../Pinta/Dialogs/AboutDialog.cs:260
 msgid "About Pinta"
 msgstr "A-zivout Pinta"
 
@@ -200,7 +200,7 @@ msgstr "Liv an drekleur"
 msgid "Background:"
 msgstr "Drekleur :"
 
-#: ../Pinta/Dialogs/AboutDialog.cs:179
+#: ../Pinta/Dialogs/AboutDialog.cs:174
 msgid "Based on the work of Paint.NET:"
 msgstr "Diazezet war al labour graet evit Paint.NET :"
 
@@ -350,7 +350,7 @@ msgstr ""
 "Klikañ ha riklañ a-benn tresañ un diuzad elipsennek. Mirout Pennlizh. "
 "pouezet da zestrizhañ ouzh tresañ ur c'helc'h."
 
-#: ../Pinta.Tools/Tools/GradientTool.cs:52
+#: ../Pinta.Tools/Tools/GradientTool.cs:53
 msgid ""
 "Click and drag to draw gradient from primary to secondary color.  Right "
 "click to reverse."
@@ -438,6 +438,10 @@ msgstr "Teñvalaat al livioù"
 msgid "Color Dodge"
 msgstr "Sklaeraat al livioù"
 
+#: ../Pinta.Tools/Tools/GradientTool.cs:200
+msgid "Color Mode"
+msgstr ""
+
 #: ../Pinta.Tools/Tools/ColorPickerTool.cs:52
 msgid "Color Picker"
 msgstr "Gwalenn da dapout ul liv"
@@ -454,7 +458,7 @@ msgstr "Peurvec'hiañ liv"
 msgid "Coloring"
 msgstr "Livadur"
 
-#: ../Pinta.Tools/Tools/GradientTool.cs:164
+#: ../Pinta.Tools/Tools/GradientTool.cs:185
 msgid "Conical Gradient"
 msgstr "Ilrezenn kernennek"
 
@@ -471,7 +475,7 @@ msgstr "Kevelek"
 msgid "Contrast"
 msgstr "Dargemm"
 
-#: ../Pinta/Dialogs/AboutDialog.cs:147
+#: ../Pinta/Dialogs/AboutDialog.cs:142
 msgid "Contributors to this release:"
 msgstr "Tud o deus kemeret perzh en handelv-mañ :"
 
@@ -808,8 +812,8 @@ msgstr "Hollek"
 msgid "Glow"
 msgstr "Skleur"
 
-#: ../Pinta.Tools/Tools/GradientTool.cs:50
-#: ../Pinta.Tools/Tools/GradientTool.cs:154
+#: ../Pinta.Tools/Tools/GradientTool.cs:51
+#: ../Pinta.Tools/Tools/GradientTool.cs:175
 msgid "Gradient"
 msgstr "Ilrezenn"
 
@@ -1186,15 +1190,15 @@ msgstr "Lintr"
 msgid "Line/Curve"
 msgstr "Linenn/Krommenn"
 
-#: ../Pinta.Tools/Tools/GradientTool.cs:162
+#: ../Pinta.Tools/Tools/GradientTool.cs:183
 msgid "Linear Diamond Gradient"
 msgstr "Ilrezenn linennek e doare diamant"
 
-#: ../Pinta.Tools/Tools/GradientTool.cs:160
+#: ../Pinta.Tools/Tools/GradientTool.cs:181
 msgid "Linear Gradient"
 msgstr "Ilrezenn linennek"
 
-#: ../Pinta.Tools/Tools/GradientTool.cs:161
+#: ../Pinta.Tools/Tools/GradientTool.cs:182
 msgid "Linear Reflected Gradient"
 msgstr "Ilrezenn linennek disvannet"
 
@@ -1237,6 +1241,10 @@ msgstr "Toueziañ gant an dreuzfollenn a-zindan"
 #, csharp-format
 msgid "Missing: {0} v{1}"
 msgstr "Mankout a ra : {0} v{1}"
+
+#: ../Pinta.Tools/Tools/GradientTool.cs:194
+msgid "Mode"
+msgstr ""
 
 #: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:880
 msgid "Modified"
@@ -1584,10 +1592,6 @@ msgstr "Skritellaat"
 msgid "Power"
 msgstr "Galloud"
 
-#: ../Pinta/Dialogs/AboutDialog.cs:194
-msgid "Powered by Mono:"
-msgstr "Enlusket gant Mono :"
-
 #: ../Pinta/Dialogs/NewImageDialog.cs:194
 msgid "Preset:"
 msgstr "Ragarventenn :"
@@ -1596,7 +1600,7 @@ msgstr "Ragarventenn :"
 msgid "Preview"
 msgstr "Alberz"
 
-#: ../Pinta/Dialogs/AboutDialog.cs:159
+#: ../Pinta/Dialogs/AboutDialog.cs:154
 msgid "Previous contributors:"
 msgstr "Tud o deus kemeret perzh a-raok :"
 
@@ -1635,7 +1639,7 @@ msgstr "RGG"
 msgid "Radial Blur"
 msgstr "Ruzed skinek"
 
-#: ../Pinta.Tools/Tools/GradientTool.cs:163
+#: ../Pinta.Tools/Tools/GradientTool.cs:184
 msgid "Radial Gradient"
 msgstr "Ilrezenn skinek"
 
@@ -1723,7 +1727,7 @@ msgstr "Adenvel an dreuzfollenn"
 msgid "Render"
 msgstr "Deouez"
 
-#: ../Pinta.Core/Managers/LivePreviewManager.cs:224
+#: ../Pinta.Core/Managers/LivePreviewManager.cs:223
 msgid "Rendering Effect"
 msgstr "Efed gant an deouez"
 
@@ -2143,9 +2147,13 @@ msgstr "Kartenn dreuzkas"
 msgid "Translate This Application"
 msgstr "Treiñ an arload-mañ"
 
-#: ../Pinta/Dialogs/AboutDialog.cs:173
+#: ../Pinta/Dialogs/AboutDialog.cs:168
 msgid "Translated by:"
 msgstr "Troet gant :"
+
+#: ../Pinta.Tools/Tools/GradientTool.cs:201
+msgid "Transparency Mode"
+msgstr ""
 
 #: ../Pinta/Dialogs/NewImageDialog.cs:289
 #: ../Pinta.Effects/Effects/WarpEffect.cs:29
@@ -2242,7 +2250,7 @@ msgstr ""
 "bihan. Arverañ ur berzhded uhel evit an disoc'h diwezhel, skeudennoù bras ha "
 "kornioù bras."
 
-#: ../Pinta/Dialogs/AboutDialog.cs:186
+#: ../Pinta/Dialogs/AboutDialog.cs:181
 msgid "Using some icons from:"
 msgstr "Arver arlunioù zo digant :"
 
@@ -2251,7 +2259,7 @@ msgstr "Arver arlunioù zo digant :"
 msgid "Version"
 msgstr "Handelv"
 
-#: ../Pinta/Dialogs/AboutDialog.cs:306
+#: ../Pinta/Dialogs/AboutDialog.cs:277
 msgid "Version Info"
 msgstr "Titouroù an handelv"
 
@@ -2387,7 +2395,7 @@ msgstr "niver a neudennoù da arverañ evit an deouez"
 msgid "pixels"
 msgstr "a bikselioù"
 
-#: ../Pinta/Dialogs/AboutDialog.cs:170
+#: ../Pinta/Dialogs/AboutDialog.cs:165
 msgid "translator-credits"
 msgstr ""
 "Launchpad Contributions:\n"
@@ -2440,6 +2448,9 @@ msgstr "{0}%"
 
 #~ msgid "No tool selected."
 #~ msgstr "Benveg ebet bet diuzet."
+
+#~ msgid "Powered by Mono:"
+#~ msgstr "Enlusket gant Mono :"
 
 #~ msgid "Union (+) (Ctrl + Left Click)"
 #~ msgstr "Unaniezh (+) (Crtl + klik a-gleik)"

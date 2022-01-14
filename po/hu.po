@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: pinta\n"
 "Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
-"POT-Creation-Date: 2022-01-03 00:34-0500\n"
+"POT-Creation-Date: 2022-01-11 23:44-0500\n"
 "PO-Revision-Date: 2020-04-27 09:04+0000\n"
 "Last-Translator: El Koulali András <Unknown>\n"
 "Language-Team: Hungarian <hu@li.org>\n"
@@ -15,8 +15,8 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Launchpad-Export-Date: 2022-01-07 03:28+0000\n"
-"X-Generator: Launchpad (build 1682fd44eec4f62371f0bed122a83482daf08e23)\n"
+"X-Launchpad-Export-Date: 2022-01-14 01:08+0000\n"
+"X-Generator: Launchpad (build 0072e2709f85567cc6c8d33e98acde9fcc09f491)\n"
 
 #: Mono.Addins.Gui/Mono.Addins.Gui/InstallDialog.cs:142
 msgid " (in user directory)"
@@ -65,7 +65,7 @@ msgstr ""
 msgid "About"
 msgstr "Névjegy"
 
-#: ../Pinta/Dialogs/AboutDialog.cs:289
+#: ../Pinta/Dialogs/AboutDialog.cs:260
 msgid "About Pinta"
 msgstr "Pinta névjegye"
 
@@ -198,7 +198,7 @@ msgstr ""
 msgid "Background:"
 msgstr ""
 
-#: ../Pinta/Dialogs/AboutDialog.cs:179
+#: ../Pinta/Dialogs/AboutDialog.cs:174
 msgid "Based on the work of Paint.NET:"
 msgstr "Az alkalmazás a Paint.NET projekten alapul:"
 
@@ -346,7 +346,7 @@ msgstr ""
 "Kattints és húzd az egeret az elliptikus kijelöléshez. Tartsd nyomva a shift-"
 "et a kör alapú kijelöléshez."
 
-#: ../Pinta.Tools/Tools/GradientTool.cs:52
+#: ../Pinta.Tools/Tools/GradientTool.cs:53
 msgid ""
 "Click and drag to draw gradient from primary to secondary color.  Right "
 "click to reverse."
@@ -435,6 +435,10 @@ msgstr "Színégetés"
 msgid "Color Dodge"
 msgstr "Színkikerülés"
 
+#: ../Pinta.Tools/Tools/GradientTool.cs:200
+msgid "Color Mode"
+msgstr ""
+
 #: ../Pinta.Tools/Tools/ColorPickerTool.cs:52
 msgid "Color Picker"
 msgstr "Színválasztó"
@@ -451,7 +455,7 @@ msgstr "Színtelítettséget"
 msgid "Coloring"
 msgstr "Színezés"
 
-#: ../Pinta.Tools/Tools/GradientTool.cs:164
+#: ../Pinta.Tools/Tools/GradientTool.cs:185
 msgid "Conical Gradient"
 msgstr "Kúpos színátmenet"
 
@@ -468,7 +472,7 @@ msgstr "Egybefüggő"
 msgid "Contrast"
 msgstr "Kontraszt"
 
-#: ../Pinta/Dialogs/AboutDialog.cs:147
+#: ../Pinta/Dialogs/AboutDialog.cs:142
 msgid "Contributors to this release:"
 msgstr "Jelen kiadás hozzájárulói:"
 
@@ -805,8 +809,8 @@ msgstr "Általános"
 msgid "Glow"
 msgstr "Ragyogás"
 
-#: ../Pinta.Tools/Tools/GradientTool.cs:50
-#: ../Pinta.Tools/Tools/GradientTool.cs:154
+#: ../Pinta.Tools/Tools/GradientTool.cs:51
+#: ../Pinta.Tools/Tools/GradientTool.cs:175
 msgid "Gradient"
 msgstr "Színátmenet"
 
@@ -1176,15 +1180,15 @@ msgstr ""
 msgid "Line/Curve"
 msgstr "Vonal/ív"
 
-#: ../Pinta.Tools/Tools/GradientTool.cs:162
+#: ../Pinta.Tools/Tools/GradientTool.cs:183
 msgid "Linear Diamond Gradient"
 msgstr "Lineáris rombusz színátmenet"
 
-#: ../Pinta.Tools/Tools/GradientTool.cs:160
+#: ../Pinta.Tools/Tools/GradientTool.cs:181
 msgid "Linear Gradient"
 msgstr "Lineáris színátmenet"
 
-#: ../Pinta.Tools/Tools/GradientTool.cs:161
+#: ../Pinta.Tools/Tools/GradientTool.cs:182
 msgid "Linear Reflected Gradient"
 msgstr "Lineáris tükrözött színátmenet"
 
@@ -1227,6 +1231,10 @@ msgstr "Réteg beolvasztása az alatta lévőbe"
 #, csharp-format
 msgid "Missing: {0} v{1}"
 msgstr "Hiányzik: {0} v{1}"
+
+#: ../Pinta.Tools/Tools/GradientTool.cs:194
+msgid "Mode"
+msgstr ""
 
 #: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:880
 msgid "Modified"
@@ -1574,10 +1582,6 @@ msgstr "Poszterizálás"
 msgid "Power"
 msgstr "Teljesítmény"
 
-#: ../Pinta/Dialogs/AboutDialog.cs:194
-msgid "Powered by Mono:"
-msgstr ""
-
 #: ../Pinta/Dialogs/NewImageDialog.cs:194
 msgid "Preset:"
 msgstr ""
@@ -1586,7 +1590,7 @@ msgstr ""
 msgid "Preview"
 msgstr ""
 
-#: ../Pinta/Dialogs/AboutDialog.cs:159
+#: ../Pinta/Dialogs/AboutDialog.cs:154
 msgid "Previous contributors:"
 msgstr "Előzetes hozzájárulók:"
 
@@ -1625,7 +1629,7 @@ msgstr "RGB"
 msgid "Radial Blur"
 msgstr "Körkörös elmosás"
 
-#: ../Pinta.Tools/Tools/GradientTool.cs:163
+#: ../Pinta.Tools/Tools/GradientTool.cs:184
 msgid "Radial Gradient"
 msgstr "Sugárirányú színátmenet"
 
@@ -1713,7 +1717,7 @@ msgstr "Réteg átnevezése"
 msgid "Render"
 msgstr "Renderelés"
 
-#: ../Pinta.Core/Managers/LivePreviewManager.cs:224
+#: ../Pinta.Core/Managers/LivePreviewManager.cs:223
 msgid "Rendering Effect"
 msgstr "Effektus renderelése"
 
@@ -2128,9 +2132,13 @@ msgstr "Átviteli térkép"
 msgid "Translate This Application"
 msgstr "Az alkalmazás fordítása"
 
-#: ../Pinta/Dialogs/AboutDialog.cs:173
+#: ../Pinta/Dialogs/AboutDialog.cs:168
 msgid "Translated by:"
 msgstr "Fordította:"
+
+#: ../Pinta.Tools/Tools/GradientTool.cs:201
+msgid "Transparency Mode"
+msgstr ""
 
 #: ../Pinta/Dialogs/NewImageDialog.cs:289
 #: ../Pinta.Effects/Effects/WarpEffect.cs:29
@@ -2226,7 +2234,7 @@ msgstr ""
 "Használjon alacsony minőséget előnézetekhez, kis méretű képekhez. Használjon "
 "magas minőséget a végeredményhez, nagy méretű képekhez."
 
-#: ../Pinta/Dialogs/AboutDialog.cs:186
+#: ../Pinta/Dialogs/AboutDialog.cs:181
 msgid "Using some icons from:"
 msgstr "Néhány ikon forrása:"
 
@@ -2235,7 +2243,7 @@ msgstr "Néhány ikon forrása:"
 msgid "Version"
 msgstr "Verzió"
 
-#: ../Pinta/Dialogs/AboutDialog.cs:306
+#: ../Pinta/Dialogs/AboutDialog.cs:277
 msgid "Version Info"
 msgstr "Verzióinformáció"
 
@@ -2371,7 +2379,7 @@ msgstr "a leképezésre használt szállak száma"
 msgid "pixels"
 msgstr "képpontok"
 
-#: ../Pinta/Dialogs/AboutDialog.cs:170
+#: ../Pinta/Dialogs/AboutDialog.cs:165
 msgid "translator-credits"
 msgstr ""
 "Launchpad Contributions:\n"

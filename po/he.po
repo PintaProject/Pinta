@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: pinta\n"
 "Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
-"POT-Creation-Date: 2022-01-03 00:34-0500\n"
+"POT-Creation-Date: 2022-01-11 23:44-0500\n"
 "PO-Revision-Date: 2021-11-03 19:55+0000\n"
 "Last-Translator: Yaron <sh.yaron@gmail.com>\n"
 "Language-Team: Hebrew <he@li.org>\n"
@@ -15,8 +15,8 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Launchpad-Export-Date: 2022-01-07 03:28+0000\n"
-"X-Generator: Launchpad (build 1682fd44eec4f62371f0bed122a83482daf08e23)\n"
+"X-Launchpad-Export-Date: 2022-01-14 01:08+0000\n"
+"X-Generator: Launchpad (build 0072e2709f85567cc6c8d33e98acde9fcc09f491)\n"
 
 #: Mono.Addins.Gui/Mono.Addins.Gui/InstallDialog.cs:142
 msgid " (in user directory)"
@@ -65,7 +65,7 @@ msgstr "_תוספים"
 msgid "About"
 msgstr "על אודות"
 
-#: ../Pinta/Dialogs/AboutDialog.cs:289
+#: ../Pinta/Dialogs/AboutDialog.cs:260
 msgid "About Pinta"
 msgstr "על אודות Pinta"
 
@@ -198,7 +198,7 @@ msgstr "צבע הרקע"
 msgid "Background:"
 msgstr "רקע:"
 
-#: ../Pinta/Dialogs/AboutDialog.cs:179
+#: ../Pinta/Dialogs/AboutDialog.cs:174
 msgid "Based on the work of Paint.NET:"
 msgstr "מבוסס על העבודה של Paint.NET:"
 
@@ -344,7 +344,7 @@ msgid ""
 "circle."
 msgstr "לחץ וגרור כדי לבחור שטח אליפטי. החזק את מקש Shift בשביל עיגול"
 
-#: ../Pinta.Tools/Tools/GradientTool.cs:52
+#: ../Pinta.Tools/Tools/GradientTool.cs:53
 msgid ""
 "Click and drag to draw gradient from primary to secondary color.  Right "
 "click to reverse."
@@ -431,6 +431,10 @@ msgstr "צריבת צבע"
 msgid "Color Dodge"
 msgstr "התחמקות צבע"
 
+#: ../Pinta.Tools/Tools/GradientTool.cs:200
+msgid "Color Mode"
+msgstr ""
+
 #: ../Pinta.Tools/Tools/ColorPickerTool.cs:52
 msgid "Color Picker"
 msgstr "‏מלקט הצבעים"
@@ -447,7 +451,7 @@ msgstr "רווית הצבע"
 msgid "Coloring"
 msgstr "צביעה"
 
-#: ../Pinta.Tools/Tools/GradientTool.cs:164
+#: ../Pinta.Tools/Tools/GradientTool.cs:185
 msgid "Conical Gradient"
 msgstr "מדרג חרוטי"
 
@@ -464,7 +468,7 @@ msgstr "המשכי"
 msgid "Contrast"
 msgstr "ניגודיות"
 
-#: ../Pinta/Dialogs/AboutDialog.cs:147
+#: ../Pinta/Dialogs/AboutDialog.cs:142
 msgid "Contributors to this release:"
 msgstr "תורמים לגרסה זו:"
 
@@ -801,8 +805,8 @@ msgstr "גלובלי"
 msgid "Glow"
 msgstr "זריחה"
 
-#: ../Pinta.Tools/Tools/GradientTool.cs:50
-#: ../Pinta.Tools/Tools/GradientTool.cs:154
+#: ../Pinta.Tools/Tools/GradientTool.cs:51
+#: ../Pinta.Tools/Tools/GradientTool.cs:175
 msgid "Gradient"
 msgstr "מדרג"
 
@@ -1171,15 +1175,15 @@ msgstr "בהירות"
 msgid "Line/Curve"
 msgstr "קו/עקומה"
 
-#: ../Pinta.Tools/Tools/GradientTool.cs:162
+#: ../Pinta.Tools/Tools/GradientTool.cs:183
 msgid "Linear Diamond Gradient"
 msgstr "מדרג קווי בצורת מעוין"
 
-#: ../Pinta.Tools/Tools/GradientTool.cs:160
+#: ../Pinta.Tools/Tools/GradientTool.cs:181
 msgid "Linear Gradient"
 msgstr "מדרג קווי"
 
-#: ../Pinta.Tools/Tools/GradientTool.cs:161
+#: ../Pinta.Tools/Tools/GradientTool.cs:182
 msgid "Linear Reflected Gradient"
 msgstr "מדרג קווי משתקף"
 
@@ -1222,6 +1226,10 @@ msgstr "מיזוג השכבה כלפי מטה"
 #, csharp-format
 msgid "Missing: {0} v{1}"
 msgstr "חסרה: {0} v{1}"
+
+#: ../Pinta.Tools/Tools/GradientTool.cs:194
+msgid "Mode"
+msgstr ""
 
 #: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:880
 msgid "Modified"
@@ -1573,10 +1581,6 @@ msgstr "הפחתת כמות הצבעים"
 msgid "Power"
 msgstr "חוזק"
 
-#: ../Pinta/Dialogs/AboutDialog.cs:194
-msgid "Powered by Mono:"
-msgstr "מופעל על גבי מונו:"
-
 #: ../Pinta/Dialogs/NewImageDialog.cs:194
 msgid "Preset:"
 msgstr "ברירת מחדל"
@@ -1585,7 +1589,7 @@ msgstr "ברירת מחדל"
 msgid "Preview"
 msgstr "תצוגה מקדימה"
 
-#: ../Pinta/Dialogs/AboutDialog.cs:159
+#: ../Pinta/Dialogs/AboutDialog.cs:154
 msgid "Previous contributors:"
 msgstr "תורמים לשעבר:"
 
@@ -1624,7 +1628,7 @@ msgstr "RGB"
 msgid "Radial Blur"
 msgstr "טשטוש מעגלי"
 
-#: ../Pinta.Tools/Tools/GradientTool.cs:163
+#: ../Pinta.Tools/Tools/GradientTool.cs:184
 msgid "Radial Gradient"
 msgstr "מדרג מעגלי"
 
@@ -1712,7 +1716,7 @@ msgstr "שינוי שם השכבה"
 msgid "Render"
 msgstr "עיבוד"
 
-#: ../Pinta.Core/Managers/LivePreviewManager.cs:224
+#: ../Pinta.Core/Managers/LivePreviewManager.cs:223
 msgid "Rendering Effect"
 msgstr "אפקט עיבוד"
 
@@ -2123,9 +2127,13 @@ msgstr "מרחב צבעים להמרה"
 msgid "Translate This Application"
 msgstr "תרגום יישום זה"
 
-#: ../Pinta/Dialogs/AboutDialog.cs:173
+#: ../Pinta/Dialogs/AboutDialog.cs:168
 msgid "Translated by:"
 msgstr "תורגם על ידי:"
+
+#: ../Pinta.Tools/Tools/GradientTool.cs:201
+msgid "Transparency Mode"
+msgstr ""
 
 #: ../Pinta/Dialogs/NewImageDialog.cs:289
 #: ../Pinta.Effects/Effects/WarpEffect.cs:29
@@ -2223,7 +2231,7 @@ msgstr ""
 "כדאי להשתמש באיכות נמוכה עבור תצוגות מקדימות, תמונות קטנות וזוויות קטנות. "
 "באיכות גבוהה כדאי להשתמש לאיכות גימור, תמונות גדולות וזוויות גדולות."
 
-#: ../Pinta/Dialogs/AboutDialog.cs:186
+#: ../Pinta/Dialogs/AboutDialog.cs:181
 msgid "Using some icons from:"
 msgstr "נעשה שימוש בכמה סמלים מ־:"
 
@@ -2232,7 +2240,7 @@ msgstr "נעשה שימוש בכמה סמלים מ־:"
 msgid "Version"
 msgstr "גרסה"
 
-#: ../Pinta/Dialogs/AboutDialog.cs:306
+#: ../Pinta/Dialogs/AboutDialog.cs:277
 msgid "Version Info"
 msgstr "נתוני הגרסה"
 
@@ -2370,7 +2378,7 @@ msgstr "מספר הפתילים לשימוש בטרם העיבוד"
 msgid "pixels"
 msgstr "פיקסלים"
 
-#: ../Pinta/Dialogs/AboutDialog.cs:170
+#: ../Pinta/Dialogs/AboutDialog.cs:165
 msgid "translator-credits"
 msgstr ""
 "Launchpad Contributions:\n"
@@ -2420,6 +2428,9 @@ msgstr "{0}%"
 
 #~ msgid "Ctrl-left click to set origin, left click to paint."
 #~ msgstr "Ctrl+לחצן שמאלי כדי להגדיר את המקור, לחצן שמאלי לציור."
+
+#~ msgid "Powered by Mono:"
+#~ msgstr "מופעל על גבי מונו:"
 
 #~ msgid "No tool selected."
 #~ msgstr "לא נבחר כלי."

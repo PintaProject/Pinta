@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: pinta\n"
 "Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
-"POT-Creation-Date: 2022-01-03 00:34-0500\n"
+"POT-Creation-Date: 2022-01-11 23:44-0500\n"
 "PO-Revision-Date: 2016-08-25 13:39+0000\n"
 "Last-Translator: Hashem Zavvari <hashemzawary@gmail.com>\n"
 "Language-Team: Persian <fa@li.org>\n"
@@ -15,8 +15,8 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=1; plural=0;\n"
-"X-Launchpad-Export-Date: 2022-01-07 03:28+0000\n"
-"X-Generator: Launchpad (build 1682fd44eec4f62371f0bed122a83482daf08e23)\n"
+"X-Launchpad-Export-Date: 2022-01-14 01:09+0000\n"
+"X-Generator: Launchpad (build 0072e2709f85567cc6c8d33e98acde9fcc09f491)\n"
 
 #: Mono.Addins.Gui/Mono.Addins.Gui/InstallDialog.cs:142
 msgid " (in user directory)"
@@ -65,7 +65,7 @@ msgstr "_افزونه‌ها"
 msgid "About"
 msgstr "درباره"
 
-#: ../Pinta/Dialogs/AboutDialog.cs:289
+#: ../Pinta/Dialogs/AboutDialog.cs:260
 msgid "About Pinta"
 msgstr "درباره‌ی پینتا"
 
@@ -198,7 +198,7 @@ msgstr "رنگ پس زمینه"
 msgid "Background:"
 msgstr "پس‌زمینه:"
 
-#: ../Pinta/Dialogs/AboutDialog.cs:179
+#: ../Pinta/Dialogs/AboutDialog.cs:174
 msgid "Based on the work of Paint.NET:"
 msgstr "مبتنی بر اثر Paint.NET:"
 
@@ -348,7 +348,7 @@ msgstr ""
 "برای یک انتخاب بیضوی کلیک کرده و بکشید. برای انتخاب دایروی کلید Shift را نگه "
 "دارید."
 
-#: ../Pinta.Tools/Tools/GradientTool.cs:52
+#: ../Pinta.Tools/Tools/GradientTool.cs:53
 msgid ""
 "Click and drag to draw gradient from primary to secondary color.  Right "
 "click to reverse."
@@ -436,6 +436,10 @@ msgstr "سوختگی رنگ"
 msgid "Color Dodge"
 msgstr "گریز رنگی"
 
+#: ../Pinta.Tools/Tools/GradientTool.cs:200
+msgid "Color Mode"
+msgstr ""
+
 #: ../Pinta.Tools/Tools/ColorPickerTool.cs:52
 msgid "Color Picker"
 msgstr "رنگ بردار"
@@ -452,7 +456,7 @@ msgstr "اشباع رنگ"
 msgid "Coloring"
 msgstr "رنگینگی"
 
-#: ../Pinta.Tools/Tools/GradientTool.cs:164
+#: ../Pinta.Tools/Tools/GradientTool.cs:185
 msgid "Conical Gradient"
 msgstr "طیف مخروطی"
 
@@ -469,7 +473,7 @@ msgstr "پیوسته"
 msgid "Contrast"
 msgstr "تضاد"
 
-#: ../Pinta/Dialogs/AboutDialog.cs:147
+#: ../Pinta/Dialogs/AboutDialog.cs:142
 msgid "Contributors to this release:"
 msgstr "مشارکت کنندگان در این نسخه:"
 
@@ -806,8 +810,8 @@ msgstr "فراگیر"
 msgid "Glow"
 msgstr "درخشش"
 
-#: ../Pinta.Tools/Tools/GradientTool.cs:50
-#: ../Pinta.Tools/Tools/GradientTool.cs:154
+#: ../Pinta.Tools/Tools/GradientTool.cs:51
+#: ../Pinta.Tools/Tools/GradientTool.cs:175
 msgid "Gradient"
 msgstr "طیف"
 
@@ -1178,15 +1182,15 @@ msgstr "روشنی"
 msgid "Line/Curve"
 msgstr "خط / منحنی"
 
-#: ../Pinta.Tools/Tools/GradientTool.cs:162
+#: ../Pinta.Tools/Tools/GradientTool.cs:183
 msgid "Linear Diamond Gradient"
 msgstr "طیف لوزوی خطی"
 
-#: ../Pinta.Tools/Tools/GradientTool.cs:160
+#: ../Pinta.Tools/Tools/GradientTool.cs:181
 msgid "Linear Gradient"
 msgstr "طیف خطی"
 
-#: ../Pinta.Tools/Tools/GradientTool.cs:161
+#: ../Pinta.Tools/Tools/GradientTool.cs:182
 msgid "Linear Reflected Gradient"
 msgstr "طیف منعکس شده‌ی خطی"
 
@@ -1229,6 +1233,10 @@ msgstr "ترکیب با لایه‌ی زیرین"
 #, csharp-format
 msgid "Missing: {0} v{1}"
 msgstr "فقدان: {0} v{1}"
+
+#: ../Pinta.Tools/Tools/GradientTool.cs:194
+msgid "Mode"
+msgstr ""
 
 #: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:880
 msgid "Modified"
@@ -1576,10 +1584,6 @@ msgstr "پوسترسازی"
 msgid "Power"
 msgstr "انرژی"
 
-#: ../Pinta/Dialogs/AboutDialog.cs:194
-msgid "Powered by Mono:"
-msgstr "نیرو گرفته از Mono:"
-
 #: ../Pinta/Dialogs/NewImageDialog.cs:194
 msgid "Preset:"
 msgstr "پیش‌تنظیم:"
@@ -1588,7 +1592,7 @@ msgstr "پیش‌تنظیم:"
 msgid "Preview"
 msgstr "پیش‌نمایش"
 
-#: ../Pinta/Dialogs/AboutDialog.cs:159
+#: ../Pinta/Dialogs/AboutDialog.cs:154
 msgid "Previous contributors:"
 msgstr "مشارکت‌کنندگان قبلی:"
 
@@ -1627,7 +1631,7 @@ msgstr "قرمز- سبز- آبی"
 msgid "Radial Blur"
 msgstr "تار شدگی دایروی"
 
-#: ../Pinta.Tools/Tools/GradientTool.cs:163
+#: ../Pinta.Tools/Tools/GradientTool.cs:184
 msgid "Radial Gradient"
 msgstr "طیف دایروی"
 
@@ -1715,7 +1719,7 @@ msgstr "تغییر نام لایه"
 msgid "Render"
 msgstr "پرداخت"
 
-#: ../Pinta.Core/Managers/LivePreviewManager.cs:224
+#: ../Pinta.Core/Managers/LivePreviewManager.cs:223
 msgid "Rendering Effect"
 msgstr "پرداخت کردن جلوه"
 
@@ -2131,9 +2135,13 @@ msgstr "انتقال نقشه"
 msgid "Translate This Application"
 msgstr "ترجمه کردن این برنامه"
 
-#: ../Pinta/Dialogs/AboutDialog.cs:173
+#: ../Pinta/Dialogs/AboutDialog.cs:168
 msgid "Translated by:"
 msgstr "مترجم:"
+
+#: ../Pinta.Tools/Tools/GradientTool.cs:201
+msgid "Transparency Mode"
+msgstr ""
 
 #: ../Pinta/Dialogs/NewImageDialog.cs:289
 #: ../Pinta.Effects/Effects/WarpEffect.cs:29
@@ -2229,7 +2237,7 @@ msgstr ""
 "برای پیش‌نمایش، تصاویر و زوایای کوچک از کیفیت پایین استفاده شود. برای پردازش "
 "نهایی، تصاویر و زوایای بزرگ‌تر از کیفیت بالا استفاده شود."
 
-#: ../Pinta/Dialogs/AboutDialog.cs:186
+#: ../Pinta/Dialogs/AboutDialog.cs:181
 msgid "Using some icons from:"
 msgstr "آیکون‌های استفاده شده از:"
 
@@ -2238,7 +2246,7 @@ msgstr "آیکون‌های استفاده شده از:"
 msgid "Version"
 msgstr "نسخه‌"
 
-#: ../Pinta/Dialogs/AboutDialog.cs:306
+#: ../Pinta/Dialogs/AboutDialog.cs:277
 msgid "Version Info"
 msgstr "اطلاعات نسخه"
 
@@ -2374,7 +2382,7 @@ msgstr "تعداد رشته‌های پردازشی برای پرداخت"
 msgid "pixels"
 msgstr "پیکسل"
 
-#: ../Pinta/Dialogs/AboutDialog.cs:170
+#: ../Pinta/Dialogs/AboutDialog.cs:165
 msgid "translator-credits"
 msgstr ""
 "Launchpad Contributions:\n"
@@ -2465,3 +2473,6 @@ msgstr "{0}%"
 #~ "برای ایجاد یک شکل جدید با شروع از لبه، کلید Ctrl را نگه داشته و خارج از "
 #~ "محدوده‌ی تصویر کلیک کنید.\n"
 #~ "برای بسته شدن شکل کلید Enter را بزنید."
+
+#~ msgid "Powered by Mono:"
+#~ msgstr "نیرو گرفته از Mono:"

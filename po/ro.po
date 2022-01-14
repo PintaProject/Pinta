@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: pinta\n"
 "Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
-"POT-Creation-Date: 2022-01-03 00:34-0500\n"
+"POT-Creation-Date: 2022-01-11 23:44-0500\n"
 "PO-Revision-Date: 2020-04-16 09:35+0000\n"
 "Last-Translator: Mircea <mirceanis@gmail.com>\n"
 "Language-Team: Romanian <ro@li.org>\n"
@@ -16,8 +16,8 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=3; plural=(n == 1 ? 0: (((n % 100 > 19) || ((n % 100 "
 "== 0) && (n != 0))) ? 2: 1));\n"
-"X-Launchpad-Export-Date: 2022-01-07 03:28+0000\n"
-"X-Generator: Launchpad (build 1682fd44eec4f62371f0bed122a83482daf08e23)\n"
+"X-Launchpad-Export-Date: 2022-01-14 01:08+0000\n"
+"X-Generator: Launchpad (build 0072e2709f85567cc6c8d33e98acde9fcc09f491)\n"
 
 #: Mono.Addins.Gui/Mono.Addins.Gui/InstallDialog.cs:142
 msgid " (in user directory)"
@@ -66,7 +66,7 @@ msgstr "E_xtensii"
 msgid "About"
 msgstr "Despre aplicație"
 
-#: ../Pinta/Dialogs/AboutDialog.cs:289
+#: ../Pinta/Dialogs/AboutDialog.cs:260
 msgid "About Pinta"
 msgstr "Despre Pinta"
 
@@ -199,7 +199,7 @@ msgstr "Culoare de fundal"
 msgid "Background:"
 msgstr "Fundal:"
 
-#: ../Pinta/Dialogs/AboutDialog.cs:179
+#: ../Pinta/Dialogs/AboutDialog.cs:174
 msgid "Based on the work of Paint.NET:"
 msgstr "Bazat pe munca la programul Paint.NET:"
 
@@ -349,7 +349,7 @@ msgstr ""
 "Click și trage pentru a desena o selecție eliptică. Ține apăsată tasta Shift "
 "pentru a constrânge selecția la forma de cerc."
 
-#: ../Pinta.Tools/Tools/GradientTool.cs:52
+#: ../Pinta.Tools/Tools/GradientTool.cs:53
 msgid ""
 "Click and drag to draw gradient from primary to secondary color.  Right "
 "click to reverse."
@@ -437,6 +437,10 @@ msgstr "Culoare arsă"
 msgid "Color Dodge"
 msgstr "Culoare evitată"
 
+#: ../Pinta.Tools/Tools/GradientTool.cs:200
+msgid "Color Mode"
+msgstr ""
+
 #: ../Pinta.Tools/Tools/ColorPickerTool.cs:52
 msgid "Color Picker"
 msgstr "Selector de culoare"
@@ -453,7 +457,7 @@ msgstr "Saturație culoare"
 msgid "Coloring"
 msgstr "Colorare"
 
-#: ../Pinta.Tools/Tools/GradientTool.cs:164
+#: ../Pinta.Tools/Tools/GradientTool.cs:185
 msgid "Conical Gradient"
 msgstr "Gradient conic"
 
@@ -470,7 +474,7 @@ msgstr "Continuu"
 msgid "Contrast"
 msgstr "Contrast"
 
-#: ../Pinta/Dialogs/AboutDialog.cs:147
+#: ../Pinta/Dialogs/AboutDialog.cs:142
 msgid "Contributors to this release:"
 msgstr "Au contribuit la această versiune:"
 
@@ -807,8 +811,8 @@ msgstr "Global"
 msgid "Glow"
 msgstr "luminiscență"
 
-#: ../Pinta.Tools/Tools/GradientTool.cs:50
-#: ../Pinta.Tools/Tools/GradientTool.cs:154
+#: ../Pinta.Tools/Tools/GradientTool.cs:51
+#: ../Pinta.Tools/Tools/GradientTool.cs:175
 msgid "Gradient"
 msgstr "Gradient"
 
@@ -1184,15 +1188,15 @@ msgstr "Luminozitate"
 msgid "Line/Curve"
 msgstr "Linie/Curbă"
 
-#: ../Pinta.Tools/Tools/GradientTool.cs:162
+#: ../Pinta.Tools/Tools/GradientTool.cs:183
 msgid "Linear Diamond Gradient"
 msgstr "Gradient liniar în diamant"
 
-#: ../Pinta.Tools/Tools/GradientTool.cs:160
+#: ../Pinta.Tools/Tools/GradientTool.cs:181
 msgid "Linear Gradient"
 msgstr "Gradient liniar"
 
-#: ../Pinta.Tools/Tools/GradientTool.cs:161
+#: ../Pinta.Tools/Tools/GradientTool.cs:182
 msgid "Linear Reflected Gradient"
 msgstr "Gradient liniar oglindit"
 
@@ -1235,6 +1239,10 @@ msgstr "Combină cu stratul inferior"
 #, csharp-format
 msgid "Missing: {0} v{1}"
 msgstr "Lipsește: {0} v{1}"
+
+#: ../Pinta.Tools/Tools/GradientTool.cs:194
+msgid "Mode"
+msgstr ""
 
 #: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:880
 msgid "Modified"
@@ -1587,10 +1595,6 @@ msgstr "Posterizează"
 msgid "Power"
 msgstr "Putere"
 
-#: ../Pinta/Dialogs/AboutDialog.cs:194
-msgid "Powered by Mono:"
-msgstr "Bazat pe Mono:"
-
 #: ../Pinta/Dialogs/NewImageDialog.cs:194
 msgid "Preset:"
 msgstr "Prestabilit:"
@@ -1599,7 +1603,7 @@ msgstr "Prestabilit:"
 msgid "Preview"
 msgstr "Previzualizare"
 
-#: ../Pinta/Dialogs/AboutDialog.cs:159
+#: ../Pinta/Dialogs/AboutDialog.cs:154
 msgid "Previous contributors:"
 msgstr "Au contribuit la versiunile anterioare:"
 
@@ -1638,7 +1642,7 @@ msgstr "RGB"
 msgid "Radial Blur"
 msgstr "Neclaritate radială"
 
-#: ../Pinta.Tools/Tools/GradientTool.cs:163
+#: ../Pinta.Tools/Tools/GradientTool.cs:184
 msgid "Radial Gradient"
 msgstr "Gradient radial"
 
@@ -1726,7 +1730,7 @@ msgstr "Redenumește stratul"
 msgid "Render"
 msgstr "Randează"
 
-#: ../Pinta.Core/Managers/LivePreviewManager.cs:224
+#: ../Pinta.Core/Managers/LivePreviewManager.cs:223
 msgid "Rendering Effect"
 msgstr "Efect de randare"
 
@@ -2148,9 +2152,13 @@ msgstr "Hartă de transfer"
 msgid "Translate This Application"
 msgstr "Tradu această aplicaţie"
 
-#: ../Pinta/Dialogs/AboutDialog.cs:173
+#: ../Pinta/Dialogs/AboutDialog.cs:168
 msgid "Translated by:"
 msgstr "Tradus de:"
+
+#: ../Pinta.Tools/Tools/GradientTool.cs:201
+msgid "Transparency Mode"
+msgstr ""
 
 #: ../Pinta/Dialogs/NewImageDialog.cs:289
 #: ../Pinta.Effects/Effects/WarpEffect.cs:29
@@ -2246,7 +2254,7 @@ msgstr ""
 "Folosiți calitatea redusă pentru previzualizări, imagini și unghiuri mici. "
 "Folosiți calitatea înaltă pentru calitatea finală, imagini și unghiuri mari."
 
-#: ../Pinta/Dialogs/AboutDialog.cs:186
+#: ../Pinta/Dialogs/AboutDialog.cs:181
 msgid "Using some icons from:"
 msgstr "Sunt utilizate unele pictograme din:"
 
@@ -2255,7 +2263,7 @@ msgstr "Sunt utilizate unele pictograme din:"
 msgid "Version"
 msgstr "Versiune"
 
-#: ../Pinta/Dialogs/AboutDialog.cs:306
+#: ../Pinta/Dialogs/AboutDialog.cs:277
 msgid "Version Info"
 msgstr "Informaţii despre versiune"
 
@@ -2391,7 +2399,7 @@ msgstr "numărul firelor de execuţie utilizate pentru randare"
 msgid "pixels"
 msgstr "pixeli"
 
-#: ../Pinta/Dialogs/AboutDialog.cs:170
+#: ../Pinta/Dialogs/AboutDialog.cs:165
 msgid "translator-credits"
 msgstr ""
 "Launchpad Contributions:\n"
@@ -2461,6 +2469,9 @@ msgstr "{0}%"
 
 #~ msgid "No tool selected."
 #~ msgstr "Nici o unealtă selectată."
+
+#~ msgid "Powered by Mono:"
+#~ msgstr "Bazat pe Mono:"
 
 #~ msgid ""
 #~ "Left click to draw a shape with the primary color.\n"

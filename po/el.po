@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: pinta\n"
 "Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
-"POT-Creation-Date: 2022-01-03 00:34-0500\n"
+"POT-Creation-Date: 2022-01-11 23:44-0500\n"
 "PO-Revision-Date: 2021-11-10 15:30+0000\n"
 "Last-Translator: Vasilis Kosmidis <Unknown>\n"
 "Language-Team: Greek <el@li.org>\n"
@@ -15,8 +15,8 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Launchpad-Export-Date: 2022-01-07 03:28+0000\n"
-"X-Generator: Launchpad (build 1682fd44eec4f62371f0bed122a83482daf08e23)\n"
+"X-Launchpad-Export-Date: 2022-01-14 01:08+0000\n"
+"X-Generator: Launchpad (build 0072e2709f85567cc6c8d33e98acde9fcc09f491)\n"
 
 #: Mono.Addins.Gui/Mono.Addins.Gui/InstallDialog.cs:142
 msgid " (in user directory)"
@@ -65,7 +65,7 @@ msgstr "Πρόσθετα"
 msgid "About"
 msgstr "Περί"
 
-#: ../Pinta/Dialogs/AboutDialog.cs:289
+#: ../Pinta/Dialogs/AboutDialog.cs:260
 msgid "About Pinta"
 msgstr "Σχετικά με το Pinta"
 
@@ -200,7 +200,7 @@ msgstr "Χρώμα Φόντου"
 msgid "Background:"
 msgstr "Φόντο:"
 
-#: ../Pinta/Dialogs/AboutDialog.cs:179
+#: ../Pinta/Dialogs/AboutDialog.cs:174
 msgid "Based on the work of Paint.NET:"
 msgstr "Βασίζεται στο Paint.NET:"
 
@@ -350,7 +350,7 @@ msgstr ""
 "Κάντε κλικ και σύρετε για να σχεδιάσετε μια ελλειπτική επιλογή. Κρατήστε το "
 "Shift για να το περιορίσετε σε ένα κύκλο."
 
-#: ../Pinta.Tools/Tools/GradientTool.cs:52
+#: ../Pinta.Tools/Tools/GradientTool.cs:53
 msgid ""
 "Click and drag to draw gradient from primary to secondary color.  Right "
 "click to reverse."
@@ -440,6 +440,10 @@ msgstr "Κάψιμο χρώματος"
 msgid "Color Dodge"
 msgstr "Υπερέκθεση χρώματος"
 
+#: ../Pinta.Tools/Tools/GradientTool.cs:200
+msgid "Color Mode"
+msgstr ""
+
 #: ../Pinta.Tools/Tools/ColorPickerTool.cs:52
 msgid "Color Picker"
 msgstr "Επιλογέας χρώματος"
@@ -456,7 +460,7 @@ msgstr "Κορεσμός χρώματος"
 msgid "Coloring"
 msgstr "Χρωματισμός"
 
-#: ../Pinta.Tools/Tools/GradientTool.cs:164
+#: ../Pinta.Tools/Tools/GradientTool.cs:185
 msgid "Conical Gradient"
 msgstr "Κωνική διαβάθμιση χρώματος"
 
@@ -473,7 +477,7 @@ msgstr "Συνεχόμενη"
 msgid "Contrast"
 msgstr "Αντίθεση"
 
-#: ../Pinta/Dialogs/AboutDialog.cs:147
+#: ../Pinta/Dialogs/AboutDialog.cs:142
 msgid "Contributors to this release:"
 msgstr "Συνεργάτες για αυτή την έκδοση:"
 
@@ -810,8 +814,8 @@ msgstr "Καθολική"
 msgid "Glow"
 msgstr "Λάμψη"
 
-#: ../Pinta.Tools/Tools/GradientTool.cs:50
-#: ../Pinta.Tools/Tools/GradientTool.cs:154
+#: ../Pinta.Tools/Tools/GradientTool.cs:51
+#: ../Pinta.Tools/Tools/GradientTool.cs:175
 msgid "Gradient"
 msgstr "Διαβάθμιση χρώματος"
 
@@ -1189,15 +1193,15 @@ msgstr "Σχετική φωτεινότητα"
 msgid "Line/Curve"
 msgstr "Γραμμή/Καμπύλη"
 
-#: ../Pinta.Tools/Tools/GradientTool.cs:162
+#: ../Pinta.Tools/Tools/GradientTool.cs:183
 msgid "Linear Diamond Gradient"
 msgstr "Γραμμική διαβάθμιση χρώματος σε μορφή διαμαντιού"
 
-#: ../Pinta.Tools/Tools/GradientTool.cs:160
+#: ../Pinta.Tools/Tools/GradientTool.cs:181
 msgid "Linear Gradient"
 msgstr "Γραμμική διαβάθμιση χρώματος"
 
-#: ../Pinta.Tools/Tools/GradientTool.cs:161
+#: ../Pinta.Tools/Tools/GradientTool.cs:182
 msgid "Linear Reflected Gradient"
 msgstr "Γραμμική διαβάθμιση χρώματος σε αντανάκλαση"
 
@@ -1240,6 +1244,10 @@ msgstr "Συγχώνευση επιπέδου προς τα κάτω"
 #, csharp-format
 msgid "Missing: {0} v{1}"
 msgstr "Λείπει: {0} v{1}"
+
+#: ../Pinta.Tools/Tools/GradientTool.cs:194
+msgid "Mode"
+msgstr ""
 
 #: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:880
 msgid "Modified"
@@ -1594,10 +1602,6 @@ msgstr "Ποστεροποίηση"
 msgid "Power"
 msgstr "Δύναμη"
 
-#: ../Pinta/Dialogs/AboutDialog.cs:194
-msgid "Powered by Mono:"
-msgstr "Βασίζεται στο Mono:"
-
 #: ../Pinta/Dialogs/NewImageDialog.cs:194
 msgid "Preset:"
 msgstr "Προκαθορισμένο:"
@@ -1606,7 +1610,7 @@ msgstr "Προκαθορισμένο:"
 msgid "Preview"
 msgstr "Προεπισκόπηση"
 
-#: ../Pinta/Dialogs/AboutDialog.cs:159
+#: ../Pinta/Dialogs/AboutDialog.cs:154
 msgid "Previous contributors:"
 msgstr "Προηγούμενοι συνεργάτες:"
 
@@ -1645,7 +1649,7 @@ msgstr "RGB"
 msgid "Radial Blur"
 msgstr "Ακτινικό θόλωμα"
 
-#: ../Pinta.Tools/Tools/GradientTool.cs:163
+#: ../Pinta.Tools/Tools/GradientTool.cs:184
 msgid "Radial Gradient"
 msgstr "Ακτινική διαβάθμιση χρώματος"
 
@@ -1733,7 +1737,7 @@ msgstr "Μετονομασία επιπέδου"
 msgid "Render"
 msgstr "Απόδοση"
 
-#: ../Pinta.Core/Managers/LivePreviewManager.cs:224
+#: ../Pinta.Core/Managers/LivePreviewManager.cs:223
 msgid "Rendering Effect"
 msgstr "Απόδοση αποτελέσματος"
 
@@ -2156,9 +2160,13 @@ msgstr "Μεταφορά χάρτη"
 msgid "Translate This Application"
 msgstr "Μεταφράστε την εφαρμογή"
 
-#: ../Pinta/Dialogs/AboutDialog.cs:173
+#: ../Pinta/Dialogs/AboutDialog.cs:168
 msgid "Translated by:"
 msgstr "Μεταφράστηκε από:"
+
+#: ../Pinta.Tools/Tools/GradientTool.cs:201
+msgid "Transparency Mode"
+msgstr ""
 
 #: ../Pinta/Dialogs/NewImageDialog.cs:289
 #: ../Pinta.Effects/Effects/WarpEffect.cs:29
@@ -2257,7 +2265,7 @@ msgstr ""
 "μικρές γωνίες. Χρησιμοποίηση υψηλής ποιότητας για βέλτιστη ποιότητα, μεγάλες "
 "εικόνες και μεγάλες γωνίες."
 
-#: ../Pinta/Dialogs/AboutDialog.cs:186
+#: ../Pinta/Dialogs/AboutDialog.cs:181
 msgid "Using some icons from:"
 msgstr "Γίνεται χρήση μερικών εικονιδίων από:"
 
@@ -2266,7 +2274,7 @@ msgstr "Γίνεται χρήση μερικών εικονιδίων από:"
 msgid "Version"
 msgstr "Έκδοση"
 
-#: ../Pinta/Dialogs/AboutDialog.cs:306
+#: ../Pinta/Dialogs/AboutDialog.cs:277
 msgid "Version Info"
 msgstr "Πληροφορίες έκδοσης"
 
@@ -2404,7 +2412,7 @@ msgstr "αριθμός νημάτων που θα χρησιμοποιηθούν
 msgid "pixels"
 msgstr "εικονοστοιχεία"
 
-#: ../Pinta/Dialogs/AboutDialog.cs:170
+#: ../Pinta/Dialogs/AboutDialog.cs:165
 msgid "translator-credits"
 msgstr ""
 "Launchpad Contributions:\n"
@@ -2472,6 +2480,9 @@ msgstr "{0}%"
 
 #~ msgid "Xor (Ctrl + Right Click)"
 #~ msgstr "Αποκλειστικό ή (Ctrl + δεξί κλικ)"
+
+#~ msgid "Powered by Mono:"
+#~ msgstr "Βασίζεται στο Mono:"
 
 #~ msgid "Intersect (Alt + Left Click)"
 #~ msgstr "Τομή (Alt + αριστερό κλικ)"

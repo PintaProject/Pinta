@@ -7,16 +7,16 @@ msgid ""
 msgstr ""
 "Project-Id-Version: pinta\n"
 "Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
-"POT-Creation-Date: 2022-01-03 00:34-0500\n"
-"PO-Revision-Date: 2021-12-29 13:28+0000\n"
+"POT-Creation-Date: 2022-01-11 23:44-0500\n"
+"PO-Revision-Date: 2022-01-12 10:38+0000\n"
 "Last-Translator: Jiri Grönroos <Unknown>\n"
 "Language-Team: Finnish <fi@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Launchpad-Export-Date: 2022-01-07 03:28+0000\n"
-"X-Generator: Launchpad (build 1682fd44eec4f62371f0bed122a83482daf08e23)\n"
+"X-Launchpad-Export-Date: 2022-01-14 01:08+0000\n"
+"X-Generator: Launchpad (build 0072e2709f85567cc6c8d33e98acde9fcc09f491)\n"
 
 #: Mono.Addins.Gui/Mono.Addins.Gui/InstallDialog.cs:142
 msgid " (in user directory)"
@@ -65,7 +65,7 @@ msgstr "A_dd-ins"
 msgid "About"
 msgstr "Tietoja"
 
-#: ../Pinta/Dialogs/AboutDialog.cs:289
+#: ../Pinta/Dialogs/AboutDialog.cs:260
 msgid "About Pinta"
 msgstr "Tietoja Pintasta"
 
@@ -198,7 +198,7 @@ msgstr "Taustaväri"
 msgid "Background:"
 msgstr "Tausta:"
 
-#: ../Pinta/Dialogs/AboutDialog.cs:179
+#: ../Pinta/Dialogs/AboutDialog.cs:174
 msgid "Based on the work of Paint.NET:"
 msgstr "Perustuu ohjelmaan Paint.NET:"
 
@@ -348,7 +348,7 @@ msgstr ""
 "Paina hiirellä ja siirrä hiirtä tehdäksesi elliptisen valinnan. Pidä Vaihto -"
 "näppäin pohjassa tehdäksesi ympyrämuotoisen valinnan."
 
-#: ../Pinta.Tools/Tools/GradientTool.cs:52
+#: ../Pinta.Tools/Tools/GradientTool.cs:53
 msgid ""
 "Click and drag to draw gradient from primary to secondary color.  Right "
 "click to reverse."
@@ -436,6 +436,10 @@ msgstr "Varjostus"
 msgid "Color Dodge"
 msgstr "Valotus"
 
+#: ../Pinta.Tools/Tools/GradientTool.cs:200
+msgid "Color Mode"
+msgstr "Väritila"
+
 #: ../Pinta.Tools/Tools/ColorPickerTool.cs:52
 msgid "Color Picker"
 msgstr "Värinpoimija"
@@ -452,7 +456,7 @@ msgstr "Värikylläisyys"
 msgid "Coloring"
 msgstr "Väritys"
 
-#: ../Pinta.Tools/Tools/GradientTool.cs:164
+#: ../Pinta.Tools/Tools/GradientTool.cs:185
 msgid "Conical Gradient"
 msgstr "Kartio"
 
@@ -469,7 +473,7 @@ msgstr "Jatkuva"
 msgid "Contrast"
 msgstr "Kontrasti"
 
-#: ../Pinta/Dialogs/AboutDialog.cs:147
+#: ../Pinta/Dialogs/AboutDialog.cs:142
 msgid "Contributors to this release:"
 msgstr "Tämän julkaisun osallistujat:"
 
@@ -806,8 +810,8 @@ msgstr "Globaali"
 msgid "Glow"
 msgstr "Hehku"
 
-#: ../Pinta.Tools/Tools/GradientTool.cs:50
-#: ../Pinta.Tools/Tools/GradientTool.cs:154
+#: ../Pinta.Tools/Tools/GradientTool.cs:51
+#: ../Pinta.Tools/Tools/GradientTool.cs:175
 msgid "Gradient"
 msgstr "Väriliukuma"
 
@@ -1182,15 +1186,15 @@ msgstr "Vaaleus"
 msgid "Line/Curve"
 msgstr "Viiva/Käyrä"
 
-#: ../Pinta.Tools/Tools/GradientTool.cs:162
+#: ../Pinta.Tools/Tools/GradientTool.cs:183
 msgid "Linear Diamond Gradient"
 msgstr "Timantti"
 
-#: ../Pinta.Tools/Tools/GradientTool.cs:160
+#: ../Pinta.Tools/Tools/GradientTool.cs:181
 msgid "Linear Gradient"
 msgstr "Lineaari"
 
-#: ../Pinta.Tools/Tools/GradientTool.cs:161
+#: ../Pinta.Tools/Tools/GradientTool.cs:182
 msgid "Linear Reflected Gradient"
 msgstr "Lineaari (Peilattu)"
 
@@ -1233,6 +1237,10 @@ msgstr "Yhdistä taso alas"
 #, csharp-format
 msgid "Missing: {0} v{1}"
 msgstr "Puuttuu: {0} v{1}"
+
+#: ../Pinta.Tools/Tools/GradientTool.cs:194
+msgid "Mode"
+msgstr "Tila"
 
 #: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:880
 msgid "Modified"
@@ -1586,10 +1594,6 @@ msgstr "Porrasta"
 msgid "Power"
 msgstr "Voima"
 
-#: ../Pinta/Dialogs/AboutDialog.cs:194
-msgid "Powered by Mono:"
-msgstr "Käyttää Monoa:"
-
 #: ../Pinta/Dialogs/NewImageDialog.cs:194
 msgid "Preset:"
 msgstr "Esiasetus:"
@@ -1598,7 +1602,7 @@ msgstr "Esiasetus:"
 msgid "Preview"
 msgstr "Esikatsele"
 
-#: ../Pinta/Dialogs/AboutDialog.cs:159
+#: ../Pinta/Dialogs/AboutDialog.cs:154
 msgid "Previous contributors:"
 msgstr "Aiemmat osallistujat:"
 
@@ -1637,7 +1641,7 @@ msgstr "RGB"
 msgid "Radial Blur"
 msgstr "Säteittäinen sumennus"
 
-#: ../Pinta.Tools/Tools/GradientTool.cs:163
+#: ../Pinta.Tools/Tools/GradientTool.cs:184
 msgid "Radial Gradient"
 msgstr "Säteittäinen"
 
@@ -1725,7 +1729,7 @@ msgstr "Nimeä taso uudelleen"
 msgid "Render"
 msgstr "Renderointi"
 
-#: ../Pinta.Core/Managers/LivePreviewManager.cs:224
+#: ../Pinta.Core/Managers/LivePreviewManager.cs:223
 msgid "Rendering Effect"
 msgstr "Renderointi"
 
@@ -1937,7 +1941,7 @@ msgstr "Näytä viesti ja poistu."
 
 #: ../Pinta.Core/Actions/ViewActions.cs:150
 msgid "Show/Hide"
-msgstr ""
+msgstr "Näytä/piilota"
 
 #: ../Pinta.Tools/Tools/ColorPickerTool.cs:225
 msgid "Single Pixel"
@@ -2138,9 +2142,13 @@ msgstr "Siirtokartta"
 msgid "Translate This Application"
 msgstr "Käännä tämä ohjelma"
 
-#: ../Pinta/Dialogs/AboutDialog.cs:173
+#: ../Pinta/Dialogs/AboutDialog.cs:168
 msgid "Translated by:"
 msgstr "Käännöksen tehnyt:"
+
+#: ../Pinta.Tools/Tools/GradientTool.cs:201
+msgid "Transparency Mode"
+msgstr "Läpinäkyvyystila"
 
 #: ../Pinta/Dialogs/NewImageDialog.cs:289
 #: ../Pinta.Effects/Effects/WarpEffect.cs:29
@@ -2238,7 +2246,7 @@ msgstr ""
 "Käytä pientä laatua tarkastamiseen, pieniin kuviin ja pieniin kulmiin. Käytä "
 "suurta laatua lopullisiin kuviin, isoihin kuviin ja suuriin kulmiin."
 
-#: ../Pinta/Dialogs/AboutDialog.cs:186
+#: ../Pinta/Dialogs/AboutDialog.cs:181
 msgid "Using some icons from:"
 msgstr "Käyttää kuvakkeita kokoelmista:"
 
@@ -2247,7 +2255,7 @@ msgstr "Käyttää kuvakkeita kokoelmista:"
 msgid "Version"
 msgstr "Versio"
 
-#: ../Pinta/Dialogs/AboutDialog.cs:306
+#: ../Pinta/Dialogs/AboutDialog.cs:277
 msgid "Version Info"
 msgstr "Versiotiedot"
 
@@ -2387,7 +2395,7 @@ msgstr "renderointiin käytettävät säikeet"
 msgid "pixels"
 msgstr "pikseliä"
 
-#: ../Pinta/Dialogs/AboutDialog.cs:170
+#: ../Pinta/Dialogs/AboutDialog.cs:165
 msgid "translator-credits"
 msgstr ""
 "Launchpad Contributions:\n"
@@ -2453,6 +2461,9 @@ msgstr "{0} %"
 
 #~ msgid "Xor (Ctrl + Right Click)"
 #~ msgstr "Xor (Ctrl + Oikea hiiri)"
+
+#~ msgid "Powered by Mono:"
+#~ msgstr "Käyttää Monoa:"
 
 #~ msgid "Hide"
 #~ msgstr "Piilota"

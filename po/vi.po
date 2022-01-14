@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: pinta\n"
 "Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
-"POT-Creation-Date: 2022-01-03 00:34-0500\n"
+"POT-Creation-Date: 2022-01-11 23:44-0500\n"
 "PO-Revision-Date: 2016-06-06 03:47+0000\n"
 "Last-Translator: Tu Nguyen <minhtuvn@gmail.com>\n"
 "Language-Team: Vietnamese <vi@li.org>\n"
@@ -15,8 +15,8 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=1; plural=0;\n"
-"X-Launchpad-Export-Date: 2022-01-07 03:28+0000\n"
-"X-Generator: Launchpad (build 1682fd44eec4f62371f0bed122a83482daf08e23)\n"
+"X-Launchpad-Export-Date: 2022-01-14 01:08+0000\n"
+"X-Generator: Launchpad (build 0072e2709f85567cc6c8d33e98acde9fcc09f491)\n"
 
 #: Mono.Addins.Gui/Mono.Addins.Gui/InstallDialog.cs:142
 msgid " (in user directory)"
@@ -65,7 +65,7 @@ msgstr "Phần mở rộng"
 msgid "About"
 msgstr "Giới thiệu"
 
-#: ../Pinta/Dialogs/AboutDialog.cs:289
+#: ../Pinta/Dialogs/AboutDialog.cs:260
 msgid "About Pinta"
 msgstr "Giới thiệu Pinta"
 
@@ -198,7 +198,7 @@ msgstr "Màu nền"
 msgid "Background:"
 msgstr "Ảnh nền"
 
-#: ../Pinta/Dialogs/AboutDialog.cs:179
+#: ../Pinta/Dialogs/AboutDialog.cs:174
 msgid "Based on the work of Paint.NET:"
 msgstr "Dựa trên chương trình Paint.NET:"
 
@@ -348,7 +348,7 @@ msgstr ""
 "Kích chuột vào kéo để lựa chọn theo hình ê-líp. Giữ Shift để tạo thành hình "
 "tròn."
 
-#: ../Pinta.Tools/Tools/GradientTool.cs:52
+#: ../Pinta.Tools/Tools/GradientTool.cs:53
 msgid ""
 "Click and drag to draw gradient from primary to secondary color.  Right "
 "click to reverse."
@@ -436,6 +436,10 @@ msgstr "Màu phơi sáng"
 msgid "Color Dodge"
 msgstr "Màu chắn sáng"
 
+#: ../Pinta.Tools/Tools/GradientTool.cs:200
+msgid "Color Mode"
+msgstr ""
+
 #: ../Pinta.Tools/Tools/ColorPickerTool.cs:52
 msgid "Color Picker"
 msgstr "Chọn màu"
@@ -452,7 +456,7 @@ msgstr "Độ bão hòa màu"
 msgid "Coloring"
 msgstr "Tô màu"
 
-#: ../Pinta.Tools/Tools/GradientTool.cs:164
+#: ../Pinta.Tools/Tools/GradientTool.cs:185
 msgid "Conical Gradient"
 msgstr "Dài màu hình nón"
 
@@ -469,7 +473,7 @@ msgstr "Kế nhau"
 msgid "Contrast"
 msgstr "Độ tương phản"
 
-#: ../Pinta/Dialogs/AboutDialog.cs:147
+#: ../Pinta/Dialogs/AboutDialog.cs:142
 msgid "Contributors to this release:"
 msgstr "Đóng góp cho bản phát hành này:"
 
@@ -806,8 +810,8 @@ msgstr "Toàn cục"
 msgid "Glow"
 msgstr "Tỏa sáng"
 
-#: ../Pinta.Tools/Tools/GradientTool.cs:50
-#: ../Pinta.Tools/Tools/GradientTool.cs:154
+#: ../Pinta.Tools/Tools/GradientTool.cs:51
+#: ../Pinta.Tools/Tools/GradientTool.cs:175
 msgid "Gradient"
 msgstr "Dải màu"
 
@@ -1179,15 +1183,15 @@ msgstr "Độ nhạt"
 msgid "Line/Curve"
 msgstr "Đường thẳng/cong"
 
-#: ../Pinta.Tools/Tools/GradientTool.cs:162
+#: ../Pinta.Tools/Tools/GradientTool.cs:183
 msgid "Linear Diamond Gradient"
 msgstr "Dải màu kim cương tuyến tính"
 
-#: ../Pinta.Tools/Tools/GradientTool.cs:160
+#: ../Pinta.Tools/Tools/GradientTool.cs:181
 msgid "Linear Gradient"
 msgstr "Dải màu tuyến tính"
 
-#: ../Pinta.Tools/Tools/GradientTool.cs:161
+#: ../Pinta.Tools/Tools/GradientTool.cs:182
 msgid "Linear Reflected Gradient"
 msgstr "Dải màu phản chiếu tuyến tính"
 
@@ -1230,6 +1234,10 @@ msgstr "Ghép lớp xuống"
 #, csharp-format
 msgid "Missing: {0} v{1}"
 msgstr "Thiếu: {0} v{1}"
+
+#: ../Pinta.Tools/Tools/GradientTool.cs:194
+msgid "Mode"
+msgstr ""
 
 #: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:880
 msgid "Modified"
@@ -1577,10 +1585,6 @@ msgstr "Làm áp phích"
 msgid "Power"
 msgstr "Cường độ"
 
-#: ../Pinta/Dialogs/AboutDialog.cs:194
-msgid "Powered by Mono:"
-msgstr "Được trang bị bởi Mono:"
-
 #: ../Pinta/Dialogs/NewImageDialog.cs:194
 msgid "Preset:"
 msgstr "Chỉnh sẵn"
@@ -1589,7 +1593,7 @@ msgstr "Chỉnh sẵn"
 msgid "Preview"
 msgstr ""
 
-#: ../Pinta/Dialogs/AboutDialog.cs:159
+#: ../Pinta/Dialogs/AboutDialog.cs:154
 msgid "Previous contributors:"
 msgstr "Đóng góp trước đây:"
 
@@ -1628,7 +1632,7 @@ msgstr "RGB"
 msgid "Radial Blur"
 msgstr "Che mờ xuyên tâm"
 
-#: ../Pinta.Tools/Tools/GradientTool.cs:163
+#: ../Pinta.Tools/Tools/GradientTool.cs:184
 msgid "Radial Gradient"
 msgstr "Dải màu đối xứng"
 
@@ -1716,7 +1720,7 @@ msgstr "Đổi tên lớp"
 msgid "Render"
 msgstr "Dựng hình"
 
-#: ../Pinta.Core/Managers/LivePreviewManager.cs:224
+#: ../Pinta.Core/Managers/LivePreviewManager.cs:223
 msgid "Rendering Effect"
 msgstr "Hiệu ứng dựng hình"
 
@@ -2129,9 +2133,13 @@ msgstr ""
 msgid "Translate This Application"
 msgstr "Dịch ứng dụng này"
 
-#: ../Pinta/Dialogs/AboutDialog.cs:173
+#: ../Pinta/Dialogs/AboutDialog.cs:168
 msgid "Translated by:"
 msgstr "Dịch bởi:"
+
+#: ../Pinta.Tools/Tools/GradientTool.cs:201
+msgid "Transparency Mode"
+msgstr ""
 
 #: ../Pinta/Dialogs/NewImageDialog.cs:289
 #: ../Pinta.Effects/Effects/WarpEffect.cs:29
@@ -2227,7 +2235,7 @@ msgstr ""
 "Sử dụng chất lượng thấp cho bản xem thử, hình nhỏ, và góc nhỏ. Sử dụng chất "
 "lượng cao cho hình lớn, hoàn chỉnh và góc lớn."
 
-#: ../Pinta/Dialogs/AboutDialog.cs:186
+#: ../Pinta/Dialogs/AboutDialog.cs:181
 msgid "Using some icons from:"
 msgstr "Dùng một số hình biểu tượng từ:"
 
@@ -2236,7 +2244,7 @@ msgstr "Dùng một số hình biểu tượng từ:"
 msgid "Version"
 msgstr "Phiên bản"
 
-#: ../Pinta/Dialogs/AboutDialog.cs:306
+#: ../Pinta/Dialogs/AboutDialog.cs:277
 msgid "Version Info"
 msgstr "Thông tin về phiên bản"
 
@@ -2372,7 +2380,7 @@ msgstr "số tuyến được dùng để dựng hình"
 msgid "pixels"
 msgstr "điểm ảnh"
 
-#: ../Pinta/Dialogs/AboutDialog.cs:170
+#: ../Pinta/Dialogs/AboutDialog.cs:165
 msgid "translator-credits"
 msgstr ""
 "Launchpad Contributions:\n"
@@ -2461,3 +2469,6 @@ msgstr "{0}%"
 
 #~ msgid "Xor (Ctrl + Right Click)"
 #~ msgstr "Xor (Ctrl + Chuột phải)"
+
+#~ msgid "Powered by Mono:"
+#~ msgstr "Được trang bị bởi Mono:"
