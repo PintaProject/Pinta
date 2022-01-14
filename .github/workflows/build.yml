@@ -43,7 +43,7 @@ jobs:
       uses: actions/upload-artifact@v2
       with:
         name: Pinta-linux.zip
-        path: pinta-2.0.1.zip
+        path: pinta-2.1.zip
         if-no-files-found: error
 
   build-macos:
