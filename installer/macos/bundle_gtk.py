@@ -9,9 +9,13 @@ import subprocess
 from stat import S_IREAD, S_IRGRP, S_IROTH, S_IWUSR
 
 PREFIX = "/usr/local"
+
+# Grab all dependencies of libgtk, plus pixbuf loader plugins.
 GTK_LIB = "/usr/local/lib/libgtk-3.dylib"
 RSVG_LIB = "/usr/local/lib/librsvg-2.2.dylib"
-ROOT_LIBS = [GTK_LIB, RSVG_LIB]
+TIFF_LIB = "/usr/local/lib/libtiff.5.dylib"
+ROOT_LIBS = [GTK_LIB, RSVG_LIB, TIFF_LIB]
+
 ADWAITA_THEME = "/usr/local/share/icons/Adwaita/index.theme"
 PIXBUF_LOADERS = "lib/gdk-pixbuf-2.0/2.10.0"
 IM_MODULES = "lib/gtk-3.0/3.0.0/immodules"
