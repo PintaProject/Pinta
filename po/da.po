@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: pinta\n"
 "Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
-"POT-Creation-Date: 2022-01-03 00:34-0500\n"
+"POT-Creation-Date: 2022-01-11 23:44-0500\n"
 "PO-Revision-Date: 2016-10-25 09:32+0000\n"
 "Last-Translator: Alan Mortensen <alanmortensen.am@gmail.com>\n"
 "Language-Team: Danish <da@li.org>\n"
@@ -15,8 +15,8 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Launchpad-Export-Date: 2022-01-07 03:28+0000\n"
-"X-Generator: Launchpad (build 1682fd44eec4f62371f0bed122a83482daf08e23)\n"
+"X-Launchpad-Export-Date: 2022-01-14 01:08+0000\n"
+"X-Generator: Launchpad (build 0072e2709f85567cc6c8d33e98acde9fcc09f491)\n"
 
 #: Mono.Addins.Gui/Mono.Addins.Gui/InstallDialog.cs:142
 msgid " (in user directory)"
@@ -65,7 +65,7 @@ msgstr "_Udvidelsesmoduler"
 msgid "About"
 msgstr "Om"
 
-#: ../Pinta/Dialogs/AboutDialog.cs:289
+#: ../Pinta/Dialogs/AboutDialog.cs:260
 msgid "About Pinta"
 msgstr "Om Pinta"
 
@@ -198,7 +198,7 @@ msgstr "Baggrundsfarve"
 msgid "Background:"
 msgstr "Baggrund:"
 
-#: ../Pinta/Dialogs/AboutDialog.cs:179
+#: ../Pinta/Dialogs/AboutDialog.cs:174
 msgid "Based on the work of Paint.NET:"
 msgstr "Baseret på Paint.NET:"
 
@@ -348,7 +348,7 @@ msgstr ""
 "Klik og træk for at tegne en elliptisk markering. Hold skift-tasten nede for "
 "at tegne en cirkel."
 
-#: ../Pinta.Tools/Tools/GradientTool.cs:52
+#: ../Pinta.Tools/Tools/GradientTool.cs:53
 msgid ""
 "Click and drag to draw gradient from primary to secondary color.  Right "
 "click to reverse."
@@ -436,6 +436,10 @@ msgstr "Farvebrænding"
 msgid "Color Dodge"
 msgstr "Farveundvigelse"
 
+#: ../Pinta.Tools/Tools/GradientTool.cs:200
+msgid "Color Mode"
+msgstr ""
+
 #: ../Pinta.Tools/Tools/ColorPickerTool.cs:52
 msgid "Color Picker"
 msgstr "Farvevælger"
@@ -452,7 +456,7 @@ msgstr "Farvemætning"
 msgid "Coloring"
 msgstr "Farvelæg"
 
-#: ../Pinta.Tools/Tools/GradientTool.cs:164
+#: ../Pinta.Tools/Tools/GradientTool.cs:185
 msgid "Conical Gradient"
 msgstr "Konisk farveovergang"
 
@@ -469,7 +473,7 @@ msgstr "Sammenhængende"
 msgid "Contrast"
 msgstr "Kontrast"
 
-#: ../Pinta/Dialogs/AboutDialog.cs:147
+#: ../Pinta/Dialogs/AboutDialog.cs:142
 msgid "Contributors to this release:"
 msgstr "Bidragydere til denne version:"
 
@@ -806,8 +810,8 @@ msgstr "Global"
 msgid "Glow"
 msgstr "Glød"
 
-#: ../Pinta.Tools/Tools/GradientTool.cs:50
-#: ../Pinta.Tools/Tools/GradientTool.cs:154
+#: ../Pinta.Tools/Tools/GradientTool.cs:51
+#: ../Pinta.Tools/Tools/GradientTool.cs:175
 msgid "Gradient"
 msgstr "Farveovergang"
 
@@ -1182,15 +1186,15 @@ msgstr "Lysstyrke"
 msgid "Line/Curve"
 msgstr "Linje/kurve"
 
-#: ../Pinta.Tools/Tools/GradientTool.cs:162
+#: ../Pinta.Tools/Tools/GradientTool.cs:183
 msgid "Linear Diamond Gradient"
 msgstr "Lineær diamant farveovergang"
 
-#: ../Pinta.Tools/Tools/GradientTool.cs:160
+#: ../Pinta.Tools/Tools/GradientTool.cs:181
 msgid "Linear Gradient"
 msgstr "Lineær farveovergang"
 
-#: ../Pinta.Tools/Tools/GradientTool.cs:161
+#: ../Pinta.Tools/Tools/GradientTool.cs:182
 msgid "Linear Reflected Gradient"
 msgstr "Lineær afspejlet farveovergang"
 
@@ -1233,6 +1237,10 @@ msgstr "Forén lag nedad"
 #, csharp-format
 msgid "Missing: {0} v{1}"
 msgstr "Manglende: {0} v{1}"
+
+#: ../Pinta.Tools/Tools/GradientTool.cs:194
+msgid "Mode"
+msgstr ""
 
 #: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:880
 msgid "Modified"
@@ -1580,10 +1588,6 @@ msgstr "Posterisér"
 msgid "Power"
 msgstr "Kraft"
 
-#: ../Pinta/Dialogs/AboutDialog.cs:194
-msgid "Powered by Mono:"
-msgstr "Drevet af Mono:"
-
 #: ../Pinta/Dialogs/NewImageDialog.cs:194
 msgid "Preset:"
 msgstr "Forudindstilling:"
@@ -1592,7 +1596,7 @@ msgstr "Forudindstilling:"
 msgid "Preview"
 msgstr "Forhåndsvisning"
 
-#: ../Pinta/Dialogs/AboutDialog.cs:159
+#: ../Pinta/Dialogs/AboutDialog.cs:154
 msgid "Previous contributors:"
 msgstr "Tidligere bidragydere:"
 
@@ -1631,7 +1635,7 @@ msgstr "RGB"
 msgid "Radial Blur"
 msgstr "Radial sløring"
 
-#: ../Pinta.Tools/Tools/GradientTool.cs:163
+#: ../Pinta.Tools/Tools/GradientTool.cs:184
 msgid "Radial Gradient"
 msgstr "Radial farveovergang"
 
@@ -1719,7 +1723,7 @@ msgstr "Omdøb lag"
 msgid "Render"
 msgstr "Optegne"
 
-#: ../Pinta.Core/Managers/LivePreviewManager.cs:224
+#: ../Pinta.Core/Managers/LivePreviewManager.cs:223
 msgid "Rendering Effect"
 msgstr "Optegne-effekt"
 
@@ -2140,9 +2144,13 @@ msgstr "Overfør kort"
 msgid "Translate This Application"
 msgstr "Oversæt dette program"
 
-#: ../Pinta/Dialogs/AboutDialog.cs:173
+#: ../Pinta/Dialogs/AboutDialog.cs:168
 msgid "Translated by:"
 msgstr "Oversat af:"
+
+#: ../Pinta.Tools/Tools/GradientTool.cs:201
+msgid "Transparency Mode"
+msgstr ""
 
 #: ../Pinta/Dialogs/NewImageDialog.cs:289
 #: ../Pinta.Effects/Effects/WarpEffect.cs:29
@@ -2238,7 +2246,7 @@ msgstr ""
 "Brug lav kvalitet til forhåndsvisning, små billeder og små vinkler. Brug høj "
 "kvalitet for afsluttende kvalitet, store billeder og store vinkler."
 
-#: ../Pinta/Dialogs/AboutDialog.cs:186
+#: ../Pinta/Dialogs/AboutDialog.cs:181
 msgid "Using some icons from:"
 msgstr "Bruger nogle ikoner fra:"
 
@@ -2247,7 +2255,7 @@ msgstr "Bruger nogle ikoner fra:"
 msgid "Version"
 msgstr "Version"
 
-#: ../Pinta/Dialogs/AboutDialog.cs:306
+#: ../Pinta/Dialogs/AboutDialog.cs:277
 msgid "Version Info"
 msgstr "VersionsInfo"
 
@@ -2383,7 +2391,7 @@ msgstr "antal tråde ved rendering"
 msgid "pixels"
 msgstr "billedpunkter"
 
-#: ../Pinta/Dialogs/AboutDialog.cs:170
+#: ../Pinta/Dialogs/AboutDialog.cs:165
 msgid "translator-credits"
 msgstr ""
 "Launchpad Contributions:\n"
@@ -2444,6 +2452,9 @@ msgstr "{0}%"
 
 #~ msgid "Xor (Ctrl + Right Click)"
 #~ msgstr "Xor (⊻) (Ctrl + Højreklik)"
+
+#~ msgid "Powered by Mono:"
+#~ msgstr "Drevet af Mono:"
 
 #~ msgid ""
 #~ "Left click to draw a shape with the primary color.\n"

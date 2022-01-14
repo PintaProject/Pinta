@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: pinta\n"
 "Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
-"POT-Creation-Date: 2022-01-03 00:34-0500\n"
+"POT-Creation-Date: 2022-01-11 23:44-0500\n"
 "PO-Revision-Date: 2021-02-16 22:18+0000\n"
 "Last-Translator: Michel Smits <Unknown>\n"
 "Language-Team: Dutch <nl@li.org>\n"
@@ -15,8 +15,8 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Launchpad-Export-Date: 2022-01-07 03:28+0000\n"
-"X-Generator: Launchpad (build 1682fd44eec4f62371f0bed122a83482daf08e23)\n"
+"X-Launchpad-Export-Date: 2022-01-14 01:08+0000\n"
+"X-Generator: Launchpad (build 0072e2709f85567cc6c8d33e98acde9fcc09f491)\n"
 
 #: Mono.Addins.Gui/Mono.Addins.Gui/InstallDialog.cs:142
 msgid " (in user directory)"
@@ -65,7 +65,7 @@ msgstr "Invoegingen"
 msgid "About"
 msgstr "Over"
 
-#: ../Pinta/Dialogs/AboutDialog.cs:289
+#: ../Pinta/Dialogs/AboutDialog.cs:260
 msgid "About Pinta"
 msgstr "Over Pinta"
 
@@ -198,7 +198,7 @@ msgstr "Achtergrondkleur"
 msgid "Background:"
 msgstr "Achtergrond:"
 
-#: ../Pinta/Dialogs/AboutDialog.cs:179
+#: ../Pinta/Dialogs/AboutDialog.cs:174
 msgid "Based on the work of Paint.NET:"
 msgstr "Gebaseerd op het werk aan Paint.NET"
 
@@ -348,7 +348,7 @@ msgstr ""
 "Klik en sleep om een ellips te tekenen. Houd shift ingedrukt om een cirkel "
 "te tekenen."
 
-#: ../Pinta.Tools/Tools/GradientTool.cs:52
+#: ../Pinta.Tools/Tools/GradientTool.cs:53
 msgid ""
 "Click and drag to draw gradient from primary to secondary color.  Right "
 "click to reverse."
@@ -436,6 +436,10 @@ msgstr "Kleur branden"
 msgid "Color Dodge"
 msgstr "Kleur ontwijken"
 
+#: ../Pinta.Tools/Tools/GradientTool.cs:200
+msgid "Color Mode"
+msgstr ""
+
 #: ../Pinta.Tools/Tools/ColorPickerTool.cs:52
 msgid "Color Picker"
 msgstr "Pipet"
@@ -452,7 +456,7 @@ msgstr "Kleurverzadiging"
 msgid "Coloring"
 msgstr "Inkleuren"
 
-#: ../Pinta.Tools/Tools/GradientTool.cs:164
+#: ../Pinta.Tools/Tools/GradientTool.cs:185
 msgid "Conical Gradient"
 msgstr "Conische gradiënt"
 
@@ -469,7 +473,7 @@ msgstr "Aangrenzend"
 msgid "Contrast"
 msgstr "Contrast"
 
-#: ../Pinta/Dialogs/AboutDialog.cs:147
+#: ../Pinta/Dialogs/AboutDialog.cs:142
 msgid "Contributors to this release:"
 msgstr "Bijdragers aan deze versie:"
 
@@ -806,8 +810,8 @@ msgstr "Globaal"
 msgid "Glow"
 msgstr "Gloed"
 
-#: ../Pinta.Tools/Tools/GradientTool.cs:50
-#: ../Pinta.Tools/Tools/GradientTool.cs:154
+#: ../Pinta.Tools/Tools/GradientTool.cs:51
+#: ../Pinta.Tools/Tools/GradientTool.cs:175
 msgid "Gradient"
 msgstr "Gradiënt"
 
@@ -1181,15 +1185,15 @@ msgstr "Helderheid"
 msgid "Line/Curve"
 msgstr "Lijn/kromme"
 
-#: ../Pinta.Tools/Tools/GradientTool.cs:162
+#: ../Pinta.Tools/Tools/GradientTool.cs:183
 msgid "Linear Diamond Gradient"
 msgstr "Lineaire diamantgradiënt"
 
-#: ../Pinta.Tools/Tools/GradientTool.cs:160
+#: ../Pinta.Tools/Tools/GradientTool.cs:181
 msgid "Linear Gradient"
 msgstr "Lineaire gradiënt"
 
-#: ../Pinta.Tools/Tools/GradientTool.cs:161
+#: ../Pinta.Tools/Tools/GradientTool.cs:182
 msgid "Linear Reflected Gradient"
 msgstr "Lineair gereflecteerde gradiënt"
 
@@ -1232,6 +1236,10 @@ msgstr "Laag omlaag samenvoegen"
 #, csharp-format
 msgid "Missing: {0} v{1}"
 msgstr "Ontbrekend: {0} v{1}"
+
+#: ../Pinta.Tools/Tools/GradientTool.cs:194
+msgid "Mode"
+msgstr ""
 
 #: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:880
 msgid "Modified"
@@ -1585,10 +1593,6 @@ msgstr "Posterize"
 msgid "Power"
 msgstr "Kracht"
 
-#: ../Pinta/Dialogs/AboutDialog.cs:194
-msgid "Powered by Mono:"
-msgstr "Gerealiseerd door Mono:"
-
 #: ../Pinta/Dialogs/NewImageDialog.cs:194
 msgid "Preset:"
 msgstr "Voorinstelling:"
@@ -1597,7 +1601,7 @@ msgstr "Voorinstelling:"
 msgid "Preview"
 msgstr "Voorbeeldweergave"
 
-#: ../Pinta/Dialogs/AboutDialog.cs:159
+#: ../Pinta/Dialogs/AboutDialog.cs:154
 msgid "Previous contributors:"
 msgstr "Vorige bijdragers"
 
@@ -1636,7 +1640,7 @@ msgstr "RGB"
 msgid "Radial Blur"
 msgstr "Radiale vervaging"
 
-#: ../Pinta.Tools/Tools/GradientTool.cs:163
+#: ../Pinta.Tools/Tools/GradientTool.cs:184
 msgid "Radial Gradient"
 msgstr "Radiale gradiënt"
 
@@ -1724,7 +1728,7 @@ msgstr "Laag hernoemen"
 msgid "Render"
 msgstr "Renderen"
 
-#: ../Pinta.Core/Managers/LivePreviewManager.cs:224
+#: ../Pinta.Core/Managers/LivePreviewManager.cs:223
 msgid "Rendering Effect"
 msgstr "Render-effect"
 
@@ -2144,9 +2148,13 @@ msgstr "Transferkaart"
 msgid "Translate This Application"
 msgstr "Deze applicatie vertalen"
 
-#: ../Pinta/Dialogs/AboutDialog.cs:173
+#: ../Pinta/Dialogs/AboutDialog.cs:168
 msgid "Translated by:"
 msgstr "Vertaald door:"
+
+#: ../Pinta.Tools/Tools/GradientTool.cs:201
+msgid "Transparency Mode"
+msgstr ""
 
 #: ../Pinta/Dialogs/NewImageDialog.cs:289
 #: ../Pinta.Effects/Effects/WarpEffect.cs:29
@@ -2244,7 +2252,7 @@ msgstr ""
 "Gebruik lage kwaliteit voor previews en kleine afbeelding. Gebruik hoge "
 "kwaliteit voor uiteindelijke versies en grote afbeeldingen."
 
-#: ../Pinta/Dialogs/AboutDialog.cs:186
+#: ../Pinta/Dialogs/AboutDialog.cs:181
 msgid "Using some icons from:"
 msgstr "Met gebruikmaking van iconen van:"
 
@@ -2253,7 +2261,7 @@ msgstr "Met gebruikmaking van iconen van:"
 msgid "Version"
 msgstr "Versie"
 
-#: ../Pinta/Dialogs/AboutDialog.cs:306
+#: ../Pinta/Dialogs/AboutDialog.cs:277
 msgid "Version Info"
 msgstr "Versie Info"
 
@@ -2389,7 +2397,7 @@ msgstr "Aantal te gebruiken threads voor renderen"
 msgid "pixels"
 msgstr "pixels"
 
-#: ../Pinta/Dialogs/AboutDialog.cs:170
+#: ../Pinta/Dialogs/AboutDialog.cs:165
 msgid "translator-credits"
 msgstr ""
 "Launchpad Contributions:\n"
@@ -2456,6 +2464,9 @@ msgstr "{0}%"
 
 #~ msgid "No tool selected."
 #~ msgstr "Geen gereedschap geselecteerd"
+
+#~ msgid "Powered by Mono:"
+#~ msgstr "Gerealiseerd door Mono:"
 
 #~ msgid ""
 #~ "Left click to draw a shape with the primary color.\n"

@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: pinta\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2022-01-03 00:34-0500\n"
+"POT-Creation-Date: 2022-01-11 23:44-0500\n"
 "PO-Revision-Date: 2021-12-15 04:00+0000\n"
 "Last-Translator: Åke Engelbrektson <Unknown>\n"
 "Language-Team: \n"
@@ -15,8 +15,8 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Launchpad-Export-Date: 2022-01-07 03:28+0000\n"
-"X-Generator: Launchpad (build 1682fd44eec4f62371f0bed122a83482daf08e23)\n"
+"X-Launchpad-Export-Date: 2022-01-14 01:08+0000\n"
+"X-Generator: Launchpad (build 0072e2709f85567cc6c8d33e98acde9fcc09f491)\n"
 "Language: sv\n"
 
 #: Mono.Addins.Gui/Mono.Addins.Gui/InstallDialog.cs:142
@@ -66,7 +66,7 @@ msgstr "T_illägg"
 msgid "About"
 msgstr "Om"
 
-#: ../Pinta/Dialogs/AboutDialog.cs:289
+#: ../Pinta/Dialogs/AboutDialog.cs:260
 msgid "About Pinta"
 msgstr "Om Pinta"
 
@@ -199,7 +199,7 @@ msgstr "Bakgrundsfärg"
 msgid "Background:"
 msgstr "Bakgrund:"
 
-#: ../Pinta/Dialogs/AboutDialog.cs:179
+#: ../Pinta/Dialogs/AboutDialog.cs:174
 msgid "Based on the work of Paint.NET:"
 msgstr "Baserat på arbetet med Paint.NET:"
 
@@ -347,7 +347,7 @@ msgid ""
 "circle."
 msgstr "Klicka och dra upp en elliptisk figur. Håll ner Shift för en cirkel."
 
-#: ../Pinta.Tools/Tools/GradientTool.cs:52
+#: ../Pinta.Tools/Tools/GradientTool.cs:53
 msgid ""
 "Click and drag to draw gradient from primary to secondary color.  Right "
 "click to reverse."
@@ -435,6 +435,10 @@ msgstr "Efterbelys färg"
 msgid "Color Dodge"
 msgstr "Färgskugga"
 
+#: ../Pinta.Tools/Tools/GradientTool.cs:200
+msgid "Color Mode"
+msgstr ""
+
 #: ../Pinta.Tools/Tools/ColorPickerTool.cs:52
 msgid "Color Picker"
 msgstr "Färghämtare"
@@ -451,7 +455,7 @@ msgstr "Färgmättnad"
 msgid "Coloring"
 msgstr "Färgläggning"
 
-#: ../Pinta.Tools/Tools/GradientTool.cs:164
+#: ../Pinta.Tools/Tools/GradientTool.cs:185
 msgid "Conical Gradient"
 msgstr "Konisk gradient"
 
@@ -468,7 +472,7 @@ msgstr "Sammanhängande"
 msgid "Contrast"
 msgstr "Kontrast"
 
-#: ../Pinta/Dialogs/AboutDialog.cs:147
+#: ../Pinta/Dialogs/AboutDialog.cs:142
 msgid "Contributors to this release:"
 msgstr "Bidragsgivare till denna utgåva:"
 
@@ -805,8 +809,8 @@ msgstr "Global"
 msgid "Glow"
 msgstr "Glöd"
 
-#: ../Pinta.Tools/Tools/GradientTool.cs:50
-#: ../Pinta.Tools/Tools/GradientTool.cs:154
+#: ../Pinta.Tools/Tools/GradientTool.cs:51
+#: ../Pinta.Tools/Tools/GradientTool.cs:175
 msgid "Gradient"
 msgstr "Tonad"
 
@@ -1211,15 +1215,15 @@ msgstr "Ljus"
 msgid "Line/Curve"
 msgstr "Linje/Kurva"
 
-#: ../Pinta.Tools/Tools/GradientTool.cs:162
+#: ../Pinta.Tools/Tools/GradientTool.cs:183
 msgid "Linear Diamond Gradient"
 msgstr "Linjär diamantgradient"
 
-#: ../Pinta.Tools/Tools/GradientTool.cs:160
+#: ../Pinta.Tools/Tools/GradientTool.cs:181
 msgid "Linear Gradient"
 msgstr "Linjär gradient"
 
-#: ../Pinta.Tools/Tools/GradientTool.cs:161
+#: ../Pinta.Tools/Tools/GradientTool.cs:182
 msgid "Linear Reflected Gradient"
 msgstr "Linjär reflekterad gradient"
 
@@ -1262,6 +1266,10 @@ msgstr "Sammanfoga lager nedåt"
 #, csharp-format
 msgid "Missing: {0} v{1}"
 msgstr "Saknar: {0} v{1}"
+
+#: ../Pinta.Tools/Tools/GradientTool.cs:194
+msgid "Mode"
+msgstr ""
 
 #: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:880
 msgid "Modified"
@@ -1614,10 +1622,6 @@ msgstr "Färgreduktion"
 msgid "Power"
 msgstr "Styrka"
 
-#: ../Pinta/Dialogs/AboutDialog.cs:194
-msgid "Powered by Mono:"
-msgstr "Drivs av Mono:"
-
 #: ../Pinta/Dialogs/NewImageDialog.cs:194
 msgid "Preset:"
 msgstr "Förinställning:"
@@ -1626,7 +1630,7 @@ msgstr "Förinställning:"
 msgid "Preview"
 msgstr "Förhandsgranska"
 
-#: ../Pinta/Dialogs/AboutDialog.cs:159
+#: ../Pinta/Dialogs/AboutDialog.cs:154
 msgid "Previous contributors:"
 msgstr "Föregående bidragsgivare:"
 
@@ -1665,7 +1669,7 @@ msgstr "RGB"
 msgid "Radial Blur"
 msgstr "Radiell oskärpa"
 
-#: ../Pinta.Tools/Tools/GradientTool.cs:163
+#: ../Pinta.Tools/Tools/GradientTool.cs:184
 msgid "Radial Gradient"
 msgstr "Radiell gradient"
 
@@ -1753,7 +1757,7 @@ msgstr "Döp om lager"
 msgid "Render"
 msgstr "Rendera"
 
-#: ../Pinta.Core/Managers/LivePreviewManager.cs:224
+#: ../Pinta.Core/Managers/LivePreviewManager.cs:223
 msgid "Rendering Effect"
 msgstr "Renderingseffekt"
 
@@ -2170,9 +2174,13 @@ msgstr "Överföringskarta"
 msgid "Translate This Application"
 msgstr "Översätt detta program"
 
-#: ../Pinta/Dialogs/AboutDialog.cs:173
+#: ../Pinta/Dialogs/AboutDialog.cs:168
 msgid "Translated by:"
 msgstr "Översatt av:"
+
+#: ../Pinta.Tools/Tools/GradientTool.cs:201
+msgid "Transparency Mode"
+msgstr ""
 
 #: ../Pinta/Dialogs/NewImageDialog.cs:289
 #: ../Pinta.Effects/Effects/WarpEffect.cs:29
@@ -2270,7 +2278,7 @@ msgstr ""
 "Använd låg kvalitet för förhandsvisningar, små bilder och små vinklar. "
 "Använd hög kvalitet för slutlig kvalitet, stora bilder och stora vinklar."
 
-#: ../Pinta/Dialogs/AboutDialog.cs:186
+#: ../Pinta/Dialogs/AboutDialog.cs:181
 msgid "Using some icons from:"
 msgstr "Använder en del ikoner från:"
 
@@ -2279,7 +2287,7 @@ msgstr "Använder en del ikoner från:"
 msgid "Version"
 msgstr "Version"
 
-#: ../Pinta/Dialogs/AboutDialog.cs:306
+#: ../Pinta/Dialogs/AboutDialog.cs:277
 msgid "Version Info"
 msgstr "Versionsinfo"
 
@@ -2417,7 +2425,7 @@ msgstr "antal trådar att använda för rendering"
 msgid "pixels"
 msgstr "bildpunkter"
 
-#: ../Pinta/Dialogs/AboutDialog.cs:170
+#: ../Pinta/Dialogs/AboutDialog.cs:165
 msgid "translator-credits"
 msgstr ""
 "Launchpad Contributions:\n"
@@ -2479,6 +2487,9 @@ msgstr "{0}%"
 
 #~ msgid "No tool selected."
 #~ msgstr "Inget verktyg valt."
+
+#~ msgid "Powered by Mono:"
+#~ msgstr "Drivs av Mono:"
 
 #~ msgid "Union (+) (Ctrl + Left Click)"
 #~ msgstr "Union (+) (Ctrl + Vänsterklick)"

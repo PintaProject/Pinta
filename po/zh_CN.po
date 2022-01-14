@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: pinta\n"
 "Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
-"POT-Creation-Date: 2022-01-03 00:34-0500\n"
+"POT-Creation-Date: 2022-01-11 23:44-0500\n"
 "PO-Revision-Date: 2021-06-16 00:09+0000\n"
 "Last-Translator: 玉堂白鹤 <yjwork@qq.com>\n"
 "Language-Team: Chinese (Simplified) <zh_CN@li.org>\n"
@@ -15,8 +15,8 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=1; plural=0;\n"
-"X-Launchpad-Export-Date: 2022-01-07 03:28+0000\n"
-"X-Generator: Launchpad (build 1682fd44eec4f62371f0bed122a83482daf08e23)\n"
+"X-Launchpad-Export-Date: 2022-01-14 01:08+0000\n"
+"X-Generator: Launchpad (build 0072e2709f85567cc6c8d33e98acde9fcc09f491)\n"
 
 #: Mono.Addins.Gui/Mono.Addins.Gui/InstallDialog.cs:142
 msgid " (in user directory)"
@@ -65,7 +65,7 @@ msgstr "插件(_D)"
 msgid "About"
 msgstr "关于"
 
-#: ../Pinta/Dialogs/AboutDialog.cs:289
+#: ../Pinta/Dialogs/AboutDialog.cs:260
 msgid "About Pinta"
 msgstr "关于 Pinta"
 
@@ -198,7 +198,7 @@ msgstr "背景色"
 msgid "Background:"
 msgstr "背景："
 
-#: ../Pinta/Dialogs/AboutDialog.cs:179
+#: ../Pinta/Dialogs/AboutDialog.cs:174
 msgid "Based on the work of Paint.NET:"
 msgstr "基于 Paint.NET 的工作："
 
@@ -344,7 +344,7 @@ msgid ""
 "circle."
 msgstr "点击并拖动绘制椭圆选区。按住 Shift 强制画圆形区域。"
 
-#: ../Pinta.Tools/Tools/GradientTool.cs:52
+#: ../Pinta.Tools/Tools/GradientTool.cs:53
 msgid ""
 "Click and drag to draw gradient from primary to secondary color.  Right "
 "click to reverse."
@@ -430,6 +430,10 @@ msgstr "颜色加深"
 msgid "Color Dodge"
 msgstr "颜色减淡"
 
+#: ../Pinta.Tools/Tools/GradientTool.cs:200
+msgid "Color Mode"
+msgstr ""
+
 #: ../Pinta.Tools/Tools/ColorPickerTool.cs:52
 msgid "Color Picker"
 msgstr "颜色拾取器"
@@ -446,7 +450,7 @@ msgstr "颜色饱和度"
 msgid "Coloring"
 msgstr "着色"
 
-#: ../Pinta.Tools/Tools/GradientTool.cs:164
+#: ../Pinta.Tools/Tools/GradientTool.cs:185
 msgid "Conical Gradient"
 msgstr "锥形渐变"
 
@@ -463,7 +467,7 @@ msgstr "区域"
 msgid "Contrast"
 msgstr "对比度"
 
-#: ../Pinta/Dialogs/AboutDialog.cs:147
+#: ../Pinta/Dialogs/AboutDialog.cs:142
 msgid "Contributors to this release:"
 msgstr "这一版本的贡献者："
 
@@ -800,8 +804,8 @@ msgstr "整个区域"
 msgid "Glow"
 msgstr "发光"
 
-#: ../Pinta.Tools/Tools/GradientTool.cs:50
-#: ../Pinta.Tools/Tools/GradientTool.cs:154
+#: ../Pinta.Tools/Tools/GradientTool.cs:51
+#: ../Pinta.Tools/Tools/GradientTool.cs:175
 msgid "Gradient"
 msgstr "渐变"
 
@@ -1157,15 +1161,15 @@ msgstr "亮度"
 msgid "Line/Curve"
 msgstr ""
 
-#: ../Pinta.Tools/Tools/GradientTool.cs:162
+#: ../Pinta.Tools/Tools/GradientTool.cs:183
 msgid "Linear Diamond Gradient"
 msgstr "菱形渐变"
 
-#: ../Pinta.Tools/Tools/GradientTool.cs:160
+#: ../Pinta.Tools/Tools/GradientTool.cs:181
 msgid "Linear Gradient"
 msgstr "线性渐变"
 
-#: ../Pinta.Tools/Tools/GradientTool.cs:161
+#: ../Pinta.Tools/Tools/GradientTool.cs:182
 msgid "Linear Reflected Gradient"
 msgstr "双线性渐变"
 
@@ -1208,6 +1212,10 @@ msgstr "向下合并图层"
 #, csharp-format
 msgid "Missing: {0} v{1}"
 msgstr "缺少：{0} v{1}"
+
+#: ../Pinta.Tools/Tools/GradientTool.cs:194
+msgid "Mode"
+msgstr ""
 
 #: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:880
 msgid "Modified"
@@ -1555,10 +1563,6 @@ msgstr "海报效果"
 msgid "Power"
 msgstr "强度"
 
-#: ../Pinta/Dialogs/AboutDialog.cs:194
-msgid "Powered by Mono:"
-msgstr "基于 Mono 构建："
-
 #: ../Pinta/Dialogs/NewImageDialog.cs:194
 msgid "Preset:"
 msgstr "预设："
@@ -1567,7 +1571,7 @@ msgstr "预设："
 msgid "Preview"
 msgstr "预览"
 
-#: ../Pinta/Dialogs/AboutDialog.cs:159
+#: ../Pinta/Dialogs/AboutDialog.cs:154
 msgid "Previous contributors:"
 msgstr "以前的贡献者："
 
@@ -1606,7 +1610,7 @@ msgstr "RGB"
 msgid "Radial Blur"
 msgstr "辐射模糊"
 
-#: ../Pinta.Tools/Tools/GradientTool.cs:163
+#: ../Pinta.Tools/Tools/GradientTool.cs:184
 msgid "Radial Gradient"
 msgstr "辐射渐变"
 
@@ -1694,7 +1698,7 @@ msgstr "重命名图层"
 msgid "Render"
 msgstr "渲染"
 
-#: ../Pinta.Core/Managers/LivePreviewManager.cs:224
+#: ../Pinta.Core/Managers/LivePreviewManager.cs:223
 msgid "Rendering Effect"
 msgstr "渲染效果"
 
@@ -2105,9 +2109,13 @@ msgstr "转换图"
 msgid "Translate This Application"
 msgstr "翻译这个应用程序"
 
-#: ../Pinta/Dialogs/AboutDialog.cs:173
+#: ../Pinta/Dialogs/AboutDialog.cs:168
 msgid "Translated by:"
 msgstr "翻译者："
+
+#: ../Pinta.Tools/Tools/GradientTool.cs:201
+msgid "Transparency Mode"
+msgstr ""
 
 #: ../Pinta/Dialogs/NewImageDialog.cs:289
 #: ../Pinta.Effects/Effects/WarpEffect.cs:29
@@ -2203,7 +2211,7 @@ msgid ""
 "quality for final quality, large images, and large angles."
 msgstr "使用低质量以用来预览或生成小图片、小角度图像，使用高质量以生成最终图片或大图片、大角度图像。"
 
-#: ../Pinta/Dialogs/AboutDialog.cs:186
+#: ../Pinta/Dialogs/AboutDialog.cs:181
 msgid "Using some icons from:"
 msgstr "从此位置使用了一些图标："
 
@@ -2212,7 +2220,7 @@ msgstr "从此位置使用了一些图标："
 msgid "Version"
 msgstr "版本"
 
-#: ../Pinta/Dialogs/AboutDialog.cs:306
+#: ../Pinta/Dialogs/AboutDialog.cs:277
 msgid "Version Info"
 msgstr "版本信息"
 
@@ -2348,7 +2356,7 @@ msgstr "渲染使用的线程数"
 msgid "pixels"
 msgstr "像素"
 
-#: ../Pinta/Dialogs/AboutDialog.cs:170
+#: ../Pinta/Dialogs/AboutDialog.cs:165
 msgid "translator-credits"
 msgstr ""
 "Launchpad Contributions:\n"
@@ -2412,3 +2420,6 @@ msgstr "{0}%"
 
 #~ msgid "No tool selected."
 #~ msgstr "没有选择工具。"
+
+#~ msgid "Powered by Mono:"
+#~ msgstr "基于 Mono 构建："

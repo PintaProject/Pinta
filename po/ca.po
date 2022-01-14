@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: pinta\n"
 "Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
-"POT-Creation-Date: 2022-01-03 00:34-0500\n"
+"POT-Creation-Date: 2022-01-11 23:44-0500\n"
 "PO-Revision-Date: 2021-12-29 14:30+0000\n"
 "Last-Translator: VPablo <villumar@gmail.com>\n"
 "Language-Team: Catalan <ca@li.org>\n"
@@ -15,8 +15,8 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Launchpad-Export-Date: 2022-01-07 03:28+0000\n"
-"X-Generator: Launchpad (build 1682fd44eec4f62371f0bed122a83482daf08e23)\n"
+"X-Launchpad-Export-Date: 2022-01-14 01:08+0000\n"
+"X-Generator: Launchpad (build 0072e2709f85567cc6c8d33e98acde9fcc09f491)\n"
 
 #: Mono.Addins.Gui/Mono.Addins.Gui/InstallDialog.cs:142
 msgid " (in user directory)"
@@ -65,7 +65,7 @@ msgstr "_Complements"
 msgid "About"
 msgstr "Quant a"
 
-#: ../Pinta/Dialogs/AboutDialog.cs:289
+#: ../Pinta/Dialogs/AboutDialog.cs:260
 msgid "About Pinta"
 msgstr "Quant al Pinta"
 
@@ -199,7 +199,7 @@ msgstr "Color del fons"
 msgid "Background:"
 msgstr "Fons:"
 
-#: ../Pinta/Dialogs/AboutDialog.cs:179
+#: ../Pinta/Dialogs/AboutDialog.cs:174
 msgid "Based on the work of Paint.NET:"
 msgstr "Basat en el treball de Paint.NET:"
 
@@ -349,7 +349,7 @@ msgstr ""
 "Feu clic i arrossegueu per dibuixar una selecció el·líptica. Manteniu "
 "premuda Maj per restringir a un cercle."
 
-#: ../Pinta.Tools/Tools/GradientTool.cs:52
+#: ../Pinta.Tools/Tools/GradientTool.cs:53
 msgid ""
 "Click and drag to draw gradient from primary to secondary color.  Right "
 "click to reverse."
@@ -438,6 +438,10 @@ msgstr "Subexposa el color"
 msgid "Color Dodge"
 msgstr "Sobreexposa el color"
 
+#: ../Pinta.Tools/Tools/GradientTool.cs:200
+msgid "Color Mode"
+msgstr ""
+
 #: ../Pinta.Tools/Tools/ColorPickerTool.cs:52
 msgid "Color Picker"
 msgstr "Capturador de color"
@@ -454,7 +458,7 @@ msgstr "Saturació del color"
 msgid "Coloring"
 msgstr "Colorejat"
 
-#: ../Pinta.Tools/Tools/GradientTool.cs:164
+#: ../Pinta.Tools/Tools/GradientTool.cs:185
 msgid "Conical Gradient"
 msgstr "Degradat cònic"
 
@@ -471,7 +475,7 @@ msgstr "Contigu"
 msgid "Contrast"
 msgstr "Contrast"
 
-#: ../Pinta/Dialogs/AboutDialog.cs:147
+#: ../Pinta/Dialogs/AboutDialog.cs:142
 msgid "Contributors to this release:"
 msgstr "Col·laboradors d’aquesta versió:"
 
@@ -808,8 +812,8 @@ msgstr "Global"
 msgid "Glow"
 msgstr "Lluentor"
 
-#: ../Pinta.Tools/Tools/GradientTool.cs:50
-#: ../Pinta.Tools/Tools/GradientTool.cs:154
+#: ../Pinta.Tools/Tools/GradientTool.cs:51
+#: ../Pinta.Tools/Tools/GradientTool.cs:175
 msgid "Gradient"
 msgstr "Degradat"
 
@@ -1214,15 +1218,15 @@ msgstr "Lluminositat"
 msgid "Line/Curve"
 msgstr "Línia/corba"
 
-#: ../Pinta.Tools/Tools/GradientTool.cs:162
+#: ../Pinta.Tools/Tools/GradientTool.cs:183
 msgid "Linear Diamond Gradient"
 msgstr "Degradat de diamant lineal"
 
-#: ../Pinta.Tools/Tools/GradientTool.cs:160
+#: ../Pinta.Tools/Tools/GradientTool.cs:181
 msgid "Linear Gradient"
 msgstr "Degradat lineal"
 
-#: ../Pinta.Tools/Tools/GradientTool.cs:161
+#: ../Pinta.Tools/Tools/GradientTool.cs:182
 msgid "Linear Reflected Gradient"
 msgstr "Degradat reflectit lineal"
 
@@ -1265,6 +1269,10 @@ msgstr "Fusiona amb la capa inferior"
 #, csharp-format
 msgid "Missing: {0} v{1}"
 msgstr "Falten: {0} v{1}"
+
+#: ../Pinta.Tools/Tools/GradientTool.cs:194
+msgid "Mode"
+msgstr ""
 
 #: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:880
 msgid "Modified"
@@ -1617,10 +1625,6 @@ msgstr "Redueix el nombre de colors"
 msgid "Power"
 msgstr "Força"
 
-#: ../Pinta/Dialogs/AboutDialog.cs:194
-msgid "Powered by Mono:"
-msgstr "Impulsat per Mono:"
-
 #: ../Pinta/Dialogs/NewImageDialog.cs:194
 msgid "Preset:"
 msgstr "Valors predefinits:"
@@ -1629,7 +1633,7 @@ msgstr "Valors predefinits:"
 msgid "Preview"
 msgstr "Vista prèvia"
 
-#: ../Pinta/Dialogs/AboutDialog.cs:159
+#: ../Pinta/Dialogs/AboutDialog.cs:154
 msgid "Previous contributors:"
 msgstr "Col·laboradors anteriors:"
 
@@ -1668,7 +1672,7 @@ msgstr "RGB"
 msgid "Radial Blur"
 msgstr "Desenfocament radial"
 
-#: ../Pinta.Tools/Tools/GradientTool.cs:163
+#: ../Pinta.Tools/Tools/GradientTool.cs:184
 msgid "Radial Gradient"
 msgstr "Degradat radial"
 
@@ -1756,7 +1760,7 @@ msgstr "Canvia el nom de la capa"
 msgid "Render"
 msgstr "Renderitza"
 
-#: ../Pinta.Core/Managers/LivePreviewManager.cs:224
+#: ../Pinta.Core/Managers/LivePreviewManager.cs:223
 msgid "Rendering Effect"
 msgstr "Efecte de renderització"
 
@@ -2177,9 +2181,13 @@ msgstr "Transfereix el mapa"
 msgid "Translate This Application"
 msgstr "Traduïu aquesta aplicació"
 
-#: ../Pinta/Dialogs/AboutDialog.cs:173
+#: ../Pinta/Dialogs/AboutDialog.cs:168
 msgid "Translated by:"
 msgstr "Traduït per:"
+
+#: ../Pinta.Tools/Tools/GradientTool.cs:201
+msgid "Transparency Mode"
+msgstr ""
 
 #: ../Pinta/Dialogs/NewImageDialog.cs:289
 #: ../Pinta.Effects/Effects/WarpEffect.cs:29
@@ -2277,7 +2285,7 @@ msgstr ""
 "Feu servir la baixa qualitat per a previsualitzacions, imatges petites i "
 "angles petits. Feu servir l'alta qualitat per a imatges grans i angles grans."
 
-#: ../Pinta/Dialogs/AboutDialog.cs:186
+#: ../Pinta/Dialogs/AboutDialog.cs:181
 msgid "Using some icons from:"
 msgstr "S'han utilitzat algunes icones de:"
 
@@ -2286,7 +2294,7 @@ msgstr "S'han utilitzat algunes icones de:"
 msgid "Version"
 msgstr "Versió"
 
-#: ../Pinta/Dialogs/AboutDialog.cs:306
+#: ../Pinta/Dialogs/AboutDialog.cs:277
 msgid "Version Info"
 msgstr "Informació de la versió"
 
@@ -2424,7 +2432,7 @@ msgstr "nombre de fils a usar per a la renderització"
 msgid "pixels"
 msgstr "píxels"
 
-#: ../Pinta/Dialogs/AboutDialog.cs:170
+#: ../Pinta/Dialogs/AboutDialog.cs:165
 msgid "translator-credits"
 msgstr ""
 "Launchpad Contributions:\n"
@@ -2477,6 +2485,9 @@ msgstr[1] "{0} actualitzacions disponibles"
 #, csharp-format
 msgid "{0}%"
 msgstr "{0} %"
+
+#~ msgid "Powered by Mono:"
+#~ msgstr "Impulsat per Mono:"
 
 #~ msgid "No tool selected."
 #~ msgstr "No s’ha seleccionat cap eina."

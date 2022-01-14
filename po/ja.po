@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: pinta\n"
 "Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
-"POT-Creation-Date: 2022-01-03 00:34-0500\n"
+"POT-Creation-Date: 2022-01-11 23:44-0500\n"
 "PO-Revision-Date: 2015-04-27 05:30+0000\n"
 "Last-Translator: ub <xenolith0bytetestcomgreen@gmail.com>\n"
 "Language-Team: Japanese <ja@li.org>\n"
@@ -15,8 +15,8 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=1; plural=0;\n"
-"X-Launchpad-Export-Date: 2022-01-07 03:28+0000\n"
-"X-Generator: Launchpad (build 1682fd44eec4f62371f0bed122a83482daf08e23)\n"
+"X-Launchpad-Export-Date: 2022-01-14 01:08+0000\n"
+"X-Generator: Launchpad (build 0072e2709f85567cc6c8d33e98acde9fcc09f491)\n"
 
 #: Mono.Addins.Gui/Mono.Addins.Gui/InstallDialog.cs:142
 msgid " (in user directory)"
@@ -65,7 +65,7 @@ msgstr "アドイン(_d)"
 msgid "About"
 msgstr "このソフトウェアについて"
 
-#: ../Pinta/Dialogs/AboutDialog.cs:289
+#: ../Pinta/Dialogs/AboutDialog.cs:260
 msgid "About Pinta"
 msgstr "Pinta について"
 
@@ -198,7 +198,7 @@ msgstr "背景色"
 msgid "Background:"
 msgstr "背景:"
 
-#: ../Pinta/Dialogs/AboutDialog.cs:179
+#: ../Pinta/Dialogs/AboutDialog.cs:174
 msgid "Based on the work of Paint.NET:"
 msgstr "Paint.NET プロジェクト:"
 
@@ -344,7 +344,7 @@ msgid ""
 "circle."
 msgstr "クリックとドラッグで楕円の領域、Shiftキーを押し続けて円。"
 
-#: ../Pinta.Tools/Tools/GradientTool.cs:52
+#: ../Pinta.Tools/Tools/GradientTool.cs:53
 msgid ""
 "Click and drag to draw gradient from primary to secondary color.  Right "
 "click to reverse."
@@ -430,6 +430,10 @@ msgstr "焼き込み(カラー)"
 msgid "Color Dodge"
 msgstr "覆い焼き(カラー)"
 
+#: ../Pinta.Tools/Tools/GradientTool.cs:200
+msgid "Color Mode"
+msgstr ""
+
 #: ../Pinta.Tools/Tools/ColorPickerTool.cs:52
 msgid "Color Picker"
 msgstr "色の取得"
@@ -446,7 +450,7 @@ msgstr "彩度"
 msgid "Coloring"
 msgstr "色の設定"
 
-#: ../Pinta.Tools/Tools/GradientTool.cs:164
+#: ../Pinta.Tools/Tools/GradientTool.cs:185
 msgid "Conical Gradient"
 msgstr "円錐形グラデーション"
 
@@ -463,7 +467,7 @@ msgstr "連続部分"
 msgid "Contrast"
 msgstr "コントラスト"
 
-#: ../Pinta/Dialogs/AboutDialog.cs:147
+#: ../Pinta/Dialogs/AboutDialog.cs:142
 msgid "Contributors to this release:"
 msgstr "このリリースの貢献者:"
 
@@ -800,8 +804,8 @@ msgstr "グローバル"
 msgid "Glow"
 msgstr "グロー"
 
-#: ../Pinta.Tools/Tools/GradientTool.cs:50
-#: ../Pinta.Tools/Tools/GradientTool.cs:154
+#: ../Pinta.Tools/Tools/GradientTool.cs:51
+#: ../Pinta.Tools/Tools/GradientTool.cs:175
 msgid "Gradient"
 msgstr "グラデーション"
 
@@ -1157,15 +1161,15 @@ msgstr "明度"
 msgid "Line/Curve"
 msgstr "直線/曲線"
 
-#: ../Pinta.Tools/Tools/GradientTool.cs:162
+#: ../Pinta.Tools/Tools/GradientTool.cs:183
 msgid "Linear Diamond Gradient"
 msgstr "菱形グラデーション"
 
-#: ../Pinta.Tools/Tools/GradientTool.cs:160
+#: ../Pinta.Tools/Tools/GradientTool.cs:181
 msgid "Linear Gradient"
 msgstr "線形グラデーション"
 
-#: ../Pinta.Tools/Tools/GradientTool.cs:161
+#: ../Pinta.Tools/Tools/GradientTool.cs:182
 msgid "Linear Reflected Gradient"
 msgstr "反射形グラデーション"
 
@@ -1208,6 +1212,10 @@ msgstr "レイヤーを統合"
 #, csharp-format
 msgid "Missing: {0} v{1}"
 msgstr "{0} v{1} がありません"
+
+#: ../Pinta.Tools/Tools/GradientTool.cs:194
+msgid "Mode"
+msgstr ""
 
 #: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:880
 msgid "Modified"
@@ -1555,10 +1563,6 @@ msgstr "ポスタリゼーション"
 msgid "Power"
 msgstr "強さ"
 
-#: ../Pinta/Dialogs/AboutDialog.cs:194
-msgid "Powered by Mono:"
-msgstr "Powered by Mono:"
-
 #: ../Pinta/Dialogs/NewImageDialog.cs:194
 msgid "Preset:"
 msgstr "プリセット:"
@@ -1567,7 +1571,7 @@ msgstr "プリセット:"
 msgid "Preview"
 msgstr ""
 
-#: ../Pinta/Dialogs/AboutDialog.cs:159
+#: ../Pinta/Dialogs/AboutDialog.cs:154
 msgid "Previous contributors:"
 msgstr "これまでの貢献者:"
 
@@ -1606,7 +1610,7 @@ msgstr "RGB"
 msgid "Radial Blur"
 msgstr "放射状のぼかし"
 
-#: ../Pinta.Tools/Tools/GradientTool.cs:163
+#: ../Pinta.Tools/Tools/GradientTool.cs:184
 msgid "Radial Gradient"
 msgstr "放射状グラデーション"
 
@@ -1694,7 +1698,7 @@ msgstr "レイヤー名を変更"
 msgid "Render"
 msgstr "レンダリング"
 
-#: ../Pinta.Core/Managers/LivePreviewManager.cs:224
+#: ../Pinta.Core/Managers/LivePreviewManager.cs:223
 msgid "Rendering Effect"
 msgstr "効果のレンダリング"
 
@@ -2105,9 +2109,13 @@ msgstr "転送マップ"
 msgid "Translate This Application"
 msgstr "このアプリケーションを翻訳"
 
-#: ../Pinta/Dialogs/AboutDialog.cs:173
+#: ../Pinta/Dialogs/AboutDialog.cs:168
 msgid "Translated by:"
 msgstr "翻訳:"
+
+#: ../Pinta.Tools/Tools/GradientTool.cs:201
+msgid "Transparency Mode"
+msgstr ""
 
 #: ../Pinta/Dialogs/NewImageDialog.cs:289
 #: ../Pinta.Effects/Effects/WarpEffect.cs:29
@@ -2201,7 +2209,7 @@ msgid ""
 "quality for final quality, large images, and large angles."
 msgstr "プレビューは低品質(小さいイメージ、小さい角度)を使い、最終的な出力は高品質(大きなイメージ、大きな角度)にする。"
 
-#: ../Pinta/Dialogs/AboutDialog.cs:186
+#: ../Pinta/Dialogs/AboutDialog.cs:181
 msgid "Using some icons from:"
 msgstr "一部のアイコン:"
 
@@ -2210,7 +2218,7 @@ msgstr "一部のアイコン:"
 msgid "Version"
 msgstr "バージョン"
 
-#: ../Pinta/Dialogs/AboutDialog.cs:306
+#: ../Pinta/Dialogs/AboutDialog.cs:277
 msgid "Version Info"
 msgstr "バージョン情報"
 
@@ -2346,7 +2354,7 @@ msgstr "レンダリングに使用するスレッド数"
 msgid "pixels"
 msgstr "ピクセル"
 
-#: ../Pinta/Dialogs/AboutDialog.cs:170
+#: ../Pinta/Dialogs/AboutDialog.cs:165
 msgid "translator-credits"
 msgstr ""
 "Launchpad Contributions:\n"
@@ -2408,6 +2416,9 @@ msgstr "{0}%"
 
 #~ msgid "No tool selected."
 #~ msgstr "ツールが選択されていません。"
+
+#~ msgid "Powered by Mono:"
+#~ msgstr "Powered by Mono:"
 
 #~ msgid ""
 #~ "Left click to draw a shape with the primary color.\n"

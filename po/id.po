@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: pinta\n"
 "Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
-"POT-Creation-Date: 2022-01-03 00:34-0500\n"
+"POT-Creation-Date: 2022-01-11 23:44-0500\n"
 "PO-Revision-Date: 2021-11-29 09:22+0000\n"
 "Last-Translator: Arief Setiadi Wibowo <q_thrynx@yahoo.com>\n"
 "Language-Team: Indonesian <permataharahap@gmail.com>\n"
@@ -15,10 +15,10 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=1; plural=0;\n"
-"X-Launchpad-Export-Date: 2022-01-07 03:28+0000\n"
-"X-Generator: Launchpad (build 1682fd44eec4f62371f0bed122a83482daf08e23)\n"
-"X-Poedit-Language: Indonesian\n"
+"X-Launchpad-Export-Date: 2022-01-14 01:08+0000\n"
+"X-Generator: Launchpad (build 0072e2709f85567cc6c8d33e98acde9fcc09f491)\n"
 "X-Poedit-Country: INDONESIA\n"
+"X-Poedit-Language: Indonesian\n"
 
 #: Mono.Addins.Gui/Mono.Addins.Gui/InstallDialog.cs:142
 msgid " (in user directory)"
@@ -67,7 +67,7 @@ msgstr ""
 msgid "About"
 msgstr "Tentang"
 
-#: ../Pinta/Dialogs/AboutDialog.cs:289
+#: ../Pinta/Dialogs/AboutDialog.cs:260
 msgid "About Pinta"
 msgstr "Tentang Pinta"
 
@@ -200,7 +200,7 @@ msgstr "Warna Latar Belakang"
 msgid "Background:"
 msgstr "Latar belakang:"
 
-#: ../Pinta/Dialogs/AboutDialog.cs:179
+#: ../Pinta/Dialogs/AboutDialog.cs:174
 msgid "Based on the work of Paint.NET:"
 msgstr "Berdasarkan karya Paint.NET:"
 
@@ -348,7 +348,7 @@ msgstr ""
 "Klik dan seret untuk menggambar pilihan elips. Tahan Shift untuk membatasi "
 "ke lingkaran."
 
-#: ../Pinta.Tools/Tools/GradientTool.cs:52
+#: ../Pinta.Tools/Tools/GradientTool.cs:53
 msgid ""
 "Click and drag to draw gradient from primary to secondary color.  Right "
 "click to reverse."
@@ -436,6 +436,10 @@ msgstr "Warna Terbakar"
 msgid "Color Dodge"
 msgstr "Penghindaran Warna"
 
+#: ../Pinta.Tools/Tools/GradientTool.cs:200
+msgid "Color Mode"
+msgstr ""
+
 #: ../Pinta.Tools/Tools/ColorPickerTool.cs:52
 msgid "Color Picker"
 msgstr "Pemilih Warna"
@@ -452,7 +456,7 @@ msgstr "Kepekatan Warna"
 msgid "Coloring"
 msgstr "Pewarnaan"
 
-#: ../Pinta.Tools/Tools/GradientTool.cs:164
+#: ../Pinta.Tools/Tools/GradientTool.cs:185
 msgid "Conical Gradient"
 msgstr "Gradasi Mengerucut"
 
@@ -469,7 +473,7 @@ msgstr "Bersambungan"
 msgid "Contrast"
 msgstr "Kontras"
 
-#: ../Pinta/Dialogs/AboutDialog.cs:147
+#: ../Pinta/Dialogs/AboutDialog.cs:142
 msgid "Contributors to this release:"
 msgstr "Kontributor untuk rilis ini:"
 
@@ -806,8 +810,8 @@ msgstr "Global"
 msgid "Glow"
 msgstr "Berpendar"
 
-#: ../Pinta.Tools/Tools/GradientTool.cs:50
-#: ../Pinta.Tools/Tools/GradientTool.cs:154
+#: ../Pinta.Tools/Tools/GradientTool.cs:51
+#: ../Pinta.Tools/Tools/GradientTool.cs:175
 msgid "Gradient"
 msgstr "Gradiasi"
 
@@ -1178,15 +1182,15 @@ msgstr "Pencahayaan"
 msgid "Line/Curve"
 msgstr "Garis/Kurva"
 
-#: ../Pinta.Tools/Tools/GradientTool.cs:162
+#: ../Pinta.Tools/Tools/GradientTool.cs:183
 msgid "Linear Diamond Gradient"
 msgstr "Gradasi Linear Wajik"
 
-#: ../Pinta.Tools/Tools/GradientTool.cs:160
+#: ../Pinta.Tools/Tools/GradientTool.cs:181
 msgid "Linear Gradient"
 msgstr "Gradasi Linear"
 
-#: ../Pinta.Tools/Tools/GradientTool.cs:161
+#: ../Pinta.Tools/Tools/GradientTool.cs:182
 msgid "Linear Reflected Gradient"
 msgstr "Gradasi Linear Tercerminkan"
 
@@ -1229,6 +1233,10 @@ msgstr "Gabungkan Ke Bawahnya"
 #, csharp-format
 msgid "Missing: {0} v{1}"
 msgstr "Hilang: {0} v{1}"
+
+#: ../Pinta.Tools/Tools/GradientTool.cs:194
+msgid "Mode"
+msgstr ""
 
 #: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:880
 msgid "Modified"
@@ -1583,10 +1591,6 @@ msgstr "Posterkan"
 msgid "Power"
 msgstr "Daya"
 
-#: ../Pinta/Dialogs/AboutDialog.cs:194
-msgid "Powered by Mono:"
-msgstr "Didukung oleh Mono:"
-
 #: ../Pinta/Dialogs/NewImageDialog.cs:194
 msgid "Preset:"
 msgstr "Set Awal:"
@@ -1595,7 +1599,7 @@ msgstr "Set Awal:"
 msgid "Preview"
 msgstr "Pratinjau"
 
-#: ../Pinta/Dialogs/AboutDialog.cs:159
+#: ../Pinta/Dialogs/AboutDialog.cs:154
 msgid "Previous contributors:"
 msgstr "Kontributor sebelumnya:"
 
@@ -1634,7 +1638,7 @@ msgstr "RGB"
 msgid "Radial Blur"
 msgstr "Pengaburan Melingkar"
 
-#: ../Pinta.Tools/Tools/GradientTool.cs:163
+#: ../Pinta.Tools/Tools/GradientTool.cs:184
 msgid "Radial Gradient"
 msgstr "Gradasi Melingkar"
 
@@ -1722,7 +1726,7 @@ msgstr "Ubah Nama Lapisan"
 msgid "Render"
 msgstr "Pencitraan"
 
-#: ../Pinta.Core/Managers/LivePreviewManager.cs:224
+#: ../Pinta.Core/Managers/LivePreviewManager.cs:223
 msgid "Rendering Effect"
 msgstr "Efek Lukis"
 
@@ -2137,9 +2141,13 @@ msgstr "Peta Transfer"
 msgid "Translate This Application"
 msgstr "Terjemahkan Aplikasi Ini"
 
-#: ../Pinta/Dialogs/AboutDialog.cs:173
+#: ../Pinta/Dialogs/AboutDialog.cs:168
 msgid "Translated by:"
 msgstr "Diterjemahkan oleh:"
+
+#: ../Pinta.Tools/Tools/GradientTool.cs:201
+msgid "Transparency Mode"
+msgstr ""
 
 #: ../Pinta/Dialogs/NewImageDialog.cs:289
 #: ../Pinta.Effects/Effects/WarpEffect.cs:29
@@ -2237,7 +2245,7 @@ msgstr ""
 "Gunakan kualitas rendah untuk pratinjau, citra kecil, dan sudut kecil. "
 "Gunakan kualitas tinggi untuk hasil akhir, citra besar, dan sudut besar."
 
-#: ../Pinta/Dialogs/AboutDialog.cs:186
+#: ../Pinta/Dialogs/AboutDialog.cs:181
 msgid "Using some icons from:"
 msgstr "Menggunakan ikon dari:"
 
@@ -2246,7 +2254,7 @@ msgstr "Menggunakan ikon dari:"
 msgid "Version"
 msgstr "Versi"
 
-#: ../Pinta/Dialogs/AboutDialog.cs:306
+#: ../Pinta/Dialogs/AboutDialog.cs:277
 msgid "Version Info"
 msgstr "Info Versi"
 
@@ -2382,7 +2390,7 @@ msgstr "jumlah ulir yang digunakan untuk melukis"
 msgid "pixels"
 msgstr "piksel"
 
-#: ../Pinta/Dialogs/AboutDialog.cs:170
+#: ../Pinta/Dialogs/AboutDialog.cs:165
 msgid "translator-credits"
 msgstr ""
 "Launchpad Contributions:\n"
@@ -2499,6 +2507,9 @@ msgstr "{0}%"
 
 #~ msgid "Increase shape's corner radius"
 #~ msgstr "Tambah radius sudut bentuk"
+
+#~ msgid "Powered by Mono:"
+#~ msgstr "Didukung oleh Mono:"
 
 #~ msgid "Tools"
 #~ msgstr "Perkakas"

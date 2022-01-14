@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: pinta\n"
 "Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
-"POT-Creation-Date: 2022-01-03 00:34-0500\n"
+"POT-Creation-Date: 2022-01-11 23:44-0500\n"
 "PO-Revision-Date: 2021-10-24 15:42+0000\n"
 "Last-Translator: Yuri Chornoivan <yurchor@gmail.com>\n"
 "Language-Team: Ukrainian <uk@li.org>\n"
@@ -16,8 +16,8 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=3; plural=n%10==1 && n%100!=11 ? 0 : n%10>=2 && "
 "n%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2;\n"
-"X-Launchpad-Export-Date: 2022-01-07 03:28+0000\n"
-"X-Generator: Launchpad (build 1682fd44eec4f62371f0bed122a83482daf08e23)\n"
+"X-Launchpad-Export-Date: 2022-01-14 01:08+0000\n"
+"X-Generator: Launchpad (build 0072e2709f85567cc6c8d33e98acde9fcc09f491)\n"
 
 #: Mono.Addins.Gui/Mono.Addins.Gui/InstallDialog.cs:142
 msgid " (in user directory)"
@@ -66,7 +66,7 @@ msgstr "Додатки"
 msgid "About"
 msgstr "Про програму"
 
-#: ../Pinta/Dialogs/AboutDialog.cs:289
+#: ../Pinta/Dialogs/AboutDialog.cs:260
 msgid "About Pinta"
 msgstr "Про Pinta"
 
@@ -199,7 +199,7 @@ msgstr "Колір тла"
 msgid "Background:"
 msgstr "Тло:"
 
-#: ../Pinta/Dialogs/AboutDialog.cs:179
+#: ../Pinta/Dialogs/AboutDialog.cs:174
 msgid "Based on the work of Paint.NET:"
 msgstr "Працює на базі Paint.NET"
 
@@ -349,7 +349,7 @@ msgstr ""
 "Натисніть і тягнять, щоб виділити елептичну область . Втримуйте Shift, щоб "
 "виділити круглу область."
 
-#: ../Pinta.Tools/Tools/GradientTool.cs:52
+#: ../Pinta.Tools/Tools/GradientTool.cs:53
 msgid ""
 "Click and drag to draw gradient from primary to secondary color.  Right "
 "click to reverse."
@@ -437,6 +437,10 @@ msgstr "Горіння кольору"
 msgid "Color Dodge"
 msgstr "Освітлення кольору"
 
+#: ../Pinta.Tools/Tools/GradientTool.cs:200
+msgid "Color Mode"
+msgstr ""
+
 #: ../Pinta.Tools/Tools/ColorPickerTool.cs:52
 msgid "Color Picker"
 msgstr "Вибір кольору"
@@ -453,7 +457,7 @@ msgstr "Насиченість кольору"
 msgid "Coloring"
 msgstr "Забарвлення"
 
-#: ../Pinta.Tools/Tools/GradientTool.cs:164
+#: ../Pinta.Tools/Tools/GradientTool.cs:185
 msgid "Conical Gradient"
 msgstr "Конічний градієнт"
 
@@ -470,7 +474,7 @@ msgstr "Суміжні області"
 msgid "Contrast"
 msgstr "Контрастність"
 
-#: ../Pinta/Dialogs/AboutDialog.cs:147
+#: ../Pinta/Dialogs/AboutDialog.cs:142
 msgid "Contributors to this release:"
 msgstr "Автори даної версії:"
 
@@ -807,8 +811,8 @@ msgstr "Глобальна"
 msgid "Glow"
 msgstr "Відблиск"
 
-#: ../Pinta.Tools/Tools/GradientTool.cs:50
-#: ../Pinta.Tools/Tools/GradientTool.cs:154
+#: ../Pinta.Tools/Tools/GradientTool.cs:51
+#: ../Pinta.Tools/Tools/GradientTool.cs:175
 msgid "Gradient"
 msgstr "Градієнт"
 
@@ -1183,15 +1187,15 @@ msgstr "Яскравість"
 msgid "Line/Curve"
 msgstr "Лінії/Криві"
 
-#: ../Pinta.Tools/Tools/GradientTool.cs:162
+#: ../Pinta.Tools/Tools/GradientTool.cs:183
 msgid "Linear Diamond Gradient"
 msgstr "Лінійний ромбовидний градієнт"
 
-#: ../Pinta.Tools/Tools/GradientTool.cs:160
+#: ../Pinta.Tools/Tools/GradientTool.cs:181
 msgid "Linear Gradient"
 msgstr "Лінійний градієнт"
 
-#: ../Pinta.Tools/Tools/GradientTool.cs:161
+#: ../Pinta.Tools/Tools/GradientTool.cs:182
 msgid "Linear Reflected Gradient"
 msgstr "Лінійний відображений градієнт."
 
@@ -1234,6 +1238,10 @@ msgstr "Обєднати шар з попереднім"
 #, csharp-format
 msgid "Missing: {0} v{1}"
 msgstr "Відсутні: {0} v{1}"
+
+#: ../Pinta.Tools/Tools/GradientTool.cs:194
+msgid "Mode"
+msgstr ""
 
 #: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:880
 msgid "Modified"
@@ -1586,10 +1594,6 @@ msgstr "Постеризація"
 msgid "Power"
 msgstr "Потужність"
 
-#: ../Pinta/Dialogs/AboutDialog.cs:194
-msgid "Powered by Mono:"
-msgstr "Підтримується Mono:"
-
 #: ../Pinta/Dialogs/NewImageDialog.cs:194
 msgid "Preset:"
 msgstr "Шаблон:"
@@ -1598,7 +1602,7 @@ msgstr "Шаблон:"
 msgid "Preview"
 msgstr "Попередній перегляд"
 
-#: ../Pinta/Dialogs/AboutDialog.cs:159
+#: ../Pinta/Dialogs/AboutDialog.cs:154
 msgid "Previous contributors:"
 msgstr "Попередні автори:"
 
@@ -1637,7 +1641,7 @@ msgstr "RGB"
 msgid "Radial Blur"
 msgstr "Радіальне розмивання"
 
-#: ../Pinta.Tools/Tools/GradientTool.cs:163
+#: ../Pinta.Tools/Tools/GradientTool.cs:184
 msgid "Radial Gradient"
 msgstr "Радіальний градієнт"
 
@@ -1725,7 +1729,7 @@ msgstr "Перейменувати шар"
 msgid "Render"
 msgstr "Обробка"
 
-#: ../Pinta.Core/Managers/LivePreviewManager.cs:224
+#: ../Pinta.Core/Managers/LivePreviewManager.cs:223
 msgid "Rendering Effect"
 msgstr "Обробити ефекти"
 
@@ -2138,9 +2142,13 @@ msgstr "Карта нормалей"
 msgid "Translate This Application"
 msgstr "Перекласти цю програму"
 
-#: ../Pinta/Dialogs/AboutDialog.cs:173
+#: ../Pinta/Dialogs/AboutDialog.cs:168
 msgid "Translated by:"
 msgstr "Над перекладом працювали:"
+
+#: ../Pinta.Tools/Tools/GradientTool.cs:201
+msgid "Transparency Mode"
+msgstr ""
 
 #: ../Pinta/Dialogs/NewImageDialog.cs:289
 #: ../Pinta.Effects/Effects/WarpEffect.cs:29
@@ -2239,7 +2247,7 @@ msgstr ""
 "і малих кутів. Використовуйте високу якість для остаточного варіанту, "
 "великих зображень і великих кутів."
 
-#: ../Pinta/Dialogs/AboutDialog.cs:186
+#: ../Pinta/Dialogs/AboutDialog.cs:181
 msgid "Using some icons from:"
 msgstr "Використовує деякі іконки з:"
 
@@ -2248,7 +2256,7 @@ msgstr "Використовує деякі іконки з:"
 msgid "Version"
 msgstr "Версія"
 
-#: ../Pinta/Dialogs/AboutDialog.cs:306
+#: ../Pinta/Dialogs/AboutDialog.cs:277
 msgid "Version Info"
 msgstr "Інформація про версію"
 
@@ -2388,7 +2396,7 @@ msgstr "кількість потоків, що будуть використа�
 msgid "pixels"
 msgstr "пікселів"
 
-#: ../Pinta/Dialogs/AboutDialog.cs:170
+#: ../Pinta/Dialogs/AboutDialog.cs:165
 msgid "translator-credits"
 msgstr ""
 "Launchpad Contributions:\n"
@@ -2457,6 +2465,9 @@ msgstr "{0}%"
 
 #~ msgid "No tool selected."
 #~ msgstr "Не вибрано жодного інструменту"
+
+#~ msgid "Powered by Mono:"
+#~ msgstr "Підтримується Mono:"
 
 #~ msgid ""
 #~ "Left click to draw a shape with the primary color.\n"

@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: pinta\n"
 "Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
-"POT-Creation-Date: 2022-01-03 00:34-0500\n"
+"POT-Creation-Date: 2022-01-11 23:44-0500\n"
 "PO-Revision-Date: 2021-12-09 08:36+0000\n"
 "Last-Translator: Pavol Polonec <pavolpolonec@gmail.com>\n"
 "Language-Team: Slovak <sk@li.org>\n"
@@ -15,8 +15,8 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=3; plural=(n==1) ? 1 : (n>=2 && n<=4) ? 2 : 0;\n"
-"X-Launchpad-Export-Date: 2022-01-07 03:28+0000\n"
-"X-Generator: Launchpad (build 1682fd44eec4f62371f0bed122a83482daf08e23)\n"
+"X-Launchpad-Export-Date: 2022-01-14 01:08+0000\n"
+"X-Generator: Launchpad (build 0072e2709f85567cc6c8d33e98acde9fcc09f491)\n"
 
 #: Mono.Addins.Gui/Mono.Addins.Gui/InstallDialog.cs:142
 msgid " (in user directory)"
@@ -65,7 +65,7 @@ msgstr "_Doplnky"
 msgid "About"
 msgstr "O aplikácii"
 
-#: ../Pinta/Dialogs/AboutDialog.cs:289
+#: ../Pinta/Dialogs/AboutDialog.cs:260
 msgid "About Pinta"
 msgstr "O aplikácii Pinta"
 
@@ -198,7 +198,7 @@ msgstr "Farba pozadia"
 msgid "Background:"
 msgstr "Pozadie:"
 
-#: ../Pinta/Dialogs/AboutDialog.cs:179
+#: ../Pinta/Dialogs/AboutDialog.cs:174
 msgid "Based on the work of Paint.NET:"
 msgstr "Založené na diele Paint.NET:"
 
@@ -348,7 +348,7 @@ msgstr ""
 "Kliknite a ťahajte na kreslenie eliptického výberu. Podržte Shift na "
 "vynútenie kruhového."
 
-#: ../Pinta.Tools/Tools/GradientTool.cs:52
+#: ../Pinta.Tools/Tools/GradientTool.cs:53
 msgid ""
 "Click and drag to draw gradient from primary to secondary color.  Right "
 "click to reverse."
@@ -436,6 +436,10 @@ msgstr "Zmiešanie farieb"
 msgid "Color Dodge"
 msgstr "Nepremiešanie farieb"
 
+#: ../Pinta.Tools/Tools/GradientTool.cs:200
+msgid "Color Mode"
+msgstr ""
+
 #: ../Pinta.Tools/Tools/ColorPickerTool.cs:52
 msgid "Color Picker"
 msgstr "Výber farby"
@@ -452,7 +456,7 @@ msgstr "Sýtosť farby"
 msgid "Coloring"
 msgstr "Farbenie"
 
-#: ../Pinta.Tools/Tools/GradientTool.cs:164
+#: ../Pinta.Tools/Tools/GradientTool.cs:185
 msgid "Conical Gradient"
 msgstr "Kónický prechod"
 
@@ -469,7 +473,7 @@ msgstr "Spojité"
 msgid "Contrast"
 msgstr "Kontrast"
 
-#: ../Pinta/Dialogs/AboutDialog.cs:147
+#: ../Pinta/Dialogs/AboutDialog.cs:142
 msgid "Contributors to this release:"
 msgstr "Prispievatelia do tohto vydania:"
 
@@ -806,8 +810,8 @@ msgstr "Všeobecné"
 msgid "Glow"
 msgstr "Žiara"
 
-#: ../Pinta.Tools/Tools/GradientTool.cs:50
-#: ../Pinta.Tools/Tools/GradientTool.cs:154
+#: ../Pinta.Tools/Tools/GradientTool.cs:51
+#: ../Pinta.Tools/Tools/GradientTool.cs:175
 msgid "Gradient"
 msgstr "Farebný prechod"
 
@@ -1181,15 +1185,15 @@ msgstr "Svetlosť"
 msgid "Line/Curve"
 msgstr "Čiara/Krivka"
 
-#: ../Pinta.Tools/Tools/GradientTool.cs:162
+#: ../Pinta.Tools/Tools/GradientTool.cs:183
 msgid "Linear Diamond Gradient"
 msgstr "Lineárny diamantový prechod"
 
-#: ../Pinta.Tools/Tools/GradientTool.cs:160
+#: ../Pinta.Tools/Tools/GradientTool.cs:181
 msgid "Linear Gradient"
 msgstr "Lineárny prechod"
 
-#: ../Pinta.Tools/Tools/GradientTool.cs:161
+#: ../Pinta.Tools/Tools/GradientTool.cs:182
 msgid "Linear Reflected Gradient"
 msgstr "Lineárny odrazený prechod"
 
@@ -1232,6 +1236,10 @@ msgstr "Zlúčiť vrstvy"
 #, csharp-format
 msgid "Missing: {0} v{1}"
 msgstr "Chýbajúce: {0} v{1}"
+
+#: ../Pinta.Tools/Tools/GradientTool.cs:194
+msgid "Mode"
+msgstr ""
 
 #: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:880
 msgid "Modified"
@@ -1584,10 +1592,6 @@ msgstr "Posterizovať"
 msgid "Power"
 msgstr "Sila"
 
-#: ../Pinta/Dialogs/AboutDialog.cs:194
-msgid "Powered by Mono:"
-msgstr "Beží na platforme Mono:"
-
 #: ../Pinta/Dialogs/NewImageDialog.cs:194
 msgid "Preset:"
 msgstr "Predvolené:"
@@ -1596,7 +1600,7 @@ msgstr "Predvolené:"
 msgid "Preview"
 msgstr "Ukážka"
 
-#: ../Pinta/Dialogs/AboutDialog.cs:159
+#: ../Pinta/Dialogs/AboutDialog.cs:154
 msgid "Previous contributors:"
 msgstr "Predchádzajúci prispievatelia"
 
@@ -1635,7 +1639,7 @@ msgstr "RGB"
 msgid "Radial Blur"
 msgstr "Radiálne rozostrenie"
 
-#: ../Pinta.Tools/Tools/GradientTool.cs:163
+#: ../Pinta.Tools/Tools/GradientTool.cs:184
 msgid "Radial Gradient"
 msgstr "Radiálny prechod"
 
@@ -1723,7 +1727,7 @@ msgstr "Premenovať vrstvu"
 msgid "Render"
 msgstr "Vykresliť"
 
-#: ../Pinta.Core/Managers/LivePreviewManager.cs:224
+#: ../Pinta.Core/Managers/LivePreviewManager.cs:223
 msgid "Rendering Effect"
 msgstr "Vykresľovací efekt"
 
@@ -2137,9 +2141,13 @@ msgstr "Prenosová mapa"
 msgid "Translate This Application"
 msgstr "Preložiť tento program"
 
-#: ../Pinta/Dialogs/AboutDialog.cs:173
+#: ../Pinta/Dialogs/AboutDialog.cs:168
 msgid "Translated by:"
 msgstr "Preložili:"
+
+#: ../Pinta.Tools/Tools/GradientTool.cs:201
+msgid "Transparency Mode"
+msgstr ""
 
 #: ../Pinta/Dialogs/NewImageDialog.cs:289
 #: ../Pinta.Effects/Effects/WarpEffect.cs:29
@@ -2238,7 +2246,7 @@ msgstr ""
 "Vysokú kvalitu používajte pri finálnej kvalite, veľkých obrázkoch a veľkých "
 "uhloch."
 
-#: ../Pinta/Dialogs/AboutDialog.cs:186
+#: ../Pinta/Dialogs/AboutDialog.cs:181
 msgid "Using some icons from:"
 msgstr "Použité niektoré ikony z:"
 
@@ -2247,7 +2255,7 @@ msgstr "Použité niektoré ikony z:"
 msgid "Version"
 msgstr "Verzia"
 
-#: ../Pinta/Dialogs/AboutDialog.cs:306
+#: ../Pinta/Dialogs/AboutDialog.cs:277
 msgid "Version Info"
 msgstr "Info o verzii"
 
@@ -2385,7 +2393,7 @@ msgstr "počet vlákien použitých na vykreslenie"
 msgid "pixels"
 msgstr "pixelov"
 
-#: ../Pinta/Dialogs/AboutDialog.cs:170
+#: ../Pinta/Dialogs/AboutDialog.cs:165
 msgid "translator-credits"
 msgstr ""
 "Launchpad Contributions:\n"
@@ -2437,6 +2445,9 @@ msgstr[2] "Dostupných {0} aktualizácií"
 #, csharp-format
 msgid "{0}%"
 msgstr "{0}%"
+
+#~ msgid "Powered by Mono:"
+#~ msgstr "Beží na platforme Mono:"
 
 #~ msgid "Union (+) (Ctrl + Left Click)"
 #~ msgstr "Zjednotenie (+) (Ctrl + kliknutie ľavým)"

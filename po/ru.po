@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
-"POT-Creation-Date: 2022-01-03 00:34-0500\n"
-"PO-Revision-Date: 2021-12-29 09:27+0000\n"
+"POT-Creation-Date: 2022-01-11 23:44-0500\n"
+"PO-Revision-Date: 2022-01-09 15:02+0000\n"
 "Last-Translator: Sergej <Unknown>\n"
 "Language-Team: Russian <ru@li.org>\n"
 "MIME-Version: 1.0\n"
@@ -16,8 +16,8 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=3; plural=n%10==1 && n%100!=11 ? 0 : n%10>=2 && "
 "n%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2;\n"
-"X-Launchpad-Export-Date: 2022-01-07 03:28+0000\n"
-"X-Generator: Launchpad (build 1682fd44eec4f62371f0bed122a83482daf08e23)\n"
+"X-Launchpad-Export-Date: 2022-01-14 01:08+0000\n"
+"X-Generator: Launchpad (build 0072e2709f85567cc6c8d33e98acde9fcc09f491)\n"
 
 #: Mono.Addins.Gui/Mono.Addins.Gui/InstallDialog.cs:142
 msgid " (in user directory)"
@@ -66,7 +66,7 @@ msgstr "Н_адстройки"
 msgid "About"
 msgstr "О программе"
 
-#: ../Pinta/Dialogs/AboutDialog.cs:289
+#: ../Pinta/Dialogs/AboutDialog.cs:260
 msgid "About Pinta"
 msgstr "О программе Pinta"
 
@@ -200,7 +200,7 @@ msgstr "Цвет фона"
 msgid "Background:"
 msgstr "Фон:"
 
-#: ../Pinta/Dialogs/AboutDialog.cs:179
+#: ../Pinta/Dialogs/AboutDialog.cs:174
 msgid "Based on the work of Paint.NET:"
 msgstr "Основано на Paint.NET:"
 
@@ -350,7 +350,7 @@ msgstr ""
 "Нажмите и тяните,  чтобы выделить эллептическую область . Удерживайте Shift, "
 "чтобы выделить круглую область."
 
-#: ../Pinta.Tools/Tools/GradientTool.cs:52
+#: ../Pinta.Tools/Tools/GradientTool.cs:53
 msgid ""
 "Click and drag to draw gradient from primary to secondary color.  Right "
 "click to reverse."
@@ -440,6 +440,10 @@ msgstr "Горение цвета"
 msgid "Color Dodge"
 msgstr "Color Dodge"
 
+#: ../Pinta.Tools/Tools/GradientTool.cs:200
+msgid "Color Mode"
+msgstr ""
+
 #: ../Pinta.Tools/Tools/ColorPickerTool.cs:52
 msgid "Color Picker"
 msgstr "Получение цвета"
@@ -456,7 +460,7 @@ msgstr "Насыщенность цвета"
 msgid "Coloring"
 msgstr "Окрашивание"
 
-#: ../Pinta.Tools/Tools/GradientTool.cs:164
+#: ../Pinta.Tools/Tools/GradientTool.cs:185
 msgid "Conical Gradient"
 msgstr "Конический градиент"
 
@@ -473,7 +477,7 @@ msgstr "Смежная область"
 msgid "Contrast"
 msgstr "Контраст"
 
-#: ../Pinta/Dialogs/AboutDialog.cs:147
+#: ../Pinta/Dialogs/AboutDialog.cs:142
 msgid "Contributors to this release:"
 msgstr "Авторы этой версии:"
 
@@ -810,8 +814,8 @@ msgstr "Глобальная"
 msgid "Glow"
 msgstr "Сияние"
 
-#: ../Pinta.Tools/Tools/GradientTool.cs:50
-#: ../Pinta.Tools/Tools/GradientTool.cs:154
+#: ../Pinta.Tools/Tools/GradientTool.cs:51
+#: ../Pinta.Tools/Tools/GradientTool.cs:175
 msgid "Gradient"
 msgstr "Градиент"
 
@@ -1219,15 +1223,15 @@ msgstr "Яркость"
 msgid "Line/Curve"
 msgstr "Линии/кривые"
 
-#: ../Pinta.Tools/Tools/GradientTool.cs:162
+#: ../Pinta.Tools/Tools/GradientTool.cs:183
 msgid "Linear Diamond Gradient"
 msgstr "Линейный ромбовидный градиент"
 
-#: ../Pinta.Tools/Tools/GradientTool.cs:160
+#: ../Pinta.Tools/Tools/GradientTool.cs:181
 msgid "Linear Gradient"
 msgstr "Линейный градиент"
 
-#: ../Pinta.Tools/Tools/GradientTool.cs:161
+#: ../Pinta.Tools/Tools/GradientTool.cs:182
 msgid "Linear Reflected Gradient"
 msgstr "Линейный отражённый градиент"
 
@@ -1270,6 +1274,10 @@ msgstr "Объединить с нижележащим"
 #, csharp-format
 msgid "Missing: {0} v{1}"
 msgstr "Отсутствует: {0} v{1}"
+
+#: ../Pinta.Tools/Tools/GradientTool.cs:194
+msgid "Mode"
+msgstr ""
 
 #: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:880
 msgid "Modified"
@@ -1623,10 +1631,6 @@ msgstr "Постеризовать"
 msgid "Power"
 msgstr "Мощность"
 
-#: ../Pinta/Dialogs/AboutDialog.cs:194
-msgid "Powered by Mono:"
-msgstr "Работает на Mono:"
-
 #: ../Pinta/Dialogs/NewImageDialog.cs:194
 msgid "Preset:"
 msgstr "Предустановка:"
@@ -1635,7 +1639,7 @@ msgstr "Предустановка:"
 msgid "Preview"
 msgstr "Предварительный просмотр"
 
-#: ../Pinta/Dialogs/AboutDialog.cs:159
+#: ../Pinta/Dialogs/AboutDialog.cs:154
 msgid "Previous contributors:"
 msgstr "Авторы предыдущих версий:"
 
@@ -1674,7 +1678,7 @@ msgstr "RGB"
 msgid "Radial Blur"
 msgstr "Радиальное размытие"
 
-#: ../Pinta.Tools/Tools/GradientTool.cs:163
+#: ../Pinta.Tools/Tools/GradientTool.cs:184
 msgid "Radial Gradient"
 msgstr "Радиальный градиент"
 
@@ -1762,7 +1766,7 @@ msgstr "Переименовать слой"
 msgid "Render"
 msgstr "Рисование"
 
-#: ../Pinta.Core/Managers/LivePreviewManager.cs:224
+#: ../Pinta.Core/Managers/LivePreviewManager.cs:223
 msgid "Rendering Effect"
 msgstr "Эффект отрисовки"
 
@@ -1974,7 +1978,7 @@ msgstr "Показать сообщение и выйти"
 
 #: ../Pinta.Core/Actions/ViewActions.cs:150
 msgid "Show/Hide"
-msgstr ""
+msgstr "Показать/Скрыть"
 
 #: ../Pinta.Tools/Tools/ColorPickerTool.cs:225
 msgid "Single Pixel"
@@ -2178,9 +2182,13 @@ msgstr "Канал"
 msgid "Translate This Application"
 msgstr "Перевести это приложение"
 
-#: ../Pinta/Dialogs/AboutDialog.cs:173
+#: ../Pinta/Dialogs/AboutDialog.cs:168
 msgid "Translated by:"
 msgstr "Переведено:"
+
+#: ../Pinta.Tools/Tools/GradientTool.cs:201
+msgid "Transparency Mode"
+msgstr ""
 
 #: ../Pinta/Dialogs/NewImageDialog.cs:289
 #: ../Pinta.Effects/Effects/WarpEffect.cs:29
@@ -2279,7 +2287,7 @@ msgstr ""
 "изображений и малых углов. Используйте высокое качество для финального "
 "варианта, больших изображений и больших углов."
 
-#: ../Pinta/Dialogs/AboutDialog.cs:186
+#: ../Pinta/Dialogs/AboutDialog.cs:181
 msgid "Using some icons from:"
 msgstr "Использованы некоторые значки из:"
 
@@ -2288,7 +2296,7 @@ msgstr "Использованы некоторые значки из:"
 msgid "Version"
 msgstr "Версия"
 
-#: ../Pinta/Dialogs/AboutDialog.cs:306
+#: ../Pinta/Dialogs/AboutDialog.cs:277
 msgid "Version Info"
 msgstr "Сведения о версии"
 
@@ -2412,6 +2420,8 @@ msgstr "разработчики Pinta"
 #: ../xdg/pinta.desktop.in.h:5
 msgid "draw;drawing;paint;painting;graphics;raster;2d;"
 msgstr ""
+"draw;drawing;paint;painting;graphics;raster;2d;рисовать;рисунок;пейнт;живопис"
+"ь;графика;растр;"
 
 #: ../Pinta/Main.cs:62
 msgid "number of threads to use for rendering"
@@ -2426,7 +2436,7 @@ msgstr "число потоков для использования при от�
 msgid "pixels"
 msgstr "пикселей"
 
-#: ../Pinta/Dialogs/AboutDialog.cs:170
+#: ../Pinta/Dialogs/AboutDialog.cs:165
 msgid "translator-credits"
 msgstr ""
 "Launchpad Contributions:\n"
@@ -2510,6 +2520,9 @@ msgstr "{0}%"
 
 #~ msgid "No tool selected."
 #~ msgstr "Не выбран инструмент"
+
+#~ msgid "Powered by Mono:"
+#~ msgstr "Работает на Mono:"
 
 #~ msgid "Union (+) (Ctrl + Left Click)"
 #~ msgstr "Соединить (+) (Ctrl + Left Click)"

@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: pinta\n"
 "Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
-"POT-Creation-Date: 2022-01-03 00:34-0500\n"
+"POT-Creation-Date: 2022-01-11 23:44-0500\n"
 "PO-Revision-Date: 2017-02-16 01:51+0000\n"
 "Last-Translator: Yacine Bouklif <yacinebouklif@gmail.com>\n"
 "Language-Team: Kabyle <kab@li.org>\n"
@@ -15,8 +15,8 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Launchpad-Export-Date: 2022-01-07 03:28+0000\n"
-"X-Generator: Launchpad (build 1682fd44eec4f62371f0bed122a83482daf08e23)\n"
+"X-Launchpad-Export-Date: 2022-01-14 01:09+0000\n"
+"X-Generator: Launchpad (build 0072e2709f85567cc6c8d33e98acde9fcc09f491)\n"
 "Language: kab\n"
 
 #: Mono.Addins.Gui/Mono.Addins.Gui/InstallDialog.cs:142
@@ -66,7 +66,7 @@ msgstr "Isiɣzaf"
 msgid "About"
 msgstr "Awal ɣef"
 
-#: ../Pinta/Dialogs/AboutDialog.cs:289
+#: ../Pinta/Dialogs/AboutDialog.cs:260
 msgid "About Pinta"
 msgstr "Awal ɣef Pinta"
 
@@ -199,7 +199,7 @@ msgstr "Ini n ugilal"
 msgid "Background:"
 msgstr "Agilal :"
 
-#: ../Pinta/Dialogs/AboutDialog.cs:179
+#: ../Pinta/Dialogs/AboutDialog.cs:174
 msgid "Based on the work of Paint.NET:"
 msgstr "Yebna ɣef leqdic n Paint.NET :"
 
@@ -349,7 +349,7 @@ msgstr ""
 "Ssed u selḥu iwakken ad tsunɣeḍ tafrayt taglayt. Ssed tanast Maj iwakken ad "
 "d-tsuffɣeḍ tawinest."
 
-#: ../Pinta.Tools/Tools/GradientTool.cs:52
+#: ../Pinta.Tools/Tools/GradientTool.cs:53
 msgid ""
 "Click and drag to draw gradient from primary to secondary color.  Right "
 "click to reverse."
@@ -437,6 +437,10 @@ msgstr "Taneẓẓi n yini +"
 msgid "Color Dodge"
 msgstr "Taneẓẓi n yini -"
 
+#: ../Pinta.Tools/Tools/GradientTool.cs:200
+msgid "Color Mode"
+msgstr ""
+
 #: ../Pinta.Tools/Tools/ColorPickerTool.cs:52
 msgid "Color Picker"
 msgstr "Aleqqaḍ n yini"
@@ -453,7 +457,7 @@ msgstr "Tawant n yiniten"
 msgid "Coloring"
 msgstr "Coloration"
 
-#: ../Pinta.Tools/Tools/GradientTool.cs:164
+#: ../Pinta.Tools/Tools/GradientTool.cs:185
 msgid "Conical Gradient"
 msgstr "Dégradé conique"
 
@@ -470,7 +474,7 @@ msgstr "Anarag"
 msgid "Contrast"
 msgstr "Amyeẓli"
 
-#: ../Pinta/Dialogs/AboutDialog.cs:147
+#: ../Pinta/Dialogs/AboutDialog.cs:142
 msgid "Contributors to this release:"
 msgstr "Fkan-d afus di lqem-agi :"
 
@@ -807,8 +811,8 @@ msgstr "Amatu"
 msgid "Glow"
 msgstr "Halo"
 
-#: ../Pinta.Tools/Tools/GradientTool.cs:50
-#: ../Pinta.Tools/Tools/GradientTool.cs:154
+#: ../Pinta.Tools/Tools/GradientTool.cs:51
+#: ../Pinta.Tools/Tools/GradientTool.cs:175
 msgid "Gradient"
 msgstr "Dégradé"
 
@@ -1182,15 +1186,15 @@ msgstr "Tefses"
 msgid "Line/Curve"
 msgstr "Izirig/Azlig"
 
-#: ../Pinta.Tools/Tools/GradientTool.cs:162
+#: ../Pinta.Tools/Tools/GradientTool.cs:183
 msgid "Linear Diamond Gradient"
 msgstr "Dégradé linéaire en diamant"
 
-#: ../Pinta.Tools/Tools/GradientTool.cs:160
+#: ../Pinta.Tools/Tools/GradientTool.cs:181
 msgid "Linear Gradient"
 msgstr "Dégradé linéaire"
 
-#: ../Pinta.Tools/Tools/GradientTool.cs:161
+#: ../Pinta.Tools/Tools/GradientTool.cs:182
 msgid "Linear Reflected Gradient"
 msgstr "Dégradé linéaire réfléchi"
 
@@ -1233,6 +1237,10 @@ msgstr "Smezdi aked ukalku n wadda"
 #, csharp-format
 msgid "Missing: {0} v{1}"
 msgstr "Manquant : {0} v{1}"
+
+#: ../Pinta.Tools/Tools/GradientTool.cs:194
+msgid "Mode"
+msgstr ""
 
 #: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:880
 msgid "Modified"
@@ -1580,10 +1588,6 @@ msgstr "Postériser"
 msgid "Power"
 msgstr "Tazmert"
 
-#: ../Pinta/Dialogs/AboutDialog.cs:194
-msgid "Powered by Mono:"
-msgstr "Réalisé avec Mono :"
-
 #: ../Pinta/Dialogs/NewImageDialog.cs:194
 msgid "Preset:"
 msgstr "Préconfiguration :"
@@ -1592,7 +1596,7 @@ msgstr "Préconfiguration :"
 msgid "Preview"
 msgstr "Azarskan"
 
-#: ../Pinta/Dialogs/AboutDialog.cs:159
+#: ../Pinta/Dialogs/AboutDialog.cs:154
 msgid "Previous contributors:"
 msgstr "Contributeurs précédents :"
 
@@ -1631,7 +1635,7 @@ msgstr "RVB"
 msgid "Radial Blur"
 msgstr "Flou radial"
 
-#: ../Pinta.Tools/Tools/GradientTool.cs:163
+#: ../Pinta.Tools/Tools/GradientTool.cs:184
 msgid "Radial Gradient"
 msgstr "Dégradé radial"
 
@@ -1719,7 +1723,7 @@ msgstr "Beddel isem n ukalku"
 msgid "Render"
 msgstr "Eg tiririt"
 
-#: ../Pinta.Core/Managers/LivePreviewManager.cs:224
+#: ../Pinta.Core/Managers/LivePreviewManager.cs:223
 msgid "Rendering Effect"
 msgstr "Asemdu n tririt"
 
@@ -2132,9 +2136,13 @@ msgstr "Takarḍa n usiweḍ"
 msgid "Translate This Application"
 msgstr "Suqqel asnas-agi"
 
-#: ../Pinta/Dialogs/AboutDialog.cs:173
+#: ../Pinta/Dialogs/AboutDialog.cs:168
 msgid "Translated by:"
 msgstr "Yettwasuqqel sɣur :"
+
+#: ../Pinta.Tools/Tools/GradientTool.cs:201
+msgid "Transparency Mode"
+msgstr ""
 
 #: ../Pinta/Dialogs/NewImageDialog.cs:289
 #: ../Pinta.Effects/Effects/WarpEffect.cs:29
@@ -2231,7 +2239,7 @@ msgstr ""
 "angles faibles. Utilisez une grande qualité pour les visualisations finales, "
 "les grandes images, et les grands angles."
 
-#: ../Pinta/Dialogs/AboutDialog.cs:186
+#: ../Pinta/Dialogs/AboutDialog.cs:181
 msgid "Using some icons from:"
 msgstr "Aseqdec n tikunin si :"
 
@@ -2240,7 +2248,7 @@ msgstr "Aseqdec n tikunin si :"
 msgid "Version"
 msgstr "Lqem"
 
-#: ../Pinta/Dialogs/AboutDialog.cs:306
+#: ../Pinta/Dialogs/AboutDialog.cs:277
 msgid "Version Info"
 msgstr "Isalen n lqem"
 
@@ -2376,7 +2384,7 @@ msgstr "nombre de fils d'exécution à utiliser pour le rendu"
 msgid "pixels"
 msgstr "ipiksilen"
 
-#: ../Pinta/Dialogs/AboutDialog.cs:170
+#: ../Pinta/Dialogs/AboutDialog.cs:165
 msgid "translator-credits"
 msgstr ""
 "Launchpad Contributions:\n"
@@ -2469,3 +2477,6 @@ msgstr "{0} %"
 #~ "Maintien de la touche Ctrl en cliquant en dehors des limites de l'image pour "
 #~ "créer une nouvelle forme à partir du bord.\n"
 #~ "Touche Entrée pour finir la forme."
+
+#~ msgid "Powered by Mono:"
+#~ msgstr "Réalisé avec Mono :"
