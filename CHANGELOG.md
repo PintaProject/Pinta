@@ -15,6 +15,7 @@ Thanks to the following contributors who worked on this release:
   - When saving a `.ora` file, a flattened image (`mergedimage.png`) is now included in the archive. This is required by the spec to accomodate viewer software ([#1377566](https://bugs.launchpad.net/pinta/+bug/1377566))
 
 ### Changed
+- Pinta now uses the standard GTK about dialog
 
 ### Fixed
 - Fixed a bug where the default linear gradient was reflected rather than clamped.

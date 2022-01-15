@@ -229,15 +229,6 @@
     <EmbeddedResource Include="Resources\Menu.Effects.Stylize.Emboss.png">
       <LogicalName>Menu.Effects.Stylize.Emboss.png</LogicalName>
     </EmbeddedResource>
-    <EmbeddedResource Include="Resources\About.Image.png">
-      <LogicalName>About.Image.png</LogicalName>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Resources\About.ImageSep.png">
-      <LogicalName>About.ImageSep.png</LogicalName>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Resources\About.ImageTop.png">
-      <LogicalName>About.ImageTop.png</LogicalName>
-    </EmbeddedResource>
     <EmbeddedResource Include="Resources\Menu.Effects.Default.png">
       <LogicalName>Menu.Effects.Default.png</LogicalName>
     </EmbeddedResource>

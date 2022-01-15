@@ -29,8 +29,6 @@ Pinta/Actions/Window/CloseAllDocumentsAction.cs
 Pinta/Actions/Window/SaveAllDocumentsAction.cs
 Pinta/AddinSetupService.cs
 Pinta/DialogHandlers.cs
-Pinta/Dialogs/AboutDialog.cs
-Pinta/Dialogs/AboutPintaTabPage.cs
 Pinta/Dialogs/ErrorDialog.cs
 Pinta/Dialogs/FileUnsupportedFormatDialog.cs
 Pinta/Dialogs/JpegCompressionDialog.cs
@@ -40,7 +38,6 @@ Pinta/Dialogs/ProgressDialog.cs
 Pinta/Dialogs/ResizeCanvasDialog.cs
 Pinta/Dialogs/ResizeImageDialog.cs
 Pinta/Dialogs/SpinButtonEntryDialog.cs
-Pinta/Dialogs/VersionInformationTabPage.cs
 Pinta/DocumentViewContent.cs
 Pinta/Extensions/GtkExtensions.cs
 Pinta/MacInterop/AppleEvent.cs
