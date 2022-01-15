@@ -45,7 +45,7 @@ namespace Pinta.Gui.Widgets
 		// For the active layer, we also draw the selection layer on top of it,
 		// so we can't directly use that layer's surface.
 		private Cairo.ImageSurface? active_layer_surface;
-		private readonly CanvasRenderer canvas_renderer = new CanvasRenderer (false);
+		private readonly CanvasRenderer canvas_renderer = new CanvasRenderer (false, false);
 
 		private const int store_index_thumbnail = 0;
 		private const int store_index_name = 1;
