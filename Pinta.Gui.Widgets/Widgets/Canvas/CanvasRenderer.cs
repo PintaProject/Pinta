@@ -14,11 +14,12 @@ using Pinta.Core;
 
 namespace Pinta.Gui.Widgets
 {
-	class CanvasRenderer
+	public class CanvasRenderer
 	{
 		private static Cairo.Pattern tranparent_pattern;
 
 		private readonly bool enable_pixel_grid;
+		private readonly bool enable_live_preview;
 
 		private Size source_size;
 		private Size destination_size;
@@ -30,9 +31,10 @@ namespace Pinta.Gui.Widgets
 		private int[]? s2dLookupX;
 		private int[]? s2dLookupY;
 
-		public CanvasRenderer (bool enable_pixel_grid)
+		public CanvasRenderer (bool enable_pixel_grid, bool enableLivePreview)
 		{
 			this.enable_pixel_grid = enable_pixel_grid;
+			enable_live_preview = enableLivePreview;
 		}
 
 		static CanvasRenderer ()
@@ -62,7 +64,6 @@ namespace Pinta.Gui.Widgets
 
 			// Our rectangle of interest
 			var r = new Rectangle (offset, dst.GetBounds ().Size).ToCairoRectangle ();
-			var doc = PintaCore.Workspace.ActiveDocument;
 
 			using (var g = new Cairo.Context (dst)) {
 				// Create the transparent checkerboard background
@@ -73,7 +74,7 @@ namespace Pinta.Gui.Widgets
 					var layer = layers[i];
 
 					// If we're in LivePreview, substitute current layer with the preview layer
-					if (layer == doc.Layers.CurrentUserLayer && PintaCore.LivePreview.IsEnabled)
+					if (enable_live_preview && layer == PintaCore.Workspace.ActiveDocument.Layers.CurrentUserLayer && PintaCore.LivePreview.IsEnabled)
 						layer = CreateLivePreviewLayer (layer);
 
 					// If the layer is offset, handle it here

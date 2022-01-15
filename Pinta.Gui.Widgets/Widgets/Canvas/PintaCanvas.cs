@@ -45,7 +45,7 @@ namespace Pinta.Gui.Widgets
 			CanvasWindow = window;
 			this.document = document;
 
-			cr = new CanvasRenderer (true);
+			cr = new CanvasRenderer (true, true);
 
 			// Keep the widget the same size as the canvas
 			document.Workspace.CanvasSizeChanged += delegate (object? sender, EventArgs e) {

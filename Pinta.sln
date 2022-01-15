@@ -22,6 +22,10 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Pinta.Docking", "Pinta.Dock
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Pinta.Core.Tests", "tests\Pinta.Core.Tests\Pinta.Core.Tests.csproj", "{B207624A-5378-4F31-B2C9-43DE7F7CC10B}"
 EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "PintaBenchmarks", "tests\PintaBenchmarks\PintaBenchmarks.csproj", "{8A8B7C9F-4AE0-4E2B-A4DF-CBABCD0DE864}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "tests", "tests", "{8D23D7B9-C97E-498C-A1C5-6159E305D9BA}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -60,9 +64,17 @@ Global
 		{B207624A-5378-4F31-B2C9-43DE7F7CC10B}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{B207624A-5378-4F31-B2C9-43DE7F7CC10B}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{B207624A-5378-4F31-B2C9-43DE7F7CC10B}.Release|Any CPU.Build.0 = Release|Any CPU
+		{8A8B7C9F-4AE0-4E2B-A4DF-CBABCD0DE864}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{8A8B7C9F-4AE0-4E2B-A4DF-CBABCD0DE864}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{8A8B7C9F-4AE0-4E2B-A4DF-CBABCD0DE864}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{8A8B7C9F-4AE0-4E2B-A4DF-CBABCD0DE864}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{B207624A-5378-4F31-B2C9-43DE7F7CC10B} = {8D23D7B9-C97E-498C-A1C5-6159E305D9BA}
+		{8A8B7C9F-4AE0-4E2B-A4DF-CBABCD0DE864} = {8D23D7B9-C97E-498C-A1C5-6159E305D9BA}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {4985F1D9-0ABE-4E83-98D2-8D119EA4075D}
