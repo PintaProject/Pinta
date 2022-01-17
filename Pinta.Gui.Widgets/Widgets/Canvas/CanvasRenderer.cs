@@ -16,7 +16,7 @@ namespace Pinta.Gui.Widgets
 {
 	public class CanvasRenderer
 	{
-		private static Cairo.Pattern tranparent_pattern;
+		private static readonly Cairo.Pattern tranparent_pattern;
 
 		private readonly bool enable_pixel_grid;
 		private readonly bool enable_live_preview;
@@ -64,7 +64,9 @@ namespace Pinta.Gui.Widgets
 
 			// Our rectangle of interest
 			var r = new Rectangle (offset, dst.GetBounds ().Size).ToCairoRectangle ();
+			var is_one_to_one = scale_factor.Ratio == 1;
 
+			using (var cache_surface = is_one_to_one ? null : CairoExtensions.CreateImageSurface (Cairo.Format.Argb32, dst.Width, dst.Height))
 			using (var g = new Cairo.Context (dst)) {
 				// Create the transparent checkerboard background
 				g.Translate (-offset.X, -offset.Y);
@@ -82,17 +84,15 @@ namespace Pinta.Gui.Widgets
 						layer = CreateOffsetLayer (layer);
 
 					// No need to resize the surface if we're at 100% zoom
-					if (scale_factor.Ratio == 1)
+					if (is_one_to_one)
 						layer.Draw (g, layer.Surface, layer.Opacity, false);
 					else {
-						using (var scaled = CairoExtensions.CreateImageSurface (Cairo.Format.Argb32, dst.Width, dst.Height)) {
-							g.Save ();
-							// Have to undo the translate set above
-							g.Translate (offset.X, offset.Y);
-							CopyScaled (layer.Surface, scaled, r.ToGdkRectangle ());
-							layer.Draw (g, scaled, layer.Opacity, false);
-							g.Restore ();
-						}
+						g.Save ();
+						// Have to undo the translate set above
+						g.Translate (offset.X, offset.Y);
+						CopyScaled (layer.Surface, cache_surface!, r.ToGdkRectangle ());
+						layer.Draw (g, cache_surface!, layer.Opacity, false);
+						g.Restore ();
 					}
 				}
 			}
@@ -177,10 +177,14 @@ namespace Pinta.Gui.Widgets
 			var dst_width = dst.Width;
 			var dst_height = dst.Height;
 
+			// Cache lookup tables
+			var lookup_x = D2SLookupX;
+			var lookup_y = D2SLookupY;
+
 			for (var dst_row = 0; dst_row < dst_height; ++dst_row) {
 				// For each dest row, look up the src row to copy from
 				var nnY = dst_row + roi.Y;
-				var srcY = D2SLookupY[nnY];
+				var srcY = lookup_y[nnY];
 
 				// Get pointers to src and dest rows
 				var dst_row_ptr = dst.GetRowAddressUnchecked (dst_ptr, dst_width, dst_row);
@@ -189,7 +193,7 @@ namespace Pinta.Gui.Widgets
 				for (var dstCol = 0; dstCol < dst_width; ++dstCol) {
 					// Look up the src column to copy from
 					var nnX = dstCol + roi.X;
-					var srcX = D2SLookupX[nnX];
+					var srcX = lookup_x[nnX];
 
 					// Copy source to destination
 					*dst_row_ptr++ = *(src_row_ptr + srcX);
@@ -275,9 +279,10 @@ namespace Pinta.Gui.Widgets
 			var dstStride = dst.Stride;
 			var sTop = D2SLookupY[offset.Y];
 			var sBottom = D2SLookupY[offset.Y + dstHeight];
+			var lookup_y = S2DLookupY;
 
 			for (var srcY = sTop; srcY <= sBottom; ++srcY) {
-				var dstY = S2DLookupY[srcY];
+				var dstY = lookup_y[srcY];
 				var dstRow = dstY - offset.Y;
 
 				if (dstRow >= 0 && dstRow < dstHeight) {
@@ -296,9 +301,10 @@ namespace Pinta.Gui.Widgets
 			// Draw vertical lines
 			var sLeft = D2SLookupX[offset.X];
 			var sRight = D2SLookupX[offset.X + dstWidth];
+			var lookup_x = S2DLookupX;
 
 			for (var srcX = sLeft; srcX <= sRight; ++srcX) {
-				var dstX = S2DLookupX[srcX];
+				var dstX = lookup_x[srcX];
 				var dstCol = dstX - offset.X;
 
 				if (dstCol >= 0 && dstCol < dstWidth) {
@@ -315,70 +321,54 @@ namespace Pinta.Gui.Widgets
 			}
 		}
 
-		private int[] CreateLookupX (int srcWidth, int dstWidth, ScaleFactor scaleFactor)
+		private static int[] CreateLookupX (int srcWidth, int dstWidth, ScaleFactor scaleFactor)
 		{
 			var lookup = new int[dstWidth + 1];
 
-			for (var x = 0; x < lookup.Length; ++x) {
-				var pt = new Point (x, 0);
-				var clientPt = scaleFactor.ScalePoint (pt);
-
-				// Sometimes the scale factor is slightly different on one axis than
-				// on another, simply due to accuracy. So we have to clamp this value to
-				// be within bounds.
-				lookup[x] = Utility.Clamp (clientPt.X, 0, srcWidth - 1);
-			}
+			// Sometimes the scale factor is slightly different on one axis than
+			// on another, simply due to accuracy. So we have to clamp this value to
+			// be within bounds.
+			for (var x = 0; x < lookup.Length; ++x)
+				lookup[x] = Utility.Clamp (scaleFactor.ScaleScalar (x), 0, srcWidth - 1);
 
 			return lookup;
 		}
 
-		private int[] CreateLookupY (int srcHeight, int dstHeight, ScaleFactor scaleFactor)
+		private static int[] CreateLookupY (int srcHeight, int dstHeight, ScaleFactor scaleFactor)
 		{
 			var lookup = new int[dstHeight + 1];
 
-			for (var y = 0; y < lookup.Length; ++y) {
-				var pt = new Point (0, y);
-				var clientPt = scaleFactor.ScalePoint (pt);
-
-				// Sometimes the scale factor is slightly different on one axis than
-				// on another, simply due to accuracy. So we have to clamp this value to
-				// be within bounds.
-				lookup[y] = Utility.Clamp (clientPt.Y, 0, srcHeight - 1);
-			}
+			// Sometimes the scale factor is slightly different on one axis than
+			// on another, simply due to accuracy. So we have to clamp this value to
+			// be within bounds.
+			for (var y = 0; y < lookup.Length; ++y)
+				lookup[y] = Utility.Clamp (scaleFactor.ScaleScalar (y), 0, srcHeight - 1);
 
 			return lookup;
 		}
 
-		private int[] CreateS2DLookupX (int srcWidth, int dstWidth, ScaleFactor scaleFactor)
+		private static int[] CreateS2DLookupX (int srcWidth, int dstWidth, ScaleFactor scaleFactor)
 		{
 			var lookup = new int[srcWidth + 1];
 
-			for (var x = 0; x < lookup.Length; ++x) {
-				var pt = new Gdk.Point (x, 0);
-				var clientPt = scaleFactor.UnscalePoint (pt);
-
-				// Sometimes the scale factor is slightly different on one axis than
-				// on another, simply due to accuracy. So we have to clamp this value to
-				// be within bounds.
-				lookup[x] = Utility.Clamp (clientPt.X, 0, dstWidth - 1);
-			}
+			// Sometimes the scale factor is slightly different on one axis than
+			// on another, simply due to accuracy. So we have to clamp this value to
+			// be within bounds.
+			for (var x = 0; x < lookup.Length; ++x)
+				lookup[x] = Utility.Clamp (scaleFactor.UnscaleScalar (x), 0, dstWidth - 1);
 
 			return lookup;
 		}
 
-		private int[] CreateS2DLookupY (int srcHeight, int dstHeight, ScaleFactor scaleFactor)
+		private static int[] CreateS2DLookupY (int srcHeight, int dstHeight, ScaleFactor scaleFactor)
 		{
 			var lookup = new int[srcHeight + 1];
 
-			for (var y = 0; y < lookup.Length; ++y) {
-				var pt = new Gdk.Point (0, y);
-				var clientPt = scaleFactor.UnscalePoint (pt);
-
-				// Sometimes the scale factor is slightly different on one axis than
-				// on another, simply due to accuracy. So we have to clamp this value to
-				// be within bounds.
-				lookup[y] = Utility.Clamp (clientPt.Y, 0, dstHeight - 1);
-			}
+			// Sometimes the scale factor is slightly different on one axis than
+			// on another, simply due to accuracy. So we have to clamp this value to
+			// be within bounds.
+			for (var y = 0; y < lookup.Length; ++y)
+				lookup[y] = Utility.Clamp (scaleFactor.UnscaleScalar (y), 0, dstHeight - 1);
 
 			return lookup;
 		}
