@@ -19,12 +19,12 @@ namespace Pinta.Core
 	/// </summary>
 	public struct ScaleFactor
 	{
-		private int denominator;
-		private int numerator;
+		private readonly int denominator;
+		private readonly int numerator;
 
 		public int Denominator { get { return denominator; } }
 		public int Numerator { get { return numerator; } }
-		public double Ratio { get { return (double) numerator / (double) denominator; } }
+		public double Ratio { get; }
 
 		public static readonly ScaleFactor OneToOne = new ScaleFactor (1, 1);
 		public static readonly ScaleFactor MinValue = new ScaleFactor (1, 100);
@@ -369,6 +369,7 @@ namespace Pinta.Core
 
 			this.numerator = numerator;
 			this.denominator = denominator;
+			Ratio = (double) numerator / (double) denominator;
 			this.Clamp ();
 		}
 	}
