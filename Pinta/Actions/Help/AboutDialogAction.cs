@@ -56,7 +56,7 @@ namespace Pinta.Actions
 				Version = PintaCore.ApplicationVersion,
 				Website = "https://www.pinta-project.com",
 				Comments = Translations.GetString ("Easily create and edit images"),
-				Copyright = BuildCopyrightText(),
+				Copyright = BuildCopyrightText (),
 				License = BuildLicenseText (),
 				Authors = authors,
 				TranslatorCredits = Translations.GetString ("translator-credits"),
@@ -64,14 +64,14 @@ namespace Pinta.Actions
 			dlg.Run ();
 		}
 
-		private string BuildCopyrightText()
+		private string BuildCopyrightText ()
 		{
 			return string.Format ("{0} (c) 2010-2022 {1}",
 				Translations.GetString ("Copyright"),
 				Translations.GetString ("by Pinta contributors"));
 		}
 
-		private string BuildLicenseText()
+		private string BuildLicenseText ()
 		{
 			var sb = new StringBuilder ();
 
