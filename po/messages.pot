@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2022-01-11 23:44-0500\n"
+"POT-Creation-Date: 2022-01-15 12:51-0500\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -64,7 +64,7 @@ msgstr ""
 msgid "About"
 msgstr ""
 
-#: ../Pinta/Dialogs/AboutDialog.cs:260
+#: ../Pinta/Actions/Help/AboutDialogAction.cs:52
 msgid "About Pinta"
 msgstr ""
 
@@ -197,7 +197,7 @@ msgstr ""
 msgid "Background:"
 msgstr ""
 
-#: ../Pinta/Dialogs/AboutDialog.cs:174
+#: ../Pinta/Actions/Help/AboutDialogAction.cs:82
 msgid "Based on the work of Paint.NET:"
 msgstr ""
 
@@ -343,7 +343,7 @@ msgid ""
 "circle."
 msgstr ""
 
-#: ../Pinta.Tools/Tools/GradientTool.cs:53
+#: ../Pinta.Tools/Tools/GradientTool.cs:51
 msgid ""
 "Click and drag to draw gradient from primary to secondary color.  Right "
 "click to reverse."
@@ -429,7 +429,7 @@ msgstr ""
 msgid "Color Dodge"
 msgstr ""
 
-#: ../Pinta.Tools/Tools/GradientTool.cs:200
+#: ../Pinta.Tools/Tools/GradientTool.cs:203
 msgid "Color Mode"
 msgstr ""
 
@@ -449,7 +449,7 @@ msgstr ""
 msgid "Coloring"
 msgstr ""
 
-#: ../Pinta.Tools/Tools/GradientTool.cs:185
+#: ../Pinta.Tools/Tools/GradientTool.cs:188
 msgid "Conical Gradient"
 msgstr ""
 
@@ -466,10 +466,6 @@ msgstr ""
 msgid "Contrast"
 msgstr ""
 
-#: ../Pinta/Dialogs/AboutDialog.cs:142
-msgid "Contributors to this release:"
-msgstr ""
-
 #: ../Pinta.Core/Actions/EditActions.cs:62
 msgid "Copy"
 msgstr ""
@@ -478,11 +474,7 @@ msgstr ""
 msgid "Copy Merged"
 msgstr ""
 
-#: ../Pinta/Dialogs/VersionInformationTabPage.cs:67
-msgid "Copy Version Info"
-msgstr ""
-
-#: ../Pinta/Dialogs/AboutPintaTabPage.cs:56
+#: ../Pinta/Actions/Help/AboutDialogAction.cs:70
 msgid "Copyright"
 msgstr ""
 
@@ -611,7 +603,7 @@ msgstr ""
 msgid "Duplicate Layer"
 msgstr ""
 
-#: ../xdg/pinta.desktop.in.h:2
+#: ../xdg/pinta.desktop.in.h:2 ../Pinta/Actions/Help/AboutDialogAction.cs:58
 msgid "Easily create and edit images"
 msgstr ""
 
@@ -803,8 +795,8 @@ msgstr ""
 msgid "Glow"
 msgstr ""
 
-#: ../Pinta.Tools/Tools/GradientTool.cs:51
-#: ../Pinta.Tools/Tools/GradientTool.cs:175
+#: ../Pinta.Tools/Tools/GradientTool.cs:49
+#: ../Pinta.Tools/Tools/GradientTool.cs:178
 msgid "Gradient"
 msgstr ""
 
@@ -1140,7 +1132,7 @@ msgstr ""
 msgid "Levels Adjustment"
 msgstr ""
 
-#: ../Pinta/Dialogs/AboutPintaTabPage.cs:50
+#: ../Pinta/Actions/Help/AboutDialogAction.cs:78
 msgid "License"
 msgstr ""
 
@@ -1160,15 +1152,15 @@ msgstr ""
 msgid "Line/Curve"
 msgstr ""
 
-#: ../Pinta.Tools/Tools/GradientTool.cs:183
+#: ../Pinta.Tools/Tools/GradientTool.cs:186
 msgid "Linear Diamond Gradient"
 msgstr ""
 
-#: ../Pinta.Tools/Tools/GradientTool.cs:181
+#: ../Pinta.Tools/Tools/GradientTool.cs:184
 msgid "Linear Gradient"
 msgstr ""
 
-#: ../Pinta.Tools/Tools/GradientTool.cs:182
+#: ../Pinta.Tools/Tools/GradientTool.cs:185
 msgid "Linear Reflected Gradient"
 msgstr ""
 
@@ -1212,7 +1204,7 @@ msgstr ""
 msgid "Missing: {0} v{1}"
 msgstr ""
 
-#: ../Pinta.Tools/Tools/GradientTool.cs:194
+#: ../Pinta.Tools/Tools/GradientTool.cs:197
 msgid "Mode"
 msgstr ""
 
@@ -1450,10 +1442,6 @@ msgstr ""
 msgid "Paste Into New Layer"
 msgstr ""
 
-#: ../Pinta/Dialogs/VersionInformationTabPage.cs:53
-msgid "Path"
-msgstr ""
-
 #: Mono.Addins.Gui/gtk-gui/Mono.Addins.Gui.NewSiteDialog.cs:130
 msgid "Path:"
 msgstr ""
@@ -1481,7 +1469,7 @@ msgstr ""
 msgid "Photo"
 msgstr ""
 
-#: ../xdg/pinta.desktop.in.h:1
+#: ../xdg/pinta.desktop.in.h:1 ../Pinta/Actions/Help/AboutDialogAction.cs:54
 msgid "Pinta"
 msgstr ""
 
@@ -1568,10 +1556,6 @@ msgstr ""
 msgid "Preview"
 msgstr ""
 
-#: ../Pinta/Dialogs/AboutDialog.cs:154
-msgid "Previous contributors:"
-msgstr ""
-
 #: ../Pinta.Effects/Effects/WarpEffect.cs:25
 msgid "Primary"
 msgstr ""
@@ -1607,7 +1591,7 @@ msgstr ""
 msgid "Radial Blur"
 msgstr ""
 
-#: ../Pinta.Tools/Tools/GradientTool.cs:184
+#: ../Pinta.Tools/Tools/GradientTool.cs:187
 msgid "Radial Gradient"
 msgstr ""
 
@@ -1677,7 +1661,7 @@ msgstr ""
 msgid "Registering repository"
 msgstr ""
 
-#: ../Pinta/Dialogs/AboutPintaTabPage.cs:50
+#: ../Pinta/Actions/Help/AboutDialogAction.cs:79
 msgid "Released under the MIT X11 License."
 msgstr ""
 
@@ -2072,10 +2056,6 @@ msgstr ""
 msgid "Tip: Right-click to remove control points."
 msgstr ""
 
-#: ../Pinta/Dialogs/VersionInformationTabPage.cs:44
-msgid "Title"
-msgstr ""
-
 #: ../Pinta.Effects/Effects/RedEyeRemoveEffect.cs:70
 #: ../Pinta.Tools/Tools/FloodTool.cs:127
 #: ../Pinta.Tools/Tools/RecolorTool.cs:200
@@ -2106,11 +2086,7 @@ msgstr ""
 msgid "Translate This Application"
 msgstr ""
 
-#: ../Pinta/Dialogs/AboutDialog.cs:168
-msgid "Translated by:"
-msgstr ""
-
-#: ../Pinta.Tools/Tools/GradientTool.cs:201
+#: ../Pinta.Tools/Tools/GradientTool.cs:204
 msgid "Transparency Mode"
 msgstr ""
 
@@ -2206,17 +2182,8 @@ msgid ""
 "quality for final quality, large images, and large angles."
 msgstr ""
 
-#: ../Pinta/Dialogs/AboutDialog.cs:181
+#: ../Pinta/Actions/Help/AboutDialogAction.cs:86
 msgid "Using some icons from:"
-msgstr ""
-
-#: ../Pinta/Dialogs/AboutPintaTabPage.cs:42
-#: ../Pinta/Dialogs/VersionInformationTabPage.cs:50
-msgid "Version"
-msgstr ""
-
-#: ../Pinta/Dialogs/AboutDialog.cs:277
-msgid "Version Info"
 msgstr ""
 
 #: ../Pinta/Dialogs/LayerPropertiesDialog.cs:195
@@ -2330,7 +2297,7 @@ msgstr ""
 msgid "_Window"
 msgstr ""
 
-#: ../Pinta/Dialogs/AboutPintaTabPage.cs:56
+#: ../Pinta/Actions/Help/AboutDialogAction.cs:71
 msgid "by Pinta contributors"
 msgstr ""
 
@@ -2351,7 +2318,7 @@ msgstr ""
 msgid "pixels"
 msgstr ""
 
-#: ../Pinta/Dialogs/AboutDialog.cs:165
+#: ../Pinta/Actions/Help/AboutDialogAction.cs:62
 msgid "translator-credits"
 msgstr ""
 

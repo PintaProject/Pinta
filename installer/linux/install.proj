@@ -39,12 +39,6 @@
     <Copy SourceFiles="$(SourceDir)/xdg/pinta.appdata.xml" DestinationFolder="$(InstallDataRootDir)/metainfo" />
     <Copy SourceFiles="$(SourceDir)/xdg/pinta.desktop" DestinationFolder="$(InstallDataRootDir)/applications" />
     <Copy SourceFiles="$(SourceDir)/xdg/pinta.xpm" DestinationFolder="$(InstallDataRootDir)/pixmaps" />
-    <Copy SourceFiles="$(SourceDir)/xdg/16x16/pinta.png" DestinationFolder="$(InstallDataRootDir)/icons/hicolor/16x16/apps" />
-    <Copy SourceFiles="$(SourceDir)/xdg/22x22/pinta.png" DestinationFolder="$(InstallDataRootDir)/icons/hicolor/22x22/apps" />
-    <Copy SourceFiles="$(SourceDir)/xdg/24x24/pinta.png" DestinationFolder="$(InstallDataRootDir)/icons/hicolor/24x24/apps" />
-    <Copy SourceFiles="$(SourceDir)/xdg/32x32/pinta.png" DestinationFolder="$(InstallDataRootDir)/icons/hicolor/32x32/apps" />
-    <Copy SourceFiles="$(SourceDir)/xdg/96x96/pinta.png" DestinationFolder="$(InstallDataRootDir)/icons/hicolor/96x96/apps" />
-    <Copy SourceFiles="$(SourceDir)/xdg/scalable/pinta.svg" DestinationFolder="$(InstallDataRootDir)/icons/hicolor/scalable/apps" />
     <Copy SourceFiles="@(Icon)" DestinationFolder="$(InstallDataRootDir)/icons/%(Icon.RecursiveDir)" />
     <Copy SourceFiles="@(Translation)" DestinationFolder="$(InstallLocaleDir)/%(Translation.RecursiveDir)" />
   </Target>
@@ -59,13 +53,7 @@
     <Delete Files="$(InstallDataRootDir)/metainfo/pinta.appdata.xml" />
     <Delete Files="$(InstallDataRootDir)/applications/pinta.desktop" />
     <Delete Files="$(InstallDataRootDir)/pixmaps/pinta.xpm" />
-    <Delete Files="$(InstallDataRootDir)/icons/hicolor/16x16/apps/pinta.png" />
-    <Delete Files="$(InstallDataRootDir)/icons/hicolor/22x22/apps/pinta.png" />
-    <Delete Files="$(InstallDataRootDir)/icons/hicolor/24x24/apps/pinta.png" />
-    <Delete Files="$(InstallDataRootDir)/icons/hicolor/32x32/apps/pinta.png" />
-    <Delete Files="$(InstallDataRootDir)/icons/hicolor/96x96/apps/pinta.png" />
-    <Delete Files="$(InstallDataRootDir)/icons/hicolor/scalable/apps/pinta.svg" />
-    <Delete Files="$(InstallDataRootDir)/icons/%(Icon.RecursiveDir)/%(Icon.Filename).png" />
+    <Delete Files="$(InstallDataRootDir)/icons/%(Icon.RecursiveDir)/%(Icon.Filename).%(Icon.Extension)" />
     <Delete Files="$(InstallLocaleDir)/%(Translation.RecursiveDir)/pinta.mo" />
   </Target>
 </Project>

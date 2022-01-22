@@ -130,6 +130,8 @@ namespace Pinta.Resources
 		public const string LayerProperties = "layer-properties";
 		public const string LayerRotateZoom = "layer-rotatezoom";
 
+		public const string Pinta = "pinta";
+
 		public const string ResizeCanvasBase = "resize-canvas-base";
 		public const string ResizeCanvasDown = "resize-canvas-down";
 		public const string ResizeCanvasLeft = "resize-canvas-left";
