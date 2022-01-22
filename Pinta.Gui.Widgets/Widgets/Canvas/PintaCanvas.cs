@@ -25,6 +25,8 @@
 // THE SOFTWARE.
 
 using System;
+using System.Collections.Generic;
+using System.Linq;
 using Gdk;
 using Gtk;
 using Pinta.Core;
@@ -155,7 +157,22 @@ namespace Pinta.Gui.Widgets
 				document.Selection.Draw (g, scale, fillSelection);
 			}
 
+			if (PintaCore.Tools.CurrentTool is not null) {
+				g.Save ();
+				g.ResetClip (); // Don't clip the control at the edge of the image.
+				g.Translate (-x, -y);
+				DrawHandles (g, PintaCore.Tools.CurrentTool.Handles);
+				g.Restore ();
+			}
+
 			return true;
+		}
+
+		private void DrawHandles (Cairo.Context cr, IEnumerable<IToolHandle> controls)
+		{
+			foreach (var control in controls.Where (c => c.Active)) {
+				control.Draw (cr);
+			}
 		}
 
 		private void SetRequisition (Size size)

@@ -106,6 +106,4 @@ namespace Pinta.Tools
 		}
 		#endregion
 	}
-
-	public delegate void MouseHandler (double x, double y, Gdk.ModifierType state);
 }

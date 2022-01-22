@@ -25,6 +25,7 @@
 // THE SOFTWARE.
 
 using System;
+using System.Collections.Generic;
 using System.Linq;
 using Cairo;
 using Gdk;
@@ -43,20 +44,30 @@ namespace Pinta.Tools
 		private PointD reset_origin;
 		private PointD shape_end;
 		private Gdk.Rectangle last_dirty;
-		private ToolControl[] controls = new ToolControl[8];
-		private int? active_control;
 		private SelectionHistoryItem? hist;
+		private CombineMode combine_mode;
+
+		private readonly MoveHandle[] handles = new MoveHandle[8];
+		private int? active_handle;
+		private CursorType? active_cursor;
+
 		public override Gdk.Key ShortcutKey { get { return Gdk.Key.S; } }
 		protected override bool ShowAntialiasingButton { get { return false; } }
-		private CursorType? active_cursor;
-		private CombineMode combine_mode;
+		public override IEnumerable<MoveHandle> Handles => handles;
 
 		public SelectTool (IServiceManager services) : base (services)
 		{
 			tools = services.GetService<IToolService> ();
 			workspace = services.GetService<IWorkspaceService> ();
 
-			CreateHandler ();
+			handles[0] = new MoveHandle { Cursor = CursorType.TopLeftCorner };
+			handles[1] = new MoveHandle { Cursor = CursorType.BottomLeftCorner };
+			handles[2] = new MoveHandle { Cursor = CursorType.TopRightCorner };
+			handles[3] = new MoveHandle { Cursor = CursorType.BottomRightCorner };
+			handles[4] = new MoveHandle { Cursor = CursorType.LeftSide };
+			handles[5] = new MoveHandle { Cursor = CursorType.TopSide };
+			handles[6] = new MoveHandle { Cursor = CursorType.RightSide };
+			handles[7] = new MoveHandle { Cursor = CursorType.BottomSide };
 
 			workspace.SelectionChanged += AfterSelectionChange;
 		}
@@ -80,13 +91,13 @@ namespace Pinta.Tools
 			hist.TakeSnapshot ();
 
 			reset_origin = e.WindowPoint;
-			active_control = HandleResize (e.PointDouble);
+			active_handle = FindHandleIndexUnderPoint (e.WindowPoint);
 
-			if (!active_control.HasValue) {
+			if (!active_handle.HasValue) {
 				combine_mode = PintaCore.Workspace.SelectionHandler.DetermineCombineMode (e);
 
-				var x = Utility.Clamp (e.PointDouble.X, 0, document.ImageSize.Width - 1);
-				var y = Utility.Clamp (e.PointDouble.Y, 0, document.ImageSize.Height - 1);
+				var x = Math.Round (Utility.Clamp (e.PointDouble.X, 0, document.ImageSize.Width - 1));
+				var y = Math.Round (Utility.Clamp (e.PointDouble.Y, 0, document.ImageSize.Height - 1));
 				shape_origin = new PointD (x, y);
 
 				document.PreviousSelection.Dispose ();
@@ -94,7 +105,7 @@ namespace Pinta.Tools
 				document.Selection.SelectionPolygons.Clear ();
 
 				// The bottom right corner should be selected.
-				active_control = 3;
+				active_handle = 3;
 			}
 
 			// Do a full redraw for modes that can wipe existing selections outside the rectangle being drawn.
@@ -109,21 +120,20 @@ namespace Pinta.Tools
 		protected override void OnMouseMove (Document document, ToolMouseEventArgs e)
 		{
 			if (!is_drawing) {
-				UpdateCursor (document, e.PointDouble);
+				UpdateCursor (document, e.WindowPoint);
 				return;
 			}
 
-			var x = Utility.Clamp (e.PointDouble.X, 0, document.ImageSize.Width - 1);
-			var y = Utility.Clamp (e.PointDouble.Y, 0, document.ImageSize.Height - 1);
+			var x = Math.Round (Utility.Clamp (e.PointDouble.X, 0, document.ImageSize.Width - 1));
+			var y = Math.Round (Utility.Clamp (e.PointDouble.Y, 0, document.ImageSize.Height - 1));
 
 			// Should always be true, set in OnMouseDown
-			if (active_control.HasValue)
-				controls[active_control.Value].HandleMouseMove (x, y, e.State);
+			if (active_handle.HasValue)
+				OnHandleMoved (active_handle.Value, x, y, e.IsShiftPressed);
 
-			ClearHandles (document.Layers.ToolLayer);
-			RefreshHandler ();
+			var dirty = ReDraw (document);
 
-			var dirty = ReDraw (document, e.IsShiftPressed);
+			UpdateHandlePositions ();
 
 			if (document.Selection != null) {
 				SelectionModeHandler.PerformSelectionMode (combine_mode, document.Selection.SelectionPolygons);
@@ -154,9 +164,7 @@ namespace Pinta.Tools
 				PintaCore.Actions.Edit.Deselect.Activate ();
 
 			} else {
-				ClearHandles (document.Layers.ToolLayer);
-
-				var dirty = ReDraw (document, e.IsShiftPressed);
+				var dirty = ReDraw (document);
 
 				if (document.Selection != null) {
 					SelectionModeHandler.PerformSelectionMode (combine_mode, document.Selection.SelectionPolygons);
@@ -173,10 +181,10 @@ namespace Pinta.Tools
 			}
 
 			is_drawing = false;
-			active_control = null;
+			active_handle = null;
 
 			// Update the mouse cursor.
-			UpdateCursor (document, e.PointDouble);
+			UpdateCursor (document, e.WindowPoint);
 		}
 
 		protected override void OnActivated (Document? document)
@@ -186,17 +194,8 @@ namespace Pinta.Tools
 			// When entering the tool, update the selection handles from the
 			// document's current selection.
 			if (document is not null) {
-				shape_origin = document.Selection.Origin;
-				shape_end = document.Selection.End;
-				UpdateHandler (document);
+				LoadFromDocument (document);
 			}
-		}
-
-		protected override void OnDeactivated (Document? document, BaseTool? newTool)
-		{
-			base.OnDeactivated (document, newTool);
-
-			document?.Layers.ToolLayer.Clear ();
 		}
 
 		protected override void OnSaveSettings (ISettingsService settings)
@@ -206,161 +205,156 @@ namespace Pinta.Tools
 			workspace.SelectionHandler.OnSaveSettings (settings);
 		}
 
-		private void RefreshHandler ()
+		private void OnHandleMoved (int handle, double x, double y, bool shift_pressed)
 		{
-			controls[0].Position = new PointD (shape_origin.X, shape_origin.Y);
-			controls[1].Position = new PointD (shape_origin.X, shape_end.Y);
-			controls[2].Position = new PointD (shape_end.X, shape_origin.Y);
-			controls[3].Position = new PointD (shape_end.X, shape_end.Y);
-			controls[4].Position = new PointD (shape_origin.X, (shape_origin.Y + shape_end.Y) / 2);
-			controls[5].Position = new PointD ((shape_origin.X + shape_end.X) / 2, shape_origin.Y);
-			controls[6].Position = new PointD (shape_end.X, (shape_origin.Y + shape_end.Y) / 2);
-			controls[7].Position = new PointD ((shape_origin.X + shape_end.X) / 2, shape_end.Y);
+			switch (handle) {
+				case 0:
+					shape_origin.X = x;
+					shape_origin.Y = y;
+					if (shift_pressed) {
+						if (shape_end.X - shape_origin.X <= shape_end.Y - shape_origin.Y)
+							shape_origin.X = shape_end.X - shape_end.Y + shape_origin.Y;
+						else
+							shape_origin.Y = shape_end.Y - shape_end.X + shape_origin.X;
+					}
+					break;
+				case 1:
+					shape_origin.X = x;
+					shape_end.Y = y;
+					if (shift_pressed) {
+						if (shape_end.X - shape_origin.X <= shape_end.Y - shape_origin.Y)
+							shape_origin.X = shape_end.X - shape_end.Y + shape_origin.Y;
+						else
+							shape_end.Y = shape_origin.Y + shape_end.X - shape_origin.X;
+					}
+					break;
+				case 2:
+					shape_end.X = x;
+					shape_origin.Y = y;
+					if (shift_pressed) {
+						if (shape_end.X - shape_origin.X <= shape_end.Y - shape_origin.Y)
+							shape_end.X = shape_origin.X + shape_end.Y - shape_origin.Y;
+						else
+							shape_origin.Y = shape_end.Y - shape_end.X + shape_origin.X;
+					}
+					break;
+				case 3:
+					shape_end.X = x;
+					shape_end.Y = y;
+					if (shift_pressed) {
+						if (shape_end.X - shape_origin.X <= shape_end.Y - shape_origin.Y)
+							shape_end.X = shape_origin.X + shape_end.Y - shape_origin.Y;
+						else
+							shape_end.Y = shape_origin.Y + shape_end.X - shape_origin.X;
+					}
+					break;
+				case 4:
+					shape_origin.X = x;
+					if (shift_pressed) {
+						var d = shape_end.X - shape_origin.X;
+						shape_origin.Y = (shape_origin.Y + shape_end.Y - d) / 2;
+						shape_end.Y = (shape_origin.Y + shape_end.Y + d) / 2;
+					}
+					break;
+				case 5:
+					shape_origin.Y = y;
+					if (shift_pressed) {
+						var d = shape_end.Y - shape_origin.Y;
+						shape_origin.X = (shape_origin.X + shape_end.X - d) / 2;
+						shape_end.X = (shape_origin.X + shape_end.X + d) / 2;
+					}
+					break;
+				case 6:
+					shape_end.X = x;
+					if (shift_pressed) {
+						var d = shape_end.X - shape_origin.X;
+						shape_origin.Y = (shape_origin.Y + shape_end.Y - d) / 2;
+						shape_end.Y = (shape_origin.Y + shape_end.Y + d) / 2;
+					}
+					break;
+				case 7:
+					shape_end.Y = y;
+					if (shift_pressed) {
+						var d = shape_end.Y - shape_origin.Y;
+						shape_origin.X = (shape_origin.X + shape_end.X - d) / 2;
+						shape_end.X = (shape_origin.X + shape_end.X + d) / 2;
+					}
+					break;
+				default:
+					throw new ArgumentOutOfRangeException ("handle");
+			}
 		}
 
-		private Gdk.Rectangle ReDraw (Document document, bool constraint)
+		private void UpdateHandlePositions ()
 		{
-			document.Selection.Visible = true;
-			document.Layers.ToolLayer.Hidden = false;
+			Gdk.Rectangle ComputeHandleBounds ()
+			{
+				// When loading a new document, we might get a selection change event
+				// before there is a canvas size / scale.
+				if (PintaCore.Workspace.CanvasSize.IsEmpty)
+					return Gdk.Rectangle.Zero;
 
-			if (constraint) {
-				var dx = Math.Abs (shape_end.X - shape_origin.X);
-				var dy = Math.Abs (shape_end.Y - shape_origin.Y);
-
-				if (dx <= dy)
-					if (shape_end.X >= shape_origin.X)
-						shape_end.X = shape_origin.X + dy;
-					else
-						shape_end.X = shape_origin.X - dy;
-				else
-					if (shape_end.Y >= shape_origin.Y)
-					shape_end.Y = shape_origin.Y + dx;
-				else
-					shape_end.Y = shape_origin.Y - dx;
+				return handles.Select (c => c.InvalidateRect).Aggregate ((accum, r) => accum.Union (r));
 			}
 
-			var rect = Utility.PointsToRectangle (shape_origin, shape_end, constraint);
+			var dirty = ComputeHandleBounds ();
+			handles[0].CanvasPosition = new PointD (shape_origin.X, shape_origin.Y);
+			handles[1].CanvasPosition = new PointD (shape_origin.X, shape_end.Y);
+			handles[2].CanvasPosition = new PointD (shape_end.X, shape_origin.Y);
+			handles[3].CanvasPosition = new PointD (shape_end.X, shape_end.Y);
+			handles[4].CanvasPosition = new PointD (shape_origin.X, (shape_origin.Y + shape_end.Y) / 2);
+			handles[5].CanvasPosition = new PointD ((shape_origin.X + shape_end.X) / 2, shape_origin.Y);
+			handles[6].CanvasPosition = new PointD (shape_end.X, (shape_origin.Y + shape_end.Y) / 2);
+			handles[7].CanvasPosition = new PointD ((shape_origin.X + shape_end.X) / 2, shape_end.Y);
+			dirty = dirty.Union (ComputeHandleBounds ());
+
+			// Repaint at the old and new handle positions.
+			PintaCore.Workspace.InvalidateWindowRect (dirty);
+		}
+
+		private Gdk.Rectangle ReDraw (Document document)
+		{
+			document.Selection.Visible = true;
+			ShowHandles (true);
+
+			var rect = Utility.PointsToRectangle (shape_origin, shape_end);
 
 			DrawShape (document, rect, document.Layers.SelectionLayer);
-			DrawHandler (document, document.Layers.ToolLayer);
 
 			// Figure out a bounding box for everything that was drawn, and add a bit of padding.
 			var dirty = rect.ToGdkRectangle ();
-
-			foreach (var tool_control in controls)
-				dirty = dirty.Union (tool_control.GetHandleRect ().ToGdkRectangle ());
-
 			dirty.Inflate (2, 2);
 			return dirty;
 		}
 
-		protected void CreateHandler ()
+		private void ShowHandles (bool visible)
 		{
-			controls[0] = new ToolControl (CursorType.TopLeftCorner, (x, y, s) => {
-				shape_origin.X = x;
-				shape_origin.Y = y;
-				if ((s & Gdk.ModifierType.ShiftMask) == Gdk.ModifierType.ShiftMask) {
-					if (shape_end.X - shape_origin.X <= shape_end.Y - shape_origin.Y)
-						shape_origin.X = shape_end.X - shape_end.Y + shape_origin.Y;
-					else
-						shape_origin.Y = shape_end.Y - shape_end.X + shape_origin.X;
-				}
-			});
-			controls[1] = new ToolControl (CursorType.BottomLeftCorner, (x, y, s) => {
-				shape_origin.X = x;
-				shape_end.Y = y;
-				if ((s & Gdk.ModifierType.ShiftMask) == Gdk.ModifierType.ShiftMask) {
-					if (shape_end.X - shape_origin.X <= shape_end.Y - shape_origin.Y)
-						shape_origin.X = shape_end.X - shape_end.Y + shape_origin.Y;
-					else
-						shape_end.Y = shape_origin.Y + shape_end.X - shape_origin.X;
-				}
-			});
-			controls[2] = new ToolControl (CursorType.TopRightCorner, (x, y, s) => {
-				shape_end.X = x;
-				shape_origin.Y = y;
-				if ((s & Gdk.ModifierType.ShiftMask) == Gdk.ModifierType.ShiftMask) {
-					if (shape_end.X - shape_origin.X <= shape_end.Y - shape_origin.Y)
-						shape_end.X = shape_origin.X + shape_end.Y - shape_origin.Y;
-					else
-						shape_origin.Y = shape_end.Y - shape_end.X + shape_origin.X;
-				}
-			});
-			controls[3] = new ToolControl (CursorType.BottomRightCorner, (x, y, s) => {
-				shape_end.X = x;
-				shape_end.Y = y;
-				if ((s & Gdk.ModifierType.ShiftMask) == Gdk.ModifierType.ShiftMask) {
-					if (shape_end.X - shape_origin.X <= shape_end.Y - shape_origin.Y)
-						shape_end.X = shape_origin.X + shape_end.Y - shape_origin.Y;
-					else
-						shape_end.Y = shape_origin.Y + shape_end.X - shape_origin.X;
-				}
-			});
-			controls[4] = new ToolControl (CursorType.LeftSide, (x, y, s) => {
-				shape_origin.X = x;
-				if ((s & Gdk.ModifierType.ShiftMask) == Gdk.ModifierType.ShiftMask) {
-					var d = shape_end.X - shape_origin.X;
-					shape_origin.Y = (shape_origin.Y + shape_end.Y - d) / 2;
-					shape_end.Y = (shape_origin.Y + shape_end.Y + d) / 2;
-				}
-			});
-			controls[5] = new ToolControl (CursorType.TopSide, (x, y, s) => {
-				shape_origin.Y = y;
-				if ((s & Gdk.ModifierType.ShiftMask) == Gdk.ModifierType.ShiftMask) {
-					var d = shape_end.Y - shape_origin.Y;
-					shape_origin.X = (shape_origin.X + shape_end.X - d) / 2;
-					shape_end.X = (shape_origin.X + shape_end.X + d) / 2;
-				}
-			});
-			controls[6] = new ToolControl (CursorType.RightSide, (x, y, s) => {
-				shape_end.X = x;
-				if ((s & Gdk.ModifierType.ShiftMask) == Gdk.ModifierType.ShiftMask) {
-					var d = shape_end.X - shape_origin.X;
-					shape_origin.Y = (shape_origin.Y + shape_end.Y - d) / 2;
-					shape_end.Y = (shape_origin.Y + shape_end.Y + d) / 2;
-				}
-			});
-			controls[7] = new ToolControl (CursorType.BottomSide, (x, y, s) => {
-				shape_end.Y = y;
-				if ((s & Gdk.ModifierType.ShiftMask) == Gdk.ModifierType.ShiftMask) {
-					var d = shape_end.Y - shape_origin.Y;
-					shape_origin.X = (shape_origin.X + shape_end.X - d) / 2;
-					shape_end.X = (shape_origin.X + shape_end.X + d) / 2;
-				}
-			});
+			foreach (var handle in handles)
+				handle.Active = visible;
 		}
 
-		public int? HandleResize (PointD point)
+		private MoveHandle? FindHandleUnderPoint (PointD window_point)
 		{
-			for (var i = 0; i < controls.Length; ++i) {
-				if (controls[i].IsInside (point))
-					return i;
+			return handles.FirstOrDefault (c => c.Active && c.ContainsPoint (window_point));
+		}
+
+		private int? FindHandleIndexUnderPoint (PointD window_point)
+		{
+			var handle = FindHandleUnderPoint (window_point);
+			if (handle is not null) {
+				return Array.IndexOf (handles, handle);
+			} else {
+				return null;
 			}
-
-			return null;
 		}
 
-		public void DrawHandler (Document document, Layer layer)
+		private void UpdateCursor (Document document, PointD window_point)
 		{
-			if (!document.Selection.Visible)
+			var active_handle = FindHandleUnderPoint (window_point);
+			if (active_handle is not null) {
+				SetCursor (new Cursor (active_handle.Cursor));
+				active_cursor = active_handle.Cursor;
 				return;
-
-			using (var g = new Context (layer.Surface)) {
-				foreach (var tool_control in controls)
-					tool_control.Render (g);
-			}
-		}
-
-		public void UpdateCursor (Document document, PointD point)
-		{
-			if (document.Selection.Visible) {
-				foreach (var ct in controls.Where (ct => ct.IsInside (point))) {
-					if (active_cursor != ct.Cursor) {
-						SetCursor (new Cursor (ct.Cursor));
-						active_cursor = ct.Cursor;
-					}
-					return;
-				}
 			}
 
 			if (active_cursor.HasValue) {
@@ -372,62 +366,37 @@ namespace Pinta.Tools
 		protected override void OnAfterUndo (Document document)
 		{
 			base.OnAfterUndo (document);
-
-			if (tools.CurrentTool == this)
-				document.Layers.ToolLayer.Hidden = false;
-
-			shape_origin = document.Selection.Origin;
-			shape_end = document.Selection.End;
-			UpdateHandler (document);
+			LoadFromDocument (document);
 		}
 
 		protected override void OnAfterRedo (Document document)
 		{
 			base.OnAfterRedo (document);
-
-			if (tools.CurrentTool == this)
-				document.Layers.ToolLayer.Hidden = false;
-
-			shape_origin = document.Selection.Origin;
-			shape_end = document.Selection.End;
-			UpdateHandler (document);
+			LoadFromDocument (document);
 		}
 
 		private void AfterSelectionChange (object? sender, EventArgs event_args)
 		{
-			if (is_drawing || !PintaCore.Workspace.HasOpenDocuments)
+			if (is_drawing || !workspace.HasOpenDocuments)
 				return;
 
 			// TODO: Try to remove this ActiveDocument call
-			var document = workspace.ActiveDocument;
-			var selection = document.Selection;
+			LoadFromDocument (workspace.ActiveDocument);
+		}
 
+		/// <summary>
+		/// Initialize from the document's selection.
+		/// </summary>
+		private void LoadFromDocument (Document document)
+		{
+			var selection = document.Selection;
 			shape_origin = selection.Origin;
 			shape_end = selection.End;
+			ShowHandles (document.Selection.Visible);
 
-			if (tools.CurrentTool == this)
-				UpdateHandler (document);
-		}
-
-		/// <summary>
-		/// Update the selection handles' positions, and redraw them.
-		/// </summary>
-		private void UpdateHandler (Document document)
-		{
-			ClearHandles (document.Layers.ToolLayer);
-			RefreshHandler ();
-			DrawHandler (document, document.Layers.ToolLayer);
-			document.Workspace.Invalidate ();
-		}
-
-		/// <summary>
-		/// Erase previously-drawn handles.
-		/// </summary>
-		private void ClearHandles (Layer layer)
-		{
-			using (var g = new Context (layer.Surface)) {
-				foreach (var tool_control in controls)
-					tool_control.Clear (g);
+			if (tools.CurrentTool == this) {
+				UpdateHandlePositions ();
+				document.Workspace.Invalidate ();
 			}
 		}
 	}

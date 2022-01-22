@@ -25,6 +25,7 @@
 // THE SOFTWARE.
 
 using System;
+using System.Collections.Generic;
 using System.Linq;
 using Gdk;
 using Gtk;
@@ -103,6 +104,11 @@ namespace Pinta.Core
 		/// Whether or not the tool is an editable ShapeTool.
 		/// </summary>
 		public virtual bool IsEditableShapeTool => false;
+
+		/// <summary>
+		/// A list of handles that should be drawn on the canvas window.
+		/// </summary>
+		public virtual IEnumerable<IToolHandle> Handles => Enumerable.Empty<IToolHandle> ();
 
 		/// <summary>
 		/// The shortcut key used to activate this tool in the toolbox. Return 0 for no shortcut key.

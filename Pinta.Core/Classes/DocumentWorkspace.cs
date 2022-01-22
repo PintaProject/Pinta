@@ -146,9 +146,18 @@ namespace Pinta.Core
 			Cairo.PointD winTopLeft = CanvasPointToWindow (canvasTopLeft.X, canvasTopLeft.Y);
 			Cairo.PointD winBtmRight = CanvasPointToWindow (canvasBtmRight.X, canvasBtmRight.Y);
 
-			Gdk.Rectangle winRect = Utility.PointsToRectangle (winTopLeft, winBtmRight, false).ToGdkRectangle ();
+			Gdk.Rectangle winRect = Utility.PointsToRectangle (winTopLeft, winBtmRight).ToGdkRectangle ();
 
 			OnCanvasInvalidated (new CanvasInvalidatedEventArgs (winRect));
+		}
+
+		/// <summary>
+		/// Repaints a rectangle region in the window.
+		/// Note that this overload uses window coordinates, whereas Invalidate() uses canvas coordinates.
+		/// </summary>
+		public void InvalidateWindowRect (Gdk.Rectangle windowRect)
+		{
+			OnCanvasInvalidated (new CanvasInvalidatedEventArgs (windowRect));
 		}
 
 		/// <summary>
