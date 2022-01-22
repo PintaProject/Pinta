@@ -160,6 +160,11 @@ namespace Pinta.Core
 			ActiveWorkspace.Invalidate (rect);
 		}
 
+		public void InvalidateWindowRect (Gdk.Rectangle windowRect)
+		{
+			ActiveWorkspace.InvalidateWindowRect (windowRect);
+		}
+
 		public Document NewDocument (Gdk.Size imageSize, Color backgroundColor)
 		{
 			Document doc = CreateAndActivateDocument (null, imageSize);

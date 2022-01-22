@@ -14,39 +14,18 @@ namespace Pinta.Core
 {
 	public static class Utility
 	{
-		public static Cairo.Rectangle PointsToRectangle (Cairo.PointD p1, Cairo.PointD p2, bool constrain)
+		/// <summary>
+		/// Create a rectangle with a positive width / height from the provided points.
+		/// </summary>
+		public static Cairo.Rectangle PointsToRectangle (Cairo.PointD p1, Cairo.PointD p2)
 		{
-			// We want to create a rectangle that always has positive width/height
-			double x, y, w, h;
+			double y1 = Math.Min (p1.Y, p2.Y);
+			double y2 = Math.Max (p1.Y, p2.Y);
+			double x1 = Math.Min (p1.X, p2.X);
+			double x2 = Math.Max (p1.X, p2.X);
 
-			if (p1.Y <= p2.Y) {
-				y = p1.Y;
-				h = p2.Y - y + 1;
-			} else {
-				y = p2.Y;
-				h = p1.Y - y + 1;
-			}
-
-			if (p1.X <= p2.X) {
-				x = p1.X;
-
-				if (constrain)
-					w = h;
-				else
-					w = p2.X - x + 1;
-			} else {
-				x = p2.X;
-
-				if (constrain) {
-					w = h;
-					x = p1.X - w;
-				} else
-					w = p1.X - x + 1;
-			}
-
-			return new Cairo.Rectangle (x, y, w, h);
+			return new Cairo.Rectangle (x1, y1, x2 - x1, y2 - y1);
 		}
-
 
 		internal static bool IsNumber (float x)
 		{

@@ -10,6 +10,7 @@ Thanks to the following contributors who worked on this release:
 ### Added
 - Updated icons to symbolic SVG icons, which are more usable for dark themes and high-res screens (#204, #207, [#1738106](https://bugs.launchpad.net/pinta/+bug/1738106), [#1909573](https://bugs.launchpad.net/pinta/+bug/1909573))
 - Added "Transparency Mode" to the Gradient tool
+- The selection move handles are now much easier to use when working on zoomed in or small images (#211, [#1173756](https://bugs.launchpad.net/pinta/+bug/1173756))
 - Improved support for `.ora` files
   - Hidden layers are now round-tripped correctly for `.ora` files ([#1377566](https://bugs.launchpad.net/pinta/+bug/1377566))
   - When saving a `.ora` file, a flattened image (`mergedimage.png`) is now included in the archive. This is required by the spec to accomodate viewer software ([#1377566](https://bugs.launchpad.net/pinta/+bug/1377566))

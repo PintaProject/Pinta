@@ -126,7 +126,7 @@ namespace Pinta.Tools
 		}
 
 		protected static readonly Color hover_color =
-		    new Color (ToolControl.FillColor.R, ToolControl.FillColor.G, ToolControl.FillColor.B, ToolControl.FillColor.A * 2d / 3d);
+			new Color (MoveHandle.FillColor.R, MoveHandle.FillColor.G, MoveHandle.FillColor.B, MoveHandle.FillColor.A * 2d / 3d);
 
 		public const double ShapeClickStartingRange = 10d;
 		public const double ShapeClickThicknessFactor = 1d;
@@ -1328,7 +1328,7 @@ namespace Pinta.Tools
 								selPoint.Position.X - controlPointOffset * 4d,
 								selPoint.Position.Y - controlPointOffset * 4d,
 								controlPointOffset * 8d, controlPointOffset * 8d),
-							ToolControl.FillColor, ToolControl.StrokeColor, 1);
+							MoveHandle.FillColor, MoveHandle.StrokeColor, 1);
 					}
 				}
 
@@ -1349,7 +1349,7 @@ namespace Pinta.Tools
 								controlPoints[i].Position.X - controlPointOffset,
 								controlPoints[i].Position.Y - controlPointOffset,
 								last_control_pt_size, last_control_pt_size),
-							ToolControl.FillColor, ToolControl.StrokeColor, (int) last_control_pt_size);
+							MoveHandle.FillColor, MoveHandle.StrokeColor, (int) last_control_pt_size);
 					}
 				}
 
