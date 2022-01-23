@@ -6,6 +6,7 @@ All notable changes to this project (beginning with version 1.7) will be documen
 Thanks to the following contributors who worked on this release:
 - @cameronwhite
 - @jpobst
+- @JanDeDinoMan
 
 ### Added
 - Updated icons to symbolic SVG icons, which are more usable for dark themes and high-res screens (#204, #207, [#1738106](https://bugs.launchpad.net/pinta/+bug/1738106), [#1909573](https://bugs.launchpad.net/pinta/+bug/1909573))
@@ -25,6 +26,7 @@ Thanks to the following contributors who worked on this release:
 - The history panel is now more readable when a dark theme is used (#207)
 - Fixed an issue where the Cairo surface for live effect previews was not always disposed (#206)
 - Fixed errors that could occur if a selection existed but had zero area (e.g. after inverting a full selection) ([#1754440](https://bugs.launchpad.net/pinta/+bug/1754440))
+- Fixed an issue on Windows where the ruler's text did not render correctly (#212)
 
 ## [2.0.2](https://github.com/PintaProject/Pinta/compare/2.0.2...HEAD) - 2022/01/13
 
