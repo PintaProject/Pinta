@@ -43,24 +43,24 @@ namespace Pinta.Core
 
 		#region IImageImporter implementation
 
-		public void Import (string fileName, Gtk.Window parent)
+		public void Import (GLib.IFile file, Gtk.Window parent)
 		{
 			Pixbuf bg;
 
 			// Handle any EXIF orientation flags
-			using (var fs = new FileStream (fileName, FileMode.Open, FileAccess.Read))
-				bg = new Pixbuf (fs);
+			using (var fs = file.Read (cancellable: null))
+				bg = new Pixbuf (fs, cancellable: null);
 
 			bg = bg.ApplyEmbeddedOrientation ();
 
 			Size imagesize = new Size (bg.Width, bg.Height);
 
-			Document doc = PintaCore.Workspace.CreateAndActivateDocument (fileName, imagesize);
+			Document doc = PintaCore.Workspace.CreateAndActivateDocument (file.Path, imagesize); // FIXME - store GLib.IFile 
 			doc.HasFile = true;
 			doc.ImageSize = imagesize;
 			doc.Workspace.CanvasSize = imagesize;
 
-			Layer layer = doc.Layers.AddNewLayer (Path.GetFileName (fileName));
+			Layer layer = doc.Layers.AddNewLayer (file.GetDisplayName ());
 
 			using (Cairo.Context g = new Cairo.Context (layer.Surface)) {
 				CairoHelper.SetSourcePixbuf (g, bg, 0, 0);

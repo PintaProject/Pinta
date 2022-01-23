@@ -211,7 +211,7 @@ namespace Pinta.Core
 		}
 
 		// TODO: Standardize add to recent files
-		public bool OpenFile (string file, Window? parent = null)
+		public bool OpenFile (GLib.IFile file, Window? parent = null)
 		{
 			bool fileOpened = false;
 
@@ -220,13 +220,13 @@ namespace Pinta.Core
 
 			try {
 				// Open the image and add it to the layers
-				IImageImporter? importer = PintaCore.System.ImageFormats.GetImporterByFile (file);
+				IImageImporter? importer = PintaCore.System.ImageFormats.GetImporterByFile (file.GetDisplayName ());
 				if (importer == null)
 					throw new FormatException (Translations.GetString ("Unsupported file format"));
 
 				importer.Import (file, parent);
 
-				PintaCore.Workspace.ActiveDocument.PathAndFileName = file;
+				PintaCore.Workspace.ActiveDocument.PathAndFileName = file.Path; // FIXME - store GLib.IFile 
 				PintaCore.Workspace.ActiveWorkspace.History.PushNewItem (new BaseHistoryItem (Resources.StandardIcons.DocumentOpen, Translations.GetString ("Open Image")));
 				PintaCore.Workspace.ActiveDocument.History.SetClean ();
 				PintaCore.Workspace.ActiveDocument.HasFile = true;
@@ -240,11 +240,11 @@ namespace Pinta.Core
 
 				fileOpened = true;
 			} catch (UnauthorizedAccessException) {
-				ShowFilePermissionErrorDialog (parent, file);
+				ShowFilePermissionErrorDialog (parent, file.Uri.ToString ());
 			} catch (FormatException e) {
-				ShowUnsupportedFormatDialog (parent, file, e.Message, e.ToString ());
+				ShowUnsupportedFormatDialog (parent, file.Uri.ToString (), e.Message, e.ToString ());
 			} catch (Exception e) {
-				ShowOpenFileErrorDialog (parent, file, e.Message, e.ToString ());
+				ShowOpenFileErrorDialog (parent, file.Uri.ToString (), e.Message, e.ToString ());
 			}
 
 			return fileOpened;

@@ -168,7 +168,7 @@ namespace Pinta.Core
 				Translations.GetString ("Open"),
 				Translations.GetString ("Cancel"));
 
-			fcd.SetCurrentFolder (PintaCore.System.GetDialogDirectory ());
+			fcd.SetCurrentFolderFile (PintaCore.System.GetDialogDirectory ());
 
 			// Add image files filter
 			var ff = new FileFilter ();
@@ -187,7 +187,7 @@ namespace Pinta.Core
 
 				string file = fcd.Filename;
 
-				string? directory = Path.GetDirectoryName (file);
+				GLib.IFile? directory = fcd.File.Parent;
 				if (directory is not null)
 					PintaCore.System.LastDialogDirectory = directory;
 

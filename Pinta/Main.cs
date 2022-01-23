@@ -125,11 +125,7 @@ namespace Pinta
 
 			if (extra.Count > 0) {
 				foreach (var file in extra) {
-					string path = file;
-					if (path.StartsWith ("file://"))
-						path = new Uri (path).LocalPath;
-
-					PintaCore.Workspace.OpenFile (path);
+					PintaCore.Workspace.OpenFile (GLib.FileFactory.NewFromCommandlineArg (file));
 				}
 			} else {
 				// Create a blank document
@@ -172,7 +168,7 @@ namespace Pinta
 					GLib.Timeout.Add (10, delegate {
 						foreach (string filename in e.Documents.Keys) {
 							System.Console.Error.WriteLine ("Opening: {0}", filename);
-							PintaCore.Workspace.OpenFile (filename);
+							PintaCore.Workspace.OpenFile (GLib.FileFactory.NewFromCommandlineArg (filename));
 						}
 						return false;
 					});

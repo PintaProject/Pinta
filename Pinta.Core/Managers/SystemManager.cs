@@ -38,7 +38,7 @@ namespace Pinta.Core
 	{
 		private static OS operating_system;
 
-		private string last_dialog_directory;
+		private GLib.IFile last_dialog_directory;
 		private RecentData recent_data;
 
 		public ImageConverterManager ImageFormats { get; private set; }
@@ -74,7 +74,7 @@ namespace Pinta.Core
 		}
 
 		#region Public Properties
-		public string LastDialogDirectory {
+		public GLib.IFile LastDialogDirectory {
 			get { return last_dialog_directory; }
 			set {
 				// The file chooser dialog may return null for the current folder in certain cases,
@@ -84,8 +84,8 @@ namespace Pinta.Core
 			}
 		}
 
-		public string DefaultDialogDirectory {
-			get { return System.Environment.GetFolderPath (Environment.SpecialFolder.MyPictures); }
+		public GLib.IFile DefaultDialogDirectory {
+			get { return GLib.FileFactory.NewForPath (System.Environment.GetFolderPath (Environment.SpecialFolder.MyPictures)); }
 		}
 
 		public RecentData RecentData { get { return recent_data; } }
@@ -95,9 +95,9 @@ namespace Pinta.Core
 		/// Returns a directory for use in a dialog. The last dialog directory is
 		/// returned if it exists, otherwise the default directory is used.
 		/// </summary>
-		public string GetDialogDirectory ()
+		public GLib.IFile GetDialogDirectory ()
 		{
-			return Directory.Exists (LastDialogDirectory) ? LastDialogDirectory : DefaultDialogDirectory;
+			return last_dialog_directory.Exists ? last_dialog_directory : DefaultDialogDirectory;
 		}
 
 		public static string GetExecutablePathName ()

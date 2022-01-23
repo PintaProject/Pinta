@@ -77,7 +77,7 @@ namespace Pinta.Actions
 				DoOverwriteConfirmation = true
 			};
 
-			fcd.SetCurrentFolder (PintaCore.System.GetDialogDirectory ());
+			fcd.SetCurrentFolderFile (PintaCore.System.GetDialogDirectory ());
 
 			if (document.HasFile)
 				fcd.SetFilename (document.PathAndFileName);
@@ -149,7 +149,7 @@ namespace Pinta.Actions
 				if (format_type != null)
 					format = format_type;
 
-				var directory = System.IO.Path.GetDirectoryName (file);
+				var directory = fcd.File.Parent;
 				if (directory is not null)
 					PintaCore.System.LastDialogDirectory = directory;
 

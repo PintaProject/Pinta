@@ -41,11 +41,12 @@ namespace Pinta.Core
 
 		#region IImageImporter implementation
 
-		public void Import (string fileName, Gtk.Window parent)
+		public void Import (GLib.IFile file, Gtk.Window parent)
 		{
-			ZipFile file = new ZipFile (fileName);
+			using var stream = new GLib.GioStream (file.Read (cancellable: null));
+			ZipFile zipfile = new ZipFile (stream);
 			XmlDocument stackXml = new XmlDocument ();
-			stackXml.Load (file.GetInputStream (file.GetEntry ("stack.xml")));
+			stackXml.Load (zipfile.GetInputStream (zipfile.GetEntry ("stack.xml")));
 
 			// NRT - This makes a lot of assumptions that the file will be perfectly
 			// valid that we need to guard against.
@@ -55,7 +56,7 @@ namespace Pinta.Core
 
 			Size imagesize = new Size (width, height);
 
-			Document doc = PintaCore.Workspace.CreateAndActivateDocument (fileName, imagesize);
+			Document doc = PintaCore.Workspace.CreateAndActivateDocument (file.Path, imagesize); // FIXME - store GLib.IFile
 			doc.HasFile = true;
 
 			XmlElement stackElement = (XmlElement) stackXml.GetElementsByTagName ("stack")[0]!;
@@ -76,8 +77,8 @@ namespace Pinta.Core
 				try {
 					// Write the file to a temporary file first
 					// Fixes a bug when running on .Net
-					ZipEntry zf = file.GetEntry (layerElement.GetAttribute ("src"));
-					Stream s = file.GetInputStream (zf);
+					ZipEntry zf = zipfile.GetEntry (layerElement.GetAttribute ("src"));
+					Stream s = zipfile.GetInputStream (zf);
 					string tmp_file = System.IO.Path.GetTempFileName ();
 
 					using (Stream stream_out = File.Open (tmp_file, FileMode.OpenOrCreate)) {
@@ -116,7 +117,7 @@ namespace Pinta.Core
 						File.Delete (tmp_file);
 					} catch { }
 				} catch {
-					using (var md = new MessageDialog (parent, DialogFlags.Modal, MessageType.Error, ButtonsType.Ok, "Could not import layer \"{0}\" from {0}", name, file)) {
+					using (var md = new MessageDialog (parent, DialogFlags.Modal, MessageType.Error, ButtonsType.Ok, "Could not import layer \"{0}\" from {0}", name, zipfile)) {
 						md.Title = "Error";
 
 						md.Run ();
@@ -124,7 +125,7 @@ namespace Pinta.Core
 				}
 			}
 
-			file.Close ();
+			zipfile.Close ();
 		}
 
 		public Pixbuf LoadThumbnail (string filename, int maxWidth, int maxHeight, Gtk.Window parent)
