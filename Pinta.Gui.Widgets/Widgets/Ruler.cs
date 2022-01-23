@@ -247,10 +247,8 @@ namespace Pinta.Gui.Widgets
 							Pango.CairoHelper.ShowLayout (cr, layout);
 							break;
 						case Orientation.Vertical:
-							PangoContext.BaseGravity = Pango.Gravity.East;
-							PangoContext.GravityHint = Pango.GravityHint.Strong;
 							cr.Save ();
-							cr.MoveTo (border.Left + font_size, position + font_size / 2);
+							cr.MoveTo (border.Left + font_size * 1.5, position + font_size / 2);
 							cr.Rotate (0.5 * Math.PI);
 							Pango.CairoHelper.ShowLayout (cr, layout);
 							cr.Restore ();
