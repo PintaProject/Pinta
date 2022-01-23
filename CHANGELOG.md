@@ -27,6 +27,7 @@ Thanks to the following contributors who worked on this release:
 - Fixed an issue where the Cairo surface for live effect previews was not always disposed (#206)
 - Fixed errors that could occur if a selection existed but had zero area (e.g. after inverting a full selection) ([#1754440](https://bugs.launchpad.net/pinta/+bug/1754440))
 - Fixed an issue on Windows where the ruler's text did not render correctly (#212)
+- Improved the zoom tool's rectangle zoom when working with smaller images
 
 ## [2.0.2](https://github.com/PintaProject/Pinta/compare/2.0.2...HEAD) - 2022/01/13
 
