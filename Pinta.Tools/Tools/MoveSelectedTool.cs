@@ -44,7 +44,7 @@ namespace Pinta.Tools
 		public override string Icon => Pinta.Resources.Icons.ToolMove;
 		// Translators: {0} is 'Ctrl', or a platform-specific key such as 'Command' on macOS.
 		public override string StatusBarText => Translations.GetString ("Left click and drag the selection to move selected content. Hold {0} to scale instead of move. Right click and drag the selection to rotate selected content. Hold Shift to rotate in steps. Use arrow keys to move selected content by a single pixel.", GtkExtensions.CtrlLabel ());
-		public override Gdk.Cursor DefaultCursor => new Gdk.Cursor (Gdk.Display.Default, Gtk.IconTheme.Default.LoadIcon (Pinta.Resources.Icons.ToolMove, 16), 0, 0);
+		public override Gdk.Cursor DefaultCursor => new Gdk.Cursor (Gdk.Display.Default, Gtk.IconTheme.Default.LoadIcon (Pinta.Resources.Icons.ToolMoveCursor, 16), 0, 0);
 		public override Gdk.Key ShortcutKey => Gdk.Key.M;
 		public override int Priority => 5;
 
