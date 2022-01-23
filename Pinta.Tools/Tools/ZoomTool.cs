@@ -110,7 +110,7 @@ namespace Pinta.Tools
 						document.Workspace.ZoomIn ();
 						document.Workspace.RecenterView (x, y);
 					} else {
-						document.Workspace.ZoomToRectangle (CairoExtensions.PointsToRectangle (shape_origin, e.PointDouble));
+						document.Workspace.ZoomToRectangle (CairoExtensions.PointsToRectangle (shape_origin.Rounded(), e.PointDouble.Rounded()));
 					}
 				} else {
 					document.Workspace.ZoomOut ();
@@ -130,16 +130,13 @@ namespace Pinta.Tools
 			if (!is_drawing)
 				return;
 
-			var r = CairoExtensions.PointsToRectangle (shape_origin, point);
+			var r = CairoExtensions.PointsToRectangle (shape_origin.Rounded (), point.Rounded ());
 
 			document.Layers.ToolLayer.Clear ();
 			document.Layers.ToolLayer.Hidden = false;
 
 			using (var g = new Context (document.Layers.ToolLayer.Surface)) {
-				g.Antialias = Antialias.Subpixel;
-
-				var dirty = g.FillStrokedRectangle (r, new Color (0, 0.4, 0.8, 0.1), new Color (0, 0, 0.9), 1);
-				dirty = dirty.Clamp ();
+				var dirty = g.FillRectangle (r, new Cairo.Color (0.7, 0.8, 0.9, 0.4));
 
 				document.Workspace.Invalidate (last_dirty.ToGdkRectangle ());
 				document.Workspace.Invalidate (dirty.ToGdkRectangle ());

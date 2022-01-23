@@ -671,6 +671,14 @@ namespace Pinta.Core
 			return Math.Sqrt (p.X * p.X + p.Y * p.Y);
 		}
 
+		/// <summary>
+		/// Returns a new point, rounded to the nearest integer coordinates.
+		/// </summary>
+		public static PointD Rounded(this PointD p)
+		{
+			return new PointD (Math.Round (p.X), Math.Round (p.Y));
+		}
+
 		public static Cairo.Rectangle ToCairoRectangle (this Gdk.Rectangle r)
 		{
 			return new Cairo.Rectangle (r.X, r.Y, r.Width, r.Height);
