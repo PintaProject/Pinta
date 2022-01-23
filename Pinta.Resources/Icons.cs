@@ -157,6 +157,7 @@ namespace Pinta.Resources
 		public const string ToolGradient = "tool-gradient-symbolic";
 		public const string ToolLine = "tool-line-symbolic";
 		public const string ToolMove = "tool-move-symbolic";
+		public const string ToolMoveCursor = "tool-move-cursor-symbolic";
 		public const string ToolMoveSelection = "tool-move-selection-symbolic";
 		public const string ToolPaintBrush = "tool-paintbrush-symbolic";
 		public const string ToolPaintBucket = "tool-paintbucket-symbolic";
