@@ -14,19 +14,6 @@ namespace Pinta.Core
 {
 	public static class Utility
 	{
-		/// <summary>
-		/// Create a rectangle with a positive width / height from the provided points.
-		/// </summary>
-		public static Cairo.Rectangle PointsToRectangle (Cairo.PointD p1, Cairo.PointD p2)
-		{
-			double y1 = Math.Min (p1.Y, p2.Y);
-			double y2 = Math.Max (p1.Y, p2.Y);
-			double x1 = Math.Min (p1.X, p2.X);
-			double x2 = Math.Max (p1.X, p2.X);
-
-			return new Cairo.Rectangle (x1, y1, x2 - x1, y2 - y1);
-		}
-
 		internal static bool IsNumber (float x)
 		{
 			return x >= float.MinValue && x <= float.MaxValue;

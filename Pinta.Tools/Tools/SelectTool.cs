@@ -317,7 +317,7 @@ namespace Pinta.Tools
 			document.Selection.Visible = true;
 			ShowHandles (true);
 
-			var rect = Utility.PointsToRectangle (shape_origin, shape_end);
+			var rect = CairoExtensions.PointsToRectangle (shape_origin, shape_end);
 
 			DrawShape (document, rect, document.Layers.SelectionLayer);
 

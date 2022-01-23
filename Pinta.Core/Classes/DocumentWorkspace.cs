@@ -146,7 +146,7 @@ namespace Pinta.Core
 			Cairo.PointD winTopLeft = CanvasPointToWindow (canvasTopLeft.X, canvasTopLeft.Y);
 			Cairo.PointD winBtmRight = CanvasPointToWindow (canvasBtmRight.X, canvasBtmRight.Y);
 
-			Gdk.Rectangle winRect = Utility.PointsToRectangle (winTopLeft, winBtmRight).ToGdkRectangle ();
+			Gdk.Rectangle winRect = CairoExtensions.PointsToRectangle (winTopLeft, winBtmRight).ToGdkRectangle ();
 
 			OnCanvasInvalidated (new CanvasInvalidatedEventArgs (winRect));
 		}

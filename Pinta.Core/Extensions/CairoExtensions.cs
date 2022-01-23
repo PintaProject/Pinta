@@ -1726,27 +1726,17 @@ namespace Pinta.Core
 			return rect;
 		}
 
+		/// <summary>
+		/// Create a rectangle with a positive width / height from the provided points.
+		/// </summary>
 		public static Rectangle PointsToRectangle (PointD p1, PointD p2)
 		{
-			double x, y, w, h;
+			double y1 = Math.Min (p1.Y, p2.Y);
+			double y2 = Math.Max (p1.Y, p2.Y);
+			double x1 = Math.Min (p1.X, p2.X);
+			double x2 = Math.Max (p1.X, p2.X);
 
-			if (p1.Y <= p2.Y) {
-				y = p1.Y;
-				h = p2.Y - y;
-			} else {
-				y = p2.Y;
-				h = p1.Y - y;
-			}
-
-			if (p1.X <= p2.X) {
-				x = p1.X;
-				w = p2.X - x;
-			} else {
-				x = p2.X;
-				w = p1.X - x;
-			}
-
-			return new Rectangle (x, y, w, h);
+			return new Cairo.Rectangle (x1, y1, x2 - x1, y2 - y1);
 		}
 
 		// Ported from PDN.
