@@ -3,6 +3,8 @@ name: Build
 on:
   # Build on new commits or pull requests.
   push:
+    paths-ignore:
+      - '**.md'
   pull_request:
   schedule:
     # Run every week just to make sure the CI environment still works.
