@@ -74,7 +74,8 @@ namespace Pinta.Actions
 				FileChooserAction.Save,
 				Translations.GetString ("Save"),
 				Translations.GetString ("Cancel")) {
-				DoOverwriteConfirmation = true
+				DoOverwriteConfirmation = true,
+				LocalOnly = false
 			};
 
 			fcd.SetCurrentFolderFile (PintaCore.System.GetDialogDirectory ());
