@@ -271,7 +271,23 @@ namespace Pinta.Gui.Widgets
 				cr.Stroke ();
 			}
 
-			// TODO-GTK3 - cache the ticks, and update the marker's position as the mouse moves.
+			// Draw marker
+			var marker_position = (Position - Lower) * (awidth / (Upper - Lower));
+
+			switch (Orientation) {
+				case Orientation.Horizontal:
+					cr.MoveTo (marker_position, border.Top);
+					cr.LineTo (marker_position, border.Top + rheight);
+					break;
+				case Orientation.Vertical:
+					cr.MoveTo (border.Left, marker_position);
+					cr.LineTo (border.Left + rheight, marker_position);
+					break;
+			}
+
+			cr.Stroke ();
+
+			// TODO-GTK3 - cache the ticks
 
 			return base.OnDrawn (cr);
 		}
