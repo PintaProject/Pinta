@@ -46,7 +46,7 @@ namespace Pinta.Core
 		{
 		}
 
-		protected override void DoSave (Pixbuf pb, string fileName, string fileType, Gtk.Window parent)
+		protected override void DoSave (Pixbuf pb, GLib.IFile file, string fileType, Gtk.Window parent)
 		{
 			//Load the JPG compression quality, but use the default value if there is no saved value.
 			int level = PintaCore.Settings.GetSetting<int> (JpgCompressionQualitySetting, defaultQuality);
@@ -64,8 +64,13 @@ namespace Pinta.Core
 			//Store the "previous" JPG compression quality value (before saving with it).
 			PintaCore.Settings.PutSetting (JpgCompressionQualitySetting, level);
 
-			//Save the file.
+			// FIXME - SaveToStreamv() isn't wrapped correctly by GtkSharp, so the quality setting is skipped for now...
+			using var stream = file.Replace ();
+			pb.SaveToStreamv (stream, fileType, null, null, null);
+#if false
 			pb.SavevUtf8 (fileName, fileType, new string?[] { "quality", null }, new string?[] { level.ToString (), null });
+#else
+#endif
 		}
 	}
 }

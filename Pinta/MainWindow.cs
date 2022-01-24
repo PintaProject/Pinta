@@ -529,10 +529,10 @@ namespace Pinta
 							contentStream.CopyTo (fileStream);
 						}
 
-						if (PintaCore.Workspace.OpenFile (GLib.FileFactory.NewForPath(tempFilePath))) {
+						if (PintaCore.Workspace.OpenFile (GLib.FileFactory.NewForPath (tempFilePath))) {
 							// Mark as not having a file, so that the user doesn't unintentionally
 							// save using the temp file.
-							PintaCore.Workspace.ActiveDocument.HasFile = false;
+							PintaCore.Workspace.ActiveDocument.ClearFileReference ();
 						}
 					} catch (Exception e) {
 						progressDialog.Hide ();

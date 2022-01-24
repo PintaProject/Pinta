@@ -99,7 +99,7 @@ namespace Pinta.Core
 		{
 			var doc = PintaCore.Workspace.OpenDocuments[idx];
 			var action_id = string.Format ("app.{0}({1})", doc_action_id, idx);
-			var label = string.Format ("{0}{1}", doc.Filename, doc.IsDirty ? "*" : string.Empty);
+			var label = string.Format ("{0}{1}", doc.DisplayName, doc.IsDirty ? "*" : string.Empty);
 			var menu_item = new GLib.MenuItem (label, action_id);
 			doc_section.AppendItem (menu_item);
 

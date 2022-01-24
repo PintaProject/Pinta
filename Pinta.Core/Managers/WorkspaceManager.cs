@@ -104,14 +104,14 @@ namespace Pinta.Core
 		public List<Document> OpenDocuments { get; private set; }
 		public bool HasOpenDocuments { get { return OpenDocuments.Count > 0; } }
 
-		public Document CreateAndActivateDocument (string? filename, Gdk.Size size)
+		public Document CreateAndActivateDocument (GLib.IFile? file, Gdk.Size size)
 		{
 			Document doc = new Document (size);
 
-			if (string.IsNullOrEmpty (filename))
-				doc.Filename = string.Format (Translations.GetString ("Unsaved Image {0}"), new_file_name++);
+			if (file is not null)
+				doc.File = file;
 			else
-				doc.PathAndFileName = filename;
+				doc.DisplayName = Translations.GetString ("Unsaved Image {0}", new_file_name++);
 
 			OpenDocuments.Add (doc);
 			OnDocumentCreated (new DocumentEventArgs (doc));
@@ -226,10 +226,8 @@ namespace Pinta.Core
 
 				importer.Import (file, parent);
 
-				PintaCore.Workspace.ActiveDocument.PathAndFileName = file.Path; // FIXME - store GLib.IFile 
 				PintaCore.Workspace.ActiveWorkspace.History.PushNewItem (new BaseHistoryItem (Resources.StandardIcons.DocumentOpen, Translations.GetString ("Open Image")));
 				PintaCore.Workspace.ActiveDocument.History.SetClean ();
-				PintaCore.Workspace.ActiveDocument.HasFile = true;
 
 				// This ensures these are called after the window is done being created and sized.
 				// Without it, we sometimes try to zoom when the window has a size of (0, 0).
@@ -302,7 +300,7 @@ namespace Pinta.Core
 		internal void ResetTitle ()
 		{
 			if (HasOpenDocuments)
-				PintaCore.Chrome.MainWindow.Title = string.Format ("{0}{1} - Pinta", ActiveDocument.Filename, ActiveDocument.IsDirty ? "*" : "");
+				PintaCore.Chrome.MainWindow.Title = string.Format ("{0}{1} - Pinta", ActiveDocument.DisplayName, ActiveDocument.IsDirty ? "*" : "");
 			else
 				PintaCore.Chrome.MainWindow.Title = "Pinta";
 		}

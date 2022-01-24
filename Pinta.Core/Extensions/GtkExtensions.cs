@@ -273,11 +273,19 @@ namespace Pinta.Core
 		/// Return the display name for the file. Note that this can be very different from file.Basename,
 		/// and should only be used for display purposes rather than identifying the file.
 		/// </summary>
-		public static string GetDisplayName(this GLib.IFile file)
+		public static string GetDisplayName (this GLib.IFile file)
 		{
 			// TODO-GTK4: use G_FILE_ATTRIBUTE_STANDARD_DISPLAY_NAME if there are bindings for it.
 			var info = file.QueryInfo ("standard::display-name", GLib.FileQueryInfoFlags.None, cancellable: null);
 			return info.DisplayName;
+		}
+
+		/// <summary>
+		/// Returns an output stream for overwriting the file, safely replacing the original file
+		/// if errors occur while writing.
+		public static GLib.OutputStream Replace (this GLib.IFile file)
+		{
+			return file.Replace (null, true, GLib.FileCreateFlags.None, null);
 		}
 	}
 }

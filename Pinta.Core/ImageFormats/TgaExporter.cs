@@ -89,40 +89,37 @@ namespace Pinta.Core
 
 		// For now, we only export in uncompressed ARGB32 format. If someone requests this functionality,
 		// we can always add more through an export dialog.
-		public void Export (Document document, string fileName, Gtk.Window parent)
+		public void Export (Document document, GLib.IFile file, Gtk.Window parent)
 		{
-			ImageSurface surf = document.GetFlattenedImage (); // Assumes the surface is in ARGB32 format
-			BinaryWriter writer = new BinaryWriter (new FileStream (fileName, FileMode.Create, FileAccess.Write));
+			using ImageSurface surf = document.GetFlattenedImage (); // Assumes the surface is in ARGB32 format
+			using var file_stream = new GLib.GioStream (file.Replace ());
+			using var writer = new BinaryWriter (file_stream);
 
-			try {
-				TgaHeader header = new TgaHeader ();
+			TgaHeader header = new TgaHeader ();
 
-				header.idLength = (byte) (ImageIdField.Length + 1);
-				header.cmapType = 0;
-				header.imageType = 2; // uncompressed RGB
-				header.cmapIndex = 0;
-				header.cmapLength = 0;
-				header.cmapEntrySize = 0;
-				header.xOrigin = 0;
-				header.yOrigin = 0;
-				header.imageWidth = (ushort) surf.Width;
-				header.imageHeight = (ushort) surf.Height;
-				header.pixelDepth = 32;
-				header.imageDesc = 8; // 32-bit, lower-left origin, which is weird but hey...
-				header.WriteTo (writer);
+			header.idLength = (byte) (ImageIdField.Length + 1);
+			header.cmapType = 0;
+			header.imageType = 2; // uncompressed RGB
+			header.cmapIndex = 0;
+			header.cmapLength = 0;
+			header.cmapEntrySize = 0;
+			header.xOrigin = 0;
+			header.yOrigin = 0;
+			header.imageWidth = (ushort) surf.Width;
+			header.imageHeight = (ushort) surf.Height;
+			header.pixelDepth = 32;
+			header.imageDesc = 8; // 32-bit, lower-left origin, which is weird but hey...
+			header.WriteTo (writer);
 
-				writer.Write (ImageIdField);
+			writer.Write (ImageIdField);
 
-				byte[] data = surf.Data;
+			byte[] data = surf.Data;
 
-				// It just so happens that the Cairo ARGB32 internal representation matches
-				// the TGA format, except vertically-flipped. In little-endian, of course.
-				for (int y = surf.Height - 1; y >= 0; y--)
-					writer.Write (data, surf.Stride * y, surf.Stride);
-			} finally {
-				(surf as IDisposable).Dispose ();
-				writer.Close ();
-			}
+			// It just so happens that the Cairo ARGB32 internal representation matches
+			// the TGA format, except vertically-flipped. In little-endian, of course.
+			for (int y = surf.Height - 1; y >= 0; y--)
+				writer.Write (data, surf.Stride * y, surf.Stride);
+
 		}
 	}
 }

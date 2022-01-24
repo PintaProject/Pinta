@@ -41,7 +41,8 @@ namespace Pinta.Core
 	// Workspace - Data about Pinta's state for the image
 	public class Document
 	{
-		private string filename = string.Empty;
+		private string display_name = string.Empty;
+		private GLib.IFile? file = null;
 		private bool is_dirty;
 
 		private DocumentSelection selection = null!; // NRT - Set by constructor via Selection property
@@ -66,12 +67,9 @@ namespace Pinta.Core
 		{
 			Selection = new DocumentSelection ();
 
-			Guid = Guid.NewGuid ();
-
 			Layers = new DocumentLayers (this);
 			Workspace = new DocumentWorkspace (this);
 			IsDirty = false;
-			HasFile = false;
 			HasBeenSavedInSession = false;
 			ImageSize = size;
 
@@ -79,26 +77,38 @@ namespace Pinta.Core
 		}
 
 		#region Public Properties
+
 		/// <summary>
 		/// Just the file name, like "dog.jpg".
+		/// If HasFile is false, this may be something like "Unsaved image 1".
 		/// </summary>
-		public string Filename {
-			get { return filename; }
+		public string DisplayName {
+			get => display_name;
 			set {
-				if (filename != value) {
-					filename = value;
-					OnRenamed ();
-				}
+				display_name = value;
+				OnRenamed ();
 			}
 		}
 
-		public Guid Guid { get; private set; }
+		/// <summary>
+		/// Identifier for the file location on disk.
+		/// </summary>
+		public GLib.IFile? File {
+			get => file;
+			set {
+				file = value;
+				DisplayName = file?.GetDisplayName () ?? String.Empty;
+			}
+		}
 
-		public bool HasFile { get; set; }
+		/// <summary>
+		/// Whether the document is associated with a file on disk.
+		/// </summary>
+		public bool HasFile => file is not null;
 
-		//Determines whether or not the Document has been saved to the file that it is currently associated with in the
-		//current session. This should be false if the Document has not yet been saved, if it was just loaded into
-		//Pinta from a file, or if the user just clicked Save As.
+		/// Whether or not the document has been saved to the file that it is currently associated with in the
+		/// current session. This should be false if the Document has not yet been saved, if it was just loaded into
+		/// Pinta from a file, or if the user just clicked Save As.
 		public bool HasBeenSavedInSession { get; set; }
 
 		public DocumentHistory History { get { return Workspace.History; } }
@@ -117,27 +127,6 @@ namespace Pinta.Core
 
 		public DocumentLayers Layers { get; }
 
-		/// <summary>
-		/// Just the directory name, like "C:\MyPictures".
-		/// </summary>
-		public string Pathname { get; set; } = string.Empty;
-
-		/// <summary>
-		/// Directory and file name, like "C:\MyPictures\dog.jpg".
-		/// </summary>
-		public string PathAndFileName {
-			get { return System.IO.Path.Combine (Pathname, Filename); }
-			set {
-				if (string.IsNullOrEmpty (value)) {
-					Pathname = string.Empty;
-					Filename = string.Empty;
-				} else {
-					Pathname = System.IO.Path.GetDirectoryName (value) ?? string.Empty;
-					Filename = System.IO.Path.GetFileName (value);
-				}
-			}
-		}
-
 		public DocumentWorkspace Workspace { get; private set; }
 
 		public delegate void LayerCloneEvent ();
@@ -153,6 +142,17 @@ namespace Pinta.Core
 			int height = Math.Min (r.Height, ImageSize.Height - y);
 
 			return new Gdk.Rectangle (x, y, width, height);
+		}
+
+		/// <summary>
+		/// Sets File to null while keeping the DisplayName the same.
+		/// This will force the user to choose a new filename when saving (i.e. "Save As").
+		/// </summary>
+		public void ClearFileReference ()
+		{
+			var name = DisplayName;
+			File = null;
+			DisplayName = name;
 		}
 
 		// Clean up any native resources we had

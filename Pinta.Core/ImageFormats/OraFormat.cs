@@ -56,8 +56,7 @@ namespace Pinta.Core
 
 			Size imagesize = new Size (width, height);
 
-			Document doc = PintaCore.Workspace.CreateAndActivateDocument (file.Path, imagesize); // FIXME - store GLib.IFile
-			doc.HasFile = true;
+			Document doc = PintaCore.Workspace.CreateAndActivateDocument (file, imagesize);
 
 			XmlElement stackElement = (XmlElement) stackXml.GetElementsByTagName ("stack")[0]!;
 			XmlNodeList layerElements = stackElement.GetElementsByTagName ("layer");
@@ -199,9 +198,11 @@ namespace Pinta.Core
 			return ms.ToArray ();
 		}
 
-		public void Export (Document document, string fileName, Gtk.Window parent)
+		public void Export (Document document, GLib.IFile file, Gtk.Window parent)
 		{
-			ZipOutputStream stream = new ZipOutputStream (new FileStream (fileName, FileMode.Create)) {
+			using var file_stream = new GLib.GioStream (file.Replace ());
+
+			using var stream = new ZipOutputStream (file_stream) {
 				UseZip64 = UseZip64.Off // For backwards compatibility with older versions.
 			};
 			ZipEntry mimetype = new ZipEntry ("mimetype");
@@ -237,8 +238,6 @@ namespace Pinta.Core
 			stream.PutNextEntry (new ZipEntry ("Thumbnails/thumbnail.png"));
 			databytes = thumb.SaveToBuffer ("png");
 			stream.Write (databytes, 0, databytes.Length);
-
-			stream.Close ();
 		}
 
 		private string BlendModeToStandard (BlendMode mode)
