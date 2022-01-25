@@ -64,13 +64,14 @@ namespace Pinta.Core
 			//Store the "previous" JPG compression quality value (before saving with it).
 			PintaCore.Settings.PutSetting (JpgCompressionQualitySetting, level);
 
-			// FIXME - SaveToStreamv() isn't wrapped correctly by GtkSharp, so the quality setting is skipped for now...
 			using var stream = file.Replace ();
-			pb.SaveToStreamv (stream, fileType, null, null, null);
-#if false
-			pb.SavevUtf8 (fileName, fileType, new string?[] { "quality", null }, new string?[] { level.ToString (), null });
-#else
-#endif
+			try {
+				// FIXME - SaveToStreamv() isn't wrapped correctly by GtkSharp, so the quality setting is skipped for now...
+				pb.SaveToStreamv (stream, fileType, null, null, null);
+				//pb.SavevUtf8 (fileName, fileType, new string?[] { "quality", null }, new string?[] { level.ToString (), null });
+			} finally {
+				stream.Close (null);
+			}
 		}
 	}
 }

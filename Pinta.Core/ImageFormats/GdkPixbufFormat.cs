@@ -48,8 +48,13 @@ namespace Pinta.Core
 			Pixbuf bg;
 
 			// Handle any EXIF orientation flags
-			using (var fs = file.Read (cancellable: null))
-				bg = new Pixbuf (fs, cancellable: null);
+			using (var fs = file.Read (cancellable: null)) {
+				try {
+					bg = new Pixbuf (fs, cancellable: null);
+				} finally {
+					fs.Close (null);
+				}
+			}
 
 			bg = bg.ApplyEmbeddedOrientation ();
 
@@ -96,8 +101,12 @@ namespace Pinta.Core
 		protected virtual void DoSave (Pixbuf pb, GLib.IFile file, string fileType, Gtk.Window parent)
 		{
 			using var stream = file.Replace ();
-			// TODO-GTK4: the simpler SaveToStream() seems to be missing in GtkSharp.
-			pb.SaveToStreamv (stream, fileType, null, null, null);
+			try {
+				// TODO-GTK4: the simpler SaveToStream() seems to be missing in GtkSharp.
+				pb.SaveToStreamv (stream, fileType, null, null, null);
+			} finally {
+				stream.Close (null);
+			}
 		}
 
 		public void Export (Document document, GLib.IFile file, Gtk.Window parent)

@@ -281,11 +281,12 @@ namespace Pinta.Core
 		}
 
 		/// <summary>
-		/// Returns an output stream for overwriting the file, safely replacing the original file
-		/// if errors occur while writing.
+		/// Returns an output stream for creating or overwriting the file.
+		/// NOTE: if you don't wrap this in a GLib.GioStream, you must call Close() !
+		/// </summary>
 		public static GLib.OutputStream Replace (this GLib.IFile file)
 		{
-			return file.Replace (null, true, GLib.FileCreateFlags.None, null);
+			return file.Replace (null, false, GLib.FileCreateFlags.None, null);
 		}
 	}
 }
