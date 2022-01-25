@@ -34,12 +34,13 @@ namespace Pinta.Core
 {
 	public class PaintShopProPalette : IPaletteLoader, IPaletteSaver
 	{
-		public List<Color> Load (string fileName)
+		public List<Color> Load (GLib.IFile file)
 		{
 			List<Color> colors = new List<Color> ();
-			StreamReader reader = new StreamReader (fileName);
-			string? line = reader.ReadLine ();
+			using var stream = new GLib.GioStream (file.Read (null));
+			StreamReader reader = new StreamReader (stream);
 
+			string? line = reader.ReadLine ();
 			if (line is null || !line.StartsWith ("JASC-PAL"))
 				throw new InvalidDataException ("Not a valid PaintShopPro palette file.");
 
@@ -64,9 +65,10 @@ namespace Pinta.Core
 			return colors;
 		}
 
-		public void Save (List<Color> colors, string fileName)
+		public void Save (List<Color> colors, GLib.IFile file)
 		{
-			StreamWriter writer = new StreamWriter (fileName);
+			using var stream = new GLib.GioStream (file.Replace ());
+			StreamWriter writer = new StreamWriter (stream);
 			writer.WriteLine ("JASC-PAL");
 			writer.WriteLine ("0100");
 			writer.WriteLine (colors.Count.ToString ());

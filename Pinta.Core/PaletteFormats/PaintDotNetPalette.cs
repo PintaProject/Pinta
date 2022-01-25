@@ -35,10 +35,11 @@ namespace Pinta.Core
 {
 	public class PaintDotNetPalette : IPaletteLoader, IPaletteSaver
 	{
-		public List<Color> Load (string fileName)
+		public List<Color> Load (GLib.IFile file)
 		{
 			List<Color> colors = new List<Color> ();
-			StreamReader reader = new StreamReader (fileName);
+			using var stream = new GLib.GioStream (file.Read (null));
+			StreamReader reader = new StreamReader (stream);
 
 			try {
 				string? line = reader.ReadLine ();
@@ -60,9 +61,10 @@ namespace Pinta.Core
 			}
 		}
 
-		public void Save (List<Color> colors, string fileName)
+		public void Save (List<Color> colors, GLib.IFile file)
 		{
-			StreamWriter writer = new StreamWriter (fileName);
+			using var stream = new GLib.GioStream (file.Replace ());
+			StreamWriter writer = new StreamWriter (stream);
 			writer.WriteLine ("; Hexadecimal format: aarrggbb");
 
 			foreach (Color color in colors) {

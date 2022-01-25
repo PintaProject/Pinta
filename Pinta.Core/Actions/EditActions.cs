@@ -52,7 +52,7 @@ namespace Pinta.Core
 		public Command ResetPalette { get; private set; }
 		public Command ResizePalette { get; private set; }
 
-		private string? lastPaletteDir = null;
+		private GLib.IFile? last_palette_dir = null;
 
 		public EditActions ()
 		{
@@ -359,7 +359,9 @@ namespace Pinta.Core
 				PintaCore.Chrome.MainWindow,
 				FileChooserAction.Open,
 				Translations.GetString ("Open"),
-				Translations.GetString ("Cancel"));
+				Translations.GetString ("Cancel")) {
+				LocalOnly = false
+			};
 
 			var ff = new FileFilter {
 				Name = Translations.GetString ("Palette files")
@@ -380,17 +382,16 @@ namespace Pinta.Core
 			ff2.AddPattern ("*.*");
 			fcd.AddFilter (ff2);
 
-			if (lastPaletteDir != null)
-				fcd.SetCurrentFolder (lastPaletteDir);
+			if (last_palette_dir != null)
+				fcd.SetCurrentFolderFile (last_palette_dir);
 
 			var response = (ResponseType) fcd.Run ();
 
 			if (response == ResponseType.Accept) {
-				var filename = fcd.Filename;
-				lastPaletteDir = System.IO.Path.GetDirectoryName (filename);
-				PintaCore.Palette.CurrentPalette.Load (filename);
+				GLib.IFile file = fcd.File;
+				last_palette_dir = file.Parent;
+				PintaCore.Palette.CurrentPalette.Load (file);
 			}
-
 		}
 
 		private void HandlerPintaCoreActionsEditSavePaletteActivated (object sender, EventArgs e)
@@ -401,7 +402,8 @@ namespace Pinta.Core
 				FileChooserAction.Save,
 				Translations.GetString ("Save"),
 				Translations.GetString ("Cancel")) {
-				DoOverwriteConfirmation = true
+				DoOverwriteConfirmation = true,
+				LocalOnly = false
 			};
 
 			foreach (var format in PintaCore.System.PaletteFormats.Formats) {
@@ -411,29 +413,31 @@ namespace Pinta.Core
 				}
 			}
 
-			if (lastPaletteDir != null)
-				fcd.SetCurrentFolder (lastPaletteDir);
+			if (last_palette_dir != null)
+				fcd.SetCurrentFolderFile (last_palette_dir);
 
 			var response = (ResponseType) fcd.Run ();
 
 			if (response == Gtk.ResponseType.Accept) {
-				string filename = fcd.Filename;
+				GLib.IFile file = fcd.File;
 
 				// Add in the extension if necessary, based on the current selected file filter.
 				// Note: on macOS, fcd.Filter doesn't seem to properly update to the current filter.
 				// However, on macOS the dialog always adds the extension automatically, so this issue doesn't matter.
-				string extension = System.IO.Path.GetExtension (filename);
+				var basename = file.Parent.GetRelativePath (file);
+				string extension = System.IO.Path.GetExtension (basename);
 				if (string.IsNullOrEmpty (extension)) {
 					var currentFormat = PintaCore.System.PaletteFormats.Formats.First (f => f.Filter == fcd.Filter);
-					filename += "." + currentFormat.Extensions.First ();
+					basename = fcd.CurrentName + "." + currentFormat.Extensions.First ();
+					file = file.Parent.GetChild (basename);
 				}
 
-				var format = PintaCore.System.PaletteFormats.GetFormatByFilename (filename);
+				var format = PintaCore.System.PaletteFormats.GetFormatByFilename (basename);
 				if (format is null)
 					throw new FormatException ();
 
-				PintaCore.Palette.CurrentPalette.Save (filename, format.Saver);
-				lastPaletteDir = System.IO.Path.GetDirectoryName (filename);
+				PintaCore.Palette.CurrentPalette.Save (file, format.Saver);
+				last_palette_dir = file.Parent;
 			}
 
 		}
