@@ -119,6 +119,8 @@ namespace Pinta.Gui.Widgets
 		{
 			base.OnDrawn (g);
 
+			var color = StyleContext.GetColor (StateFlags).ToCairoColor ();
+
 			var ourRect = Gdk.Rectangle.Inflate (Window.GetBounds (), -1, -1).ToCairoRectangle ();
 
 			var diameter = Math.Min (ourRect.Width, ourRect.Height);
@@ -133,7 +135,7 @@ namespace Pinta.Gui.Widgets
 			var ellipseRect = new Cairo.Rectangle (ourRect.Location (), diameter, diameter);
 			var ellipseOutlineRect = ellipseRect;
 
-			g.DrawEllipse (ellipseOutlineRect, new Cairo.Color (.1, .1, .1), 1);
+			g.DrawEllipse (ellipseOutlineRect, color, 1);
 
 			var endPointRadius = radius - 2;
 
@@ -144,8 +146,8 @@ namespace Pinta.Gui.Widgets
 			var gripSize = 2.5f;
 			var gripEllipseRect = new Cairo.Rectangle (center.X - gripSize, center.Y - gripSize, gripSize * 2, gripSize * 2);
 
-			g.FillEllipse (gripEllipseRect, new Cairo.Color (.1, .1, .1));
-			g.DrawLine (center, endPoint, new Cairo.Color (.1, .1, .1), 1);
+			g.FillEllipse (gripEllipseRect, color);
+			g.DrawLine (center, endPoint, color, 1);
 
 			return true;
 		}
