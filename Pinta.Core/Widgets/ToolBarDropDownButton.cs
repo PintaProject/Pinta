@@ -99,7 +99,7 @@ namespace Pinta.Core
 
 		protected void SetSelectedItem (ToolBarItem item)
 		{
-			image.Pixbuf = IconTheme.Default.LoadIcon (item.ImageId, 16);
+			image.SetFromIconName (item.ImageId, IconSize.SmallToolbar);
 
 			selected_item = item;
 			TooltipText = item.Text;

@@ -83,8 +83,7 @@ namespace Pinta
 			hbox.Spacing = 6;
 			hbox.BorderWidth = 12;
 
-			var error_icon = new Image ();
-			error_icon.Pixbuf = Gtk.IconTheme.Default.LoadIcon (Resources.StandardIcons.DialogError, 32);
+			var error_icon = Image.NewFromIconName (Resources.StandardIcons.DialogError, IconSize.Dialog);
 			error_icon.Yalign = 0;
 			hbox.PackStart (error_icon, false, false, 0);
 

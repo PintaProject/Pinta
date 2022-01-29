@@ -182,7 +182,7 @@ namespace Pinta.Gui.Widgets
 				UseUnderline = true
 			};
 
-			var button_image = new Image (IconTheme.Default.LoadIcon (Resources.StandardIcons.GoPrevious, 16));
+			var button_image = Image.NewFromIconName (Resources.StandardIcons.GoPrevious, IconSize.Button);
 			button.Add (button_image);
 
 			var alignment2 = new Alignment (0.5F, 0F, 1F, 0F) {
