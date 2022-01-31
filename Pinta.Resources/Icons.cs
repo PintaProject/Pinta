@@ -45,6 +45,13 @@ namespace Pinta.Resources
 		public const string DocumentSave = "document-save-symbolic";
 		public const string DocumentSaveAs = "document-save-as-symbolic";
 
+		public const string FormatJustifyLeft = "format-justify-left-symbolic";
+		public const string FormatJustifyCenter = "format-justify-center-symbolic";
+		public const string FormatJustifyRight = "format-justify-right-symbolic";
+		public const string FormatTextBold = "format-text-bold-symbolic";
+		public const string FormatTextItalic = "format-text-italic-symbolic";
+		public const string FormatTextUnderline = "format-text-underline-symbolic";
+
 		public const string EditCopy = "edit-copy-symbolic";
 		public const string EditCut = "edit-cut-symbolic";
 		public const string EditPaste = "edit-paste-symbolic";

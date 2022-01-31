@@ -79,12 +79,6 @@
     <EmbeddedResource Include="Resources\LayersWidget.Hidden.png">
       <LogicalName>LayersWidget.Hidden.png</LogicalName>
     </EmbeddedResource>
-    <EmbeddedResource Include="Resources\Toolbar.MinusButton.png">
-      <LogicalName>Toolbar.MinusButton.png</LogicalName>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Resources\Toolbar.PlusButton.png">
-      <LogicalName>Toolbar.PlusButton.png</LogicalName>
-    </EmbeddedResource>
     <EmbeddedResource Include="Resources\ColorPalette.SwapIcon.png">
       <LogicalName>ColorPalette.SwapIcon.png</LogicalName>
     </EmbeddedResource>
@@ -117,24 +111,6 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Resources\Menu.Adjustments.Posterize.png">
       <LogicalName>Menu.Adjustments.Posterize.png</LogicalName>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Resources\Toolbar.Bold.png">
-      <LogicalName>Toolbar.Bold.png</LogicalName>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Resources\Toolbar.CenterAlignment.png">
-      <LogicalName>Toolbar.CenterAlignment.png</LogicalName>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Resources\Toolbar.Italic.png">
-      <LogicalName>Toolbar.Italic.png</LogicalName>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Resources\Toolbar.LeftAlignment.png">
-      <LogicalName>Toolbar.LeftAlignment.png</LogicalName>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Resources\Toolbar.RightAlignment.png">
-      <LogicalName>Toolbar.RightAlignment.png</LogicalName>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Resources\Toolbar.Underline.png">
-      <LogicalName>Toolbar.Underline.png</LogicalName>
     </EmbeddedResource>
     <EmbeddedResource Include="Resources\Menu.Effects.Artistic.InkSketch.png">
       <LogicalName>Menu.Effects.Artistic.InkSketch.png</LogicalName>

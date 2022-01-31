@@ -114,12 +114,12 @@ namespace Pinta.Tools
 		// NRT - Created by OnBuildToolBar
 		private ToolBarLabel font_label = null!;
 		private ToolBarWidget<FontButton> font_button = null!;
-		private ToolBarToggleButton bold_btn = null!;
-		private ToolBarToggleButton italic_btn = null!;
-		private ToolBarToggleButton underscore_btn = null!;
-		private ToolBarToggleButton left_alignment_btn = null!;
-		private ToolBarToggleButton center_alignment_btn = null!;
-		private ToolBarToggleButton Right_alignment_btn = null!;
+		private ToggleToolButton bold_btn = null!;
+		private ToggleToolButton italic_btn = null!;
+		private ToggleToolButton underscore_btn = null!;
+		private ToggleToolButton left_alignment_btn = null!;
+		private ToggleToolButton center_alignment_btn = null!;
+		private ToggleToolButton right_alignment_btn = null!;
 		private ToolBarLabel fill_label = null!;
 		private ToolBarDropDownButton fill_button = null!;
 		private SeparatorToolItem fill_sep = null!;
@@ -157,7 +157,10 @@ namespace Pinta.Tools
 			tb.AppendItem (new SeparatorToolItem ());
 
 			if (bold_btn == null) {
-				bold_btn = new ToolBarToggleButton ("Toolbar.Bold.png", Translations.GetString ("Bold"), Translations.GetString ("Bold"));
+				bold_btn = new ToggleToolButton () {
+					IconName = Pinta.Resources.StandardIcons.FormatTextBold,
+					TooltipText = Translations.GetString ("Bold")
+				};
 				bold_btn.Active = Settings.GetSetting (BOLD_SETTING, false);
 				bold_btn.Toggled += HandleBoldButtonToggled;
 			}
@@ -165,7 +168,10 @@ namespace Pinta.Tools
 			tb.AppendItem (bold_btn);
 
 			if (italic_btn == null) {
-				italic_btn = new ToolBarToggleButton ("Toolbar.Italic.png", Translations.GetString ("Italic"), Translations.GetString ("Italic"));
+				italic_btn = new ToggleToolButton () {
+					IconName = Pinta.Resources.StandardIcons.FormatTextItalic,
+					TooltipText = Translations.GetString ("Italic")
+				};
 				italic_btn.Active = Settings.GetSetting (ITALIC_SETTING, false);
 				italic_btn.Toggled += HandleItalicButtonToggled;
 			}
@@ -173,7 +179,10 @@ namespace Pinta.Tools
 			tb.AppendItem (italic_btn);
 
 			if (underscore_btn == null) {
-				underscore_btn = new ToolBarToggleButton ("Toolbar.Underline.png", Translations.GetString ("Underline"), Translations.GetString ("Underline"));
+				underscore_btn = new ToggleToolButton () {
+					IconName = Pinta.Resources.StandardIcons.FormatTextUnderline,
+					TooltipText = Translations.GetString ("Underline")
+				};
 				underscore_btn.Active = Settings.GetSetting (UNDERLINE_SETTING, false);
 				underscore_btn.Toggled += HandleUnderscoreButtonToggled;
 			}
@@ -185,7 +194,10 @@ namespace Pinta.Tools
 			var alignment = (TextAlignment) Settings.GetSetting (ALIGNMENT_SETTING, (int) TextAlignment.Left);
 
 			if (left_alignment_btn == null) {
-				left_alignment_btn = new ToolBarToggleButton ("Toolbar.LeftAlignment.png", Translations.GetString ("Left Align"), Translations.GetString ("Left Align"));
+				left_alignment_btn = new ToggleToolButton () {
+					IconName = Pinta.Resources.StandardIcons.FormatJustifyLeft,
+					TooltipText = Translations.GetString ("Left Align")
+				};
 				left_alignment_btn.Active = alignment == TextAlignment.Left;
 				left_alignment_btn.Toggled += HandleLeftAlignmentButtonToggled;
 			}
@@ -193,20 +205,26 @@ namespace Pinta.Tools
 			tb.AppendItem (left_alignment_btn);
 
 			if (center_alignment_btn == null) {
-				center_alignment_btn = new ToolBarToggleButton ("Toolbar.CenterAlignment.png", Translations.GetString ("Center Align"), Translations.GetString ("Center Align"));
+				center_alignment_btn = new ToggleToolButton () {
+					IconName = Pinta.Resources.StandardIcons.FormatJustifyCenter,
+					TooltipText = Translations.GetString ("Center Align")
+				};
 				center_alignment_btn.Active = alignment == TextAlignment.Center;
 				center_alignment_btn.Toggled += HandleCenterAlignmentButtonToggled;
 			}
 
 			tb.AppendItem (center_alignment_btn);
 
-			if (Right_alignment_btn == null) {
-				Right_alignment_btn = new ToolBarToggleButton ("Toolbar.RightAlignment.png", Translations.GetString ("Right Align"), Translations.GetString ("Right Align"));
-				Right_alignment_btn.Active = alignment == TextAlignment.Right;
-				Right_alignment_btn.Toggled += HandleRightAlignmentButtonToggled;
+			if (right_alignment_btn == null) {
+				right_alignment_btn = new ToggleToolButton () {
+					IconName = Pinta.Resources.StandardIcons.FormatJustifyRight,
+					TooltipText = Translations.GetString ("Right Align")
+				};
+				right_alignment_btn.Active = alignment == TextAlignment.Right;
+				right_alignment_btn.Toggled += HandleRightAlignmentButtonToggled;
 			}
 
-			tb.AppendItem (Right_alignment_btn);
+			tb.AppendItem (right_alignment_btn);
 
 			if (fill_sep == null)
 				fill_sep = new Gtk.SeparatorToolItem ();
@@ -292,7 +310,7 @@ namespace Pinta.Tools
 
 		private TextAlignment Alignment {
 			get {
-				if (Right_alignment_btn.Active)
+				if (right_alignment_btn.Active)
 					return TextAlignment.Right;
 				else if (center_alignment_btn.Active)
 					return TextAlignment.Center;
@@ -310,9 +328,9 @@ namespace Pinta.Tools
 		private void HandleLeftAlignmentButtonToggled (object? sender, EventArgs e)
 		{
 			if (left_alignment_btn.Active) {
-				Right_alignment_btn.Active = false;
+				right_alignment_btn.Active = false;
 				center_alignment_btn.Active = false;
-			} else if (!Right_alignment_btn.Active && !center_alignment_btn.Active) {
+			} else if (!right_alignment_btn.Active && !center_alignment_btn.Active) {
 				left_alignment_btn.Active = true;
 			}
 
@@ -322,9 +340,9 @@ namespace Pinta.Tools
 		private void HandleCenterAlignmentButtonToggled (object? sender, EventArgs e)
 		{
 			if (center_alignment_btn.Active) {
-				Right_alignment_btn.Active = false;
+				right_alignment_btn.Active = false;
 				left_alignment_btn.Active = false;
-			} else if (!Right_alignment_btn.Active && !left_alignment_btn.Active) {
+			} else if (!right_alignment_btn.Active && !left_alignment_btn.Active) {
 				center_alignment_btn.Active = true;
 			}
 
@@ -333,11 +351,11 @@ namespace Pinta.Tools
 
 		private void HandleRightAlignmentButtonToggled (object? sender, EventArgs e)
 		{
-			if (Right_alignment_btn.Active) {
+			if (right_alignment_btn.Active) {
 				center_alignment_btn.Active = false;
 				left_alignment_btn.Active = false;
 			} else if (!center_alignment_btn.Active && !left_alignment_btn.Active) {
-				Right_alignment_btn.Active = true;
+				right_alignment_btn.Active = true;
 			}
 
 			UpdateFont ();
