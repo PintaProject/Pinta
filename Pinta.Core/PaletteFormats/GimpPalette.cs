@@ -35,10 +35,11 @@ namespace Pinta.Core
 {
 	public class GimpPalette : IPaletteLoader, IPaletteSaver
 	{
-		public List<Color> Load (string fileName)
+		public List<Color> Load (GLib.IFile file)
 		{
 			List<Color> colors = new List<Color> ();
-			StreamReader reader = new StreamReader (fileName);
+			using var stream = new GLib.GioStream (file.Read (null));
+			StreamReader reader = new StreamReader (stream);
 			string? line = reader.ReadLine ();
 
 			if (line is null || !line.StartsWith ("GIMP"))
@@ -63,9 +64,10 @@ namespace Pinta.Core
 			return colors;
 		}
 
-		public void Save (List<Color> colors, string fileName)
+		public void Save (List<Color> colors, GLib.IFile file)
 		{
-			StreamWriter writer = new StreamWriter (fileName);
+			using var stream = new GLib.GioStream (file.Replace ());
+			StreamWriter writer = new StreamWriter (stream);
 			writer.WriteLine ("GIMP Palette");
 			writer.WriteLine ("Name: Pinta Created {0}", DateTime.Now.ToString (DateTimeFormatInfo.InvariantInfo.RFC1123Pattern));
 			writer.WriteLine ("#");

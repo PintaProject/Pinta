@@ -63,7 +63,7 @@ namespace Pinta.Actions
 
 			using var md = new MessageDialog (PintaCore.Chrome.MainWindow, DialogFlags.Modal,
 						    MessageType.Question, ButtonsType.None, true,
-						    message, System.IO.Path.GetFileName (PintaCore.Workspace.ActiveDocument.Filename));
+						    message, PintaCore.Workspace.ActiveDocument.DisplayName);
 
 			// Use the standard button order for each OS.
 			Widget closeButton;

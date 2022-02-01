@@ -453,8 +453,9 @@ namespace Pinta
 			PintaCore.Actions.View.ToolBox.Value = PintaCore.Settings.GetSetting ("toolbox-shown", true);
 			PintaCore.Actions.View.ImageTabs.Value = PintaCore.Settings.GetSetting ("image-tabs-shown", true);
 			PintaCore.Actions.View.PixelGrid.Value = PintaCore.Settings.GetSetting ("pixel-grid-shown", false);
-			PintaCore.System.LastDialogDirectory = PintaCore.Settings.GetSetting (LastDialogDirSettingKey,
-											      PintaCore.System.DefaultDialogDirectory);
+
+			var dialog_uri = PintaCore.Settings.GetSetting (LastDialogDirSettingKey, PintaCore.System.DefaultDialogDirectory.Uri.ToString ());
+			PintaCore.System.LastDialogDirectory = GLib.FileFactory.NewForUri (dialog_uri);
 
 			var ruler_metric = (MetricType) PintaCore.Settings.GetSetting ("ruler-metric", (int) MetricType.Pixels);
 			PintaCore.Actions.View.RulerMetric.Activate (new GLib.Variant ((int) ruler_metric));
@@ -478,7 +479,7 @@ namespace Pinta
 			PintaCore.Settings.PutSetting ("statusbar-shown", PintaCore.Actions.View.StatusBar.Value);
 			PintaCore.Settings.PutSetting ("toolbox-shown", PintaCore.Actions.View.ToolBox.Value);
 			PintaCore.Settings.PutSetting ("pixel-grid-shown", PintaCore.Actions.View.PixelGrid.Value);
-			PintaCore.Settings.PutSetting (LastDialogDirSettingKey, PintaCore.System.LastDialogDirectory);
+			PintaCore.Settings.PutSetting (LastDialogDirSettingKey, PintaCore.System.LastDialogDirectory.Uri.ToString ());
 
 			if (PintaCore.Tools.CurrentTool is BaseTool tool)
 				PintaCore.Settings.PutSetting (LastSelectedToolSettingKey, tool.GetType ().Name);
@@ -528,10 +529,10 @@ namespace Pinta
 							contentStream.CopyTo (fileStream);
 						}
 
-						if (PintaCore.Workspace.OpenFile (tempFilePath)) {
+						if (PintaCore.Workspace.OpenFile (GLib.FileFactory.NewForPath (tempFilePath))) {
 							// Mark as not having a file, so that the user doesn't unintentionally
 							// save using the temp file.
-							PintaCore.Workspace.ActiveDocument.HasFile = false;
+							PintaCore.Workspace.ActiveDocument.ClearFileReference ();
 						}
 					} catch (Exception e) {
 						progressDialog.Hide ();
@@ -542,8 +543,8 @@ namespace Pinta
 						progressDialog.Hide ();
 						PintaCore.Chrome.MainWindowBusy = false;
 					}
-				} else if (file.StartsWith ("file://")) {
-					PintaCore.Workspace.OpenFile (new Uri (file).LocalPath);
+				} else {
+					PintaCore.Workspace.OpenFile (GLib.FileFactory.NewFromCommandlineArg (file));
 				}
 			}
 		}

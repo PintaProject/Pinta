@@ -47,7 +47,7 @@ namespace Pinta
 
 		public event EventHandler? LabelChanged;
 
-		public string Label => Document.Filename + (Document.IsDirty ? "*" : string.Empty);
+		public string Label => Document.DisplayName + (Document.IsDirty ? "*" : string.Empty);
 
 		public Gtk.Widget Widget { get { return canvas_window; } }
 	}

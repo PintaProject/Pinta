@@ -90,13 +90,6 @@ namespace Pinta.Core
 			return p;
 		}
 
-		public static Palette FromFile (string fileName)
-		{
-			Palette p = new Palette ();
-			p.Load (fileName);
-			return p;
-		}
-
 		public void LoadDefault ()
 		{
 			colors.Clear ();
@@ -156,26 +149,26 @@ namespace Pinta.Core
 			OnPaletteChanged ();
 		}
 
-		public void Load (string fileName)
+		public void Load (GLib.IFile file)
 		{
 			try {
-				var loader = PintaCore.System.PaletteFormats.GetFormatByFilename (fileName)?.Loader;
+				var loader = PintaCore.System.PaletteFormats.GetFormatByFilename (file.GetDisplayName ())?.Loader;
 
 				if (loader == null)
 					throw new FormatException ();
 
-				colors = loader.Load (fileName);
+				colors = loader.Load (file);
 				colors.TrimExcess ();
 				OnPaletteChanged ();
 			} catch (FormatException e) {
 				var parent = PintaCore.Chrome.MainWindow;
-				ShowUnsupportedFormatDialog (parent, fileName, "Unsupported palette format", e.ToString ());
+				ShowUnsupportedFormatDialog (parent, file.ParsedName, "Unsupported palette format", e.ToString ());
 			}
 		}
 
-		public void Save (string fileName, IPaletteSaver saver)
+		public void Save (GLib.IFile file, IPaletteSaver saver)
 		{
-			saver.Save (colors, fileName);
+			saver.Save (colors, file);
 		}
 
 		private void ShowUnsupportedFormatDialog (Window parent, string filename, string primaryText, string details)

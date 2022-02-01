@@ -38,12 +38,12 @@ namespace Pinta.Core
 		/// <param name='document'>
 		/// The document to be saved.
 		/// </param>
-		/// <param name='fileName'>
-		/// File name to save to.
+		/// <param name='file'>
+		/// File identifier to save to.
 		/// </param>
 		/// <param name='parent'>
 		/// Window to be used as a parent for any dialogs that are shown.
 		/// </param>
-		void Export (Document document, string fileName, Gtk.Window parent);
+		void Export (Document document, GLib.IFile file, Gtk.Window parent);
 	}
 }

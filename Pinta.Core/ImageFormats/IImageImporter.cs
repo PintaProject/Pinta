@@ -35,11 +35,11 @@ namespace Pinta.Core
 		/// <summary>
 		/// Imports a document into Pinta.
 		/// </summary>
-		/// <param name='filename'>The name of the file to be imported.</param>
+		/// <param name='file'>The identifier of the file to be imported.</param>
 		/// <param name='parent'>
 		/// Window to be used as a parent for any dialogs that are shown.
 		/// </param>
-		void Import (string filename, Gtk.Window parent);
+		void Import (GLib.IFile file, Gtk.Window parent);
 
 		/// <summary>
 		/// Returns a thumbnail of an image.

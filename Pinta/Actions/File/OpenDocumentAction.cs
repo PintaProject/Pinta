@@ -73,21 +73,23 @@ namespace Pinta.Actions
 			ff2.AddPattern ("*.*");
 			fcd.AddFilter (ff2);
 
-			fcd.SetCurrentFolder (PintaCore.System.GetDialogDirectory ());
+			fcd.SetCurrentFolderFile (PintaCore.System.GetDialogDirectory ());
 			fcd.SelectMultiple = true;
+			fcd.LocalOnly = false;
 
 			var response = (ResponseType) fcd.Run ();
 
 			if (response == ResponseType.Accept) {
-				PintaCore.System.LastDialogDirectory = fcd.CurrentFolder;
+				PintaCore.System.LastDialogDirectory = fcd.CurrentFolderFile;
 
-				foreach (var file in fcd.Filenames) {
+				foreach (var file in fcd.Files) {
 					if (PintaCore.Workspace.OpenFile (file)) {
-						RecentManager.Default.AddFull (fcd.Uri, PintaCore.System.RecentData);
+						RecentManager.Default.AddFull (file.Uri.ToString (), PintaCore.System.RecentData);
 
-						var directory = System.IO.Path.GetDirectoryName (file);
-						if (directory is not null)
+						var directory = file.Parent;
+						if (directory is not null) {
 							PintaCore.System.LastDialogDirectory = directory;
+						}
 					}
 				}
 			}

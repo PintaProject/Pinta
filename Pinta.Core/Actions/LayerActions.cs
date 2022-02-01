@@ -166,9 +166,11 @@ namespace Pinta.Core
 				PintaCore.Chrome.MainWindow,
 				FileChooserAction.Open,
 				Translations.GetString ("Open"),
-				Translations.GetString ("Cancel"));
+				Translations.GetString ("Cancel")) {
+				LocalOnly = false
+			};
 
-			fcd.SetCurrentFolder (PintaCore.System.GetDialogDirectory ());
+			fcd.SetCurrentFolderFile (PintaCore.System.GetDialogDirectory ());
 
 			// Add image files filter
 			var ff = new FileFilter ();
@@ -185,20 +187,24 @@ namespace Pinta.Core
 			var response = (ResponseType) fcd.Run ();
 			if (response == ResponseType.Accept) {
 
-				string file = fcd.Filename;
+				GLib.IFile file = fcd.File;
 
-				string? directory = Path.GetDirectoryName (file);
+				GLib.IFile? directory = file.Parent;
 				if (directory is not null)
 					PintaCore.System.LastDialogDirectory = directory;
 
 				// Open the image and add it to the layers
-				UserLayer layer = doc.Layers.AddNewLayer (System.IO.Path.GetFileName (file));
+				UserLayer layer = doc.Layers.AddNewLayer (file.GetDisplayName ());
 
-				using (var fs = new FileStream (file, FileMode.Open))
-				using (var bg = new Pixbuf (fs))
-				using (var g = new Cairo.Context (layer.Surface)) {
-					Gdk.CairoHelper.SetSourcePixbuf (g, bg, 0, 0);
-					g.Paint ();
+				using var fs = file.Read (null);
+				try {
+					using (var bg = new Pixbuf (fs, cancellable: null))
+					using (var g = new Cairo.Context (layer.Surface)) {
+						Gdk.CairoHelper.SetSourcePixbuf (g, bg, 0, 0);
+						g.Paint ();
+					}
+				} finally {
+					fs.Close (null);
 				}
 
 				doc.Layers.SetCurrentUserLayer (layer);
