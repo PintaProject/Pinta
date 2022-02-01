@@ -143,16 +143,21 @@ namespace Pinta.Gui.Widgets
 
 		private void HandleLayerSelected (object? o, EventArgs e)
 		{
-			// Prevent triggered when closing the app which causes a crash
-			if (updating_model || !PintaCore.Workspace.HasOpenDocuments)
+			if (updating_model)
+				return;
+
+			// This handler is triggered via Reset() when the tree is cleared.
+			// So, if the selection was reset we should exit early, since there might not be
+			// an active document or the document might not have any layers yet.
+			// Otherwise, if the selection is non-empty there should be an open document with layers.
+			var layer = GetSelectedLayerInTreeView ();
+			if (layer is null)
 				return;
 
 			updating_model = true;
 
 			var doc = PintaCore.Workspace.ActiveDocument;
-			var layer = GetSelectedLayerInTreeView ();
-
-			if (doc.Layers.CurrentUserLayer != layer && layer != null)
+			if (doc.Layers.CurrentUserLayer != layer)
 				doc.Layers.SetCurrentUserLayer (layer);
 
 			updating_model = false;

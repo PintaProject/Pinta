@@ -29,6 +29,7 @@ Thanks to the following contributors who worked on this release:
 - Fixed an issue on Windows where the ruler's text did not render correctly (#212)
 - Fixed a regression from Pinta 2.0 where the rulers did not draw a marker for the current mouse position (#214)
 - Improved the zoom tool's rectangle zoom when working with smaller images
+- Fixed a potential crash when opening / adding an image after actions in the layer list panel ([#1959598](https://bugs.launchpad.net/pinta/+bug/1959598))
 
 ## [2.0.2](https://github.com/PintaProject/Pinta/compare/2.0.2...HEAD) - 2022/01/13
 
