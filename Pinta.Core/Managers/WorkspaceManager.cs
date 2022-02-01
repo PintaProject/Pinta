@@ -238,11 +238,11 @@ namespace Pinta.Core
 
 				fileOpened = true;
 			} catch (UnauthorizedAccessException) {
-				ShowFilePermissionErrorDialog (parent, file.Uri.ToString ());
+				ShowFilePermissionErrorDialog (parent, file.ParsedName);
 			} catch (FormatException e) {
-				ShowUnsupportedFormatDialog (parent, file.Uri.ToString (), e.Message, e.ToString ());
+				ShowUnsupportedFormatDialog (parent, file.ParsedName, e.Message, e.ToString ());
 			} catch (Exception e) {
-				ShowOpenFileErrorDialog (parent, file.Uri.ToString (), e.Message, e.ToString ());
+				ShowOpenFileErrorDialog (parent, file.ParsedName, e.Message, e.ToString ());
 			}
 
 			return fileOpened;

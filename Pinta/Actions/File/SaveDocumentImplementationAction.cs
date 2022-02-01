@@ -112,8 +112,9 @@ namespace Pinta.Actions
 				// Gtk doesn't like it if we set the file name to an extension that we don't have
 				// a filter for, so we change the extension to our default extension.
 				if (document.HasFile) {
-					// FIXME - this may not be correct for GLib.IFile.
-					fcd.SetFile (GLib.FileFactory.NewForPath (Path.ChangeExtension (document.File!.Path.ToString (), format_desc.Extensions[0])));
+					var file = document.File!;
+					var basename = file.Parent.GetRelativePath (file);
+					fcd.SetFile (file.Parent.GetChild (Path.ChangeExtension (basename, format_desc.Extensions[0])));
 				}
 			}
 
@@ -134,12 +135,11 @@ namespace Pinta.Actions
 				var file = fcd.File;
 
 				// Note that we can't use file.GetDisplayName() because the file doesn't exist.
-				var display_name = fcd.CurrentFolderFile.GetRelativePath (file);
-				if (!string.IsNullOrEmpty(Path.GetExtension(display_name))) {
+				var display_name = file.Parent.GetRelativePath (file);
+				if (string.IsNullOrEmpty(Path.GetExtension(display_name))) {
 					// No extension; add one from the format descriptor.
 					display_name = string.Format ("{0}.{1}", display_name, format.Extensions[0]);
-					fcd.CurrentName = display_name;
-					file = fcd.File;
+					file = file.Parent.GetChild (display_name);
 
 					// We also need to display an overwrite confirmation message manually,
 					// because MessageDialog won't do this for us in this case.

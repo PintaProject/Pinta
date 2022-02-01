@@ -162,7 +162,7 @@ namespace Pinta.Core
 				OnPaletteChanged ();
 			} catch (FormatException e) {
 				var parent = PintaCore.Chrome.MainWindow;
-				ShowUnsupportedFormatDialog (parent, file.Uri.ToString (), "Unsupported palette format", e.ToString ());
+				ShowUnsupportedFormatDialog (parent, file.ParsedName, "Unsupported palette format", e.ToString ());
 			}
 		}
 
