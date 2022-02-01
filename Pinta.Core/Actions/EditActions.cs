@@ -428,7 +428,7 @@ namespace Pinta.Core
 				string extension = System.IO.Path.GetExtension (basename);
 				if (string.IsNullOrEmpty (extension)) {
 					var currentFormat = PintaCore.System.PaletteFormats.Formats.First (f => f.Filter == fcd.Filter);
-					basename = fcd.CurrentName + "." + currentFormat.Extensions.First ();
+					basename += "." + currentFormat.Extensions.First ();
 					file = file.Parent.GetChild (basename);
 				}
 
