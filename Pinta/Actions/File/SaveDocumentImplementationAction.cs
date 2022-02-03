@@ -136,7 +136,7 @@ namespace Pinta.Actions
 
 				// Note that we can't use file.GetDisplayName() because the file doesn't exist.
 				var display_name = file.Parent.GetRelativePath (file);
-				if (string.IsNullOrEmpty(Path.GetExtension(display_name))) {
+				if (string.IsNullOrEmpty (Path.GetExtension (display_name))) {
 					// No extension; add one from the format descriptor.
 					display_name = string.Format ("{0}.{1}", display_name, format.Extensions[0]);
 					file = file.Parent.GetChild (display_name);

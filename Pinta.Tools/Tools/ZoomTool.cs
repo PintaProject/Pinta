@@ -112,7 +112,7 @@ namespace Pinta.Tools
 						document.Workspace.ZoomIn ();
 						document.Workspace.RecenterView (x, y);
 					} else {
-						document.Workspace.ZoomToRectangle (CairoExtensions.PointsToRectangle (shape_origin.Rounded(), e.PointDouble.Rounded()));
+						document.Workspace.ZoomToRectangle (CairoExtensions.PointsToRectangle (shape_origin.Rounded (), e.PointDouble.Rounded ()));
 					}
 				} else {
 					document.Workspace.ZoomOut ();
