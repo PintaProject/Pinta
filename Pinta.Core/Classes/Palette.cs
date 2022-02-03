@@ -29,6 +29,7 @@ using System.Collections.Generic;
 using System.Globalization;
 using System.IO;
 using System.Linq;
+using System.Text;
 using Cairo;
 using Gtk;
 
@@ -151,18 +152,36 @@ namespace Pinta.Core
 
 		public void Load (GLib.IFile file)
 		{
-			try {
-				var loader = PintaCore.System.PaletteFormats.GetFormatByFilename (file.GetDisplayName ())?.Loader;
+			List<Color>? loaded_colors = null;
+			var errors = new StringBuilder ();
 
-				if (loader == null)
-					throw new FormatException ();
+			var loader = PintaCore.System.PaletteFormats.GetFormatByFilename (file.GetDisplayName ())?.Loader;
+			if (loader != null) {
+				loaded_colors = loader.Load (file);
+			} else {
+				// Not a recognized extension, so attempt all formats
+				foreach (var format in PintaCore.System.PaletteFormats.Formats.Where (f => !f.IsWriteOnly ())) {
+					try {
+						loaded_colors = format.Loader.Load (file);
+						if (loaded_colors != null) {
+							break;
+						}
+					} catch (Exception e) {
+						// Record errors in case none of the formats work.
+						errors.AppendLine ($"Failed to load palette as {format.Filter.Name}:");
+						errors.Append (e.ToString ());
+						errors.AppendLine ();
+					}
+				}
+			}
 
-				colors = loader.Load (file);
+			if (loaded_colors is not null) {
+				colors = loaded_colors;
 				colors.TrimExcess ();
 				OnPaletteChanged ();
-			} catch (FormatException e) {
+			} else {
 				var parent = PintaCore.Chrome.MainWindow;
-				ShowUnsupportedFormatDialog (parent, file.ParsedName, "Unsupported palette format", e.ToString ());
+				ShowUnsupportedFormatDialog (parent, file.ParsedName, "Unsupported palette format", errors.ToString ());
 			}
 		}
 
