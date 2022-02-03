@@ -27,6 +27,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Text;
 using Cairo;
 using Gtk;
 
@@ -221,10 +222,35 @@ namespace Pinta.Core
 			try {
 				// Open the image and add it to the layers
 				IImageImporter? importer = PintaCore.System.ImageFormats.GetImporterByFile (file.GetDisplayName ());
-				if (importer == null)
-					throw new FormatException (Translations.GetString ("Unsupported file format"));
+				if (importer is not null) {
+					importer.Import (file, parent);
+				} else {
+					// Unknown extension, so try every loader.
+					var errors = new StringBuilder ();
+					bool loaded = false;
+					foreach (var format in PintaCore.System.ImageFormats.Formats.Where (f => !f.IsWriteOnly ())) {
+						try {
+							format.Importer!.Import (file, parent);
+							loaded = true;
+							break;
+						} catch (UnauthorizedAccessException) {
+							// If the file can't be accessed, don't retry for every format.
+							ShowFilePermissionErrorDialog (parent, file.ParsedName);
+							return false;
+						} catch (Exception e) {
+							// Record errors in case none of the formats work.
+							errors.AppendLine ($"Failed to load image as {format.Filter.Name}:");
+							errors.Append (e.ToString ());
+							errors.AppendLine ();
+						}
+					}
 
-				importer.Import (file, parent);
+					if (!loaded) {
+						ShowUnsupportedFormatDialog (parent, file.ParsedName,
+							Translations.GetString ("Unsupported file format"), errors.ToString ());
+						return false;
+					}
+				}
 
 				PintaCore.Workspace.ActiveWorkspace.History.PushNewItem (new BaseHistoryItem (Resources.StandardIcons.DocumentOpen, Translations.GetString ("Open Image")));
 				PintaCore.Workspace.ActiveDocument.History.SetClean ();
@@ -239,8 +265,6 @@ namespace Pinta.Core
 				fileOpened = true;
 			} catch (UnauthorizedAccessException) {
 				ShowFilePermissionErrorDialog (parent, file.ParsedName);
-			} catch (FormatException e) {
-				ShowUnsupportedFormatDialog (parent, file.ParsedName, e.Message, e.ToString ());
 			} catch (Exception e) {
 				ShowOpenFileErrorDialog (parent, file.ParsedName, e.Message, e.ToString ());
 			}
