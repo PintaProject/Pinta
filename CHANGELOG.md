@@ -30,6 +30,7 @@ Thanks to the following contributors who worked on this release:
 - Fixed a regression from Pinta 2.0 where the rulers did not draw a marker for the current mouse position (#214)
 - Improved the zoom tool's rectangle zoom when working with smaller images
 - Fixed a potential crash when opening / adding an image after actions in the layer list panel ([#1959598](https://bugs.launchpad.net/pinta/+bug/1959598))
+- Fixed an issue where the "All Files" filter in the Open File dialog ignored files with no extension, and did not work in the macOS native file chooser ([#1958670](https://bugs.launchpad.net/pinta/+bug/1958670), [#1679570](https://bugs.launchpad.net/pinta/+bug/1679570))
 
 ## [2.0.2](https://github.com/PintaProject/Pinta/compare/2.0.2...HEAD) - 2022/01/13
 

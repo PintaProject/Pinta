@@ -379,7 +379,7 @@ namespace Pinta.Core
 			FileFilter ff2 = new FileFilter {
 				Name = Translations.GetString ("All files")
 			};
-			ff2.AddPattern ("*.*");
+			ff2.AddPattern ("*");
 			fcd.AddFilter (ff2);
 
 			if (last_palette_dir != null)
