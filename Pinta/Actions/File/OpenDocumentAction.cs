@@ -65,6 +65,14 @@ namespace Pinta.Actions
 				}
 			}
 
+			if (SystemManager.GetOperatingSystem() != OS.Windows) {
+				foreach (var format in PintaCore.System.ImageFormats.Formats) {
+					foreach (var mime in format.Mimes) {
+						ff.AddMimeType (mime);
+					}
+				}
+			}
+
 			fcd.AddFilter (ff);
 
 			var ff2 = new FileFilter {
