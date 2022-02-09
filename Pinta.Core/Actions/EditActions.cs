@@ -374,14 +374,6 @@ namespace Pinta.Core
 				}
 			}
 
-			if (SystemManager.GetOperatingSystem() != OS.Windows) {
-				foreach (var format in PintaCore.System.ImageFormats.Formats) {
-					foreach (var mime in format.Mimes) {
-						ff.AddMimeType (mime);
-					}
-				}
-			}
-
 			fcd.AddFilter (ff);
 
 			FileFilter ff2 = new FileFilter {

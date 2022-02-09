@@ -181,6 +181,14 @@ namespace Pinta.Core
 				}
 			}
 
+			if (SystemManager.GetOperatingSystem() != OS.Windows) {
+				foreach (var format in PintaCore.System.ImageFormats.Formats) {
+					foreach (var mime in format.Mimes) {
+						ff.AddMimeType (mime);
+					}
+				}
+			}
+
 			ff.Name = Translations.GetString ("Image files");
 			fcd.AddFilter (ff);
 
