@@ -97,6 +97,10 @@ namespace Pinta.Core
 				formatNames.Append (wildcard);
 			}
 
+			// On Unix-like systems, file extensions are often considered optional.
+			// Files can often also be identified by their MIME types.
+			// Windows does not understand MIME types natively.
+			// Adding a MIME filter on Windows would break the native file picker and force a GTK file picker instead.
 			if (SystemManager.GetOperatingSystem() != OS.Windows) {
 				foreach (string mime in mimes) {
 					ff.AddMimeType (mime);
