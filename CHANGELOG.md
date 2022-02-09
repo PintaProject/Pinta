@@ -7,6 +7,7 @@ Thanks to the following contributors who worked on this release:
 - @cameronwhite
 - @jpobst
 - @JanDeDinoMan
+- @MrCarroll
 
 ### Added
 - Updated icons to symbolic SVG icons, which are more usable for dark themes and high-res screens (#204, #207, [#1738106](https://bugs.launchpad.net/pinta/+bug/1738106), [#1909573](https://bugs.launchpad.net/pinta/+bug/1909573))
@@ -17,6 +18,7 @@ Thanks to the following contributors who worked on this release:
   - Hidden layers are now round-tripped correctly for `.ora` files ([#1377566](https://bugs.launchpad.net/pinta/+bug/1377566))
   - When saving a `.ora` file, a flattened image (`mergedimage.png`) is now included in the archive. This is required by the spec to accomodate viewer software ([#1377566](https://bugs.launchpad.net/pinta/+bug/1377566))
 - Image or palette files that have an unknown extension but have valid contents can now be loaded ([#1679570](https://bugs.launchpad.net/pinta/+bug/1679570))
+  - The file dialog also now uses MIME types on Linux and macOS, allowing valid image files with unknown extensions to be included in the image file filter (#216)
 
 ### Changed
 - Pinta now uses the standard GTK about dialog
