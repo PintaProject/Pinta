@@ -45,6 +45,7 @@ namespace Pinta.Core
 
 		/// <summary>
 		/// A list of supported MIME types (for example, "image/jpg" and "image/png").
+		/// </summary>
 		public string[] Mimes { get; private set; }
 
 		/// <summary>
@@ -69,6 +70,7 @@ namespace Pinta.Core
 		/// in the file dialog's filter.
 		/// </param>
 		/// <param name="extensions">A list of supported file extensions (for example, "jpeg" and "JPEG").</param>
+		/// <param name="mimes">A list of supported file MIME types (for example, "image/jpeg" and "image/png").</param>
 		/// <param name="importer">The importer for this file format, or null if importing is not supported.</param>
 		/// <param name="exporter">The exporter for this file format, or null if exporting is not supported.</param>
 		public FormatDescriptor (string displayPrefix, string[] extensions, string[] mimes,
