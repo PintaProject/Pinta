@@ -99,7 +99,7 @@ namespace Pinta.Core
 
 			if (SystemManager.GetOperatingSystem() != OS.Windows) {
 				foreach (string mime in mimes) {
-					ff.AddPattern (mime);
+					ff.AddMimeType (mime);
 				}
 			}
 
