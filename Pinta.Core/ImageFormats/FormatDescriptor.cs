@@ -44,6 +44,11 @@ namespace Pinta.Core
 		public string[] Extensions { get; private set; }
 
 		/// <summary>
+		/// A list of supported MIME types (for example, "image/jpg" and "image/png").
+		/// </summary>
+		public string[] Mimes { get; private set; }
+
+		/// <summary>
 		/// The importer for this file format. This may be null if only exporting
 		/// is supported for this format.
 		/// </summary>
@@ -65,9 +70,10 @@ namespace Pinta.Core
 		/// in the file dialog's filter.
 		/// </param>
 		/// <param name="extensions">A list of supported file extensions (for example, "jpeg" and "JPEG").</param>
+		/// <param name="mimes">A list of supported file MIME types (for example, "image/jpeg" and "image/png").</param>
 		/// <param name="importer">The importer for this file format, or null if importing is not supported.</param>
 		/// <param name="exporter">The exporter for this file format, or null if exporting is not supported.</param>
-		public FormatDescriptor (string displayPrefix, string[] extensions,
+		public FormatDescriptor (string displayPrefix, string[] extensions, string[] mimes,
 					 IImageImporter? importer, IImageExporter? exporter)
 		{
 			if (extensions == null || (importer == null && exporter == null)) {
@@ -75,6 +81,7 @@ namespace Pinta.Core
 			}
 
 			this.Extensions = extensions;
+			this.Mimes = mimes;
 			this.Importer = importer;
 			this.Exporter = exporter;
 
@@ -88,6 +95,16 @@ namespace Pinta.Core
 				string wildcard = string.Format ("*.{0}", ext);
 				ff.AddPattern (wildcard);
 				formatNames.Append (wildcard);
+			}
+
+			// On Unix-like systems, file extensions are often considered optional.
+			// Files can often also be identified by their MIME types.
+			// Windows does not understand MIME types natively.
+			// Adding a MIME filter on Windows would break the native file picker and force a GTK file picker instead.
+			if (SystemManager.GetOperatingSystem() != OS.Windows) {
+				foreach (string mime in mimes) {
+					ff.AddMimeType (mime);
+				}
 			}
 
 			ff.Name = string.Format (Translations.GetString ("{0} image ({1})"), displayPrefix, formatNames);
