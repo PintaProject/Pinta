@@ -101,7 +101,7 @@ namespace Pinta.Core
 			// Files can often also be identified by their MIME types.
 			// Windows does not understand MIME types natively.
 			// Adding a MIME filter on Windows would break the native file picker and force a GTK file picker instead.
-			if (SystemManager.GetOperatingSystem() != OS.Windows) {
+			if (SystemManager.GetOperatingSystem () != OS.Windows) {
 				foreach (string mime in mimes) {
 					ff.AddMimeType (mime);
 				}
