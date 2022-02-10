@@ -82,12 +82,14 @@ namespace Pinta.Actions
 
 			if (document.HasFile)
 				fcd.SetFile (document.File);
-			else
-				fcd.CurrentName = document.DisplayName;
-
-			var filetypes = new Dictionary<FileFilter, FormatDescriptor> ();
+			else {
+				// Append the default extension, producing e.g. "Unsaved Image 1.png"
+				var default_ext = PintaCore.System.ImageFormats.GetDefaultSaveFormat ().Extensions.First ();
+				fcd.CurrentName = $"{document.DisplayName}.{default_ext}";
+			}
 
 			// Add all the formats we support to the save dialog
+			var filetypes = new Dictionary<FileFilter, FormatDescriptor> ();
 			foreach (var format in PintaCore.System.ImageFormats.Formats) {
 				if (!format.IsReadOnly ()) {
 					fcd.AddFilter (format.Filter);
@@ -106,54 +108,21 @@ namespace Pinta.Actions
 			if (document.HasFile)
 				format_desc = PintaCore.System.ImageFormats.GetFormatByFile (document.DisplayName);
 
-			if (format_desc == null) {
+			if (format_desc == null)
 				format_desc = PintaCore.System.ImageFormats.GetDefaultSaveFormat ();
-
-				// Gtk doesn't like it if we set the file name to an extension that we don't have
-				// a filter for, so we change the extension to our default extension.
-				if (document.HasFile) {
-					var file = document.File!;
-					var basename = file.Parent.GetRelativePath (file);
-					fcd.SetFile (file.Parent.GetChild (Path.ChangeExtension (basename, format_desc.Extensions[0])));
-				}
-			}
 
 			fcd.Filter = format_desc.Filter;
 
-			fcd.AddNotification ("filter", OnFilterChanged);
-
-			// Replace GTK's ConfirmOverwrite with our own, for UI consistency
-			fcd.ConfirmOverwrite += (eventSender, eventArgs) => {
-				if (this.ConfirmOverwrite (fcd, fcd.File))
-					eventArgs.RetVal = FileChooserConfirmation.AcceptFilename;
-				else
-					eventArgs.RetVal = FileChooserConfirmation.SelectAgain;
-			};
-
 			while ((ResponseType) fcd.Run () == ResponseType.Accept) {
-				FormatDescriptor format = filetypes[fcd.Filter];
 				var file = fcd.File;
 
 				// Note that we can't use file.GetDisplayName() because the file doesn't exist.
 				var display_name = file.Parent.GetRelativePath (file);
-				if (string.IsNullOrEmpty (Path.GetExtension (display_name))) {
-					// No extension; add one from the format descriptor.
-					display_name = string.Format ("{0}.{1}", display_name, format.Extensions[0]);
-					file = file.Parent.GetChild (display_name);
-
-					// We also need to display an overwrite confirmation message manually,
-					// because MessageDialog won't do this for us in this case.
-					if (file.Exists && !ConfirmOverwrite (fcd, file))
-						continue;
-				}
 
 				// Always follow the extension rather than the file type drop down
 				// ie: if the user chooses to save a "jpeg" as "foo.png", we are going
 				// to assume they just didn't update the dropdown and really want png
-				var format_type = PintaCore.System.ImageFormats.GetFormatByFile (display_name);
-
-				if (format_type != null)
-					format = format_type;
+				var format = PintaCore.System.ImageFormats.GetFormatByFile (display_name) ?? filetypes[fcd.Filter];
 
 				var directory = file.Parent;
 				if (directory is not null)
@@ -169,7 +138,7 @@ namespace Pinta.Actions
 				document.HasBeenSavedInSession = false;
 
 				RecentManager.Default.AddFull (file.Uri.ToString (), PintaCore.System.RecentData);
-				PintaCore.System.ImageFormats.SetDefaultFormat (Path.GetExtension (display_name));
+				PintaCore.System.ImageFormats.SetDefaultFormat (format.Extensions.First ());
 
 				document.File = file;
 				return true;
@@ -242,51 +211,6 @@ namespace Pinta.Actions
 			document.HasBeenSavedInSession = true;
 
 			return true;
-		}
-
-		private bool ConfirmOverwrite (IFileChooser fcd, GLib.IFile file)
-		{
-			string primary = Translations.GetString ("A file named \"{0}\" already exists. Do you want to replace it?");
-			string secondary = Translations.GetString ("The file already exists in \"{1}\". Replacing it will overwrite its contents.");
-			string message = string.Format (markup, primary, secondary);
-
-			using var md = new MessageDialog (PintaCore.Chrome.MainWindow, DialogFlags.Modal | DialogFlags.DestroyWithParent,
-				MessageType.Question, ButtonsType.None,
-				true, message, file.GetDisplayName (), fcd.CurrentFolder);
-
-			// Use the standard button order for each OS.
-			if (PintaCore.System.OperatingSystem == OS.Windows) {
-				md.AddButton (Translations.GetString ("Replace"), ResponseType.Ok);
-				md.AddButton (Stock.Cancel, ResponseType.Cancel);
-			} else {
-				md.AddButton (Stock.Cancel, ResponseType.Cancel);
-				md.AddButton (Translations.GetString ("Replace"), ResponseType.Ok);
-			}
-
-			md.DefaultResponse = ResponseType.Cancel;
-
-			int response = md.Run ();
-
-			return response == (int) ResponseType.Ok;
-		}
-
-		private void OnFilterChanged (object o, GLib.NotifyArgs args)
-		{
-			var fcd = (IFileChooser) o;
-
-			// Ensure that the file filter is never blank.
-			if (fcd.Filter == null) {
-				fcd.Filter = PintaCore.System.ImageFormats.GetDefaultSaveFormat ().Filter;
-				return;
-			}
-
-			// find the FormatDescriptor
-			FormatDescriptor format_desc = PintaCore.System.ImageFormats.Formats.Single (f => f.Filter == fcd.Filter);
-
-			// adjust the filename
-			var p = fcd.Filename ?? fcd.CurrentName;
-			p = Path.ChangeExtension (Path.GetFileName (p), format_desc.Extensions[0]);
-			fcd.CurrentName = p;
 		}
 	}
 }
