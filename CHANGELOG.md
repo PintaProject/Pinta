@@ -8,6 +8,7 @@ Thanks to the following contributors who worked on this release:
 - @jpobst
 - @JanDeDinoMan
 - @MrCarroll
+- @supershadoe
 
 ### Added
 - Updated icons to symbolic SVG icons, which are more usable for dark themes and high-res screens (#204, #207, [#1738106](https://bugs.launchpad.net/pinta/+bug/1738106), [#1909573](https://bugs.launchpad.net/pinta/+bug/1909573))
@@ -34,6 +35,7 @@ Thanks to the following contributors who worked on this release:
 - Improved the zoom tool's rectangle zoom when working with smaller images
 - Fixed a potential crash when opening / adding an image after actions in the layer list panel ([#1959598](https://bugs.launchpad.net/pinta/+bug/1959598))
 - Fixed an issue where the "All Files" filter in the Open File dialog ignored files with no extension, and did not work in the macOS native file chooser ([#1958670](https://bugs.launchpad.net/pinta/+bug/1958670), [#1679570](https://bugs.launchpad.net/pinta/+bug/1679570))
+- Fixed a crash in the text tool when pressing Ctrl+X without a selection (#219, [#1964398](https://bugs.launchpad.net/pinta/+bug/1964398))
 
 ## [2.0.2](https://github.com/PintaProject/Pinta/compare/2.0.2...HEAD) - 2022/01/13
 
