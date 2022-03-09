@@ -341,7 +341,9 @@ namespace Pinta.Core
 		public void PerformCut (Gtk.Clipboard clipboard)
 		{
 			PerformCopy (clipboard);
-			DeleteSelection ();
+			if (HasSelection ()) {
+				DeleteSelection ();
+			}
 		}
 
 		/// <summary>
