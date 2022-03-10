@@ -9,13 +9,13 @@ using System.Runtime.CompilerServices;
 using System.Threading.Tasks;
 using Tmds.DBus;
 
-[assembly: InternalsVisibleTo(Tmds.DBus.Connection.DynamicAssemblyName)]
+[assembly: InternalsVisibleTo (Tmds.DBus.Connection.DynamicAssemblyName)]
 namespace Requests.DBus
 {
-    [DBusInterface("org.freedesktop.portal.Request")]
-    interface IRequest : IDBusObject
-    {
-        Task CloseAsync();
-        Task<IDisposable> WatchResponseAsync(Action<(uint response, IDictionary<string, object> results)> handler, Action<Exception>? onError = null);
-    }
+	[DBusInterface ("org.freedesktop.portal.Request")]
+	interface IRequest : IDBusObject
+	{
+		Task CloseAsync ();
+		Task<IDisposable> WatchResponseAsync (Action<(uint response, IDictionary<string, object> results)> handler, Action<Exception>? onError = null);
+	}
 }

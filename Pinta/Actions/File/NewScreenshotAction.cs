@@ -25,11 +25,11 @@
 // THE SOFTWARE.
 
 using System;
+using System.Collections.Generic;
 using Gdk;
 using Pinta.Core;
-using System.Collections.Generic;
-using Tmds.DBus;
 using ScreenshotPortal.DBus;
+using Tmds.DBus;
 
 namespace Pinta.Actions
 {
@@ -52,14 +52,13 @@ namespace Pinta.Actions
 			// Use XDG Desktop Portal Screenshot API's to allow capturing screenshots on Wayland environments
 			// Check for presence of the $WAYLAND_DISPLAY variable to indicate Wayland is being used.
 			// Ideally GTK would give us this information instead, but the necessary functions aren't wrapped.
-			if (SystemManager.GetOperatingSystem() == OS.X11 && Environment.GetEnvironmentVariable("WAYLAND_DISPLAY") != null) {
+			if (SystemManager.GetOperatingSystem () == OS.X11 && Environment.GetEnvironmentVariable ("WAYLAND_DISPLAY") != null) {
 				try {
 					// It's important that the portal interactions are synchronised with the main thread
 					// Otherwise the use of the portals will cause massive instability and crash Pinta
-					var systemConnection = new Connection (new ClientConnectionOptions (Address.Session) 
-						{ AutoConnect = true, SynchronizationContext = GLib.GLibSynchronizationContext.Current });
-					
-					var portal = systemConnection.CreateProxy <IScreenshot> (
+					var systemConnection = new Connection (new ClientConnectionOptions (Address.Session) { AutoConnect = true, SynchronizationContext = GLib.GLibSynchronizationContext.Current });
+
+					var portal = systemConnection.CreateProxy<IScreenshot> (
 						"org.freedesktop.portal.Desktop",
 						"/org/freedesktop/portal/desktop");
 
@@ -68,7 +67,7 @@ namespace Pinta.Actions
 					// The empty string means that the compositor may unfortunately place the dialog wherever it pleases.
 					// https://flatpak.github.io/xdg-desktop-portal/#parent_window
 					var rootWindowID = "";
-					var portalOptions = new Dictionary <string, object> {
+					var portalOptions = new Dictionary<string, object> {
 						{ "modal", true },
 						{ "interactive", true }}; // Enables options such as delay, specific windows, etc.
 
@@ -79,7 +78,7 @@ namespace Pinta.Actions
 							// However the response 1 can occur when the user presses "Cancel" on the second stage of the UI
 							// As a result, it's not reliable to throw error messages when the retval == 1
 							if (reply.response == 0) {
-								if (PintaCore.Workspace.OpenFile (GLib.FileFactory.NewForUri (reply.results["uri"].ToString() ))) {
+								if (PintaCore.Workspace.OpenFile (GLib.FileFactory.NewForUri (reply.results["uri"].ToString ()))) {
 									// Mark as not having a file, so that the user doesn't unintentionally
 									// save using the temp file.
 									PintaCore.Workspace.ActiveDocument.ClearFileReference ();
@@ -87,10 +86,10 @@ namespace Pinta.Actions
 							}
 						}
 					);
-				return; // Prevent falling back to default screenshot behaviour
+					return; // Prevent falling back to default screenshot behaviour
 
 				} catch (Tmds.DBus.DBusException) {
-					PintaCore.Chrome.ShowErrorDialog (PintaCore.Chrome.MainWindow, 
+					PintaCore.Chrome.ShowErrorDialog (PintaCore.Chrome.MainWindow,
 						Translations.GetString ("Failed to take screenshot"),
 						Translations.GetString ("Failed to access XDG Desktop Portals"));
 					return; // Prevent falling back to default screenshot behaviour
