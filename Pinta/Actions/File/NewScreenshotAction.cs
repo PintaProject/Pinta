@@ -52,7 +52,7 @@ namespace Pinta.Actions
 			// Use XDG Desktop Portal Screenshot API's to allow capturing screenshots on Wayland environments
 			// Check for presence of the $WAYLAND_DISPLAY variable to indicate Wayland is being used.
 			// Ideally GTK would give us this information instead, but the necessary functions aren't wrapped.
-			if (SystemManager.GetOperatingSystem () == OS.X11 && Environment.GetEnvironmentVariable ("WAYLAND_DISPLAY") != null) {
+			if (SystemManager.GetOperatingSystem () == OS.X11) {
 				try {
 					// It's important that the portal interactions are synchronised with the main thread
 					// Otherwise the use of the portals will cause massive instability and crash Pinta
