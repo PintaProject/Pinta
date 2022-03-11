@@ -89,10 +89,10 @@ namespace Pinta.Actions
 					return; // Prevent falling back to default screenshot behaviour
 
 				} catch (Tmds.DBus.DBusException) {
-					PintaCore.Chrome.ShowErrorDialog (PintaCore.Chrome.MainWindow,
+					if (Environment.GetEnvironmentVariable ("WAYLAND_DISPLAY") != null) {
+						PintaCore.Chrome.ShowErrorDialog (PintaCore.Chrome.MainWindow,
 						Translations.GetString ("Failed to take screenshot"),
 						Translations.GetString ("Failed to access XDG Desktop Portals"));
-					if (Environment.GetEnvironmentVariable ("WAYLAND_DISPLAY") != null) {
 						return; // Don't bother trying to use legacy screenshot logic on Wayland, it won't work
 					}
 				}
