@@ -6,6 +6,8 @@ Pinta/Actions/Edit/PasteIntoNewImageAction.cs
 Pinta/Actions/Edit/PasteIntoNewLayerAction.cs
 Pinta/Actions/Edit/ResizePaletteAction.cs
 Pinta/Actions/File/CloseDocumentAction.cs
+Pinta/Actions/File/DBus/RequestsPortal.cs
+Pinta/Actions/File/DBus/ScreenshotPortal.cs
 Pinta/Actions/File/ExitAction.cs
 Pinta/Actions/File/ModifyCompressionAction.cs
 Pinta/Actions/File/NewDocumentAction.cs
@@ -74,6 +76,7 @@ Pinta.Core/Classes/DocumentLayers.cs
 Pinta.Core/Classes/DocumentSelection.cs
 Pinta.Core/Classes/DocumentWorkspace.cs
 Pinta.Core/Classes/IExtension.cs
+Pinta.Core/Classes/IToolHandle.cs
 Pinta.Core/Classes/Layer.cs
 Pinta.Core/Classes/LayerProperties.cs
 Pinta.Core/Classes/ObservableObject.cs
@@ -143,7 +146,6 @@ Pinta.Core/Extensions/ToolBarComboBox.cs
 Pinta.Core/Extensions/ToolBarImage.cs
 Pinta.Core/Extensions/ToolBarLabel.cs
 Pinta.Core/Extensions/ToolBarSlider.cs
-Pinta.Core/Extensions/ToolBarToggleButton.cs
 Pinta.Core/Extensions/ToolBarWidget.cs
 Pinta.Core/Extensions/ToolBoxButton.cs
 Pinta.Core/HistoryItems/AddLayerHistoryItem.cs
@@ -286,6 +288,7 @@ Pinta.Tools/Editable/Shapes/LineCurveSeriesEngine.cs
 Pinta.Tools/Editable/Shapes/OrganizedPointCollection.cs
 Pinta.Tools/Editable/Shapes/RoundedLineEngine.cs
 Pinta.Tools/Editable/Shapes/ShapeEngineCollection.cs
+Pinta.Tools/Handles/MoveHandle.cs
 Pinta.Tools/HistoryItems/ShapesHistoryItem.cs
 Pinta.Tools/HistoryItems/ShapesModifyHistoryItem.cs
 Pinta.Tools/Tools/BaseBrushTool.cs
@@ -314,5 +317,4 @@ Pinta.Tools/Tools/RoundedRectangleTool.cs
 Pinta.Tools/Tools/SelectTool.cs
 Pinta.Tools/Tools/ShapeTool.cs
 Pinta.Tools/Tools/TextTool.cs
-Pinta.Tools/Tools/ToolControl/ToolControl.cs
 Pinta.Tools/Tools/ZoomTool.cs

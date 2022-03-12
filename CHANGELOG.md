@@ -14,6 +14,7 @@ Thanks to the following contributors who worked on this release:
 - Updated icons to symbolic SVG icons, which are more usable for dark themes and high-res screens (#204, #207, [#1738106](https://bugs.launchpad.net/pinta/+bug/1738106), [#1909573](https://bugs.launchpad.net/pinta/+bug/1909573))
 - Added "Transparency Mode" to the Gradient tool
 - The selection move handles are now much easier to use when working on zoomed in or small images (#211, [#1173756](https://bugs.launchpad.net/pinta/+bug/1173756))
+- The File -> New Screenshot command now uses the XDG screenshot portal if available. This fixes issues with taking screenshots under Wayland (#218, [#1955841](https://bugs.launchpad.net/pinta/+bug/1955841))
 - Improved canvas rendering performance (#209, #210)
 - Improved support for `.ora` files
   - Hidden layers are now round-tripped correctly for `.ora` files ([#1377566](https://bugs.launchpad.net/pinta/+bug/1377566))
