@@ -1,0 +1,68 @@
+pinta (1.7.1-0ppa1~focal1) focal; urgency=medium
+
+  * New upstream release.
+
+ -- Cameron White <cameronwhite91@gmail.com>  Sat, 20 Nov 2021 12:26:00 -0400
+
+pinta (1.7-0ppa1~focal1) focal; urgency=medium
+
+  * New upstream release.
+
+ -- Cameron White <cameronwhite91@gmail.com>  Tue, 04 Aug 2020 19:05:42 -0400
+
+pinta (1.5-0ppa3~trusty1) trusty; urgency=medium
+
+  * New upstream release with numerous bug fixes and new features.
+
+ -- Cameron White <cameronwhite91@gmail.com>  Sat, 24 May 2014 15:20:20 -0400
+
+pinta (1.4-0ppa1~saucy1) saucy; urgency=low
+
+  * New upstream release with numerous bug fixes and new features.
+
+ -- Cameron White <cameronwhite91@gmail.com>  Thu, 02 Jan 2014 18:53:31 -0500
+
+pinta (1.4-0ppa1~quantal1) quantal; urgency=low
+
+  * New upstream release with numerous bug fixes and new features.
+
+ -- Cameron White <cameronwhite91@gmail.com>  Wed, 26 Sep 2012 19:44:13 -0400
+
+pinta (1.3-0ubuntu1~precise1) precise; urgency=low
+
+  * New upstream release with a focus on improved stability.
+  * 35 bug fixes, 17 of which were for high-priority issues and crashes.
+
+ -- Cameron White <cameronwhite91@gmail.com>  Sat, 28 Apr 2012 13:59:08 -0400
+
+pinta (1.2-0ubuntu1~precise1) precise; urgency=low
+
+  * New upstream release with numerous bug fixes and new features.
+
+ -- Cameron White <cameronwhite91@gmail.com>  Sun, 15 Apr 2012 02:37:18 -0400
+
+pinta (1.1-1ubuntu3) oneiric; urgency=low
+
+  * Remove the Mono 2.8 version check patch 
+
+ -- Cameron White <cameronwhite91@gmail.com>  Thu, 13 Oct 2011 20:26:54 -0400
+
+pinta (1.1-1ubuntu2) oneiric; urgency=low
+
+  * Remove Mono 2.8 version check
+  * Update contributors list
+  * Fix incorrect version number in "About" dialog
+
+ -- Cameron White <cameronwhite91@gmail.com>  Wed, 12 Oct 2011 21:59:01 -0400
+
+pinta (1.1-1ubuntu1) oneiric; urgency=low
+
+  * Added dependencies for Mono.Addins
+
+ -- Cameron White <cameronwhite91@gmail.com>  Sun, 09 Oct 2011 02:42:43 -0400
+
+pinta (1.1-1) oneiric; urgency=low
+
+  * New upstream release with numerous bug fixes and improvements.
+
+ -- Cameron White <cameronwhite91@gmail.com>  Fri, 07 Oct 2011 23:33:02 -0400
