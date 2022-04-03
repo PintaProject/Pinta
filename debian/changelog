@@ -1,3 +1,10 @@
+pinta (2.0.1-88-gcc318ca1) focal; urgency=medium
+
+  * New upstream release.
+  * Built using https://hub.docker.com/_/microsoft-dotnet-sdk/
+
+ -- Stavros Ntentos <133706+stdedos@users.noreply.github.com>  Sat Apr 2 22:24:14 2022 +0300
+
 pinta (1.7.1-0ppa1~focal1) focal; urgency=medium
 
   * New upstream release.

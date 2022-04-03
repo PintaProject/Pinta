@@ -1,0 +1,5 @@
+# Extracted `/app` from the Docker build
+/app
+
+# Dockerfile needen't be included/tracked in the build process
+/Dockerfile

@@ -7,6 +7,8 @@
     <ApplicationIcon>Pinta.ico</ApplicationIcon>
     <OutputPath>..\bin</OutputPath>
     <AppendTargetFrameworkToOutputPath>false</AppendTargetFrameworkToOutputPath>
+    <RuntimeIdentifiers>linux-x64</RuntimeIdentifiers>
+    <PlatformTarget>AnyCPU</PlatformTarget>
 
     <!-- Disabled by default as it requires gettext to be installed. -->
     <BuildTranslations>false</BuildTranslations>
