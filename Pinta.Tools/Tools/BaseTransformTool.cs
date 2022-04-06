@@ -200,4 +200,3 @@ namespace Pinta.Tools
 	}
 }
 
-

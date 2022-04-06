@@ -298,4 +298,3 @@ namespace Pinta.Gui.Widgets
 		}
 	}
 }
-
