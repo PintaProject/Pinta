@@ -49,10 +49,10 @@ namespace Pinta
 		public MainWindow () : base ("com.github.PintaProject.Pinta", GLib.ApplicationFlags.NonUnique)
 		{
 			Register (GLib.Cancellable.Current);
-            // This needs to match the name of the .desktop file in order to
-            // show the correct application icon under some environments (e.g.
-            // KDE Wayland). See bug 1967687.
-            GLib.Global.ProgramName = "pinta";
+			// This needs to match the name of the .desktop file in order to
+			// show the correct application icon under some environments (e.g.
+			// KDE Wayland). See bug 1967687.
+			GLib.Global.ProgramName = "pinta";
 		}
 
 		protected override void OnActivated ()
