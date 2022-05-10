@@ -3,8 +3,6 @@
     <TargetFramework>net6.0</TargetFramework>
     <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
     <Nullable>enable</Nullable>
-    <RuntimeIdentifiers>linux-x64</RuntimeIdentifiers>
-    <PlatformTarget>AnyCPU</PlatformTarget>
   </PropertyGroup>
   <ItemGroup>
     <PackageReference Include="GtkSharp" Version="3.24.24.34" />
