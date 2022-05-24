@@ -312,9 +312,9 @@ namespace Pinta
 			percentageRadio = new RadioButton (Translations.GetString ("By percentage:"));
 			absoluteRadio = new RadioButton (percentageRadio, Translations.GetString ("By absolute size:"));
 
-			percentageSpinner = new SpinButton (1, 1000, 1);
-			widthSpinner = new SpinButton (1, 10000, 1);
-			heightSpinner = new SpinButton (1, 10000, 1);
+			percentageSpinner = new SpinButton (1, int.MaxValue, 1);
+			widthSpinner = new SpinButton (1, int.MaxValue, 1);
+			heightSpinner = new SpinButton (1, int.MaxValue, 1);
 
 			aspectCheckbox = new CheckButton (Translations.GetString ("Maintain aspect ratio"));
 
