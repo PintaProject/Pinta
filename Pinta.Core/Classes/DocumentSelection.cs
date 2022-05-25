@@ -94,7 +94,6 @@ namespace Pinta.Core
 		public void Draw (Cairo.Context g, double scale, bool fillSelection)
 		{
 			g.Save ();
-			g.Translate (0.5, 0.5);
 			g.Scale (scale, scale);
 
 			g.AppendPath (SelectionPath);
