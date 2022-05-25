@@ -96,8 +96,8 @@ namespace Pinta.Tools
 			if (!active_handle.HasValue) {
 				combine_mode = PintaCore.Workspace.SelectionHandler.DetermineCombineMode (e);
 
-				var x = Math.Round (Utility.Clamp (e.PointDouble.X, 0, document.ImageSize.Width - 1));
-				var y = Math.Round (Utility.Clamp (e.PointDouble.Y, 0, document.ImageSize.Height - 1));
+				var x = Math.Round (Utility.Clamp (e.PointDouble.X, 0, document.ImageSize.Width));
+				var y = Math.Round (Utility.Clamp (e.PointDouble.Y, 0, document.ImageSize.Height));
 				shape_origin = new PointD (x, y);
 
 				document.PreviousSelection.Dispose ();
@@ -124,8 +124,8 @@ namespace Pinta.Tools
 				return;
 			}
 
-			var x = Math.Round (Utility.Clamp (e.PointDouble.X, 0, document.ImageSize.Width - 1));
-			var y = Math.Round (Utility.Clamp (e.PointDouble.Y, 0, document.ImageSize.Height - 1));
+			var x = Math.Round (Utility.Clamp (e.PointDouble.X, 0, document.ImageSize.Width));
+			var y = Math.Round (Utility.Clamp (e.PointDouble.Y, 0, document.ImageSize.Height));
 
 			// Should always be true, set in OnMouseDown
 			if (active_handle.HasValue)
