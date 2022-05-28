@@ -384,6 +384,7 @@ namespace Pinta.Core
 			Workspace.CanvasSize = new_size;
 
 			PintaCore.Actions.View.UpdateCanvasScale ();
+			ResetSelectionPaths ();
 			Workspace.Invalidate ();
 		}
 

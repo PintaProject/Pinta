@@ -40,6 +40,7 @@ Thanks to the following contributors who worked on this release:
 - Fixed an issue where the "All Files" filter in the Open File dialog ignored files with no extension, and did not work in the macOS native file chooser ([#1958670](https://bugs.launchpad.net/pinta/+bug/1958670), [#1679570](https://bugs.launchpad.net/pinta/+bug/1679570))
 - Fixed a crash in the text tool when pressing Ctrl+X without a selection (#219, [#1964398](https://bugs.launchpad.net/pinta/+bug/1964398))
 - The application icon now appears correctly on KDE Wayland sessions [#1967687](https://bugs.launchpad.net/pinta/+bug/1967687)
+- Fixed an issue where the selection could be invalid after undoing a rotation [#1975864](https://bugs.launchpad.net/pinta/+bug/1975864)
 
 ## [2.0.2](https://github.com/PintaProject/Pinta/compare/2.0.2...HEAD) - 2022/01/13
 
