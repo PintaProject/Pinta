@@ -31,8 +31,9 @@ COPY . .
 RUN ./autogen.sh
 RUN make
 
-# # Causes NETSDK1095
-# -p:PublishReadyToRun=true
 # # Causes Unhandled exception. System.TypeLoadException: Could not load type 'System.Collections.ObjectModel.KeyedCollection`2' from assembly 'System.ObjectModel, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a'.
 # -p:PublishTrimmed=true
-RUN dotnet publish -c release -o /app --no-restore --runtime linux-x64 --self-contained
+
+# # Causes: NETSDK1031: It is not supported to build or publish a self-contained application without specifying a RuntimeIdentifier. You must either specify a RuntimeIdentifier or set SelfContained to false.
+# RUN dotnet publish --no-restore -p:BuildTranslations=true --configuration Release --runtime linux-x64 --self-contained -o /app
+RUN dotnet publish -p:PublishReadyToRun=true -p:BuildTranslations=true --configuration Release --runtime linux-x64 --self-contained -o /app
