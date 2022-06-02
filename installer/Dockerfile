@@ -11,7 +11,6 @@ COPY Pinta.Tools/Pinta.Tools.csproj ./Pinta.Tools/
 COPY Pinta.Resources/Pinta.Resources.csproj ./Pinta.Resources/
 COPY Pinta.Core/Pinta.Core.csproj ./Pinta.Core/
 COPY Pinta/Pinta.csproj ./Pinta/
-RUN dotnet restore Pinta/Pinta.csproj
 
 # Install dependencies
 RUN apt-get update && apt-get install -y \
@@ -28,12 +27,20 @@ RUN apt-get update && apt-get install -y \
 
 # copy and publish app and libraries
 COPY . .
+RUN dotnet restore --runtime linux-x64 Pinta/Pinta.csproj && \
+	dotnet restore --runtime linux-x64 Pinta.Tools/Pinta.Tools.csproj && \
+	dotnet restore --runtime linux-x64 tests/Pinta.Core.Tests/Pinta.Core.Tests.csproj && \
+	dotnet restore --runtime linux-x64 tests/PintaBenchmarks/PintaBenchmarks.csproj
 RUN ./autogen.sh
 RUN make
 
 # # Causes Unhandled exception. System.TypeLoadException: Could not load type 'System.Collections.ObjectModel.KeyedCollection`2' from assembly 'System.ObjectModel, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a'.
 # -p:PublishTrimmed=true
 
-# # Causes: NETSDK1031: It is not supported to build or publish a self-contained application without specifying a RuntimeIdentifier. You must either specify a RuntimeIdentifier or set SelfContained to false.
-# RUN dotnet publish --no-restore -p:BuildTranslations=true --configuration Release --runtime linux-x64 --self-contained -o /app
-RUN dotnet publish -p:PublishReadyToRun=true -p:BuildTranslations=true --configuration Release --runtime linux-x64 --self-contained -o /app
+# RUN dotnet publish --no-restore -p:PublishReadyToRun=true -p:BuildTranslations=true --configuration Release --runtime linux-x64 --self-contained -o /app
+# # Causes:
+# # /usr/share/dotnet/sdk/6.0.202/Sdks/Microsoft.NET.Sdk/targets/Microsoft.NET.Publish.targets(293,5): error NETSDK1095: Optimizing assemblies for performance is not supported for the selected target platform or architecture. Please verify you are using a supported runtime identifier, or set the PublishReadyToRun property to false. [/source/Pinta.Effects/Pinta.Effects.csproj]
+# # /usr/share/dotnet/sdk/6.0.202/Sdks/Microsoft.NET.Sdk/targets/Microsoft.NET.Publish.targets(293,5): error NETSDK1095: Optimizing assemblies for performance is not supported for the selected target platform or architecture. Please verify you are using a supported runtime identifier, or set the PublishReadyToRun property to false. [/source/Pinta.Tools/Pinta.Tools.csproj]
+
+RUN dotnet publish --no-restore -p:BuildTranslations=true --configuration Release --runtime linux-x64 --self-contained -o /app
+

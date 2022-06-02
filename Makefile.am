@@ -3,7 +3,7 @@ DIST_SUBDIRS = xdg
 
 BINDIR = $(srcdir)/bin
 
-PINTA_BUILD_OPTS = --configuration Release -p:BuildTranslations=true
+PINTA_BUILD_OPTS = --configuration Release -p:BuildTranslations=true --no-restore
 
 PINTA_INSTALL_OPTS = \
 	-p:SourceDir=$(abs_srcdir) \
