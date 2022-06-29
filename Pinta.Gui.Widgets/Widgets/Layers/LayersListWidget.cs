@@ -246,7 +246,9 @@ namespace Pinta.Gui.Widgets
 
 		private void Reset ()
 		{
+			updating_model = true;
 			store.Clear ();
+			updating_model = false;
 
 			if (active_layer_surface != null) {
 				(active_layer_surface as IDisposable).Dispose ();
