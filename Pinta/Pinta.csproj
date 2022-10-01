@@ -13,7 +13,7 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="GtkSharp" Version="3.24.24.34" />
+    <PackageReference Include="GtkSharp" Version="3.24.24.38" />
     <PackageReference Include="Tmds.DBus" Version="0.10.1" />
   </ItemGroup>
 
