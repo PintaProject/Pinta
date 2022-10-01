@@ -42,7 +42,7 @@ jobs:
     - name: Build Installer
       run: make releasezip
     - name: Upload Installer
-      uses: actions/upload-artifact@v2
+      uses: actions/upload-artifact@v3
       with:
         name: Pinta-linux.zip
         path: pinta-2.1.zip
@@ -81,7 +81,7 @@ jobs:
 
     - name: Upload Installer
       if: github.event_name != 'pull_request'
-      uses: actions/upload-artifact@v2
+      uses: actions/upload-artifact@v3
       with:
         name: "Pinta.dmg"
         path: installer/macos/Pinta.dmg
@@ -110,7 +110,7 @@ jobs:
         iscc installer/windows/installer.iss
 
     - name: Upload Installer
-      uses: actions/upload-artifact@v2
+      uses: actions/upload-artifact@v3
       with:
         name: "Pinta.exe"
         path: installer/windows/Pinta.exe
