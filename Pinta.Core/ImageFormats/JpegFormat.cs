@@ -66,9 +66,7 @@ namespace Pinta.Core
 
 			using var stream = file.Replace ();
 			try {
-				// FIXME - SaveToStreamv() isn't wrapped correctly by GtkSharp, so the quality setting is skipped for now...
-				pb.SaveToStreamv (stream, fileType, null, null, null);
-				//pb.SavevUtf8 (fileName, fileType, new string?[] { "quality", null }, new string?[] { level.ToString (), null });
+                pb.SaveToStreamv (stream, fileType, new string?[] { "quality", null }, new string?[] { level.ToString (), null }, null);
 			} finally {
 				stream.Close (null);
 			}

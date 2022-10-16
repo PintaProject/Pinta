@@ -102,8 +102,7 @@ namespace Pinta.Core
 		{
 			using var stream = file.Replace ();
 			try {
-				// TODO-GTK4: the simpler SaveToStream() seems to be missing in GtkSharp.
-				pb.SaveToStreamv (stream, fileType, null, null, null);
+				pb.SaveToStream (stream, fileType, null);
 			} finally {
 				stream.Close (null);
 			}
