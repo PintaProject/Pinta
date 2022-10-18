@@ -1580,9 +1580,16 @@ namespace Pinta.Tools
 			if (correspondingTool != null && PintaCore.Tools.CurrentTool != correspondingTool) {
 				ShapeTool? oldTool = PintaCore.Tools.CurrentTool as ShapeTool;
 
+				int oldToolSPI = -1;
+				int oldToolSSI = -1;
+				//SetCurrentTool sets oldTool's SelectedPointIndex and SelectedShapeIndex to -1 so their value has to be saved before this happens.
+				if (oldTool != null && oldTool.IsEditableShapeTool && permanentSwitch) {
+					oldToolSPI = oldTool.EditEngine.SelectedPointIndex;
+					oldToolSSI = oldTool.EditEngine.SelectedShapeIndex;
+				}
+
 				//The active tool needs to be switched to the corresponding tool.
 				PintaCore.Tools.SetCurrentTool (correspondingTool);
-
 				var newTool = (ShapeTool?) PintaCore.Tools.CurrentTool;
 
 				// This shouldn't be possible, but we need a null check.
@@ -1593,8 +1600,8 @@ namespace Pinta.Tools
 				if (oldTool != null && oldTool.IsEditableShapeTool) {
 					if (permanentSwitch) {
 						//Set the new tool's active shape and point to the old shape and point.
-						newTool.EditEngine.SelectedPointIndex = oldTool.EditEngine.SelectedPointIndex;
-						newTool.EditEngine.SelectedShapeIndex = oldTool.EditEngine.SelectedShapeIndex;
+						newTool.EditEngine.SelectedPointIndex = oldToolSPI;
+						newTool.EditEngine.SelectedShapeIndex = oldToolSSI;
 
 						//Make sure neither tool thinks it is drawing anything.
 						newTool.EditEngine.is_drawing = false;
