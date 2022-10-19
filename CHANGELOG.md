@@ -10,6 +10,7 @@ Thanks to the following contributors who worked on this release:
 - @MrCarroll
 - @supershadoe
 - @Zekiah-A
+- @Zeti123
 
 ### Added
 - Updated icons to symbolic SVG icons, which are more usable for dark themes and high-res screens (#204, #207, [#1738106](https://bugs.launchpad.net/pinta/+bug/1738106), [#1909573](https://bugs.launchpad.net/pinta/+bug/1909573))
@@ -42,6 +43,7 @@ Thanks to the following contributors who worked on this release:
 - The application icon now appears correctly on KDE Wayland sessions [#1967687](https://bugs.launchpad.net/pinta/+bug/1967687)
 - Fixed an issue where the selection could be invalid after undoing a rotation [#1975864](https://bugs.launchpad.net/pinta/+bug/1975864)
 - Fixed a bug where the selected layer could be changed while updating the layer list widget [#1965101](https://bugs.launchpad.net/pinta/+bug/1965101)
+- Fixed a bug in the shape tools where changing the shape type did not always take effect (#235, [#1993332](https://bugs.launchpad.net/pinta/+bug/1993332))
 
 ## [2.0.2](https://github.com/PintaProject/Pinta/compare/2.0.2...HEAD) - 2022/01/13
 
