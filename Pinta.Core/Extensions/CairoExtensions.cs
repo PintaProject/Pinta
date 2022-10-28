@@ -1723,12 +1723,12 @@ namespace Pinta.Core
 
 		public static Gdk.Rectangle GetRectangleFromPoints (Point a, Point b, int inflate)
 		{
-			var x = Math.Min (a.X, b.X);
-			var y = Math.Min (a.Y, b.Y);
-			var w = Math.Max (a.X, b.X);
-			var h = Math.Max (a.Y, b.Y);
+			var x1 = Math.Min (a.X, b.X);
+			var y1 = Math.Min (a.Y, b.Y);
+			var x2 = Math.Max (a.X, b.X);
+			var y2 = Math.Max (a.Y, b.Y);
 
-			var rect = new Gdk.Rectangle (x, y, w, h);
+			var rect = new Gdk.Rectangle(x1, y1, x2 - x1, y2 - y1);
 			rect.Inflate (inflate, inflate);
 
 			return rect;

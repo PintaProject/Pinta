@@ -134,8 +134,8 @@ namespace Pinta.Resources
 		public const string LayerMoveDown = "layers-move-layer-down-symbolic";
 		public const string LayerMoveUp = "layers-move-layer-up-symbolic";
 		public const string LayerNew = "layers-add-layer-symbolic";
-		public const string LayerProperties = "layer-properties";
-		public const string LayerRotateZoom = "layer-rotatezoom";
+		public const string LayerProperties = "document-properties-symbolic";
+		public const string LayerRotateZoom = "layers-rotate-zoom-symbolic";
 
 		public const string Pinta = "pinta";
 
