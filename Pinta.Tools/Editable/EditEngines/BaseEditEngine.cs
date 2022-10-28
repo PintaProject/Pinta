@@ -336,11 +336,11 @@ namespace Pinta.Tools
 						if (selEngine != null) {
 							//Create a new ShapesModifyHistoryItem so that the changing of the shape type can be undone.
 							PintaCore.Workspace.ActiveDocument.History.PushNewItem (new ShapesModifyHistoryItem (
-							this, owner.Icon, Translations.GetString ("Changed Shape Type")));
+								this, owner.Icon, Translations.GetString ("Changed Shape Type")));
 
 							//Clone the old shape; it should be automatically garbage-collected. newShapeType already has the updated value.
 							selEngine = selEngine.Convert (newShapeType, SelectedShapeIndex);
-							
+
 							int previousSSI = SelectedShapeIndex;
 							ActivateCorrespondingTool (selEngine.ShapeType, true);
 							SelectedShapeIndex = previousSSI;
