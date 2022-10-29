@@ -29,7 +29,7 @@ Thanks to the following contributors who worked on this release:
 - Pinta now uses the standard GTK about dialog
 
 ### Fixed
-- Fixed a bug where the default linear gradient was reflected rather than clamped.
+- Fixed a bug where the default linear gradient was reflected rather than clamped
 - The gradient tool now updates correctly when drawing transparent colors. Previously, old results were visible under the transparent color ([#1937942](https://bugs.launchpad.net/pinta/+bug/1937942))
 - The history panel is now more readable when a dark theme is used (#207)
 - Fixed an issue where the Cairo surface for live effect previews was not always disposed (#206)
@@ -44,6 +44,7 @@ Thanks to the following contributors who worked on this release:
 - Fixed an issue where the selection could be invalid after undoing a rotation [#1975864](https://bugs.launchpad.net/pinta/+bug/1975864)
 - Fixed a bug where the selected layer could be changed while updating the layer list widget [#1965101](https://bugs.launchpad.net/pinta/+bug/1965101)
 - Fixed a bug in the shape tools where changing the shape type did not always take effect (#235, #238, [#1993332](https://bugs.launchpad.net/pinta/+bug/1993332), [#1635902](https://bugs.launchpad.net/pinta/+bug/1635902))
+- Fixed an issue on macOS where toolbar drop down button menus items could not be selected properly
 
 ## [2.0.2](https://github.com/PintaProject/Pinta/compare/2.0.2...HEAD) - 2022/01/13
 

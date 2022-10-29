@@ -28,7 +28,6 @@ namespace Pinta.Core
 
 			dropdown = new GLib.Menu ();
 			menu_button.MenuModel = dropdown;
-			menu_button.UsePopover = false;
 
 			action_group = new GLib.SimpleActionGroup ();
 			menu_button.InsertActionGroup (action_prefix, action_group);
