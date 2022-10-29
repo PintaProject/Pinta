@@ -330,9 +330,10 @@ namespace Pinta.Tools
 					ShapeTypes newShapeType = ShapeType;
 					ShapeEngine? selEngine = SelectedShapeEngine;
 
-					if (selEngine != null) {
-						//Verify that the tool needs to be switched.
-						if (GetCorrespondingTool (newShapeType) != this.owner) {
+					//Verify that the tool needs to be switched.
+					if (GetCorrespondingTool (newShapeType) != this.owner) {
+						//if shape is selected it will be converted to new shape and shape type will be changed, otherwise only shape type will be changed.
+						if (selEngine != null) {
 							//Create a new ShapesModifyHistoryItem so that the changing of the shape type can be undone.
 							PintaCore.Workspace.ActiveDocument.History.PushNewItem (new ShapesModifyHistoryItem (
 								this, owner.Icon, Translations.GetString ("Changed Shape Type")));
@@ -341,14 +342,15 @@ namespace Pinta.Tools
 							selEngine = selEngine.Convert (newShapeType, SelectedShapeIndex);
 
 							int previousSSI = SelectedShapeIndex;
-
 							ActivateCorrespondingTool (selEngine.ShapeType, true);
-
 							SelectedShapeIndex = previousSSI;
-
 							//Draw the updated shape with organized points generation (for mouse detection). 
 							DrawActiveShape (true, false, true, false, true);
 						}
+						else {
+							ActivateCorrespondingTool (newShapeType, true);
+						}
+
 					}
 				};
 			}
