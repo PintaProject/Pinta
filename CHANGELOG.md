@@ -43,7 +43,7 @@ Thanks to the following contributors who worked on this release:
 - The application icon now appears correctly on KDE Wayland sessions [#1967687](https://bugs.launchpad.net/pinta/+bug/1967687)
 - Fixed an issue where the selection could be invalid after undoing a rotation [#1975864](https://bugs.launchpad.net/pinta/+bug/1975864)
 - Fixed a bug where the selected layer could be changed while updating the layer list widget [#1965101](https://bugs.launchpad.net/pinta/+bug/1965101)
-- Fixed a bug in the shape tools where changing the shape type did not always take effect (#235, [#1993332](https://bugs.launchpad.net/pinta/+bug/1993332))
+- Fixed a bug in the shape tools where changing the shape type did not always take effect (#235, #238, [#1993332](https://bugs.launchpad.net/pinta/+bug/1993332), [#1635902](https://bugs.launchpad.net/pinta/+bug/1635902))
 
 ## [2.0.2](https://github.com/PintaProject/Pinta/compare/2.0.2...HEAD) - 2022/01/13
 
