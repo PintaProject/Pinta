@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: pinta\n"
 "Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
-"POT-Creation-Date: 2022-01-11 23:44-0500\n"
+"POT-Creation-Date: 2022-11-04 22:46-0400\n"
 "PO-Revision-Date: 2021-12-31 16:38+0000\n"
 "Last-Translator: abuyop <Unknown>\n"
 "Language-Team: Malay <ms@li.org>\n"
@@ -15,8 +15,8 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Launchpad-Export-Date: 2022-01-14 01:09+0000\n"
-"X-Generator: Launchpad (build 0072e2709f85567cc6c8d33e98acde9fcc09f491)\n"
+"X-Launchpad-Export-Date: 2022-11-05 02:52+0000\n"
+"X-Generator: Launchpad (build 83f7123b02a2b50a64bc29e7e35197179a885279)\n"
 
 #: Mono.Addins.Gui/Mono.Addins.Gui/InstallDialog.cs:142
 msgid " (in user directory)"
@@ -52,12 +52,7 @@ msgstr "Kawasan 7 x 7"
 msgid "9 x 9 Region"
 msgstr "Kawasan 9 x 9"
 
-#: ../Pinta/Actions/File/SaveDocumentImplementationAction.cs:241
-#, csharp-format
-msgid "A file named \"{0}\" already exists. Do you want to replace it?"
-msgstr "Satu fail bernama \"{0}\" sudah wujud. Anda mahu gantikannya?"
-
-#: ../Pinta/MainWindow.cs:349
+#: ../Pinta/MainWindow.cs:353
 msgid "A_dd-ins"
 msgstr "Tam_bahan"
 
@@ -65,13 +60,13 @@ msgstr "Tam_bahan"
 msgid "About"
 msgstr "Perihal"
 
-#: ../Pinta/Dialogs/AboutDialog.cs:260
+#: ../Pinta/Actions/Help/AboutDialogAction.cs:52
 msgid "About Pinta"
 msgstr "Perihal Pinta"
 
 #: ../Pinta/Actions/Edit/PasteAction.cs:130
 #: ../Pinta.Core/Actions/LayerActions.cs:50
-#: ../Pinta.Core/Actions/LayerActions.cs:312
+#: ../Pinta.Core/Actions/LayerActions.cs:330
 msgid "Add New Layer"
 msgstr "Tambah Lapisan Baharu"
 
@@ -99,7 +94,7 @@ msgstr "Pengurusan Repositori Tambahan"
 msgid "Add-in packages"
 msgstr "Pakej tambahan"
 
-#: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:801
+#: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:803
 msgid "Added"
 msgstr "Ditambah"
 
@@ -111,8 +106,8 @@ msgstr "Sambungan tambahan diperlukan untuk menjalankan operasi ini."
 msgid "After select"
 msgstr "Selepas pilih"
 
-#: ../Pinta/Actions/File/OpenDocumentAction.cs:71
-#: ../Pinta.Core/Actions/EditActions.cs:378
+#: ../Pinta/Actions/File/OpenDocumentAction.cs:83
+#: ../Pinta.Core/Actions/EditActions.cs:380
 msgid "All files"
 msgstr "Semua fail"
 
@@ -148,11 +143,11 @@ msgstr "Sudut"
 msgid "Antialias"
 msgstr "Antialias"
 
-#: ../Pinta.Core/Classes/BaseTool.cs:346
+#: ../Pinta.Core/Classes/BaseTool.cs:352
 msgid "Antialiasing Off"
 msgstr "Antialias Mati"
 
-#: ../Pinta.Core/Classes/BaseTool.cs:345
+#: ../Pinta.Core/Classes/BaseTool.cs:351
 msgid "Antialiasing On"
 msgstr "Antialias Hidup"
 
@@ -186,7 +181,7 @@ msgstr "Auto Aras"
 msgid "Available in repository:"
 msgstr "Tersedia dalam repositori:"
 
-#: ../Pinta.Core/Managers/WorkspaceManager.cs:169
+#: ../Pinta.Core/Managers/WorkspaceManager.cs:175
 msgid "Background"
 msgstr "Latar Belakang"
 
@@ -198,7 +193,7 @@ msgstr "Warna Latar Belakang"
 msgid "Background:"
 msgstr "Latar Belakang:"
 
-#: ../Pinta/Dialogs/AboutDialog.cs:174
+#: ../Pinta/Actions/Help/AboutDialogAction.cs:82
 msgid "Based on the work of Paint.NET:"
 msgstr "Berasaskan hasil kerja Paint.NET"
 
@@ -232,7 +227,7 @@ msgstr "Biru "
 msgid "Blurs"
 msgstr "Kabur"
 
-#: ../Pinta.Tools/Tools/TextTool.cs:160
+#: ../Pinta.Tools/Tools/TextTool.cs:162
 msgid "Bold"
 msgstr "Tebal"
 
@@ -275,7 +270,7 @@ msgstr "Mengikut peratus:"
 #: ../Pinta/Actions/File/OpenDocumentAction.cs:54
 #: ../Pinta/Actions/File/SaveDocumentImplementationAction.cs:76
 #: ../Pinta.Core/Actions/EditActions.cs:362
-#: ../Pinta.Core/Actions/EditActions.cs:403
+#: ../Pinta.Core/Actions/EditActions.cs:404
 #: ../Pinta.Core/Actions/LayerActions.cs:169
 msgid "Cancel"
 msgstr "Batal"
@@ -288,7 +283,7 @@ msgstr "Kanvas"
 msgid "Cell Size"
 msgstr "Saiz Sel"
 
-#: ../Pinta.Tools/Tools/TextTool.cs:196
+#: ../Pinta.Tools/Tools/TextTool.cs:210
 msgid "Center Align"
 msgstr "Jajar Tengah"
 
@@ -304,7 +299,7 @@ msgstr "Ditengahkan"
 msgid "Centimeters"
 msgstr "Sentimeter"
 
-#: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:338
+#: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:339
 msgid "Changed Shape Type"
 msgstr "Jenis Bentuk Berubah"
 
@@ -348,7 +343,7 @@ msgstr ""
 "Klik dan seret untuk lukis pemilihan eliptik. Tahan Shift untuk dikekang "
 "menjadi satu bulatan."
 
-#: ../Pinta.Tools/Tools/GradientTool.cs:53
+#: ../Pinta.Tools/Tools/GradientTool.cs:51
 msgid ""
 "Click and drag to draw gradient from primary to secondary color.  Right "
 "click to reverse."
@@ -436,7 +431,7 @@ msgstr "Bakar Warna"
 msgid "Color Dodge"
 msgstr "Tokok Tambah Warna"
 
-#: ../Pinta.Tools/Tools/GradientTool.cs:200
+#: ../Pinta.Tools/Tools/GradientTool.cs:203
 msgid "Color Mode"
 msgstr ""
 
@@ -456,7 +451,7 @@ msgstr "Ketepuan Warna"
 msgid "Coloring"
 msgstr "Pewarnaan"
 
-#: ../Pinta.Tools/Tools/GradientTool.cs:185
+#: ../Pinta.Tools/Tools/GradientTool.cs:188
 msgid "Conical Gradient"
 msgstr "Gradien Berkon"
 
@@ -473,10 +468,6 @@ msgstr "Bersebelahan"
 msgid "Contrast"
 msgstr "Beza Jelas"
 
-#: ../Pinta/Dialogs/AboutDialog.cs:142
-msgid "Contributors to this release:"
-msgstr "Penyumbang keluaran ini:"
-
 #: ../Pinta.Core/Actions/EditActions.cs:62
 msgid "Copy"
 msgstr "Salin"
@@ -485,22 +476,18 @@ msgstr "Salin"
 msgid "Copy Merged"
 msgstr "Salin Bergabung"
 
-#: ../Pinta/Dialogs/VersionInformationTabPage.cs:67
-msgid "Copy Version Info"
-msgstr "Salin Maklumat Versi"
-
-#: ../Pinta/Dialogs/AboutPintaTabPage.cs:56
+#: ../Pinta/Actions/Help/AboutDialogAction.cs:70
 msgid "Copyright"
 msgstr "Hak Cipta"
 
-#: ../Pinta/Actions/File/NewScreenshotAction.cs:70
+#: ../Pinta/Actions/File/NewScreenshotAction.cs:124
 #, csharp-format
 msgid "Could not obtain the size of display '{0}'"
 msgstr "Tidak memperoleh saiz paparan '{0}'"
 
-#: ../Pinta.Core/Classes/Palette.cs:185
-#: ../Pinta.Core/Managers/WorkspaceManager.cs:376
-#: ../Pinta.Core/Managers/WorkspaceManager.cs:385
+#: ../Pinta.Core/Classes/Palette.cs:197
+#: ../Pinta.Core/Managers/WorkspaceManager.cs:403
+#: ../Pinta.Core/Managers/WorkspaceManager.cs:412
 #, csharp-format
 msgid "Could not open file: {0}"
 msgstr "Tidak dapat buka fail: {0}"
@@ -510,7 +497,7 @@ msgid "Coverage"
 msgstr "Liputan"
 
 #: ../Pinta.Core/Actions/ImageActions.cs:47
-#: ../Pinta.Core/Actions/ImageActions.cs:292
+#: ../Pinta.Core/Actions/ImageActions.cs:286
 msgid "Crop to Selection"
 msgstr "Kerat ke Pemilihan"
 
@@ -539,16 +526,16 @@ msgstr "Gelapkan"
 msgid "Dash"
 msgstr "Sengkang"
 
-#: ../Pinta/Actions/File/NewScreenshotAction.cs:52
+#: ../Pinta/Actions/File/NewScreenshotAction.cs:106
 msgid "Delay before taking a screenshot (seconds):"
 msgstr "Lengah sebelum mengambil tangkap skrin (saat):"
 
 #: ../Pinta.Core/Actions/LayerActions.cs:51
-#: ../Pinta.Core/Actions/LayerActions.cs:295
+#: ../Pinta.Core/Actions/LayerActions.cs:313
 msgid "Delete Layer"
 msgstr "Padam Lapisan"
 
-#: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:480
+#: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:482
 msgid "Deleted"
 msgstr "Dipadamkan"
 
@@ -560,7 +547,7 @@ msgstr "Nyahpilih"
 msgid "Deselect All"
 msgstr "Nyahpilih Semua"
 
-#: ../Pinta/Dialogs/ErrorDialog.cs:99
+#: ../Pinta/Dialogs/ErrorDialog.cs:98
 #: Mono.Addins.Gui/gtk-gui/Mono.Addins.Gui.ErrorDialog.cs:92
 #: Mono.Addins.Gui/gtk-gui/Mono.Addins.Gui.ProgressDialog.cs:66
 msgid "Details"
@@ -601,7 +588,7 @@ msgstr "Jangan tukar alat"
 msgid "Don't change canvas size"
 msgstr "Jangan ubah saiz kanvas"
 
-#: ../Pinta/MainWindow.cs:539
+#: ../Pinta/MainWindow.cs:544
 msgid "Download failed"
 msgstr "Muat turun gagal"
 
@@ -609,16 +596,16 @@ msgstr "Muat turun gagal"
 msgid "Download size"
 msgstr "Saiz muat turun"
 
-#: ../Pinta/MainWindow.cs:520
+#: ../Pinta/MainWindow.cs:525
 msgid "Downloading Image"
 msgstr "Memuat Turun Imej"
 
 #: ../Pinta.Core/Actions/LayerActions.cs:52
-#: ../Pinta.Core/Actions/LayerActions.cs:286
+#: ../Pinta.Core/Actions/LayerActions.cs:304
 msgid "Duplicate Layer"
 msgstr "Duplikasi Lapisan"
 
-#: ../xdg/pinta.desktop.in.h:2
+#: ../xdg/pinta.desktop.in.h:2 ../Pinta/Actions/Help/AboutDialogAction.cs:58
 msgid "Easily create and edit images"
 msgstr "Cipta dan sunting imej dengan mudah"
 
@@ -630,7 +617,7 @@ msgstr "Kelakuan Pinggir"
 msgid "Edge Detect"
 msgstr "Kesan Pinggir"
 
-#: ../Pinta/MainWindow.cs:342
+#: ../Pinta/MainWindow.cs:346
 msgid "Effe_cts"
 msgstr "Kes_an"
 
@@ -661,7 +648,7 @@ msgstr "Padam Pemilihan"
 msgid "Eraser"
 msgstr "Pemadam"
 
-#: ../Pinta/Actions/File/SaveDocumentImplementationAction.cs:186
+#: ../Pinta/Actions/File/SaveDocumentImplementationAction.cs:163
 msgid "Error"
 msgstr "Ralat"
 
@@ -684,15 +671,20 @@ msgstr "Kembangkan kanvas"
 msgid "Factor"
 msgstr "Faktor"
 
-#: ../Pinta.Core/Managers/WorkspaceManager.cs:403
+#: ../Pinta/Actions/File/NewScreenshotAction.cs:95
+msgid "Failed to access XDG Desktop Portals"
+msgstr ""
+
+#: ../Pinta.Core/Managers/WorkspaceManager.cs:430
 msgid "Failed to open image"
 msgstr "Gagal membuka imej"
 
-#: ../Pinta/Actions/File/SaveDocumentImplementationAction.cs:209
+#: ../Pinta/Actions/File/SaveDocumentImplementationAction.cs:186
 msgid "Failed to save image"
 msgstr "Gagal menyimpan imej"
 
-#: ../Pinta/Actions/File/NewScreenshotAction.cs:69
+#: ../Pinta/Actions/File/NewScreenshotAction.cs:94
+#: ../Pinta/Actions/File/NewScreenshotAction.cs:123
 msgid "Failed to take screenshot"
 msgstr "Gagak membuat tangkap layar"
 
@@ -700,7 +692,7 @@ msgstr "Gagak membuat tangkap layar"
 msgid "File a Bug"
 msgstr "Laporkan Pepijat"
 
-#: ../Pinta.Tools/Tools/TextTool.cs:227
+#: ../Pinta.Tools/Tools/TextTool.cs:245
 msgid "Fill Background"
 msgstr "Isi Latar Belakang"
 
@@ -724,8 +716,8 @@ msgstr "Gaya Isi"
 msgid "Fill and Outline Shape"
 msgstr "IBentuk Rangka dan Berisi"
 
-#: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:1100
-#: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:1471
+#: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:1102
+#: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:1473
 msgid "Finalized"
 msgstr "Dimuktamadkan"
 
@@ -734,7 +726,7 @@ msgid "Finish Pixels"
 msgstr "Piksel Selesai"
 
 #: ../Pinta.Core/Actions/ImageActions.cs:56
-#: ../Pinta.Core/Actions/ImageActions.cs:156
+#: ../Pinta.Core/Actions/ImageActions.cs:152
 msgid "Flatten"
 msgstr "Ratakan"
 
@@ -810,8 +802,8 @@ msgstr "Sejagat"
 msgid "Glow"
 msgstr "Teja"
 
-#: ../Pinta.Tools/Tools/GradientTool.cs:51
-#: ../Pinta.Tools/Tools/GradientTool.cs:175
+#: ../Pinta.Tools/Tools/GradientTool.cs:49
+#: ../Pinta.Tools/Tools/GradientTool.cs:178
 msgid "Gradient"
 msgstr "Gradien"
 
@@ -858,7 +850,7 @@ msgstr "Rona"
 msgid "Hue / Saturation"
 msgstr "Rona / Ketepuan"
 
-#: ../Pinta/Actions/File/SaveDocumentImplementationAction.cs:200
+#: ../Pinta/Actions/File/SaveDocumentImplementationAction.cs:177
 msgid "ICO files can not be larger than 255 x 255 pixels."
 msgstr "Fail ICO tidak boleh besar dari 255  x 255 piksel."
 
@@ -883,7 +875,7 @@ msgid "Image cannot be pasted"
 msgstr "Imej tidak boleh ditampal"
 
 #: ../Pinta/Actions/File/OpenDocumentAction.cs:58
-#: ../Pinta.Core/Actions/LayerActions.cs:182
+#: ../Pinta.Core/Actions/LayerActions.cs:196
 msgid "Image files"
 msgstr "Fail imej"
 
@@ -891,11 +883,11 @@ msgstr "Fail imej"
 msgid "Image larger than canvas"
 msgstr "Imej lebih besar berbanding kanvas"
 
-#: ../Pinta/Actions/File/SaveDocumentImplementationAction.cs:199
+#: ../Pinta/Actions/File/SaveDocumentImplementationAction.cs:176
 msgid "Image too large"
 msgstr "Imej terlalu besar"
 
-#: ../Pinta.Core/Actions/LayerActions.cs:206
+#: ../Pinta.Core/Actions/LayerActions.cs:224
 msgid "Import From File"
 msgstr "Import Dari Fail"
 
@@ -979,11 +971,11 @@ msgid "Invert Colors"
 msgstr "Songsang Warna"
 
 #: ../Pinta.Core/Actions/EditActions.cs:69
-#: ../Pinta.Core/Actions/EditActions.cs:456
+#: ../Pinta.Core/Actions/EditActions.cs:460
 msgid "Invert Selection"
 msgstr "Songsang Pemilihan"
 
-#: ../Pinta.Tools/Tools/TextTool.cs:168
+#: ../Pinta.Tools/Tools/TextTool.cs:173
 msgid "Italic"
 msgstr "Condong"
 
@@ -1007,7 +999,7 @@ msgstr "Pilih Lasso"
 msgid "Layer"
 msgstr "Lapisan"
 
-#: ../Pinta.Gui.Widgets/Widgets/Layers/LayersListWidget.cs:286
+#: ../Pinta.Gui.Widgets/Widgets/Layers/LayersListWidget.cs:293
 msgid "Layer Hidden"
 msgstr "Lapisan Disembunyikan"
 
@@ -1024,7 +1016,7 @@ msgstr "Sifat Lapisan"
 msgid "Layer Properties..."
 msgstr "Sifat Lapisan..."
 
-#: ../Pinta.Gui.Widgets/Widgets/Layers/LayersListWidget.cs:286
+#: ../Pinta.Gui.Widgets/Widgets/Layers/LayersListWidget.cs:293
 msgid "Layer Shown"
 msgstr "Lapisan Ditunjukkan"
 
@@ -1038,7 +1030,7 @@ msgstr "Lapisan {0}"
 msgid "Layers"
 msgstr "Lapisan"
 
-#: ../Pinta.Tools/Tools/TextTool.cs:188
+#: ../Pinta.Tools/Tools/TextTool.cs:199
 msgid "Left Align"
 msgstr "Jajar Kiri"
 
@@ -1191,7 +1183,7 @@ msgstr "Aras"
 msgid "Levels Adjustment"
 msgstr "Pelarasan Aras"
 
-#: ../Pinta/Dialogs/AboutPintaTabPage.cs:50
+#: ../Pinta/Actions/Help/AboutDialogAction.cs:78
 msgid "License"
 msgstr "Lesen"
 
@@ -1211,15 +1203,15 @@ msgstr "Kecerahan"
 msgid "Line/Curve"
 msgstr "Garis/Lengkung"
 
-#: ../Pinta.Tools/Tools/GradientTool.cs:183
+#: ../Pinta.Tools/Tools/GradientTool.cs:186
 msgid "Linear Diamond Gradient"
 msgstr "Gradien Intan Linear"
 
-#: ../Pinta.Tools/Tools/GradientTool.cs:181
+#: ../Pinta.Tools/Tools/GradientTool.cs:184
 msgid "Linear Gradient"
 msgstr "Gradien Linear"
 
-#: ../Pinta.Tools/Tools/GradientTool.cs:182
+#: ../Pinta.Tools/Tools/GradientTool.cs:185
 msgid "Linear Reflected Gradient"
 msgstr "Gradien Terpantul Linear"
 
@@ -1254,7 +1246,7 @@ msgid "Median"
 msgstr "Median"
 
 #: ../Pinta.Core/Actions/LayerActions.cs:53
-#: ../Pinta.Core/Actions/LayerActions.cs:264
+#: ../Pinta.Core/Actions/LayerActions.cs:282
 msgid "Merge Layer Down"
 msgstr "Gabung Lapisan Bawah"
 
@@ -1263,11 +1255,11 @@ msgstr "Gabung Lapisan Bawah"
 msgid "Missing: {0} v{1}"
 msgstr "Hilang: {0} v{1}"
 
-#: ../Pinta.Tools/Tools/GradientTool.cs:194
+#: ../Pinta.Tools/Tools/GradientTool.cs:197
 msgid "Mode"
 msgstr ""
 
-#: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:880
+#: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:882
 msgid "Modified"
 msgstr "Diubah suai"
 
@@ -1280,12 +1272,12 @@ msgid "Motion Blur"
 msgstr "Kabur Pergerakan"
 
 #: ../Pinta.Core/Actions/LayerActions.cs:59
-#: ../Pinta.Core/Actions/LayerActions.cs:250
+#: ../Pinta.Core/Actions/LayerActions.cs:268
 msgid "Move Layer Down"
 msgstr "Alih Lapisan Ke bawah"
 
 #: ../Pinta.Core/Actions/LayerActions.cs:58
-#: ../Pinta.Core/Actions/LayerActions.cs:239
+#: ../Pinta.Core/Actions/LayerActions.cs:257
 msgid "Move Layer Up"
 msgstr "Alih Lapisan Ke atas"
 
@@ -1318,7 +1310,7 @@ msgid "New"
 msgstr "Baharu"
 
 #: ../Pinta/Dialogs/NewImageDialog.cs:68
-#: ../Pinta.Core/Managers/WorkspaceManager.cs:178
+#: ../Pinta.Core/Managers/WorkspaceManager.cs:184
 msgid "New Image"
 msgstr "Imej Baharu"
 
@@ -1354,11 +1346,11 @@ msgstr "Hingar"
 
 #: ../Pinta.Core/Effects/UserBlendOps.cs:33
 #: ../Pinta.Tools/Brushes/PlainBrush.cs:37
-#: ../Pinta.Tools/Tools/EraserTool.cs:267 ../Pinta.Tools/Tools/TextTool.cs:224
+#: ../Pinta.Tools/Tools/EraserTool.cs:267 ../Pinta.Tools/Tools/TextTool.cs:242
 msgid "Normal"
 msgstr "Biasa"
 
-#: ../Pinta.Core/Classes/BaseTool.cs:330
+#: ../Pinta.Core/Classes/BaseTool.cs:336
 msgid "Normal Blending"
 msgstr "Pengadunan Normal"
 
@@ -1366,7 +1358,7 @@ msgstr "Pengadunan Normal"
 msgid "Normal Size"
 msgstr "Saiz Biasa"
 
-#: ../Pinta.Tools/Tools/TextTool.cs:225
+#: ../Pinta.Tools/Tools/TextTool.cs:243
 msgid "Normal and Outline"
 msgstr "Biasa dan Rangka"
 
@@ -1395,7 +1387,7 @@ msgstr "Buka"
 msgid "Open Curve Shape"
 msgstr "Bentuk Lengkung Terbuka"
 
-#: ../Pinta.Core/Managers/WorkspaceManager.cs:225
+#: ../Pinta.Core/Managers/WorkspaceManager.cs:255
 msgid "Open Image"
 msgstr "Buka Imej"
 
@@ -1438,7 +1430,7 @@ msgid "Other"
 msgstr "Lain-lain"
 
 #: ../Pinta.Effects/Effects/OutlineEffect.cs:27
-#: ../Pinta.Tools/Tools/TextTool.cs:226
+#: ../Pinta.Tools/Tools/TextTool.cs:244
 msgid "Outline"
 msgstr "Rangka"
 
@@ -1447,7 +1439,7 @@ msgstr "Rangka"
 msgid "Outline Shape"
 msgstr "Bentuk Rangka"
 
-#: ../Pinta.Tools/Tools/TextTool.cs:241
+#: ../Pinta.Tools/Tools/TextTool.cs:259
 msgid "Outline width"
 msgstr "Lebar rangka"
 
@@ -1463,7 +1455,7 @@ msgstr "Histogram Output"
 msgid "Overlay"
 msgstr "Tindihan Atas"
 
-#: ../Pinta.Core/Classes/BaseTool.cs:331
+#: ../Pinta.Core/Classes/BaseTool.cs:337
 msgid "Overwrite"
 msgstr "Tulis-Ganti"
 
@@ -1479,7 +1471,7 @@ msgstr "Berus Cat"
 msgid "Palette"
 msgstr "Palet"
 
-#: ../Pinta.Core/Actions/EditActions.cs:365
+#: ../Pinta.Core/Actions/EditActions.cs:367
 msgid "Palette files"
 msgstr "Fail palet"
 
@@ -1502,10 +1494,6 @@ msgstr "Tampal ke Imej Baharu"
 #: ../Pinta.Core/Actions/EditActions.cs:65
 msgid "Paste Into New Layer"
 msgstr "Tampal dalam Lapisan Baharu"
-
-#: ../Pinta/Dialogs/VersionInformationTabPage.cs:53
-msgid "Path"
-msgstr "Laluan"
 
 #: Mono.Addins.Gui/gtk-gui/Mono.Addins.Gui.NewSiteDialog.cs:130
 msgid "Path:"
@@ -1534,7 +1522,7 @@ msgstr "Persentil"
 msgid "Photo"
 msgstr "Foto"
 
-#: ../xdg/pinta.desktop.in.h:1
+#: ../xdg/pinta.desktop.in.h:1 ../Pinta/Actions/Help/AboutDialogAction.cs:54
 msgid "Pinta"
 msgstr "Pinta"
 
@@ -1554,7 +1542,7 @@ msgstr "Penyunting Imej Pinta"
 msgid "Pinta Website"
 msgstr "Tapak Sesawang Pinta"
 
-#: ../Pinta/Actions/File/SaveDocumentImplementationAction.cs:185
+#: ../Pinta/Actions/File/SaveDocumentImplementationAction.cs:162
 msgid "Pinta does not support saving images in this file format."
 msgstr "Pinta tidak menyokong penyimpanan imej dalam format fail ini."
 
@@ -1573,11 +1561,11 @@ msgstr ""
 "anda, serta berupaya mencipta lapisan-lapisan tanpa had yang dapat membantu "
 "pengurusan kreativiti anda."
 
-#: ../Pinta.Core/Managers/WorkspaceManager.cs:386
+#: ../Pinta.Core/Managers/WorkspaceManager.cs:413
 msgid "Pinta supports the following file formats:"
 msgstr "Pinta menyokong format fail berikut:"
 
-#: ../Pinta.Core/Classes/Palette.cs:186
+#: ../Pinta.Core/Classes/Palette.cs:198
 msgid "Pinta supports the following palette formats:"
 msgstr "Pinta menyokong format palet berikut:"
 
@@ -1593,12 +1581,12 @@ msgstr "Pikselkan"
 msgid "Pixels"
 msgstr "Piksel"
 
-#: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:523
-#: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:767
+#: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:525
+#: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:769
 msgid "Point Added"
 msgstr "Titik Ditambah"
 
-#: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:466
+#: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:468
 msgid "Point Deleted"
 msgstr "Titik Terpadam"
 
@@ -1626,10 +1614,6 @@ msgstr "Praset:"
 #: ../Pinta/Dialogs/NewImageDialog.cs:318
 msgid "Preview"
 msgstr "Pratonton"
-
-#: ../Pinta/Dialogs/AboutDialog.cs:154
-msgid "Previous contributors:"
-msgstr "Penyumbang terdahulu:"
 
 #: ../Pinta.Effects/Effects/WarpEffect.cs:25
 msgid "Primary"
@@ -1666,7 +1650,7 @@ msgstr "RGB"
 msgid "Radial Blur"
 msgstr "Kabur Berjejari"
 
-#: ../Pinta.Tools/Tools/GradientTool.cs:184
+#: ../Pinta.Tools/Tools/GradientTool.cs:187
 msgid "Radial Gradient"
 msgstr "Gradien Jejari"
 
@@ -1736,7 +1720,7 @@ msgstr "Daftar repositori dalam talian"
 msgid "Registering repository"
 msgstr "Mendaftar repositori"
 
-#: ../Pinta/Dialogs/AboutPintaTabPage.cs:50
+#: ../Pinta/Actions/Help/AboutDialogAction.cs:79
 msgid "Released under the MIT X11 License."
 msgstr "Dikeluarkan bawah Lesen X11 MIT."
 
@@ -1758,13 +1742,11 @@ msgstr "Kemas Gabung"
 msgid "Rendering Effect"
 msgstr "Kesan Pengemasgabungan"
 
-#: ../Pinta/Actions/File/SaveDocumentImplementationAction.cs:251
-#: ../Pinta/Actions/File/SaveDocumentImplementationAction.cs:255
 #: ../Pinta.Core/Classes/SelectionModeHandler.cs:47
 msgid "Replace"
 msgstr "Ganti"
 
-#: ../Pinta/Dialogs/ErrorDialog.cs:110
+#: ../Pinta/Dialogs/ErrorDialog.cs:109
 msgid "Report Bug...."
 msgstr "Lapor Pepijat..."
 
@@ -1816,7 +1798,7 @@ msgstr "Saiz Semula Imej..."
 msgid "Resize Palette"
 msgstr "Saiz Semula Palet"
 
-#: ../Pinta.Tools/Tools/TextTool.cs:204
+#: ../Pinta.Tools/Tools/TextTool.cs:221
 msgid "Right Align"
 msgstr "Jajar Kanan"
 
@@ -1883,7 +1865,7 @@ msgid "Saturation Percentage"
 msgstr "Peratus Ketepuan"
 
 #: ../Pinta/Actions/File/SaveDocumentImplementationAction.cs:75
-#: ../Pinta.Core/Actions/EditActions.cs:402
+#: ../Pinta.Core/Actions/EditActions.cs:403
 #: ../Pinta.Core/Actions/FileActions.cs:55
 msgid "Save"
 msgstr "Simpan"
@@ -1901,7 +1883,7 @@ msgstr "Simpan Sebagai..."
 msgid "Save Image File"
 msgstr "Simpan fail Imej"
 
-#: ../Pinta.Core/Actions/EditActions.cs:399
+#: ../Pinta.Core/Actions/EditActions.cs:400
 msgid "Save Palette File"
 msgstr "Simpan Fail Palet"
 
@@ -2027,7 +2009,7 @@ msgstr "Tukar ke alat Pensel"
 msgid "Switch to previous tool"
 msgstr "Tukar kepada alat terdahulu"
 
-#: ../Pinta/Actions/File/NewScreenshotAction.cs:51
+#: ../Pinta/Actions/File/NewScreenshotAction.cs:105
 msgid "Take Screenshot"
 msgstr "Ambil Tangkap Layar"
 
@@ -2039,21 +2021,13 @@ msgstr "Teks"
 msgid "Text - Finalize"
 msgstr "Teks - Muktamadkan"
 
-#: ../Pinta.Tools/Tools/TextTool.cs:217
+#: ../Pinta.Tools/Tools/TextTool.cs:235
 msgid "Text Style"
 msgstr "Gaya Teks"
 
 #: ../Pinta/Actions/Edit/PasteAction.cs:160
 msgid "The clipboard does not contain an image."
 msgstr "Papan keratan tidak mengandungi satu imej."
-
-#: ../Pinta/Actions/File/SaveDocumentImplementationAction.cs:242
-#, csharp-format
-msgid ""
-"The file already exists in \"{1}\". Replacing it will overwrite its contents."
-msgstr ""
-"Fail sudah wujud dalam \"{1}\". Sekiranya diganti semua kandungannya akan "
-"ditulis-ganti."
 
 #: Mono.Addins.Gui/gtk-gui/Mono.Addins.Gui.AddinInstallerDialog.cs:48
 msgid "The following add-ins will be installed:"
@@ -2138,10 +2112,6 @@ msgstr "Saiz Jubin"
 msgid "Tip: Right-click to remove control points."
 msgstr "Petua: Klik kanan untuk buang titik-titik kawalan."
 
-#: ../Pinta/Dialogs/VersionInformationTabPage.cs:44
-msgid "Title"
-msgstr "Tajuk"
-
 #: ../Pinta.Effects/Effects/RedEyeRemoveEffect.cs:70
 #: ../Pinta.Tools/Tools/FloodTool.cs:127
 #: ../Pinta.Tools/Tools/RecolorTool.cs:200
@@ -2156,7 +2126,7 @@ msgstr "Alat"
 msgid "Tool Box"
 msgstr "Kotak Alat"
 
-#: ../Pinta/MainWindow.cs:364
+#: ../Pinta/MainWindow.cs:368
 msgid "Tool Windows"
 msgstr "Tetingkap Alat"
 
@@ -2172,11 +2142,7 @@ msgstr "Peta Pindahan"
 msgid "Translate This Application"
 msgstr "Terjemah Aplikasi Ini"
 
-#: ../Pinta/Dialogs/AboutDialog.cs:168
-msgid "Translated by:"
-msgstr "Diterjemah oleh:"
-
-#: ../Pinta.Tools/Tools/GradientTool.cs:201
+#: ../Pinta.Tools/Tools/GradientTool.cs:204
 msgid "Transparency Mode"
 msgstr ""
 
@@ -2194,7 +2160,7 @@ msgstr "Pulas"
 msgid "Type"
 msgstr "Jenis"
 
-#: ../Pinta/MainWindow.cs:540
+#: ../Pinta/MainWindow.cs:545
 #, csharp-format
 msgid ""
 "Unable to download image from {0}.\n"
@@ -2203,7 +2169,7 @@ msgstr ""
 "Gagal memuat turun imej daripada {0}.\n"
 "Butiran: {1}"
 
-#: ../Pinta.Tools/Tools/TextTool.cs:176
+#: ../Pinta.Tools/Tools/TextTool.cs:184
 msgid "Underline"
 msgstr "Garis Bawah"
 
@@ -2229,12 +2195,12 @@ msgstr "Menyahpasang Tambahan"
 msgid "Union (+) ({0} + Left Click)"
 msgstr "Kesatuan (+) ({0} + Klik Kiri)"
 
-#: ../Pinta.Core/Managers/WorkspaceManager.cs:112
+#: ../Pinta.Core/Managers/WorkspaceManager.cs:115
 #, csharp-format
 msgid "Unsaved Image {0}"
 msgstr "Imej Belum Simpan {0}"
 
-#: ../Pinta.Core/Managers/WorkspaceManager.cs:220
+#: ../Pinta.Core/Managers/WorkspaceManager.cs:250
 msgid "Unsupported file format"
 msgstr "Format fail tidak disokong"
 
@@ -2276,18 +2242,9 @@ msgstr ""
 "Guna kualiti rendah untuk pratonton, imej kecil, dan sudut kecil. Guna "
 "kualiti tinggi untuk kualiti terakhir, imej besar, dan sudut besar."
 
-#: ../Pinta/Dialogs/AboutDialog.cs:181
+#: ../Pinta/Actions/Help/AboutDialogAction.cs:86
 msgid "Using some icons from:"
 msgstr "Menggunakan beberapa ikon daripada:"
-
-#: ../Pinta/Dialogs/AboutPintaTabPage.cs:42
-#: ../Pinta/Dialogs/VersionInformationTabPage.cs:50
-msgid "Version"
-msgstr "Versi"
-
-#: ../Pinta/Dialogs/AboutDialog.cs:277
-msgid "Version Info"
-msgstr "Maklumat Versi"
 
 #: ../Pinta/Dialogs/LayerPropertiesDialog.cs:195
 msgid "Visible"
@@ -2309,8 +2266,8 @@ msgstr "Lebar:"
 
 #: ../Pinta.Core/Actions/ViewActions.cs:103
 #: ../Pinta.Core/Actions/ViewActions.cs:282
-#: ../Pinta.Core/Classes/DocumentWorkspace.cs:315
-#: ../Pinta.Core/Classes/DocumentWorkspace.cs:323
+#: ../Pinta.Core/Classes/DocumentWorkspace.cs:324
+#: ../Pinta.Core/Classes/DocumentWorkspace.cs:332
 msgid "Window"
 msgstr "Tetingkap"
 
@@ -2329,13 +2286,13 @@ msgid "Xor ({0} + Right Click)"
 msgstr "Xor ({0} + Klik Kanan)"
 
 #. Translators: {0} is the name of a file that the user does not have permission to open.
-#: ../Pinta.Core/Managers/WorkspaceManager.cs:405
+#: ../Pinta.Core/Managers/WorkspaceManager.cs:432
 #, csharp-format
 msgid "You do not have access to '{0}'."
 msgstr "Anda tidak capaian ke '{0}'."
 
 #. Translators: {0} is the name of a file that the user does not have write permission for.
-#: ../Pinta/Actions/File/SaveDocumentImplementationAction.cs:211
+#: ../Pinta/Actions/File/SaveDocumentImplementationAction.cs:188
 #, csharp-format
 msgid ""
 "You do not have access to modify '{0}'. The file or folder may be read-only."
@@ -2366,27 +2323,27 @@ msgstr "Zum Keluar"
 msgid "Zoom to Selection"
 msgstr "Zum ke Pemilihan"
 
-#: ../Pinta/MainWindow.cs:339
+#: ../Pinta/MainWindow.cs:343
 msgid "_Adjustments"
 msgstr "_Pelarasan"
 
-#: ../Pinta/MainWindow.cs:324
+#: ../Pinta/MainWindow.cs:328
 msgid "_Edit"
 msgstr "_Sunting"
 
-#: ../Pinta/MainWindow.cs:320
+#: ../Pinta/MainWindow.cs:324
 msgid "_File"
 msgstr "_Fail"
 
-#: ../Pinta/MainWindow.cs:358
+#: ../Pinta/MainWindow.cs:362
 msgid "_Help"
 msgstr "_Bantuan"
 
-#: ../Pinta/MainWindow.cs:332
+#: ../Pinta/MainWindow.cs:336
 msgid "_Image"
 msgstr "_Imej"
 
-#: ../Pinta/MainWindow.cs:336
+#: ../Pinta/MainWindow.cs:340
 msgid "_Layers"
 msgstr "_Lapisan"
 
@@ -2394,15 +2351,15 @@ msgstr "_Lapisan"
 msgid "_Uninstall..."
 msgstr "_Nyahpasang..."
 
-#: ../Pinta/MainWindow.cs:328
+#: ../Pinta/MainWindow.cs:332
 msgid "_View"
 msgstr "L_ihat"
 
-#: ../Pinta/MainWindow.cs:354
+#: ../Pinta/MainWindow.cs:358
 msgid "_Window"
 msgstr "_Tetingkap"
 
-#: ../Pinta/Dialogs/AboutPintaTabPage.cs:56
+#: ../Pinta/Actions/Help/AboutDialogAction.cs:71
 msgid "by Pinta contributors"
 msgstr "oleh para penyumbang Pinta"
 
@@ -2423,7 +2380,7 @@ msgstr "bilangan jaluran digunakan untuk pengemasgabungan"
 msgid "pixels"
 msgstr "piksel"
 
-#: ../Pinta/Dialogs/AboutDialog.cs:165
+#: ../Pinta/Actions/Help/AboutDialogAction.cs:62
 msgid "translator-credits"
 msgstr ""
 "Launchpad Contributions:\n"
@@ -2445,7 +2402,7 @@ msgstr "{0} + klik kiri untuk menetapkan asalan, klik kiri untuk mengecat."
 msgid "{0} copy"
 msgstr "{0} salinan"
 
-#: ../Pinta.Core/ImageFormats/FormatDescriptor.cs:93
+#: ../Pinta.Core/ImageFormats/FormatDescriptor.cs:110
 #, csharp-format
 msgid "{0} image ({1})"
 msgstr "{0} imej ({1})"
@@ -2470,8 +2427,29 @@ msgstr[1] "{0} kemas kini tersedia"
 msgid "{0}%"
 msgstr "{0}%"
 
+#~ msgid "Translated by:"
+#~ msgstr "Diterjemah oleh:"
+
+#~ msgid "Title"
+#~ msgstr "Tajuk"
+
+#~ msgid "Version"
+#~ msgstr "Versi"
+
+#~ msgid "Path"
+#~ msgstr "Laluan"
+
+#~ msgid "Version Info"
+#~ msgstr "Maklumat Versi"
+
 #~ msgid "No tool selected."
 #~ msgstr "Tiada alat dipilih."
+
+#~ msgid "Previous contributors:"
+#~ msgstr "Penyumbang terdahulu:"
+
+#~ msgid "Contributors to this release:"
+#~ msgstr "Penyumbang keluaran ini:"
 
 #~ msgid "Union (+) (Ctrl + Left Click)"
 #~ msgstr "Satukan (+) (Ctrl + Klik Kiri)"
@@ -2521,6 +2499,17 @@ msgstr "{0}%"
 
 #~ msgid "Ctrl-left click to set origin, left click to paint."
 #~ msgstr "Ctrl+klik kiri untuk tetapkan asalan, klik kiri untuk cat."
+
+#, csharp-format
+#~ msgid ""
+#~ "The file already exists in \"{1}\". Replacing it will overwrite its contents."
+#~ msgstr ""
+#~ "Fail sudah wujud dalam \"{1}\". Sekiranya diganti semua kandungannya akan "
+#~ "ditulis-ganti."
+
+#, csharp-format
+#~ msgid "A file named \"{0}\" already exists. Do you want to replace it?"
+#~ msgstr "Satu fail bernama \"{0}\" sudah wujud. Anda mahu gantikannya?"
 
 #~ msgid "Powered by Mono:"
 #~ msgstr "Diperkasakan oleh Mono:"
@@ -2598,6 +2587,9 @@ msgstr "{0}%"
 
 #~ msgid "Decrease shape's corner radius"
 #~ msgstr "Kecilkan jejari bucu bentuk"
+
+#~ msgid "Copy Version Info"
+#~ msgstr "Salin Maklumat Versi"
 
 #~ msgid "Tools"
 #~ msgstr "Alatan"

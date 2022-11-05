@@ -7,20 +7,20 @@ msgid ""
 msgstr ""
 "Project-Id-Version: pinta\n"
 "Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
-"POT-Creation-Date: 2022-01-11 23:44-0500\n"
-"PO-Revision-Date: 2015-04-27 05:30+0000\n"
-"Last-Translator: ub <xenolith0bytetestcomgreen@gmail.com>\n"
+"POT-Creation-Date: 2022-11-04 22:46-0400\n"
+"PO-Revision-Date: 2022-06-12 12:30+0000\n"
+"Last-Translator: UTUMI Hirosi <utuhiro78@yahoo.co.jp>\n"
 "Language-Team: Japanese <ja@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=1; plural=0;\n"
-"X-Launchpad-Export-Date: 2022-01-14 01:08+0000\n"
-"X-Generator: Launchpad (build 0072e2709f85567cc6c8d33e98acde9fcc09f491)\n"
+"X-Launchpad-Export-Date: 2022-11-05 02:52+0000\n"
+"X-Generator: Launchpad (build 83f7123b02a2b50a64bc29e7e35197179a885279)\n"
 
 #: Mono.Addins.Gui/Mono.Addins.Gui/InstallDialog.cs:142
 msgid " (in user directory)"
-msgstr " (ユーザ・フォルダ内)"
+msgstr " (ユーザディレクトリ内)"
 
 #: ../Pinta.Core/Classes/SelectionModeHandler.cs:61
 msgid " Selection Mode: "
@@ -29,7 +29,7 @@ msgstr " 選択モード: "
 #: Mono.Addins/Mono.Addins.Description/AssemblyDependency.cs:103
 #, csharp-format
 msgid "(provided by {0})"
-msgstr "(provided by {0})"
+msgstr "({0} によって提供)"
 
 #: ../Pinta.Core/Managers/EffectsManager.cs:60
 #: ../Pinta.Core/Managers/EffectsManager.cs:90
@@ -52,12 +52,7 @@ msgstr "7 x 7 範囲"
 msgid "9 x 9 Region"
 msgstr "9 x 9 範囲"
 
-#: ../Pinta/Actions/File/SaveDocumentImplementationAction.cs:241
-#, csharp-format
-msgid "A file named \"{0}\" already exists. Do you want to replace it?"
-msgstr "同名のファイル \"{0}\" があります。置き換えますか？"
-
-#: ../Pinta/MainWindow.cs:349
+#: ../Pinta/MainWindow.cs:353
 msgid "A_dd-ins"
 msgstr "アドイン(_d)"
 
@@ -65,13 +60,13 @@ msgstr "アドイン(_d)"
 msgid "About"
 msgstr "このソフトウェアについて"
 
-#: ../Pinta/Dialogs/AboutDialog.cs:260
+#: ../Pinta/Actions/Help/AboutDialogAction.cs:52
 msgid "About Pinta"
 msgstr "Pinta について"
 
 #: ../Pinta/Actions/Edit/PasteAction.cs:130
 #: ../Pinta.Core/Actions/LayerActions.cs:50
-#: ../Pinta.Core/Actions/LayerActions.cs:312
+#: ../Pinta.Core/Actions/LayerActions.cs:330
 msgid "Add New Layer"
 msgstr "新規レイヤーを追加"
 
@@ -99,7 +94,7 @@ msgstr "アドインリポジトリの管理"
 msgid "Add-in packages"
 msgstr "アドインパッケージ"
 
-#: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:801
+#: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:803
 msgid "Added"
 msgstr "追加しました"
 
@@ -111,8 +106,8 @@ msgstr "この操作には追加の拡張機能が必要です。"
 msgid "After select"
 msgstr "色取得後の動作"
 
-#: ../Pinta/Actions/File/OpenDocumentAction.cs:71
-#: ../Pinta.Core/Actions/EditActions.cs:378
+#: ../Pinta/Actions/File/OpenDocumentAction.cs:83
+#: ../Pinta.Core/Actions/EditActions.cs:380
 msgid "All files"
 msgstr "すべてのファイル"
 
@@ -148,13 +143,13 @@ msgstr "角度"
 msgid "Antialias"
 msgstr "アンチエイリアス"
 
-#: ../Pinta.Core/Classes/BaseTool.cs:346
+#: ../Pinta.Core/Classes/BaseTool.cs:352
 msgid "Antialiasing Off"
-msgstr "アンチエイリアスの無効"
+msgstr "アンチエイリアス無効"
 
-#: ../Pinta.Core/Classes/BaseTool.cs:345
+#: ../Pinta.Core/Classes/BaseTool.cs:351
 msgid "Antialiasing On"
-msgstr "アンチエイリアスの有効"
+msgstr "アンチエイリアス有効"
 
 #: Mono.Addins.Gui/Mono.Addins.Gui/InstallDialog.cs:190
 msgid "Are you sure you want to cancel the installation?"
@@ -176,17 +171,17 @@ msgstr "自動"
 
 #: ../Pinta.Core/Actions/ImageActions.cs:48
 msgid "Auto Crop"
-msgstr "自動クロップ"
+msgstr "自動切り抜き"
 
 #: ../Pinta.Effects/Adjustments/AutoLevelEffect.cs:25
 msgid "Auto Level"
-msgstr "自動レベル"
+msgstr "自動レベル補正"
 
 #: Mono.Addins.Gui/Mono.Addins.Gui/AddinInfoView.cs:217
 msgid "Available in repository:"
 msgstr "利用可能なリポジトリ:"
 
-#: ../Pinta.Core/Managers/WorkspaceManager.cs:169
+#: ../Pinta.Core/Managers/WorkspaceManager.cs:175
 msgid "Background"
 msgstr "背景色"
 
@@ -198,7 +193,7 @@ msgstr "背景色"
 msgid "Background:"
 msgstr "背景:"
 
-#: ../Pinta/Dialogs/AboutDialog.cs:174
+#: ../Pinta/Actions/Help/AboutDialogAction.cs:82
 msgid "Based on the work of Paint.NET:"
 msgstr "Paint.NET プロジェクト:"
 
@@ -232,7 +227,7 @@ msgstr "青 "
 msgid "Blurs"
 msgstr "ぼかし"
 
-#: ../Pinta.Tools/Tools/TextTool.cs:160
+#: ../Pinta.Tools/Tools/TextTool.cs:162
 msgid "Bold"
 msgstr "太文字"
 
@@ -243,7 +238,7 @@ msgstr "輝度"
 
 #: ../Pinta.Effects/Adjustments/BrightnessContrastEffect.cs:29
 msgid "Brightness / Contrast"
-msgstr "明かるさ/コントラスト"
+msgstr "輝度/コントラスト"
 
 #: Mono.Addins.Gui/gtk-gui/Mono.Addins.Gui.NewSiteDialog.cs:154
 msgid "Browse..."
@@ -275,10 +270,10 @@ msgstr "パーセント指定:"
 #: ../Pinta/Actions/File/OpenDocumentAction.cs:54
 #: ../Pinta/Actions/File/SaveDocumentImplementationAction.cs:76
 #: ../Pinta.Core/Actions/EditActions.cs:362
-#: ../Pinta.Core/Actions/EditActions.cs:403
+#: ../Pinta.Core/Actions/EditActions.cs:404
 #: ../Pinta.Core/Actions/LayerActions.cs:169
 msgid "Cancel"
-msgstr ""
+msgstr "キャンセル"
 
 #: ../Pinta/Pads/CanvasPad.cs:43
 msgid "Canvas"
@@ -288,7 +283,7 @@ msgstr "キャンバス"
 msgid "Cell Size"
 msgstr "セルのサイズ"
 
-#: ../Pinta.Tools/Tools/TextTool.cs:196
+#: ../Pinta.Tools/Tools/TextTool.cs:210
 msgid "Center Align"
 msgstr "中央揃え"
 
@@ -304,17 +299,17 @@ msgstr "中央揃え"
 msgid "Centimeters"
 msgstr "センチメートル"
 
-#: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:338
+#: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:339
 msgid "Changed Shape Type"
 msgstr "形状を変更"
 
 #: ../Pinta.Effects/Dialogs/Effects.LevelsDialog.cs:473
 msgid "Choose Color"
-msgstr ""
+msgstr "色を選択"
 
 #: ../Pinta.Gui.Widgets/Widgets/StatusBarColorPaletteWidget.cs:106
 msgid "Choose Palette Color"
-msgstr "パレットカラーを選択"
+msgstr "パレット色を選択"
 
 #: ../Pinta.Gui.Widgets/Widgets/StatusBarColorPaletteWidget.cs:76
 msgid "Choose Primary Color"
@@ -330,25 +325,25 @@ msgstr "円"
 
 #: ../Pinta.Effects/Effects/WarpEffect.cs:19
 msgid "Clamp"
-msgstr ""
+msgstr "クランプ"
 
 #: ../Pinta.Tools/Tools/RectangleSelectTool.cs:41
 msgid ""
 "Click and drag to draw a rectangular selection. Hold Shift to constrain to a "
 "square."
-msgstr "クリックとドラッグで四角形を描画、Shiftキーを押し続けて正方形。"
+msgstr "クリックしてドラッグすると、四角形を描画する。Shift キーを押し続けると正方形。"
 
 #: ../Pinta.Tools/Tools/EllipseSelectTool.cs:41
 msgid ""
 "Click and drag to draw an elliptical selection. Hold Shift to constrain to a "
 "circle."
-msgstr "クリックとドラッグで楕円の領域、Shiftキーを押し続けて円。"
+msgstr "クリックしてドラッグすると、楕円の選択範囲を描画する。Shift キーを押し続けると円。"
 
-#: ../Pinta.Tools/Tools/GradientTool.cs:53
+#: ../Pinta.Tools/Tools/GradientTool.cs:51
 msgid ""
 "Click and drag to draw gradient from primary to secondary color.  Right "
 "click to reverse."
-msgstr "クリックとドラッグでプライマリ色からセカンダリ色へのグラデーション、右クリックで逆。"
+msgstr "クリックしてドラッグすると、プライマリ色からセカンダリ色へのグラデーションを描く。右クリックで逆。"
 
 #: ../Pinta.Tools/Tools/LassoSelectTool.cs:55
 msgid "Click and drag to draw the outline for a selection area."
@@ -364,7 +359,7 @@ msgstr "クリックでプライマリ色とセカンダリ色のリセット。
 
 #: ../Pinta.Gui.Widgets/Widgets/StatusBarColorPaletteWidget.cs:223
 msgid "Click to select primary color."
-msgstr "クリックでプライマリーの選択。"
+msgstr "クリックでプライマリ色の選択。"
 
 #: ../Pinta.Tools/Tools/MagicWandTool.cs:50
 msgid "Click to select region of similar color."
@@ -376,7 +371,7 @@ msgstr "クリックでセカンダリ色の選択。"
 
 #: ../Pinta.Gui.Widgets/Widgets/StatusBarColorPaletteWidget.cs:229
 msgid "Click to switch between primary and secondary color."
-msgstr ""
+msgstr "クリックすると、プライマリ色とセカンダリ色を切り替えます。"
 
 #: ../Pinta/Dialogs/NewImageDialog.cs:161
 #: ../Pinta/Dialogs/NewImageDialog.cs:199
@@ -400,7 +395,7 @@ msgstr "すべて閉じる"
 #: ../Pinta/Actions/File/CloseDocumentAction.cs:72
 #: ../Pinta/Actions/File/CloseDocumentAction.cs:75
 msgid "Close _without Saving"
-msgstr ""
+msgstr "保存せずに閉じる(_W)"
 
 #: ../Pinta.Tools/Editable/EditEngines/RectangleEditEngine.cs:40
 msgid "Closed Curve Shape"
@@ -420,7 +415,7 @@ msgstr "粗さ"
 
 #: ../Pinta.Core/Effects/UserBlendOps.cs:45
 msgid "Color"
-msgstr ""
+msgstr "色"
 
 #: ../Pinta.Core/Effects/UserBlendOps.cs:35
 msgid "Color Burn"
@@ -430,9 +425,9 @@ msgstr "焼き込み(カラー)"
 msgid "Color Dodge"
 msgstr "覆い焼き(カラー)"
 
-#: ../Pinta.Tools/Tools/GradientTool.cs:200
+#: ../Pinta.Tools/Tools/GradientTool.cs:203
 msgid "Color Mode"
-msgstr ""
+msgstr "カラーモード"
 
 #: ../Pinta.Tools/Tools/ColorPickerTool.cs:52
 msgid "Color Picker"
@@ -450,13 +445,13 @@ msgstr "彩度"
 msgid "Coloring"
 msgstr "色の設定"
 
-#: ../Pinta.Tools/Tools/GradientTool.cs:185
+#: ../Pinta.Tools/Tools/GradientTool.cs:188
 msgid "Conical Gradient"
 msgstr "円錐形グラデーション"
 
 #: ../Pinta.Core/Actions/HelpActions.cs:44
 msgid "Contents"
-msgstr ""
+msgstr "コンテンツ"
 
 #: ../Pinta.Tools/Tools/FloodTool.cs:136
 msgid "Contiguous"
@@ -467,10 +462,6 @@ msgstr "連続部分"
 msgid "Contrast"
 msgstr "コントラスト"
 
-#: ../Pinta/Dialogs/AboutDialog.cs:142
-msgid "Contributors to this release:"
-msgstr "このリリースの貢献者:"
-
 #: ../Pinta.Core/Actions/EditActions.cs:62
 msgid "Copy"
 msgstr "コピー"
@@ -479,22 +470,18 @@ msgstr "コピー"
 msgid "Copy Merged"
 msgstr "クリップボードにコピー"
 
-#: ../Pinta/Dialogs/VersionInformationTabPage.cs:67
-msgid "Copy Version Info"
-msgstr ""
-
-#: ../Pinta/Dialogs/AboutPintaTabPage.cs:56
+#: ../Pinta/Actions/Help/AboutDialogAction.cs:70
 msgid "Copyright"
 msgstr "著作権"
 
-#: ../Pinta/Actions/File/NewScreenshotAction.cs:70
+#: ../Pinta/Actions/File/NewScreenshotAction.cs:124
 #, csharp-format
 msgid "Could not obtain the size of display '{0}'"
-msgstr ""
+msgstr "ディスプレイ '{0}' のサイズを取得できませんでした"
 
-#: ../Pinta.Core/Classes/Palette.cs:185
-#: ../Pinta.Core/Managers/WorkspaceManager.cs:376
-#: ../Pinta.Core/Managers/WorkspaceManager.cs:385
+#: ../Pinta.Core/Classes/Palette.cs:197
+#: ../Pinta.Core/Managers/WorkspaceManager.cs:403
+#: ../Pinta.Core/Managers/WorkspaceManager.cs:412
 #, csharp-format
 msgid "Could not open file: {0}"
 msgstr "ファイルを開けません: {0}"
@@ -504,9 +491,9 @@ msgid "Coverage"
 msgstr "範囲"
 
 #: ../Pinta.Core/Actions/ImageActions.cs:47
-#: ../Pinta.Core/Actions/ImageActions.cs:292
+#: ../Pinta.Core/Actions/ImageActions.cs:286
 msgid "Crop to Selection"
-msgstr "選択範囲のクロップ"
+msgstr "選択範囲を切り抜く"
 
 #: ../Pinta.Effects/Adjustments/CurvesEffect.cs:27
 #: ../Pinta.Effects/Dialogs/Effects.CurvesDialog.cs:90
@@ -533,16 +520,16 @@ msgstr "比較(暗)"
 msgid "Dash"
 msgstr "線種"
 
-#: ../Pinta/Actions/File/NewScreenshotAction.cs:52
+#: ../Pinta/Actions/File/NewScreenshotAction.cs:106
 msgid "Delay before taking a screenshot (seconds):"
 msgstr "スクリーンショットを撮るまでの遅延時間（秒）："
 
 #: ../Pinta.Core/Actions/LayerActions.cs:51
-#: ../Pinta.Core/Actions/LayerActions.cs:295
+#: ../Pinta.Core/Actions/LayerActions.cs:313
 msgid "Delete Layer"
 msgstr "レイヤーを削除"
 
-#: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:480
+#: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:482
 msgid "Deleted"
 msgstr "削除しました"
 
@@ -554,7 +541,7 @@ msgstr "選択解除"
 msgid "Deselect All"
 msgstr "選択を解除"
 
-#: ../Pinta/Dialogs/ErrorDialog.cs:99
+#: ../Pinta/Dialogs/ErrorDialog.cs:98
 #: Mono.Addins.Gui/gtk-gui/Mono.Addins.Gui.ErrorDialog.cs:92
 #: Mono.Addins.Gui/gtk-gui/Mono.Addins.Gui.ProgressDialog.cs:66
 msgid "Details"
@@ -595,24 +582,24 @@ msgstr "なにもしない"
 msgid "Don't change canvas size"
 msgstr "キャンバスサイズは変えない"
 
-#: ../Pinta/MainWindow.cs:539
+#: ../Pinta/MainWindow.cs:544
 msgid "Download failed"
-msgstr ""
+msgstr "ダウンロードに失敗しました"
 
 #: Mono.Addins.Gui/Mono.Addins.Gui/AddinInfoView.cs:293
 msgid "Download size"
 msgstr "ダウンロードサイズ"
 
-#: ../Pinta/MainWindow.cs:520
+#: ../Pinta/MainWindow.cs:525
 msgid "Downloading Image"
-msgstr ""
+msgstr "画像のダウンロード"
 
 #: ../Pinta.Core/Actions/LayerActions.cs:52
-#: ../Pinta.Core/Actions/LayerActions.cs:286
+#: ../Pinta.Core/Actions/LayerActions.cs:304
 msgid "Duplicate Layer"
 msgstr "レイヤーを複製"
 
-#: ../xdg/pinta.desktop.in.h:2
+#: ../xdg/pinta.desktop.in.h:2 ../Pinta/Actions/Help/AboutDialogAction.cs:58
 msgid "Easily create and edit images"
 msgstr "簡単に画像を作成したり編集を行います"
 
@@ -624,7 +611,7 @@ msgstr "境界処理"
 msgid "Edge Detect"
 msgstr "エッジの強調"
 
-#: ../Pinta/MainWindow.cs:342
+#: ../Pinta/MainWindow.cs:346
 msgid "Effe_cts"
 msgstr "効果(_C)"
 
@@ -655,7 +642,7 @@ msgstr "選択範囲を消去"
 msgid "Eraser"
 msgstr "消しゴム"
 
-#: ../Pinta/Actions/File/SaveDocumentImplementationAction.cs:186
+#: ../Pinta/Actions/File/SaveDocumentImplementationAction.cs:163
 msgid "Error"
 msgstr "エラー"
 
@@ -667,7 +654,7 @@ msgstr "例外が発生しました: {0}"
 
 #: ../Pinta.Core/Classes/SelectionModeHandler.cs:50
 msgid "Exclude (-) (Right Click)"
-msgstr "減算 (-) (Right Click)"
+msgstr "Exclude (-) (右クリック)"
 
 #: ../Pinta/Actions/Edit/PasteAction.cs:173
 msgid "Expand canvas"
@@ -678,23 +665,28 @@ msgstr "キャンバスを広げる"
 msgid "Factor"
 msgstr "係数"
 
-#: ../Pinta.Core/Managers/WorkspaceManager.cs:403
+#: ../Pinta/Actions/File/NewScreenshotAction.cs:95
+msgid "Failed to access XDG Desktop Portals"
+msgstr ""
+
+#: ../Pinta.Core/Managers/WorkspaceManager.cs:430
 msgid "Failed to open image"
-msgstr ""
+msgstr "画像を開けませんでした"
 
-#: ../Pinta/Actions/File/SaveDocumentImplementationAction.cs:209
+#: ../Pinta/Actions/File/SaveDocumentImplementationAction.cs:186
 msgid "Failed to save image"
-msgstr ""
+msgstr "画像の保存に失敗しました"
 
-#: ../Pinta/Actions/File/NewScreenshotAction.cs:69
+#: ../Pinta/Actions/File/NewScreenshotAction.cs:94
+#: ../Pinta/Actions/File/NewScreenshotAction.cs:123
 msgid "Failed to take screenshot"
-msgstr ""
+msgstr "スクリーンショットを撮れませんでした"
 
 #: ../Pinta.Core/Actions/HelpActions.cs:46
 msgid "File a Bug"
 msgstr "バグの報告"
 
-#: ../Pinta.Tools/Tools/TextTool.cs:227
+#: ../Pinta.Tools/Tools/TextTool.cs:245
 msgid "Fill Background"
 msgstr "背景を塗りつぶす"
 
@@ -718,8 +710,8 @@ msgstr "塗りつぶしスタイル"
 msgid "Fill and Outline Shape"
 msgstr "塗りつぶして輪郭を描く"
 
-#: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:1100
-#: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:1471
+#: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:1102
+#: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:1473
 msgid "Finalized"
 msgstr "決定"
 
@@ -728,7 +720,7 @@ msgid "Finish Pixels"
 msgstr "ピクセル完了"
 
 #: ../Pinta.Core/Actions/ImageActions.cs:56
-#: ../Pinta.Core/Actions/ImageActions.cs:156
+#: ../Pinta.Core/Actions/ImageActions.cs:152
 msgid "Flatten"
 msgstr "フラット化"
 
@@ -739,11 +731,11 @@ msgstr "水平方向に反転"
 
 #: ../Pinta.Core/HistoryItems/InvertHistoryItem.cs:53
 msgid "Flip Image Horizontal"
-msgstr "イメージを水平方向に反転"
+msgstr "画像を水平方向に反転"
 
 #: ../Pinta.Core/HistoryItems/InvertHistoryItem.cs:57
 msgid "Flip Image Vertical"
-msgstr "イメージを垂直方向に反転"
+msgstr "画像を垂直方向に反転"
 
 #: ../Pinta.Core/HistoryItems/InvertHistoryItem.cs:78
 msgid "Flip Layer Horizontal"
@@ -794,7 +786,7 @@ msgstr "ギャラリー"
 
 #: ../Pinta.Effects/Effects/GaussianBlurEffect.cs:24
 msgid "Gaussian Blur"
-msgstr "ガウスぼかし"
+msgstr "ガウシアンぼかし"
 
 #: ../Pinta.Tools/Tools/FloodTool.cs:137
 msgid "Global"
@@ -804,8 +796,8 @@ msgstr "グローバル"
 msgid "Glow"
 msgstr "グロー"
 
-#: ../Pinta.Tools/Tools/GradientTool.cs:51
-#: ../Pinta.Tools/Tools/GradientTool.cs:175
+#: ../Pinta.Tools/Tools/GradientTool.cs:49
+#: ../Pinta.Tools/Tools/GradientTool.cs:178
 msgid "Gradient"
 msgstr "グラデーション"
 
@@ -821,7 +813,7 @@ msgstr "グリッド"
 
 #: ../Pinta.Core/Effects/UserBlendOps.cs:43
 msgid "Hard Light"
-msgstr ""
+msgstr "ハードライト"
 
 #: ../Pinta/Dialogs/NewImageDialog.cs:230
 #: ../Pinta/Dialogs/ResizeCanvasDialog.cs:339
@@ -848,9 +840,9 @@ msgstr "色相"
 
 #: ../Pinta.Effects/Adjustments/HueSaturationEffect.cs:26
 msgid "Hue / Saturation"
-msgstr "色あい/彩やかさ"
+msgstr "色相/彩度"
 
-#: ../Pinta/Actions/File/SaveDocumentImplementationAction.cs:200
+#: ../Pinta/Actions/File/SaveDocumentImplementationAction.cs:177
 msgid "ICO files can not be larger than 255 x 255 pixels."
 msgstr "ICOファイルは255 x 255ピクセルまでです"
 
@@ -868,26 +860,26 @@ msgstr "画像エディター"
 
 #: ../Pinta.Core/Actions/ViewActions.cs:71
 msgid "Image Tabs"
-msgstr ""
+msgstr "画像タブ"
 
 #: ../Pinta/Actions/Edit/PasteAction.cs:159
 msgid "Image cannot be pasted"
 msgstr "画像を貼り付けできません"
 
 #: ../Pinta/Actions/File/OpenDocumentAction.cs:58
-#: ../Pinta.Core/Actions/LayerActions.cs:182
+#: ../Pinta.Core/Actions/LayerActions.cs:196
 msgid "Image files"
-msgstr "イメージファイル"
+msgstr "画像ファイル"
 
 #: ../Pinta/Actions/Edit/PasteAction.cs:168
 msgid "Image larger than canvas"
 msgstr "画像がキャンバスより大きいです"
 
-#: ../Pinta/Actions/File/SaveDocumentImplementationAction.cs:199
+#: ../Pinta/Actions/File/SaveDocumentImplementationAction.cs:176
 msgid "Image too large"
 msgstr "画像が大きすぎます"
 
-#: ../Pinta.Core/Actions/LayerActions.cs:206
+#: ../Pinta.Core/Actions/LayerActions.cs:224
 msgid "Import From File"
 msgstr "ファイルからインポート"
 
@@ -963,19 +955,19 @@ msgstr "輝度"
 #: ../Pinta.Core/Classes/SelectionModeHandler.cs:54
 #, csharp-format
 msgid "Intersect ({0} + Left Click)"
-msgstr ""
+msgstr "Intersect ({0} + 左クリック)"
 
 #: ../Pinta.Effects/Adjustments/InvertColorsEffect.cs:25
 #: ../Pinta.Effects/Effects/MandelbrotFractalEffect.cs:166
 msgid "Invert Colors"
-msgstr "色の反転"
+msgstr "色を反転"
 
 #: ../Pinta.Core/Actions/EditActions.cs:69
-#: ../Pinta.Core/Actions/EditActions.cs:456
+#: ../Pinta.Core/Actions/EditActions.cs:460
 msgid "Invert Selection"
 msgstr "選択範囲を反転"
 
-#: ../Pinta.Tools/Tools/TextTool.cs:168
+#: ../Pinta.Tools/Tools/TextTool.cs:173
 msgid "Italic"
 msgstr "斜体"
 
@@ -999,7 +991,7 @@ msgstr "なげなわ選択"
 msgid "Layer"
 msgstr "レイヤー"
 
-#: ../Pinta.Gui.Widgets/Widgets/Layers/LayersListWidget.cs:286
+#: ../Pinta.Gui.Widgets/Widgets/Layers/LayersListWidget.cs:293
 msgid "Layer Hidden"
 msgstr "レイヤー非表示"
 
@@ -1014,9 +1006,9 @@ msgstr "レイヤーのプロパティ"
 
 #: ../Pinta.Core/Actions/LayerActions.cs:60
 msgid "Layer Properties..."
-msgstr "レイヤー・プロパティ"
+msgstr "レイヤーのプロパティ..."
 
-#: ../Pinta.Gui.Widgets/Widgets/Layers/LayersListWidget.cs:286
+#: ../Pinta.Gui.Widgets/Widgets/Layers/LayersListWidget.cs:293
 msgid "Layer Shown"
 msgstr "レイヤー表示"
 
@@ -1024,13 +1016,13 @@ msgstr "レイヤー表示"
 #: ../Pinta.Core/Classes/DocumentLayers.cs:135
 #, csharp-format
 msgid "Layer {0}"
-msgstr ""
+msgstr "レイヤー {0}"
 
 #: ../Pinta/Pads/LayersPad.cs:40 ../Pinta/Pads/LayersPad.cs:60
 msgid "Layers"
 msgstr "レイヤー"
 
-#: ../Pinta.Tools/Tools/TextTool.cs:188
+#: ../Pinta.Tools/Tools/TextTool.cs:199
 msgid "Left Align"
 msgstr "左揃え"
 
@@ -1043,6 +1035,9 @@ msgid ""
 "content. Hold Shift to rotate in steps. Use arrow keys to move selected "
 "content by a single pixel."
 msgstr ""
+"選択範囲を左クリックしてドラッグすると、選択したコンテンツを移動します。{0} "
+"を押し続けると、移動する代わりに拡大縮小します。選択範囲を右クリックしてドラッグすると、選択したコンテンツを回転させます。Shift "
+"キーを押しながら行うと、段階的に回転します。矢印キーを押すと、選択したコンテンツを 1 ピクセル移動します。"
 
 #. Translators: {0} is 'Ctrl', or a platform-specific key such as 'Command' on macOS.
 #: ../Pinta.Tools/Tools/MoveSelectionTool.cs:45
@@ -1053,6 +1048,9 @@ msgid ""
 "selection outline. Hold Shift to rotate in steps. Use arrow keys to move "
 "selection outline by a single pixel."
 msgstr ""
+"選択範囲を左クリックしてドラッグすると、選択したアウトラインを移動します。{0} "
+"を押し続けると、移動する代わりに拡大縮小します。選択範囲を右クリックしてドラッグすると、選択したアウトラインを回転させます。Shift "
+"キーを押しながら行うと、段階的に回転します。矢印キーを押すと、選択したアウトラインを 1 ピクセル移動します。"
 
 #. Translators: {0} is 'Ctrl', or a platform-specific key such as 'Command' on macOS.
 #: ../Pinta.Tools/Tools/ShapeTool.cs:49
@@ -1075,19 +1073,32 @@ msgid ""
 "starting at the edge.\n"
 "Press Enter to finalize the shape."
 msgstr ""
+"左クリックすると、プライマリ色で図形を描きます。\n"
+"図形を左クリックすると、制御点を追加します。\n"
+"制御点を左クリックしてドラッグすると、移動します。\n"
+"制御点を右クリックしてドラッグすると、テンションを変更できます。\n"
+"Shift を押しながらドラッグすると、角度にスナップします。\n"
+"矢印キーを押すと、選択した制御点を移動します。\n"
+"{0} + 左右キーを押すと、制御点を順番に選択できます。\n"
+"Delete を押すと、選択した制御点が削除されます。\n"
+"スペースを押すと、マウスの位置に新しい制御点を追加します。\n"
+"スペースを押しながら {0} を押すと、全く同じ位置に制御点を作成します。\n"
+"制御点を左クリックしながら {0} を押すと、全く同じ位置に新しい図形を作成します。\n"
+"画像の境界線の外側をクリックしながら {0} を押すと、境界線から始まる新しい図形を作成します。\n"
+"Enter を押すと、図形を確定します。"
 
 #: ../Pinta.Tools/Tools/PencilTool.cs:50
 msgid ""
 "Left click to draw freeform one-pixel wide lines with the primary color. "
 "Right click to use the secondary color."
-msgstr "左クリックでプライマリ色で１ピクセル幅の自由曲線を描画、右クリックはセカンダリ色。"
+msgstr "左クリックすると、プライマリ色で自由に 1 ピクセル幅の線を描画します。右クリックするとセカンダリ色を使用。"
 
 #: ../Pinta.Tools/Tools/FreeformShapeTool.cs:55
 #: ../Pinta.Tools/Tools/PaintBrushTool.cs:62
 msgid ""
 "Left click to draw with primary color, right click to draw with secondary "
 "color."
-msgstr "左クリックでプライマリ色で描画、右クリックでセカンダリ色。"
+msgstr "左クリックするとプライマリ色で描画、右クリックするとセカンダリ色。"
 
 #: ../Pinta.Tools/Tools/EraserTool.cs:57
 msgid ""
@@ -1098,19 +1109,19 @@ msgstr "左クリックで消去、右クリックでセカンダリ色。 "
 msgid ""
 "Left click to fill a region with the primary color, right click to fill with "
 "the secondary color."
-msgstr "左クリックでプライマリ色で塗りつぶし、右クリックでセカンダリ色。"
+msgstr "左クリックするとプライマリ色で塗りつぶし、右クリックでセカンダリ色。"
 
 #: ../Pinta.Tools/Tools/TextTool.cs:91
 msgid ""
 "Left click to place cursor, then type desired text. Text color is primary "
 "color."
-msgstr "左クリックして文字を入力します。文字はプライマリ色。"
+msgstr "左クリックするとカーソルを置き、目的のテキストを入力します。テキストの色はプライマリ色。"
 
 #: ../Pinta.Tools/Tools/RecolorTool.cs:59
 msgid ""
 "Left click to replace the secondary color with the primary color. Right "
 "click to reverse."
-msgstr "左クリックでセカンダリとプライマリカラーの入れ替え。右クリックで逆。"
+msgstr "左クリックするとセカンダリ色をプライマリ色に置き換える。右クリックで逆。"
 
 #: ../Pinta.Gui.Widgets/Widgets/StatusBarColorPaletteWidget.cs:220
 #: ../Pinta.Tools/Tools/ColorPickerTool.cs:54
@@ -1121,13 +1132,13 @@ msgstr "左クリックでプライマリ色、右クリックでセカンダリ
 msgid ""
 "Left click to set primary color. Right click to set secondary color. Middle "
 "click to choose palette color."
-msgstr "左クリックでプライマリ色をセット、右クリックでセカンダリ色をセット、中クリックでパレットカラーの選択。"
+msgstr "左クリックでプライマリ色を指定する。右クリックでセカンダリ色を指定する。中クリックでパレット色を選択。"
 
 #: ../Pinta.Tools/Tools/ZoomTool.cs:58
 msgid ""
 "Left click to zoom in. Right click to zoom out. Click and drag to zoom in "
 "selection."
-msgstr "左クリックでズームイン、右クリックでズームアウト、クリックとドラッグで選択した範囲にズームイン。"
+msgstr "左クリックで拡大。右クリックで縮小。クリックしてドラッグすると選択範囲を拡大。"
 
 #: ../Pinta.Tools/Editable/EditEngines/ArrowedEditEngine.cs:332
 msgid "Length"
@@ -1141,7 +1152,7 @@ msgstr "レベル"
 msgid "Levels Adjustment"
 msgstr "レベル補正"
 
-#: ../Pinta/Dialogs/AboutPintaTabPage.cs:50
+#: ../Pinta/Actions/Help/AboutDialogAction.cs:78
 msgid "License"
 msgstr "ライセンス"
 
@@ -1161,15 +1172,15 @@ msgstr "明度"
 msgid "Line/Curve"
 msgstr "直線/曲線"
 
-#: ../Pinta.Tools/Tools/GradientTool.cs:183
+#: ../Pinta.Tools/Tools/GradientTool.cs:186
 msgid "Linear Diamond Gradient"
 msgstr "菱形グラデーション"
 
-#: ../Pinta.Tools/Tools/GradientTool.cs:181
+#: ../Pinta.Tools/Tools/GradientTool.cs:184
 msgid "Linear Gradient"
 msgstr "線形グラデーション"
 
-#: ../Pinta.Tools/Tools/GradientTool.cs:182
+#: ../Pinta.Tools/Tools/GradientTool.cs:185
 msgid "Linear Reflected Gradient"
 msgstr "反射形グラデーション"
 
@@ -1184,7 +1195,7 @@ msgstr "明度"
 
 #: ../Pinta.Tools/Tools/MagicWandTool.cs:48
 msgid "Magic Wand Select"
-msgstr "魔法の杖"
+msgstr "自動選択"
 
 #: ../Pinta/Dialogs/ResizeCanvasDialog.cs:319
 #: ../Pinta/Dialogs/ResizeImageDialog.cs:155
@@ -1204,7 +1215,7 @@ msgid "Median"
 msgstr "中央値"
 
 #: ../Pinta.Core/Actions/LayerActions.cs:53
-#: ../Pinta.Core/Actions/LayerActions.cs:264
+#: ../Pinta.Core/Actions/LayerActions.cs:282
 msgid "Merge Layer Down"
 msgstr "レイヤーを統合"
 
@@ -1213,11 +1224,11 @@ msgstr "レイヤーを統合"
 msgid "Missing: {0} v{1}"
 msgstr "{0} v{1} がありません"
 
-#: ../Pinta.Tools/Tools/GradientTool.cs:194
+#: ../Pinta.Tools/Tools/GradientTool.cs:197
 msgid "Mode"
-msgstr ""
+msgstr "モード"
 
-#: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:880
+#: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:882
 msgid "Modified"
 msgstr "修正"
 
@@ -1227,21 +1238,21 @@ msgstr "詳細情報"
 
 #: ../Pinta.Effects/Effects/MotionBlurEffect.cs:24
 msgid "Motion Blur"
-msgstr "動作ぼかし"
+msgstr "モーションぼかし"
 
 #: ../Pinta.Core/Actions/LayerActions.cs:59
-#: ../Pinta.Core/Actions/LayerActions.cs:250
+#: ../Pinta.Core/Actions/LayerActions.cs:268
 msgid "Move Layer Down"
 msgstr "レイヤーを下に移動"
 
 #: ../Pinta.Core/Actions/LayerActions.cs:58
-#: ../Pinta.Core/Actions/LayerActions.cs:239
+#: ../Pinta.Core/Actions/LayerActions.cs:257
 msgid "Move Layer Up"
 msgstr "レイヤーを上に移動"
 
 #: ../Pinta.Tools/Tools/MoveSelectedTool.cs:43
 msgid "Move Selected Pixels"
-msgstr "選択した領域の画像を移動"
+msgstr "選択範囲の画像を移動"
 
 #: ../Pinta.Tools/Tools/MoveSelectionTool.cs:42
 msgid "Move Selection"
@@ -1268,9 +1279,9 @@ msgid "New"
 msgstr "新規"
 
 #: ../Pinta/Dialogs/NewImageDialog.cs:68
-#: ../Pinta.Core/Managers/WorkspaceManager.cs:178
+#: ../Pinta.Core/Managers/WorkspaceManager.cs:184
 msgid "New Image"
-msgstr "新規イメージ"
+msgstr "新規画像"
 
 #: ../Pinta.Core/Actions/FileActions.cs:51
 msgid "New Screenshot..."
@@ -1304,11 +1315,11 @@ msgstr "ノイズ"
 
 #: ../Pinta.Core/Effects/UserBlendOps.cs:33
 #: ../Pinta.Tools/Brushes/PlainBrush.cs:37
-#: ../Pinta.Tools/Tools/EraserTool.cs:267 ../Pinta.Tools/Tools/TextTool.cs:224
+#: ../Pinta.Tools/Tools/EraserTool.cs:267 ../Pinta.Tools/Tools/TextTool.cs:242
 msgid "Normal"
 msgstr "通常"
 
-#: ../Pinta.Core/Classes/BaseTool.cs:330
+#: ../Pinta.Core/Classes/BaseTool.cs:336
 msgid "Normal Blending"
 msgstr "ノーマルブレンド"
 
@@ -1316,7 +1327,7 @@ msgstr "ノーマルブレンド"
 msgid "Normal Size"
 msgstr "標準のサイズ"
 
-#: ../Pinta.Tools/Tools/TextTool.cs:225
+#: ../Pinta.Tools/Tools/TextTool.cs:243
 msgid "Normal and Outline"
 msgstr "アウトライン付き"
 
@@ -1345,14 +1356,14 @@ msgstr "開く"
 msgid "Open Curve Shape"
 msgstr "開いた曲線"
 
-#: ../Pinta.Core/Managers/WorkspaceManager.cs:225
+#: ../Pinta.Core/Managers/WorkspaceManager.cs:255
 msgid "Open Image"
-msgstr "イメージを開く"
+msgstr "画像を開く"
 
 #: ../Pinta/Actions/File/OpenDocumentAction.cs:50
 #: ../Pinta.Core/Actions/LayerActions.cs:165
 msgid "Open Image File"
-msgstr "イメージファイルを開く"
+msgstr "画像ファイルを開く"
 
 #: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:322
 msgid "Open Line/Curve Series"
@@ -1388,7 +1399,7 @@ msgid "Other"
 msgstr "その他"
 
 #: ../Pinta.Effects/Effects/OutlineEffect.cs:27
-#: ../Pinta.Tools/Tools/TextTool.cs:226
+#: ../Pinta.Tools/Tools/TextTool.cs:244
 msgid "Outline"
 msgstr "アウトライン"
 
@@ -1397,7 +1408,7 @@ msgstr "アウトライン"
 msgid "Outline Shape"
 msgstr "輪郭を描く"
 
-#: ../Pinta.Tools/Tools/TextTool.cs:241
+#: ../Pinta.Tools/Tools/TextTool.cs:259
 msgid "Outline width"
 msgstr "アウトライン幅"
 
@@ -1413,25 +1424,25 @@ msgstr "出力ヒストグラム"
 msgid "Overlay"
 msgstr "オーバーレイ"
 
-#: ../Pinta.Core/Classes/BaseTool.cs:331
+#: ../Pinta.Core/Classes/BaseTool.cs:337
 msgid "Overwrite"
 msgstr "上書き"
 
 #: ../Pinta.Tools/Tools/PaintBucketTool.cs:44
 msgid "Paint Bucket"
-msgstr "ペイント缶"
+msgstr "塗りつぶし"
 
 #: ../Pinta.Tools/Tools/PaintBrushTool.cs:60
 msgid "Paintbrush"
-msgstr "ペイントブラシ"
+msgstr "絵筆"
 
 #: ../Pinta.Core/Actions/EditActions.cs:138
 msgid "Palette"
 msgstr "パレット"
 
-#: ../Pinta.Core/Actions/EditActions.cs:365
+#: ../Pinta.Core/Actions/EditActions.cs:367
 msgid "Palette files"
-msgstr ""
+msgstr "パレットファイル"
 
 #: ../Pinta/Actions/Layers/RotateZoomLayerAction.cs:115
 #: ../Pinta.Tools/Tools/PanTool.cs:42
@@ -1446,16 +1457,12 @@ msgstr "貼り付け"
 
 #: ../Pinta.Core/Actions/EditActions.cs:66
 msgid "Paste Into New Image"
-msgstr "新規イメージに貼り付け"
+msgstr "新規画像に貼り付け"
 
 #: ../Pinta/Actions/Edit/PasteAction.cs:78
 #: ../Pinta.Core/Actions/EditActions.cs:65
 msgid "Paste Into New Layer"
 msgstr "新規レイヤーに貼り付け"
-
-#: ../Pinta/Dialogs/VersionInformationTabPage.cs:53
-msgid "Path"
-msgstr "パス名"
 
 #: Mono.Addins.Gui/gtk-gui/Mono.Addins.Gui.NewSiteDialog.cs:130
 msgid "Path:"
@@ -1484,7 +1491,7 @@ msgstr "パーセント"
 msgid "Photo"
 msgstr "写真"
 
-#: ../xdg/pinta.desktop.in.h:1
+#: ../xdg/pinta.desktop.in.h:1 ../Pinta/Actions/Help/AboutDialogAction.cs:54
 msgid "Pinta"
 msgstr "Pinta"
 
@@ -1504,7 +1511,7 @@ msgstr "Pinta 画像エディター"
 msgid "Pinta Website"
 msgstr "Pinta 公式サイト"
 
-#: ../Pinta/Actions/File/SaveDocumentImplementationAction.cs:185
+#: ../Pinta/Actions/File/SaveDocumentImplementationAction.cs:162
 msgid "Pinta does not support saving images in this file format."
 msgstr "Pintaはこの画像形式での保存をサポートしていません"
 
@@ -1516,14 +1523,17 @@ msgid ""
 "apply to your images, and also has the ability to create unlimited layers to "
 "help organize your creativity."
 msgstr ""
+"Pinta は、シンプルでありながら強力なインターフェイスを備えた、画像編集・描画・ペイントアプリケーションです。Pinta "
+"には、フリーハンド・長方形・円・線など、さまざまな描画ツールがあります。また、35 "
+"を超える画像効果があり、無制限のレイヤーを作成して制作物を整理できます。"
 
-#: ../Pinta.Core/Managers/WorkspaceManager.cs:386
+#: ../Pinta.Core/Managers/WorkspaceManager.cs:413
 msgid "Pinta supports the following file formats:"
-msgstr ""
+msgstr "Pinta は次のファイル形式をサポートしています:"
 
-#: ../Pinta.Core/Classes/Palette.cs:186
+#: ../Pinta.Core/Classes/Palette.cs:198
 msgid "Pinta supports the following palette formats:"
-msgstr ""
+msgstr "Pinta は次のパレット形式をサポートしています:"
 
 #: ../Pinta.Core/Actions/ViewActions.cs:72
 msgid "Pixel Grid"
@@ -1537,12 +1547,12 @@ msgstr "モザイク"
 msgid "Pixels"
 msgstr "ピクセル"
 
-#: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:523
-#: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:767
+#: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:525
+#: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:769
 msgid "Point Added"
 msgstr "ポイント追加"
 
-#: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:466
+#: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:468
 msgid "Point Deleted"
 msgstr "ポイント消去"
 
@@ -1569,11 +1579,7 @@ msgstr "プリセット:"
 
 #: ../Pinta/Dialogs/NewImageDialog.cs:318
 msgid "Preview"
-msgstr ""
-
-#: ../Pinta/Dialogs/AboutDialog.cs:154
-msgid "Previous contributors:"
-msgstr "これまでの貢献者:"
+msgstr "プレビュー"
 
 #: ../Pinta.Effects/Effects/WarpEffect.cs:25
 msgid "Primary"
@@ -1608,9 +1614,9 @@ msgstr "RGB"
 
 #: ../Pinta.Effects/Effects/RadialBlurEffect.cs:24
 msgid "Radial Blur"
-msgstr "放射状のぼかし"
+msgstr "放射状ぼかし"
 
-#: ../Pinta.Tools/Tools/GradientTool.cs:184
+#: ../Pinta.Tools/Tools/GradientTool.cs:187
 msgid "Radial Gradient"
 msgstr "放射状グラデーション"
 
@@ -1637,7 +1643,7 @@ msgstr "四角形"
 
 #: ../Pinta.Tools/Tools/RectangleSelectTool.cs:39
 msgid "Rectangle Select"
-msgstr "四角形選択"
+msgstr "四角選択"
 
 #: ../Pinta.Effects/Dialogs/Effects.LevelsDialog.cs:521
 #: ../Pinta.Effects/Dialogs/Effects.PosterizeDialog.cs:113
@@ -1680,7 +1686,7 @@ msgstr "オンラインリポジトリを登録"
 msgid "Registering repository"
 msgstr "リポジトリ登録"
 
-#: ../Pinta/Dialogs/AboutPintaTabPage.cs:50
+#: ../Pinta/Actions/Help/AboutDialogAction.cs:79
 msgid "Released under the MIT X11 License."
 msgstr "MIT X11 ライセンスの元で公開されました。"
 
@@ -1702,13 +1708,11 @@ msgstr "レンダリング"
 msgid "Rendering Effect"
 msgstr "効果のレンダリング"
 
-#: ../Pinta/Actions/File/SaveDocumentImplementationAction.cs:251
-#: ../Pinta/Actions/File/SaveDocumentImplementationAction.cs:255
 #: ../Pinta.Core/Classes/SelectionModeHandler.cs:47
 msgid "Replace"
-msgstr "置換(Replace)"
+msgstr "Replace"
 
-#: ../Pinta/Dialogs/ErrorDialog.cs:110
+#: ../Pinta/Dialogs/ErrorDialog.cs:109
 msgid "Report Bug...."
 msgstr "バグ報告..."
 
@@ -1760,18 +1764,18 @@ msgstr "画像サイズの変更..."
 msgid "Resize Palette"
 msgstr "パレットサイズの変更"
 
-#: ../Pinta.Tools/Tools/TextTool.cs:204
+#: ../Pinta.Tools/Tools/TextTool.cs:221
 msgid "Right Align"
 msgstr "右揃え"
 
 #: ../Pinta/Actions/Layers/RotateZoomLayerAction.cs:53
 #: ../Pinta/Actions/Layers/RotateZoomLayerAction.cs:107
 msgid "Rotate / Zoom Layer"
-msgstr "レイヤーの回転/ズーム"
+msgstr "レイヤーを回転/ズーム"
 
 #: ../Pinta.Core/Actions/LayerActions.cs:57
 msgid "Rotate / Zoom Layer..."
-msgstr "レイヤーの回転/ズーム..."
+msgstr "レイヤーを回転/ズーム..."
 
 #: ../Pinta.Core/Actions/ImageActions.cs:55
 #: ../Pinta.Core/HistoryItems/InvertHistoryItem.cs:49
@@ -1824,10 +1828,10 @@ msgstr "彩度"
 
 #: ../Pinta.Effects/Effects/RedEyeRemoveEffect.cs:74
 msgid "Saturation Percentage"
-msgstr ""
+msgstr "飽和率"
 
 #: ../Pinta/Actions/File/SaveDocumentImplementationAction.cs:75
-#: ../Pinta.Core/Actions/EditActions.cs:402
+#: ../Pinta.Core/Actions/EditActions.cs:403
 #: ../Pinta.Core/Actions/FileActions.cs:55
 msgid "Save"
 msgstr "保存"
@@ -1843,16 +1847,16 @@ msgstr "名前を付けて保存..."
 
 #: ../Pinta/Actions/File/SaveDocumentImplementationAction.cs:72
 msgid "Save Image File"
-msgstr "イメージファイルの保存"
+msgstr "画像ファイルの保存"
 
-#: ../Pinta.Core/Actions/EditActions.cs:399
+#: ../Pinta.Core/Actions/EditActions.cs:400
 msgid "Save Palette File"
 msgstr "パレットの保存"
 
 #: ../Pinta/Actions/File/CloseDocumentAction.cs:60
 #, csharp-format
 msgid "Save changes to image \"{0}\" before closing?"
-msgstr ""
+msgstr "閉じる前に画像 \"{0}\" への変更を保存しますか？"
 
 #: ../Pinta.Effects/Effects/CloudsEffect.cs:200
 msgid "Scale"
@@ -1893,7 +1897,7 @@ msgstr "形状"
 
 #: ../Pinta.Effects/Effects/SharpenEffect.cs:24
 msgid "Sharpen"
-msgstr "シャープ"
+msgstr "シャープ化"
 
 #: ../Pinta.Core/Extensions/ToolBoxButton.cs:52
 #: ../Pinta.Gui.Widgets/Widgets/StatusBarColorPaletteWidget.cs:230
@@ -1910,7 +1914,7 @@ msgstr "このメッセージを表示して終了。"
 
 #: ../Pinta.Core/Actions/ViewActions.cs:150
 msgid "Show/Hide"
-msgstr ""
+msgstr "表示/非表示"
 
 #: ../Pinta.Tools/Tools/ColorPickerTool.cs:225
 msgid "Single Pixel"
@@ -1922,15 +1926,15 @@ msgstr "サイズ"
 
 #: ../Pinta.Tools/Tools/EraserTool.cs:267
 msgid "Smooth"
-msgstr ""
+msgstr "なめらか"
 
 #: ../Pinta.Core/Effects/UserBlendOps.cs:44
 msgid "Soft Light"
-msgstr ""
+msgstr "ソフトライト"
 
 #: ../Pinta.Effects/Effects/SoftenPortraitEffect.cs:56
 msgid "Soften Portrait"
-msgstr "ポートレイトのぼかし"
+msgstr "ポートレイトぼかし"
 
 #: ../Pinta.Effects/Effects/SoftenPortraitEffect.cs:117
 msgid "Softness"
@@ -1950,7 +1954,7 @@ msgstr "四角形"
 
 #: ../Pinta.Core/Actions/ViewActions.cs:73
 msgid "Status Bar"
-msgstr ""
+msgstr "ステータスバー"
 
 #: ../Pinta.Effects/Effects/ReduceNoiseEffect.cs:96
 msgid "Strength"
@@ -1961,7 +1965,7 @@ msgstr "強度"
 #: ../Pinta.Effects/Effects/OutlineEffect.cs:35
 #: ../Pinta.Effects/Effects/ReliefEffect.cs:32
 msgid "Stylize"
-msgstr "様式"
+msgstr "様式化"
 
 #: ../Pinta.Tools/Tools/ColorPickerTool.cs:208
 msgid "Switch to Pencil tool"
@@ -1971,7 +1975,7 @@ msgstr "鉛筆ツールに切り替える"
 msgid "Switch to previous tool"
 msgstr "以前のツールに切り替える"
 
-#: ../Pinta/Actions/File/NewScreenshotAction.cs:51
+#: ../Pinta/Actions/File/NewScreenshotAction.cs:105
 msgid "Take Screenshot"
 msgstr "スクリーンショットの取得"
 
@@ -1983,19 +1987,13 @@ msgstr "テキスト"
 msgid "Text - Finalize"
 msgstr "テキスト - 決定"
 
-#: ../Pinta.Tools/Tools/TextTool.cs:217
+#: ../Pinta.Tools/Tools/TextTool.cs:235
 msgid "Text Style"
 msgstr "スタイル"
 
 #: ../Pinta/Actions/Edit/PasteAction.cs:160
 msgid "The clipboard does not contain an image."
 msgstr "クリップボードに画像がありません"
-
-#: ../Pinta/Actions/File/SaveDocumentImplementationAction.cs:242
-#, csharp-format
-msgid ""
-"The file already exists in \"{1}\". Replacing it will overwrite its contents."
-msgstr "同名のファイル \"{1}\" があります。ファイルが上書きされます。"
 
 #: Mono.Addins.Gui/gtk-gui/Mono.Addins.Gui.AddinInstallerDialog.cs:48
 msgid "The following add-ins will be installed:"
@@ -2075,10 +2073,6 @@ msgstr "タイルのサイズ"
 msgid "Tip: Right-click to remove control points."
 msgstr "右クリックで制御点を消去"
 
-#: ../Pinta/Dialogs/VersionInformationTabPage.cs:44
-msgid "Title"
-msgstr "タイトル"
-
 #: ../Pinta.Effects/Effects/RedEyeRemoveEffect.cs:70
 #: ../Pinta.Tools/Tools/FloodTool.cs:127
 #: ../Pinta.Tools/Tools/RecolorTool.cs:200
@@ -2091,9 +2085,9 @@ msgstr "ツール"
 
 #: ../Pinta.Core/Actions/ViewActions.cs:74
 msgid "Tool Box"
-msgstr ""
+msgstr "ツールボックス"
 
-#: ../Pinta/MainWindow.cs:364
+#: ../Pinta/MainWindow.cs:368
 msgid "Tool Windows"
 msgstr "ツールウィンドウ"
 
@@ -2109,13 +2103,9 @@ msgstr "転送マップ"
 msgid "Translate This Application"
 msgstr "このアプリケーションを翻訳"
 
-#: ../Pinta/Dialogs/AboutDialog.cs:168
-msgid "Translated by:"
-msgstr "翻訳:"
-
-#: ../Pinta.Tools/Tools/GradientTool.cs:201
+#: ../Pinta.Tools/Tools/GradientTool.cs:204
 msgid "Transparency Mode"
-msgstr ""
+msgstr "透明モード"
 
 #: ../Pinta/Dialogs/NewImageDialog.cs:289
 #: ../Pinta.Effects/Effects/WarpEffect.cs:29
@@ -2131,14 +2121,16 @@ msgstr "ねじれ"
 msgid "Type"
 msgstr "種類"
 
-#: ../Pinta/MainWindow.cs:540
+#: ../Pinta/MainWindow.cs:545
 #, csharp-format
 msgid ""
 "Unable to download image from {0}.\n"
 "Details: {1}"
 msgstr ""
+"{0} から画像をダウンロードできません。\n"
+"詳細: {1}"
 
-#: ../Pinta.Tools/Tools/TextTool.cs:176
+#: ../Pinta.Tools/Tools/TextTool.cs:184
 msgid "Underline"
 msgstr "下線"
 
@@ -2162,14 +2154,14 @@ msgstr "アドインのアンインストール"
 #: ../Pinta.Core/Classes/SelectionModeHandler.cs:49
 #, csharp-format
 msgid "Union (+) ({0} + Left Click)"
-msgstr ""
+msgstr "Union (+) ({0} + 左クリック)"
 
-#: ../Pinta.Core/Managers/WorkspaceManager.cs:112
+#: ../Pinta.Core/Managers/WorkspaceManager.cs:115
 #, csharp-format
 msgid "Unsaved Image {0}"
 msgstr "未保存の画像 {0}"
 
-#: ../Pinta.Core/Managers/WorkspaceManager.cs:220
+#: ../Pinta.Core/Managers/WorkspaceManager.cs:250
 msgid "Unsupported file format"
 msgstr "サポートされていないフォーマットです"
 
@@ -2207,20 +2199,11 @@ msgstr "使い方: pinta [files]"
 msgid ""
 "Use low quality for previews, small images, and small angles.  Use high "
 "quality for final quality, large images, and large angles."
-msgstr "プレビューは低品質(小さいイメージ、小さい角度)を使い、最終的な出力は高品質(大きなイメージ、大きな角度)にする。"
+msgstr "プレビューには低品質（小さい画像、小さい角度）を使用し、確定時には高品質（大きな画像、大きな角度）を使用します。"
 
-#: ../Pinta/Dialogs/AboutDialog.cs:181
+#: ../Pinta/Actions/Help/AboutDialogAction.cs:86
 msgid "Using some icons from:"
 msgstr "一部のアイコン:"
-
-#: ../Pinta/Dialogs/AboutPintaTabPage.cs:42
-#: ../Pinta/Dialogs/VersionInformationTabPage.cs:50
-msgid "Version"
-msgstr "バージョン"
-
-#: ../Pinta/Dialogs/AboutDialog.cs:277
-msgid "Version Info"
-msgstr "バージョン情報"
 
 #: ../Pinta/Dialogs/LayerPropertiesDialog.cs:195
 msgid "Visible"
@@ -2242,8 +2225,8 @@ msgstr "幅:"
 
 #: ../Pinta.Core/Actions/ViewActions.cs:103
 #: ../Pinta.Core/Actions/ViewActions.cs:282
-#: ../Pinta.Core/Classes/DocumentWorkspace.cs:315
-#: ../Pinta.Core/Classes/DocumentWorkspace.cs:323
+#: ../Pinta.Core/Classes/DocumentWorkspace.cs:324
+#: ../Pinta.Core/Classes/DocumentWorkspace.cs:332
 msgid "Window"
 msgstr "ウィンドウ"
 
@@ -2259,20 +2242,20 @@ msgstr "Xor"
 #: ../Pinta.Core/Classes/SelectionModeHandler.cs:52
 #, csharp-format
 msgid "Xor ({0} + Right Click)"
-msgstr ""
+msgstr "Xor ({0} + 右クリック)"
 
 #. Translators: {0} is the name of a file that the user does not have permission to open.
-#: ../Pinta.Core/Managers/WorkspaceManager.cs:405
+#: ../Pinta.Core/Managers/WorkspaceManager.cs:432
 #, csharp-format
 msgid "You do not have access to '{0}'."
-msgstr ""
+msgstr "'{0}' にアクセスできません。"
 
 #. Translators: {0} is the name of a file that the user does not have write permission for.
-#: ../Pinta/Actions/File/SaveDocumentImplementationAction.cs:211
+#: ../Pinta/Actions/File/SaveDocumentImplementationAction.cs:188
 #, csharp-format
 msgid ""
 "You do not have access to modify '{0}'. The file or folder may be read-only."
-msgstr ""
+msgstr "'{0}' を変更するためのアクセス権がありません。ファイルまたはフォルダが読み取り専用である可能性があります。"
 
 #: ../Pinta/Actions/Layers/RotateZoomLayerAction.cs:118
 #: ../Pinta.Effects/Effects/JuliaFractalEffect.cs:136
@@ -2283,7 +2266,7 @@ msgstr "ズーム"
 
 #: ../Pinta.Effects/Effects/ZoomBlurEffect.cs:24
 msgid "Zoom Blur"
-msgstr "ズームのぼかし"
+msgstr "ズームぼかし"
 
 #: ../Pinta.Core/Actions/ViewActions.cs:65
 msgid "Zoom In"
@@ -2297,27 +2280,27 @@ msgstr "縮小"
 msgid "Zoom to Selection"
 msgstr "選択範囲に合わせる"
 
-#: ../Pinta/MainWindow.cs:339
+#: ../Pinta/MainWindow.cs:343
 msgid "_Adjustments"
 msgstr "調整(_A)"
 
-#: ../Pinta/MainWindow.cs:324
+#: ../Pinta/MainWindow.cs:328
 msgid "_Edit"
 msgstr "編集(_E)"
 
-#: ../Pinta/MainWindow.cs:320
+#: ../Pinta/MainWindow.cs:324
 msgid "_File"
 msgstr "ファイル(_F)"
 
-#: ../Pinta/MainWindow.cs:358
+#: ../Pinta/MainWindow.cs:362
 msgid "_Help"
 msgstr "ヘルプ(_H)"
 
-#: ../Pinta/MainWindow.cs:332
+#: ../Pinta/MainWindow.cs:336
 msgid "_Image"
 msgstr "画像(_I)"
 
-#: ../Pinta/MainWindow.cs:336
+#: ../Pinta/MainWindow.cs:340
 msgid "_Layers"
 msgstr "レイヤ(_L)"
 
@@ -2325,21 +2308,21 @@ msgstr "レイヤ(_L)"
 msgid "_Uninstall..."
 msgstr "アンインストール(_U)..."
 
-#: ../Pinta/MainWindow.cs:328
+#: ../Pinta/MainWindow.cs:332
 msgid "_View"
 msgstr "表示(_V)"
 
-#: ../Pinta/MainWindow.cs:354
+#: ../Pinta/MainWindow.cs:358
 msgid "_Window"
 msgstr "ウィンドウ(_W)"
 
-#: ../Pinta/Dialogs/AboutPintaTabPage.cs:56
+#: ../Pinta/Actions/Help/AboutDialogAction.cs:71
 msgid "by Pinta contributors"
 msgstr "Pinta 貢献者"
 
 #: ../xdg/pinta.desktop.in.h:5
 msgid "draw;drawing;paint;painting;graphics;raster;2d;"
-msgstr ""
+msgstr "描画;ペイント;グラフィックス;ラスター;2d;"
 
 #: ../Pinta/Main.cs:62
 msgid "number of threads to use for rendering"
@@ -2354,7 +2337,7 @@ msgstr "レンダリングに使用するスレッド数"
 msgid "pixels"
 msgstr "ピクセル"
 
-#: ../Pinta/Dialogs/AboutDialog.cs:165
+#: ../Pinta/Actions/Help/AboutDialogAction.cs:62
 msgid "translator-credits"
 msgstr ""
 "Launchpad Contributions:\n"
@@ -2362,6 +2345,7 @@ msgstr ""
 "  Jonathan Pobst https://launchpad.net/~jpobst\n"
 "  Kiyotaka Nishibori https://launchpad.net/~ml-nishibori-kiyotaka\n"
 "  OTHUBO Jumpei https://launchpad.net/~otsubo-jumpei\n"
+"  UTUMI Hirosi https://launchpad.net/~utuhiro78\n"
 "  YannUbuntu https://launchpad.net/~yannubuntu\n"
 "  Yuki Kodama https://launchpad.net/~kuy\n"
 "  Yutaka Aiko https://launchpad.net/~ubon\n"
@@ -2372,16 +2356,16 @@ msgstr ""
 #: ../Pinta.Tools/Tools/CloneStampTool.cs:47
 #, csharp-format
 msgid "{0} + left click to set origin, left click to paint."
-msgstr ""
+msgstr "{0} + 左クリックで原点を設定し、左クリックでペイント。"
 
 #. Translators: this is the auto-generated name for a duplicated layer.
 #. {0} is the name of the source layer. Example: "Layer 3 copy".
 #: ../Pinta.Core/Classes/DocumentLayers.cs:234
 #, csharp-format
 msgid "{0} copy"
-msgstr ""
+msgstr "{0} コピー"
 
-#: ../Pinta.Core/ImageFormats/FormatDescriptor.cs:93
+#: ../Pinta.Core/ImageFormats/FormatDescriptor.cs:110
 #, csharp-format
 msgid "{0} image ({1})"
 msgstr "{0} 画像 ({1})"
@@ -2390,7 +2374,7 @@ msgstr "{0} 画像 ({1})"
 #: ../Pinta.Core/PaletteFormats/PaletteDescriptor.cs:62
 #, csharp-format
 msgid "{0} palette ({1})"
-msgstr ""
+msgstr "{0} パレット ({1})"
 
 #: Mono.Addins.Gui/Mono.Addins.Gui/AddinManagerDialog.cs:363
 #, csharp-format
@@ -2405,6 +2389,25 @@ msgstr[0] "{0} 個のアップデートがあります"
 msgid "{0}%"
 msgstr "{0}%"
 
+#~ msgid "Translated by:"
+#~ msgstr "翻訳:"
+
+#~ msgid "Title"
+#~ msgstr "タイトル"
+
+#~ msgid "Version"
+#~ msgstr "バージョン"
+
+#~ msgid "Version Info"
+#~ msgstr "バージョン情報"
+
+#~ msgid "Path"
+#~ msgstr "パス名"
+
+#, csharp-format
+#~ msgid "A file named \"{0}\" already exists. Do you want to replace it?"
+#~ msgstr "同名のファイル \"{0}\" があります。置き換えますか？"
+
 #~ msgid "Ctrl-left click to set origin, left click to paint."
 #~ msgstr "Ctrl+左クリックで画像を取得、左クリックで描画。"
 
@@ -2417,8 +2420,19 @@ msgstr "{0}%"
 #~ msgid "No tool selected."
 #~ msgstr "ツールが選択されていません。"
 
+#~ msgid "Contributors to this release:"
+#~ msgstr "このリリースの貢献者:"
+
 #~ msgid "Powered by Mono:"
 #~ msgstr "Powered by Mono:"
+
+#~ msgid "Previous contributors:"
+#~ msgstr "これまでの貢献者:"
+
+#, csharp-format
+#~ msgid ""
+#~ "The file already exists in \"{1}\". Replacing it will overwrite its contents."
+#~ msgstr "同名のファイル \"{1}\" があります。ファイルが上書きされます。"
 
 #~ msgid ""
 #~ "Left click to draw a shape with the primary color.\n"
@@ -2451,3 +2465,6 @@ msgstr "{0}%"
 #~ "Ctrl を押しながら制御点を左クリックで新しい形状のためのポイントを正確に同じ場所に作成。\n"
 #~ "Ctrl を押しながら図形外を左クリックすると新しい形状を作成。\n"
 #~ "Enter で形状を決定。"
+
+#~ msgid "Copy Version Info"
+#~ msgstr "バージョン情報をコピー"

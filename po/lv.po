@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: pinta\n"
 "Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
-"POT-Creation-Date: 2022-01-11 23:44-0500\n"
+"POT-Creation-Date: 2022-11-04 22:46-0400\n"
 "PO-Revision-Date: 2012-04-02 01:07+0000\n"
 "Last-Translator: Cameron White <cameronwhite91@gmail.com>\n"
 "Language-Team: Latvian <lv@li.org>\n"
@@ -15,8 +15,8 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=3; plural=n%10==1 && n%100!=11 ? 0 : n != 0 ? 1 : 2;\n"
-"X-Launchpad-Export-Date: 2022-01-14 01:09+0000\n"
-"X-Generator: Launchpad (build 0072e2709f85567cc6c8d33e98acde9fcc09f491)\n"
+"X-Launchpad-Export-Date: 2022-11-05 02:52+0000\n"
+"X-Generator: Launchpad (build 83f7123b02a2b50a64bc29e7e35197179a885279)\n"
 
 #: Mono.Addins.Gui/Mono.Addins.Gui/InstallDialog.cs:142
 msgid " (in user directory)"
@@ -52,12 +52,7 @@ msgstr ""
 msgid "9 x 9 Region"
 msgstr ""
 
-#: ../Pinta/Actions/File/SaveDocumentImplementationAction.cs:241
-#, csharp-format
-msgid "A file named \"{0}\" already exists. Do you want to replace it?"
-msgstr "Fails \"{0}\" jau eksistē. Vai vēlaties to pārrakstīt?"
-
-#: ../Pinta/MainWindow.cs:349
+#: ../Pinta/MainWindow.cs:353
 msgid "A_dd-ins"
 msgstr ""
 
@@ -65,13 +60,13 @@ msgstr ""
 msgid "About"
 msgstr "Par programmu"
 
-#: ../Pinta/Dialogs/AboutDialog.cs:260
+#: ../Pinta/Actions/Help/AboutDialogAction.cs:52
 msgid "About Pinta"
 msgstr "Par Pinta"
 
 #: ../Pinta/Actions/Edit/PasteAction.cs:130
 #: ../Pinta.Core/Actions/LayerActions.cs:50
-#: ../Pinta.Core/Actions/LayerActions.cs:312
+#: ../Pinta.Core/Actions/LayerActions.cs:330
 msgid "Add New Layer"
 msgstr "Pievienot jaunu slāni"
 
@@ -99,7 +94,7 @@ msgstr ""
 msgid "Add-in packages"
 msgstr ""
 
-#: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:801
+#: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:803
 msgid "Added"
 msgstr ""
 
@@ -111,8 +106,8 @@ msgstr ""
 msgid "After select"
 msgstr "Pēc izvēles:"
 
-#: ../Pinta/Actions/File/OpenDocumentAction.cs:71
-#: ../Pinta.Core/Actions/EditActions.cs:378
+#: ../Pinta/Actions/File/OpenDocumentAction.cs:83
+#: ../Pinta.Core/Actions/EditActions.cs:380
 msgid "All files"
 msgstr "Visi faili"
 
@@ -148,11 +143,11 @@ msgstr "Leņķis"
 msgid "Antialias"
 msgstr "Nogludināt"
 
-#: ../Pinta.Core/Classes/BaseTool.cs:346
+#: ../Pinta.Core/Classes/BaseTool.cs:352
 msgid "Antialiasing Off"
 msgstr "Malu pludināšana izslēgta"
 
-#: ../Pinta.Core/Classes/BaseTool.cs:345
+#: ../Pinta.Core/Classes/BaseTool.cs:351
 msgid "Antialiasing On"
 msgstr "Malu pludināšana Ieslēgta"
 
@@ -186,7 +181,7 @@ msgstr "Automātiskie Līmeņi"
 msgid "Available in repository:"
 msgstr ""
 
-#: ../Pinta.Core/Managers/WorkspaceManager.cs:169
+#: ../Pinta.Core/Managers/WorkspaceManager.cs:175
 msgid "Background"
 msgstr "Fons"
 
@@ -198,7 +193,7 @@ msgstr ""
 msgid "Background:"
 msgstr ""
 
-#: ../Pinta/Dialogs/AboutDialog.cs:174
+#: ../Pinta/Actions/Help/AboutDialogAction.cs:82
 msgid "Based on the work of Paint.NET:"
 msgstr "Veidots uz Paint.NET bāzes"
 
@@ -232,7 +227,7 @@ msgstr "Zils "
 msgid "Blurs"
 msgstr "Izpludināšana"
 
-#: ../Pinta.Tools/Tools/TextTool.cs:160
+#: ../Pinta.Tools/Tools/TextTool.cs:162
 msgid "Bold"
 msgstr "Treknraksts"
 
@@ -275,7 +270,7 @@ msgstr "Procentuāli:"
 #: ../Pinta/Actions/File/OpenDocumentAction.cs:54
 #: ../Pinta/Actions/File/SaveDocumentImplementationAction.cs:76
 #: ../Pinta.Core/Actions/EditActions.cs:362
-#: ../Pinta.Core/Actions/EditActions.cs:403
+#: ../Pinta.Core/Actions/EditActions.cs:404
 #: ../Pinta.Core/Actions/LayerActions.cs:169
 msgid "Cancel"
 msgstr ""
@@ -288,7 +283,7 @@ msgstr ""
 msgid "Cell Size"
 msgstr "Šūnas izmērs"
 
-#: ../Pinta.Tools/Tools/TextTool.cs:196
+#: ../Pinta.Tools/Tools/TextTool.cs:210
 msgid "Center Align"
 msgstr "Līdzināt pēc vidus"
 
@@ -304,7 +299,7 @@ msgstr "Centrēts"
 msgid "Centimeters"
 msgstr "Centimetri"
 
-#: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:338
+#: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:339
 msgid "Changed Shape Type"
 msgstr ""
 
@@ -344,7 +339,7 @@ msgid ""
 "circle."
 msgstr ""
 
-#: ../Pinta.Tools/Tools/GradientTool.cs:53
+#: ../Pinta.Tools/Tools/GradientTool.cs:51
 msgid ""
 "Click and drag to draw gradient from primary to secondary color.  Right "
 "click to reverse."
@@ -432,7 +427,7 @@ msgstr ""
 msgid "Color Dodge"
 msgstr ""
 
-#: ../Pinta.Tools/Tools/GradientTool.cs:200
+#: ../Pinta.Tools/Tools/GradientTool.cs:203
 msgid "Color Mode"
 msgstr ""
 
@@ -452,7 +447,7 @@ msgstr "Krasu piesātinājums"
 msgid "Coloring"
 msgstr "Krāsošana"
 
-#: ../Pinta.Tools/Tools/GradientTool.cs:185
+#: ../Pinta.Tools/Tools/GradientTool.cs:188
 msgid "Conical Gradient"
 msgstr "Koniskā krāsu pāreja"
 
@@ -469,10 +464,6 @@ msgstr "Nepārtraukts"
 msgid "Contrast"
 msgstr "Kontrasts"
 
-#: ../Pinta/Dialogs/AboutDialog.cs:142
-msgid "Contributors to this release:"
-msgstr ""
-
 #: ../Pinta.Core/Actions/EditActions.cs:62
 msgid "Copy"
 msgstr "Kopēt"
@@ -481,22 +472,18 @@ msgstr "Kopēt"
 msgid "Copy Merged"
 msgstr ""
 
-#: ../Pinta/Dialogs/VersionInformationTabPage.cs:67
-msgid "Copy Version Info"
-msgstr ""
-
-#: ../Pinta/Dialogs/AboutPintaTabPage.cs:56
+#: ../Pinta/Actions/Help/AboutDialogAction.cs:70
 msgid "Copyright"
 msgstr "Autortiesības"
 
-#: ../Pinta/Actions/File/NewScreenshotAction.cs:70
+#: ../Pinta/Actions/File/NewScreenshotAction.cs:124
 #, csharp-format
 msgid "Could not obtain the size of display '{0}'"
 msgstr ""
 
-#: ../Pinta.Core/Classes/Palette.cs:185
-#: ../Pinta.Core/Managers/WorkspaceManager.cs:376
-#: ../Pinta.Core/Managers/WorkspaceManager.cs:385
+#: ../Pinta.Core/Classes/Palette.cs:197
+#: ../Pinta.Core/Managers/WorkspaceManager.cs:403
+#: ../Pinta.Core/Managers/WorkspaceManager.cs:412
 #, csharp-format
 msgid "Could not open file: {0}"
 msgstr "Nevar atvērt failu: {0}"
@@ -506,7 +493,7 @@ msgid "Coverage"
 msgstr "Pārklājums"
 
 #: ../Pinta.Core/Actions/ImageActions.cs:47
-#: ../Pinta.Core/Actions/ImageActions.cs:292
+#: ../Pinta.Core/Actions/ImageActions.cs:286
 msgid "Crop to Selection"
 msgstr "Apcirst līdz iezīmējumam"
 
@@ -535,16 +522,16 @@ msgstr ""
 msgid "Dash"
 msgstr ""
 
-#: ../Pinta/Actions/File/NewScreenshotAction.cs:52
+#: ../Pinta/Actions/File/NewScreenshotAction.cs:106
 msgid "Delay before taking a screenshot (seconds):"
 msgstr "Laiks pirms uzņemt ekrān-šāviņu (sekundēs):"
 
 #: ../Pinta.Core/Actions/LayerActions.cs:51
-#: ../Pinta.Core/Actions/LayerActions.cs:295
+#: ../Pinta.Core/Actions/LayerActions.cs:313
 msgid "Delete Layer"
 msgstr "Dzēst slāni"
 
-#: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:480
+#: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:482
 msgid "Deleted"
 msgstr ""
 
@@ -556,7 +543,7 @@ msgstr "Noņemt iezīmējumu"
 msgid "Deselect All"
 msgstr "Atcelt visu iezīmēto"
 
-#: ../Pinta/Dialogs/ErrorDialog.cs:99
+#: ../Pinta/Dialogs/ErrorDialog.cs:98
 #: Mono.Addins.Gui/gtk-gui/Mono.Addins.Gui.ErrorDialog.cs:92
 #: Mono.Addins.Gui/gtk-gui/Mono.Addins.Gui.ProgressDialog.cs:66
 msgid "Details"
@@ -597,7 +584,7 @@ msgstr "Nepārslēgt rīkus"
 msgid "Don't change canvas size"
 msgstr "Nemainīt audekla izmēru"
 
-#: ../Pinta/MainWindow.cs:539
+#: ../Pinta/MainWindow.cs:544
 msgid "Download failed"
 msgstr ""
 
@@ -605,16 +592,16 @@ msgstr ""
 msgid "Download size"
 msgstr ""
 
-#: ../Pinta/MainWindow.cs:520
+#: ../Pinta/MainWindow.cs:525
 msgid "Downloading Image"
 msgstr ""
 
 #: ../Pinta.Core/Actions/LayerActions.cs:52
-#: ../Pinta.Core/Actions/LayerActions.cs:286
+#: ../Pinta.Core/Actions/LayerActions.cs:304
 msgid "Duplicate Layer"
 msgstr "Dublēt slāni"
 
-#: ../xdg/pinta.desktop.in.h:2
+#: ../xdg/pinta.desktop.in.h:2 ../Pinta/Actions/Help/AboutDialogAction.cs:58
 msgid "Easily create and edit images"
 msgstr ""
 
@@ -626,7 +613,7 @@ msgstr "Malu uzvedība"
 msgid "Edge Detect"
 msgstr "Malu Effekts"
 
-#: ../Pinta/MainWindow.cs:342
+#: ../Pinta/MainWindow.cs:346
 msgid "Effe_cts"
 msgstr "Efe_kti"
 
@@ -657,7 +644,7 @@ msgstr "Dzēst iezīmējumu"
 msgid "Eraser"
 msgstr "Dzēšgumija"
 
-#: ../Pinta/Actions/File/SaveDocumentImplementationAction.cs:186
+#: ../Pinta/Actions/File/SaveDocumentImplementationAction.cs:163
 msgid "Error"
 msgstr "Kļūda"
 
@@ -680,15 +667,20 @@ msgstr "Izvērst audeklu"
 msgid "Factor"
 msgstr "Koeficients"
 
-#: ../Pinta.Core/Managers/WorkspaceManager.cs:403
+#: ../Pinta/Actions/File/NewScreenshotAction.cs:95
+msgid "Failed to access XDG Desktop Portals"
+msgstr ""
+
+#: ../Pinta.Core/Managers/WorkspaceManager.cs:430
 msgid "Failed to open image"
 msgstr ""
 
-#: ../Pinta/Actions/File/SaveDocumentImplementationAction.cs:209
+#: ../Pinta/Actions/File/SaveDocumentImplementationAction.cs:186
 msgid "Failed to save image"
 msgstr ""
 
-#: ../Pinta/Actions/File/NewScreenshotAction.cs:69
+#: ../Pinta/Actions/File/NewScreenshotAction.cs:94
+#: ../Pinta/Actions/File/NewScreenshotAction.cs:123
 msgid "Failed to take screenshot"
 msgstr ""
 
@@ -696,7 +688,7 @@ msgstr ""
 msgid "File a Bug"
 msgstr "Ziņot par kļūdu"
 
-#: ../Pinta.Tools/Tools/TextTool.cs:227
+#: ../Pinta.Tools/Tools/TextTool.cs:245
 msgid "Fill Background"
 msgstr ""
 
@@ -720,8 +712,8 @@ msgstr "Iekrāsošanas veids"
 msgid "Fill and Outline Shape"
 msgstr "Pildīt un ārlīnija"
 
-#: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:1100
-#: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:1471
+#: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:1102
+#: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:1473
 msgid "Finalized"
 msgstr ""
 
@@ -730,7 +722,7 @@ msgid "Finish Pixels"
 msgstr "Pabeigtie piksleļi"
 
 #: ../Pinta.Core/Actions/ImageActions.cs:56
-#: ../Pinta.Core/Actions/ImageActions.cs:156
+#: ../Pinta.Core/Actions/ImageActions.cs:152
 msgid "Flatten"
 msgstr "Placināt"
 
@@ -806,8 +798,8 @@ msgstr "Globāls"
 msgid "Glow"
 msgstr "Kvēlošana"
 
-#: ../Pinta.Tools/Tools/GradientTool.cs:51
-#: ../Pinta.Tools/Tools/GradientTool.cs:175
+#: ../Pinta.Tools/Tools/GradientTool.cs:49
+#: ../Pinta.Tools/Tools/GradientTool.cs:178
 msgid "Gradient"
 msgstr "Krāsu pāreja"
 
@@ -854,7 +846,7 @@ msgstr ""
 msgid "Hue / Saturation"
 msgstr "Tonis / Piesātinājums"
 
-#: ../Pinta/Actions/File/SaveDocumentImplementationAction.cs:200
+#: ../Pinta/Actions/File/SaveDocumentImplementationAction.cs:177
 msgid "ICO files can not be larger than 255 x 255 pixels."
 msgstr ""
 
@@ -879,7 +871,7 @@ msgid "Image cannot be pasted"
 msgstr ""
 
 #: ../Pinta/Actions/File/OpenDocumentAction.cs:58
-#: ../Pinta.Core/Actions/LayerActions.cs:182
+#: ../Pinta.Core/Actions/LayerActions.cs:196
 msgid "Image files"
 msgstr "Attēla faili"
 
@@ -887,11 +879,11 @@ msgstr "Attēla faili"
 msgid "Image larger than canvas"
 msgstr ""
 
-#: ../Pinta/Actions/File/SaveDocumentImplementationAction.cs:199
+#: ../Pinta/Actions/File/SaveDocumentImplementationAction.cs:176
 msgid "Image too large"
 msgstr ""
 
-#: ../Pinta.Core/Actions/LayerActions.cs:206
+#: ../Pinta.Core/Actions/LayerActions.cs:224
 msgid "Import From File"
 msgstr "Ievietot no faila"
 
@@ -975,11 +967,11 @@ msgid "Invert Colors"
 msgstr "Invertēt krāsas"
 
 #: ../Pinta.Core/Actions/EditActions.cs:69
-#: ../Pinta.Core/Actions/EditActions.cs:456
+#: ../Pinta.Core/Actions/EditActions.cs:460
 msgid "Invert Selection"
 msgstr "Invertēt iezīmējumu"
 
-#: ../Pinta.Tools/Tools/TextTool.cs:168
+#: ../Pinta.Tools/Tools/TextTool.cs:173
 msgid "Italic"
 msgstr "Slīpraksts"
 
@@ -1003,7 +995,7 @@ msgstr "Lasso Iezīmēšana"
 msgid "Layer"
 msgstr "Slānis"
 
-#: ../Pinta.Gui.Widgets/Widgets/Layers/LayersListWidget.cs:286
+#: ../Pinta.Gui.Widgets/Widgets/Layers/LayersListWidget.cs:293
 msgid "Layer Hidden"
 msgstr ""
 
@@ -1020,7 +1012,7 @@ msgstr "Slāņa Opcijas"
 msgid "Layer Properties..."
 msgstr "Slāņa īpašības"
 
-#: ../Pinta.Gui.Widgets/Widgets/Layers/LayersListWidget.cs:286
+#: ../Pinta.Gui.Widgets/Widgets/Layers/LayersListWidget.cs:293
 msgid "Layer Shown"
 msgstr ""
 
@@ -1034,7 +1026,7 @@ msgstr ""
 msgid "Layers"
 msgstr "Slāņi"
 
-#: ../Pinta.Tools/Tools/TextTool.cs:188
+#: ../Pinta.Tools/Tools/TextTool.cs:199
 msgid "Left Align"
 msgstr "Līdzināt pa kreisi"
 
@@ -1154,7 +1146,7 @@ msgstr "Līmeņi"
 msgid "Levels Adjustment"
 msgstr "Pielāgot līmeņus"
 
-#: ../Pinta/Dialogs/AboutPintaTabPage.cs:50
+#: ../Pinta/Actions/Help/AboutDialogAction.cs:78
 msgid "License"
 msgstr "Licence"
 
@@ -1174,15 +1166,15 @@ msgstr ""
 msgid "Line/Curve"
 msgstr ""
 
-#: ../Pinta.Tools/Tools/GradientTool.cs:183
+#: ../Pinta.Tools/Tools/GradientTool.cs:186
 msgid "Linear Diamond Gradient"
 msgstr "Dimantveida krāsu pāreja"
 
-#: ../Pinta.Tools/Tools/GradientTool.cs:181
+#: ../Pinta.Tools/Tools/GradientTool.cs:184
 msgid "Linear Gradient"
 msgstr "Lineāra krāsu pāreja"
 
-#: ../Pinta.Tools/Tools/GradientTool.cs:182
+#: ../Pinta.Tools/Tools/GradientTool.cs:185
 msgid "Linear Reflected Gradient"
 msgstr "Lineāra, atstarota krāsu pāreja"
 
@@ -1217,7 +1209,7 @@ msgid "Median"
 msgstr "Mediāna"
 
 #: ../Pinta.Core/Actions/LayerActions.cs:53
-#: ../Pinta.Core/Actions/LayerActions.cs:264
+#: ../Pinta.Core/Actions/LayerActions.cs:282
 msgid "Merge Layer Down"
 msgstr "Apvienot ar zemāko slāni"
 
@@ -1226,11 +1218,11 @@ msgstr "Apvienot ar zemāko slāni"
 msgid "Missing: {0} v{1}"
 msgstr ""
 
-#: ../Pinta.Tools/Tools/GradientTool.cs:194
+#: ../Pinta.Tools/Tools/GradientTool.cs:197
 msgid "Mode"
 msgstr ""
 
-#: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:880
+#: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:882
 msgid "Modified"
 msgstr ""
 
@@ -1243,12 +1235,12 @@ msgid "Motion Blur"
 msgstr "Virziena izpludināšana"
 
 #: ../Pinta.Core/Actions/LayerActions.cs:59
-#: ../Pinta.Core/Actions/LayerActions.cs:250
+#: ../Pinta.Core/Actions/LayerActions.cs:268
 msgid "Move Layer Down"
 msgstr "Pārvietot Slāni uz Leju"
 
 #: ../Pinta.Core/Actions/LayerActions.cs:58
-#: ../Pinta.Core/Actions/LayerActions.cs:239
+#: ../Pinta.Core/Actions/LayerActions.cs:257
 msgid "Move Layer Up"
 msgstr "Pārvietot Slāni Uz Augšu"
 
@@ -1279,7 +1271,7 @@ msgid "New"
 msgstr "Jauns"
 
 #: ../Pinta/Dialogs/NewImageDialog.cs:68
-#: ../Pinta.Core/Managers/WorkspaceManager.cs:178
+#: ../Pinta.Core/Managers/WorkspaceManager.cs:184
 msgid "New Image"
 msgstr "Jauna Bilde"
 
@@ -1315,11 +1307,11 @@ msgstr "Troksnis"
 
 #: ../Pinta.Core/Effects/UserBlendOps.cs:33
 #: ../Pinta.Tools/Brushes/PlainBrush.cs:37
-#: ../Pinta.Tools/Tools/EraserTool.cs:267 ../Pinta.Tools/Tools/TextTool.cs:224
+#: ../Pinta.Tools/Tools/EraserTool.cs:267 ../Pinta.Tools/Tools/TextTool.cs:242
 msgid "Normal"
 msgstr "Normāls"
 
-#: ../Pinta.Core/Classes/BaseTool.cs:330
+#: ../Pinta.Core/Classes/BaseTool.cs:336
 msgid "Normal Blending"
 msgstr "Parastā Jaukšana"
 
@@ -1327,7 +1319,7 @@ msgstr "Parastā Jaukšana"
 msgid "Normal Size"
 msgstr "Normāla izmēra"
 
-#: ../Pinta.Tools/Tools/TextTool.cs:225
+#: ../Pinta.Tools/Tools/TextTool.cs:243
 msgid "Normal and Outline"
 msgstr "Normāla Ārlīnija"
 
@@ -1356,7 +1348,7 @@ msgstr "Atvērt"
 msgid "Open Curve Shape"
 msgstr ""
 
-#: ../Pinta.Core/Managers/WorkspaceManager.cs:225
+#: ../Pinta.Core/Managers/WorkspaceManager.cs:255
 msgid "Open Image"
 msgstr "Atvērt attēlu"
 
@@ -1399,7 +1391,7 @@ msgid "Other"
 msgstr ""
 
 #: ../Pinta.Effects/Effects/OutlineEffect.cs:27
-#: ../Pinta.Tools/Tools/TextTool.cs:226
+#: ../Pinta.Tools/Tools/TextTool.cs:244
 msgid "Outline"
 msgstr "Kontūra"
 
@@ -1408,7 +1400,7 @@ msgstr "Kontūra"
 msgid "Outline Shape"
 msgstr "Tikai ārlīnija"
 
-#: ../Pinta.Tools/Tools/TextTool.cs:241
+#: ../Pinta.Tools/Tools/TextTool.cs:259
 msgid "Outline width"
 msgstr "Ārlīnijas Platums"
 
@@ -1424,7 +1416,7 @@ msgstr "Izvadīt Histogrammu"
 msgid "Overlay"
 msgstr ""
 
-#: ../Pinta.Core/Classes/BaseTool.cs:331
+#: ../Pinta.Core/Classes/BaseTool.cs:337
 msgid "Overwrite"
 msgstr "Pārrakstīt"
 
@@ -1440,7 +1432,7 @@ msgstr "Ota"
 msgid "Palette"
 msgstr "Palete"
 
-#: ../Pinta.Core/Actions/EditActions.cs:365
+#: ../Pinta.Core/Actions/EditActions.cs:367
 msgid "Palette files"
 msgstr ""
 
@@ -1463,10 +1455,6 @@ msgstr "Ielīmēt jaunā attēlā"
 #: ../Pinta.Core/Actions/EditActions.cs:65
 msgid "Paste Into New Layer"
 msgstr "Iekopēt jaunā slānī"
-
-#: ../Pinta/Dialogs/VersionInformationTabPage.cs:53
-msgid "Path"
-msgstr "Ceļš"
 
 #: Mono.Addins.Gui/gtk-gui/Mono.Addins.Gui.NewSiteDialog.cs:130
 msgid "Path:"
@@ -1495,7 +1483,7 @@ msgstr "Procentile"
 msgid "Photo"
 msgstr "Foto"
 
-#: ../xdg/pinta.desktop.in.h:1
+#: ../xdg/pinta.desktop.in.h:1 ../Pinta/Actions/Help/AboutDialogAction.cs:54
 msgid "Pinta"
 msgstr ""
 
@@ -1515,7 +1503,7 @@ msgstr ""
 msgid "Pinta Website"
 msgstr "Pinta mājaslapa"
 
-#: ../Pinta/Actions/File/SaveDocumentImplementationAction.cs:185
+#: ../Pinta/Actions/File/SaveDocumentImplementationAction.cs:162
 msgid "Pinta does not support saving images in this file format."
 msgstr "Pinta neatbalsta šo faila formātu."
 
@@ -1528,11 +1516,11 @@ msgid ""
 "help organize your creativity."
 msgstr ""
 
-#: ../Pinta.Core/Managers/WorkspaceManager.cs:386
+#: ../Pinta.Core/Managers/WorkspaceManager.cs:413
 msgid "Pinta supports the following file formats:"
 msgstr ""
 
-#: ../Pinta.Core/Classes/Palette.cs:186
+#: ../Pinta.Core/Classes/Palette.cs:198
 msgid "Pinta supports the following palette formats:"
 msgstr ""
 
@@ -1548,12 +1536,12 @@ msgstr "Pikselēt"
 msgid "Pixels"
 msgstr "Pikseļi"
 
-#: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:523
-#: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:767
+#: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:525
+#: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:769
 msgid "Point Added"
 msgstr ""
 
-#: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:466
+#: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:468
 msgid "Point Deleted"
 msgstr ""
 
@@ -1580,10 +1568,6 @@ msgstr ""
 
 #: ../Pinta/Dialogs/NewImageDialog.cs:318
 msgid "Preview"
-msgstr ""
-
-#: ../Pinta/Dialogs/AboutDialog.cs:154
-msgid "Previous contributors:"
 msgstr ""
 
 #: ../Pinta.Effects/Effects/WarpEffect.cs:25
@@ -1621,7 +1605,7 @@ msgstr "RGB"
 msgid "Radial Blur"
 msgstr "Radiāla pludināšana"
 
-#: ../Pinta.Tools/Tools/GradientTool.cs:184
+#: ../Pinta.Tools/Tools/GradientTool.cs:187
 msgid "Radial Gradient"
 msgstr "Radiāla krāsu pāreja"
 
@@ -1691,7 +1675,7 @@ msgstr ""
 msgid "Registering repository"
 msgstr ""
 
-#: ../Pinta/Dialogs/AboutPintaTabPage.cs:50
+#: ../Pinta/Actions/Help/AboutDialogAction.cs:79
 msgid "Released under the MIT X11 License."
 msgstr "Publicēts zem MIT X11 licences."
 
@@ -1713,13 +1697,11 @@ msgstr "Renderēt"
 msgid "Rendering Effect"
 msgstr "Renderēšanas Effekti"
 
-#: ../Pinta/Actions/File/SaveDocumentImplementationAction.cs:251
-#: ../Pinta/Actions/File/SaveDocumentImplementationAction.cs:255
 #: ../Pinta.Core/Classes/SelectionModeHandler.cs:47
 msgid "Replace"
 msgstr ""
 
-#: ../Pinta/Dialogs/ErrorDialog.cs:110
+#: ../Pinta/Dialogs/ErrorDialog.cs:109
 msgid "Report Bug...."
 msgstr ""
 
@@ -1771,7 +1753,7 @@ msgstr "Mainīt attēla izmēru..."
 msgid "Resize Palette"
 msgstr "Toņu daudzums"
 
-#: ../Pinta.Tools/Tools/TextTool.cs:204
+#: ../Pinta.Tools/Tools/TextTool.cs:221
 msgid "Right Align"
 msgstr "Līdzināt pa labi"
 
@@ -1838,7 +1820,7 @@ msgid "Saturation Percentage"
 msgstr ""
 
 #: ../Pinta/Actions/File/SaveDocumentImplementationAction.cs:75
-#: ../Pinta.Core/Actions/EditActions.cs:402
+#: ../Pinta.Core/Actions/EditActions.cs:403
 #: ../Pinta.Core/Actions/FileActions.cs:55
 msgid "Save"
 msgstr "Saglabāt"
@@ -1856,7 +1838,7 @@ msgstr "Saglabāt kā..."
 msgid "Save Image File"
 msgstr "Saglabāt Attēla Failu"
 
-#: ../Pinta.Core/Actions/EditActions.cs:399
+#: ../Pinta.Core/Actions/EditActions.cs:400
 msgid "Save Palette File"
 msgstr "Saglabāt paleti"
 
@@ -1982,7 +1964,7 @@ msgstr "Pārslēgt uz zīmuli"
 msgid "Switch to previous tool"
 msgstr "Pārslēgt uz iepriekšējo rīku"
 
-#: ../Pinta/Actions/File/NewScreenshotAction.cs:51
+#: ../Pinta/Actions/File/NewScreenshotAction.cs:105
 msgid "Take Screenshot"
 msgstr "Uzņemt ekrānattēlu"
 
@@ -1994,19 +1976,13 @@ msgstr "Teksts"
 msgid "Text - Finalize"
 msgstr ""
 
-#: ../Pinta.Tools/Tools/TextTool.cs:217
+#: ../Pinta.Tools/Tools/TextTool.cs:235
 msgid "Text Style"
 msgstr "Teksta Stils"
 
 #: ../Pinta/Actions/Edit/PasteAction.cs:160
 msgid "The clipboard does not contain an image."
 msgstr ""
-
-#: ../Pinta/Actions/File/SaveDocumentImplementationAction.cs:242
-#, csharp-format
-msgid ""
-"The file already exists in \"{1}\". Replacing it will overwrite its contents."
-msgstr "Šis fails jau pastāv \"{1}\". Aizvietojot tiks pārskatīts tā saturs."
 
 #: Mono.Addins.Gui/gtk-gui/Mono.Addins.Gui.AddinInstallerDialog.cs:48
 msgid "The following add-ins will be installed:"
@@ -2086,10 +2062,6 @@ msgstr "Rūts izmērs"
 msgid "Tip: Right-click to remove control points."
 msgstr "Uzziņai: Labais klikšķis lai noņemtu kontrol punktus"
 
-#: ../Pinta/Dialogs/VersionInformationTabPage.cs:44
-msgid "Title"
-msgstr "Nosaukums"
-
 #: ../Pinta.Effects/Effects/RedEyeRemoveEffect.cs:70
 #: ../Pinta.Tools/Tools/FloodTool.cs:127
 #: ../Pinta.Tools/Tools/RecolorTool.cs:200
@@ -2104,7 +2076,7 @@ msgstr "Rīks"
 msgid "Tool Box"
 msgstr ""
 
-#: ../Pinta/MainWindow.cs:364
+#: ../Pinta/MainWindow.cs:368
 msgid "Tool Windows"
 msgstr "Rīku Logi"
 
@@ -2120,11 +2092,7 @@ msgstr "Pārnešanas karte"
 msgid "Translate This Application"
 msgstr "Tulkot šo programmu"
 
-#: ../Pinta/Dialogs/AboutDialog.cs:168
-msgid "Translated by:"
-msgstr "Tulkoja:"
-
-#: ../Pinta.Tools/Tools/GradientTool.cs:201
+#: ../Pinta.Tools/Tools/GradientTool.cs:204
 msgid "Transparency Mode"
 msgstr ""
 
@@ -2142,14 +2110,14 @@ msgstr "Savīt"
 msgid "Type"
 msgstr "Tips"
 
-#: ../Pinta/MainWindow.cs:540
+#: ../Pinta/MainWindow.cs:545
 #, csharp-format
 msgid ""
 "Unable to download image from {0}.\n"
 "Details: {1}"
 msgstr ""
 
-#: ../Pinta.Tools/Tools/TextTool.cs:176
+#: ../Pinta.Tools/Tools/TextTool.cs:184
 msgid "Underline"
 msgstr "Pasvītrots"
 
@@ -2175,12 +2143,12 @@ msgstr ""
 msgid "Union (+) ({0} + Left Click)"
 msgstr ""
 
-#: ../Pinta.Core/Managers/WorkspaceManager.cs:112
+#: ../Pinta.Core/Managers/WorkspaceManager.cs:115
 #, csharp-format
 msgid "Unsaved Image {0}"
 msgstr "Nesglabāts attēls {0}"
 
-#: ../Pinta.Core/Managers/WorkspaceManager.cs:220
+#: ../Pinta.Core/Managers/WorkspaceManager.cs:250
 msgid "Unsupported file format"
 msgstr ""
 
@@ -2223,18 +2191,9 @@ msgstr ""
 "leņķiem. Izvēlaties augstu kvalitāti labam rezultātam, lieliem attēliem un "
 "lieliem leņķiem."
 
-#: ../Pinta/Dialogs/AboutDialog.cs:181
+#: ../Pinta/Actions/Help/AboutDialogAction.cs:86
 msgid "Using some icons from:"
 msgstr "Lietot dažas ikonas no:"
-
-#: ../Pinta/Dialogs/AboutPintaTabPage.cs:42
-#: ../Pinta/Dialogs/VersionInformationTabPage.cs:50
-msgid "Version"
-msgstr "Versija"
-
-#: ../Pinta/Dialogs/AboutDialog.cs:277
-msgid "Version Info"
-msgstr "Versijas Informācija"
 
 #: ../Pinta/Dialogs/LayerPropertiesDialog.cs:195
 msgid "Visible"
@@ -2256,8 +2215,8 @@ msgstr "Platums:"
 
 #: ../Pinta.Core/Actions/ViewActions.cs:103
 #: ../Pinta.Core/Actions/ViewActions.cs:282
-#: ../Pinta.Core/Classes/DocumentWorkspace.cs:315
-#: ../Pinta.Core/Classes/DocumentWorkspace.cs:323
+#: ../Pinta.Core/Classes/DocumentWorkspace.cs:324
+#: ../Pinta.Core/Classes/DocumentWorkspace.cs:332
 msgid "Window"
 msgstr "Logs"
 
@@ -2276,13 +2235,13 @@ msgid "Xor ({0} + Right Click)"
 msgstr ""
 
 #. Translators: {0} is the name of a file that the user does not have permission to open.
-#: ../Pinta.Core/Managers/WorkspaceManager.cs:405
+#: ../Pinta.Core/Managers/WorkspaceManager.cs:432
 #, csharp-format
 msgid "You do not have access to '{0}'."
 msgstr ""
 
 #. Translators: {0} is the name of a file that the user does not have write permission for.
-#: ../Pinta/Actions/File/SaveDocumentImplementationAction.cs:211
+#: ../Pinta/Actions/File/SaveDocumentImplementationAction.cs:188
 #, csharp-format
 msgid ""
 "You do not have access to modify '{0}'. The file or folder may be read-only."
@@ -2311,27 +2270,27 @@ msgstr "Tālināt"
 msgid "Zoom to Selection"
 msgstr "Tuvināt līdz iezīmētajam"
 
-#: ../Pinta/MainWindow.cs:339
+#: ../Pinta/MainWindow.cs:343
 msgid "_Adjustments"
 msgstr "Korekcij_as"
 
-#: ../Pinta/MainWindow.cs:324
+#: ../Pinta/MainWindow.cs:328
 msgid "_Edit"
 msgstr "_Rediģēt"
 
-#: ../Pinta/MainWindow.cs:320
+#: ../Pinta/MainWindow.cs:324
 msgid "_File"
 msgstr "_Fails"
 
-#: ../Pinta/MainWindow.cs:358
+#: ../Pinta/MainWindow.cs:362
 msgid "_Help"
 msgstr "_Palīdzība"
 
-#: ../Pinta/MainWindow.cs:332
+#: ../Pinta/MainWindow.cs:336
 msgid "_Image"
 msgstr "_Attēls"
 
-#: ../Pinta/MainWindow.cs:336
+#: ../Pinta/MainWindow.cs:340
 msgid "_Layers"
 msgstr "S_lāņi"
 
@@ -2339,15 +2298,15 @@ msgstr "S_lāņi"
 msgid "_Uninstall..."
 msgstr ""
 
-#: ../Pinta/MainWindow.cs:328
+#: ../Pinta/MainWindow.cs:332
 msgid "_View"
 msgstr "_Skats"
 
-#: ../Pinta/MainWindow.cs:354
+#: ../Pinta/MainWindow.cs:358
 msgid "_Window"
 msgstr "_Logs"
 
-#: ../Pinta/Dialogs/AboutPintaTabPage.cs:56
+#: ../Pinta/Actions/Help/AboutDialogAction.cs:71
 msgid "by Pinta contributors"
 msgstr "visi Pinta atbalstītāji"
 
@@ -2368,7 +2327,7 @@ msgstr "Pavedienu daudzums ko izmantot renderēšanai"
 msgid "pixels"
 msgstr "pikseļi"
 
-#: ../Pinta/Dialogs/AboutDialog.cs:165
+#: ../Pinta/Actions/Help/AboutDialogAction.cs:62
 msgid "translator-credits"
 msgstr ""
 "Launchpad Contributions:\n"
@@ -2390,7 +2349,7 @@ msgstr ""
 msgid "{0} copy"
 msgstr ""
 
-#: ../Pinta.Core/ImageFormats/FormatDescriptor.cs:93
+#: ../Pinta.Core/ImageFormats/FormatDescriptor.cs:110
 #, csharp-format
 msgid "{0} image ({1})"
 msgstr "{0} attēls ({1})"
@@ -2415,7 +2374,31 @@ msgstr[1] ""
 msgid "{0}%"
 msgstr ""
 
+#~ msgid "Translated by:"
+#~ msgstr "Tulkoja:"
+
+#~ msgid "Version"
+#~ msgstr "Versija"
+
+#~ msgid "Path"
+#~ msgstr "Ceļš"
+
+#~ msgid "Title"
+#~ msgstr "Nosaukums"
+
+#~ msgid "Version Info"
+#~ msgstr "Versijas Informācija"
+
 #~ msgid "Ctrl-left click to set origin, left click to paint."
 #~ msgstr ""
 #~ "Ctrl - kreisais klikšķis lai iestatītu klonēšanas avotu, kreisais klikšķis "
 #~ "lai krāsotu."
+
+#, csharp-format
+#~ msgid ""
+#~ "The file already exists in \"{1}\". Replacing it will overwrite its contents."
+#~ msgstr "Šis fails jau pastāv \"{1}\". Aizvietojot tiks pārskatīts tā saturs."
+
+#, csharp-format
+#~ msgid "A file named \"{0}\" already exists. Do you want to replace it?"
+#~ msgstr "Fails \"{0}\" jau eksistē. Vai vēlaties to pārrakstīt?"

@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: pinta\n"
 "Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
-"POT-Creation-Date: 2022-01-11 23:44-0500\n"
+"POT-Creation-Date: 2022-11-04 22:46-0400\n"
 "PO-Revision-Date: 2021-01-24 20:30+0000\n"
 "Last-Translator: Мирослав Николић <miroslavnikolic@rocketmail.com>\n"
 "Language-Team: српски <gnome-sr@googlegroups.org>\n"
@@ -15,8 +15,8 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=3; plural=n%10==1 && n%100!=11 ? 0 : n%10>=2 && "
 "n%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2;\n"
-"X-Launchpad-Export-Date: 2022-01-14 01:08+0000\n"
-"X-Generator: Launchpad (build 0072e2709f85567cc6c8d33e98acde9fcc09f491)\n"
+"X-Launchpad-Export-Date: 2022-11-05 02:52+0000\n"
+"X-Generator: Launchpad (build 83f7123b02a2b50a64bc29e7e35197179a885279)\n"
 "Language: sr\n"
 
 #: Mono.Addins.Gui/Mono.Addins.Gui/InstallDialog.cs:142
@@ -53,12 +53,7 @@ msgstr "7 x 7 област"
 msgid "9 x 9 Region"
 msgstr "9 x 9 област"
 
-#: ../Pinta/Actions/File/SaveDocumentImplementationAction.cs:241
-#, csharp-format
-msgid "A file named \"{0}\" already exists. Do you want to replace it?"
-msgstr "Датотека под називом „{0}“ већ постоји. Да ли желите да је замените?"
-
-#: ../Pinta/MainWindow.cs:349
+#: ../Pinta/MainWindow.cs:353
 msgid "A_dd-ins"
 msgstr "_Додаци"
 
@@ -66,13 +61,13 @@ msgstr "_Додаци"
 msgid "About"
 msgstr "О програму"
 
-#: ../Pinta/Dialogs/AboutDialog.cs:260
+#: ../Pinta/Actions/Help/AboutDialogAction.cs:52
 msgid "About Pinta"
 msgstr "О Пинти"
 
 #: ../Pinta/Actions/Edit/PasteAction.cs:130
 #: ../Pinta.Core/Actions/LayerActions.cs:50
-#: ../Pinta.Core/Actions/LayerActions.cs:312
+#: ../Pinta.Core/Actions/LayerActions.cs:330
 msgid "Add New Layer"
 msgstr "Додај нови слој"
 
@@ -100,7 +95,7 @@ msgstr "Управљајте ризницама додатака"
 msgid "Add-in packages"
 msgstr "Пакети додатака"
 
-#: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:801
+#: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:803
 msgid "Added"
 msgstr "Додато"
 
@@ -112,8 +107,8 @@ msgstr "Потребна су додатна проширења за извођ�
 msgid "After select"
 msgstr "Након избора"
 
-#: ../Pinta/Actions/File/OpenDocumentAction.cs:71
-#: ../Pinta.Core/Actions/EditActions.cs:378
+#: ../Pinta/Actions/File/OpenDocumentAction.cs:83
+#: ../Pinta.Core/Actions/EditActions.cs:380
 msgid "All files"
 msgstr "Све датотеке"
 
@@ -149,11 +144,11 @@ msgstr "Угао"
 msgid "Antialias"
 msgstr "Умекшавање ивица"
 
-#: ../Pinta.Core/Classes/BaseTool.cs:346
+#: ../Pinta.Core/Classes/BaseTool.cs:352
 msgid "Antialiasing Off"
 msgstr "Умекшавање је искључено"
 
-#: ../Pinta.Core/Classes/BaseTool.cs:345
+#: ../Pinta.Core/Classes/BaseTool.cs:351
 msgid "Antialiasing On"
 msgstr "Умекшавање је укључено"
 
@@ -187,7 +182,7 @@ msgstr "Сам нивелиши"
 msgid "Available in repository:"
 msgstr "Доступно у ризници:"
 
-#: ../Pinta.Core/Managers/WorkspaceManager.cs:169
+#: ../Pinta.Core/Managers/WorkspaceManager.cs:175
 msgid "Background"
 msgstr "Позадина"
 
@@ -199,7 +194,7 @@ msgstr "Боја позадине"
 msgid "Background:"
 msgstr "Позадина:"
 
-#: ../Pinta/Dialogs/AboutDialog.cs:174
+#: ../Pinta/Actions/Help/AboutDialogAction.cs:82
 msgid "Based on the work of Paint.NET:"
 msgstr "Засновано на раду „Paint.NET“-а:"
 
@@ -233,7 +228,7 @@ msgstr "Плава "
 msgid "Blurs"
 msgstr "Замућења"
 
-#: ../Pinta.Tools/Tools/TextTool.cs:160
+#: ../Pinta.Tools/Tools/TextTool.cs:162
 msgid "Bold"
 msgstr "Подебљано"
 
@@ -276,7 +271,7 @@ msgstr "У процентима:"
 #: ../Pinta/Actions/File/OpenDocumentAction.cs:54
 #: ../Pinta/Actions/File/SaveDocumentImplementationAction.cs:76
 #: ../Pinta.Core/Actions/EditActions.cs:362
-#: ../Pinta.Core/Actions/EditActions.cs:403
+#: ../Pinta.Core/Actions/EditActions.cs:404
 #: ../Pinta.Core/Actions/LayerActions.cs:169
 msgid "Cancel"
 msgstr ""
@@ -289,7 +284,7 @@ msgstr "Платно"
 msgid "Cell Size"
 msgstr "Величина ћелије"
 
-#: ../Pinta.Tools/Tools/TextTool.cs:196
+#: ../Pinta.Tools/Tools/TextTool.cs:210
 msgid "Center Align"
 msgstr "Поравнање по средини"
 
@@ -305,7 +300,7 @@ msgstr "Усредиштено"
 msgid "Centimeters"
 msgstr "Центиметри"
 
-#: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:338
+#: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:339
 msgid "Changed Shape Type"
 msgstr "Измењена врста облика"
 
@@ -349,7 +344,7 @@ msgstr ""
 "Притисните и превуците да исцртате елипсоидни избор. Држите помак да "
 "ограничите на круг."
 
-#: ../Pinta.Tools/Tools/GradientTool.cs:53
+#: ../Pinta.Tools/Tools/GradientTool.cs:51
 msgid ""
 "Click and drag to draw gradient from primary to secondary color.  Right "
 "click to reverse."
@@ -437,7 +432,7 @@ msgstr "Затамњивање боје"
 msgid "Color Dodge"
 msgstr "Осветљавање боје"
 
-#: ../Pinta.Tools/Tools/GradientTool.cs:200
+#: ../Pinta.Tools/Tools/GradientTool.cs:203
 msgid "Color Mode"
 msgstr ""
 
@@ -457,7 +452,7 @@ msgstr "Засићеност"
 msgid "Coloring"
 msgstr "Обојеност"
 
-#: ../Pinta.Tools/Tools/GradientTool.cs:185
+#: ../Pinta.Tools/Tools/GradientTool.cs:188
 msgid "Conical Gradient"
 msgstr "Купасти прелив"
 
@@ -474,10 +469,6 @@ msgstr "Непрекидно"
 msgid "Contrast"
 msgstr "Контраст"
 
-#: ../Pinta/Dialogs/AboutDialog.cs:142
-msgid "Contributors to this release:"
-msgstr "Доприносиоци овом издању:"
-
 #: ../Pinta.Core/Actions/EditActions.cs:62
 msgid "Copy"
 msgstr "Умножи"
@@ -486,22 +477,18 @@ msgstr "Умножи"
 msgid "Copy Merged"
 msgstr "Умножи стопљено"
 
-#: ../Pinta/Dialogs/VersionInformationTabPage.cs:67
-msgid "Copy Version Info"
-msgstr ""
-
-#: ../Pinta/Dialogs/AboutPintaTabPage.cs:56
+#: ../Pinta/Actions/Help/AboutDialogAction.cs:70
 msgid "Copyright"
 msgstr "Ауторска права"
 
-#: ../Pinta/Actions/File/NewScreenshotAction.cs:70
+#: ../Pinta/Actions/File/NewScreenshotAction.cs:124
 #, csharp-format
 msgid "Could not obtain the size of display '{0}'"
 msgstr ""
 
-#: ../Pinta.Core/Classes/Palette.cs:185
-#: ../Pinta.Core/Managers/WorkspaceManager.cs:376
-#: ../Pinta.Core/Managers/WorkspaceManager.cs:385
+#: ../Pinta.Core/Classes/Palette.cs:197
+#: ../Pinta.Core/Managers/WorkspaceManager.cs:403
+#: ../Pinta.Core/Managers/WorkspaceManager.cs:412
 #, csharp-format
 msgid "Could not open file: {0}"
 msgstr "Не могу да отворим датотеку: {0}"
@@ -511,7 +498,7 @@ msgid "Coverage"
 msgstr "Покривеност"
 
 #: ../Pinta.Core/Actions/ImageActions.cs:47
-#: ../Pinta.Core/Actions/ImageActions.cs:292
+#: ../Pinta.Core/Actions/ImageActions.cs:286
 msgid "Crop to Selection"
 msgstr "Исеци на изабрано"
 
@@ -540,16 +527,16 @@ msgstr "Затамњено"
 msgid "Dash"
 msgstr "Црта"
 
-#: ../Pinta/Actions/File/NewScreenshotAction.cs:52
+#: ../Pinta/Actions/File/NewScreenshotAction.cs:106
 msgid "Delay before taking a screenshot (seconds):"
 msgstr "Застој пре снимања екрана (сек.):"
 
 #: ../Pinta.Core/Actions/LayerActions.cs:51
-#: ../Pinta.Core/Actions/LayerActions.cs:295
+#: ../Pinta.Core/Actions/LayerActions.cs:313
 msgid "Delete Layer"
 msgstr "Обриши слој"
 
-#: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:480
+#: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:482
 msgid "Deleted"
 msgstr "Обрисано"
 
@@ -561,7 +548,7 @@ msgstr "Поништи избор"
 msgid "Deselect All"
 msgstr "Одзначи све"
 
-#: ../Pinta/Dialogs/ErrorDialog.cs:99
+#: ../Pinta/Dialogs/ErrorDialog.cs:98
 #: Mono.Addins.Gui/gtk-gui/Mono.Addins.Gui.ErrorDialog.cs:92
 #: Mono.Addins.Gui/gtk-gui/Mono.Addins.Gui.ProgressDialog.cs:66
 msgid "Details"
@@ -602,7 +589,7 @@ msgstr "Не мењај алат"
 msgid "Don't change canvas size"
 msgstr "Не мењај величину платна"
 
-#: ../Pinta/MainWindow.cs:539
+#: ../Pinta/MainWindow.cs:544
 msgid "Download failed"
 msgstr "Преузимање није успело"
 
@@ -610,16 +597,16 @@ msgstr "Преузимање није успело"
 msgid "Download size"
 msgstr "За преузимање"
 
-#: ../Pinta/MainWindow.cs:520
+#: ../Pinta/MainWindow.cs:525
 msgid "Downloading Image"
 msgstr "Преузимам слику"
 
 #: ../Pinta.Core/Actions/LayerActions.cs:52
-#: ../Pinta.Core/Actions/LayerActions.cs:286
+#: ../Pinta.Core/Actions/LayerActions.cs:304
 msgid "Duplicate Layer"
 msgstr "Удвостручи слој"
 
-#: ../xdg/pinta.desktop.in.h:2
+#: ../xdg/pinta.desktop.in.h:2 ../Pinta/Actions/Help/AboutDialogAction.cs:58
 msgid "Easily create and edit images"
 msgstr "С лакоћом правите и уређујте слике"
 
@@ -631,7 +618,7 @@ msgstr "Понашање ивица"
 msgid "Edge Detect"
 msgstr "Откриј ивице"
 
-#: ../Pinta/MainWindow.cs:342
+#: ../Pinta/MainWindow.cs:346
 msgid "Effe_cts"
 msgstr "Дејст_ва"
 
@@ -662,7 +649,7 @@ msgstr "Обриши изабрано"
 msgid "Eraser"
 msgstr "Гумица"
 
-#: ../Pinta/Actions/File/SaveDocumentImplementationAction.cs:186
+#: ../Pinta/Actions/File/SaveDocumentImplementationAction.cs:163
 msgid "Error"
 msgstr "Грешкa"
 
@@ -685,15 +672,20 @@ msgstr "Рашири платно"
 msgid "Factor"
 msgstr "Чинилац"
 
-#: ../Pinta.Core/Managers/WorkspaceManager.cs:403
+#: ../Pinta/Actions/File/NewScreenshotAction.cs:95
+msgid "Failed to access XDG Desktop Portals"
+msgstr ""
+
+#: ../Pinta.Core/Managers/WorkspaceManager.cs:430
 msgid "Failed to open image"
 msgstr ""
 
-#: ../Pinta/Actions/File/SaveDocumentImplementationAction.cs:209
+#: ../Pinta/Actions/File/SaveDocumentImplementationAction.cs:186
 msgid "Failed to save image"
 msgstr ""
 
-#: ../Pinta/Actions/File/NewScreenshotAction.cs:69
+#: ../Pinta/Actions/File/NewScreenshotAction.cs:94
+#: ../Pinta/Actions/File/NewScreenshotAction.cs:123
 msgid "Failed to take screenshot"
 msgstr ""
 
@@ -701,7 +693,7 @@ msgstr ""
 msgid "File a Bug"
 msgstr "Пријавите грешку"
 
-#: ../Pinta.Tools/Tools/TextTool.cs:227
+#: ../Pinta.Tools/Tools/TextTool.cs:245
 msgid "Fill Background"
 msgstr "Позадина испуне"
 
@@ -725,8 +717,8 @@ msgstr "Стил испуњавања"
 msgid "Fill and Outline Shape"
 msgstr "Облик испуњавања и контуре"
 
-#: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:1100
-#: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:1471
+#: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:1102
+#: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:1473
 msgid "Finalized"
 msgstr "Завршено"
 
@@ -735,7 +727,7 @@ msgid "Finish Pixels"
 msgstr "Доврши тачкице"
 
 #: ../Pinta.Core/Actions/ImageActions.cs:56
-#: ../Pinta.Core/Actions/ImageActions.cs:156
+#: ../Pinta.Core/Actions/ImageActions.cs:152
 msgid "Flatten"
 msgstr "Изравнај"
 
@@ -811,8 +803,8 @@ msgstr "Опште"
 msgid "Glow"
 msgstr "Сјај"
 
-#: ../Pinta.Tools/Tools/GradientTool.cs:51
-#: ../Pinta.Tools/Tools/GradientTool.cs:175
+#: ../Pinta.Tools/Tools/GradientTool.cs:49
+#: ../Pinta.Tools/Tools/GradientTool.cs:178
 msgid "Gradient"
 msgstr "Прелијте"
 
@@ -859,7 +851,7 @@ msgstr "Нијанса"
 msgid "Hue / Saturation"
 msgstr "Нијанса / Засићеност"
 
-#: ../Pinta/Actions/File/SaveDocumentImplementationAction.cs:200
+#: ../Pinta/Actions/File/SaveDocumentImplementationAction.cs:177
 msgid "ICO files can not be larger than 255 x 255 pixels."
 msgstr "ИКО датотеке не могу бити веће од 255 x 255 тачкица."
 
@@ -884,7 +876,7 @@ msgid "Image cannot be pasted"
 msgstr "Слика не може бити убачена"
 
 #: ../Pinta/Actions/File/OpenDocumentAction.cs:58
-#: ../Pinta.Core/Actions/LayerActions.cs:182
+#: ../Pinta.Core/Actions/LayerActions.cs:196
 msgid "Image files"
 msgstr "Датотеке слика"
 
@@ -892,11 +884,11 @@ msgstr "Датотеке слика"
 msgid "Image larger than canvas"
 msgstr "Слика је већа од платна"
 
-#: ../Pinta/Actions/File/SaveDocumentImplementationAction.cs:199
+#: ../Pinta/Actions/File/SaveDocumentImplementationAction.cs:176
 msgid "Image too large"
 msgstr "Слика је превелика"
 
-#: ../Pinta.Core/Actions/LayerActions.cs:206
+#: ../Pinta.Core/Actions/LayerActions.cs:224
 msgid "Import From File"
 msgstr "Увези из датотеке"
 
@@ -980,11 +972,11 @@ msgid "Invert Colors"
 msgstr "Изврни боје"
 
 #: ../Pinta.Core/Actions/EditActions.cs:69
-#: ../Pinta.Core/Actions/EditActions.cs:456
+#: ../Pinta.Core/Actions/EditActions.cs:460
 msgid "Invert Selection"
 msgstr "Обрни избор"
 
-#: ../Pinta.Tools/Tools/TextTool.cs:168
+#: ../Pinta.Tools/Tools/TextTool.cs:173
 msgid "Italic"
 msgstr "Искошено"
 
@@ -1008,7 +1000,7 @@ msgstr "Изаберите ласо"
 msgid "Layer"
 msgstr "Слој"
 
-#: ../Pinta.Gui.Widgets/Widgets/Layers/LayersListWidget.cs:286
+#: ../Pinta.Gui.Widgets/Widgets/Layers/LayersListWidget.cs:293
 msgid "Layer Hidden"
 msgstr "Скривени слој"
 
@@ -1025,7 +1017,7 @@ msgstr "Својства слоја"
 msgid "Layer Properties..."
 msgstr "Својства слоја..."
 
-#: ../Pinta.Gui.Widgets/Widgets/Layers/LayersListWidget.cs:286
+#: ../Pinta.Gui.Widgets/Widgets/Layers/LayersListWidget.cs:293
 msgid "Layer Shown"
 msgstr "Приказани слој"
 
@@ -1039,7 +1031,7 @@ msgstr ""
 msgid "Layers"
 msgstr "Слојеви"
 
-#: ../Pinta.Tools/Tools/TextTool.cs:188
+#: ../Pinta.Tools/Tools/TextTool.cs:199
 msgid "Left Align"
 msgstr "Лево поравнање"
 
@@ -1166,7 +1158,7 @@ msgstr "Нивои"
 msgid "Levels Adjustment"
 msgstr "Подешавање нивоа"
 
-#: ../Pinta/Dialogs/AboutPintaTabPage.cs:50
+#: ../Pinta/Actions/Help/AboutDialogAction.cs:78
 msgid "License"
 msgstr "Дозвола"
 
@@ -1186,15 +1178,15 @@ msgstr "Светлина"
 msgid "Line/Curve"
 msgstr "Линија/крива"
 
-#: ../Pinta.Tools/Tools/GradientTool.cs:183
+#: ../Pinta.Tools/Tools/GradientTool.cs:186
 msgid "Linear Diamond Gradient"
 msgstr "Линијски дијамантски прелив"
 
-#: ../Pinta.Tools/Tools/GradientTool.cs:181
+#: ../Pinta.Tools/Tools/GradientTool.cs:184
 msgid "Linear Gradient"
 msgstr "Линијски прелив"
 
-#: ../Pinta.Tools/Tools/GradientTool.cs:182
+#: ../Pinta.Tools/Tools/GradientTool.cs:185
 msgid "Linear Reflected Gradient"
 msgstr "Линијски одбијени прелив"
 
@@ -1229,7 +1221,7 @@ msgid "Median"
 msgstr "Симетрала"
 
 #: ../Pinta.Core/Actions/LayerActions.cs:53
-#: ../Pinta.Core/Actions/LayerActions.cs:264
+#: ../Pinta.Core/Actions/LayerActions.cs:282
 msgid "Merge Layer Down"
 msgstr "Стопи слој са доњим"
 
@@ -1238,11 +1230,11 @@ msgstr "Стопи слој са доњим"
 msgid "Missing: {0} v{1}"
 msgstr "Недостаје: {0} v{1}"
 
-#: ../Pinta.Tools/Tools/GradientTool.cs:194
+#: ../Pinta.Tools/Tools/GradientTool.cs:197
 msgid "Mode"
 msgstr ""
 
-#: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:880
+#: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:882
 msgid "Modified"
 msgstr "Измењено"
 
@@ -1255,12 +1247,12 @@ msgid "Motion Blur"
 msgstr "Замућење покрета"
 
 #: ../Pinta.Core/Actions/LayerActions.cs:59
-#: ../Pinta.Core/Actions/LayerActions.cs:250
+#: ../Pinta.Core/Actions/LayerActions.cs:268
 msgid "Move Layer Down"
 msgstr "Помери слој доле"
 
 #: ../Pinta.Core/Actions/LayerActions.cs:58
-#: ../Pinta.Core/Actions/LayerActions.cs:239
+#: ../Pinta.Core/Actions/LayerActions.cs:257
 msgid "Move Layer Up"
 msgstr "Помери слој горе"
 
@@ -1293,7 +1285,7 @@ msgid "New"
 msgstr "Нова"
 
 #: ../Pinta/Dialogs/NewImageDialog.cs:68
-#: ../Pinta.Core/Managers/WorkspaceManager.cs:178
+#: ../Pinta.Core/Managers/WorkspaceManager.cs:184
 msgid "New Image"
 msgstr "Нова слика"
 
@@ -1329,11 +1321,11 @@ msgstr "Сметње"
 
 #: ../Pinta.Core/Effects/UserBlendOps.cs:33
 #: ../Pinta.Tools/Brushes/PlainBrush.cs:37
-#: ../Pinta.Tools/Tools/EraserTool.cs:267 ../Pinta.Tools/Tools/TextTool.cs:224
+#: ../Pinta.Tools/Tools/EraserTool.cs:267 ../Pinta.Tools/Tools/TextTool.cs:242
 msgid "Normal"
 msgstr "Нормално"
 
-#: ../Pinta.Core/Classes/BaseTool.cs:330
+#: ../Pinta.Core/Classes/BaseTool.cs:336
 msgid "Normal Blending"
 msgstr "Обично стапање"
 
@@ -1341,7 +1333,7 @@ msgstr "Обично стапање"
 msgid "Normal Size"
 msgstr "Нормална величина"
 
-#: ../Pinta.Tools/Tools/TextTool.cs:225
+#: ../Pinta.Tools/Tools/TextTool.cs:243
 msgid "Normal and Outline"
 msgstr "Обично и контура"
 
@@ -1370,7 +1362,7 @@ msgstr "Отвори"
 msgid "Open Curve Shape"
 msgstr "Облик отворене криве"
 
-#: ../Pinta.Core/Managers/WorkspaceManager.cs:225
+#: ../Pinta.Core/Managers/WorkspaceManager.cs:255
 msgid "Open Image"
 msgstr "Отвори слику"
 
@@ -1413,7 +1405,7 @@ msgid "Other"
 msgstr "Друго"
 
 #: ../Pinta.Effects/Effects/OutlineEffect.cs:27
-#: ../Pinta.Tools/Tools/TextTool.cs:226
+#: ../Pinta.Tools/Tools/TextTool.cs:244
 msgid "Outline"
 msgstr "Обрис"
 
@@ -1422,7 +1414,7 @@ msgstr "Обрис"
 msgid "Outline Shape"
 msgstr "Облик контуре"
 
-#: ../Pinta.Tools/Tools/TextTool.cs:241
+#: ../Pinta.Tools/Tools/TextTool.cs:259
 msgid "Outline width"
 msgstr "Ширина контуре"
 
@@ -1438,7 +1430,7 @@ msgstr "Излазни хистограм"
 msgid "Overlay"
 msgstr "Преклапање"
 
-#: ../Pinta.Core/Classes/BaseTool.cs:331
+#: ../Pinta.Core/Classes/BaseTool.cs:337
 msgid "Overwrite"
 msgstr "Препиши"
 
@@ -1454,7 +1446,7 @@ msgstr "Четкица"
 msgid "Palette"
 msgstr "Палета"
 
-#: ../Pinta.Core/Actions/EditActions.cs:365
+#: ../Pinta.Core/Actions/EditActions.cs:367
 msgid "Palette files"
 msgstr "Датотеке палете"
 
@@ -1477,10 +1469,6 @@ msgstr "Убаци у нову слику"
 #: ../Pinta.Core/Actions/EditActions.cs:65
 msgid "Paste Into New Layer"
 msgstr "Убаци у нови слој"
-
-#: ../Pinta/Dialogs/VersionInformationTabPage.cs:53
-msgid "Path"
-msgstr "Путања"
 
 #: Mono.Addins.Gui/gtk-gui/Mono.Addins.Gui.NewSiteDialog.cs:130
 msgid "Path:"
@@ -1509,7 +1497,7 @@ msgstr "Проценат"
 msgid "Photo"
 msgstr "Фотографија"
 
-#: ../xdg/pinta.desktop.in.h:1
+#: ../xdg/pinta.desktop.in.h:1 ../Pinta/Actions/Help/AboutDialogAction.cs:54
 msgid "Pinta"
 msgstr "Пинта"
 
@@ -1529,7 +1517,7 @@ msgstr "Уређивач слика Пинта"
 msgid "Pinta Website"
 msgstr "Веб сајт Пинте"
 
-#: ../Pinta/Actions/File/SaveDocumentImplementationAction.cs:185
+#: ../Pinta/Actions/File/SaveDocumentImplementationAction.cs:162
 msgid "Pinta does not support saving images in this file format."
 msgstr "Пинта не подржава чување слика у овом запису."
 
@@ -1547,11 +1535,11 @@ msgstr ""
 "за примењивање на вашим сликама, а такође има способност да створи "
 "неограничене слојеве који помажу у организацији ваше креативности."
 
-#: ../Pinta.Core/Managers/WorkspaceManager.cs:386
+#: ../Pinta.Core/Managers/WorkspaceManager.cs:413
 msgid "Pinta supports the following file formats:"
 msgstr "Пинта подржава следеће формате датотека:"
 
-#: ../Pinta.Core/Classes/Palette.cs:186
+#: ../Pinta.Core/Classes/Palette.cs:198
 msgid "Pinta supports the following palette formats:"
 msgstr "Пинта подржава следеће формате палете:"
 
@@ -1567,12 +1555,12 @@ msgstr "Истачкавање"
 msgid "Pixels"
 msgstr "Тачкице"
 
-#: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:523
-#: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:767
+#: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:525
+#: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:769
 msgid "Point Added"
 msgstr "Тачка је додата"
 
-#: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:466
+#: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:468
 msgid "Point Deleted"
 msgstr "Тачка је обрисана"
 
@@ -1600,10 +1588,6 @@ msgstr "Подешеност:"
 #: ../Pinta/Dialogs/NewImageDialog.cs:318
 msgid "Preview"
 msgstr "Претпреглед"
-
-#: ../Pinta/Dialogs/AboutDialog.cs:154
-msgid "Previous contributors:"
-msgstr "Претходни доприносиоци:"
 
 #: ../Pinta.Effects/Effects/WarpEffect.cs:25
 msgid "Primary"
@@ -1640,7 +1624,7 @@ msgstr "ЦЗП"
 msgid "Radial Blur"
 msgstr "Кружно замућење"
 
-#: ../Pinta.Tools/Tools/GradientTool.cs:184
+#: ../Pinta.Tools/Tools/GradientTool.cs:187
 msgid "Radial Gradient"
 msgstr "Кружни прелив"
 
@@ -1710,7 +1694,7 @@ msgstr "Забележи ризницу на мрежи"
 msgid "Registering repository"
 msgstr "Бележим ризницу"
 
-#: ../Pinta/Dialogs/AboutPintaTabPage.cs:50
+#: ../Pinta/Actions/Help/AboutDialogAction.cs:79
 msgid "Released under the MIT X11 License."
 msgstr "Програм је издат под МИТ-овом дозволом Икс11."
 
@@ -1732,13 +1716,11 @@ msgstr "Исцртавање"
 msgid "Rendering Effect"
 msgstr "Дејство исцртавања"
 
-#: ../Pinta/Actions/File/SaveDocumentImplementationAction.cs:251
-#: ../Pinta/Actions/File/SaveDocumentImplementationAction.cs:255
 #: ../Pinta.Core/Classes/SelectionModeHandler.cs:47
 msgid "Replace"
 msgstr "Замени"
 
-#: ../Pinta/Dialogs/ErrorDialog.cs:110
+#: ../Pinta/Dialogs/ErrorDialog.cs:109
 msgid "Report Bug...."
 msgstr "Пријавите грешку..."
 
@@ -1790,7 +1772,7 @@ msgstr "Промени величину слике..."
 msgid "Resize Palette"
 msgstr "Промените величину палете"
 
-#: ../Pinta.Tools/Tools/TextTool.cs:204
+#: ../Pinta.Tools/Tools/TextTool.cs:221
 msgid "Right Align"
 msgstr "Десно поравнање"
 
@@ -1857,7 +1839,7 @@ msgid "Saturation Percentage"
 msgstr "Проценат засићености"
 
 #: ../Pinta/Actions/File/SaveDocumentImplementationAction.cs:75
-#: ../Pinta.Core/Actions/EditActions.cs:402
+#: ../Pinta.Core/Actions/EditActions.cs:403
 #: ../Pinta.Core/Actions/FileActions.cs:55
 msgid "Save"
 msgstr "Сачувај"
@@ -1875,7 +1857,7 @@ msgstr "Сачувај као..."
 msgid "Save Image File"
 msgstr "Сачувај датотеку слике"
 
-#: ../Pinta.Core/Actions/EditActions.cs:399
+#: ../Pinta.Core/Actions/EditActions.cs:400
 msgid "Save Palette File"
 msgstr "Сачувај датотеку палете"
 
@@ -2001,7 +1983,7 @@ msgstr "Пребаци на оловку"
 msgid "Switch to previous tool"
 msgstr "Пребаци на претходни алат"
 
-#: ../Pinta/Actions/File/NewScreenshotAction.cs:51
+#: ../Pinta/Actions/File/NewScreenshotAction.cs:105
 msgid "Take Screenshot"
 msgstr "Направите снимак екрана"
 
@@ -2013,20 +1995,13 @@ msgstr "Текст"
 msgid "Text - Finalize"
 msgstr "Текст — Доврши"
 
-#: ../Pinta.Tools/Tools/TextTool.cs:217
+#: ../Pinta.Tools/Tools/TextTool.cs:235
 msgid "Text Style"
 msgstr "Изглед текста"
 
 #: ../Pinta/Actions/Edit/PasteAction.cs:160
 msgid "The clipboard does not contain an image."
 msgstr "Остава не садржи слику."
-
-#: ../Pinta/Actions/File/SaveDocumentImplementationAction.cs:242
-#, csharp-format
-msgid ""
-"The file already exists in \"{1}\". Replacing it will overwrite its contents."
-msgstr ""
-"Већ постоји датотека у „{1}“. Уколико је замените преписаћете њен садржај."
 
 #: Mono.Addins.Gui/gtk-gui/Mono.Addins.Gui.AddinInstallerDialog.cs:48
 msgid "The following add-ins will be installed:"
@@ -2108,10 +2083,6 @@ msgstr "Величина плочице"
 msgid "Tip: Right-click to remove control points."
 msgstr "Савет: Притисните десним тастером да уклоните тачке управљања."
 
-#: ../Pinta/Dialogs/VersionInformationTabPage.cs:44
-msgid "Title"
-msgstr "Наслов"
-
 #: ../Pinta.Effects/Effects/RedEyeRemoveEffect.cs:70
 #: ../Pinta.Tools/Tools/FloodTool.cs:127
 #: ../Pinta.Tools/Tools/RecolorTool.cs:200
@@ -2126,7 +2097,7 @@ msgstr "Алатка"
 msgid "Tool Box"
 msgstr ""
 
-#: ../Pinta/MainWindow.cs:364
+#: ../Pinta/MainWindow.cs:368
 msgid "Tool Windows"
 msgstr "Прозор алата"
 
@@ -2142,11 +2113,7 @@ msgstr "Мапа преноса"
 msgid "Translate This Application"
 msgstr "Преведите овај програм"
 
-#: ../Pinta/Dialogs/AboutDialog.cs:168
-msgid "Translated by:"
-msgstr "Преводиоци:"
-
-#: ../Pinta.Tools/Tools/GradientTool.cs:201
+#: ../Pinta.Tools/Tools/GradientTool.cs:204
 msgid "Transparency Mode"
 msgstr ""
 
@@ -2164,7 +2131,7 @@ msgstr "Увртање"
 msgid "Type"
 msgstr "Врста"
 
-#: ../Pinta/MainWindow.cs:540
+#: ../Pinta/MainWindow.cs:545
 #, csharp-format
 msgid ""
 "Unable to download image from {0}.\n"
@@ -2173,7 +2140,7 @@ msgstr ""
 "Не могу да преузмем слику са „{0}“.\n"
 "Детаљи: {1}"
 
-#: ../Pinta.Tools/Tools/TextTool.cs:176
+#: ../Pinta.Tools/Tools/TextTool.cs:184
 msgid "Underline"
 msgstr "Подвучено"
 
@@ -2199,12 +2166,12 @@ msgstr "Уклањам додатке"
 msgid "Union (+) ({0} + Left Click)"
 msgstr ""
 
-#: ../Pinta.Core/Managers/WorkspaceManager.cs:112
+#: ../Pinta.Core/Managers/WorkspaceManager.cs:115
 #, csharp-format
 msgid "Unsaved Image {0}"
 msgstr "Несачувана слика „{0}“"
 
-#: ../Pinta.Core/Managers/WorkspaceManager.cs:220
+#: ../Pinta.Core/Managers/WorkspaceManager.cs:250
 msgid "Unsupported file format"
 msgstr "Неподржан запис датотеке"
 
@@ -2246,18 +2213,9 @@ msgstr ""
 "Користите мањи квалитет за прегледе, мале слике, и мале углове.  Користите "
 "већи квалитет за крајњи квалитет, велике слике, и велике углове."
 
-#: ../Pinta/Dialogs/AboutDialog.cs:181
+#: ../Pinta/Actions/Help/AboutDialogAction.cs:86
 msgid "Using some icons from:"
 msgstr "Користи неке иконице из:"
-
-#: ../Pinta/Dialogs/AboutPintaTabPage.cs:42
-#: ../Pinta/Dialogs/VersionInformationTabPage.cs:50
-msgid "Version"
-msgstr "Издање"
-
-#: ../Pinta/Dialogs/AboutDialog.cs:277
-msgid "Version Info"
-msgstr "Подаци о издању"
 
 #: ../Pinta/Dialogs/LayerPropertiesDialog.cs:195
 msgid "Visible"
@@ -2279,8 +2237,8 @@ msgstr "Ширина:"
 
 #: ../Pinta.Core/Actions/ViewActions.cs:103
 #: ../Pinta.Core/Actions/ViewActions.cs:282
-#: ../Pinta.Core/Classes/DocumentWorkspace.cs:315
-#: ../Pinta.Core/Classes/DocumentWorkspace.cs:323
+#: ../Pinta.Core/Classes/DocumentWorkspace.cs:324
+#: ../Pinta.Core/Classes/DocumentWorkspace.cs:332
 msgid "Window"
 msgstr "Прозор"
 
@@ -2299,13 +2257,13 @@ msgid "Xor ({0} + Right Click)"
 msgstr ""
 
 #. Translators: {0} is the name of a file that the user does not have permission to open.
-#: ../Pinta.Core/Managers/WorkspaceManager.cs:405
+#: ../Pinta.Core/Managers/WorkspaceManager.cs:432
 #, csharp-format
 msgid "You do not have access to '{0}'."
 msgstr ""
 
 #. Translators: {0} is the name of a file that the user does not have write permission for.
-#: ../Pinta/Actions/File/SaveDocumentImplementationAction.cs:211
+#: ../Pinta/Actions/File/SaveDocumentImplementationAction.cs:188
 #, csharp-format
 msgid ""
 "You do not have access to modify '{0}'. The file or folder may be read-only."
@@ -2334,27 +2292,27 @@ msgstr "Умањи"
 msgid "Zoom to Selection"
 msgstr "Изабрано у први план"
 
-#: ../Pinta/MainWindow.cs:339
+#: ../Pinta/MainWindow.cs:343
 msgid "_Adjustments"
 msgstr "Доте_ривања"
 
-#: ../Pinta/MainWindow.cs:324
+#: ../Pinta/MainWindow.cs:328
 msgid "_Edit"
 msgstr "_Уређивање"
 
-#: ../Pinta/MainWindow.cs:320
+#: ../Pinta/MainWindow.cs:324
 msgid "_File"
 msgstr "_Датотека"
 
-#: ../Pinta/MainWindow.cs:358
+#: ../Pinta/MainWindow.cs:362
 msgid "_Help"
 msgstr "По_моћ"
 
-#: ../Pinta/MainWindow.cs:332
+#: ../Pinta/MainWindow.cs:336
 msgid "_Image"
 msgstr "_Слика"
 
-#: ../Pinta/MainWindow.cs:336
+#: ../Pinta/MainWindow.cs:340
 msgid "_Layers"
 msgstr "Сл_ојеви"
 
@@ -2362,15 +2320,15 @@ msgstr "Сл_ојеви"
 msgid "_Uninstall..."
 msgstr "_Уклони..."
 
-#: ../Pinta/MainWindow.cs:328
+#: ../Pinta/MainWindow.cs:332
 msgid "_View"
 msgstr "_Преглед"
 
-#: ../Pinta/MainWindow.cs:354
+#: ../Pinta/MainWindow.cs:358
 msgid "_Window"
 msgstr "_Прозор"
 
-#: ../Pinta/Dialogs/AboutPintaTabPage.cs:56
+#: ../Pinta/Actions/Help/AboutDialogAction.cs:71
 msgid "by Pinta contributors"
 msgstr "доприносиоци Пинте"
 
@@ -2393,7 +2351,7 @@ msgstr "број нити за исцртавање"
 msgid "pixels"
 msgstr "тачкица"
 
-#: ../Pinta/Dialogs/AboutDialog.cs:165
+#: ../Pinta/Actions/Help/AboutDialogAction.cs:62
 msgid "translator-credits"
 msgstr ""
 "Launchpad Contributions:\n"
@@ -2417,7 +2375,7 @@ msgstr ""
 msgid "{0} copy"
 msgstr ""
 
-#: ../Pinta.Core/ImageFormats/FormatDescriptor.cs:93
+#: ../Pinta.Core/ImageFormats/FormatDescriptor.cs:110
 #, csharp-format
 msgid "{0} image ({1})"
 msgstr "{0} слика ({1})"
@@ -2443,8 +2401,39 @@ msgstr[2] "Доступно је {0} ажурирања"
 msgid "{0}%"
 msgstr "{0}%"
 
+#, csharp-format
+#~ msgid "A file named \"{0}\" already exists. Do you want to replace it?"
+#~ msgstr "Датотека под називом „{0}“ већ постоји. Да ли желите да је замените?"
+
+#, csharp-format
+#~ msgid ""
+#~ "The file already exists in \"{1}\". Replacing it will overwrite its contents."
+#~ msgstr ""
+#~ "Већ постоји датотека у „{1}“. Уколико је замените преписаћете њен садржај."
+
+#~ msgid "Contributors to this release:"
+#~ msgstr "Доприносиоци овом издању:"
+
+#~ msgid "Previous contributors:"
+#~ msgstr "Претходни доприносиоци:"
+
+#~ msgid "Translated by:"
+#~ msgstr "Преводиоци:"
+
 #~ msgid "Powered by Mono:"
 #~ msgstr "Погони га Моно:"
+
+#~ msgid "Version Info"
+#~ msgstr "Подаци о издању"
+
+#~ msgid "Version"
+#~ msgstr "Издање"
+
+#~ msgid "Title"
+#~ msgstr "Наслов"
+
+#~ msgid "Path"
+#~ msgstr "Путања"
 
 #~ msgid "No tool selected."
 #~ msgstr "Није изабран ниједан алат."

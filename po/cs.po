@@ -7,16 +7,16 @@ msgid ""
 msgstr ""
 "Project-Id-Version: pinta\n"
 "Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
-"POT-Creation-Date: 2022-01-11 23:44-0500\n"
-"PO-Revision-Date: 2017-11-29 09:06+0000\n"
-"Last-Translator: Pavel Borecki <Unknown>\n"
+"POT-Creation-Date: 2022-11-04 22:46-0400\n"
+"PO-Revision-Date: 2022-03-20 09:22+0000\n"
+"Last-Translator: Lukas Oubrecht <lukas@oubrecht.org>\n"
 "Language-Team: Czech <cs@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=3; plural=(n==1) ? 0 : (n>=2 && n<=4) ? 1 : 2;\n"
-"X-Launchpad-Export-Date: 2022-01-14 01:08+0000\n"
-"X-Generator: Launchpad (build 0072e2709f85567cc6c8d33e98acde9fcc09f491)\n"
+"X-Launchpad-Export-Date: 2022-11-05 02:52+0000\n"
+"X-Generator: Launchpad (build 83f7123b02a2b50a64bc29e7e35197179a885279)\n"
 
 #: Mono.Addins.Gui/Mono.Addins.Gui/InstallDialog.cs:142
 msgid " (in user directory)"
@@ -52,12 +52,7 @@ msgstr "Oblast 7 x 7"
 msgid "9 x 9 Region"
 msgstr "Oblast 9 x 9"
 
-#: ../Pinta/Actions/File/SaveDocumentImplementationAction.cs:241
-#, csharp-format
-msgid "A file named \"{0}\" already exists. Do you want to replace it?"
-msgstr "Soubor \"{0}\" už existuje. Chcete ho přepsat?"
-
-#: ../Pinta/MainWindow.cs:349
+#: ../Pinta/MainWindow.cs:353
 msgid "A_dd-ins"
 msgstr "D_oplňky"
 
@@ -65,13 +60,13 @@ msgstr "D_oplňky"
 msgid "About"
 msgstr "O aplikaci"
 
-#: ../Pinta/Dialogs/AboutDialog.cs:260
+#: ../Pinta/Actions/Help/AboutDialogAction.cs:52
 msgid "About Pinta"
 msgstr "O Pinta"
 
 #: ../Pinta/Actions/Edit/PasteAction.cs:130
 #: ../Pinta.Core/Actions/LayerActions.cs:50
-#: ../Pinta.Core/Actions/LayerActions.cs:312
+#: ../Pinta.Core/Actions/LayerActions.cs:330
 msgid "Add New Layer"
 msgstr "Přidat novou vrstvu"
 
@@ -99,7 +94,7 @@ msgstr "Správa repozitářů s doplňky"
 msgid "Add-in packages"
 msgstr "Balíčky s doplňky"
 
-#: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:801
+#: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:803
 msgid "Added"
 msgstr "Přidáno"
 
@@ -113,8 +108,8 @@ msgstr ""
 msgid "After select"
 msgstr "Po výběru"
 
-#: ../Pinta/Actions/File/OpenDocumentAction.cs:71
-#: ../Pinta.Core/Actions/EditActions.cs:378
+#: ../Pinta/Actions/File/OpenDocumentAction.cs:83
+#: ../Pinta.Core/Actions/EditActions.cs:380
 msgid "All files"
 msgstr "Všechny soubory"
 
@@ -150,11 +145,11 @@ msgstr "Úhel"
 msgid "Antialias"
 msgstr "Vyhlazování"
 
-#: ../Pinta.Core/Classes/BaseTool.cs:346
+#: ../Pinta.Core/Classes/BaseTool.cs:352
 msgid "Antialiasing Off"
 msgstr "Antialiasing Vypnout"
 
-#: ../Pinta.Core/Classes/BaseTool.cs:345
+#: ../Pinta.Core/Classes/BaseTool.cs:351
 msgid "Antialiasing On"
 msgstr "Antialiasing Zapnout"
 
@@ -188,7 +183,7 @@ msgstr "Automatická úroveň"
 msgid "Available in repository:"
 msgstr "Dostupné v repozitáři:"
 
-#: ../Pinta.Core/Managers/WorkspaceManager.cs:169
+#: ../Pinta.Core/Managers/WorkspaceManager.cs:175
 msgid "Background"
 msgstr "Pozadí"
 
@@ -200,7 +195,7 @@ msgstr "Barva pozadí"
 msgid "Background:"
 msgstr "Pozadí:"
 
-#: ../Pinta/Dialogs/AboutDialog.cs:174
+#: ../Pinta/Actions/Help/AboutDialogAction.cs:82
 msgid "Based on the work of Paint.NET:"
 msgstr "Na základě práce Paint.NET"
 
@@ -234,7 +229,7 @@ msgstr "Modrá "
 msgid "Blurs"
 msgstr "Rozmazání"
 
-#: ../Pinta.Tools/Tools/TextTool.cs:160
+#: ../Pinta.Tools/Tools/TextTool.cs:162
 msgid "Bold"
 msgstr "Tučně"
 
@@ -277,10 +272,10 @@ msgstr "Procentuelně:"
 #: ../Pinta/Actions/File/OpenDocumentAction.cs:54
 #: ../Pinta/Actions/File/SaveDocumentImplementationAction.cs:76
 #: ../Pinta.Core/Actions/EditActions.cs:362
-#: ../Pinta.Core/Actions/EditActions.cs:403
+#: ../Pinta.Core/Actions/EditActions.cs:404
 #: ../Pinta.Core/Actions/LayerActions.cs:169
 msgid "Cancel"
-msgstr ""
+msgstr "Zrušit"
 
 #: ../Pinta/Pads/CanvasPad.cs:43
 msgid "Canvas"
@@ -290,7 +285,7 @@ msgstr "Plátno"
 msgid "Cell Size"
 msgstr "Velikost buňky"
 
-#: ../Pinta.Tools/Tools/TextTool.cs:196
+#: ../Pinta.Tools/Tools/TextTool.cs:210
 msgid "Center Align"
 msgstr "Zarovnat na střed"
 
@@ -306,13 +301,13 @@ msgstr "Vystředěné"
 msgid "Centimeters"
 msgstr "Centimetry"
 
-#: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:338
+#: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:339
 msgid "Changed Shape Type"
 msgstr "Změnit typ tvarování"
 
 #: ../Pinta.Effects/Dialogs/Effects.LevelsDialog.cs:473
 msgid "Choose Color"
-msgstr ""
+msgstr "Vybrat barvu"
 
 #: ../Pinta.Gui.Widgets/Widgets/StatusBarColorPaletteWidget.cs:106
 msgid "Choose Palette Color"
@@ -350,7 +345,7 @@ msgstr ""
 "Kliknutím a táhnutím vytvoříte elyptický výběr. Pro kruhový výběr podržte "
 "Shift."
 
-#: ../Pinta.Tools/Tools/GradientTool.cs:53
+#: ../Pinta.Tools/Tools/GradientTool.cs:51
 msgid ""
 "Click and drag to draw gradient from primary to secondary color.  Right "
 "click to reverse."
@@ -384,7 +379,7 @@ msgstr "Kliknutím vyberte sekundární barvu."
 
 #: ../Pinta.Gui.Widgets/Widgets/StatusBarColorPaletteWidget.cs:229
 msgid "Click to switch between primary and secondary color."
-msgstr ""
+msgstr "Kliknutím přepnete mezi primární a sekundární barvou"
 
 #: ../Pinta/Dialogs/NewImageDialog.cs:161
 #: ../Pinta/Dialogs/NewImageDialog.cs:199
@@ -408,7 +403,7 @@ msgstr "Zavřít vše"
 #: ../Pinta/Actions/File/CloseDocumentAction.cs:72
 #: ../Pinta/Actions/File/CloseDocumentAction.cs:75
 msgid "Close _without Saving"
-msgstr ""
+msgstr "Zavřít _bez uložení"
 
 #: ../Pinta.Tools/Editable/EditEngines/RectangleEditEngine.cs:40
 msgid "Closed Curve Shape"
@@ -438,9 +433,9 @@ msgstr "Smísení barev"
 msgid "Color Dodge"
 msgstr "Nepromísení barev"
 
-#: ../Pinta.Tools/Tools/GradientTool.cs:200
+#: ../Pinta.Tools/Tools/GradientTool.cs:203
 msgid "Color Mode"
-msgstr ""
+msgstr "Režim barev"
 
 #: ../Pinta.Tools/Tools/ColorPickerTool.cs:52
 msgid "Color Picker"
@@ -458,7 +453,7 @@ msgstr "Sytost barev"
 msgid "Coloring"
 msgstr "Barevnost"
 
-#: ../Pinta.Tools/Tools/GradientTool.cs:185
+#: ../Pinta.Tools/Tools/GradientTool.cs:188
 msgid "Conical Gradient"
 msgstr "Kónický přechod"
 
@@ -475,10 +470,6 @@ msgstr "Spojité"
 msgid "Contrast"
 msgstr "Kontrast"
 
-#: ../Pinta/Dialogs/AboutDialog.cs:142
-msgid "Contributors to this release:"
-msgstr "Přispěli k této verzi:"
-
 #: ../Pinta.Core/Actions/EditActions.cs:62
 msgid "Copy"
 msgstr "Kopírovat"
@@ -487,22 +478,18 @@ msgstr "Kopírovat"
 msgid "Copy Merged"
 msgstr "Kopírovat sloučené"
 
-#: ../Pinta/Dialogs/VersionInformationTabPage.cs:67
-msgid "Copy Version Info"
-msgstr ""
-
-#: ../Pinta/Dialogs/AboutPintaTabPage.cs:56
+#: ../Pinta/Actions/Help/AboutDialogAction.cs:70
 msgid "Copyright"
 msgstr "Copyright"
 
-#: ../Pinta/Actions/File/NewScreenshotAction.cs:70
+#: ../Pinta/Actions/File/NewScreenshotAction.cs:124
 #, csharp-format
 msgid "Could not obtain the size of display '{0}'"
-msgstr ""
+msgstr "Nepodařilo se získat velikost displeje '{0}'"
 
-#: ../Pinta.Core/Classes/Palette.cs:185
-#: ../Pinta.Core/Managers/WorkspaceManager.cs:376
-#: ../Pinta.Core/Managers/WorkspaceManager.cs:385
+#: ../Pinta.Core/Classes/Palette.cs:197
+#: ../Pinta.Core/Managers/WorkspaceManager.cs:403
+#: ../Pinta.Core/Managers/WorkspaceManager.cs:412
 #, csharp-format
 msgid "Could not open file: {0}"
 msgstr "Nelze otevřít soubor: {0}"
@@ -512,7 +499,7 @@ msgid "Coverage"
 msgstr "Pokrytí"
 
 #: ../Pinta.Core/Actions/ImageActions.cs:47
-#: ../Pinta.Core/Actions/ImageActions.cs:292
+#: ../Pinta.Core/Actions/ImageActions.cs:286
 msgid "Crop to Selection"
 msgstr "Vystřihnout do výběru"
 
@@ -541,16 +528,16 @@ msgstr "Ztmavit"
 msgid "Dash"
 msgstr "Pomlčka"
 
-#: ../Pinta/Actions/File/NewScreenshotAction.cs:52
+#: ../Pinta/Actions/File/NewScreenshotAction.cs:106
 msgid "Delay before taking a screenshot (seconds):"
 msgstr "Zpoždění před sejmutím obrazovky (sekundy):"
 
 #: ../Pinta.Core/Actions/LayerActions.cs:51
-#: ../Pinta.Core/Actions/LayerActions.cs:295
+#: ../Pinta.Core/Actions/LayerActions.cs:313
 msgid "Delete Layer"
 msgstr "Smazat vrstvu"
 
-#: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:480
+#: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:482
 msgid "Deleted"
 msgstr "Odstraněno"
 
@@ -562,7 +549,7 @@ msgstr "Zrušit výběr"
 msgid "Deselect All"
 msgstr "Zrušit výběr"
 
-#: ../Pinta/Dialogs/ErrorDialog.cs:99
+#: ../Pinta/Dialogs/ErrorDialog.cs:98
 #: Mono.Addins.Gui/gtk-gui/Mono.Addins.Gui.ErrorDialog.cs:92
 #: Mono.Addins.Gui/gtk-gui/Mono.Addins.Gui.ProgressDialog.cs:66
 msgid "Details"
@@ -603,24 +590,24 @@ msgstr "Nepřepínat nástroj"
 msgid "Don't change canvas size"
 msgstr "Neměnit velikost plátna"
 
-#: ../Pinta/MainWindow.cs:539
+#: ../Pinta/MainWindow.cs:544
 msgid "Download failed"
-msgstr ""
+msgstr "Stahování se nezdařilo"
 
 #: Mono.Addins.Gui/Mono.Addins.Gui/AddinInfoView.cs:293
 msgid "Download size"
 msgstr "Velikost ke stažení"
 
-#: ../Pinta/MainWindow.cs:520
+#: ../Pinta/MainWindow.cs:525
 msgid "Downloading Image"
-msgstr ""
+msgstr "Stahování obrázku"
 
 #: ../Pinta.Core/Actions/LayerActions.cs:52
-#: ../Pinta.Core/Actions/LayerActions.cs:286
+#: ../Pinta.Core/Actions/LayerActions.cs:304
 msgid "Duplicate Layer"
 msgstr "Duplikovat vrstvu"
 
-#: ../xdg/pinta.desktop.in.h:2
+#: ../xdg/pinta.desktop.in.h:2 ../Pinta/Actions/Help/AboutDialogAction.cs:58
 msgid "Easily create and edit images"
 msgstr "Snadné vytváření a úprava obrázků"
 
@@ -632,7 +619,7 @@ msgstr "Chování hran"
 msgid "Edge Detect"
 msgstr "Detekce hran"
 
-#: ../Pinta/MainWindow.cs:342
+#: ../Pinta/MainWindow.cs:346
 msgid "Effe_cts"
 msgstr "Efe_kty"
 
@@ -663,7 +650,7 @@ msgstr "Smazat výběr"
 msgid "Eraser"
 msgstr "Guma"
 
-#: ../Pinta/Actions/File/SaveDocumentImplementationAction.cs:186
+#: ../Pinta/Actions/File/SaveDocumentImplementationAction.cs:163
 msgid "Error"
 msgstr "Chyba"
 
@@ -686,23 +673,28 @@ msgstr "Roztáhnout plátno"
 msgid "Factor"
 msgstr "Faktor"
 
-#: ../Pinta.Core/Managers/WorkspaceManager.cs:403
+#: ../Pinta/Actions/File/NewScreenshotAction.cs:95
+msgid "Failed to access XDG Desktop Portals"
+msgstr ""
+
+#: ../Pinta.Core/Managers/WorkspaceManager.cs:430
 msgid "Failed to open image"
-msgstr ""
+msgstr "Obrázek se nepodařilo otevřít"
 
-#: ../Pinta/Actions/File/SaveDocumentImplementationAction.cs:209
+#: ../Pinta/Actions/File/SaveDocumentImplementationAction.cs:186
 msgid "Failed to save image"
-msgstr ""
+msgstr "Obrázek se nepodařilo uložit"
 
-#: ../Pinta/Actions/File/NewScreenshotAction.cs:69
+#: ../Pinta/Actions/File/NewScreenshotAction.cs:94
+#: ../Pinta/Actions/File/NewScreenshotAction.cs:123
 msgid "Failed to take screenshot"
-msgstr ""
+msgstr "Snímek obrazovky se nezdařil"
 
 #: ../Pinta.Core/Actions/HelpActions.cs:46
 msgid "File a Bug"
 msgstr "Nahlásit chybu"
 
-#: ../Pinta.Tools/Tools/TextTool.cs:227
+#: ../Pinta.Tools/Tools/TextTool.cs:245
 msgid "Fill Background"
 msgstr "Vyplnit pozadí"
 
@@ -726,8 +718,8 @@ msgstr "Styl výpně"
 msgid "Fill and Outline Shape"
 msgstr "Vyplnit a Obtáhnout tvar"
 
-#: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:1100
-#: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:1471
+#: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:1102
+#: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:1473
 msgid "Finalized"
 msgstr "Dokončeno"
 
@@ -736,7 +728,7 @@ msgid "Finish Pixels"
 msgstr "Dokončit pixely"
 
 #: ../Pinta.Core/Actions/ImageActions.cs:56
-#: ../Pinta.Core/Actions/ImageActions.cs:156
+#: ../Pinta.Core/Actions/ImageActions.cs:152
 msgid "Flatten"
 msgstr "Zploštit"
 
@@ -812,8 +804,8 @@ msgstr "Globální"
 msgid "Glow"
 msgstr "Záře"
 
-#: ../Pinta.Tools/Tools/GradientTool.cs:51
-#: ../Pinta.Tools/Tools/GradientTool.cs:175
+#: ../Pinta.Tools/Tools/GradientTool.cs:49
+#: ../Pinta.Tools/Tools/GradientTool.cs:178
 msgid "Gradient"
 msgstr "Přechod"
 
@@ -860,7 +852,7 @@ msgstr "Odstín"
 msgid "Hue / Saturation"
 msgstr "Odstín / Sytost"
 
-#: ../Pinta/Actions/File/SaveDocumentImplementationAction.cs:200
+#: ../Pinta/Actions/File/SaveDocumentImplementationAction.cs:177
 msgid "ICO files can not be larger than 255 x 255 pixels."
 msgstr "Soubory ICO nesmí být větší než 255 x 255 pixelů"
 
@@ -885,7 +877,7 @@ msgid "Image cannot be pasted"
 msgstr "Nelze vložit obrázek"
 
 #: ../Pinta/Actions/File/OpenDocumentAction.cs:58
-#: ../Pinta.Core/Actions/LayerActions.cs:182
+#: ../Pinta.Core/Actions/LayerActions.cs:196
 msgid "Image files"
 msgstr "Soubory obrázků"
 
@@ -893,11 +885,11 @@ msgstr "Soubory obrázků"
 msgid "Image larger than canvas"
 msgstr "Obrázek větší než plátno"
 
-#: ../Pinta/Actions/File/SaveDocumentImplementationAction.cs:199
+#: ../Pinta/Actions/File/SaveDocumentImplementationAction.cs:176
 msgid "Image too large"
 msgstr "Obrázek je příliš velký"
 
-#: ../Pinta.Core/Actions/LayerActions.cs:206
+#: ../Pinta.Core/Actions/LayerActions.cs:224
 msgid "Import From File"
 msgstr "Vložit ze souboru"
 
@@ -981,11 +973,11 @@ msgid "Invert Colors"
 msgstr "Invertovat barvy"
 
 #: ../Pinta.Core/Actions/EditActions.cs:69
-#: ../Pinta.Core/Actions/EditActions.cs:456
+#: ../Pinta.Core/Actions/EditActions.cs:460
 msgid "Invert Selection"
 msgstr "Obrátit výběr"
 
-#: ../Pinta.Tools/Tools/TextTool.cs:168
+#: ../Pinta.Tools/Tools/TextTool.cs:173
 msgid "Italic"
 msgstr "Kurzíva"
 
@@ -1009,7 +1001,7 @@ msgstr "Výběr lasem"
 msgid "Layer"
 msgstr "Vrstva"
 
-#: ../Pinta.Gui.Widgets/Widgets/Layers/LayersListWidget.cs:286
+#: ../Pinta.Gui.Widgets/Widgets/Layers/LayersListWidget.cs:293
 msgid "Layer Hidden"
 msgstr "Vrstva skryta"
 
@@ -1026,7 +1018,7 @@ msgstr "Vlastnosti vrstvy"
 msgid "Layer Properties..."
 msgstr "Vlastnosti Vrstvy..."
 
-#: ../Pinta.Gui.Widgets/Widgets/Layers/LayersListWidget.cs:286
+#: ../Pinta.Gui.Widgets/Widgets/Layers/LayersListWidget.cs:293
 msgid "Layer Shown"
 msgstr "Vrstva zobrazena"
 
@@ -1034,13 +1026,13 @@ msgstr "Vrstva zobrazena"
 #: ../Pinta.Core/Classes/DocumentLayers.cs:135
 #, csharp-format
 msgid "Layer {0}"
-msgstr ""
+msgstr "Vrstva {0}"
 
 #: ../Pinta/Pads/LayersPad.cs:40 ../Pinta/Pads/LayersPad.cs:60
 msgid "Layers"
 msgstr "Vrstvy"
 
-#: ../Pinta.Tools/Tools/TextTool.cs:188
+#: ../Pinta.Tools/Tools/TextTool.cs:199
 msgid "Left Align"
 msgstr "Zarovnat doleva"
 
@@ -1162,7 +1154,7 @@ msgstr "Úrovně"
 msgid "Levels Adjustment"
 msgstr "Přizpůsobení úrovně"
 
-#: ../Pinta/Dialogs/AboutPintaTabPage.cs:50
+#: ../Pinta/Actions/Help/AboutDialogAction.cs:78
 msgid "License"
 msgstr "Licence"
 
@@ -1182,15 +1174,15 @@ msgstr "Světlost"
 msgid "Line/Curve"
 msgstr "Čára/Křivka"
 
-#: ../Pinta.Tools/Tools/GradientTool.cs:183
+#: ../Pinta.Tools/Tools/GradientTool.cs:186
 msgid "Linear Diamond Gradient"
 msgstr "Lineární kosočtvercový přechod"
 
-#: ../Pinta.Tools/Tools/GradientTool.cs:181
+#: ../Pinta.Tools/Tools/GradientTool.cs:184
 msgid "Linear Gradient"
 msgstr "Lineární přechod"
 
-#: ../Pinta.Tools/Tools/GradientTool.cs:182
+#: ../Pinta.Tools/Tools/GradientTool.cs:185
 msgid "Linear Reflected Gradient"
 msgstr "Lineární odražeý přechod"
 
@@ -1225,7 +1217,7 @@ msgid "Median"
 msgstr "Medián"
 
 #: ../Pinta.Core/Actions/LayerActions.cs:53
-#: ../Pinta.Core/Actions/LayerActions.cs:264
+#: ../Pinta.Core/Actions/LayerActions.cs:282
 msgid "Merge Layer Down"
 msgstr "Spojit vrstvy"
 
@@ -1234,11 +1226,11 @@ msgstr "Spojit vrstvy"
 msgid "Missing: {0} v{1}"
 msgstr "Chybějící: {0} v{1}"
 
-#: ../Pinta.Tools/Tools/GradientTool.cs:194
+#: ../Pinta.Tools/Tools/GradientTool.cs:197
 msgid "Mode"
-msgstr ""
+msgstr "Režim"
 
-#: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:880
+#: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:882
 msgid "Modified"
 msgstr "Změněno"
 
@@ -1251,12 +1243,12 @@ msgid "Motion Blur"
 msgstr "Rozmazání pohybem"
 
 #: ../Pinta.Core/Actions/LayerActions.cs:59
-#: ../Pinta.Core/Actions/LayerActions.cs:250
+#: ../Pinta.Core/Actions/LayerActions.cs:268
 msgid "Move Layer Down"
 msgstr "Posunout vrstvu dolů"
 
 #: ../Pinta.Core/Actions/LayerActions.cs:58
-#: ../Pinta.Core/Actions/LayerActions.cs:239
+#: ../Pinta.Core/Actions/LayerActions.cs:257
 msgid "Move Layer Up"
 msgstr "Posunout vrstvu nahoru"
 
@@ -1289,7 +1281,7 @@ msgid "New"
 msgstr "Nový"
 
 #: ../Pinta/Dialogs/NewImageDialog.cs:68
-#: ../Pinta.Core/Managers/WorkspaceManager.cs:178
+#: ../Pinta.Core/Managers/WorkspaceManager.cs:184
 msgid "New Image"
 msgstr "Nový obrázek"
 
@@ -1325,11 +1317,11 @@ msgstr "Šum"
 
 #: ../Pinta.Core/Effects/UserBlendOps.cs:33
 #: ../Pinta.Tools/Brushes/PlainBrush.cs:37
-#: ../Pinta.Tools/Tools/EraserTool.cs:267 ../Pinta.Tools/Tools/TextTool.cs:224
+#: ../Pinta.Tools/Tools/EraserTool.cs:267 ../Pinta.Tools/Tools/TextTool.cs:242
 msgid "Normal"
 msgstr "Normální"
 
-#: ../Pinta.Core/Classes/BaseTool.cs:330
+#: ../Pinta.Core/Classes/BaseTool.cs:336
 msgid "Normal Blending"
 msgstr "Normální míchání"
 
@@ -1337,7 +1329,7 @@ msgstr "Normální míchání"
 msgid "Normal Size"
 msgstr "Normální velikost"
 
-#: ../Pinta.Tools/Tools/TextTool.cs:225
+#: ../Pinta.Tools/Tools/TextTool.cs:243
 msgid "Normal and Outline"
 msgstr "Normální a ohraničený"
 
@@ -1366,7 +1358,7 @@ msgstr "Otevřít"
 msgid "Open Curve Shape"
 msgstr "Tvar otevřené křivky"
 
-#: ../Pinta.Core/Managers/WorkspaceManager.cs:225
+#: ../Pinta.Core/Managers/WorkspaceManager.cs:255
 msgid "Open Image"
 msgstr "Otevřít obrázek"
 
@@ -1409,7 +1401,7 @@ msgid "Other"
 msgstr "Jiné"
 
 #: ../Pinta.Effects/Effects/OutlineEffect.cs:27
-#: ../Pinta.Tools/Tools/TextTool.cs:226
+#: ../Pinta.Tools/Tools/TextTool.cs:244
 msgid "Outline"
 msgstr "Obtáhnout"
 
@@ -1418,7 +1410,7 @@ msgstr "Obtáhnout"
 msgid "Outline Shape"
 msgstr "Obtáhnout tvar"
 
-#: ../Pinta.Tools/Tools/TextTool.cs:241
+#: ../Pinta.Tools/Tools/TextTool.cs:259
 msgid "Outline width"
 msgstr "Šířka ohraničení"
 
@@ -1434,7 +1426,7 @@ msgstr "Výstupní histogram"
 msgid "Overlay"
 msgstr "Překrytí"
 
-#: ../Pinta.Core/Classes/BaseTool.cs:331
+#: ../Pinta.Core/Classes/BaseTool.cs:337
 msgid "Overwrite"
 msgstr "Přepsat"
 
@@ -1450,9 +1442,9 @@ msgstr "Štětec"
 msgid "Palette"
 msgstr "Paleta"
 
-#: ../Pinta.Core/Actions/EditActions.cs:365
+#: ../Pinta.Core/Actions/EditActions.cs:367
 msgid "Palette files"
-msgstr ""
+msgstr "Soubory palet"
 
 #: ../Pinta/Actions/Layers/RotateZoomLayerAction.cs:115
 #: ../Pinta.Tools/Tools/PanTool.cs:42
@@ -1473,10 +1465,6 @@ msgstr "Vložit do nového obrázku"
 #: ../Pinta.Core/Actions/EditActions.cs:65
 msgid "Paste Into New Layer"
 msgstr "Vložit do nové vrstvy"
-
-#: ../Pinta/Dialogs/VersionInformationTabPage.cs:53
-msgid "Path"
-msgstr "Cesta"
 
 #: Mono.Addins.Gui/gtk-gui/Mono.Addins.Gui.NewSiteDialog.cs:130
 msgid "Path:"
@@ -1505,7 +1493,7 @@ msgstr "Percentil"
 msgid "Photo"
 msgstr "Fotografie"
 
-#: ../xdg/pinta.desktop.in.h:1
+#: ../xdg/pinta.desktop.in.h:1 ../Pinta/Actions/Help/AboutDialogAction.cs:54
 msgid "Pinta"
 msgstr "Pinta"
 
@@ -1525,7 +1513,7 @@ msgstr "Grafický editor Pinta"
 msgid "Pinta Website"
 msgstr "Stránky Pinta"
 
-#: ../Pinta/Actions/File/SaveDocumentImplementationAction.cs:185
+#: ../Pinta/Actions/File/SaveDocumentImplementationAction.cs:162
 msgid "Pinta does not support saving images in this file format."
 msgstr "Pinta nepodporuje ukládání obrázků v tomto typu souborů.."
 
@@ -1537,14 +1525,19 @@ msgid ""
 "apply to your images, and also has the ability to create unlimited layers to "
 "help organize your creativity."
 msgstr ""
+"Pinta je aplikace pro úpravu obrázků, kreslení a malování s jednoduchým, ale "
+"výkonným rozhraním. Pinta má širokou škálu nástrojů pro kreslení, včetně: "
+"volné ruky, obdélníků, kružnic a čar. Má také více než 35 efektů, které "
+"můžete použít na své obrázky, a také možnost vytvářet neomezené množství "
+"vrstev, které vám pomohou uspořádat vaši kreativitu."
 
-#: ../Pinta.Core/Managers/WorkspaceManager.cs:386
+#: ../Pinta.Core/Managers/WorkspaceManager.cs:413
 msgid "Pinta supports the following file formats:"
-msgstr ""
+msgstr "Pinta podporuje následující formáty souborů:"
 
-#: ../Pinta.Core/Classes/Palette.cs:186
+#: ../Pinta.Core/Classes/Palette.cs:198
 msgid "Pinta supports the following palette formats:"
-msgstr ""
+msgstr "Pinta podporuje následující formáty palet:"
 
 #: ../Pinta.Core/Actions/ViewActions.cs:72
 msgid "Pixel Grid"
@@ -1558,12 +1551,12 @@ msgstr "Rozpixelovat"
 msgid "Pixels"
 msgstr "Pixely"
 
-#: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:523
-#: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:767
+#: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:525
+#: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:769
 msgid "Point Added"
 msgstr "Bod přidán"
 
-#: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:466
+#: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:468
 msgid "Point Deleted"
 msgstr "Bod odstraněn"
 
@@ -1591,10 +1584,6 @@ msgstr "Předvolba:"
 #: ../Pinta/Dialogs/NewImageDialog.cs:318
 msgid "Preview"
 msgstr "Náhled"
-
-#: ../Pinta/Dialogs/AboutDialog.cs:154
-msgid "Previous contributors:"
-msgstr "Přispěli k předchozím verzím:"
 
 #: ../Pinta.Effects/Effects/WarpEffect.cs:25
 msgid "Primary"
@@ -1631,7 +1620,7 @@ msgstr "RGB barvy"
 msgid "Radial Blur"
 msgstr "Rozmazání otáčením"
 
-#: ../Pinta.Tools/Tools/GradientTool.cs:184
+#: ../Pinta.Tools/Tools/GradientTool.cs:187
 msgid "Radial Gradient"
 msgstr "Radiální přechod"
 
@@ -1701,7 +1690,7 @@ msgstr "Zaregistrovat internetový repozitář"
 msgid "Registering repository"
 msgstr "Registrace repozitářů"
 
-#: ../Pinta/Dialogs/AboutPintaTabPage.cs:50
+#: ../Pinta/Actions/Help/AboutDialogAction.cs:79
 msgid "Released under the MIT X11 License."
 msgstr "Vydáno pod licencí MIT X11"
 
@@ -1723,13 +1712,11 @@ msgstr "Vykreslit"
 msgid "Rendering Effect"
 msgstr "Vykreslovací efekt"
 
-#: ../Pinta/Actions/File/SaveDocumentImplementationAction.cs:251
-#: ../Pinta/Actions/File/SaveDocumentImplementationAction.cs:255
 #: ../Pinta.Core/Classes/SelectionModeHandler.cs:47
 msgid "Replace"
 msgstr "Nahradit"
 
-#: ../Pinta/Dialogs/ErrorDialog.cs:110
+#: ../Pinta/Dialogs/ErrorDialog.cs:109
 msgid "Report Bug...."
 msgstr "Nahlásit chybu..."
 
@@ -1781,7 +1768,7 @@ msgstr "Změnit velikost obrázku..."
 msgid "Resize Palette"
 msgstr "Velikost Palety"
 
-#: ../Pinta.Tools/Tools/TextTool.cs:204
+#: ../Pinta.Tools/Tools/TextTool.cs:221
 msgid "Right Align"
 msgstr "Zarovnat doprava"
 
@@ -1848,7 +1835,7 @@ msgid "Saturation Percentage"
 msgstr "Procento sytosti"
 
 #: ../Pinta/Actions/File/SaveDocumentImplementationAction.cs:75
-#: ../Pinta.Core/Actions/EditActions.cs:402
+#: ../Pinta.Core/Actions/EditActions.cs:403
 #: ../Pinta.Core/Actions/FileActions.cs:55
 msgid "Save"
 msgstr "Uložit"
@@ -1866,14 +1853,14 @@ msgstr "Uložit jako..."
 msgid "Save Image File"
 msgstr "Uložení obrázku"
 
-#: ../Pinta.Core/Actions/EditActions.cs:399
+#: ../Pinta.Core/Actions/EditActions.cs:400
 msgid "Save Palette File"
 msgstr "Uložit soubor palety"
 
 #: ../Pinta/Actions/File/CloseDocumentAction.cs:60
 #, csharp-format
 msgid "Save changes to image \"{0}\" before closing?"
-msgstr ""
+msgstr "Uložit změny do obrázku \"{0}\" před uzavřením?"
 
 #: ../Pinta.Effects/Effects/CloudsEffect.cs:200
 msgid "Scale"
@@ -1931,7 +1918,7 @@ msgstr "Zobrazit tuto zprávu a zavřít."
 
 #: ../Pinta.Core/Actions/ViewActions.cs:150
 msgid "Show/Hide"
-msgstr ""
+msgstr "Zobrazit/Skrýt"
 
 #: ../Pinta.Tools/Tools/ColorPickerTool.cs:225
 msgid "Single Pixel"
@@ -1971,7 +1958,7 @@ msgstr "Čtverce"
 
 #: ../Pinta.Core/Actions/ViewActions.cs:73
 msgid "Status Bar"
-msgstr ""
+msgstr "Stavový řádek"
 
 #: ../Pinta.Effects/Effects/ReduceNoiseEffect.cs:96
 msgid "Strength"
@@ -1992,7 +1979,7 @@ msgstr "Přepnout na tužku"
 msgid "Switch to previous tool"
 msgstr "Přepnout na předchozí nástroj"
 
-#: ../Pinta/Actions/File/NewScreenshotAction.cs:51
+#: ../Pinta/Actions/File/NewScreenshotAction.cs:105
 msgid "Take Screenshot"
 msgstr "Sejmout obrazovku"
 
@@ -2004,19 +1991,13 @@ msgstr "Text"
 msgid "Text - Finalize"
 msgstr "Text - Dokončení"
 
-#: ../Pinta.Tools/Tools/TextTool.cs:217
+#: ../Pinta.Tools/Tools/TextTool.cs:235
 msgid "Text Style"
 msgstr "Styl textu"
 
 #: ../Pinta/Actions/Edit/PasteAction.cs:160
 msgid "The clipboard does not contain an image."
 msgstr "Schránka neobsahuje žádný obrázek"
-
-#: ../Pinta/Actions/File/SaveDocumentImplementationAction.cs:242
-#, csharp-format
-msgid ""
-"The file already exists in \"{1}\". Replacing it will overwrite its contents."
-msgstr "Soubor už existuje v \"{1}\". Nahrazení přepíše jeho obsah."
 
 #: Mono.Addins.Gui/gtk-gui/Mono.Addins.Gui.AddinInstallerDialog.cs:48
 msgid "The following add-ins will be installed:"
@@ -2098,10 +2079,6 @@ msgstr "Velikost dlaždic"
 msgid "Tip: Right-click to remove control points."
 msgstr "Tip: Pravým kliknutím odstraníte ovládací body"
 
-#: ../Pinta/Dialogs/VersionInformationTabPage.cs:44
-msgid "Title"
-msgstr "Název"
-
 #: ../Pinta.Effects/Effects/RedEyeRemoveEffect.cs:70
 #: ../Pinta.Tools/Tools/FloodTool.cs:127
 #: ../Pinta.Tools/Tools/RecolorTool.cs:200
@@ -2114,9 +2091,9 @@ msgstr "Nástroj"
 
 #: ../Pinta.Core/Actions/ViewActions.cs:74
 msgid "Tool Box"
-msgstr ""
+msgstr "Nástrojový box"
 
-#: ../Pinta/MainWindow.cs:364
+#: ../Pinta/MainWindow.cs:368
 msgid "Tool Windows"
 msgstr "Okna Nástrojů"
 
@@ -2132,13 +2109,9 @@ msgstr "Přenosová mapa"
 msgid "Translate This Application"
 msgstr "Přeložit tuto aplikaci"
 
-#: ../Pinta/Dialogs/AboutDialog.cs:168
-msgid "Translated by:"
-msgstr "Přeložili:"
-
-#: ../Pinta.Tools/Tools/GradientTool.cs:201
+#: ../Pinta.Tools/Tools/GradientTool.cs:204
 msgid "Transparency Mode"
-msgstr ""
+msgstr "Režim průhlednosti"
 
 #: ../Pinta/Dialogs/NewImageDialog.cs:289
 #: ../Pinta.Effects/Effects/WarpEffect.cs:29
@@ -2154,14 +2127,16 @@ msgstr "Zkroutit"
 msgid "Type"
 msgstr "Typ"
 
-#: ../Pinta/MainWindow.cs:540
+#: ../Pinta/MainWindow.cs:545
 #, csharp-format
 msgid ""
 "Unable to download image from {0}.\n"
 "Details: {1}"
 msgstr ""
+"Nelze stáhnout obrázek z {0}.\n"
+"Podrobnosti: {1}"
 
-#: ../Pinta.Tools/Tools/TextTool.cs:176
+#: ../Pinta.Tools/Tools/TextTool.cs:184
 msgid "Underline"
 msgstr "Podtržené"
 
@@ -2187,12 +2162,12 @@ msgstr "Odebírání doplňků"
 msgid "Union (+) ({0} + Left Click)"
 msgstr ""
 
-#: ../Pinta.Core/Managers/WorkspaceManager.cs:112
+#: ../Pinta.Core/Managers/WorkspaceManager.cs:115
 #, csharp-format
 msgid "Unsaved Image {0}"
 msgstr "Neuložený obrázek {0}"
 
-#: ../Pinta.Core/Managers/WorkspaceManager.cs:220
+#: ../Pinta.Core/Managers/WorkspaceManager.cs:250
 msgid "Unsupported file format"
 msgstr "Nepodporovaný typ souboru"
 
@@ -2234,18 +2209,9 @@ msgstr ""
 "Použivejte nízkou kvalitu pro náhledy, malé obrázky a nízké úhly. Vysokou "
 "kvalitu pro finální kvalitu, velké obrázky a úhly."
 
-#: ../Pinta/Dialogs/AboutDialog.cs:181
+#: ../Pinta/Actions/Help/AboutDialogAction.cs:86
 msgid "Using some icons from:"
 msgstr "Použity některé ikonky z:"
-
-#: ../Pinta/Dialogs/AboutPintaTabPage.cs:42
-#: ../Pinta/Dialogs/VersionInformationTabPage.cs:50
-msgid "Version"
-msgstr "Verze"
-
-#: ../Pinta/Dialogs/AboutDialog.cs:277
-msgid "Version Info"
-msgstr "Informace o verzi"
 
 #: ../Pinta/Dialogs/LayerPropertiesDialog.cs:195
 msgid "Visible"
@@ -2267,8 +2233,8 @@ msgstr "Šířka:"
 
 #: ../Pinta.Core/Actions/ViewActions.cs:103
 #: ../Pinta.Core/Actions/ViewActions.cs:282
-#: ../Pinta.Core/Classes/DocumentWorkspace.cs:315
-#: ../Pinta.Core/Classes/DocumentWorkspace.cs:323
+#: ../Pinta.Core/Classes/DocumentWorkspace.cs:324
+#: ../Pinta.Core/Classes/DocumentWorkspace.cs:332
 msgid "Window"
 msgstr "Okno"
 
@@ -2287,13 +2253,13 @@ msgid "Xor ({0} + Right Click)"
 msgstr ""
 
 #. Translators: {0} is the name of a file that the user does not have permission to open.
-#: ../Pinta.Core/Managers/WorkspaceManager.cs:405
+#: ../Pinta.Core/Managers/WorkspaceManager.cs:432
 #, csharp-format
 msgid "You do not have access to '{0}'."
-msgstr ""
+msgstr "Nemáte přístup do '{0}'."
 
 #. Translators: {0} is the name of a file that the user does not have write permission for.
-#: ../Pinta/Actions/File/SaveDocumentImplementationAction.cs:211
+#: ../Pinta/Actions/File/SaveDocumentImplementationAction.cs:188
 #, csharp-format
 msgid ""
 "You do not have access to modify '{0}'. The file or folder may be read-only."
@@ -2322,27 +2288,27 @@ msgstr "Oddálit"
 msgid "Zoom to Selection"
 msgstr "Přiblížit na výběr"
 
-#: ../Pinta/MainWindow.cs:339
+#: ../Pinta/MainWindow.cs:343
 msgid "_Adjustments"
 msgstr "_Přizpůsobení"
 
-#: ../Pinta/MainWindow.cs:324
+#: ../Pinta/MainWindow.cs:328
 msgid "_Edit"
 msgstr "_Upravit"
 
-#: ../Pinta/MainWindow.cs:320
+#: ../Pinta/MainWindow.cs:324
 msgid "_File"
 msgstr "_Soubor"
 
-#: ../Pinta/MainWindow.cs:358
+#: ../Pinta/MainWindow.cs:362
 msgid "_Help"
 msgstr "_Nápověda"
 
-#: ../Pinta/MainWindow.cs:332
+#: ../Pinta/MainWindow.cs:336
 msgid "_Image"
 msgstr "_Obrázek"
 
-#: ../Pinta/MainWindow.cs:336
+#: ../Pinta/MainWindow.cs:340
 msgid "_Layers"
 msgstr "_Vrstvy"
 
@@ -2350,21 +2316,21 @@ msgstr "_Vrstvy"
 msgid "_Uninstall..."
 msgstr "O_debrat..."
 
-#: ../Pinta/MainWindow.cs:328
+#: ../Pinta/MainWindow.cs:332
 msgid "_View"
 msgstr "_Zobrazit"
 
-#: ../Pinta/MainWindow.cs:354
+#: ../Pinta/MainWindow.cs:358
 msgid "_Window"
 msgstr "_Okno"
 
-#: ../Pinta/Dialogs/AboutPintaTabPage.cs:56
+#: ../Pinta/Actions/Help/AboutDialogAction.cs:71
 msgid "by Pinta contributors"
 msgstr "Od přispěvatelů Pinta"
 
 #: ../xdg/pinta.desktop.in.h:5
 msgid "draw;drawing;paint;painting;graphics;raster;2d;"
-msgstr ""
+msgstr "kreslení;kreslení;malování;malování;grafika;rastr;2d;"
 
 #: ../Pinta/Main.cs:62
 msgid "number of threads to use for rendering"
@@ -2379,13 +2345,14 @@ msgstr "počet vláken použitých k vykreslení"
 msgid "pixels"
 msgstr "pixely"
 
-#: ../Pinta/Dialogs/AboutDialog.cs:165
+#: ../Pinta/Actions/Help/AboutDialogAction.cs:62
 msgid "translator-credits"
 msgstr ""
 "Launchpad Contributions:\n"
 "  Cameron White https://launchpad.net/~cameronwhite91\n"
 "  Jan Fluksa https://launchpad.net/~jan-fluksa\n"
 "  Jonathan Pobst https://launchpad.net/~jpobst\n"
+"  Lukas Oubrecht https://launchpad.net/~i-lukas-k\n"
 "  Martin Tesar https://launchpad.net/~tesarmar\n"
 "  Pavel Borecki https://launchpad.net/~pavel-borecki\n"
 "  Pavel Kotrč https://launchpad.net/~pkotrc\n"
@@ -2405,9 +2372,9 @@ msgstr ""
 #: ../Pinta.Core/Classes/DocumentLayers.cs:234
 #, csharp-format
 msgid "{0} copy"
-msgstr ""
+msgstr "{0} kopie"
 
-#: ../Pinta.Core/ImageFormats/FormatDescriptor.cs:93
+#: ../Pinta.Core/ImageFormats/FormatDescriptor.cs:110
 #, csharp-format
 msgid "{0} image ({1})"
 msgstr "{0} obrázek ({1})"
@@ -2416,7 +2383,7 @@ msgstr "{0} obrázek ({1})"
 #: ../Pinta.Core/PaletteFormats/PaletteDescriptor.cs:62
 #, csharp-format
 msgid "{0} palette ({1})"
-msgstr ""
+msgstr "{0} paleta ({1})"
 
 #: Mono.Addins.Gui/Mono.Addins.Gui/AddinManagerDialog.cs:363
 #, csharp-format
@@ -2433,14 +2400,44 @@ msgstr[2] "Dostupných {0} aktualizací"
 msgid "{0}%"
 msgstr "{0}%"
 
+#~ msgid "Translated by:"
+#~ msgstr "Přeložili:"
+
+#~ msgid "Title"
+#~ msgstr "Název"
+
+#~ msgid "Version"
+#~ msgstr "Verze"
+
+#~ msgid "Version Info"
+#~ msgstr "Informace o verzi"
+
+#~ msgid "Path"
+#~ msgstr "Cesta"
+
 #~ msgid "Ctrl-left click to set origin, left click to paint."
 #~ msgstr "Ctrl+Levý klik k výběru zdroje, levý klik kreslí."
+
+#, csharp-format
+#~ msgid "A file named \"{0}\" already exists. Do you want to replace it?"
+#~ msgstr "Soubor \"{0}\" už existuje. Chcete ho přepsat?"
+
+#, csharp-format
+#~ msgid ""
+#~ "The file already exists in \"{1}\". Replacing it will overwrite its contents."
+#~ msgstr "Soubor už existuje v \"{1}\". Nahrazení přepíše jeho obsah."
 
 #~ msgid "No tool selected."
 #~ msgstr "Nebyl vybrán žádný nástroj."
 
 #~ msgid "Powered by Mono:"
 #~ msgstr "Běží na platformě Mono:"
+
+#~ msgid "Previous contributors:"
+#~ msgstr "Přispěli k předchozím verzím:"
+
+#~ msgid "Contributors to this release:"
+#~ msgstr "Přispěli k této verzi:"
 
 #~ msgid "Union (+) (Ctrl + Left Click)"
 #~ msgstr "Přidat"
@@ -2481,3 +2478,6 @@ msgstr "{0}%"
 #~ "pozici.\n"
 #~ "Držte Ctrl a klikem mimo obrázek vytvoříte nový tvar začínající na hraně.\n"
 #~ "Pro dokončení tvaru stiskněte Enter."
+
+#~ msgid "Copy Version Info"
+#~ msgstr "Kopírovat informace o verzi"

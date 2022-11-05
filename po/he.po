@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: pinta\n"
 "Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
-"POT-Creation-Date: 2022-01-11 23:44-0500\n"
+"POT-Creation-Date: 2022-11-04 22:46-0400\n"
 "PO-Revision-Date: 2021-11-03 19:55+0000\n"
 "Last-Translator: Yaron <sh.yaron@gmail.com>\n"
 "Language-Team: Hebrew <he@li.org>\n"
@@ -15,8 +15,8 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Launchpad-Export-Date: 2022-01-14 01:08+0000\n"
-"X-Generator: Launchpad (build 0072e2709f85567cc6c8d33e98acde9fcc09f491)\n"
+"X-Launchpad-Export-Date: 2022-11-05 02:52+0000\n"
+"X-Generator: Launchpad (build 83f7123b02a2b50a64bc29e7e35197179a885279)\n"
 
 #: Mono.Addins.Gui/Mono.Addins.Gui/InstallDialog.cs:142
 msgid " (in user directory)"
@@ -52,12 +52,7 @@ msgstr "אזור של 7 × 7"
 msgid "9 x 9 Region"
 msgstr "אזור של 9 × 9"
 
-#: ../Pinta/Actions/File/SaveDocumentImplementationAction.cs:241
-#, csharp-format
-msgid "A file named \"{0}\" already exists. Do you want to replace it?"
-msgstr "קובץ בשם \"{0}\" כבר קיים. האם ברצונך להחליף אותו?"
-
-#: ../Pinta/MainWindow.cs:349
+#: ../Pinta/MainWindow.cs:353
 msgid "A_dd-ins"
 msgstr "_תוספים"
 
@@ -65,13 +60,13 @@ msgstr "_תוספים"
 msgid "About"
 msgstr "על אודות"
 
-#: ../Pinta/Dialogs/AboutDialog.cs:260
+#: ../Pinta/Actions/Help/AboutDialogAction.cs:52
 msgid "About Pinta"
 msgstr "על אודות Pinta"
 
 #: ../Pinta/Actions/Edit/PasteAction.cs:130
 #: ../Pinta.Core/Actions/LayerActions.cs:50
-#: ../Pinta.Core/Actions/LayerActions.cs:312
+#: ../Pinta.Core/Actions/LayerActions.cs:330
 msgid "Add New Layer"
 msgstr "הוספת שכבה חדשה"
 
@@ -99,7 +94,7 @@ msgstr "ניהול מאגרי תוספים"
 msgid "Add-in packages"
 msgstr "חבילות תוסף"
 
-#: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:801
+#: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:803
 msgid "Added"
 msgstr "נוספה"
 
@@ -111,8 +106,8 @@ msgstr "הרחבות נוספות נחוצות לשם ביצוע פעולה זא
 msgid "After select"
 msgstr "לאחר הבחירה"
 
-#: ../Pinta/Actions/File/OpenDocumentAction.cs:71
-#: ../Pinta.Core/Actions/EditActions.cs:378
+#: ../Pinta/Actions/File/OpenDocumentAction.cs:83
+#: ../Pinta.Core/Actions/EditActions.cs:380
 msgid "All files"
 msgstr "כל הקבצים"
 
@@ -148,11 +143,11 @@ msgstr "זווית"
 msgid "Antialias"
 msgstr "החלקת קצוות"
 
-#: ../Pinta.Core/Classes/BaseTool.cs:346
+#: ../Pinta.Core/Classes/BaseTool.cs:352
 msgid "Antialiasing Off"
 msgstr "החלקה כבויה"
 
-#: ../Pinta.Core/Classes/BaseTool.cs:345
+#: ../Pinta.Core/Classes/BaseTool.cs:351
 msgid "Antialiasing On"
 msgstr "החלקה פעילה"
 
@@ -186,7 +181,7 @@ msgstr "רמות אוטומטיות"
 msgid "Available in repository:"
 msgstr "זמין במאגר:"
 
-#: ../Pinta.Core/Managers/WorkspaceManager.cs:169
+#: ../Pinta.Core/Managers/WorkspaceManager.cs:175
 msgid "Background"
 msgstr "רקע"
 
@@ -198,7 +193,7 @@ msgstr "צבע הרקע"
 msgid "Background:"
 msgstr "רקע:"
 
-#: ../Pinta/Dialogs/AboutDialog.cs:174
+#: ../Pinta/Actions/Help/AboutDialogAction.cs:82
 msgid "Based on the work of Paint.NET:"
 msgstr "מבוסס על העבודה של Paint.NET:"
 
@@ -232,7 +227,7 @@ msgstr "כחול "
 msgid "Blurs"
 msgstr "טשטושים"
 
-#: ../Pinta.Tools/Tools/TextTool.cs:160
+#: ../Pinta.Tools/Tools/TextTool.cs:162
 msgid "Bold"
 msgstr "מודגש"
 
@@ -275,7 +270,7 @@ msgstr "באחוזים:"
 #: ../Pinta/Actions/File/OpenDocumentAction.cs:54
 #: ../Pinta/Actions/File/SaveDocumentImplementationAction.cs:76
 #: ../Pinta.Core/Actions/EditActions.cs:362
-#: ../Pinta.Core/Actions/EditActions.cs:403
+#: ../Pinta.Core/Actions/EditActions.cs:404
 #: ../Pinta.Core/Actions/LayerActions.cs:169
 msgid "Cancel"
 msgstr ""
@@ -288,7 +283,7 @@ msgstr "משטח ציור"
 msgid "Cell Size"
 msgstr "גודל התא"
 
-#: ../Pinta.Tools/Tools/TextTool.cs:196
+#: ../Pinta.Tools/Tools/TextTool.cs:210
 msgid "Center Align"
 msgstr "יישור למרכז"
 
@@ -304,7 +299,7 @@ msgstr "ממורכז"
 msgid "Centimeters"
 msgstr "סנטימטרים"
 
-#: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:338
+#: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:339
 msgid "Changed Shape Type"
 msgstr "סוג הצורה השתנה"
 
@@ -344,7 +339,7 @@ msgid ""
 "circle."
 msgstr "לחץ וגרור כדי לבחור שטח אליפטי. החזק את מקש Shift בשביל עיגול"
 
-#: ../Pinta.Tools/Tools/GradientTool.cs:53
+#: ../Pinta.Tools/Tools/GradientTool.cs:51
 msgid ""
 "Click and drag to draw gradient from primary to secondary color.  Right "
 "click to reverse."
@@ -431,7 +426,7 @@ msgstr "צריבת צבע"
 msgid "Color Dodge"
 msgstr "התחמקות צבע"
 
-#: ../Pinta.Tools/Tools/GradientTool.cs:200
+#: ../Pinta.Tools/Tools/GradientTool.cs:203
 msgid "Color Mode"
 msgstr ""
 
@@ -451,7 +446,7 @@ msgstr "רווית הצבע"
 msgid "Coloring"
 msgstr "צביעה"
 
-#: ../Pinta.Tools/Tools/GradientTool.cs:185
+#: ../Pinta.Tools/Tools/GradientTool.cs:188
 msgid "Conical Gradient"
 msgstr "מדרג חרוטי"
 
@@ -468,10 +463,6 @@ msgstr "המשכי"
 msgid "Contrast"
 msgstr "ניגודיות"
 
-#: ../Pinta/Dialogs/AboutDialog.cs:142
-msgid "Contributors to this release:"
-msgstr "תורמים לגרסה זו:"
-
 #: ../Pinta.Core/Actions/EditActions.cs:62
 msgid "Copy"
 msgstr "העתקה"
@@ -480,22 +471,18 @@ msgstr "העתקה"
 msgid "Copy Merged"
 msgstr "העתקה עם מיזוג"
 
-#: ../Pinta/Dialogs/VersionInformationTabPage.cs:67
-msgid "Copy Version Info"
-msgstr "העתקת פרטי הגרסה"
-
-#: ../Pinta/Dialogs/AboutPintaTabPage.cs:56
+#: ../Pinta/Actions/Help/AboutDialogAction.cs:70
 msgid "Copyright"
 msgstr "כל הזכויות שמורות"
 
-#: ../Pinta/Actions/File/NewScreenshotAction.cs:70
+#: ../Pinta/Actions/File/NewScreenshotAction.cs:124
 #, csharp-format
 msgid "Could not obtain the size of display '{0}'"
 msgstr ""
 
-#: ../Pinta.Core/Classes/Palette.cs:185
-#: ../Pinta.Core/Managers/WorkspaceManager.cs:376
-#: ../Pinta.Core/Managers/WorkspaceManager.cs:385
+#: ../Pinta.Core/Classes/Palette.cs:197
+#: ../Pinta.Core/Managers/WorkspaceManager.cs:403
+#: ../Pinta.Core/Managers/WorkspaceManager.cs:412
 #, csharp-format
 msgid "Could not open file: {0}"
 msgstr "לא ניתן לפתוח את הקובץ: {0}"
@@ -505,7 +492,7 @@ msgid "Coverage"
 msgstr "כיסוי"
 
 #: ../Pinta.Core/Actions/ImageActions.cs:47
-#: ../Pinta.Core/Actions/ImageActions.cs:292
+#: ../Pinta.Core/Actions/ImageActions.cs:286
 msgid "Crop to Selection"
 msgstr "חיתוך לבחירה"
 
@@ -534,16 +521,16 @@ msgstr "האפלה"
 msgid "Dash"
 msgstr "קווקוו"
 
-#: ../Pinta/Actions/File/NewScreenshotAction.cs:52
+#: ../Pinta/Actions/File/NewScreenshotAction.cs:106
 msgid "Delay before taking a screenshot (seconds):"
 msgstr "ההשהיה שלפני צילום המסך (בשניות):"
 
 #: ../Pinta.Core/Actions/LayerActions.cs:51
-#: ../Pinta.Core/Actions/LayerActions.cs:295
+#: ../Pinta.Core/Actions/LayerActions.cs:313
 msgid "Delete Layer"
 msgstr "מחיקת שכבה"
 
-#: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:480
+#: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:482
 msgid "Deleted"
 msgstr "נמחקה"
 
@@ -555,7 +542,7 @@ msgstr "ביטול בחירה"
 msgid "Deselect All"
 msgstr "ביטול בחירת הכול"
 
-#: ../Pinta/Dialogs/ErrorDialog.cs:99
+#: ../Pinta/Dialogs/ErrorDialog.cs:98
 #: Mono.Addins.Gui/gtk-gui/Mono.Addins.Gui.ErrorDialog.cs:92
 #: Mono.Addins.Gui/gtk-gui/Mono.Addins.Gui.ProgressDialog.cs:66
 msgid "Details"
@@ -596,7 +583,7 @@ msgstr "לא להחליף כלי"
 msgid "Don't change canvas size"
 msgstr "לא לשנות את גודל משטח הציור"
 
-#: ../Pinta/MainWindow.cs:539
+#: ../Pinta/MainWindow.cs:544
 msgid "Download failed"
 msgstr "ההורדה נכשלה"
 
@@ -604,16 +591,16 @@ msgstr "ההורדה נכשלה"
 msgid "Download size"
 msgstr "גודל ההורדה"
 
-#: ../Pinta/MainWindow.cs:520
+#: ../Pinta/MainWindow.cs:525
 msgid "Downloading Image"
 msgstr "תמונה מתקבלת"
 
 #: ../Pinta.Core/Actions/LayerActions.cs:52
-#: ../Pinta.Core/Actions/LayerActions.cs:286
+#: ../Pinta.Core/Actions/LayerActions.cs:304
 msgid "Duplicate Layer"
 msgstr "שכפול שכבה"
 
-#: ../xdg/pinta.desktop.in.h:2
+#: ../xdg/pinta.desktop.in.h:2 ../Pinta/Actions/Help/AboutDialogAction.cs:58
 msgid "Easily create and edit images"
 msgstr "ליצור ולערוך תמונות בקלות"
 
@@ -625,7 +612,7 @@ msgstr "התנהגות הקצוות"
 msgid "Edge Detect"
 msgstr "איתור קצוות"
 
-#: ../Pinta/MainWindow.cs:342
+#: ../Pinta/MainWindow.cs:346
 msgid "Effe_cts"
 msgstr "_אפקטים"
 
@@ -656,7 +643,7 @@ msgstr "מחיקת הבחירה"
 msgid "Eraser"
 msgstr "מוחק"
 
-#: ../Pinta/Actions/File/SaveDocumentImplementationAction.cs:186
+#: ../Pinta/Actions/File/SaveDocumentImplementationAction.cs:163
 msgid "Error"
 msgstr "שגיאה"
 
@@ -679,15 +666,20 @@ msgstr "הרחבת משטח הציור"
 msgid "Factor"
 msgstr "מקדם"
 
-#: ../Pinta.Core/Managers/WorkspaceManager.cs:403
+#: ../Pinta/Actions/File/NewScreenshotAction.cs:95
+msgid "Failed to access XDG Desktop Portals"
+msgstr ""
+
+#: ../Pinta.Core/Managers/WorkspaceManager.cs:430
 msgid "Failed to open image"
 msgstr "פתיחת התמונה נכשלה"
 
-#: ../Pinta/Actions/File/SaveDocumentImplementationAction.cs:209
+#: ../Pinta/Actions/File/SaveDocumentImplementationAction.cs:186
 msgid "Failed to save image"
 msgstr "שמירת התמונה נכשלה"
 
-#: ../Pinta/Actions/File/NewScreenshotAction.cs:69
+#: ../Pinta/Actions/File/NewScreenshotAction.cs:94
+#: ../Pinta/Actions/File/NewScreenshotAction.cs:123
 msgid "Failed to take screenshot"
 msgstr ""
 
@@ -695,7 +687,7 @@ msgstr ""
 msgid "File a Bug"
 msgstr "דיווח על תקלה"
 
-#: ../Pinta.Tools/Tools/TextTool.cs:227
+#: ../Pinta.Tools/Tools/TextTool.cs:245
 msgid "Fill Background"
 msgstr "מילוי הרקע"
 
@@ -719,8 +711,8 @@ msgstr "סגנון המילוי"
 msgid "Fill and Outline Shape"
 msgstr "מילוי וקו המתאר של הצורה"
 
-#: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:1100
-#: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:1471
+#: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:1102
+#: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:1473
 msgid "Finalized"
 msgstr "מוגמר"
 
@@ -729,7 +721,7 @@ msgid "Finish Pixels"
 msgstr "גימור הפיקסלים"
 
 #: ../Pinta.Core/Actions/ImageActions.cs:56
-#: ../Pinta.Core/Actions/ImageActions.cs:156
+#: ../Pinta.Core/Actions/ImageActions.cs:152
 msgid "Flatten"
 msgstr "השטחה"
 
@@ -805,8 +797,8 @@ msgstr "גלובלי"
 msgid "Glow"
 msgstr "זריחה"
 
-#: ../Pinta.Tools/Tools/GradientTool.cs:51
-#: ../Pinta.Tools/Tools/GradientTool.cs:175
+#: ../Pinta.Tools/Tools/GradientTool.cs:49
+#: ../Pinta.Tools/Tools/GradientTool.cs:178
 msgid "Gradient"
 msgstr "מדרג"
 
@@ -853,7 +845,7 @@ msgstr "גוון"
 msgid "Hue / Saturation"
 msgstr "גוון / רוויה"
 
-#: ../Pinta/Actions/File/SaveDocumentImplementationAction.cs:200
+#: ../Pinta/Actions/File/SaveDocumentImplementationAction.cs:177
 msgid "ICO files can not be larger than 255 x 255 pixels."
 msgstr "קובצי ICO לא יכולים לחרוג מגודל של 255 × 255"
 
@@ -878,7 +870,7 @@ msgid "Image cannot be pasted"
 msgstr "לא ניתן להדביק תמונה"
 
 #: ../Pinta/Actions/File/OpenDocumentAction.cs:58
-#: ../Pinta.Core/Actions/LayerActions.cs:182
+#: ../Pinta.Core/Actions/LayerActions.cs:196
 msgid "Image files"
 msgstr "קובצי תמונה"
 
@@ -886,11 +878,11 @@ msgstr "קובצי תמונה"
 msgid "Image larger than canvas"
 msgstr "התמונה גדולה ממשטח הציור"
 
-#: ../Pinta/Actions/File/SaveDocumentImplementationAction.cs:199
+#: ../Pinta/Actions/File/SaveDocumentImplementationAction.cs:176
 msgid "Image too large"
 msgstr "התמונה גדולה מדי"
 
-#: ../Pinta.Core/Actions/LayerActions.cs:206
+#: ../Pinta.Core/Actions/LayerActions.cs:224
 msgid "Import From File"
 msgstr "ייבוא מקובץ"
 
@@ -974,11 +966,11 @@ msgid "Invert Colors"
 msgstr "היפוך צבעים"
 
 #: ../Pinta.Core/Actions/EditActions.cs:69
-#: ../Pinta.Core/Actions/EditActions.cs:456
+#: ../Pinta.Core/Actions/EditActions.cs:460
 msgid "Invert Selection"
 msgstr "היפוך הבחירה"
 
-#: ../Pinta.Tools/Tools/TextTool.cs:168
+#: ../Pinta.Tools/Tools/TextTool.cs:173
 msgid "Italic"
 msgstr "נטוי"
 
@@ -1002,7 +994,7 @@ msgstr "בחירת פלצור"
 msgid "Layer"
 msgstr "שכבה"
 
-#: ../Pinta.Gui.Widgets/Widgets/Layers/LayersListWidget.cs:286
+#: ../Pinta.Gui.Widgets/Widgets/Layers/LayersListWidget.cs:293
 msgid "Layer Hidden"
 msgstr "שכבה מוסתרת"
 
@@ -1019,7 +1011,7 @@ msgstr "מאפייני השכבה"
 msgid "Layer Properties..."
 msgstr "מאפייני השכבה..."
 
-#: ../Pinta.Gui.Widgets/Widgets/Layers/LayersListWidget.cs:286
+#: ../Pinta.Gui.Widgets/Widgets/Layers/LayersListWidget.cs:293
 msgid "Layer Shown"
 msgstr "שכבה מופיעה"
 
@@ -1033,7 +1025,7 @@ msgstr ""
 msgid "Layers"
 msgstr "שכבות"
 
-#: ../Pinta.Tools/Tools/TextTool.cs:188
+#: ../Pinta.Tools/Tools/TextTool.cs:199
 msgid "Left Align"
 msgstr "יישור לשמאל"
 
@@ -1155,7 +1147,7 @@ msgstr "רמות"
 msgid "Levels Adjustment"
 msgstr "התאמת הרמות"
 
-#: ../Pinta/Dialogs/AboutPintaTabPage.cs:50
+#: ../Pinta/Actions/Help/AboutDialogAction.cs:78
 msgid "License"
 msgstr "רישיון"
 
@@ -1175,15 +1167,15 @@ msgstr "בהירות"
 msgid "Line/Curve"
 msgstr "קו/עקומה"
 
-#: ../Pinta.Tools/Tools/GradientTool.cs:183
+#: ../Pinta.Tools/Tools/GradientTool.cs:186
 msgid "Linear Diamond Gradient"
 msgstr "מדרג קווי בצורת מעוין"
 
-#: ../Pinta.Tools/Tools/GradientTool.cs:181
+#: ../Pinta.Tools/Tools/GradientTool.cs:184
 msgid "Linear Gradient"
 msgstr "מדרג קווי"
 
-#: ../Pinta.Tools/Tools/GradientTool.cs:182
+#: ../Pinta.Tools/Tools/GradientTool.cs:185
 msgid "Linear Reflected Gradient"
 msgstr "מדרג קווי משתקף"
 
@@ -1218,7 +1210,7 @@ msgid "Median"
 msgstr "חציוני"
 
 #: ../Pinta.Core/Actions/LayerActions.cs:53
-#: ../Pinta.Core/Actions/LayerActions.cs:264
+#: ../Pinta.Core/Actions/LayerActions.cs:282
 msgid "Merge Layer Down"
 msgstr "מיזוג השכבה כלפי מטה"
 
@@ -1227,11 +1219,11 @@ msgstr "מיזוג השכבה כלפי מטה"
 msgid "Missing: {0} v{1}"
 msgstr "חסרה: {0} v{1}"
 
-#: ../Pinta.Tools/Tools/GradientTool.cs:194
+#: ../Pinta.Tools/Tools/GradientTool.cs:197
 msgid "Mode"
 msgstr ""
 
-#: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:880
+#: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:882
 msgid "Modified"
 msgstr "השתנתה"
 
@@ -1244,12 +1236,12 @@ msgid "Motion Blur"
 msgstr "טשטוש בתנועה"
 
 #: ../Pinta.Core/Actions/LayerActions.cs:59
-#: ../Pinta.Core/Actions/LayerActions.cs:250
+#: ../Pinta.Core/Actions/LayerActions.cs:268
 msgid "Move Layer Down"
 msgstr "הזזת השכבה מטה"
 
 #: ../Pinta.Core/Actions/LayerActions.cs:58
-#: ../Pinta.Core/Actions/LayerActions.cs:239
+#: ../Pinta.Core/Actions/LayerActions.cs:257
 msgid "Move Layer Up"
 msgstr "הזזת השכבה מעלה"
 
@@ -1282,7 +1274,7 @@ msgid "New"
 msgstr "חדש"
 
 #: ../Pinta/Dialogs/NewImageDialog.cs:68
-#: ../Pinta.Core/Managers/WorkspaceManager.cs:178
+#: ../Pinta.Core/Managers/WorkspaceManager.cs:184
 msgid "New Image"
 msgstr "תמונה חדשה"
 
@@ -1318,11 +1310,11 @@ msgstr "רעש"
 
 #: ../Pinta.Core/Effects/UserBlendOps.cs:33
 #: ../Pinta.Tools/Brushes/PlainBrush.cs:37
-#: ../Pinta.Tools/Tools/EraserTool.cs:267 ../Pinta.Tools/Tools/TextTool.cs:224
+#: ../Pinta.Tools/Tools/EraserTool.cs:267 ../Pinta.Tools/Tools/TextTool.cs:242
 msgid "Normal"
 msgstr "רגיל"
 
-#: ../Pinta.Core/Classes/BaseTool.cs:330
+#: ../Pinta.Core/Classes/BaseTool.cs:336
 msgid "Normal Blending"
 msgstr "ערבול רגיל"
 
@@ -1330,7 +1322,7 @@ msgstr "ערבול רגיל"
 msgid "Normal Size"
 msgstr "גודל רגיל"
 
-#: ../Pinta.Tools/Tools/TextTool.cs:225
+#: ../Pinta.Tools/Tools/TextTool.cs:243
 msgid "Normal and Outline"
 msgstr "רגיל ומתאר"
 
@@ -1359,7 +1351,7 @@ msgstr "פתיחה"
 msgid "Open Curve Shape"
 msgstr "צורת עקומה פתוחה"
 
-#: ../Pinta.Core/Managers/WorkspaceManager.cs:225
+#: ../Pinta.Core/Managers/WorkspaceManager.cs:255
 msgid "Open Image"
 msgstr "פתיחת תמונה"
 
@@ -1402,7 +1394,7 @@ msgid "Other"
 msgstr "אחר"
 
 #: ../Pinta.Effects/Effects/OutlineEffect.cs:27
-#: ../Pinta.Tools/Tools/TextTool.cs:226
+#: ../Pinta.Tools/Tools/TextTool.cs:244
 msgid "Outline"
 msgstr "קו מתאר"
 
@@ -1411,7 +1403,7 @@ msgstr "קו מתאר"
 msgid "Outline Shape"
 msgstr "קו המתאר של הצורה"
 
-#: ../Pinta.Tools/Tools/TextTool.cs:241
+#: ../Pinta.Tools/Tools/TextTool.cs:259
 msgid "Outline width"
 msgstr "עובי המתאר"
 
@@ -1427,7 +1419,7 @@ msgstr "היסטוגרמת הפלט"
 msgid "Overlay"
 msgstr "כיסוי"
 
-#: ../Pinta.Core/Classes/BaseTool.cs:331
+#: ../Pinta.Core/Classes/BaseTool.cs:337
 msgid "Overwrite"
 msgstr "דריסה"
 
@@ -1443,7 +1435,7 @@ msgstr "מברשת"
 msgid "Palette"
 msgstr "לוח צבעים"
 
-#: ../Pinta.Core/Actions/EditActions.cs:365
+#: ../Pinta.Core/Actions/EditActions.cs:367
 msgid "Palette files"
 msgstr "קובצי ערכות צבעים"
 
@@ -1466,10 +1458,6 @@ msgstr "הדבקה לתמונה חדשה"
 #: ../Pinta.Core/Actions/EditActions.cs:65
 msgid "Paste Into New Layer"
 msgstr "הדבקה לשכבה חדשה"
-
-#: ../Pinta/Dialogs/VersionInformationTabPage.cs:53
-msgid "Path"
-msgstr "נתיב"
 
 #: Mono.Addins.Gui/gtk-gui/Mono.Addins.Gui.NewSiteDialog.cs:130
 msgid "Path:"
@@ -1498,7 +1486,7 @@ msgstr "באחוזים"
 msgid "Photo"
 msgstr "צילום"
 
-#: ../xdg/pinta.desktop.in.h:1
+#: ../xdg/pinta.desktop.in.h:1 ../Pinta/Actions/Help/AboutDialogAction.cs:54
 msgid "Pinta"
 msgstr "פינטה"
 
@@ -1518,7 +1506,7 @@ msgstr "עורך התמונות פינטה"
 msgid "Pinta Website"
 msgstr "האתר של פינטה"
 
-#: ../Pinta/Actions/File/SaveDocumentImplementationAction.cs:185
+#: ../Pinta/Actions/File/SaveDocumentImplementationAction.cs:162
 msgid "Pinta does not support saving images in this file format."
 msgstr "ל־Pinta אין תמיכה בשמירת תמונות במבנה קובץ זה."
 
@@ -1535,11 +1523,11 @@ msgstr ""
 "יש לו גם למעלה מ־35 אפקטים להחלה על התמונות שלך ויש לו גם את היכולת ליצור "
 "שכבות אינסופיות כדי לסייע לסדר את היצירתיות שלך."
 
-#: ../Pinta.Core/Managers/WorkspaceManager.cs:386
+#: ../Pinta.Core/Managers/WorkspaceManager.cs:413
 msgid "Pinta supports the following file formats:"
 msgstr "ב־Pinta יש תמיכה בסוגי הקבצים הבאים:"
 
-#: ../Pinta.Core/Classes/Palette.cs:186
+#: ../Pinta.Core/Classes/Palette.cs:198
 msgid "Pinta supports the following palette formats:"
 msgstr "ב־Pinta יש תמיכה בתצורות ערכות הצבעים הבאות:"
 
@@ -1555,12 +1543,12 @@ msgstr "טשטוש לפיקסלים"
 msgid "Pixels"
 msgstr "פיקסלים"
 
-#: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:523
-#: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:767
+#: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:525
+#: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:769
 msgid "Point Added"
 msgstr "נוספה נקודה"
 
-#: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:466
+#: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:468
 msgid "Point Deleted"
 msgstr "נקודה נמחקה"
 
@@ -1588,10 +1576,6 @@ msgstr "ברירת מחדל"
 #: ../Pinta/Dialogs/NewImageDialog.cs:318
 msgid "Preview"
 msgstr "תצוגה מקדימה"
-
-#: ../Pinta/Dialogs/AboutDialog.cs:154
-msgid "Previous contributors:"
-msgstr "תורמים לשעבר:"
 
 #: ../Pinta.Effects/Effects/WarpEffect.cs:25
 msgid "Primary"
@@ -1628,7 +1612,7 @@ msgstr "RGB"
 msgid "Radial Blur"
 msgstr "טשטוש מעגלי"
 
-#: ../Pinta.Tools/Tools/GradientTool.cs:184
+#: ../Pinta.Tools/Tools/GradientTool.cs:187
 msgid "Radial Gradient"
 msgstr "מדרג מעגלי"
 
@@ -1698,7 +1682,7 @@ msgstr "רישום למאגר מקוון"
 msgid "Registering repository"
 msgstr "המאגר נרשם"
 
-#: ../Pinta/Dialogs/AboutPintaTabPage.cs:50
+#: ../Pinta/Actions/Help/AboutDialogAction.cs:79
 msgid "Released under the MIT X11 License."
 msgstr "שוחרר תחת תנאי הרישיון MIT X11."
 
@@ -1720,13 +1704,11 @@ msgstr "עיבוד"
 msgid "Rendering Effect"
 msgstr "אפקט עיבוד"
 
-#: ../Pinta/Actions/File/SaveDocumentImplementationAction.cs:251
-#: ../Pinta/Actions/File/SaveDocumentImplementationAction.cs:255
 #: ../Pinta.Core/Classes/SelectionModeHandler.cs:47
 msgid "Replace"
 msgstr "החלפה"
 
-#: ../Pinta/Dialogs/ErrorDialog.cs:110
+#: ../Pinta/Dialogs/ErrorDialog.cs:109
 msgid "Report Bug...."
 msgstr "גיליתי באג..."
 
@@ -1778,7 +1760,7 @@ msgstr "שינוי גודל התמונה..."
 msgid "Resize Palette"
 msgstr "שינוי גודל ערכת הצבעים"
 
-#: ../Pinta.Tools/Tools/TextTool.cs:204
+#: ../Pinta.Tools/Tools/TextTool.cs:221
 msgid "Right Align"
 msgstr "יישור לימין"
 
@@ -1845,7 +1827,7 @@ msgid "Saturation Percentage"
 msgstr "אחוזי רוויה"
 
 #: ../Pinta/Actions/File/SaveDocumentImplementationAction.cs:75
-#: ../Pinta.Core/Actions/EditActions.cs:402
+#: ../Pinta.Core/Actions/EditActions.cs:403
 #: ../Pinta.Core/Actions/FileActions.cs:55
 msgid "Save"
 msgstr "שמירה"
@@ -1863,7 +1845,7 @@ msgstr "שמירה בשם..."
 msgid "Save Image File"
 msgstr "שמירת קובץ תמונה"
 
-#: ../Pinta.Core/Actions/EditActions.cs:399
+#: ../Pinta.Core/Actions/EditActions.cs:400
 msgid "Save Palette File"
 msgstr "שמירת קובץ ערכת הצבעים"
 
@@ -1989,7 +1971,7 @@ msgstr "מעבר לכלי העיפרון"
 msgid "Switch to previous tool"
 msgstr "חזרה לכלי הקודם"
 
-#: ../Pinta/Actions/File/NewScreenshotAction.cs:51
+#: ../Pinta/Actions/File/NewScreenshotAction.cs:105
 msgid "Take Screenshot"
 msgstr "צילום המסך"
 
@@ -2001,19 +1983,13 @@ msgstr "טקסט"
 msgid "Text - Finalize"
 msgstr "טקסט - גימור"
 
-#: ../Pinta.Tools/Tools/TextTool.cs:217
+#: ../Pinta.Tools/Tools/TextTool.cs:235
 msgid "Text Style"
 msgstr "סגנון הטקסט"
 
 #: ../Pinta/Actions/Edit/PasteAction.cs:160
 msgid "The clipboard does not contain an image."
 msgstr "לוח הגזירים אינו מכיל תמונה."
-
-#: ../Pinta/Actions/File/SaveDocumentImplementationAction.cs:242
-#, csharp-format
-msgid ""
-"The file already exists in \"{1}\". Replacing it will overwrite its contents."
-msgstr "הקובץ כבר קיים תחת \"{1}\". החלפתו תשכתב על תוכנו."
 
 #: Mono.Addins.Gui/gtk-gui/Mono.Addins.Gui.AddinInstallerDialog.cs:48
 msgid "The following add-ins will be installed:"
@@ -2093,10 +2069,6 @@ msgstr "גודל האריח"
 msgid "Tip: Right-click to remove control points."
 msgstr "עצה: לחצן ימני כדי להסיר נקודות בקרה."
 
-#: ../Pinta/Dialogs/VersionInformationTabPage.cs:44
-msgid "Title"
-msgstr "כותרת"
-
 #: ../Pinta.Effects/Effects/RedEyeRemoveEffect.cs:70
 #: ../Pinta.Tools/Tools/FloodTool.cs:127
 #: ../Pinta.Tools/Tools/RecolorTool.cs:200
@@ -2111,7 +2083,7 @@ msgstr "כלי"
 msgid "Tool Box"
 msgstr ""
 
-#: ../Pinta/MainWindow.cs:364
+#: ../Pinta/MainWindow.cs:368
 msgid "Tool Windows"
 msgstr "חלונות כלים"
 
@@ -2127,11 +2099,7 @@ msgstr "מרחב צבעים להמרה"
 msgid "Translate This Application"
 msgstr "תרגום יישום זה"
 
-#: ../Pinta/Dialogs/AboutDialog.cs:168
-msgid "Translated by:"
-msgstr "תורגם על ידי:"
-
-#: ../Pinta.Tools/Tools/GradientTool.cs:201
+#: ../Pinta.Tools/Tools/GradientTool.cs:204
 msgid "Transparency Mode"
 msgstr ""
 
@@ -2149,7 +2117,7 @@ msgstr "סיבוב"
 msgid "Type"
 msgstr "סוג"
 
-#: ../Pinta/MainWindow.cs:540
+#: ../Pinta/MainWindow.cs:545
 #, csharp-format
 msgid ""
 "Unable to download image from {0}.\n"
@@ -2158,7 +2126,7 @@ msgstr ""
 "הורדת התמונה מתוך {0} לא הצליחה.\n"
 "פרטים: {1}"
 
-#: ../Pinta.Tools/Tools/TextTool.cs:176
+#: ../Pinta.Tools/Tools/TextTool.cs:184
 msgid "Underline"
 msgstr "קו תחתי"
 
@@ -2184,12 +2152,12 @@ msgstr "התוספים מוסרים"
 msgid "Union (+) ({0} + Left Click)"
 msgstr ""
 
-#: ../Pinta.Core/Managers/WorkspaceManager.cs:112
+#: ../Pinta.Core/Managers/WorkspaceManager.cs:115
 #, csharp-format
 msgid "Unsaved Image {0}"
 msgstr "תמונה שלא נשמרה {0}"
 
-#: ../Pinta.Core/Managers/WorkspaceManager.cs:220
+#: ../Pinta.Core/Managers/WorkspaceManager.cs:250
 msgid "Unsupported file format"
 msgstr "סוג קובץ אינו נתמך"
 
@@ -2231,18 +2199,9 @@ msgstr ""
 "כדאי להשתמש באיכות נמוכה עבור תצוגות מקדימות, תמונות קטנות וזוויות קטנות. "
 "באיכות גבוהה כדאי להשתמש לאיכות גימור, תמונות גדולות וזוויות גדולות."
 
-#: ../Pinta/Dialogs/AboutDialog.cs:181
+#: ../Pinta/Actions/Help/AboutDialogAction.cs:86
 msgid "Using some icons from:"
 msgstr "נעשה שימוש בכמה סמלים מ־:"
-
-#: ../Pinta/Dialogs/AboutPintaTabPage.cs:42
-#: ../Pinta/Dialogs/VersionInformationTabPage.cs:50
-msgid "Version"
-msgstr "גרסה"
-
-#: ../Pinta/Dialogs/AboutDialog.cs:277
-msgid "Version Info"
-msgstr "נתוני הגרסה"
 
 #: ../Pinta/Dialogs/LayerPropertiesDialog.cs:195
 msgid "Visible"
@@ -2264,8 +2223,8 @@ msgstr "רוחב:‏"
 
 #: ../Pinta.Core/Actions/ViewActions.cs:103
 #: ../Pinta.Core/Actions/ViewActions.cs:282
-#: ../Pinta.Core/Classes/DocumentWorkspace.cs:315
-#: ../Pinta.Core/Classes/DocumentWorkspace.cs:323
+#: ../Pinta.Core/Classes/DocumentWorkspace.cs:324
+#: ../Pinta.Core/Classes/DocumentWorkspace.cs:332
 msgid "Window"
 msgstr "חלון"
 
@@ -2284,13 +2243,13 @@ msgid "Xor ({0} + Right Click)"
 msgstr ""
 
 #. Translators: {0} is the name of a file that the user does not have permission to open.
-#: ../Pinta.Core/Managers/WorkspaceManager.cs:405
+#: ../Pinta.Core/Managers/WorkspaceManager.cs:432
 #, csharp-format
 msgid "You do not have access to '{0}'."
 msgstr "אין לך גישה אל ‚{0}’"
 
 #. Translators: {0} is the name of a file that the user does not have write permission for.
-#: ../Pinta/Actions/File/SaveDocumentImplementationAction.cs:211
+#: ../Pinta/Actions/File/SaveDocumentImplementationAction.cs:188
 #, csharp-format
 msgid ""
 "You do not have access to modify '{0}'. The file or folder may be read-only."
@@ -2319,27 +2278,27 @@ msgstr "התרחקות"
 msgid "Zoom to Selection"
 msgstr "תקריב על הבחירה"
 
-#: ../Pinta/MainWindow.cs:339
+#: ../Pinta/MainWindow.cs:343
 msgid "_Adjustments"
 msgstr "הת_אמות"
 
-#: ../Pinta/MainWindow.cs:324
+#: ../Pinta/MainWindow.cs:328
 msgid "_Edit"
 msgstr "ע_ריכה"
 
-#: ../Pinta/MainWindow.cs:320
+#: ../Pinta/MainWindow.cs:324
 msgid "_File"
 msgstr "_קובץ"
 
-#: ../Pinta/MainWindow.cs:358
+#: ../Pinta/MainWindow.cs:362
 msgid "_Help"
 msgstr "ע_זרה"
 
-#: ../Pinta/MainWindow.cs:332
+#: ../Pinta/MainWindow.cs:336
 msgid "_Image"
 msgstr "ת_מונה"
 
-#: ../Pinta/MainWindow.cs:336
+#: ../Pinta/MainWindow.cs:340
 msgid "_Layers"
 msgstr "שכ_בות"
 
@@ -2347,15 +2306,15 @@ msgstr "שכ_בות"
 msgid "_Uninstall..."
 msgstr "ה_סרה..."
 
-#: ../Pinta/MainWindow.cs:328
+#: ../Pinta/MainWindow.cs:332
 msgid "_View"
 msgstr "ת_צוגה"
 
-#: ../Pinta/MainWindow.cs:354
+#: ../Pinta/MainWindow.cs:358
 msgid "_Window"
 msgstr "_חלון"
 
-#: ../Pinta/Dialogs/AboutPintaTabPage.cs:56
+#: ../Pinta/Actions/Help/AboutDialogAction.cs:71
 msgid "by Pinta contributors"
 msgstr "לתורמי Pinta"
 
@@ -2378,7 +2337,7 @@ msgstr "מספר הפתילים לשימוש בטרם העיבוד"
 msgid "pixels"
 msgstr "פיקסלים"
 
-#: ../Pinta/Dialogs/AboutDialog.cs:165
+#: ../Pinta/Actions/Help/AboutDialogAction.cs:62
 msgid "translator-credits"
 msgstr ""
 "Launchpad Contributions:\n"
@@ -2401,7 +2360,7 @@ msgstr ""
 msgid "{0} copy"
 msgstr ""
 
-#: ../Pinta.Core/ImageFormats/FormatDescriptor.cs:93
+#: ../Pinta.Core/ImageFormats/FormatDescriptor.cs:110
 #, csharp-format
 msgid "{0} image ({1})"
 msgstr "{0} תמונה ({1})"
@@ -2426,11 +2385,41 @@ msgstr[1] "{0} עדכונים זמינים"
 msgid "{0}%"
 msgstr "{0}%"
 
+#~ msgid "Translated by:"
+#~ msgstr "תורגם על ידי:"
+
+#~ msgid "Title"
+#~ msgstr "כותרת"
+
+#~ msgid "Version"
+#~ msgstr "גרסה"
+
+#~ msgid "Version Info"
+#~ msgstr "נתוני הגרסה"
+
+#~ msgid "Path"
+#~ msgstr "נתיב"
+
 #~ msgid "Ctrl-left click to set origin, left click to paint."
 #~ msgstr "Ctrl+לחצן שמאלי כדי להגדיר את המקור, לחצן שמאלי לציור."
 
+#, csharp-format
+#~ msgid "A file named \"{0}\" already exists. Do you want to replace it?"
+#~ msgstr "קובץ בשם \"{0}\" כבר קיים. האם ברצונך להחליף אותו?"
+
+#, csharp-format
+#~ msgid ""
+#~ "The file already exists in \"{1}\". Replacing it will overwrite its contents."
+#~ msgstr "הקובץ כבר קיים תחת \"{1}\". החלפתו תשכתב על תוכנו."
+
 #~ msgid "Powered by Mono:"
 #~ msgstr "מופעל על גבי מונו:"
+
+#~ msgid "Previous contributors:"
+#~ msgstr "תורמים לשעבר:"
+
+#~ msgid "Contributors to this release:"
+#~ msgstr "תורמים לגרסה זו:"
 
 #~ msgid "No tool selected."
 #~ msgstr "לא נבחר כלי."
@@ -2504,6 +2493,9 @@ msgstr "{0}%"
 
 #~ msgid "Close _without saving"
 #~ msgstr "לסגור מ_בלי לשמור"
+
+#~ msgid "Copy Version Info"
+#~ msgstr "העתקת פרטי הגרסה"
 
 #~ msgid "Images"
 #~ msgstr "תמונות"

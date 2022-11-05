@@ -7,17 +7,17 @@ msgid ""
 msgstr ""
 "Project-Id-Version: pinta\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2022-01-15 12:51-0500\n"
-"PO-Revision-Date: 2022-02-04 14:53+0100\n"
-"Last-Translator: Heimen Stoffels <vistausss@fastmail.com>\n"
+"POT-Creation-Date: 2022-11-04 22:46-0400\n"
+"PO-Revision-Date: 2022-02-04 16:45+0000\n"
+"Last-Translator: Heimen Stoffels <Unknown>\n"
 "Language-Team: Dutch <nl@li.org>\n"
-"Language: nl\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Launchpad-Export-Date: 2022-01-14 01:08+0000\n"
-"X-Generator: Poedit 3.0.1\n"
+"X-Launchpad-Export-Date: 2022-11-05 02:52+0000\n"
+"X-Generator: Launchpad (build 83f7123b02a2b50a64bc29e7e35197179a885279)\n"
+"Language: nl\n"
 
 #: Mono.Addins.Gui/Mono.Addins.Gui/InstallDialog.cs:142
 msgid " (in user directory)"
@@ -53,12 +53,7 @@ msgstr "7 x 7-gebied"
 msgid "9 x 9 Region"
 msgstr "9 x 9-gebied"
 
-#: ../Pinta/Actions/File/SaveDocumentImplementationAction.cs:241
-#, csharp-format
-msgid "A file named \"{0}\" already exists. Do you want to replace it?"
-msgstr "Er is al een bestand genaamd “{0}”. Wilt u dit vervangen?"
-
-#: ../Pinta/MainWindow.cs:349
+#: ../Pinta/MainWindow.cs:353
 msgid "A_dd-ins"
 msgstr "Uitbrei_dingen"
 
@@ -72,7 +67,7 @@ msgstr "Over Pinta"
 
 #: ../Pinta/Actions/Edit/PasteAction.cs:130
 #: ../Pinta.Core/Actions/LayerActions.cs:50
-#: ../Pinta.Core/Actions/LayerActions.cs:312
+#: ../Pinta.Core/Actions/LayerActions.cs:330
 msgid "Add New Layer"
 msgstr "Laag toevoegen"
 
@@ -100,7 +95,7 @@ msgstr "Pakketbronnen met uitbreidingen beheren"
 msgid "Add-in packages"
 msgstr "Uitbreidingspakketten"
 
-#: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:801
+#: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:803
 msgid "Added"
 msgstr "Toegevoegd"
 
@@ -113,8 +108,8 @@ msgstr ""
 msgid "After select"
 msgstr "Na selecteren"
 
-#: ../Pinta/Actions/File/OpenDocumentAction.cs:71
-#: ../Pinta.Core/Actions/EditActions.cs:378
+#: ../Pinta/Actions/File/OpenDocumentAction.cs:83
+#: ../Pinta.Core/Actions/EditActions.cs:380
 msgid "All files"
 msgstr "Alle bestanden"
 
@@ -150,11 +145,11 @@ msgstr "Hoek"
 msgid "Antialias"
 msgstr "Anti-kartelvorming"
 
-#: ../Pinta.Core/Classes/BaseTool.cs:346
+#: ../Pinta.Core/Classes/BaseTool.cs:352
 msgid "Antialiasing Off"
 msgstr "Anti-kartelvorming uitschakelen"
 
-#: ../Pinta.Core/Classes/BaseTool.cs:345
+#: ../Pinta.Core/Classes/BaseTool.cs:351
 msgid "Antialiasing On"
 msgstr "Anti-kartelvorming inschakelen"
 
@@ -188,7 +183,7 @@ msgstr "Automatische niveaus bepalen"
 msgid "Available in repository:"
 msgstr "Beschikbaar in pakketbron:"
 
-#: ../Pinta.Core/Managers/WorkspaceManager.cs:169
+#: ../Pinta.Core/Managers/WorkspaceManager.cs:175
 msgid "Background"
 msgstr "Achtergrond"
 
@@ -234,7 +229,7 @@ msgstr "Blauw "
 msgid "Blurs"
 msgstr "Vervagen"
 
-#: ../Pinta.Tools/Tools/TextTool.cs:160
+#: ../Pinta.Tools/Tools/TextTool.cs:162
 msgid "Bold"
 msgstr "Vetgedrukt"
 
@@ -277,7 +272,7 @@ msgstr "Met percentage:"
 #: ../Pinta/Actions/File/OpenDocumentAction.cs:54
 #: ../Pinta/Actions/File/SaveDocumentImplementationAction.cs:76
 #: ../Pinta.Core/Actions/EditActions.cs:362
-#: ../Pinta.Core/Actions/EditActions.cs:403
+#: ../Pinta.Core/Actions/EditActions.cs:404
 #: ../Pinta.Core/Actions/LayerActions.cs:169
 msgid "Cancel"
 msgstr "Annuleren"
@@ -290,7 +285,7 @@ msgstr "Canvas"
 msgid "Cell Size"
 msgstr "Celgrootte"
 
-#: ../Pinta.Tools/Tools/TextTool.cs:196
+#: ../Pinta.Tools/Tools/TextTool.cs:210
 msgid "Center Align"
 msgstr "Centreren"
 
@@ -306,7 +301,7 @@ msgstr "Gecentreerd"
 msgid "Centimeters"
 msgstr "Centimeter"
 
-#: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:338
+#: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:339
 msgid "Changed Shape Type"
 msgstr "Het vormtype is veranderd"
 
@@ -487,14 +482,14 @@ msgstr "Samengevoegd kopiëren"
 msgid "Copyright"
 msgstr "Copyright"
 
-#: ../Pinta/Actions/File/NewScreenshotAction.cs:70
+#: ../Pinta/Actions/File/NewScreenshotAction.cs:124
 #, csharp-format
 msgid "Could not obtain the size of display '{0}'"
 msgstr "De afmetingen van ‘{0}’ kunnen niet worden opgevraagd"
 
-#: ../Pinta.Core/Classes/Palette.cs:185
-#: ../Pinta.Core/Managers/WorkspaceManager.cs:376
-#: ../Pinta.Core/Managers/WorkspaceManager.cs:385
+#: ../Pinta.Core/Classes/Palette.cs:197
+#: ../Pinta.Core/Managers/WorkspaceManager.cs:403
+#: ../Pinta.Core/Managers/WorkspaceManager.cs:412
 #, csharp-format
 msgid "Could not open file: {0}"
 msgstr "‘{0}’ kan niet worden geopend"
@@ -504,7 +499,7 @@ msgid "Coverage"
 msgstr "Bereik"
 
 #: ../Pinta.Core/Actions/ImageActions.cs:47
-#: ../Pinta.Core/Actions/ImageActions.cs:292
+#: ../Pinta.Core/Actions/ImageActions.cs:286
 msgid "Crop to Selection"
 msgstr "Bijsnijden tot selectie"
 
@@ -533,16 +528,16 @@ msgstr "Donkerder maken"
 msgid "Dash"
 msgstr "Streep"
 
-#: ../Pinta/Actions/File/NewScreenshotAction.cs:52
+#: ../Pinta/Actions/File/NewScreenshotAction.cs:106
 msgid "Delay before taking a screenshot (seconds):"
 msgstr "Wachttijd alvorens schermfoto te maken (in seconden):"
 
 #: ../Pinta.Core/Actions/LayerActions.cs:51
-#: ../Pinta.Core/Actions/LayerActions.cs:295
+#: ../Pinta.Core/Actions/LayerActions.cs:313
 msgid "Delete Layer"
 msgstr "Laag verwijderen"
 
-#: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:480
+#: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:482
 msgid "Deleted"
 msgstr "Verwijderd"
 
@@ -554,7 +549,7 @@ msgstr "Deselecteren"
 msgid "Deselect All"
 msgstr "Alles deselecteren"
 
-#: ../Pinta/Dialogs/ErrorDialog.cs:99
+#: ../Pinta/Dialogs/ErrorDialog.cs:98
 #: Mono.Addins.Gui/gtk-gui/Mono.Addins.Gui.ErrorDialog.cs:92
 #: Mono.Addins.Gui/gtk-gui/Mono.Addins.Gui.ProgressDialog.cs:66
 msgid "Details"
@@ -595,7 +590,7 @@ msgstr "Gereedschap behouden"
 msgid "Don't change canvas size"
 msgstr "Canvasformaat niet aanpassen"
 
-#: ../Pinta/MainWindow.cs:539
+#: ../Pinta/MainWindow.cs:544
 msgid "Download failed"
 msgstr "Het downloaden is mislukt"
 
@@ -603,12 +598,12 @@ msgstr "Het downloaden is mislukt"
 msgid "Download size"
 msgstr "Downloadgrootte"
 
-#: ../Pinta/MainWindow.cs:520
+#: ../Pinta/MainWindow.cs:525
 msgid "Downloading Image"
 msgstr "Bezig met downloaden van afbeelding"
 
 #: ../Pinta.Core/Actions/LayerActions.cs:52
-#: ../Pinta.Core/Actions/LayerActions.cs:286
+#: ../Pinta.Core/Actions/LayerActions.cs:304
 msgid "Duplicate Layer"
 msgstr "Laag klonen"
 
@@ -624,7 +619,7 @@ msgstr "Randgedrag"
 msgid "Edge Detect"
 msgstr "Randen detecteren"
 
-#: ../Pinta/MainWindow.cs:342
+#: ../Pinta/MainWindow.cs:346
 msgid "Effe_cts"
 msgstr "Effe_cten"
 
@@ -655,7 +650,7 @@ msgstr "Selectie wissen"
 msgid "Eraser"
 msgstr "Gum"
 
-#: ../Pinta/Actions/File/SaveDocumentImplementationAction.cs:186
+#: ../Pinta/Actions/File/SaveDocumentImplementationAction.cs:163
 msgid "Error"
 msgstr "Foutmelding"
 
@@ -678,15 +673,20 @@ msgstr "Canvas vergroten"
 msgid "Factor"
 msgstr "Factor"
 
-#: ../Pinta.Core/Managers/WorkspaceManager.cs:403
+#: ../Pinta/Actions/File/NewScreenshotAction.cs:95
+msgid "Failed to access XDG Desktop Portals"
+msgstr ""
+
+#: ../Pinta.Core/Managers/WorkspaceManager.cs:430
 msgid "Failed to open image"
 msgstr "De afbeelding kan niet worden geopend"
 
-#: ../Pinta/Actions/File/SaveDocumentImplementationAction.cs:209
+#: ../Pinta/Actions/File/SaveDocumentImplementationAction.cs:186
 msgid "Failed to save image"
 msgstr "De afbeelding kan niet worden opgeslagen"
 
-#: ../Pinta/Actions/File/NewScreenshotAction.cs:69
+#: ../Pinta/Actions/File/NewScreenshotAction.cs:94
+#: ../Pinta/Actions/File/NewScreenshotAction.cs:123
 msgid "Failed to take screenshot"
 msgstr "Er kan geen schermfoto worden gemaakt"
 
@@ -694,7 +694,7 @@ msgstr "Er kan geen schermfoto worden gemaakt"
 msgid "File a Bug"
 msgstr "Bug melden"
 
-#: ../Pinta.Tools/Tools/TextTool.cs:227
+#: ../Pinta.Tools/Tools/TextTool.cs:245
 msgid "Fill Background"
 msgstr "Achtergrond opvullen"
 
@@ -718,8 +718,8 @@ msgstr "Opvulstijl"
 msgid "Fill and Outline Shape"
 msgstr "Opvullen en omlijnen"
 
-#: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:1100
-#: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:1471
+#: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:1102
+#: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:1473
 msgid "Finalized"
 msgstr "Afgewerkt"
 
@@ -728,7 +728,7 @@ msgid "Finish Pixels"
 msgstr "Pixels beëindigen"
 
 #: ../Pinta.Core/Actions/ImageActions.cs:56
-#: ../Pinta.Core/Actions/ImageActions.cs:156
+#: ../Pinta.Core/Actions/ImageActions.cs:152
 msgid "Flatten"
 msgstr "Plat maken"
 
@@ -850,7 +850,7 @@ msgstr "Tint"
 msgid "Hue / Saturation"
 msgstr "Tint/Verzadiging"
 
-#: ../Pinta/Actions/File/SaveDocumentImplementationAction.cs:200
+#: ../Pinta/Actions/File/SaveDocumentImplementationAction.cs:177
 msgid "ICO files can not be larger than 255 x 255 pixels."
 msgstr "ICO-bestanden mogen niet groter zijn dan 255 x 255 pixels."
 
@@ -875,7 +875,7 @@ msgid "Image cannot be pasted"
 msgstr "De afbeelding kan niet worden geplakt"
 
 #: ../Pinta/Actions/File/OpenDocumentAction.cs:58
-#: ../Pinta.Core/Actions/LayerActions.cs:182
+#: ../Pinta.Core/Actions/LayerActions.cs:196
 msgid "Image files"
 msgstr "Afbeeldingsbestanden"
 
@@ -883,11 +883,11 @@ msgstr "Afbeeldingsbestanden"
 msgid "Image larger than canvas"
 msgstr "De afbeelding is groter dan het canvas"
 
-#: ../Pinta/Actions/File/SaveDocumentImplementationAction.cs:199
+#: ../Pinta/Actions/File/SaveDocumentImplementationAction.cs:176
 msgid "Image too large"
 msgstr "De afbeelding is te groot"
 
-#: ../Pinta.Core/Actions/LayerActions.cs:206
+#: ../Pinta.Core/Actions/LayerActions.cs:224
 msgid "Import From File"
 msgstr "Importeren uit bestand"
 
@@ -971,11 +971,11 @@ msgid "Invert Colors"
 msgstr "Kleuren omkeren"
 
 #: ../Pinta.Core/Actions/EditActions.cs:69
-#: ../Pinta.Core/Actions/EditActions.cs:456
+#: ../Pinta.Core/Actions/EditActions.cs:460
 msgid "Invert Selection"
 msgstr "Selectie omkeren"
 
-#: ../Pinta.Tools/Tools/TextTool.cs:168
+#: ../Pinta.Tools/Tools/TextTool.cs:173
 msgid "Italic"
 msgstr "Cursief"
 
@@ -999,7 +999,7 @@ msgstr "Lassoselectie"
 msgid "Layer"
 msgstr "Laag"
 
-#: ../Pinta.Gui.Widgets/Widgets/Layers/LayersListWidget.cs:286
+#: ../Pinta.Gui.Widgets/Widgets/Layers/LayersListWidget.cs:293
 msgid "Layer Hidden"
 msgstr "De laag is verborgen"
 
@@ -1016,7 +1016,7 @@ msgstr "Laageigenschappen"
 msgid "Layer Properties..."
 msgstr "Laageigenschappen…"
 
-#: ../Pinta.Gui.Widgets/Widgets/Layers/LayersListWidget.cs:286
+#: ../Pinta.Gui.Widgets/Widgets/Layers/LayersListWidget.cs:293
 msgid "Layer Shown"
 msgstr "De laag is zichtbaar"
 
@@ -1030,7 +1030,7 @@ msgstr "Laag {0}"
 msgid "Layers"
 msgstr "Lagen"
 
-#: ../Pinta.Tools/Tools/TextTool.cs:188
+#: ../Pinta.Tools/Tools/TextTool.cs:199
 msgid "Left Align"
 msgstr "Links uitlijnen"
 
@@ -1248,7 +1248,7 @@ msgid "Median"
 msgstr "Mediaan"
 
 #: ../Pinta.Core/Actions/LayerActions.cs:53
-#: ../Pinta.Core/Actions/LayerActions.cs:264
+#: ../Pinta.Core/Actions/LayerActions.cs:282
 msgid "Merge Layer Down"
 msgstr "Laag naar beneden samenvoegen"
 
@@ -1261,7 +1261,7 @@ msgstr "Ontbrekend: {0} v{1}"
 msgid "Mode"
 msgstr "Modus"
 
-#: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:880
+#: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:882
 msgid "Modified"
 msgstr "Bewerkt"
 
@@ -1274,12 +1274,12 @@ msgid "Motion Blur"
 msgstr "Bewegingsvervaging"
 
 #: ../Pinta.Core/Actions/LayerActions.cs:59
-#: ../Pinta.Core/Actions/LayerActions.cs:250
+#: ../Pinta.Core/Actions/LayerActions.cs:268
 msgid "Move Layer Down"
 msgstr "Laag omlaag verplaatsen"
 
 #: ../Pinta.Core/Actions/LayerActions.cs:58
-#: ../Pinta.Core/Actions/LayerActions.cs:239
+#: ../Pinta.Core/Actions/LayerActions.cs:257
 msgid "Move Layer Up"
 msgstr "Laag omhoog verplaatsen"
 
@@ -1312,7 +1312,7 @@ msgid "New"
 msgstr "Nieuw"
 
 #: ../Pinta/Dialogs/NewImageDialog.cs:68
-#: ../Pinta.Core/Managers/WorkspaceManager.cs:178
+#: ../Pinta.Core/Managers/WorkspaceManager.cs:184
 msgid "New Image"
 msgstr "Nieuwe afbeelding"
 
@@ -1348,11 +1348,11 @@ msgstr "Ruis"
 
 #: ../Pinta.Core/Effects/UserBlendOps.cs:33
 #: ../Pinta.Tools/Brushes/PlainBrush.cs:37
-#: ../Pinta.Tools/Tools/EraserTool.cs:267 ../Pinta.Tools/Tools/TextTool.cs:224
+#: ../Pinta.Tools/Tools/EraserTool.cs:267 ../Pinta.Tools/Tools/TextTool.cs:242
 msgid "Normal"
 msgstr "Standaard"
 
-#: ../Pinta.Core/Classes/BaseTool.cs:330
+#: ../Pinta.Core/Classes/BaseTool.cs:336
 msgid "Normal Blending"
 msgstr "Standaardmenging"
 
@@ -1360,7 +1360,7 @@ msgstr "Standaardmenging"
 msgid "Normal Size"
 msgstr "Standaardgrootte"
 
-#: ../Pinta.Tools/Tools/TextTool.cs:225
+#: ../Pinta.Tools/Tools/TextTool.cs:243
 msgid "Normal and Outline"
 msgstr "Standaard en omlijnen"
 
@@ -1389,7 +1389,7 @@ msgstr "Openen"
 msgid "Open Curve Shape"
 msgstr "Open curvevorm"
 
-#: ../Pinta.Core/Managers/WorkspaceManager.cs:225
+#: ../Pinta.Core/Managers/WorkspaceManager.cs:255
 msgid "Open Image"
 msgstr "Afbeelding openen"
 
@@ -1432,7 +1432,7 @@ msgid "Other"
 msgstr "Overige"
 
 #: ../Pinta.Effects/Effects/OutlineEffect.cs:27
-#: ../Pinta.Tools/Tools/TextTool.cs:226
+#: ../Pinta.Tools/Tools/TextTool.cs:244
 msgid "Outline"
 msgstr "Omlijnen"
 
@@ -1441,7 +1441,7 @@ msgstr "Omlijnen"
 msgid "Outline Shape"
 msgstr "Contourvorm"
 
-#: ../Pinta.Tools/Tools/TextTool.cs:241
+#: ../Pinta.Tools/Tools/TextTool.cs:259
 msgid "Outline width"
 msgstr "Contourdikte"
 
@@ -1457,7 +1457,7 @@ msgstr "Uitvoerhistogram"
 msgid "Overlay"
 msgstr "Bovenop"
 
-#: ../Pinta.Core/Classes/BaseTool.cs:331
+#: ../Pinta.Core/Classes/BaseTool.cs:337
 msgid "Overwrite"
 msgstr "Overschrijven"
 
@@ -1473,7 +1473,7 @@ msgstr "Penseel"
 msgid "Palette"
 msgstr "Palet"
 
-#: ../Pinta.Core/Actions/EditActions.cs:365
+#: ../Pinta.Core/Actions/EditActions.cs:367
 msgid "Palette files"
 msgstr "Paletbestanden"
 
@@ -1544,7 +1544,7 @@ msgstr "Pinta-afbeeldingsbewerker"
 msgid "Pinta Website"
 msgstr "Pinta-website"
 
-#: ../Pinta/Actions/File/SaveDocumentImplementationAction.cs:185
+#: ../Pinta/Actions/File/SaveDocumentImplementationAction.cs:162
 msgid "Pinta does not support saving images in this file format."
 msgstr ""
 "Pinta heeft geen ondersteuning voor het opslaan in dit bestandsformaat."
@@ -1564,11 +1564,11 @@ msgstr ""
 "afbeeldingseffecten en de mogelijkheid om te werken met een onbeperkt aantal "
 "lagen."
 
-#: ../Pinta.Core/Managers/WorkspaceManager.cs:386
+#: ../Pinta.Core/Managers/WorkspaceManager.cs:413
 msgid "Pinta supports the following file formats:"
 msgstr "Pinta ondersteunt de volgende bestandsformaten:"
 
-#: ../Pinta.Core/Classes/Palette.cs:186
+#: ../Pinta.Core/Classes/Palette.cs:198
 msgid "Pinta supports the following palette formats:"
 msgstr "Pinta ondersteunt de volgende paletformaten:"
 
@@ -1584,12 +1584,12 @@ msgstr "Pixelvorming"
 msgid "Pixels"
 msgstr "Pixels"
 
-#: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:523
-#: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:767
+#: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:525
+#: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:769
 msgid "Point Added"
 msgstr "Punt toegevoegd"
 
-#: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:466
+#: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:468
 msgid "Point Deleted"
 msgstr "Punt verwijderd"
 
@@ -1745,13 +1745,11 @@ msgstr "Renderen"
 msgid "Rendering Effect"
 msgstr "Rendereffect"
 
-#: ../Pinta/Actions/File/SaveDocumentImplementationAction.cs:251
-#: ../Pinta/Actions/File/SaveDocumentImplementationAction.cs:255
 #: ../Pinta.Core/Classes/SelectionModeHandler.cs:47
 msgid "Replace"
 msgstr "Vervangen"
 
-#: ../Pinta/Dialogs/ErrorDialog.cs:110
+#: ../Pinta/Dialogs/ErrorDialog.cs:109
 msgid "Report Bug...."
 msgstr "Bug melden…"
 
@@ -1803,7 +1801,7 @@ msgstr "Afbeeldingsgrootte aanpassen…"
 msgid "Resize Palette"
 msgstr "Paletgrootte aanpassen"
 
-#: ../Pinta.Tools/Tools/TextTool.cs:204
+#: ../Pinta.Tools/Tools/TextTool.cs:221
 msgid "Right Align"
 msgstr "Rechts uitlijnen"
 
@@ -1870,7 +1868,7 @@ msgid "Saturation Percentage"
 msgstr "Verzadigingspercentrage"
 
 #: ../Pinta/Actions/File/SaveDocumentImplementationAction.cs:75
-#: ../Pinta.Core/Actions/EditActions.cs:402
+#: ../Pinta.Core/Actions/EditActions.cs:403
 #: ../Pinta.Core/Actions/FileActions.cs:55
 msgid "Save"
 msgstr "Opslaan"
@@ -1888,7 +1886,7 @@ msgstr "Opslaan als…"
 msgid "Save Image File"
 msgstr "Afbeelding opslaan"
 
-#: ../Pinta.Core/Actions/EditActions.cs:399
+#: ../Pinta.Core/Actions/EditActions.cs:400
 msgid "Save Palette File"
 msgstr "Paletbestand opslaan"
 
@@ -2014,7 +2012,7 @@ msgstr "Potlood gebruiken"
 msgid "Switch to previous tool"
 msgstr "Vorig gereedschap gebruiken"
 
-#: ../Pinta/Actions/File/NewScreenshotAction.cs:51
+#: ../Pinta/Actions/File/NewScreenshotAction.cs:105
 msgid "Take Screenshot"
 msgstr "Schermfoto maken"
 
@@ -2026,21 +2024,13 @@ msgstr "Tekst"
 msgid "Text - Finalize"
 msgstr "Tekst - Afwerken"
 
-#: ../Pinta.Tools/Tools/TextTool.cs:217
+#: ../Pinta.Tools/Tools/TextTool.cs:235
 msgid "Text Style"
 msgstr "Tekststijl"
 
 #: ../Pinta/Actions/Edit/PasteAction.cs:160
 msgid "The clipboard does not contain an image."
 msgstr "Het klembord bevat geen afbeelding."
-
-#: ../Pinta/Actions/File/SaveDocumentImplementationAction.cs:242
-#, csharp-format
-msgid ""
-"The file already exists in \"{1}\". Replacing it will overwrite its contents."
-msgstr ""
-"Dit bestand staat al in ‘{1}’. Als u dat bestand vervangt, dan wordt de "
-"inhoud ervan overschreven."
 
 #: Mono.Addins.Gui/gtk-gui/Mono.Addins.Gui.AddinInstallerDialog.cs:48
 msgid "The following add-ins will be installed:"
@@ -2140,7 +2130,7 @@ msgstr "Gereedschap"
 msgid "Tool Box"
 msgstr "Gereedschapskist"
 
-#: ../Pinta/MainWindow.cs:364
+#: ../Pinta/MainWindow.cs:368
 msgid "Tool Windows"
 msgstr "Gereedschapsvensters"
 
@@ -2174,7 +2164,7 @@ msgstr "Spiraal"
 msgid "Type"
 msgstr "Soort"
 
-#: ../Pinta/MainWindow.cs:540
+#: ../Pinta/MainWindow.cs:545
 #, csharp-format
 msgid ""
 "Unable to download image from {0}.\n"
@@ -2183,7 +2173,7 @@ msgstr ""
 "De afbeelding kan niet worden opgehaald van ‘{0}’.\n"
 "Details: {1}"
 
-#: ../Pinta.Tools/Tools/TextTool.cs:176
+#: ../Pinta.Tools/Tools/TextTool.cs:184
 msgid "Underline"
 msgstr "Onderstrepen"
 
@@ -2209,12 +2199,12 @@ msgstr "Bezig met verwijderen van uitbreidingen…"
 msgid "Union (+) ({0} + Left Click)"
 msgstr "Samenvoegen (+) ({0} + linkermuisknop)"
 
-#: ../Pinta.Core/Managers/WorkspaceManager.cs:112
+#: ../Pinta.Core/Managers/WorkspaceManager.cs:115
 #, csharp-format
 msgid "Unsaved Image {0}"
 msgstr "Niet-opgeslagen bestand: ‘{0}’"
 
-#: ../Pinta.Core/Managers/WorkspaceManager.cs:220
+#: ../Pinta.Core/Managers/WorkspaceManager.cs:250
 msgid "Unsupported file format"
 msgstr "Niet-ondersteund bestandstype"
 
@@ -2280,8 +2270,8 @@ msgstr "Breedte:"
 
 #: ../Pinta.Core/Actions/ViewActions.cs:103
 #: ../Pinta.Core/Actions/ViewActions.cs:282
-#: ../Pinta.Core/Classes/DocumentWorkspace.cs:315
-#: ../Pinta.Core/Classes/DocumentWorkspace.cs:323
+#: ../Pinta.Core/Classes/DocumentWorkspace.cs:324
+#: ../Pinta.Core/Classes/DocumentWorkspace.cs:332
 msgid "Window"
 msgstr "Venster"
 
@@ -2300,13 +2290,13 @@ msgid "Xor ({0} + Right Click)"
 msgstr "Xor ({0} + rechtermuisknop)"
 
 #. Translators: {0} is the name of a file that the user does not have permission to open.
-#: ../Pinta.Core/Managers/WorkspaceManager.cs:405
+#: ../Pinta.Core/Managers/WorkspaceManager.cs:432
 #, csharp-format
 msgid "You do not have access to '{0}'."
 msgstr "U heeft geen toegang tot ‘{0}’."
 
 #. Translators: {0} is the name of a file that the user does not have write permission for.
-#: ../Pinta/Actions/File/SaveDocumentImplementationAction.cs:211
+#: ../Pinta/Actions/File/SaveDocumentImplementationAction.cs:188
 #, csharp-format
 msgid ""
 "You do not have access to modify '{0}'. The file or folder may be read-only."
@@ -2337,27 +2327,27 @@ msgstr "Uitzoomen"
 msgid "Zoom to Selection"
 msgstr "Zoomen tot selectie"
 
-#: ../Pinta/MainWindow.cs:339
+#: ../Pinta/MainWindow.cs:343
 msgid "_Adjustments"
 msgstr "_Aanpassingen"
 
-#: ../Pinta/MainWindow.cs:324
+#: ../Pinta/MainWindow.cs:328
 msgid "_Edit"
 msgstr "B_ewerken"
 
-#: ../Pinta/MainWindow.cs:320
+#: ../Pinta/MainWindow.cs:324
 msgid "_File"
 msgstr "_Bestand"
 
-#: ../Pinta/MainWindow.cs:358
+#: ../Pinta/MainWindow.cs:362
 msgid "_Help"
 msgstr "_Hulp"
 
-#: ../Pinta/MainWindow.cs:332
+#: ../Pinta/MainWindow.cs:336
 msgid "_Image"
 msgstr "Afbeeld_ing"
 
-#: ../Pinta/MainWindow.cs:336
+#: ../Pinta/MainWindow.cs:340
 msgid "_Layers"
 msgstr "_Lagen"
 
@@ -2365,11 +2355,11 @@ msgstr "_Lagen"
 msgid "_Uninstall..."
 msgstr "_Deïnstalleren…"
 
-#: ../Pinta/MainWindow.cs:328
+#: ../Pinta/MainWindow.cs:332
 msgid "_View"
 msgstr "Beel_d"
 
-#: ../Pinta/MainWindow.cs:354
+#: ../Pinta/MainWindow.cs:358
 msgid "_Window"
 msgstr "_Venster"
 
@@ -2410,6 +2400,22 @@ msgstr ""
 "  Tijmen Rekmans https://launchpad.net/~tijmenr\n"
 "  Tim https://launchpad.net/~timpotim-dev\n"
 "  ndke https://launchpad.net/~niels-1\n"
+"  olavl https://launchpad.net/~olavl\n"
+"\n"
+"Launchpad Contributions:\n"
+"  Arjan ten Vergert https://launchpad.net/~info-bobsquad\n"
+"  Cameron White https://launchpad.net/~cameronwhite91\n"
+"  Geoffrey De Belie https://launchpad.net/~computergeoffrey\n"
+"  Guus https://launchpad.net/~guus-verbeek\n"
+"  Harry Slieker https://launchpad.net/~harryslieker\n"
+"  Heimen Stoffels https://launchpad.net/~vistaus\n"
+"  Heimen Stoffels https://launchpad.net/~vistausss-3\n"
+"  Jonathan Pobst https://launchpad.net/~jpobst\n"
+"  Michel Smits https://launchpad.net/~micsmithel\n"
+"  Ron de Leeuw https://launchpad.net/~leviwosc\n"
+"  Tijmen Rekmans https://launchpad.net/~tijmenr\n"
+"  Tim https://launchpad.net/~timpotim-dev\n"
+"  ndke https://launchpad.net/~niels-1\n"
 "  olavl https://launchpad.net/~olavl"
 
 #. Translators: {0} is 'Ctrl', or a platform-specific key such as 'Command' on macOS.
@@ -2427,7 +2433,7 @@ msgstr ""
 msgid "{0} copy"
 msgstr "{0} (kopie)"
 
-#: ../Pinta.Core/ImageFormats/FormatDescriptor.cs:93
+#: ../Pinta.Core/ImageFormats/FormatDescriptor.cs:110
 #, csharp-format
 msgid "{0} image ({1})"
 msgstr "{0}-afbeelding ({1})"
@@ -2452,14 +2458,14 @@ msgstr[1] "{0} updates beschikbaar"
 msgid "{0}%"
 msgstr "{0}%"
 
-#~ msgid "Contributors to this release:"
-#~ msgstr "Bijdragers aan deze versie:"
+#~ msgid "Ctrl-left click to set origin, left click to paint."
+#~ msgstr "Ctrl-klik voor bronselectie, klik om te tekenen."
+
+#~ msgid "Version"
+#~ msgstr "Versie"
 
 #~ msgid "Path"
 #~ msgstr "Pad"
-
-#~ msgid "Previous contributors:"
-#~ msgstr "Vorige bijdragers"
 
 #~ msgid "Title"
 #~ msgstr "Titel"
@@ -2467,14 +2473,8 @@ msgstr "{0}%"
 #~ msgid "Translated by:"
 #~ msgstr "Vertaald door:"
 
-#~ msgid "Version"
-#~ msgstr "Versie"
-
 #~ msgid "Version Info"
 #~ msgstr "Versie Info"
-
-#~ msgid "Ctrl-left click to set origin, left click to paint."
-#~ msgstr "Ctrl-klik voor bronselectie, klik om te tekenen."
 
 #~ msgid "Union (+) (Ctrl + Left Click)"
 #~ msgstr "Unie (+) (Ctrl + Linksklik)"
@@ -2485,8 +2485,14 @@ msgstr "{0}%"
 #~ msgid "No tool selected."
 #~ msgstr "Geen gereedschap geselecteerd"
 
+#~ msgid "Contributors to this release:"
+#~ msgstr "Bijdragers aan deze versie:"
+
 #~ msgid "Powered by Mono:"
 #~ msgstr "Gerealiseerd door Mono:"
+
+#~ msgid "Previous contributors:"
+#~ msgstr "Vorige bijdragers"
 
 #~ msgid ""
 #~ "Left click to draw a shape with the primary color.\n"
@@ -2498,19 +2504,18 @@ msgstr "{0}%"
 #~ "Press Ctrl + left/right arrows to select control points by order.\n"
 #~ "Press Delete to delete the selected control point.\n"
 #~ "Press Space to add a new control point at the mouse position.\n"
-#~ "Hold Ctrl while pressing Space to create the control point at the exact "
-#~ "same position.\n"
+#~ "Hold Ctrl while pressing Space to create the control point at the exact same "
+#~ "position.\n"
 #~ "Hold Ctrl while left clicking on a control point to create a new shape at "
 #~ "the exact same position.\n"
-#~ "Hold Ctrl while clicking outside of the image bounds to create a new "
-#~ "shape starting at the edge.\n"
+#~ "Hold Ctrl while clicking outside of the image bounds to create a new shape "
+#~ "starting at the edge.\n"
 #~ "Press Enter to finalize the shape."
 #~ msgstr ""
 #~ "Links klikken om een vorm te tekenen met het primaire kleur.\n"
 #~ "Links klikken op een vorm om een controlepunt toe te voegen.\n"
 #~ "Links klikken op een controle punt en slepen om het te verplaatsen.\n"
-#~ "Rechts klikken op een controlepunt en slepen om zijn spanning te "
-#~ "wijzigen.\n"
+#~ "Rechts klikken op een controlepunt en slepen om zijn spanning te wijzigen.\n"
 #~ "Houd Shift ingedrukt om naar hoeken te bewegen.\n"
 #~ "Gebruik de pijltoetsen om het controlepunt te verplaatsen.\n"
 #~ "Druk Ctrl + links/rechts in om controlepunten te selecteren op basis van "
@@ -2518,12 +2523,12 @@ msgstr "{0}%"
 #~ "Druk Delete om het geselecteerde controlepunt te verwijderen.\n"
 #~ "Druk Spatie om een nieuw controlepunt toe te voegen op de plaats van de "
 #~ "muis.\n"
-#~ "Houd Ctrl ingedrukt met Spatie om een controlepunt toe te voegen op "
-#~ "dezelfde plaats.\n"
-#~ "Houd Ctrl ingedrukt met links klikken op een controlepunt om een nieuwe "
-#~ "vorm te maken op dezelfde plaats.\n"
-#~ "Houd Ctrl ingedrukt met klikken buiten de afbeelding om een nieuwe vorm "
-#~ "aan het uiteinde te maken.\n"
+#~ "Houd Ctrl ingedrukt met Spatie om een controlepunt toe te voegen op dezelfde "
+#~ "plaats.\n"
+#~ "Houd Ctrl ingedrukt met links klikken op een controlepunt om een nieuwe vorm "
+#~ "te maken op dezelfde plaats.\n"
+#~ "Houd Ctrl ingedrukt met klikken buiten de afbeelding om een nieuwe vorm aan "
+#~ "het uiteinde te maken.\n"
 #~ "Druk op Enter om de vorm af te werken."
 
 #~ msgid ""
@@ -2533,22 +2538,33 @@ msgstr "{0}%"
 #~ "selection outline by a single pixel."
 #~ msgstr ""
 #~ "Klik met de linkermuisknop en sleep de selectie om de omlijning te "
-#~ "verplaatsen. Houd Ctrl ingedrukt om te schalen in plaats van te "
-#~ "verplaatsen. Klik met de rechtermuisknop en sleep de selectie om de "
-#~ "omlijning te roteren. Houd Shift ingedrukt om in stappen te roteren. "
-#~ "Gebruik de pijltjestoetsen om de omlijning met één pixel te verplaatsen."
+#~ "verplaatsen. Houd Ctrl ingedrukt om te schalen in plaats van te verplaatsen. "
+#~ "Klik met de rechtermuisknop en sleep de selectie om de omlijning te roteren. "
+#~ "Houd Shift ingedrukt om in stappen te roteren. Gebruik de pijltjestoetsen om "
+#~ "de omlijning met één pixel te verplaatsen."
 
 #~ msgid ""
 #~ "Left click and drag the selection to move selected content. Hold Ctrl to "
-#~ "scale instead of move. Right click and drag the selection to rotate "
-#~ "selected content. Hold Shift to rotate in steps. Use arrow keys to move "
-#~ "selected content by a single pixel."
+#~ "scale instead of move. Right click and drag the selection to rotate selected "
+#~ "content. Hold Shift to rotate in steps. Use arrow keys to move selected "
+#~ "content by a single pixel."
 #~ msgstr ""
-#~ "Klik met de linkermuisknop en sleep de selectie om de inhoud te "
-#~ "verplaatsen. Houd Ctrl ingedrukt om te schalen in plaats van te "
-#~ "verplaatsen. Klik met de rechtermuisknop en sleep de selectie om de "
-#~ "inhoud te roteren. Houd Shift ingedrukt om in stappen te roteren. Gebruik "
-#~ "de pijltjestoetsen om de inhoud met één pixel te verplaatsen."
+#~ "Klik met de linkermuisknop en sleep de selectie om de inhoud te verplaatsen. "
+#~ "Houd Ctrl ingedrukt om te schalen in plaats van te verplaatsen. Klik met de "
+#~ "rechtermuisknop en sleep de selectie om de inhoud te roteren. Houd Shift "
+#~ "ingedrukt om in stappen te roteren. Gebruik de pijltjestoetsen om de inhoud "
+#~ "met één pixel te verplaatsen."
 
 #~ msgid "Intersect (Alt + Left Click)"
 #~ msgstr "Doorsnijden (Alt + Linkermuisknop)"
+
+#, csharp-format
+#~ msgid "A file named \"{0}\" already exists. Do you want to replace it?"
+#~ msgstr "Er is al een bestand genaamd “{0}”. Wilt u dit vervangen?"
+
+#, csharp-format
+#~ msgid ""
+#~ "The file already exists in \"{1}\". Replacing it will overwrite its contents."
+#~ msgstr ""
+#~ "Dit bestand staat al in ‘{1}’. Als u dat bestand vervangt, dan wordt de "
+#~ "inhoud ervan overschreven."
