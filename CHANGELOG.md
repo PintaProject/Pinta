@@ -24,6 +24,9 @@ Thanks to the following contributors who worked on this release:
 - Image or palette files that have an unknown extension but have valid contents can now be loaded ([#1679570](https://bugs.launchpad.net/pinta/+bug/1679570))
   - The file dialog also now uses MIME types on Linux and macOS, allowing valid image files with unknown extensions to be included in the image file filter (#216)
 - Updated the application icon (#220)
+- WebP support
+  - For Linux users, [webp-pixbuf-loader](https://github.com/aruiz/webp-pixbuf-loader/) is now a suggested dependency to enable WebP support in Pinta
+  - `webp-pixbuf-loader` is now included with the macOS package for WebP support
 
 ### Changed
 - Pinta now uses the standard GTK about dialog

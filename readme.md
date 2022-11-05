@@ -41,7 +41,7 @@ For building on the command line:
 ## Building on macOS
 
 - Install .NET 6 and GTK
-  - `brew install dotnet-sdk gtk+3 adwaita-icon-theme gettext`
+  - `brew install dotnet-sdk gtk+3 adwaita-icon-theme gettext webp-pixbuf-loader`
 - Build:
   - `dotnet build`
 - Run:
@@ -54,6 +54,7 @@ Alternatively, Pinta can be built by opening `Pinta.sln` in [Visual Studio for M
 - Install [.NET 6](https://dotnet.microsoft.com/) following the instructions for your Linux distribution.
 - Install other dependencies (instructions are for Ubuntu 20.04, but should be similar for other distros):
   - `sudo apt install autotools-dev autoconf-archive gettext intltool libgtk-3-dev`
+  - Optional dependencies: `webp-pixbuf-loader`
 - Build (option 1, for development and testing):
   - `dotnet build`
   - `dotnet run --project Pinta`
