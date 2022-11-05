@@ -177,8 +177,7 @@ namespace Pinta.Tools
 			}
 		}
 
-		protected PointD hover_point = new PointD (-1d, -1d);
-		protected int hovered_pt_as_control_pt = -1;
+		protected PointD? hover_point;
 
 		protected bool changing_tension = false;
 		protected PointD last_mouse_pos = new PointD (0d, 0d);
@@ -502,7 +501,7 @@ namespace Pinta.Tools
 						SelectedShapeIndex = -1;
 					}
 
-					hover_point = new PointD (-1d, -1d);
+					hover_point = null;
 
 					DrawActiveShape (true, false, true, false, false);
 				}
@@ -1124,16 +1123,14 @@ namespace Pinta.Tools
 			} else {
 				//Do not draw the hover point. Instead, reset the hover point. NOTE: this is necessary even though the hover point
 				//is reset later. It affects the DrawShape call.
-				hover_point = new PointD (-1d, -1d);
-				hovered_pt_as_control_pt = -1;
+				hover_point = null;
 			}
 
 			//Draw the shape onto the temporary DrawingLayer.
 			Rectangle dirty = DrawShape (engine, engine.DrawingLayer.Layer, true, drawHoverSelection);
 
 			//Reset the hover point after each drawing.
-			hover_point = new PointD (-1d, -1d);
-			hovered_pt_as_control_pt = -1;
+			hover_point = null;
 
 			return dirty;
 		}
@@ -1143,9 +1140,8 @@ namespace Pinta.Tools
 		/// </summary>
 		private void CalculateHoverPoint ()
 		{
+			hover_point = null;
 			if (SEngines.Count > 0) {
-				hover_point = new PointD (-1d, -1d);
-
 				int closestCPIndex, closestCPShapeIndex;
 				ControlPoint? closestControlPoint;
 				double closestCPDistance;
@@ -1167,10 +1163,7 @@ namespace Pinta.Tools
 				//Determine if the closest ControlPoint is within the expected click range.
 				if (closestControlPoint != null && closestCPDistance < currentClickRange) {
 					//User clicked directly on a ControlPoint on a shape.
-
-					hover_point.X = closestControlPoint.Position.X;
-					hover_point.Y = closestControlPoint.Position.Y;
-					hovered_pt_as_control_pt = closestCPIndex;
+					hover_point = closestControlPoint.Position;
 				} else if (closestDistance < currentClickRange) //Determine if the user is hovering the mouse close enough to a shape.
 				  {
 					//User is hovering over a generated point on a shape.
@@ -1179,31 +1172,20 @@ namespace Pinta.Tools
 						//Note: compare the currentPoint's distance here because it's the actual mouse position.
 						if (current_point.Distance (controlPoints[closestPointIndex].Position) < currentClickRange) {
 							//Mouse hovering over a control point (on the "previous order" side of the point).
-
-							hover_point.X = controlPoints[closestPointIndex].Position.X;
-							hover_point.Y = controlPoints[closestPointIndex].Position.Y;
-							hovered_pt_as_control_pt = closestPointIndex;
+							hover_point = controlPoints[closestPointIndex].Position;
 						} else if (closestPointIndex > 0) {
 							if (current_point.Distance (controlPoints[closestPointIndex - 1].Position) < currentClickRange) {
 								//Mouse hovering over a control point (on the "following order" side of the point).
-
-								hover_point.X = controlPoints[closestPointIndex - 1].Position.X;
-								hover_point.Y = controlPoints[closestPointIndex - 1].Position.Y;
-								hovered_pt_as_control_pt = closestPointIndex - 1;
+								hover_point = controlPoints[closestPointIndex - 1].Position;
 							}
 						} else if (controlPoints.Count > 0 && current_point.Distance (controlPoints[controlPoints.Count - 1].Position) < currentClickRange) {
 							//Mouse hovering over a control point (on the "following order" side of the point).
-
-							hovered_pt_as_control_pt = controlPoints.Count - 1;
-							hover_point.X = controlPoints[hovered_pt_as_control_pt].Position.X;
-							hover_point.Y = controlPoints[hovered_pt_as_control_pt].Position.Y;
+							hover_point = controlPoints[controlPoints.Count - 1].Position;
 						}
 					}
 
-					if (hover_point.X < 0d) {
-						hover_point.X = closestPoint.X;
-						hover_point.Y = closestPoint.Y;
-					}
+					if (hover_point is null)
+						hover_point = closestPoint;
 				}
 			}
 		}
@@ -1340,8 +1322,8 @@ namespace Pinta.Tools
 				if (controlPoints.Count > 0) {
 					//Draw the control points for the shape.
 					for (int i = 0; i < controlPoints.Count; ++i) {
-						//Skip drawing the hovered control point.
-						if (drawHoverSelection && hovered_pt_as_control_pt > -1 && hover_point.Distance (controlPoints[i].Position) < 1d) {
+						//Skip drawing the control point if it is being hovered over.
+						if (drawHoverSelection && hover_point is PointD pos && pos.Distance (controlPoints[i].Position) < 1d) {
 							continue;
 						}
 
@@ -1379,15 +1361,15 @@ namespace Pinta.Tools
 			double controlPointOffset = (double) last_control_pt_size / 2d;
 
 			//Verify that the user isn't changing the tension of a control point and that there is a hover point to draw.
-			if (!changing_tension && hover_point.X > -1d) {
+			if (!changing_tension && hover_point is PointD pos) {
 				Rectangle hoverOuterEllipseRect = new Rectangle (
-					hover_point.X - controlPointOffset * 3d, hover_point.Y - controlPointOffset * 3d,
+					pos.X - controlPointOffset * 3d, pos.Y - controlPointOffset * 3d,
 					controlPointOffset * 6d, controlPointOffset * 6d);
 
 				g.FillStrokedEllipse (hoverOuterEllipseRect, hover_color, hover_color, 1);
 
 				g.FillStrokedEllipse (new Rectangle (
-					hover_point.X - controlPointOffset, hover_point.Y - controlPointOffset,
+					pos.X - controlPointOffset, pos.Y - controlPointOffset,
 					last_control_pt_size, last_control_pt_size), hover_color, hover_color, (int) last_control_pt_size);
 
 
