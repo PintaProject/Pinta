@@ -45,6 +45,7 @@ Thanks to the following contributors who worked on this release:
 - Fixed a bug where the selected layer could be changed while updating the layer list widget [#1965101](https://bugs.launchpad.net/pinta/+bug/1965101)
 - Fixed a bug in the shape tools where changing the shape type did not always take effect (#235, #238, [#1993332](https://bugs.launchpad.net/pinta/+bug/1993332), [#1635902](https://bugs.launchpad.net/pinta/+bug/1635902))
 - Fixed an issue on macOS where toolbar drop down button menus items could not be selected properly
+- Pinta now always saves files to the exact file name chosen by the native file dialog, without e.g. appending a default extension. This fixes issues where files saved through desktop portals could be lost ([#1958670](https://bugs.launchpad.net/pinta/+bug/1958670))
 
 ## [2.0.2](https://github.com/PintaProject/Pinta/compare/2.0.2...HEAD) - 2022/01/13
 
