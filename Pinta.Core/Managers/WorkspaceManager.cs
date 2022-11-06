@@ -283,33 +283,25 @@ namespace Pinta.Core
 		}
 
 		/// <summary>
-		/// Converts a point from the active documents
-		/// window coordinates to canvas coordinates
+		/// Converts a point from the active document's window coordinates to canvas coordinates.
 		/// </summary>
-		/// <param name='x'>
-		/// The X coordinate of the window point
+		/// <param name='canvas_pos'>
+		/// The position of the window point
 		/// </param>
-		/// <param name='y'>
-		/// The Y coordinate of the window point
-		/// </param>
-		public Cairo.PointD WindowPointToCanvas (double x, double y)
+		public Cairo.PointD WindowPointToCanvas (Cairo.PointD window_pos)
 		{
-			return ActiveWorkspace.WindowPointToCanvas (x, y);
+			return ActiveWorkspace.WindowPointToCanvas (window_pos.X, window_pos.Y);
 		}
 
 		/// <summary>
-		/// Converts a point from the active documents
-		/// canvas coordinates to window coordinates
+		/// Converts a point from the active document's canvas coordinates to window coordinates.
 		/// </summary>
-		/// <param name='x'>
-		/// The X coordinate of the canvas point
+		/// <param name='canvas_pos'>
+		/// The position of the canvas point
 		/// </param>
-		/// <param name='y'>
-		/// The Y coordinate of the canvas point
-		/// </param>
-		public Cairo.PointD CanvasPointToWindow (double x, double y)
+		public Cairo.PointD CanvasPointToWindow (Cairo.PointD canvas_pos)
 		{
-			return ActiveWorkspace.CanvasPointToWindow (x, y);
+			return ActiveWorkspace.CanvasPointToWindow (canvas_pos.X, canvas_pos.Y);
 		}
 
 		public Gdk.Rectangle ClampToImageSize (Gdk.Rectangle r)

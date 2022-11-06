@@ -48,7 +48,7 @@ namespace Pinta.Tools
 			const double radius = 4.5;
 			const double diameter = 2 * radius;
 
-			var window_pt = PintaCore.Workspace.CanvasPointToWindow (CanvasPosition.X, CanvasPosition.Y);
+			var window_pt = PintaCore.Workspace.CanvasPointToWindow (CanvasPosition);
 			return new Cairo.Rectangle (window_pt.X - radius, window_pt.Y - radius, diameter, diameter);
 		}
 	}
