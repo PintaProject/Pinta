@@ -176,7 +176,7 @@ namespace Pinta.Tools
 		public IEnumerable<IToolHandle> Handles => new[] { hover_handle };
 
 		private PointD? hover_point;
-		private MoveHandle hover_handle = new();
+		private MoveHandle hover_handle = new ();
 
 		protected bool changing_tension = false;
 		protected PointD last_mouse_pos = new PointD (0d, 0d);
@@ -344,8 +344,7 @@ namespace Pinta.Tools
 							SelectedShapeIndex = previousSSI;
 							//Draw the updated shape with organized points generation (for mouse detection). 
 							DrawActiveShape (true, false, true, false, true);
-						}
-						else {
+						} else {
 							ActivateCorrespondingTool (newShapeType, true);
 						}
 
@@ -999,8 +998,8 @@ namespace Pinta.Tools
 			if (activeEngine == null) {
 				//No shape will be drawn; however, the hover point still needs to be drawn if drawHoverSelection is true.
 				if (drawHoverSelection) {
-					CalculateHoverPoint();
-					UpdateHoverHandle();
+					CalculateHoverPoint ();
+					UpdateHoverHandle ();
 				}
 			} else {
 				//Clear any temporary drawing, because something new will be drawn.
@@ -1110,6 +1109,9 @@ namespace Pinta.Tools
 		{
 			hover_point = null;
 			if (SEngines.Count > 0) {
+				// TODO - the distance comparisons should be done in screen space using the MoveHandle.
+				double currentClickRange = ShapeClickStartingRange + BrushWidth * ShapeClickThicknessFactor;
+
 				int closestCPIndex, closestCPShapeIndex;
 				ControlPoint? closestControlPoint;
 				double closestCPDistance;
@@ -1117,42 +1119,19 @@ namespace Pinta.Tools
 				SEngines.FindClosestControlPoint (current_point,
 					out closestCPShapeIndex, out closestCPIndex, out closestControlPoint, out closestCPDistance);
 
-				int closestShapeIndex, closestPointIndex;
-				PointD closestPoint;
-				double closestDistance;
-
-				OrganizedPointCollection.FindClosestPoint (SEngines, current_point,
-					out closestShapeIndex, out closestPointIndex, out closestPoint, out closestDistance);
-
-				double currentClickRange = ShapeClickStartingRange + BrushWidth * ShapeClickThicknessFactor;
-
-				List<ControlPoint> controlPoints = SEngines[closestShapeIndex].ControlPoints;
-
-				//Determine if the closest ControlPoint is within the expected click range.
 				if (closestControlPoint != null && closestCPDistance < currentClickRange) {
-					//User clicked directly on a ControlPoint on a shape.
+					// Directly hovered over a control point.
 					hover_point = closestControlPoint.Position;
-				} else if (closestDistance < currentClickRange) //Determine if the user is hovering the mouse close enough to a shape.
-				  {
-					//User is hovering over a generated point on a shape.
+				} else {
+					// Otherwise, the user may be hovering over a generated point.
+					int closestShapeIndex, closestPointIndex;
+					PointD closestPoint;
+					double closestDistance;
 
-					if (controlPoints.Count > closestPointIndex) {
-						//Note: compare the currentPoint's distance here because it's the actual mouse position.
-						if (current_point.Distance (controlPoints[closestPointIndex].Position) < currentClickRange) {
-							//Mouse hovering over a control point (on the "previous order" side of the point).
-							hover_point = controlPoints[closestPointIndex].Position;
-						} else if (closestPointIndex > 0) {
-							if (current_point.Distance (controlPoints[closestPointIndex - 1].Position) < currentClickRange) {
-								//Mouse hovering over a control point (on the "following order" side of the point).
-								hover_point = controlPoints[closestPointIndex - 1].Position;
-							}
-						} else if (controlPoints.Count > 0 && current_point.Distance (controlPoints[controlPoints.Count - 1].Position) < currentClickRange) {
-							//Mouse hovering over a control point (on the "following order" side of the point).
-							hover_point = controlPoints[controlPoints.Count - 1].Position;
-						}
-					}
+					OrganizedPointCollection.FindClosestPoint (SEngines, current_point,
+						out closestShapeIndex, out closestPointIndex, out closestPoint, out closestDistance);
 
-					if (hover_point is null)
+					if (closestDistance < currentClickRange)
 						hover_point = closestPoint;
 				}
 			}
@@ -1323,11 +1302,10 @@ namespace Pinta.Tools
 
 			// Don't show the hover handle while the user is changing a control point's tension.
 			hover_handle.Active = false;
-			if (!changing_tension && hover_point.HasValue)
-			{
+			if (!changing_tension && hover_point.HasValue) {
 				hover_handle.CanvasPosition = hover_point.Value;
 				hover_handle.Active = true;
-				dirty = dirty.Union(hover_handle.InvalidateRect);
+				dirty = dirty.Union (hover_handle.InvalidateRect);
 			}
 
 			PintaCore.Workspace.InvalidateWindowRect (dirty);
