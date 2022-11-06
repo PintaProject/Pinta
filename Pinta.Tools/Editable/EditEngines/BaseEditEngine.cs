@@ -55,7 +55,6 @@ namespace Pinta.Tools
 		protected bool is_drawing = false;
 
 		protected Rectangle? last_dirty = null;
-		protected Rectangle? last_hover = null;
 
 		protected double last_control_pt_size = 0d;
 
@@ -125,9 +124,6 @@ namespace Pinta.Tools
 			}
 		}
 
-		protected static readonly Color hover_color =
-			new Color (MoveHandle.FillColor.R, MoveHandle.FillColor.G, MoveHandle.FillColor.B, MoveHandle.FillColor.A * 2d / 3d);
-
 		public const double ShapeClickStartingRange = 10d;
 		public const double ShapeClickThicknessFactor = 1d;
 		public const double DefaultEndPointTension = 0d;
@@ -177,7 +173,10 @@ namespace Pinta.Tools
 			}
 		}
 
-		protected PointD? hover_point;
+		public IEnumerable<IToolHandle> Handles => new[] { hover_handle };
+
+		private PointD? hover_point;
+		private MoveHandle hover_handle = new();
 
 		protected bool changing_tension = false;
 		protected PointD last_mouse_pos = new PointD (0d, 0d);
@@ -1000,7 +999,8 @@ namespace Pinta.Tools
 			if (activeEngine == null) {
 				//No shape will be drawn; however, the hover point still needs to be drawn if drawHoverSelection is true.
 				if (drawHoverSelection) {
-					DrawTemporaryHoverPoint ();
+					CalculateHoverPoint();
+					UpdateHoverHandle();
 				}
 			} else {
 				//Clear any temporary drawing, because something new will be drawn.
@@ -1029,16 +1029,6 @@ namespace Pinta.Tools
 		/// </summary>
 		private void BeforeDraw ()
 		{
-			//Clear the ToolLayer if it was used previously (e.g. for hover points when there was no active shape).
-			PintaCore.Workspace.ActiveDocument.Layers.ToolLayer.Clear ();
-
-			//Invalidate the old hover point bounds, if any.
-			if (last_hover != null) {
-				PintaCore.Workspace.Invalidate (last_hover.Value.ToGdkRectangle ());
-
-				last_hover = null;
-			}
-
 			//Check to see if a new shape is selected.
 			if (prev_selected_shape_index != SelectedShapeIndex) {
 				//A new shape is selected, so clear the previous dirty Rectangle.
@@ -1046,28 +1036,6 @@ namespace Pinta.Tools
 
 				prev_selected_shape_index = SelectedShapeIndex;
 			}
-		}
-
-		/// <summary>
-		/// Do not call. Use DrawActiveShape.
-		/// </summary>
-		private void DrawTemporaryHoverPoint ()
-		{
-			Document doc = PintaCore.Workspace.ActiveDocument;
-
-			//Since there is no active ShapeEngine, the ToolLayer's surface will be used to draw the hover point on.
-			using (Context g = new Context (doc.Layers.ToolLayer.Surface)) {
-				g.AppendPath (doc.Selection.SelectionPath);
-				g.FillRule = FillRule.EvenOdd;
-				g.Clip ();
-
-				CalculateHoverPoint ();
-
-				//Draw the hover point. Note: the hover point has its own invalidation.
-				DrawHoverPoint (g);
-			}
-
-			doc.Layers.ToolLayer.Hidden = false;
 		}
 
 		/// <summary>
@@ -1337,53 +1305,33 @@ namespace Pinta.Tools
 					}
 				}
 
-				if (drawHoverSelection) {
-					//Draw the hover point.
-					DrawHoverPoint (g);
-				}
+				if (drawHoverSelection)
+					UpdateHoverHandle ();
 			}
 		}
 
 		/// <summary>
-		/// Draws the hover point, if any.
+		/// Update the hover handle's position and redraw it.
 		/// </summary>
-		/// <param name="g"></param>
-		protected void DrawHoverPoint (Context g)
+		protected void UpdateHoverHandle ()
 		{
 			ShapeEngine? activeEngine = ActiveShapeEngine;
 
-			if (activeEngine != null) {
-				last_control_pt_size = Math.Min (activeEngine.BrushWidth + 1, 5);
-			} else {
-				last_control_pt_size = Math.Min (BrushWidth + 1, 5);
+			Gdk.Rectangle dirty = Gdk.Rectangle.Zero;
+			if (hover_handle.Active)
+				dirty = hover_handle.InvalidateRect;
+
+			// Don't show the hover handle while the user is changing a control point's tension.
+			hover_handle.Active = false;
+			if (!changing_tension && hover_point.HasValue)
+			{
+				hover_handle.CanvasPosition = hover_point.Value;
+				hover_handle.Active = true;
+				dirty = dirty.Union(hover_handle.InvalidateRect);
 			}
 
-			double controlPointOffset = (double) last_control_pt_size / 2d;
-
-			//Verify that the user isn't changing the tension of a control point and that there is a hover point to draw.
-			if (!changing_tension && hover_point is PointD pos) {
-				Rectangle hoverOuterEllipseRect = new Rectangle (
-					pos.X - controlPointOffset * 3d, pos.Y - controlPointOffset * 3d,
-					controlPointOffset * 6d, controlPointOffset * 6d);
-
-				g.FillStrokedEllipse (hoverOuterEllipseRect, hover_color, hover_color, 1);
-
-				g.FillStrokedEllipse (new Rectangle (
-					pos.X - controlPointOffset, pos.Y - controlPointOffset,
-					last_control_pt_size, last_control_pt_size), hover_color, hover_color, (int) last_control_pt_size);
-
-
-				hoverOuterEllipseRect = hoverOuterEllipseRect.Inflate (1, 1);
-
-				//Since the hover point can be outside of the active shape's bounds (hovering over a different shape), a special
-				//invalidation call needs to be made for the hover point in order to ensure its visibility at all times.
-				PintaCore.Workspace.Invalidate (hoverOuterEllipseRect.ToGdkRectangle ());
-
-				last_hover = hoverOuterEllipseRect;
-				last_hover = last_hover.Value.Clamp ();
-			}
+			PintaCore.Workspace.InvalidateWindowRect (dirty);
 		}
-
 
 		/// <summary>
 		/// Go through every editable shape and draw it.
@@ -1459,9 +1407,6 @@ namespace Pinta.Tools
 			if (dirty.HasValue) {
 				InvalidateAfterDraw (dirty.Value);
 			}
-
-			// Ensure the ToolLayer gets hidden now that we're done with it
-			doc.Layers.ToolLayer.Hidden = true;
 
 			//Clear out all of the data.
 			ResetShapes ();
