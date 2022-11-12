@@ -687,97 +687,72 @@ namespace Pinta.Tools
 			OrganizedPointCollection.FindClosestPoint (SEngines, current_point,
 			    out closestShapeIndex, out closestPointIndex, out closestPoint, out closestDistance);
 
-			bool clickedOnControlPoint = false;
+			bool clicked_control_point = false;
+			bool clicked_generated_point = false;
+			{
+				var current_window_point = PintaCore.Workspace.CanvasPointToWindow(current_point);
+				var test_handle = new MoveHandle();
 
-			// TODO - this should be replaced with the screen space tests from the MoveHandle
-			double currentClickRange = ShapeClickStartingRange + BrushWidth;
-
-			//Determine if the closest ControlPoint is within the expected click range.
-			if (closestControlPoint != null && closestCPDistance < currentClickRange) {
-				//User clicked directly on a ControlPoint on a shape.
-
-				clicked_without_modifying = true;
-
-				SelectedPointIndex = closestCPIndex;
-				SelectedShapeIndex = closestCPShapeIndex;
-
-				clickedOnControlPoint = true;
-			} else if (closestDistance < currentClickRange) //Determine if the user clicked close enough to a shape.
-			  {
-				//User clicked on a generated point on a shape.
-
-				List<ControlPoint> controlPoints = SEngines[closestShapeIndex].ControlPoints;
-
-				//Note: compare the currentPoint's distance here because it's the actual mouse position.
-				if (controlPoints.Count > closestPointIndex && current_point.Distance (controlPoints[closestPointIndex].Position) < currentClickRange) {
-					//User clicked on a control point (on the "previous order" side of the point).
-
-					clicked_without_modifying = true;
-
-					SelectedPointIndex = closestPointIndex;
-					SelectedShapeIndex = closestShapeIndex;
-
-					clickedOnControlPoint = true;
-				} else if (closestPointIndex > 0) {
-					if (current_point.Distance (controlPoints[closestPointIndex - 1].Position) < currentClickRange) {
-						//User clicked on a control point (on the "following order" side of the point).
-
-						clicked_without_modifying = true;
-
-						SelectedPointIndex = closestPointIndex - 1;
-						SelectedShapeIndex = closestShapeIndex;
-
-						clickedOnControlPoint = true;
-					} else if (controlPoints.Count > 0 && current_point.Distance (controlPoints[controlPoints.Count - 1].Position) < currentClickRange) {
-						//User clicked on a control point (on the "following order" side of the point).
-
-						clicked_without_modifying = true;
-
-						SelectedPointIndex = closestPointIndex - 1;
-						SelectedShapeIndex = closestShapeIndex;
-
-						clickedOnControlPoint = true;
+				// Check if the user is directly clicking on a control point.
+				if (closestControlPoint != null)
+				{
+					test_handle.CanvasPosition = closestControlPoint.Position;
+					clicked_control_point = test_handle.ContainsPoint(current_window_point);
+					if (clicked_control_point)
+					{
+						SelectedPointIndex = closestCPIndex;
+						SelectedShapeIndex = closestCPShapeIndex;
 					}
 				}
 
-				//Check for clicking on a non-control point. Don't do anything here if right clicked.
-				if (!changing_tension && !clickedOnControlPoint && closestShapeIndex > -1 && closestPointIndex > -1 && SEngines.Count > closestShapeIndex) {
-					//User clicked on a non-control point on a shape.
+				// Otherwise, the user might have clicked on a generated point.
+				if (!clicked_control_point)
+				{
+					test_handle.CanvasPosition = closestPoint;
+					clicked_generated_point = test_handle.ContainsPoint(current_window_point);
+				}
+			}
 
-					//Determine if the currently active tool matches the clicked on shape's corresponding tool, and if not, switch to it.
-					if (ActivateCorrespondingTool (closestShapeIndex, true) != null) {
-						//Pass on the event and its data to the newly activated tool.
-						PintaCore.Tools.DoMouseDown (document, e);
+			clicked_without_modifying = clicked_control_point;
 
-						//Don't do anything else here once the tool is switched and the event is passed on.
-						return;
-					}
+			if (!changing_tension && clicked_generated_point)
+			{
+				//Determine if the currently active tool matches the clicked on shape's corresponding tool, and if not, switch to it.
+				if (ActivateCorrespondingTool(closestShapeIndex, true) != null)
+				{
+					//Pass on the event and its data to the newly activated tool.
+					PintaCore.Tools.DoMouseDown(document, e);
 
-					//The currently active tool matches the clicked on shape's corresponding tool.
+					//Don't do anything else here once the tool is switched and the event is passed on.
+					return;
+				}
 
-					//Only create a new shape if the user isn't holding the control key down.
-					if (!ctrlKey) {
-						//Create a new ShapesModifyHistoryItem so that the adding of a control point can be undone.
-						doc.History.PushNewItem (new ShapesModifyHistoryItem (this, owner.Icon, ShapeName + " " + Translations.GetString ("Point Added")));
+				//The currently active tool matches the clicked on shape's corresponding tool.
 
-						controlPoints.Insert (closestPointIndex,
-							new ControlPoint (new PointD (current_point.X, current_point.Y), DefaultMidPointTension));
-					}
+				//Only create a new shape if the user isn't holding the control key down.
+				if (!ctrlKey)
+				{
+					//Create a new ShapesModifyHistoryItem so that the adding of a control point can be undone.
+					doc.History.PushNewItem(new ShapesModifyHistoryItem(this, owner.Icon, ShapeName + " " + Translations.GetString("Point Added")));
 
-					//These should be set after creating the history item.
-					SelectedPointIndex = closestPointIndex;
-					SelectedShapeIndex = closestShapeIndex;
+					SEngines[closestShapeIndex].ControlPoints.Insert(closestPointIndex,
+						new ControlPoint(new PointD(current_point.X, current_point.Y), DefaultMidPointTension));
+				}
 
-					ShapeEngine? activeEngine = ActiveShapeEngine;
+				//These should be set after creating the history item.
+				SelectedPointIndex = closestPointIndex;
+				SelectedShapeIndex = closestShapeIndex;
 
-					if (activeEngine != null) {
-						UpdateToolbarSettings (activeEngine);
-					}
+				ShapeEngine? activeEngine = ActiveShapeEngine;
+
+				if (activeEngine != null)
+				{
+					UpdateToolbarSettings(activeEngine);
 				}
 			}
 
 			//Create a new shape if the user control + clicks on a shape or if the user simply clicks outside of any shapes.
-			if (!changing_tension && (ctrlKey || (closestCPDistance >= currentClickRange && closestDistance >= currentClickRange))) {
+			if (!changing_tension && (ctrlKey || (!clicked_control_point && !clicked_generated_point))) {
 				//Verify that the user clicked inside the image bounds or that the user is
 				//holding the Ctrl key (to ignore the Image bounds and draw on the edge).
 				if ((point.X == shape_origin.X && point.Y == shape_origin.Y) || ctrlKey) {
@@ -796,7 +771,7 @@ namespace Pinta.Tools
 						doc.Layers.CurrentUserLayer.Surface.Clone (), doc.Layers.CurrentUserLayer, SelectedPointIndex, SelectedShapeIndex, false));
 
 					//Create the shape, add its starting points, and add it to SEngines.
-					SEngines.Add (CreateShape (ctrlKey, clickedOnControlPoint, prevSelPoint));
+					SEngines.Add (CreateShape (ctrlKey, clicked_control_point, prevSelPoint));
 
 					//Select the new shape.
 					SelectedShapeIndex = SEngines.Count - 1;
@@ -810,7 +785,7 @@ namespace Pinta.Tools
 
 					StorePreviousSettings ();
 				}
-			} else if (clickedOnControlPoint) {
+			} else if (clicked_control_point) {
 				//Since the user is not creating a new shape or control point but rather modifying an existing control point, it should be determined
 				//whether the currently active tool matches the clicked on shape's corresponding tool, and if not, switch to it.
 				if (ActivateCorrespondingTool (SelectedShapeIndex, true) != null) {
@@ -831,7 +806,7 @@ namespace Pinta.Tools
 			}
 
 			//Determine if the user right clicks outside of any shapes (neither on their control points nor on their generated points).
-			if ((closestCPDistance >= currentClickRange && closestDistance >= currentClickRange) && changing_tension) {
+			if ((!clicked_control_point && !clicked_generated_point) && changing_tension) {
 				clicked_without_modifying = true;
 			}
 
