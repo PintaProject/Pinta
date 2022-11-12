@@ -66,7 +66,7 @@ namespace Pinta.Core
 
 			using var stream = file.Replace ();
 			try {
-                pb.SaveToStreamv (stream, fileType, new string?[] { "quality", null }, new string?[] { level.ToString (), null }, null);
+				pb.SaveToStreamv (stream, fileType, new string?[] { "quality", null }, new string?[] { level.ToString (), null }, null);
 			} finally {
 				stream.Close (null);
 			}
