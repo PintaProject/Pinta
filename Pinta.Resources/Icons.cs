@@ -149,15 +149,15 @@ namespace Pinta.Resources
 		public const string ResizeCanvasSW = "image-resize-canvas-sw-symbolic";
 		public const string ResizeCanvasUp = "image-resize-canvas-up-symbolic";
 
-		public const string Sampling1 = "sampling-1x1";
-		public const string Sampling3 = "sampling-3x3";
-		public const string Sampling5 = "sampling-5x5";
-		public const string Sampling7 = "sampling-7x7";
-		public const string Sampling9 = "sampling-9x9";
+		public const string Sampling1 = "tool-colorpicker-sampling-1x1-symbolic";
+		public const string Sampling3 = "tool-colorpicker-sampling-3x3-symbolic";
+		public const string Sampling5 = "tool-colorpicker-sampling-5x5-symbolic";
+		public const string Sampling7 = "tool-colorpicker-sampling-7x7-symbolic";
+		public const string Sampling9 = "tool-colorpicker-sampling-9x9-symbolic";
 
 		public const string ToolCloneStamp = "tool-clonestamp-symbolic";
 		public const string ToolColorPicker = "tool-colorpicker-symbolic";
-		public const string ToolColorPickerPreviousTool = "tool-colorpicker-previoustool";
+		public const string ToolColorPickerPreviousTool = "go-previous-symbolic";
 		public const string ToolEllipse = "tool-ellipse-symbolic";
 		public const string ToolEraser = "tool-eraser-symbolic";
 		public const string ToolFreeformShape = "tool-freeformshape-symbolic";
