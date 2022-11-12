@@ -294,7 +294,7 @@ namespace Pinta.Tools
 				if (PintaCore.Workspace.CanvasSize.IsEmpty)
 					return Gdk.Rectangle.Zero;
 
-				return handles.Select (c => c.InvalidateRect).Aggregate ((accum, r) => accum.Union (r));
+				return MoveHandle.UnionInvalidateRects (handles);
 			}
 
 			var dirty = ComputeHandleBounds ();

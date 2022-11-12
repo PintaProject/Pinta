@@ -56,8 +56,6 @@ namespace Pinta.Tools
 
 		protected Rectangle? last_dirty = null;
 
-		protected double last_control_pt_size = 0d;
-
 		protected PointD shape_origin;
 		protected PointD current_point;
 
@@ -172,8 +170,9 @@ namespace Pinta.Tools
 			}
 		}
 
-		public IEnumerable<IToolHandle> Handles => new[] { hover_handle };
+		public IEnumerable<IToolHandle> Handles => control_pt_handles.Append (hover_handle);
 		private MoveHandle hover_handle = new ();
+		private List<MoveHandle> control_pt_handles = new ();
 
 		protected bool changing_tension = false;
 		protected PointD last_mouse_pos = new PointD (0d, 0d);
@@ -1104,10 +1103,6 @@ namespace Pinta.Tools
 		{
 			Document doc = PintaCore.Workspace.ActiveDocument;
 
-			//Inflate to accomodate for previously drawn control points, if any.
-			int inflate = (int) (last_control_pt_size * 8d);
-			dirty = dirty.Inflate (inflate, inflate);
-
 			// Increase the size of the dirty rect to account for antialiasing.
 			if (owner.UseAntialiasing) {
 				dirty = dirty.Inflate (1, 1);
@@ -1181,55 +1176,30 @@ namespace Pinta.Tools
 		protected void DrawControlPoints (Context g, bool drawHoverSelection)
 		{
 			ShapeEngine? activeEngine = ActiveShapeEngine;
+			if (activeEngine is null)
+				return;
 
-			if (activeEngine != null) {
-				last_control_pt_size = Math.Min (activeEngine.BrushWidth + 1, 3);
-			} else {
-				last_control_pt_size = Math.Min (BrushWidth + 1, 3);
+			Gdk.Rectangle dirty = MoveHandle.UnionInvalidateRects (control_pt_handles);
+			control_pt_handles.Clear ();
+
+			// TODO - scale control points based on the brush size for visibility?
+			if (drawHoverSelection) {
+				UpdateHoverHandle ();
+
+				// TODO - indicate selected control point.
 			}
 
-			double controlPointOffset = (double) last_control_pt_size / 2d;
-
-			if (activeEngine != null) {
-				//Draw the control points for the active shape.
-
-				if (drawHoverSelection) {
-					UpdateHoverHandle ();
-
-					ControlPoint? selPoint = SelectedPoint;
-
-					if (selPoint != null) {
-						//Draw a ring around the selected point.
-						g.FillStrokedEllipse (
-							new Rectangle (
-								selPoint.Position.X - controlPointOffset * 4d,
-								selPoint.Position.Y - controlPointOffset * 4d,
-								controlPointOffset * 8d, controlPointOffset * 8d),
-							MoveHandle.FillColor, MoveHandle.StrokeColor, 1);
-					}
+			foreach (ControlPoint point in activeEngine.ControlPoints) {
+				//Skip drawing the control point if it is being hovered over.
+				if (drawHoverSelection && hover_handle.Active && hover_handle.CanvasPosition.Distance (point.Position) < 1d) {
+					continue;
 				}
 
-				List<ControlPoint> controlPoints = activeEngine.ControlPoints;
-
-				//Determine if the shape has one or more points.
-				if (controlPoints.Count > 0) {
-					//Draw the control points for the shape.
-					for (int i = 0; i < controlPoints.Count; ++i) {
-						//Skip drawing the control point if it is being hovered over.
-						if (drawHoverSelection && hover_handle.Active && hover_handle.CanvasPosition.Distance (controlPoints[i].Position) < 1d) {
-							continue;
-						}
-
-						//Draw each control point.
-						g.FillStrokedEllipse (
-							new Rectangle (
-								controlPoints[i].Position.X - controlPointOffset,
-								controlPoints[i].Position.Y - controlPointOffset,
-								last_control_pt_size, last_control_pt_size),
-							MoveHandle.FillColor, MoveHandle.StrokeColor, (int) last_control_pt_size);
-					}
-				}
+				control_pt_handles.Add (new MoveHandle () { Active = true, CanvasPosition = point.Position });
 			}
+
+			dirty = dirty.Union (MoveHandle.UnionInvalidateRects (control_pt_handles));
+			PintaCore.Workspace.InvalidateWindowRect (dirty);
 		}
 
 		/// <summary>

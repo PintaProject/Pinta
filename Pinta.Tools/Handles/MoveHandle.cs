@@ -1,4 +1,8 @@
 using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Reflection.Metadata;
+using Gtk;
 using Pinta.Core;
 
 namespace Pinta.Tools
@@ -51,6 +55,12 @@ namespace Pinta.Tools
 			var window_pt = PintaCore.Workspace.CanvasPointToWindow (CanvasPosition);
 			return new Cairo.Rectangle (window_pt.X - radius, window_pt.Y - radius, diameter, diameter);
 		}
+
+		/// <summary>
+		/// Returns the union of the invalidate rectangles for a collection of handles.
+		/// </summary>
+		public static Gdk.Rectangle UnionInvalidateRects (IEnumerable<MoveHandle> handles) =>
+			handles.Select (c => c.InvalidateRect).DefaultIfEmpty (Gdk.Rectangle.Zero).Aggregate ((accum, r) => accum.Union (r));
 	}
 }
 
