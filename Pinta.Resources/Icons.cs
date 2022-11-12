@@ -113,7 +113,7 @@ namespace Pinta.Resources
 
 		public const string HelpBug = "help-bug";
 		public const string HelpTranslate = "help-translate";
-		public const string HelpWebsite = "help-website";
+		public const string HelpWebsite = "help-website-symbolic";
 
 		public const string ImageCrop = "ui-crop-to-selection-symbolic";
 		public const string ImageResize = "image-resize";
@@ -139,15 +139,15 @@ namespace Pinta.Resources
 
 		public const string Pinta = "pinta";
 
-		public const string ResizeCanvasBase = "resize-canvas-base";
-		public const string ResizeCanvasDown = "resize-canvas-down";
-		public const string ResizeCanvasLeft = "resize-canvas-left";
-		public const string ResizeCanvasNE = "resize-canvas-ne";
-		public const string ResizeCanvasNW = "resize-canvas-nw";
-		public const string ResizeCanvasRight = "resize-canvas-right";
-		public const string ResizeCanvasSE = "resize-canvas-se";
-		public const string ResizeCanvasSW = "resize-canvas-sw";
-		public const string ResizeCanvasUp = "resize-canvas-up";
+		public const string ResizeCanvasBase = "image-resize-canvas-base-symbolic";
+		public const string ResizeCanvasDown = "image-resize-canvas-down-symbolic";
+		public const string ResizeCanvasLeft = "image-resize-canvas-left-symbolic";
+		public const string ResizeCanvasNE = "image-resize-canvas-ne-symbolic";
+		public const string ResizeCanvasNW = "image-resize-canvas-nw-symbolic";
+		public const string ResizeCanvasRight = "image-resize-canvas-right-symbolic";
+		public const string ResizeCanvasSE = "image-resize-canvas-se-symbolic";
+		public const string ResizeCanvasSW = "image-resize-canvas-sw-symbolic";
+		public const string ResizeCanvasUp = "image-resize-canvas-up-symbolic";
 
 		public const string Sampling1 = "sampling-1x1";
 		public const string Sampling3 = "sampling-3x3";
