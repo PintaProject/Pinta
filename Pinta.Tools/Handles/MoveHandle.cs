@@ -12,11 +12,22 @@ namespace Pinta.Tools
 	/// </summary>
 	public class MoveHandle : IToolHandle
 	{
-		public static readonly Cairo.Color FillColor = new (0, 0, 1, 0.9);
+		public static readonly Cairo.Color FillColor = new (0, 0, 1, 1);
+		public static readonly Cairo.Color SelectionFillColor = new (1, 0.5, 0, 1);
 		public static readonly Cairo.Color StrokeColor = new (1, 1, 1, 0.7);
 
 		public Cairo.PointD CanvasPosition { get; set; }
+
+		/// <summary>
+		/// Inactive handles are not drawn.
+		/// </summary>
 		public bool Active { get; set; } = false;
+
+		/// <summary>
+		/// A handle that is selected by the user for interaction is drawn in a different color.
+		/// </summary>
+		public bool Selected { get; set; } = false;
+
 		public Gdk.CursorType Cursor { get; init; }
 
 		/// <summary>
@@ -36,7 +47,7 @@ namespace Pinta.Tools
 		/// </summary>
 		public void Draw (Cairo.Context cr)
 		{
-			cr.FillStrokedEllipse (ComputeWindowRect (), MoveHandle.FillColor, MoveHandle.StrokeColor, 1);
+			cr.FillStrokedEllipse (ComputeWindowRect (), Selected ? SelectionFillColor : FillColor, StrokeColor, 1);
 		}
 
 		/// <summary>

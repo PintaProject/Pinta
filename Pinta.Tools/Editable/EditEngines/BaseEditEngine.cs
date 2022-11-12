@@ -1182,12 +1182,8 @@ namespace Pinta.Tools
 			Gdk.Rectangle dirty = MoveHandle.UnionInvalidateRects (control_pt_handles);
 			control_pt_handles.Clear ();
 
-			// TODO - scale control points based on the brush size for visibility?
-			if (drawHoverSelection) {
+			if (drawHoverSelection)
 				UpdateHoverHandle ();
-
-				// TODO - indicate selected control point.
-			}
 
 			foreach (ControlPoint point in activeEngine.ControlPoints) {
 				//Skip drawing the control point if it is being hovered over.
@@ -1195,7 +1191,11 @@ namespace Pinta.Tools
 					continue;
 				}
 
-				control_pt_handles.Add (new MoveHandle () { Active = true, CanvasPosition = point.Position });
+				control_pt_handles.Add (new MoveHandle () {
+					Active = true,
+					CanvasPosition = point.Position,
+					Selected = (point == SelectedPoint)
+				});
 			}
 
 			dirty = dirty.Union (MoveHandle.UnionInvalidateRects (control_pt_handles));
@@ -1212,7 +1212,7 @@ namespace Pinta.Tools
 				dirty = hover_handle.InvalidateRect;
 
 			// Don't show the hover handle while the user is changing a control point's tension.
-			hover_handle.Active = false;
+			hover_handle.Active = hover_handle.Selected = false;
 			if (!changing_tension) {
 				var current_window_point = PintaCore.Workspace.CanvasPointToWindow (current_point);
 
@@ -1225,7 +1225,7 @@ namespace Pinta.Tools
 				// Check if the user is directly hovering over a control point.
 				if (closestControlPoint != null) {
 					hover_handle.CanvasPosition = closestControlPoint.Position;
-					hover_handle.Active = hover_handle.ContainsPoint (current_window_point);
+					hover_handle.Active = hover_handle.Selected = hover_handle.ContainsPoint (current_window_point);
 				}
 
 				// Otherwise, the user may be hovering over a generated point.
