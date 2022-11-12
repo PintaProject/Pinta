@@ -12,8 +12,8 @@ namespace Pinta.Tools
 	/// </summary>
 	public class MoveHandle : IToolHandle
 	{
-		public static readonly Cairo.Color FillColor = new (0, 0, 1, 0.5);
-		public static readonly Cairo.Color StrokeColor = new (0, 0, 1, 0.7);
+		public static readonly Cairo.Color FillColor = new (0, 0, 1, 0.9);
+		public static readonly Cairo.Color StrokeColor = new (1, 1, 1, 0.7);
 
 		public Cairo.PointD CanvasPosition { get; set; }
 		public bool Active { get; set; } = false;
