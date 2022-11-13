@@ -87,8 +87,8 @@ namespace Pinta.Resources
 		public const string AntiAliasingEnabled = "antialiasing-enabled";
 		public const string AntiAliasingDisabled = "antialiasing-disabled";
 
-		public const string BlendingNormal = "blending-normal";
-		public const string BlendingOverwrite = "blending-overwrite";
+		public const string BlendingNormal = "tool-blending-normal-symbolic";
+		public const string BlendingOverwrite = "tool-blending-overwrite-symbolic";
 
 		public const string ColorModeColor = "tool-gradient-colormode-color-symbolic";
 		public const string ColorModeTransparency = "tool-gradient-colormode-transparency-symbolic";
