@@ -46,15 +46,12 @@ namespace Pinta.Gui.Widgets
 		const int WIDGET_HEIGHT = 42;
 		const int PALETTE_MARGIN = 10;
 
-		private readonly Gdk.Pixbuf swap_icon;
-		private readonly Gdk.Pixbuf reset_icon;
+		private Gdk.Pixbuf swap_icon = new (Gdk.Colorspace.Rgb, false, 8, 0, 0); // overridden in OnShown()
+		private Gdk.Pixbuf reset_icon = new (Gdk.Colorspace.Rgb, false, 8, 0, 0);
 
 		public StatusBarColorPaletteWidget ()
 		{
 			AddEvents ((int) Gdk.EventMask.ButtonPressMask);
-
-			swap_icon = PintaCore.Resources.GetIcon ("ColorPalette.SwapIcon.png");
-			reset_icon = PintaCore.Resources.GetIcon ("ColorPalette.ResetIcon.png");
 
 			HasTooltip = true;
 			QueryTooltip += HandleQueryTooltip;
@@ -65,6 +62,16 @@ namespace Pinta.Gui.Widgets
 			PintaCore.Palette.CurrentPalette.PaletteChanged += new EventHandler (Palette_ColorChanged);
 
 			HeightRequest = WIDGET_HEIGHT;
+		}
+
+		protected override void OnShown ()
+		{
+			base.OnShown ();
+
+			// Load the symbolic icons when shown. In the constructor the StyleContext isn't ready,
+			// so symbolic icons might not be colored correctly.
+			swap_icon = PintaCore.Resources.GetIcon (Pinta.Resources.Icons.ColorPaletteSwap, StyleContext);
+			reset_icon = PintaCore.Resources.GetIcon (Pinta.Resources.Icons.ColorPaletteReset, StyleContext);
 		}
 
 		protected override bool OnButtonPressEvent (Gdk.EventButton ev)

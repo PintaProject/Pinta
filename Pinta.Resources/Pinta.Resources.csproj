@@ -79,12 +79,6 @@
     <EmbeddedResource Include="Resources\LayersWidget.Hidden.png">
       <LogicalName>LayersWidget.Hidden.png</LogicalName>
     </EmbeddedResource>
-    <EmbeddedResource Include="Resources\ColorPalette.SwapIcon.png">
-      <LogicalName>ColorPalette.SwapIcon.png</LogicalName>
-    </EmbeddedResource>
-	<EmbeddedResource Include="Resources\ColorPalette.ResetIcon.png">
-      <LogicalName>ColorPalette.ResetIcon.png</LogicalName>
-    </EmbeddedResource>
     <EmbeddedResource Include="Resources\Menu.Adjustments.AutoLevel.png">
       <LogicalName>Menu.Adjustments.AutoLevel.png</LogicalName>
     </EmbeddedResource>

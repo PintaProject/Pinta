@@ -93,6 +93,9 @@ namespace Pinta.Resources
 		public const string ColorModeColor = "tool-gradient-colormode-color-symbolic";
 		public const string ColorModeTransparency = "tool-gradient-colormode-transparency-symbolic";
 
+		public const string ColorPaletteReset = "ui-colorpalette-reset-symbolic";
+		public const string ColorPaletteSwap = "ui-colorpalette-swap-symbolic";
+
 		public const string CursorPosition = "ui-cursor-location-symbolic";
 
 		public const string EditSelectionErase = "edit-selection-erase";
