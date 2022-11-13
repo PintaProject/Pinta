@@ -170,9 +170,12 @@ namespace Pinta.Tools
 			}
 		}
 
-		public IEnumerable<IToolHandle> Handles => control_pt_handles.Append (hover_handle);
+		/// <summary>
+		/// Display the handles for all active shape engines' control points, along with the hover position
+		/// </summary>
+		public IEnumerable<IToolHandle> Handles =>
+			SEngines.SelectMany (engine => engine.ControlPointHandles).Append (hover_handle);
 		private MoveHandle hover_handle = new ();
-		private List<MoveHandle> control_pt_handles = new ();
 
 		protected bool changing_tension = false;
 		protected PointD last_mouse_pos = new PointD (0d, 0d);
@@ -690,38 +693,33 @@ namespace Pinta.Tools
 			bool clicked_control_point = false;
 			bool clicked_generated_point = false;
 			{
-				var current_window_point = PintaCore.Workspace.CanvasPointToWindow(current_point);
-				var test_handle = new MoveHandle();
+				var current_window_point = PintaCore.Workspace.CanvasPointToWindow (current_point);
+				var test_handle = new MoveHandle ();
 
 				// Check if the user is directly clicking on a control point.
-				if (closestControlPoint != null)
-				{
+				if (closestControlPoint != null) {
 					test_handle.CanvasPosition = closestControlPoint.Position;
-					clicked_control_point = test_handle.ContainsPoint(current_window_point);
-					if (clicked_control_point)
-					{
+					clicked_control_point = test_handle.ContainsPoint (current_window_point);
+					if (clicked_control_point) {
 						SelectedPointIndex = closestCPIndex;
 						SelectedShapeIndex = closestCPShapeIndex;
 					}
 				}
 
 				// Otherwise, the user might have clicked on a generated point.
-				if (!clicked_control_point)
-				{
+				if (!clicked_control_point) {
 					test_handle.CanvasPosition = closestPoint;
-					clicked_generated_point = test_handle.ContainsPoint(current_window_point);
+					clicked_generated_point = test_handle.ContainsPoint (current_window_point);
 				}
 			}
 
 			clicked_without_modifying = clicked_control_point;
 
-			if (!changing_tension && clicked_generated_point)
-			{
+			if (!changing_tension && clicked_generated_point) {
 				//Determine if the currently active tool matches the clicked on shape's corresponding tool, and if not, switch to it.
-				if (ActivateCorrespondingTool(closestShapeIndex, true) != null)
-				{
+				if (ActivateCorrespondingTool (closestShapeIndex, true) != null) {
 					//Pass on the event and its data to the newly activated tool.
-					PintaCore.Tools.DoMouseDown(document, e);
+					PintaCore.Tools.DoMouseDown (document, e);
 
 					//Don't do anything else here once the tool is switched and the event is passed on.
 					return;
@@ -730,13 +728,12 @@ namespace Pinta.Tools
 				//The currently active tool matches the clicked on shape's corresponding tool.
 
 				//Only create a new shape if the user isn't holding the control key down.
-				if (!ctrlKey)
-				{
+				if (!ctrlKey) {
 					//Create a new ShapesModifyHistoryItem so that the adding of a control point can be undone.
-					doc.History.PushNewItem(new ShapesModifyHistoryItem(this, owner.Icon, ShapeName + " " + Translations.GetString("Point Added")));
+					doc.History.PushNewItem (new ShapesModifyHistoryItem (this, owner.Icon, ShapeName + " " + Translations.GetString ("Point Added")));
 
-					SEngines[closestShapeIndex].ControlPoints.Insert(closestPointIndex,
-						new ControlPoint(new PointD(current_point.X, current_point.Y), DefaultMidPointTension));
+					SEngines[closestShapeIndex].ControlPoints.Insert (closestPointIndex,
+						new ControlPoint (new PointD (current_point.X, current_point.Y), DefaultMidPointTension));
 				}
 
 				//These should be set after creating the history item.
@@ -745,9 +742,8 @@ namespace Pinta.Tools
 
 				ShapeEngine? activeEngine = ActiveShapeEngine;
 
-				if (activeEngine != null)
-				{
-					UpdateToolbarSettings(activeEngine);
+				if (activeEngine != null) {
+					UpdateToolbarSettings (activeEngine);
 				}
 			}
 
@@ -967,9 +963,7 @@ namespace Pinta.Tools
 
 			if (activeEngine == null) {
 				//No shape will be drawn; however, the hover point still needs to be drawn if drawHoverSelection is true.
-				if (drawHoverSelection) {
-					UpdateHoverHandle ();
-				}
+				UpdateHoverHandle (drawHoverSelection);
 			} else {
 				//Clear any temporary drawing, because something new will be drawn.
 				activeEngine.DrawingLayer.Layer.Clear ();
@@ -1138,9 +1132,7 @@ namespace Pinta.Tools
 					//Draw anything extra (that not every shape has), like arrows.
 					DrawExtras (ref dirty, g, engine);
 
-					if (drawCP) {
-						DrawControlPoints (g, drawHoverSelection);
-					}
+					DrawControlPoints (g, activeEngine, drawCP, drawHoverSelection);
 				}
 			}
 
@@ -1148,39 +1140,37 @@ namespace Pinta.Tools
 			return dirty ?? new Rectangle (0d, 0d, 0d, 0d);
 		}
 
-		protected void DrawControlPoints (Context g, bool drawHoverSelection)
+		private void DrawControlPoints (Context g, ShapeEngine shape, bool draw_controls, bool draw_selection)
 		{
-			ShapeEngine? activeEngine = ActiveShapeEngine;
-			if (activeEngine is null)
-				return;
+			Gdk.Rectangle dirty = MoveHandle.UnionInvalidateRects (shape.ControlPointHandles);
+			shape.ControlPointHandles.Clear ();
 
-			Gdk.Rectangle dirty = MoveHandle.UnionInvalidateRects (control_pt_handles);
-			control_pt_handles.Clear ();
+			if (draw_controls) {
+				UpdateHoverHandle (draw_selection);
 
-			if (drawHoverSelection)
-				UpdateHoverHandle ();
+				foreach (ControlPoint point in shape.ControlPoints) {
+					//Skip drawing the control point if it is being hovered over.
+					if (draw_selection && hover_handle.Active && hover_handle.CanvasPosition.Distance (point.Position) < 1d) {
+						continue;
+					}
 
-			foreach (ControlPoint point in activeEngine.ControlPoints) {
-				//Skip drawing the control point if it is being hovered over.
-				if (drawHoverSelection && hover_handle.Active && hover_handle.CanvasPosition.Distance (point.Position) < 1d) {
-					continue;
+					shape.ControlPointHandles.Add (new MoveHandle () {
+						Active = true,
+						CanvasPosition = point.Position,
+						Selected = (point == SelectedPoint) && draw_selection
+					});
 				}
 
-				control_pt_handles.Add (new MoveHandle () {
-					Active = true,
-					CanvasPosition = point.Position,
-					Selected = (point == SelectedPoint)
-				});
+				dirty = dirty.Union (MoveHandle.UnionInvalidateRects (shape.ControlPointHandles));
 			}
 
-			dirty = dirty.Union (MoveHandle.UnionInvalidateRects (control_pt_handles));
 			PintaCore.Workspace.InvalidateWindowRect (dirty);
 		}
 
 		/// <summary>
 		/// Update the hover handle's position and redraw it.
 		/// </summary>
-		protected void UpdateHoverHandle ()
+		protected void UpdateHoverHandle (bool draw_selection)
 		{
 			Gdk.Rectangle dirty = Gdk.Rectangle.Zero;
 			if (hover_handle.Active)
@@ -1188,7 +1178,8 @@ namespace Pinta.Tools
 
 			// Don't show the hover handle while the user is changing a control point's tension.
 			hover_handle.Active = hover_handle.Selected = false;
-			if (!changing_tension) {
+
+			if (!changing_tension && draw_selection) {
 				var current_window_point = PintaCore.Workspace.CanvasPointToWindow (current_point);
 
 				int closestCPIndex, closestCPShapeIndex;
