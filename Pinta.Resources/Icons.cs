@@ -106,10 +106,10 @@ namespace Pinta.Resources
 		public const string GradientLinearReflected = "tool-gradient-linear-reflected-symbolic";
 		public const string GradientRadial = "tool-gradient-radial-symbolic";
 
-		public const string FillStyleBackground = "fillstyle-background";
-		public const string FillStyleFill = "fillstyle-fill";
-		public const string FillStyleOutline = "fillstyle-outline";
-		public const string FillStyleOutlineFill = "fillstyle-outlinefill";
+		public const string FillStyleBackground = "tool-fillstyle-background-symbolic";
+		public const string FillStyleFill = "tool-fillstyle-fill-symbolic";
+		public const string FillStyleOutline = "tool-fillstyle-outline-symbolic";
+		public const string FillStyleOutlineFill = "tool-fillstyle-outlinefill-symbolic";
 
 		public const string HelpBug = "help-bug";
 		public const string HelpTranslate = "help-translate";
