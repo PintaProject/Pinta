@@ -177,6 +177,9 @@ namespace Pinta.Tools
 			SEngines.SelectMany (engine => engine.ControlPointHandles).Append (hover_handle);
 		private MoveHandle hover_handle = new ();
 
+		private readonly Gdk.Cursor grab_cursor = new (Gdk.Display.Default, Pinta.Resources.StandardCursors.Grab);
+		private readonly Gdk.Cursor grabbing_cursor = new (Gdk.Display.Default, Pinta.Resources.StandardCursors.Grabbing);
+
 		protected bool changing_tension = false;
 		protected PointD last_mouse_pos = new PointD (0d, 0d);
 
@@ -1209,6 +1212,13 @@ namespace Pinta.Tools
 				if (hover_handle.Active)
 					dirty = dirty.Union (hover_handle.InvalidateRect);
 			}
+
+			// Update the tool's cursor if we are hovering over or dragging a control point.
+			var tool = PintaCore.Tools.CurrentTool!;
+			if (hover_handle.Selected)
+				tool.SetCursor (is_drawing ? grabbing_cursor : grab_cursor);
+			else
+				tool.SetCursor (tool.DefaultCursor);
 
 			PintaCore.Workspace.InvalidateWindowRect (dirty);
 		}

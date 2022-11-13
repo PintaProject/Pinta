@@ -188,4 +188,13 @@ namespace Pinta.Resources
 		public const string ViewZoomSelection = "view-zoom-selection";
 		public const string ViewZoomWindow = "view-zoom-window";
 	}
+
+	/// <summary>
+	/// Standard CSS cursor names (see Gdk.Cursor.new_from_name docs for a complete list).
+	/// </summary>
+	public static class StandardCursors
+	{
+		public const string Grab = "grab";
+		public const string Grabbing = "grabbing";
+	}
 }
