@@ -84,8 +84,8 @@ namespace Pinta.Resources
 
 		public const string AddinsManage = "addins-manage";
 
-		public const string AntiAliasingEnabled = "antialiasing-enabled";
-		public const string AntiAliasingDisabled = "antialiasing-disabled";
+		public const string AntiAliasingEnabled = "tool-antialiasing-enabled-symbolic";
+		public const string AntiAliasingDisabled = "tool-antialiasing-disabled-symbolic";
 
 		public const string BlendingNormal = "tool-blending-normal-symbolic";
 		public const string BlendingOverwrite = "tool-blending-overwrite-symbolic";
