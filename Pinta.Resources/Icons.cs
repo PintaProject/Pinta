@@ -121,17 +121,17 @@ namespace Pinta.Resources
 		public const string ImageCrop = "ui-crop-to-selection-symbolic";
 		public const string ImageResize = "image-resize";
 		public const string ImageResizeCanvas = "image-resize-canvas";
-		public const string ImageFlipHorizontal = "image-flip-horizontal";
-		public const string ImageFlipVertical = "image-flip-vertical";
-		public const string ImageRotate90CW = "image-rotate-90cw";
-		public const string ImageRotate90CCW = "image-rotate-90ccw";
-		public const string ImageRotate180 = "image-rotate-180";
+		public const string ImageFlipHorizontal = "image-flip-horizontal-symbolic";
+		public const string ImageFlipVertical = "image-flip-vertical-symbolic";
+		public const string ImageRotate90CW = "image-rotate-90cw-symbolic";
+		public const string ImageRotate90CCW = "image-rotate-90ccw-symbolic";
+		public const string ImageRotate180 = "image-rotate-180-symbolic";
 		public const string ImageFlatten = "image-flatten";
 
 		public const string LayerDelete = "layers-remove-layer-symbolic";
 		public const string LayerDuplicate = "layers-duplicate-layer-symbolic";
-		public const string LayerFlipHorizontal = "layer-flip-horizontal";
-		public const string LayerFlipVertical = "layer-flip-vertical";
+		public const string LayerFlipHorizontal = ImageFlipHorizontal;
+		public const string LayerFlipVertical = ImageFlipVertical;
 		public const string LayerImport = "layer-import";
 		public const string LayerMergeDown = "layers-merge-down-symbolic";
 		public const string LayerMoveDown = "layers-move-layer-down-symbolic";
