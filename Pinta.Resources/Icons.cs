@@ -90,8 +90,8 @@ namespace Pinta.Resources
 		public const string BlendingNormal = "blending-normal";
 		public const string BlendingOverwrite = "blending-overwrite";
 
-		public const string ColorModeColor = "colormode-color";
-		public const string ColorModeTransparency = "colormode-transparency";
+		public const string ColorModeColor = "tool-gradient-colormode-color-symbolic";
+		public const string ColorModeTransparency = "tool-gradient-colormode-transparency-symbolic";
 
 		public const string CursorPosition = "ui-cursor-location-symbolic";
 
@@ -100,11 +100,11 @@ namespace Pinta.Resources
 		public const string EditSelectionInvert = "edit-selection-invert";
 		public const string EditSelectionNone = "ui-deselect-symbolic";
 
-		public const string GradientConical = "gradient-conical";
-		public const string GradientDiamond = "gradient-diamond";
-		public const string GradientLinear = "gradient-linear";
-		public const string GradientLinearReflected = "gradient-linear-reflected";
-		public const string GradientRadial = "gradient-radial";
+		public const string GradientConical = "tool-gradient-conical-symbolic";
+		public const string GradientDiamond = "tool-gradient-diamond-symbolic";
+		public const string GradientLinear = "tool-gradient-linear-symbolic";
+		public const string GradientLinearReflected = "tool-gradient-linear-reflected-symbolic";
+		public const string GradientRadial = "tool-gradient-radial-symbolic";
 
 		public const string FillStyleBackground = "fillstyle-background";
 		public const string FillStyleFill = "fillstyle-fill";
