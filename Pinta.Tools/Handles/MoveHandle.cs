@@ -1,4 +1,8 @@
 using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Reflection.Metadata;
+using Gtk;
 using Pinta.Core;
 
 namespace Pinta.Tools
@@ -8,11 +12,22 @@ namespace Pinta.Tools
 	/// </summary>
 	public class MoveHandle : IToolHandle
 	{
-		public static readonly Cairo.Color FillColor = new (0, 0, 1, 0.5);
-		public static readonly Cairo.Color StrokeColor = new (0, 0, 1, 0.7);
+		public static readonly Cairo.Color FillColor = new (0, 0, 1, 1);
+		public static readonly Cairo.Color SelectionFillColor = new (1, 0.5, 0, 1);
+		public static readonly Cairo.Color StrokeColor = new (1, 1, 1, 0.7);
 
 		public Cairo.PointD CanvasPosition { get; set; }
+
+		/// <summary>
+		/// Inactive handles are not drawn.
+		/// </summary>
 		public bool Active { get; set; } = false;
+
+		/// <summary>
+		/// A handle that is selected by the user for interaction is drawn in a different color.
+		/// </summary>
+		public bool Selected { get; set; } = false;
+
 		public Gdk.CursorType Cursor { get; init; }
 
 		/// <summary>
@@ -32,7 +47,7 @@ namespace Pinta.Tools
 		/// </summary>
 		public void Draw (Cairo.Context cr)
 		{
-			cr.FillStrokedEllipse (ComputeWindowRect (), MoveHandle.FillColor, MoveHandle.StrokeColor, 1);
+			cr.FillStrokedEllipse (ComputeWindowRect (), Selected ? SelectionFillColor : FillColor, StrokeColor, 1);
 		}
 
 		/// <summary>
@@ -48,9 +63,15 @@ namespace Pinta.Tools
 			const double radius = 4.5;
 			const double diameter = 2 * radius;
 
-			var window_pt = PintaCore.Workspace.CanvasPointToWindow (CanvasPosition.X, CanvasPosition.Y);
+			var window_pt = PintaCore.Workspace.CanvasPointToWindow (CanvasPosition);
 			return new Cairo.Rectangle (window_pt.X - radius, window_pt.Y - radius, diameter, diameter);
 		}
+
+		/// <summary>
+		/// Returns the union of the invalidate rectangles for a collection of handles.
+		/// </summary>
+		public static Gdk.Rectangle UnionInvalidateRects (IEnumerable<MoveHandle> handles) =>
+			handles.Select (c => c.InvalidateRect).DefaultIfEmpty (Gdk.Rectangle.Zero).Aggregate ((accum, r) => accum.Union (r));
 	}
 }
 

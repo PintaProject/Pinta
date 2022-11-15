@@ -25,6 +25,7 @@
 // THE SOFTWARE.
 
 using System;
+using System.Collections.Generic;
 using Pinta.Core;
 
 namespace Pinta.Tools
@@ -166,5 +167,7 @@ namespace Pinta.Tools
 
 			EditEngine.OnSaveSettings (settings, GetType ().Name.ToLowerInvariant ());
 		}
+
+		public override IEnumerable<IToolHandle> Handles => EditEngine.Handles;
 	}
 }

@@ -102,6 +102,7 @@ namespace Pinta.Tools
 	{
 		//A collection of the original ControlPoints that the shape is based on and that the user interacts with.
 		public List<ControlPoint> ControlPoints = new List<ControlPoint> ();
+		public List<MoveHandle> ControlPointHandles = new ();
 
 		//A collection of calculated GeneratedPoints that make up the entirety of the shape being drawn.
 		public GeneratedPoint[] GeneratedPoints = new GeneratedPoint[0];

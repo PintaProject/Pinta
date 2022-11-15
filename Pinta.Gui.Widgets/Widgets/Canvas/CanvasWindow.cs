@@ -58,7 +58,7 @@ namespace Pinta
 				if (!PintaCore.Workspace.HasOpenDocuments)
 					return;
 
-				var point = PintaCore.Workspace.WindowPointToCanvas (args.Event.X, args.Event.Y);
+				var point = PintaCore.Workspace.WindowPointToCanvas (new Cairo.PointD (args.Event.X, args.Event.Y));
 
 				horizontal_ruler.Position = point.X;
 				vertical_ruler.Position = point.Y;
