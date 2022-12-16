@@ -27,6 +27,8 @@ Thanks to the following contributors who worked on this release:
 - WebP support
   - For Linux users, [webp-pixbuf-loader](https://github.com/aruiz/webp-pixbuf-loader/) is now a suggested dependency to enable WebP support in Pinta
   - `webp-pixbuf-loader` is now included with the macOS package for WebP support
+- Upgraded to .NET 7
+  - Building against .NET 6 (LTS) is still supported. When building from the tarball, .NET 6 will be used if .NET 7 is unavailable
 
 ### Changed
 - Pinta now uses the standard GTK about dialog

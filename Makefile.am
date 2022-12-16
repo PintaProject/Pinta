@@ -31,7 +31,7 @@ all: build
 
 # target: run - Launch the uninstalled copy
 run: build
-	$(DOTNET) bin/Pinta.dll
+	$(DOTNET_CMD) bin/Pinta.dll
 
 # target: help - Display callable targets.
 help:
@@ -39,10 +39,10 @@ help:
 
 # target: build - Build Pinta.
 build: Pinta.sln
-	cd $(srcdir) && $(DOTNET) build Pinta.sln $(PINTA_BUILD_OPTS)
+	cd $(srcdir) && $(DOTNET_CMD) build Pinta.sln $(PINTA_BUILD_OPTS)
 
 test: build
-	$(DOTNET) test Pinta.sln $(PINTA_BUILD_OPTS)
+	$(DOTNET_CMD) test Pinta.sln $(PINTA_BUILD_OPTS)
 
 # target: list - List source files.
 list:
@@ -89,17 +89,17 @@ cleanobj:
 
 # target: install - Installs Pinta.
 install-exec-local: build
-	$(DOTNET) publish Pinta.sln $(PINTA_BUILD_OPTS) --self-contained false -o $(srcdir)/publish
-	$(DOTNET) msbuild installer/linux/install.proj -target:Install $(PINTA_INSTALL_OPTS)
+	$(DOTNET_CMD) publish Pinta.sln $(PINTA_BUILD_OPTS) --self-contained false -o $(srcdir)/publish
+	$(DOTNET_CMD) msbuild installer/linux/install.proj -target:Install $(PINTA_INSTALL_OPTS)
 	$(INSTALL_SCRIPT) installer/linux/pinta $(DESTDIR)$(bindir)/$(PACKAGE)
 
 # target: uninstall - Uninstalls Pinta.
 uninstall-hook:
-	$(DOTNET) msbuild installer/linux/install.proj -target:Uninstall $(PINTA_INSTALL_OPTS)
+	$(DOTNET_CMD) msbuild installer/linux/install.proj -target:Uninstall $(PINTA_INSTALL_OPTS)
 
 # target: releasezip - Make a self-contained release zip file.
 releasezip:
-	$(DOTNET) publish Pinta.sln $(PINTA_BUILD_OPTS) -r linux-x64 --self-contained true -o $(srcdir)/release
+	$(DOTNET_CMD) publish Pinta.sln $(PINTA_BUILD_OPTS) -r linux-x64 --self-contained true -o $(srcdir)/release
 	cd $(srcdir)/release && zip -r ../$(RELEASE_FILE).zip * -x "*.pdb"
 
 EXTRA_DIST = Pinta Pinta.Core Pinta.Docking Pinta.Effects Pinta.Gui.Widgets Pinta.Resources Pinta.Tools po xdg tests license-mit.txt \

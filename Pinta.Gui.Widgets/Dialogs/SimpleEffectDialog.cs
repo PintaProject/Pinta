@@ -38,7 +38,6 @@ namespace Pinta.Gui.Widgets
 {
 	public class SimpleEffectDialog : Gtk.Dialog
 	{
-		[ThreadStatic]
 		readonly Random random = new Random ();
 
 		const uint event_delay_millis = 100;

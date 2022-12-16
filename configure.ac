@@ -21,7 +21,15 @@ AX_COMPARE_VERSION([$DOTNET_VERSION], [ge], [$DOTNET_MINIMUM_VERSION],
     AC_MSG_ERROR([dotnet $DOTNET_MINIMUM_VERSION or higher is required (found version $DOTNET_VERSION).])
 )
 
-AC_SUBST(DOTNET)
+# Select target framework based on the dotnet version.
+DOTNET_TARGET_FRAMEWORK=net6.0
+AX_COMPARE_VERSION([$DOTNET_VERSION], [ge], [7.0],
+                   [DOTNET_TARGET_FRAMEWORK=net7.0], [])
+AC_MSG_NOTICE([Using target framework $DOTNET_TARGET_FRAMEWORK])
+
+DOTNET_CMD="env TargetFramework=$DOTNET_TARGET_FRAMEWORK $DOTNET"
+
+AC_SUBST(DOTNET_CMD)
 
 AC_PROG_INTLTOOL([0.35.0], [no-xml])
 GETTEXT_PACKAGE=pinta
@@ -53,6 +61,7 @@ ${PACKAGE}-${VERSION}
   Build Environment
     Install Prefix:     	${prefix}
     .NET Runtime:       	${DOTNET}
+    .NET Target Framework:      ${DOTNET_TARGET_FRAMEWORK}
     Launch Script:	        ${prefix}/bin/${PACKAGE}
     Installation Directory: ${prefix}/lib/${PACKAGE}/
 

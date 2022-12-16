@@ -1,5 +1,9 @@
 <Project>
   <PropertyGroup>
+    <!-- The target framework can be set with an environment variable of the same name -->
+    <TargetFramework Condition=" '$(TargetFramework)' == '' ">net7.0</TargetFramework>
+    <Nullable>enable</Nullable>
+
     <!-- Versioning and assembly info -->
     <Version>2.1.0.0</Version>
     <Authors>PintaProject</Authors>
