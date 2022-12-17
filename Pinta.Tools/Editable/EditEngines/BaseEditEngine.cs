@@ -687,7 +687,7 @@ namespace Pinta.Tools
 				out closestCPShapeIndex, out closestCPIndex, out closestControlPoint, out closestCPDistance);
 
 			int closestShapeIndex, closestPointIndex;
-			PointD closestPoint;
+			PointD? closestPoint;
 			double closestDistance;
 
 			OrganizedPointCollection.FindClosestPoint (SEngines, current_point,
@@ -710,8 +710,8 @@ namespace Pinta.Tools
 				}
 
 				// Otherwise, the user might have clicked on a generated point.
-				if (!clicked_control_point) {
-					test_handle.CanvasPosition = closestPoint;
+				if (!clicked_control_point && closestPoint.HasValue) {
+					test_handle.CanvasPosition = closestPoint.Value;
 					clicked_generated_point = test_handle.ContainsPoint (current_window_point);
 				}
 			}
@@ -1200,13 +1200,15 @@ namespace Pinta.Tools
 				// Otherwise, the user may be hovering over a generated point.
 				if (!hover_handle.Active) {
 					int closestShapeIndex, closestPointIndex;
-					PointD closestPoint;
+					PointD? closestPoint;
 					double closestDistance;
 					OrganizedPointCollection.FindClosestPoint (SEngines, current_point,
 						out closestShapeIndex, out closestPointIndex, out closestPoint, out closestDistance);
 
-					hover_handle.CanvasPosition = closestPoint;
-					hover_handle.Active = hover_handle.ContainsPoint (current_window_point);
+					if (closestPoint.HasValue) {
+						hover_handle.CanvasPosition = closestPoint.Value;
+						hover_handle.Active = hover_handle.ContainsPoint (current_window_point);
+					}
 				}
 
 				if (hover_handle.Active)

@@ -125,11 +125,11 @@ namespace Pinta.Tools
 		/// <param name="closestDistance">The closest point's distance away from currentPoint.</param>
 		public static void FindClosestPoint (
 	    List<ShapeEngine> SEL, PointD currentPoint,
-			out int closestShapeIndex, out int closestPointIndex, out PointD closestPoint, out double closestDistance)
+			out int closestShapeIndex, out int closestPointIndex, out PointD? closestPoint, out double closestDistance)
 		{
 			closestShapeIndex = 0;
 			closestPointIndex = 0;
-			closestPoint = new PointD (0d, 0d);
+			closestPoint = null;
 			closestDistance = double.MaxValue;
 
 			double currentDistance = double.MaxValue;
