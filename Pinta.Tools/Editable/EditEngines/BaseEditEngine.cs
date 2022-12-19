@@ -644,7 +644,7 @@ namespace Pinta.Tools
 
 		public virtual void HandleMouseDown (Document document, ToolMouseEventArgs e)
 		{
-			var point = e.PointDouble;
+			var unclamped_point = e.PointDouble;
 
 			//If we are already drawing, ignore any additional mouse down events.
 			if (is_drawing) {
@@ -656,7 +656,7 @@ namespace Pinta.Tools
 
 			Document doc = PintaCore.Workspace.ActiveDocument;
 
-			shape_origin = new PointD (Utility.Clamp (point.X, 0, doc.ImageSize.Width - 1), Utility.Clamp (point.Y, 0, doc.ImageSize.Height - 1));
+			shape_origin = new PointD (Utility.Clamp (unclamped_point.X, 0, doc.ImageSize.Width - 1), Utility.Clamp (unclamped_point.Y, 0, doc.ImageSize.Height - 1));
 			current_point = shape_origin;
 
 			bool shiftKey = e.IsShiftPressed;
@@ -683,20 +683,20 @@ namespace Pinta.Tools
 			ControlPoint? closestControlPoint;
 			double closestCPDistance;
 
-			SEngines.FindClosestControlPoint (current_point,
+			SEngines.FindClosestControlPoint (unclamped_point,
 				out closestCPShapeIndex, out closestCPIndex, out closestControlPoint, out closestCPDistance);
 
 			int closestShapeIndex, closestPointIndex;
 			PointD? closestPoint;
 			double closestDistance;
 
-			OrganizedPointCollection.FindClosestPoint (SEngines, current_point,
+			OrganizedPointCollection.FindClosestPoint (SEngines, unclamped_point,
 			    out closestShapeIndex, out closestPointIndex, out closestPoint, out closestDistance);
 
 			bool clicked_control_point = false;
 			bool clicked_generated_point = false;
 			{
-				var current_window_point = PintaCore.Workspace.CanvasPointToWindow (current_point);
+				var current_window_point = PintaCore.Workspace.CanvasPointToWindow (unclamped_point);
 				var test_handle = new MoveHandle ();
 
 				// Check if the user is directly clicking on a control point.
@@ -752,38 +752,34 @@ namespace Pinta.Tools
 
 			//Create a new shape if the user control + clicks on a shape or if the user simply clicks outside of any shapes.
 			if (!changing_tension && (ctrlKey || (!clicked_control_point && !clicked_generated_point))) {
-				//Verify that the user clicked inside the image bounds or that the user is
-				//holding the Ctrl key (to ignore the Image bounds and draw on the edge).
-				if ((point.X == shape_origin.X && point.Y == shape_origin.Y) || ctrlKey) {
-					PointD prevSelPoint;
+				PointD prevSelPoint;
 
-					//First, store the position of the currently selected point.
-					if (SelectedPoint != null && ctrlKey) {
-						prevSelPoint = new PointD (SelectedPoint.Position.X, SelectedPoint.Position.Y);
-					} else {
-						//This doesn't matter, other than the fact that it gets set to a value in order for the code to build.
-						prevSelPoint = new PointD (0d, 0d);
-					}
-
-					//Create a new ShapesHistoryItem so that the creation of a new shape can be undone.
-					doc.History.PushNewItem (new ShapesHistoryItem (this, owner.Icon, ShapeName + " " + Translations.GetString ("Added"),
-						doc.Layers.CurrentUserLayer.Surface.Clone (), doc.Layers.CurrentUserLayer, SelectedPointIndex, SelectedShapeIndex, false));
-
-					//Create the shape, add its starting points, and add it to SEngines.
-					SEngines.Add (CreateShape (ctrlKey, clicked_control_point, prevSelPoint));
-
-					//Select the new shape.
-					SelectedShapeIndex = SEngines.Count - 1;
-
-					ShapeEngine? activeEngine = ActiveShapeEngine;
-
-					if (activeEngine != null) {
-						//Set the AntiAliasing.
-						activeEngine.AntiAliasing = owner.UseAntialiasing;
-					}
-
-					StorePreviousSettings ();
+				//First, store the position of the currently selected point.
+				if (SelectedPoint != null && ctrlKey) {
+					prevSelPoint = new PointD (SelectedPoint.Position.X, SelectedPoint.Position.Y);
+				} else {
+					//This doesn't matter, other than the fact that it gets set to a value in order for the code to build.
+					prevSelPoint = new PointD (0d, 0d);
 				}
+
+				//Create a new ShapesHistoryItem so that the creation of a new shape can be undone.
+				doc.History.PushNewItem (new ShapesHistoryItem (this, owner.Icon, ShapeName + " " + Translations.GetString ("Added"),
+					doc.Layers.CurrentUserLayer.Surface.Clone (), doc.Layers.CurrentUserLayer, SelectedPointIndex, SelectedShapeIndex, false));
+
+				//Create the shape, add its starting points, and add it to SEngines.
+				SEngines.Add (CreateShape (ctrlKey, clicked_control_point, prevSelPoint));
+
+				//Select the new shape.
+				SelectedShapeIndex = SEngines.Count - 1;
+
+				ShapeEngine? activeEngine = ActiveShapeEngine;
+
+				if (activeEngine != null) {
+					//Set the AntiAliasing.
+					activeEngine.AntiAliasing = owner.UseAntialiasing;
+				}
+
+				StorePreviousSettings ();
 			} else if (clicked_control_point) {
 				//Since the user is not creating a new shape or control point but rather modifying an existing control point, it should be determined
 				//whether the currently active tool matches the clicked on shape's corresponding tool, and if not, switch to it.
@@ -824,20 +820,20 @@ namespace Pinta.Tools
 		public virtual void HandleMouseMove (Document document, ToolMouseEventArgs e)
 		{
 			Document doc = document;
-			var point = e.PointDouble;
-
-			current_point = new PointD (Utility.Clamp (point.X, 0, doc.ImageSize.Width - 1), Utility.Clamp (point.Y, 0, doc.ImageSize.Height - 1));
-
+			current_point = e.PointDouble;
 			bool shiftKey = e.IsShiftPressed;
-
-			if (shiftKey) {
-				CalculateModifiedCurrentPoint ();
-			}
 
 			if (!is_drawing) {
 				//Redraw the active shape to show a (temporary) highlighted control point (over any shape) when applicable.
 				DrawActiveShape (false, false, true, shiftKey, false);
 			} else {
+				current_point = new PointD (Utility.Clamp (current_point.X, 0, doc.ImageSize.Width - 1), Utility.Clamp (current_point.Y, 0, doc.ImageSize.Height - 1));
+
+
+				if (shiftKey) {
+					CalculateModifiedCurrentPoint ();
+				}
+
 				ControlPoint? selPoint = SelectedPoint;
 
 				//Make sure a control point is selected.
@@ -863,7 +859,7 @@ namespace Pinta.Tools
 						//Changing a control point's tension.
 
 						//Unclamp the mouse position when changing tension.
-						current_point = new PointD (point.X, point.Y);
+						current_point = e.PointDouble;
 
 						//Calculate the new tension based off of the movement of the mouse that's
 						//perpendicular to the previous and following control points.

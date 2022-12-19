@@ -58,7 +58,6 @@ namespace Pinta.Tools
 				    "\nPress Space to add a new control point at the mouse position." +
 				    "\nHold {0} while pressing Space to create the control point at the exact same position." +
 				    "\nHold {0} while left clicking on a control point to create a new shape at the exact same position." +
-				    "\nHold {0} while clicking outside of the image bounds to create a new shape starting at the edge." +
 				    "\nPress Enter to finalize the shape.", GtkExtensions.CtrlLabel ());
 			}
 		}

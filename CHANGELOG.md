@@ -32,6 +32,7 @@ Thanks to the following contributors who worked on this release:
 
 ### Changed
 - Pinta now uses the standard GTK about dialog
+- The Line / Curve tool no longer requires pressing Ctrl to start drawing a shape when the mouse is outside the canvas ([#1999997](https://bugs.launchpad.net/pinta/+bug/1999997))
 
 ### Fixed
 - Fixed a bug where the default linear gradient was reflected rather than clamped
