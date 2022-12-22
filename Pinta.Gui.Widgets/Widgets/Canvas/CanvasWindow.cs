@@ -1,21 +1,21 @@
-// 
+//
 // CanvasWindow.cs
-//  
+//
 // Author:
 //       Jonathan Pobst <monkey@jpobst.com>
-// 
+//
 // Copyright (c) 2015 Jonathan Pobst
-// 
+//
 // Permission is hereby granted, free of charge, to any person obtaining a copy
 // of this software and associated documentation files (the "Software"), to deal
 // in the Software without restriction, including without limitation the rights
 // to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
 // copies of the Software, and to permit persons to whom the Software is
 // furnished to do so, subject to the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be included in
 // all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
 // IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
 // FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
@@ -186,9 +186,9 @@ namespace Pinta
 			// Allow the user to zoom in/out with Ctrl-Mousewheel
 			if (args.Event.State.IsControlPressed () && args.Event.Direction == ScrollDirection.Smooth) {
 				if (args.Event.DeltaX > 0 || args.Event.DeltaY < 0)
-					document.Workspace.ZoomInFromMouseScroll (new Cairo.PointD (args.Event.X, args.Event.Y));
+					document.Workspace.ZoomInFromMouseScroll (new Cairo.PointD (args.Event.X + scrolled_window.Hadjustment.Value, args.Event.Y + scrolled_window.Vadjustment.Value));
 				else if (args.Event.DeltaX < 0 || args.Event.DeltaY > 0)
-					document.Workspace.ZoomOutFromMouseScroll (new Cairo.PointD (args.Event.X, args.Event.Y));
+					document.Workspace.ZoomOutFromMouseScroll (new Cairo.PointD (args.Event.X + scrolled_window.Hadjustment.Value, args.Event.Y + scrolled_window.Vadjustment.Value));
 
 				args.RetVal = true;
 			}
