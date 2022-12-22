@@ -194,9 +194,15 @@ namespace Pinta
 			doc.Workspace.Canvas = canvas.Canvas;
 
 			// Zoom to window only on first show (if we do it always, it will be called on every resize)
+			// Note: this does seem to allow a small flicker where large images are shown at 100% zoom before
+			// zooming out (Bug 1959673)
 			canvas.SizeAllocated += (o, e2) => {
-				if (!canvas.HasBeenShown)
-					ZoomToWindow_Activated (o, e);
+				if (!canvas.HasBeenShown) {
+					Application.Invoke (delegate {
+						ZoomToWindow_Activated (o, e);
+						PintaCore.Workspace.Invalidate ();
+					});
+				}
 
 				canvas.HasBeenShown = true;
 			};

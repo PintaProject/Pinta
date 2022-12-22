@@ -52,6 +52,7 @@ Thanks to the following contributors who worked on this release:
 - Fixed a bug in the shape tools where changing the shape type did not always take effect (#235, #238, [#1993332](https://bugs.launchpad.net/pinta/+bug/1993332), [#1635902](https://bugs.launchpad.net/pinta/+bug/1635902))
 - Fixed an issue on macOS where toolbar drop down button menus items could not be selected properly
 - Pinta now always saves files to the exact file name chosen by the native file dialog, without e.g. appending a default extension. This fixes issues where files saved through desktop portals could be lost ([#1958670](https://bugs.launchpad.net/pinta/+bug/1958670))
+- Fixed a bug where pasting into a new image could occasionally zoom the new image to 1% ([#1959673](https://bugs.launchpad.net/pinta/+bug/1959673))
 
 ## [2.0.2](https://github.com/PintaProject/Pinta/compare/2.0.2...HEAD) - 2022/01/13
 

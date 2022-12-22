@@ -184,12 +184,6 @@ namespace Pinta.Core
 			doc.Workspace.History.PushNewItem (new BaseHistoryItem (Resources.StandardIcons.DocumentNew, Translations.GetString ("New Image")));
 			doc.Workspace.History.SetClean ();
 
-			// This ensures these are called after the window is done being created and sized.
-			// Without it, we sometimes try to zoom when the window has a size of (0, 0).
-			Gtk.Application.Invoke (delegate {
-				PintaCore.Actions.View.ZoomToWindow.Activate ();
-			});
-
 			return doc;
 		}
 
@@ -254,13 +248,6 @@ namespace Pinta.Core
 
 				PintaCore.Workspace.ActiveWorkspace.History.PushNewItem (new BaseHistoryItem (Resources.StandardIcons.DocumentOpen, Translations.GetString ("Open Image")));
 				PintaCore.Workspace.ActiveDocument.History.SetClean ();
-
-				// This ensures these are called after the window is done being created and sized.
-				// Without it, we sometimes try to zoom when the window has a size of (0, 0).
-				Gtk.Application.Invoke (delegate {
-					PintaCore.Actions.View.ZoomToWindow.Activate ();
-					PintaCore.Workspace.Invalidate ();
-				});
 
 				fileOpened = true;
 			} catch (UnauthorizedAccessException) {
