@@ -178,7 +178,6 @@ namespace Pinta.Tools
 		private MoveHandle hover_handle = new ();
 
 		private readonly Gdk.Cursor grab_cursor = new (Gdk.Display.Default, Pinta.Resources.StandardCursors.Grab);
-		private readonly Gdk.Cursor grabbing_cursor = new (Gdk.Display.Default, Pinta.Resources.StandardCursors.Grabbing);
 
 		protected bool changing_tension = false;
 		protected PointD last_mouse_pos = new PointD (0d, 0d);
@@ -552,7 +551,7 @@ namespace Pinta.Tools
 						++SelectedPointIndex;
 					}
 
-					DrawActiveShape (true, false, true, shiftKey, false);
+					DrawActiveShape (true, false, true, shiftKey, false, e.IsControlPressed);
 				}
 
 				return true;
@@ -624,6 +623,10 @@ namespace Pinta.Tools
 				}
 
 				return true;
+			} else if (keyPressed.IsControlKey ()) {
+				// Redraw since the Ctrl key affects the hover cursor, etc
+				DrawActiveShape (false, false, true, e.IsShiftPressed, false, true);
+				return true;
 			} else {
 				return false;
 			}
@@ -635,7 +638,10 @@ namespace Pinta.Tools
 
 			if (keyReleased == Gdk.Key.Delete || keyReleased == Gdk.Key.Return || keyReleased == Gdk.Key.KP_Enter
 			    || keyReleased == Gdk.Key.space || keyReleased == Gdk.Key.Up || keyReleased == Gdk.Key.Down
-			    || keyReleased == Gdk.Key.Left || keyReleased == Gdk.Key.Right) {
+			    || keyReleased == Gdk.Key.Left || keyReleased == Gdk.Key.Right || keyReleased.IsControlKey ()) {
+				if (keyReleased.IsControlKey ()) {
+					DrawActiveShape (false, false, true, e.IsShiftPressed, false, false);
+				}
 				return true;
 			} else {
 				return false;
@@ -805,7 +811,7 @@ namespace Pinta.Tools
 				clicked_without_modifying = true;
 			}
 
-			DrawActiveShape (false, false, true, shiftKey, false);
+			DrawActiveShape (false, false, true, shiftKey, false, e.IsControlPressed);
 		}
 
 		public virtual void HandleMouseUp (Document document, ToolMouseEventArgs e)
@@ -814,7 +820,7 @@ namespace Pinta.Tools
 
 			changing_tension = false;
 
-			DrawActiveShape (true, false, true, e.IsShiftPressed, false);
+			DrawActiveShape (true, false, true, e.IsShiftPressed, false, e.IsControlPressed);
 		}
 
 		public virtual void HandleMouseMove (Document document, ToolMouseEventArgs e)
@@ -825,7 +831,7 @@ namespace Pinta.Tools
 
 			if (!is_drawing) {
 				//Redraw the active shape to show a (temporary) highlighted control point (over any shape) when applicable.
-				DrawActiveShape (false, false, true, shiftKey, false);
+				DrawActiveShape (false, false, true, shiftKey, false, e.IsControlPressed);
 			} else {
 				current_point = new PointD (Utility.Clamp (current_point.X, 0, doc.ImageSize.Width - 1), Utility.Clamp (current_point.Y, 0, doc.ImageSize.Height - 1));
 
@@ -918,7 +924,7 @@ namespace Pinta.Tools
 										Utility.Clamp (selPoint.Tension, 0d, 1d);
 					}
 
-					DrawActiveShape (false, false, true, shiftKey, false);
+					DrawActiveShape (false, false, true, shiftKey, false, e.IsControlPressed);
 				}
 			}
 
@@ -935,7 +941,7 @@ namespace Pinta.Tools
 		/// <param name="drawHoverSelection">Whether to draw any hover point or selected point.</param>
 		/// <param name="shiftKey">Whether the shift key is being pressed. This is for width/height constraining/equalizing.</param>
 		/// <param name="preventSwitchBack">Whether to prevent switching back to the old tool if a tool change is necessary.</param>
-		public void DrawActiveShape (bool calculateOrganizedPoints, bool finalize, bool drawHoverSelection, bool shiftKey, bool preventSwitchBack)
+		public void DrawActiveShape (bool calculateOrganizedPoints, bool finalize, bool drawHoverSelection, bool shiftKey, bool preventSwitchBack, bool ctrl_key = false)
 		{
 			ShapeTool? oldTool = BaseEditEngine.ActivateCorrespondingTool (SelectedShapeIndex, calculateOrganizedPoints);
 
@@ -962,7 +968,7 @@ namespace Pinta.Tools
 
 			if (activeEngine == null) {
 				//No shape will be drawn; however, the hover point still needs to be drawn if drawHoverSelection is true.
-				UpdateHoverHandle (drawHoverSelection);
+				UpdateHoverHandle (drawHoverSelection, ctrl_key);
 			} else {
 				//Clear any temporary drawing, because something new will be drawn.
 				activeEngine.DrawingLayer.Layer.Clear ();
@@ -973,7 +979,7 @@ namespace Pinta.Tools
 				if (finalize) {
 					dirty = DrawFinalized (activeEngine, true, shiftKey);
 				} else {
-					dirty = DrawUnfinalized (activeEngine, drawHoverSelection, shiftKey);
+					dirty = DrawUnfinalized (activeEngine, drawHoverSelection, shiftKey, ctrl_key);
 				}
 
 				//Determine if the organized (spatially hashed) points should be generated. This is for mouse interaction detection after drawing.
@@ -1021,7 +1027,7 @@ namespace Pinta.Tools
 			}
 
 			//Draw the finalized shape.
-			Rectangle dirty = DrawShape (engine, doc.Layers.CurrentUserLayer, false, false);
+			Rectangle dirty = DrawShape (engine, doc.Layers.CurrentUserLayer, false, false, false);
 
 			if (createHistoryItem) {
 				//Make sure that the undo surface isn't null.
@@ -1042,10 +1048,10 @@ namespace Pinta.Tools
 		/// <param name="dirty"></param>
 		/// <param name="drawHoverSelection"></param>
 		/// <param name="shiftKey"></param>
-		private Rectangle DrawUnfinalized (ShapeEngine engine, bool drawHoverSelection, bool shiftKey)
+		private Rectangle DrawUnfinalized (ShapeEngine engine, bool drawHoverSelection, bool shiftKey, bool ctrl_key)
 		{
 			//Draw the shape onto the temporary DrawingLayer.
-			return DrawShape (engine, engine.DrawingLayer.Layer, true, drawHoverSelection);
+			return DrawShape (engine, engine.DrawingLayer.Layer, true, drawHoverSelection, ctrl_key);
 		}
 
 		/// <summary>
@@ -1087,7 +1093,7 @@ namespace Pinta.Tools
 		}
 
 
-		protected Rectangle DrawShape (ShapeEngine engine, Layer l, bool drawCP, bool drawHoverSelection)
+		protected Rectangle DrawShape (ShapeEngine engine, Layer l, bool drawCP, bool drawHoverSelection, bool ctrl_key)
 		{
 			Document doc = PintaCore.Workspace.ActiveDocument;
 
@@ -1131,7 +1137,7 @@ namespace Pinta.Tools
 					//Draw anything extra (that not every shape has), like arrows.
 					DrawExtras (ref dirty, g, engine);
 
-					DrawControlPoints (g, activeEngine, drawCP, drawHoverSelection);
+					DrawControlPoints (g, activeEngine, drawCP, drawHoverSelection, ctrl_key);
 				}
 			}
 
@@ -1139,13 +1145,13 @@ namespace Pinta.Tools
 			return dirty ?? new Rectangle (0d, 0d, 0d, 0d);
 		}
 
-		private void DrawControlPoints (Context g, ShapeEngine shape, bool draw_controls, bool draw_selection)
+		private void DrawControlPoints (Context g, ShapeEngine shape, bool draw_controls, bool draw_selection, bool ctrl_key)
 		{
 			Gdk.Rectangle dirty = MoveHandle.UnionInvalidateRects (shape.ControlPointHandles);
 			shape.ControlPointHandles.Clear ();
 
 			if (draw_controls) {
-				UpdateHoverHandle (draw_selection);
+				UpdateHoverHandle (draw_selection, ctrl_key);
 
 				foreach (ControlPoint point in shape.ControlPoints) {
 					//Skip drawing the control point if it is being hovered over.
@@ -1169,7 +1175,7 @@ namespace Pinta.Tools
 		/// <summary>
 		/// Update the hover handle's position and redraw it.
 		/// </summary>
-		protected void UpdateHoverHandle (bool draw_selection)
+		protected void UpdateHoverHandle (bool draw_selection, bool ctrl_key)
 		{
 			Gdk.Rectangle dirty = Gdk.Rectangle.Zero;
 			if (hover_handle.Active)
@@ -1211,10 +1217,12 @@ namespace Pinta.Tools
 					dirty = dirty.Union (hover_handle.InvalidateRect);
 			}
 
-			// Update the tool's cursor if we are hovering over or dragging a control point.
+			// Update the tool's cursor if we are hovering over a control point / generated point,
+			// and Ctrl is not pressed (since Ctrl+click starts a new shape).
+			// Otherwise, the normal cursor is shown to indicate that a shape can be drawn.
 			var tool = PintaCore.Tools.CurrentTool!;
-			if (hover_handle.Selected)
-				tool.SetCursor (is_drawing ? grabbing_cursor : grab_cursor);
+			if (hover_handle.Active && !is_drawing && !ctrl_key)
+				tool.SetCursor (grab_cursor);
 			else
 				tool.SetCursor (tool.DefaultCursor);
 
