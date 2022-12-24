@@ -18,6 +18,7 @@ Thanks to the following contributors who worked on this release:
 - The selection move handles and shape control point handles are now much easier to use when working on zoomed in or small images (#211, #223, [#1173756](https://bugs.launchpad.net/pinta/+bug/1173756), [#1958924](https://bugs.launchpad.net/pinta/+bug/1958924), [#1958920](https://bugs.launchpad.net/pinta/+bug/1958920))
 - The File -> New Screenshot command now uses the XDG screenshot portal if available. This fixes issues with taking screenshots under Wayland (#218, [#1955841](https://bugs.launchpad.net/pinta/+bug/1955841))
 - Improved canvas rendering performance (#209, #210)
+- Added support for loading files from virtual filesystems such as Google Drive mounts (#215, [#1958763](https://bugs.launchpad.net/pinta/+bug/1958763))
 - Improved support for `.ora` files
   - Hidden layers are now round-tripped correctly for `.ora` files ([#1377566](https://bugs.launchpad.net/pinta/+bug/1377566))
   - When saving a `.ora` file, a flattened image (`mergedimage.png`) is now included in the archive. This is required by the spec to accomodate viewer software ([#1377566](https://bugs.launchpad.net/pinta/+bug/1377566))
