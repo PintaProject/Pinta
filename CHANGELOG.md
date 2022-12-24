@@ -54,6 +54,7 @@ Thanks to the following contributors who worked on this release:
 - Pinta now always saves files to the exact file name chosen by the native file dialog, without e.g. appending a default extension. This fixes issues where files saved through desktop portals could be lost ([#1958670](https://bugs.launchpad.net/pinta/+bug/1958670))
 - Fixed a bug where an empty dash pattern resulted in nothing being drawn ([#1973706](https://bugs.launchpad.net/pinta/+bug/1973706))
 - Fixed issues where certain dash patterns did not draw correctly ([#1959032](https://bugs.launchpad.net/pinta/+bug/1959032))
+- Fixed a bug where pasting into a new image could occasionally zoom the new image to 1% ([#1959673](https://bugs.launchpad.net/pinta/+bug/1959673))
 
 ## [2.0.2](https://github.com/PintaProject/Pinta/compare/2.0.2...HEAD) - 2022/01/13
 
