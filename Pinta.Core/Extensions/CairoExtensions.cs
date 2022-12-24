@@ -35,6 +35,7 @@
 
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Runtime.InteropServices;
 using System.Threading.Tasks;
 using Cairo;
@@ -1982,6 +1983,7 @@ namespace Pinta.Core
 
 		/// <summary>
 		/// Given a string pattern consisting of dashes and spaces, creates the Cairo dash pattern.
+		/// Any other characters are treated as a space.
 		/// See https://www.cairographics.org/manual/cairo-cairo-t.html#cairo-set-dash
 		/// </summary>
 		/// <param name="dash_pattern">The dash pattern string.</param>
@@ -1989,81 +1991,39 @@ namespace Pinta.Core
 		/// <returns>The double[] generated.</returns>
 		public static double[] CreateDashPattern (string dash_pattern, double brush_width)
 		{
-			const double dashFactor = 1.0;
+			// An empty cairo pattern just draws a normal line.
+			if (string.IsNullOrEmpty (dash_pattern))
+				return Array.Empty<double> ();
 
 			var dashes = new List<double> ();
 
-			//For each consecutive dash character, extent will increase by 1.
-			//For each consecutive space character, extent will dicrease by 1.
-			int extent = 0;
-
-			/* The expected input for the dash pattern string is any combination of dashes and spaces; however, every character is allowed to
-			 * be entered. Only dash characters will count as dashes, and any non-dash character (including spaces, 'a', '$', '=', or etc.) will
-			 * be counted as if it were a space, so to speak. So, "-- - --- -" is considered the same as "--b-$---=-".
-			 * 
-			 * This code goes through the string, character by character, counting up the number of consecutive dashes and spaces. Whenever a
-			 * series of one or more dashes or spaces (exclusively) is followed by the opposing type (e.g. "----" is then followed by ' '),
-			 * the extent as to how far the series went (how many consecutive characters were met; in this case, 4) is then added to the
-			 * resulting dashList.
-			 * 
-			 * To understand this code, it is necessary to first understand how Cairo's dashing system works. I myself have only bothered to
-			 * understand it (as it can become slightly difficult) only to the extent as to which is necessary to be able to systematically
-			 * derive the resembling dash pattern array from the given string. Here are the rules that I have come up with that work:
-			 * 
-			 *     1. Alternate the number of consecutive dashes and spaces. "---  - " would result in { 3.0, 2.0, 1.0, 1.0 }.
-			 *     
-			 *     2. Every pattern must start with a dash representation and end with a space representation. If the pattern started
-			 *        with a space and/or ended with a dash, use 0.0 as a placeholder (the result of a 0.0 will not be directly visual).
-			 *        " ---- --" would thus result in { 0.0, 1.0, 4.0, 1.0, 2.0, 0.0 }. This order AND ending is mandatory; I don't
-			 *        understand why, but I do know that this way it works perfectly well and that it wasn't working perfectly otherwise.
-			 * 
-			 * Note: "extent" is only ever 0 at the very beginning; otherwise, it will always be > 0 or < 0. After the foreach loop, "extent" will
-			 * never be equal to 0, and the final series must be added onto the dash pattern array outside of the loop, thus tying off the loose end. */
-			foreach (char c in dash_pattern) {
-				if (c == '-') {
-					//Dash character.
-
-					if (extent >= 0) {
-						++extent;
-					} else {
-						//There were previously one or more non-dash characters.
-						dashes.Add ((double) -extent * brush_width * dashFactor);
-
-						extent = 1;
-					}
-				} else {
-					//Non-dash character.
-
-					if (extent == 0) {
-						//Pattern is starting with a non-dash character. Resulting double[] pattern must end
-						//with a dash representation for this to be accurate: 0.0 is merely a placeholder.
-						dashes.Add (0.0);
-
-						--extent;
-					} else if (extent < 0) {
-						--extent;
-					} else {
-						//There were previously one or more dash characters.
-						dashes.Add ((double) extent * brush_width * dashFactor);
-
-						extent = -1;
+			// Count the number of consecutive dashes / spaces.
+			// e.g. "---  - " produces { 3.0, 2.0, 1.0, 1.0 }
+			{
+				var is_dash = dash_pattern.Select (c => c == '-').ToArray ();
+				int count = 0;
+				for (int i = 0; i < dash_pattern.Length; ++i, ++count) {
+					if (i > 0 && is_dash[i] != is_dash[i - 1]) {
+						dashes.Add ((double) count);
+						count = 0;
 					}
 				}
+
+				dashes.Add ((double) count);
 			}
 
-			//At this point, extent != 0.
-			if (extent > 0) {
-				//extent > 0. Pattern ended with a dash character.
-				dashes.Add ((double) extent * brush_width * dashFactor);
+			// The cairo pattern starts with a dash, so if the string pattern
+			// started with a space we need to add a zero-width dash.
+			if (!dash_pattern.StartsWith ('-'))
+				dashes.Insert (0, 0.0);
 
-				//Resulting double[] pattern must end with a space representation for this to be accurate: 0.0 is merely a placeholder.
+			// The cairo pattern must have an even number of dashes and spaces to loop,
+			// so add a zero length space if the string pattern ended with a dash.
+			if (dash_pattern.EndsWith ('-'))
 				dashes.Add (0.0);
-			} else if (extent < 0) {
-				//extent < 0. Pattern ended with a non-dash character.
-				dashes.Add ((double) -extent * brush_width * dashFactor);
-			}
 
-			return dashes.ToArray ();
+			// Each dash / space follows the brush width.
+			return dashes.Select (x => x * brush_width).ToArray ();
 		}
 	}
 }
