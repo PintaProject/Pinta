@@ -1988,7 +1988,7 @@ namespace Pinta.Core
 		/// </summary>
 		/// <param name="dash_pattern">The dash pattern string.</param>
 		/// <param name="brush_width">The width of the brush.</param>
-		/// <returns>The double[] generated.</returns>
+		/// <returns>The cairo dash pattern.</returns>
 		public static double[] CreateDashPattern (string dash_pattern, double brush_width)
 		{
 			// An empty cairo pattern just draws a normal line.
@@ -2017,13 +2017,21 @@ namespace Pinta.Core
 			if (!dash_pattern.StartsWith ('-'))
 				dashes.Insert (0, 0.0);
 
-			// The cairo pattern must have an even number of dashes and spaces to loop,
+			// The cairo pattern must have an even number of dash and space sequences to loop,
 			// so add a zero length space if the string pattern ended with a dash.
 			if (dash_pattern.EndsWith ('-'))
 				dashes.Add (0.0);
 
 			// Each dash / space follows the brush width.
 			return dashes.Select (x => x * brush_width).ToArray ();
+		}
+
+		/// <summary>
+		/// Sets the dash pattern from a string (see CreateDashPattern()).
+		/// </summary>
+		public static void SetDashFromString (this Context context, string dash_pattern, double brush_width)
+		{
+			context.SetDash (CreateDashPattern (dash_pattern, brush_width), 0.0);
 		}
 	}
 }

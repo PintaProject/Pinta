@@ -1109,7 +1109,7 @@ namespace Pinta.Tools
 
 					g.Antialias = activeEngine.AntiAliasing ? Antialias.Subpixel : Antialias.None;
 
-					g.SetDash (CairoExtensions.CreateDashPattern (activeEngine.DashPattern, activeEngine.BrushWidth), 0.0);
+					g.SetDashFromString (activeEngine.DashPattern, activeEngine.BrushWidth);
 
 					g.LineWidth = activeEngine.BrushWidth;
 

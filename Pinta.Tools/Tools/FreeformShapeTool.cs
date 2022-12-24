@@ -117,7 +117,7 @@ namespace Pinta.Tools
 			using (var g = document.CreateClippedToolContext ()) {
 				g.Antialias = UseAntialiasing ? Antialias.Subpixel : Antialias.None;
 
-				g.SetDash (CairoExtensions.CreateDashPattern (dash_pattern, BrushWidth), 0.0);
+				g.SetDashFromString (dash_pattern, BrushWidth);
 
 				if (path != null) {
 					g.AppendPath (path);
@@ -163,7 +163,7 @@ namespace Pinta.Tools
 			using (Context g = document.CreateClippedContext ()) {
 				g.Antialias = UseAntialiasing ? Antialias.Subpixel : Antialias.None;
 
-				g.SetDash (CairoExtensions.CreateDashPattern (dash_pattern, BrushWidth), 0.0);
+				g.SetDashFromString (dash_pattern, BrushWidth);
 
 				if (path != null) {
 					g.AppendPath (path);
