@@ -1988,9 +1988,10 @@ namespace Pinta.Core
 		/// </summary>
 		/// <param name="dash_pattern">The dash pattern string.</param>
 		/// <param name="brush_width">The width of the brush.</param>
+		/// <param name="line_cap">The line cap style being used.</param>
 		/// <param name="dash_list">The Cairo dash pattern.</param>
 		/// <param name="offset">The offset into the dash pattern to begin drawing from.</param>
-		public static void CreateDashPattern (string dash_pattern, double brush_width, out double[] dash_list, out double offset)
+		public static void CreateDashPattern (string dash_pattern, double brush_width, LineCap line_cap, out double[] dash_list, out double offset)
 		{
 			// An empty cairo pattern or a pattern with no dashes just draws a normal line.
 			// Cairo draws a normal line when the dash list is empty.
@@ -2027,29 +2028,44 @@ namespace Pinta.Core
 			// However, we can't draw a zero-width dash if the line cap is square, so instead
 			// we need to shift the space to the end of the pattern and then use the offset parameter
 			// to start drawing from there.
-			offset = 0.0;
+			double? offset_from_end = null;
 			if (!dash_pattern.StartsWith ('-')) {
-				double space = dashes[0];
+				offset_from_end = dashes[0];
 				dashes.RemoveAt (0);
-				offset = dashes.Sum ();
 
 				// From above, the dash pattern must already have a space at the end so
 				// we can just increase its size.
 				// The list is non-empty since patterns containing only a space result in an early exit.
-				dashes[dashes.Count - 1] += space;
+				dashes[dashes.Count - 1] += offset_from_end.Value;
 			}
 
-			// Each dash / space follows the brush width.
-			dash_list = dashes.Select (x => x * brush_width).ToArray ();
-			offset *= brush_width;
+			// Each dash / space is the size of the brush width.
+			// Line caps add some complexity - dashes extend visually by 0.5 * brush_width on
+			// either side (e.g. a dash of size 0 still draws a square), so we need to
+			// adjust the sizes accordingly for this padding.
+			// Cairo seems to sometimes ignore zero sized dashes though (e.g. for a dash pattern
+			// such as "- -" => { 0, 30, 0, 15 }, with brush width 15), so we always draw at least a length of 1.
+			double dash_size_offset = line_cap == LineCap.Butt ? 0.0 : -brush_width;
+			double space_size_offset = line_cap == LineCap.Butt ? 0.0 : brush_width;
+			dash_list = dashes.Select ((dash, i) => {
+				if ((i % 2) == 0)
+					return Math.Max (dash * brush_width + dash_size_offset, 1.0);
+				else
+					return dash * brush_width + space_size_offset;
+			}
+			).ToArray ();
+
+			offset = 0;
+			if (offset_from_end.HasValue)
+				offset = dash_list.Sum () - (offset_from_end.Value * brush_width + 0.5 * space_size_offset);
 		}
 
 		/// <summary>
 		/// Sets the dash pattern from a string (see CreateDashPattern()).
 		/// </summary>
-		public static void SetDashFromString (this Context context, string dash_pattern, double brush_width)
+		public static void SetDashFromString (this Context context, string dash_pattern, double brush_width, LineCap line_cap = LineCap.Butt)
 		{
-			CreateDashPattern (dash_pattern, brush_width, out var dashes, out var offset);
+			CreateDashPattern (dash_pattern, brush_width, line_cap, out var dashes, out var offset);
 			context.SetDash (dashes, offset);
 		}
 	}
