@@ -1988,12 +1988,17 @@ namespace Pinta.Core
 		/// </summary>
 		/// <param name="dash_pattern">The dash pattern string.</param>
 		/// <param name="brush_width">The width of the brush.</param>
-		/// <returns>The cairo dash pattern.</returns>
-		public static double[] CreateDashPattern (string dash_pattern, double brush_width)
+		/// <param name="dash_list">The Cairo dash pattern.</param>
+		/// <param name="offset">The offset into the dash pattern to begin drawing from.</param>
+		public static void CreateDashPattern (string dash_pattern, double brush_width, out double[] dash_list, out double offset)
 		{
-			// An empty cairo pattern just draws a normal line.
-			if (string.IsNullOrEmpty (dash_pattern))
-				return Array.Empty<double> ();
+			// An empty cairo pattern or a pattern with no dashes just draws a normal line.
+			// Cairo draws a normal line when the dash list is empty.
+			if (!dash_pattern.Contains ('-')) {
+				dash_list = Array.Empty<double> ();
+				offset = 0.0;
+				return;
+			}
 
 			var dashes = new List<double> ();
 
@@ -2012,18 +2017,31 @@ namespace Pinta.Core
 				dashes.Add ((double) count);
 			}
 
-			// The cairo pattern starts with a dash, so if the string pattern
-			// started with a space we need to add a zero-width dash.
-			if (!dash_pattern.StartsWith ('-'))
-				dashes.Insert (0, 0.0);
-
 			// The cairo pattern must have an even number of dash and space sequences to loop,
 			// so add a zero length space if the string pattern ended with a dash.
 			if (dash_pattern.EndsWith ('-'))
 				dashes.Add (0.0);
 
+			// The cairo pattern starts with a dash, so if the string pattern
+			// started with a space we need to add a zero-width dash.
+			// However, we can't draw a zero-width dash if the line cap is square, so instead
+			// we need to shift the space to the end of the pattern and then use the offset parameter
+			// to start drawing from there.
+			offset = 0.0;
+			if (!dash_pattern.StartsWith ('-')) {
+				double space = dashes[0];
+				dashes.RemoveAt (0);
+				offset = dashes.Sum ();
+
+				// From above, the dash pattern must already have a space at the end so
+				// we can just increase its size.
+				// The list is non-empty since patterns containing only a space result in an early exit.
+				dashes[dashes.Count - 1] += space;
+			}
+
 			// Each dash / space follows the brush width.
-			return dashes.Select (x => x * brush_width).ToArray ();
+			dash_list = dashes.Select (x => x * brush_width).ToArray ();
+			offset *= brush_width;
 		}
 
 		/// <summary>
@@ -2031,7 +2049,8 @@ namespace Pinta.Core
 		/// </summary>
 		public static void SetDashFromString (this Context context, string dash_pattern, double brush_width)
 		{
-			context.SetDash (CreateDashPattern (dash_pattern, brush_width), 0.0);
+			CreateDashPattern (dash_pattern, brush_width, out var dashes, out var offset);
+			context.SetDash (dashes, offset);
 		}
 	}
 }

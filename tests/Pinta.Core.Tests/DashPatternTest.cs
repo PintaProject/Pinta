@@ -11,19 +11,22 @@ namespace Pinta.Core.Tests
 	[TestFixture]
 	class DashPatternTest
 	{
-		[TestCase ("", ExpectedResult = new double[] { })]
-		[TestCase ("-", ExpectedResult = new[] { 3.0, 0.0 })]
-		[TestCase (" ", ExpectedResult = new[] { 0.0, 3.0 })]
-		[TestCase (" -", ExpectedResult = new[] { 0.0, 3.0, 3.0, 0.0 })]
-		[TestCase ("-- ", ExpectedResult = new[] { 6.0, 3.0 })]
-		[TestCase (" --", ExpectedResult = new[] { 0.0, 3.0, 6.0, 0.0 })]
-		[TestCase ("  -", ExpectedResult = new[] { 0.0, 6.0, 3.0, 0.0 })]
-		[TestCase ("$ !-", ExpectedResult = new[] { 0.0, 9.0, 3.0, 0.0 })]
-		[TestCase (" - --", ExpectedResult = new[] { 0.0, 3.0, 3.0, 3.0, 6.0, 0.0 })]
-		[TestCase (" - - --------", ExpectedResult = new[] { 0.0, 3.0, 3.0, 3.0, 3.0, 3.0, 24.0, 0.0 })]
-		public double[] CreateDashPattern (string pattern)
+		[TestCase ("", new double[] { }, 0.0)]
+		[TestCase ("-", new[] { 3.0, 0.0 }, 0.0)]
+		[TestCase (" ", new double[] { }, 0.0)]
+		[TestCase (" -", new[] { 3.0, 3.0 }, 3.0)]
+		[TestCase ("- -", new[] { 3.0, 3.0, 3.0, 0.0 }, 0.0)]
+		[TestCase ("-- ", new[] { 6.0, 3.0 }, 0.0)]
+		[TestCase (" --", new[] { 6.0, 3.0 }, 6.0)]
+		[TestCase ("  -", new[] { 3.0, 6.0 }, 3.0)]
+		[TestCase ("$ !-", new[] { 3.0, 9.0 }, 3.0)]
+		[TestCase (" - --", new[] { 3.0, 3.0, 6.0, 3.0 }, 12.0)]
+		[TestCase (" - - --------", new[] { 3.0, 3.0, 3.0, 3.0, 24.0, 3.0 }, 36.0)]
+		public void CreateDashPattern (string pattern, double[] expected_dashes, double expected_offset)
 		{
-			return CairoExtensions.CreateDashPattern (pattern, 3.0);
+			CairoExtensions.CreateDashPattern (pattern, 3.0, out var dashes, out var offset);
+			Assert.AreEqual (dashes, expected_dashes);
+			Assert.AreEqual (offset, expected_offset);
 		}
 	}
 }
