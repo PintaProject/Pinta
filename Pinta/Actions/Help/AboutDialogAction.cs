@@ -96,9 +96,11 @@ namespace Pinta.Actions
 		private readonly string[] authors = new[] {
 			"Cameron White (@cameronwhite)",
 			"Jonathan Pobst (@jpobst)",
-			"Mykola Franchuk (@thekolian1996)",
-			"@darkdragon-001",
-			"@iangzh",
+			"James Carroll (@MrCarroll)",
+			"Bartosz Głowacki (@Zeti123)",
+			"@JanDeDinoMan",
+			"@supershadoe",
+			"@Zekiah-A",
 
 			// Old authors.
 			"A. Karon @akaro2424",
@@ -156,7 +158,9 @@ namespace Pinta.Actions
 			"Tom Kadwill",
 			"@aivel",
 			"@anadvu",
+			"@darkdragon-001",
 			"@jefetienne",
+			"@iangzh",
 			"@nikita-yfh",
 			"@pikachuiscool2",
 			"@scx",
