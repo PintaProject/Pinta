@@ -29,11 +29,11 @@ using System.Linq;
 
 namespace Pinta.Core
 {
-	public class PaletteFormats
+	public class PaletteFormatManager
 	{
 		private List<PaletteDescriptor> formats;
 
-		public PaletteFormats ()
+		public PaletteFormatManager ()
 		{
 			formats = new List<PaletteDescriptor> ();
 

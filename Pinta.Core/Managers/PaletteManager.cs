@@ -178,7 +178,7 @@ namespace Pinta.Core
 		private void SaveCurrentPalette ()
 		{
 			var palette_file = System.IO.Path.Combine (PintaCore.Settings.GetUserSettingsDirectory (), PALETTE_FILE);
-			var palette_saver = PintaCore.System.PaletteFormats.Formats.FirstOrDefault (p => p.Extensions.Contains ("txt"))?.Saver;
+			var palette_saver = PintaCore.PaletteFormats.Formats.FirstOrDefault (p => p.Extensions.Contains ("txt"))?.Saver;
 
 			if (palette_saver is not null)
 				CurrentPalette.Save (GLib.FileFactory.NewForPath (palette_file), palette_saver);

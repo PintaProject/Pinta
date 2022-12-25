@@ -58,7 +58,7 @@ namespace Pinta.Actions
 				Name = Translations.GetString ("Image files")
 			};
 
-			foreach (var format in PintaCore.System.ImageFormats.Formats) {
+			foreach (var format in PintaCore.ImageFormats.Formats) {
 				if (!format.IsWriteOnly ()) {
 					foreach (var ext in format.Extensions)
 						ff.AddPattern (string.Format ("*.{0}", ext));
@@ -70,7 +70,7 @@ namespace Pinta.Actions
 			// Windows does not understand MIME types natively.
 			// Adding a MIME filter on Windows would break the native file picker and force a GTK file picker instead.
 			if (SystemManager.GetOperatingSystem () != OS.Windows) {
-				foreach (var format in PintaCore.System.ImageFormats.Formats) {
+				foreach (var format in PintaCore.ImageFormats.Formats) {
 					foreach (var mime in format.Mimes) {
 						ff.AddMimeType (mime);
 					}

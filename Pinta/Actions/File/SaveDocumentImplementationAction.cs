@@ -84,13 +84,13 @@ namespace Pinta.Actions
 				fcd.SetFile (document.File);
 			else {
 				// Append the default extension, producing e.g. "Unsaved Image 1.png"
-				var default_ext = PintaCore.System.ImageFormats.GetDefaultSaveFormat ().Extensions.First ();
+				var default_ext = PintaCore.ImageFormats.GetDefaultSaveFormat ().Extensions.First ();
 				fcd.CurrentName = $"{document.DisplayName}.{default_ext}";
 			}
 
 			// Add all the formats we support to the save dialog
 			var filetypes = new Dictionary<FileFilter, FormatDescriptor> ();
-			foreach (var format in PintaCore.System.ImageFormats.Formats) {
+			foreach (var format in PintaCore.ImageFormats.Formats) {
 				if (!format.IsReadOnly ()) {
 					fcd.AddFilter (format.Filter);
 					filetypes.Add (format.Filter, format);
@@ -106,10 +106,10 @@ namespace Pinta.Actions
 			FormatDescriptor? format_desc = null;
 
 			if (document.HasFile)
-				format_desc = PintaCore.System.ImageFormats.GetFormatByFile (document.DisplayName);
+				format_desc = PintaCore.ImageFormats.GetFormatByFile (document.DisplayName);
 
 			if (format_desc == null || format_desc.IsReadOnly ())
-				format_desc = PintaCore.System.ImageFormats.GetDefaultSaveFormat ();
+				format_desc = PintaCore.ImageFormats.GetDefaultSaveFormat ();
 
 			fcd.Filter = format_desc.Filter;
 
@@ -122,7 +122,7 @@ namespace Pinta.Actions
 				// Always follow the extension rather than the file type drop down
 				// ie: if the user chooses to save a "jpeg" as "foo.png", we are going
 				// to assume they just didn't update the dropdown and really want png
-				var format = PintaCore.System.ImageFormats.GetFormatByFile (display_name) ?? filetypes[fcd.Filter];
+				var format = PintaCore.ImageFormats.GetFormatByFile (display_name) ?? filetypes[fcd.Filter];
 
 				var directory = file.Parent;
 				if (directory is not null)
@@ -138,7 +138,7 @@ namespace Pinta.Actions
 				document.HasBeenSavedInSession = false;
 
 				RecentManager.Default.AddFull (file.Uri.ToString (), PintaCore.System.RecentData);
-				PintaCore.System.ImageFormats.SetDefaultFormat (format.Extensions.First ());
+				PintaCore.ImageFormats.SetDefaultFormat (format.Extensions.First ());
 
 				document.File = file;
 				return true;
@@ -156,7 +156,7 @@ namespace Pinta.Actions
 				throw new ArgumentException ("Attempted to save a document with no associated file");
 
 			if (format == null)
-				format = PintaCore.System.ImageFormats.GetFormatByFile (file.GetDisplayName ());
+				format = PintaCore.ImageFormats.GetFormatByFile (file.GetDisplayName ());
 
 			if (format == null || format.IsReadOnly ()) {
 				using var md = new MessageDialog (parent, DialogFlags.Modal, MessageType.Error, ButtonsType.Ok, Translations.GetString ("Pinta does not support saving images in this file format."), file);

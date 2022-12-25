@@ -44,6 +44,8 @@ namespace Pinta.Core
 		public static LivePreviewManager LivePreview { get; private set; }
 		public static SettingsManager Settings { get; private set; }
 		public static EffectsManager Effects { get; private set; }
+		public static ImageConverterManager ImageFormats { get; private set; }
+		public static PaletteFormatManager PaletteFormats { get; private set; }
 		public static IServiceManager Services { get; }
 
 		public const string ApplicationVersion = "2.1";
@@ -60,6 +62,8 @@ namespace Pinta.Core
 			Layers = new LayerManager ();
 			PaintBrushes = new PaintBrushManager ();
 			Tools = new ToolManager ();
+			ImageFormats = new ImageConverterManager ();
+			PaletteFormats = new PaletteFormatManager ();
 			System = new SystemManager ();
 			LivePreview = new LivePreviewManager ();
 			Palette = new PaletteManager ();
@@ -75,6 +79,8 @@ namespace Pinta.Core
 			Services.AddService (Layers);
 			Services.AddService<IPaintBrushService> (PaintBrushes);
 			Services.AddService<IToolService> (Tools);
+			Services.AddService (ImageFormats);
+			Services.AddService (PaletteFormats);
 			Services.AddService (System);
 			Services.AddService (LivePreview);
 			Services.AddService<IPaletteService> (Palette);
