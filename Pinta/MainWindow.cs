@@ -29,39 +29,48 @@ using System.Collections.Generic;
 using System.Linq;
 using Gtk;
 using Pinta.Core;
+#if false // TODO-GTK4
 using Pinta.Docking;
 using Pinta.Gui.Widgets;
+#endif
 using Pinta.MacInterop;
 
 namespace Pinta
 {
-	public class MainWindow : Gtk.Application
+	public class MainWindow
 	{
+		Adw.Application app;
 		// NRT - Created in OnActivated
 		WindowShell window_shell = null!;
+#if false // TODO-GTK4
 		Dock dock = null!;
 		GLib.Menu show_pad = null!;
 
 		CanvasPad canvas_pad = null!;
+#endif
 
 		private readonly System.Net.Http.HttpClient http_client = new ();
 
-		public MainWindow () : base ("com.github.PintaProject.Pinta", GLib.ApplicationFlags.NonUnique)
+		public MainWindow (Adw.Application app)
 		{
-			Register (GLib.Cancellable.Current);
+			this.app = app;
+
 			// This needs to match the name of the .desktop file in order to
 			// show the correct application icon under some environments (e.g.
 			// KDE Wayland). See bug 1967687.
+#if false // TODO-GTK4 - properly expose in gir.core?
 			GLib.Global.ProgramName = "pinta";
+#else
+			GLib.Internal.Functions.SetPrgname ("pinta");
+#endif
 		}
 
-		protected override void OnActivated ()
+		public void Activate ()
 		{
-			base.OnActivated ();
-
 			// Build our window
 			CreateWindow ();
 
+#if false // TODO-GTK4
 			// Initialize interface things
 			window_shell.AddAccelGroup (PintaCore.Actions.AccelGroup);
 			new ActionHandlers ();
@@ -78,8 +87,7 @@ namespace Pinta
 					if (response != ResponseType.Help)
 						break;
 				}
-			}
-	    );
+			});
 
 			PintaCore.Chrome.InitializeUnsupportedFormatDialog ((parent, message, details) => {
 				System.Console.Error.WriteLine ("Pinta: {0}", details);
@@ -135,8 +143,10 @@ namespace Pinta
 			var notebook = canvas_pad.Notebook;
 			notebook.TabClosed += DockNotebook_TabClosed;
 			notebook.ActiveTabChanged += DockNotebook_ActiveTabChanged;
+#endif
 		}
 
+#if false // TODO-GTK4
 		private void Workspace_DocumentClosed (object? sender, DocumentEventArgs e)
 		{
 			var tab = FindTabWithCanvas ((PintaCanvas) e.Document.Workspace.Canvas);
@@ -287,6 +297,7 @@ namespace Pinta
 				extension.Uninitialize ();
 		}
 #endif
+#endif
 
 		#region GUI Construction
 		private void CreateWindow ()
@@ -296,22 +307,27 @@ namespace Pinta
 			var height = PintaCore.Settings.GetSetting<int> ("window-size-height", 750);
 			var maximize = PintaCore.Settings.GetSetting<bool> ("window-maximized", false);
 
-			window_shell = new WindowShell (this, "Pinta.GenericWindow", "Pinta", width, height, maximize);
+			window_shell = new WindowShell (app, "Pinta.GenericWindow", "Pinta", width, height, maximize);
 
+#if false // TODO-GTK4
 			CreateMainMenu (window_shell);
 			CreateMainToolBar (window_shell);
 			CreateToolToolBar (window_shell);
 
 			CreatePanels (window_shell);
 			CreateStatusBar (window_shell);
+#endif
 
-			AddWindow (window_shell);
-			window_shell.ShowAll ();
+			app.AddWindow (window_shell.Window);
 
+#if false // TODO-GTK4
 			PintaCore.Chrome.InitializeApplication (this);
 			PintaCore.Chrome.InitializeWindowShell (window_shell);
+#endif
 		}
+		#endregion
 
+#if false // TODO-GTK4
 		private void CreateMainMenu (WindowShell shell)
 		{
 			if (PintaCore.System.OperatingSystem == OS.Mac) {
@@ -444,7 +460,6 @@ namespace Pinta
 
 			container.PackStart (dock, true, true, 0);
 		}
-		#endregion
 
 		#region User Settings
 		private const string LastDialogDirSettingKey = "last-dialog-directory";
@@ -623,5 +638,6 @@ namespace Pinta
 				.FirstOrDefault ();
 		}
 		#endregion
+#endif
 	}
 }

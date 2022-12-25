@@ -1,8 +1,5 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
   <ItemGroup>
-    <PackageReference Include="GtkSharp" Version="3.24.24.38" />
-  </ItemGroup>
-  <ItemGroup>
     <Content Include="icons/hicolor/*/*/*">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
@@ -197,5 +194,11 @@
     <EmbeddedResource Include="Resources\Menu.Effects.Default.png">
       <LogicalName>Menu.Effects.Default.png</LogicalName>
     </EmbeddedResource>
+  </ItemGroup>
+
+  <!-- TODO-GTK4 - build all files -->
+  <ItemGroup>
+    <Compile Remove="**/*.cs" />
+    <Compile Include="Icons.cs" />
   </ItemGroup>
 </Project>

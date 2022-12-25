@@ -32,6 +32,10 @@ namespace Pinta.Core
 {
 	public static class PintaCore
 	{
+		public static SystemManager System { get; private set; }
+		public static SettingsManager Settings { get; private set; }
+
+#if false // TODO-GTK4
 		public static LayerManager Layers { get; private set; }
 		public static PaintBrushManager PaintBrushes { get; private set; }
 		public static ToolManager Tools { get; private set; }
@@ -40,23 +44,25 @@ namespace Pinta.Core
 		public static ResourceManager Resources { get; private set; }
 		public static ActionManager Actions { get; private set; }
 		public static WorkspaceManager Workspace { get; private set; }
-		public static SystemManager System { get; private set; }
 		public static RecentFileManager RecentFiles { get; private set; }
 		public static LivePreviewManager LivePreview { get; private set; }
-		public static SettingsManager Settings { get; private set; }
 		public static EffectsManager Effects { get; private set; }
 		public static ImageConverterManager ImageFormats { get; private set; }
 		public static PaletteFormatManager PaletteFormats { get; private set; }
 		public static IServiceManager Services { get; }
+#endif
 
 		public const string ApplicationVersion = "2.2";
 
 		static PintaCore ()
 		{
+			System = new SystemManager ();
+			Settings = new SettingsManager ();
+
+#if false // TODO-GTK4
 			// Resources and Settings are intialized first so later
 			// Managers can access them as needed.
 			Resources = new ResourceManager ();
-			Settings = new SettingsManager ();
 
 			Actions = new ActionManager ();
 			Workspace = new WorkspaceManager ();
@@ -65,7 +71,6 @@ namespace Pinta.Core
 			Tools = new ToolManager ();
 			ImageFormats = new ImageConverterManager ();
 			PaletteFormats = new PaletteFormatManager ();
-			System = new SystemManager ();
 			RecentFiles = new RecentFileManager ();
 			LivePreview = new LivePreviewManager ();
 			Palette = new PaletteManager ();
@@ -89,11 +94,14 @@ namespace Pinta.Core
 			Services.AddService<IPaletteService> (Palette);
 			Services.AddService (Chrome);
 			Services.AddService (Effects);
+#endif
 		}
 
 		public static void Initialize ()
 		{
+#if false // TODO-GTK4
 			Actions.RegisterHandlers ();
+#endif
 		}
 	}
 }

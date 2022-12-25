@@ -11,8 +11,8 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="GtkSharp" Version="3.24.24.38" />
     <PackageReference Include="Tmds.DBus" Version="0.13.0" />
+    <PackageReference Include="GirCore.Adw-1" Version="0.1.0" />
   </ItemGroup>
 
   <ItemGroup>
@@ -24,6 +24,16 @@
     <ProjectReference Include="..\Pinta.Tools\Pinta.Tools.csproj" />
     <!-- TODO-GTK3 remove once addins are supported -->
     <ProjectReference Include="..\Pinta.Effects\Pinta.Effects.csproj" />
+  </ItemGroup>
+
+  <!-- TODO-GTK4 - build all files -->
+  <ItemGroup>
+    <Compile Remove="**/*.cs" />
+    <Compile Include="Main.cs" />
+    <Compile Include="MainWindow.cs" />
+    <Compile Include="MacInterop/*.cs" />
+    <Compile Include="Options.cs" />
+    <Compile Include="WindowShell.cs" />
   </ItemGroup>
 
   <!-- Run msgfmt on our translation (po) files -->

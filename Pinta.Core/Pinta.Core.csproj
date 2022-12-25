@@ -3,12 +3,21 @@
     <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
   </PropertyGroup>
   <ItemGroup>
-    <PackageReference Include="GtkSharp" Version="3.24.24.38" />
     <PackageReference Include="NGettext" Version="0.6.7" />
     <PackageReference Include="SharpZipLib" Version="1.4.2" />
     <PackageReference Include="ParagonClipper" Version="6.4.2" />
+    <PackageReference Include="GirCore.Gtk-4.0" Version="0.1.0" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Pinta.Resources\Pinta.Resources.csproj" />
+  </ItemGroup>
+
+  <!-- TODO-GTK4 - build all files -->
+  <ItemGroup>
+    <Compile Remove="**/*.cs" />
+    <Compile Include="PintaCore.cs" />
+    <Compile Include="Classes/Translations.cs" />
+    <Compile Include="Managers/SettingsManager.cs" />
+    <Compile Include="Managers/SystemManager.cs" />
   </ItemGroup>
 </Project>

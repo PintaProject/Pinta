@@ -4,7 +4,6 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="GtkSharp" Version="3.24.24.38" />
     <PackageReference Include="NUnit" Version="3.13.3" />
     <PackageReference Include="Microsoft.NET.Test.Sdk" Version="17.5.0" />
     <PackageReference Include="NUnit3TestAdapter" Version="4.4.0" />
@@ -12,6 +11,11 @@
 
   <ItemGroup>
     <ProjectReference Include="..\..\Pinta.Core\Pinta.Core.csproj" />
+  </ItemGroup>
+
+  <!-- TODO-GTK4 - build all files -->
+  <ItemGroup>
+    <Compile Remove="**/*.cs" />
   </ItemGroup>
 
 </Project>

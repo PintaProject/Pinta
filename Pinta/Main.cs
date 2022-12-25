@@ -83,17 +83,23 @@ namespace Pinta
 				return;
 			}
 
+#if false // TODO-GTK4 - is there an equivalent in gir.core?
 			GLib.ExceptionManager.UnhandledException += new GLib.UnhandledExceptionHandler (ExceptionManager_UnhandledException);
-
-			Application.Init ();
+#endif
 
 			// For testing a dark variant of the theme.
 			//Gtk.Settings.Default.SetProperty("gtk-application-prefer-dark-theme", new GLib.Value(true));
 
+#if false // TODO-GTK4 - Gtk.IconTheme.GetForDisplay isn't wrapped yet.
 			// Add our icons to the search path.
 			Gtk.IconTheme.Default.AppendSearchPath (Pinta.Core.SystemManager.GetDataRootDirectory () + "/icons");
+#endif
 
-			var app = new MainWindow ();
+#if true // TODO-GTK4 - this shouldn't be necessary with next gir.core release
+			Adw.Module.Initialize ();
+#endif
+			var app = Adw.Application.New ("com.github.PintaProject.Pinta", Gio.ApplicationFlags.NonUnique);
+			var main_window = new MainWindow (app);
 
 			if (threads != -1)
 				Pinta.Core.PintaCore.System.RenderThreads = threads;
@@ -102,9 +108,12 @@ namespace Pinta
 				RegisterForAppleEvents ();
 			}
 
-			// TODO-GTK3 - try using the GTK command line parsing once GtkSharp supports it.
-			app.Activated += (_, _) => OpenFilesFromCommandLine (extra);
-			app.Run ("pinta", Array.Empty<string> ());
+			app.OnActivate += (_, _) => {
+				main_window.Activate ();
+				OpenFilesFromCommandLine (extra);
+			};
+
+			app.Run ();
 		}
 
 		private static void ShowHelp (OptionSet p)
@@ -124,6 +133,8 @@ namespace Pinta
 				}
 			}
 
+#if false // TODO-GTK4 - need to enable more code
+
 			if (extra.Count > 0) {
 				foreach (var file in extra) {
 					PintaCore.Workspace.OpenFile (Core.GtkExtensions.FileNewForCommandlineArg (file));
@@ -132,8 +143,10 @@ namespace Pinta
 				// Create a blank document
 				PintaCore.Workspace.NewDocument (new Gdk.Size (800, 600), new Cairo.Color (1, 1, 1));
 			}
+#endif
 		}
 
+#if false // TODO-GTK4 - is there an equivalent in gir.core?
 		private static void ExceptionManager_UnhandledException (GLib.UnhandledExceptionArgs args)
 		{
 			Exception ex = (Exception) args.ExceptionObject;
@@ -141,12 +154,14 @@ namespace Pinta
 							  string.Format ("{0}:\n{1}", "Unhandled exception", ex.Message),
 							  ex.ToString ());
 		}
+#endif
 
 		/// <summary>
 		/// Registers for OSX-specific events, like quitting from the dock.
 		/// </summary>
 		static void RegisterForAppleEvents ()
 		{
+#if false // TODO-GTK4
 			MacInterop.ApplicationEvents.Quit += (sender, e) => {
 				GLib.Timeout.Add (10, delegate {
 					PintaCore.Actions.App.Exit.Activate ();
@@ -176,6 +191,7 @@ namespace Pinta
 				}
 				e.Handled = true;
 			};
+#endif
 		}
 	}
 }

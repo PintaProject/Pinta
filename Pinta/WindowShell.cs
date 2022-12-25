@@ -30,37 +30,41 @@ using Gtk;
 
 namespace Pinta
 {
-	public class WindowShell : ApplicationWindow
+	public class WindowShell
 	{
-		private VBox shell_layout;
-		private VBox menu_layout;
-		private HBox? workspace_layout;
+		private ApplicationWindow app_window;
+		private Box shell_layout;
+		private Box menu_layout;
+#if false // TODO-GTK4
+		private Box? workspace_layout;
+		private Box? main_toolbar;
+#endif
 
-		private Toolbar? main_toolbar;
-
-		public WindowShell (Application app, string name, string title, int width, int height, bool maximize) : base (app)
+		public WindowShell (Application app, string name, string title, int width, int height, bool maximize)
 		{
-			Name = name;
-			Title = title;
-			DefaultWidth = width;
-			DefaultHeight = height;
+			app_window = Gtk.ApplicationWindow.New (app);
 
-			WindowPosition = WindowPosition.Center;
-			Resizable = true;
+			app_window.Name = name;
+			app_window.Title = title;
+			app_window.DefaultWidth = width;
+			app_window.DefaultHeight = height;
+			app_window.Resizable = true;
 
 			if (maximize)
-				Maximize ();
+				app_window.Maximize ();
 
-			shell_layout = new VBox () { Name = "shell_layout" };
-			menu_layout = new VBox () { Name = "menu_layout" };
+			shell_layout = Box.New (Orientation.Vertical, 0);
+			menu_layout = Box.New (Orientation.Vertical, 0);
 
-			shell_layout.PackStart (menu_layout, false, false, 0);
+			shell_layout.Prepend (menu_layout);
 
-			Add (shell_layout);
-
-			shell_layout.ShowAll ();
+			app_window.SetChild (shell_layout);
+			app_window.Present ();
 		}
 
+		public ApplicationWindow Window => app_window;
+
+#if false // TODO-GTK3
 		public Toolbar CreateToolBar (string name)
 		{
 			main_toolbar = new Toolbar ();
@@ -106,5 +110,6 @@ namespace Pinta
 		{
 			Gtk.Drag.DestSet (this, Gtk.DestDefaults.Motion | Gtk.DestDefaults.Highlight | Gtk.DestDefaults.Drop, entries, Gdk.DragAction.Copy);
 		}
+#endif
 	}
 }
