@@ -50,8 +50,8 @@ namespace Pinta.Resources
 
 			// We can't find this image, but we are going to return *some* image rather than null to prevent crashes
 			// Try to return GTK's default "missing image" image
-			if (name != Gtk.Stock.MissingImage)
-				return GetIcon (Gtk.Stock.MissingImage, size);
+			if (name != StandardIcons.ImageMissing)
+				return GetIcon (StandardIcons.ImageMissing, size);
 
 			// If even the "missing image" is missing, make one on the fly
 			return CreateMissingImage (size);
