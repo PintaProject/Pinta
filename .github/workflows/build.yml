@@ -31,7 +31,7 @@ jobs:
     - name: Install Apt Dependencies
       run: |
         sudo apt update
-        sudo apt install autotools-dev autoconf-archive gettext intltool libadwaita-1-0
+        sudo apt install autotools-dev autoconf-archive gettext intltool libadwaita-1-dev
     - name: Generate Tarball
       run: |
         ./autogen.sh
