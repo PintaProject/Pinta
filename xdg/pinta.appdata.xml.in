@@ -38,6 +38,67 @@
     <binary>pinta</binary>
   </provides>
   <releases>
+    <release version="2.1" date="2022-12-24">
+      <url>https://github.com/PintaProject/Pinta/releases/tag/2.1</url>
+      <description>
+        <p>New Features / Improvements</p>
+        <ul>
+          <li>Updated icons to symbolic SVG icons, which are more usable for dark themes and high-res screens (#204, #207, #1738106, #1909573)</li>
+          <li>Added "Transparency Mode" to the Gradient tool</li>
+          <li>The selection move handles and shape control point handles are now much easier to use when working on zoomed in or small images (#211, #223, #1173756, #1958924, #1958920)</li>
+          <li>The File -&gt; New Screenshot command now uses the XDG screenshot portal if available. This fixes issues with taking screenshots under Wayland (#218, #1955841)</li>
+          <li>Improved canvas rendering performance (#209, #210)</li>
+          <li>Added support for loading files from virtual filesystems such as Google Drive mounts (#215, #1958763)</li>
+          <li>Improved support for <code>.ora</code> files<ul>
+              <li>Hidden layers are now round-tripped correctly for <code>.ora</code> files (#1377566)</li>
+              <li>When saving a <code>.ora</code> file, a flattened image (<code>mergedimage.png</code>) is now included in the archive. This is required by the spec to accomodate viewer software (#1377566)</li>
+            </ul>
+          </li>
+          <li>Image or palette files that have an unknown extension but have valid contents can now be loaded (#1679570)<ul>
+              <li>The file dialog also now uses MIME types on Linux and macOS, allowing valid image files with unknown extensions to be included in the image file filter (#216)</li>
+            </ul>
+          </li>
+          <li>Updated the application icon (#220)</li>
+          <li>WebP support<ul>
+              <li>For Linux users, webp-pixbuf-loader is now a suggested dependency to enable WebP support in Pinta</li>
+              <li><code>webp-pixbuf-loader</code> is now included with the macOS package for WebP support</li>
+            </ul>
+          </li>
+          <li>Upgraded to .NET 7<ul>
+              <li>Building against .NET 6 (LTS) is still supported. When building from the tarball, .NET 6 will be used if .NET 7 is unavailable</li>
+            </ul>
+          </li>
+        </ul>
+        <p>Changes</p>
+        <ul>
+          <li>Pinta now uses the standard GTK about dialog</li>
+          <li>The Line / Curve tool no longer requires pressing Ctrl to start drawing a shape when the mouse is outside the canvas (#1999997)</li>
+        </ul>
+        <p>Bug Fixes</p>
+        <ul>
+          <li>Fixed a bug where the default linear gradient was reflected rather than clamped</li>
+          <li>The gradient tool now updates correctly when drawing transparent colors. Previously, old results were visible under the transparent color (#1937942)</li>
+          <li>The history panel is now more readable when a dark theme is used (#207)</li>
+          <li>Fixed an issue where the Cairo surface for live effect previews was not always disposed (#206)</li>
+          <li>Fixed errors that could occur if a selection existed but had zero area (e.g. after inverting a full selection) (#1754440)</li>
+          <li>Fixed an issue on Windows where the ruler's text did not render correctly (#212)</li>
+          <li>Fixed a regression from Pinta 2.0 where the rulers did not draw a marker for the current mouse position (#214)</li>
+          <li>Improved the zoom tool's rectangle zoom when working with smaller images</li>
+          <li>Fixed a potential crash when opening / adding an image after actions in the layer list panel (#1959598)</li>
+          <li>Fixed an issue where the "All Files" filter in the Open File dialog ignored files with no extension, and did not work in the macOS native file chooser (#1958670, #1679570)</li>
+          <li>Fixed a crash in the text tool when pressing Ctrl+X without a selection (#219, #1964398)</li>
+          <li>The application icon now appears correctly on KDE Wayland sessions (#1967687)</li>
+          <li>Fixed an issue where the selection could be invalid after undoing a rotation (#1975864)</li>
+          <li>Fixed a bug where the selected layer could be changed while updating the layer list widget (#1965101)</li>
+          <li>Fixed a bug in the shape tools where changing the shape type did not always take effect (#235, #238, #1993332, #1635902)</li>
+          <li>Fixed an issue on macOS where toolbar drop down button menus items could not be selected properly</li>
+          <li>Pinta now always saves files to the exact file name chosen by the native file dialog, without e.g. appending a default extension. This fixes issues where files saved through desktop portals could be lost (#1958670)</li>
+          <li>Fixed a bug where an empty dash pattern resulted in nothing being drawn (#1973706)</li>
+          <li>Fixed issues where certain dash patterns did not draw correctly (#1959032)</li>
+          <li>Fixed a bug where pasting into a new image could occasionally zoom the new image to 1% (#1959673)</li>
+        </ul>
+      </description>
+    </release>
       <release version="2.0.2" date="2022-01-13">
       <url>https://github.com/PintaProject/Pinta/releases/tag/2.0.2</url>
       <description>
