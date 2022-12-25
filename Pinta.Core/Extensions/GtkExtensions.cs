@@ -32,6 +32,7 @@ namespace Pinta.Core
 {
 	public static class GtkExtensions
 	{
+#if false // TODO-GTK4
 		public const int MouseLeftButton = 1;
 		public const int MouseMiddleButton = 2;
 		public const int MouseRightButton = 3;
@@ -58,6 +59,7 @@ namespace Pinta.Core
 			};
 			return item;
 		}
+#endif
 
 		public static void AddAction (this Gtk.Application app, Command action)
 		{
@@ -76,6 +78,7 @@ namespace Pinta.Core
 			app.SetAccelsForAction (action.FullName, accels);
 		}
 
+#if false // TODO-GTK4
 		public static void Remove (this GLib.Menu menu, Command action)
 		{
 			for (int i = 0; i < menu.NItems; ++i) {
@@ -301,19 +304,6 @@ namespace Pinta.Core
 				return "";
 			}
 		}
-
-		[DllImport("libgio-2.0-0.dll", CallingConvention = CallingConvention.Cdecl)]
-		private static extern IntPtr g_file_new_for_commandline_arg ([MarshalAs(UnmanagedType.LPUTF8Str)] string arg);
-
-		public static GLib.IFile FileNewForCommandlineArg (string arg)
-		{
-			// g_file_new_for_commandline_arg() expects a UTF-8 string. GtkSharp's binding doesn't
-			// explicitly do this conversion, so on Windows we need to manually do this to avoid having
-			// the default marshalling leave it as UTF-16.
-			if (PintaCore.System.OperatingSystem == OS.Windows)
-				return GLib.FileAdapter.GetObject (g_file_new_for_commandline_arg (arg), false) as GLib.IFile;
-			else
-				return GLib.FileFactory.NewFromCommandlineArg (arg);
-		}
+#endif
 	}
 }

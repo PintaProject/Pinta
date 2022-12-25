@@ -16,7 +16,12 @@
   <ItemGroup>
     <Compile Remove="**/*.cs" />
     <Compile Include="PintaCore.cs" />
+    <Compile Include="Actions/AppActions.cs" />
+    <Compile Include="Actions/HelpActions.cs" />
+    <Compile Include="Actions/Command.cs" />
     <Compile Include="Classes/Translations.cs" />
+    <Compile Include="Extensions/GtkExtensions.cs" />
+    <Compile Include="Managers/ActionManager.cs" />
     <Compile Include="Managers/SettingsManager.cs" />
     <Compile Include="Managers/SystemManager.cs" />
   </ItemGroup>

@@ -33,6 +33,7 @@ namespace Pinta.Core
 	public static class PintaCore
 	{
 		public static SystemManager System { get; private set; }
+		public static ActionManager Actions { get; private set; }
 		public static SettingsManager Settings { get; private set; }
 
 #if false // TODO-GTK4
@@ -42,7 +43,6 @@ namespace Pinta.Core
 		public static ChromeManager Chrome { get; private set; }
 		public static PaletteManager Palette { get; private set; }
 		public static ResourceManager Resources { get; private set; }
-		public static ActionManager Actions { get; private set; }
 		public static WorkspaceManager Workspace { get; private set; }
 		public static RecentFileManager RecentFiles { get; private set; }
 		public static LivePreviewManager LivePreview { get; private set; }
@@ -57,6 +57,7 @@ namespace Pinta.Core
 		static PintaCore ()
 		{
 			System = new SystemManager ();
+			Actions = new ActionManager ();
 			Settings = new SettingsManager ();
 
 #if false // TODO-GTK4
@@ -64,7 +65,6 @@ namespace Pinta.Core
 			// Managers can access them as needed.
 			Resources = new ResourceManager ();
 
-			Actions = new ActionManager ();
 			Workspace = new WorkspaceManager ();
 			Layers = new LayerManager ();
 			PaintBrushes = new PaintBrushManager ();

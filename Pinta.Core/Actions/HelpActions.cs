@@ -48,7 +48,7 @@ namespace Pinta.Core
 		}
 
 		#region Initialization
-		public void RegisterActions (Gtk.Application app, GLib.Menu menu)
+		public void RegisterActions (Gtk.Application app, Gio.Menu menu)
 		{
 			app.AddAccelAction (Contents, "F1");
 			menu.AppendItem (Contents.CreateMenuItem ());
@@ -64,7 +64,7 @@ namespace Pinta.Core
 
 			// This is part of the application menu on macOS.
 			if (PintaCore.System.OperatingSystem != OS.Mac) {
-				var about_section = new GLib.Menu ();
+				var about_section = Gio.Menu.New ();
 				menu.AppendSection (null, about_section);
 
 				var about = PintaCore.Actions.App.About;
@@ -103,7 +103,9 @@ namespace Pinta.Core
 
 		private void OpenUrl (string url)
 		{
+#if false // TODO-GTK4 - gtk_show_uri not wrapped by gir.core
 			Gtk.Global.ShowUriOnWindow (PintaCore.Chrome.MainWindow, url, Gtk.Global.CurrentEventTime);
+#endif
 		}
 		#endregion
 	}

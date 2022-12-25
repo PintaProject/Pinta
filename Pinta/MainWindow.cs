@@ -309,8 +309,8 @@ namespace Pinta
 
 			window_shell = new WindowShell (app, "Pinta.GenericWindow", "Pinta", width, height, maximize);
 
-#if false // TODO-GTK4
 			CreateMainMenu (window_shell);
+#if false // TODO-GTK4
 			CreateMainToolBar (window_shell);
 			CreateToolToolBar (window_shell);
 
@@ -327,20 +327,21 @@ namespace Pinta
 		}
 		#endregion
 
-#if false // TODO-GTK4
 		private void CreateMainMenu (WindowShell shell)
 		{
+			var menu_bar = Gio.Menu.New ();
+			app.Menubar = menu_bar;
+
 			if (PintaCore.System.OperatingSystem == OS.Mac) {
-				// Only use the application on macOS. On other platforms, these
+				// Only use the application menu on macOS. On other platforms, these
 				// menu items appear under File, Help, etc.
-				var app_menu = new GLib.Menu ();
-				PintaCore.Actions.App.RegisterActions (this, app_menu);
-				AppMenu = app_menu;
+				// The first menu seems to be treated as the application menu.
+				var app_menu = Gio.Menu.New ();
+				PintaCore.Actions.App.RegisterActions (app, app_menu);
+				menu_bar.AppendSubmenu ("_Application", app_menu);
 			}
 
-			var menu_bar = new GLib.Menu ();
-			Menubar = menu_bar;
-
+#if false // TODO-GTK4
 			var file_menu = new GLib.Menu ();
 			PintaCore.Actions.File.RegisterActions (this, file_menu);
 			menu_bar.AppendSubmenu (Translations.GetString ("_File"), file_menu);
@@ -378,11 +379,12 @@ namespace Pinta
 			var window_menu = new GLib.Menu ();
 			PintaCore.Actions.Window.RegisterActions (this, window_menu);
 			menu_bar.AppendSubmenu (Translations.GetString ("_Window"), window_menu);
-
-			var help_menu = new GLib.Menu ();
-			PintaCore.Actions.Help.RegisterActions (this, help_menu);
+#endif
+			var help_menu = Gio.Menu.New ();
+			PintaCore.Actions.Help.RegisterActions (app, help_menu);
 			menu_bar.AppendSubmenu (Translations.GetString ("_Help"), help_menu);
 
+#if false // TODO-GTK4
 			var pad_section = new GLib.Menu ();
 			view_menu.AppendSection (null, pad_section);
 
@@ -461,7 +463,7 @@ namespace Pinta
 			container.PackStart (dock, true, true, 0);
 		}
 
-		#region User Settings
+			#region User Settings
 		private const string LastDialogDirSettingKey = "last-dialog-directory";
 		private const string LastSelectedToolSettingKey = "last-selected-tool";
 
@@ -511,9 +513,9 @@ namespace Pinta
 
 			PintaCore.Settings.DoSaveSettingsBeforeQuit ();
 		}
-		#endregion
+			#endregion
 
-		#region Action Handlers
+			#region Action Handlers
 		private void MainWindow_DeleteEvent (object o, DeleteEventArgs args)
 		{
 			// leave window open so user can cancel quitting
@@ -637,7 +639,8 @@ namespace Pinta
 				.Where (i => ((CanvasWindow) i.Widget).Canvas == canvas)
 				.FirstOrDefault ();
 		}
-		#endregion
+			#endregion
 #endif
+		}
 	}
 }

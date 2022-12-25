@@ -33,9 +33,14 @@ namespace Pinta.Core
 {
 	public class ActionManager
 	{
-		public AccelGroup AccelGroup { get; private set; }
+#if false // TODO-GTK4
+		public AccelGroup AccelGroup { get; private set; } = new();
+#endif
 
-		public AppActions App { get; private set; }
+		public AppActions App { get; private set; } = new ();
+		public HelpActions Help { get; private set; } = new ();
+
+#if false // TODO-GTK4
 		public FileActions File { get; private set; }
 		public EditActions Edit { get; private set; }
 		public ViewActions View { get; private set; }
@@ -45,13 +50,11 @@ namespace Pinta.Core
 		public EffectsActions Effects { get; private set; }
 		public AddinActions Addins { get; private set; }
 		public WindowActions Window { get; private set; }
-		public HelpActions Help { get; private set; }
+#endif
 
 		public ActionManager ()
 		{
-			AccelGroup = new AccelGroup ();
-
-			App = new AppActions ();
+#if false // TODO-GTK4
 			File = new FileActions ();
 			Edit = new EditActions ();
 			View = new ViewActions ();
@@ -61,9 +64,10 @@ namespace Pinta.Core
 			Effects = new EffectsActions ();
 			Addins = new AddinActions ();
 			Window = new WindowActions ();
-			Help = new HelpActions ();
+#endif
 		}
 
+#if false // TODO-GTK4
 		public void CreateToolBar (Gtk.Toolbar toolbar)
 		{
 			toolbar.AppendItem (File.New.CreateToolBarItem ());
@@ -136,5 +140,6 @@ namespace Pinta.Core
 			View.RegisterHandlers ();
 			Help.RegisterHandlers ();
 		}
+#endif
 	}
 }
