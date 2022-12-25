@@ -41,6 +41,7 @@ namespace Pinta.Core
 		public static ActionManager Actions { get; private set; }
 		public static WorkspaceManager Workspace { get; private set; }
 		public static SystemManager System { get; private set; }
+		public static RecentFileManager RecentFiles { get; private set; }
 		public static LivePreviewManager LivePreview { get; private set; }
 		public static SettingsManager Settings { get; private set; }
 		public static EffectsManager Effects { get; private set; }
@@ -65,6 +66,7 @@ namespace Pinta.Core
 			ImageFormats = new ImageConverterManager ();
 			PaletteFormats = new PaletteFormatManager ();
 			System = new SystemManager ();
+			RecentFiles = new RecentFileManager ();
 			LivePreview = new LivePreviewManager ();
 			Palette = new PaletteManager ();
 			Chrome = new ChromeManager ();
@@ -82,6 +84,7 @@ namespace Pinta.Core
 			Services.AddService (ImageFormats);
 			Services.AddService (PaletteFormats);
 			Services.AddService (System);
+			Services.AddService (RecentFiles);
 			Services.AddService (LivePreview);
 			Services.AddService<IPaletteService> (Palette);
 			Services.AddService (Chrome);

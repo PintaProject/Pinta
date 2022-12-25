@@ -78,7 +78,7 @@ namespace Pinta.Actions
 				LocalOnly = false
 			};
 
-			fcd.SetCurrentFolderFile (PintaCore.System.GetDialogDirectory ());
+			fcd.SetCurrentFolderFile (PintaCore.RecentFiles.GetDialogDirectory ());
 
 			if (document.HasFile)
 				fcd.SetFile (document.File);
@@ -126,7 +126,7 @@ namespace Pinta.Actions
 
 				var directory = file.Parent;
 				if (directory is not null)
-					PintaCore.System.LastDialogDirectory = directory;
+					PintaCore.RecentFiles.LastDialogDirectory = directory;
 
 				// If saving the file failed or was cancelled, let the user select
 				// a different file type.
@@ -137,7 +137,7 @@ namespace Pinta.Actions
 				//hasn't been saved to its associated file in this session.
 				document.HasBeenSavedInSession = false;
 
-				RecentManager.Default.AddFull (file.Uri.ToString (), PintaCore.System.RecentData);
+				RecentManager.Default.AddFull (file.Uri.ToString (), PintaCore.RecentFiles.RecentData);
 				PintaCore.ImageFormats.SetDefaultFormat (format.Extensions.First ());
 
 				document.File = file;

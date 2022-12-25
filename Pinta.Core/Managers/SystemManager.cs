@@ -38,22 +38,12 @@ namespace Pinta.Core
 	{
 		private static OS operating_system;
 
-		private GLib.IFile last_dialog_directory;
-		private RecentData recent_data;
-
 		public int RenderThreads { get; set; }
 		public OS OperatingSystem { get { return operating_system; } }
 
 		public SystemManager ()
 		{
 			RenderThreads = Environment.ProcessorCount;
-
-			last_dialog_directory = DefaultDialogDirectory;
-
-			recent_data = new RecentData ();
-			recent_data.AppName = "Pinta";
-			recent_data.AppExec = GetExecutablePathName ();
-			recent_data.MimeType = "image/*";
 		}
 
 		static SystemManager ()
@@ -67,33 +57,6 @@ namespace Pinta.Core
 				operating_system = OS.X11;
 			else
 				operating_system = OS.Other;
-		}
-
-		#region Public Properties
-		public GLib.IFile LastDialogDirectory {
-			get { return last_dialog_directory; }
-			set {
-				// The file chooser dialog may return null for the current folder in certain cases,
-				// such as the Recently Used pane in the Gnome file chooser.
-				if (value != null)
-					last_dialog_directory = value;
-			}
-		}
-
-		public GLib.IFile DefaultDialogDirectory {
-			get { return GLib.FileFactory.NewForPath (System.Environment.GetFolderPath (Environment.SpecialFolder.MyPictures)); }
-		}
-
-		public RecentData RecentData { get { return recent_data; } }
-		#endregion
-
-		/// <summary>
-		/// Returns a directory for use in a dialog. The last dialog directory is
-		/// returned if it exists, otherwise the default directory is used.
-		/// </summary>
-		public GLib.IFile GetDialogDirectory ()
-		{
-			return last_dialog_directory.Exists ? last_dialog_directory : DefaultDialogDirectory;
 		}
 
 		public static string GetExecutablePathName ()
