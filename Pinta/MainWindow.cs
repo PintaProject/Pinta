@@ -464,8 +464,8 @@ namespace Pinta
 			PintaCore.Actions.View.ImageTabs.Value = PintaCore.Settings.GetSetting ("image-tabs-shown", true);
 			PintaCore.Actions.View.PixelGrid.Value = PintaCore.Settings.GetSetting ("pixel-grid-shown", false);
 
-			var dialog_uri = PintaCore.Settings.GetSetting (LastDialogDirSettingKey, PintaCore.System.DefaultDialogDirectory.Uri.ToString ());
-			PintaCore.System.LastDialogDirectory = GLib.FileFactory.NewForUri (dialog_uri);
+			var dialog_uri = PintaCore.Settings.GetSetting (LastDialogDirSettingKey, PintaCore.RecentFiles.DefaultDialogDirectory.Uri.ToString ());
+			PintaCore.RecentFiles.LastDialogDirectory = GLib.FileFactory.NewForUri (dialog_uri);
 
 			var ruler_metric = (MetricType) PintaCore.Settings.GetSetting ("ruler-metric", (int) MetricType.Pixels);
 			PintaCore.Actions.View.RulerMetric.Activate (new GLib.Variant ((int) ruler_metric));
@@ -489,7 +489,7 @@ namespace Pinta
 			PintaCore.Settings.PutSetting ("statusbar-shown", PintaCore.Actions.View.StatusBar.Value);
 			PintaCore.Settings.PutSetting ("toolbox-shown", PintaCore.Actions.View.ToolBox.Value);
 			PintaCore.Settings.PutSetting ("pixel-grid-shown", PintaCore.Actions.View.PixelGrid.Value);
-			PintaCore.Settings.PutSetting (LastDialogDirSettingKey, PintaCore.System.LastDialogDirectory.Uri.ToString ());
+			PintaCore.Settings.PutSetting (LastDialogDirSettingKey, PintaCore.RecentFiles.LastDialogDirectory.Uri.ToString ());
 
 			if (PintaCore.Tools.CurrentTool is BaseTool tool)
 				PintaCore.Settings.PutSetting (LastSelectedToolSettingKey, tool.GetType ().Name);

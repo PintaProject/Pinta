@@ -170,7 +170,7 @@ namespace Pinta.Core
 				LocalOnly = false
 			};
 
-			fcd.SetCurrentFolderFile (PintaCore.System.GetDialogDirectory ());
+			fcd.SetCurrentFolderFile (PintaCore.RecentFiles.GetDialogDirectory ());
 
 			// Add image files filter
 			var ff = new FileFilter ();
@@ -203,7 +203,7 @@ namespace Pinta.Core
 
 				GLib.IFile? directory = file.Parent;
 				if (directory is not null)
-					PintaCore.System.LastDialogDirectory = directory;
+					PintaCore.RecentFiles.LastDialogDirectory = directory;
 
 				// Open the image and add it to the layers
 				UserLayer layer = doc.Layers.AddNewLayer (file.GetDisplayName ());
