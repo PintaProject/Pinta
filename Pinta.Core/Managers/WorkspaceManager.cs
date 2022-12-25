@@ -215,14 +215,14 @@ namespace Pinta.Core
 
 			try {
 				// Open the image and add it to the layers
-				IImageImporter? importer = PintaCore.System.ImageFormats.GetImporterByFile (file.GetDisplayName ());
+				IImageImporter? importer = PintaCore.ImageFormats.GetImporterByFile (file.GetDisplayName ());
 				if (importer is not null) {
 					importer.Import (file, parent);
 				} else {
 					// Unknown extension, so try every loader.
 					var errors = new StringBuilder ();
 					bool loaded = false;
-					foreach (var format in PintaCore.System.ImageFormats.Formats.Where (f => !f.IsWriteOnly ())) {
+					foreach (var format in PintaCore.ImageFormats.Formats.Where (f => !f.IsWriteOnly ())) {
 						try {
 							format.Importer!.Import (file, parent);
 							loaded = true;
@@ -390,7 +390,7 @@ namespace Pinta.Core
 
 			string secondaryText = Translations.GetString ("Could not open file: {0}", filename);
 			secondaryText += string.Format ("\n\n{0}\n", Translations.GetString ("Pinta supports the following file formats:"));
-			var extensions = from format in PintaCore.System.ImageFormats.Formats
+			var extensions = from format in PintaCore.ImageFormats.Formats
 					 where format.Importer != null
 					 from extension in format.Extensions
 					 where char.IsLower (extension.FirstOrDefault ())

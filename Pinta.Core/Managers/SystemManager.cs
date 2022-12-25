@@ -41,15 +41,11 @@ namespace Pinta.Core
 		private GLib.IFile last_dialog_directory;
 		private RecentData recent_data;
 
-		public ImageConverterManager ImageFormats { get; private set; }
-		public PaletteFormats PaletteFormats { get; private set; }
 		public int RenderThreads { get; set; }
 		public OS OperatingSystem { get { return operating_system; } }
 
 		public SystemManager ()
 		{
-			ImageFormats = new ImageConverterManager ();
-			PaletteFormats = new PaletteFormats ();
 			RenderThreads = Environment.ProcessorCount;
 
 			last_dialog_directory = DefaultDialogDirectory;

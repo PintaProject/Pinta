@@ -155,12 +155,12 @@ namespace Pinta.Core
 			List<Color>? loaded_colors = null;
 			var errors = new StringBuilder ();
 
-			var loader = PintaCore.System.PaletteFormats.GetFormatByFilename (file.GetDisplayName ())?.Loader;
+			var loader = PintaCore.PaletteFormats.GetFormatByFilename (file.GetDisplayName ())?.Loader;
 			if (loader != null) {
 				loaded_colors = loader.Load (file);
 			} else {
 				// Not a recognized extension, so attempt all formats
-				foreach (var format in PintaCore.System.PaletteFormats.Formats.Where (f => !f.IsWriteOnly ())) {
+				foreach (var format in PintaCore.PaletteFormats.Formats.Where (f => !f.IsWriteOnly ())) {
 					try {
 						loaded_colors = format.Loader.Load (file);
 						if (loaded_colors != null) {
@@ -196,7 +196,7 @@ namespace Pinta.Core
 
 			string secondaryText = Translations.GetString ("Could not open file: {0}", filename);
 			secondaryText += string.Format ("\n\n{0}\n", Translations.GetString ("Pinta supports the following palette formats:"));
-			var extensions = from format in PintaCore.System.PaletteFormats.Formats
+			var extensions = from format in PintaCore.PaletteFormats.Formats
 					 where format.Loader != null
 					 from extension in format.Extensions
 					 where char.IsLower (extension.FirstOrDefault ())

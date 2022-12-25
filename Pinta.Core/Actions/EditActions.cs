@@ -367,7 +367,7 @@ namespace Pinta.Core
 				Name = Translations.GetString ("Palette files")
 			};
 
-			foreach (var format in PintaCore.System.PaletteFormats.Formats) {
+			foreach (var format in PintaCore.PaletteFormats.Formats) {
 				if (!format.IsWriteOnly ()) {
 					foreach (var ext in format.Extensions)
 						ff.AddPattern (string.Format ("*.{0}", ext));
@@ -406,7 +406,7 @@ namespace Pinta.Core
 				LocalOnly = false
 			};
 
-			foreach (var format in PintaCore.System.PaletteFormats.Formats) {
+			foreach (var format in PintaCore.PaletteFormats.Formats) {
 				if (!format.IsReadOnly ()) {
 					FileFilter fileFilter = format.Filter;
 					fcd.AddFilter (fileFilter);
@@ -427,12 +427,12 @@ namespace Pinta.Core
 				var basename = file.Parent.GetRelativePath (file);
 				string extension = System.IO.Path.GetExtension (basename);
 				if (string.IsNullOrEmpty (extension)) {
-					var currentFormat = PintaCore.System.PaletteFormats.Formats.First (f => f.Filter == fcd.Filter);
+					var currentFormat = PintaCore.PaletteFormats.Formats.First (f => f.Filter == fcd.Filter);
 					basename += "." + currentFormat.Extensions.First ();
 					file = file.Parent.GetChild (basename);
 				}
 
-				var format = PintaCore.System.PaletteFormats.GetFormatByFilename (basename);
+				var format = PintaCore.PaletteFormats.GetFormatByFilename (basename);
 				if (format is null)
 					throw new FormatException ();
 
