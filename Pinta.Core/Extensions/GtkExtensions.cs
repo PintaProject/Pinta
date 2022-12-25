@@ -25,7 +25,7 @@
 // THE SOFTWARE.
 
 using System;
-using System.Runtime.InteropServices;
+using System.Linq;
 using Gtk;
 
 namespace Pinta.Core
@@ -68,15 +68,21 @@ namespace Pinta.Core
 
 		public static void AddAccelAction (this Gtk.Application app, Command action, string accel)
 		{
-			app.AddAction (action);
-			app.SetAccelsForAction (action.FullName, new string[] { accel });
+			app.AddAccelAction (action, new[] { accel });
 		}
 
 		public static void AddAccelAction (this Gtk.Application app, Command action, string[] accels)
 		{
 			app.AddAction (action);
-			app.SetAccelsForAction (action.FullName, accels);
+			app.SetAccelsForAction (action.FullName, accels.Select (s => ConvertPrimaryKey (s)).ToArray ());
 		}
+
+		/// <summary>
+		/// Convert the "<Primary>" accelerator to the Ctrl or Command key, depending on the platform.
+		/// This was done automatically in GTK3, but does not happen in GTK4.
+		/// </summary>
+		private static string ConvertPrimaryKey (string accel) =>
+			accel.Replace ("<Primary>", PintaCore.System.OperatingSystem == OS.Mac ? "<Meta>" : "<Control>");
 
 #if false // TODO-GTK4
 		public static void Remove (this GLib.Menu menu, Command action)

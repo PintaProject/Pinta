@@ -43,7 +43,9 @@ namespace Pinta.Core
 		public Command Print { get; private set; }
 
 		public event EventHandler<ModifyCompressionEventArgs>? ModifyCompression;
+#if false // TODO-GTK4
 		public event EventHandler<DocumentCancelEventArgs>? SaveDocument;
+#endif
 
 		public FileActions ()
 		{
@@ -63,7 +65,7 @@ namespace Pinta.Core
 		}
 
 		#region Initialization
-		public void RegisterActions (Gtk.Application app, GLib.Menu menu)
+		public void RegisterActions (Gtk.Application app, Gio.Menu menu)
 		{
 			app.AddAccelAction (New, "<Primary>N");
 			menu.AppendItem (New.CreateMenuItem ());
@@ -74,7 +76,7 @@ namespace Pinta.Core
 			app.AddAccelAction (Open, "<Primary>O");
 			menu.AppendItem (Open.CreateMenuItem ());
 
-			var save_section = new GLib.Menu ();
+			var save_section = Gio.Menu.New ();
 			menu.AppendSection (null, save_section);
 
 			app.AddAccelAction (Save, "<Primary>S");
@@ -83,7 +85,7 @@ namespace Pinta.Core
 			app.AddAccelAction (SaveAs, "<Primary><Shift>S");
 			save_section.AppendItem (SaveAs.CreateMenuItem ());
 
-			var close_section = new GLib.Menu ();
+			var close_section = Gio.Menu.New ();
 			menu.AppendSection (null, close_section);
 
 			app.AddAccelAction (Close, "<Primary>W");
@@ -109,6 +111,7 @@ namespace Pinta.Core
 		#endregion
 
 		#region Event Invokers
+#if false // TODO-GTK4
 		internal bool RaiseSaveDocument (Document document, bool saveAs)
 		{
 			DocumentCancelEventArgs e = new DocumentCancelEventArgs (document, saveAs);
@@ -120,6 +123,7 @@ namespace Pinta.Core
 
 			return !e.Cancel;
 		}
+#endif
 
 		internal int RaiseModifyCompression (int defaultCompression, Gtk.Window parent)
 		{

@@ -38,10 +38,10 @@ namespace Pinta.Core
 #endif
 
 		public AppActions App { get; private set; } = new ();
+		public FileActions File { get; private set; } = new ();
 		public HelpActions Help { get; private set; } = new ();
 
 #if false // TODO-GTK4
-		public FileActions File { get; private set; }
 		public EditActions Edit { get; private set; }
 		public ViewActions View { get; private set; }
 		public ImageActions Image { get; private set; }
@@ -55,7 +55,6 @@ namespace Pinta.Core
 		public ActionManager ()
 		{
 #if false // TODO-GTK4
-			File = new FileActions ();
 			Edit = new EditActions ();
 			View = new ViewActions ();
 			Image = new ImageActions ();
