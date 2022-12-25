@@ -42,7 +42,7 @@ AM_GLIB_GNU_GETTEXT
 pintalocaledir='${prefix}/${DATADIRNAME}/locale'
 AC_SUBST(pintalocaledir)
 
-PKG_CHECK_MODULES([GTK_30], [gtk+-3.0])
+PKG_CHECK_MODULES([ADW_1], [libadwaita-1])
 
 AC_CONFIG_FILES([
 Makefile
