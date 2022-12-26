@@ -20,7 +20,10 @@
     <Compile Include="Actions/FileActions.cs" />
     <Compile Include="Actions/HelpActions.cs" />
     <Compile Include="Actions/Command.cs" />
+    <Compile Include="Classes/Point.cs" />
+    <Compile Include="Classes/Rectangle.cs" />
     <Compile Include="Classes/Translations.cs" />
+    <Compile Include="Enumerations/*.cs" />
     <Compile Include="EventArgs/ModifyCompressionEventArgs.cs" />
     <Compile Include="Extensions/CairoExtensions.cs" />
     <Compile Include="Extensions/GdkExtensions.cs" />

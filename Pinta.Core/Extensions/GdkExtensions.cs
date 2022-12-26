@@ -27,22 +27,6 @@
 using System;
 using Gdk;
 
-// TODO-GTK4 - should this be part of gir.core?
-namespace Gdk
-{
-	public struct Size
-	{
-		public Size (int width, int height)
-		{
-			Width = width;
-			Height = height;
-		}
-
-		public int Width;
-		public int Height;
-	}
-}
-
 namespace Pinta.Core
 {
 #if false // TODO-GTK4

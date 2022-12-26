@@ -64,15 +64,15 @@ namespace Cairo
 	}
 }
 
-#if false // TODO-GTK4
 namespace Pinta.Core
 {
 	public static class CairoExtensions
 	{
+#if false // TODO-GTK4 - many of these may be obsolete
 		// Most of these functions return an affected area
 		// This can be ignored if you don't need it
 
-#region context
+		#region context
 		public static Rectangle DrawRectangle (this Context g, Rectangle r, Color color, int lineWidth)
 		{
 			// Put it on a pixel line
@@ -686,7 +686,7 @@ namespace Pinta.Core
 		{
 			g.SetSourceRGBA (c.R, c.G, c.B, c.A);
 		}
-#endregion
+		#endregion
 
 		public static double Distance (this PointD s, PointD e)
 		{
@@ -1954,7 +1954,25 @@ namespace Pinta.Core
 			unsafe {
 				return new Span<ColorBgra> (surface.DataPtr.ToPointer (), surface.Width * surface.Height);
 			}
+                }
+#endif
+
+		public static void SetSourceColor(this Context context, Color color)
+		{
+			context.SetSourceRgba(color.R, color.G, color.B, color.A);
+		}
+
+		public static void AddColorStop (this Gradient gradient, double offset, Color color)
+		{
+			gradient.AddColorStopRgba(offset, color.R, color.G, color.B, color.A);
+		}
+
+		// TODO-GTK4 - this needs to have a proper constructor in gir.core
+		public static Matrix CreateIdentityMatrix()
+		{
+			var matrix = new Matrix (Cairo.Internal.MatrixManagedHandle.Create ());
+			matrix.InitIdentity ();
+			return matrix;
 		}
 	}
 }
-#endif
