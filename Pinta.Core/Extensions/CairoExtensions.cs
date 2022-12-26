@@ -40,6 +40,31 @@ using System.Runtime.InteropServices;
 using System.Threading.Tasks;
 using Cairo;
 
+// TODO-GTK4 - should this be part of gir.core?
+namespace Cairo
+{
+	public struct Color
+	{
+		public Color (double r, double g, double b) : this (r, g, b, 1.0)
+		{
+		}
+
+		public Color (double r, double g, double b, double a)
+		{
+			this.R = r;
+			this.G = g;
+			this.B = b;
+			this.A = a;
+		}
+
+		public double R;
+		public double G;
+		public double B;
+		public double A;
+	}
+}
+
+#if false // TODO-GTK4
 namespace Pinta.Core
 {
 	public static class CairoExtensions
@@ -47,7 +72,7 @@ namespace Pinta.Core
 		// Most of these functions return an affected area
 		// This can be ignored if you don't need it
 
-		#region context
+#region context
 		public static Rectangle DrawRectangle (this Context g, Rectangle r, Color color, int lineWidth)
 		{
 			// Put it on a pixel line
@@ -661,7 +686,7 @@ namespace Pinta.Core
 		{
 			g.SetSourceRGBA (c.R, c.G, c.B, c.A);
 		}
-		#endregion
+#endregion
 
 		public static double Distance (this PointD s, PointD e)
 		{
@@ -1932,3 +1957,4 @@ namespace Pinta.Core
 		}
 	}
 }
+#endif

@@ -236,29 +236,25 @@ namespace Pinta.Core
 				};
 			}
 		}
+#endif
 
 		/// <summary>
 		/// Returns the Cancel / Ok button pair in the correct order for the current platform.
 		/// This can be used with the Gtk.Dialog constructor.
 		/// </summary>
-		public static object[] DialogButtonsCancelOk ()
+		public static void AddCancelOkButtons (this Dialog dialog)
 		{
+			// TODO-GTK4 - can these use the translations from GTK?
 			if (PintaCore.System.OperatingSystem == OS.Windows) {
-				return new object[] {
-		    Gtk.Stock.Ok,
-		    Gtk.ResponseType.Ok,
-		    Gtk.Stock.Cancel,
-		    Gtk.ResponseType.Cancel
-				};
+				dialog.AddButton ("_OK", (int) ResponseType.Ok);
+				dialog.AddButton ("_Cancel", (int) ResponseType.Cancel);
 			} else {
-				return new object[] {
-		    Gtk.Stock.Cancel,
-		    Gtk.ResponseType.Cancel,
-		    Gtk.Stock.Ok,
-		    Gtk.ResponseType.Ok
-				};
+				dialog.AddButton ("_Cancel", (int) ResponseType.Cancel);
+				dialog.AddButton ("_OK", (int) ResponseType.Ok);
 			}
 		}
+
+#if false // TODO-GTK4
 		/// <summary>
 		/// Returns the platform-specific label for the Ctrl key.
 		/// For example, this is the Cmd key on macOS.
