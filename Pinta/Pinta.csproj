@@ -29,6 +29,9 @@
   <!-- TODO-GTK4 - build all files -->
   <ItemGroup>
     <Compile Remove="**/*.cs" />
+    <Compile Include="Actions/IActionHandler.cs" />
+    <Compile Include="Actions/Help/AboutDialogAction.cs" />
+    <Compile Include="DialogHandlers.cs" />
     <Compile Include="Main.cs" />
     <Compile Include="MainWindow.cs" />
     <Compile Include="MacInterop/*.cs" />

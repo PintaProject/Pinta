@@ -26,6 +26,7 @@
     <Compile Include="Extensions/GdkExtensions.cs" />
     <Compile Include="Extensions/GtkExtensions.cs" />
     <Compile Include="Managers/ActionManager.cs" />
+    <Compile Include="Managers/ChromeManager.cs" />
     <Compile Include="Managers/SettingsManager.cs" />
     <Compile Include="Managers/SystemManager.cs" />
   </ItemGroup>

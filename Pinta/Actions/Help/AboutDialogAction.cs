@@ -26,6 +26,7 @@
 
 using System;
 using System.Text;
+using System.Xml.Linq;
 using Gtk;
 using Pinta.Core;
 
@@ -47,21 +48,22 @@ namespace Pinta.Actions
 
 		private void Activated (object sender, EventArgs e)
 		{
-			using var dlg = new AboutDialog () {
-				TransientFor = PintaCore.Chrome.MainWindow,
-				Title = Translations.GetString ("About Pinta"),
-				IconName = Pinta.Resources.Icons.AboutPinta,
-				ProgramName = Translations.GetString ("Pinta"),
-				LogoIconName = Pinta.Resources.Icons.Pinta,
-				Version = PintaCore.ApplicationVersion,
-				Website = "https://www.pinta-project.com",
-				Comments = Translations.GetString ("Easily create and edit images"),
-				Copyright = BuildCopyrightText (),
-				License = BuildLicenseText (),
-				Authors = authors,
-				TranslatorCredits = Translations.GetString ("translator-credits"),
-			};
-			dlg.Run ();
+			// TODO-GTK4 use Adw.AboutWindow after upgrading to the next gir.core release (isn't wrapped in the current version).
+			var dialog = Gtk.AboutDialog.New ();
+			dialog.TransientFor = PintaCore.Chrome.MainWindow;
+			dialog.Title = Translations.GetString ("About Pinta");
+			dialog.IconName = Pinta.Resources.Icons.AboutPinta;
+			dialog.ProgramName = Translations.GetString ("Pinta");
+			dialog.LogoIconName = Pinta.Resources.Icons.Pinta;
+			dialog.Version = PintaCore.ApplicationVersion;
+			dialog.Website = "https://www.pinta-project.com";
+			dialog.Comments = Translations.GetString ("Easily create and edit images");
+			dialog.Copyright = BuildCopyrightText ();
+			dialog.License = BuildLicenseText ();
+			dialog.Authors = authors;
+			dialog.TranslatorCredits = Translations.GetString ("translator-credits");
+
+			dialog.Present ();
 		}
 
 		private string BuildCopyrightText ()

@@ -33,10 +33,6 @@ namespace Pinta.Core
 {
 	public class ActionManager
 	{
-#if false // TODO-GTK4
-		public AccelGroup AccelGroup { get; private set; } = new();
-#endif
-
 		public AppActions App { get; private set; } = new ();
 		public FileActions File { get; private set; } = new ();
 		public HelpActions Help { get; private set; } = new ();

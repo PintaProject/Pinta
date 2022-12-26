@@ -33,8 +33,10 @@ namespace Pinta.Core
 	{
 		// NRT - These are all initialized via the Initialize* functions
 		// but it would be nice to rewrite it to provably non-null.
+		public Application Application { get; private set; } = null!;
+		public Window MainWindow { get; private set; } = null!;
+#if false // TODO-GTK4
 		private Toolbar tool_toolbar = null!;
-		private Window main_window = null!;
 		private IProgressDialog progress_dialog = null!;
 		private bool main_window_busy;
 		private Gdk.Point last_canvas_cursor_point;
@@ -42,10 +44,8 @@ namespace Pinta.Core
 		private ErrorDialogHandler error_dialog_handler = null!;
 		private UnsupportedFormatDialogHandler unsupported_format_dialog_handler = null!;
 
-		public Application Application { get; private set; } = null!;
 		public Toolbar ToolToolBar { get { return tool_toolbar; } }
 		public Toolbar MainToolBar { get { return main_toolbar; } }
-		public Window MainWindow { get { return main_window; } }
 		public Statusbar StatusBar { get; private set; } = null!;
 		public Toolbar ToolBox { get; private set; } = null!;
 		public Notebook ImageTabsNotebook { get; private set; } = null!;
@@ -53,11 +53,13 @@ namespace Pinta.Core
 		public IProgressDialog ProgressDialog { get { return progress_dialog; } }
 		public GLib.Menu AdjustmentsMenu { get; private set; } = null!;
 		public GLib.Menu EffectsMenu { get; private set; } = null!;
+#endif
 
 		public ChromeManager ()
 		{
 		}
 
+#if false // TODO-GTK4
 		#region Public Properties
 		public Gdk.Point LastCanvasCursorPoint {
 			get { return last_canvas_cursor_point; }
@@ -81,6 +83,7 @@ namespace Pinta.Core
 			}
 		}
 		#endregion
+#endif
 
 		#region Public Methods
 		public void InitializeApplication (Gtk.Application application)
@@ -88,6 +91,12 @@ namespace Pinta.Core
 			Application = application;
 		}
 
+		public void InitializeWindowShell (Window shell)
+		{
+			MainWindow = shell;
+		}
+
+#if false // TODO-GTK4
 		public void InitializeToolToolBar (Toolbar toolToolBar)
 		{
 			tool_toolbar = toolToolBar;
@@ -111,11 +120,6 @@ namespace Pinta.Core
 		public void InitializeImageTabsNotebook (Notebook notebook)
 		{
 			ImageTabsNotebook = notebook;
-		}
-
-		public void InitializeWindowShell (Window shell)
-		{
-			main_window = shell;
 		}
 
 		public void InitializeMainMenu (GLib.Menu adj_menu, GLib.Menu effects_menu)
@@ -156,8 +160,9 @@ namespace Pinta.Core
 		{
 			OnStatusBarTextChanged (text);
 		}
+#endif
 		#endregion
-
+#if false // TODO-GTK4
 		#region Protected Methods
 		protected void OnLastCanvasCursorPointChanged ()
 		{
@@ -176,6 +181,7 @@ namespace Pinta.Core
 		public event EventHandler? LastCanvasCursorPointChanged;
 		public event EventHandler<TextChangedEventArgs>? StatusBarTextChanged;
 		#endregion
+#endif
 	}
 
 	public interface IProgressDialog

@@ -70,11 +70,10 @@ namespace Pinta
 			// Build our window
 			CreateWindow ();
 
-#if false // TODO-GTK4
 			// Initialize interface things
-			window_shell.AddAccelGroup (PintaCore.Actions.AccelGroup);
 			new ActionHandlers ();
 
+#if false // TODO-GTK4
 			PintaCore.Chrome.InitializeProgessDialog (new ProgressDialog ());
 			PintaCore.Chrome.InitializeErrorDialogHandler ((parent, message, details) => {
 				System.Console.Error.WriteLine ("Pinta: {0}", details);
@@ -320,10 +319,8 @@ namespace Pinta
 
 			app.AddWindow (window_shell.Window);
 
-#if false // TODO-GTK4
-			PintaCore.Chrome.InitializeApplication (this);
-			PintaCore.Chrome.InitializeWindowShell (window_shell);
-#endif
+			PintaCore.Chrome.InitializeApplication (app);
+			PintaCore.Chrome.InitializeWindowShell (window_shell.Window);
 		}
 		#endregion
 

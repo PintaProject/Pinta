@@ -33,10 +33,11 @@ namespace Pinta
 {
 	public class ActionHandlers
 	{
-		private List<IActionHandler> action_handlers = new List<IActionHandler> ();
+		private List<IActionHandler> action_handlers = new ();
 
 		public ActionHandlers ()
 		{
+#if false // TODO-GTK4
 			// File
 			action_handlers.Add (new NewDocumentAction ());
 			action_handlers.Add (new NewScreenshotAction ());
@@ -73,7 +74,7 @@ namespace Pinta
 			// Window
 			action_handlers.Add (new CloseAllDocumentsAction ());
 			action_handlers.Add (new SaveAllDocumentsAction ());
-
+#endif
 			// Help
 			action_handlers.Add (new AboutDialogAction ());
 
@@ -81,15 +82,18 @@ namespace Pinta
 			foreach (var action in action_handlers)
 				action.Initialize ();
 
+#if false // TODO-GTK4
 			// We need to toggle actions active/inactive
 			// when there isn't an open document
 			PintaCore.Workspace.DocumentCreated += Workspace_DocumentCreated;
 			PintaCore.Workspace.DocumentClosed += Workspace_DocumentClosed;
+#endif
 
 			// Initially, no documents are open.
 			ToggleActions (false);
 		}
 
+#if false // TODO-GTK4
 		private void Workspace_DocumentClosed (object? sender, DocumentEventArgs e)
 		{
 			PintaCore.Actions.Window.RemoveDocument (e.Document);
@@ -105,9 +109,11 @@ namespace Pinta
 
 			ToggleActions (true);
 		}
+#endif
 
 		private static void ToggleActions (bool enable)
 		{
+#if false // TODO-GTK4
 			PintaCore.Actions.File.Close.Sensitive = enable;
 			PintaCore.Actions.File.Save.Sensitive = enable;
 			PintaCore.Actions.File.SaveAs.Sensitive = enable;
@@ -157,6 +163,7 @@ namespace Pinta
 
 			PintaCore.Actions.Window.SaveAll.Sensitive = enable;
 			PintaCore.Actions.Window.CloseAll.Sensitive = enable;
+#endif
 		}
 	}
 }

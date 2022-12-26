@@ -35,12 +35,12 @@ namespace Pinta.Core
 		public static SystemManager System { get; private set; }
 		public static ActionManager Actions { get; private set; }
 		public static SettingsManager Settings { get; private set; }
+		public static ChromeManager Chrome { get; private set; }
 
 #if false // TODO-GTK4
 		public static LayerManager Layers { get; private set; }
 		public static PaintBrushManager PaintBrushes { get; private set; }
 		public static ToolManager Tools { get; private set; }
-		public static ChromeManager Chrome { get; private set; }
 		public static PaletteManager Palette { get; private set; }
 		public static ResourceManager Resources { get; private set; }
 		public static WorkspaceManager Workspace { get; private set; }
@@ -59,6 +59,7 @@ namespace Pinta.Core
 			System = new SystemManager ();
 			Actions = new ActionManager ();
 			Settings = new SettingsManager ();
+			Chrome = new ChromeManager ();
 
 #if false // TODO-GTK4
 			// Resources and Settings are intialized first so later
@@ -74,7 +75,6 @@ namespace Pinta.Core
 			RecentFiles = new RecentFileManager ();
 			LivePreview = new LivePreviewManager ();
 			Palette = new PaletteManager ();
-			Chrome = new ChromeManager ();
 			Effects = new EffectsManager ();
 
 			Services = new ServiceManager ();
