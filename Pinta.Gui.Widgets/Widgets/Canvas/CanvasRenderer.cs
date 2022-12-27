@@ -115,7 +115,7 @@ namespace Pinta.Gui.Widgets
 		private void RenderPixelGrid (Cairo.ImageSurface dst, Point offset)
 		{
 			// Draw horizontal lines
-			var dst_data = dst.GetData();
+			var dst_data = dst.GetData ();
 			var dstHeight = dst.Height;
 			var dstWidth = dst.Width;
 			var dstStride = dst.Stride;
@@ -128,7 +128,7 @@ namespace Pinta.Gui.Widgets
 				var dstRow = dstY - offset.Y;
 
 				if (dstRow >= 0 && dstRow < dstHeight) {
-					var dst_row = dst_data.Slice(dstRow * dstWidth, dstWidth);
+					var dst_row = dst_data.Slice (dstRow * dstWidth, dstWidth);
 
 					for (int x = offset.X & 1; x < dst_row.Length; x += 2)
 						dst_row[x] = ColorBgra.Black;

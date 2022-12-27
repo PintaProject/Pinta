@@ -75,7 +75,7 @@ namespace Pinta.Core
 			this.pixels = pixels;
 		}
 
-		public static unsafe SurfaceDiff? Create (ImageSurface original, ImageSurface updated_surf, bool force = false)
+		public static SurfaceDiff? Create (ImageSurface original, ImageSurface updated_surf, bool force = false)
 		{
 			if (original.Width != updated_surf.Width || original.Height != updated_surf.Height) {
 				// If the surface changed size, only throw an error if the user forced the use of a diff.
@@ -92,14 +92,11 @@ namespace Pinta.Core
 
 #if DEBUG_DIFF
 			Console.WriteLine ("Original surface size: {0}x{1}", orig_width, orig_height);
-			System.Diagnostics.Stopwatch timer = new System.Diagnostics.Stopwatch();
-			timer.Start();
+			System.Diagnostics.Stopwatch timer = new System.Diagnostics.Stopwatch ();
+			timer.Start ();
 #endif
 
 			// STEP 1 - Find the bounds of the changed pixels.
-			var orig_ptr = (int*) original.DataPtr;
-			var updated_ptr = (int*) updated_surf.DataPtr;
-
 			DiffBounds diff_bounds = new DiffBounds (orig_width, orig_height);
 			object diff_bounds_lock = new Object ();
 
@@ -109,14 +106,14 @@ namespace Pinta.Core
 			// pixels.
 			Parallel.For<DiffBounds> (0, orig_height, () => new DiffBounds (orig_width, orig_height),
 				     (row, loop, my_bounds) => {
-
 					     var offset = row * orig_width;
-					     var orig = orig_ptr + offset;
-					     var updated = updated_ptr + offset;
+					     var orig_row = original.GetReadOnlyData ().Slice (offset, orig_width);
+					     var updated_row = updated_surf.GetData ().Slice (offset, orig_width);
+
 					     bool change_in_row = false;
 
 					     for (int i = 0; i < orig_width; ++i) {
-						     if (*(orig++) != *(updated++)) {
+						     if (orig_row[i] != updated_row[i]) {
 							     change_in_row = true;
 							     my_bounds.left = System.Math.Min (my_bounds.left, i);
 							     my_bounds.right = System.Math.Max (my_bounds.right, i);
@@ -158,11 +155,11 @@ namespace Pinta.Core
 
 			for (int y = bounds_y; y <= bottom; ++y) {
 				var offset = y * orig_width;
-				var updated = updated_ptr + offset + bounds_x;
-				var orig = orig_ptr + offset + bounds_x;
+				var orig_row = original.GetReadOnlyData ().Slice (offset, orig_width);
+				var updated_row = updated_surf.GetData ().Slice (offset, orig_width);
 
 				for (int x = bounds_x; x <= right; ++x) {
-					bool changed = *(orig++) != *(updated++);
+					bool changed = orig_row[x] != updated_row[x];
 					bitmask[index++] = changed;
 					if (changed) {
 						num_changed++;
@@ -184,28 +181,23 @@ namespace Pinta.Core
 
 			// Store the old pixels.
 			var pixels = new ColorBgra[num_changed];
-			var new_ptr = (ColorBgra*) original.DataPtr;
+			var orig_data = original.GetData ();
 			int mask_index = 0;
 
-			fixed (ColorBgra* fixed_ptr = pixels) {
-				var pixel_ptr = fixed_ptr;
+			int pixels_idx = 0;
+			for (int y = bounds_y; y <= bottom; ++y) {
+				int orig_idx = bounds_x + y * orig_width;
 
-				for (int y = bounds_y; y <= bottom; ++y) {
-					var new_pixel_ptr = new_ptr + bounds_x + y * orig_width;
-
-					for (int x = bounds_x; x <= right; ++x) {
-						if (bitmask[mask_index++]) {
-							*pixel_ptr++ = *new_pixel_ptr;
-						}
-
-						new_pixel_ptr++;
+				for (int x = bounds_x; x <= right; ++x) {
+					if (bitmask[mask_index++]) {
+						pixels[pixels_idx++] = orig_data[y * orig_width + x];
 					}
 				}
 			}
 
 #if DEBUG_DIFF
-			timer.Stop();
-			System.Console.WriteLine("SurfaceDiff time: " + timer.ElapsedMilliseconds);
+			timer.Stop ();
+			System.Console.WriteLine ("SurfaceDiff time: " + timer.ElapsedMilliseconds);
 #endif
 
 			return new SurfaceDiff (bitmask, bounds, pixels);
@@ -230,35 +222,34 @@ namespace Pinta.Core
 		#endregion
 
 		#region Private Methods
-		private unsafe void ApplyAndSwap (ImageSurface dst, bool swap)
+		private void ApplyAndSwap (ImageSurface dst, bool swap)
 		{
 			dst.Flush ();
 
 			var dest_width = dst.Width;
-			var dst_ptr = (ColorBgra*) dst.DataPtr;
+			var dst_data = dst.GetData ();
 			var mask_index = 0;
+			int pixel_idx = 0;
 			ColorBgra swap_pixel;
 
-			fixed (ColorBgra* fixed_ptr = pixels) {
-				var pixel_ptr = fixed_ptr;
-				dst_ptr += bounds.X + bounds.Y * dest_width;
+			for (int y = bounds.Y; y <= bounds.GetBottom (); y++) {
+				int dst_idx = bounds.X + y * dest_width;
+				for (int x = bounds.X; x <= bounds.GetRight (); x++) {
+					if (bitmask[mask_index++]) {
+						if (swap) {
+							swap_pixel = dst_data[dst_idx];
+							dst_data[dst_idx] = pixels[pixel_idx];
+							pixels[pixel_idx] = swap_pixel;
+						} else {
+							dst_data[dst_idx] = pixels[pixel_idx];
+						}
 
-				for (int y = bounds.Y; y <= bounds.GetBottom (); y++) {
-					for (int x = bounds.X; x <= bounds.GetRight (); x++) {
-						if (bitmask[mask_index++])
-							if (swap) {
-								swap_pixel = *dst_ptr;
-								*dst_ptr = *pixel_ptr;
-								*pixel_ptr++ = swap_pixel;
-							} else {
-								*dst_ptr = *pixel_ptr++;
-							}
-
-						dst_ptr++;
+						++pixel_idx;
 					}
 
-					dst_ptr += dest_width - bounds.Width;
+					++dst_idx;
 				}
+
 			}
 
 			dst.MarkDirty ();
