@@ -112,10 +112,10 @@ namespace Pinta.Gui.Widgets
 		private int[] S2DLookupY => s2dLookupY ??= CreateS2DLookupY (source_size.Height, destination_size.Height, scale_factor);
 
 		#region Algorithms ported from PDN
-		private unsafe void RenderPixelGrid (Cairo.ImageSurface dst, Point offset)
+		private void RenderPixelGrid (Cairo.ImageSurface dst, Point offset)
 		{
 			// Draw horizontal lines
-			var dst_ptr = (ColorBgra*) dst.DataPtr;
+			var dst_data = dst.GetData();
 			var dstHeight = dst.Height;
 			var dstWidth = dst.Width;
 			var dstStride = dst.Stride;
@@ -128,15 +128,10 @@ namespace Pinta.Gui.Widgets
 				var dstRow = dstY - offset.Y;
 
 				if (dstRow >= 0 && dstRow < dstHeight) {
-					var dstRowPtr = dst.GetRowAddressUnchecked (dst_ptr, dstWidth, dstRow);
-					var dstRowEndPtr = dstRowPtr + dstWidth;
+					var dst_row = dst_data.Slice(dstRow * dstWidth, dstWidth);
 
-					dstRowPtr += offset.X & 1;
-
-					while (dstRowPtr < dstRowEndPtr) {
-						*dstRowPtr = ColorBgra.Black;
-						dstRowPtr += 2;
-					}
+					for (int x = offset.X & 1; x < dst_row.Length; x += 2)
+						dst_row[x] = ColorBgra.Black;
 				}
 			}
 
@@ -150,15 +145,8 @@ namespace Pinta.Gui.Widgets
 				var dstCol = dstX - offset.X;
 
 				if (dstCol >= 0 && dstCol < dstWidth) {
-					var dstColPtr = (byte*) dst.GetPointAddress (dstCol, 0);
-					var dstColEndPtr = dstColPtr + dstStride * dstHeight;
-
-					dstColPtr += (offset.Y & 1) * dstStride;
-
-					while (dstColPtr < dstColEndPtr) {
-						*((ColorBgra*) dstColPtr) = ColorBgra.Black;
-						dstColPtr += 2 * dstStride;
-					}
+					for (int idx = dstCol + (offset.Y & 1) * dstWidth; idx < dst_data.Length; idx += 2 * dstWidth)
+						dst_data[idx] = ColorBgra.Black;
 				}
 			}
 		}
