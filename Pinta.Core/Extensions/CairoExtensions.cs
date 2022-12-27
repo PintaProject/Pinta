@@ -885,26 +885,6 @@ namespace Pinta.Core
 			return newsurf;
 		}
 
-		public static unsafe bool ContainsTranslucent (this ImageSurface surf)
-		{
-			bool ret = false;
-
-			ColorBgra* ptr = (ColorBgra*) surf.DataPtr;
-			int width = surf.Width;
-
-			for (int x = 0; x < width; x++)
-				for (int y = 0; y < surf.Height; y++) {
-					int a = (int) surf.GetColorBgraUnchecked (ptr, width, x, y).A;
-
-					if (a > 0 && a < 255) {
-						Console.WriteLine (surf.GetColorBgraUnchecked (ptr, width, x, y).ToString ());
-						ret = true;
-					}
-				}
-
-			return ret;
-		}
-
 		public static Path Clone (this Path path)
 		{
 			var doc = PintaCore.Workspace.ActiveDocument;
