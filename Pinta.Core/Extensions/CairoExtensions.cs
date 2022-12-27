@@ -2068,5 +2068,19 @@ namespace Pinta.Core
 			CreateDashPattern (dash_pattern, brush_width, line_cap, out var dashes, out var offset);
 			context.SetDash (dashes, offset);
 		}
+
+		public static ReadOnlySpan<ColorBgra> GetReadOnlyData (this ImageSurface surface)
+		{
+			unsafe {
+				return new ReadOnlySpan<ColorBgra> (surface.DataPtr.ToPointer (), surface.Width * surface.Height);
+			}
+		}
+
+		public static Span<ColorBgra> GetData (this ImageSurface surface)
+		{
+			unsafe {
+				return new Span<ColorBgra> (surface.DataPtr.ToPointer (), surface.Width * surface.Height);
+			}
+		}
 	}
 }

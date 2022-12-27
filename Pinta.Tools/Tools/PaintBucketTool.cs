@@ -59,7 +59,7 @@ namespace Pinta.Tools
 			base.OnMouseDown (document, e);
 		}
 
-		protected unsafe override void OnFillRegionComputed (Document document, BitMask stencil)
+		protected override void OnFillRegionComputed (Document document, BitMask stencil)
 		{
 			var surf = document.Layers.ToolLayer.Surface;
 
@@ -73,18 +73,17 @@ namespace Pinta.Tools
 			hist.TakeSnapshotOfLayer (document.Layers.CurrentUserLayer);
 
 			var color = fill_color.ToColorBgra ().ToPremultipliedAlpha ();
-			var dstPtr = (ColorBgra*) surf.DataPtr;
 			var width = surf.Width;
-
 			surf.Flush ();
 
 			// Color in any pixel that the stencil says we need to fill
 			Parallel.For (0, stencil.Height, y => {
 				var stencil_width = stencil.Width;
+				var dst_data = surf.GetData ();
 
 				for (var x = 0; x < stencil_width; ++x) {
 					if (stencil.Get (x, y))
-						surf.SetColorBgraUnchecked (dstPtr, width, color, x, y);
+						dst_data[y * width + x] = color;
 				}
 			});
 
