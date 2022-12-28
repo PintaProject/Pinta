@@ -63,19 +63,19 @@ namespace Pinta.Effects
 			if (!table_calculated)
 				Calculate ();
 
-			var src_data = src.GetReadOnlyData();
-			var dst_data = dest.GetData();
+			var src_data = src.GetReadOnlyData ();
+			var dst_data = dest.GetData ();
 			int width = src.Width;
 
 			foreach (Gdk.Rectangle rect in rois) {
 				for (int y = rect.Top; y <= rect.GetBottom (); y++) {
-					var src_row = src_data.Slice(y * width + rect.Left, rect.Width);
-					var dst_row = dst_data.Slice(y * width + rect.Left, rect.Width);
+					var src_row = src_data.Slice (y * width + rect.Left, rect.Width);
+					var dst_row = dst_data.Slice (y * width + rect.Left, rect.Width);
 
 					if (divide == 0) {
 						for (int i = 0; i < src_row.Length; ++i) {
 							ref readonly ColorBgra col = ref src_row[i];
-							uint c = rgbTable![col.GetIntensityByte()]; // NRT - Set in Calculate
+							uint c = rgbTable![col.GetIntensityByte ()]; // NRT - Set in Calculate
 							dst_row[i].Bgra = (col.Bgra & 0xff000000) | c | (c << 8) | (c << 16);
 						}
 					} else {

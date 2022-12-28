@@ -81,7 +81,7 @@ namespace Pinta.Tools
 			base.OnMouseDown (document, e);
 		}
 
-		protected unsafe override void OnMouseMove (Document document, ToolMouseEventArgs e)
+		protected override void OnMouseMove (Document document, ToolMouseEventArgs e)
 		{
 			ColorBgra old_color;
 			ColorBgra new_color;
@@ -120,9 +120,9 @@ namespace Pinta.Tools
 
 			tmp_layer.Flush ();
 
-			var tmp_data_ptr = (ColorBgra*) tmp_layer.DataPtr;
+			var tmp_data = tmp_layer.GetData ();
 			var tmp_width = tmp_layer.Width;
-			var surf_data_ptr = (ColorBgra*) surf.DataPtr;
+			var surf_data = surf.GetReadOnlyData ();
 			var surf_width = surf.Width;
 
 			// The stencil lets us know if we've already checked this
@@ -133,8 +133,9 @@ namespace Pinta.Tools
 					if (stencil[i, j])
 						continue;
 
-					if (ColorBgra.ColorsWithinTolerance (new_color, surf.GetColorBgraUnchecked (surf_data_ptr, surf_width, i, j), myTolerance))
-						*tmp_layer.GetPointAddressUnchecked (tmp_data_ptr, tmp_width, i, j) = AdjustColorDifference (new_color, old_color, surf.GetColorBgraUnchecked (surf_data_ptr, surf_width, i, j));
+					ref readonly ColorBgra surf_color = ref surf_data[j * surf_width + i];
+					if (ColorBgra.ColorsWithinTolerance (new_color, surf_color, myTolerance))
+						tmp_data[j * tmp_width + i] = AdjustColorDifference (new_color, old_color, surf_color);
 
 					stencil[i, j] = true;
 				}

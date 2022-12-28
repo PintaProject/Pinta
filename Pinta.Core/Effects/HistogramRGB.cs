@@ -47,12 +47,12 @@ namespace Pinta.Core
 			long[] histogramG = histogram[1];
 			long[] histogramR = histogram[2];
 
-			var data = surface.GetReadOnlyData();
+			var data = surface.GetReadOnlyData ();
 			int rect_right = rect.GetRight ();
 			int width = surface.Width;
 
 			for (int y = rect.Y; y <= rect.GetBottom (); ++y) {
-				var row = data.Slice(y * width);
+				var row = data.Slice (y * width);
 				for (int x = rect.X; x <= rect_right; ++x) {
 					ref readonly ColorBgra c = ref row[x];
 					++histogramB[c.B];
