@@ -58,40 +58,37 @@ namespace Pinta.Effects
 			return EffectHelper.LaunchSimpleEffectDialog (this);
 		}
 
-		public unsafe override void Render (ImageSurface src, ImageSurface dest, Gdk.Rectangle[] rois)
+		public override void Render (ImageSurface src, ImageSurface dest, Gdk.Rectangle[] rois)
 		{
 			if (!table_calculated)
 				Calculate ();
 
+			var src_data = src.GetReadOnlyData();
+			var dst_data = dest.GetData();
+			int width = src.Width;
+
 			foreach (Gdk.Rectangle rect in rois) {
 				for (int y = rect.Top; y <= rect.GetBottom (); y++) {
-					ColorBgra* srcRowPtr = src.GetPointAddressUnchecked (rect.Left, y);
-					ColorBgra* dstRowPtr = dest.GetPointAddressUnchecked (rect.Left, y);
-					ColorBgra* dstRowEndPtr = dstRowPtr + rect.Width;
+					var src_row = src_data.Slice(y * width + rect.Left, rect.Width);
+					var dst_row = dst_data.Slice(y * width + rect.Left, rect.Width);
 
 					if (divide == 0) {
-						while (dstRowPtr < dstRowEndPtr) {
-							ColorBgra col = *srcRowPtr;
-							int i = col.GetIntensityByte ();
-							uint c = rgbTable![i]; // NRT - Set in Calculate
-							dstRowPtr->Bgra = (col.Bgra & 0xff000000) | c | (c << 8) | (c << 16);
-
-							++dstRowPtr;
-							++srcRowPtr;
+						for (int i = 0; i < src_row.Length; ++i) {
+							ref readonly ColorBgra col = ref src_row[i];
+							uint c = rgbTable![col.GetIntensityByte()]; // NRT - Set in Calculate
+							dst_row[i].Bgra = (col.Bgra & 0xff000000) | c | (c << 8) | (c << 16);
 						}
 					} else {
-						while (dstRowPtr < dstRowEndPtr) {
-							ColorBgra col = *srcRowPtr;
-							int i = col.GetIntensityByte ();
-							int shiftIndex = i * 256;
+						for (int i = 0; i < src_row.Length; ++i) {
+							ColorBgra col = src_row[i];
+							int intensity = col.GetIntensityByte ();
+							int shiftIndex = intensity * 256;
 
 							col.R = rgbTable![shiftIndex + col.R];
 							col.G = rgbTable[shiftIndex + col.G];
 							col.B = rgbTable[shiftIndex + col.B];
 
-							*dstRowPtr = col;
-							++dstRowPtr;
-							++srcRowPtr;
+							dst_row[i] = col;
 						}
 					}
 				}
