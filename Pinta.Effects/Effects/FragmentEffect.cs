@@ -68,12 +68,12 @@ namespace Pinta.Effects
 			Gdk.Point[] pointOffsets = RecalcPointOffsets (Data.Fragments, Data.Rotation, Data.Distance);
 
 			int poLength = pointOffsets.Length;
-			Gdk.Point* pointOffsetsPtr = stackalloc Gdk.Point[poLength];
+			Span<Gdk.Point> pointOffsetsPtr = stackalloc Gdk.Point[poLength];
 
 			for (int i = 0; i < poLength; ++i)
 				pointOffsetsPtr[i] = pointOffsets[i];
 
-			ColorBgra* samples = stackalloc ColorBgra[poLength];
+			Span<ColorBgra> samples = stackalloc ColorBgra[poLength];
 
 			// Cache these for a massive performance boost
 			int src_width = src.Width;
@@ -97,7 +97,7 @@ namespace Pinta.Effects
 							}
 						}
 
-						*dstPtr = ColorBgra.Blend (samples, sampleCount);
+						*dstPtr = ColorBgra.Blend (samples.Slice (0, sampleCount));
 						++dstPtr;
 					}
 				}

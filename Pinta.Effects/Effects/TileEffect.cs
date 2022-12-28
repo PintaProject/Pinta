@@ -62,7 +62,7 @@ namespace Pinta.Effects
 
 			int aaLevel = 4;
 			int aaSamples = aaLevel * aaLevel + 1;
-			PointD* aaPoints = stackalloc PointD[aaSamples];
+			Span<PointD> aaPoints = stackalloc PointD[aaSamples];
 
 			for (int i = 0; i < aaSamples; ++i) {
 				double x = (i * aaLevel) / (double) aaSamples;

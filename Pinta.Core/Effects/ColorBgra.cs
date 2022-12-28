@@ -525,12 +525,9 @@ namespace Pinta.Core
 		/// <summary>
 		/// Smoothly blends the given colors together, assuming equal weighting for each one.
 		/// </summary>
-		public unsafe static ColorBgra Blend (ColorBgra* colors, int count)
+		public static ColorBgra Blend (ReadOnlySpan<ColorBgra> colors)
 		{
-			if (count < 0) {
-				throw new ArgumentOutOfRangeException ("count must be 0 or greater");
-			}
-
+			int count = colors.Length;
 			if (count == 0) {
 				return ColorBgra.Transparent;
 			}
@@ -569,11 +566,9 @@ namespace Pinta.Core
 		/// Smoothly blends the given colors together, assuming equal weighting for each one.
 		/// It is assumed that pre-multiplied alpha is used.
 		/// </summary>
-		public static unsafe ColorBgra BlendPremultiplied (ColorBgra* colors, int count)
+		public static ColorBgra BlendPremultiplied (ReadOnlySpan<ColorBgra> colors)
 		{
-			if (count < 0)
-				throw new ArgumentOutOfRangeException ("count", "must be 0 or greater");
-
+			int count = colors.Length;
 			if (count == 0)
 				return ColorBgra.Transparent;
 

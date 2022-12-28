@@ -145,14 +145,11 @@ namespace Pinta.Tools
 				settings.PutSetting (SAMPLE_TYPE_SETTING, sample_type.SelectedIndex);
 		}
 
-		private unsafe Color GetColorFromPoint (Document document, Point point)
+		private Color GetColorFromPoint (Document document, Point point)
 		{
 			var pixels = GetPixelsFromPoint (document, point);
-
-			fixed (ColorBgra* ptr = pixels) {
-				var color = ColorBgra.BlendPremultiplied (ptr, pixels.Length);
-				return color.ToStraightAlpha ().ToCairoColor ();
-			}
+			var color = ColorBgra.BlendPremultiplied (pixels);
+			return color.ToStraightAlpha ().ToCairoColor ();
 		}
 
 		private ColorBgra[] GetPixelsFromPoint (Document document, Point point)

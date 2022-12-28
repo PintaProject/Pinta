@@ -70,9 +70,9 @@ namespace Pinta.Effects
 			ColorBgra colTransparent = ColorBgra.Transparent;
 
 			int aaSampleCount = Data.Quality * Data.Quality;
-			Cairo.PointD* aaPoints = stackalloc Cairo.PointD[aaSampleCount];
+			Span<PointD> aaPoints = stackalloc Cairo.PointD[aaSampleCount];
 			Utility.GetRgssOffsets (aaPoints, aaSampleCount, Data.Quality);
-			ColorBgra* samples = stackalloc ColorBgra[aaSampleCount];
+			Span<ColorBgra> samples = stackalloc ColorBgra[aaSampleCount];
 
 			TransformData td;
 
@@ -141,7 +141,7 @@ namespace Pinta.Effects
 							++sampleCount;
 						}
 
-						*dstPtr = ColorBgra.Blend (samples, sampleCount);
+						*dstPtr = ColorBgra.Blend (samples.Slice (0, sampleCount));
 						++dstPtr;
 					}
 				}

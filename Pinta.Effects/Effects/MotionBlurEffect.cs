@@ -71,7 +71,7 @@ namespace Pinta.Effects
 				}
 			}
 
-			ColorBgra* samples = stackalloc ColorBgra[points.Length];
+			Span<ColorBgra> samples = stackalloc ColorBgra[points.Length];
 
 			ColorBgra* src_dataptr = (ColorBgra*) src.DataPtr;
 			int src_width = src.Width;
@@ -94,7 +94,7 @@ namespace Pinta.Effects
 							}
 						}
 
-						*dstPtr = ColorBgra.Blend (samples, sampleCount);
+						*dstPtr = ColorBgra.Blend (samples.Slice (0, sampleCount));
 						++dstPtr;
 					}
 				}

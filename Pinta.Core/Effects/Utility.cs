@@ -285,7 +285,7 @@ namespace Pinta.Core
 			return coords;
 		}
 
-		public static unsafe void GetRgssOffsets (Cairo.PointD* samplesArray, int sampleCount, int quality)
+		public static void GetRgssOffsets (Span<Cairo.PointD> samplesArray, int sampleCount, int quality)
 		{
 			if (sampleCount < 1) {
 				throw new ArgumentOutOfRangeException ("sampleCount", "sampleCount must be [0, int.MaxValue]");

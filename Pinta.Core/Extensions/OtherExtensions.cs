@@ -27,7 +27,7 @@ namespace Pinta.Core
 			return false;
 		}
 
-		public unsafe static Point[][] CreatePolygonSet (this BitMask stencil, Rectangle bounds, int translateX, int translateY)
+		public static Point[][] CreatePolygonSet (this BitMask stencil, Rectangle bounds, int translateX, int translateY)
 		{
 			List<Point[]> polygons = new List<Point[]> ();
 

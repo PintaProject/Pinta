@@ -183,7 +183,7 @@ namespace Pinta.Core
 			return new Gdk.Size ((int) (w * cos + h * sin), (int) (w * sin + h * cos));
 		}
 
-		public unsafe void HueSaturation (int hueDelta, int satDelta, int lightness)
+		public void HueSaturation (int hueDelta, int satDelta, int lightness)
 		{
 			ImageSurface dest = Surface.Clone ();
 

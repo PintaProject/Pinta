@@ -57,7 +57,7 @@ namespace Pinta.Effects
 
 			int aaLevel = Data.Antialias;
 			int aaSamples = aaLevel * aaLevel + 1;
-			PointD* aaPoints = stackalloc PointD[aaSamples];
+			Span<PointD> aaPoints = stackalloc PointD[aaSamples];
 
 			for (int i = 0; i < aaSamples; ++i) {
 				PointD pt = new PointD (
