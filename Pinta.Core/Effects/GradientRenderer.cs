@@ -109,7 +109,7 @@ namespace Pinta.Core
 			endAlpha = (byte) (255 - endColor.A);
 		}
 
-		unsafe public void Render (ImageSurface surface, Gdk.Rectangle[] rois)
+		public void Render (ImageSurface surface, Gdk.Rectangle[] rois)
 		{
 			byte startAlpha;
 			byte endAlpha;
@@ -123,7 +123,7 @@ namespace Pinta.Core
 
 			surface.Flush ();
 
-			ColorBgra* src_data_ptr = (ColorBgra*) surface.DataPtr;
+			Span<ColorBgra> src_data = surface.GetData ();
 			int src_width = surface.Width;
 
 			for (int ri = 0; ri < rois.Length; ++ri) {
@@ -132,33 +132,33 @@ namespace Pinta.Core
 				if (this.startPoint.X == this.endPoint.X && this.startPoint.Y == this.endPoint.Y) {
 					// Start and End point are the same ... fill with solid color.
 					for (int y = rect.Top; y <= rect.GetBottom (); ++y) {
-						ColorBgra* pixelPtr = surface.GetPointAddress (rect.Left, y);
+						var row = src_data.Slice (y * src_width, src_width);
 
 						for (int x = rect.Left; x <= rect.GetRight (); ++x) {
+							ref ColorBgra pixel = ref row[x];
 							ColorBgra result;
 
 							if (this.alphaOnly && this.alphaBlending) {
-								byte resultAlpha = (byte) Utility.FastDivideShortByByte ((ushort) (pixelPtr->A * endAlpha), 255);
-								result = *pixelPtr;
+								byte resultAlpha = (byte) Utility.FastDivideShortByByte ((ushort) (pixel.A * endAlpha), 255);
+								result = pixel;
 								result.A = resultAlpha;
 							} else if (this.alphaOnly && !this.alphaBlending) {
-								result = *pixelPtr;
+								result = pixel;
 								result.A = endAlpha;
 							} else if (!this.alphaOnly && this.alphaBlending) {
-								result = this.normalBlendOp.Apply (*pixelPtr, this.endColor);
+								result = this.normalBlendOp.Apply (pixel, this.endColor);
 								//if (!this.alphaOnly && !this.alphaBlending)
 							} else {
 								result = this.endColor;
 							}
 
-							*pixelPtr = result;
-							++pixelPtr;
+							pixel = result;
 						}
 					}
 				} else {
 					var mainrect = rect;
 					Parallel.ForEach (Enumerable.Range (rect.Top, rect.Height),
-						(y) => ProcessGradientLine (startAlpha, endAlpha, y, mainrect, surface, src_data_ptr, src_width));
+						(y) => ProcessGradientLine (startAlpha, endAlpha, y, mainrect, surface.GetData (), src_width));
 				}
 			}
 
@@ -166,9 +166,9 @@ namespace Pinta.Core
 			AfterRender ();
 		}
 
-		private unsafe bool ProcessGradientLine (byte startAlpha, byte endAlpha, int y, Rectangle rect, ImageSurface surface, ColorBgra* src_data_ptr, int src_width)
+		private bool ProcessGradientLine (byte startAlpha, byte endAlpha, int y, Rectangle rect, Span<ColorBgra> surface_data, int src_width)
 		{
-			var pixelPtr = surface.GetPointAddressUnchecked (src_data_ptr, src_width, rect.Left, y);
+			var row = surface_data.Slice (y * src_width, src_width);
 			var right = rect.GetRight ();
 
 			// Note that Cairo uses premultiplied alpha.
@@ -176,41 +176,37 @@ namespace Pinta.Core
 				for (var x = rect.Left; x <= right; ++x) {
 					var lerpByte = ComputeByteLerp (x, y);
 					var lerpAlpha = lerpAlphas[lerpByte];
+					ref ColorBgra pixel = ref row[x];
 
-					pixelPtr->B = Utility.FastScaleByteByByte (pixelPtr->B, lerpAlpha);
-					pixelPtr->G = Utility.FastScaleByteByByte (pixelPtr->G, lerpAlpha);
-					pixelPtr->R = Utility.FastScaleByteByByte (pixelPtr->R, lerpAlpha);
-					pixelPtr->A = Utility.FastScaleByteByByte (pixelPtr->A, lerpAlpha);
-
-					++pixelPtr;
+					pixel.B = Utility.FastScaleByteByByte (pixel.B, lerpAlpha);
+					pixel.G = Utility.FastScaleByteByByte (pixel.G, lerpAlpha);
+					pixel.R = Utility.FastScaleByteByByte (pixel.R, lerpAlpha);
+					pixel.A = Utility.FastScaleByteByByte (pixel.A, lerpAlpha);
 				}
 			} else if (alphaOnly && !alphaBlending) {
 				for (var x = rect.Left; x <= right; ++x) {
 					var lerpByte = ComputeByteLerp (x, y);
 					var lerpAlpha = lerpAlphas[lerpByte];
+					ref ColorBgra pixel = ref row[x];
 
-					var color = pixelPtr->ToStraightAlpha ();
+					var color = pixel.ToStraightAlpha ();
 					color.A = lerpAlpha;
-					*pixelPtr = color.ToPremultipliedAlpha ();
-
-					++pixelPtr;
+					pixel = color.ToPremultipliedAlpha ();
 				}
 			} else if (!alphaOnly && (alphaBlending && (startAlpha != 255 || endAlpha != 255))) {
 				// If we're doing all color channels, and we're doing alpha blending, and if alpha blending is necessary
 				for (var x = rect.Left; x <= right; ++x) {
 					var lerpByte = ComputeByteLerp (x, y);
 					var lerpColor = lerpColors[lerpByte];
-					var result = normalBlendOp.Apply (*pixelPtr, lerpColor);
-					*pixelPtr = result;
-					++pixelPtr;
+					ref ColorBgra pixel = ref row[x];
+					pixel = normalBlendOp.Apply (pixel, lerpColor);
 				}
 				//if (!this.alphaOnly && !this.alphaBlending) // or sC.A == 255 && eC.A == 255
 			} else {
 				for (var x = rect.Left; x <= right; ++x) {
 					var lerpByte = ComputeByteLerp (x, y);
 					var lerpColor = lerpColors[lerpByte];
-					*pixelPtr = lerpColor;
-					++pixelPtr;
+					row[x] = lerpColor;
 				}
 			}
 			return true;
