@@ -71,7 +71,7 @@ namespace Pinta.Effects
 		}
 
 		#region Algorithm Code Ported From PDN
-		public unsafe override void Render (ImageSurface src, ImageSurface dest, Gdk.Rectangle[] rois)
+		public override void Render (ImageSurface src, ImageSurface dest, Gdk.Rectangle[] rois)
 		{
 			// Glow backgound 
 			glowEffect.Data.Radius = 6;
@@ -79,6 +79,10 @@ namespace Pinta.Effects
 			glowEffect.Data.Contrast = -(Data.Coloring - 50) * 2;
 
 			this.glowEffect.Render (src, dest, rois);
+
+			var src_data = src.GetReadOnlyData();
+			int width = src.Width;
+			var dst_data = dest.GetData();
 
 			// Create black outlines by finding the edges of objects 
 			foreach (Gdk.Rectangle roi in rois) {
@@ -94,8 +98,7 @@ namespace Pinta.Effects
 						bottom = dest.Height;
 					}
 
-					ColorBgra* srcPtr = src.GetPointAddress (roi.X, y);
-					ColorBgra* dstPtr = dest.GetPointAddress (roi.X, y);
+					var dst_row = dst_data.Slice(y * width, width);
 
 					for (int x = roi.Left; x <= roi.GetRight (); ++x) {
 						int left = x - radius;
@@ -113,22 +116,19 @@ namespace Pinta.Effects
 						int g = 0;
 						int b = 0;
 
-						int src_width = src.Width;
-						ColorBgra* src_dataptr = (ColorBgra*) src.DataPtr;
-
 						for (int v = top; v < bottom; v++) {
-							ColorBgra* pRow = src.GetRowAddressUnchecked (src_dataptr, src_width, v);
+							var src_row = src_data.Slice(v * width, width);
 							int j = v - y + radius;
 
 							for (int u = left; u < right; u++) {
 								int i1 = u - x + radius;
 								int w = conv[j][i1];
 
-								ColorBgra* pRef = pRow + u;
+								ref readonly ColorBgra src_pixel = ref src_row[u];
 
-								r += pRef->R * w;
-								g += pRef->G * w;
-								b += pRef->B * w;
+								r += src_pixel.R * w;
+								g += src_pixel.G * w;
+								b += src_pixel.B * w;
 							}
 						}
 
@@ -147,12 +147,9 @@ namespace Pinta.Effects
 							topLayer = ColorBgra.FromBgra (0, 0, 0, topLayer.A);
 						}
 
-						// Change Blend Mode to Darken 
-						ColorBgra myPixel = this.darkenOp.Apply (topLayer, *dstPtr);
-						*dstPtr = myPixel;
-
-						++srcPtr;
-						++dstPtr;
+						// Change Blend Mode to Darken
+						ref ColorBgra dst_pixel = ref dst_row[x];
+						dst_pixel = this.darkenOp.Apply (topLayer, dst_pixel);
 					}
 				}
 			}

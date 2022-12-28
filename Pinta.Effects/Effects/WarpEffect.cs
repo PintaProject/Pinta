@@ -56,7 +56,7 @@ namespace Pinta.Effects
 		protected double DefaultRadius2 { get { return this.defaultRadius2; } }
 
 		#region Algorithm Code Ported From PDN
-		public unsafe override void Render (ImageSurface src, ImageSurface dst, Gdk.Rectangle[] rois)
+		public override void Render (ImageSurface src, ImageSurface dst, Gdk.Rectangle[] rois)
 		{
 			var selection = PintaCore.LivePreview.RenderBounds;
 			this.defaultRadius = Math.Min (selection.Width, selection.Height) * 0.5;
@@ -74,12 +74,17 @@ namespace Pinta.Effects
 			Utility.GetRgssOffsets (aaPoints, aaSampleCount, Data.Quality);
 			Span<ColorBgra> samples = stackalloc ColorBgra[aaSampleCount];
 
+			var dst_data = dst.GetData();
+			int dst_width = dst.Width;
+			var src_data = src.GetReadOnlyData();
+			int src_width = src.Width;
+
 			TransformData td;
 
 			foreach (Gdk.Rectangle rect in rois) {
 
 				for (int y = rect.Top; y <= rect.GetBottom (); y++) {
-					ColorBgra* dstPtr = dst.GetPointAddressUnchecked (rect.Left, y);
+					var dst_row = dst_data.Slice(y * dst_width, dst_width);
 
 					double relativeY = y - y_center_offset;
 
@@ -129,7 +134,7 @@ namespace Pinta.Effects
 										break;
 
 									case WarpEdgeBehavior.Original:
-										sample = src.GetColorBgraUnchecked (x, y);
+										sample = src_data[y * src_width + x];
 										break;
 									default:
 
@@ -141,8 +146,7 @@ namespace Pinta.Effects
 							++sampleCount;
 						}
 
-						*dstPtr = ColorBgra.Blend (samples.Slice (0, sampleCount));
-						++dstPtr;
+						dst_row[x] = ColorBgra.Blend (samples.Slice (0, sampleCount));
 					}
 				}
 			}
