@@ -63,12 +63,16 @@ namespace Pinta.Effects
 			contrastEffect.Data.Contrast = Data.Contrast;
 			contrastEffect.Render (dest, dest, rois);
 
+			var dst_data = dest.GetData ();
+			var src_data = src.GetReadOnlyData ();
+			int src_width = src.Width;
+			int dst_width = dest.Width;
+
 			foreach (Gdk.Rectangle roi in rois) {
 				for (int y = roi.Top; y <= roi.GetBottom (); ++y) {
-					ColorBgra* dstPtr = dest.GetPointAddressUnchecked (roi.Left, y);
-					ColorBgra* srcPtr = src.GetPointAddressUnchecked (roi.Left, y);
-
-					screenBlendOp.Apply (dstPtr, srcPtr, dstPtr, roi.Width);
+					var dst_row = dst_data.Slice (y * dst_width + roi.Left, roi.Width);
+					var src_row = dst_data.Slice (y * src_width + roi.Left, roi.Width);
+					screenBlendOp.Apply (dst_row, src_row, dst_row);
 				}
 			}
 		}

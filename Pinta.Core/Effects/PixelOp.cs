@@ -12,7 +12,7 @@ using Cairo;
 namespace Pinta.Core
 {
 	[Serializable]
-	public unsafe abstract class PixelOp //: IPixelOp
+	public abstract class PixelOp //: IPixelOp
 	{
 		public PixelOp ()
 		{
@@ -89,25 +89,27 @@ namespace Pinta.Core
 			// Cache the width and height properties
 			int width = roiSize.Width;
 			int height = roiSize.Height;
+			var src_data = src.GetReadOnlyData ();
+			int src_width = src.Width;
+			var dst_data = dst.GetData ();
+			int dst_width = dst.Width;
 
 			// Do the work.
-			unsafe {
-				for (int row = 0; row < height; ++row) {
-					ColorBgra* dstPtr = dst.GetPointAddress (dstOffset.X, dstOffset.Y + row);
-					ColorBgra* srcPtr = src.GetPointAddress (srcOffset.X, srcOffset.Y + row);
-					Apply (dstPtr, srcPtr, width);
-				}
+			for (int row = 0; row < height; ++row) {
+				Apply (dst_data.Slice ((dstOffset.Y + row) * dst_width + dstOffset.X, width),
+				       src_data.Slice ((srcOffset.Y + row) * src_width + srcOffset.X, width));
 			}
 		}
 
 		public virtual void Apply (ImageSurface dst, Gdk.Point dstOffset, ImageSurface src, Gdk.Point srcOffset, int scanLength)
 		{
-			Apply (dst.GetPointAddress (dstOffset), src.GetPointAddress (srcOffset), scanLength);
+			Apply (dst.GetData ().Slice (dstOffset.Y * dst.Width + dstOffset.X, scanLength),
+			       src.GetData ().Slice (srcOffset.Y * src.Width + srcOffset.X, scanLength));
 		}
 
-		public virtual void Apply (ColorBgra* dst, ColorBgra* src, int length)
+		public virtual void Apply (Span<ColorBgra> dst, ReadOnlySpan<ColorBgra> src)
 		{
-			throw new System.NotImplementedException ("Derived class must implement Apply(ColorBgra*,ColorBgra*,int)");
+			throw new System.NotImplementedException ("Derived class must implement Apply(Span<ColorBgra> dst, ReadOnlySpan<ColorBgra> src)");
 		}
 	}
 }

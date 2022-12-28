@@ -7,7 +7,6 @@
 
 using System;
 
-
 namespace Pinta.Core
 {
 	/// <summary>
@@ -27,21 +26,18 @@ namespace Pinta.Core
 		public class Identity
 		    : UnaryPixelOp
 		{
-			public override ColorBgra Apply (ColorBgra color)
+			public override ColorBgra Apply (in ColorBgra color)
 			{
 				return color;
 			}
 
-			public unsafe override void Apply (ColorBgra* dst, ColorBgra* src, int length)
+			public override void Apply (Span<ColorBgra> dst, ReadOnlySpan<ColorBgra> src)
 			{
-				for (int i = 0; i < length; i++) {
-					*dst = *src;
-					dst++;
-					src++;
-				}
+				for (int i = 0; i < src.Length; i++)
+					dst[i] = src[i];
 			}
 
-			public unsafe override void Apply (ColorBgra* ptr, int length)
+			public override void Apply (Span<ColorBgra> dst)
 			{
 				return;
 			}
@@ -56,27 +52,21 @@ namespace Pinta.Core
 		{
 			private ColorBgra setColor;
 
-			public override ColorBgra Apply (ColorBgra color)
+			public override ColorBgra Apply (in ColorBgra color)
 			{
 				return setColor;
 			}
 
-			public unsafe override void Apply (ColorBgra* dst, ColorBgra* src, int length)
+			public override void Apply (Span<ColorBgra> dst, ReadOnlySpan<ColorBgra> src)
 			{
-				while (length > 0) {
-					*dst = setColor;
-					++dst;
-					--length;
-				}
+				for (int i = 0; i < src.Length; i++)
+					dst[i] = setColor;
 			}
 
-			public unsafe override void Apply (ColorBgra* ptr, int length)
+			public override void Apply (Span<ColorBgra> dst)
 			{
-				while (length > 0) {
-					*ptr = setColor;
-					++ptr;
-					--length;
-				}
+				for (int i = 0; i < dst.Length; i++)
+					dst[i] = setColor;
 			}
 
 			public Constant (ColorBgra setColor)
@@ -94,7 +84,7 @@ namespace Pinta.Core
 		{
 			private ColorBgra blendColor;
 
-			public override ColorBgra Apply (ColorBgra color)
+			public override ColorBgra Apply (in ColorBgra color)
 			{
 				int a = blendColor.A;
 				int invA = 255 - a;
@@ -124,32 +114,26 @@ namespace Pinta.Core
 			private int channel;
 			private byte setValue;
 
-			public override ColorBgra Apply (ColorBgra color)
+			public override ColorBgra Apply (in ColorBgra color)
 			{
-				color[channel] = setValue;
+				ColorBgra result = color;
+				result[channel] = setValue;
 				return color;
 			}
 
-			public override unsafe void Apply (ColorBgra* dst, ColorBgra* src, int length)
+			public override void Apply (Span<ColorBgra> dst, ReadOnlySpan<ColorBgra> src)
 			{
-				while (length > 0) {
-					*dst = *src;
-					(*dst)[channel] = setValue;
-					++dst;
-					++src;
-					--length;
+				for (int i = 0; i < src.Length; ++i) {
+					dst[i] = src[i];
+					dst[i][channel] = setValue;
 				}
 			}
 
-			public override unsafe void Apply (ColorBgra* ptr, int length)
+			public override void Apply (Span<ColorBgra> dst)
 			{
-				while (length > 0) {
-					(*ptr)[channel] = setValue;
-					++ptr;
-					--length;
-				}
+				for (int i = 0; i < dst.Length; ++i)
+					dst[i][channel] = setValue;
 			}
-
 
 			public SetChannel (int channel, byte setValue)
 			{
@@ -171,28 +155,21 @@ namespace Pinta.Core
 		{
 			private UInt32 addValue;
 
-			public override ColorBgra Apply (ColorBgra color)
+			public override ColorBgra Apply (in ColorBgra color)
 			{
 				return ColorBgra.FromUInt32 ((color.Bgra & 0x00ffffff) + addValue);
 			}
 
-			public override unsafe void Apply (ColorBgra* dst, ColorBgra* src, int length)
+			public override void Apply (Span<ColorBgra> dst, ReadOnlySpan<ColorBgra> src)
 			{
-				while (length > 0) {
-					dst->Bgra = (src->Bgra & 0x00ffffff) + addValue;
-					++dst;
-					++src;
-					--length;
-				}
+				for (int i = 0; i < src.Length; ++i)
+					dst[i].Bgra = (src[i].Bgra & 0x00ffffff) + addValue;
 			}
 
-			public override unsafe void Apply (ColorBgra* ptr, int length)
+			public override void Apply (Span<ColorBgra> dst)
 			{
-				while (length > 0) {
-					ptr->Bgra = (ptr->Bgra & 0x00ffffff) + addValue;
-					++ptr;
-					--length;
-				}
+				for (int i = 0; i < dst.Length; ++i)
+					dst[i].Bgra = (dst[i].Bgra & 0x00ffffff) + addValue;
 			}
 
 			public SetAlphaChannel (byte alphaValue)
@@ -208,28 +185,21 @@ namespace Pinta.Core
 		public class SetAlphaChannelTo255
 		    : UnaryPixelOp
 		{
-			public override ColorBgra Apply (ColorBgra color)
+			public override ColorBgra Apply (in ColorBgra color)
 			{
 				return ColorBgra.FromUInt32 (color.Bgra | 0xff000000);
 			}
 
-			public override unsafe void Apply (ColorBgra* dst, ColorBgra* src, int length)
+			public override void Apply (Span<ColorBgra> dst, ReadOnlySpan<ColorBgra> src)
 			{
-				while (length > 0) {
-					dst->Bgra = src->Bgra | 0xff000000;
-					++dst;
-					++src;
-					--length;
-				}
+				for (int i = 0; i < src.Length; ++i)
+					dst[i].Bgra = src[i].Bgra | 0xff000000;
 			}
 
-			public override unsafe void Apply (ColorBgra* ptr, int length)
+			public override void Apply (Span<ColorBgra> dst)
 			{
-				while (length > 0) {
-					ptr->Bgra |= 0xff000000;
-					++ptr;
-					--length;
-				}
+				for (int i = 0; i < dst.Length; ++i)
+					dst[i].Bgra |= 0xff000000;
 			}
 		}
 
@@ -240,7 +210,7 @@ namespace Pinta.Core
 		public class Invert
 		    : UnaryPixelOp
 		{
-			public override ColorBgra Apply (ColorBgra color)
+			public override ColorBgra Apply (in ColorBgra color)
 			{
 				//Note: Cairo images use premultiplied alpha values
 				//The formula for changing B would be: (255 - B * 255 / A) * A / 255
@@ -265,7 +235,7 @@ namespace Pinta.Core
 				setSaturation = (double) sat / 100;
 			}
 
-			public override ColorBgra Apply (ColorBgra color)
+			public override ColorBgra Apply (in ColorBgra color)
 			{
 				// The higher the saturation, the more red it is
 				int saturation = GetSaturation (color);
@@ -284,7 +254,7 @@ namespace Pinta.Core
 			}
 
 			//Saturation formula from RgbColor.cs, public HsvColor ToHsv()
-			private int GetSaturation (ColorBgra color)
+			private int GetSaturation (in ColorBgra color)
 			{
 				double min;
 				double max;
@@ -320,7 +290,7 @@ namespace Pinta.Core
 		public class InvertWithAlpha
 		    : UnaryPixelOp
 		{
-			public override ColorBgra Apply (ColorBgra color)
+			public override ColorBgra Apply (in ColorBgra color)
 			{
 				return ColorBgra.FromBgra ((byte) (255 - color.B), (byte) (255 - color.G), (byte) (255 - color.R), (byte) (255 - color.A));
 			}
@@ -334,7 +304,7 @@ namespace Pinta.Core
 		public class AverageChannels
 		    : UnaryPixelOp
 		{
-			public override ColorBgra Apply (ColorBgra color)
+			public override ColorBgra Apply (in ColorBgra color)
 			{
 				byte average = (byte) (((int) color.R + (int) color.G + (int) color.B) / 3);
 				return ColorBgra.FromBgra (average, average, average, color.A);
@@ -345,39 +315,30 @@ namespace Pinta.Core
 		public class Desaturate
 		    : UnaryPixelOp
 		{
-			public override ColorBgra Apply (ColorBgra color)
+			public override ColorBgra Apply (in ColorBgra color)
 			{
 				byte i = color.GetIntensityByte ();
 				return ColorBgra.FromBgra (i, i, i, color.A);
 			}
 
-			public unsafe override void Apply (ColorBgra* ptr, int length)
+			public override void Apply (Span<ColorBgra> dst, ReadOnlySpan<ColorBgra> src)
 			{
-				while (length > 0) {
-					byte i = ptr->GetIntensityByte ();
-
-					ptr->R = i;
-					ptr->G = i;
-					ptr->B = i;
-
-					++ptr;
-					--length;
+				for (int i = 0; i < src.Length; ++i) {
+					ref ColorBgra result = ref dst[i];
+					byte val = src[i].GetIntensityByte ();
+					dst[i] = ColorBgra.FromBgra(val, val, val, src[i].A);
+					result.R = result.G = result.B = val;
+					result.A = src[i].A;
 				}
 			}
 
-			public unsafe override void Apply (ColorBgra* dst, ColorBgra* src, int length)
+			public override void Apply (Span<ColorBgra> dst)
 			{
-				while (length > 0) {
-					byte i = src->GetIntensityByte ();
+				for (int i = 0; i < dst.Length; ++i) {
+					ref ColorBgra result = ref dst[i];
+					byte val = result.GetIntensityByte ();
+					result.R = result.G = result.B = val;
 
-					dst->B = i;
-					dst->G = i;
-					dst->R = i;
-					dst->A = src->A;
-
-					++dst;
-					++src;
-					--length;
 				}
 			}
 		}
@@ -395,7 +356,7 @@ namespace Pinta.Core
 				}
 			}
 
-			public override ColorBgra Apply (ColorBgra color)
+			public override ColorBgra Apply (in ColorBgra color)
 			{
 				byte lumi = color.GetIntensityByte ();
 				int diff = Curve[lumi] - lumi;
@@ -425,31 +386,30 @@ namespace Pinta.Core
 				}
 			}
 
-			public override unsafe void Apply (ColorBgra* dst, ColorBgra* src, int length)
+			public override void Apply (Span<ColorBgra> dst, ReadOnlySpan<ColorBgra> src)
 			{
-				while (--length >= 0) {
-					dst->B = CurveB[src->B];
-					dst->G = CurveG[src->G];
-					dst->R = CurveR[src->R];
-					dst->A = src->A;
-
-					++dst;
-					++src;
+				for (int i = 0; i < src.Length; ++i) {
+					ref ColorBgra d = ref dst[i];
+					ref readonly ColorBgra s = ref src[i];
+					d.B = CurveB[s.B];
+					d.G = CurveG[s.G];
+					d.R = CurveR[s.R];
+					d.A = s.A;
 				}
 			}
 
-			public override unsafe void Apply (ColorBgra* ptr, int length)
+			public override void Apply (Span<ColorBgra> dst)
 			{
-				while (--length >= 0) {
-					ptr->B = CurveB[ptr->B];
-					ptr->G = CurveG[ptr->G];
-					ptr->R = CurveR[ptr->R];
+				for (int i = 0; i < dst.Length; ++i) {
+					ref ColorBgra d = ref dst[i];
+					d.B = CurveB[d.B];
+					d.G = CurveG[d.G];
+					d.R = CurveR[d.R];
 
-					++ptr;
 				}
 			}
 
-			public override ColorBgra Apply (ColorBgra color)
+			public override ColorBgra Apply (in ColorBgra color)
 			{
 				return ColorBgra.FromBgra (CurveB[color.B], CurveG[color.G], CurveR[color.R], color.A);
 			}
@@ -770,9 +730,10 @@ namespace Pinta.Core
 				}
 			}
 
-			public override ColorBgra Apply (ColorBgra color)
+			public override ColorBgra Apply (in ColorBgra src_color)
 			{
 				//adjust saturation
+				ColorBgra color = src_color;
 				byte intensity = color.GetIntensityByte ();
 				color.R = Utility.ClampToByte ((intensity * 1024 + (color.R - intensity) * satFactor) >> 10);
 				color.G = Utility.ClampToByte ((intensity * 1024 + (color.G - intensity) * satFactor) >> 10);
@@ -845,34 +806,31 @@ namespace Pinta.Core
 				return levels;
 			}
 
-			public override ColorBgra Apply (ColorBgra color)
+			public override ColorBgra Apply (in ColorBgra color)
 			{
 				return ColorBgra.FromBgra (blueLevels[color.B], greenLevels[color.G], redLevels[color.R], color.A);
 			}
 
-			public unsafe override void Apply (ColorBgra* ptr, int length)
+			public override void Apply (Span<ColorBgra> dst, ReadOnlySpan<ColorBgra> src)
 			{
-				while (length > 0) {
-					ptr->B = this.blueLevels[ptr->B];
-					ptr->G = this.greenLevels[ptr->G];
-					ptr->R = this.redLevels[ptr->R];
-
-					++ptr;
-					--length;
+				for (int i = 0; i < src.Length; ++i) {
+					ref ColorBgra d = ref dst[i];
+					ref readonly ColorBgra s = ref src[i];
+					d.B = blueLevels[s.B];
+					d.G = greenLevels[s.G];
+					d.R = redLevels[s.R];
+					d.A = s.A;
 				}
 			}
 
-			public unsafe override void Apply (ColorBgra* dst, ColorBgra* src, int length)
+			public override void Apply (Span<ColorBgra> dst)
 			{
-				while (length > 0) {
-					dst->B = this.blueLevels[src->B];
-					dst->G = this.greenLevels[src->G];
-					dst->R = this.redLevels[src->R];
-					dst->A = src->A;
+				for (int i = 0; i < dst.Length; ++i) {
+					ref ColorBgra d = ref dst[i];
+					d.B = blueLevels[d.B];
+					d.G = greenLevels[d.G];
+					d.R = redLevels[d.R];
 
-					++dst;
-					++src;
-					--length;
 				}
 			}
 		}

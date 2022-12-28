@@ -186,9 +186,6 @@ namespace Pinta.Core
 		public unsafe void HueSaturation (int hueDelta, int satDelta, int lightness)
 		{
 			ImageSurface dest = Surface.Clone ();
-			ColorBgra* dstPtr = (ColorBgra*) dest.DataPtr;
-
-			int len = Surface.Data.Length / 4;
 
 			// map the range [0,100] -> [0,100] and the range [101,200] -> [103,400]
 			if (satDelta > 100)
@@ -201,7 +198,9 @@ namespace Pinta.Core
 			else
 				op = new UnaryPixelOps.HueSaturationLightness (hueDelta, satDelta, lightness);
 
-			op.Apply (dstPtr, len);
+			dest.Flush ();
+			op.Apply (dest.GetData ());
+			dest.MarkDirty ();
 
 			using (Context g = new Context (Surface)) {
 				g.AppendPath (PintaCore.Workspace.ActiveDocument.Selection.SelectionPath);

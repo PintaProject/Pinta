@@ -18,21 +18,14 @@ namespace Pinta.Core
 	/// result of the form: c = F(a, b)
 	/// </summary>
 	[Serializable]
-	public unsafe abstract class BinaryPixelOp : PixelOp
+	public abstract class BinaryPixelOp : PixelOp
 	{
-		public abstract ColorBgra Apply (ColorBgra lhs, ColorBgra rhs);
+		public abstract ColorBgra Apply (in ColorBgra lhs, in ColorBgra rhs);
 
-		public unsafe virtual void Apply (ColorBgra* dst, ColorBgra* lhs, ColorBgra* rhs, int length)
+		public virtual void Apply (Span<ColorBgra> dst, ReadOnlySpan<ColorBgra> lhs, ReadOnlySpan<ColorBgra> rhs)
 		{
-			unsafe {
-				while (length > 0) {
-					*dst = Apply (*lhs, *rhs);
-					++dst;
-					++lhs;
-					++rhs;
-					--length;
-				}
-			}
+			for (int i = 0; i < dst.Length; ++i)
+				dst[i] = Apply (lhs[i], rhs[i]);
 		}
 
 		/// <summary>
@@ -79,34 +72,25 @@ namespace Pinta.Core
 			// Cache the width and height properties
 			int width = roiSize.Width;
 			int height = roiSize.Height;
+			var lhs_data = lhs.GetReadOnlyData ();
+			int lhs_width = lhs.Width;
+			var rhs_data = rhs.GetReadOnlyData ();
+			int rhs_width = rhs.Width;
+			var dst_data = dst.GetData ();
+			int dst_width = dst.Width;
 
 			// Do the work.
-			unsafe {
-				for (int row = 0; row < height; ++row) {
-					ColorBgra* dstPtr = dst.GetPointAddress (dstOffset.X, dstOffset.Y + row);
-					ColorBgra* lhsPtr = lhs.GetPointAddress (lhsOffset.X, lhsOffset.Y + row);
-					ColorBgra* rhsPtr = rhs.GetPointAddress (rhsOffset.X, rhsOffset.Y + row);
-
-					Apply (dstPtr, lhsPtr, rhsPtr, width);
-				}
+			for (int row = 0; row < height; ++row) {
+				Apply (dst_data.Slice ((dstOffset.Y + row) * dst_width + dstOffset.X, width),
+				       lhs_data.Slice ((lhsOffset.Y + row) * lhs_width + lhsOffset.X, width),
+				       rhs_data.Slice ((rhsOffset.Y + row) * rhs_width + rhsOffset.X, width));
 			}
 		}
 
-		public unsafe override void Apply (ColorBgra* dst, ColorBgra* src, int length)
+		public override void Apply (Span<ColorBgra> dst, ReadOnlySpan<ColorBgra> src)
 		{
-			unsafe {
-				while (length > 0) {
-					*dst = Apply (*dst, *src);
-					++dst;
-					++src;
-					--length;
-				}
-			}
-		}
-
-		public override void Apply (Cairo.ImageSurface dst, Point dstOffset, Cairo.ImageSurface src, Point srcOffset, int roiLength)
-		{
-			Apply (dst.GetPointAddress (dstOffset), src.GetPointAddress (srcOffset), roiLength);
+			for (int i = 0; i < src.Length; ++i)
+				dst[i] = Apply (dst[i], src[i]);
 		}
 
 		public void Apply (Cairo.ImageSurface dst, Cairo.ImageSurface src)
@@ -115,12 +99,13 @@ namespace Pinta.Core
 				throw new ArgumentException ("dst.Size != src.Size");
 			}
 
-			unsafe {
-				for (int y = 0; y < dst.Height; ++y) {
-					ColorBgra* dstPtr = dst.GetRowAddressUnchecked (y);
-					ColorBgra* srcPtr = src.GetRowAddressUnchecked (y);
-					Apply (dstPtr, srcPtr, dst.Width);
-				}
+			var src_data = src.GetReadOnlyData ();
+			var dst_data = dst.GetData ();
+			int width = src.Width;
+
+			for (int y = 0; y < dst.Height; ++y) {
+				Apply (dst_data.Slice (y * width, width),
+				      src_data.Slice (y * width, width));
 			}
 		}
 
@@ -134,14 +119,15 @@ namespace Pinta.Core
 				throw new ArgumentException ("lhs.Size != rhs.Size");
 			}
 
-			unsafe {
-				for (int y = 0; y < dst.Height; ++y) {
-					ColorBgra* dstPtr = dst.GetRowAddressUnchecked (y);
-					ColorBgra* lhsPtr = lhs.GetRowAddressUnchecked (y);
-					ColorBgra* rhsPtr = rhs.GetRowAddressUnchecked (y);
+			var lhs_data = lhs.GetReadOnlyData ();
+			var rhs_data = rhs.GetReadOnlyData ();
+			var dst_data = dst.GetData ();
+			int width = dst.Width;
 
-					Apply (dstPtr, lhsPtr, rhsPtr, dst.Width);
-				}
+			for (int y = 0; y < dst.Height; ++y) {
+				Apply (dst_data.Slice (y * width, width),
+				      lhs_data.Slice (y * width, width),
+				      rhs_data.Slice (y * width, width));
 			}
 		}
 

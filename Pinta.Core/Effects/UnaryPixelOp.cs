@@ -17,42 +17,33 @@ namespace Pinta.Core
 	/// result of the form: d = F(c)
 	/// </summary>
 	[Serializable]
-	public unsafe abstract class UnaryPixelOp : PixelOp
+	public abstract class UnaryPixelOp : PixelOp
 	{
 		public UnaryPixelOp ()
 		{
 		}
 
-		public abstract ColorBgra Apply (ColorBgra color);
+		public abstract ColorBgra Apply (in ColorBgra color);
 
-		public unsafe override void Apply (ColorBgra* dst, ColorBgra* src, int length)
+		public override void Apply (Span<ColorBgra> dst, ReadOnlySpan<ColorBgra> src)
 		{
-			unsafe {
-				while (length > 0) {
-					*dst = Apply (*src);
-					++dst;
-					++src;
-					--length;
-				}
-			}
+			//Debug.Assert (dst.Length == src.Length);
+			for (int i = 0; i < src.Length; ++i)
+				dst[i] = Apply (src[i]);
 		}
 
-		public unsafe virtual void Apply (ColorBgra* ptr, int length)
+		public virtual void Apply (Span<ColorBgra> dst)
 		{
-			unsafe {
-				while (length > 0) {
-					*ptr = Apply (*ptr);
-					++ptr;
-					--length;
-				}
-			}
+			for (int i = 0; i < dst.Length; ++i)
+				dst[i] = Apply (dst[i]);
 		}
 
-		private unsafe void ApplyRectangle (ImageSurface surface, Gdk.Rectangle rect)
+		private void ApplyRectangle (ImageSurface surface, Gdk.Rectangle rect)
 		{
-			for (int y = rect.Left; y <= rect.GetBottom (); ++y) {
-				ColorBgra* ptr = surface.GetPointAddress (rect.Left, y);
-				Apply (ptr, rect.Width);
+			var data = surface.GetData ();
+			int width = surface.Width;
+			for (int y = rect.Top; y <= rect.GetBottom (); ++y) {
+				Apply (data.Slice (y * width + rect.Left, rect.Width));
 			}
 		}
 
@@ -63,10 +54,8 @@ namespace Pinta.Core
 			if (regionBounds != Gdk.Rectangle.Intersect (surface.GetBounds (), regionBounds))
 				throw new ArgumentOutOfRangeException ("roi", "Region is out of bounds");
 
-			unsafe {
-				for (int x = startIndex; x < startIndex + length; ++x)
-					ApplyRectangle (surface, roi[x]);
-			}
+			for (int x = startIndex; x < startIndex + length; ++x)
+				ApplyRectangle (surface, roi[x]);
 		}
 
 		public void Apply (ImageSurface surface, Gdk.Rectangle[] roi)
@@ -74,27 +63,21 @@ namespace Pinta.Core
 			Apply (surface, roi, 0, roi.Length);
 		}
 
-		public unsafe void Apply (ImageSurface surface, Gdk.Rectangle roi)
+		public void Apply (ImageSurface surface, Gdk.Rectangle roi)
 		{
 			ApplyRectangle (surface, roi);
 		}
 
-		public override void Apply (ImageSurface dst, Gdk.Point dstOffset, ImageSurface src, Gdk.Point srcOffset, int scanLength)
-		{
-			Apply (dst.GetPointAddress (dstOffset), src.GetPointAddress (srcOffset), scanLength);
-		}
-
 		public void Apply (ImageSurface dst, ImageSurface src, Gdk.Rectangle roi)
 		{
-			ColorBgra* src_data_ptr = (ColorBgra*) src.DataPtr;
+			var src_data = src.GetReadOnlyData ();
+			var dst_data = dst.GetData ();
 			int src_width = src.Width;
-			ColorBgra* dst_data_ptr = (ColorBgra*) dst.DataPtr;
 			int dst_width = dst.Width;
 
 			for (int y = roi.Y; y <= roi.GetBottom (); ++y) {
-				ColorBgra* dstPtr = dst.GetPointAddressUnchecked (dst_data_ptr, dst_width, roi.X, y);
-				ColorBgra* srcPtr = src.GetPointAddressUnchecked (src_data_ptr, src_width, roi.X, y);
-				Apply (dstPtr, srcPtr, roi.Width);
+				Apply (dst_data.Slice (y * dst_width + roi.X, roi.Width),
+				      src_data.Slice (y * src_width + roi.X, roi.Width));
 			}
 		}
 
