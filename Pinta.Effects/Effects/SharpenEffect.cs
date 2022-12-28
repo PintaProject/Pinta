@@ -44,13 +44,13 @@ namespace Pinta.Effects
 			return EffectHelper.LaunchSimpleEffectDialog (this);
 		}
 
-		public unsafe override void Render (ImageSurface src, ImageSurface dest, Gdk.Rectangle[] rois)
+		public override void Render (ImageSurface src, ImageSurface dest, Gdk.Rectangle[] rois)
 		{
 			foreach (Gdk.Rectangle rect in rois)
 				RenderRect (Data.Amount, src, dest, rect);
 		}
 
-		public unsafe override ColorBgra Apply (ColorBgra src, int area, int* hb, int* hg, int* hr, int* ha)
+		public override ColorBgra Apply (in ColorBgra src, int area, Span<int> hb, Span<int> hg, Span<int> hr, Span<int> ha)
 		{
 			ColorBgra median = GetPercentile (50, area, hb, hg, hr, ha);
 			return ColorBgra.Lerp (src, median, -0.5f);

@@ -48,7 +48,7 @@ namespace Pinta.Effects
 		}
 
 		#region Algorithm Code Ported From PDN
-		public unsafe override ColorBgra Apply (ColorBgra src, int area, int* hb, int* hg, int* hr, int* ha)
+		public override ColorBgra Apply (in ColorBgra src, int area, Span<int> hb, Span<int> hg, Span<int> hr, Span<int> ha)
 		{
 			int minCount1 = area * (100 - this.intensity) / 200;
 			int minCount2 = area * (100 + this.intensity) / 200;
@@ -125,7 +125,7 @@ namespace Pinta.Effects
 			    (byte) (a2));
 		}
 
-		public unsafe override void Render (ImageSurface src, ImageSurface dest, Gdk.Rectangle[] rois)
+		public override void Render (ImageSurface src, ImageSurface dest, Gdk.Rectangle[] rois)
 		{
 			this.thickness = Data.Thickness;
 			this.intensity = Data.Intensity;

@@ -48,7 +48,7 @@ namespace Pinta.Effects
 		}
 
 		#region Algorithm Code Ported From PDN
-		public unsafe override void Render (ImageSurface src, ImageSurface dest, Gdk.Rectangle[] rois)
+		public override void Render (ImageSurface src, ImageSurface dest, Gdk.Rectangle[] rois)
 		{
 			this.radius = Data.Radius;
 			this.percentile = Data.Percentile;
@@ -57,7 +57,7 @@ namespace Pinta.Effects
 				RenderRect (this.radius, src, dest, rect);
 		}
 
-		public unsafe override ColorBgra Apply (ColorBgra src, int area, int* hb, int* hg, int* hr, int* ha)
+		public override ColorBgra Apply (in ColorBgra src, int area, Span<int> hb, Span<int> hg, Span<int> hr, Span<int> ha)
 		{
 			ColorBgra c = GetPercentile (this.percentile, area, hb, hg, hr, ha);
 			return c;

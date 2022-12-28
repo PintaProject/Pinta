@@ -47,7 +47,7 @@ namespace Pinta.Effects
 		}
 
 		#region Algorithm Code Ported From PDN
-		public unsafe override void Render (ImageSurface src, ImageSurface dest, Gdk.Rectangle[] rois)
+		public override void Render (ImageSurface src, ImageSurface dest, Gdk.Rectangle[] rois)
 		{
 			this.radius = Data.Radius;
 
@@ -55,7 +55,7 @@ namespace Pinta.Effects
 				RenderRectWithAlpha (this.radius, src, dest, rect);
 		}
 
-		public unsafe override ColorBgra ApplyWithAlpha (ColorBgra src, int area, int sum, int* hb, int* hg, int* hr)
+		public override ColorBgra ApplyWithAlpha (in ColorBgra src, int area, int sum, Span<int> hb, Span<int> hg, Span<int> hr)
 		{
 			//each slot of the histgram can contain up to area * 255. This will overflow an int when area > 32k
 			if (area < 32768) {
@@ -79,9 +79,9 @@ namespace Pinta.Effects
 				long r = 0;
 
 				for (long i = 1; i < 256; ++i) {
-					b += i * hb[i];
-					g += i * hg[i];
-					r += i * hr[i];
+					b += i * hb[(int) i];
+					g += i * hg[(int) i];
+					r += i * hr[(int) i];
 				}
 
 				int alpha = sum / area;

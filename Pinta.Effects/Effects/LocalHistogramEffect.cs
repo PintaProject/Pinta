@@ -13,14 +13,8 @@ using Pinta.Core;
 
 namespace Pinta.Effects
 {
-	public abstract class LocalHistogramEffect
-	    : BaseEffect
+	public abstract class LocalHistogramEffect : BaseEffect
 	{
-		/*internal LocalHistogramEffect(string name, Image image, string subMenuName, EffectFlags flags)
-		    : base(name, image, subMenuName, flags)
-		{
-		}*/
-
 		protected static int GetMaxAreaForRadius (int radius)
 		{
 			int area = 0;
@@ -37,26 +31,23 @@ namespace Pinta.Effects
 			return area;
 		}
 
-		private unsafe void SetToZero (int* pointer, uint size)
+		private void SetToZero (Span<int> data)
 		{
-			for (int i = 0; i < (size / sizeof (int)); i++) {
-				*pointer = 0;
-				pointer++;
-			}
+			data.Clear ();
 		}
 
-		public virtual unsafe ColorBgra Apply (ColorBgra src, int area, int* hb, int* hg, int* hr, int* ha)
+		public virtual ColorBgra Apply (in ColorBgra src, int area, Span<int> hb, Span<int> hg, Span<int> hr, Span<int> ha)
 		{
 			return src;
 		}
 
 		//same as Aply, except the histogram is alpha-weighted instead of keeping a separate alpha channel histogram.
-		public virtual unsafe ColorBgra ApplyWithAlpha (ColorBgra src, int area, int sum, int* hb, int* hg, int* hr)
+		public virtual ColorBgra ApplyWithAlpha (in ColorBgra src, int area, int sum, Span<int> hb, Span<int> hg, Span<int> hr)
 		{
 			return src;
 		}
 
-		public static unsafe ColorBgra GetPercentile (int percentile, int area, int* hb, int* hg, int* hr, int* ha)
+		public static ColorBgra GetPercentile (int percentile, int area, Span<int> hb, Span<int> hg, Span<int> hr, Span<int> ha)
 		{
 			int minCount = area * percentile / 100;
 
@@ -111,7 +102,7 @@ namespace Pinta.Effects
 			return ColorBgra.FromBgra ((byte) b, (byte) g, (byte) r, (byte) a);
 		}
 
-		public unsafe void RenderRect (
+		public void RenderRect (
 		    int rad,
 		    ImageSurface src,
 		    ImageSurface dst,
@@ -119,9 +110,9 @@ namespace Pinta.Effects
 		{
 			int width = src.Width;
 			int height = src.Height;
+			int stride = src.Stride / ColorBgra.SizeOf;
 
-			int* leadingEdgeX = stackalloc int[rad + 1];
-			int stride = src.Stride / sizeof (ColorBgra);
+			Span<int> leadingEdgeX = stackalloc int[rad + 1];
 
 			// approximately (rad + 0.5)^2
 			int cutoff = ((rad * 2 + 1) * (rad * 2 + 1) + 2) / 4;
@@ -135,22 +126,21 @@ namespace Pinta.Effects
 			}
 
 			const int hLength = 256;
-			int* hb = stackalloc int[hLength];
-			int* hg = stackalloc int[hLength];
-			int* hr = stackalloc int[hLength];
-			int* ha = stackalloc int[hLength];
-			uint hSize = (uint) (sizeof (int) * hLength);
+			Span<int> hb = stackalloc int[hLength];
+			Span<int> hg = stackalloc int[hLength];
+			Span<int> hr = stackalloc int[hLength];
+			Span<int> ha = stackalloc int[hLength];
+
+			var src_data = src.GetReadOnlyData ();
+			var dst_data = dst.GetData ();
 
 			for (int y = rect.Top; y <= rect.GetBottom (); ++y) {
-				SetToZero (hb, hSize);
-				SetToZero (hg, hSize);
-				SetToZero (hr, hSize);
-				SetToZero (ha, hSize);
+				SetToZero (hb);
+				SetToZero (hg);
+				SetToZero (hr);
+				SetToZero (ha);
 
 				int area = 0;
-
-				ColorBgra* ps = src.GetPointAddressUnchecked (rect.Left, y);
-				ColorBgra* pd = dst.GetPointAddressUnchecked (rect.Left, y);
 
 				// assert: v + y >= 0
 				int top = -Math.Min (rad, y);
@@ -165,23 +155,25 @@ namespace Pinta.Effects
 				int right = Math.Min (rad, width - 1 - rect.Left);
 
 				for (int v = top; v <= bottom; ++v) {
-					ColorBgra* psamp = src.GetPointAddressUnchecked (rect.Left + left, y + v);
+					ReadOnlySpan<ColorBgra> psamples = src_data.Slice ((y + v) * width + rect.Left + left);
 
-					for (int u = left; u <= right; ++u) {
+					for (int u = left, i = 0; u <= right; ++u, ++i) {
+						ref readonly ColorBgra psamp = ref psamples[i];
 						if ((u * u + v * v) <= cutoff) {
 							++area;
-							++hb[psamp->B];
-							++hg[psamp->G];
-							++hr[psamp->R];
-							++ha[psamp->A];
+							++hb[psamp.B];
+							++hb[psamp.G];
+							++hb[psamp.R];
+							++hb[psamp.A];
 						}
-
-						++psamp;
 					}
 				}
 
+				ReadOnlySpan<ColorBgra> ps = src_data.Slice (y * width, width);
+				Span<ColorBgra> pd = dst_data.Slice (y * width, width);
+
 				for (int x = rect.Left; x <= rect.GetRight (); x++) {
-					*pd = Apply (*ps, area, hb, hg, hr, ha);
+					pd[x] = Apply (ps[x], area, hb, hg, hr, ha);
 
 					// assert: u + x >= 0
 					left = -Math.Min (rad, x);
@@ -204,12 +196,12 @@ namespace Pinta.Effects
 
 					while (v >= top) {
 						int u = leadingEdgeX[-v];
-						ColorBgra* p = unchecked(ps + (v * stride)) - u;
+						ref readonly ColorBgra p = ref src_data[(y * width + x) + (v * stride) - u];
 
-						--hb[p->B];
-						--hg[p->G];
-						--hr[p->R];
-						--ha[p->A];
+						--hb[p.B];
+						--hg[p.G];
+						--hr[p.R];
+						--ha[p.A];
 						--area;
 
 						--v;
@@ -229,12 +221,11 @@ namespace Pinta.Effects
 
 					while (v >= top) {
 						int u = leadingEdgeX[-v];
-						ColorBgra* p = unchecked(ps + (v * stride)) + u + 1;
-
-						++hb[p->B];
-						++hg[p->G];
-						++hr[p->R];
-						++ha[p->A];
+						ref readonly ColorBgra p = ref src_data[(y * width + x) + (v * stride) + u + 1];
+						++hb[p.B];
+						++hg[p.G];
+						++hr[p.R];
+						++ha[p.A];
 						++area;
 
 						--v;
@@ -255,12 +246,11 @@ namespace Pinta.Effects
 
 					while (v <= bottom) {
 						int u = leadingEdgeX[v];
-						ColorBgra* p = ps + v * stride - u;
-
-						--hb[p->B];
-						--hg[p->G];
-						--hr[p->R];
-						--ha[p->A];
+						ref readonly ColorBgra p = ref src_data[(y * width + x) + (v * stride) - u];
+						--hb[p.B];
+						--hg[p.G];
+						--hr[p.R];
+						--ha[p.A];
 						--area;
 
 						++v;
@@ -281,25 +271,21 @@ namespace Pinta.Effects
 
 					while (v <= bottom) {
 						int u = leadingEdgeX[v];
-						ColorBgra* p = ps + v * stride + u + 1;
-
-						++hb[p->B];
-						++hg[p->G];
-						++hr[p->R];
-						++ha[p->A];
+						ref readonly ColorBgra p = ref src_data[(y * width + x) + (v * stride) + u + 1];
+						++hb[p.B];
+						++hg[p.G];
+						++hr[p.R];
+						++ha[p.A];
 						++area;
 
 						++v;
 					}
-
-					++ps;
-					++pd;
 				}
 			}
 		}
 
 		//same as RenderRect, except the histogram is alpha-weighted instead of keeping a separate alpha channel histogram.
-		public unsafe void RenderRectWithAlpha (
+		public void RenderRectWithAlpha (
 		    int rad,
 		    ImageSurface src,
 		    ImageSurface dst,
@@ -307,9 +293,9 @@ namespace Pinta.Effects
 		{
 			int width = src.Width;
 			int height = src.Height;
+			int stride = src.Stride / ColorBgra.SizeOf;
 
-			int* leadingEdgeX = stackalloc int[rad + 1];
-			int stride = src.Stride / sizeof (ColorBgra);
+			Span<int> leadingEdgeX = stackalloc int[rad + 1];
 
 			// approximately (rad + 0.5)^2
 			int cutoff = ((rad * 2 + 1) * (rad * 2 + 1) + 2) / 4;
@@ -323,21 +309,20 @@ namespace Pinta.Effects
 			}
 
 			const int hLength = 256;
-			int* hb = stackalloc int[hLength];
-			int* hg = stackalloc int[hLength];
-			int* hr = stackalloc int[hLength];
-			uint hSize = (uint) (sizeof (int) * hLength);
+			Span<int> hb = stackalloc int[hLength];
+			Span<int> hg = stackalloc int[hLength];
+			Span<int> hr = stackalloc int[hLength];
+
+			var src_data = src.GetReadOnlyData ();
+			var dst_data = dst.GetData ();
 
 			for (int y = rect.Top; y <= rect.GetBottom (); y++) {
-				SetToZero (hb, hSize);
-				SetToZero (hg, hSize);
-				SetToZero (hr, hSize);
+				SetToZero (hb);
+				SetToZero (hg);
+				SetToZero (hr);
 
 				int area = 0;
 				int sum = 0;
-
-				ColorBgra* ps = src.GetPointAddressUnchecked (rect.Left, y);
-				ColorBgra* pd = dst.GetPointAddressUnchecked (rect.Left, y);
 
 				// assert: v + y >= 0
 				int top = -Math.Min (rad, y);
@@ -352,24 +337,26 @@ namespace Pinta.Effects
 				int right = Math.Min (rad, width - 1 - rect.Left);
 
 				for (int v = top; v <= bottom; ++v) {
-					ColorBgra* psamp = src.GetPointAddressUnchecked (rect.Left + left, y + v);
+					ReadOnlySpan<ColorBgra> psamples = src_data.Slice ((y + v) * width + rect.Left + left);
 
-					for (int u = left; u <= right; ++u) {
-						byte w = psamp->A;
+					for (int u = left, i = 0; u <= right; ++u, ++i) {
+						ref readonly ColorBgra psamp = ref psamples[i];
 						if ((u * u + v * v) <= cutoff) {
 							++area;
+							byte w = psamp.A;
 							sum += w;
-							hb[psamp->B] += w;
-							hg[psamp->G] += w;
-							hr[psamp->R] += w;
+							hb[psamp.B] += w;
+							hg[psamp.G] += w;
+							hr[psamp.R] += w;
 						}
-
-						++psamp;
 					}
 				}
 
+				ReadOnlySpan<ColorBgra> ps = src_data.Slice (y * width, width);
+				Span<ColorBgra> pd = dst_data.Slice (y * width, width);
+
 				for (int x = rect.Left; x <= rect.GetRight (); x++) {
-					*pd = ApplyWithAlpha (*ps, area, sum, hb, hg, hr);
+					pd[x] = ApplyWithAlpha (ps[x], area, sum, hb, hg, hr);
 
 					// assert: u + x >= 0
 					left = -Math.Min (rad, x);
@@ -392,12 +379,12 @@ namespace Pinta.Effects
 
 					while (v >= top) {
 						int u = leadingEdgeX[-v];
-						ColorBgra* p = unchecked(ps + (v * stride)) - u;
-						byte w = p->A;
+						ref readonly ColorBgra p = ref src_data[(y * width + x) + (v * stride) - u];
+						byte w = p.A;
 
-						hb[p->B] -= w;
-						hg[p->G] -= w;
-						hr[p->R] -= w;
+						hb[p.B] -= w;
+						hg[p.G] -= w;
+						hr[p.R] -= w;
 						sum -= w;
 						--area;
 
@@ -418,12 +405,12 @@ namespace Pinta.Effects
 
 					while (v >= top) {
 						int u = leadingEdgeX[-v];
-						ColorBgra* p = unchecked(ps + (v * stride)) + u + 1;
-						byte w = p->A;
+						ref readonly ColorBgra p = ref src_data[(y * width + x) + (v * stride) + u + 1];
+						byte w = p.A;
 
-						hb[p->B] += w;
-						hg[p->G] += w;
-						hr[p->R] += w;
+						hb[p.B] += w;
+						hg[p.G] += w;
+						hr[p.R] += w;
 						sum += w;
 						++area;
 
@@ -445,12 +432,12 @@ namespace Pinta.Effects
 
 					while (v <= bottom) {
 						int u = leadingEdgeX[v];
-						ColorBgra* p = ps + v * stride - u;
-						byte w = p->A;
+						ref readonly ColorBgra p = ref src_data[(y * width + x) + (v * stride) - u];
+						byte w = p.A;
 
-						hb[p->B] -= w;
-						hg[p->G] -= w;
-						hr[p->R] -= w;
+						hb[p.B] -= w;
+						hg[p.G] -= w;
+						hr[p.R] -= w;
 						sum -= w;
 						--area;
 
@@ -472,20 +459,17 @@ namespace Pinta.Effects
 
 					while (v <= bottom) {
 						int u = leadingEdgeX[v];
-						ColorBgra* p = ps + v * stride + u + 1;
-						byte w = p->A;
+						ref readonly ColorBgra p = ref src_data[(y * width + x) + (v * stride) + u + 1];
+						byte w = p.A;
 
-						hb[p->B] += w;
-						hg[p->G] += w;
-						hr[p->R] += w;
+						hb[p.B] += w;
+						hg[p.G] += w;
+						hr[p.R] += w;
 						sum += w;
 						++area;
 
 						++v;
 					}
-
-					++ps;
-					++pd;
 				}
 			}
 		}

@@ -48,7 +48,7 @@ namespace Pinta.Effects
 		}
 
 		#region Algorithm Code Ported From PDN
-		public override unsafe ColorBgra Apply (ColorBgra color, int area, int* hb, int* hg, int* hr, int* ha)
+		public override ColorBgra Apply (in ColorBgra color, int area, Span<int> hb, Span<int> hg, Span<int> hr, Span<int> ha)
 		{
 			ColorBgra normalized = GetPercentileOfColor (color, area, hb, hg, hr, ha);
 			double lerp = strength * (1 - 0.75 * color.GetIntensity ());
@@ -56,7 +56,7 @@ namespace Pinta.Effects
 			return ColorBgra.Lerp (color, normalized, lerp);
 		}
 
-		private static unsafe ColorBgra GetPercentileOfColor (ColorBgra color, int area, int* hb, int* hg, int* hr, int* ha)
+		private static ColorBgra GetPercentileOfColor (ColorBgra color, int area, Span<int> hb, Span<int> hg, Span<int> hr, Span<int> ha)
 		{
 			int rc = 0;
 			int gc = 0;
@@ -78,7 +78,7 @@ namespace Pinta.Effects
 			return ColorBgra.FromBgr ((byte) bc, (byte) gc, (byte) rc);
 		}
 
-		public unsafe override void Render (ImageSurface src, ImageSurface dest, Gdk.Rectangle[] rois)
+		public override void Render (ImageSurface src, ImageSurface dest, Gdk.Rectangle[] rois)
 		{
 			this.radius = Data.Radius;
 			this.strength = -0.2 * Data.Strength;
