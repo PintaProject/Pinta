@@ -54,6 +54,8 @@ namespace Pinta.Effects
 		private const double yOffsetBasis = -0.29;
 		private double yOffset = yOffsetBasis;
 
+		private InvertColorsEffect invert_effect = new();
+
 		private static double Mandelbrot (double r, double i, int factor)
 		{
 			int c = 0;
@@ -72,7 +74,7 @@ namespace Pinta.Effects
 			return c - Math.Log (y * y + x * x) * invLogMax;
 		}
 
-		unsafe public override void Render (ImageSurface src, ImageSurface dst, Gdk.Rectangle[] rois)
+		public override void Render (ImageSurface src, ImageSurface dst, Gdk.Rectangle[] rois)
 		{
 			int w = dst.Width;
 			int h = dst.Height;
@@ -87,12 +89,12 @@ namespace Pinta.Effects
 			double invCount = 1.0 / (double) count;
 			double angleTheta = (Data.Angle * 2 * Math.PI) / 360;
 
-			ColorBgra* dst_dataptr = (ColorBgra*) dst.DataPtr;
+			Span<ColorBgra> dst_data = dst.GetData();
 			int dst_width = dst.Width;
 
 			foreach (Gdk.Rectangle rect in rois) {
 				for (int y = rect.Top; y <= rect.GetBottom (); y++) {
-					ColorBgra* dstPtr = dst.GetPointAddressUnchecked (dst_dataptr, dst_width, rect.Left, y);
+					var dst_row = dst_data.Slice(y * dst_width, dst_width);
 
 					for (int x = rect.Left; x <= rect.GetRight (); x++) {
 						int r = 0;
@@ -122,28 +124,13 @@ namespace Pinta.Effects
 							a += Utility.ClampToByte (c - 0);
 						}
 
-						*dstPtr = ColorBgra.FromBgra (Utility.ClampToByte (b / count), Utility.ClampToByte (g / count), Utility.ClampToByte (r / count), Utility.ClampToByte (a / count));
-
-						++dstPtr;
+						dst_row[x] = ColorBgra.FromBgra (Utility.ClampToByte (b / count), Utility.ClampToByte (g / count), Utility.ClampToByte (r / count), Utility.ClampToByte (a / count));
 					}
 				}
+			}
 
-				if (Data.InvertColors) {
-					for (int y = rect.Top; y <= rect.GetBottom (); y++) {
-						ColorBgra* dstPtr = dst.GetPointAddressUnchecked (dst_dataptr, dst_width, rect.Left, y);
-
-						for (int x = rect.Left; x <= rect.GetRight (); ++x) {
-							ColorBgra c = *dstPtr;
-
-							c.B = (byte) (255 - c.B);
-							c.G = (byte) (255 - c.G);
-							c.R = (byte) (255 - c.R);
-
-							*dstPtr = c;
-							++dstPtr;
-						}
-					}
-				}
+			if (Data.InvertColors) {
+				invert_effect.Render (dst, dst, rois);
 			}
 		}
 		#endregion

@@ -63,7 +63,7 @@ namespace Pinta.Effects
 			return c;
 		}
 
-		unsafe public override void Render (ImageSurface src, ImageSurface dst, Gdk.Rectangle[] rois)
+		public override void Render (ImageSurface src, ImageSurface dst, Gdk.Rectangle[] rois)
 		{
 			const double jr = 0.3125;
 			const double ji = 0.03;
@@ -78,12 +78,12 @@ namespace Pinta.Effects
 			double invCount = 1.0 / (double) count;
 			double angleTheta = (Data.Angle * Math.PI * 2) / 360.0;
 
-			ColorBgra* dst_dataptr = (ColorBgra*) dst.DataPtr;
+			Span<ColorBgra> dst_data = dst.GetData();
 			int dst_width = dst.Width;
 
 			foreach (Gdk.Rectangle rect in rois) {
 				for (int y = rect.Top; y <= rect.GetBottom (); y++) {
-					ColorBgra* dstPtr = dst.GetPointAddressUnchecked (dst_dataptr, dst_width, rect.Left, y);
+					var dst_row = dst_data.Slice(y * dst_width, dst_width);
 
 					for (int x = rect.Left; x <= rect.GetRight (); x++) {
 						int r = 0;
@@ -116,9 +116,7 @@ namespace Pinta.Effects
 							a += Utility.ClampToByte (c - 0);
 						}
 
-						*dstPtr = ColorBgra.FromBgra (Utility.ClampToByte (b / count), Utility.ClampToByte (g / count), Utility.ClampToByte (r / count), Utility.ClampToByte (a / count));
-
-						++dstPtr;
+						dst_row[x] = ColorBgra.FromBgra (Utility.ClampToByte (b / count), Utility.ClampToByte (g / count), Utility.ClampToByte (r / count), Utility.ClampToByte (a / count));
 					}
 				}
 			}

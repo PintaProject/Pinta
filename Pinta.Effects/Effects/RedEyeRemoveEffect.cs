@@ -59,7 +59,7 @@ namespace Pinta.Effects
 			}
 		}
 
-		public unsafe override void Render (ImageSurface src, ImageSurface dest, Gdk.Rectangle[] rois)
+		public override void Render (ImageSurface src, ImageSurface dest, Gdk.Rectangle[] rois)
 		{
 			op?.Apply (dest, src, rois);
 		}
