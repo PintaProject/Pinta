@@ -326,7 +326,7 @@ namespace Pinta.Core
 				for (int i = 0; i < src.Length; ++i) {
 					ref ColorBgra result = ref dst[i];
 					byte val = src[i].GetIntensityByte ();
-					dst[i] = ColorBgra.FromBgra(val, val, val, src[i].A);
+					dst[i] = ColorBgra.FromBgra (val, val, val, src[i].A);
 					result.R = result.G = result.B = val;
 					result.A = src[i].A;
 				}

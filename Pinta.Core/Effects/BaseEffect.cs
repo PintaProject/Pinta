@@ -106,17 +106,16 @@ namespace Pinta.Core
 		/// <param name="src">The source surface. DO NOT MODIFY.</param>
 		/// <param name="dst">The destination surface.</param>
 		/// <param name="roi">A rectangle of interest (roi) specifying the area to modify. Only these areas should be modified</param>
-		protected unsafe virtual void Render (ImageSurface src, ImageSurface dst, Gdk.Rectangle roi)
+		protected virtual void Render (ImageSurface src, ImageSurface dst, Gdk.Rectangle roi)
 		{
-			ColorBgra* src_data_ptr = (ColorBgra*) src.DataPtr;
+			var src_data = src.GetReadOnlyData ();
+			var dst_data = dst.GetData ();
 			int src_width = src.Width;
-			ColorBgra* dst_data_ptr = (ColorBgra*) dst.DataPtr;
 			int dst_width = dst.Width;
 
 			for (int y = roi.Y; y <= roi.GetBottom (); ++y) {
-				ColorBgra* srcPtr = src.GetPointAddressUnchecked (src_data_ptr, src_width, roi.X, y);
-				ColorBgra* dstPtr = dst.GetPointAddressUnchecked (dst_data_ptr, dst_width, roi.X, y);
-				Render (srcPtr, dstPtr, roi.Width);
+				Render (src_data.Slice (y * src_width + roi.X, roi.Width),
+					dst_data.Slice (y * dst_width + roi.X, roi.Width));
 			}
 		}
 
@@ -126,14 +125,10 @@ namespace Pinta.Core
 		/// <param name="src">The source surface. DO NOT MODIFY.</param>
 		/// <param name="dst">The destination surface.</param>
 		/// <param name="length">The number of pixels to render.</param>
-		protected unsafe virtual void Render (ColorBgra* src, ColorBgra* dst, int length)
+		protected virtual void Render (ReadOnlySpan<ColorBgra> src, Span<ColorBgra> dst)
 		{
-			while (length > 0) {
-				*dst = Render (*src);
-				++dst;
-				++src;
-				--length;
-			}
+			for (int i = 0; i < src.Length; ++i)
+				dst[i] = Render (src[i]);
 		}
 
 		/// <summary>
@@ -141,7 +136,7 @@ namespace Pinta.Core
 		/// </summary>
 		/// <param name="color">The color of the source surface pixel.</param>
 		/// <returns>The color to be used for the destination pixel.</returns>
-		protected virtual ColorBgra Render (ColorBgra color)
+		protected virtual ColorBgra Render (in ColorBgra color)
 		{
 			return color;
 		}
