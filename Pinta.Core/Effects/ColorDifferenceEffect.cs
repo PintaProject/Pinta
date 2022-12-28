@@ -21,13 +21,14 @@ namespace Pinta.Core
 	/// </summary>
 	public abstract class ColorDifferenceEffect : BaseEffect
 	{
-		public unsafe void RenderColorDifferenceEffect (double[][] weights, ImageSurface src, ImageSurface dest, Gdk.Rectangle[] rois)
+		public void RenderColorDifferenceEffect (double[][] weights, ImageSurface src, ImageSurface dest, Gdk.Rectangle[] rois)
 		{
 			Gdk.Rectangle src_rect = src.GetBounds ();
 
 			// Cache these for a massive performance boost
+			var src_data = src.GetReadOnlyData ();
+			var dst_data = dest.GetData ();
 			int src_width = src.Width;
-			ColorBgra* src_data_ptr = (ColorBgra*) src.DataPtr;
 
 			foreach (Gdk.Rectangle rect in rois) {
 				// loop through each line of target rectangle
@@ -40,8 +41,8 @@ namespace Pinta.Core
 					if (y == src_rect.Y + src_rect.Height - 1)
 						fyEnd = 2;
 
-					// loop through each point in the line 
-					ColorBgra* dstPtr = dest.GetPointAddressUnchecked (rect.X, y);
+					// loop through each point in the line
+					var dst_row = dst_data.Slice (y * src_width);
 
 					for (int x = rect.X; x < rect.X + rect.Width; ++x) {
 						int fxStart = 0;
@@ -61,7 +62,7 @@ namespace Pinta.Core
 						for (int fy = fyStart; fy < fyEnd; ++fy) {
 							for (int fx = fxStart; fx < fxEnd; ++fx) {
 								double weight = weights[fy][fx];
-								ColorBgra c = src.GetPointUnchecked (src_data_ptr, src_width, x - 1 + fx, y - 1 + fy);
+								ref readonly ColorBgra c = ref src_data[(y - 1 + fy) * src_width + (x - 1 + fx)];
 
 								rSum += weight * (double) c.R;
 								gSum += weight * (double) c.G;
@@ -91,8 +92,7 @@ namespace Pinta.Core
 						if (iBsum < 0)
 							iBsum = 0;
 
-						*dstPtr = ColorBgra.FromBgra ((byte) iBsum, (byte) iGsum, (byte) iRsum, 255);
-						++dstPtr;
+						dst_row[x] = ColorBgra.FromBgra ((byte) iBsum, (byte) iGsum, (byte) iRsum, 255);
 					}
 				}
 			}
