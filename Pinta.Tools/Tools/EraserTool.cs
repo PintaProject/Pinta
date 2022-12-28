@@ -188,7 +188,7 @@ namespace Pinta.Tools
 			g.Stroke ();
 		}
 
-		private unsafe void EraseSmooth (ImageSurface surf, Context g, PointD start, PointD end)
+		private void EraseSmooth (ImageSurface surf, Context g, PointD start, PointD end)
 		{
 			var rad = (int) (BrushWidth / 2.0) + 1;
 
@@ -213,9 +213,10 @@ namespace Pinta.Tools
 				if ((dest_rect.Width > 0) && (dest_rect.Height > 0)) {
 					// Allow Clipping through a temporary surface
 					using (var tmp_surface = CopySurfacePart (surf, dest_rect)) {
+						var tmp_data = tmp_surface.GetData();
 
 						for (var iy = dest_rect.Top; iy < dest_rect.Bottom; iy++) {
-							var srcRowPtr = tmp_surface.GetRowAddressUnchecked (iy - dest_rect.Top);
+							var srcRow = tmp_data.Slice(tmp_surface.Width * (iy - dest_rect.Top));
 							var dy = ((iy - y) * LUT_Resolution) / rad;
 
 							if (dy < 0)
@@ -224,7 +225,7 @@ namespace Pinta.Tools
 							var lut_factor_row = lut_factor[dy];
 
 							for (var ix = dest_rect.Left; ix < dest_rect.Right; ix++) {
-								var col = *srcRowPtr;
+								ref ColorBgra col = ref srcRow[ix - dest_rect.Left];
 								var dx = ((ix - x) * LUT_Resolution) / rad;
 
 								if (dx < 0)
@@ -244,9 +245,6 @@ namespace Pinta.Tools
 									col.G = (byte) (col.G * force / 255);
 									col.B = (byte) (col.B * force / 255);
 								}
-
-								*srcRowPtr = col;
-								srcRowPtr++;
 							}
 						}
 

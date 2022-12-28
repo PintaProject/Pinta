@@ -54,7 +54,7 @@ namespace Pinta.Effects
 		}
 
 		#region Algorithm Code Ported From PDN
-		public unsafe override void Render (ImageSurface src, ImageSurface dest, Gdk.Rectangle[] rois)
+		public override void Render (ImageSurface src, ImageSurface dest, Gdk.Rectangle[] rois)
 		{
 			blurEffect.Data.Radius = Data.Radius;
 			blurEffect.Render (src, dest, rois);
