@@ -37,6 +37,7 @@ namespace Pinta.Core
 		{
 			formats = new List<PaletteDescriptor> ();
 
+#if false // TODO-GTK4
 			PaintDotNetPalette pdnHandler = new PaintDotNetPalette ();
 			formats.Add (new PaletteDescriptor ("Paint.NET", new string[] { "txt", "TXT" }, pdnHandler, pdnHandler));
 
@@ -45,6 +46,7 @@ namespace Pinta.Core
 
 			PaintShopProPalette pspHandler = new PaintShopProPalette ();
 			formats.Add (new PaletteDescriptor ("PaintShop Pro", new string[] { "pal", "PAL" }, pspHandler, pspHandler));
+#endif
 		}
 
 		public IEnumerable<PaletteDescriptor> Formats { get { return formats; } }

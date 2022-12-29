@@ -34,6 +34,6 @@ namespace Pinta.Core
 	// [TypeExtensionPoint]
 	public interface IPaletteSaver
 	{
-		void Save (List<Color> colors, GLib.IFile file);
+		void Save (List<Color> colors, Gio.File file);
 	}
 }

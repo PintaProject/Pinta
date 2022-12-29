@@ -150,8 +150,9 @@ namespace Pinta.Core
 			OnPaletteChanged ();
 		}
 
-		public void Load (GLib.IFile file)
+		public void Load (Gio.File file)
 		{
+#if false // TODO-GTK4
 			List<Color>? loaded_colors = null;
 			var errors = new StringBuilder ();
 
@@ -183,13 +184,15 @@ namespace Pinta.Core
 				var parent = PintaCore.Chrome.MainWindow;
 				ShowUnsupportedFormatDialog (parent, file.ParsedName, "Unsupported palette format", errors.ToString ());
 			}
+#endif
 		}
 
-		public void Save (GLib.IFile file, IPaletteSaver saver)
+		public void Save (Gio.File file, IPaletteSaver saver)
 		{
 			saver.Save (colors, file);
 		}
 
+#if false // TODO-GTK4
 		private void ShowUnsupportedFormatDialog (Window parent, string filename, string primaryText, string details)
 		{
 			string markup = "<span weight=\"bold\" size=\"larger\">{0}</span>\n\n{1}";
@@ -208,5 +211,6 @@ namespace Pinta.Core
 			string message = string.Format (markup, primaryText, secondaryText);
 			PintaCore.Chrome.ShowUnsupportedFormatDialog (parent, message, details);
 		}
+#endif
 	}
 }

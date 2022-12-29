@@ -22,6 +22,7 @@
     <Compile Include="Actions/Command.cs" />
     <Compile Include="Classes/IExtension.cs" />
     <Compile Include="Classes/ObservableObject.cs" />
+    <Compile Include="Classes/Palette.cs" />
     <Compile Include="Classes/Point.cs" />
     <Compile Include="Classes/Rectangle.cs" />
     <Compile Include="Classes/Translations.cs" />
@@ -33,7 +34,12 @@
     <Compile Include="Extensions/GtkExtensions.cs" />
     <Compile Include="Managers/ActionManager.cs" />
     <Compile Include="Managers/ChromeManager.cs" />
+    <Compile Include="Managers/PaletteManager.cs" />
+    <Compile Include="Managers/PaletteFormatManager.cs" />
     <Compile Include="Managers/SettingsManager.cs" />
     <Compile Include="Managers/SystemManager.cs" />
+    <Compile Include="PaletteFormats/IPaletteLoader.cs" />
+    <Compile Include="PaletteFormats/IPaletteSaver.cs" />
+    <Compile Include="PaletteFormats/PaletteDescriptor.cs" />
   </ItemGroup>
 </Project>

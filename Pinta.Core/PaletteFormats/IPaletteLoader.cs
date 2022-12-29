@@ -34,6 +34,6 @@ namespace Pinta.Core
 	// [TypeExtensionPoint]
 	public interface IPaletteLoader
 	{
-		List<Color> Load (GLib.IFile file);
+		List<Color> Load (Gio.File file);
 	}
 }

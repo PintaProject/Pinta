@@ -757,6 +757,7 @@ namespace Pinta.Core
 		{
 			return new Gdk.Pixbuf (surfSource, 0, 0, surfSource.Width, surfSource.Height);
 		}
+#endif
 
 		public static ColorBgra ToColorBgra (this Cairo.Color color)
 		{
@@ -782,6 +783,7 @@ namespace Pinta.Core
 			return c;
 		}
 
+#if false // TODO-GTK4
 		public static Gdk.Color ToGdkColor (this ColorBgra color)
 		{
 			Gdk.Color c = new Gdk.Color (color.R, color.G, color.B);

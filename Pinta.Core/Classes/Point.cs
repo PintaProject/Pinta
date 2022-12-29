@@ -37,6 +37,8 @@ namespace Pinta.Core
 			this.Y = y;
 		}
 
+		public static Point Zero;
+
 		public int X;
 		public int Y;
 
