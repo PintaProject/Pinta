@@ -207,7 +207,7 @@ namespace Pinta.Core
 		private static bool IsConstantRow (ImageSurface surf, Cairo.Color color, int y)
 		{
 			for (int x = 0; x < surf.Width; ++x) {
-				if (!color.Equals (surf.GetPixel (x, y)))
+				if (!color.Equals (surf.GetColorBgra (x, y).ToCairoColor ()))
 					return false;
 			}
 
@@ -220,7 +220,7 @@ namespace Pinta.Core
 		private static bool IsConstantColumn (ImageSurface surf, Cairo.Color color, Gdk.Rectangle rect, int x)
 		{
 			for (int y = rect.Top; y < rect.Bottom; ++y) {
-				if (!color.Equals (surf.GetPixel (x, y)))
+				if (!color.Equals (surf.GetColorBgra (x, y).ToCairoColor ()))
 					return false;
 			}
 
@@ -235,7 +235,7 @@ namespace Pinta.Core
 
 			using (var image = doc.GetFlattenedImage ()) {
 				Gdk.Rectangle rect = image.GetBounds ();
-				Cairo.Color border_color = image.GetPixel (0, 0);
+				Cairo.Color border_color = image.GetColorBgra (0, 0).ToCairoColor ();
 
 				// Top down.
 				for (int y = 0; y < image.Height; ++y) {

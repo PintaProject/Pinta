@@ -119,7 +119,7 @@ namespace Pinta.Effects
 								ySample = (ySample + height) % height;
 							}
 
-							ref readonly ColorBgra sample = ref src.GetPoint (src_data, src_width, xSample, ySample);
+							ref readonly ColorBgra sample = ref src.GetColorBgra (src_data, src_width, xSample, ySample);
 
 							b += sample.B;
 							g += sample.G;

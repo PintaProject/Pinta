@@ -179,7 +179,7 @@ namespace Pinta.Tools
 		private ColorBgra GetPixel (Document document, int x, int y)
 		{
 			if (SampleLayerOnly)
-				return document.Layers.CurrentUserLayer.Surface.GetColorBgraUnchecked (x, y);
+				return document.Layers.CurrentUserLayer.Surface.GetColorBgra (x, y);
 			else
 				return document.GetComputedPixel (x, y);
 		}

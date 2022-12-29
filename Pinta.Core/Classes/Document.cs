@@ -244,7 +244,7 @@ namespace Pinta.Core
 			using (var dst = CairoExtensions.CreateImageSurface (Format.Argb32, 1, 1)) {
 				using (var g = new Context (dst)) {
 					foreach (var layer in Layers.GetLayersToPaint ()) {
-						var color = layer.Surface.GetColorBgraUnchecked (x, y).ToStraightAlpha ().ToCairoColor ();
+						var color = layer.Surface.GetColorBgra (x, y).ToStraightAlpha ().ToCairoColor ();
 
 						g.SetBlendMode (layer.BlendMode);
 						g.SetSourceColor (color);
@@ -254,7 +254,7 @@ namespace Pinta.Core
 					}
 				}
 
-				return dst.GetColorBgraUnchecked (0, 0);
+				return dst.GetColorBgra (0, 0);
 			}
 		}
 

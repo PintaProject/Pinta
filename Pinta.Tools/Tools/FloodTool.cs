@@ -97,7 +97,7 @@ namespace Pinta.Tools
 				if (IsContinguousMode)
 					CairoExtensions.FillStencilFromPoint (surface, stencilBuffer, pos, tol, out boundingBox, currentRegion, LimitToSelection);
 				else
-					CairoExtensions.FillStencilByColor (surface, stencilBuffer, surface.GetColorBgraUnchecked (pos.X, pos.Y), tol, out boundingBox, currentRegion, LimitToSelection);
+					CairoExtensions.FillStencilByColor (surface, stencilBuffer, surface.GetColorBgra (pos.X, pos.Y), tol, out boundingBox, currentRegion, LimitToSelection);
 
 				OnFillRegionComputed (document, stencilBuffer);
 

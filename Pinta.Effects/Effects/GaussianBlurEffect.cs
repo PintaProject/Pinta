@@ -110,7 +110,7 @@ namespace Pinta.Effects
 									int srcY = y + wy - r;
 
 									if (srcY >= 0 && srcY < src_height) {
-										ColorBgra c = src.GetPoint (src_data, src_width, srcX, srcY).ToStraightAlpha ();
+										ColorBgra c = src.GetColorBgra (src_data, src_width, srcX, srcY).ToStraightAlpha ();
 										int wp = w[wy];
 
 										waSums[wx] += wp;
@@ -194,7 +194,7 @@ namespace Pinta.Effects
 									int srcY = y + wy - r;
 
 									if (srcY >= 0 && srcY < src_height) {
-										ColorBgra c = src.GetPoint (src_data, src_width, srcX, srcY).ToStraightAlpha ();
+										ColorBgra c = src.GetColorBgra (src_data, src_width, srcX, srcY).ToStraightAlpha ();
 										int wp = w[wy];
 
 										waSums[wx] += wp;

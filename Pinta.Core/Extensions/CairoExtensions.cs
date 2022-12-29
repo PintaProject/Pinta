@@ -743,18 +743,6 @@ namespace Pinta.Core
 			return new Gdk.Pixbuf (surfSource, 0, 0, surfSource.Width, surfSource.Height);
 		}
 
-		public static Color GetPixel (this Cairo.ImageSurface surf, int x, int y)
-		{
-			ColorBgra c = surf.GetReadOnlyData ()[y * surf.Width + x];
-
-			return new Color (c.R / 255f, c.G / 255f, c.B / 255f, c.A / 255f);
-		}
-
-		public static ColorBgra GetColorBgraUnchecked (this Cairo.ImageSurface surf, int x, int y)
-		{
-			return surf.GetReadOnlyData ()[y * surf.Width + x];
-		}
-
 		public static ColorBgra ToColorBgra (this Cairo.Color color)
 		{
 			ColorBgra c = new ColorBgra ();
@@ -939,71 +927,22 @@ namespace Pinta.Core
 			return x >= 0 && x < surf.Width && y >= 0 && y < surf.Height;
 		}
 
-
-		public static unsafe ColorBgra* GetPointAddressUnchecked (this ImageSurface surf, int x, int y)
-		{
-			ColorBgra* dstPtr = (ColorBgra*) surf.DataPtr;
-
-			dstPtr += (x) + (y * surf.Width);
-
-			return dstPtr;
-		}
-
-		public static unsafe ColorBgra* GetPointAddressUnchecked (this ImageSurface surf, ColorBgra* surfDataPtr, int surfWidth, int x, int y)
-		{
-			ColorBgra* dstPtr = surfDataPtr;
-
-			dstPtr += (x) + (y * surfWidth);
-
-			return dstPtr;
-		}
-
 		// This isn't really an extension method, since it doesn't use
 		// the passed in argument, but it's nice to have the same calling
 		// convention as the uncached version.  If you can use this one
 		// over the other, it is much faster in tight loops (like effects).
-		public static unsafe ColorBgra GetPointUnchecked (this ImageSurface surf, ColorBgra* surfDataPtr, int surfWidth, int x, int y)
-		{
-			ColorBgra* dstPtr = surfDataPtr;
-
-			dstPtr += (x) + (y * surfWidth);
-
-			return *dstPtr;
-		}
-
-		// This isn't really an extension method, since it doesn't use
-		// the passed in argument, but it's nice to have the same calling
-		// convention as the uncached version.  If you can use this one
-		// over the other, it is much faster in tight loops (like effects).
-		public static ref readonly ColorBgra GetPoint (this ImageSurface surf, ReadOnlySpan<ColorBgra> data, int width, int x, int y)
+		public static ref readonly ColorBgra GetColorBgra (this ImageSurface surf, ReadOnlySpan<ColorBgra> data, int width, int x, int y)
 		{
 			return ref data[width * y + x];
 		}
 
-		public static unsafe ColorBgra* GetRowAddressUnchecked (this ImageSurface surf, int y)
+		/// <summary>
+		/// Prefer using the variant which takes the surface data and width, for improved performance
+		/// if there are repeated calls in a loop.
+		/// </summary>
+		public static ref readonly ColorBgra GetColorBgra (this ImageSurface surf, int x, int y)
 		{
-			ColorBgra* dstPtr = (ColorBgra*) surf.DataPtr;
-
-			dstPtr += y * surf.Width;
-
-			return dstPtr;
-		}
-
-		public static unsafe ColorBgra* GetRowAddressUnchecked (this ImageSurface surf, ColorBgra* surfDataPtr, int surfWidth, int y)
-		{
-			ColorBgra* dstPtr = surfDataPtr;
-
-			dstPtr += y * surfWidth;
-
-			return dstPtr;
-		}
-
-		public static unsafe ColorBgra* GetPointAddress (this ImageSurface surf, int x, int y)
-		{
-			if (x < 0 || x >= surf.Width)
-				throw new ArgumentOutOfRangeException ("x", "Out of bounds: x=" + x.ToString ());
-
-			return surf.GetPointAddressUnchecked (x, y);
+			return ref surf.GetColorBgra (surf.GetReadOnlyData (), surf.Width, x, y);
 		}
 
 		public static Gdk.Rectangle GetBounds (this ImageSurface surf)
@@ -1083,10 +1022,10 @@ namespace Pinta.Core
 					else
 						sbottom = stop + 1;
 
-					ref readonly ColorBgra cul = ref src.GetPoint (src_data, srcWidth, sleft, stop);
-					ref readonly ColorBgra cur = ref src.GetPoint (src_data, srcWidth, sright, stop);
-					ref readonly ColorBgra cll = ref src.GetPoint (src_data, srcWidth, sleft, sbottom);
-					ref readonly ColorBgra clr = ref src.GetPoint (src_data, srcWidth, sright, sbottom);
+					ref readonly ColorBgra cul = ref src.GetColorBgra (src_data, srcWidth, sleft, stop);
+					ref readonly ColorBgra cur = ref src.GetColorBgra (src_data, srcWidth, sright, stop);
+					ref readonly ColorBgra cll = ref src.GetColorBgra (src_data, srcWidth, sleft, sbottom);
+					ref readonly ColorBgra clr = ref src.GetColorBgra (src_data, srcWidth, sright, sbottom);
 
 					return ColorBgra.BlendColors4W16IP (cul, wul, cur, wur, cll, wll, clr, wlr);
 				}
@@ -1150,10 +1089,10 @@ namespace Pinta.Core
 				else
 					sbottom = stop + 1;
 
-				ref readonly ColorBgra cul = ref src.GetPoint (src_data, srcWidth, sleft, stop);
-				ref readonly ColorBgra cur = ref src.GetPoint (src_data, srcWidth, sright, stop);
-				ref readonly ColorBgra cll = ref src.GetPoint (src_data, srcWidth, sleft, sbottom);
-				ref readonly ColorBgra clr = ref src.GetPoint (src_data, srcWidth, sright, sbottom);
+				ref readonly ColorBgra cul = ref src.GetColorBgra (src_data, srcWidth, sleft, stop);
+				ref readonly ColorBgra cur = ref src.GetColorBgra (src_data, srcWidth, sright, stop);
+				ref readonly ColorBgra cll = ref src.GetColorBgra (src_data, srcWidth, sleft, sbottom);
+				ref readonly ColorBgra clr = ref src.GetColorBgra (src_data, srcWidth, sright, sbottom);
 
 				return ColorBgra.BlendColors4W16IP (cul, wul, cur, wur, cll, wll, clr, wlr);
 			}
@@ -1214,10 +1153,10 @@ namespace Pinta.Core
 				else
 					sbottom = stop + 1;
 
-				ref readonly ColorBgra cul = ref src.GetPoint (src_data, srcWidth, sleft, stop);
-				ref readonly ColorBgra cur = ref src.GetPoint (src_data, srcWidth, sright, stop);
-				ref readonly ColorBgra cll = ref src.GetPoint (src_data, srcWidth, sleft, sbottom);
-				ref readonly ColorBgra clr = ref src.GetPoint (src_data, srcWidth, sright, sbottom);
+				ref readonly ColorBgra cul = ref src.GetColorBgra (src_data, srcWidth, sleft, stop);
+				ref readonly ColorBgra cur = ref src.GetColorBgra (src_data, srcWidth, sright, stop);
+				ref readonly ColorBgra cll = ref src.GetColorBgra (src_data, srcWidth, sleft, sbottom);
+				ref readonly ColorBgra clr = ref src.GetColorBgra (src_data, srcWidth, sright, sbottom);
 
 				return ColorBgra.BlendColors4W16IP (cul, wul, cur, wur, cll, wll, clr, wlr);
 			}
@@ -1657,10 +1596,12 @@ namespace Pinta.Core
 		}
 
 		// Ported from PDN.
-		public unsafe static void FillStencilFromPoint (ImageSurface surface, BitMask stencil, Point start, int tolerance,
+		public static void FillStencilFromPoint (ImageSurface surface, BitMask stencil, Point start, int tolerance,
 								out Rectangle boundingBox, Cairo.Region limitRegion, bool limitToSelection)
 		{
-			ColorBgra cmp = surface.GetColorBgraUnchecked (start.X, start.Y);
+			ReadOnlySpan<ColorBgra> surf_data = surface.GetReadOnlyData ();
+			int surf_width = surface.Width;
+			ColorBgra cmp = surface.GetColorBgra (surf_data, surf_width, start.X, start.Y);
 			int top = int.MaxValue;
 			int bottom = int.MinValue;
 			int left = int.MaxValue;
@@ -1690,13 +1631,13 @@ namespace Pinta.Core
 			while (queue.Count > 0) {
 				Point pt = queue.Dequeue ();
 
-				ColorBgra* rowPtr = surface.GetRowAddressUnchecked (pt.Y);
+				ReadOnlySpan<ColorBgra> row = surf_data.Slice (pt.Y * surf_width, surf_width);
 				int localLeft = pt.X - 1;
 				int localRight = pt.X;
 
 				while (localLeft >= 0 &&
 				       !stencil.Get (localLeft, pt.Y) &&
-				       ColorBgra.ColorsWithinTolerance (cmp, rowPtr[localLeft], tolerance)) {
+				       ColorBgra.ColorsWithinTolerance (cmp, row[localLeft], tolerance)) {
 					stencil.Set (localLeft, pt.Y, true);
 					--localLeft;
 				}
@@ -1704,7 +1645,7 @@ namespace Pinta.Core
 				int surfaceWidth = surface.Width;
 				while (localRight < surfaceWidth &&
 				       !stencil.Get (localRight, pt.Y) &&
-				       ColorBgra.ColorsWithinTolerance (cmp, rowPtr[localRight], tolerance)) {
+				       ColorBgra.ColorsWithinTolerance (cmp, row[localRight], tolerance)) {
 					stencil.Set (localRight, pt.Y, true);
 					++localRight;
 				}
@@ -1712,14 +1653,15 @@ namespace Pinta.Core
 				++localLeft;
 				--localRight;
 
-				Action<int> checkRow = (row) => {
+				void checkRow (ReadOnlySpan<ColorBgra> surf_data, int row)
+				{
 					int sleft = localLeft;
 					int sright = localLeft;
-					ColorBgra* otherRowPtr = surface.GetRowAddressUnchecked (row);
+					ReadOnlySpan<ColorBgra> other_row = surf_data.Slice (row * surf_width, surf_width);
 
 					for (int sx = localLeft; sx <= localRight; ++sx) {
 						if (!stencil.Get (sx, row) &&
-						    ColorBgra.ColorsWithinTolerance (cmp, otherRowPtr[sx], tolerance)) {
+						    ColorBgra.ColorsWithinTolerance (cmp, other_row[sx], tolerance)) {
 							++sright;
 						} else {
 							if (sright - sleft > 0) {
@@ -1734,14 +1676,14 @@ namespace Pinta.Core
 					if (sright - sleft > 0) {
 						queue.Enqueue (new Point (sleft, row));
 					}
-				};
+				}
 
 				if (pt.Y > 0) {
-					checkRow (pt.Y - 1);
+					checkRow (surf_data, pt.Y - 1);
 				}
 
 				if (pt.Y < surface.Height - 1) {
-					checkRow (pt.Y + 1);
+					checkRow (surf_data, pt.Y + 1);
 				}
 
 				if (localLeft < left) {
@@ -1768,9 +1710,11 @@ namespace Pinta.Core
 		}
 
 		// Ported from PDN
-		public unsafe static void FillStencilByColor (ImageSurface surface, BitMask stencil, ColorBgra cmp, int tolerance,
+		public static void FillStencilByColor (ImageSurface surface, BitMask stencil, ColorBgra cmp, int tolerance,
 							      out Rectangle boundingBox, Cairo.Region limitRegion, bool limitToSelection)
 		{
+			int surf_width = surface.Width;
+
 			int top = int.MaxValue;
 			int bottom = int.MinValue;
 			int left = int.MaxValue;
@@ -1795,11 +1739,10 @@ namespace Pinta.Core
 
 			Parallel.For (0, surface.Height, y => {
 				bool foundPixelInRow = false;
-				ColorBgra* ptr = surface.GetRowAddressUnchecked (y);
+				ReadOnlySpan<ColorBgra> row = surface.GetReadOnlyData ().Slice (y * surf_width, surf_width);
 
-				int surfaceWidth = surface.Width;
-				for (int x = 0; x < surfaceWidth; ++x) {
-					if (ColorBgra.ColorsWithinTolerance (cmp, *ptr, tolerance)) {
+				for (int x = 0; x < surf_width; ++x) {
+					if (ColorBgra.ColorsWithinTolerance (cmp, row[x], tolerance)) {
 						stencil.Set (x, y, true);
 
 						if (x < left) {
@@ -1812,8 +1755,6 @@ namespace Pinta.Core
 
 						foundPixelInRow = true;
 					}
-
-					++ptr;
 				}
 
 				if (foundPixelInRow) {

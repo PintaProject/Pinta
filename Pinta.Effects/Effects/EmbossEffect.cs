@@ -88,7 +88,7 @@ namespace Pinta.Effects
 						for (int fy = fyStart; fy < fyEnd; ++fy) {
 							for (int fx = fxStart; fx < fxEnd; ++fx) {
 								double weight = weights[fy, fx];
-								ref readonly ColorBgra c = ref src.GetPoint (src_data, srcWidth, x - 1 + fx, y - 1 + fy);
+								ref readonly ColorBgra c = ref src.GetColorBgra (src_data, srcWidth, x - 1 + fx, y - 1 + fy);
 								double intensity = (double) c.GetIntensityByte ();
 								sum += weight * intensity;
 							}

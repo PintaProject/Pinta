@@ -101,7 +101,7 @@ namespace Pinta.Effects
 
 								theta += (t * twist) / 100;
 
-								ref readonly ColorBgra sample = ref src.GetPoint (src_data, width,
+								ref readonly ColorBgra sample = ref src.GetColorBgra (src_data, width,
 								    (int) (hw + (float) (rad * Math.Cos (theta))),
 								    (int) (hh + (float) (rad * Math.Sin (theta))));
 

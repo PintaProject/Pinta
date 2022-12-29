@@ -93,7 +93,7 @@ namespace Pinta.Effects
 							int v = y - pointOffsetsPtr[i].Y;
 
 							if (u >= 0 && u < src_width && v >= 0 && v < src_height) {
-								samples[sampleCount] = src.GetPoint (src_data, src_width, u, v);
+								samples[sampleCount] = src.GetColorBgra (src_data, src_width, u, v);
 								++sampleCount;
 							}
 						}
