@@ -63,7 +63,7 @@ namespace Pinta.Effects
 			return pointOffsets;
 		}
 
-		public unsafe override void Render (ImageSurface src, ImageSurface dst, Gdk.Rectangle[] rois)
+		public override void Render (ImageSurface src, ImageSurface dst, Gdk.Rectangle[] rois)
 		{
 			Gdk.Point[] pointOffsets = RecalcPointOffsets (Data.Fragments, Data.Rotation, Data.Distance);
 
@@ -78,11 +78,12 @@ namespace Pinta.Effects
 			// Cache these for a massive performance boost
 			int src_width = src.Width;
 			int src_height = src.Height;
-			ColorBgra* src_data_ptr = (ColorBgra*) src.DataPtr;
+			ReadOnlySpan<ColorBgra> src_data = src.GetReadOnlyData ();
+			Span<ColorBgra> dst_data = dst.GetData ();
 
 			foreach (Gdk.Rectangle rect in rois) {
 				for (int y = rect.Top; y <= rect.GetBottom (); y++) {
-					ColorBgra* dstPtr = dst.GetPointAddressUnchecked (rect.Left, y);
+					var dst_row = dst_data.Slice (y * src_width, src_width);
 
 					for (int x = rect.Left; x <= rect.GetRight (); x++) {
 						int sampleCount = 0;
@@ -92,13 +93,12 @@ namespace Pinta.Effects
 							int v = y - pointOffsetsPtr[i].Y;
 
 							if (u >= 0 && u < src_width && v >= 0 && v < src_height) {
-								samples[sampleCount] = src.GetPointUnchecked (src_data_ptr, src_width, u, v);
+								samples[sampleCount] = src.GetPoint (src_data, src_width, u, v);
 								++sampleCount;
 							}
 						}
 
-						*dstPtr = ColorBgra.Blend (samples.Slice (0, sampleCount));
-						++dstPtr;
+						dst_row[x] = ColorBgra.Blend (samples.Slice (0, sampleCount));
 					}
 				}
 			}

@@ -1037,12 +1037,12 @@ namespace Pinta.Core
 			return r.ContainsCorrect (pt.X, pt.Y);
 		}
 
-		public static unsafe ColorBgra GetBilinearSample (this ImageSurface src, float x, float y)
+		public static ColorBgra GetBilinearSample (this ImageSurface src, float x, float y)
 		{
-			return GetBilinearSample (src, (ColorBgra*) src.DataPtr, src.Width, src.Height, x, y);
+			return GetBilinearSample (src, src.GetReadOnlyData (), src.Width, src.Height, x, y);
 		}
 
-		public static unsafe ColorBgra GetBilinearSample (this ImageSurface src, ColorBgra* srcDataPtr, int srcWidth, int srcHeight, float x, float y)
+		public static ColorBgra GetBilinearSample (this ImageSurface src, ReadOnlySpan<ColorBgra> src_data, int srcWidth, int srcHeight, float x, float y)
 		{
 			if (!Utility.IsNumber (x) || !Utility.IsNumber (y))
 				return ColorBgra.Transparent;
@@ -1083,25 +1083,24 @@ namespace Pinta.Core
 					else
 						sbottom = stop + 1;
 
-					ColorBgra* cul = src.GetPointAddressUnchecked (srcDataPtr, srcWidth, sleft, stop);
-					ColorBgra* cur = cul + (sright - sleft);
-					ColorBgra* cll = src.GetPointAddressUnchecked (srcDataPtr, srcWidth, sleft, sbottom);
-					ColorBgra* clr = cll + (sright - sleft);
+					ref readonly ColorBgra cul = ref src.GetPoint (src_data, srcWidth, sleft, stop);
+					ref readonly ColorBgra cur = ref src.GetPoint (src_data, srcWidth, sright, stop);
+					ref readonly ColorBgra cll = ref src.GetPoint (src_data, srcWidth, sleft, sbottom);
+					ref readonly ColorBgra clr = ref src.GetPoint (src_data, srcWidth, sright, sbottom);
 
-					ColorBgra c = ColorBgra.BlendColors4W16IP (*cul, wul, *cur, wur, *cll, wll, *clr, wlr);
-					return c;
+					return ColorBgra.BlendColors4W16IP (cul, wul, cur, wur, cll, wll, clr, wlr);
 				}
 			} else {
 				return ColorBgra.FromUInt32 (0);
 			}
 		}
 
-		public static unsafe ColorBgra GetBilinearSampleClamped (this ImageSurface src, float x, float y)
+		public static ColorBgra GetBilinearSampleClamped (this ImageSurface src, float x, float y)
 		{
-			return GetBilinearSampleClamped (src, (ColorBgra*) src.DataPtr, src.Width, src.Height, x, y);
+			return GetBilinearSampleClamped (src, src.GetReadOnlyData (), src.Width, src.Height, x, y);
 		}
 
-		public static unsafe ColorBgra GetBilinearSampleClamped (this ImageSurface src, ColorBgra* srcDataPtr, int srcWidth, int srcHeight, float x, float y)
+		public static ColorBgra GetBilinearSampleClamped (this ImageSurface src, ReadOnlySpan<ColorBgra> src_data, int srcWidth, int srcHeight, float x, float y)
 		{
 			if (!Utility.IsNumber (x) || !Utility.IsNumber (y))
 				return ColorBgra.Transparent;
@@ -1151,22 +1150,21 @@ namespace Pinta.Core
 				else
 					sbottom = stop + 1;
 
-				ColorBgra* cul = src.GetPointAddressUnchecked (srcDataPtr, srcWidth, sleft, stop);
-				ColorBgra* cur = cul + (sright - sleft);
-				ColorBgra* cll = src.GetPointAddressUnchecked (srcDataPtr, srcWidth, sleft, sbottom);
-				ColorBgra* clr = cll + (sright - sleft);
+				ref readonly ColorBgra cul = ref src.GetPoint (src_data, srcWidth, sleft, stop);
+				ref readonly ColorBgra cur = ref src.GetPoint (src_data, srcWidth, sright, stop);
+				ref readonly ColorBgra cll = ref src.GetPoint (src_data, srcWidth, sleft, sbottom);
+				ref readonly ColorBgra clr = ref src.GetPoint (src_data, srcWidth, sright, sbottom);
 
-				ColorBgra c = ColorBgra.BlendColors4W16IP (*cul, wul, *cur, wur, *cll, wll, *clr, wlr);
-				return c;
+				return ColorBgra.BlendColors4W16IP (cul, wul, cur, wur, cll, wll, clr, wlr);
 			}
 		}
 
-		public static unsafe ColorBgra GetBilinearSampleWrapped (this ImageSurface src, float x, float y)
+		public static ColorBgra GetBilinearSampleWrapped (this ImageSurface src, float x, float y)
 		{
-			return GetBilinearSampleWrapped (src, (ColorBgra*) src.DataPtr, src.Width, src.Height, x, y);
+			return GetBilinearSampleWrapped (src, src.GetReadOnlyData (), src.Width, src.Height, x, y);
 		}
 
-		public static unsafe ColorBgra GetBilinearSampleWrapped (this ImageSurface src, ColorBgra* srcDataPtr, int srcWidth, int srcHeight, float x, float y)
+		public static ColorBgra GetBilinearSampleWrapped (this ImageSurface src, ReadOnlySpan<ColorBgra> src_data, int srcWidth, int srcHeight, float x, float y)
 		{
 			if (!Utility.IsNumber (x) || !Utility.IsNumber (y))
 				return ColorBgra.Transparent;
@@ -1216,14 +1214,12 @@ namespace Pinta.Core
 				else
 					sbottom = stop + 1;
 
-				ColorBgra cul = src.GetPointUnchecked (srcDataPtr, srcWidth, sleft, stop);
-				ColorBgra cur = src.GetPointUnchecked (srcDataPtr, srcWidth, sright, stop);
-				ColorBgra cll = src.GetPointUnchecked (srcDataPtr, srcWidth, sleft, sbottom);
-				ColorBgra clr = src.GetPointUnchecked (srcDataPtr, srcWidth, sright, sbottom);
+				ref readonly ColorBgra cul = ref src.GetPoint (src_data, srcWidth, sleft, stop);
+				ref readonly ColorBgra cur = ref src.GetPoint (src_data, srcWidth, sright, stop);
+				ref readonly ColorBgra cll = ref src.GetPoint (src_data, srcWidth, sleft, sbottom);
+				ref readonly ColorBgra clr = ref src.GetPoint (src_data, srcWidth, sright, sbottom);
 
-				ColorBgra c = ColorBgra.BlendColors4W16IP (cul, wul, cur, wur, cll, wll, clr, wlr);
-
-				return c;
+				return ColorBgra.BlendColors4W16IP (cul, wul, cur, wur, cll, wll, clr, wlr);
 			}
 		}
 

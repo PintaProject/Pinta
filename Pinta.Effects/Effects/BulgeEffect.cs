@@ -47,7 +47,7 @@ namespace Pinta.Effects
 		}
 
 		#region Algorithm Code Ported From PDN
-		unsafe public override void Render (ImageSurface src, ImageSurface dst, Gdk.Rectangle[] rois)
+		public override void Render (ImageSurface src, ImageSurface dst, Gdk.Rectangle[] rois)
 		{
 			float bulge = (float) Data.Amount;
 
@@ -61,14 +61,14 @@ namespace Pinta.Effects
 
 			int src_width = src.Width;
 			int src_height = src.Height;
-			ColorBgra* src_data_ptr = (ColorBgra*) src.DataPtr;
+			ReadOnlySpan<ColorBgra> src_data = src.GetReadOnlyData ();
+			Span<ColorBgra> dst_data = dst.GetData ();
 
 			foreach (Gdk.Rectangle rect in rois) {
 
 				for (int y = rect.Top; y <= rect.GetBottom (); y++) {
-
-					ColorBgra* dstPtr = dst.GetPointAddressUnchecked (rect.Left, y);
-					ColorBgra* srcPtr = src.GetPointAddressUnchecked (src_data_ptr, src_width, rect.Left, y);
+					var src_row = src_data.Slice (y * src_width, src_width);
+					var dst_row = dst_data.Slice (y * src_width, src_width);
 					float v = y - hh;
 
 					for (int x = rect.Left; x <= rect.GetRight (); x++) {
@@ -82,13 +82,10 @@ namespace Pinta.Effects
 							float xp = u * rscale2;
 							float yp = v * rscale2;
 
-							*dstPtr = src.GetBilinearSampleClamped (src_data_ptr, src_width, src_height, xp + hw, yp + hh);
+							dst_row[x] = src.GetBilinearSampleClamped (src_data, src_width, src_height, xp + hw, yp + hh);
 						} else {
-							*dstPtr = *srcPtr;
+							dst_row[x] = src_row[x];
 						}
-
-						++dstPtr;
-						++srcPtr;
 					}
 				}
 			}

@@ -45,7 +45,7 @@ namespace Pinta.Effects
 		}
 
 		#region Algorithm Code Ported From PDN
-		public unsafe override void Render (ImageSurface src, ImageSurface dst, Gdk.Rectangle[] rois)
+		public override void Render (ImageSurface src, ImageSurface dst, Gdk.Rectangle[] rois)
 		{
 			PointD start = new PointD (0, 0);
 			double theta = ((double) (Data.Angle + 180) * 2 * Math.PI) / 360.0;
@@ -73,14 +73,15 @@ namespace Pinta.Effects
 
 			Span<ColorBgra> samples = stackalloc ColorBgra[points.Length];
 
-			ColorBgra* src_dataptr = (ColorBgra*) src.DataPtr;
+			ReadOnlySpan<ColorBgra> src_data = src.GetReadOnlyData ();
+			Span<ColorBgra> dst_data = dst.GetData ();
 			int src_width = src.Width;
 			int src_height = src.Height;
 
 			foreach (Gdk.Rectangle rect in rois) {
 
 				for (int y = rect.Top; y <= rect.GetBottom (); ++y) {
-					ColorBgra* dstPtr = dst.GetPointAddressUnchecked (rect.Left, y);
+					var dst_row = dst_data.Slice (y * src_width, src_width);
 
 					for (int x = rect.Left; x <= rect.GetRight (); ++x) {
 						int sampleCount = 0;
@@ -89,13 +90,12 @@ namespace Pinta.Effects
 							PointD pt = new PointD (points[j].X + (float) x, points[j].Y + (float) y);
 
 							if (pt.X >= 0 && pt.Y >= 0 && pt.X <= (src_width - 1) && pt.Y <= (src_height - 1)) {
-								samples[sampleCount] = src.GetBilinearSample (src_dataptr, src_width, src_height, (float) pt.X, (float) pt.Y);
+								samples[sampleCount] = src.GetBilinearSample (src_data, src_width, src_height, (float) pt.X, (float) pt.Y);
 								++sampleCount;
 							}
 						}
 
-						*dstPtr = ColorBgra.Blend (samples.Slice (0, sampleCount));
-						++dstPtr;
+						dst_row[x] = ColorBgra.Blend (samples.Slice (0, sampleCount));
 					}
 				}
 			}

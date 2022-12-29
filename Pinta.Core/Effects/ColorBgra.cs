@@ -374,7 +374,7 @@ namespace Pinta.Core
 		/// The weights should be 16-bit fixed point numbers that add up to 65536 ("1.0").
 		/// 4W16IP means "4 colors, weights, 16-bit integer precision"
 		/// </remarks>
-		public static ColorBgra BlendColors4W16IP (ColorBgra c1, uint w1, ColorBgra c2, uint w2, ColorBgra c3, uint w3, ColorBgra c4, uint w4)
+		public static ColorBgra BlendColors4W16IP (in ColorBgra c1, uint w1, in ColorBgra c2, uint w2, in ColorBgra c3, uint w3, in ColorBgra c4, uint w4)
 		{
 #if DEBUG
 			if ((w1 + w2 + w3 + w4) != 65536) {
