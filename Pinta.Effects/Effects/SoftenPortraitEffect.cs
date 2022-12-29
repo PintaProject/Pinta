@@ -34,6 +34,7 @@ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 THE SOFTWARE. 
 */
 using System;
+using System.Security.Cryptography;
 using Cairo;
 using Pinta.Core;
 using Pinta.Effects;
@@ -81,7 +82,7 @@ namespace Pinta.Effects
 			return EffectHelper.LaunchSimpleEffectDialog (this);
 		}
 
-		public unsafe override void Render (ImageSurface src, ImageSurface dest, Gdk.Rectangle[] rois)
+		public override void Render (ImageSurface src, ImageSurface dest, Gdk.Rectangle[] rois)
 		{
 			int warmth = Data.Warmth;
 			float redAdjust = 1.0f + (warmth / 100.0f);
@@ -90,22 +91,22 @@ namespace Pinta.Effects
 			this.blurEffect.Render (src, dest, rois);
 			this.bacAdjustment.Render (src, dest, rois);
 
+			ReadOnlySpan<ColorBgra> src_data = src.GetReadOnlyData ();
+			Span<ColorBgra> dst_data = dest.GetData ();
+			int width = dest.Width;
+
 			foreach (Gdk.Rectangle roi in rois) {
 				for (int y = roi.Top; y <= roi.GetBottom (); ++y) {
-					ColorBgra* srcPtr = src.GetPointAddress (roi.X, y);
-					ColorBgra* dstPtr = dest.GetPointAddress (roi.X, y);
+					var src_row = src_data.Slice (y * width, width);
+					var dst_row = dst_data.Slice (y * width, width);
 
 					for (int x = roi.Left; x <= roi.GetRight (); ++x) {
-						ColorBgra srcGrey = this.desaturateOp.Apply (*srcPtr);
+						ColorBgra srcGrey = this.desaturateOp.Apply (src_row[x]);
 
 						srcGrey.R = Utility.ClampToByte ((int) ((float) srcGrey.R * redAdjust));
 						srcGrey.B = Utility.ClampToByte ((int) ((float) srcGrey.B * blueAdjust));
 
-						ColorBgra mypixel = this.overlayOp.Apply (srcGrey, *dstPtr);
-						*dstPtr = mypixel;
-
-						++srcPtr;
-						++dstPtr;
+						dst_row[x] = this.overlayOp.Apply (srcGrey, dst_row[x]);
 					}
 				}
 			}

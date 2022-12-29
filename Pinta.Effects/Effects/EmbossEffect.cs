@@ -47,14 +47,15 @@ namespace Pinta.Effects
 		}
 
 		#region Algorithm Code Ported From PDN
-		unsafe public override void Render (ImageSurface src, ImageSurface dst, Gdk.Rectangle[] rois)
+		public override void Render (ImageSurface src, ImageSurface dst, Gdk.Rectangle[] rois)
 		{
 			double[,] weights = Weights;
 
 			var srcWidth = src.Width;
 			var srcHeight = src.Height;
 
-			ColorBgra* src_data_ptr = (ColorBgra*) src.DataPtr;
+			ReadOnlySpan<ColorBgra> src_data = src.GetReadOnlyData ();
+			Span<ColorBgra> dst_data = dst.GetData ();
 
 			foreach (var rect in rois) {
 				// loop through each line of target rectangle
@@ -69,7 +70,7 @@ namespace Pinta.Effects
 						fyEnd = 2;
 
 					// loop through each point in the line 
-					ColorBgra* dstPtr = dst.GetPointAddress (rect.Left, y);
+					var dst_row = dst_data.Slice (y * srcWidth, srcWidth);
 
 					for (int x = rect.Left; x <= rect.GetRight (); ++x) {
 						int fxStart = 0;
@@ -87,7 +88,7 @@ namespace Pinta.Effects
 						for (int fy = fyStart; fy < fyEnd; ++fy) {
 							for (int fx = fxStart; fx < fxEnd; ++fx) {
 								double weight = weights[fy, fx];
-								ColorBgra c = src.GetPointUnchecked (src_data_ptr, srcWidth, x - 1 + fx, y - 1 + fy);
+								ref readonly ColorBgra c = ref src.GetPoint (src_data, srcWidth, x - 1 + fx, y - 1 + fy);
 								double intensity = (double) c.GetIntensityByte ();
 								sum += weight * intensity;
 							}
@@ -102,9 +103,7 @@ namespace Pinta.Effects
 						if (iSum < 0)
 							iSum = 0;
 
-						*dstPtr = ColorBgra.FromBgra ((byte) iSum, (byte) iSum, (byte) iSum, 255);
-
-						++dstPtr;
+						dst_row[x] = ColorBgra.FromBgra ((byte) iSum, (byte) iSum, (byte) iSum, 255);
 					}
 				}
 			}

@@ -47,7 +47,7 @@ namespace Pinta.Effects
 		}
 
 		#region Algorithm Code Ported From PDN
-		unsafe public override void Render (ImageSurface src, ImageSurface dst, Gdk.Rectangle[] rois)
+		public override void Render (ImageSurface src, ImageSurface dst, Gdk.Rectangle[] rois)
 		{
 			int width = dst.Width;
 			int height = dst.Height;
@@ -75,12 +75,13 @@ namespace Pinta.Effects
 			}
 
 			int src_width = src.Width;
-			ColorBgra* src_data_ptr = (ColorBgra*) src.DataPtr;
+			ReadOnlySpan<ColorBgra> src_data = src.GetReadOnlyData ();
+			Span<ColorBgra> dst_data = dst.GetData ();
 
 			foreach (var rect in rois) {
 				for (int y = rect.Top; y <= rect.GetBottom (); y++) {
 					float j = y - hh;
-					ColorBgra* dstPtr = dst.GetPointAddressUnchecked (rect.Left, y);
+					var dst_row = dst_data.Slice (y * width, width);
 
 					for (int x = rect.Left; x <= rect.GetRight (); x++) {
 						int b = 0;
@@ -118,7 +119,7 @@ namespace Pinta.Effects
 								ySample = (ySample + height) % height;
 							}
 
-							ColorBgra sample = *src.GetPointAddressUnchecked (src_data_ptr, src_width, xSample, ySample);
+							ref readonly ColorBgra sample = ref src.GetPoint (src_data, src_width, xSample, ySample);
 
 							b += sample.B;
 							g += sample.G;
@@ -126,7 +127,7 @@ namespace Pinta.Effects
 							a += sample.A;
 						}
 
-						*(dstPtr++) = ColorBgra.FromBgra ((byte) (b / aaSamples), (byte) (g / aaSamples),
+						dst_row[x] = ColorBgra.FromBgra ((byte) (b / aaSamples), (byte) (g / aaSamples),
 							(byte) (r / aaSamples), (byte) (a / aaSamples));
 					}
 				}

@@ -123,13 +123,15 @@ namespace Pinta.Effects
 			return Utility.Lerp (edge1, edge2, v);
 		}
 
-		private unsafe static void RenderClouds (ImageSurface surface, Gdk.Rectangle rect, int scale, byte seed, double power, ColorBgra colorFrom, ColorBgra colorTo)
+		private static void RenderClouds (ImageSurface surface, Gdk.Rectangle rect, int scale, byte seed, double power, ColorBgra colorFrom, ColorBgra colorTo)
 		{
 			int w = surface.Width;
 			int h = surface.Height;
+			var data = surface.GetData ();
+			int bottom = rect.GetBottom ();
 
 			for (int y = rect.Top; y <= rect.GetBottom (); ++y) {
-				ColorBgra* ptr = surface.GetPointAddressUnchecked (0, y - rect.Top);
+				var row = data.Slice ((y - rect.Top) * w, w);
 				int dy = 2 * y - h;
 
 				for (int x = rect.Left; x <= rect.GetRight (); ++x) {
@@ -160,8 +162,7 @@ namespace Pinta.Effects
 						mult *= power;
 					}
 
-					*ptr = ColorBgra.Lerp (colorFrom, colorTo, (val + 1) / 2);
-					++ptr;
+					row[x - rect.Left] = ColorBgra.Lerp (colorFrom, colorTo, (val + 1) / 2);
 				}
 			}
 		}
