@@ -21,11 +21,14 @@
     <Compile Include="Actions/HelpActions.cs" />
     <Compile Include="Actions/Command.cs" />
     <Compile Include="Classes/IExtension.cs" />
+    <Compile Include="Classes/Layer.cs" />
     <Compile Include="Classes/ObservableObject.cs" />
     <Compile Include="Classes/Palette.cs" />
     <Compile Include="Classes/Point.cs" />
     <Compile Include="Classes/Rectangle.cs" />
+    <Compile Include="Classes/Re-editable/ReEditableLayer.cs" />
     <Compile Include="Classes/Translations.cs" />
+    <Compile Include="Classes/UserLayer.cs" />
     <Compile Include="Effects/*.cs" />
     <Compile Include="Enumerations/*.cs" />
     <Compile Include="EventArgs/ModifyCompressionEventArgs.cs" />

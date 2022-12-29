@@ -51,41 +51,44 @@ namespace Pinta.Core
 		//Call the base class constructor and setup the engines.
 		public UserLayer (ImageSurface surface, bool hidden, double opacity, string name) : base (surface, hidden, opacity, name)
 		{
+#if false // TODO-GTK4 - enable Pango-related code and the text engine
 			tEngine = new TextEngine ();
+#endif
 			TextLayer = new ReEditableLayer (this);
 		}
 
+#if false // TODO-GTK4
 		//Stores most of the editable text's data, including the text itself.
 		public TextEngine tEngine;
 
 		//Rectangular boundary surrounding the editable text.
 		public Gdk.Rectangle textBounds = Gdk.Rectangle.Zero;
 		public Gdk.Rectangle previousTextBounds = Gdk.Rectangle.Zero;
+#endif
 
-		public override void ApplyTransform (Matrix xform, Size new_size)
+		public override void ApplyTransform (Matrix xform, Size old_size, Size new_size)
 		{
-			base.ApplyTransform (xform, new_size);
+			base.ApplyTransform (xform, old_size, new_size);
 
 			foreach (ReEditableLayer rel in ReEditableLayers) {
 				if (rel.IsLayerSetup)
-					rel.Layer.ApplyTransform (xform, new_size);
+					rel.Layer.ApplyTransform (xform, old_size, new_size);
 			}
 		}
 
-		public void Rotate (double angle, Size new_size)
+		public void Rotate (double angle, Size old_size, Size new_size)
 		{
 			double radians = (angle / 180d) * Math.PI;
-			var old_size = PintaCore.Workspace.ImageSize;
 
-			var xform = new Matrix ();
+			var xform = CairoExtensions.CreateIdentityMatrix ();
 			xform.Translate (new_size.Width / 2.0, new_size.Height / 2.0);
 			xform.Rotate (radians);
 			xform.Translate (-old_size.Width / 2.0, -old_size.Height / 2.0);
 
-			ApplyTransform (xform, new_size);
+			ApplyTransform (xform, old_size, new_size);
 		}
 
-		public override void Crop (Gdk.Rectangle rect, Path? selection)
+		public override void Crop (Rectangle rect, Path? selection)
 		{
 			base.Crop (rect, selection);
 

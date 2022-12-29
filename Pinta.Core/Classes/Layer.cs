@@ -54,8 +54,8 @@ namespace Pinta.Core
 			this.blend_mode = BlendMode.Normal;
 
 			// TODO-GTK4 - this needs to have a proper constructor in gir.core
-			transform = new(Cairo.Internal.MatrixManagedHandle.Create());
-			transform.InitIdentity();
+			transform = new (Cairo.Internal.MatrixManagedHandle.Create ());
+			transform.InitIdentity ();
 		}
 
 		public ImageSurface Surface { get; set; }
@@ -96,32 +96,26 @@ namespace Pinta.Core
 		{
 			var dest = CairoExtensions.CreateImageSurface (Format.Argb32, Surface.Width, Surface.Height);
 
-			using (Cairo.Context g = new Cairo.Context (dest)) {
-				g.Matrix = new Matrix (-1, 0, 0, 1, Surface.Width, 0);
-				g.SetSource (Surface);
+			var g = new Cairo.Context (dest);
+			g.SetMatrix (CairoExtensions.CreateMatrix (-1, 0, 0, 1, Surface.Width, 0));
+			g.SetSourceSurface (Surface, 0, 0);
 
-				g.Paint ();
-			}
+			g.Paint ();
 
-			Surface old = Surface;
 			Surface = dest;
-			(old as IDisposable).Dispose ();
 		}
 
 		public void FlipVertical ()
 		{
 			var dest = CairoExtensions.CreateImageSurface (Format.Argb32, Surface.Width, Surface.Height);
 
-			using (Cairo.Context g = new Cairo.Context (dest)) {
-				g.Matrix = new Matrix (1, 0, 0, -1, 0, Surface.Height);
-				g.SetSource (Surface);
+			var g = new Cairo.Context (dest);
+			g.SetMatrix (CairoExtensions.CreateMatrix (1, 0, 0, -1, 0, Surface.Height));
+			g.SetSourceSurface (Surface, 0, 0);
 
-				g.Paint ();
-			}
+			g.Paint ();
 
-			Surface old = Surface;
 			Surface = dest;
-			(old as IDisposable).Dispose ();
 		}
 
 		public void Draw (Context ctx)
@@ -156,23 +150,19 @@ namespace Pinta.Core
 			ctx.Restore ();
 		}
 
-		public virtual void ApplyTransform (Matrix xform, Size new_size)
+		public virtual void ApplyTransform (Matrix xform, Size old_size, Size new_size)
 		{
-			var old_size = PintaCore.Workspace.ImageSize;
-			var dest = CairoExtensions.CreateImageSurface (Format.ARGB32, new_size.Width, new_size.Height);
+			var dest = CairoExtensions.CreateImageSurface (Format.Argb32, new_size.Width, new_size.Height);
 
-			using (var g = new Context (dest)) {
-				g.Transform (xform);
-				g.SetSource (Surface);
-				g.Paint ();
-			}
+			var g = new Context (dest);
+			g.Transform (xform);
+			g.SetSourceSurface (Surface, 0, 0);
+			g.Paint ();
 
-			Surface old = Surface;
 			Surface = dest;
-			old.Dispose ();
 		}
 
-		public static Gdk.Size RotateDimensions (Gdk.Size originalSize, double angle)
+		public static Size RotateDimensions (Size originalSize, double angle)
 		{
 			double radians = (angle / 180d) * Math.PI;
 			double cos = Math.Abs (Math.Cos (radians));
@@ -180,51 +170,18 @@ namespace Pinta.Core
 			int w = originalSize.Width;
 			int h = originalSize.Height;
 
-			return new Gdk.Size ((int) (w * cos + h * sin), (int) (w * sin + h * cos));
-		}
-
-		public void HueSaturation (int hueDelta, int satDelta, int lightness)
-		{
-			ImageSurface dest = Surface.Clone ();
-
-			// map the range [0,100] -> [0,100] and the range [101,200] -> [103,400]
-			if (satDelta > 100)
-				satDelta = ((satDelta - 100) * 3) + 100;
-
-			UnaryPixelOp op;
-
-			if (hueDelta == 0 && satDelta == 100 && lightness == 0)
-				op = new UnaryPixelOps.Identity ();
-			else
-				op = new UnaryPixelOps.HueSaturationLightness (hueDelta, satDelta, lightness);
-
-			dest.Flush ();
-			op.Apply (dest.GetData ());
-			dest.MarkDirty ();
-
-			using (Context g = new Context (Surface)) {
-				g.AppendPath (PintaCore.Workspace.ActiveDocument.Selection.SelectionPath);
-				g.FillRule = Cairo.FillRule.EvenOdd;
-				g.Clip ();
-
-				g.SetSource (dest);
-				g.Paint ();
-			}
-
-			(dest as IDisposable).Dispose ();
+			return new Size ((int) (w * cos + h * sin), (int) (w * sin + h * cos));
 		}
 
 		public virtual void Resize (int width, int height)
 		{
 			ImageSurface dest = CairoExtensions.CreateImageSurface (Format.Argb32, width, height);
 
-			using (Context g = new Context (dest)) {
-				g.Scale ((double) width / (double) Surface.Width, (double) height / (double) Surface.Height);
-				g.SetSourceSurface (Surface, 0, 0);
-				g.Paint ();
-			}
+			var g = new Context (dest);
+			g.Scale ((double) width / (double) Surface.Width, (double) height / (double) Surface.Height);
+			g.SetSourceSurface (Surface, 0, 0);
+			g.Paint ();
 
-			(Surface as IDisposable).Dispose (); ;
 			Surface = dest;
 		}
 
@@ -235,67 +192,60 @@ namespace Pinta.Core
 			int delta_x = Surface.Width - width;
 			int delta_y = Surface.Height - height;
 
-			using (Context g = new Context (dest)) {
-				switch (anchor) {
-					case Anchor.NW:
-						g.SetSourceSurface (Surface, 0, 0);
-						break;
-					case Anchor.N:
-						g.SetSourceSurface (Surface, -delta_x / 2, 0);
-						break;
-					case Anchor.NE:
-						g.SetSourceSurface (Surface, -delta_x, 0);
-						break;
-					case Anchor.E:
-						g.SetSourceSurface (Surface, -delta_x, -delta_y / 2);
-						break;
-					case Anchor.SE:
-						g.SetSourceSurface (Surface, -delta_x, -delta_y);
-						break;
-					case Anchor.S:
-						g.SetSourceSurface (Surface, -delta_x / 2, -delta_y);
-						break;
-					case Anchor.SW:
-						g.SetSourceSurface (Surface, 0, -delta_y);
-						break;
-					case Anchor.W:
-						g.SetSourceSurface (Surface, 0, -delta_y / 2);
-						break;
-					case Anchor.Center:
-						g.SetSourceSurface (Surface, -delta_x / 2, -delta_y / 2);
-						break;
-				}
-
-				g.Paint ();
+			var g = new Context (dest);
+			switch (anchor) {
+				case Anchor.NW:
+					g.SetSourceSurface (Surface, 0, 0);
+					break;
+				case Anchor.N:
+					g.SetSourceSurface (Surface, -delta_x / 2, 0);
+					break;
+				case Anchor.NE:
+					g.SetSourceSurface (Surface, -delta_x, 0);
+					break;
+				case Anchor.E:
+					g.SetSourceSurface (Surface, -delta_x, -delta_y / 2);
+					break;
+				case Anchor.SE:
+					g.SetSourceSurface (Surface, -delta_x, -delta_y);
+					break;
+				case Anchor.S:
+					g.SetSourceSurface (Surface, -delta_x / 2, -delta_y);
+					break;
+				case Anchor.SW:
+					g.SetSourceSurface (Surface, 0, -delta_y);
+					break;
+				case Anchor.W:
+					g.SetSourceSurface (Surface, 0, -delta_y / 2);
+					break;
+				case Anchor.Center:
+					g.SetSourceSurface (Surface, -delta_x / 2, -delta_y / 2);
+					break;
 			}
+			g.Paint ();
 
-			(Surface as IDisposable).Dispose ();
 			Surface = dest;
 		}
 
-		public virtual void Crop (Gdk.Rectangle rect, Path? selection)
+		public virtual void Crop (Rectangle rect, Path? selection)
 		{
 			ImageSurface dest = CairoExtensions.CreateImageSurface (Format.Argb32, rect.Width, rect.Height);
 
+			var g = new Context (dest);
+			// Move the selected content to the upper left
+			g.Translate (-rect.X, -rect.Y);
+			g.Antialias = Antialias.None;
 
-
-			using (Context g = new Context (dest)) {
-				// Move the selected content to the upper left
-				g.Translate (-rect.X, -rect.Y);
-				g.Antialias = Antialias.None;
-
-				// Optionally, respect the given path.
-				if (selection != null) {
-					g.AppendPath (selection);
-					g.FillRule = Cairo.FillRule.EvenOdd;
-					g.Clip ();
-				}
-
-				g.SetSource (Surface);
-				g.Paint ();
+			// Optionally, respect the given path.
+			if (selection != null) {
+				g.AppendPath (selection);
+				g.FillRule = Cairo.FillRule.EvenOdd;
+				g.Clip ();
 			}
 
-			(Surface as IDisposable).Dispose ();
+			g.SetSourceSurface (Surface, 0, 0);
+			g.Paint ();
+
 			Surface = dest;
 		}
 	}

@@ -810,22 +810,25 @@ namespace Pinta.Core
 		{
 			return new Gdk.Size (point.X, point.Y);
 		}
+#endif
 
 		public static ImageSurface Clone (this ImageSurface surf)
 		{
+#if false // TODO-GTK4
 			if (PintaCore.Workspace.HasOpenDocuments)
 				PintaCore.Workspace.ActiveDocument.SignalSurfaceCloned ();
+#endif
 
 			ImageSurface newsurf = CairoExtensions.CreateImageSurface (surf.Format, surf.Width, surf.Height);
 
-			using (Context g = new Context (newsurf)) {
-				g.SetSource (surf);
-				g.Paint ();
-			}
+			var g = new Context (newsurf);
+			g.SetSourceSurface (surf, 0, 0);
+			g.Paint ();
 
 			return newsurf;
 		}
 
+#if false // TODO-GTK4
 		public static Path Clone (this Path path)
 		{
 			var doc = PintaCore.Workspace.ActiveDocument;
@@ -839,15 +842,16 @@ namespace Pinta.Core
 
 			return newpath;
 		}
+#endif
 
 		public static void Clear (this ImageSurface surface)
 		{
-			using (Context g = new Context (surface)) {
-				g.Operator = Operator.Clear;
-				g.Paint ();
-			}
+			var g = new Context (surface);
+			g.Operator = Operator.Clear;
+			g.Paint ();
 		}
 
+#if false // TODO-GTK4
 		public static void Clear (this Context g, Rectangle roi)
 		{
 			g.Save ();
@@ -1504,6 +1508,11 @@ namespace Pinta.Core
 
 			return pattern;
 		}
+#endif
+		public static void Rectangle (this Context g, Rectangle r)
+		{
+			g.Rectangle (r.X, r.Y, r.Width, r.Height);
+		}
 
 		public static void BlendSurface (this Context g, Surface src, BlendMode mode = BlendMode.Normal, double opacity = 1.0)
 		{
@@ -1589,6 +1598,7 @@ namespace Pinta.Core
 			}
 		}
 
+#if false // TODO-GTK4
 		public static Gdk.Rectangle GetRectangleFromPoints (Point a, Point b, int inflate)
 		{
 			var x1 = Math.Min (a.X, b.X);
@@ -1798,6 +1808,7 @@ namespace Pinta.Core
 		{
 			return p.X == int.MinValue && p.Y == int.MinValue;
 		}
+#endif
 
 		/// <summary>
 		/// Wrapper method to create an ImageSurface and handle allocation failures.
@@ -1936,7 +1947,6 @@ namespace Pinta.Core
 			CreateDashPattern (dash_pattern, brush_width, line_cap, out var dashes, out var offset);
 			context.SetDash (dashes, offset);
 		}
-#endif
 
 		public static ReadOnlySpan<ColorBgra> GetReadOnlyData (this ImageSurface surface)
 		{
@@ -1975,6 +1985,14 @@ namespace Pinta.Core
 		{
 			var matrix = new Matrix (Cairo.Internal.MatrixManagedHandle.Create ());
 			matrix.InitIdentity ();
+			return matrix;
+		}
+
+		// TODO-GTK4 - this needs to have a proper constructor in gir.core
+		public static Matrix CreateMatrix (double xx, double xy, double yx, double yy, double x0, double y0)
+		{
+			var matrix = new Matrix (Cairo.Internal.MatrixManagedHandle.Create ());
+			matrix.Init (xx, xy, yx, yy, x0, y0);
 			return matrix;
 		}
 	}
