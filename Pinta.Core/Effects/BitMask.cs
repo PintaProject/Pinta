@@ -17,7 +17,7 @@ namespace Pinta.Core
 			array = new BitArray (width * height);
 		}
 
-		public bool this[Cairo.Point pt] {
+		public bool this[Point pt] {
 			get => this[pt.X, pt.Y];
 			set => this[pt.X, pt.Y] = value;
 		}
@@ -56,10 +56,10 @@ namespace Pinta.Core
 
 		public void Set (int x, int y, bool newValue) => array[GetIndex (x, y)] = newValue;
 
-		public void Set (Gdk.Rectangle rect, bool newValue)
+		public void Set (Rectangle rect, bool newValue)
 		{
-			for (var y = rect.Y; y <= rect.GetBottom (); ++y) {
-				for (var x = rect.X; x <= rect.GetRight (); ++x) {
+			for (var y = rect.Y; y <= rect.Bottom; ++y) {
+				for (var x = rect.X; x <= rect.Right; ++x) {
 					Set (x, y, newValue);
 				}
 			}

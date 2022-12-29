@@ -94,7 +94,7 @@ namespace Pinta.Core
 		/// <param name="src">The source surface. DO NOT MODIFY.</param>
 		/// <param name="dst">The destination surface.</param>
 		/// <param name="rois">An array of rectangles of interest (roi) specifying the area(s) to modify. Only these areas should be modified.</param>
-		public virtual void Render (ImageSurface src, ImageSurface dst, Gdk.Rectangle[] rois)
+		public virtual void Render (ImageSurface src, ImageSurface dst, Rectangle[] rois)
 		{
 			foreach (var rect in rois)
 				Render (src, dst, rect);
@@ -106,14 +106,14 @@ namespace Pinta.Core
 		/// <param name="src">The source surface. DO NOT MODIFY.</param>
 		/// <param name="dst">The destination surface.</param>
 		/// <param name="roi">A rectangle of interest (roi) specifying the area to modify. Only these areas should be modified</param>
-		protected virtual void Render (ImageSurface src, ImageSurface dst, Gdk.Rectangle roi)
+		protected virtual void Render (ImageSurface src, ImageSurface dst, Rectangle roi)
 		{
 			var src_data = src.GetReadOnlyData ();
 			var dst_data = dst.GetData ();
 			int src_width = src.Width;
 			int dst_width = dst.Width;
 
-			for (int y = roi.Y; y <= roi.GetBottom (); ++y) {
+			for (int y = roi.Y; y <= roi.Bottom; ++y) {
 				Render (src_data.Slice (y * src_width + roi.X, roi.Width),
 					dst_data.Slice (y * dst_width + roi.X, roi.Width));
 			}

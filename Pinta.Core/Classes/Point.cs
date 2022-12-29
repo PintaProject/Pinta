@@ -29,7 +29,7 @@ using System;
 /// Replacements for Cairo / GDK points that GtkSharp provided in the GTK3 build.
 namespace Pinta.Core
 {
-	public struct Point
+	public record struct Point
 	{
 		public Point (int x, int y)
 		{
@@ -43,9 +43,9 @@ namespace Pinta.Core
 		public override string ToString () => $"{X}, {Y}";
 	}
 
-	public struct PointD
+	public record struct PointD
 	{
-		public PointD(double x, double y)
+		public PointD (double x, double y)
 		{
 			this.X = x;
 			this.Y = y;
@@ -55,9 +55,19 @@ namespace Pinta.Core
 		public double Y;
 
 		public override string ToString () => $"{X}, {Y}";
+
+		public double Distance (in PointD e)
+		{
+			return new PointD (X - e.X, Y - e.Y).Magnitude ();
+		}
+
+		public double Magnitude ()
+		{
+			return Math.Sqrt (X * X + Y * Y);
+		}
 	}
 
-	public struct Size
+	public record struct Size
 	{
 		public Size (int width, int height)
 		{

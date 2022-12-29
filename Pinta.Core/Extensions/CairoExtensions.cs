@@ -688,16 +688,6 @@ namespace Pinta.Core
 		}
 		#endregion
 
-		public static double Distance (this PointD s, PointD e)
-		{
-			return Magnitude (new PointD (s.X - e.X, s.Y - e.Y));
-		}
-
-		public static double Magnitude (this PointD p)
-		{
-			return Math.Sqrt (p.X * p.X + p.Y * p.Y);
-		}
-
 		/// <summary>
 		/// Returns a new point, rounded to the nearest integer coordinates.
 		/// </summary>
@@ -969,17 +959,18 @@ namespace Pinta.Core
 		{
 			return ref surf.GetColorBgra (surf.GetReadOnlyData (), surf.Width, x, y);
 		}
+#endif
 
-		public static Gdk.Rectangle GetBounds (this ImageSurface surf)
+		public static Rectangle GetBounds (this ImageSurface surf)
 		{
-			return new Gdk.Rectangle (0, 0, surf.Width, surf.Height);
+			return new Rectangle (0, 0, surf.Width, surf.Height);
 		}
 
-		public static Gdk.Size GetSize (this ImageSurface surf)
+		public static Size GetSize (this ImageSurface surf)
 		{
-			return new Gdk.Size (surf.Width, surf.Height);
+			return new Size (surf.Width, surf.Height);
 		}
-
+#if false // TODO-GTK4
 
 		/// <summary>
 		/// There was a bug in gdk-sharp where this returns incorrect values.
@@ -1941,34 +1932,42 @@ namespace Pinta.Core
 			CreateDashPattern (dash_pattern, brush_width, line_cap, out var dashes, out var offset);
 			context.SetDash (dashes, offset);
 		}
+#endif
 
 		public static ReadOnlySpan<ColorBgra> GetReadOnlyData (this ImageSurface surface)
 		{
+#if false // TODO-GTK4 requires next release of gir.core
 			unsafe {
 				return new ReadOnlySpan<ColorBgra> (surface.DataPtr.ToPointer (), surface.Width * surface.Height);
 			}
+#else
+			throw new NotImplementedException ();
+#endif
 		}
 
 		public static Span<ColorBgra> GetData (this ImageSurface surface)
 		{
+#if false // TODO-GTK4 requires next release of gir.core
 			unsafe {
 				return new Span<ColorBgra> (surface.DataPtr.ToPointer (), surface.Width * surface.Height);
 			}
-                }
+#else
+			throw new NotImplementedException ();
 #endif
+		}
 
-		public static void SetSourceColor(this Context context, Color color)
+		public static void SetSourceColor (this Context context, Color color)
 		{
-			context.SetSourceRgba(color.R, color.G, color.B, color.A);
+			context.SetSourceRgba (color.R, color.G, color.B, color.A);
 		}
 
 		public static void AddColorStop (this Gradient gradient, double offset, Color color)
 		{
-			gradient.AddColorStopRgba(offset, color.R, color.G, color.B, color.A);
+			gradient.AddColorStopRgba (offset, color.R, color.G, color.B, color.A);
 		}
 
 		// TODO-GTK4 - this needs to have a proper constructor in gir.core
-		public static Matrix CreateIdentityMatrix()
+		public static Matrix CreateIdentityMatrix ()
 		{
 			var matrix = new Matrix (Cairo.Internal.MatrixManagedHandle.Create ());
 			matrix.InitIdentity ();

@@ -95,9 +95,9 @@ namespace Pinta.Core
 			return (from + frac * (to - from));
 		}
 
-		public static Cairo.PointD Lerp (Cairo.PointD from, Cairo.PointD to, float frac)
+		public static PointD Lerp (PointD from, PointD to, float frac)
 		{
-			return new Cairo.PointD (Lerp (from.X, to.X, frac), Lerp (from.Y, to.Y, frac));
+			return new PointD (Lerp (from.X, to.X, frac), Lerp (from.Y, to.Y, frac));
 		}
 
 		public static void Swap (ref int a, ref int b)
@@ -143,19 +143,19 @@ namespace Pinta.Core
 		/// <param name="startIndex">Index of the first rectangle in the array to examine.</param>
 		/// <param name="length">Number of rectangles to examine, beginning at <b>startIndex</b>.</param>
 		/// <returns>A rectangle that surrounds the region.</returns>
-		public static Gdk.Rectangle GetRegionBounds (Gdk.Rectangle[] rects, int startIndex, int length)
+		public static Rectangle GetRegionBounds (Rectangle[] rects, int startIndex, int length)
 		{
 			if (rects.Length == 0) {
-				return Gdk.Rectangle.Zero;
+				return Rectangle.Zero;
 			}
 
 			int left = rects[startIndex].Left;
 			int top = rects[startIndex].Top;
-			int right = rects[startIndex].GetRight ();
-			int bottom = rects[startIndex].GetBottom ();
+			int right = rects[startIndex].Right;
+			int bottom = rects[startIndex].Bottom;
 
 			for (int i = startIndex + 1; i < startIndex + length; ++i) {
-				Gdk.Rectangle rect = rects[i];
+				Rectangle rect = rects[i];
 
 				if (rect.Left < left) {
 					left = rect.Left;
@@ -165,16 +165,16 @@ namespace Pinta.Core
 					top = rect.Top;
 				}
 
-				if (rect.GetRight () > right) {
-					right = rect.GetRight ();
+				if (rect.Right > right) {
+					right = rect.Right;
 				}
 
-				if (rect.GetBottom () > bottom) {
-					bottom = rect.GetBottom ();
+				if (rect.Bottom > bottom) {
+					bottom = rect.Bottom;
 				}
 			}
 
-			return Gdk.Rectangle.FromLTRB (left, top, right, bottom);
+			return Rectangle.FromLTRB (left, top, right, bottom);
 		}
 
 		public static int ColorDifference (ColorBgra a, ColorBgra b)
@@ -196,12 +196,12 @@ namespace Pinta.Core
 			return diffSq / 3;
 		}
 
-		public static Gdk.Rectangle[] InflateRectangles (Gdk.Rectangle[] rects, int len)
+		public static Rectangle[] InflateRectangles (Rectangle[] rects, int len)
 		{
-			Gdk.Rectangle[] inflated = new Gdk.Rectangle[rects.Length];
+			Rectangle[] inflated = new Rectangle[rects.Length];
 
 			for (int i = 0; i < rects.Length; ++i)
-				inflated[i] = new Gdk.Rectangle (rects[i].X - len, rects[i].Y - len, rects[i].Width + 2 * len, rects[i].Height + 2 * len);
+				inflated[i] = new Rectangle (rects[i].X - len, rects[i].Y - len, rects[i].Width + 2 * len, rects[i].Height + 2 * len);
 
 			return inflated;
 		}
@@ -223,9 +223,9 @@ namespace Pinta.Core
 			return (byte) r2;
 		}
 
-		public static Gdk.Point[] GetLinePoints (Gdk.Point first, Gdk.Point second)
+		public static Point[] GetLinePoints (Point first, Point second)
 		{
-			Gdk.Point[]? coords = null;
+			Point[]? coords = null;
 
 			int x1 = first.X;
 			int y1 = first.Y;
@@ -243,7 +243,7 @@ namespace Pinta.Core
 			int y = 0;
 
 			if (dxabs > dyabs) {
-				coords = new Gdk.Point[dxabs + 1];
+				coords = new Point[dxabs + 1];
 
 				for (int i = 0; i <= dxabs; i++) {
 					y += dyabs;
@@ -253,21 +253,21 @@ namespace Pinta.Core
 						py += sdy;
 					}
 
-					coords[i] = new Gdk.Point (px, py);
+					coords[i] = new Point (px, py);
 					px += sdx;
 				}
 			} else
 			    // had to add in this cludge for slopes of 1 ... wasn't drawing half the line
 			    if (dxabs == dyabs) {
-				coords = new Gdk.Point[dxabs + 1];
+				coords = new Point[dxabs + 1];
 
 				for (int i = 0; i <= dxabs; i++) {
-					coords[i] = new Gdk.Point (px, py);
+					coords[i] = new Point (px, py);
 					px += sdx;
 					py += sdy;
 				}
 			} else {
-				coords = new Gdk.Point[dyabs + 1];
+				coords = new Point[dyabs + 1];
 
 				for (int i = 0; i <= dyabs; i++) {
 					x += dxabs;
@@ -277,7 +277,7 @@ namespace Pinta.Core
 						px += sdx;
 					}
 
-					coords[i] = new Gdk.Point (px, py);
+					coords[i] = new Point (px, py);
 					py += sdy;
 				}
 			}
@@ -285,7 +285,7 @@ namespace Pinta.Core
 			return coords;
 		}
 
-		public static void GetRgssOffsets (Span<Cairo.PointD> samplesArray, int sampleCount, int quality)
+		public static void GetRgssOffsets (Span<PointD> samplesArray, int sampleCount, int quality)
 		{
 			if (sampleCount < 1) {
 				throw new ArgumentOutOfRangeException ("sampleCount", "sampleCount must be [0, int.MaxValue]");
@@ -296,7 +296,7 @@ namespace Pinta.Core
 			}
 
 			if (sampleCount == 1) {
-				samplesArray[0] = new Cairo.PointD (0.0, 0.0);
+				samplesArray[0] = new PointD (0.0, 0.0);
 			} else {
 				for (int i = 0; i < sampleCount; ++i) {
 					double y = (i + 1d) / (sampleCount + 1d);
@@ -304,7 +304,7 @@ namespace Pinta.Core
 
 					x -= (int) x;
 
-					samplesArray[i] = new Cairo.PointD (x - 0.5d, y - 0.5d);
+					samplesArray[i] = new PointD (x - 0.5d, y - 0.5d);
 				}
 			}
 		}

@@ -10,7 +10,6 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Cairo;
-using Rectangle = Gdk.Rectangle;
 
 namespace Pinta.Core
 {
@@ -109,7 +108,7 @@ namespace Pinta.Core
 			endAlpha = (byte) (255 - endColor.A);
 		}
 
-		public void Render (ImageSurface surface, Gdk.Rectangle[] rois)
+		public void Render (ImageSurface surface, Rectangle[] rois)
 		{
 			byte startAlpha;
 			byte endAlpha;
@@ -127,14 +126,14 @@ namespace Pinta.Core
 			int src_width = surface.Width;
 
 			for (int ri = 0; ri < rois.Length; ++ri) {
-				Gdk.Rectangle rect = rois[ri];
+				Rectangle rect = rois[ri];
 
 				if (this.startPoint.X == this.endPoint.X && this.startPoint.Y == this.endPoint.Y) {
 					// Start and End point are the same ... fill with solid color.
-					for (int y = rect.Top; y <= rect.GetBottom (); ++y) {
+					for (int y = rect.Top; y <= rect.Bottom; ++y) {
 						var row = src_data.Slice (y * src_width, src_width);
 
-						for (int x = rect.Left; x <= rect.GetRight (); ++x) {
+						for (int x = rect.Left; x <= rect.Right; ++x) {
 							ref ColorBgra pixel = ref row[x];
 							ColorBgra result;
 
@@ -169,7 +168,7 @@ namespace Pinta.Core
 		private bool ProcessGradientLine (byte startAlpha, byte endAlpha, int y, Rectangle rect, Span<ColorBgra> surface_data, int src_width)
 		{
 			var row = surface_data.Slice (y * src_width, src_width);
-			var right = rect.GetRight ();
+			var right = rect.Right;
 
 			// Note that Cairo uses premultiplied alpha.
 			if (alphaOnly && alphaBlending) {

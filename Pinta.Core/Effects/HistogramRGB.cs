@@ -41,17 +41,17 @@ namespace Pinta.Core
 			return ColorBgra.FromBgr ((byte) (perc[0]), (byte) (perc[1]), (byte) (perc[2]));
 		}
 
-		protected override void AddSurfaceRectangleToHistogram (ImageSurface surface, Gdk.Rectangle rect)
+		protected override void AddSurfaceRectangleToHistogram (ImageSurface surface, Rectangle rect)
 		{
 			long[] histogramB = histogram[0];
 			long[] histogramG = histogram[1];
 			long[] histogramR = histogram[2];
 
 			var data = surface.GetReadOnlyData ();
-			int rect_right = rect.GetRight ();
+			int rect_right = rect.Right;
 			int width = surface.Width;
 
-			for (int y = rect.Y; y <= rect.GetBottom (); ++y) {
+			for (int y = rect.Y; y <= rect.Bottom; ++y) {
 				var row = data.Slice (y * width);
 				for (int x = rect.X; x <= rect_right; ++x) {
 					ref readonly ColorBgra c = ref row[x];
