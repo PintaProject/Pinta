@@ -54,9 +54,14 @@ namespace Pinta
 		/// </summary>
 		internal static bool LaunchSimpleEffectDialog (BaseEffect effect)
 		{
+#if false // TODO-GTK4
 			return LaunchSimpleEffectDialog (effect, new PintaLocalizer ());
+#else
+			throw new NotImplementedException ();
+#endif
 		}
 
+#if false // TODO-GTK4
 		/// <summary>
 		/// Helper function for the above methods. The IAddinLocalizer provides a generic way to
 		/// get translated strings both for Pinta's effects and for effect add-ins.
@@ -87,6 +92,7 @@ namespace Pinta
 				return ret;
 			}
 		}
+#endif
 
 		/// <summary>
 		/// Wrapper around the AddinLocalizer of an add-in.

@@ -20,6 +20,7 @@
     <Compile Include="Actions/FileActions.cs" />
     <Compile Include="Actions/HelpActions.cs" />
     <Compile Include="Actions/Command.cs" />
+    <Compile Include="Classes/IExtension.cs" />
     <Compile Include="Classes/ObservableObject.cs" />
     <Compile Include="Classes/Point.cs" />
     <Compile Include="Classes/Rectangle.cs" />

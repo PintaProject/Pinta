@@ -16,7 +16,7 @@ namespace Pinta.Effects
 {
 	public class RedEyeRemoveEffect : BaseEffect
 	{
-		private UnaryPixelOp? op;
+		private UnaryPixelOp? op = null;
 
 		public override string Icon {
 			get { return "Menu.Effects.Photo.RedEyeRemove.png"; }
@@ -43,6 +43,7 @@ namespace Pinta.Effects
 
 		public override bool LaunchConfiguration ()
 		{
+#if false // TODO-GTK4
 			using (var dialog = new SimpleEffectDialog (Name, PintaCore.Resources.GetIcon (Icon), Data, new PintaLocalizer ())) {
 				// Hookup event handling for live preview.
 				dialog.EffectDataChanged += (o, e) => {
@@ -57,9 +58,12 @@ namespace Pinta.Effects
 
 				return ret;
 			}
+#else
+			throw new NotImplementedException ();
+#endif
 		}
 
-		public override void Render (ImageSurface src, ImageSurface dest, Gdk.Rectangle[] rois)
+		public override void Render (ImageSurface src, ImageSurface dest, Core.Rectangle[] rois)
 		{
 			op?.Apply (dest, src, rois);
 		}

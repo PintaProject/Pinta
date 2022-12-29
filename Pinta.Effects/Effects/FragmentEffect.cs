@@ -45,17 +45,17 @@ namespace Pinta.Effects
 		}
 
 		#region Algorithm Code Ported From PDN
-		private Gdk.Point[] RecalcPointOffsets (int fragments, double rotationAngle, int distance)
+		private Core.Point[] RecalcPointOffsets (int fragments, double rotationAngle, int distance)
 		{
 			double pointStep = 2 * Math.PI / (double) fragments;
 			double rotationRadians = ((rotationAngle - 90.0) * Math.PI) / 180.0;
 
-			Gdk.Point[] pointOffsets = new Gdk.Point[fragments];
+			var pointOffsets = new Core.Point[fragments];
 
 			for (int i = 0; i < fragments; i++) {
 				double currentRadians = rotationRadians + (pointStep * i);
 
-				pointOffsets[i] = new Gdk.Point (
+				pointOffsets[i] = new Core.Point (
 				    (int) Math.Round (distance * -Math.Sin (currentRadians), MidpointRounding.AwayFromZero),
 				    (int) Math.Round (distance * -Math.Cos (currentRadians), MidpointRounding.AwayFromZero));
 			}
@@ -63,12 +63,12 @@ namespace Pinta.Effects
 			return pointOffsets;
 		}
 
-		public override void Render (ImageSurface src, ImageSurface dst, Gdk.Rectangle[] rois)
+		public override void Render (ImageSurface src, ImageSurface dst, Core.Rectangle[] rois)
 		{
-			Gdk.Point[] pointOffsets = RecalcPointOffsets (Data.Fragments, Data.Rotation, Data.Distance);
+			Core.Point[] pointOffsets = RecalcPointOffsets (Data.Fragments, Data.Rotation, Data.Distance);
 
 			int poLength = pointOffsets.Length;
-			Span<Gdk.Point> pointOffsetsPtr = stackalloc Gdk.Point[poLength];
+			Span<Core.Point> pointOffsetsPtr = stackalloc Core.Point[poLength];
 
 			for (int i = 0; i < poLength; ++i)
 				pointOffsetsPtr[i] = pointOffsets[i];
@@ -81,11 +81,11 @@ namespace Pinta.Effects
 			ReadOnlySpan<ColorBgra> src_data = src.GetReadOnlyData ();
 			Span<ColorBgra> dst_data = dst.GetData ();
 
-			foreach (Gdk.Rectangle rect in rois) {
-				for (int y = rect.Top; y <= rect.GetBottom (); y++) {
+			foreach (Core.Rectangle rect in rois) {
+				for (int y = rect.Top; y <= rect.Bottom; y++) {
 					var dst_row = dst_data.Slice (y * src_width, src_width);
 
-					for (int x = rect.Left; x <= rect.GetRight (); x++) {
+					for (int x = rect.Left; x <= rect.Right; x++) {
 						int sampleCount = 0;
 
 						for (int i = 0; i < poLength; ++i) {

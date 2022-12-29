@@ -74,7 +74,7 @@ namespace Pinta.Effects
 			return c - Math.Log (y * y + x * x) * invLogMax;
 		}
 
-		public override void Render (ImageSurface src, ImageSurface dst, Gdk.Rectangle[] rois)
+		public override void Render (ImageSurface src, ImageSurface dst, Core.Rectangle[] rois)
 		{
 			int w = dst.Width;
 			int h = dst.Height;
@@ -92,11 +92,11 @@ namespace Pinta.Effects
 			Span<ColorBgra> dst_data = dst.GetData ();
 			int dst_width = dst.Width;
 
-			foreach (Gdk.Rectangle rect in rois) {
-				for (int y = rect.Top; y <= rect.GetBottom (); y++) {
+			foreach (Core.Rectangle rect in rois) {
+				for (int y = rect.Top; y <= rect.Bottom; y++) {
 					var dst_row = dst_data.Slice (y * dst_width, dst_width);
 
-					for (int x = rect.Left; x <= rect.GetRight (); x++) {
+					for (int x = rect.Left; x <= rect.Right; x++) {
 						int r = 0;
 						int g = 0;
 						int b = 0;

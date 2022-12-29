@@ -78,6 +78,9 @@ namespace Pinta.Core
 
 		public static Rectangle Zero;
 
+		public static Rectangle FromLTRB (int left, int top, int right, int bottom)
+			=> new Rectangle (left, top, right - left + 1, bottom - top + 1);
+
 		public int Left => X;
 		public int Top => Y;
 		public int Right => X + Width - 1;
@@ -88,11 +91,12 @@ namespace Pinta.Core
 
 		public override string ToString () => $"x:{X} y:{Y} w:{Width} h:{Height}";
 
+		public bool Contains (int x, int y)
+		{
+			return x >= Left && x <= Right && y >= Top && y <= Bottom;
+		}
 
-		public static Rectangle FromLTRB (int left, int top, int right, int bottom)
-			=> new Rectangle (left, top, right - left + 1, bottom - top + 1);
-
-		public Rectangle Intersect (Rectangle r) => Intersect (this, r);
+		public void Intersect (Rectangle r) => this = Intersect (this, r);
 
 		public static Rectangle Intersect (in Rectangle a, in Rectangle b)
 		{

@@ -109,7 +109,7 @@ namespace Pinta.Effects
 			}
 		}
 
-		public override void Render (ImageSurface src, ImageSurface dst, Gdk.Rectangle[] rois)
+		public override void Render (ImageSurface src, ImageSurface dst, Core.Rectangle[] rois)
 		{
 			this.intensity = Data.Intensity;
 			this.colorSaturation = Data.ColorSaturation;
@@ -130,10 +130,10 @@ namespace Pinta.Effects
 			Span<ColorBgra> dst_data = dst.GetData ();
 			int width = src.Width;
 
-			foreach (Gdk.Rectangle rect in rois) {
-				int right = rect.GetRight ();
+			foreach (Core.Rectangle rect in rois) {
+				int right = rect.Right;
 
-				for (int y = rect.Top; y <= rect.GetBottom (); ++y) {
+				for (int y = rect.Top; y <= rect.Bottom; ++y) {
 					var dst_row = dst_data.Slice (y * width, width);
 					var src_row = src_data.Slice (y * width, width);
 

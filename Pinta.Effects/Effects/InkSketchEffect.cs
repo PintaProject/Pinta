@@ -71,7 +71,7 @@ namespace Pinta.Effects
 		}
 
 		#region Algorithm Code Ported From PDN
-		public override void Render (ImageSurface src, ImageSurface dest, Gdk.Rectangle[] rois)
+		public override void Render (ImageSurface src, ImageSurface dest, Core.Rectangle[] rois)
 		{
 			// Glow backgound 
 			glowEffect.Data.Radius = 6;
@@ -85,8 +85,8 @@ namespace Pinta.Effects
 			var dst_data = dest.GetData ();
 
 			// Create black outlines by finding the edges of objects 
-			foreach (Gdk.Rectangle roi in rois) {
-				for (int y = roi.Top; y <= roi.GetBottom (); ++y) {
+			foreach (Core.Rectangle roi in rois) {
+				for (int y = roi.Top; y <= roi.Bottom; ++y) {
 					int top = y - radius;
 					int bottom = y + radius + 1;
 
@@ -100,7 +100,7 @@ namespace Pinta.Effects
 
 					var dst_row = dst_data.Slice (y * width, width);
 
-					for (int x = roi.Left; x <= roi.GetRight (); ++x) {
+					for (int x = roi.Left; x <= roi.Right; ++x) {
 						int left = x - radius;
 						int right = x + radius + 1;
 

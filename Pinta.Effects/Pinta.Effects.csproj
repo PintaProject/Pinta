@@ -10,5 +10,8 @@
   <!-- TODO-GTK4 - build all files -->
   <ItemGroup>
     <Compile Remove="**/*.cs" />
+    <Compile Include="Adjustments/*.cs" />
+    <Compile Include="Effects/*.cs" />
+    <Compile Include="Utilities/*.cs" />
   </ItemGroup>
 </Project>

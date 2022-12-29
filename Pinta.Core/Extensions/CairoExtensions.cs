@@ -941,6 +941,7 @@ namespace Pinta.Core
 		{
 			return x >= 0 && x < surf.Width && y >= 0 && y < surf.Height;
 		}
+#endif
 
 		// This isn't really an extension method, since it doesn't use
 		// the passed in argument, but it's nice to have the same calling
@@ -959,7 +960,6 @@ namespace Pinta.Core
 		{
 			return ref surf.GetColorBgra (surf.GetReadOnlyData (), surf.Width, x, y);
 		}
-#endif
 
 		public static Rectangle GetBounds (this ImageSurface surf)
 		{
@@ -991,6 +991,7 @@ namespace Pinta.Core
 		{
 			return r.ContainsCorrect (pt.X, pt.Y);
 		}
+#endif
 
 		public static ColorBgra GetBilinearSample (this ImageSurface src, float x, float y)
 		{
@@ -1178,6 +1179,7 @@ namespace Pinta.Core
 			}
 		}
 
+#if false // TODO-GTK4
 		public static void TranslatePointsInPlace (this Point[] Points, int dx, int dy)
 		{
 			for (int i = 0; i < Points.Length; ++i) {

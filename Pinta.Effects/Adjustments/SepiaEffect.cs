@@ -41,7 +41,7 @@ namespace Pinta.Effects
 				ColorBgra.White);
 		}
 
-		public override void Render (ImageSurface src, ImageSurface dest, Gdk.Rectangle[] rois)
+		public override void Render (ImageSurface src, ImageSurface dest, Core.Rectangle[] rois)
 		{
 			desat.Apply (dest, src, rois);
 			level.Apply (dest, dest, rois);

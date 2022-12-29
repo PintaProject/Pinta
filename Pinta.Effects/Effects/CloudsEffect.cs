@@ -123,18 +123,18 @@ namespace Pinta.Effects
 			return Utility.Lerp (edge1, edge2, v);
 		}
 
-		private static void RenderClouds (ImageSurface surface, Gdk.Rectangle rect, int scale, byte seed, double power, ColorBgra colorFrom, ColorBgra colorTo)
+		private static void RenderClouds (ImageSurface surface, Core.Rectangle rect, int scale, byte seed, double power, ColorBgra colorFrom, ColorBgra colorTo)
 		{
 			int w = surface.Width;
 			int h = surface.Height;
 			var data = surface.GetData ();
-			int bottom = rect.GetBottom ();
+			int bottom = rect.Bottom;
 
-			for (int y = rect.Top; y <= rect.GetBottom (); ++y) {
+			for (int y = rect.Top; y <= rect.Bottom; ++y) {
 				var row = data.Slice ((y - rect.Top) * w, w);
 				int dy = 2 * y - h;
 
-				for (int x = rect.Left; x <= rect.GetRight (); ++x) {
+				for (int x = rect.Left; x <= rect.Right; ++x) {
 					int dx = 2 * x - w;
 					double val = 0;
 					double mult = 1;
@@ -167,8 +167,9 @@ namespace Pinta.Effects
 			}
 		}
 
-		protected override void Render (ImageSurface src, ImageSurface dst, Gdk.Rectangle roi)
+		protected override void Render (ImageSurface src, ImageSurface dst, Core.Rectangle roi)
 		{
+#if false // TODO-GTK4
 			var r = roi.ToCairoRectangle ();
 
 			using (var temp = CairoExtensions.CreateImageSurface (Format.Argb32, roi.Width, roi.Height)) {
@@ -190,6 +191,9 @@ namespace Pinta.Effects
 					}
 				}
 			}
+#else
+			throw new NotImplementedException ();
+#endif
 		}
 		#endregion
 

@@ -44,7 +44,7 @@ namespace Pinta.Effects
 			return EffectHelper.LaunchSimpleEffectDialog (this);
 		}
 
-		public override void Render (ImageSurface src, ImageSurface dest, Gdk.Rectangle[] rois)
+		public override void Render (ImageSurface src, ImageSurface dest, Core.Rectangle[] rois)
 		{
 			int hue_delta = Data.Hue;
 			int sat_delta = Data.Saturation;

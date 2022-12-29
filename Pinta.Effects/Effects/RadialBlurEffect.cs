@@ -57,7 +57,7 @@ namespace Pinta.Effects
 			fy = cy + ((cx >> 8) * fr >> 8) - ((cy >> 14) * (fr * fr >> 11) >> 8);
 		}
 
-		public override void Render (ImageSurface src, ImageSurface dst, Gdk.Rectangle[] rois)
+		public override void Render (ImageSurface src, ImageSurface dst, Core.Rectangle[] rois)
 		{
 			if (Data.Angle == 0) {
 				// Copy src to dest
@@ -77,12 +77,12 @@ namespace Pinta.Effects
 			var dst_data = dst.GetData ();
 			var src_data = src.GetReadOnlyData ();
 
-			foreach (Gdk.Rectangle rect in rois) {
-				for (int y = rect.Top; y <= rect.GetBottom (); ++y) {
+			foreach (Core.Rectangle rect in rois) {
+				for (int y = rect.Top; y <= rect.Bottom; ++y) {
 					var dst_row = dst_data.Slice (y * w, w);
 					var src_row = src_data.Slice (y * src_w, src_w);
 
-					for (int x = rect.Left; x <= rect.GetRight (); ++x) {
+					for (int x = rect.Left; x <= rect.Right; ++x) {
 						ref ColorBgra dst_pixel = ref dst_row[x];
 						ref readonly ColorBgra src_pixel = ref src_row[x];
 

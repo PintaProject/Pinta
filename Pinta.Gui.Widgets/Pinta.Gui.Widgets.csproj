@@ -9,5 +9,6 @@
   <!-- TODO-GTK4 - build all files -->
   <ItemGroup>
     <Compile Remove="**/*.cs" />
+    <Compile Include="DialogAttributes.cs" />
   </ItemGroup>
 </Project>

@@ -125,12 +125,12 @@ namespace Pinta.Effects
 			    (byte) (a2));
 		}
 
-		public override void Render (ImageSurface src, ImageSurface dest, Gdk.Rectangle[] rois)
+		public override void Render (ImageSurface src, ImageSurface dest, Core.Rectangle[] rois)
 		{
 			this.thickness = Data.Thickness;
 			this.intensity = Data.Intensity;
 
-			foreach (Gdk.Rectangle rect in rois)
+			foreach (Core.Rectangle rect in rois)
 				RenderRect (this.thickness, src, dest, rect);
 		}
 

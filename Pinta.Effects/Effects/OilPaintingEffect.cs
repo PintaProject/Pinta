@@ -45,7 +45,7 @@ namespace Pinta.Effects
 		}
 
 		#region Algorithm Code Ported From PDN
-		public override void Render (ImageSurface src, ImageSurface dest, Gdk.Rectangle[] rois)
+		public override void Render (ImageSurface src, ImageSurface dest, Core.Rectangle[] rois)
 		{
 			int width = src.Width;
 			int height = src.Height;
@@ -62,12 +62,12 @@ namespace Pinta.Effects
 			ReadOnlySpan<ColorBgra> src_data = src.GetReadOnlyData ();
 			Span<ColorBgra> dst_data = dest.GetData ();
 
-			foreach (Gdk.Rectangle rect in rois) {
+			foreach (Core.Rectangle rect in rois) {
 
 				int rectTop = rect.Top;
-				int rectBottom = rect.GetBottom ();
+				int rectBottom = rect.Bottom;
 				int rectLeft = rect.Left;
-				int rectRight = rect.GetRight ();
+				int rectRight = rect.Right;
 
 				for (int y = rectTop; y <= rectBottom; ++y) {
 					var dst_row = dst_data.Slice (y * width, width);

@@ -45,7 +45,7 @@ namespace Pinta.Effects
 		}
 
 		#region Algorithm Code Ported From PDN
-		public override void Render (ImageSurface src, ImageSurface dst, Gdk.Rectangle[] rois)
+		public override void Render (ImageSurface src, ImageSurface dst, Core.Rectangle[] rois)
 		{
 			float twist = Data.Amount;
 
@@ -73,12 +73,12 @@ namespace Pinta.Effects
 			Span<ColorBgra> dst_data = dst.GetData ();
 
 			foreach (var rect in rois) {
-				for (int y = rect.Top; y <= rect.GetBottom (); y++) {
+				for (int y = rect.Top; y <= rect.Bottom; y++) {
 					float j = y - hh;
 					var src_row = src_data.Slice (y * width, width);
 					var dst_row = dst_data.Slice (y * width, width);
 
-					for (int x = rect.Left; x <= rect.GetRight (); x++) {
+					for (int x = rect.Left; x <= rect.Right; x++) {
 						float i = x - hw;
 
 						if (i * i + j * j > (maxrad + 1) * (maxrad + 1)) {

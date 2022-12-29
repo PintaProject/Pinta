@@ -47,7 +47,7 @@ namespace Pinta.Effects
 		}
 
 		#region Algorithm Code Ported From PDN
-		public override void Render (ImageSurface src, ImageSurface dst, Gdk.Rectangle[] rois)
+		public override void Render (ImageSurface src, ImageSurface dst, Core.Rectangle[] rois)
 		{
 			float bulge = (float) Data.Amount;
 
@@ -64,14 +64,14 @@ namespace Pinta.Effects
 			ReadOnlySpan<ColorBgra> src_data = src.GetReadOnlyData ();
 			Span<ColorBgra> dst_data = dst.GetData ();
 
-			foreach (Gdk.Rectangle rect in rois) {
+			foreach (Core.Rectangle rect in rois) {
 
-				for (int y = rect.Top; y <= rect.GetBottom (); y++) {
+				for (int y = rect.Top; y <= rect.Bottom; y++) {
 					var src_row = src_data.Slice (y * src_width, src_width);
 					var dst_row = dst_data.Slice (y * src_width, src_width);
 					float v = y - hh;
 
-					for (int x = rect.Left; x <= rect.GetRight (); x++) {
+					for (int x = rect.Left; x <= rect.Right; x++) {
 						float u = x - hw;
 						float r = (float) Math.Sqrt (u * u + v * v);
 						float rscale1 = (1f - (r / maxrad));
@@ -98,7 +98,7 @@ namespace Pinta.Effects
 			public int Amount = 45;
 
 			[Caption ("Offset")]
-			public Cairo.PointD Offset = new Cairo.PointD (0.0, 0.0);
+			public Core.PointD Offset = new (0.0, 0.0);
 
 			[Skip]
 			public override bool IsDefault {

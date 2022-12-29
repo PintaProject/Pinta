@@ -82,7 +82,7 @@ namespace Pinta.Effects
 			return EffectHelper.LaunchSimpleEffectDialog (this);
 		}
 
-		public override void Render (ImageSurface src, ImageSurface dest, Gdk.Rectangle[] rois)
+		public override void Render (ImageSurface src, ImageSurface dest, Core.Rectangle[] rois)
 		{
 			int warmth = Data.Warmth;
 			float redAdjust = 1.0f + (warmth / 100.0f);
@@ -95,12 +95,12 @@ namespace Pinta.Effects
 			Span<ColorBgra> dst_data = dest.GetData ();
 			int width = dest.Width;
 
-			foreach (Gdk.Rectangle roi in rois) {
-				for (int y = roi.Top; y <= roi.GetBottom (); ++y) {
+			foreach (var roi in rois) {
+				for (int y = roi.Top; y <= roi.Bottom; ++y) {
 					var src_row = src_data.Slice (y * width, width);
 					var dst_row = dst_data.Slice (y * width, width);
 
-					for (int x = roi.Left; x <= roi.GetRight (); ++x) {
+					for (int x = roi.Left; x <= roi.Right; ++x) {
 						ColorBgra srcGrey = this.desaturateOp.Apply (src_row[x]);
 
 						srcGrey.R = Utility.ClampToByte ((int) ((float) srcGrey.R * redAdjust));

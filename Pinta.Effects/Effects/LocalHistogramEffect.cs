@@ -106,7 +106,7 @@ namespace Pinta.Effects
 		    int rad,
 		    ImageSurface src,
 		    ImageSurface dst,
-		    Gdk.Rectangle rect)
+		    Core.Rectangle rect)
 		{
 			int width = src.Width;
 			int height = src.Height;
@@ -134,7 +134,7 @@ namespace Pinta.Effects
 			var src_data = src.GetReadOnlyData ();
 			var dst_data = dst.GetData ();
 
-			for (int y = rect.Top; y <= rect.GetBottom (); ++y) {
+			for (int y = rect.Top; y <= rect.Bottom; ++y) {
 				SetToZero (hb);
 				SetToZero (hg);
 				SetToZero (hr);
@@ -172,7 +172,7 @@ namespace Pinta.Effects
 				ReadOnlySpan<ColorBgra> ps = src_data.Slice (y * width, width);
 				Span<ColorBgra> pd = dst_data.Slice (y * width, width);
 
-				for (int x = rect.Left; x <= rect.GetRight (); x++) {
+				for (int x = rect.Left; x <= rect.Right; x++) {
 					pd[x] = Apply (ps[x], area, hb, hg, hr, ha);
 
 					// assert: u + x >= 0
@@ -289,7 +289,7 @@ namespace Pinta.Effects
 		    int rad,
 		    ImageSurface src,
 		    ImageSurface dst,
-		    Gdk.Rectangle rect)
+		    Core.Rectangle rect)
 		{
 			int width = src.Width;
 			int height = src.Height;
@@ -316,7 +316,7 @@ namespace Pinta.Effects
 			var src_data = src.GetReadOnlyData ();
 			var dst_data = dst.GetData ();
 
-			for (int y = rect.Top; y <= rect.GetBottom (); y++) {
+			for (int y = rect.Top; y <= rect.Bottom; y++) {
 				SetToZero (hb);
 				SetToZero (hg);
 				SetToZero (hr);
@@ -355,7 +355,7 @@ namespace Pinta.Effects
 				ReadOnlySpan<ColorBgra> ps = src_data.Slice (y * width, width);
 				Span<ColorBgra> pd = dst_data.Slice (y * width, width);
 
-				for (int x = rect.Left; x <= rect.GetRight (); x++) {
+				for (int x = rect.Left; x <= rect.Right; x++) {
 					pd[x] = ApplyWithAlpha (ps[x], area, sum, hb, hg, hr);
 
 					// assert: u + x >= 0

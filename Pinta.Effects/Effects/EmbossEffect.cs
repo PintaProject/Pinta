@@ -47,7 +47,7 @@ namespace Pinta.Effects
 		}
 
 		#region Algorithm Code Ported From PDN
-		public override void Render (ImageSurface src, ImageSurface dst, Gdk.Rectangle[] rois)
+		public override void Render (ImageSurface src, ImageSurface dst, Core.Rectangle[] rois)
 		{
 			double[,] weights = Weights;
 
@@ -59,7 +59,7 @@ namespace Pinta.Effects
 
 			foreach (var rect in rois) {
 				// loop through each line of target rectangle
-				for (int y = rect.Top; y <= rect.GetBottom (); ++y) {
+				for (int y = rect.Top; y <= rect.Bottom; ++y) {
 					int fyStart = 0;
 					int fyEnd = 3;
 
@@ -72,7 +72,7 @@ namespace Pinta.Effects
 					// loop through each point in the line 
 					var dst_row = dst_data.Slice (y * srcWidth, srcWidth);
 
-					for (int x = rect.Left; x <= rect.GetRight (); ++x) {
+					for (int x = rect.Left; x <= rect.Right; ++x) {
 						int fxStart = 0;
 						int fxEnd = 3;
 

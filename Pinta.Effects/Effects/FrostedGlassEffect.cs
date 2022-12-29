@@ -49,7 +49,7 @@ namespace Pinta.Effects
 		}
 
 		#region Algorithm Code Ported From PDN
-		public override void Render (ImageSurface src, ImageSurface dst, Gdk.Rectangle[] rois)
+		public override void Render (ImageSurface src, ImageSurface dst, Core.Rectangle[] rois)
 		{
 			int width = src.Width;
 			int height = src.Height;
@@ -68,9 +68,9 @@ namespace Pinta.Effects
 
 			foreach (var rect in rois) {
 				int rectTop = rect.Top;
-				int rectBottom = rect.GetBottom ();
+				int rectBottom = rect.Bottom;
 				int rectLeft = rect.Left;
-				int rectRight = rect.GetRight ();
+				int rectRight = rect.Right;
 
 				for (int y = rectTop; y <= rectBottom; ++y) {
 					var dst_row = dst_data.Slice (y * width, width);

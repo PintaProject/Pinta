@@ -42,6 +42,7 @@ namespace Pinta.Effects
 
 		public override bool LaunchConfiguration ()
 		{
+#if false // TODO-GTK4
 			using (var dialog = new PosterizeDialog ()) {
 				dialog.Title = Name;
 				dialog.Icon = PintaCore.Resources.GetIcon (Icon);
@@ -50,9 +51,12 @@ namespace Pinta.Effects
 				int response = dialog.Run ();
 				return (response == (int) Gtk.ResponseType.Ok);
 			}
+#else
+			throw new NotImplementedException ();
+#endif
 		}
 
-		public override void Render (ImageSurface src, ImageSurface dest, Gdk.Rectangle[] rois)
+		public override void Render (ImageSurface src, ImageSurface dest, Core.Rectangle[] rois)
 		{
 			if (op == null)
 				op = new UnaryPixelOps.PosterizePixel (Data.Red, Data.Green, Data.Blue);

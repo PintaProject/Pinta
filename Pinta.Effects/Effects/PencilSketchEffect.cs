@@ -58,7 +58,7 @@ namespace Pinta.Effects
 		}
 
 		#region Algorithm Code Ported From PDN
-		public override void Render (ImageSurface src, ImageSurface dest, Gdk.Rectangle[] rois)
+		public override void Render (ImageSurface src, ImageSurface dest, Core.Rectangle[] rois)
 		{
 			bacAdjustment.Data.Brightness = -Data.ColorRange;
 			bacAdjustment.Data.Contrast = -Data.ColorRange;
@@ -75,12 +75,12 @@ namespace Pinta.Effects
 			var src_data = src.GetReadOnlyData ();
 			int src_width = src.Width;
 
-			foreach (Gdk.Rectangle roi in rois) {
-				for (int y = roi.Top; y <= roi.GetBottom (); ++y) {
+			foreach (Core.Rectangle roi in rois) {
+				for (int y = roi.Top; y <= roi.Bottom; ++y) {
 					var src_row = src_data.Slice (y * src_width, src_width);
 					var dst_row = dst_data.Slice (y * dst_width, dst_width);
 
-					for (int x = roi.Left; x <= roi.GetRight (); ++x) {
+					for (int x = roi.Left; x <= roi.Right; ++x) {
 						ColorBgra srcGrey = desaturateOp.Apply (src_row[x]);
 						dst_row[x] = colorDodgeOp.Apply (srcGrey, dst_row[x]);
 					}
