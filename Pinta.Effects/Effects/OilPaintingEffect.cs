@@ -45,34 +45,22 @@ namespace Pinta.Effects
 		}
 
 		#region Algorithm Code Ported From PDN
-		public unsafe override void Render (ImageSurface src, ImageSurface dest, Gdk.Rectangle[] rois)
+		public override void Render (ImageSurface src, ImageSurface dest, Gdk.Rectangle[] rois)
 		{
 			int width = src.Width;
 			int height = src.Height;
 
 			int arrayLens = 1 + Data.Coarseness;
-
-			int localStoreSize = arrayLens * 5 * sizeof (int);
-
-			byte* localStore = stackalloc byte[localStoreSize];
-			byte* p = localStore;
-
-			int* intensityCount = (int*) p;
-			p += arrayLens * sizeof (int);
-
-			uint* avgRed = (uint*) p;
-			p += arrayLens * sizeof (uint);
-
-			uint* avgGreen = (uint*) p;
-			p += arrayLens * sizeof (uint);
-
-			uint* avgBlue = (uint*) p;
-			p += arrayLens * sizeof (uint);
-
-			uint* avgAlpha = (uint*) p;
-			p += arrayLens * sizeof (uint);
+			Span<int> intensityCount = stackalloc int[arrayLens];
+			Span<uint> avgRed = stackalloc uint[arrayLens];
+			Span<uint> avgGreen = stackalloc uint[arrayLens];
+			Span<uint> avgBlue = stackalloc uint[arrayLens];
+			Span<uint> avgAlpha = stackalloc uint[arrayLens];
 
 			byte maxIntensity = (byte) Data.Coarseness;
+
+			ReadOnlySpan<ColorBgra> src_data = src.GetReadOnlyData ();
+			Span<ColorBgra> dst_data = dest.GetData ();
 
 			foreach (Gdk.Rectangle rect in rois) {
 
@@ -81,13 +69,8 @@ namespace Pinta.Effects
 				int rectLeft = rect.Left;
 				int rectRight = rect.GetRight ();
 
-				ColorBgra* dst_dataptr = (ColorBgra*) dest.DataPtr;
-				int dst_width = dest.Width;
-				ColorBgra* src_dataptr = (ColorBgra*) src.DataPtr;
-				int src_width = src.Width;
-
 				for (int y = rectTop; y <= rectBottom; ++y) {
-					ColorBgra* dstPtr = dest.GetPointAddressUnchecked (dst_dataptr, dst_width, rect.Left, y);
+					var dst_row = dst_data.Slice (y * width, width);
 
 					int top = y - Data.BrushSize;
 					int bottom = y + Data.BrushSize + 1;
@@ -101,7 +84,11 @@ namespace Pinta.Effects
 					}
 
 					for (int x = rectLeft; x <= rectRight; ++x) {
-						SetToZero (localStore, (ulong) localStoreSize);
+						intensityCount.Clear ();
+						avgRed.Clear ();
+						avgGreen.Clear ();
+						avgBlue.Clear ();
+						avgAlpha.Clear ();
 
 						int left = x - Data.BrushSize;
 						int right = x + Data.BrushSize + 1;
@@ -117,20 +104,19 @@ namespace Pinta.Effects
 						int numInt = 0;
 
 						for (int j = top; j < bottom; ++j) {
-							ColorBgra* srcPtr = src.GetPointAddressUnchecked (src_dataptr, src_width, left, j);
+							var src_row = src_data.Slice (j * width, width);
 
 							for (int i = left; i < right; ++i) {
-								byte intensity = Utility.FastScaleByteByByte (srcPtr->GetIntensityByte (), maxIntensity);
+								ref readonly ColorBgra src_pixel = ref src_row[i];
+								byte intensity = Utility.FastScaleByteByByte (src_pixel.GetIntensityByte (), maxIntensity);
 
 								++intensityCount[intensity];
 								++numInt;
 
-								avgRed[intensity] += srcPtr->R;
-								avgGreen[intensity] += srcPtr->G;
-								avgBlue[intensity] += srcPtr->B;
-								avgAlpha[intensity] += srcPtr->A;
-
-								++srcPtr;
+								avgRed[intensity] += src_pixel.R;
+								avgGreen[intensity] += src_pixel.G;
+								avgBlue[intensity] += src_pixel.B;
+								avgAlpha[intensity] += src_pixel.A;
 							}
 						}
 
@@ -151,21 +137,9 @@ namespace Pinta.Effects
 						byte B = (byte) (avgBlue[chosenIntensity] / maxInstance);
 						byte A = (byte) (avgAlpha[chosenIntensity] / maxInstance);
 
-						*dstPtr = ColorBgra.FromBgra (B, G, R, A);
-						++dstPtr;
+						dst_row[x] = ColorBgra.FromBgra (B, G, R, A);
 					}
 				}
-			}
-		}
-
-		// This is slow, and gets called a lot
-		private unsafe static void SetToZero (byte* dst, ulong length)
-		{
-			int* ptr = (int*) dst;
-
-			for (ulong i = 0; i < length / 4; i++) {
-				*ptr = 0;
-				ptr++;
 			}
 		}
 		#endregion

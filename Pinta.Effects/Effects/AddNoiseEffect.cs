@@ -109,7 +109,7 @@ namespace Pinta.Effects
 			}
 		}
 
-		public unsafe override void Render (ImageSurface src, ImageSurface dst, Gdk.Rectangle[] rois)
+		public override void Render (ImageSurface src, ImageSurface dst, Gdk.Rectangle[] rois)
 		{
 			this.intensity = Data.Intensity;
 			this.colorSaturation = Data.ColorSaturation;
@@ -126,14 +126,20 @@ namespace Pinta.Effects
 			Random localRand = threadRand;
 			int[] localLookup = lookup;
 
-			foreach (Gdk.Rectangle rect in rois) {
-				for (int y = rect.Top; y <= rect.GetBottom (); ++y) {
-					ColorBgra* srcPtr = src.GetPointAddressUnchecked (rect.Left, y);
-					ColorBgra* dstPtr = dst.GetPointAddressUnchecked (rect.Left, y);
+			ReadOnlySpan<ColorBgra> src_data = src.GetReadOnlyData ();
+			Span<ColorBgra> dst_data = dst.GetData ();
+			int width = src.Width;
 
-					for (int x = 0; x < rect.Width; ++x) {
+			foreach (Gdk.Rectangle rect in rois) {
+				int right = rect.GetRight ();
+
+				for (int y = rect.Top; y <= rect.GetBottom (); ++y) {
+					var dst_row = dst_data.Slice (y * width, width);
+					var src_row = src_data.Slice (y * width, width);
+
+					for (int x = rect.Left; x <= right; ++x) {
 						if (localRand.NextDouble () > this.coverage) {
-							*dstPtr = *srcPtr;
+							dst_row[x] = src_row[x];
 						} else {
 							int r;
 							int g;
@@ -151,14 +157,14 @@ namespace Pinta.Effects
 							g = i + (((g - i) * sat) >> 12);
 							b = i + (((b - i) * sat) >> 12);
 
-							dstPtr->R = Utility.ClampToByte (srcPtr->R + ((r * dev + 32768) >> 16));
-							dstPtr->G = Utility.ClampToByte (srcPtr->G + ((g * dev + 32768) >> 16));
-							dstPtr->B = Utility.ClampToByte (srcPtr->B + ((b * dev + 32768) >> 16));
-							dstPtr->A = srcPtr->A;
-						}
+							ref readonly ColorBgra src_pixel = ref src_row[x];
+							ref ColorBgra dst_pixel = ref dst_row[x];
 
-						++srcPtr;
-						++dstPtr;
+							dst_pixel.R = Utility.ClampToByte (src_pixel.R + ((r * dev + 32768) >> 16));
+							dst_pixel.G = Utility.ClampToByte (src_pixel.G + ((g * dev + 32768) >> 16));
+							dst_pixel.B = Utility.ClampToByte (src_pixel.B + ((b * dev + 32768) >> 16));
+							dst_pixel.A = src_pixel.A;
+						}
 					}
 				}
 			}

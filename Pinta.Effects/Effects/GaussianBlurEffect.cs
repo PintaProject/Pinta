@@ -8,6 +8,7 @@
 /////////////////////////////////////////////////////////////////////////////////
 
 using System;
+using System.Security.Cryptography;
 using Cairo;
 using Pinta.Core;
 using Pinta.Gui.Widgets;
@@ -59,7 +60,7 @@ namespace Pinta.Effects
 			return weights;
 		}
 
-		public unsafe override void Render (ImageSurface src, ImageSurface dest, Gdk.Rectangle[] rois)
+		public override void Render (ImageSurface src, ImageSurface dest, Gdk.Rectangle[] rois)
 		{
 			if (Data.Radius == 0) {
 				// Copy src to dest
@@ -70,38 +71,22 @@ namespace Pinta.Effects
 			int[] w = CreateGaussianBlurRow (r);
 			int wlen = w.Length;
 
-			int localStoreSize = wlen * 6 * sizeof (long);
-			byte* localStore = stackalloc byte[localStoreSize];
-			byte* p = localStore;
-
-			long* waSums = (long*) p;
-			p += wlen * sizeof (long);
-
-			long* wcSums = (long*) p;
-			p += wlen * sizeof (long);
-
-			long* aSums = (long*) p;
-			p += wlen * sizeof (long);
-
-			long* bSums = (long*) p;
-			p += wlen * sizeof (long);
-
-			long* gSums = (long*) p;
-			p += wlen * sizeof (long);
-
-			long* rSums = (long*) p;
-			p += wlen * sizeof (long);
+			Span<long> waSums = stackalloc long[wlen];
+			Span<long> wcSums = stackalloc long[wlen];
+			Span<long> aSums = stackalloc long[wlen];
+			Span<long> bSums = stackalloc long[wlen];
+			Span<long> gSums = stackalloc long[wlen];
+			Span<long> rSums = stackalloc long[wlen];
 
 			// Cache these for a massive performance boost
 			int src_width = src.Width;
 			int src_height = src.Height;
-			ColorBgra* src_data_ptr = (ColorBgra*) src.DataPtr;
+			ReadOnlySpan<ColorBgra> src_data = src.GetReadOnlyData ();
+			Span<ColorBgra> dst_data = dest.GetData ();
 
 			foreach (Gdk.Rectangle rect in rois) {
 				if (rect.Height >= 1 && rect.Width >= 1) {
 					for (int y = rect.Top; y <= rect.GetBottom (); ++y) {
-						//Memory.SetToZero (localStore, (ulong)localStoreSize);
-
 						long waSum = 0;
 						long wcSum = 0;
 						long aSum = 0;
@@ -109,7 +94,7 @@ namespace Pinta.Effects
 						long gSum = 0;
 						long rSum = 0;
 
-						ColorBgra* dstPtr = dest.GetPointAddressUnchecked (rect.Left, y);
+						var dst_row = dst_data.Slice (y * src_width, src_width);
 
 						for (int wx = 0; wx < wlen; ++wx) {
 							int srcX = rect.Left + wx - r;
@@ -125,7 +110,7 @@ namespace Pinta.Effects
 									int srcY = y + wy - r;
 
 									if (srcY >= 0 && srcY < src_height) {
-										ColorBgra c = src.GetPointUnchecked (src_data_ptr, src_width, srcX, srcY).ToStraightAlpha ();
+										ColorBgra c = src.GetPoint (src_data, src_width, srcX, srcY).ToStraightAlpha ();
 										int wp = w[wy];
 
 										waSums[wx] += wp;
@@ -155,17 +140,15 @@ namespace Pinta.Effects
 						wcSum >>= 8;
 
 						if (waSum == 0 || wcSum == 0) {
-							dstPtr->Bgra = 0;
+							dst_row[rect.Left].Bgra = 0;
 						} else {
 							byte alpha = (byte) (aSum / waSum);
 							byte blue = (byte) (bSum / wcSum);
 							byte green = (byte) (gSum / wcSum);
 							byte red = (byte) (rSum / wcSum);
 
-							dstPtr->Bgra = ColorBgra.FromBgra (blue, green, red, alpha).ToPremultipliedAlpha ().Bgra;
+							dst_row[rect.Left].Bgra = ColorBgra.FromBgra (blue, green, red, alpha).ToPremultipliedAlpha ().Bgra;
 						}
-
-						++dstPtr;
 
 						for (int x = rect.Left + 1; x <= rect.GetRight (); ++x) {
 							for (int i = 0; i < wlen - 1; ++i) {
@@ -211,7 +194,7 @@ namespace Pinta.Effects
 									int srcY = y + wy - r;
 
 									if (srcY >= 0 && srcY < src_height) {
-										ColorBgra c = src.GetPointUnchecked (src_data_ptr, src_width, srcX, srcY).ToStraightAlpha ();
+										ColorBgra c = src.GetPoint (src_data, src_width, srcX, srcY).ToStraightAlpha ();
 										int wp = w[wy];
 
 										waSums[wx] += wp;
@@ -240,17 +223,15 @@ namespace Pinta.Effects
 							wcSum >>= 8;
 
 							if (waSum == 0 || wcSum == 0) {
-								dstPtr->Bgra = 0;
+								dst_row[x].Bgra = 0;
 							} else {
 								byte alpha = (byte) (aSum / waSum);
 								byte blue = (byte) (bSum / wcSum);
 								byte green = (byte) (gSum / wcSum);
 								byte red = (byte) (rSum / wcSum);
 
-								dstPtr->Bgra = ColorBgra.FromBgra (blue, green, red, alpha).ToPremultipliedAlpha ().Bgra;
+								dst_row[x].Bgra = ColorBgra.FromBgra (blue, green, red, alpha).ToPremultipliedAlpha ().Bgra;
 							}
-
-							++dstPtr;
 						}
 					}
 				}
