@@ -218,17 +218,13 @@ namespace Pinta.Core
 		{
 			ImageSurface dest = CairoExtensions.CreateImageSurface (Format.Argb32, width, height);
 
-			Pixbuf pb = Surface.ToPixbuf ();
-			Pixbuf pbScaled = pb.ScaleSimple (width, height, InterpType.Bilinear);
-
 			using (Context g = new Context (dest)) {
-				CairoHelper.SetSourcePixbuf (g, pbScaled, 0, 0);
+				g.Scale ((double) width / (double) Surface.Width, (double) height / (double) Surface.Height);
+				g.SetSourceSurface (Surface, 0, 0);
 				g.Paint ();
 			}
 
-			(Surface as IDisposable).Dispose ();
-			(pb as IDisposable).Dispose ();
-			(pbScaled as IDisposable).Dispose ();
+			(Surface as IDisposable).Dispose (); ;
 			Surface = dest;
 		}
 
