@@ -8,14 +8,14 @@ msgstr ""
 "Project-Id-Version: pinta\n"
 "Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
 "POT-Creation-Date: 2022-12-18 22:26-0500\n"
-"PO-Revision-Date: 2022-12-24 23:35+0000\n"
+"PO-Revision-Date: 2022-12-29 22:46+0000\n"
 "Last-Translator: Cameron White <cameronwhite91@gmail.com>\n"
 "Language-Team: English (Australia) <en_AU@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Launchpad-Export-Date: 2022-12-29 14:12+0000\n"
+"X-Launchpad-Export-Date: 2022-12-29 22:48+0000\n"
 "X-Generator: Launchpad (build 31c78762a8046acf7ab47372e5d588ebb3759d2e)\n"
 
 #: Mono.Addins.Gui/Mono.Addins.Gui/InstallDialog.cs:142
@@ -309,15 +309,15 @@ msgstr "Choose Colour"
 
 #: ../Pinta.Gui.Widgets/Widgets/StatusBarColorPaletteWidget.cs:113
 msgid "Choose Palette Color"
-msgstr "Choose Palette Color"
+msgstr "Choose Palette Colour"
 
 #: ../Pinta.Gui.Widgets/Widgets/StatusBarColorPaletteWidget.cs:83
 msgid "Choose Primary Color"
-msgstr "Choose Primary Color"
+msgstr "Choose Primary Colour"
 
 #: ../Pinta.Gui.Widgets/Widgets/StatusBarColorPaletteWidget.cs:86
 msgid "Choose Secondary Color"
-msgstr "Choose Secondary Color"
+msgstr "Choose Secondary Colour"
 
 #: ../Pinta.Tools/Brushes/CircleBrush.cs:37
 msgid "Circles"
@@ -348,7 +348,7 @@ msgid ""
 "Click and drag to draw gradient from primary to secondary color.  Right "
 "click to reverse."
 msgstr ""
-"Click and drag to draw gradient from primary to secondary color.  Right "
+"Click and drag to draw gradient from primary to secondary colour.  Right "
 "click to reverse."
 
 #: ../Pinta.Tools/Tools/LassoSelectTool.cs:55
@@ -361,19 +361,19 @@ msgstr "Click and drag to navigate image."
 
 #: ../Pinta.Gui.Widgets/Widgets/StatusBarColorPaletteWidget.cs:241
 msgid "Click to reset primary and secondary color."
-msgstr "Click to reset primary and secondary color."
+msgstr "Click to reset primary and secondary colour."
 
 #: ../Pinta.Gui.Widgets/Widgets/StatusBarColorPaletteWidget.cs:230
 msgid "Click to select primary color."
-msgstr "Click to select primary color."
+msgstr "Click to select primary colour."
 
 #: ../Pinta.Tools/Tools/MagicWandTool.cs:50
 msgid "Click to select region of similar color."
-msgstr "Click to select region of similar color."
+msgstr "Click to select region of similar colour."
 
 #: ../Pinta.Gui.Widgets/Widgets/StatusBarColorPaletteWidget.cs:233
 msgid "Click to select secondary color."
-msgstr "Click to select secondary color."
+msgstr "Click to select secondary colour."
 
 #: ../Pinta.Gui.Widgets/Widgets/StatusBarColorPaletteWidget.cs:236
 msgid "Click to switch between primary and secondary color."
@@ -425,11 +425,11 @@ msgstr "Colour"
 
 #: ../Pinta.Core/Effects/UserBlendOps.cs:35
 msgid "Color Burn"
-msgstr "Color Burn"
+msgstr "Colour Burn"
 
 #: ../Pinta.Core/Effects/UserBlendOps.cs:36
 msgid "Color Dodge"
-msgstr "Color Dodge"
+msgstr "Colour Dodge"
 
 #: ../Pinta.Tools/Tools/GradientTool.cs:203
 msgid "Color Mode"
@@ -437,19 +437,19 @@ msgstr "Colour Mode"
 
 #: ../Pinta.Tools/Tools/ColorPickerTool.cs:52
 msgid "Color Picker"
-msgstr "Color Picker"
+msgstr "Colour Picker"
 
 #: ../Pinta.Effects/Effects/PencilSketchEffect.cs:101
 msgid "Color Range"
-msgstr "Color Range"
+msgstr "Colour Range"
 
 #: ../Pinta.Effects/Effects/AddNoiseEffect.cs:173
 msgid "Color Saturation"
-msgstr "Color Saturation"
+msgstr "Colour Saturation"
 
 #: ../Pinta.Effects/Effects/InkSketchEffect.cs:167
 msgid "Coloring"
-msgstr "Coloring"
+msgstr "Colouring"
 
 #: ../Pinta.Tools/Tools/GradientTool.cs:188
 msgid "Conical Gradient"
@@ -967,7 +967,7 @@ msgstr "Intersect ({0} + Left Click)"
 #: ../Pinta.Effects/Adjustments/InvertColorsEffect.cs:25
 #: ../Pinta.Effects/Effects/MandelbrotFractalEffect.cs:166
 msgid "Invert Colors"
-msgstr "Invert Colors"
+msgstr "Invert Colours"
 
 #: ../Pinta.Core/Actions/EditActions.cs:69
 #: ../Pinta.Core/Actions/EditActions.cs:460
@@ -1109,30 +1109,31 @@ msgid ""
 "Left click to draw with primary color, right click to draw with secondary "
 "color."
 msgstr ""
-"Left click to draw with primary color, right click to draw with secondary "
-"color."
+"Left click to draw with primary colour, right click to draw with secondary "
+"colour."
 
 #: ../Pinta.Tools/Tools/EraserTool.cs:57
 msgid ""
 "Left click to erase to transparent, right click to erase to secondary color. "
 msgstr ""
-"Left click to erase to transparent, right click to erase to secondary color. "
+"Left click to erase to transparent, right click to erase to secondary "
+"colour. "
 
 #: ../Pinta.Tools/Tools/PaintBucketTool.cs:46
 msgid ""
 "Left click to fill a region with the primary color, right click to fill with "
 "the secondary color."
 msgstr ""
-"Left click to fill a region with the primary color, right click to fill with "
-"the secondary color."
+"Left click to fill a region with the primary colour, right click to fill "
+"with the secondary colour."
 
 #: ../Pinta.Tools/Tools/TextTool.cs:91
 msgid ""
 "Left click to place cursor, then type desired text. Text color is primary "
 "color."
 msgstr ""
-"Left click to place cursor, then type desired text. Text color is primary "
-"color."
+"Left click to place cursor, then type desired text. Text colour is primary "
+"colour."
 
 #: ../Pinta.Tools/Tools/RecolorTool.cs:59
 msgid ""
@@ -1145,15 +1146,16 @@ msgstr ""
 #: ../Pinta.Gui.Widgets/Widgets/StatusBarColorPaletteWidget.cs:227
 #: ../Pinta.Tools/Tools/ColorPickerTool.cs:54
 msgid "Left click to set primary color. Right click to set secondary color."
-msgstr "Left click to set primary color. Right click to set secondary color."
+msgstr ""
+"Left click to set primary colour. Right click to set secondary colour."
 
 #: ../Pinta.Gui.Widgets/Widgets/StatusBarColorPaletteWidget.cs:223
 msgid ""
 "Left click to set primary color. Right click to set secondary color. Middle "
 "click to choose palette color."
 msgstr ""
-"Left click to set primary color. Right click to set secondary color. Middle "
-"click to choose palette color."
+"Left click to set primary colour. Right click to set secondary colour. "
+"Middle click to choose palette colour."
 
 #: ../Pinta.Tools/Tools/ZoomTool.cs:58
 msgid ""
@@ -1660,7 +1662,7 @@ msgstr "Random Noise"
 
 #: ../Pinta.Tools/Tools/RecolorTool.cs:57
 msgid "Recolor"
-msgstr "Recolor"
+msgstr "Recolour"
 
 #: ../Pinta.Tools/Tools/RectangleTool.cs:39
 msgid "Rectangle"
@@ -1914,7 +1916,7 @@ msgstr "Sepia"
 
 #: ../Pinta.Core/Actions/EditActions.cs:76
 msgid "Set Number of Colors"
-msgstr "Set Number of Colors"
+msgstr "Set Number of Colours"
 
 #: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:315
 msgid "Shape Type"
