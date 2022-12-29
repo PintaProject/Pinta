@@ -90,11 +90,9 @@ namespace Pinta.Core
 
 		public void FlipHorizontal ()
 		{
-			var doc = PintaCore.Workspace.ActiveDocument;
+			var dest = CairoExtensions.CreateImageSurface (Format.Argb32, Surface.Width, Surface.Height);
 
-			Layer dest = doc.Layers.CreateLayer ();
-
-			using (Cairo.Context g = new Cairo.Context (dest.Surface)) {
+			using (Cairo.Context g = new Cairo.Context (dest)) {
 				g.Matrix = new Matrix (-1, 0, 0, 1, Surface.Width, 0);
 				g.SetSource (Surface);
 
@@ -102,17 +100,15 @@ namespace Pinta.Core
 			}
 
 			Surface old = Surface;
-			Surface = dest.Surface;
+			Surface = dest;
 			(old as IDisposable).Dispose ();
 		}
 
 		public void FlipVertical ()
 		{
-			var doc = PintaCore.Workspace.ActiveDocument;
+			var dest = CairoExtensions.CreateImageSurface (Format.Argb32, Surface.Width, Surface.Height);
 
-			Layer dest = doc.Layers.CreateLayer ();
-
-			using (Cairo.Context g = new Cairo.Context (dest.Surface)) {
+			using (Cairo.Context g = new Cairo.Context (dest)) {
 				g.Matrix = new Matrix (1, 0, 0, -1, 0, Surface.Height);
 				g.SetSource (Surface);
 
@@ -120,7 +116,7 @@ namespace Pinta.Core
 			}
 
 			Surface old = Surface;
-			Surface = dest.Surface;
+			Surface = dest;
 			(old as IDisposable).Dispose ();
 		}
 
