@@ -7,16 +7,16 @@ msgid ""
 msgstr ""
 "Project-Id-Version: pinta\n"
 "Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
-"POT-Creation-Date: 2022-11-04 22:46-0400\n"
-"PO-Revision-Date: 2022-01-18 17:35+0000\n"
+"POT-Creation-Date: 2022-12-18 22:26-0500\n"
+"PO-Revision-Date: 2022-12-03 16:00+0000\n"
 "Last-Translator: Bernard Stafford <Unknown>\n"
 "Language-Team: Afrikaans <af@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Launchpad-Export-Date: 2022-11-05 02:52+0000\n"
-"X-Generator: Launchpad (build 83f7123b02a2b50a64bc29e7e35197179a885279)\n"
+"X-Launchpad-Export-Date: 2022-12-29 14:04+0000\n"
+"X-Generator: Launchpad (build 31c78762a8046acf7ab47372e5d588ebb3759d2e)\n"
 
 #: Mono.Addins.Gui/Mono.Addins.Gui/InstallDialog.cs:142
 msgid " (in user directory)"
@@ -94,7 +94,7 @@ msgstr "Voeg-in Bewaarplek Bestuure"
 msgid "Add-in packages"
 msgstr "Voeg-in- pakkette"
 
-#: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:803
+#: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:766
 msgid "Added"
 msgstr "Begevoeg"
 
@@ -308,15 +308,15 @@ msgstr "Veranderde Shape Tipe"
 msgid "Choose Color"
 msgstr "Kies Kleur"
 
-#: ../Pinta.Gui.Widgets/Widgets/StatusBarColorPaletteWidget.cs:106
+#: ../Pinta.Gui.Widgets/Widgets/StatusBarColorPaletteWidget.cs:113
 msgid "Choose Palette Color"
 msgstr "Kies Palet Kleur"
 
-#: ../Pinta.Gui.Widgets/Widgets/StatusBarColorPaletteWidget.cs:76
+#: ../Pinta.Gui.Widgets/Widgets/StatusBarColorPaletteWidget.cs:83
 msgid "Choose Primary Color"
 msgstr "Kies Primêre Kleur"
 
-#: ../Pinta.Gui.Widgets/Widgets/StatusBarColorPaletteWidget.cs:79
+#: ../Pinta.Gui.Widgets/Widgets/StatusBarColorPaletteWidget.cs:86
 msgid "Choose Secondary Color"
 msgstr "Kies Sekondêre Kleur"
 
@@ -360,11 +360,11 @@ msgstr "Klik en sleep om die buitelyn vir 'n keuringsgebied te teken."
 msgid "Click and drag to navigate image."
 msgstr "Klik en sleep om navigeer beeld."
 
-#: ../Pinta.Gui.Widgets/Widgets/StatusBarColorPaletteWidget.cs:234
+#: ../Pinta.Gui.Widgets/Widgets/StatusBarColorPaletteWidget.cs:241
 msgid "Click to reset primary and secondary color."
 msgstr "Klik om die primêre en sekondêre kleur terug te stel."
 
-#: ../Pinta.Gui.Widgets/Widgets/StatusBarColorPaletteWidget.cs:223
+#: ../Pinta.Gui.Widgets/Widgets/StatusBarColorPaletteWidget.cs:230
 msgid "Click to select primary color."
 msgstr "Klik om primêre kleur te kies."
 
@@ -372,11 +372,11 @@ msgstr "Klik om primêre kleur te kies."
 msgid "Click to select region of similar color."
 msgstr "Klik om streek van soortgelyke kleur te kies."
 
-#: ../Pinta.Gui.Widgets/Widgets/StatusBarColorPaletteWidget.cs:226
+#: ../Pinta.Gui.Widgets/Widgets/StatusBarColorPaletteWidget.cs:233
 msgid "Click to select secondary color."
 msgstr "Klik om sekondêre kleur te kies."
 
-#: ../Pinta.Gui.Widgets/Widgets/StatusBarColorPaletteWidget.cs:229
+#: ../Pinta.Gui.Widgets/Widgets/StatusBarColorPaletteWidget.cs:236
 msgid "Click to switch between primary and secondary color."
 msgstr "Klik om oorskakel tussen primêre en sekondêre kleur."
 
@@ -487,8 +487,8 @@ msgid "Could not obtain the size of display '{0}'"
 msgstr "Kon nie obtain die grootte van die -vertoon '{0}'"
 
 #: ../Pinta.Core/Classes/Palette.cs:197
-#: ../Pinta.Core/Managers/WorkspaceManager.cs:403
-#: ../Pinta.Core/Managers/WorkspaceManager.cs:412
+#: ../Pinta.Core/Managers/WorkspaceManager.cs:395
+#: ../Pinta.Core/Managers/WorkspaceManager.cs:404
 #, csharp-format
 msgid "Could not open file: {0}"
 msgstr "Kon nie lêer oop: {0}"
@@ -536,7 +536,7 @@ msgstr "Vertraging voordat neem 'n skermkiekie (sekondes):"
 msgid "Delete Layer"
 msgstr "Skrap Laag"
 
-#: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:482
+#: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:481
 msgid "Deleted"
 msgstr "Geskrap"
 
@@ -674,9 +674,9 @@ msgstr "Faktor"
 
 #: ../Pinta/Actions/File/NewScreenshotAction.cs:95
 msgid "Failed to access XDG Desktop Portals"
-msgstr ""
+msgstr "Mislukte toegang tot XDG Werkskerm Portale nie"
 
-#: ../Pinta.Core/Managers/WorkspaceManager.cs:430
+#: ../Pinta.Core/Managers/WorkspaceManager.cs:422
 msgid "Failed to open image"
 msgstr "Mislukte om oop beeld"
 
@@ -717,8 +717,8 @@ msgstr "Vul Styl"
 msgid "Fill and Outline Shape"
 msgstr "Vul en Buitelyn Shape"
 
-#: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:1102
-#: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:1473
+#: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:1030
+#: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:1291
 msgid "Finalized"
 msgstr "Gefinaliseer"
 
@@ -1064,7 +1064,7 @@ msgstr ""
 "seleksie buitelyn 'n enkele pixel te skuif."
 
 #. Translators: {0} is 'Ctrl', or a platform-specific key such as 'Command' on macOS.
-#: ../Pinta.Tools/Tools/ShapeTool.cs:49
+#: ../Pinta.Tools/Tools/ShapeTool.cs:50
 #, csharp-format
 msgid ""
 "Left click to draw a shape with the primary color.\n"
@@ -1080,26 +1080,8 @@ msgid ""
 "position.\n"
 "Hold {0} while left clicking on a control point to create a new shape at the "
 "exact same position.\n"
-"Hold {0} while clicking outside of the image bounds to create a new shape "
-"starting at the edge.\n"
 "Press Enter to finalize the shape."
 msgstr ""
-"Linkskliek om 'n vorm met die primêre kleur te teken.\n"
-"Klik met die linkermuisknop op 'n vorm om 'n beheerpunt by te voeg.\n"
-"Linkskliek op 'n beheerpunt en sleep om dit te skuif.\n"
-"Regskliek op 'n beheerpunt en sleep om die tension te verander.\n"
-"Hou Shift vas om na snap -hoeke.\n"
-"Gebruik pyltjie sleutels om die geselekteerde beheerpunt te skuif.\n"
-"Druk {0} + links/regspyltjies om beheerpunte volgens volgorde te kies.\n"
-"Druk Skrap om die geselekteerde beheerpunt uit te vee.\n"
-"Druk Spasie om 'n nuwe beheerpunt by die muisposisie by te voeg.\n"
-"Hou {0} terwyl jy Spasie druk om die beheerpunt op presies dieselfde posisie "
-"te skep.\n"
-"Hou {0} in terwyl jy links op 'n beheerpunt klik om 'n nuwe vorm op presies "
-"dieselfde posisie te skep.\n"
-"Hou {0} vas terwyl jy buite die prentgrense klik om 'n nuwe vorm te skep wat "
-"by die rand begin.\n"
-"Druk Betree om die vorm te finaliseer."
 
 #: ../Pinta.Tools/Tools/PencilTool.cs:50
 msgid ""
@@ -1149,13 +1131,13 @@ msgstr ""
 "Links klik om die sekondêre kleur met die primêre kleur te vervang. Regsklik "
 "om te keer."
 
-#: ../Pinta.Gui.Widgets/Widgets/StatusBarColorPaletteWidget.cs:220
+#: ../Pinta.Gui.Widgets/Widgets/StatusBarColorPaletteWidget.cs:227
 #: ../Pinta.Tools/Tools/ColorPickerTool.cs:54
 msgid "Left click to set primary color. Right click to set secondary color."
 msgstr ""
 "Links klik om primêre kleur te stel. Regs kliek om sekondêre kleure te stel."
 
-#: ../Pinta.Gui.Widgets/Widgets/StatusBarColorPaletteWidget.cs:216
+#: ../Pinta.Gui.Widgets/Widgets/StatusBarColorPaletteWidget.cs:223
 msgid ""
 "Left click to set primary color. Right click to set secondary color. Middle "
 "click to choose palette color."
@@ -1259,7 +1241,7 @@ msgstr "Ontbreek: {0} v{1}"
 msgid "Mode"
 msgstr "Modus"
 
-#: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:882
+#: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:844
 msgid "Modified"
 msgstr "Gemodifiseerde"
 
@@ -1560,7 +1542,7 @@ msgstr ""
 "effekte om op jou beelde van toepassing te wees, en het ook die vermoë om "
 "onbeperkte lae te skep om te help organiseer jou kreatiwiteit."
 
-#: ../Pinta.Core/Managers/WorkspaceManager.cs:413
+#: ../Pinta.Core/Managers/WorkspaceManager.cs:405
 msgid "Pinta supports the following file formats:"
 msgstr "Pinta ondersteun die volgende lêerformate:"
 
@@ -1580,12 +1562,12 @@ msgstr "Pixelate"
 msgid "Pixels"
 msgstr "Pixels"
 
-#: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:525
-#: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:769
+#: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:522
+#: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:736
 msgid "Point Added"
 msgstr "Punt Bygevoeg"
 
-#: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:468
+#: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:467
 msgid "Point Deleted"
 msgstr "Punt Geskrap"
 
@@ -1933,7 +1915,7 @@ msgid "Sharpen"
 msgstr "Verscherpen"
 
 #: ../Pinta.Core/Extensions/ToolBoxButton.cs:52
-#: ../Pinta.Gui.Widgets/Widgets/StatusBarColorPaletteWidget.cs:230
+#: ../Pinta.Gui.Widgets/Widgets/StatusBarColorPaletteWidget.cs:237
 msgid "Shortcut key"
 msgstr "Kortpad sleutel"
 
@@ -2287,7 +2269,7 @@ msgid "Xor ({0} + Right Click)"
 msgstr "Xor ({0} + Regs Klick)"
 
 #. Translators: {0} is the name of a file that the user does not have permission to open.
-#: ../Pinta.Core/Managers/WorkspaceManager.cs:432
+#: ../Pinta.Core/Managers/WorkspaceManager.cs:424
 #, csharp-format
 msgid "You do not have access to '{0}'."
 msgstr "Jy toegang tot het nie '{0}'."
