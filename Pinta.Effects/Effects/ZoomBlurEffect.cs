@@ -45,7 +45,7 @@ namespace Pinta.Effects
 		}
 
 		#region Algorithm Code Ported From PDN
-		public unsafe override void Render (ImageSurface src, ImageSurface dst, Gdk.Rectangle[] rois)
+		public override void Render (ImageSurface src, ImageSurface dst, Gdk.Rectangle[] rois)
 		{
 			if (Data.Amount == 0) {
 				// Copy src to dest
@@ -53,9 +53,9 @@ namespace Pinta.Effects
 			}
 
 			int src_width = src.Width;
-			ColorBgra* src_data_ptr = (ColorBgra*) src.DataPtr;
+			ReadOnlySpan<ColorBgra> src_data = src.GetReadOnlyData ();
 			int dst_width = dst.Width;
-			ColorBgra* dst_data_ptr = (ColorBgra*) dst.DataPtr;
+			Span<ColorBgra> dst_data = dst.GetData ();
 			Gdk.Rectangle src_bounds = src.GetBounds ();
 
 			long w = dst.Width;
@@ -70,8 +70,8 @@ namespace Pinta.Effects
 
 			foreach (Gdk.Rectangle rect in rois) {
 				for (int y = rect.Top; y <= rect.GetBottom (); ++y) {
-					ColorBgra* dstPtr = dst.GetPointAddressUnchecked (dst_data_ptr, dst_width, rect.Left, y);
-					ColorBgra* srcPtr = src.GetPointAddressUnchecked (src_data_ptr, src_width, rect.Left, y);
+					var src_row = src_data.Slice (y * src_width, src_width);
+					var dst_row = dst_data.Slice (y * dst_width, dst_width);
 
 					for (int x = rect.Left; x <= rect.GetRight (); ++x) {
 						long fx = (x << 16) - fcx;
@@ -83,10 +83,11 @@ namespace Pinta.Effects
 						int sa = 0;
 						int sc = 0;
 
-						sr += srcPtr->R * srcPtr->A;
-						sg += srcPtr->G * srcPtr->A;
-						sb += srcPtr->B * srcPtr->A;
-						sa += srcPtr->A;
+						ref readonly ColorBgra src_pixel = ref src_row[x];
+						sr += src_pixel.R * src_pixel.A;
+						sg += src_pixel.G * src_pixel.A;
+						sb += src_pixel.B * src_pixel.A;
+						sa += src_pixel.A;
 						++sc;
 
 						for (int i = 0; i < n; ++i) {
@@ -97,28 +98,27 @@ namespace Pinta.Effects
 							int v = (int) (fy + fcy + 32768 >> 16);
 
 							if (src_bounds.Contains (u, v)) {
-								ColorBgra* srcPtr2 = src.GetPointAddressUnchecked (src_data_ptr, src_width, u, v);
+								ref readonly ColorBgra src_pixel_2 = ref src.GetPoint (src_data, src_width, u, v);
 
-								sr += srcPtr2->R * srcPtr2->A;
-								sg += srcPtr2->G * srcPtr2->A;
-								sb += srcPtr2->B * srcPtr2->A;
-								sa += srcPtr2->A;
+								sr += src_pixel_2.R * src_pixel_2.A;
+								sg += src_pixel_2.G * src_pixel_2.A;
+								sb += src_pixel_2.B * src_pixel_2.A;
+								sa += src_pixel_2.A;
 								++sc;
 							}
 						}
 
+						ref ColorBgra dst_pixel = ref dst_row[x];
+
 						if (sa != 0) {
-							*dstPtr = ColorBgra.FromBgra (
+							dst_pixel = ColorBgra.FromBgra (
 							    Utility.ClampToByte (sb / sa),
 							    Utility.ClampToByte (sg / sa),
 							    Utility.ClampToByte (sr / sa),
 							    Utility.ClampToByte (sa / sc));
 						} else {
-							dstPtr->Bgra = 0;
+							dst_pixel.Bgra = 0;
 						}
-
-						++srcPtr;
-						++dstPtr;
 					}
 				}
 			}

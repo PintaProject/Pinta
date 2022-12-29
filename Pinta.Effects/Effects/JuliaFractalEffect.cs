@@ -78,12 +78,12 @@ namespace Pinta.Effects
 			double invCount = 1.0 / (double) count;
 			double angleTheta = (Data.Angle * Math.PI * 2) / 360.0;
 
-			Span<ColorBgra> dst_data = dst.GetData();
+			Span<ColorBgra> dst_data = dst.GetData ();
 			int dst_width = dst.Width;
 
 			foreach (Gdk.Rectangle rect in rois) {
 				for (int y = rect.Top; y <= rect.GetBottom (); y++) {
-					var dst_row = dst_data.Slice(y * dst_width, dst_width);
+					var dst_row = dst_data.Slice (y * dst_width, dst_width);
 
 					for (int x = rect.Left; x <= rect.GetRight (); x++) {
 						int r = 0;

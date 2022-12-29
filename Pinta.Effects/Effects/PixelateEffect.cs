@@ -47,7 +47,7 @@ namespace Pinta.Effects
 		}
 
 		#region Algorithm Code Ported From PDN
-		private ColorBgra ComputeCellColor(int x, int y,  ReadOnlySpan<ColorBgra> src_data, int cellSize, Gdk.Rectangle srcBounds)
+		private ColorBgra ComputeCellColor (int x, int y, ReadOnlySpan<ColorBgra> src_data, int cellSize, Gdk.Rectangle srcBounds)
 		{
 			Gdk.Rectangle cell = GetCellBox (x, y, cellSize);
 			cell.Intersect (srcBounds);
@@ -57,7 +57,7 @@ namespace Pinta.Effects
 			int bottom = cell.GetBottom ();
 			int top = cell.Top;
 
-			ColorBgra colorTopLeft = src_data[top * srcBounds.Width + left].ToStraightAlpha();
+			ColorBgra colorTopLeft = src_data[top * srcBounds.Width + left].ToStraightAlpha ();
 			ColorBgra colorTopRight = src_data[top * srcBounds.Width + right].ToStraightAlpha ();
 			ColorBgra colorBottomLeft = src_data[bottom * srcBounds.Width + left].ToStraightAlpha ();
 			ColorBgra colorBottomRight = src_data[bottom * srcBounds.Width + right].ToStraightAlpha ();
@@ -86,8 +86,8 @@ namespace Pinta.Effects
 			Gdk.Rectangle src_bounds = src.GetBounds ();
 			Gdk.Rectangle dest_bounds = dest.GetBounds ();
 
-			var src_data = src.GetReadOnlyData();
-			var dst_data = dest.GetData();
+			var src_data = src.GetReadOnlyData ();
+			var dst_data = dest.GetData ();
 
 			foreach (var rect in rois) {
 				for (int y = rect.Top; y <= rect.GetBottom (); ++y) {
@@ -102,7 +102,7 @@ namespace Pinta.Effects
 						yEnd = Math.Min (rect.GetBottom (), cellRect.GetBottom ());
 
 						for (int y2 = y; y2 <= yEnd; ++y2) {
-							var dst_row = dst_data.Slice(y2 * dest_bounds.Width, dest_bounds.Width);
+							var dst_row = dst_data.Slice (y2 * dest_bounds.Width, dest_bounds.Width);
 
 							for (int x2 = x; x2 <= xEnd; ++x2) {
 								dst_row[x2].Bgra = color.Bgra;

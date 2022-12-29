@@ -213,10 +213,10 @@ namespace Pinta.Tools
 				if ((dest_rect.Width > 0) && (dest_rect.Height > 0)) {
 					// Allow Clipping through a temporary surface
 					using (var tmp_surface = CopySurfacePart (surf, dest_rect)) {
-						var tmp_data = tmp_surface.GetData();
+						var tmp_data = tmp_surface.GetData ();
 
 						for (var iy = dest_rect.Top; iy < dest_rect.Bottom; iy++) {
-							var srcRow = tmp_data.Slice(tmp_surface.Width * (iy - dest_rect.Top));
+							var srcRow = tmp_data.Slice (tmp_surface.Width * (iy - dest_rect.Top));
 							var dy = ((iy - y) * LUT_Resolution) / rad;
 
 							if (dy < 0)

@@ -971,6 +971,15 @@ namespace Pinta.Core
 			return *dstPtr;
 		}
 
+		// This isn't really an extension method, since it doesn't use
+		// the passed in argument, but it's nice to have the same calling
+		// convention as the uncached version.  If you can use this one
+		// over the other, it is much faster in tight loops (like effects).
+		public static ref readonly ColorBgra GetPoint (this ImageSurface surf, ReadOnlySpan<ColorBgra> data, int width, int x, int y)
+		{
+			return ref data[width * y + x];
+		}
+
 		public static unsafe ColorBgra* GetRowAddressUnchecked (this ImageSurface surf, int y)
 		{
 			ColorBgra* dstPtr = (ColorBgra*) surf.DataPtr;

@@ -74,9 +74,9 @@ namespace Pinta.Effects
 			Utility.GetRgssOffsets (aaPoints, aaSampleCount, Data.Quality);
 			Span<ColorBgra> samples = stackalloc ColorBgra[aaSampleCount];
 
-			var dst_data = dst.GetData();
+			var dst_data = dst.GetData ();
 			int dst_width = dst.Width;
-			var src_data = src.GetReadOnlyData();
+			var src_data = src.GetReadOnlyData ();
 			int src_width = src.Width;
 
 			TransformData td;
@@ -84,7 +84,7 @@ namespace Pinta.Effects
 			foreach (Gdk.Rectangle rect in rois) {
 
 				for (int y = rect.Top; y <= rect.GetBottom (); y++) {
-					var dst_row = dst_data.Slice(y * dst_width, dst_width);
+					var dst_row = dst_data.Slice (y * dst_width, dst_width);
 
 					double relativeY = y - y_center_offset;
 

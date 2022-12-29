@@ -45,7 +45,7 @@ namespace Pinta.Effects
 		}
 
 		#region Algorithm Code Ported From PDN
-		public unsafe override void Render (ImageSurface src, ImageSurface dst, Gdk.Rectangle[] rois)
+		public override void Render (ImageSurface src, ImageSurface dst, Gdk.Rectangle[] rois)
 		{
 			float twist = Data.Amount;
 
@@ -68,20 +68,21 @@ namespace Pinta.Effects
 				aaPoints[i] = pt;
 			}
 
-			int src_width = src.Width;
-			ColorBgra* src_data_ptr = (ColorBgra*) src.DataPtr;
+			int width = src.Width;
+			ReadOnlySpan<ColorBgra> src_data = src.GetReadOnlyData ();
+			Span<ColorBgra> dst_data = dst.GetData ();
 
 			foreach (var rect in rois) {
 				for (int y = rect.Top; y <= rect.GetBottom (); y++) {
 					float j = y - hh;
-					ColorBgra* dstPtr = dst.GetPointAddressUnchecked (rect.Left, y);
-					ColorBgra* srcPtr = src.GetPointAddressUnchecked (src_data_ptr, src_width, rect.Left, y);
+					var src_row = src_data.Slice (y * width, width);
+					var dst_row = dst_data.Slice (y * width, width);
 
 					for (int x = rect.Left; x <= rect.GetRight (); x++) {
 						float i = x - hw;
 
 						if (i * i + j * j > (maxrad + 1) * (maxrad + 1)) {
-							*dstPtr = *srcPtr;
+							dst_row[x] = src_row[x];
 						} else {
 							int b = 0;
 							int g = 0;
@@ -100,7 +101,7 @@ namespace Pinta.Effects
 
 								theta += (t * twist) / 100;
 
-								ColorBgra sample = src.GetPointUnchecked (src_data_ptr, src_width,
+								ref readonly ColorBgra sample = ref src.GetPoint (src_data, width,
 								    (int) (hw + (float) (rad * Math.Cos (theta))),
 								    (int) (hh + (float) (rad * Math.Sin (theta))));
 
@@ -110,15 +111,12 @@ namespace Pinta.Effects
 								a += sample.A;
 							}
 
-							*dstPtr = ColorBgra.FromBgra (
+							dst_row[x] = ColorBgra.FromBgra (
 							    (byte) (b / aaSamples),
 							    (byte) (g / aaSamples),
 							    (byte) (r / aaSamples),
 							    (byte) (a / aaSamples));
 						}
-
-						++dstPtr;
-						++srcPtr;
 					}
 				}
 			}

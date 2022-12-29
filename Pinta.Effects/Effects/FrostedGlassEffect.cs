@@ -49,22 +49,22 @@ namespace Pinta.Effects
 		}
 
 		#region Algorithm Code Ported From PDN
-		unsafe public override void Render (ImageSurface src, ImageSurface dst, Gdk.Rectangle[] rois)
+		public override void Render (ImageSurface src, ImageSurface dst, Gdk.Rectangle[] rois)
 		{
 			int width = src.Width;
 			int height = src.Height;
 			int r = Data.Amount;
 			Random localRandom = this.random;
 
-			int* intensityCount = stackalloc int[256];
-			uint* avgRed = stackalloc uint[256];
-			uint* avgGreen = stackalloc uint[256];
-			uint* avgBlue = stackalloc uint[256];
-			uint* avgAlpha = stackalloc uint[256];
-			byte* intensityChoices = stackalloc byte[(1 + (r * 2)) * (1 + (r * 2))];
+			Span<int> intensityCount = stackalloc int[256];
+			Span<uint> avgRed = stackalloc uint[256];
+			Span<uint> avgGreen = stackalloc uint[256];
+			Span<uint> avgBlue = stackalloc uint[256];
+			Span<uint> avgAlpha = stackalloc uint[256];
+			Span<byte> intensityChoices = stackalloc byte[(1 + (r * 2)) * (1 + (r * 2))];
 
-			int src_width = src.Width;
-			ColorBgra* src_data_ptr = (ColorBgra*) src.DataPtr;
+			ReadOnlySpan<ColorBgra> src_data = src.GetReadOnlyData ();
+			Span<ColorBgra> dst_data = dst.GetData ();
 
 			foreach (var rect in rois) {
 				int rectTop = rect.Top;
@@ -73,7 +73,7 @@ namespace Pinta.Effects
 				int rectRight = rect.GetRight ();
 
 				for (int y = rectTop; y <= rectBottom; ++y) {
-					ColorBgra* dstPtr = dst.GetPointAddress (rect.Left, y);
+					var dst_row = dst_data.Slice (y * width, width);
 
 					int top = y - r;
 					int bottom = y + r + 1;
@@ -113,22 +113,21 @@ namespace Pinta.Effects
 								continue;
 							}
 
-							ColorBgra* srcPtr = src.GetPointAddressUnchecked (src_data_ptr, src_width, left, j);
+							var src_row = src_data.Slice (j * width, width);
 
 							for (int i = left; i < right; ++i) {
-								byte intensity = srcPtr->GetIntensityByte ();
+								ref readonly ColorBgra src_pixel = ref src_row[i];
+								byte intensity = src_pixel.GetIntensityByte ();
 
 								intensityChoices[intensityChoicesIndex] = intensity;
 								++intensityChoicesIndex;
 
 								++intensityCount[intensity];
 
-								avgRed[intensity] += srcPtr->R;
-								avgGreen[intensity] += srcPtr->G;
-								avgBlue[intensity] += srcPtr->B;
-								avgAlpha[intensity] += srcPtr->A;
-
-								++srcPtr;
+								avgRed[intensity] += src_pixel.R;
+								avgGreen[intensity] += src_pixel.G;
+								avgBlue[intensity] += src_pixel.B;
+								avgAlpha[intensity] += src_pixel.A;
 							}
 						}
 
@@ -145,8 +144,7 @@ namespace Pinta.Effects
 						byte B = (byte) (avgBlue[chosenIntensity] / intensityCount[chosenIntensity]);
 						byte A = (byte) (avgAlpha[chosenIntensity] / intensityCount[chosenIntensity]);
 
-						*dstPtr = ColorBgra.FromBgra (B, G, R, A);
-						++dstPtr;
+						dst_row[x] = ColorBgra.FromBgra (B, G, R, A);
 
 						// prepare the array for the next loop iteration
 						for (int i = 0; i < intensityChoicesIndex; ++i) {

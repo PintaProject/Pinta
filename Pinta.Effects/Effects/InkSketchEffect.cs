@@ -80,9 +80,9 @@ namespace Pinta.Effects
 
 			this.glowEffect.Render (src, dest, rois);
 
-			var src_data = src.GetReadOnlyData();
+			var src_data = src.GetReadOnlyData ();
 			int width = src.Width;
-			var dst_data = dest.GetData();
+			var dst_data = dest.GetData ();
 
 			// Create black outlines by finding the edges of objects 
 			foreach (Gdk.Rectangle roi in rois) {
@@ -98,7 +98,7 @@ namespace Pinta.Effects
 						bottom = dest.Height;
 					}
 
-					var dst_row = dst_data.Slice(y * width, width);
+					var dst_row = dst_data.Slice (y * width, width);
 
 					for (int x = roi.Left; x <= roi.GetRight (); ++x) {
 						int left = x - radius;
@@ -117,7 +117,7 @@ namespace Pinta.Effects
 						int b = 0;
 
 						for (int v = top; v < bottom; v++) {
-							var src_row = src_data.Slice(v * width, width);
+							var src_row = src_data.Slice (v * width, width);
 							int j = v - y + radius;
 
 							for (int u = left; u < right; u++) {

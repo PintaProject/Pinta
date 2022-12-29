@@ -70,18 +70,18 @@ namespace Pinta.Effects
 			invertEffect.Render (dest, dest, rois);
 			desaturateOp.Apply (dest, dest, rois);
 
-			var dst_data = dest.GetData();
+			var dst_data = dest.GetData ();
 			int dst_width = dest.Width;
-			var src_data = src.GetReadOnlyData();
+			var src_data = src.GetReadOnlyData ();
 			int src_width = src.Width;
 
 			foreach (Gdk.Rectangle roi in rois) {
 				for (int y = roi.Top; y <= roi.GetBottom (); ++y) {
-					var src_row = src_data.Slice(y * src_width, src_width);
-					var dst_row = dst_data.Slice(y * dst_width, dst_width);
+					var src_row = src_data.Slice (y * src_width, src_width);
+					var dst_row = dst_data.Slice (y * dst_width, dst_width);
 
 					for (int x = roi.Left; x <= roi.GetRight (); ++x) {
-						ColorBgra srcGrey = desaturateOp.Apply(src_row[x]);
+						ColorBgra srcGrey = desaturateOp.Apply (src_row[x]);
 						dst_row[x] = colorDodgeOp.Apply (srcGrey, dst_row[x]);
 					}
 				}
