@@ -152,8 +152,6 @@ namespace Pinta.Core
 #if false // TODO-GTK4
 			if (System.IO.File.Exists (palette_file))
 				CurrentPalette.Load (GLib.FileFactory.NewForPath (palette_file));
-#else
-			throw new NotImplementedException ();
 #endif
 		}
 

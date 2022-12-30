@@ -2,9 +2,4 @@
   <ItemGroup>
     <ProjectReference Include="..\Pinta.Core\Pinta.Core.csproj" />
   </ItemGroup>
-
-  <!-- TODO-GTK4 - build all files -->
-  <ItemGroup>
-    <Compile Remove="**/*.cs" />
-  </ItemGroup>
 </Project>

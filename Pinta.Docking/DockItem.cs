@@ -24,6 +24,7 @@
 
 using System;
 using Gtk;
+using Pinta.Resources;
 
 namespace Pinta.Docking
 {
@@ -31,7 +32,7 @@ namespace Pinta.Docking
 	/// A dock item contains a single child widget, and can be docked at
 	/// various locations.
 	/// </summary>
-	public class DockItem : VBox
+	public class DockItem : Box
 	{
 		private Label label_widget;
 		private Stack button_stack;
@@ -46,7 +47,7 @@ namespace Pinta.Docking
 		/// <summary>
 		/// Visible label for the dock item.
 		/// </summary>
-		public string Label { get => label_widget.Text; set => label_widget.Text = value; }
+		public string Label { get => label_widget.GetLabel (); set => label_widget.SetLabel (value); }
 
 		/// <summary>
 		/// Triggered when the minimize button is pressed.
@@ -60,39 +61,46 @@ namespace Pinta.Docking
 
 		public DockItem (Widget child, string unique_name, bool locked = false)
 		{
+			SetOrientation (Orientation.Vertical);
+
 			UniqueName = unique_name;
 
-			minimize_button = new Button ("window-minimize-symbolic", IconSize.Button) { Relief = ReliefStyle.None };
-			maximize_button = new Button ("window-maximize-symbolic", IconSize.Button) { Relief = ReliefStyle.None };
+			// TODO-GTK4 - replacement for ReliefStyle.None?
+			minimize_button = Button.NewFromIconName (StandardIcons.WindowMinimize);
+			maximize_button = Button.NewFromIconName (StandardIcons.WindowMaximize);
 
 			button_stack = new Stack ();
-			button_stack.Add (minimize_button);
-			button_stack.Add (maximize_button);
+			button_stack.AddChild (minimize_button);
+			button_stack.AddChild (maximize_button);
 
 			label_widget = new Label ();
 			if (!locked) {
 				const int padding = 8;
-				var title_layout = new HBox ();
-				title_layout.PackStart (label_widget, false, false, padding);
+				var title_layout = Box.New (Orientation.Horizontal, 0);
+				label_widget.MarginStart = label_widget.MarginEnd = padding;
+				title_layout.Prepend (label_widget);
 
-				title_layout.PackEnd (button_stack, false, false, 0);
+				title_layout.Append (button_stack);
 
-				minimize_button.Clicked += (o, args) => {
+				minimize_button.OnClicked += (o, args) => {
 					MinimizeClicked?.Invoke (this, new EventArgs ());
 				};
 
-				maximize_button.Clicked += (o, args) => {
+				maximize_button.OnClicked += (o, args) => {
 					MaximizeClicked?.Invoke (this, new EventArgs ());
 				};
 
-				PackStart (title_layout, false, false, 0);
+				Append (title_layout);
 			}
 
-			PackStart (child, true, true, 0);
+			child.Valign = Align.Fill;
+			child.Vexpand = true;
+			Append (child);
 
 			// TODO - support dragging into floating panel?
 		}
 
+#if false // TODO-GTK4
 		/// <summary>
 		/// Create a toolbar and add it to the bottom of the dock item.
 		/// </summary>
@@ -102,6 +110,7 @@ namespace Pinta.Docking
 			PackStart (toolbar, false, false, 0);
 			return toolbar;
 		}
+#endif
 
 		/// <summary>
 		/// Update the dock item's state after it is minimized.

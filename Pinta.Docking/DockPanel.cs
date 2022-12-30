@@ -30,21 +30,25 @@ using Pinta.Core;
 
 namespace Pinta.Docking
 {
-	public class DockPanel : HBox
+	public class DockPanel : Box
 	{
 		private class DockPanelItem
 		{
 			public DockPanelItem (DockItem item)
 			{
 				Item = item;
-				Pane = new Paned (Orientation.Vertical);
-				ReopenButton = new Button (new Label (item.Label) { Angle = 270 });
+				Pane = Paned.New (Orientation.Vertical);
 
-				popover = new Popover (ReopenButton);
+				var label = Label.New (item.Label);
+				// TODO-GTK4 - figure out how to set angle to 270 degrees for vertical text
+				ReopenButton = Button.New ();
+				ReopenButton.SetChild (label);
+
+				popover = new Popover () { Child = ReopenButton };
 				popover.Position = PositionType.Left;
 
-				ReopenButton.Clicked += (o, args) => {
-					popover.ShowAll ();
+				ReopenButton.OnClicked += (o, args) => {
+					popover.Show ();
 					popover.Popup ();
 				};
 			}
@@ -60,21 +64,22 @@ namespace Pinta.Docking
 			{
 				dock_bar.Remove (ReopenButton);
 				popover.Hide ();
-				if (popover.Child != null)
-					popover.Remove (Item);
+				popover.Child = null;
 
-				Pane.Pack1 (Item, resize: false, shrink: false);
+				Pane.StartChild = Item;
+				Pane.ResizeStartChild = false;
+				Pane.ShrinkStartChild = false;
 
 				Item.Maximize ();
 			}
 
 			public void Minimize (Box dock_bar)
 			{
-				Pane.Remove (Item);
-				popover.Add (Item);
+				Pane.StartChild = null;
+				popover.Child = Item;
 
-				dock_bar.PackStart (ReopenButton, false, false, 0);
-				ReopenButton.ShowAll ();
+				dock_bar.Append (ReopenButton);
+				ReopenButton.Show ();
 
 				Item.Minimize ();
 			}
@@ -83,7 +88,7 @@ namespace Pinta.Docking
 		/// <summary>
 		/// Contains the buttons to re-open any minimized dock items.
 		/// </summary>
-		private VBox dock_bar = new VBox ();
+		private Box dock_bar = Box.New (Orientation.Vertical, 0);
 
 		/// <summary>
 		/// List of the items in this panel, which may be minimized or maximized.
@@ -92,7 +97,8 @@ namespace Pinta.Docking
 
 		public DockPanel ()
 		{
-			PackEnd (dock_bar, false, false, 0);
+			SetOrientation (Orientation.Horizontal);
+			Append (dock_bar);
 		}
 
 		public void AddItem (DockItem item)
@@ -100,10 +106,14 @@ namespace Pinta.Docking
 			var panel_item = new DockPanelItem (item);
 
 			// Connect to the previous pane in the list.
-			if (items.Count > 0)
-				items.Last ().Pane.Add2 (panel_item.Pane);
-			else
-				PackStart (panel_item.Pane, true, true, 0);
+			if (items.Count > 0) {
+				var pane = items.Last ().Pane;
+				pane.EndChild = panel_item.Pane;
+			} else {
+				panel_item.Pane.Hexpand = true;
+				panel_item.Pane.Halign = Align.Fill;
+				Prepend (panel_item.Pane);
+			}
 
 			items.Add (panel_item);
 			panel_item.Maximize (dock_bar);

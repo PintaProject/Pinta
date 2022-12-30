@@ -29,10 +29,8 @@ using System.Collections.Generic;
 using System.Linq;
 using Gtk;
 using Pinta.Core;
-#if false // TODO-GTK4
 using Pinta.Docking;
 using Pinta.Gui.Widgets;
-#endif
 using Pinta.MacInterop;
 
 namespace Pinta
@@ -42,12 +40,12 @@ namespace Pinta
 		Adw.Application app;
 		// NRT - Created in OnActivated
 		WindowShell window_shell = null!;
-#if false // TODO-GTK4
 		Dock dock = null!;
+#if false // TODO-GTK4
 		GLib.Menu show_pad = null!;
+#endif
 
 		CanvasPad canvas_pad = null!;
-#endif
 
 		private readonly System.Net.Http.HttpClient http_client = new ();
 
@@ -312,8 +310,10 @@ namespace Pinta
 #if false // TODO-GTK4
 			CreateMainToolBar (window_shell);
 			CreateToolToolBar (window_shell);
+#endif
 
 			CreatePanels (window_shell);
+#if false // TODO-GTK4
 			CreateStatusBar (window_shell);
 #endif
 
@@ -389,8 +389,10 @@ namespace Pinta
 			pad_section.AppendSubmenu (Translations.GetString ("Tool Windows"), show_pad);
 
 			PintaCore.Chrome.InitializeMainMenu (adj_menu, effects_menu);
+#endif
 		}
 
+#if false // TODO-GTK4
 		private void CreateMainToolBar (WindowShell shell)
 		{
 			var main_toolbar = window_shell.CreateToolBar ("main_toolbar");
@@ -426,28 +428,32 @@ namespace Pinta
 
 			PintaCore.Chrome.InitializeStatusBar (statusbar);
 		}
+#endif
 
 		private void CreatePanels (WindowShell shell)
 		{
-			HBox panel_container = shell.CreateWorkspace ();
-
+			Box panel_container = shell.CreateWorkspace ();
 			CreateDockAndPads (panel_container);
-			panel_container.ShowAll ();
 		}
 
-		private void CreateDockAndPads (HBox container)
+		private void CreateDockAndPads (Box container)
 		{
+#if false // TODO-GTK4
 			var toolbox = new ToolBoxWidget ();
 			container.PackStart (toolbox, false, false, 0);
 			PintaCore.Chrome.InitializeToolBox (toolbox);
+#endif
 
 			// Dock widget
 			dock = new Dock ();
+			dock.Hexpand = true;
+			dock.Halign = Align.Fill;
 
 			// Canvas pad
 			canvas_pad = new CanvasPad ();
 			canvas_pad.Initialize (dock);
 			PintaCore.Chrome.InitializeImageTabsNotebook (canvas_pad.Notebook);
+#if false // TODO-GTK4
 
 			// Layer pad
 			var layers_pad = new LayersPad ();
@@ -456,11 +462,14 @@ namespace Pinta
 			// History pad
 			var history_pad = new HistoryPad ();
 			history_pad.Initialize (dock, this, show_pad);
+#endif
 
-			container.PackStart (dock, true, true, 0);
+			container.Append (dock);
 		}
 
-			#region User Settings
+#if false // TODO-GTK4
+
+		#region User Settings
 		private const string LastDialogDirSettingKey = "last-dialog-directory";
 		private const string LastSelectedToolSettingKey = "last-selected-tool";
 
@@ -510,9 +519,9 @@ namespace Pinta
 
 			PintaCore.Settings.DoSaveSettingsBeforeQuit ();
 		}
-			#endregion
+		#endregion
 
-			#region Action Handlers
+		#region Action Handlers
 		private void MainWindow_DeleteEvent (object o, DeleteEventArgs args)
 		{
 			// leave window open so user can cancel quitting
@@ -636,8 +645,7 @@ namespace Pinta
 				.Where (i => ((CanvasWindow) i.Widget).Canvas == canvas)
 				.FirstOrDefault ();
 		}
-			#endregion
+		#endregion
 #endif
-		}
 	}
 }

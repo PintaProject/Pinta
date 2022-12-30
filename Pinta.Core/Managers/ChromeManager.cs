@@ -35,6 +35,7 @@ namespace Pinta.Core
 		// but it would be nice to rewrite it to provably non-null.
 		public Application Application { get; private set; } = null!;
 		public Window MainWindow { get; private set; } = null!;
+		public Notebook ImageTabsNotebook { get; private set; } = null!;
 #if false // TODO-GTK4
 		private Toolbar tool_toolbar = null!;
 		private IProgressDialog progress_dialog = null!;
@@ -48,7 +49,6 @@ namespace Pinta.Core
 		public Toolbar MainToolBar { get { return main_toolbar; } }
 		public Statusbar StatusBar { get; private set; } = null!;
 		public Toolbar ToolBox { get; private set; } = null!;
-		public Notebook ImageTabsNotebook { get; private set; } = null!;
 
 		public IProgressDialog ProgressDialog { get { return progress_dialog; } }
 		public GLib.Menu AdjustmentsMenu { get; private set; } = null!;
@@ -116,12 +116,14 @@ namespace Pinta.Core
 		{
 			ToolBox = toolbox;
 		}
+#endif
 
 		public void InitializeImageTabsNotebook (Notebook notebook)
 		{
 			ImageTabsNotebook = notebook;
 		}
 
+#if false // TODO-GTK4
 		public void InitializeMainMenu (GLib.Menu adj_menu, GLib.Menu effects_menu)
 		{
 			AdjustmentsMenu = adj_menu;

@@ -43,6 +43,30 @@ namespace Pinta
 				Label = Translations.GetString ("Canvas")
 			};
 			workspace.AddItem (canvas_dock, DockPlacement.Center);
+
+#if true // TODO-GTK4 remove
+			Notebook.WidthRequest = 800;
+			Notebook.InsertTab (new TestItem ("foo"), 0);
+			Notebook.InsertTab (new TestItem ("bar"), 0);
+			Notebook.InsertTab (new TestItem ("baz"), 0);
+#endif
 		}
 	}
+
+#if true // TODO-GTK4 remove
+	internal class TestItem : IDockNotebookItem
+	{
+		private Widget widget;
+
+		public TestItem (string label)
+		{
+			Label = label;
+			widget = Button.NewWithLabel (label);
+		}
+
+		public Widget Widget => widget;
+		public string Label { get; private set; }
+		public event EventHandler? LabelChanged;
+	}
+#endif
 }

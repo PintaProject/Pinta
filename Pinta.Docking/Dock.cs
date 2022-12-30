@@ -31,22 +31,28 @@ namespace Pinta.Docking
 	/// <summary>
 	/// The root widget, containing all dock items underneath it.
 	/// </summary>
-	public class Dock : HBox
+	public class Dock : Box
 	{
 		private readonly DockPanel right_panel = new DockPanel ();
-		private readonly Paned pane = new Paned (Orientation.Horizontal);
+		private readonly Paned pane = Paned.New (Orientation.Horizontal);
 
 		public Dock ()
 		{
-			pane.Pack2 (right_panel, resize: false, shrink: false);
-			Add (pane);
+			SetOrientation (Orientation.Horizontal);
+
+			pane.EndChild = right_panel;
+			pane.ResizeEndChild = false;
+			pane.ShrinkEndChild = false;
+			Append (pane);
 		}
 
 		public void AddItem (DockItem item, DockPlacement placement)
 		{
 			switch (placement) {
 				case DockPlacement.Center:
-					pane.Pack1 (item, resize: true, shrink: false);
+					pane.StartChild = item;
+					pane.ResizeStartChild = true;
+					pane.ShrinkStartChild = false;
 					break;
 				case DockPlacement.Right:
 					right_panel.AddItem (item);

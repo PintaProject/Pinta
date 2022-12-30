@@ -27,6 +27,7 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Linq;
 using Gtk;
+using Pinta.Resources;
 
 namespace Pinta.Docking
 {
@@ -52,7 +53,7 @@ namespace Pinta.Docking
 		public DockNotebook ()
 		{
 			// Emit an event when the current tab is changed.
-			SwitchPage += (o, args) => {
+			OnSwitchPage += (o, args) => {
 				var widget = args.Page;
 				IDockNotebookItem? item = items.Where (i => i.Widget == widget).FirstOrDefault ();
 				ActiveTabChanged?.Invoke (this, new TabEventArgs (item));
@@ -94,38 +95,32 @@ namespace Pinta.Docking
 		/// </summary>
 		public IDockNotebookItem? ActiveItem {
 			get {
-				var current = CurrentPageWidget;
+				var current = GetNthPage (GetCurrentPage ());
 				return items.Where (i => i.Widget == current).FirstOrDefault ();
 			}
 			set {
 				var idx = PageNum (value!.Widget);
 				if (idx >= 0)
-					CurrentPage = idx;
+					SetCurrentPage (idx);
 			}
 		}
 
 		public void InsertTab (IDockNotebookItem item, int position)
 		{
-			var tab_layout = new HBox ();
-			var label_widget = new Label (item.Label);
-			// Truncate the text if it is longer than a reasonable size for the tab.
-			label_widget.Ellipsize = Pango.EllipsizeMode.End;
-			label_widget.MaxWidthChars = 1;
-			label_widget.WidthRequest = 150;
+			var tab_layout = Box.New (Orientation.Horizontal, 0);
+			var label_widget = Label.New (item.Label);
+			item.LabelChanged += (o, args) => { label_widget.SetLabel (item.Label); };
 
-			item.LabelChanged += (o, args) => { label_widget.Text = item.Label; };
-
-			var close_button = new Button ("window-close-symbolic", IconSize.SmallToolbar) {
-				Relief = ReliefStyle.None
-			};
-			close_button.Clicked += (sender, args) => {
+			var close_button = Button.NewFromIconName (StandardIcons.WindowClose);
+			close_button.OnClicked += (sender, args) => {
 				CloseTab (item);
 			};
 
-			tab_layout.PackStart (label_widget, false, false, 0);
-			tab_layout.PackStart (close_button, false, false, 0);
+			tab_layout.Append (label_widget);
+			tab_layout.Append (close_button);
 
 			// Use an event box to grab mouse events.
+#if false // TODO-GTK4
 			var tab_box = new EventBox () {
 				Events = Gdk.EventMask.ButtonReleaseMask,
 				VisibleWindow = false
@@ -139,8 +134,9 @@ namespace Pinta.Docking
 					CloseTab (item);
 				}
 			};
+#endif
 
-			InsertPage (item.Widget, tab_box, position);
+			InsertPage (item.Widget, tab_layout, position);
 			SetTabReorderable (item.Widget, true);
 
 			items.Add (item);

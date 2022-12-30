@@ -70,6 +70,8 @@ namespace Pinta.Resources
 		public const string ViewFullscreen = "view-fullscreen-symbolic";
 
 		public const string WindowClose = "window-close-symbolic";
+		public const string WindowMaximize = "window-maximize-symbolic";
+		public const string WindowMinimize = "window-minimize-symbolic";
 
 		public const string ZoomFitBest = "zoom-fit-best-symbolic";
 		public const string ZoomIn = "zoom-in-symbolic";

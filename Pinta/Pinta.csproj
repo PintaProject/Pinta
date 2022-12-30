@@ -36,6 +36,8 @@
     <Compile Include="MainWindow.cs" />
     <Compile Include="MacInterop/*.cs" />
     <Compile Include="Options.cs" />
+    <Compile Include="Pads/CanvasPad.cs" />
+    <Compile Include="Pads/IDockPad.cs" />
     <Compile Include="WindowShell.cs" />
   </ItemGroup>
 

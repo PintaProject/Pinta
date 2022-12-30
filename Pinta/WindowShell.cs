@@ -35,8 +35,8 @@ namespace Pinta
 		private ApplicationWindow app_window;
 		private Box shell_layout;
 		private Box menu_layout;
-#if false // TODO-GTK4
 		private Box? workspace_layout;
+#if false // TODO-GTK4
 		private Box? main_toolbar;
 #endif
 
@@ -94,18 +94,21 @@ namespace Pinta
 
 			return statusbar;
 		}
+#endif
 
-		public HBox CreateWorkspace ()
+		public Box CreateWorkspace ()
 		{
-			workspace_layout = new HBox ();
+			workspace_layout = Box.New (Orientation.Horizontal, 0);
 			workspace_layout.Name = "workspace_layout";
+			workspace_layout.Hexpand = true;
+			workspace_layout.Halign = Align.Fill;
 
-			shell_layout.PackStart (workspace_layout, true, true, 0);
-			workspace_layout.ShowAll ();
+			shell_layout.Append (workspace_layout);
 
 			return workspace_layout;
 		}
 
+#if false // TODO-GTK4
 		public void AddDragDropSupport (params TargetEntry[] entries)
 		{
 			Gtk.Drag.DestSet (this, Gtk.DestDefaults.Motion | Gtk.DestDefaults.Highlight | Gtk.DestDefaults.Drop, entries, Gdk.DragAction.Copy);
