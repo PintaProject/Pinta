@@ -48,6 +48,11 @@ namespace Pinta.Core
 		{
 		}
 
+		public double Left => X;
+		public double Top => Y;
+		public double Right => X + Width - 1; // TODO-GTK4 - Cairo.Rectangle.GetRight() was X + Width, same for GetBottom()
+		public double Bottom => Y + Height - 1;
+
 		public override string ToString () => $"x:{X} y:{Y} w:{Width} h:{Height}";
 	}
 
@@ -80,6 +85,8 @@ namespace Pinta.Core
 
 		public static RectangleI FromLTRB (int left, int top, int right, int bottom)
 			=> new RectangleI (left, top, right - left + 1, bottom - top + 1);
+
+		public RectangleD ToDouble() => new RectangleD(X, Y, Width, Height);
 
 		public int Left => X;
 		public int Top => Y;

@@ -63,7 +63,6 @@ namespace Pinta.Core
 		public Layer ToolLayer {
 			get {
 				if (tool_layer is null || tool_layer.Surface.Width != document.ImageSize.Width || tool_layer.Surface.Height != document.ImageSize.Height) {
-					tool_layer?.Surface.Dispose ();
 					tool_layer = CreateLayer ("Tool Layer");
 					tool_layer.Hidden = true;
 				}
@@ -108,17 +107,11 @@ namespace Pinta.Core
 		/// </summary>
 		internal void Close ()
 		{
-			// Dispose all of our layers
-			while (user_layers.Count > 0) {
-				var l = user_layers[user_layers.Count - 1];
-				user_layers.RemoveAt (user_layers.Count - 1);
-				l.Surface.Dispose ();
-			}
-
+			user_layers.Clear();
 			CurrentUserLayerIndex = -1;
 
-			tool_layer?.Surface.Dispose ();
-			selection_layer?.Surface.Dispose ();
+			tool_layer = null;
+			selection_layer = null;
 		}
 
 		/// <summary>
@@ -136,7 +129,7 @@ namespace Pinta.Core
 			width ??= document.ImageSize.Width;
 			height ??= document.ImageSize.Height;
 
-			var surface = CairoExtensions.CreateImageSurface (Format.ARGB32, width.Value, height.Value);
+			var surface = CairoExtensions.CreateImageSurface (Format.Argb32, width.Value, height.Value);
 			var layer = new UserLayer (surface) { Name = name };
 
 			return layer;
@@ -148,11 +141,7 @@ namespace Pinta.Core
 		[MemberNotNull (nameof (selection_layer))]
 		public void CreateSelectionLayer ()
 		{
-			var old = selection_layer;
-
 			selection_layer = CreateLayer ();
-
-			old?.Surface.Dispose ();
 		}
 
 		/// <summary>
@@ -161,11 +150,7 @@ namespace Pinta.Core
 		[MemberNotNull (nameof (selection_layer))]
 		public void CreateSelectionLayer (int width, int height)
 		{
-			var old = selection_layer;
-
 			selection_layer = CreateLayer (null, width, height);
-
-			old?.Surface.Dispose ();
 		}
 
 		/// <summary>
@@ -189,18 +174,14 @@ namespace Pinta.Core
 
 		/// <summary>
 		/// Deletes the user layer at the specified index and removes it from the
-		/// layer collection, optionally Disposing the layer surface.
+		/// layer collection.
 		/// </summary>
 		/// <param name="index"></param>
-		/// <param name="dispose"></param>
-		public void DeleteLayer (int index, bool dispose)
+		public void DeleteLayer (int index)
 		{
 			var layer = user_layers[index];
 
 			user_layers.RemoveAt (index);
-
-			if (dispose)
-				layer.Surface.Dispose ();
 
 			// Only change this if this wasn't already the bottom layer
 			if (CurrentUserLayerIndex > 0)
@@ -233,10 +214,9 @@ namespace Pinta.Core
 			// {0} is the name of the source layer. Example: "Layer 3 copy".
 			var layer = CreateLayer (Translations.GetString ("{0} copy", source.Name));
 
-			using (var g = new Context (layer.Surface)) {
-				g.SetSource (source.Surface);
-				g.Paint ();
-			}
+			var g = new Context(layer.Surface);
+			g.SetSourceSurface(source.Surface, 0, 0);
+			g.Paint();
 
 			layer.Hidden = source.Hidden;
 			layer.Opacity = source.Opacity;
@@ -262,12 +242,10 @@ namespace Pinta.Core
 
 			// Find the "bottom" layer
 			var bottom_layer = user_layers[0];
-			var old_surf = bottom_layer.Surface;
 
 			// Replace the bottom surface with the flattened image,
 			// and dispose the old surface
 			bottom_layer.Surface = GetFlattenedImage ();
-			old_surf.Dispose ();
 
 			// Reset our layer pointer to the only remaining layer
 			CurrentUserLayerIndex = 0;
@@ -278,7 +256,11 @@ namespace Pinta.Core
 
 			LayerRemoved?.Invoke (this, EventArgs.Empty);
 			PintaCore.Layers.OnLayerRemoved ();
+#if false // TODO-GTK4
 			document.Workspace.Invalidate ();
+#else
+			throw new NotImplementedException();
+#endif
 		}
 
 		/// <summary>
@@ -288,13 +270,12 @@ namespace Pinta.Core
 		{
 			var surf = CairoExtensions.CreateImageSurface (Format.Argb32, document.ImageSize.Width, document.ImageSize.Height);
 
-			using (var g = new Context (surf)) {
-				g.AppendPath (document.Selection.SelectionPath);
-				g.Clip ();
+			var g = new Context(surf);
+			g.AppendPath (document.Selection.SelectionPath);
+			g.Clip ();
 
-				g.SetSource (user_layers[index].Surface);
-				g.Paint ();
-			}
+			g.SetSourceSurface (user_layers[index].Surface, 0, 0);
+			g.Paint ();
 
 			return surf;
 		}
@@ -307,7 +288,7 @@ namespace Pinta.Core
 			// Create a new image surface
 			var surf = CairoExtensions.CreateImageSurface (Format.Argb32, document.ImageSize.Width, document.ImageSize.Height);
 
-			using var g = new Context (surf);
+			var g = new Context (surf);
 
 			if (clip_to_selection) {
 				document.Selection.Clip (g);
@@ -391,11 +372,13 @@ namespace Pinta.Core
 			var dest = user_layers[CurrentUserLayerIndex - 1];
 
 			// Blend the layers
-			using (var g = new Context (dest.Surface))
-				source.Draw (g);
+			var g = new Context(dest.Surface);
+			source.Draw(g);
 
 			DeleteCurrentLayer ();
 		}
+
+#if false // TODO-GTK4
 
 		/// <summary>
 		/// Moves the current layer down 1 position in the layer collection.
@@ -454,6 +437,7 @@ namespace Pinta.Core
 		{
 			SetCurrentUserLayer (user_layers.IndexOf (layer));
 		}
+#endif
 
 		/// <summary>
 		/// Gets the user layer at the specified index.

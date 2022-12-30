@@ -42,7 +42,7 @@ namespace Pinta.Core
 	public class Document
 	{
 		private string display_name = string.Empty;
-		private GLib.IFile? file = null;
+		private Gio.File? file = null;
 		private bool is_dirty;
 
 		private DocumentSelection selection = null!; // NRT - Set by constructor via Selection property
@@ -63,12 +63,14 @@ namespace Pinta.Core
 
 		public DocumentSelection PreviousSelection = new DocumentSelection ();
 
-		public Document (Gdk.Size size)
+		public Document (Core.Size size)
 		{
 			Selection = new DocumentSelection ();
 
 			Layers = new DocumentLayers (this);
+#if false // TODO-GTK4
 			Workspace = new DocumentWorkspace (this);
+#endif
 			IsDirty = false;
 			HasBeenSavedInSession = false;
 			ImageSize = size;
@@ -76,7 +78,7 @@ namespace Pinta.Core
 			ResetSelectionPaths ();
 		}
 
-		#region Public Properties
+#region Public Properties
 
 		/// <summary>
 		/// Just the file name, like "dog.jpg".
@@ -93,7 +95,7 @@ namespace Pinta.Core
 		/// <summary>
 		/// Identifier for the file location on disk.
 		/// </summary>
-		public GLib.IFile? File {
+		public Gio.File? File {
 			get => file;
 			set {
 				file = value;
@@ -111,9 +113,11 @@ namespace Pinta.Core
 		/// Pinta from a file, or if the user just clicked Save As.
 		public bool HasBeenSavedInSession { get; set; }
 
+#if false // TODO-GTK4
 		public DocumentHistory History { get { return Workspace.History; } }
+#endif
 
-		public Gdk.Size ImageSize { get; set; }
+		public Core.Size ImageSize { get; set; }
 
 		public bool IsDirty {
 			get { return is_dirty; }
@@ -127,21 +131,22 @@ namespace Pinta.Core
 
 		public DocumentLayers Layers { get; }
 
+#if false // TODO-GTK4
 		public DocumentWorkspace Workspace { get; private set; }
+#endif
 
 		public delegate void LayerCloneEvent ();
-		#endregion
+#endregion
 
-		#region Public Methods
-		// Adds a new layer above the current one
-		public Gdk.Rectangle ClampToImageSize (Gdk.Rectangle r)
+#region Public Methods
+		public RectangleI ClampToImageSize (RectangleI r)
 		{
 			int x = Utility.Clamp (r.X, 0, ImageSize.Width);
 			int y = Utility.Clamp (r.Y, 0, ImageSize.Height);
 			int width = Math.Min (r.Width, ImageSize.Width - x);
 			int height = Math.Min (r.Height, ImageSize.Height - y);
 
-			return new Gdk.Rectangle (x, y, width, height);
+			return new RectangleI (x, y, width, height);
 		}
 
 		/// <summary>
@@ -159,11 +164,9 @@ namespace Pinta.Core
 		public void Close ()
 		{
 			Layers.Close ();
-
-			Selection.Dispose ();
-			PreviousSelection.Dispose ();
-
+#if false // TODO-GTK4
 			Workspace.History.Clear ();
+#endif
 		}
 
 		public Context CreateClippedContext ()
@@ -196,6 +199,7 @@ namespace Pinta.Core
 			return g;
 		}
 
+#if false // TODO-GTK4
 		public void FinishSelection ()
 		{
 			// We don't have an uncommitted layer, abort
@@ -235,31 +239,31 @@ namespace Pinta.Core
 
 			Workspace.Invalidate ();
 		}
+#endif
 
 		/// <summary>
 		/// Gets the final pixel color for the given point, taking layers, opacity, and blend modes into account.
 		/// </summary>
 		public ColorBgra GetComputedPixel (int x, int y)
 		{
-			using (var dst = CairoExtensions.CreateImageSurface (Format.Argb32, 1, 1)) {
-				using (var g = new Context (dst)) {
-					foreach (var layer in Layers.GetLayersToPaint ()) {
-						var color = layer.Surface.GetColorBgra (x, y).ToStraightAlpha ().ToCairoColor ();
+			var dst = CairoExtensions.CreateImageSurface(Format.Argb32, 1, 1);
+			var g = new Context(dst);
+			foreach (var layer in Layers.GetLayersToPaint ()) {
+				var color = layer.Surface.GetColorBgra (x, y).ToStraightAlpha ().ToCairoColor ();
 
-						g.SetBlendMode (layer.BlendMode);
-						g.SetSourceColor (color);
+				g.SetBlendMode (layer.BlendMode);
+				g.SetSourceColor (color);
 
-						g.Rectangle (dst.GetBounds ().ToCairoRectangle ());
-						g.PaintWithAlpha (layer.Opacity);
-					}
-				}
-
-				return dst.GetColorBgra (0, 0);
+				g.Rectangle (dst.GetBounds ().ToDouble());
+				g.PaintWithAlpha (layer.Opacity);
 			}
+
+			return dst.GetColorBgra (0, 0);
 		}
 
 		public ImageSurface GetFlattenedImage (bool clip_to_selection = false) => Layers.GetFlattenedImage (clip_to_selection);
 
+#if false // TODO-GTK4
 		/// <param name="canvasOnly">false for the whole selection, true for the part only on our canvas</param>
 		public Gdk.Rectangle GetSelectedBounds (bool canvasOnly)
 		{
@@ -270,15 +274,18 @@ namespace Pinta.Core
 
 			return bounds;
 		}
+#endif
 
 		public void ResetSelectionPaths ()
 		{
-			var rect = new Cairo.Rectangle (0, 0, ImageSize.Width, ImageSize.Height);
+			var rect = new Core.RectangleD (0, 0, ImageSize.Width, ImageSize.Height);
 			Selection.CreateRectangleSelection (rect);
 			PreviousSelection.CreateRectangleSelection (rect);
 			Selection.Visible = false;
 			PreviousSelection.Visible = false;
 		}
+
+#if false // TODO-GTK4
 
 		/// <summary>
 		/// Resizes the canvas.
@@ -378,7 +385,7 @@ namespace Pinta.Core
 		{
 			var new_size = Layer.RotateDimensions (ImageSize, angle);
 			foreach (var layer in Layers.UserLayers)
-				layer.Rotate (angle, new_size);
+				layer.Rotate (angle, ImageSize, new_size);
 
 			ImageSize = new_size;
 			Workspace.CanvasSize = new_size;
@@ -393,6 +400,7 @@ namespace Pinta.Core
 		{
 			return PintaCore.Actions.File.RaiseSaveDocument (this, saveAs);
 		}
+#endif
 
 		/// <summary>
 		/// Signal to the TextTool that an ImageSurface was cloned.
@@ -403,9 +411,9 @@ namespace Pinta.Core
 				LayerCloned ();
 			}
 		}
-		#endregion
+#endregion
 
-		#region Protected Methods
+#region Protected Methods
 		protected void OnIsDirtyChanged ()
 		{
 			if (IsDirtyChanged != null)
@@ -417,22 +425,22 @@ namespace Pinta.Core
 			if (Renamed != null)
 				Renamed (this, EventArgs.Empty);
 		}
-		#endregion
+#endregion
 
-		#region Private Methods
+#region Private Methods
 		private void OnSelectionChanged ()
 		{
 			if (SelectionChanged != null)
 				SelectionChanged.Invoke (this, EventArgs.Empty);
 		}
-		#endregion
+#endregion
 
-		#region Public Events
+#region Public Events
 		public event EventHandler? IsDirtyChanged;
 		public event EventHandler? Renamed;
 		public event LayerCloneEvent? LayerCloned;
 		public event EventHandler? SelectionChanged;
 
-		#endregion
+#endregion
 	}
 }

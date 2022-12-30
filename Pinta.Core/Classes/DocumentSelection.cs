@@ -32,7 +32,7 @@ using ClipperLib;
 
 namespace Pinta.Core
 {
-	public class DocumentSelection : IDisposable
+	public class DocumentSelection
 	{
 		private Path? selection_path;
 
@@ -57,10 +57,15 @@ namespace Pinta.Core
 		public Path SelectionPath {
 			get {
 				if (selection_path == null) {
+#if false // TODO-GTK4 enable once WorkspaceManager is enabled
 					var doc = PintaCore.Workspace.ActiveDocument;
 
 					using (var g = new Context (doc.Layers.CurrentUserLayer.Surface))
 						selection_path = g.CreatePolygonPath (ConvertToPolygonSet (SelectionPolygons));
+#else
+					throw new NotImplementedException();
+#endif
+
 				}
 
 				return selection_path;
@@ -74,10 +79,7 @@ namespace Pinta.Core
 		/// </summary>
 		public void MarkDirty ()
 		{
-			if (selection_path != null) {
-				selection_path.Dispose ();
-				selection_path = null;
-			}
+			selection_path = null;
 
 			// Notify any listeners.
 			if (SelectionModified != null)
@@ -137,14 +139,14 @@ namespace Pinta.Core
 		/// </summary>
 		/// <param name="pintaPolygonSet">A Pinta Polygon set.</param>
 		/// <returns>A Clipper Polygon collection.</returns>
-		public static List<List<IntPoint>> ConvertToPolygons (Point[][] pintaPolygonSet)
+		public static List<List<IntPoint>> ConvertToPolygons (PointI[][] pintaPolygonSet)
 		{
 			List<List<IntPoint>> newPolygons = new List<List<IntPoint>> ();
 
-			foreach (Point[] pA in pintaPolygonSet) {
+			foreach (PointI[] pA in pintaPolygonSet) {
 				List<IntPoint> newPolygon = new List<IntPoint> ();
 
-				foreach (Point p in pA) {
+				foreach (PointI p in pA) {
 					newPolygon.Add (new IntPoint ((long) p.X, (long) p.Y));
 				}
 
@@ -159,19 +161,19 @@ namespace Pinta.Core
 		/// </summary>
 		/// <param name="clipperPolygons">A Clipper Polygon collection.</param>
 		/// <returns>A Pinta Polygon set.</returns>
-		public static Point[][] ConvertToPolygonSet (List<List<IntPoint>> clipperPolygons)
+		public static PointI[][] ConvertToPolygonSet (List<List<IntPoint>> clipperPolygons)
 		{
-			Point[][] resultingPolygonSet = new Point[clipperPolygons.Count][];
+			var resultingPolygonSet = new PointI[clipperPolygons.Count][];
 
 			int polygonNumber = 0;
 
 			foreach (List<IntPoint> ipL in clipperPolygons) {
-				resultingPolygonSet[polygonNumber] = new Point[ipL.Count];
+				resultingPolygonSet[polygonNumber] = new PointI[ipL.Count];
 
 				int pointNumber = 0;
 
 				foreach (IntPoint ip in ipL) {
-					resultingPolygonSet[polygonNumber][pointNumber] = new Point ((int) ip.X, (int) ip.Y);
+					resultingPolygonSet[polygonNumber][pointNumber] = new PointI ((int) ip.X, (int) ip.Y);
 
 					++pointNumber;
 				}
@@ -220,7 +222,7 @@ namespace Pinta.Core
 		/// Create an elliptical Selection from a bounding Rectangle.
 		/// </summary>
 		/// <param name="r">The bounding Rectangle surrounding the ellipse.</param>
-		public void CreateEllipseSelection (Rectangle r)
+		public void CreateEllipseSelection (RectangleD r)
 		{
 			//These values were calculated in the static CreateEllipsePath method
 			//in Pinta.Core.CairoExtensions, so they were used here as well.
@@ -353,13 +355,13 @@ namespace Pinta.Core
 		/// Create a rectangular Selection from a Rectangle.
 		/// </summary>
 		/// <param name="r">The Rectangle.</param>
-		public void CreateRectangleSelection (Rectangle r)
+		public void CreateRectangleSelection (RectangleD r)
 		{
 			SelectionPolygons.Clear ();
 			SelectionPolygons.Add (CreateRectanglePolygon (r));
 
 			Origin = new PointD (r.X, r.Y);
-			End = new PointD (r.GetRight (), r.GetBottom ());
+			End = new PointD (r.Right, r.Bottom);
 
 			MarkDirty ();
 		}
@@ -373,11 +375,11 @@ namespace Pinta.Core
 		/// <param name='imageSize'>
 		/// The size of the document.
 		/// </param>
-		public void Invert (Surface surface, Gdk.Size imageSize)
+		public void Invert (Surface surface, Core.Size imageSize)
 		{
 			List<List<IntPoint>> resultingPolygons = new List<List<IntPoint>> ();
 
-			var documentPolygon = CreateRectanglePolygon (new Rectangle (0, 0, imageSize.Width, imageSize.Height));
+			var documentPolygon = CreateRectanglePolygon (new RectangleD (0, 0, imageSize.Width, imageSize.Height));
 
 			// Create a rectangle that is the size of the entire image,
 			// and subtract all of the polygons in the current selection from it.
@@ -391,7 +393,7 @@ namespace Pinta.Core
 			MarkDirty ();
 		}
 
-		private static List<IntPoint> CreateRectanglePolygon (Rectangle r)
+		private static List<IntPoint> CreateRectanglePolygon (RectangleD r)
 		{
 			// The 4 corners of the Rectangle.
 			int corner1X = (int) Math.Round (r.X);
@@ -414,12 +416,6 @@ namespace Pinta.Core
 			return newPolygon;
 		}
 
-		public void Dispose ()
-		{
-			if (selection_path != null)
-				selection_path.Dispose ();
-		}
-
 		/// <summary>
 		/// Resets the selection.
 		/// </summary>
@@ -434,7 +430,7 @@ namespace Pinta.Core
 		/// <summary>
 		/// Returns a rectangle that encloses the entire selection.
 		/// </summary>
-		public Rectangle GetBounds ()
+		public RectangleD GetBounds ()
 		{
 			var minX = double.MaxValue;
 			var minY = double.MaxValue;
@@ -460,9 +456,9 @@ namespace Pinta.Core
 
 			// Invalid (empty) rectangle - avoid overflow from maxX - minX
 			if (minX > maxX || minY > maxY)
-				return new Rectangle ();
+				return new RectangleD ();
 
-			return new Rectangle (minX, minY, maxX - minX, maxY - minY);
+			return new RectangleD (minX, minY, maxX - minX, maxY - minY);
 		}
 	}
 }

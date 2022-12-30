@@ -1995,5 +1995,10 @@ namespace Pinta.Core
 			matrix.Init (xx, xy, yx, yy, x0, y0);
 			return matrix;
 		}
+
+		public static void TransformPoint(this Matrix m, ref Core.PointD p)
+		{
+			m.TransformPoint(ref p.X, ref p.Y);
+		}
 	}
 }
