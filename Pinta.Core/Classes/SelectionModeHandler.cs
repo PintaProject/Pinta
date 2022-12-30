@@ -33,8 +33,10 @@ namespace Pinta.Core
 {
 	public class SelectionModeHandler
 	{
+#if false // TODO-GTK4
 		private ToolBarLabel? selection_label;
 		private ToolBarComboBox? selection_combo_box;
+#endif
 
 		private CombineMode selected_mode;
 		private Dictionary<string, CombineMode> combine_modes;
@@ -44,6 +46,8 @@ namespace Pinta.Core
 		public SelectionModeHandler ()
 		{
 			combine_modes = new Dictionary<string, CombineMode> () {
+#if false // TODO-GTK4
+
 		{ Translations.GetString ("Replace"), CombineMode.Replace},
                 // Translators: {0} is 'Ctrl', or a platform-specific key such as 'Command' on macOS.
                 { Translations.GetString ("Union (+) ({0} + Left Click)", GtkExtensions.CtrlLabel ()), CombineMode.Union},
@@ -52,9 +56,11 @@ namespace Pinta.Core
                 { Translations.GetString ("Xor ({0} + Right Click)", GtkExtensions.CtrlLabel ()), CombineMode.Xor},
                 // Translators: {0} is 'Alt', or a platform-specific key such as 'Option' on macOS.
                 { Translations.GetString ("Intersect ({0} + Left Click)", GtkExtensions.AltLabel ()), CombineMode.Intersect},
-	    };
+#endif
+			};
 		}
 
+#if false // TODO-GTK4
 		public void BuildToolbar (Gtk.Toolbar tb, ISettingsService settings)
 		{
 			if (selection_label == null)
@@ -100,69 +106,69 @@ namespace Pinta.Core
 
 			return mode;
 		}
+#endif
 
-		public static void PerformSelectionMode (CombineMode mode, List<List<IntPoint>> polygons)
+		public static void PerformSelectionMode (Document doc, CombineMode mode, List<List<IntPoint>> polygons)
 		{
-			var doc = PintaCore.Workspace.ActiveDocument;
-			doc.Selection.Dispose ();
 			doc.Selection = doc.PreviousSelection.Clone ();
 			doc.Selection.Visible = true;
 
-			using (Context g = new Context (doc.Layers.CurrentUserLayer.Surface)) {
-				//Make sure time isn't wasted if the CombineMode is Replace - Replace is much simpler than the other 4 selection modes.
-				if (mode == CombineMode.Replace) {
-					//Clear any previously stored Polygons.
-					doc.Selection.SelectionPolygons.Clear ();
+			var g = new Context (doc.Layers.CurrentUserLayer.Surface);
+			//Make sure time isn't wasted if the CombineMode is Replace - Replace is much simpler than the other 4 selection modes.
+			if (mode == CombineMode.Replace) {
+				//Clear any previously stored Polygons.
+				doc.Selection.SelectionPolygons.Clear ();
 
-					//Set the resulting selection path to the new selection path.
-					doc.Selection.SelectionPolygons = polygons;
-				} else {
-					var resultingPolygons = new List<List<IntPoint>> ();
+				//Set the resulting selection path to the new selection path.
+				doc.Selection.SelectionPolygons = polygons;
+			} else {
+				var resultingPolygons = new List<List<IntPoint>> ();
 
-					//Specify the Clipper Subject (the previous Polygons) and the Clipper Clip (the new Polygons).
-					//Note: for Union, ignore the Clipper Library instructions - the new polygon(s) should be Clips, not Subjects!
-					doc.Selection.SelectionClipper.AddPaths (doc.Selection.SelectionPolygons, PolyType.ptSubject, true);
-					doc.Selection.SelectionClipper.AddPaths (polygons, PolyType.ptClip, true);
+				//Specify the Clipper Subject (the previous Polygons) and the Clipper Clip (the new Polygons).
+				//Note: for Union, ignore the Clipper Library instructions - the new polygon(s) should be Clips, not Subjects!
+				doc.Selection.SelectionClipper.AddPaths (doc.Selection.SelectionPolygons, PolyType.ptSubject, true);
+				doc.Selection.SelectionClipper.AddPaths (polygons, PolyType.ptClip, true);
 
-					switch (mode) {
-						case CombineMode.Xor:
-							//Xor means "Combine both Polygon sets, but leave out any areas of intersection between the two."
-							doc.Selection.SelectionClipper.Execute (ClipType.ctXor, resultingPolygons);
-							break;
-						case CombineMode.Exclude:
-							//Exclude == Difference
+				switch (mode) {
+					case CombineMode.Xor:
+						//Xor means "Combine both Polygon sets, but leave out any areas of intersection between the two."
+						doc.Selection.SelectionClipper.Execute (ClipType.ctXor, resultingPolygons);
+						break;
+					case CombineMode.Exclude:
+						//Exclude == Difference
 
-							//Exclude/Difference means "Subtract any overlapping areas of the new Polygon set from the old Polygon set."
-							doc.Selection.SelectionClipper.Execute (ClipType.ctDifference, resultingPolygons);
-							break;
-						case CombineMode.Intersect:
-							//Intersect means "Leave only the overlapping areas between the new and old Polygon sets."
-							doc.Selection.SelectionClipper.Execute (ClipType.ctIntersection, resultingPolygons);
-							break;
-						default:
-							//Default should only be *CombineMode.Union*, but just in case...
+						//Exclude/Difference means "Subtract any overlapping areas of the new Polygon set from the old Polygon set."
+						doc.Selection.SelectionClipper.Execute (ClipType.ctDifference, resultingPolygons);
+						break;
+					case CombineMode.Intersect:
+						//Intersect means "Leave only the overlapping areas between the new and old Polygon sets."
+						doc.Selection.SelectionClipper.Execute (ClipType.ctIntersection, resultingPolygons);
+						break;
+					default:
+						//Default should only be *CombineMode.Union*, but just in case...
 
-							//Union means "Combine both Polygon sets, and keep any overlapping areas as well."
-							doc.Selection.SelectionClipper.Execute (ClipType.ctUnion, resultingPolygons);
-							break;
-					}
-
-					//After using Clipper, it has to be cleared so there are no conflicts with its next usage.
-					doc.Selection.SelectionClipper.Clear ();
-
-					//Set the resulting selection path to the calculated ("clipped") selection path.
-					doc.Selection.SelectionPolygons = resultingPolygons;
+						//Union means "Combine both Polygon sets, and keep any overlapping areas as well."
+						doc.Selection.SelectionClipper.Execute (ClipType.ctUnion, resultingPolygons);
+						break;
 				}
 
-				doc.Selection.MarkDirty ();
+				//After using Clipper, it has to be cleared so there are no conflicts with its next usage.
+				doc.Selection.SelectionClipper.Clear ();
+
+				//Set the resulting selection path to the calculated ("clipped") selection path.
+				doc.Selection.SelectionPolygons = resultingPolygons;
 			}
+
+			doc.Selection.MarkDirty ();
 		}
 
+#if false // TODO-GTK4
 		public void OnSaveSettings (ISettingsService settings)
 		{
 			if (selection_combo_box is not null)
 				settings.PutSetting (COMBINE_MODE_SETTING, selection_combo_box.ComboBox.Active);
 		}
+#endif
 	}
 
 	public enum CombineMode

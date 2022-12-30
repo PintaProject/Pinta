@@ -34,6 +34,7 @@ namespace Pinta.Core
 	{
 		public static SystemManager System { get; private set; }
 		public static ActionManager Actions { get; private set; }
+		public static WorkspaceManager Workspace { get; private set; }
 		public static SettingsManager Settings { get; private set; }
 		public static ChromeManager Chrome { get; private set; }
 		public static PaletteManager Palette { get; private set; }
@@ -44,7 +45,6 @@ namespace Pinta.Core
 		public static PaintBrushManager PaintBrushes { get; private set; }
 		public static ToolManager Tools { get; private set; }
 		public static ResourceManager Resources { get; private set; }
-		public static WorkspaceManager Workspace { get; private set; }
 		public static RecentFileManager RecentFiles { get; private set; }
 		public static LivePreviewManager LivePreview { get; private set; }
 		public static EffectsManager Effects { get; private set; }
@@ -59,6 +59,7 @@ namespace Pinta.Core
 			System = new SystemManager ();
 			Settings = new SettingsManager ();
 			Actions = new ActionManager ();
+			Workspace = new WorkspaceManager ();
 			Layers = new LayerManager ();
 			PaletteFormats = new PaletteFormatManager ();
 			Palette = new PaletteManager ();
@@ -69,7 +70,6 @@ namespace Pinta.Core
 			// Managers can access them as needed.
 			Resources = new ResourceManager ();
 
-			Workspace = new WorkspaceManager ();
 			PaintBrushes = new PaintBrushManager ();
 			Tools = new ToolManager ();
 			ImageFormats = new ImageConverterManager ();

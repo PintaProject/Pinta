@@ -133,17 +133,20 @@ namespace Pinta
 				}
 			}
 
-#if false // TODO-GTK4 - need to enable more code
 
 			if (extra.Count > 0) {
+#if false // TODO-GTK4 - need gir.core binding for NewFromCommandLineArg
+
 				foreach (var file in extra) {
 					PintaCore.Workspace.OpenFile (Core.GtkExtensions.FileNewForCommandlineArg (file));
 				}
+#else
+				throw new NotImplementedException ();
+#endif
 			} else {
 				// Create a blank document
-				PintaCore.Workspace.NewDocument (new Gdk.Size (800, 600), new Cairo.Color (1, 1, 1));
+				PintaCore.Workspace.NewDocument (new Core.Size (800, 600), new Cairo.Color (1, 1, 1));
 			}
-#endif
 		}
 
 #if false // TODO-GTK4 - is there an equivalent in gir.core?

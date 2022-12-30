@@ -57,15 +57,10 @@ namespace Pinta.Core
 		public Path SelectionPath {
 			get {
 				if (selection_path == null) {
-#if false // TODO-GTK4 enable once WorkspaceManager is enabled
 					var doc = PintaCore.Workspace.ActiveDocument;
 
-					using (var g = new Context (doc.Layers.CurrentUserLayer.Surface))
-						selection_path = g.CreatePolygonPath (ConvertToPolygonSet (SelectionPolygons));
-#else
-					throw new NotImplementedException ();
-#endif
-
+					var g = new Context (doc.Layers.CurrentUserLayer.Surface);
+					selection_path = g.CreatePolygonPath (ConvertToPolygonSet (SelectionPolygons));
 				}
 
 				return selection_path;

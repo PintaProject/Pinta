@@ -808,10 +808,8 @@ namespace Pinta.Core
 
 		public static ImageSurface Clone (this ImageSurface surf)
 		{
-#if false // TODO-GTK4
 			if (PintaCore.Workspace.HasOpenDocuments)
 				PintaCore.Workspace.ActiveDocument.SignalSurfaceCloned ();
-#endif
 
 			ImageSurface newsurf = CairoExtensions.CreateImageSurface (surf.Format, surf.Width, surf.Height);
 
@@ -822,21 +820,18 @@ namespace Pinta.Core
 			return newsurf;
 		}
 
-#if false // TODO-GTK4
 		public static Path Clone (this Path path)
 		{
 			var doc = PintaCore.Workspace.ActiveDocument;
 
 			Path newpath;
 
-			using (Context g = new Context (doc.Layers.CurrentUserLayer.Surface)) {
-				g.AppendPath (path);
-				newpath = g.CopyPath ();
-			}
+			var g = new Context (doc.Layers.CurrentUserLayer.Surface);
+			g.AppendPath (path);
+			newpath = g.CopyPath ();
 
 			return newpath;
 		}
-#endif
 
 		public static void Clear (this ImageSurface surface)
 		{
@@ -1354,11 +1349,12 @@ namespace Pinta.Core
 
 			return scans;
 		}
+#endif
 
-		public static Path CreatePolygonPath (this Context g, Point[][] polygonSet)
+		public static Path CreatePolygonPath (this Context g, PointI[][] polygonSet)
 		{
 			g.Save ();
-			Point p;
+			PointI p;
 
 			for (int i = 0; i < polygonSet.Length; i++) {
 				if (polygonSet[i].Length == 0)
@@ -1382,26 +1378,7 @@ namespace Pinta.Core
 			return path;
 		}
 
-		public static Gdk.Point ToGdkPoint (this PointD point)
-		{
-			return new Gdk.Point ((int) point.X, (int) point.Y);
-		}
-
-		public static bool IsEmpty (this PointD point)
-		{
-			return point.X == 0 && point.Y == 0;
-		}
-
-		public static void TransformPoint (this Matrix matrix, ref PointD point)
-		{
-			double x = point.X;
-			double y = point.Y;
-
-			matrix.TransformPoint (ref x, ref y);
-
-			point.X = x;
-			point.Y = y;
-		}
+#if false // TODO-GTK4
 
 		public static void InitMatrix (this Matrix matrix, Matrix source)
 		{

@@ -38,7 +38,7 @@ namespace Pinta.Core
 		Document ActiveDocument { get; }
 		DocumentWorkspace ActiveWorkspace { get; }
 		event EventHandler? ActiveDocumentChanged;
-		Gdk.Rectangle ClampToImageSize (Gdk.Rectangle r);
+		RectangleI ClampToImageSize (RectangleI r);
 		bool HasOpenDocuments { get; }
 		event EventHandler? SelectionChanged;
 		SelectionModeHandler SelectionHandler { get; }
@@ -83,12 +83,12 @@ namespace Pinta.Core
 			}
 		}
 
-		public Gdk.Size ImageSize {
+		public Size ImageSize {
 			get { return ActiveDocument.ImageSize; }
 			set { ActiveDocument.ImageSize = value; }
 		}
 
-		public Gdk.Size CanvasSize {
+		public Size CanvasSize {
 			get { return ActiveWorkspace.CanvasSize; }
 			set { ActiveWorkspace.CanvasSize = value; }
 		}
@@ -105,7 +105,7 @@ namespace Pinta.Core
 		public List<Document> OpenDocuments { get; private set; }
 		public bool HasOpenDocuments { get { return OpenDocuments.Count > 0; } }
 
-		public Document CreateAndActivateDocument (GLib.IFile? file, Gdk.Size size)
+		public Document CreateAndActivateDocument (Gio.File? file, Size size)
 		{
 			Document doc = new Document (size);
 
@@ -152,21 +152,21 @@ namespace Pinta.Core
 
 		public void Invalidate ()
 		{
-			if (PintaCore.Workspace.HasOpenDocuments)
+			if (HasOpenDocuments)
 				ActiveWorkspace.Invalidate ();
 		}
 
-		public void Invalidate (Gdk.Rectangle rect)
+		public void Invalidate (RectangleI rect)
 		{
 			ActiveWorkspace.Invalidate (rect);
 		}
 
-		public void InvalidateWindowRect (Gdk.Rectangle windowRect)
+		public void InvalidateWindowRect (RectangleI windowRect)
 		{
 			ActiveWorkspace.InvalidateWindowRect (windowRect);
 		}
 
-		public Document NewDocument (Gdk.Size imageSize, Color backgroundColor)
+		public Document NewDocument (Size imageSize, Color backgroundColor)
 		{
 			Document doc = CreateAndActivateDocument (null, imageSize);
 			doc.Workspace.CanvasSize = imageSize;
@@ -175,10 +175,9 @@ namespace Pinta.Core
 			Layer background = doc.Layers.AddNewLayer (Translations.GetString ("Background"));
 
 			if (backgroundColor.A != 0) {
-				using (Cairo.Context g = new Cairo.Context (background.Surface)) {
-					g.SetSourceColor (backgroundColor);
-					g.Paint ();
-				}
+				var g = new Cairo.Context (background.Surface);
+				g.SetSourceColor (backgroundColor);
+				g.Paint ();
 			}
 
 			doc.Workspace.History.PushNewItem (new BaseHistoryItem (Resources.StandardIcons.DocumentNew, Translations.GetString ("New Image")));
@@ -186,6 +185,7 @@ namespace Pinta.Core
 
 			return doc;
 		}
+#if false // TODO-GTK4
 
 		/// <summary>
 		/// Creates a new Document with a specified image as content.
@@ -193,7 +193,7 @@ namespace Pinta.Core
 		/// </summary>
 		public Document NewDocumentFromImage (Gdk.Pixbuf image)
 		{
-			var doc = NewDocument (new Gdk.Size (image.Width, image.Height), new Color (0, 0, 0, 0));
+			var doc = NewDocument (new Size (image.Width, image.Height), new Color (0, 0, 0, 0));
 
 			using (var g = new Context (doc.Layers[0].Surface))
 				g.DrawPixbuf (image, new Point (0, 0));
@@ -204,10 +204,12 @@ namespace Pinta.Core
 
 			return doc;
 		}
+#endif
 
 		// TODO: Standardize add to recent files
-		public bool OpenFile (GLib.IFile file, Window? parent = null)
+		public bool OpenFile (Gio.File file, Window? parent = null)
 		{
+#if false // TODO-GTK4
 			bool fileOpened = false;
 
 			if (parent == null)
@@ -257,8 +259,12 @@ namespace Pinta.Core
 			}
 
 			return fileOpened;
+#else
+			throw new NotImplementedException ();
+#endif
 		}
 
+#if false // TODO-GTK4
 		public void ResizeImage (int width, int height)
 		{
 			ActiveDocument.ResizeImage (width, height);
@@ -268,6 +274,7 @@ namespace Pinta.Core
 		{
 			ActiveDocument.ResizeCanvas (width, height, anchor, compoundAction);
 		}
+#endif
 
 		/// <summary>
 		/// Converts a point from the active document's window coordinates to canvas coordinates.
@@ -275,7 +282,7 @@ namespace Pinta.Core
 		/// <param name='canvas_pos'>
 		/// The position of the window point
 		/// </param>
-		public Cairo.PointD WindowPointToCanvas (Cairo.PointD window_pos)
+		public PointD WindowPointToCanvas (PointD window_pos)
 		{
 			return ActiveWorkspace.WindowPointToCanvas (window_pos.X, window_pos.Y);
 		}
@@ -286,12 +293,12 @@ namespace Pinta.Core
 		/// <param name='canvas_pos'>
 		/// The position of the canvas point
 		/// </param>
-		public Cairo.PointD CanvasPointToWindow (Cairo.PointD canvas_pos)
+		public PointD CanvasPointToWindow (PointD canvas_pos)
 		{
 			return ActiveWorkspace.CanvasPointToWindow (canvas_pos.X, canvas_pos.Y);
 		}
 
-		public Gdk.Rectangle ClampToImageSize (Gdk.Rectangle r)
+		public RectangleI ClampToImageSize (RectangleI r)
 		{
 			return ActiveDocument.ClampToImageSize (r);
 		}
@@ -320,11 +327,16 @@ namespace Pinta.Core
 
 		public void SetActiveDocument (Document document)
 		{
+#if false // TODO-GTK4
 			PintaCore.Actions.Window.SetActiveDocument (document);
+#else
+			throw new NotImplementedException ();
+#endif
 		}
 
 		internal void SetActiveDocumentInternal (Document document)
 		{
+#if false // TODO-GTK4
 			// Work around a case where we closed a document but haven't updated
 			// the active_document_index yet and it points to the closed document
 			if (HasOpenDocuments && active_document_index != -1 && OpenDocuments.Count > active_document_index)
@@ -334,6 +346,9 @@ namespace Pinta.Core
 			active_document_index = index;
 
 			OnActiveDocumentChanged (EventArgs.Empty);
+#else
+			throw new NotImplementedException ();
+#endif
 		}
 
 		#region Protected Methods
@@ -376,6 +391,8 @@ namespace Pinta.Core
 		}
 		#endregion
 
+#if false // TODO-GTK4
+
 		private void ShowOpenFileErrorDialog (Window parent, string filename, string primaryText, string details)
 		{
 			string markup = "<span weight=\"bold\" size=\"larger\">{0}</span>\n\n{1}";
@@ -402,6 +419,7 @@ namespace Pinta.Core
 			string message = string.Format (markup, primaryText, secondaryText);
 			PintaCore.Chrome.ShowUnsupportedFormatDialog (parent, message, details);
 		}
+#endif
 
 		private void ShowFilePermissionErrorDialog (Window parent, string filename)
 		{
@@ -411,8 +429,12 @@ namespace Pinta.Core
 			string secondary = Translations.GetString ("You do not have access to '{0}'.", filename);
 			string message = string.Format (markup, primary, secondary);
 
-			using var md = new MessageDialog (parent, DialogFlags.Modal, MessageType.Error, ButtonsType.Ok, message);
+#if false // TODO-GTK4 need bindings from gir.core
+			using var md = MessageDialog.New (parent, DialogFlags.Modal, MessageType.Error, ButtonsType.Ok, message);
 			md.Run ();
+#else
+			throw new NotImplementedException ();
+#endif
 		}
 
 		#region Public Events

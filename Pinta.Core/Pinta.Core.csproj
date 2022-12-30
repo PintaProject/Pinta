@@ -33,6 +33,7 @@
     <Compile Include="Classes/Rectangle.cs" />
     <Compile Include="Classes/Re-editable/ReEditableLayer.cs" />
     <Compile Include="Classes/ScaleFactor.cs" />
+    <Compile Include="Classes/SelectionModeHandler.cs" />
     <Compile Include="Classes/Translations.cs" />
     <Compile Include="Classes/UserLayer.cs" />
     <Compile Include="Effects/*.cs" />
@@ -53,6 +54,7 @@
     <Compile Include="Managers/PaletteFormatManager.cs" />
     <Compile Include="Managers/SettingsManager.cs" />
     <Compile Include="Managers/SystemManager.cs" />
+    <Compile Include="Managers/WorkspaceManager.cs" />
     <Compile Include="PaletteFormats/IPaletteLoader.cs" />
     <Compile Include="PaletteFormats/IPaletteSaver.cs" />
     <Compile Include="PaletteFormats/PaletteDescriptor.cs" />
