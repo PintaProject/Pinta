@@ -43,7 +43,9 @@ namespace Pinta.Core
 		internal DocumentWorkspace (Document document)
 		{
 			this.document = document;
+#if false // TODO-GTK4
 			History = new DocumentHistory (document);
+#endif
 		}
 
 		#region Public Events
@@ -56,10 +58,10 @@ namespace Pinta.Core
 
 		public bool CanvasFitsInWindow {
 			get {
-				Gtk.Viewport view = (Gtk.Viewport) Canvas.Parent;
+				Gtk.Viewport view = (Gtk.Viewport) Canvas.Parent!;
 
-				int window_x = view.Allocation.Width;
-				int window_y = view.Allocation.Height;
+				int window_x = view.GetAllocatedWidth ();
+				int window_y = view.GetAllocatedHeight ();
 
 				if (CanvasSize.Width <= window_x && CanvasSize.Height <= window_y)
 					return true;
@@ -78,14 +80,16 @@ namespace Pinta.Core
 			}
 		}
 
+#if false // TODO-GTK4
 		public DocumentHistory History { get; private set; }
+#endif
 
 		public bool ImageFitsInWindow {
 			get {
-				Gtk.Viewport view = (Gtk.Viewport) Canvas.Parent;
+				Gtk.Viewport view = (Gtk.Viewport) Canvas.Parent!;
 
-				int window_x = view.Allocation.Width;
-				int window_y = view.Children[0].Allocation.Height;
+				int window_x = view.GetAllocatedWidth ();
+				int window_y = view.Child!.GetAllocatedHeight ();
 
 				if (document.ImageSize.Width <= window_x && document.ImageSize.Height <= window_y)
 					return true;
@@ -94,8 +98,8 @@ namespace Pinta.Core
 			}
 		}
 
-		public Cairo.PointD Offset {
-			get { return new Cairo.PointD ((Canvas.Allocation.Width - canvas_size.Width) / 2, (Canvas.Allocation.Height - canvas_size.Height) / 2); }
+		public PointD Offset {
+			get { return new PointD ((Canvas.GetAllocatedWidth () - canvas_size.Width) / 2, (Canvas.GetAllocatedHeight () - canvas_size.Height) / 2); }
 		}
 
 		public double Scale {
@@ -113,13 +117,17 @@ namespace Pinta.Core
 					int new_x = Math.Max ((int) (document.ImageSize.Width * value), 1);
 					int new_y = Math.Max ((int) (((long) new_x * document.ImageSize.Height) / document.ImageSize.Width), 1);
 
-					CanvasSize = new Gdk.Size (new_x, new_y);
+					CanvasSize = new Size (new_x, new_y);
 					Invalidate ();
 
+#if false // TODO-GTK4
 					if (PintaCore.Tools.CurrentTool?.CursorChangesOnZoom == true) {
 						//The current tool's cursor changes when the zoom changes.
 						PintaCore.Tools.CurrentTool.SetCursor (PintaCore.Tools.CurrentTool.DefaultCursor);
 					}
+#else
+					throw new NotImplementedException ();
+#endif
 				}
 			}
 		}
@@ -138,15 +146,15 @@ namespace Pinta.Core
 		/// <param name='canvasRect'>
 		/// The rectangle region of the canvas requiring repainting
 		/// </param>
-		public void Invalidate (Gdk.Rectangle canvasRect)
+		public void Invalidate (RectangleI canvasRect)
 		{
-			Cairo.PointD canvasTopLeft = new Cairo.PointD (canvasRect.Left, canvasRect.Top);
-			Cairo.PointD canvasBtmRight = new Cairo.PointD (canvasRect.Right + 1, canvasRect.Bottom + 1);
+			var canvasTopLeft = new PointD (canvasRect.Left, canvasRect.Top);
+			var canvasBtmRight = new PointD (canvasRect.Right + 1, canvasRect.Bottom + 1);
 
-			Cairo.PointD winTopLeft = CanvasPointToWindow (canvasTopLeft.X, canvasTopLeft.Y);
-			Cairo.PointD winBtmRight = CanvasPointToWindow (canvasBtmRight.X, canvasBtmRight.Y);
+			var winTopLeft = CanvasPointToWindow (canvasTopLeft.X, canvasTopLeft.Y);
+			var winBtmRight = CanvasPointToWindow (canvasBtmRight.X, canvasBtmRight.Y);
 
-			Gdk.Rectangle winRect = CairoExtensions.PointsToRectangle (winTopLeft, winBtmRight).ToGdkRectangle ();
+			RectangleI winRect = CairoExtensions.PointsToRectangle (winTopLeft, winBtmRight).ToInt ();
 
 			OnCanvasInvalidated (new CanvasInvalidatedEventArgs (winRect));
 		}
@@ -155,7 +163,7 @@ namespace Pinta.Core
 		/// Repaints a rectangle region in the window.
 		/// Note that this overload uses window coordinates, whereas Invalidate() uses canvas coordinates.
 		/// </summary>
-		public void InvalidateWindowRect (Gdk.Rectangle windowRect)
+		public void InvalidateWindowRect (RectangleI windowRect)
 		{
 			OnCanvasInvalidated (new CanvasInvalidatedEventArgs (windowRect));
 		}
@@ -163,12 +171,12 @@ namespace Pinta.Core
 		/// <summary>
 		/// Determines whether the rectangle lies (at least partially) outside the canvas area.
 		/// </summary>
-		public bool IsPartiallyOffscreen (Gdk.Rectangle rect)
+		public bool IsPartiallyOffscreen (RectangleI rect)
 		{
 			return (rect.IsEmpty || rect.Left < 0 || rect.Top < 0);
 		}
 
-		public bool PointInCanvas (Cairo.PointD point)
+		public bool PointInCanvas (PointD point)
 		{
 			if (point.X < 0 || point.Y < 0)
 				return false;
@@ -181,18 +189,22 @@ namespace Pinta.Core
 
 		public void RecenterView (double x, double y)
 		{
-			Gtk.Viewport view = (Gtk.Viewport) Canvas.Parent;
+			Gtk.Viewport view = (Gtk.Viewport) Canvas.Parent!;
 
-			view.Hadjustment.Value = Utility.Clamp (x * Scale - view.Hadjustment.PageSize / 2, view.Hadjustment.Lower, view.Hadjustment.Upper);
-			view.Vadjustment.Value = Utility.Clamp (y * Scale - view.Vadjustment.PageSize / 2, view.Vadjustment.Lower, view.Vadjustment.Upper);
+			var h_adjust = view.GetHadjustment ();
+			h_adjust.Value = Utility.Clamp (x * Scale - h_adjust.PageSize / 2, h_adjust.Lower, h_adjust.Upper);
+			var v_adjust = view.GetVadjustment ();
+			v_adjust.Value = Utility.Clamp (y * Scale - v_adjust.PageSize / 2, v_adjust.Lower, v_adjust.Upper);
 		}
 
 		public void ScrollCanvas (int dx, int dy)
 		{
-			Gtk.Viewport view = (Gtk.Viewport) Canvas.Parent;
+			Gtk.Viewport view = (Gtk.Viewport) Canvas.Parent!;
 
-			view.Hadjustment.Value = Utility.Clamp (dx + view.Hadjustment.Value, view.Hadjustment.Lower, view.Hadjustment.Upper - view.Hadjustment.PageSize);
-			view.Vadjustment.Value = Utility.Clamp (dy + view.Vadjustment.Value, view.Vadjustment.Lower, view.Vadjustment.Upper - view.Vadjustment.PageSize);
+			var h_adjust = view.GetHadjustment ();
+			h_adjust.Value = Utility.Clamp (dx + h_adjust.Value, h_adjust.Lower, h_adjust.Upper - h_adjust.PageSize);
+			var v_adjust = view.GetVadjustment ();
+			v_adjust.Value = Utility.Clamp (dy + v_adjust.Value, v_adjust.Lower, v_adjust.Upper - v_adjust.PageSize);
 		}
 
 		/// <summary>
@@ -204,12 +216,11 @@ namespace Pinta.Core
 		/// <param name='y'>
 		/// The Y coordinate of the window point
 		/// </param>
-		public Cairo.PointD WindowPointToCanvas (double x, double y)
+		public PointD WindowPointToCanvas (double x, double y)
 		{
-			ScaleFactor sf = new ScaleFactor (PintaCore.Workspace.ImageSize.Width,
-							  PintaCore.Workspace.CanvasSize.Width);
-			Cairo.PointD pt = sf.ScalePoint (new Cairo.PointD (x - Offset.X, y - Offset.Y));
-			return new Cairo.PointD (pt.X, pt.Y);
+			var sf = new ScaleFactor (document.ImageSize.Width, CanvasSize.Width);
+			var pt = sf.ScalePoint (new PointD (x - Offset.X, y - Offset.Y));
+			return new PointD (pt.X, pt.Y);
 		}
 
 		/// <summary>
@@ -221,40 +232,39 @@ namespace Pinta.Core
 		/// <param name='y'>
 		/// The Y coordinate of the canvas point
 		/// </param>
-		public Cairo.PointD CanvasPointToWindow (double x, double y)
+		public PointD CanvasPointToWindow (double x, double y)
 		{
-			ScaleFactor sf = new ScaleFactor (PintaCore.Workspace.ImageSize.Width,
-							  PintaCore.Workspace.CanvasSize.Width);
-			Cairo.PointD pt = sf.UnscalePoint (new Cairo.PointD (x, y));
-			return new Cairo.PointD (pt.X + Offset.X, pt.Y + Offset.Y);
+			var sf = new ScaleFactor (document.ImageSize.Width, CanvasSize.Width);
+			var pt = sf.UnscalePoint (new PointD (x, y));
+			return new PointD (pt.X + Offset.X, pt.Y + Offset.Y);
 		}
 
 		public void ZoomIn ()
 		{
-			ZoomAndRecenterView (ZoomType.ZoomIn, new Cairo.PointD (-1, -1)); // Zoom in relative to the center of the viewport.
+			ZoomAndRecenterView (ZoomType.ZoomIn, new PointD (-1, -1)); // Zoom in relative to the center of the viewport.
 		}
 
 		public void ZoomOut ()
 		{
-			ZoomAndRecenterView (ZoomType.ZoomOut, new Cairo.PointD (-1, -1)); // Zoom out relative to the center of the viewport.
+			ZoomAndRecenterView (ZoomType.ZoomOut, new PointD (-1, -1)); // Zoom out relative to the center of the viewport.
 		}
 
-		public void ZoomInFromMouseScroll (Cairo.PointD point)
+		public void ZoomInFromMouseScroll (in PointD point)
 		{
 			ZoomAndRecenterView (ZoomType.ZoomIn, point); // Zoom in relative to mouse position.
 		}
 
-		public void ZoomOutFromMouseScroll (Cairo.PointD point)
+		public void ZoomOutFromMouseScroll (in PointD point)
 		{
 			ZoomAndRecenterView (ZoomType.ZoomOut, point); // Zoom out relative to mouse position.
 		}
 
 		public void ZoomManually ()
 		{
-			ZoomAndRecenterView (ZoomType.ZoomManually, new Cairo.PointD (-1, -1));
+			ZoomAndRecenterView (ZoomType.ZoomManually, new PointD (-1, -1));
 		}
 
-		public void ZoomToRectangle (Cairo.Rectangle rect)
+		public void ZoomToRectangle (RectangleD rect)
 		{
 			double ratio;
 
@@ -263,9 +273,13 @@ namespace Pinta.Core
 			else
 				ratio = document.ImageSize.Height / rect.Height;
 
+#if false // TODO-GTK4
 			PintaCore.Actions.View.ZoomComboBox.ComboBox.Entry.Text = ViewActions.ToPercent (ratio);
 			Gtk.Main.Iteration (); //Force update of scrollbar upper before recenter
 			RecenterView (rect.X + rect.Width / 2, rect.Y + rect.Height / 2);
+#else
+			throw new NotImplementedException ();
+#endif
 		}
 		#endregion
 
@@ -282,8 +296,9 @@ namespace Pinta.Core
 				CanvasSizeChanged (this, EventArgs.Empty);
 		}
 
-		private void ZoomAndRecenterView (ZoomType zoomType, Cairo.PointD point)
+		private void ZoomAndRecenterView (ZoomType zoomType, in PointD point)
 		{
+#if false // TODO-GTK4
 			if (zoomType == ZoomType.ZoomOut && (CanvasSize.Width == 1 || CanvasSize.Height == 1))
 				return; //Can't zoom in past a 1x1 px canvas
 
@@ -363,6 +378,9 @@ namespace Pinta.Core
 			PintaCore.Actions.View.ResumeZoomUpdate ();
 			if (Canvas.Window != null)
 				Canvas.Window.ThawUpdates ();
+#else
+			throw new NotImplementedException ();
+#endif
 		}
 		#endregion
 	}

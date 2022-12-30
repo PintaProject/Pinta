@@ -48,6 +48,9 @@ namespace Pinta.Core
 		{
 		}
 
+		public RectangleI ToInt () => new RectangleI ((int) Math.Floor (X), (int) Math.Floor (Y),
+							      (int) Math.Ceiling (Width), (int) Math.Ceiling (Height));
+
 		public double Left => X;
 		public double Top => Y;
 		public double Right => X + Width - 1; // TODO-GTK4 - Cairo.Rectangle.GetRight() was X + Width, same for GetBottom()
@@ -92,6 +95,8 @@ namespace Pinta.Core
 		public int Top => Y;
 		public int Right => X + Width - 1;
 		public int Bottom => Y + Height - 1;
+
+		public bool IsEmpty => (Width == 0) || (Height == 0);
 
 		public PointI Location => new PointI (X, Y);
 		public Size Size => new Size (Width, Height);

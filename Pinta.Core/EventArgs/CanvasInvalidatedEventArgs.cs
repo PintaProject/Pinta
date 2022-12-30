@@ -32,14 +32,14 @@ namespace Pinta.Core
 	public class CanvasInvalidatedEventArgs : EventArgs
 	{
 		public bool EntireSurface { get; set; }
-		public RectangleD Rectangle { get; set; }
+		public RectangleI Rectangle { get; set; }
 
 		public CanvasInvalidatedEventArgs ()
 		{
 			EntireSurface = true;
 		}
 
-		public CanvasInvalidatedEventArgs (RectangleD rect)
+		public CanvasInvalidatedEventArgs (RectangleI rect)
 		{
 			EntireSurface = false;
 			Rectangle = rect;

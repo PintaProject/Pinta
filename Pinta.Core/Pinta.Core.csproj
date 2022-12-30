@@ -23,6 +23,7 @@
     <Compile Include="Classes/Document.cs" />
     <Compile Include="Classes/DocumentLayers.cs" />
     <Compile Include="Classes/DocumentSelection.cs" />
+    <Compile Include="Classes/DocumentWorkspace.cs" />
     <Compile Include="Classes/IExtension.cs" />
     <Compile Include="Classes/Layer.cs" />
     <Compile Include="Classes/ObservableObject.cs" />
@@ -30,11 +31,13 @@
     <Compile Include="Classes/Point.cs" />
     <Compile Include="Classes/Rectangle.cs" />
     <Compile Include="Classes/Re-editable/ReEditableLayer.cs" />
+    <Compile Include="Classes/ScaleFactor.cs" />
     <Compile Include="Classes/Translations.cs" />
     <Compile Include="Classes/UserLayer.cs" />
     <Compile Include="Effects/*.cs" />
     <Compile Include="Enumerations/*.cs" />
     <Compile Include="EventArgs/CanvasInvalidatedEventArgs.cs" />
+    <Compile Include="EventArgs/DocumentEventArgs.cs" />
     <Compile Include="EventArgs/ModifyCompressionEventArgs.cs" />
     <Compile Include="Extensions/CairoExtensions.cs" />
     <Compile Include="Extensions/GdkExtensions.cs" />

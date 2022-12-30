@@ -68,9 +68,7 @@ namespace Pinta.Core
 			Selection = new DocumentSelection ();
 
 			Layers = new DocumentLayers (this);
-#if false // TODO-GTK4
 			Workspace = new DocumentWorkspace (this);
-#endif
 			IsDirty = false;
 			HasBeenSavedInSession = false;
 			ImageSize = size;
@@ -131,9 +129,7 @@ namespace Pinta.Core
 
 		public DocumentLayers Layers { get; }
 
-#if false // TODO-GTK4
 		public DocumentWorkspace Workspace { get; private set; }
-#endif
 
 		public delegate void LayerCloneEvent ();
 		#endregion

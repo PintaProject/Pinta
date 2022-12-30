@@ -731,12 +731,6 @@ namespace Pinta.Core
 			return new Cairo.Rectangle (x, y, w, h);
 		}
 
-		public static Gdk.Rectangle ToGdkRectangle (this Cairo.Rectangle r)
-		{
-			return new Gdk.Rectangle ((int) Math.Floor (r.X), (int) Math.Floor (r.Y),
-						  (int) Math.Ceiling (r.Width), (int) Math.Ceiling (r.Height));
-		}
-
 		public static bool ContainsPoint (this Cairo.Rectangle r, double x, double y)
 		{
 			if (x < r.X || x >= r.X + r.Width)
@@ -1611,20 +1605,22 @@ namespace Pinta.Core
 
 			return rect;
 		}
+#endif
 
 		/// <summary>
 		/// Create a rectangle with a positive width / height from the provided points.
 		/// </summary>
-		public static Rectangle PointsToRectangle (PointD p1, PointD p2)
+		public static RectangleD PointsToRectangle (PointD p1, PointD p2)
 		{
 			double y1 = Math.Min (p1.Y, p2.Y);
 			double y2 = Math.Max (p1.Y, p2.Y);
 			double x1 = Math.Min (p1.X, p2.X);
 			double x2 = Math.Max (p1.X, p2.X);
 
-			return new Cairo.Rectangle (x1, y1, x2 - x1, y2 - y1);
+			return new RectangleD (x1, y1, x2 - x1, y2 - y1);
 		}
 
+#if false // TODO-GTK4
 		// Ported from PDN.
 		public static void FillStencilFromPoint (ImageSurface surface, BitMask stencil, Point start, int tolerance,
 								out Rectangle boundingBox, Cairo.Region limitRegion, bool limitToSelection)
