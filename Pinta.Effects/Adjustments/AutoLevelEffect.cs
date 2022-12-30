@@ -29,11 +29,11 @@ namespace Pinta.Effects
 			get { return "L"; }
 		}
 
-		public override void Render (ImageSurface src, ImageSurface dest, Core.Rectangle[] rois)
+		public override void Render (ImageSurface src, ImageSurface dest, RectangleI[] rois)
 		{
 			if (op == null) {
 				HistogramRgb histogram = new HistogramRgb ();
-				histogram.UpdateHistogram (src, new Core.Rectangle (0, 0, src.Width, src.Height));
+				histogram.UpdateHistogram (src, new RectangleI (0, 0, src.Width, src.Height));
 
 				op = histogram.MakeLevelsAuto ();
 			}

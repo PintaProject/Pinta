@@ -48,12 +48,12 @@ namespace Pinta.Effects
 		}
 
 		#region Algorithm Code Ported From PDN
-		public override void Render (ImageSurface src, ImageSurface dest, Core.Rectangle[] rois)
+		public override void Render (ImageSurface src, ImageSurface dest, Core.RectangleI[] rois)
 		{
 			this.radius = Data.Radius;
 			this.percentile = Data.Percentile;
 
-			foreach (Core.Rectangle rect in rois)
+			foreach (Core.RectangleI rect in rois)
 				RenderRect (this.radius, src, dest, rect);
 		}
 

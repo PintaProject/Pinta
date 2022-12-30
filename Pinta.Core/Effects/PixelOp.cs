@@ -26,14 +26,14 @@ namespace Pinta.Core
 			return (byte) (((la * (256 - (ra + (ra >> 7)))) >> 8) + ra);
 		}
 
-		public void Apply (ImageSurface dst, ImageSurface src, Rectangle[] rois, int startIndex, int length)
+		public void Apply (ImageSurface dst, ImageSurface src, RectangleI[] rois, int startIndex, int length)
 		{
 			for (int i = startIndex; i < startIndex + length; ++i) {
 				ApplyBase (dst, rois[i].Location, src, rois[i].Location, rois[i].Size);
 			}
 		}
 
-		public void Apply (ImageSurface dst, Point dstOffset, ImageSurface src, Point srcOffset, Size roiSize)
+		public void Apply (ImageSurface dst, PointI dstOffset, ImageSurface src, PointI srcOffset, Size roiSize)
 		{
 			ApplyBase (dst, dstOffset, src, srcOffset, roiSize);
 		}
@@ -48,22 +48,22 @@ namespace Pinta.Core
 		/// <param name="src">The Surface to read pixels from for the rhs parameter given to the method <b>ColorBgra Apply(ColorBgra, ColorBgra)</b>.</param>
 		/// <param name="srcOffset">The pixel offset that defines the upper-left of the rectangle-of-interest for the src Surface.</param>
 		/// <param name="roiSize">The size of the rectangles-of-interest for all Surfaces.</param>
-		public void ApplyBase (ImageSurface dst, Point dstOffset, ImageSurface src, Point srcOffset, Size roiSize)
+		public void ApplyBase (ImageSurface dst, PointI dstOffset, ImageSurface src, PointI srcOffset, Size roiSize)
 		{
 			// Create bounding rectangles for each Surface
-			var dstRect = new Rectangle (dstOffset, roiSize);
+			var dstRect = new RectangleI (dstOffset, roiSize);
 
 			if (dstRect.Width == 0 || dstRect.Height == 0)
 				return;
 
-			var srcRect = new Rectangle (srcOffset, roiSize);
+			var srcRect = new RectangleI (srcOffset, roiSize);
 
 			if (srcRect.Width == 0 || srcRect.Height == 0)
 				return;
 
 			// Clip those rectangles to those Surface's bounding rectangles
-			var dstClip = Rectangle.Intersect (dstRect, dst.GetBounds ());
-			var srcClip = Rectangle.Intersect (srcRect, src.GetBounds ());
+			var dstClip = RectangleI.Intersect (dstRect, dst.GetBounds ());
+			var srcClip = RectangleI.Intersect (srcRect, src.GetBounds ());
 
 			// If any of those Rectangles actually got clipped, then throw an exception
 			if (dstRect != dstClip)
@@ -101,7 +101,7 @@ namespace Pinta.Core
 			}
 		}
 
-		public virtual void Apply (ImageSurface dst, Point dstOffset, ImageSurface src, Point srcOffset, int scanLength)
+		public virtual void Apply (ImageSurface dst, PointI dstOffset, ImageSurface src, PointI srcOffset, int scanLength)
 		{
 			Apply (dst.GetData ().Slice (dstOffset.Y * dst.Width + dstOffset.X, scanLength),
 			       src.GetData ().Slice (srcOffset.Y * src.Width + srcOffset.X, scanLength));

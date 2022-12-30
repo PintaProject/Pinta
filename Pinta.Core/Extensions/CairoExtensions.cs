@@ -967,9 +967,9 @@ namespace Pinta.Core
 			return ref surf.GetColorBgra (surf.GetReadOnlyData (), surf.Width, x, y);
 		}
 
-		public static Rectangle GetBounds (this ImageSurface surf)
+		public static RectangleI GetBounds (this ImageSurface surf)
 		{
-			return new Rectangle (0, 0, surf.Width, surf.Height);
+			return new RectangleI (0, 0, surf.Width, surf.Height);
 		}
 
 		public static Size GetSize (this ImageSurface surf)
@@ -1509,7 +1509,7 @@ namespace Pinta.Core
 			return pattern;
 		}
 #endif
-		public static void Rectangle (this Context g, Rectangle r)
+		public static void Rectangle (this Context g, RectangleD r)
 		{
 			g.Rectangle (r.X, r.Y, r.Width, r.Height);
 		}
@@ -1523,7 +1523,7 @@ namespace Pinta.Core
 			g.Restore ();
 		}
 
-		public static void BlendSurface (this Context g, Surface src, Rectangle roi, BlendMode mode = BlendMode.Normal, double opacity = 1.0)
+		public static void BlendSurface (this Context g, Surface src, RectangleD roi, BlendMode mode = BlendMode.Normal, double opacity = 1.0)
 		{
 			g.Save ();
 			g.Rectangle (roi);
@@ -1534,7 +1534,7 @@ namespace Pinta.Core
 			g.Restore ();
 		}
 
-		public static void BlendSurface (this Context g, Surface src, Point offset, BlendMode mode = BlendMode.Normal, double opacity = 1.0)
+		public static void BlendSurface (this Context g, Surface src, PointI offset, BlendMode mode = BlendMode.Normal, double opacity = 1.0)
 		{
 			g.Save ();
 			g.Translate (offset.X, offset.Y);

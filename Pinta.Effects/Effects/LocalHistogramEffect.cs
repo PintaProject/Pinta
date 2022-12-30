@@ -106,7 +106,7 @@ namespace Pinta.Effects
 		    int rad,
 		    ImageSurface src,
 		    ImageSurface dst,
-		    Core.Rectangle rect)
+		    Core.RectangleI rect)
 		{
 			int width = src.Width;
 			int height = src.Height;
@@ -289,7 +289,7 @@ namespace Pinta.Effects
 		    int rad,
 		    ImageSurface src,
 		    ImageSurface dst,
-		    Core.Rectangle rect)
+		    Core.RectangleI rect)
 		{
 			int width = src.Width;
 			int height = src.Height;

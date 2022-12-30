@@ -58,7 +58,7 @@ namespace Pinta.Effects
 			return EffectHelper.LaunchSimpleEffectDialog (this);
 		}
 
-		public override void Render (ImageSurface src, ImageSurface dest, Core.Rectangle[] rois)
+		public override void Render (ImageSurface src, ImageSurface dest, Core.RectangleI[] rois)
 		{
 			if (!table_calculated)
 				Calculate ();
@@ -67,7 +67,7 @@ namespace Pinta.Effects
 			var dst_data = dest.GetData ();
 			int width = src.Width;
 
-			foreach (Core.Rectangle rect in rois) {
+			foreach (Core.RectangleI rect in rois) {
 				for (int y = rect.Top; y <= rect.Bottom; y++) {
 					var src_row = src_data.Slice (y * width + rect.Left, rect.Width);
 					var dst_row = dst_data.Slice (y * width + rect.Left, rect.Width);

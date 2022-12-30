@@ -47,7 +47,7 @@ namespace Pinta.Effects
 		}
 
 		#region Algorithm Code Ported From PDN
-		public override void Render (ImageSurface src, ImageSurface dst, Core.Rectangle[] rois)
+		public override void Render (ImageSurface src, ImageSurface dst, Core.RectangleI[] rois)
 		{
 			float bulge = (float) Data.Amount;
 
@@ -64,7 +64,7 @@ namespace Pinta.Effects
 			ReadOnlySpan<ColorBgra> src_data = src.GetReadOnlyData ();
 			Span<ColorBgra> dst_data = dst.GetData ();
 
-			foreach (Core.Rectangle rect in rois) {
+			foreach (Core.RectangleI rect in rois) {
 
 				for (int y = rect.Top; y <= rect.Bottom; y++) {
 					var src_row = src_data.Slice (y * src_width, src_width);

@@ -163,7 +163,7 @@ namespace Pinta.Core
 			histogram.Initialize ();
 		}
 
-		protected abstract void AddSurfaceRectangleToHistogram (ImageSurface surface, Rectangle rect);
+		protected abstract void AddSurfaceRectangleToHistogram (ImageSurface surface, RectangleI rect);
 
 		//public void UpdateHistogram(Surface surface)
 		//{
@@ -172,7 +172,7 @@ namespace Pinta.Core
 		//    OnHistogramUpdated();
 		//}
 
-		public void UpdateHistogram (ImageSurface surface, Rectangle rect)
+		public void UpdateHistogram (ImageSurface surface, RectangleI rect)
 		{
 			Clear ();
 			AddSurfaceRectangleToHistogram (surface, rect);

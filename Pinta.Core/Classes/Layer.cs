@@ -227,7 +227,7 @@ namespace Pinta.Core
 			Surface = dest;
 		}
 
-		public virtual void Crop (Rectangle rect, Path? selection)
+		public virtual void Crop (RectangleI rect, Path? selection)
 		{
 			ImageSurface dest = CairoExtensions.CreateImageSurface (Format.Argb32, rect.Width, rect.Height);
 

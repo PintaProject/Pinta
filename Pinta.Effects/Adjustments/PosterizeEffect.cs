@@ -56,7 +56,7 @@ namespace Pinta.Effects
 #endif
 		}
 
-		public override void Render (ImageSurface src, ImageSurface dest, Core.Rectangle[] rois)
+		public override void Render (ImageSurface src, ImageSurface dest, Core.RectangleI[] rois)
 		{
 			if (op == null)
 				op = new UnaryPixelOps.PosterizePixel (Data.Red, Data.Green, Data.Blue);

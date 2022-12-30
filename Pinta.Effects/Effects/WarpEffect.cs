@@ -56,7 +56,7 @@ namespace Pinta.Effects
 		protected double DefaultRadius2 { get { return this.defaultRadius2; } }
 
 		#region Algorithm Code Ported From PDN
-		public override void Render (ImageSurface src, ImageSurface dst, Core.Rectangle[] rois)
+		public override void Render (ImageSurface src, ImageSurface dst, Core.RectangleI[] rois)
 		{
 #if false // TODO-GTK4
 			var selection = PintaCore.LivePreview.RenderBounds;

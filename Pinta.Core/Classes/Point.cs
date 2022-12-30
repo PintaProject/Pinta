@@ -29,15 +29,15 @@ using System;
 /// Replacements for Cairo / GDK points that GtkSharp provided in the GTK3 build.
 namespace Pinta.Core
 {
-	public record struct Point
+	public record struct PointI
 	{
-		public Point (int x, int y)
+		public PointI (int x, int y)
 		{
 			this.X = x;
 			this.Y = y;
 		}
 
-		public static Point Zero;
+		public static PointI Zero;
 
 		public int X;
 		public int Y;

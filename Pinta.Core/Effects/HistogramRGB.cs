@@ -41,7 +41,7 @@ namespace Pinta.Core
 			return ColorBgra.FromBgr ((byte) (perc[0]), (byte) (perc[1]), (byte) (perc[2]));
 		}
 
-		protected override void AddSurfaceRectangleToHistogram (ImageSurface surface, Rectangle rect)
+		protected override void AddSurfaceRectangleToHistogram (ImageSurface surface, RectangleI rect)
 		{
 			long[] histogramB = histogram[0];
 			long[] histogramG = histogram[1];

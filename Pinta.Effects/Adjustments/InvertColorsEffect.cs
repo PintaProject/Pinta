@@ -29,7 +29,7 @@ namespace Pinta.Effects
 			get { return "I"; }
 		}
 
-		public override void Render (ImageSurface src, ImageSurface dest, Core.Rectangle[] rois)
+		public override void Render (ImageSurface src, ImageSurface dest, Core.RectangleI[] rois)
 		{
 			op.Apply (dest, src, rois);
 		}

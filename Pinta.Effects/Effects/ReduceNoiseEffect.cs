@@ -78,12 +78,12 @@ namespace Pinta.Effects
 			return ColorBgra.FromBgr ((byte) bc, (byte) gc, (byte) rc);
 		}
 
-		public override void Render (ImageSurface src, ImageSurface dest, Core.Rectangle[] rois)
+		public override void Render (ImageSurface src, ImageSurface dest, Core.RectangleI[] rois)
 		{
 			this.radius = Data.Radius;
 			this.strength = -0.2 * Data.Strength;
 
-			foreach (Core.Rectangle rect in rois)
+			foreach (var rect in rois)
 				RenderRect (this.radius, src, dest, rect);
 		}
 		#endregion

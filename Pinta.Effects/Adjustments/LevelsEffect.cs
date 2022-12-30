@@ -61,7 +61,7 @@ namespace Pinta.Effects
 #endif
 		}
 
-		public override void Render (ImageSurface src, ImageSurface dest, Core.Rectangle[] rois)
+		public override void Render (ImageSurface src, ImageSurface dest, Core.RectangleI[] rois)
 		{
 			Data.Levels.Apply (dest, src, rois);
 		}

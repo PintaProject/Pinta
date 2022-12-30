@@ -47,9 +47,9 @@ namespace Pinta.Effects
 		}
 
 		#region Algorithm Code Ported From PDN
-		private ColorBgra ComputeCellColor (int x, int y, ReadOnlySpan<ColorBgra> src_data, int cellSize, Core.Rectangle srcBounds)
+		private ColorBgra ComputeCellColor (int x, int y, ReadOnlySpan<ColorBgra> src_data, int cellSize, Core.RectangleI srcBounds)
 		{
-			Core.Rectangle cell = GetCellBox (x, y, cellSize);
+			Core.RectangleI cell = GetCellBox (x, y, cellSize);
 			cell.Intersect (srcBounds);
 
 			int left = cell.Left;
@@ -67,22 +67,22 @@ namespace Pinta.Effects
 			return c.ToPremultipliedAlpha ();
 		}
 
-		private Core.Rectangle GetCellBox (int x, int y, int cellSize)
+		private Core.RectangleI GetCellBox (int x, int y, int cellSize)
 		{
 			int widthBoxNum = x % cellSize;
 			int heightBoxNum = y % cellSize;
-			var leftUpper = new Core.Point (x - widthBoxNum, y - heightBoxNum);
+			var leftUpper = new Core.PointI (x - widthBoxNum, y - heightBoxNum);
 
-			return new Core.Rectangle (leftUpper, new Core.Size (cellSize, cellSize));
+			return new Core.RectangleI (leftUpper, new Core.Size (cellSize, cellSize));
 		}
 
 
-		public override void Render (ImageSurface src, ImageSurface dest, Core.Rectangle[] rois)
+		public override void Render (ImageSurface src, ImageSurface dest, Core.RectangleI[] rois)
 		{
 			var cellSize = Data.CellSize;
 
-			Core.Rectangle src_bounds = src.GetBounds ();
-			Core.Rectangle dest_bounds = dest.GetBounds ();
+			Core.RectangleI src_bounds = src.GetBounds ();
+			Core.RectangleI dest_bounds = dest.GetBounds ();
 
 			var src_data = src.GetReadOnlyData ();
 			var dst_data = dest.GetData ();

@@ -143,10 +143,10 @@ namespace Pinta.Core
 		/// <param name="startIndex">Index of the first rectangle in the array to examine.</param>
 		/// <param name="length">Number of rectangles to examine, beginning at <b>startIndex</b>.</param>
 		/// <returns>A rectangle that surrounds the region.</returns>
-		public static Rectangle GetRegionBounds (Rectangle[] rects, int startIndex, int length)
+		public static RectangleI GetRegionBounds (RectangleI[] rects, int startIndex, int length)
 		{
 			if (rects.Length == 0) {
-				return Rectangle.Zero;
+				return RectangleI.Zero;
 			}
 
 			int left = rects[startIndex].Left;
@@ -155,7 +155,7 @@ namespace Pinta.Core
 			int bottom = rects[startIndex].Bottom;
 
 			for (int i = startIndex + 1; i < startIndex + length; ++i) {
-				Rectangle rect = rects[i];
+				RectangleI rect = rects[i];
 
 				if (rect.Left < left) {
 					left = rect.Left;
@@ -174,7 +174,7 @@ namespace Pinta.Core
 				}
 			}
 
-			return Rectangle.FromLTRB (left, top, right, bottom);
+			return RectangleI.FromLTRB (left, top, right, bottom);
 		}
 
 		public static int ColorDifference (ColorBgra a, ColorBgra b)
@@ -196,12 +196,12 @@ namespace Pinta.Core
 			return diffSq / 3;
 		}
 
-		public static Rectangle[] InflateRectangles (Rectangle[] rects, int len)
+		public static RectangleI[] InflateRectangles (RectangleI[] rects, int len)
 		{
-			Rectangle[] inflated = new Rectangle[rects.Length];
+			RectangleI[] inflated = new RectangleI[rects.Length];
 
 			for (int i = 0; i < rects.Length; ++i)
-				inflated[i] = new Rectangle (rects[i].X - len, rects[i].Y - len, rects[i].Width + 2 * len, rects[i].Height + 2 * len);
+				inflated[i] = new RectangleI (rects[i].X - len, rects[i].Y - len, rects[i].Width + 2 * len, rects[i].Height + 2 * len);
 
 			return inflated;
 		}
@@ -223,9 +223,9 @@ namespace Pinta.Core
 			return (byte) r2;
 		}
 
-		public static Point[] GetLinePoints (Point first, Point second)
+		public static PointI[] GetLinePoints (PointI first, PointI second)
 		{
-			Point[]? coords = null;
+			PointI[]? coords = null;
 
 			int x1 = first.X;
 			int y1 = first.Y;
@@ -243,7 +243,7 @@ namespace Pinta.Core
 			int y = 0;
 
 			if (dxabs > dyabs) {
-				coords = new Point[dxabs + 1];
+				coords = new PointI[dxabs + 1];
 
 				for (int i = 0; i <= dxabs; i++) {
 					y += dyabs;
@@ -253,21 +253,21 @@ namespace Pinta.Core
 						py += sdy;
 					}
 
-					coords[i] = new Point (px, py);
+					coords[i] = new PointI (px, py);
 					px += sdx;
 				}
 			} else
 			    // had to add in this cludge for slopes of 1 ... wasn't drawing half the line
 			    if (dxabs == dyabs) {
-				coords = new Point[dxabs + 1];
+				coords = new PointI[dxabs + 1];
 
 				for (int i = 0; i <= dxabs; i++) {
-					coords[i] = new Point (px, py);
+					coords[i] = new PointI (px, py);
 					px += sdx;
 					py += sdy;
 				}
 			} else {
-				coords = new Point[dyabs + 1];
+				coords = new PointI[dyabs + 1];
 
 				for (int i = 0; i <= dyabs; i++) {
 					x += dxabs;
@@ -277,7 +277,7 @@ namespace Pinta.Core
 						px += sdx;
 					}
 
-					coords[i] = new Point (px, py);
+					coords[i] = new PointI (px, py);
 					py += sdy;
 				}
 			}

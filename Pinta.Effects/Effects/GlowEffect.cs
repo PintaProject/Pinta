@@ -54,7 +54,7 @@ namespace Pinta.Effects
 		}
 
 		#region Algorithm Code Ported From PDN
-		public override void Render (ImageSurface src, ImageSurface dest, Core.Rectangle[] rois)
+		public override void Render (ImageSurface src, ImageSurface dest, Core.RectangleI[] rois)
 		{
 			blurEffect.Data.Radius = Data.Radius;
 			blurEffect.Render (src, dest, rois);
@@ -68,7 +68,7 @@ namespace Pinta.Effects
 			int src_width = src.Width;
 			int dst_width = dest.Width;
 
-			foreach (Core.Rectangle roi in rois) {
+			foreach (Core.RectangleI roi in rois) {
 				for (int y = roi.Top; y <= roi.Bottom; ++y) {
 					var dst_row = dst_data.Slice (y * dst_width + roi.Left, roi.Width);
 					var src_row = dst_data.Slice (y * src_width + roi.Left, roi.Width);

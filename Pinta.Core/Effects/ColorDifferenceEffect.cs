@@ -21,16 +21,16 @@ namespace Pinta.Core
 	/// </summary>
 	public abstract class ColorDifferenceEffect : BaseEffect
 	{
-		public void RenderColorDifferenceEffect (double[][] weights, ImageSurface src, ImageSurface dest, Rectangle[] rois)
+		public void RenderColorDifferenceEffect (double[][] weights, ImageSurface src, ImageSurface dest, RectangleI[] rois)
 		{
-			Rectangle src_rect = src.GetBounds ();
+			RectangleI src_rect = src.GetBounds ();
 
 			// Cache these for a massive performance boost
 			var src_data = src.GetReadOnlyData ();
 			var dst_data = dest.GetData ();
 			int src_width = src.Width;
 
-			foreach (Rectangle rect in rois) {
+			foreach (RectangleI rect in rois) {
 				// loop through each line of target rectangle
 				for (int y = rect.Y; y < rect.Y + rect.Height; ++y) {
 					int fyStart = 0;

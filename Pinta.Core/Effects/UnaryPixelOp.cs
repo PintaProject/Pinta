@@ -38,7 +38,7 @@ namespace Pinta.Core
 				dst[i] = Apply (dst[i]);
 		}
 
-		private void ApplyRectangle (ImageSurface surface, Rectangle rect)
+		private void ApplyRectangle (ImageSurface surface, RectangleI rect)
 		{
 			var data = surface.GetData ();
 			int width = surface.Width;
@@ -47,28 +47,28 @@ namespace Pinta.Core
 			}
 		}
 
-		public void Apply (ImageSurface surface, Rectangle[] roi, int startIndex, int length)
+		public void Apply (ImageSurface surface, RectangleI[] roi, int startIndex, int length)
 		{
-			Rectangle regionBounds = Utility.GetRegionBounds (roi, startIndex, length);
+			RectangleI regionBounds = Utility.GetRegionBounds (roi, startIndex, length);
 
-			if (regionBounds != Rectangle.Intersect (surface.GetBounds (), regionBounds))
+			if (regionBounds != RectangleI.Intersect (surface.GetBounds (), regionBounds))
 				throw new ArgumentOutOfRangeException ("roi", "Region is out of bounds");
 
 			for (int x = startIndex; x < startIndex + length; ++x)
 				ApplyRectangle (surface, roi[x]);
 		}
 
-		public void Apply (ImageSurface surface, Rectangle[] roi)
+		public void Apply (ImageSurface surface, RectangleI[] roi)
 		{
 			Apply (surface, roi, 0, roi.Length);
 		}
 
-		public void Apply (ImageSurface surface, Rectangle roi)
+		public void Apply (ImageSurface surface, RectangleI roi)
 		{
 			ApplyRectangle (surface, roi);
 		}
 
-		public void Apply (ImageSurface dst, ImageSurface src, Rectangle roi)
+		public void Apply (ImageSurface dst, ImageSurface src, RectangleI roi)
 		{
 			var src_data = src.GetReadOnlyData ();
 			var dst_data = dst.GetData ();
@@ -81,9 +81,9 @@ namespace Pinta.Core
 			}
 		}
 
-		public void Apply (ImageSurface dst, ImageSurface src, Rectangle[] rois)
+		public void Apply (ImageSurface dst, ImageSurface src, RectangleI[] rois)
 		{
-			foreach (Rectangle roi in rois)
+			foreach (RectangleI roi in rois)
 				Apply (dst, src, roi);
 		}
 	}

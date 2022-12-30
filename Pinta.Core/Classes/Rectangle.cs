@@ -51,14 +51,14 @@ namespace Pinta.Core
 		public override string ToString () => $"x:{X} y:{Y} w:{Width} h:{Height}";
 	}
 
-	public record struct Rectangle
+	public record struct RectangleI
 	{
 		public int X;
 		public int Y;
 		public int Width;
 		public int Height;
 
-		public Rectangle (int x, int y, int width, int height)
+		public RectangleI (int x, int y, int width, int height)
 		{
 			this.X = x;
 			this.Y = y;
@@ -66,27 +66,27 @@ namespace Pinta.Core
 			this.Height = height;
 		}
 
-		public Rectangle (in Point point, int width, int height)
+		public RectangleI (in PointI point, int width, int height)
 			: this (point.X, point.Y, width, height)
 		{
 		}
 
-		public Rectangle (in Point point, in Size size)
+		public RectangleI (in PointI point, in Size size)
 			: this (point.X, point.Y, size.Width, size.Height)
 		{
 		}
 
-		public static Rectangle Zero;
+		public static RectangleI Zero;
 
-		public static Rectangle FromLTRB (int left, int top, int right, int bottom)
-			=> new Rectangle (left, top, right - left + 1, bottom - top + 1);
+		public static RectangleI FromLTRB (int left, int top, int right, int bottom)
+			=> new RectangleI (left, top, right - left + 1, bottom - top + 1);
 
 		public int Left => X;
 		public int Top => Y;
 		public int Right => X + Width - 1;
 		public int Bottom => Y + Height - 1;
 
-		public Point Location => new Point (X, Y);
+		public PointI Location => new PointI (X, Y);
 		public Size Size => new Size (Width, Height);
 
 		public override string ToString () => $"x:{X} y:{Y} w:{Width} h:{Height}";
@@ -96,9 +96,9 @@ namespace Pinta.Core
 			return x >= Left && x <= Right && y >= Top && y <= Bottom;
 		}
 
-		public void Intersect (Rectangle r) => this = Intersect (this, r);
+		public void Intersect (RectangleI r) => this = Intersect (this, r);
 
-		public static Rectangle Intersect (in Rectangle a, in Rectangle b)
+		public static RectangleI Intersect (in RectangleI a, in RectangleI b)
 		{
 			int left = Math.Max (a.Left, b.Left);
 			int right = Math.Min (a.Right, b.Right);

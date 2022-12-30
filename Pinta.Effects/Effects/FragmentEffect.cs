@@ -45,17 +45,17 @@ namespace Pinta.Effects
 		}
 
 		#region Algorithm Code Ported From PDN
-		private Core.Point[] RecalcPointOffsets (int fragments, double rotationAngle, int distance)
+		private Core.PointI[] RecalcPointOffsets (int fragments, double rotationAngle, int distance)
 		{
 			double pointStep = 2 * Math.PI / (double) fragments;
 			double rotationRadians = ((rotationAngle - 90.0) * Math.PI) / 180.0;
 
-			var pointOffsets = new Core.Point[fragments];
+			var pointOffsets = new Core.PointI[fragments];
 
 			for (int i = 0; i < fragments; i++) {
 				double currentRadians = rotationRadians + (pointStep * i);
 
-				pointOffsets[i] = new Core.Point (
+				pointOffsets[i] = new Core.PointI (
 				    (int) Math.Round (distance * -Math.Sin (currentRadians), MidpointRounding.AwayFromZero),
 				    (int) Math.Round (distance * -Math.Cos (currentRadians), MidpointRounding.AwayFromZero));
 			}
@@ -63,12 +63,12 @@ namespace Pinta.Effects
 			return pointOffsets;
 		}
 
-		public override void Render (ImageSurface src, ImageSurface dst, Core.Rectangle[] rois)
+		public override void Render (ImageSurface src, ImageSurface dst, Core.RectangleI[] rois)
 		{
-			Core.Point[] pointOffsets = RecalcPointOffsets (Data.Fragments, Data.Rotation, Data.Distance);
+			Core.PointI[] pointOffsets = RecalcPointOffsets (Data.Fragments, Data.Rotation, Data.Distance);
 
 			int poLength = pointOffsets.Length;
-			Span<Core.Point> pointOffsetsPtr = stackalloc Core.Point[poLength];
+			Span<Core.PointI> pointOffsetsPtr = stackalloc Core.PointI[poLength];
 
 			for (int i = 0; i < poLength; ++i)
 				pointOffsetsPtr[i] = pointOffsets[i];
@@ -81,7 +81,7 @@ namespace Pinta.Effects
 			ReadOnlySpan<ColorBgra> src_data = src.GetReadOnlyData ();
 			Span<ColorBgra> dst_data = dst.GetData ();
 
-			foreach (Core.Rectangle rect in rois) {
+			foreach (Core.RectangleI rect in rois) {
 				for (int y = rect.Top; y <= rect.Bottom; y++) {
 					var dst_row = dst_data.Slice (y * src_width, src_width);
 

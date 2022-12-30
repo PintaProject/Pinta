@@ -45,7 +45,7 @@ namespace Pinta.Effects
 		}
 
 		#region Algorithm Code Ported From PDN
-		public override void Render (ImageSurface src, ImageSurface dst, Core.Rectangle[] rois)
+		public override void Render (ImageSurface src, ImageSurface dst, Core.RectangleI[] rois)
 		{
 			if (Data.Amount == 0) {
 				// Copy src to dest
@@ -56,7 +56,7 @@ namespace Pinta.Effects
 			ReadOnlySpan<ColorBgra> src_data = src.GetReadOnlyData ();
 			int dst_width = dst.Width;
 			Span<ColorBgra> dst_data = dst.GetData ();
-			Core.Rectangle src_bounds = src.GetBounds ();
+			Core.RectangleI src_bounds = src.GetBounds ();
 
 			long w = dst.Width;
 			long h = dst.Height;
@@ -68,7 +68,7 @@ namespace Pinta.Effects
 
 			const int n = 64;
 
-			foreach (Core.Rectangle rect in rois) {
+			foreach (var rect in rois) {
 				for (int y = rect.Top; y <= rect.Bottom; ++y) {
 					var src_row = src_data.Slice (y * src_width, src_width);
 					var dst_row = dst_data.Slice (y * dst_width, dst_width);
@@ -131,7 +131,7 @@ namespace Pinta.Effects
 			public int Amount = 10;
 
 			[Caption ("Offset")]
-			public Core.Point Offset = new (0, 0);
+			public Core.PointI Offset = new (0, 0);
 
 			[Skip]
 			public override bool IsDefault { get { return Amount == 0; } }

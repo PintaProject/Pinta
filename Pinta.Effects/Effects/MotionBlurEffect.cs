@@ -45,7 +45,7 @@ namespace Pinta.Effects
 		}
 
 		#region Algorithm Code Ported From PDN
-		public override void Render (ImageSurface src, ImageSurface dst, Core.Rectangle[] rois)
+		public override void Render (ImageSurface src, ImageSurface dst, Core.RectangleI[] rois)
 		{
 			PointD start = new PointD (0, 0);
 			double theta = ((double) (Data.Angle + 180) * 2 * Math.PI) / 360.0;
@@ -78,7 +78,7 @@ namespace Pinta.Effects
 			int src_width = src.Width;
 			int src_height = src.Height;
 
-			foreach (Core.Rectangle rect in rois) {
+			foreach (var rect in rois) {
 
 				for (int y = rect.Top; y <= rect.Bottom; ++y) {
 					var dst_row = dst_data.Slice (y * src_width, src_width);

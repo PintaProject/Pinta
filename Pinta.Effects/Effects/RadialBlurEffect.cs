@@ -57,7 +57,7 @@ namespace Pinta.Effects
 			fy = cy + ((cx >> 8) * fr >> 8) - ((cy >> 14) * (fr * fr >> 11) >> 8);
 		}
 
-		public override void Render (ImageSurface src, ImageSurface dst, Core.Rectangle[] rois)
+		public override void Render (ImageSurface src, ImageSurface dst, Core.RectangleI[] rois)
 		{
 			if (Data.Angle == 0) {
 				// Copy src to dest
@@ -77,7 +77,7 @@ namespace Pinta.Effects
 			var dst_data = dst.GetData ();
 			var src_data = src.GetReadOnlyData ();
 
-			foreach (Core.Rectangle rect in rois) {
+			foreach (Core.RectangleI rect in rois) {
 				for (int y = rect.Top; y <= rect.Bottom; ++y) {
 					var dst_row = dst_data.Slice (y * w, w);
 					var src_row = src_data.Slice (y * src_w, src_w);

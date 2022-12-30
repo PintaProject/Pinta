@@ -123,7 +123,7 @@ namespace Pinta.Effects
 			return Utility.Lerp (edge1, edge2, v);
 		}
 
-		private static void RenderClouds (ImageSurface surface, Core.Rectangle rect, int scale, byte seed, double power, ColorBgra colorFrom, ColorBgra colorTo)
+		private static void RenderClouds (ImageSurface surface, Core.RectangleI rect, int scale, byte seed, double power, ColorBgra colorFrom, ColorBgra colorTo)
 		{
 			int w = surface.Width;
 			int h = surface.Height;
@@ -167,7 +167,7 @@ namespace Pinta.Effects
 			}
 		}
 
-		protected override void Render (ImageSurface src, ImageSurface dst, Core.Rectangle roi)
+		protected override void Render (ImageSurface src, ImageSurface dst, Core.RectangleI roi)
 		{
 #if false // TODO-GTK4
 			var r = roi.ToCairoRectangle ();

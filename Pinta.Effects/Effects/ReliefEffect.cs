@@ -46,7 +46,7 @@ namespace Pinta.Effects
 		}
 
 		#region Algorithm Code Ported From PDN
-		public override void Render (Cairo.ImageSurface src, Cairo.ImageSurface dst, Core.Rectangle[] rois)
+		public override void Render (Cairo.ImageSurface src, Cairo.ImageSurface dst, Core.RectangleI[] rois)
 		{
 			base.RenderColorDifferenceEffect (Weights, src, dst, rois);
 		}

@@ -88,7 +88,7 @@ namespace Pinta.Core
 			ApplyTransform (xform, old_size, new_size);
 		}
 
-		public override void Crop (Rectangle rect, Path? selection)
+		public override void Crop (RectangleI rect, Path? selection)
 		{
 			base.Crop (rect, selection);
 

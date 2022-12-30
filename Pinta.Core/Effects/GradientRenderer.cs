@@ -108,7 +108,7 @@ namespace Pinta.Core
 			endAlpha = (byte) (255 - endColor.A);
 		}
 
-		public void Render (ImageSurface surface, Rectangle[] rois)
+		public void Render (ImageSurface surface, RectangleI[] rois)
 		{
 			byte startAlpha;
 			byte endAlpha;
@@ -126,7 +126,7 @@ namespace Pinta.Core
 			int src_width = surface.Width;
 
 			for (int ri = 0; ri < rois.Length; ++ri) {
-				Rectangle rect = rois[ri];
+				RectangleI rect = rois[ri];
 
 				if (this.startPoint.X == this.endPoint.X && this.startPoint.Y == this.endPoint.Y) {
 					// Start and End point are the same ... fill with solid color.
@@ -165,7 +165,7 @@ namespace Pinta.Core
 			AfterRender ();
 		}
 
-		private bool ProcessGradientLine (byte startAlpha, byte endAlpha, int y, Rectangle rect, Span<ColorBgra> surface_data, int src_width)
+		private bool ProcessGradientLine (byte startAlpha, byte endAlpha, int y, RectangleI rect, Span<ColorBgra> surface_data, int src_width)
 		{
 			var row = surface_data.Slice (y * src_width, src_width);
 			var right = rect.Right;

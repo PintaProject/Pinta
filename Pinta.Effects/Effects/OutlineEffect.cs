@@ -125,12 +125,12 @@ namespace Pinta.Effects
 			    (byte) (a2));
 		}
 
-		public override void Render (ImageSurface src, ImageSurface dest, Core.Rectangle[] rois)
+		public override void Render (ImageSurface src, ImageSurface dest, Core.RectangleI[] rois)
 		{
 			this.thickness = Data.Thickness;
 			this.intensity = Data.Intensity;
 
-			foreach (Core.Rectangle rect in rois)
+			foreach (var rect in rois)
 				RenderRect (this.thickness, src, dest, rect);
 		}
 

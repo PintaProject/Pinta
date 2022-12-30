@@ -63,7 +63,7 @@ namespace Pinta.Effects
 			return c;
 		}
 
-		public override void Render (ImageSurface src, ImageSurface dst, Core.Rectangle[] rois)
+		public override void Render (ImageSurface src, ImageSurface dst, Core.RectangleI[] rois)
 		{
 			const double jr = 0.3125;
 			const double ji = 0.03;
@@ -81,7 +81,7 @@ namespace Pinta.Effects
 			Span<ColorBgra> dst_data = dst.GetData ();
 			int dst_width = dst.Width;
 
-			foreach (Core.Rectangle rect in rois) {
+			foreach (Core.RectangleI rect in rois) {
 				for (int y = rect.Top; y <= rect.Bottom; y++) {
 					var dst_row = dst_data.Slice (y * dst_width, dst_width);
 

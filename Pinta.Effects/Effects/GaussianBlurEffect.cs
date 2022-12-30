@@ -60,7 +60,7 @@ namespace Pinta.Effects
 			return weights;
 		}
 
-		public override void Render (ImageSurface src, ImageSurface dest, Core.Rectangle[] rois)
+		public override void Render (ImageSurface src, ImageSurface dest, Core.RectangleI[] rois)
 		{
 			if (Data.Radius == 0) {
 				// Copy src to dest
@@ -84,7 +84,7 @@ namespace Pinta.Effects
 			ReadOnlySpan<ColorBgra> src_data = src.GetReadOnlyData ();
 			Span<ColorBgra> dst_data = dest.GetData ();
 
-			foreach (Core.Rectangle rect in rois) {
+			foreach (var rect in rois) {
 				if (rect.Height >= 1 && rect.Width >= 1) {
 					for (int y = rect.Top; y <= rect.Bottom; ++y) {
 						long waSum = 0;
