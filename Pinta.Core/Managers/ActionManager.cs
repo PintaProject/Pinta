@@ -35,6 +35,7 @@ namespace Pinta.Core
 	{
 		public AppActions App { get; private set; } = new ();
 		public FileActions File { get; private set; } = new ();
+		public WindowActions Window { get; private set; } = new ();
 		public HelpActions Help { get; private set; } = new ();
 
 #if false // TODO-GTK4
@@ -45,7 +46,6 @@ namespace Pinta.Core
 		public AdjustmentsActions Adjustments { get; private set; }
 		public EffectsActions Effects { get; private set; }
 		public AddinActions Addins { get; private set; }
-		public WindowActions Window { get; private set; }
 #endif
 
 		public ActionManager ()
@@ -58,7 +58,6 @@ namespace Pinta.Core
 			Adjustments = new AdjustmentsActions ();
 			Effects = new EffectsActions ();
 			Addins = new AddinActions ();
-			Window = new WindowActions ();
 #endif
 		}
 

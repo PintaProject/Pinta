@@ -33,31 +33,36 @@ namespace Pinta.Core
 {
 	public class WindowActions
 	{
-		private GLib.Menu doc_section = null!; // NRT - Set in RegisterActions
+		private Gio.Menu doc_section = null!; // NRT - Set in RegisterActions
 		private static readonly string doc_action_id = "active_document";
-		private GLib.SimpleAction active_doc_action;
+		private Gio.SimpleAction active_doc_action;
 
 		public Command SaveAll { get; private set; }
 		public Command CloseAll { get; private set; }
+
+		// TODO-GTK4 - add pre-defined VariantType's to gir.core
+		private static readonly GLib.VariantType IntVariantType = new ("i");
 
 		public WindowActions ()
 		{
 			SaveAll = new Command ("SaveAll", Translations.GetString ("Save All"), null, Resources.StandardIcons.DocumentSave);
 			CloseAll = new Command ("CloseAll", Translations.GetString ("Close All"), null, Resources.StandardIcons.WindowClose);
 
-			active_doc_action = new GLib.SimpleAction (doc_action_id, GLib.VariantType.Int32, new GLib.Variant (-1));
+			active_doc_action = Gio.SimpleAction.NewStateful (doc_action_id, IntVariantType, GLib.Variant.Create (-1));
 
-			active_doc_action.Activated += (o, e) => {
-				var idx = (int) e.P0;
+#if false // TODO-GTK4 - seems to be some issues here in gir.core
+			active_doc_action.OnActivate += (o, e) => {
+				var idx = e.Parameter!.GetInt();
 				if (idx < PintaCore.Workspace.OpenDocuments.Count) {
 					PintaCore.Workspace.SetActiveDocumentInternal (PintaCore.Workspace.OpenDocuments[idx]);
-					active_doc_action.ChangeState (e.P0);
+					active_doc_action.ChangeState (e.Parameter);
 				}
 			};
+#endif
 		}
 
 		#region Initialization
-		public void RegisterActions (Gtk.Application app, GLib.Menu menu)
+		public void RegisterActions (Gtk.Application app, Gio.Menu menu)
 		{
 			app.AddAccelAction (SaveAll, "<Ctrl><Alt>A");
 			menu.AppendItem (SaveAll.CreateMenuItem ());
@@ -65,7 +70,7 @@ namespace Pinta.Core
 			app.AddAccelAction (CloseAll, "<Primary><Shift>W");
 			menu.AppendItem (CloseAll.CreateMenuItem ());
 
-			doc_section = new GLib.Menu ();
+			doc_section = Gio.Menu.New ();
 			menu.AppendSection (null, doc_section);
 
 			app.AddAction (active_doc_action);
@@ -77,7 +82,7 @@ namespace Pinta.Core
 		public void SetActiveDocument (Document doc)
 		{
 			var idx = PintaCore.Workspace.OpenDocuments.IndexOf (doc);
-			active_doc_action.Activate (new GLib.Variant (idx));
+			active_doc_action.Activate (GLib.Variant.Create (idx));
 		}
 
 		public void AddDocument (Document doc)
@@ -100,7 +105,7 @@ namespace Pinta.Core
 			var doc = PintaCore.Workspace.OpenDocuments[idx];
 			var action_id = string.Format ("app.{0}({1})", doc_action_id, idx);
 			var label = string.Format ("{0}{1}", doc.DisplayName, doc.IsDirty ? "*" : string.Empty);
-			var menu_item = new GLib.MenuItem (label, action_id);
+			var menu_item = Gio.MenuItem.New (label, action_id);
 			doc_section.AppendItem (menu_item);
 
 			// We only assign accelerators up to Alt-9

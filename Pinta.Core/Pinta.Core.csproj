@@ -18,6 +18,7 @@
     <Compile Include="PintaCore.cs" />
     <Compile Include="Actions/AppActions.cs" />
     <Compile Include="Actions/FileActions.cs" />
+    <Compile Include="Actions/WindowActions.cs" />
     <Compile Include="Actions/HelpActions.cs" />
     <Compile Include="Actions/Command.cs" />
     <Compile Include="Classes/Document.cs" />

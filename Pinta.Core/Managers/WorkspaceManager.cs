@@ -327,11 +327,7 @@ namespace Pinta.Core
 
 		public void SetActiveDocument (Document document)
 		{
-#if false // TODO-GTK4
 			PintaCore.Actions.Window.SetActiveDocument (document);
-#else
-			throw new NotImplementedException ();
-#endif
 		}
 
 		internal void SetActiveDocumentInternal (Document document)

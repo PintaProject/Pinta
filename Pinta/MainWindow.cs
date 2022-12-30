@@ -372,11 +372,12 @@ namespace Pinta
 			PintaCore.Actions.Addins.RegisterActions (this, addins_menu);
 			menu_bar.AppendSubmenu (Translations.GetString ("A_dd-ins"), addins_menu);
 #endif
-
-			var window_menu = new GLib.Menu ();
-			PintaCore.Actions.Window.RegisterActions (this, window_menu);
-			menu_bar.AppendSubmenu (Translations.GetString ("_Window"), window_menu);
 #endif
+
+			var window_menu = Gio.Menu.New ();
+			PintaCore.Actions.Window.RegisterActions (app, window_menu);
+			menu_bar.AppendSubmenu (Translations.GetString ("_Window"), window_menu);
+
 			var help_menu = Gio.Menu.New ();
 			PintaCore.Actions.Help.RegisterActions (app, help_menu);
 			menu_bar.AppendSubmenu (Translations.GetString ("_Help"), help_menu);
