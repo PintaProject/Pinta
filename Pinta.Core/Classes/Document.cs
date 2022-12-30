@@ -78,7 +78,7 @@ namespace Pinta.Core
 			ResetSelectionPaths ();
 		}
 
-#region Public Properties
+		#region Public Properties
 
 		/// <summary>
 		/// Just the file name, like "dog.jpg".
@@ -136,9 +136,9 @@ namespace Pinta.Core
 #endif
 
 		public delegate void LayerCloneEvent ();
-#endregion
+		#endregion
 
-#region Public Methods
+		#region Public Methods
 		public RectangleI ClampToImageSize (RectangleI r)
 		{
 			int x = Utility.Clamp (r.X, 0, ImageSize.Width);
@@ -246,15 +246,15 @@ namespace Pinta.Core
 		/// </summary>
 		public ColorBgra GetComputedPixel (int x, int y)
 		{
-			var dst = CairoExtensions.CreateImageSurface(Format.Argb32, 1, 1);
-			var g = new Context(dst);
+			var dst = CairoExtensions.CreateImageSurface (Format.Argb32, 1, 1);
+			var g = new Context (dst);
 			foreach (var layer in Layers.GetLayersToPaint ()) {
 				var color = layer.Surface.GetColorBgra (x, y).ToStraightAlpha ().ToCairoColor ();
 
 				g.SetBlendMode (layer.BlendMode);
 				g.SetSourceColor (color);
 
-				g.Rectangle (dst.GetBounds ().ToDouble());
+				g.Rectangle (dst.GetBounds ().ToDouble ());
 				g.PaintWithAlpha (layer.Opacity);
 			}
 
@@ -411,9 +411,9 @@ namespace Pinta.Core
 				LayerCloned ();
 			}
 		}
-#endregion
+		#endregion
 
-#region Protected Methods
+		#region Protected Methods
 		protected void OnIsDirtyChanged ()
 		{
 			if (IsDirtyChanged != null)
@@ -425,22 +425,22 @@ namespace Pinta.Core
 			if (Renamed != null)
 				Renamed (this, EventArgs.Empty);
 		}
-#endregion
+		#endregion
 
-#region Private Methods
+		#region Private Methods
 		private void OnSelectionChanged ()
 		{
 			if (SelectionChanged != null)
 				SelectionChanged.Invoke (this, EventArgs.Empty);
 		}
-#endregion
+		#endregion
 
-#region Public Events
+		#region Public Events
 		public event EventHandler? IsDirtyChanged;
 		public event EventHandler? Renamed;
 		public event LayerCloneEvent? LayerCloned;
 		public event EventHandler? SelectionChanged;
 
-#endregion
+		#endregion
 	}
 }

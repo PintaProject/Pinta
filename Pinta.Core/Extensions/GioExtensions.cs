@@ -43,7 +43,7 @@ namespace Pinta.Core
 			var info = file.QueryInfo ("standard::display-name", GLib.FileQueryInfoFlags.None, cancellable: null);
 			return info.DisplayName;
 #else
-			throw new NotImplementedException();
+			throw new NotImplementedException ();
 #endif
 		}
 
@@ -56,7 +56,7 @@ namespace Pinta.Core
 #if false // TODO-GTK4 - needs gir.core bindings
 			return file.Replace (null, false, Gio.FileCreateFlags.None, null);
 #else
-			throw new NotImplementedException();
+			throw new NotImplementedException ();
 #endif
 		}
 

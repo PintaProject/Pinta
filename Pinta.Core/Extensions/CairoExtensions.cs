@@ -1996,9 +1996,9 @@ namespace Pinta.Core
 			return matrix;
 		}
 
-		public static void TransformPoint(this Matrix m, ref Core.PointD p)
+		public static void TransformPoint (this Matrix m, ref Core.PointD p)
 		{
-			m.TransformPoint(ref p.X, ref p.Y);
+			m.TransformPoint (ref p.X, ref p.Y);
 		}
 	}
 }

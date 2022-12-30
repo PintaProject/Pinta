@@ -63,7 +63,7 @@ namespace Pinta.Core
 					using (var g = new Context (doc.Layers.CurrentUserLayer.Surface))
 						selection_path = g.CreatePolygonPath (ConvertToPolygonSet (SelectionPolygons));
 #else
-					throw new NotImplementedException();
+					throw new NotImplementedException ();
 #endif
 
 				}

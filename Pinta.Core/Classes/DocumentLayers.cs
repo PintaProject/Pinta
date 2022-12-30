@@ -107,7 +107,7 @@ namespace Pinta.Core
 		/// </summary>
 		internal void Close ()
 		{
-			user_layers.Clear();
+			user_layers.Clear ();
 			CurrentUserLayerIndex = -1;
 
 			tool_layer = null;
@@ -214,9 +214,9 @@ namespace Pinta.Core
 			// {0} is the name of the source layer. Example: "Layer 3 copy".
 			var layer = CreateLayer (Translations.GetString ("{0} copy", source.Name));
 
-			var g = new Context(layer.Surface);
-			g.SetSourceSurface(source.Surface, 0, 0);
-			g.Paint();
+			var g = new Context (layer.Surface);
+			g.SetSourceSurface (source.Surface, 0, 0);
+			g.Paint ();
 
 			layer.Hidden = source.Hidden;
 			layer.Opacity = source.Opacity;
@@ -259,7 +259,7 @@ namespace Pinta.Core
 #if false // TODO-GTK4
 			document.Workspace.Invalidate ();
 #else
-			throw new NotImplementedException();
+			throw new NotImplementedException ();
 #endif
 		}
 
@@ -270,7 +270,7 @@ namespace Pinta.Core
 		{
 			var surf = CairoExtensions.CreateImageSurface (Format.Argb32, document.ImageSize.Width, document.ImageSize.Height);
 
-			var g = new Context(surf);
+			var g = new Context (surf);
 			g.AppendPath (document.Selection.SelectionPath);
 			g.Clip ();
 
@@ -372,8 +372,8 @@ namespace Pinta.Core
 			var dest = user_layers[CurrentUserLayerIndex - 1];
 
 			// Blend the layers
-			var g = new Context(dest.Surface);
-			source.Draw(g);
+			var g = new Context (dest.Surface);
+			source.Draw (g);
 
 			DeleteCurrentLayer ();
 		}

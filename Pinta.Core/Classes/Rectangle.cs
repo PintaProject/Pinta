@@ -86,7 +86,7 @@ namespace Pinta.Core
 		public static RectangleI FromLTRB (int left, int top, int right, int bottom)
 			=> new RectangleI (left, top, right - left + 1, bottom - top + 1);
 
-		public RectangleD ToDouble() => new RectangleD(X, Y, Width, Height);
+		public RectangleD ToDouble () => new RectangleD (X, Y, Width, Height);
 
 		public int Left => X;
 		public int Top => Y;

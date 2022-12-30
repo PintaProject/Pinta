@@ -66,16 +66,16 @@ namespace Pinta.Core
 			//TODO Get the workspace to subscribe to this event, and invalidate itself.
 			PintaCore.Workspace.Invalidate ();
 #else
-			throw new NotImplementedException();
+			throw new NotImplementedException ();
 #endif
 		}
-#endregion
+		#endregion
 
-#region Events
+		#region Events
 		public event EventHandler? LayerAdded;
 		public event EventHandler? LayerRemoved;
 		public event EventHandler? SelectedLayerChanged;
 		public event PropertyChangedEventHandler? LayerPropertyChanged;
-#endregion
+		#endregion
 	}
 }
