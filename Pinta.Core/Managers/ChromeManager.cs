@@ -35,7 +35,7 @@ namespace Pinta.Core
 		// but it would be nice to rewrite it to provably non-null.
 		public Application Application { get; private set; } = null!;
 		public Window MainWindow { get; private set; } = null!;
-		public Notebook ImageTabsNotebook { get; private set; } = null!;
+		public Widget ImageTabsNotebook { get; private set; } = null!;
 #if false // TODO-GTK4
 		private Toolbar tool_toolbar = null!;
 		private IProgressDialog progress_dialog = null!;
@@ -118,7 +118,7 @@ namespace Pinta.Core
 		}
 #endif
 
-		public void InitializeImageTabsNotebook (Notebook notebook)
+		public void InitializeImageTabsNotebook (Widget notebook)
 		{
 			ImageTabsNotebook = notebook;
 		}
