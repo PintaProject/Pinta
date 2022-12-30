@@ -111,9 +111,7 @@ namespace Pinta.Core
 		/// Pinta from a file, or if the user just clicked Save As.
 		public bool HasBeenSavedInSession { get; set; }
 
-#if false // TODO-GTK4
 		public DocumentHistory History { get { return Workspace.History; } }
-#endif
 
 		public Core.Size ImageSize { get; set; }
 
@@ -160,9 +158,7 @@ namespace Pinta.Core
 		public void Close ()
 		{
 			Layers.Close ();
-#if false // TODO-GTK4
 			Workspace.History.Clear ();
-#endif
 		}
 
 		public Context CreateClippedContext ()

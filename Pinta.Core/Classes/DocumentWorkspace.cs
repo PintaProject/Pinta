@@ -43,9 +43,7 @@ namespace Pinta.Core
 		internal DocumentWorkspace (Document document)
 		{
 			this.document = document;
-#if false // TODO-GTK4
 			History = new DocumentHistory (document);
-#endif
 		}
 
 		#region Public Events
@@ -80,9 +78,7 @@ namespace Pinta.Core
 			}
 		}
 
-#if false // TODO-GTK4
 		public DocumentHistory History { get; private set; }
-#endif
 
 		public bool ImageFitsInWindow {
 			get {

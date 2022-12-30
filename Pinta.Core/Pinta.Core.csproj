@@ -21,6 +21,7 @@
     <Compile Include="Actions/HelpActions.cs" />
     <Compile Include="Actions/Command.cs" />
     <Compile Include="Classes/Document.cs" />
+    <Compile Include="Classes/DocumentHistory.cs" />
     <Compile Include="Classes/DocumentLayers.cs" />
     <Compile Include="Classes/DocumentSelection.cs" />
     <Compile Include="Classes/DocumentWorkspace.cs" />
@@ -38,11 +39,13 @@
     <Compile Include="Enumerations/*.cs" />
     <Compile Include="EventArgs/CanvasInvalidatedEventArgs.cs" />
     <Compile Include="EventArgs/DocumentEventArgs.cs" />
+    <Compile Include="EventArgs/HistoryItemAddedEventArgs.cs" />
     <Compile Include="EventArgs/ModifyCompressionEventArgs.cs" />
     <Compile Include="Extensions/CairoExtensions.cs" />
     <Compile Include="Extensions/GdkExtensions.cs" />
     <Compile Include="Extensions/GioExtensions.cs" />
     <Compile Include="Extensions/GtkExtensions.cs" />
+    <Compile Include="HistoryItems/BaseHistoryItem.cs" />
     <Compile Include="Managers/ActionManager.cs" />
     <Compile Include="Managers/ChromeManager.cs" />
     <Compile Include="Managers/LayerManager.cs" />
