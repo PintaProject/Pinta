@@ -134,7 +134,9 @@ namespace Pinta
 			PintaCore.Actions.View.ZoomToSelection.Activated += ZoomToSelection_Activated;
 			PintaCore.Workspace.ActiveDocumentChanged += ActiveDocumentChanged;
 
+#endif
 			PintaCore.Workspace.DocumentCreated += Workspace_DocumentCreated;
+#if false // TODO-GTK4
 			PintaCore.Workspace.DocumentClosed += Workspace_DocumentClosed;
 
 			var notebook = canvas_pad.Notebook;
@@ -179,18 +181,20 @@ namespace Pinta
 
 			((CanvasWindow) view.Widget).Canvas.Window.Cursor = PintaCore.Tools.CurrentTool?.CurrentCursor;
 		}
+#endif
 
 		private void Workspace_DocumentCreated (object? sender, DocumentEventArgs e)
 		{
 			var doc = e.Document;
 
 			var notebook = canvas_pad.Notebook;
-			var selected_index = notebook.CurrentPage;
-
+			var selected_index = notebook.ActiveItemIndex;
 
 			var canvas = new CanvasWindow (doc) {
+#if false // TODO-GTK4 enable once the view menu is supported
 				RulersVisible = PintaCore.Actions.View.Rulers.Value,
 				RulerMetric = GetCurrentRulerMetric ()
+#endif
 			};
 
 			var my_content = new DocumentViewContent (doc, canvas);
@@ -203,6 +207,7 @@ namespace Pinta
 			// Zoom to window only on first show (if we do it always, it will be called on every resize)
 			// Note: this does seem to allow a small flicker where large images are shown at 100% zoom before
 			// zooming out (Bug 1959673)
+#if false // TODO-GTK4 enable once the view menu is supported
 			canvas.SizeAllocated += (o, e2) => {
 				if (!canvas.HasBeenShown) {
 					Application.Invoke (delegate {
@@ -219,8 +224,10 @@ namespace Pinta
 				PintaCore.Actions.View.RulerMetric.ChangeState (args.P0);
 				canvas.RulerMetric = GetCurrentRulerMetric ();
 			};
+#endif
 		}
 
+#if false // TODO-GTK4
 		private MetricType GetCurrentRulerMetric ()
 		{
 			return (MetricType) (int) PintaCore.Actions.View.RulerMetric.State;

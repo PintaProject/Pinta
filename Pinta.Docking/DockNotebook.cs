@@ -56,6 +56,7 @@ namespace Pinta.Docking
 			SetOrientation (Orientation.Vertical);
 
 			tab_bar.SetView (tab_view);
+			tab_bar.Autohide = false;
 
 			tab_view.Vexpand = true;
 			tab_view.Valign = Align.Fill;
@@ -126,6 +127,14 @@ namespace Pinta.Docking
 			get => FindItemForPage (tab_view.SelectedPage);
 			set => tab_view.SelectedPage = tab_view.GetPage (value!.Widget);
 		}
+
+		/// <summary>
+		/// Returns the index of the active item.
+		/// </summary>
+		public int ActiveItemIndex => tab_view.SelectedPage switch {
+			null => -1,
+			var page => tab_view.GetPagePosition (page)
+		};
 
 		public void InsertTab (IDockNotebookItem item, int position)
 		{

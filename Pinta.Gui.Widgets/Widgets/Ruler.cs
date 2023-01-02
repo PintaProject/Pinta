@@ -103,6 +103,7 @@ namespace Pinta.Gui.Widgets
 			QueueDraw ();
 		}
 
+#if false // TODO-GTK4
 		private Requisition GetSizeRequest ()
 		{
 			var border = StyleContext.GetBorder (StateFlags);
@@ -300,5 +301,6 @@ namespace Pinta.Gui.Widgets
 
 			return font_size;
 		}
+#endif
 	}
 }

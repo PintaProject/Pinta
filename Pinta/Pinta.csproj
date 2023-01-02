@@ -32,6 +32,7 @@
     <Compile Include="Actions/IActionHandler.cs" />
     <Compile Include="Actions/Help/AboutDialogAction.cs" />
     <Compile Include="DialogHandlers.cs" />
+    <Compile Include="DocumentViewContent.cs" />
     <Compile Include="Main.cs" />
     <Compile Include="MainWindow.cs" />
     <Compile Include="MacInterop/*.cs" />

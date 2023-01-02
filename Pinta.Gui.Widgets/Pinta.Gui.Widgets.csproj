@@ -10,5 +10,7 @@
   <ItemGroup>
     <Compile Remove="**/*.cs" />
     <Compile Include="DialogAttributes.cs" />
+    <Compile Include="Widgets/Canvas/*.cs" />
+    <Compile Include="Widgets/Ruler.cs" />
   </ItemGroup>
 </Project>

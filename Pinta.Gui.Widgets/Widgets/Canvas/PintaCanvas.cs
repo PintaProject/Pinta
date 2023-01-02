@@ -54,6 +54,7 @@ namespace Pinta.Gui.Widgets
 				SetRequisition (document.Workspace.CanvasSize);
 			};
 
+#if false // TODO-GTK4
 			// Update the canvas when the image changes
 			document.Workspace.CanvasInvalidated += delegate (object? sender, CanvasInvalidatedEventArgs e) {
 				// If GTK+ hasn't created the canvas window yet, no need to invalidate it
@@ -93,33 +94,31 @@ namespace Pinta.Gui.Widgets
 				if (PintaCore.Tools.CurrentTool != null)
 					PintaCore.Tools.DoMouseMove (document, e);
 			};
+#endif
+			SetDrawFunc ((area, context, width, height) => Draw (context, width, height));
 		}
 
-		protected override bool OnDrawn (Cairo.Context context)
+		private void Draw (Cairo.Context context, int width, int height)
 		{
-			base.OnDrawn (context);
-
 			var scale = document.Workspace.Scale;
 
 			var x = (int) document.Workspace.Offset.X;
 			var y = (int) document.Workspace.Offset.Y;
 
 			// Translate our expose area for the whole drawingarea to just our canvas
-			var canvas_bounds = new Rectangle (x, y, document.Workspace.CanvasSize.Width, document.Workspace.CanvasSize.Height);
-			Rectangle expose_rect;
+			var canvas_bounds = new RectangleI (x, y, document.Workspace.CanvasSize.Width, document.Workspace.CanvasSize.Height);
 
-			if (Gdk.CairoHelper.GetClipRectangle (context, out expose_rect))
+			if (CairoExtensions.GetClipRectangle (context, out RectangleI expose_rect))
 				canvas_bounds.Intersect (expose_rect);
 
 			if (canvas_bounds.IsEmpty)
-				return true;
+				return;
 
 			canvas_bounds.X -= x;
 			canvas_bounds.Y -= y;
 
 			// Resize our offscreen surface to a surface the size of our drawing area
 			if (canvas == null || canvas.Width != canvas_bounds.Width || canvas.Height != canvas_bounds.Height) {
-				canvas?.Dispose ();
 				canvas = CairoExtensions.CreateImageSurface (Cairo.Format.Argb32, canvas_bounds.Width, canvas_bounds.Height);
 			}
 
@@ -128,12 +127,12 @@ namespace Pinta.Gui.Widgets
 			var g = context;
 
 			// Draw our canvas drop shadow
-			g.DrawRectangle (new Cairo.Rectangle (x - 1, y - 1, document.Workspace.CanvasSize.Width + 2, document.Workspace.CanvasSize.Height + 2), new Cairo.Color (.5, .5, .5), 1);
-			g.DrawRectangle (new Cairo.Rectangle (x - 2, y - 2, document.Workspace.CanvasSize.Width + 4, document.Workspace.CanvasSize.Height + 4), new Cairo.Color (.8, .8, .8), 1);
-			g.DrawRectangle (new Cairo.Rectangle (x - 3, y - 3, document.Workspace.CanvasSize.Width + 6, document.Workspace.CanvasSize.Height + 6), new Cairo.Color (.9, .9, .9), 1);
+			g.DrawRectangle (new RectangleD (x - 1, y - 1, document.Workspace.CanvasSize.Width + 2, document.Workspace.CanvasSize.Height + 2), new Cairo.Color (.5, .5, .5), 1);
+			g.DrawRectangle (new RectangleD (x - 2, y - 2, document.Workspace.CanvasSize.Width + 4, document.Workspace.CanvasSize.Height + 4), new Cairo.Color (.8, .8, .8), 1);
+			g.DrawRectangle (new RectangleD (x - 3, y - 3, document.Workspace.CanvasSize.Width + 6, document.Workspace.CanvasSize.Height + 6), new Cairo.Color (.9, .9, .9), 1);
 
 			// Set up our clip rectangle
-			g.Rectangle (new Cairo.Rectangle (x, y, document.Workspace.CanvasSize.Width, document.Workspace.CanvasSize.Height));
+			g.Rectangle (new RectangleD (x, y, document.Workspace.CanvasSize.Width, document.Workspace.CanvasSize.Height));
 			g.Clip ();
 
 			g.Translate (x, y);
@@ -151,6 +150,7 @@ namespace Pinta.Gui.Widgets
 			g.Paint ();
 
 			// Selection outline
+#if false // TODO-GTK4 - enable when tools are enabled
 			if (document.Selection.Visible) {
 				var tool_name = PintaCore.Tools.CurrentTool?.GetType ().Name ?? string.Empty;
 				var fillSelection = tool_name.Contains ("Select") && !tool_name.Contains ("Selected");
@@ -164,8 +164,7 @@ namespace Pinta.Gui.Widgets
 				DrawHandles (g, PintaCore.Tools.CurrentTool.Handles);
 				g.Restore ();
 			}
-
-			return true;
+#endif
 		}
 
 		private void DrawHandles (Cairo.Context cr, IEnumerable<IToolHandle> controls)
@@ -183,6 +182,7 @@ namespace Pinta.Gui.Widgets
 			QueueResize ();
 		}
 
+#if false // TODO-GTK4
 		public void DoKeyPressEvent (object o, KeyPressEventArgs e)
 		{
 			// Give the current tool a chance to handle the key press
@@ -193,5 +193,6 @@ namespace Pinta.Gui.Widgets
 		{
 			PintaCore.Tools.DoKeyUp (document, e);
 		}
+#endif
 	}
 }

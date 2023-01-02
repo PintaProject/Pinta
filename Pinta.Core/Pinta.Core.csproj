@@ -28,6 +28,7 @@
     <Compile Include="Classes/DocumentSelection.cs" />
     <Compile Include="Classes/DocumentWorkspace.cs" />
     <Compile Include="Classes/IExtension.cs" />
+    <Compile Include="Classes/IToolHandle.cs" />
     <Compile Include="Classes/Layer.cs" />
     <Compile Include="Classes/LayerProperties.cs" />
     <Compile Include="Classes/ObservableObject.cs" />

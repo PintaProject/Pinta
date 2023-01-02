@@ -49,11 +49,12 @@ namespace Pinta
 
 			Build (document);
 
-			scrolled_window.Hadjustment.ValueChanged += UpdateRulerRange;
-			scrolled_window.Vadjustment.ValueChanged += UpdateRulerRange;
+			scrolled_window.Hadjustment!.OnValueChanged += UpdateRulerRange;
+			scrolled_window.Vadjustment!.OnValueChanged += UpdateRulerRange;
 			document.Workspace.CanvasSizeChanged += UpdateRulerRange;
-			Canvas.SizeAllocated += UpdateRulerRange;
+			Canvas.OnResize += UpdateRulerRange;
 
+#if false // TODO-GTK4
 			Canvas.MotionNotifyEvent += delegate (object? o, MotionNotifyEventArgs args) {
 				if (!PintaCore.Workspace.HasOpenDocuments)
 					return;
@@ -63,8 +64,10 @@ namespace Pinta
 				horizontal_ruler.Position = point.X;
 				vertical_ruler.Position = point.Y;
 			};
+#endif
 		}
 
+#if false // TODO-GTK4
 		public bool IsMouseOnCanvas {
 			get {
 				// Get the position of the mouse pointer relative
@@ -72,10 +75,11 @@ namespace Pinta
 				GdkExtensions.GetWidgetPointer (scrolled_window, out int x, out int y, out var mask);
 
 				// Check if the pointer is on the canvas
-				return (x > 0) && (x < scrolled_window.Allocation.Width) &&
-				    (y > 0) && (y < scrolled_window.Allocation.Height);
+				return (x > 0) && (x < scrolled_window.GetAllocatedWidth()) &&
+				    (y > 0) && (y < scrolled_window.GetAllocatedHeight());
 			}
 		}
+#endif
 
 		public bool RulersVisible {
 			get => horizontal_ruler.Visible;
@@ -99,10 +103,11 @@ namespace Pinta
 
 		public void UpdateRulerRange (object? sender, EventArgs e)
 		{
+#if false // TODO-GTK4
 			Main.Iteration (); //Force update of scrollbar upper before recenter
 
-			var lower = new Cairo.PointD (0, 0);
-			var upper = new Cairo.PointD (0, 0);
+			var lower = new PointD (0, 0);
+			var upper = new PointD (0, 0);
 
 			if (scrolled_window.Hadjustment == null || scrolled_window.Vadjustment == null)
 				return;
@@ -126,6 +131,7 @@ namespace Pinta
 
 			horizontal_ruler.SetRange (lower.X, upper.X);
 			vertical_ruler.SetRange (lower.Y, upper.Y);
+#endif
 		}
 
 		[MemberNotNull (nameof (Canvas), nameof (horizontal_ruler), nameof (vertical_ruler), nameof (scrolled_window))]
@@ -136,21 +142,21 @@ namespace Pinta
 
 			scrolled_window = new ScrolledWindow ();
 
-			var vp = new Viewport () {
-				ShadowType = ShadowType.None
-			};
+			var vp = new Viewport ();
 
-			var css = new CssProvider ();
+#if false // TODO-GTK4 (may not be necessary with the new tab view widget)
+			var css = CssProvider.New ();
 			css.LoadFromData ("* { background-color: @theme_bg_color; }");
 			vp.StyleContext.AddProvider (css, 0);
+#endif
 
+#if false // TODO-GTK4
 			vp.ScrollEvent += ViewPort_ScrollEvent;
+#endif
 
 			Canvas = new PintaCanvas (this, document) {
 				Name = "canvas",
-				CanDefault = true,
 				CanFocus = true,
-				Events = (Gdk.EventMask) 16134
 			};
 
 			// Rulers
@@ -170,17 +176,14 @@ namespace Pinta
 			scrolled_window.Vexpand = true;
 			Attach (scrolled_window, 1, 1, 1, 1);
 
-			scrolled_window.Add (vp);
-			vp.Add (Canvas);
-
-			ShowAll ();
-			Canvas.Show ();
-			vp.Show ();
+			scrolled_window.Child = vp;
+			vp.Child = Canvas;
 
 			horizontal_ruler.Visible = false;
 			vertical_ruler.Visible = false;
 		}
 
+#if false // TODO-GTK4
 		private void ViewPort_ScrollEvent (object o, ScrollEventArgs args)
 		{
 			// Allow the user to zoom in/out with Ctrl-Mousewheel
@@ -193,5 +196,6 @@ namespace Pinta
 				args.RetVal = true;
 			}
 		}
+#endif
 	}
 }

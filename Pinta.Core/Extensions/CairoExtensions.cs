@@ -71,12 +71,11 @@ namespace Pinta.Core
 		// Most of these functions return an affected area
 		// This can be ignored if you don't need it
 
-#if false // TODO-GTK4 - many of these may be obsolete
-		public static Rectangle DrawRectangle (this Context g, Rectangle r, Color color, int lineWidth)
+		public static RectangleD DrawRectangle (this Context g, RectangleD r, Color color, int lineWidth)
 		{
 			// Put it on a pixel line
 			if (lineWidth == 1)
-				r = new Rectangle (r.X + 0.5, r.Y + 0.5, r.Width - 1, r.Height - 1);
+				r = new RectangleD (r.X + 0.5, r.Y + 0.5, r.Width - 1, r.Height - 1);
 
 			g.Save ();
 
@@ -90,13 +89,15 @@ namespace Pinta.Core
 			g.LineWidth = lineWidth;
 			g.LineCap = LineCap.Square;
 
-			Rectangle dirty = g.StrokeExtents ();
+			RectangleD dirty = g.StrokeExtents ();
 			g.Stroke ();
 
 			g.Restore ();
 
 			return dirty;
 		}
+
+#if false // TODO-GTK4 - many of these may be obsolete
 
 		public static Rectangle DrawFullRectangle (this Context g, Rectangle r, Color color, int lineWidth)
 		{
@@ -138,8 +139,15 @@ namespace Pinta.Core
 
 			return path;
 		}
+#endif
 
-		public static Rectangle FillRectangle (this Context g, Rectangle r, Color color)
+		public static RectangleD StrokeExtents (this Context g)
+		{
+			g.StrokeExtents (out double x1, out double y1, out double x2, out double y2);
+			return new RectangleD (x1, y1, x2 - x1, y2 - y1);
+		}
+
+		public static RectangleD FillRectangle (this Context g, RectangleD r, Color color)
 		{
 			g.Save ();
 
@@ -151,7 +159,7 @@ namespace Pinta.Core
 
 			g.SetSourceColor (color);
 
-			Rectangle dirty = g.StrokeExtents ();
+			RectangleD dirty = g.StrokeExtents ();
 
 			g.Fill ();
 			g.Restore ();
@@ -159,7 +167,7 @@ namespace Pinta.Core
 			return dirty;
 		}
 
-		public static Rectangle FillRectangle (this Context g, Rectangle r, Pattern pattern)
+		public static RectangleD FillRectangle (this Context g, RectangleD r, Pattern pattern)
 		{
 			g.Save ();
 
@@ -171,7 +179,7 @@ namespace Pinta.Core
 
 			g.SetSource (pattern);
 
-			Rectangle dirty = g.StrokeExtents ();
+			RectangleD dirty = g.StrokeExtents ();
 			g.Fill ();
 
 			g.Restore ();
@@ -179,7 +187,7 @@ namespace Pinta.Core
 			return dirty;
 		}
 
-		public static Rectangle FillRectangle (this Context g, Rectangle r, Pattern pattern, PointD patternOffset)
+		public static RectangleD FillRectangle (this Context g, RectangleD r, Pattern pattern, PointD patternOffset)
 		{
 			g.Save ();
 
@@ -189,10 +197,14 @@ namespace Pinta.Core
 			g.LineTo (r.X, r.Y + r.Height);
 			g.LineTo (r.X, r.Y);
 
-			pattern.Matrix.Translate (-patternOffset.X, -patternOffset.Y);
+			var xform = CreateIdentityMatrix ();
+			pattern.GetMatrix (xform);
+			xform.Translate (-patternOffset.X, -patternOffset.Y);
+			pattern.SetMatrix (xform);
+
 			g.SetSource (pattern);
 
-			Rectangle dirty = g.StrokeExtents ();
+			RectangleD dirty = g.StrokeExtents ();
 			g.Fill ();
 
 			g.Restore ();
@@ -200,6 +212,7 @@ namespace Pinta.Core
 			return dirty;
 		}
 
+#if false // TODO-GTK4
 		public static Rectangle DrawPolygonal (this Context g, PointD[] points, Color color)
 		{
 			g.Save ();
@@ -1445,11 +1458,12 @@ namespace Pinta.Core
 					Math.Max (r1.Value.Y + r1.Value.Height, r2.Value.Y + r2.Value.Height) - minY);
 			}
 		}
+#endif
 
 		public static Pattern CreateTransparentBackgroundPattern (int size)
 		{
-			using (var surface = CreateTransparentBackgroundSurface (size))
-				return surface.ToTiledPattern ();
+			var surface = CreateTransparentBackgroundSurface (size);
+			return surface.ToTiledPattern ();
 		}
 
 		public static ImageSurface CreateTransparentBackgroundSurface (int size)
@@ -1457,17 +1471,16 @@ namespace Pinta.Core
 			var surface = CreateImageSurface (Format.Argb32, size, size);
 
 			// Draw the checkerboard
-			using (var g = new Context (surface)) {
-				// Fill white
-				g.FillRectangle (new Rectangle (0, 0, size, size), new Color (1, 1, 1));
+			var g = new Context (surface);
+			// Fill white
+			g.FillRectangle (new RectangleD (0, 0, size, size), new Color (1, 1, 1));
 
-				var color = new Color (0.78, 0.78, 0.78);
-				var half_size = size / 2;
+			var color = new Color (0.78, 0.78, 0.78);
+			var half_size = size / 2;
 
-				// Draw gray squares
-				g.FillRectangle (new Rectangle (0, 0, half_size, half_size), color);
-				g.FillRectangle (new Rectangle (half_size, half_size, half_size, half_size), color);
-			}
+			// Draw gray squares
+			g.FillRectangle (new RectangleD (0, 0, half_size, half_size), color);
+			g.FillRectangle (new RectangleD (half_size, half_size, half_size, half_size), color);
 
 			return surface;
 		}
@@ -1479,7 +1492,7 @@ namespace Pinta.Core
 
 			return pattern;
 		}
-#endif
+
 		public static void Rectangle (this Context g, RectangleD r)
 		{
 			g.Rectangle (r.X, r.Y, r.Width, r.Height);
@@ -1980,6 +1993,19 @@ namespace Pinta.Core
 		public static void TransformPoint (this Matrix m, ref Core.PointD p)
 		{
 			m.TransformPoint (ref p.X, ref p.Y);
+		}
+
+		/// <summary>
+		/// Port of gdk_cairo_get_clip_rectangle from GTK3
+		/// TODO-GTK4 - verify if this works reliably, see https://gitlab.gnome.org/GNOME/gtk/-/commit/052d0f6e6004b7c791cfbb891c70ab0bb316c228
+		/// </summary>
+		public static bool GetClipRectangle (Cairo.Context context, out RectangleI rect)
+		{
+			context.ClipExtents (out double x1, out double y1, out double x2, out double y2);
+			bool clip_exists = x1 < x2 && y1 < y2;
+
+			rect = new RectangleD (x1, y1, x2 - x1, y2 - y1).ToInt ();
+			return clip_exists;
 		}
 	}
 }

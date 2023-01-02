@@ -9,7 +9,6 @@
 
 using System;
 using System.Collections.Generic;
-using Gdk;
 using Pinta.Core;
 
 namespace Pinta.Gui.Widgets
@@ -57,50 +56,54 @@ namespace Pinta.Gui.Widgets
 			s2dLookupY = null;
 		}
 
-		public void Render (List<Layer> layers, Cairo.ImageSurface dst, Point offset)
+		public void Render (List<Layer> layers, Cairo.ImageSurface dst, PointI offset)
 		{
 			dst.Flush ();
 
 			// Our rectangle of interest
-			var r = new Rectangle (offset, dst.GetBounds ().Size).ToCairoRectangle ();
+			var r = new RectangleI (offset, dst.GetBounds ().Size).ToDouble ();
 			var is_one_to_one = scale_factor.Ratio == 1;
 
-			using (var g = new Cairo.Context (dst)) {
-				// Create the transparent checkerboard background
-				g.Translate (-offset.X, -offset.Y);
-				g.FillRectangle (r, tranparent_pattern, new Cairo.PointD (offset.X, offset.Y));
+			var g = new Cairo.Context (dst);
 
-				for (var i = 0; i < layers.Count; i++) {
-					var layer = layers[i];
-					var surf = layer.Surface;
+			// Create the transparent checkerboard background
+			g.Translate (-offset.X, -offset.Y);
+			g.FillRectangle (r, tranparent_pattern, new PointD (offset.X, offset.Y));
 
-					// If we're in LivePreview, substitute current layer with the preview layer
-					if (enable_live_preview && layer == PintaCore.Workspace.ActiveDocument.Layers.CurrentUserLayer && PintaCore.LivePreview.IsEnabled)
-						surf = PintaCore.LivePreview.LivePreviewSurface;
+			for (var i = 0; i < layers.Count; i++) {
+				var layer = layers[i];
+				var surf = layer.Surface;
 
-					g.Save ();
-					if (!is_one_to_one) {
-						// Scale the source surface based on the zoom leve.
-						double inv_scale = 1.0 / scale_factor.Ratio;
-						g.Scale (inv_scale, inv_scale);
-					}
+				// If we're in LivePreview, substitute current layer with the preview layer
+#if false // TODO-GTK4 enable when live preview is supported.
+                                if (enable_live_preview && layer == PintaCore.Workspace.ActiveDocument.Layers.CurrentUserLayer && PintaCore.LivePreview.IsEnabled)
+                                        surf = PintaCore.LivePreview.LivePreviewSurface;
+#endif
 
-					g.Transform (layer.Transform);
-
-					// Use nearest-neighbor interpolation when zoomed in so that there isn't any smoothing.
-					var filter = (scale_factor.Ratio <= 1) ? Cairo.Filter.Nearest : Cairo.Filter.Bilinear;
-					using var src_pattern = new Cairo.SurfacePattern (surf) { Filter = filter };
-					g.SetSource (src_pattern);
-
-					g.SetBlendMode (layer.BlendMode);
-					g.PaintWithAlpha (layer.Opacity);
-					g.Restore ();
+				g.Save ();
+				if (!is_one_to_one) {
+					// Scale the source surface based on the zoom leve.
+					double inv_scale = 1.0 / scale_factor.Ratio;
+					g.Scale (inv_scale, inv_scale);
 				}
+
+				g.Transform (layer.Transform);
+
+				// Use nearest-neighbor interpolation when zoomed in so that there isn't any smoothing.
+				var filter = (scale_factor.Ratio <= 1) ? Cairo.Filter.Nearest : Cairo.Filter.Bilinear;
+				var src_pattern = new Cairo.SurfacePattern (surf) { Filter = filter };
+				g.SetSource (src_pattern);
+
+				g.SetBlendMode (layer.BlendMode);
+				g.PaintWithAlpha (layer.Opacity);
+				g.Restore ();
 			}
 
 			// If we are at least 200% and grid is requested, draw it
+#if false // TODO-GTK4 enable when view menu is supported.
 			if (enable_pixel_grid && PintaCore.Actions.View.PixelGrid.Value && scale_factor.Ratio <= 0.5d)
 				RenderPixelGrid (dst, offset);
+#endif
 
 			dst.MarkDirty ();
 		}
@@ -112,7 +115,7 @@ namespace Pinta.Gui.Widgets
 		private int[] S2DLookupY => s2dLookupY ??= CreateS2DLookupY (source_size.Height, destination_size.Height, scale_factor);
 
 		#region Algorithms ported from PDN
-		private void RenderPixelGrid (Cairo.ImageSurface dst, Point offset)
+		private void RenderPixelGrid (Cairo.ImageSurface dst, PointI offset)
 		{
 			// Draw horizontal lines
 			var dst_data = dst.GetData ();
