@@ -17,6 +17,7 @@
     <Compile Remove="**/*.cs" />
     <Compile Include="PintaCore.cs" />
     <Compile Include="Actions/AppActions.cs" />
+    <Compile Include="Actions/EditActions.cs" />
     <Compile Include="Actions/FileActions.cs" />
     <Compile Include="Actions/WindowActions.cs" />
     <Compile Include="Actions/HelpActions.cs" />

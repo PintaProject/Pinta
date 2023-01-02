@@ -57,15 +57,14 @@ namespace Pinta.Core
 			}
 		}
 
-#if false // TODO-GTK4
-		public ListStore ListStore { get; } = new ListStore (typeof (BaseHistoryItem));
-#endif
+		// TODO-GTK4 - create a Gio.ListStore with a custom GObject type to provide the data needed
+		// by the history tree view?
+		public Gtk.StringList ListStore { get; } = Gtk.StringList.New (Array.Empty<string> ());
 
 		public int Pointer { get; private set; } = -1;
 
 		public void PushNewItem (BaseHistoryItem newItem)
 		{
-#if false // TODO-GTK4
 			// Remove all old redos starting from the end of the list
 			for (var i = history.Count - 1; i >= 0; i--) {
 				var item = history[i];
@@ -75,14 +74,15 @@ namespace Pinta.Core
 					item.Dispose ();
 
 					//Remove from ListStore
-					ListStore.Remove (ref item.Id);
+					ListStore.Remove (item.Id);
 				} else if (item.State == HistoryItemState.Undo) {
 					break;
 				}
 			}
 
 			//Add new undo to ListStore
-			newItem.Id = ListStore.AppendValues (newItem);
+			newItem.Id = ListStore.GetNItems ();
+			ListStore.Append ("");
 			history.Add (newItem);
 			Pointer = history.Count - 1;
 
@@ -95,14 +95,10 @@ namespace Pinta.Core
 			PintaCore.Actions.Edit.Redo.Sensitive = false;
 
 			HistoryItemAdded?.Invoke (this, new HistoryItemAddedEventArgs (newItem));
-#else
-			throw new NotImplementedException ();
-#endif
 		}
 
 		public void Undo ()
 		{
-#if false // TODO-GTK4
 			if (Pointer < 0) {
 				throw new InvalidOperationException ("Undo stack is empty");
 			} else {
@@ -113,8 +109,10 @@ namespace Pinta.Core
 				if (item.CausesDirty)
 					document.IsDirty = true;
 
+#if false // TODO-GTK4 test if this is necessary
 				ListStore.SetValue (item.Id, 0, item);
 				history[Pointer] = item;
+#endif
 				Pointer--;
 			}
 
@@ -127,14 +125,10 @@ namespace Pinta.Core
 			PintaCore.Actions.Edit.Redo.Sensitive = true;
 
 			ActionUndone?.Invoke (this, EventArgs.Empty);
-#else
-			throw new NotImplementedException ();
-#endif
 		}
 
 		public void Redo ()
 		{
-#if false // TODO-GTK4
 			if (Pointer >= history.Count - 1)
 				throw new InvalidOperationException ("Redo stack is empty");
 
@@ -143,8 +137,10 @@ namespace Pinta.Core
 			var item = history[Pointer];
 			item.Redo ();
 			item.State = HistoryItemState.Undo;
+#if false // TODO-GTK4 test if this is necessary
 			ListStore.SetValue (item.Id, 0, item);
 			history[Pointer] = item;
+#endif
 
 			if (Pointer == history.Count - 1)
 				PintaCore.Actions.Edit.Redo.Sensitive = false;
@@ -158,9 +154,6 @@ namespace Pinta.Core
 				PintaCore.Actions.Edit.Undo.Sensitive = true;
 
 			ActionRedone?.Invoke (this, EventArgs.Empty);
-#else
-			throw new NotImplementedException ();
-#endif
 		}
 
 		/// <summary>
@@ -186,10 +179,9 @@ namespace Pinta.Core
 
 		public void Clear ()
 		{
-#if false // TODO-GTK4
 			history.ForEach (delegate (BaseHistoryItem item) { item.Dispose (); });
 			history.Clear ();
-			ListStore.Clear ();
+			ListStore.Splice (0, ListStore.GetNItems (), Array.Empty<string> ());
 			Pointer = -1;
 			clean_pointer = -1;
 
@@ -197,9 +189,6 @@ namespace Pinta.Core
 
 			PintaCore.Actions.Edit.Redo.Sensitive = false;
 			PintaCore.Actions.Edit.Undo.Sensitive = false;
-#else
-			throw new NotImplementedException ();
-#endif
 		}
 	}
 }

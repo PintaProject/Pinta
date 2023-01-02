@@ -342,11 +342,11 @@ namespace Pinta
 			PintaCore.Actions.File.RegisterActions (app, file_menu);
 			menu_bar.AppendSubmenu (Translations.GetString ("_File"), file_menu);
 
-#if false // TODO-GTK4
-			var edit_menu = new GLib.Menu ();
-			PintaCore.Actions.Edit.RegisterActions (this, edit_menu);
+			var edit_menu = Gio.Menu.New ();
+			PintaCore.Actions.Edit.RegisterActions (app, edit_menu);
 			menu_bar.AppendSubmenu (Translations.GetString ("_Edit"), edit_menu);
 
+#if false // TODO-GTK4
 			var view_menu = new GLib.Menu ();
 			PintaCore.Actions.View.RegisterActions (this, view_menu);
 			menu_bar.AppendSubmenu (Translations.GetString ("_View"), view_menu);

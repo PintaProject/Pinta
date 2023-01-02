@@ -52,7 +52,7 @@ namespace Pinta.Core
 		public Command ResetPalette { get; private set; }
 		public Command ResizePalette { get; private set; }
 
-		private GLib.IFile? last_palette_dir = null;
+		private Gio.File? last_palette_dir = null;
 
 		public EditActions ()
 		{
@@ -81,7 +81,7 @@ namespace Pinta.Core
 		}
 
 		#region Initialization
-		public void RegisterActions (Gtk.Application app, GLib.Menu menu)
+		public void RegisterActions (Gtk.Application app, Gio.Menu menu)
 		{
 			app.AddAccelAction (Undo, "<Primary>Z");
 			menu.AppendItem (Undo.CreateMenuItem ());
@@ -89,7 +89,7 @@ namespace Pinta.Core
 			app.AddAccelAction (Redo, new[] { "<Primary><Shift>Z", "<Ctrl>Y" });
 			menu.AppendItem (Redo.CreateMenuItem ());
 
-			var paste_section = new GLib.Menu ();
+			var paste_section = Gio.Menu.New ();
 			menu.AppendSection (null, paste_section);
 
 			app.AddAccelAction (Cut, "<Primary>X");
@@ -110,7 +110,7 @@ namespace Pinta.Core
 			app.AddAccelAction (PasteIntoNewImage, "<Primary><Alt>V");
 			paste_section.AppendItem (PasteIntoNewImage.CreateMenuItem ());
 
-			var sel_section = new GLib.Menu ();
+			var sel_section = Gio.Menu.New ();
 			menu.AppendSection (null, sel_section);
 
 			app.AddAccelAction (SelectAll, "<Primary>A");
@@ -119,7 +119,7 @@ namespace Pinta.Core
 			app.AddAccelAction (Deselect, new[] { "<Primary><Shift>A", "<Ctrl>D" });
 			sel_section.AppendItem (Deselect.CreateMenuItem ());
 
-			var edit_sel_section = new GLib.Menu ();
+			var edit_sel_section = Gio.Menu.New ();
 			menu.AppendSection (null, edit_sel_section);
 
 			app.AddAccelAction (EraseSelection, "Delete");
@@ -131,10 +131,10 @@ namespace Pinta.Core
 			app.AddAccelAction (InvertSelection, "<Primary>I");
 			edit_sel_section.AppendItem (InvertSelection.CreateMenuItem ());
 
-			var palette_section = new GLib.Menu ();
+			var palette_section = Gio.Menu.New ();
 			menu.AppendSection (null, palette_section);
 
-			var palette_menu = new GLib.Menu ();
+			var palette_menu = Gio.Menu.New ();
 			menu.AppendSubmenu (Translations.GetString ("Palette"), palette_menu);
 
 			app.AddAction (LoadPalette);
@@ -150,6 +150,7 @@ namespace Pinta.Core
 			palette_menu.AppendItem (ResizePalette.CreateMenuItem ());
 		}
 
+#if false // TODO-GTK4
 		public void CreateHistoryWindowToolBar (Gtk.Toolbar toolbar)
 		{
 			toolbar.AppendItem (Undo.CreateToolBarItem ());
@@ -185,9 +186,11 @@ namespace Pinta.Core
 				InvertSelection.Sensitive = visible;
 			};
 		}
+#endif
 
 		#endregion
 
+#if false // TODO-GTK4
 		#region Action Handlers
 		private void HandlePintaCoreActionsEditFillSelectionActivated (object sender, EventArgs e)
 		{
@@ -478,5 +481,6 @@ namespace Pinta.Core
 			Undo.Sensitive = PintaCore.Workspace.ActiveWorkspace.History.CanUndo;
 		}
 		#endregion
+#endif
 	}
 }

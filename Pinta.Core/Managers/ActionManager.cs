@@ -35,11 +35,11 @@ namespace Pinta.Core
 	{
 		public AppActions App { get; private set; } = new ();
 		public FileActions File { get; private set; } = new ();
+		public EditActions Edit { get; private set; } = new ();
 		public WindowActions Window { get; private set; } = new ();
 		public HelpActions Help { get; private set; } = new ();
 
 #if false // TODO-GTK4
-		public EditActions Edit { get; private set; }
 		public ViewActions View { get; private set; }
 		public ImageActions Image { get; private set; }
 		public LayerActions Layers { get; private set; }
@@ -51,7 +51,6 @@ namespace Pinta.Core
 		public ActionManager ()
 		{
 #if false // TODO-GTK4
-			Edit = new EditActions ();
 			View = new ViewActions ();
 			Image = new ImageActions ();
 			Layers = new LayerActions ();
