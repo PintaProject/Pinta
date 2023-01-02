@@ -38,7 +38,7 @@ namespace Pinta.Core
 		//   around the temporary layer
 		private Document doc;
 		private DocumentSelection? old_selection;
-		private readonly Matrix old_transform = new Matrix ();
+		private Matrix old_transform = CairoExtensions.CreateIdentityMatrix ();
 		private ImageSurface? old_surface;
 		private int layer_index;
 		private bool lifted;            // Whether this item has lift
@@ -59,14 +59,6 @@ namespace Pinta.Core
 			Swap ();
 		}
 
-		public override void Dispose ()
-		{
-			old_selection?.Dispose ();
-
-			if (old_surface != null)
-				(old_surface as IDisposable).Dispose ();
-		}
-
 		private void Swap ()
 		{
 			var doc = PintaCore.Workspace.ActiveDocument;
@@ -75,10 +67,9 @@ namespace Pinta.Core
 			doc.Selection = old_selection!; // NRT - Set in TakeSnapshot
 			old_selection = swap_selection;
 
-			Matrix swap_transform = new Matrix ();
-			swap_transform.InitMatrix (doc.Layers.SelectionLayer.Transform);
-			doc.Layers.SelectionLayer.Transform.InitMatrix (old_transform);
-			old_transform.InitMatrix (swap_transform);
+			Matrix swap_transform = doc.Layers.SelectionLayer.Transform;
+			doc.Layers.SelectionLayer.Transform = old_transform;
+			old_transform = swap_transform;
 
 			if (lifted) {
 				// Grab the original surface
@@ -110,7 +101,7 @@ namespace Pinta.Core
 			}
 
 			old_selection = doc.Selection.Clone ();
-			old_transform.InitMatrix (doc.Layers.SelectionLayer.Transform);
+			old_transform = doc.Layers.SelectionLayer.Transform.Clone ();
 		}
 	}
 }

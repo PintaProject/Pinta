@@ -58,13 +58,7 @@ namespace Pinta.Core
 			// Store the layer for "undo"
 			layer = doc.Layers[layer_index];
 
-			doc.Layers.DeleteLayer (layer_index, false);
-		}
-
-		public override void Dispose ()
-		{
-			if (layer != null)
-				(layer.Surface as IDisposable).Dispose ();
+			doc.Layers.DeleteLayer (layer_index);
 		}
 	}
 }

@@ -53,8 +53,10 @@ namespace Pinta.Core
 
 			Size swap = PintaCore.Workspace.ImageSize;
 
+#if false // TODO-GTK4
 			var window = PintaCore.Workspace.ActiveWorkspace.Canvas.Window;
 			window.FreezeUpdates ();
+#endif
 
 			PintaCore.Workspace.ImageSize = old_size;
 			PintaCore.Workspace.CanvasSize = old_size;
@@ -64,12 +66,7 @@ namespace Pinta.Core
 			base.Undo ();
 
 			if (RestoreSelection != null) {
-				DocumentSelection old = PintaCore.Workspace.ActiveDocument.Selection;
 				doc.Selection = RestoreSelection.Clone ();
-
-				if (old != null) {
-					old.Dispose ();
-				}
 			} else {
 				doc.ResetSelectionPaths ();
 			}
@@ -77,9 +74,11 @@ namespace Pinta.Core
 			PintaCore.Workspace.Invalidate ();
 
 			PintaCore.Workspace.Scale = scale;
+#if false // TODO-GTK4
 			PintaCore.Actions.View.UpdateCanvasScale ();
 
 			window.ThawUpdates ();
+#endif
 		}
 
 		public override void Redo ()
@@ -91,8 +90,10 @@ namespace Pinta.Core
 
 			Size swap = PintaCore.Workspace.ImageSize;
 
+#if false // TODO-GTK4
 			var window = PintaCore.Workspace.ActiveWorkspace.Canvas.Window;
 			window.FreezeUpdates ();
+#endif
 
 			PintaCore.Workspace.ImageSize = old_size;
 			PintaCore.Workspace.CanvasSize = old_size;
@@ -105,18 +106,11 @@ namespace Pinta.Core
 			PintaCore.Workspace.Invalidate ();
 
 			PintaCore.Workspace.Scale = scale;
+#if false // TODO-GTK4
 			PintaCore.Actions.View.UpdateCanvasScale ();
 
 			window.ThawUpdates ();
-		}
-
-		public override void Dispose ()
-		{
-			base.Dispose ();
-
-			if (RestoreSelection != null) {
-				RestoreSelection.Dispose ();
-			}
+#endif
 		}
 	}
 }

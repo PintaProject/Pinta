@@ -191,7 +191,6 @@ namespace Pinta.Core
 			return g;
 		}
 
-#if false // TODO-GTK4
 		public void FinishSelection ()
 		{
 			// We don't have an uncommitted layer, abort
@@ -203,10 +202,9 @@ namespace Pinta.Core
 
 			Layer layer = Layers.SelectionLayer;
 
-			using (Cairo.Context g = new Cairo.Context (Layers.CurrentUserLayer.Surface)) {
-				selection.Clip (g);
-				layer.Draw (g);
-			}
+			var g = new Cairo.Context (Layers.CurrentUserLayer.Surface);
+			selection.Clip (g);
+			layer.Draw (g);
 
 			Layers.DestroySelectionLayer ();
 			Workspace.Invalidate ();
@@ -231,7 +229,6 @@ namespace Pinta.Core
 
 			Workspace.Invalidate ();
 		}
-#endif
 
 		/// <summary>
 		/// Gets the final pixel color for the given point, taking layers, opacity, and blend modes into account.
@@ -277,8 +274,6 @@ namespace Pinta.Core
 			PreviousSelection.Visible = false;
 		}
 
-#if false // TODO-GTK4
-
 		/// <summary>
 		/// Resizes the canvas.
 		/// </summary>
@@ -296,7 +291,9 @@ namespace Pinta.Core
 			if (ImageSize.Width == width && ImageSize.Height == height)
 				return;
 
+#if false // TODO-GTK4 - re-enable once tools are built
 			PintaCore.Tools.Commit ();
+#endif
 
 			ResizeHistoryItem hist = new ResizeHistoryItem (ImageSize);
 			hist.Icon = Resources.Icons.ImageResizeCanvas;
@@ -305,7 +302,7 @@ namespace Pinta.Core
 
 			scale = Workspace.Scale;
 
-			ImageSize = new Gdk.Size (width, height);
+			ImageSize = new Size (width, height);
 
 			foreach (var layer in Layers.UserLayers)
 				layer.ResizeCanvas (width, height, anchor);
@@ -330,14 +327,16 @@ namespace Pinta.Core
 			if (ImageSize.Width == width && ImageSize.Height == height)
 				return;
 
+#if false // TODO-GTK4 - re-enable once tools are built
 			PintaCore.Tools.Commit ();
+#endif
 
 			ResizeHistoryItem hist = new ResizeHistoryItem (ImageSize);
 			hist.StartSnapshotOfImage ();
 
 			scale = Workspace.Scale;
 
-			ImageSize = new Gdk.Size (width, height);
+			ImageSize = new Size (width, height);
 
 			foreach (var layer in Layers.UserLayers)
 				layer.Resize (width, height);
@@ -348,10 +347,12 @@ namespace Pinta.Core
 
 			ResetSelectionPaths ();
 
+#if false // TODO-GTK4
 			Workspace.Canvas.Window.FreezeUpdates ();
 			Workspace.Scale = scale;
 			PintaCore.Actions.View.UpdateCanvasScale ();
 			Workspace.Canvas.Window.ThawUpdates ();
+#endif
 		}
 
 		// Rotate image 180 degrees (flip H+V)
@@ -382,7 +383,9 @@ namespace Pinta.Core
 			ImageSize = new_size;
 			Workspace.CanvasSize = new_size;
 
+#if false // TODO-GTK4
 			PintaCore.Actions.View.UpdateCanvasScale ();
+#endif
 			ResetSelectionPaths ();
 			Workspace.Invalidate ();
 		}
@@ -392,7 +395,6 @@ namespace Pinta.Core
 		{
 			return PintaCore.Actions.File.RaiseSaveDocument (this, saveAs);
 		}
-#endif
 
 		/// <summary>
 		/// Signal to the TextTool that an ImageSurface was cloned.

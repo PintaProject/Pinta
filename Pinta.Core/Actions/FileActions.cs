@@ -43,9 +43,7 @@ namespace Pinta.Core
 		public Command Print { get; private set; }
 
 		public event EventHandler<ModifyCompressionEventArgs>? ModifyCompression;
-#if false // TODO-GTK4
 		public event EventHandler<DocumentCancelEventArgs>? SaveDocument;
-#endif
 
 		public FileActions ()
 		{
@@ -111,7 +109,6 @@ namespace Pinta.Core
 		#endregion
 
 		#region Event Invokers
-#if false // TODO-GTK4
 		internal bool RaiseSaveDocument (Document document, bool saveAs)
 		{
 			DocumentCancelEventArgs e = new DocumentCancelEventArgs (document, saveAs);
@@ -123,7 +120,6 @@ namespace Pinta.Core
 
 			return !e.Cancel;
 		}
-#endif
 
 		internal int RaiseModifyCompression (int defaultCompression, Gtk.Window parent)
 		{

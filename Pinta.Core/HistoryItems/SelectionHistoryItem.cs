@@ -52,12 +52,6 @@ namespace Pinta.Core
 			Swap ();
 		}
 
-		public override void Dispose ()
-		{
-			old_selection?.Dispose ();
-			old_previous_selection?.Dispose ();
-		}
-
 		private void Swap ()
 		{
 			var doc = PintaCore.Workspace.ActiveDocument;

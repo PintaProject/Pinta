@@ -38,7 +38,6 @@ namespace Pinta.Core
 		private bool hidden;
 		private string name;
 		private BlendMode blend_mode;
-		private Matrix transform;
 
 		public Layer (ImageSurface surface) : this (surface, false, 1f, "")
 		{
@@ -54,13 +53,13 @@ namespace Pinta.Core
 			this.blend_mode = BlendMode.Normal;
 
 			// TODO-GTK4 - this needs to have a proper constructor in gir.core
-			transform = new (Cairo.Internal.MatrixManagedHandle.Create ());
-			transform.InitIdentity ();
+			Transform = new (Cairo.Internal.MatrixManagedHandle.Create ());
+			Transform.InitIdentity ();
 		}
 
 		public ImageSurface Surface { get; set; }
 		public bool Tiled { get; set; }
-		public Matrix Transform { get { return transform; } }
+		public Matrix Transform { get; set; }
 
 		public static readonly string OpacityProperty = "Opacity";
 		public static readonly string HiddenProperty = "Hidden";

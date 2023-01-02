@@ -31,7 +31,7 @@ namespace Pinta.Core
 {
 	public enum HistoryItemState { Undo, Redo }
 
-	public class BaseHistoryItem : IDisposable
+	public class BaseHistoryItem
 	{
 		public string? Icon { get; set; }
 		public string? Text { get; set; }
@@ -71,11 +71,5 @@ namespace Pinta.Core
 			x = y;
 			y = temp;
 		}
-
-		#region IDisposable Members
-		public virtual void Dispose ()
-		{
-		}
-		#endregion
 	}
 }

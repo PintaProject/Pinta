@@ -33,7 +33,7 @@ namespace Pinta.Core
 	{
 		private ImageSurface? old_selection_layer;
 		private ImageSurface? old_surface;
-		private readonly Matrix old_transform = new Matrix ();
+		private Matrix old_transform = CairoExtensions.CreateIdentityMatrix ();
 
 		public override bool CausesDirty { get { return false; } }
 
@@ -49,50 +49,42 @@ namespace Pinta.Core
 
 			doc.Layers.ShowSelectionLayer = true;
 
-			Matrix swap_transfrom = new Matrix ();
-			swap_transfrom.InitMatrix (doc.Layers.SelectionLayer.Transform);
+			Matrix swap_transform = doc.Layers.SelectionLayer.Transform;
 			ImageSurface swap_surf = doc.Layers.CurrentUserLayer.Surface;
 			ImageSurface swap_sel = doc.Layers.SelectionLayer.Surface;
 
 			doc.Layers.SelectionLayer.Surface = old_selection_layer!; // NRT - Set in TakeSnapshot
-			doc.Layers.SelectionLayer.Transform.InitMatrix (old_transform);
+			doc.Layers.SelectionLayer.Transform = old_transform;
 			doc.Layers.CurrentUserLayer.Surface = old_surface!;
 
-			old_transform.InitMatrix (swap_transfrom);
+			old_transform = swap_transform;
 			old_surface = swap_surf;
 			old_selection_layer = swap_sel;
 
 			PintaCore.Workspace.Invalidate ();
+#if false // TODO-GTK4 - re-enable once tools are built
 			PintaCore.Tools.SetCurrentTool ("MoveSelectedTool");
+#endif
 		}
 
 		public override void Redo ()
 		{
 			var doc = PintaCore.Workspace.ActiveDocument;
 
-			Matrix swap_transfrom = new Matrix ();
-			swap_transfrom.InitMatrix (doc.Layers.SelectionLayer.Transform);
+			Matrix swap_transfrom = doc.Layers.SelectionLayer.Transform;
 			ImageSurface swap_surf = doc.Layers.CurrentUserLayer.Surface.Clone ();
 			ImageSurface swap_sel = doc.Layers.SelectionLayer.Surface;
 
 			doc.Layers.CurrentUserLayer.Surface = old_surface!; // NRT - Set in TakeSnapshot
 			doc.Layers.SelectionLayer.Surface = old_selection_layer!;
-			doc.Layers.SelectionLayer.Transform.InitMatrix (old_transform);
+			doc.Layers.SelectionLayer.Transform = old_transform;
 
 			old_surface = swap_surf;
 			old_selection_layer = swap_sel;
-			old_transform.InitMatrix (swap_transfrom);
+			old_transform = swap_transfrom;
 
 			doc.Layers.DestroySelectionLayer ();
 			PintaCore.Workspace.Invalidate ();
-		}
-
-		public override void Dispose ()
-		{
-			if (old_surface != null)
-				(old_surface as IDisposable).Dispose ();
-			if (old_selection_layer != null)
-				(old_selection_layer as IDisposable).Dispose ();
 		}
 
 		public void TakeSnapshot ()
@@ -101,7 +93,7 @@ namespace Pinta.Core
 
 			old_selection_layer = doc.Layers.SelectionLayer.Surface.Clone ();
 			old_surface = doc.Layers.CurrentUserLayer.Surface.Clone ();
-			old_transform.InitMatrix (doc.Layers.SelectionLayer.Transform);
+			old_transform = doc.Layers.SelectionLayer.Transform.Clone ();
 		}
 	}
 }

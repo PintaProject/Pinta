@@ -71,7 +71,6 @@ namespace Pinta.Core
 
 				if (item.State == HistoryItemState.Redo) {
 					history.RemoveAt (i);
-					item.Dispose ();
 
 					//Remove from ListStore
 					ListStore.Remove (item.Id);
@@ -179,7 +178,6 @@ namespace Pinta.Core
 
 		public void Clear ()
 		{
-			history.ForEach (delegate (BaseHistoryItem item) { item.Dispose (); });
 			history.Clear ();
 			ListStore.Splice (0, ListStore.GetNItems (), Array.Empty<string> ());
 			Pointer = -1;

@@ -68,11 +68,10 @@ namespace Pinta.Core
 {
 	public static class CairoExtensions
 	{
-#if false // TODO-GTK4 - many of these may be obsolete
 		// Most of these functions return an affected area
 		// This can be ignored if you don't need it
 
-		#region context
+#if false // TODO-GTK4 - many of these may be obsolete
 		public static Rectangle DrawRectangle (this Context g, Rectangle r, Color color, int lineWidth)
 		{
 			// Put it on a pixel line
@@ -606,16 +605,18 @@ namespace Pinta.Core
 
 			return new Rectangle (te.X, te.Y, te.Width, te.Height);
 		}
+#endif
 
-		public static void DrawPixbuf (this Context g, Gdk.Pixbuf pixbuf, Point dest)
+		public static void DrawPixbuf (this Context g, GdkPixbuf.Pixbuf pixbuf, double pixbuf_x, double pixbuf_y)
 		{
 			g.Save ();
-
-			Gdk.CairoHelper.SetSourcePixbuf (g, pixbuf, dest.X, dest.Y);
+			// TODO-GTK4 - gir.core should generate a binding for this.
+			Gdk.Internal.Functions.CairoSetSourcePixbuf (g.Handle, pixbuf.Handle, pixbuf_x, pixbuf_y);
 			g.Paint ();
 			g.Restore ();
 		}
 
+#if false // TODO-GTK4
 		public static void DrawLinearGradient (this Context g, Surface oldsurface, GradientColorMode mode, Color c1, Color c2, PointD p1, PointD p2)
 		{
 			g.Save ();
@@ -686,7 +687,6 @@ namespace Pinta.Core
 		{
 			g.SetSourceRGBA (c.R, c.G, c.B, c.A);
 		}
-		#endregion
 
 		/// <summary>
 		/// Returns a new point, rounded to the nearest integer coordinates.
@@ -1967,6 +1967,14 @@ namespace Pinta.Core
 			var matrix = new Matrix (Cairo.Internal.MatrixManagedHandle.Create ());
 			matrix.Init (xx, xy, yx, yy, x0, y0);
 			return matrix;
+		}
+
+		// TODO-GTK4 - this needs to have a proper copy operator in gir.core, or access to the 6 float fields.
+		public static Matrix Clone (this Matrix m)
+		{
+			var result = CreateIdentityMatrix ();
+			result.Multiply (m);
+			return result;
 		}
 
 		public static void TransformPoint (this Matrix m, ref Core.PointD p)

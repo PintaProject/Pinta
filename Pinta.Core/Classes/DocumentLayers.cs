@@ -378,8 +378,6 @@ namespace Pinta.Core
 			DeleteCurrentLayer ();
 		}
 
-#if false // TODO-GTK4
-
 		/// <summary>
 		/// Moves the current layer down 1 position in the layer collection.
 		/// </summary>
@@ -421,9 +419,11 @@ namespace Pinta.Core
 		/// </summary>
 		public void SetCurrentUserLayer (int i)
 		{
+#if false // TODO-GTK4 - re-enable once tools are built
 			// Ensure that the current tool's modifications are finalized before
 			// switching layers.
 			PintaCore.Tools.CurrentTool?.DoCommit (document);
+#endif
 
 			CurrentUserLayerIndex = i;
 			SelectedLayerChanged?.Invoke (this, EventArgs.Empty);
@@ -437,7 +437,6 @@ namespace Pinta.Core
 		{
 			SetCurrentUserLayer (user_layers.IndexOf (layer));
 		}
-#endif
 
 		/// <summary>
 		/// Gets the user layer at the specified index.
