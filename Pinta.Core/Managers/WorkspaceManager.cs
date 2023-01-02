@@ -185,18 +185,17 @@ namespace Pinta.Core
 
 			return doc;
 		}
-#if false // TODO-GTK4
 
 		/// <summary>
 		/// Creates a new Document with a specified image as content.
 		/// Primarily used for Paste Into New Image.
 		/// </summary>
-		public Document NewDocumentFromImage (Gdk.Pixbuf image)
+		public Document NewDocumentFromImage (GdkPixbuf.Pixbuf image)
 		{
 			var doc = NewDocument (new Size (image.Width, image.Height), new Color (0, 0, 0, 0));
 
-			using (var g = new Context (doc.Layers[0].Surface))
-				g.DrawPixbuf (image, new Point (0, 0));
+			var g = new Context (doc.Layers[0].Surface);
+			g.DrawPixbuf (image, 0, 0);
 
 			// A normal document considers the "New Image" history to not be dirty, as it's just a
 			// blank background. We put an image there, so we should try to save if the user closes it.
@@ -204,7 +203,6 @@ namespace Pinta.Core
 
 			return doc;
 		}
-#endif
 
 		// TODO: Standardize add to recent files
 		public bool OpenFile (Gio.File file, Window? parent = null)
@@ -264,7 +262,6 @@ namespace Pinta.Core
 #endif
 		}
 
-#if false // TODO-GTK4
 		public void ResizeImage (int width, int height)
 		{
 			ActiveDocument.ResizeImage (width, height);
@@ -274,7 +271,6 @@ namespace Pinta.Core
 		{
 			ActiveDocument.ResizeCanvas (width, height, anchor, compoundAction);
 		}
-#endif
 
 		/// <summary>
 		/// Converts a point from the active document's window coordinates to canvas coordinates.
@@ -337,14 +333,12 @@ namespace Pinta.Core
 			// the active_document_index yet and it points to the closed document
 			if (HasOpenDocuments && active_document_index != -1 && OpenDocuments.Count > active_document_index)
 				PintaCore.Tools.Commit ();
+#endif
 
 			int index = OpenDocuments.IndexOf (document);
 			active_document_index = index;
 
 			OnActiveDocumentChanged (EventArgs.Empty);
-#else
-			throw new NotImplementedException ();
-#endif
 		}
 
 		#region Protected Methods
