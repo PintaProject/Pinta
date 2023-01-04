@@ -62,17 +62,22 @@ namespace Pinta.Actions
 				using_clipboard = false;
 			}
 
-			using var dialog = new NewImageDialog (imgWidth, imgHeight, bg_type, using_clipboard);
+			var dialog = new NewImageDialog (imgWidth, imgHeight, bg_type, using_clipboard);
 
-			int response = dialog.Run ();
+			dialog.OnResponse += (_, e) => {
+				int response = e.ResponseId;
+				if (response == (int) Gtk.ResponseType.Ok) {
+					PintaCore.Workspace.NewDocument (new Size (dialog.NewImageWidth, dialog.NewImageHeight), dialog.NewImageBackground);
 
-			if (response == (int) Gtk.ResponseType.Ok) {
-				PintaCore.Workspace.NewDocument (new Gdk.Size (dialog.NewImageWidth, dialog.NewImageHeight), dialog.NewImageBackground);
+					PintaCore.Settings.PutSetting ("new-image-width", dialog.NewImageWidth);
+					PintaCore.Settings.PutSetting ("new-image-height", dialog.NewImageHeight);
+					PintaCore.Settings.PutSetting ("new-image-bg", dialog.NewImageBackgroundType);
+				}
 
-				PintaCore.Settings.PutSetting ("new-image-width", dialog.NewImageWidth);
-				PintaCore.Settings.PutSetting ("new-image-height", dialog.NewImageHeight);
-				PintaCore.Settings.PutSetting ("new-image-bg", dialog.NewImageBackgroundType);
-			}
+				dialog.Destroy ();
+			};
+
+			dialog.Present ();
 		}
 
 		/// <summary>
@@ -87,6 +92,7 @@ namespace Pinta.Actions
 			bool clipboardUsed = false;
 			width = height = 0;
 
+#if false // TODO-GTK4 - need gir.core binding for gdk_display_get_default(), and other missing bindings for Gdk.Clipboard
 			Gtk.Clipboard cb = Gtk.Clipboard.Get (Gdk.Atom.Intern ("CLIPBOARD", false));
 			if (cb.WaitIsImageAvailable ()) {
 				Gdk.Pixbuf image = cb.WaitForImage ();
@@ -99,6 +105,7 @@ namespace Pinta.Actions
 			}
 
 			cb.Dispose ();
+#endif
 
 			return clipboardUsed;
 		}

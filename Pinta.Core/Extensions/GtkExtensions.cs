@@ -275,5 +275,15 @@ namespace Pinta.Core
 			return Accelerator.GetLabel (key, mods);
 		}
 #endif
+
+		/// <summary>
+		/// Set all four margins of the widget to the same value.
+		/// </summary>
+		/// <param name="w"></param>
+		/// <param name="margin"></param>
+		public static void SetAllMargins (this Widget w, int margin)
+		{
+			w.MarginTop = w.MarginBottom = w.MarginStart = w.MarginEnd = margin;
+		}
 	}
 }

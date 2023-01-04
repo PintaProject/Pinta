@@ -37,9 +37,9 @@ namespace Pinta
 
 		public ActionHandlers ()
 		{
-#if false // TODO-GTK4
 			// File
 			action_handlers.Add (new NewDocumentAction ());
+#if false // TODO-GTK4
 			action_handlers.Add (new NewScreenshotAction ());
 			action_handlers.Add (new OpenDocumentAction ());
 			action_handlers.Add (new SaveDocumentAction ());

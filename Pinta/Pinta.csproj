@@ -30,8 +30,10 @@
   <ItemGroup>
     <Compile Remove="**/*.cs" />
     <Compile Include="Actions/IActionHandler.cs" />
+    <Compile Include="Actions/File/NewDocumentAction.cs" />
     <Compile Include="Actions/Help/AboutDialogAction.cs" />
     <Compile Include="DialogHandlers.cs" />
+    <Compile Include="Dialogs/NewImageDialog.cs" />
     <Compile Include="DocumentViewContent.cs" />
     <Compile Include="Main.cs" />
     <Compile Include="MainWindow.cs" />

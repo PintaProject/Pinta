@@ -128,6 +128,8 @@ namespace Pinta.Resources
 		public const string ImageRotate90CCW = "image-rotate-90ccw-symbolic";
 		public const string ImageRotate180 = "image-rotate-180-symbolic";
 		public const string ImageFlatten = "image-flatten";
+		public const string OrientationPortrait = "image-orientation-portrait-symbolic";
+		public const string OrientationLandscape = "image-orientation-landscape-symbolic";
 
 		public const string LayerDelete = "layers-remove-layer-symbolic";
 		public const string LayerDuplicate = "layers-duplicate-layer-symbolic";

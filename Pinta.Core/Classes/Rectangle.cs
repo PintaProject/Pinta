@@ -84,7 +84,7 @@ namespace Pinta.Core
 		{
 		}
 
-		public static RectangleI Zero;
+		public static readonly RectangleI Zero;
 
 		public static RectangleI FromLTRB (int left, int top, int right, int bottom)
 			=> new RectangleI (left, top, right - left + 1, bottom - top + 1);

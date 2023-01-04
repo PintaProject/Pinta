@@ -37,7 +37,7 @@ namespace Pinta.Core
 			this.Y = y;
 		}
 
-		public static PointI Zero;
+		public static readonly PointI Zero;
 
 		public int X;
 		public int Y;
@@ -79,6 +79,8 @@ namespace Pinta.Core
 
 		public int Width;
 		public int Height;
+
+		public static readonly Size Empty;
 
 		public override string ToString () => $"{Width}, {Height}";
 	}
