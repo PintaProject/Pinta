@@ -296,11 +296,7 @@ namespace Pinta
 			background_label.MarginBottom = 4;
 
 			white_bg_radio = CheckButton.NewWithLabel (Translations.GetString ("White"));
-#if false // TODO-GTK4 - requires gdk_pixbuf_get_from_surface() from next release of gir.core
-			var image_white = new Image (GdkExtensions.CreateColorSwatch (16, new Gdk.Color (255, 255, 255)));
-#else
-			var image_white = new Image ();
-#endif
+			var image_white = Image.NewFromPixbuf (CairoExtensions.CreateColorSwatch (16, new Cairo.Color (1, 1, 1)).ToPixbuf ());
 
 			var hbox_white = Box.New (Orientation.Horizontal, 0);
 			image_white.MarginEnd = 7;
@@ -310,11 +306,7 @@ namespace Pinta
 
 			secondary_bg_radio = CheckButton.NewWithLabel (Translations.GetString ("Background Color"));
 			secondary_bg_radio.SetGroup (white_bg_radio);
-#if false // TODO-GTK4
-			var image_bg = new Image (GdkExtensions.CreateColorSwatch (16, PintaCore.Palette.SecondaryColor.ToGdkColor ()));
-#else
-			var image_bg = new Image ();
-#endif
+			var image_bg = Image.NewFromPixbuf (CairoExtensions.CreateColorSwatch (16, PintaCore.Palette.SecondaryColor).ToPixbuf ());
 
 			var hbox_bg = Box.New (Orientation.Horizontal, 0);
 			image_bg.MarginEnd = 7;
@@ -324,11 +316,7 @@ namespace Pinta
 
 			trans_bg_radio = CheckButton.NewWithLabel (Translations.GetString ("Transparent"));
 			trans_bg_radio.SetGroup (secondary_bg_radio);
-#if false // TODO-GTK4
-			var image_trans = new Image (GdkExtensions.CreateTransparentColorSwatch (true));
-#else
-			var image_trans = new Image ();
-#endif
+			var image_trans = Image.NewFromPixbuf (CairoExtensions.CreateTransparentColorSwatch (16, true).ToPixbuf ());
 			image_trans.MarginEnd = 7;
 
 			var hbox_trans = Box.New (Orientation.Horizontal, 0);

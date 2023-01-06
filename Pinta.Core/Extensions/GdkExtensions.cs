@@ -26,6 +26,7 @@
 
 using System;
 using Gdk;
+using GdkPixbuf;
 
 namespace Pinta.Core
 {
@@ -182,29 +183,9 @@ namespace Pinta.Core
 		{
 			return new Cairo.Color (color.Red, color.Green, color.Blue, color.Alpha);
 		}
+#endif
 
-		public static Pixbuf CreateColorSwatch (int size, Color color)
-		{
-			using (var surf = CairoExtensions.CreateImageSurface (Cairo.Format.Argb32, size, size))
-			using (var g = new Cairo.Context (surf)) {
-				g.FillRectangle (new Cairo.Rectangle (0, 0, size, size), color.ToCairoColor ());
-				g.DrawRectangle (new Cairo.Rectangle (0, 0, size, size), new Cairo.Color (0, 0, 0), 1);
-				return surf.ToPixbuf ();
-			}
-		}
-
-		public static Pixbuf CreateTransparentColorSwatch (bool drawBorder)
-		{
-			var size = 16;
-
-			using (var surface = CairoExtensions.CreateTransparentBackgroundSurface (size))
-			using (var g = new Cairo.Context (surface)) {
-				if (drawBorder)
-					g.DrawRectangle (new Cairo.Rectangle (0, 0, size, size), new Cairo.Color (0, 0, 0), 1);
-
-				return surface.ToPixbuf ();
-			}
-		}
+#if false // TODO-GTK4
 		/// <summary>
 		/// Create a cursor icon with a shape that visually represents the tool's thickness.
 		/// </summary>

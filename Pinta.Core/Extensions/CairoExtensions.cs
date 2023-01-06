@@ -759,11 +759,12 @@ namespace Pinta.Core
 			return ContainsPoint (r, point.X, point.Y);
 		}
 
-		public static Gdk.Pixbuf ToPixbuf (this Cairo.ImageSurface surfSource)
-		{
-			return new Gdk.Pixbuf (surfSource, 0, 0, surfSource.Width, surfSource.Height);
-		}
 #endif
+
+		public static GdkPixbuf.Pixbuf ToPixbuf (this Cairo.ImageSurface surfSource)
+		{
+			return Gdk.Functions.PixbufGetFromSurface (surfSource, 0, 0, surfSource.Width, surfSource.Height)!;
+		}
 
 		public static ColorBgra ToColorBgra (this Cairo.Color color)
 		{
@@ -1938,7 +1939,7 @@ namespace Pinta.Core
 		/// </summary>
 		public static ReadOnlySpan<ColorBgra> GetReadOnlyPixelData (this ImageSurface surface)
 		{
-			return surface.GetPixelData();
+			return surface.GetPixelData ();
 		}
 
 		/// <summary>
@@ -1946,7 +1947,7 @@ namespace Pinta.Core
 		/// </summary>
 		public static Span<ColorBgra> GetPixelData (this ImageSurface surface)
 		{
-			return MemoryMarshal.Cast<byte, ColorBgra>(surface.GetData());
+			return MemoryMarshal.Cast<byte, ColorBgra> (surface.GetData ());
 		}
 
 		public static void SetSourceColor (this Context context, Color color)
@@ -1999,6 +2000,25 @@ namespace Pinta.Core
 
 			rect = new RectangleD (x1, y1, x2 - x1, y2 - y1).ToInt ();
 			return clip_exists;
+		}
+
+		public static ImageSurface CreateColorSwatch (int size, Color color)
+		{
+			var surf = CreateImageSurface (Cairo.Format.Argb32, size, size);
+			var g = new Cairo.Context (surf);
+			g.FillRectangle (new RectangleD (0, 0, size, size), color);
+			g.DrawRectangle (new RectangleD (0, 0, size, size), new Color (0, 0, 0), 1);
+			return surf;
+		}
+
+		public static ImageSurface CreateTransparentColorSwatch (int size, bool drawBorder)
+		{
+			var surface = CairoExtensions.CreateTransparentBackgroundSurface (size);
+			var g = new Cairo.Context (surface);
+			if (drawBorder)
+				g.DrawRectangle (new RectangleD (0, 0, size, size), new Color (0, 0, 0), 1);
+
+			return surface;
 		}
 	}
 }
