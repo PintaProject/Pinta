@@ -52,7 +52,8 @@ namespace Pinta.Core
 		public string FullName { get { return string.Format ("app.{0}", Name); } }
 		public bool IsImportant { get; set; } = false;
 
-		public bool Sensitive { get { return Action.Enabled; } set { Action.Enabled = value; } }
+		// TODO-GTK4 - the Enabled properly should be get/set. This was a regression in gir.core 0.2
+		public bool Sensitive { get { return Action.Enabled; } set { Action.SetEnabled(value); } }
 
 		public Command (string name, string label, string? tooltip, string? icon_name, GLib.Variant? state = null)
 		{

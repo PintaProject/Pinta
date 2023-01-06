@@ -285,5 +285,10 @@ namespace Pinta.Core
 		{
 			w.MarginTop = w.MarginBottom = w.MarginStart = w.MarginEnd = margin;
 		}
+
+		/// <summary>
+		/// Helper function to return the icon theme for the default display.
+		/// </summary>
+		public static Gtk.IconTheme GetDefaultIconTheme() => Gtk.IconTheme.GetForDisplay (Gdk.Display.GetDefault ()!);
 	}
 }

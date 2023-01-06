@@ -48,19 +48,18 @@ namespace Pinta.Actions
 
 		private void Activated (object sender, EventArgs e)
 		{
-			// TODO-GTK4 use Adw.AboutWindow after upgrading to the next gir.core release (isn't wrapped in the current version).
-			var dialog = Gtk.AboutDialog.New ();
+			var dialog = Adw.AboutWindow.New ();
 			dialog.TransientFor = PintaCore.Chrome.MainWindow;
 			dialog.Title = Translations.GetString ("About Pinta");
 			dialog.IconName = Pinta.Resources.Icons.AboutPinta;
-			dialog.ProgramName = Translations.GetString ("Pinta");
-			dialog.LogoIconName = Pinta.Resources.Icons.Pinta;
+			dialog.ApplicationName = Translations.GetString ("Pinta");
+			dialog.ApplicationIcon = Pinta.Resources.Icons.Pinta;
 			dialog.Version = PintaCore.ApplicationVersion;
 			dialog.Website = "https://www.pinta-project.com";
 			dialog.Comments = Translations.GetString ("Easily create and edit images");
 			dialog.Copyright = BuildCopyrightText ();
 			dialog.License = BuildLicenseText ();
-			dialog.Authors = authors;
+			dialog.Developers = authors;
 			dialog.TranslatorCredits = Translations.GetString ("translator-credits");
 
 			dialog.Present ();

@@ -56,11 +56,7 @@ namespace Pinta
 			// This needs to match the name of the .desktop file in order to
 			// show the correct application icon under some environments (e.g.
 			// KDE Wayland). See bug 1967687.
-#if false // TODO-GTK4 - properly expose in gir.core?
-			GLib.Global.ProgramName = "pinta";
-#else
-			GLib.Internal.Functions.SetPrgname ("pinta");
-#endif
+			GLib.Functions.SetPrgname ("pinta");
 		}
 
 		public void Activate ()
@@ -93,8 +89,10 @@ namespace Pinta
 				unsupportedFormDialog.Run ();
 			}
 			);
+#endif
 
 			PintaCore.Initialize ();
+#if false // TODO-GTK4
 
 			// Initialize extensions
 			// TODO-GTK3 (addins)
@@ -132,20 +130,17 @@ namespace Pinta
 			// TODO: These need to be [re]moved when we redo zoom support
 			PintaCore.Actions.View.ZoomToWindow.Activated += ZoomToWindow_Activated;
 			PintaCore.Actions.View.ZoomToSelection.Activated += ZoomToSelection_Activated;
+#endif
 			PintaCore.Workspace.ActiveDocumentChanged += ActiveDocumentChanged;
 
-#endif
 			PintaCore.Workspace.DocumentCreated += Workspace_DocumentCreated;
-#if false // TODO-GTK4
 			PintaCore.Workspace.DocumentClosed += Workspace_DocumentClosed;
 
 			var notebook = canvas_pad.Notebook;
 			notebook.TabClosed += DockNotebook_TabClosed;
 			notebook.ActiveTabChanged += DockNotebook_ActiveTabChanged;
-#endif
 		}
 
-#if false // TODO-GTK4
 		private void Workspace_DocumentClosed (object? sender, DocumentEventArgs e)
 		{
 			var tab = FindTabWithCanvas ((PintaCanvas) e.Document.Workspace.Canvas);
@@ -178,10 +173,10 @@ namespace Pinta
 			var view = (DocumentViewContent) item;
 
 			PintaCore.Workspace.SetActiveDocument (view.Document);
-
+#if false // TODO-GTK4
 			((CanvasWindow) view.Widget).Canvas.Window.Cursor = PintaCore.Tools.CurrentTool?.CurrentCursor;
-		}
 #endif
+		}
 
 		private void Workspace_DocumentCreated (object? sender, DocumentEventArgs e)
 		{
@@ -303,7 +298,7 @@ namespace Pinta
 #endif
 #endif
 
-		#region GUI Construction
+#region GUI Construction
 		private void CreateWindow ()
 		{
 			// Check for stored window settings
@@ -329,7 +324,7 @@ namespace Pinta
 			PintaCore.Chrome.InitializeApplication (app);
 			PintaCore.Chrome.InitializeWindowShell (window_shell.Window);
 		}
-		#endregion
+#endregion
 
 		private void CreateMainMenu (WindowShell shell)
 		{
@@ -628,14 +623,18 @@ namespace Pinta
 
 			PintaCore.Actions.View.ZoomToWindowActivated = true;
 		}
+		#endregion
+
+#endif
 
 		private void ActiveDocumentChanged (object? sender, EventArgs e)
 		{
 			if (PintaCore.Workspace.HasOpenDocuments) {
+#if false // TODO-GTK4 - update once view menu is enabled
 				PintaCore.Actions.View.SuspendZoomUpdate ();
 				PintaCore.Actions.View.ZoomComboBox.ComboBox.Entry.Text = ViewActions.ToPercent (PintaCore.Workspace.Scale);
 				PintaCore.Actions.View.ResumeZoomUpdate ();
-
+#endif
 				var doc = PintaCore.Workspace.ActiveDocument;
 				var tab = FindTabWithCanvas ((PintaCanvas) doc.Workspace.Canvas);
 
@@ -653,7 +652,5 @@ namespace Pinta
 				.Where (i => ((CanvasWindow) i.Widget).Canvas == canvas)
 				.FirstOrDefault ();
 		}
-		#endregion
-#endif
 	}
 }

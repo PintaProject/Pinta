@@ -103,9 +103,8 @@ namespace Pinta.Core
 
 		private void OpenUrl (string url)
 		{
-#if false // TODO-GTK4 - gtk_show_uri not wrapped by gir.core
-			Gtk.Global.ShowUriOnWindow (PintaCore.Chrome.MainWindow, url, Gtk.Global.CurrentEventTime);
-#endif
+			// TODO-GTK4 - this produces an "unsupported on current backend" error on macOS
+			Gtk.Functions.ShowUri(PintaCore.Chrome.MainWindow, url, /* GDK_CURRENT_TIME */ 0);
 		}
 		#endregion
 	}

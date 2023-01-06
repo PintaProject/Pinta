@@ -90,15 +90,11 @@ namespace Pinta
 			// For testing a dark variant of the theme.
 			//Gtk.Settings.Default.SetProperty("gtk-application-prefer-dark-theme", new GLib.Value(true));
 
-#if false // TODO-GTK4 - Gtk.IconTheme.GetForDisplay isn't wrapped yet.
-			// Add our icons to the search path.
-			Gtk.IconTheme.Default.AppendSearchPath (Pinta.Core.SystemManager.GetDataRootDirectory () + "/icons");
-#endif
-
-#if true // TODO-GTK4 - this shouldn't be necessary with next gir.core release
-			Adw.Module.Initialize ();
-#endif
 			var app = Adw.Application.New ("com.github.PintaProject.Pinta", Gio.ApplicationFlags.NonUnique);
+
+			// Add our icons to the search path.
+			GtkExtensions.GetDefaultIconTheme().AddSearchPath (Pinta.Core.SystemManager.GetDataRootDirectory () + "/icons");
+
 			var main_window = new MainWindow (app);
 
 			if (threads != -1)
@@ -134,11 +130,9 @@ namespace Pinta
 			}
 
 			if (extra.Count > 0) {
-#if false // TODO-GTK4 - need gir.core binding for NewFromCommandLineArg
 				foreach (var file in extra) {
-					PintaCore.Workspace.OpenFile (Core.GtkExtensions.FileNewForCommandlineArg (file));
+					PintaCore.Workspace.OpenFile (Gio.FileHelper.NewForCommandlineArg (file));
 				}
-#endif
 			} else {
 				// Create a blank document
 				PintaCore.Workspace.NewDocument (new Core.Size (800, 600), new Cairo.Color (1, 1, 1));

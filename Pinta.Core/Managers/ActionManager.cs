@@ -123,16 +123,18 @@ namespace Pinta.Core
 				cursor.Text = string.Format ("  {0}, {1}", pt.X, pt.Y);
 			};
 		}
+#endif
 
 		public void RegisterHandlers ()
 		{
 			File.RegisterHandlers ();
+#if false // TODO-GTK4
 			Edit.RegisterHandlers ();
 			Image.RegisterHandlers ();
 			Layers.RegisterHandlers ();
 			View.RegisterHandlers ();
+#endif
 			Help.RegisterHandlers ();
 		}
-#endif
 	}
 }

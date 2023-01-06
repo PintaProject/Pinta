@@ -99,9 +99,7 @@ namespace Pinta.Core
 
 		public static void Initialize ()
 		{
-#if false // TODO-GTK4
 			Actions.RegisterHandlers ();
-#endif
 		}
 	}
 }

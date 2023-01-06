@@ -623,8 +623,7 @@ namespace Pinta.Core
 		public static void DrawPixbuf (this Context g, GdkPixbuf.Pixbuf pixbuf, double pixbuf_x, double pixbuf_y)
 		{
 			g.Save ();
-			// TODO-GTK4 - gir.core should generate a binding for this.
-			Gdk.Internal.Functions.CairoSetSourcePixbuf (g.Handle, pixbuf.Handle, pixbuf_x, pixbuf_y);
+			Gdk.Functions.CairoSetSourcePixbuf (g, pixbuf, pixbuf_x, pixbuf_y);
 			g.Paint ();
 			g.Restore ();
 		}
@@ -1934,26 +1933,20 @@ namespace Pinta.Core
 			context.SetDash (dashes, offset);
 		}
 
+		/// <summary>
+		/// Access the image surface's data as a read-only span of ColorBgra pixels.
+		/// </summary>
 		public static ReadOnlySpan<ColorBgra> GetReadOnlyPixelData (this ImageSurface surface)
 		{
-#if false // TODO-GTK4 requires next release of gir.core
-			unsafe {
-				return new ReadOnlySpan<ColorBgra> (surface.DataPtr.ToPointer (), surface.Width * surface.Height);
-			}
-#else
-			throw new NotImplementedException ();
-#endif
+			return surface.GetPixelData();
 		}
 
+		/// <summary>
+		/// Access the image surface's data as a span of ColorBgra pixels.
+		/// </summary>
 		public static Span<ColorBgra> GetPixelData (this ImageSurface surface)
 		{
-#if false // TODO-GTK4 requires next release of gir.core
-			unsafe {
-				return new Span<ColorBgra> (surface.DataPtr.ToPointer (), surface.Width * surface.Height);
-			}
-#else
-			throw new NotImplementedException ();
-#endif
+			return MemoryMarshal.Cast<byte, ColorBgra>(surface.GetData());
 		}
 
 		public static void SetSourceColor (this Context context, Color color)
