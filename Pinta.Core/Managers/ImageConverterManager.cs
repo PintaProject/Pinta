@@ -39,7 +39,7 @@ namespace Pinta.Core
 		public ImageConverterManager ()
 		{
 			formats = new List<FormatDescriptor> ();
-
+#if false // TODO-GTK4
 			// Create all the formats supported by Gdk
 			foreach (var format in Pixbuf.Formats) {
 				string formatName = format.Name.ToLowerInvariant ();
@@ -76,6 +76,7 @@ namespace Pinta.Core
 			// Create all the formats we have our own importers/exporters for
 			OraFormat oraHandler = new OraFormat ();
 			RegisterFormat (new FormatDescriptor ("OpenRaster", new string[] { "ora", "ORA" }, new string[] { "image/openraster" }, oraHandler, oraHandler));
+#endif
 		}
 
 		public IEnumerable<FormatDescriptor> Formats { get { return formats; } }

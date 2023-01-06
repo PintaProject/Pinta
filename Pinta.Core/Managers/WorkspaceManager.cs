@@ -207,7 +207,6 @@ namespace Pinta.Core
 		// TODO: Standardize add to recent files
 		public bool OpenFile (Gio.File file, Window? parent = null)
 		{
-#if false // TODO-GTK4
 			bool fileOpened = false;
 
 			if (parent == null)
@@ -229,7 +228,7 @@ namespace Pinta.Core
 							break;
 						} catch (UnauthorizedAccessException) {
 							// If the file can't be accessed, don't retry for every format.
-							ShowFilePermissionErrorDialog (parent, file.ParsedName);
+							ShowFilePermissionErrorDialog (parent, file.GetParseName ());
 							return false;
 						} catch (Exception e) {
 							// Record errors in case none of the formats work.
@@ -240,7 +239,7 @@ namespace Pinta.Core
 					}
 
 					if (!loaded) {
-						ShowUnsupportedFormatDialog (parent, file.ParsedName,
+						ShowUnsupportedFormatDialog (parent, file.GetParseName (),
 							Translations.GetString ("Unsupported file format"), errors.ToString ());
 						return false;
 					}
@@ -251,15 +250,12 @@ namespace Pinta.Core
 
 				fileOpened = true;
 			} catch (UnauthorizedAccessException) {
-				ShowFilePermissionErrorDialog (parent, file.ParsedName);
+				ShowFilePermissionErrorDialog (parent, file.GetParseName ());
 			} catch (Exception e) {
-				ShowOpenFileErrorDialog (parent, file.ParsedName, e.Message, e.ToString ());
+				ShowOpenFileErrorDialog (parent, file.GetParseName (), e.Message, e.ToString ());
 			}
 
 			return fileOpened;
-#else
-			throw new NotImplementedException ();
-#endif
 		}
 
 		public void ResizeImage (int width, int height)
@@ -381,35 +377,38 @@ namespace Pinta.Core
 		}
 		#endregion
 
-#if false // TODO-GTK4
 
 		private void ShowOpenFileErrorDialog (Window parent, string filename, string primaryText, string details)
 		{
+#if false // TODO-GTK4
+
 			string markup = "<span weight=\"bold\" size=\"larger\">{0}</span>\n\n{1}";
 			string secondaryText = string.Format (Translations.GetString ("Could not open file: {0}"), filename);
 			string message = string.Format (markup, primaryText, secondaryText);
 			PintaCore.Chrome.ShowErrorDialog (parent, message, details);
+#else
+			throw new NotImplementedException ();
+#endif
 		}
 
-		private void ShowUnsupportedFormatDialog (Window parent, string filename, string primaryText, string details)
+		private void ShowUnsupportedFormatDialog (Window parent, string filename, string message, string errors)
 		{
-			string markup = "<span weight=\"bold\" size=\"larger\">{0}</span>\n\n{1}";
+			var details = new StringBuilder ();
+			details.AppendLine (Translations.GetString ("Could not open file: {0}", filename));
+			details.AppendLine (Translations.GetString ("Pinta supports the following file formats:"));
 
-			string secondaryText = Translations.GetString ("Could not open file: {0}", filename);
-			secondaryText += string.Format ("\n\n{0}\n", Translations.GetString ("Pinta supports the following file formats:"));
 			var extensions = from format in PintaCore.ImageFormats.Formats
 					 where format.Importer != null
 					 from extension in format.Extensions
 					 where char.IsLower (extension.FirstOrDefault ())
 					 orderby extension
 					 select extension;
+			details.AppendJoin (", ", extensions);
+			details.AppendLine ();
+			details.AppendLine (errors);
 
-			secondaryText += String.Join (", ", extensions);
-
-			string message = string.Format (markup, primaryText, secondaryText);
-			PintaCore.Chrome.ShowUnsupportedFormatDialog (parent, message, details);
+			PintaCore.Chrome.ShowMessageDialog (parent, message, details.ToString ());
 		}
-#endif
 
 		private static void ShowFilePermissionErrorDialog (Window parent, string filename)
 		{

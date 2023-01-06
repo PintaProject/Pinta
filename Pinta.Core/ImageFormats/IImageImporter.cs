@@ -39,7 +39,7 @@ namespace Pinta.Core
 		/// <param name='parent'>
 		/// Window to be used as a parent for any dialogs that are shown.
 		/// </param>
-		void Import (GLib.IFile file, Gtk.Window parent);
+		void Import (Gio.File file, Gtk.Window parent);
 
 		/// <summary>
 		/// Returns a thumbnail of an image.
@@ -56,7 +56,6 @@ namespace Pinta.Core
 		/// Window to be used as a parent for any dialogs that are shown.
 		/// </param>
 		/// <returns>The thumbnail, or null if the image could not be loaded.</returns>
-		Gdk.Pixbuf? LoadThumbnail (string filename, int maxWidth, int maxHeight,
-					  Gtk.Window parent);
+		GdkPixbuf.Pixbuf? LoadThumbnail (string filename, int maxWidth, int maxHeight, Gtk.Window parent);
 	}
 }

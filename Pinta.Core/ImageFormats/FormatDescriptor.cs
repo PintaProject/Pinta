@@ -85,7 +85,7 @@ namespace Pinta.Core
 			this.Importer = importer;
 			this.Exporter = exporter;
 
-			FileFilter ff = new FileFilter ();
+			FileFilter ff = FileFilter.New ();
 			StringBuilder formatNames = new StringBuilder ();
 
 			foreach (string ext in extensions) {

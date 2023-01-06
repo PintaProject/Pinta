@@ -39,11 +39,11 @@ namespace Pinta
 		{
 			// File
 			action_handlers.Add (new NewDocumentAction ());
+			action_handlers.Add (new OpenDocumentAction ());
 			action_handlers.Add (new CloseDocumentAction ());
 			action_handlers.Add (new ExitProgramAction ());
 #if false // TODO-GTK4
 			action_handlers.Add (new NewScreenshotAction ());
-			action_handlers.Add (new OpenDocumentAction ());
 			action_handlers.Add (new SaveDocumentAction ());
 			action_handlers.Add (new SaveDocumentAsAction ());
 			action_handlers.Add (new PrintDocumentAction ());

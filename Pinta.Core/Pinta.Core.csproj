@@ -54,8 +54,12 @@
     <Compile Include="Extensions/GtkExtensions.cs" />
     <Compile Include="HistoryItems/*.cs" />
     <Compile Remove="HistoryItems/TextHistoryItem.cs" />
+    <Compile Include="ImageFormats/FormatDescriptor.cs" />
+    <Compile Include="ImageFormats/IImageImporter.cs" />
+    <Compile Include="ImageFormats/IImageExporter.cs" />
     <Compile Include="Managers/ActionManager.cs" />
     <Compile Include="Managers/ChromeManager.cs" />
+    <Compile Include="Managers/ImageConverterManager.cs" />
     <Compile Include="Managers/LayerManager.cs" />
     <Compile Include="Managers/PaletteManager.cs" />
     <Compile Include="Managers/PaletteFormatManager.cs" />

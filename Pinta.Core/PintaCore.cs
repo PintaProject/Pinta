@@ -40,6 +40,7 @@ namespace Pinta.Core
 		public static PaletteManager Palette { get; private set; }
 		public static PaletteFormatManager PaletteFormats { get; private set; }
 		public static LayerManager Layers { get; private set; }
+		public static ImageConverterManager ImageFormats { get; private set; }
 
 #if false // TODO-GTK4
 		public static PaintBrushManager PaintBrushes { get; private set; }
@@ -48,7 +49,6 @@ namespace Pinta.Core
 		public static RecentFileManager RecentFiles { get; private set; }
 		public static LivePreviewManager LivePreview { get; private set; }
 		public static EffectsManager Effects { get; private set; }
-		public static ImageConverterManager ImageFormats { get; private set; }
 		public static IServiceManager Services { get; }
 #endif
 
@@ -61,6 +61,7 @@ namespace Pinta.Core
 			Actions = new ActionManager ();
 			Workspace = new WorkspaceManager ();
 			Layers = new LayerManager ();
+			ImageFormats = new ImageConverterManager ();
 			PaletteFormats = new PaletteFormatManager ();
 			Palette = new PaletteManager ();
 			Chrome = new ChromeManager ();
@@ -72,7 +73,6 @@ namespace Pinta.Core
 
 			PaintBrushes = new PaintBrushManager ();
 			Tools = new ToolManager ();
-			ImageFormats = new ImageConverterManager ();
 			RecentFiles = new RecentFileManager ();
 			LivePreview = new LivePreviewManager ();
 			Effects = new EffectsManager ();

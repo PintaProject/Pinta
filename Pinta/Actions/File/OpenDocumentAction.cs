@@ -25,6 +25,7 @@
 // THE SOFTWARE.
 
 using System;
+using System.Linq;
 using Gtk;
 using Pinta.Core;
 
@@ -46,67 +47,73 @@ namespace Pinta.Actions
 
 		private void Activated (object sender, EventArgs e)
 		{
-			using var fcd = new FileChooserNative (
+			var fcd = FileChooserNative.New (
 				Translations.GetString ("Open Image File"),
 				PintaCore.Chrome.MainWindow,
 				FileChooserAction.Open,
 				Translations.GetString ("Open"),
 				Translations.GetString ("Cancel"));
+			fcd.Modal = true;
+
 
 			// Add image files filter
-			var ff = new FileFilter {
-				Name = Translations.GetString ("Image files")
-			};
+			var ff = FileFilter.New ();
+			ff.Name = Translations.GetString ("Image files");
 
 			foreach (var format in PintaCore.ImageFormats.Formats) {
 				if (!format.IsWriteOnly ()) {
 					foreach (var ext in format.Extensions)
 						ff.AddPattern (string.Format ("*.{0}", ext));
-				}
-			}
 
-			// On Unix-like systems, file extensions are often considered optional.
-			// Files can often also be identified by their MIME types.
-			// Windows does not understand MIME types natively.
-			// Adding a MIME filter on Windows would break the native file picker and force a GTK file picker instead.
-			if (SystemManager.GetOperatingSystem () != OS.Windows) {
-				foreach (var format in PintaCore.ImageFormats.Formats) {
+					// On Unix-like systems, file extensions are often considered optional.
+					// Files can often also be identified by their MIME types.
+					// Windows does not understand MIME types natively.
+					// Adding a MIME filter on Windows would break the native file picker and force a GTK file picker instead.
 					foreach (var mime in format.Mimes) {
 						ff.AddMimeType (mime);
 					}
 				}
 			}
 
-			fcd.AddFilter (ff);
+			// TODO-GTK4 - remove this once all image formats are supported.
+			// The macOS native file dialog errors out if the filter is empty
+			if (PintaCore.ImageFormats.Formats.Any (f => !f.IsWriteOnly ()))
+				fcd.AddFilter (ff);
 
-			var ff2 = new FileFilter {
-				Name = Translations.GetString ("All files")
-			};
+			var ff2 = FileFilter.New ();
+			ff2.Name = Translations.GetString ("All files");
 			ff2.AddPattern ("*");
 			fcd.AddFilter (ff2);
 
-			if (PintaCore.RecentFiles.GetDialogDirectory () is GLib.IFile dir && dir.Exists)
+#if false // TODO-GTK4 missing gir.core binding
+			if (PintaCore.RecentFiles.GetDialogDirectory () is Gio.File dir && dir.Exists)
 				fcd.SetCurrentFolderFile (dir);
-
+#endif
 			fcd.SelectMultiple = true;
-			fcd.LocalOnly = false;
 
-			var response = (ResponseType) fcd.Run ();
+			fcd.OnResponse += (_, e) => {
+				if (e.ResponseId == (int) Gtk.ResponseType.Accept) {
+#if false // TODO-GTK4 support recent files and opening multiple files
 
-			if (response == ResponseType.Accept) {
-				PintaCore.RecentFiles.LastDialogDirectory = fcd.CurrentFolderFile;
+					PintaCore.RecentFiles.LastDialogDirectory = fcd.CurrentFolderFile;
 
-				foreach (var file in fcd.Files) {
-					if (PintaCore.Workspace.OpenFile (file)) {
-						RecentManager.Default.AddFull (file.GetUriAsString (), PintaCore.RecentFiles.RecentData);
+					foreach (var file in fcd.GetFiles()) {
+						if (PintaCore.Workspace.OpenFile (file)) {
+							RecentManager.Default.AddFull (file.GetUriAsString (), PintaCore.RecentFiles.RecentData);
 
-						var directory = file.Parent;
-						if (directory is not null) {
-							PintaCore.RecentFiles.LastDialogDirectory = directory;
-						}
+							var directory = file.Parent;
+							if (directory is not null) {
+								PintaCore.RecentFiles.LastDialogDirectory = directory;
+							}
 					}
+#else
+					PintaCore.Workspace.OpenFile (fcd.GetFile ()!);
+#endif
+
 				}
-			}
+			};
+
+			fcd.Show ();
 		}
 	}
 }

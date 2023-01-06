@@ -43,7 +43,7 @@ namespace Pinta.Core
 			var info = file.QueryInfo ("standard::display-name", GLib.FileQueryInfoFlags.None, cancellable: null);
 			return info.DisplayName;
 #else
-			throw new NotImplementedException ();
+			return file.GetBasename ()!;
 #endif
 		}
 
