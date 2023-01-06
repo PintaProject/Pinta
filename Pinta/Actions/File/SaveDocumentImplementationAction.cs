@@ -108,7 +108,7 @@ namespace Pinta.Actions
 			if (document.HasFile)
 				format_desc = PintaCore.ImageFormats.GetFormatByFile (document.DisplayName);
 
-			if (format_desc == null)
+			if (format_desc == null || format_desc.IsReadOnly())
 				format_desc = PintaCore.ImageFormats.GetDefaultSaveFormat ();
 
 			fcd.Filter = format_desc.Filter;
