@@ -298,7 +298,7 @@ namespace Pinta
 #endif
 #endif
 
-#region GUI Construction
+		#region GUI Construction
 		private void CreateWindow ()
 		{
 			// Check for stored window settings
@@ -324,7 +324,7 @@ namespace Pinta
 			PintaCore.Chrome.InitializeApplication (app);
 			PintaCore.Chrome.InitializeWindowShell (window_shell.Window);
 		}
-#endregion
+		#endregion
 
 		private void CreateMainMenu (WindowShell shell)
 		{

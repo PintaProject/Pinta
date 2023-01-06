@@ -148,11 +148,11 @@ namespace Pinta.Docking
 			// TODO-GTK4 - try using the thumbnail feature in Adw.TabPage
 		}
 
-		public void RemoveTab(IDockNotebookItem item)
+		public void RemoveTab (IDockNotebookItem item)
 		{
-			var page = tab_view.GetPage(item.Widget);
-			tab_view.ClosePage(page);
-			items.Remove(item);
+			var page = tab_view.GetPage (item.Widget);
+			tab_view.ClosePage (page);
+			items.Remove (item);
 		}
 
 		private IDockNotebookItem? FindItemForPage (Adw.TabPage? page) => items.Where (i => i.Widget == page?.Child).FirstOrDefault ();

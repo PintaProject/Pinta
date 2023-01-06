@@ -93,7 +93,7 @@ namespace Pinta
 			var app = Adw.Application.New ("com.github.PintaProject.Pinta", Gio.ApplicationFlags.NonUnique);
 
 			// Add our icons to the search path.
-			GtkExtensions.GetDefaultIconTheme().AddSearchPath (Pinta.Core.SystemManager.GetDataRootDirectory () + "/icons");
+			GtkExtensions.GetDefaultIconTheme ().AddSearchPath (Pinta.Core.SystemManager.GetDataRootDirectory () + "/icons");
 
 			var main_window = new MainWindow (app);
 

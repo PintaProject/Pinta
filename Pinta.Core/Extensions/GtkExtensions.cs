@@ -289,6 +289,6 @@ namespace Pinta.Core
 		/// <summary>
 		/// Helper function to return the icon theme for the default display.
 		/// </summary>
-		public static Gtk.IconTheme GetDefaultIconTheme() => Gtk.IconTheme.GetForDisplay (Gdk.Display.GetDefault ()!);
+		public static Gtk.IconTheme GetDefaultIconTheme () => Gtk.IconTheme.GetForDisplay (Gdk.Display.GetDefault ()!);
 	}
 }
