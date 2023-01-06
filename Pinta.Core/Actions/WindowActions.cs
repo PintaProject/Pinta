@@ -82,7 +82,13 @@ namespace Pinta.Core
 		public void SetActiveDocument (Document doc)
 		{
 			var idx = PintaCore.Workspace.OpenDocuments.IndexOf (doc);
+#if false // TODO-GTK4 - re-enable after OnActivate() issues above are fixed
 			active_doc_action.Activate (GLib.Variant.Create (idx));
+#else
+			if (idx < PintaCore.Workspace.OpenDocuments.Count) {
+				PintaCore.Workspace.SetActiveDocumentInternal (PintaCore.Workspace.OpenDocuments[idx]);
+			}
+#endif
 		}
 
 		public void AddDocument (Document doc)

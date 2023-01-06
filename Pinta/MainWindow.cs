@@ -185,13 +185,12 @@ namespace Pinta
 				RulerMetric = GetCurrentRulerMetric ()
 #endif
 			};
+			doc.Workspace.Canvas = canvas.Canvas;
 
 			var my_content = new DocumentViewContent (doc, canvas);
 
 			// Insert our tab to the right of the currently selected tab
 			notebook.InsertTab (my_content, selected_index + 1);
-
-			doc.Workspace.Canvas = canvas.Canvas;
 
 			// Zoom to window only on first show (if we do it always, it will be called on every resize)
 			// Note: this does seem to allow a small flicker where large images are shown at 100% zoom before

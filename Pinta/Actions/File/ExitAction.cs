@@ -60,7 +60,7 @@ namespace Pinta.Actions
 			// Let everyone know we are quitting
 			PintaCore.Actions.App.RaiseBeforeQuit ();
 
-			(PintaCore.Chrome.Application as GLib.Application).Quit ();
+			PintaCore.Chrome.Application.Quit ();
 		}
 	}
 }
