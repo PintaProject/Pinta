@@ -118,7 +118,7 @@ namespace Pinta.Gui.Widgets
 		private void RenderPixelGrid (Cairo.ImageSurface dst, PointI offset)
 		{
 			// Draw horizontal lines
-			var dst_data = dst.GetData ();
+			var dst_data = dst.GetPixelData ();
 			var dstHeight = dst.Height;
 			var dstWidth = dst.Width;
 			var dstStride = dst.Stride;

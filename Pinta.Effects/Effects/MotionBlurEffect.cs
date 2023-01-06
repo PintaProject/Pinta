@@ -73,8 +73,8 @@ namespace Pinta.Effects
 
 			Span<ColorBgra> samples = stackalloc ColorBgra[points.Length];
 
-			ReadOnlySpan<ColorBgra> src_data = src.GetReadOnlyData ();
-			Span<ColorBgra> dst_data = dst.GetData ();
+			ReadOnlySpan<ColorBgra> src_data = src.GetReadOnlyPixelData ();
+			Span<ColorBgra> dst_data = dst.GetPixelData ();
 			int src_width = src.Width;
 			int src_height = src.Height;
 

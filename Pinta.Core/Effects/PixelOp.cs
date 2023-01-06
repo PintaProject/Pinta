@@ -89,9 +89,9 @@ namespace Pinta.Core
 			// Cache the width and height properties
 			int width = roiSize.Width;
 			int height = roiSize.Height;
-			var src_data = src.GetReadOnlyData ();
+			var src_data = src.GetReadOnlyPixelData ();
 			int src_width = src.Width;
-			var dst_data = dst.GetData ();
+			var dst_data = dst.GetPixelData ();
 			int dst_width = dst.Width;
 
 			// Do the work.
@@ -103,8 +103,8 @@ namespace Pinta.Core
 
 		public virtual void Apply (ImageSurface dst, PointI dstOffset, ImageSurface src, PointI srcOffset, int scanLength)
 		{
-			Apply (dst.GetData ().Slice (dstOffset.Y * dst.Width + dstOffset.X, scanLength),
-			       src.GetData ().Slice (srcOffset.Y * src.Width + srcOffset.X, scanLength));
+			Apply (dst.GetPixelData ().Slice (dstOffset.Y * dst.Width + dstOffset.X, scanLength),
+			       src.GetPixelData ().Slice (srcOffset.Y * src.Width + srcOffset.X, scanLength));
 		}
 
 		public virtual void Apply (Span<ColorBgra> dst, ReadOnlySpan<ColorBgra> src)

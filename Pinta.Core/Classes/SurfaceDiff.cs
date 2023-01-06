@@ -107,8 +107,8 @@ namespace Pinta.Core
 			Parallel.For<DiffBounds> (0, orig_height, () => new DiffBounds (orig_width, orig_height),
 				     (row, loop, my_bounds) => {
 					     var offset = row * orig_width;
-					     var orig_row = original.GetReadOnlyData ().Slice (offset, orig_width);
-					     var updated_row = updated_surf.GetData ().Slice (offset, orig_width);
+					     var orig_row = original.GetReadOnlyPixelData ().Slice (offset, orig_width);
+					     var updated_row = updated_surf.GetPixelData ().Slice (offset, orig_width);
 
 					     bool change_in_row = false;
 
@@ -154,8 +154,8 @@ namespace Pinta.Core
 
 			for (int y = bounds_y; y <= bottom; ++y) {
 				var offset = y * orig_width;
-				var orig_row = original.GetReadOnlyData ().Slice (offset, orig_width);
-				var updated_row = updated_surf.GetData ().Slice (offset, orig_width);
+				var orig_row = original.GetReadOnlyPixelData ().Slice (offset, orig_width);
+				var updated_row = updated_surf.GetPixelData ().Slice (offset, orig_width);
 
 				for (int x = bounds_x; x <= right; ++x) {
 					bool changed = orig_row[x] != updated_row[x];
@@ -180,7 +180,7 @@ namespace Pinta.Core
 
 			// Store the old pixels.
 			var pixels = new ColorBgra[num_changed];
-			var orig_data = original.GetData ();
+			var orig_data = original.GetPixelData ();
 			int mask_index = 0;
 
 			int pixels_idx = 0;
@@ -226,7 +226,7 @@ namespace Pinta.Core
 			dst.Flush ();
 
 			var dest_width = dst.Width;
-			var dst_data = dst.GetData ();
+			var dst_data = dst.GetPixelData ();
 			var mask_index = 0;
 			int pixel_idx = 0;
 			ColorBgra swap_pixel;

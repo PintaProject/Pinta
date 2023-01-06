@@ -63,8 +63,8 @@ namespace Pinta.Effects
 			if (!table_calculated)
 				Calculate ();
 
-			var src_data = src.GetReadOnlyData ();
-			var dst_data = dest.GetData ();
+			var src_data = src.GetReadOnlyPixelData ();
+			var dst_data = dest.GetPixelData ();
 			int width = src.Width;
 
 			foreach (Core.RectangleI rect in rois) {

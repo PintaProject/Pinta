@@ -26,8 +26,8 @@ namespace Pinta.Core
 			RectangleI src_rect = src.GetBounds ();
 
 			// Cache these for a massive performance boost
-			var src_data = src.GetReadOnlyData ();
-			var dst_data = dest.GetData ();
+			var src_data = src.GetReadOnlyPixelData ();
+			var dst_data = dest.GetPixelData ();
 			int src_width = src.Width;
 
 			foreach (RectangleI rect in rois) {

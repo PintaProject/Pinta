@@ -70,9 +70,9 @@ namespace Pinta.Effects
 			invertEffect.Render (dest, dest, rois);
 			desaturateOp.Apply (dest, dest, rois);
 
-			var dst_data = dest.GetData ();
+			var dst_data = dest.GetPixelData ();
 			int dst_width = dest.Width;
-			var src_data = src.GetReadOnlyData ();
+			var src_data = src.GetReadOnlyPixelData ();
 			int src_width = src.Width;
 
 			foreach (Core.RectangleI roi in rois) {

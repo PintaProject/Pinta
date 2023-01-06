@@ -59,8 +59,8 @@ namespace Pinta.Effects
 
 			byte maxIntensity = (byte) Data.Coarseness;
 
-			ReadOnlySpan<ColorBgra> src_data = src.GetReadOnlyData ();
-			Span<ColorBgra> dst_data = dest.GetData ();
+			ReadOnlySpan<ColorBgra> src_data = src.GetReadOnlyPixelData ();
+			Span<ColorBgra> dst_data = dest.GetPixelData ();
 
 			foreach (var rect in rois) {
 

@@ -72,11 +72,11 @@ namespace Pinta.Core
 			// Cache the width and height properties
 			int width = roiSize.Width;
 			int height = roiSize.Height;
-			var lhs_data = lhs.GetReadOnlyData ();
+			var lhs_data = lhs.GetReadOnlyPixelData ();
 			int lhs_width = lhs.Width;
-			var rhs_data = rhs.GetReadOnlyData ();
+			var rhs_data = rhs.GetReadOnlyPixelData ();
 			int rhs_width = rhs.Width;
-			var dst_data = dst.GetData ();
+			var dst_data = dst.GetPixelData ();
 			int dst_width = dst.Width;
 
 			// Do the work.
@@ -99,8 +99,8 @@ namespace Pinta.Core
 				throw new ArgumentException ("dst.Size != src.Size");
 			}
 
-			var src_data = src.GetReadOnlyData ();
-			var dst_data = dst.GetData ();
+			var src_data = src.GetReadOnlyPixelData ();
+			var dst_data = dst.GetPixelData ();
 			int width = src.Width;
 
 			for (int y = 0; y < dst.Height; ++y) {
@@ -119,9 +119,9 @@ namespace Pinta.Core
 				throw new ArgumentException ("lhs.Size != rhs.Size");
 			}
 
-			var lhs_data = lhs.GetReadOnlyData ();
-			var rhs_data = rhs.GetReadOnlyData ();
-			var dst_data = dst.GetData ();
+			var lhs_data = lhs.GetReadOnlyPixelData ();
+			var rhs_data = rhs.GetReadOnlyPixelData ();
+			var dst_data = dst.GetPixelData ();
 			int width = dst.Width;
 
 			for (int y = 0; y < dst.Height; ++y) {

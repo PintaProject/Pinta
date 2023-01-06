@@ -63,8 +63,8 @@ namespace Pinta.Effects
 			Span<uint> avgAlpha = stackalloc uint[256];
 			Span<byte> intensityChoices = stackalloc byte[(1 + (r * 2)) * (1 + (r * 2))];
 
-			ReadOnlySpan<ColorBgra> src_data = src.GetReadOnlyData ();
-			Span<ColorBgra> dst_data = dst.GetData ();
+			ReadOnlySpan<ColorBgra> src_data = src.GetReadOnlyPixelData ();
+			Span<ColorBgra> dst_data = dst.GetPixelData ();
 
 			foreach (var rect in rois) {
 				int rectTop = rect.Top;

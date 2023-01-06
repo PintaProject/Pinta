@@ -122,7 +122,7 @@ namespace Pinta.Core
 
 			surface.Flush ();
 
-			Span<ColorBgra> src_data = surface.GetData ();
+			Span<ColorBgra> src_data = surface.GetPixelData ();
 			int src_width = surface.Width;
 
 			for (int ri = 0; ri < rois.Length; ++ri) {
@@ -157,7 +157,7 @@ namespace Pinta.Core
 				} else {
 					var mainrect = rect;
 					Parallel.ForEach (Enumerable.Range (rect.Top, rect.Height),
-						(y) => ProcessGradientLine (startAlpha, endAlpha, y, mainrect, surface.GetData (), src_width));
+						(y) => ProcessGradientLine (startAlpha, endAlpha, y, mainrect, surface.GetPixelData (), src_width));
 				}
 			}
 

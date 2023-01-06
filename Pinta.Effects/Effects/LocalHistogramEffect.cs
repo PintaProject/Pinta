@@ -131,8 +131,8 @@ namespace Pinta.Effects
 			Span<int> hr = stackalloc int[hLength];
 			Span<int> ha = stackalloc int[hLength];
 
-			var src_data = src.GetReadOnlyData ();
-			var dst_data = dst.GetData ();
+			var src_data = src.GetReadOnlyPixelData ();
+			var dst_data = dst.GetPixelData ();
 
 			for (int y = rect.Top; y <= rect.Bottom; ++y) {
 				SetToZero (hb);
@@ -313,8 +313,8 @@ namespace Pinta.Effects
 			Span<int> hg = stackalloc int[hLength];
 			Span<int> hr = stackalloc int[hLength];
 
-			var src_data = src.GetReadOnlyData ();
-			var dst_data = dst.GetData ();
+			var src_data = src.GetReadOnlyPixelData ();
+			var dst_data = dst.GetPixelData ();
 
 			for (int y = rect.Top; y <= rect.Bottom; y++) {
 				SetToZero (hb);

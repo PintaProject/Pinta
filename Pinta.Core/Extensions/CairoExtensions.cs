@@ -966,7 +966,7 @@ namespace Pinta.Core
 		/// </summary>
 		public static ref readonly ColorBgra GetColorBgra (this ImageSurface surf, int x, int y)
 		{
-			return ref surf.GetColorBgra (surf.GetReadOnlyData (), surf.Width, x, y);
+			return ref surf.GetColorBgra (surf.GetReadOnlyPixelData (), surf.Width, x, y);
 		}
 
 		public static RectangleI GetBounds (this ImageSurface surf)
@@ -1003,7 +1003,7 @@ namespace Pinta.Core
 
 		public static ColorBgra GetBilinearSample (this ImageSurface src, float x, float y)
 		{
-			return GetBilinearSample (src, src.GetReadOnlyData (), src.Width, src.Height, x, y);
+			return GetBilinearSample (src, src.GetReadOnlyPixelData (), src.Width, src.Height, x, y);
 		}
 
 		public static ColorBgra GetBilinearSample (this ImageSurface src, ReadOnlySpan<ColorBgra> src_data, int srcWidth, int srcHeight, float x, float y)
@@ -1061,7 +1061,7 @@ namespace Pinta.Core
 
 		public static ColorBgra GetBilinearSampleClamped (this ImageSurface src, float x, float y)
 		{
-			return GetBilinearSampleClamped (src, src.GetReadOnlyData (), src.Width, src.Height, x, y);
+			return GetBilinearSampleClamped (src, src.GetReadOnlyPixelData (), src.Width, src.Height, x, y);
 		}
 
 		public static ColorBgra GetBilinearSampleClamped (this ImageSurface src, ReadOnlySpan<ColorBgra> src_data, int srcWidth, int srcHeight, float x, float y)
@@ -1125,7 +1125,7 @@ namespace Pinta.Core
 
 		public static ColorBgra GetBilinearSampleWrapped (this ImageSurface src, float x, float y)
 		{
-			return GetBilinearSampleWrapped (src, src.GetReadOnlyData (), src.Width, src.Height, x, y);
+			return GetBilinearSampleWrapped (src, src.GetReadOnlyPixelData (), src.Width, src.Height, x, y);
 		}
 
 		public static ColorBgra GetBilinearSampleWrapped (this ImageSurface src, ReadOnlySpan<ColorBgra> src_data, int srcWidth, int srcHeight, float x, float y)
@@ -1934,7 +1934,7 @@ namespace Pinta.Core
 			context.SetDash (dashes, offset);
 		}
 
-		public static ReadOnlySpan<ColorBgra> GetReadOnlyData (this ImageSurface surface)
+		public static ReadOnlySpan<ColorBgra> GetReadOnlyPixelData (this ImageSurface surface)
 		{
 #if false // TODO-GTK4 requires next release of gir.core
 			unsafe {
@@ -1945,7 +1945,7 @@ namespace Pinta.Core
 #endif
 		}
 
-		public static Span<ColorBgra> GetData (this ImageSurface surface)
+		public static Span<ColorBgra> GetPixelData (this ImageSurface surface)
 		{
 #if false // TODO-GTK4 requires next release of gir.core
 			unsafe {

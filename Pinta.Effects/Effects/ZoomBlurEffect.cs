@@ -53,9 +53,9 @@ namespace Pinta.Effects
 			}
 
 			int src_width = src.Width;
-			ReadOnlySpan<ColorBgra> src_data = src.GetReadOnlyData ();
+			ReadOnlySpan<ColorBgra> src_data = src.GetReadOnlyPixelData ();
 			int dst_width = dst.Width;
-			Span<ColorBgra> dst_data = dst.GetData ();
+			Span<ColorBgra> dst_data = dst.GetPixelData ();
 			Core.RectangleI src_bounds = src.GetBounds ();
 
 			long w = dst.Width;

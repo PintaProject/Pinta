@@ -47,7 +47,7 @@ namespace Pinta.Core
 			long[] histogramG = histogram[1];
 			long[] histogramR = histogram[2];
 
-			var data = surface.GetReadOnlyData ();
+			var data = surface.GetReadOnlyPixelData ();
 			int rect_right = rect.Right;
 			int width = surface.Width;
 

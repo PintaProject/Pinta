@@ -40,7 +40,7 @@ namespace Pinta.Core
 
 		private void ApplyRectangle (ImageSurface surface, RectangleI rect)
 		{
-			var data = surface.GetData ();
+			var data = surface.GetPixelData ();
 			int width = surface.Width;
 			for (int y = rect.Top; y <= rect.Bottom; ++y) {
 				Apply (data.Slice (y * width + rect.Left, rect.Width));
@@ -70,8 +70,8 @@ namespace Pinta.Core
 
 		public void Apply (ImageSurface dst, ImageSurface src, RectangleI roi)
 		{
-			var src_data = src.GetReadOnlyData ();
-			var dst_data = dst.GetData ();
+			var src_data = src.GetReadOnlyPixelData ();
+			var dst_data = dst.GetPixelData ();
 			int src_width = src.Width;
 			int dst_width = dst.Width;
 

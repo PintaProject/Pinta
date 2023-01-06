@@ -63,8 +63,8 @@ namespace Pinta.Effects
 			contrastEffect.Data.Contrast = Data.Contrast;
 			contrastEffect.Render (dest, dest, rois);
 
-			var dst_data = dest.GetData ();
-			var src_data = src.GetReadOnlyData ();
+			var dst_data = dest.GetPixelData ();
+			var src_data = src.GetReadOnlyPixelData ();
 			int src_width = src.Width;
 			int dst_width = dest.Width;
 

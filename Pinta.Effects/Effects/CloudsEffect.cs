@@ -127,7 +127,7 @@ namespace Pinta.Effects
 		{
 			int w = surface.Width;
 			int h = surface.Height;
-			var data = surface.GetData ();
+			var data = surface.GetPixelData ();
 			int bottom = rect.Bottom;
 
 			for (int y = rect.Top; y <= rect.Bottom; ++y) {

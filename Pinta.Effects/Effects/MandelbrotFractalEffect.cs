@@ -89,7 +89,7 @@ namespace Pinta.Effects
 			double invCount = 1.0 / (double) count;
 			double angleTheta = (Data.Angle * 2 * Math.PI) / 360;
 
-			Span<ColorBgra> dst_data = dst.GetData ();
+			Span<ColorBgra> dst_data = dst.GetPixelData ();
 			int dst_width = dst.Width;
 
 			foreach (Core.RectangleI rect in rois) {

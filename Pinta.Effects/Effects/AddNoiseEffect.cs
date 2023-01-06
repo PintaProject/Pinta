@@ -126,8 +126,8 @@ namespace Pinta.Effects
 			Random localRand = threadRand;
 			int[] localLookup = lookup;
 
-			ReadOnlySpan<ColorBgra> src_data = src.GetReadOnlyData ();
-			Span<ColorBgra> dst_data = dst.GetData ();
+			ReadOnlySpan<ColorBgra> src_data = src.GetReadOnlyPixelData ();
+			Span<ColorBgra> dst_data = dst.GetPixelData ();
 			int width = src.Width;
 
 			foreach (var rect in rois) {

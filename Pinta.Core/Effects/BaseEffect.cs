@@ -108,8 +108,8 @@ namespace Pinta.Core
 		/// <param name="roi">A rectangle of interest (roi) specifying the area to modify. Only these areas should be modified</param>
 		protected virtual void Render (ImageSurface src, ImageSurface dst, RectangleI roi)
 		{
-			var src_data = src.GetReadOnlyData ();
-			var dst_data = dst.GetData ();
+			var src_data = src.GetReadOnlyPixelData ();
+			var dst_data = dst.GetPixelData ();
 			int src_width = src.Width;
 			int dst_width = dst.Width;
 

@@ -74,8 +74,8 @@ namespace Pinta.Effects
 
 			int fr = (int) (Data.Angle * Math.PI * 65536.0 / 181.0);
 
-			var dst_data = dst.GetData ();
-			var src_data = src.GetReadOnlyData ();
+			var dst_data = dst.GetPixelData ();
+			var src_data = src.GetReadOnlyPixelData ();
 
 			foreach (Core.RectangleI rect in rois) {
 				for (int y = rect.Top; y <= rect.Bottom; ++y) {

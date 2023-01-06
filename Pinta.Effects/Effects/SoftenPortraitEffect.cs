@@ -91,8 +91,8 @@ namespace Pinta.Effects
 			this.blurEffect.Render (src, dest, rois);
 			this.bacAdjustment.Render (src, dest, rois);
 
-			ReadOnlySpan<ColorBgra> src_data = src.GetReadOnlyData ();
-			Span<ColorBgra> dst_data = dest.GetData ();
+			ReadOnlySpan<ColorBgra> src_data = src.GetReadOnlyPixelData ();
+			Span<ColorBgra> dst_data = dest.GetPixelData ();
 			int width = dest.Width;
 
 			foreach (var roi in rois) {

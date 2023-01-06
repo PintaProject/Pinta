@@ -54,8 +54,8 @@ namespace Pinta.Effects
 			var srcWidth = src.Width;
 			var srcHeight = src.Height;
 
-			ReadOnlySpan<ColorBgra> src_data = src.GetReadOnlyData ();
-			Span<ColorBgra> dst_data = dst.GetData ();
+			ReadOnlySpan<ColorBgra> src_data = src.GetReadOnlyPixelData ();
+			Span<ColorBgra> dst_data = dst.GetPixelData ();
 
 			foreach (var rect in rois) {
 				// loop through each line of target rectangle

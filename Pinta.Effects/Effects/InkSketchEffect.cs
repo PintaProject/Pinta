@@ -80,9 +80,9 @@ namespace Pinta.Effects
 
 			this.glowEffect.Render (src, dest, rois);
 
-			var src_data = src.GetReadOnlyData ();
+			var src_data = src.GetReadOnlyPixelData ();
 			int width = src.Width;
-			var dst_data = dest.GetData ();
+			var dst_data = dest.GetPixelData ();
 
 			// Create black outlines by finding the edges of objects 
 			foreach (Core.RectangleI roi in rois) {

@@ -84,8 +84,8 @@ namespace Pinta.Effects
 			Core.RectangleI src_bounds = src.GetBounds ();
 			Core.RectangleI dest_bounds = dest.GetBounds ();
 
-			var src_data = src.GetReadOnlyData ();
-			var dst_data = dest.GetData ();
+			var src_data = src.GetReadOnlyPixelData ();
+			var dst_data = dest.GetPixelData ();
 
 			foreach (var rect in rois) {
 				for (int y = rect.Top; y <= rect.Bottom; ++y) {
