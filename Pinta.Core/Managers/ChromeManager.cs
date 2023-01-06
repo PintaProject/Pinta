@@ -43,8 +43,10 @@ namespace Pinta.Core
 		private Gdk.Point last_canvas_cursor_point;
 		private Toolbar main_toolbar = null!;
 		private ErrorDialogHandler error_dialog_handler = null!;
-		private UnsupportedFormatDialogHandler unsupported_format_dialog_handler = null!;
+#endif
+		private MessageDialogHandler message_dialog_handler = null!;
 
+#if false // TODO-GTK4
 		public Toolbar ToolToolBar { get { return tool_toolbar; } }
 		public Toolbar MainToolBar { get { return main_toolbar; } }
 		public Statusbar StatusBar { get; private set; } = null!;
@@ -142,22 +144,26 @@ namespace Pinta.Core
 		{
 			error_dialog_handler = handler;
 		}
+#endif
 
-		public void InitializeUnsupportedFormatDialog (UnsupportedFormatDialogHandler handler)
+		public void InitializeMessageDialog (MessageDialogHandler handler)
 		{
-			unsupported_format_dialog_handler = handler;
+			message_dialog_handler = handler;
 		}
 
+#if false // TODO-GTK4
 		public void ShowErrorDialog (Window parent, string message, string details)
 		{
 			error_dialog_handler (parent, message, details);
 		}
+#endif
 
-		public void ShowUnsupportedFormatDialog (Window parent, string message, string details)
+		public void ShowMessageDialog (Window parent, string message, string details)
 		{
-			unsupported_format_dialog_handler (parent, message, details);
+			message_dialog_handler (parent, message, details);
 		}
 
+#if false // TODO-GTK4
 		public void SetStatusBarText (string text)
 		{
 			OnStatusBarTextChanged (text);
@@ -197,5 +203,5 @@ namespace Pinta.Core
 	}
 
 	public delegate void ErrorDialogHandler (Window parent, string message, string details);
-	public delegate void UnsupportedFormatDialogHandler (Window parent, string message, string details);
+	public delegate void MessageDialogHandler (Window parent, string message, string details);
 }

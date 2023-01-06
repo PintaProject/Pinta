@@ -411,20 +411,13 @@ namespace Pinta.Core
 		}
 #endif
 
-		private void ShowFilePermissionErrorDialog (Window parent, string filename)
+		private static void ShowFilePermissionErrorDialog (Window parent, string filename)
 		{
-			string markup = "<span weight=\"bold\" size=\"larger\">{0}</span>\n\n{1}";
-			string primary = Translations.GetString ("Failed to open image");
+			string message = Translations.GetString ("Failed to open image");
 			// Translators: {0} is the name of a file that the user does not have permission to open.
-			string secondary = Translations.GetString ("You do not have access to '{0}'.", filename);
-			string message = string.Format (markup, primary, secondary);
+			string details = Translations.GetString ("You do not have access to '{0}'.", filename);
 
-#if false // TODO-GTK4 need bindings from gir.core
-			using var md = MessageDialog.New (parent, DialogFlags.Modal, MessageType.Error, ButtonsType.Ok, message);
-			md.Run ();
-#else
-			throw new NotImplementedException ();
-#endif
+			PintaCore.Chrome.ShowMessageDialog (parent, message, details);
 		}
 
 		#region Public Events

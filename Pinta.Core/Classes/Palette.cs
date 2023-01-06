@@ -152,7 +152,6 @@ namespace Pinta.Core
 
 		public void Load (Gio.File file)
 		{
-#if false // TODO-GTK4
 			List<Color>? loaded_colors = null;
 			var errors = new StringBuilder ();
 
@@ -182,9 +181,8 @@ namespace Pinta.Core
 				OnPaletteChanged ();
 			} else {
 				var parent = PintaCore.Chrome.MainWindow;
-				ShowUnsupportedFormatDialog (parent, file.ParsedName, "Unsupported palette format", errors.ToString ());
+				ShowUnsupportedFormatDialog (parent, file.GetParseName (), Translations.GetString ("Unsupported palette format"), errors.ToString ());
 			}
-#endif
 		}
 
 		public void Save (Gio.File file, IPaletteSaver saver)
@@ -192,25 +190,23 @@ namespace Pinta.Core
 			saver.Save (colors, file);
 		}
 
-#if false // TODO-GTK4
-		private void ShowUnsupportedFormatDialog (Window parent, string filename, string primaryText, string details)
+		private void ShowUnsupportedFormatDialog (Window parent, string filename, string message, string errors)
 		{
-			string markup = "<span weight=\"bold\" size=\"larger\">{0}</span>\n\n{1}";
+			var details = new StringBuilder ();
+			details.AppendLine (Translations.GetString ("Could not open file: {0}", filename));
+			details.AppendLine (Translations.GetString ("Pinta supports the following palette formats:"));
 
-			string secondaryText = Translations.GetString ("Could not open file: {0}", filename);
-			secondaryText += string.Format ("\n\n{0}\n", Translations.GetString ("Pinta supports the following palette formats:"));
 			var extensions = from format in PintaCore.PaletteFormats.Formats
 					 where format.Loader != null
 					 from extension in format.Extensions
 					 where char.IsLower (extension.FirstOrDefault ())
 					 orderby extension
 					 select extension;
+			details.AppendJoin (", ", extensions);
+			details.AppendLine ();
+			details.AppendLine (errors);
 
-			secondaryText += String.Join (", ", extensions);
-
-			string message = string.Format (markup, primaryText, secondaryText);
-			PintaCore.Chrome.ShowUnsupportedFormatDialog (parent, message, details);
+			PintaCore.Chrome.ShowMessageDialog (parent, message, details.ToString ());
 		}
-#endif
 	}
 }

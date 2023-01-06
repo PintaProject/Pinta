@@ -81,15 +81,9 @@ namespace Pinta
 						break;
 				}
 			});
-
-			PintaCore.Chrome.InitializeUnsupportedFormatDialog ((parent, message, details) => {
-				System.Console.Error.WriteLine ("Pinta: {0}", details);
-				using var unsupportedFormDialog = new FileUnsupportedFormatDialog (parent);
-				unsupportedFormDialog.SetMessage (message);
-				unsupportedFormDialog.Run ();
-			}
-			);
 #endif
+
+			PintaCore.Chrome.InitializeMessageDialog (ShowUnsupportedFormatDialog);
 
 			PintaCore.Initialize ();
 #if false // TODO-GTK4
@@ -651,6 +645,20 @@ namespace Pinta
 			return canvas_pad.Notebook.Items
 				.Where (i => ((CanvasWindow) i.Widget).Canvas == canvas)
 				.FirstOrDefault ();
+		}
+
+		private static void ShowUnsupportedFormatDialog (Window parent, string message, string details)
+		{
+			System.Console.Error.WriteLine ("Pinta: {0}\n{1}", message, details);
+
+			var dialog = Adw.MessageDialog.New (parent, message, details);
+
+			const string ok_response = "ok";
+			dialog.AddResponse (ok_response, Translations.GetString ("_OK"));
+			dialog.DefaultResponse = ok_response;
+			dialog.CloseResponse = ok_response;
+
+			dialog.Present ();
 		}
 	}
 }
