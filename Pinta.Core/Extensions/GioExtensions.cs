@@ -59,17 +59,5 @@ namespace Pinta.Core
 			throw new NotImplementedException ();
 #endif
 		}
-
-		/// <summary>
-		/// Wrapper around file.Uri.ToString(), which returns an empty string if the URI is empty instead of throwing an exception.
-		/// </summary>
-		public static string GetUriAsString (this Gio.File file)
-		{
-			try {
-				return file.Uri.ToString ();
-			} catch (System.UriFormatException) {
-				return "";
-			}
-		}
 	}
 }
