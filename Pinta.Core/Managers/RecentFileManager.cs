@@ -36,7 +36,7 @@ namespace Pinta.Core
 {
 	public class RecentFileManager
 	{
-		private GLib.IFile last_dialog_directory;
+		private GLib.IFile? last_dialog_directory;
 		private RecentData recent_data;
 
 		public RecentFileManager ()
@@ -49,7 +49,7 @@ namespace Pinta.Core
 			recent_data.MimeType = "image/*";
 		}
 
-		public GLib.IFile LastDialogDirectory {
+		public GLib.IFile? LastDialogDirectory {
 			get { return last_dialog_directory; }
 			set {
 				// The file chooser dialog may return null for the current folder in certain cases,
@@ -59,8 +59,11 @@ namespace Pinta.Core
 			}
 		}
 
-		public GLib.IFile DefaultDialogDirectory {
-			get { return GLib.FileFactory.NewForPath (System.Environment.GetFolderPath (Environment.SpecialFolder.MyPictures)); }
+		public GLib.IFile? DefaultDialogDirectory {
+			get {
+				string path = System.Environment.GetFolderPath (Environment.SpecialFolder.MyPictures);
+				return !string.IsNullOrEmpty (path) ? GLib.FileFactory.NewForPath (path) : null;
+			}
 		}
 
 		public RecentData RecentData { get { return recent_data; } }
@@ -69,9 +72,9 @@ namespace Pinta.Core
 		/// Returns a directory for use in a dialog. The last dialog directory is
 		/// returned if it exists, otherwise the default directory is used.
 		/// </summary>
-		public GLib.IFile GetDialogDirectory ()
+		public GLib.IFile? GetDialogDirectory ()
 		{
-			return last_dialog_directory.Exists ? last_dialog_directory : DefaultDialogDirectory;
+			return (last_dialog_directory != null && last_dialog_directory.Exists) ? last_dialog_directory : DefaultDialogDirectory;
 		}
 	}
 }
