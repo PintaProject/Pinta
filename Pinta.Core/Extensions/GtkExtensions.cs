@@ -288,5 +288,17 @@ namespace Pinta.Core
 		{
 			return file.Replace (null, false, GLib.FileCreateFlags.None, null);
 		}
+
+		/// <summary>
+		/// Wrapper around file.Uri.ToString(), which returns an empty string if the URI is empty instead of throwing an exception.
+		/// </summary>
+		public static string GetUriAsString (this GLib.IFile file)
+		{
+			try {
+				return file.Uri.ToString ();
+			} catch (System.UriFormatException) {
+				return "";
+			}
+		}
 	}
 }

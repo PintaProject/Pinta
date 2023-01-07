@@ -85,7 +85,9 @@ namespace Pinta.Actions
 			ff2.AddPattern ("*");
 			fcd.AddFilter (ff2);
 
-			fcd.SetCurrentFolderFile (PintaCore.RecentFiles.GetDialogDirectory ());
+			if (PintaCore.RecentFiles.GetDialogDirectory () is GLib.IFile dir && dir.Exists)
+				fcd.SetCurrentFolderFile (dir);
+
 			fcd.SelectMultiple = true;
 			fcd.LocalOnly = false;
 
@@ -96,7 +98,7 @@ namespace Pinta.Actions
 
 				foreach (var file in fcd.Files) {
 					if (PintaCore.Workspace.OpenFile (file)) {
-						RecentManager.Default.AddFull (file.Uri.ToString (), PintaCore.RecentFiles.RecentData);
+						RecentManager.Default.AddFull (file.GetUriAsString (), PintaCore.RecentFiles.RecentData);
 
 						var directory = file.Parent;
 						if (directory is not null) {

@@ -170,7 +170,8 @@ namespace Pinta.Core
 				LocalOnly = false
 			};
 
-			fcd.SetCurrentFolderFile (PintaCore.RecentFiles.GetDialogDirectory ());
+			if (PintaCore.RecentFiles.GetDialogDirectory () is GLib.IFile dir && dir.Exists)
+				fcd.SetCurrentFolderFile (dir);
 
 			// Add image files filter
 			var ff = new FileFilter ();

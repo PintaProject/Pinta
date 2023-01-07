@@ -78,7 +78,8 @@ namespace Pinta.Actions
 				LocalOnly = false
 			};
 
-			fcd.SetCurrentFolderFile (PintaCore.RecentFiles.GetDialogDirectory ());
+			if (PintaCore.RecentFiles.GetDialogDirectory () is GLib.IFile dir && dir.Exists)
+				fcd.SetCurrentFolderFile (dir);
 
 			if (document.HasFile)
 				fcd.SetFile (document.File);
@@ -137,7 +138,7 @@ namespace Pinta.Actions
 				//hasn't been saved to its associated file in this session.
 				document.HasBeenSavedInSession = false;
 
-				RecentManager.Default.AddFull (file.Uri.ToString (), PintaCore.RecentFiles.RecentData);
+				RecentManager.Default.AddFull (file.GetUriAsString (), PintaCore.RecentFiles.RecentData);
 				PintaCore.ImageFormats.SetDefaultFormat (format.Extensions.First ());
 
 				document.File = file;
