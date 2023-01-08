@@ -50,13 +50,16 @@
     <Compile Include="EventArgs/ModifyCompressionEventArgs.cs" />
     <Compile Include="Extensions/CairoExtensions.cs" />
     <Compile Include="Extensions/GdkExtensions.cs" />
+    <Compile Include="Extensions/GdkPixbufExtensions.cs" />
     <Compile Include="Extensions/GioExtensions.cs" />
+    <Compile Include="Extensions/GioStream.cs" />
     <Compile Include="Extensions/GtkExtensions.cs" />
     <Compile Include="HistoryItems/*.cs" />
     <Compile Remove="HistoryItems/TextHistoryItem.cs" />
     <Compile Include="ImageFormats/FormatDescriptor.cs" />
     <Compile Include="ImageFormats/IImageImporter.cs" />
     <Compile Include="ImageFormats/IImageExporter.cs" />
+    <Compile Include="ImageFormats/GdkPixbufFormat.cs" />
     <Compile Include="Managers/ActionManager.cs" />
     <Compile Include="Managers/ChromeManager.cs" />
     <Compile Include="Managers/ImageConverterManager.cs" />

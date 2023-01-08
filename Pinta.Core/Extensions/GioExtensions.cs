@@ -59,5 +59,100 @@ namespace Pinta.Core
 			throw new NotImplementedException ();
 #endif
 		}
+
+		// TODO-GTK4 - needs a proper binding in gir.core
+		public static Gio.FileInputStream Read (this Gio.File file, Gio.Cancellable? cancellable)
+		{
+			GLib.Internal.ErrorOwnedHandle error;
+			IntPtr result = Gio.Internal.File.Read (file.Handle, cancellable == null ? IntPtr.Zero : cancellable.Handle, out error);
+			GLib.Error.ThrowOnError (error);
+			return new FileInputStreamWrapper (result, true);
+		}
+
+		internal class FileInputStreamWrapper : Gio.FileInputStream
+		{
+			internal FileInputStreamWrapper (IntPtr ptr, bool ownedRef) : base (ptr, ownedRef)
+			{
+			}
+		}
+
+		// TODO-GTK4 - needs a proper binding in gir.core
+		public static Gio.FileInfo QueryInfo (this Gio.FileInputStream stream, string attributes, Gio.Cancellable? cancellable)
+		{
+			GLib.Internal.ErrorOwnedHandle error;
+			IntPtr result = Gio.Internal.FileInputStream.QueryInfo (stream.Handle, attributes, cancellable == null ? IntPtr.Zero : cancellable.Handle, out error);
+			GLib.Error.ThrowOnError (error);
+			return new FileInfoWrapper (result, true);
+		}
+
+		// TODO-GTK4 - needs a proper binding in gir.core
+		public static Gio.FileInfo QueryInfo (this Gio.FileOutputStream stream, string attributes, Gio.Cancellable? cancellable)
+		{
+			GLib.Internal.ErrorOwnedHandle error;
+			IntPtr result = Gio.Internal.FileOutputStream.QueryInfo (stream.Handle, attributes, cancellable == null ? IntPtr.Zero : cancellable.Handle, out error);
+			GLib.Error.ThrowOnError (error);
+			return new FileInfoWrapper (result, true);
+		}
+
+		// TODO-GTK4 - needs a proper binding in gir.core
+		public static Gio.FileInfo QueryInfo (this Gio.FileIOStream stream, string attributes, Gio.Cancellable? cancellable)
+		{
+			GLib.Internal.ErrorOwnedHandle error;
+			IntPtr result = Gio.Internal.FileIOStream.QueryInfo (stream.Handle, attributes, cancellable == null ? IntPtr.Zero : cancellable.Handle, out error);
+			GLib.Error.ThrowOnError (error);
+			return new FileInfoWrapper (result, true);
+		}
+
+		internal class FileInfoWrapper : Gio.FileInfo
+		{
+			internal FileInfoWrapper (IntPtr ptr, bool ownedRef) : base (ptr, ownedRef)
+			{
+			}
+		}
+
+		// TODO-GTK4 - needs a proper binding in gir.core
+		public static long Read (this Gio.InputStream stream, byte[] buffer, uint count, Gio.Cancellable? cancellable)
+		{
+			GLib.Internal.ErrorOwnedHandle error;
+			long result = Gio.Internal.InputStream.Read (stream.Handle, ref buffer, count, cancellable == null ? IntPtr.Zero : cancellable.Handle, out error);
+			GLib.Error.ThrowOnError (error);
+			return result;
+		}
+
+		// TODO-GTK4 - needs a proper binding in gir.core
+		public static long Write (this Gio.OutputStream stream, byte[] buffer, uint count, Gio.Cancellable? cancellable)
+		{
+			GLib.Internal.ErrorOwnedHandle error;
+			long result = Gio.Internal.OutputStream.Write (stream.Handle, buffer, count, cancellable == null ? IntPtr.Zero : cancellable.Handle, out error);
+			GLib.Error.ThrowOnError (error);
+			return result;
+		}
+
+		// TODO-GTK4 - needs a proper binding in gir.core
+		public static bool Close (this Gio.InputStream stream, Gio.Cancellable? cancellable)
+		{
+			GLib.Internal.ErrorOwnedHandle error;
+			bool result = Gio.Internal.InputStream.Close (stream.Handle, cancellable == null ? IntPtr.Zero : cancellable.Handle, out error);
+			GLib.Error.ThrowOnError (error);
+			return result;
+		}
+
+		// TODO-GTK4 - needs a proper binding in gir.core
+		public static bool Close (this Gio.OutputStream stream, Gio.Cancellable? cancellable)
+		{
+			GLib.Internal.ErrorOwnedHandle error;
+			bool result = Gio.Internal.OutputStream.Close (stream.Handle, cancellable == null ? IntPtr.Zero : cancellable.Handle, out error);
+			GLib.Error.ThrowOnError (error);
+			return result;
+		}
+
+		// TODO-GTK4 - needs a proper binding in gir.core
+		public static bool Close (this Gio.IOStream stream, Gio.Cancellable? cancellable)
+		{
+			GLib.Internal.ErrorOwnedHandle error;
+			bool result = Gio.Internal.IOStream.Close (stream.Handle, cancellable == null ? IntPtr.Zero : cancellable.Handle, out error);
+			GLib.Error.ThrowOnError (error);
+			return result;
+		}
 	}
 }
