@@ -47,9 +47,7 @@ namespace Pinta.Actions
 		private void Activated (object sender, EventArgs e)
 		{
 			// Commit any pending changes
-#if false // TODO-GTK4 - enable once tools are enabled
 			PintaCore.Tools.Commit ();
-#endif
 
 			// If it's not dirty, just close it
 			if (!PintaCore.Workspace.ActiveDocument.IsDirty) {

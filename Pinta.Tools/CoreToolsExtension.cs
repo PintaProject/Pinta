@@ -43,6 +43,7 @@ namespace Pinta.Tools
 		#region IExtension Members
 		public void Initialize ()
 		{
+#if false // TODO-GTK4
 			PintaCore.PaintBrushes.AddPaintBrush (new Brushes.CircleBrush ());
 			PintaCore.PaintBrushes.AddPaintBrush (new Brushes.GridBrush ());
 			PintaCore.PaintBrushes.AddPaintBrush (new Brushes.PlainBrush ());
@@ -52,7 +53,6 @@ namespace Pinta.Tools
 			PintaCore.Tools.AddTool (new MoveSelectedTool (PintaCore.Services));
 			PintaCore.Tools.AddTool (new MoveSelectionTool (PintaCore.Services));
 			PintaCore.Tools.AddTool (new ZoomTool (PintaCore.Services));
-			PintaCore.Tools.AddTool (new PanTool (PintaCore.Services));
 			PintaCore.Tools.AddTool (new RectangleSelectTool (PintaCore.Services));
 			PintaCore.Tools.AddTool (new EllipseSelectTool (PintaCore.Services));
 			PintaCore.Tools.AddTool (new LassoSelectTool (PintaCore.Services));
@@ -71,10 +71,14 @@ namespace Pinta.Tools
 			PintaCore.Tools.AddTool (new FreeformShapeTool (PintaCore.Services));
 			PintaCore.Tools.AddTool (new CloneStampTool (PintaCore.Services));
 			PintaCore.Tools.AddTool (new RecolorTool (PintaCore.Services));
+#else
+			PintaCore.Tools.AddTool (new PanTool (PintaCore.Services));
+#endif
 		}
 
 		public void Uninitialize ()
 		{
+#if false // TODO-GTK4
 			PintaCore.PaintBrushes.RemoveInstanceOfPaintBrush (typeof (Brushes.CircleBrush));
 			PintaCore.PaintBrushes.RemoveInstanceOfPaintBrush (typeof (Brushes.GridBrush));
 			PintaCore.PaintBrushes.RemoveInstanceOfPaintBrush (typeof (Brushes.PlainBrush));
@@ -88,7 +92,6 @@ namespace Pinta.Tools
 			PintaCore.Tools.RemoveInstanceOfTool<EllipseSelectTool> ();
 			PintaCore.Tools.RemoveInstanceOfTool<ZoomTool> ();
 			PintaCore.Tools.RemoveInstanceOfTool<MagicWandTool> ();
-			PintaCore.Tools.RemoveInstanceOfTool<PanTool> ();
 			PintaCore.Tools.RemoveInstanceOfTool<PaintBucketTool> ();
 			PintaCore.Tools.RemoveInstanceOfTool<GradientTool> ();
 			PintaCore.Tools.RemoveInstanceOfTool<PaintBrushTool> ();
@@ -103,6 +106,9 @@ namespace Pinta.Tools
 			PintaCore.Tools.RemoveInstanceOfTool<RoundedRectangleTool> ();
 			PintaCore.Tools.RemoveInstanceOfTool<EllipseTool> ();
 			PintaCore.Tools.RemoveInstanceOfTool<FreeformShapeTool> ();
+#else
+			PintaCore.Tools.RemoveInstanceOfTool<PanTool> ();
+#endif
 		}
 		#endregion
 	}

@@ -324,12 +324,10 @@ namespace Pinta.Core
 
 		internal void SetActiveDocumentInternal (Document document)
 		{
-#if false // TODO-GTK4
 			// Work around a case where we closed a document but haven't updated
 			// the active_document_index yet and it points to the closed document
 			if (HasOpenDocuments && active_document_index != -1 && OpenDocuments.Count > active_document_index)
 				PintaCore.Tools.Commit ();
-#endif
 
 			int index = OpenDocuments.IndexOf (document);
 			active_document_index = index;

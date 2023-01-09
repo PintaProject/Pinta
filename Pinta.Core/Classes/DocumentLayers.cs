@@ -419,11 +419,9 @@ namespace Pinta.Core
 		/// </summary>
 		public void SetCurrentUserLayer (int i)
 		{
-#if false // TODO-GTK4 - re-enable once tools are built
 			// Ensure that the current tool's modifications are finalized before
 			// switching layers.
 			PintaCore.Tools.CurrentTool?.DoCommit (document);
-#endif
 
 			CurrentUserLayerIndex = i;
 			SelectedLayerChanged?.Invoke (this, EventArgs.Empty);

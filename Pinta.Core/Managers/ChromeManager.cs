@@ -161,12 +161,12 @@ namespace Pinta.Core
 			message_dialog_handler (parent, message, details);
 		}
 
-#if false // TODO-GTK4
 		public void SetStatusBarText (string text)
 		{
+#if false // TODO-GTK4
 			OnStatusBarTextChanged (text);
-		}
 #endif
+		}
 		#endregion
 #if false // TODO-GTK4
 		#region Protected Methods

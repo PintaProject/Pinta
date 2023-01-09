@@ -42,10 +42,13 @@ namespace Pinta.Tools
 		public override string Name => Translations.GetString ("Pan");
 		public override string Icon => Pinta.Resources.Icons.ToolPan;
 		public override string StatusBarText => Translations.GetString ("Click and drag to navigate image.");
+#if false // TODO-GTK4
 		public override Gdk.Cursor DefaultCursor => new Gdk.Cursor (Gdk.Display.Default, Resources.GetIcon ("Cursor.Pan.png"), 8, 8);
 		public override Gdk.Key ShortcutKey => Gdk.Key.H;
+#endif
 		public override int Priority => 11;
 
+#if false // TODO-GTK4
 		protected override void OnMouseDown (Document document, ToolMouseEventArgs e)
 		{
 			// If we are already panning, ignore any additional mouse down events
@@ -71,5 +74,6 @@ namespace Pinta.Tools
 		{
 			active = false;
 		}
+#endif
 	}
 }

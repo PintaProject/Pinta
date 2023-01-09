@@ -116,14 +116,10 @@ namespace Pinta.Core
 					CanvasSize = new Size (new_x, new_y);
 					Invalidate ();
 
-#if false // TODO-GTK4
 					if (PintaCore.Tools.CurrentTool?.CursorChangesOnZoom == true) {
 						//The current tool's cursor changes when the zoom changes.
 						PintaCore.Tools.CurrentTool.SetCursor (PintaCore.Tools.CurrentTool.DefaultCursor);
 					}
-#else
-					throw new NotImplementedException ();
-#endif
 				}
 			}
 		}

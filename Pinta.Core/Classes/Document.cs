@@ -291,9 +291,7 @@ namespace Pinta.Core
 			if (ImageSize.Width == width && ImageSize.Height == height)
 				return;
 
-#if false // TODO-GTK4 - re-enable once tools are built
 			PintaCore.Tools.Commit ();
-#endif
 
 			ResizeHistoryItem hist = new ResizeHistoryItem (ImageSize);
 			hist.Icon = Resources.Icons.ImageResizeCanvas;
@@ -327,9 +325,7 @@ namespace Pinta.Core
 			if (ImageSize.Width == width && ImageSize.Height == height)
 				return;
 
-#if false // TODO-GTK4 - re-enable once tools are built
 			PintaCore.Tools.Commit ();
-#endif
 
 			ResizeHistoryItem hist = new ResizeHistoryItem (ImageSize);
 			hist.StartSnapshotOfImage ();

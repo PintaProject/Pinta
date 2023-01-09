@@ -39,18 +39,22 @@ namespace Pinta.Core
 		private readonly IToolService tools;
 		private readonly IWorkspaceService workspace;
 
+#if false // TODO-GTK4
 		protected IResourceService Resources { get; }
+#endif
 		protected ISettingsService Settings { get; }
 
 		public const int DEFAULT_BRUSH_WIDTH = 2;
 		private string ANTIALIAS_SETTING => $"{GetType ().Name.ToLowerInvariant ()}-antialias";
 		private string ALPHABLEND_SETTING => $"{GetType ().Name.ToLowerInvariant ()}-alpha-blend";
 
-		protected static Cairo.Point point_empty = new Cairo.Point (-500, -500);
+		protected static PointD point_empty = new (-500, -500);
 
 		protected BaseTool (IServiceManager services)
 		{
+#if false // TODO-GTK4
 			Resources = services.GetService<IResourceService> ();
+#endif
 			Settings = services.GetService<ISettingsService> ();
 
 			tools = services.GetService<IToolService> ();
@@ -110,10 +114,12 @@ namespace Pinta.Core
 		/// </summary>
 		public virtual IEnumerable<IToolHandle> Handles => Enumerable.Empty<IToolHandle> ();
 
+#if false // TODO-GTK4
 		/// <summary>
 		/// The shortcut key used to activate this tool in the toolbox. Return 0 for no shortcut key.
 		/// </summary>
 		public virtual Gdk.Key ShortcutKey => 0;
+#endif
 
 		/// <summary>
 		/// Affects the order of the tool in the toolbox. Lower numbers will appear first.
@@ -187,7 +193,7 @@ namespace Pinta.Core
 		/// <summary>
 		/// Called when the tool needs to add its items to the Tool toolbar.
 		/// </summary>
-		protected virtual void OnBuildToolBar (Toolbar toolbar)
+		protected virtual void OnBuildToolBar (Box toolbar)
 		{
 		}
 
@@ -255,7 +261,7 @@ namespace Pinta.Core
 		{
 			return false;
 		}
-
+#if false // TODO-GTK4
 		/// <summary>
 		/// Called when a key is pressed. Return 'true' if the key is handled, or
 		/// 'false' to allow other components to handle it.
@@ -294,6 +300,7 @@ namespace Pinta.Core
 		protected virtual void OnMouseUp (Document document, ToolMouseEventArgs e)
 		{
 		}
+#endif
 
 		/// <summary>
 		/// Called before the application exist to give tool a chance to save settings.
@@ -314,19 +321,21 @@ namespace Pinta.Core
 		{
 			CurrentCursor = cursor;
 
+#if false // TODO-GTK4
 			if (workspace.HasOpenDocuments && workspace.ActiveWorkspace.Canvas.Window != null)
 				workspace.ActiveWorkspace.Canvas.Window.Cursor = cursor;
+#endif
 		}
 
 		#region Toolbar
 		private ToolBoxButton? tool_item;
 		private ToolBarDropDownButton? antialiasing_button;
 		private ToolBarDropDownButton? alphablending_button;
-		private SeparatorToolItem? separator;
+		private Separator? separator;
 
 		public virtual ToolBoxButton ToolItem => tool_item ??= CreateToolButton ();
 
-		private SeparatorToolItem Separator => separator ??= new SeparatorToolItem ();
+		private Separator Separator => separator ??= GtkExtensions.CreateToolBarSeparator ();
 
 		private ToolBarDropDownButton AlphaBlendingDropDown {
 			get {
@@ -374,18 +383,18 @@ namespace Pinta.Core
 
 		internal void DoAfterUndo (Document document) => OnAfterUndo (document);
 
-		internal void DoBuildToolBar (Toolbar toolbar)
+		internal void DoBuildToolBar (Box toolbar)
 		{
 			OnBuildToolBar (toolbar);
 
 			// Add alpha-blending and anti-aliasing dropdowns if needed
 			if (ShowAlphaBlendingButton || ShowAntialiasingButton)
-				toolbar.AppendItem (Separator);
+				toolbar.Append (Separator);
 
 			if (ShowAntialiasingButton)
-				toolbar.AppendItem (AntialiasingDropDown);
+				toolbar.Append (AntialiasingDropDown);
 			if (ShowAlphaBlendingButton)
-				toolbar.AppendItem (AlphaBlendingDropDown);
+				toolbar.Append (AlphaBlendingDropDown);
 		}
 
 		internal void DoCommit (Document? document) => OnCommit (document);
@@ -406,6 +415,7 @@ namespace Pinta.Core
 
 		internal bool DoHandleUndo (Document document) => OnHandleUndo (document);
 
+#if false // TODO-GTK4
 		internal void DoKeyDown (Document document, KeyPressEventArgs args) => args.RetVal = OnKeyDown (document, ToolKeyEventArgs.FromKeyPressEventArgs (args));
 
 		internal void DoKeyUp (Document document, KeyReleaseEventArgs args) => args.RetVal = OnKeyUp (document, ToolKeyEventArgs.FromKeyReleaseEventArgs (args));
@@ -417,6 +427,7 @@ namespace Pinta.Core
 		internal void DoMouseMove (Document document, MotionNotifyEventArgs args) => OnMouseMove (document, ToolMouseEventArgs.FromMotionNotifyEventArgs (document, args));
 
 		internal void DoMouseUp (Document document, ButtonReleaseEventArgs args) => OnMouseUp (document, ToolMouseEventArgs.FromButtonReleaseEventArgs (document, args));
+#endif
 		#endregion
 	}
 }

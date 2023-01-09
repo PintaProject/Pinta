@@ -50,10 +50,12 @@ namespace Pinta.Core
 		/// </summary>
 		BaseTool? CurrentTool { get; }
 
+#if false // TODO-GTK4
 		/// <summary>
 		/// Performs the mouse down event for the currently selected tool.
 		/// </summary>
 		void DoMouseDown (Document document, ToolMouseEventArgs e);
+#endif
 
 		/// <summary>
 		/// Gets the previously selected tool.
@@ -76,10 +78,12 @@ namespace Pinta.Core
 		/// </summary>
 		bool SetCurrentTool (string tool);
 
+#if false // TODO-GTK4
 		/// <summary>
 		/// Sets the current tool to the next tool with the specified shortcut.
 		/// </summary>
 		void SetCurrentTool (Gdk.Key shortcut);
+#endif
 	}
 
 	public class ToolManager : IEnumerable<BaseTool>, IToolService
@@ -98,7 +102,7 @@ namespace Pinta.Core
 
 		public void AddTool (BaseTool tool)
 		{
-			tool.ToolItem.Clicked += HandleToolBoxToolItemClicked;
+			tool.ToolItem.OnClicked += HandleToolBoxToolItemClicked;
 
 			tools.Add (tool);
 
@@ -115,7 +119,7 @@ namespace Pinta.Core
 			if (tool is null)
 				return;
 
-			tool.ToolItem.Clicked -= HandleToolBoxToolItemClicked;
+			tool.ToolItem.OnClicked -= HandleToolBoxToolItemClicked;
 			tool.ToolItem.Active = false;
 			tool.ToolItem.Sensitive = false;
 
@@ -185,11 +189,11 @@ namespace Pinta.Core
 			tool.ToolItem.Active = true;
 			tool.DoActivated (PintaCore.Workspace.ActiveDocumentOrDefault);
 
-			ToolImage.Set (tool.Icon);
+			ToolImage.SetFromIconName (tool.Icon);
 
-			PintaCore.Chrome.ToolToolBar.AppendItem (ToolLabel);
-			PintaCore.Chrome.ToolToolBar.AppendItem (ToolImage);
-			PintaCore.Chrome.ToolToolBar.AppendItem (ToolSeparator);
+			PintaCore.Chrome.ToolToolBar.Append (ToolLabel);
+			PintaCore.Chrome.ToolToolBar.Append (ToolImage);
+			PintaCore.Chrome.ToolToolBar.Append (ToolSeparator);
 
 			tool.DoBuildToolBar (PintaCore.Chrome.ToolToolBar);
 
@@ -207,6 +211,7 @@ namespace Pinta.Core
 			return false;
 		}
 
+#if false // TODO-GTK4
 		public void SetCurrentTool (Gdk.Key shortcut)
 		{
 			if (FindNextTool (shortcut) is BaseTool tool)
@@ -234,18 +239,20 @@ namespace Pinta.Core
 				next_index = 0;
 			return shortcut_tools[next_index];
 		}
+#endif
 
 		private void DeactivateTool (BaseTool tool, BaseTool? newTool)
 		{
 			var toolbar = PintaCore.Chrome.ToolToolBar;
 
-			while (toolbar.NItems > 0)
-				toolbar.Remove (toolbar.Children[toolbar.NItems - 1]);
+			while (toolbar.GetFirstChild () is Widget child)
+				toolbar.Remove (child);
 
 			tool.DoDeactivated (PintaCore.Workspace.ActiveDocumentOrDefault, newTool);
 			tool.ToolItem.Active = false;
 		}
 
+#if false // TODO-GTK4
 		public void DoMouseDown (Document document, ButtonPressEventArgs args)
 		{
 			if (!TryMouseDownPanOverride (document, args))
@@ -267,6 +274,7 @@ namespace Pinta.Core
 		public void DoMouseDown (Document document, ToolMouseEventArgs e) => CurrentTool?.DoMouseDown (document, e);
 		public void DoKeyDown (Document document, KeyPressEventArgs args) => CurrentTool?.DoKeyDown (document, args);
 		public void DoKeyUp (Document document, KeyReleaseEventArgs args) => CurrentTool?.DoKeyUp (document, args);
+#endif
 		public void DoAfterSave (Document document) => CurrentTool?.DoAfterSave (document);
 		public bool DoHandlePaste (Document document, Clipboard clipboard) => CurrentTool?.DoHandlePaste (document, clipboard) ?? false;
 
@@ -274,6 +282,7 @@ namespace Pinta.Core
 
 		System.Collections.IEnumerator System.Collections.IEnumerable.GetEnumerator () => tools.GetEnumerator ();
 
+#if false // TODO-GTK4
 		private bool TryMouseDownPanOverride (Document document, ButtonPressEventArgs args)
 		{
 			if (is_panning)
@@ -315,6 +324,7 @@ namespace Pinta.Core
 
 			return false;
 		}
+#endif
 
 		private bool TryGetPanTool ([NotNullWhen (true)] out BaseTool? tool)
 		{
@@ -332,12 +342,12 @@ namespace Pinta.Core
 			}
 		}
 
-		private ToolBarLabel? tool_label;
-		private ToolBarImage? tool_image;
-		private SeparatorToolItem? tool_sep;
+		private Label? tool_label;
+		private Image? tool_image;
+		private Separator? tool_sep;
 
-		private ToolBarLabel ToolLabel => tool_label ??= new ToolBarLabel (string.Format (" {0}:  ", Translations.GetString ("Tool")));
-		private ToolBarImage ToolImage => tool_image ??= new ToolBarImage (string.Empty);
-		private SeparatorToolItem ToolSeparator => tool_sep ??= new SeparatorToolItem ();
+		private Label ToolLabel => tool_label ??= Label.New (string.Format (" {0}:  ", Translations.GetString ("Tool")));
+		private Image ToolImage => tool_image ??= new Image ();
+		private Separator ToolSeparator => tool_sep ??= GtkExtensions.CreateToolBarSeparator ();
 	}
 }

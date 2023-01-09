@@ -86,7 +86,6 @@ namespace Pinta
 			PintaCore.Chrome.InitializeMessageDialog (ShowUnsupportedFormatDialog);
 
 			PintaCore.Initialize ();
-#if false // TODO-GTK4
 
 			// Initialize extensions
 			// TODO-GTK3 (addins)
@@ -102,10 +101,13 @@ namespace Pinta
 #else
 			var tools = new Pinta.Tools.CoreToolsExtension ();
 			tools.Initialize ();
+#if false // TODO-GTK4
 			var effects = new Pinta.Effects.CoreEffectsExtension ();
 			effects.Initialize ();
 #endif
+#endif
 
+#if false // TODO-GTK4
 			// Load the user's previous settings
 			LoadUserSettings ();
 
@@ -303,9 +305,7 @@ namespace Pinta
 
 			CreateMainMenu (window_shell);
 			CreateMainToolBar (window_shell);
-#if false // TODO-GTK4
 			CreateToolToolBar (window_shell);
-#endif
 
 			CreatePanels (window_shell);
 #if false // TODO-GTK4
@@ -395,18 +395,15 @@ namespace Pinta
 			PintaCore.Chrome.InitializeMainToolBar (main_toolbar);
 		}
 
-#if false // TODO-GTK4
 		private void CreateToolToolBar (WindowShell shell)
 		{
 			var tool_toolbar = window_shell.CreateToolBar ("tool_toolbar");
-
-			tool_toolbar.ToolbarStyle = ToolbarStyle.Icons;
-			tool_toolbar.IconSize = IconSize.SmallToolbar;
 			tool_toolbar.HeightRequest = 42;
 
 			PintaCore.Chrome.InitializeToolToolBar (tool_toolbar);
 		}
 
+#if false // TODO-GTK4
 		private void CreateStatusBar (WindowShell shell)
 		{
 			var statusbar = shell.CreateStatusBar ("statusbar");
