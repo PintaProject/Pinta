@@ -32,6 +32,11 @@ namespace Pinta.Core
 {
 	public static class GtkExtensions
 	{
+		// Style classes from libadwaita.
+		// https://gnome.pages.gitlab.gnome.org/libadwaita/doc/1-latest/style-classes.html
+		public const string SpacerStyleClass = "spacer";
+		public const string ToolbarStyleClass = "toolbar";
+
 #if false // TODO-GTK4
 		public const int MouseLeftButton = 1;
 		public const int MouseMiddleButton = 2;
@@ -48,18 +53,44 @@ namespace Pinta.Core
 			item.Show ();
 			tb.PackEnd (item, false, false, padding);
 		}
-
-		public static Gtk.ToolButton CreateToolBarItem (this Command action)
+#endif
+		/// <summary>
+		/// In GTK4, toolbars are just a Box with a different CSS style class.
+		/// </summary>
+		public static Gtk.Box CreateToolBar ()
 		{
-			var item = new ToolButton (null, action.ShortLabel ?? action.Label) {
+			var toolbar = new Box () { Orientation = Orientation.Horizontal, Spacing = 0 };
+			toolbar.AddCssClass (GtkExtensions.ToolbarStyleClass);
+			return toolbar;
+		}
+
+		public static Gtk.Button CreateToolBarItem (this Command action)
+		{
+			var label = action.ShortLabel ?? action.Label;
+			var button = new Button () {
 				ActionName = action.FullName,
 				TooltipText = action.Tooltip ?? action.Label,
-				IsImportant = action.IsImportant,
-				IconName = action.IconName
 			};
-			return item;
+
+			if (action.IsImportant) {
+				button.Child = new Adw.ButtonContent () {
+					IconName = action.IconName,
+					Label = label
+				};
+			} else {
+				button.Label = label;
+				button.IconName = action.IconName;
+			}
+
+			return button;
 		}
-#endif
+
+		public static Gtk.Separator CreateToolBarSeparator ()
+		{
+			var sep = new Separator ();
+			sep.AddCssClass (SpacerStyleClass);
+			return sep;
+		}
 
 		public static void AddAction (this Gtk.Application app, Command action)
 		{

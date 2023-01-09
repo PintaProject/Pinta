@@ -27,6 +27,7 @@
 using System;
 using System.Linq;
 using Gtk;
+using Pinta.Core;
 
 namespace Pinta
 {
@@ -36,9 +37,7 @@ namespace Pinta
 		private Box shell_layout;
 		private Box menu_layout;
 		private Box? workspace_layout;
-#if false // TODO-GTK4
 		private Box? main_toolbar;
-#endif
 
 		public WindowShell (Application app, string name, string title, int width, int height, bool maximize)
 		{
@@ -64,18 +63,18 @@ namespace Pinta
 
 		public ApplicationWindow Window => app_window;
 
-#if false // TODO-GTK3
-		public Toolbar CreateToolBar (string name)
+		public Box CreateToolBar (string name)
 		{
-			main_toolbar = new Toolbar ();
+			main_toolbar = GtkExtensions.CreateToolBar ();
 			main_toolbar.Name = name;
 
-			menu_layout.PackStart (main_toolbar, false, false, 0);
+			menu_layout.Append (main_toolbar);
 			main_toolbar.Show ();
 
 			return main_toolbar;
 		}
 
+#if false // TODO-GTK4
 		public Statusbar CreateStatusBar (string name)
 		{
 			var statusbar = new Statusbar {

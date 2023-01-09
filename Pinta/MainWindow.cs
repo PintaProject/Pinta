@@ -302,8 +302,8 @@ namespace Pinta
 			window_shell = new WindowShell (app, "Pinta.GenericWindow", "Pinta", width, height, maximize);
 
 			CreateMainMenu (window_shell);
-#if false // TODO-GTK4
 			CreateMainToolBar (window_shell);
+#if false // TODO-GTK4
 			CreateToolToolBar (window_shell);
 #endif
 
@@ -388,21 +388,14 @@ namespace Pinta
 #endif
 		}
 
-#if false // TODO-GTK4
 		private void CreateMainToolBar (WindowShell shell)
 		{
 			var main_toolbar = window_shell.CreateToolBar ("main_toolbar");
-
-			if (PintaCore.System.OperatingSystem == OS.Windows) {
-				main_toolbar.ToolbarStyle = ToolbarStyle.Icons;
-				main_toolbar.IconSize = IconSize.SmallToolbar;
-			}
-
 			PintaCore.Actions.CreateToolBar (main_toolbar);
-
 			PintaCore.Chrome.InitializeMainToolBar (main_toolbar);
 		}
 
+#if false // TODO-GTK4
 		private void CreateToolToolBar (WindowShell shell)
 		{
 			var tool_toolbar = window_shell.CreateToolBar ("tool_toolbar");

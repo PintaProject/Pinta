@@ -60,40 +60,42 @@ namespace Pinta.Core
 #endif
 		}
 
-#if false // TODO-GTK4
-		public void CreateToolBar (Gtk.Toolbar toolbar)
+		public void CreateToolBar (Gtk.Box toolbar)
 		{
-			toolbar.AppendItem (File.New.CreateToolBarItem ());
-			toolbar.AppendItem (File.Open.CreateToolBarItem ());
-			toolbar.AppendItem (File.Save.CreateToolBarItem ());
+			toolbar.Append (File.New.CreateToolBarItem ());
+			toolbar.Append (File.Open.CreateToolBarItem ());
+			toolbar.Append (File.Save.CreateToolBarItem ());
 			// Printing is disabled for now until it is fully functional.
 #if false
 			toolbar.AppendItem (File.Print.CreateToolBarItem ());
 #endif
-			toolbar.AppendItem (new SeparatorToolItem ());
+			toolbar.Append (GtkExtensions.CreateToolBarSeparator ());
 
 			// Cut/Copy/Paste comes before Undo/Redo on Windows
 			if (PintaCore.System.OperatingSystem == OS.Windows) {
-				toolbar.AppendItem (Edit.Cut.CreateToolBarItem ());
-				toolbar.AppendItem (Edit.Copy.CreateToolBarItem ());
-				toolbar.AppendItem (Edit.Paste.CreateToolBarItem ());
-				toolbar.AppendItem (new SeparatorToolItem ());
-				toolbar.AppendItem (Edit.Undo.CreateToolBarItem ());
-				toolbar.AppendItem (Edit.Redo.CreateToolBarItem ());
+				toolbar.Append (Edit.Cut.CreateToolBarItem ());
+				toolbar.Append (Edit.Copy.CreateToolBarItem ());
+				toolbar.Append (Edit.Paste.CreateToolBarItem ());
+				toolbar.Append (GtkExtensions.CreateToolBarSeparator ());
+				toolbar.Append (Edit.Undo.CreateToolBarItem ());
+				toolbar.Append (Edit.Redo.CreateToolBarItem ());
 			} else {
-				toolbar.AppendItem (Edit.Undo.CreateToolBarItem ());
-				toolbar.AppendItem (Edit.Redo.CreateToolBarItem ());
-				toolbar.AppendItem (new SeparatorToolItem ());
-				toolbar.AppendItem (Edit.Cut.CreateToolBarItem ());
-				toolbar.AppendItem (Edit.Copy.CreateToolBarItem ());
-				toolbar.AppendItem (Edit.Paste.CreateToolBarItem ());
+				toolbar.Append (Edit.Undo.CreateToolBarItem ());
+				toolbar.Append (Edit.Redo.CreateToolBarItem ());
+				toolbar.Append (GtkExtensions.CreateToolBarSeparator ());
+				toolbar.Append (Edit.Cut.CreateToolBarItem ());
+				toolbar.Append (Edit.Copy.CreateToolBarItem ());
+				toolbar.Append (Edit.Paste.CreateToolBarItem ());
 			}
 
-			toolbar.AppendItem (new SeparatorToolItem ());
-			toolbar.AppendItem (Image.CropToSelection.CreateToolBarItem ());
-			toolbar.AppendItem (Edit.Deselect.CreateToolBarItem ());
+			toolbar.Append (GtkExtensions.CreateToolBarSeparator ());
+#if false // TODO-GTK4 - enable once the Image menu is enabled
+			toolbar.Append (Image.CropToSelection.CreateToolBarItem ());
+#endif
+			toolbar.Append (Edit.Deselect.CreateToolBarItem ());
 		}
 
+#if false // TODO-GTK4
 		public void CreateStatusBar (Statusbar statusbar)
 		{
 			// Document zoom widget

@@ -37,18 +37,16 @@ namespace Pinta.Core
 		public Window MainWindow { get; private set; } = null!;
 		public Widget ImageTabsNotebook { get; private set; } = null!;
 #if false // TODO-GTK4
-		private Toolbar tool_toolbar = null!;
 		private IProgressDialog progress_dialog = null!;
 		private bool main_window_busy;
 		private Gdk.Point last_canvas_cursor_point;
-		private Toolbar main_toolbar = null!;
 		private ErrorDialogHandler error_dialog_handler = null!;
 #endif
 		private MessageDialogHandler message_dialog_handler = null!;
 
+		public Box MainToolBar { get; private set; } = null!;
+		public Box ToolToolBar { get; private set; } = null!;
 #if false // TODO-GTK4
-		public Toolbar ToolToolBar { get { return tool_toolbar; } }
-		public Toolbar MainToolBar { get { return main_toolbar; } }
 		public Statusbar StatusBar { get; private set; } = null!;
 		public Toolbar ToolBox { get; private set; } = null!;
 
@@ -98,17 +96,17 @@ namespace Pinta.Core
 			MainWindow = shell;
 		}
 
+		public void InitializeToolToolBar (Box toolToolBar)
+		{
+			ToolToolBar = toolToolBar;
+		}
+
+		public void InitializeMainToolBar (Box mainToolBar)
+		{
+			MainToolBar = mainToolBar;
+		}
+
 #if false // TODO-GTK4
-		public void InitializeToolToolBar (Toolbar toolToolBar)
-		{
-			tool_toolbar = toolToolBar;
-		}
-
-		public void InitializeMainToolBar (Toolbar mainToolBar)
-		{
-			main_toolbar = mainToolBar;
-		}
-
 		public void InitializeStatusBar (Statusbar statusbar)
 		{
 			StatusBar = statusbar;
