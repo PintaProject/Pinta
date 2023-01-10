@@ -7,31 +7,31 @@ using Pinta.Core;
 
 namespace Pinta.Gui.Widgets
 {
-	public class ToolBoxWidget : Toolbar
+	public class ToolBoxWidget : Box
 	{
 		public ToolBoxWidget ()
 		{
 			HeightRequest = 375;
+			AddCssClass (GtkExtensions.ToolbarStyleClass);
 
 			PintaCore.Tools.ToolAdded += HandleToolAdded;
 			PintaCore.Tools.ToolRemoved += HandleToolRemoved;
 
 			Orientation = Orientation.Vertical;
-			ToolbarStyle = ToolbarStyle.Icons;
-
-			ShowAll ();
 		}
 
 		public void AddItem (ToolBoxButton item)
 		{
-			item.IsImportant = false;
-
 			var index = PintaCore.Tools.ToList ().IndexOf (item.Tool);
 
-			Insert (item.Tool.ToolItem, index);
+			Widget? prev_widget = GetFirstChild ();
+			for (int i = 1; i < index; ++i)
+				prev_widget = prev_widget!.GetNextSibling ();
+
+			InsertChildAfter (item.Tool.ToolItem, prev_widget);
 		}
 
-		public void RemoveItem (ToolButton item)
+		public void RemoveItem (ToolBoxButton item)
 		{
 			Remove (item);
 		}

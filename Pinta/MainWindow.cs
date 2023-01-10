@@ -424,11 +424,9 @@ namespace Pinta
 
 		private void CreateDockAndPads (Box container)
 		{
-#if false // TODO-GTK4
 			var toolbox = new ToolBoxWidget ();
-			container.PackStart (toolbox, false, false, 0);
+			container.Append (toolbox);
 			PintaCore.Chrome.InitializeToolBox (toolbox);
-#endif
 
 			// Dock widget
 			dock = new Dock ();

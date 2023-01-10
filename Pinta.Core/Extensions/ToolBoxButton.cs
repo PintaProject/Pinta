@@ -40,7 +40,7 @@ namespace Pinta.Core
 		{
 			Tool = tool;
 			IconName = tool.Icon;
-			Label = tool.Name;
+			Name = tool.Name;
 
 			Show ();
 			if (tool.ShortcutKey != 0) {

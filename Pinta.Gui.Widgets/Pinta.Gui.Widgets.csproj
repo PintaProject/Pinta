@@ -12,5 +12,6 @@
     <Compile Include="DialogAttributes.cs" />
     <Compile Include="Widgets/Canvas/*.cs" />
     <Compile Include="Widgets/Ruler.cs" />
+    <Compile Include="Widgets/ToolBoxWidget.cs" />
   </ItemGroup>
 </Project>

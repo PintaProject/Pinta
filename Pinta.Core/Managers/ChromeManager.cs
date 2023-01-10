@@ -46,9 +46,10 @@ namespace Pinta.Core
 
 		public Box MainToolBar { get; private set; } = null!;
 		public Box ToolToolBar { get; private set; } = null!;
+		public Box ToolBox { get; private set; } = null!;
+
 #if false // TODO-GTK4
 		public Statusbar StatusBar { get; private set; } = null!;
-		public Toolbar ToolBox { get; private set; } = null!;
 
 		public IProgressDialog ProgressDialog { get { return progress_dialog; } }
 		public GLib.Menu AdjustmentsMenu { get; private set; } = null!;
@@ -111,12 +112,12 @@ namespace Pinta.Core
 		{
 			StatusBar = statusbar;
 		}
+#endif
 
-		public void InitializeToolBox (Toolbar toolbox)
+		public void InitializeToolBox (Box toolbox)
 		{
 			ToolBox = toolbox;
 		}
-#endif
 
 		public void InitializeImageTabsNotebook (Widget notebook)
 		{
