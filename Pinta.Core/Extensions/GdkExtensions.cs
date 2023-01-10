@@ -30,9 +30,9 @@ using GdkPixbuf;
 
 namespace Pinta.Core
 {
-#if false // TODO-GTK4
 	public static class GdkExtensions
 	{
+#if false // TODO-GTK4
 		// Invalidate the whole thing
 		public static void Invalidate (this Window w)
 		{
@@ -68,6 +68,7 @@ namespace Pinta.Core
 		{
 			return p.X == int.MinValue && p.Y == int.MinValue;
 		}
+#endif
 
 		public static bool IsShiftPressed (this ModifierType m)
 		{
@@ -79,15 +80,17 @@ namespace Pinta.Core
 		/// </summary>
 		public static bool IsControlPressed (this ModifierType m)
 		{
+#if false // TODO-GTK4 - test which modifier the Cmd key produces in GTK4
 			if (PintaCore.System.OperatingSystem == OS.Mac)
 				return m.HasFlag (ModifierType.Mod2Mask);
 			else
-				return m.HasFlag (ModifierType.ControlMask);
+#endif
+			return m.HasFlag (ModifierType.ControlMask);
 		}
 
 		public static bool IsAltPressed (this ModifierType m)
 		{
-			return m.HasFlag (ModifierType.Mod1Mask);
+			return m.HasFlag (ModifierType.AltMask);
 		}
 
 		public static bool IsLeftMousePressed (this ModifierType m)
@@ -100,6 +103,7 @@ namespace Pinta.Core
 			return m.HasFlag (ModifierType.Button3Mask);
 		}
 
+#if false // TODO-GTK4
 		public static bool IsShiftPressed (this EventButton ev)
 		{
 			return ev.State.IsShiftPressed ();
@@ -114,6 +118,8 @@ namespace Pinta.Core
 		{
 			return ev.State.IsAltPressed ();
 		}
+#endif
+#if false // TODO-GTK4
 
 		/// <summary>
 		/// Returns whether this key is a Ctrl key (or the Cmd key on macOS).
@@ -270,6 +276,7 @@ namespace Pinta.Core
 				return CairoExtensions.ToPixbuf (i);
 			}
 		}
+#endif
 
 		public static Key ToUpper (this Key k1)
 		{
@@ -279,6 +286,7 @@ namespace Pinta.Core
 			return k1;
 		}
 
+#if false // TODO-GTK4
 		public static void GetWidgetPointer (Gtk.Widget widget, out int x, out int y, out Gdk.ModifierType mask)
 		{
 			var pointer = widget.Display.DefaultSeat.Pointer;
@@ -290,6 +298,6 @@ namespace Pinta.Core
 			var pointer = window.Display.DefaultSeat.Pointer;
 			window.GetDevicePosition (pointer, out x, out y, out mask);
 		}
-	}
 #endif
+	}
 }

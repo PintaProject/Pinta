@@ -78,12 +78,10 @@ namespace Pinta.Core
 		/// </summary>
 		bool SetCurrentTool (string tool);
 
-#if false // TODO-GTK4
 		/// <summary>
 		/// Sets the current tool to the next tool with the specified shortcut.
 		/// </summary>
 		void SetCurrentTool (Gdk.Key shortcut);
-#endif
 	}
 
 	public class ToolManager : IEnumerable<BaseTool>, IToolService
@@ -211,7 +209,6 @@ namespace Pinta.Core
 			return false;
 		}
 
-#if false // TODO-GTK4
 		public void SetCurrentTool (Gdk.Key shortcut)
 		{
 			if (FindNextTool (shortcut) is BaseTool tool)
@@ -239,7 +236,6 @@ namespace Pinta.Core
 				next_index = 0;
 			return shortcut_tools[next_index];
 		}
-#endif
 
 		private void DeactivateTool (BaseTool tool, BaseTool? newTool)
 		{

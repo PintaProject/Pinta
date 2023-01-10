@@ -43,13 +43,11 @@ namespace Pinta.Core
 			Label = tool.Name;
 
 			Show ();
-#if false // TODO-GTK4
 			if (tool.ShortcutKey != 0) {
 				var shortcut_label = Translations.GetString ("Shortcut key");
 				TooltipText = $"{tool.Name}\n{shortcut_label}: {tool.ShortcutKey.ToString ().ToUpperInvariant ()}\n\n{tool.StatusBarText}";
 			} else
-#endif
-			TooltipText = tool.Name;
+				TooltipText = tool.Name;
 		}
 	}
 }

@@ -32,7 +32,9 @@ namespace Pinta.Core
 {
 	public class ToolKeyEventArgs : EventArgs
 	{
+#if false // TODO-GTK4
 		public EventKey? Event { get; init; }
+#endif
 
 		/// <summary>
 		/// Specifies whether the Alt key is currently pressed.
@@ -66,6 +68,7 @@ namespace Pinta.Core
 
 		public ModifierType State { get; init; }
 
+#if false // TODO-GTK4
 		public static ToolKeyEventArgs FromKeyPressEventArgs (KeyPressEventArgs args)
 		{
 			return new ToolKeyEventArgs {
@@ -83,5 +86,6 @@ namespace Pinta.Core
 				State = args.Event.State
 			};
 		}
+#endif
 	}
 }

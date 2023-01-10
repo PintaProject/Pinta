@@ -50,8 +50,11 @@
     <Compile Include="EventArgs/HistoryItemAddedEventArgs.cs" />
     <Compile Include="EventArgs/ModifyCompressionEventArgs.cs" />
     <Compile Include="EventArgs/ToolEventArgs.cs" />
+    <Compile Include="EventArgs/ToolKeyEventArgs.cs" />
+    <Compile Include="EventArgs/ToolMouseEventArgs.cs" />
     <Compile Include="Extensions/CairoExtensions.cs" />
     <Compile Include="Extensions/GdkExtensions.cs" />
+    <Compile Include="Extensions/GdkKey.cs" />
     <Compile Include="Extensions/GdkPixbufExtensions.cs" />
     <Compile Include="Extensions/GioExtensions.cs" />
     <Compile Include="Extensions/GioStream.cs" />

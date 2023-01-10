@@ -114,12 +114,10 @@ namespace Pinta.Core
 		/// </summary>
 		public virtual IEnumerable<IToolHandle> Handles => Enumerable.Empty<IToolHandle> ();
 
-#if false // TODO-GTK4
 		/// <summary>
 		/// The shortcut key used to activate this tool in the toolbox. Return 0 for no shortcut key.
 		/// </summary>
 		public virtual Gdk.Key ShortcutKey => 0;
-#endif
 
 		/// <summary>
 		/// Affects the order of the tool in the toolbox. Lower numbers will appear first.
@@ -261,7 +259,7 @@ namespace Pinta.Core
 		{
 			return false;
 		}
-#if false // TODO-GTK4
+
 		/// <summary>
 		/// Called when a key is pressed. Return 'true' if the key is handled, or
 		/// 'false' to allow other components to handle it.
@@ -300,7 +298,6 @@ namespace Pinta.Core
 		protected virtual void OnMouseUp (Document document, ToolMouseEventArgs e)
 		{
 		}
-#endif
 
 		/// <summary>
 		/// Called before the application exist to give tool a chance to save settings.

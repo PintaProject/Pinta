@@ -68,7 +68,7 @@ namespace Pinta.Core
 		/// <summary>
 		/// The cursor location in canvas coordinates.
 		/// </summary>
-		public Cairo.Point Point => new Cairo.Point ((int) PointDouble.X, (int) PointDouble.Y);
+		public PointI Point => new ((int) PointDouble.X, (int) PointDouble.Y);
 
 		/// <summary>
 		/// The cursor location in canvas coordinates.
@@ -82,6 +82,7 @@ namespace Pinta.Core
 		/// </summary>
 		public PointD WindowPoint { get; init; }
 
+#if false // TODO-GTK4
 		public static ToolMouseEventArgs FromButtonPressEventArgs (Document document, ButtonPressEventArgs e)
 		{
 			return new ToolMouseEventArgs {
@@ -114,6 +115,7 @@ namespace Pinta.Core
 				Root = new PointD (e.Event.XRoot, e.Event.YRoot)
 			};
 		}
+#endif
 
 	}
 }
