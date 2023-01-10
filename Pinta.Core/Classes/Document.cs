@@ -252,9 +252,8 @@ namespace Pinta.Core
 
 		public ImageSurface GetFlattenedImage (bool clip_to_selection = false) => Layers.GetFlattenedImage (clip_to_selection);
 
-#if false // TODO-GTK4
 		/// <param name="canvasOnly">false for the whole selection, true for the part only on our canvas</param>
-		public Gdk.Rectangle GetSelectedBounds (bool canvasOnly)
+		public RectangleI GetSelectedBounds (bool canvasOnly)
 		{
 			var bounds = Selection.SelectionPath.GetBounds ();
 
@@ -263,7 +262,6 @@ namespace Pinta.Core
 
 			return bounds;
 		}
-#endif
 
 		public void ResetSelectionPaths ()
 		{

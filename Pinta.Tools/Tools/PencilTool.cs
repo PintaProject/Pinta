@@ -34,7 +34,7 @@ namespace Pinta.Tools
 	{
 		private readonly IPaletteService palette;
 
-		private Point last_point = point_empty;
+		private PointI last_point = point_empty;
 
 		private ImageSurface? undo_surface;
 		private bool surface_modified;
@@ -48,7 +48,9 @@ namespace Pinta.Tools
 		public override string Name => Translations.GetString ("Pencil");
 		public override string Icon => Pinta.Resources.Icons.ToolPencil;
 		public override string StatusBarText => Translations.GetString ("Left click to draw freeform one-pixel wide lines with the primary color. Right click to use the secondary color.");
+#if false // TODO-GTK4
 		public override Gdk.Cursor DefaultCursor => new Gdk.Cursor (Gdk.Display.Default, Resources.GetIcon ("Cursor.Pencil.png"), 7, 24);
+#endif
 		public override Gdk.Key ShortcutKey => Gdk.Key.P;
 		public override int Priority => 25;
 		protected override bool ShowAlphaBlendingButton => true;
@@ -95,11 +97,8 @@ namespace Pinta.Tools
 
 		protected override void OnMouseUp (Document document, ToolMouseEventArgs e)
 		{
-			if (undo_surface != null) {
-				if (surface_modified)
-					document.History.PushNewItem (new SimpleHistoryItem (Icon, Name, undo_surface, document.Layers.CurrentUserLayerIndex));
-				else
-					undo_surface.Dispose ();
+			if (undo_surface != null && surface_modified) {
+				document.History.PushNewItem (new SimpleHistoryItem (Icon, Name, undo_surface, document.Layers.CurrentUserLayerIndex));
 			}
 
 			surface_modified = false;
@@ -122,38 +121,37 @@ namespace Pinta.Tools
 			if (document.Workspace.PointInCanvas (e.PointDouble))
 				surface_modified = true;
 
-			using (var g = document.CreateClippedContext ()) {
+			var g = document.CreateClippedContext ();
 
-				g.Antialias = Antialias.None;
+			g.Antialias = Antialias.None;
 
-				g.SetSourceColor (tool_color);
+			g.SetSourceColor (tool_color);
 
-				if (UseAlphaBlending)
-					g.SetBlendMode (BlendMode.Normal);
-				else
-					g.Operator = Operator.Source;
+			if (UseAlphaBlending)
+				g.SetBlendMode (BlendMode.Normal);
+			else
+				g.Operator = Operator.Source;
 
-				g.LineWidth = 1;
-				g.LineCap = LineCap.Square;
+			g.LineWidth = 1;
+			g.LineCap = LineCap.Square;
 
-				if (first_pixel) {
-					// Cairo does not support a single-pixel-long single-pixel-wide line
-					g.Rectangle (x, y, 1.0, 1.0);
-					g.Fill ();
-				} else {
-					// Adding 0.5 forces cairo into the correct square:
-					// See https://bugs.launchpad.net/bugs/672232
-					g.MoveTo (last_point.X + 0.5, last_point.Y + 0.5);
-					g.LineTo (x + 0.5, y + 0.5);
-					g.Stroke ();
-				}
+			if (first_pixel) {
+				// Cairo does not support a single-pixel-long single-pixel-wide line
+				g.Rectangle (x, y, 1.0, 1.0);
+				g.Fill ();
+			} else {
+				// Adding 0.5 forces cairo into the correct square:
+				// See https://bugs.launchpad.net/bugs/672232
+				g.MoveTo (last_point.X + 0.5, last_point.Y + 0.5);
+				g.LineTo (x + 0.5, y + 0.5);
+				g.Stroke ();
 			}
 
-			var dirty = CairoExtensions.GetRectangleFromPoints (last_point, new Point (x, y), 4);
+			var dirty = CairoExtensions.GetRectangleFromPoints (last_point, new PointI (x, y), 4);
 
 			document.Workspace.Invalidate (document.ClampToImageSize (dirty));
 
-			last_point = new Point (x, y);
+			last_point = new PointI (x, y);
 		}
 	}
 }

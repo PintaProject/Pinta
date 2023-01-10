@@ -10,6 +10,8 @@
   <ItemGroup>
     <Compile Remove="**/*.cs" />
     <Compile Include="CoreToolsExtension.cs" />
+    <Compile Include="Tools/GradientTool.cs" />
     <Compile Include="Tools/PanTool.cs" />
+    <Compile Include="Tools/PencilTool.cs" />
   </ItemGroup>
 </Project>

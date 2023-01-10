@@ -42,6 +42,8 @@ namespace Pinta.Core
 			IconName = tool.Icon;
 			Name = tool.Name;
 
+			AddCssClass (GtkExtensions.FlatStyleClass);
+
 			Show ();
 			if (tool.ShortcutKey != 0) {
 				var shortcut_label = Translations.GetString ("Shortcut key");

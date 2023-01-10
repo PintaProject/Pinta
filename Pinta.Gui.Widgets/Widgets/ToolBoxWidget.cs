@@ -12,12 +12,13 @@ namespace Pinta.Gui.Widgets
 		public ToolBoxWidget ()
 		{
 			HeightRequest = 375;
-			AddCssClass (GtkExtensions.ToolbarStyleClass);
+			AddCssClass (GtkExtensions.LinkedStyleClass);
 
 			PintaCore.Tools.ToolAdded += HandleToolAdded;
 			PintaCore.Tools.ToolRemoved += HandleToolRemoved;
 
 			Orientation = Orientation.Vertical;
+			Spacing = 0;
 		}
 
 		public void AddItem (ToolBoxButton item)

@@ -33,7 +33,7 @@ namespace Pinta.Tools
 	public class GradientTool : BaseTool
 	{
 		private readonly IPaletteService palette;
-		Cairo.PointD startpoint;
+		PointD startpoint;
 		bool tracking;
 		protected ImageSurface? undo_surface;
 		MouseButton button;
@@ -50,21 +50,23 @@ namespace Pinta.Tools
 		public override string Icon => Pinta.Resources.Icons.ToolGradient;
 		public override string StatusBarText => Translations.GetString ("Click and drag to draw gradient from primary to secondary color.  Right click to reverse.");
 		public override Gdk.Key ShortcutKey => Gdk.Key.G;
+#if false // TODO-GTK4
 		public override Gdk.Cursor DefaultCursor => new Gdk.Cursor (Gdk.Display.Default, Resources.GetIcon ("Cursor.Gradient.png"), 9, 18);
+#endif
 		public override int Priority => 31;
 		protected override bool ShowAlphaBlendingButton => true;
 		private GradientType SelectedGradientType => GradientDropDown.SelectedItem.GetTagOrDefault (GradientType.Linear);
 		private GradientColorMode SelectedGradientColorMode => ColorModeDropDown.SelectedItem.GetTagOrDefault (GradientColorMode.Color);
 
-		protected override void OnBuildToolBar (Gtk.Toolbar tb)
+		protected override void OnBuildToolBar (Gtk.Box tb)
 		{
 			base.OnBuildToolBar (tb);
 
-			tb.AppendItem (GradientLabel);
-			tb.AppendItem (GradientDropDown);
-			tb.AppendItem (new Gtk.SeparatorToolItem ());
-			tb.AppendItem (ModeLabel);
-			tb.AppendItem (ColorModeDropDown);
+			tb.Append (GradientLabel);
+			tb.Append (GradientDropDown);
+			tb.Append (GtkExtensions.CreateToolBarSeparator ());
+			tb.Append (ModeLabel);
+			tb.Append (ColorModeDropDown);
 		}
 
 		protected override void OnMouseDown (Document document, ToolMouseEventArgs e)
@@ -123,22 +125,20 @@ namespace Pinta.Tools
 
 				// Initialize the scratch layer with the (original) current layer, if any blending is required.
 				if (gr.AlphaOnly || (gr.AlphaBlending && (gr.StartColor.A != 255 || gr.EndColor.A != 255))) {
-					using (var g = new Context (scratch_layer)) {
-						document.Selection.Clip (g);
-						g.SetSource (undo_surface);
-						g.Operator = Operator.Source;
-						g.Paint ();
-					}
+					var g = new Context (scratch_layer);
+					document.Selection.Clip (g);
+					g.SetSourceSurface (undo_surface!, 0, 0);
+					g.Operator = Operator.Source;
+					g.Paint ();
 				}
 
 				gr.Render (scratch_layer, new[] { selection_bounds });
 
 				// Transfer the result back to the current layer.
-				using (var g = document.CreateClippedContext ()) {
-					g.SetSource (scratch_layer);
-					g.Operator = Operator.Source;
-					g.Paint ();
-				}
+				var context = document.CreateClippedContext ();
+				context.SetSourceSurface (scratch_layer, 0, 0);
+				context.Operator = Operator.Source;
+				context.Paint ();
 
 				selection_bounds.Inflate (5, 5);
 				document.Workspace.Invalidate (selection_bounds);
@@ -170,12 +170,12 @@ namespace Pinta.Tools
 			};
 		}
 
-		private ToolBarLabel? gradient_label;
+		private Gtk.Label? gradient_label;
 		private ToolBarDropDownButton? gradient_button;
-		private ToolBarLabel? color_mode_label;
+		private Gtk.Label? color_mode_label;
 		private ToolBarDropDownButton? color_mode_button;
 
-		private ToolBarLabel GradientLabel => gradient_label ??= new ToolBarLabel (string.Format (" {0}: ", Translations.GetString ("Gradient")));
+		private Gtk.Label GradientLabel => gradient_label ??= Gtk.Label.New (string.Format (" {0}: ", Translations.GetString ("Gradient")));
 		private ToolBarDropDownButton GradientDropDown {
 			get {
 				if (gradient_button == null) {
@@ -194,7 +194,7 @@ namespace Pinta.Tools
 			}
 		}
 
-		private ToolBarLabel ModeLabel => color_mode_label ??= new ToolBarLabel (string.Format (" {0}: ", Translations.GetString ("Mode")));
+		private Gtk.Label ModeLabel => color_mode_label ??= Gtk.Label.New (string.Format (" {0}: ", Translations.GetString ("Mode")));
 		private ToolBarDropDownButton ColorModeDropDown {
 			get {
 				if (color_mode_button == null) {

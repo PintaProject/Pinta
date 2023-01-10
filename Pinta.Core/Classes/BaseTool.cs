@@ -48,7 +48,7 @@ namespace Pinta.Core
 		private string ANTIALIAS_SETTING => $"{GetType ().Name.ToLowerInvariant ()}-antialias";
 		private string ALPHABLEND_SETTING => $"{GetType ().Name.ToLowerInvariant ()}-alpha-blend";
 
-		protected static PointD point_empty = new (-500, -500);
+		protected static PointI point_empty = new (-500, -500);
 
 		protected BaseTool (IServiceManager services)
 		{

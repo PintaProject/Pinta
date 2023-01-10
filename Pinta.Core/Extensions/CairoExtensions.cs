@@ -863,26 +863,21 @@ namespace Pinta.Core
 			g.Paint ();
 			g.Restore ();
 		}
-
-		public static Gdk.Rectangle GetBounds (this Path path)
+#endif
+		public static RectangleD PathExtents (this Context context)
 		{
-			Rectangle rect;
-			var doc = PintaCore.Workspace.ActiveDocument;
-
-
-			using (Context g = new Context (doc.Layers.CurrentUserLayer.Surface)) {
-				g.AppendPath (path);
-				rect = g.PathExtents ();
-			}
-
-			int x = (int) Math.Round (rect.X);
-			int y = (int) Math.Round (rect.Y);
-			int w = (int) Math.Round (rect.Width);
-			int h = (int) Math.Round (rect.Height);
-
-			return new Gdk.Rectangle (x, y, w, h);
+			context.PathExtents (out double x1, out double y1, out double x2, out double y2);
+			return new RectangleD (x1, y1, x2 - x1, y2 - y1);
 		}
 
+		public static RectangleI GetBounds (this Path path)
+		{
+			var doc = PintaCore.Workspace.ActiveDocument;
+			var g = new Context (doc.Layers.CurrentUserLayer.Surface);
+			g.AppendPath (path);
+			return g.PathExtents ().ToInt ();
+		}
+#if false // TODO-GTK4
 		public static Color Clone (this Color color)
 		{
 			return new Color (color.R, color.G, color.B, color.A);
@@ -1582,20 +1577,18 @@ namespace Pinta.Core
 			}
 		}
 
-#if false // TODO-GTK4
-		public static Gdk.Rectangle GetRectangleFromPoints (Point a, Point b, int inflate)
+		public static RectangleI GetRectangleFromPoints (PointI a, PointI b, int inflate)
 		{
 			var x1 = Math.Min (a.X, b.X);
 			var y1 = Math.Min (a.Y, b.Y);
 			var x2 = Math.Max (a.X, b.X);
 			var y2 = Math.Max (a.Y, b.Y);
 
-			var rect = new Gdk.Rectangle (x1, y1, x2 - x1, y2 - y1);
+			var rect = new RectangleI (x1, y1, x2 - x1, y2 - y1);
 			rect.Inflate (inflate, inflate);
 
 			return rect;
 		}
-#endif
 
 		/// <summary>
 		/// Create a rectangle with a positive width / height from the provided points.

@@ -34,6 +34,8 @@ namespace Pinta.Core
 	{
 		// Style classes from libadwaita.
 		// https://gnome.pages.gitlab.gnome.org/libadwaita/doc/1-latest/style-classes.html
+		public const string FlatStyleClass = "flat";
+		public const string LinkedStyleClass = "linked";
 		public const string SpacerStyleClass = "spacer";
 		public const string ToolbarStyleClass = "toolbar";
 

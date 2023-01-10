@@ -122,6 +122,14 @@ namespace Pinta.Core
 
 			return FromLTRB (left, top, right, bottom);
 		}
+
+		public void Inflate (int width, int height)
+		{
+			X -= width;
+			Y -= height;
+			Width += width * 2;
+			Height += height * 2;
+		}
 	}
 }
 
