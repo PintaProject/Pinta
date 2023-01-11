@@ -76,11 +76,8 @@ namespace Pinta
 
 		public Box CreateStatusBar (string name)
 		{
-			var statusbar = new Box {
-				Name = name,
-				Orientation = Orientation.Horizontal,
-				Spacing = 6
-			};
+			var statusbar = GtkExtensions.CreateToolBar ();
+			statusbar.Name = name;
 
 			shell_layout.Append (statusbar);
 

@@ -17,11 +17,12 @@
     <Compile Remove="**/*.cs" />
     <Compile Include="PintaCore.cs" />
     <Compile Include="Actions/AppActions.cs" />
+    <Compile Include="Actions/Command.cs" />
     <Compile Include="Actions/EditActions.cs" />
     <Compile Include="Actions/FileActions.cs" />
-    <Compile Include="Actions/WindowActions.cs" />
     <Compile Include="Actions/HelpActions.cs" />
-    <Compile Include="Actions/Command.cs" />
+    <Compile Include="Actions/ViewActions.cs" />
+    <Compile Include="Actions/WindowActions.cs" />
     <Compile Include="Classes/BaseTool.cs" />
     <Compile Include="Classes/Document.cs" />
     <Compile Include="Classes/DocumentHistory.cs" />
@@ -60,6 +61,7 @@
     <Compile Include="Extensions/GioExtensions.cs" />
     <Compile Include="Extensions/GioStream.cs" />
     <Compile Include="Extensions/GtkExtensions.cs" />
+    <Compile Include="Extensions/ToolBarComboBox.cs" />
     <Compile Include="Extensions/ToolBoxButton.cs" />
     <Compile Include="HistoryItems/*.cs" />
     <Compile Remove="HistoryItems/TextHistoryItem.cs" />

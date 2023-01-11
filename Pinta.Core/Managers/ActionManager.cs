@@ -36,11 +36,11 @@ namespace Pinta.Core
 		public AppActions App { get; private set; } = new ();
 		public FileActions File { get; private set; } = new ();
 		public EditActions Edit { get; private set; } = new ();
+		public ViewActions View { get; private set; } = new ();
 		public WindowActions Window { get; private set; } = new ();
 		public HelpActions Help { get; private set; } = new ();
 
 #if false // TODO-GTK4
-		public ViewActions View { get; private set; }
 		public ImageActions Image { get; private set; }
 		public LayerActions Layers { get; private set; }
 		public AdjustmentsActions Adjustments { get; private set; }
@@ -51,7 +51,6 @@ namespace Pinta.Core
 		public ActionManager ()
 		{
 #if false // TODO-GTK4
-			View = new ViewActions ();
 			Image = new ImageActions ();
 			Layers = new LayerActions ();
 			Adjustments = new AdjustmentsActions ();
@@ -107,9 +106,7 @@ namespace Pinta.Core
 				cursor.SetText (string.Format ("  {0}, {1}", pt.X, pt.Y));
 			};
 
-			var sep = GtkExtensions.CreateToolBarSeparator ();
-			sep.MarginStart = sep.MarginEnd = 6;
-			statusbar.Append (sep);
+			statusbar.Append (GtkExtensions.CreateToolBarSeparator ());
 
 			// Selection size widget
 			statusbar.Append (Image.NewFromIconName (Resources.Icons.ToolSelectRectangle));
@@ -122,9 +119,7 @@ namespace Pinta.Core
 			};
 
 			// Document zoom widget
-#if false // TODO-GTK4
 			View.CreateStatusBar (statusbar);
-#endif
 		}
 
 		public void RegisterHandlers ()
@@ -134,8 +129,8 @@ namespace Pinta.Core
 			Edit.RegisterHandlers ();
 			Image.RegisterHandlers ();
 			Layers.RegisterHandlers ();
-			View.RegisterHandlers ();
 #endif
+			View.RegisterHandlers ();
 			Help.RegisterHandlers ();
 		}
 	}
