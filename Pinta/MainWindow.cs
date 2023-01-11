@@ -308,9 +308,7 @@ namespace Pinta
 			CreateToolToolBar (window_shell);
 
 			CreatePanels (window_shell);
-#if false // TODO-GTK4
 			CreateStatusBar (window_shell);
-#endif
 
 			app.AddWindow (window_shell.Window);
 
@@ -403,18 +401,19 @@ namespace Pinta
 			PintaCore.Chrome.InitializeToolToolBar (tool_toolbar);
 		}
 
-#if false // TODO-GTK4
 		private void CreateStatusBar (WindowShell shell)
 		{
 			var statusbar = shell.CreateStatusBar ("statusbar");
 
-			statusbar.PackStart (new StatusBarColorPaletteWidget (), true, true, 0);
+			statusbar.Append (new StatusBarColorPaletteWidget () {
+				Hexpand = true,
+				Halign = Align.Fill
+			});
 
 			PintaCore.Actions.CreateStatusBar (statusbar);
 
 			PintaCore.Chrome.InitializeStatusBar (statusbar);
 		}
-#endif
 
 		private void CreatePanels (WindowShell shell)
 		{

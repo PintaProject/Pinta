@@ -74,26 +74,18 @@ namespace Pinta
 			return main_toolbar;
 		}
 
-#if false // TODO-GTK4
-		public Statusbar CreateStatusBar (string name)
+		public Box CreateStatusBar (string name)
 		{
-			var statusbar = new Statusbar {
+			var statusbar = new Box {
 				Name = name,
-				Margin = 0
+				Orientation = Orientation.Horizontal,
+				Spacing = 0
 			};
 
-			// Remove the default text area
-			var child = statusbar.Children.FirstOrDefault ();
-
-			if (child != null)
-				statusbar.Remove (child);
-
-			shell_layout.PackEnd (statusbar, false, false, 0);
-			statusbar.Show ();
+			shell_layout.Append (statusbar);
 
 			return statusbar;
 		}
-#endif
 
 		public Box CreateWorkspace ()
 		{

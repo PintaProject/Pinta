@@ -39,23 +39,10 @@ namespace Pinta.Core
 		public const string SpacerStyleClass = "spacer";
 		public const string ToolbarStyleClass = "toolbar";
 
-#if false // TODO-GTK4
-		public const int MouseLeftButton = 1;
-		public const int MouseMiddleButton = 2;
-		public const int MouseRightButton = 3;
+		public const uint MouseLeftButton = 1;
+		public const uint MouseMiddleButton = 2;
+		public const uint MouseRightButton = 3;
 
-		public static void AppendItem (this Toolbar tb, ToolItem item)
-		{
-			item.Show ();
-			tb.Insert (item, tb.NItems);
-		}
-
-		public static void AppendItem (this Statusbar tb, ToolItem item, uint padding = 0)
-		{
-			item.Show ();
-			tb.PackEnd (item, false, false, padding);
-		}
-#endif
 		/// <summary>
 		/// In GTK4, toolbars are just a Box with a different CSS style class.
 		/// </summary>

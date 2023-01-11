@@ -628,6 +628,9 @@ namespace Pinta.Core
 			g.Restore ();
 		}
 
+		public static void DrawPixbuf (this Context g, GdkPixbuf.Pixbuf pixbuf, PointD pixbuf_pos)
+			=> g.DrawPixbuf (pixbuf, pixbuf_pos.X, pixbuf_pos.Y);
+
 #if false // TODO-GTK4
 		public static void DrawLinearGradient (this Context g, Surface oldsurface, GradientColorMode mode, Color c1, Color c2, PointD p1, PointD p2)
 		{
@@ -718,11 +721,6 @@ namespace Pinta.Core
 			return CreateRectangleInt (r.X, r.Y, r.Width, r.Height);
 		}
 
-		public static Cairo.Point Location (this Cairo.Rectangle r)
-		{
-			return new Cairo.Point ((int) r.X, (int) r.Y);
-		}
-
 		public static Cairo.Rectangle Clamp (this Cairo.Rectangle r)
 		{
 			double x = r.X;
@@ -742,23 +740,6 @@ namespace Pinta.Core
 
 			return new Cairo.Rectangle (x, y, w, h);
 		}
-
-		public static bool ContainsPoint (this Cairo.Rectangle r, double x, double y)
-		{
-			if (x < r.X || x >= r.X + r.Width)
-				return false;
-
-			if (y < r.Y || y >= r.Y + r.Height)
-				return false;
-
-			return true;
-		}
-
-		public static bool ContainsPoint (this Cairo.Rectangle r, Cairo.PointD point)
-		{
-			return ContainsPoint (r, point.X, point.Y);
-		}
-
 #endif
 
 		public static GdkPixbuf.Pixbuf ToPixbuf (this Cairo.ImageSurface surfSource)

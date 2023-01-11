@@ -33,28 +33,26 @@ namespace Pinta.Gui.Widgets
 {
 	public class StatusBarColorPaletteWidget : Gtk.DrawingArea
 	{
-		private Rectangle primary_rect = new Rectangle (4, 3, 24, 24);
-		private Rectangle secondary_rect = new Rectangle (17, 16, 24, 24);
-		private Rectangle swap_rect = new Rectangle (27, 2, 15, 15);
-		private Rectangle reset_rect = new Rectangle (2, 27, 15, 15);
+		private RectangleD primary_rect = new (4, 3, 24, 24);
+		private RectangleD secondary_rect = new (17, 16, 24, 24);
+		private RectangleD swap_rect = new (27, 2, 15, 15);
+		private RectangleD reset_rect = new (2, 27, 15, 15);
 
-		private Rectangle palette_rect;
-		private Rectangle recent_palette_rect;
+		private RectangleD palette_rect;
+		private RectangleD recent_palette_rect;
 
 		const int PALETTE_ROWS = 2;
 		const int SWATCH_SIZE = 19;
 		const int WIDGET_HEIGHT = 42;
 		const int PALETTE_MARGIN = 10;
 
-		private Gdk.Pixbuf swap_icon = new (Gdk.Colorspace.Rgb, false, 8, 0, 0); // overridden in OnShown()
-		private Gdk.Pixbuf reset_icon = new (Gdk.Colorspace.Rgb, false, 8, 0, 0);
+		private GdkPixbuf.Pixbuf swap_icon = GdkPixbuf.Pixbuf.New (GdkPixbuf.Colorspace.Rgb, false, 8, 1, 1); // overridden in OnShown()
+		private GdkPixbuf.Pixbuf reset_icon = GdkPixbuf.Pixbuf.New (GdkPixbuf.Colorspace.Rgb, false, 8, 1, 1);
 
 		public StatusBarColorPaletteWidget ()
 		{
-			AddEvents ((int) Gdk.EventMask.ButtonPressMask);
-
 			HasTooltip = true;
-			QueryTooltip += HandleQueryTooltip;
+			OnQueryTooltip += HandleQueryTooltip;
 
 			PintaCore.Palette.PrimaryColorChanged += new EventHandler (Palette_ColorChanged);
 			PintaCore.Palette.SecondaryColorChanged += new EventHandler (Palette_ColorChanged);
@@ -62,22 +60,33 @@ namespace Pinta.Gui.Widgets
 			PintaCore.Palette.CurrentPalette.PaletteChanged += new EventHandler (Palette_ColorChanged);
 
 			HeightRequest = WIDGET_HEIGHT;
+
+			OnRealize += (_, _) => HandleShown ();
+			OnResize += (_, e) => HandleSizeAllocated (e);
+			SetDrawFunc ((area, context, width, height) => Draw (context));
+
+			// Handle mouse clicks.
+			var gesture = Gtk.GestureClick.New ();
+			gesture.SetButton (0); // Listen for all mouse buttons.
+			gesture.OnReleased += (_, e) => {
+				HandleClick (new PointD (e.X, e.Y), gesture.GetCurrentButton ());
+				gesture.SetState (Gtk.EventSequenceState.Claimed);
+			};
+			AddController (gesture);
 		}
 
-		protected override void OnShown ()
+		private void HandleShown ()
 		{
-			base.OnShown ();
-
 			// Load the symbolic icons when shown. In the constructor the StyleContext isn't ready,
 			// so symbolic icons might not be colored correctly.
+#if false // TODO-GTK4 resources
 			swap_icon = PintaCore.Resources.GetIcon (Pinta.Resources.Icons.ColorPaletteSwap, StyleContext);
 			reset_icon = PintaCore.Resources.GetIcon (Pinta.Resources.Icons.ColorPaletteReset, StyleContext);
+#endif
 		}
 
-		protected override bool OnButtonPressEvent (Gdk.EventButton ev)
+		private void HandleClick (PointD point, uint button)
 		{
-			var point = ev.GetPoint ();
-
 			switch (GetElementAtPoint (point)) {
 				case WidgetElement.PrimaryColor:
 					PintaCore.Palette.PrimaryColor = GetUserChosenColor (PintaCore.Palette.PrimaryColor, Translations.GetString ("Choose Primary Color"));
@@ -105,9 +114,9 @@ namespace Pinta.Gui.Widgets
 					if (index < 0)
 						break;
 
-					if (ev.Button == 3)
+					if (button == GtkExtensions.MouseRightButton)
 						PintaCore.Palette.SecondaryColor = PintaCore.Palette.CurrentPalette[index];
-					else if (ev.Button == 1)
+					else if (button == GtkExtensions.MouseLeftButton)
 						PintaCore.Palette.PrimaryColor = PintaCore.Palette.CurrentPalette[index];
 					else
 						PintaCore.Palette.CurrentPalette[index] = GetUserChosenColor (PintaCore.Palette.CurrentPalette[index], Translations.GetString ("Choose Palette Color"));
@@ -120,29 +129,25 @@ namespace Pinta.Gui.Widgets
 					if (recent_index < 0)
 						break;
 
-					if (ev.Button == 3)
+					if (button == GtkExtensions.MouseRightButton)
 						PintaCore.Palette.SetColor (false, PintaCore.Palette.RecentlyUsedColors.ElementAt (recent_index), false);
-					else if (ev.Button == 1)
+					else if (button == GtkExtensions.MouseLeftButton)
 						PintaCore.Palette.SetColor (true, PintaCore.Palette.RecentlyUsedColors.ElementAt (recent_index), false);
 
 					break;
 			}
-
-			return base.OnButtonPressEvent (ev);
 		}
 
-		protected override bool OnDrawn (Context g)
+		private void Draw (Context g)
 		{
-			base.OnDrawn (g);
-
 			// Draw Secondary color swatch
 			g.FillRectangle (secondary_rect, PintaCore.Palette.SecondaryColor);
-			g.DrawRectangle (new Rectangle (secondary_rect.X + 1, secondary_rect.Y + 1, secondary_rect.Width - 2, secondary_rect.Height - 2), new Color (1, 1, 1), 1);
+			g.DrawRectangle (new RectangleD (secondary_rect.X + 1, secondary_rect.Y + 1, secondary_rect.Width - 2, secondary_rect.Height - 2), new Color (1, 1, 1), 1);
 			g.DrawRectangle (secondary_rect, new Color (0, 0, 0), 1);
 
 			// Draw Primary color swatch
 			g.FillRectangle (primary_rect, PintaCore.Palette.PrimaryColor);
-			g.DrawRectangle (new Rectangle (primary_rect.X + 1, primary_rect.Y + 1, primary_rect.Width - 2, primary_rect.Height - 2), new Color (1, 1, 1), 1);
+			g.DrawRectangle (new RectangleD (primary_rect.X + 1, primary_rect.Y + 1, primary_rect.Width - 2, primary_rect.Height - 2), new Color (1, 1, 1), 1);
 			g.DrawRectangle (primary_rect, new Color (0, 0, 0), 1);
 
 			// Draw swatch icons
@@ -160,22 +165,21 @@ namespace Pinta.Gui.Widgets
 
 			for (var i = 0; i < palette.Count; i++)
 				g.FillRectangle (GetSwatchBounds (i), palette[i]);
-
-			return true;
 		}
 
-		protected override void OnSizeAllocated (Gdk.Rectangle allocation)
+		private void HandleSizeAllocated (Gtk.DrawingArea.ResizeSignalArgs e)
 		{
-			base.OnSizeAllocated (allocation);
+			int width = e.Width;
+			int height = e.Height;
 
 			// Store the bounds allocated for our palette
 			var recent_cols = PintaCore.Palette.MaxRecentlyUsedColor / PALETTE_ROWS;
 
-			recent_palette_rect = new Rectangle (50, 2, SWATCH_SIZE * recent_cols, SWATCH_SIZE * PALETTE_ROWS);
-			palette_rect = new Rectangle (recent_palette_rect.GetRight () + PALETTE_MARGIN, 2, AllocatedWidth - recent_palette_rect.GetRight () - PALETTE_MARGIN, SWATCH_SIZE * PALETTE_ROWS);
+			recent_palette_rect = new RectangleD (50, 2, SWATCH_SIZE * recent_cols, SWATCH_SIZE * PALETTE_ROWS);
+			palette_rect = new RectangleD (recent_palette_rect.Right + PALETTE_MARGIN, 2, width - recent_palette_rect.Right - PALETTE_MARGIN, SWATCH_SIZE * PALETTE_ROWS);
 		}
 
-		private Rectangle GetSwatchBounds (int index, bool recentColorPalette = false)
+		private RectangleD GetSwatchBounds (int index, bool recentColorPalette = false)
 		{
 			// Normal swatches are layed out like this:
 			// 0 | 2 | 4 | 6
@@ -194,7 +198,7 @@ namespace Pinta.Gui.Widgets
 			var x = palette_bounds.X + (col * SWATCH_SIZE);
 			var y = palette_bounds.Y + (row * SWATCH_SIZE);
 
-			return new Rectangle (x, y, SWATCH_SIZE, SWATCH_SIZE);
+			return new RectangleD (x, y, SWATCH_SIZE, SWATCH_SIZE);
 		}
 
 		private int GetSwatchAtLocation (PointD point, bool recentColorPalette = false)
@@ -212,7 +216,7 @@ namespace Pinta.Gui.Widgets
 		/// <summary>
 		/// Provide a custom tooltip based on the cursor location.
 		/// </summary>
-		private void HandleQueryTooltip (object o, Gtk.QueryTooltipArgs args)
+		private void HandleQueryTooltip (object o, Gtk.Widget.QueryTooltipSignalArgs args)
 		{
 			string? text = null;
 			var point = new PointD (args.X, args.Y);
@@ -242,31 +246,37 @@ namespace Pinta.Gui.Widgets
 					break;
 			}
 
-			args.Tooltip.Text = text;
+			args.Tooltip.SetText (text);
+#if false // TODO-GTK4
 			args.RetVal = (text != null);
+#endif
 		}
 
 		private void Palette_ColorChanged (object? sender, EventArgs e)
 		{
 			// Color change events may be received while the widget is minimized,
 			// so we only call Invalidate() if the widget is shown.
-			if (IsRealized)
-				Window.Invalidate ();
+			if (GetRealized ())
+				QueueDraw ();
 		}
 
 		private Color GetUserChosenColor (Color initialColor, string title)
 		{
-			using (var ccd = new Gtk.ColorChooserDialog (title, PintaCore.Chrome.MainWindow)) {
-				ccd.UseAlpha = true;
-				ccd.Rgba = initialColor.ToGdkRGBA ();
+			var ccd = Gtk.ColorChooserDialog.New (title, PintaCore.Chrome.MainWindow);
+			ccd.UseAlpha = true;
+#if false // TODO-GTK4 - Gdk.RGBA bindings needed
+			ccd.Rgba = initialColor.ToGdkRGBA ();
 
-				var response = (Gtk.ResponseType) ccd.Run ();
+			var response = (Gtk.ResponseType) ccd.Run ();
 
-				if (response == Gtk.ResponseType.Ok)
-					return ccd.Rgba.ToCairoColor ();
+			if (response == Gtk.ResponseType.Ok)
+				return ccd.Rgba.ToCairoColor ();
 
-				return initialColor;
-			}
+			return initialColor;
+#else
+			ccd.Present ();
+			return initialColor;
+#endif
 		}
 
 		private WidgetElement GetElementAtPoint (PointD point)

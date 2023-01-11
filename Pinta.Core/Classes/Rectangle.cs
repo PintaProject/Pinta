@@ -57,6 +57,21 @@ namespace Pinta.Core
 		public double Bottom => Y + Height - 1;
 
 		public override string ToString () => $"x:{X} y:{Y} w:{Width} h:{Height}";
+
+		public bool ContainsPoint (double x, double y)
+		{
+			if (x < this.X || x >= this.X + this.Width)
+				return false;
+
+			if (y < this.Y || y >= this.Y + this.Height)
+				return false;
+
+			return true;
+		}
+
+		public bool ContainsPoint (in PointD point) => ContainsPoint (point.X, point.Y);
+
+		public PointD Location () => new PointD (X, Y);
 	}
 
 	public record struct RectangleI

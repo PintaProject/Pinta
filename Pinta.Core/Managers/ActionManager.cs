@@ -95,9 +95,9 @@ namespace Pinta.Core
 			toolbar.Append (Edit.Deselect.CreateToolBarItem ());
 		}
 
-#if false // TODO-GTK4
-		public void CreateStatusBar (Statusbar statusbar)
+		public void CreateStatusBar (Box statusbar)
 		{
+#if false // TODO-GTK4
 			// Document zoom widget
 			View.CreateStatusBar (statusbar);
 
@@ -124,8 +124,8 @@ namespace Pinta.Core
 				var pt = PintaCore.Chrome.LastCanvasCursorPoint;
 				cursor.Text = string.Format ("  {0}, {1}", pt.X, pt.Y);
 			};
-		}
 #endif
+		}
 
 		public void RegisterHandlers ()
 		{
