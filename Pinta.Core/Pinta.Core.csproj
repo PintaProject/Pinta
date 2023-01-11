@@ -49,6 +49,7 @@
     <Compile Include="EventArgs/DocumentCancelEventArgs.cs" />
     <Compile Include="EventArgs/HistoryItemAddedEventArgs.cs" />
     <Compile Include="EventArgs/ModifyCompressionEventArgs.cs" />
+    <Compile Include="EventArgs/TextChangedEventArgs.cs" />
     <Compile Include="EventArgs/ToolEventArgs.cs" />
     <Compile Include="EventArgs/ToolKeyEventArgs.cs" />
     <Compile Include="EventArgs/ToolMouseEventArgs.cs" />

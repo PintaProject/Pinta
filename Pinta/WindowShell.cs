@@ -79,7 +79,7 @@ namespace Pinta
 			var statusbar = new Box {
 				Name = name,
 				Orientation = Orientation.Horizontal,
-				Spacing = 0
+				Spacing = 6
 			};
 
 			shell_layout.Append (statusbar);

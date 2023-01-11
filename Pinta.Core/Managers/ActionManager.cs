@@ -97,33 +97,33 @@ namespace Pinta.Core
 
 		public void CreateStatusBar (Box statusbar)
 		{
-#if false // TODO-GTK4
-			// Document zoom widget
-			View.CreateStatusBar (statusbar);
-
-			// Selection size widget
-			var SelectionSize = new ToolBarLabel ("  0, 0");
-
-			statusbar.AppendItem (SelectionSize);
-			statusbar.AppendItem (new ToolBarImage (Resources.Icons.ToolSelectRectangle));
-
-			PintaCore.Workspace.SelectionChanged += delegate {
-				var bounds = PintaCore.Workspace.HasOpenDocuments ? PintaCore.Workspace.ActiveDocument.Selection.GetBounds () : new Cairo.Rectangle ();
-				SelectionSize.Text = string.Format ("  {0}, {1}", bounds.Width, bounds.Height);
-			};
-
-			statusbar.AppendItem (new SeparatorToolItem { Margin = 6 }, 6);
-
 			// Cursor position widget
-			var cursor = new ToolBarLabel ("  0, 0");
-
-			statusbar.AppendItem (cursor);
-			statusbar.AppendItem (new ToolBarImage (Resources.Icons.CursorPosition));
+			statusbar.Append (Image.NewFromIconName (Resources.Icons.CursorPosition));
+			var cursor = Label.New ("  0, 0");
+			statusbar.Append (cursor);
 
 			PintaCore.Chrome.LastCanvasCursorPointChanged += delegate {
 				var pt = PintaCore.Chrome.LastCanvasCursorPoint;
-				cursor.Text = string.Format ("  {0}, {1}", pt.X, pt.Y);
+				cursor.SetText (string.Format ("  {0}, {1}", pt.X, pt.Y));
 			};
+
+			var sep = GtkExtensions.CreateToolBarSeparator ();
+			sep.MarginStart = sep.MarginEnd = 6;
+			statusbar.Append (sep);
+
+			// Selection size widget
+			statusbar.Append (Image.NewFromIconName (Resources.Icons.ToolSelectRectangle));
+			var selection_size = Label.New ("  0, 0");
+			statusbar.Append (selection_size);
+
+			PintaCore.Workspace.SelectionChanged += delegate {
+				var bounds = PintaCore.Workspace.HasOpenDocuments ? PintaCore.Workspace.ActiveDocument.Selection.GetBounds () : new RectangleD ();
+				selection_size.SetText (string.Format ("  {0}, {1}", bounds.Width, bounds.Height));
+			};
+
+			// Document zoom widget
+#if false // TODO-GTK4
+			View.CreateStatusBar (statusbar);
 #endif
 		}
 

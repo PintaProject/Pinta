@@ -31,6 +31,8 @@ namespace Pinta.Core
 {
 	public class ChromeManager
 	{
+		private PointI last_canvas_cursor_point;
+
 		// NRT - These are all initialized via the Initialize* functions
 		// but it would be nice to rewrite it to provably non-null.
 		public Application Application { get; private set; } = null!;
@@ -39,7 +41,6 @@ namespace Pinta.Core
 #if false // TODO-GTK4
 		private IProgressDialog progress_dialog = null!;
 		private bool main_window_busy;
-		private Gdk.Point last_canvas_cursor_point;
 		private ErrorDialogHandler error_dialog_handler = null!;
 #endif
 		private MessageDialogHandler message_dialog_handler = null!;
@@ -59,9 +60,8 @@ namespace Pinta.Core
 		{
 		}
 
-#if false // TODO-GTK4
 		#region Public Properties
-		public Gdk.Point LastCanvasCursorPoint {
+		public PointI LastCanvasCursorPoint {
 			get { return last_canvas_cursor_point; }
 			set {
 				if (last_canvas_cursor_point != value) {
@@ -71,6 +71,7 @@ namespace Pinta.Core
 			}
 		}
 
+#if false // TODO-GTK4
 		public bool MainWindowBusy {
 			get { return main_window_busy; }
 			set {
@@ -82,8 +83,8 @@ namespace Pinta.Core
 					main_window.Window.Cursor = new Gdk.Cursor (Gdk.CursorType.Arrow);
 			}
 		}
-		#endregion
 #endif
+		#endregion
 
 		#region Public Methods
 		public void InitializeApplication (Gtk.Application application)
@@ -161,12 +162,9 @@ namespace Pinta.Core
 
 		public void SetStatusBarText (string text)
 		{
-#if false // TODO-GTK4
 			OnStatusBarTextChanged (text);
-#endif
 		}
 		#endregion
-#if false // TODO-GTK4
 		#region Protected Methods
 		protected void OnLastCanvasCursorPointChanged ()
 		{
@@ -185,7 +183,6 @@ namespace Pinta.Core
 		public event EventHandler? LastCanvasCursorPointChanged;
 		public event EventHandler<TextChangedEventArgs>? StatusBarTextChanged;
 		#endregion
-#endif
 	}
 
 	public interface IProgressDialog
