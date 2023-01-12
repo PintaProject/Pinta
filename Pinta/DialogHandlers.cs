@@ -58,9 +58,11 @@ namespace Pinta
 			action_handlers.Add (new AddinManagerAction ());
 
 			// Image
+#endif
 			action_handlers.Add (new ResizeImageAction ());
 			action_handlers.Add (new ResizeCanvasAction ());
 
+#if false // TODO-GTK4
 			// Layers
 			action_handlers.Add (new LayerPropertiesAction ());
 			action_handlers.Add (new RotateZoomLayerAction ());

@@ -33,8 +33,8 @@ namespace Pinta
 {
 	public class ResizeImageDialog : Dialog
 	{
-		private RadioButton percentageRadio;
-		private RadioButton absoluteRadio;
+		private CheckButton percentageRadio;
+		private CheckButton absoluteRadio;
 		private SpinButton percentageSpinner;
 		private SpinButton widthSpinner;
 		private SpinButton heightSpinner;
@@ -42,10 +42,13 @@ namespace Pinta
 
 		private bool value_changing;
 
-		public ResizeImageDialog () : base (Translations.GetString ("Resize Image"), PintaCore.Chrome.MainWindow,
-						    DialogFlags.Modal,
-											Core.GtkExtensions.DialogButtonsCancelOk ())
+		public ResizeImageDialog ()
 		{
+			Title = Translations.GetString ("Resize Image");
+			TransientFor = PintaCore.Chrome.MainWindow;
+			Modal = true;
+			this.AddCancelOkButtons ();
+
 			Build ();
 
 			aspectCheckbox.Active = true;
@@ -53,28 +56,30 @@ namespace Pinta
 			widthSpinner.Value = PintaCore.Workspace.ImageSize.Width;
 			heightSpinner.Value = PintaCore.Workspace.ImageSize.Height;
 
-			percentageRadio.Toggled += new EventHandler (percentageRadio_Toggled);
-			absoluteRadio.Toggled += new EventHandler (absoluteRadio_Toggled);
-			percentageRadio.Toggle ();
+			percentageRadio.OnToggled += percentageRadio_Toggled;
+			absoluteRadio.OnToggled += absoluteRadio_Toggled;
+			percentageRadio.Active = true;
 
 			percentageSpinner.Value = 100;
-			percentageSpinner.ValueChanged += new EventHandler (percentageSpinner_ValueChanged);
+			percentageSpinner.OnValueChanged += percentageSpinner_ValueChanged;
 
-			widthSpinner.ValueChanged += new EventHandler (widthSpinner_ValueChanged);
-			heightSpinner.ValueChanged += new EventHandler (heightSpinner_ValueChanged);
+			widthSpinner.OnValueChanged += widthSpinner_ValueChanged;
+			heightSpinner.OnValueChanged += heightSpinner_ValueChanged;
 
-			DefaultResponse = Gtk.ResponseType.Ok;
+			SetDefaultResponse ((int) ResponseType.Ok);
 
+#if false // TODO-GTK4 SpinButton API has changed and it no longer provides an Entry. Might be able to obtain a Gtk.Text?
 			widthSpinner.ActivatesDefault = true;
 			heightSpinner.ActivatesDefault = true;
 			percentageSpinner.ActivatesDefault = true;
+#endif
 			percentageSpinner.GrabFocus ();
 		}
 
 		#region Public Methods
 		public void SaveChanges ()
 		{
-			PintaCore.Workspace.ResizeImage (widthSpinner.ValueAsInt, heightSpinner.ValueAsInt);
+			PintaCore.Workspace.ResizeImage (widthSpinner.GetValueAsInt (), heightSpinner.GetValueAsInt ());
 		}
 		#endregion
 
@@ -105,8 +110,8 @@ namespace Pinta
 
 		private void percentageSpinner_ValueChanged (object? sender, EventArgs e)
 		{
-			widthSpinner.Value = (int) (PintaCore.Workspace.ImageSize.Width * (percentageSpinner.ValueAsInt / 100f));
-			heightSpinner.Value = (int) (PintaCore.Workspace.ImageSize.Height * (percentageSpinner.ValueAsInt / 100f));
+			widthSpinner.Value = (int) (PintaCore.Workspace.ImageSize.Width * (percentageSpinner.GetValueAsInt () / 100f));
+			heightSpinner.Value = (int) (PintaCore.Workspace.ImageSize.Height * (percentageSpinner.GetValueAsInt () / 100f));
 		}
 
 		private void absoluteRadio_Toggled (object? sender, EventArgs e)
@@ -140,49 +145,48 @@ namespace Pinta
 		private void Build ()
 		{
 			IconName = Resources.Icons.ImageResize;
-			WindowPosition = WindowPosition.CenterOnParent;
 
 			DefaultWidth = 300;
 			DefaultHeight = 200;
 
-			percentageRadio = new RadioButton (Translations.GetString ("By percentage:"));
-			absoluteRadio = new RadioButton (percentageRadio, Translations.GetString ("By absolute size:"));
+			percentageRadio = CheckButton.NewWithLabel (Translations.GetString ("By percentage:"));
+			absoluteRadio = CheckButton.NewWithLabel (Translations.GetString ("By absolute size:"));
+			absoluteRadio.SetGroup (percentageRadio);
 
-			percentageSpinner = new SpinButton (1, int.MaxValue, 1);
-			widthSpinner = new SpinButton (1, int.MaxValue, 1);
-			heightSpinner = new SpinButton (1, int.MaxValue, 1);
+			percentageSpinner = SpinButton.NewWithRange (1, int.MaxValue, 1);
+			widthSpinner = SpinButton.NewWithRange (1, int.MaxValue, 1);
+			heightSpinner = SpinButton.NewWithRange (1, int.MaxValue, 1);
 
-			aspectCheckbox = new CheckButton (Translations.GetString ("Maintain aspect ratio"));
+			aspectCheckbox = CheckButton.NewWithLabel (Translations.GetString ("Maintain aspect ratio"));
 
 			const int spacing = 6;
-			var main_vbox = new VBox () { Spacing = spacing, BorderWidth = 12 };
+			var main_vbox = new Box () { Orientation = Orientation.Vertical, Spacing = spacing };
 
-			var hbox_percent = new HBox () { Spacing = spacing };
-			hbox_percent.PackStart (percentageRadio, true, true, 0);
-			hbox_percent.PackStart (percentageSpinner, false, false, 0);
-			hbox_percent.PackEnd (new Label ("%"), false, false, 0);
-			main_vbox.PackStart (hbox_percent, false, false, 0);
+			var hbox_percent = new Box () { Orientation = Orientation.Horizontal, Spacing = spacing };
+			hbox_percent.Append (percentageRadio);
+			hbox_percent.Append (percentageSpinner);
+			hbox_percent.Append (Label.New ("%"));
+			main_vbox.Append (hbox_percent);
 
-			main_vbox.PackStart (absoluteRadio, false, false, 0);
+			main_vbox.Append (absoluteRadio);
 
-			var hbox_width = new HBox () { Spacing = spacing };
-			hbox_width.PackStart (new Label (Translations.GetString ("Width:")), false, false, 0);
-			hbox_width.PackStart (widthSpinner, false, false, 0);
-			hbox_width.PackStart (new Label (Translations.GetString ("pixels")), false, false, 0);
-			main_vbox.PackStart (hbox_width, false, false, 0);
+			var hbox_width = new Box () { Orientation = Orientation.Horizontal, Spacing = spacing };
+			hbox_width.Append (Label.New (Translations.GetString ("Width:")));
+			hbox_width.Append (widthSpinner);
+			hbox_width.Append (Label.New (Translations.GetString ("pixels")));
+			main_vbox.Append (hbox_width);
 
-			var hbox_height = new HBox () { Spacing = spacing };
-			hbox_height.PackStart (new Label (Translations.GetString ("Height:")), false, false, 0);
-			hbox_height.PackStart (heightSpinner, false, false, 0);
-			hbox_height.PackStart (new Label (Translations.GetString ("pixels")), false, false, 0);
-			main_vbox.PackStart (hbox_height, false, false, 0);
+			var hbox_height = new Box () { Orientation = Orientation.Horizontal, Spacing = spacing };
+			hbox_height.Append (Label.New (Translations.GetString ("Height:")));
+			hbox_height.Append (heightSpinner);
+			hbox_height.Append (Label.New (Translations.GetString ("pixels")));
+			main_vbox.Append (hbox_height);
 
-			main_vbox.PackStart (aspectCheckbox, false, false, 0);
+			main_vbox.Append (aspectCheckbox);
 
-			ContentArea.BorderWidth = 2;
-			ContentArea.Add (main_vbox);
-
-			ShowAll ();
+			var content_area = (Box) GetContentArea ();
+			content_area.SetAllMargins (12);
+			content_area.Append (main_vbox);
 		}
 		#endregion
 	}

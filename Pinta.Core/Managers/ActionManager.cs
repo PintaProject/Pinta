@@ -37,11 +37,11 @@ namespace Pinta.Core
 		public FileActions File { get; private set; } = new ();
 		public EditActions Edit { get; private set; } = new ();
 		public ViewActions View { get; private set; } = new ();
+		public ImageActions Image { get; private set; } = new ();
 		public WindowActions Window { get; private set; } = new ();
 		public HelpActions Help { get; private set; } = new ();
 
 #if false // TODO-GTK4
-		public ImageActions Image { get; private set; }
 		public LayerActions Layers { get; private set; }
 		public AdjustmentsActions Adjustments { get; private set; }
 		public EffectsActions Effects { get; private set; }
@@ -51,7 +51,6 @@ namespace Pinta.Core
 		public ActionManager ()
 		{
 #if false // TODO-GTK4
-			Image = new ImageActions ();
 			Layers = new LayerActions ();
 			Adjustments = new AdjustmentsActions ();
 			Effects = new EffectsActions ();
@@ -88,16 +87,14 @@ namespace Pinta.Core
 			}
 
 			toolbar.Append (GtkExtensions.CreateToolBarSeparator ());
-#if false // TODO-GTK4 - enable once the Image menu is enabled
 			toolbar.Append (Image.CropToSelection.CreateToolBarItem ());
-#endif
 			toolbar.Append (Edit.Deselect.CreateToolBarItem ());
 		}
 
 		public void CreateStatusBar (Box statusbar)
 		{
 			// Cursor position widget
-			statusbar.Append (Image.NewFromIconName (Resources.Icons.CursorPosition));
+			statusbar.Append (Gtk.Image.NewFromIconName (Resources.Icons.CursorPosition));
 			var cursor = Label.New ("  0, 0");
 			statusbar.Append (cursor);
 
@@ -109,7 +106,7 @@ namespace Pinta.Core
 			statusbar.Append (GtkExtensions.CreateToolBarSeparator ());
 
 			// Selection size widget
-			statusbar.Append (Image.NewFromIconName (Resources.Icons.ToolSelectRectangle));
+			statusbar.Append (Gtk.Image.NewFromIconName (Resources.Icons.ToolSelectRectangle));
 			var selection_size = Label.New ("  0, 0");
 			statusbar.Append (selection_size);
 
@@ -125,9 +122,9 @@ namespace Pinta.Core
 		public void RegisterHandlers ()
 		{
 			File.RegisterHandlers ();
+			Image.RegisterHandlers ();
 #if false // TODO-GTK4
 			Edit.RegisterHandlers ();
-			Image.RegisterHandlers ();
 			Layers.RegisterHandlers ();
 #endif
 			View.RegisterHandlers ();
