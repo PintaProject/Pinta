@@ -170,17 +170,20 @@ namespace Pinta
 
 			main_vbox.Append (absoluteRadio);
 
-			var hbox_width = new Box () { Orientation = Orientation.Horizontal, Spacing = spacing };
-			hbox_width.Append (Label.New (Translations.GetString ("Width:")));
-			hbox_width.Append (widthSpinner);
-			hbox_width.Append (Label.New (Translations.GetString ("pixels")));
-			main_vbox.Append (hbox_width);
+			var grid = new Grid () { RowSpacing = spacing, ColumnSpacing = 6, ColumnHomogeneous = false };
+			var width_label = Label.New (Translations.GetString ("Width:"));
+			width_label.Halign = Align.End;
+			grid.Attach (width_label, 0, 0, 1, 1);
+			grid.Attach (widthSpinner, 1, 0, 1, 1);
+			grid.Attach (Label.New (Translations.GetString ("pixels")), 2, 0, 1, 1);
 
-			var hbox_height = new Box () { Orientation = Orientation.Horizontal, Spacing = spacing };
-			hbox_height.Append (Label.New (Translations.GetString ("Height:")));
-			hbox_height.Append (heightSpinner);
-			hbox_height.Append (Label.New (Translations.GetString ("pixels")));
-			main_vbox.Append (hbox_height);
+			var height_label = Label.New (Translations.GetString ("Height:"));
+			height_label.Halign = Align.End;
+			grid.Attach (height_label, 0, 1, 1, 1);
+			grid.Attach (heightSpinner, 1, 1, 1, 1);
+			grid.Attach (Label.New (Translations.GetString ("pixels")), 2, 1, 1, 1);
+
+			main_vbox.Append (grid);
 
 			main_vbox.Append (aspectCheckbox);
 
