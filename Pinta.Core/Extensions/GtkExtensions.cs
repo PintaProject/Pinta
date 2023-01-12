@@ -35,8 +35,10 @@ namespace Pinta.Core
 		// Style classes from libadwaita.
 		// https://gnome.pages.gitlab.gnome.org/libadwaita/doc/1-latest/style-classes.html
 		public const string FlatStyleClass = "flat";
+		public const string InlineStyleClass = "inline";
 		public const string LinkedStyleClass = "linked";
 		public const string SpacerStyleClass = "spacer";
+		public const string SuggestedActionStyleClass = "suggested-action";
 		public const string ToolbarStyleClass = "toolbar";
 
 		public const uint MouseLeftButton = 1;
@@ -265,13 +267,16 @@ namespace Pinta.Core
 		public static void AddCancelOkButtons (this Dialog dialog)
 		{
 			// TODO-GTK4 - can these use the translations from GTK?
+			Widget ok_button;
 			if (PintaCore.System.OperatingSystem == OS.Windows) {
-				dialog.AddButton ("_OK", (int) ResponseType.Ok);
+				ok_button = dialog.AddButton ("_OK", (int) ResponseType.Ok);
 				dialog.AddButton ("_Cancel", (int) ResponseType.Cancel);
 			} else {
 				dialog.AddButton ("_Cancel", (int) ResponseType.Cancel);
-				dialog.AddButton ("_OK", (int) ResponseType.Ok);
+				ok_button = dialog.AddButton ("_OK", (int) ResponseType.Ok);
 			}
+
+			ok_button.AddCssClass (SuggestedActionStyleClass);
 		}
 
 #if false // TODO-GTK4
