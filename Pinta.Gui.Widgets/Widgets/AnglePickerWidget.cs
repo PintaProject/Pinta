@@ -14,7 +14,7 @@ using Pinta.Core;
 
 namespace Pinta.Gui.Widgets
 {
-	public class AnglePickerWidget : FilledAreaBin
+	public class AnglePickerWidget : Box
 	{
 		private AnglePickerGraphic anglepickergraphic1;
 		private SpinButton spin;
@@ -26,17 +26,21 @@ namespace Pinta.Gui.Widgets
 			Build ();
 
 			anglepickergraphic1.ValueChanged += HandleAnglePickerValueChanged;
-			spin.ValueChanged += HandleSpinValueChanged;
-			button.Clicked += HandleButtonClicked;
+			spin.OnValueChanged += HandleSpinValueChanged;
+			button.OnClicked += HandleButtonClicked;
 
+			OnRealize += (_, _) => anglepickergraphic1.ValueDouble = DefaultValue;
+
+#if false // TODO-GTK4 SpinButton API has changed and it no longer provides an Entry. Might be able to obtain a Gtk.Text?
 			spin.ActivatesDefault = true;
+#endif
 		}
 
 		public double DefaultValue { get; set; }
 
 		public string Label {
-			get => label.Text;
-			set => label.Text = value;
+			get => label.GetText ();
+			set => label.SetText (value);
 		}
 
 		public double Value {
@@ -47,13 +51,6 @@ namespace Pinta.Gui.Widgets
 					OnValueChanged ();
 				}
 			}
-		}
-
-		protected override void OnShown ()
-		{
-			base.OnShown ();
-
-			anglepickergraphic1.ValueDouble = DefaultValue;
 		}
 
 		private void HandleAnglePickerValueChanged (object? sender, EventArgs e)
@@ -84,59 +81,48 @@ namespace Pinta.Gui.Widgets
 		[MemberNotNull (nameof (anglepickergraphic1), nameof (spin), nameof (button), nameof (label))]
 		private void Build ()
 		{
+			const int spacing = 6;
+
 			// Section label + line
-			var hbox1 = new HBox (false, 6);
+			var hbox1 = new Box () { Orientation = Orientation.Horizontal, Spacing = spacing };
 
 			label = new Label ();
-			hbox1.PackStart (label, false, false, 0);
-			hbox1.PackStart (new HSeparator (), true, true, 0);
+			hbox1.Append (label);
+			hbox1.Append (new Separator () { Orientation = Orientation.Horizontal });
 
 			// Angle graphic + spinner + reset button
-			var hbox2 = new HBox (false, 6);
+			var hbox2 = new Box () { Orientation = Orientation.Horizontal, Spacing = spacing };
 
 			anglepickergraphic1 = new AnglePickerGraphic ();
-			hbox2.PackStart (anglepickergraphic1, true, false, 0);
+			anglepickergraphic1.Hexpand = true;
+			anglepickergraphic1.Halign = Align.Center;
+			hbox2.Append (anglepickergraphic1);
 
-			spin = new SpinButton (0, 360, 1) {
-				CanFocus = true,
-				ClimbRate = 1,
-				Numeric = true
-			};
+			spin = SpinButton.NewWithRange (0, 360, 1);
+			spin.CanFocus = true;
+			spin.ClimbRate = 1;
+			spin.Numeric = true;
+			spin.Adjustment!.PageIncrement = 10;
+			spin.Valign = Align.Start;
 
-			spin.Adjustment.PageIncrement = 10;
-
-			var alignment = new Alignment (0.5F, 0F, 1F, 0F) {
-				spin
-			};
-
-			hbox2.PackStart (alignment, false, false, 0);
+			hbox2.Append (spin);
 
 			// Reset button
 			button = new Button {
+				IconName = Resources.StandardIcons.GoPrevious,
 				WidthRequest = 28,
 				HeightRequest = 24,
 				CanFocus = true,
-				UseUnderline = true
+				UseUnderline = true,
+				Valign = Align.Start
 			};
-
-			var button_image = Image.NewFromIconName (Resources.StandardIcons.GoPrevious, IconSize.Button);
-			button.Add (button_image);
-
-			var alignment2 = new Alignment (0.5F, 0F, 1F, 0F) {
-				button
-			};
-
-			hbox2.PackStart (alignment2, false, false, 0);
+			hbox2.Append (button);
 
 			// Main layout
-			var vbox = new VBox (false, 6) {
-				hbox1,
-				hbox2
-			};
-
-			Add (vbox);
-
-			vbox.ShowAll ();
+			Orientation = Orientation.Vertical;
+			Spacing = spacing;
+			Append (hbox1);
+			Append (hbox2);
 		}
 	}
 }

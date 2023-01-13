@@ -72,6 +72,14 @@ namespace Pinta.Core
 		public bool ContainsPoint (in PointD point) => ContainsPoint (point.X, point.Y);
 
 		public PointD Location () => new PointD (X, Y);
+
+		public void Inflate (double width, double height)
+		{
+			X -= width;
+			Y -= height;
+			Width += width * 2;
+			Height += height * 2;
+		}
 	}
 
 	public record struct RectangleI

@@ -316,8 +316,9 @@ namespace Pinta.Core
 
 			return dirty;
 		}
+#endif
 
-		public static Rectangle DrawEllipse (this Context g, Rectangle r, Color color, int lineWidth)
+		public static RectangleD DrawEllipse (this Context g, RectangleD r, Color color, int lineWidth)
 		{
 			double rx = r.Width / 2;
 			double ry = r.Height / 2;
@@ -339,7 +340,7 @@ namespace Pinta.Core
 			g.SetSourceColor (color);
 			g.LineWidth = lineWidth;
 
-			Rectangle dirty = g.StrokeExtents ();
+			RectangleD dirty = g.StrokeExtents ();
 
 			g.Stroke ();
 			g.Restore ();
@@ -347,7 +348,7 @@ namespace Pinta.Core
 			return dirty;
 		}
 
-		public static Rectangle FillEllipse (this Context g, Rectangle r, Color color)
+		public static RectangleD FillEllipse (this Context g, RectangleD r, Color color)
 		{
 			double rx = r.Width / 2;
 			double ry = r.Height / 2;
@@ -368,7 +369,7 @@ namespace Pinta.Core
 
 			g.SetSourceColor (color);
 
-			Rectangle dirty = g.StrokeExtents ();
+			RectangleD dirty = g.StrokeExtents ();
 
 			g.Fill ();
 			g.Restore ();
@@ -376,6 +377,7 @@ namespace Pinta.Core
 			return dirty;
 		}
 
+#if false // TODO-GTK4
 		public static Path CreateEllipsePath (this Context g, Rectangle r)
 		{
 			double rx = r.Width / 2;
@@ -547,8 +549,9 @@ namespace Pinta.Core
 			var cp2y = cp1y + (y2 - c_y) / 3.0;
 			g.CurveTo (cp1x, cp1y, cp2x, cp2y, x2, y2);
 		}
+#endif
 
-		public static Rectangle DrawLine (this Context g, PointD p1, PointD p2, Color color, int lineWidth)
+		public static RectangleD DrawLine (this Context g, PointD p1, PointD p2, Color color, int lineWidth)
 		{
 			// Put it on a pixel line
 			if (lineWidth == 1) {
@@ -565,7 +568,7 @@ namespace Pinta.Core
 			g.LineWidth = lineWidth;
 			g.LineCap = LineCap.Square;
 
-			Rectangle dirty = g.StrokeExtents ();
+			RectangleD dirty = g.StrokeExtents ();
 			g.Stroke ();
 
 			g.Restore ();
@@ -573,6 +576,7 @@ namespace Pinta.Core
 			return dirty;
 		}
 
+#if false // TODO-GTK4
 		private static Pango.Style CairoToPangoSlant (FontSlant slant)
 		{
 			switch (slant) {

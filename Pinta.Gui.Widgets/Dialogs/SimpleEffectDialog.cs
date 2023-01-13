@@ -126,11 +126,11 @@ namespace Pinta.Gui.Widgets
 					AddWidget (CreateSeed (localizer.GetString (caption), EffectData, mi, attrs));
 				else if (mType == typeof (int))
 					AddWidget (CreateSlider (localizer.GetString (caption), EffectData, mi, attrs));
-				else if (mType == typeof (double) && (caption == "Angle" || caption == "Rotation"))
-					AddWidget (CreateAnglePicker (localizer.GetString (caption), EffectData, mi, attrs));
 #else
 				if (false) { }
 #endif
+				else if (mType == typeof (double) && (caption == "Angle" || caption == "Rotation"))
+					AddWidget (CreateAnglePicker (localizer.GetString (caption), EffectData, mi, attrs));
 				else if (mType == typeof (double))
 					AddWidget (CreateDoubleSlider (localizer.GetString (caption), EffectData, mi, attrs));
 #if false
@@ -357,6 +357,7 @@ namespace Pinta.Gui.Widgets
 
 			return widget;
 		}
+#endif
 
 		private AnglePickerWidget CreateAnglePicker (string caption, object o, MemberInfo member, object[] attributes)
 		{
@@ -377,6 +378,7 @@ namespace Pinta.Gui.Widgets
 			return widget;
 		}
 
+#if false // TODO-GTK4
 		private Gtk.Label CreateHintLabel (string hint)
 		{
 			var label = new Gtk.Label (hint) {
