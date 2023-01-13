@@ -333,7 +333,7 @@ namespace Pinta
 
 			main_vbox.Append (absoluteRadio);
 
-			var hw_grid = new Grid () { RowSpacing = spacing, ColumnSpacing = 6, ColumnHomogeneous = false };
+			var hw_grid = new Grid () { RowSpacing = spacing, ColumnSpacing = spacing, ColumnHomogeneous = false };
 			var width_label = Label.New (Translations.GetString ("Width:"));
 			width_label.Halign = Align.End;
 			hw_grid.Attach (width_label, 0, 0, 1, 1);
