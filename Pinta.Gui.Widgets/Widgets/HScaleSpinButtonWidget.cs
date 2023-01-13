@@ -31,9 +31,9 @@ using Pinta.Core;
 
 namespace Pinta.Gui.Widgets
 {
-	public class HScaleSpinButtonWidget : FilledAreaBin
+	public class HScaleSpinButtonWidget : Box
 	{
-		private HScale hscale;
+		private Scale hscale;
 		private SpinButton spin;
 		private Button button;
 		private Label label;
@@ -47,16 +47,20 @@ namespace Pinta.Gui.Widgets
 		{
 			Build ();
 
-			hscale.ValueChanged += HandleHscaleValueChanged;
-			spin.ValueChanged += HandleSpinValueChanged;
-			button.Clicked += HandleButtonClicked;
+			hscale.OnValueChanged += HandleHscaleValueChanged;
+			spin.OnValueChanged += HandleSpinValueChanged;
+			button.OnClicked += HandleButtonClicked;
 
+			OnRealize += (_, _) => Value = DefaultValue;
+
+#if false // TODO-GTK4 SpinButton API has changed and it no longer provides an Entry. Might be able to obtain a Gtk.Text?
 			spin.ActivatesDefault = true;
+#endif
 		}
 
 		public string Label {
-			get => label.Text;
-			set => label.Text = value;
+			get => label.GetText ();
+			set => label.SetText (value);
 		}
 
 		public double DefaultValue { get; set; }
@@ -65,8 +69,8 @@ namespace Pinta.Gui.Widgets
 			get => max_value;
 			set {
 				max_value = value;
-				hscale.Adjustment.Upper = value;
-				spin.Adjustment.Upper = value;
+				hscale.Adjustment!.Upper = value;
+				spin.Adjustment!.Upper = value;
 			}
 		}
 
@@ -74,8 +78,8 @@ namespace Pinta.Gui.Widgets
 			get => min_value;
 			set {
 				min_value = value;
-				hscale.Adjustment.Lower = value;
-				spin.Adjustment.Lower = value;
+				hscale.Adjustment!.Lower = value;
+				spin.Adjustment!.Lower = value;
 			}
 		}
 
@@ -94,12 +98,12 @@ namespace Pinta.Gui.Widgets
 			get => inc_value;
 			set {
 				inc_value = value;
-				hscale.Adjustment.StepIncrement = value;
-				spin.Adjustment.StepIncrement = value;
+				hscale.Adjustment!.StepIncrement = value;
+				spin.Adjustment!.StepIncrement = value;
 			}
 		}
 
-		public int ValueAsInt => spin.ValueAsInt;
+		public int ValueAsInt => spin.GetValueAsInt ();
 
 		public double Value {
 			get => spin.Value;
@@ -111,25 +115,18 @@ namespace Pinta.Gui.Widgets
 			}
 		}
 
-		protected override void OnShown ()
-		{
-			base.OnShown ();
-
-			Value = DefaultValue;
-		}
-
 		private void HandleHscaleValueChanged (object? sender, EventArgs e)
 		{
-			if (spin.Value != hscale.Value) {
-				spin.Value = hscale.Value;
+			if (spin.Value != hscale.GetValue ()) {
+				spin.Value = hscale.GetValue ();
 				OnValueChanged ();
 			}
 		}
 
 		private void HandleSpinValueChanged (object? sender, EventArgs e)
 		{
-			if (hscale.Value != spin.Value) {
-				hscale.Value = spin.Value;
+			if (hscale.GetValue () != spin.Value) {
+				hscale.SetValue (spin.Value);
 				OnValueChanged ();
 			}
 		}
@@ -146,60 +143,51 @@ namespace Pinta.Gui.Widgets
 		[MemberNotNull (nameof (label), nameof (hscale), nameof (spin), nameof (button))]
 		private void Build ()
 		{
+			const int spacing = 6;
+
 			// Section label + line
-			var hbox1 = new HBox (false, 6);
+			var hbox1 = new Box () { Orientation = Orientation.Horizontal, Spacing = spacing };
 
 			label = new Label ();
-			hbox1.PackStart (label, false, false, 0);
-			hbox1.PackStart (new HSeparator (), true, true, 0);
+			hbox1.Append (label);
+			hbox1.Append (new Separator () { Orientation = Orientation.Horizontal });
 
 			// Slider + spinner + reset button
-			var hbox2 = new HBox (false, 6);
+			var hbox2 = new Box () { Orientation = Orientation.Horizontal, Spacing = spacing };
 
-			hscale = new HScale (2, 64, 1) {
-				CanFocus = true,
-				DrawValue = false,
-				Digits = 0,
-				ValuePos = PositionType.Top
-			};
+			hscale = Scale.NewWithRange (Orientation.Horizontal, 2, 64, 1);
+			hscale.CanFocus = true;
+			hscale.DrawValue = false;
+			hscale.Digits = 0;
+			hscale.ValuePos = PositionType.Top;
+			hscale.Hexpand = true;
+			hscale.Halign = Align.Fill;
 
-			hbox2.PackStart (hscale, true, true, 0);
+			hbox2.Append (hscale);
 
-			spin = new SpinButton (0, 100, 1) {
-				CanFocus = true,
-				ClimbRate = 1,
-				Numeric = true
-			};
-			spin.Adjustment.PageIncrement = 10;
+			spin = SpinButton.NewWithRange (0, 100, 1);
+			spin.CanFocus = true;
+			spin.ClimbRate = 1;
+			spin.Numeric = true;
+			spin.Adjustment!.PageIncrement = 10;
 
-			hbox2.PackStart (spin, false, false, 0);
+			hbox2.Append (spin);
 
 			// Reset button
 			button = new Button {
+				IconName = Resources.StandardIcons.GoPrevious,
 				WidthRequest = 28,
 				HeightRequest = 24,
 				CanFocus = true,
 				UseUnderline = true
 			};
-
-			var button_image = Image.NewFromIconName (Resources.StandardIcons.GoPrevious, IconSize.Button);
-			button.Add (button_image);
-
-			var alignment2 = new Alignment (0.5F, 0F, 1F, 0F) {
-				button
-			};
-
-			hbox2.PackStart (alignment2, false, false, 0);
+			hbox2.Append (button);
 
 			// Main layout
-			var vbox = new VBox (false, 6) {
-				hbox1,
-				hbox2
-			};
-
-			Add (vbox);
-
-			vbox.ShowAll ();
+			Orientation = Orientation.Vertical;
+			Spacing = spacing;
+			Append (hbox1);
+			Append (hbox2);
 		}
 	}
 }

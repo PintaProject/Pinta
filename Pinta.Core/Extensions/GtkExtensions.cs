@@ -285,8 +285,8 @@ namespace Pinta.Core
 		/// <summary>
 		/// Helper function to avoid repeated casts. The dialog's content area is always a Box.
 		/// </summary>
-		public static Box GetContentAreaBox(this Dialog dialog)
-			=> (Box)dialog.GetContentArea();
+		public static Box GetContentAreaBox (this Dialog dialog)
+			=> (Box) dialog.GetContentArea ();
 
 #if false // TODO-GTK4
 		/// <summary>

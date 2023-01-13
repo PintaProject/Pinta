@@ -33,6 +33,8 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Reflection;
 using System.Text;
+using Gtk;
+using Pinta.Core;
 
 namespace Pinta.Gui.Widgets
 {
@@ -42,39 +44,45 @@ namespace Pinta.Gui.Widgets
 
 		const uint event_delay_millis = 100;
 		uint event_delay_timeout_id;
-		GLib.TimeoutHandler? timeout_func;
+
+		private delegate bool TimeoutHandler ();
+		TimeoutHandler? timeout_func;
 
 		/// Since this dialog is used by add-ins, the IAddinLocalizer allows for translations to be
 		/// fetched from the appropriate place.
 		/// </param>
-		public SimpleEffectDialog (string title, Gdk.Pixbuf icon, object effectData, IAddinLocalizer localizer)
-			: base (title, Core.PintaCore.Chrome.MainWindow, Gtk.DialogFlags.Modal, Core.GtkExtensions.DialogButtonsCancelOk ())
+		public SimpleEffectDialog (string title, string icon_name, object effectData, IAddinLocalizer localizer)
 		{
-			Icon = icon;
+			Title = title;
+			TransientFor = PintaCore.Chrome.MainWindow;
+			Modal = true;
+			this.AddCancelOkButtons ();
+			this.SetDefaultResponse (ResponseType.Ok);
+
+			IconName = icon_name;
 			EffectData = effectData;
 
-			BorderWidth = 6;
-			ContentArea.Spacing = 12;
+			this.GetContentAreaBox ().Spacing = 12;
+			this.GetContentAreaBox ().SetAllMargins (6);
 			WidthRequest = 400;
 			Resizable = false;
-			DefaultResponse = Gtk.ResponseType.Ok;
 
 			BuildDialog (localizer);
+
+			OnClose += (_, _) => HandleClose ();
 		}
 
 		public object EffectData { get; private set; }
 
 		public event PropertyChangedEventHandler? EffectDataChanged;
 
-		protected override void Dispose (bool disposing)
+		private void HandleClose ()
 		{
 			// If there is a timeout that hasn't been invoked yet, run it before closing the dialog.
-			if (disposing && event_delay_timeout_id != 0) {
+			if (event_delay_timeout_id != 0) {
 				GLib.Source.Remove (event_delay_timeout_id);
 				timeout_func?.Invoke ();
 			}
-
-			base.Dispose (disposing);
 		}
 
 		#region EffectData Parser
@@ -113,38 +121,44 @@ namespace Pinta.Gui.Widgets
 				if (caption == null)
 					caption = MakeCaption (mi.Name);
 
+#if false // TODO-GTK4
 				if (mType == typeof (int) && (caption == "Seed"))
 					AddWidget (CreateSeed (localizer.GetString (caption), EffectData, mi, attrs));
 				else if (mType == typeof (int))
 					AddWidget (CreateSlider (localizer.GetString (caption), EffectData, mi, attrs));
 				else if (mType == typeof (double) && (caption == "Angle" || caption == "Rotation"))
 					AddWidget (CreateAnglePicker (localizer.GetString (caption), EffectData, mi, attrs));
+#else
+				if (false) { }
+#endif
 				else if (mType == typeof (double))
 					AddWidget (CreateDoubleSlider (localizer.GetString (caption), EffectData, mi, attrs));
+#if false
 				else if (combo && mType == typeof (string))
 					AddWidget (CreateComboBox (localizer.GetString (caption), EffectData, mi, attrs));
 				else if (mType == typeof (bool))
 					AddWidget (CreateCheckBox (localizer.GetString (caption), EffectData, mi, attrs));
-				else if (mType == typeof (Gdk.Point))
+				else if (mType == typeof (PointI))
 					AddWidget (CreatePointPicker (localizer.GetString (caption), EffectData, mi, attrs));
-				else if (mType == typeof (Cairo.PointD))
+				else if (mType == typeof (PointD))
 					AddWidget (CreateOffsetPicker (localizer.GetString (caption), EffectData, mi, attrs));
 				else if (mType.IsEnum)
 					AddWidget (CreateEnumComboBox (localizer.GetString (caption), EffectData, mi, attrs));
 
 				if (hint != null)
 					AddWidget (CreateHintLabel (localizer.GetString (hint)));
+#endif
 			}
 		}
 
 		private void AddWidget (Gtk.Widget widget)
 		{
-			widget.Show ();
-			ContentArea.Add (widget);
+			this.GetContentAreaBox ().Append (widget);
 		}
 		#endregion
 
 		#region Control Builders
+#if false // TODO-GTK4
 		private ComboBoxWidget CreateEnumComboBox (string caption, object o, MemberInfo member, object[] attributes)
 		{
 			var myType = GetTypeForMember (member)!; // NRT - We're looping through members we got from reflection
@@ -215,6 +229,7 @@ namespace Pinta.Gui.Widgets
 
 			return widget;
 		}
+#endif
 
 		private HScaleSpinButtonWidget CreateDoubleSlider (string caption, object o, MemberInfo member, object[] attributes)
 		{
@@ -294,6 +309,7 @@ namespace Pinta.Gui.Widgets
 			return widget;
 		}
 
+#if false // TODO-GTK4
 		private Gtk.CheckButton CreateCheckBox (string caption, object o, MemberInfo member, object[] attributes)
 		{
 			var widget = new Gtk.CheckButton {
@@ -380,6 +396,7 @@ namespace Pinta.Gui.Widgets
 
 			return widget;
 		}
+#endif
 		#endregion
 
 		#region Static Reflection Methods
@@ -454,8 +471,9 @@ namespace Pinta.Gui.Widgets
 			return null;
 		}
 
-		private void DelayedUpdate (GLib.TimeoutHandler handler)
+		private void DelayedUpdate (TimeoutHandler handler)
 		{
+#if false // TODO-GTK4
 			if (event_delay_timeout_id != 0) {
 				GLib.Source.Remove (event_delay_timeout_id);
 				if (handler != timeout_func)
@@ -469,6 +487,7 @@ namespace Pinta.Gui.Widgets
 				timeout_func = null;
 				return false;
 			});
+#endif
 		}
 		#endregion
 	}

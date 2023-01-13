@@ -64,10 +64,10 @@ namespace Pinta
 
 			// Layers
 			action_handlers.Add (new LayerPropertiesAction ());
-#if false // TODO-GTK4
 			action_handlers.Add (new RotateZoomLayerAction ());
 
 			// View
+#if false // TODO-GTK4
 			action_handlers.Add (new ToolBarToggledAction ());
 			action_handlers.Add (new ImageTabsToggledAction ());
 			action_handlers.Add (new StatusBarToggledAction ());
