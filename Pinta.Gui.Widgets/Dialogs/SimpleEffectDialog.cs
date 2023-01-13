@@ -140,8 +140,10 @@ namespace Pinta.Gui.Widgets
 					AddWidget (CreateCheckBox (localizer.GetString (caption), EffectData, mi, attrs));
 				else if (mType == typeof (PointI))
 					AddWidget (CreatePointPicker (localizer.GetString (caption), EffectData, mi, attrs));
+#endif
 				else if (mType == typeof (PointD))
 					AddWidget (CreateOffsetPicker (localizer.GetString (caption), EffectData, mi, attrs));
+#if false // TODO-GTK4
 				else if (mType.IsEnum)
 					AddWidget (CreateEnumComboBox (localizer.GetString (caption), EffectData, mi, attrs));
 
@@ -325,6 +327,7 @@ namespace Pinta.Gui.Widgets
 
 			return widget;
 		}
+#endif
 
 		private PointPickerWidget CreateOffsetPicker (string caption, object o, MemberInfo member, object[] attributes)
 		{
@@ -332,7 +335,7 @@ namespace Pinta.Gui.Widgets
 				Label = caption
 			};
 
-			if (GetValue (member, o) is Cairo.PointD p)
+			if (GetValue (member, o) is PointD p)
 				widget.DefaultOffset = p;
 
 			widget.PointPicked += delegate (object? sender, EventArgs e) {
@@ -342,6 +345,7 @@ namespace Pinta.Gui.Widgets
 			return widget;
 		}
 
+#if false // TODO-GTK4
 		private PointPickerWidget CreatePointPicker (string caption, object o, MemberInfo member, object[] attributes)
 		{
 			var widget = new PointPickerWidget {
