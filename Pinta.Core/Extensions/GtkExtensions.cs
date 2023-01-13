@@ -282,6 +282,12 @@ namespace Pinta.Core
 		public static void SetDefaultResponse (this Dialog dialog, ResponseType response)
 			=> dialog.SetDefaultResponse ((int) response);
 
+		/// <summary>
+		/// Helper function to avoid repeated casts. The dialog's content area is always a Box.
+		/// </summary>
+		public static Box GetContentAreaBox(this Dialog dialog)
+			=> (Box)dialog.GetContentArea();
+
 #if false // TODO-GTK4
 		/// <summary>
 		/// Returns the platform-specific label for the Ctrl key.

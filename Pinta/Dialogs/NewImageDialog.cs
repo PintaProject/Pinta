@@ -73,7 +73,7 @@ namespace Pinta
 			// We don't show the background color option if it's the same as "White"
 			allow_background_color = PintaCore.Palette.SecondaryColor.ToColorBgra () != ColorBgra.White;
 
-			var content_area = GetContentArea ();
+			var content_area = this.GetContentAreaBox ();
 			content_area.SetAllMargins (8);
 
 			Resizable = false;
@@ -362,7 +362,7 @@ namespace Pinta
 			main_hbox.Append (options_vbox);
 			main_hbox.Append (preview_vbox);
 
-			var content_area = (Box) GetContentArea ();
+			var content_area = this.GetContentAreaBox ();
 			content_area.Append (main_hbox);
 		}
 

@@ -186,7 +186,7 @@ namespace Pinta
 
 			main_vbox.Append (aspectCheckbox);
 
-			var content_area = (Box) GetContentArea ();
+			var content_area = this.GetContentAreaBox ();
 			content_area.SetAllMargins (12);
 			content_area.Append (main_vbox);
 		}

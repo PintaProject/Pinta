@@ -185,7 +185,7 @@ namespace Pinta
 			DefaultHeight = 224;
 			const int spacing = 6;
 
-			var content_area = (Box) GetContentArea ();
+			var content_area = this.GetContentAreaBox ();
 			content_area.Spacing = spacing;
 			content_area.SetAllMargins (10);
 
