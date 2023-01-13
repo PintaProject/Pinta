@@ -30,7 +30,7 @@ using Gtk;
 
 namespace Pinta.Gui.Widgets
 {
-	public class ReseedButtonWidget : FilledAreaBin
+	public class ReseedButtonWidget : Box
 	{
 		private Button button;
 
@@ -40,43 +40,34 @@ namespace Pinta.Gui.Widgets
 		{
 			Build ();
 
-			button.Clicked += (_, _) => Clicked?.Invoke (this, EventArgs.Empty);
+			button.OnClicked += (_, _) => Clicked?.Invoke (this, EventArgs.Empty);
 		}
 
 		[MemberNotNull (nameof (button))]
 		private void Build ()
 		{
+			const int spacing = 6;
+
 			// Section label + line
-			var hbox1 = new HBox (false, 6);
-
-			var label = new Label {
-				LabelProp = Pinta.Core.Translations.GetString ("Random Noise")
-			};
-
-			hbox1.PackStart (label, false, false, 0);
-			hbox1.PackStart (new HSeparator (), true, true, 0);
+			var label = Label.New (Pinta.Core.Translations.GetString ("Random Noise"));
+			label.Hexpand = false;
+			label.Halign = Align.Start;
 
 			// Reseed button
 			button = new Button {
 				WidthRequest = 88,
 				CanFocus = true,
 				UseUnderline = true,
-				Label = Pinta.Core.Translations.GetString ("Reseed")
+				Label = Pinta.Core.Translations.GetString ("Reseed"),
+				Hexpand = false,
+				Halign = Align.Start
 			};
-
-			var hbox2 = new HBox (false, 6);
-
-			hbox2.PackStart (button, false, false, 0);
 
 			// Main layout
-			var vbox = new VBox (false, 6) {
-				hbox1,
-				hbox2
-			};
-
-			Add (vbox);
-
-			vbox.ShowAll ();
+			Orientation = Orientation.Vertical;
+			Spacing = spacing;
+			Append (label);
+			Append (button);
 		}
 	}
 }

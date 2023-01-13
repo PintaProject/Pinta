@@ -121,14 +121,10 @@ namespace Pinta.Gui.Widgets
 				if (caption == null)
 					caption = MakeCaption (mi.Name);
 
-#if false // TODO-GTK4
 				if (mType == typeof (int) && (caption == "Seed"))
 					AddWidget (CreateSeed (localizer.GetString (caption), EffectData, mi, attrs));
 				else if (mType == typeof (int))
 					AddWidget (CreateSlider (localizer.GetString (caption), EffectData, mi, attrs));
-#else
-				if (false) { }
-#endif
 				else if (mType == typeof (double) && (caption == "Angle" || caption == "Rotation"))
 					AddWidget (CreateAnglePicker (localizer.GetString (caption), EffectData, mi, attrs));
 				else if (mType == typeof (double))
@@ -136,20 +132,20 @@ namespace Pinta.Gui.Widgets
 #if false
 				else if (combo && mType == typeof (string))
 					AddWidget (CreateComboBox (localizer.GetString (caption), EffectData, mi, attrs));
+#endif
 				else if (mType == typeof (bool))
 					AddWidget (CreateCheckBox (localizer.GetString (caption), EffectData, mi, attrs));
 				else if (mType == typeof (PointI))
 					AddWidget (CreatePointPicker (localizer.GetString (caption), EffectData, mi, attrs));
-#endif
 				else if (mType == typeof (PointD))
 					AddWidget (CreateOffsetPicker (localizer.GetString (caption), EffectData, mi, attrs));
 #if false // TODO-GTK4
 				else if (mType.IsEnum)
 					AddWidget (CreateEnumComboBox (localizer.GetString (caption), EffectData, mi, attrs));
+#endif
 
 				if (hint != null)
 					AddWidget (CreateHintLabel (localizer.GetString (hint)));
-#endif
 			}
 		}
 
@@ -311,7 +307,6 @@ namespace Pinta.Gui.Widgets
 			return widget;
 		}
 
-#if false // TODO-GTK4
 		private Gtk.CheckButton CreateCheckBox (string caption, object o, MemberInfo member, object[] attributes)
 		{
 			var widget = new Gtk.CheckButton {
@@ -321,13 +316,12 @@ namespace Pinta.Gui.Widgets
 			if (GetValue (member, o) is bool b)
 				widget.Active = b;
 
-			widget.Toggled += delegate (object? sender, EventArgs e) {
+			widget.OnToggled += (_, _) => {
 				SetValue (member, o, widget.Active);
 			};
 
 			return widget;
 		}
-#endif
 
 		private PointPickerWidget CreateOffsetPicker (string caption, object o, MemberInfo member, object[] attributes)
 		{
@@ -345,14 +339,13 @@ namespace Pinta.Gui.Widgets
 			return widget;
 		}
 
-#if false // TODO-GTK4
 		private PointPickerWidget CreatePointPicker (string caption, object o, MemberInfo member, object[] attributes)
 		{
 			var widget = new PointPickerWidget {
 				Label = caption
 			};
 
-			if (GetValue (member, o) is Gdk.Point p)
+			if (GetValue (member, o) is PointI p)
 				widget.DefaultPoint = p;
 
 			widget.PointPicked += delegate (object? sender, EventArgs e) {
@@ -361,7 +354,6 @@ namespace Pinta.Gui.Widgets
 
 			return widget;
 		}
-#endif
 
 		private AnglePickerWidget CreateAnglePicker (string caption, object o, MemberInfo member, object[] attributes)
 		{
@@ -382,12 +374,11 @@ namespace Pinta.Gui.Widgets
 			return widget;
 		}
 
-#if false // TODO-GTK4
 		private Gtk.Label CreateHintLabel (string hint)
 		{
-			var label = new Gtk.Label (hint) {
-				LineWrap = true
-			};
+			var label = Gtk.Label.New (hint);
+			label.Wrap = true;
+			label.Halign = Align.Start;
 
 			return label;
 		}
@@ -396,13 +387,12 @@ namespace Pinta.Gui.Widgets
 		{
 			var widget = new ReseedButtonWidget ();
 
-			widget.Clicked += delegate (object? sender, EventArgs e) {
+			widget.Clicked += (_, _) => {
 				SetValue (member, o, random.Next ());
 			};
 
 			return widget;
 		}
-#endif
 		#endregion
 
 		#region Static Reflection Methods
