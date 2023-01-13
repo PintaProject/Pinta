@@ -27,6 +27,7 @@
 using System;
 using System.Diagnostics.CodeAnalysis;
 using Gtk;
+using Pinta.Core;
 
 namespace Pinta.Gui.Widgets
 {
@@ -50,6 +51,7 @@ namespace Pinta.Gui.Widgets
 
 			// Section label + line
 			var label = Label.New (Pinta.Core.Translations.GetString ("Random Noise"));
+			label.AddCssClass (AdwaitaStyles.Title4);
 			label.Hexpand = false;
 			label.Halign = Align.Start;
 

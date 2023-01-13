@@ -57,7 +57,7 @@ namespace Pinta.Docking
 
 			tab_bar.SetView (tab_view);
 			tab_bar.Autohide = false;
-			tab_bar.AddCssClass (Pinta.Core.GtkExtensions.InlineStyleClass);
+			tab_bar.AddCssClass (Pinta.Core.AdwaitaStyles.Inline);
 
 			tab_view.Vexpand = true;
 			tab_view.Valign = Align.Fill;

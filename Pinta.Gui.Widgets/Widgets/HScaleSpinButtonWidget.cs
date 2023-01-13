@@ -149,8 +149,8 @@ namespace Pinta.Gui.Widgets
 			var hbox1 = new Box () { Orientation = Orientation.Horizontal, Spacing = spacing };
 
 			label = new Label ();
+			label.AddCssClass (AdwaitaStyles.Title4);
 			hbox1.Append (label);
-			hbox1.Append (new Separator () { Orientation = Orientation.Horizontal });
 
 			// Slider + spinner + reset button
 			var hbox2 = new Box () { Orientation = Orientation.Horizontal, Spacing = spacing };

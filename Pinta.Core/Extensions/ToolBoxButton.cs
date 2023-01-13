@@ -42,7 +42,7 @@ namespace Pinta.Core
 			IconName = tool.Icon;
 			Name = tool.Name;
 
-			AddCssClass (GtkExtensions.FlatStyleClass);
+			AddCssClass (AdwaitaStyles.Flat);
 
 			Show ();
 			if (tool.ShortcutKey != 0) {

@@ -30,17 +30,23 @@ using Gtk;
 
 namespace Pinta.Core
 {
+	/// <summary>
+	/// Style classes from libadwaita.
+	/// https://gnome.pages.gitlab.gnome.org/libadwaita/doc/1-latest/style-classes.html
+	/// </summary>
+	public static class AdwaitaStyles
+	{
+		public const string Flat = "flat";
+		public const string Inline = "inline";
+		public const string Linked = "linked";
+		public const string Spacer = "spacer";
+		public const string SuggestedAction = "suggested-action";
+		public const string Title4 = "title-4";
+		public const string Toolbar = "toolbar";
+	};
+
 	public static class GtkExtensions
 	{
-		// Style classes from libadwaita.
-		// https://gnome.pages.gitlab.gnome.org/libadwaita/doc/1-latest/style-classes.html
-		public const string FlatStyleClass = "flat";
-		public const string InlineStyleClass = "inline";
-		public const string LinkedStyleClass = "linked";
-		public const string SpacerStyleClass = "spacer";
-		public const string SuggestedActionStyleClass = "suggested-action";
-		public const string ToolbarStyleClass = "toolbar";
-
 		public const uint MouseLeftButton = 1;
 		public const uint MouseMiddleButton = 2;
 		public const uint MouseRightButton = 3;
@@ -51,7 +57,7 @@ namespace Pinta.Core
 		public static Gtk.Box CreateToolBar ()
 		{
 			var toolbar = new Box () { Orientation = Orientation.Horizontal, Spacing = 0 };
-			toolbar.AddCssClass (GtkExtensions.ToolbarStyleClass);
+			toolbar.AddCssClass (AdwaitaStyles.Toolbar);
 			return toolbar;
 		}
 
@@ -79,7 +85,7 @@ namespace Pinta.Core
 		public static Gtk.Separator CreateToolBarSeparator ()
 		{
 			var sep = new Separator ();
-			sep.AddCssClass (SpacerStyleClass);
+			sep.AddCssClass (AdwaitaStyles.Spacer);
 			return sep;
 		}
 
@@ -276,7 +282,7 @@ namespace Pinta.Core
 				ok_button = dialog.AddButton ("_OK", (int) ResponseType.Ok);
 			}
 
-			ok_button.AddCssClass (SuggestedActionStyleClass);
+			ok_button.AddCssClass (AdwaitaStyles.SuggestedAction);
 		}
 
 		public static void SetDefaultResponse (this Dialog dialog, ResponseType response)

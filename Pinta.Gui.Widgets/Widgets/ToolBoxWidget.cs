@@ -12,7 +12,7 @@ namespace Pinta.Gui.Widgets
 		public ToolBoxWidget ()
 		{
 			HeightRequest = 375;
-			AddCssClass (GtkExtensions.LinkedStyleClass);
+			AddCssClass (AdwaitaStyles.Linked);
 
 			// TODO-GTK4 - test the overflow behaviour once all tools are available, if there isn't enough height.
 
