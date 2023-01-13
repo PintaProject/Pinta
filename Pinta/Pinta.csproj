@@ -36,7 +36,9 @@
     <Compile Include="Actions/File/ExitAction.cs" />
     <Compile Include="Actions/Help/AboutDialogAction.cs" />
     <Compile Include="Actions/Image/*.cs" />
+    <Compile Include="Actions/Layers/LayerPropertiesAction.cs" />
     <Compile Include="DialogHandlers.cs" />
+    <Compile Include="Dialogs/LayerPropertiesDialog.cs" />
     <Compile Include="Dialogs/NewImageDialog.cs" />
     <Compile Include="Dialogs/ResizeCanvasDialog.cs" />
     <Compile Include="Dialogs/ResizeImageDialog.cs" />

@@ -59,6 +59,7 @@ namespace Pinta
 			TransientFor = PintaCore.Chrome.MainWindow;
 			Modal = true;
 			this.AddCancelOkButtons ();
+			this.SetDefaultResponse (ResponseType.Ok);
 
 			Build ();
 
@@ -88,7 +89,6 @@ namespace Pinta
 			SEButton.OnClicked += HandleSEButtonClicked;
 
 			SetAnchor (Anchor.Center);
-			SetDefaultResponse ((int) ResponseType.Ok);
 
 #if false // TODO-GTK4 SpinButton API has changed and it no longer provides an Entry. Might be able to obtain a Gtk.Text?
 			widthSpinner.ActivatesDefault = true;

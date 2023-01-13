@@ -279,6 +279,9 @@ namespace Pinta.Core
 			ok_button.AddCssClass (SuggestedActionStyleClass);
 		}
 
+		public static void SetDefaultResponse (this Dialog dialog, ResponseType response)
+			=> dialog.SetDefaultResponse ((int) response);
+
 #if false // TODO-GTK4
 		/// <summary>
 		/// Returns the platform-specific label for the Ctrl key.

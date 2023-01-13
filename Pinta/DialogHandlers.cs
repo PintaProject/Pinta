@@ -62,9 +62,9 @@ namespace Pinta
 			action_handlers.Add (new ResizeImageAction ());
 			action_handlers.Add (new ResizeCanvasAction ());
 
-#if false // TODO-GTK4
 			// Layers
 			action_handlers.Add (new LayerPropertiesAction ());
+#if false // TODO-GTK4
 			action_handlers.Add (new RotateZoomLayerAction ());
 
 			// View
@@ -143,7 +143,6 @@ namespace Pinta
 			PintaCore.Actions.Image.RotateCW.Sensitive = enable;
 			PintaCore.Actions.Image.Flatten.Sensitive = enable;
 
-#if false // TODO-GTK4
 			PintaCore.Actions.Layers.AddNewLayer.Sensitive = enable;
 			PintaCore.Actions.Layers.DeleteLayer.Sensitive = enable;
 			PintaCore.Actions.Layers.DuplicateLayer.Sensitive = enable;
@@ -156,6 +155,7 @@ namespace Pinta
 			PintaCore.Actions.Layers.MoveLayerDown.Sensitive = enable;
 			PintaCore.Actions.Layers.Properties.Sensitive = enable;
 
+#if false // TODO-GTK4
 			PintaCore.Actions.Adjustments.ToggleActionsSensitive (enable);
 			PintaCore.Actions.Effects.ToggleActionsSensitive (enable);
 

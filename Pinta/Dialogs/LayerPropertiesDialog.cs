@@ -45,13 +45,17 @@ namespace Pinta
 		private Entry layerNameEntry;
 		private CheckButton visibilityCheckbox;
 		private SpinButton opacitySpinner;
-		private HScale opacitySlider;
+		private Scale opacitySlider;
 		private ComboBoxText blendComboBox;
 
-		public LayerPropertiesDialog () : base (Translations.GetString ("Layer Properties"),
-			PintaCore.Chrome.MainWindow, DialogFlags.Modal,
-	    Core.GtkExtensions.DialogButtonsCancelOk ())
+		public LayerPropertiesDialog ()
 		{
+			Title = Translations.GetString ("Layer Properties");
+			TransientFor = PintaCore.Chrome.MainWindow;
+			Modal = true;
+			this.AddCancelOkButtons ();
+			this.SetDefaultResponse (ResponseType.Ok);
+
 			var doc = PintaCore.Workspace.ActiveDocument;
 
 			Build ();
@@ -69,25 +73,27 @@ namespace Pinta
 				opacity,
 				blendmode);
 
-			layerNameEntry.Text = initial_properties.Name;
+			layerNameEntry.SetText (initial_properties.Name);
 			visibilityCheckbox.Active = !initial_properties.Hidden;
 			opacitySpinner.Value = (int) (initial_properties.Opacity * 100);
-			opacitySlider.Value = (int) (initial_properties.Opacity * 100);
+			opacitySlider.SetValue ((int) (initial_properties.Opacity * 100));
 
 			var all_blendmodes = UserBlendOps.GetAllBlendModeNames ().ToList ();
 			var index = all_blendmodes.IndexOf (UserBlendOps.GetBlendModeName (blendmode));
 			blendComboBox.Active = index;
 
+#if false // TODO-GTK4 - Editable.OnChanged signal is missing in gir.core                                                                         
 			layerNameEntry.Changed += OnLayerNameChanged;
-			visibilityCheckbox.Toggled += OnVisibilityToggled;
-			opacitySpinner.ValueChanged += new EventHandler (OnOpacitySpinnerChanged);
-			opacitySlider.ValueChanged += new EventHandler (OnOpacitySliderChanged);
-			blendComboBox.Changed += OnBlendModeChanged;
+#endif
+			visibilityCheckbox.OnToggled += OnVisibilityToggled;
+			opacitySpinner.OnValueChanged += OnOpacitySpinnerChanged;
+			opacitySlider.OnValueChanged += OnOpacitySliderChanged;
+			blendComboBox.OnChanged += OnBlendModeChanged;
 
-			DefaultResponse = Gtk.ResponseType.Ok;
-
+#if false // TODO-GTK4 SpinButton API has changed and it no longer provides an Entry. Might be able to obtain a Gtk.Text?
 			layerNameEntry.ActivatesDefault = true;
 			opacitySpinner.ActivatesDefault = true;
+#endif
 		}
 
 		public bool AreLayerPropertiesUpdated {
@@ -116,7 +122,7 @@ namespace Pinta
 		{
 			var doc = PintaCore.Workspace.ActiveDocument;
 
-			name = layerNameEntry.Text;
+			name = layerNameEntry.GetText ();
 			doc.Layers.CurrentUserLayer.Name = name;
 		}
 
@@ -135,13 +141,13 @@ namespace Pinta
 
 		private void OnOpacitySliderChanged (object? sender, EventArgs e)
 		{
-			opacitySpinner.Value = opacitySlider.Value;
+			opacitySpinner.Value = opacitySlider.GetValue ();
 			UpdateOpacity ();
 		}
 
 		private void OnOpacitySpinnerChanged (object? sender, EventArgs e)
 		{
-			opacitySlider.Value = opacitySpinner.Value;
+			opacitySlider.SetValue (opacitySpinner.Value);
 			UpdateOpacity ();
 		}
 
@@ -163,7 +169,7 @@ namespace Pinta
 		{
 			var doc = PintaCore.Workspace.ActiveDocument;
 
-			blendmode = UserBlendOps.GetBlendModeByName (blendComboBox.ActiveText);
+			blendmode = UserBlendOps.GetBlendModeByName (blendComboBox.GetActiveText ()!);
 			doc.Layers.CurrentUserLayer.BlendMode = blendmode;
 			if (doc.Layers.SelectionLayer != null) {
 				//Update BlendMode for SelectionLayer and force redraw
@@ -177,65 +183,63 @@ namespace Pinta
 		{
 			DefaultWidth = 349;
 			DefaultHeight = 224;
-			BorderWidth = 6;
-			ContentArea.Spacing = 10;
+
+			var content_area = (Box) GetContentArea ();
+			content_area.Spacing = 6;
+			content_area.SetAllMargins (10);
 
 			// Layer name
-			var box1 = new HBox ();
+			var box1 = new Box () { Orientation = Orientation.Horizontal, Spacing = 6 };
 
-			box1.Spacing = 6;
-			box1.PackStart (new Label (Translations.GetString ("Name:")), false, false, 0);
+			box1.Append (Label.New (Translations.GetString ("Name:")));
 
 			layerNameEntry = new Entry ();
-			box1.PackStart (layerNameEntry, true, true, 0);
+			layerNameEntry.Hexpand = true;
+			layerNameEntry.Halign = Align.Fill;
+			box1.Append (layerNameEntry);
 
-			ContentArea.PackStart (box1, false, false, 0);
+			content_area.Append (box1);
 
 			// Visible checkbox
-			visibilityCheckbox = new CheckButton (Translations.GetString ("Visible"));
+			visibilityCheckbox = CheckButton.NewWithLabel (Translations.GetString ("Visible"));
 
-			ContentArea.PackStart (visibilityCheckbox, false, false, 0);
+			content_area.Append (visibilityCheckbox);
 
 			// Horizontal separator
-			ContentArea.PackStart (new HSeparator (), false, false, 0);
+			content_area.Append (new Separator () { Orientation = Orientation.Horizontal });
 
 			// Blend mode
-			var box2 = new HBox ();
-
-			box2.Spacing = 6;
-			box2.PackStart (new Label (Translations.GetString ("Blend Mode") + ":"), false, false, 0);
+			var box2 = new Box () { Orientation = Orientation.Horizontal, Spacing = 6 };
+			box2.Append (Label.New (Translations.GetString ("Blend Mode") + ":"));
 
 			blendComboBox = new ComboBoxText ();
 			foreach (string name in UserBlendOps.GetAllBlendModeNames ())
 				blendComboBox.AppendText (name);
 
-			box2.PackStart (blendComboBox, true, true, 0);
+			blendComboBox.Hexpand = true;
+			blendComboBox.Halign = Align.Fill;
+			box2.Append (blendComboBox);
 
-			ContentArea.PackStart (box2, false, false, 0);
+			content_area.Append (box2);
 
 			// Opacity
-			var box3 = new HBox ();
+			var box3 = new Box () { Orientation = Orientation.Horizontal, Spacing = 6 };
+			box3.Append (Label.New (Translations.GetString ("Opacity:")));
 
-			box3.Spacing = 6;
-			box3.PackStart (new Label (Translations.GetString ("Opacity:")), false, false, 0);
-
-			opacitySpinner = new SpinButton (0, 100, 1);
-			opacitySpinner.Adjustment.PageIncrement = 10;
+			opacitySpinner = SpinButton.NewWithRange (0, 100, 1);
+			opacitySpinner.Adjustment!.PageIncrement = 10;
 			opacitySpinner.ClimbRate = 1;
 
-			box3.PackStart (opacitySpinner, false, false, 0);
+			box3.Append (opacitySpinner);
 
-			opacitySlider = new HScale (0, 100, 1);
+			opacitySlider = Scale.NewWithRange (Orientation.Horizontal, 0, 100, 1);
 			opacitySlider.Digits = 0;
-			opacitySlider.Adjustment.PageIncrement = 10;
-			box3.PackStart (opacitySlider, true, true, 0);
+			opacitySlider.Adjustment!.PageIncrement = 10;
+			opacitySlider.Hexpand = true;
+			opacitySlider.Halign = Align.Fill;
+			box3.Append (opacitySlider);
 
-			ContentArea.PackStart (box3, false, false, 0);
-
-			// Finish up
-			ContentArea.ShowAll ();
-
-			DefaultResponse = ResponseType.Ok;
+			content_area.Append (box3);
 		}
 		#endregion
 	}

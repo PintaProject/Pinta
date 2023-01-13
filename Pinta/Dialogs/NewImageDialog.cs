@@ -68,6 +68,7 @@ namespace Pinta
 			TransientFor = PintaCore.Chrome.MainWindow;
 			Modal = true;
 			this.AddCancelOkButtons ();
+			this.SetDefaultResponse (ResponseType.Ok);
 
 			// We don't show the background color option if it's the same as "White"
 			allow_background_color = PintaCore.Palette.SecondaryColor.ToColorBgra () != ColorBgra.White;
@@ -76,7 +77,6 @@ namespace Pinta
 			content_area.SetAllMargins (8);
 
 			Resizable = false;
-			SetDefaultResponse ((int) ResponseType.Ok);
 
 			IconName = Resources.StandardIcons.DocumentNew;
 
