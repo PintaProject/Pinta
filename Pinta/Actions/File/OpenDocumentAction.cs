@@ -75,10 +75,7 @@ namespace Pinta.Actions
 				}
 			}
 
-			// TODO-GTK4 - remove this once all image formats are supported.
-			// The macOS native file dialog errors out if the filter is empty
-			if (PintaCore.ImageFormats.Formats.Any (f => !f.IsWriteOnly ()))
-				fcd.AddFilter (ff);
+			fcd.AddFilter (ff);
 
 			var ff2 = FileFilter.New ();
 			ff2.Name = Translations.GetString ("All files");

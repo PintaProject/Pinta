@@ -38,11 +38,11 @@ namespace Pinta.Core
 		public EditActions Edit { get; private set; } = new ();
 		public ViewActions View { get; private set; } = new ();
 		public ImageActions Image { get; private set; } = new ();
+		public LayerActions Layers { get; private set; } = new ();
 		public WindowActions Window { get; private set; } = new ();
 		public HelpActions Help { get; private set; } = new ();
 
 #if false // TODO-GTK4
-		public LayerActions Layers { get; private set; }
 		public AdjustmentsActions Adjustments { get; private set; }
 		public EffectsActions Effects { get; private set; }
 		public AddinActions Addins { get; private set; }
@@ -51,7 +51,6 @@ namespace Pinta.Core
 		public ActionManager ()
 		{
 #if false // TODO-GTK4
-			Layers = new LayerActions ();
 			Adjustments = new AdjustmentsActions ();
 			Effects = new EffectsActions ();
 			Addins = new AddinActions ();
@@ -122,11 +121,11 @@ namespace Pinta.Core
 		public void RegisterHandlers ()
 		{
 			File.RegisterHandlers ();
-			Image.RegisterHandlers ();
 #if false // TODO-GTK4
 			Edit.RegisterHandlers ();
-			Layers.RegisterHandlers ();
 #endif
+			Image.RegisterHandlers ();
+			Layers.RegisterHandlers ();
 			View.RegisterHandlers ();
 			Help.RegisterHandlers ();
 		}

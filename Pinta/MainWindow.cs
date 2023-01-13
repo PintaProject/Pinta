@@ -347,11 +347,11 @@ namespace Pinta
 			PintaCore.Actions.Image.RegisterActions (app, image_menu);
 			menu_bar.AppendSubmenu (Translations.GetString ("_Image"), image_menu);
 
-#if false // TODO-GTK4
-			var layers_menu = new GLib.Menu ();
-			PintaCore.Actions.Layers.RegisterActions (this, layers_menu);
+			var layers_menu = Gio.Menu.New ();
+			PintaCore.Actions.Layers.RegisterActions (app, layers_menu);
 			menu_bar.AppendSubmenu (Translations.GetString ("_Layers"), layers_menu);
 
+#if false // TODO-GTK4
 			var adj_menu = new GLib.Menu ();
 			menu_bar.AppendSubmenu (Translations.GetString ("_Adjustments"), adj_menu);
 
