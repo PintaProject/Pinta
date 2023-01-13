@@ -183,34 +183,33 @@ namespace Pinta
 		{
 			DefaultWidth = 349;
 			DefaultHeight = 224;
+			const int spacing = 6;
 
 			var content_area = (Box) GetContentArea ();
-			content_area.Spacing = 6;
+			content_area.Spacing = spacing;
 			content_area.SetAllMargins (10);
 
-			// Layer name
-			var box1 = new Box () { Orientation = Orientation.Horizontal, Spacing = 6 };
+			var grid = new Grid () { RowSpacing = spacing, ColumnSpacing = spacing, ColumnHomogeneous = false };
 
-			box1.Append (Label.New (Translations.GetString ("Name:")));
+			// Layer name
+			var name_label = Label.New (Translations.GetString ("Name:"));
+			name_label.Halign = Align.End;
+			grid.Attach (name_label, 0, 0, 1, 1);
 
 			layerNameEntry = new Entry ();
 			layerNameEntry.Hexpand = true;
 			layerNameEntry.Halign = Align.Fill;
-			box1.Append (layerNameEntry);
-
-			content_area.Append (box1);
+			grid.Attach (layerNameEntry, 1, 0, 1, 1);
 
 			// Visible checkbox
 			visibilityCheckbox = CheckButton.NewWithLabel (Translations.GetString ("Visible"));
 
-			content_area.Append (visibilityCheckbox);
-
-			// Horizontal separator
-			content_area.Append (new Separator () { Orientation = Orientation.Horizontal });
+			grid.Attach (visibilityCheckbox, 1, 1, 1, 1);
 
 			// Blend mode
-			var box2 = new Box () { Orientation = Orientation.Horizontal, Spacing = 6 };
-			box2.Append (Label.New (Translations.GetString ("Blend Mode") + ":"));
+			var blend_label = Label.New (Translations.GetString ("Blend Mode") + ":");
+			blend_label.Halign = Align.End;
+			grid.Attach (blend_label, 0, 2, 1, 1);
 
 			blendComboBox = new ComboBoxText ();
 			foreach (string name in UserBlendOps.GetAllBlendModeNames ())
@@ -218,28 +217,29 @@ namespace Pinta
 
 			blendComboBox.Hexpand = true;
 			blendComboBox.Halign = Align.Fill;
-			box2.Append (blendComboBox);
-
-			content_area.Append (box2);
+			grid.Attach (blendComboBox, 1, 2, 1, 1);
 
 			// Opacity
-			var box3 = new Box () { Orientation = Orientation.Horizontal, Spacing = 6 };
-			box3.Append (Label.New (Translations.GetString ("Opacity:")));
+			var opacity_label = Label.New (Translations.GetString ("Opacity:"));
+			opacity_label.Halign = Align.End;
+			grid.Attach (opacity_label, 0, 3, 1, 1);
 
+			var opacity_box = new Box () { Orientation = Orientation.Horizontal, Spacing = spacing };
 			opacitySpinner = SpinButton.NewWithRange (0, 100, 1);
 			opacitySpinner.Adjustment!.PageIncrement = 10;
 			opacitySpinner.ClimbRate = 1;
-
-			box3.Append (opacitySpinner);
+			opacity_box.Append (opacitySpinner);
 
 			opacitySlider = Scale.NewWithRange (Orientation.Horizontal, 0, 100, 1);
 			opacitySlider.Digits = 0;
 			opacitySlider.Adjustment!.PageIncrement = 10;
 			opacitySlider.Hexpand = true;
 			opacitySlider.Halign = Align.Fill;
-			box3.Append (opacitySlider);
+			opacity_box.Append (opacitySlider);
 
-			content_area.Append (box3);
+			grid.Attach (opacity_box, 1, 3, 1, 1);
+
+			content_area.Append (grid);
 		}
 		#endregion
 	}
