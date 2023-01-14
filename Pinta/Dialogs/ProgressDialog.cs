@@ -42,22 +42,21 @@ namespace Pinta
 			TransientFor = PintaCore.Chrome.MainWindow;
 			Modal = true;
 
-			OnResponse += (_, args) => Canceled?.Invoke(this, EventArgs.Empty);
+			OnResponse += (_, args) => Canceled?.Invoke (this, EventArgs.Empty);
 
 			this.Build ();
 			timeout_id = 0;
 			Hide ();
 		}
 
-		public new string Title
-		{
-			get => base.GetTitle()!;
-			set => SetTitle(value);
+		public new string Title {
+			get => base.GetTitle ()!;
+			set => SetTitle (value);
 		}
 
 		public string Text {
-			get { return label.GetText(); }
-			set { label.SetText(value); }
+			get { return label.GetText (); }
+			set { label.SetText (value); }
 		}
 
 		public double Progress {
@@ -86,9 +85,9 @@ namespace Pinta
 		[MemberNotNull (nameof (label), nameof (progress_bar))]
 		private void Build ()
 		{
-			var content_area = this.GetContentAreaBox();
+			var content_area = this.GetContentAreaBox ();
 			content_area.Spacing = 6;
-			content_area.SetAllMargins(2);
+			content_area.SetAllMargins (2);
 
 			label = new Label ();
 			content_area.Append (label);

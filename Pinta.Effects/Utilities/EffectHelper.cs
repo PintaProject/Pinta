@@ -64,10 +64,10 @@ namespace Pinta
 		/// </summary>
 		private static bool LaunchSimpleEffectDialog (BaseEffect effect, IAddinLocalizer localizer)
 		{
-			ArgumentNullException.ThrowIfNull(effect);
-			ArgumentNullException.ThrowIfNull(effect.EffectData);
+			ArgumentNullException.ThrowIfNull (effect);
+			ArgumentNullException.ThrowIfNull (effect.EffectData);
 
-			var dialog = new SimpleEffectDialog(
+			var dialog = new SimpleEffectDialog (
 				effect.Name, effect.Icon, effect.EffectData, localizer);
 
 			// Hookup event handling for live preview.
@@ -78,10 +78,12 @@ namespace Pinta
 
 			bool ret = true;
 			dialog.OnResponse += (_, args) => {
-				if (args.ResponseId == (int)Gtk.ResponseType.Ok)
+				if (args.ResponseId == (int) Gtk.ResponseType.Ok)
 					ret = !effect.EffectData.IsDefault;
 				else
 					ret = false;
+
+				dialog.Destroy ();
 			};
 
 			dialog.Present ();

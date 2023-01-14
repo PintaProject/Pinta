@@ -81,6 +81,8 @@ namespace Pinta.Actions
 					if ((layer.Opacity != initial.Opacity) || (layer.BlendMode != initial.BlendMode) || (layer.Hidden != initial.Hidden))
 						PintaCore.Workspace.ActiveWorkspace.Invalidate ();
 				}
+
+				dialog.Destroy ();
 			};
 
 			dialog.Present ();

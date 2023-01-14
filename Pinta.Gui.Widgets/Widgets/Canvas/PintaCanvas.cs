@@ -54,19 +54,24 @@ namespace Pinta.Gui.Widgets
 				SetRequisition (document.Workspace.CanvasSize);
 			};
 
-#if false // TODO-GTK4
 			// Update the canvas when the image changes
 			document.Workspace.CanvasInvalidated += delegate (object? sender, CanvasInvalidatedEventArgs e) {
 				// If GTK+ hasn't created the canvas window yet, no need to invalidate it
-				if (Window == null)
+				if (!GetRealized ())
 					return;
 
+				// TODO-GTK4 - is there a way to invalidate only a rectangle?
+#if false
 				if (e.EntireSurface)
 					Window.Invalidate ();
 				else
 					Window.InvalidateRect (e.Rectangle, false);
+#else
+				QueueDraw ();
+#endif
 			};
 
+#if false // TODO-GTK4
 			// Give mouse press events to the current tool
 			ButtonPressEvent += delegate (object sender, ButtonPressEventArgs e) {
 				// The canvas gets the button press before the tab system, so

@@ -68,6 +68,8 @@ namespace Pinta.Actions
 				ClearLivePreview ();
 				if (args.ResponseId == (int) Gtk.ResponseType.Ok && !data.IsDefault)
 					ApplyTransform (data);
+
+				dialog.Destroy ();
 			};
 
 			dialog.Present ();
