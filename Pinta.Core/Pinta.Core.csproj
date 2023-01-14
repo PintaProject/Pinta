@@ -17,6 +17,7 @@
     <Compile Remove="**/*.cs" />
     <Compile Include="PintaCore.cs" />
     <Compile Include="Actions/*.cs" />
+    <Compile Include="Classes/AsyncEffectRenderer.cs" />
     <Compile Include="Classes/BaseTool.cs" />
     <Compile Include="Classes/Document.cs" />
     <Compile Include="Classes/DocumentHistory.cs" />
@@ -43,6 +44,7 @@
     <Compile Include="EventArgs/DocumentEventArgs.cs" />
     <Compile Include="EventArgs/DocumentCancelEventArgs.cs" />
     <Compile Include="EventArgs/HistoryItemAddedEventArgs.cs" />
+    <Compile Include="EventArgs/LivePreview*.cs" />
     <Compile Include="EventArgs/ModifyCompressionEventArgs.cs" />
     <Compile Include="EventArgs/TextChangedEventArgs.cs" />
     <Compile Include="EventArgs/ToolEventArgs.cs" />
@@ -68,6 +70,7 @@
     <Compile Include="Managers/EffectsManager.cs" />
     <Compile Include="Managers/ImageConverterManager.cs" />
     <Compile Include="Managers/LayerManager.cs" />
+    <Compile Include="Managers/LivePreviewManager.cs" />
     <Compile Include="Managers/PaletteManager.cs" />
     <Compile Include="Managers/PaletteFormatManager.cs" />
     <Compile Include="Managers/ServiceManager.cs" />

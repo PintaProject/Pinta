@@ -32,24 +32,24 @@ namespace Pinta.Core
 {
 	public static class PintaCore
 	{
-		public static SystemManager System { get; private set; }
 		public static ActionManager Actions { get; private set; }
-		public static WorkspaceManager Workspace { get; private set; }
-		public static SettingsManager Settings { get; private set; }
 		public static ChromeManager Chrome { get; private set; }
-		public static PaletteManager Palette { get; private set; }
-		public static PaletteFormatManager PaletteFormats { get; private set; }
-		public static LayerManager Layers { get; private set; }
-		public static ToolManager Tools { get; private set; }
-		public static ImageConverterManager ImageFormats { get; private set; }
 		public static EffectsManager Effects { get; private set; }
+		public static ImageConverterManager ImageFormats { get; private set; }
 		public static IServiceManager Services { get; }
+		public static LayerManager Layers { get; private set; }
+		public static LivePreviewManager LivePreview { get; private set; }
+		public static PaletteFormatManager PaletteFormats { get; private set; }
+		public static PaletteManager Palette { get; private set; }
+		public static SettingsManager Settings { get; private set; }
+		public static SystemManager System { get; private set; }
+		public static ToolManager Tools { get; private set; }
+		public static WorkspaceManager Workspace { get; private set; }
 
 #if false // TODO-GTK4
 		public static PaintBrushManager PaintBrushes { get; private set; }
 		public static ResourceManager Resources { get; private set; }
 		public static RecentFileManager RecentFiles { get; private set; }
-		public static LivePreviewManager LivePreview { get; private set; }
 #endif
 
 		public const string ApplicationVersion = "2.2";
@@ -64,6 +64,7 @@ namespace Pinta.Core
 			Tools = new ToolManager ();
 			ImageFormats = new ImageConverterManager ();
 			PaletteFormats = new PaletteFormatManager ();
+			LivePreview = new LivePreviewManager ();
 			Palette = new PaletteManager ();
 			Chrome = new ChromeManager ();
 			Effects = new EffectsManager ();
@@ -75,7 +76,6 @@ namespace Pinta.Core
 
 			PaintBrushes = new PaintBrushManager ();
 			RecentFiles = new RecentFileManager ();
-			LivePreview = new LivePreviewManager ();
 #endif
 
 			Services = new ServiceManager ();
@@ -88,6 +88,7 @@ namespace Pinta.Core
 			Services.AddService (ImageFormats);
 			Services.AddService (PaletteFormats);
 			Services.AddService (System);
+			Services.AddService (LivePreview);
 			Services.AddService<IPaletteService> (Palette);
 			Services.AddService (Chrome);
 			Services.AddService (Effects);
@@ -95,7 +96,6 @@ namespace Pinta.Core
 			Services.AddService<IResourceService> (Resources);
 			Services.AddService<IPaintBrushService> (PaintBrushes);
 			Services.AddService (RecentFiles);
-			Services.AddService (LivePreview);
 #endif
 		}
 

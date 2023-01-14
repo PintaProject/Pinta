@@ -849,6 +849,11 @@ namespace Pinta.Core
 			g.Restore ();
 		}
 #endif
+		public static void MarkDirty (this ImageSurface surface, in RectangleI rect)
+		{
+			surface.MarkDirty (rect.X, rect.Y, rect.Width, rect.Height);
+		}
+
 		public static RectangleD PathExtents (this Context context)
 		{
 			context.PathExtents (out double x1, out double y1, out double x2, out double y2);

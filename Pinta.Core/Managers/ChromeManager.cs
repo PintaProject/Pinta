@@ -32,15 +32,15 @@ namespace Pinta.Core
 	public class ChromeManager
 	{
 		private PointI last_canvas_cursor_point;
+		private bool main_window_busy;
 
 		// NRT - These are all initialized via the Initialize* functions
 		// but it would be nice to rewrite it to provably non-null.
 		public Application Application { get; private set; } = null!;
 		public Window MainWindow { get; private set; } = null!;
 		public Widget ImageTabsNotebook { get; private set; } = null!;
-#if false // TODO-GTK4
 		private IProgressDialog progress_dialog = null!;
-		private bool main_window_busy;
+#if false // TODO-GTK4
 		private ErrorDialogHandler error_dialog_handler = null!;
 #endif
 		private MessageDialogHandler message_dialog_handler = null!;
@@ -50,9 +50,7 @@ namespace Pinta.Core
 		public Box ToolBox { get; private set; } = null!;
 		public Box StatusBar { get; private set; } = null!;
 
-#if false // TODO-GTK4
 		public IProgressDialog ProgressDialog { get { return progress_dialog; } }
-#endif
 		public Gio.Menu AdjustmentsMenu { get; private set; } = null!;
 		public Gio.Menu EffectsMenu { get; private set; } = null!;
 
@@ -71,19 +69,17 @@ namespace Pinta.Core
 			}
 		}
 
-#if false // TODO-GTK4
 		public bool MainWindowBusy {
 			get { return main_window_busy; }
 			set {
 				main_window_busy = value;
 
 				if (main_window_busy)
-					main_window.Window.Cursor = new Gdk.Cursor (Gdk.CursorType.Watch);
+					MainWindow.Cursor = Gdk.Cursor.NewFromName (Pinta.Resources.StandardCursors.Progress, null);
 				else
-					main_window.Window.Cursor = new Gdk.Cursor (Gdk.CursorType.Arrow);
+					MainWindow.Cursor = Gdk.Cursor.NewFromName (Pinta.Resources.StandardCursors.Default, null);
 			}
 		}
-#endif
 		#endregion
 
 		#region Public Methods
@@ -128,7 +124,6 @@ namespace Pinta.Core
 			EffectsMenu = effects_menu;
 		}
 
-#if false // TODO-GTK4
 		public void InitializeProgessDialog (IProgressDialog progressDialog)
 		{
 			if (progressDialog == null)
@@ -137,6 +132,7 @@ namespace Pinta.Core
 			progress_dialog = progressDialog;
 		}
 
+#if false // TODO-GTK4
 		public void InitializeErrorDialogHandler (ErrorDialogHandler handler)
 		{
 			error_dialog_handler = handler;

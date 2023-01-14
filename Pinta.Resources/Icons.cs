@@ -200,7 +200,9 @@ namespace Pinta.Resources
 	/// </summary>
 	public static class StandardCursors
 	{
+		public const string Default = "default";
 		public const string Grab = "grab";
 		public const string Grabbing = "grabbing";
+		public const string Progress = "progress";
 	}
 }

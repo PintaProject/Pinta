@@ -53,7 +53,7 @@ namespace Pinta.Core
 		BaseEffect? effect;
 		Cairo.ImageSurface? source_surface;
 		Cairo.ImageSurface? dest_surface;
-		Gdk.Rectangle render_bounds;
+		RectangleI render_bounds;
 
 		bool is_rendering;
 		bool cancel_render_flag;
@@ -118,7 +118,7 @@ namespace Pinta.Core
 		internal void Start (BaseEffect effect,
 				     Cairo.ImageSurface source,
 				     Cairo.ImageSurface dest,
-				     Gdk.Rectangle renderBounds)
+				     RectangleI renderBounds)
 		{
 			Debug.WriteLine ("AsyncEffectRenderer.Start ()");
 
@@ -160,7 +160,7 @@ namespace Pinta.Core
 				HandleRenderCompletion ();
 		}
 
-		protected abstract void OnUpdate (double progress, Gdk.Rectangle updatedBounds);
+		protected abstract void OnUpdate (double progress, RectangleI updatedBounds);
 
 		protected abstract void OnCompletion (bool canceled, Exception[]? exceptions);
 
@@ -206,14 +206,17 @@ namespace Pinta.Core
 					slave.Join ();
 
 				// Change back to the UI thread to notify of completion.
-				Gtk.Application.Invoke ((o, e) => HandleRenderCompletion ());
+				GLib.Timeout.AddFull (0, 0, (_) => {
+					HandleRenderCompletion ();
+					return false; // don't call the timer again
+				});
 			});
 
 			master.Priority = settings.ThreadPriority;
 			master.Start ();
 
 			// Start timer used to periodically fire update events on the UI thread.
-			timer_tick_id = GLib.Timeout.Add ((uint) settings.UpdateMillis, HandleTimerTick);
+			timer_tick_id = GLib.Timeout.AddFull (0, (uint) settings.UpdateMillis, (_) => HandleTimerTick ());
 		}
 
 		Thread StartSlaveThread (int renderId, int threadId)
@@ -247,7 +250,7 @@ namespace Pinta.Core
 		void RenderTile (int renderId, int threadId, int tileIndex)
 		{
 			Exception? exception = null;
-			Gdk.Rectangle bounds = new Gdk.Rectangle ();
+			var bounds = new RectangleI ();
 
 			try {
 
@@ -257,7 +260,7 @@ namespace Pinta.Core
 				if (!cancel_render_flag) {
 					dest_surface!.Flush ();
 					effect!.Render (source_surface!, dest_surface, new[] { bounds });
-					dest_surface.MarkDirty (bounds.ToCairoRectangle ());
+					dest_surface.MarkDirty (bounds);
 				}
 
 			} catch (Exception ex) {
@@ -293,17 +296,17 @@ namespace Pinta.Core
 		}
 
 		// Runs on a background thread.
-		Gdk.Rectangle GetTileBounds (int tileIndex)
+		RectangleI GetTileBounds (int tileIndex)
 		{
 			int horizTileCount = (int) Math.Ceiling ((float) render_bounds.Width
 							       / (float) settings.TileWidth);
 
 			int x = ((tileIndex % horizTileCount) * settings.TileWidth) + render_bounds.X;
 			int y = ((tileIndex / horizTileCount) * settings.TileHeight) + render_bounds.Y;
-			int w = Math.Min (settings.TileWidth, render_bounds.GetRight () + 1 - x);
-			int h = Math.Min (settings.TileHeight, render_bounds.GetBottom () + 1 - y);
+			int w = Math.Min (settings.TileWidth, render_bounds.Right + 1 - x);
+			int h = Math.Min (settings.TileHeight, render_bounds.Bottom + 1 - y);
 
-			return new Gdk.Rectangle (x, y, w, h);
+			return new RectangleI (x, y, w, h);
 		}
 
 		int CalculateTotalTiles ()
@@ -317,7 +320,7 @@ namespace Pinta.Core
 		{
 			Debug.WriteLine (DateTime.Now.ToString ("HH:mm:ss:ffff") + " Timer tick.");
 
-			Gdk.Rectangle bounds;
+			RectangleI bounds;
 
 			lock (updated_lock) {
 
@@ -326,7 +329,7 @@ namespace Pinta.Core
 
 				is_updated = false;
 
-				bounds = new Gdk.Rectangle (updated_x1,
+				bounds = new RectangleI (updated_x1,
 							    updated_y1,
 								updated_x2 - updated_x1,
 								updated_y2 - updated_y1);
