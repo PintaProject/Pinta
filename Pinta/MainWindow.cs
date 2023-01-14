@@ -65,8 +65,8 @@ namespace Pinta
 			// Initialize interface things
 			new ActionHandlers ();
 
-#if false // TODO-GTK4
 			PintaCore.Chrome.InitializeProgessDialog (new ProgressDialog ());
+#if false // TODO-GTK4
 			PintaCore.Chrome.InitializeErrorDialogHandler ((parent, message, details) => {
 				System.Console.Error.WriteLine ("Pinta: {0}", details);
 				using var errorDialog = new ErrorDialog (parent);

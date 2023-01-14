@@ -168,6 +168,8 @@ namespace Pinta.Core
 		{
 			if (timer_tick_id > 0)
 				GLib.Source.Remove (timer_tick_id);
+
+			timer_tick_id = 0;
 		}
 
 		void StartRender ()
@@ -206,7 +208,7 @@ namespace Pinta.Core
 					slave.Join ();
 
 				// Change back to the UI thread to notify of completion.
-				GLib.Timeout.AddFull (0, 0, (_) => {
+				GLib.Functions.TimeoutAddFull (0, 0, (_) => {
 					HandleRenderCompletion ();
 					return false; // don't call the timer again
 				});
@@ -216,7 +218,7 @@ namespace Pinta.Core
 			master.Start ();
 
 			// Start timer used to periodically fire update events on the UI thread.
-			timer_tick_id = GLib.Timeout.AddFull (0, (uint) settings.UpdateMillis, (_) => HandleTimerTick ());
+			timer_tick_id = GLib.Functions.TimeoutAddFull (0, (uint) settings.UpdateMillis, (_) => HandleTimerTick ());
 		}
 
 		Thread StartSlaveThread (int renderId, int threadId)
@@ -351,6 +353,8 @@ namespace Pinta.Core
 
 			if (timer_tick_id > 0)
 				GLib.Source.Remove (timer_tick_id);
+
+			timer_tick_id = 0;
 
 			OnCompletion (cancel_render_flag, exceptions);
 

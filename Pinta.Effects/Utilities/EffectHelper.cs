@@ -26,6 +26,7 @@
 
 using System;
 using System.ComponentModel;
+using GLib;
 using Pinta.Core;
 using Pinta.Gui.Widgets;
 
@@ -54,45 +55,38 @@ namespace Pinta
 		/// </summary>
 		internal static bool LaunchSimpleEffectDialog (BaseEffect effect)
 		{
-#if false // TODO-GTK4
 			return LaunchSimpleEffectDialog (effect, new PintaLocalizer ());
-#else
-			throw new NotImplementedException ();
-#endif
 		}
 
-#if false // TODO-GTK4
 		/// <summary>
 		/// Helper function for the above methods. The IAddinLocalizer provides a generic way to
 		/// get translated strings both for Pinta's effects and for effect add-ins.
 		/// </summary>
 		private static bool LaunchSimpleEffectDialog (BaseEffect effect, IAddinLocalizer localizer)
 		{
-			if (effect == null)
-				throw new ArgumentNullException ("effect");
+			ArgumentNullException.ThrowIfNull(effect);
+			ArgumentNullException.ThrowIfNull(effect.EffectData);
 
-			if (effect.EffectData == null)
-				throw new ArgumentException ("effect.EffectData is null.");
+			var dialog = new SimpleEffectDialog(
+				effect.Name, effect.Icon, effect.EffectData, localizer);
 
-			using (var dialog = new SimpleEffectDialog (effect.Name,
-												 PintaCore.Resources.GetIcon (effect.Icon),
-												 effect.EffectData, localizer)) {
-				// Hookup event handling for live preview.
-				dialog.EffectDataChanged += (o, e) => {
-					if (effect.EffectData != null)
-						effect.EffectData.FirePropertyChanged (e.PropertyName);
-				};
+			// Hookup event handling for live preview.
+			dialog.EffectDataChanged += (o, e) => {
+				if (effect.EffectData != null)
+					effect.EffectData.FirePropertyChanged (e.PropertyName);
+			};
 
-				int response = dialog.Run ();
-
-				bool ret = false;
-				if (response == (int) Gtk.ResponseType.Ok && effect.EffectData != null)
+			bool ret = true;
+			dialog.OnResponse += (_, args) => {
+				if (args.ResponseId == (int)Gtk.ResponseType.Ok)
 					ret = !effect.EffectData.IsDefault;
+				else
+					ret = false;
+			};
 
-				return ret;
-			}
+			dialog.Present ();
+			return ret;
 		}
-#endif
 
 		/// <summary>
 		/// Wrapper around the AddinLocalizer of an add-in.
