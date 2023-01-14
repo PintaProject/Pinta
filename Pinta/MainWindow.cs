@@ -101,10 +101,8 @@ namespace Pinta
 #else
 			var tools = new Pinta.Tools.CoreToolsExtension ();
 			tools.Initialize ();
-#if false // TODO-GTK4
 			var effects = new Pinta.Effects.CoreEffectsExtension ();
 			effects.Initialize ();
-#endif
 #endif
 
 #if false // TODO-GTK4
@@ -351,11 +349,10 @@ namespace Pinta
 			PintaCore.Actions.Layers.RegisterActions (app, layers_menu);
 			menu_bar.AppendSubmenu (Translations.GetString ("_Layers"), layers_menu);
 
-#if false // TODO-GTK4
-			var adj_menu = new GLib.Menu ();
+			var adj_menu = Gio.Menu.New ();
 			menu_bar.AppendSubmenu (Translations.GetString ("_Adjustments"), adj_menu);
 
-			var effects_menu = new GLib.Menu ();
+			var effects_menu = Gio.Menu.New ();
 			menu_bar.AppendSubmenu (Translations.GetString ("Effe_cts"), effects_menu);
 
 			// TODO-GTK3 (addins)
@@ -364,7 +361,6 @@ namespace Pinta
 			var addins_menu = new GLib.Menu ();
 			PintaCore.Actions.Addins.RegisterActions (this, addins_menu);
 			menu_bar.AppendSubmenu (Translations.GetString ("A_dd-ins"), addins_menu);
-#endif
 #endif
 
 			var window_menu = Gio.Menu.New ();
@@ -382,8 +378,8 @@ namespace Pinta
 			show_pad = new GLib.Menu ();
 			pad_section.AppendSubmenu (Translations.GetString ("Tool Windows"), show_pad);
 
-			PintaCore.Chrome.InitializeMainMenu (adj_menu, effects_menu);
 #endif
+			PintaCore.Chrome.InitializeMainMenu (adj_menu, effects_menu);
 		}
 
 		private void CreateMainToolBar (WindowShell shell)

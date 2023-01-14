@@ -52,9 +52,9 @@ namespace Pinta.Core
 
 #if false // TODO-GTK4
 		public IProgressDialog ProgressDialog { get { return progress_dialog; } }
-		public GLib.Menu AdjustmentsMenu { get; private set; } = null!;
-		public GLib.Menu EffectsMenu { get; private set; } = null!;
 #endif
+		public Gio.Menu AdjustmentsMenu { get; private set; } = null!;
+		public Gio.Menu EffectsMenu { get; private set; } = null!;
 
 		public ChromeManager ()
 		{
@@ -122,13 +122,13 @@ namespace Pinta.Core
 			ImageTabsNotebook = notebook;
 		}
 
-#if false // TODO-GTK4
-		public void InitializeMainMenu (GLib.Menu adj_menu, GLib.Menu effects_menu)
+		public void InitializeMainMenu (Gio.Menu adj_menu, Gio.Menu effects_menu)
 		{
 			AdjustmentsMenu = adj_menu;
 			EffectsMenu = effects_menu;
 		}
 
+#if false // TODO-GTK4
 		public void InitializeProgessDialog (IProgressDialog progressDialog)
 		{
 			if (progressDialog == null)

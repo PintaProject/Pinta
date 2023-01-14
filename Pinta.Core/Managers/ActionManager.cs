@@ -39,22 +39,14 @@ namespace Pinta.Core
 		public ViewActions View { get; private set; } = new ();
 		public ImageActions Image { get; private set; } = new ();
 		public LayerActions Layers { get; private set; } = new ();
+		public AdjustmentsActions Adjustments { get; private set; } = new ();
+		public EffectsActions Effects { get; private set; } = new ();
 		public WindowActions Window { get; private set; } = new ();
 		public HelpActions Help { get; private set; } = new ();
-
-#if false // TODO-GTK4
-		public AdjustmentsActions Adjustments { get; private set; }
-		public EffectsActions Effects { get; private set; }
-		public AddinActions Addins { get; private set; }
-#endif
+		public AddinActions Addins { get; private set; } = new ();
 
 		public ActionManager ()
 		{
-#if false // TODO-GTK4
-			Adjustments = new AdjustmentsActions ();
-			Effects = new EffectsActions ();
-			Addins = new AddinActions ();
-#endif
 		}
 
 		public void CreateToolBar (Gtk.Box toolbar)

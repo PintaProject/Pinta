@@ -16,15 +16,7 @@
   <ItemGroup>
     <Compile Remove="**/*.cs" />
     <Compile Include="PintaCore.cs" />
-    <Compile Include="Actions/AppActions.cs" />
-    <Compile Include="Actions/Command.cs" />
-    <Compile Include="Actions/EditActions.cs" />
-    <Compile Include="Actions/FileActions.cs" />
-    <Compile Include="Actions/HelpActions.cs" />
-    <Compile Include="Actions/ImageActions.cs" />
-    <Compile Include="Actions/LayerActions.cs" />
-    <Compile Include="Actions/ViewActions.cs" />
-    <Compile Include="Actions/WindowActions.cs" />
+    <Compile Include="Actions/*.cs" />
     <Compile Include="Classes/BaseTool.cs" />
     <Compile Include="Classes/Document.cs" />
     <Compile Include="Classes/DocumentHistory.cs" />
@@ -73,6 +65,7 @@
     <Compile Include="ImageFormats/GdkPixbufFormat.cs" />
     <Compile Include="Managers/ActionManager.cs" />
     <Compile Include="Managers/ChromeManager.cs" />
+    <Compile Include="Managers/EffectsManager.cs" />
     <Compile Include="Managers/ImageConverterManager.cs" />
     <Compile Include="Managers/LayerManager.cs" />
     <Compile Include="Managers/PaletteManager.cs" />

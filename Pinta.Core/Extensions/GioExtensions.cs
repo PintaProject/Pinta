@@ -154,5 +154,31 @@ namespace Pinta.Core
 			GLib.Error.ThrowOnError (error);
 			return result;
 		}
+
+		public static void Remove (this Gio.Menu menu, Command action)
+		{
+			for (int i = 0; i < menu.GetNItems (); ++i) {
+				var name_attr = menu.GetItemAttributeValue (i, "action", GLib.VariantType.String).GetString ();
+				if (name_attr == action.FullName) {
+					menu.Remove (i);
+					return;
+				}
+			}
+		}
+
+		public static void AppendMenuItemSorted (this Gio.Menu menu, Gio.MenuItem item)
+		{
+			var new_label = item.GetAttributeValue ("label", GLib.VariantType.String).GetString ();
+
+			for (int i = 0; i < menu.GetNItems (); i++) {
+				var label = menu.GetItemAttributeValue (i, "label", GLib.VariantType.String).GetString ();
+				if (string.Compare (label, new_label) > 0) {
+					menu.InsertItem (i, item);
+					return;
+				}
+			}
+
+			menu.AppendItem (item);
+		}
 	}
 }

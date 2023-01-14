@@ -52,13 +52,17 @@ namespace Pinta.Core
 		public void RegisterAdjustment (BaseEffect adjustment)
 		{
 			// Add icon to IconFactory
+#if false // TODO-GTK4
 			Gtk.IconFactory fact = new Gtk.IconFactory ();
 			ObsoleteExtensions.AddToIconFactory (fact, adjustment.Icon, new Gtk.IconSet (PintaCore.Resources.GetIcon (adjustment.Icon)));
 			ObsoleteExtensions.AddDefaultToIconFactory (fact);
+#endif
 
 			// Create a gtk action for each adjustment
 			var act = new Command (adjustment.GetType ().Name, adjustment.Name + (adjustment.IsConfigurable ? Translations.GetString ("...") : ""), string.Empty, adjustment.Icon);
+#if false // TODO-GTK4
 			act.Activated += (o, args) => { PintaCore.LivePreview.Start (adjustment); };
+#endif
 
 			PintaCore.Actions.Adjustments.Actions.Add (act);
 
@@ -82,14 +86,18 @@ namespace Pinta.Core
 		public void RegisterEffect (BaseEffect effect)
 		{
 			// Add icon to IconFactory
+#if false // TODO-GTK4
 			Gtk.IconFactory fact = new Gtk.IconFactory ();
 			ObsoleteExtensions.AddToIconFactory (fact, effect.Icon, new Gtk.IconSet (PintaCore.Resources.GetIcon (effect.Icon)));
 			ObsoleteExtensions.AddDefaultToIconFactory (fact);
+#endif
 
 			// Create a gtk action and menu item for each effect
 			var act = new Command (effect.GetType ().Name, effect.Name + (effect.IsConfigurable ? Translations.GetString ("...") : ""), string.Empty, effect.Icon);
 			PintaCore.Chrome.Application.AddAction (act);
+#if false // TODO-GTK4
 			act.Activated += (o, args) => { PintaCore.LivePreview.Start (effect); };
+#endif
 
 			PintaCore.Actions.Effects.AddEffect (effect.EffectMenuCategory, act);
 

@@ -11,6 +11,7 @@
   <ItemGroup>
     <Compile Remove="**/*.cs" />
     <Compile Include="Adjustments/*.cs" />
+    <Compile Include="CoreEffectsExtension.cs" />
     <Compile Include="Effects/*.cs" />
     <Compile Include="Utilities/*.cs" />
   </ItemGroup>
