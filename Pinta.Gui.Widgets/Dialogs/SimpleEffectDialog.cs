@@ -129,20 +129,16 @@ namespace Pinta.Gui.Widgets
 					AddWidget (CreateAnglePicker (localizer.GetString (caption), EffectData, mi, attrs));
 				else if (mType == typeof (double))
 					AddWidget (CreateDoubleSlider (localizer.GetString (caption), EffectData, mi, attrs));
-#if false
 				else if (combo && mType == typeof (string))
 					AddWidget (CreateComboBox (localizer.GetString (caption), EffectData, mi, attrs));
-#endif
 				else if (mType == typeof (bool))
 					AddWidget (CreateCheckBox (localizer.GetString (caption), EffectData, mi, attrs));
 				else if (mType == typeof (PointI))
 					AddWidget (CreatePointPicker (localizer.GetString (caption), EffectData, mi, attrs));
 				else if (mType == typeof (PointD))
 					AddWidget (CreateOffsetPicker (localizer.GetString (caption), EffectData, mi, attrs));
-#if false // TODO-GTK4
 				else if (mType.IsEnum)
 					AddWidget (CreateEnumComboBox (localizer.GetString (caption), EffectData, mi, attrs));
-#endif
 
 				if (hint != null)
 					AddWidget (CreateHintLabel (localizer.GetString (hint)));
@@ -156,7 +152,6 @@ namespace Pinta.Gui.Widgets
 		#endregion
 
 		#region Control Builders
-#if false // TODO-GTK4
 		private ComboBoxWidget CreateEnumComboBox (string caption, object o, MemberInfo member, object[] attributes)
 		{
 			var myType = GetTypeForMember (member)!; // NRT - We're looping through members we got from reflection
@@ -184,8 +179,6 @@ namespace Pinta.Gui.Widgets
 			var widget = new ComboBoxWidget (labels.ToArray ()) {
 				Label = caption
 			};
-
-			widget.AddEvents ((int) Gdk.EventMask.ButtonPressMask);
 
 			if (GetValue (member, o) is object obj)
 				widget.Active = ((IList) member_names).IndexOf (obj.ToString ());
@@ -216,8 +209,6 @@ namespace Pinta.Gui.Widgets
 				Label = caption
 			};
 
-			widget.AddEvents ((int) Gdk.EventMask.ButtonPressMask);
-
 			if (GetValue (member, o) is string s)
 				widget.Active = entries.IndexOf (s);
 
@@ -227,7 +218,6 @@ namespace Pinta.Gui.Widgets
 
 			return widget;
 		}
-#endif
 
 		private HScaleSpinButtonWidget CreateDoubleSlider (string caption, object o, MemberInfo member, object[] attributes)
 		{
