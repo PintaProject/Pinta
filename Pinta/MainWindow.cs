@@ -41,9 +41,7 @@ namespace Pinta
 		// NRT - Created in OnActivated
 		WindowShell window_shell = null!;
 		Dock dock = null!;
-#if false // TODO-GTK4
-		GLib.Menu show_pad = null!;
-#endif
+		Gio.Menu show_pad = null!;
 
 		CanvasPad canvas_pad = null!;
 
@@ -371,14 +369,12 @@ namespace Pinta
 			PintaCore.Actions.Help.RegisterActions (app, help_menu);
 			menu_bar.AppendSubmenu (Translations.GetString ("_Help"), help_menu);
 
-#if false // TODO-GTK4
-			var pad_section = new GLib.Menu ();
+			var pad_section = Gio.Menu.New ();
 			view_menu.AppendSection (null, pad_section);
 
-			show_pad = new GLib.Menu ();
+			show_pad = Gio.Menu.New ();
 			pad_section.AppendSubmenu (Translations.GetString ("Tool Windows"), show_pad);
 
-#endif
 			PintaCore.Chrome.InitializeMainMenu (adj_menu, effects_menu);
 		}
 
