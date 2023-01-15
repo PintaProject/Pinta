@@ -113,9 +113,7 @@ namespace Pinta.Core
 		public void RegisterHandlers ()
 		{
 			File.RegisterHandlers ();
-#if false // TODO-GTK4
 			Edit.RegisterHandlers ();
-#endif
 			Image.RegisterHandlers ();
 			Layers.RegisterHandlers ();
 			View.RegisterHandlers ();

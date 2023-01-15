@@ -150,11 +150,10 @@ namespace Pinta.Core
 			palette_menu.AppendItem (ResizePalette.CreateMenuItem ());
 		}
 
-#if false // TODO-GTK4
-		public void CreateHistoryWindowToolBar (Gtk.Toolbar toolbar)
+		public void CreateHistoryWindowToolBar (Gtk.Box toolbar)
 		{
-			toolbar.AppendItem (Undo.CreateToolBarItem ());
-			toolbar.AppendItem (Redo.CreateToolBarItem ());
+			toolbar.Append (Undo.CreateToolBarItem ());
+			toolbar.Append (Redo.CreateToolBarItem ());
 		}
 
 		public void RegisterHandlers ()
@@ -186,11 +185,9 @@ namespace Pinta.Core
 				InvertSelection.Sensitive = visible;
 			};
 		}
-#endif
 
 		#endregion
 
-#if false // TODO-GTK4
 		#region Action Handlers
 		private void HandlePintaCoreActionsEditFillSelectionActivated (object sender, EventArgs e)
 		{
@@ -200,13 +197,12 @@ namespace Pinta.Core
 
 			Cairo.ImageSurface old = doc.Layers.CurrentUserLayer.Surface.Clone ();
 
-			using (var g = new Cairo.Context (doc.Layers.CurrentUserLayer.Surface)) {
-				g.AppendPath (doc.Selection.SelectionPath);
-				g.FillRule = FillRule.EvenOdd;
+			var g = new Cairo.Context (doc.Layers.CurrentUserLayer.Surface);
+			g.AppendPath (doc.Selection.SelectionPath);
+			g.FillRule = FillRule.EvenOdd;
 
-				g.SetSourceColor (PintaCore.Palette.PrimaryColor);
-				g.Fill ();
-			}
+			g.SetSourceColor (PintaCore.Palette.PrimaryColor);
+			g.Fill ();
 
 			doc.Workspace.Invalidate ();
 			doc.History.PushNewItem (new SimpleHistoryItem (Resources.Icons.EditSelectionFill, Translations.GetString ("Fill Selection"), old, doc.Layers.CurrentUserLayerIndex));
@@ -236,13 +232,12 @@ namespace Pinta.Core
 
 			Cairo.ImageSurface old = doc.Layers.CurrentUserLayer.Surface.Clone ();
 
-			using (var g = new Cairo.Context (doc.Layers.CurrentUserLayer.Surface)) {
-				g.AppendPath (doc.Selection.SelectionPath);
-				g.FillRule = FillRule.EvenOdd;
+			var g = new Cairo.Context (doc.Layers.CurrentUserLayer.Surface);
+			g.AppendPath (doc.Selection.SelectionPath);
+			g.FillRule = FillRule.EvenOdd;
 
-				g.Operator = Cairo.Operator.Clear;
-				g.Fill ();
-			}
+			g.Operator = Cairo.Operator.Clear;
+			g.Fill ();
 
 			doc.Workspace.Invalidate ();
 
@@ -269,6 +264,7 @@ namespace Pinta.Core
 
 		private void HandlerPintaCoreActionsEditCopyActivated (object sender, EventArgs e)
 		{
+#if false // TODO-GTK4 clipboard
 			Document doc = PintaCore.Workspace.ActiveDocument;
 
 			Gtk.Clipboard cb = Gtk.Clipboard.Get (Gdk.Atom.Intern ("CLIPBOARD", false));
@@ -294,10 +290,12 @@ namespace Pinta.Core
 
 				(dest as IDisposable).Dispose ();
 			}
+#endif
 		}
 
 		private void HandlerPintaCoreActionsEditCopyMergedActivated (object sender, EventArgs e)
 		{
+#if false // TODO-GTK4 clipboard
 			var cb = Gtk.Clipboard.Get (Gdk.Atom.Intern ("CLIPBOARD", false));
 			var doc = PintaCore.Workspace.ActiveDocument;
 
@@ -319,10 +317,12 @@ namespace Pinta.Core
 					cb.Image = dest.ToPixbuf ();
 				}
 			}
+#endif
 		}
 
 		private void HandlerPintaCoreActionsEditCutActivated (object sender, EventArgs e)
 		{
+#if false // TODO-GTK4 clipboard
 			var doc = PintaCore.Workspace.ActiveDocument;
 
 			Gtk.Clipboard cb = Gtk.Clipboard.Get (Gdk.Atom.Intern ("CLIPBOARD", false));
@@ -335,6 +335,7 @@ namespace Pinta.Core
 
 			// Erase selection
 			HandlePintaCoreActionsEditEraseSelectionActivated ("Cut", e);
+#endif
 		}
 
 		private void HandlerPintaCoreActionsEditUndoActivated (object sender, EventArgs e)
@@ -357,18 +358,15 @@ namespace Pinta.Core
 
 		private void HandlerPintaCoreActionsEditLoadPaletteActivated (object sender, EventArgs e)
 		{
-			using var fcd = new FileChooserNative (
+			var fcd = FileChooserNative.New (
 				Translations.GetString ("Open Palette File"),
 				PintaCore.Chrome.MainWindow,
 				FileChooserAction.Open,
 				Translations.GetString ("Open"),
-				Translations.GetString ("Cancel")) {
-				LocalOnly = false
-			};
+				Translations.GetString ("Cancel"));
 
-			var ff = new FileFilter {
-				Name = Translations.GetString ("Palette files")
-			};
+			var ff = FileFilter.New ();
+			ff.Name = Translations.GetString ("Palette files");
 
 			foreach (var format in PintaCore.PaletteFormats.Formats) {
 				if (!format.IsWriteOnly ()) {
@@ -379,35 +377,34 @@ namespace Pinta.Core
 
 			fcd.AddFilter (ff);
 
-			FileFilter ff2 = new FileFilter {
-				Name = Translations.GetString ("All files")
-			};
+			var ff2 = FileFilter.New ();
+			ff2.Name = Translations.GetString ("All files");
 			ff2.AddPattern ("*");
 			fcd.AddFilter (ff2);
 
+#if false // TODO-GTK4 need gir.core binding for gtk_file_chooser_set_current_folder
 			if (last_palette_dir != null)
 				fcd.SetCurrentFolderFile (last_palette_dir);
+#endif
+			fcd.OnResponse += (_, args) => {
+				var response = (ResponseType) args.ResponseId;
 
-			var response = (ResponseType) fcd.Run ();
-
-			if (response == ResponseType.Accept) {
-				GLib.IFile file = fcd.File;
-				last_palette_dir = file.Parent;
-				PintaCore.Palette.CurrentPalette.Load (file);
-			}
+				if (response == ResponseType.Accept) {
+					Gio.File file = fcd.GetFile ()!;
+					last_palette_dir = file.GetParent ();
+					PintaCore.Palette.CurrentPalette.Load (file);
+				}
+			};
 		}
 
 		private void HandlerPintaCoreActionsEditSavePaletteActivated (object sender, EventArgs e)
 		{
-			using var fcd = new FileChooserNative (
+			var fcd = FileChooserNative.New (
 				Translations.GetString ("Save Palette File"),
 				PintaCore.Chrome.MainWindow,
 				FileChooserAction.Save,
 				Translations.GetString ("Save"),
-				Translations.GetString ("Cancel")) {
-				DoOverwriteConfirmation = true,
-				LocalOnly = false
-			};
+				Translations.GetString ("Cancel"));
 
 			foreach (var format in PintaCore.PaletteFormats.Formats) {
 				if (!format.IsReadOnly ()) {
@@ -416,33 +413,36 @@ namespace Pinta.Core
 				}
 			}
 
+#if false // TODO-GTK4 need gir.core binding for gtk_file_chooser_set_current_folder
 			if (last_palette_dir != null)
 				fcd.SetCurrentFolderFile (last_palette_dir);
+#endif
 
-			var response = (ResponseType) fcd.Run ();
+			fcd.OnResponse += (_, args) => {
+				var response = (ResponseType) args.ResponseId;
 
-			if (response == Gtk.ResponseType.Accept) {
-				GLib.IFile file = fcd.File;
+				if (response == Gtk.ResponseType.Accept) {
+					Gio.File file = fcd.GetFile ()!;
 
-				// Add in the extension if necessary, based on the current selected file filter.
-				// Note: on macOS, fcd.Filter doesn't seem to properly update to the current filter.
-				// However, on macOS the dialog always adds the extension automatically, so this issue doesn't matter.
-				var basename = file.Parent.GetRelativePath (file);
-				string extension = System.IO.Path.GetExtension (basename);
-				if (string.IsNullOrEmpty (extension)) {
-					var currentFormat = PintaCore.PaletteFormats.Formats.First (f => f.Filter == fcd.Filter);
-					basename += "." + currentFormat.Extensions.First ();
-					file = file.Parent.GetChild (basename);
+					// Add in the extension if necessary, based on the current selected file filter.
+					// Note: on macOS, fcd.Filter doesn't seem to properly update to the current filter.
+					// However, on macOS the dialog always adds the extension automatically, so this issue doesn't matter.
+					var basename = file.GetParent ()!.GetRelativePath (file)!;
+					string extension = System.IO.Path.GetExtension (basename);
+					if (string.IsNullOrEmpty (extension)) {
+						var currentFormat = PintaCore.PaletteFormats.Formats.First (f => f.Filter == fcd.Filter);
+						basename += "." + currentFormat.Extensions.First ();
+						file = file.GetParent ()!.GetChild (basename);
+					}
+
+					var format = PintaCore.PaletteFormats.GetFormatByFilename (basename);
+					if (format is null)
+						throw new FormatException ();
+
+					PintaCore.Palette.CurrentPalette.Save (file, format.Saver);
+					last_palette_dir = file.GetParent ();
 				}
-
-				var format = PintaCore.PaletteFormats.GetFormatByFilename (basename);
-				if (format is null)
-					throw new FormatException ();
-
-				PintaCore.Palette.CurrentPalette.Save (file, format.Saver);
-				last_palette_dir = file.Parent;
-			}
-
+			};
 		}
 
 		private void HandlerPintaCoreActionsEditResetPaletteActivated (object sender, EventArgs e)
@@ -481,6 +481,5 @@ namespace Pinta.Core
 			Undo.Sensitive = PintaCore.Workspace.ActiveWorkspace.History.CanUndo;
 		}
 		#endregion
-#endif
 	}
 }
