@@ -68,9 +68,7 @@
     <Compile Include="ImageFormats/IImageExporter.cs" />
     <Compile Include="ImageFormats/GdkPixbufFormat.cs" />
     <Compile Include="Managers/*.cs" />
-    <Compile Include="PaletteFormats/IPaletteLoader.cs" />
-    <Compile Include="PaletteFormats/IPaletteSaver.cs" />
-    <Compile Include="PaletteFormats/PaletteDescriptor.cs" />
+    <Compile Include="PaletteFormats/*.cs" />
     <Compile Include="Widgets/ToolBarDropDownButton.cs" />
   </ItemGroup>
 </Project>

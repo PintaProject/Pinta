@@ -149,10 +149,8 @@ namespace Pinta.Core
 		{
 			var palette_file = System.IO.Path.Combine (PintaCore.Settings.GetUserSettingsDirectory (), PALETTE_FILE);
 
-#if false // TODO-GTK4
 			if (System.IO.File.Exists (palette_file))
-				CurrentPalette.Load (GLib.FileFactory.NewForPath (palette_file));
-#endif
+				CurrentPalette.Load (Gio.FileHelper.NewForPath (palette_file));
 		}
 
 		private void PopulateRecentlyUsedColors ()
@@ -183,12 +181,8 @@ namespace Pinta.Core
 		{
 			var palette_file = System.IO.Path.Combine (PintaCore.Settings.GetUserSettingsDirectory (), PALETTE_FILE);
 			var palette_saver = PintaCore.PaletteFormats.Formats.FirstOrDefault (p => p.Extensions.Contains ("txt"))?.Saver;
-#if false // TODO-GTK4
 			if (palette_saver is not null)
-				CurrentPalette.Save (GLib.FileFactory.NewForPath (palette_file), palette_saver);
-#else
-			throw new NotImplementedException ();
-#endif
+				CurrentPalette.Save (Gio.FileHelper.NewForPath (palette_file), palette_saver);
 		}
 
 		private void SaveRecentlyUsedColors ()

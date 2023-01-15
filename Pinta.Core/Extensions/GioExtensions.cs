@@ -56,8 +56,18 @@ namespace Pinta.Core
 #if false // TODO-GTK4 - needs gir.core bindings
 			return file.Replace (null, false, Gio.FileCreateFlags.None, null);
 #else
-			throw new NotImplementedException ();
+			GLib.Internal.ErrorOwnedHandle error;
+			IntPtr result = Gio.Internal.File.Replace (file.Handle, null, false, Gio.FileCreateFlags.None, IntPtr.Zero, out error);
+			GLib.Error.ThrowOnError (error);
+			return new FileOutputStreamWrapper (result, true);
 #endif
+		}
+
+		internal class FileOutputStreamWrapper : Gio.FileOutputStream
+		{
+			internal FileOutputStreamWrapper (IntPtr ptr, bool ownedRef) : base (ptr, ownedRef)
+			{
+			}
 		}
 
 		// TODO-GTK4 - needs a proper binding in gir.core
