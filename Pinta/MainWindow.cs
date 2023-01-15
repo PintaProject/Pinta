@@ -103,26 +103,26 @@ namespace Pinta
 			effects.Initialize ();
 #endif
 
-#if false // TODO-GTK4
 			// Load the user's previous settings
 			LoadUserSettings ();
+			PintaCore.Actions.App.BeforeQuit += delegate { SaveUserSettings (); };
 
+#if false // TODO-GTK4
 			// We support drag and drop for URIs
 			window_shell.AddDragDropSupport (new Gtk.TargetEntry ("text/uri-list", 0, 100));
 
 			// Handle a few main window specific actions
-			PintaCore.Actions.App.BeforeQuit += delegate { SaveUserSettings (); };
-
 			window_shell.DeleteEvent += MainWindow_DeleteEvent;
 			window_shell.DragDataReceived += MainWindow_DragDataReceived;
 
 			window_shell.KeyPressEvent += MainWindow_KeyPressEvent;
 			window_shell.KeyReleaseEvent += MainWindow_KeyReleaseEvent;
+#endif
 
 			// TODO: These need to be [re]moved when we redo zoom support
 			PintaCore.Actions.View.ZoomToWindow.Activated += ZoomToWindow_Activated;
 			PintaCore.Actions.View.ZoomToSelection.Activated += ZoomToSelection_Activated;
-#endif
+
 			PintaCore.Workspace.ActiveDocumentChanged += ActiveDocumentChanged;
 
 			PintaCore.Workspace.DocumentCreated += Workspace_DocumentCreated;
@@ -165,9 +165,7 @@ namespace Pinta
 			var view = (DocumentViewContent) item;
 
 			PintaCore.Workspace.SetActiveDocument (view.Document);
-#if false // TODO-GTK4
-			((CanvasWindow) view.Widget).Canvas.Window.Cursor = PintaCore.Tools.CurrentTool?.CurrentCursor;
-#endif
+			((CanvasWindow) view.Widget).Canvas.Cursor = PintaCore.Tools.CurrentTool?.CurrentCursor;
 		}
 
 		private void Workspace_DocumentCreated (object? sender, DocumentEventArgs e)
@@ -178,10 +176,8 @@ namespace Pinta
 			var selected_index = notebook.ActiveItemIndex;
 
 			var canvas = new CanvasWindow (doc) {
-#if false // TODO-GTK4 enable once the view menu is supported
 				RulersVisible = PintaCore.Actions.View.Rulers.Value,
 				RulerMetric = GetCurrentRulerMetric ()
-#endif
 			};
 			doc.Workspace.Canvas = canvas.Canvas;
 
@@ -193,12 +189,12 @@ namespace Pinta
 			// Zoom to window only on first show (if we do it always, it will be called on every resize)
 			// Note: this does seem to allow a small flicker where large images are shown at 100% zoom before
 			// zooming out (Bug 1959673)
-#if false // TODO-GTK4 enable once the view menu is supported
-			canvas.SizeAllocated += (o, e2) => {
+			canvas.OnShow += (o, e2) => {
 				if (!canvas.HasBeenShown) {
-					Application.Invoke (delegate {
+					GLib.Functions.TimeoutAddFull (0, 0, delegate {
 						ZoomToWindow_Activated (o, e);
 						PintaCore.Workspace.Invalidate ();
+						return false;
 					});
 				}
 
@@ -206,19 +202,18 @@ namespace Pinta
 			};
 
 			PintaCore.Actions.View.Rulers.Toggled += (active) => { canvas.RulersVisible = active; };
-			PintaCore.Actions.View.RulerMetric.Activated += (o, args) => {
-				PintaCore.Actions.View.RulerMetric.ChangeState (args.P0);
+			PintaCore.Actions.View.RulerMetric.OnActivate += (o, args) => {
+				PintaCore.Actions.View.RulerMetric.ChangeState (args.Parameter!);
 				canvas.RulerMetric = GetCurrentRulerMetric ();
 			};
-#endif
+		}
+
+		private MetricType GetCurrentRulerMetric ()
+		{
+			return (MetricType) PintaCore.Actions.View.RulerMetric.GetState ().GetInt ();
 		}
 
 #if false // TODO-GTK4
-		private MetricType GetCurrentRulerMetric ()
-		{
-			return (MetricType) (int) PintaCore.Actions.View.RulerMetric.State;
-		}
-
 		[GLib.ConnectBefore]
 		private void MainWindow_KeyPressEvent (object o, KeyPressEventArgs e)
 		{
@@ -442,8 +437,6 @@ namespace Pinta
 			container.Append (dock);
 		}
 
-#if false // TODO-GTK4
-
 		#region User Settings
 		private const string LastDialogDirSettingKey = "last-dialog-directory";
 		private const string LastSelectedToolSettingKey = "last-selected-tool";
@@ -462,11 +455,11 @@ namespace Pinta
 			PintaCore.Actions.View.ImageTabs.Value = PintaCore.Settings.GetSetting ("image-tabs-shown", true);
 			PintaCore.Actions.View.PixelGrid.Value = PintaCore.Settings.GetSetting ("pixel-grid-shown", false);
 
-			var dialog_uri = PintaCore.Settings.GetSetting (LastDialogDirSettingKey, PintaCore.RecentFiles.DefaultDialogDirectory?.GetUriAsString () ?? "");
-			PintaCore.RecentFiles.LastDialogDirectory = GLib.FileFactory.NewForUri (dialog_uri);
+			var dialog_uri = PintaCore.Settings.GetSetting (LastDialogDirSettingKey, PintaCore.RecentFiles.DefaultDialogDirectory?.GetUri () ?? "");
+			PintaCore.RecentFiles.LastDialogDirectory = Gio.FileHelper.NewForUri (dialog_uri);
 
 			var ruler_metric = (MetricType) PintaCore.Settings.GetSetting ("ruler-metric", (int) MetricType.Pixels);
-			PintaCore.Actions.View.RulerMetric.Activate (new GLib.Variant ((int) ruler_metric));
+			PintaCore.Actions.View.RulerMetric.Activate (GLib.Variant.Create ((int) ruler_metric));
 		}
 
 		private void SaveUserSettings ()
@@ -474,20 +467,20 @@ namespace Pinta
 			dock.SaveSettings (PintaCore.Settings);
 
 			// Don't store the maximized height if the window is maximized
-			if ((window_shell.Window.State & Gdk.WindowState.Maximized) == 0) {
-				PintaCore.Settings.PutSetting ("window-size-width", window_shell.Window.GetSize ().Width);
-				PintaCore.Settings.PutSetting ("window-size-height", window_shell.Window.GetSize ().Height);
+			if (!window_shell.Window.IsMaximized ()) {
+				PintaCore.Settings.PutSetting ("window-size-width", window_shell.Window.GetWidth ());
+				PintaCore.Settings.PutSetting ("window-size-height", window_shell.Window.GetHeight ());
 			}
 
 			PintaCore.Settings.PutSetting ("ruler-metric", (int) GetCurrentRulerMetric ());
-			PintaCore.Settings.PutSetting ("window-maximized", (window_shell.Window.State & Gdk.WindowState.Maximized) != 0);
+			PintaCore.Settings.PutSetting ("window-maximized", window_shell.Window.IsMaximized ());
 			PintaCore.Settings.PutSetting ("ruler-shown", PintaCore.Actions.View.Rulers.Value);
 			PintaCore.Settings.PutSetting ("image-tabs-shown", PintaCore.Actions.View.ImageTabs.Value);
 			PintaCore.Settings.PutSetting ("toolbar-shown", PintaCore.Actions.View.ToolBar.Value);
 			PintaCore.Settings.PutSetting ("statusbar-shown", PintaCore.Actions.View.StatusBar.Value);
 			PintaCore.Settings.PutSetting ("toolbox-shown", PintaCore.Actions.View.ToolBox.Value);
 			PintaCore.Settings.PutSetting ("pixel-grid-shown", PintaCore.Actions.View.PixelGrid.Value);
-			PintaCore.Settings.PutSetting (LastDialogDirSettingKey, PintaCore.RecentFiles.LastDialogDirectory?.GetUriAsString () ?? "");
+			PintaCore.Settings.PutSetting (LastDialogDirSettingKey, PintaCore.RecentFiles.LastDialogDirectory?.GetUri () ?? "");
 
 			if (PintaCore.Tools.CurrentTool is BaseTool tool)
 				PintaCore.Settings.PutSetting (LastSelectedToolSettingKey, tool.GetType ().Name);
@@ -497,6 +490,7 @@ namespace Pinta
 		#endregion
 
 		#region Action Handlers
+#if false // TODO-GTK4
 		private void MainWindow_DeleteEvent (object o, DeleteEventArgs args)
 		{
 			// leave window open so user can cancel quitting
@@ -558,10 +552,11 @@ namespace Pinta
 				}
 			}
 		}
+#endif
 
 		private void ZoomToSelection_Activated (object sender, EventArgs e)
 		{
-			PintaCore.Workspace.ActiveWorkspace.ZoomToRectangle (PintaCore.Workspace.ActiveDocument.Selection.SelectionPath.GetBounds ().ToCairoRectangle ());
+			PintaCore.Workspace.ActiveWorkspace.ZoomToRectangle (PintaCore.Workspace.ActiveDocument.Selection.SelectionPath.GetBounds ().ToDouble ());
 		}
 
 		private void ZoomToWindow_Activated (object sender, EventArgs e)
@@ -573,10 +568,10 @@ namespace Pinta
 				int image_x = PintaCore.Workspace.ImageSize.Width;
 				int image_y = PintaCore.Workspace.ImageSize.Height;
 
-				var canvas_window = PintaCore.Workspace.ActiveWorkspace.Canvas.Parent;
+				var canvas_window = PintaCore.Workspace.ActiveWorkspace.Canvas.Parent!;
 
-				var window_x = canvas_window.Allocation.Width;
-				var window_y = canvas_window.Allocation.Height;
+				var window_x = canvas_window.GetAllocatedWidth ();
+				var window_y = canvas_window.GetAllocatedHeight ();
 
 				double ratio;
 
@@ -589,7 +584,7 @@ namespace Pinta
 
 				PintaCore.Workspace.Scale = ratio;
 				PintaCore.Actions.View.SuspendZoomUpdate ();
-				PintaCore.Actions.View.ZoomComboBox.ComboBox.Entry.Text = ViewActions.ToPercent (PintaCore.Workspace.Scale);
+				PintaCore.Actions.View.ZoomComboBox.ComboBox.GetEntry ().SetText (ViewActions.ToPercent (PintaCore.Workspace.Scale));
 				PintaCore.Actions.View.ResumeZoomUpdate ();
 			}
 
@@ -597,16 +592,14 @@ namespace Pinta
 		}
 		#endregion
 
-#endif
 
 		private void ActiveDocumentChanged (object? sender, EventArgs e)
 		{
 			if (PintaCore.Workspace.HasOpenDocuments) {
-#if false // TODO-GTK4 - update once view menu is enabled
 				PintaCore.Actions.View.SuspendZoomUpdate ();
-				PintaCore.Actions.View.ZoomComboBox.ComboBox.Entry.Text = ViewActions.ToPercent (PintaCore.Workspace.Scale);
+				PintaCore.Actions.View.ZoomComboBox.ComboBox.GetEntry ().SetText (ViewActions.ToPercent (PintaCore.Workspace.Scale));
 				PintaCore.Actions.View.ResumeZoomUpdate ();
-#endif
+
 				var doc = PintaCore.Workspace.ActiveDocument;
 				var tab = FindTabWithCanvas ((PintaCanvas) doc.Workspace.Canvas);
 

@@ -304,5 +304,16 @@ namespace Pinta.Core
 		/// Helper function to return the icon theme for the default display.
 		/// </summary>
 		public static Gtk.IconTheme GetDefaultIconTheme () => Gtk.IconTheme.GetForDisplay (Gdk.Display.GetDefault ()!);
+
+		/// <summary>
+		/// For a combo box that has an entry, provides easy access to the child entry widget.
+		/// </summary>
+		public static Entry GetEntry (this ComboBox box)
+		{
+			if (!box.HasEntry)
+				throw new InvalidOperationException ("Combobox does not have an entry");
+
+			return (Entry) box.Child!;
+		}
 	}
 }
