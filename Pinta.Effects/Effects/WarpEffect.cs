@@ -58,7 +58,6 @@ namespace Pinta.Effects
 		#region Algorithm Code Ported From PDN
 		public override void Render (ImageSurface src, ImageSurface dst, Core.RectangleI[] rois)
 		{
-#if false // TODO-GTK4
 			var selection = PintaCore.LivePreview.RenderBounds;
 			this.defaultRadius = Math.Min (selection.Width, selection.Height) * 0.5;
 			this.defaultRadius2 = this.defaultRadius * this.defaultRadius;
@@ -75,14 +74,14 @@ namespace Pinta.Effects
 			Utility.GetRgssOffsets (aaPoints, aaSampleCount, Data.Quality);
 			Span<ColorBgra> samples = stackalloc ColorBgra[aaSampleCount];
 
-			var dst_data = dst.GetData ();
+			var dst_data = dst.GetPixelData ();
 			int dst_width = dst.Width;
-			var src_data = src.GetReadOnlyData ();
+			var src_data = src.GetReadOnlyPixelData ();
 			int src_width = src.Width;
 
 			TransformData td;
 
-			foreach (Core.Rectangle rect in rois) {
+			foreach (Core.RectangleI rect in rois) {
 
 				for (int y = rect.Top; y <= rect.Bottom; y++) {
 					var dst_row = dst_data.Slice (y * dst_width, dst_width);
@@ -151,7 +150,6 @@ namespace Pinta.Effects
 					}
 				}
 			}
-#endif
 		}
 
 		protected abstract void InverseTransform (ref TransformData data);

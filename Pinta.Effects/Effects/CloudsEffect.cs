@@ -169,31 +169,25 @@ namespace Pinta.Effects
 
 		protected override void Render (ImageSurface src, ImageSurface dst, Core.RectangleI roi)
 		{
-#if false // TODO-GTK4
-			var r = roi.ToCairoRectangle ();
+			var r = roi.ToDouble ();
 
-			using (var temp = CairoExtensions.CreateImageSurface (Format.Argb32, roi.Width, roi.Height)) {
+			var temp = CairoExtensions.CreateImageSurface (Format.Argb32, roi.Width, roi.Height);
 
-				RenderClouds (temp, roi, Data.Scale, (byte) (Data.Seed ^ instanceSeed), Data.Power / 100.0,
-					      PintaCore.Palette.PrimaryColor.ToColorBgra (), PintaCore.Palette.SecondaryColor.ToColorBgra ());
+			RenderClouds (temp, roi, Data.Scale, (byte) (Data.Seed ^ instanceSeed), Data.Power / 100.0,
+					PintaCore.Palette.PrimaryColor.ToColorBgra (), PintaCore.Palette.SecondaryColor.ToColorBgra ());
 
-				temp.MarkDirty ();
+			temp.MarkDirty ();
 
-				// Have to lock because effect renderer is multithreaded
-				lock (render_lock) {
-					using (var g = new Context (dst)) {
-						// - Clear any previous render from the destination
-						// - Copy the source to the destination
-						// - Blend the clouds over the source
-						g.Clear (r);
-						g.BlendSurface (src, r);
-						g.BlendSurface (temp, r.Location (), (BlendMode) CloudsData.BlendOps[Data.BlendMode]);
-					}
-				}
+			// Have to lock because effect renderer is multithreaded
+			lock (render_lock) {
+				var g = new Context (dst);
+				// - Clear any previous render from the destination
+				// - Copy the source to the destination
+				// - Blend the clouds over the source
+				g.Clear (r);
+				g.BlendSurface (src, r);
+				g.BlendSurface (temp, r.Location (), (BlendMode) CloudsData.BlendOps[Data.BlendMode]);
 			}
-#else
-			throw new NotImplementedException ();
-#endif
 		}
 		#endregion
 

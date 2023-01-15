@@ -838,8 +838,7 @@ namespace Pinta.Core
 			g.Paint ();
 		}
 
-#if false // TODO-GTK4
-		public static void Clear (this Context g, Rectangle roi)
+		public static void Clear (this Context g, RectangleD roi)
 		{
 			g.Save ();
 			g.Rectangle (roi.X, roi.Y, roi.Width, roi.Height);
@@ -848,7 +847,7 @@ namespace Pinta.Core
 			g.Paint ();
 			g.Restore ();
 		}
-#endif
+
 		public static void MarkDirty (this ImageSurface surface, in RectangleI rect)
 		{
 			surface.MarkDirty (rect.X, rect.Y, rect.Width, rect.Height);
@@ -1503,7 +1502,7 @@ namespace Pinta.Core
 			g.Restore ();
 		}
 
-		public static void BlendSurface (this Context g, Surface src, PointI offset, BlendMode mode = BlendMode.Normal, double opacity = 1.0)
+		public static void BlendSurface (this Context g, Surface src, PointD offset, BlendMode mode = BlendMode.Normal, double opacity = 1.0)
 		{
 			g.Save ();
 			g.Translate (offset.X, offset.Y);

@@ -39,28 +39,15 @@ namespace Pinta.Effects
 		public RedEyeRemoveEffect ()
 		{
 			EffectData = new RedEyeRemoveData ();
+
+			EffectData.PropertyChanged += (_, _) => {
+				op = new UnaryPixelOps.RedEyeRemove (Data.Tolerance, Data.Saturation);
+			};
 		}
 
 		public override void LaunchConfiguration ()
 		{
-#if false // TODO-GTK4
-			using (var dialog = new SimpleEffectDialog (Name, PintaCore.Resources.GetIcon (Icon), Data, new PintaLocalizer ())) {
-				// Hookup event handling for live preview.
-				dialog.EffectDataChanged += (o, e) => {
-					if (EffectData != null) {
-						op = new UnaryPixelOps.RedEyeRemove (Data.Tolerance, Data.Saturation);
-						EffectData.FirePropertyChanged (e.PropertyName);
-					}
-				};
-
-				int response = dialog.Run ();
-				bool ret = (response == (int) Gtk.ResponseType.Ok);
-
-				return ret;
-			}
-#else
-			throw new NotImplementedException ();
-#endif
+			EffectHelper.LaunchSimpleEffectDialog (this);
 		}
 
 		public override void Render (ImageSurface src, ImageSurface dest, Core.RectangleI[] rois)
