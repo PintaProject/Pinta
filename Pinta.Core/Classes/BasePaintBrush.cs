@@ -77,8 +77,8 @@ namespace Pinta.Core
 			OnMouseDown ();
 		}
 
-		public virtual Gdk.Rectangle DoMouseMove (Context g, Color strokeColor, ImageSurface surface,
-							  int x, int y, int lastX, int lastY)
+		public virtual RectangleI DoMouseMove (Context g, Color strokeColor, ImageSurface surface,
+						       int x, int y, int lastX, int lastY)
 		{
 			return OnMouseMove (g, strokeColor, surface, x, y, lastX, lastY);
 		}
@@ -109,7 +109,7 @@ namespace Pinta.Core
 		/// <param name="lastX">The previous x coordinate of the mouse.</param>
 		/// <param name="lastY">The previous y coordinate of the mouse.</param>
 		/// <returns>A rectangle containing the area of the canvas that should be redrawn.</returns>
-		protected abstract Gdk.Rectangle OnMouseMove (Context g, Color strokeColor, ImageSurface surface,
-							      int x, int y, int lastX, int lastY);
+		protected abstract RectangleI OnMouseMove (Context g, Color strokeColor, ImageSurface surface,
+							   int x, int y, int lastX, int lastY);
 	}
 }

@@ -9,6 +9,7 @@
   <!-- TODO-GTK4 - build all files -->
   <ItemGroup>
     <Compile Remove="**/*.cs" />
+    <Compile Include="Brushes/*.cs" />
     <Compile Include="CoreToolsExtension.cs" />
     <Compile Include="Tools/GradientTool.cs" />
     <Compile Include="Tools/PanTool.cs" />

@@ -41,7 +41,7 @@ namespace Pinta.Tools.Brushes
 			get { return -100; }
 		}
 
-		protected override Gdk.Rectangle OnMouseMove (Context g, Color strokeColor, ImageSurface surface,
+		protected override RectangleI OnMouseMove (Context g, Color strokeColor, ImageSurface surface,
 							      int x, int y, int lastX, int lastY)
 		{
 			// Cairo does not support a single-pixel-long single-pixel-wide line
@@ -55,7 +55,7 @@ namespace Pinta.Tools.Brushes
 				g.StrokePreserve ();
 			}
 
-			Gdk.Rectangle dirty = g.StrokeExtents ().ToGdkRectangle ();
+			RectangleI dirty = g.StrokeExtents ().ToInt ();
 
 			// For some reason (?!) we need to inflate the dirty
 			// rectangle for small brush widths in zoomed images

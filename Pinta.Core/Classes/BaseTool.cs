@@ -39,9 +39,7 @@ namespace Pinta.Core
 		private readonly IToolService tools;
 		private readonly IWorkspaceService workspace;
 
-#if false // TODO-GTK4
 		protected IResourceService Resources { get; }
-#endif
 		protected ISettingsService Settings { get; }
 
 		public const int DEFAULT_BRUSH_WIDTH = 2;
@@ -52,9 +50,7 @@ namespace Pinta.Core
 
 		protected BaseTool (IServiceManager services)
 		{
-#if false // TODO-GTK4
 			Resources = services.GetService<IResourceService> ();
-#endif
 			Settings = services.GetService<ISettingsService> ();
 
 			tools = services.GetService<IToolService> ();
@@ -318,10 +314,8 @@ namespace Pinta.Core
 		{
 			CurrentCursor = cursor;
 
-#if false // TODO-GTK4
-			if (workspace.HasOpenDocuments && workspace.ActiveWorkspace.Canvas.Window != null)
-				workspace.ActiveWorkspace.Canvas.Window.Cursor = cursor;
-#endif
+			if (workspace.HasOpenDocuments)
+				workspace.ActiveWorkspace.Canvas.Cursor = cursor;
 		}
 
 		#region Toolbar
