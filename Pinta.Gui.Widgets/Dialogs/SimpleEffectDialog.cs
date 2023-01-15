@@ -459,7 +459,6 @@ namespace Pinta.Gui.Widgets
 
 		private void DelayedUpdate (TimeoutHandler handler)
 		{
-#if false // TODO-GTK4
 			if (event_delay_timeout_id != 0) {
 				GLib.Source.Remove (event_delay_timeout_id);
 				if (handler != timeout_func)
@@ -467,13 +466,12 @@ namespace Pinta.Gui.Widgets
 			}
 
 			timeout_func = handler;
-			event_delay_timeout_id = GLib.Timeout.Add (event_delay_millis, () => {
+			event_delay_timeout_id = GLib.Functions.TimeoutAddFull (0, event_delay_millis, (_) => {
 				event_delay_timeout_id = 0;
 				timeout_func.Invoke ();
 				timeout_func = null;
 				return false;
 			});
-#endif
 		}
 		#endregion
 	}

@@ -154,9 +154,8 @@ namespace Pinta
 		/// </summary>
 		static void RegisterForAppleEvents ()
 		{
-#if false // TODO-GTK4
 			MacInterop.ApplicationEvents.Quit += (sender, e) => {
-				GLib.Timeout.Add (10, delegate {
+				GLib.Functions.TimeoutAddFull (0, 10, delegate {
 					PintaCore.Actions.App.Exit.Activate ();
 					return false;
 				});
@@ -165,7 +164,7 @@ namespace Pinta
 
 			MacInterop.ApplicationEvents.Reopen += (sender, e) => {
 				var window = PintaCore.Chrome.MainWindow;
-				window.Deiconify ();
+				window.Unminimize ();
 				window.Hide ();
 				window.Show ();
 				window.Present ();
@@ -174,17 +173,16 @@ namespace Pinta
 
 			MacInterop.ApplicationEvents.OpenDocuments += (sender, e) => {
 				if (e.Documents != null) {
-					GLib.Timeout.Add (10, delegate {
+					GLib.Functions.TimeoutAddFull (0, 10, delegate {
 						foreach (string filename in e.Documents.Keys) {
 							System.Console.Error.WriteLine ("Opening: {0}", filename);
-							PintaCore.Workspace.OpenFile (Core.GtkExtensions.FileNewForCommandlineArg (filename));
+							PintaCore.Workspace.OpenFile (Gio.FileHelper.NewForCommandlineArg (filename));
 						}
 						return false;
 					});
 				}
 				e.Handled = true;
 			};
-#endif
 		}
 	}
 }
