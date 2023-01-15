@@ -65,9 +65,9 @@ namespace Pinta.Effects
 			conv[4] = new int[] { -1, -1, -5, -1, -1 };
 		}
 
-		public override bool LaunchConfiguration ()
+		public override void LaunchConfiguration ()
 		{
-			return EffectHelper.LaunchSimpleEffectDialog (this);
+			EffectHelper.LaunchSimpleEffectDialog (this);
 		}
 
 		#region Algorithm Code Ported From PDN

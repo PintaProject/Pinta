@@ -32,9 +32,9 @@ namespace Pinta.Effects
 			get { return Translations.GetString ("Stylize"); }
 		}
 
-		public override bool LaunchConfiguration ()
+		public override void LaunchConfiguration ()
 		{
-			return EffectHelper.LaunchSimpleEffectDialog (this);
+			EffectHelper.LaunchSimpleEffectDialog (this);
 		}
 
 		public override string Icon {

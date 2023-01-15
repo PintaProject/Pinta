@@ -39,9 +39,9 @@ namespace Pinta.Effects
 			EffectData = new HueSaturationData ();
 		}
 
-		public override bool LaunchConfiguration ()
+		public override void LaunchConfiguration ()
 		{
-			return EffectHelper.LaunchSimpleEffectDialog (this);
+			EffectHelper.LaunchSimpleEffectDialog (this);
 		}
 
 		public override void Render (ImageSurface src, ImageSurface dest, Core.RectangleI[] rois)

@@ -53,9 +53,9 @@ namespace Pinta.Effects
 			table_calculated = false;
 		}
 
-		public override bool LaunchConfiguration ()
+		public override void LaunchConfiguration ()
 		{
-			return EffectHelper.LaunchSimpleEffectDialog (this);
+			EffectHelper.LaunchSimpleEffectDialog (this);
 		}
 
 		public override void Render (ImageSurface src, ImageSurface dest, Core.RectangleI[] rois)

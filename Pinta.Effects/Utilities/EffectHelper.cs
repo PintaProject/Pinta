@@ -53,16 +53,16 @@ namespace Pinta
 		/// <summary>
 		/// Launchs an effect dialog using Pinta's translation template.
 		/// </summary>
-		internal static bool LaunchSimpleEffectDialog (BaseEffect effect)
+		internal static void LaunchSimpleEffectDialog (BaseEffect effect)
 		{
-			return LaunchSimpleEffectDialog (effect, new PintaLocalizer ());
+			LaunchSimpleEffectDialog (effect, new PintaLocalizer ());
 		}
 
 		/// <summary>
 		/// Helper function for the above methods. The IAddinLocalizer provides a generic way to
 		/// get translated strings both for Pinta's effects and for effect add-ins.
 		/// </summary>
-		private static bool LaunchSimpleEffectDialog (BaseEffect effect, IAddinLocalizer localizer)
+		private static void LaunchSimpleEffectDialog (BaseEffect effect, IAddinLocalizer localizer)
 		{
 			ArgumentNullException.ThrowIfNull (effect);
 			ArgumentNullException.ThrowIfNull (effect.EffectData);
@@ -76,18 +76,12 @@ namespace Pinta
 					effect.EffectData.FirePropertyChanged (e.PropertyName);
 			};
 
-			bool ret = true;
 			dialog.OnResponse += (_, args) => {
-				if (args.ResponseId == (int) Gtk.ResponseType.Ok)
-					ret = !effect.EffectData.IsDefault;
-				else
-					ret = false;
-
+				effect.OnConfigDialogResponse (args.ResponseId == (int) Gtk.ResponseType.Ok);
 				dialog.Destroy ();
 			};
 
 			dialog.Present ();
-			return ret;
 		}
 
 		/// <summary>

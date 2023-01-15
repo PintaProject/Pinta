@@ -77,14 +77,25 @@ namespace Pinta.Core
 
 		/// <summary>
 		/// Launches the configuration dialog for this effect/adjustment.
+		/// If IsConfigurable is true, the ConfigDialogResponse event will be invoked when the user accepts or cancels the dialog.
 		/// </summary>
-		/// <returns>Whether the user accepted or cancelled the configuration dialog. (true: accept, false: cancel)</returns>
-		public virtual bool LaunchConfiguration ()
+		public virtual void LaunchConfiguration ()
 		{
 			if (IsConfigurable)
 				throw new NotImplementedException (string.Format ("{0} is marked as configurable, but has not implemented LaunchConfiguration", this.GetType ()));
+		}
 
-			return false;
+		/// <summary>
+		/// Emitted when the configuration dialog is accepted or cancelled by the user.
+		/// </summary>
+		public event EventHandler<ConfigDialogResponseEventArgs>? ConfigDialogResponse;
+
+		/// <summary>
+		/// Notify that the configuration dialog was accepted or cancelled by the user.
+		/// </summary>
+		public void OnConfigDialogResponse (bool accepted)
+		{
+			ConfigDialogResponse?.Invoke (this, new ConfigDialogResponseEventArgs (accepted));
 		}
 
 		#region Overrideable Render Methods
@@ -159,6 +170,13 @@ namespace Pinta.Core
 				effect.EffectData = EffectData?.Clone ();
 
 			return effect;
+		}
+
+		public class ConfigDialogResponseEventArgs : EventArgs
+		{
+			public ConfigDialogResponseEventArgs (bool accepted) { Accepted = accepted; }
+
+			public bool Accepted { get; private set; }
 		}
 	}
 

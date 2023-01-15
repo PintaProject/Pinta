@@ -126,13 +126,24 @@ namespace Pinta.Core
 			renderer.Start (effect, layer.Surface, live_preview_surface, render_bounds);
 
 			if (effect.IsConfigurable) {
-				if (!effect.LaunchConfiguration ()) {
-					PintaCore.Chrome.MainWindowBusy = true;
-					Cancel ();
-				} else {
-					PintaCore.Chrome.MainWindowBusy = true;
-					Apply ();
-				}
+				EventHandler<BaseEffect.ConfigDialogResponseEventArgs>? handler = null;
+				handler = (_, args) => {
+					if (!args.Accepted) {
+						PintaCore.Chrome.MainWindowBusy = true;
+						Cancel ();
+					} else {
+						PintaCore.Chrome.MainWindowBusy = true;
+						Apply ();
+					}
+
+					// Unsubscribe once we're done.
+					effect.ConfigDialogResponse -= handler;
+				};
+
+				effect.ConfigDialogResponse += handler;
+
+				effect.LaunchConfiguration ();
+
 			} else {
 				PintaCore.Chrome.MainWindowBusy = true;
 				Apply ();

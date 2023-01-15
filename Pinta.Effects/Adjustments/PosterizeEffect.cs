@@ -40,7 +40,7 @@ namespace Pinta.Effects
 			EffectData = new PosterizeData ();
 		}
 
-		public override bool LaunchConfiguration ()
+		public override void LaunchConfiguration ()
 		{
 #if false // TODO-GTK4
 			using (var dialog = new PosterizeDialog ()) {

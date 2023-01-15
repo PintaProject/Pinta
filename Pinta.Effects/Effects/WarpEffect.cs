@@ -44,9 +44,9 @@ namespace Pinta.Effects
 			EffectData = new WarpData ();
 		}
 
-		public override bool LaunchConfiguration ()
+		public override void LaunchConfiguration ()
 		{
-			return EffectHelper.LaunchSimpleEffectDialog (this);
+			EffectHelper.LaunchSimpleEffectDialog (this);
 		}
 
 		private double defaultRadius = 0;
