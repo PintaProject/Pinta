@@ -33,26 +33,34 @@ namespace Pinta
 {
 	public interface IResourceService
 	{
-		Gdk.Pixbuf GetIcon (string name, StyleContext? context = null);
-		Gdk.Pixbuf GetIcon (string name, int size, StyleContext? context = null);
+		GdkPixbuf.Pixbuf GetIcon (string name, StyleContext? context = null);
+		GdkPixbuf.Pixbuf GetIcon (string name, int size, StyleContext? context = null);
 		Stream? GetResourceIconStream (string name);
 	}
 
 	public class ResourceManager : IResourceService
 	{
-		public Gdk.Pixbuf GetIcon (string name, StyleContext? context = null)
+		public GdkPixbuf.Pixbuf GetIcon (string name, StyleContext? context = null)
 		{
 			return GetIcon (name, 16, context);
 		}
 
-		public Gdk.Pixbuf GetIcon (string name, int size, StyleContext? context = null)
+		public GdkPixbuf.Pixbuf GetIcon (string name, int size, StyleContext? context = null)
 		{
+#if false // TODO-GTK4
 			return ResourceLoader.GetIcon (name, size, context);
+#else
+			throw new NotImplementedException ();
+#endif
 		}
 
 		public Stream? GetResourceIconStream (string name)
 		{
+#if false // TODO-GTK4
 			return ResourceLoader.GetResourceIconStream (name);
+#else
+			throw new NotImplementedException ();
+#endif
 		}
 	}
 }

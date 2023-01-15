@@ -36,20 +36,24 @@ namespace Pinta.Core
 {
 	public class RecentFileManager
 	{
-		private GLib.IFile? last_dialog_directory;
+		private Gio.File? last_dialog_directory;
+#if false // TODO-GTK4 - gir.core binding for RecentData struct
 		private RecentData recent_data;
+#endif
 
 		public RecentFileManager ()
 		{
 			last_dialog_directory = DefaultDialogDirectory;
 
+#if false // TODO-GTK4
 			recent_data = new RecentData ();
 			recent_data.AppName = "Pinta";
 			recent_data.AppExec = SystemManager.GetExecutablePathName ();
 			recent_data.MimeType = "image/*";
+#endif
 		}
 
-		public GLib.IFile? LastDialogDirectory {
+		public Gio.File? LastDialogDirectory {
 			get { return last_dialog_directory; }
 			set {
 				// The file chooser dialog may return null for the current folder in certain cases,
@@ -59,22 +63,24 @@ namespace Pinta.Core
 			}
 		}
 
-		public GLib.IFile? DefaultDialogDirectory {
+		public Gio.File? DefaultDialogDirectory {
 			get {
 				string path = System.Environment.GetFolderPath (Environment.SpecialFolder.MyPictures);
-				return !string.IsNullOrEmpty (path) ? GLib.FileFactory.NewForPath (path) : null;
+				return !string.IsNullOrEmpty (path) ? Gio.FileHelper.NewForPath (path) : null;
 			}
 		}
 
+#if false // TODO-GTK4
 		public RecentData RecentData { get { return recent_data; } }
+#endif
 
 		/// <summary>
 		/// Returns a directory for use in a dialog. The last dialog directory is
 		/// returned if it exists, otherwise the default directory is used.
 		/// </summary>
-		public GLib.IFile? GetDialogDirectory ()
+		public Gio.File? GetDialogDirectory ()
 		{
-			return (last_dialog_directory != null && last_dialog_directory.Exists) ? last_dialog_directory : DefaultDialogDirectory;
+			return (last_dialog_directory != null && last_dialog_directory.QueryExists (null)) ? last_dialog_directory : DefaultDialogDirectory;
 		}
 	}
 }
