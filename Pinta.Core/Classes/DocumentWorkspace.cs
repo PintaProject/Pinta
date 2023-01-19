@@ -265,13 +265,11 @@ namespace Pinta.Core
 			else
 				ratio = document.ImageSize.Height / rect.Height;
 
+			PintaCore.Actions.View.ZoomComboBox.ComboBox.GetEntry ().SetText (ViewActions.ToPercent (ratio));
 #if false // TODO-GTK4
-			PintaCore.Actions.View.ZoomComboBox.ComboBox.Entry.Text = ViewActions.ToPercent (ratio);
 			Gtk.Main.Iteration (); //Force update of scrollbar upper before recenter
-			RecenterView (rect.X + rect.Width / 2, rect.Y + rect.Height / 2);
-#else
-			throw new NotImplementedException ();
 #endif
+			RecenterView (rect.X + rect.Width / 2, rect.Y + rect.Height / 2);
 		}
 		#endregion
 
@@ -290,30 +288,31 @@ namespace Pinta.Core
 
 		private void ZoomAndRecenterView (ZoomType zoomType, in PointD point)
 		{
-#if false // TODO-GTK4
 			if (zoomType == ZoomType.ZoomOut && (CanvasSize.Width == 1 || CanvasSize.Height == 1))
 				return; //Can't zoom in past a 1x1 px canvas
 
 			double zoom;
 
-			if (!ViewActions.TryParsePercent (PintaCore.Actions.View.ZoomComboBox.ComboBox.ActiveText, out zoom))
+			if (!ViewActions.TryParsePercent (PintaCore.Actions.View.ZoomComboBox.ComboBox.GetActiveText ()!, out zoom))
 				zoom = Scale * 100;
 
 			zoom = Math.Min (zoom, 3600);
 
+#if false // TODO-GTK4
 			if (Canvas.Window != null)
 				Canvas.Window.FreezeUpdates ();
+#endif
 
 			PintaCore.Actions.View.SuspendZoomUpdate ();
 
-			Gtk.Viewport view = (Gtk.Viewport) Canvas.Parent;
+			Gtk.Viewport view = (Gtk.Viewport) Canvas.Parent!;
 
 			bool adjustOnMousePosition = point.X >= 0.0 && point.Y >= 0.0;
 
 			double center_x = adjustOnMousePosition ?
-				point.X : view.Hadjustment.Value + (view.Hadjustment.PageSize / 2.0);
+				point.X : view.Hadjustment!.Value + (view.Hadjustment.PageSize / 2.0);
 			double center_y = adjustOnMousePosition ?
-				point.Y : view.Vadjustment.Value + (view.Vadjustment.PageSize / 2.0);
+				point.Y : view.Vadjustment!.Value + (view.Vadjustment.PageSize / 2.0);
 
 			center_x = (center_x - Offset.X) / Scale;
 			center_y = (center_y - Offset.Y) / Scale;
@@ -362,16 +361,15 @@ namespace Pinta.Core
 
 			// Quick fix : need to manually update Upper limit because the value is not changing after updating the canvas scale.
 			// TODO : I think there is an event need to be fired so that those values updated automatically.
-			view.Hadjustment.Upper = CanvasSize.Width < view.Hadjustment.PageSize ? view.Hadjustment.PageSize : CanvasSize.Width;
-			view.Vadjustment.Upper = CanvasSize.Height < view.Vadjustment.PageSize ? view.Vadjustment.PageSize : CanvasSize.Height;
+			view.Hadjustment!.Upper = CanvasSize.Width < view.Hadjustment.PageSize ? view.Hadjustment.PageSize : CanvasSize.Width;
+			view.Vadjustment!.Upper = CanvasSize.Height < view.Vadjustment.PageSize ? view.Vadjustment.PageSize : CanvasSize.Height;
 
 			RecenterView (center_x, center_y);
 
 			PintaCore.Actions.View.ResumeZoomUpdate ();
+#if false // TODO-GTK4
 			if (Canvas.Window != null)
 				Canvas.Window.ThawUpdates ();
-#else
-			throw new NotImplementedException ();
 #endif
 		}
 		#endregion
