@@ -26,6 +26,7 @@
 
 using System;
 using System.Linq;
+using System.Runtime.InteropServices;
 using Gio;
 
 namespace Pinta.Core
@@ -124,10 +125,14 @@ namespace Pinta.Core
 		public static long Read (this Gio.InputStream stream, byte[] buffer, uint count, Gio.Cancellable? cancellable)
 		{
 			GLib.Internal.ErrorOwnedHandle error;
-			long result = Gio.Internal.InputStream.Read (stream.Handle, ref buffer, count, cancellable == null ? IntPtr.Zero : cancellable.Handle, out error);
+			long result = Read (stream.Handle, buffer, count, cancellable == null ? IntPtr.Zero : cancellable.Handle, out error);
 			GLib.Error.ThrowOnError (error);
 			return result;
 		}
+
+		// Manual dllimport since the generated gir.core internal function is incorrect (https://github.com/gircore/gir.core/issues/763)
+		[DllImport ("gio-2.0", EntryPoint = "g_input_stream_read")]
+		private static extern long Read (IntPtr stream, byte[] buffer, uint count, IntPtr cancellable, out GLib.Internal.ErrorOwnedHandle error);
 
 		// TODO-GTK4 - needs a proper binding in gir.core
 		public static long Write (this Gio.OutputStream stream, byte[] buffer, uint count, Gio.Cancellable? cancellable)

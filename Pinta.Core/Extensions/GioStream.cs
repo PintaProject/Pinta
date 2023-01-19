@@ -212,6 +212,8 @@ namespace Pinta.Core
 			}
 #if false // TODO-GTK4
 			seekable.Seek (offset, seek_type, null);
+#else
+			throw new NotImplementedException ();
 #endif
 			return Position;
 		}
@@ -231,6 +233,8 @@ namespace Pinta.Core
 #if false // TODO-GTK4
 
 			seekable.Truncate (value, null);
+#else
+			throw new NotImplementedException ();
 #endif
 		}
 
