@@ -69,30 +69,6 @@ namespace Pinta.Core
 			var g = new Cairo.Context (layer.Surface);
 			g.DrawPixbuf (bg, 0, 0);
 		}
-
-		public Pixbuf? LoadThumbnail (string filename, int maxWidth, int maxHeight, Gtk.Window parent)
-		{
-			Pixbuf? pixbuf = null;
-
-#if false // TODO-GTK4
-			var imageInfo = GdkPixbuf.Pixbuf.GetFileInfo (filename, out int imageWidth, out int imageHeight);
-
-			if (imageInfo == null) {
-				return null;
-			}
-
-			// Scale down images that are too large, but don't scale up small images.
-			if (imageWidth > maxWidth || imageHeight > maxHeight) {
-				pixbuf = GdkPixbufExtensions.NewPixbufFromFileAtScale (filename, maxWidth, maxHeight, true);
-			} else {
-				pixbuf = Pixbuf.NewFromFile (filename);
-			}
-			
-#endif
-
-			return pixbuf;
-		}
-
 		#endregion
 
 		protected virtual void DoSave (Pixbuf pb, Gio.File file, string fileType, Gtk.Window parent)

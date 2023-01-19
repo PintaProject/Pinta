@@ -210,11 +210,7 @@ namespace Pinta.Core
 					seek_type = GLib.SeekType.Set;
 					break;
 			}
-#if false // TODO-GTK4
 			seekable.Seek (offset, seek_type, null);
-#else
-			throw new NotImplementedException ();
-#endif
 			return Position;
 		}
 

@@ -81,7 +81,7 @@ namespace Pinta
 			});
 #endif
 
-			PintaCore.Chrome.InitializeMessageDialog (ShowUnsupportedFormatDialog);
+			PintaCore.Chrome.InitializeMessageDialog (ShowMessageDialog);
 
 			PintaCore.Initialize ();
 
@@ -618,7 +618,7 @@ namespace Pinta
 				.FirstOrDefault ();
 		}
 
-		private static void ShowUnsupportedFormatDialog (Window parent, string message, string details)
+		private static void ShowMessageDialog (Window parent, string message, string details)
 		{
 			System.Console.Error.WriteLine ("Pinta: {0}\n{1}", message, details);
 

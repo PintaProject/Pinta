@@ -67,6 +67,7 @@
     <Compile Include="ImageFormats/IImageImporter.cs" />
     <Compile Include="ImageFormats/IImageExporter.cs" />
     <Compile Include="ImageFormats/GdkPixbufFormat.cs" />
+    <Compile Include="ImageFormats/OraFormat.cs" />
     <Compile Include="Managers/*.cs" />
     <Compile Include="PaletteFormats/*.cs" />
     <Compile Include="Widgets/ToolBarDropDownButton.cs" />

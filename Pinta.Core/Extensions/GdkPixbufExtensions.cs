@@ -27,7 +27,6 @@
 using System;
 using System.Runtime.InteropServices;
 using GdkPixbuf;
-using GLib.Internal;
 
 namespace Pinta.Core
 {
@@ -57,6 +56,19 @@ namespace Pinta.Core
 			GLib.Internal.ErrorOwnedHandle error;
 			bool result = GdkPixbuf.Internal.Pixbuf.SaveToStreamv (pixbuf.Handle, stream.Handle, type, IntPtr.Zero, IntPtr.Zero, cancellable == null ? IntPtr.Zero : cancellable.Handle, out error);
 			GLib.Error.ThrowOnError (error);
+			return result;
+		}
+
+		// TODO-GTK4 - needs a proper binding in gir.core
+		public static byte[] SaveToBuffer (this Pixbuf pixbuf, string type)
+		{
+			GLib.Internal.ErrorOwnedHandle error;
+			SaveToBufferv (pixbuf.Handle, out IntPtr buffer, out uint buffer_size, type, IntPtr.Zero, IntPtr.Zero, out error);
+			GLib.Error.ThrowOnError (error);
+
+			var result = new byte[buffer_size];
+			Marshal.Copy (buffer, result, 0, (int) buffer_size);
+			Marshal.FreeHGlobal (buffer);
 			return result;
 		}
 
@@ -107,6 +119,9 @@ namespace Pinta.Core
 		private static extern IntPtr GetMimeTypes (GdkPixbuf.Internal.PixbufFormatHandle format);
 
 		[DllImport ("gdk_pixbuf-2.0", EntryPoint = "gdk_pixbuf_get_formats")]
-		private static extern SListUnownedHandle GetFormatsNative ();
+		private static extern GLib.Internal.SListUnownedHandle GetFormatsNative ();
+
+		[DllImport ("gdk_pixbuf-2.0", EntryPoint = "gdk_pixbuf_save_to_bufferv")]
+		private static extern bool SaveToBufferv (IntPtr pixbuf, out IntPtr buffer, out uint buffer_size, string type, IntPtr option_keys, IntPtr option_values, out GLib.Internal.ErrorOwnedHandle error);
 	}
 }

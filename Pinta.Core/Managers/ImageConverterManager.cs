@@ -79,12 +79,9 @@ namespace Pinta.Core
 				RegisterFormat (new FormatDescriptor (formatNameUpperCase, extensions, format.GetMimeTypes (), importer, exporter));
 			}
 
-#if false // TODO-GTK4
-
 			// Create all the formats we have our own importers/exporters for
 			OraFormat oraHandler = new OraFormat ();
 			RegisterFormat (new FormatDescriptor ("OpenRaster", new string[] { "ora", "ORA" }, new string[] { "image/openraster" }, oraHandler, oraHandler));
-#endif
 		}
 
 		public IEnumerable<FormatDescriptor> Formats { get { return formats; } }

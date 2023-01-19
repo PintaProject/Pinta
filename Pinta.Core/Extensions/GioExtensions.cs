@@ -144,6 +144,15 @@ namespace Pinta.Core
 		}
 
 		// TODO-GTK4 - needs a proper binding in gir.core
+		public static bool Seek (this Gio.Seekable seekable, long offset, GLib.SeekType seek_type, Gio.Cancellable? cancellable)
+		{
+			GLib.Internal.ErrorOwnedHandle error;
+			bool result = Gio.Internal.Seekable.Seek (seekable.Handle, offset, seek_type, cancellable == null ? IntPtr.Zero : cancellable.Handle, out error);
+			GLib.Error.ThrowOnError (error);
+			return result;
+		}
+
+		// TODO-GTK4 - needs a proper binding in gir.core
 		public static bool Close (this Gio.InputStream stream, Gio.Cancellable? cancellable)
 		{
 			GLib.Internal.ErrorOwnedHandle error;
