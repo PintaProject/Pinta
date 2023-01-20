@@ -515,10 +515,12 @@ namespace Pinta
 			if (args.Info != 100)
 				return;
 
-			string fullData = System.Text.Encoding.UTF8.GetString (args.SelectionData.Data);
+			string fullData = System.Text.Encoding.UTF8.GetString (args.SelectionData.Data).TrimEnd ('\0');
 
-			foreach (string individualFile in fullData.Split ('\n')) {
+			foreach (string individualFile in fullData.Split (System.Environment.NewLine)) {
 				string file = individualFile.Trim ();
+				if (string.IsNullOrEmpty (file))
+					continue;
 
 				if (file.StartsWith ("http") || file.StartsWith ("ftp")) {
 					string tempFilePath = System.IO.Path.GetTempPath () + System.IO.Path.GetFileName (file);
