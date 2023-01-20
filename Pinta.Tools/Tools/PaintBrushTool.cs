@@ -39,7 +39,7 @@ namespace Pinta.Tools
 		private BasePaintBrush default_brush;
 		private BasePaintBrush active_brush;
 		private Color stroke_color;
-		private Point last_point;
+		private PointI last_point;
 
 		private const string BRUSH_SETTING = "paint-brush-brush";
 
@@ -64,6 +64,7 @@ namespace Pinta.Tools
 		public override Gdk.Key ShortcutKey => Gdk.Key.B;
 		public override int Priority => 21;
 
+#if false // TODO-GTK4 cursors
 		public override Gdk.Cursor DefaultCursor {
 			get {
 				var icon = GdkExtensions.CreateIconWithShape ("Cursor.Paintbrush.png",
@@ -73,15 +74,16 @@ namespace Pinta.Tools
 				return new Gdk.Cursor (Gdk.Display.Default, icon, iconOffsetX, iconOffsetY);
 			}
 		}
+#endif
 
-		protected override void OnBuildToolBar (Toolbar tb)
+		protected override void OnBuildToolBar (Box tb)
 		{
 			base.OnBuildToolBar (tb);
 
-			tb.AppendItem (Separator);
+			tb.Append (Separator);
 
-			tb.AppendItem (BrushLabel);
-			tb.AppendItem (BrushComboBox);
+			tb.Append (BrushLabel);
+			tb.Append (BrushComboBox);
 		}
 
 		protected override void OnMouseDown (Document document, ToolMouseEventArgs e)
@@ -116,18 +118,17 @@ namespace Pinta.Tools
 				surface_modified = true;
 
 			var surf = document.Layers.CurrentUserLayer.Surface;
-			var invalidate_rect = Gdk.Rectangle.Zero;
+			var invalidate_rect = RectangleI.Zero;
 			var brush_width = BrushWidth;
 
-			using (var g = document.CreateClippedContext ()) {
-				g.Antialias = UseAntialiasing ? Antialias.Subpixel : Antialias.None;
-				g.LineWidth = brush_width;
-				g.LineJoin = LineJoin.Round;
-				g.LineCap = BrushWidth == 1 ? LineCap.Butt : LineCap.Round;
-				g.SetSourceColor (stroke_color);
+			var g = document.CreateClippedContext ();
+			g.Antialias = UseAntialiasing ? Antialias.Subpixel : Antialias.None;
+			g.LineWidth = brush_width;
+			g.LineJoin = LineJoin.Round;
+			g.LineCap = BrushWidth == 1 ? LineCap.Butt : LineCap.Round;
+			g.SetSourceColor (stroke_color);
 
-				invalidate_rect = active_brush.DoMouseMove (g, stroke_color, surf, x, y, last_point.X, last_point.Y);
-			}
+			invalidate_rect = active_brush.DoMouseMove (g, stroke_color, surf, x, y, last_point.X, last_point.Y);
 
 			// If we draw partially offscreen, Cairo gives us a bogus
 			// dirty rectangle, so redraw everything.
@@ -154,19 +155,19 @@ namespace Pinta.Tools
 				settings.PutSetting (BRUSH_SETTING, brush_combo_box.ComboBox.Active);
 		}
 
-		private ToolBarLabel? brush_label;
+		private Label? brush_label;
 		private ToolBarComboBox? brush_combo_box;
-		private SeparatorToolItem? separator;
+		private Gtk.Separator? separator;
 
-		private SeparatorToolItem Separator => separator ??= new SeparatorToolItem ();
-		private ToolBarLabel BrushLabel => brush_label ??= new ToolBarLabel (string.Format (" {0}:  ", Translations.GetString ("Type")));
+		private Gtk.Separator Separator => separator ??= GtkExtensions.CreateToolBarSeparator ();
+		private Label BrushLabel => brush_label ??= Label.New (string.Format (" {0}:  ", Translations.GetString ("Type")));
 
 		private ToolBarComboBox BrushComboBox {
 			get {
 				if (brush_combo_box is null) {
 					brush_combo_box = new ToolBarComboBox (100, 0, false);
-					brush_combo_box.ComboBox.Changed += (o, e) => {
-						var brush_name = brush_combo_box.ComboBox.ActiveText;
+					brush_combo_box.ComboBox.OnChanged += (o, e) => {
+						var brush_name = brush_combo_box.ComboBox.GetActiveText ();
 						active_brush = brushes.SingleOrDefault (brush => brush.Name == brush_name) ?? default_brush;
 					};
 

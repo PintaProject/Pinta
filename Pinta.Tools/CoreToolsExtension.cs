@@ -43,13 +43,13 @@ namespace Pinta.Tools
 		#region IExtension Members
 		public void Initialize ()
 		{
-#if false // TODO-GTK4
 			PintaCore.PaintBrushes.AddPaintBrush (new Brushes.CircleBrush ());
 			PintaCore.PaintBrushes.AddPaintBrush (new Brushes.GridBrush ());
 			PintaCore.PaintBrushes.AddPaintBrush (new Brushes.PlainBrush ());
 			PintaCore.PaintBrushes.AddPaintBrush (new Brushes.SplatterBrush ());
 			PintaCore.PaintBrushes.AddPaintBrush (new Brushes.SquaresBrush ());
 
+#if false // TODO-GTK4
 			PintaCore.Tools.AddTool (new MoveSelectedTool (PintaCore.Services));
 			PintaCore.Tools.AddTool (new MoveSelectionTool (PintaCore.Services));
 			PintaCore.Tools.AddTool (new ZoomTool (PintaCore.Services));
@@ -57,8 +57,6 @@ namespace Pinta.Tools
 			PintaCore.Tools.AddTool (new EllipseSelectTool (PintaCore.Services));
 			PintaCore.Tools.AddTool (new LassoSelectTool (PintaCore.Services));
 			PintaCore.Tools.AddTool (new MagicWandTool (PintaCore.Services));
-			PintaCore.Tools.AddTool (new PaintBrushTool (PintaCore.Services));
-			PintaCore.Tools.AddTool (new EraserTool (PintaCore.Services));
 			PintaCore.Tools.AddTool (new PaintBucketTool (PintaCore.Services));
 			PintaCore.Tools.AddTool (new ColorPickerTool (PintaCore.Services));
 			PintaCore.Tools.AddTool (new TextTool (PintaCore.Services));
@@ -71,20 +69,22 @@ namespace Pinta.Tools
 			PintaCore.Tools.AddTool (new RecolorTool (PintaCore.Services));
 #else
 			PintaCore.Tools.AddTool (new PanTool (PintaCore.Services));
+			PintaCore.Tools.AddTool (new PaintBrushTool (PintaCore.Services));
 			PintaCore.Tools.AddTool (new PencilTool (PintaCore.Services));
+			PintaCore.Tools.AddTool (new EraserTool (PintaCore.Services));
 			PintaCore.Tools.AddTool (new GradientTool (PintaCore.Services));
 #endif
 		}
 
 		public void Uninitialize ()
 		{
-#if false // TODO-GTK4
 			PintaCore.PaintBrushes.RemoveInstanceOfPaintBrush (typeof (Brushes.CircleBrush));
 			PintaCore.PaintBrushes.RemoveInstanceOfPaintBrush (typeof (Brushes.GridBrush));
 			PintaCore.PaintBrushes.RemoveInstanceOfPaintBrush (typeof (Brushes.PlainBrush));
 			PintaCore.PaintBrushes.RemoveInstanceOfPaintBrush (typeof (Brushes.SplatterBrush));
 			PintaCore.PaintBrushes.RemoveInstanceOfPaintBrush (typeof (Brushes.SquaresBrush));
 
+#if false // TODO-GTK4
 			PintaCore.Tools.RemoveInstanceOfTool<RectangleSelectTool> ();
 			PintaCore.Tools.RemoveInstanceOfTool<MoveSelectedTool> ();
 			PintaCore.Tools.RemoveInstanceOfTool<LassoSelectTool> ();
@@ -93,8 +93,6 @@ namespace Pinta.Tools
 			PintaCore.Tools.RemoveInstanceOfTool<ZoomTool> ();
 			PintaCore.Tools.RemoveInstanceOfTool<MagicWandTool> ();
 			PintaCore.Tools.RemoveInstanceOfTool<PaintBucketTool> ();
-			PintaCore.Tools.RemoveInstanceOfTool<PaintBrushTool> ();
-			PintaCore.Tools.RemoveInstanceOfTool<EraserTool> ();
 			PintaCore.Tools.RemoveInstanceOfTool<ColorPickerTool> ();
 			PintaCore.Tools.RemoveInstanceOfTool<CloneStampTool> ();
 			PintaCore.Tools.RemoveInstanceOfTool<RecolorTool> ();
@@ -106,7 +104,9 @@ namespace Pinta.Tools
 			PintaCore.Tools.RemoveInstanceOfTool<FreeformShapeTool> ();
 #else
 			PintaCore.Tools.RemoveInstanceOfTool<PanTool> ();
+			PintaCore.Tools.RemoveInstanceOfTool<PaintBrushTool> ();
 			PintaCore.Tools.RemoveInstanceOfTool<PencilTool> ();
+			PintaCore.Tools.RemoveInstanceOfTool<EraserTool> ();
 			PintaCore.Tools.RemoveInstanceOfTool<GradientTool> ();
 #endif
 		}

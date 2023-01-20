@@ -89,6 +89,19 @@ namespace Pinta.Core
 			return sep;
 		}
 
+		public static Gtk.SpinButton CreateToolBarSpinButton (double min, double max, double step, double init_value)
+		{
+			var spin = Gtk.SpinButton.NewWithRange (min, max, step);
+			spin.Value = init_value;
+			// After a spin button is edited, return focus to the canvas so that
+			// tools can handle subsequent key events.
+			spin.OnValueChanged += (o, e) => {
+				if (PintaCore.Workspace.HasOpenDocuments)
+					PintaCore.Workspace.ActiveWorkspace.Canvas.GrabFocus ();
+			};
+			return spin;
+		}
+
 		public static void AddAction (this Gtk.Application app, Command action)
 		{
 			app.AddAction (action.Action);
@@ -112,17 +125,16 @@ namespace Pinta.Core
 		private static string ConvertPrimaryKey (string accel) =>
 			accel.Replace ("<Primary>", PintaCore.System.OperatingSystem == OS.Mac ? "<Meta>" : "<Control>");
 
-#if false // TODO-GTK4
-		public static void Toggle (this Gtk.ToggleToolButton button)
-		{
-			button.Active = !button.Active;
-		}
-
 		public static int GetItemCount (this ComboBox combo)
 		{
+#if false // TODO-GTK4
 			return ((ListStore) combo.Model).IterNChildren ();
+#else
+			return -1;
+#endif
 		}
 
+#if false // TODO-GTK4
 		public static int FindValue<T> (this ComboBox combo, T value)
 		{
 			for (var i = 0; i < combo.GetItemCount (); i++)
