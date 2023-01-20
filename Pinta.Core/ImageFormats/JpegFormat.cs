@@ -25,9 +25,8 @@
 // THE SOFTWARE.
 
 using System;
-using System.IO;
 
-using Gdk;
+using GdkPixbuf;
 
 namespace Pinta.Core
 {
@@ -46,7 +45,7 @@ namespace Pinta.Core
 		{
 		}
 
-		protected override void DoSave (Pixbuf pb, GLib.IFile file, string fileType, Gtk.Window parent)
+		protected override void DoSave (Pixbuf pb, Gio.File file, string fileType, Gtk.Window parent)
 		{
 			//Load the JPG compression quality, but use the default value if there is no saved value.
 			int level = PintaCore.Settings.GetSetting<int> (JpgCompressionQualitySetting, defaultQuality);
@@ -66,7 +65,7 @@ namespace Pinta.Core
 
 			using var stream = file.Replace ();
 			try {
-				pb.SaveToStreamv (stream, fileType, new string?[] { "quality", null }, new string?[] { level.ToString (), null }, null);
+				pb.SaveToStreamv (stream, fileType, new string[] { "quality" }, new string[] { level.ToString () }, null);
 			} finally {
 				stream.Close (null);
 			}

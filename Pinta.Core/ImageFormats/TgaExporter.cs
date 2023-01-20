@@ -89,10 +89,10 @@ namespace Pinta.Core
 
 		// For now, we only export in uncompressed ARGB32 format. If someone requests this functionality,
 		// we can always add more through an export dialog.
-		public void Export (Document document, GLib.IFile file, Gtk.Window parent)
+		public void Export (Document document, Gio.File file, Gtk.Window parent)
 		{
-			using ImageSurface surf = document.GetFlattenedImage (); // Assumes the surface is in ARGB32 format
-			using var file_stream = new GLib.GioStream (file.Replace ());
+			ImageSurface surf = document.GetFlattenedImage (); // Assumes the surface is in ARGB32 format
+			using var file_stream = new GioStream (file.Replace ());
 			using var writer = new BinaryWriter (file_stream);
 
 			TgaHeader header = new TgaHeader ();
@@ -113,12 +113,12 @@ namespace Pinta.Core
 
 			writer.Write (ImageIdField);
 
-			byte[] data = surf.Data;
+			Span<byte> data = surf.GetData ();
 
 			// It just so happens that the Cairo ARGB32 internal representation matches
 			// the TGA format, except vertically-flipped. In little-endian, of course.
 			for (int y = surf.Height - 1; y >= 0; y--)
-				writer.Write (data, surf.Stride * y, surf.Stride);
+				writer.Write (data.Slice (surf.Stride * y, surf.Stride));
 
 		}
 	}

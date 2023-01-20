@@ -60,21 +60,14 @@ namespace Pinta.Core
 
 				GdkPixbufFormat importer = new GdkPixbufFormat (formatName);
 				IImageExporter? exporter;
-#if false // TODO-GTK4
 				if (formatName == "jpeg")
 					exporter = importer = new JpegFormat ();
 				else if (formatName == "tga")
 					exporter = new TgaExporter ();
-				else if (format.IsWritable)
+				else if (format.IsWritable ())
 					exporter = importer;
 				else
 					exporter = null;
-#else
-				if (format.IsWritable ())
-					exporter = importer;
-				else
-					exporter = null;
-#endif
 
 				RegisterFormat (new FormatDescriptor (formatNameUpperCase, extensions, format.GetMimeTypes (), importer, exporter));
 			}

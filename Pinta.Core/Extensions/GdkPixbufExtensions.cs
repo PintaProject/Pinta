@@ -72,6 +72,17 @@ namespace Pinta.Core
 			return result;
 		}
 
+		// TODO-GTK4 - needs a proper binding in gir.core
+		public static bool SaveToStreamv (this Pixbuf pixbuf, Gio.OutputStream stream, string type, string[] option_keys, string[] option_values, Gio.Cancellable? cancellable)
+		{
+			GLib.Internal.ErrorOwnedHandle error;
+			using var option_keys_native = new GLib.Internal.StringArrayNullTerminatedSafeHandle (option_keys);
+			using var option_values_native = new GLib.Internal.StringArrayNullTerminatedSafeHandle (option_values);
+			bool result = SaveToStreamv (pixbuf.Handle, stream.Handle, type, option_keys_native.DangerousGetHandle (), option_values_native.DangerousGetHandle (), cancellable == null ? IntPtr.Zero : cancellable.Handle, out error);
+			GLib.Error.ThrowOnError (error);
+			return result;
+		}
+
 		internal class PixbufWrapper : Pixbuf
 		{
 			internal PixbufWrapper (IntPtr ptr, bool ownedRef) : base (ptr, ownedRef)
@@ -123,5 +134,8 @@ namespace Pinta.Core
 
 		[DllImport ("gdk_pixbuf-2.0", EntryPoint = "gdk_pixbuf_save_to_bufferv")]
 		private static extern bool SaveToBufferv (IntPtr pixbuf, out IntPtr buffer, out uint buffer_size, string type, IntPtr option_keys, IntPtr option_values, out GLib.Internal.ErrorOwnedHandle error);
+
+		[DllImport ("gdk_pixbuf-2.0", EntryPoint = "gdk_pixbuf_save_to_streamv")]
+		private static extern bool SaveToStreamv (IntPtr pixbuf, IntPtr stream, string type, IntPtr option_keys, IntPtr option_values, IntPtr cancellable, out GLib.Internal.ErrorOwnedHandle error);
 	}
 }
