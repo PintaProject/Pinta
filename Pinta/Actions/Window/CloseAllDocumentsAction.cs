@@ -48,6 +48,8 @@ namespace Pinta.Actions
 			while (PintaCore.Workspace.HasOpenDocuments) {
 				int count = PintaCore.Workspace.OpenDocuments.Count;
 
+				// TODO-GTK4 - since dialogs are no longer blocking, execution may return here
+				// before the close prompt dialog is done.
 				PintaCore.Actions.File.Close.Activate ();
 
 				// If we still have the same number of open documents,

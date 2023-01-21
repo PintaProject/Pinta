@@ -55,10 +55,10 @@ namespace Pinta
 			action_handlers.Add (new PasteIntoNewLayerAction ());
 			action_handlers.Add (new PasteIntoNewImageAction ());
 			action_handlers.Add (new ResizePaletteAction ());
+#endif
 			action_handlers.Add (new AddinManagerAction ());
 
 			// Image
-#endif
 			action_handlers.Add (new ResizeImageAction ());
 			action_handlers.Add (new ResizeCanvasAction ());
 
@@ -67,7 +67,6 @@ namespace Pinta
 			action_handlers.Add (new RotateZoomLayerAction ());
 
 			// View
-#if false // TODO-GTK4
 			action_handlers.Add (new ToolBarToggledAction ());
 			action_handlers.Add (new ImageTabsToggledAction ());
 			action_handlers.Add (new StatusBarToggledAction ());
@@ -76,7 +75,7 @@ namespace Pinta
 			// Window
 			action_handlers.Add (new CloseAllDocumentsAction ());
 			action_handlers.Add (new SaveAllDocumentsAction ());
-#endif
+
 			// Help
 			action_handlers.Add (new AboutDialogAction ());
 

@@ -49,7 +49,6 @@ namespace Pinta.Docking
 		private readonly Adw.TabView tab_view = new ();
 		private readonly Adw.TabBar tab_bar = new ();
 		private HashSet<IDockNotebookItem> items = new ();
-		private bool enable_tabs = true;
 
 		public DockNotebook ()
 		{
@@ -109,15 +108,12 @@ namespace Pinta.Docking
 		/// Whether to show the tab bar.
 		/// </summary>
 		public bool EnableTabs {
-			get => enable_tabs;
+			get => tab_bar.IsVisible ();
 			set {
-				enable_tabs = value;
-				if (items.Count > 0) {
-					if (enable_tabs)
-						tab_bar.Hide ();
-					else
-						tab_bar.Show ();
-				}
+				if (value)
+					tab_bar.Show ();
+				else
+					tab_bar.Hide ();
 			}
 		}
 
