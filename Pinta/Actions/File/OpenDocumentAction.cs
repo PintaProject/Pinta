@@ -82,10 +82,9 @@ namespace Pinta.Actions
 			ff2.AddPattern ("*");
 			fcd.AddFilter (ff2);
 
-#if false // TODO-GTK4 missing gir.core binding
-			if (PintaCore.RecentFiles.GetDialogDirectory () is Gio.File dir && dir.Exists)
-				fcd.SetCurrentFolderFile (dir);
-#endif
+			if (PintaCore.RecentFiles.GetDialogDirectory () is Gio.File dir && dir.QueryExists (null))
+				fcd.SetCurrentFolder (dir);
+
 			fcd.SelectMultiple = true;
 
 			fcd.OnResponse += (_, e) => {

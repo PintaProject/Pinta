@@ -168,10 +168,8 @@ namespace Pinta.Core
 				Translations.GetString ("Open"),
 				Translations.GetString ("Cancel"));
 
-#if false // TODO-GTK4 recent files
-			if (PintaCore.RecentFiles.GetDialogDirectory () is GLib.IFile dir && dir.Exists)
-				fcd.SetCurrentFolderFile (dir);
-#endif
+			if (PintaCore.RecentFiles.GetDialogDirectory () is Gio.File dir && dir.QueryExists (null))
+				fcd.SetCurrentFolder (dir);
 
 			// Add image files filter
 			var ff = FileFilter.New ();

@@ -382,10 +382,9 @@ namespace Pinta.Core
 			ff2.AddPattern ("*");
 			fcd.AddFilter (ff2);
 
-#if false // TODO-GTK4 need gir.core binding for gtk_file_chooser_set_current_folder
 			if (last_palette_dir != null)
-				fcd.SetCurrentFolderFile (last_palette_dir);
-#endif
+				fcd.SetCurrentFolder (last_palette_dir);
+
 			fcd.OnResponse += (_, args) => {
 				var response = (ResponseType) args.ResponseId;
 
@@ -413,10 +412,8 @@ namespace Pinta.Core
 				}
 			}
 
-#if false // TODO-GTK4 need gir.core binding for gtk_file_chooser_set_current_folder
 			if (last_palette_dir != null)
-				fcd.SetCurrentFolderFile (last_palette_dir);
-#endif
+				fcd.SetCurrentFolder (last_palette_dir);
 
 			fcd.OnResponse += (_, args) => {
 				var response = (ResponseType) args.ResponseId;

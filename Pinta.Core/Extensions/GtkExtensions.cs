@@ -327,5 +327,23 @@ namespace Pinta.Core
 
 			return (Entry) box.Child!;
 		}
+
+		// TODO-GTK4 - need gir.core binding for gtk_file_chooser_set_current_folder
+		public static bool SetCurrentFolder (this FileChooser chooser, Gio.File file)
+		{
+			GLib.Internal.ErrorOwnedHandle error;
+			bool result = Gtk.Internal.FileChooser.SetCurrentFolder (chooser.Handle, file.Handle, out error);
+			GLib.Error.ThrowOnError (error);
+			return result;
+		}
+
+		// TODO-GTK4 - need gir.core binding for gtk_file_chooser_set_file
+		public static bool SetFile (this FileChooser chooser, Gio.File file)
+		{
+			GLib.Internal.ErrorOwnedHandle error;
+			bool result = Gtk.Internal.FileChooser.SetFile (chooser.Handle, file.Handle, out error);
+			GLib.Error.ThrowOnError (error);
+			return result;
+		}
 	}
 }

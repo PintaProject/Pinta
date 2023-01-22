@@ -211,7 +211,7 @@ namespace Pinta.Core
 
 			// Add thumbnail.
 			Size newSize = GetThumbDimensions (flattenedPb.Width, flattenedPb.Height);
-			var thumb = flattenedPb.ScaleSimple (newSize.Width, newSize.Height, GdkPixbuf.InterpType.Bilinear);
+			var thumb = flattenedPb.ScaleSimple (newSize.Width, newSize.Height, GdkPixbuf.InterpType.Bilinear)!;
 			stream.PutNextEntry (new ZipEntry ("Thumbnails/thumbnail.png"));
 			databytes = thumb.SaveToBuffer ("png");
 			stream.Write (databytes, 0, databytes.Length);
