@@ -86,6 +86,8 @@ namespace Pinta.Docking
 				tab_view.ClosePageFinish (page, !close_args.Cancel);
 				if (!close_args.Cancel)
 					items.Remove (item);
+
+				// TODO-GTK4 - return GDK_EVENT_STOP to prevent the default close handler from running. Requires https://github.com/gircore/gir.core/issues/755
 			};
 		}
 

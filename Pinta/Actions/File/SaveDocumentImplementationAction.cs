@@ -109,45 +109,40 @@ namespace Pinta.Actions
 
 			fcd.Filter = format_desc.Filter;
 
-			// TODO-GTK4 - callers expect this to be blocking
-			// TODO-GTK4 - allow re-selecting if saving the file failed or was cancelled
-			fcd.OnResponse += (_, args) => {
-				if (args.ResponseId == (int) ResponseType.Accept) {
-					var file = fcd.GetFile ()!;
+			while (fcd.RunBlocking () == ResponseType.Accept) {
+				var file = fcd.GetFile ()!;
 
-					// Note that we can't use file.GetDisplayName() because the file doesn't exist.
-					var display_name = file.GetParent ()!.GetRelativePath (file)!;
+				// Note that we can't use file.GetDisplayName() because the file doesn't exist.
+				var display_name = file.GetParent ()!.GetRelativePath (file)!;
 
-					// Always follow the extension rather than the file type drop down
-					// ie: if the user chooses to save a "jpeg" as "foo.png", we are going
-					// to assume they just didn't update the dropdown and really want png
-					var format = PintaCore.ImageFormats.GetFormatByFile (display_name) ?? filetypes[fcd.Filter];
+				// Always follow the extension rather than the file type drop down
+				// ie: if the user chooses to save a "jpeg" as "foo.png", we are going
+				// to assume they just didn't update the dropdown and really want png
+				var format = PintaCore.ImageFormats.GetFormatByFile (display_name) ?? filetypes[fcd.Filter];
 
-					var directory = file.GetParent ();
-					if (directory is not null)
-						PintaCore.RecentFiles.LastDialogDirectory = directory;
+				var directory = file.GetParent ();
+				if (directory is not null)
+					PintaCore.RecentFiles.LastDialogDirectory = directory;
 
-					// If saving the file failed or was cancelled, let the user select
-					// a different file type.
-					if (!SaveFile (document, file, format, PintaCore.Chrome.MainWindow))
-						return;
+				// If saving the file failed or was cancelled, let the user select
+				// a different file type.
+				if (!SaveFile (document, file, format, PintaCore.Chrome.MainWindow))
+					continue;
 
-					//The user is saving the Document to a new file, so technically it
-					//hasn't been saved to its associated file in this session.
-					document.HasBeenSavedInSession = false;
+				//The user is saving the Document to a new file, so technically it
+				//hasn't been saved to its associated file in this session.
+				document.HasBeenSavedInSession = false;
 
 #if false // TODO-GTK4 support recent files
 					RecentManager.Default.AddFull (file.GetUriAsString (), PintaCore.RecentFiles.RecentData);
 #endif
-					PintaCore.ImageFormats.SetDefaultFormat (format.Extensions.First ());
+				PintaCore.ImageFormats.SetDefaultFormat (format.Extensions.First ());
 
-					document.File = file;
-				}
-			};
+				document.File = file;
+				return true;
+			}
 
-			fcd.Show ();
-
-			return true;
+			return false;
 		}
 
 		private bool SaveFile (Document document, Gio.File? file, FormatDescriptor? format, Window parent)

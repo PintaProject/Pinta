@@ -76,20 +76,18 @@ namespace Pinta.Actions
 			dialog.CloseResponse = cancel_response;
 			dialog.DefaultResponse = save_response;
 
-			dialog.OnResponse += (_, e) => {
-				if (e.Response == save_response) {
-					PintaCore.Workspace.ActiveDocument.Save (false);
+			string response = dialog.RunBlocking ();
+			if (response == save_response) {
+				PintaCore.Workspace.ActiveDocument.Save (false);
 
-					// If the image is still dirty, the user
-					// must have cancelled the Save dialog
-					if (!PintaCore.Workspace.ActiveDocument.IsDirty)
-						PintaCore.Workspace.CloseActiveDocument ();
-				} else if (e.Response == discard_response) {
+				// If the image is still dirty, the user
+				// must have cancelled the Save dialog
+				if (!PintaCore.Workspace.ActiveDocument.IsDirty)
 					PintaCore.Workspace.CloseActiveDocument ();
-				}
-			};
+			} else if (response == discard_response) {
+				PintaCore.Workspace.CloseActiveDocument ();
+			}
 
-			dialog.Present ();
 		}
 	}
 }

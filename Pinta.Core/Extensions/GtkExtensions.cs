@@ -345,5 +345,55 @@ namespace Pinta.Core
 			GLib.Error.ThrowOnError (error);
 			return result;
 		}
+
+		/// <summary>
+		/// Similar to gtk_dialog_run() in GTK3, this runs the dialog in a blocking manner with a nested event loop.
+		/// This can be useful for compability with old code that relies on this behaviour, but new code should be
+		/// structured to use event handlers.
+		/// </summary>
+		public static string RunBlocking (this Adw.MessageDialog dialog)
+		{
+			string response = "";
+			GLib.MainLoop loop = new ();
+
+			if (!dialog.Modal)
+				dialog.Modal = true;
+
+			dialog.OnResponse += (_, args) => {
+				response = args.Response;
+				if (loop.IsRunning ())
+					loop.Quit ();
+			};
+
+			dialog.Show ();
+			loop.Run ();
+
+			return response;
+		}
+
+		/// <summary>
+		/// Similar to gtk_dialog_run() in GTK3, this runs the dialog in a blocking manner with a nested event loop.
+		/// This can be useful for compability with old code that relies on this behaviour, but new code should be
+		/// structured to use event handlers.
+		/// </summary>
+		public static ResponseType RunBlocking (this Gtk.NativeDialog dialog)
+		{
+			var response = ResponseType.None;
+			GLib.MainLoop loop = new ();
+
+			if (!dialog.Modal)
+				dialog.Modal = true;
+
+			dialog.OnResponse += (_, args) => {
+				response = (ResponseType) args.ResponseId;
+				if (loop.IsRunning ())
+					loop.Quit ();
+			};
+
+			dialog.Show ();
+			loop.Run ();
+
+			return response;
+		}
 	}
 }
