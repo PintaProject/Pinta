@@ -116,6 +116,15 @@ namespace Pinta.Core
 			return spin;
 		}
 
+		public static Scale CreateToolBarSlider (int min, int max, int step, int val)
+		{
+			var slider = Scale.NewWithRange (Orientation.Horizontal, min, max, step);
+			slider.WidthRequest = 150;
+			slider.ValuePos = PositionType.Left;
+			slider.SetValue (val);
+			return slider;
+		}
+
 		public static void AddAction (this Gtk.Application app, Command action)
 		{
 			app.AddAction (action.Action);

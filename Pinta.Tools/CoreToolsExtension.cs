@@ -66,13 +66,13 @@ namespace Pinta.Tools
 			PintaCore.Tools.AddTool (new EllipseTool (PintaCore.Services));
 			PintaCore.Tools.AddTool (new FreeformShapeTool (PintaCore.Services));
 			PintaCore.Tools.AddTool (new CloneStampTool (PintaCore.Services));
-			PintaCore.Tools.AddTool (new RecolorTool (PintaCore.Services));
 #else
 			PintaCore.Tools.AddTool (new PanTool (PintaCore.Services));
-			PintaCore.Tools.AddTool (new PaintBrushTool (PintaCore.Services));
-			PintaCore.Tools.AddTool (new PencilTool (PintaCore.Services));
-			PintaCore.Tools.AddTool (new EraserTool (PintaCore.Services));
 			PintaCore.Tools.AddTool (new GradientTool (PintaCore.Services));
+			PintaCore.Tools.AddTool (new PaintBrushTool (PintaCore.Services));
+			PintaCore.Tools.AddTool (new EraserTool (PintaCore.Services));
+			PintaCore.Tools.AddTool (new PencilTool (PintaCore.Services));
+			PintaCore.Tools.AddTool (new RecolorTool (PintaCore.Services));
 #endif
 		}
 
@@ -95,7 +95,6 @@ namespace Pinta.Tools
 			PintaCore.Tools.RemoveInstanceOfTool<PaintBucketTool> ();
 			PintaCore.Tools.RemoveInstanceOfTool<ColorPickerTool> ();
 			PintaCore.Tools.RemoveInstanceOfTool<CloneStampTool> ();
-			PintaCore.Tools.RemoveInstanceOfTool<RecolorTool> ();
 			PintaCore.Tools.RemoveInstanceOfTool<TextTool> ();
 			PintaCore.Tools.RemoveInstanceOfTool<LineCurveTool> ();
 			PintaCore.Tools.RemoveInstanceOfTool<RectangleTool> ();
@@ -104,10 +103,11 @@ namespace Pinta.Tools
 			PintaCore.Tools.RemoveInstanceOfTool<FreeformShapeTool> ();
 #else
 			PintaCore.Tools.RemoveInstanceOfTool<PanTool> ();
-			PintaCore.Tools.RemoveInstanceOfTool<PaintBrushTool> ();
-			PintaCore.Tools.RemoveInstanceOfTool<PencilTool> ();
-			PintaCore.Tools.RemoveInstanceOfTool<EraserTool> ();
 			PintaCore.Tools.RemoveInstanceOfTool<GradientTool> ();
+			PintaCore.Tools.RemoveInstanceOfTool<PaintBrushTool> ();
+			PintaCore.Tools.RemoveInstanceOfTool<EraserTool> ();
+			PintaCore.Tools.RemoveInstanceOfTool<PencilTool> ();
+			PintaCore.Tools.RemoveInstanceOfTool<RecolorTool> ();
 #endif
 		}
 		#endregion

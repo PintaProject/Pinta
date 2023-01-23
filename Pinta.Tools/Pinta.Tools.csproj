@@ -17,5 +17,6 @@
     <Compile Include="Tools/PaintBrushTool.cs" />
     <Compile Include="Tools/PanTool.cs" />
     <Compile Include="Tools/PencilTool.cs" />
+    <Compile Include="Tools/RecolorTool.cs" />
   </ItemGroup>
 </Project>
