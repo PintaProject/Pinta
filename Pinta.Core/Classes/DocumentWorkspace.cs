@@ -215,6 +215,8 @@ namespace Pinta.Core
 			return new PointD (pt.X, pt.Y);
 		}
 
+		public PointD WindowPointToCanvas (in PointD point) => WindowPointToCanvas (point.X, point.Y);
+
 		/// <summary>
 		/// Converts a point from canvas coordinates to window coordinates
 		/// </summary>

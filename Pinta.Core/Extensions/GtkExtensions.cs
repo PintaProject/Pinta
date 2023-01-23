@@ -52,6 +52,20 @@ namespace Pinta.Core
 		public const uint MouseRightButton = 3;
 
 		/// <summary>
+		/// Convert from GetCurrentButton to the MouseButton enum.
+		/// </summary>
+		public static MouseButton GetCurrentMouseButton (this Gtk.GestureClick gesture)
+		{
+			uint button = gesture.GetCurrentButton ();
+			return button switch {
+				MouseLeftButton => MouseButton.Left,
+				MouseMiddleButton => MouseButton.Middle,
+				MouseRightButton => MouseButton.Right,
+				_ => MouseButton.None
+			};
+		}
+
+		/// <summary>
 		/// In GTK4, toolbars are just a Box with a different CSS style class.
 		/// </summary>
 		public static Gtk.Box CreateToolBar ()

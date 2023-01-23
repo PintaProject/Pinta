@@ -410,15 +410,10 @@ namespace Pinta.Core
 		internal void DoKeyDown (Document document, KeyPressEventArgs args) => args.RetVal = OnKeyDown (document, ToolKeyEventArgs.FromKeyPressEventArgs (args));
 
 		internal void DoKeyUp (Document document, KeyReleaseEventArgs args) => args.RetVal = OnKeyUp (document, ToolKeyEventArgs.FromKeyReleaseEventArgs (args));
-
-		internal void DoMouseDown (Document document, ButtonPressEventArgs args) => OnMouseDown (document, ToolMouseEventArgs.FromButtonPressEventArgs (document, args));
-
-		internal void DoMouseDown (Document document, ToolMouseEventArgs e) => OnMouseDown (document, e);
-
-		internal void DoMouseMove (Document document, MotionNotifyEventArgs args) => OnMouseMove (document, ToolMouseEventArgs.FromMotionNotifyEventArgs (document, args));
-
-		internal void DoMouseUp (Document document, ButtonReleaseEventArgs args) => OnMouseUp (document, ToolMouseEventArgs.FromButtonReleaseEventArgs (document, args));
 #endif
+		internal void DoMouseDown (Document document, ToolMouseEventArgs args) => OnMouseDown (document, args);
+		internal void DoMouseMove (Document document, ToolMouseEventArgs args) => OnMouseMove (document, args);
+		internal void DoMouseUp (Document document, ToolMouseEventArgs args) => OnMouseUp (document, args);
 		#endregion
 	}
 }

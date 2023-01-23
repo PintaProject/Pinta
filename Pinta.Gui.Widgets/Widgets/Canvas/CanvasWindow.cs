@@ -39,6 +39,7 @@ namespace Pinta
 		private Ruler horizontal_ruler;
 		private Ruler vertical_ruler;
 		private ScrolledWindow scrolled_window;
+		private EventControllerMotion motion_controller;
 
 		public PintaCanvas Canvas { get; set; }
 		public bool HasBeenShown { get; set; }
@@ -54,32 +55,21 @@ namespace Pinta
 			document.Workspace.CanvasSizeChanged += UpdateRulerRange;
 			Canvas.OnResize += UpdateRulerRange;
 
-#if false // TODO-GTK4
-			Canvas.MotionNotifyEvent += delegate (object? o, MotionNotifyEventArgs args) {
+			motion_controller = Gtk.EventControllerMotion.New ();
+			motion_controller.OnMotion += (_, args) => {
 				if (!PintaCore.Workspace.HasOpenDocuments)
 					return;
 
-				var point = PintaCore.Workspace.WindowPointToCanvas (new Cairo.PointD (args.Event.X, args.Event.Y));
+				var point = PintaCore.Workspace.WindowPointToCanvas (new PointD (args.X, args.Y));
 
 				horizontal_ruler.Position = point.X;
 				vertical_ruler.Position = point.Y;
 			};
-#endif
+
+			AddController (motion_controller);
 		}
 
-#if false // TODO-GTK4
-		public bool IsMouseOnCanvas {
-			get {
-				// Get the position of the mouse pointer relative
-				// to canvas scrolled window top-left corner
-				GdkExtensions.GetWidgetPointer (scrolled_window, out int x, out int y, out var mask);
-
-				// Check if the pointer is on the canvas
-				return (x > 0) && (x < scrolled_window.GetAllocatedWidth()) &&
-				    (y > 0) && (y < scrolled_window.GetAllocatedHeight());
-			}
-		}
-#endif
+		public bool IsMouseOnCanvas => motion_controller.ContainsPointer;
 
 		public bool RulersVisible {
 			get => horizontal_ruler.Visible;

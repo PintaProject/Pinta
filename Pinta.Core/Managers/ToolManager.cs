@@ -248,26 +248,25 @@ namespace Pinta.Core
 			tool.ToolItem.Active = false;
 		}
 
-#if false // TODO-GTK4
-		public void DoMouseDown (Document document, ButtonPressEventArgs args)
+		public void DoMouseDown (Document document, ToolMouseEventArgs args)
 		{
 			if (!TryMouseDownPanOverride (document, args))
 				CurrentTool?.DoMouseDown (document, args);
 		}
 
-		public void DoMouseMove (Document document, MotionNotifyEventArgs args)
+		public void DoMouseMove (Document document, ToolMouseEventArgs args)
 		{
 			if (!TryMouseMovePanOverride (document, args))
 				CurrentTool?.DoMouseMove (document, args);
 		}
 
-		public void DoMouseUp (Document document, ButtonReleaseEventArgs args)
+		public void DoMouseUp (Document document, ToolMouseEventArgs args)
 		{
 			if (!TryMouseUpPanOverride (document, args))
 				CurrentTool?.DoMouseUp (document, args);
 		}
 
-		public void DoMouseDown (Document document, ToolMouseEventArgs e) => CurrentTool?.DoMouseDown (document, e);
+#if false // TODO-GTK4
 		public void DoKeyDown (Document document, KeyPressEventArgs args) => CurrentTool?.DoKeyDown (document, args);
 		public void DoKeyUp (Document document, KeyReleaseEventArgs args) => CurrentTool?.DoKeyUp (document, args);
 #endif
@@ -278,16 +277,15 @@ namespace Pinta.Core
 
 		System.Collections.IEnumerator System.Collections.IEnumerable.GetEnumerator () => tools.GetEnumerator ();
 
-#if false // TODO-GTK4
-		private bool TryMouseDownPanOverride (Document document, ButtonPressEventArgs args)
+		private bool TryMouseDownPanOverride (Document document, ToolMouseEventArgs args)
 		{
 			if (is_panning)
 				return true;
 
-			if (args.Event.Button == GtkExtensions.MouseMiddleButton && TryGetPanTool (out var pan)) {
+			if (args.MouseButton == MouseButton.Middle && TryGetPanTool (out var pan)) {
 				is_panning = true;
-				stored_cursor = document.Workspace.Canvas.Window.Cursor;
-				document.Workspace.Canvas.Window.Cursor = pan.DefaultCursor;
+				stored_cursor = document.Workspace.Canvas.Cursor;
+				document.Workspace.Canvas.Cursor = pan.DefaultCursor;
 				pan.DoMouseDown (document, args);
 				return true;
 			}
@@ -295,7 +293,7 @@ namespace Pinta.Core
 			return false;
 		}
 
-		private bool TryMouseMovePanOverride (Document document, MotionNotifyEventArgs args)
+		private bool TryMouseMovePanOverride (Document document, ToolMouseEventArgs args)
 		{
 			if (is_panning && TryGetPanTool (out var pan)) {
 				pan.DoMouseMove (document, args);
@@ -305,22 +303,21 @@ namespace Pinta.Core
 			return false;
 		}
 
-		private bool TryMouseUpPanOverride (Document document, ButtonReleaseEventArgs args)
+		private bool TryMouseUpPanOverride (Document document, ToolMouseEventArgs args)
 		{
 			if (is_panning && TryGetPanTool (out var pan)) {
 				// Ignore any mouse button releases that aren't Middle
-				if (args.Event.Button != GtkExtensions.MouseMiddleButton)
+				if (args.MouseButton != MouseButton.Middle)
 					return true;
 
 				is_panning = false;
 				pan.DoMouseUp (document, args);
-				document.Workspace.Canvas.Window.Cursor = stored_cursor;
+				document.Workspace.Canvas.Cursor = stored_cursor;
 				return true;
 			}
 
 			return false;
 		}
-#endif
 
 		private bool TryGetPanTool ([NotNullWhen (true)] out BaseTool? tool)
 		{

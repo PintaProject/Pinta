@@ -58,6 +58,8 @@ namespace Pinta.Core
 
 		public override string ToString () => $"{X}, {Y}";
 
+		public PointI ToInt () => new ((int) X, (int) Y);
+
 		public double Distance (in PointD e)
 		{
 			return new PointD (X - e.X, Y - e.Y).Magnitude ();
