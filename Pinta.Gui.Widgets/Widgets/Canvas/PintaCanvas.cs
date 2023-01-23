@@ -225,17 +225,25 @@ namespace Pinta.Gui.Widgets
 			QueueResize ();
 		}
 
-#if false // TODO-GTK4
-		public void DoKeyPressEvent (object o, KeyPressEventArgs e)
+		public bool DoKeyPressEvent (Gtk.EventControllerKey.KeyPressedSignalArgs args)
 		{
 			// Give the current tool a chance to handle the key press
-			PintaCore.Tools.DoKeyDown (document, e);
+			var tool_args = new ToolKeyEventArgs () {
+				Key = args.GetKey (),
+				State = args.State
+			};
+
+			return PintaCore.Tools.DoKeyDown (document, tool_args);
 		}
 
-		public void DoKeyReleaseEvent (object o, KeyReleaseEventArgs e)
+		public bool DoKeyReleaseEvent (Gtk.EventControllerKey.KeyReleasedSignalArgs args)
 		{
-			PintaCore.Tools.DoKeyUp (document, e);
+			var tool_args = new ToolKeyEventArgs () {
+				Key = args.GetKey (),
+				State = args.State
+			};
+
+			return PintaCore.Tools.DoKeyUp (document, tool_args);
 		}
-#endif
 	}
 }

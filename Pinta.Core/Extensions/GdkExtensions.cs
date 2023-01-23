@@ -131,25 +131,16 @@ namespace Pinta.Core
 			else
 				return key == Key.Control_L || key == Key.Control_R;
 		}
+#endif
 
 		/// <summary>
-		/// Filters out all modifier keys except Ctrl/Shift/Alt. This prevents Caps Lock, Num Lock, etc
-		/// from appearing as active modifier keys.
+		/// Returns whether any of the Ctrl/Cmd/Shift/Alt modifiers are active.
+		/// This prevents Caps Lock, Num Lock, etc from appearing as active modifier keys.
 		/// </summary>
-		public static ModifierType FilterModifierKeys (this ModifierType current_state)
-		{
-			var state = Gdk.ModifierType.None;
+		public static bool HasModifierKey (this ModifierType current_state)
+			=> current_state.IsControlPressed () || current_state.IsShiftPressed () || current_state.IsAltPressed ();
 
-			state |= (current_state & Gdk.ModifierType.ControlMask);
-			state |= (current_state & Gdk.ModifierType.ShiftMask);
-			state |= (current_state & Gdk.ModifierType.Mod1Mask);
-			if (PintaCore.System.OperatingSystem == OS.Mac) {
-				state |= (current_state & Gdk.ModifierType.Mod2Mask); // Command key on macOS.
-			}
-
-			return state;
-		}
-
+#if false // TODO-GTK4
 		public static Cairo.PointD GetPoint (this EventButton ev)
 		{
 			return new Cairo.PointD (ev.X, ev.Y);

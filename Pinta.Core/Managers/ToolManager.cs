@@ -81,7 +81,7 @@ namespace Pinta.Core
 		/// <summary>
 		/// Sets the current tool to the next tool with the specified shortcut.
 		/// </summary>
-		void SetCurrentTool (Gdk.Key shortcut);
+		bool SetCurrentTool (Gdk.Key shortcut);
 	}
 
 	public class ToolManager : IEnumerable<BaseTool>, IToolService
@@ -209,10 +209,14 @@ namespace Pinta.Core
 			return false;
 		}
 
-		public void SetCurrentTool (Gdk.Key shortcut)
+		public bool SetCurrentTool (Gdk.Key shortcut)
 		{
-			if (FindNextTool (shortcut) is BaseTool tool)
+			if (FindNextTool (shortcut) is BaseTool tool) {
 				SetCurrentTool (tool);
+				return true;
+			}
+
+			return false;
 		}
 
 		private BaseTool? FindNextTool (Gdk.Key shortcut)
@@ -266,10 +270,9 @@ namespace Pinta.Core
 				CurrentTool?.DoMouseUp (document, args);
 		}
 
-#if false // TODO-GTK4
-		public void DoKeyDown (Document document, KeyPressEventArgs args) => CurrentTool?.DoKeyDown (document, args);
-		public void DoKeyUp (Document document, KeyReleaseEventArgs args) => CurrentTool?.DoKeyUp (document, args);
-#endif
+		public bool DoKeyDown (Document document, ToolKeyEventArgs args) => CurrentTool?.DoKeyDown (document, args) ?? false;
+		public bool DoKeyUp (Document document, ToolKeyEventArgs args) => CurrentTool?.DoKeyUp (document, args) ?? false;
+
 		public void DoAfterSave (Document document) => CurrentTool?.DoAfterSave (document);
 		public bool DoHandlePaste (Document document, Clipboard clipboard) => CurrentTool?.DoHandlePaste (document, clipboard) ?? false;
 

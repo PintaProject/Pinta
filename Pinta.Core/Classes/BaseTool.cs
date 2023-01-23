@@ -406,11 +406,10 @@ namespace Pinta.Core
 
 		internal bool DoHandleUndo (Document document) => OnHandleUndo (document);
 
-#if false // TODO-GTK4
-		internal void DoKeyDown (Document document, KeyPressEventArgs args) => args.RetVal = OnKeyDown (document, ToolKeyEventArgs.FromKeyPressEventArgs (args));
+		internal bool DoKeyDown (Document document, ToolKeyEventArgs args) => OnKeyDown (document, args);
 
-		internal void DoKeyUp (Document document, KeyReleaseEventArgs args) => args.RetVal = OnKeyUp (document, ToolKeyEventArgs.FromKeyReleaseEventArgs (args));
-#endif
+		internal bool DoKeyUp (Document document, ToolKeyEventArgs args) => OnKeyUp (document, args);
+
 		internal void DoMouseDown (Document document, ToolMouseEventArgs args) => OnMouseDown (document, args);
 		internal void DoMouseMove (Document document, ToolMouseEventArgs args) => OnMouseMove (document, args);
 		internal void DoMouseUp (Document document, ToolMouseEventArgs args) => OnMouseUp (document, args);

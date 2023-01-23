@@ -89,18 +89,18 @@ namespace Pinta.Core
 			};
 		}
 
-#if false // TODO-GTK4
-		public void DoKeyPress (object o, KeyPressEventArgs e)
+		public bool DoKeyPress (Gtk.EventControllerKey.KeyPressedSignalArgs args)
 		{
-			if (e.Event.State.FilterModifierKeys () == Gdk.ModifierType.None && e.Event.Key.ToUpper () == Gdk.Key.X) {
+			if (!args.State.HasModifierKey () && args.GetKey ().ToUpper () == Gdk.Key.X) {
 				Color temp = PintaCore.Palette.PrimaryColor;
 				PintaCore.Palette.PrimaryColor = PintaCore.Palette.SecondaryColor;
 				PintaCore.Palette.SecondaryColor = temp;
 
-				e.RetVal = true;
+				return true;
 			}
+
+			return false;
 		}
-#endif
 
 		// This allows callers to bypass affecting the recently used list
 		public void SetColor (bool setPrimary, Color color, bool addToRecent = true)

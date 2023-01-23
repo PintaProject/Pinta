@@ -32,10 +32,6 @@ namespace Pinta.Core
 {
 	public class ToolKeyEventArgs : EventArgs
 	{
-#if false // TODO-GTK4
-		public EventKey? Event { get; init; }
-#endif
-
 		/// <summary>
 		/// Specifies whether the Alt key is currently pressed.
 		/// </summary>

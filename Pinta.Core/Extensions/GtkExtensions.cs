@@ -415,5 +415,15 @@ namespace Pinta.Core
 		{
 			return GLib.Internal.MainContext.Iteration (context.Handle, may_block);
 		}
+
+		/// <summary>
+		/// Provides convenient access to the Gdk.Key of the key being pressed.
+		/// </summary>
+		public static Gdk.Key GetKey (this Gtk.EventControllerKey.KeyPressedSignalArgs args) => (Gdk.Key) args.Keyval;
+
+		/// <summary>
+		/// Provides convenient access to the Gdk.Key of the key being released.
+		/// </summary>
+		public static Gdk.Key GetKey (this Gtk.EventControllerKey.KeyReleasedSignalArgs args) => (Gdk.Key) args.Keyval;
 	}
 }

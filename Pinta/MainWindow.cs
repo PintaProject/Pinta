@@ -114,10 +114,11 @@ namespace Pinta
 			// Handle a few main window specific actions
 			window_shell.DeleteEvent += MainWindow_DeleteEvent;
 			window_shell.DragDataReceived += MainWindow_DragDataReceived;
-
-			window_shell.KeyPressEvent += MainWindow_KeyPressEvent;
-			window_shell.KeyReleaseEvent += MainWindow_KeyReleaseEvent;
 #endif
+			var key_controller = Gtk.EventControllerKey.New ();
+			key_controller.OnKeyPressed += HandleGlobalKeyPress;
+			key_controller.OnKeyReleased += HandleGlobalKeyRelease;
+			window_shell.Window.AddController (key_controller);
 
 			// TODO: These need to be [re]moved when we redo zoom support
 			PintaCore.Actions.View.ZoomToWindow.Activated += ZoomToWindow_Activated;
@@ -213,13 +214,11 @@ namespace Pinta
 			return (MetricType) PintaCore.Actions.View.RulerMetric.GetState ().GetInt ();
 		}
 
-#if false // TODO-GTK4
-		[GLib.ConnectBefore]
-		private void MainWindow_KeyPressEvent (object o, KeyPressEventArgs e)
+		private void HandleGlobalKeyPress (Gtk.EventControllerKey controller, Gtk.EventControllerKey.KeyPressedSignalArgs args)
 		{
 			// Give the widget that has focus a first shot at handling the event.
 			// Otherwise, key presses may be intercepted by shortcuts for menu items.
-			if (SendToFocusWidget (e, e.Event))
+			if (SendToFocusWidget (controller))
 				return;
 
 			// Give the Canvas (and by extension the tools)
@@ -228,26 +227,24 @@ namespace Pinta
 			if (PintaCore.Workspace.HasOpenDocuments) {
 				var canvas_window = ((PintaCanvas) PintaCore.Workspace.ActiveWorkspace.Canvas).CanvasWindow;
 
-				if (canvas_window.Canvas.HasFocus || canvas_window.IsMouseOnCanvas)
-					canvas_window.Canvas.DoKeyPressEvent (o, e);
+				if ((canvas_window.Canvas.HasFocus || canvas_window.IsMouseOnCanvas) &&
+				     canvas_window.Canvas.DoKeyPressEvent (args)) {
+					return;
+				}
 			}
 
 			// If the canvas/tool didn't consume it, see if its a toolbox shortcut
-			if (e.RetVal is not true) {
-				if (e.Event.State.FilterModifierKeys () == Gdk.ModifierType.None)
-					PintaCore.Tools.SetCurrentTool (e.Event.Key);
+			if (!args.State.HasModifierKey () && PintaCore.Tools.SetCurrentTool (args.GetKey ())) {
+				return;
 			}
 
 			// Finally, see if the palette widget wants it.
-			if (e.RetVal is not true) {
-				PintaCore.Palette.DoKeyPress (o, e);
-			}
+			PintaCore.Palette.DoKeyPress (args);
 		}
 
-		[GLib.ConnectBefore]
-		private void MainWindow_KeyReleaseEvent (object o, KeyReleaseEventArgs e)
+		private void HandleGlobalKeyRelease (Gtk.EventControllerKey controller, Gtk.EventControllerKey.KeyReleasedSignalArgs args)
 		{
-			if (SendToFocusWidget (e, e.Event) || !PintaCore.Workspace.HasOpenDocuments)
+			if (SendToFocusWidget (controller) || !PintaCore.Workspace.HasOpenDocuments)
 				return;
 
 			// Give the Canvas (and by extension the tools)
@@ -256,14 +253,13 @@ namespace Pinta
 			var canvas_window = ((PintaCanvas) PintaCore.Workspace.ActiveWorkspace.Canvas).CanvasWindow;
 
 			if (canvas_window.Canvas.HasFocus || canvas_window.IsMouseOnCanvas)
-				canvas_window.Canvas.DoKeyReleaseEvent (o, e);
+				canvas_window.Canvas.DoKeyReleaseEvent (args);
 		}
 
-		private bool SendToFocusWidget (GLib.SignalArgs args, Gdk.EventKey e)
+		private bool SendToFocusWidget (Gtk.EventControllerKey key_controller)
 		{
-			var widget = window_shell.Focus;
-			if (widget != null && widget.ProcessEvent (e)) {
-				args.RetVal = true;
+			var widget = window_shell.Window.FocusWidget;
+			if (widget != null && key_controller.Forward (widget)) {
 				return true;
 			}
 
@@ -281,7 +277,6 @@ namespace Pinta
 			else
 				extension.Uninitialize ();
 		}
-#endif
 #endif
 
 		#region GUI Construction
