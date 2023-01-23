@@ -50,12 +50,10 @@ namespace Pinta.Core
 		/// </summary>
 		BaseTool? CurrentTool { get; }
 
-#if false // TODO-GTK4
 		/// <summary>
 		/// Performs the mouse down event for the currently selected tool.
 		/// </summary>
 		void DoMouseDown (Document document, ToolMouseEventArgs e);
-#endif
 
 		/// <summary>
 		/// Gets the previously selected tool.
