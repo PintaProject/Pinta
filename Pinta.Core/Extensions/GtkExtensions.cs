@@ -395,5 +395,11 @@ namespace Pinta.Core
 
 			return response;
 		}
+
+		// TODO-GTK4 - gir.core does not yet generate bindings for record methods
+		public static bool Iteration (this GLib.MainContext context, bool may_block)
+		{
+			return GLib.Internal.MainContext.Iteration (context.Handle, may_block);
+		}
 	}
 }

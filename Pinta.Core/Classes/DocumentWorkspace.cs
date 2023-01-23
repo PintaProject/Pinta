@@ -183,9 +183,9 @@ namespace Pinta.Core
 		{
 			Gtk.Viewport view = (Gtk.Viewport) Canvas.Parent!;
 
-			var h_adjust = view.GetHadjustment ();
+			var h_adjust = view.GetHadjustment ()!;
 			h_adjust.Value = Utility.Clamp (x * Scale - h_adjust.PageSize / 2, h_adjust.Lower, h_adjust.Upper);
-			var v_adjust = view.GetVadjustment ();
+			var v_adjust = view.GetVadjustment ()!;
 			v_adjust.Value = Utility.Clamp (y * Scale - v_adjust.PageSize / 2, v_adjust.Lower, v_adjust.Upper);
 		}
 
@@ -193,9 +193,9 @@ namespace Pinta.Core
 		{
 			Gtk.Viewport view = (Gtk.Viewport) Canvas.Parent!;
 
-			var h_adjust = view.GetHadjustment ();
+			var h_adjust = view.GetHadjustment ()!;
 			h_adjust.Value = Utility.Clamp (dx + h_adjust.Value, h_adjust.Lower, h_adjust.Upper - h_adjust.PageSize);
-			var v_adjust = view.GetVadjustment ();
+			var v_adjust = view.GetVadjustment ()!;
 			v_adjust.Value = Utility.Clamp (dy + v_adjust.Value, v_adjust.Lower, v_adjust.Upper - v_adjust.PageSize);
 		}
 
@@ -266,9 +266,7 @@ namespace Pinta.Core
 				ratio = document.ImageSize.Height / rect.Height;
 
 			PintaCore.Actions.View.ZoomComboBox.ComboBox.GetEntry ().SetText (ViewActions.ToPercent (ratio));
-#if false // TODO-GTK4
-			Gtk.Main.Iteration (); //Force update of scrollbar upper before recenter
-#endif
+			GLib.MainContext.Default ().Iteration (false); //Force update of scrollbar upper before recenter
 			RecenterView (rect.X + rect.Width / 2, rect.Y + rect.Height / 2);
 		}
 		#endregion

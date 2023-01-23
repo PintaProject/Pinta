@@ -181,11 +181,13 @@ namespace Pinta.Core
 		{
 			ZoomIn.Activated += HandlePintaCoreActionsViewZoomInActivated;
 			ZoomOut.Activated += HandlePintaCoreActionsViewZoomOutActivated;
-#if false // TODO-GTK4
-			ZoomComboBox.ComboBox.Changed += HandlePintaCoreActionsViewZoomComboBoxComboBoxChanged;
-			ZoomComboBox.ComboBox.Entry.FocusOutEvent += new Gtk.FocusOutEventHandler (ComboBox_FocusOutEvent);
-			ZoomComboBox.ComboBox.Entry.FocusInEvent += new Gtk.FocusInEventHandler (Entry_FocusInEvent);
-#endif
+			ZoomComboBox.ComboBox.OnChanged += HandlePintaCoreActionsViewZoomComboBoxComboBoxChanged;
+
+			var focus_controller = Gtk.EventControllerFocus.New ();
+			focus_controller.OnEnter += Entry_FocusInEvent;
+			focus_controller.OnLeave += Entry_FocusOutEvent;
+			ZoomComboBox.ComboBox.GetEntry ().AddController (focus_controller);
+
 			ActualSize.Activated += HandlePintaCoreActionsViewActualSizeActivated;
 
 			PixelGrid.Toggled += (_) => {
@@ -207,26 +209,24 @@ namespace Pinta.Core
 		private string? temp_zoom;
 		private bool suspend_zoom_change;
 
-#if false // TODO-GTK4
-		private void Entry_FocusInEvent (object o, Gtk.FocusInEventArgs args)
+		private void Entry_FocusInEvent (object o, EventArgs args)
 		{
-			temp_zoom = PintaCore.Actions.View.ZoomComboBox.ComboBox.ActiveText;
+			temp_zoom = PintaCore.Actions.View.ZoomComboBox.ComboBox.GetActiveText ()!;
 		}
 
-		private void ComboBox_FocusOutEvent (object o, Gtk.FocusOutEventArgs args)
+		private void Entry_FocusOutEvent (object o, EventArgs args)
 		{
-			string text = PintaCore.Actions.View.ZoomComboBox.ComboBox.ActiveText;
+			string text = PintaCore.Actions.View.ZoomComboBox.ComboBox.GetActiveText ()!;
 			double percent;
 
 			if (!TryParsePercent (text, out percent)) {
-				PintaCore.Actions.View.ZoomComboBox.ComboBox.Entry.Text = temp_zoom;
+				PintaCore.Actions.View.ZoomComboBox.ComboBox.GetEntry ().SetText (temp_zoom!);
 				return;
 			}
 
 			if (percent > 3600)
 				PintaCore.Actions.View.ZoomComboBox.ComboBox.Active = 0;
 		}
-#endif
 		#endregion
 
 		/// <summary>
