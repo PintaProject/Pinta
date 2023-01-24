@@ -88,6 +88,26 @@ namespace Pinta.Core
 			copy.Inflate (width, height);
 			return copy;
 		}
+
+		public RectangleD Clamp ()
+		{
+			double x = this.X;
+			double y = this.Y;
+			double w = this.Width;
+			double h = this.Height;
+
+			if (x < 0) {
+				w -= x;
+				x = 0;
+			}
+
+			if (y < 0) {
+				h -= y;
+				y = 0;
+			}
+
+			return new RectangleD (x, y, w, h);
+		}
 	}
 
 	public record struct RectangleI

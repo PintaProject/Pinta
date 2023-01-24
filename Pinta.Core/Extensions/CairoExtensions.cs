@@ -212,11 +212,10 @@ namespace Pinta.Core
 			return dirty;
 		}
 
-#if false // TODO-GTK4
-		public static Rectangle DrawPolygonal (this Context g, PointD[] points, Color color)
+		public static RectangleD DrawPolygonal (this Context g, PointD[] points, Color color)
 		{
 			g.Save ();
-			g.MoveTo (points[0]);
+			g.MoveTo (points[0].X, points[0].Y);
 			foreach (var point in points) {
 				g.LineTo (point.X, point.Y);
 			}
@@ -224,7 +223,7 @@ namespace Pinta.Core
 			g.SetSourceColor (color);
 			g.LineCap = LineCap.Square;
 
-			Rectangle dirty = g.StrokeExtents ();
+			RectangleD dirty = g.StrokeExtents ();
 			g.Stroke ();
 
 			g.Restore ();
@@ -232,17 +231,17 @@ namespace Pinta.Core
 			return dirty;
 		}
 
-		public static Rectangle FillPolygonal (this Context g, PointD[] points, Color color)
+		public static RectangleD FillPolygonal (this Context g, PointD[] points, Color color)
 		{
 			g.Save ();
 
-			g.MoveTo (points[0]);
+			g.MoveTo (points[0].X, points[0].Y);
 			foreach (var point in points)
-				g.LineTo (point);
+				g.LineTo (point.X, point.Y);
 
 			g.SetSourceColor (color);
 
-			Rectangle dirty = g.StrokeExtents ();
+			RectangleD dirty = g.StrokeExtents ();
 			g.Fill ();
 
 			g.Restore ();
@@ -250,6 +249,7 @@ namespace Pinta.Core
 			return dirty;
 		}
 
+#if false // TODO-GTK4
 		public static Rectangle FillStrokedRectangle (this Context g, Rectangle r, Color fill, Color stroke, int lineWidth)
 		{
 			double x = r.X;
@@ -725,26 +725,6 @@ namespace Pinta.Core
 		{
 			return CreateRectangleInt (r.X, r.Y, r.Width, r.Height);
 		}
-
-		public static Cairo.Rectangle Clamp (this Cairo.Rectangle r)
-		{
-			double x = r.X;
-			double y = r.Y;
-			double w = r.Width;
-			double h = r.Height;
-
-			if (x < 0) {
-				w -= x;
-				x = 0;
-			}
-
-			if (y < 0) {
-				h -= y;
-				y = 0;
-			}
-
-			return new Cairo.Rectangle (x, y, w, h);
-		}
 #endif
 
 		public static GdkPixbuf.Pixbuf ToPixbuf (this Cairo.ImageSurface surfSource)
@@ -868,11 +848,6 @@ namespace Pinta.Core
 			return g.PathExtents ().ToInt ();
 		}
 #if false // TODO-GTK4
-		public static Color Clone (this Color color)
-		{
-			return new Color (color.R, color.G, color.B, color.A);
-		}
-
 		public static Gdk.Color ToGdkColor (this Cairo.Color color)
 		{
 			Gdk.Color c = new Gdk.Color ();
@@ -1398,6 +1373,7 @@ namespace Pinta.Core
 			matrix.X0 = dst.X - (matrix.Xx * src.X);
 			matrix.Y0 = dst.Y - (matrix.Yy * src.Y);
 		}
+#endif
 
 		/// <summary>
 		/// Computes and returns the Union (largest possible combination) of two Rectangles.
@@ -1411,7 +1387,7 @@ namespace Pinta.Core
 		/// <param name="r1">The first given Rectangle.</param>
 		/// <param name="r2">The second given Rectangle.</param>
 		/// <returns></returns>
-		public static Rectangle? UnionRectangles (this Rectangle? r1, Rectangle? r2)
+		public static RectangleD? UnionRectangles (this RectangleD? r1, RectangleD? r2)
 		{
 			if (r1 == null) {
 				//r2 is the only given Rectangle that could still have a value, and if it's null, return that anyways.
@@ -1427,12 +1403,11 @@ namespace Pinta.Core
 				double minY = Math.Min (r1.Value.Y, r2.Value.Y);
 
 				//Calculate the right-most and bottom-most values and subtract the left-most and top-most values from them to get the width and height.
-				return new Rectangle (minX, minY,
+				return new RectangleD (minX, minY,
 					Math.Max (r1.Value.X + r1.Value.Width, r2.Value.X + r2.Value.Width) - minX,
 					Math.Max (r1.Value.Y + r1.Value.Height, r2.Value.Y + r2.Value.Height) - minY);
 			}
 		}
-#endif
 
 		public static Pattern CreateTransparentBackgroundPattern (int size)
 		{

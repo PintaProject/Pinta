@@ -64,7 +64,7 @@ namespace Pinta.Tools
 
 		protected abstract BaseEditEngine CreateEditEngine ();
 
-		protected override void OnBuildToolBar (Gtk.Toolbar tb)
+		protected override void OnBuildToolBar (Gtk.Box tb)
 		{
 			base.OnBuildToolBar (tb);
 

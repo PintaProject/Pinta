@@ -56,7 +56,7 @@ namespace Pinta.Tools
 			AddLinePoints (ctrlKey, clickedOnControlPoint, newEngine, prevSelPoint);
 
 			//Set the new shape's DashPattern option.
-			newEngine.DashPattern = dash_pattern_box.comboBox!.ComboBox.ActiveText; // NRT - Code assumes this is not-null
+			newEngine.DashPattern = dash_pattern_box.comboBox!.ComboBox.GetActiveText ()!; // NRT - Code assumes this is not-null
 
 			//Set the new arrow's settings to be the same as what's in the toolbar settings.
 			setNewArrowSettings (newEngine);

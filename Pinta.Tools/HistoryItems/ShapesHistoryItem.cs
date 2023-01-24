@@ -68,8 +68,6 @@ namespace Pinta.Tools
 
 			if (userSurfaceDiff == null) {
 				userSurface = passedUserSurface;
-			} else {
-				(passedUserSurface as IDisposable).Dispose ();
 			}
 
 
@@ -140,13 +138,6 @@ namespace Pinta.Tools
 					((ShapeTool?) PintaCore.Tools.CurrentTool)?.EditEngine.DrawAllShapes ();
 				}
 			}
-		}
-
-		public override void Dispose ()
-		{
-			// Free up native surface
-			if (userSurface != null)
-				(userSurface as IDisposable).Dispose ();
 		}
 	}
 }
