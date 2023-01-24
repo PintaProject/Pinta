@@ -204,5 +204,14 @@ namespace Pinta.Resources
 		public const string Grab = "grab";
 		public const string Grabbing = "grabbing";
 		public const string Progress = "progress";
+
+		public const string ResizeN = "n-resize";
+		public const string ResizeE = "e-resize";
+		public const string ResizeS = "s-resize";
+		public const string ResizeW = "w-resize";
+		public const string ResizeNE = "ne-resize";
+		public const string ResizeNW = "nw-resize";
+		public const string ResizeSE = "se-resize";
+		public const string ResizeSW = "sw-resize";
 	}
 }

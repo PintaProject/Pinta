@@ -403,8 +403,9 @@ namespace Pinta.Core
 
 			return path;
 		}
+#endif
 
-		public static Rectangle FillStrokedEllipse (this Context g, Rectangle r, Color fill, Color stroke, int lineWidth)
+		public static RectangleD FillStrokedEllipse (this Context g, RectangleD r, Color fill, Color stroke, int lineWidth)
 		{
 			double rx = r.Width / 2;
 			double ry = r.Height / 2;
@@ -429,7 +430,7 @@ namespace Pinta.Core
 			g.SetSourceColor (stroke);
 			g.LineWidth = lineWidth;
 
-			Rectangle dirty = g.StrokeExtents ();
+			RectangleD dirty = g.StrokeExtents ();
 
 			g.Stroke ();
 			g.Restore ();
@@ -437,6 +438,7 @@ namespace Pinta.Core
 			return dirty;
 		}
 
+#if false // TODO-GTK4
 		public static Rectangle FillStrokedRoundedRectangle (this Context g, Rectangle r, double radius, Color fill, Color stroke, int lineWidth)
 		{
 			g.Save ();

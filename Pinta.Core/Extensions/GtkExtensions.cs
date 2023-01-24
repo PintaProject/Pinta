@@ -26,6 +26,7 @@
 
 using System;
 using System.Linq;
+using System.Runtime.InteropServices;
 using Gtk;
 
 namespace Pinta.Core
@@ -303,15 +304,14 @@ namespace Pinta.Core
 		public static Box GetContentAreaBox (this Dialog dialog)
 			=> (Box) dialog.GetContentArea ();
 
-#if false // TODO-GTK4
 		/// <summary>
-		/// Returns the platform-specific label for the Ctrl key.
+		/// Returns the platform-specific label for the "Primary" (Ctrl) key.
 		/// For example, this is the Cmd key on macOS.
 		/// </summary>
 		public static string CtrlLabel ()
 		{
-			Accelerator.Parse ("<Primary>", out var key, out var mods);
-			return Accelerator.GetLabel (key, mods);
+			AcceleratorParse (ConvertPrimaryKey ("<Primary>"), out var key, out var mods);
+			return Gtk.Functions.AcceleratorGetLabel (key, mods);
 		}
 
 		/// <summary>
@@ -320,10 +320,13 @@ namespace Pinta.Core
 		/// </summary>
 		public static string AltLabel ()
 		{
-			Accelerator.Parse ("<Alt>", out var key, out var mods);
-			return Accelerator.GetLabel (key, mods);
+			AcceleratorParse ("<Alt>", out var key, out var mods);
+			return Gtk.Functions.AcceleratorGetLabel (key, mods);
 		}
-#endif
+
+		// TODO-GTK4 - need binding from gir.core
+		[DllImport ("libgtk-4.1", EntryPoint = "gtk_accelerator_parse")]
+		private static extern bool AcceleratorParse ([MarshalAs (UnmanagedType.LPUTF8Str)] string accelerator, out uint accelerator_key, out Gdk.ModifierType accelerator_mods);
 
 		/// <summary>
 		/// Set all four margins of the widget to the same value.

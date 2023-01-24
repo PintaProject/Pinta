@@ -80,6 +80,13 @@ namespace Pinta.Core
 			Width += width * 2;
 			Height += height * 2;
 		}
+
+		public RectangleD Inflated (double width, double height)
+		{
+			RectangleD copy = this;
+			copy.Inflate (width, height);
+			return copy;
+		}
 	}
 
 	public record struct RectangleI
@@ -143,6 +150,17 @@ namespace Pinta.Core
 			if (left > right || top > bottom)
 				return Zero;
 
+			return FromLTRB (left, top, right, bottom);
+		}
+
+		public RectangleI Union (RectangleI r) => Union (this, r);
+
+		public static RectangleI Union (in RectangleI a, in RectangleI b)
+		{
+			int left = Math.Min (a.Left, b.Left);
+			int right = Math.Max (a.Right, b.Right);
+			int top = Math.Min (a.Top, b.Top);
+			int bottom = Math.Max (a.Bottom, b.Bottom);
 			return FromLTRB (left, top, right, bottom);
 		}
 

@@ -43,13 +43,13 @@ namespace Pinta.Tools
 		private PointD shape_origin;
 		private PointD reset_origin;
 		private PointD shape_end;
-		private Gdk.Rectangle last_dirty;
+		private RectangleI last_dirty;
 		private SelectionHistoryItem? hist;
 		private CombineMode combine_mode;
 
 		private readonly MoveHandle[] handles = new MoveHandle[8];
 		private int? active_handle;
-		private CursorType? active_cursor;
+		private string? active_cursor_name;
 
 		public override Gdk.Key ShortcutKey { get { return Gdk.Key.S; } }
 		protected override bool ShowAntialiasingButton { get { return false; } }
@@ -60,21 +60,21 @@ namespace Pinta.Tools
 			tools = services.GetService<IToolService> ();
 			workspace = services.GetService<IWorkspaceService> ();
 
-			handles[0] = new MoveHandle { Cursor = CursorType.TopLeftCorner };
-			handles[1] = new MoveHandle { Cursor = CursorType.BottomLeftCorner };
-			handles[2] = new MoveHandle { Cursor = CursorType.TopRightCorner };
-			handles[3] = new MoveHandle { Cursor = CursorType.BottomRightCorner };
-			handles[4] = new MoveHandle { Cursor = CursorType.LeftSide };
-			handles[5] = new MoveHandle { Cursor = CursorType.TopSide };
-			handles[6] = new MoveHandle { Cursor = CursorType.RightSide };
-			handles[7] = new MoveHandle { Cursor = CursorType.BottomSide };
+			handles[0] = new MoveHandle { CursorName = Pinta.Resources.StandardCursors.ResizeNW };
+			handles[1] = new MoveHandle { CursorName = Pinta.Resources.StandardCursors.ResizeSW };
+			handles[2] = new MoveHandle { CursorName = Pinta.Resources.StandardCursors.ResizeNE };
+			handles[3] = new MoveHandle { CursorName = Pinta.Resources.StandardCursors.ResizeSE };
+			handles[4] = new MoveHandle { CursorName = Pinta.Resources.StandardCursors.ResizeW };
+			handles[5] = new MoveHandle { CursorName = Pinta.Resources.StandardCursors.ResizeN };
+			handles[6] = new MoveHandle { CursorName = Pinta.Resources.StandardCursors.ResizeE };
+			handles[7] = new MoveHandle { CursorName = Pinta.Resources.StandardCursors.ResizeS };
 
 			workspace.SelectionChanged += AfterSelectionChange;
 		}
 
-		protected abstract void DrawShape (Document document, Cairo.Rectangle r, Layer l);
+		protected abstract void DrawShape (Document document, RectangleD r, Layer l);
 
-		protected override void OnBuildToolBar (Toolbar tb)
+		protected override void OnBuildToolBar (Box tb)
 		{
 			base.OnBuildToolBar (tb);
 
@@ -100,7 +100,6 @@ namespace Pinta.Tools
 				var y = Math.Round (Utility.Clamp (e.PointDouble.Y, 0, document.ImageSize.Height));
 				shape_origin = new PointD (x, y);
 
-				document.PreviousSelection.Dispose ();
 				document.PreviousSelection = document.Selection.Clone ();
 				document.Selection.SelectionPolygons.Clear ();
 
@@ -111,7 +110,7 @@ namespace Pinta.Tools
 			// Do a full redraw for modes that can wipe existing selections outside the rectangle being drawn.
 			if (combine_mode == CombineMode.Replace || combine_mode == CombineMode.Intersect) {
 				var size = document.ImageSize;
-				last_dirty = new Gdk.Rectangle (0, 0, size.Width, size.Height);
+				last_dirty = new RectangleI (0, 0, size.Width, size.Height);
 			}
 
 			is_drawing = true;
@@ -136,7 +135,7 @@ namespace Pinta.Tools
 			UpdateHandlePositions ();
 
 			if (document.Selection != null) {
-				SelectionModeHandler.PerformSelectionMode (combine_mode, document.Selection.SelectionPolygons);
+				SelectionModeHandler.PerformSelectionMode (document, combine_mode, document.Selection.SelectionPolygons);
 				document.Workspace.Invalidate (dirty.Union (last_dirty));
 			}
 
@@ -157,7 +156,6 @@ namespace Pinta.Tools
 					// Roll back any changes made to the selection, e.g. in OnMouseDown().
 					hist.Undo ();
 
-					hist.Dispose ();
 					hist = null;
 				}
 
@@ -167,7 +165,7 @@ namespace Pinta.Tools
 				var dirty = ReDraw (document);
 
 				if (document.Selection != null) {
-					SelectionModeHandler.PerformSelectionMode (combine_mode, document.Selection.SelectionPolygons);
+					SelectionModeHandler.PerformSelectionMode (document, combine_mode, document.Selection.SelectionPolygons);
 
 					document.Selection.Origin = shape_origin;
 					document.Selection.End = shape_end;
@@ -287,12 +285,12 @@ namespace Pinta.Tools
 
 		private void UpdateHandlePositions ()
 		{
-			Gdk.Rectangle ComputeHandleBounds ()
+			RectangleI ComputeHandleBounds ()
 			{
 				// When loading a new document, we might get a selection change event
 				// before there is a canvas size / scale.
 				if (PintaCore.Workspace.CanvasSize.IsEmpty)
-					return Gdk.Rectangle.Zero;
+					return RectangleI.Zero;
 
 				return MoveHandle.UnionInvalidateRects (handles);
 			}
@@ -312,7 +310,7 @@ namespace Pinta.Tools
 			PintaCore.Workspace.InvalidateWindowRect (dirty);
 		}
 
-		private Gdk.Rectangle ReDraw (Document document)
+		private RectangleI ReDraw (Document document)
 		{
 			document.Selection.Visible = true;
 			ShowHandles (true);
@@ -322,7 +320,7 @@ namespace Pinta.Tools
 			DrawShape (document, rect, document.Layers.SelectionLayer);
 
 			// Figure out a bounding box for everything that was drawn, and add a bit of padding.
-			var dirty = rect.ToGdkRectangle ();
+			var dirty = rect.ToInt ();
 			dirty.Inflate (2, 2);
 			return dirty;
 		}
@@ -352,14 +350,14 @@ namespace Pinta.Tools
 		{
 			var active_handle = FindHandleUnderPoint (window_point);
 			if (active_handle is not null) {
-				SetCursor (new Cursor (active_handle.Cursor));
-				active_cursor = active_handle.Cursor;
+				SetCursor (Cursor.NewFromName (active_handle.CursorName, null));
+				active_cursor_name = active_handle.CursorName;
 				return;
 			}
 
-			if (active_cursor.HasValue) {
+			if (active_cursor_name != null) {
 				SetCursor (DefaultCursor);
-				active_cursor = null;
+				active_cursor_name = null;
 			}
 		}
 

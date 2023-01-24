@@ -133,9 +133,9 @@ namespace Pinta.Core
 		private static extern GLib.Internal.SListUnownedHandle GetFormatsNative ();
 
 		[DllImport ("gdk_pixbuf-2.0", EntryPoint = "gdk_pixbuf_save_to_bufferv")]
-		private static extern bool SaveToBufferv (IntPtr pixbuf, out IntPtr buffer, out uint buffer_size, string type, IntPtr option_keys, IntPtr option_values, out GLib.Internal.ErrorOwnedHandle error);
+		private static extern bool SaveToBufferv (IntPtr pixbuf, out IntPtr buffer, out uint buffer_size, [MarshalAs (UnmanagedType.LPUTF8Str)] string type, IntPtr option_keys, IntPtr option_values, out GLib.Internal.ErrorOwnedHandle error);
 
 		[DllImport ("gdk_pixbuf-2.0", EntryPoint = "gdk_pixbuf_save_to_streamv")]
-		private static extern bool SaveToStreamv (IntPtr pixbuf, IntPtr stream, string type, IntPtr option_keys, IntPtr option_values, IntPtr cancellable, out GLib.Internal.ErrorOwnedHandle error);
+		private static extern bool SaveToStreamv (IntPtr pixbuf, IntPtr stream, [MarshalAs (UnmanagedType.LPUTF8Str)] string type, IntPtr option_keys, IntPtr option_values, IntPtr cancellable, out GLib.Internal.ErrorOwnedHandle error);
 	}
 }

@@ -53,8 +53,6 @@ namespace Pinta.Tools
 			PintaCore.Tools.AddTool (new MoveSelectedTool (PintaCore.Services));
 			PintaCore.Tools.AddTool (new MoveSelectionTool (PintaCore.Services));
 			PintaCore.Tools.AddTool (new ZoomTool (PintaCore.Services));
-			PintaCore.Tools.AddTool (new RectangleSelectTool (PintaCore.Services));
-			PintaCore.Tools.AddTool (new EllipseSelectTool (PintaCore.Services));
 			PintaCore.Tools.AddTool (new LassoSelectTool (PintaCore.Services));
 			PintaCore.Tools.AddTool (new MagicWandTool (PintaCore.Services));
 			PintaCore.Tools.AddTool (new PaintBucketTool (PintaCore.Services));
@@ -68,6 +66,8 @@ namespace Pinta.Tools
 			PintaCore.Tools.AddTool (new CloneStampTool (PintaCore.Services));
 #else
 			PintaCore.Tools.AddTool (new PanTool (PintaCore.Services));
+			PintaCore.Tools.AddTool (new RectangleSelectTool (PintaCore.Services));
+			PintaCore.Tools.AddTool (new EllipseSelectTool (PintaCore.Services));
 			PintaCore.Tools.AddTool (new GradientTool (PintaCore.Services));
 			PintaCore.Tools.AddTool (new PaintBrushTool (PintaCore.Services));
 			PintaCore.Tools.AddTool (new EraserTool (PintaCore.Services));
@@ -85,11 +85,9 @@ namespace Pinta.Tools
 			PintaCore.PaintBrushes.RemoveInstanceOfPaintBrush (typeof (Brushes.SquaresBrush));
 
 #if false // TODO-GTK4
-			PintaCore.Tools.RemoveInstanceOfTool<RectangleSelectTool> ();
 			PintaCore.Tools.RemoveInstanceOfTool<MoveSelectedTool> ();
 			PintaCore.Tools.RemoveInstanceOfTool<LassoSelectTool> ();
 			PintaCore.Tools.RemoveInstanceOfTool<MoveSelectionTool> ();
-			PintaCore.Tools.RemoveInstanceOfTool<EllipseSelectTool> ();
 			PintaCore.Tools.RemoveInstanceOfTool<ZoomTool> ();
 			PintaCore.Tools.RemoveInstanceOfTool<MagicWandTool> ();
 			PintaCore.Tools.RemoveInstanceOfTool<PaintBucketTool> ();
@@ -103,6 +101,8 @@ namespace Pinta.Tools
 			PintaCore.Tools.RemoveInstanceOfTool<FreeformShapeTool> ();
 #else
 			PintaCore.Tools.RemoveInstanceOfTool<PanTool> ();
+			PintaCore.Tools.RemoveInstanceOfTool<RectangleSelectTool> ();
+			PintaCore.Tools.RemoveInstanceOfTool<EllipseSelectTool> ();
 			PintaCore.Tools.RemoveInstanceOfTool<GradientTool> ();
 			PintaCore.Tools.RemoveInstanceOfTool<PaintBrushTool> ();
 			PintaCore.Tools.RemoveInstanceOfTool<EraserTool> ();

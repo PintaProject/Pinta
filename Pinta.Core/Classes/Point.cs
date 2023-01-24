@@ -90,6 +90,8 @@ namespace Pinta.Core
 		public static readonly Size Empty;
 
 		public override string ToString () => $"{Width}, {Height}";
+
+		public bool IsEmpty => (Width == 0 && Height == 0);
 	}
 }
 

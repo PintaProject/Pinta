@@ -16,7 +16,7 @@ namespace Pinta.Tools
 		public static readonly Cairo.Color SelectionFillColor = new (1, 0.5, 0, 1);
 		public static readonly Cairo.Color StrokeColor = new (1, 1, 1, 0.7);
 
-		public Cairo.PointD CanvasPosition { get; set; }
+		public PointD CanvasPosition { get; set; }
 
 		/// <summary>
 		/// Inactive handles are not drawn.
@@ -28,17 +28,18 @@ namespace Pinta.Tools
 		/// </summary>
 		public bool Selected { get; set; } = false;
 
-		public Gdk.CursorType Cursor { get; init; }
+		public string CursorName { get; init; } = Pinta.Resources.StandardCursors.Default;
 
 		/// <summary>
 		/// Tests whether the window point is inside the handle's area.
 		/// The area to grab a handle is a bit larger than the rendered area for easier selection.
 		/// </summary>
-		public bool ContainsPoint (Cairo.PointD window_point)
+		public bool ContainsPoint (PointD window_point)
 		{
 			const int tolerance = 5;
 
-			var bounds = ComputeWindowRect ().Inflate (tolerance, tolerance);
+			var bounds = ComputeWindowRect ();
+			bounds.Inflate (tolerance, tolerance);
 			return bounds.ContainsPoint (window_point);
 		}
 
@@ -53,25 +54,25 @@ namespace Pinta.Tools
 		/// <summary>
 		/// Bounding rectangle to use with InvalidateWindowRect() when triggering a redraw.
 		/// </summary>
-		public Gdk.Rectangle InvalidateRect => ComputeWindowRect ().Inflate (2, 2).ToGdkRectangle ();
+		public RectangleI InvalidateRect => ComputeWindowRect ().Inflated (2, 2).ToInt ();
 
 		/// <summary>
 		/// Bounding rectangle of the handle (in window space).
 		/// </summary>
-		private Cairo.Rectangle ComputeWindowRect ()
+		private RectangleD ComputeWindowRect ()
 		{
 			const double radius = 4.5;
 			const double diameter = 2 * radius;
 
 			var window_pt = PintaCore.Workspace.CanvasPointToWindow (CanvasPosition);
-			return new Cairo.Rectangle (window_pt.X - radius, window_pt.Y - radius, diameter, diameter);
+			return new RectangleD (window_pt.X - radius, window_pt.Y - radius, diameter, diameter);
 		}
 
 		/// <summary>
 		/// Returns the union of the invalidate rectangles for a collection of handles.
 		/// </summary>
-		public static Gdk.Rectangle UnionInvalidateRects (IEnumerable<MoveHandle> handles) =>
-			handles.Select (c => c.InvalidateRect).DefaultIfEmpty (Gdk.Rectangle.Zero).Aggregate ((accum, r) => accum.Union (r));
+		public static RectangleI UnionInvalidateRects (IEnumerable<MoveHandle> handles) =>
+			handles.Select (c => c.InvalidateRect).DefaultIfEmpty (RectangleI.Zero).Aggregate ((accum, r) => accum.Union (r));
 	}
 }
 

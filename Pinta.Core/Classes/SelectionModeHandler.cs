@@ -33,10 +33,8 @@ namespace Pinta.Core
 {
 	public class SelectionModeHandler
 	{
-#if false // TODO-GTK4
-		private ToolBarLabel? selection_label;
+		private Gtk.Label? selection_label;
 		private ToolBarComboBox? selection_combo_box;
-#endif
 
 		private CombineMode selected_mode;
 		private Dictionary<string, CombineMode> combine_modes;
@@ -46,33 +44,29 @@ namespace Pinta.Core
 		public SelectionModeHandler ()
 		{
 			combine_modes = new Dictionary<string, CombineMode> () {
-#if false // TODO-GTK4
-
-		{ Translations.GetString ("Replace"), CombineMode.Replace},
-                // Translators: {0} is 'Ctrl', or a platform-specific key such as 'Command' on macOS.
-                { Translations.GetString ("Union (+) ({0} + Left Click)", GtkExtensions.CtrlLabel ()), CombineMode.Union},
-		{ Translations.GetString ("Exclude (-) (Right Click)"), CombineMode.Exclude},
-                // Translators: {0} is 'Ctrl', or a platform-specific key such as 'Command' on macOS.
-                { Translations.GetString ("Xor ({0} + Right Click)", GtkExtensions.CtrlLabel ()), CombineMode.Xor},
-                // Translators: {0} is 'Alt', or a platform-specific key such as 'Option' on macOS.
-                { Translations.GetString ("Intersect ({0} + Left Click)", GtkExtensions.AltLabel ()), CombineMode.Intersect},
-#endif
+				{ Translations.GetString ("Replace"), CombineMode.Replace},
+				// Translators: {0} is 'Ctrl', or a platform-specific key such as 'Command' on macOS.
+				{ Translations.GetString ("Union (+) ({0} + Left Click)", GtkExtensions.CtrlLabel ()), CombineMode.Union},
+				{ Translations.GetString ("Exclude (-) (Right Click)"), CombineMode.Exclude},
+				// Translators: {0} is 'Ctrl', or a platform-specific key such as 'Command' on macOS.
+				{ Translations.GetString ("Xor ({0} + Right Click)", GtkExtensions.CtrlLabel ()), CombineMode.Xor},
+				// Translators: {0} is 'Alt', or a platform-specific key such as 'Option' on macOS.
+				{ Translations.GetString ("Intersect ({0} + Left Click)", GtkExtensions.AltLabel ()), CombineMode.Intersect},
 			};
 		}
 
-#if false // TODO-GTK4
-		public void BuildToolbar (Gtk.Toolbar tb, ISettingsService settings)
+		public void BuildToolbar (Gtk.Box tb, ISettingsService settings)
 		{
 			if (selection_label == null)
-				selection_label = new ToolBarLabel (Translations.GetString (" Selection Mode: "));
+				selection_label = Gtk.Label.New (Translations.GetString (" Selection Mode: "));
 
-			tb.AppendItem (selection_label);
+			tb.Append (selection_label);
 
 			if (selection_combo_box == null) {
 				selection_combo_box = new ToolBarComboBox (170, 0, false);
 
-				selection_combo_box.ComboBox.Changed += (o, e) => {
-					selected_mode = combine_modes[selection_combo_box.ComboBox.ActiveText];
+				selection_combo_box.ComboBox.OnChanged += (o, e) => {
+					selected_mode = combine_modes[selection_combo_box.ComboBox.GetActiveText ()!];
 				};
 
 				foreach (var mode in combine_modes)
@@ -81,7 +75,7 @@ namespace Pinta.Core
 				selection_combo_box.ComboBox.Active = settings.GetSetting (COMBINE_MODE_SETTING, 0);
 			}
 
-			tb.AppendItem (selection_combo_box);
+			tb.Append (selection_combo_box);
 		}
 
 		/// <summary>
@@ -106,7 +100,6 @@ namespace Pinta.Core
 
 			return mode;
 		}
-#endif
 
 		public static void PerformSelectionMode (Document doc, CombineMode mode, List<List<IntPoint>> polygons)
 		{
@@ -162,13 +155,11 @@ namespace Pinta.Core
 			doc.Selection.MarkDirty ();
 		}
 
-#if false // TODO-GTK4
 		public void OnSaveSettings (ISettingsService settings)
 		{
 			if (selection_combo_box is not null)
 				settings.PutSetting (COMBINE_MODE_SETTING, selection_combo_box.ComboBox.Active);
 		}
-#endif
 	}
 
 	public enum CombineMode
