@@ -37,8 +37,8 @@ namespace Pinta.Tools
 	{
 		private bool dashChangeSetup = false;
 
-		private ToolBarLabel? dashPatternLabel;
-		private ToolItem? dashPatternSep;
+		private Label? dashPatternLabel;
+		private Separator? dashPatternSep;
 
 		public ToolBarComboBox? comboBox;
 
@@ -55,26 +55,26 @@ namespace Pinta.Tools
 		/// </summary>
 		/// <param name="tb">The Toolbar to add the DashPatternBox to.</param>
 		/// <returns>null if the DashPatternBox has already been setup; otherwise, returns the DashPatternBox itself.</returns>
-		public Gtk.ComboBoxText? SetupToolbar (Toolbar tb)
+		public Gtk.ComboBoxText? SetupToolbar (Box tb)
 		{
 			if (dashPatternSep == null) {
-				dashPatternSep = new SeparatorToolItem ();
+				dashPatternSep = GtkExtensions.CreateToolBarSeparator ();
 			}
 
-			tb.AppendItem (dashPatternSep);
+			tb.Append (dashPatternSep);
 
 			if (dashPatternLabel == null) {
-				dashPatternLabel = new ToolBarLabel (string.Format (" {0}: ", Translations.GetString ("Dash")));
+				dashPatternLabel = Label.New (string.Format (" {0}: ", Translations.GetString ("Dash")));
 			}
 
-			tb.AppendItem (dashPatternLabel);
+			tb.Append (dashPatternLabel);
 
 			if (comboBox == null) {
 				comboBox = new ToolBarComboBox (50, 0, true,
 					"-", " -", " --", " ---", "  -", "   -", " - --", " - - --------", " - - ---- - ----");
 			}
 
-			tb.AppendItem (comboBox);
+			tb.Append (comboBox);
 
 			if (dashChangeSetup) {
 				return null;
