@@ -138,7 +138,7 @@ namespace Pinta.Core
 			return x >= Left && x <= Right && y >= Top && y <= Bottom;
 		}
 
-		public void Intersect (RectangleI r) => this = Intersect (this, r);
+		public RectangleI Intersect (RectangleI r) => Intersect (this, r);
 
 		public static RectangleI Intersect (in RectangleI a, in RectangleI b)
 		{

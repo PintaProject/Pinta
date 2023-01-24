@@ -50,7 +50,7 @@ namespace Pinta.Effects
 		private ColorBgra ComputeCellColor (int x, int y, ReadOnlySpan<ColorBgra> src_data, int cellSize, Core.RectangleI srcBounds)
 		{
 			Core.RectangleI cell = GetCellBox (x, y, cellSize);
-			cell.Intersect (srcBounds);
+			cell = cell.Intersect (srcBounds);
 
 			int left = cell.Left;
 			int right = cell.Right;
@@ -93,7 +93,7 @@ namespace Pinta.Effects
 
 					for (int x = rect.Left; x <= rect.Right; ++x) {
 						var cellRect = GetCellBox (x, y, cellSize);
-						cellRect.Intersect (dest_bounds);
+						cellRect = cellRect.Intersect (dest_bounds);
 						var color = ComputeCellColor (x, y, src_data, cellSize, src_bounds);
 
 						int xEnd = Math.Min (rect.Right, cellRect.Right);

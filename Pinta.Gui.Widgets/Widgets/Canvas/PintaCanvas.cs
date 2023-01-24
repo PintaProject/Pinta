@@ -154,7 +154,7 @@ namespace Pinta.Gui.Widgets
 			var canvas_bounds = new RectangleI (x, y, document.Workspace.CanvasSize.Width, document.Workspace.CanvasSize.Height);
 
 			if (CairoExtensions.GetClipRectangle (context, out RectangleI expose_rect))
-				canvas_bounds.Intersect (expose_rect);
+				canvas_bounds = canvas_bounds.Intersect (expose_rect);
 
 			if (canvas_bounds.IsEmpty)
 				return;
