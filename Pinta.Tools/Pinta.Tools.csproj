@@ -13,6 +13,7 @@
     <Compile Include="CoreToolsExtension.cs" />
     <Compile Include="Handles/MoveHandle.cs" />
     <Compile Include="Tools/BaseBrushTool.cs" />
+    <Compile Include="Tools/CloneStampTool.cs" />
     <Compile Include="Tools/ColorPickerTool.cs" />
     <Compile Include="Tools/EllipseSelectTool.cs" />
     <Compile Include="Tools/EraserTool.cs" />

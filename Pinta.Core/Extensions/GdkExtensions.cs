@@ -63,11 +63,6 @@ namespace Pinta.Core
 		{
 			return ColorBgra.FromBgr ((byte) (color.Blue * 255 / ushort.MaxValue), (byte) (color.Green * 255 / ushort.MaxValue), (byte) (color.Red * 255 / ushort.MaxValue));
 		}
-
-		public static bool IsNotSet (this Point p)
-		{
-			return p.X == int.MinValue && p.Y == int.MinValue;
-		}
 #endif
 
 		public static bool IsShiftPressed (this ModifierType m)
@@ -80,12 +75,12 @@ namespace Pinta.Core
 		/// </summary>
 		public static bool IsControlPressed (this ModifierType m)
 		{
-#if false // TODO-GTK4 - test which modifier the Cmd key produces in GTK4
-			if (PintaCore.System.OperatingSystem == OS.Mac)
-				return m.HasFlag (ModifierType.Mod2Mask);
-			else
-#endif
-			return m.HasFlag (ModifierType.ControlMask);
+			// The Cmd key is GDK_MOD2_MASK, which is no longer a public constant as of GTK4
+			if (PintaCore.System.OperatingSystem == OS.Mac) {
+				var modifier_val = (uint) m;
+				return (modifier_val & 16) != 0;
+			} else
+				return m.HasFlag (ModifierType.ControlMask);
 		}
 
 		public static bool IsAltPressed (this ModifierType m)
@@ -103,24 +98,6 @@ namespace Pinta.Core
 			return m.HasFlag (ModifierType.Button3Mask);
 		}
 
-#if false // TODO-GTK4
-		public static bool IsShiftPressed (this EventButton ev)
-		{
-			return ev.State.IsShiftPressed ();
-		}
-
-		public static bool IsControlPressed (this EventButton ev)
-		{
-			return ev.State.IsControlPressed ();
-		}
-
-		public static bool IsAltPressed (this EventButton ev)
-		{
-			return ev.State.IsAltPressed ();
-		}
-#endif
-#if false // TODO-GTK4
-
 		/// <summary>
 		/// Returns whether this key is a Ctrl key (or the Cmd key on macOS).
 		/// </summary>
@@ -131,7 +108,6 @@ namespace Pinta.Core
 			else
 				return key == Key.Control_L || key == Key.Control_R;
 		}
-#endif
 
 		/// <summary>
 		/// Returns whether any of the Ctrl/Cmd/Shift/Alt modifiers are active.
@@ -139,48 +115,6 @@ namespace Pinta.Core
 		/// </summary>
 		public static bool HasModifierKey (this ModifierType current_state)
 			=> current_state.IsControlPressed () || current_state.IsShiftPressed () || current_state.IsAltPressed ();
-
-#if false // TODO-GTK4
-		public static Cairo.PointD GetPoint (this EventButton ev)
-		{
-			return new Cairo.PointD (ev.X, ev.Y);
-		}
-
-		/// <summary>
-		/// The implementation of Rectangle.Bottom was changed in 2.12.11 to fix an off-by-one error,
-		/// and this function provides the newer behaviour for backwards compatibility with older versions.
-		/// </summary>
-		public static int GetBottom (this Rectangle r)
-		{
-			return r.Y + r.Height - 1;
-		}
-
-		/// <summary>
-		/// The implementation of Rectangle.Right was changed in 2.12.11 to fix an off-by-one error,
-		/// and this function provides the newer behaviour for backwards compatibility with older versions.
-		/// </summary>
-		public static int GetRight (this Rectangle r)
-		{
-			return r.X + r.Width - 1;
-		}
-
-		public static Cairo.Surface ToSurface (this Pixbuf pixbuf)
-		{
-			var surface = CairoExtensions.CreateImageSurface (Cairo.Format.ARGB32, pixbuf.Width, pixbuf.Height);
-
-			using (var g = new Cairo.Context (surface)) {
-				Gdk.CairoHelper.SetSourcePixbuf (g, pixbuf, 0, 0);
-				g.Paint ();
-			}
-
-			return surface;
-		}
-
-		public static Cairo.Color ToCairoColor (this Gdk.RGBA color)
-		{
-			return new Cairo.Color (color.Red, color.Green, color.Blue, color.Alpha);
-		}
-#endif
 
 #if false // TODO-GTK4
 		/// <summary>
