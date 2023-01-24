@@ -33,8 +33,8 @@ namespace Pinta.Tools
 	public abstract class BaseTransformTool : BaseTool
 	{
 		private readonly int rotate_steps = 32;
-		private readonly Matrix transform = new Matrix ();
-		private Rectangle source_rect;
+		private readonly Matrix transform = CairoExtensions.CreateIdentityMatrix ();
+		private RectangleD source_rect;
 		private PointD original_point;
 		private bool is_dragging = false;
 		private bool is_rotating = false;
@@ -176,7 +176,7 @@ namespace Pinta.Tools
 			return base.OnKeyUp (document, e);
 		}
 
-		protected abstract Rectangle GetSourceRectangle (Document document);
+		protected abstract RectangleD GetSourceRectangle (Document document);
 
 		protected virtual void OnStartTransform (Document document)
 		{

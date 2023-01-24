@@ -14,6 +14,7 @@
     <Compile Include="Dashes/*.cs" />
     <Compile Include="Handles/MoveHandle.cs" />
     <Compile Include="Tools/BaseBrushTool.cs" />
+    <Compile Include="Tools/BaseTransformTool.cs" />
     <Compile Include="Tools/CloneStampTool.cs" />
     <Compile Include="Tools/ColorPickerTool.cs" />
     <Compile Include="Tools/EllipseSelectTool.cs" />
@@ -21,6 +22,8 @@
     <Compile Include="Tools/FreeformShapeTool.cs" />
     <Compile Include="Tools/GradientTool.cs" />
     <Compile Include="Tools/LassoSelectTool.cs" />
+    <Compile Include="Tools/MoveSelectedTool.cs" />
+    <Compile Include="Tools/MoveSelectionTool.cs" />
     <Compile Include="Tools/PaintBrushTool.cs" />
     <Compile Include="Tools/PanTool.cs" />
     <Compile Include="Tools/PencilTool.cs" />

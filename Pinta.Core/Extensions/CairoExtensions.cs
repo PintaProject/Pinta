@@ -1399,17 +1399,6 @@ namespace Pinta.Core
 			matrix.Y0 = dst.Y - (matrix.Yy * src.Y);
 		}
 
-		public static Rectangle FromLTRB (double left, double top, double right, double bottom)
-		{
-			return new Rectangle (Math.Min (left, right), Math.Min (top, bottom),
-					     Math.Abs (right - left), Math.Abs (bottom - top));
-		}
-
-		public static PointD GetCenter (this Cairo.Rectangle rect)
-		{
-			return new PointD (rect.X + rect.Width / 2, rect.Y + rect.Height / 2);
-		}
-
 		/// <summary>
 		/// Computes and returns the Union (largest possible combination) of two Rectangles.
 		/// The two given Rectangles do not need to intersect.
@@ -1952,6 +1941,14 @@ namespace Pinta.Core
 			var matrix = new Matrix (Cairo.Internal.MatrixManagedHandle.Create ());
 			matrix.Init (xx, xy, yx, yy, x0, y0);
 			return matrix;
+		}
+
+		// TODO-GTK4 - this needs to have a proper copy operator in gir.core, or access to the 6 float fields.
+		// Should also audit all usages of Cairo.Matrix which changed from a struct to a class with gir.core
+		public static void InitMatrix (this Matrix m, Matrix other)
+		{
+			m.InitIdentity ();
+			m.Multiply (other);
 		}
 
 		// TODO-GTK4 - this needs to have a proper copy operator in gir.core, or access to the 6 float fields.
