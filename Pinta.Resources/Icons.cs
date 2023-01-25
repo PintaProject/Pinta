@@ -189,8 +189,6 @@ namespace Pinta.Resources
 		public const string ViewGrid = "view-grid";
 		public const string ViewRulers = "view-rulers";
 		public const string ViewZoom100 = "view-zoom-100";
-		public const string ViewZoomIn = "view-zoom-in";
-		public const string ViewZoomOut = "view-zoom-out";
 		public const string ViewZoomSelection = "view-zoom-selection";
 		public const string ViewZoomWindow = "view-zoom-window";
 	}
@@ -213,5 +211,8 @@ namespace Pinta.Resources
 		public const string ResizeNW = "nw-resize";
 		public const string ResizeSE = "se-resize";
 		public const string ResizeSW = "sw-resize";
+
+		public const string ZoomIn = "zoom-in";
+		public const string ZoomOut = "zoom-out";
 	}
 }

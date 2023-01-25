@@ -40,5 +40,6 @@
     <Compile Include="Tools/RoundedRectangleTool.cs" />
     <Compile Include="Tools/SelectTool.cs" />
     <Compile Include="Tools/ShapeTool.cs" />
+    <Compile Include="Tools/ZoomTool.cs" />
   </ItemGroup>
 </Project>
