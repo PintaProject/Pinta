@@ -13,10 +13,4 @@
     <ProjectReference Include="..\..\Pinta.Core\Pinta.Core.csproj" />
   </ItemGroup>
 
-  <!-- TODO-GTK4 - build all files -->
-  <ItemGroup>
-    <Compile Remove="**/*.cs" />
-    <Compile Include="DashPatternTest.cs" />
-  </ItemGroup>
-
 </Project>

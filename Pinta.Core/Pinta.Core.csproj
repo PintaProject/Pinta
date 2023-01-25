@@ -34,6 +34,7 @@
     <Compile Include="Classes/Point.cs" />
     <Compile Include="Classes/Rectangle.cs" />
     <Compile Include="Classes/Re-editable/ReEditableLayer.cs" />
+    <Compile Include="Classes/Re-editable/Text/*.cs" />
     <Compile Include="Classes/ScaleFactor.cs" />
     <Compile Include="Classes/SelectionModeHandler.cs" />
     <Compile Include="Classes/SurfaceDiff.cs" />
@@ -52,16 +53,7 @@
     <Compile Include="EventArgs/ToolEventArgs.cs" />
     <Compile Include="EventArgs/ToolKeyEventArgs.cs" />
     <Compile Include="EventArgs/ToolMouseEventArgs.cs" />
-    <Compile Include="Extensions/CairoExtensions.cs" />
-    <Compile Include="Extensions/GdkExtensions.cs" />
-    <Compile Include="Extensions/GdkKey.cs" />
-    <Compile Include="Extensions/GdkPixbufExtensions.cs" />
-    <Compile Include="Extensions/GioExtensions.cs" />
-    <Compile Include="Extensions/GioStream.cs" />
-    <Compile Include="Extensions/GtkExtensions.cs" />
-    <Compile Include="Extensions/OtherExtensions.cs" />
-    <Compile Include="Extensions/ToolBarComboBox.cs" />
-    <Compile Include="Extensions/ToolBoxButton.cs" />
+    <Compile Include="Extensions/*.cs" />
     <Compile Include="HistoryItems/*.cs" />
     <Compile Remove="HistoryItems/TextHistoryItem.cs" />
     <Compile Include="ImageFormats/*.cs" />

@@ -27,14 +27,14 @@ namespace Pinta.Core
 		private TextPosition currentPos;
 		private TextPosition selectionStart;
 
-		public Pango.FontDescription Font { get; private set; } = new ();
+		public Pango.FontDescription Font { get; private set; } = PangoExtensions.CreateFontDescription ();
 		public TextAlignment Alignment { get; private set; }
 		public bool Underline { get; private set; }
 
 		public TextPosition CurrentPosition { get { return currentPos; } }
 		public int LineCount { get { return lines.Count; } }
 		public TextMode State;
-		public Point Origin { get; set; }
+		public PointI Origin { get; set; }
 
 		public event EventHandler? Modified;
 
@@ -59,7 +59,7 @@ namespace Pinta.Core
 			currentPos = new TextPosition (0, 0);
 			ClearSelection ();
 
-			Origin = Point.Zero;
+			Origin = PointI.Zero;
 
 			OnModified ();
 		}
@@ -79,7 +79,7 @@ namespace Pinta.Core
 			clonedTE.Font = Font.Copy ();
 			clonedTE.Alignment = Alignment;
 			clonedTE.Underline = Underline;
-			clonedTE.Origin = new Point (Origin.X, Origin.Y);
+			clonedTE.Origin = new PointI (Origin.X, Origin.Y);
 
 			//The rest of the variables are calculated on the spot.
 
@@ -318,6 +318,7 @@ namespace Pinta.Core
 			}
 		}
 
+#if false // TODO-GTK4 clipboard
 		public void PerformCopy (Gtk.Clipboard clipboard)
 		{
 			if (HasSelection ()) {
@@ -385,6 +386,7 @@ namespace Pinta.Core
 			OnModified ();
 			return true;
 		}
+#endif
 		#endregion
 
 		#region Private Methods
