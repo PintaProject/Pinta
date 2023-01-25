@@ -1076,42 +1076,89 @@ namespace Pinta.Core
 			return new RectangleD (x1, y1, x2 - x1, y2 - y1);
 		}
 
-#if false // TODO-GTK4
-		// Ported from PDN.
-		public static void FillStencilFromPoint (ImageSurface surface, BitMask stencil, Point start, int tolerance,
-								out Rectangle boundingBox, Cairo.Region limitRegion, bool limitToSelection)
+		// TODO-GTK4 - remove these manual bindings once gir.core has improved bindings for Cairo.Region (https://github.com/gircore/gir.core/pull/621)
+		[StructLayout (LayoutKind.Sequential)]
+		private struct CairoRectangleInt
 		{
-			ReadOnlySpan<ColorBgra> surf_data = surface.GetReadOnlyData ();
+			public int X;
+			public int Y;
+			public int Width;
+			public int Height;
+
+			public RectangleI ToRectangleI () => new RectangleI (X, Y, Width, Height);
+		}
+
+		private const string CairoDllName = "libcairo";
+
+		[DllImport (CairoDllName, EntryPoint = "cairo_region_create_rectangle")]
+		private static extern Cairo.Internal.RegionOwnedHandle RegionCreateRectangle (ref CairoRectangleInt rect);
+
+		[DllImport (CairoDllName, EntryPoint = "cairo_region_contains_point")]
+		private static extern bool RegionContainsPoint (Cairo.Internal.RegionHandle handle, int x, int y);
+
+		[DllImport (CairoDllName, EntryPoint = "cairo_region_xor")]
+		private static extern Status RegionXor (Cairo.Internal.RegionHandle handle, Cairo.Internal.RegionHandle other);
+
+		[DllImport (CairoDllName, EntryPoint = "cairo_region_num_rectangles")]
+		private static extern int RegionNumRectangles (Cairo.Internal.RegionHandle handle);
+
+		[DllImport (CairoDllName, EntryPoint = "cairo_region_get_rectangle")]
+		private static extern int RegionGetRectangle (Cairo.Internal.RegionHandle handle, int i, out CairoRectangleInt rect);
+
+		public static Region CreateRegion (in RectangleI rect)
+		{
+			var cairo_rect = new CairoRectangleInt () { X = rect.X, Y = rect.Y, Width = rect.Width, Height = rect.Height };
+			return new Cairo.Region (RegionCreateRectangle (ref cairo_rect));
+		}
+
+		public static bool ContainsPoint (this Cairo.Region region, int x, int y)
+			=> RegionContainsPoint (region.Handle, x, y);
+
+		private static Status Xor (this Cairo.Region region, Cairo.Region other)
+			=> RegionXor (region.Handle, other.Handle);
+
+		private static void GetRectangle (this Cairo.Region region, int i, out CairoRectangleInt rect)
+			=> RegionGetRectangle (region.Handle, i, out rect);
+
+		private static int GetNumRectangles (this Cairo.Region region)
+			=> RegionNumRectangles (region.Handle);
+
+		// Ported from PDN.
+		public static void FillStencilFromPoint (ImageSurface surface, BitMask stencil, PointI start, int tolerance,
+								out RectangleD boundingBox, Cairo.Region limitRegion, bool limitToSelection)
+		{
+			ReadOnlySpan<ColorBgra> surf_data = surface.GetReadOnlyPixelData ();
 			int surf_width = surface.Width;
 			ColorBgra cmp = surface.GetColorBgra (surf_data, surf_width, start.X, start.Y);
 			int top = int.MaxValue;
 			int bottom = int.MinValue;
 			int left = int.MaxValue;
 			int right = int.MinValue;
-			Cairo.RectangleInt[] scans;
+			RectangleI[] scans;
 
 			stencil.Clear (false);
 
 			if (limitToSelection) {
-				using (Cairo.Region excluded = new Cairo.Region (CairoExtensions.CreateRectangleInt (0, 0, stencil.Width, stencil.Height))) {
-					excluded.Xor (limitRegion);
-					scans = new Cairo.RectangleInt[excluded.NumRectangles];
-					for (int i = 0, n = excluded.NumRectangles; i < n; ++i)
-						scans[i] = excluded.GetRectangle (i);
+				var excluded = CreateRegion (new RectangleI (0, 0, stencil.Width, stencil.Height));
+				excluded.Xor (limitRegion);
+				scans = new RectangleI[excluded.GetNumRectangles ()];
+				for (int i = 0, n = scans.Length; i < n; ++i) {
+					excluded.GetRectangle (i, out var cairo_rect);
+					scans[i] = cairo_rect.ToRectangleI ();
 				}
 			} else {
-				scans = new Cairo.RectangleInt[0];
+				scans = new RectangleI[0];
 			}
 
 			foreach (var rect in scans) {
-				stencil.Set (rect.ToGdkRectangle (), true);
+				stencil.Set (rect, true);
 			}
 
-			var queue = new System.Collections.Generic.Queue<Point> (16);
+			var queue = new System.Collections.Generic.Queue<PointI> (16);
 			queue.Enqueue (start);
 
 			while (queue.Count > 0) {
-				Point pt = queue.Dequeue ();
+				PointI pt = queue.Dequeue ();
 
 				ReadOnlySpan<ColorBgra> row = surf_data.Slice (pt.Y * surf_width, surf_width);
 				int localLeft = pt.X - 1;
@@ -1147,7 +1194,7 @@ namespace Pinta.Core
 							++sright;
 						} else {
 							if (sright - sleft > 0) {
-								queue.Enqueue (new Point (sleft, row));
+								queue.Enqueue (new PointI (sleft, row));
 							}
 
 							++sright;
@@ -1156,7 +1203,7 @@ namespace Pinta.Core
 					}
 
 					if (sright - sleft > 0) {
-						queue.Enqueue (new Point (sleft, row));
+						queue.Enqueue (new PointI (sleft, row));
 					}
 				}
 
@@ -1186,14 +1233,14 @@ namespace Pinta.Core
 			}
 
 			foreach (var rect in scans)
-				stencil.Set (rect.ToGdkRectangle (), false);
+				stencil.Set (rect, false);
 
-			boundingBox = new Rectangle (left, top, right - left + 1, bottom - top + 1);
+			boundingBox = new RectangleD (left, top, right - left + 1, bottom - top + 1);
 		}
 
 		// Ported from PDN
 		public static void FillStencilByColor (ImageSurface surface, BitMask stencil, ColorBgra cmp, int tolerance,
-							      out Rectangle boundingBox, Cairo.Region limitRegion, bool limitToSelection)
+							      out RectangleD boundingBox, Cairo.Region limitRegion, bool limitToSelection)
 		{
 			int surf_width = surface.Width;
 
@@ -1201,27 +1248,28 @@ namespace Pinta.Core
 			int bottom = int.MinValue;
 			int left = int.MaxValue;
 			int right = int.MinValue;
-			Cairo.RectangleInt[] scans;
+			RectangleI[] scans;
 
 			stencil.Clear (false);
 
 			if (limitToSelection) {
-				using (var excluded = new Cairo.Region (CairoExtensions.CreateRectangleInt (0, 0, stencil.Width, stencil.Height))) {
-					excluded.Xor (limitRegion);
-					scans = new Cairo.RectangleInt[excluded.NumRectangles];
-					for (int i = 0, n = excluded.NumRectangles; i < n; ++i)
-						scans[i] = excluded.GetRectangle (i);
+				var excluded = CreateRegion (new RectangleI (0, 0, stencil.Width, stencil.Height));
+				excluded.Xor (limitRegion);
+				scans = new RectangleI[excluded.GetNumRectangles ()];
+				for (int i = 0, n = scans.Length; i < n; ++i) {
+					excluded.GetRectangle (i, out var cairo_rect);
+					scans[i] = cairo_rect.ToRectangleI ();
 				}
 			} else {
-				scans = new Cairo.RectangleInt[0];
+				scans = new RectangleI[0];
 			}
 
 			foreach (var rect in scans)
-				stencil.Set (rect.ToGdkRectangle (), true);
+				stencil.Set (rect, true);
 
 			Parallel.For (0, surface.Height, y => {
 				bool foundPixelInRow = false;
-				ReadOnlySpan<ColorBgra> row = surface.GetReadOnlyData ().Slice (y * surf_width, surf_width);
+				ReadOnlySpan<ColorBgra> row = surface.GetReadOnlyPixelData ().Slice (y * surf_width, surf_width);
 
 				for (int x = 0; x < surf_width; ++x) {
 					if (ColorBgra.ColorsWithinTolerance (cmp, row[x], tolerance)) {
@@ -1251,11 +1299,10 @@ namespace Pinta.Core
 			});
 
 			foreach (var rect in scans)
-				stencil.Set (rect.ToGdkRectangle (), false);
+				stencil.Set (rect, false);
 
-			boundingBox = new Rectangle (left, top, right - left + 1, bottom - top + 1);
+			boundingBox = new RectangleD (left, top, right - left + 1, bottom - top + 1);
 		}
-#endif
 
 		/// <summary>
 		/// Wrapper method to create an ImageSurface and handle allocation failures.

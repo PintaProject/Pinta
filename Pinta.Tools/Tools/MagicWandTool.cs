@@ -48,14 +48,16 @@ namespace Pinta.Tools
 		public override string Name => Translations.GetString ("Magic Wand Select");
 		public override string Icon => Pinta.Resources.Icons.ToolSelectMagicWand;
 		public override string StatusBarText => Translations.GetString ("Click to select region of similar color.");
+#if false // TODO-GTK4 cursors
 		public override Gdk.Cursor DefaultCursor => new Gdk.Cursor (Gdk.Display.Default, Resources.GetIcon ("Cursor.MagicWand.png"), 21, 10);
+#endif
 		public override int Priority => 19;
 
-		protected override void OnBuildToolBar (Gtk.Toolbar tb)
+		protected override void OnBuildToolBar (Gtk.Box tb)
 		{
 			base.OnBuildToolBar (tb);
 
-			tb.AppendItem (SelectionSeparator);
+			tb.Append (SelectionSeparator);
 
 			workspace.SelectionHandler.BuildToolbar (tb, Settings);
 		}
@@ -70,16 +72,15 @@ namespace Pinta.Tools
 			document.Selection.Visible = true;
 		}
 
-		protected override void OnFillRegionComputed (Document document, Point[][] polygonSet)
+		protected override void OnFillRegionComputed (Document document, PointI[][] polygonSet)
 		{
 			var undoAction = new SelectionHistoryItem (Icon, Name);
 			undoAction.TakeSnapshot ();
 
-			document.PreviousSelection.Dispose ();
 			document.PreviousSelection = document.Selection.Clone ();
 
 			document.Selection.SelectionPolygons.Clear ();
-			SelectionModeHandler.PerformSelectionMode (combine_mode, DocumentSelection.ConvertToPolygons (polygonSet));
+			SelectionModeHandler.PerformSelectionMode (document, combine_mode, DocumentSelection.ConvertToPolygons (polygonSet));
 
 			document.History.PushNewItem (undoAction);
 			document.Workspace.Invalidate ();
@@ -92,7 +93,7 @@ namespace Pinta.Tools
 			workspace.SelectionHandler.OnSaveSettings (settings);
 		}
 
-		private SeparatorToolItem? selection_sep;
-		private SeparatorToolItem SelectionSeparator => selection_sep ??= new SeparatorToolItem ();
+		private Separator? selection_sep;
+		private Separator SelectionSeparator => selection_sep ??= GtkExtensions.CreateToolBarSeparator ();
 	}
 }
