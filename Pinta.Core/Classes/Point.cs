@@ -70,6 +70,11 @@ namespace Pinta.Core
 			return Math.Sqrt (X * X + Y * Y);
 		}
 
+		/// <summary>
+		/// Returns a new point, rounded to the nearest integer coordinates.
+		/// </summary>
+		public PointD Rounded () => new PointD (Math.Round (X), Math.Round (Y));
+
 		public static PointD operator + (in PointD a, in PointD b)
 		{
 			return new PointD (a.X + b.X, a.Y + b.Y);

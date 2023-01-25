@@ -27,13 +27,13 @@ namespace Pinta.Core
 			return false;
 		}
 
-		public static Point[][] CreatePolygonSet (this BitMask stencil, Rectangle bounds, int translateX, int translateY)
+		public static PointI[][] CreatePolygonSet (this BitMask stencil, RectangleD bounds, int translateX, int translateY)
 		{
-			List<Point[]> polygons = new List<Point[]> ();
+			var polygons = new List<PointI[]> ();
 
 			if (!stencil.IsEmpty) {
-				Point start = bounds.Location ();
-				List<Point> pts = new List<Point> ();
+				PointI start = bounds.Location ().ToInt ();
+				var pts = new List<PointI> ();
 				int count = 0;
 
 				// find all islands
@@ -48,11 +48,11 @@ namespace Pinta.Core
 
 						++start.X;
 
-						if (start.X >= bounds.GetRight ()) {
+						if (start.X >= bounds.Right) {
 							++start.Y;
 							start.X = (int) bounds.X;
 
-							if (start.Y >= bounds.GetBottom ()) {
+							if (start.Y >= bounds.Bottom) {
 								break;
 							}
 						}
@@ -63,11 +63,11 @@ namespace Pinta.Core
 
 					pts.Clear ();
 
-					Point last = new Point (start.X, start.Y + 1);
-					Point curr = new Point (start.X, start.Y);
-					Point next = curr;
-					Point left = new Point ();
-					Point right = new Point ();
+					PointI last = new (start.X, start.Y + 1);
+					PointI curr = new (start.X, start.Y);
+					PointI next = curr;
+					PointI left = new ();
+					PointI right = new ();
 
 					// trace island outline
 					while (true) {
@@ -104,7 +104,7 @@ namespace Pinta.Core
 							break;
 					}
 
-					Point[] points = pts.ToArray ();
+					PointI[] points = pts.ToArray ();
 					Scanline[] scans = points.GetScans ();
 
 					foreach (Scanline scan in scans)

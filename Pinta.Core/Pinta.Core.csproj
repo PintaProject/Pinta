@@ -59,6 +59,7 @@
     <Compile Include="Extensions/GioExtensions.cs" />
     <Compile Include="Extensions/GioStream.cs" />
     <Compile Include="Extensions/GtkExtensions.cs" />
+    <Compile Include="Extensions/OtherExtensions.cs" />
     <Compile Include="Extensions/ToolBarComboBox.cs" />
     <Compile Include="Extensions/ToolBoxButton.cs" />
     <Compile Include="HistoryItems/*.cs" />
