@@ -64,24 +64,6 @@ namespace Pinta.Core
 
 		public ModifierType State { get; init; }
 
-#if false // TODO-GTK4
-		public static ToolKeyEventArgs FromKeyPressEventArgs (KeyPressEventArgs args)
-		{
-			return new ToolKeyEventArgs {
-				Event = args.Event,
-				Key = args.Event.Key,
-				State = args.Event.State
-			};
-		}
-
-		public static ToolKeyEventArgs FromKeyReleaseEventArgs (KeyReleaseEventArgs args)
-		{
-			return new ToolKeyEventArgs {
-				Event = args.Event,
-				Key = args.Event.Key,
-				State = args.Event.State
-			};
-		}
-#endif
+		public Event? Event { get; init; }
 	}
 }

@@ -49,9 +49,6 @@ namespace Pinta.Tools
 			PintaCore.PaintBrushes.AddPaintBrush (new Brushes.SplatterBrush ());
 			PintaCore.PaintBrushes.AddPaintBrush (new Brushes.SquaresBrush ());
 
-#if false // TODO-GTK4
-			PintaCore.Tools.AddTool (new TextTool (PintaCore.Services));
-#else
 			PintaCore.Tools.AddTool (new MoveSelectedTool (PintaCore.Services));
 			PintaCore.Tools.AddTool (new MoveSelectionTool (PintaCore.Services));
 			PintaCore.Tools.AddTool (new ZoomTool (PintaCore.Services));
@@ -66,6 +63,7 @@ namespace Pinta.Tools
 			PintaCore.Tools.AddTool (new PaintBucketTool (PintaCore.Services));
 			PintaCore.Tools.AddTool (new GradientTool (PintaCore.Services));
 			PintaCore.Tools.AddTool (new ColorPickerTool (PintaCore.Services));
+			PintaCore.Tools.AddTool (new TextTool (PintaCore.Services));
 			PintaCore.Tools.AddTool (new LineCurveTool (PintaCore.Services));
 			PintaCore.Tools.AddTool (new RectangleTool (PintaCore.Services));
 			PintaCore.Tools.AddTool (new RoundedRectangleTool (PintaCore.Services));
@@ -73,7 +71,6 @@ namespace Pinta.Tools
 			PintaCore.Tools.AddTool (new FreeformShapeTool (PintaCore.Services));
 			PintaCore.Tools.AddTool (new CloneStampTool (PintaCore.Services));
 			PintaCore.Tools.AddTool (new RecolorTool (PintaCore.Services));
-#endif
 		}
 
 		public void Uninitialize ()
@@ -84,9 +81,6 @@ namespace Pinta.Tools
 			PintaCore.PaintBrushes.RemoveInstanceOfPaintBrush (typeof (Brushes.SplatterBrush));
 			PintaCore.PaintBrushes.RemoveInstanceOfPaintBrush (typeof (Brushes.SquaresBrush));
 
-#if false // TODO-GTK4
-			PintaCore.Tools.RemoveInstanceOfTool<TextTool> ();
-#else
 			PintaCore.Tools.RemoveInstanceOfTool<MoveSelectedTool> ();
 			PintaCore.Tools.RemoveInstanceOfTool<MoveSelectionTool> ();
 			PintaCore.Tools.RemoveInstanceOfTool<ZoomTool> ();
@@ -101,6 +95,7 @@ namespace Pinta.Tools
 			PintaCore.Tools.RemoveInstanceOfTool<PaintBucketTool> ();
 			PintaCore.Tools.RemoveInstanceOfTool<GradientTool> ();
 			PintaCore.Tools.RemoveInstanceOfTool<ColorPickerTool> ();
+			PintaCore.Tools.RemoveInstanceOfTool<TextTool> ();
 			PintaCore.Tools.RemoveInstanceOfTool<LineCurveTool> ();
 			PintaCore.Tools.RemoveInstanceOfTool<RectangleTool> ();
 			PintaCore.Tools.RemoveInstanceOfTool<RoundedRectangleTool> ();
@@ -108,7 +103,6 @@ namespace Pinta.Tools
 			PintaCore.Tools.RemoveInstanceOfTool<FreeformShapeTool> ();
 			PintaCore.Tools.RemoveInstanceOfTool<CloneStampTool> ();
 			PintaCore.Tools.RemoveInstanceOfTool<RecolorTool> ();
-#endif
 		}
 		#endregion
 	}

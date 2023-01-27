@@ -51,20 +51,16 @@ namespace Pinta.Core
 		//Call the base class constructor and setup the engines.
 		public UserLayer (ImageSurface surface, bool hidden, double opacity, string name) : base (surface, hidden, opacity, name)
 		{
-#if false // TODO-GTK4 - enable Pango-related code and the text engine
 			tEngine = new TextEngine ();
-#endif
 			TextLayer = new ReEditableLayer (this);
 		}
 
-#if false // TODO-GTK4
 		//Stores most of the editable text's data, including the text itself.
 		public TextEngine tEngine;
 
 		//Rectangular boundary surrounding the editable text.
-		public Gdk.Rectangle textBounds = Gdk.Rectangle.Zero;
-		public Gdk.Rectangle previousTextBounds = Gdk.Rectangle.Zero;
-#endif
+		public RectangleI textBounds = RectangleI.Zero;
+		public RectangleI previousTextBounds = RectangleI.Zero;
 
 		public override void ApplyTransform (Matrix xform, Size old_size, Size new_size)
 		{

@@ -225,10 +225,11 @@ namespace Pinta.Gui.Widgets
 			QueueResize ();
 		}
 
-		public bool DoKeyPressEvent (Gtk.EventControllerKey.KeyPressedSignalArgs args)
+		public bool DoKeyPressEvent (Gtk.EventControllerKey controller, Gtk.EventControllerKey.KeyPressedSignalArgs args)
 		{
 			// Give the current tool a chance to handle the key press
 			var tool_args = new ToolKeyEventArgs () {
+				Event = controller.GetCurrentEvent (),
 				Key = args.GetKey (),
 				State = args.State
 			};
@@ -236,9 +237,10 @@ namespace Pinta.Gui.Widgets
 			return PintaCore.Tools.DoKeyDown (document, tool_args);
 		}
 
-		public bool DoKeyReleaseEvent (Gtk.EventControllerKey.KeyReleasedSignalArgs args)
+		public bool DoKeyReleaseEvent (Gtk.EventControllerKey controller, Gtk.EventControllerKey.KeyReleasedSignalArgs args)
 		{
 			var tool_args = new ToolKeyEventArgs () {
+				Event = controller.GetCurrentEvent (),
 				Key = args.GetKey (),
 				State = args.State
 			};

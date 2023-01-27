@@ -90,6 +90,8 @@ namespace Pinta
 			// For testing a dark variant of the theme.
 			//Gtk.Settings.Default.SetProperty("gtk-application-prefer-dark-theme", new GLib.Value(true));
 
+			Pango.Module.Initialize ();
+			PangoCairo.Module.Initialize ();
 			var app = Adw.Application.New ("com.github.PintaProject.Pinta", Gio.ApplicationFlags.NonUnique);
 
 			// Add our icons to the search path.

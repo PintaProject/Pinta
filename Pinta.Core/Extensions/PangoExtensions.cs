@@ -41,6 +41,12 @@ namespace Pinta.Core
 		public static FontDescription Copy (this FontDescription desc)
 			=> new FontDescription (Pango.Internal.FontDescription.Copy (desc.Handle));
 
+		public static void SetWeight (this FontDescription desc, Weight weight)
+			=> Pango.Internal.FontDescription.SetWeight (desc.Handle, weight);
+
+		public static void SetStyle (this FontDescription desc, Style style)
+			=> Pango.Internal.FontDescription.SetStyle (desc.Handle, style);
+
 		public static void GetCursorPos (this Layout layout, int index, out RectangleI strong_pos, out RectangleI weak_pos)
 		{
 			InternalGetCursorPos (layout.Handle, index, out var strong_pos_pango, out var weak_pos_pango);

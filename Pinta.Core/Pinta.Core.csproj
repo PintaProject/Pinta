@@ -7,6 +7,7 @@
     <PackageReference Include="SharpZipLib" Version="1.4.2" />
     <PackageReference Include="ParagonClipper" Version="6.4.2" />
     <PackageReference Include="GirCore.Adw-1" Version="0.2.0" />
+    <PackageReference Include="GirCore.PangoCairo-1.0" Version="0.2.0" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Pinta.Resources\Pinta.Resources.csproj" />
@@ -55,7 +56,6 @@
     <Compile Include="EventArgs/ToolMouseEventArgs.cs" />
     <Compile Include="Extensions/*.cs" />
     <Compile Include="HistoryItems/*.cs" />
-    <Compile Remove="HistoryItems/TextHistoryItem.cs" />
     <Compile Include="ImageFormats/*.cs" />
     <Compile Include="Managers/*.cs" />
     <Compile Include="PaletteFormats/*.cs" />

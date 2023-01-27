@@ -159,6 +159,8 @@ namespace Pinta.Core
 			return x >= Left && x <= Right && y >= Top && y <= Bottom;
 		}
 
+		public bool Contains (in PointI pt) => Contains (pt.X, pt.Y);
+
 		public RectangleI Intersect (RectangleI r) => Intersect (this, r);
 
 		public static RectangleI Intersect (in RectangleI a, in RectangleI b)

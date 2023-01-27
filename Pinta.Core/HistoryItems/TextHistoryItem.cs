@@ -40,7 +40,7 @@ namespace Pinta.Core
 		ImageSurface? userSurface;
 
 		TextEngine tEngine;
-		Gdk.Rectangle textBounds;
+		RectangleI textBounds;
 
 		/// <summary>
 		/// A history item for when text is created, edited, and/or finalized.
@@ -62,8 +62,6 @@ namespace Pinta.Core
 
 			if (text_surface_diff == null) {
 				textSurface = passedTextSurface;
-			} else {
-				(passedTextSurface as IDisposable).Dispose ();
 			}
 
 
@@ -71,14 +69,12 @@ namespace Pinta.Core
 
 			if (user_surface_diff == null) {
 				userSurface = passedUserSurface;
-			} else {
-				(passedUserSurface as IDisposable).Dispose ();
 			}
 
 
 			tEngine = passedTextEngine;
 
-			textBounds = new Gdk.Rectangle (userLayer.textBounds.X, userLayer.textBounds.Y, userLayer.textBounds.Width, userLayer.textBounds.Height);
+			textBounds = new RectangleI (userLayer.textBounds.X, userLayer.textBounds.Y, userLayer.textBounds.Width, userLayer.textBounds.Height);
 		}
 
 		public override void Undo ()
@@ -132,7 +128,7 @@ namespace Pinta.Core
 
 			//Store the old text data temporarily.
 			TextEngine oldTEngine = tEngine;
-			Gdk.Rectangle oldTextBounds = textBounds;
+			RectangleI oldTextBounds = textBounds;
 
 			//Swap half of the data.
 			tEngine = userLayer.tEngine;
@@ -141,17 +137,6 @@ namespace Pinta.Core
 			//Swap the other half.
 			userLayer.tEngine = oldTEngine;
 			userLayer.textBounds = oldTextBounds;
-		}
-
-		public override void Dispose ()
-		{
-			// Free up native surface
-			if (textSurface != null)
-				(textSurface as IDisposable).Dispose ();
-
-			// Free up native surface
-			if (userSurface != null)
-				(userSurface as IDisposable).Dispose ();
 		}
 	}
 }

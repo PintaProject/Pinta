@@ -126,6 +126,11 @@ namespace Pinta.Core
 			return slider;
 		}
 
+		public static void Toggle (this Gtk.ToggleButton button)
+		{
+			button.Active = !button.Active;
+		}
+
 		public static void AddAction (this Gtk.Application app, Command action)
 		{
 			app.AddAction (action.Action);

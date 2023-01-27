@@ -228,7 +228,7 @@ namespace Pinta
 				var canvas_window = ((PintaCanvas) PintaCore.Workspace.ActiveWorkspace.Canvas).CanvasWindow;
 
 				if ((canvas_window.Canvas.HasFocus || canvas_window.IsMouseOnCanvas) &&
-				     canvas_window.Canvas.DoKeyPressEvent (args)) {
+				     canvas_window.Canvas.DoKeyPressEvent (controller, args)) {
 					return;
 				}
 			}
@@ -253,7 +253,7 @@ namespace Pinta
 			var canvas_window = ((PintaCanvas) PintaCore.Workspace.ActiveWorkspace.Canvas).CanvasWindow;
 
 			if (canvas_window.Canvas.HasFocus || canvas_window.IsMouseOnCanvas)
-				canvas_window.Canvas.DoKeyReleaseEvent (args);
+				canvas_window.Canvas.DoKeyReleaseEvent (controller, args);
 		}
 
 		private bool SendToFocusWidget (Gtk.EventControllerKey key_controller)
