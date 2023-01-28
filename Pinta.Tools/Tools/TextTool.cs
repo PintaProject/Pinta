@@ -11,6 +11,7 @@
 using System;
 using System.Collections.Generic;
 using System.Text;
+using System.Threading.Tasks;
 using Gdk;
 using Gtk;
 using Pinta.Core;
@@ -699,15 +700,11 @@ namespace Pinta.Tools
 						StopEditing (false);
 						return true;
 					case Gdk.Key.Insert:
-#if false // TODO-GTK4 clipboard
 						if (e.IsShiftPressed) {
-							Gtk.Clipboard cb = Gtk.Clipboard.Get (Gdk.Atom.Intern ("CLIPBOARD", false));
-							CurrentTextEngine.PerformPaste (cb);
+							CurrentTextEngine.PerformPaste (GdkExtensions.GetDefaultClipboard ()).Wait ();
 						} else if (e.IsControlPressed) {
-							Gtk.Clipboard cb = Gtk.Clipboard.Get (Gdk.Atom.Intern ("CLIPBOARD", false));
-							CurrentTextEngine.PerformCopy (cb);
+							CurrentTextEngine.PerformCopy (GdkExtensions.GetDefaultClipboard ());
 						}
-#endif
 						break;
 					default:
 						if (e.IsControlPressed) {
@@ -1082,18 +1079,18 @@ namespace Pinta.Tools
 		#endregion
 		#region Copy/Paste
 
-#if false // TODO-GTK4 clipboard
-		protected override bool OnHandlePaste (Document document, Clipboard cb)
+		protected override async Task<bool> OnHandlePaste (Document document, Clipboard cb)
 		{
 			if (!is_editing) {
 				return false;
 			}
 
-			if (!CurrentTextEngine.PerformPaste (cb)) {
-				return false;
+			if (await CurrentTextEngine.PerformPaste (cb)) {
+				RedrawText (true, true);
+				return true;
 			}
-			RedrawText (true, true);
-			return true;
+
+			return false;
 		}
 
 		protected override bool OnHandleCopy (Document document, Clipboard cb)
@@ -1114,7 +1111,6 @@ namespace Pinta.Tools
 			RedrawText (true, true);
 			return true;
 		}
-#endif
 
 		#endregion#endregion
 	}

@@ -49,9 +49,11 @@ namespace Pinta
 			action_handlers.Add (new NewScreenshotAction ());
 			action_handlers.Add (new PrintDocumentAction ());
 			action_handlers.Add (new ModifyCompressionAction ());
+#endif
 
 			// Edit
 			action_handlers.Add (new PasteAction ());
+#if false // TODO-GTK4
 			action_handlers.Add (new PasteIntoNewLayerAction ());
 			action_handlers.Add (new PasteIntoNewImageAction ());
 			action_handlers.Add (new ResizePaletteAction ());

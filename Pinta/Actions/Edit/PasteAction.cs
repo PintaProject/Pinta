@@ -49,10 +49,10 @@ namespace Pinta.Actions
 			var doc = PintaCore.Workspace.ActiveDocument;
 
 			// Get the scroll position in canvas co-ordinates
-			var view = (Viewport) doc.Workspace.Canvas.Parent;
+			var view = (Viewport) doc.Workspace.Canvas.Parent!;
 			var canvasPos = doc.Workspace.WindowPointToCanvas (
-				view.Hadjustment.Value,
-				view.Vadjustment.Value);
+				view.Hadjustment!.Value,
+				view.Vadjustment!.Value);
 
 			// Paste into the active document.
 			// The 'false' argument indicates that paste should be
@@ -71,25 +71,26 @@ namespace Pinta.Actions
 		/// <param name="y">Optional. Location within image to paste to.
 		/// Position will be adjusted if pasted image would hang
 		/// over right or bottom edges of canvas.</param>
-		public static void Paste (Document doc, bool toNewLayer, int x = 0, int y = 0)
+		public static async void Paste (Document doc, bool toNewLayer, int x = 0, int y = 0)
 		{
 			// Create a compound history item for recording several
 			// operations so that they can all be undone/redone together.
 			var history_text = toNewLayer ? Translations.GetString ("Paste Into New Layer") : Translations.GetString ("Paste");
 			var paste_action = new CompoundHistoryItem (Resources.StandardIcons.EditPaste, history_text);
 
-			var cb = Clipboard.Get (Gdk.Atom.Intern ("CLIPBOARD", false));
+			var cb = GdkExtensions.GetDefaultClipboard ();
 
 			// See if the current tool wants to handle the paste
 			// operation (e.g., the text tool could paste text)
 			if (!toNewLayer) {
-				if (PintaCore.Tools.DoHandlePaste (doc, cb))
+				if (await PintaCore.Tools.DoHandlePaste (doc, cb))
 					return;
 			}
 
 			// Commit any unfinished tool actions
 			PintaCore.Tools.Commit ();
 
+#if false // TODO-GTK4 clipboard
 			// Don't dispose this, as we're going to give it to the history
 			Gdk.Pixbuf? cbImage = null;
 
@@ -152,8 +153,10 @@ namespace Pinta.Actions
 
 			paste_action.Push (new PasteHistoryItem (cbImage, old_selection));
 			doc.History.PushNewItem (paste_action);
+#endif
 		}
 
+#if false // TODO-GTK4
 		public static void ShowClipboardEmptyDialog ()
 		{
 			var primary = Translations.GetString ("Image cannot be pasted");
@@ -174,5 +177,6 @@ namespace Pinta.Actions
 				new DialogButton (Translations.GetString ("Don't change canvas size"), ResponseType.Reject),
 				new DialogButton (Stock.Cancel, ResponseType.Cancel));
 		}
+#endif
 	}
 }

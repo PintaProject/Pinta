@@ -28,6 +28,7 @@ using System;
 using System.Collections.Generic;
 using System.Diagnostics.CodeAnalysis;
 using System.Linq;
+using System.Threading.Tasks;
 using Gdk;
 using Gtk;
 
@@ -272,7 +273,7 @@ namespace Pinta.Core
 		public bool DoKeyUp (Document document, ToolKeyEventArgs args) => CurrentTool?.DoKeyUp (document, args) ?? false;
 
 		public void DoAfterSave (Document document) => CurrentTool?.DoAfterSave (document);
-		public bool DoHandlePaste (Document document, Clipboard clipboard) => CurrentTool?.DoHandlePaste (document, clipboard) ?? false;
+		public Task<bool> DoHandlePaste (Document document, Clipboard clipboard) => CurrentTool?.DoHandlePaste (document, clipboard) ?? Task.FromResult (false);
 
 		public IEnumerator<BaseTool> GetEnumerator () => tools.GetEnumerator ();
 

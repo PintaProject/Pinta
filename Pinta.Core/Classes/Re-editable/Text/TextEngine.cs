@@ -15,6 +15,7 @@ using System.Linq;
 using System.Reflection;
 using System.Text;
 using System.Text.RegularExpressions;
+using System.Threading.Tasks;
 using Gdk;
 using Pinta.Core;
 
@@ -318,8 +319,7 @@ namespace Pinta.Core
 			}
 		}
 
-#if false // TODO-GTK4 clipboard
-		public void PerformCopy (Gtk.Clipboard clipboard)
+		public void PerformCopy (Gdk.Clipboard clipboard)
 		{
 			if (HasSelection ()) {
 				StringBuilder strbld = new StringBuilder ();
@@ -334,12 +334,12 @@ namespace Pinta.Core
 				});
 				strbld.Remove (strbld.Length - Environment.NewLine.Length, Environment.NewLine.Length);
 
-				clipboard.Text = strbld.ToString ();
+				clipboard.SetText (strbld.ToString ());
 			} else
-				clipboard.Clear ();
+				clipboard.SetText (string.Empty);
 		}
 
-		public void PerformCut (Gtk.Clipboard clipboard)
+		public void PerformCut (Gdk.Clipboard clipboard)
 		{
 			PerformCopy (clipboard);
 			if (HasSelection ()) {
@@ -350,13 +350,9 @@ namespace Pinta.Core
 		/// <summary>
 		/// Pastes text from the clipboard.
 		/// </summary>
-		/// <returns>
-		/// <c>true</c>, if the paste was successfully performed, <c>false</c> otherwise.
-		/// </returns>
-		public bool PerformPaste (Gtk.Clipboard clipboard)
+		public async Task<bool> PerformPaste (Gdk.Clipboard clipboard)
 		{
-			string txt = string.Empty;
-			txt = clipboard.WaitForText ();
+			string? txt = await clipboard.ReadTextAsync ();
 			if (String.IsNullOrEmpty (txt))
 				return false;
 
@@ -384,9 +380,9 @@ namespace Pinta.Core
 			State = TextMode.Uncommitted;
 
 			OnModified ();
+
 			return true;
 		}
-#endif
 		#endregion
 
 		#region Private Methods

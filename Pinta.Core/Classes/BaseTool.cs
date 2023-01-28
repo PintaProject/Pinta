@@ -27,6 +27,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Threading.Tasks;
 using Gdk;
 using Gtk;
 
@@ -231,9 +232,9 @@ namespace Pinta.Core
 		/// Return 'true' if the Cut is handled, or 'false' to allow other
 		/// components to handle it.
 		/// </summary>
-		protected virtual bool OnHandlePaste (Document document, Clipboard cb)
+		protected virtual Task<bool> OnHandlePaste (Document document, Clipboard cb)
 		{
-			return false;
+			return Task.FromResult (false);
 		}
 
 		/// <summary>
@@ -400,7 +401,7 @@ namespace Pinta.Core
 
 		internal bool DoHandleCut (Document document, Clipboard clipboard) => OnHandleCut (document, clipboard);
 
-		internal bool DoHandlePaste (Document document, Clipboard clipboard) => OnHandlePaste (document, clipboard);
+		internal Task<bool> DoHandlePaste (Document document, Clipboard clipboard) => OnHandlePaste (document, clipboard);
 
 		internal bool DoHandleRedo (Document document) => OnHandleRedo (document);
 

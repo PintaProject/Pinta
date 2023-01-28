@@ -25,6 +25,7 @@
 // THE SOFTWARE.
 
 using System;
+using System.Threading.Tasks;
 using Gdk;
 using GdkPixbuf;
 
@@ -224,5 +225,26 @@ namespace Pinta.Core
 			window.GetDevicePosition (pointer, out x, out y, out mask);
 		}
 #endif
+
+		// TODO-GTK4 - need gir.core async bindings for Gdk.Clipboard
+		public static Task<string?> ReadTextAsync (this Gdk.Clipboard clipboard)
+		{
+			var tcs = new TaskCompletionSource<string?> ();
+
+			Gdk.Internal.Clipboard.ReadTextAsync (clipboard.Handle, IntPtr.Zero, (_, args, _) => {
+				GLib.Internal.ErrorOwnedHandle error;
+				string? result = Gdk.Internal.Clipboard.ReadTextFinish (clipboard.Handle, args, out error);
+				GLib.Error.ThrowOnError (error);
+
+				tcs.SetResult (result);
+			}, IntPtr.Zero);
+
+			return tcs.Task;
+		}
+
+		/// <summary>
+		/// Helper function to return the clipboard for the default display.
+		/// </summary>
+		public static Gdk.Clipboard GetDefaultClipboard () => Gdk.Display.GetDefault ()!.GetClipboard ();
 	}
 }

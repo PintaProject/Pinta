@@ -264,13 +264,13 @@ namespace Pinta.Core
 
 		private void HandlerPintaCoreActionsEditCopyActivated (object sender, EventArgs e)
 		{
-#if false // TODO-GTK4 clipboard
 			Document doc = PintaCore.Workspace.ActiveDocument;
 
-			Gtk.Clipboard cb = Gtk.Clipboard.Get (Gdk.Atom.Intern ("CLIPBOARD", false));
+			var cb = GdkExtensions.GetDefaultClipboard ();
 			if (PintaCore.Tools.CurrentTool?.DoHandleCopy (doc, cb) == true)
 				return;
 
+#if false // TODO-GTK4 clipboard
 			PintaCore.Tools.Commit ();
 
 			using (ImageSurface src = doc.Layers.GetClippedLayer (doc.Layers.CurrentUserLayerIndex)) {
