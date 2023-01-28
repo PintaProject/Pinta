@@ -46,13 +46,18 @@ namespace Pinta.Actions
 
 		private void Activated (object sender, EventArgs e)
 		{
-			using var dialog = new SpinButtonEntryDialog (Translations.GetString ("Resize Palette"),
+			var dialog = new SpinButtonEntryDialog (Translations.GetString ("Resize Palette"),
 					PintaCore.Chrome.MainWindow, Translations.GetString ("New palette size:"), 1, 96,
 					PintaCore.Palette.CurrentPalette.Count);
 
-			if (dialog.Run () == (int) ResponseType.Ok) {
-				PintaCore.Palette.CurrentPalette.Resize (dialog.GetValue ());
-			}
+			dialog.OnResponse += (_, args) => {
+				if (args.ResponseId == (int) ResponseType.Ok)
+					PintaCore.Palette.CurrentPalette.Resize (dialog.GetValue ());
+
+				dialog.Destroy ();
+			};
+
+			dialog.Present ();
 		}
 	}
 }
