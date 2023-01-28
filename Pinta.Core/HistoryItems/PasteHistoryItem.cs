@@ -32,12 +32,12 @@ namespace Pinta.Core
 {
 	public class PasteHistoryItem : BaseHistoryItem
 	{
-		private GdkPixbuf.Pixbuf paste_image;
+		private Cairo.ImageSurface paste_image;
 		private DocumentSelection old_selection;
 
 		public override bool CausesDirty { get { return true; } }
 
-		public PasteHistoryItem (GdkPixbuf.Pixbuf pasteImage, DocumentSelection oldSelection)
+		public PasteHistoryItem (Cairo.ImageSurface pasteImage, DocumentSelection oldSelection)
 		{
 			Text = Translations.GetString ("Paste");
 			Icon = Resources.StandardIcons.EditPaste;
@@ -55,14 +55,13 @@ namespace Pinta.Core
 			doc.Layers.ShowSelectionLayer = true;
 
 			var g = new Cairo.Context (doc.Layers.SelectionLayer.Surface);
-			g.DrawPixbuf (paste_image, 0, 0);
+			g.SetSourceSurface (paste_image, 0, 0);
+			g.Paint ();
 
 			Swap ();
 
 			PintaCore.Workspace.Invalidate ();
-#if false // TODO-GTK4 - re-enable once tools are built
 			PintaCore.Tools.SetCurrentTool ("MoveSelectedTool");
-#endif
 		}
 
 		public override void Undo ()

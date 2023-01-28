@@ -242,9 +242,56 @@ namespace Pinta.Core
 			return tcs.Task;
 		}
 
+		// TODO-GTK4 - need gir.core async bindings for Gdk.Clipboard
+		public static Task<Texture?> ReadTextureAsync (this Gdk.Clipboard clipboard)
+		{
+			var tcs = new TaskCompletionSource<Texture?> ();
+
+			Gdk.Internal.Clipboard.ReadTextureAsync (clipboard.Handle, IntPtr.Zero, (_, args, _) => {
+				GLib.Internal.ErrorOwnedHandle error;
+				IntPtr result = Gdk.Internal.Clipboard.ReadTextureFinish (clipboard.Handle, args, out error);
+				GLib.Error.ThrowOnError (error);
+
+				tcs.SetResult (result != IntPtr.Zero ? new TextureWrapper (result, true) : null);
+			}, IntPtr.Zero);
+
+			return tcs.Task;
+		}
+
+		internal class TextureWrapper : Gdk.Texture
+		{
+			internal TextureWrapper (IntPtr ptr, bool ownedRef) : base (ptr, ownedRef)
+			{
+			}
+		}
+
+		/// <summary>
+		/// Helper function to set the clipboard's contents to an image.
+		/// </summary>
+		public static void SetImage (this Gdk.Clipboard clipboard, Cairo.ImageSurface surf)
+			=> clipboard.SetTexture (Gdk.Texture.NewForPixbuf (surf.ToPixbuf ()));
+
 		/// <summary>
 		/// Helper function to return the clipboard for the default display.
 		/// </summary>
 		public static Gdk.Clipboard GetDefaultClipboard () => Gdk.Display.GetDefault ()!.GetClipboard ();
+
+		/// <summary>
+		/// Convert a texture to a Cairo surface.
+		/// </summary>
+		public static Cairo.ImageSurface ToSurface (this Gdk.Texture texture)
+		{
+			var surf = CairoExtensions.CreateImageSurface (Cairo.Format.Argb32, texture.Width, texture.Height);
+			Span<byte> surf_data = surf.GetData ();
+
+			// TODO-GTK4 - need gir.core bindings for this.
+			var buffer = new byte[surf_data.Length];
+			Gdk.Internal.Texture.Download (texture.Handle, buffer, (uint) surf.Stride);
+
+			buffer.CopyTo (surf_data);
+			surf.MarkDirty ();
+
+			return surf;
+		}
 	}
 }

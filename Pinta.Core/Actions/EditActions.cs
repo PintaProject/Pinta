@@ -270,62 +270,50 @@ namespace Pinta.Core
 			if (PintaCore.Tools.CurrentTool?.DoHandleCopy (doc, cb) == true)
 				return;
 
-#if false // TODO-GTK4 clipboard
 			PintaCore.Tools.Commit ();
 
-			using (ImageSurface src = doc.Layers.GetClippedLayer (doc.Layers.CurrentUserLayerIndex)) {
+			ImageSurface src = doc.Layers.GetClippedLayer (doc.Layers.CurrentUserLayerIndex);
 
-				Gdk.Rectangle rect = doc.GetSelectedBounds (true);
-				if (rect.Width == 0 || rect.Height == 0)
-					return;
+			RectangleI rect = doc.GetSelectedBounds (true);
+			if (rect.IsEmpty)
+				return;
 
-				ImageSurface dest = CairoExtensions.CreateImageSurface (Format.Argb32, rect.Width, rect.Height);
+			ImageSurface dest = CairoExtensions.CreateImageSurface (Format.Argb32, rect.Width, rect.Height);
 
-				using (Context g = new Context (dest)) {
-					g.SetSourceSurface (src, -rect.X, -rect.Y);
-					g.Paint ();
-				}
+			Context g = new Context (dest);
+			g.SetSourceSurface (src, -rect.X, -rect.Y);
+			g.Paint ();
 
-				cb.Image = dest.ToPixbuf ();
-
-				(dest as IDisposable).Dispose ();
-			}
-#endif
+			cb.SetImage (dest);
 		}
 
 		private void HandlerPintaCoreActionsEditCopyMergedActivated (object sender, EventArgs e)
 		{
-#if false // TODO-GTK4 clipboard
-			var cb = Gtk.Clipboard.Get (Gdk.Atom.Intern ("CLIPBOARD", false));
+			var cb = GdkExtensions.GetDefaultClipboard ();
 			var doc = PintaCore.Workspace.ActiveDocument;
 
 			PintaCore.Tools.Commit ();
 
 			// Get our merged ("flattened") image
-			using (var src = doc.GetFlattenedImage (/* clip_to_selection */ true)) {
-				var rect = doc.GetSelectedBounds (true);
+			var src = doc.GetFlattenedImage (/* clip_to_selection */ true);
+			var rect = doc.GetSelectedBounds (true);
 
-				// Copy it to a correctly sized surface 
-				using (var dest = CairoExtensions.CreateImageSurface (Format.Argb32, rect.Width, rect.Height)) {
+			// Copy it to a correctly sized surface 
+			var dest = CairoExtensions.CreateImageSurface (Format.Argb32, rect.Width, rect.Height);
 
-					using (Context g = new Context (dest)) {
-						g.SetSourceSurface (src, -rect.X, -rect.Y);
-						g.Paint ();
-					}
+			var g = new Context (dest);
+			g.SetSourceSurface (src, -rect.X, -rect.Y);
+			g.Paint ();
 
-					// Give it to the clipboard
-					cb.Image = dest.ToPixbuf ();
-				}
-			}
-#endif
+			// Give it to the clipboard
+			cb.SetImage (dest);
 		}
 
 		private void HandlerPintaCoreActionsEditCutActivated (object sender, EventArgs e)
 		{
-#if false // TODO-GTK4 clipboard
 			var doc = PintaCore.Workspace.ActiveDocument;
 
-			Gtk.Clipboard cb = Gtk.Clipboard.Get (Gdk.Atom.Intern ("CLIPBOARD", false));
+			Gdk.Clipboard cb = GdkExtensions.GetDefaultClipboard ();
 			if (PintaCore.Tools.CurrentTool?.DoHandleCut (doc, cb) == true)
 				return;
 			PintaCore.Tools.Commit ();
@@ -335,7 +323,6 @@ namespace Pinta.Core
 
 			// Erase selection
 			HandlePintaCoreActionsEditEraseSelectionActivated ("Cut", e);
-#endif
 		}
 
 		private void HandlerPintaCoreActionsEditUndoActivated (object sender, EventArgs e)

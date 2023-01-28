@@ -27,6 +27,7 @@
 using System;
 using System.Linq;
 using System.Runtime.InteropServices;
+using System.Threading.Tasks;
 using Gtk;
 
 namespace Pinta.Core
@@ -425,6 +426,20 @@ namespace Pinta.Core
 			loop.Run ();
 
 			return response;
+		}
+
+		// TODO-GTK4 replace with adw_message_dialog_choose() once adwaita 1.3 is available
+		public static Task<string> RunAsync (this Adw.MessageDialog dialog)
+		{
+			var tcs = new TaskCompletionSource<string> ();
+
+			dialog.OnResponse += (_, args) => {
+				tcs.SetResult (args.Response);
+			};
+
+			dialog.Show ();
+
+			return tcs.Task;
 		}
 
 		// TODO-GTK4 - gir.core does not yet generate bindings for record methods
