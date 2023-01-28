@@ -48,11 +48,11 @@ namespace Pinta.Actions
 			var doc = PintaCore.Workspace.ActiveDocument;
 
 			// Get the scroll position in canvas co-ordinates
-			var view = (Viewport) doc.Workspace.Canvas.Parent;
+			var view = (Viewport) doc.Workspace.Canvas.Parent!;
 
 			var canvasPos = doc.Workspace.WindowPointToCanvas (
-				view.Hadjustment.Value,
-				view.Vadjustment.Value);
+				view.Hadjustment!.Value,
+				view.Vadjustment!.Value);
 
 			// Paste into the active document.
 			// The 'true' argument indicates that paste should be

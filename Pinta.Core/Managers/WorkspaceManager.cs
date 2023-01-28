@@ -190,12 +190,13 @@ namespace Pinta.Core
 		/// Creates a new Document with a specified image as content.
 		/// Primarily used for Paste Into New Image.
 		/// </summary>
-		public Document NewDocumentFromImage (GdkPixbuf.Pixbuf image)
+		public Document NewDocumentFromImage (Cairo.ImageSurface image)
 		{
 			var doc = NewDocument (new Size (image.Width, image.Height), new Color (0, 0, 0, 0));
 
 			var g = new Context (doc.Layers[0].Surface);
-			g.DrawPixbuf (image, 0, 0);
+			g.SetSourceSurface (image, 0, 0);
+			g.Paint ();
 
 			// A normal document considers the "New Image" history to not be dirty, as it's just a
 			// blank background. We put an image there, so we should try to save if the user closes it.

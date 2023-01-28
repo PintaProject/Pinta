@@ -53,9 +53,9 @@ namespace Pinta
 
 			// Edit
 			action_handlers.Add (new PasteAction ());
-#if false // TODO-GTK4
 			action_handlers.Add (new PasteIntoNewLayerAction ());
 			action_handlers.Add (new PasteIntoNewImageAction ());
+#if false // TODO-GTK4
 			action_handlers.Add (new ResizePaletteAction ());
 #endif
 			action_handlers.Add (new AddinManagerAction ());

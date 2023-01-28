@@ -25,6 +25,7 @@
 // THE SOFTWARE.
 
 using System;
+using System.Threading.Tasks;
 using Pinta.Core;
 
 namespace Pinta.Actions
@@ -43,7 +44,7 @@ namespace Pinta.Actions
 		}
 		#endregion
 
-		private void Activated (object sender, EventArgs e)
+		private async void Activated (object sender, EventArgs e)
 		{
 			int imgWidth = 0;
 			int imgHeight = 0;
@@ -52,7 +53,8 @@ namespace Pinta.Actions
 
 			// Try to get the dimensions of an image on the clipboard
 			// for the initial width and height values on the NewImageDialog
-			if (!GetClipboardImageSize (out imgWidth, out imgHeight)) {
+			Gdk.Texture? cb_texture = await GdkExtensions.GetDefaultClipboard ().ReadTextureAsync ();
+			if (cb_texture is null) {
 				// An image was not on the clipboard,
 				// so use saved dimensions from settings
 				imgWidth = PintaCore.Settings.GetSetting<int> ("new-image-width", 800);
@@ -60,6 +62,9 @@ namespace Pinta.Actions
 				bg_type = PintaCore.Settings.GetSetting<NewImageDialog.BackgroundType> (
 					"new-image-bg", NewImageDialog.BackgroundType.White);
 				using_clipboard = false;
+			} else {
+				imgWidth = cb_texture.Width;
+				imgHeight = cb_texture.Height;
 			}
 
 			var dialog = new NewImageDialog (imgWidth, imgHeight, bg_type, using_clipboard);
@@ -78,36 +83,6 @@ namespace Pinta.Actions
 			};
 
 			dialog.Present ();
-		}
-
-		/// <summary>
-		/// Gets the width and height of an image on the clipboard,
-		/// if available.
-		/// </summary>
-		/// <param name="width">Destination for the image width.</param>
-		/// <param name="height">Destination for the image height.</param>
-		/// <returns>True if dimensions were available, false otherwise.</returns>
-		private static bool GetClipboardImageSize (out int width, out int height)
-		{
-			bool clipboardUsed = false;
-			width = height = 0;
-
-#if false // TODO-GTK4 - need gir.core binding for gdk_display_get_default(), and other missing bindings for Gdk.Clipboard
-			Gtk.Clipboard cb = Gtk.Clipboard.Get (Gdk.Atom.Intern ("CLIPBOARD", false));
-			if (cb.WaitIsImageAvailable ()) {
-				Gdk.Pixbuf image = cb.WaitForImage ();
-				if (image != null) {
-					clipboardUsed = true;
-					width = image.Width;
-					height = image.Height;
-					image.Dispose ();
-				}
-			}
-
-			cb.Dispose ();
-#endif
-
-			return clipboardUsed;
 		}
 	}
 }

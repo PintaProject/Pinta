@@ -250,9 +250,18 @@ namespace Pinta.Core
 			Gdk.Internal.Clipboard.ReadTextureAsync (clipboard.Handle, IntPtr.Zero, (_, args, _) => {
 				GLib.Internal.ErrorOwnedHandle error;
 				IntPtr result = Gdk.Internal.Clipboard.ReadTextureFinish (clipboard.Handle, args, out error);
-				GLib.Error.ThrowOnError (error);
 
-				tcs.SetResult (result != IntPtr.Zero ? new TextureWrapper (result, true) : null);
+				Texture? texture = null;
+				if (result != IntPtr.Zero)
+					texture = new TextureWrapper (result, true);
+
+				try {
+					GLib.Error.ThrowOnError (error);
+				} catch (Exception) {
+					texture = null;
+				}
+
+				tcs.SetResult (texture);
 			}, IntPtr.Zero);
 
 			return tcs.Task;
