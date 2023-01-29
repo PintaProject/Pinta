@@ -58,16 +58,14 @@ namespace Pinta.Tools
 		private int SampleSize => SampleSizeDropDown.SelectedItem.GetTagOrDefault (1);
 		private bool SampleLayerOnly => SampleTypeDropDown.SelectedItem.GetTagOrDefault (false);
 
-#if false // TODO-GTK4 cursors
 		public override Gdk.Cursor DefaultCursor {
 			get {
 				var icon = GdkExtensions.CreateIconWithShape ("Cursor.ColorPicker.png",
 								CursorShape.Rectangle, SampleSize, 7, 27,
 								out var iconOffsetX, out var iconOffsetY);
-				return new Gdk.Cursor (Gdk.Display.Default, icon, iconOffsetX, iconOffsetY);
+				return Gdk.Cursor.NewFromTexture (icon, iconOffsetX, iconOffsetY, null);
 			}
 		}
-#endif
 
 		protected override void OnBuildToolBar (Box tb)
 		{

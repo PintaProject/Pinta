@@ -58,9 +58,7 @@ namespace Pinta.Tools
 		public override string Icon => Pinta.Resources.Icons.ToolRecolor;
 		public override string StatusBarText => Translations.GetString ("Left click to replace the secondary color with the primary color. " +
 							  "Right click to reverse.");
-#if false // TODO-GTK4 cursors
-		public override Gdk.Cursor DefaultCursor => new Gdk.Cursor (Gdk.Display.Default, Resources.GetIcon ("Cursor.Recolor.png"), 9, 18);
-#endif
+		public override Gdk.Cursor DefaultCursor => Gdk.Cursor.NewFromTexture (Resources.GetIcon ("Cursor.Recolor.png"), 9, 18, null);
 		public override Gdk.Key ShortcutKey => Gdk.Key.R;
 		protected float Tolerance => (float) (ToleranceSlider.GetValue () / 100);
 		public override int Priority => 49;

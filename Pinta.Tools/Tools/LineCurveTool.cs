@@ -38,9 +38,7 @@ namespace Pinta.Tools
 
 		public override string Name => Translations.GetString ("Line/Curve");
 		public override string Icon => Pinta.Resources.Icons.ToolLine;
-#if false // TODO-GTK4 cursors
-		public override Gdk.Cursor DefaultCursor => new Gdk.Cursor (Gdk.Display.Default, Resources.GetIcon ("Cursor.Line.png"), 9, 18);
-#endif
+		public override Gdk.Cursor DefaultCursor => Gdk.Cursor.NewFromTexture (Resources.GetIcon ("Cursor.Line.png"), 9, 18, null);
 		public override int Priority => 37;
 
 		public override BaseEditEngine.ShapeTypes ShapeType => BaseEditEngine.ShapeTypes.OpenLineCurveSeries;

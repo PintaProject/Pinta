@@ -64,17 +64,15 @@ namespace Pinta.Tools
 		public override Gdk.Key ShortcutKey => Gdk.Key.B;
 		public override int Priority => 21;
 
-#if false // TODO-GTK4 cursors
 		public override Gdk.Cursor DefaultCursor {
 			get {
 				var icon = GdkExtensions.CreateIconWithShape ("Cursor.Paintbrush.png",
 								CursorShape.Ellipse, BrushWidth, 8, 24,
 								out var iconOffsetX, out var iconOffsetY);
 
-				return new Gdk.Cursor (Gdk.Display.Default, icon, iconOffsetX, iconOffsetY);
+				return Gdk.Cursor.NewFromTexture (icon, iconOffsetX, iconOffsetY, null);
 			}
 		}
-#endif
 
 		protected override void OnBuildToolBar (Box tb)
 		{

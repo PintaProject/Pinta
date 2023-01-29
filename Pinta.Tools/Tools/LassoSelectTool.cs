@@ -54,9 +54,7 @@ namespace Pinta.Tools
 		public override string Icon => Pinta.Resources.Icons.ToolSelectLasso;
 		public override string StatusBarText => Translations.GetString ("Click and drag to draw the outline for a selection area.");
 		public override Gdk.Key ShortcutKey => Gdk.Key.S;
-#if false // TODO-GTK4 cursors
-		public override Gdk.Cursor DefaultCursor => new Gdk.Cursor (Gdk.Display.Default, Resources.GetIcon ("Cursor.LassoSelect.png"), 9, 18);
-#endif
+		public override Gdk.Cursor DefaultCursor => Gdk.Cursor.NewFromTexture (Resources.GetIcon ("Cursor.LassoSelect.png"), 9, 18, null);
 		public override int Priority => 17;
 
 		protected override void OnBuildToolBar (Box tb)

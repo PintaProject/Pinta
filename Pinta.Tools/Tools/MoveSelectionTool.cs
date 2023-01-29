@@ -43,9 +43,7 @@ namespace Pinta.Tools
 		public override string Icon => Pinta.Resources.Icons.ToolMoveSelection;
 		// Translators: {0} is 'Ctrl', or a platform-specific key such as 'Command' on macOS.
 		public override string StatusBarText => Translations.GetString ("Left click and drag the selection to move selection outline. Hold {0} to scale instead of move. Right click and drag the selection to rotate selection outline. Hold Shift to rotate in steps. Use arrow keys to move selection outline by a single pixel.", GtkExtensions.CtrlLabel ());
-#if false // TODO-GTK4 cursors
-		public override Gdk.Cursor DefaultCursor => new Gdk.Cursor (Gdk.Display.Default, Gtk.IconTheme.Default.LoadIcon (Pinta.Resources.Icons.ToolMoveSelection, 16), 0, 0);
-#endif
+		public override Gdk.Cursor DefaultCursor => Gdk.Cursor.NewFromTexture (Resources.GetIcon (Pinta.Resources.Icons.ToolMoveSelection), 0, 0, null);
 		public override Gdk.Key ShortcutKey => Gdk.Key.M;
 		public override int Priority => 7;
 

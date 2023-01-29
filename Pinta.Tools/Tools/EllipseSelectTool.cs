@@ -39,9 +39,7 @@ namespace Pinta.Tools
 		public override string Name => Translations.GetString ("Ellipse Select");
 		public override string Icon => Pinta.Resources.Icons.ToolSelectEllipse;
 		public override string StatusBarText => Translations.GetString ("Click and drag to draw an elliptical selection. Hold Shift to constrain to a circle.");
-#if false // TODO-GTK4 cursors
-		public override Gdk.Cursor DefaultCursor => new Gdk.Cursor (Gdk.Display.Default, Resources.GetIcon ("Cursor.EllipseSelect.png"), 9, 18);
-#endif
+		public override Gdk.Cursor DefaultCursor => Gdk.Cursor.NewFromTexture (Resources.GetIcon ("Cursor.EllipseSelect.png"), 9, 18, null);
 		public override int Priority => 15;
 
 		protected override void DrawShape (Document document, RectangleD r, Layer l)

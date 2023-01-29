@@ -38,9 +38,7 @@ namespace Pinta.Tools
 
 		public override string Name => Translations.GetString ("Rounded Rectangle");
 		public override string Icon => Pinta.Resources.Icons.ToolRectangleRounded;
-#if false // TODO-GTK4 cursors
-		public override Gdk.Cursor DefaultCursor => new Gdk.Cursor (Gdk.Display.Default, Resources.GetIcon ("Cursor.RoundedRectangle.png"), 9, 18);
-#endif
+		public override Gdk.Cursor DefaultCursor => Gdk.Cursor.NewFromTexture (Resources.GetIcon ("Cursor.RoundedRectangle.png"), 9, 18, null);
 		public override int Priority => 41;
 
 		public override BaseEditEngine.ShapeTypes ShapeType => BaseEditEngine.ShapeTypes.RoundedLineSeries;

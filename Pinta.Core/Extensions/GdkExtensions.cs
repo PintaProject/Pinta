@@ -117,7 +117,6 @@ namespace Pinta.Core
 		public static bool HasModifierKey (this ModifierType current_state)
 			=> current_state.IsControlPressed () || current_state.IsShiftPressed () || current_state.IsAltPressed ();
 
-#if false // TODO-GTK4
 		/// <summary>
 		/// Create a cursor icon with a shape that visually represents the tool's thickness.
 		/// </summary>
@@ -129,11 +128,11 @@ namespace Pinta.Core
 		/// <param name="shapeX">The X position in the returned Pixbuf that will be the center of the shape.</param>
 		/// <param name="shapeY">The Y position in the returned Pixbuf that will be the center of the shape.</param>
 		/// <returns>The new cursor icon with an shape that represents the tool's thickness.</returns>
-		public static Gdk.Pixbuf CreateIconWithShape (string imgName, CursorShape shape, int shapeWidth,
+		public static Gdk.Texture CreateIconWithShape (string imgName, CursorShape shape, int shapeWidth,
 							  int imgToShapeX, int imgToShapeY,
 							  out int shapeX, out int shapeY)
 		{
-			Gdk.Pixbuf img = PintaCore.Resources.GetIcon (imgName);
+			Gdk.Texture img = PintaCore.Resources.GetIcon (imgName);
 
 			double zoom = 1d;
 			if (PintaCore.Workspace.HasOpenDocuments) {
@@ -145,8 +144,8 @@ namespace Pinta.Core
 
 			// Calculate bounding boxes around the both image and shape
 			// relative to the image top-left corner.
-			Gdk.Rectangle imgBBox = new Gdk.Rectangle (0, 0, img.Width, img.Height);
-			Gdk.Rectangle shapeBBox = new Gdk.Rectangle (
+			var imgBBox = new RectangleI (0, 0, img.Width, img.Height);
+			var shapeBBox = new RectangleI (
 				imgToShapeX - halfOfShapeWidth,
 				imgToShapeY - halfOfShapeWidth,
 				shapeWidth,
@@ -158,7 +157,7 @@ namespace Pinta.Core
 			// To determine required size of icon,
 			// find union of the image and shape bounding boxes
 			// (still relative to image top-left corner)
-			Gdk.Rectangle iconBBox = imgBBox.Union (shapeBBox);
+			RectangleI iconBBox = imgBBox.Union (shapeBBox);
 
 			// Image top-left corner in icon co-ordinates
 			int imgX = imgBBox.Left - iconBBox.Left;
@@ -168,41 +167,40 @@ namespace Pinta.Core
 			shapeX = imgToShapeX - iconBBox.Left;
 			shapeY = imgToShapeY - iconBBox.Top;
 
-			using (var i = CairoExtensions.CreateImageSurface (Cairo.Format.ARGB32, iconBBox.Width, iconBBox.Height)) {
-				using (var g = new Cairo.Context (i)) {
-					// Don't show shape if shapeWidth less than 3,
-					if (shapeWidth > 3) {
-						int diam = Math.Max (1, shapeWidth - 2);
-						Cairo.Rectangle shapeRect = new Cairo.Rectangle (shapeX - halfOfShapeWidth,
-												 shapeY - halfOfShapeWidth,
-												 diam,
-												 diam);
+			var i = CairoExtensions.CreateImageSurface (Cairo.Format.Argb32, iconBBox.Width, iconBBox.Height);
+			var g = new Cairo.Context (i);
+			// Don't show shape if shapeWidth less than 3,
+			if (shapeWidth > 3) {
+				int diam = Math.Max (1, shapeWidth - 2);
+				var shapeRect = new RectangleD (shapeX - halfOfShapeWidth,
+										 shapeY - halfOfShapeWidth,
+										 diam,
+										 diam);
 
-						Cairo.Color outerColor = new Cairo.Color (255, 255, 255, 0.75);
-						Cairo.Color innerColor = new Cairo.Color (0, 0, 0);
+				Cairo.Color outerColor = new Cairo.Color (255, 255, 255, 0.75);
+				Cairo.Color innerColor = new Cairo.Color (0, 0, 0);
 
-						switch (shape) {
-							case CursorShape.Ellipse:
-								g.DrawEllipse (shapeRect, outerColor, 2);
-								shapeRect = shapeRect.Inflate (-1, -1);
-								g.DrawEllipse (shapeRect, innerColor, 1);
-								break;
-							case CursorShape.Rectangle:
-								g.DrawRectangle (shapeRect, outerColor, 1);
-								shapeRect = shapeRect.Inflate (-1, -1);
-								g.DrawRectangle (shapeRect, innerColor, 1);
-								break;
-						}
-					}
-
-					// Draw the image
-					g.DrawPixbuf (img, new Cairo.Point (imgX, imgY));
+				switch (shape) {
+					case CursorShape.Ellipse:
+						g.DrawEllipse (shapeRect, outerColor, 2);
+						shapeRect = shapeRect.Inflated (-1, -1);
+						g.DrawEllipse (shapeRect, innerColor, 1);
+						break;
+					case CursorShape.Rectangle:
+						g.DrawRectangle (shapeRect, outerColor, 1);
+						shapeRect = shapeRect.Inflated (-1, -1);
+						g.DrawRectangle (shapeRect, innerColor, 1);
+						break;
 				}
-
-				return CairoExtensions.ToPixbuf (i);
 			}
+
+			// Draw the image
+			var img_surf = img.ToSurface ();
+			g.SetSourceSurface (img_surf, imgX, imgY);
+			g.Paint ();
+
+			return Texture.NewForPixbuf (i.ToPixbuf ());
 		}
-#endif
 
 		public static Key ToUpper (this Key k1)
 		{

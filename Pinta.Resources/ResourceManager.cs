@@ -30,8 +30,8 @@ using System.IO;
 using System.Linq;
 using System.Reflection;
 using System.Runtime.CompilerServices;
-using Gtk;
 using Gdk;
+using Gtk;
 
 namespace Pinta.Resources
 {
@@ -40,11 +40,9 @@ namespace Pinta.Resources
 		[MethodImpl (MethodImplOptions.NoInlining)]
 		public static Texture GetIcon (string name, int size)
 		{
-#if false // TODO-GTK4 themed icons perhaps shouldn't be loaded this way?
 			// First see if it's a built-in gtk icon, like gtk-new.
 			if (TryGetIconFromTheme (name, size, out var theme_result))
 				return theme_result;
-#endif
 
 			// Otherwise, get it from our embedded resources.
 			if (TryGetIconFromResources (name, out var resource_result))
@@ -59,7 +57,6 @@ namespace Pinta.Resources
 			return CreateMissingImage (size);
 		}
 
-#if false // TODO-GTK4
 		private static bool TryGetIconFromTheme (string name, int size, [NotNullWhen (true)] out Gdk.Texture? image)
 		{
 			image = null;
@@ -68,25 +65,27 @@ namespace Pinta.Resources
 				// This will also load any icons added by Gtk.IconFactory.AddDefault() . 
 				var icon_theme = Gtk.IconTheme.GetForDisplay (Gdk.Display.GetDefault ()!);
 				var icon_paintable = icon_theme.LookupIcon (name, Array.Empty<string> (), size, 1, TextDirection.None, Gtk.IconLookupFlags.Preload);
-				if (icon_paintable == null)
+				if (icon_paintable == null || (name != StandardIcons.ImageMissing && icon_paintable.IconName!.StartsWith ("image-missing")))
 					return false;
 
 				var snapshot = Gtk.Snapshot.New ();
 				icon_paintable.Snapshot (snapshot, size, size);
 
 				var node = snapshot.ToNode ();
-				if (node == null)
+				if (node != null && node.GetNodeType () == Gsk.RenderNodeType.ColorMatrixNode) {
+					node = new Gsk.RenderNode (Gsk.Internal.ColorMatrixNode.GetChild (node.Handle));
+				}
+
+				if (node == null || node.GetNodeType () != Gsk.RenderNodeType.TextureNode)
 					return false;
 
-				var texture_node = (Gsk.TextureNode) node;
-				image = texture_node.GetTexture ();
+				image = new TextureWrapper (Gsk.Internal.TextureNode.GetTexture (node.Handle), false);
 			} catch (Exception ex) {
 				Console.Error.WriteLine (ex.Message);
 			}
 
 			return image != null;
 		}
-#endif
 
 		private static bool TryGetIconFromResources (string name, [NotNullWhen (true)] out Texture? image)
 		{

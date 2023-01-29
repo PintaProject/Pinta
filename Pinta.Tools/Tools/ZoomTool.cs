@@ -49,13 +49,8 @@ namespace Pinta.Tools
 
 			cursorZoomIn = Gdk.Cursor.NewFromName (Pinta.Resources.StandardCursors.ZoomIn, null);
 			cursorZoomOut = Gdk.Cursor.NewFromName (Pinta.Resources.StandardCursors.ZoomOut, null);
-#if false // TODO-GTK4 cursors
-			cursorZoom = new Gdk.Cursor (Gdk.Display.Default, Gtk.IconTheme.Default.LoadIcon (Pinta.Resources.Icons.ToolZoom, 16), 0, 0);
-			cursorZoomPan = new Gdk.Cursor (Gdk.Display.Default, Gtk.IconTheme.Default.LoadIcon (Pinta.Resources.Icons.ToolPan, 16), 0, 0);
-#else
-			cursorZoom = Gdk.Cursor.NewFromName (Pinta.Resources.StandardCursors.Default, null);
-			cursorZoomPan = Gdk.Cursor.NewFromName (Pinta.Resources.StandardCursors.Grab, null);
-#endif
+			cursorZoom = Gdk.Cursor.NewFromTexture (Resources.GetIcon (Pinta.Resources.Icons.ToolZoom), 0, 0, null);
+			cursorZoomPan = Gdk.Cursor.NewFromTexture (Resources.GetIcon (Pinta.Resources.Icons.ToolPan), 0, 0, null);
 		}
 
 		public override string Name => Translations.GetString ("Zoom");

@@ -50,16 +50,14 @@ namespace Pinta.Tools
 		public override int Priority => 47;
 		protected override bool ShowAntialiasingButton => true;
 
-#if false // TODO-GTK4 icons
 		public override Cursor DefaultCursor {
 			get {
 				var icon = GdkExtensions.CreateIconWithShape ("Cursor.CloneStamp.png",
 								CursorShape.Ellipse, BrushWidth, 16, 26,
 								out var iconOffsetX, out var iconOffsetY);
-				return new Cursor (Display.Default, icon, iconOffsetX, iconOffsetY);
+				return Gdk.Cursor.NewFromTexture (icon, iconOffsetX, iconOffsetY, null);
 			}
 		}
-#endif
 
 		protected override void OnMouseDown (Document document, ToolMouseEventArgs e)
 		{
@@ -141,11 +139,7 @@ namespace Pinta.Tools
 		{
 			// Note that this WON'T work if user presses control key and THEN selects the tool!
 			if (e.Key.IsControlKey ()) {
-#if false // TODO-GTK4 cursors
-				var icon = Resources.GetIcon ("Cursor.CloneStampSetSource.png");
-				var setSourceCursor = new Cursor (Display.Default, icon, 16, 26);
-				SetCursor (setSourceCursor);
-#endif
+				SetCursor (Gdk.Cursor.NewFromTexture (Resources.GetIcon ("Cursor.CloneStampSetSource.png"), 16, 26, null));
 			}
 
 			return false;

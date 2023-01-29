@@ -92,27 +92,14 @@ namespace Pinta.Tools
 			get { return Translations.GetString ("Left click to place cursor, then type desired text. Text color is primary color."); }
 		}
 
-#if false // TODO-GTK4 cursors
-		public override Gdk.Cursor DefaultCursor {
-			get {
-				return new Gdk.Cursor (Gdk.Display.Default,
-						PintaCore.Resources.GetIcon ("Cursor.Text.png"),
-						16, 16);
-			}
-		}
-		public Gdk.Cursor InvalidEditCursor { get { return new Gdk.Cursor (Gdk.Display.Default, IconTheme.Default.LoadIcon (Pinta.Resources.Icons.EditSelectionErase, 16), 8, 0); } }
-#else
-		public Gdk.Cursor InvalidEditCursor => Gdk.Cursor.NewFromName (Pinta.Resources.StandardCursors.Default, null);
-#endif
+		public override Gdk.Cursor DefaultCursor => Gdk.Cursor.NewFromTexture (Resources.GetIcon ("Cursor.Text.png"), 16, 16, null);
+		public Gdk.Cursor InvalidEditCursor => Gdk.Cursor.NewFromTexture (Resources.GetIcon (Pinta.Resources.Icons.EditSelectionErase), 0, 0, null);
 
 		#region Constructor
 		public TextTool (IServiceManager services) : base (services)
 		{
-#if false // TODO-GTK4 cursors
-			cursor_hand = new Gdk.Cursor (Gdk.Display.Default, PintaCore.Resources.GetIcon ("Cursor.Pan.png"), 8, 8);
-#else
-			cursor_hand = Gdk.Cursor.NewFromName (Pinta.Resources.StandardCursors.Default, null);
-#endif
+			cursor_hand = Gdk.Cursor.NewFromTexture (Resources.GetIcon ("Cursor.Pan.png"), 8, 8, null);
+
 			imContext = Gtk.IMMulticontext.New ();
 			imContext.OnCommit += OnIMCommit;
 

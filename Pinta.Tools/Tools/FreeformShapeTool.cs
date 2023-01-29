@@ -53,9 +53,7 @@ namespace Pinta.Tools
 		public override string Name => Translations.GetString ("Freeform Shape");
 		public override string Icon => Pinta.Resources.Icons.ToolFreeformShape;
 		public override string StatusBarText => Translations.GetString ("Left click to draw with primary color, right click to draw with secondary color.");
-#if false // TODO-GTK4 cursors
-		public override Gdk.Cursor DefaultCursor => new Gdk.Cursor (Gdk.Display.Default, Resources.GetIcon ("Cursor.FreeformShape.png"), 9, 18);
-#endif
+		public override Gdk.Cursor DefaultCursor => Gdk.Cursor.NewFromTexture (Resources.GetIcon ("Cursor.FreeformShape.png"), 9, 18, null);
 		public override Gdk.Key ShortcutKey => Gdk.Key.O;
 		public override int Priority => 45;
 
