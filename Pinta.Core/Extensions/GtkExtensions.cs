@@ -331,7 +331,7 @@ namespace Pinta.Core
 		}
 
 		// TODO-GTK4 - need binding from gir.core
-		[DllImport ("libgtk-4.1", EntryPoint = "gtk_accelerator_parse")]
+		[DllImport ("libgtk-4", EntryPoint = "gtk_accelerator_parse")]
 		private static extern bool AcceleratorParse ([MarshalAs (UnmanagedType.LPUTF8Str)] string accelerator, out uint accelerator_key, out Gdk.ModifierType accelerator_mods);
 
 		/// <summary>
