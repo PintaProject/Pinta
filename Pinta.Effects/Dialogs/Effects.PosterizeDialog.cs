@@ -53,17 +53,19 @@ namespace Pinta.Effects
 
 		public PosterizeData? EffectData { get; set; }
 
-		public PosterizeDialog () : base (Translations.GetString ("Posterize"),
-						  PintaCore.Chrome.MainWindow, DialogFlags.Modal,
-										  GtkExtensions.DialogButtonsCancelOk ())
+		public PosterizeDialog ()
 		{
+			Title = Translations.GetString ("Posterize");
+			TransientFor = PintaCore.Chrome.MainWindow;
+			Modal = true;
+			this.AddCancelOkButtons ();
+			this.SetDefaultResponse (ResponseType.Ok);
+
 			Build ();
 
 			red_spinbox.ValueChanged += HandleValueChanged;
 			green_spinbox.ValueChanged += HandleValueChanged;
 			blue_spinbox.ValueChanged += HandleValueChanged;
-
-			DefaultResponse = Gtk.ResponseType.Ok;
 		}
 
 		private void HandleValueChanged (object? sender, EventArgs e)
@@ -97,7 +99,6 @@ namespace Pinta.Effects
 			spinbox.DefaultValue = 16;
 			spinbox.MaximumValue = 64;
 			spinbox.MinimumValue = 2;
-			ContentArea.Add (spinbox);
 		}
 
 		[MemberNotNull (nameof (red_spinbox), nameof (green_spinbox), nameof (blue_spinbox), nameof (link_button))]
@@ -105,29 +106,32 @@ namespace Pinta.Effects
 		{
 			Resizable = false;
 
-			ContentArea.WidthRequest = 400;
-			ContentArea.BorderWidth = 6;
-			ContentArea.Spacing = 6;
+			var content_area = this.GetContentAreaBox ();
+			content_area.WidthRequest = 400;
+			content_area.SetAllMargins (6);
+			content_area.Spacing = 6;
 
 			red_spinbox = new HScaleSpinButtonWidget ();
 			red_spinbox.Label = Translations.GetString ("Red");
 			InitSpinBox (red_spinbox);
+			content_area.Append (red_spinbox);
 
 			green_spinbox = new HScaleSpinButtonWidget ();
 			green_spinbox.Label = Translations.GetString ("Green");
 			InitSpinBox (green_spinbox);
+			content_area.Append (green_spinbox);
 
 			blue_spinbox = new HScaleSpinButtonWidget ();
 			blue_spinbox.Label = Translations.GetString ("Blue");
 			InitSpinBox (blue_spinbox);
+			content_area.Append (blue_spinbox);
 
-			link_button = new CheckButton (Translations.GetString ("Linked"));
+			link_button = CheckButton.NewWithLabel (Translations.GetString ("Linked"));
 			link_button.Active = true;
-			ContentArea.Add (link_button);
+			content_area.Append (link_button);
 
 			DefaultWidth = 400;
 			DefaultHeight = 300;
-			ShowAll ();
 		}
 	}
 }

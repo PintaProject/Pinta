@@ -42,18 +42,18 @@ namespace Pinta.Effects
 
 		public override void LaunchConfiguration ()
 		{
-#if false // TODO-GTK4
-			using (var dialog = new PosterizeDialog ()) {
-				dialog.Title = Name;
-				dialog.Icon = PintaCore.Resources.GetIcon (Icon);
-				dialog.EffectData = Data;
+			var dialog = new PosterizeDialog () {
+				Title = Name,
+				IconName = Icon,
+				EffectData = Data
+			};
 
-				int response = dialog.Run ();
-				return (response == (int) Gtk.ResponseType.Ok);
-			}
-#else
-			throw new NotImplementedException ();
-#endif
+			dialog.OnResponse += (_, args) => {
+				OnConfigDialogResponse (args.ResponseId == (int) Gtk.ResponseType.Ok);
+				dialog.Destroy ();
+			};
+
+			dialog.Present ();
 		}
 
 		public override void Render (ImageSurface src, ImageSurface dest, Core.RectangleI[] rois)
