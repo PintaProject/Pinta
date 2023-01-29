@@ -30,19 +30,21 @@ using System.IO;
 using System.Linq;
 using System.Reflection;
 using System.Runtime.CompilerServices;
-using Gdk;
 using Gtk;
+using Gdk;
 
 namespace Pinta.Resources
 {
 	public static class ResourceLoader
 	{
 		[MethodImpl (MethodImplOptions.NoInlining)]
-		public static Pixbuf GetIcon (string name, int size, StyleContext? context = null)
+		public static Texture GetIcon (string name, int size)
 		{
+#if false // TODO-GTK4 themed icons perhaps shouldn't be loaded this way?
 			// First see if it's a built-in gtk icon, like gtk-new.
-			if (TryGetIconFromTheme (name, size, context, out var theme_result))
+			if (TryGetIconFromTheme (name, size, out var theme_result))
 				return theme_result;
+#endif
 
 			// Otherwise, get it from our embedded resources.
 			if (TryGetIconFromResources (name, out var resource_result))
@@ -57,32 +59,36 @@ namespace Pinta.Resources
 			return CreateMissingImage (size);
 		}
 
-		public static Stream? GetResourceIconStream (string name)
-		{
-			var asm = typeof (ResourceLoader).Assembly;
-
-			return asm.GetManifestResourceStream (name);
-		}
-
-		private static bool TryGetIconFromTheme (string name, int size, StyleContext? context, [NotNullWhen (true)] out Pixbuf? image)
+#if false // TODO-GTK4
+		private static bool TryGetIconFromTheme (string name, int size, [NotNullWhen (true)] out Gdk.Texture? image)
 		{
 			image = null;
 
 			try {
 				// This will also load any icons added by Gtk.IconFactory.AddDefault() . 
-				using (var icon = Gtk.IconTheme.Default.LookupIcon (name, size, Gtk.IconLookupFlags.ForceSize)) {
-					if (icon != null)
-						image = context != null ? icon.LoadSymbolicForContext (context, out var _) : icon.LoadIcon ();
-				}
+				var icon_theme = Gtk.IconTheme.GetForDisplay (Gdk.Display.GetDefault ()!);
+				var icon_paintable = icon_theme.LookupIcon (name, Array.Empty<string> (), size, 1, TextDirection.None, Gtk.IconLookupFlags.Preload);
+				if (icon_paintable == null)
+					return false;
 
+				var snapshot = Gtk.Snapshot.New ();
+				icon_paintable.Snapshot (snapshot, size, size);
+
+				var node = snapshot.ToNode ();
+				if (node == null)
+					return false;
+
+				var texture_node = (Gsk.TextureNode) node;
+				image = texture_node.GetTexture ();
 			} catch (Exception ex) {
 				Console.Error.WriteLine (ex.Message);
 			}
 
 			return image != null;
 		}
+#endif
 
-		private static bool TryGetIconFromResources (string name, [NotNullWhen (true)] out Pixbuf? image)
+		private static bool TryGetIconFromResources (string name, [NotNullWhen (true)] out Texture? image)
 		{
 			// Check 'Pinta.Resources' for our image
 			if (TryGetIconFromAssembly (Assembly.GetExecutingAssembly (), name, out image))
@@ -96,18 +102,39 @@ namespace Pinta.Resources
 			return false;
 		}
 
-		private static bool TryGetIconFromAssembly (Assembly assembly, string name, [NotNullWhen (true)] out Pixbuf? image)
+		private static bool TryGetIconFromAssembly (Assembly assembly, string name, [NotNullWhen (true)] out Texture? image)
 		{
 			image = null;
 
 			try {
-				if (HasResource (assembly, name))
-					image = new Pixbuf (assembly, name);
+				if (HasResource (assembly, name)) {
+					using var stream = assembly.GetManifestResourceStream (name)!;
+					var buffer = new byte[stream.Length];
+					stream.Read (buffer, 0, buffer.Length);
+
+					// TODO-GTK4 need binding for this
+					var bytes = GLib.Bytes.From (buffer);
+					GLib.Internal.ErrorOwnedHandle error;
+					image = new TextureWrapper (Gdk.Internal.Texture.NewFromBytes (bytes.Handle, out error), true);
+					GLib.Error.ThrowOnError (error);
+
+#if false
+					image.SaveToPng ("/tmp/output.png");
+#endif
+				}
 			} catch (Exception ex) {
 				Console.Error.WriteLine (ex.Message);
+				image = null;
 			}
 
 			return image != null;
+		}
+
+		private class TextureWrapper : Gdk.Texture
+		{
+			internal TextureWrapper (IntPtr ptr, bool ownedRef) : base (ptr, ownedRef)
+			{
+			}
 		}
 
 		private static bool HasResource (Assembly asm, string name)
@@ -117,29 +144,28 @@ namespace Pinta.Resources
 
 		// From MonoDevelop:
 		// https://github.com/mono/monodevelop/blob/master/main/src/core/MonoDevelop.Ide/gtk-gui/generated.cs
-		private static Pixbuf CreateMissingImage (int size)
+		private static Texture CreateMissingImage (int size)
 		{
-			using (var surf = new Cairo.ImageSurface (Cairo.Format.Argb32, size, size))
-			using (var g = new Cairo.Context (surf)) {
-				g.SetSourceColor (new Cairo.Color (1, 1, 1));
-				g.Rectangle (0, 0, size, size);
-				g.Fill ();
+			var surf = new Cairo.ImageSurface (Cairo.Format.Argb32, size, size);
+			var g = new Cairo.Context (surf);
+			g.SetSourceRgb (1, 1, 1);
+			g.Rectangle (0, 0, size, size);
+			g.Fill ();
 
-				g.SetSourceColor (new Cairo.Color (0, 0, 0));
-				g.Rectangle (0, 0, size - 1, size - 1);
-				g.Fill ();
+			g.SetSourceRgb (0, 0, 0);
+			g.Rectangle (0, 0, size - 1, size - 1);
+			g.Fill ();
 
-				g.LineWidth = 3;
-				g.LineCap = Cairo.LineCap.Round;
-				g.LineJoin = Cairo.LineJoin.Round;
-				g.SetSourceColor (new Cairo.Color (1, 0, 0));
-				g.MoveTo (size / 4, size / 4);
-				g.LineTo ((size - 1) - (size / 4), (size - 1) - (size / 4));
-				g.MoveTo ((size - 1) - (size / 4), size / 4);
-				g.LineTo (size / 4, (size - 1) - (size / 4));
+			g.LineWidth = 3;
+			g.LineCap = Cairo.LineCap.Round;
+			g.LineJoin = Cairo.LineJoin.Round;
+			g.SetSourceRgb (1, 0, 0);
+			g.MoveTo (size / 4, size / 4);
+			g.LineTo ((size - 1) - (size / 4), (size - 1) - (size / 4));
+			g.MoveTo ((size - 1) - (size / 4), size / 4);
+			g.LineTo (size / 4, (size - 1) - (size / 4));
 
-				return new Pixbuf (surf, 0, 0, surf.Width, surf.Height);
-			}
+			return Texture.NewForPixbuf (Gdk.Functions.PixbufGetFromSurface (surf, 0, 0, surf.Width, surf.Height)!);
 		}
 	}
 }

@@ -48,9 +48,7 @@ namespace Pinta.Tools
 		public override string Name => Translations.GetString ("Pencil");
 		public override string Icon => Pinta.Resources.Icons.ToolPencil;
 		public override string StatusBarText => Translations.GetString ("Left click to draw freeform one-pixel wide lines with the primary color. Right click to use the secondary color.");
-#if false // TODO-GTK4
-		public override Gdk.Cursor DefaultCursor => new Gdk.Cursor (Gdk.Display.Default, Resources.GetIcon ("Cursor.Pencil.png"), 7, 24);
-#endif
+		public override Gdk.Cursor DefaultCursor => Gdk.Cursor.NewFromTexture (Resources.GetIcon ("Cursor.Pencil.png"), 7, 24, null);
 		public override Gdk.Key ShortcutKey => Gdk.Key.P;
 		public override int Priority => 25;
 		protected override bool ShowAlphaBlendingButton => true;

@@ -195,10 +195,7 @@
       <LogicalName>Menu.Effects.Default.png</LogicalName>
     </EmbeddedResource>
   </ItemGroup>
-
-  <!-- TODO-GTK4 - build all files -->
   <ItemGroup>
-    <Compile Remove="**/*.cs" />
-    <Compile Include="Icons.cs" />
+    <PackageReference Include="GirCore.Gtk-4.0" Version="0.2.0" />
   </ItemGroup>
 </Project>
