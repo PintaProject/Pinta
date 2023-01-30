@@ -154,13 +154,11 @@ namespace Pinta
 			PintaCore.Actions.Layers.MoveLayerDown.Sensitive = enable;
 			PintaCore.Actions.Layers.Properties.Sensitive = enable;
 
-#if false // TODO-GTK4
 			PintaCore.Actions.Adjustments.ToggleActionsSensitive (enable);
 			PintaCore.Actions.Effects.ToggleActionsSensitive (enable);
 
 			PintaCore.Actions.Window.SaveAll.Sensitive = enable;
 			PintaCore.Actions.Window.CloseAll.Sensitive = enable;
-#endif
 		}
 	}
 }
