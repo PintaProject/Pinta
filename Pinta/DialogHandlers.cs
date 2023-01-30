@@ -43,12 +43,12 @@ namespace Pinta
 			action_handlers.Add (new SaveDocumentAction ());
 			action_handlers.Add (new SaveDocumentAsAction ());
 			action_handlers.Add (new SaveDocumentImplmentationAction ());
+			action_handlers.Add (new ModifyCompressionAction ());
 			action_handlers.Add (new CloseDocumentAction ());
 			action_handlers.Add (new ExitProgramAction ());
 #if false // TODO-GTK4
 			action_handlers.Add (new NewScreenshotAction ());
 			action_handlers.Add (new PrintDocumentAction ());
-			action_handlers.Add (new ModifyCompressionAction ());
 #endif
 
 			// Edit

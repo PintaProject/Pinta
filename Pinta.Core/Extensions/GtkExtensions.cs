@@ -428,6 +428,31 @@ namespace Pinta.Core
 			return response;
 		}
 
+		/// <summary>
+		/// Similar to gtk_dialog_run() in GTK3, this runs the dialog in a blocking manner with a nested event loop.
+		/// This can be useful for compability with old code that relies on this behaviour, but new code should be
+		/// structured to use event handlers.
+		/// </summary>
+		public static ResponseType RunBlocking (this Gtk.Dialog dialog)
+		{
+			var response = ResponseType.None;
+			GLib.MainLoop loop = new ();
+
+			if (!dialog.Modal)
+				dialog.Modal = true;
+
+			dialog.OnResponse += (_, args) => {
+				response = (ResponseType) args.ResponseId;
+				if (loop.IsRunning ())
+					loop.Quit ();
+			};
+
+			dialog.Show ();
+			loop.Run ();
+
+			return response;
+		}
+
 		// TODO-GTK4 replace with adw_message_dialog_choose() once adwaita 1.3 is available
 		public static Task<string> RunAsync (this Adw.MessageDialog dialog)
 		{
