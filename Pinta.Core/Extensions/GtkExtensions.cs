@@ -482,5 +482,26 @@ namespace Pinta.Core
 		/// Provides convenient access to the Gdk.Key of the key being released.
 		/// </summary>
 		public static Gdk.Key GetKey (this Gtk.EventControllerKey.KeyReleasedSignalArgs args) => (Gdk.Key) args.Keyval;
+
+		/// <summary>
+		/// Sets the activates-default property for the editable text field of a spin button.
+		/// </summary>
+		public static void SetActivatesDefault (this Gtk.SpinButton spin_button, bool activates)
+		{
+			Editable? editable = spin_button.GetDelegate ();
+			if (editable is null)
+				return;
+
+			// TODO-GTK4 - gir.core should be able to cast to a Gtk.Text from Gtk.Editable
+			var text = new TextWrapper (editable.Handle, false);
+			text.SetActivatesDefault (activates);
+		}
+
+		internal class TextWrapper : Gtk.Text
+		{
+			internal TextWrapper (IntPtr ptr, bool ownedRef) : base (ptr, ownedRef)
+			{
+			}
+		}
 	}
 }

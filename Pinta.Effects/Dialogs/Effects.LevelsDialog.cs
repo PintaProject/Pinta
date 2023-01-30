@@ -103,11 +103,11 @@ namespace Pinta.Effects
 			colorpanelOutHigh.ButtonPressEvent += HandleColorPanelButtonPressEvent;
 
 			DefaultResponse = ResponseType.Ok;
-			spinInLow.ActivatesDefault = true;
-			spinInHigh.ActivatesDefault = true;
-			spinOutGamma.ActivatesDefault = true;
-			spinOutLow.ActivatesDefault = true;
-			spinOutHigh.ActivatesDefault = true;
+			spinInLow.SetActivatesDefault(true);
+			spinInHigh.SetActivatesDefault(true);
+			spinOutGamma.SetActivatesDefault(true);
+			spinOutLow.SetActivatesDefault(true);
+			spinOutHigh.SetActivatesDefault(true);
 		}
 
 		private UnaryPixelOps.Level Levels {

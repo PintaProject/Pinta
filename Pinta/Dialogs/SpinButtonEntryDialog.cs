@@ -55,9 +55,7 @@ namespace Pinta
 			content_area.SetAllMargins (12);
 			content_area.Append (hbox);
 
-#if false // TODO-GTK4 SpinButton API has changed and it no longer provides an Entry. Might be able to obtain a Gtk.Text?
-			spinButton.ActivatesDefault = true;
-#endif
+			spinButton.SetActivatesDefault (true);
 		}
 
 		public int GetValue ()

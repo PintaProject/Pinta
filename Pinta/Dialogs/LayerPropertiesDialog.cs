@@ -90,10 +90,8 @@ namespace Pinta
 			opacitySlider.OnValueChanged += OnOpacitySliderChanged;
 			blendComboBox.OnChanged += OnBlendModeChanged;
 
-#if false // TODO-GTK4 SpinButton API has changed and it no longer provides an Entry. Might be able to obtain a Gtk.Text?
-			layerNameEntry.ActivatesDefault = true;
-			opacitySpinner.ActivatesDefault = true;
-#endif
+			layerNameEntry.SetActivatesDefault (true);
+			opacitySpinner.SetActivatesDefault (true);
 		}
 
 		public bool AreLayerPropertiesUpdated {

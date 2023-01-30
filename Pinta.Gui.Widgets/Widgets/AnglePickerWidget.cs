@@ -31,9 +31,7 @@ namespace Pinta.Gui.Widgets
 
 			OnRealize += (_, _) => anglepickergraphic1.ValueDouble = DefaultValue;
 
-#if false // TODO-GTK4 SpinButton API has changed and it no longer provides an Entry. Might be able to obtain a Gtk.Text?
-			spin.ActivatesDefault = true;
-#endif
+			spin.SetActivatesDefault (true);
 		}
 
 		public double DefaultValue { get; set; }

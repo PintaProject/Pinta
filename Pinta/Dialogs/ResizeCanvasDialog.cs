@@ -90,11 +90,10 @@ namespace Pinta
 
 			SetAnchor (Anchor.Center);
 
-#if false // TODO-GTK4 SpinButton API has changed and it no longer provides an Entry. Might be able to obtain a Gtk.Text?
-			widthSpinner.ActivatesDefault = true;
-			heightSpinner.ActivatesDefault = true;
-			percentageSpinner.ActivatesDefault = true;
-#endif
+			widthSpinner.SetActivatesDefault (true);
+			heightSpinner.SetActivatesDefault (true);
+			percentageSpinner.SetActivatesDefault (true);
+
 			percentageSpinner.GrabFocus ();
 		}
 

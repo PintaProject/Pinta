@@ -53,10 +53,8 @@ namespace Pinta.Gui.Widgets
 
 			OnRealize += (_, _) => HandleShown ();
 
-#if false // TODO-GTK4 SpinButton API has changed and it no longer provides an Entry. Might be able to obtain a Gtk.Text?
-			spin_x.ActivatesDefault = true;
-			spin_y.ActivatesDefault = true;
-#endif
+			spin_x.SetActivatesDefault (true);
+			spin_y.SetActivatesDefault (true);
 		}
 
 		public string Label {
