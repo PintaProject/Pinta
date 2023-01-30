@@ -117,7 +117,7 @@ namespace Pinta.Actions
 			public double Angle = 0;
 
 			[Caption ("Pan")]
-			public PointD Pan;
+			public PointD Pan = new (0, 0);
 
 			[Caption ("Zoom"), MinimumValue (0), MaximumValue (16)]
 			public double Zoom = 1.0;

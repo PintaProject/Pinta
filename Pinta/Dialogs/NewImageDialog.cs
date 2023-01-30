@@ -482,7 +482,7 @@ namespace Pinta
 
 		private void UpdateOkButton ()
 		{
-			var button = GetWidgetForResponse ((int) ResponseType.Ok);
+			var button = GetWidgetForResponse ((int) ResponseType.Ok)!;
 			button.Sensitive = IsValidSize;
 		}
 
