@@ -343,8 +343,10 @@ namespace Pinta.Core
 
 #if false // TODO-GTK4
 			Workspace.Canvas.Window.FreezeUpdates ();
+#endif
 			Workspace.Scale = scale;
 			PintaCore.Actions.View.UpdateCanvasScale ();
+#if false // TODO-GTK4
 			Workspace.Canvas.Window.ThawUpdates ();
 #endif
 		}
@@ -377,9 +379,7 @@ namespace Pinta.Core
 			ImageSize = new_size;
 			Workspace.CanvasSize = new_size;
 
-#if false // TODO-GTK4
 			PintaCore.Actions.View.UpdateCanvasScale ();
-#endif
 			ResetSelectionPaths ();
 			Workspace.Invalidate ();
 		}

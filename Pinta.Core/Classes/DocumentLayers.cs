@@ -256,11 +256,7 @@ namespace Pinta.Core
 
 			LayerRemoved?.Invoke (this, EventArgs.Empty);
 			PintaCore.Layers.OnLayerRemoved ();
-#if false // TODO-GTK4
 			document.Workspace.Invalidate ();
-#else
-			throw new NotImplementedException ();
-#endif
 		}
 
 		/// <summary>

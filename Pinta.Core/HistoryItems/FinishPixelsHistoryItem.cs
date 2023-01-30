@@ -62,9 +62,7 @@ namespace Pinta.Core
 			old_selection_layer = swap_sel;
 
 			PintaCore.Workspace.Invalidate ();
-#if false // TODO-GTK4 - re-enable once tools are built
 			PintaCore.Tools.SetCurrentTool ("MoveSelectedTool");
-#endif
 		}
 
 		public override void Redo ()
