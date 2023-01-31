@@ -48,9 +48,6 @@ namespace Pinta.Core
 			foreach (string entry in contents)
 				ComboBox.AppendText (entry);
 
-#if false // TODO-GTK4
-			ComboBox.AddEvents ((int) Gdk.EventMask.ButtonPressMask);
-#endif
 			ComboBox.WidthRequest = width;
 
 			if (activeIndex >= 0)

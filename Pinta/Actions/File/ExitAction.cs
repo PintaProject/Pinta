@@ -53,8 +53,6 @@ namespace Pinta.Actions
 
 				// If we still have the same number of open documents,
 				// the user cancelled on a Save prompt.
-				// TODO-GTK4 - since dialogs are no longer blocking, execution may return here
-				// before the close prompt dialog is done.
 				if (count == PintaCore.Workspace.OpenDocuments.Count)
 					return;
 			}
