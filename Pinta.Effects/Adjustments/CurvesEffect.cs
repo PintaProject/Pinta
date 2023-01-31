@@ -44,18 +44,17 @@ namespace Pinta.Effects
 
 		public override void LaunchConfiguration ()
 		{
-#if false // TODO-GTK4
-			using (var dialog = new CurvesDialog (Data)) {
-				dialog.Title = Name;
-				dialog.Icon = PintaCore.Resources.GetIcon (Icon);
+			var dialog = new CurvesDialog (Data) {
+				Title = Name,
+				IconName = Icon,
+			};
 
-				int response = dialog.Run ();
+			dialog.OnResponse += (_, args) => {
+				OnConfigDialogResponse (args.ResponseId == (int) Gtk.ResponseType.Ok);
+				dialog.Destroy ();
+			};
 
-				return (response == (int) Gtk.ResponseType.Ok);
-			}
-#else
-			throw new NotImplementedException ();
-#endif
+			dialog.Present ();
 		}
 
 		public override void Render (ImageSurface src, ImageSurface dest, Core.RectangleI[] rois)

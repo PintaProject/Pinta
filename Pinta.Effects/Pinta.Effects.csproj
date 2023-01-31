@@ -11,6 +11,7 @@
   <ItemGroup>
     <Compile Remove="**/*.cs" />
     <Compile Include="Adjustments/*.cs" />
+    <Compile Include="Dialogs/Effects.CurvesDialog.cs" />
     <Compile Include="Dialogs/Effects.PosterizeDialog.cs" />
     <Compile Include="CoreEffectsExtension.cs" />
     <Compile Include="Effects/*.cs" />
