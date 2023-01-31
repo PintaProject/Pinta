@@ -112,11 +112,8 @@ namespace Pinta.Gui.Widgets
 
 		private void Draw (Context g)
 		{
-#if false // TODO-GTK4 GdkRGBA bindings
-			var color = GetStyleContext().GetColor (StateFlags).ToCairoColor ();
-#else
-			var color = new Color (1, 1, 1);
-#endif
+			GetStyleContext ().GetColor (out var color);
+
 			var rect = GetDrawBounds ();
 			var diameter = Math.Min (rect.Width, rect.Height);
 			var radius = (diameter / 2.0);

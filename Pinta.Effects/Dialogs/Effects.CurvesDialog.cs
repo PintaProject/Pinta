@@ -288,7 +288,6 @@ namespace Pinta.Effects
 
 		private void DrawGrid (Context g)
 		{
-			g.SetSourceColor (new Color (0.05, 0.05, 0.05));
 			g.SetDash (new double[] { 4, 4 }, 2);
 			g.LineWidth = 1;
 
@@ -314,13 +313,13 @@ namespace Pinta.Effects
 
 		private IEnumerator<ControlPointDrawingInfo> GetDrawingInfos ()
 		{
-			if (Mode == ColorTransferMode.Luminosity)
+			if (Mode == ColorTransferMode.Luminosity) {
+				drawing.GetStyleContext ().GetColor (out var fg_color);
 				yield return new ControlPointDrawingInfo () {
-					Color = new Color (0.4, 0.4, 0.4),
+					Color = fg_color,
 					IsActive = true
 				};
-
-			else {
+			} else {
 				yield return new ControlPointDrawingInfo () {
 					Color = new Color (0.9, 0, 0),
 					IsActive = checkRed.Active
@@ -376,6 +375,7 @@ namespace Pinta.Effects
 		private void DrawSpline (Context g)
 		{
 			var infos = GetDrawingInfos ();
+			g.Save ();
 
 			foreach (var controlPoints in ControlPoints) {
 
@@ -409,10 +409,15 @@ namespace Pinta.Effects
 				g.LineWidth = info.IsActive ? 2 : 1;
 				g.Stroke ();
 			}
+
+			g.Restore ();
 		}
 
 		private void HandleDrawingDrawnEvent (Context g)
 		{
+			drawing.GetStyleContext ().GetColor (out var fg_color);
+			g.SetSourceColor (fg_color);
+
 			DrawBorder (g);
 			DrawPointerCross (g);
 			DrawSpline (g);

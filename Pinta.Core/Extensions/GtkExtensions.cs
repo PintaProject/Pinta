@@ -331,7 +331,8 @@ namespace Pinta.Core
 		}
 
 		// TODO-GTK4 - need binding from gir.core
-		[DllImport ("libgtk-4", EntryPoint = "gtk_accelerator_parse")]
+		private const string GtkDllName = "libgtk-4";
+		[DllImport (GtkDllName, EntryPoint = "gtk_accelerator_parse")]
 		private static extern bool AcceleratorParse ([MarshalAs (UnmanagedType.LPUTF8Str)] string accelerator, out uint accelerator_key, out Gdk.ModifierType accelerator_mods);
 
 		/// <summary>
@@ -503,5 +504,25 @@ namespace Pinta.Core
 			{
 			}
 		}
+
+		// TODO-GTK4 - remove once Gdk.RGBA has struct bindings from gir.core
+		[StructLayout (LayoutKind.Sequential)]
+		private struct GdkRGBA
+		{
+			public float Red;
+			public float Green;
+			public float Blue;
+			public float Alpha;
+		}
+
+		// TODO-GTK4 - remove once Gdk.RGBA has struct bindings from gir.core
+		public static void GetColor (this Gtk.StyleContext context, out Cairo.Color color)
+		{
+			StyleContextGetColor (context.Handle, out var gdk_color);
+			color = new Cairo.Color (gdk_color.Red, gdk_color.Green, gdk_color.Blue, gdk_color.Alpha);
+		}
+
+		[DllImport (GtkDllName, EntryPoint = "gtk_style_context_get_color")]
+		private static extern void StyleContextGetColor (IntPtr handle, out GdkRGBA color);
 	}
 }
