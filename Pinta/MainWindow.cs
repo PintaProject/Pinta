@@ -190,7 +190,7 @@ namespace Pinta
 			// Zoom to window only on first show (if we do it always, it will be called on every resize)
 			// Note: this does seem to allow a small flicker where large images are shown at 100% zoom before
 			// zooming out (Bug 1959673)
-			canvas.OnShow += (o, e2) => {
+			canvas.Canvas.OnResize += (o, e2) => {
 				if (!canvas.HasBeenShown) {
 					GLib.Functions.TimeoutAddFull (0, 0, delegate {
 						ZoomToWindow_Activated (o, e);
