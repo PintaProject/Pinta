@@ -40,7 +40,7 @@ using Pinta.Core;
 
 namespace Pinta.Gui.Widgets
 {
-	public class HistogramWidget : FilledAreaBin
+	public class HistogramWidget : Gtk.DrawingArea
 	{
 		private bool[] selected;
 
@@ -48,6 +48,8 @@ namespace Pinta.Gui.Widgets
 		{
 			Histogram = new HistogramRgb ();
 			selected = new bool[] { true, true, true };
+
+			SetDrawFunc ((_, context, _, _) => Draw (context));
 		}
 
 		public bool FlipHorizontal { get; set; }
@@ -66,7 +68,7 @@ namespace Pinta.Gui.Widgets
 			selected[channel] = val;
 		}
 
-		private void CheckPoint (Rectangle rect, PointD point)
+		private void CheckPoint (RectangleD rect, PointD point)
 		{
 			if (point.X < rect.X)
 				point.X = rect.X;
@@ -81,7 +83,7 @@ namespace Pinta.Gui.Widgets
 
 		private void DrawChannel (Context g, ColorBgra color, int channel, long max, float mean)
 		{
-			var rect = new Rectangle (0, 0, AllocatedWidth, AllocatedHeight);
+			var rect = new RectangleD (0, 0, GetAllocatedWidth (), GetAllocatedHeight ());
 
 			var l = (int) rect.X;
 			var t = (int) rect.Y;
@@ -139,7 +141,7 @@ namespace Pinta.Gui.Widgets
 			g.FillPolygonal (points, brush_color.ToCairoColor ());
 		}
 
-		protected override bool OnDrawn (Context g)
+		private void Draw (Context g)
 		{
 			var max = Histogram.GetMax ();
 			var mean = Histogram.GetMean ();
@@ -148,8 +150,6 @@ namespace Pinta.Gui.Widgets
 
 			for (var i = 0; i < channels; ++i)
 				DrawChannel (g, Histogram.GetVisualColor (i), i, max, mean[i]);
-
-			return true;
 		}
 	}
 }

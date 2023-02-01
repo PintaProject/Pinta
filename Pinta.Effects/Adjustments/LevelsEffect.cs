@@ -44,21 +44,19 @@ namespace Pinta.Effects
 
 		public override void LaunchConfiguration ()
 		{
-#if false // TODO-GTK4
-			using (var dialog = new LevelsDialog (Data)) {
-				dialog.Title = Name;
-				dialog.Icon = PintaCore.Resources.GetIcon (Icon);
+			var dialog = new LevelsDialog (Data) {
+				Title = Name,
+				IconName = Icon,
+			};
 
-				var response = Gtk.ResponseType.None;
-				while (response == Gtk.ResponseType.None) {
-					response = (Gtk.ResponseType) dialog.Run ();
+			dialog.OnResponse += (_, args) => {
+				if (args.ResponseId != (int) Gtk.ResponseType.None) {
+					OnConfigDialogResponse (args.ResponseId == (int) Gtk.ResponseType.Ok);
+					dialog.Destroy ();
 				}
+			};
 
-				return response == Gtk.ResponseType.Ok;
-			}
-#else
-			throw new NotImplementedException ();
-#endif
+			dialog.Present ();
 		}
 
 		public override void Render (ImageSurface src, ImageSurface dest, Core.RectangleI[] rois)

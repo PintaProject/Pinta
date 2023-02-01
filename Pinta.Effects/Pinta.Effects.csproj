@@ -6,15 +6,4 @@
     <ProjectReference Include="..\Pinta.Core\Pinta.Core.csproj" />
     <ProjectReference Include="..\Pinta.Gui.Widgets\Pinta.Gui.Widgets.csproj" />
   </ItemGroup>
-
-  <!-- TODO-GTK4 - build all files -->
-  <ItemGroup>
-    <Compile Remove="**/*.cs" />
-    <Compile Include="Adjustments/*.cs" />
-    <Compile Include="Dialogs/Effects.CurvesDialog.cs" />
-    <Compile Include="Dialogs/Effects.PosterizeDialog.cs" />
-    <Compile Include="CoreEffectsExtension.cs" />
-    <Compile Include="Effects/*.cs" />
-    <Compile Include="Utilities/*.cs" />
-  </ItemGroup>
 </Project>

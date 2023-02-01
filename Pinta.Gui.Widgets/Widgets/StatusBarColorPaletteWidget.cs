@@ -264,19 +264,17 @@ namespace Pinta.Gui.Widgets
 		{
 			var ccd = Gtk.ColorChooserDialog.New (title, PintaCore.Chrome.MainWindow);
 			ccd.UseAlpha = true;
-#if false // TODO-GTK4 - Gdk.RGBA bindings needed
-			ccd.Rgba = initialColor.ToGdkRGBA ();
+			ccd.SetColor (initialColor);
 
-			var response = (Gtk.ResponseType) ccd.Run ();
+			Cairo.Color result = initialColor;
 
+			var response = ccd.RunBlocking ();
 			if (response == Gtk.ResponseType.Ok)
-				return ccd.Rgba.ToCairoColor ();
+				ccd.GetColor (out result);
 
-			return initialColor;
-#else
-			ccd.Present ();
-			return initialColor;
-#endif
+			ccd.Destroy ();
+
+			return result;
 		}
 
 		private WidgetElement GetElementAtPoint (PointD point)

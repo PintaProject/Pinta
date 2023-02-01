@@ -32,28 +32,26 @@ using Pinta.Core;
 
 namespace Pinta.Gui.Widgets
 {
-	public class ColorPanelWidget : FilledAreaBin
+	public class ColorPanelWidget : DrawingArea
 	{
-		private readonly EventBox eventbox;
-
 		public Color CairoColor { get; set; }
 
 		public ColorPanelWidget ()
 		{
 			HeightRequest = 24;
 
-			eventbox = new EventBox {
-				Events = (Gdk.EventMask) 256,
-				VisibleWindow = false
-			};
+			SetDrawFunc ((_, context, _, _) => Draw (context));
 
-			Add (eventbox);
+			ClickGesture = Gtk.GestureClick.New ();
+			ClickGesture.SetButton (0); // Handle all buttons
+			AddController (ClickGesture);
 		}
 
-		protected override bool OnDrawn (Context cr)
+		public Gtk.GestureClick ClickGesture { get; private init; }
+
+		private void Draw (Context cr)
 		{
-			cr.FillRoundedRectangle (new Rectangle (0, 0, AllocatedWidth, AllocatedHeight), 4, CairoColor);
-			return true;
+			cr.FillRoundedRectangle (new RectangleD (0, 0, GetAllocatedWidth (), GetAllocatedHeight ()), 4, CairoColor);
 		}
 	}
 }

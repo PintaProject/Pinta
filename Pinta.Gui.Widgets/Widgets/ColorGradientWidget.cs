@@ -28,42 +28,52 @@ using System;
 using System.Diagnostics.CodeAnalysis;
 using System.Linq;
 using Cairo;
+using GObject;
 using Gtk;
 using Pinta.Core;
 
 namespace Pinta.Gui.Widgets
 {
-	public class ColorGradientWidget : FilledAreaBin
+	public class ColorGradientWidget : Gtk.DrawingArea
 	{
-		private EventBox eventbox;
-
 		private const double xpad = 0.15;       // gradient horizontal padding							
 		private const double ypad = 0.03;       // gradient vertical padding
 
 		private double[] vals;
+		private PointI last_mouse_pos = new (0, 0);
 
 		public ColorGradientWidget (int count)
 		{
-			Build ();
+			CanFocus = true;
 			Count = count;
 
 			ValueIndex = -1;
 
-			eventbox.MotionNotifyEvent += HandleMotionNotifyEvent;
-			eventbox.LeaveNotifyEvent += HandleLeaveNotifyEvent;
-			eventbox.ButtonPressEvent += HandleButtonPressEvent;
-			eventbox.ButtonReleaseEvent += HandleButtonReleaseEvent;
+			SetDrawFunc ((_, context, _, _) => Draw (context));
+
+			var motion_controller = Gtk.EventControllerMotion.New ();
+			motion_controller.OnMotion += HandleMotionNotifyEvent;
+			motion_controller.OnLeave += HandleLeaveNotifyEvent;
+			AddController (motion_controller);
+
+			ClickGesture = Gtk.GestureClick.New ();
+			ClickGesture.SetButton (0); // Handle all buttons
+			ClickGesture.OnPressed += HandleButtonPressEvent;
+			ClickGesture.OnReleased += HandleButtonReleaseEvent;
+			AddController (ClickGesture);
 		}
 
-		private Rectangle GradientRectangle {
+		public Gtk.GestureClick ClickGesture { get; private init; }
+
+		private RectangleD GradientRectangle {
 			get {
-				var rect = new Rectangle (0, 0, AllocatedWidth, AllocatedHeight);
+				var rect = GetAllocation ();
 				var x = rect.X + xpad * rect.Width;
 				var y = rect.Y + ypad * rect.Height;
 				var width = (1 - 2 * xpad) * rect.Width;
 				var height = (1 - 2 * ypad) * rect.Height;
 
-				return new Rectangle (x, y, width, height);
+				return new RectangleD (x, y, width, height);
 			}
 		}
 
@@ -100,10 +110,12 @@ namespace Pinta.Gui.Widgets
 			}
 		}
 
+		private RectangleD GetAllocation () => new RectangleD (0, 0, GetAllocatedWidth (), GetAllocatedHeight ());
+
 		private double GetYFromValue (double val)
 		{
 			var rect = GradientRectangle;
-			var all = Allocation.ToCairoRectangle ();
+			var all = GetAllocation ();
 
 			return all.Y + ypad * all.Height + rect.Height * (255 - val) / 255;
 		}
@@ -127,7 +139,7 @@ namespace Pinta.Gui.Widgets
 		private int GetValueFromY (double py)
 		{
 			var rect = GradientRectangle;
-			var all = Allocation.ToCairoRectangle ();
+			var all = GetAllocation ();
 
 			py -= all.Y + ypad * all.Height;
 			return ((int) (255 * (rect.Height - py) / rect.Height));
@@ -168,14 +180,15 @@ namespace Pinta.Gui.Widgets
 			}
 		}
 
-		private void HandleMotionNotifyEvent (object o, MotionNotifyEventArgs args)
+		private void HandleMotionNotifyEvent (EventControllerMotion controller, EventControllerMotion.MotionSignalArgs args)
 		{
-			GdkExtensions.GetWindowPointer (Window, out var px, out var py, out var mask);
+			int px = (int) args.X;
+			int py = (int) args.Y;
 
 			var index = FindValueIndex (py);
 			py = (int) NormalizeY (index, py);
 
-			if (mask == Gdk.ModifierType.Button1Mask) {
+			if (controller.GetCurrentEventState ().IsLeftMousePressed ()) {
 				if (index != -1) {
 					var y = GetValueFromY (py);
 
@@ -184,30 +197,30 @@ namespace Pinta.Gui.Widgets
 				}
 			}
 
+			last_mouse_pos = new (px, py);
+
 			// to avoid unnessesary costly redrawing
 			if (index != -1)
-				Window.Invalidate ();
+				QueueDraw ();
 		}
 
-		private void HandleLeaveNotifyEvent (object o, LeaveNotifyEventArgs args)
+		private void HandleLeaveNotifyEvent (EventControllerMotion controller, EventArgs args)
 		{
-			if (args.Event.State != Gdk.ModifierType.Button1Mask)
+			if (!controller.GetCurrentEventState ().IsLeftMousePressed ())
 				ValueIndex = -1;
 
-			Window.Invalidate ();
+			QueueDraw ();
 		}
 
-		private void HandleButtonPressEvent (object o, ButtonPressEventArgs args)
+		private void HandleButtonPressEvent (GestureClick controller, GestureClick.PressedSignalArgs args)
 		{
-			GdkExtensions.GetWindowPointer (Window, out var px, out var py, out var mask);
-
-			var index = FindValueIndex ((int) py);
+			var index = FindValueIndex ((int) args.Y);
 
 			if (index != -1)
 				ValueIndex = index;
 		}
 
-		private void HandleButtonReleaseEvent (object o, ButtonReleaseEventArgs args)
+		private void HandleButtonReleaseEvent (GestureClick controller, GestureClick.ReleasedSignalArgs args)
 		{
 			ValueIndex = -1;
 		}
@@ -216,7 +229,7 @@ namespace Pinta.Gui.Widgets
 		{
 			var rect = GradientRectangle;
 
-			using var pat = new LinearGradient (rect.X, rect.Y, rect.X, rect.Y + rect.Height);
+			var pat = new LinearGradient (rect.X, rect.Y, rect.X, rect.Y + rect.Height);
 			pat.AddColorStop (0, MaxColor);
 			pat.AddColorStop (1, new Cairo.Color (0, 0, 0));
 
@@ -227,10 +240,11 @@ namespace Pinta.Gui.Widgets
 
 		private void DrawTriangles (Context g)
 		{
-			GdkExtensions.GetWindowPointer (Window, out var px, out var py, out var mask);
+			int px = last_mouse_pos.X;
+			int py = last_mouse_pos.Y;
 
 			var rect = GradientRectangle;
-			var all = Allocation.ToCairoRectangle ();
+			var all = GetAllocation ();
 
 			var index = FindValueIndex (py);
 
@@ -259,29 +273,14 @@ namespace Pinta.Gui.Widgets
 			}
 		}
 
-		protected override bool OnDrawn (Context g)
+		private void Draw (Context g)
 		{
 			DrawGradient (g);
 			DrawTriangles (g);
-			return true;
 		}
 
 		protected void OnValueChanged (int index) => ValueChanged?.Invoke (this, new IndexEventArgs (index));
 
 		public event EventHandler<IndexEventArgs>? ValueChanged;
-
-		[MemberNotNull (nameof (eventbox))]
-		private void Build ()
-		{
-			CanFocus = true;
-			Events = (Gdk.EventMask) 1534;
-
-			eventbox = new EventBox {
-				Events = (Gdk.EventMask) 790,
-				VisibleWindow = false
-			};
-
-			Add (eventbox);
-		}
 	}
 }

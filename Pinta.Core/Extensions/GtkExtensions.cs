@@ -524,5 +524,29 @@ namespace Pinta.Core
 
 		[DllImport (GtkDllName, EntryPoint = "gtk_style_context_get_color")]
 		private static extern void StyleContextGetColor (IntPtr handle, out GdkRGBA color);
+
+		// TODO-GTK4 - remove once Gdk.RGBA has struct bindings from gir.core
+		public static void SetColor (this Gtk.ColorChooserDialog dialog, Cairo.Color color)
+		{
+			ColorChooserSetRgba (dialog.Handle, new GdkRGBA () {
+				Red = (float) color.R,
+				Blue = (float) color.B,
+				Green = (float) color.G,
+				Alpha = (float) color.A
+			});
+		}
+
+		[DllImport (GtkDllName, EntryPoint = "gtk_color_chooser_set_rgba")]
+		private static extern void ColorChooserSetRgba (IntPtr handle, GdkRGBA color);
+
+		// TODO-GTK4 - remove once Gdk.RGBA has struct bindings from gir.core
+		public static void GetColor (this Gtk.ColorChooserDialog dialog, out Cairo.Color color)
+		{
+			ColorChooserGetRgba (dialog.Handle, out var gdk_color);
+			color = new Cairo.Color (gdk_color.Red, gdk_color.Green, gdk_color.Blue, gdk_color.Alpha);
+		}
+
+		[DllImport (GtkDllName, EntryPoint = "gtk_color_chooser_get_rgba")]
+		private static extern void ColorChooserGetRgba (IntPtr handle, out GdkRGBA color);
 	}
 }

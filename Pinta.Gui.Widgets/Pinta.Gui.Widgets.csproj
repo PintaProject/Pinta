@@ -14,7 +14,10 @@
     <Compile Include="Widgets/AnglePickerGraphic.cs" />
     <Compile Include="Widgets/AnglePickerWidget.cs" />
     <Compile Include="Widgets/Canvas/*.cs" />
+    <Compile Include="Widgets/ColorGradientWidget.cs" />
+    <Compile Include="Widgets/ColorPanelWidget.cs" />
     <Compile Include="Widgets/ComboBoxWidget.cs" />
+    <Compile Include="Widgets/HistogramWidget.cs" />
     <Compile Include="Widgets/HScaleSpinButtonWidget.cs" />
     <Compile Include="Widgets/PointPickerGraphic.cs" />
     <Compile Include="Widgets/PointPickerWidget.cs" />

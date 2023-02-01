@@ -210,20 +210,6 @@ namespace Pinta.Core
 			return k1;
 		}
 
-#if false // TODO-GTK4
-		public static void GetWidgetPointer (Gtk.Widget widget, out int x, out int y, out Gdk.ModifierType mask)
-		{
-			var pointer = widget.Display.DefaultSeat.Pointer;
-			widget.Window.GetDevicePosition (pointer, out x, out y, out mask);
-		}
-
-		public static void GetWindowPointer (Gdk.Window window, out int x, out int y, out Gdk.ModifierType mask)
-		{
-			var pointer = window.Display.DefaultSeat.Pointer;
-			window.GetDevicePosition (pointer, out x, out y, out mask);
-		}
-#endif
-
 		// TODO-GTK4 - need gir.core async bindings for Gdk.Clipboard
 		public static Task<string?> ReadTextAsync (this Gdk.Clipboard clipboard)
 		{
