@@ -367,7 +367,6 @@ namespace Pinta.Effects
 			} else
 				skip_counter++;
 
-			QueueDraw ();
 			disable_updating = false;
 
 			UpdateLivePreview ();
@@ -444,8 +443,6 @@ namespace Pinta.Effects
 				histogramInput.SetSelected (i, mask[i]);
 				histogramOutput.SetSelected (i, mask[i]);
 			}
-
-			QueueDraw ();
 		}
 
 		private void HandleCheckRedToggled (object? sender, EventArgs e)

@@ -34,7 +34,14 @@ namespace Pinta.Gui.Widgets
 {
 	public class ColorPanelWidget : DrawingArea
 	{
-		public Color CairoColor { get; set; }
+		private Color color;
+		public Color CairoColor {
+			get => color;
+			set {
+				color = value;
+				QueueDraw ();
+			}
+		}
 
 		public ColorPanelWidget ()
 		{

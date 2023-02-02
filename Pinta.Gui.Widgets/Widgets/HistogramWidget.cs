@@ -61,11 +61,13 @@ namespace Pinta.Gui.Widgets
 		public void ResetHistogram ()
 		{
 			Histogram = new HistogramRgb ();
+			Histogram.HistogramChanged += (_, _) => QueueDraw ();
 		}
 
 		public void SetSelected (int channel, bool val)
 		{
 			selected[channel] = val;
+			QueueDraw ();
 		}
 
 		private void CheckPoint (RectangleD rect, PointD point)

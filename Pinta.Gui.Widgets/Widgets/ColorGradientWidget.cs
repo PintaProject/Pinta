@@ -93,7 +93,14 @@ namespace Pinta.Gui.Widgets
 			}
 		}
 
-		public Color MaxColor { get; set; }
+		private Color max_color;
+		public Color MaxColor {
+			get => max_color;
+			set {
+				max_color = value;
+				QueueDraw ();
+			}
+		}
 
 		public int ValueIndex { get; private set; }
 
@@ -240,6 +247,9 @@ namespace Pinta.Gui.Widgets
 
 		private void DrawTriangles (Context g)
 		{
+			GetStyleContext ().GetColor (out var hover_color);
+			var inactive_color = hover_color with { A = 0.5 };
+
 			int px = last_mouse_pos.X;
 			int py = last_mouse_pos.Y;
 
@@ -252,8 +262,8 @@ namespace Pinta.Gui.Widgets
 
 				var val = vals[i];
 				var y = GetYFromValue (val);
-				var hoover = ((index == i)) && (all.ContainsPoint (px, py) || ValueIndex != -1);
-				var color = hoover ? new Color (0.1, 0.1, 0.9) : new Color (0.1, 0.1, 0.1);
+				var hover = ((index == i)) && (all.ContainsPoint (px, py) || ValueIndex != -1);
+				var color = hover ? hover_color : inactive_color;
 
 				// left triangle
 				var points = new PointD[] { new PointD (rect.X, y),
