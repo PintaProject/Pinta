@@ -50,7 +50,7 @@ namespace Pinta.Core
 
 			active_doc_action = Gio.SimpleAction.NewStateful (doc_action_id, IntVariantType, GLib.Variant.Create (-1));
 
-#if false // TODO-GTK4 - seems to be some issues here in gir.core
+#if false // TODO-GTK4 - the new variant value cannot be accessed due to an issue in gir.core, fixed in https://github.com/gircore/gir.core/pull/779
 			active_doc_action.OnActivate += (o, e) => {
 				var idx = e.Parameter!.GetInt();
 				if (idx < PintaCore.Workspace.OpenDocuments.Count) {

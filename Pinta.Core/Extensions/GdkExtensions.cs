@@ -33,39 +33,6 @@ namespace Pinta.Core
 {
 	public static class GdkExtensions
 	{
-#if false // TODO-GTK4
-		// Invalidate the whole thing
-		public static void Invalidate (this Window w)
-		{
-			w.InvalidateRect (new Rectangle (0, 0, w.Width, w.Height), true);
-		}
-
-		public static Rectangle GetBounds (this Window w)
-		{
-			return new Rectangle (0, 0, w.Width, w.Height);
-		}
-
-		public static Size GetSize (this Window w)
-		{
-			return new Size (w.Width, w.Height);
-		}
-
-		public static Cairo.Color ToCairoColor (this Gdk.Color color)
-		{
-			return new Cairo.Color ((double) color.Red / ushort.MaxValue, (double) color.Green / ushort.MaxValue, (double) color.Blue / ushort.MaxValue);
-		}
-
-		public static Gdk.Point Center (this Gdk.Rectangle rect)
-		{
-			return new Gdk.Point (rect.X + rect.Width / 2, rect.Y + rect.Height / 2);
-		}
-
-		public static ColorBgra ToBgraColor (this Gdk.Color color)
-		{
-			return ColorBgra.FromBgr ((byte) (color.Blue * 255 / ushort.MaxValue), (byte) (color.Green * 255 / ushort.MaxValue), (byte) (color.Red * 255 / ushort.MaxValue));
-		}
-#endif
-
 		public static bool IsShiftPressed (this ModifierType m)
 		{
 			return m.HasFlag (ModifierType.ShiftMask);
