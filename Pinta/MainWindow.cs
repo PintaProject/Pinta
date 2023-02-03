@@ -406,7 +406,15 @@ namespace Pinta
 		private void CreateDockAndPads (Box container)
 		{
 			var toolbox = new ToolBoxWidget ();
-			container.Append (toolbox);
+			var toolbox_scroll = new ScrolledWindow () {
+				Child = toolbox,
+				HscrollbarPolicy = PolicyType.Never,
+				VscrollbarPolicy = PolicyType.Automatic,
+				HasFrame = false,
+				OverlayScrolling = true,
+				WindowPlacement = CornerType.BottomRight
+			};
+			container.Append (toolbox_scroll);
 			PintaCore.Chrome.InitializeToolBox (toolbox);
 
 			// Dock widget

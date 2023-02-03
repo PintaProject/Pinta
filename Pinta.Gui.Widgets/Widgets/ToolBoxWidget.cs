@@ -14,8 +14,6 @@ namespace Pinta.Gui.Widgets
 			HeightRequest = 375;
 			AddCssClass (AdwaitaStyles.Linked);
 
-			// TODO-GTK4 - test the overflow behaviour once all tools are available, if there isn't enough height.
-
 			PintaCore.Tools.ToolAdded += HandleToolAdded;
 			PintaCore.Tools.ToolRemoved += HandleToolRemoved;
 
