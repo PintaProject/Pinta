@@ -142,7 +142,7 @@ namespace Pinta.Tools
 			tb.Append (font_label);
 
 			if (font_button == null) {
-				font_button = new FontButton () { UseSize = true, UseFont = true };
+				font_button = new FontButton () { UseSize = false, UseFont = true };
 				// Default to Arial if possible.
 				font_button.Font = Settings.GetSetting (FONT_SETTING, "Arial 12");
 
