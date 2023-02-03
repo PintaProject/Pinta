@@ -75,10 +75,8 @@ namespace Pinta.Gui.Widgets
 				var surf = layer.Surface;
 
 				// If we're in LivePreview, substitute current layer with the preview layer
-#if false // TODO-GTK4 enable when live preview is supported.
-                                if (enable_live_preview && layer == PintaCore.Workspace.ActiveDocument.Layers.CurrentUserLayer && PintaCore.LivePreview.IsEnabled)
-                                        surf = PintaCore.LivePreview.LivePreviewSurface;
-#endif
+				if (enable_live_preview && layer == PintaCore.Workspace.ActiveDocument.Layers.CurrentUserLayer && PintaCore.LivePreview.IsEnabled)
+					surf = PintaCore.LivePreview.LivePreviewSurface;
 
 				g.Save ();
 				if (!is_one_to_one) {
@@ -100,10 +98,8 @@ namespace Pinta.Gui.Widgets
 			}
 
 			// If we are at least 200% and grid is requested, draw it
-#if false // TODO-GTK4 enable when view menu is supported.
 			if (enable_pixel_grid && PintaCore.Actions.View.PixelGrid.Value && scale_factor.Ratio <= 0.5d)
 				RenderPixelGrid (dst, offset);
-#endif
 
 			dst.MarkDirty ();
 		}
