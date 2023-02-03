@@ -40,6 +40,10 @@ namespace Pinta.Gui.Widgets
 
 		private Cairo.ImageSurface? canvas;
 
+		// TODO-GTK4 - this needs to be a member variable due to https://github.com/gircore/gir.core/issues/783
+		Gtk.GestureClick click_controller;
+		Gtk.EventControllerMotion motion_controller;
+
 		public CanvasWindow CanvasWindow { get; private set; }
 
 		public PintaCanvas (CanvasWindow window, Document document)
@@ -72,7 +76,7 @@ namespace Pinta.Gui.Widgets
 			};
 
 			// Give mouse press / release events to the current tool
-			var click_controller = Gtk.GestureClick.New ();
+			click_controller = Gtk.GestureClick.New ();
 			click_controller.SetButton (0); // Listen for all mouse buttons.
 
 			click_controller.OnPressed += (_, args) => {
@@ -115,7 +119,7 @@ namespace Pinta.Gui.Widgets
 			AddController (click_controller);
 
 			// Give mouse move events to the current tool
-			var motion_controller = Gtk.EventControllerMotion.New ();
+			motion_controller = Gtk.EventControllerMotion.New ();
 			motion_controller.OnMotion += (_, args) => {
 				var window_point = new PointD (args.X, args.Y);
 				var canvas_point = document.Workspace.WindowPointToCanvas (window_point);

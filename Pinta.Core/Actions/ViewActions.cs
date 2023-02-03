@@ -60,6 +60,9 @@ namespace Pinta.Core
 			}
 		}
 
+		// TODO-GTK4 - this needs to be a member variable due to https://github.com/gircore/gir.core/issues/783
+		Gtk.EventControllerFocus focus_controller = null!;
+
 		public ViewActions ()
 		{
 			ZoomIn = new Command ("ZoomIn", Translations.GetString ("Zoom In"), null, Resources.StandardIcons.ValueIncrease);
@@ -183,7 +186,7 @@ namespace Pinta.Core
 			ZoomOut.Activated += HandlePintaCoreActionsViewZoomOutActivated;
 			ZoomComboBox.ComboBox.OnChanged += HandlePintaCoreActionsViewZoomComboBoxComboBoxChanged;
 
-			var focus_controller = Gtk.EventControllerFocus.New ();
+			focus_controller = Gtk.EventControllerFocus.New ();
 			focus_controller.OnEnter += Entry_FocusInEvent;
 			focus_controller.OnLeave += Entry_FocusOutEvent;
 			ZoomComboBox.ComboBox.GetEntry ().AddController (focus_controller);

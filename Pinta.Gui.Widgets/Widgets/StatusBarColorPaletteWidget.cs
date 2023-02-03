@@ -41,6 +41,9 @@ namespace Pinta.Gui.Widgets
 		private RectangleD palette_rect;
 		private RectangleD recent_palette_rect;
 
+		// TODO-GTK4 - this needs to be a member variable due to https://github.com/gircore/gir.core/issues/783
+		private readonly Gtk.GestureClick click_gesture;
+
 		const int PALETTE_ROWS = 2;
 		const int SWATCH_SIZE = 19;
 		const int WIDGET_HEIGHT = 42;
@@ -66,13 +69,13 @@ namespace Pinta.Gui.Widgets
 			SetDrawFunc ((area, context, width, height) => Draw (context));
 
 			// Handle mouse clicks.
-			var gesture = Gtk.GestureClick.New ();
-			gesture.SetButton (0); // Listen for all mouse buttons.
-			gesture.OnReleased += (_, e) => {
-				HandleClick (new PointD (e.X, e.Y), gesture.GetCurrentButton ());
-				gesture.SetState (Gtk.EventSequenceState.Claimed);
+			click_gesture = Gtk.GestureClick.New ();
+			click_gesture.SetButton (0); // Listen for all mouse buttons.
+			click_gesture.OnReleased += (_, e) => {
+				HandleClick (new PointD (e.X, e.Y), click_gesture.GetCurrentButton ());
+				click_gesture.SetState (Gtk.EventSequenceState.Claimed);
 			};
-			AddController (gesture);
+			AddController (click_gesture);
 		}
 
 		private void HandleShown ()

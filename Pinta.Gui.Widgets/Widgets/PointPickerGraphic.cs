@@ -37,6 +37,9 @@ namespace Pinta.Gui.Widgets
 		private PointI position;
 		private PointD drag_start;
 
+		// TODO-GTK4 - this needs to be a member variable due to https://github.com/gircore/gir.core/issues/783
+		private readonly Gtk.GestureDrag drag_gesture;
+
 		public PointPickerGraphic ()
 		{
 			HeightRequest = WidthRequest = 65;
@@ -47,24 +50,24 @@ namespace Pinta.Gui.Widgets
 			SetDrawFunc ((area, context, width, height) => Draw (context));
 
 			// Handle click + drag.
-			var gesture = Gtk.GestureDrag.New ();
-			gesture.SetButton (GtkExtensions.MouseLeftButton);
+			drag_gesture = Gtk.GestureDrag.New ();
+			drag_gesture.SetButton (GtkExtensions.MouseLeftButton);
 
-			gesture.OnDragBegin += (_, args) => {
+			drag_gesture.OnDragBegin += (_, args) => {
 				drag_start = new PointD (args.StartX, args.StartY);
 				Position = MousePtToPosition (drag_start);
-				gesture.SetState (Gtk.EventSequenceState.Claimed);
+				drag_gesture.SetState (Gtk.EventSequenceState.Claimed);
 			};
-			gesture.OnDragUpdate += (_, args) => {
+			drag_gesture.OnDragUpdate += (_, args) => {
 				var drag_offset = new PointD (args.OffsetX, args.OffsetY);
 				Position = MousePtToPosition (drag_start + drag_offset);
 			};
-			gesture.OnDragEnd += (_, args) => {
+			drag_gesture.OnDragEnd += (_, args) => {
 				var drag_offset = new PointD (args.OffsetX, args.OffsetY);
 				Position = MousePtToPosition (drag_start + drag_offset);
 			};
 
-			AddController (gesture);
+			AddController (drag_gesture);
 		}
 
 		private void UpdateThumbnail ()
