@@ -49,9 +49,6 @@ namespace Pinta.Gui.Widgets
 		const int WIDGET_HEIGHT = 42;
 		const int PALETTE_MARGIN = 10;
 
-		private GdkPixbuf.Pixbuf swap_icon = GdkPixbuf.Pixbuf.New (GdkPixbuf.Colorspace.Rgb, false, 8, 1, 1); // overridden in OnShown()
-		private GdkPixbuf.Pixbuf reset_icon = GdkPixbuf.Pixbuf.New (GdkPixbuf.Colorspace.Rgb, false, 8, 1, 1);
-
 		public StatusBarColorPaletteWidget ()
 		{
 			HasTooltip = true;
@@ -64,7 +61,6 @@ namespace Pinta.Gui.Widgets
 
 			HeightRequest = WIDGET_HEIGHT;
 
-			OnRealize += (_, _) => HandleShown ();
 			OnResize += (_, e) => HandleSizeAllocated (e);
 			SetDrawFunc ((area, context, width, height) => Draw (context));
 
@@ -76,16 +72,6 @@ namespace Pinta.Gui.Widgets
 				click_gesture.SetState (Gtk.EventSequenceState.Claimed);
 			};
 			AddController (click_gesture);
-		}
-
-		private void HandleShown ()
-		{
-			// Load the symbolic icons when shown. In the constructor the StyleContext isn't ready,
-			// so symbolic icons might not be colored correctly.
-#if false // TODO-GTK4 resources
-			swap_icon = PintaCore.Resources.GetIcon (Pinta.Resources.Icons.ColorPaletteSwap, StyleContext);
-			reset_icon = PintaCore.Resources.GetIcon (Pinta.Resources.Icons.ColorPaletteReset, StyleContext);
-#endif
 		}
 
 		private void HandleClick (PointD point, uint button)
@@ -153,9 +139,14 @@ namespace Pinta.Gui.Widgets
 			g.DrawRectangle (new RectangleD (primary_rect.X + 1, primary_rect.Y + 1, primary_rect.Width - 2, primary_rect.Height - 2), new Color (1, 1, 1), 1);
 			g.DrawRectangle (primary_rect, new Color (0, 0, 0), 1);
 
-			// Draw swatch icons
-			g.DrawPixbuf (swap_icon, swap_rect.Location ());
-			g.DrawPixbuf (reset_icon, reset_rect.Location ());
+			// Draw the swap icon.
+			GetStyleContext ().GetColor (out var fg_color);
+			DrawSwapIcon (g, fg_color);
+
+			// Draw the reset icon.
+			double square_size = 0.6 * reset_rect.Width;
+			g.DrawRectangle (new RectangleD (reset_rect.Location (), square_size, square_size), fg_color, 1);
+			g.FillRectangle (new RectangleD (reset_rect.Right - square_size, reset_rect.Bottom - square_size, square_size, square_size), fg_color);
 
 			// Draw recently used color swatches
 			var recent = PintaCore.Palette.RecentlyUsedColors;
@@ -168,6 +159,35 @@ namespace Pinta.Gui.Widgets
 
 			for (var i = 0; i < palette.Count; i++)
 				g.FillRectangle (GetSwatchBounds (i), palette[i]);
+		}
+
+		private void DrawSwapIcon (Context g, Color color)
+		{
+			double arrow_size = 4;
+
+			g.Save ();
+			g.LineWidth = 1.5;
+			g.SetSourceColor (color);
+
+			double radius = 11;
+			double offset = 1;
+			double x = swap_rect.Left + radius;
+			double y = swap_rect.Bottom - offset;
+			g.MoveTo (x, y);
+			g.CurveTo (x, y - radius - 2, x, y - radius + offset, swap_rect.Left + offset, swap_rect.Bottom - radius);
+
+			g.MoveTo (x - arrow_size, y - arrow_size);
+			g.LineTo (x, y);
+			g.LineTo (x + arrow_size, y - arrow_size);
+
+			x = swap_rect.Left + offset;
+			y = swap_rect.Bottom - radius;
+			g.MoveTo (x + arrow_size, y - arrow_size);
+			g.LineTo (x, y);
+			g.LineTo (x + arrow_size, y + arrow_size);
+
+			g.Stroke ();
+			g.Restore ();
 		}
 
 		private void HandleSizeAllocated (Gtk.DrawingArea.ResizeSignalArgs e)
@@ -250,7 +270,7 @@ namespace Pinta.Gui.Widgets
 			}
 
 			args.Tooltip.SetText (text);
-#if false // TODO-GTK4
+#if false // TODO-GTK4 - requires signal return values (https://github.com/gircore/gir.core/pull/775)
 			args.RetVal = (text != null);
 #endif
 		}
