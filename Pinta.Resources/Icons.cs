@@ -65,6 +65,8 @@ namespace Pinta.Resources
 
 		public const string ImageMissing = "image-missing-symbolic";
 
+		public const string OpenMenu = "open-menu-symbolic";
+
 		public const string ValueDecrease = "value-decrease-symbolic";
 		public const string ValueIncrease = "value-increase-symbolic";
 		public const string ViewFullscreen = "view-fullscreen-symbolic";

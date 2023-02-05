@@ -82,6 +82,22 @@ namespace Pinta.Core
 			toolbar.Append (Edit.Deselect.CreateToolBarItem ());
 		}
 
+		public void CreateHeaderToolBar (Adw.HeaderBar header)
+		{
+			header.PackStart (File.New.CreateToolBarItem ());
+			header.PackStart (File.Open.CreateToolBarItem ());
+			header.PackStart (File.Save.CreateToolBarItem ());
+
+			header.PackStart (GtkExtensions.CreateToolBarSeparator ());
+			header.PackStart (Edit.Undo.CreateToolBarItem ());
+			header.PackStart (Edit.Redo.CreateToolBarItem ());
+
+			header.PackStart (GtkExtensions.CreateToolBarSeparator ());
+			header.PackStart (Edit.Cut.CreateToolBarItem ());
+			header.PackStart (Edit.Copy.CreateToolBarItem ());
+			header.PackStart (Edit.Paste.CreateToolBarItem ());
+		}
+
 		public void CreateStatusBar (Box statusbar)
 		{
 			// Cursor position widget

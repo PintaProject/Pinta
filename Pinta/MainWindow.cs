@@ -309,15 +309,24 @@ namespace Pinta
 		private void CreateMainMenu (WindowShell shell)
 		{
 			var menu_bar = Gio.Menu.New ();
-			app.Menubar = menu_bar;
 
-			if (PintaCore.System.OperatingSystem == OS.Mac) {
-				// Only use the application menu on macOS. On other platforms, these
-				// menu items appear under File, Help, etc.
-				// The first menu seems to be treated as the application menu.
-				var app_menu = Gio.Menu.New ();
-				PintaCore.Actions.App.RegisterActions (app, app_menu);
-				menu_bar.AppendSubmenu ("_Application", app_menu);
+			if (window_shell.HeaderBar is null) {
+				app.Menubar = menu_bar;
+
+				if (PintaCore.System.OperatingSystem == OS.Mac) {
+					// Only use the application menu on macOS. On other platforms, these
+					// menu items appear under File, Help, etc.
+					// The first menu seems to be treated as the application menu.
+					var app_menu = Gio.Menu.New ();
+					PintaCore.Actions.App.RegisterActions (app, app_menu);
+					menu_bar.AppendSubmenu ("_Application", app_menu);
+				}
+			} else {
+				var header_bar = window_shell.HeaderBar;
+				header_bar.PackEnd (new Gtk.MenuButton () {
+					MenuModel = menu_bar,
+					IconName = Resources.StandardIcons.OpenMenu
+				});
 			}
 
 			var file_menu = Gio.Menu.New ();
@@ -374,7 +383,12 @@ namespace Pinta
 		private void CreateMainToolBar (WindowShell shell)
 		{
 			var main_toolbar = window_shell.CreateToolBar ("main_toolbar");
-			PintaCore.Actions.CreateToolBar (main_toolbar);
+
+			if (window_shell.HeaderBar is not null)
+				PintaCore.Actions.CreateHeaderToolBar (window_shell.HeaderBar!);
+			else
+				PintaCore.Actions.CreateToolBar (main_toolbar);
+
 			PintaCore.Chrome.InitializeMainToolBar (main_toolbar);
 		}
 

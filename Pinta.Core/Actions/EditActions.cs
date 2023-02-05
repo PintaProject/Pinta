@@ -75,7 +75,6 @@ namespace Pinta.Core
 			ResetPalette = new Command ("resetpalette", Translations.GetString ("Reset to Default"), null, Resources.StandardIcons.DocumentRevert);
 			ResizePalette = new Command ("resizepalette", Translations.GetString ("Set Number of Colors"), null, Resources.Icons.ImageResize);
 
-			Undo.IsImportant = true;
 			Undo.Sensitive = false;
 			Redo.Sensitive = false;
 		}

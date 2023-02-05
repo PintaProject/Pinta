@@ -33,7 +33,8 @@ namespace Pinta
 {
 	public class WindowShell
 	{
-		private ApplicationWindow app_window;
+		private readonly ApplicationWindow app_window;
+		private readonly Adw.HeaderBar? header_bar;
 		private Box shell_layout;
 		private Box menu_layout;
 		private Box? workspace_layout;
@@ -52,6 +53,12 @@ namespace Pinta
 			if (maximize)
 				app_window.Maximize ();
 
+			// On macOS the global menubar is used, but otherwise use a header bar.
+			if (PintaCore.System.OperatingSystem != OS.Mac) {
+				header_bar = Adw.HeaderBar.New ();
+				app_window.SetTitlebar (header_bar);
+			}
+
 			shell_layout = Box.New (Orientation.Vertical, 0);
 			menu_layout = Box.New (Orientation.Vertical, 0);
 
@@ -62,6 +69,7 @@ namespace Pinta
 		}
 
 		public ApplicationWindow Window => app_window;
+		public Adw.HeaderBar? HeaderBar => header_bar;
 
 		public Box CreateToolBar (string name)
 		{
