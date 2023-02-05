@@ -49,6 +49,17 @@ namespace Pinta.Core
 
 	public static class GtkExtensions
 	{
+		private const string GtkLibraryName = "Gtk";
+
+		static GtkExtensions ()
+		{
+			NativeImportResolver.RegisterLibrary (GtkLibraryName,
+				windowsLibraryName: "libgtk-4-1.dll",
+				linuxLibraryName: "libgtk-4.so.1",
+				osxLibraryName: "libgtk-4.1.dylib"
+			);
+		}
+
 		public const uint MouseLeftButton = 1;
 		public const uint MouseMiddleButton = 2;
 		public const uint MouseRightButton = 3;
@@ -331,8 +342,7 @@ namespace Pinta.Core
 		}
 
 		// TODO-GTK4 - need binding from gir.core
-		private const string GtkDllName = "libgtk-4";
-		[DllImport (GtkDllName, EntryPoint = "gtk_accelerator_parse")]
+		[DllImport (GtkLibraryName, EntryPoint = "gtk_accelerator_parse")]
 		private static extern bool AcceleratorParse ([MarshalAs (UnmanagedType.LPUTF8Str)] string accelerator, out uint accelerator_key, out Gdk.ModifierType accelerator_mods);
 
 		/// <summary>
@@ -522,7 +532,7 @@ namespace Pinta.Core
 			color = new Cairo.Color (gdk_color.Red, gdk_color.Green, gdk_color.Blue, gdk_color.Alpha);
 		}
 
-		[DllImport (GtkDllName, EntryPoint = "gtk_style_context_get_color")]
+		[DllImport (GtkLibraryName, EntryPoint = "gtk_style_context_get_color")]
 		private static extern void StyleContextGetColor (IntPtr handle, out GdkRGBA color);
 
 		// TODO-GTK4 - remove once Gdk.RGBA has struct bindings from gir.core
@@ -536,7 +546,7 @@ namespace Pinta.Core
 			});
 		}
 
-		[DllImport (GtkDllName, EntryPoint = "gtk_color_chooser_set_rgba")]
+		[DllImport (GtkLibraryName, EntryPoint = "gtk_color_chooser_set_rgba")]
 		private static extern void ColorChooserSetRgba (IntPtr handle, GdkRGBA color);
 
 		// TODO-GTK4 - remove once Gdk.RGBA has struct bindings from gir.core
@@ -546,7 +556,7 @@ namespace Pinta.Core
 			color = new Cairo.Color (gdk_color.Red, gdk_color.Green, gdk_color.Blue, gdk_color.Alpha);
 		}
 
-		[DllImport (GtkDllName, EntryPoint = "gtk_color_chooser_get_rgba")]
+		[DllImport (GtkLibraryName, EntryPoint = "gtk_color_chooser_get_rgba")]
 		private static extern void ColorChooserGetRgba (IntPtr handle, out GdkRGBA color);
 	}
 }

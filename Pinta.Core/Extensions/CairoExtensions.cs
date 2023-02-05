@@ -68,6 +68,17 @@ namespace Pinta.Core
 {
 	public static class CairoExtensions
 	{
+		private const string CairoLibraryName = "cairo-graphics";
+
+		static CairoExtensions ()
+		{
+			NativeImportResolver.RegisterLibrary (CairoLibraryName,
+				windowsLibraryName: "libcairo-2.dll",
+				linuxLibraryName: "libcairo.so.2",
+				osxLibraryName: "libcairo.2.dylib"
+			);
+		}
+
 		// Most of these functions return an affected area
 		// This can be ignored if you don't need it
 
@@ -1088,21 +1099,19 @@ namespace Pinta.Core
 			public RectangleI ToRectangleI () => new RectangleI (X, Y, Width, Height);
 		}
 
-		private const string CairoDllName = "libcairo";
-
-		[DllImport (CairoDllName, EntryPoint = "cairo_region_create_rectangle")]
+		[DllImport (CairoLibraryName, EntryPoint = "cairo_region_create_rectangle")]
 		private static extern Cairo.Internal.RegionOwnedHandle RegionCreateRectangle (ref CairoRectangleInt rect);
 
-		[DllImport (CairoDllName, EntryPoint = "cairo_region_contains_point")]
+		[DllImport (CairoLibraryName, EntryPoint = "cairo_region_contains_point")]
 		private static extern bool RegionContainsPoint (Cairo.Internal.RegionHandle handle, int x, int y);
 
-		[DllImport (CairoDllName, EntryPoint = "cairo_region_xor")]
+		[DllImport (CairoLibraryName, EntryPoint = "cairo_region_xor")]
 		private static extern Status RegionXor (Cairo.Internal.RegionHandle handle, Cairo.Internal.RegionHandle other);
 
-		[DllImport (CairoDllName, EntryPoint = "cairo_region_num_rectangles")]
+		[DllImport (CairoLibraryName, EntryPoint = "cairo_region_num_rectangles")]
 		private static extern int RegionNumRectangles (Cairo.Internal.RegionHandle handle);
 
-		[DllImport (CairoDllName, EntryPoint = "cairo_region_get_rectangle")]
+		[DllImport (CairoLibraryName, EntryPoint = "cairo_region_get_rectangle")]
 		private static extern int RegionGetRectangle (Cairo.Internal.RegionHandle handle, int i, out CairoRectangleInt rect);
 
 		public static Region CreateRegion (in RectangleI rect)

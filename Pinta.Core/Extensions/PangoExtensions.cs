@@ -33,7 +33,16 @@ namespace Pinta.Core
 	// TODO-GTK4 - these need a proper binding in gir.core
 	public static class PangoExtensions
 	{
-		private const string PangoDllName = "libpango-1.0";
+		private const string PangoLibraryName = "Pango";
+
+		static PangoExtensions ()
+		{
+			NativeImportResolver.RegisterLibrary (PangoLibraryName,
+				windowsLibraryName: "libpango-1.0-0.dll",
+				linuxLibraryName: "libpango-1.0.so.0",
+				osxLibraryName: "libpango-1.0.0.dylib"
+			);
+		}
 
 		public static FontDescription CreateFontDescription ()
 			=> new FontDescription (Pango.Internal.FontDescription.New ());
@@ -54,7 +63,7 @@ namespace Pinta.Core
 			weak_pos = weak_pos_pango.ToRectangleI ();
 		}
 
-		[DllImport (PangoDllName, EntryPoint = "pango_layout_get_cursor_pos")]
+		[DllImport (PangoLibraryName, EntryPoint = "pango_layout_get_cursor_pos")]
 		private static extern void InternalGetCursorPos (IntPtr layout, int index, out PangoRectangle strong_pos, out PangoRectangle weak_pos);
 
 		public static void GetPixelExtents (this Layout layout, out RectangleI ink_rect, out RectangleI logical_rect)
@@ -64,7 +73,7 @@ namespace Pinta.Core
 			logical_rect = logical_rect_pango.ToRectangleI ();
 		}
 
-		[DllImport (PangoDllName, EntryPoint = "pango_layout_get_pixel_extents")]
+		[DllImport (PangoLibraryName, EntryPoint = "pango_layout_get_pixel_extents")]
 		private static extern void InternalGetPixelExtents (IntPtr layout, out PangoRectangle ink_rect, out PangoRectangle logical_rect);
 
 		public static void IndexToPos (this Layout layout, int index, out RectangleI pos)
@@ -73,7 +82,7 @@ namespace Pinta.Core
 			pos = pos_pango.ToRectangleI ();
 		}
 
-		[DllImport (PangoDllName, EntryPoint = "pango_layout_index_to_pos")]
+		[DllImport (PangoLibraryName, EntryPoint = "pango_layout_index_to_pos")]
 		private static extern void InternalIndexToPos (IntPtr layout, int index, out PangoRectangle pos);
 
 		public static void XyToIndex (this Layout layout, int x, int y, out int index, out int trailing)
@@ -81,7 +90,7 @@ namespace Pinta.Core
 			InternalXyToIndex (layout.Handle, x, y, out index, out trailing);
 		}
 
-		[DllImport (PangoDllName, EntryPoint = "pango_layout_xy_to_index")]
+		[DllImport (PangoLibraryName, EntryPoint = "pango_layout_xy_to_index")]
 		private static extern void InternalXyToIndex (IntPtr layout, int x, int y, out int index, out int trailing);
 
 		[StructLayout (LayoutKind.Sequential)]

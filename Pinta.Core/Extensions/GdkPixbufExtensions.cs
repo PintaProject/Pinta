@@ -32,6 +32,17 @@ namespace Pinta.Core
 {
 	public static class GdkPixbufExtensions
 	{
+		private const string PixbufLibraryName = "GdkPixbuf";
+
+		static GdkPixbufExtensions ()
+		{
+			NativeImportResolver.RegisterLibrary (PixbufLibraryName,
+				windowsLibraryName: "libgdk_pixbuf-2.0-0.dll",
+				linuxLibraryName: "libgdk_pixbuf-2.0.so.0",
+				osxLibraryName: "libgdk_pixbuf-2.0.0.dylib"
+			);
+		}
+
 		// TODO-GTK4 - needs a proper binding in gir.core
 		public static Pixbuf NewPixbufFromStream (Gio.InputStream stream, Gio.Cancellable? cancellable)
 		{
@@ -126,16 +137,16 @@ namespace Pinta.Core
 			return GLib.Internal.StringHelper.ToStringArrayUtf8 (resultNative);
 		}
 
-		[DllImport ("gdk_pixbuf-2.0", EntryPoint = "gdk_pixbuf_format_get_mime_types")]
+		[DllImport (PixbufLibraryName, EntryPoint = "gdk_pixbuf_format_get_mime_types")]
 		private static extern IntPtr GetMimeTypes (GdkPixbuf.Internal.PixbufFormatHandle format);
 
-		[DllImport ("gdk_pixbuf-2.0", EntryPoint = "gdk_pixbuf_get_formats")]
+		[DllImport (PixbufLibraryName, EntryPoint = "gdk_pixbuf_get_formats")]
 		private static extern GLib.Internal.SListUnownedHandle GetFormatsNative ();
 
-		[DllImport ("gdk_pixbuf-2.0", EntryPoint = "gdk_pixbuf_save_to_bufferv")]
+		[DllImport (PixbufLibraryName, EntryPoint = "gdk_pixbuf_save_to_bufferv")]
 		private static extern bool SaveToBufferv (IntPtr pixbuf, out IntPtr buffer, out uint buffer_size, [MarshalAs (UnmanagedType.LPUTF8Str)] string type, IntPtr option_keys, IntPtr option_values, out GLib.Internal.ErrorOwnedHandle error);
 
-		[DllImport ("gdk_pixbuf-2.0", EntryPoint = "gdk_pixbuf_save_to_streamv")]
+		[DllImport (PixbufLibraryName, EntryPoint = "gdk_pixbuf_save_to_streamv")]
 		private static extern bool SaveToStreamv (IntPtr pixbuf, IntPtr stream, [MarshalAs (UnmanagedType.LPUTF8Str)] string type, IntPtr option_keys, IntPtr option_values, IntPtr cancellable, out GLib.Internal.ErrorOwnedHandle error);
 	}
 }
