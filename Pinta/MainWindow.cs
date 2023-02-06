@@ -217,12 +217,12 @@ namespace Pinta
 			return (MetricType) PintaCore.Actions.View.RulerMetric.GetState ().GetInt ();
 		}
 
-		private void HandleGlobalKeyPress (Gtk.EventControllerKey controller, Gtk.EventControllerKey.KeyPressedSignalArgs args)
+		private bool HandleGlobalKeyPress (Gtk.EventControllerKey controller, Gtk.EventControllerKey.KeyPressedSignalArgs args)
 		{
 			// Give the widget that has focus a first shot at handling the event.
 			// Otherwise, key presses may be intercepted by shortcuts for menu items.
 			if (SendToFocusWidget (controller))
-				return;
+				return true;
 
 			// Give the Canvas (and by extension the tools)
 			// first shot at handling the event if
@@ -232,17 +232,17 @@ namespace Pinta
 
 				if ((canvas_window.Canvas.HasFocus || canvas_window.IsMouseOnCanvas) &&
 				     canvas_window.Canvas.DoKeyPressEvent (controller, args)) {
-					return;
+					return true;
 				}
 			}
 
 			// If the canvas/tool didn't consume it, see if its a toolbox shortcut
 			if (!args.State.HasModifierKey () && PintaCore.Tools.SetCurrentTool (args.GetKey ())) {
-				return;
+				return true;
 			}
 
 			// Finally, see if the palette widget wants it.
-			PintaCore.Palette.DoKeyPress (args);
+			return PintaCore.Palette.DoKeyPress (args);
 		}
 
 		private void HandleGlobalKeyRelease (Gtk.EventControllerKey controller, Gtk.EventControllerKey.KeyReleasedSignalArgs args)

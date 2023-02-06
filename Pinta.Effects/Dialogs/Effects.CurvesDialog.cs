@@ -435,7 +435,8 @@ namespace Pinta.Effects
 			content_area.Spacing = 6;
 
 			const int spacing = 6;
-			var hbox1 = new Box () { Orientation = Orientation.Horizontal, Spacing = spacing };
+			var hbox1 = new Box () { Spacing = spacing };
+			hbox1.SetOrientation (Orientation.Horizontal);
 			hbox1.Append (Label.New (Translations.GetString ("Transfer Map")));
 
 			comboMap = new ComboBoxText ();
@@ -458,7 +459,8 @@ namespace Pinta.Effects
 			drawing.SetAllMargins (8);
 			content_area.Append (drawing);
 
-			var hbox2 = new Box () { Orientation = Orientation.Horizontal };
+			var hbox2 = new Box ();
+			hbox2.SetOrientation (Orientation.Horizontal);
 			checkRed = new CheckButton () { Label = Translations.GetString ("Red  "), Active = true };
 			checkGreen = new CheckButton () { Label = Translations.GetString ("Green"), Active = true };
 			checkBlue = new CheckButton () { Label = Translations.GetString ("Blue "), Active = true };

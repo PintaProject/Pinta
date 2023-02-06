@@ -35,7 +35,7 @@ namespace Pinta.Core
 
 		public ToolBarComboBox (int width, int activeIndex, bool allowEntry, params string[] contents)
 		{
-			Orientation = Orientation.Horizontal;
+			SetOrientation (Orientation.Horizontal);
 			Spacing = 0;
 			Hexpand = false;
 

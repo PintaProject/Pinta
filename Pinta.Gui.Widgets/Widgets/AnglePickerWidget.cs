@@ -82,7 +82,8 @@ namespace Pinta.Gui.Widgets
 			const int spacing = 6;
 
 			// Section label + line
-			var hbox1 = new Box () { Orientation = Orientation.Horizontal, Spacing = spacing };
+			var hbox1 = new Box () { Spacing = spacing };
+			hbox1.SetOrientation (Orientation.Horizontal);
 
 			label = new Label ();
 			label.AddCssClass (AdwaitaStyles.Title4);
@@ -90,7 +91,8 @@ namespace Pinta.Gui.Widgets
 			hbox1.Append (label);
 
 			// Angle graphic + spinner + reset button
-			var hbox2 = new Box () { Orientation = Orientation.Horizontal, Spacing = spacing };
+			var hbox2 = new Box () { Spacing = spacing };
+			hbox2.SetOrientation (Orientation.Horizontal);
 
 			anglepickergraphic1 = new AnglePickerGraphic ();
 			anglepickergraphic1.Hexpand = true;
@@ -118,7 +120,7 @@ namespace Pinta.Gui.Widgets
 			hbox2.Append (button);
 
 			// Main layout
-			Orientation = Orientation.Vertical;
+			SetOrientation (Orientation.Vertical);
 			Spacing = spacing;
 			Append (hbox1);
 			Append (hbox2);

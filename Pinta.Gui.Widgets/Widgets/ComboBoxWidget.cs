@@ -68,7 +68,8 @@ namespace Pinta.Gui.Widgets
 			const int spacing = 6;
 
 			// Section label + line
-			var hbox1 = new Box () { Orientation = Orientation.Horizontal, Spacing = spacing };
+			var hbox1 = new Box () { Spacing = spacing };
+			hbox1.SetOrientation (Orientation.Horizontal);
 
 			label = new Label ();
 			label.AddCssClass (AdwaitaStyles.Title4);
@@ -79,7 +80,7 @@ namespace Pinta.Gui.Widgets
 
 			// Main layout
 			// Main layout
-			Orientation = Orientation.Vertical;
+			SetOrientation (Orientation.Vertical);
 			Spacing = spacing;
 			Append (hbox1);
 			Append (combobox);

@@ -222,7 +222,8 @@ namespace Pinta
 			opacity_label.Halign = Align.End;
 			grid.Attach (opacity_label, 0, 3, 1, 1);
 
-			var opacity_box = new Box () { Orientation = Orientation.Horizontal, Spacing = spacing };
+			var opacity_box = new Box () { Spacing = spacing };
+			opacity_box.SetOrientation (Orientation.Horizontal);
 			opacitySpinner = SpinButton.NewWithRange (0, 100, 1);
 			opacitySpinner.Adjustment!.PageIncrement = 10;
 			opacitySpinner.ClimbRate = 1;

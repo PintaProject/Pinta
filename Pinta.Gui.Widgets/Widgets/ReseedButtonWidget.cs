@@ -66,7 +66,7 @@ namespace Pinta.Gui.Widgets
 			};
 
 			// Main layout
-			Orientation = Orientation.Vertical;
+			SetOrientation (Orientation.Vertical);
 			Spacing = spacing;
 			Append (label);
 			Append (button);

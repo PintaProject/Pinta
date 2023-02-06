@@ -518,7 +518,8 @@ namespace Pinta.Effects
 
 			Resizable = false;
 
-			var hboxChecks = new Box () { Orientation = Orientation.Horizontal, Spacing = spacing };
+			var hboxChecks = new Box () { Spacing = spacing };
+			hboxChecks.SetOrientation (Orientation.Horizontal);
 			checkRed = new CheckButton () { Label = Translations.GetString ("Red"), Active = true };
 			hboxChecks.Append (checkRed);
 			checkGreen = new CheckButton () { Label = Translations.GetString ("Green"), Active = true };
@@ -555,12 +556,14 @@ namespace Pinta.Effects
 			histogramInput = new HistogramWidget () { WidthRequest = 130, FlipHorizontal = true };
 			histogramOutput = new HistogramWidget () { WidthRequest = 130 };
 
-			var hboxLayout = new Box () { Orientation = Orientation.Horizontal, Spacing = spacing };
+			var hboxLayout = new Box () { Spacing = spacing };
+			hboxLayout.SetOrientation (Orientation.Horizontal);
 			hboxLayout.SetAllMargins (spacing);
 
 			static Box CreateLabelledWidget (Widget widget, string label)
 			{
-				var vbox = new Box () { Orientation = Orientation.Vertical, Spacing = spacing };
+				var vbox = new Box () { Spacing = spacing };
+				vbox.SetOrientation (Orientation.Vertical);
 				var label_widget = Label.New (label);
 				label_widget.Halign = Align.Start;
 				vbox.Append (label_widget);
@@ -573,7 +576,8 @@ namespace Pinta.Effects
 
 			hboxLayout.Append (CreateLabelledWidget (histogramInput, Translations.GetString ("Input Histogram")));
 
-			var vboxInput = new Box () { Orientation = Orientation.Vertical, Spacing = spacing };
+			var vboxInput = new Box () { Spacing = spacing };
+			vboxInput.SetOrientation (Orientation.Vertical);
 			vboxInput.Append (spinInHigh);
 			vboxInput.Append (colorpanelInHigh);
 			colorpanelInLow.Valign = Align.End;
@@ -581,13 +585,15 @@ namespace Pinta.Effects
 			vboxInput.Append (colorpanelInLow);
 			vboxInput.Append (spinInLow);
 
-			var hboxInput = new Box () { Orientation = Orientation.Horizontal, Spacing = spacing };
+			var hboxInput = new Box () { Spacing = spacing };
+			hboxInput.SetOrientation (Orientation.Horizontal);
 			hboxInput.Append (vboxInput);
 			hboxInput.Append (gradientInput);
 
 			hboxLayout.Append (CreateLabelledWidget (hboxInput, Translations.GetString ("Input")));
 
-			var vboxOutput = new Box () { Orientation = Orientation.Vertical, Spacing = spacing };
+			var vboxOutput = new Box () { Spacing = spacing };
+			vboxOutput.SetOrientation (Orientation.Vertical);
 			vboxOutput.Append (spinOutHigh);
 			vboxOutput.Append (colorpanelOutHigh);
 			vboxOutput.Append (spinOutGamma);
@@ -595,7 +601,8 @@ namespace Pinta.Effects
 			vboxOutput.Append (colorpanelOutLow);
 			vboxOutput.Append (spinOutLow);
 
-			var hboxOutput = new Box () { Orientation = Orientation.Horizontal, Spacing = spacing };
+			var hboxOutput = new Box () { Spacing = spacing };
+			hboxOutput.SetOrientation (Orientation.Horizontal);
 			hboxOutput.Append (gradientOutput);
 			hboxOutput.Append (vboxOutput);
 

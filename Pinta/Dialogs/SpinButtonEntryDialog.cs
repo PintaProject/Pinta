@@ -41,7 +41,8 @@ namespace Pinta
 			this.AddCancelOkButtons ();
 			this.SetDefaultResponse (ResponseType.Ok);
 
-			var hbox = new Box () { Orientation = Orientation.Horizontal, Spacing = 6 };
+			var hbox = new Box () { Spacing = 6 };
+			hbox.SetOrientation (Orientation.Horizontal);
 
 			var lbl = Label.New (label);
 			lbl.Xalign = 0;

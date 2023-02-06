@@ -149,14 +149,17 @@ namespace Pinta.Gui.Widgets
 			const int spacing = 6;
 
 			// Section label + line
-			var hbox1 = new Box () { Orientation = Orientation.Horizontal, Spacing = spacing };
+			var hbox1 = new Box () { Spacing = spacing };
+			hbox1.SetOrientation (Orientation.Horizontal);
+
 
 			label = new Label ();
 			label.AddCssClass (AdwaitaStyles.Title4);
 			hbox1.Append (label);
 
 			// PointPickerGraphic
-			var hbox2 = new Box () { Orientation = Orientation.Horizontal, Spacing = spacing };
+			var hbox2 = new Box () { Spacing = spacing };
+			hbox2.SetOrientation (Orientation.Horizontal);
 
 			pointpickergraphic1 = new PointPickerGraphic ();
 			pointpickergraphic1.Hexpand = true;
@@ -182,7 +185,8 @@ namespace Pinta.Gui.Widgets
 				Valign = Align.Start
 			};
 
-			var x_hbox = new Box () { Orientation = Orientation.Horizontal, Spacing = spacing };
+			var x_hbox = new Box () { Spacing = spacing };
+			x_hbox.SetOrientation (Orientation.Horizontal);
 
 			x_hbox.Append (label2);
 			x_hbox.Append (spin_x);
@@ -207,21 +211,23 @@ namespace Pinta.Gui.Widgets
 				Valign = Align.Start
 			};
 
-			var y_hbox = new Box () { Orientation = Orientation.Horizontal, Spacing = spacing };
+			var y_hbox = new Box () { Spacing = spacing };
+			y_hbox.SetOrientation (Orientation.Horizontal);
 
 			y_hbox.Append (label3);
 			y_hbox.Append (spin_y);
 			y_hbox.Append (button2);
 
 			// Vbox for spinners
-			var spin_vbox = new Box () { Orientation = Orientation.Vertical, Spacing = spacing };
+			var spin_vbox = new Box () { Spacing = spacing };
+			spin_vbox.SetOrientation (Orientation.Vertical);
 			spin_vbox.Append (x_hbox);
 			spin_vbox.Append (y_hbox);
 
 			hbox2.Append (spin_vbox);
 
 			// Main layout
-			Orientation = Orientation.Vertical;
+			SetOrientation (Orientation.Vertical);
 			Spacing = spacing;
 			Append (hbox1);
 			Append (hbox2);

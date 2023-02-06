@@ -83,7 +83,8 @@ namespace Pinta.Core
 		/// </summary>
 		public static Gtk.Box CreateToolBar ()
 		{
-			var toolbar = new Box () { Orientation = Orientation.Horizontal, Spacing = 0 };
+			var toolbar = new Box () { Spacing = 0 };
+			toolbar.SetOrientation (Orientation.Horizontal);
 			toolbar.AddCssClass (AdwaitaStyles.Toolbar);
 			return toolbar;
 		}

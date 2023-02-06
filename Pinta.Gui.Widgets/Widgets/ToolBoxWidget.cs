@@ -17,7 +17,7 @@ namespace Pinta.Gui.Widgets
 			PintaCore.Tools.ToolAdded += HandleToolAdded;
 			PintaCore.Tools.ToolRemoved += HandleToolRemoved;
 
-			Orientation = Orientation.Vertical;
+			SetOrientation (Orientation.Vertical);
 			Spacing = 0;
 		}
 

@@ -239,7 +239,7 @@ namespace Pinta.Gui.Widgets
 		/// <summary>
 		/// Provide a custom tooltip based on the cursor location.
 		/// </summary>
-		private void HandleQueryTooltip (object o, Gtk.Widget.QueryTooltipSignalArgs args)
+		private bool HandleQueryTooltip (object o, Gtk.Widget.QueryTooltipSignalArgs args)
 		{
 			string? text = null;
 			var point = new PointD (args.X, args.Y);
@@ -270,9 +270,7 @@ namespace Pinta.Gui.Widgets
 			}
 
 			args.Tooltip.SetText (text);
-#if false // TODO-GTK4 - requires signal return values (https://github.com/gircore/gir.core/pull/775)
-			args.RetVal = (text != null);
-#endif
+			return text != null;
 		}
 
 		private void Palette_ColorChanged (object? sender, EventArgs e)

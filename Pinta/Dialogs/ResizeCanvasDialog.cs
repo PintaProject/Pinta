@@ -322,9 +322,11 @@ namespace Pinta
 			aspectCheckbox = CheckButton.NewWithLabel (Translations.GetString ("Maintain aspect ratio"));
 
 			const int spacing = 6;
-			var main_vbox = new Box () { Orientation = Gtk.Orientation.Vertical, Spacing = spacing };
+			var main_vbox = new Box () { Spacing = spacing };
+			main_vbox.SetOrientation (Orientation.Vertical);
 
-			var hbox_percent = new Box () { Orientation = Gtk.Orientation.Horizontal, Spacing = spacing };
+			var hbox_percent = new Box () { Spacing = spacing };
+			hbox_percent.SetOrientation (Orientation.Horizontal);
 			hbox_percent.Append (percentageRadio);
 			hbox_percent.Append (percentageSpinner);
 			hbox_percent.Append (Label.New ("%"));
@@ -348,7 +350,9 @@ namespace Pinta
 			main_vbox.Append (hw_grid);
 
 			main_vbox.Append (aspectCheckbox);
-			main_vbox.Append (new Separator () { Orientation = Orientation.Horizontal });
+			var sep = new Separator ();
+			sep.SetOrientation (Orientation.Horizontal);
+			main_vbox.Append (sep);
 
 			var align_label = Label.New (Translations.GetString ("Anchor:"));
 			align_label.Xalign = 0;
