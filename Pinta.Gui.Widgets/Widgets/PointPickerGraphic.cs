@@ -37,9 +37,6 @@ namespace Pinta.Gui.Widgets
 		private PointI position;
 		private PointD drag_start;
 
-		// TODO-GTK4 - this needs to be a member variable due to https://github.com/gircore/gir.core/issues/783
-		private readonly Gtk.GestureDrag drag_gesture;
-
 		public PointPickerGraphic ()
 		{
 			HeightRequest = WidthRequest = 65;
@@ -50,7 +47,7 @@ namespace Pinta.Gui.Widgets
 			SetDrawFunc ((area, context, width, height) => Draw (context));
 
 			// Handle click + drag.
-			drag_gesture = Gtk.GestureDrag.New ();
+			var drag_gesture = Gtk.GestureDrag.New ();
 			drag_gesture.SetButton (GtkExtensions.MouseLeftButton);
 
 			drag_gesture.OnDragBegin += (_, args) => {

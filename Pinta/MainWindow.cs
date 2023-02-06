@@ -45,9 +45,6 @@ namespace Pinta
 
 		CanvasPad canvas_pad = null!;
 
-		// TODO-GTK4 - this needs to be a member variable due to https://github.com/gircore/gir.core/issues/783
-		EventControllerKey key_controller = null!;
-
 		private readonly System.Net.Http.HttpClient http_client = new ();
 
 		public MainWindow (Adw.Application app)
@@ -118,7 +115,7 @@ namespace Pinta
 			window_shell.DeleteEvent += MainWindow_DeleteEvent;
 			window_shell.DragDataReceived += MainWindow_DragDataReceived;
 #endif
-			key_controller = Gtk.EventControllerKey.New ();
+			var key_controller = Gtk.EventControllerKey.New ();
 			key_controller.OnKeyPressed += HandleGlobalKeyPress;
 			key_controller.OnKeyReleased += HandleGlobalKeyRelease;
 			window_shell.Window.AddController (key_controller);
