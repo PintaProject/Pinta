@@ -112,9 +112,10 @@ namespace Pinta
 			window_shell.AddDragDropSupport (new Gtk.TargetEntry ("text/uri-list", 0, 100));
 
 			// Handle a few main window specific actions
-			window_shell.DeleteEvent += MainWindow_DeleteEvent;
 			window_shell.DragDataReceived += MainWindow_DragDataReceived;
 #endif
+			window_shell.Window.OnCloseRequest += HandleCloseRequest;
+
 			var key_controller = Gtk.EventControllerKey.New ();
 			key_controller.OnKeyPressed += HandleGlobalKeyPress;
 			key_controller.OnKeyReleased += HandleGlobalKeyRelease;
@@ -507,15 +508,15 @@ namespace Pinta
 		#endregion
 
 		#region Action Handlers
-#if false // TODO-GTK4
-		private void MainWindow_DeleteEvent (object o, DeleteEventArgs args)
+		private bool HandleCloseRequest (object o, EventArgs args)
 		{
-			// leave window open so user can cancel quitting
-			args.RetVal = true;
-
 			PintaCore.Actions.App.Exit.Activate ();
+
+			// Stop the default handler from running so the user can cancel quitting.
+			return true;
 		}
 
+#if false // TODO-GTK4
 		private async void MainWindow_DragDataReceived (object o, DragDataReceivedArgs args)
 		{
 			// TODO: Generate random name for the picture being downloaded
