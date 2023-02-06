@@ -76,8 +76,7 @@ namespace Pinta.Core
 			StatusBar = new ToggleCommand ("Statusbar", Translations.GetString ("Status Bar"), null, null);
 			ToolBox = new ToggleCommand ("ToolBox", Translations.GetString ("Tool Box"), null, null);
 			Rulers = new ToggleCommand ("Rulers", Translations.GetString ("Rulers"), null, Resources.Icons.ViewRulers);
-			// TODO-GTK4 - need gir.core bindings for variant types.
-			RulerMetric = Gio.SimpleAction.NewStateful ("rulermetric", new GLib.VariantType ("i"), GLib.Variant.Create (0));
+			RulerMetric = Gio.SimpleAction.NewStateful ("rulermetric", GtkExtensions.IntVariantType, GLib.Variant.Create (0));
 			Fullscreen = new Command ("Fullscreen", Translations.GetString ("Fullscreen"), null, Resources.StandardIcons.DocumentNew);
 
 			ZoomCollection = new string[] {

@@ -40,25 +40,20 @@ namespace Pinta.Core
 		public Command SaveAll { get; private set; }
 		public Command CloseAll { get; private set; }
 
-		// TODO-GTK4 - add pre-defined VariantType's to gir.core
-		private static readonly GLib.VariantType IntVariantType = new ("i");
-
 		public WindowActions ()
 		{
 			SaveAll = new Command ("SaveAll", Translations.GetString ("Save All"), null, Resources.StandardIcons.DocumentSave);
 			CloseAll = new Command ("CloseAll", Translations.GetString ("Close All"), null, Resources.StandardIcons.WindowClose);
 
-			active_doc_action = Gio.SimpleAction.NewStateful (doc_action_id, IntVariantType, GLib.Variant.Create (-1));
+			active_doc_action = Gio.SimpleAction.NewStateful (doc_action_id, GtkExtensions.IntVariantType, GLib.Variant.Create (-1));
 
-#if false // TODO-GTK4 - the new variant value cannot be accessed due to an issue in gir.core, fixed in https://github.com/gircore/gir.core/pull/779
 			active_doc_action.OnActivate += (o, e) => {
-				var idx = e.Parameter!.GetInt();
+				var idx = e.Parameter!.GetInt ();
 				if (idx < PintaCore.Workspace.OpenDocuments.Count) {
 					PintaCore.Workspace.SetActiveDocumentInternal (PintaCore.Workspace.OpenDocuments[idx]);
 					active_doc_action.ChangeState (e.Parameter);
 				}
 			};
-#endif
 		}
 
 		#region Initialization
@@ -82,13 +77,7 @@ namespace Pinta.Core
 		public void SetActiveDocument (Document doc)
 		{
 			var idx = PintaCore.Workspace.OpenDocuments.IndexOf (doc);
-#if false // TODO-GTK4 - re-enable after OnActivate() issues above are fixed
 			active_doc_action.Activate (GLib.Variant.Create (idx));
-#else
-			if (idx < PintaCore.Workspace.OpenDocuments.Count) {
-				PintaCore.Workspace.SetActiveDocumentInternal (PintaCore.Workspace.OpenDocuments[idx]);
-			}
-#endif
 		}
 
 		public void AddDocument (Document doc)

@@ -78,6 +78,9 @@ namespace Pinta.Core
 			};
 		}
 
+		// TODO-GTK4 - add pre-defined VariantType's to gir.core
+		public static readonly GLib.VariantType IntVariantType = new ("i");
+
 		/// <summary>
 		/// In GTK4, toolbars are just a Box with a different CSS style class.
 		/// </summary>
