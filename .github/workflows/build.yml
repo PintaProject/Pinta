@@ -97,7 +97,7 @@ jobs:
 
     steps:
     - uses: actions/checkout@v3
-    - uses: microsoft/setup-msbuild@v1.1.3
+    - uses: microsoft/setup-msbuild@v1.3.1
     - name: Setup .NET
       uses: actions/setup-dotnet@v3
       with:
