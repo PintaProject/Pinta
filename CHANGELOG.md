@@ -14,6 +14,7 @@ Thanks to the following contributors who worked on this release:
 - Fixed a bug where the Save As file dialog failed to open when using the file chooser portal (e.g. for sandboxed Snap or Flatpak packages), if the image's file type did not support exporting (e.g. SVG) ([#2002021](https://bugs.launchpad.net/pinta/+bug/2002021))
 - Fixed a potential error when opening or closing Pinta, if the last dialog directory setting was an empty string ([#2002188](https://bugs.launchpad.net/pinta/+bug/2002188), [#2001734](https://bugs.launchpad.net/pinta/+bug/2001734))
 - Fixed error messages when dragging and dropping to open a file ([#2003384](https://bugs.launchpad.net/pinta/+bug/2003384))
+- Fixed an issue where the tab labels could not shrink, limiting the minimum size of the window ([#2006572](https://bugs.launchpad.net/pinta/+bug/2006572))
 
 ## [2.1](https://github.com/PintaProject/Pinta/releases/tag/2.1) - 2023/01/03
 
