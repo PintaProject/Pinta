@@ -108,9 +108,11 @@ namespace Pinta.Docking
 		{
 			var tab_layout = new HBox ();
 			var label_widget = new Label (item.Label);
+			// Truncate the text if it is longer than a reasonable size for the tab.
 			label_widget.Ellipsize = Pango.EllipsizeMode.End;
-			label_widget.Halign = Align.Fill;
-			label_widget.Hexpand = true;
+			label_widget.MaxWidthChars = 1;
+			label_widget.WidthRequest = 150;
+
 			item.LabelChanged += (o, args) => { label_widget.Text = item.Label; };
 
 			var close_button = new Button ("window-close-symbolic", IconSize.SmallToolbar) {
@@ -120,7 +122,7 @@ namespace Pinta.Docking
 				CloseTab (item);
 			};
 
-			tab_layout.PackStart (label_widget, true, true, 0);
+			tab_layout.PackStart (label_widget, false, false, 0);
 			tab_layout.PackStart (close_button, false, false, 0);
 
 			// Use an event box to grab mouse events.
