@@ -15,6 +15,7 @@ Thanks to the following contributors who worked on this release:
 - Fixed a potential error when opening or closing Pinta, if the last dialog directory setting was an empty string ([#2002188](https://bugs.launchpad.net/pinta/+bug/2002188), [#2001734](https://bugs.launchpad.net/pinta/+bug/2001734))
 - Fixed error messages when dragging and dropping to open a file ([#2003384](https://bugs.launchpad.net/pinta/+bug/2003384))
 - Fixed an issue where the tab labels could not shrink, limiting the minimum size of the window ([#2006572](https://bugs.launchpad.net/pinta/+bug/2006572))
+- Fixed errors on Windows when opening non-ASCII file paths through the "Open With" context menu ([#2006974](https://bugs.launchpad.net/pinta/+bug/2006974))
 
 ## [2.1](https://github.com/PintaProject/Pinta/releases/tag/2.1) - 2023/01/03
 
