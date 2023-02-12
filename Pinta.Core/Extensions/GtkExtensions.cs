@@ -25,6 +25,7 @@
 // THE SOFTWARE.
 
 using System;
+using System.Runtime.InteropServices;
 using Gtk;
 
 namespace Pinta.Core
@@ -299,6 +300,20 @@ namespace Pinta.Core
 			} catch (System.UriFormatException) {
 				return "";
 			}
+		}
+
+		[DllImport("libgio-2.0-0.dll", CallingConvention = CallingConvention.Cdecl)]
+		private static extern IntPtr g_file_new_for_commandline_arg ([MarshalAs(UnmanagedType.LPUTF8Str)] string arg);
+
+		public static GLib.IFile FileNewForCommandlineArg (string arg)
+		{
+			// g_file_new_for_commandline_arg() expects a UTF-8 string. GtkSharp's binding doesn't
+			// explicitly do this conversion, so on Windows we need to manually do this to avoid having
+			// the default marshalling leave it as UTF-16.
+			if (PintaCore.System.OperatingSystem == OS.Windows)
+				return GLib.FileAdapter.GetObject (g_file_new_for_commandline_arg (arg), false) as GLib.IFile;
+			else
+				return GLib.FileFactory.NewFromCommandlineArg (arg);
 		}
 	}
 }

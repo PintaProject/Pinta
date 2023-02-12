@@ -29,6 +29,7 @@ using System.Collections.Generic;
 using System.IO;
 using System.Reflection;
 using System.Runtime.InteropServices;
+using System.Text;
 using Gtk;
 using Mono.Options;
 using Pinta.Core;
@@ -125,7 +126,7 @@ namespace Pinta
 
 			if (extra.Count > 0) {
 				foreach (var file in extra) {
-					PintaCore.Workspace.OpenFile (GLib.FileFactory.NewFromCommandlineArg (file));
+					PintaCore.Workspace.OpenFile (Core.GtkExtensions.FileNewForCommandlineArg (file));
 				}
 			} else {
 				// Create a blank document
@@ -168,7 +169,7 @@ namespace Pinta
 					GLib.Timeout.Add (10, delegate {
 						foreach (string filename in e.Documents.Keys) {
 							System.Console.Error.WriteLine ("Opening: {0}", filename);
-							PintaCore.Workspace.OpenFile (GLib.FileFactory.NewFromCommandlineArg (filename));
+							PintaCore.Workspace.OpenFile (Core.GtkExtensions.FileNewForCommandlineArg (filename));
 						}
 						return false;
 					});

@@ -556,7 +556,7 @@ namespace Pinta
 						PintaCore.Chrome.MainWindowBusy = false;
 					}
 				} else {
-					PintaCore.Workspace.OpenFile (GLib.FileFactory.NewFromCommandlineArg (file));
+					PintaCore.Workspace.OpenFile (Core.GtkExtensions.FileNewForCommandlineArg (file));
 				}
 			}
 		}
