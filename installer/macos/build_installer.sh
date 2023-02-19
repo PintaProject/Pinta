@@ -1,7 +1,7 @@
 #!/bin/sh
 set -e
 
-MAC_APP_DIR=package/Pinta.app
+MAC_APP_DIR="$PWD/package/Pinta.app"
 MAC_APP_BIN_DIR="${MAC_APP_DIR}/Contents/MacOS/"
 MAC_APP_RESOURCE_DIR="${MAC_APP_DIR}/Contents/Resources/"
 MAC_APP_SHARE_DIR="${MAC_APP_RESOURCE_DIR}/share"
@@ -15,7 +15,7 @@ run_codesign()
 
 mkdir -p ${MAC_APP_BIN_DIR} ${MAC_APP_RESOURCE_DIR} ${MAC_APP_SHARE_DIR}
 
-dotnet publish ../../Pinta.sln -p:BuildTranslations=true -c Release -r osx-x64 --self-contained true -o ${MAC_APP_BIN_DIR}
+dotnet publish ../../Pinta.sln -p:PublishDir=${MAC_APP_BIN_DIR} -p:BuildTranslations=true -c Release -r osx-x64 --self-contained true
 
 # Remove stuff we don't need.
 rm ${MAC_APP_BIN_DIR}/*.pdb

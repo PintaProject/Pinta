@@ -89,7 +89,7 @@ cleanobj:
 
 # target: install - Installs Pinta.
 install-exec-local: build
-	$(DOTNET_CMD) publish Pinta.sln $(PINTA_BUILD_OPTS) --self-contained false -o $(srcdir)/publish
+	$(DOTNET_CMD) publish Pinta.sln $(PINTA_BUILD_OPTS) --self-contained false -p:PublishDir=$(abs_srcdir)/publish
 	$(DOTNET_CMD) msbuild installer/linux/install.proj -target:Install $(PINTA_INSTALL_OPTS)
 	$(INSTALL_SCRIPT) installer/linux/pinta $(DESTDIR)$(bindir)/$(PACKAGE)
 
@@ -99,8 +99,8 @@ uninstall-hook:
 
 # target: releasezip - Make a self-contained release zip file.
 releasezip:
-	$(DOTNET_CMD) publish Pinta.sln $(PINTA_BUILD_OPTS) -r linux-x64 --self-contained true -o $(srcdir)/release
-	cd $(srcdir)/release && zip -r ../$(RELEASE_FILE).zip * -x "*.pdb"
+	$(DOTNET_CMD) publish Pinta.sln $(PINTA_BUILD_OPTS) -r linux-x64 --self-contained true -p:PublishDir=$(abs_srcdir)/release
+	cd $(abs_srcdir)/release && zip -r ../$(RELEASE_FILE).zip * -x "*.pdb"
 
 EXTRA_DIST = Pinta Pinta.Core Pinta.Docking Pinta.Effects Pinta.Gui.Widgets Pinta.Resources Pinta.Tools po xdg tests license-mit.txt \
            license-pdn.txt Pinta.sln pinta.pc.in readme.md intltool-extract.in \
