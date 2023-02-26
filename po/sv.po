@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: pinta\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2022-11-04 22:46-0400\n"
+"POT-Creation-Date: 2022-12-18 22:26-0500\n"
 "PO-Revision-Date: 2022-01-14 12:11+0000\n"
 "Last-Translator: Åke Engelbrektson <Unknown>\n"
 "Language-Team: \n"
@@ -15,8 +15,8 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Launchpad-Export-Date: 2022-11-05 02:52+0000\n"
-"X-Generator: Launchpad (build 83f7123b02a2b50a64bc29e7e35197179a885279)\n"
+"X-Launchpad-Export-Date: 2023-02-26 03:56+0000\n"
+"X-Generator: Launchpad (build b826c8bc42f0c41016fa141bf50faee47f7ecd80)\n"
 "Language: sv\n"
 
 #: Mono.Addins.Gui/Mono.Addins.Gui/InstallDialog.cs:142
@@ -95,7 +95,7 @@ msgstr "Hanterare för tilläggsförråd"
 msgid "Add-in packages"
 msgstr "Tilläggspaket"
 
-#: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:803
+#: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:766
 msgid "Added"
 msgstr "Tillagd"
 
@@ -308,15 +308,15 @@ msgstr "Ändrad figurtyp"
 msgid "Choose Color"
 msgstr "Välj färg"
 
-#: ../Pinta.Gui.Widgets/Widgets/StatusBarColorPaletteWidget.cs:106
+#: ../Pinta.Gui.Widgets/Widgets/StatusBarColorPaletteWidget.cs:113
 msgid "Choose Palette Color"
 msgstr "Välj palettfärg"
 
-#: ../Pinta.Gui.Widgets/Widgets/StatusBarColorPaletteWidget.cs:76
+#: ../Pinta.Gui.Widgets/Widgets/StatusBarColorPaletteWidget.cs:83
 msgid "Choose Primary Color"
 msgstr "Välj primär färg"
 
-#: ../Pinta.Gui.Widgets/Widgets/StatusBarColorPaletteWidget.cs:79
+#: ../Pinta.Gui.Widgets/Widgets/StatusBarColorPaletteWidget.cs:86
 msgid "Choose Secondary Color"
 msgstr "Välj sekundär färg"
 
@@ -358,11 +358,11 @@ msgstr "Klicka och dra för att rita konturen för ett markeringsområde."
 msgid "Click and drag to navigate image."
 msgstr "Klicka och dra för att navigera bilden."
 
-#: ../Pinta.Gui.Widgets/Widgets/StatusBarColorPaletteWidget.cs:234
+#: ../Pinta.Gui.Widgets/Widgets/StatusBarColorPaletteWidget.cs:241
 msgid "Click to reset primary and secondary color."
 msgstr "Klicka för att återställa primär och sekundär färg."
 
-#: ../Pinta.Gui.Widgets/Widgets/StatusBarColorPaletteWidget.cs:223
+#: ../Pinta.Gui.Widgets/Widgets/StatusBarColorPaletteWidget.cs:230
 msgid "Click to select primary color."
 msgstr "Klicka för att välja primär färg."
 
@@ -370,11 +370,11 @@ msgstr "Klicka för att välja primär färg."
 msgid "Click to select region of similar color."
 msgstr "Klicka för att markera ett område med liknande färg."
 
-#: ../Pinta.Gui.Widgets/Widgets/StatusBarColorPaletteWidget.cs:226
+#: ../Pinta.Gui.Widgets/Widgets/StatusBarColorPaletteWidget.cs:233
 msgid "Click to select secondary color."
 msgstr "Klicka för att välja sekundär färg."
 
-#: ../Pinta.Gui.Widgets/Widgets/StatusBarColorPaletteWidget.cs:229
+#: ../Pinta.Gui.Widgets/Widgets/StatusBarColorPaletteWidget.cs:236
 msgid "Click to switch between primary and secondary color."
 msgstr "Klicka för att växla mellan primär och sekundär färg."
 
@@ -485,8 +485,8 @@ msgid "Could not obtain the size of display '{0}'"
 msgstr "Kunde inte inhämta visningsstorlek för '{0}'"
 
 #: ../Pinta.Core/Classes/Palette.cs:197
-#: ../Pinta.Core/Managers/WorkspaceManager.cs:403
-#: ../Pinta.Core/Managers/WorkspaceManager.cs:412
+#: ../Pinta.Core/Managers/WorkspaceManager.cs:395
+#: ../Pinta.Core/Managers/WorkspaceManager.cs:404
 #, csharp-format
 msgid "Could not open file: {0}"
 msgstr "Kunde inte öppna filen: {0}"
@@ -534,7 +534,7 @@ msgstr "Fördröjning före en skärmbild tas (sekunder):"
 msgid "Delete Layer"
 msgstr "Radera lager"
 
-#: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:482
+#: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:481
 msgid "Deleted"
 msgstr "Borttagen"
 
@@ -674,7 +674,7 @@ msgstr "Faktor"
 msgid "Failed to access XDG Desktop Portals"
 msgstr ""
 
-#: ../Pinta.Core/Managers/WorkspaceManager.cs:430
+#: ../Pinta.Core/Managers/WorkspaceManager.cs:422
 msgid "Failed to open image"
 msgstr "Kunde ine öppna bild"
 
@@ -715,8 +715,8 @@ msgstr "Fyllnadsstil"
 msgid "Fill and Outline Shape"
 msgstr "Fyll och konturera form"
 
-#: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:1102
-#: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:1473
+#: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:1030
+#: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:1291
 msgid "Finalized"
 msgstr "Slutförd"
 
@@ -1065,7 +1065,7 @@ msgstr ""
 "bildpunkt åt gången."
 
 #. Translators: {0} is 'Ctrl', or a platform-specific key such as 'Command' on macOS.
-#: ../Pinta.Tools/Tools/ShapeTool.cs:49
+#: ../Pinta.Tools/Tools/ShapeTool.cs:50
 #, csharp-format
 msgid ""
 "Left click to draw a shape with the primary color.\n"
@@ -1081,28 +1081,8 @@ msgid ""
 "position.\n"
 "Hold {0} while left clicking on a control point to create a new shape at the "
 "exact same position.\n"
-"Hold {0} while clicking outside of the image bounds to create a new shape "
-"starting at the edge.\n"
 "Press Enter to finalize the shape."
 msgstr ""
-"Vänsterklicka för att rita en figur med primär färg.\n"
-"Vänsterklicka på en figur för att lägga till en kontrollpunkt.\n"
-"Vänsterklicka på en kontrollpunkt och dra, för att flytta den.\n"
-"Högerklicka på en kontrollpunkt och dra, för att ändra dess spänning.\n"
-"Håll ner SHIFT för att fästa vid vinklar.\n"
-"Använd piltangenterna för att flytta markerad kontrollpunkt.\n"
-"Tryck {0} + vänster-/högerpilar för att markera kontrollpunkter i "
-"ordningsföljd.\n"
-"Tryck Delete för att ta bort markerad kontrollpunkt.\n"
-"Tryck Blanksteg för att lägga till en ny kontrollpunkt vid muspekarens "
-"position.\n"
-"Håll ner {0} och tryck Blanksteg för att skapa kontrollpunkten vid exakt "
-"samma position.\n"
-"Håll ner {0} och klicka på en kontrollpunkt för att skapa en ny figur vid "
-"exakt samma position.\n"
-"Håll ner {0} och klicka utanför bildgränsen för att skapa en ny figur som "
-"börjar vid kanten.\n"
-"Tryck Retur för att slutföra figuren."
 
 #: ../Pinta.Tools/Tools/PencilTool.cs:50
 msgid ""
@@ -1152,14 +1132,14 @@ msgstr ""
 "Vänsterklicka för att ersätta sekundärfärgen med primärfärgen. Högerklicka "
 "för att återställa."
 
-#: ../Pinta.Gui.Widgets/Widgets/StatusBarColorPaletteWidget.cs:220
+#: ../Pinta.Gui.Widgets/Widgets/StatusBarColorPaletteWidget.cs:227
 #: ../Pinta.Tools/Tools/ColorPickerTool.cs:54
 msgid "Left click to set primary color. Right click to set secondary color."
 msgstr ""
 "Vänsterklicka för att ställa in den primära färgen. Högerklicka för sekundär "
 "färg."
 
-#: ../Pinta.Gui.Widgets/Widgets/StatusBarColorPaletteWidget.cs:216
+#: ../Pinta.Gui.Widgets/Widgets/StatusBarColorPaletteWidget.cs:223
 msgid ""
 "Left click to set primary color. Right click to set secondary color. Middle "
 "click to choose palette color."
@@ -1263,7 +1243,7 @@ msgstr "Saknar: {0} v{1}"
 msgid "Mode"
 msgstr "Läge"
 
-#: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:882
+#: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:844
 msgid "Modified"
 msgstr "Ändrad"
 
@@ -1564,7 +1544,7 @@ msgstr ""
 "effekter att tillämpa på dina bilder och har även förmågan att skapa ett "
 "obegränsat antal lager för att hjälpa till att organisera din kreativitet."
 
-#: ../Pinta.Core/Managers/WorkspaceManager.cs:413
+#: ../Pinta.Core/Managers/WorkspaceManager.cs:405
 msgid "Pinta supports the following file formats:"
 msgstr "Pinta stöder följande filformat:"
 
@@ -1584,12 +1564,12 @@ msgstr "Pixelisera"
 msgid "Pixels"
 msgstr "Bildpunkter"
 
-#: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:525
-#: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:769
+#: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:522
+#: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:736
 msgid "Point Added"
 msgstr "Punkt tillagd"
 
-#: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:468
+#: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:467
 msgid "Point Deleted"
 msgstr "Punkt borttagen"
 
@@ -1937,7 +1917,7 @@ msgid "Sharpen"
 msgstr "Skärpa"
 
 #: ../Pinta.Core/Extensions/ToolBoxButton.cs:52
-#: ../Pinta.Gui.Widgets/Widgets/StatusBarColorPaletteWidget.cs:230
+#: ../Pinta.Gui.Widgets/Widgets/StatusBarColorPaletteWidget.cs:237
 msgid "Shortcut key"
 msgstr "Snabbtangent"
 
@@ -2289,7 +2269,7 @@ msgid "Xor ({0} + Right Click)"
 msgstr "Xor ({0} + Högerklick)"
 
 #. Translators: {0} is the name of a file that the user does not have permission to open.
-#: ../Pinta.Core/Managers/WorkspaceManager.cs:432
+#: ../Pinta.Core/Managers/WorkspaceManager.cs:424
 #, csharp-format
 msgid "You do not have access to '{0}'."
 msgstr "Du har inte åtkomstbehörighet till \"{0}\"."

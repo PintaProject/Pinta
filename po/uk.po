@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: pinta\n"
 "Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
-"POT-Creation-Date: 2022-11-04 22:46-0400\n"
+"POT-Creation-Date: 2022-12-18 22:26-0500\n"
 "PO-Revision-Date: 2022-02-10 07:50+0000\n"
 "Last-Translator: Yuri Chornoivan <yurchor@gmail.com>\n"
 "Language-Team: Ukrainian <uk@li.org>\n"
@@ -16,8 +16,8 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=3; plural=n%10==1 && n%100!=11 ? 0 : n%10>=2 && "
 "n%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2;\n"
-"X-Launchpad-Export-Date: 2022-11-05 02:52+0000\n"
-"X-Generator: Launchpad (build 83f7123b02a2b50a64bc29e7e35197179a885279)\n"
+"X-Launchpad-Export-Date: 2023-02-26 03:56+0000\n"
+"X-Generator: Launchpad (build b826c8bc42f0c41016fa141bf50faee47f7ecd80)\n"
 
 #: Mono.Addins.Gui/Mono.Addins.Gui/InstallDialog.cs:142
 msgid " (in user directory)"
@@ -95,7 +95,7 @@ msgstr "Керування репозиторіями з додатками"
 msgid "Add-in packages"
 msgstr "Пакунки додатків"
 
-#: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:803
+#: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:766
 msgid "Added"
 msgstr "Додано"
 
@@ -308,15 +308,15 @@ msgstr "Змінена форма"
 msgid "Choose Color"
 msgstr "Виберіть колір"
 
-#: ../Pinta.Gui.Widgets/Widgets/StatusBarColorPaletteWidget.cs:106
+#: ../Pinta.Gui.Widgets/Widgets/StatusBarColorPaletteWidget.cs:113
 msgid "Choose Palette Color"
 msgstr "Оберіть палітру кольорів"
 
-#: ../Pinta.Gui.Widgets/Widgets/StatusBarColorPaletteWidget.cs:76
+#: ../Pinta.Gui.Widgets/Widgets/StatusBarColorPaletteWidget.cs:83
 msgid "Choose Primary Color"
 msgstr "Виберіть основний колір"
 
-#: ../Pinta.Gui.Widgets/Widgets/StatusBarColorPaletteWidget.cs:79
+#: ../Pinta.Gui.Widgets/Widgets/StatusBarColorPaletteWidget.cs:86
 msgid "Choose Secondary Color"
 msgstr "Виберіть вторинний колір"
 
@@ -360,11 +360,11 @@ msgstr "За допомогою миші виділіть контур для в
 msgid "Click and drag to navigate image."
 msgstr "Клацніть і перетягуйте для навігації по зображенню"
 
-#: ../Pinta.Gui.Widgets/Widgets/StatusBarColorPaletteWidget.cs:234
+#: ../Pinta.Gui.Widgets/Widgets/StatusBarColorPaletteWidget.cs:241
 msgid "Click to reset primary and secondary color."
 msgstr "Натисніть для скидання первинного і вторинного кольорів."
 
-#: ../Pinta.Gui.Widgets/Widgets/StatusBarColorPaletteWidget.cs:223
+#: ../Pinta.Gui.Widgets/Widgets/StatusBarColorPaletteWidget.cs:230
 msgid "Click to select primary color."
 msgstr "Клацніть, щоб вибрати основний колір."
 
@@ -372,11 +372,11 @@ msgstr "Клацніть, щоб вибрати основний колір."
 msgid "Click to select region of similar color."
 msgstr "Вибрати регіон з аналогічним кольром."
 
-#: ../Pinta.Gui.Widgets/Widgets/StatusBarColorPaletteWidget.cs:226
+#: ../Pinta.Gui.Widgets/Widgets/StatusBarColorPaletteWidget.cs:233
 msgid "Click to select secondary color."
 msgstr "Клацніть, щоб вибрати додатковий колір."
 
-#: ../Pinta.Gui.Widgets/Widgets/StatusBarColorPaletteWidget.cs:229
+#: ../Pinta.Gui.Widgets/Widgets/StatusBarColorPaletteWidget.cs:236
 msgid "Click to switch between primary and secondary color."
 msgstr "Клацніть, щоб перемкнутися між основним і вторинним кольорами."
 
@@ -487,8 +487,8 @@ msgid "Could not obtain the size of display '{0}'"
 msgstr "Не вдалося отримати розміри дисплея «{0}»"
 
 #: ../Pinta.Core/Classes/Palette.cs:197
-#: ../Pinta.Core/Managers/WorkspaceManager.cs:403
-#: ../Pinta.Core/Managers/WorkspaceManager.cs:412
+#: ../Pinta.Core/Managers/WorkspaceManager.cs:395
+#: ../Pinta.Core/Managers/WorkspaceManager.cs:404
 #, csharp-format
 msgid "Could not open file: {0}"
 msgstr "Не можу відкрити файл: {0}"
@@ -536,7 +536,7 @@ msgstr "Зробити скріншот із затримкою (в секунд
 msgid "Delete Layer"
 msgstr "Видалити шар"
 
-#: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:482
+#: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:481
 msgid "Deleted"
 msgstr "Вилучено"
 
@@ -676,7 +676,7 @@ msgstr "Фактор"
 msgid "Failed to access XDG Desktop Portals"
 msgstr ""
 
-#: ../Pinta.Core/Managers/WorkspaceManager.cs:430
+#: ../Pinta.Core/Managers/WorkspaceManager.cs:422
 msgid "Failed to open image"
 msgstr "Не вдалося відкрити зображення"
 
@@ -717,8 +717,8 @@ msgstr "Стиль заповнення"
 msgid "Fill and Outline Shape"
 msgstr "Залити і обвести фігуру"
 
-#: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:1102
-#: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:1473
+#: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:1030
+#: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:1291
 msgid "Finalized"
 msgstr "Закінчений"
 
@@ -1068,7 +1068,7 @@ msgstr ""
 "контуру позначення на один піксель."
 
 #. Translators: {0} is 'Ctrl', or a platform-specific key such as 'Command' on macOS.
-#: ../Pinta.Tools/Tools/ShapeTool.cs:49
+#: ../Pinta.Tools/Tools/ShapeTool.cs:50
 #, csharp-format
 msgid ""
 "Left click to draw a shape with the primary color.\n"
@@ -1084,31 +1084,8 @@ msgid ""
 "position.\n"
 "Hold {0} while left clicking on a control point to create a new shape at the "
 "exact same position.\n"
-"Hold {0} while clicking outside of the image bounds to create a new shape "
-"starting at the edge.\n"
 "Press Enter to finalize the shape."
 msgstr ""
-"Клацніть лівою кнопкою, щоб намалювати форму основним кольором.\n"
-"Клацніть лівою кнопкою на формі, щоб додати контрольну точку.\n"
-"Клацніть лівою кнопкою на контрольній точці і перетягніть вказівник, щоб "
-"пересунути контрольну точку.\n"
-"Клацніть правою кнопкою на контрольній точці і перетягніть вказівник, щоб "
-"змінити її  розтяг.\n"
-"Утримуйте натиснутою клавішу Shift для фіксування за основними кутами.\n"
-"Скористайтеся клавішами зі стрілками для пересування вибраної контрольної "
-"точки.\n"
-"Натисніть {0} + стрілки ліворуч/праворуч для послідовного вибору контрольних "
-"точок.\n"
-"Натисніть клавішу Delete для вилучення позначеної контрольної точки.\n"
-"Натисніть клавішу пробілу для додавання нової контрольної точки у позиції "
-"вказівника миші.\n"
-"Утримуйте натиснутою клавішу {0} під час натискання пробілу для створення "
-"додаткової контрольної точки у тій самій позиції.\n"
-"Утримуйте натиснутою клавішу {0} під час клацання лівою кнопкою миші на "
-"контрольній точці для створення нової форми у тій самій позиції.\n"
-"Утримуйте натиснутою клавішу {0} під час клацання поза межами зображення для "
-"створення форми з початком на відповідному краю.\n"
-"Натисніть клавішу Enter для завершення створення форми."
 
 #: ../Pinta.Tools/Tools/PencilTool.cs:50
 msgid ""
@@ -1156,14 +1133,14 @@ msgid ""
 msgstr ""
 "Ліва кнопка - заміна вторинного кольору на основний. Права кнопка - навпаки."
 
-#: ../Pinta.Gui.Widgets/Widgets/StatusBarColorPaletteWidget.cs:220
+#: ../Pinta.Gui.Widgets/Widgets/StatusBarColorPaletteWidget.cs:227
 #: ../Pinta.Tools/Tools/ColorPickerTool.cs:54
 msgid "Left click to set primary color. Right click to set secondary color."
 msgstr ""
 "Клацніть лівою клавішею миші для вибору основного кольору. Клацніть правою "
 "клавішею миші, щоб вибрати додатковий колір."
 
-#: ../Pinta.Gui.Widgets/Widgets/StatusBarColorPaletteWidget.cs:216
+#: ../Pinta.Gui.Widgets/Widgets/StatusBarColorPaletteWidget.cs:223
 msgid ""
 "Left click to set primary color. Right click to set secondary color. Middle "
 "click to choose palette color."
@@ -1268,7 +1245,7 @@ msgstr "Відсутні: {0} v{1}"
 msgid "Mode"
 msgstr "Режим"
 
-#: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:882
+#: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:844
 msgid "Modified"
 msgstr "Змінений"
 
@@ -1569,7 +1546,7 @@ msgstr ""
 "застосувати до ваших зображень понад 35 ефектів, а також створити необмежену "
 "кількість шарів, які допоможуть упорядкувати ваші художні засоби."
 
-#: ../Pinta.Core/Managers/WorkspaceManager.cs:413
+#: ../Pinta.Core/Managers/WorkspaceManager.cs:405
 msgid "Pinta supports the following file formats:"
 msgstr "У Pinta передбачено підтримку таких форматів файлів:"
 
@@ -1589,12 +1566,12 @@ msgstr "Пікселізація"
 msgid "Pixels"
 msgstr "Пікселів"
 
-#: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:525
-#: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:769
+#: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:522
+#: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:736
 msgid "Point Added"
 msgstr "Точка додана"
 
-#: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:468
+#: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:467
 msgid "Point Deleted"
 msgstr "Точка вилучена"
 
@@ -1942,7 +1919,7 @@ msgid "Sharpen"
 msgstr "Різкість"
 
 #: ../Pinta.Core/Extensions/ToolBoxButton.cs:52
-#: ../Pinta.Gui.Widgets/Widgets/StatusBarColorPaletteWidget.cs:230
+#: ../Pinta.Gui.Widgets/Widgets/StatusBarColorPaletteWidget.cs:237
 msgid "Shortcut key"
 msgstr "Гаряча клавіша"
 
@@ -2292,7 +2269,7 @@ msgid "Xor ({0} + Right Click)"
 msgstr "Викл. АБО ({0} + клацання правою кнопкою)"
 
 #. Translators: {0} is the name of a file that the user does not have permission to open.
-#: ../Pinta.Core/Managers/WorkspaceManager.cs:432
+#: ../Pinta.Core/Managers/WorkspaceManager.cs:424
 #, csharp-format
 msgid "You do not have access to '{0}'."
 msgstr "У вас немає прав доступу до «{0}»."
