@@ -1,7 +1,7 @@
 # Change Log
 All notable changes to this project (beginning with version 1.7) will be documented in this file.
 
-## [Unreleased](https://github.com/PintaProject/Pinta/compare/2.1...HEAD)
+## [Unreleased](https://github.com/PintaProject/Pinta/compare/2.1.1...HEAD)
 
 Thanks to the following contributors who worked on this release:
 - @cameronwhite
@@ -9,6 +9,16 @@ Thanks to the following contributors who worked on this release:
 ### Added
 
 ### Changed
+
+### Fixed
+
+## [2.1.1](https://github.com/PintaProject/Pinta/releases/tag/2.1.1) - 2023/02/26
+
+Thanks to the following contributors who worked on this release:
+- @cameronwhite
+
+### Changed
+- Updated translations
 
 ### Fixed
 - Fixed a bug where the Save As file dialog failed to open when using the file chooser portal (e.g. for sandboxed Snap or Flatpak packages), if the image's file type did not support exporting (e.g. SVG) ([#2002021](https://bugs.launchpad.net/pinta/+bug/2002021))

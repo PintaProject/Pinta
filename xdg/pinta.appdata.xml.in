@@ -38,6 +38,23 @@
     <binary>pinta</binary>
   </provides>
   <releases>
+    <release version="2.1.1" date="2023-02-26">
+      <url>https://github.com/PintaProject/Pinta/releases/tag/2.1.1</url>
+      <description>
+        <p>Changes</p>
+        <ul>
+          <li>Updated translations</li>
+        </ul>
+        <p>Bug Fixes</p>
+        <ul>
+            <li>Fixed a bug where the Save As file dialog failed to open when using the file chooser portal (e.g. for sandboxed Snap or Flatpak packages), if the image's file type did not support exporting (e.g. SVG) (#2002021)</li>
+            <li>Fixed a potential error when opening or closing Pinta, if the last dialog directory setting was an empty string (#2002188, #2001734)</li>
+            <li>Fixed error messages when dragging and dropping to open a file (#2003384)</li>
+            <li>Fixed an issue where the tab labels could not shrink, limiting the minimum size of the window (#2006572)</li>
+            <li>Fixed errors on Windows when opening non-ASCII file paths through the "Open With" context menu (2006974)</li>
+        </ul>
+      </description>
+    </release>
     <release version="2.1" date="2023-01-02">
       <url>https://github.com/PintaProject/Pinta/releases/tag/2.1</url>
       <description>
