@@ -49,7 +49,7 @@ namespace Pinta.Core
 		public static PaletteFormatManager PaletteFormats { get; private set; }
 		public static IServiceManager Services { get; }
 
-		public const string ApplicationVersion = "2.1";
+		public const string ApplicationVersion = "2.1.1";
 
 		static PintaCore ()
 		{
