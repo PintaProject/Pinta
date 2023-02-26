@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: pinta\n"
 "Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
-"POT-Creation-Date: 2022-11-04 22:46-0400\n"
+"POT-Creation-Date: 2022-12-18 22:26-0500\n"
 "PO-Revision-Date: 2022-04-30 17:06+0000\n"
 "Last-Translator: Hugo Carvalho <hugokarvalho@hotmail.com>\n"
 "Language-Team: European Portuguese\n"
@@ -16,8 +16,8 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Launchpad-Export-Date: 2022-11-05 02:52+0000\n"
-"X-Generator: Launchpad (build 83f7123b02a2b50a64bc29e7e35197179a885279)\n"
+"X-Launchpad-Export-Date: 2023-02-26 03:56+0000\n"
+"X-Generator: Launchpad (build b826c8bc42f0c41016fa141bf50faee47f7ecd80)\n"
 "Language: pt_PT\n"
 
 #: Mono.Addins.Gui/Mono.Addins.Gui/InstallDialog.cs:142
@@ -96,7 +96,7 @@ msgstr "Gestão de repositórios de extras"
 msgid "Add-in packages"
 msgstr "Pacotes de extras"
 
-#: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:803
+#: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:766
 msgid "Added"
 msgstr "Adicionado"
 
@@ -309,15 +309,15 @@ msgstr "Tipo de forma alterada"
 msgid "Choose Color"
 msgstr "Escolher a Cor"
 
-#: ../Pinta.Gui.Widgets/Widgets/StatusBarColorPaletteWidget.cs:106
+#: ../Pinta.Gui.Widgets/Widgets/StatusBarColorPaletteWidget.cs:113
 msgid "Choose Palette Color"
 msgstr "Escolha a cor da paleta"
 
-#: ../Pinta.Gui.Widgets/Widgets/StatusBarColorPaletteWidget.cs:76
+#: ../Pinta.Gui.Widgets/Widgets/StatusBarColorPaletteWidget.cs:83
 msgid "Choose Primary Color"
 msgstr "Escolha a cor primária"
 
-#: ../Pinta.Gui.Widgets/Widgets/StatusBarColorPaletteWidget.cs:79
+#: ../Pinta.Gui.Widgets/Widgets/StatusBarColorPaletteWidget.cs:86
 msgid "Choose Secondary Color"
 msgstr "Escolha a cor secundária"
 
@@ -361,11 +361,11 @@ msgstr "Clique e arraste para desenhar o contorno da área selecionada."
 msgid "Click and drag to navigate image."
 msgstr "Clique e arraste para navegar na imagem."
 
-#: ../Pinta.Gui.Widgets/Widgets/StatusBarColorPaletteWidget.cs:234
+#: ../Pinta.Gui.Widgets/Widgets/StatusBarColorPaletteWidget.cs:241
 msgid "Click to reset primary and secondary color."
 msgstr "Clique para reiniciar a cor primária e secundária."
 
-#: ../Pinta.Gui.Widgets/Widgets/StatusBarColorPaletteWidget.cs:223
+#: ../Pinta.Gui.Widgets/Widgets/StatusBarColorPaletteWidget.cs:230
 msgid "Click to select primary color."
 msgstr "Clique para escolher a cor primária."
 
@@ -373,11 +373,11 @@ msgstr "Clique para escolher a cor primária."
 msgid "Click to select region of similar color."
 msgstr "Clique para escolher uma área de cor similar."
 
-#: ../Pinta.Gui.Widgets/Widgets/StatusBarColorPaletteWidget.cs:226
+#: ../Pinta.Gui.Widgets/Widgets/StatusBarColorPaletteWidget.cs:233
 msgid "Click to select secondary color."
 msgstr "Clique para escolher a cor secundária."
 
-#: ../Pinta.Gui.Widgets/Widgets/StatusBarColorPaletteWidget.cs:229
+#: ../Pinta.Gui.Widgets/Widgets/StatusBarColorPaletteWidget.cs:236
 msgid "Click to switch between primary and secondary color."
 msgstr "Clique para alternar entre a cor primária e secundária."
 
@@ -488,8 +488,8 @@ msgid "Could not obtain the size of display '{0}'"
 msgstr "Não conseguiu obter tamanho do ecrã '{0}'"
 
 #: ../Pinta.Core/Classes/Palette.cs:197
-#: ../Pinta.Core/Managers/WorkspaceManager.cs:403
-#: ../Pinta.Core/Managers/WorkspaceManager.cs:412
+#: ../Pinta.Core/Managers/WorkspaceManager.cs:395
+#: ../Pinta.Core/Managers/WorkspaceManager.cs:404
 #, csharp-format
 msgid "Could not open file: {0}"
 msgstr "Impossível abrir o ficheiro: {0}"
@@ -537,7 +537,7 @@ msgstr "Atraso antes da captura do ecrã (segundos):"
 msgid "Delete Layer"
 msgstr "Eliminar camada"
 
-#: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:482
+#: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:481
 msgid "Deleted"
 msgstr "Eliminado"
 
@@ -677,7 +677,7 @@ msgstr "Fator"
 msgid "Failed to access XDG Desktop Portals"
 msgstr ""
 
-#: ../Pinta.Core/Managers/WorkspaceManager.cs:430
+#: ../Pinta.Core/Managers/WorkspaceManager.cs:422
 msgid "Failed to open image"
 msgstr "Falha ao abrir imagem"
 
@@ -718,8 +718,8 @@ msgstr "Estilo de preenchimento"
 msgid "Fill and Outline Shape"
 msgstr "Forma de contorno e preenchimento"
 
-#: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:1102
-#: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:1473
+#: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:1030
+#: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:1291
 msgid "Finalized"
 msgstr "Finalizado"
 
@@ -1067,7 +1067,7 @@ msgstr ""
 "esquema de seleção por um único píxel."
 
 #. Translators: {0} is 'Ctrl', or a platform-specific key such as 'Command' on macOS.
-#: ../Pinta.Tools/Tools/ShapeTool.cs:49
+#: ../Pinta.Tools/Tools/ShapeTool.cs:50
 #, csharp-format
 msgid ""
 "Left click to draw a shape with the primary color.\n"
@@ -1083,28 +1083,8 @@ msgid ""
 "position.\n"
 "Hold {0} while left clicking on a control point to create a new shape at the "
 "exact same position.\n"
-"Hold {0} while clicking outside of the image bounds to create a new shape "
-"starting at the edge.\n"
 "Press Enter to finalize the shape."
 msgstr ""
-"Botão esquerdo do rato para desenhar uma forma com a cor primária.\n"
-"Botão esquerdo do rato sobre uma forma para adicionar um ponto de controlo.\n"
-"Botão esquerdo do rato num ponto de controlo e arraste-o para o mover.\n"
-"Botão direito do rato sobre um ponto de controlo e arraste para alterar a "
-"sua tensão.\n"
-"Manter premido o Shift para encaixar em ângulos.\n"
-"Utilizar as teclas de setas para mover o ponto de controlo selecionado.\n"
-"Premir {0} + setas esquerda/direita para selecionar pontos de controlo por "
-"ordem.\n"
-"Premir Delete para eliminar o ponto de controlo selecionado.\n"
-"Premir Espaço para adicionar um novo ponto de controlo na posição do rato.\n"
-"Premir {0} enquanto se prime Espaço para criar o ponto de controlo "
-"exatamente na mesma posição.\n"
-"Manter premido {0} enquanto se clica com o botão esquerdo do rato sobre um "
-"ponto de controlo para criar uma nova forma exatamente na mesma posição.\n"
-"Manter premido {0} enquanto se clica fora dos limites da imagem para criar "
-"uma nova forma a partir do contorno.\n"
-"Prima Enter para finalizar a forma."
 
 #: ../Pinta.Tools/Tools/PencilTool.cs:50
 msgid ""
@@ -1154,14 +1134,14 @@ msgstr ""
 "Botão esquerdo do rato para substituir a cor secundária pela primária. "
 "Clique direito para inverter."
 
-#: ../Pinta.Gui.Widgets/Widgets/StatusBarColorPaletteWidget.cs:220
+#: ../Pinta.Gui.Widgets/Widgets/StatusBarColorPaletteWidget.cs:227
 #: ../Pinta.Tools/Tools/ColorPickerTool.cs:54
 msgid "Left click to set primary color. Right click to set secondary color."
 msgstr ""
 "Botão esquerdo do rato para definir a cor primária, botão direito do rato "
 "para definir a cor secundária."
 
-#: ../Pinta.Gui.Widgets/Widgets/StatusBarColorPaletteWidget.cs:216
+#: ../Pinta.Gui.Widgets/Widgets/StatusBarColorPaletteWidget.cs:223
 msgid ""
 "Left click to set primary color. Right click to set secondary color. Middle "
 "click to choose palette color."
@@ -1265,7 +1245,7 @@ msgstr "Falta: {0} v{1}"
 msgid "Mode"
 msgstr "Modo"
 
-#: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:882
+#: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:844
 msgid "Modified"
 msgstr "Modificado"
 
@@ -1566,7 +1546,7 @@ msgstr ""
 "mais de 35 efeitos para aplicar às suas imagens, e também tem a capacidade "
 "de criar camadas ilimitadas para ajudar a organizar a sua criatividade."
 
-#: ../Pinta.Core/Managers/WorkspaceManager.cs:413
+#: ../Pinta.Core/Managers/WorkspaceManager.cs:405
 msgid "Pinta supports the following file formats:"
 msgstr "O Pinta suporta os seguintes formatos de ficheiro:"
 
@@ -1586,12 +1566,12 @@ msgstr "Pixelizar"
 msgid "Pixels"
 msgstr "Pixéis"
 
-#: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:525
-#: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:769
+#: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:522
+#: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:736
 msgid "Point Added"
 msgstr "Ponto adicionado"
 
-#: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:468
+#: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:467
 msgid "Point Deleted"
 msgstr "Ponto eliminado"
 
@@ -1939,7 +1919,7 @@ msgid "Sharpen"
 msgstr "Precisão"
 
 #: ../Pinta.Core/Extensions/ToolBoxButton.cs:52
-#: ../Pinta.Gui.Widgets/Widgets/StatusBarColorPaletteWidget.cs:230
+#: ../Pinta.Gui.Widgets/Widgets/StatusBarColorPaletteWidget.cs:237
 msgid "Shortcut key"
 msgstr "Tecla de atalho"
 
@@ -2289,7 +2269,7 @@ msgid "Xor ({0} + Right Click)"
 msgstr "Xor ({0} + Clique direito)"
 
 #. Translators: {0} is the name of a file that the user does not have permission to open.
-#: ../Pinta.Core/Managers/WorkspaceManager.cs:432
+#: ../Pinta.Core/Managers/WorkspaceManager.cs:424
 #, csharp-format
 msgid "You do not have access to '{0}'."
 msgstr "Não tem acesso a '{0}'."

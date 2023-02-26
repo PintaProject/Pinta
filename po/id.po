@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: pinta\n"
 "Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
-"POT-Creation-Date: 2022-11-04 22:46-0400\n"
+"POT-Creation-Date: 2022-12-18 22:26-0500\n"
 "PO-Revision-Date: 2022-08-14 01:27+0000\n"
 "Last-Translator: Trisno Pamuji <tri.snowman@gmail.com>\n"
 "Language-Team: Indonesian <permataharahap@gmail.com>\n"
@@ -15,10 +15,10 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=1; plural=0;\n"
-"X-Launchpad-Export-Date: 2022-11-05 02:52+0000\n"
-"X-Generator: Launchpad (build 83f7123b02a2b50a64bc29e7e35197179a885279)\n"
-"X-Poedit-Language: Indonesian\n"
+"X-Launchpad-Export-Date: 2023-02-26 03:56+0000\n"
+"X-Generator: Launchpad (build b826c8bc42f0c41016fa141bf50faee47f7ecd80)\n"
 "X-Poedit-Country: INDONESIA\n"
+"X-Poedit-Language: Indonesian\n"
 
 #: Mono.Addins.Gui/Mono.Addins.Gui/InstallDialog.cs:142
 msgid " (in user directory)"
@@ -96,7 +96,7 @@ msgstr "Manajemen Repositori Add-in"
 msgid "Add-in packages"
 msgstr "Paket Add-in"
 
-#: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:803
+#: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:766
 msgid "Added"
 msgstr "Ditambah"
 
@@ -309,15 +309,15 @@ msgstr "Jenis Bentuk Berubah"
 msgid "Choose Color"
 msgstr "Pilih Warna"
 
-#: ../Pinta.Gui.Widgets/Widgets/StatusBarColorPaletteWidget.cs:106
+#: ../Pinta.Gui.Widgets/Widgets/StatusBarColorPaletteWidget.cs:113
 msgid "Choose Palette Color"
 msgstr "Pilih Warna Palet"
 
-#: ../Pinta.Gui.Widgets/Widgets/StatusBarColorPaletteWidget.cs:76
+#: ../Pinta.Gui.Widgets/Widgets/StatusBarColorPaletteWidget.cs:83
 msgid "Choose Primary Color"
 msgstr "Pilih Warna Primer"
 
-#: ../Pinta.Gui.Widgets/Widgets/StatusBarColorPaletteWidget.cs:79
+#: ../Pinta.Gui.Widgets/Widgets/StatusBarColorPaletteWidget.cs:86
 msgid "Choose Secondary Color"
 msgstr "Pilih Warna Sekunder"
 
@@ -361,11 +361,11 @@ msgstr "Klik dan seret untuk menggambar garis tepi area pemilihan."
 msgid "Click and drag to navigate image."
 msgstr "Klik dan seret untuk menavigasi citra."
 
-#: ../Pinta.Gui.Widgets/Widgets/StatusBarColorPaletteWidget.cs:234
+#: ../Pinta.Gui.Widgets/Widgets/StatusBarColorPaletteWidget.cs:241
 msgid "Click to reset primary and secondary color."
 msgstr "Klik untuk mengatur ulang warna primer dan sekunder."
 
-#: ../Pinta.Gui.Widgets/Widgets/StatusBarColorPaletteWidget.cs:223
+#: ../Pinta.Gui.Widgets/Widgets/StatusBarColorPaletteWidget.cs:230
 msgid "Click to select primary color."
 msgstr "Klik untuk memilih warna primer."
 
@@ -373,11 +373,11 @@ msgstr "Klik untuk memilih warna primer."
 msgid "Click to select region of similar color."
 msgstr "Pilih untuk memilih area yang warnanya mirip."
 
-#: ../Pinta.Gui.Widgets/Widgets/StatusBarColorPaletteWidget.cs:226
+#: ../Pinta.Gui.Widgets/Widgets/StatusBarColorPaletteWidget.cs:233
 msgid "Click to select secondary color."
 msgstr "Klik untuk memilih warna sekunder."
 
-#: ../Pinta.Gui.Widgets/Widgets/StatusBarColorPaletteWidget.cs:229
+#: ../Pinta.Gui.Widgets/Widgets/StatusBarColorPaletteWidget.cs:236
 msgid "Click to switch between primary and secondary color."
 msgstr "Klik untuk berganti antara warna primer dan sekunder."
 
@@ -488,8 +488,8 @@ msgid "Could not obtain the size of display '{0}'"
 msgstr "Tidak bisa mendapatkan ukuran tampilan '{0}'"
 
 #: ../Pinta.Core/Classes/Palette.cs:197
-#: ../Pinta.Core/Managers/WorkspaceManager.cs:403
-#: ../Pinta.Core/Managers/WorkspaceManager.cs:412
+#: ../Pinta.Core/Managers/WorkspaceManager.cs:395
+#: ../Pinta.Core/Managers/WorkspaceManager.cs:404
 #, csharp-format
 msgid "Could not open file: {0}"
 msgstr "Gagal membuka berkas: {0}"
@@ -537,7 +537,7 @@ msgstr "Jeda sebelum mengambil cuplikan layar (dalam detik)"
 msgid "Delete Layer"
 msgstr "Hapus Lapisan"
 
-#: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:482
+#: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:481
 msgid "Deleted"
 msgstr "Dihapus"
 
@@ -677,7 +677,7 @@ msgstr "Faktor"
 msgid "Failed to access XDG Desktop Portals"
 msgstr ""
 
-#: ../Pinta.Core/Managers/WorkspaceManager.cs:430
+#: ../Pinta.Core/Managers/WorkspaceManager.cs:422
 msgid "Failed to open image"
 msgstr "Gagal membuka gambar"
 
@@ -718,8 +718,8 @@ msgstr "Model isian"
 msgid "Fill and Outline Shape"
 msgstr "Bentuk Berisi dan Bergaris Tepi"
 
-#: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:1102
-#: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:1473
+#: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:1030
+#: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:1291
 msgid "Finalized"
 msgstr "Diselesaikan"
 
@@ -1066,7 +1066,7 @@ msgstr ""
 "panah untuk memindahkan garis seleksi dengan satu piksel."
 
 #. Translators: {0} is 'Ctrl', or a platform-specific key such as 'Command' on macOS.
-#: ../Pinta.Tools/Tools/ShapeTool.cs:49
+#: ../Pinta.Tools/Tools/ShapeTool.cs:50
 #, csharp-format
 msgid ""
 "Left click to draw a shape with the primary color.\n"
@@ -1082,27 +1082,8 @@ msgid ""
 "position.\n"
 "Hold {0} while left clicking on a control point to create a new shape at the "
 "exact same position.\n"
-"Hold {0} while clicking outside of the image bounds to create a new shape "
-"starting at the edge.\n"
 "Press Enter to finalize the shape."
 msgstr ""
-"Klik kiri untuk menggambar bentuk dengan warna primer.\n"
-"Klik kiri pada bentuk untuk menambahkan titik kontrol.\n"
-"Klik kiri pada titik kontrol dan seret untuk memindahkannya.\n"
-"Klik kanan pada titik kontrol dan seret untuk mengubah ketegangannya.\n"
-"Tahan Shift untuk mengambil sudut.\n"
-"Gunakan tombol panah untuk memindahkan titik kontrol yang dipilih.\n"
-"Tekan {0} + panah kiri/kanan untuk memilih titik kontrol berdasarkan "
-"urutan.\n"
-"Tekan Hapus untuk menghapus titik kontrol yang dipilih.\n"
-"Tekan Spasi untuk menambahkan titik kontrol baru pada posisi mouse.\n"
-"Tahan {0} sambil menekan Spasi untuk membuat titik kontrol pada posisi yang "
-"sama persis.\n"
-"Tahan {0} sambil mengeklik kiri pada titik kontrol untuk membuat bentuk baru "
-"pada posisi yang sama persis.\n"
-"Tahan {0} sambil mengeklik di luar batas gambar untuk membuat bentuk baru "
-"mulai dari tepi.\n"
-"Tekan Enter untuk menyelesaikan bentuk."
 
 #: ../Pinta.Tools/Tools/PencilTool.cs:50
 msgid ""
@@ -1152,13 +1133,13 @@ msgstr ""
 "Klik kiri untuk mengganti warna sekunder dengan warna primer. Klik kanan "
 "untuk membalikkan."
 
-#: ../Pinta.Gui.Widgets/Widgets/StatusBarColorPaletteWidget.cs:220
+#: ../Pinta.Gui.Widgets/Widgets/StatusBarColorPaletteWidget.cs:227
 #: ../Pinta.Tools/Tools/ColorPickerTool.cs:54
 msgid "Left click to set primary color. Right click to set secondary color."
 msgstr ""
 "Klik kiri untuk mengeset warna primer. Klik kanan untuk warna sekunder."
 
-#: ../Pinta.Gui.Widgets/Widgets/StatusBarColorPaletteWidget.cs:216
+#: ../Pinta.Gui.Widgets/Widgets/StatusBarColorPaletteWidget.cs:223
 msgid ""
 "Left click to set primary color. Right click to set secondary color. Middle "
 "click to choose palette color."
@@ -1262,7 +1243,7 @@ msgstr "Hilang: {0} v{1}"
 msgid "Mode"
 msgstr "Mode"
 
-#: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:882
+#: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:844
 msgid "Modified"
 msgstr "Diubah"
 
@@ -1565,7 +1546,7 @@ msgstr ""
 "membuat lapisan (layer) tak terbatas untuk membantu mengatur kreativitas "
 "Anda."
 
-#: ../Pinta.Core/Managers/WorkspaceManager.cs:413
+#: ../Pinta.Core/Managers/WorkspaceManager.cs:405
 msgid "Pinta supports the following file formats:"
 msgstr "Pinta mendukung format berkas berikut:"
 
@@ -1585,12 +1566,12 @@ msgstr "Pikselkan"
 msgid "Pixels"
 msgstr "Piksel"
 
-#: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:525
-#: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:769
+#: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:522
+#: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:736
 msgid "Point Added"
 msgstr "Titik Ditambahkan"
 
-#: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:468
+#: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:467
 msgid "Point Deleted"
 msgstr "Titik Dihapus"
 
@@ -1938,7 +1919,7 @@ msgid "Sharpen"
 msgstr "Pertajam"
 
 #: ../Pinta.Core/Extensions/ToolBoxButton.cs:52
-#: ../Pinta.Gui.Widgets/Widgets/StatusBarColorPaletteWidget.cs:230
+#: ../Pinta.Gui.Widgets/Widgets/StatusBarColorPaletteWidget.cs:237
 msgid "Shortcut key"
 msgstr "Kunci pintasan"
 
@@ -2290,7 +2271,7 @@ msgid "Xor ({0} + Right Click)"
 msgstr "Xor ({0} + Klik Kanan)"
 
 #. Translators: {0} is the name of a file that the user does not have permission to open.
-#: ../Pinta.Core/Managers/WorkspaceManager.cs:432
+#: ../Pinta.Core/Managers/WorkspaceManager.cs:424
 #, csharp-format
 msgid "You do not have access to '{0}'."
 msgstr "Anda tidak memiliki akses ke '{0}'."

@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: pinta\n"
 "Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
-"POT-Creation-Date: 2022-11-04 22:46-0400\n"
+"POT-Creation-Date: 2022-12-18 22:26-0500\n"
 "PO-Revision-Date: 2022-03-29 07:57+0000\n"
 "Last-Translator: Pavol Polonec <pavolpolonec@gmail.com>\n"
 "Language-Team: Slovak <sk@li.org>\n"
@@ -15,8 +15,8 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=3; plural=(n==1) ? 1 : (n>=2 && n<=4) ? 2 : 0;\n"
-"X-Launchpad-Export-Date: 2022-11-05 02:52+0000\n"
-"X-Generator: Launchpad (build 83f7123b02a2b50a64bc29e7e35197179a885279)\n"
+"X-Launchpad-Export-Date: 2023-02-26 03:56+0000\n"
+"X-Generator: Launchpad (build b826c8bc42f0c41016fa141bf50faee47f7ecd80)\n"
 
 #: Mono.Addins.Gui/Mono.Addins.Gui/InstallDialog.cs:142
 msgid " (in user directory)"
@@ -94,7 +94,7 @@ msgstr "Správa repozitárov s doplnkami"
 msgid "Add-in packages"
 msgstr "Balíčky s doplnkami"
 
-#: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:803
+#: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:766
 msgid "Added"
 msgstr "Pridané"
 
@@ -307,15 +307,15 @@ msgstr "Zmeniť typ tvaru"
 msgid "Choose Color"
 msgstr "Vybrať farbu"
 
-#: ../Pinta.Gui.Widgets/Widgets/StatusBarColorPaletteWidget.cs:106
+#: ../Pinta.Gui.Widgets/Widgets/StatusBarColorPaletteWidget.cs:113
 msgid "Choose Palette Color"
 msgstr "Vybrať farbu palety"
 
-#: ../Pinta.Gui.Widgets/Widgets/StatusBarColorPaletteWidget.cs:76
+#: ../Pinta.Gui.Widgets/Widgets/StatusBarColorPaletteWidget.cs:83
 msgid "Choose Primary Color"
 msgstr "Vybrať primárnu farbu"
 
-#: ../Pinta.Gui.Widgets/Widgets/StatusBarColorPaletteWidget.cs:79
+#: ../Pinta.Gui.Widgets/Widgets/StatusBarColorPaletteWidget.cs:86
 msgid "Choose Secondary Color"
 msgstr "Vybrať sekundárnu farbu"
 
@@ -359,11 +359,11 @@ msgstr "Kliknutím a ťahaním obtiahnete vybranú oblasť."
 msgid "Click and drag to navigate image."
 msgstr "Kliknutím a ťahaním sa pohybujete v obrázku"
 
-#: ../Pinta.Gui.Widgets/Widgets/StatusBarColorPaletteWidget.cs:234
+#: ../Pinta.Gui.Widgets/Widgets/StatusBarColorPaletteWidget.cs:241
 msgid "Click to reset primary and secondary color."
 msgstr "Kliknite na zmenu primárnej a sekundárnej farby"
 
-#: ../Pinta.Gui.Widgets/Widgets/StatusBarColorPaletteWidget.cs:223
+#: ../Pinta.Gui.Widgets/Widgets/StatusBarColorPaletteWidget.cs:230
 msgid "Click to select primary color."
 msgstr "Kliknutím vyberiete primárnu farbu"
 
@@ -371,11 +371,11 @@ msgstr "Kliknutím vyberiete primárnu farbu"
 msgid "Click to select region of similar color."
 msgstr "Kliknutím vyberiete oblasť s podobnou farbou."
 
-#: ../Pinta.Gui.Widgets/Widgets/StatusBarColorPaletteWidget.cs:226
+#: ../Pinta.Gui.Widgets/Widgets/StatusBarColorPaletteWidget.cs:233
 msgid "Click to select secondary color."
 msgstr "Kliknutím vyberiete sekundárnu farbu"
 
-#: ../Pinta.Gui.Widgets/Widgets/StatusBarColorPaletteWidget.cs:229
+#: ../Pinta.Gui.Widgets/Widgets/StatusBarColorPaletteWidget.cs:236
 msgid "Click to switch between primary and secondary color."
 msgstr "Kliknite na výmenu hlavnej a vedľajšej farby."
 
@@ -486,8 +486,8 @@ msgid "Could not obtain the size of display '{0}'"
 msgstr "Nepodarilo sa zistiť veľkosť monitora '{0}'"
 
 #: ../Pinta.Core/Classes/Palette.cs:197
-#: ../Pinta.Core/Managers/WorkspaceManager.cs:403
-#: ../Pinta.Core/Managers/WorkspaceManager.cs:412
+#: ../Pinta.Core/Managers/WorkspaceManager.cs:395
+#: ../Pinta.Core/Managers/WorkspaceManager.cs:404
 #, csharp-format
 msgid "Could not open file: {0}"
 msgstr "Nedá sa otvoriť súbor: {0}"
@@ -535,7 +535,7 @@ msgstr "Oneskorenie pred zachytením snímky obrazovky (v sekundách):"
 msgid "Delete Layer"
 msgstr "Odstrániť vrstvu"
 
-#: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:482
+#: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:481
 msgid "Deleted"
 msgstr "Odstránené"
 
@@ -675,7 +675,7 @@ msgstr "Faktor"
 msgid "Failed to access XDG Desktop Portals"
 msgstr ""
 
-#: ../Pinta.Core/Managers/WorkspaceManager.cs:430
+#: ../Pinta.Core/Managers/WorkspaceManager.cs:422
 msgid "Failed to open image"
 msgstr "Obrázok nie je možné otvoriť"
 
@@ -716,8 +716,8 @@ msgstr "Štýl výplne"
 msgid "Fill and Outline Shape"
 msgstr "Útvar s výplňou a obrysom"
 
-#: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:1102
-#: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:1473
+#: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:1030
+#: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:1291
 msgid "Finalized"
 msgstr "Dokončený"
 
@@ -1063,7 +1063,7 @@ msgstr ""
 "krokoch. Šipkami presuniete obrys výberu o jeden pixel."
 
 #. Translators: {0} is 'Ctrl', or a platform-specific key such as 'Command' on macOS.
-#: ../Pinta.Tools/Tools/ShapeTool.cs:49
+#: ../Pinta.Tools/Tools/ShapeTool.cs:50
 #, csharp-format
 msgid ""
 "Left click to draw a shape with the primary color.\n"
@@ -1079,25 +1079,8 @@ msgid ""
 "position.\n"
 "Hold {0} while left clicking on a control point to create a new shape at the "
 "exact same position.\n"
-"Hold {0} while clicking outside of the image bounds to create a new shape "
-"starting at the edge.\n"
 "Press Enter to finalize the shape."
 msgstr ""
-"Ľavým kliknutím nakreslíte útvar hlavnou farbou.\n"
-"Ľavým kliknutím na tvar pridáte obrysový bod.\n"
-"Ľavým kliknutím môžete presunúť obrysový bod.\n"
-"Pravým kliknutím zmeníte zakrivenie bodu.\n"
-"Pri držaní shiftu sa bod pripne podľa uhlu.\n"
-"Šípkami presuniete vybraný obrysový bod.\n"
-"Stlačením {0} s ľavou/pravou šípkou vyberiete ďalší bod v poradí.\n"
-"Stlačením Delete vymažete vybraný bod.\n"
-"Stlačením medzerníka pridáte na pozícií kurzora nový bod.\n"
-"{0} + medzerník: Vytvoríte bod na rovnakej pozícií.\n"
-"{0} + kliknutie ľavým tlačidlom myši na bod: Nakreslíte nový útvar z "
-"vybraného bodu.\n"
-"{0} + kliknutie ľavým tlačidlom myši mimo obrázka: Nakreslíte nový útvar z "
-"kraja obrázka.\n"
-"Enter: Dokončiť tvar"
 
 #: ../Pinta.Tools/Tools/PencilTool.cs:50
 msgid ""
@@ -1145,14 +1128,14 @@ msgstr ""
 "Kliknite ľavým tlačidlom myši pre nahradenie sekundárnej farby primárnou. "
 "Kliknite pravým tlačidlom pre vrátenie."
 
-#: ../Pinta.Gui.Widgets/Widgets/StatusBarColorPaletteWidget.cs:220
+#: ../Pinta.Gui.Widgets/Widgets/StatusBarColorPaletteWidget.cs:227
 #: ../Pinta.Tools/Tools/ColorPickerTool.cs:54
 msgid "Left click to set primary color. Right click to set secondary color."
 msgstr ""
 "Kliknutím ľavým tlačidlom vyberiete primárnu farbu. Kliknutím pravým "
 "tlačidlom vyberiete sekundárnu farbu."
 
-#: ../Pinta.Gui.Widgets/Widgets/StatusBarColorPaletteWidget.cs:216
+#: ../Pinta.Gui.Widgets/Widgets/StatusBarColorPaletteWidget.cs:223
 msgid ""
 "Left click to set primary color. Right click to set secondary color. Middle "
 "click to choose palette color."
@@ -1256,7 +1239,7 @@ msgstr "Chýbajúce: {0} v{1}"
 msgid "Mode"
 msgstr "Režim"
 
-#: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:882
+#: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:844
 msgid "Modified"
 msgstr "Upravené"
 
@@ -1557,7 +1540,7 @@ msgstr ""
 "ako 35 rôznych efektov. Pinta tiež dokáže pracovať s neobmedzeným množstvom "
 "vrstiev."
 
-#: ../Pinta.Core/Managers/WorkspaceManager.cs:413
+#: ../Pinta.Core/Managers/WorkspaceManager.cs:405
 msgid "Pinta supports the following file formats:"
 msgstr "Pinta podporuje nasledovné formáty súborov:"
 
@@ -1577,12 +1560,12 @@ msgstr "Pixelizovať"
 msgid "Pixels"
 msgstr "Pixle"
 
-#: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:525
-#: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:769
+#: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:522
+#: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:736
 msgid "Point Added"
 msgstr "Bod pridaný"
 
-#: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:468
+#: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:467
 msgid "Point Deleted"
 msgstr "Bod odstránený"
 
@@ -1930,7 +1913,7 @@ msgid "Sharpen"
 msgstr "Doostriť"
 
 #: ../Pinta.Core/Extensions/ToolBoxButton.cs:52
-#: ../Pinta.Gui.Widgets/Widgets/StatusBarColorPaletteWidget.cs:230
+#: ../Pinta.Gui.Widgets/Widgets/StatusBarColorPaletteWidget.cs:237
 msgid "Shortcut key"
 msgstr "Klávesová skratka"
 
@@ -2281,7 +2264,7 @@ msgid "Xor ({0} + Right Click)"
 msgstr "Xor ({0} + Pravé tlačidlo myši)"
 
 #. Translators: {0} is the name of a file that the user does not have permission to open.
-#: ../Pinta.Core/Managers/WorkspaceManager.cs:432
+#: ../Pinta.Core/Managers/WorkspaceManager.cs:424
 #, csharp-format
 msgid "You do not have access to '{0}'."
 msgstr "Nemáte právo na prístup k súboru '{0}'."
