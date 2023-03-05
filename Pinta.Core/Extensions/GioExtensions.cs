@@ -51,8 +51,7 @@ namespace Pinta.Core
 		public static string GetDisplayName (this Gio.File file)
 		{
 #if false // TODO-GTK4 - needs gir.core bindings
-			// TODO-GTK4: use G_FILE_ATTRIBUTE_STANDARD_DISPLAY_NAME if there are bindings for it.
-			var info = file.QueryInfo ("standard::display-name", GLib.FileQueryInfoFlags.None, cancellable: null);
+			var info = file.QueryInfo (Constants.FILE_ATTRIBUTE_STANDARD_DISPLAY_NAME, GLib.FileQueryInfoFlags.None, cancellable: null);
 			return info.DisplayName;
 #else
 			return file.GetBasename ()!;

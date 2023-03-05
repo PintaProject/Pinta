@@ -2,7 +2,7 @@
 
 namespace Gdk
 {
-	// TODO-GTK4 remove this once gir.core generates the Gdk key constants
+	// TODO-GTK4 remove this once gir.core generates the key values as 'const' (https://github.com/gircore/gir.core/issues/820)
 	public enum Key
 	{
 		VoidSymbol = 0xFFFFFF,

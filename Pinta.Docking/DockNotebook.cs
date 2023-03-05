@@ -88,9 +88,8 @@ namespace Pinta.Docking
 				if (!close_args.Cancel)
 					items.Remove (item);
 
-				// Return true (GDK_EVENT_STOP) to prevent the default close handler from running.
-				return true;
-				// TODO-GTK4 - return GDK_EVENT_STOP to prevent the default close handler from running. Requires https://github.com/gircore/gir.core/issues/755
+				// Prevent the default close handler from running.
+				return Gdk.Constants.EVENT_STOP;
 			};
 		}
 
