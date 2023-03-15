@@ -38,6 +38,7 @@ namespace Pinta.Core
 	/// </summary>
 	public static class AdwaitaStyles
 	{
+		public const string DimLabel = "dim-label";
 		public const string Flat = "flat";
 		public const string Inline = "inline";
 		public const string Linked = "linked";

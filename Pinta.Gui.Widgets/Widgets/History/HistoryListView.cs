@@ -26,23 +26,11 @@
 // THE SOFTWARE.
 
 using System;
-using System.Diagnostics.CodeAnalysis;
 using Gtk;
 using Pinta.Core;
 
 namespace Pinta.Gui.Widgets
 {
-	// GObject subclass for use with Gio.ListStore
-	public class HistoryListViewItem : GObject.Object
-	{
-		public HistoryListViewItem (BaseHistoryItem item) : base (true, Array.Empty<GObject.ConstructArgument> ())
-		{
-			Label = item.Text!;
-		}
-
-		public string Label { get; set; }
-	}
-
 	public class HistoryListView : ScrolledWindow
 	{
 		private ListView view;
@@ -64,21 +52,16 @@ namespace Pinta.Gui.Widgets
 			selection_model.OnSelectionChanged += OnSelectionChanged;
 #endif
 
-			// TODO-GTK4
-			// - improve spacing
-			// - show the history item's icons
-			// - display undone items as faded / italic
 			factory = Gtk.SignalListItemFactory.New ();
 			factory.OnSetup += (factory, args) => {
-				var label = new Gtk.Label ();
 				var item = (Gtk.ListItem) args.Object;
-				item.SetChild (label);
+				item.SetChild (new HistoryItemWidget());
 			};
 			factory.OnBind += (factory, args) => {
 				var list_item = (Gtk.ListItem) args.Object;
 				var model_item = (HistoryListViewItem) list_item.GetItem ()!;
-				var label = (Gtk.Label) list_item.GetChild ()!;
-				label.SetText (model_item.Label);
+				var widget = (HistoryItemWidget) list_item.GetChild ()!;
+				widget.Update (model_item);
 			};
 
 			view = ListView.New (selection_model, factory);
