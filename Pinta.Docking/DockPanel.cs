@@ -62,7 +62,9 @@ namespace Pinta.Docking
 
 			public void Maximize (Box dock_bar)
 			{
-				dock_bar.Remove (ReopenButton);
+				if (dock_bar.GetLastChild () == ReopenButton)
+					dock_bar.Remove (ReopenButton);
+
 				popover.Hide ();
 				popover.Child = null;
 
@@ -75,6 +77,7 @@ namespace Pinta.Docking
 
 			public void Minimize (Box dock_bar)
 			{
+				// TODO-GTK4 - there seem to be crashes with the popover
 				Pane.StartChild = null;
 				popover.Child = Item;
 

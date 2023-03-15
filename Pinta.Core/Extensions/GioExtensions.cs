@@ -214,5 +214,10 @@ namespace Pinta.Core
 
 			menu.AppendItem (item);
 		}
+
+		public static void RemoveMultiple (this Gio.ListStore store, uint position, uint n_removals)
+		{
+			store.Splice (position, n_removals, Array.Empty<GObject.Object> (), 0);
+		}
 	}
 }

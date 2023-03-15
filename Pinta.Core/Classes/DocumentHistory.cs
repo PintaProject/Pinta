@@ -57,11 +57,9 @@ namespace Pinta.Core
 			}
 		}
 
-		// TODO-GTK4 - create a Gio.ListStore with a custom GObject type to provide the data needed
-		// by the history tree view?
-		public Gtk.StringList ListStore { get; } = Gtk.StringList.New (Array.Empty<string> ());
-
 		public int Pointer { get; private set; } = -1;
+
+		public IEnumerable<BaseHistoryItem> Items => history;
 
 		public void PushNewItem (BaseHistoryItem newItem)
 		{
@@ -71,17 +69,11 @@ namespace Pinta.Core
 
 				if (item.State == HistoryItemState.Redo) {
 					history.RemoveAt (i);
-
-					//Remove from ListStore
-					ListStore.Remove (item.Id);
 				} else if (item.State == HistoryItemState.Undo) {
 					break;
 				}
 			}
 
-			//Add new undo to ListStore
-			newItem.Id = ListStore.GetNItems ();
-			ListStore.Append ("");
 			history.Add (newItem);
 			Pointer = history.Count - 1;
 
@@ -108,10 +100,6 @@ namespace Pinta.Core
 				if (item.CausesDirty)
 					document.IsDirty = true;
 
-#if false // TODO-GTK4 test if this is necessary
-				ListStore.SetValue (item.Id, 0, item);
-				history[Pointer] = item;
-#endif
 				Pointer--;
 			}
 
@@ -136,10 +124,6 @@ namespace Pinta.Core
 			var item = history[Pointer];
 			item.Redo ();
 			item.State = HistoryItemState.Undo;
-#if false // TODO-GTK4 test if this is necessary
-			ListStore.SetValue (item.Id, 0, item);
-			history[Pointer] = item;
-#endif
 
 			if (Pointer == history.Count - 1)
 				PintaCore.Actions.Edit.Redo.Sensitive = false;
@@ -179,7 +163,6 @@ namespace Pinta.Core
 		public void Clear ()
 		{
 			history.Clear ();
-			ListStore.Splice (0, ListStore.GetNItems (), Array.Empty<string> ());
 			Pointer = -1;
 			clean_pointer = -1;
 

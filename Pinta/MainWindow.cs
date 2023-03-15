@@ -446,11 +446,11 @@ namespace Pinta
 			// Layer pad
 			var layers_pad = new LayersPad ();
 			layers_pad.Initialize (dock, this, show_pad);
+#endif
 
 			// History pad
 			var history_pad = new HistoryPad ();
-			history_pad.Initialize (dock, this, show_pad);
-#endif
+			history_pad.Initialize (dock, app, show_pad);
 
 			container.Append (dock);
 		}

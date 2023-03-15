@@ -32,136 +32,111 @@ using Pinta.Core;
 
 namespace Pinta.Gui.Widgets
 {
+	// GObject subclass for use with Gio.ListStore
+	public class HistoryTreeViewItem : GObject.Object
+	{
+		public HistoryTreeViewItem (BaseHistoryItem item) : base (true, Array.Empty<GObject.ConstructArgument> ())
+		{
+			Label = item.Text!;
+		}
+
+		public string Label { get; set; }
+	}
+
 	public class HistoryTreeView : ScrolledWindow
 	{
-		private TreeView tree;
+		private ListView view;
+		private Gio.ListStore model;
+		private Gtk.SingleSelection selection_model;
+		private Gtk.SignalListItemFactory factory;
 		private Document? active_document;
 
 		public HistoryTreeView ()
 		{
-			Build ();
-
-			PintaCore.Workspace.ActiveDocumentChanged += Workspace_ActiveDocumentChanged;
-		}
-
-		[MemberNotNull (nameof (tree))]
-		private void Build ()
-		{
 			CanFocus = false;
 			SetSizeRequest (200, 200);
-
 			SetPolicy (PolicyType.Automatic, PolicyType.Automatic);
 
-			tree = new TreeView {
-				CanFocus = false,
+			model = Gio.ListStore.New (HistoryTreeViewItem.GetGType ());
 
-				HeadersVisible = false,
-				EnableGridLines = TreeViewGridLines.None,
-				EnableTreeLines = false
+			selection_model = Gtk.SingleSelection.New (model);
+#if false // TODO-GTK4 - the selection-changed signal isn't generated currently (https://github.com/gircore/gir.core/issues/831)
+			selection_model.OnSelectionChanged += OnSelectionChanged;
+#endif
+
+			// TODO-GTK4
+			// - improve spacing
+			// - show the history item's icons
+			// - display undone items as faded / italic
+			factory = Gtk.SignalListItemFactory.New ();
+			factory.OnSetup += (factory, args) => {
+				var label = new Gtk.Label ();
+				var item = (Gtk.ListItem) args.Object;
+				item.SetChild (label);
+			};
+			factory.OnBind += (factory, args) => {
+				var list_item = (Gtk.ListItem) args.Object;
+				var model_item = (HistoryTreeViewItem) list_item.GetItem ()!;
+				var label = (Gtk.Label) list_item.GetChild ()!;
+				label.SetText (model_item.Label);
 			};
 
-			tree.Selection.Mode = SelectionMode.Single;
-			tree.Selection.SelectFunction = HistoryItemSelected;
+			view = ListView.New (selection_model, factory);
+			view.CanFocus = false;
 
-			var icon_column = new TreeViewColumn ();
-			var icon_cell = new CellRendererPixbuf ();
-			icon_column.PackStart (icon_cell, true);
+			SetChild (view);
 
-			var text_column = new TreeViewColumn ();
-			var text_cell = new CellRendererText ();
-			text_column.PackStart (text_cell, true);
-
-			text_column.SetCellDataFunc (text_cell, new TreeCellDataFunc (HistoryRenderText));
-			icon_column.SetCellDataFunc (icon_cell, new TreeCellDataFunc (HistoryRenderIcon));
-
-			tree.AppendColumn (icon_column);
-			tree.AppendColumn (text_column);
-
-			Add (tree);
-
-			ShowAll ();
+			PintaCore.Workspace.ActiveDocumentChanged += OnActiveDocumentChanged;
 		}
 
-		private void Workspace_ActiveDocumentChanged (object? sender, EventArgs e)
+		private void OnActiveDocumentChanged (object? sender, EventArgs e)
 		{
 			var doc = PintaCore.Workspace.HasOpenDocuments ? PintaCore.Workspace.ActiveDocument : null;
-
 			if (active_document == doc)
 				return;
 
 			if (active_document is not null) {
-				active_document.History.HistoryItemAdded -= new EventHandler<HistoryItemAddedEventArgs> (OnHistoryItemsChanged);
-				active_document.History.ActionUndone -= new EventHandler (OnHistoryItemsChanged);
-				active_document.History.ActionRedone -= new EventHandler (OnHistoryItemsChanged);
+				active_document.History.HistoryItemAdded -= OnHistoryItemAdded;
+				active_document.History.ActionUndone -= OnUndoOrRedo;
+				active_document.History.ActionRedone -= OnUndoOrRedo;
 			}
 
-			tree.Model = doc?.History.ListStore;
+			// Clear out old items and rebuild.
+			model.RemoveMultiple (0, model.GetNItems ());
 
 			if (doc is not null) {
-				doc.History.HistoryItemAdded += new EventHandler<HistoryItemAddedEventArgs> (OnHistoryItemsChanged);
-				doc.History.ActionUndone += new EventHandler (OnHistoryItemsChanged);
-				doc.History.ActionRedone += new EventHandler (OnHistoryItemsChanged);
+				foreach (BaseHistoryItem item in doc.History.Items) {
+					model.Append (new HistoryTreeViewItem (item));
+				}
+
+				doc.History.HistoryItemAdded += OnHistoryItemAdded;
+				doc.History.ActionUndone += OnUndoOrRedo;
+				doc.History.ActionRedone += OnUndoOrRedo;
 			}
 
 			active_document = doc;
-
-			OnHistoryItemsChanged (this, EventArgs.Empty);
 		}
 
-		public bool HistoryItemSelected (TreeSelection selection, ITreeModel model, TreePath path, bool path_currently_selected)
+		private void OnHistoryItemAdded (object? sender, HistoryItemAddedEventArgs args)
 		{
-			if (active_document is null)
-				return true;
+			ArgumentNullException.ThrowIfNull (active_document);
 
-			var current = path.Indices[0];
+			uint idx = (uint) active_document.History.Pointer;
 
-			if (!path_currently_selected) {
-				while (active_document.History.Pointer < current)
-					active_document.History.Redo ();
+			// Remove any stale (previously undone) items before adding the new item.
+			model.RemoveMultiple (idx, model.GetNItems () - idx);
 
-				while (active_document.History.Pointer > current)
-					active_document.History.Undo ();
-			}
-
-			return true;
+			model.Append (new HistoryTreeViewItem (args.Item));
+			selection_model.SetSelected (idx);
 		}
 
-		private void HistoryRenderText (TreeViewColumn column, CellRenderer cell, ITreeModel model, TreeIter iter)
+		private void OnUndoOrRedo (object? sender, EventArgs args)
 		{
-			var item = (BaseHistoryItem) model.GetValue (iter, 0);
+			ArgumentNullException.ThrowIfNull (active_document);
 
-			if (item.State == HistoryItemState.Undo) {
-				((CellRendererText) cell).Style = Pango.Style.Normal;
-				((CellRendererText) cell).ForegroundRgba = StyleContext.GetColor (StateFlags);
-				((CellRendererText) cell).Text = item.Text;
-			} else if (item.State == HistoryItemState.Redo) {
-				((CellRendererText) cell).Style = Pango.Style.Oblique;
-				((CellRendererText) cell).Foreground = "gray";
-				((CellRendererText) cell).Text = item.Text;
-			}
-		}
-
-		private void HistoryRenderIcon (TreeViewColumn column, CellRenderer cell, ITreeModel model, TreeIter iter)
-		{
-			var item = (BaseHistoryItem) model.GetValue (iter, 0);
-			var pixbuf_cell = (CellRendererPixbuf) cell;
-
-			if (pixbuf_cell.Pixbuf != null)
-				pixbuf_cell.Pixbuf.Dispose ();
-
-			if (item.Icon != null)
-				pixbuf_cell.Pixbuf = PintaCore.Resources.GetIcon (item.Icon, StyleContext);
-		}
-
-		private void OnHistoryItemsChanged (object? o, EventArgs args)
-		{
-			if (active_document is null)
-				return;
-
-			if (tree.Model != null && active_document.History.Current != null) {
-				tree.Selection.SelectIter (active_document.History.Current.Id);
-				tree.ScrollToCell (tree.Model.GetPath (active_document.History.Current.Id), tree.Columns[1], true, (float) 0.9, 0);
-			}
+			// Update the selected history item.
+			uint selected_idx = (uint) active_document.History.Pointer;
+			selection_model.SetSelected (selected_idx);
 		}
 	}
 }

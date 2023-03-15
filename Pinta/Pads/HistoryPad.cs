@@ -33,7 +33,7 @@ namespace Pinta
 {
 	public class HistoryPad : IDockPad
 	{
-		public void Initialize (Dock workspace, Application app, GLib.Menu padMenu)
+		public void Initialize (Dock workspace, Application app, Gio.Menu padMenu)
 		{
 			var history = new HistoryTreeView ();
 			DockItem history_item = new DockItem (history, "History") {
@@ -47,9 +47,12 @@ namespace Pinta
 			history_item.DefaultWidth = 100;
 			history_item.Behavior |= DockItemBehavior.CantClose;
 #endif
+
+#if false // TODO-GTK4 - support the history pad toolbar
 			var history_tb = history_item.AddToolBar ();
 			history_tb.Add (PintaCore.Actions.Edit.Undo.CreateDockToolBarItem ());
 			history_tb.Add (PintaCore.Actions.Edit.Redo.CreateDockToolBarItem ());
+#endif
 
 			workspace.AddItem (history_item, DockPlacement.Right);
 
@@ -60,7 +63,9 @@ namespace Pinta
 			padMenu.AppendItem (show_history.CreateMenuItem ());
 
 			show_history.Toggled += (val) => { history_item.Visible = val; };
+#if false // TODO-GTK4 - visibility-notify-event no longer exists, can probably replace with a dedicated event on the DockItem class
 			history_item.VisibilityNotifyEvent += (o, args) => { show_history.Value = history_item.Visible; };
+#endif
 		}
 	}
 }

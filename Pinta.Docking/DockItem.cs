@@ -65,9 +65,10 @@ namespace Pinta.Docking
 
 			UniqueName = unique_name;
 
-			// TODO-GTK4 - replacement for ReliefStyle.None?
 			minimize_button = Button.NewFromIconName (StandardIcons.WindowMinimize);
+			minimize_button.AddCssClass (Pinta.Core.AdwaitaStyles.Flat);
 			maximize_button = Button.NewFromIconName (StandardIcons.WindowMaximize);
+			maximize_button.AddCssClass (Pinta.Core.AdwaitaStyles.Flat);
 
 			button_stack = new Stack ();
 			button_stack.AddChild (minimize_button);
@@ -78,7 +79,9 @@ namespace Pinta.Docking
 				const int padding = 8;
 				var title_layout = Box.New (Orientation.Horizontal, 0);
 				label_widget.MarginStart = label_widget.MarginEnd = padding;
-				title_layout.Prepend (label_widget);
+				label_widget.Hexpand = true;
+				label_widget.Halign = Align.Start;
+				title_layout.Append (label_widget);
 
 				title_layout.Append (button_stack);
 
