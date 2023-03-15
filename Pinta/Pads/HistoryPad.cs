@@ -35,7 +35,7 @@ namespace Pinta
 	{
 		public void Initialize (Dock workspace, Application app, Gio.Menu padMenu)
 		{
-			var history = new HistoryTreeView ();
+			var history = new HistoryListView ();
 			DockItem history_item = new DockItem (history, "History") {
 				Label = Translations.GetString ("History")
 			};

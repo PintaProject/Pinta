@@ -33,9 +33,9 @@ using Pinta.Core;
 namespace Pinta.Gui.Widgets
 {
 	// GObject subclass for use with Gio.ListStore
-	public class HistoryTreeViewItem : GObject.Object
+	public class HistoryListViewItem : GObject.Object
 	{
-		public HistoryTreeViewItem (BaseHistoryItem item) : base (true, Array.Empty<GObject.ConstructArgument> ())
+		public HistoryListViewItem (BaseHistoryItem item) : base (true, Array.Empty<GObject.ConstructArgument> ())
 		{
 			Label = item.Text!;
 		}
@@ -43,7 +43,7 @@ namespace Pinta.Gui.Widgets
 		public string Label { get; set; }
 	}
 
-	public class HistoryTreeView : ScrolledWindow
+	public class HistoryListView : ScrolledWindow
 	{
 		private ListView view;
 		private Gio.ListStore model;
@@ -51,13 +51,13 @@ namespace Pinta.Gui.Widgets
 		private Gtk.SignalListItemFactory factory;
 		private Document? active_document;
 
-		public HistoryTreeView ()
+		public HistoryListView ()
 		{
 			CanFocus = false;
 			SetSizeRequest (200, 200);
 			SetPolicy (PolicyType.Automatic, PolicyType.Automatic);
 
-			model = Gio.ListStore.New (HistoryTreeViewItem.GetGType ());
+			model = Gio.ListStore.New (HistoryListViewItem.GetGType ());
 
 			selection_model = Gtk.SingleSelection.New (model);
 #if false // TODO-GTK4 - the selection-changed signal isn't generated currently (https://github.com/gircore/gir.core/issues/831)
@@ -76,7 +76,7 @@ namespace Pinta.Gui.Widgets
 			};
 			factory.OnBind += (factory, args) => {
 				var list_item = (Gtk.ListItem) args.Object;
-				var model_item = (HistoryTreeViewItem) list_item.GetItem ()!;
+				var model_item = (HistoryListViewItem) list_item.GetItem ()!;
 				var label = (Gtk.Label) list_item.GetChild ()!;
 				label.SetText (model_item.Label);
 			};
@@ -106,7 +106,7 @@ namespace Pinta.Gui.Widgets
 
 			if (doc is not null) {
 				foreach (BaseHistoryItem item in doc.History.Items) {
-					model.Append (new HistoryTreeViewItem (item));
+					model.Append (new HistoryListViewItem (item));
 				}
 
 				doc.History.HistoryItemAdded += OnHistoryItemAdded;
@@ -126,7 +126,7 @@ namespace Pinta.Gui.Widgets
 			// Remove any stale (previously undone) items before adding the new item.
 			model.RemoveMultiple (idx, model.GetNItems () - idx);
 
-			model.Append (new HistoryTreeViewItem (args.Item));
+			model.Append (new HistoryListViewItem (args.Item));
 			selection_model.SetSelected (idx);
 		}
 
