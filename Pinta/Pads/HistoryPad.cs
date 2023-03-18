@@ -40,19 +40,9 @@ namespace Pinta
 				Label = Translations.GetString ("History")
 			};
 
-			// TODO-GTK3 (docking)
-#if false
-			history_item.DefaultLocation = "Images/Bottom";
-			history_item.Icon = Gtk.IconTheme.Default.LoadIcon(Resources.Icons.LayerDuplicate, 16);
-			history_item.DefaultWidth = 100;
-			history_item.Behavior |= DockItemBehavior.CantClose;
-#endif
-
-#if false // TODO-GTK4 - support the history pad toolbar
 			var history_tb = history_item.AddToolBar ();
-			history_tb.Add (PintaCore.Actions.Edit.Undo.CreateDockToolBarItem ());
-			history_tb.Add (PintaCore.Actions.Edit.Redo.CreateDockToolBarItem ());
-#endif
+			history_tb.Append (PintaCore.Actions.Edit.Undo.CreateDockToolBarItem ());
+			history_tb.Append (PintaCore.Actions.Edit.Redo.CreateDockToolBarItem ());
 
 			workspace.AddItem (history_item, DockPlacement.Right);
 

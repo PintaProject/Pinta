@@ -55,7 +55,7 @@ namespace Pinta.Gui.Widgets
 			factory = Gtk.SignalListItemFactory.New ();
 			factory.OnSetup += (factory, args) => {
 				var item = (Gtk.ListItem) args.Object;
-				item.SetChild (new HistoryItemWidget());
+				item.SetChild (new HistoryItemWidget ());
 			};
 			factory.OnBind += (factory, args) => {
 				var list_item = (Gtk.ListItem) args.Object;

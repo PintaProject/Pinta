@@ -24,6 +24,7 @@
 
 using System;
 using Gtk;
+using Pinta.Core;
 using Pinta.Resources;
 
 namespace Pinta.Docking
@@ -103,17 +104,15 @@ namespace Pinta.Docking
 			// TODO - support dragging into floating panel?
 		}
 
-#if false // TODO-GTK4
 		/// <summary>
 		/// Create a toolbar and add it to the bottom of the dock item.
 		/// </summary>
-		public Toolbar AddToolBar ()
+		public Gtk.Box AddToolBar ()
 		{
-			var toolbar = new Toolbar ();
-			PackStart (toolbar, false, false, 0);
+			var toolbar = GtkExtensions.CreateToolBar ();
+			Append (toolbar);
 			return toolbar;
 		}
-#endif
 
 		/// <summary>
 		/// Update the dock item's state after it is minimized.

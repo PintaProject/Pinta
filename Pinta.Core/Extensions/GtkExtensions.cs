@@ -93,7 +93,7 @@ namespace Pinta.Core
 			return toolbar;
 		}
 
-		public static Gtk.Button CreateToolBarItem (this Command action)
+		public static Gtk.Button CreateToolBarItem (this Command action, bool force_icon_only = false)
 		{
 			var label = action.ShortLabel ?? action.Label;
 			var button = new Button () {
@@ -101,7 +101,7 @@ namespace Pinta.Core
 				TooltipText = action.Tooltip ?? action.Label,
 			};
 
-			if (action.IsImportant) {
+			if (action.IsImportant && !force_icon_only) {
 				button.Child = new Adw.ButtonContent () {
 					IconName = action.IconName,
 					Label = label
@@ -112,6 +112,11 @@ namespace Pinta.Core
 			}
 
 			return button;
+		}
+
+		public static Gtk.Button CreateDockToolBarItem (this Command action)
+		{
+			return action.CreateToolBarItem (force_icon_only: false);
 		}
 
 		public static Gtk.Separator CreateToolBarSeparator ()

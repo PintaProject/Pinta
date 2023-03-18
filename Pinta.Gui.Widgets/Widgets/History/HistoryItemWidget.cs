@@ -53,7 +53,7 @@ namespace Pinta.Gui.Widgets
 		public HistoryItemWidget ()
 		{
 			Spacing = 6;
-			this.SetAllMargins(2);
+			this.SetAllMargins (2);
 			SetOrientation (Orientation.Horizontal);
 
 			image = Gtk.Image.New ();
@@ -71,9 +71,9 @@ namespace Pinta.Gui.Widgets
 			label.SetText (item.Label);
 
 			if (item.Active)
-				RemoveCssClass(AdwaitaStyles.DimLabel);
+				RemoveCssClass (AdwaitaStyles.DimLabel);
 			else
-				AddCssClass(AdwaitaStyles.DimLabel);
+				AddCssClass (AdwaitaStyles.DimLabel);
 		}
 	}
 }
