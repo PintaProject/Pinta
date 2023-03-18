@@ -30,19 +30,43 @@ namespace Pinta.Gui.Widgets
 	// GObject subclass for use with Gio.ListStore
 	public class LayersListViewItem : GObject.Object
 	{
+		private Document doc;
 		private UserLayer layer;
 
-		public LayersListViewItem (UserLayer layer) : base (true, Array.Empty<GObject.ConstructArgument> ())
+		public LayersListViewItem (Document doc, UserLayer layer) : base (true, Array.Empty<GObject.ConstructArgument> ())
 		{
+			this.doc = doc;
 			this.layer = layer;
 		}
 
 		public string Label => layer.Name;
 		public bool Visible => !layer.Hidden;
+
+		public void HandleVisibilityToggled (bool visible)
+		{
+			if (Visible == visible)
+				return;
+
+			var doc = PintaCore.Workspace.ActiveDocument;
+
+			var initial = new LayerProperties (layer.Name, visible, layer.Opacity, layer.BlendMode);
+			var updated = new LayerProperties (layer.Name, !visible, layer.Opacity, layer.BlendMode);
+
+			var historyItem = new UpdateLayerPropertiesHistoryItem (
+				Resources.Icons.LayerProperties,
+				visible ? Translations.GetString ("Layer Shown") : Translations.GetString ("Layer Hidden"),
+				doc.Layers.IndexOf (layer),
+				initial,
+				updated);
+			historyItem.Redo ();
+
+			doc.History.PushNewItem (historyItem);
+		}
 	}
 
 	public class LayersListViewItemWidget : Box
 	{
+		private LayersListViewItem? item;
 		private Gtk.Label label;
 		private Gtk.CheckButton visible_button;
 
@@ -52,20 +76,28 @@ namespace Pinta.Gui.Widgets
 			this.SetAllMargins (2);
 			SetOrientation (Orientation.Horizontal);
 
+			// TODO-GTK4 - add preview image for layer
+
 			label = Gtk.Label.New (string.Empty);
 			label.Halign = Align.Start;
 			label.Hexpand = true;
+			label.Ellipsize = Pango.EllipsizeMode.End;
 			Append (label);
 
 			visible_button = CheckButton.New ();
 			visible_button.Halign = Align.End;
 			visible_button.Hexpand = false;
 			Append (visible_button);
+
+			visible_button.OnToggled += (_, _) => {
+				item?.HandleVisibilityToggled (visible_button.Active);
+			};
 		}
 
 		// Set the widget's contents to the provided layer.
 		public void Update (LayersListViewItem item)
 		{
+			this.item = item;
 			label.SetText (item.Label);
 			visible_button.SetActive (item.Visible);
 		}

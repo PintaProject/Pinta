@@ -70,13 +70,22 @@ namespace Pinta.Gui.Widgets
 
 			view = ListView.New (selection_model, factory);
 			view.CanFocus = false;
+			view.OnActivate += HandleRowActivated;
 
 			SetChild (view);
 
-			PintaCore.Workspace.ActiveDocumentChanged += OnActiveDocumentChanged;
+			PintaCore.Workspace.ActiveDocumentChanged += HandleActiveDocumentChanged;
 		}
 
-		private void OnActiveDocumentChanged (object? sender, EventArgs e)
+		private void HandleRowActivated (ListView sender, ListView.ActivateSignalArgs args)
+		{
+			// TODO-GTK4 - once OnSelectionChanged is handled, verify that the double click to active will also have selected the layer.
+
+			// Open the layer properties dialog
+			PintaCore.Actions.Layers.Properties.Activate ();
+		}
+
+		private void HandleActiveDocumentChanged (object? sender, EventArgs e)
 		{
 			var doc = PintaCore.Workspace.HasOpenDocuments ? PintaCore.Workspace.ActiveDocument : null;
 
@@ -84,13 +93,13 @@ namespace Pinta.Gui.Widgets
 				return;
 
 			if (active_document != null) {
-				active_document.History.HistoryItemAdded -= OnHistoryChanged;
-				active_document.History.ActionUndone -= OnHistoryChanged;
-				active_document.History.ActionRedone -= OnHistoryChanged;
-				active_document.Layers.LayerAdded -= OnLayerAdded;
-				active_document.Layers.LayerRemoved -= OnLayerRemoved;
-				active_document.Layers.SelectedLayerChanged -= OnSelectedLayerChanged;
-				active_document.Layers.LayerPropertyChanged -= OnLayerPropertyChanged;
+				active_document.History.HistoryItemAdded -= HandleHistoryChanged;
+				active_document.History.ActionUndone -= HandleHistoryChanged;
+				active_document.History.ActionRedone -= HandleHistoryChanged;
+				active_document.Layers.LayerAdded -= HandleLayerAdded;
+				active_document.Layers.LayerRemoved -= HandleLayerRemoved;
+				active_document.Layers.SelectedLayerChanged -= HandleSelectedLayerChanged;
+				active_document.Layers.LayerPropertyChanged -= HandleLayerPropertyChanged;
 			}
 
 			// Clear out old items and rebuild.
@@ -98,36 +107,36 @@ namespace Pinta.Gui.Widgets
 
 			if (doc is not null) {
 				foreach (var layer in doc.Layers.UserLayers.Reverse ()) {
-					model.Append (new LayersListViewItem (layer));
+					model.Append (new LayersListViewItem (doc, layer));
 				}
 
-				doc.History.HistoryItemAdded += OnHistoryChanged;
-				doc.History.ActionUndone += OnHistoryChanged;
-				doc.History.ActionRedone += OnHistoryChanged;
-				doc.Layers.LayerAdded += OnLayerAdded;
-				doc.Layers.LayerRemoved += OnLayerRemoved;
-				doc.Layers.SelectedLayerChanged += OnSelectedLayerChanged;
-				doc.Layers.LayerPropertyChanged += OnLayerPropertyChanged;
+				doc.History.HistoryItemAdded += HandleHistoryChanged;
+				doc.History.ActionUndone += HandleHistoryChanged;
+				doc.History.ActionRedone += HandleHistoryChanged;
+				doc.Layers.LayerAdded += HandleLayerAdded;
+				doc.Layers.LayerRemoved += HandleLayerRemoved;
+				doc.Layers.SelectedLayerChanged += HandleSelectedLayerChanged;
+				doc.Layers.LayerPropertyChanged += HandleLayerPropertyChanged;
 			}
 
 			active_document = doc;
 		}
 
-		private void OnHistoryChanged (object? sender, EventArgs e)
+		private void HandleHistoryChanged (object? sender, EventArgs e)
 		{
 			// Update the widgets by flagging every item as having changed.
 			for (uint i = 0; i < model.NItems; ++i)
 				model.ItemsChanged (i, 0, 0);
 		}
 
-		private void OnLayerAdded (object? sender, EventArgs e)
+		private void HandleLayerAdded (object? sender, EventArgs e)
 		{
 			ArgumentNullException.ThrowIfNull (active_document);
 
-			model.Insert (0, new LayersListViewItem (active_document.Layers.UserLayers.Last ()));
+			model.Insert (0, new LayersListViewItem (active_document, active_document.Layers.UserLayers.Last ()));
 		}
 
-		private void OnLayerRemoved (object? sender, IndexEventArgs e)
+		private void HandleLayerRemoved (object? sender, IndexEventArgs e)
 		{
 			ArgumentNullException.ThrowIfNull (active_document);
 
@@ -135,7 +144,7 @@ namespace Pinta.Gui.Widgets
 			model.Remove ((uint) (active_document.Layers.Count () - e.Index));
 		}
 
-		private void OnSelectedLayerChanged (object? sender, EventArgs e)
+		private void HandleSelectedLayerChanged (object? sender, EventArgs e)
 		{
 			ArgumentNullException.ThrowIfNull (active_document);
 
@@ -143,10 +152,10 @@ namespace Pinta.Gui.Widgets
 			selection_model.SelectItem ((uint) index, unselectRest: true);
 		}
 
-		private void OnLayerPropertyChanged (object? sender, EventArgs e)
+		private void HandleLayerPropertyChanged (object? sender, EventArgs e)
 		{
 			// Treat the same as an undo event, and update the widgets.
-			OnHistoryChanged (sender, e);
+			HandleHistoryChanged (sender, e);
 		}
 	}
 }
