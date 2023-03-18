@@ -25,7 +25,7 @@ namespace Pinta.Core
 		}
 
 		public event EventHandler? LayerAdded;
-		public event EventHandler? LayerRemoved;
+		public event EventHandler<IndexEventArgs>? LayerRemoved;
 		public event EventHandler? SelectedLayerChanged;
 		public event PropertyChangedEventHandler? LayerPropertyChanged;
 
@@ -156,21 +156,7 @@ namespace Pinta.Core
 		/// <summary>
 		/// Deletes the current layer and removes it from the layer collection.
 		/// </summary>
-		public void DeleteCurrentLayer ()
-		{
-			var layer = CurrentUserLayer;
-
-			user_layers.RemoveAt (CurrentUserLayerIndex);
-
-			// Only change this if this wasn't already the bottom layer
-			if (CurrentUserLayerIndex > 0)
-				CurrentUserLayerIndex--;
-
-			layer.PropertyChanged -= RaiseLayerPropertyChangedEvent;
-
-			LayerRemoved?.Invoke (this, EventArgs.Empty);
-			PintaCore.Layers.OnLayerRemoved ();
-		}
+		public void DeleteCurrentLayer () => DeleteLayer (CurrentUserLayerIndex);
 
 		/// <summary>
 		/// Deletes the user layer at the specified index and removes it from the
@@ -189,7 +175,7 @@ namespace Pinta.Core
 
 			layer.PropertyChanged -= RaiseLayerPropertyChangedEvent;
 
-			LayerRemoved?.Invoke (this, EventArgs.Empty);
+			LayerRemoved?.Invoke (this, new IndexEventArgs (index));
 			PintaCore.Layers.OnLayerRemoved ();
 		}
 
@@ -252,10 +238,8 @@ namespace Pinta.Core
 
 			// Delete all other layers
 			while (user_layers.Count > 1)
-				user_layers.RemoveAt (1);
+				DeleteLayer (user_layers.Count - 1);
 
-			LayerRemoved?.Invoke (this, EventArgs.Empty);
-			PintaCore.Layers.OnLayerRemoved ();
 			document.Workspace.Invalidate ();
 		}
 

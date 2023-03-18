@@ -38,11 +38,13 @@ namespace Pinta.Gui.Widgets
 		}
 
 		public string Label => layer.Name;
+		public bool Visible => !layer.Hidden;
 	}
 
 	public class LayersListViewItemWidget : Box
 	{
 		private Gtk.Label label;
+		private Gtk.CheckButton visible_button;
 
 		public LayersListViewItemWidget ()
 		{
@@ -52,13 +54,20 @@ namespace Pinta.Gui.Widgets
 
 			label = Gtk.Label.New (string.Empty);
 			label.Halign = Align.Start;
+			label.Hexpand = true;
 			Append (label);
+
+			visible_button = CheckButton.New ();
+			visible_button.Halign = Align.End;
+			visible_button.Hexpand = false;
+			Append (visible_button);
 		}
 
 		// Set the widget's contents to the provided layer.
 		public void Update (LayersListViewItem item)
 		{
 			label.SetText (item.Label);
+			visible_button.SetActive (item.Visible);
 		}
 	}
 }

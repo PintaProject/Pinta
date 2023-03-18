@@ -87,8 +87,8 @@ namespace Pinta.Gui.Widgets
 				active_document.History.HistoryItemAdded -= OnHistoryChanged;
 				active_document.History.ActionUndone -= OnHistoryChanged;
 				active_document.History.ActionRedone -= OnHistoryChanged;
-				active_document.Layers.LayerAdded -= OnLayerAddedOrRemoved;
-				active_document.Layers.LayerRemoved -= OnLayerAddedOrRemoved;
+				active_document.Layers.LayerAdded -= OnLayerAdded;
+				active_document.Layers.LayerRemoved -= OnLayerRemoved;
 				active_document.Layers.SelectedLayerChanged -= OnSelectedLayerChanged;
 				active_document.Layers.LayerPropertyChanged -= OnLayerPropertyChanged;
 			}
@@ -104,8 +104,8 @@ namespace Pinta.Gui.Widgets
 				doc.History.HistoryItemAdded += OnHistoryChanged;
 				doc.History.ActionUndone += OnHistoryChanged;
 				doc.History.ActionRedone += OnHistoryChanged;
-				doc.Layers.LayerAdded += OnLayerAddedOrRemoved;
-				doc.Layers.LayerRemoved += OnLayerAddedOrRemoved;
+				doc.Layers.LayerAdded += OnLayerAdded;
+				doc.Layers.LayerRemoved += OnLayerRemoved;
 				doc.Layers.SelectedLayerChanged += OnSelectedLayerChanged;
 				doc.Layers.LayerPropertyChanged += OnLayerPropertyChanged;
 			}
@@ -115,22 +115,38 @@ namespace Pinta.Gui.Widgets
 
 		private void OnHistoryChanged (object? sender, EventArgs e)
 		{
-			// TODO-GTK4 - implement this.
+			// Update the widgets by flagging every item as having changed.
+			for (uint i = 0; i < model.NItems; ++i)
+				model.ItemsChanged (i, 0, 0);
 		}
 
-		private void OnLayerAddedOrRemoved (object? sender, EventArgs e)
+		private void OnLayerAdded (object? sender, EventArgs e)
 		{
-			// TODO-GTK4 - implement this.
+			ArgumentNullException.ThrowIfNull (active_document);
+
+			model.Insert (0, new LayersListViewItem (active_document.Layers.UserLayers.Last ()));
+		}
+
+		private void OnLayerRemoved (object? sender, IndexEventArgs e)
+		{
+			ArgumentNullException.ThrowIfNull (active_document);
+
+			// Note: don't need to subtract 1 because the layer has already been removed from the document.
+			model.Remove ((uint) (active_document.Layers.Count () - e.Index));
 		}
 
 		private void OnSelectedLayerChanged (object? sender, EventArgs e)
 		{
-			// TODO-GTK4 - implement this.
+			ArgumentNullException.ThrowIfNull (active_document);
+
+			int index = active_document.Layers.Count () - 1 - active_document.Layers.CurrentUserLayerIndex;
+			selection_model.SelectItem ((uint) index, unselectRest: true);
 		}
 
 		private void OnLayerPropertyChanged (object? sender, EventArgs e)
 		{
-			// TODO-GTK4 - implement this.
+			// Treat the same as an undo event, and update the widgets.
+			OnHistoryChanged (sender, e);
 		}
 	}
 }
