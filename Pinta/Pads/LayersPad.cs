@@ -33,20 +33,20 @@ namespace Pinta
 {
 	public class LayersPad : IDockPad
 	{
-		public void Initialize (Dock workspace, Application app, GLib.Menu padMenu)
+		public void Initialize (Dock workspace, Application app, Gio.Menu padMenu)
 		{
-			var layers = new LayersListWidget ();
+			var layers = new LayersListView ();
 			DockItem layers_item = new DockItem (layers, "Layers") {
 				Label = Translations.GetString ("Layers")
 			};
 
 			var layers_tb = layers_item.AddToolBar ();
-			layers_tb.Add (PintaCore.Actions.Layers.AddNewLayer.CreateDockToolBarItem ());
-			layers_tb.Add (PintaCore.Actions.Layers.DeleteLayer.CreateDockToolBarItem ());
-			layers_tb.Add (PintaCore.Actions.Layers.DuplicateLayer.CreateDockToolBarItem ());
-			layers_tb.Add (PintaCore.Actions.Layers.MergeLayerDown.CreateDockToolBarItem ());
-			layers_tb.Add (PintaCore.Actions.Layers.MoveLayerUp.CreateDockToolBarItem ());
-			layers_tb.Add (PintaCore.Actions.Layers.MoveLayerDown.CreateDockToolBarItem ());
+			layers_tb.Append (PintaCore.Actions.Layers.AddNewLayer.CreateDockToolBarItem ());
+			layers_tb.Append (PintaCore.Actions.Layers.DeleteLayer.CreateDockToolBarItem ());
+			layers_tb.Append (PintaCore.Actions.Layers.DuplicateLayer.CreateDockToolBarItem ());
+			layers_tb.Append (PintaCore.Actions.Layers.MergeLayerDown.CreateDockToolBarItem ());
+			layers_tb.Append (PintaCore.Actions.Layers.MoveLayerUp.CreateDockToolBarItem ());
+			layers_tb.Append (PintaCore.Actions.Layers.MoveLayerDown.CreateDockToolBarItem ());
 
 			// TODO-GTK3 (docking)
 #if false
@@ -64,7 +64,9 @@ namespace Pinta
 			padMenu.AppendItem (show_layers.CreateMenuItem ());
 
 			show_layers.Toggled += (val) => { layers_item.Visible = val; };
+#if false // TODO-GTK4 - visibility-notify-event no longer exists, can probably replace with a dedicated event on the DockItem class
 			layers_item.VisibilityNotifyEvent += (o, args) => { show_layers.Value = layers_item.Visible; };
+#endif
 		}
 	}
 }

@@ -20,6 +20,7 @@
     <Compile Include="Widgets/HistogramWidget.cs" />
     <Compile Include="Widgets/History/*.cs" />
     <Compile Include="Widgets/HScaleSpinButtonWidget.cs" />
+    <Compile Include="Widgets/Layers/*.cs" />
     <Compile Include="Widgets/PointPickerGraphic.cs" />
     <Compile Include="Widgets/PointPickerWidget.cs" />
     <Compile Include="Widgets/ReseedButtonWidget.cs" />

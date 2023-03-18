@@ -441,12 +441,10 @@ namespace Pinta
 			canvas_pad = new CanvasPad ();
 			canvas_pad.Initialize (dock);
 			PintaCore.Chrome.InitializeImageTabsNotebook (canvas_pad.Notebook);
-#if false // TODO-GTK4
 
 			// Layer pad
 			var layers_pad = new LayersPad ();
-			layers_pad.Initialize (dock, this, show_pad);
-#endif
+			layers_pad.Initialize (dock, app, show_pad);
 
 			// History pad
 			var history_pad = new HistoryPad ();
