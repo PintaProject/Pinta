@@ -12,43 +12,4 @@
   <ItemGroup>
     <ProjectReference Include="..\Pinta.Resources\Pinta.Resources.csproj" />
   </ItemGroup>
-
-  <!-- TODO-GTK4 - build all files -->
-  <ItemGroup>
-    <Compile Remove="**/*.cs" />
-    <Compile Include="PintaCore.cs" />
-    <Compile Include="Actions/*.cs" />
-    <Compile Include="Classes/AsyncEffectRenderer.cs" />
-    <Compile Include="Classes/BasePaintBrush.cs" />
-    <Compile Include="Classes/BaseTool.cs" />
-    <Compile Include="Classes/Document.cs" />
-    <Compile Include="Classes/DocumentHistory.cs" />
-    <Compile Include="Classes/DocumentLayers.cs" />
-    <Compile Include="Classes/DocumentSelection.cs" />
-    <Compile Include="Classes/DocumentWorkspace.cs" />
-    <Compile Include="Classes/IExtension.cs" />
-    <Compile Include="Classes/IToolHandle.cs" />
-    <Compile Include="Classes/Layer.cs" />
-    <Compile Include="Classes/LayerProperties.cs" />
-    <Compile Include="Classes/ObservableObject.cs" />
-    <Compile Include="Classes/Palette.cs" />
-    <Compile Include="Classes/Point.cs" />
-    <Compile Include="Classes/Rectangle.cs" />
-    <Compile Include="Classes/Re-editable/ReEditableLayer.cs" />
-    <Compile Include="Classes/Re-editable/Text/*.cs" />
-    <Compile Include="Classes/ScaleFactor.cs" />
-    <Compile Include="Classes/SelectionModeHandler.cs" />
-    <Compile Include="Classes/SurfaceDiff.cs" />
-    <Compile Include="Classes/Translations.cs" />
-    <Compile Include="Classes/UserLayer.cs" />
-    <Compile Include="Effects/*.cs" />
-    <Compile Include="Enumerations/*.cs" />
-    <Compile Include="EventArgs/*.cs" />
-    <Compile Include="Extensions/*.cs" />
-    <Compile Include="HistoryItems/*.cs" />
-    <Compile Include="ImageFormats/*.cs" />
-    <Compile Include="Managers/*.cs" />
-    <Compile Include="PaletteFormats/*.cs" />
-    <Compile Include="Widgets/ToolBarDropDownButton.cs" />
-  </ItemGroup>
 </Project>

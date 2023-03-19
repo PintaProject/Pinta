@@ -5,27 +5,4 @@
   <ItemGroup>
     <ProjectReference Include="..\Pinta.Core\Pinta.Core.csproj" />
   </ItemGroup>
-
-  <!-- TODO-GTK4 - build all files -->
-  <ItemGroup>
-    <Compile Remove="**/*.cs" />
-    <Compile Include="DialogAttributes.cs" />
-    <Compile Include="Dialogs/SimpleEffectDialog.cs" />
-    <Compile Include="Widgets/AnglePickerGraphic.cs" />
-    <Compile Include="Widgets/AnglePickerWidget.cs" />
-    <Compile Include="Widgets/Canvas/*.cs" />
-    <Compile Include="Widgets/ColorGradientWidget.cs" />
-    <Compile Include="Widgets/ColorPanelWidget.cs" />
-    <Compile Include="Widgets/ComboBoxWidget.cs" />
-    <Compile Include="Widgets/HistogramWidget.cs" />
-    <Compile Include="Widgets/History/*.cs" />
-    <Compile Include="Widgets/HScaleSpinButtonWidget.cs" />
-    <Compile Include="Widgets/Layers/*.cs" />
-    <Compile Include="Widgets/PointPickerGraphic.cs" />
-    <Compile Include="Widgets/PointPickerWidget.cs" />
-    <Compile Include="Widgets/ReseedButtonWidget.cs" />
-    <Compile Include="Widgets/Ruler.cs" />
-    <Compile Include="Widgets/StatusBarColorPaletteWidget.cs" />
-    <Compile Include="Widgets/ToolBoxWidget.cs" />
-  </ItemGroup>
 </Project>

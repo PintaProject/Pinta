@@ -29,6 +29,7 @@ using Pinta.Core;
 
 namespace Pinta.Actions
 {
+#if false // TODO - printing is not yet enabled, and needs to be ported to GTK4
 	public class PrintDocumentAction : IActionHandler
 	{
 		#region IActionHandler implementation
@@ -84,5 +85,6 @@ namespace Pinta.Actions
 			op.NPages = 1;
 		}
 	}
+#endif
 }
 
