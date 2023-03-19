@@ -377,24 +377,17 @@ namespace Pinta.Core
 		#endregion
 
 
-		private void ShowOpenFileErrorDialog (Window parent, string filename, string primaryText, string details)
+		private void ShowOpenFileErrorDialog (Window parent, string filename, string primary_text, string details)
 		{
-#if false // TODO-GTK4
-
-			string markup = "<span weight=\"bold\" size=\"larger\">{0}</span>\n\n{1}";
-			string secondaryText = string.Format (Translations.GetString ("Could not open file: {0}"), filename);
-			string message = string.Format (markup, primaryText, secondaryText);
-			PintaCore.Chrome.ShowErrorDialog (parent, message, details);
-#else
-			throw new NotImplementedException ();
-#endif
+			string secondary_text = Translations.GetString ("Could not open file: {0}", filename);
+			PintaCore.Chrome.ShowErrorDialog (parent, primary_text, secondary_text, details);
 		}
 
 		private void ShowUnsupportedFormatDialog (Window parent, string filename, string message, string errors)
 		{
-			var details = new StringBuilder ();
-			details.AppendLine (Translations.GetString ("Could not open file: {0}", filename));
-			details.AppendLine (Translations.GetString ("Pinta supports the following file formats:"));
+			var body = new StringBuilder ();
+			body.AppendLine (Translations.GetString ("Could not open file: {0}", filename));
+			body.AppendLine (Translations.GetString ("Pinta supports the following file formats:"));
 
 			var extensions = from format in PintaCore.ImageFormats.Formats
 					 where format.Importer != null
@@ -402,11 +395,9 @@ namespace Pinta.Core
 					 where char.IsLower (extension.FirstOrDefault ())
 					 orderby extension
 					 select extension;
-			details.AppendJoin (", ", extensions);
-			details.AppendLine ();
-			details.AppendLine (errors);
+			body.AppendJoin (", ", extensions);
 
-			PintaCore.Chrome.ShowMessageDialog (parent, message, details.ToString ());
+			PintaCore.Chrome.ShowErrorDialog (parent, message, body.ToString (), errors);
 		}
 
 		private static void ShowFilePermissionErrorDialog (Window parent, string filename)

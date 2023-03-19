@@ -31,93 +31,53 @@ using Pinta.Core;
 
 namespace Pinta
 {
-	public class ErrorDialog : Gtk.Dialog
+	public static class ErrorDialog
 	{
-		private Label description_label;
-		private Expander expander;
-		private TextView details_text;
-		private Button bug_report_button;
-
-		public ErrorDialog (Window parent) : base ("Pinta", parent, DialogFlags.Modal | DialogFlags.DestroyWithParent)
+		public static void ShowMessage (Window parent, string message, string body)
 		{
-			Build ();
+			System.Console.Error.WriteLine ("Pinta: {0}\n{1}", message, body);
 
-			expander.Activated += (sender, e) => {
-				GLib.Timeout.Add (100, new GLib.TimeoutHandler (UpdateSize));
-			};
+			var dialog = Adw.MessageDialog.New (parent, message, body);
 
-			bug_report_button.Clicked += (sender, e) => {
-				PintaCore.Actions.Help.Bugs.Activate ();
-			};
+			const string ok_response = "ok";
+			dialog.AddResponse (ok_response, Translations.GetString ("_OK"));
+			dialog.DefaultResponse = ok_response;
+			dialog.CloseResponse = ok_response;
 
-			TransientFor = parent;
-
-			expander.Visible = false;
-			DefaultResponse = ResponseType.Ok;
+			dialog.Present ();
 		}
 
-		public void SetMessage (string message)
+		public static void ShowError (Window parent, string message, string body, string details)
 		{
-			description_label.Markup = message;
-		}
+			System.Console.Error.WriteLine ("Pinta: {0}\n{1}", message, details);
 
-		public void AddDetails (string text)
-		{
-			TextIter it = details_text.Buffer.EndIter;
-			details_text.Buffer.Insert (ref it, text);
-			expander.Visible = true;
-		}
+			var dialog = Adw.MessageDialog.New (parent, message, body);
 
-		private bool UpdateSize ()
-		{
-			int w, h;
-			GetSize (out w, out h);
-			Resize (w, 1);
-			return false;
-		}
+			var text_view = Gtk.TextView.New ();
+			text_view.Buffer!.SetText (details, -1);
 
-		[MemberNotNull (nameof (expander), nameof (bug_report_button), nameof (description_label), nameof (details_text))]
-		private void Build ()
-		{
-			var hbox = new HBox ();
-			hbox.Spacing = 6;
-			hbox.BorderWidth = 12;
-
-			var error_icon = Image.NewFromIconName (Resources.StandardIcons.DialogError, IconSize.Dialog);
-			error_icon.Yalign = 0;
-			hbox.PackStart (error_icon, false, false, 0);
-
-			var vbox = new VBox ();
-			vbox.Spacing = 6;
-
-			description_label = new Label ();
-			description_label.Wrap = true;
-			description_label.Xalign = 0;
-			vbox.PackStart (description_label, false, false, 0);
-
-			expander = new Expander (Translations.GetString ("Details"));
-			details_text = new TextView ();
-			var scroll = new ScrolledWindow ();
-			scroll.Add (details_text);
+			var scroll = Gtk.ScrolledWindow.New ();
 			scroll.HeightRequest = 250;
-			expander.Add (scroll);
-			vbox.Add (expander);
+			scroll.SetChild (text_view);
 
-			hbox.Add (vbox);
-			this.ContentArea.Add (hbox);
+			var expander = Gtk.Expander.New (Translations.GetString ("Details"));
+			expander.SetChild (scroll);
+			dialog.SetExtraChild (expander);
 
-			bug_report_button = new Button (Translations.GetString ("Report Bug...."));
-			bug_report_button.CanFocus = false;
-			AddActionWidget (bug_report_button, ResponseType.Help);
+			const string bug_response = "bug";
+			const string ok_response = "ok";
+			dialog.AddResponse (bug_response, Translations.GetString ("Report Bug..."));
+			dialog.SetResponseAppearance (bug_response, Adw.ResponseAppearance.Suggested);
+			dialog.AddResponse (ok_response, Translations.GetString ("_OK"));
+			dialog.DefaultResponse = ok_response;
+			dialog.CloseResponse = ok_response;
 
-			var ok_button = new Button (Gtk.Stock.Ok);
-			ok_button.CanDefault = true;
-			AddActionWidget (ok_button, ResponseType.Ok);
+			dialog.OnResponse += (_, args) => {
+				if (args.Response == bug_response)
+					PintaCore.Actions.Help.Bugs.Activate ();
+			};
 
-			DefaultWidth = 600;
-			DefaultHeight = 142;
-
-			ShowAll ();
+			dialog.Present ();
 		}
 	}
 }

@@ -44,13 +44,7 @@
     <Compile Include="Actions/View/*.cs" />
     <Compile Include="Actions/Window/*.cs" />
     <Compile Include="DialogHandlers.cs" />
-    <Compile Include="Dialogs/JpegCompressionDialog.cs" />
-    <Compile Include="Dialogs/LayerPropertiesDialog.cs" />
-    <Compile Include="Dialogs/NewImageDialog.cs" />
-    <Compile Include="Dialogs/ProgressDialog.cs" />
-    <Compile Include="Dialogs/ResizeCanvasDialog.cs" />
-    <Compile Include="Dialogs/ResizeImageDialog.cs" />
-    <Compile Include="Dialogs/SpinButtonEntryDialog.cs" />
+    <Compile Include="Dialogs/*.cs" />
     <Compile Include="DocumentViewContent.cs" />
     <Compile Include="Main.cs" />
     <Compile Include="MainWindow.cs" />

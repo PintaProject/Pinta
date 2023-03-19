@@ -40,9 +40,7 @@ namespace Pinta.Core
 		public Window MainWindow { get; private set; } = null!;
 		public Widget ImageTabsNotebook { get; private set; } = null!;
 		private IProgressDialog progress_dialog = null!;
-#if false // TODO-GTK4
 		private ErrorDialogHandler error_dialog_handler = null!;
-#endif
 		private MessageDialogHandler message_dialog_handler = null!;
 
 		public Box MainToolBar { get; private set; } = null!;
@@ -132,28 +130,24 @@ namespace Pinta.Core
 			progress_dialog = progressDialog;
 		}
 
-#if false // TODO-GTK4
 		public void InitializeErrorDialogHandler (ErrorDialogHandler handler)
 		{
 			error_dialog_handler = handler;
 		}
-#endif
 
 		public void InitializeMessageDialog (MessageDialogHandler handler)
 		{
 			message_dialog_handler = handler;
 		}
 
-#if false // TODO-GTK4
-		public void ShowErrorDialog (Window parent, string message, string details)
+		public void ShowErrorDialog (Window parent, string message, string body, string details)
 		{
-			error_dialog_handler (parent, message, details);
+			error_dialog_handler (parent, message, body, details);
 		}
-#endif
 
-		public void ShowMessageDialog (Window parent, string message, string details)
+		public void ShowMessageDialog (Window parent, string message, string body)
 		{
-			message_dialog_handler (parent, message, details);
+			message_dialog_handler (parent, message, body);
 		}
 
 		public void SetStatusBarText (string text)
@@ -191,6 +185,6 @@ namespace Pinta.Core
 		event EventHandler<EventArgs> Canceled;
 	}
 
-	public delegate void ErrorDialogHandler (Window parent, string message, string details);
-	public delegate void MessageDialogHandler (Window parent, string message, string details);
+	public delegate void ErrorDialogHandler (Window parent, string message, string body, string details);
+	public delegate void MessageDialogHandler (Window parent, string message, string body);
 }
