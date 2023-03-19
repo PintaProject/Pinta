@@ -30,6 +30,7 @@ using System.IO;
 using System.Reflection;
 using System.Runtime.InteropServices;
 using System.Text;
+using System.Threading;
 using Gtk;
 using Mono.Options;
 using Pinta.Core;
@@ -94,6 +95,7 @@ namespace Pinta
 			Pango.Module.Initialize ();
 			PangoCairo.Module.Initialize ();
 			var app = Adw.Application.New ("com.github.PintaProject.Pinta", Gio.ApplicationFlags.NonUnique);
+			SynchronizationContext.SetSynchronizationContext (new GLibExtensions.GLibSynchronizationContext ());
 
 			// Add our icons to the search path.
 			GtkExtensions.GetDefaultIconTheme ().AddSearchPath (Pinta.Core.SystemManager.GetDataRootDirectory () + "/icons");

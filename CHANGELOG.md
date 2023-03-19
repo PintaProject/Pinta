@@ -7,6 +7,8 @@ Thanks to the following contributors who worked on this release:
 - @cameronwhite
 
 ### Added
+- Ported to GTK4 and libadwaita
+  - Due to API changes in GTK4, the File -> New Screenshot option now only uses the XDG screenshot portal on Linux, and is currently unsupported on Windows and macOS.
 
 ### Changed
 
