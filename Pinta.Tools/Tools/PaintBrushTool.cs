@@ -173,7 +173,7 @@ namespace Pinta.Tools
 
 					var brush = Settings.GetSetting (BRUSH_SETTING, 0);
 
-					if (brush < brush_combo_box.ComboBox.GetItemCount ())
+					if (brush < brush_combo_box.ComboBox.Model.IterNChildren (null))
 						brush_combo_box.ComboBox.Active = brush;
 				}
 
