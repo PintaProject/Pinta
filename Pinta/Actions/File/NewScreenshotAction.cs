@@ -26,6 +26,7 @@
 
 using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using Gdk;
 using Pinta.Core;
 using ScreenshotPortal.DBus;
@@ -97,6 +98,24 @@ namespace Pinta.Actions
 						Translations.GetString ("Failed to take screenshot"),
 						Translations.GetString ("Failed to access XDG Desktop Portals"),
 						e.ToString ());
+				}
+
+				return;
+
+			} else if (SystemManager.GetOperatingSystem () == OS.Mac) {
+				try {
+					// Launch the screencapture utility in interactive mode and save to the clipboard.
+					// Note for testing: this requires screen recording permissions, so running from the generated .app bundle is required.
+					const string screencapture_path = "/usr/sbin/screencapture";
+					const string screencapture_args = "-iUc";
+
+					var process = Process.Start (screencapture_path, screencapture_args);
+					process.WaitForExit ();
+
+					PintaCore.Actions.Edit.PasteIntoNewImage.Activate ();
+				} catch (Exception e) {
+					PintaCore.Chrome.ShowErrorDialog (PintaCore.Chrome.MainWindow,
+						Translations.GetString ("Failed to take screenshot"), string.Empty, e.ToString ());
 				}
 
 				return;
