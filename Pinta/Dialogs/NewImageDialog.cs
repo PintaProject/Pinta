@@ -45,7 +45,8 @@ namespace Pinta
 		private List<Size> preset_sizes;
 		private PreviewArea preview;
 
-		private ComboBoxText preset_combo;
+		private Gtk.StringList preset_dropdown_model;
+		private DropDown preset_dropdown;
 		private Entry width_entry;
 		private Entry height_entry;
 
@@ -159,7 +160,7 @@ namespace Pinta
 
 		private Size SelectedPresetSize {
 			get {
-				string text = preset_combo.GetActiveText ()!;
+				string text = preset_dropdown_model.GetString (preset_dropdown.Selected)!;
 				if (text == Translations.GetString ("Clipboard") || text == Translations.GetString ("Custom"))
 					return Size.Empty;
 
@@ -183,7 +184,7 @@ namespace Pinta
 			preset_sizes.Add (new Size (1600, 1200));
 		}
 
-		[MemberNotNull (nameof (preset_combo), nameof (portrait_radio), nameof (landscape_radio), nameof (white_bg_radio), nameof (secondary_bg_radio), nameof (trans_bg_radio), nameof (width_entry), nameof (height_entry), nameof (preview))]
+		[MemberNotNull (nameof (preset_dropdown_model), nameof (preset_dropdown), nameof (portrait_radio), nameof (landscape_radio), nameof (white_bg_radio), nameof (secondary_bg_radio), nameof (trans_bg_radio), nameof (width_entry), nameof (height_entry), nameof (preview))]
 		private void BuildDialog ()
 		{
 			// Layout table for preset, width, and height
@@ -205,14 +206,11 @@ namespace Pinta
 			preset_entries.Add (Translations.GetString ("Custom"));
 			preset_entries.AddRange (preset_sizes.Select (p => string.Format ("{0} x {1}", p.Width, p.Height)));
 
-			preset_combo = new ComboBoxText ();
-			foreach (string entry in preset_entries)
-				preset_combo.AppendText (entry);
-
-			preset_combo.Active = 0;
+			preset_dropdown_model = StringList.New (preset_entries.ToArray ());
+			preset_dropdown = DropDown.New (preset_dropdown_model, expression: null);
 
 			layout_grid.Attach (size_label, 0, 0, 1, 1);
-			layout_grid.Attach (preset_combo, 1, 0, 1, 1);
+			layout_grid.Attach (preset_dropdown, 1, 0, 1, 1);
 
 			// Width Entry
 			var width_label = Label.New (Translations.GetString ("Width:"));
@@ -368,11 +366,16 @@ namespace Pinta
 
 		private void WireUpEvents ()
 		{
-			// Handle preset combo changes
-			preset_combo.OnChanged += (o, e) => {
+			// Handle preset changes
+			// Gtk.DropDown doesn't have a proper signal for this, so listen to changes in the 'selected' property.
+			preset_dropdown.OnNotify += (o, args) => {
+				if (args.Pspec.GetName () != "selected")
+					return;
+
+				Console.WriteLine ($"onselecteditem {preset_dropdown.Selected} {args.Pspec.GetName ()}");
 				var new_size = IsValidSize ? NewImageSize : Size.Empty;
 
-				string? preset_text = preset_combo.GetActiveText ();
+				string? preset_text = preset_dropdown_model.GetString (preset_dropdown.Selected);
 				if (has_clipboard && preset_text == Translations.GetString ("Clipboard"))
 					new_size = clipboard_size;
 				else if (preset_text == Translations.GetString ("Custom"))
@@ -456,14 +459,13 @@ namespace Pinta
 
 		private void UpdateOrientation ()
 		{
-#if false // TODO-GTK4 - requires missing gir.core bindings for TreeModel.IterNthChild
 			if (NewImageWidth < NewImageHeight && !portrait_radio.Active)
 				portrait_radio.Activate ();
 			else if (NewImageWidth > NewImageHeight && !landscape_radio.Active)
 				landscape_radio.Activate ();
 
-			for (var i = 1; i < preset_combo.GetItemCount (); i++) {
-				var text = preset_combo.GetValueAt<string> (i);
+			for (uint i = 1, n = preset_dropdown_model.GetNItems (); i < n; i++) {
+				var text = preset_dropdown_model.GetString (i)!;
 
 				if (text == Translations.GetString ("Clipboard") || text == Translations.GetString ("Custom"))
 					continue;
@@ -475,9 +477,9 @@ namespace Pinta
 				var new_size = new Size (NewImageWidth < NewImageHeight ? Math.Min (width, height) : Math.Max (width, height), NewImageWidth < NewImageHeight ? Math.Max (width, height) : Math.Min (width, height));
 				var new_text = string.Format ("{0} x {1}", new_size.Width, new_size.Height);
 
-				preset_combo.SetValueAt (i, new_text);
+				if (new_text != text)
+					preset_dropdown_model.Splice (i, 1, new[] { new_text });
 			}
-#endif
 		}
 
 		private void UpdateOkButton ()
@@ -491,14 +493,10 @@ namespace Pinta
 			if (!IsValidSize)
 				return;
 
-#if false // TODO-GTK4
-
 			var text = string.Format ("{0} x {1}", NewImageWidth, NewImageHeight);
-			var index = preset_combo.FindValue (text);
-
-			if (index >= 0 && preset_combo.Active != index)
-				preset_combo.Active = index;
-#endif
+			if (preset_dropdown_model.FindString (text, out uint index) && preset_dropdown.Selected != index) {
+				preset_dropdown.Selected = index;
+			}
 		}
 
 		private class PreviewArea : DrawingArea

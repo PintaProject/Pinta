@@ -254,6 +254,22 @@ namespace Pinta.Core
 			return (Entry) box.Child!;
 		}
 
+		/// <summary>
+		/// Find the index of a string in a Gtk.StringList.
+		/// </summary>
+		public static bool FindString (this StringList list, string s, out uint index)
+		{
+			for (uint i = 0, n = list.GetNItems (); i < n; ++i) {
+				if (list.GetString (i) == s) {
+					index = i;
+					return true;
+				}
+			}
+
+			index = 0;
+			return false;
+		}
+
 		// TODO-GTK4 - need gir.core binding for gtk_file_chooser_set_current_folder
 		public static bool SetCurrentFolder (this FileChooser chooser, Gio.File file)
 		{
