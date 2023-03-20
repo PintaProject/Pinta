@@ -82,9 +82,8 @@ namespace Pinta
 			var index = all_blendmodes.IndexOf (UserBlendOps.GetBlendModeName (blendmode));
 			blendComboBox.Active = index;
 
-#if false // TODO-GTK4 - Editable.OnChanged signal is missing in gir.core                                                                         
-			layerNameEntry.Changed += OnLayerNameChanged;
-#endif
+			layerNameEntry.OnChanged ((o, e) => OnLayerNameChanged (o, e));
+
 			visibilityCheckbox.OnToggled += OnVisibilityToggled;
 			opacitySpinner.OnValueChanged += OnOpacitySpinnerChanged;
 			opacitySlider.OnValueChanged += OnOpacitySliderChanged;

@@ -28,6 +28,7 @@ using System;
 using System.Linq;
 using System.Runtime.InteropServices;
 using System.Threading.Tasks;
+using GObject;
 using Gtk;
 
 namespace Pinta.Core
@@ -457,5 +458,16 @@ namespace Pinta.Core
 
 		[DllImport (GtkLibraryName, EntryPoint = "gtk_color_chooser_get_rgba")]
 		private static extern void ColorChooserGetRgba (IntPtr handle, out GdkRGBA color);
+
+		private static readonly Signal<Entry> EntryChangedSignal = new (
+		    unmanagedName: "changed",
+		    managedName: string.Empty
+		);
+
+		// TODO-GTK4 (bindings) - the Gtk.Editable::changed signal is not generated (https://github.com/gircore/gir.core/issues/831)
+		public static void OnChanged (this Entry o, SignalHandler<Entry> handler)
+		{
+			EntryChangedSignal.Connect (o, handler);
+		}
 	}
 }

@@ -372,7 +372,6 @@ namespace Pinta
 				if (args.Pspec.GetName () != "selected")
 					return;
 
-				Console.WriteLine ($"onselecteditem {preset_dropdown.Selected} {args.Pspec.GetName ()}");
 				var new_size = IsValidSize ? NewImageSize : Size.Empty;
 
 				string? preset_text = preset_dropdown_model.GetString (preset_dropdown.Selected);
@@ -395,9 +394,8 @@ namespace Pinta
 				UpdateOrientation ();
 				preview.Update (NewImageSize);
 			};
-#if false // TODO-GTK4 - gir.core seems to be missing the Editable ::changed signal
 			// Handle width/height entry changes
-			width_entry.OnChanged += (o, e) => {
+			width_entry.OnChanged ((o, e) => {
 				if (suppress_events)
 					return;
 
@@ -407,14 +405,14 @@ namespace Pinta
 					return;
 
 				if (NewImageSize != SelectedPresetSize)
-					preset_combo.Active = has_clipboard ? 1 : 0;
+					preset_dropdown.Selected = has_clipboard ? 1u : 0;
 
 				UpdateOrientation ();
 				UpdatePresetSelection ();
 				preview.Update (NewImageSize);
-			};
+			});
 
-			height_entry.OnChanged += (o, e) => {
+			height_entry.OnChanged ((o, e) => {
 				if (suppress_events)
 					return;
 
@@ -424,13 +422,12 @@ namespace Pinta
 					return;
 
 				if (NewImageSize != SelectedPresetSize)
-					preset_combo.Active = has_clipboard ? 1 : 0;
+					preset_dropdown.Selected = has_clipboard ? 1u : 0;
 
 				UpdateOrientation ();
 				UpdatePresetSelection ();
 				preview.Update (NewImageSize);
-			};
-#endif
+			});
 
 			// Handle orientation changes
 			portrait_radio.OnToggled += (o, e) => {
