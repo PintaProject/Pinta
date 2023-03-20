@@ -136,11 +136,12 @@ namespace Pinta.Gui.Widgets
 				model.ItemsChanged (i, 0, 0);
 		}
 
-		private void HandleLayerAdded (object? sender, EventArgs e)
+		private void HandleLayerAdded (object? sender, IndexEventArgs e)
 		{
 			ArgumentNullException.ThrowIfNull (active_document);
 
-			model.Insert (0, new LayersListViewItem (active_document, active_document.Layers.UserLayers.Last ()));
+			int index = active_document.Layers.Count () - 1 - e.Index;
+			model.Insert ((uint) index, new LayersListViewItem (active_document, active_document.Layers[e.Index]));
 		}
 
 		private void HandleLayerRemoved (object? sender, IndexEventArgs e)

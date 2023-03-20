@@ -24,7 +24,7 @@ namespace Pinta.Core
 			this.document = document;
 		}
 
-		public event EventHandler? LayerAdded;
+		public event EventHandler<IndexEventArgs>? LayerAdded;
 		public event EventHandler<IndexEventArgs>? LayerRemoved;
 		public event EventHandler? SelectedLayerChanged;
 		public event PropertyChangedEventHandler? LayerPropertyChanged;
@@ -96,7 +96,7 @@ namespace Pinta.Core
 
 			layer.PropertyChanged += RaiseLayerPropertyChangedEvent;
 
-			LayerAdded?.Invoke (this, EventArgs.Empty);
+			LayerAdded?.Invoke (this, new IndexEventArgs (user_layers.Count - 1));
 			PintaCore.Layers.OnLayerAdded ();
 			return layer;
 		}
@@ -212,7 +212,7 @@ namespace Pinta.Core
 
 			layer.PropertyChanged += RaiseLayerPropertyChangedEvent;
 
-			LayerAdded?.Invoke (this, EventArgs.Empty);
+			LayerAdded?.Invoke (this, new IndexEventArgs (CurrentUserLayerIndex));
 			PintaCore.Layers.OnLayerAdded ();
 
 			return layer;
@@ -335,7 +335,7 @@ namespace Pinta.Core
 
 			layer.PropertyChanged += RaiseLayerPropertyChangedEvent;
 
-			LayerAdded?.Invoke (this, EventArgs.Empty);
+			LayerAdded?.Invoke (this, new IndexEventArgs (index));
 			PintaCore.Layers.OnLayerAdded ();
 		}
 
@@ -367,8 +367,9 @@ namespace Pinta.Core
 				throw new InvalidOperationException ("Cannot move layer down because current layer is the bottom layer.");
 
 			var layer = CurrentUserLayer;
-			user_layers.RemoveAt (CurrentUserLayerIndex);
-			user_layers.Insert (--CurrentUserLayerIndex, layer);
+			int index = CurrentUserLayerIndex;
+			DeleteLayer (index);
+			Insert (layer, index - 1);
 
 			SelectedLayerChanged?.Invoke (this, EventArgs.Empty);
 			PintaCore.Layers.OnSelectedLayerChanged ();
@@ -385,8 +386,10 @@ namespace Pinta.Core
 				throw new InvalidOperationException ("Cannot move layer up because current layer is the top layer.");
 
 			var layer = CurrentUserLayer;
-			user_layers.RemoveAt (CurrentUserLayerIndex);
-			user_layers.Insert (++CurrentUserLayerIndex, layer);
+			int index = CurrentUserLayerIndex;
+			DeleteLayer (index);
+			Insert (layer, index + 1);
+			CurrentUserLayerIndex = index + 1;
 
 			SelectedLayerChanged?.Invoke (this, EventArgs.Empty);
 			PintaCore.Layers.OnSelectedLayerChanged ();
