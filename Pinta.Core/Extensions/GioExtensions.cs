@@ -50,7 +50,7 @@ namespace Pinta.Core
 		/// </summary>
 		public static string GetDisplayName (this Gio.File file)
 		{
-#if false // TODO-GTK4 - needs gir.core bindings
+#if false // TODO-GTK4 (bindings) - this will be added in v0.4 (https://github.com/gircore/gir.core/issues/756)
 			var info = file.QueryInfo (Constants.FILE_ATTRIBUTE_STANDARD_DISPLAY_NAME, GLib.FileQueryInfoFlags.None, cancellable: null);
 			return info.DisplayName;
 #else
@@ -64,7 +64,7 @@ namespace Pinta.Core
 		/// </summary>
 		public static Gio.OutputStream Replace (this Gio.File file)
 		{
-#if false // TODO-GTK4 - needs gir.core bindings
+#if false // TODO-GTK4 (bindings) - this will be added in v0.4 (https://github.com/gircore/gir.core/issues/756)
 			return file.Replace (null, false, Gio.FileCreateFlags.None, null);
 #else
 			GLib.Internal.ErrorOwnedHandle error;
@@ -81,7 +81,7 @@ namespace Pinta.Core
 			}
 		}
 
-		// TODO-GTK4 - needs a proper binding in gir.core
+		// TODO-GTK4 (bindings) - this will be added in v0.4 (https://github.com/gircore/gir.core/issues/756)
 		public static Gio.FileInputStream Read (this Gio.File file, Gio.Cancellable? cancellable)
 		{
 			GLib.Internal.ErrorOwnedHandle error;
@@ -97,7 +97,7 @@ namespace Pinta.Core
 			}
 		}
 
-		// TODO-GTK4 - needs a proper binding in gir.core
+		// TODO-GTK4 (bindings) - this will be added in v0.4 (https://github.com/gircore/gir.core/issues/756)
 		public static Gio.FileInfo QueryInfo (this Gio.FileInputStream stream, string attributes, Gio.Cancellable? cancellable)
 		{
 			GLib.Internal.ErrorOwnedHandle error;
@@ -106,7 +106,7 @@ namespace Pinta.Core
 			return new FileInfoWrapper (result, true);
 		}
 
-		// TODO-GTK4 - needs a proper binding in gir.core
+		// TODO-GTK4 (bindings) - this will be added in v0.4 (https://github.com/gircore/gir.core/issues/756)
 		public static Gio.FileInfo QueryInfo (this Gio.FileOutputStream stream, string attributes, Gio.Cancellable? cancellable)
 		{
 			GLib.Internal.ErrorOwnedHandle error;
@@ -115,7 +115,7 @@ namespace Pinta.Core
 			return new FileInfoWrapper (result, true);
 		}
 
-		// TODO-GTK4 - needs a proper binding in gir.core
+		// TODO-GTK4 (bindings) - this will be added in v0.4 (https://github.com/gircore/gir.core/issues/756)
 		public static Gio.FileInfo QueryInfo (this Gio.FileIOStream stream, string attributes, Gio.Cancellable? cancellable)
 		{
 			GLib.Internal.ErrorOwnedHandle error;
@@ -131,7 +131,7 @@ namespace Pinta.Core
 			}
 		}
 
-		// TODO-GTK4 - needs a proper binding in gir.core
+		// TODO-GTK4 (bindings) - primitive value arrays are not generated correctly (https://github.com/gircore/gir.core/issues/763)
 		public static long Read (this Gio.InputStream stream, byte[] buffer, uint count, Gio.Cancellable? cancellable)
 		{
 			GLib.Internal.ErrorOwnedHandle error;
@@ -144,7 +144,7 @@ namespace Pinta.Core
 		[DllImport (GioLibraryName, EntryPoint = "g_input_stream_read")]
 		private static extern long Read (IntPtr stream, byte[] buffer, uint count, IntPtr cancellable, out GLib.Internal.ErrorOwnedHandle error);
 
-		// TODO-GTK4 - needs a proper binding in gir.core
+		// TODO-GTK4 (bindings) - primitive value arrays are not generated correctly (https://github.com/gircore/gir.core/issues/763)
 		public static long Write (this Gio.OutputStream stream, byte[] buffer, uint count, Gio.Cancellable? cancellable)
 		{
 			GLib.Internal.ErrorOwnedHandle error;
@@ -153,7 +153,7 @@ namespace Pinta.Core
 			return result;
 		}
 
-		// TODO-GTK4 - needs a proper binding in gir.core
+		// TODO-GTK4 (bindings) - this will be added in v0.4 (https://github.com/gircore/gir.core/issues/756)
 		public static bool Seek (this Gio.Seekable seekable, long offset, GLib.SeekType seek_type, Gio.Cancellable? cancellable)
 		{
 			GLib.Internal.ErrorOwnedHandle error;
@@ -162,7 +162,7 @@ namespace Pinta.Core
 			return result;
 		}
 
-		// TODO-GTK4 - needs a proper binding in gir.core
+		// TODO-GTK4 (bindings) - this will be added in v0.4 (https://github.com/gircore/gir.core/issues/756)
 		public static bool Close (this Gio.InputStream stream, Gio.Cancellable? cancellable)
 		{
 			GLib.Internal.ErrorOwnedHandle error;
@@ -171,7 +171,7 @@ namespace Pinta.Core
 			return result;
 		}
 
-		// TODO-GTK4 - needs a proper binding in gir.core
+		// TODO-GTK4 (bindings) - this will be added in v0.4 (https://github.com/gircore/gir.core/issues/756)
 		public static bool Close (this Gio.OutputStream stream, Gio.Cancellable? cancellable)
 		{
 			GLib.Internal.ErrorOwnedHandle error;
@@ -180,7 +180,7 @@ namespace Pinta.Core
 			return result;
 		}
 
-		// TODO-GTK4 - needs a proper binding in gir.core
+		// TODO-GTK4 (bindings) - this will be added in v0.4 (https://github.com/gircore/gir.core/issues/756)
 		public static bool Close (this Gio.IOStream stream, Gio.Cancellable? cancellable)
 		{
 			GLib.Internal.ErrorOwnedHandle error;

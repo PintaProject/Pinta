@@ -80,7 +80,7 @@ namespace Pinta.Core
 			};
 		}
 
-		// TODO-GTK4 - add pre-defined VariantType's to gir.core
+		// TODO-GTK4 (bindings, unsubmitted) - add pre-defined VariantType's to gir.core
 		public static readonly GLib.VariantType IntVariantType = new ("i");
 
 		/// <summary>
@@ -225,7 +225,7 @@ namespace Pinta.Core
 			return Gtk.Functions.AcceleratorGetLabel (key, mods);
 		}
 
-		// TODO-GTK4 - need binding from gir.core
+		// TODO-GTK4 (bindings, unsubmitted) - need support for 'out' enum parameters.
 		[DllImport (GtkLibraryName, EntryPoint = "gtk_accelerator_parse")]
 		private static extern bool AcceleratorParse ([MarshalAs (UnmanagedType.LPUTF8Str)] string accelerator, out uint accelerator_key, out Gdk.ModifierType accelerator_mods);
 
@@ -271,7 +271,7 @@ namespace Pinta.Core
 			return false;
 		}
 
-		// TODO-GTK4 - need gir.core binding for gtk_file_chooser_set_current_folder
+		// TODO-GTK4 (bindings) - this will be added in v0.4 (https://github.com/gircore/gir.core/issues/756)
 		public static bool SetCurrentFolder (this FileChooser chooser, Gio.File file)
 		{
 			GLib.Internal.ErrorOwnedHandle error;
@@ -280,7 +280,7 @@ namespace Pinta.Core
 			return result;
 		}
 
-		// TODO-GTK4 - need gir.core binding for gtk_file_chooser_set_file
+		// TODO-GTK4 (bindings) - this will be added in v0.4 (https://github.com/gircore/gir.core/issues/756)
 		public static bool SetFile (this FileChooser chooser, Gio.File file)
 		{
 			GLib.Internal.ErrorOwnedHandle error;
@@ -364,7 +364,7 @@ namespace Pinta.Core
 			return response;
 		}
 
-		// TODO-GTK4 replace with adw_message_dialog_choose() once adwaita 1.3 is available
+		// TODO-GTK4 (bindings) - replace with adw_message_dialog_choose() once adwaita 1.3 is available, like in v0.4 of gir.core
 		public static Task<string> RunAsync (this Adw.MessageDialog dialog)
 		{
 			var tcs = new TaskCompletionSource<string> ();
@@ -378,7 +378,7 @@ namespace Pinta.Core
 			return tcs.Task;
 		}
 
-		// TODO-GTK4 - gir.core does not yet generate bindings for record methods
+		// TODO-GTK4 (bindings) - record methods are not generated (https://github.com/gircore/gir.core/issues/743)
 		public static bool Iteration (this GLib.MainContext context, bool may_block)
 		{
 			return GLib.Internal.MainContext.Iteration (context.Handle, may_block);
@@ -403,7 +403,7 @@ namespace Pinta.Core
 			if (editable is null)
 				return;
 
-			// TODO-GTK4 - gir.core should be able to cast to a Gtk.Text from Gtk.Editable
+			// TODO-GTK4 (bindings, unsubmitted) - should be able to cast to a Gtk.Text from Gtk.Editable
 			var text = new TextWrapper (editable.Handle, false);
 			text.SetActivatesDefault (activates);
 		}
@@ -415,7 +415,7 @@ namespace Pinta.Core
 			}
 		}
 
-		// TODO-GTK4 - remove once Gdk.RGBA has struct bindings from gir.core
+		// TODO-GTK4 (bindings) - structs are not generated (https://github.com/gircore/gir.core/issues/622)
 		[StructLayout (LayoutKind.Sequential)]
 		private struct GdkRGBA
 		{
@@ -425,7 +425,7 @@ namespace Pinta.Core
 			public float Alpha;
 		}
 
-		// TODO-GTK4 - remove once Gdk.RGBA has struct bindings from gir.core
+		// TODO-GTK4 (bindings) - structs are not generated (https://github.com/gircore/gir.core/issues/622)
 		public static void GetColor (this Gtk.StyleContext context, out Cairo.Color color)
 		{
 			StyleContextGetColor (context.Handle, out var gdk_color);
@@ -435,7 +435,7 @@ namespace Pinta.Core
 		[DllImport (GtkLibraryName, EntryPoint = "gtk_style_context_get_color")]
 		private static extern void StyleContextGetColor (IntPtr handle, out GdkRGBA color);
 
-		// TODO-GTK4 - remove once Gdk.RGBA has struct bindings from gir.core
+		// TODO-GTK4 (bindings) - structs are not generated (https://github.com/gircore/gir.core/issues/622)
 		public static void SetColor (this Gtk.ColorChooserDialog dialog, Cairo.Color color)
 		{
 			ColorChooserSetRgba (dialog.Handle, new GdkRGBA () {
@@ -449,7 +449,7 @@ namespace Pinta.Core
 		[DllImport (GtkLibraryName, EntryPoint = "gtk_color_chooser_set_rgba")]
 		private static extern void ColorChooserSetRgba (IntPtr handle, GdkRGBA color);
 
-		// TODO-GTK4 - remove once Gdk.RGBA has struct bindings from gir.core
+		// TODO-GTK4 (bindings) - structs are not generated (https://github.com/gircore/gir.core/issues/622)
 		public static void GetColor (this Gtk.ColorChooserDialog dialog, out Cairo.Color color)
 		{
 			ColorChooserGetRgba (dialog.Handle, out var gdk_color);
