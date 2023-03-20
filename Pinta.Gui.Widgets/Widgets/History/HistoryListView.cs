@@ -48,9 +48,7 @@ namespace Pinta.Gui.Widgets
 			model = Gio.ListStore.New (HistoryListViewItem.GetGType ());
 
 			selection_model = Gtk.SingleSelection.New (model);
-#if false // TODO-GTK4 - the selection-changed signal isn't generated currently (https://github.com/gircore/gir.core/issues/831)
-			selection_model.OnSelectionChanged += OnSelectionChanged;
-#endif
+			selection_model.OnSelectionChanged ((o, args) => HandleSelectionChanged (o, args));
 
 			factory = Gtk.SignalListItemFactory.New ();
 			factory.OnSetup += (factory, args) => {
@@ -70,6 +68,17 @@ namespace Pinta.Gui.Widgets
 			SetChild (view);
 
 			PintaCore.Workspace.ActiveDocumentChanged += OnActiveDocumentChanged;
+		}
+
+		private void HandleSelectionChanged (object? sender, GtkExtensions.SelectionChangedSignalArgs e)
+		{
+			ArgumentNullException.ThrowIfNull (active_document);
+
+			int index = (int) selection_model.Selected;
+			while (active_document.History.Pointer < index)
+				active_document.History.Redo ();
+			while (active_document.History.Pointer > index)
+				active_document.History.Undo ();
 		}
 
 		private void OnActiveDocumentChanged (object? sender, EventArgs e)

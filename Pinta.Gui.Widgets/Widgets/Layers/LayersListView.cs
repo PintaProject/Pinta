@@ -52,9 +52,7 @@ namespace Pinta.Gui.Widgets
 			model = Gio.ListStore.New (LayersListViewItem.GetGType ());
 
 			selection_model = Gtk.SingleSelection.New (model);
-#if false // TODO-GTK4 - the selection-changed signal isn't generated currently (https://github.com/gircore/gir.core/issues/831)
-			selection_model.OnSelectionChanged += OnSelectionChanged;
-#endif
+			selection_model.OnSelectionChanged ((o, args) => HandleSelectionChanged (o, args));
 
 			factory = Gtk.SignalListItemFactory.New ();
 			factory.OnSetup += (factory, args) => {
@@ -77,10 +75,19 @@ namespace Pinta.Gui.Widgets
 			PintaCore.Workspace.ActiveDocumentChanged += HandleActiveDocumentChanged;
 		}
 
+		private void HandleSelectionChanged (object? sender, GtkExtensions.SelectionChangedSignalArgs e)
+		{
+			ArgumentNullException.ThrowIfNull (active_document);
+
+			int model_idx = (int) selection_model.Selected;
+			int doc_idx = active_document.Layers.Count () - 1 - model_idx;
+
+			if (active_document.Layers.CurrentUserLayerIndex != doc_idx)
+				active_document.Layers.SetCurrentUserLayer (doc_idx);
+		}
+
 		private void HandleRowActivated (ListView sender, ListView.ActivateSignalArgs args)
 		{
-			// TODO-GTK4 - once OnSelectionChanged is handled, verify that the double click to active will also have selected the layer.
-
 			// Open the layer properties dialog
 			PintaCore.Actions.Layers.Properties.Activate ();
 		}

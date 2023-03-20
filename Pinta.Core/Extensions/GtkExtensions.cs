@@ -469,5 +469,23 @@ namespace Pinta.Core
 		{
 			EntryChangedSignal.Connect (o, handler);
 		}
+
+		public sealed class SelectionChangedSignalArgs : SignalArgs
+		{
+			public uint Position => Args[1].Extract<uint> ();
+			public uint NItems => Args[2].Extract<uint> ();
+
+		}
+
+		private static readonly Signal<SingleSelection, SelectionChangedSignalArgs> SelectionChangedSignal = new (
+		    unmanagedName: "selection-changed",
+		    managedName: string.Empty
+		);
+
+		// TODO-GTK4 (bindings) - the Gtk.SelectionModel::selection-changed signal is not generated (https://github.com/gircore/gir.core/issues/831)
+		public static void OnSelectionChanged (this SingleSelection o, SignalHandler<SingleSelection, SelectionChangedSignalArgs> handler)
+		{
+			SelectionChangedSignal.Connect (o, handler);
+		}
 	}
 }
