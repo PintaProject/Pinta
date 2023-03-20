@@ -111,15 +111,11 @@ namespace Pinta.Resources
 					var buffer = new byte[stream.Length];
 					stream.Read (buffer, 0, buffer.Length);
 
-					// TODO-GTK4 need binding for this
+					// TODO-GTK4 (bindings) - this should be availabe in v0.4 (https://github.com/gircore/gir.core/issues/756)
 					var bytes = GLib.Bytes.From (buffer);
 					GLib.Internal.ErrorOwnedHandle error;
 					image = new TextureWrapper (Gdk.Internal.Texture.NewFromBytes (bytes.Handle, out error), true);
 					GLib.Error.ThrowOnError (error);
-
-#if false
-					image.SaveToPng ("/tmp/output.png");
-#endif
 				}
 			} catch (Exception ex) {
 				Console.Error.WriteLine (ex.Message);

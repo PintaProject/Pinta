@@ -145,8 +145,6 @@ namespace Pinta.Docking
 			page.Title = item.Label;
 			// Update the tab's label when the document's title changes.
 			item.LabelChanged += (o, args) => { page.Title = item.Label; };
-
-			// TODO-GTK4 - try using the thumbnail feature in Adw.TabPage
 		}
 
 		public void RemoveTab (IDockNotebookItem item)

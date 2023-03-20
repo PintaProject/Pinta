@@ -286,20 +286,12 @@ namespace Pinta.Core
 				hist.StartSnapshotOfImage ();
 				hist.RestoreSelection = doc.Selection.Clone ();
 
-#if false // TODO-GTK4
-				doc.Workspace.Canvas.Window.FreezeUpdates ();
-#endif
-
 				double original_scale = doc.Workspace.Scale;
 				doc.ImageSize = rect.Size;
 				doc.Workspace.CanvasSize = rect.Size;
 				doc.Workspace.Scale = original_scale;
 
 				PintaCore.Actions.View.UpdateCanvasScale ();
-
-#if false // TODO-GTK4
-				doc.Workspace.Canvas.Window.ThawUpdates ();
-#endif
 
 				foreach (var layer in doc.Layers.UserLayers)
 					layer.Crop (rect, selection);
