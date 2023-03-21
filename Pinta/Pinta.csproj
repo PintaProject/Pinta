@@ -12,7 +12,7 @@
 
   <ItemGroup>
     <PackageReference Include="GtkSharp" Version="3.24.24.38" />
-    <PackageReference Include="Tmds.DBus" Version="0.13.0" />
+    <PackageReference Include="Tmds.DBus" Version="0.14.0" />
   </ItemGroup>
 
   <ItemGroup>
