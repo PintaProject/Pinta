@@ -253,5 +253,32 @@ namespace Pinta.Core
 
 			return surf;
 		}
+
+		// TODO-GTK4 (bindings) - Gdk.ContentFormats is not wrapped since it is a struct (https://github.com/gircore/gir.core/issues/622)
+		public static ContentFormats CreateContentFormats (string[] mime_types)
+		{
+			var handle = Gdk.Internal.ContentFormats.New (mime_types, (uint) mime_types.Length);
+			return new ContentFormats (handle);
+		}
+
+		// TODO-GTK4 (bindings, unsubmitted) - need gir.core async bindings for this function
+		public static void ReadAsync (this Gdk.Drop drop, string[] mime_types, Action<Gio.InputStream> callback)
+		{
+			var mime_types_native = new GLib.Internal.StringArrayNullTerminatedSafeHandle (mime_types);
+			Gdk.Internal.Drop.ReadAsync (drop.Handle, mime_types_native.DangerousGetHandle (), 0, IntPtr.Zero, (_, args, _) => {
+				GLib.Internal.ErrorOwnedHandle error;
+				IntPtr result = Gdk.Internal.Drop.ReadFinish (drop.Handle, args, out var mime_type, out error);
+				GLib.Error.ThrowOnError (error);
+
+				callback (new InputStreamWrapper (result, true));
+			}, IntPtr.Zero);
+		}
+
+		internal class InputStreamWrapper : Gio.InputStream
+		{
+			internal InputStreamWrapper (IntPtr ptr, bool ownedRef) : base (ptr, ownedRef)
+			{
+			}
+		}
 	}
 }

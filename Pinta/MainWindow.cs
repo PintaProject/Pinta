@@ -26,7 +26,9 @@
 
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
+using System.Threading.Tasks;
 using Gtk;
 using Pinta.Core;
 using Pinta.Docking;
@@ -45,6 +47,8 @@ namespace Pinta
 
 		CanvasPad canvas_pad = null!;
 
+		private static readonly string[] drop_mime_types = new[] { "text/uri-list" };
+		private DropTargetAsync drop_target = null!;
 		private readonly System.Net.Http.HttpClient http_client = new ();
 
 		public MainWindow (Adw.Application app)
@@ -93,13 +97,13 @@ namespace Pinta
 			LoadUserSettings ();
 			PintaCore.Actions.App.BeforeQuit += delegate { SaveUserSettings (); };
 
-#if false // TODO-GTK4
 			// We support drag and drop for URIs
-			window_shell.AddDragDropSupport (new Gtk.TargetEntry ("text/uri-list", 0, 100));
+			var formats = GdkExtensions.CreateContentFormats (drop_mime_types);
+			drop_target = Gtk.DropTargetAsync.New (formats, Gdk.DragAction.Copy);
+			drop_target.OnDrop += HandleDrop;
+			window_shell.Window.AddController (drop_target);
 
 			// Handle a few main window specific actions
-			window_shell.DragDataReceived += MainWindow_DragDataReceived;
-#endif
 			window_shell.Window.OnCloseRequest += HandleCloseRequest;
 
 			var key_controller = Gtk.EventControllerKey.New ();
@@ -500,61 +504,65 @@ namespace Pinta
 			return true;
 		}
 
-#if false // TODO-GTK4
-		private async void MainWindow_DragDataReceived (object o, DragDataReceivedArgs args)
+		private bool HandleDrop (DropTargetAsync sender, DropTargetAsync.DropSignalArgs args)
 		{
-			// TODO: Generate random name for the picture being downloaded
+			var drop = args.Drop;
 
-			// Only handle URIs
-			if (args.Info != 100)
-				return;
+			drop.ReadAsync (drop_mime_types, async input_stream => {
+				// The data should be a list of URIs in UTF-8 format.
+				using var stream = new GioStream (input_stream);
+				using var stream_reader = new StreamReader (stream, System.Text.Encoding.UTF8);
 
-			string fullData = System.Text.Encoding.UTF8.GetString (args.SelectionData.Data).TrimEnd ('\0');
+				string? line;
+				while ((line = stream_reader.ReadLine ()) != null) {
+					string file = line.Trim ();
+					if (string.IsNullOrEmpty (file))
+						continue;
 
-			foreach (string individualFile in fullData.Split (System.Environment.NewLine)) {
-				string file = individualFile.Trim ();
-				if (string.IsNullOrEmpty (file))
-					continue;
+					if (file.StartsWith ("http") || file.StartsWith ("ftp")) {
+						string tempFilePath = System.IO.Path.GetTempPath () + System.IO.Path.GetFileName (file);
 
-				if (file.StartsWith ("http") || file.StartsWith ("ftp")) {
-					string tempFilePath = System.IO.Path.GetTempPath () + System.IO.Path.GetFileName (file);
+						var progressDialog = PintaCore.Chrome.ProgressDialog;
 
-					var progressDialog = PintaCore.Chrome.ProgressDialog;
+						try {
+							PintaCore.Chrome.MainWindowBusy = true;
 
-					try {
-						PintaCore.Chrome.MainWindowBusy = true;
+							progressDialog.Title = Translations.GetString ("Downloading Image");
+							progressDialog.Text = "";
+							progressDialog.Show ();
 
-						progressDialog.Title = Translations.GetString ("Downloading Image");
-						progressDialog.Text = "";
-						progressDialog.Show ();
+							{
+								using var response = await http_client.GetAsync (file, System.Net.Http.HttpCompletionOption.ResponseHeadersRead);
+								using var contentStream = response.Content.ReadAsStream ();
+								using var fileStream = System.IO.File.Create (tempFilePath);
+								contentStream.CopyTo (fileStream);
+							}
 
-						{
-							using var response = await http_client.GetAsync (file, System.Net.Http.HttpCompletionOption.ResponseHeadersRead);
-							using var contentStream = response.Content.ReadAsStream ();
-							using var fileStream = System.IO.File.Create (tempFilePath);
-							contentStream.CopyTo (fileStream);
+							if (PintaCore.Workspace.OpenFile (Gio.FileHelper.NewForPath (tempFilePath))) {
+								// Mark as not having a file, so that the user doesn't unintentionally
+								// save using the temp file.
+								PintaCore.Workspace.ActiveDocument.ClearFileReference ();
+							}
+						} catch (Exception e) {
+							progressDialog.Hide ();
+							PintaCore.Chrome.ShowErrorDialog (PintaCore.Chrome.MainWindow,
+								Translations.GetString ("Download failed"),
+								Translations.GetString ("Unable to download image from {0}.", file),
+								e.Message);
+						} finally {
+							progressDialog.Hide ();
+							PintaCore.Chrome.MainWindowBusy = false;
 						}
-
-						if (PintaCore.Workspace.OpenFile (GLib.FileFactory.NewForPath (tempFilePath))) {
-							// Mark as not having a file, so that the user doesn't unintentionally
-							// save using the temp file.
-							PintaCore.Workspace.ActiveDocument.ClearFileReference ();
-						}
-					} catch (Exception e) {
-						progressDialog.Hide ();
-						PintaCore.Chrome.ShowErrorDialog (PintaCore.Chrome.MainWindow,
-							Translations.GetString ("Download failed"),
-							string.Format (Translations.GetString ("Unable to download image from {0}.\nDetails: {1}"), file, e.Message));
-					} finally {
-						progressDialog.Hide ();
-						PintaCore.Chrome.MainWindowBusy = false;
+					} else {
+						PintaCore.Workspace.OpenFile (Gio.FileHelper.NewForCommandlineArg (file));
 					}
-				} else {
-					PintaCore.Workspace.OpenFile (Core.GtkExtensions.FileNewForCommandlineArg (file));
 				}
-			}
+
+				drop.Finish (Gdk.DragAction.Copy);
+			});
+
+			return true;
 		}
-#endif
 
 		private void ZoomToSelection_Activated (object sender, EventArgs e)
 		{

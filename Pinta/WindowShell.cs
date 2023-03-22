@@ -103,12 +103,5 @@ namespace Pinta
 
 			return workspace_layout;
 		}
-
-#if false // TODO-GTK4
-		public void AddDragDropSupport (params TargetEntry[] entries)
-		{
-			Gtk.Drag.DestSet (this, Gtk.DestDefaults.Motion | Gtk.DestDefaults.Highlight | Gtk.DestDefaults.Drop, entries, Gdk.DragAction.Copy);
-		}
-#endif
 	}
 }
