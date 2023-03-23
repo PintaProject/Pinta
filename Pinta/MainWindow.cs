@@ -48,7 +48,6 @@ namespace Pinta
 		CanvasPad canvas_pad = null!;
 
 		private DropTarget drop_target = null!;
-		private readonly System.Net.Http.HttpClient http_client = new ();
 
 		public MainWindow (Adw.Application app)
 		{
@@ -509,62 +508,14 @@ namespace Pinta
 
 			foreach (Gio.File file in file_list.GetFiles ()) {
 				PintaCore.Workspace.OpenFile (file);
-			}
 
-#if false // TODO-GTK4 - test dropping images from a web browser
-			drop.ReadAsync (drop_mime_types, async input_stream => {
-				// The data should be a list of URIs in UTF-8 format.
-				using var stream = new GioStream (input_stream);
-				using var stream_reader = new StreamReader (stream, System.Text.Encoding.UTF8);
-
-				string? line;
-				while ((line = stream_reader.ReadLine ()) != null) {
-					string file = line.Trim ();
-					if (string.IsNullOrEmpty (file))
-						continue;
-
-					if (file.StartsWith ("http") || file.StartsWith ("ftp")) {
-						string tempFilePath = System.IO.Path.GetTempPath () + System.IO.Path.GetFileName (file);
-
-						var progressDialog = PintaCore.Chrome.ProgressDialog;
-
-						try {
-							PintaCore.Chrome.MainWindowBusy = true;
-
-							progressDialog.Title = Translations.GetString ("Downloading Image");
-							progressDialog.Text = "";
-							progressDialog.Show ();
-
-							{
-								using var response = await http_client.GetAsync (file, System.Net.Http.HttpCompletionOption.ResponseHeadersRead);
-								using var contentStream = response.Content.ReadAsStream ();
-								using var fileStream = System.IO.File.Create (tempFilePath);
-								contentStream.CopyTo (fileStream);
-							}
-
-							if (PintaCore.Workspace.OpenFile (Gio.FileHelper.NewForPath (tempFilePath))) {
-								// Mark as not having a file, so that the user doesn't unintentionally
-								// save using the temp file.
-								PintaCore.Workspace.ActiveDocument.ClearFileReference ();
-							}
-						} catch (Exception e) {
-							progressDialog.Hide ();
-							PintaCore.Chrome.ShowErrorDialog (PintaCore.Chrome.MainWindow,
-								Translations.GetString ("Download failed"),
-								Translations.GetString ("Unable to download image from {0}.", file),
-								e.Message);
-						} finally {
-							progressDialog.Hide ();
-							PintaCore.Chrome.MainWindowBusy = false;
-						}
-					} else {
-						PintaCore.Workspace.OpenFile (Gio.FileHelper.NewForCommandlineArg (file));
-					}
+				if (file.GetUriScheme () is string scheme &&
+				   (scheme.StartsWith ("http") || scheme.StartsWith ("ftp"))) {
+					// If the file was likely dragged from a browser, mark as not having a file
+					// so that the user must choose a new file to save to instead of hitting a permission error.
+					PintaCore.Workspace.ActiveDocument.ClearFileReference ();
 				}
-
-				drop.Finish (Gdk.DragAction.Copy);
-			});
-#endif
+			}
 
 			return true;
 		}
