@@ -47,8 +47,7 @@ namespace Pinta
 
 		CanvasPad canvas_pad = null!;
 
-		private static readonly string[] drop_mime_types = new[] { "text/uri-list" };
-		private DropTargetAsync drop_target = null!;
+		private DropTarget drop_target = null!;
 		private readonly System.Net.Http.HttpClient http_client = new ();
 
 		public MainWindow (Adw.Application app)
@@ -97,9 +96,8 @@ namespace Pinta
 			LoadUserSettings ();
 			PintaCore.Actions.App.BeforeQuit += delegate { SaveUserSettings (); };
 
-			// We support drag and drop for URIs
-			var formats = GdkExtensions.CreateContentFormats (drop_mime_types);
-			drop_target = Gtk.DropTargetAsync.New (formats, Gdk.DragAction.Copy);
+			// We support drag and drop for URIs, which are converted into a Gdk.FileList.
+			drop_target = Gtk.DropTarget.New (GdkExtensions.GetFileListGType (), Gdk.DragAction.Copy);
 			drop_target.OnDrop += HandleDrop;
 			window_shell.Window.AddController (drop_target);
 
@@ -504,10 +502,16 @@ namespace Pinta
 			return true;
 		}
 
-		private bool HandleDrop (DropTargetAsync sender, DropTargetAsync.DropSignalArgs args)
+		private bool HandleDrop (DropTarget sender, DropTarget.DropSignalArgs args)
 		{
-			var drop = args.Drop;
+			if (args.Value.GetBoxed (GdkExtensions.GetFileListGType ()) is not Gdk.FileList file_list)
+				return false;
 
+			foreach (Gio.File file in file_list.GetFiles ()) {
+				PintaCore.Workspace.OpenFile (file);
+			}
+
+#if false // TODO-GTK4 - test dropping images from a web browser
 			drop.ReadAsync (drop_mime_types, async input_stream => {
 				// The data should be a list of URIs in UTF-8 format.
 				using var stream = new GioStream (input_stream);
@@ -560,6 +564,7 @@ namespace Pinta
 
 				drop.Finish (Gdk.DragAction.Copy);
 			});
+#endif
 
 			return true;
 		}
