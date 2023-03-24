@@ -19,7 +19,7 @@ namespace Pinta.Effects
 		UnaryPixelOp level = new UnaryPixelOps.Desaturate ();
 
 		public override string Icon {
-			get { return "Menu.Adjustments.Sepia.png"; }
+			get { return Pinta.Resources.Icons.AdjustmentsSepia; }
 		}
 
 		public override string Name {

@@ -20,7 +20,7 @@ namespace Pinta.Effects
 		UnaryPixelOp? op = null;
 
 		public override string Icon {
-			get { return "Menu.Adjustments.Curves.png"; }
+			get { return Pinta.Resources.Icons.AdjustmentsCurves; }
 		}
 
 		public override string Name {

@@ -22,7 +22,7 @@ namespace Pinta.Effects
 		private bool table_calculated;
 
 		public override string Icon {
-			get { return "Menu.Adjustments.BrightnessAndContrast.png"; }
+			get { return Pinta.Resources.Icons.AdjustmentsBrightnessContrast; }
 		}
 
 		public override string Name {

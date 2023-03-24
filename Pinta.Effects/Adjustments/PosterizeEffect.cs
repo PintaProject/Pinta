@@ -18,7 +18,7 @@ namespace Pinta.Effects
 		UnaryPixelOps.PosterizePixel? op = null;
 
 		public override string Icon {
-			get { return "Menu.Adjustments.Posterize.png"; }
+			get { return Pinta.Resources.Icons.AdjustmentsPosterize; }
 		}
 
 		public override string Name {

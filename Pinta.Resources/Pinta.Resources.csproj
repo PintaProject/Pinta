@@ -65,33 +65,6 @@
     <EmbeddedResource Include="Resources\Cursor.PaintBucket.png">
       <LogicalName>Cursor.PaintBucket.png</LogicalName>
     </EmbeddedResource>
-    <EmbeddedResource Include="Resources\Menu.Adjustments.AutoLevel.png">
-      <LogicalName>Menu.Adjustments.AutoLevel.png</LogicalName>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Resources\Menu.Adjustments.BlackAndWhite.png">
-      <LogicalName>Menu.Adjustments.BlackAndWhite.png</LogicalName>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Resources\Menu.Adjustments.BrightnessAndContrast.png">
-      <LogicalName>Menu.Adjustments.BrightnessAndContrast.png</LogicalName>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Resources\Menu.Adjustments.Curves.png">
-      <LogicalName>Menu.Adjustments.Curves.png</LogicalName>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Resources\Menu.Adjustments.HueAndSaturation.png">
-      <LogicalName>Menu.Adjustments.HueAndSaturation.png</LogicalName>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Resources\Menu.Adjustments.InvertColors.png">
-      <LogicalName>Menu.Adjustments.InvertColors.png</LogicalName>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Resources\Menu.Adjustments.Levels.png">
-      <LogicalName>Menu.Adjustments.Levels.png</LogicalName>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Resources\Menu.Adjustments.Sepia.png">
-      <LogicalName>Menu.Adjustments.Sepia.png</LogicalName>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Resources\Menu.Adjustments.Posterize.png">
-      <LogicalName>Menu.Adjustments.Posterize.png</LogicalName>
-    </EmbeddedResource>
     <EmbeddedResource Include="Resources\Menu.Effects.Artistic.InkSketch.png">
       <LogicalName>Menu.Effects.Artistic.InkSketch.png</LogicalName>
     </EmbeddedResource>

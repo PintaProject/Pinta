@@ -18,7 +18,7 @@ namespace Pinta.Effects
 		UnaryPixelOps.Level? op;
 
 		public override string Icon {
-			get { return "Menu.Adjustments.AutoLevel.png"; }
+			get { return Pinta.Resources.Icons.AdjustmentsAutoLevel; }
 		}
 
 		public override string Name {

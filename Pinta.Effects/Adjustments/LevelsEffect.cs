@@ -16,7 +16,7 @@ namespace Pinta.Effects
 	public class LevelsEffect : BaseEffect
 	{
 		public override string Icon {
-			get { return "Menu.Adjustments.Levels.png"; }
+			get { return Pinta.Resources.Icons.AdjustmentsLevels; }
 		}
 
 		public override string Name {

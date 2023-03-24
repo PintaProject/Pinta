@@ -19,7 +19,7 @@ namespace Pinta.Effects
 		UnaryPixelOp? op;
 
 		public override string Icon {
-			get { return "Menu.Adjustments.HueAndSaturation.png"; }
+			get { return Pinta.Resources.Icons.AdjustmentsHueSaturation; }
 		}
 
 		public override string Name {

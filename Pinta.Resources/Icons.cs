@@ -87,6 +87,16 @@ namespace Pinta.Resources
 
 		public const string AddinsManage = "addins-manage";
 
+		public const string AdjustmentsAutoLevel = "adjustments-autolevel";
+		public const string AdjustmentsBlackAndWhite = "adjustments-blackandwhite";
+		public const string AdjustmentsBrightnessContrast = "adjustments-brightnesscontrast";
+		public const string AdjustmentsCurves = "adjustments-curves";
+		public const string AdjustmentsHueSaturation = "adjustments-huesaturation";
+		public const string AdjustmentsInvertColors = "adjustments-invertcolors";
+		public const string AdjustmentsLevels = "adjustments-levels";
+		public const string AdjustmentsPosterize = "adjustments-posterize";
+		public const string AdjustmentsSepia = "adjustments-sepia";
+
 		public const string AntiAliasingEnabled = "tool-antialiasing-enabled-symbolic";
 		public const string AntiAliasingDisabled = "tool-antialiasing-disabled-symbolic";
 

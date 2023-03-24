@@ -51,11 +51,9 @@ namespace Pinta.Core
 		/// <returns>The action created for this adjustment</returns>
 		public void RegisterAdjustment (BaseEffect adjustment)
 		{
-			// Add icon to IconFactory
-#if false // TODO-GTK4 add icons to theme instead
-			Gtk.IconFactory fact = new Gtk.IconFactory ();
-			ObsoleteExtensions.AddToIconFactory (fact, adjustment.Icon, new Gtk.IconSet (PintaCore.Resources.GetIcon (adjustment.Icon)));
-			ObsoleteExtensions.AddDefaultToIconFactory (fact);
+#if false // For testing purposes to detect any missing icons. This implies more disk accesses on startup so we may not want this on by default.
+			if (!GtkExtensions.GetDefaultIconTheme ().HasIcon (adjustment.Icon))
+				Console.Error.WriteLine ($"Icon {adjustment.Icon} for adjustment {adjustment.Name} not found");
 #endif
 
 			// Create a gtk action for each adjustment

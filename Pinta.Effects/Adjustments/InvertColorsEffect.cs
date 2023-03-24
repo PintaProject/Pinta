@@ -18,7 +18,7 @@ namespace Pinta.Effects
 		UnaryPixelOp op = new UnaryPixelOps.Invert ();
 
 		public override string Icon {
-			get { return "Menu.Adjustments.InvertColors.png"; }
+			get { return Pinta.Resources.Icons.AdjustmentsInvertColors; }
 		}
 
 		public override string Name {
