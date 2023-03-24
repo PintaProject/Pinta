@@ -65,12 +65,6 @@
     <EmbeddedResource Include="Resources\Cursor.PaintBucket.png">
       <LogicalName>Cursor.PaintBucket.png</LogicalName>
     </EmbeddedResource>
-    <EmbeddedResource Include="Resources\LayersWidget.Visible.png">
-      <LogicalName>LayersWidget.Visible.png</LogicalName>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Resources\LayersWidget.Hidden.png">
-      <LogicalName>LayersWidget.Hidden.png</LogicalName>
-    </EmbeddedResource>
     <EmbeddedResource Include="Resources\Menu.Adjustments.AutoLevel.png">
       <LogicalName>Menu.Adjustments.AutoLevel.png</LogicalName>
     </EmbeddedResource>
