@@ -93,9 +93,6 @@ namespace Pinta
 
 		public void UpdateRulerRange (object? sender, EventArgs e)
 		{
-#if false // TODO-GTK4
-			Main.Iteration (); //Force update of scrollbar upper before recenter
-
 			var lower = new PointD (0, 0);
 			var upper = new PointD (0, 0);
 
@@ -121,7 +118,6 @@ namespace Pinta
 
 			horizontal_ruler.SetRange (lower.X, upper.X);
 			vertical_ruler.SetRange (lower.Y, upper.Y);
-#endif
 		}
 
 		[MemberNotNull (nameof (Canvas), nameof (horizontal_ruler), nameof (vertical_ruler), nameof (scrolled_window))]
@@ -133,12 +129,6 @@ namespace Pinta
 			scrolled_window = new ScrolledWindow ();
 
 			var vp = new Viewport ();
-
-#if false // TODO-GTK4 (may not be necessary with the new tab view widget)
-			var css = CssProvider.New ();
-			css.LoadFromData ("* { background-color: @theme_bg_color; }");
-			vp.StyleContext.AddProvider (css, 0);
-#endif
 
 #if false // TODO-GTK4
 			vp.ScrollEvent += ViewPort_ScrollEvent;

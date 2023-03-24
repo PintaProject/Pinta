@@ -50,6 +50,12 @@ namespace Pinta.Core
 		public static FontDescription Copy (this FontDescription desc)
 			=> new FontDescription (Pango.Internal.FontDescription.Copy (desc.Handle));
 
+		public static int GetSize (this FontDescription desc)
+			=> Pango.Internal.FontDescription.GetSize (desc.Handle);
+
+		public static bool GetSizeIsAbsolute (this FontDescription desc)
+			=> Pango.Internal.FontDescription.GetSizeIsAbsolute (desc.Handle);
+
 		public static void SetWeight (this FontDescription desc, Weight weight)
 			=> Pango.Internal.FontDescription.SetWeight (desc.Handle, weight);
 
