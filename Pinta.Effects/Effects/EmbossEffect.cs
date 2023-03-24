@@ -16,9 +16,7 @@ namespace Pinta.Effects
 {
 	public class EmbossEffect : BaseEffect
 	{
-		public override string Icon {
-			get { return "Menu.Effects.Stylize.Emboss.png"; }
-		}
+		public override string Icon => Pinta.Resources.Icons.EffectsStylizeEmboss;
 
 		public override string Name {
 			get { return Translations.GetString ("Emboss"); }

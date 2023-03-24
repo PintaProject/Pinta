@@ -18,9 +18,7 @@ namespace Pinta.Effects
 	{
 		private UnaryPixelOp? op = null;
 
-		public override string Icon {
-			get { return "Menu.Effects.Photo.RedEyeRemove.png"; }
-		}
+		public override string Icon => Pinta.Resources.Icons.EffectsPhotoRedEyeRemove;
 
 		public override string Name {
 			get { return Translations.GetString ("Red Eye Removal"); }

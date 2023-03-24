@@ -16,9 +16,7 @@ namespace Pinta.Effects
 {
 	public class OilPaintingEffect : BaseEffect
 	{
-		public override string Icon {
-			get { return "Menu.Effects.Artistic.OilPainting.png"; }
-		}
+		public override string Icon => Pinta.Resources.Icons.EffectsArtisticOilPainting;
 
 		public override string Name {
 			get { return Translations.GetString ("Oil Painting"); }

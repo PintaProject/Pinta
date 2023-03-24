@@ -16,9 +16,7 @@ namespace Pinta.Effects
 {
 	public class TileEffect : BaseEffect
 	{
-		public override string Icon {
-			get { return "Menu.Effects.Distort.Tile.png"; }
-		}
+		public override string Icon => Pinta.Resources.Icons.EffectsDistortTile;
 
 		public override string Name {
 			get { return Translations.GetString ("Tile Reflection"); }

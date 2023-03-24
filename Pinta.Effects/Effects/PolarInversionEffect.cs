@@ -16,9 +16,7 @@ namespace Pinta.Effects
 {
 	public class PolarInversionEffect : WarpEffect
 	{
-		public override string Icon {
-			get { return "Menu.Effects.Distort.PolarInversion.png"; }
-		}
+		public override string Icon => Pinta.Resources.Icons.EffectsDistortPolarInversion;
 
 		public override string Name {
 			get { return Translations.GetString ("Polar Inversion"); }

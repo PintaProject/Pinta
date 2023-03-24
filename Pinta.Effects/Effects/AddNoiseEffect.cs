@@ -21,9 +21,7 @@ namespace Pinta.Effects
 		private int colorSaturation;
 		private double coverage;
 
-		public override string Icon {
-			get { return "Menu.Effects.Noise.AddNoise.png"; }
-		}
+		public override string Icon => Pinta.Resources.Icons.EffectsNoiseAddNoise;
 
 		public override string Name {
 			get { return Translations.GetString ("Add Noise"); }

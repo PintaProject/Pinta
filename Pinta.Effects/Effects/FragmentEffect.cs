@@ -16,9 +16,7 @@ namespace Pinta.Effects
 {
 	public class FragmentEffect : BaseEffect
 	{
-		public override string Icon {
-			get { return "Menu.Effects.Blurs.Fragment.png"; }
-		}
+		public override string Icon => Pinta.Resources.Icons.EffectsBlursFragment;
 
 		public override string Name {
 			get { return Translations.GetString ("Fragment"); }

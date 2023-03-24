@@ -113,6 +113,37 @@ namespace Pinta.Resources
 		public const string EditSelectionInvert = "edit-selection-invert";
 		public const string EditSelectionNone = "ui-deselect-symbolic";
 
+		public const string EffectsArtisticInkSketch = "effects-artistic-inksketch";
+		public const string EffectsArtisticOilPainting = "effects-artistic-oilpainting";
+		public const string EffectsArtisticPencilSketch = "effects-artistic-pencilsketch";
+		public const string EffectsBlursFragment = "effects-blurs-fragment";
+		public const string EffectsBlursGaussianBlur = "effects-blurs-gaussianblur";
+		public const string EffectsBlursMotionBlur = "effects-blurs-motionblur";
+		public const string EffectsBlursRadialBlur = "effects-blurs-radialblur";
+		public const string EffectsBlursUnfocus = "effects-blurs-unfocus";
+		public const string EffectsBlursZoomBlur = "effects-blurs-zoomblur";
+		public const string EffectsDefault = "effects-default";
+		public const string EffectsDistortBulge = "effects-distort-bulge";
+		public const string EffectsDistortFrostedGlass = "effects-distort-frostedglass";
+		public const string EffectsDistortPixelate = "effects-distort-pixelate";
+		public const string EffectsDistortPolarInversion = "effects-distort-polarinversion";
+		public const string EffectsDistortTile = "effects-distort-tile";
+		public const string EffectsDistortTwist = "effects-distort-twist";
+		public const string EffectsNoiseAddNoise = "effects-noise-addnoise";
+		public const string EffectsNoiseMedian = "effects-noise-median";
+		public const string EffectsNoiseReduceNoise = "effects-noise-reducenoise";
+		public const string EffectsPhotoGlow = "effects-photo-glow";
+		public const string EffectsPhotoRedEyeRemove = "effects-photo-redeyeremove";
+		public const string EffectsPhotoSharpen = "effects-photo-sharpen";
+		public const string EffectsPhotoSoftenPortrait = "effects-photo-softenportrait";
+		public const string EffectsRenderClouds = "effects-render-clouds";
+		public const string EffectsRenderJuliaFractal = "effects-render-juliafractal";
+		public const string EffectsRenderMandelbrotFractal = "effects-render-mandelbrotfractal";
+		public const string EffectsStylizeEdgeDetect = "effects-stylize-edgedetect";
+		public const string EffectsStylizeEmboss = "effects-stylize-emboss";
+		public const string EffectsStylizeOutline = "effects-stylize-outline";
+		public const string EffectsStylizeRelief = "effects-stylize-relief";
+
 		public const string GradientConical = "tool-gradient-conical-symbolic";
 		public const string GradientDiamond = "tool-gradient-diamond-symbolic";
 		public const string GradientLinear = "tool-gradient-linear-symbolic";

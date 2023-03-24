@@ -16,9 +16,7 @@ namespace Pinta.Effects
 {
 	public class JuliaFractalEffect : BaseEffect
 	{
-		public override string Icon {
-			get { return "Menu.Effects.Render.JuliaFractal.png"; }
-		}
+		public override string Icon => Pinta.Resources.Icons.EffectsRenderJuliaFractal;
 
 		public override string Name {
 			get { return Translations.GetString ("Julia Fractal"); }

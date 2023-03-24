@@ -16,9 +16,7 @@ namespace Pinta.Effects
 {
 	public class TwistEffect : BaseEffect
 	{
-		public override string Icon {
-			get { return "Menu.Effects.Distort.Twist.png"; }
-		}
+		public override string Icon => Pinta.Resources.Icons.EffectsDistortTwist;
 
 		public override string Name {
 			get { return Translations.GetString ("Twist"); }

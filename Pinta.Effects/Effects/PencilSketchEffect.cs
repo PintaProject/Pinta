@@ -23,9 +23,7 @@ namespace Pinta.Effects
 		private BrightnessContrastEffect bacAdjustment;
 		private UserBlendOps.ColorDodgeBlendOp colorDodgeOp;
 
-		public override string Icon {
-			get { return "Menu.Effects.Artistic.PencilSketch.png"; }
-		}
+		public override string Icon => Pinta.Resources.Icons.EffectsArtisticPencilSketch;
 
 		public override string Name {
 			get { return Translations.GetString ("Pencil Sketch"); }

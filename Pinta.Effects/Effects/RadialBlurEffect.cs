@@ -17,9 +17,7 @@ namespace Pinta.Effects
 {
 	public class RadialBlurEffect : BaseEffect
 	{
-		public override string Icon {
-			get { return "Menu.Effects.Blurs.RadialBlur.png"; }
-		}
+		public override string Icon => Pinta.Resources.Icons.EffectsBlursRadialBlur;
 
 		public override string Name {
 			get { return Translations.GetString ("Radial Blur"); }

@@ -81,11 +81,9 @@ namespace Pinta.Core
 		/// <returns>The action created for this effect</returns>
 		public void RegisterEffect (BaseEffect effect)
 		{
-			// Add icon to IconFactory
-#if false // TODO-GTK4 - add icons to theme instead
-			Gtk.IconFactory fact = new Gtk.IconFactory ();
-			ObsoleteExtensions.AddToIconFactory (fact, effect.Icon, new Gtk.IconSet (PintaCore.Resources.GetIcon (effect.Icon)));
-			ObsoleteExtensions.AddDefaultToIconFactory (fact);
+#if false // For testing purposes to detect any missing icons. This implies more disk accesses on startup so we may not want this on by default.
+			if (!GtkExtensions.GetDefaultIconTheme ().HasIcon (effect.Icon))
+				Console.Error.WriteLine ($"Icon {effect.Icon} for effect {effect.Name} not found");
 #endif
 
 			// Create a gtk action and menu item for each effect

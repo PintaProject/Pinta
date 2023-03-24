@@ -19,9 +19,7 @@ namespace Pinta.Effects
 		private int radius;
 		private double strength;
 
-		public override string Icon {
-			get { return "Menu.Effects.Noise.ReduceNoise.png"; }
-		}
+		public override string Icon => Pinta.Resources.Icons.EffectsNoiseReduceNoise;
 
 		public override string Name {
 			get { return Translations.GetString ("Reduce Noise"); }

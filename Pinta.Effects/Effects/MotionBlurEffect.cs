@@ -16,9 +16,7 @@ namespace Pinta.Effects
 {
 	public class MotionBlurEffect : BaseEffect
 	{
-		public override string Icon {
-			get { return "Menu.Effects.Blurs.MotionBlur.png"; }
-		}
+		public override string Icon => Pinta.Resources.Icons.EffectsBlursMotionBlur;
 
 		public override string Name {
 			get { return Translations.GetString ("Motion Blur"); }

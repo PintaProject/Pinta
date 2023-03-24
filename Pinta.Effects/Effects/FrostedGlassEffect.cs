@@ -16,9 +16,7 @@ namespace Pinta.Effects
 {
 	public class FrostedGlassEffect : BaseEffect
 	{
-		public override string Icon {
-			get { return "Menu.Effects.Distort.FrostedGlass.png"; }
-		}
+		public override string Icon => Pinta.Resources.Icons.EffectsDistortFrostedGlass;
 
 		public override string Name {
 			get { return Translations.GetString ("Frosted Glass"); }

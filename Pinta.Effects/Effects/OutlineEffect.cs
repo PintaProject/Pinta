@@ -19,9 +19,7 @@ namespace Pinta.Effects
 		private int thickness;
 		private int intensity;
 
-		public override string Icon {
-			get { return "Menu.Effects.Stylize.Outline.png"; }
-		}
+		public override string Icon => Pinta.Resources.Icons.EffectsStylizeOutline;
 
 		public override string Name {
 			get { return Translations.GetString ("Outline"); }

@@ -16,9 +16,7 @@ namespace Pinta.Effects
 {
 	public class BulgeEffect : BaseEffect
 	{
-		public override string Icon {
-			get { return "Menu.Effects.Distort.Bulge.png"; }
-		}
+		public override string Icon => Pinta.Resources.Icons.EffectsDistortBulge;
 
 		public override string Name {
 			get { return Translations.GetString ("Bulge"); }

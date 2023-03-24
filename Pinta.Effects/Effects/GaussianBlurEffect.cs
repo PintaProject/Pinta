@@ -17,9 +17,7 @@ namespace Pinta.Effects
 {
 	public class GaussianBlurEffect : BaseEffect
 	{
-		public override string Icon {
-			get { return "Menu.Effects.Blurs.GaussianBlur.png"; }
-		}
+		public override string Icon => Pinta.Resources.Icons.EffectsBlursGaussianBlur;
 
 		public override string Name {
 			get { return Translations.GetString ("Gaussian Blur"); }

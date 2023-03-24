@@ -37,9 +37,7 @@ namespace Pinta.Effects
 			EffectHelper.LaunchSimpleEffectDialog (this);
 		}
 
-		public override string Icon {
-			get { return "Menu.Effects.Stylize.Relief.png"; }
-		}
+		public override string Icon => Pinta.Resources.Icons.EffectsStylizeRelief;
 
 		public override string Name {
 			get { return Translations.GetString ("Relief"); }

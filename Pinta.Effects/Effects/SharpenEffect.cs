@@ -16,9 +16,7 @@ namespace Pinta.Effects
 {
 	public class SharpenEffect : LocalHistogramEffect
 	{
-		public override string Icon {
-			get { return "Menu.Effects.Photo.Sharpen.png"; }
-		}
+		public override string Icon => Pinta.Resources.Icons.EffectsPhotoSharpen;
 
 		public override string Name {
 			get { return Translations.GetString ("Sharpen"); }

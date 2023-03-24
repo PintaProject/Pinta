@@ -19,9 +19,7 @@ namespace Pinta.Effects
 	{
 		private double[][]? weights;
 
-		public override string Icon {
-			get { return "Menu.Effects.Stylize.EdgeDetect.png"; }
-		}
+		public override string Icon => Pinta.Resources.Icons.EffectsStylizeEdgeDetect;
 
 		public override string Name {
 			get { return Translations.GetString ("Edge Detect"); }

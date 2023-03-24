@@ -21,9 +21,7 @@ namespace Pinta.Effects
 		private BrightnessContrastEffect contrastEffect;
 		private UserBlendOps.ScreenBlendOp screenBlendOp;
 
-		public override string Icon {
-			get { return "Menu.Effects.Photo.Glow.png"; }
-		}
+		public override string Icon => Pinta.Resources.Icons.EffectsPhotoGlow;
 
 		public override string Name {
 			get { return Translations.GetString ("Glow"); }

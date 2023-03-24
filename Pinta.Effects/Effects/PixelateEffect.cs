@@ -16,9 +16,7 @@ namespace Pinta.Effects
 {
 	public class PixelateEffect : BaseEffect
 	{
-		public override string Icon {
-			get { return "Menu.Effects.Distort.Pixelate.png"; }
-		}
+		public override string Icon => Pinta.Resources.Icons.EffectsDistortPixelate;
 
 		public override string Name {
 			get { return Translations.GetString ("Pixelate"); }

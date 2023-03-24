@@ -21,9 +21,7 @@ namespace Pinta.Effects
 		private byte instanceSeed = unchecked((byte) DateTime.Now.Ticks);
 		private static object render_lock = new object ();
 
-		public override string Icon {
-			get { return "Menu.Effects.Render.Clouds.png"; }
-		}
+		public override string Icon => Pinta.Resources.Icons.EffectsRenderClouds;
 
 		public override string Name {
 			get { return Translations.GetString ("Clouds"); }

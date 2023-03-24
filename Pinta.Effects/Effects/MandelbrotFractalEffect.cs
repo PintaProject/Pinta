@@ -16,9 +16,7 @@ namespace Pinta.Effects
 {
 	public class MandelbrotFractalEffect : BaseEffect
 	{
-		public override string Icon {
-			get { return "Menu.Effects.Render.MandelbrotFractal.png"; }
-		}
+		public override string Icon => Pinta.Resources.Icons.EffectsRenderMandelbrotFractal;
 
 		public override string Name {
 			get { return Translations.GetString ("Mandelbrot Fractal"); }

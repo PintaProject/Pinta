@@ -24,9 +24,7 @@ namespace Pinta.Effects
 		private UnaryPixelOps.Desaturate desaturateOp;
 		private UserBlendOps.DarkenBlendOp darkenOp;
 
-		public override string Icon {
-			get { return "Menu.Effects.Artistic.InkSketch.png"; }
-		}
+		public override string Icon => Pinta.Resources.Icons.EffectsArtisticInkSketch;
 
 		public override string Name {
 			get { return Translations.GetString ("Ink Sketch"); }

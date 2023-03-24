@@ -49,9 +49,7 @@ namespace Pinta.Effects
 		private UnaryPixelOps.Desaturate desaturateOp;
 		private UserBlendOps.OverlayBlendOp overlayOp;
 
-		public override string Icon {
-			get { return "Menu.Effects.Photo.SoftenPortrait.png"; }
-		}
+		public override string Icon => Pinta.Resources.Icons.EffectsPhotoSoftenPortrait;
 
 		public override string Name {
 			get { return Translations.GetString ("Soften Portrait"); }

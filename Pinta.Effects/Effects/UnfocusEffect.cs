@@ -18,9 +18,7 @@ namespace Pinta.Effects
 	{
 		private int radius;
 
-		public override string Icon {
-			get { return "Menu.Effects.Blurs.Unfocus.png"; }
-		}
+		public override string Icon => Pinta.Resources.Icons.EffectsBlursUnfocus;
 
 		public override string Name {
 			get { return Translations.GetString ("Unfocus"); }

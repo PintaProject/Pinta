@@ -19,9 +19,7 @@ namespace Pinta.Effects
 		private int radius;
 		private int percentile;
 
-		public override string Icon {
-			get { return "Menu.Effects.Noise.Median.png"; }
-		}
+		public override string Icon => Pinta.Resources.Icons.EffectsNoiseMedian;
 
 		public override string Name {
 			get { return Translations.GetString ("Median"); }

@@ -48,7 +48,7 @@ namespace Pinta.Core
 		/// <summary>
 		/// Returns the icon to use for the effect in the Adjustments/Effects menu and history pad.
 		/// </summary>
-		public virtual string Icon { get { return "Menu.Effects.Default.png"; } }
+		public virtual string Icon => Pinta.Resources.Icons.EffectsDefault;
 
 		/// <summary>
 		/// Returns whether this effect can display a configuration dialog to the user. (Implemented by LaunchConfiguration ().)
