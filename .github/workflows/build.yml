@@ -70,16 +70,14 @@ jobs:
       run: dotnet test Pinta.sln -c Release
 
     - name: Add Cert to Keychain
-      if: ${{ false }} # Disable until the installer supports GTK4
-      #if: github.event_name != 'pull_request'
+      if: github.event_name != 'pull_request'
       uses: apple-actions/import-codesign-certs@v1
       with:
         p12-file-base64: ${{ secrets.MAC_CERTS_BASE64 }}
         p12-password: ${{ secrets.MAC_CERTS_PASSWORD }}
 
     - name: Build Installer
-      if: ${{ false }} # Disable until the installer supports GTK4
-      #if: github.event_name != 'pull_request'
+      if: github.event_name != 'pull_request'
       env:
         MAC_DEV_PASSWORD: ${{ secrets.MAC_DEV_PASSWORD }}
       run: |
@@ -87,8 +85,7 @@ jobs:
         ./build_installer.sh
 
     - name: Upload Installer
-      if: ${{ false }} # Disable until the installer supports GTK4
-      #if: github.event_name != 'pull_request'
+      if: github.event_name != 'pull_request'
       uses: actions/upload-artifact@v3
       with:
         name: "Pinta.dmg"

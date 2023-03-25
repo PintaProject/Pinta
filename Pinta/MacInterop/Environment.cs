@@ -45,10 +45,8 @@ namespace Pinta.MacInterop
 				var share_dir = SystemManager.GetDataRootDirectory ();
 				SetEnvVar ("XDG_DATA_DIRS", share_dir);
 
-				// Set environment variables used for loading pixbuf modules and input method modules.
-				// TODO-GTK4 - update when packaging GTK4 for macOS.
+				// Set environment variables used for loading pixbuf modules.
 				var resources_dir = Directory.GetParent (share_dir)!.FullName;
-				SetEnvVar ("GTK_IM_MODULE_FILE", Path.Combine (resources_dir, "lib/gtk-3.0/3.0.0/immodules.cache"));
 				SetEnvVar ("GDK_PIXBUF_MODULE_FILE", Path.Combine (resources_dir, "lib/gdk-pixbuf-2.0/2.10.0/loaders.cache"));
 			}
 		}

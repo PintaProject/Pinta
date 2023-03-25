@@ -10,15 +10,14 @@ from stat import S_IREAD, S_IRGRP, S_IROTH, S_IWUSR
 
 PREFIX = "/usr/local"
 
-# Grab all dependencies of libgtk, plus pixbuf loader plugins.
-GTK_LIB = "/usr/local/lib/libgtk-3.dylib"
+# Grab all dependencies of libadwaita / libgtk, plus pixbuf loader plugins.
+GTK_LIB = "/usr/local/lib/libadwaita-1.0.dylib"
 RSVG_LIB = "/usr/local/lib/librsvg-2.2.dylib"
 TIFF_LIB = "/usr/local/lib/libtiff.5.dylib"
 ROOT_LIBS = [GTK_LIB, RSVG_LIB, TIFF_LIB]
 
 ADWAITA_THEME = "/usr/local/share/icons/Adwaita/index.theme"
 PIXBUF_LOADERS = "lib/gdk-pixbuf-2.0/2.10.0"
-IM_MODULES = "lib/gtk-3.0/3.0.0/immodules"
 GLIB_SCHEMAS = "share/glib-2.0/schemas"
 
 OTOOL_LIB_REGEX = re.compile("(/usr/local/.*\.dylib)") # Ignore system libraries.
@@ -138,10 +137,6 @@ shutil.copytree(adwaita_icons,
 
 copy_plugins(PIXBUF_LOADERS, lib_install_dir)
 install_plugin_cache(os.path.join(PIXBUF_LOADERS, "loaders.cache"),
-                     args.resource_dir)
-
-copy_plugins(IM_MODULES, lib_install_dir)
-install_plugin_cache(os.path.join(IM_MODULES, "../immodules.cache"),
                      args.resource_dir)
 
 copy_resources(GLIB_SCHEMAS)
