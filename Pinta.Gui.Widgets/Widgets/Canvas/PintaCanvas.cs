@@ -76,7 +76,8 @@ namespace Pinta.Gui.Widgets
 			click_controller.SetButton (0); // Listen for all mouse buttons.
 
 			click_controller.OnPressed += (_, args) => {
-				click_controller.SetState (Gtk.EventSequenceState.Claimed);
+				// Note we don't call click_controller.SetState (Gtk.EventSequenceState.Claimed) here, so
+				// that the CanvasWindow can also receive motion events to update the root window mouse position.
 
 				// The canvas gets the button press before the tab system, so
 				// if this click is on a canvas that isn't currently the ActiveDocument yet, 
@@ -92,7 +93,8 @@ namespace Pinta.Gui.Widgets
 					State = click_controller.GetCurrentEventState (),
 					MouseButton = click_controller.GetCurrentMouseButton (),
 					PointDouble = canvas_point,
-					WindowPoint = window_point
+					WindowPoint = window_point,
+					RootPoint = CanvasWindow.WindowMousePosition
 				};
 
 				PintaCore.Tools.DoMouseDown (document, tool_args);
@@ -106,7 +108,8 @@ namespace Pinta.Gui.Widgets
 					State = click_controller.GetCurrentEventState (),
 					MouseButton = click_controller.GetCurrentMouseButton (),
 					PointDouble = canvas_point,
-					WindowPoint = window_point
+					WindowPoint = window_point,
+					RootPoint = CanvasWindow.WindowMousePosition
 				};
 
 				PintaCore.Tools.DoMouseUp (document, tool_args);
@@ -129,9 +132,7 @@ namespace Pinta.Gui.Widgets
 						MouseButton = MouseButton.None,
 						PointDouble = canvas_point,
 						WindowPoint = window_point,
-#if false // TODO-GTK4 is this needed for the pan tool?
-						Root = new PointD (e.Event.XRoot, e.Event.YRoot)
-#endif
+						RootPoint = CanvasWindow.WindowMousePosition
 					};
 
 					PintaCore.Tools.DoMouseMove (document, tool_args);

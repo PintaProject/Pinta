@@ -40,6 +40,8 @@ namespace Pinta
 		private Ruler vertical_ruler;
 		private ScrolledWindow scrolled_window;
 		private EventControllerMotion motion_controller;
+		private PointD current_window_pos = new ();
+		private PointD current_canvas_pos = new ();
 
 		public PintaCanvas Canvas { get; set; }
 		public bool HasBeenShown { get; set; }
@@ -60,15 +62,17 @@ namespace Pinta
 				if (!PintaCore.Workspace.HasOpenDocuments)
 					return;
 
-				var point = PintaCore.Workspace.WindowPointToCanvas (new PointD (args.X, args.Y));
+				current_window_pos = new PointD (args.X, args.Y);
+				current_canvas_pos = PintaCore.Workspace.WindowPointToCanvas (current_window_pos);
 
-				horizontal_ruler.Position = point.X;
-				vertical_ruler.Position = point.Y;
+				horizontal_ruler.Position = current_canvas_pos.X;
+				vertical_ruler.Position = current_canvas_pos.Y;
 			};
 
 			AddController (motion_controller);
 		}
 
+		public PointD WindowMousePosition => current_window_pos;
 		public bool IsMouseOnCanvas => motion_controller.ContainsPointer;
 
 		public bool RulersVisible {
@@ -130,9 +134,9 @@ namespace Pinta
 
 			var vp = new Viewport ();
 
-#if false // TODO-GTK4
-			vp.ScrollEvent += ViewPort_ScrollEvent;
-#endif
+			var scroll_controller = Gtk.EventControllerScroll.New (EventControllerScrollFlags.Vertical);
+			scroll_controller.OnScroll += HandleScrollEvent;
+			vp.AddController (scroll_controller);
 
 			Canvas = new PintaCanvas (this, document) {
 				Name = "canvas",
@@ -163,19 +167,19 @@ namespace Pinta
 			vertical_ruler.Visible = false;
 		}
 
-#if false // TODO-GTK4
-		private void ViewPort_ScrollEvent (object o, ScrollEventArgs args)
+		private bool HandleScrollEvent (EventControllerScroll controller, EventControllerScroll.ScrollSignalArgs args)
 		{
 			// Allow the user to zoom in/out with Ctrl-Mousewheel
-			if (args.Event.State.IsControlPressed () && args.Event.Direction == ScrollDirection.Smooth) {
-				if (args.Event.DeltaX > 0 || args.Event.DeltaY < 0)
-					document.Workspace.ZoomInFromMouseScroll (new Cairo.PointD (args.Event.X, args.Event.Y));
-				else if (args.Event.DeltaX < 0 || args.Event.DeltaY > 0)
-					document.Workspace.ZoomOutFromMouseScroll (new Cairo.PointD (args.Event.X, args.Event.Y));
+			if (controller.GetCurrentEventState ().IsControlPressed ()) {
+				if (args.Dx > 0 || args.Dy < 0)
+					document.Workspace.ZoomInFromMouseScroll (current_canvas_pos);
+				else if (args.Dx < 0 || args.Dy > 0)
+					document.Workspace.ZoomOutFromMouseScroll (current_canvas_pos);
 
-				args.RetVal = true;
+				return true;
 			}
+
+			return false;
 		}
-#endif
 	}
 }

@@ -56,15 +56,14 @@ namespace Pinta.Tools
 			if (!document.Workspace.CanvasFitsInWindow)
 				active = true;
 
-			last_point = new PointD (e.Root.X, e.Root.Y);
+			last_point = new PointD (e.RootPoint.X, e.RootPoint.Y);
 		}
 
 		protected override void OnMouseMove (Document document, ToolMouseEventArgs e)
 		{
-			// TODO-GTK4 - verify if the Root position is actually necessary. If not, remove this from the ToolMouseEventArgs structure.
 			if (active) {
-				document.Workspace.ScrollCanvas ((int) (last_point.X - e.Root.X), (int) (last_point.Y - e.Root.Y));
-				last_point = new PointD (e.Root.X, e.Root.Y);
+				document.Workspace.ScrollCanvas ((int) (last_point.X - e.RootPoint.X), (int) (last_point.Y - e.RootPoint.Y));
+				last_point = new PointD (e.RootPoint.X, e.RootPoint.Y);
 			}
 		}
 

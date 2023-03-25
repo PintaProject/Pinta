@@ -75,7 +75,11 @@ namespace Pinta.Core
 		/// </summary>
 		public PointD PointDouble { get; init; }
 
-		public PointD Root { get; init; }
+		/// <summary>
+		/// The cursor location in the root canvas window.
+		/// Unlike WindowPoint, this is outside the scroll area and remains the same while scrolling.
+		/// </summary>
+		public PointD RootPoint { get; init; }
 
 		/// <summary>
 		/// The cursor location in window coordinates.
