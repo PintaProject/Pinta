@@ -15,9 +15,9 @@ public class CanvasRendererBenchmarks
 	private readonly ImageSurface dest_surface_zoom_in;
 	private readonly ImageSurface dest_surface_zoom_out;
 
-	private readonly Gdk.Size src_size;
-	private readonly Gdk.Size dest_size_zoom_in;
-	private readonly Gdk.Size dest_size_zoom_out;
+	private readonly Size src_size;
+	private readonly Size dest_size_zoom_in;
+	private readonly Size dest_size_zoom_out;
 
 	private readonly List<Layer> layers = new List<Layer> ();
 	private readonly List<Layer> ten_laters = new List<Layer> ();
@@ -46,7 +46,7 @@ public class CanvasRendererBenchmarks
 		var renderer = new CanvasRenderer (false, false);
 
 		renderer.Initialize (src_size, src_size);
-		renderer.Render (layers, dest_surface, Gdk.Point.Zero);
+		renderer.Render (layers, dest_surface, PointI.Zero);
 	}
 
 	[Benchmark]
@@ -55,7 +55,7 @@ public class CanvasRendererBenchmarks
 		var renderer = new CanvasRenderer (false, false);
 
 		renderer.Initialize (src_size, src_size);
-		renderer.Render (ten_laters, dest_surface, Gdk.Point.Zero);
+		renderer.Render (ten_laters, dest_surface, PointI.Zero);
 	}
 
 	[Benchmark]
@@ -64,7 +64,7 @@ public class CanvasRendererBenchmarks
 		var renderer = new CanvasRenderer (false, false);
 
 		renderer.Initialize (src_size, dest_size_zoom_in);
-		renderer.Render (layers, dest_surface_zoom_in, Gdk.Point.Zero);
+		renderer.Render (layers, dest_surface_zoom_in, PointI.Zero);
 	}
 
 	[Benchmark]
@@ -73,7 +73,7 @@ public class CanvasRendererBenchmarks
 		var renderer = new CanvasRenderer (false, false);
 
 		renderer.Initialize (src_size, dest_size_zoom_in);
-		renderer.Render (ten_laters, dest_surface_zoom_in, Gdk.Point.Zero);
+		renderer.Render (ten_laters, dest_surface_zoom_in, PointI.Zero);
 	}
 
 	[Benchmark]
@@ -82,7 +82,7 @@ public class CanvasRendererBenchmarks
 		var renderer = new CanvasRenderer (false, false);
 
 		renderer.Initialize (src_size, dest_size_zoom_out);
-		renderer.Render (layers, dest_surface_zoom_out, Gdk.Point.Zero);
+		renderer.Render (layers, dest_surface_zoom_out, PointI.Zero);
 	}
 
 	[Benchmark]
@@ -91,6 +91,6 @@ public class CanvasRendererBenchmarks
 		var renderer = new CanvasRenderer (false, false);
 
 		renderer.Initialize (src_size, dest_size_zoom_out);
-		renderer.Render (ten_laters, dest_surface_zoom_out, Gdk.Point.Zero);
+		renderer.Render (ten_laters, dest_surface_zoom_out, PointI.Zero);
 	}
 }

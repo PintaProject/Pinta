@@ -11,7 +11,7 @@ public class AdjustmentsBenchmarks
 {
 	private readonly ImageSurface surface;
 	private readonly ImageSurface dest_surface;
-	private readonly Gdk.Rectangle bounds;
+	private readonly RectangleI bounds;
 
 	public AdjustmentsBenchmarks ()
 	{
