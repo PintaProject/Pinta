@@ -89,7 +89,7 @@ namespace Pinta.Actions
 
 			fcd.OnResponse += (_, e) => {
 				if (e.ResponseId == (int) Gtk.ResponseType.Accept) {
-#if false // TODO-GTK4 support recent files and opening multiple files
+#if false // TODO-GTK4 (recent files) - also support opening multiple files
 
 					PintaCore.RecentFiles.LastDialogDirectory = fcd.CurrentFolderFile;
 

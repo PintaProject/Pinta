@@ -61,7 +61,6 @@ namespace Pinta.Actions
 
 			var dialog = Adw.MessageDialog.New (PintaCore.Chrome.MainWindow, heading, body);
 
-			// TODO-GTK4 - use other button order for Windows?
 			const string cancel_response = "cancel";
 			const string discard_response = "discard";
 			const string save_response = "save";

@@ -53,7 +53,7 @@ namespace Pinta.Core
 
 		public double Left => X;
 		public double Top => Y;
-		public double Right => X + Width - 1; // TODO-GTK4 - Cairo.Rectangle.GetRight() was X + Width, same for GetBottom()
+		public double Right => X + Width - 1;
 		public double Bottom => Y + Height - 1;
 
 		public override string ToString () => $"x:{X} y:{Y} w:{Width} h:{Height}";

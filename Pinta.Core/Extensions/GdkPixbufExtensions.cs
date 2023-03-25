@@ -43,7 +43,7 @@ namespace Pinta.Core
 			);
 		}
 
-		// TODO-GTK4 - needs a proper binding in gir.core
+		// TODO-GTK4 (bindings) - this will be added in v0.4 (https://github.com/gircore/gir.core/issues/756)
 		public static Pixbuf NewPixbufFromStream (Gio.InputStream stream, Gio.Cancellable? cancellable)
 		{
 			GLib.Internal.ErrorOwnedHandle error;
@@ -52,7 +52,7 @@ namespace Pinta.Core
 			return new PixbufWrapper (result, true);
 		}
 
-		// TODO-GTK4 - needs a proper binding in gir.core
+		// TODO-GTK4 (bindings) - this will be added in v0.4 (https://github.com/gircore/gir.core/issues/756)
 		public static Pixbuf NewPixbufFromFileAtScale (string filename, int width, int height, bool preserve_aspect_ratio)
 		{
 			GLib.Internal.ErrorOwnedHandle error;
@@ -61,7 +61,7 @@ namespace Pinta.Core
 			return new PixbufWrapper (result, true);
 		}
 
-		// TODO-GTK4 - needs a proper binding in gir.core
+		// TODO-GTK4 (bindings) - this will be added in v0.4 (https://github.com/gircore/gir.core/issues/756)
 		public static bool SaveToStream (this Pixbuf pixbuf, Gio.OutputStream stream, string type, Gio.Cancellable? cancellable)
 		{
 			GLib.Internal.ErrorOwnedHandle error;
@@ -70,7 +70,7 @@ namespace Pinta.Core
 			return result;
 		}
 
-		// TODO-GTK4 - needs a proper binding in gir.core
+		// TODO-GTK4 (bindings, unsubmitted) - needs support for primitive value arrays
 		public static byte[] SaveToBuffer (this Pixbuf pixbuf, string type)
 		{
 			GLib.Internal.ErrorOwnedHandle error;
@@ -83,7 +83,7 @@ namespace Pinta.Core
 			return result;
 		}
 
-		// TODO-GTK4 - needs a proper binding in gir.core
+		// TODO-GTK4 (bindings) - this will be added in v0.4 (https://github.com/gircore/gir.core/issues/756)
 		public static bool SaveToStreamv (this Pixbuf pixbuf, Gio.OutputStream stream, string type, string[] option_keys, string[] option_values, Gio.Cancellable? cancellable)
 		{
 			GLib.Internal.ErrorOwnedHandle error;
@@ -102,7 +102,7 @@ namespace Pinta.Core
 		}
 
 		// Higher-level wrapper around GdkPixbuf.Pixbuf.GetFormats(), which returns only a GLib.SList.
-		// TODO-GTK4 - gir.core doesn't have public bindings for GLib.SList functions
+		// TODO-GTK4 (bindings) - record methods are not generated (https://github.com/gircore/gir.core/issues/743)
 		public static PixbufFormat[] GetFormats ()
 		{
 			// FIXME - using an unowned handle here because SListOwnedHandle is not correctly implemented in gir.core
@@ -117,19 +117,19 @@ namespace Pinta.Core
 			return result;
 		}
 
-		// TODO-GTK4 - gir.core doesn't yet generate bindings for record member functions.
+		// TODO-GTK4 (bindings) - record methods are not generated (https://github.com/gircore/gir.core/issues/743)
 		public static string GetName (this PixbufFormat format)
 		{
 			return GdkPixbuf.Internal.PixbufFormat.GetName (format.Handle);
 		}
 
-		// TODO-GTK4 - gir.core doesn't yet generate bindings for record member functions.
+		// TODO-GTK4 (bindings) - record methods are not generated (https://github.com/gircore/gir.core/issues/743)
 		public static bool IsWritable (this PixbufFormat format)
 		{
 			return GdkPixbuf.Internal.PixbufFormat.IsWritable (format.Handle);
 		}
 
-		// TODO-GTK4 - gir.core doesn't yet generate bindings for record member functions.
+		// TODO-GTK4 (bindings) - record methods are not generated (https://github.com/gircore/gir.core/issues/743)
 		public static string[] GetMimeTypes (this PixbufFormat format)
 		{
 			IntPtr resultNative = GetMimeTypes (format.Handle);

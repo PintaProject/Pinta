@@ -39,6 +39,7 @@ namespace Pinta.Gui.Widgets
 
 		public PointPickerGraphic ()
 		{
+			// TODO-GTK (improvement) - the allocated width should depend on the image aspect ratio. See the old GTK3 implementation
 			HeightRequest = WidthRequest = 65;
 
 			OnResize += (_, _) => UpdateThumbnail ();
@@ -126,12 +127,11 @@ namespace Pinta.Gui.Widgets
 
 		private RectangleI GetDrawBounds ()
 		{
-			// TODO-GTK4 - fix this logic to avoid drawing offscreen
 			int width = GetAllocatedWidth ();
 			int height = GetAllocatedHeight ();
 			// Always be X pixels tall, but maintain aspect ratio
 			var imagesize = PintaCore.Workspace.ImageSize;
-			width = (imagesize.Width * height) / imagesize.Height;
+			width = Math.Min (width, (imagesize.Width * height) / imagesize.Height);
 
 			return new RectangleI (0, 0, width, height);
 		}

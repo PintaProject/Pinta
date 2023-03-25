@@ -51,7 +51,7 @@ namespace Pinta.Actions
 		async private void Activated (object sender, EventArgs args)
 		{
 			// GTK4 removed gdk_pixbuf_get_from_window(), so we need to use OS-specific APis to take a screenshot.
-			// TODO-GTK4 - implement screenshots for Windows and macOS
+			// TODO-GTK4 - implement screenshots for Windows
 
 			// On Linux, use the XDG Desktop Portal Screenshot API.
 			if (SystemManager.GetOperatingSystem () == OS.X11) {

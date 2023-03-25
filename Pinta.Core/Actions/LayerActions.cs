@@ -202,7 +202,7 @@ namespace Pinta.Core
 					Gio.File file = fcd.GetFile ()!;
 
 					Gio.File? directory = file.GetParent ();
-#if false // TODO-GTK4 recent files
+#if false // TODO-GTK4 (recent files)
 					if (directory is not null)
 						PintaCore.RecentFiles.LastDialogDirectory = directory;
 #endif

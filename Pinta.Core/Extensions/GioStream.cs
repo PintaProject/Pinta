@@ -226,8 +226,7 @@ namespace Pinta.Core
 
 			if (is_disposed)
 				throw new ObjectDisposedException ("The stream is closed");
-#if false // TODO-GTK4
-
+#if false // TODO-GTK4 (bindings) - this will be added in v0.4 (https://github.com/gircore/gir.core/issues/756)
 			seekable.Truncate (value, null);
 #else
 			throw new NotImplementedException ();

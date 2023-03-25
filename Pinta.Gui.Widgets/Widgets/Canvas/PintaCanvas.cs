@@ -60,7 +60,7 @@ namespace Pinta.Gui.Widgets
 				if (!GetRealized ())
 					return;
 
-				// TODO-GTK4 - is there a way to invalidate only a rectangle?
+				// TODO-GTK4 (improvement) - is there a way to invalidate only a rectangle?
 #if false
 				if (e.EntireSurface)
 					Window.Invalidate ();

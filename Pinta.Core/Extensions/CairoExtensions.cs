@@ -40,7 +40,7 @@ using System.Runtime.InteropServices;
 using System.Threading.Tasks;
 using Cairo;
 
-// TODO-GTK4 - should this be part of gir.core?
+// TODO-GTK4 (bindings, unsubmitted) - should this be added to gir.core?
 namespace Cairo
 {
 	public struct Color
@@ -1087,7 +1087,7 @@ namespace Pinta.Core
 			return new RectangleD (x1, y1, x2 - x1, y2 - y1);
 		}
 
-		// TODO-GTK4 - remove these manual bindings once gir.core has improved bindings for Cairo.Region (https://github.com/gircore/gir.core/pull/621)
+		// TODO-GTK4 (bindings) - remove once gir.core has improved bindings for Cairo.Region (https://github.com/gircore/gir.core/pull/621)
 		[StructLayout (LayoutKind.Sequential)]
 		private struct CairoRectangleInt
 		{
@@ -1477,7 +1477,7 @@ namespace Pinta.Core
 			gradient.AddColorStopRgba (offset, color.R, color.G, color.B, color.A);
 		}
 
-		// TODO-GTK4 - this needs to have a proper constructor in gir.core
+		// TODO-GTK4 (bindings) - requires improvements to struct generation (https://github.com/gircore/gir.core/issues/622)
 		public static Matrix CreateIdentityMatrix ()
 		{
 			var matrix = new Matrix (Cairo.Internal.MatrixManagedHandle.Create ());
@@ -1485,7 +1485,7 @@ namespace Pinta.Core
 			return matrix;
 		}
 
-		// TODO-GTK4 - this needs to have a proper constructor in gir.core
+		// TODO-GTK4 (bindings) - requires improvements to struct generation (https://github.com/gircore/gir.core/issues/622)
 		public static Matrix CreateMatrix (double xx, double xy, double yx, double yy, double x0, double y0)
 		{
 			var matrix = new Matrix (Cairo.Internal.MatrixManagedHandle.Create ());
@@ -1493,7 +1493,8 @@ namespace Pinta.Core
 			return matrix;
 		}
 
-		// TODO-GTK4 - this needs to have a proper copy operator in gir.core, or access to the 6 float fields.
+		// TODO-GTK4 (bindings) - requires improvements to struct generation (https://github.com/gircore/gir.core/issues/622)
+		// This needs to have a proper copy operator in gir.core, or access to the 6 float fields.
 		// Should also audit all usages of Cairo.Matrix which changed from a struct to a class with gir.core
 		public static void InitMatrix (this Matrix m, Matrix other)
 		{
@@ -1501,7 +1502,8 @@ namespace Pinta.Core
 			m.Multiply (other);
 		}
 
-		// TODO-GTK4 - this needs to have a proper copy operator in gir.core, or access to the 6 float fields.
+		// TODO-GTK4 (bindings) - requires improvements to struct generation (https://github.com/gircore/gir.core/issues/622)
+		// This needs to have a proper copy operator in gir.core, or access to the 6 float fields.
 		public static Matrix Clone (this Matrix m)
 		{
 			var result = CreateIdentityMatrix ();
@@ -1516,7 +1518,6 @@ namespace Pinta.Core
 
 		/// <summary>
 		/// Port of gdk_cairo_get_clip_rectangle from GTK3
-		/// TODO-GTK4 - verify if this works reliably, see https://gitlab.gnome.org/GNOME/gtk/-/commit/052d0f6e6004b7c791cfbb891c70ab0bb316c228
 		/// </summary>
 		public static bool GetClipRectangle (Cairo.Context context, out RectangleI rect)
 		{

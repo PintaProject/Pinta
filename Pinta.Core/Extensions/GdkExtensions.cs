@@ -177,7 +177,7 @@ namespace Pinta.Core
 			return k1;
 		}
 
-		// TODO-GTK4 - need gir.core async bindings for Gdk.Clipboard
+		// TODO-GTK4 (bindings, unsubmitted) - need gir.core async bindings for Gdk.Clipboard
 		public static Task<string?> ReadTextAsync (this Gdk.Clipboard clipboard)
 		{
 			var tcs = new TaskCompletionSource<string?> ();
@@ -193,7 +193,7 @@ namespace Pinta.Core
 			return tcs.Task;
 		}
 
-		// TODO-GTK4 - need gir.core async bindings for Gdk.Clipboard
+		// TODO-GTK4 (bindings, unsubmitted) - need gir.core async bindings for Gdk.Clipboard
 		public static Task<Texture?> ReadTextureAsync (this Gdk.Clipboard clipboard)
 		{
 			var tcs = new TaskCompletionSource<Texture?> ();
@@ -244,7 +244,7 @@ namespace Pinta.Core
 			var surf = CairoExtensions.CreateImageSurface (Cairo.Format.Argb32, texture.Width, texture.Height);
 			Span<byte> surf_data = surf.GetData ();
 
-			// TODO-GTK4 - need gir.core bindings for this.
+			// TODO-GTK4 (bindings, unsubmitted) - needs support for primitive value arrays
 			var buffer = new byte[surf_data.Length];
 			Gdk.Internal.Texture.Download (texture.Handle, buffer, (uint) surf.Stride);
 

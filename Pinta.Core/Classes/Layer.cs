@@ -52,9 +52,7 @@ namespace Pinta.Core
 			this.name = name;
 			this.blend_mode = BlendMode.Normal;
 
-			// TODO-GTK4 - this needs to have a proper constructor in gir.core
-			Transform = new (Cairo.Internal.MatrixManagedHandle.Create ());
-			Transform.InitIdentity ();
+			Transform = CairoExtensions.CreateIdentityMatrix ();
 		}
 
 		public ImageSurface Surface { get; set; }
