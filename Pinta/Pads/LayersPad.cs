@@ -36,7 +36,7 @@ namespace Pinta
 		public void Initialize (Dock workspace, Application app, Gio.Menu padMenu)
 		{
 			var layers = new LayersListView ();
-			DockItem layers_item = new DockItem (layers, "Layers") {
+			DockItem layers_item = new DockItem (layers, "Layers", icon_name: Pinta.Resources.Icons.LayerDuplicate) {
 				Label = Translations.GetString ("Layers")
 			};
 

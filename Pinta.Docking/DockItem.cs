@@ -46,6 +46,11 @@ namespace Pinta.Docking
 		public string UniqueName { get; private set; }
 
 		/// <summary>
+		/// Icon name for the dock item, used when minimized.
+		/// </summary>
+		public string IconName { get; private set; }
+
+		/// <summary>
 		/// Visible label for the dock item.
 		/// </summary>
 		public string Label { get => label_widget.GetLabel (); set => label_widget.SetLabel (value); }
@@ -60,11 +65,12 @@ namespace Pinta.Docking
 		/// </summary>
 		public event EventHandler? MaximizeClicked;
 
-		public DockItem (Widget child, string unique_name, bool locked = false)
+		public DockItem (Widget child, string unique_name, string icon_name, bool locked = false)
 		{
 			SetOrientation (Orientation.Vertical);
 
 			UniqueName = unique_name;
+			IconName = icon_name;
 
 			minimize_button = Button.NewFromIconName (StandardIcons.WindowMinimize);
 			minimize_button.AddCssClass (Pinta.Core.AdwaitaStyles.Flat);

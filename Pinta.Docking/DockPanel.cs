@@ -39,10 +39,10 @@ namespace Pinta.Docking
 				Item = item;
 				Pane = Paned.New (Orientation.Vertical);
 
-				var label = Label.New (item.Label);
-				// TODO-GTK4 - figure out how to set angle to 270 degrees for vertical text
+				var icon = Image.NewFromIconName (item.IconName);
 				ReopenButton = ToggleButton.New ();
-				ReopenButton.SetChild (label);
+				ReopenButton.TooltipText = item.Label;
+				ReopenButton.SetChild (icon);
 
 				// Autohide is set to false since it seems to cause the popover to close even when clicking inside it, on macOS at least
 				// Instead, the reopen button is a toggle button to close the popover.

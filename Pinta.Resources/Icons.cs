@@ -159,6 +159,8 @@ namespace Pinta.Resources
 		public const string HelpTranslate = "help-translate";
 		public const string HelpWebsite = "help-website-symbolic";
 
+		public const string HistoryList = "ui-historylist-symbolic";
+
 		public const string ImageCrop = "ui-crop-to-selection-symbolic";
 		public const string ImageResize = "image-resize";
 		public const string ImageResizeCanvas = "image-resize-canvas";
