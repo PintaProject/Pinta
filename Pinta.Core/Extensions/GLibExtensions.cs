@@ -6,7 +6,7 @@ namespace Pinta.Core
 	public static class GLibExtensions
 	{
 		// Ported from GtkSharp
-		// TODO-GTK4 - should this be added upstream in gir.core? (along with setting it up at startup)
+		// TODO-GTK4 (bindings, unsubmitted) - should this be added upstream in gir.core? (along with setting it up at startup)
 		public class GLibSynchronizationContext : SynchronizationContext
 		{
 			public override void Post (SendOrPostCallback d, object? state)

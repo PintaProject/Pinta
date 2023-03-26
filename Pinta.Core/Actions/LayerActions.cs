@@ -202,10 +202,8 @@ namespace Pinta.Core
 					Gio.File file = fcd.GetFile ()!;
 
 					Gio.File? directory = file.GetParent ();
-#if false // TODO-GTK4 (recent files)
 					if (directory is not null)
 						PintaCore.RecentFiles.LastDialogDirectory = directory;
-#endif
 
 					// Open the image and add it to the layers
 					UserLayer layer = doc.Layers.AddNewLayer (file.GetDisplayName ());

@@ -25,6 +25,7 @@
 // THE SOFTWARE.
 
 using System;
+using System.Collections.Generic;
 using System.Linq;
 using System.Runtime.InteropServices;
 using System.Threading.Tasks;
@@ -503,6 +504,18 @@ namespace Pinta.Core
 
 				child = child.GetNextSibling ();
 			}
+		}
+
+		// TODO-GTK4 (bindings, unsubmitted) - wrapper for GetFiles() since Gio.ListModel.GetObject doesn't return a Gio.File instance
+		public static Gio.File[] GetFileList (this Gtk.FileChooser file_chooser)
+		{
+			List<Gio.File> result = new ();
+
+			Gio.ListModel files = file_chooser.GetFiles ();
+			for (uint i = 0, n = files.GetNItems (); i < n; ++i)
+				result.Add (new Gio.FileHelper (files.GetItem (i), ownedRef: true));
+
+			return result.ToArray ();
 		}
 	}
 }

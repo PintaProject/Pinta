@@ -37,20 +37,10 @@ namespace Pinta.Core
 	public class RecentFileManager
 	{
 		private Gio.File? last_dialog_directory;
-#if false // TODO-GTK4 - gir.core binding for RecentData struct
-		private RecentData recent_data;
-#endif
 
 		public RecentFileManager ()
 		{
 			last_dialog_directory = DefaultDialogDirectory;
-
-#if false // TODO-GTK4
-			recent_data = new RecentData ();
-			recent_data.AppName = "Pinta";
-			recent_data.AppExec = SystemManager.GetExecutablePathName ();
-			recent_data.MimeType = "image/*";
-#endif
 		}
 
 		public Gio.File? LastDialogDirectory {
@@ -70,10 +60,6 @@ namespace Pinta.Core
 			}
 		}
 
-#if false // TODO-GTK4
-		public RecentData RecentData { get { return recent_data; } }
-#endif
-
 		/// <summary>
 		/// Returns a directory for use in a dialog. The last dialog directory is
 		/// returned if it exists, otherwise the default directory is used.
@@ -81,6 +67,14 @@ namespace Pinta.Core
 		public Gio.File? GetDialogDirectory ()
 		{
 			return (last_dialog_directory != null && last_dialog_directory.QueryExists (null)) ? last_dialog_directory : DefaultDialogDirectory;
+		}
+
+		/// <summary>
+		/// Add a file to the list of recently-used files.
+		/// </summary>
+		public void AddFile (Gio.File file)
+		{
+			RecentManager.GetDefault ().AddItem (file.GetUri ());
 		}
 	}
 }

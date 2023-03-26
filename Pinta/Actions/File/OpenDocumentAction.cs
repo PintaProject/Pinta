@@ -89,23 +89,18 @@ namespace Pinta.Actions
 
 			fcd.OnResponse += (_, e) => {
 				if (e.ResponseId == (int) Gtk.ResponseType.Accept) {
-#if false // TODO-GTK4 (recent files) - also support opening multiple files
 
-					PintaCore.RecentFiles.LastDialogDirectory = fcd.CurrentFolderFile;
+					foreach (var file in fcd.GetFileList ()) {
+						if (!PintaCore.Workspace.OpenFile (file))
+							continue;
 
-					foreach (var file in fcd.GetFiles()) {
-						if (PintaCore.Workspace.OpenFile (file)) {
-							RecentManager.Default.AddFull (file.GetUriAsString (), PintaCore.RecentFiles.RecentData);
+						PintaCore.RecentFiles.AddFile (file);
 
-							var directory = file.Parent;
-							if (directory is not null) {
-								PintaCore.RecentFiles.LastDialogDirectory = directory;
-							}
+						var directory = file.GetParent ();
+						if (directory is not null)
+							PintaCore.RecentFiles.LastDialogDirectory = directory;
+
 					}
-#else
-					PintaCore.Workspace.OpenFile (fcd.GetFile ()!);
-#endif
-
 				}
 			};
 

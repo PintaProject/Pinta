@@ -133,9 +133,7 @@ namespace Pinta.Actions
 				//hasn't been saved to its associated file in this session.
 				document.HasBeenSavedInSession = false;
 
-#if false // TODO-GTK4 (recent files)
-					RecentManager.Default.AddFull (file.GetUriAsString (), PintaCore.RecentFiles.RecentData);
-#endif
+				PintaCore.RecentFiles.AddFile (file);
 				PintaCore.ImageFormats.SetDefaultFormat (format.Extensions.First ());
 
 				document.File = file;
