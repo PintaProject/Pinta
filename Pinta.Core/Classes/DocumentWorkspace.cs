@@ -298,11 +298,6 @@ namespace Pinta.Core
 
 			zoom = Math.Min (zoom, 3600);
 
-#if false // TODO-GTK4
-			if (Canvas.Window != null)
-				Canvas.Window.FreezeUpdates ();
-#endif
-
 			PintaCore.Actions.View.SuspendZoomUpdate ();
 
 			Gtk.Viewport view = (Gtk.Viewport) Canvas.Parent!;
@@ -367,10 +362,6 @@ namespace Pinta.Core
 			RecenterView (center_x, center_y);
 
 			PintaCore.Actions.View.ResumeZoomUpdate ();
-#if false // TODO-GTK4
-			if (Canvas.Window != null)
-				Canvas.Window.ThawUpdates ();
-#endif
 		}
 		#endregion
 	}

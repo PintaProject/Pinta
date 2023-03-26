@@ -53,11 +53,6 @@ namespace Pinta.Core
 
 			Size swap = PintaCore.Workspace.ImageSize;
 
-#if false // TODO-GTK4
-			var window = PintaCore.Workspace.ActiveWorkspace.Canvas.Window;
-			window.FreezeUpdates ();
-#endif
-
 			PintaCore.Workspace.ImageSize = old_size;
 			PintaCore.Workspace.CanvasSize = old_size;
 
@@ -74,11 +69,6 @@ namespace Pinta.Core
 			PintaCore.Workspace.Invalidate ();
 
 			PintaCore.Workspace.Scale = scale;
-#if false // TODO-GTK4
-			PintaCore.Actions.View.UpdateCanvasScale ();
-
-			window.ThawUpdates ();
-#endif
 		}
 
 		public override void Redo ()
@@ -89,11 +79,6 @@ namespace Pinta.Core
 			double scale = PintaCore.Workspace.Scale;
 
 			Size swap = PintaCore.Workspace.ImageSize;
-
-#if false // TODO-GTK4
-			var window = PintaCore.Workspace.ActiveWorkspace.Canvas.Window;
-			window.FreezeUpdates ();
-#endif
 
 			PintaCore.Workspace.ImageSize = old_size;
 			PintaCore.Workspace.CanvasSize = old_size;
@@ -106,11 +91,6 @@ namespace Pinta.Core
 			PintaCore.Workspace.Invalidate ();
 
 			PintaCore.Workspace.Scale = scale;
-#if false // TODO-GTK4
-			PintaCore.Actions.View.UpdateCanvasScale ();
-
-			window.ThawUpdates ();
-#endif
 		}
 	}
 }

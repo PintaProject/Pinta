@@ -341,14 +341,8 @@ namespace Pinta.Core
 
 			ResetSelectionPaths ();
 
-#if false // TODO-GTK4
-			Workspace.Canvas.Window.FreezeUpdates ();
-#endif
 			Workspace.Scale = scale;
 			PintaCore.Actions.View.UpdateCanvasScale ();
-#if false // TODO-GTK4
-			Workspace.Canvas.Window.ThawUpdates ();
-#endif
 		}
 
 		// Rotate image 180 degrees (flip H+V)
