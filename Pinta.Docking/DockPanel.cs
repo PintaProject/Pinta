@@ -67,7 +67,7 @@ namespace Pinta.Docking
 
 			public bool IsMinimized => popover.Child != null;
 
-			public void Maximize (Box dock_bar)
+			public void UpdateOnMaximize (Box dock_bar)
 			{
 				// Remove the reopen button from the dock bar.
 				// Note that it might not already be in the dock bar, e.g. on startup.
@@ -79,19 +79,15 @@ namespace Pinta.Docking
 				Pane.StartChild = Item;
 				Pane.ResizeStartChild = false;
 				Pane.ShrinkStartChild = false;
-
-				Item.Maximize ();
 			}
 
-			public void Minimize (Box dock_bar)
+			public void UpdateOnMinimize (Box dock_bar)
 			{
 				Pane.StartChild = null;
 				popover.Child = Item;
 
 				dock_bar.Append (ReopenButton);
 				ReopenButton.Active = false;
-
-				Item.Minimize ();
 			}
 		}
 
@@ -126,13 +122,13 @@ namespace Pinta.Docking
 			}
 
 			items.Add (panel_item);
-			panel_item.Maximize (dock_bar);
+			panel_item.UpdateOnMaximize (dock_bar);
 
 			item.MinimizeClicked += (o, args) => {
-				panel_item.Minimize (dock_bar);
+				panel_item.UpdateOnMinimize (dock_bar);
 			};
 			item.MaximizeClicked += (o, args) => {
-				panel_item.Maximize (dock_bar);
+				panel_item.UpdateOnMaximize (dock_bar);
 			};
 		}
 
@@ -150,7 +146,7 @@ namespace Pinta.Docking
 		{
 			foreach (var panel_item in items) {
 				if (settings.GetSetting<bool> (MinimizeKey (panel_item), false)) {
-					panel_item.Minimize (dock_bar);
+					panel_item.Item.Minimize ();
 				}
 
 #if false

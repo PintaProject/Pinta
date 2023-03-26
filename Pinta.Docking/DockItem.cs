@@ -92,13 +92,8 @@ namespace Pinta.Docking
 
 				title_layout.Append (button_stack);
 
-				minimize_button.OnClicked += (o, args) => {
-					MinimizeClicked?.Invoke (this, new EventArgs ());
-				};
-
-				maximize_button.OnClicked += (o, args) => {
-					MaximizeClicked?.Invoke (this, new EventArgs ());
-				};
+				minimize_button.OnClicked += (o, args) => Minimize ();
+				maximize_button.OnClicked += (o, args) => Maximize ();
 
 				Append (title_layout);
 			}
@@ -121,13 +116,25 @@ namespace Pinta.Docking
 		}
 
 		/// <summary>
-		/// Update the dock item's state after it is minimized.
+		/// Minimize the dock item.
 		/// </summary>
-		public void Minimize () => button_stack.VisibleChild = maximize_button;
+		public void Minimize ()
+		{
+			if (button_stack.VisibleChild != maximize_button) {
+				button_stack.VisibleChild = maximize_button;
+				MinimizeClicked?.Invoke (this, new EventArgs ());
+			}
+		}
 
 		/// <summary>
-		/// Update the dock item's state after it is maximized.
+		/// Maximize the dock item.
 		/// </summary>
-		public void Maximize () => button_stack.VisibleChild = minimize_button;
+		public void Maximize ()
+		{
+			if (button_stack.VisibleChild != minimize_button) {
+				button_stack.VisibleChild = minimize_button;
+				MaximizeClicked?.Invoke (this, new EventArgs ());
+			}
+		}
 	}
 }

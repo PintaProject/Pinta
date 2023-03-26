@@ -63,10 +63,14 @@ namespace Pinta
 			app.AddAction (show_layers);
 			padMenu.AppendItem (show_layers.CreateMenuItem ());
 
-			show_layers.Toggled += (val) => { layers_item.Visible = val; };
-#if false // TODO-GTK4 - visibility-notify-event no longer exists, can probably replace with a dedicated event on the DockItem class
-			layers_item.VisibilityNotifyEvent += (o, args) => { show_layers.Value = layers_item.Visible; };
-#endif
+			show_layers.Toggled += (val) => {
+				if (val)
+					layers_item.Maximize ();
+				else
+					layers_item.Minimize ();
+			};
+			layers_item.MaximizeClicked += (_, _) => show_layers.Value = true;
+			layers_item.MinimizeClicked += (_, _) => show_layers.Value = false;
 		}
 	}
 }

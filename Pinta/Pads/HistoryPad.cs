@@ -52,10 +52,14 @@ namespace Pinta
 			app.AddAction (show_history);
 			padMenu.AppendItem (show_history.CreateMenuItem ());
 
-			show_history.Toggled += (val) => { history_item.Visible = val; };
-#if false // TODO-GTK4 - visibility-notify-event no longer exists, can probably replace with a dedicated event on the DockItem class
-			history_item.VisibilityNotifyEvent += (o, args) => { show_history.Value = history_item.Visible; };
-#endif
+			show_history.Toggled += (val) => {
+				if (val)
+					history_item.Maximize ();
+				else
+					history_item.Minimize ();
+			};
+			history_item.MaximizeClicked += (_, _) => show_history.Value = true;
+			history_item.MinimizeClicked += (_, _) => show_history.Value = false;
 		}
 	}
 }
