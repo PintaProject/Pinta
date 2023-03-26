@@ -27,6 +27,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Threading.Tasks;
 using Gdk;
 using Gtk;
 
@@ -46,7 +47,7 @@ namespace Pinta.Core
 		private string ANTIALIAS_SETTING => $"{GetType ().Name.ToLowerInvariant ()}-antialias";
 		private string ALPHABLEND_SETTING => $"{GetType ().Name.ToLowerInvariant ()}-alpha-blend";
 
-		protected static Cairo.Point point_empty = new Cairo.Point (-500, -500);
+		protected static PointI point_empty = new (-500, -500);
 
 		protected BaseTool (IServiceManager services)
 		{
@@ -187,7 +188,7 @@ namespace Pinta.Core
 		/// <summary>
 		/// Called when the tool needs to add its items to the Tool toolbar.
 		/// </summary>
-		protected virtual void OnBuildToolBar (Toolbar toolbar)
+		protected virtual void OnBuildToolBar (Box toolbar)
 		{
 		}
 
@@ -231,9 +232,9 @@ namespace Pinta.Core
 		/// Return 'true' if the Cut is handled, or 'false' to allow other
 		/// components to handle it.
 		/// </summary>
-		protected virtual bool OnHandlePaste (Document document, Clipboard cb)
+		protected virtual Task<bool> OnHandlePaste (Document document, Clipboard cb)
 		{
-			return false;
+			return Task.FromResult (false);
 		}
 
 		/// <summary>
@@ -314,19 +315,19 @@ namespace Pinta.Core
 		{
 			CurrentCursor = cursor;
 
-			if (workspace.HasOpenDocuments && workspace.ActiveWorkspace.Canvas.Window != null)
-				workspace.ActiveWorkspace.Canvas.Window.Cursor = cursor;
+			if (workspace.HasOpenDocuments)
+				workspace.ActiveWorkspace.Canvas.Cursor = cursor;
 		}
 
 		#region Toolbar
 		private ToolBoxButton? tool_item;
 		private ToolBarDropDownButton? antialiasing_button;
 		private ToolBarDropDownButton? alphablending_button;
-		private SeparatorToolItem? separator;
+		private Separator? separator;
 
 		public virtual ToolBoxButton ToolItem => tool_item ??= CreateToolButton ();
 
-		private SeparatorToolItem Separator => separator ??= new SeparatorToolItem ();
+		private Separator Separator => separator ??= GtkExtensions.CreateToolBarSeparator ();
 
 		private ToolBarDropDownButton AlphaBlendingDropDown {
 			get {
@@ -374,18 +375,18 @@ namespace Pinta.Core
 
 		internal void DoAfterUndo (Document document) => OnAfterUndo (document);
 
-		internal void DoBuildToolBar (Toolbar toolbar)
+		internal void DoBuildToolBar (Box toolbar)
 		{
 			OnBuildToolBar (toolbar);
 
 			// Add alpha-blending and anti-aliasing dropdowns if needed
 			if (ShowAlphaBlendingButton || ShowAntialiasingButton)
-				toolbar.AppendItem (Separator);
+				toolbar.Append (Separator);
 
 			if (ShowAntialiasingButton)
-				toolbar.AppendItem (AntialiasingDropDown);
+				toolbar.Append (AntialiasingDropDown);
 			if (ShowAlphaBlendingButton)
-				toolbar.AppendItem (AlphaBlendingDropDown);
+				toolbar.Append (AlphaBlendingDropDown);
 		}
 
 		internal void DoCommit (Document? document) => OnCommit (document);
@@ -400,23 +401,19 @@ namespace Pinta.Core
 
 		internal bool DoHandleCut (Document document, Clipboard clipboard) => OnHandleCut (document, clipboard);
 
-		internal bool DoHandlePaste (Document document, Clipboard clipboard) => OnHandlePaste (document, clipboard);
+		internal Task<bool> DoHandlePaste (Document document, Clipboard clipboard) => OnHandlePaste (document, clipboard);
 
 		internal bool DoHandleRedo (Document document) => OnHandleRedo (document);
 
 		internal bool DoHandleUndo (Document document) => OnHandleUndo (document);
 
-		internal void DoKeyDown (Document document, KeyPressEventArgs args) => args.RetVal = OnKeyDown (document, ToolKeyEventArgs.FromKeyPressEventArgs (args));
+		internal bool DoKeyDown (Document document, ToolKeyEventArgs args) => OnKeyDown (document, args);
 
-		internal void DoKeyUp (Document document, KeyReleaseEventArgs args) => args.RetVal = OnKeyUp (document, ToolKeyEventArgs.FromKeyReleaseEventArgs (args));
+		internal bool DoKeyUp (Document document, ToolKeyEventArgs args) => OnKeyUp (document, args);
 
-		internal void DoMouseDown (Document document, ButtonPressEventArgs args) => OnMouseDown (document, ToolMouseEventArgs.FromButtonPressEventArgs (document, args));
-
-		internal void DoMouseDown (Document document, ToolMouseEventArgs e) => OnMouseDown (document, e);
-
-		internal void DoMouseMove (Document document, MotionNotifyEventArgs args) => OnMouseMove (document, ToolMouseEventArgs.FromMotionNotifyEventArgs (document, args));
-
-		internal void DoMouseUp (Document document, ButtonReleaseEventArgs args) => OnMouseUp (document, ToolMouseEventArgs.FromButtonReleaseEventArgs (document, args));
+		internal void DoMouseDown (Document document, ToolMouseEventArgs args) => OnMouseDown (document, args);
+		internal void DoMouseMove (Document document, ToolMouseEventArgs args) => OnMouseMove (document, args);
+		internal void DoMouseUp (Document document, ToolMouseEventArgs args) => OnMouseUp (document, args);
 		#endregion
 	}
 }

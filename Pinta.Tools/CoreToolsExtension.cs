@@ -81,28 +81,28 @@ namespace Pinta.Tools
 			PintaCore.PaintBrushes.RemoveInstanceOfPaintBrush (typeof (Brushes.SplatterBrush));
 			PintaCore.PaintBrushes.RemoveInstanceOfPaintBrush (typeof (Brushes.SquaresBrush));
 
-			PintaCore.Tools.RemoveInstanceOfTool<RectangleSelectTool> ();
 			PintaCore.Tools.RemoveInstanceOfTool<MoveSelectedTool> ();
-			PintaCore.Tools.RemoveInstanceOfTool<LassoSelectTool> ();
 			PintaCore.Tools.RemoveInstanceOfTool<MoveSelectionTool> ();
-			PintaCore.Tools.RemoveInstanceOfTool<EllipseSelectTool> ();
 			PintaCore.Tools.RemoveInstanceOfTool<ZoomTool> ();
-			PintaCore.Tools.RemoveInstanceOfTool<MagicWandTool> ();
 			PintaCore.Tools.RemoveInstanceOfTool<PanTool> ();
+			PintaCore.Tools.RemoveInstanceOfTool<RectangleSelectTool> ();
+			PintaCore.Tools.RemoveInstanceOfTool<EllipseSelectTool> ();
+			PintaCore.Tools.RemoveInstanceOfTool<LassoSelectTool> ();
+			PintaCore.Tools.RemoveInstanceOfTool<MagicWandTool> ();
+			PintaCore.Tools.RemoveInstanceOfTool<PaintBrushTool> ();
+			PintaCore.Tools.RemoveInstanceOfTool<PencilTool> ();
+			PintaCore.Tools.RemoveInstanceOfTool<EraserTool> ();
 			PintaCore.Tools.RemoveInstanceOfTool<PaintBucketTool> ();
 			PintaCore.Tools.RemoveInstanceOfTool<GradientTool> ();
-			PintaCore.Tools.RemoveInstanceOfTool<PaintBrushTool> ();
-			PintaCore.Tools.RemoveInstanceOfTool<EraserTool> ();
-			PintaCore.Tools.RemoveInstanceOfTool<PencilTool> ();
 			PintaCore.Tools.RemoveInstanceOfTool<ColorPickerTool> ();
-			PintaCore.Tools.RemoveInstanceOfTool<CloneStampTool> ();
-			PintaCore.Tools.RemoveInstanceOfTool<RecolorTool> ();
 			PintaCore.Tools.RemoveInstanceOfTool<TextTool> ();
 			PintaCore.Tools.RemoveInstanceOfTool<LineCurveTool> ();
 			PintaCore.Tools.RemoveInstanceOfTool<RectangleTool> ();
 			PintaCore.Tools.RemoveInstanceOfTool<RoundedRectangleTool> ();
 			PintaCore.Tools.RemoveInstanceOfTool<EllipseTool> ();
 			PintaCore.Tools.RemoveInstanceOfTool<FreeformShapeTool> ();
+			PintaCore.Tools.RemoveInstanceOfTool<CloneStampTool> ();
+			PintaCore.Tools.RemoveInstanceOfTool<RecolorTool> ();
 		}
 		#endregion
 	}

@@ -19,9 +19,7 @@ namespace Pinta.Effects
 		private int radius;
 		private double strength;
 
-		public override string Icon {
-			get { return "Menu.Effects.Noise.ReduceNoise.png"; }
-		}
+		public override string Icon => Pinta.Resources.Icons.EffectsNoiseReduceNoise;
 
 		public override string Name {
 			get { return Translations.GetString ("Reduce Noise"); }
@@ -42,9 +40,9 @@ namespace Pinta.Effects
 			EffectData = new ReduceNoiseData ();
 		}
 
-		public override bool LaunchConfiguration ()
+		public override void LaunchConfiguration ()
 		{
-			return EffectHelper.LaunchSimpleEffectDialog (this);
+			EffectHelper.LaunchSimpleEffectDialog (this);
 		}
 
 		#region Algorithm Code Ported From PDN
@@ -78,12 +76,12 @@ namespace Pinta.Effects
 			return ColorBgra.FromBgr ((byte) bc, (byte) gc, (byte) rc);
 		}
 
-		public override void Render (ImageSurface src, ImageSurface dest, Gdk.Rectangle[] rois)
+		public override void Render (ImageSurface src, ImageSurface dest, Core.RectangleI[] rois)
 		{
 			this.radius = Data.Radius;
 			this.strength = -0.2 * Data.Strength;
 
-			foreach (Gdk.Rectangle rect in rois)
+			foreach (var rect in rois)
 				RenderRect (this.radius, src, dest, rect);
 		}
 		#endregion

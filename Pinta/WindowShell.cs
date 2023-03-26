@@ -27,84 +27,81 @@
 using System;
 using System.Linq;
 using Gtk;
+using Pinta.Core;
 
 namespace Pinta
 {
-	public class WindowShell : ApplicationWindow
+	public class WindowShell
 	{
-		private VBox shell_layout;
-		private VBox menu_layout;
-		private HBox? workspace_layout;
+		private readonly ApplicationWindow app_window;
+		private readonly Adw.HeaderBar? header_bar;
+		private Box shell_layout;
+		private Box menu_layout;
+		private Box? workspace_layout;
+		private Box? main_toolbar;
 
-		private Toolbar? main_toolbar;
-
-		public WindowShell (Application app, string name, string title, int width, int height, bool maximize) : base (app)
+		public WindowShell (Application app, string name, string title, int width, int height, bool maximize)
 		{
-			Name = name;
-			Title = title;
-			DefaultWidth = width;
-			DefaultHeight = height;
+			app_window = Gtk.ApplicationWindow.New (app);
 
-			WindowPosition = WindowPosition.Center;
-			Resizable = true;
+			app_window.Name = name;
+			app_window.Title = title;
+			app_window.DefaultWidth = width;
+			app_window.DefaultHeight = height;
+			app_window.Resizable = true;
 
 			if (maximize)
-				Maximize ();
+				app_window.Maximize ();
 
-			shell_layout = new VBox () { Name = "shell_layout" };
-			menu_layout = new VBox () { Name = "menu_layout" };
+			// On macOS the global menubar is used, but otherwise use a header bar.
+			if (PintaCore.System.OperatingSystem != OS.Mac) {
+				header_bar = Adw.HeaderBar.New ();
+				app_window.SetTitlebar (header_bar);
+			}
 
-			shell_layout.PackStart (menu_layout, false, false, 0);
+			shell_layout = Box.New (Orientation.Vertical, 0);
+			menu_layout = Box.New (Orientation.Vertical, 0);
 
-			Add (shell_layout);
+			shell_layout.Prepend (menu_layout);
 
-			shell_layout.ShowAll ();
+			app_window.SetChild (shell_layout);
+			app_window.Present ();
 		}
 
-		public Toolbar CreateToolBar (string name)
+		public ApplicationWindow Window => app_window;
+		public Adw.HeaderBar? HeaderBar => header_bar;
+
+		public Box CreateToolBar (string name)
 		{
-			main_toolbar = new Toolbar ();
+			main_toolbar = GtkExtensions.CreateToolBar ();
 			main_toolbar.Name = name;
 
-			menu_layout.PackStart (main_toolbar, false, false, 0);
+			menu_layout.Append (main_toolbar);
 			main_toolbar.Show ();
 
 			return main_toolbar;
 		}
 
-		public Statusbar CreateStatusBar (string name)
+		public Box CreateStatusBar (string name)
 		{
-			var statusbar = new Statusbar {
-				Name = name,
-				Margin = 0
-			};
+			var statusbar = GtkExtensions.CreateToolBar ();
+			statusbar.Name = name;
 
-			// Remove the default text area
-			var child = statusbar.Children.FirstOrDefault ();
-
-			if (child != null)
-				statusbar.Remove (child);
-
-			shell_layout.PackEnd (statusbar, false, false, 0);
-			statusbar.Show ();
+			shell_layout.Append (statusbar);
 
 			return statusbar;
 		}
 
-		public HBox CreateWorkspace ()
+		public Box CreateWorkspace ()
 		{
-			workspace_layout = new HBox ();
+			workspace_layout = Box.New (Orientation.Horizontal, 0);
 			workspace_layout.Name = "workspace_layout";
+			workspace_layout.Hexpand = true;
+			workspace_layout.Halign = Align.Fill;
 
-			shell_layout.PackStart (workspace_layout, true, true, 0);
-			workspace_layout.ShowAll ();
+			shell_layout.Append (workspace_layout);
 
 			return workspace_layout;
-		}
-
-		public void AddDragDropSupport (params TargetEntry[] entries)
-		{
-			Gtk.Drag.DestSet (this, Gtk.DestDefaults.Motion | Gtk.DestDefaults.Highlight | Gtk.DestDefaults.Drop, entries, Gdk.DragAction.Copy);
 		}
 	}
 }

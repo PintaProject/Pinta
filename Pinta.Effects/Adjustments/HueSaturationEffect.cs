@@ -19,7 +19,7 @@ namespace Pinta.Effects
 		UnaryPixelOp? op;
 
 		public override string Icon {
-			get { return "Menu.Adjustments.HueAndSaturation.png"; }
+			get { return Pinta.Resources.Icons.AdjustmentsHueSaturation; }
 		}
 
 		public override string Name {
@@ -39,12 +39,12 @@ namespace Pinta.Effects
 			EffectData = new HueSaturationData ();
 		}
 
-		public override bool LaunchConfiguration ()
+		public override void LaunchConfiguration ()
 		{
-			return EffectHelper.LaunchSimpleEffectDialog (this);
+			EffectHelper.LaunchSimpleEffectDialog (this);
 		}
 
-		public override void Render (ImageSurface src, ImageSurface dest, Gdk.Rectangle[] rois)
+		public override void Render (ImageSurface src, ImageSurface dest, Core.RectangleI[] rois)
 		{
 			int hue_delta = Data.Hue;
 			int sat_delta = Data.Saturation;

@@ -65,11 +65,15 @@ namespace Pinta.Resources
 
 		public const string ImageMissing = "image-missing-symbolic";
 
+		public const string OpenMenu = "open-menu-symbolic";
+
 		public const string ValueDecrease = "value-decrease-symbolic";
 		public const string ValueIncrease = "value-increase-symbolic";
 		public const string ViewFullscreen = "view-fullscreen-symbolic";
 
 		public const string WindowClose = "window-close-symbolic";
+		public const string WindowMaximize = "window-maximize-symbolic";
+		public const string WindowMinimize = "window-minimize-symbolic";
 
 		public const string ZoomFitBest = "zoom-fit-best-symbolic";
 		public const string ZoomIn = "zoom-in-symbolic";
@@ -83,6 +87,16 @@ namespace Pinta.Resources
 
 		public const string AddinsManage = "addins-manage";
 
+		public const string AdjustmentsAutoLevel = "adjustments-autolevel";
+		public const string AdjustmentsBlackAndWhite = "adjustments-blackandwhite";
+		public const string AdjustmentsBrightnessContrast = "adjustments-brightnesscontrast";
+		public const string AdjustmentsCurves = "adjustments-curves";
+		public const string AdjustmentsHueSaturation = "adjustments-huesaturation";
+		public const string AdjustmentsInvertColors = "adjustments-invertcolors";
+		public const string AdjustmentsLevels = "adjustments-levels";
+		public const string AdjustmentsPosterize = "adjustments-posterize";
+		public const string AdjustmentsSepia = "adjustments-sepia";
+
 		public const string AntiAliasingEnabled = "tool-antialiasing-enabled-symbolic";
 		public const string AntiAliasingDisabled = "tool-antialiasing-disabled-symbolic";
 
@@ -92,15 +106,43 @@ namespace Pinta.Resources
 		public const string ColorModeColor = "tool-gradient-colormode-color-symbolic";
 		public const string ColorModeTransparency = "tool-gradient-colormode-transparency-symbolic";
 
-		public const string ColorPaletteReset = "ui-colorpalette-reset-symbolic";
-		public const string ColorPaletteSwap = "ui-colorpalette-swap-symbolic";
-
 		public const string CursorPosition = "ui-cursor-location-symbolic";
 
 		public const string EditSelectionErase = "edit-selection-erase";
 		public const string EditSelectionFill = "edit-selection-fill";
 		public const string EditSelectionInvert = "edit-selection-invert";
 		public const string EditSelectionNone = "ui-deselect-symbolic";
+
+		public const string EffectsArtisticInkSketch = "effects-artistic-inksketch";
+		public const string EffectsArtisticOilPainting = "effects-artistic-oilpainting";
+		public const string EffectsArtisticPencilSketch = "effects-artistic-pencilsketch";
+		public const string EffectsBlursFragment = "effects-blurs-fragment";
+		public const string EffectsBlursGaussianBlur = "effects-blurs-gaussianblur";
+		public const string EffectsBlursMotionBlur = "effects-blurs-motionblur";
+		public const string EffectsBlursRadialBlur = "effects-blurs-radialblur";
+		public const string EffectsBlursUnfocus = "effects-blurs-unfocus";
+		public const string EffectsBlursZoomBlur = "effects-blurs-zoomblur";
+		public const string EffectsDefault = "effects-default";
+		public const string EffectsDistortBulge = "effects-distort-bulge";
+		public const string EffectsDistortFrostedGlass = "effects-distort-frostedglass";
+		public const string EffectsDistortPixelate = "effects-distort-pixelate";
+		public const string EffectsDistortPolarInversion = "effects-distort-polarinversion";
+		public const string EffectsDistortTile = "effects-distort-tile";
+		public const string EffectsDistortTwist = "effects-distort-twist";
+		public const string EffectsNoiseAddNoise = "effects-noise-addnoise";
+		public const string EffectsNoiseMedian = "effects-noise-median";
+		public const string EffectsNoiseReduceNoise = "effects-noise-reducenoise";
+		public const string EffectsPhotoGlow = "effects-photo-glow";
+		public const string EffectsPhotoRedEyeRemove = "effects-photo-redeyeremove";
+		public const string EffectsPhotoSharpen = "effects-photo-sharpen";
+		public const string EffectsPhotoSoftenPortrait = "effects-photo-softenportrait";
+		public const string EffectsRenderClouds = "effects-render-clouds";
+		public const string EffectsRenderJuliaFractal = "effects-render-juliafractal";
+		public const string EffectsRenderMandelbrotFractal = "effects-render-mandelbrotfractal";
+		public const string EffectsStylizeEdgeDetect = "effects-stylize-edgedetect";
+		public const string EffectsStylizeEmboss = "effects-stylize-emboss";
+		public const string EffectsStylizeOutline = "effects-stylize-outline";
+		public const string EffectsStylizeRelief = "effects-stylize-relief";
 
 		public const string GradientConical = "tool-gradient-conical-symbolic";
 		public const string GradientDiamond = "tool-gradient-diamond-symbolic";
@@ -117,6 +159,8 @@ namespace Pinta.Resources
 		public const string HelpTranslate = "help-translate";
 		public const string HelpWebsite = "help-website-symbolic";
 
+		public const string HistoryList = "ui-historylist-symbolic";
+
 		public const string ImageCrop = "ui-crop-to-selection-symbolic";
 		public const string ImageResize = "image-resize";
 		public const string ImageResizeCanvas = "image-resize-canvas";
@@ -126,6 +170,8 @@ namespace Pinta.Resources
 		public const string ImageRotate90CCW = "image-rotate-90ccw-symbolic";
 		public const string ImageRotate180 = "image-rotate-180-symbolic";
 		public const string ImageFlatten = "image-flatten";
+		public const string OrientationPortrait = "image-orientation-portrait-symbolic";
+		public const string OrientationLandscape = "image-orientation-landscape-symbolic";
 
 		public const string LayerDelete = "layers-remove-layer-symbolic";
 		public const string LayerDuplicate = "layers-duplicate-layer-symbolic";
@@ -185,8 +231,6 @@ namespace Pinta.Resources
 		public const string ViewGrid = "view-grid";
 		public const string ViewRulers = "view-rulers";
 		public const string ViewZoom100 = "view-zoom-100";
-		public const string ViewZoomIn = "view-zoom-in";
-		public const string ViewZoomOut = "view-zoom-out";
 		public const string ViewZoomSelection = "view-zoom-selection";
 		public const string ViewZoomWindow = "view-zoom-window";
 	}
@@ -196,7 +240,21 @@ namespace Pinta.Resources
 	/// </summary>
 	public static class StandardCursors
 	{
+		public const string Default = "default";
 		public const string Grab = "grab";
 		public const string Grabbing = "grabbing";
+		public const string Progress = "progress";
+
+		public const string ResizeN = "n-resize";
+		public const string ResizeE = "e-resize";
+		public const string ResizeS = "s-resize";
+		public const string ResizeW = "w-resize";
+		public const string ResizeNE = "ne-resize";
+		public const string ResizeNW = "nw-resize";
+		public const string ResizeSE = "se-resize";
+		public const string ResizeSW = "sw-resize";
+
+		public const string ZoomIn = "zoom-in";
+		public const string ZoomOut = "zoom-out";
 	}
 }

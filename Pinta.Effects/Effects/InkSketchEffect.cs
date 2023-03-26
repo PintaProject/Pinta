@@ -24,9 +24,7 @@ namespace Pinta.Effects
 		private UnaryPixelOps.Desaturate desaturateOp;
 		private UserBlendOps.DarkenBlendOp darkenOp;
 
-		public override string Icon {
-			get { return "Menu.Effects.Artistic.InkSketch.png"; }
-		}
+		public override string Icon => Pinta.Resources.Icons.EffectsArtisticInkSketch;
 
 		public override string Name {
 			get { return Translations.GetString ("Ink Sketch"); }
@@ -65,13 +63,13 @@ namespace Pinta.Effects
 			conv[4] = new int[] { -1, -1, -5, -1, -1 };
 		}
 
-		public override bool LaunchConfiguration ()
+		public override void LaunchConfiguration ()
 		{
-			return EffectHelper.LaunchSimpleEffectDialog (this);
+			EffectHelper.LaunchSimpleEffectDialog (this);
 		}
 
 		#region Algorithm Code Ported From PDN
-		public override void Render (ImageSurface src, ImageSurface dest, Gdk.Rectangle[] rois)
+		public override void Render (ImageSurface src, ImageSurface dest, Core.RectangleI[] rois)
 		{
 			// Glow backgound 
 			glowEffect.Data.Radius = 6;
@@ -80,13 +78,13 @@ namespace Pinta.Effects
 
 			this.glowEffect.Render (src, dest, rois);
 
-			var src_data = src.GetReadOnlyData ();
+			var src_data = src.GetReadOnlyPixelData ();
 			int width = src.Width;
-			var dst_data = dest.GetData ();
+			var dst_data = dest.GetPixelData ();
 
 			// Create black outlines by finding the edges of objects 
-			foreach (Gdk.Rectangle roi in rois) {
-				for (int y = roi.Top; y <= roi.GetBottom (); ++y) {
+			foreach (Core.RectangleI roi in rois) {
+				for (int y = roi.Top; y <= roi.Bottom; ++y) {
 					int top = y - radius;
 					int bottom = y + radius + 1;
 
@@ -100,7 +98,7 @@ namespace Pinta.Effects
 
 					var dst_row = dst_data.Slice (y * width, width);
 
-					for (int x = roi.Left; x <= roi.GetRight (); ++x) {
+					for (int x = roi.Left; x <= roi.Right; ++x) {
 						int left = x - radius;
 						int right = x + radius + 1;
 

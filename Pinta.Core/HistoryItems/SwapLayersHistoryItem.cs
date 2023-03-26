@@ -63,8 +63,8 @@ namespace Pinta.Core
 			UserLayer layer1 = doc.Layers[l1];
 			UserLayer layer2 = doc.Layers[l2];
 
-			doc.Layers.DeleteLayer (l1, false);
-			doc.Layers.DeleteLayer (l2 - 1, false);
+			doc.Layers.DeleteLayer (l1);
+			doc.Layers.DeleteLayer (l2 - 1);
 
 			doc.Layers.Insert (layer2, l1);
 			doc.Layers.Insert (layer1, l2);

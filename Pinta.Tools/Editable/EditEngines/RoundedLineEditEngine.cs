@@ -46,21 +46,21 @@ namespace Pinta.Tools
 		protected double previousRadius = DefaultRadius;
 
 		// NRT - Created in HandleBuildToolBar
-		protected ToolBarWidget<Gtk.SpinButton> radius = null!;
-		protected ToolBarLabel radius_label = null!;
-		protected Gtk.SeparatorToolItem radius_sep = null!;
+		protected Gtk.SpinButton radius = null!;
+		protected Gtk.Label radius_label = null!;
+		protected Gtk.Separator radius_sep = null!;
 
 		public double Radius {
 			get {
 				if (radius != null)
-					return radius.Widget.Value;
+					return radius.Value;
 				else
 					return BrushWidth;
 			}
 
 			set {
 				if (radius != null) {
-					radius.Widget.Value = value;
+					radius.Value = value;
 
 					ShapeEngine? selEngine = SelectedShapeEngine;
 
@@ -82,34 +82,34 @@ namespace Pinta.Tools
 			base.OnSaveSettings (settings, toolPrefix);
 
 			if (radius is not null)
-				settings.PutSetting (RADIUS_SETTING (toolPrefix), (int) radius.Widget.Value);
+				settings.PutSetting (RADIUS_SETTING (toolPrefix), (int) radius.Value);
 		}
 
-		public override void HandleBuildToolBar (Gtk.Toolbar tb, ISettingsService settings, string toolPrefix)
+		public override void HandleBuildToolBar (Gtk.Box tb, ISettingsService settings, string toolPrefix)
 		{
 			base.HandleBuildToolBar (tb, settings, toolPrefix);
 
 
 			if (radius_sep == null)
-				radius_sep = new Gtk.SeparatorToolItem ();
+				radius_sep = GtkExtensions.CreateToolBarSeparator ();
 
-			tb.AppendItem (radius_sep);
+			tb.Append (radius_sep);
 
 			if (radius_label == null)
-				radius_label = new ToolBarLabel (string.Format ("  {0}: ", Translations.GetString ("Radius")));
+				radius_label = Gtk.Label.New (string.Format ("  {0}: ", Translations.GetString ("Radius")));
 
-			tb.AppendItem (radius_label);
+			tb.Append (radius_label);
 
 			if (radius == null) {
-				radius = new (new Gtk.SpinButton (0, 1e5, 1) { Value = settings.GetSetting (RADIUS_SETTING (toolPrefix), 20) });
+				radius = GtkExtensions.CreateToolBarSpinButton (0, 1e5, 1, settings.GetSetting (RADIUS_SETTING (toolPrefix), 20));
 
-				radius.Widget.ValueChanged += (o, e) => {
+				radius.OnValueChanged += (o, e) => {
 					//Go through the Get/Set routine.
 					Radius = Radius;
 				};
 			}
 
-			tb.AppendItem (radius);
+			tb.Append (radius);
 		}
 
 
@@ -128,7 +128,7 @@ namespace Pinta.Tools
 			AddRectanglePoints (ctrlKey, clickedOnControlPoint, newEngine, prevSelPoint);
 
 			//Set the new shape's DashPattern option.
-			newEngine.DashPattern = dash_pattern_box.comboBox!.ComboBox.ActiveText; // NRT - Code assumes this is not-null
+			newEngine.DashPattern = dash_pattern_box.comboBox!.ComboBox.GetActiveText ()!; // NRT - Code assumes this is not-null
 
 			return newEngine;
 		}

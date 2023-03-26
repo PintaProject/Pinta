@@ -31,35 +31,33 @@ namespace Pinta.Core
 {
 	public class ChromeManager
 	{
+		private PointI last_canvas_cursor_point;
+		private bool main_window_busy;
+
 		// NRT - These are all initialized via the Initialize* functions
 		// but it would be nice to rewrite it to provably non-null.
-		private Toolbar tool_toolbar = null!;
-		private Window main_window = null!;
-		private IProgressDialog progress_dialog = null!;
-		private bool main_window_busy;
-		private Gdk.Point last_canvas_cursor_point;
-		private Toolbar main_toolbar = null!;
-		private ErrorDialogHandler error_dialog_handler = null!;
-		private UnsupportedFormatDialogHandler unsupported_format_dialog_handler = null!;
-
 		public Application Application { get; private set; } = null!;
-		public Toolbar ToolToolBar { get { return tool_toolbar; } }
-		public Toolbar MainToolBar { get { return main_toolbar; } }
-		public Window MainWindow { get { return main_window; } }
-		public Statusbar StatusBar { get; private set; } = null!;
-		public Toolbar ToolBox { get; private set; } = null!;
-		public Notebook ImageTabsNotebook { get; private set; } = null!;
+		public Window MainWindow { get; private set; } = null!;
+		public Widget ImageTabsNotebook { get; private set; } = null!;
+		private IProgressDialog progress_dialog = null!;
+		private ErrorDialogHandler error_dialog_handler = null!;
+		private MessageDialogHandler message_dialog_handler = null!;
+
+		public Box MainToolBar { get; private set; } = null!;
+		public Box ToolToolBar { get; private set; } = null!;
+		public Box ToolBox { get; private set; } = null!;
+		public Box StatusBar { get; private set; } = null!;
 
 		public IProgressDialog ProgressDialog { get { return progress_dialog; } }
-		public GLib.Menu AdjustmentsMenu { get; private set; } = null!;
-		public GLib.Menu EffectsMenu { get; private set; } = null!;
+		public Gio.Menu AdjustmentsMenu { get; private set; } = null!;
+		public Gio.Menu EffectsMenu { get; private set; } = null!;
 
 		public ChromeManager ()
 		{
 		}
 
 		#region Public Properties
-		public Gdk.Point LastCanvasCursorPoint {
+		public PointI LastCanvasCursorPoint {
 			get { return last_canvas_cursor_point; }
 			set {
 				if (last_canvas_cursor_point != value) {
@@ -75,9 +73,9 @@ namespace Pinta.Core
 				main_window_busy = value;
 
 				if (main_window_busy)
-					main_window.Window.Cursor = new Gdk.Cursor (Gdk.CursorType.Watch);
+					MainWindow.Cursor = Gdk.Cursor.NewFromName (Pinta.Resources.StandardCursors.Progress, null);
 				else
-					main_window.Window.Cursor = new Gdk.Cursor (Gdk.CursorType.Arrow);
+					MainWindow.Cursor = Gdk.Cursor.NewFromName (Pinta.Resources.StandardCursors.Default, null);
 			}
 		}
 		#endregion
@@ -88,37 +86,37 @@ namespace Pinta.Core
 			Application = application;
 		}
 
-		public void InitializeToolToolBar (Toolbar toolToolBar)
+		public void InitializeWindowShell (Window shell)
 		{
-			tool_toolbar = toolToolBar;
+			MainWindow = shell;
 		}
 
-		public void InitializeMainToolBar (Toolbar mainToolBar)
+		public void InitializeToolToolBar (Box toolToolBar)
 		{
-			main_toolbar = mainToolBar;
+			ToolToolBar = toolToolBar;
 		}
 
-		public void InitializeStatusBar (Statusbar statusbar)
+		public void InitializeMainToolBar (Box mainToolBar)
+		{
+			MainToolBar = mainToolBar;
+		}
+
+		public void InitializeStatusBar (Box statusbar)
 		{
 			StatusBar = statusbar;
 		}
 
-		public void InitializeToolBox (Toolbar toolbox)
+		public void InitializeToolBox (Box toolbox)
 		{
 			ToolBox = toolbox;
 		}
 
-		public void InitializeImageTabsNotebook (Notebook notebook)
+		public void InitializeImageTabsNotebook (Widget notebook)
 		{
 			ImageTabsNotebook = notebook;
 		}
 
-		public void InitializeWindowShell (Window shell)
-		{
-			main_window = shell;
-		}
-
-		public void InitializeMainMenu (GLib.Menu adj_menu, GLib.Menu effects_menu)
+		public void InitializeMainMenu (Gio.Menu adj_menu, Gio.Menu effects_menu)
 		{
 			AdjustmentsMenu = adj_menu;
 			EffectsMenu = effects_menu;
@@ -137,19 +135,19 @@ namespace Pinta.Core
 			error_dialog_handler = handler;
 		}
 
-		public void InitializeUnsupportedFormatDialog (UnsupportedFormatDialogHandler handler)
+		public void InitializeMessageDialog (MessageDialogHandler handler)
 		{
-			unsupported_format_dialog_handler = handler;
+			message_dialog_handler = handler;
 		}
 
-		public void ShowErrorDialog (Window parent, string message, string details)
+		public void ShowErrorDialog (Window parent, string message, string body, string details)
 		{
-			error_dialog_handler (parent, message, details);
+			error_dialog_handler (parent, message, body, details);
 		}
 
-		public void ShowUnsupportedFormatDialog (Window parent, string message, string details)
+		public void ShowMessageDialog (Window parent, string message, string body)
 		{
-			unsupported_format_dialog_handler (parent, message, details);
+			message_dialog_handler (parent, message, body);
 		}
 
 		public void SetStatusBarText (string text)
@@ -157,7 +155,6 @@ namespace Pinta.Core
 			OnStatusBarTextChanged (text);
 		}
 		#endregion
-
 		#region Protected Methods
 		protected void OnLastCanvasCursorPointChanged ()
 		{
@@ -188,6 +185,6 @@ namespace Pinta.Core
 		event EventHandler<EventArgs> Canceled;
 	}
 
-	public delegate void ErrorDialogHandler (Window parent, string message, string details);
-	public delegate void UnsupportedFormatDialogHandler (Window parent, string message, string details);
+	public delegate void ErrorDialogHandler (Window parent, string message, string body, string details);
+	public delegate void MessageDialogHandler (Window parent, string message, string body);
 }

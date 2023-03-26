@@ -21,9 +21,7 @@ namespace Pinta.Effects
 		private int colorSaturation;
 		private double coverage;
 
-		public override string Icon {
-			get { return "Menu.Effects.Noise.AddNoise.png"; }
-		}
+		public override string Icon => Pinta.Resources.Icons.EffectsNoiseAddNoise;
 
 		public override string Name {
 			get { return Translations.GetString ("Add Noise"); }
@@ -49,9 +47,9 @@ namespace Pinta.Effects
 			EffectData = new NoiseData ();
 		}
 
-		public override bool LaunchConfiguration ()
+		public override void LaunchConfiguration ()
 		{
-			return EffectHelper.LaunchSimpleEffectDialog (this);
+			EffectHelper.LaunchSimpleEffectDialog (this);
 		}
 
 		#region Algorithm Code Ported From PDN
@@ -109,7 +107,7 @@ namespace Pinta.Effects
 			}
 		}
 
-		public override void Render (ImageSurface src, ImageSurface dst, Gdk.Rectangle[] rois)
+		public override void Render (ImageSurface src, ImageSurface dst, Core.RectangleI[] rois)
 		{
 			this.intensity = Data.Intensity;
 			this.colorSaturation = Data.ColorSaturation;
@@ -126,14 +124,14 @@ namespace Pinta.Effects
 			Random localRand = threadRand;
 			int[] localLookup = lookup;
 
-			ReadOnlySpan<ColorBgra> src_data = src.GetReadOnlyData ();
-			Span<ColorBgra> dst_data = dst.GetData ();
+			ReadOnlySpan<ColorBgra> src_data = src.GetReadOnlyPixelData ();
+			Span<ColorBgra> dst_data = dst.GetPixelData ();
 			int width = src.Width;
 
-			foreach (Gdk.Rectangle rect in rois) {
-				int right = rect.GetRight ();
+			foreach (var rect in rois) {
+				int right = rect.Right;
 
-				for (int y = rect.Top; y <= rect.GetBottom (); ++y) {
+				for (int y = rect.Top; y <= rect.Bottom; ++y) {
 					var dst_row = dst_data.Slice (y * width, width);
 					var src_row = src_data.Slice (y * width, width);
 

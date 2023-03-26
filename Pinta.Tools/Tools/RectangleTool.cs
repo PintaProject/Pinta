@@ -38,7 +38,7 @@ namespace Pinta.Tools
 
 		public override string Name => Translations.GetString ("Rectangle");
 		public override string Icon => Pinta.Resources.Icons.ToolRectangle;
-		public override Gdk.Cursor DefaultCursor => new Gdk.Cursor (Gdk.Display.Default, Resources.GetIcon ("Cursor.Rectangle.png"), 9, 18);
+		public override Gdk.Cursor DefaultCursor => Gdk.Cursor.NewFromTexture (Resources.GetIcon ("Cursor.Rectangle.png"), 9, 18, null);
 		public override int Priority => 39;
 
 		public override BaseEditEngine.ShapeTypes ShapeType => BaseEditEngine.ShapeTypes.ClosedLineCurveSeries;

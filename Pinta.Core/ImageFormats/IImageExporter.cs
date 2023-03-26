@@ -44,6 +44,6 @@ namespace Pinta.Core
 		/// <param name='parent'>
 		/// Window to be used as a parent for any dialogs that are shown.
 		/// </param>
-		void Export (Document document, GLib.IFile file, Gtk.Window parent);
+		void Export (Document document, Gio.File file, Gtk.Window parent);
 	}
 }

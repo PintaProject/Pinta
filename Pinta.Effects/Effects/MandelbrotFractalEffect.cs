@@ -16,9 +16,7 @@ namespace Pinta.Effects
 {
 	public class MandelbrotFractalEffect : BaseEffect
 	{
-		public override string Icon {
-			get { return "Menu.Effects.Render.MandelbrotFractal.png"; }
-		}
+		public override string Icon => Pinta.Resources.Icons.EffectsRenderMandelbrotFractal;
 
 		public override string Name {
 			get { return Translations.GetString ("Mandelbrot Fractal"); }
@@ -39,9 +37,9 @@ namespace Pinta.Effects
 			EffectData = new MandelbrotFractalData ();
 		}
 
-		public override bool LaunchConfiguration ()
+		public override void LaunchConfiguration ()
 		{
-			return EffectHelper.LaunchSimpleEffectDialog (this);
+			EffectHelper.LaunchSimpleEffectDialog (this);
 		}
 
 		#region Algorithm Code Ported From PDN
@@ -74,7 +72,7 @@ namespace Pinta.Effects
 			return c - Math.Log (y * y + x * x) * invLogMax;
 		}
 
-		public override void Render (ImageSurface src, ImageSurface dst, Gdk.Rectangle[] rois)
+		public override void Render (ImageSurface src, ImageSurface dst, Core.RectangleI[] rois)
 		{
 			int w = dst.Width;
 			int h = dst.Height;
@@ -89,14 +87,14 @@ namespace Pinta.Effects
 			double invCount = 1.0 / (double) count;
 			double angleTheta = (Data.Angle * 2 * Math.PI) / 360;
 
-			Span<ColorBgra> dst_data = dst.GetData ();
+			Span<ColorBgra> dst_data = dst.GetPixelData ();
 			int dst_width = dst.Width;
 
-			foreach (Gdk.Rectangle rect in rois) {
-				for (int y = rect.Top; y <= rect.GetBottom (); y++) {
+			foreach (Core.RectangleI rect in rois) {
+				for (int y = rect.Top; y <= rect.Bottom; y++) {
 					var dst_row = dst_data.Slice (y * dst_width, dst_width);
 
-					for (int x = rect.Left; x <= rect.GetRight (); x++) {
+					for (int x = rect.Left; x <= rect.Right; x++) {
 						int r = 0;
 						int g = 0;
 						int b = 0;

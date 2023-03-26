@@ -57,9 +57,9 @@ namespace Pinta.Core
 			}
 		}
 
-		public ListStore ListStore { get; } = new ListStore (typeof (BaseHistoryItem));
-
 		public int Pointer { get; private set; } = -1;
+
+		public IEnumerable<BaseHistoryItem> Items => history;
 
 		public void PushNewItem (BaseHistoryItem newItem)
 		{
@@ -69,17 +69,11 @@ namespace Pinta.Core
 
 				if (item.State == HistoryItemState.Redo) {
 					history.RemoveAt (i);
-					item.Dispose ();
-
-					//Remove from ListStore
-					ListStore.Remove (ref item.Id);
 				} else if (item.State == HistoryItemState.Undo) {
 					break;
 				}
 			}
 
-			//Add new undo to ListStore
-			newItem.Id = ListStore.AppendValues (newItem);
 			history.Add (newItem);
 			Pointer = history.Count - 1;
 
@@ -106,8 +100,6 @@ namespace Pinta.Core
 				if (item.CausesDirty)
 					document.IsDirty = true;
 
-				ListStore.SetValue (item.Id, 0, item);
-				history[Pointer] = item;
 				Pointer--;
 			}
 
@@ -132,8 +124,6 @@ namespace Pinta.Core
 			var item = history[Pointer];
 			item.Redo ();
 			item.State = HistoryItemState.Undo;
-			ListStore.SetValue (item.Id, 0, item);
-			history[Pointer] = item;
 
 			if (Pointer == history.Count - 1)
 				PintaCore.Actions.Edit.Redo.Sensitive = false;
@@ -172,9 +162,7 @@ namespace Pinta.Core
 
 		public void Clear ()
 		{
-			history.ForEach (delegate (BaseHistoryItem item) { item.Dispose (); });
 			history.Clear ();
-			ListStore.Clear ();
 			Pointer = -1;
 			clean_pointer = -1;
 

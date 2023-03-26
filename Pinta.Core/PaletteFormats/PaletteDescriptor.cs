@@ -46,7 +46,7 @@ namespace Pinta.Core
 			this.Loader = loader;
 			this.Saver = saver;
 
-			FileFilter ff = new FileFilter ();
+			var ff = FileFilter.New ();
 			StringBuilder formatNames = new StringBuilder ();
 
 			foreach (string ext in extensions) {

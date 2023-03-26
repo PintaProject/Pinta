@@ -16,9 +16,7 @@ namespace Pinta.Effects
 {
 	public class FragmentEffect : BaseEffect
 	{
-		public override string Icon {
-			get { return "Menu.Effects.Blurs.Fragment.png"; }
-		}
+		public override string Icon => Pinta.Resources.Icons.EffectsBlursFragment;
 
 		public override string Name {
 			get { return Translations.GetString ("Fragment"); }
@@ -39,23 +37,23 @@ namespace Pinta.Effects
 			EffectData = new FragmentData ();
 		}
 
-		public override bool LaunchConfiguration ()
+		public override void LaunchConfiguration ()
 		{
-			return EffectHelper.LaunchSimpleEffectDialog (this);
+			EffectHelper.LaunchSimpleEffectDialog (this);
 		}
 
 		#region Algorithm Code Ported From PDN
-		private Gdk.Point[] RecalcPointOffsets (int fragments, double rotationAngle, int distance)
+		private Core.PointI[] RecalcPointOffsets (int fragments, double rotationAngle, int distance)
 		{
 			double pointStep = 2 * Math.PI / (double) fragments;
 			double rotationRadians = ((rotationAngle - 90.0) * Math.PI) / 180.0;
 
-			Gdk.Point[] pointOffsets = new Gdk.Point[fragments];
+			var pointOffsets = new Core.PointI[fragments];
 
 			for (int i = 0; i < fragments; i++) {
 				double currentRadians = rotationRadians + (pointStep * i);
 
-				pointOffsets[i] = new Gdk.Point (
+				pointOffsets[i] = new Core.PointI (
 				    (int) Math.Round (distance * -Math.Sin (currentRadians), MidpointRounding.AwayFromZero),
 				    (int) Math.Round (distance * -Math.Cos (currentRadians), MidpointRounding.AwayFromZero));
 			}
@@ -63,12 +61,12 @@ namespace Pinta.Effects
 			return pointOffsets;
 		}
 
-		public override void Render (ImageSurface src, ImageSurface dst, Gdk.Rectangle[] rois)
+		public override void Render (ImageSurface src, ImageSurface dst, Core.RectangleI[] rois)
 		{
-			Gdk.Point[] pointOffsets = RecalcPointOffsets (Data.Fragments, Data.Rotation, Data.Distance);
+			Core.PointI[] pointOffsets = RecalcPointOffsets (Data.Fragments, Data.Rotation, Data.Distance);
 
 			int poLength = pointOffsets.Length;
-			Span<Gdk.Point> pointOffsetsPtr = stackalloc Gdk.Point[poLength];
+			Span<Core.PointI> pointOffsetsPtr = stackalloc Core.PointI[poLength];
 
 			for (int i = 0; i < poLength; ++i)
 				pointOffsetsPtr[i] = pointOffsets[i];
@@ -78,14 +76,14 @@ namespace Pinta.Effects
 			// Cache these for a massive performance boost
 			int src_width = src.Width;
 			int src_height = src.Height;
-			ReadOnlySpan<ColorBgra> src_data = src.GetReadOnlyData ();
-			Span<ColorBgra> dst_data = dst.GetData ();
+			ReadOnlySpan<ColorBgra> src_data = src.GetReadOnlyPixelData ();
+			Span<ColorBgra> dst_data = dst.GetPixelData ();
 
-			foreach (Gdk.Rectangle rect in rois) {
-				for (int y = rect.Top; y <= rect.GetBottom (); y++) {
+			foreach (Core.RectangleI rect in rois) {
+				for (int y = rect.Top; y <= rect.Bottom; y++) {
 					var dst_row = dst_data.Slice (y * src_width, src_width);
 
-					for (int x = rect.Left; x <= rect.GetRight (); x++) {
+					for (int x = rect.Left; x <= rect.Right; x++) {
 						int sampleCount = 0;
 
 						for (int i = 0; i < poLength; ++i) {

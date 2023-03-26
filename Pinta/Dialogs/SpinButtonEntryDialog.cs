@@ -25,6 +25,7 @@
 // THE SOFTWARE.
 
 using Gtk;
+using Pinta.Core;
 
 namespace Pinta
 {
@@ -33,31 +34,34 @@ namespace Pinta
 		private SpinButton spinButton;
 
 		public SpinButtonEntryDialog (string title, Window parent, string label, int min, int max, int current)
-			: base (title, parent, DialogFlags.Modal, Core.GtkExtensions.DialogButtonsCancelOk ())
 		{
-			BorderWidth = 6;
-			ContentArea.Spacing = 3;
-			HBox hbox = new HBox ();
-			hbox.Spacing = 6;
+			Title = title;
+			TransientFor = parent;
+			Modal = true;
+			this.AddCancelOkButtons ();
+			this.SetDefaultResponse (ResponseType.Ok);
 
-			Label lbl = new Label (label);
+			var hbox = new Box () { Spacing = 6 };
+			hbox.SetOrientation (Orientation.Horizontal);
+
+			var lbl = Label.New (label);
 			lbl.Xalign = 0;
-			hbox.PackStart (lbl, true, true, 0);
+			hbox.Append (lbl);
 
-			spinButton = new SpinButton (min, max, 1);
+			spinButton = SpinButton.NewWithRange (min, max, 1);
 			spinButton.Value = current;
-			hbox.PackStart (spinButton, true, true, 0);
+			hbox.Append (spinButton);
 
-			hbox.ShowAll ();
-			ContentArea.Add (hbox);
+			var content_area = this.GetContentAreaBox ();
+			content_area.SetAllMargins (12);
+			content_area.Append (hbox);
 
-			DefaultResponse = ResponseType.Ok;
-			spinButton.ActivatesDefault = true;
+			spinButton.SetActivatesDefault (true);
 		}
 
 		public int GetValue ()
 		{
-			return spinButton.ValueAsInt;
+			return spinButton.GetValueAsInt ();
 		}
 	}
 }

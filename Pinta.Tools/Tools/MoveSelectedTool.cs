@@ -34,7 +34,7 @@ namespace Pinta.Tools
 	{
 		private MovePixelsHistoryItem? hist;
 		private DocumentSelection? original_selection;
-		private readonly Matrix original_transform = new Matrix ();
+		private readonly Matrix original_transform = CairoExtensions.CreateIdentityMatrix ();
 
 		public MoveSelectedTool (IServiceManager services) : base (services)
 		{
@@ -44,13 +44,13 @@ namespace Pinta.Tools
 		public override string Icon => Pinta.Resources.Icons.ToolMove;
 		// Translators: {0} is 'Ctrl', or a platform-specific key such as 'Command' on macOS.
 		public override string StatusBarText => Translations.GetString ("Left click and drag the selection to move selected content. Hold {0} to scale instead of move. Right click and drag the selection to rotate selected content. Hold Shift to rotate in steps. Use arrow keys to move selected content by a single pixel.", GtkExtensions.CtrlLabel ());
-		public override Gdk.Cursor DefaultCursor => new Gdk.Cursor (Gdk.Display.Default, Gtk.IconTheme.Default.LoadIcon (Pinta.Resources.Icons.ToolMoveCursor, 16), 0, 0);
+		public override Gdk.Cursor DefaultCursor => Gdk.Cursor.NewFromTexture (Resources.GetIcon (Pinta.Resources.Icons.ToolMoveCursor), 0, 0, null);
 		public override Gdk.Key ShortcutKey => Gdk.Key.M;
 		public override int Priority => 5;
 
-		protected override Rectangle GetSourceRectangle (Document document)
+		protected override RectangleD GetSourceRectangle (Document document)
 		{
-			return document.Selection.SelectionPath.GetBounds ().ToCairoRectangle ();
+			return document.Selection.SelectionPath.GetBounds ().ToDouble ();
 		}
 
 		protected override void OnStartTransform (Document document)
@@ -60,7 +60,7 @@ namespace Pinta.Tools
 			// If there is no selection, select the whole image.
 			if (document.Selection.SelectionPolygons.Count == 0) {
 				document.Selection.CreateRectangleSelection (
-					new Rectangle (0, 0, document.ImageSize.Width, document.ImageSize.Height));
+					new RectangleD (0, 0, document.ImageSize.Width, document.ImageSize.Height));
 			}
 
 			original_selection = document.Selection.Clone ();
@@ -78,22 +78,20 @@ namespace Pinta.Tools
 				document.Layers.SelectionLayer.Opacity = document.Layers.CurrentUserLayer.Opacity;
 				document.Layers.SelectionLayer.Hidden = document.Layers.CurrentUserLayer.Hidden;
 
-				using (var g = new Context (document.Layers.SelectionLayer.Surface)) {
-					g.AppendPath (document.Selection.SelectionPath);
-					g.FillRule = FillRule.EvenOdd;
-					g.SetSource (document.Layers.CurrentUserLayer.Surface);
-					g.Clip ();
-					g.Paint ();
-				}
+				var g = new Context (document.Layers.SelectionLayer.Surface);
+				g.AppendPath (document.Selection.SelectionPath);
+				g.FillRule = FillRule.EvenOdd;
+				g.SetSourceSurface (document.Layers.CurrentUserLayer.Surface, 0, 0);
+				g.Clip ();
+				g.Paint ();
 
 				var surf = document.Layers.CurrentUserLayer.Surface;
 
-				using (var g = new Context (surf)) {
-					g.AppendPath (document.Selection.SelectionPath);
-					g.FillRule = FillRule.EvenOdd;
-					g.Operator = Cairo.Operator.Clear;
-					g.Fill ();
-				}
+				g = new Context (surf);
+				g.AppendPath (document.Selection.SelectionPath);
+				g.FillRule = FillRule.EvenOdd;
+				g.Operator = Cairo.Operator.Clear;
+				g.Fill ();
 			}
 
 			document.Workspace.Invalidate ();
@@ -103,7 +101,6 @@ namespace Pinta.Tools
 		{
 			base.OnUpdateTransform (document, transform);
 
-			document.Selection.Dispose ();
 			document.Selection = original_selection!.Transform (transform); // NRT - Set in OnStartTransform
 			document.Selection.Visible = true;
 
@@ -118,14 +115,13 @@ namespace Pinta.Tools
 			base.OnFinishTransform (document, transform);
 
 			// Also transform the base selection used for the various select modes.
-			using (var prev_selection = document.PreviousSelection)
-				document.PreviousSelection = prev_selection.Transform (transform);
+			var prev_selection = document.PreviousSelection;
+			document.PreviousSelection = prev_selection.Transform (transform);
 
 			if (hist != null)
 				document.History.PushNewItem (hist);
 
 			hist = null;
-			original_selection?.Dispose ();
 			original_selection = null;
 			original_transform.InitIdentity ();
 		}

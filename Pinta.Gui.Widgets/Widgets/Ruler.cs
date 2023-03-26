@@ -87,6 +87,26 @@ namespace Pinta.Gui.Widgets
 		public Ruler (Orientation orientation)
 		{
 			Orientation = orientation;
+
+			SetDrawFunc ((area, context, width, height) => Draw (context, width, height));
+
+			// Determine the size request, based on the font size.
+			int font_size = GetFontSize (GetPangoContext ().GetFontDescription (), ScaleFactor);
+			int size = 2 + font_size * 2;
+
+			int width = 0;
+			int height = 0;
+			switch (Orientation) {
+				case Orientation.Horizontal:
+					height = size;
+					break;
+				case Orientation.Vertical:
+					width = size;
+					break;
+			}
+
+			WidthRequest = width;
+			HeightRequest = height;
 		}
 
 		/// <summary>
@@ -103,65 +123,22 @@ namespace Pinta.Gui.Widgets
 			QueueDraw ();
 		}
 
-		private Requisition GetSizeRequest ()
+		private void Draw (Context cr, int width, int height)
 		{
-			var border = StyleContext.GetBorder (StateFlags);
-			var font = ObsoleteExtensions.GetStyleContextFont (StyleContext, StateFlags);
-			int font_size = GetFontSize (font);
-
-			int size = 2 + font_size * 2;
-
-			int width = border.Left + border.Right;
-			int height = border.Top + border.Bottom;
-
-			switch (Orientation) {
-				case Orientation.Horizontal:
-					width += 1;
-					height += size;
-					break;
-				case Orientation.Vertical:
-					width += size;
-					height += 1;
-					break;
-			}
-
-			return new Requisition () { Width = width, Height = height };
-		}
-
-		protected override void OnGetPreferredHeight (out int minimum_height, out int natural_height)
-		{
-			minimum_height = natural_height = GetSizeRequest ().Height;
-		}
-
-		protected override void OnGetPreferredWidth (out int minimum_width, out int natural_width)
-		{
-			minimum_width = natural_width = GetSizeRequest ().Width;
-		}
-
-		protected override bool OnDrawn (Context cr)
-		{
-			var awidth = AllocatedWidth;
-			var aheight = AllocatedHeight;
-			StyleContext.RenderBackground (cr, 0, 0, awidth, aheight);
+			GetStyleContext ().GetColor (out var color);
+			cr.SetSourceColor (color);
 
 			cr.LineWidth = 1.0;
-			Gdk.CairoHelper.SetSourceRgba (cr, StyleContext.GetColor (StateFlags));
-
-			// Determine the ruler's size.
-			var border = StyleContext.GetBorder (StateFlags);
-			int rwidth = awidth - (border.Left + border.Right);
-			int rheight = aheight - (border.Top + border.Bottom);
 
 			// Draw bottom line of the ruler.
 			switch (Orientation) {
 				case Orientation.Horizontal:
-					cr.Rectangle (0, aheight - border.Bottom - 1, awidth, 1);
+					cr.Rectangle (0, height - 1, width, 1);
 					break;
 				case Orientation.Vertical:
-					cr.Rectangle (awidth - border.Left - 1, 0, 1, aheight);
+					cr.Rectangle (width - 1, 0, 1, height);
 					// Swap so that width is the longer dimension (horizontal).
-					Utility.Swap (ref awidth, ref aheight);
-					Utility.Swap (ref rwidth, ref rheight);
+					Utility.Swap (ref width, ref height);
 					break;
 			}
 			cr.Fill ();
@@ -195,12 +172,12 @@ namespace Pinta.Gui.Widgets
 			double max_size = scaled_upper - scaled_lower;
 
 			// There must be enough space between the large ticks for the text labels.
-			var font = ObsoleteExtensions.GetStyleContextFont (StyleContext, StateFlags);
-			int font_size = GetFontSize (font);
+			var font = GetPangoContext ().GetFontDescription ();
+			int font_size = GetFontSize (font, ScaleFactor);
 			var max_digits = ((int) -Math.Abs (max_size)).ToString ().Length;
 			int min_separation = max_digits * font_size * 2;
 
-			double increment = awidth / max_size;
+			double increment = width / max_size;
 
 			// Figure out how to display the ticks.
 			int scale_index;
@@ -227,10 +204,10 @@ namespace Pinta.Gui.Widgets
 				double position = Math.Floor (i * pixels_per_tick - scaled_lower * increment) + 0.5;
 
 				// Height of tick
-				int height = rheight;
+				int tick_height = height;
 				for (int j = divide_index; j > 0; --j) {
 					if (i % subdivide[j] == 0) break;
-					height = height / 2 + 1;
+					tick_height = tick_height / 2 + 1;
 				}
 
 				// Draw text for major ticks.
@@ -239,18 +216,18 @@ namespace Pinta.Gui.Widgets
 					string label = label_value.ToString ();
 
 					var layout = CreatePangoLayout (label);
-					layout.FontDescription = font;
+					layout.SetFontDescription (font);
 
 					switch (Orientation) {
 						case Orientation.Horizontal:
-							cr.MoveTo (position + 2, border.Top);
-							Pango.CairoHelper.ShowLayout (cr, layout);
+							cr.MoveTo (position + 2, 0);
+							PangoCairo.Functions.ShowLayout (cr, layout);
 							break;
 						case Orientation.Vertical:
 							cr.Save ();
-							cr.MoveTo (border.Left + font_size * 1.5, position + font_size / 2);
+							cr.MoveTo (font_size * 1.5, position + font_size / 2);
 							cr.Rotate (0.5 * Math.PI);
-							Pango.CairoHelper.ShowLayout (cr, layout);
+							PangoCairo.Functions.ShowLayout (cr, layout);
 							cr.Restore ();
 							break;
 					}
@@ -259,12 +236,12 @@ namespace Pinta.Gui.Widgets
 				// Draw ticks
 				switch (Orientation) {
 					case Orientation.Horizontal:
-						cr.MoveTo (position, rheight + border.Top - height);
-						cr.LineTo (position, rheight + border.Top);
+						cr.MoveTo (position, height - tick_height);
+						cr.LineTo (position, height);
 						break;
 					case Orientation.Vertical:
-						cr.MoveTo (rheight + border.Left - height, position);
-						cr.LineTo (rheight + border.Left, position);
+						cr.MoveTo (height - tick_height, position);
+						cr.LineTo (height, position);
 						break;
 				}
 
@@ -272,31 +249,33 @@ namespace Pinta.Gui.Widgets
 			}
 
 			// Draw marker
-			var marker_position = (Position - Lower) * (awidth / (Upper - Lower));
+			var marker_position = (Position - Lower) * (width / (Upper - Lower));
 
 			switch (Orientation) {
 				case Orientation.Horizontal:
-					cr.MoveTo (marker_position, border.Top);
-					cr.LineTo (marker_position, border.Top + rheight);
+					cr.MoveTo (marker_position, 0);
+					cr.LineTo (marker_position, height);
 					break;
 				case Orientation.Vertical:
-					cr.MoveTo (border.Left, marker_position);
-					cr.LineTo (border.Left + rheight, marker_position);
+					cr.MoveTo (0, marker_position);
+					cr.LineTo (height, marker_position);
 					break;
 			}
 
 			cr.Stroke ();
 
 			// TODO-GTK3 - cache the ticks
-
-			return base.OnDrawn (cr);
 		}
 
-		private static int GetFontSize (Pango.FontDescription font)
+		private static int GetFontSize (Pango.FontDescription font, int scale_factor)
 		{
-			int font_size = font.Size;
-			if (!font.SizeIsAbsolute)
-				font_size = (int) (font_size / Pango.Scale.PangoScale);
+			int font_size = font.GetSize ();
+			font_size = PangoExtensions.UnitsToPixels (font_size);
+
+			// Convert from points to device units.
+			if (!font.GetSizeIsAbsolute ()) {
+				font_size = (int) ((scale_factor * font_size) / 72.0);
+			}
 
 			return font_size;
 		}

@@ -57,7 +57,7 @@ namespace Pinta.Core
 		}
 
 		#region Initialization
-		public void RegisterActions (Gtk.Application app, GLib.Menu menu)
+		public void RegisterActions (Gtk.Application app, Gio.Menu menu)
 		{
 			app.AddAccelAction (CropToSelection, "<Primary><Shift>X");
 			menu.AppendItem (CropToSelection.CreateMenuItem ());
@@ -71,7 +71,7 @@ namespace Pinta.Core
 			app.AddAccelAction (CanvasSize, "<Primary><Shift>R");
 			menu.AppendItem (CanvasSize.CreateMenuItem ());
 
-			var flip_section = new GLib.Menu ();
+			var flip_section = Gio.Menu.New ();
 			menu.AppendSection (null, flip_section);
 
 			app.AddAction (FlipHorizontal);
@@ -80,7 +80,7 @@ namespace Pinta.Core
 			app.AddAction (FlipVertical);
 			flip_section.AppendItem (FlipVertical.CreateMenuItem ());
 
-			var rotate_section = new GLib.Menu ();
+			var rotate_section = Gio.Menu.New ();
 			menu.AppendSection (null, rotate_section);
 
 			app.AddAccelAction (RotateCW, "<Primary>H");
@@ -92,7 +92,7 @@ namespace Pinta.Core
 			app.AddAccelAction (Rotate180, "<Primary>J");
 			rotate_section.AppendItem (Rotate180.CreateMenuItem ());
 
-			var flatten_section = new GLib.Menu ();
+			var flatten_section = Gio.Menu.New ();
 			menu.AppendSection (null, flatten_section);
 
 			app.AddAccelAction (Flatten, "<Primary><Shift>F");
@@ -196,7 +196,7 @@ namespace Pinta.Core
 
 			PintaCore.Tools.Commit ();
 
-			Gdk.Rectangle rect = doc.GetSelectedBounds (true);
+			RectangleI rect = doc.GetSelectedBounds (true);
 
 			CropImageToRectangle (doc, rect, doc.Selection.SelectionPath);
 		}
@@ -217,7 +217,7 @@ namespace Pinta.Core
 		/// <summary>
 		/// Checks if all of the pixels in the column (within the bounds of the rectangle) match the specified color.
 		/// </summary>
-		private static bool IsConstantColumn (ImageSurface surf, Cairo.Color color, Gdk.Rectangle rect, int x)
+		private static bool IsConstantColumn (ImageSurface surf, Cairo.Color color, RectangleI rect, int x)
 		{
 			for (int y = rect.Top; y < rect.Bottom; ++y) {
 				if (!color.Equals (surf.GetColorBgra (x, y).ToCairoColor ()))
@@ -233,51 +233,50 @@ namespace Pinta.Core
 
 			PintaCore.Tools.Commit ();
 
-			using (var image = doc.GetFlattenedImage ()) {
-				Gdk.Rectangle rect = image.GetBounds ();
-				Cairo.Color border_color = image.GetColorBgra (0, 0).ToCairoColor ();
+			var image = doc.GetFlattenedImage ();
+			RectangleI rect = image.GetBounds ();
+			Cairo.Color border_color = image.GetColorBgra (0, 0).ToCairoColor ();
 
-				// Top down.
-				for (int y = 0; y < image.Height; ++y) {
-					if (!IsConstantRow (image, border_color, y))
-						break;
+			// Top down.
+			for (int y = 0; y < image.Height; ++y) {
+				if (!IsConstantRow (image, border_color, y))
+					break;
 
-					++rect.Y;
-					--rect.Height;
-				}
-
-				// Bottom up.
-				for (int y = rect.Bottom; y >= rect.Top; --y) {
-					if (!IsConstantRow (image, border_color, y))
-						break;
-
-					--rect.Height;
-				}
-
-				// Left side.
-				for (int x = 0; x < image.Width; ++x) {
-					if (!IsConstantColumn (image, border_color, rect, x))
-						break;
-
-					++rect.X;
-					--rect.Width;
-				}
-
-				// Right side.
-				for (int x = rect.Right; x >= rect.Left; --x) {
-					if (!IsConstantColumn (image, border_color, rect, x))
-						break;
-
-					--rect.Width;
-				}
-
-				// Ignore the current selection when auto-cropping.
-				CropImageToRectangle (doc, rect, /*selection*/ null);
+				++rect.Y;
+				--rect.Height;
 			}
+
+			// Bottom up.
+			for (int y = rect.Bottom; y >= rect.Top; --y) {
+				if (!IsConstantRow (image, border_color, y))
+					break;
+
+				--rect.Height;
+			}
+
+			// Left side.
+			for (int x = 0; x < image.Width; ++x) {
+				if (!IsConstantColumn (image, border_color, rect, x))
+					break;
+
+				++rect.X;
+				--rect.Width;
+			}
+
+			// Right side.
+			for (int x = rect.Right; x >= rect.Left; --x) {
+				if (!IsConstantColumn (image, border_color, rect, x))
+					break;
+
+				--rect.Width;
+			}
+
+			// Ignore the current selection when auto-cropping.
+			CropImageToRectangle (doc, rect, /*selection*/ null);
 		}
 		#endregion
 
-		static void CropImageToRectangle (Document doc, Gdk.Rectangle rect, Path? selection)
+		static void CropImageToRectangle (Document doc, RectangleI rect, Path? selection)
 		{
 			if (rect.Width > 0 && rect.Height > 0) {
 				ResizeHistoryItem hist = new ResizeHistoryItem (doc.ImageSize);
@@ -287,16 +286,12 @@ namespace Pinta.Core
 				hist.StartSnapshotOfImage ();
 				hist.RestoreSelection = doc.Selection.Clone ();
 
-				doc.Workspace.Canvas.Window.FreezeUpdates ();
-
 				double original_scale = doc.Workspace.Scale;
 				doc.ImageSize = rect.Size;
 				doc.Workspace.CanvasSize = rect.Size;
 				doc.Workspace.Scale = original_scale;
 
 				PintaCore.Actions.View.UpdateCanvasScale ();
-
-				doc.Workspace.Canvas.Window.ThawUpdates ();
 
 				foreach (var layer in doc.Layers.UserLayers)
 					layer.Crop (rect, selection);

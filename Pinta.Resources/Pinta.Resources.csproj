@@ -1,8 +1,5 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
   <ItemGroup>
-    <PackageReference Include="GtkSharp" Version="3.24.24.38" />
-  </ItemGroup>
-  <ItemGroup>
     <Content Include="icons/hicolor/*/*/*">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
@@ -68,134 +65,8 @@
     <EmbeddedResource Include="Resources\Cursor.PaintBucket.png">
       <LogicalName>Cursor.PaintBucket.png</LogicalName>
     </EmbeddedResource>
-    <EmbeddedResource Include="Resources\LayersWidget.Visible.png">
-      <LogicalName>LayersWidget.Visible.png</LogicalName>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Resources\LayersWidget.Hidden.png">
-      <LogicalName>LayersWidget.Hidden.png</LogicalName>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Resources\Menu.Adjustments.AutoLevel.png">
-      <LogicalName>Menu.Adjustments.AutoLevel.png</LogicalName>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Resources\Menu.Adjustments.BlackAndWhite.png">
-      <LogicalName>Menu.Adjustments.BlackAndWhite.png</LogicalName>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Resources\Menu.Adjustments.BrightnessAndContrast.png">
-      <LogicalName>Menu.Adjustments.BrightnessAndContrast.png</LogicalName>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Resources\Menu.Adjustments.Curves.png">
-      <LogicalName>Menu.Adjustments.Curves.png</LogicalName>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Resources\Menu.Adjustments.HueAndSaturation.png">
-      <LogicalName>Menu.Adjustments.HueAndSaturation.png</LogicalName>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Resources\Menu.Adjustments.InvertColors.png">
-      <LogicalName>Menu.Adjustments.InvertColors.png</LogicalName>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Resources\Menu.Adjustments.Levels.png">
-      <LogicalName>Menu.Adjustments.Levels.png</LogicalName>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Resources\Menu.Adjustments.Sepia.png">
-      <LogicalName>Menu.Adjustments.Sepia.png</LogicalName>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Resources\Menu.Adjustments.Posterize.png">
-      <LogicalName>Menu.Adjustments.Posterize.png</LogicalName>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Resources\Menu.Effects.Artistic.InkSketch.png">
-      <LogicalName>Menu.Effects.Artistic.InkSketch.png</LogicalName>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Resources\Menu.Effects.Artistic.OilPainting.png">
-      <LogicalName>Menu.Effects.Artistic.OilPainting.png</LogicalName>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Resources\Menu.Effects.Artistic.PencilSketch.png">
-      <LogicalName>Menu.Effects.Artistic.PencilSketch.png</LogicalName>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Resources\Menu.Effects.Blurs.Fragment.png">
-      <LogicalName>Menu.Effects.Blurs.Fragment.png</LogicalName>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Resources\Menu.Effects.Blurs.GaussianBlur.png">
-      <LogicalName>Menu.Effects.Blurs.GaussianBlur.png</LogicalName>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Resources\Menu.Effects.Blurs.MotionBlur.png">
-      <LogicalName>Menu.Effects.Blurs.MotionBlur.png</LogicalName>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Resources\Menu.Effects.Blurs.RadialBlur.png">
-      <LogicalName>Menu.Effects.Blurs.RadialBlur.png</LogicalName>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Resources\Menu.Effects.Blurs.SurfaceBlur.png">
-      <LogicalName>Menu.Effects.Blurs.SurfaceBlur.png</LogicalName>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Resources\Menu.Effects.Blurs.Unfocus.png">
-      <LogicalName>Menu.Effects.Blurs.Unfocus.png</LogicalName>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Resources\Menu.Effects.Blurs.ZoomBlur.png">
-      <LogicalName>Menu.Effects.Blurs.ZoomBlur.png</LogicalName>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Resources\Menu.Effects.Photo.Glow.png">
-      <LogicalName>Menu.Effects.Photo.Glow.png</LogicalName>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Resources\Menu.Effects.Photo.RedEyeRemove.png">
-      <LogicalName>Menu.Effects.Photo.RedEyeRemove.png</LogicalName>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Resources\Menu.Effects.Photo.Sharpen.png">
-      <LogicalName>Menu.Effects.Photo.Sharpen.png</LogicalName>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Resources\Menu.Effects.Photo.SoftenPortrait.png">
-      <LogicalName>Menu.Effects.Photo.SoftenPortrait.png</LogicalName>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Resources\Menu.Effects.Stylize.EdgeDetect.png">
-      <LogicalName>Menu.Effects.Stylize.EdgeDetect.png</LogicalName>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Resources\Menu.Effects.Render.Clouds.png">
-      <LogicalName>Menu.Effects.Render.Clouds.png</LogicalName>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Resources\Menu.Effects.Render.JuliaFractal.png">
-      <LogicalName>Menu.Effects.Render.JuliaFractal.png</LogicalName>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Resources\Menu.Effects.Render.MandelbrotFractal.png">
-      <LogicalName>Menu.Effects.Render.MandelbrotFractal.png</LogicalName>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Resources\Menu.Effects.Distort.Bulge.png">
-      <LogicalName>Menu.Effects.Distort.Bulge.png</LogicalName>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Resources\Menu.Effects.Noise.Median.png">
-      <LogicalName>Menu.Effects.Noise.Median.png</LogicalName>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Resources\Menu.Effects.Noise.ReduceNoise.png">
-      <LogicalName>Menu.Effects.Noise.ReduceNoise.png</LogicalName>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Resources\Menu.Effects.Noise.AddNoise.png">
-      <LogicalName>Menu.Effects.Noise.AddNoise.png</LogicalName>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Resources\Menu.Effects.Stylize.Outline.png">
-      <LogicalName>Menu.Effects.Stylize.Outline.png</LogicalName>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Resources\Menu.Effects.Distort.Dents.png">
-      <LogicalName>Menu.Effects.Distort.Dents.png</LogicalName>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Resources\Menu.Effects.Distort.PolarInversion.png">
-      <LogicalName>Menu.Effects.Distort.PolarInversion.png</LogicalName>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Resources\Menu.Effects.Distort.Twist.png">
-      <LogicalName>Menu.Effects.Distort.Twist.png</LogicalName>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Resources\Menu.Effects.Distort.Tile.png">
-      <LogicalName>Menu.Effects.Distort.Tile.png</LogicalName>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Resources\Menu.Effects.Distort.Pixelate.png">
-      <LogicalName>Menu.Effects.Distort.Pixelate.png</LogicalName>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Resources\Menu.Effects.Distort.FrostedGlass.png">
-      <LogicalName>Menu.Effects.Distort.FrostedGlass.png</LogicalName>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Resources\Menu.Effects.Stylize.Relief.png">
-      <LogicalName>Menu.Effects.Stylize.Relief.png</LogicalName>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Resources\Menu.Effects.Stylize.Emboss.png">
-      <LogicalName>Menu.Effects.Stylize.Emboss.png</LogicalName>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Resources\Menu.Effects.Default.png">
-      <LogicalName>Menu.Effects.Default.png</LogicalName>
-    </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <PackageReference Include="GirCore.Gtk-4.0" Version="0.3.0" />
   </ItemGroup>
 </Project>

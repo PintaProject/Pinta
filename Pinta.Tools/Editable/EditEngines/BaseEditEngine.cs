@@ -54,7 +54,7 @@ namespace Pinta.Tools
 
 		protected bool is_drawing = false;
 
-		protected Rectangle? last_dirty = null;
+		protected RectangleD? last_dirty = null;
 
 		protected PointD shape_origin;
 		protected PointD current_point;
@@ -70,15 +70,15 @@ namespace Pinta.Tools
 		}
 
 		// NRT - Created by HandleBuildToolBar
-		protected ToolBarWidget<Gtk.SpinButton> brush_width = null!;
-		protected ToolBarLabel brush_width_label = null!;
-		protected ToolBarLabel fill_label = null!;
+		protected Gtk.SpinButton brush_width = null!;
+		protected Gtk.Label brush_width_label = null!;
+		protected Gtk.Label fill_label = null!;
 		protected ToolBarDropDownButton fill_button = null!;
-		protected Gtk.SeparatorToolItem fill_sep = null!;
+		protected Gtk.Separator fill_sep = null!;
 
-		protected ToolBarLabel shape_type_label = null!;
+		protected Gtk.Label shape_type_label = null!;
 		protected ToolBarDropDownButton shape_type_button = null!;
-		protected Gtk.SeparatorToolItem shape_type_sep = null!;
+		protected Gtk.Separator shape_type_sep = null!;
 
 		protected DashPatternBox dash_pattern_box = new DashPatternBox ();
 		private string prev_dash_pattern = "-";
@@ -86,10 +86,10 @@ namespace Pinta.Tools
 		private bool prev_antialiasing = true;
 
 		public int BrushWidth {
-			get => brush_width?.Widget.ValueAsInt ?? BaseTool.DEFAULT_BRUSH_WIDTH;
+			get => brush_width?.GetValueAsInt () ?? BaseTool.DEFAULT_BRUSH_WIDTH;
 			set {
 				if (brush_width is not null)
-					brush_width.Widget.Value = value;
+					brush_width.Value = value;
 			}
 		}
 
@@ -177,7 +177,7 @@ namespace Pinta.Tools
 			SEngines.SelectMany (engine => engine.ControlPointHandles).Append (hover_handle);
 		private MoveHandle hover_handle = new ();
 
-		private readonly Gdk.Cursor grab_cursor = new (Gdk.Display.Default, Pinta.Resources.StandardCursors.Grab);
+		private readonly Gdk.Cursor grab_cursor = Gdk.Cursor.NewFromName (Pinta.Resources.StandardCursors.Grab, null);
 
 		protected bool changing_tension = false;
 		protected PointD last_mouse_pos = new PointD (0d, 0d);
@@ -210,7 +210,7 @@ namespace Pinta.Tools
 			ShapeEngine? activeEngine = ActiveShapeEngine;
 
 			if (activeEngine != null) {
-				activeEngine.OutlineColor = OutlineColor.Clone ();
+				activeEngine.OutlineColor = OutlineColor;
 
 				DrawActiveShape (false, false, true, false, false);
 			}
@@ -221,7 +221,7 @@ namespace Pinta.Tools
 			ShapeEngine? activeEngine = ActiveShapeEngine;
 
 			if (activeEngine != null) {
-				activeEngine.FillColor = FillColor.Clone ();
+				activeEngine.FillColor = FillColor;
 
 				DrawActiveShape (false, false, true, false, false);
 			}
@@ -250,26 +250,26 @@ namespace Pinta.Tools
 		public virtual void OnSaveSettings (ISettingsService settings, string toolPrefix)
 		{
 			if (brush_width is not null)
-				settings.PutSetting (BRUSH_WIDTH_SETTING (toolPrefix), (int) brush_width.Widget.Value);
+				settings.PutSetting (BRUSH_WIDTH_SETTING (toolPrefix), (int) brush_width.Value);
 			if (fill_button is not null)
 				settings.PutSetting (FILL_TYPE_SETTING (toolPrefix), fill_button.SelectedIndex);
 			if (shape_type_button is not null)
 				settings.PutSetting (SHAPE_TYPE_SETTING (toolPrefix), shape_type_button.SelectedIndex);
 			if (dash_pattern_box?.comboBox is not null)
-				settings.PutSetting (DASH_PATTERN_SETTING (toolPrefix), dash_pattern_box.comboBox.ComboBox.ActiveText);
+				settings.PutSetting (DASH_PATTERN_SETTING (toolPrefix), dash_pattern_box.comboBox.ComboBox.GetActiveText ()!);
 		}
 
-		public virtual void HandleBuildToolBar (Gtk.Toolbar tb, ISettingsService settings, string toolPrefix)
+		public virtual void HandleBuildToolBar (Gtk.Box tb, ISettingsService settings, string toolPrefix)
 		{
 			if (brush_width_label == null)
-				brush_width_label = new ToolBarLabel (string.Format (" {0}: ", Translations.GetString ("Brush width")));
+				brush_width_label = Gtk.Label.New (string.Format (" {0}: ", Translations.GetString ("Brush width")));
 
-			tb.AppendItem (brush_width_label);
+			tb.Append (brush_width_label);
 
 			if (brush_width == null) {
-				brush_width = new (new Gtk.SpinButton (1, 1e5, 1) { Value = settings.GetSetting (BRUSH_WIDTH_SETTING (toolPrefix), BaseTool.DEFAULT_BRUSH_WIDTH) });
+				brush_width = GtkExtensions.CreateToolBarSpinButton (1, 1e5, 1, settings.GetSetting (BRUSH_WIDTH_SETTING (toolPrefix), BaseTool.DEFAULT_BRUSH_WIDTH));
 
-				brush_width.Widget.ValueChanged += (o, e) => {
+				brush_width.OnValueChanged += (o, e) => {
 					ShapeEngine? selEngine = SelectedShapeEngine;
 
 					if (selEngine != null) {
@@ -280,17 +280,17 @@ namespace Pinta.Tools
 				};
 			}
 
-			tb.AppendItem (brush_width);
+			tb.Append (brush_width);
 
 			if (fill_sep == null)
-				fill_sep = new Gtk.SeparatorToolItem ();
+				fill_sep = GtkExtensions.CreateToolBarSeparator ();
 
-			tb.AppendItem (fill_sep);
+			tb.Append (fill_sep);
 
 			if (fill_label == null)
-				fill_label = new ToolBarLabel (string.Format (" {0}: ", Translations.GetString ("Fill Style")));
+				fill_label = Gtk.Label.New (string.Format (" {0}: ", Translations.GetString ("Fill Style")));
 
-			tb.AppendItem (fill_label);
+			tb.Append (fill_label);
 
 			if (fill_button == null) {
 				fill_button = new ToolBarDropDownButton ();
@@ -303,17 +303,17 @@ namespace Pinta.Tools
 				fill_button.SelectedItemChanged += OnFillStyleChanged;
 			}
 
-			tb.AppendItem (fill_button);
+			tb.Append (fill_button);
 
 			if (shape_type_sep == null)
-				shape_type_sep = new Gtk.SeparatorToolItem ();
+				shape_type_sep = GtkExtensions.CreateToolBarSeparator ();
 
-			tb.AppendItem (shape_type_sep);
+			tb.Append (shape_type_sep);
 
 			if (shape_type_label == null)
-				shape_type_label = new ToolBarLabel (string.Format (" {0}: ", Translations.GetString ("Shape Type")));
+				shape_type_label = Gtk.Label.New (string.Format (" {0}: ", Translations.GetString ("Shape Type")));
 
-			tb.AppendItem (shape_type_label);
+			tb.Append (shape_type_label);
 
 			if (shape_type_button == null) {
 				shape_type_button = new ToolBarDropDownButton ();
@@ -355,20 +355,20 @@ namespace Pinta.Tools
 
 			shape_type_button.SelectedItem = shape_type_button.Items[(int) owner.ShapeType];
 
-			tb.AppendItem (shape_type_button);
+			tb.Append (shape_type_button);
 
 
 			Gtk.ComboBoxText? dpbBox = dash_pattern_box.SetupToolbar (tb);
 
 			if (dpbBox != null) {
-				dpbBox.Entry.Text = settings.GetSetting (DASH_PATTERN_SETTING (toolPrefix), "-");
+				dpbBox.GetEntry ().SetText (settings.GetSetting (DASH_PATTERN_SETTING (toolPrefix), "-"));
 
 
-				dpbBox.Changed += (o, e) => {
+				dpbBox.OnChanged += (o, e) => {
 					ShapeEngine? selEngine = SelectedShapeEngine;
 
 					if (selEngine != null) {
-						selEngine.DashPattern = dpbBox.ActiveText;
+						selEngine.DashPattern = dpbBox.GetActiveText ()!;
 						StorePreviousSettings ();
 						DrawActiveShape (false, false, true, false, false);
 					}
@@ -973,7 +973,7 @@ namespace Pinta.Tools
 				//Clear any temporary drawing, because something new will be drawn.
 				activeEngine.DrawingLayer.Layer.Clear ();
 
-				Rectangle dirty;
+				RectangleD dirty;
 
 				//Determine if the drawing should be for finalizing the shape onto the image or drawing it temporarily.
 				if (finalize) {
@@ -1011,7 +1011,7 @@ namespace Pinta.Tools
 		/// <param name="engine"></param>
 		/// <param name="dirty"></param>
 		/// <param name="shiftKey"></param>
-		private Rectangle DrawFinalized (ShapeEngine engine, bool createHistoryItem, bool shiftKey)
+		private RectangleD DrawFinalized (ShapeEngine engine, bool createHistoryItem, bool shiftKey)
 		{
 			Document doc = PintaCore.Workspace.ActiveDocument;
 
@@ -1027,7 +1027,7 @@ namespace Pinta.Tools
 			}
 
 			//Draw the finalized shape.
-			Rectangle dirty = DrawShape (engine, doc.Layers.CurrentUserLayer, false, false, false);
+			RectangleD dirty = DrawShape (engine, doc.Layers.CurrentUserLayer, false, false, false);
 
 			if (createHistoryItem) {
 				//Make sure that the undo surface isn't null.
@@ -1048,7 +1048,7 @@ namespace Pinta.Tools
 		/// <param name="dirty"></param>
 		/// <param name="drawHoverSelection"></param>
 		/// <param name="shiftKey"></param>
-		private Rectangle DrawUnfinalized (ShapeEngine engine, bool drawHoverSelection, bool shiftKey, bool ctrl_key)
+		private RectangleD DrawUnfinalized (ShapeEngine engine, bool drawHoverSelection, bool shiftKey, bool ctrl_key)
 		{
 			//Draw the shape onto the temporary DrawingLayer.
 			return DrawShape (engine, engine.DrawingLayer.Layer, true, drawHoverSelection, ctrl_key);
@@ -1073,81 +1073,80 @@ namespace Pinta.Tools
 			}
 		}
 
-		private void InvalidateAfterDraw (Rectangle dirty)
+		private void InvalidateAfterDraw (RectangleD dirty)
 		{
 			Document doc = PintaCore.Workspace.ActiveDocument;
 
 			// Increase the size of the dirty rect to account for antialiasing.
 			if (owner.UseAntialiasing) {
-				dirty = dirty.Inflate (1, 1);
+				dirty = dirty.Inflated (1, 1);
 			}
 
 			//Combine, clamp, and invalidate the dirty Rectangle.
-			if (((Rectangle?) dirty).UnionRectangles (last_dirty) is Rectangle r)
+			if (((RectangleD?) dirty).UnionRectangles (last_dirty) is RectangleD r)
 				dirty = r;
 
 			dirty = dirty.Clamp ();
-			doc.Workspace.Invalidate (dirty.ToGdkRectangle ());
+			doc.Workspace.Invalidate (dirty.ToInt ());
 
 			last_dirty = dirty;
 		}
 
 
-		protected Rectangle DrawShape (ShapeEngine engine, Layer l, bool drawCP, bool drawHoverSelection, bool ctrl_key)
+		protected RectangleD DrawShape (ShapeEngine engine, Layer l, bool drawCP, bool drawHoverSelection, bool ctrl_key)
 		{
 			Document doc = PintaCore.Workspace.ActiveDocument;
 
-			Rectangle? dirty = null;
+			RectangleD? dirty = null;
 
 			ShapeEngine? activeEngine = ActiveShapeEngine;
 
 			if (activeEngine != null) {
-				using (Context g = new Context (l.Surface)) {
-					g.AppendPath (doc.Selection.SelectionPath);
-					g.FillRule = FillRule.EvenOdd;
-					g.Clip ();
+				var g = new Context (l.Surface);
+				g.AppendPath (doc.Selection.SelectionPath);
+				g.FillRule = FillRule.EvenOdd;
+				g.Clip ();
 
-					g.Antialias = activeEngine.AntiAliasing ? Antialias.Subpixel : Antialias.None;
+				g.Antialias = activeEngine.AntiAliasing ? Antialias.Subpixel : Antialias.None;
 
-					g.SetDashFromString (activeEngine.DashPattern, activeEngine.BrushWidth, LineCap.Square);
+				g.SetDashFromString (activeEngine.DashPattern, activeEngine.BrushWidth, LineCap.Square);
 
-					g.LineWidth = activeEngine.BrushWidth;
+				g.LineWidth = activeEngine.BrushWidth;
 
-					//Draw the shape.
-					if (activeEngine.ControlPoints.Count > 0) {
-						//Generate the points that make up the shape.
-						activeEngine.GeneratePoints (activeEngine.BrushWidth);
+				//Draw the shape.
+				if (activeEngine.ControlPoints.Count > 0) {
+					//Generate the points that make up the shape.
+					activeEngine.GeneratePoints (activeEngine.BrushWidth);
 
-						PointD[] points = activeEngine.GetActualPoints ();
+					PointD[] points = activeEngine.GetActualPoints ();
 
-						//Expand the invalidation rectangle as necessary.
+					//Expand the invalidation rectangle as necessary.
 
-						if (FillShape) {
-							Color fill_color = StrokeShape ? activeEngine.FillColor : activeEngine.OutlineColor;
-							dirty = dirty.UnionRectangles (g.FillPolygonal (points, fill_color));
-						}
-
-						if (StrokeShape) {
-							dirty = dirty.UnionRectangles (g.DrawPolygonal (points, activeEngine.OutlineColor));
-						}
+					if (FillShape) {
+						Color fill_color = StrokeShape ? activeEngine.FillColor : activeEngine.OutlineColor;
+						dirty = dirty.UnionRectangles (g.FillPolygonal (points, fill_color));
 					}
 
-					g.SetDash (new double[] { }, 0.0);
-
-					//Draw anything extra (that not every shape has), like arrows.
-					DrawExtras (ref dirty, g, engine);
-
-					DrawControlPoints (g, activeEngine, drawCP, drawHoverSelection, ctrl_key);
+					if (StrokeShape) {
+						dirty = dirty.UnionRectangles (g.DrawPolygonal (points, activeEngine.OutlineColor));
+					}
 				}
+
+				g.SetDash (new double[] { }, 0.0);
+
+				//Draw anything extra (that not every shape has), like arrows.
+				DrawExtras (ref dirty, g, engine);
+
+				DrawControlPoints (g, activeEngine, drawCP, drawHoverSelection, ctrl_key);
 			}
 
 
-			return dirty ?? new Rectangle (0d, 0d, 0d, 0d);
+			return dirty ?? new RectangleD (0d, 0d, 0d, 0d);
 		}
 
 		private void DrawControlPoints (Context g, ShapeEngine shape, bool draw_controls, bool draw_selection, bool ctrl_key)
 		{
-			Gdk.Rectangle dirty = MoveHandle.UnionInvalidateRects (shape.ControlPointHandles);
+			RectangleI dirty = MoveHandle.UnionInvalidateRects (shape.ControlPointHandles);
 			shape.ControlPointHandles.Clear ();
 
 			if (draw_controls) {
@@ -1177,7 +1176,7 @@ namespace Pinta.Tools
 		/// </summary>
 		protected void UpdateHoverHandle (bool draw_selection, bool ctrl_key)
 		{
-			Gdk.Rectangle dirty = Gdk.Rectangle.Zero;
+			var dirty = RectangleI.Zero;
 			if (hover_handle.Active)
 				dirty = hover_handle.InvalidateRect;
 
@@ -1268,7 +1267,7 @@ namespace Pinta.Tools
 
 			int previousSelectedPointIndex = SelectedPointIndex;
 
-			Rectangle? dirty = null;
+			RectangleD? dirty = null;
 
 			//Finalize all of the shapes.
 			for (SelectedShapeIndex = 0; SelectedShapeIndex < SEngines.Count; ++SelectedShapeIndex) {
@@ -1288,7 +1287,7 @@ namespace Pinta.Tools
 					SEngines[SelectedShapeIndex].DrawingLayer.Layer.Clear ();
 
 					//Draw the current shape with the corresponding tool's EditEngine.
-					dirty = dirty.UnionRectangles ((Rectangle?) correspondingEngine.DrawFinalized (
+					dirty = dirty.UnionRectangles ((RectangleD?) correspondingEngine.DrawFinalized (
 						SEngines[SelectedShapeIndex], false, false));
 				}
 			}
@@ -1479,10 +1478,10 @@ namespace Pinta.Tools
 				owner.UseAntialiasing = engine.AntiAliasing;
 
 				//Update the DashPatternBox to represent the current shape's DashPattern.
-				dash_pattern_box.comboBox!.ComboBox.Entry.Text = engine.DashPattern; // NRT - Code assumes this is not-null
+				dash_pattern_box.comboBox!.ComboBox.GetEntry ().SetText (engine.DashPattern); // NRT - Code assumes this is not-null
 
-				OutlineColor = engine.OutlineColor.Clone ();
-				FillColor = engine.FillColor.Clone ();
+				OutlineColor = engine.OutlineColor;
+				FillColor = engine.FillColor;
 
 				BrushWidth = engine.BrushWidth;
 
@@ -1496,7 +1495,7 @@ namespace Pinta.Tools
 		protected virtual void RecallPreviousSettings ()
 		{
 			if (dash_pattern_box.comboBox != null) {
-				dash_pattern_box.comboBox.ComboBox.Entry.Text = prev_dash_pattern;
+				dash_pattern_box.comboBox.ComboBox.GetEntry ().SetText (prev_dash_pattern);
 			}
 
 			owner.UseAntialiasing = prev_antialiasing;
@@ -1509,7 +1508,7 @@ namespace Pinta.Tools
 		protected virtual void StorePreviousSettings ()
 		{
 			if (dash_pattern_box.comboBox != null) {
-				prev_dash_pattern = dash_pattern_box.comboBox.ComboBox.Entry.Text;
+				prev_dash_pattern = dash_pattern_box.comboBox.ComboBox.GetEntry ().GetText ();
 			}
 
 			prev_antialiasing = owner.UseAntialiasing;
@@ -1530,7 +1529,7 @@ namespace Pinta.Tools
 			controlPoints.ElementAt (SelectedPointIndex).Position = new PointD (current_point.X, current_point.Y);
 		}
 
-		protected virtual void DrawExtras (ref Rectangle? dirty, Context g, ShapeEngine engine)
+		protected virtual void DrawExtras (ref RectangleD? dirty, Context g, ShapeEngine engine)
 		{
 
 		}

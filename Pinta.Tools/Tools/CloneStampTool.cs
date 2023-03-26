@@ -33,9 +33,9 @@ namespace Pinta.Tools
 	public class CloneStampTool : BaseBrushTool
 	{
 		private bool painting;
-		private Cairo.Point origin = new Cairo.Point (int.MinValue, int.MinValue);
-		private Cairo.Point offset = new Cairo.Point (int.MinValue, int.MinValue);
-		private Cairo.Point last_point = new Cairo.Point (int.MinValue, int.MinValue);
+		private PointI? origin = null;
+		private PointI? offset = null;
+		private PointI? last_point = null;
 
 		public CloneStampTool (IServiceManager services) : base (services)
 		{
@@ -55,7 +55,7 @@ namespace Pinta.Tools
 				var icon = GdkExtensions.CreateIconWithShape ("Cursor.CloneStamp.png",
 								CursorShape.Ellipse, BrushWidth, 16, 26,
 								out var iconOffsetX, out var iconOffsetY);
-				return new Cursor (Display.Default, icon, iconOffsetX, iconOffsetY);
+				return Gdk.Cursor.NewFromTexture (icon, iconOffsetX, iconOffsetY, null);
 			}
 		}
 
@@ -67,13 +67,13 @@ namespace Pinta.Tools
 
 			// Ctrl click is set origin, regular click is begin drawing
 			if (!e.IsControlPressed) {
-				if (origin.IsNotSet ())
+				if (!origin.HasValue)
 					return;
 
 				painting = true;
 
-				if (offset.IsNotSet ())
-					offset = new Cairo.Point (e.Point.X - origin.X, e.Point.Y - origin.Y);
+				if (!offset.HasValue)
+					offset = new (e.Point.X - origin.Value.X, e.Point.Y - origin.Value.Y);
 
 				document.Layers.ToolLayer.Clear ();
 				document.Layers.ToolLayer.Hidden = false;
@@ -87,31 +87,30 @@ namespace Pinta.Tools
 
 		protected override void OnMouseMove (Document document, ToolMouseEventArgs e)
 		{
-			if (!painting || offset.IsNotSet ())
+			if (!painting || !offset.HasValue)
 				return;
 
 			var x = e.Point.X;
 			var y = e.Point.Y;
 
-			if (last_point.IsNotSet ()) {
+			if (!last_point.HasValue) {
 				last_point = e.Point;
 				return;
 			}
 
-			using (var g = document.CreateClippedToolContext ()) {
-				g.Antialias = UseAntialiasing ? Cairo.Antialias.Subpixel : Cairo.Antialias.None;
+			var g = document.CreateClippedToolContext ();
+			g.Antialias = UseAntialiasing ? Cairo.Antialias.Subpixel : Cairo.Antialias.None;
 
-				g.MoveTo (last_point.X, last_point.Y);
-				g.LineTo (x, y);
+			g.MoveTo (last_point.Value.X, last_point.Value.Y);
+			g.LineTo (x, y);
 
-				g.SetSource (document.Layers.CurrentUserLayer.Surface, offset.X, offset.Y);
-				g.LineWidth = BrushWidth;
-				g.LineCap = Cairo.LineCap.Round;
+			g.SetSourceSurface (document.Layers.CurrentUserLayer.Surface, offset.Value.X, offset.Value.Y);
+			g.LineWidth = BrushWidth;
+			g.LineCap = Cairo.LineCap.Round;
 
-				g.Stroke ();
-			}
+			g.Stroke ();
 
-			var dirty_rect = CairoExtensions.GetRectangleFromPoints (last_point, e.Point, BrushWidth + 2);
+			var dirty_rect = CairoExtensions.GetRectangleFromPoints (last_point.Value, e.Point, BrushWidth + 2);
 
 			last_point = e.Point;
 			surface_modified = true;
@@ -122,15 +121,14 @@ namespace Pinta.Tools
 		{
 			painting = false;
 
-			using (var g = new Cairo.Context (document.Layers.CurrentUserLayer.Surface)) {
-				g.SetSource (document.Layers.ToolLayer.Surface);
-				g.Paint ();
-			}
+			var g = new Cairo.Context (document.Layers.CurrentUserLayer.Surface);
+			g.SetSourceSurface (document.Layers.ToolLayer.Surface, 0, 0);
+			g.Paint ();
 
 			base.OnMouseUp (document, e);
 
-			offset = new Cairo.Point (int.MinValue, int.MinValue);
-			last_point = new Cairo.Point (int.MinValue, int.MinValue);
+			offset = null;
+			last_point = null;
 
 			document.Layers.ToolLayer.Clear ();
 			document.Layers.ToolLayer.Hidden = true;
@@ -141,9 +139,7 @@ namespace Pinta.Tools
 		{
 			// Note that this WON'T work if user presses control key and THEN selects the tool!
 			if (e.Key.IsControlKey ()) {
-				var icon = Resources.GetIcon ("Cursor.CloneStampSetSource.png");
-				var setSourceCursor = new Cursor (Display.Default, icon, 16, 26);
-				SetCursor (setSourceCursor);
+				SetCursor (Gdk.Cursor.NewFromTexture (Resources.GetIcon ("Cursor.CloneStampSetSource.png"), 16, 26, null));
 			}
 
 			return false;
@@ -159,7 +155,7 @@ namespace Pinta.Tools
 
 		protected override void OnDeactivated (Document? document, BaseTool? newTool)
 		{
-			origin = new Cairo.Point (int.MinValue, int.MinValue);
+			origin = null;
 		}
 	}
 }

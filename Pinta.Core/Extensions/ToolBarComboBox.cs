@@ -29,12 +29,16 @@ using Gtk;
 
 namespace Pinta.Core
 {
-	public class ToolBarComboBox : ToolItem
+	public class ToolBarComboBox : Box
 	{
 		public ComboBoxText ComboBox { get; private set; }
 
 		public ToolBarComboBox (int width, int activeIndex, bool allowEntry, params string[] contents)
 		{
+			SetOrientation (Orientation.Horizontal);
+			Spacing = 0;
+			Hexpand = false;
+
 			if (allowEntry)
 				ComboBox = ComboBoxText.NewWithEntry ();
 			else
@@ -44,7 +48,6 @@ namespace Pinta.Core
 			foreach (string entry in contents)
 				ComboBox.AppendText (entry);
 
-			ComboBox.AddEvents ((int) Gdk.EventMask.ButtonPressMask);
 			ComboBox.WidthRequest = width;
 
 			if (activeIndex >= 0)
@@ -52,8 +55,7 @@ namespace Pinta.Core
 
 			ComboBox.Show ();
 
-			Add (ComboBox);
-			Show ();
+			Append (ComboBox);
 		}
 	}
 }

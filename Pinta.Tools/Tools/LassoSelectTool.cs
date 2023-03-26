@@ -54,10 +54,10 @@ namespace Pinta.Tools
 		public override string Icon => Pinta.Resources.Icons.ToolSelectLasso;
 		public override string StatusBarText => Translations.GetString ("Click and drag to draw the outline for a selection area.");
 		public override Gdk.Key ShortcutKey => Gdk.Key.S;
-		public override Gdk.Cursor DefaultCursor => new Gdk.Cursor (Gdk.Display.Default, Resources.GetIcon ("Cursor.LassoSelect.png"), 9, 18);
+		public override Gdk.Cursor DefaultCursor => Gdk.Cursor.NewFromTexture (Resources.GetIcon ("Cursor.LassoSelect.png"), 9, 18, null);
 		public override int Priority => 17;
 
-		protected override void OnBuildToolBar (Toolbar tb)
+		protected override void OnBuildToolBar (Box tb)
 		{
 			base.OnBuildToolBar (tb);
 
@@ -76,7 +76,6 @@ namespace Pinta.Tools
 			path = null;
 			is_drawing = true;
 
-			document.PreviousSelection.Dispose ();
 			document.PreviousSelection = document.Selection.Clone ();
 		}
 
@@ -92,29 +91,27 @@ namespace Pinta.Tools
 
 			var surf = document.Layers.SelectionLayer.Surface;
 
-			using (var g = new Context (surf)) {
-				g.Antialias = Antialias.Subpixel;
+			var g = new Context (surf);
+			g.Antialias = Antialias.Subpixel;
 
-				if (path != null) {
-					g.AppendPath (path);
-					path.Dispose ();
-				} else {
-					g.MoveTo (x, y);
-				}
-
-				g.LineTo (x, y);
-				lasso_polygon.Add (new IntPoint ((long) x, (long) y));
-
-				path = g.CopyPath ();
-
-				g.FillRule = FillRule.EvenOdd;
-				g.ClosePath ();
+			if (path != null) {
+				g.AppendPath (path);
+			} else {
+				g.MoveTo (x, y);
 			}
+
+			g.LineTo (x, y);
+			lasso_polygon.Add (new IntPoint ((long) x, (long) y));
+
+			path = g.CopyPath ();
+
+			g.FillRule = FillRule.EvenOdd;
+			g.ClosePath ();
 
 			document.Selection.SelectionPolygons.Clear ();
 			document.Selection.SelectionPolygons.Add (lasso_polygon.ToList ());
 
-			SelectionModeHandler.PerformSelectionMode (combine_mode, document.Selection.SelectionPolygons);
+			SelectionModeHandler.PerformSelectionMode (document, combine_mode, document.Selection.SelectionPolygons);
 
 			document.Workspace.Invalidate ();
 		}
@@ -123,20 +120,18 @@ namespace Pinta.Tools
 		{
 			var surf = document.Layers.SelectionLayer.Surface;
 
-			using (var g = new Context (surf)) {
-				if (path != null) {
-					g.AppendPath (path);
-					path.Dispose ();
-					path = null;
-				}
-
-				g.FillRule = FillRule.EvenOdd;
-				g.ClosePath ();
+			var g = new Context (surf);
+			if (path != null) {
+				g.AppendPath (path);
+				path = null;
 			}
+
+			g.FillRule = FillRule.EvenOdd;
+			g.ClosePath ();
 
 			document.Selection.SelectionPolygons.Clear ();
 			document.Selection.SelectionPolygons.Add (lasso_polygon.ToList ());
-			SelectionModeHandler.PerformSelectionMode (combine_mode, document.Selection.SelectionPolygons);
+			SelectionModeHandler.PerformSelectionMode (document, combine_mode, document.Selection.SelectionPolygons);
 			document.Workspace.Invalidate ();
 
 			if (hist != null) {

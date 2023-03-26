@@ -42,7 +42,7 @@ namespace Pinta.Tools
 		public override string Name => Translations.GetString ("Pan");
 		public override string Icon => Pinta.Resources.Icons.ToolPan;
 		public override string StatusBarText => Translations.GetString ("Click and drag to navigate image.");
-		public override Gdk.Cursor DefaultCursor => new Gdk.Cursor (Gdk.Display.Default, Resources.GetIcon ("Cursor.Pan.png"), 8, 8);
+		public override Gdk.Cursor DefaultCursor => Gdk.Cursor.NewFromTexture (Resources.GetIcon ("Cursor.Pan.png"), 8, 8, null);
 		public override Gdk.Key ShortcutKey => Gdk.Key.H;
 		public override int Priority => 11;
 
@@ -56,14 +56,14 @@ namespace Pinta.Tools
 			if (!document.Workspace.CanvasFitsInWindow)
 				active = true;
 
-			last_point = new PointD (e.Root.X, e.Root.Y);
+			last_point = new PointD (e.RootPoint.X, e.RootPoint.Y);
 		}
 
 		protected override void OnMouseMove (Document document, ToolMouseEventArgs e)
 		{
 			if (active) {
-				document.Workspace.ScrollCanvas ((int) (last_point.X - e.Root.X), (int) (last_point.Y - e.Root.Y));
-				last_point = new PointD (e.Root.X, e.Root.Y);
+				document.Workspace.ScrollCanvas ((int) (last_point.X - e.RootPoint.X), (int) (last_point.Y - e.RootPoint.Y));
+				last_point = new PointD (e.RootPoint.X, e.RootPoint.Y);
 			}
 		}
 

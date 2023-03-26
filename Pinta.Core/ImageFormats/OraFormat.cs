@@ -29,8 +29,6 @@ using System.Collections.Generic;
 using System.IO;
 using System.Xml;
 using Cairo;
-using Gdk;
-using Gtk;
 using ICSharpCode.SharpZipLib.Zip;
 
 namespace Pinta.Core
@@ -41,9 +39,9 @@ namespace Pinta.Core
 
 		#region IImageImporter implementation
 
-		public void Import (GLib.IFile file, Gtk.Window parent)
+		public void Import (Gio.File file, Gtk.Window parent)
 		{
-			using var stream = new GLib.GioStream (file.Read (cancellable: null));
+			using var stream = new GioStream (file.Read (cancellable: null));
 			ZipFile zipfile = new ZipFile (stream);
 			XmlDocument stackXml = new XmlDocument ();
 			stackXml.Load (zipfile.GetInputStream (zipfile.GetEntry ("stack.xml")));
@@ -104,42 +102,22 @@ namespace Pinta.Core
 					layer.Opacity = double.Parse (GetAttribute (layerElement, "opacity", "1"), GetFormat ());
 					layer.BlendMode = StandardToBlendMode (GetAttribute (layerElement, "composite-op", "svg:src-over"));
 
-					using (var fs = new FileStream (tmp_file, FileMode.Open))
-					using (Pixbuf pb = new Pixbuf (fs)) {
-						using (Context g = new Context (layer.Surface)) {
-							Gdk.CairoHelper.SetSourcePixbuf (g, pb, x, y);
-							g.Paint ();
-						}
-					}
+					var pb = GdkPixbuf.Pixbuf.NewFromFile (tmp_file);
+					var g = new Context (layer.Surface);
+					g.DrawPixbuf (pb, x, y);
 
 					try {
 						File.Delete (tmp_file);
 					} catch { }
 				} catch {
-					using (var md = new MessageDialog (parent, DialogFlags.Modal, MessageType.Error, ButtonsType.Ok, "Could not import layer \"{0}\" from {0}", name, zipfile)) {
-						md.Title = "Error";
-
-						md.Run ();
-					}
+					// Translators: {0} is the name of a layer, and {1} is the path to a .ora file.
+					string details = Translations.GetString ("Could not import layer \"{0}\" from {1}", name, zipfile);
+					PintaCore.Chrome.ShowMessageDialog (PintaCore.Chrome.MainWindow, Translations.GetString ("Error"), details);
 				}
 			}
 
 			zipfile.Close ();
 		}
-
-		public Pixbuf LoadThumbnail (string filename, int maxWidth, int maxHeight, Gtk.Window parent)
-		{
-			ZipFile file = new ZipFile (filename);
-			ZipEntry ze = file.GetEntry ("Thumbnails/thumbnail.png");
-
-			// The ORA specification requires that all files will have a
-			// thumbnail that is less than 256x256 pixels, so don't bother
-			// with scaling the preview.
-			Pixbuf p = new Pixbuf (file.GetInputStream (ze));
-			file.Close ();
-			return p;
-		}
-
 		#endregion
 
 		private static IFormatProvider GetFormat ()
@@ -198,9 +176,9 @@ namespace Pinta.Core
 			return ms.ToArray ();
 		}
 
-		public void Export (Document document, GLib.IFile file, Gtk.Window parent)
+		public void Export (Document document, Gio.File file, Gtk.Window parent)
 		{
-			using var file_stream = new GLib.GioStream (file.Replace ());
+			using var file_stream = new GioStream (file.Replace ());
 
 			using var stream = new ZipOutputStream (file_stream) {
 				UseZip64 = UseZip64.Off // For backwards compatibility with older versions.
@@ -213,7 +191,7 @@ namespace Pinta.Core
 			stream.Write (databytes, 0, databytes.Length);
 
 			for (int i = 0; i < document.Layers.UserLayers.Count; i++) {
-				using Pixbuf pb = document.Layers.UserLayers[i].Surface.ToPixbuf ();
+				var pb = document.Layers.UserLayers[i].Surface.ToPixbuf ();
 				byte[] buf = pb.SaveToBuffer ("png");
 
 				stream.PutNextEntry (new ZipEntry ("data/layer" + i.ToString () + ".png"));
@@ -224,8 +202,7 @@ namespace Pinta.Core
 			databytes = GetLayerXmlData (document.Layers.UserLayers);
 			stream.Write (databytes, 0, databytes.Length);
 
-			using ImageSurface flattened = document.GetFlattenedImage ();
-			using Pixbuf flattenedPb = flattened.ToPixbuf ();
+			var flattenedPb = document.GetFlattenedImage ().ToPixbuf ();
 
 			// Add merged image.
 			stream.PutNextEntry (new ZipEntry ("mergedimage.png"));
@@ -234,7 +211,7 @@ namespace Pinta.Core
 
 			// Add thumbnail.
 			Size newSize = GetThumbDimensions (flattenedPb.Width, flattenedPb.Height);
-			using Pixbuf thumb = flattenedPb.ScaleSimple (newSize.Width, newSize.Height, InterpType.Bilinear);
+			var thumb = flattenedPb.ScaleSimple (newSize.Width, newSize.Height, GdkPixbuf.InterpType.Bilinear)!;
 			stream.PutNextEntry (new ZipEntry ("Thumbnails/thumbnail.png"));
 			databytes = thumb.SaveToBuffer ("png");
 			stream.Write (databytes, 0, databytes.Length);

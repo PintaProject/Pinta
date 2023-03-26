@@ -1,4 +1,5 @@
 using Cairo;
+using Pinta.Core;
 
 namespace PintaBenchmarks;
 
@@ -6,10 +7,23 @@ internal class TestData
 {
 	public static ImageSurface Get2000PixelImage ()
 	{
-		var assembly_path = System.IO.Path.GetDirectoryName (typeof (TestData).Assembly.Location);
-		var file = System.IO.Path.Combine (assembly_path!, "Assets", "2000px-test.png");
-		var surf = new ImageSurface (file);
+		Gio.Module.Initialize ();
+		GdkPixbuf.Module.Initialize ();
+		Cairo.Module.Initialize ();
+		Gdk.Module.Initialize ();
 
-		return surf;
+		var assembly_path = System.IO.Path.GetDirectoryName (typeof (TestData).Assembly.Location);
+		var file = Gio.FileHelper.NewForPath (System.IO.Path.Combine (assembly_path!, "Assets", "2000px-test.png"));
+
+		using var fs = file.Read (null);
+		try {
+			var bg = GdkPixbufExtensions.NewPixbufFromStream (fs, cancellable: null);
+			var surf = CairoExtensions.CreateImageSurface (Format.Argb32, bg.Width, bg.Height);
+			var context = new Cairo.Context (surf);
+			context.DrawPixbuf (bg, 0, 0);
+			return surf;
+		} finally {
+			fs.Close (null);
+		}
 	}
 }

@@ -33,98 +33,97 @@ namespace Pinta.Core
 {
 	public class ActionManager
 	{
-		public AccelGroup AccelGroup { get; private set; }
-
-		public AppActions App { get; private set; }
-		public FileActions File { get; private set; }
-		public EditActions Edit { get; private set; }
-		public ViewActions View { get; private set; }
-		public ImageActions Image { get; private set; }
-		public LayerActions Layers { get; private set; }
-		public AdjustmentsActions Adjustments { get; private set; }
-		public EffectsActions Effects { get; private set; }
-		public AddinActions Addins { get; private set; }
-		public WindowActions Window { get; private set; }
-		public HelpActions Help { get; private set; }
+		public AppActions App { get; private set; } = new ();
+		public FileActions File { get; private set; } = new ();
+		public EditActions Edit { get; private set; } = new ();
+		public ViewActions View { get; private set; } = new ();
+		public ImageActions Image { get; private set; } = new ();
+		public LayerActions Layers { get; private set; } = new ();
+		public AdjustmentsActions Adjustments { get; private set; } = new ();
+		public EffectsActions Effects { get; private set; } = new ();
+		public WindowActions Window { get; private set; } = new ();
+		public HelpActions Help { get; private set; } = new ();
+		public AddinActions Addins { get; private set; } = new ();
 
 		public ActionManager ()
 		{
-			AccelGroup = new AccelGroup ();
-
-			App = new AppActions ();
-			File = new FileActions ();
-			Edit = new EditActions ();
-			View = new ViewActions ();
-			Image = new ImageActions ();
-			Layers = new LayerActions ();
-			Adjustments = new AdjustmentsActions ();
-			Effects = new EffectsActions ();
-			Addins = new AddinActions ();
-			Window = new WindowActions ();
-			Help = new HelpActions ();
 		}
 
-		public void CreateToolBar (Gtk.Toolbar toolbar)
+		public void CreateToolBar (Gtk.Box toolbar)
 		{
-			toolbar.AppendItem (File.New.CreateToolBarItem ());
-			toolbar.AppendItem (File.Open.CreateToolBarItem ());
-			toolbar.AppendItem (File.Save.CreateToolBarItem ());
+			toolbar.Append (File.New.CreateToolBarItem ());
+			toolbar.Append (File.Open.CreateToolBarItem ());
+			toolbar.Append (File.Save.CreateToolBarItem ());
 			// Printing is disabled for now until it is fully functional.
 #if false
 			toolbar.AppendItem (File.Print.CreateToolBarItem ());
 #endif
-			toolbar.AppendItem (new SeparatorToolItem ());
+			toolbar.Append (GtkExtensions.CreateToolBarSeparator ());
 
 			// Cut/Copy/Paste comes before Undo/Redo on Windows
 			if (PintaCore.System.OperatingSystem == OS.Windows) {
-				toolbar.AppendItem (Edit.Cut.CreateToolBarItem ());
-				toolbar.AppendItem (Edit.Copy.CreateToolBarItem ());
-				toolbar.AppendItem (Edit.Paste.CreateToolBarItem ());
-				toolbar.AppendItem (new SeparatorToolItem ());
-				toolbar.AppendItem (Edit.Undo.CreateToolBarItem ());
-				toolbar.AppendItem (Edit.Redo.CreateToolBarItem ());
+				toolbar.Append (Edit.Cut.CreateToolBarItem ());
+				toolbar.Append (Edit.Copy.CreateToolBarItem ());
+				toolbar.Append (Edit.Paste.CreateToolBarItem ());
+				toolbar.Append (GtkExtensions.CreateToolBarSeparator ());
+				toolbar.Append (Edit.Undo.CreateToolBarItem ());
+				toolbar.Append (Edit.Redo.CreateToolBarItem ());
 			} else {
-				toolbar.AppendItem (Edit.Undo.CreateToolBarItem ());
-				toolbar.AppendItem (Edit.Redo.CreateToolBarItem ());
-				toolbar.AppendItem (new SeparatorToolItem ());
-				toolbar.AppendItem (Edit.Cut.CreateToolBarItem ());
-				toolbar.AppendItem (Edit.Copy.CreateToolBarItem ());
-				toolbar.AppendItem (Edit.Paste.CreateToolBarItem ());
+				toolbar.Append (Edit.Undo.CreateToolBarItem ());
+				toolbar.Append (Edit.Redo.CreateToolBarItem ());
+				toolbar.Append (GtkExtensions.CreateToolBarSeparator ());
+				toolbar.Append (Edit.Cut.CreateToolBarItem ());
+				toolbar.Append (Edit.Copy.CreateToolBarItem ());
+				toolbar.Append (Edit.Paste.CreateToolBarItem ());
 			}
 
-			toolbar.AppendItem (new SeparatorToolItem ());
-			toolbar.AppendItem (Image.CropToSelection.CreateToolBarItem ());
-			toolbar.AppendItem (Edit.Deselect.CreateToolBarItem ());
+			toolbar.Append (GtkExtensions.CreateToolBarSeparator ());
+			toolbar.Append (Image.CropToSelection.CreateToolBarItem ());
+			toolbar.Append (Edit.Deselect.CreateToolBarItem ());
 		}
 
-		public void CreateStatusBar (Statusbar statusbar)
+		public void CreateHeaderToolBar (Adw.HeaderBar header)
 		{
-			// Document zoom widget
-			View.CreateStatusBar (statusbar);
+			header.PackStart (File.New.CreateToolBarItem ());
+			header.PackStart (File.Open.CreateToolBarItem ());
+			header.PackStart (File.Save.CreateToolBarItem ());
 
-			// Selection size widget
-			var SelectionSize = new ToolBarLabel ("  0, 0");
+			header.PackStart (GtkExtensions.CreateToolBarSeparator ());
+			header.PackStart (Edit.Undo.CreateToolBarItem ());
+			header.PackStart (Edit.Redo.CreateToolBarItem ());
 
-			statusbar.AppendItem (SelectionSize);
-			statusbar.AppendItem (new ToolBarImage (Resources.Icons.ToolSelectRectangle));
+			header.PackStart (GtkExtensions.CreateToolBarSeparator ());
+			header.PackStart (Edit.Cut.CreateToolBarItem ());
+			header.PackStart (Edit.Copy.CreateToolBarItem ());
+			header.PackStart (Edit.Paste.CreateToolBarItem ());
+		}
 
-			PintaCore.Workspace.SelectionChanged += delegate {
-				var bounds = PintaCore.Workspace.HasOpenDocuments ? PintaCore.Workspace.ActiveDocument.Selection.GetBounds () : new Cairo.Rectangle ();
-				SelectionSize.Text = string.Format ("  {0}, {1}", bounds.Width, bounds.Height);
-			};
-
-			statusbar.AppendItem (new SeparatorToolItem { Margin = 6 }, 6);
-
+		public void CreateStatusBar (Box statusbar)
+		{
 			// Cursor position widget
-			var cursor = new ToolBarLabel ("  0, 0");
-
-			statusbar.AppendItem (cursor);
-			statusbar.AppendItem (new ToolBarImage (Resources.Icons.CursorPosition));
+			statusbar.Append (Gtk.Image.NewFromIconName (Resources.Icons.CursorPosition));
+			var cursor = Label.New ("  0, 0");
+			statusbar.Append (cursor);
 
 			PintaCore.Chrome.LastCanvasCursorPointChanged += delegate {
 				var pt = PintaCore.Chrome.LastCanvasCursorPoint;
-				cursor.Text = string.Format ("  {0}, {1}", pt.X, pt.Y);
+				cursor.SetText (string.Format ("  {0}, {1}", pt.X, pt.Y));
 			};
+
+			statusbar.Append (GtkExtensions.CreateToolBarSeparator ());
+
+			// Selection size widget
+			statusbar.Append (Gtk.Image.NewFromIconName (Resources.Icons.ToolSelectRectangle));
+			var selection_size = Label.New ("  0, 0");
+			statusbar.Append (selection_size);
+
+			PintaCore.Workspace.SelectionChanged += delegate {
+				var bounds = PintaCore.Workspace.HasOpenDocuments ? PintaCore.Workspace.ActiveDocument.Selection.GetBounds () : new RectangleD ();
+				selection_size.SetText (string.Format ("  {0}, {1}", bounds.Width, bounds.Height));
+			};
+
+			// Document zoom widget
+			View.CreateStatusBar (statusbar);
 		}
 
 		public void RegisterHandlers ()

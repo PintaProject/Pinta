@@ -25,6 +25,7 @@
 // THE SOFTWARE.
 
 using System;
+using System.Threading.Tasks;
 using Pinta.Core;
 
 namespace Pinta.Actions
@@ -43,7 +44,7 @@ namespace Pinta.Actions
 		}
 		#endregion
 
-		private void Activated (object sender, EventArgs e)
+		private async void Activated (object sender, EventArgs e)
 		{
 			int imgWidth = 0;
 			int imgHeight = 0;
@@ -52,7 +53,8 @@ namespace Pinta.Actions
 
 			// Try to get the dimensions of an image on the clipboard
 			// for the initial width and height values on the NewImageDialog
-			if (!GetClipboardImageSize (out imgWidth, out imgHeight)) {
+			Gdk.Texture? cb_texture = await GdkExtensions.GetDefaultClipboard ().ReadTextureAsync ();
+			if (cb_texture is null) {
 				// An image was not on the clipboard,
 				// so use saved dimensions from settings
 				imgWidth = PintaCore.Settings.GetSetting<int> ("new-image-width", 800);
@@ -60,47 +62,27 @@ namespace Pinta.Actions
 				bg_type = PintaCore.Settings.GetSetting<NewImageDialog.BackgroundType> (
 					"new-image-bg", NewImageDialog.BackgroundType.White);
 				using_clipboard = false;
+			} else {
+				imgWidth = cb_texture.Width;
+				imgHeight = cb_texture.Height;
 			}
 
-			using var dialog = new NewImageDialog (imgWidth, imgHeight, bg_type, using_clipboard);
+			var dialog = new NewImageDialog (imgWidth, imgHeight, bg_type, using_clipboard);
 
-			int response = dialog.Run ();
+			dialog.OnResponse += (_, e) => {
+				int response = e.ResponseId;
+				if (response == (int) Gtk.ResponseType.Ok) {
+					PintaCore.Workspace.NewDocument (new Size (dialog.NewImageWidth, dialog.NewImageHeight), dialog.NewImageBackground);
 
-			if (response == (int) Gtk.ResponseType.Ok) {
-				PintaCore.Workspace.NewDocument (new Gdk.Size (dialog.NewImageWidth, dialog.NewImageHeight), dialog.NewImageBackground);
-
-				PintaCore.Settings.PutSetting ("new-image-width", dialog.NewImageWidth);
-				PintaCore.Settings.PutSetting ("new-image-height", dialog.NewImageHeight);
-				PintaCore.Settings.PutSetting ("new-image-bg", dialog.NewImageBackgroundType);
-			}
-		}
-
-		/// <summary>
-		/// Gets the width and height of an image on the clipboard,
-		/// if available.
-		/// </summary>
-		/// <param name="width">Destination for the image width.</param>
-		/// <param name="height">Destination for the image height.</param>
-		/// <returns>True if dimensions were available, false otherwise.</returns>
-		private static bool GetClipboardImageSize (out int width, out int height)
-		{
-			bool clipboardUsed = false;
-			width = height = 0;
-
-			Gtk.Clipboard cb = Gtk.Clipboard.Get (Gdk.Atom.Intern ("CLIPBOARD", false));
-			if (cb.WaitIsImageAvailable ()) {
-				Gdk.Pixbuf image = cb.WaitForImage ();
-				if (image != null) {
-					clipboardUsed = true;
-					width = image.Width;
-					height = image.Height;
-					image.Dispose ();
+					PintaCore.Settings.PutSetting ("new-image-width", dialog.NewImageWidth);
+					PintaCore.Settings.PutSetting ("new-image-height", dialog.NewImageHeight);
+					PintaCore.Settings.PutSetting ("new-image-bg", dialog.NewImageBackgroundType);
 				}
-			}
 
-			cb.Dispose ();
+				dialog.Destroy ();
+			};
 
-			return clipboardUsed;
+			dialog.Present ();
 		}
 	}
 }

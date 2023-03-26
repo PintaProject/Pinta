@@ -16,9 +16,7 @@ namespace Pinta.Effects
 {
 	public class MotionBlurEffect : BaseEffect
 	{
-		public override string Icon {
-			get { return "Menu.Effects.Blurs.MotionBlur.png"; }
-		}
+		public override string Icon => Pinta.Resources.Icons.EffectsBlursMotionBlur;
 
 		public override string Name {
 			get { return Translations.GetString ("Motion Blur"); }
@@ -39,13 +37,13 @@ namespace Pinta.Effects
 			EffectData = new MotionBlurData ();
 		}
 
-		public override bool LaunchConfiguration ()
+		public override void LaunchConfiguration ()
 		{
-			return EffectHelper.LaunchSimpleEffectDialog (this);
+			EffectHelper.LaunchSimpleEffectDialog (this);
 		}
 
 		#region Algorithm Code Ported From PDN
-		public override void Render (ImageSurface src, ImageSurface dst, Gdk.Rectangle[] rois)
+		public override void Render (ImageSurface src, ImageSurface dst, Core.RectangleI[] rois)
 		{
 			PointD start = new PointD (0, 0);
 			double theta = ((double) (Data.Angle + 180) * 2 * Math.PI) / 360.0;
@@ -73,17 +71,17 @@ namespace Pinta.Effects
 
 			Span<ColorBgra> samples = stackalloc ColorBgra[points.Length];
 
-			ReadOnlySpan<ColorBgra> src_data = src.GetReadOnlyData ();
-			Span<ColorBgra> dst_data = dst.GetData ();
+			ReadOnlySpan<ColorBgra> src_data = src.GetReadOnlyPixelData ();
+			Span<ColorBgra> dst_data = dst.GetPixelData ();
 			int src_width = src.Width;
 			int src_height = src.Height;
 
-			foreach (Gdk.Rectangle rect in rois) {
+			foreach (var rect in rois) {
 
-				for (int y = rect.Top; y <= rect.GetBottom (); ++y) {
+				for (int y = rect.Top; y <= rect.Bottom; ++y) {
 					var dst_row = dst_data.Slice (y * src_width, src_width);
 
-					for (int x = rect.Left; x <= rect.GetRight (); ++x) {
+					for (int x = rect.Left; x <= rect.Right; ++x) {
 						int sampleCount = 0;
 
 						for (int j = 0; j < points.Length; ++j) {

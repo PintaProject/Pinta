@@ -32,13 +32,11 @@ namespace Pinta.Core
 {
 	public class EffectsActions
 	{
-		public Dictionary<string, GLib.Menu> Menus { get; private set; }
-		public List<Command> Actions { get; private set; }
+		public Dictionary<string, Gio.Menu> Menus { get; private set; } = new ();
+		public List<Command> Actions { get; private set; } = new ();
 
 		public EffectsActions ()
 		{
-			Actions = new List<Command> ();
-			Menus = new Dictionary<string, GLib.Menu> ();
 		}
 
 		#region Initialization
@@ -47,14 +45,14 @@ namespace Pinta.Core
 			var effects_menu = PintaCore.Chrome.EffectsMenu;
 
 			if (!Menus.ContainsKey (category)) {
-				var category_menu = new GLib.Menu ();
-				effects_menu.AppendMenuItemSorted (GLib.MenuItem.NewSubmenu (Translations.GetString (category), category_menu));
+				var category_menu = Gio.Menu.New ();
+				effects_menu.AppendMenuItemSorted (Gio.MenuItem.NewSubmenu (Translations.GetString (category), category_menu));
 				Menus.Add (category, category_menu);
 			}
 
 			Actions.Add (action);
 
-			GLib.Menu m = Menus[category];
+			Gio.Menu m = Menus[category];
 			m.AppendMenuItemSorted (action.CreateMenuItem ());
 		}
 

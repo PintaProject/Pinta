@@ -34,10 +34,10 @@ namespace Pinta.Core
 {
 	public class PaintShopProPalette : IPaletteLoader, IPaletteSaver
 	{
-		public List<Color> Load (GLib.IFile file)
+		public List<Color> Load (Gio.File file)
 		{
 			List<Color> colors = new List<Color> ();
-			using var stream = new GLib.GioStream (file.Read (null));
+			using var stream = new GioStream (file.Read (null));
 			StreamReader reader = new StreamReader (stream);
 
 			string? line = reader.ReadLine ();
@@ -65,9 +65,9 @@ namespace Pinta.Core
 			return colors;
 		}
 
-		public void Save (List<Color> colors, GLib.IFile file)
+		public void Save (List<Color> colors, Gio.File file)
 		{
-			using var stream = new GLib.GioStream (file.Replace ());
+			using var stream = new GioStream (file.Replace ());
 			StreamWriter writer = new StreamWriter (stream);
 			writer.WriteLine ("JASC-PAL");
 			writer.WriteLine ("0100");

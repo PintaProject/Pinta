@@ -32,21 +32,19 @@ namespace Pinta.Effects
 			get { return Translations.GetString ("Stylize"); }
 		}
 
-		public override bool LaunchConfiguration ()
+		public override void LaunchConfiguration ()
 		{
-			return EffectHelper.LaunchSimpleEffectDialog (this);
+			EffectHelper.LaunchSimpleEffectDialog (this);
 		}
 
-		public override string Icon {
-			get { return "Menu.Effects.Stylize.Relief.png"; }
-		}
+		public override string Icon => Pinta.Resources.Icons.EffectsStylizeRelief;
 
 		public override string Name {
 			get { return Translations.GetString ("Relief"); }
 		}
 
 		#region Algorithm Code Ported From PDN
-		public override void Render (Cairo.ImageSurface src, Cairo.ImageSurface dst, Gdk.Rectangle[] rois)
+		public override void Render (Cairo.ImageSurface src, Cairo.ImageSurface dst, Core.RectangleI[] rois)
 		{
 			base.RenderColorDifferenceEffect (Weights, src, dst, rois);
 		}

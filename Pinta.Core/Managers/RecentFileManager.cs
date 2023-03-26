@@ -36,20 +36,14 @@ namespace Pinta.Core
 {
 	public class RecentFileManager
 	{
-		private GLib.IFile? last_dialog_directory;
-		private RecentData recent_data;
+		private Gio.File? last_dialog_directory;
 
 		public RecentFileManager ()
 		{
 			last_dialog_directory = DefaultDialogDirectory;
-
-			recent_data = new RecentData ();
-			recent_data.AppName = "Pinta";
-			recent_data.AppExec = SystemManager.GetExecutablePathName ();
-			recent_data.MimeType = "image/*";
 		}
 
-		public GLib.IFile? LastDialogDirectory {
+		public Gio.File? LastDialogDirectory {
 			get { return last_dialog_directory; }
 			set {
 				// The file chooser dialog may return null for the current folder in certain cases,
@@ -59,22 +53,28 @@ namespace Pinta.Core
 			}
 		}
 
-		public GLib.IFile? DefaultDialogDirectory {
+		public Gio.File? DefaultDialogDirectory {
 			get {
 				string path = System.Environment.GetFolderPath (Environment.SpecialFolder.MyPictures);
-				return !string.IsNullOrEmpty (path) ? GLib.FileFactory.NewForPath (path) : null;
+				return !string.IsNullOrEmpty (path) ? Gio.FileHelper.NewForPath (path) : null;
 			}
 		}
-
-		public RecentData RecentData { get { return recent_data; } }
 
 		/// <summary>
 		/// Returns a directory for use in a dialog. The last dialog directory is
 		/// returned if it exists, otherwise the default directory is used.
 		/// </summary>
-		public GLib.IFile? GetDialogDirectory ()
+		public Gio.File? GetDialogDirectory ()
 		{
-			return (last_dialog_directory != null && last_dialog_directory.Exists) ? last_dialog_directory : DefaultDialogDirectory;
+			return (last_dialog_directory != null && last_dialog_directory.QueryExists (null)) ? last_dialog_directory : DefaultDialogDirectory;
+		}
+
+		/// <summary>
+		/// Add a file to the list of recently-used files.
+		/// </summary>
+		public void AddFile (Gio.File file)
+		{
+			RecentManager.GetDefault ().AddItem (file.GetUri ());
 		}
 	}
 }

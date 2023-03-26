@@ -16,9 +16,7 @@ namespace Pinta.Effects
 {
 	public class TileEffect : BaseEffect
 	{
-		public override string Icon {
-			get { return "Menu.Effects.Distort.Tile.png"; }
-		}
+		public override string Icon => Pinta.Resources.Icons.EffectsDistortTile;
 
 		public override string Name {
 			get { return Translations.GetString ("Tile Reflection"); }
@@ -41,13 +39,13 @@ namespace Pinta.Effects
 			EffectData = new TileData ();
 		}
 
-		public override bool LaunchConfiguration ()
+		public override void LaunchConfiguration ()
 		{
-			return EffectHelper.LaunchSimpleEffectDialog (this);
+			EffectHelper.LaunchSimpleEffectDialog (this);
 		}
 
 		#region Algorithm Code Ported From PDN
-		public override void Render (ImageSurface src, ImageSurface dst, Gdk.Rectangle[] rois)
+		public override void Render (ImageSurface src, ImageSurface dst, Core.RectangleI[] rois)
 		{
 			int width = dst.Width;
 			int height = dst.Height;
@@ -75,15 +73,15 @@ namespace Pinta.Effects
 			}
 
 			int src_width = src.Width;
-			ReadOnlySpan<ColorBgra> src_data = src.GetReadOnlyData ();
-			Span<ColorBgra> dst_data = dst.GetData ();
+			ReadOnlySpan<ColorBgra> src_data = src.GetReadOnlyPixelData ();
+			Span<ColorBgra> dst_data = dst.GetPixelData ();
 
 			foreach (var rect in rois) {
-				for (int y = rect.Top; y <= rect.GetBottom (); y++) {
+				for (int y = rect.Top; y <= rect.Bottom; y++) {
 					float j = y - hh;
 					var dst_row = dst_data.Slice (y * width, width);
 
-					for (int x = rect.Left; x <= rect.GetRight (); x++) {
+					for (int x = rect.Left; x <= rect.Right; x++) {
 						int b = 0;
 						int g = 0;
 						int r = 0;

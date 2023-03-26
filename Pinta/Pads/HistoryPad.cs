@@ -33,23 +33,16 @@ namespace Pinta
 {
 	public class HistoryPad : IDockPad
 	{
-		public void Initialize (Dock workspace, Application app, GLib.Menu padMenu)
+		public void Initialize (Dock workspace, Application app, Gio.Menu padMenu)
 		{
-			var history = new HistoryTreeView ();
-			DockItem history_item = new DockItem (history, "History") {
+			var history = new HistoryListView ();
+			DockItem history_item = new DockItem (history, "History", icon_name: Pinta.Resources.Icons.HistoryList) {
 				Label = Translations.GetString ("History")
 			};
 
-			// TODO-GTK3 (docking)
-#if false
-			history_item.DefaultLocation = "Images/Bottom";
-			history_item.Icon = Gtk.IconTheme.Default.LoadIcon(Resources.Icons.LayerDuplicate, 16);
-			history_item.DefaultWidth = 100;
-			history_item.Behavior |= DockItemBehavior.CantClose;
-#endif
 			var history_tb = history_item.AddToolBar ();
-			history_tb.Add (PintaCore.Actions.Edit.Undo.CreateDockToolBarItem ());
-			history_tb.Add (PintaCore.Actions.Edit.Redo.CreateDockToolBarItem ());
+			history_tb.Append (PintaCore.Actions.Edit.Undo.CreateDockToolBarItem ());
+			history_tb.Append (PintaCore.Actions.Edit.Redo.CreateDockToolBarItem ());
 
 			workspace.AddItem (history_item, DockPlacement.Right);
 
@@ -59,8 +52,14 @@ namespace Pinta
 			app.AddAction (show_history);
 			padMenu.AppendItem (show_history.CreateMenuItem ());
 
-			show_history.Toggled += (val) => { history_item.Visible = val; };
-			history_item.VisibilityNotifyEvent += (o, args) => { show_history.Value = history_item.Visible; };
+			show_history.Toggled += (val) => {
+				if (val)
+					history_item.Maximize ();
+				else
+					history_item.Minimize ();
+			};
+			history_item.MaximizeClicked += (_, _) => show_history.Value = true;
+			history_item.MinimizeClicked += (_, _) => show_history.Value = false;
 		}
 	}
 }

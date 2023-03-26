@@ -16,9 +16,7 @@ namespace Pinta.Effects
 {
 	public class BulgeEffect : BaseEffect
 	{
-		public override string Icon {
-			get { return "Menu.Effects.Distort.Bulge.png"; }
-		}
+		public override string Icon => Pinta.Resources.Icons.EffectsDistortBulge;
 
 		public override string Name {
 			get { return Translations.GetString ("Bulge"); }
@@ -41,13 +39,13 @@ namespace Pinta.Effects
 			EffectData = new BulgeData ();
 		}
 
-		public override bool LaunchConfiguration ()
+		public override void LaunchConfiguration ()
 		{
-			return EffectHelper.LaunchSimpleEffectDialog (this);
+			EffectHelper.LaunchSimpleEffectDialog (this);
 		}
 
 		#region Algorithm Code Ported From PDN
-		public override void Render (ImageSurface src, ImageSurface dst, Gdk.Rectangle[] rois)
+		public override void Render (ImageSurface src, ImageSurface dst, Core.RectangleI[] rois)
 		{
 			float bulge = (float) Data.Amount;
 
@@ -61,17 +59,17 @@ namespace Pinta.Effects
 
 			int src_width = src.Width;
 			int src_height = src.Height;
-			ReadOnlySpan<ColorBgra> src_data = src.GetReadOnlyData ();
-			Span<ColorBgra> dst_data = dst.GetData ();
+			ReadOnlySpan<ColorBgra> src_data = src.GetReadOnlyPixelData ();
+			Span<ColorBgra> dst_data = dst.GetPixelData ();
 
-			foreach (Gdk.Rectangle rect in rois) {
+			foreach (Core.RectangleI rect in rois) {
 
-				for (int y = rect.Top; y <= rect.GetBottom (); y++) {
+				for (int y = rect.Top; y <= rect.Bottom; y++) {
 					var src_row = src_data.Slice (y * src_width, src_width);
 					var dst_row = dst_data.Slice (y * src_width, src_width);
 					float v = y - hh;
 
-					for (int x = rect.Left; x <= rect.GetRight (); x++) {
+					for (int x = rect.Left; x <= rect.Right; x++) {
 						float u = x - hw;
 						float r = (float) Math.Sqrt (u * u + v * v);
 						float rscale1 = (1f - (r / maxrad));
@@ -98,7 +96,7 @@ namespace Pinta.Effects
 			public int Amount = 45;
 
 			[Caption ("Offset")]
-			public Cairo.PointD Offset = new Cairo.PointD (0.0, 0.0);
+			public Core.PointD Offset = new (0.0, 0.0);
 
 			[Skip]
 			public override bool IsDefault {

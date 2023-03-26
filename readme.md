@@ -4,7 +4,7 @@
 
 Copyright (C) 2010 Jonathan Pobst <monkey AT jpobst DOT com>
 
-Pinta is a Gtk# clone of [Paint.Net 3.0](http://www.getpaint.net/)
+Pinta is a GTK clone of [Paint.Net 3.0](http://www.getpaint.net/)
 
 Original Pinta code is licensed under the MIT License:
 See `license-mit.txt` for the MIT License
@@ -40,8 +40,8 @@ For building on the command line:
 
 ## Building on macOS
 
-- Install .NET 7 and GTK
-  - `brew install dotnet-sdk gtk+3 adwaita-icon-theme gettext webp-pixbuf-loader`
+- Install .NET 7 and GTK4
+  - `brew install dotnet-sdk libadwaita adwaita-icon-theme gettext webp-pixbuf-loader`
 - Build:
   - `dotnet build`
 - Run:
@@ -52,8 +52,9 @@ Alternatively, Pinta can be built by opening `Pinta.sln` in [Visual Studio for M
 ## Building on Linux
 
 - Install [.NET 7](https://dotnet.microsoft.com/) following the instructions for your Linux distribution.
-- Install other dependencies (instructions are for Ubuntu 20.04, but should be similar for other distros):
-  - `sudo apt install autotools-dev autoconf-archive gettext intltool libgtk-3-dev`
+- Install other dependencies (instructions are for Ubuntu 22.10, but should be similar for other distros):
+  - `sudo apt install autotools-dev autoconf-archive gettext intltool libadwaita-1-dev
+  - Minimum library versions: `gtk` >= 4.8 and `libadwaita` >= 1.2
   - Optional dependencies: `webp-pixbuf-loader`
 - Build (option 1, for development and testing):
   - `dotnet build`

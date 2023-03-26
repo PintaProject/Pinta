@@ -33,7 +33,7 @@ namespace Pinta
 {
 	public class ActionHandlers
 	{
-		private List<IActionHandler> action_handlers = new List<IActionHandler> ();
+		private List<IActionHandler> action_handlers = new ();
 
 		public ActionHandlers ()
 		{
@@ -43,11 +43,11 @@ namespace Pinta
 			action_handlers.Add (new OpenDocumentAction ());
 			action_handlers.Add (new SaveDocumentAction ());
 			action_handlers.Add (new SaveDocumentAsAction ());
-			action_handlers.Add (new PrintDocumentAction ());
+			action_handlers.Add (new SaveDocumentImplmentationAction ());
+			action_handlers.Add (new ModifyCompressionAction ());
+			//action_handlers.Add (new PrintDocumentAction ());
 			action_handlers.Add (new CloseDocumentAction ());
 			action_handlers.Add (new ExitProgramAction ());
-			action_handlers.Add (new ModifyCompressionAction ());
-			action_handlers.Add (new SaveDocumentImplmentationAction ());
 
 			// Edit
 			action_handlers.Add (new PasteAction ());

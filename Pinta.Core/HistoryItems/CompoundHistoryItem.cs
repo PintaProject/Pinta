@@ -62,12 +62,6 @@ namespace Pinta.Core
 				item.Redo ();
 		}
 
-		public override void Dispose ()
-		{
-			foreach (var item in history_stack)
-				item.Dispose ();
-		}
-
 		public void StartSnapshotOfImage ()
 		{
 			snapshots = new List<ImageSurface> ();

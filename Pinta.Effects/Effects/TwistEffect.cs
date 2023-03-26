@@ -16,9 +16,7 @@ namespace Pinta.Effects
 {
 	public class TwistEffect : BaseEffect
 	{
-		public override string Icon {
-			get { return "Menu.Effects.Distort.Twist.png"; }
-		}
+		public override string Icon => Pinta.Resources.Icons.EffectsDistortTwist;
 
 		public override string Name {
 			get { return Translations.GetString ("Twist"); }
@@ -39,13 +37,13 @@ namespace Pinta.Effects
 			EffectData = new TwistData ();
 		}
 
-		public override bool LaunchConfiguration ()
+		public override void LaunchConfiguration ()
 		{
-			return EffectHelper.LaunchSimpleEffectDialog (this);
+			EffectHelper.LaunchSimpleEffectDialog (this);
 		}
 
 		#region Algorithm Code Ported From PDN
-		public override void Render (ImageSurface src, ImageSurface dst, Gdk.Rectangle[] rois)
+		public override void Render (ImageSurface src, ImageSurface dst, Core.RectangleI[] rois)
 		{
 			float twist = Data.Amount;
 
@@ -69,16 +67,16 @@ namespace Pinta.Effects
 			}
 
 			int width = src.Width;
-			ReadOnlySpan<ColorBgra> src_data = src.GetReadOnlyData ();
-			Span<ColorBgra> dst_data = dst.GetData ();
+			ReadOnlySpan<ColorBgra> src_data = src.GetReadOnlyPixelData ();
+			Span<ColorBgra> dst_data = dst.GetPixelData ();
 
 			foreach (var rect in rois) {
-				for (int y = rect.Top; y <= rect.GetBottom (); y++) {
+				for (int y = rect.Top; y <= rect.Bottom; y++) {
 					float j = y - hh;
 					var src_row = src_data.Slice (y * width, width);
 					var dst_row = dst_data.Slice (y * width, width);
 
-					for (int x = rect.Left; x <= rect.GetRight (); x++) {
+					for (int x = rect.Left; x <= rect.Right; x++) {
 						float i = x - hw;
 
 						if (i * i + j * j > (maxrad + 1) * (maxrad + 1)) {

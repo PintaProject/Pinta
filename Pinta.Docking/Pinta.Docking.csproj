@@ -1,8 +1,8 @@
 <Project Sdk="Microsoft.NET.Sdk">
   <ItemGroup>
-    <PackageReference Include="GtkSharp" Version="3.24.24.38" />
+    <ProjectReference Include="..\Pinta.Core\Pinta.Core.csproj" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\Pinta.Core\Pinta.Core.csproj" />
+    <PackageReference Include="GirCore.Adw-1" Version="0.3.0" />
   </ItemGroup>
 </Project>

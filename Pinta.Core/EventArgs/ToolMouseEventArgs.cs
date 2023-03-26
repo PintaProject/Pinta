@@ -68,52 +68,22 @@ namespace Pinta.Core
 		/// <summary>
 		/// The cursor location in canvas coordinates.
 		/// </summary>
-		public Cairo.Point Point => new Cairo.Point ((int) PointDouble.X, (int) PointDouble.Y);
+		public PointI Point => new ((int) PointDouble.X, (int) PointDouble.Y);
 
 		/// <summary>
 		/// The cursor location in canvas coordinates.
 		/// </summary>
 		public PointD PointDouble { get; init; }
 
-		public PointD Root { get; init; }
+		/// <summary>
+		/// The cursor location in the root canvas window.
+		/// Unlike WindowPoint, this is outside the scroll area and remains the same while scrolling.
+		/// </summary>
+		public PointD RootPoint { get; init; }
 
 		/// <summary>
 		/// The cursor location in window coordinates.
 		/// </summary>
 		public PointD WindowPoint { get; init; }
-
-		public static ToolMouseEventArgs FromButtonPressEventArgs (Document document, ButtonPressEventArgs e)
-		{
-			return new ToolMouseEventArgs {
-				State = e.Event.State,
-				MouseButton = (MouseButton) e.Event.Button,
-				PointDouble = document.Workspace.WindowPointToCanvas (e.Event.X, e.Event.Y),
-				WindowPoint = e.Event.GetPoint (),
-				Root = new PointD (e.Event.XRoot, e.Event.YRoot)
-			};
-		}
-
-		public static ToolMouseEventArgs FromButtonReleaseEventArgs (Document document, ButtonReleaseEventArgs e)
-		{
-			return new ToolMouseEventArgs {
-				State = e.Event.State,
-				MouseButton = (MouseButton) e.Event.Button,
-				PointDouble = document.Workspace.WindowPointToCanvas (e.Event.X, e.Event.Y),
-				WindowPoint = e.Event.GetPoint (),
-				Root = new PointD (e.Event.XRoot, e.Event.YRoot)
-			};
-		}
-
-		public static ToolMouseEventArgs FromMotionNotifyEventArgs (Document document, MotionNotifyEventArgs e)
-		{
-			return new ToolMouseEventArgs {
-				State = e.Event.State,
-				MouseButton = MouseButton.None,
-				PointDouble = document.Workspace.WindowPointToCanvas (e.Event.X, e.Event.Y),
-				WindowPoint = new PointD (e.Event.X, e.Event.Y),
-				Root = new PointD (e.Event.XRoot, e.Event.YRoot)
-			};
-		}
-
 	}
 }

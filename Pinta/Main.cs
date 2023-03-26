@@ -30,6 +30,7 @@ using System.IO;
 using System.Reflection;
 using System.Runtime.InteropServices;
 using System.Text;
+using System.Threading;
 using Gtk;
 using Mono.Options;
 using Pinta.Core;
@@ -83,17 +84,23 @@ namespace Pinta
 				return;
 			}
 
+#if false // TODO-GTK4 - is there an equivalent in gir.core?
 			GLib.ExceptionManager.UnhandledException += new GLib.UnhandledExceptionHandler (ExceptionManager_UnhandledException);
-
-			Application.Init ();
+#endif
 
 			// For testing a dark variant of the theme.
 			//Gtk.Settings.Default.SetProperty("gtk-application-prefer-dark-theme", new GLib.Value(true));
 
-			// Add our icons to the search path.
-			Gtk.IconTheme.Default.AppendSearchPath (Pinta.Core.SystemManager.GetDataRootDirectory () + "/icons");
+			Gsk.Module.Initialize ();
+			Pango.Module.Initialize ();
+			PangoCairo.Module.Initialize ();
+			var app = Adw.Application.New ("com.github.PintaProject.Pinta", Gio.ApplicationFlags.NonUnique);
+			SynchronizationContext.SetSynchronizationContext (new GLibExtensions.GLibSynchronizationContext ());
 
-			var app = new MainWindow ();
+			// Add our icons to the search path.
+			GtkExtensions.GetDefaultIconTheme ().AddSearchPath (Pinta.Core.SystemManager.GetDataRootDirectory () + "/icons");
+
+			var main_window = new MainWindow (app);
 
 			if (threads != -1)
 				Pinta.Core.PintaCore.System.RenderThreads = threads;
@@ -102,9 +109,12 @@ namespace Pinta
 				RegisterForAppleEvents ();
 			}
 
-			// TODO-GTK3 - try using the GTK command line parsing once GtkSharp supports it.
-			app.Activated += (_, _) => OpenFilesFromCommandLine (extra);
-			app.Run ("pinta", Array.Empty<string> ());
+			app.OnActivate += (_, _) => {
+				main_window.Activate ();
+				OpenFilesFromCommandLine (extra);
+			};
+
+			app.Run ();
 		}
 
 		private static void ShowHelp (OptionSet p)
@@ -126,14 +136,15 @@ namespace Pinta
 
 			if (extra.Count > 0) {
 				foreach (var file in extra) {
-					PintaCore.Workspace.OpenFile (Core.GtkExtensions.FileNewForCommandlineArg (file));
+					PintaCore.Workspace.OpenFile (Gio.FileHelper.NewForCommandlineArg (file));
 				}
 			} else {
 				// Create a blank document
-				PintaCore.Workspace.NewDocument (new Gdk.Size (800, 600), new Cairo.Color (1, 1, 1));
+				PintaCore.Workspace.NewDocument (new Core.Size (800, 600), new Cairo.Color (1, 1, 1));
 			}
 		}
 
+#if false // TODO-GTK4 - is there an equivalent in gir.core?
 		private static void ExceptionManager_UnhandledException (GLib.UnhandledExceptionArgs args)
 		{
 			Exception ex = (Exception) args.ExceptionObject;
@@ -141,6 +152,7 @@ namespace Pinta
 							  string.Format ("{0}:\n{1}", "Unhandled exception", ex.Message),
 							  ex.ToString ());
 		}
+#endif
 
 		/// <summary>
 		/// Registers for OSX-specific events, like quitting from the dock.
@@ -148,7 +160,7 @@ namespace Pinta
 		static void RegisterForAppleEvents ()
 		{
 			MacInterop.ApplicationEvents.Quit += (sender, e) => {
-				GLib.Timeout.Add (10, delegate {
+				GLib.Functions.TimeoutAddFull (0, 10, delegate {
 					PintaCore.Actions.App.Exit.Activate ();
 					return false;
 				});
@@ -157,7 +169,7 @@ namespace Pinta
 
 			MacInterop.ApplicationEvents.Reopen += (sender, e) => {
 				var window = PintaCore.Chrome.MainWindow;
-				window.Deiconify ();
+				window.Unminimize ();
 				window.Hide ();
 				window.Show ();
 				window.Present ();
@@ -166,10 +178,10 @@ namespace Pinta
 
 			MacInterop.ApplicationEvents.OpenDocuments += (sender, e) => {
 				if (e.Documents != null) {
-					GLib.Timeout.Add (10, delegate {
+					GLib.Functions.TimeoutAddFull (0, 10, delegate {
 						foreach (string filename in e.Documents.Keys) {
 							System.Console.Error.WriteLine ("Opening: {0}", filename);
-							PintaCore.Workspace.OpenFile (Core.GtkExtensions.FileNewForCommandlineArg (filename));
+							PintaCore.Workspace.OpenFile (Gio.FileHelper.NewForCommandlineArg (filename));
 						}
 						return false;
 					});

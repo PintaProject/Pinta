@@ -45,7 +45,7 @@ namespace Pinta.Core
 			// Store the layer for "redo"
 			layer = doc.Layers[layer_index];
 
-			doc.Layers.DeleteLayer (layer_index, false);
+			doc.Layers.DeleteLayer (layer_index);
 		}
 
 		public override void Redo ()
@@ -58,12 +58,6 @@ namespace Pinta.Core
 			doc.Layers.SetCurrentUserLayer (layer!);
 
 			layer = null;
-		}
-
-		public override void Dispose ()
-		{
-			if (layer != null)
-				(layer.Surface as IDisposable).Dispose ();
 		}
 	}
 }

@@ -19,9 +19,7 @@ namespace Pinta.Effects
 		private int thickness;
 		private int intensity;
 
-		public override string Icon {
-			get { return "Menu.Effects.Stylize.Outline.png"; }
-		}
+		public override string Icon => Pinta.Resources.Icons.EffectsStylizeOutline;
 
 		public override string Name {
 			get { return Translations.GetString ("Outline"); }
@@ -42,9 +40,9 @@ namespace Pinta.Effects
 			EffectData = new OutlineData ();
 		}
 
-		public override bool LaunchConfiguration ()
+		public override void LaunchConfiguration ()
 		{
-			return EffectHelper.LaunchSimpleEffectDialog (this);
+			EffectHelper.LaunchSimpleEffectDialog (this);
 		}
 
 		#region Algorithm Code Ported From PDN
@@ -125,12 +123,12 @@ namespace Pinta.Effects
 			    (byte) (a2));
 		}
 
-		public override void Render (ImageSurface src, ImageSurface dest, Gdk.Rectangle[] rois)
+		public override void Render (ImageSurface src, ImageSurface dest, Core.RectangleI[] rois)
 		{
 			this.thickness = Data.Thickness;
 			this.intensity = Data.Intensity;
 
-			foreach (Gdk.Rectangle rect in rois)
+			foreach (var rect in rois)
 				RenderRect (this.thickness, src, dest, rect);
 		}
 

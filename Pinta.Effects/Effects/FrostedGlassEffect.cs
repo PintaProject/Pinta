@@ -16,9 +16,7 @@ namespace Pinta.Effects
 {
 	public class FrostedGlassEffect : BaseEffect
 	{
-		public override string Icon {
-			get { return "Menu.Effects.Distort.FrostedGlass.png"; }
-		}
+		public override string Icon => Pinta.Resources.Icons.EffectsDistortFrostedGlass;
 
 		public override string Name {
 			get { return Translations.GetString ("Frosted Glass"); }
@@ -43,13 +41,13 @@ namespace Pinta.Effects
 			EffectData = new FrostedGlassData ();
 		}
 
-		public override bool LaunchConfiguration ()
+		public override void LaunchConfiguration ()
 		{
-			return EffectHelper.LaunchSimpleEffectDialog (this);
+			EffectHelper.LaunchSimpleEffectDialog (this);
 		}
 
 		#region Algorithm Code Ported From PDN
-		public override void Render (ImageSurface src, ImageSurface dst, Gdk.Rectangle[] rois)
+		public override void Render (ImageSurface src, ImageSurface dst, Core.RectangleI[] rois)
 		{
 			int width = src.Width;
 			int height = src.Height;
@@ -63,14 +61,14 @@ namespace Pinta.Effects
 			Span<uint> avgAlpha = stackalloc uint[256];
 			Span<byte> intensityChoices = stackalloc byte[(1 + (r * 2)) * (1 + (r * 2))];
 
-			ReadOnlySpan<ColorBgra> src_data = src.GetReadOnlyData ();
-			Span<ColorBgra> dst_data = dst.GetData ();
+			ReadOnlySpan<ColorBgra> src_data = src.GetReadOnlyPixelData ();
+			Span<ColorBgra> dst_data = dst.GetPixelData ();
 
 			foreach (var rect in rois) {
 				int rectTop = rect.Top;
-				int rectBottom = rect.GetBottom ();
+				int rectBottom = rect.Bottom;
 				int rectLeft = rect.Left;
-				int rectRight = rect.GetRight ();
+				int rectRight = rect.Right;
 
 				for (int y = rectTop; y <= rectBottom; ++y) {
 					var dst_row = dst_data.Slice (y * width, width);

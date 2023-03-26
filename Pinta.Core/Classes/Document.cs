@@ -42,7 +42,7 @@ namespace Pinta.Core
 	public class Document
 	{
 		private string display_name = string.Empty;
-		private GLib.IFile? file = null;
+		private Gio.File? file = null;
 		private bool is_dirty;
 
 		private DocumentSelection selection = null!; // NRT - Set by constructor via Selection property
@@ -63,7 +63,7 @@ namespace Pinta.Core
 
 		public DocumentSelection PreviousSelection = new DocumentSelection ();
 
-		public Document (Gdk.Size size)
+		public Document (Core.Size size)
 		{
 			Selection = new DocumentSelection ();
 
@@ -93,7 +93,7 @@ namespace Pinta.Core
 		/// <summary>
 		/// Identifier for the file location on disk.
 		/// </summary>
-		public GLib.IFile? File {
+		public Gio.File? File {
 			get => file;
 			set {
 				file = value;
@@ -113,7 +113,7 @@ namespace Pinta.Core
 
 		public DocumentHistory History { get { return Workspace.History; } }
 
-		public Gdk.Size ImageSize { get; set; }
+		public Core.Size ImageSize { get; set; }
 
 		public bool IsDirty {
 			get { return is_dirty; }
@@ -133,15 +133,14 @@ namespace Pinta.Core
 		#endregion
 
 		#region Public Methods
-		// Adds a new layer above the current one
-		public Gdk.Rectangle ClampToImageSize (Gdk.Rectangle r)
+		public RectangleI ClampToImageSize (RectangleI r)
 		{
 			int x = Utility.Clamp (r.X, 0, ImageSize.Width);
 			int y = Utility.Clamp (r.Y, 0, ImageSize.Height);
 			int width = Math.Min (r.Width, ImageSize.Width - x);
 			int height = Math.Min (r.Height, ImageSize.Height - y);
 
-			return new Gdk.Rectangle (x, y, width, height);
+			return new RectangleI (x, y, width, height);
 		}
 
 		/// <summary>
@@ -159,10 +158,6 @@ namespace Pinta.Core
 		public void Close ()
 		{
 			Layers.Close ();
-
-			Selection.Dispose ();
-			PreviousSelection.Dispose ();
-
 			Workspace.History.Clear ();
 		}
 
@@ -207,10 +202,9 @@ namespace Pinta.Core
 
 			Layer layer = Layers.SelectionLayer;
 
-			using (Cairo.Context g = new Cairo.Context (Layers.CurrentUserLayer.Surface)) {
-				selection.Clip (g);
-				layer.Draw (g);
-			}
+			var g = new Cairo.Context (Layers.CurrentUserLayer.Surface);
+			selection.Clip (g);
+			layer.Draw (g);
 
 			Layers.DestroySelectionLayer ();
 			Workspace.Invalidate ();
@@ -241,27 +235,25 @@ namespace Pinta.Core
 		/// </summary>
 		public ColorBgra GetComputedPixel (int x, int y)
 		{
-			using (var dst = CairoExtensions.CreateImageSurface (Format.Argb32, 1, 1)) {
-				using (var g = new Context (dst)) {
-					foreach (var layer in Layers.GetLayersToPaint ()) {
-						var color = layer.Surface.GetColorBgra (x, y).ToStraightAlpha ().ToCairoColor ();
+			var dst = CairoExtensions.CreateImageSurface (Format.Argb32, 1, 1);
+			var g = new Context (dst);
+			foreach (var layer in Layers.GetLayersToPaint ()) {
+				var color = layer.Surface.GetColorBgra (x, y).ToStraightAlpha ().ToCairoColor ();
 
-						g.SetBlendMode (layer.BlendMode);
-						g.SetSourceColor (color);
+				g.SetBlendMode (layer.BlendMode);
+				g.SetSourceColor (color);
 
-						g.Rectangle (dst.GetBounds ().ToCairoRectangle ());
-						g.PaintWithAlpha (layer.Opacity);
-					}
-				}
-
-				return dst.GetColorBgra (0, 0);
+				g.Rectangle (dst.GetBounds ().ToDouble ());
+				g.PaintWithAlpha (layer.Opacity);
 			}
+
+			return dst.GetColorBgra (0, 0);
 		}
 
 		public ImageSurface GetFlattenedImage (bool clip_to_selection = false) => Layers.GetFlattenedImage (clip_to_selection);
 
 		/// <param name="canvasOnly">false for the whole selection, true for the part only on our canvas</param>
-		public Gdk.Rectangle GetSelectedBounds (bool canvasOnly)
+		public RectangleI GetSelectedBounds (bool canvasOnly)
 		{
 			var bounds = Selection.SelectionPath.GetBounds ();
 
@@ -273,7 +265,7 @@ namespace Pinta.Core
 
 		public void ResetSelectionPaths ()
 		{
-			var rect = new Cairo.Rectangle (0, 0, ImageSize.Width, ImageSize.Height);
+			var rect = new Core.RectangleD (0, 0, ImageSize.Width, ImageSize.Height);
 			Selection.CreateRectangleSelection (rect);
 			PreviousSelection.CreateRectangleSelection (rect);
 			Selection.Visible = false;
@@ -306,7 +298,7 @@ namespace Pinta.Core
 
 			scale = Workspace.Scale;
 
-			ImageSize = new Gdk.Size (width, height);
+			ImageSize = new Size (width, height);
 
 			foreach (var layer in Layers.UserLayers)
 				layer.ResizeCanvas (width, height, anchor);
@@ -338,7 +330,7 @@ namespace Pinta.Core
 
 			scale = Workspace.Scale;
 
-			ImageSize = new Gdk.Size (width, height);
+			ImageSize = new Size (width, height);
 
 			foreach (var layer in Layers.UserLayers)
 				layer.Resize (width, height);
@@ -349,10 +341,8 @@ namespace Pinta.Core
 
 			ResetSelectionPaths ();
 
-			Workspace.Canvas.Window.FreezeUpdates ();
 			Workspace.Scale = scale;
 			PintaCore.Actions.View.UpdateCanvasScale ();
-			Workspace.Canvas.Window.ThawUpdates ();
 		}
 
 		// Rotate image 180 degrees (flip H+V)
@@ -378,7 +368,7 @@ namespace Pinta.Core
 		{
 			var new_size = Layer.RotateDimensions (ImageSize, angle);
 			foreach (var layer in Layers.UserLayers)
-				layer.Rotate (angle, new_size);
+				layer.Rotate (angle, ImageSize, new_size);
 
 			ImageSize = new_size;
 			Workspace.CanvasSize = new_size;

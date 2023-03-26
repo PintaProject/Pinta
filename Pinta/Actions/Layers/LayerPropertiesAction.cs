@@ -48,40 +48,44 @@ namespace Pinta.Actions
 		{
 			var doc = PintaCore.Workspace.ActiveDocument;
 
-			using var dialog = new LayerPropertiesDialog ();
+			var dialog = new LayerPropertiesDialog ();
 
-			int response = dialog.Run ();
+			dialog.OnResponse += (_, args) => {
+				var response = (ResponseType) args.ResponseId;
+				if (response == Gtk.ResponseType.Ok && dialog.AreLayerPropertiesUpdated) {
 
-			if (response == (int) Gtk.ResponseType.Ok
-				&& dialog.AreLayerPropertiesUpdated) {
+					var historyMessage = GetLayerPropertyUpdateMessage (
+							dialog.InitialLayerProperties,
+							dialog.UpdatedLayerProperties);
 
-				var historyMessage = GetLayerPropertyUpdateMessage (
+					var historyItem = new UpdateLayerPropertiesHistoryItem (
+						Resources.Icons.LayerProperties,
+						historyMessage,
+						doc.Layers.CurrentUserLayerIndex,
 						dialog.InitialLayerProperties,
 						dialog.UpdatedLayerProperties);
 
-				var historyItem = new UpdateLayerPropertiesHistoryItem (
-					Resources.Icons.LayerProperties,
-					historyMessage,
-					doc.Layers.CurrentUserLayerIndex,
-					dialog.InitialLayerProperties,
-					dialog.UpdatedLayerProperties);
+					doc.History.PushNewItem (historyItem);
 
-				doc.History.PushNewItem (historyItem);
-
-				PintaCore.Workspace.ActiveWorkspace.Invalidate ();
-
-			} else {
-
-				var layer = doc.Layers.CurrentUserLayer;
-				var selectionLayer = doc.Layers.SelectionLayer;
-				var initial = dialog.InitialLayerProperties;
-				initial.SetProperties (layer);
-				if (selectionLayer != null)
-					initial.SetProperties (selectionLayer);
-
-				if ((layer.Opacity != initial.Opacity) || (layer.BlendMode != initial.BlendMode) || (layer.Hidden != initial.Hidden))
 					PintaCore.Workspace.ActiveWorkspace.Invalidate ();
-			}
+
+				} else {
+
+					var layer = doc.Layers.CurrentUserLayer;
+					var selectionLayer = doc.Layers.SelectionLayer;
+					var initial = dialog.InitialLayerProperties;
+					initial.SetProperties (layer);
+					if (selectionLayer != null)
+						initial.SetProperties (selectionLayer);
+
+					if ((layer.Opacity != initial.Opacity) || (layer.BlendMode != initial.BlendMode) || (layer.Hidden != initial.Hidden))
+						PintaCore.Workspace.ActiveWorkspace.Invalidate ();
+				}
+
+				dialog.Destroy ();
+			};
+
+			dialog.Present ();
 		}
 
 		private string GetLayerPropertyUpdateMessage (LayerProperties initial, LayerProperties updated)

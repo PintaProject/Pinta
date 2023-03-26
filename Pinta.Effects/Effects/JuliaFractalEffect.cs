@@ -16,9 +16,7 @@ namespace Pinta.Effects
 {
 	public class JuliaFractalEffect : BaseEffect
 	{
-		public override string Icon {
-			get { return "Menu.Effects.Render.JuliaFractal.png"; }
-		}
+		public override string Icon => Pinta.Resources.Icons.EffectsRenderJuliaFractal;
 
 		public override string Name {
 			get { return Translations.GetString ("Julia Fractal"); }
@@ -39,9 +37,9 @@ namespace Pinta.Effects
 			EffectData = new JuliaFractalData ();
 		}
 
-		public override bool LaunchConfiguration ()
+		public override void LaunchConfiguration ()
 		{
-			return EffectHelper.LaunchSimpleEffectDialog (this);
+			EffectHelper.LaunchSimpleEffectDialog (this);
 		}
 
 		#region Algorithm Code Ported From PDN
@@ -63,7 +61,7 @@ namespace Pinta.Effects
 			return c;
 		}
 
-		public override void Render (ImageSurface src, ImageSurface dst, Gdk.Rectangle[] rois)
+		public override void Render (ImageSurface src, ImageSurface dst, Core.RectangleI[] rois)
 		{
 			const double jr = 0.3125;
 			const double ji = 0.03;
@@ -78,14 +76,14 @@ namespace Pinta.Effects
 			double invCount = 1.0 / (double) count;
 			double angleTheta = (Data.Angle * Math.PI * 2) / 360.0;
 
-			Span<ColorBgra> dst_data = dst.GetData ();
+			Span<ColorBgra> dst_data = dst.GetPixelData ();
 			int dst_width = dst.Width;
 
-			foreach (Gdk.Rectangle rect in rois) {
-				for (int y = rect.Top; y <= rect.GetBottom (); y++) {
+			foreach (Core.RectangleI rect in rois) {
+				for (int y = rect.Top; y <= rect.Bottom; y++) {
 					var dst_row = dst_data.Slice (y * dst_width, dst_width);
 
-					for (int x = rect.Left; x <= rect.GetRight (); x++) {
+					for (int x = rect.Left; x <= rect.Right; x++) {
 						int r = 0;
 						int g = 0;
 						int b = 0;

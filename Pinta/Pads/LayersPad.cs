@@ -33,20 +33,20 @@ namespace Pinta
 {
 	public class LayersPad : IDockPad
 	{
-		public void Initialize (Dock workspace, Application app, GLib.Menu padMenu)
+		public void Initialize (Dock workspace, Application app, Gio.Menu padMenu)
 		{
-			var layers = new LayersListWidget ();
-			DockItem layers_item = new DockItem (layers, "Layers") {
+			var layers = new LayersListView ();
+			DockItem layers_item = new DockItem (layers, "Layers", icon_name: Pinta.Resources.Icons.LayerDuplicate) {
 				Label = Translations.GetString ("Layers")
 			};
 
 			var layers_tb = layers_item.AddToolBar ();
-			layers_tb.Add (PintaCore.Actions.Layers.AddNewLayer.CreateDockToolBarItem ());
-			layers_tb.Add (PintaCore.Actions.Layers.DeleteLayer.CreateDockToolBarItem ());
-			layers_tb.Add (PintaCore.Actions.Layers.DuplicateLayer.CreateDockToolBarItem ());
-			layers_tb.Add (PintaCore.Actions.Layers.MergeLayerDown.CreateDockToolBarItem ());
-			layers_tb.Add (PintaCore.Actions.Layers.MoveLayerUp.CreateDockToolBarItem ());
-			layers_tb.Add (PintaCore.Actions.Layers.MoveLayerDown.CreateDockToolBarItem ());
+			layers_tb.Append (PintaCore.Actions.Layers.AddNewLayer.CreateDockToolBarItem ());
+			layers_tb.Append (PintaCore.Actions.Layers.DeleteLayer.CreateDockToolBarItem ());
+			layers_tb.Append (PintaCore.Actions.Layers.DuplicateLayer.CreateDockToolBarItem ());
+			layers_tb.Append (PintaCore.Actions.Layers.MergeLayerDown.CreateDockToolBarItem ());
+			layers_tb.Append (PintaCore.Actions.Layers.MoveLayerUp.CreateDockToolBarItem ());
+			layers_tb.Append (PintaCore.Actions.Layers.MoveLayerDown.CreateDockToolBarItem ());
 
 			// TODO-GTK3 (docking)
 #if false
@@ -63,8 +63,14 @@ namespace Pinta
 			app.AddAction (show_layers);
 			padMenu.AppendItem (show_layers.CreateMenuItem ());
 
-			show_layers.Toggled += (val) => { layers_item.Visible = val; };
-			layers_item.VisibilityNotifyEvent += (o, args) => { show_layers.Value = layers_item.Visible; };
+			show_layers.Toggled += (val) => {
+				if (val)
+					layers_item.Maximize ();
+				else
+					layers_item.Minimize ();
+			};
+			layers_item.MaximizeClicked += (_, _) => show_layers.Value = true;
+			layers_item.MinimizeClicked += (_, _) => show_layers.Value = false;
 		}
 	}
 }

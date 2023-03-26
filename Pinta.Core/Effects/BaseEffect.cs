@@ -48,7 +48,7 @@ namespace Pinta.Core
 		/// <summary>
 		/// Returns the icon to use for the effect in the Adjustments/Effects menu and history pad.
 		/// </summary>
-		public virtual string Icon { get { return "Menu.Effects.Default.png"; } }
+		public virtual string Icon => Pinta.Resources.Icons.EffectsDefault;
 
 		/// <summary>
 		/// Returns whether this effect can display a configuration dialog to the user. (Implemented by LaunchConfiguration ().)
@@ -77,14 +77,25 @@ namespace Pinta.Core
 
 		/// <summary>
 		/// Launches the configuration dialog for this effect/adjustment.
+		/// If IsConfigurable is true, the ConfigDialogResponse event will be invoked when the user accepts or cancels the dialog.
 		/// </summary>
-		/// <returns>Whether the user accepted or cancelled the configuration dialog. (true: accept, false: cancel)</returns>
-		public virtual bool LaunchConfiguration ()
+		public virtual void LaunchConfiguration ()
 		{
 			if (IsConfigurable)
 				throw new NotImplementedException (string.Format ("{0} is marked as configurable, but has not implemented LaunchConfiguration", this.GetType ()));
+		}
 
-			return false;
+		/// <summary>
+		/// Emitted when the configuration dialog is accepted or cancelled by the user.
+		/// </summary>
+		public event EventHandler<ConfigDialogResponseEventArgs>? ConfigDialogResponse;
+
+		/// <summary>
+		/// Notify that the configuration dialog was accepted or cancelled by the user.
+		/// </summary>
+		public void OnConfigDialogResponse (bool accepted)
+		{
+			ConfigDialogResponse?.Invoke (this, new ConfigDialogResponseEventArgs (accepted));
 		}
 
 		#region Overrideable Render Methods
@@ -94,7 +105,7 @@ namespace Pinta.Core
 		/// <param name="src">The source surface. DO NOT MODIFY.</param>
 		/// <param name="dst">The destination surface.</param>
 		/// <param name="rois">An array of rectangles of interest (roi) specifying the area(s) to modify. Only these areas should be modified.</param>
-		public virtual void Render (ImageSurface src, ImageSurface dst, Gdk.Rectangle[] rois)
+		public virtual void Render (ImageSurface src, ImageSurface dst, RectangleI[] rois)
 		{
 			foreach (var rect in rois)
 				Render (src, dst, rect);
@@ -106,14 +117,14 @@ namespace Pinta.Core
 		/// <param name="src">The source surface. DO NOT MODIFY.</param>
 		/// <param name="dst">The destination surface.</param>
 		/// <param name="roi">A rectangle of interest (roi) specifying the area to modify. Only these areas should be modified</param>
-		protected virtual void Render (ImageSurface src, ImageSurface dst, Gdk.Rectangle roi)
+		protected virtual void Render (ImageSurface src, ImageSurface dst, RectangleI roi)
 		{
-			var src_data = src.GetReadOnlyData ();
-			var dst_data = dst.GetData ();
+			var src_data = src.GetReadOnlyPixelData ();
+			var dst_data = dst.GetPixelData ();
 			int src_width = src.Width;
 			int dst_width = dst.Width;
 
-			for (int y = roi.Y; y <= roi.GetBottom (); ++y) {
+			for (int y = roi.Y; y <= roi.Bottom; ++y) {
 				Render (src_data.Slice (y * src_width + roi.X, roi.Width),
 					dst_data.Slice (y * dst_width + roi.X, roi.Width));
 			}
@@ -159,6 +170,13 @@ namespace Pinta.Core
 				effect.EffectData = EffectData?.Clone ();
 
 			return effect;
+		}
+
+		public class ConfigDialogResponseEventArgs : EventArgs
+		{
+			public ConfigDialogResponseEventArgs (bool accepted) { Accepted = accepted; }
+
+			public bool Accepted { get; private set; }
 		}
 	}
 

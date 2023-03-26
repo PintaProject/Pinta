@@ -38,52 +38,52 @@ namespace Pinta.Core
 				dst[i] = Apply (dst[i]);
 		}
 
-		private void ApplyRectangle (ImageSurface surface, Gdk.Rectangle rect)
+		private void ApplyRectangle (ImageSurface surface, RectangleI rect)
 		{
-			var data = surface.GetData ();
+			var data = surface.GetPixelData ();
 			int width = surface.Width;
-			for (int y = rect.Top; y <= rect.GetBottom (); ++y) {
+			for (int y = rect.Top; y <= rect.Bottom; ++y) {
 				Apply (data.Slice (y * width + rect.Left, rect.Width));
 			}
 		}
 
-		public void Apply (ImageSurface surface, Gdk.Rectangle[] roi, int startIndex, int length)
+		public void Apply (ImageSurface surface, RectangleI[] roi, int startIndex, int length)
 		{
-			Gdk.Rectangle regionBounds = Utility.GetRegionBounds (roi, startIndex, length);
+			RectangleI regionBounds = Utility.GetRegionBounds (roi, startIndex, length);
 
-			if (regionBounds != Gdk.Rectangle.Intersect (surface.GetBounds (), regionBounds))
+			if (regionBounds != RectangleI.Intersect (surface.GetBounds (), regionBounds))
 				throw new ArgumentOutOfRangeException ("roi", "Region is out of bounds");
 
 			for (int x = startIndex; x < startIndex + length; ++x)
 				ApplyRectangle (surface, roi[x]);
 		}
 
-		public void Apply (ImageSurface surface, Gdk.Rectangle[] roi)
+		public void Apply (ImageSurface surface, RectangleI[] roi)
 		{
 			Apply (surface, roi, 0, roi.Length);
 		}
 
-		public void Apply (ImageSurface surface, Gdk.Rectangle roi)
+		public void Apply (ImageSurface surface, RectangleI roi)
 		{
 			ApplyRectangle (surface, roi);
 		}
 
-		public void Apply (ImageSurface dst, ImageSurface src, Gdk.Rectangle roi)
+		public void Apply (ImageSurface dst, ImageSurface src, RectangleI roi)
 		{
-			var src_data = src.GetReadOnlyData ();
-			var dst_data = dst.GetData ();
+			var src_data = src.GetReadOnlyPixelData ();
+			var dst_data = dst.GetPixelData ();
 			int src_width = src.Width;
 			int dst_width = dst.Width;
 
-			for (int y = roi.Y; y <= roi.GetBottom (); ++y) {
+			for (int y = roi.Y; y <= roi.Bottom; ++y) {
 				Apply (dst_data.Slice (y * dst_width + roi.X, roi.Width),
 				      src_data.Slice (y * src_width + roi.X, roi.Width));
 			}
 		}
 
-		public void Apply (ImageSurface dst, ImageSurface src, Gdk.Rectangle[] rois)
+		public void Apply (ImageSurface dst, ImageSurface src, RectangleI[] rois)
 		{
-			foreach (Gdk.Rectangle roi in rois)
+			foreach (RectangleI roi in rois)
 				Apply (dst, src, roi);
 		}
 	}

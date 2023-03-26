@@ -43,7 +43,7 @@ namespace Pinta.Core
 		public ToggleCommand StatusBar { get; private set; }
 		public ToggleCommand ToolBox { get; private set; }
 		public ToggleCommand Rulers { get; private set; }
-		public GLib.SimpleAction RulerMetric { get; private set; }
+		public Gio.SimpleAction RulerMetric { get; private set; }
 		public Command Fullscreen { get; private set; }
 
 		public ToolBarComboBox ZoomComboBox { get; private set; }
@@ -56,7 +56,7 @@ namespace Pinta.Core
 			get { return zoom_to_window_activated; }
 			set {
 				zoom_to_window_activated = value;
-				old_zoom_text = ZoomComboBox.ComboBox.ActiveText;
+				old_zoom_text = ZoomComboBox.ComboBox.GetActiveText ()!;
 			}
 		}
 
@@ -73,7 +73,7 @@ namespace Pinta.Core
 			StatusBar = new ToggleCommand ("Statusbar", Translations.GetString ("Status Bar"), null, null);
 			ToolBox = new ToggleCommand ("ToolBox", Translations.GetString ("Tool Box"), null, null);
 			Rulers = new ToggleCommand ("Rulers", Translations.GetString ("Rulers"), null, Resources.Icons.ViewRulers);
-			RulerMetric = new GLib.SimpleAction ("rulermetric", GLib.VariantType.Int32, new GLib.Variant (0));
+			RulerMetric = Gio.SimpleAction.NewStateful ("rulermetric", GtkExtensions.IntVariantType, GLib.Variant.Create (0));
 			Fullscreen = new Command ("Fullscreen", Translations.GetString ("Fullscreen"), null, Resources.StandardIcons.DocumentNew);
 
 			ZoomCollection = new string[] {
@@ -102,7 +102,7 @@ namespace Pinta.Core
 				ToPercent (0.05),
 				Translations.GetString ("Window")
 			};
-			ZoomComboBox = new ToolBarComboBox (90, DefaultZoomIndex (), true, ZoomCollection) { Margin = 4 };
+			ZoomComboBox = new ToolBarComboBox (90, DefaultZoomIndex (), true, ZoomCollection);
 
 			// The toolbar is shown by default.
 			ToolBar.Value = true;
@@ -112,9 +112,9 @@ namespace Pinta.Core
 		}
 
 		#region Initialization
-		public void RegisterActions (Gtk.Application app, GLib.Menu menu)
+		public void RegisterActions (Gtk.Application app, Gio.Menu menu)
 		{
-			var zoom_section = new GLib.Menu ();
+			var zoom_section = Gio.Menu.New ();
 			menu.AppendSection (null, zoom_section);
 
 			app.AddAccelAction (ZoomIn, new[] { "<Primary>plus", "<Primary>equal", "equal", "<Primary>KP_Add", "KP_Add" });
@@ -132,10 +132,10 @@ namespace Pinta.Core
 			app.AddAccelAction (Fullscreen, "F11");
 			zoom_section.AppendItem (Fullscreen.CreateMenuItem ());
 
-			var metric_section = new GLib.Menu ();
+			var metric_section = Gio.Menu.New ();
 			menu.AppendSection (null, metric_section);
 
-			var metric_menu = new GLib.Menu ();
+			var metric_menu = Gio.Menu.New ();
 			metric_section.AppendSubmenu (Translations.GetString ("Ruler Units"), metric_menu);
 
 			app.AddAction (RulerMetric);
@@ -143,10 +143,10 @@ namespace Pinta.Core
 			metric_menu.Append (Translations.GetString ("Inches"), $"app.{RulerMetric.Name}(1)");
 			metric_menu.Append (Translations.GetString ("Centimeters"), $"app.{RulerMetric.Name}(2)");
 
-			var show_hide_section = new GLib.Menu ();
+			var show_hide_section = Gio.Menu.New ();
 			menu.AppendSection (null, show_hide_section);
 
-			var show_hide_menu = new GLib.Menu ();
+			var show_hide_menu = Gio.Menu.New ();
 			show_hide_section.AppendSubmenu (Translations.GetString ("Show/Hide"), show_hide_menu);
 
 			app.AddAction (PixelGrid);
@@ -168,21 +168,25 @@ namespace Pinta.Core
 			show_hide_menu.AppendItem (ImageTabs.CreateMenuItem ());
 		}
 
-		public void CreateStatusBar (Statusbar statusbar)
+		public void CreateStatusBar (Box statusbar)
 		{
-			statusbar.AppendItem (ZoomIn.CreateToolBarItem ());
-			statusbar.AppendItem (ZoomComboBox);
-			statusbar.AppendItem (ZoomOut.CreateToolBarItem ());
-			statusbar.AppendItem (new SeparatorToolItem { Margin = 6 }, 6);
+			statusbar.Append (GtkExtensions.CreateToolBarSeparator ());
+			statusbar.Append (ZoomOut.CreateToolBarItem ());
+			statusbar.Append (ZoomComboBox);
+			statusbar.Append (ZoomIn.CreateToolBarItem ());
 		}
 
 		public void RegisterHandlers ()
 		{
 			ZoomIn.Activated += HandlePintaCoreActionsViewZoomInActivated;
 			ZoomOut.Activated += HandlePintaCoreActionsViewZoomOutActivated;
-			ZoomComboBox.ComboBox.Changed += HandlePintaCoreActionsViewZoomComboBoxComboBoxChanged;
-			ZoomComboBox.ComboBox.Entry.FocusOutEvent += new Gtk.FocusOutEventHandler (ComboBox_FocusOutEvent);
-			ZoomComboBox.ComboBox.Entry.FocusInEvent += new Gtk.FocusInEventHandler (Entry_FocusInEvent);
+			ZoomComboBox.ComboBox.OnChanged += HandlePintaCoreActionsViewZoomComboBoxComboBoxChanged;
+
+			var focus_controller = Gtk.EventControllerFocus.New ();
+			focus_controller.OnEnter += Entry_FocusInEvent;
+			focus_controller.OnLeave += Entry_FocusOutEvent;
+			ZoomComboBox.ComboBox.GetEntry ().AddController (focus_controller);
+
 			ActualSize.Activated += HandlePintaCoreActionsViewActualSizeActivated;
 
 			PixelGrid.Toggled += (_) => {
@@ -204,18 +208,18 @@ namespace Pinta.Core
 		private string? temp_zoom;
 		private bool suspend_zoom_change;
 
-		private void Entry_FocusInEvent (object o, Gtk.FocusInEventArgs args)
+		private void Entry_FocusInEvent (object o, EventArgs args)
 		{
-			temp_zoom = PintaCore.Actions.View.ZoomComboBox.ComboBox.ActiveText;
+			temp_zoom = PintaCore.Actions.View.ZoomComboBox.ComboBox.GetActiveText ()!;
 		}
 
-		private void ComboBox_FocusOutEvent (object o, Gtk.FocusOutEventArgs args)
+		private void Entry_FocusOutEvent (object o, EventArgs args)
 		{
-			string text = PintaCore.Actions.View.ZoomComboBox.ComboBox.ActiveText;
+			string text = PintaCore.Actions.View.ZoomComboBox.ComboBox.GetActiveText ()!;
 			double percent;
 
 			if (!TryParsePercent (text, out percent)) {
-				PintaCore.Actions.View.ZoomComboBox.ComboBox.Entry.Text = temp_zoom;
+				PintaCore.Actions.View.ZoomComboBox.ComboBox.GetEntry ().SetText (temp_zoom!);
 				return;
 			}
 
@@ -275,7 +279,7 @@ namespace Pinta.Core
 
 		public void UpdateCanvasScale ()
 		{
-			string text = PintaCore.Actions.View.ZoomComboBox.ComboBox.ActiveText;
+			string text = PintaCore.Actions.View.ZoomComboBox.ComboBox.GetActiveText ()!;
 
 			// stay in "Zoom to Window" mode if this function was called without the zoom level being changed by the user (e.g. if the 
 			// image was rotated or cropped) and "Zoom to Window" mode is active

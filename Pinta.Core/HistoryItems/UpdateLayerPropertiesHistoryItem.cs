@@ -73,10 +73,6 @@ namespace Pinta.Core
 			UpdateSelectionLayer (doc, layer);
 		}
 
-		public override void Dispose ()
-		{
-		}
-
 		private void UpdateSelectionLayer (Document doc, Layer layer)
 		{
 			// Keep the selection layer's visibility in sync with the current layer.

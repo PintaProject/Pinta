@@ -15,6 +15,7 @@ using System.Linq;
 using System.Reflection;
 using System.Text;
 using System.Text.RegularExpressions;
+using System.Threading.Tasks;
 using Gdk;
 using Pinta.Core;
 
@@ -27,14 +28,14 @@ namespace Pinta.Core
 		private TextPosition currentPos;
 		private TextPosition selectionStart;
 
-		public Pango.FontDescription Font { get; private set; } = new ();
+		public Pango.FontDescription Font { get; private set; } = PangoExtensions.CreateFontDescription ();
 		public TextAlignment Alignment { get; private set; }
 		public bool Underline { get; private set; }
 
 		public TextPosition CurrentPosition { get { return currentPos; } }
 		public int LineCount { get { return lines.Count; } }
 		public TextMode State;
-		public Point Origin { get; set; }
+		public PointI Origin { get; set; }
 
 		public event EventHandler? Modified;
 
@@ -59,7 +60,7 @@ namespace Pinta.Core
 			currentPos = new TextPosition (0, 0);
 			ClearSelection ();
 
-			Origin = Point.Zero;
+			Origin = PointI.Zero;
 
 			OnModified ();
 		}
@@ -79,7 +80,7 @@ namespace Pinta.Core
 			clonedTE.Font = Font.Copy ();
 			clonedTE.Alignment = Alignment;
 			clonedTE.Underline = Underline;
-			clonedTE.Origin = new Point (Origin.X, Origin.Y);
+			clonedTE.Origin = new PointI (Origin.X, Origin.Y);
 
 			//The rest of the variables are calculated on the spot.
 
@@ -318,7 +319,7 @@ namespace Pinta.Core
 			}
 		}
 
-		public void PerformCopy (Gtk.Clipboard clipboard)
+		public void PerformCopy (Gdk.Clipboard clipboard)
 		{
 			if (HasSelection ()) {
 				StringBuilder strbld = new StringBuilder ();
@@ -333,12 +334,12 @@ namespace Pinta.Core
 				});
 				strbld.Remove (strbld.Length - Environment.NewLine.Length, Environment.NewLine.Length);
 
-				clipboard.Text = strbld.ToString ();
+				clipboard.SetText (strbld.ToString ());
 			} else
-				clipboard.Clear ();
+				clipboard.SetText (string.Empty);
 		}
 
-		public void PerformCut (Gtk.Clipboard clipboard)
+		public void PerformCut (Gdk.Clipboard clipboard)
 		{
 			PerformCopy (clipboard);
 			if (HasSelection ()) {
@@ -349,13 +350,9 @@ namespace Pinta.Core
 		/// <summary>
 		/// Pastes text from the clipboard.
 		/// </summary>
-		/// <returns>
-		/// <c>true</c>, if the paste was successfully performed, <c>false</c> otherwise.
-		/// </returns>
-		public bool PerformPaste (Gtk.Clipboard clipboard)
+		public async Task<bool> PerformPaste (Gdk.Clipboard clipboard)
 		{
-			string txt = string.Empty;
-			txt = clipboard.WaitForText ();
+			string? txt = await clipboard.ReadTextAsync ();
 			if (String.IsNullOrEmpty (txt))
 				return false;
 
@@ -383,6 +380,7 @@ namespace Pinta.Core
 			State = TextMode.Uncommitted;
 
 			OnModified ();
+
 			return true;
 		}
 		#endregion

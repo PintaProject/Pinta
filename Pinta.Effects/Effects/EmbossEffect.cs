@@ -16,9 +16,7 @@ namespace Pinta.Effects
 {
 	public class EmbossEffect : BaseEffect
 	{
-		public override string Icon {
-			get { return "Menu.Effects.Stylize.Emboss.png"; }
-		}
+		public override string Icon => Pinta.Resources.Icons.EffectsStylizeEmboss;
 
 		public override string Name {
 			get { return Translations.GetString ("Emboss"); }
@@ -41,25 +39,25 @@ namespace Pinta.Effects
 			EffectData = new EmbossData ();
 		}
 
-		public override bool LaunchConfiguration ()
+		public override void LaunchConfiguration ()
 		{
-			return EffectHelper.LaunchSimpleEffectDialog (this);
+			EffectHelper.LaunchSimpleEffectDialog (this);
 		}
 
 		#region Algorithm Code Ported From PDN
-		public override void Render (ImageSurface src, ImageSurface dst, Gdk.Rectangle[] rois)
+		public override void Render (ImageSurface src, ImageSurface dst, Core.RectangleI[] rois)
 		{
 			double[,] weights = Weights;
 
 			var srcWidth = src.Width;
 			var srcHeight = src.Height;
 
-			ReadOnlySpan<ColorBgra> src_data = src.GetReadOnlyData ();
-			Span<ColorBgra> dst_data = dst.GetData ();
+			ReadOnlySpan<ColorBgra> src_data = src.GetReadOnlyPixelData ();
+			Span<ColorBgra> dst_data = dst.GetPixelData ();
 
 			foreach (var rect in rois) {
 				// loop through each line of target rectangle
-				for (int y = rect.Top; y <= rect.GetBottom (); ++y) {
+				for (int y = rect.Top; y <= rect.Bottom; ++y) {
 					int fyStart = 0;
 					int fyEnd = 3;
 
@@ -72,7 +70,7 @@ namespace Pinta.Effects
 					// loop through each point in the line 
 					var dst_row = dst_data.Slice (y * srcWidth, srcWidth);
 
-					for (int x = rect.Left; x <= rect.GetRight (); ++x) {
+					for (int x = rect.Left; x <= rect.Right; ++x) {
 						int fxStart = 0;
 						int fxEnd = 3;
 

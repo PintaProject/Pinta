@@ -49,9 +49,7 @@ namespace Pinta.Effects
 		private UnaryPixelOps.Desaturate desaturateOp;
 		private UserBlendOps.OverlayBlendOp overlayOp;
 
-		public override string Icon {
-			get { return "Menu.Effects.Photo.SoftenPortrait.png"; }
-		}
+		public override string Icon => Pinta.Resources.Icons.EffectsPhotoSoftenPortrait;
 
 		public override string Name {
 			get { return Translations.GetString ("Soften Portrait"); }
@@ -77,12 +75,12 @@ namespace Pinta.Effects
 			overlayOp = new UserBlendOps.OverlayBlendOp ();
 		}
 
-		public override bool LaunchConfiguration ()
+		public override void LaunchConfiguration ()
 		{
-			return EffectHelper.LaunchSimpleEffectDialog (this);
+			EffectHelper.LaunchSimpleEffectDialog (this);
 		}
 
-		public override void Render (ImageSurface src, ImageSurface dest, Gdk.Rectangle[] rois)
+		public override void Render (ImageSurface src, ImageSurface dest, Core.RectangleI[] rois)
 		{
 			int warmth = Data.Warmth;
 			float redAdjust = 1.0f + (warmth / 100.0f);
@@ -91,16 +89,16 @@ namespace Pinta.Effects
 			this.blurEffect.Render (src, dest, rois);
 			this.bacAdjustment.Render (src, dest, rois);
 
-			ReadOnlySpan<ColorBgra> src_data = src.GetReadOnlyData ();
-			Span<ColorBgra> dst_data = dest.GetData ();
+			ReadOnlySpan<ColorBgra> src_data = src.GetReadOnlyPixelData ();
+			Span<ColorBgra> dst_data = dest.GetPixelData ();
 			int width = dest.Width;
 
-			foreach (Gdk.Rectangle roi in rois) {
-				for (int y = roi.Top; y <= roi.GetBottom (); ++y) {
+			foreach (var roi in rois) {
+				for (int y = roi.Top; y <= roi.Bottom; ++y) {
 					var src_row = src_data.Slice (y * width, width);
 					var dst_row = dst_data.Slice (y * width, width);
 
-					for (int x = roi.Left; x <= roi.GetRight (); ++x) {
+					for (int x = roi.Left; x <= roi.Right; ++x) {
 						ColorBgra srcGrey = this.desaturateOp.Apply (src_row[x]);
 
 						srcGrey.R = Utility.ClampToByte ((int) ((float) srcGrey.R * redAdjust));

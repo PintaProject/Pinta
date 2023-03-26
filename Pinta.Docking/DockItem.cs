@@ -24,6 +24,8 @@
 
 using System;
 using Gtk;
+using Pinta.Core;
+using Pinta.Resources;
 
 namespace Pinta.Docking
 {
@@ -31,7 +33,7 @@ namespace Pinta.Docking
 	/// A dock item contains a single child widget, and can be docked at
 	/// various locations.
 	/// </summary>
-	public class DockItem : VBox
+	public class DockItem : Box
 	{
 		private Label label_widget;
 		private Stack button_stack;
@@ -44,9 +46,14 @@ namespace Pinta.Docking
 		public string UniqueName { get; private set; }
 
 		/// <summary>
+		/// Icon name for the dock item, used when minimized.
+		/// </summary>
+		public string IconName { get; private set; }
+
+		/// <summary>
 		/// Visible label for the dock item.
 		/// </summary>
-		public string Label { get => label_widget.Text; set => label_widget.Text = value; }
+		public string Label { get => label_widget.GetLabel (); set => label_widget.SetLabel (value); }
 
 		/// <summary>
 		/// Triggered when the minimize button is pressed.
@@ -58,37 +65,42 @@ namespace Pinta.Docking
 		/// </summary>
 		public event EventHandler? MaximizeClicked;
 
-		public DockItem (Widget child, string unique_name, bool locked = false)
+		public DockItem (Widget child, string unique_name, string icon_name, bool locked = false)
 		{
-			UniqueName = unique_name;
+			SetOrientation (Orientation.Vertical);
 
-			minimize_button = new Button ("window-minimize-symbolic", IconSize.Button) { Relief = ReliefStyle.None };
-			maximize_button = new Button ("window-maximize-symbolic", IconSize.Button) { Relief = ReliefStyle.None };
+			UniqueName = unique_name;
+			IconName = icon_name;
+
+			minimize_button = Button.NewFromIconName (StandardIcons.WindowMinimize);
+			minimize_button.AddCssClass (Pinta.Core.AdwaitaStyles.Flat);
+			maximize_button = Button.NewFromIconName (StandardIcons.WindowMaximize);
+			maximize_button.AddCssClass (Pinta.Core.AdwaitaStyles.Flat);
 
 			button_stack = new Stack ();
-			button_stack.Add (minimize_button);
-			button_stack.Add (maximize_button);
+			button_stack.AddChild (minimize_button);
+			button_stack.AddChild (maximize_button);
 
 			label_widget = new Label ();
 			if (!locked) {
 				const int padding = 8;
-				var title_layout = new HBox ();
-				title_layout.PackStart (label_widget, false, false, padding);
+				var title_layout = Box.New (Orientation.Horizontal, 0);
+				label_widget.MarginStart = label_widget.MarginEnd = padding;
+				label_widget.Hexpand = true;
+				label_widget.Halign = Align.Start;
+				title_layout.Append (label_widget);
 
-				title_layout.PackEnd (button_stack, false, false, 0);
+				title_layout.Append (button_stack);
 
-				minimize_button.Clicked += (o, args) => {
-					MinimizeClicked?.Invoke (this, new EventArgs ());
-				};
+				minimize_button.OnClicked += (o, args) => Minimize ();
+				maximize_button.OnClicked += (o, args) => Maximize ();
 
-				maximize_button.Clicked += (o, args) => {
-					MaximizeClicked?.Invoke (this, new EventArgs ());
-				};
-
-				PackStart (title_layout, false, false, 0);
+				Append (title_layout);
 			}
 
-			PackStart (child, true, true, 0);
+			child.Valign = Align.Fill;
+			child.Vexpand = true;
+			Append (child);
 
 			// TODO - support dragging into floating panel?
 		}
@@ -96,21 +108,33 @@ namespace Pinta.Docking
 		/// <summary>
 		/// Create a toolbar and add it to the bottom of the dock item.
 		/// </summary>
-		public Toolbar AddToolBar ()
+		public Gtk.Box AddToolBar ()
 		{
-			var toolbar = new Toolbar ();
-			PackStart (toolbar, false, false, 0);
+			var toolbar = GtkExtensions.CreateToolBar ();
+			Append (toolbar);
 			return toolbar;
 		}
 
 		/// <summary>
-		/// Update the dock item's state after it is minimized.
+		/// Minimize the dock item.
 		/// </summary>
-		public void Minimize () => button_stack.VisibleChild = maximize_button;
+		public void Minimize ()
+		{
+			if (button_stack.VisibleChild != maximize_button) {
+				button_stack.VisibleChild = maximize_button;
+				MinimizeClicked?.Invoke (this, new EventArgs ());
+			}
+		}
 
 		/// <summary>
-		/// Update the dock item's state after it is maximized.
+		/// Maximize the dock item.
 		/// </summary>
-		public void Maximize () => button_stack.VisibleChild = minimize_button;
+		public void Maximize ()
+		{
+			if (button_stack.VisibleChild != minimize_button) {
+				button_stack.VisibleChild = minimize_button;
+				MaximizeClicked?.Invoke (this, new EventArgs ());
+			}
+		}
 	}
 }

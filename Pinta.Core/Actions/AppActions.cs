@@ -46,7 +46,7 @@ namespace Pinta.Core
 		}
 
 		#region Initialization
-		public void RegisterActions (Gtk.Application app, GLib.Menu menu)
+		public void RegisterActions (Gtk.Application app, Gio.Menu menu)
 		{
 			app.AddAction (About);
 			menu.AppendItem (About.CreateMenuItem ());

@@ -28,7 +28,7 @@ using System;
 using System.IO;
 using System.Runtime.InteropServices;
 
-using Gdk;
+using GdkPixbuf;
 
 namespace Pinta.Core
 {
@@ -43,20 +43,20 @@ namespace Pinta.Core
 
 		#region IImageImporter implementation
 
-		public void Import (GLib.IFile file, Gtk.Window parent)
+		public void Import (Gio.File file, Gtk.Window parent)
 		{
 			Pixbuf bg;
 
 			// Handle any EXIF orientation flags
 			using (var fs = file.Read (cancellable: null)) {
 				try {
-					bg = new Pixbuf (fs, cancellable: null);
+					bg = GdkPixbufExtensions.NewPixbufFromStream (fs, cancellable: null);
 				} finally {
 					fs.Close (null);
 				}
 			}
 
-			bg = bg.ApplyEmbeddedOrientation ();
+			bg = bg.ApplyEmbeddedOrientation () ?? bg;
 
 			Size imagesize = new Size (bg.Width, bg.Height);
 
@@ -66,39 +66,12 @@ namespace Pinta.Core
 
 			Layer layer = doc.Layers.AddNewLayer (file.GetDisplayName ());
 
-			using (Cairo.Context g = new Cairo.Context (layer.Surface)) {
-				CairoHelper.SetSourcePixbuf (g, bg, 0, 0);
-				g.Paint ();
-			}
-
-			bg.Dispose ();
+			var g = new Cairo.Context (layer.Surface);
+			g.DrawPixbuf (bg, 0, 0);
 		}
-
-		public Pixbuf? LoadThumbnail (string filename, int maxWidth, int maxHeight, Gtk.Window parent)
-		{
-			int imageWidth;
-			int imageHeight;
-			Pixbuf? pixbuf = null;
-
-			var imageInfo = Gdk.Pixbuf.GetFileInfo (filename, out imageWidth, out imageHeight);
-
-			if (imageInfo == null) {
-				return null;
-			}
-
-			// Scale down images that are too large, but don't scale up small images.
-			if (imageWidth > maxWidth || imageHeight > maxHeight) {
-				pixbuf = new Gdk.Pixbuf (filename, maxWidth, maxHeight, true);
-			} else {
-				pixbuf = new Gdk.Pixbuf (filename);
-			}
-
-			return pixbuf;
-		}
-
 		#endregion
 
-		protected virtual void DoSave (Pixbuf pb, GLib.IFile file, string fileType, Gtk.Window parent)
+		protected virtual void DoSave (Pixbuf pb, Gio.File file, string fileType, Gtk.Window parent)
 		{
 			using var stream = file.Replace ();
 			try {
@@ -108,9 +81,9 @@ namespace Pinta.Core
 			}
 		}
 
-		public void Export (Document document, GLib.IFile file, Gtk.Window parent)
+		public void Export (Document document, Gio.File file, Gtk.Window parent)
 		{
-			using var surf = document.GetFlattenedImage ();
+			var surf = document.GetFlattenedImage ();
 
 			using Pixbuf pb = surf.ToPixbuf ();
 			DoSave (pb, file, filetype, parent);

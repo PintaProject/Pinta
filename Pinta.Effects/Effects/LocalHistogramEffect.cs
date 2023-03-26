@@ -106,7 +106,7 @@ namespace Pinta.Effects
 		    int rad,
 		    ImageSurface src,
 		    ImageSurface dst,
-		    Gdk.Rectangle rect)
+		    Core.RectangleI rect)
 		{
 			int width = src.Width;
 			int height = src.Height;
@@ -131,10 +131,10 @@ namespace Pinta.Effects
 			Span<int> hr = stackalloc int[hLength];
 			Span<int> ha = stackalloc int[hLength];
 
-			var src_data = src.GetReadOnlyData ();
-			var dst_data = dst.GetData ();
+			var src_data = src.GetReadOnlyPixelData ();
+			var dst_data = dst.GetPixelData ();
 
-			for (int y = rect.Top; y <= rect.GetBottom (); ++y) {
+			for (int y = rect.Top; y <= rect.Bottom; ++y) {
 				SetToZero (hb);
 				SetToZero (hg);
 				SetToZero (hr);
@@ -172,7 +172,7 @@ namespace Pinta.Effects
 				ReadOnlySpan<ColorBgra> ps = src_data.Slice (y * width, width);
 				Span<ColorBgra> pd = dst_data.Slice (y * width, width);
 
-				for (int x = rect.Left; x <= rect.GetRight (); x++) {
+				for (int x = rect.Left; x <= rect.Right; x++) {
 					pd[x] = Apply (ps[x], area, hb, hg, hr, ha);
 
 					// assert: u + x >= 0
@@ -289,7 +289,7 @@ namespace Pinta.Effects
 		    int rad,
 		    ImageSurface src,
 		    ImageSurface dst,
-		    Gdk.Rectangle rect)
+		    Core.RectangleI rect)
 		{
 			int width = src.Width;
 			int height = src.Height;
@@ -313,10 +313,10 @@ namespace Pinta.Effects
 			Span<int> hg = stackalloc int[hLength];
 			Span<int> hr = stackalloc int[hLength];
 
-			var src_data = src.GetReadOnlyData ();
-			var dst_data = dst.GetData ();
+			var src_data = src.GetReadOnlyPixelData ();
+			var dst_data = dst.GetPixelData ();
 
-			for (int y = rect.Top; y <= rect.GetBottom (); y++) {
+			for (int y = rect.Top; y <= rect.Bottom; y++) {
 				SetToZero (hb);
 				SetToZero (hg);
 				SetToZero (hr);
@@ -355,7 +355,7 @@ namespace Pinta.Effects
 				ReadOnlySpan<ColorBgra> ps = src_data.Slice (y * width, width);
 				Span<ColorBgra> pd = dst_data.Slice (y * width, width);
 
-				for (int x = rect.Left; x <= rect.GetRight (); x++) {
+				for (int x = rect.Left; x <= rect.Right; x++) {
 					pd[x] = ApplyWithAlpha (ps[x], area, sum, hb, hg, hr);
 
 					// assert: u + x >= 0

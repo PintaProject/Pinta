@@ -16,9 +16,7 @@ namespace Pinta.Effects
 {
 	public class SharpenEffect : LocalHistogramEffect
 	{
-		public override string Icon {
-			get { return "Menu.Effects.Photo.Sharpen.png"; }
-		}
+		public override string Icon => Pinta.Resources.Icons.EffectsPhotoSharpen;
 
 		public override string Name {
 			get { return Translations.GetString ("Sharpen"); }
@@ -39,14 +37,14 @@ namespace Pinta.Effects
 			EffectData = new SharpenData ();
 		}
 
-		public override bool LaunchConfiguration ()
+		public override void LaunchConfiguration ()
 		{
-			return EffectHelper.LaunchSimpleEffectDialog (this);
+			EffectHelper.LaunchSimpleEffectDialog (this);
 		}
 
-		public override void Render (ImageSurface src, ImageSurface dest, Gdk.Rectangle[] rois)
+		public override void Render (ImageSurface src, ImageSurface dest, Core.RectangleI[] rois)
 		{
-			foreach (Gdk.Rectangle rect in rois)
+			foreach (var rect in rois)
 				RenderRect (Data.Amount, src, dest, rect);
 		}
 

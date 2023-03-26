@@ -20,7 +20,7 @@ namespace Pinta.Effects
 		UnaryPixelOp? op = null;
 
 		public override string Icon {
-			get { return "Menu.Adjustments.Curves.png"; }
+			get { return Pinta.Resources.Icons.AdjustmentsCurves; }
 		}
 
 		public override string Name {
@@ -42,19 +42,22 @@ namespace Pinta.Effects
 			EffectData = new CurvesData ();
 		}
 
-		public override bool LaunchConfiguration ()
+		public override void LaunchConfiguration ()
 		{
-			using (var dialog = new CurvesDialog (Data)) {
-				dialog.Title = Name;
-				dialog.Icon = PintaCore.Resources.GetIcon (Icon);
+			var dialog = new CurvesDialog (Data) {
+				Title = Name,
+				IconName = Icon,
+			};
 
-				int response = dialog.Run ();
+			dialog.OnResponse += (_, args) => {
+				OnConfigDialogResponse (args.ResponseId == (int) Gtk.ResponseType.Ok);
+				dialog.Destroy ();
+			};
 
-				return (response == (int) Gtk.ResponseType.Ok);
-			}
+			dialog.Present ();
 		}
 
-		public override void Render (ImageSurface src, ImageSurface dest, Gdk.Rectangle[] rois)
+		public override void Render (ImageSurface src, ImageSurface dest, Core.RectangleI[] rois)
 		{
 			if (Data.ControlPoints == null)
 				return;

@@ -41,7 +41,7 @@ namespace Pinta.Tools.Brushes
 			get { return 0.05; }
 		}
 
-		protected override Gdk.Rectangle OnMouseMove (Context g, Color strokeColor, ImageSurface surface,
+		protected override RectangleI OnMouseMove (Context g, Color strokeColor, ImageSurface surface,
 							      int x, int y, int lastX, int lastY)
 		{
 			double cx = Math.Round (x / 100.0) * 100.0;
@@ -59,7 +59,7 @@ namespace Pinta.Tools.Brushes
 				g.Stroke ();
 			}
 
-			return Gdk.Rectangle.Zero;
+			return RectangleI.Zero;
 		}
 	}
 }

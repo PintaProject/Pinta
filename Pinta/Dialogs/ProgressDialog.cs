@@ -38,18 +38,25 @@ namespace Pinta
 		uint timeout_id;
 
 		public ProgressDialog ()
-		    : base (string.Empty, PintaCore.Chrome.MainWindow, DialogFlags.Modal)
 		{
-			WindowPosition = WindowPosition.CenterOnParent;
+			TransientFor = PintaCore.Chrome.MainWindow;
+			Modal = true;
+
+			OnResponse += (_, args) => Canceled?.Invoke (this, EventArgs.Empty);
 
 			this.Build ();
 			timeout_id = 0;
 			Hide ();
 		}
 
+		public new string Title {
+			get => base.GetTitle ()!;
+			set => SetTitle (value);
+		}
+
 		public string Text {
-			get { return label.Text; }
-			set { label.Text = value; }
+			get { return label.GetText (); }
+			set { label.SetText (value); }
 		}
 
 		public double Progress {
@@ -61,8 +68,8 @@ namespace Pinta
 
 		void IProgressDialog.Show ()
 		{
-			timeout_id = GLib.Timeout.Add (500, () => {
-				this.ShowAll ();
+			timeout_id = GLib.Functions.TimeoutAddFull (0, 500, (_) => {
+				this.Show ();
 				timeout_id = 0;
 				return false;
 			});
@@ -75,25 +82,21 @@ namespace Pinta
 			this.Hide ();
 		}
 
-		protected override void OnResponse (Gtk.ResponseType response_id)
-		{
-			if (Canceled != null)
-				Canceled (this, EventArgs.Empty);
-		}
-
 		[MemberNotNull (nameof (label), nameof (progress_bar))]
 		private void Build ()
 		{
-			ContentArea.BorderWidth = 2;
-			ContentArea.Spacing = 6;
+			var content_area = this.GetContentAreaBox ();
+			content_area.Spacing = 6;
+			content_area.SetAllMargins (2);
 
 			label = new Label ();
-			ContentArea.Add (label);
+			content_area.Append (label);
 
 			progress_bar = new ProgressBar ();
-			ContentArea.Add (progress_bar);
+			content_area.Append (progress_bar);
 
-			AddButton (Gtk.Stock.Cancel, Gtk.ResponseType.Cancel);
+			// TODO-GTK4 - can this use the translations from GTK?
+			AddButton ("_Cancel", (int) ResponseType.Cancel);
 
 			DefaultWidth = 400;
 			DefaultHeight = 114;

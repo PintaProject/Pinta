@@ -32,22 +32,19 @@ namespace Pinta.Core
 	/// <summary>
 	/// Buttons used by the ToolBoxWidget.
 	/// </summary>
-	public class ToolBoxButton : ToggleToolButton
+	public class ToolBoxButton : ToggleButton
 	{
 		public BaseTool Tool { get; }
 
 		public ToolBoxButton (BaseTool tool)
 		{
 			Tool = tool;
+			IconName = tool.Icon;
+			Name = tool.Name;
 
-			var image = Image.NewFromIconName (tool.Icon, IconSize.Button);
-			image.Show ();
-
-			IconWidget = image;
-			Label = tool.Name;
+			AddCssClass (AdwaitaStyles.Flat);
 
 			Show ();
-
 			if (tool.ShortcutKey != 0) {
 				var shortcut_label = Translations.GetString ("Shortcut key");
 				TooltipText = $"{tool.Name}\n{shortcut_label}: {tool.ShortcutKey.ToString ().ToUpperInvariant ()}\n\n{tool.StatusBarText}";

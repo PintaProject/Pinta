@@ -36,20 +36,15 @@ namespace Pinta.Actions
 
 		public void Uninitialize () => PintaCore.Actions.Edit.PasteIntoNewImage.Activated -= Activated;
 
-		private void Activated (object sender, EventArgs e)
+		private async void Activated (object sender, EventArgs e)
 		{
-			var cb = Clipboard.Get (Gdk.Atom.Intern ("CLIPBOARD", false));
+			var cb = GdkExtensions.GetDefaultClipboard ();
+			Gdk.Texture? cb_texture = await cb.ReadTextureAsync ();
 
-			if (cb.WaitIsImageAvailable ()) {
-				using (var image = cb.WaitForImage ()) {
-					if (image != null) {
-						PintaCore.Workspace.NewDocumentFromImage (image);
-						return;
-					}
-				}
-			}
-
-			PasteAction.ShowClipboardEmptyDialog ();
+			if (cb_texture is not null)
+				PintaCore.Workspace.NewDocumentFromImage (cb_texture.ToSurface ());
+			else
+				PasteAction.ShowClipboardEmptyDialog ();
 		}
 	}
 }

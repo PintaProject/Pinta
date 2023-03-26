@@ -38,22 +38,22 @@ namespace Pinta.Core
 		/// <param name="rhs">The Surface to read pixels from for the rhs parameter given to the method <b>ColorBgra Apply(ColorBgra, ColorBgra)</b></param>
 		/// <param name="rhsOffset">The pixel offset that defines the upper-left of the rectangle-of-interest for the rhs Surface.</param>
 		/// <param name="roiSize">The size of the rectangles-of-interest for all Surfaces.</param>
-		public void Apply (Cairo.ImageSurface dst, Point dstOffset,
-				  Cairo.ImageSurface lhs, Point lhsOffset,
-				  Cairo.ImageSurface rhs, Point rhsOffset,
+		public void Apply (Cairo.ImageSurface dst, PointI dstOffset,
+				  Cairo.ImageSurface lhs, PointI lhsOffset,
+				  Cairo.ImageSurface rhs, PointI rhsOffset,
 				  Size roiSize)
 		{
 			// Bounds checking only enabled in Debug builds.
 #if DEBUG
 			// Create bounding rectangles for each Surface
-			Rectangle dstRect = new Rectangle (dstOffset, roiSize);
-			Rectangle lhsRect = new Rectangle (lhsOffset, roiSize);
-			Rectangle rhsRect = new Rectangle (rhsOffset, roiSize);
+			var dstRect = new RectangleI (dstOffset, roiSize);
+			var lhsRect = new RectangleI (lhsOffset, roiSize);
+			var rhsRect = new RectangleI (rhsOffset, roiSize);
 
 			// Clip those rectangles to those Surface's bounding rectangles
-			Rectangle dstClip = Rectangle.Intersect (dstRect, dst.GetBounds ());
-			Rectangle lhsClip = Rectangle.Intersect (lhsRect, lhs.GetBounds ());
-			Rectangle rhsClip = Rectangle.Intersect (rhsRect, rhs.GetBounds ());
+			var dstClip = RectangleI.Intersect (dstRect, dst.GetBounds ());
+			var lhsClip = RectangleI.Intersect (lhsRect, lhs.GetBounds ());
+			var rhsClip = RectangleI.Intersect (rhsRect, rhs.GetBounds ());
 
 			// If any of those Rectangles actually got clipped, then throw an exception
 			if (dstRect != dstClip) {
@@ -72,11 +72,11 @@ namespace Pinta.Core
 			// Cache the width and height properties
 			int width = roiSize.Width;
 			int height = roiSize.Height;
-			var lhs_data = lhs.GetReadOnlyData ();
+			var lhs_data = lhs.GetReadOnlyPixelData ();
 			int lhs_width = lhs.Width;
-			var rhs_data = rhs.GetReadOnlyData ();
+			var rhs_data = rhs.GetReadOnlyPixelData ();
 			int rhs_width = rhs.Width;
-			var dst_data = dst.GetData ();
+			var dst_data = dst.GetPixelData ();
 			int dst_width = dst.Width;
 
 			// Do the work.
@@ -99,8 +99,8 @@ namespace Pinta.Core
 				throw new ArgumentException ("dst.Size != src.Size");
 			}
 
-			var src_data = src.GetReadOnlyData ();
-			var dst_data = dst.GetData ();
+			var src_data = src.GetReadOnlyPixelData ();
+			var dst_data = dst.GetPixelData ();
 			int width = src.Width;
 
 			for (int y = 0; y < dst.Height; ++y) {
@@ -119,9 +119,9 @@ namespace Pinta.Core
 				throw new ArgumentException ("lhs.Size != rhs.Size");
 			}
 
-			var lhs_data = lhs.GetReadOnlyData ();
-			var rhs_data = rhs.GetReadOnlyData ();
-			var dst_data = dst.GetData ();
+			var lhs_data = lhs.GetReadOnlyPixelData ();
+			var rhs_data = rhs.GetReadOnlyPixelData ();
+			var dst_data = dst.GetPixelData ();
 			int width = dst.Width;
 
 			for (int y = 0; y < dst.Height; ++y) {

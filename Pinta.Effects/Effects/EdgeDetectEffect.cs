@@ -19,9 +19,7 @@ namespace Pinta.Effects
 	{
 		private double[][]? weights;
 
-		public override string Icon {
-			get { return "Menu.Effects.Stylize.EdgeDetect.png"; }
-		}
+		public override string Icon => Pinta.Resources.Icons.EffectsStylizeEdgeDetect;
 
 		public override string Name {
 			get { return Translations.GetString ("Edge Detect"); }
@@ -42,12 +40,12 @@ namespace Pinta.Effects
 			EffectData = new EdgeDetectData ();
 		}
 
-		public override bool LaunchConfiguration ()
+		public override void LaunchConfiguration ()
 		{
-			return EffectHelper.LaunchSimpleEffectDialog (this);
+			EffectHelper.LaunchSimpleEffectDialog (this);
 		}
 
-		public override void Render (ImageSurface src, ImageSurface dest, Gdk.Rectangle[] rois)
+		public override void Render (ImageSurface src, ImageSurface dest, Core.RectangleI[] rois)
 		{
 			SetWeights ();
 			base.RenderColorDifferenceEffect (weights, src, dest, rois);

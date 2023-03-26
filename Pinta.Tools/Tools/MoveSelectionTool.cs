@@ -43,13 +43,13 @@ namespace Pinta.Tools
 		public override string Icon => Pinta.Resources.Icons.ToolMoveSelection;
 		// Translators: {0} is 'Ctrl', or a platform-specific key such as 'Command' on macOS.
 		public override string StatusBarText => Translations.GetString ("Left click and drag the selection to move selection outline. Hold {0} to scale instead of move. Right click and drag the selection to rotate selection outline. Hold Shift to rotate in steps. Use arrow keys to move selection outline by a single pixel.", GtkExtensions.CtrlLabel ());
-		public override Gdk.Cursor DefaultCursor => new Gdk.Cursor (Gdk.Display.Default, Gtk.IconTheme.Default.LoadIcon (Pinta.Resources.Icons.ToolMoveSelection, 16), 0, 0);
+		public override Gdk.Cursor DefaultCursor => Gdk.Cursor.NewFromTexture (Resources.GetIcon (Pinta.Resources.Icons.ToolMoveSelection), 0, 0, null);
 		public override Gdk.Key ShortcutKey => Gdk.Key.M;
 		public override int Priority => 7;
 
-		protected override Rectangle GetSourceRectangle (Document document)
+		protected override RectangleD GetSourceRectangle (Document document)
 		{
-			return document.Selection.SelectionPath.GetBounds ().ToCairoRectangle ();
+			return document.Selection.SelectionPath.GetBounds ().ToDouble ();
 		}
 
 		protected override void OnStartTransform (Document document)
@@ -70,7 +70,6 @@ namespace Pinta.Tools
 			if (original_selection is null)
 				return;
 
-			document.Selection.Dispose ();
 			document.Selection = original_selection.Transform (transform);
 			document.Selection.Visible = true;
 
@@ -82,15 +81,14 @@ namespace Pinta.Tools
 			base.OnFinishTransform (document, transform);
 
 			// Also transform the base selection used for the various select modes.
-			using (var prev_selection = document.PreviousSelection)
-				document.PreviousSelection = prev_selection.Transform (transform);
+			var prev_selection = document.PreviousSelection;
+			document.PreviousSelection = prev_selection.Transform (transform);
 
 			if (hist != null)
 				document.History.PushNewItem (hist);
 
 			hist = null;
 
-			original_selection?.Dispose ();
 			original_selection = null;
 		}
 	}

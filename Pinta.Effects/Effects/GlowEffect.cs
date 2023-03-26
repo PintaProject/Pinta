@@ -21,9 +21,7 @@ namespace Pinta.Effects
 		private BrightnessContrastEffect contrastEffect;
 		private UserBlendOps.ScreenBlendOp screenBlendOp;
 
-		public override string Icon {
-			get { return "Menu.Effects.Photo.Glow.png"; }
-		}
+		public override string Icon => Pinta.Resources.Icons.EffectsPhotoGlow;
 
 		public override string Name {
 			get { return Translations.GetString ("Glow"); }
@@ -48,13 +46,13 @@ namespace Pinta.Effects
 			screenBlendOp = new UserBlendOps.ScreenBlendOp ();
 		}
 
-		public override bool LaunchConfiguration ()
+		public override void LaunchConfiguration ()
 		{
-			return EffectHelper.LaunchSimpleEffectDialog (this);
+			EffectHelper.LaunchSimpleEffectDialog (this);
 		}
 
 		#region Algorithm Code Ported From PDN
-		public override void Render (ImageSurface src, ImageSurface dest, Gdk.Rectangle[] rois)
+		public override void Render (ImageSurface src, ImageSurface dest, Core.RectangleI[] rois)
 		{
 			blurEffect.Data.Radius = Data.Radius;
 			blurEffect.Render (src, dest, rois);
@@ -63,13 +61,13 @@ namespace Pinta.Effects
 			contrastEffect.Data.Contrast = Data.Contrast;
 			contrastEffect.Render (dest, dest, rois);
 
-			var dst_data = dest.GetData ();
-			var src_data = src.GetReadOnlyData ();
+			var dst_data = dest.GetPixelData ();
+			var src_data = src.GetReadOnlyPixelData ();
 			int src_width = src.Width;
 			int dst_width = dest.Width;
 
-			foreach (Gdk.Rectangle roi in rois) {
-				for (int y = roi.Top; y <= roi.GetBottom (); ++y) {
+			foreach (Core.RectangleI roi in rois) {
+				for (int y = roi.Top; y <= roi.Bottom; ++y) {
 					var dst_row = dst_data.Slice (y * dst_width + roi.Left, roi.Width);
 					var src_row = dst_data.Slice (y * src_width + roi.Left, roi.Width);
 					screenBlendOp.Apply (dst_row, src_row, dst_row);

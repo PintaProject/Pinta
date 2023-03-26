@@ -19,9 +19,7 @@ namespace Pinta.Effects
 		private int radius;
 		private int percentile;
 
-		public override string Icon {
-			get { return "Menu.Effects.Noise.Median.png"; }
-		}
+		public override string Icon => Pinta.Resources.Icons.EffectsNoiseMedian;
 
 		public override string Name {
 			get { return Translations.GetString ("Median"); }
@@ -42,18 +40,18 @@ namespace Pinta.Effects
 			EffectData = new MedianData ();
 		}
 
-		public override bool LaunchConfiguration ()
+		public override void LaunchConfiguration ()
 		{
-			return EffectHelper.LaunchSimpleEffectDialog (this);
+			EffectHelper.LaunchSimpleEffectDialog (this);
 		}
 
 		#region Algorithm Code Ported From PDN
-		public override void Render (ImageSurface src, ImageSurface dest, Gdk.Rectangle[] rois)
+		public override void Render (ImageSurface src, ImageSurface dest, Core.RectangleI[] rois)
 		{
 			this.radius = Data.Radius;
 			this.percentile = Data.Percentile;
 
-			foreach (Gdk.Rectangle rect in rois)
+			foreach (Core.RectangleI rect in rois)
 				RenderRect (this.radius, src, dest, rect);
 		}
 

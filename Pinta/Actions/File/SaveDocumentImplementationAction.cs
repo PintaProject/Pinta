@@ -35,8 +35,6 @@ namespace Pinta.Actions
 {
 	class SaveDocumentImplmentationAction : IActionHandler
 	{
-		private const string markup = "<span weight=\"bold\" size=\"larger\">{0}</span>\n\n{1}";
-
 		#region IActionHandler Members
 		public void Initialize ()
 		{
@@ -68,25 +66,22 @@ namespace Pinta.Actions
 		// been saved before.  Either way, we need to prompt for a filename.
 		private bool SaveFileAs (Document document)
 		{
-			using var fcd = new FileChooserNative (
+			var fcd = FileChooserNative.New (
 				Translations.GetString ("Save Image File"),
 				PintaCore.Chrome.MainWindow,
 				FileChooserAction.Save,
 				Translations.GetString ("Save"),
-				Translations.GetString ("Cancel")) {
-				DoOverwriteConfirmation = true,
-				LocalOnly = false
-			};
+				Translations.GetString ("Cancel"));
 
-			if (PintaCore.RecentFiles.GetDialogDirectory () is GLib.IFile dir && dir.Exists)
-				fcd.SetCurrentFolderFile (dir);
+			if (PintaCore.RecentFiles.GetDialogDirectory () is Gio.File dir && dir.QueryExists (null))
+				fcd.SetCurrentFolder (dir);
 
 			if (document.HasFile)
-				fcd.SetFile (document.File);
+				fcd.SetFile (document.File!);
 			else {
 				// Append the default extension, producing e.g. "Unsaved Image 1.png"
 				var default_ext = PintaCore.ImageFormats.GetDefaultSaveFormat ().Extensions.First ();
-				fcd.CurrentName = $"{document.DisplayName}.{default_ext}";
+				fcd.SetCurrentName ($"{document.DisplayName}.{default_ext}");
 			}
 
 			// Add all the formats we support to the save dialog
@@ -114,18 +109,18 @@ namespace Pinta.Actions
 
 			fcd.Filter = format_desc.Filter;
 
-			while ((ResponseType) fcd.Run () == ResponseType.Accept) {
-				var file = fcd.File;
+			while (fcd.RunBlocking () == ResponseType.Accept) {
+				var file = fcd.GetFile ()!;
 
 				// Note that we can't use file.GetDisplayName() because the file doesn't exist.
-				var display_name = file.Parent.GetRelativePath (file);
+				var display_name = file.GetParent ()!.GetRelativePath (file)!;
 
 				// Always follow the extension rather than the file type drop down
 				// ie: if the user chooses to save a "jpeg" as "foo.png", we are going
 				// to assume they just didn't update the dropdown and really want png
 				var format = PintaCore.ImageFormats.GetFormatByFile (display_name) ?? filetypes[fcd.Filter];
 
-				var directory = file.Parent;
+				var directory = file.GetParent ();
 				if (directory is not null)
 					PintaCore.RecentFiles.LastDialogDirectory = directory;
 
@@ -138,7 +133,7 @@ namespace Pinta.Actions
 				//hasn't been saved to its associated file in this session.
 				document.HasBeenSavedInSession = false;
 
-				RecentManager.Default.AddFull (file.GetUriAsString (), PintaCore.RecentFiles.RecentData);
+				PintaCore.RecentFiles.AddFile (file);
 				PintaCore.ImageFormats.SetDefaultFormat (format.Extensions.First ());
 
 				document.File = file;
@@ -148,7 +143,7 @@ namespace Pinta.Actions
 			return false;
 		}
 
-		private bool SaveFile (Document document, GLib.IFile? file, FormatDescriptor? format, Window parent)
+		private bool SaveFile (Document document, Gio.File? file, FormatDescriptor? format, Window parent)
 		{
 			if (file is null)
 				file = document.File;
@@ -160,10 +155,9 @@ namespace Pinta.Actions
 				format = PintaCore.ImageFormats.GetFormatByFile (file.GetDisplayName ());
 
 			if (format == null || format.IsReadOnly ()) {
-				using var md = new MessageDialog (parent, DialogFlags.Modal, MessageType.Error, ButtonsType.Ok, Translations.GetString ("Pinta does not support saving images in this file format."), file);
-				md.Title = Translations.GetString ("Error");
-
-				md.Run ();
+				PintaCore.Chrome.ShowMessageDialog (parent,
+					Translations.GetString ("Pinta does not support saving images in this file format."),
+					file.GetDisplayName ());
 				return false;
 			}
 
@@ -176,22 +170,15 @@ namespace Pinta.Actions
 				if (e.Message == "Image too large to be saved as ICO") {
 					string primary = Translations.GetString ("Image too large");
 					string secondary = Translations.GetString ("ICO files can not be larger than 255 x 255 pixels.");
-					string message = string.Format (markup, primary, secondary);
 
-					using var md = new MessageDialog (parent, DialogFlags.Modal, MessageType.Error,
-					ButtonsType.Ok, message);
-
-					md.Run ();
+					PintaCore.Chrome.ShowMessageDialog (parent, primary, secondary);
 					return false;
 				} else if (e.Message.Contains ("Permission denied") && e.Message.Contains ("Failed to open")) {
 					string primary = Translations.GetString ("Failed to save image");
 					// Translators: {0} is the name of a file that the user does not have write permission for.
 					string secondary = Translations.GetString ("You do not have access to modify '{0}'. The file or folder may be read-only.", file);
-					string message = string.Format (markup, primary, secondary);
 
-					using var md = new MessageDialog (parent, DialogFlags.Modal, MessageType.Error, ButtonsType.Ok, message);
-
-					md.Run ();
+					PintaCore.Chrome.ShowMessageDialog (parent, primary, secondary);
 					return false;
 				} else {
 					throw; // Only catch exceptions we know the reason for

@@ -41,8 +41,8 @@ namespace Pinta.Core
 			formats = new List<FormatDescriptor> ();
 
 			// Create all the formats supported by Gdk
-			foreach (var format in Pixbuf.Formats) {
-				string formatName = format.Name.ToLowerInvariant ();
+			foreach (var format in GdkPixbufExtensions.GetFormats ()) {
+				string formatName = format.GetName ().ToLowerInvariant ();
 				string formatNameUpperCase = formatName.ToUpperInvariant ();
 				string[] extensions;
 
@@ -58,19 +58,18 @@ namespace Pinta.Core
 						break;
 				}
 
-				GdkPixbufFormat importer = new GdkPixbufFormat (format.Name.ToLowerInvariant ());
+				GdkPixbufFormat importer = new GdkPixbufFormat (formatName);
 				IImageExporter? exporter;
-
 				if (formatName == "jpeg")
 					exporter = importer = new JpegFormat ();
 				else if (formatName == "tga")
 					exporter = new TgaExporter ();
-				else if (format.IsWritable)
+				else if (format.IsWritable ())
 					exporter = importer;
 				else
 					exporter = null;
 
-				RegisterFormat (new FormatDescriptor (formatNameUpperCase, extensions, format.MimeTypes, importer, exporter));
+				RegisterFormat (new FormatDescriptor (formatNameUpperCase, extensions, format.GetMimeTypes (), importer, exporter));
 			}
 
 			// Create all the formats we have our own importers/exporters for

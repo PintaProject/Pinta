@@ -89,15 +89,17 @@ namespace Pinta.Core
 			};
 		}
 
-		public void DoKeyPress (object o, KeyPressEventArgs e)
+		public bool DoKeyPress (Gtk.EventControllerKey.KeyPressedSignalArgs args)
 		{
-			if (e.Event.State.FilterModifierKeys () == Gdk.ModifierType.None && e.Event.Key.ToUpper () == Gdk.Key.X) {
+			if (!args.State.HasModifierKey () && args.GetKey ().ToUpper () == Gdk.Key.X) {
 				Color temp = PintaCore.Palette.PrimaryColor;
 				PintaCore.Palette.PrimaryColor = PintaCore.Palette.SecondaryColor;
 				PintaCore.Palette.SecondaryColor = temp;
 
-				e.RetVal = true;
+				return true;
 			}
+
+			return false;
 		}
 
 		// This allows callers to bypass affecting the recently used list
@@ -148,7 +150,7 @@ namespace Pinta.Core
 			var palette_file = System.IO.Path.Combine (PintaCore.Settings.GetUserSettingsDirectory (), PALETTE_FILE);
 
 			if (System.IO.File.Exists (palette_file))
-				CurrentPalette.Load (GLib.FileFactory.NewForPath (palette_file));
+				CurrentPalette.Load (Gio.FileHelper.NewForPath (palette_file));
 		}
 
 		private void PopulateRecentlyUsedColors ()
@@ -179,9 +181,8 @@ namespace Pinta.Core
 		{
 			var palette_file = System.IO.Path.Combine (PintaCore.Settings.GetUserSettingsDirectory (), PALETTE_FILE);
 			var palette_saver = PintaCore.PaletteFormats.Formats.FirstOrDefault (p => p.Extensions.Contains ("txt"))?.Saver;
-
 			if (palette_saver is not null)
-				CurrentPalette.Save (GLib.FileFactory.NewForPath (palette_file), palette_saver);
+				CurrentPalette.Save (Gio.FileHelper.NewForPath (palette_file), palette_saver);
 		}
 
 		private void SaveRecentlyUsedColors ()

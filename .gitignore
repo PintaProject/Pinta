@@ -30,3 +30,4 @@ po/stamp-it
 xdg/pinta.desktop
 xdg/pinta.appdata.xml
 .vs
+.vscode

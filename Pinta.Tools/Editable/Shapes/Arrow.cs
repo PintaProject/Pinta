@@ -63,7 +63,7 @@ namespace Pinta.Tools
 		/// <param name="g">The drawing context.</param>
 		/// <param name="endPoint">The end point of a shape.</param>
 		/// <param name="almostEndPoint">The point right before the end point.</param>
-		public Rectangle? Draw (Context g, Color outlineColor, PointD endPoint, PointD almostEndPoint)
+		public RectangleD? Draw (Context g, Color outlineColor, PointD endPoint, PointD almostEndPoint)
 		{
 			//First, calculate the ending angle.
 			double endingAngle = Math.Atan (Math.Abs (endPoint.Y - almostEndPoint.Y) / Math.Abs (endPoint.X - almostEndPoint.X)) * invRadiansToDegrees;
@@ -106,7 +106,7 @@ namespace Pinta.Tools
 			double minX = Math.Min (Math.Min (arrowPoints[1].X, arrowPoints[2].X), arrowPoints[3].X);
 			double minY = Math.Min (Math.Min (arrowPoints[1].Y, arrowPoints[2].Y), arrowPoints[3].Y);
 
-			return new Rectangle (minX, minY,
+			return new RectangleD (minX, minY,
 				Math.Max (Math.Max (arrowPoints[1].X, arrowPoints[2].X), arrowPoints[3].X) - minX,
 				Math.Max (Math.Max (arrowPoints[1].Y, arrowPoints[2].Y), arrowPoints[3].Y) - minY);
 		}

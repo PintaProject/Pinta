@@ -45,8 +45,6 @@ namespace Pinta.Core
 			// If the diff was too big, store the original surface, else, dispose it
 			if (surface_diff == null)
 				old_surface = oldSurface;
-			else
-				(oldSurface as IDisposable).Dispose ();
 		}
 
 		public SimpleHistoryItem (string icon, string text) : base (icon, text)
@@ -82,13 +80,6 @@ namespace Pinta.Core
 
 				PintaCore.Workspace.Invalidate ();
 			}
-		}
-
-		public override void Dispose ()
-		{
-			// Free up native surface
-			if (old_surface != null)
-				(old_surface as IDisposable).Dispose ();
 		}
 
 		public void TakeSnapshotOfLayer (int layerIndex)

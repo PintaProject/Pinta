@@ -40,7 +40,7 @@ namespace Pinta.Tools
 			Smooth = 1,
 		}
 
-		private Point last_point = point_empty;
+		private PointI last_point = point_empty;
 		private EraserType eraser_type = EraserType.Normal;
 
 		private const int LUT_Resolution = 256;
@@ -64,16 +64,16 @@ namespace Pinta.Tools
 				var icon = GdkExtensions.CreateIconWithShape ("Cursor.Eraser.png",
 								CursorShape.Ellipse, BrushWidth, 8, 22,
 								out var iconOffsetX, out var iconOffsetY);
-				return new Gdk.Cursor (Gdk.Display.Default, icon, iconOffsetX, iconOffsetY);
+				return Gdk.Cursor.NewFromTexture (icon, iconOffsetX, iconOffsetY, null);
 			}
 		}
 
-		protected override void OnBuildToolBar (Toolbar tb)
+		protected override void OnBuildToolBar (Box tb)
 		{
 			base.OnBuildToolBar (tb);
 
-			tb.AppendItem (TypeLabel);
-			tb.AppendItem (TypeComboBox);
+			tb.Append (TypeLabel);
+			tb.Append (TypeComboBox);
 		}
 
 		protected override void OnMouseMove (Document document, ToolMouseEventArgs e)
@@ -92,14 +92,13 @@ namespace Pinta.Tools
 			if (document.Workspace.PointInCanvas (new_pointd))
 				surface_modified = true;
 
-			using (var g = document.CreateClippedContext ()) {
-				var last_pointd = new PointD (last_point.X, last_point.Y);
+			var g = document.CreateClippedContext ();
+			var last_pointd = new PointD (last_point.X, last_point.Y);
 
-				if (eraser_type == EraserType.Normal)
-					EraseNormal (g, last_pointd, new_pointd);
-				else if (eraser_type == EraserType.Smooth)
-					EraseSmooth (document.Layers.CurrentUserLayer.Surface, g, last_pointd, new_pointd);
-			}
+			if (eraser_type == EraserType.Normal)
+				EraseNormal (g, last_pointd, new_pointd);
+			else if (eraser_type == EraserType.Smooth)
+				EraseSmooth (document.Layers.CurrentUserLayer.Surface, g, last_pointd, new_pointd);
 
 			var dirty = CairoExtensions.GetRectangleFromPoints (last_point, new_point, BrushWidth + 2);
 
@@ -140,16 +139,15 @@ namespace Pinta.Tools
 			}
 		}
 
-		private ImageSurface CopySurfacePart (ImageSurface surf, Gdk.Rectangle dest_rect)
+		private ImageSurface CopySurfacePart (ImageSurface surf, RectangleI dest_rect)
 		{
 			var tmp_surface = CairoExtensions.CreateImageSurface (Format.Argb32, dest_rect.Width, dest_rect.Height);
 
-			using (var g = new Context (tmp_surface)) {
-				g.Operator = Operator.Source;
-				g.SetSourceSurface (surf, -dest_rect.Left, -dest_rect.Top);
-				g.Rectangle (new Rectangle (0, 0, dest_rect.Width, dest_rect.Height));
-				g.Fill ();
-			}
+			var g = new Context (tmp_surface);
+			g.Operator = Operator.Source;
+			g.SetSourceSurface (surf, -dest_rect.Left, -dest_rect.Top);
+			g.Rectangle (new RectangleD (0, 0, dest_rect.Width, dest_rect.Height));
+			g.Fill ();
 
 			//Flush to make sure all drawing operations are finished
 			tmp_surface.Flush ();
@@ -157,11 +155,11 @@ namespace Pinta.Tools
 			return tmp_surface;
 		}
 
-		private void PasteSurfacePart (Context g, ImageSurface tmp_surface, Gdk.Rectangle dest_rect)
+		private void PasteSurfacePart (Context g, ImageSurface tmp_surface, RectangleI dest_rect)
 		{
 			g.Operator = Operator.Source;
 			g.SetSourceSurface (tmp_surface, dest_rect.Left, dest_rect.Top);
-			g.Rectangle (new Rectangle (dest_rect.Left, dest_rect.Top, dest_rect.Width, dest_rect.Height));
+			g.Rectangle (new RectangleD (dest_rect.Left, dest_rect.Top, dest_rect.Width, dest_rect.Height));
 			g.Fill ();
 		}
 
@@ -206,59 +204,58 @@ namespace Pinta.Tools
 				var pt = Utility.Lerp (start, end, (float) step / num_steps);
 				int x = (int) pt.X, y = (int) pt.Y;
 
-				var surface_rect = new Gdk.Rectangle (0, 0, surf.Width, surf.Height);
-				var brush_rect = new Gdk.Rectangle (x - rad, y - rad, 2 * rad, 2 * rad);
-				var dest_rect = Gdk.Rectangle.Intersect (surface_rect, brush_rect);
+				var surface_rect = new RectangleI (0, 0, surf.Width, surf.Height);
+				var brush_rect = new RectangleI (x - rad, y - rad, 2 * rad, 2 * rad);
+				var dest_rect = RectangleI.Intersect (surface_rect, brush_rect);
 
 				if ((dest_rect.Width > 0) && (dest_rect.Height > 0)) {
 					// Allow Clipping through a temporary surface
-					using (var tmp_surface = CopySurfacePart (surf, dest_rect)) {
-						var tmp_data = tmp_surface.GetData ();
+					var tmp_surface = CopySurfacePart (surf, dest_rect);
+					var tmp_data = tmp_surface.GetPixelData ();
 
-						for (var iy = dest_rect.Top; iy < dest_rect.Bottom; iy++) {
-							var srcRow = tmp_data.Slice (tmp_surface.Width * (iy - dest_rect.Top));
-							var dy = ((iy - y) * LUT_Resolution) / rad;
+					for (var iy = dest_rect.Top; iy < dest_rect.Bottom; iy++) {
+						var srcRow = tmp_data.Slice (tmp_surface.Width * (iy - dest_rect.Top));
+						var dy = ((iy - y) * LUT_Resolution) / rad;
 
-							if (dy < 0)
-								dy = -dy;
+						if (dy < 0)
+							dy = -dy;
 
-							var lut_factor_row = lut_factor[dy];
+						var lut_factor_row = lut_factor[dy];
 
-							for (var ix = dest_rect.Left; ix < dest_rect.Right; ix++) {
-								ref ColorBgra col = ref srcRow[ix - dest_rect.Left];
-								var dx = ((ix - x) * LUT_Resolution) / rad;
+						for (var ix = dest_rect.Left; ix < dest_rect.Right; ix++) {
+							ref ColorBgra col = ref srcRow[ix - dest_rect.Left];
+							var dx = ((ix - x) * LUT_Resolution) / rad;
 
-								if (dx < 0)
-									dx = -dx;
+							if (dx < 0)
+								dx = -dx;
 
-								var force = lut_factor_row[dx];
+							var force = lut_factor_row[dx];
 
-								// Note: premultiplied alpha is used!
-								if (mouse_button == MouseButton.Right) {
-									col.A = (byte) ((col.A * force + bk_col_a * (255 - force)) / 255);
-									col.R = (byte) ((col.R * force + bk_col_r * (255 - force)) / 255);
-									col.G = (byte) ((col.G * force + bk_col_g * (255 - force)) / 255);
-									col.B = (byte) ((col.B * force + bk_col_b * (255 - force)) / 255);
-								} else {
-									col.A = (byte) (col.A * force / 255);
-									col.R = (byte) (col.R * force / 255);
-									col.G = (byte) (col.G * force / 255);
-									col.B = (byte) (col.B * force / 255);
-								}
+							// Note: premultiplied alpha is used!
+							if (mouse_button == MouseButton.Right) {
+								col.A = (byte) ((col.A * force + bk_col_a * (255 - force)) / 255);
+								col.R = (byte) ((col.R * force + bk_col_r * (255 - force)) / 255);
+								col.G = (byte) ((col.G * force + bk_col_g * (255 - force)) / 255);
+								col.B = (byte) ((col.B * force + bk_col_b * (255 - force)) / 255);
+							} else {
+								col.A = (byte) (col.A * force / 255);
+								col.R = (byte) (col.R * force / 255);
+								col.G = (byte) (col.G * force / 255);
+								col.B = (byte) (col.B * force / 255);
 							}
 						}
-
-						// Draw the final result on the surface
-						PasteSurfacePart (g, tmp_surface, dest_rect);
 					}
+
+					// Draw the final result on the surface
+					PasteSurfacePart (g, tmp_surface, dest_rect);
 				}
 			}
 		}
 
-		private ToolBarLabel? type_label;
+		private Label? type_label;
 		private ToolBarComboBox? type_combobox;
 
-		private ToolBarLabel TypeLabel => type_label ??= new ToolBarLabel (string.Format (" {0}: ", Translations.GetString ("Type")));
+		private Label TypeLabel => type_label ??= Label.New (string.Format (" {0}: ", Translations.GetString ("Type")));
 		private ToolBarComboBox TypeComboBox {
 			get {
 				if (type_combobox is null) {
@@ -266,7 +263,7 @@ namespace Pinta.Tools
 
 					type_combobox.ComboBox.Active = Settings.GetSetting (ERASER_TYPE_SETTING, 0);
 
-					type_combobox.ComboBox.Changed += (o, e) => {
+					type_combobox.ComboBox.OnChanged += (o, e) => {
 						eraser_type = (EraserType) type_combobox.ComboBox.Active;
 					};
 				}

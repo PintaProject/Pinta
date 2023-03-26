@@ -20,6 +20,12 @@ namespace Pinta.Core.Tests
 
 		private string LinesToString (string[] lines) => string.Join (Environment.NewLine, lines);
 
+		[OneTimeSetUp]
+		public void Init ()
+		{
+			Pango.Module.Initialize ();
+		}
+
 		[Test]
 		public void PerformEnter ()
 		{

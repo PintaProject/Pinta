@@ -32,22 +32,22 @@ namespace Pinta.Core
 {
 	public static class PintaCore
 	{
-		public static LayerManager Layers { get; private set; }
-		public static PaintBrushManager PaintBrushes { get; private set; }
-		public static ToolManager Tools { get; private set; }
-		public static ChromeManager Chrome { get; private set; }
-		public static PaletteManager Palette { get; private set; }
-		public static ResourceManager Resources { get; private set; }
 		public static ActionManager Actions { get; private set; }
-		public static WorkspaceManager Workspace { get; private set; }
-		public static SystemManager System { get; private set; }
-		public static RecentFileManager RecentFiles { get; private set; }
-		public static LivePreviewManager LivePreview { get; private set; }
-		public static SettingsManager Settings { get; private set; }
+		public static ChromeManager Chrome { get; private set; }
 		public static EffectsManager Effects { get; private set; }
 		public static ImageConverterManager ImageFormats { get; private set; }
-		public static PaletteFormatManager PaletteFormats { get; private set; }
 		public static IServiceManager Services { get; }
+		public static LayerManager Layers { get; private set; }
+		public static LivePreviewManager LivePreview { get; private set; }
+		public static PaintBrushManager PaintBrushes { get; private set; }
+		public static PaletteFormatManager PaletteFormats { get; private set; }
+		public static PaletteManager Palette { get; private set; }
+		public static RecentFileManager RecentFiles { get; private set; }
+		public static ResourceManager Resources { get; private set; }
+		public static SettingsManager Settings { get; private set; }
+		public static SystemManager System { get; private set; }
+		public static ToolManager Tools { get; private set; }
+		public static WorkspaceManager Workspace { get; private set; }
 
 		public const string ApplicationVersion = "2.2";
 
@@ -56,8 +56,8 @@ namespace Pinta.Core
 			// Resources and Settings are intialized first so later
 			// Managers can access them as needed.
 			Resources = new ResourceManager ();
+			System = new SystemManager ();
 			Settings = new SettingsManager ();
-
 			Actions = new ActionManager ();
 			Workspace = new WorkspaceManager ();
 			Layers = new LayerManager ();
@@ -65,7 +65,6 @@ namespace Pinta.Core
 			Tools = new ToolManager ();
 			ImageFormats = new ImageConverterManager ();
 			PaletteFormats = new PaletteFormatManager ();
-			System = new SystemManager ();
 			RecentFiles = new RecentFileManager ();
 			LivePreview = new LivePreviewManager ();
 			Palette = new PaletteManager ();
@@ -85,6 +84,7 @@ namespace Pinta.Core
 			Services.AddService (PaletteFormats);
 			Services.AddService (System);
 			Services.AddService (RecentFiles);
+
 			Services.AddService (LivePreview);
 			Services.AddService<IPaletteService> (Palette);
 			Services.AddService (Chrome);

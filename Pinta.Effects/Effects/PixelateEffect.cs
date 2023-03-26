@@ -16,9 +16,7 @@ namespace Pinta.Effects
 {
 	public class PixelateEffect : BaseEffect
 	{
-		public override string Icon {
-			get { return "Menu.Effects.Distort.Pixelate.png"; }
-		}
+		public override string Icon => Pinta.Resources.Icons.EffectsDistortPixelate;
 
 		public override string Name {
 			get { return Translations.GetString ("Pixelate"); }
@@ -41,20 +39,20 @@ namespace Pinta.Effects
 			EffectData = new PixelateData ();
 		}
 
-		public override bool LaunchConfiguration ()
+		public override void LaunchConfiguration ()
 		{
-			return EffectHelper.LaunchSimpleEffectDialog (this);
+			EffectHelper.LaunchSimpleEffectDialog (this);
 		}
 
 		#region Algorithm Code Ported From PDN
-		private ColorBgra ComputeCellColor (int x, int y, ReadOnlySpan<ColorBgra> src_data, int cellSize, Gdk.Rectangle srcBounds)
+		private ColorBgra ComputeCellColor (int x, int y, ReadOnlySpan<ColorBgra> src_data, int cellSize, Core.RectangleI srcBounds)
 		{
-			Gdk.Rectangle cell = GetCellBox (x, y, cellSize);
-			cell.Intersect (srcBounds);
+			Core.RectangleI cell = GetCellBox (x, y, cellSize);
+			cell = cell.Intersect (srcBounds);
 
 			int left = cell.Left;
-			int right = cell.GetRight ();
-			int bottom = cell.GetBottom ();
+			int right = cell.Right;
+			int bottom = cell.Bottom;
 			int top = cell.Top;
 
 			ColorBgra colorTopLeft = src_data[top * srcBounds.Width + left].ToStraightAlpha ();
@@ -67,39 +65,37 @@ namespace Pinta.Effects
 			return c.ToPremultipliedAlpha ();
 		}
 
-		private Gdk.Rectangle GetCellBox (int x, int y, int cellSize)
+		private Core.RectangleI GetCellBox (int x, int y, int cellSize)
 		{
 			int widthBoxNum = x % cellSize;
 			int heightBoxNum = y % cellSize;
-			var leftUpper = new Gdk.Point (x - widthBoxNum, y - heightBoxNum);
+			var leftUpper = new Core.PointI (x - widthBoxNum, y - heightBoxNum);
 
-			var returnMe = new Gdk.Rectangle (leftUpper, new Gdk.Size (cellSize, cellSize));
-
-			return returnMe;
+			return new Core.RectangleI (leftUpper, new Core.Size (cellSize, cellSize));
 		}
 
 
-		public override void Render (ImageSurface src, ImageSurface dest, Gdk.Rectangle[] rois)
+		public override void Render (ImageSurface src, ImageSurface dest, Core.RectangleI[] rois)
 		{
 			var cellSize = Data.CellSize;
 
-			Gdk.Rectangle src_bounds = src.GetBounds ();
-			Gdk.Rectangle dest_bounds = dest.GetBounds ();
+			Core.RectangleI src_bounds = src.GetBounds ();
+			Core.RectangleI dest_bounds = dest.GetBounds ();
 
-			var src_data = src.GetReadOnlyData ();
-			var dst_data = dest.GetData ();
+			var src_data = src.GetReadOnlyPixelData ();
+			var dst_data = dest.GetPixelData ();
 
 			foreach (var rect in rois) {
-				for (int y = rect.Top; y <= rect.GetBottom (); ++y) {
+				for (int y = rect.Top; y <= rect.Bottom; ++y) {
 					int yEnd = y + 1;
 
-					for (int x = rect.Left; x <= rect.GetRight (); ++x) {
+					for (int x = rect.Left; x <= rect.Right; ++x) {
 						var cellRect = GetCellBox (x, y, cellSize);
-						cellRect.Intersect (dest_bounds);
+						cellRect = cellRect.Intersect (dest_bounds);
 						var color = ComputeCellColor (x, y, src_data, cellSize, src_bounds);
 
-						int xEnd = Math.Min (rect.GetRight (), cellRect.GetRight ());
-						yEnd = Math.Min (rect.GetBottom (), cellRect.GetBottom ());
+						int xEnd = Math.Min (rect.Right, cellRect.Right);
+						yEnd = Math.Min (rect.Bottom, cellRect.Bottom);
 
 						for (int y2 = y; y2 <= yEnd; ++y2) {
 							var dst_row = dst_data.Slice (y2 * dest_bounds.Width, dest_bounds.Width);

@@ -57,17 +57,28 @@ namespace Pinta.Gui.Widgets
 			// Update the canvas when the image changes
 			document.Workspace.CanvasInvalidated += delegate (object? sender, CanvasInvalidatedEventArgs e) {
 				// If GTK+ hasn't created the canvas window yet, no need to invalidate it
-				if (Window == null)
+				if (!GetRealized ())
 					return;
 
+				// TODO-GTK4 (improvement) - is there a way to invalidate only a rectangle?
+#if false
 				if (e.EntireSurface)
 					Window.Invalidate ();
 				else
 					Window.InvalidateRect (e.Rectangle, false);
+#else
+				QueueDraw ();
+#endif
 			};
 
-			// Give mouse press events to the current tool
-			ButtonPressEvent += delegate (object sender, ButtonPressEventArgs e) {
+			// Give mouse press / release events to the current tool
+			var click_controller = Gtk.GestureClick.New ();
+			click_controller.SetButton (0); // Listen for all mouse buttons.
+
+			click_controller.OnPressed += (_, args) => {
+				// Note we don't call click_controller.SetState (Gtk.EventSequenceState.Claimed) here, so
+				// that the CanvasWindow can also receive motion events to update the root window mouse position.
+
 				// The canvas gets the button press before the tab system, so
 				// if this click is on a canvas that isn't currently the ActiveDocument yet, 
 				// we need to go ahead and make it the active document for the tools
@@ -75,51 +86,85 @@ namespace Pinta.Gui.Widgets
 				if (PintaCore.Workspace.ActiveDocument != document)
 					PintaCore.Workspace.SetActiveDocument (document);
 
-				PintaCore.Tools.DoMouseDown (document, e);
+				var window_point = new PointD (args.X, args.Y);
+				var canvas_point = document.Workspace.WindowPointToCanvas (window_point);
+
+				var tool_args = new ToolMouseEventArgs () {
+					State = click_controller.GetCurrentEventState (),
+					MouseButton = click_controller.GetCurrentMouseButton (),
+					PointDouble = canvas_point,
+					WindowPoint = window_point,
+					RootPoint = CanvasWindow.WindowMousePosition
+				};
+
+				PintaCore.Tools.DoMouseDown (document, tool_args);
 			};
 
-			// Give mouse release events to the current tool
-			ButtonReleaseEvent += delegate (object sender, ButtonReleaseEventArgs e) {
-				PintaCore.Tools.DoMouseUp (document, e);
+			click_controller.OnReleased += (_, args) => {
+				var window_point = new PointD (args.X, args.Y);
+				var canvas_point = document.Workspace.WindowPointToCanvas (window_point);
+
+				var tool_args = new ToolMouseEventArgs () {
+					State = click_controller.GetCurrentEventState (),
+					MouseButton = click_controller.GetCurrentMouseButton (),
+					PointDouble = canvas_point,
+					WindowPoint = window_point,
+					RootPoint = CanvasWindow.WindowMousePosition
+				};
+
+				PintaCore.Tools.DoMouseUp (document, tool_args);
 			};
+
+			AddController (click_controller);
 
 			// Give mouse move events to the current tool
-			MotionNotifyEvent += delegate (object sender, MotionNotifyEventArgs e) {
-				var point = document.Workspace.WindowPointToCanvas (e.Event.X, e.Event.Y);
+			var motion_controller = Gtk.EventControllerMotion.New ();
+			motion_controller.OnMotion += (_, args) => {
+				var window_point = new PointD (args.X, args.Y);
+				var canvas_point = document.Workspace.WindowPointToCanvas (window_point);
 
-				if (document.Workspace.PointInCanvas (point))
-					PintaCore.Chrome.LastCanvasCursorPoint = point.ToGdkPoint ();
+				if (document.Workspace.PointInCanvas (canvas_point))
+					PintaCore.Chrome.LastCanvasCursorPoint = canvas_point.ToInt ();
 
-				if (PintaCore.Tools.CurrentTool != null)
-					PintaCore.Tools.DoMouseMove (document, e);
+				if (PintaCore.Tools.CurrentTool != null) {
+					var tool_args = new ToolMouseEventArgs () {
+						State = motion_controller.GetCurrentEventState (),
+						MouseButton = MouseButton.None,
+						PointDouble = canvas_point,
+						WindowPoint = window_point,
+						RootPoint = CanvasWindow.WindowMousePosition
+					};
+
+					PintaCore.Tools.DoMouseMove (document, tool_args);
+				}
 			};
+
+			AddController (motion_controller);
+
+			SetDrawFunc ((area, context, width, height) => Draw (context, width, height));
 		}
 
-		protected override bool OnDrawn (Cairo.Context context)
+		private void Draw (Cairo.Context context, int width, int height)
 		{
-			base.OnDrawn (context);
-
 			var scale = document.Workspace.Scale;
 
 			var x = (int) document.Workspace.Offset.X;
 			var y = (int) document.Workspace.Offset.Y;
 
 			// Translate our expose area for the whole drawingarea to just our canvas
-			var canvas_bounds = new Rectangle (x, y, document.Workspace.CanvasSize.Width, document.Workspace.CanvasSize.Height);
-			Rectangle expose_rect;
+			var canvas_bounds = new RectangleI (x, y, document.Workspace.CanvasSize.Width, document.Workspace.CanvasSize.Height);
 
-			if (Gdk.CairoHelper.GetClipRectangle (context, out expose_rect))
-				canvas_bounds.Intersect (expose_rect);
+			if (CairoExtensions.GetClipRectangle (context, out RectangleI expose_rect))
+				canvas_bounds = canvas_bounds.Intersect (expose_rect);
 
 			if (canvas_bounds.IsEmpty)
-				return true;
+				return;
 
 			canvas_bounds.X -= x;
 			canvas_bounds.Y -= y;
 
 			// Resize our offscreen surface to a surface the size of our drawing area
 			if (canvas == null || canvas.Width != canvas_bounds.Width || canvas.Height != canvas_bounds.Height) {
-				canvas?.Dispose ();
 				canvas = CairoExtensions.CreateImageSurface (Cairo.Format.Argb32, canvas_bounds.Width, canvas_bounds.Height);
 			}
 
@@ -128,12 +173,12 @@ namespace Pinta.Gui.Widgets
 			var g = context;
 
 			// Draw our canvas drop shadow
-			g.DrawRectangle (new Cairo.Rectangle (x - 1, y - 1, document.Workspace.CanvasSize.Width + 2, document.Workspace.CanvasSize.Height + 2), new Cairo.Color (.5, .5, .5), 1);
-			g.DrawRectangle (new Cairo.Rectangle (x - 2, y - 2, document.Workspace.CanvasSize.Width + 4, document.Workspace.CanvasSize.Height + 4), new Cairo.Color (.8, .8, .8), 1);
-			g.DrawRectangle (new Cairo.Rectangle (x - 3, y - 3, document.Workspace.CanvasSize.Width + 6, document.Workspace.CanvasSize.Height + 6), new Cairo.Color (.9, .9, .9), 1);
+			g.DrawRectangle (new RectangleD (x - 1, y - 1, document.Workspace.CanvasSize.Width + 2, document.Workspace.CanvasSize.Height + 2), new Cairo.Color (.5, .5, .5), 1);
+			g.DrawRectangle (new RectangleD (x - 2, y - 2, document.Workspace.CanvasSize.Width + 4, document.Workspace.CanvasSize.Height + 4), new Cairo.Color (.8, .8, .8), 1);
+			g.DrawRectangle (new RectangleD (x - 3, y - 3, document.Workspace.CanvasSize.Width + 6, document.Workspace.CanvasSize.Height + 6), new Cairo.Color (.9, .9, .9), 1);
 
 			// Set up our clip rectangle
-			g.Rectangle (new Cairo.Rectangle (x, y, document.Workspace.CanvasSize.Width, document.Workspace.CanvasSize.Height));
+			g.Rectangle (new RectangleD (x, y, document.Workspace.CanvasSize.Width, document.Workspace.CanvasSize.Height));
 			g.Clip ();
 
 			g.Translate (x, y);
@@ -164,8 +209,6 @@ namespace Pinta.Gui.Widgets
 				DrawHandles (g, PintaCore.Tools.CurrentTool.Handles);
 				g.Restore ();
 			}
-
-			return true;
 		}
 
 		private void DrawHandles (Cairo.Context cr, IEnumerable<IToolHandle> controls)
@@ -183,15 +226,27 @@ namespace Pinta.Gui.Widgets
 			QueueResize ();
 		}
 
-		public void DoKeyPressEvent (object o, KeyPressEventArgs e)
+		public bool DoKeyPressEvent (Gtk.EventControllerKey controller, Gtk.EventControllerKey.KeyPressedSignalArgs args)
 		{
 			// Give the current tool a chance to handle the key press
-			PintaCore.Tools.DoKeyDown (document, e);
+			var tool_args = new ToolKeyEventArgs () {
+				Event = controller.GetCurrentEvent (),
+				Key = args.GetKey (),
+				State = args.State
+			};
+
+			return PintaCore.Tools.DoKeyDown (document, tool_args);
 		}
 
-		public void DoKeyReleaseEvent (object o, KeyReleaseEventArgs e)
+		public bool DoKeyReleaseEvent (Gtk.EventControllerKey controller, Gtk.EventControllerKey.KeyReleasedSignalArgs args)
 		{
-			PintaCore.Tools.DoKeyUp (document, e);
+			var tool_args = new ToolKeyEventArgs () {
+				Event = controller.GetCurrentEvent (),
+				Key = args.GetKey (),
+				State = args.State
+			};
+
+			return PintaCore.Tools.DoKeyUp (document, tool_args);
 		}
 	}
 }

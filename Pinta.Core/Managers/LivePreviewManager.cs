@@ -49,7 +49,7 @@ namespace Pinta.Core
 		bool cancel_live_preview_flag;
 
 		Cairo.ImageSurface live_preview_surface = null!;
-		Gdk.Rectangle render_bounds;
+		RectangleI render_bounds;
 		SimpleHistoryItem history_item = null!;
 
 		AsyncEffectRenderer renderer = null!;
@@ -63,7 +63,7 @@ namespace Pinta.Core
 
 		public bool IsEnabled { get { return live_preview_enabled; } }
 		public Cairo.ImageSurface LivePreviewSurface { get { return live_preview_surface; } }
-		public Gdk.Rectangle RenderBounds { get { return render_bounds; } }
+		public RectangleI RenderBounds { get { return render_bounds; } }
 
 		public event EventHandler<LivePreviewStartedEventArgs>? Started;
 		public event EventHandler<LivePreviewRenderUpdatedEventArgs>? RenderUpdated;
@@ -103,9 +103,8 @@ namespace Pinta.Core
 			history_item.TakeSnapshotOfLayer (doc.Layers.CurrentUserLayerIndex);
 
 			// Paint the pre-effect layer surface into into the working surface.
-			using (var ctx = new Cairo.Context (live_preview_surface)) {
-				layer.Draw (ctx, layer.Surface, 1);
-			}
+			var ctx = new Cairo.Context (live_preview_surface);
+			layer.Draw (ctx, layer.Surface, 1);
 
 			if (effect.EffectData != null)
 				effect.EffectData.PropertyChanged += EffectData_PropertyChanged;
@@ -127,13 +126,24 @@ namespace Pinta.Core
 			renderer.Start (effect, layer.Surface, live_preview_surface, render_bounds);
 
 			if (effect.IsConfigurable) {
-				if (!effect.LaunchConfiguration ()) {
-					PintaCore.Chrome.MainWindowBusy = true;
-					Cancel ();
-				} else {
-					PintaCore.Chrome.MainWindowBusy = true;
-					Apply ();
-				}
+				EventHandler<BaseEffect.ConfigDialogResponseEventArgs>? handler = null;
+				handler = (_, args) => {
+					if (!args.Accepted) {
+						PintaCore.Chrome.MainWindowBusy = true;
+						Cancel ();
+					} else {
+						PintaCore.Chrome.MainWindowBusy = true;
+						Apply ();
+					}
+
+					// Unsubscribe once we're done.
+					effect.ConfigDialogResponse -= handler;
+				};
+
+				effect.ConfigDialogResponse += handler;
+
+				effect.LaunchConfiguration ();
+
 			} else {
 				PintaCore.Chrome.MainWindowBusy = true;
 				Apply ();
@@ -204,7 +214,6 @@ namespace Pinta.Core
 			FireLivePreviewEndedEvent (RenderStatus.Canceled, null);
 			live_preview_enabled = false;
 
-			live_preview_surface?.Dispose ();
 			live_preview_surface = null!;
 
 			PintaCore.Workspace.Invalidate ();
@@ -238,14 +247,12 @@ namespace Pinta.Core
 		{
 			Debug.WriteLine ("LivePreviewManager.HandleApply()");
 
-			using (var ctx = new Cairo.Context (layer.Surface)) {
+			var ctx = new Cairo.Context (layer.Surface);
+			ctx.Save ();
+			PintaCore.Workspace.ActiveDocument.Selection.Clip (ctx);
 
-				ctx.Save ();
-				PintaCore.Workspace.ActiveDocument.Selection.Clip (ctx);
-
-				layer.DrawWithOperator (ctx, live_preview_surface, Cairo.Operator.Source);
-				ctx.Restore ();
-			}
+			layer.DrawWithOperator (ctx, live_preview_surface, Cairo.Operator.Source);
+			ctx.Restore ();
 
 			PintaCore.Workspace.ActiveDocument.History.PushNewItem (history_item);
 			history_item = null!;
@@ -271,7 +278,6 @@ namespace Pinta.Core
 				effect = null!;
 			}
 
-			live_preview_surface?.Dispose ();
 			live_preview_surface = null!;
 
 			if (renderer != null) {
@@ -279,10 +285,7 @@ namespace Pinta.Core
 				renderer = null!;
 			}
 
-			if (history_item != null) {
-				history_item.Dispose ();
-				history_item = null!;
-			}
+			history_item = null!;
 
 			// Hide progress dialog and clean up events.
 			var dialog = PintaCore.Chrome.ProgressDialog;
@@ -308,7 +311,7 @@ namespace Pinta.Core
 				this.manager = manager;
 			}
 
-			protected override void OnUpdate (double progress, Gdk.Rectangle updatedBounds)
+			protected override void OnUpdate (double progress, RectangleI updatedBounds)
 			{
 				Debug.WriteLine (DateTime.Now.ToString ("HH:mm:ss:ffff") + " LivePreviewManager.OnUpdate() progress: " + progress);
 				PintaCore.Chrome.ProgressDialog.Progress = progress;
@@ -337,7 +340,7 @@ namespace Pinta.Core
 			}
 		}
 
-		void FireLivePreviewRenderUpdatedEvent (double progress, Gdk.Rectangle bounds)
+		void FireLivePreviewRenderUpdatedEvent (double progress, RectangleI bounds)
 		{
 
 			if (RenderUpdated != null) {
@@ -357,8 +360,8 @@ namespace Pinta.Core
 			// Calculate canvas bounds.
 			double x1 = bounds.Left * scale;
 			double y1 = bounds.Top * scale;
-			double x2 = (bounds.GetRight () + 1) * scale;
-			double y2 = (bounds.GetBottom () + 1) * scale;
+			double x2 = (bounds.Right + 1) * scale;
+			double y2 = (bounds.Bottom + 1) * scale;
 
 			// TODO Figure out why when scale > 1 that I need add on an
 			// extra pixel of padding.
@@ -384,7 +387,7 @@ namespace Pinta.Core
 			int height = (int) Math.Ceiling (y2) - y;
 
 			// Tell GTK to expose the drawing area.			
-			PintaCore.Workspace.ActiveWorkspace.Canvas.QueueDrawArea (x, y, width, height);
+			PintaCore.Workspace.ActiveWorkspace.InvalidateWindowRect (new RectangleI (x, y, width, height));
 		}
 	}
 }

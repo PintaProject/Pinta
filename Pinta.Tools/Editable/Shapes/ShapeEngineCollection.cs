@@ -149,8 +149,8 @@ namespace Pinta.Tools
 			ShapeType = shape_type;
 			AntiAliasing = antialiasing;
 			Closed = closed;
-			OutlineColor = outline_color.Clone ();
-			FillColor = fill_color.Clone ();
+			OutlineColor = outline_color;
+			FillColor = fill_color;
 			BrushWidth = brush_width;
 		}
 
@@ -160,8 +160,8 @@ namespace Pinta.Tools
 			ShapeType = src.ShapeType;
 			AntiAliasing = src.AntiAliasing;
 			Closed = src.Closed;
-			OutlineColor = src.OutlineColor.Clone ();
-			FillColor = src.FillColor.Clone ();
+			OutlineColor = src.OutlineColor;
+			FillColor = src.FillColor;
 			BrushWidth = src.BrushWidth;
 
 			// Don't clone the GeneratedPoints or OrganizedPoints, as they will be calculated.

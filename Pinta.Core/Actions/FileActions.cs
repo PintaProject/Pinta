@@ -63,7 +63,7 @@ namespace Pinta.Core
 		}
 
 		#region Initialization
-		public void RegisterActions (Gtk.Application app, GLib.Menu menu)
+		public void RegisterActions (Gtk.Application app, Gio.Menu menu)
 		{
 			app.AddAccelAction (New, "<Primary>N");
 			menu.AppendItem (New.CreateMenuItem ());
@@ -74,7 +74,7 @@ namespace Pinta.Core
 			app.AddAccelAction (Open, "<Primary>O");
 			menu.AppendItem (Open.CreateMenuItem ());
 
-			var save_section = new GLib.Menu ();
+			var save_section = Gio.Menu.New ();
 			menu.AppendSection (null, save_section);
 
 			app.AddAccelAction (Save, "<Primary>S");
@@ -83,7 +83,7 @@ namespace Pinta.Core
 			app.AddAccelAction (SaveAs, "<Primary><Shift>S");
 			save_section.AppendItem (SaveAs.CreateMenuItem ());
 
-			var close_section = new GLib.Menu ();
+			var close_section = Gio.Menu.New ();
 			menu.AppendSection (null, close_section);
 
 			app.AddAccelAction (Close, "<Primary>W");

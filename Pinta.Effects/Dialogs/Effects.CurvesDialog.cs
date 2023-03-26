@@ -59,6 +59,7 @@ namespace Pinta.Effects
 		private int channels;
 		//last added control point x;
 		private int last_cpx;
+		private PointI last_mouse_pos = new (0, 0);
 
 		//control points for luminosity transfer mode
 		private SortedList<int, int>[] luminosity_cps = null!; // NRT - Set via code flow
@@ -87,23 +88,35 @@ namespace Pinta.Effects
 
 		public CurvesData EffectData { get; private set; }
 
-		public CurvesDialog (CurvesData effectData) : base (Translations.GetString ("Curves"), PintaCore.Chrome.MainWindow,
-								    DialogFlags.Modal,
-															GtkExtensions.DialogButtonsCancelOk ())
+		public CurvesDialog (CurvesData effectData)
 		{
+			Title = Translations.GetString ("Curves");
+			TransientFor = PintaCore.Chrome.MainWindow;
+			Modal = true;
+			this.AddCancelOkButtons ();
+			this.SetDefaultResponse (ResponseType.Ok);
+
 			Build ();
 
 			EffectData = effectData;
 
-			comboMap.Changed += HandleComboMapChanged;
-			buttonReset.Clicked += HandleButtonResetClicked;
-			checkRed.Toggled += HandleCheckToggled;
-			checkGreen.Toggled += HandleCheckToggled;
-			checkBlue.Toggled += HandleCheckToggled;
-			drawing.Drawn += HandleDrawingDrawnEvent;
-			drawing.MotionNotifyEvent += HandleDrawingMotionNotifyEvent;
-			drawing.LeaveNotifyEvent += HandleDrawingLeaveNotifyEvent;
-			drawing.ButtonPressEvent += HandleDrawingButtonPressEvent;
+			comboMap.OnChanged += HandleComboMapChanged;
+			buttonReset.OnClicked += HandleButtonResetClicked;
+			checkRed.OnToggled += HandleCheckToggled;
+			checkGreen.OnToggled += HandleCheckToggled;
+			checkBlue.OnToggled += HandleCheckToggled;
+
+			drawing.SetDrawFunc ((area, context, width, height) => HandleDrawingDrawnEvent (context));
+
+			var motion_controller = Gtk.EventControllerMotion.New ();
+			motion_controller.OnMotion += HandleDrawingMotionNotifyEvent;
+			motion_controller.OnLeave += (_, _) => InvalidateDrawing ();
+			drawing.AddController (motion_controller);
+
+			var click_controller = Gtk.GestureClick.New ();
+			click_controller.SetButton (0); // Handle all buttons
+			click_controller.OnPressed += HandleDrawingButtonPressEvent;
+			drawing.AddController (click_controller);
 
 			ResetControlPoints ();
 		}
@@ -160,12 +173,7 @@ namespace Pinta.Effects
 		private void InvalidateDrawing ()
 		{
 			//to invalidate whole drawing area
-			drawing.Window.Invalidate ();
-		}
-
-		private void HandleDrawingLeaveNotifyEvent (object? o, Gtk.LeaveNotifyEventArgs args)
-		{
-			InvalidateDrawing ();
+			drawing.QueueDraw ();
 		}
 
 		private IEnumerable<SortedList<int, int>> GetActiveControlPoints ()
@@ -195,16 +203,17 @@ namespace Pinta.Effects
 			UpdateLivePreview ("ControlPoints");
 		}
 
-		private void HandleDrawingMotionNotifyEvent (object o, Gtk.MotionNotifyEventArgs args)
+		private void HandleDrawingMotionNotifyEvent (EventControllerMotion controller, EventControllerMotion.MotionSignalArgs args)
 		{
-			int x, y;
-			Gdk.ModifierType mask;
-			GdkExtensions.GetWindowPointer (drawing.Window, out x, out y, out mask);
+			int x = (int) args.X;
+			int y = (int) args.Y;
+
+			last_mouse_pos = new (x, y);
 
 			if (x < 0 || x >= size || y < 0 || y >= size)
 				return;
 
-			if (args.Event.State == Gdk.ModifierType.Button1Mask) {
+			if (controller.GetCurrentEventState () == Gdk.ModifierType.Button1Mask) {
 				// first and last control point cannot be removed
 				if (last_cpx != 0 && last_cpx != size - 1) {
 					foreach (var controlPoints in GetActiveControlPoints ()) {
@@ -219,18 +228,17 @@ namespace Pinta.Effects
 			InvalidateDrawing ();
 		}
 
-		private void HandleDrawingButtonPressEvent (object o, Gtk.ButtonPressEventArgs args)
+		private void HandleDrawingButtonPressEvent (GestureClick controller, GestureClick.PressedSignalArgs args)
 		{
-			int x, y;
-			Gdk.ModifierType mask;
-			GdkExtensions.GetWindowPointer (drawing.Window, out x, out y, out mask);
+			int x = (int) args.X;
+			int y = (int) args.Y;
 
-			if (args.Event.Button == 1) {
+			if (controller.GetCurrentMouseButton () == MouseButton.Left) {
 				AddControlPoint (x, y);
 			}
 
 			// user pressed right button
-			if (args.Event.Button == 3) {
+			if (controller.GetCurrentMouseButton () == MouseButton.Right) {
 				foreach (var controlPoints in GetActiveControlPoints ()) {
 					for (int i = 0; i < controlPoints.Count; i++) {
 						int cpx = controlPoints.Keys[i];
@@ -262,9 +270,8 @@ namespace Pinta.Effects
 
 		private void DrawPointerCross (Context g)
 		{
-			int x, y;
-			Gdk.ModifierType mask;
-			GdkExtensions.GetWindowPointer (drawing.Window, out x, out y, out mask);
+			int x = last_mouse_pos.X;
+			int y = last_mouse_pos.Y;
 
 			if (x >= 0 && x < size && y >= 0 && y < size) {
 				g.LineWidth = 0.5;
@@ -274,14 +281,13 @@ namespace Pinta.Effects
 				g.LineTo (size, y);
 				g.Stroke ();
 
-				this.labelPoint.Text = string.Format ("({0}, {1})", x, y);
+				this.labelPoint.SetText (string.Format ("({0}, {1})", x, y));
 			} else
-				this.labelPoint.Text = string.Empty;
+				this.labelPoint.SetText (string.Empty);
 		}
 
 		private void DrawGrid (Context g)
 		{
-			g.SetSourceColor (new Color (0.05, 0.05, 0.05));
 			g.SetDash (new double[] { 4, 4 }, 2);
 			g.LineWidth = 1;
 
@@ -307,13 +313,13 @@ namespace Pinta.Effects
 
 		private IEnumerator<ControlPointDrawingInfo> GetDrawingInfos ()
 		{
-			if (Mode == ColorTransferMode.Luminosity)
+			if (Mode == ColorTransferMode.Luminosity) {
+				drawing.GetStyleContext ().GetColor (out var fg_color);
 				yield return new ControlPointDrawingInfo () {
-					Color = new Color (0.4, 0.4, 0.4),
+					Color = fg_color,
 					IsActive = true
 				};
-
-			else {
+			} else {
 				yield return new ControlPointDrawingInfo () {
 					Color = new Color (0.9, 0, 0),
 					IsActive = checkRed.Active
@@ -331,9 +337,8 @@ namespace Pinta.Effects
 
 		private void DrawControlPoints (Context g)
 		{
-			int x, y;
-			Gdk.ModifierType mask;
-			GdkExtensions.GetWindowPointer (drawing.Window, out x, out y, out mask);
+			int x = last_mouse_pos.X;
+			int y = last_mouse_pos.Y;
 
 			var infos = GetDrawingInfos ();
 
@@ -345,21 +350,21 @@ namespace Pinta.Effects
 				for (int i = 0; i < controlPoints.Count; i++) {
 					int cpx = controlPoints.Keys[i];
 					int cpy = size - 1 - (int) controlPoints.Values[i];
-					Rectangle rect;
+					RectangleD rect;
 
 					if (info.IsActive) {
 						if (CheckControlPointProximity (cpx, cpy, x, y)) {
-							rect = new Rectangle (cpx - (radius + 2) / 2, cpy - (radius + 2) / 2, radius + 2, radius + 2);
+							rect = new RectangleD (cpx - (radius + 2) / 2, cpy - (radius + 2) / 2, radius + 2, radius + 2);
 							g.DrawEllipse (rect, new Color (0.2, 0.2, 0.2), 2);
-							rect = new Rectangle (cpx - radius / 2, cpy - radius / 2, radius, radius);
+							rect = new RectangleD (cpx - radius / 2, cpy - radius / 2, radius, radius);
 							g.FillEllipse (rect, new Color (0.9, 0.9, 0.9));
 						} else {
-							rect = new Rectangle (cpx - radius / 2, cpy - radius / 2, radius, radius);
+							rect = new RectangleD (cpx - radius / 2, cpy - radius / 2, radius, radius);
 							g.DrawEllipse (rect, info.Color, 2);
 						}
 					}
 
-					rect = new Rectangle (cpx - (radius - 2) / 2, cpy - (radius - 2) / 2, radius - 2, radius - 2);
+					rect = new RectangleD (cpx - (radius - 2) / 2, cpy - (radius - 2) / 2, radius - 2, radius - 2);
 					g.FillEllipse (rect, info.Color);
 				}
 			}
@@ -370,6 +375,7 @@ namespace Pinta.Effects
 		private void DrawSpline (Context g)
 		{
 			var infos = GetDrawingInfos ();
+			g.Save ();
 
 			foreach (var controlPoints in ControlPoints) {
 
@@ -392,9 +398,9 @@ namespace Pinta.Effects
 				g.LineWidth = 2;
 				g.LineJoin = LineJoin.Round;
 
-				g.MoveTo (line[0]);
+				g.MoveTo (line[0].X, line[0].Y);
 				for (int i = 1; i < line.Length; i++)
-					g.LineTo (line[i]);
+					g.LineTo (line[i].X, line[i].Y);
 
 				infos.MoveNext ();
 				var info = infos.Current;
@@ -403,11 +409,15 @@ namespace Pinta.Effects
 				g.LineWidth = info.IsActive ? 2 : 1;
 				g.Stroke ();
 			}
+
+			g.Restore ();
 		}
 
-		private void HandleDrawingDrawnEvent (object o, Gtk.DrawnArgs args)
+		private void HandleDrawingDrawnEvent (Context g)
 		{
-			Context g = args.Cr;
+			drawing.GetStyleContext ().GetColor (out var fg_color);
+			g.SetSourceColor (fg_color);
+
 			DrawBorder (g);
 			DrawPointerCross (g);
 			DrawSpline (g);
@@ -418,56 +428,59 @@ namespace Pinta.Effects
 		[MemberNotNull (nameof (comboMap), nameof (labelPoint), nameof (labelTip), nameof (checkRed), nameof (checkGreen), nameof (checkBlue), nameof (buttonReset), nameof (drawing))]
 		private void Build ()
 		{
-			WindowPosition = WindowPosition.CenterOnParent;
 			Resizable = false;
 
-			const int spacing = 6;
-			var hbox1 = new HBox () { Spacing = spacing };
-			hbox1.PackStart (new Label (Translations.GetString ("Transfer Map")), false, false, 0);
-			hbox1.PackStart (new HSeparator (), true, true, 0);
-			ContentArea.PackStart (hbox1, false, false, 0);
+			var content_area = this.GetContentAreaBox ();
+			content_area.SetAllMargins (12);
+			content_area.Spacing = 6;
 
-			var hbox2 = new HBox () { Spacing = spacing };
+			const int spacing = 6;
+			var hbox1 = new Box () { Spacing = spacing };
+			hbox1.SetOrientation (Orientation.Horizontal);
+			hbox1.Append (Label.New (Translations.GetString ("Transfer Map")));
+
 			comboMap = new ComboBoxText ();
 			comboMap.AppendText (Translations.GetString ("RGB"));
 			comboMap.AppendText (Translations.GetString ("Luminosity"));
 			comboMap.Active = 1;
-			hbox2.PackStart (comboMap, false, false, 0);
+			hbox1.Append (comboMap);
 
-			labelPoint = new Label ("(256, 256)");
-			var labelAlign = new Alignment (1, 0.5f, 1, 0);
-			labelAlign.Add (labelPoint);
-			hbox2.PackEnd (labelAlign, false, false, 0);
-			ContentArea.PackStart (hbox2, false, false, 0);
+			labelPoint = Label.New ("(256, 256)");
+			labelPoint.Hexpand = true;
+			labelPoint.Halign = Align.End;
+			hbox1.Append (labelPoint);
+			content_area.Append (hbox1);
 
 			drawing = new DrawingArea () {
 				WidthRequest = 256,
 				HeightRequest = 256,
-				Events = (Gdk.EventMask) 795646,
 				CanFocus = true
 			};
-			ContentArea.PackStart (drawing, false, false, 8);
+			drawing.SetAllMargins (8);
+			content_area.Append (drawing);
 
-			var hbox3 = new HBox ();
-			checkRed = new CheckButton (Translations.GetString ("Red  ")) { Active = true };
-			checkGreen = new CheckButton (Translations.GetString ("Green")) { Active = true };
-			checkBlue = new CheckButton (Translations.GetString ("Blue ")) { Active = true };
-			hbox3.PackStart (checkRed, false, false, 0);
-			hbox3.PackStart (checkGreen, false, false, 0);
-			hbox3.PackStart (checkBlue, false, false, 0);
+			var hbox2 = new Box ();
+			hbox2.SetOrientation (Orientation.Horizontal);
+			checkRed = new CheckButton () { Label = Translations.GetString ("Red  "), Active = true };
+			checkGreen = new CheckButton () { Label = Translations.GetString ("Green"), Active = true };
+			checkBlue = new CheckButton () { Label = Translations.GetString ("Blue "), Active = true };
+			hbox2.Prepend (checkRed);
+			hbox2.Prepend (checkGreen);
+			hbox2.Prepend (checkBlue);
 
 			buttonReset = new Button () {
 				WidthRequest = 81,
 				HeightRequest = 30,
-				Label = Translations.GetString ("Reset")
+				Label = Translations.GetString ("Reset"),
+				Halign = Align.End,
+				Hexpand = true
 			};
-			hbox3.PackEnd (buttonReset, false, false, 0);
-			ContentArea.PackStart (hbox3, false, false, 0);
+			hbox2.Append (buttonReset);
+			content_area.Append (hbox2);
 
-			labelTip = new Label (Translations.GetString ("Tip: Right-click to remove control points."));
-			ContentArea.PackStart (labelTip, false, false, 0);
+			labelTip = Label.New (Translations.GetString ("Tip: Right-click to remove control points."));
+			content_area.Append (labelTip);
 
-			ContentArea.ShowAll ();
 			checkRed.Hide ();
 			checkGreen.Hide ();
 			checkBlue.Hide ();

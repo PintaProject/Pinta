@@ -44,7 +44,7 @@ namespace Pinta.Tools
 		public override string Name => Translations.GetString ("Paint Bucket");
 		public override string Icon => Pinta.Resources.Icons.ToolPaintBucket;
 		public override string StatusBarText => Translations.GetString ("Left click to fill a region with the primary color, right click to fill with the secondary color.");
-		public override Gdk.Cursor DefaultCursor => new Gdk.Cursor (Gdk.Display.Default, PintaCore.Resources.GetIcon ("Cursor.PaintBucket.png"), 21, 21);
+		public override Gdk.Cursor DefaultCursor => Gdk.Cursor.NewFromTexture (Resources.GetIcon ("Cursor.PaintBucket.png"), 21, 21, null);
 		public override Gdk.Key ShortcutKey => Gdk.Key.F;
 		public override int Priority => 29;
 		protected override bool CalculatePolygonSet => false;
@@ -63,11 +63,10 @@ namespace Pinta.Tools
 		{
 			var surf = document.Layers.ToolLayer.Surface;
 
-			using (var g = new Context (surf)) {
-				g.Operator = Operator.Source;
-				g.SetSource (document.Layers.CurrentUserLayer.Surface);
-				g.Paint ();
-			}
+			var g = new Context (surf);
+			g.Operator = Operator.Source;
+			g.SetSourceSurface (document.Layers.CurrentUserLayer.Surface, 0, 0);
+			g.Paint ();
 
 			var hist = new SimpleHistoryItem (Icon, Name);
 			hist.TakeSnapshotOfLayer (document.Layers.CurrentUserLayer);
@@ -79,7 +78,7 @@ namespace Pinta.Tools
 			// Color in any pixel that the stencil says we need to fill
 			Parallel.For (0, stencil.Height, y => {
 				var stencil_width = stencil.Width;
-				var dst_data = surf.GetData ();
+				var dst_data = surf.GetPixelData ();
 
 				for (var x = 0; x < stencil_width; ++x) {
 					if (stencil.Get (x, y))
@@ -91,11 +90,10 @@ namespace Pinta.Tools
 
 			// Transfer the temp layer to the real one,
 			// respecting any selection area
-			using (var g = document.CreateClippedContext ()) {
-				g.Operator = Operator.Source;
-				g.SetSource (surf);
-				g.Paint ();
-			}
+			g = document.CreateClippedContext ();
+			g.Operator = Operator.Source;
+			g.SetSourceSurface (surf, 0, 0);
+			g.Paint ();
 
 			document.Layers.ToolLayer.Clear ();
 			document.History.PushNewItem (hist);

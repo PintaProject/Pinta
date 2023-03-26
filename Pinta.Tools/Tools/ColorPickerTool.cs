@@ -63,22 +63,22 @@ namespace Pinta.Tools
 				var icon = GdkExtensions.CreateIconWithShape ("Cursor.ColorPicker.png",
 								CursorShape.Rectangle, SampleSize, 7, 27,
 								out var iconOffsetX, out var iconOffsetY);
-				return new Gdk.Cursor (Gdk.Display.Default, icon, iconOffsetX, iconOffsetY);
+				return Gdk.Cursor.NewFromTexture (icon, iconOffsetX, iconOffsetY, null);
 			}
 		}
 
-		protected override void OnBuildToolBar (Toolbar tb)
+		protected override void OnBuildToolBar (Box tb)
 		{
 			base.OnBuildToolBar (tb);
 
-			tb.AppendItem (SamplingLabel);
-			tb.AppendItem (SampleSizeDropDown);
-			tb.AppendItem (SampleTypeDropDown);
+			tb.Append (SamplingLabel);
+			tb.Append (SampleSizeDropDown);
+			tb.Append (SampleTypeDropDown);
 
-			tb.AppendItem (Separator);
+			tb.Append (Separator);
 
-			tb.AppendItem (ToolSelectionLabel);
-			tb.AppendItem (ToolSelectionDropDown);
+			tb.Append (ToolSelectionLabel);
+			tb.Append (ToolSelectionDropDown);
 		}
 
 		protected override void OnMouseDown (Document document, ToolMouseEventArgs e)
@@ -145,14 +145,14 @@ namespace Pinta.Tools
 				settings.PutSetting (SAMPLE_TYPE_SETTING, sample_type.SelectedIndex);
 		}
 
-		private Color GetColorFromPoint (Document document, Point point)
+		private Color GetColorFromPoint (Document document, PointI point)
 		{
 			var pixels = GetPixelsFromPoint (document, point);
 			var color = ColorBgra.BlendPremultiplied (pixels);
 			return color.ToStraightAlpha ().ToCairoColor ();
 		}
 
-		private ColorBgra[] GetPixelsFromPoint (Document document, Point point)
+		private ColorBgra[] GetPixelsFromPoint (Document document, PointI point)
 		{
 			var x = point.X;
 			var y = point.Y;
@@ -164,13 +164,13 @@ namespace Pinta.Tools
 				return new[] { GetPixel (document, x, y) };
 
 			// Find the pixels we need (clamp to the size of the image)
-			var rect = new Gdk.Rectangle (x - half, y - half, size, size);
-			rect.Intersect (new Gdk.Rectangle (Gdk.Point.Zero, document.ImageSize));
+			var rect = new RectangleI (x - half, y - half, size, size);
+			rect = rect.Intersect (new RectangleI (PointI.Zero, document.ImageSize));
 
 			var pixels = new List<ColorBgra> ();
 
-			for (var i = rect.Left; i <= rect.GetRight (); i++)
-				for (var j = rect.Top; j <= rect.GetBottom (); j++)
+			for (var i = rect.Left; i <= rect.Right; i++)
+				for (var j = rect.Top; j <= rect.Bottom; j++)
 					pixels.Add (GetPixel (document, i, j));
 
 			return pixels.ToArray ();
@@ -185,15 +185,15 @@ namespace Pinta.Tools
 		}
 
 		private ToolBarDropDownButton? tool_select;
-		private ToolBarLabel? tool_select_label;
-		private ToolBarLabel? sampling_label;
+		private Label? tool_select_label;
+		private Label? sampling_label;
 		private ToolBarDropDownButton? sample_size;
 		private ToolBarDropDownButton? sample_type;
-		private SeparatorToolItem? sample_sep;
+		private Separator? sample_sep;
 
-		private ToolBarLabel ToolSelectionLabel => tool_select_label ??= new ToolBarLabel (string.Format (" {0}: ", Translations.GetString ("After select")));
-		private ToolBarLabel SamplingLabel => sampling_label ??= new ToolBarLabel (string.Format (" {0}: ", Translations.GetString ("Sampling")));
-		private SeparatorToolItem Separator => sample_sep ??= new SeparatorToolItem ();
+		private Label ToolSelectionLabel => tool_select_label ??= Label.New (string.Format (" {0}: ", Translations.GetString ("After select")));
+		private Label SamplingLabel => sampling_label ??= Label.New (string.Format (" {0}: ", Translations.GetString ("Sampling")));
+		private Separator Separator => sample_sep ??= GtkExtensions.CreateToolBarSeparator ();
 
 		private ToolBarDropDownButton ToolSelectionDropDown {
 			get {

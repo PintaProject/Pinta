@@ -49,26 +49,30 @@ namespace Pinta.Actions
 			// TODO - allow the layer to be zoomed in or out
 
 			var data = new RotateZoomData ();
-			Gtk.ResponseType response;
-			using (var dialog = new SimpleEffectDialog (Translations.GetString ("Rotate / Zoom Layer"),
-				Gtk.IconTheme.Default.LoadIcon (Resources.Icons.LayerRotateZoom, 16),
+
+			var dialog = new SimpleEffectDialog (
+				Translations.GetString ("Rotate / Zoom Layer"),
+				Resources.Icons.LayerRotateZoom,
 				data,
-				new PintaLocalizer ())) {
+				new PintaLocalizer ());
 
-				// When parameters are modified, update the display transform of the layer.
-				dialog.EffectDataChanged += (o, args) => {
-					var xform = ComputeMatrix (data);
-					var doc = PintaCore.Workspace.ActiveDocument;
-					doc.Layers.CurrentUserLayer.Transform.InitMatrix (xform);
-					PintaCore.Workspace.Invalidate ();
-				};
+			// When parameters are modified, update the display transform of the layer.
+			dialog.EffectDataChanged += (o, args) => {
+				var xform = ComputeMatrix (data);
+				var doc = PintaCore.Workspace.ActiveDocument;
+				doc.Layers.CurrentUserLayer.Transform = xform.Clone ();
+				PintaCore.Workspace.Invalidate ();
+			};
 
-				response = (Gtk.ResponseType) dialog.Run ();
-			}
+			dialog.OnResponse += (_, args) => {
+				ClearLivePreview ();
+				if (args.ResponseId == (int) Gtk.ResponseType.Ok && !data.IsDefault)
+					ApplyTransform (data);
 
-			ClearLivePreview ();
-			if (response == Gtk.ResponseType.Ok && !data.IsDefault)
-				ApplyTransform (data);
+				dialog.Destroy ();
+			};
+
+			dialog.Present ();
 		}
 
 		private static void ClearLivePreview ()
@@ -79,7 +83,7 @@ namespace Pinta.Actions
 
 		private static Matrix ComputeMatrix (RotateZoomData data)
 		{
-			var xform = new Matrix ();
+			var xform = CairoExtensions.CreateIdentityMatrix ();
 			var image_size = PintaCore.Workspace.ImageSize;
 			var center_x = image_size.Width / 2.0;
 			var center_y = image_size.Height / 2.0;
@@ -100,7 +104,7 @@ namespace Pinta.Actions
 			var old_surf = doc.Layers.CurrentUserLayer.Surface.Clone ();
 
 			var xform = ComputeMatrix (data);
-			doc.Layers.CurrentUserLayer.ApplyTransform (xform, PintaCore.Workspace.ImageSize);
+			doc.Layers.CurrentUserLayer.ApplyTransform (xform, PintaCore.Workspace.ImageSize, PintaCore.Workspace.ImageSize);
 			doc.Workspace.Invalidate ();
 
 			doc.History.PushNewItem (new SimpleHistoryItem (Resources.Icons.LayerRotateZoom,
@@ -113,7 +117,7 @@ namespace Pinta.Actions
 			public double Angle = 0;
 
 			[Caption ("Pan")]
-			public PointD Pan;
+			public PointD Pan = new (0, 0);
 
 			[Caption ("Zoom"), MinimumValue (0), MaximumValue (16)]
 			public double Zoom = 1.0;

@@ -17,9 +17,7 @@ namespace Pinta.Effects
 {
 	public class GaussianBlurEffect : BaseEffect
 	{
-		public override string Icon {
-			get { return "Menu.Effects.Blurs.GaussianBlur.png"; }
-		}
+		public override string Icon => Pinta.Resources.Icons.EffectsBlursGaussianBlur;
 
 		public override string Name {
 			get { return Translations.GetString ("Gaussian Blur"); }
@@ -40,9 +38,9 @@ namespace Pinta.Effects
 			EffectData = new GaussianBlurData ();
 		}
 
-		public override bool LaunchConfiguration ()
+		public override void LaunchConfiguration ()
 		{
-			return EffectHelper.LaunchSimpleEffectDialog (this);
+			EffectHelper.LaunchSimpleEffectDialog (this);
 		}
 
 		#region Algorithm Code Ported From PDN
@@ -60,7 +58,7 @@ namespace Pinta.Effects
 			return weights;
 		}
 
-		public override void Render (ImageSurface src, ImageSurface dest, Gdk.Rectangle[] rois)
+		public override void Render (ImageSurface src, ImageSurface dest, Core.RectangleI[] rois)
 		{
 			if (Data.Radius == 0) {
 				// Copy src to dest
@@ -81,12 +79,12 @@ namespace Pinta.Effects
 			// Cache these for a massive performance boost
 			int src_width = src.Width;
 			int src_height = src.Height;
-			ReadOnlySpan<ColorBgra> src_data = src.GetReadOnlyData ();
-			Span<ColorBgra> dst_data = dest.GetData ();
+			ReadOnlySpan<ColorBgra> src_data = src.GetReadOnlyPixelData ();
+			Span<ColorBgra> dst_data = dest.GetPixelData ();
 
-			foreach (Gdk.Rectangle rect in rois) {
+			foreach (var rect in rois) {
 				if (rect.Height >= 1 && rect.Width >= 1) {
-					for (int y = rect.Top; y <= rect.GetBottom (); ++y) {
+					for (int y = rect.Top; y <= rect.Bottom; ++y) {
 						long waSum = 0;
 						long wcSum = 0;
 						long aSum = 0;
@@ -150,7 +148,7 @@ namespace Pinta.Effects
 							dst_row[rect.Left].Bgra = ColorBgra.FromBgra (blue, green, red, alpha).ToPremultipliedAlpha ().Bgra;
 						}
 
-						for (int x = rect.Left + 1; x <= rect.GetRight (); ++x) {
+						for (int x = rect.Left + 1; x <= rect.Right; ++x) {
 							for (int i = 0; i < wlen - 1; ++i) {
 								waSums[i] = waSums[i + 1];
 								wcSums[i] = wcSums[i + 1];

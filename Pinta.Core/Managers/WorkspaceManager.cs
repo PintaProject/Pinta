@@ -38,7 +38,7 @@ namespace Pinta.Core
 		Document ActiveDocument { get; }
 		DocumentWorkspace ActiveWorkspace { get; }
 		event EventHandler? ActiveDocumentChanged;
-		Gdk.Rectangle ClampToImageSize (Gdk.Rectangle r);
+		RectangleI ClampToImageSize (RectangleI r);
 		bool HasOpenDocuments { get; }
 		event EventHandler? SelectionChanged;
 		SelectionModeHandler SelectionHandler { get; }
@@ -83,12 +83,12 @@ namespace Pinta.Core
 			}
 		}
 
-		public Gdk.Size ImageSize {
+		public Size ImageSize {
 			get { return ActiveDocument.ImageSize; }
 			set { ActiveDocument.ImageSize = value; }
 		}
 
-		public Gdk.Size CanvasSize {
+		public Size CanvasSize {
 			get { return ActiveWorkspace.CanvasSize; }
 			set { ActiveWorkspace.CanvasSize = value; }
 		}
@@ -105,7 +105,7 @@ namespace Pinta.Core
 		public List<Document> OpenDocuments { get; private set; }
 		public bool HasOpenDocuments { get { return OpenDocuments.Count > 0; } }
 
-		public Document CreateAndActivateDocument (GLib.IFile? file, Gdk.Size size)
+		public Document CreateAndActivateDocument (Gio.File? file, Size size)
 		{
 			Document doc = new Document (size);
 
@@ -152,21 +152,21 @@ namespace Pinta.Core
 
 		public void Invalidate ()
 		{
-			if (PintaCore.Workspace.HasOpenDocuments)
+			if (HasOpenDocuments)
 				ActiveWorkspace.Invalidate ();
 		}
 
-		public void Invalidate (Gdk.Rectangle rect)
+		public void Invalidate (RectangleI rect)
 		{
 			ActiveWorkspace.Invalidate (rect);
 		}
 
-		public void InvalidateWindowRect (Gdk.Rectangle windowRect)
+		public void InvalidateWindowRect (RectangleI windowRect)
 		{
 			ActiveWorkspace.InvalidateWindowRect (windowRect);
 		}
 
-		public Document NewDocument (Gdk.Size imageSize, Color backgroundColor)
+		public Document NewDocument (Size imageSize, Color backgroundColor)
 		{
 			Document doc = CreateAndActivateDocument (null, imageSize);
 			doc.Workspace.CanvasSize = imageSize;
@@ -175,10 +175,9 @@ namespace Pinta.Core
 			Layer background = doc.Layers.AddNewLayer (Translations.GetString ("Background"));
 
 			if (backgroundColor.A != 0) {
-				using (Cairo.Context g = new Cairo.Context (background.Surface)) {
-					g.SetSourceColor (backgroundColor);
-					g.Paint ();
-				}
+				var g = new Cairo.Context (background.Surface);
+				g.SetSourceColor (backgroundColor);
+				g.Paint ();
 			}
 
 			doc.Workspace.History.PushNewItem (new BaseHistoryItem (Resources.StandardIcons.DocumentNew, Translations.GetString ("New Image")));
@@ -191,12 +190,13 @@ namespace Pinta.Core
 		/// Creates a new Document with a specified image as content.
 		/// Primarily used for Paste Into New Image.
 		/// </summary>
-		public Document NewDocumentFromImage (Gdk.Pixbuf image)
+		public Document NewDocumentFromImage (Cairo.ImageSurface image)
 		{
-			var doc = NewDocument (new Gdk.Size (image.Width, image.Height), new Color (0, 0, 0, 0));
+			var doc = NewDocument (new Size (image.Width, image.Height), new Color (0, 0, 0, 0));
 
-			using (var g = new Context (doc.Layers[0].Surface))
-				g.DrawPixbuf (image, new Point (0, 0));
+			var g = new Context (doc.Layers[0].Surface);
+			g.SetSourceSurface (image, 0, 0);
+			g.Paint ();
 
 			// A normal document considers the "New Image" history to not be dirty, as it's just a
 			// blank background. We put an image there, so we should try to save if the user closes it.
@@ -206,7 +206,7 @@ namespace Pinta.Core
 		}
 
 		// TODO: Standardize add to recent files
-		public bool OpenFile (GLib.IFile file, Window? parent = null)
+		public bool OpenFile (Gio.File file, Window? parent = null)
 		{
 			bool fileOpened = false;
 
@@ -229,7 +229,7 @@ namespace Pinta.Core
 							break;
 						} catch (UnauthorizedAccessException) {
 							// If the file can't be accessed, don't retry for every format.
-							ShowFilePermissionErrorDialog (parent, file.ParsedName);
+							ShowFilePermissionErrorDialog (parent, file.GetParseName ());
 							return false;
 						} catch (Exception e) {
 							// Record errors in case none of the formats work.
@@ -240,7 +240,7 @@ namespace Pinta.Core
 					}
 
 					if (!loaded) {
-						ShowUnsupportedFormatDialog (parent, file.ParsedName,
+						ShowUnsupportedFormatDialog (parent, file.GetParseName (),
 							Translations.GetString ("Unsupported file format"), errors.ToString ());
 						return false;
 					}
@@ -251,9 +251,9 @@ namespace Pinta.Core
 
 				fileOpened = true;
 			} catch (UnauthorizedAccessException) {
-				ShowFilePermissionErrorDialog (parent, file.ParsedName);
+				ShowFilePermissionErrorDialog (parent, file.GetParseName ());
 			} catch (Exception e) {
-				ShowOpenFileErrorDialog (parent, file.ParsedName, e.Message, e.ToString ());
+				ShowOpenFileErrorDialog (parent, file.GetParseName (), e.Message, e.ToString ());
 			}
 
 			return fileOpened;
@@ -275,7 +275,7 @@ namespace Pinta.Core
 		/// <param name='canvas_pos'>
 		/// The position of the window point
 		/// </param>
-		public Cairo.PointD WindowPointToCanvas (Cairo.PointD window_pos)
+		public PointD WindowPointToCanvas (PointD window_pos)
 		{
 			return ActiveWorkspace.WindowPointToCanvas (window_pos.X, window_pos.Y);
 		}
@@ -286,12 +286,12 @@ namespace Pinta.Core
 		/// <param name='canvas_pos'>
 		/// The position of the canvas point
 		/// </param>
-		public Cairo.PointD CanvasPointToWindow (Cairo.PointD canvas_pos)
+		public PointD CanvasPointToWindow (PointD canvas_pos)
 		{
 			return ActiveWorkspace.CanvasPointToWindow (canvas_pos.X, canvas_pos.Y);
 		}
 
-		public Gdk.Rectangle ClampToImageSize (Gdk.Rectangle r)
+		public RectangleI ClampToImageSize (RectangleI r)
 		{
 			return ActiveDocument.ClampToImageSize (r);
 		}
@@ -376,43 +376,37 @@ namespace Pinta.Core
 		}
 		#endregion
 
-		private void ShowOpenFileErrorDialog (Window parent, string filename, string primaryText, string details)
+
+		private void ShowOpenFileErrorDialog (Window parent, string filename, string primary_text, string details)
 		{
-			string markup = "<span weight=\"bold\" size=\"larger\">{0}</span>\n\n{1}";
-			string secondaryText = string.Format (Translations.GetString ("Could not open file: {0}"), filename);
-			string message = string.Format (markup, primaryText, secondaryText);
-			PintaCore.Chrome.ShowErrorDialog (parent, message, details);
+			string secondary_text = Translations.GetString ("Could not open file: {0}", filename);
+			PintaCore.Chrome.ShowErrorDialog (parent, primary_text, secondary_text, details);
 		}
 
-		private void ShowUnsupportedFormatDialog (Window parent, string filename, string primaryText, string details)
+		private void ShowUnsupportedFormatDialog (Window parent, string filename, string message, string errors)
 		{
-			string markup = "<span weight=\"bold\" size=\"larger\">{0}</span>\n\n{1}";
+			var body = new StringBuilder ();
+			body.AppendLine (Translations.GetString ("Could not open file: {0}", filename));
+			body.AppendLine (Translations.GetString ("Pinta supports the following file formats:"));
 
-			string secondaryText = Translations.GetString ("Could not open file: {0}", filename);
-			secondaryText += string.Format ("\n\n{0}\n", Translations.GetString ("Pinta supports the following file formats:"));
 			var extensions = from format in PintaCore.ImageFormats.Formats
 					 where format.Importer != null
 					 from extension in format.Extensions
 					 where char.IsLower (extension.FirstOrDefault ())
 					 orderby extension
 					 select extension;
+			body.AppendJoin (", ", extensions);
 
-			secondaryText += String.Join (", ", extensions);
-
-			string message = string.Format (markup, primaryText, secondaryText);
-			PintaCore.Chrome.ShowUnsupportedFormatDialog (parent, message, details);
+			PintaCore.Chrome.ShowErrorDialog (parent, message, body.ToString (), errors);
 		}
 
-		private void ShowFilePermissionErrorDialog (Window parent, string filename)
+		private static void ShowFilePermissionErrorDialog (Window parent, string filename)
 		{
-			string markup = "<span weight=\"bold\" size=\"larger\">{0}</span>\n\n{1}";
-			string primary = Translations.GetString ("Failed to open image");
+			string message = Translations.GetString ("Failed to open image");
 			// Translators: {0} is the name of a file that the user does not have permission to open.
-			string secondary = Translations.GetString ("You do not have access to '{0}'.", filename);
-			string message = string.Format (markup, primary, secondary);
+			string details = Translations.GetString ("You do not have access to '{0}'.", filename);
 
-			using var md = new MessageDialog (parent, DialogFlags.Modal, MessageType.Error, ButtonsType.Ok, message);
-			md.Run ();
+			PintaCore.Chrome.ShowMessageDialog (parent, message, details);
 		}
 
 		#region Public Events

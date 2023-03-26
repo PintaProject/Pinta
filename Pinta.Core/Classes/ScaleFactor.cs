@@ -8,7 +8,6 @@
 /////////////////////////////////////////////////////////////////////////////////
 
 using System;
-using Gdk;
 
 namespace Pinta.Core
 {
@@ -169,64 +168,64 @@ namespace Pinta.Core
 			return (x * (double) denominator) / (double) numerator;
 		}
 
-		public Point ScalePoint (Point p)
+		public PointI ScalePoint (PointI p)
 		{
-			return new Point (ScaleScalar (p.X), ScaleScalar (p.Y));
+			return new PointI (ScaleScalar (p.X), ScaleScalar (p.Y));
 		}
 
-		public Cairo.PointD ScalePoint (Cairo.PointD p)
+		public PointD ScalePoint (PointD p)
 		{
-			return new Cairo.PointD (ScaleScalar (p.X), ScaleScalar (p.Y));
+			return new PointD (ScaleScalar (p.X), ScaleScalar (p.Y));
 		}
 
-		public Cairo.PointD ScalePointJustX (Cairo.PointD p)
+		public PointD ScalePointJustX (PointD p)
 		{
-			return new Cairo.PointD (ScaleScalar (p.X), p.Y);
+			return new PointD (ScaleScalar (p.X), p.Y);
 		}
 
-		public Cairo.PointD ScalePointJustY (Cairo.PointD p)
+		public PointD ScalePointJustY (PointD p)
 		{
-			return new Cairo.PointD (p.X, ScaleScalar (p.Y));
+			return new PointD (p.X, ScaleScalar (p.Y));
 		}
 
-		public Cairo.PointD UnscalePoint (Cairo.PointD p)
+		public PointD UnscalePoint (PointD p)
 		{
-			return new Cairo.PointD (UnscaleScalar (p.X), UnscaleScalar (p.Y));
+			return new PointD (UnscaleScalar (p.X), UnscaleScalar (p.Y));
 		}
 
-		public Cairo.PointD UnscalePointJustX (Cairo.PointD p)
+		public PointD UnscalePointJustX (PointD p)
 		{
-			return new Cairo.PointD (UnscaleScalar (p.X), p.Y);
+			return new PointD (UnscaleScalar (p.X), p.Y);
 		}
 
-		public Cairo.PointD UnscalePointJustY (Cairo.PointD p)
+		public PointD UnscalePointJustY (PointD p)
 		{
-			return new Cairo.PointD (p.X, UnscaleScalar (p.Y));
+			return new PointD (p.X, UnscaleScalar (p.Y));
 		}
 
-		public Point ScalePointJustX (Point p)
+		public PointI ScalePointJustX (PointI p)
 		{
-			return new Point (ScaleScalar (p.X), p.Y);
+			return new PointI (ScaleScalar (p.X), p.Y);
 		}
 
-		public Point ScalePointJustY (Point p)
+		public PointI ScalePointJustY (PointI p)
 		{
-			return new Point (p.X, ScaleScalar (p.Y));
+			return new PointI (p.X, ScaleScalar (p.Y));
 		}
 
-		public Point UnscalePoint (Point p)
+		public PointI UnscalePoint (PointI p)
 		{
-			return new Point (UnscaleScalar (p.X), UnscaleScalar (p.Y));
+			return new PointI (UnscaleScalar (p.X), UnscaleScalar (p.Y));
 		}
 
-		public Point UnscalePointJustX (Point p)
+		public PointI UnscalePointJustX (PointI p)
 		{
-			return new Point (UnscaleScalar (p.X), p.Y);
+			return new PointI (UnscaleScalar (p.X), p.Y);
 		}
 
-		public Point UnscalePointJustY (Point p)
+		public PointI UnscalePointJustY (PointI p)
 		{
-			return new Point (p.X, UnscaleScalar (p.Y));
+			return new PointI (p.X, UnscaleScalar (p.Y));
 		}
 
 		//public SizeF ScaleSize(C s)
@@ -259,14 +258,14 @@ namespace Pinta.Core
 		//    return new RectangleF(UnscalePoint(rectF.Location), UnscaleSize(rectF.Size));
 		//}
 
-		public Rectangle ScaleRectangle (Rectangle rect)
+		public RectangleI ScaleRectangle (RectangleI rect)
 		{
-			return new Rectangle (ScalePoint (rect.Location), ScaleSize (rect.Size));
+			return new RectangleI (ScalePoint (rect.Location), ScaleSize (rect.Size));
 		}
 
-		public Rectangle UnscaleRectangle (Rectangle rect)
+		public RectangleI UnscaleRectangle (RectangleI rect)
 		{
-			return new Rectangle (UnscalePoint (rect.Location), UnscaleSize (rect.Size));
+			return new RectangleI (UnscalePoint (rect.Location), UnscaleSize (rect.Size));
 		}
 
 		private static readonly double[] scales =

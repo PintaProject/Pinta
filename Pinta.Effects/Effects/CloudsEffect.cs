@@ -21,9 +21,7 @@ namespace Pinta.Effects
 		private byte instanceSeed = unchecked((byte) DateTime.Now.Ticks);
 		private static object render_lock = new object ();
 
-		public override string Icon {
-			get { return "Menu.Effects.Render.Clouds.png"; }
-		}
+		public override string Icon => Pinta.Resources.Icons.EffectsRenderClouds;
 
 		public override string Name {
 			get { return Translations.GetString ("Clouds"); }
@@ -44,9 +42,9 @@ namespace Pinta.Effects
 			EffectData = new CloudsData ();
 		}
 
-		public override bool LaunchConfiguration ()
+		public override void LaunchConfiguration ()
 		{
-			return EffectHelper.LaunchSimpleEffectDialog (this);
+			EffectHelper.LaunchSimpleEffectDialog (this);
 		}
 
 		#region Algorithm Code Ported From PDN
@@ -123,18 +121,18 @@ namespace Pinta.Effects
 			return Utility.Lerp (edge1, edge2, v);
 		}
 
-		private static void RenderClouds (ImageSurface surface, Gdk.Rectangle rect, int scale, byte seed, double power, ColorBgra colorFrom, ColorBgra colorTo)
+		private static void RenderClouds (ImageSurface surface, Core.RectangleI rect, int scale, byte seed, double power, ColorBgra colorFrom, ColorBgra colorTo)
 		{
 			int w = surface.Width;
 			int h = surface.Height;
-			var data = surface.GetData ();
-			int bottom = rect.GetBottom ();
+			var data = surface.GetPixelData ();
+			int bottom = rect.Bottom;
 
-			for (int y = rect.Top; y <= rect.GetBottom (); ++y) {
+			for (int y = rect.Top; y <= rect.Bottom; ++y) {
 				var row = data.Slice ((y - rect.Top) * w, w);
 				int dy = 2 * y - h;
 
-				for (int x = rect.Left; x <= rect.GetRight (); ++x) {
+				for (int x = rect.Left; x <= rect.Right; ++x) {
 					int dx = 2 * x - w;
 					double val = 0;
 					double mult = 1;
@@ -167,28 +165,26 @@ namespace Pinta.Effects
 			}
 		}
 
-		protected override void Render (ImageSurface src, ImageSurface dst, Gdk.Rectangle roi)
+		protected override void Render (ImageSurface src, ImageSurface dst, Core.RectangleI roi)
 		{
-			var r = roi.ToCairoRectangle ();
+			var r = roi.ToDouble ();
 
-			using (var temp = CairoExtensions.CreateImageSurface (Format.Argb32, roi.Width, roi.Height)) {
+			var temp = CairoExtensions.CreateImageSurface (Format.Argb32, roi.Width, roi.Height);
 
-				RenderClouds (temp, roi, Data.Scale, (byte) (Data.Seed ^ instanceSeed), Data.Power / 100.0,
-					      PintaCore.Palette.PrimaryColor.ToColorBgra (), PintaCore.Palette.SecondaryColor.ToColorBgra ());
+			RenderClouds (temp, roi, Data.Scale, (byte) (Data.Seed ^ instanceSeed), Data.Power / 100.0,
+					PintaCore.Palette.PrimaryColor.ToColorBgra (), PintaCore.Palette.SecondaryColor.ToColorBgra ());
 
-				temp.MarkDirty ();
+			temp.MarkDirty ();
 
-				// Have to lock because effect renderer is multithreaded
-				lock (render_lock) {
-					using (var g = new Context (dst)) {
-						// - Clear any previous render from the destination
-						// - Copy the source to the destination
-						// - Blend the clouds over the source
-						g.Clear (r);
-						g.BlendSurface (src, r);
-						g.BlendSurface (temp, r.Location (), (BlendMode) CloudsData.BlendOps[Data.BlendMode]);
-					}
-				}
+			// Have to lock because effect renderer is multithreaded
+			lock (render_lock) {
+				var g = new Context (dst);
+				// - Clear any previous render from the destination
+				// - Copy the source to the destination
+				// - Blend the clouds over the source
+				g.Clear (r);
+				g.BlendSurface (src, r);
+				g.BlendSurface (temp, r.Location (), (BlendMode) CloudsData.BlendOps[Data.BlendMode]);
 			}
 		}
 		#endregion

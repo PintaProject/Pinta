@@ -26,6 +26,7 @@
 // THE SOFTWARE.
 
 using System;
+using System.Threading.Tasks;
 using Gtk;
 using Pinta.Core;
 
@@ -49,10 +50,10 @@ namespace Pinta.Actions
 			var doc = PintaCore.Workspace.ActiveDocument;
 
 			// Get the scroll position in canvas co-ordinates
-			var view = (Viewport) doc.Workspace.Canvas.Parent;
+			var view = (Viewport) doc.Workspace.Canvas.Parent!;
 			var canvasPos = doc.Workspace.WindowPointToCanvas (
-				view.Hadjustment.Value,
-				view.Vadjustment.Value);
+				view.Hadjustment!.Value,
+				view.Vadjustment!.Value);
 
 			// Paste into the active document.
 			// The 'false' argument indicates that paste should be
@@ -71,56 +72,52 @@ namespace Pinta.Actions
 		/// <param name="y">Optional. Location within image to paste to.
 		/// Position will be adjusted if pasted image would hang
 		/// over right or bottom edges of canvas.</param>
-		public static void Paste (Document doc, bool toNewLayer, int x = 0, int y = 0)
+		public static async void Paste (Document doc, bool toNewLayer, int x = 0, int y = 0)
 		{
 			// Create a compound history item for recording several
 			// operations so that they can all be undone/redone together.
 			var history_text = toNewLayer ? Translations.GetString ("Paste Into New Layer") : Translations.GetString ("Paste");
 			var paste_action = new CompoundHistoryItem (Resources.StandardIcons.EditPaste, history_text);
 
-			var cb = Clipboard.Get (Gdk.Atom.Intern ("CLIPBOARD", false));
+			var cb = GdkExtensions.GetDefaultClipboard ();
 
 			// See if the current tool wants to handle the paste
 			// operation (e.g., the text tool could paste text)
 			if (!toNewLayer) {
-				if (PintaCore.Tools.DoHandlePaste (doc, cb))
+				if (await PintaCore.Tools.DoHandlePaste (doc, cb))
 					return;
 			}
 
 			// Commit any unfinished tool actions
 			PintaCore.Tools.Commit ();
 
-			// Don't dispose this, as we're going to give it to the history
-			Gdk.Pixbuf? cbImage = null;
-
-			if (cb.WaitIsImageAvailable ())
-				cbImage = cb.WaitForImage ();
-
-			if (cbImage is null) {
+			Gdk.Texture? cb_texture = await cb.ReadTextureAsync ();
+			if (cb_texture is null) {
 				ShowClipboardEmptyDialog ();
 				return;
 			}
 
+			Cairo.ImageSurface cb_image = cb_texture.ToSurface ();
+
 			var canvas_size = PintaCore.Workspace.ImageSize;
 
 			// If the image being pasted is larger than the canvas size, allow the user to optionally resize the canvas
-			if (cbImage.Width > canvas_size.Width || cbImage.Height > canvas_size.Height) {
-				var response = ShowExpandCanvasDialog ();
+			if (cb_image.Width > canvas_size.Width || cb_image.Height > canvas_size.Height) {
+				var response = await ShowExpandCanvasDialog ();
 
 				if (response == ResponseType.Accept) {
-					var new_width = Math.Max (canvas_size.Width, cbImage.Width);
-					var new_height = Math.Max (canvas_size.Height, cbImage.Height);
+					var new_width = Math.Max (canvas_size.Width, cb_image.Width);
+					var new_height = Math.Max (canvas_size.Height, cb_image.Height);
 					PintaCore.Workspace.ResizeCanvas (new_width, new_height, Pinta.Core.Anchor.Center, paste_action);
 					PintaCore.Actions.View.UpdateCanvasScale ();
-				} else if (response == ResponseType.Cancel || response == ResponseType.DeleteEvent) {
+				} else if (response != ResponseType.Reject) // cancelled
 					return;
-				}
 			}
 
 			// If the pasted image would fall off bottom- or right-
 			// side of image, adjust paste position
-			x = Math.Max (0, Math.Min (x, canvas_size.Width - cbImage.Width));
-			y = Math.Max (0, Math.Min (y, canvas_size.Height - cbImage.Height));
+			x = Math.Max (0, Math.Min (x, canvas_size.Width - cb_image.Width));
+			y = Math.Max (0, Math.Min (y, canvas_size.Height - cb_image.Height));
 
 			// If requested, create a new layer, make it the current
 			// layer and record it's creation in the history
@@ -131,12 +128,13 @@ namespace Pinta.Actions
 			}
 
 			// Copy the paste to the temp layer, which should be at least the size of this document.
-			doc.Layers.CreateSelectionLayer (Math.Max (doc.ImageSize.Width, cbImage.Width),
-							 Math.Max (doc.ImageSize.Height, cbImage.Height));
+			doc.Layers.CreateSelectionLayer (Math.Max (doc.ImageSize.Width, cb_image.Width),
+									 Math.Max (doc.ImageSize.Height, cb_image.Height));
 			doc.Layers.ShowSelectionLayer = true;
 
-			using (var g = new Cairo.Context (doc.Layers.SelectionLayer.Surface))
-				g.DrawPixbuf (cbImage, new Cairo.Point (0, 0));
+			var g = new Cairo.Context (doc.Layers.SelectionLayer.Surface);
+			g.SetSourceSurface (cb_image, 0, 0);
+			g.Paint ();
 
 			doc.Layers.SelectionLayer.Transform.InitIdentity ();
 			doc.Layers.SelectionLayer.Transform.Translate (x, y);
@@ -145,12 +143,12 @@ namespace Pinta.Actions
 
 			var old_selection = doc.Selection.Clone ();
 
-			doc.Selection.CreateRectangleSelection (new Cairo.Rectangle (x, y, cbImage.Width, cbImage.Height));
+			doc.Selection.CreateRectangleSelection (new RectangleD (x, y, cb_image.Width, cb_image.Height));
 			doc.Selection.Visible = true;
 
 			doc.Workspace.Invalidate ();
 
-			paste_action.Push (new PasteHistoryItem (cbImage, old_selection));
+			paste_action.Push (new PasteHistoryItem (cb_image, old_selection));
 			doc.History.PushNewItem (paste_action);
 		}
 
@@ -158,21 +156,32 @@ namespace Pinta.Actions
 		{
 			var primary = Translations.GetString ("Image cannot be pasted");
 			var secondary = Translations.GetString ("The clipboard does not contain an image.");
-			var markup = $"<span weight=\"bold\" size=\"larger\">{primary}</span>\n\n{secondary}\n";
-
-			DialogExtensions.ShowErrorDialog (markup);
+			PintaCore.Chrome.ShowMessageDialog (PintaCore.Chrome.MainWindow, primary, secondary);
 		}
 
-		public static ResponseType ShowExpandCanvasDialog ()
+		public static async Task<ResponseType> ShowExpandCanvasDialog ()
 		{
 			var primary = Translations.GetString ("Image larger than canvas");
 			var secondary = Translations.GetString ("The image being pasted is larger than the canvas size. What would you like to do?");
-			var markup = $"<span weight=\"bold\" size=\"larger\">{primary}</span>\n\n{secondary}";
+			var dialog = Adw.MessageDialog.New (PintaCore.Chrome.MainWindow, primary, secondary);
 
-			return DialogExtensions.ShowQuestionDialog (markup,
-				new DialogButton (Translations.GetString ("Expand canvas"), ResponseType.Accept, true),
-				new DialogButton (Translations.GetString ("Don't change canvas size"), ResponseType.Reject),
-				new DialogButton (Stock.Cancel, ResponseType.Cancel));
+			const string cancel_response = "cancel";
+			const string reject_response = "reject";
+			const string expand_response = "expand";
+			dialog.AddResponse (cancel_response, Translations.GetString ("_Cancel"));
+			dialog.AddResponse (reject_response, Translations.GetString ("Don't change canvas size"));
+			dialog.AddResponse (expand_response, Translations.GetString ("Expand canvas"));
+
+			dialog.SetResponseAppearance (expand_response, Adw.ResponseAppearance.Suggested);
+			dialog.CloseResponse = cancel_response;
+			dialog.DefaultResponse = expand_response;
+
+			string response = await dialog.RunAsync ();
+			return response switch {
+				expand_response => ResponseType.Accept,
+				reject_response => ResponseType.Reject,
+				_ => ResponseType.Cancel
+			};
 		}
 	}
 }

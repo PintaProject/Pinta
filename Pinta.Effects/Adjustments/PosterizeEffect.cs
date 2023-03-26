@@ -18,7 +18,7 @@ namespace Pinta.Effects
 		UnaryPixelOps.PosterizePixel? op = null;
 
 		public override string Icon {
-			get { return "Menu.Adjustments.Posterize.png"; }
+			get { return Pinta.Resources.Icons.AdjustmentsPosterize; }
 		}
 
 		public override string Name {
@@ -40,19 +40,23 @@ namespace Pinta.Effects
 			EffectData = new PosterizeData ();
 		}
 
-		public override bool LaunchConfiguration ()
+		public override void LaunchConfiguration ()
 		{
-			using (var dialog = new PosterizeDialog ()) {
-				dialog.Title = Name;
-				dialog.Icon = PintaCore.Resources.GetIcon (Icon);
-				dialog.EffectData = Data;
+			var dialog = new PosterizeDialog () {
+				Title = Name,
+				IconName = Icon,
+				EffectData = Data
+			};
 
-				int response = dialog.Run ();
-				return (response == (int) Gtk.ResponseType.Ok);
-			}
+			dialog.OnResponse += (_, args) => {
+				OnConfigDialogResponse (args.ResponseId == (int) Gtk.ResponseType.Ok);
+				dialog.Destroy ();
+			};
+
+			dialog.Present ();
 		}
 
-		public override void Render (ImageSurface src, ImageSurface dest, Gdk.Rectangle[] rois)
+		public override void Render (ImageSurface src, ImageSurface dest, Core.RectangleI[] rois)
 		{
 			if (op == null)
 				op = new UnaryPixelOps.PosterizePixel (Data.Red, Data.Green, Data.Blue);

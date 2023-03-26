@@ -39,6 +39,9 @@ namespace Pinta
 		private Ruler horizontal_ruler;
 		private Ruler vertical_ruler;
 		private ScrolledWindow scrolled_window;
+		private EventControllerMotion motion_controller;
+		private PointD current_window_pos = new ();
+		private PointD current_canvas_pos = new ();
 
 		public PintaCanvas Canvas { get; set; }
 		public bool HasBeenShown { get; set; }
@@ -49,33 +52,28 @@ namespace Pinta
 
 			Build (document);
 
-			scrolled_window.Hadjustment.ValueChanged += UpdateRulerRange;
-			scrolled_window.Vadjustment.ValueChanged += UpdateRulerRange;
+			scrolled_window.Hadjustment!.OnValueChanged += UpdateRulerRange;
+			scrolled_window.Vadjustment!.OnValueChanged += UpdateRulerRange;
 			document.Workspace.CanvasSizeChanged += UpdateRulerRange;
-			Canvas.SizeAllocated += UpdateRulerRange;
+			Canvas.OnResize += UpdateRulerRange;
 
-			Canvas.MotionNotifyEvent += delegate (object? o, MotionNotifyEventArgs args) {
+			motion_controller = Gtk.EventControllerMotion.New ();
+			motion_controller.OnMotion += (_, args) => {
 				if (!PintaCore.Workspace.HasOpenDocuments)
 					return;
 
-				var point = PintaCore.Workspace.WindowPointToCanvas (new Cairo.PointD (args.Event.X, args.Event.Y));
+				current_window_pos = new PointD (args.X, args.Y);
+				current_canvas_pos = PintaCore.Workspace.WindowPointToCanvas (current_window_pos);
 
-				horizontal_ruler.Position = point.X;
-				vertical_ruler.Position = point.Y;
+				horizontal_ruler.Position = current_canvas_pos.X;
+				vertical_ruler.Position = current_canvas_pos.Y;
 			};
+
+			AddController (motion_controller);
 		}
 
-		public bool IsMouseOnCanvas {
-			get {
-				// Get the position of the mouse pointer relative
-				// to canvas scrolled window top-left corner
-				GdkExtensions.GetWidgetPointer (scrolled_window, out int x, out int y, out var mask);
-
-				// Check if the pointer is on the canvas
-				return (x > 0) && (x < scrolled_window.Allocation.Width) &&
-				    (y > 0) && (y < scrolled_window.Allocation.Height);
-			}
-		}
+		public PointD WindowMousePosition => current_window_pos;
+		public bool IsMouseOnCanvas => motion_controller.ContainsPointer;
 
 		public bool RulersVisible {
 			get => horizontal_ruler.Visible;
@@ -99,10 +97,8 @@ namespace Pinta
 
 		public void UpdateRulerRange (object? sender, EventArgs e)
 		{
-			Main.Iteration (); //Force update of scrollbar upper before recenter
-
-			var lower = new Cairo.PointD (0, 0);
-			var upper = new Cairo.PointD (0, 0);
+			var lower = new PointD (0, 0);
+			var upper = new PointD (0, 0);
 
 			if (scrolled_window.Hadjustment == null || scrolled_window.Vadjustment == null)
 				return;
@@ -136,21 +132,15 @@ namespace Pinta
 
 			scrolled_window = new ScrolledWindow ();
 
-			var vp = new Viewport () {
-				ShadowType = ShadowType.None
-			};
+			var vp = new Viewport ();
 
-			var css = new CssProvider ();
-			css.LoadFromData ("* { background-color: @theme_bg_color; }");
-			vp.StyleContext.AddProvider (css, 0);
-
-			vp.ScrollEvent += ViewPort_ScrollEvent;
+			var scroll_controller = Gtk.EventControllerScroll.New (EventControllerScrollFlags.Vertical);
+			scroll_controller.OnScroll += HandleScrollEvent;
+			vp.AddController (scroll_controller);
 
 			Canvas = new PintaCanvas (this, document) {
 				Name = "canvas",
-				CanDefault = true,
 				CanFocus = true,
-				Events = (Gdk.EventMask) 16134
 			};
 
 			// Rulers
@@ -170,28 +160,26 @@ namespace Pinta
 			scrolled_window.Vexpand = true;
 			Attach (scrolled_window, 1, 1, 1, 1);
 
-			scrolled_window.Add (vp);
-			vp.Add (Canvas);
-
-			ShowAll ();
-			Canvas.Show ();
-			vp.Show ();
+			scrolled_window.Child = vp;
+			vp.Child = Canvas;
 
 			horizontal_ruler.Visible = false;
 			vertical_ruler.Visible = false;
 		}
 
-		private void ViewPort_ScrollEvent (object o, ScrollEventArgs args)
+		private bool HandleScrollEvent (EventControllerScroll controller, EventControllerScroll.ScrollSignalArgs args)
 		{
 			// Allow the user to zoom in/out with Ctrl-Mousewheel
-			if (args.Event.State.IsControlPressed () && args.Event.Direction == ScrollDirection.Smooth) {
-				if (args.Event.DeltaX > 0 || args.Event.DeltaY < 0)
-					document.Workspace.ZoomInFromMouseScroll (new Cairo.PointD (args.Event.X, args.Event.Y));
-				else if (args.Event.DeltaX < 0 || args.Event.DeltaY > 0)
-					document.Workspace.ZoomOutFromMouseScroll (new Cairo.PointD (args.Event.X, args.Event.Y));
+			if (controller.GetCurrentEventState ().IsControlPressed ()) {
+				if (args.Dx > 0 || args.Dy < 0)
+					document.Workspace.ZoomInFromMouseScroll (current_canvas_pos);
+				else if (args.Dx < 0 || args.Dy > 0)
+					document.Workspace.ZoomOutFromMouseScroll (current_canvas_pos);
 
-				args.RetVal = true;
+				return true;
 			}
+
+			return false;
 		}
 	}
 }

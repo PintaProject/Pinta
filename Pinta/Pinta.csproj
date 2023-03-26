@@ -11,8 +11,8 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="GtkSharp" Version="3.24.24.38" />
     <PackageReference Include="Tmds.DBus" Version="0.14.0" />
+    <PackageReference Include="GirCore.Adw-1" Version="0.3.0" />
   </ItemGroup>
 
   <ItemGroup>

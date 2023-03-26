@@ -25,38 +25,134 @@
 // THE SOFTWARE.
 
 using System;
+using System.Collections.Generic;
+using System.Linq;
 using System.Runtime.InteropServices;
+using System.Threading.Tasks;
+using GObject;
 using Gtk;
 
 namespace Pinta.Core
 {
+	/// <summary>
+	/// Style classes from libadwaita.
+	/// https://gnome.pages.gitlab.gnome.org/libadwaita/doc/1-latest/style-classes.html
+	/// </summary>
+	public static class AdwaitaStyles
+	{
+		public const string DimLabel = "dim-label";
+		public const string Flat = "flat";
+		public const string Inline = "inline";
+		public const string Linked = "linked";
+		public const string Spacer = "spacer";
+		public const string SuggestedAction = "suggested-action";
+		public const string Title4 = "title-4";
+		public const string Toolbar = "toolbar";
+	};
+
 	public static class GtkExtensions
 	{
-		public const int MouseLeftButton = 1;
-		public const int MouseMiddleButton = 2;
-		public const int MouseRightButton = 3;
+		private const string GtkLibraryName = "Gtk";
 
-		public static void AppendItem (this Toolbar tb, ToolItem item)
+		static GtkExtensions ()
 		{
-			item.Show ();
-			tb.Insert (item, tb.NItems);
+			NativeImportResolver.RegisterLibrary (GtkLibraryName,
+				windowsLibraryName: "libgtk-4-1.dll",
+				linuxLibraryName: "libgtk-4.so.1",
+				osxLibraryName: "libgtk-4.1.dylib"
+			);
 		}
 
-		public static void AppendItem (this Statusbar tb, ToolItem item, uint padding = 0)
+		public const uint MouseLeftButton = 1;
+		public const uint MouseMiddleButton = 2;
+		public const uint MouseRightButton = 3;
+
+		/// <summary>
+		/// Convert from GetCurrentButton to the MouseButton enum.
+		/// </summary>
+		public static MouseButton GetCurrentMouseButton (this Gtk.GestureClick gesture)
 		{
-			item.Show ();
-			tb.PackEnd (item, false, false, padding);
+			uint button = gesture.GetCurrentButton ();
+			return button switch {
+				MouseLeftButton => MouseButton.Left,
+				MouseMiddleButton => MouseButton.Middle,
+				MouseRightButton => MouseButton.Right,
+				_ => MouseButton.None
+			};
 		}
 
-		public static Gtk.ToolButton CreateToolBarItem (this Command action)
+		// TODO-GTK4 (bindings, unsubmitted) - add pre-defined VariantType's to gir.core
+		public static readonly GLib.VariantType IntVariantType = new ("i");
+
+		/// <summary>
+		/// In GTK4, toolbars are just a Box with a different CSS style class.
+		/// </summary>
+		public static Gtk.Box CreateToolBar ()
 		{
-			var item = new ToolButton (null, action.ShortLabel ?? action.Label) {
+			var toolbar = new Box () { Spacing = 0 };
+			toolbar.SetOrientation (Orientation.Horizontal);
+			toolbar.AddCssClass (AdwaitaStyles.Toolbar);
+			return toolbar;
+		}
+
+		public static Gtk.Button CreateToolBarItem (this Command action, bool force_icon_only = false)
+		{
+			var label = action.ShortLabel ?? action.Label;
+			var button = new Button () {
 				ActionName = action.FullName,
 				TooltipText = action.Tooltip ?? action.Label,
-				IsImportant = action.IsImportant,
-				IconName = action.IconName
 			};
-			return item;
+
+			if (action.IsImportant && !force_icon_only) {
+				button.Child = new Adw.ButtonContent () {
+					IconName = action.IconName,
+					Label = label
+				};
+			} else {
+				button.Label = label;
+				button.IconName = action.IconName;
+			}
+
+			return button;
+		}
+
+		public static Gtk.Button CreateDockToolBarItem (this Command action)
+		{
+			return action.CreateToolBarItem (force_icon_only: false);
+		}
+
+		public static Gtk.Separator CreateToolBarSeparator ()
+		{
+			var sep = new Separator ();
+			sep.AddCssClass (AdwaitaStyles.Spacer);
+			return sep;
+		}
+
+		public static Gtk.SpinButton CreateToolBarSpinButton (double min, double max, double step, double init_value)
+		{
+			var spin = Gtk.SpinButton.NewWithRange (min, max, step);
+			spin.Value = init_value;
+			// After a spin button is edited, return focus to the canvas so that
+			// tools can handle subsequent key events.
+			spin.OnValueChanged += (o, e) => {
+				if (PintaCore.Workspace.HasOpenDocuments)
+					PintaCore.Workspace.ActiveWorkspace.Canvas.GrabFocus ();
+			};
+			return spin;
+		}
+
+		public static Scale CreateToolBarSlider (int min, int max, int step, int val)
+		{
+			var slider = Scale.NewWithRange (Orientation.Horizontal, min, max, step);
+			slider.WidthRequest = 150;
+			slider.ValuePos = PositionType.Left;
+			slider.SetValue (val);
+			return slider;
+		}
+
+		public static void Toggle (this Gtk.ToggleButton button)
+		{
+			button.Active = !button.Active;
 		}
 
 		public static void AddAction (this Gtk.Application app, Command action)
@@ -66,198 +162,58 @@ namespace Pinta.Core
 
 		public static void AddAccelAction (this Gtk.Application app, Command action, string accel)
 		{
-			app.AddAction (action);
-			app.SetAccelsForAction (action.FullName, new string[] { accel });
+			app.AddAccelAction (action, new[] { accel });
 		}
 
 		public static void AddAccelAction (this Gtk.Application app, Command action, string[] accels)
 		{
 			app.AddAction (action);
-			app.SetAccelsForAction (action.FullName, accels);
-		}
-
-		public static void Remove (this GLib.Menu menu, Command action)
-		{
-			for (int i = 0; i < menu.NItems; ++i) {
-				var name_attr = (string) menu.GetItemAttributeValue (i, "action", GLib.VariantType.String);
-				if (name_attr == action.FullName) {
-					menu.Remove (i);
-					return;
-				}
-			}
-		}
-
-		public static void AppendMenuItemSorted (this GLib.Menu menu, GLib.MenuItem item)
-		{
-			var new_label = (string) item.GetAttributeValue ("label", GLib.VariantType.String);
-
-			for (int i = 0; i < menu.NItems; i++) {
-				var label = (string) menu.GetItemAttributeValue (i, "label", GLib.VariantType.String);
-				if (string.Compare (label, new_label) > 0) {
-					menu.InsertItem (i, item);
-					return;
-				}
-			}
-
-			menu.AppendItem (item);
-		}
-
-		public static void Toggle (this Gtk.ToggleToolButton button)
-		{
-			button.Active = !button.Active;
-		}
-
-		public static int GetItemCount (this ComboBox combo)
-		{
-			return ((ListStore) combo.Model).IterNChildren ();
-		}
-
-		public static int FindValue<T> (this ComboBox combo, T value)
-		{
-			for (var i = 0; i < combo.GetItemCount (); i++)
-				if (combo.GetValueAt<T> (i)?.Equals (value) == true)
-					return i;
-
-			return -1;
-		}
-
-		public static T GetValueAt<T> (this ComboBox combo, int index)
-		{
-			TreeIter iter;
-
-			// Set the tree iter to the correct row
-			((ListStore) combo.Model).IterNthChild (out iter, index);
-
-			// Retrieve the value of the first column at that row
-			return (T) combo.Model.GetValue (iter, 0);
-		}
-
-		public static void SetValueAt (this ComboBox combo, int index, object value)
-		{
-			TreeIter iter;
-
-			// Set the tree iter to the correct row
-			((ListStore) combo.Model).IterNthChild (out iter, index);
-
-			// Set the value of the first column at that row
-			combo.Model.SetValue (iter, 0, value);
+			app.SetAccelsForAction (action.FullName, accels.Select (s => ConvertPrimaryKey (s)).ToArray ());
 		}
 
 		/// <summary>
-		/// Gets the value in the specified column in the first selected row in a TreeView.
+		/// Convert the "<Primary>" accelerator to the Ctrl or Command key, depending on the platform.
+		/// This was done automatically in GTK3, but does not happen in GTK4.
 		/// </summary>
-		public static T? GetSelectedValueAt<T> (this TreeView treeView, int column) where T : class
-		{
-			var paths = treeView.Selection.GetSelectedRows ();
-
-			if (paths != null && paths.Length > 0 && treeView.Model.GetIter (out var iter, paths[0]))
-				return treeView.Model.GetValue (iter, column) as T;
-
-			return null;
-		}
-
-		/// <summary>
-		/// Gets the value in the specified column in the specified row in a TreeView.
-		/// </summary>
-		public static T? GetValueAt<T> (this TreeView treeView, string path, int column) where T : class
-		{
-			if (treeView.Model.GetIter (out var iter, new TreePath (path)))
-				return treeView.Model.GetValue (iter, column) as T;
-
-			return null;
-		}
-
-		/// <summary>
-		/// Sets the specified row(s) as selected in a TreeView.
-		/// </summary>
-		public static void SetSelectedRows (this TreeView treeView, params int[] indices)
-		{
-			var path = new TreePath (indices);
-			treeView.Selection.SelectPath (path);
-		}
-
-		public static Gdk.Pixbuf LoadIcon (this Gtk.IconTheme theme, string icon_name, int size)
-		{
-			// Simple wrapper to avoid the verbose IconLookupFlags parameter.
-			return theme.LoadIcon (icon_name, size, Gtk.IconLookupFlags.ForceSize);
-		}
-
-		/// <summary>
-		/// Returns the Cancel / Open button pair in the correct order for the current platform.
-		/// This can be used with the Gtk.Dialog constructor.
-		/// </summary>
-		public static object[] DialogButtonsCancelOpen ()
-		{
-			if (PintaCore.System.OperatingSystem == OS.Windows) {
-				return new object[] {
-		    Gtk.Stock.Open,
-		    Gtk.ResponseType.Ok,
-		    Gtk.Stock.Cancel,
-		    Gtk.ResponseType.Cancel
-				};
-			} else {
-				return new object[] {
-		    Gtk.Stock.Cancel,
-		    Gtk.ResponseType.Cancel,
-		    Gtk.Stock.Open,
-		    Gtk.ResponseType.Ok
-				};
-			}
-		}
-
-		/// <summary>
-		/// Returns the Cancel / Save button pair in the correct order for the current platform.
-		/// This can be used with the Gtk.Dialog constructor.
-		/// </summary>
-		public static object[] DialogButtonsCancelSave ()
-		{
-			if (PintaCore.System.OperatingSystem == OS.Windows) {
-				return new object[] {
-		    Gtk.Stock.Save,
-		    Gtk.ResponseType.Ok,
-		    Gtk.Stock.Cancel,
-		    Gtk.ResponseType.Cancel
-				};
-			} else {
-				return new object[] {
-		    Gtk.Stock.Cancel,
-		    Gtk.ResponseType.Cancel,
-		    Gtk.Stock.Save,
-		    Gtk.ResponseType.Ok
-				};
-			}
-		}
+		private static string ConvertPrimaryKey (string accel) =>
+			accel.Replace ("<Primary>", PintaCore.System.OperatingSystem == OS.Mac ? "<Meta>" : "<Control>");
 
 		/// <summary>
 		/// Returns the Cancel / Ok button pair in the correct order for the current platform.
 		/// This can be used with the Gtk.Dialog constructor.
 		/// </summary>
-		public static object[] DialogButtonsCancelOk ()
+		public static void AddCancelOkButtons (this Dialog dialog)
 		{
+			// TODO-GTK4 - can these use the translations from GTK?
+			Widget ok_button;
 			if (PintaCore.System.OperatingSystem == OS.Windows) {
-				return new object[] {
-		    Gtk.Stock.Ok,
-		    Gtk.ResponseType.Ok,
-		    Gtk.Stock.Cancel,
-		    Gtk.ResponseType.Cancel
-				};
+				ok_button = dialog.AddButton ("_OK", (int) ResponseType.Ok);
+				dialog.AddButton ("_Cancel", (int) ResponseType.Cancel);
 			} else {
-				return new object[] {
-		    Gtk.Stock.Cancel,
-		    Gtk.ResponseType.Cancel,
-		    Gtk.Stock.Ok,
-		    Gtk.ResponseType.Ok
-				};
+				dialog.AddButton ("_Cancel", (int) ResponseType.Cancel);
+				ok_button = dialog.AddButton ("_OK", (int) ResponseType.Ok);
 			}
+
+			ok_button.AddCssClass (AdwaitaStyles.SuggestedAction);
 		}
+
+		public static void SetDefaultResponse (this Dialog dialog, ResponseType response)
+			=> dialog.SetDefaultResponse ((int) response);
+
 		/// <summary>
-		/// Returns the platform-specific label for the Ctrl key.
+		/// Helper function to avoid repeated casts. The dialog's content area is always a Box.
+		/// </summary>
+		public static Box GetContentAreaBox (this Dialog dialog)
+			=> (Box) dialog.GetContentArea ();
+
+		/// <summary>
+		/// Returns the platform-specific label for the "Primary" (Ctrl) key.
 		/// For example, this is the Cmd key on macOS.
 		/// </summary>
 		public static string CtrlLabel ()
 		{
-			Accelerator.Parse ("<Primary>", out var key, out var mods);
-			return Accelerator.GetLabel (key, mods);
+			AcceleratorParse (ConvertPrimaryKey ("<Primary>"), out var key, out var mods);
+			return Gtk.Functions.AcceleratorGetLabel (key, mods);
 		}
 
 		/// <summary>
@@ -266,54 +222,300 @@ namespace Pinta.Core
 		/// </summary>
 		public static string AltLabel ()
 		{
-			Accelerator.Parse ("<Alt>", out var key, out var mods);
-			return Accelerator.GetLabel (key, mods);
+			AcceleratorParse ("<Alt>", out var key, out var mods);
+			return Gtk.Functions.AcceleratorGetLabel (key, mods);
+		}
+
+		// TODO-GTK4 (bindings, unsubmitted) - need support for 'out' enum parameters.
+		[DllImport (GtkLibraryName, EntryPoint = "gtk_accelerator_parse")]
+		private static extern bool AcceleratorParse ([MarshalAs (UnmanagedType.LPUTF8Str)] string accelerator, out uint accelerator_key, out Gdk.ModifierType accelerator_mods);
+
+		/// <summary>
+		/// Set all four margins of the widget to the same value.
+		/// </summary>
+		/// <param name="w"></param>
+		/// <param name="margin"></param>
+		public static void SetAllMargins (this Widget w, int margin)
+		{
+			w.MarginTop = w.MarginBottom = w.MarginStart = w.MarginEnd = margin;
 		}
 
 		/// <summary>
-		/// Return the display name for the file. Note that this can be very different from file.Basename,
-		/// and should only be used for display purposes rather than identifying the file.
+		/// Helper function to return the icon theme for the default display.
 		/// </summary>
-		public static string GetDisplayName (this GLib.IFile file)
+		public static Gtk.IconTheme GetDefaultIconTheme () => Gtk.IconTheme.GetForDisplay (Gdk.Display.GetDefault ()!);
+
+		/// <summary>
+		/// For a combo box that has an entry, provides easy access to the child entry widget.
+		/// </summary>
+		public static Entry GetEntry (this ComboBox box)
 		{
-			// TODO-GTK4: use G_FILE_ATTRIBUTE_STANDARD_DISPLAY_NAME if there are bindings for it.
-			var info = file.QueryInfo ("standard::display-name", GLib.FileQueryInfoFlags.None, cancellable: null);
-			return info.DisplayName;
+			if (!box.HasEntry)
+				throw new InvalidOperationException ("Combobox does not have an entry");
+
+			return (Entry) box.Child!;
 		}
 
 		/// <summary>
-		/// Returns an output stream for creating or overwriting the file.
-		/// NOTE: if you don't wrap this in a GLib.GioStream, you must call Close() !
+		/// Find the index of a string in a Gtk.StringList.
 		/// </summary>
-		public static GLib.OutputStream Replace (this GLib.IFile file)
+		public static bool FindString (this StringList list, string s, out uint index)
 		{
-			return file.Replace (null, false, GLib.FileCreateFlags.None, null);
+			for (uint i = 0, n = list.GetNItems (); i < n; ++i) {
+				if (list.GetString (i) == s) {
+					index = i;
+					return true;
+				}
+			}
+
+			index = 0;
+			return false;
+		}
+
+		// TODO-GTK4 (bindings) - this will be added in v0.4 (https://github.com/gircore/gir.core/issues/756)
+		public static bool SetCurrentFolder (this FileChooser chooser, Gio.File file)
+		{
+			GLib.Internal.ErrorOwnedHandle error;
+			bool result = Gtk.Internal.FileChooser.SetCurrentFolder (chooser.Handle, file.Handle, out error);
+			GLib.Error.ThrowOnError (error);
+			return result;
+		}
+
+		// TODO-GTK4 (bindings) - this will be added in v0.4 (https://github.com/gircore/gir.core/issues/756)
+		public static bool SetFile (this FileChooser chooser, Gio.File file)
+		{
+			GLib.Internal.ErrorOwnedHandle error;
+			bool result = Gtk.Internal.FileChooser.SetFile (chooser.Handle, file.Handle, out error);
+			GLib.Error.ThrowOnError (error);
+			return result;
 		}
 
 		/// <summary>
-		/// Wrapper around file.Uri.ToString(), which returns an empty string if the URI is empty instead of throwing an exception.
+		/// Similar to gtk_dialog_run() in GTK3, this runs the dialog in a blocking manner with a nested event loop.
+		/// This can be useful for compability with old code that relies on this behaviour, but new code should be
+		/// structured to use event handlers.
 		/// </summary>
-		public static string GetUriAsString (this GLib.IFile file)
+		public static string RunBlocking (this Adw.MessageDialog dialog)
 		{
-			try {
-				return file.Uri.ToString ();
-			} catch (System.UriFormatException) {
-				return "";
+			string response = "";
+			GLib.MainLoop loop = new ();
+
+			if (!dialog.Modal)
+				dialog.Modal = true;
+
+			dialog.OnResponse += (_, args) => {
+				response = args.Response;
+				if (loop.IsRunning ())
+					loop.Quit ();
+			};
+
+			dialog.Show ();
+			loop.Run ();
+
+			return response;
+		}
+
+		/// <summary>
+		/// Similar to gtk_dialog_run() in GTK3, this runs the dialog in a blocking manner with a nested event loop.
+		/// This can be useful for compability with old code that relies on this behaviour, but new code should be
+		/// structured to use event handlers.
+		/// </summary>
+		public static ResponseType RunBlocking (this Gtk.NativeDialog dialog)
+		{
+			var response = ResponseType.None;
+			GLib.MainLoop loop = new ();
+
+			if (!dialog.Modal)
+				dialog.Modal = true;
+
+			dialog.OnResponse += (_, args) => {
+				response = (ResponseType) args.ResponseId;
+				if (loop.IsRunning ())
+					loop.Quit ();
+			};
+
+			dialog.Show ();
+			loop.Run ();
+
+			return response;
+		}
+
+		/// <summary>
+		/// Similar to gtk_dialog_run() in GTK3, this runs the dialog in a blocking manner with a nested event loop.
+		/// This can be useful for compability with old code that relies on this behaviour, but new code should be
+		/// structured to use event handlers.
+		/// </summary>
+		public static ResponseType RunBlocking (this Gtk.Dialog dialog)
+		{
+			var response = ResponseType.None;
+			GLib.MainLoop loop = new ();
+
+			if (!dialog.Modal)
+				dialog.Modal = true;
+
+			dialog.OnResponse += (_, args) => {
+				response = (ResponseType) args.ResponseId;
+				if (loop.IsRunning ())
+					loop.Quit ();
+			};
+
+			dialog.Show ();
+			loop.Run ();
+
+			return response;
+		}
+
+		// TODO-GTK4 (bindings) - replace with adw_message_dialog_choose() once adwaita 1.3 is available, like in v0.4 of gir.core
+		public static Task<string> RunAsync (this Adw.MessageDialog dialog)
+		{
+			var tcs = new TaskCompletionSource<string> ();
+
+			dialog.OnResponse += (_, args) => {
+				tcs.SetResult (args.Response);
+			};
+
+			dialog.Show ();
+
+			return tcs.Task;
+		}
+
+		// TODO-GTK4 (bindings) - record methods are not generated (https://github.com/gircore/gir.core/issues/743)
+		public static bool Iteration (this GLib.MainContext context, bool may_block)
+		{
+			return GLib.Internal.MainContext.Iteration (context.Handle, may_block);
+		}
+
+		/// <summary>
+		/// Provides convenient access to the Gdk.Key of the key being pressed.
+		/// </summary>
+		public static Gdk.Key GetKey (this Gtk.EventControllerKey.KeyPressedSignalArgs args) => (Gdk.Key) args.Keyval;
+
+		/// <summary>
+		/// Provides convenient access to the Gdk.Key of the key being released.
+		/// </summary>
+		public static Gdk.Key GetKey (this Gtk.EventControllerKey.KeyReleasedSignalArgs args) => (Gdk.Key) args.Keyval;
+
+		/// <summary>
+		/// Sets the activates-default property for the editable text field of a spin button.
+		/// </summary>
+		public static void SetActivatesDefault (this Gtk.SpinButton spin_button, bool activates)
+		{
+			Editable? editable = spin_button.GetDelegate ();
+			if (editable is null)
+				return;
+
+			// TODO-GTK4 (bindings, unsubmitted) - should be able to cast to a Gtk.Text from Gtk.Editable
+			var text = new TextWrapper (editable.Handle, false);
+			text.SetActivatesDefault (activates);
+		}
+
+		internal class TextWrapper : Gtk.Text
+		{
+			internal TextWrapper (IntPtr ptr, bool ownedRef) : base (ptr, ownedRef)
+			{
 			}
 		}
 
-		[DllImport("libgio-2.0-0.dll", CallingConvention = CallingConvention.Cdecl)]
-		private static extern IntPtr g_file_new_for_commandline_arg ([MarshalAs(UnmanagedType.LPUTF8Str)] string arg);
-
-		public static GLib.IFile FileNewForCommandlineArg (string arg)
+		// TODO-GTK4 (bindings) - structs are not generated (https://github.com/gircore/gir.core/issues/622)
+		[StructLayout (LayoutKind.Sequential)]
+		private struct GdkRGBA
 		{
-			// g_file_new_for_commandline_arg() expects a UTF-8 string. GtkSharp's binding doesn't
-			// explicitly do this conversion, so on Windows we need to manually do this to avoid having
-			// the default marshalling leave it as UTF-16.
-			if (PintaCore.System.OperatingSystem == OS.Windows)
-				return GLib.FileAdapter.GetObject (g_file_new_for_commandline_arg (arg), false) as GLib.IFile;
-			else
-				return GLib.FileFactory.NewFromCommandlineArg (arg);
+			public float Red;
+			public float Green;
+			public float Blue;
+			public float Alpha;
+		}
+
+		// TODO-GTK4 (bindings) - structs are not generated (https://github.com/gircore/gir.core/issues/622)
+		public static void GetColor (this Gtk.StyleContext context, out Cairo.Color color)
+		{
+			StyleContextGetColor (context.Handle, out var gdk_color);
+			color = new Cairo.Color (gdk_color.Red, gdk_color.Green, gdk_color.Blue, gdk_color.Alpha);
+		}
+
+		[DllImport (GtkLibraryName, EntryPoint = "gtk_style_context_get_color")]
+		private static extern void StyleContextGetColor (IntPtr handle, out GdkRGBA color);
+
+		// TODO-GTK4 (bindings) - structs are not generated (https://github.com/gircore/gir.core/issues/622)
+		public static void SetColor (this Gtk.ColorChooserDialog dialog, Cairo.Color color)
+		{
+			ColorChooserSetRgba (dialog.Handle, new GdkRGBA () {
+				Red = (float) color.R,
+				Blue = (float) color.B,
+				Green = (float) color.G,
+				Alpha = (float) color.A
+			});
+		}
+
+		[DllImport (GtkLibraryName, EntryPoint = "gtk_color_chooser_set_rgba")]
+		private static extern void ColorChooserSetRgba (IntPtr handle, GdkRGBA color);
+
+		// TODO-GTK4 (bindings) - structs are not generated (https://github.com/gircore/gir.core/issues/622)
+		public static void GetColor (this Gtk.ColorChooserDialog dialog, out Cairo.Color color)
+		{
+			ColorChooserGetRgba (dialog.Handle, out var gdk_color);
+			color = new Cairo.Color (gdk_color.Red, gdk_color.Green, gdk_color.Blue, gdk_color.Alpha);
+		}
+
+		[DllImport (GtkLibraryName, EntryPoint = "gtk_color_chooser_get_rgba")]
+		private static extern void ColorChooserGetRgba (IntPtr handle, out GdkRGBA color);
+
+		private static readonly Signal<Entry> EntryChangedSignal = new (
+		    unmanagedName: "changed",
+		    managedName: string.Empty
+		);
+
+		// TODO-GTK4 (bindings) - the Gtk.Editable::changed signal is not generated (https://github.com/gircore/gir.core/issues/831)
+		public static void OnChanged (this Entry o, SignalHandler<Entry> handler)
+		{
+			EntryChangedSignal.Connect (o, handler);
+		}
+
+		public sealed class SelectionChangedSignalArgs : SignalArgs
+		{
+			public uint Position => Args[1].Extract<uint> ();
+			public uint NItems => Args[2].Extract<uint> ();
+
+		}
+
+		private static readonly Signal<SingleSelection, SelectionChangedSignalArgs> SelectionChangedSignal = new (
+		    unmanagedName: "selection-changed",
+		    managedName: string.Empty
+		);
+
+		// TODO-GTK4 (bindings) - the Gtk.SelectionModel::selection-changed signal is not generated (https://github.com/gircore/gir.core/issues/831)
+		public static void OnSelectionChanged (this SingleSelection o, SignalHandler<SingleSelection, SelectionChangedSignalArgs> handler)
+		{
+			SelectionChangedSignal.Connect (o, handler);
+		}
+
+		/// <summary>
+		/// Remove the widget if it is a child of the box.
+		/// Calling Remove() produces warnings from GTK if the child isn't found.
+		/// </summary>
+		public static void RemoveIfChild (this Box box, Widget to_remove)
+		{
+			Widget? child = box.GetFirstChild ();
+			while (child != null) {
+				if (child == to_remove) {
+					box.Remove (child);
+					return;
+				}
+
+				child = child.GetNextSibling ();
+			}
+		}
+
+		// TODO-GTK4 (bindings, unsubmitted) - wrapper for GetFiles() since Gio.ListModel.GetObject doesn't return a Gio.File instance
+		public static Gio.File[] GetFileList (this Gtk.FileChooser file_chooser)
+		{
+			List<Gio.File> result = new ();
+
+			Gio.ListModel files = file_chooser.GetFiles ();
+			for (uint i = 0, n = files.GetNItems (); i < n; ++i)
+				result.Add (new Gio.FileHelper (files.GetItem (i), ownedRef: true));
+
+			return result.ToArray ();
 		}
 	}
 }

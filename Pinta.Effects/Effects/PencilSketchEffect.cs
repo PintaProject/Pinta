@@ -23,9 +23,7 @@ namespace Pinta.Effects
 		private BrightnessContrastEffect bacAdjustment;
 		private UserBlendOps.ColorDodgeBlendOp colorDodgeOp;
 
-		public override string Icon {
-			get { return "Menu.Effects.Artistic.PencilSketch.png"; }
-		}
+		public override string Icon => Pinta.Resources.Icons.EffectsArtisticPencilSketch;
 
 		public override string Name {
 			get { return Translations.GetString ("Pencil Sketch"); }
@@ -52,13 +50,13 @@ namespace Pinta.Effects
 			colorDodgeOp = new UserBlendOps.ColorDodgeBlendOp ();
 		}
 
-		public override bool LaunchConfiguration ()
+		public override void LaunchConfiguration ()
 		{
-			return EffectHelper.LaunchSimpleEffectDialog (this);
+			EffectHelper.LaunchSimpleEffectDialog (this);
 		}
 
 		#region Algorithm Code Ported From PDN
-		public override void Render (ImageSurface src, ImageSurface dest, Gdk.Rectangle[] rois)
+		public override void Render (ImageSurface src, ImageSurface dest, Core.RectangleI[] rois)
 		{
 			bacAdjustment.Data.Brightness = -Data.ColorRange;
 			bacAdjustment.Data.Contrast = -Data.ColorRange;
@@ -70,17 +68,17 @@ namespace Pinta.Effects
 			invertEffect.Render (dest, dest, rois);
 			desaturateOp.Apply (dest, dest, rois);
 
-			var dst_data = dest.GetData ();
+			var dst_data = dest.GetPixelData ();
 			int dst_width = dest.Width;
-			var src_data = src.GetReadOnlyData ();
+			var src_data = src.GetReadOnlyPixelData ();
 			int src_width = src.Width;
 
-			foreach (Gdk.Rectangle roi in rois) {
-				for (int y = roi.Top; y <= roi.GetBottom (); ++y) {
+			foreach (Core.RectangleI roi in rois) {
+				for (int y = roi.Top; y <= roi.Bottom; ++y) {
 					var src_row = src_data.Slice (y * src_width, src_width);
 					var dst_row = dst_data.Slice (y * dst_width, dst_width);
 
-					for (int x = roi.Left; x <= roi.GetRight (); ++x) {
+					for (int x = roi.Left; x <= roi.Right; ++x) {
 						ColorBgra srcGrey = desaturateOp.Apply (src_row[x]);
 						dst_row[x] = colorDodgeOp.Apply (srcGrey, dst_row[x]);
 					}

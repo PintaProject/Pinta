@@ -22,7 +22,7 @@ namespace Pinta.Effects
 		private bool table_calculated;
 
 		public override string Icon {
-			get { return "Menu.Adjustments.BrightnessAndContrast.png"; }
+			get { return Pinta.Resources.Icons.AdjustmentsBrightnessContrast; }
 		}
 
 		public override string Name {
@@ -53,22 +53,22 @@ namespace Pinta.Effects
 			table_calculated = false;
 		}
 
-		public override bool LaunchConfiguration ()
+		public override void LaunchConfiguration ()
 		{
-			return EffectHelper.LaunchSimpleEffectDialog (this);
+			EffectHelper.LaunchSimpleEffectDialog (this);
 		}
 
-		public override void Render (ImageSurface src, ImageSurface dest, Gdk.Rectangle[] rois)
+		public override void Render (ImageSurface src, ImageSurface dest, Core.RectangleI[] rois)
 		{
 			if (!table_calculated)
 				Calculate ();
 
-			var src_data = src.GetReadOnlyData ();
-			var dst_data = dest.GetData ();
+			var src_data = src.GetReadOnlyPixelData ();
+			var dst_data = dest.GetPixelData ();
 			int width = src.Width;
 
-			foreach (Gdk.Rectangle rect in rois) {
-				for (int y = rect.Top; y <= rect.GetBottom (); y++) {
+			foreach (Core.RectangleI rect in rois) {
+				for (int y = rect.Top; y <= rect.Bottom; y++) {
 					var src_row = src_data.Slice (y * width + rect.Left, rect.Width);
 					var dst_row = dst_data.Slice (y * width + rect.Left, rect.Width);
 

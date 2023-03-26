@@ -41,7 +41,7 @@ namespace Pinta.Tools.Brushes
 			get { return 0.5; }
 		}
 
-		protected override Gdk.Rectangle OnMouseMove (Context g, Color strokeColor, ImageSurface surface,
+		protected override RectangleI OnMouseMove (Context g, Color strokeColor, ImageSurface surface,
 							      int x, int y, int lastX, int lastY)
 		{
 			int line_width = (int) g.LineWidth;
@@ -54,7 +54,7 @@ namespace Pinta.Tools.Brushes
 				size = Random.Next (2, line_width);
 			}
 
-			Rectangle r = new Rectangle (x - Random.Next (-15, 15), y - Random.Next (-15, 15), size, size);
+			var r = new RectangleD (x - Random.Next (-15, 15), y - Random.Next (-15, 15), size, size);
 
 			double rx = r.Width / 2;
 			double ry = r.Height / 2;
@@ -73,12 +73,12 @@ namespace Pinta.Tools.Brushes
 
 			g.ClosePath ();
 
-			Rectangle dirty = g.StrokeExtents ();
+			RectangleI dirty = g.StrokeExtents ().ToInt ();
 
 			g.Fill ();
 			g.Restore ();
 
-			return dirty.ToGdkRectangle ();
+			return dirty;
 		}
 	}
 }

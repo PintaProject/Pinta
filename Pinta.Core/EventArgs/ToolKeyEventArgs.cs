@@ -32,8 +32,6 @@ namespace Pinta.Core
 {
 	public class ToolKeyEventArgs : EventArgs
 	{
-		public EventKey? Event { get; init; }
-
 		/// <summary>
 		/// Specifies whether the Alt key is currently pressed.
 		/// </summary>
@@ -66,22 +64,6 @@ namespace Pinta.Core
 
 		public ModifierType State { get; init; }
 
-		public static ToolKeyEventArgs FromKeyPressEventArgs (KeyPressEventArgs args)
-		{
-			return new ToolKeyEventArgs {
-				Event = args.Event,
-				Key = args.Event.Key,
-				State = args.Event.State
-			};
-		}
-
-		public static ToolKeyEventArgs FromKeyReleaseEventArgs (KeyReleaseEventArgs args)
-		{
-			return new ToolKeyEventArgs {
-				Event = args.Event,
-				Key = args.Event.Key,
-				State = args.Event.State
-			};
-		}
+		public Event? Event { get; init; }
 	}
 }

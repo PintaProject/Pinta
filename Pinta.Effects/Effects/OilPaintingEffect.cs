@@ -16,9 +16,7 @@ namespace Pinta.Effects
 {
 	public class OilPaintingEffect : BaseEffect
 	{
-		public override string Icon {
-			get { return "Menu.Effects.Artistic.OilPainting.png"; }
-		}
+		public override string Icon => Pinta.Resources.Icons.EffectsArtisticOilPainting;
 
 		public override string Name {
 			get { return Translations.GetString ("Oil Painting"); }
@@ -39,13 +37,13 @@ namespace Pinta.Effects
 			EffectData = new OilPaintingData ();
 		}
 
-		public override bool LaunchConfiguration ()
+		public override void LaunchConfiguration ()
 		{
-			return EffectHelper.LaunchSimpleEffectDialog (this);
+			EffectHelper.LaunchSimpleEffectDialog (this);
 		}
 
 		#region Algorithm Code Ported From PDN
-		public override void Render (ImageSurface src, ImageSurface dest, Gdk.Rectangle[] rois)
+		public override void Render (ImageSurface src, ImageSurface dest, RectangleI[] rois)
 		{
 			int width = src.Width;
 			int height = src.Height;
@@ -59,15 +57,15 @@ namespace Pinta.Effects
 
 			byte maxIntensity = (byte) Data.Coarseness;
 
-			ReadOnlySpan<ColorBgra> src_data = src.GetReadOnlyData ();
-			Span<ColorBgra> dst_data = dest.GetData ();
+			ReadOnlySpan<ColorBgra> src_data = src.GetReadOnlyPixelData ();
+			Span<ColorBgra> dst_data = dest.GetPixelData ();
 
-			foreach (Gdk.Rectangle rect in rois) {
+			foreach (var rect in rois) {
 
 				int rectTop = rect.Top;
-				int rectBottom = rect.GetBottom ();
+				int rectBottom = rect.Bottom;
 				int rectLeft = rect.Left;
-				int rectRight = rect.GetRight ();
+				int rectRight = rect.Right;
 
 				for (int y = rectTop; y <= rectBottom; ++y) {
 					var dst_row = dst_data.Slice (y * width, width);

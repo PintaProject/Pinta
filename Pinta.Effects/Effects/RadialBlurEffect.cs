@@ -17,9 +17,7 @@ namespace Pinta.Effects
 {
 	public class RadialBlurEffect : BaseEffect
 	{
-		public override string Icon {
-			get { return "Menu.Effects.Blurs.RadialBlur.png"; }
-		}
+		public override string Icon => Pinta.Resources.Icons.EffectsBlursRadialBlur;
 
 		public override string Name {
 			get { return Translations.GetString ("Radial Blur"); }
@@ -40,9 +38,9 @@ namespace Pinta.Effects
 			EffectData = new RadialBlurData ();
 		}
 
-		public override bool LaunchConfiguration ()
+		public override void LaunchConfiguration ()
 		{
-			return EffectHelper.LaunchSimpleEffectDialog (this);
+			EffectHelper.LaunchSimpleEffectDialog (this);
 		}
 
 		#region Algorithm Code Ported From PDN
@@ -57,7 +55,7 @@ namespace Pinta.Effects
 			fy = cy + ((cx >> 8) * fr >> 8) - ((cy >> 14) * (fr * fr >> 11) >> 8);
 		}
 
-		public override void Render (ImageSurface src, ImageSurface dst, Gdk.Rectangle[] rois)
+		public override void Render (ImageSurface src, ImageSurface dst, Core.RectangleI[] rois)
 		{
 			if (Data.Angle == 0) {
 				// Copy src to dest
@@ -74,15 +72,15 @@ namespace Pinta.Effects
 
 			int fr = (int) (Data.Angle * Math.PI * 65536.0 / 181.0);
 
-			var dst_data = dst.GetData ();
-			var src_data = src.GetReadOnlyData ();
+			var dst_data = dst.GetPixelData ();
+			var src_data = src.GetReadOnlyPixelData ();
 
-			foreach (Gdk.Rectangle rect in rois) {
-				for (int y = rect.Top; y <= rect.GetBottom (); ++y) {
+			foreach (Core.RectangleI rect in rois) {
+				for (int y = rect.Top; y <= rect.Bottom; ++y) {
 					var dst_row = dst_data.Slice (y * w, w);
 					var src_row = src_data.Slice (y * src_w, src_w);
 
-					for (int x = rect.Left; x <= rect.GetRight (); ++x) {
+					for (int x = rect.Left; x <= rect.Right; ++x) {
 						ref ColorBgra dst_pixel = ref dst_row[x];
 						ref readonly ColorBgra src_pixel = ref src_row[x];
 

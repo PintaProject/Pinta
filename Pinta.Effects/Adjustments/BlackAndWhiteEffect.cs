@@ -18,7 +18,7 @@ namespace Pinta.Effects
 		UnaryPixelOp op = new UnaryPixelOps.Desaturate ();
 
 		public override string Icon {
-			get { return "Menu.Adjustments.BlackAndWhite.png"; }
+			get { return Pinta.Resources.Icons.AdjustmentsBlackAndWhite; }
 		}
 
 		public override string Name {
@@ -29,7 +29,7 @@ namespace Pinta.Effects
 			get { return "G"; }
 		}
 
-		public override void Render (ImageSurface src, ImageSurface dest, Gdk.Rectangle[] rois)
+		public override void Render (ImageSurface src, ImageSurface dest, Core.RectangleI[] rois)
 		{
 			op.Apply (dest, src, rois);
 		}

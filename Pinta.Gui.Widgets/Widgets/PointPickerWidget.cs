@@ -31,7 +31,7 @@ using Pinta.Core;
 
 namespace Pinta.Gui.Widgets
 {
-	public class PointPickerWidget : FilledAreaBin
+	public class PointPickerWidget : Box
 	{
 		private Label label;
 		private PointPickerGraphic pointpickergraphic1;
@@ -46,26 +46,28 @@ namespace Pinta.Gui.Widgets
 		{
 			Build ();
 
-			spin_x.Adjustment.Upper = PintaCore.Workspace.ImageSize.Width;
-			spin_y.Adjustment.Upper = PintaCore.Workspace.ImageSize.Height;
-			spin_x.Adjustment.Lower = 0;
-			spin_y.Adjustment.Lower = 0;
+			spin_x.Adjustment!.Upper = PintaCore.Workspace.ImageSize.Width;
+			spin_y.Adjustment!.Upper = PintaCore.Workspace.ImageSize.Height;
+			spin_x.Adjustment!.Lower = 0;
+			spin_y.Adjustment!.Lower = 0;
 
-			spin_x.ActivatesDefault = true;
-			spin_y.ActivatesDefault = true;
+			OnRealize += (_, _) => HandleShown ();
+
+			spin_x.SetActivatesDefault (true);
+			spin_y.SetActivatesDefault (true);
 		}
 
 		public string Label {
-			get => label.Text;
-			set => label.Text = value;
+			get => label.GetText ();
+			set => label.SetText (value);
 		}
 
-		public Gdk.Point DefaultPoint { get; set; }
+		public PointI DefaultPoint { get; set; }
 
-		public Gdk.Point Point {
-			get => new Gdk.Point (spin_x.ValueAsInt, spin_y.ValueAsInt);
+		public PointI Point {
+			get => new PointI (spin_x.GetValueAsInt (), spin_y.GetValueAsInt ());
 			set {
-				if (value.X != spin_x.ValueAsInt || value.Y != spin_y.ValueAsInt) {
+				if (value.X != spin_x.GetValueAsInt () || value.Y != spin_y.GetValueAsInt ()) {
 					spin_x.Value = value.X;
 					spin_y.Value = value.Y;
 					OnPointPicked ();
@@ -73,19 +75,19 @@ namespace Pinta.Gui.Widgets
 			}
 		}
 
-		public Cairo.PointD DefaultOffset {
+		public PointD DefaultOffset {
 			get {
-				return new Cairo.PointD ((DefaultPoint.X * 2.0 / PintaCore.Workspace.ImageSize.Width) - 1.0,
+				return new PointD ((DefaultPoint.X * 2.0 / PintaCore.Workspace.ImageSize.Width) - 1.0,
 							 (DefaultPoint.Y * 2.0 / PintaCore.Workspace.ImageSize.Height) - 1.0);
 			}
 			set {
-				DefaultPoint = new Gdk.Point ((int) ((value.X + 1.0) * PintaCore.Workspace.ImageSize.Width / 2.0),
+				DefaultPoint = new PointI ((int) ((value.X + 1.0) * PintaCore.Workspace.ImageSize.Width / 2.0),
 							      (int) ((value.Y + 1.0) * PintaCore.Workspace.ImageSize.Height / 2.0));
 			}
 		}
 
-		public Cairo.PointD Offset
-			=> new Cairo.PointD ((spin_x.Value * 2.0 / PintaCore.Workspace.ImageSize.Width) - 1.0, (spin_y.Value * 2.0 / PintaCore.Workspace.ImageSize.Height) - 1.0);
+		public PointD Offset
+			=> new PointD ((spin_x.Value * 2.0 / PintaCore.Workspace.ImageSize.Width) - 1.0, (spin_y.Value * 2.0 / PintaCore.Workspace.ImageSize.Height) - 1.0);
 
 		private void HandlePointpickergraphic1PositionChanged (object? sender, EventArgs e)
 		{
@@ -114,16 +116,15 @@ namespace Pinta.Gui.Widgets
 			}
 		}
 
-		protected override void OnShown ()
+		private void HandleShown ()
 		{
-			base.OnShown ();
 			Point = DefaultPoint;
 
-			spin_x.ValueChanged += HandleSpinXValueChanged;
-			spin_y.ValueChanged += HandleSpinYValueChanged;
+			spin_x.OnValueChanged += HandleSpinXValueChanged;
+			spin_y.OnValueChanged += HandleSpinYValueChanged;
 			pointpickergraphic1.PositionChanged += HandlePointpickergraphic1PositionChanged;
-			button1.Pressed += HandleButton1Pressed;
-			button2.Pressed += HandleButton2Pressed;
+			button1.OnClicked += HandleButton1Pressed;
+			button2.OnClicked += HandleButton2Pressed;
 
 			pointpickergraphic1.Init (DefaultPoint);
 		}
@@ -145,100 +146,91 @@ namespace Pinta.Gui.Widgets
 		[MemberNotNull (nameof (label), nameof (spin_x), nameof (spin_y), nameof (button1), nameof (button2), nameof (pointpickergraphic1))]
 		private void Build ()
 		{
+			const int spacing = 6;
+
 			// Section label + line
-			var hbox1 = new HBox (false, 6);
+			var hbox1 = new Box () { Spacing = spacing };
+			hbox1.SetOrientation (Orientation.Horizontal);
+
 
 			label = new Label ();
-			hbox1.PackStart (label, false, false, 0);
-			hbox1.PackStart (new HSeparator (), true, true, 0);
+			label.AddCssClass (AdwaitaStyles.Title4);
+			hbox1.Append (label);
 
 			// PointPickerGraphic
-			var hbox2 = new HBox (false, 6);
+			var hbox2 = new Box () { Spacing = spacing };
+			hbox2.SetOrientation (Orientation.Horizontal);
 
 			pointpickergraphic1 = new PointPickerGraphic ();
-			hbox2.PackStart (pointpickergraphic1, true, false, 0);
+			pointpickergraphic1.Hexpand = true;
+			pointpickergraphic1.Halign = Align.Center;
+			hbox2.Append (pointpickergraphic1);
 
 			// X spinner
-			var label2 = new Label {
-				LabelProp = "X:"
-			};
+			var label2 = Gtk.Label.New ("X:");
 
-			spin_x = new SpinButton (0, 100, 1) {
-				CanFocus = true,
-				ClimbRate = 1,
-				Numeric = true
-			};
-			spin_x.Adjustment.PageIncrement = 10;
+			spin_x = SpinButton.NewWithRange (0, 100, 1);
+			spin_x.CanFocus = true;
+			spin_x.ClimbRate = 1;
+			spin_x.Numeric = true;
+			spin_x.Adjustment!.PageIncrement = 10;
+			spin_x.Valign = Align.Start;
 
 			button1 = new Button {
+				IconName = Resources.StandardIcons.GoPrevious,
 				WidthRequest = 28,
 				HeightRequest = 24,
 				CanFocus = true,
-				UseUnderline = true
+				UseUnderline = true,
+				Valign = Align.Start
 			};
 
-			var button_image = Image.NewFromIconName (Resources.StandardIcons.GoPrevious, IconSize.Button);
-			button1.Add (button_image);
+			var x_hbox = new Box () { Spacing = spacing };
+			x_hbox.SetOrientation (Orientation.Horizontal);
 
-			var alignment1 = new Alignment (0.5F, 0.5F, 1F, 0F) {
-				button1
-			};
-
-			var x_hbox = new HBox (false, 6);
-
-			x_hbox.PackStart (label2, false, false, 0);
-			x_hbox.PackStart (spin_x, false, false, 0);
-			x_hbox.PackStart (alignment1, false, false, 0);
+			x_hbox.Append (label2);
+			x_hbox.Append (spin_x);
+			x_hbox.Append (button1);
 
 			// Y spinner
-			var label3 = new Label {
-				LabelProp = "Y:"
-			};
+			var label3 = Gtk.Label.New ("Y:");
 
-			spin_y = new SpinButton (0, 100, 1) {
-				CanFocus = true,
-				ClimbRate = 1,
-				Numeric = true
-			};
-			spin_y.Adjustment.PageIncrement = 10;
+			spin_y = SpinButton.NewWithRange (0, 100, 1);
+			spin_y.CanFocus = true;
+			spin_y.ClimbRate = 1;
+			spin_y.Numeric = true;
+			spin_y.Adjustment!.PageIncrement = 10;
+			spin_y.Valign = Align.Start;
 
 			button2 = new Button {
+				IconName = Resources.StandardIcons.GoPrevious,
 				WidthRequest = 28,
 				HeightRequest = 24,
 				CanFocus = true,
-				UseUnderline = true
+				UseUnderline = true,
+				Valign = Align.Start
 			};
 
-			var button_image2 = Image.NewFromIconName (Resources.StandardIcons.GoPrevious, IconSize.Button);
-			button2.Add (button_image2);
+			var y_hbox = new Box () { Spacing = spacing };
+			y_hbox.SetOrientation (Orientation.Horizontal);
 
-			var alignment2 = new Alignment (0.5F, 0.5F, 1F, 0F) {
-				button2
-			};
-
-			var y_hbox = new HBox (false, 6);
-
-			y_hbox.PackStart (label3, false, false, 0);
-			y_hbox.PackStart (spin_y, false, false, 0);
-			y_hbox.PackStart (alignment2, false, false, 0);
+			y_hbox.Append (label3);
+			y_hbox.Append (spin_y);
+			y_hbox.Append (button2);
 
 			// Vbox for spinners
-			var spin_vbox = new VBox {
-				x_hbox,
-				y_hbox
-			};
+			var spin_vbox = new Box () { Spacing = spacing };
+			spin_vbox.SetOrientation (Orientation.Vertical);
+			spin_vbox.Append (x_hbox);
+			spin_vbox.Append (y_hbox);
 
-			hbox2.PackStart (spin_vbox, false, false, 0);
+			hbox2.Append (spin_vbox);
 
 			// Main layout
-			var vbox = new VBox (false, 6) {
-				hbox1,
-				hbox2
-			};
-
-			Add (vbox);
-
-			vbox.ShowAll ();
+			SetOrientation (Orientation.Vertical);
+			Spacing = spacing;
+			Append (hbox1);
+			Append (hbox2);
 		}
 	}
 }

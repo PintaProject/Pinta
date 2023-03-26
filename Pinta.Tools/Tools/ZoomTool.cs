@@ -40,17 +40,17 @@ namespace Pinta.Tools
 		private MouseButton mouseDown;
 		private bool is_drawing;
 		protected PointD shape_origin;
-		private Rectangle last_dirty;
+		private RectangleD last_dirty;
 		private static readonly int tolerance = 10;
 
 		public ZoomTool (IServiceManager services) : base (services)
 		{
 			mouseDown = 0;
 
-			cursorZoomIn = new Gdk.Cursor (Gdk.Display.Default, Gtk.IconTheme.Default.LoadIcon (Pinta.Resources.Icons.ViewZoomIn, 16), 0, 0);
-			cursorZoomOut = new Gdk.Cursor (Gdk.Display.Default, Gtk.IconTheme.Default.LoadIcon (Pinta.Resources.Icons.ViewZoomOut, 16), 0, 0);
-			cursorZoom = new Gdk.Cursor (Gdk.Display.Default, Gtk.IconTheme.Default.LoadIcon (Pinta.Resources.Icons.ToolZoom, 16), 0, 0);
-			cursorZoomPan = new Gdk.Cursor (Gdk.Display.Default, Gtk.IconTheme.Default.LoadIcon (Pinta.Resources.Icons.ToolPan, 16), 0, 0);
+			cursorZoomIn = Gdk.Cursor.NewFromName (Pinta.Resources.StandardCursors.ZoomIn, null);
+			cursorZoomOut = Gdk.Cursor.NewFromName (Pinta.Resources.StandardCursors.ZoomOut, null);
+			cursorZoom = Gdk.Cursor.NewFromTexture (Resources.GetIcon (Pinta.Resources.Icons.ToolZoom), 0, 0, null);
+			cursorZoomPan = Gdk.Cursor.NewFromTexture (Resources.GetIcon (Pinta.Resources.Icons.ToolPan), 0, 0, null);
 		}
 
 		public override string Name => Translations.GetString ("Zoom");
@@ -137,14 +137,13 @@ namespace Pinta.Tools
 			document.Layers.ToolLayer.Clear ();
 			document.Layers.ToolLayer.Hidden = false;
 
-			using (var g = new Context (document.Layers.ToolLayer.Surface)) {
-				var dirty = g.FillRectangle (r, new Cairo.Color (0.7, 0.8, 0.9, 0.4));
+			var g = new Context (document.Layers.ToolLayer.Surface);
+			var dirty = g.FillRectangle (r, new Cairo.Color (0.7, 0.8, 0.9, 0.4));
 
-				document.Workspace.Invalidate (last_dirty.ToGdkRectangle ());
-				document.Workspace.Invalidate (dirty.ToGdkRectangle ());
+			document.Workspace.Invalidate (last_dirty.ToInt ());
+			document.Workspace.Invalidate (dirty.ToInt ());
 
-				last_dirty = dirty;
-			}
+			last_dirty = dirty;
 		}
 	}
 }

@@ -16,11 +16,9 @@ namespace Pinta.Effects
 {
 	public class RedEyeRemoveEffect : BaseEffect
 	{
-		private UnaryPixelOp? op;
+		private UnaryPixelOp? op = null;
 
-		public override string Icon {
-			get { return "Menu.Effects.Photo.RedEyeRemove.png"; }
-		}
+		public override string Icon => Pinta.Resources.Icons.EffectsPhotoRedEyeRemove;
 
 		public override string Name {
 			get { return Translations.GetString ("Red Eye Removal"); }
@@ -39,27 +37,18 @@ namespace Pinta.Effects
 		public RedEyeRemoveEffect ()
 		{
 			EffectData = new RedEyeRemoveData ();
+
+			EffectData.PropertyChanged += (_, _) => {
+				op = new UnaryPixelOps.RedEyeRemove (Data.Tolerance, Data.Saturation);
+			};
 		}
 
-		public override bool LaunchConfiguration ()
+		public override void LaunchConfiguration ()
 		{
-			using (var dialog = new SimpleEffectDialog (Name, PintaCore.Resources.GetIcon (Icon), Data, new PintaLocalizer ())) {
-				// Hookup event handling for live preview.
-				dialog.EffectDataChanged += (o, e) => {
-					if (EffectData != null) {
-						op = new UnaryPixelOps.RedEyeRemove (Data.Tolerance, Data.Saturation);
-						EffectData.FirePropertyChanged (e.PropertyName);
-					}
-				};
-
-				int response = dialog.Run ();
-				bool ret = (response == (int) Gtk.ResponseType.Ok);
-
-				return ret;
-			}
+			EffectHelper.LaunchSimpleEffectDialog (this);
 		}
 
-		public override void Render (ImageSurface src, ImageSurface dest, Gdk.Rectangle[] rois)
+		public override void Render (ImageSurface src, ImageSurface dest, Core.RectangleI[] rois)
 		{
 			op?.Apply (dest, src, rois);
 		}

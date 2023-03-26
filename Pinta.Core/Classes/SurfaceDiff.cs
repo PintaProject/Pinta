@@ -64,11 +64,11 @@ namespace Pinta.Core
 		private const int MINIMUM_SAVINGS_PERCENT = 10;
 
 		private BitArray bitmask;
-		private Gdk.Rectangle bounds;
+		private RectangleI bounds;
 		private ColorBgra[] pixels;
 
 		#region Constructors
-		private SurfaceDiff (BitArray bitmask, Gdk.Rectangle bounds, ColorBgra[] pixels)
+		private SurfaceDiff (BitArray bitmask, RectangleI bounds, ColorBgra[] pixels)
 		{
 			this.bitmask = bitmask;
 			this.bounds = bounds;
@@ -107,8 +107,8 @@ namespace Pinta.Core
 			Parallel.For<DiffBounds> (0, orig_height, () => new DiffBounds (orig_width, orig_height),
 				     (row, loop, my_bounds) => {
 					     var offset = row * orig_width;
-					     var orig_row = original.GetReadOnlyData ().Slice (offset, orig_width);
-					     var updated_row = updated_surf.GetData ().Slice (offset, orig_width);
+					     var orig_row = original.GetReadOnlyPixelData ().Slice (offset, orig_width);
+					     var updated_row = updated_surf.GetPixelData ().Slice (offset, orig_width);
 
 					     bool change_in_row = false;
 
@@ -134,9 +134,8 @@ namespace Pinta.Core
 					     return;
 				     });
 
-			var bounds = new Gdk.Rectangle (diff_bounds.left, diff_bounds.top,
-							diff_bounds.right - diff_bounds.left + 1,
-							diff_bounds.bottom - diff_bounds.top + 1);
+			var bounds = new RectangleI (diff_bounds.left, diff_bounds.top,
+						     diff_bounds.right - diff_bounds.left + 1, diff_bounds.bottom - diff_bounds.top + 1);
 
 #if DEBUG_DIFF
 			Console.WriteLine ("Truncated surface size: {0}x{1}", bounds.Width, bounds.Height);
@@ -148,15 +147,15 @@ namespace Pinta.Core
 			int index = 0;
 			int num_changed = 0;
 
-			int bottom = bounds.GetBottom ();
-			int right = bounds.GetRight ();
+			int bottom = bounds.Bottom;
+			int right = bounds.Right;
 			int bounds_x = bounds.X;
 			int bounds_y = bounds.Y;
 
 			for (int y = bounds_y; y <= bottom; ++y) {
 				var offset = y * orig_width;
-				var orig_row = original.GetReadOnlyData ().Slice (offset, orig_width);
-				var updated_row = updated_surf.GetData ().Slice (offset, orig_width);
+				var orig_row = original.GetReadOnlyPixelData ().Slice (offset, orig_width);
+				var updated_row = updated_surf.GetPixelData ().Slice (offset, orig_width);
 
 				for (int x = bounds_x; x <= right; ++x) {
 					bool changed = orig_row[x] != updated_row[x];
@@ -181,7 +180,7 @@ namespace Pinta.Core
 
 			// Store the old pixels.
 			var pixels = new ColorBgra[num_changed];
-			var orig_data = original.GetData ();
+			var orig_data = original.GetPixelData ();
 			int mask_index = 0;
 
 			int pixels_idx = 0;
@@ -215,7 +214,7 @@ namespace Pinta.Core
 			ApplyAndSwap (dst, true);
 		}
 
-		public Gdk.Rectangle GetBounds ()
+		public RectangleI GetBounds ()
 		{
 			return bounds;
 		}
@@ -227,14 +226,14 @@ namespace Pinta.Core
 			dst.Flush ();
 
 			var dest_width = dst.Width;
-			var dst_data = dst.GetData ();
+			var dst_data = dst.GetPixelData ();
 			var mask_index = 0;
 			int pixel_idx = 0;
 			ColorBgra swap_pixel;
 
-			for (int y = bounds.Y; y <= bounds.GetBottom (); y++) {
+			for (int y = bounds.Y; y <= bounds.Bottom; y++) {
 				int dst_idx = bounds.X + y * dest_width;
-				for (int x = bounds.X; x <= bounds.GetRight (); x++) {
+				for (int x = bounds.X; x <= bounds.Right; x++) {
 					if (bitmask[mask_index++]) {
 						if (swap) {
 							swap_pixel = dst_data[dst_idx];

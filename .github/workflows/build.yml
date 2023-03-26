@@ -15,7 +15,7 @@ env:
 
 jobs:
   build-ubuntu:
-    runs-on: ubuntu-20.04
+    runs-on: ubuntu-22.04
 
     # Test building with .NET 6 and .NET 7
     strategy:
@@ -31,7 +31,7 @@ jobs:
     - name: Install Apt Dependencies
       run: |
         sudo apt update
-        sudo apt install autotools-dev autoconf-archive gettext intltool libgtk-3-dev
+        sudo apt install autotools-dev autoconf-archive gettext intltool libadwaita-1-dev
     - name: Generate Tarball
       run: |
         ./autogen.sh
@@ -63,7 +63,7 @@ jobs:
       with:
         dotnet-version: ${{env.DOTNET_VERSION}}
     - name: Install Dependencies
-      run: brew install gtk+3 adwaita-icon-theme gettext
+      run: brew install libadwaita adwaita-icon-theme gettext
     - name: Build
       run: dotnet build Pinta.sln -c Release
     - name: Test
@@ -94,6 +94,9 @@ jobs:
 
   build-windows:
     runs-on: windows-2022
+    defaults:
+      run:
+        shell: msys2 {0}
 
     steps:
     - uses: actions/checkout@v3
@@ -102,6 +105,12 @@ jobs:
       uses: actions/setup-dotnet@v3
       with:
         dotnet-version: ${{env.DOTNET_VERSION}}
+    - name: Install dependencies
+      uses: msys2/setup-msys2@v2
+      with:
+        path-type: inherit # Inherit the path so that dotnet can be found
+        update: true
+        install: mingw-w64-x86_64-libadwaita
     - name: Build
       run: dotnet build Pinta.sln -c Release
     - name: Test
@@ -109,6 +118,7 @@ jobs:
 
     # Note that msgfmt is already available from the Git for Windows installation!
     - name: Build Installer
+      if: ${{ false }} # Disable until the installer supports GTK4
       run: |
         choco install innosetup -y -v
         dotnet publish Pinta.sln -p:BuildTranslations=true -c Release -r win-x64 --self-contained true
@@ -116,6 +126,7 @@ jobs:
 
     - name: Upload Installer
       uses: actions/upload-artifact@v3
+      if: ${{ false }} # Disable until the installer supports GTK4
       with:
         name: "Pinta.exe"
         path: installer/windows/Pinta.exe

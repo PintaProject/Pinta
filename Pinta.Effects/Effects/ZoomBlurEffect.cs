@@ -16,9 +16,7 @@ namespace Pinta.Effects
 {
 	public class ZoomBlurEffect : BaseEffect
 	{
-		public override string Icon {
-			get { return "Menu.Effects.Blurs.ZoomBlur.png"; }
-		}
+		public override string Icon => Pinta.Resources.Icons.EffectsBlursZoomBlur;
 
 		public override string Name {
 			get { return Translations.GetString ("Zoom Blur"); }
@@ -39,13 +37,13 @@ namespace Pinta.Effects
 			EffectData = new ZoomBlurData ();
 		}
 
-		public override bool LaunchConfiguration ()
+		public override void LaunchConfiguration ()
 		{
-			return EffectHelper.LaunchSimpleEffectDialog (this);
+			EffectHelper.LaunchSimpleEffectDialog (this);
 		}
 
 		#region Algorithm Code Ported From PDN
-		public override void Render (ImageSurface src, ImageSurface dst, Gdk.Rectangle[] rois)
+		public override void Render (ImageSurface src, ImageSurface dst, Core.RectangleI[] rois)
 		{
 			if (Data.Amount == 0) {
 				// Copy src to dest
@@ -53,10 +51,10 @@ namespace Pinta.Effects
 			}
 
 			int src_width = src.Width;
-			ReadOnlySpan<ColorBgra> src_data = src.GetReadOnlyData ();
+			ReadOnlySpan<ColorBgra> src_data = src.GetReadOnlyPixelData ();
 			int dst_width = dst.Width;
-			Span<ColorBgra> dst_data = dst.GetData ();
-			Gdk.Rectangle src_bounds = src.GetBounds ();
+			Span<ColorBgra> dst_data = dst.GetPixelData ();
+			Core.RectangleI src_bounds = src.GetBounds ();
 
 			long w = dst.Width;
 			long h = dst.Height;
@@ -68,12 +66,12 @@ namespace Pinta.Effects
 
 			const int n = 64;
 
-			foreach (Gdk.Rectangle rect in rois) {
-				for (int y = rect.Top; y <= rect.GetBottom (); ++y) {
+			foreach (var rect in rois) {
+				for (int y = rect.Top; y <= rect.Bottom; ++y) {
 					var src_row = src_data.Slice (y * src_width, src_width);
 					var dst_row = dst_data.Slice (y * dst_width, dst_width);
 
-					for (int x = rect.Left; x <= rect.GetRight (); ++x) {
+					for (int x = rect.Left; x <= rect.Right; ++x) {
 						long fx = (x << 16) - fcx;
 						long fy = (y << 16) - fcy;
 
@@ -131,7 +129,7 @@ namespace Pinta.Effects
 			public int Amount = 10;
 
 			[Caption ("Offset")]
-			public Gdk.Point Offset = new Gdk.Point (0, 0);
+			public Core.PointI Offset = new (0, 0);
 
 			[Skip]
 			public override bool IsDefault { get { return Amount == 0; } }

@@ -69,9 +69,12 @@ namespace Pinta.Effects
 
 		public LevelsData EffectData { get; private set; }
 
-		public LevelsDialog (LevelsData effectData) : base (Translations.GetString ("Levels Adjustment"),
-								    PintaCore.Chrome.MainWindow, DialogFlags.Modal)
+		public LevelsDialog (LevelsData effectData)
 		{
+			Title = Translations.GetString ("Levels Adjustment");
+			TransientFor = PintaCore.Chrome.MainWindow;
+			Modal = true;
+
 			Build ();
 
 			EffectData = effectData;
@@ -81,33 +84,32 @@ namespace Pinta.Effects
 			Reset ();
 			UpdateLevels ();
 
-			checkRed.Toggled += HandleCheckRedToggled;
-			checkGreen.Toggled += HandleCheckGreenToggled;
-			checkBlue.Toggled += HandleCheckBlueToggled;
-			buttonReset.Clicked += HandleButtonResetClicked;
-			buttonAuto.Clicked += HandleButtonAutoClicked;
-			spinInLow.ValueChanged += HandleSpinInLowValueChanged;
-			spinInHigh.ValueChanged += HandleSpinInHighValueChanged;
-			spinOutLow.ValueChanged += HandleSpinOutLowValueChanged;
-			spinOutGamma.ValueChanged += HandleSpinOutGammaValueChanged;
-			spinOutHigh.ValueChanged += HandleSpinOutHighValueChanged;
+			checkRed.OnToggled += HandleCheckRedToggled;
+			checkGreen.OnToggled += HandleCheckGreenToggled;
+			checkBlue.OnToggled += HandleCheckBlueToggled;
+			buttonReset.OnClicked += HandleButtonResetClicked;
+			buttonAuto.OnClicked += HandleButtonAutoClicked;
+			spinInLow.OnValueChanged += HandleSpinInLowValueChanged;
+			spinInHigh.OnValueChanged += HandleSpinInHighValueChanged;
+			spinOutLow.OnValueChanged += HandleSpinOutLowValueChanged;
+			spinOutGamma.OnValueChanged += HandleSpinOutGammaValueChanged;
+			spinOutHigh.OnValueChanged += HandleSpinOutHighValueChanged;
 			gradientInput.ValueChanged += HandleGradientInputValueChanged;
 			gradientOutput.ValueChanged += HandleGradientOutputValueChanged;
-			gradientInput.ButtonReleaseEvent += HandleGradientButtonReleaseEvent;
-			gradientOutput.ButtonReleaseEvent += HandleGradientButtonReleaseEvent;
-			gradientInput.ButtonPressEvent += HandleGradientButtonPressEvent;
-			gradientOutput.ButtonPressEvent += HandleGradientButtonPressEvent;
-			colorpanelInLow.ButtonPressEvent += HandleColorPanelButtonPressEvent;
-			colorpanelInHigh.ButtonPressEvent += HandleColorPanelButtonPressEvent;
-			colorpanelOutLow.ButtonPressEvent += HandleColorPanelButtonPressEvent;
-			colorpanelOutHigh.ButtonPressEvent += HandleColorPanelButtonPressEvent;
+			gradientInput.ClickGesture.OnReleased += HandleGradientButtonReleaseEvent;
+			gradientOutput.ClickGesture.OnReleased += HandleGradientButtonReleaseEvent;
+			gradientInput.ClickGesture.OnPressed += HandleGradientButtonPressEvent;
+			gradientOutput.ClickGesture.OnPressed += HandleGradientButtonPressEvent;
+			colorpanelInLow.ClickGesture.OnPressed += HandleColorPanelButtonPressEvent;
+			colorpanelInHigh.ClickGesture.OnPressed += HandleColorPanelButtonPressEvent;
+			colorpanelOutLow.ClickGesture.OnPressed += HandleColorPanelButtonPressEvent;
+			colorpanelOutHigh.ClickGesture.OnPressed += HandleColorPanelButtonPressEvent;
 
-			DefaultResponse = ResponseType.Ok;
-			spinInLow.ActivatesDefault = true;
-			spinInHigh.ActivatesDefault = true;
-			spinOutGamma.ActivatesDefault = true;
-			spinOutLow.ActivatesDefault = true;
-			spinOutHigh.ActivatesDefault = true;
+			spinInLow.SetActivatesDefault (true);
+			spinInHigh.SetActivatesDefault (true);
+			spinOutGamma.SetActivatesDefault (true);
+			spinOutLow.SetActivatesDefault (true);
+			spinOutHigh.SetActivatesDefault (true);
 		}
 
 		private UnaryPixelOps.Level Levels {
@@ -137,7 +139,7 @@ namespace Pinta.Effects
 			var doc = PintaCore.Workspace.ActiveDocument;
 
 			ImageSurface surface = doc.Layers.CurrentUserLayer.Surface;
-			Gdk.Rectangle rect = doc.Selection.SelectionPath.GetBounds ();
+			RectangleI rect = doc.Selection.SelectionPath.GetBounds ();
 			histogramInput.Histogram.UpdateHistogram (surface, rect);
 			UpdateOutputHistogram ();
 		}
@@ -191,17 +193,17 @@ namespace Pinta.Effects
 
 		private void HandleSpinInLowValueChanged (object? sender, EventArgs e)
 		{
-			gradientInput.SetValue (0, spinInLow.ValueAsInt);
+			gradientInput.SetValue (0, spinInLow.GetValueAsInt ());
 		}
 
 		private void HandleSpinInHighValueChanged (object? sender, EventArgs e)
 		{
-			gradientInput.SetValue (1, spinInHigh.ValueAsInt);
+			gradientInput.SetValue (1, spinInHigh.GetValueAsInt ());
 		}
 
 		private void HandleSpinOutLowValueChanged (object? sender, EventArgs e)
 		{
-			gradientOutput.SetValue (0, spinOutLow.ValueAsInt);
+			gradientOutput.SetValue (0, spinOutLow.GetValueAsInt ());
 		}
 
 		private int FromGammaValue ()
@@ -220,7 +222,7 @@ namespace Pinta.Effects
 
 		private void HandleSpinOutHighValueChanged (object? sender, EventArgs e)
 		{
-			gradientOutput.SetValue (2, spinOutHigh.ValueAsInt);
+			gradientOutput.SetValue (2, spinOutHigh.GetValueAsInt ());
 		}
 
 		private int MaskAvg (ColorBgra before)
@@ -365,18 +367,17 @@ namespace Pinta.Effects
 			} else
 				skip_counter++;
 
-			Window.Invalidate ();
 			disable_updating = false;
 
 			UpdateLivePreview ();
 		}
 
-		private void HandleGradientButtonPressEvent (object o, ButtonPressEventArgs args)
+		private void HandleGradientButtonPressEvent (GestureClick controller, GestureClick.PressedSignalArgs args)
 		{
 			button_down = true;
 		}
 
-		private void HandleGradientButtonReleaseEvent (object o, ButtonReleaseEventArgs args)
+		private void HandleGradientButtonReleaseEvent (GestureClick controller, GestureClick.ReleasedSignalArgs args)
 		{
 			button_down = false;
 
@@ -442,8 +443,6 @@ namespace Pinta.Effects
 				histogramInput.SetSelected (i, mask[i]);
 				histogramOutput.SetSelected (i, mask[i]);
 			}
-
-			Window.Invalidate ();
 		}
 
 		private void HandleCheckRedToggled (object? sender, EventArgs e)
@@ -464,45 +463,47 @@ namespace Pinta.Effects
 			MaskChanged ();
 		}
 
-		private void HandleColorPanelButtonPressEvent (object sender, ButtonPressEventArgs args)
+		private void HandleColorPanelButtonPressEvent (GestureClick controller, GestureClick.PressedSignalArgs args)
 		{
-			if (args.Event.Type != Gdk.EventType.TwoButtonPress)
+			if (args.NPress != 2) // double click
 				return;
 
-			ColorPanelWidget panel = (ColorPanelWidget) sender;
-			using (var ccd = new Gtk.ColorChooserDialog (Translations.GetString ("Choose Color"), PintaCore.Chrome.MainWindow)) {
-				ccd.UseAlpha = true;
-				ccd.Rgba = panel.CairoColor.ToGdkRGBA ();
+			ColorPanelWidget panel = (ColorPanelWidget) controller.GetWidget ();
+			var ccd = Gtk.ColorChooserDialog.New (Translations.GetString ("Choose Color"), PintaCore.Chrome.MainWindow);
+			ccd.UseAlpha = true;
+			ccd.SetColor (panel.CairoColor);
 
-				var response = (Gtk.ResponseType) ccd.Run ();
-				if (response == Gtk.ResponseType.Ok) {
-					ColorBgra col = ccd.Rgba.ToCairoColor ().ToGdkColor ().ToBgraColor ();
+			var response = (Gtk.ResponseType) ccd.RunBlocking ();
+			if (response == Gtk.ResponseType.Ok) {
+				ccd.GetColor (out var cairo_color);
+				ColorBgra col = cairo_color.ToColorBgra ();
 
-					if (panel == colorpanelInLow) {
-						Levels.ColorInLow = col;
-					} else if (panel == colorpanelInHigh) {
-						Levels.ColorInHigh = col;
-					} else if (panel == colorpanelOutLow) {
-						Levels.ColorOutLow = col;
-						//                } else if (panel == colorpanelOutMid) {
-						//                    ColorBgra lo = Levels.ColorInLow;
-						//                    ColorBgra md = histogramInput.Histogram.GetMeanColor();
-						//                    ColorBgra hi = Levels.ColorInHigh;
-						//                    ColorBgra out_lo = Levels.ColorOutLow;
-						//                    ColorBgra out_hi = Levels.ColorOutHigh;
-						//
-						//                    for (int i = 0; i < 3; i++) {
-						//                        double logA = (col[i] - out_lo[i]) / (out_hi[i] - out_lo[i]);
-						//                        double logBase = (md[i] - lo[i]) / (hi[i] - lo[i]);
-						//                        double logVal = (logBase == 1.0) ? 0.0 : Math.Log (logA, logBase);
-						//
-						//                        Levels.SetGamma(i, (float)Utility.Clamp (logVal, 0.1, 10.0));
-						//                    }
-					} else if (panel == colorpanelOutHigh) {
-						Levels.ColorOutHigh = col;
-					}
+				if (panel == colorpanelInLow) {
+					Levels.ColorInLow = col;
+				} else if (panel == colorpanelInHigh) {
+					Levels.ColorInHigh = col;
+				} else if (panel == colorpanelOutLow) {
+					Levels.ColorOutLow = col;
+					//                } else if (panel == colorpanelOutMid) {
+					//                    ColorBgra lo = Levels.ColorInLow;
+					//                    ColorBgra md = histogramInput.Histogram.GetMeanColor();
+					//                    ColorBgra hi = Levels.ColorInHigh;
+					//                    ColorBgra out_lo = Levels.ColorOutLow;
+					//                    ColorBgra out_hi = Levels.ColorOutHigh;
+					//
+					//                    for (int i = 0; i < 3; i++) {
+					//                        double logA = (col[i] - out_lo[i]) / (out_hi[i] - out_lo[i]);
+					//                        double logBase = (md[i] - lo[i]) / (hi[i] - lo[i]);
+					//                        double logVal = (logBase == 1.0) ? 0.0 : Math.Log (logA, logBase);
+					//
+					//                        Levels.SetGamma(i, (float)Utility.Clamp (logVal, 0.1, 10.0));
+					//                    }
+				} else if (panel == colorpanelOutHigh) {
+					Levels.ColorOutHigh = col;
 				}
 			}
+
+			ccd.Destroy ();
 
 			UpdateFromLevelsOp ();
 			UpdateLevels ();
@@ -517,31 +518,31 @@ namespace Pinta.Effects
 
 			Resizable = false;
 
-			var hboxChecks = new HBox () { Spacing = spacing };
-			checkRed = new CheckButton (Translations.GetString ("Red")) { Active = true };
-			hboxChecks.PackStart (checkRed, false, false, 0);
-			checkGreen = new CheckButton (Translations.GetString ("Green")) { Active = true };
-			hboxChecks.PackStart (checkGreen, false, false, 0);
-			checkBlue = new CheckButton (Translations.GetString ("Blue")) { Active = true };
-			hboxChecks.PackStart (checkBlue, false, false, 0);
+			var hboxChecks = new Box () { Spacing = spacing };
+			hboxChecks.SetOrientation (Orientation.Horizontal);
+			checkRed = new CheckButton () { Label = Translations.GetString ("Red"), Active = true };
+			hboxChecks.Append (checkRed);
+			checkGreen = new CheckButton () { Label = Translations.GetString ("Green"), Active = true };
+			hboxChecks.Append (checkGreen);
+			checkBlue = new CheckButton () { Label = Translations.GetString ("Blue"), Active = true };
+			hboxChecks.Append (checkBlue);
 
-			buttonReset = new Button () { Label = Translations.GetString ("Reset"), WidthRequest = 80 };
-			buttonAuto = new Button () { Label = Translations.GetString ("Auto"), WidthRequest = 80 };
+			buttonAuto = (Button) AddButton (Translations.GetString ("Auto"), (int) ResponseType.None);
+			buttonReset = (Button) AddButton (Translations.GetString ("Reset"), (int) ResponseType.None);
+			AddActionWidget (hboxChecks, (int) ResponseType.None);
 
-			AddActionWidget (buttonAuto, ResponseType.None);
-			AddActionWidget (buttonReset, ResponseType.None);
-			AddActionWidget (hboxChecks, ResponseType.None);
+			this.AddCancelOkButtons ();
+			this.SetDefaultResponse (ResponseType.Ok);
 
-			var buttons = GtkExtensions.DialogButtonsCancelOk ();
-			AddButton ((string) buttons[0], (Gtk.ResponseType) buttons[1]);
-			AddButton ((string) buttons[2], (Gtk.ResponseType) buttons[3]);
+			spinInLow = SpinButton.NewWithRange (0, 254, 1);
+			spinInHigh = SpinButton.NewWithRange (1, 255, 1);
+			spinInHigh.Value = 255;
 
-			spinInLow = new SpinButton (0, 254, 1);
-			spinInHigh = new SpinButton (1, 255, 1) { Value = 255 };
-
-			spinOutLow = new SpinButton (0, 252, 1);
-			spinOutHigh = new SpinButton (2, 255, 1) { Value = 255 };
-			spinOutGamma = new SpinButton (0, 100, 0.1) { Value = 1 };
+			spinOutLow = SpinButton.NewWithRange (0, 252, 1);
+			spinOutHigh = SpinButton.NewWithRange (2, 255, 1);
+			spinOutHigh.Value = 255;
+			spinOutGamma = SpinButton.NewWithRange (0, 100, 0.1);
+			spinOutGamma.Value = 1;
 
 			gradientInput = new ColorGradientWidget (2) { WidthRequest = 40 };
 			gradientOutput = new ColorGradientWidget (3) { WidthRequest = 40 };
@@ -555,54 +556,62 @@ namespace Pinta.Effects
 			histogramInput = new HistogramWidget () { WidthRequest = 130, FlipHorizontal = true };
 			histogramOutput = new HistogramWidget () { WidthRequest = 130 };
 
-			var hboxLayout = new HBox () { Spacing = spacing, BorderWidth = spacing };
+			var hboxLayout = new Box () { Spacing = spacing };
+			hboxLayout.SetOrientation (Orientation.Horizontal);
+			hboxLayout.SetAllMargins (spacing);
 
-			static VBox CreateLabelledWidget (Widget widget, string label)
+			static Box CreateLabelledWidget (Widget widget, string label)
 			{
-				var hbox = new HBox () { Spacing = spacing };
-				hbox.PackStart (new Label (label), false, false, 0);
-				hbox.PackStart (new HSeparator (), true, true, 0);
-
-				var vbox = new VBox () { Spacing = spacing };
-				vbox.PackStart (hbox, false, false, 0);
-				vbox.PackStart (widget, true, true, 0);
+				var vbox = new Box () { Spacing = spacing };
+				vbox.SetOrientation (Orientation.Vertical);
+				var label_widget = Label.New (label);
+				label_widget.Halign = Align.Start;
+				vbox.Append (label_widget);
+				widget.Vexpand = true;
+				widget.Valign = Align.Fill;
+				vbox.Append (widget);
 
 				return vbox;
 			}
 
-			hboxLayout.PackStart (CreateLabelledWidget (histogramInput, Translations.GetString ("Input Histogram")), false, false, 0);
+			hboxLayout.Append (CreateLabelledWidget (histogramInput, Translations.GetString ("Input Histogram")));
 
-			var vboxInput = new VBox () { Spacing = spacing };
-			vboxInput.PackStart (spinInHigh, false, false, 0);
-			vboxInput.PackStart (colorpanelInHigh, false, false, 0);
-			vboxInput.PackEnd (colorpanelInLow, false, false, 0);
-			vboxInput.PackEnd (spinInLow, false, false, 0);
+			var vboxInput = new Box () { Spacing = spacing };
+			vboxInput.SetOrientation (Orientation.Vertical);
+			vboxInput.Append (spinInHigh);
+			vboxInput.Append (colorpanelInHigh);
+			colorpanelInLow.Valign = Align.End;
+			colorpanelInLow.Vexpand = true;
+			vboxInput.Append (colorpanelInLow);
+			vboxInput.Append (spinInLow);
 
-			var hboxInput = new HBox () { Spacing = spacing };
-			hboxInput.PackStart (vboxInput, false, false, 0);
-			hboxInput.PackStart (gradientInput, false, false, 0);
+			var hboxInput = new Box () { Spacing = spacing };
+			hboxInput.SetOrientation (Orientation.Horizontal);
+			hboxInput.Append (vboxInput);
+			hboxInput.Append (gradientInput);
 
-			hboxLayout.PackStart (CreateLabelledWidget (hboxInput, Translations.GetString ("Input")), false, false, 0);
+			hboxLayout.Append (CreateLabelledWidget (hboxInput, Translations.GetString ("Input")));
 
-			var vboxOutput = new VBox () { Spacing = spacing };
-			vboxOutput.PackStart (spinOutHigh, false, false, 0);
-			vboxOutput.PackStart (colorpanelOutHigh, false, false, 0);
-			vboxOutput.PackStart (spinOutGamma, false, false, 0);
-			vboxOutput.PackStart (colorpanelOutMid, false, false, 0);
-			vboxOutput.PackStart (colorpanelOutLow, false, false, 0);
-			vboxOutput.PackStart (spinOutLow, false, false, 0);
+			var vboxOutput = new Box () { Spacing = spacing };
+			vboxOutput.SetOrientation (Orientation.Vertical);
+			vboxOutput.Append (spinOutHigh);
+			vboxOutput.Append (colorpanelOutHigh);
+			vboxOutput.Append (spinOutGamma);
+			vboxOutput.Append (colorpanelOutMid);
+			vboxOutput.Append (colorpanelOutLow);
+			vboxOutput.Append (spinOutLow);
 
-			var hboxOutput = new HBox () { Spacing = spacing };
-			hboxOutput.PackStart (gradientOutput, false, false, 0);
-			hboxOutput.PackStart (vboxOutput, false, false, 0);
+			var hboxOutput = new Box () { Spacing = spacing };
+			hboxOutput.SetOrientation (Orientation.Horizontal);
+			hboxOutput.Append (gradientOutput);
+			hboxOutput.Append (vboxOutput);
 
-			hboxLayout.PackStart (CreateLabelledWidget (hboxOutput, Translations.GetString ("Output")), false, false, 0);
+			hboxLayout.Append (CreateLabelledWidget (hboxOutput, Translations.GetString ("Output")));
 
-			hboxLayout.PackStart (CreateLabelledWidget (histogramOutput, Translations.GetString ("Output Histogram")), false, false, 0);
+			hboxLayout.Append (CreateLabelledWidget (histogramOutput, Translations.GetString ("Output Histogram")));
 
-			ContentArea.Add (hboxLayout);
-
-			ShowAll ();
+			var content_area = this.GetContentAreaBox ();
+			content_area.Append (hboxLayout);
 		}
 	}
 }

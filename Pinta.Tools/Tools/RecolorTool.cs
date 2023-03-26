@@ -44,7 +44,7 @@ namespace Pinta.Tools
 	{
 		private readonly IWorkspaceService workspace;
 
-		private Point last_point = point_empty;
+		private PointI last_point = point_empty;
 		private BitMask? stencil;
 
 		private const string TOLERANCE_SETTING = "recolor-tolerance";
@@ -58,19 +58,19 @@ namespace Pinta.Tools
 		public override string Icon => Pinta.Resources.Icons.ToolRecolor;
 		public override string StatusBarText => Translations.GetString ("Left click to replace the secondary color with the primary color. " +
 							  "Right click to reverse.");
-		public override Gdk.Cursor DefaultCursor => new Gdk.Cursor (Gdk.Display.Default, Resources.GetIcon ("Cursor.Recolor.png"), 9, 18);
+		public override Gdk.Cursor DefaultCursor => Gdk.Cursor.NewFromTexture (Resources.GetIcon ("Cursor.Recolor.png"), 9, 18, null);
 		public override Gdk.Key ShortcutKey => Gdk.Key.R;
-		protected float Tolerance => (float) (ToleranceSlider.Slider.Value / 100);
+		protected float Tolerance => (float) (ToleranceSlider.GetValue () / 100);
 		public override int Priority => 49;
 
-		protected override void OnBuildToolBar (Toolbar tb)
+		protected override void OnBuildToolBar (Box tb)
 		{
 			base.OnBuildToolBar (tb);
 
-			tb.AppendItem (Separator);
+			tb.Append (Separator);
 
-			tb.AppendItem (ToleranceLabel);
-			tb.AppendItem (ToleranceSlider);
+			tb.Append (ToleranceLabel);
+			tb.Append (ToleranceSlider);
 		}
 
 		protected override void OnMouseDown (Document document, ToolMouseEventArgs e)
@@ -105,7 +105,7 @@ namespace Pinta.Tools
 			var y = e.Point.Y;
 
 			if (last_point.Equals (point_empty))
-				last_point = new Point (x, y);
+				last_point = new PointI (x, y);
 
 			if (document.Workspace.PointInCanvas (e.PointDouble))
 				surface_modified = true;
@@ -113,23 +113,23 @@ namespace Pinta.Tools
 			var surf = document.Layers.CurrentUserLayer.Surface;
 			var tmp_layer = document.Layers.ToolLayer.Surface;
 
-			var roi = CairoExtensions.GetRectangleFromPoints (last_point, new Point (x, y), BrushWidth + 2);
+			var roi = CairoExtensions.GetRectangleFromPoints (last_point, new PointI (x, y), BrushWidth + 2);
 
 			roi = workspace.ClampToImageSize (roi);
 			var myTolerance = (int) (Tolerance * 256);
 
 			tmp_layer.Flush ();
 
-			var tmp_data = tmp_layer.GetData ();
+			var tmp_data = tmp_layer.GetPixelData ();
 			var tmp_width = tmp_layer.Width;
-			var surf_data = surf.GetReadOnlyData ();
+			var surf_data = surf.GetReadOnlyPixelData ();
 			var surf_width = surf.Width;
 
 			// The stencil lets us know if we've already checked this
 			// pixel, providing a nice perf boost
 			// Maybe this should be changed to a BitVector2DSurfaceAdapter?
-			for (var i = roi.X; i <= roi.GetRight (); i++)
-				for (var j = roi.Y; j <= roi.GetBottom (); j++) {
+			for (var i = roi.X; i <= roi.Right; i++)
+				for (var j = roi.Y; j <= roi.Bottom; j++) {
 					if (stencil[i, j])
 						continue;
 
@@ -142,24 +142,23 @@ namespace Pinta.Tools
 
 			tmp_layer.MarkDirty ();
 
-			using (var g = document.CreateClippedContext ()) {
-				g.Antialias = UseAntialiasing ? Antialias.Subpixel : Antialias.None;
+			var g = document.CreateClippedContext ();
+			g.Antialias = UseAntialiasing ? Antialias.Subpixel : Antialias.None;
 
-				g.MoveTo (last_point.X, last_point.Y);
-				g.LineTo (x, y);
+			g.MoveTo (last_point.X, last_point.Y);
+			g.LineTo (x, y);
 
-				g.LineWidth = BrushWidth;
-				g.LineJoin = LineJoin.Round;
-				g.LineCap = LineCap.Round;
+			g.LineWidth = BrushWidth;
+			g.LineJoin = LineJoin.Round;
+			g.LineCap = LineCap.Round;
 
-				g.SetSource (tmp_layer);
+			g.SetSourceSurface (tmp_layer, 0, 0);
 
-				g.Stroke ();
-			}
+			g.Stroke ();
 
 			document.Workspace.Invalidate (roi);
 
-			last_point = new Point (x, y);
+			last_point = new PointI (x, y);
 		}
 
 		protected override void OnSaveSettings (ISettingsService settings)
@@ -167,7 +166,7 @@ namespace Pinta.Tools
 			base.OnSaveSettings (settings);
 
 			if (tolerance_slider is not null)
-				settings.PutSetting (TOLERANCE_SETTING, (int) tolerance_slider.Slider.Value);
+				settings.PutSetting (TOLERANCE_SETTING, (int) tolerance_slider.GetValue ());
 		}
 
 		#region Private PDN Methods
@@ -194,12 +193,12 @@ namespace Pinta.Tools
 		}
 		#endregion
 
-		private ToolBarLabel? tolerance_label;
-		private ToolBarSlider? tolerance_slider;
-		private SeparatorToolItem? separator;
+		private Label? tolerance_label;
+		private Scale? tolerance_slider;
+		private Separator? separator;
 
-		private ToolBarLabel ToleranceLabel => tolerance_label ??= new ToolBarLabel (string.Format ("  {0}: ", Translations.GetString ("Tolerance")));
-		private ToolBarSlider ToleranceSlider => tolerance_slider ??= new ToolBarSlider (0, 100, 1, Settings.GetSetting (TOLERANCE_SETTING, 50));
-		private SeparatorToolItem Separator => separator ??= new SeparatorToolItem ();
+		private Label ToleranceLabel => tolerance_label ??= Label.New (string.Format ("  {0}: ", Translations.GetString ("Tolerance")));
+		private Scale ToleranceSlider => tolerance_slider ??= GtkExtensions.CreateToolBarSlider (0, 100, 1, Settings.GetSetting (TOLERANCE_SETTING, 50));
+		private Separator Separator => separator ??= GtkExtensions.CreateToolBarSeparator ();
 	}
 }

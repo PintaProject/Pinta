@@ -33,6 +33,8 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Reflection;
 using System.Text;
+using Gtk;
+using Pinta.Core;
 
 namespace Pinta.Gui.Widgets
 {
@@ -42,39 +44,45 @@ namespace Pinta.Gui.Widgets
 
 		const uint event_delay_millis = 100;
 		uint event_delay_timeout_id;
-		GLib.TimeoutHandler? timeout_func;
+
+		private delegate bool TimeoutHandler ();
+		TimeoutHandler? timeout_func;
 
 		/// Since this dialog is used by add-ins, the IAddinLocalizer allows for translations to be
 		/// fetched from the appropriate place.
 		/// </param>
-		public SimpleEffectDialog (string title, Gdk.Pixbuf icon, object effectData, IAddinLocalizer localizer)
-			: base (title, Core.PintaCore.Chrome.MainWindow, Gtk.DialogFlags.Modal, Core.GtkExtensions.DialogButtonsCancelOk ())
+		public SimpleEffectDialog (string title, string icon_name, object effectData, IAddinLocalizer localizer)
 		{
-			Icon = icon;
+			Title = title;
+			TransientFor = PintaCore.Chrome.MainWindow;
+			Modal = true;
+			this.AddCancelOkButtons ();
+			this.SetDefaultResponse (ResponseType.Ok);
+
+			IconName = icon_name;
 			EffectData = effectData;
 
-			BorderWidth = 6;
-			ContentArea.Spacing = 12;
+			this.GetContentAreaBox ().Spacing = 12;
+			this.GetContentAreaBox ().SetAllMargins (6);
 			WidthRequest = 400;
 			Resizable = false;
-			DefaultResponse = Gtk.ResponseType.Ok;
 
 			BuildDialog (localizer);
+
+			OnClose += (_, _) => HandleClose ();
 		}
 
 		public object EffectData { get; private set; }
 
 		public event PropertyChangedEventHandler? EffectDataChanged;
 
-		protected override void Dispose (bool disposing)
+		private void HandleClose ()
 		{
 			// If there is a timeout that hasn't been invoked yet, run it before closing the dialog.
-			if (disposing && event_delay_timeout_id != 0) {
+			if (event_delay_timeout_id != 0) {
 				GLib.Source.Remove (event_delay_timeout_id);
 				timeout_func?.Invoke ();
 			}
-
-			base.Dispose (disposing);
 		}
 
 		#region EffectData Parser
@@ -125,9 +133,9 @@ namespace Pinta.Gui.Widgets
 					AddWidget (CreateComboBox (localizer.GetString (caption), EffectData, mi, attrs));
 				else if (mType == typeof (bool))
 					AddWidget (CreateCheckBox (localizer.GetString (caption), EffectData, mi, attrs));
-				else if (mType == typeof (Gdk.Point))
+				else if (mType == typeof (PointI))
 					AddWidget (CreatePointPicker (localizer.GetString (caption), EffectData, mi, attrs));
-				else if (mType == typeof (Cairo.PointD))
+				else if (mType == typeof (PointD))
 					AddWidget (CreateOffsetPicker (localizer.GetString (caption), EffectData, mi, attrs));
 				else if (mType.IsEnum)
 					AddWidget (CreateEnumComboBox (localizer.GetString (caption), EffectData, mi, attrs));
@@ -139,8 +147,7 @@ namespace Pinta.Gui.Widgets
 
 		private void AddWidget (Gtk.Widget widget)
 		{
-			widget.Show ();
-			ContentArea.Add (widget);
+			this.GetContentAreaBox ().Append (widget);
 		}
 		#endregion
 
@@ -173,8 +180,6 @@ namespace Pinta.Gui.Widgets
 				Label = caption
 			};
 
-			widget.AddEvents ((int) Gdk.EventMask.ButtonPressMask);
-
 			if (GetValue (member, o) is object obj)
 				widget.Active = ((IList) member_names).IndexOf (obj.ToString ());
 
@@ -203,8 +208,6 @@ namespace Pinta.Gui.Widgets
 			var widget = new ComboBoxWidget (entries.ToArray ()) {
 				Label = caption
 			};
-
-			widget.AddEvents ((int) Gdk.EventMask.ButtonPressMask);
 
 			if (GetValue (member, o) is string s)
 				widget.Active = entries.IndexOf (s);
@@ -303,7 +306,7 @@ namespace Pinta.Gui.Widgets
 			if (GetValue (member, o) is bool b)
 				widget.Active = b;
 
-			widget.Toggled += delegate (object? sender, EventArgs e) {
+			widget.OnToggled += (_, _) => {
 				SetValue (member, o, widget.Active);
 			};
 
@@ -316,7 +319,7 @@ namespace Pinta.Gui.Widgets
 				Label = caption
 			};
 
-			if (GetValue (member, o) is Cairo.PointD p)
+			if (GetValue (member, o) is PointD p)
 				widget.DefaultOffset = p;
 
 			widget.PointPicked += delegate (object? sender, EventArgs e) {
@@ -332,7 +335,7 @@ namespace Pinta.Gui.Widgets
 				Label = caption
 			};
 
-			if (GetValue (member, o) is Gdk.Point p)
+			if (GetValue (member, o) is PointI p)
 				widget.DefaultPoint = p;
 
 			widget.PointPicked += delegate (object? sender, EventArgs e) {
@@ -363,9 +366,9 @@ namespace Pinta.Gui.Widgets
 
 		private Gtk.Label CreateHintLabel (string hint)
 		{
-			var label = new Gtk.Label (hint) {
-				LineWrap = true
-			};
+			var label = Gtk.Label.New (hint);
+			label.Wrap = true;
+			label.Halign = Align.Start;
 
 			return label;
 		}
@@ -374,7 +377,7 @@ namespace Pinta.Gui.Widgets
 		{
 			var widget = new ReseedButtonWidget ();
 
-			widget.Clicked += delegate (object? sender, EventArgs e) {
+			widget.Clicked += (_, _) => {
 				SetValue (member, o, random.Next ());
 			};
 
@@ -454,7 +457,7 @@ namespace Pinta.Gui.Widgets
 			return null;
 		}
 
-		private void DelayedUpdate (GLib.TimeoutHandler handler)
+		private void DelayedUpdate (TimeoutHandler handler)
 		{
 			if (event_delay_timeout_id != 0) {
 				GLib.Source.Remove (event_delay_timeout_id);
@@ -463,7 +466,7 @@ namespace Pinta.Gui.Widgets
 			}
 
 			timeout_func = handler;
-			event_delay_timeout_id = GLib.Timeout.Add (event_delay_millis, () => {
+			event_delay_timeout_id = GLib.Functions.TimeoutAddFull (0, event_delay_millis, (_) => {
 				event_delay_timeout_id = 0;
 				timeout_func.Invoke ();
 				timeout_func = null;

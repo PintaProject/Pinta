@@ -43,32 +43,32 @@ namespace Pinta.Tools
 {
 	public abstract class FloodTool : BaseTool
 	{
-		protected ToolBarLabel? mode_label;
+		protected Label? mode_label;
 		protected ToolBarDropDownButton? mode_button;
-		protected SeparatorToolItem? mode_sep;
-		protected ToolBarLabel? tolerance_label;
-		protected ToolBarSlider? tolerance_slider;
+		protected Separator? mode_sep;
+		protected Label? tolerance_label;
+		protected Scale? tolerance_slider;
 
 		public FloodTool (IServiceManager services) : base (services)
 		{
 		}
 
 		protected bool IsContinguousMode => ModeDropDown.SelectedItem.GetTagOrDefault (true);
-		protected float Tolerance => (float) (ToleranceSlider.Slider.Value / 100);
+		protected float Tolerance => (float) (ToleranceSlider.GetValue () / 100);
 		protected virtual bool CalculatePolygonSet => true;
 		protected bool LimitToSelection { get; set; } = true;
 		private string FILL_MODE_SETTING => $"{GetType ().Name.ToLowerInvariant ()}-fill-mode";
 		private string FILL_TOLERANCE_SETTING => $"{GetType ().Name.ToLowerInvariant ()}-fill-tolerance";
 
-		protected override void OnBuildToolBar (Gtk.Toolbar tb)
+		protected override void OnBuildToolBar (Gtk.Box tb)
 		{
 			base.OnBuildToolBar (tb);
 
-			tb.AppendItem (ModeLabel);
-			tb.AppendItem (ModeDropDown);
-			tb.AppendItem (Separator);
-			tb.AppendItem (ToleranceLabel);
-			tb.AppendItem (ToleranceSlider);
+			tb.Append (ModeLabel);
+			tb.Append (ModeDropDown);
+			tb.Append (Separator);
+			tb.Append (ToleranceLabel);
+			tb.Append (ToleranceSlider);
 		}
 
 		protected override void OnMouseDown (Document document, ToolMouseEventArgs e)
@@ -83,30 +83,29 @@ namespace Pinta.Tools
 
 			base.OnMouseDown (document, e);
 
-			using (var currentRegion = new Cairo.Region (document.GetSelectedBounds (true).ToCairoRectangleInt ())) {
-				// See if the mouse click is valid
-				if (!currentRegion.ContainsPoint (pos.X, pos.Y) && LimitToSelection)
-					return;
+			var currentRegion = CairoExtensions.CreateRegion (document.GetSelectedBounds (true));
+			// See if the mouse click is valid
+			if (!currentRegion.ContainsPoint (pos.X, pos.Y) && LimitToSelection)
+				return;
 
-				var surface = document.Layers.CurrentUserLayer.Surface;
-				var stencilBuffer = new BitMask (surface.Width, surface.Height);
-				var tol = (int) (Tolerance * Tolerance * 256);
+			var surface = document.Layers.CurrentUserLayer.Surface;
+			var stencilBuffer = new BitMask (surface.Width, surface.Height);
+			var tol = (int) (Tolerance * Tolerance * 256);
 
-				Rectangle boundingBox;
+			RectangleD boundingBox;
 
-				if (IsContinguousMode)
-					CairoExtensions.FillStencilFromPoint (surface, stencilBuffer, pos, tol, out boundingBox, currentRegion, LimitToSelection);
-				else
-					CairoExtensions.FillStencilByColor (surface, stencilBuffer, surface.GetColorBgra (pos.X, pos.Y), tol, out boundingBox, currentRegion, LimitToSelection);
+			if (IsContinguousMode)
+				CairoExtensions.FillStencilFromPoint (surface, stencilBuffer, pos, tol, out boundingBox, currentRegion, LimitToSelection);
+			else
+				CairoExtensions.FillStencilByColor (surface, stencilBuffer, surface.GetColorBgra (pos.X, pos.Y), tol, out boundingBox, currentRegion, LimitToSelection);
 
-				OnFillRegionComputed (document, stencilBuffer);
+			OnFillRegionComputed (document, stencilBuffer);
 
-				// If a derived tool is only going to use the stencil,
-				// don't waste time building the polygon set
-				if (CalculatePolygonSet) {
-					var polygonSet = stencilBuffer.CreatePolygonSet (boundingBox, 0, 0);
-					OnFillRegionComputed (document, polygonSet);
-				}
+			// If a derived tool is only going to use the stencil,
+			// don't waste time building the polygon set
+			if (CalculatePolygonSet) {
+				var polygonSet = stencilBuffer.CreatePolygonSet (boundingBox, 0, 0);
+				OnFillRegionComputed (document, polygonSet);
 			}
 		}
 
@@ -117,16 +116,16 @@ namespace Pinta.Tools
 			if (mode_button is not null)
 				settings.PutSetting (FILL_MODE_SETTING, mode_button.SelectedIndex);
 			if (tolerance_slider is not null)
-				settings.PutSetting (FILL_TOLERANCE_SETTING, (int) tolerance_slider.Slider.Value);
+				settings.PutSetting (FILL_TOLERANCE_SETTING, (int) tolerance_slider.GetValue ());
 		}
 
-		protected virtual void OnFillRegionComputed (Document document, Point[][] polygonSet) { }
+		protected virtual void OnFillRegionComputed (Document document, PointI[][] polygonSet) { }
 		protected virtual void OnFillRegionComputed (Document document, BitMask stencil) { }
 
-		protected ToolBarLabel ModeLabel => mode_label ??= new ToolBarLabel (string.Format (" {0}: ", Translations.GetString ("Flood Mode")));
-		protected ToolBarLabel ToleranceLabel => tolerance_label ??= new ToolBarLabel (string.Format (" {0}: ", Translations.GetString ("Tolerance")));
-		protected ToolBarSlider ToleranceSlider => tolerance_slider ??= new ToolBarSlider (0, 100, 1, Settings.GetSetting (FILL_TOLERANCE_SETTING, 0));
-		protected SeparatorToolItem Separator => mode_sep ??= new SeparatorToolItem ();
+		protected Label ModeLabel => mode_label ??= Label.New (string.Format (" {0}: ", Translations.GetString ("Flood Mode")));
+		protected Label ToleranceLabel => tolerance_label ??= Label.New (string.Format (" {0}: ", Translations.GetString ("Tolerance")));
+		protected Scale ToleranceSlider => tolerance_slider ??= GtkExtensions.CreateToolBarSlider (0, 100, 1, Settings.GetSetting (FILL_TOLERANCE_SETTING, 0));
+		protected Separator Separator => mode_sep ??= GtkExtensions.CreateToolBarSeparator ();
 
 		protected ToolBarDropDownButton ModeDropDown {
 			get {

@@ -32,8 +32,6 @@ namespace Pinta.Actions
 {
 	class CloseDocumentAction : IActionHandler
 	{
-		private const string markup = "<span weight=\"bold\" size=\"larger\">{0}</span>\n\n{1}";
-
 		#region IActionHandler Members
 		public void Initialize ()
 		{
@@ -57,44 +55,38 @@ namespace Pinta.Actions
 				return;
 			}
 
-			var primary = Translations.GetString ("Save changes to image \"{0}\" before closing?");
-			var secondary = Translations.GetString ("If you don't save, all changes will be permanently lost.");
-			var message = string.Format (markup, primary, secondary);
+			var heading = Translations.GetString ("Save changes to image \"{0}\" before closing?",
+				PintaCore.Workspace.ActiveDocument.DisplayName);
+			var body = Translations.GetString ("If you don't save, all changes will be permanently lost.");
 
-			using var md = new MessageDialog (PintaCore.Chrome.MainWindow, DialogFlags.Modal,
-						    MessageType.Question, ButtonsType.None, true,
-						    message, PintaCore.Workspace.ActiveDocument.DisplayName);
+			var dialog = Adw.MessageDialog.New (PintaCore.Chrome.MainWindow, heading, body);
 
-			// Use the standard button order for each OS.
-			Widget closeButton;
-			if (PintaCore.System.OperatingSystem == OS.Windows) {
-				md.AddButton (Stock.Save, ResponseType.Yes);
-				closeButton = md.AddButton (Translations.GetString ("Close _without Saving"), ResponseType.No);
-				md.AddButton (Stock.Cancel, ResponseType.Cancel);
-			} else {
-				closeButton = md.AddButton (Translations.GetString ("Close _without Saving"), ResponseType.No);
-				md.AddButton (Stock.Cancel, ResponseType.Cancel);
-				md.AddButton (Stock.Save, ResponseType.Yes);
-			}
+			const string cancel_response = "cancel";
+			const string discard_response = "discard";
+			const string save_response = "save";
+			dialog.AddResponse (cancel_response, Translations.GetString ("_Cancel"));
+			dialog.AddResponse (discard_response, Translations.GetString ("_Discard"));
+			dialog.AddResponse (save_response, Translations.GetString ("_Save"));
 
-			// Style the close button as being a destructive action.
-			// (https://developer.gnome.org/hig/stable/buttons.html.en)
-			closeButton.StyleContext.AddClass ("destructive-action");
+			// Configure the styling for the save / discard buttons.
+			dialog.SetResponseAppearance (discard_response, Adw.ResponseAppearance.Destructive);
+			dialog.SetResponseAppearance (save_response, Adw.ResponseAppearance.Suggested);
 
-			md.DefaultResponse = ResponseType.Yes;
+			dialog.CloseResponse = cancel_response;
+			dialog.DefaultResponse = save_response;
 
-			ResponseType response = (ResponseType) md.Run ();
-
-			if (response == ResponseType.Yes) {
+			string response = dialog.RunBlocking ();
+			if (response == save_response) {
 				PintaCore.Workspace.ActiveDocument.Save (false);
 
 				// If the image is still dirty, the user
 				// must have cancelled the Save dialog
 				if (!PintaCore.Workspace.ActiveDocument.IsDirty)
 					PintaCore.Workspace.CloseActiveDocument ();
-			} else if (response == ResponseType.No) {
+			} else if (response == discard_response) {
 				PintaCore.Workspace.CloseActiveDocument ();
 			}
+
 		}
 	}
 }

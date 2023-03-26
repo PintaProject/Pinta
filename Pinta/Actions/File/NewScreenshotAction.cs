@@ -26,6 +26,7 @@
 
 using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using Gdk;
 using Pinta.Core;
 using ScreenshotPortal.DBus;
@@ -47,16 +48,20 @@ namespace Pinta.Actions
 		}
 		#endregion
 
-		async private void Activated (object sender, EventArgs e)
+		async private void Activated (object sender, EventArgs args)
 		{
-			// Use XDG Desktop Portal Screenshot API's to allow capturing screenshots on Wayland environments
-			// Check for presence of the $WAYLAND_DISPLAY variable to indicate Wayland is being used.
-			// Ideally GTK would give us this information instead, but the necessary functions aren't wrapped.
+			// GTK4 removed gdk_pixbuf_get_from_window(), so we need to use OS-specific APis to take a screenshot.
+			// TODO-GTK4 - implement screenshots for Windows
+
+			// On Linux, use the XDG Desktop Portal Screenshot API.
 			if (SystemManager.GetOperatingSystem () == OS.X11) {
 				try {
 					// It's important that the portal interactions are synchronised with the main thread
 					// Otherwise the use of the portals will cause massive instability and crash Pinta
-					var systemConnection = new Connection (new ClientConnectionOptions (Address.Session) { AutoConnect = true, SynchronizationContext = GLib.GLibSynchronizationContext.Current });
+					var systemConnection = new Connection (new ClientConnectionOptions (Address.Session) {
+						AutoConnect = true,
+						SynchronizationContext = GLibExtensions.GLibSynchronizationContext.Current
+					});
 
 					var portal = systemConnection.CreateProxy<IScreenshot> (
 						"org.freedesktop.portal.Desktop",
@@ -78,7 +83,8 @@ namespace Pinta.Actions
 							// However the response 1 can occur when the user presses "Cancel" on the second stage of the UI
 							// As a result, it's not reliable to throw error messages when the retval == 1
 							if (reply.response == 0) {
-								if (PintaCore.Workspace.OpenFile (GLib.FileFactory.NewForUri (reply.results["uri"].ToString ()))) {
+								string? uri = reply.results["uri"].ToString ();
+								if (uri is not null && PintaCore.Workspace.OpenFile (Gio.FileHelper.NewForUri (uri))) {
 									// Mark as not having a file, so that the user doesn't unintentionally
 									// save using the temp file.
 									PintaCore.Workspace.ActiveDocument.ClearFileReference ();
@@ -86,66 +92,37 @@ namespace Pinta.Actions
 							}
 						}
 					);
-					return; // Prevent falling back to default screenshot behaviour
 
-				} catch (Tmds.DBus.DBusException) {
-					if (Environment.GetEnvironmentVariable ("WAYLAND_DISPLAY") != null) {
-						PintaCore.Chrome.ShowErrorDialog (PintaCore.Chrome.MainWindow,
+				} catch (Tmds.DBus.DBusException e) {
+					PintaCore.Chrome.ShowErrorDialog (PintaCore.Chrome.MainWindow,
 						Translations.GetString ("Failed to take screenshot"),
-						Translations.GetString ("Failed to access XDG Desktop Portals"));
-						return; // Don't bother trying to use legacy screenshot logic on Wayland, it won't work
-					}
+						Translations.GetString ("Failed to access XDG Desktop Portals"),
+						e.ToString ());
 				}
+
+				return;
+
+			} else if (SystemManager.GetOperatingSystem () == OS.Mac) {
+				try {
+					// Launch the screencapture utility in interactive mode and save to the clipboard.
+					// Note for testing: this requires screen recording permissions, so running from the generated .app bundle is required.
+					const string screencapture_path = "/usr/sbin/screencapture";
+					const string screencapture_args = "-iUc";
+
+					var process = Process.Start (screencapture_path, screencapture_args);
+					process.WaitForExit ();
+
+					PintaCore.Actions.Edit.PasteIntoNewImage.Activate ();
+				} catch (Exception e) {
+					PintaCore.Chrome.ShowErrorDialog (PintaCore.Chrome.MainWindow,
+						Translations.GetString ("Failed to take screenshot"), string.Empty, e.ToString ());
+				}
+
+				return;
 			}
 
-			// Pinta's standard screenshotting logic for non-Wayland systems
-
-			int delay = PintaCore.Settings.GetSetting<int> ("screenshot-delay", 0);
-
-			using var dialog = new SpinButtonEntryDialog (Translations.GetString ("Take Screenshot"),
-					PintaCore.Chrome.MainWindow, Translations.GetString ("Delay before taking a screenshot (seconds):"), 0, 300, delay);
-
-			if (dialog.Run () == (int) Gtk.ResponseType.Ok) {
-				delay = dialog.GetValue ();
-
-				PintaCore.Settings.PutSetting ("screenshot-delay", delay);
-
-				GLib.Timeout.Add ((uint) delay * 1000, () => {
-					Screen screen = Screen.Default;
-					var root_window = screen.RootWindow;
-					int width = root_window.Width;
-					int height = root_window.Height;
-
-					if (width == 0 || height == 0) {
-						// Something went wrong...
-						// This might happen when running under wayland, see bug 1923241
-						PintaCore.Chrome.ShowErrorDialog (PintaCore.Chrome.MainWindow,
-							Translations.GetString ("Failed to take screenshot"),
-							Translations.GetString ("Could not obtain the size of display '{0}'", screen.Display.Name));
-						return false;
-					}
-
-					Document doc = PintaCore.Workspace.NewDocument (new Size (width, height), new Cairo.Color (1, 1, 1));
-
-					using (var pb = new Pixbuf (root_window, 0, 0, width, height)) {
-						using (Cairo.Context g = new Cairo.Context (doc.Layers.UserLayers[0].Surface)) {
-							CairoHelper.SetSourcePixbuf (g, pb, 0, 0);
-							g.Paint ();
-						}
-					}
-
-					doc.IsDirty = true;
-
-					if (!PintaCore.Chrome.MainWindow.IsActive) {
-						PintaCore.Chrome.MainWindow.UrgencyHint = true;
-
-						// Don't flash forever
-						GLib.Timeout.Add (3 * 1000, () => PintaCore.Chrome.MainWindow.UrgencyHint = false);
-					}
-
-					return false;
-				});
-			}
+			PintaCore.Chrome.ShowMessageDialog (PintaCore.Chrome.MainWindow,
+				Translations.GetString ("Failed to take screenshot"), string.Empty);
 		}
 	}
 }

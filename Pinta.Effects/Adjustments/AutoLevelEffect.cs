@@ -18,7 +18,7 @@ namespace Pinta.Effects
 		UnaryPixelOps.Level? op;
 
 		public override string Icon {
-			get { return "Menu.Adjustments.AutoLevel.png"; }
+			get { return Pinta.Resources.Icons.AdjustmentsAutoLevel; }
 		}
 
 		public override string Name {
@@ -29,11 +29,11 @@ namespace Pinta.Effects
 			get { return "L"; }
 		}
 
-		public override void Render (ImageSurface src, ImageSurface dest, Gdk.Rectangle[] rois)
+		public override void Render (ImageSurface src, ImageSurface dest, RectangleI[] rois)
 		{
 			if (op == null) {
 				HistogramRgb histogram = new HistogramRgb ();
-				histogram.UpdateHistogram (src, new Gdk.Rectangle (0, 0, src.Width, src.Height));
+				histogram.UpdateHistogram (src, new RectangleI (0, 0, src.Width, src.Height));
 
 				op = histogram.MakeLevelsAuto ();
 			}

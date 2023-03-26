@@ -30,60 +30,71 @@ using Pinta.Core;
 
 namespace Pinta.Docking
 {
-	public class DockPanel : HBox
+	public class DockPanel : Box
 	{
 		private class DockPanelItem
 		{
 			public DockPanelItem (DockItem item)
 			{
 				Item = item;
-				Pane = new Paned (Orientation.Vertical);
-				ReopenButton = new Button (new Label (item.Label) { Angle = 270 });
+				Pane = Paned.New (Orientation.Vertical);
 
-				popover = new Popover (ReopenButton);
-				popover.Position = PositionType.Left;
+				var icon = Image.NewFromIconName (item.IconName);
+				ReopenButton = ToggleButton.New ();
+				ReopenButton.TooltipText = item.Label;
+				ReopenButton.SetChild (icon);
 
-				ReopenButton.Clicked += (o, args) => {
-					popover.ShowAll ();
-					popover.Popup ();
+				// Autohide is set to false since it seems to cause the popover to close even when clicking inside it, on macOS at least
+				// Instead, the reopen button is a toggle button to close the popover.
+				popover = new Popover () {
+					Autohide = false,
+					Position = PositionType.Left
+				};
+				popover.SetParent (ReopenButton);
+
+				ReopenButton.OnToggled += (o, args) => {
+					if (ReopenButton.Active)
+						popover.Popup ();
+					else
+						popover.Popdown ();
 				};
 			}
 
 			public DockItem Item { get; private set; }
 			public Paned Pane { get; private set; }
-			public Button ReopenButton { get; private set; }
+			public ToggleButton ReopenButton { get; private set; }
 			private Popover popover;
 
 			public bool IsMinimized => popover.Child != null;
 
-			public void Maximize (Box dock_bar)
+			public void UpdateOnMaximize (Box dock_bar)
 			{
-				dock_bar.Remove (ReopenButton);
-				popover.Hide ();
-				if (popover.Child != null)
-					popover.Remove (Item);
+				// Remove the reopen button from the dock bar.
+				// Note that it might not already be in the dock bar, e.g. on startup.
+				dock_bar.RemoveIfChild (ReopenButton);
 
-				Pane.Pack1 (Item, resize: false, shrink: false);
+				popover.Popdown ();
+				popover.Child = null;
 
-				Item.Maximize ();
+				Pane.StartChild = Item;
+				Pane.ResizeStartChild = false;
+				Pane.ShrinkStartChild = false;
 			}
 
-			public void Minimize (Box dock_bar)
+			public void UpdateOnMinimize (Box dock_bar)
 			{
-				Pane.Remove (Item);
-				popover.Add (Item);
+				Pane.StartChild = null;
+				popover.Child = Item;
 
-				dock_bar.PackStart (ReopenButton, false, false, 0);
-				ReopenButton.ShowAll ();
-
-				Item.Minimize ();
+				dock_bar.Append (ReopenButton);
+				ReopenButton.Active = false;
 			}
 		}
 
 		/// <summary>
 		/// Contains the buttons to re-open any minimized dock items.
 		/// </summary>
-		private VBox dock_bar = new VBox ();
+		private Box dock_bar = Box.New (Orientation.Vertical, 0);
 
 		/// <summary>
 		/// List of the items in this panel, which may be minimized or maximized.
@@ -92,7 +103,8 @@ namespace Pinta.Docking
 
 		public DockPanel ()
 		{
-			PackEnd (dock_bar, false, false, 0);
+			SetOrientation (Orientation.Horizontal);
+			Append (dock_bar);
 		}
 
 		public void AddItem (DockItem item)
@@ -100,19 +112,23 @@ namespace Pinta.Docking
 			var panel_item = new DockPanelItem (item);
 
 			// Connect to the previous pane in the list.
-			if (items.Count > 0)
-				items.Last ().Pane.Add2 (panel_item.Pane);
-			else
-				PackStart (panel_item.Pane, true, true, 0);
+			if (items.Count > 0) {
+				var pane = items.Last ().Pane;
+				pane.EndChild = panel_item.Pane;
+			} else {
+				panel_item.Pane.Hexpand = true;
+				panel_item.Pane.Halign = Align.Fill;
+				Prepend (panel_item.Pane);
+			}
 
 			items.Add (panel_item);
-			panel_item.Maximize (dock_bar);
+			panel_item.UpdateOnMaximize (dock_bar);
 
 			item.MinimizeClicked += (o, args) => {
-				panel_item.Minimize (dock_bar);
+				panel_item.UpdateOnMinimize (dock_bar);
 			};
 			item.MaximizeClicked += (o, args) => {
-				panel_item.Maximize (dock_bar);
+				panel_item.UpdateOnMaximize (dock_bar);
 			};
 		}
 
@@ -130,7 +146,7 @@ namespace Pinta.Docking
 		{
 			foreach (var panel_item in items) {
 				if (settings.GetSetting<bool> (MinimizeKey (panel_item), false)) {
-					panel_item.Minimize (dock_bar);
+					panel_item.Item.Minimize ();
 				}
 
 #if false

@@ -16,7 +16,7 @@ namespace Pinta.Effects
 	public class LevelsEffect : BaseEffect
 	{
 		public override string Icon {
-			get { return "Menu.Adjustments.Levels.png"; }
+			get { return Pinta.Resources.Icons.AdjustmentsLevels; }
 		}
 
 		public override string Name {
@@ -42,22 +42,24 @@ namespace Pinta.Effects
 			EffectData = new LevelsData ();
 		}
 
-		public override bool LaunchConfiguration ()
+		public override void LaunchConfiguration ()
 		{
-			using (var dialog = new LevelsDialog (Data)) {
-				dialog.Title = Name;
-				dialog.Icon = PintaCore.Resources.GetIcon (Icon);
+			var dialog = new LevelsDialog (Data) {
+				Title = Name,
+				IconName = Icon,
+			};
 
-				var response = Gtk.ResponseType.None;
-				while (response == Gtk.ResponseType.None) {
-					response = (Gtk.ResponseType) dialog.Run ();
+			dialog.OnResponse += (_, args) => {
+				if (args.ResponseId != (int) Gtk.ResponseType.None) {
+					OnConfigDialogResponse (args.ResponseId == (int) Gtk.ResponseType.Ok);
+					dialog.Destroy ();
 				}
+			};
 
-				return response == Gtk.ResponseType.Ok;
-			}
+			dialog.Present ();
 		}
 
-		public override void Render (ImageSurface src, ImageSurface dest, Gdk.Rectangle[] rois)
+		public override void Render (ImageSurface src, ImageSurface dest, Core.RectangleI[] rois)
 		{
 			Data.Levels.Apply (dest, src, rois);
 		}

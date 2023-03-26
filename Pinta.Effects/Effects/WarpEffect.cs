@@ -44,19 +44,19 @@ namespace Pinta.Effects
 			EffectData = new WarpData ();
 		}
 
-		public override bool LaunchConfiguration ()
+		public override void LaunchConfiguration ()
 		{
-			return EffectHelper.LaunchSimpleEffectDialog (this);
+			EffectHelper.LaunchSimpleEffectDialog (this);
 		}
 
-		private double defaultRadius;
-		private double defaultRadius2;
+		private double defaultRadius = 0;
+		private double defaultRadius2 = 0;
 
 		protected double DefaultRadius { get { return this.defaultRadius; } }
 		protected double DefaultRadius2 { get { return this.defaultRadius2; } }
 
 		#region Algorithm Code Ported From PDN
-		public override void Render (ImageSurface src, ImageSurface dst, Gdk.Rectangle[] rois)
+		public override void Render (ImageSurface src, ImageSurface dst, Core.RectangleI[] rois)
 		{
 			var selection = PintaCore.LivePreview.RenderBounds;
 			this.defaultRadius = Math.Min (selection.Width, selection.Height) * 0.5;
@@ -70,25 +70,25 @@ namespace Pinta.Effects
 			ColorBgra colTransparent = ColorBgra.Transparent;
 
 			int aaSampleCount = Data.Quality * Data.Quality;
-			Span<PointD> aaPoints = stackalloc Cairo.PointD[aaSampleCount];
+			Span<PointD> aaPoints = stackalloc PointD[aaSampleCount];
 			Utility.GetRgssOffsets (aaPoints, aaSampleCount, Data.Quality);
 			Span<ColorBgra> samples = stackalloc ColorBgra[aaSampleCount];
 
-			var dst_data = dst.GetData ();
+			var dst_data = dst.GetPixelData ();
 			int dst_width = dst.Width;
-			var src_data = src.GetReadOnlyData ();
+			var src_data = src.GetReadOnlyPixelData ();
 			int src_width = src.Width;
 
 			TransformData td;
 
-			foreach (Gdk.Rectangle rect in rois) {
+			foreach (Core.RectangleI rect in rois) {
 
-				for (int y = rect.Top; y <= rect.GetBottom (); y++) {
+				for (int y = rect.Top; y <= rect.Bottom; y++) {
 					var dst_row = dst_data.Slice (y * dst_width, dst_width);
 
 					double relativeY = y - y_center_offset;
 
-					for (int x = rect.Left; x <= rect.GetRight (); x++) {
+					for (int x = rect.Left; x <= rect.Right; x++) {
 						double relativeX = x - x_center_offset;
 
 						int sampleCount = 0;
@@ -193,7 +193,7 @@ namespace Pinta.Effects
 			public int Quality = 2;
 
 			[Caption ("Center Offset")]
-			public Cairo.PointD CenterOffset;
+			public Core.PointD CenterOffset;
 
 			public WarpEdgeBehavior EdgeBehavior = WarpEdgeBehavior.Wrap;
 		}
