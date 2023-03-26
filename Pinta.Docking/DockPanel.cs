@@ -41,31 +41,39 @@ namespace Pinta.Docking
 
 				var label = Label.New (item.Label);
 				// TODO-GTK4 - figure out how to set angle to 270 degrees for vertical text
-				ReopenButton = Button.New ();
+				ReopenButton = ToggleButton.New ();
 				ReopenButton.SetChild (label);
 
-				popover = new Popover () { Child = ReopenButton };
-				popover.Position = PositionType.Left;
+				// Autohide is set to false since it seems to cause the popover to close even when clicking inside it, on macOS at least
+				// Instead, the reopen button is a toggle button to close the popover.
+				popover = new Popover () {
+					Autohide = false,
+					Position = PositionType.Left
+				};
+				popover.SetParent (ReopenButton);
 
-				ReopenButton.OnClicked += (o, args) => {
-					popover.Show ();
-					popover.Popup ();
+				ReopenButton.OnToggled += (o, args) => {
+					if (ReopenButton.Active)
+						popover.Popup ();
+					else
+						popover.Popdown ();
 				};
 			}
 
 			public DockItem Item { get; private set; }
 			public Paned Pane { get; private set; }
-			public Button ReopenButton { get; private set; }
+			public ToggleButton ReopenButton { get; private set; }
 			private Popover popover;
 
 			public bool IsMinimized => popover.Child != null;
 
 			public void Maximize (Box dock_bar)
 			{
-				if (dock_bar.GetLastChild () == ReopenButton)
-					dock_bar.Remove (ReopenButton);
+				// Remove the reopen button from the dock bar.
+				// Note that it might not already be in the dock bar, e.g. on startup.
+				dock_bar.RemoveIfChild (ReopenButton);
 
-				popover.Hide ();
+				popover.Popdown ();
 				popover.Child = null;
 
 				Pane.StartChild = Item;
@@ -77,12 +85,11 @@ namespace Pinta.Docking
 
 			public void Minimize (Box dock_bar)
 			{
-				// TODO-GTK4 - there seem to be crashes with the popover
 				Pane.StartChild = null;
 				popover.Child = Item;
 
 				dock_bar.Append (ReopenButton);
-				ReopenButton.Show ();
+				ReopenButton.Active = false;
 
 				Item.Minimize ();
 			}

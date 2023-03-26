@@ -487,5 +487,22 @@ namespace Pinta.Core
 		{
 			SelectionChangedSignal.Connect (o, handler);
 		}
+
+		/// <summary>
+		/// Remove the widget if it is a child of the box.
+		/// Calling Remove() produces warnings from GTK if the child isn't found.
+		/// </summary>
+		public static void RemoveIfChild (this Box box, Widget to_remove)
+		{
+			Widget? child = box.GetFirstChild ();
+			while (child != null) {
+				if (child == to_remove) {
+					box.Remove (child);
+					return;
+				}
+
+				child = child.GetNextSibling ();
+			}
+		}
 	}
 }
