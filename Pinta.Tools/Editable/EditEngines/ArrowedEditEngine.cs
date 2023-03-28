@@ -25,6 +25,7 @@
 // THE SOFTWARE.
 
 using System;
+using System.Collections.Generic;
 using Cairo;
 using Gtk;
 using Pinta.Core;
@@ -122,28 +123,21 @@ namespace Pinta.Tools
 
 		private void UpdateArrowOptionToolbarItems ()
 		{
-			// Carefully insert after the dash pattern box, since the Antialiasing dropdown may have been added already.
-			var after_widget = dash_pattern_box.comboBox;
-
 			if (ArrowOneEnabled || ArrowTwoEnabled) {
 				if (extra_toolbar_items_added)
 					return;
 
-				toolbar.InsertChildAfter (ArrowSizeLabel, after_widget);
-				toolbar.InsertChildAfter (ArrowSize, after_widget);
-				toolbar.InsertChildAfter (ArrowAngleOffsetLabel, after_widget);
-				toolbar.InsertChildAfter (ArrowAngleOffset, after_widget);
-				toolbar.InsertChildAfter (ArrowLengthOffsetLabel, after_widget);
-				toolbar.InsertChildAfter (ArrowLengthOffset, after_widget);
+				// Carefully insert after our last toolbar widget, since the Antialiasing dropdown may have been added already.
+				Widget after_widget = ArrowTwoEnabledCheckBox;
+				foreach (var widget in GetArrowOptionToolbarItems ()) {
+					toolbar.InsertChildAfter (widget, after_widget);
+					after_widget = widget;
+				}
 
 				extra_toolbar_items_added = true;
 			} else if (extra_toolbar_items_added) {
-				toolbar.Remove (ArrowSizeLabel);
-				toolbar.Remove (ArrowSize);
-				toolbar.Remove (ArrowAngleOffsetLabel);
-				toolbar.Remove (ArrowAngleOffset);
-				toolbar.Remove (ArrowLengthOffsetLabel);
-				toolbar.Remove (ArrowLengthOffset);
+				foreach (var widget in GetArrowOptionToolbarItems ())
+					toolbar.Remove (widget);
 
 				extra_toolbar_items_added = false;
 			}
@@ -351,5 +345,15 @@ namespace Pinta.Tools
 				return arrowLengthOffset;
 			}
 		}
-	}
+
+		private IEnumerable<Widget> GetArrowOptionToolbarItems ()
+		{
+			yield return ArrowSizeLabel;
+			yield return ArrowSize;
+			yield return ArrowAngleOffsetLabel;
+			yield return ArrowAngleOffset;
+			yield return ArrowLengthOffsetLabel;
+			yield return ArrowLengthOffset;
+		}
+	};
 }
