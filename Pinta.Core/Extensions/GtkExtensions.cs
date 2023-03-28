@@ -506,7 +506,7 @@ namespace Pinta.Core
 			}
 		}
 
-		// TODO-GTK4 (bindings, unsubmitted) - wrapper for GetFiles() since Gio.ListModel.GetObject doesn't return a Gio.File instance
+		// TODO-GTK4 (bindings) - wrapper for GetFiles() since Gio.ListModel.GetObject doesn't return a Gio.File instance (https://github.com/gircore/gir.core/issues/838)
 		public static Gio.File[] GetFileList (this Gtk.FileChooser file_chooser)
 		{
 			List<Gio.File> result = new ();
