@@ -1949,7 +1949,7 @@ msgstr "Single Pixel"
 
 #: ../Pinta.Tools/Editable/EditEngines/ArrowedEditEngine.cs:280
 msgid "Size"
-msgstr "Window Size"
+msgstr "Size"
 
 #: ../Pinta.Tools/Tools/EraserTool.cs:267
 msgid "Smooth"
