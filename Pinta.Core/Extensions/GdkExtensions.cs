@@ -182,13 +182,13 @@ namespace Pinta.Core
 		{
 			var tcs = new TaskCompletionSource<string?> ();
 
-			Gdk.Internal.Clipboard.ReadTextAsync (clipboard.Handle, IntPtr.Zero, (_, args, _) => {
+			Gdk.Internal.Clipboard.ReadTextAsync (clipboard.Handle, IntPtr.Zero, new Gio.Internal.AsyncReadyCallbackAsyncHandler ((_, args) => {
 				GLib.Internal.ErrorOwnedHandle error;
-				string? result = Gdk.Internal.Clipboard.ReadTextFinish (clipboard.Handle, args, out error);
+				string? result = Gdk.Internal.Clipboard.ReadTextFinish (clipboard.Handle, args.Handle, out error);
 				GLib.Error.ThrowOnError (error);
 
 				tcs.SetResult (result);
-			}, IntPtr.Zero);
+			}).NativeCallback, IntPtr.Zero);
 
 			return tcs.Task;
 		}
@@ -198,9 +198,9 @@ namespace Pinta.Core
 		{
 			var tcs = new TaskCompletionSource<Texture?> ();
 
-			Gdk.Internal.Clipboard.ReadTextureAsync (clipboard.Handle, IntPtr.Zero, (_, args, _) => {
+			Gdk.Internal.Clipboard.ReadTextureAsync (clipboard.Handle, IntPtr.Zero, new Gio.Internal.AsyncReadyCallbackAsyncHandler ((_, args) => {
 				GLib.Internal.ErrorOwnedHandle error;
-				IntPtr result = Gdk.Internal.Clipboard.ReadTextureFinish (clipboard.Handle, args, out error);
+				IntPtr result = Gdk.Internal.Clipboard.ReadTextureFinish (clipboard.Handle, args.Handle, out error);
 
 				Texture? texture = null;
 				if (result != IntPtr.Zero)
@@ -213,7 +213,7 @@ namespace Pinta.Core
 				}
 
 				tcs.SetResult (texture);
-			}, IntPtr.Zero);
+			}).NativeCallback, IntPtr.Zero);
 
 			return tcs.Task;
 		}

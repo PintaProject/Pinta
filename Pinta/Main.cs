@@ -112,6 +112,16 @@ namespace Pinta
 			app.OnActivate += (_, _) => {
 				main_window.Activate ();
 				OpenFilesFromCommandLine (extra);
+
+				// For debugging, run the garbage collector much more frequently.
+				// This can be useful to detect certain memory management issues in the GTK bindings.
+#if false
+				GLib.Functions.TimeoutAddFull (0, 100, (_) => {
+					GC.Collect ();
+					GC.WaitForPendingFinalizers ();
+					return true;
+				});
+#endif
 			};
 
 			app.Run ();
