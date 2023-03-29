@@ -5,10 +5,10 @@
     </Content>
   </ItemGroup>
   <ItemGroup>
-	<EmbeddedResource Include="Resources\Cursor.Pan.png">
+    <EmbeddedResource Include="Resources\Cursor.PanTool.png">
       <LogicalName>Cursor.Pan.png</LogicalName>
     </EmbeddedResource>
-	<EmbeddedResource Include="Resources\Cursor.Paintbrush.png">
+    <EmbeddedResource Include="Resources\Cursor.Paintbrush.png">
       <LogicalName>Cursor.Paintbrush.png</LogicalName>
     </EmbeddedResource>
     <EmbeddedResource Include="Resources\Cursor.ColorPicker.png">

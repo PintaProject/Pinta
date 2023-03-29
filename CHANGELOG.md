@@ -13,6 +13,7 @@ Thanks to the following contributors who worked on this release:
 ### Changed
 
 ### Fixed
+- Fixed an issue where the Pan tool's cursor could show up as a missing icon ([#2013047](https://bugs.launchpad.net/pinta/+bug/2013047))
 
 ## [2.1.1](https://github.com/PintaProject/Pinta/releases/tag/2.1.1) - 2023/02/26
 
