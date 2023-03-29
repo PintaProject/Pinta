@@ -70,7 +70,7 @@ namespace Pinta.Core
 			GLib.Internal.ErrorOwnedHandle error;
 			IntPtr result = Gio.Internal.File.Replace (file.Handle, null, false, Gio.FileCreateFlags.None, IntPtr.Zero, out error);
 			GLib.Error.ThrowOnError (error);
-			return new FileOutputStreamWrapper (result, true);
+			return new FileOutputStreamWrapper (result, ownedRef: true);
 #endif
 		}
 
@@ -87,7 +87,7 @@ namespace Pinta.Core
 			GLib.Internal.ErrorOwnedHandle error;
 			IntPtr result = Gio.Internal.File.Read (file.Handle, cancellable == null ? IntPtr.Zero : cancellable.Handle, out error);
 			GLib.Error.ThrowOnError (error);
-			return new FileInputStreamWrapper (result, true);
+			return new FileInputStreamWrapper (result, ownedRef: true);
 		}
 
 		internal class FileInputStreamWrapper : Gio.FileInputStream
@@ -103,7 +103,7 @@ namespace Pinta.Core
 			GLib.Internal.ErrorOwnedHandle error;
 			IntPtr result = Gio.Internal.FileInputStream.QueryInfo (stream.Handle, attributes, cancellable == null ? IntPtr.Zero : cancellable.Handle, out error);
 			GLib.Error.ThrowOnError (error);
-			return new FileInfoWrapper (result, true);
+			return new FileInfoWrapper (result, ownedRef: true);
 		}
 
 		// TODO-GTK4 (bindings) - this will be added in v0.4 (https://github.com/gircore/gir.core/issues/756)
@@ -112,7 +112,7 @@ namespace Pinta.Core
 			GLib.Internal.ErrorOwnedHandle error;
 			IntPtr result = Gio.Internal.FileOutputStream.QueryInfo (stream.Handle, attributes, cancellable == null ? IntPtr.Zero : cancellable.Handle, out error);
 			GLib.Error.ThrowOnError (error);
-			return new FileInfoWrapper (result, true);
+			return new FileInfoWrapper (result, ownedRef: true);
 		}
 
 		// TODO-GTK4 (bindings) - this will be added in v0.4 (https://github.com/gircore/gir.core/issues/756)
@@ -121,7 +121,7 @@ namespace Pinta.Core
 			GLib.Internal.ErrorOwnedHandle error;
 			IntPtr result = Gio.Internal.FileIOStream.QueryInfo (stream.Handle, attributes, cancellable == null ? IntPtr.Zero : cancellable.Handle, out error);
 			GLib.Error.ThrowOnError (error);
-			return new FileInfoWrapper (result, true);
+			return new FileInfoWrapper (result, ownedRef: true);
 		}
 
 		internal class FileInfoWrapper : Gio.FileInfo

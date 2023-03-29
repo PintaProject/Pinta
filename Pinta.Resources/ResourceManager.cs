@@ -79,7 +79,7 @@ namespace Pinta.Resources
 				if (node == null || node.GetNodeType () != Gsk.RenderNodeType.TextureNode)
 					return false;
 
-				image = new TextureWrapper (Gsk.Internal.TextureNode.GetTexture (node.Handle), false);
+				image = new TextureWrapper (Gsk.Internal.TextureNode.GetTexture (node.Handle), ownedRef: false);
 			} catch (Exception ex) {
 				Console.Error.WriteLine (ex.Message);
 			}
@@ -114,7 +114,7 @@ namespace Pinta.Resources
 					// TODO-GTK4 (bindings) - this should be availabe in v0.4 (https://github.com/gircore/gir.core/issues/756)
 					var bytes = GLib.Bytes.From (buffer);
 					GLib.Internal.ErrorOwnedHandle error;
-					image = new TextureWrapper (Gdk.Internal.Texture.NewFromBytes (bytes.Handle, out error), true);
+					image = new TextureWrapper (Gdk.Internal.Texture.NewFromBytes (bytes.Handle, out error), ownedRef: true);
 					GLib.Error.ThrowOnError (error);
 				}
 			} catch (Exception ex) {

@@ -49,7 +49,7 @@ namespace Pinta.Core
 			GLib.Internal.ErrorOwnedHandle error;
 			IntPtr result = GdkPixbuf.Internal.Pixbuf.NewFromStream (stream.Handle, cancellable == null ? IntPtr.Zero : cancellable.Handle, out error);
 			GLib.Error.ThrowOnError (error);
-			return new PixbufWrapper (result, true);
+			return new PixbufWrapper (result, ownedRef: true);
 		}
 
 		// TODO-GTK4 (bindings) - this will be added in v0.4 (https://github.com/gircore/gir.core/issues/756)
@@ -58,7 +58,7 @@ namespace Pinta.Core
 			GLib.Internal.ErrorOwnedHandle error;
 			IntPtr result = GdkPixbuf.Internal.Pixbuf.NewFromFileAtScale (filename, width, height, preserve_aspect_ratio, out error);
 			GLib.Error.ThrowOnError (error);
-			return new PixbufWrapper (result, true);
+			return new PixbufWrapper (result, ownedRef: true);
 		}
 
 		// TODO-GTK4 (bindings) - this will be added in v0.4 (https://github.com/gircore/gir.core/issues/756)

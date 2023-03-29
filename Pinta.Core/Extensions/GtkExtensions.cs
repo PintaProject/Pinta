@@ -405,7 +405,7 @@ namespace Pinta.Core
 				return;
 
 			// TODO-GTK4 (bindings, unsubmitted) - should be able to cast to a Gtk.Text from Gtk.Editable
-			var text = new TextWrapper (editable.Handle, false);
+			var text = new TextWrapper (editable.Handle, ownedRef: false);
 			text.SetActivatesDefault (activates);
 		}
 

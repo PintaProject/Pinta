@@ -204,7 +204,7 @@ namespace Pinta.Core
 
 				Texture? texture = null;
 				if (result != IntPtr.Zero)
-					texture = new TextureWrapper (result, true);
+					texture = new TextureWrapper (result, ownedRef: true);
 
 				try {
 					GLib.Error.ThrowOnError (error);
@@ -268,7 +268,7 @@ namespace Pinta.Core
 			uint n = GLib.Internal.SList.Length (slist_handle);
 			var result = new Gio.File[n];
 			for (uint i = 0; i < n; ++i) {
-				result[i] = new Gio.FileHelper (GLib.Internal.SList.NthData (slist_handle, i), false);
+				result[i] = new Gio.FileHelper (GLib.Internal.SList.NthData (slist_handle, i), ownedRef: false);
 			}
 
 			GLib.Internal.SList.Free (slist_handle);
