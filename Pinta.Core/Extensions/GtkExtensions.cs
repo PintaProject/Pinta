@@ -145,6 +145,7 @@ namespace Pinta.Core
 		{
 			var slider = Scale.NewWithRange (Orientation.Horizontal, min, max, step);
 			slider.WidthRequest = 150;
+			slider.DrawValue = true;
 			slider.ValuePos = PositionType.Left;
 			slider.SetValue (val);
 			return slider;
