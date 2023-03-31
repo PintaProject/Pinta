@@ -29,8 +29,6 @@ using System.Collections.Generic;
 using System.Diagnostics;
 using Gdk;
 using Pinta.Core;
-using ScreenshotPortal.DBus;
-using Tmds.DBus;
 
 namespace Pinta.Actions
 {
@@ -48,7 +46,7 @@ namespace Pinta.Actions
 		}
 		#endregion
 
-		async private void Activated (object sender, EventArgs args)
+		private void Activated (object _, EventArgs args)
 		{
 			// GTK4 removed gdk_pixbuf_get_from_window(), so we need to use OS-specific APis to take a screenshot.
 			// TODO-GTK4 - implement screenshots for Windows
@@ -56,44 +54,31 @@ namespace Pinta.Actions
 			// On Linux, use the XDG Desktop Portal Screenshot API.
 			if (SystemManager.GetOperatingSystem () == OS.X11) {
 				try {
-					// It's important that the portal interactions are synchronised with the main thread
-					// Otherwise the use of the portals will cause massive instability and crash Pinta
-					var systemConnection = new Connection (new ClientConnectionOptions (Address.Session) {
-						AutoConnect = true,
-						SynchronizationContext = GLibExtensions.GLibSynchronizationContext.Current
+					var connection = Gio.DBusConnection.Get (Gio.BusType.Session);
+
+					Console.WriteLine ($"Connection unique name {connection.UniqueName}");
+					string sender = connection.UniqueName!.TrimStart (':').Replace ('.', '_');
+					string token = Guid.NewGuid ().ToString ().Replace ('-', '_');
+					string handle = $"/org/freedesktop/portal/desktop/request/{sender}/{token}";
+					Console.WriteLine ($"handle: {handle}");
+					uint signal_id = connection.SignalSubscribe ("org.freedesktop.portal.Desktop", "org.freedesktop.portal.Request", "Response", handle, null, Gio.DBusSignalFlags.NoMatchRule, (_, _, _, _, _, _) => {
+						Console.WriteLine ("received signal");
 					});
 
-					var portal = systemConnection.CreateProxy<IScreenshot> (
-						"org.freedesktop.portal.Desktop",
-						"/org/freedesktop/portal/desktop");
-
-					// The rootWindowID should be set to allow proper parenting of the screenshot dialog.
+					// The root window id should be set to allow proper parenting of the screenshot dialog.
 					// However, the necessary functions are not correctly wrapped.
 					// The empty string means that the compositor may unfortunately place the dialog wherever it pleases.
 					// https://flatpak.github.io/xdg-desktop-portal/#parent_window
-					var rootWindowID = "";
-					var portalOptions = new Dictionary<string, object> {
-						{ "modal", true },
-						{ "interactive", true }}; // Enables options such as delay, specific windows, etc.
+					var root_window_id = "";
 
-					var handle = await portal.ScreenshotAsync (rootWindowID, portalOptions);
-					await handle.WatchResponseAsync (
-						reply => {
-							// response 0 == success, 1 == undefined error, 2 == user cancelled (not an error)
-							// However the response 1 can occur when the user presses "Cancel" on the second stage of the UI
-							// As a result, it's not reliable to throw error messages when the retval == 1
-							if (reply.response == 0) {
-								string? uri = reply.results["uri"].ToString ();
-								if (uri is not null && PintaCore.Workspace.OpenFile (Gio.FileHelper.NewForUri (uri))) {
-									// Mark as not having a file, so that the user doesn't unintentionally
-									// save using the temp file.
-									PintaCore.Workspace.ActiveDocument.ClearFileReference ();
-								}
-							}
-						}
+					var parameters = new GLib.Variant (
+						GLib.Variant.Create (root_window_id),
+						// TODO - add the 'handle_token', 'modal', and 'interactive' parameters.
+						GLib.Variant.CreateEmptyDictionary (GLib.VariantType.String, GLib.VariantType.Variant)
 					);
+					connection.Call ("org.freedesktop.portal.Desktop", "/org/freedesktop/portal/desktop", "org.freedesktop.portal.Screenshot", "Screenshot", parameters);
 
-				} catch (Tmds.DBus.DBusException e) {
+				} catch (Exception e) {
 					PintaCore.Chrome.ShowErrorDialog (PintaCore.Chrome.MainWindow,
 						Translations.GetString ("Failed to take screenshot"),
 						Translations.GetString ("Failed to access XDG Desktop Portals"),
