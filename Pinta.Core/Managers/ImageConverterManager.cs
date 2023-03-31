@@ -137,10 +137,7 @@ namespace Pinta.Core
 		public FormatDescriptor? GetFormatByFile (string file)
 		{
 			string extension = Path.GetExtension (file);
-
-			extension = NormalizeExtension (extension);
-
-			return Formats.Where (p => p.Extensions.Contains (extension)).FirstOrDefault ();
+			return GetFormatByExtension (extension);
 		}
 
 		/// <summary>
@@ -200,7 +197,7 @@ namespace Pinta.Core
 		/// Finds the file format for the given file extension, or null
 		/// if no file format exists for that extension.
 		/// </summary>
-		private FormatDescriptor? GetFormatByExtension (string extension)
+		public FormatDescriptor? GetFormatByExtension (string extension)
 		{
 			extension = NormalizeExtension (extension);
 

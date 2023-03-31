@@ -105,13 +105,15 @@ namespace Pinta.Core
 		public List<Document> OpenDocuments { get; private set; }
 		public bool HasOpenDocuments { get { return OpenDocuments.Count > 0; } }
 
-		public Document CreateAndActivateDocument (Gio.File? file, Size size)
+		public Document CreateAndActivateDocument (Gio.File? file, string? file_type, Size size)
 		{
 			Document doc = new Document (size);
 
-			if (file is not null)
+			if (file is not null) {
+				ArgumentNullException.ThrowIfNullOrEmpty (file_type);
 				doc.File = file;
-			else
+				doc.FileType = file_type;
+			} else
 				doc.DisplayName = Translations.GetString ("Unsaved Image {0}", new_file_name++);
 
 			OpenDocuments.Add (doc);
@@ -168,7 +170,7 @@ namespace Pinta.Core
 
 		public Document NewDocument (Size imageSize, Color backgroundColor)
 		{
-			Document doc = CreateAndActivateDocument (null, imageSize);
+			Document doc = CreateAndActivateDocument (null, null, imageSize);
 			doc.Workspace.CanvasSize = imageSize;
 
 			// Start with an empty white layer

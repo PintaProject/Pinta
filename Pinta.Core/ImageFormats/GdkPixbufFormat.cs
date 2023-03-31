@@ -60,7 +60,7 @@ namespace Pinta.Core
 
 			Size imagesize = new Size (bg.Width, bg.Height);
 
-			Document doc = PintaCore.Workspace.CreateAndActivateDocument (file, imagesize);
+			Document doc = PintaCore.Workspace.CreateAndActivateDocument (file, filetype, imagesize);
 			doc.ImageSize = imagesize;
 			doc.Workspace.CanvasSize = imagesize;
 

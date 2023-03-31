@@ -54,7 +54,7 @@ namespace Pinta.Core
 
 			Size imagesize = new Size (width, height);
 
-			Document doc = PintaCore.Workspace.CreateAndActivateDocument (file, imagesize);
+			Document doc = PintaCore.Workspace.CreateAndActivateDocument (file, "ora", imagesize);
 
 			XmlElement stackElement = (XmlElement) stackXml.GetElementsByTagName ("stack")[0]!;
 			XmlNodeList layerElements = stackElement.GetElementsByTagName ("layer");

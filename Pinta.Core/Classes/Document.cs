@@ -91,6 +91,14 @@ namespace Pinta.Core
 		}
 
 		/// <summary>
+		/// File type of the image, if File is not null. This is an extensions, e.g. "png" or "ora".
+		/// This cannot necessarily be derived from the file name's extension (e.g. when opening
+		/// a file with no extension or an incorrect extension) so it's easiest to record
+		/// the file type used when opening the image.
+		/// </summary>
+		public string? FileType { get; set; }
+
+		/// <summary>
 		/// Identifier for the file location on disk.
 		/// </summary>
 		public Gio.File? File {
@@ -151,6 +159,7 @@ namespace Pinta.Core
 		{
 			var name = DisplayName;
 			File = null;
+			FileType = null;
 			DisplayName = name;
 		}
 

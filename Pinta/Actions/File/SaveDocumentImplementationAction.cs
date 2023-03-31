@@ -137,6 +137,7 @@ namespace Pinta.Actions
 				PintaCore.ImageFormats.SetDefaultFormat (format.Extensions.First ());
 
 				document.File = file;
+				document.FileType = format.Extensions.First ();
 				return true;
 			}
 
@@ -151,8 +152,10 @@ namespace Pinta.Actions
 			if (file is null)
 				throw new ArgumentException ("Attempted to save a document with no associated file");
 
-			if (format == null)
-				format = PintaCore.ImageFormats.GetFormatByFile (file.GetDisplayName ());
+			if (format == null) {
+				ArgumentNullException.ThrowIfNullOrEmpty (document.FileType);
+				format = PintaCore.ImageFormats.GetFormatByExtension (document.FileType);
+			}
 
 			if (format == null || format.IsReadOnly ()) {
 				PintaCore.Chrome.ShowMessageDialog (parent,
@@ -188,6 +191,7 @@ namespace Pinta.Actions
 			}
 
 			document.File = file;
+			document.FileType = format.Extensions.First ();
 
 			PintaCore.Tools.DoAfterSave (document);
 
