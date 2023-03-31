@@ -41,6 +41,7 @@ namespace Pinta.Core
 			Tool = tool;
 			IconName = tool.Icon;
 			Name = tool.Name;
+			CanFocus = false;
 
 			AddCssClass (AdwaitaStyles.Flat);
 

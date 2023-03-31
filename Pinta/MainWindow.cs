@@ -105,7 +105,10 @@ namespace Pinta
 			// Handle a few main window specific actions
 			window_shell.Window.OnCloseRequest += HandleCloseRequest;
 
+			// Add custom key handling during the capture phase. For example, this ensures that the "-" key
+			// can be typed into the dash pattern box instead of being handled as a shortcut
 			var key_controller = Gtk.EventControllerKey.New ();
+			key_controller.SetPropagationPhase (PropagationPhase.Capture);
 			key_controller.OnKeyPressed += HandleGlobalKeyPress;
 			key_controller.OnKeyReleased += HandleGlobalKeyRelease;
 			window_shell.Window.AddController (key_controller);

@@ -131,6 +131,7 @@ namespace Pinta.Core
 		public static Gtk.SpinButton CreateToolBarSpinButton (double min, double max, double step, double init_value)
 		{
 			var spin = Gtk.SpinButton.NewWithRange (min, max, step);
+			spin.FocusOnClick = false;
 			spin.Value = init_value;
 			// After a spin button is edited, return focus to the canvas so that
 			// tools can handle subsequent key events.

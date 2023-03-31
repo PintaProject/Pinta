@@ -142,7 +142,7 @@ namespace Pinta.Tools
 			tb.Append (font_label);
 
 			if (font_button == null) {
-				font_button = new FontButton () { UseSize = false, UseFont = true };
+				font_button = new FontButton () { UseSize = false, UseFont = true, CanFocus = false };
 				// Default to Arial if possible.
 				font_button.Font = Settings.GetSetting (FONT_SETTING, "Arial 12");
 
@@ -156,7 +156,8 @@ namespace Pinta.Tools
 			if (bold_btn == null) {
 				bold_btn = new ToggleButton () {
 					IconName = Pinta.Resources.StandardIcons.FormatTextBold,
-					TooltipText = Translations.GetString ("Bold")
+					TooltipText = Translations.GetString ("Bold"),
+					CanFocus = false
 				};
 				bold_btn.Active = Settings.GetSetting (BOLD_SETTING, false);
 				bold_btn.OnToggled += HandleBoldButtonToggled;
@@ -167,7 +168,8 @@ namespace Pinta.Tools
 			if (italic_btn == null) {
 				italic_btn = new ToggleButton () {
 					IconName = Pinta.Resources.StandardIcons.FormatTextItalic,
-					TooltipText = Translations.GetString ("Italic")
+					TooltipText = Translations.GetString ("Italic"),
+					CanFocus = false
 				};
 				italic_btn.Active = Settings.GetSetting (ITALIC_SETTING, false);
 				italic_btn.OnToggled += HandleItalicButtonToggled;
@@ -178,7 +180,8 @@ namespace Pinta.Tools
 			if (underscore_btn == null) {
 				underscore_btn = new ToggleButton () {
 					IconName = Pinta.Resources.StandardIcons.FormatTextUnderline,
-					TooltipText = Translations.GetString ("Underline")
+					TooltipText = Translations.GetString ("Underline"),
+					CanFocus = false
 				};
 				underscore_btn.Active = Settings.GetSetting (UNDERLINE_SETTING, false);
 				underscore_btn.OnToggled += HandleUnderscoreButtonToggled;
@@ -193,7 +196,8 @@ namespace Pinta.Tools
 			if (left_alignment_btn == null) {
 				left_alignment_btn = new ToggleButton () {
 					IconName = Pinta.Resources.StandardIcons.FormatJustifyLeft,
-					TooltipText = Translations.GetString ("Left Align")
+					TooltipText = Translations.GetString ("Left Align"),
+					CanFocus = false
 				};
 				left_alignment_btn.Active = alignment == TextAlignment.Left;
 				left_alignment_btn.OnToggled += HandleLeftAlignmentButtonToggled;
@@ -204,7 +208,8 @@ namespace Pinta.Tools
 			if (center_alignment_btn == null) {
 				center_alignment_btn = new ToggleButton () {
 					IconName = Pinta.Resources.StandardIcons.FormatJustifyCenter,
-					TooltipText = Translations.GetString ("Center Align")
+					TooltipText = Translations.GetString ("Center Align"),
+					CanFocus = false
 				};
 				center_alignment_btn.Active = alignment == TextAlignment.Center;
 				center_alignment_btn.OnToggled += HandleCenterAlignmentButtonToggled;
@@ -215,7 +220,8 @@ namespace Pinta.Tools
 			if (right_alignment_btn == null) {
 				right_alignment_btn = new ToggleButton () {
 					IconName = Pinta.Resources.StandardIcons.FormatJustifyRight,
-					TooltipText = Translations.GetString ("Right Align")
+					TooltipText = Translations.GetString ("Right Align"),
+					CanFocus = false
 				};
 				right_alignment_btn.Active = alignment == TextAlignment.Right;
 				right_alignment_btn.OnToggled += HandleRightAlignmentButtonToggled;

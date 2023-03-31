@@ -47,6 +47,8 @@ namespace Pinta.Gui.Widgets
 			CanvasWindow = window;
 			this.document = document;
 
+			Focusable = true;
+
 			cr = new CanvasRenderer (true, true);
 
 			// Keep the widget the same size as the canvas
@@ -78,6 +80,9 @@ namespace Pinta.Gui.Widgets
 			click_controller.OnPressed += (_, args) => {
 				// Note we don't call click_controller.SetState (Gtk.EventSequenceState.Claimed) here, so
 				// that the CanvasWindow can also receive motion events to update the root window mouse position.
+
+				// A mouse click on the canvas should grab focus from any toolbar widgets, etc
+				GrabFocus ();
 
 				// The canvas gets the button press before the tab system, so
 				// if this click is on a canvas that isn't currently the ActiveDocument yet, 

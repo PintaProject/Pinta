@@ -41,9 +41,10 @@ namespace Pinta.Core
 
 			if (allowEntry)
 				ComboBox = ComboBoxText.NewWithEntry ();
-			else
+			else {
 				ComboBox = new ComboBoxText ();
-
+				CanFocus = false;
+			}
 
 			foreach (string entry in contents)
 				ComboBox.AppendText (entry);
@@ -52,8 +53,6 @@ namespace Pinta.Core
 
 			if (activeIndex >= 0)
 				ComboBox.Active = activeIndex;
-
-			ComboBox.Show ();
 
 			Append (ComboBox);
 		}
