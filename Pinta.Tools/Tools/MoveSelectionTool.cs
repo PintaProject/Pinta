@@ -42,7 +42,13 @@ namespace Pinta.Tools
 		public override string Name => Translations.GetString ("Move Selection");
 		public override string Icon => Pinta.Resources.Icons.ToolMoveSelection;
 		// Translators: {0} is 'Ctrl', or a platform-specific key such as 'Command' on macOS.
-		public override string StatusBarText => Translations.GetString ("Left click and drag the selection to move selection outline. Hold {0} to scale instead of move. Right click and drag the selection to rotate selection outline. Hold Shift to rotate in steps. Use arrow keys to move selection outline by a single pixel.", GtkExtensions.CtrlLabel ());
+		public override string StatusBarText => Translations.GetString (
+			"Left click and drag the selection to move selection outline." +
+			"\nHold {0} to scale instead of move." +
+			"\nRight click and drag the selection to rotate selection outline." +
+			"\nHold Shift to rotate in steps." +
+			"\nUse arrow keys to move selection outline by a single pixel.",
+			GtkExtensions.CtrlLabel ());
 		public override Gdk.Cursor DefaultCursor => Gdk.Cursor.NewFromTexture (Resources.GetIcon (Pinta.Resources.Icons.ToolMoveSelection), 0, 0, null);
 		public override Gdk.Key ShortcutKey => Gdk.Key.M;
 		public override int Priority => 7;

@@ -55,7 +55,10 @@ namespace Pinta.Tools
 
 		public override string Name => Translations.GetString ("Zoom");
 		public override string Icon => Pinta.Resources.Icons.ToolZoom;
-		public override string StatusBarText => Translations.GetString ("Left click to zoom in. Right click to zoom out. Click and drag to zoom in selection.");
+		public override string StatusBarText => Translations.GetString (
+			"Left click to zoom in." +
+			"\nRight click to zoom out." +
+			"\nClick and drag to zoom in selection.");
 		public override Gdk.Cursor DefaultCursor => cursorZoom;
 		public override Gdk.Key ShortcutKey => Gdk.Key.Z;
 		public override int Priority => 9;

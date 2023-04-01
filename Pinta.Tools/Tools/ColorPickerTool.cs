@@ -51,7 +51,7 @@ namespace Pinta.Tools
 
 		public override string Name => Translations.GetString ("Color Picker");
 		public override string Icon => Pinta.Resources.Icons.ToolColorPicker;
-		public override string StatusBarText => Translations.GetString ("Left click to set primary color. Right click to set secondary color.");
+		public override string StatusBarText => Translations.GetString ("Left click to set primary color.\nRight click to set secondary color.");
 		public override bool CursorChangesOnZoom => true;
 		public override Gdk.Key ShortcutKey => Gdk.Key.K;
 		public override int Priority => 33;

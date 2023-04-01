@@ -11,6 +11,7 @@ compile
 config.log
 config.status
 configure
+configure~
 install-sh
 installer/macos/Pinta.dmg
 installer/macos/package
