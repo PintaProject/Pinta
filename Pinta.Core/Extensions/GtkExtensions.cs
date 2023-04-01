@@ -81,7 +81,7 @@ namespace Pinta.Core
 			};
 		}
 
-		// TODO-GTK4 (bindings, unsubmitted) - add pre-defined VariantType's to gir.core
+		// TODO-GTK4 (bindings) - add pre-defined VariantType's to gir.core (https://github.com/gircore/gir.core/issues/843)
 		public static readonly GLib.VariantType IntVariantType = new ("i");
 
 		/// <summary>

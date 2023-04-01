@@ -100,7 +100,7 @@ namespace Pinta.Core
 		public delegate void ToggledHandler (bool value);
 		public ToggledHandler? Toggled;
 
-		// TODO-GTK4 - these should be in gir.core
+		// TODO-GTK4 (bindings) - missing GLib.Variant bindings (https://github.com/gircore/gir.core/issues/843)
 		private static GLib.Variant CreateBoolVariant (bool v) => new GLib.Variant (GLib.Internal.Variant.NewBoolean (v));
 		private static bool GetBoolValue (GLib.Variant val) => GLib.Internal.Variant.GetBoolean (val.Handle);
 	}
