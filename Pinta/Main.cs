@@ -84,7 +84,7 @@ namespace Pinta
 				return;
 			}
 
-#if false // TODO-GTK4 - is there an equivalent in gir.core?
+#if false // TODO-GTK4 (bindings) - there isn't any support for dealing with unhandled exceptions from signal callbacks (https://github.com/gircore/gir.core/issues/845)
 			GLib.ExceptionManager.UnhandledException += new GLib.UnhandledExceptionHandler (ExceptionManager_UnhandledException);
 #endif
 
@@ -154,7 +154,7 @@ namespace Pinta
 			}
 		}
 
-#if false // TODO-GTK4 - is there an equivalent in gir.core?
+#if false // TODO-GTK4 (bindings) - there isn't any support for dealing with unhandled exceptions from signal callbacks (https://github.com/gircore/gir.core/issues/845)
 		private static void ExceptionManager_UnhandledException (GLib.UnhandledExceptionArgs args)
 		{
 			Exception ex = (Exception) args.ExceptionObject;
