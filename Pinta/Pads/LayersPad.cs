@@ -48,13 +48,6 @@ namespace Pinta
 			layers_tb.Append (PintaCore.Actions.Layers.MoveLayerUp.CreateDockToolBarItem ());
 			layers_tb.Append (PintaCore.Actions.Layers.MoveLayerDown.CreateDockToolBarItem ());
 
-			// TODO-GTK3 (docking)
-#if false
-
-			layers_item.Icon = Gtk.IconTheme.Default.LoadIcon(Resources.Icons.LayerMergeDown, 16);
-			layers_item.DefaultWidth = 100;
-			layers_item.Behavior |= DockItemBehavior.CantClose;
-#endif
 			workspace.AddItem (layers_item, DockPlacement.Right);
 
 			var show_layers = new ToggleCommand ("layers", Translations.GetString ("Layers"), null, Resources.Icons.LayerMergeDown) {
