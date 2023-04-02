@@ -124,12 +124,7 @@ namespace Pinta.Core
 
 		public T[] GetExtensions<T> ()
 		{
-			// TODO-GTK3 (addins)
-#if false
-			return AddinManager.GetExtensionObjects<T> ();
-#else
-			return new T[0];
-#endif
+			return Mono.Addins.AddinManager.GetExtensionObjects<T> ();
 		}
 	}
 

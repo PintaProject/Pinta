@@ -24,38 +24,36 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 // THE SOFTWARE.
 
-#if false
-// TODO - GTK3
 using Mono.Addins;
 using Mono.Addins.Setup;
 using Pinta.Core;
 
 namespace Pinta
 {
-	public class AddinSetupService: SetupService
+	public class AddinSetupService : SetupService
 	{
-		internal AddinSetupService (AddinRegistry r): base (r)
+		internal AddinSetupService (AddinRegistry r) : base (r)
 		{
 		}
-		
+
 		public bool AreRepositoriesRegistered ()
 		{
 			string url = GetPlatformRepositoryUrl ();
 			return Repositories.ContainsRepository (url);
 		}
-		
+
 		public void RegisterRepositories (bool enable)
 		{
 			RegisterRepository (GetPlatformRepositoryUrl (),
-			                    Translations.GetString ("Pinta Community Addins - Platform-Specific"),
-			                    enable);
+					    Translations.GetString ("Pinta Community Addins - Platform-Specific"),
+					    enable);
 
 			RegisterRepository (GetAllRepositoryUrl (),
-			                    Translations.GetString ("Pinta Community Addins - Cross-Platform"),
-			                    enable);
+					    Translations.GetString ("Pinta Community Addins - Cross-Platform"),
+					    enable);
 		}
 
-		private void RegisterRepository(string url, string name, bool enable)
+		private void RegisterRepository (string url, string name, bool enable)
 		{
 			if (!Repositories.ContainsRepository (url)) {
 				var rep = Repositories.RegisterRepository (null, url, false);
@@ -65,17 +63,14 @@ namespace Pinta
 				Repositories.SetRepositoryEnabled (url, enable);
 			}
 		}
-		
+
 		private static string GetPlatformRepositoryUrl ()
 		{
-			string platform;
-			if (SystemManager.GetOperatingSystem () == OS.Windows)
-				platform = "Windows";
-			else
-				if (SystemManager.GetOperatingSystem () == OS.Mac)
-					platform = "Mac";
-				else
-					platform = "Linux";
+			string platform = SystemManager.GetOperatingSystem () switch {
+				OS.Windows => "Windows",
+				OS.Mac => "Mac",
+				_ => "Linux"
+			};
 
 			return "http://pintaproject.github.io/Pinta-Community-Addins/repository/" + platform + "/main.mrep";
 		}
@@ -86,4 +81,3 @@ namespace Pinta
 		}
 	}
 }
-#endif

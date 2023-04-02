@@ -28,17 +28,18 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using Mono.Addins;
 using Pinta.Core;
+
+[assembly: Addin ("DefaultEffects", PintaCore.ApplicationVersion, Category = "Core")]
+[assembly: AddinName ("Default Effects")]
+[assembly: AddinDescription ("The default adjustments and effects that ship with Pinta")]
+[assembly: AddinDependency ("Pinta", PintaCore.ApplicationVersion)]
 
 namespace Pinta.Effects
 {
-	// TODO-GTK3 (addins)
-#if false
 	[Mono.Addins.Extension]
 	class CoreEffectsExtension : IExtension
-#else
-	public class CoreEffectsExtension : IExtension
-#endif
 	{
 		#region IExtension Members
 		public void Initialize ()

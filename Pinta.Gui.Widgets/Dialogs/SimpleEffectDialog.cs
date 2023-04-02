@@ -34,6 +34,7 @@ using System.ComponentModel;
 using System.Reflection;
 using System.Text;
 using Gtk;
+using Mono.Addins.Localization;
 using Pinta.Core;
 
 namespace Pinta.Gui.Widgets
@@ -474,13 +475,6 @@ namespace Pinta.Gui.Widgets
 			});
 		}
 		#endregion
-	}
-
-	// TODO-GTK3 (addins)
-	// This is a temporary replacement for IAddinLocalizer from Mono.Addins.
-	public interface IAddinLocalizer
-	{
-		string GetString (string msgid);
 	}
 
 	/// <summary>

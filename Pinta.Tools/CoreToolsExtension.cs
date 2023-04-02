@@ -28,17 +28,18 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using Mono.Addins;
 using Pinta.Core;
+
+[assembly: Addin ("DefaultTools", PintaCore.ApplicationVersion, Category = "Core")]
+[assembly: AddinName ("Default Tools")]
+[assembly: AddinDescription ("The default tools and brushes that ship with Pinta")]
+[assembly: AddinDependency ("Pinta", PintaCore.ApplicationVersion)]
 
 namespace Pinta.Tools
 {
-	// TODO-GTK3 (addins)
-#if false
 	[Mono.Addins.Extension]
-	class CoreToolsExtension : IExtension
-#else
 	public class CoreToolsExtension : IExtension
-#endif
 	{
 		#region IExtension Members
 		public void Initialize ()

@@ -13,6 +13,9 @@
   <ItemGroup>
     <PackageReference Include="Tmds.DBus" Version="0.14.0" />
     <PackageReference Include="GirCore.Adw-1" Version="0.3.0" />
+    <PackageReference Include="Mono.Addins" Version="1.4.1" />
+    <PackageReference Include="Mono.Addins.Setup" Version="1.4.1" />
+    <PackageReference Include="Mono.Addins.CecilReflector" Version="1.4.1" />
   </ItemGroup>
 
   <ItemGroup>
@@ -20,9 +23,7 @@
     <ProjectReference Include="..\Pinta.Docking\Pinta.Docking.csproj" />
     <ProjectReference Include="..\Pinta.Gui.Widgets\Pinta.Gui.Widgets.csproj" />
     <ProjectReference Include="..\Pinta.Resources\Pinta.Resources.csproj" />
-    <!-- TODO-GTK3 remove once addins are supported -->
     <ProjectReference Include="..\Pinta.Tools\Pinta.Tools.csproj" />
-    <!-- TODO-GTK3 remove once addins are supported -->
     <ProjectReference Include="..\Pinta.Effects\Pinta.Effects.csproj" />
   </ItemGroup>
 
