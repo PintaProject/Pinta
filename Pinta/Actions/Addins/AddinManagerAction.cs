@@ -26,6 +26,7 @@
 
 using System;
 using Pinta.Core;
+using Pinta.Gui.Addins;
 
 namespace Pinta.Actions
 {
@@ -45,16 +46,9 @@ namespace Pinta.Actions
 
 		private void Activated (object sender, EventArgs e)
 		{
-			// TODO-GTK3 (addins)
-#if false
-			AddinManagerWindow.AllowInstall = true;
-
-			AddinManagerWindow.Run (PintaCore.Chrome.MainWindow);
-#else
-			throw new NotImplementedException ();
-#endif
-
-			//dlg.DeleteEvent += delegate { dlg.Destroy (); };
+			var service = new AddinSetupService (Mono.Addins.AddinManager.Registry);
+			var dialog = new AddinManagerDialog (PintaCore.Chrome.MainWindow, service, allow_install: true);
+			dialog.Show ();
 		}
 	}
 }

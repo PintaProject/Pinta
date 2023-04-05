@@ -21,6 +21,7 @@
   <ItemGroup>
     <ProjectReference Include="..\Pinta.Core\Pinta.Core.csproj" />
     <ProjectReference Include="..\Pinta.Docking\Pinta.Docking.csproj" />
+    <ProjectReference Include="..\Pinta.Gui.Addins\Pinta.Gui.Addins.csproj" />
     <ProjectReference Include="..\Pinta.Gui.Widgets\Pinta.Gui.Widgets.csproj" />
     <ProjectReference Include="..\Pinta.Resources\Pinta.Resources.csproj" />
     <ProjectReference Include="..\Pinta.Tools\Pinta.Tools.csproj" />

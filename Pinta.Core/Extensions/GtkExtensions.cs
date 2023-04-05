@@ -40,6 +40,7 @@ namespace Pinta.Core
 	/// </summary>
 	public static class AdwaitaStyles
 	{
+		public const string Body = "body";
 		public const string DimLabel = "dim-label";
 		public const string Flat = "flat";
 		public const string Inline = "inline";
