@@ -23,6 +23,13 @@ namespace Pinta.Gui.Addins
 
 		public string Name => info.Name;
 		public string Description => info.Description;
+		public string Version => info.Version;
+
+		public bool Enabled {
+			get => addin.Enabled;
+			set => addin.Enabled = value;
+		}
+		public bool CanDisable => addin.Description.CanDisable;
 	}
 
 	internal class AddinListViewItemWidget : Box
