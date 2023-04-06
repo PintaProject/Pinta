@@ -36,8 +36,8 @@ namespace Pinta.Tools
 	{
 		private readonly IPaintBrushService brushes;
 
-		private BasePaintBrush default_brush;
-		private BasePaintBrush active_brush;
+		private BasePaintBrush? default_brush;
+		private BasePaintBrush? active_brush;
 		private Color stroke_color;
 		private PointI last_point;
 
@@ -47,10 +47,7 @@ namespace Pinta.Tools
 		{
 			brushes = services.GetService<IPaintBrushService> ();
 
-			if (!brushes.Any ())
-				throw new InvalidOperationException ("There are no registered paint brushes.");
-
-			default_brush = brushes.First ();
+			default_brush = brushes.FirstOrDefault ();
 			active_brush = default_brush;
 
 			brushes.BrushAdded += (_, _) => RebuildBrushComboBox ();
@@ -88,7 +85,7 @@ namespace Pinta.Tools
 		{
 			base.OnMouseDown (document, e);
 
-			active_brush.DoMouseDown ();
+			active_brush?.DoMouseDown ();
 		}
 
 		protected override void OnMouseMove (Document document, ToolMouseEventArgs e)
@@ -101,6 +98,9 @@ namespace Pinta.Tools
 				last_point = point_empty;
 				return;
 			}
+
+			if (active_brush is null)
+				return;
 
 			// TODO: also multiply by pressure
 			stroke_color = new Color (stroke_color.R, stroke_color.G, stroke_color.B,
@@ -142,7 +142,7 @@ namespace Pinta.Tools
 		{
 			base.OnMouseUp (document, e);
 
-			active_brush.DoMouseUp ();
+			active_brush?.DoMouseUp ();
 		}
 
 		protected override void OnSaveSettings (ISettingsService settings)
@@ -186,10 +186,7 @@ namespace Pinta.Tools
 		/// </summary>
 		private void RebuildBrushComboBox ()
 		{
-			if (!brushes.Any ())
-				throw new InvalidOperationException ("There are no registered paint brushes.");
-
-			default_brush = brushes.First ();
+			default_brush = brushes.FirstOrDefault ();
 
 			BrushComboBox.ComboBox.RemoveAll ();
 
