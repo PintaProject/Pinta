@@ -1,5 +1,6 @@
 using System;
 using System.Linq;
+using System.Threading.Tasks;
 using Mono.Addins;
 using Mono.Addins.Setup;
 
@@ -11,6 +12,8 @@ namespace Pinta.Gui.Addins
 		private AddinListView installed_list;
 		private AddinListView updates_list;
 		private AddinListView gallery_list;
+
+		private StatusProgressBar progress_bar;
 
 		public AddinManagerDialog (Gtk.Window parent, SetupService service, bool allow_install)
 		{
@@ -28,7 +31,8 @@ namespace Pinta.Gui.Addins
 
 			var content = Gtk.Box.New (Gtk.Orientation.Vertical, 0);
 			content.Append (header_bar);
-			content.Append (view_stack);
+			progress_bar = new StatusProgressBar (view_stack);
+			content.Append (progress_bar);
 			Content = content;
 
 			// TODO - handle allow_install and service
@@ -46,6 +50,21 @@ namespace Pinta.Gui.Addins
 		private void LoadAll ()
 		{
 			LoadInstalled ();
+
+			// First update the available addins in a background thread, since this involves network access.
+			progress_bar.ShowProgress ();
+			Task.Run (() => {
+				service.Repositories.UpdateAllRepositories (progress_bar);
+			}).ContinueWith ((_) => {
+				// Execute UI updates on the main thread.
+				GLib.Functions.IdleAddFull (0, (_) => {
+
+					progress_bar.HideProgress ();
+					LoadGallery ();
+
+					return false;
+				});
+			});
 		}
 
 		private void LoadInstalled ()
@@ -72,5 +91,37 @@ namespace Pinta.Gui.Addins
 
 		}
 
+		private void LoadGallery ()
+		{
+			gallery_list.Clear ();
+
+			// TODO - support filtering the list of repositories.
+			AddinRepositoryEntry[] reps = service.Repositories.GetAvailableAddins (RepositorySearchFlags.LatestVersionsOnly);
+
+			foreach (var arep in reps) {
+				if (!Utilities.InApplicationNamespace (service, arep.Addin.Id))
+					continue;
+
+#if false // TODO
+				if (IsFiltered (arep.Addin))
+					continue;
+#endif
+
+				AddinStatus status = AddinStatus.NotInstalled;
+
+				// Find whatever version is installed
+				Addin sinfo = AddinManager.Registry.GetAddin (Addin.GetIdName (arep.Addin.Id));
+
+				if (sinfo != null) {
+					status |= AddinStatus.Installed;
+					if (!sinfo.Enabled || Utilities.GetMissingDependencies (sinfo).Any ())
+						status |= AddinStatus.Disabled;
+					if (Addin.CompareVersions (sinfo.Version, arep.Addin.Version) > 0)
+						status |= AddinStatus.HasUpdate;
+				}
+
+				gallery_list.AddAddinRepositoryEntry (arep.Addin, arep, status);
+			}
+		}
 	}
 }

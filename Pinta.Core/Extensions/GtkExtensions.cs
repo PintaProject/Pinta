@@ -46,6 +46,7 @@ namespace Pinta.Core
 		public const string Heading = "heading";
 		public const string Inline = "inline";
 		public const string Linked = "linked";
+		public const string Osd = "osd";
 		public const string Spacer = "spacer";
 		public const string SuggestedAction = "suggested-action";
 		public const string Title4 = "title-4";

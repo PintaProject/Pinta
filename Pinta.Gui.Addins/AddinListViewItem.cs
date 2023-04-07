@@ -4,20 +4,32 @@ using Mono.Addins;
 using Mono.Addins.Setup;
 using Pinta.Core;
 
+// The widget can display either an installed add-in, or an entry from an add-in repository.
+using AddinOrRepoEntry = OneOf.OneOf<Mono.Addins.Addin, Mono.Addins.Setup.AddinRepositoryEntry>;
+
 namespace Pinta.Gui.Addins
 {
 	// GObject subclass for use with Gio.ListStore
 	internal class AddinListViewItem : GObject.Object
 	{
 		private AddinHeader info;
-		private Addin addin;
 		private AddinStatus status;
+
+		private AddinOrRepoEntry addin;
 
 		public AddinListViewItem (AddinHeader info, Addin addin, AddinStatus status)
 			: base (true, Array.Empty<GObject.ConstructArgument> ())
 		{
 			this.info = info;
-			this.addin = addin;
+			this.addin = AddinOrRepoEntry.FromT0 (addin);
+			this.status = status;
+		}
+
+		public AddinListViewItem (AddinHeader info, AddinRepositoryEntry addin, AddinStatus status)
+			: base (true, Array.Empty<GObject.ConstructArgument> ())
+		{
+			this.info = info;
+			this.addin = AddinOrRepoEntry.FromT1 (addin);
 			this.status = status;
 		}
 
@@ -26,10 +38,20 @@ namespace Pinta.Gui.Addins
 		public string Version => info.Version;
 
 		public bool Enabled {
-			get => addin.Enabled;
-			set => addin.Enabled = value;
+			get => addin.Match (
+				addin => addin.Enabled,
+				_ => throw new NotImplementedException ()
+			);
+			set => addin.Match (
+				addin => addin.Enabled = value,
+				_ => throw new NotImplementedException ()
+			);
 		}
-		public bool CanDisable => addin.Description.CanDisable;
+
+		public bool CanDisable => addin.Match (
+			addin => addin.Description.CanDisable,
+			repo_entry => false
+		);
 	}
 
 	internal class AddinListViewItemWidget : Box

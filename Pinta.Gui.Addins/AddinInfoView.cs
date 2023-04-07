@@ -54,15 +54,16 @@ namespace Pinta.Gui.Addins
 			version_label.SetLabel (Translations.GetString ("Version: {0}", item.Version));
 			desc_label.SetLabel (item.Description);
 
-			enable_switch.Active = item.Enabled;
 			enable_switch.Visible = item.CanDisable;
+			if (item.CanDisable)
+				enable_switch.Active = item.Enabled;
 
 			current_item = item;
 		}
 
 		private void HandleEnableSwitched ()
 		{
-			if (current_item is not null)
+			if (current_item is not null && current_item.CanDisable)
 				current_item.Enabled = enable_switch.Active;
 		}
 	}

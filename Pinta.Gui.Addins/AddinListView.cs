@@ -67,6 +67,15 @@ namespace Pinta.Gui.Addins
 				HandleSelectionChanged ();
 		}
 
+		public void AddAddinRepositoryEntry (AddinHeader info, AddinRepositoryEntry addin, AddinStatus status)
+		{
+			model.Append (new AddinListViewItem (info, addin, status));
+
+			// Adding items may not cause a selection-changed signal, as mentioned in the SelectionModel docs
+			if (model.NItems == 1)
+				HandleSelectionChanged ();
+		}
+
 		private void HandleSelectionChanged ()
 		{
 			if (model.GetObject (selection_model.Selected) is AddinListViewItem item)
