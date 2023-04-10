@@ -10,6 +10,8 @@ namespace Pinta.Gui.Addins
 		private Gtk.Label size_label;
 		private Gtk.Label repo_label;
 		private Gtk.Label desc_label;
+		private Gtk.Button info_button;
+		private Gtk.Button install_button;
 		private Gtk.Switch enable_switch = new ();
 
 		private AddinListViewItem? current_item;
@@ -56,8 +58,17 @@ namespace Pinta.Gui.Addins
 			desc_label.AddCssClass (AdwaitaStyles.Body);
 			Append (desc_label);
 
+			info_button = Gtk.Button.NewWithLabel (Translations.GetString ("More Information..."));
+			info_button.OnClicked += (_, _) => HandleInfoButtonClicked ();
+
+			install_button = Gtk.Button.NewWithLabel (Translations.GetString ("Install..."));
+			install_button.AddCssClass (AdwaitaStyles.SuggestedAction);
+			install_button.OnClicked += (_, _) => HandleInstallButtonClicked ();
+
 			var hbox = Gtk.Box.New (Gtk.Orientation.Horizontal, 6);
 			hbox.AddCssClass (AdwaitaStyles.Toolbar);
+			hbox.Append (install_button);
+			hbox.Append (info_button);
 			hbox.Append (enable_switch);
 			Append (hbox);
 
@@ -85,6 +96,9 @@ namespace Pinta.Gui.Addins
 			if (repo_name is not null)
 				repo_label.SetLabel (Translations.GetString ("Available in repository: {0}", repo_name));
 
+			info_button.Visible = !string.IsNullOrEmpty (item.Url);
+			install_button.Visible = !item.Installed;
+
 			enable_switch.Visible = item.CanDisable;
 			if (item.CanDisable)
 				enable_switch.Active = item.Enabled;
@@ -96,6 +110,17 @@ namespace Pinta.Gui.Addins
 		{
 			if (current_item is not null && current_item.CanDisable)
 				current_item.Enabled = enable_switch.Active;
+		}
+
+		private void HandleInfoButtonClicked ()
+		{
+			Gtk.Functions.ShowUri (null, current_item!.Url, /* GDK_CURRENT_TIME */ 0);
+		}
+
+		private void HandleInstallButtonClicked ()
+		{
+			// TODO
+			throw new NotImplementedException ();
 		}
 	}
 }

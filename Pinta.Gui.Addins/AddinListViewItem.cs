@@ -36,6 +36,9 @@ namespace Pinta.Gui.Addins
 		public string Name => info.Name;
 		public string Description => info.Description;
 		public string Version => info.Version;
+		public string Url => info.Url;
+
+		public bool Installed => addin.IsT0;
 
 		public bool Enabled {
 			get => addin.Match (

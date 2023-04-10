@@ -15,7 +15,7 @@ namespace Pinta.Gui.Addins
 
 		private StatusProgressBar progress_bar;
 
-		public AddinManagerDialog (Gtk.Window parent, SetupService service, bool allow_install)
+		public AddinManagerDialog (Gtk.Window parent, SetupService service)
 		{
 			this.service = service;
 
@@ -35,7 +35,6 @@ namespace Pinta.Gui.Addins
 			content.Append (progress_bar);
 			Content = content;
 
-			// TODO - handle allow_install and service
 			// TODO - set icons for these panes
 			installed_list = new AddinListView ();
 			view_stack.AddTitled (installed_list, null, Pinta.Core.Translations.GetString ("Installed"));

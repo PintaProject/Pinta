@@ -47,7 +47,7 @@ namespace Pinta.Actions
 		private void Activated (object sender, EventArgs e)
 		{
 			var service = new AddinSetupService (Mono.Addins.AddinManager.Registry);
-			var dialog = new AddinManagerDialog (PintaCore.Chrome.MainWindow, service, allow_install: true);
+			var dialog = new AddinManagerDialog (PintaCore.Chrome.MainWindow, service);
 			dialog.Show ();
 		}
 	}
