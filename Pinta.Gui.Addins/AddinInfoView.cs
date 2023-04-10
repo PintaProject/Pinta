@@ -5,9 +5,9 @@ namespace Pinta.Gui.Addins
 {
 	internal class AddinInfoView : Gtk.Box
 	{
-		private Gtk.Label title_label = new ();
-		private Gtk.Label version_label = new ();
-		private Gtk.Label desc_label = new ();
+		private Gtk.Label title_label;
+		private Gtk.Label version_label;
+		private Gtk.Label desc_label;
 		private Gtk.Switch enable_switch = new ();
 
 		private AddinListViewItem? current_item;
@@ -19,19 +19,26 @@ namespace Pinta.Gui.Addins
 			Spacing = 10;
 			WidthRequest = 300;
 
-			title_label.Halign = Gtk.Align.Start;
+			title_label = new Gtk.Label () {
+				Halign = Gtk.Align.Start
+			};
 			title_label.AddCssClass (AdwaitaStyles.Title4);
 			Append (title_label);
 
-			version_label.Halign = Gtk.Align.Start;
+			version_label = new Gtk.Label () {
+				Halign = Gtk.Align.Start
+			};
 			version_label.AddCssClass (AdwaitaStyles.Heading);
 			Append (version_label);
 
-			desc_label.Halign = Gtk.Align.Start;
-			desc_label.Hexpand = true;
-			desc_label.Valign = Gtk.Align.Start;
-			desc_label.Vexpand = true;
-			desc_label.Wrap = true;
+			desc_label = new Gtk.Label () {
+				Halign = Gtk.Align.Start,
+				Hexpand = true,
+				Valign = Gtk.Align.Start,
+				Vexpand = true,
+				Xalign = 0,
+				Wrap = true,
+			};
 			desc_label.AddCssClass (AdwaitaStyles.Body);
 			Append (desc_label);
 
