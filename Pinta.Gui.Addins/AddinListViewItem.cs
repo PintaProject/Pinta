@@ -52,6 +52,22 @@ namespace Pinta.Gui.Addins
 			addin => addin.Description.CanDisable,
 			repo_entry => false
 		);
+
+		public string? DownloadSize {
+			get {
+				if (int.TryParse (info.Properties.GetPropertyValue ("DownloadSize"), out int size)) {
+					float fs = ((float) size) / 1048576f;
+					return fs.ToString ("0.00 MB");
+				} else {
+					return null;
+				}
+			}
+		}
+
+		public string? RepositoryName => addin.Match<string?> (
+			addin => null,
+			repo_entry => !string.IsNullOrEmpty (repo_entry.RepositoryName) ? repo_entry.RepositoryName : repo_entry.RepositoryUrl
+		);
 	}
 
 	internal class AddinListViewItemWidget : Box

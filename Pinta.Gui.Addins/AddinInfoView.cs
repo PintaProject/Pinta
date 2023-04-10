@@ -7,6 +7,8 @@ namespace Pinta.Gui.Addins
 	{
 		private Gtk.Label title_label;
 		private Gtk.Label version_label;
+		private Gtk.Label size_label;
+		private Gtk.Label repo_label;
 		private Gtk.Label desc_label;
 		private Gtk.Switch enable_switch = new ();
 
@@ -30,6 +32,18 @@ namespace Pinta.Gui.Addins
 			};
 			version_label.AddCssClass (AdwaitaStyles.Heading);
 			Append (version_label);
+
+			size_label = new Gtk.Label () {
+				Halign = Gtk.Align.Start
+			};
+			size_label.AddCssClass (AdwaitaStyles.Heading);
+			Append (size_label);
+
+			repo_label = new Gtk.Label () {
+				Halign = Gtk.Align.Start
+			};
+			repo_label.AddCssClass (AdwaitaStyles.Heading);
+			Append (repo_label);
 
 			desc_label = new Gtk.Label () {
 				Halign = Gtk.Align.Start,
@@ -60,6 +74,16 @@ namespace Pinta.Gui.Addins
 			title_label.SetLabel (item.Name);
 			version_label.SetLabel (Translations.GetString ("Version: {0}", item.Version));
 			desc_label.SetLabel (item.Description);
+
+			string? download_size = item.DownloadSize;
+			size_label.Visible = download_size != null;
+			if (download_size is not null)
+				size_label.SetLabel (Translations.GetString ("Download size: {0}", download_size));
+
+			string? repo_name = item.RepositoryName;
+			repo_label.Visible = repo_name != null;
+			if (repo_name is not null)
+				repo_label.SetLabel (Translations.GetString ("Available in repository: {0}", repo_name));
 
 			enable_switch.Visible = item.CanDisable;
 			if (item.CanDisable)
