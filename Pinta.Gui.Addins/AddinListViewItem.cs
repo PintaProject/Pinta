@@ -4,9 +4,6 @@ using Mono.Addins;
 using Mono.Addins.Setup;
 using Pinta.Core;
 
-// The widget can display either an installed add-in, or an entry from an add-in repository.
-using AddinOrRepoEntry = OneOf.OneOf<Mono.Addins.Addin, Mono.Addins.Setup.AddinRepositoryEntry>;
-
 namespace Pinta.Gui.Addins
 {
 	// GObject subclass for use with Gio.ListStore
@@ -14,23 +11,31 @@ namespace Pinta.Gui.Addins
 	{
 		private AddinHeader info;
 		private AddinStatus status;
+		private Addin? installed_addin;
+		private AddinRepositoryEntry? available_addin;
 
-		private AddinOrRepoEntry addin;
-
-		public AddinListViewItem (AddinHeader info, Addin addin, AddinStatus status)
+		/// <summary>
+		/// Constructor for the list of installed addins.
+		/// </summary>
+		public AddinListViewItem (AddinHeader info, Addin installed_addin, AddinStatus status)
 			: base (true, Array.Empty<GObject.ConstructArgument> ())
 		{
 			this.info = info;
-			this.addin = AddinOrRepoEntry.FromT0 (addin);
+			this.installed_addin = installed_addin;
 			this.status = status;
 		}
 
-		public AddinListViewItem (AddinHeader info, AddinRepositoryEntry addin, AddinStatus status)
+		/// <summary>
+		/// Constructor for the gallery view of available add-ins, some of which may already be installed.
+		/// </summary>
+		public AddinListViewItem (AddinHeader info, AddinRepositoryEntry available_addin, AddinStatus status)
 			: base (true, Array.Empty<GObject.ConstructArgument> ())
 		{
 			this.info = info;
-			this.addin = AddinOrRepoEntry.FromT1 (addin);
+			this.available_addin = available_addin;
 			this.status = status;
+
+			installed_addin = AddinManager.Registry.GetAddin (Addin.GetIdName (info.Id));
 		}
 
 		public string Name => info.Name;
@@ -38,23 +43,14 @@ namespace Pinta.Gui.Addins
 		public string Version => info.Version;
 		public string Url => info.Url;
 
-		public bool Installed => addin.IsT0;
+		public bool Installed => installed_addin is not null;
 
 		public bool Enabled {
-			get => addin.Match (
-				addin => addin.Enabled,
-				_ => throw new NotImplementedException ()
-			);
-			set => addin.Match (
-				addin => addin.Enabled = value,
-				_ => throw new NotImplementedException ()
-			);
+			get => installed_addin!.Enabled;
+			set => installed_addin!.Enabled = value;
 		}
 
-		public bool CanDisable => addin.Match (
-			addin => addin.Description.CanDisable,
-			repo_entry => false
-		);
+		public bool CanDisable => installed_addin?.Description.CanDisable ?? false;
 
 		public string? DownloadSize {
 			get {
@@ -67,10 +63,8 @@ namespace Pinta.Gui.Addins
 			}
 		}
 
-		public string? RepositoryName => addin.Match<string?> (
-			addin => null,
-			repo_entry => !string.IsNullOrEmpty (repo_entry.RepositoryName) ? repo_entry.RepositoryName : repo_entry.RepositoryUrl
-		);
+		public string? RepositoryName => available_addin == null ? null :
+			!string.IsNullOrEmpty (available_addin.RepositoryName) ? available_addin.RepositoryName : available_addin.RepositoryUrl;
 	}
 
 	internal class AddinListViewItemWidget : Box
