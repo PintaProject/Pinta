@@ -101,7 +101,8 @@ namespace Pinta.Core
 		{
 			tool.ToolItem.OnClicked += HandleToolBoxToolItemClicked;
 
-			tools.Add (tool);
+			if (!tools.Add (tool))
+				throw new Exception ("Attempted to add a duplicate tool");
 
 			ToolAdded?.Invoke (this, new ToolEventArgs (tool));
 
@@ -120,7 +121,8 @@ namespace Pinta.Core
 			tool.ToolItem.Active = false;
 			tool.ToolItem.Sensitive = false;
 
-			tools.Remove (tool);
+			if (!tools.Remove (tool))
+				throw new Exception ("Attempted to remove a tool that wasn't registered");
 
 			// Are we trying to remove the current tool?
 			if (CurrentTool == tool) {
@@ -332,8 +334,16 @@ namespace Pinta.Core
 		{
 			public override int Compare (BaseTool? x, BaseTool? y)
 			{
+				int result = (x?.Priority ?? 0) - (y?.Priority ?? 0);
+				// If two tools have the same priority, sort by type name so that both tools can still
+				// be inserted into the set.
+				if (result == 0) {
+					string x_type = x?.GetType ().AssemblyQualifiedName ?? string.Empty;
+					string y_type = y?.GetType ().AssemblyQualifiedName ?? string.Empty;
+					result = x_type.CompareTo (y_type);
+				}
 
-				return (x?.Priority ?? 0) - (y?.Priority ?? 0);
+				return result;
 			}
 		}
 
