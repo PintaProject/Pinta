@@ -12,6 +12,7 @@ namespace Pinta.Gui.Addins
 		private Gtk.Label desc_label;
 		private Gtk.Button info_button;
 		private Gtk.Button install_button;
+		private Gtk.Button uninstall_button;
 		private Gtk.Switch enable_switch = new ();
 
 		private AddinListViewItem? current_item;
@@ -65,8 +66,15 @@ namespace Pinta.Gui.Addins
 			install_button.AddCssClass (AdwaitaStyles.SuggestedAction);
 			install_button.OnClicked += (_, _) => HandleInstallButtonClicked ();
 
+			uninstall_button = Gtk.Button.NewWithLabel (Translations.GetString ("Uninstall..."));
+			uninstall_button.AddCssClass (AdwaitaStyles.DestructiveAction);
+			uninstall_button.OnClicked += (_, _) => HandleUninstallButtonClicked ();
+
+			// TODO - add an update button
+
 			var hbox = Gtk.Box.New (Gtk.Orientation.Horizontal, 6);
 			hbox.AddCssClass (AdwaitaStyles.Toolbar);
+			hbox.Append (uninstall_button);
 			hbox.Append (install_button);
 			hbox.Append (info_button);
 			hbox.Append (enable_switch);
@@ -98,8 +106,9 @@ namespace Pinta.Gui.Addins
 
 			info_button.Visible = !string.IsNullOrEmpty (item.Url);
 			install_button.Visible = !item.Installed;
+			uninstall_button.Visible = item.CanUninstall;
 
-			enable_switch.Visible = item.CanDisable;
+			enable_switch.Visible = item.Installed && item.CanDisable;
 			if (item.CanDisable)
 				enable_switch.Active = item.Enabled;
 
@@ -118,6 +127,12 @@ namespace Pinta.Gui.Addins
 		}
 
 		private void HandleInstallButtonClicked ()
+		{
+			// TODO
+			throw new NotImplementedException ();
+		}
+
+		private void HandleUninstallButtonClicked ()
 		{
 			// TODO
 			throw new NotImplementedException ();

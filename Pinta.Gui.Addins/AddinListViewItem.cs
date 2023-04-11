@@ -45,12 +45,13 @@ namespace Pinta.Gui.Addins
 
 		public bool Installed => installed_addin is not null;
 
+		public bool CanDisable => installed_addin?.Description.CanDisable ?? false;
 		public bool Enabled {
 			get => installed_addin!.Enabled;
 			set => installed_addin!.Enabled = value;
 		}
 
-		public bool CanDisable => installed_addin?.Description.CanDisable ?? false;
+		public bool CanUninstall => installed_addin?.Description.CanUninstall ?? false;
 
 		public string? DownloadSize {
 			get {

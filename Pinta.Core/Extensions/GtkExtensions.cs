@@ -41,6 +41,7 @@ namespace Pinta.Core
 	public static class AdwaitaStyles
 	{
 		public const string Body = "body";
+		public const string DestructiveAction = "destructive-action";
 		public const string DimLabel = "dim-label";
 		public const string Flat = "flat";
 		public const string Heading = "heading";
