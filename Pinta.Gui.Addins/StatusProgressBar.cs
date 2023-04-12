@@ -3,6 +3,12 @@ using Mono.Addins;
 
 namespace Pinta.Gui.Addins
 {
+	internal interface IErrorReporter
+	{
+		void ReportError (string message, Exception exception);
+		void ReportWarning (string message);
+	}
+
 	/// <summary>
 	/// Implementation of IProgressStatus to display status with an overlaid progress bar,
 	/// and toasts for any warnings / errors
@@ -11,12 +17,14 @@ namespace Pinta.Gui.Addins
 	/// </summary>
 	internal class StatusProgressBar : Adw.Bin, IProgressStatus
 	{
-		private Adw.ToastOverlay toast_overlay = new ();
 		private Gtk.Overlay progress_overlay = new ();
 		private Gtk.ProgressBar progress_bar;
+		private IErrorReporter error_reporter;
 
-		public StatusProgressBar (Gtk.Widget primary_widget)
+		public StatusProgressBar (Gtk.Widget primary_widget, IErrorReporter error_reporter)
 		{
+			this.error_reporter = error_reporter;
+
 			progress_bar = new Gtk.ProgressBar () {
 				Fraction = 0.5,
 				ShowText = true
@@ -24,8 +32,7 @@ namespace Pinta.Gui.Addins
 			progress_bar.AddCssClass (Pinta.Core.AdwaitaStyles.Osd);
 
 			progress_overlay.Child = primary_widget;
-			toast_overlay.Child = progress_overlay;
-			Child = toast_overlay;
+			Child = progress_overlay;
 		}
 
 		public void ShowProgress ()
@@ -54,25 +61,9 @@ namespace Pinta.Gui.Addins
 			Console.WriteLine ("Info: {0}", msg);
 		}
 
-		public void ReportError (string message, Exception exception)
-		{
-			Console.WriteLine ("Error: {0}\n{1}", message, exception);
+		public void ReportError (string message, Exception exception) => error_reporter.ReportError (message, exception);
 
-			GLib.Functions.IdleAddFull (0, (_) => {
-				toast_overlay.AddToast (Adw.Toast.New (message));
-				return false;
-			});
-		}
-
-		public void ReportWarning (string message)
-		{
-			Console.WriteLine ("Warning: {0}", message);
-
-			GLib.Functions.IdleAddFull (0, (_) => {
-				toast_overlay.AddToast (Adw.Toast.New (message));
-				return false;
-			});
-		}
+		public void ReportWarning (string message) => error_reporter.ReportWarning (message);
 
 		public void SetMessage (string msg)
 		{

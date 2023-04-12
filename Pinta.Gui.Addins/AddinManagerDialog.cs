@@ -13,6 +13,7 @@ namespace Pinta.Gui.Addins
 		private AddinListView updates_list;
 		private AddinListView gallery_list;
 
+		private Adw.ToastOverlay toast_overlay = new ();
 		private StatusProgressBar progress_bar;
 
 		public AddinManagerDialog (Gtk.Window parent, SetupService service)
@@ -31,8 +32,9 @@ namespace Pinta.Gui.Addins
 
 			var content = Gtk.Box.New (Gtk.Orientation.Vertical, 0);
 			content.Append (header_bar);
-			progress_bar = new StatusProgressBar (view_stack);
-			content.Append (progress_bar);
+			progress_bar = new StatusProgressBar (view_stack, new ToastErrorReporter (toast_overlay));
+			toast_overlay.Child = progress_bar;
+			content.Append (toast_overlay);
 			Content = content;
 
 			// TODO - set icons for these panes
@@ -84,7 +86,7 @@ namespace Pinta.Gui.Addins
 					if (addininfoInstalled.GetUpdate (ainfo) != null)
 						st |= AddinStatus.HasUpdate;
 #endif
-					installed_list.AddAddin (ah, ainfo, st);
+					installed_list.AddAddin (service, ah, ainfo, st);
 				}
 			}
 
@@ -119,8 +121,38 @@ namespace Pinta.Gui.Addins
 						status |= AddinStatus.HasUpdate;
 				}
 
-				gallery_list.AddAddinRepositoryEntry (arep.Addin, arep, status);
+				gallery_list.AddAddinRepositoryEntry (service, arep.Addin, arep, status);
 			}
+		}
+	}
+
+	internal class ToastErrorReporter : IErrorReporter
+	{
+		private Adw.ToastOverlay toast_overlay;
+
+		public ToastErrorReporter (Adw.ToastOverlay toast_overlay)
+		{
+			this.toast_overlay = toast_overlay;
+		}
+
+		public void ReportError (string message, Exception exception)
+		{
+			Console.WriteLine ("Error: {0}\n{1}", message, exception);
+
+			GLib.Functions.IdleAddFull (0, (_) => {
+				toast_overlay.AddToast (Adw.Toast.New (message));
+				return false;
+			});
+		}
+
+		public void ReportWarning (string message)
+		{
+			Console.WriteLine ("Warning: {0}", message);
+
+			GLib.Functions.IdleAddFull (0, (_) => {
+				toast_overlay.AddToast (Adw.Toast.New (message));
+				return false;
+			});
 		}
 	}
 }

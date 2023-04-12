@@ -9,6 +9,7 @@ namespace Pinta.Gui.Addins
 	// GObject subclass for use with Gio.ListStore
 	internal class AddinListViewItem : GObject.Object
 	{
+		private SetupService service;
 		private AddinHeader info;
 		private AddinStatus status;
 		private Addin? installed_addin;
@@ -17,9 +18,10 @@ namespace Pinta.Gui.Addins
 		/// <summary>
 		/// Constructor for the list of installed addins.
 		/// </summary>
-		public AddinListViewItem (AddinHeader info, Addin installed_addin, AddinStatus status)
+		public AddinListViewItem (SetupService service, AddinHeader info, Addin installed_addin, AddinStatus status)
 			: base (true, Array.Empty<GObject.ConstructArgument> ())
 		{
+			this.service = service;
 			this.info = info;
 			this.installed_addin = installed_addin;
 			this.status = status;
@@ -28,9 +30,10 @@ namespace Pinta.Gui.Addins
 		/// <summary>
 		/// Constructor for the gallery view of available add-ins, some of which may already be installed.
 		/// </summary>
-		public AddinListViewItem (AddinHeader info, AddinRepositoryEntry available_addin, AddinStatus status)
+		public AddinListViewItem (SetupService service, AddinHeader info, AddinRepositoryEntry available_addin, AddinStatus status)
 			: base (true, Array.Empty<GObject.ConstructArgument> ())
 		{
+			this.service = service;
 			this.info = info;
 			this.available_addin = available_addin;
 			this.status = status;
@@ -38,12 +41,15 @@ namespace Pinta.Gui.Addins
 			installed_addin = AddinManager.Registry.GetAddin (Addin.GetIdName (info.Id));
 		}
 
+		public SetupService Service => service;
+
 		public string Name => info.Name;
 		public string Description => info.Description;
 		public string Version => info.Version;
 		public string Url => info.Url;
 
 		public bool Installed => installed_addin is not null;
+		public AddinRepositoryEntry? RepositoryEntry => available_addin;
 
 		public bool CanDisable => installed_addin?.Description.CanDisable ?? false;
 		public bool Enabled {

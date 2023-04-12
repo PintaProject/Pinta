@@ -1,4 +1,5 @@
 using System;
+using Mono.Addins.Setup;
 using Pinta.Core;
 
 namespace Pinta.Gui.Addins
@@ -128,8 +129,13 @@ namespace Pinta.Gui.Addins
 
 		private void HandleInstallButtonClicked ()
 		{
-			// TODO
-			throw new NotImplementedException ();
+			ArgumentNullException.ThrowIfNull (current_item);
+			if (current_item.RepositoryEntry is null)
+				throw new Exception ("The install button should not be available unless there is a repository entry");
+
+			var dialog = new InstallDialog (PintaCore.Chrome.MainWindow, current_item.Service);
+			dialog.InitForInstall (new[] { current_item.RepositoryEntry });
+			dialog.Show ();
 		}
 
 		private void HandleUninstallButtonClicked ()

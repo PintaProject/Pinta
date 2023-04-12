@@ -58,18 +58,18 @@ namespace Pinta.Gui.Addins
 			model.RemoveAll ();
 		}
 
-		public void AddAddin (AddinHeader info, Addin addin, AddinStatus status)
+		public void AddAddin (SetupService service, AddinHeader info, Addin addin, AddinStatus status)
 		{
-			model.Append (new AddinListViewItem (info, addin, status));
+			model.Append (new AddinListViewItem (service, info, addin, status));
 
 			// Adding items may not cause a selection-changed signal, as mentioned in the SelectionModel docs
 			if (model.NItems == 1)
 				HandleSelectionChanged ();
 		}
 
-		public void AddAddinRepositoryEntry (AddinHeader info, AddinRepositoryEntry addin, AddinStatus status)
+		public void AddAddinRepositoryEntry (SetupService service, AddinHeader info, AddinRepositoryEntry addin, AddinStatus status)
 		{
-			model.Append (new AddinListViewItem (info, addin, status));
+			model.Append (new AddinListViewItem (service, info, addin, status));
 
 			// Adding items may not cause a selection-changed signal, as mentioned in the SelectionModel docs
 			if (model.NItems == 1)
