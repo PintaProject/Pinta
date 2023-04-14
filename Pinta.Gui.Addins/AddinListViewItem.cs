@@ -49,6 +49,7 @@ namespace Pinta.Gui.Addins
 		public string Url => info.Url;
 
 		public bool Installed => installed_addin is not null;
+		public Addin? Addin => installed_addin;
 		public AddinRepositoryEntry? RepositoryEntry => available_addin;
 
 		public bool CanDisable => installed_addin?.Description.CanDisable ?? false;

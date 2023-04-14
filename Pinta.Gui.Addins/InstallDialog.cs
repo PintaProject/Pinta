@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Mono.Addins;
 using Mono.Addins.Description;
 using Mono.Addins.Setup;
 using Pinta.Core;
@@ -13,6 +14,7 @@ namespace Pinta.Gui.Addins
 	{
 		private SetupService service;
 		private PackageCollection packages_to_install = new ();
+		private List<string> addins_to_remove = new ();
 		private InstallErrorReporter error_reporter = new ();
 
 		private Adw.WindowTitle window_title = new ();
@@ -26,8 +28,8 @@ namespace Pinta.Gui.Addins
 		private Gtk.Label install_label;
 		private Gtk.Label uninstall_heading_label;
 		private Gtk.Label uninstall_label;
-		private Gtk.Label unresolved_heading_label;
-		private Gtk.Label unresolved_label;
+		private Gtk.Label dependencies_heading_label;
+		private Gtk.Label dependencies_label;
 
 		private Gtk.Button install_button;
 		private Gtk.Button cancel_button;
@@ -83,14 +85,14 @@ namespace Pinta.Gui.Addins
 			uninstall_label.AddCssClass (AdwaitaStyles.Warning);
 			labels.Append (uninstall_label);
 
-			unresolved_heading_label = Gtk.Label.New (Translations.GetString ("The following dependencies could not be resolved:"));
-			unresolved_heading_label.AddCssClass (AdwaitaStyles.Title4);
-			labels.Append (unresolved_heading_label);
+			dependencies_heading_label = Gtk.Label.New (Translations.GetString ("The following dependencies could not be resolved:"));
+			dependencies_heading_label.AddCssClass (AdwaitaStyles.Title4);
+			labels.Append (dependencies_heading_label);
 
-			unresolved_label = new Gtk.Label ();
-			unresolved_label.AddCssClass (AdwaitaStyles.Body);
-			unresolved_label.AddCssClass (AdwaitaStyles.Error);
-			labels.Append (unresolved_label);
+			dependencies_label = new Gtk.Label ();
+			dependencies_label.AddCssClass (AdwaitaStyles.Body);
+			dependencies_label.AddCssClass (AdwaitaStyles.Error);
+			labels.Append (dependencies_label);
 
 			var scroll = Gtk.ScrolledWindow.New ();
 			scroll.Child = labels;
@@ -107,7 +109,6 @@ namespace Pinta.Gui.Addins
 			buttons.Append (cancel_button);
 
 			install_button = Gtk.Button.NewWithLabel (Translations.GetString ("Install"));
-			install_button.AddCssClass (AdwaitaStyles.SuggestedAction);
 			buttons.Append (install_button);
 
 			content.Append (buttons);
@@ -133,9 +134,38 @@ namespace Pinta.Gui.Addins
 			DisplayInstallInfo ();
 		}
 
+		public void InitForUninstall (Addin[] addins_to_uninstall)
+		{
+			window_title.Title = Translations.GetString ("Uninstall");
+			install_button.Label = Translations.GetString ("Uninstall");
+			install_button.AddCssClass (AdwaitaStyles.DestructiveAction);
+
+			addins_to_remove = addins_to_uninstall.Select (a => a.Id).ToList ();
+
+			error_heading_label.Visible = error_label.Visible = false;
+			warning_heading_label.Visible = warning_label.Visible = false;
+			install_heading_label.Visible = install_label.Visible = false;
+
+			uninstall_heading_label.SetLabel (Translations.GetString ("The following packages will be uninstalled:"));
+			uninstall_label.SetLabel (string.Join (Environment.NewLine, addins_to_uninstall.Select (a => a.Name)));
+
+			var dependents = new HashSet<Addin> ();
+			foreach (string id in addins_to_remove) {
+				dependents.UnionWith (service.GetDependentAddins (id, true));
+			}
+
+			dependencies_heading_label.Visible = dependencies_label.Visible = dependents.Any ();
+			if (dependents.Any ()) {
+				dependencies_heading_label.SetLabel (Translations.GetString (
+					"There are other extension packages that depend on the previous ones which will also be uninstalled:"));
+				dependencies_label.SetLabel (string.Join (Environment.NewLine, dependents.Select (a => a.Name)));
+			}
+		}
+
 		private void DisplayInstallInfo ()
 		{
 			window_title.Title = Translations.GetString ("Install");
+			install_button.AddCssClass (AdwaitaStyles.SuggestedAction);
 
 			PackageCollection to_uninstall;
 			DependencyCollection unresolved;
@@ -180,14 +210,14 @@ namespace Pinta.Gui.Addins
 				uninstall_label.SetLabel (sb.ToString ());
 			}
 
-			unresolved_heading_label.Visible = unresolved_label.Visible = unresolved.Count > 0;
-			if (unresolved_label.Visible) {
+			dependencies_heading_label.Visible = dependencies_label.Visible = unresolved.Count > 0;
+			if (dependencies_label.Visible) {
 				sb.Clear ();
 
 				foreach (Dependency p in unresolved)
 					sb.AppendLine (p.Name);
 
-				unresolved_label.SetLabel (sb.ToString ());
+				dependencies_label.SetLabel (sb.ToString ());
 			}
 
 			install_button.Sensitive = success;
@@ -198,12 +228,14 @@ namespace Pinta.Gui.Addins
 			install_button.Sensitive = false;
 			cancel_button.Sensitive = false;
 
-			error_heading_label.SetLabel (Translations.GetString ("The installation failed!"));
-			warning_heading_label.SetLabel (Translations.GetString ("The installation completed with warnings."));
-
 			error_reporter.Clear ();
 			progress_bar.ShowProgress ();
-			await Install ();
+
+			if (addins_to_remove.Any ())
+				await Uninstall ();
+			else
+				await Install ();
+
 			progress_bar.HideProgress ();
 
 			install_button.Visible = false;
@@ -212,7 +244,7 @@ namespace Pinta.Gui.Addins
 
 			install_heading_label.Visible = install_label.Visible = false;
 			uninstall_heading_label.Visible = uninstall_label.Visible = false;
-			unresolved_heading_label.Visible = unresolved_label.Visible = false;
+			dependencies_heading_label.Visible = dependencies_label.Visible = false;
 
 			error_heading_label.Visible = error_label.Visible = error_reporter.Errors.Any ();
 			if (error_label.Visible)
@@ -228,19 +260,21 @@ namespace Pinta.Gui.Addins
 
 		private Task Install ()
 		{
+			error_heading_label.SetLabel (Translations.GetString ("The installation failed!"));
+			warning_heading_label.SetLabel (Translations.GetString ("The installation has completed with warnings."));
+
 			return Task.Run (() => {
-#if false // For testing
-				float progress = 0;
-				while (progress < 1) {
-					progress_bar.SetProgress (progress);
-					progress_bar.SetMessage ($"Installing {progress}");
-					System.Threading.Thread.Sleep (500);
-					progress += 0.1f;
-				}
-				progress_bar.ReportError ("some warning", null!);
-#else
 				service.Install (progress_bar, packages_to_install);
-#endif
+			});
+		}
+
+		private Task Uninstall ()
+		{
+			error_heading_label.SetLabel (Translations.GetString ("The uninstallation failed!"));
+			warning_heading_label.SetLabel (Translations.GetString ("The uninstallation has completed with warnings."));
+
+			return Task.Run (() => {
+				service.Uninstall (progress_bar, addins_to_remove);
 			});
 		}
 	}

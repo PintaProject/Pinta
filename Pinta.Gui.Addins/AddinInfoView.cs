@@ -140,8 +140,13 @@ namespace Pinta.Gui.Addins
 
 		private void HandleUninstallButtonClicked ()
 		{
-			// TODO
-			throw new NotImplementedException ();
+			ArgumentNullException.ThrowIfNull (current_item);
+			if (current_item.Addin is null)
+				throw new Exception ("The uninstall button should not be available unless there is an installed addin");
+
+			var dialog = new InstallDialog (PintaCore.Chrome.MainWindow, current_item.Service);
+			dialog.InitForUninstall (new[] { current_item.Addin });
+			dialog.Show ();
 		}
 	}
 }
