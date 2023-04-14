@@ -27,7 +27,8 @@ namespace Pinta.Gui.Addins
 
 			progress_bar = new Gtk.ProgressBar () {
 				Fraction = 0.5,
-				ShowText = true
+				ShowText = true,
+				Valign = Gtk.Align.End
 			};
 			progress_bar.AddCssClass (Pinta.Core.AdwaitaStyles.Osd);
 
