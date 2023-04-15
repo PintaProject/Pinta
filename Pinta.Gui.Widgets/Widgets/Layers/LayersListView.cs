@@ -132,7 +132,7 @@ namespace Pinta.Gui.Widgets
 		private void HandleHistoryChanged (object? sender, EventArgs e)
 		{
 			// Update the widgets by flagging every item as having changed.
-			for (uint i = 0; i < model.NItems; ++i)
+			for (uint i = 0; i < model.GetNItems (); ++i)
 				model.ItemsChanged (i, 0, 0);
 		}
 
