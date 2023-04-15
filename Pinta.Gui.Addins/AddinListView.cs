@@ -14,6 +14,11 @@ namespace Pinta.Gui.Addins
 		private Gtk.ListView list_view;
 		private AddinInfoView info_view;
 
+		/// <summary>
+		/// Event raised when addins are installed or uninstalled.
+		/// </summary>
+		public event EventHandler? OnAddinChanged;
+
 		public AddinListView ()
 		{
 			model = Gio.ListStore.New (AddinListViewItem.GetGType ());
@@ -42,6 +47,7 @@ namespace Pinta.Gui.Addins
 			list_view_scroll.SetPolicy (PolicyType.Automatic, PolicyType.Automatic);
 
 			info_view = new AddinInfoView ();
+			info_view.OnAddinChanged += (o, e) => OnAddinChanged?.Invoke (o, e);
 
 			var flap = Adw.Flap.New ();
 			flap.FoldPolicy = Adw.FlapFoldPolicy.Never;

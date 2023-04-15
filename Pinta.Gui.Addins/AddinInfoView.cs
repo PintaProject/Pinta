@@ -18,6 +18,11 @@ namespace Pinta.Gui.Addins
 
 		private AddinListViewItem? current_item;
 
+		/// <summary>
+		/// Event raised when addins are installed or uninstalled.
+		/// </summary>
+		public event EventHandler? OnAddinChanged;
+
 		public AddinInfoView ()
 		{
 			this.SetAllMargins (10);
@@ -134,6 +139,7 @@ namespace Pinta.Gui.Addins
 				throw new Exception ("The install button should not be available unless there is a repository entry");
 
 			var dialog = new InstallDialog (PintaCore.Chrome.MainWindow, current_item.Service);
+			dialog.OnSuccess += (_, _) => OnAddinChanged?.Invoke (this, EventArgs.Empty);
 			dialog.InitForInstall (new[] { current_item.RepositoryEntry });
 			dialog.Show ();
 		}
@@ -145,6 +151,7 @@ namespace Pinta.Gui.Addins
 				throw new Exception ("The uninstall button should not be available unless there is an installed addin");
 
 			var dialog = new InstallDialog (PintaCore.Chrome.MainWindow, current_item.Service);
+			dialog.OnSuccess += (_, _) => OnAddinChanged?.Invoke (this, EventArgs.Empty);
 			dialog.InitForUninstall (new[] { current_item.Addin });
 			dialog.Show ();
 		}

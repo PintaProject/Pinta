@@ -34,6 +34,8 @@ namespace Pinta.Gui.Addins
 		private Gtk.Button install_button;
 		private Gtk.Button cancel_button;
 
+		public event EventHandler? OnSuccess;
+
 		public InstallDialog (Gtk.Window parent, SetupService service)
 		{
 			this.service = service;
@@ -249,13 +251,15 @@ namespace Pinta.Gui.Addins
 			error_heading_label.Visible = error_label.Visible = error_reporter.Errors.Any ();
 			if (error_label.Visible)
 				error_label.SetLabel (string.Join (Environment.NewLine, error_reporter.Errors));
+			else {
+				warning_heading_label.Visible = warning_label.Visible = error_reporter.Warnings.Any ();
+				if (warning_label.Visible)
+					warning_label.SetLabel (string.Join (Environment.NewLine, error_reporter.Warnings));
+				else
+					Close (); // Success with no warnings!
 
-			warning_heading_label.Visible = warning_label.Visible = error_reporter.Warnings.Any ();
-			if (!error_label.Visible && warning_label.Visible)
-				warning_label.SetLabel (string.Join (Environment.NewLine, error_reporter.Warnings));
-
-			if (!error_label.Visible && !warning_label.Visible)
-				Close (); // Success!
+				OnSuccess?.Invoke (this, EventArgs.Empty);
+			}
 		}
 
 		private Task Install ()

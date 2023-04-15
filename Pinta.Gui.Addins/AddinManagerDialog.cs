@@ -45,6 +45,10 @@ namespace Pinta.Gui.Addins
 			gallery_list = new AddinListView ();
 			view_stack.AddTitled (gallery_list, null, Pinta.Core.Translations.GetString ("Gallery"));
 
+			installed_list.OnAddinChanged += (_, _) => LoadAll ();
+			updates_list.OnAddinChanged += (_, _) => LoadAll ();
+			gallery_list.OnAddinChanged += (_, _) => LoadAll ();
+
 			LoadAll ();
 		}
 
