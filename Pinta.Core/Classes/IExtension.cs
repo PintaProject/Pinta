@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using Pinta.Core;
 
-[assembly: Mono.Addins.AddinRoot ("Pinta", PintaCore.ApplicationVersion)]
+[assembly: Mono.Addins.AddinRoot ("Pinta", PintaCore.ApplicationVersion, CompatVersion = PintaCore.ApplicationVersion)]
 
 namespace Pinta.Core
 {
