@@ -3,6 +3,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using Mono.Addins;
 using Mono.Addins.Setup;
+using Pinta.Resources;
 
 namespace Pinta.Gui.Addins
 {
@@ -39,11 +40,11 @@ namespace Pinta.Gui.Addins
 
 			// TODO - set icons for these panes
 			installed_list = new AddinListView ();
-			view_stack.AddTitled (installed_list, null, Pinta.Core.Translations.GetString ("Installed"));
+			view_stack.AddTitledWithIcon (installed_list, null, Pinta.Core.Translations.GetString ("Installed"), StandardIcons.ApplicationAddon);
 			updates_list = new AddinListView ();
-			view_stack.AddTitled (updates_list, "updates", Pinta.Core.Translations.GetString ("Updates"));
+			view_stack.AddTitledWithIcon (updates_list, "updates", Pinta.Core.Translations.GetString ("Updates"), StandardIcons.SoftwareUpdateAvailable);
 			gallery_list = new AddinListView ();
-			view_stack.AddTitled (gallery_list, null, Pinta.Core.Translations.GetString ("Gallery"));
+			view_stack.AddTitledWithIcon (gallery_list, null, Pinta.Core.Translations.GetString ("Gallery"), StandardIcons.SystemSoftwareInstall);
 
 			installed_list.OnAddinChanged += (_, _) => LoadAll ();
 			updates_list.OnAddinChanged += (_, _) => LoadAll ();

@@ -67,14 +67,19 @@ namespace Pinta.Gui.Addins
 
 			info_button = Gtk.Button.NewWithLabel (Translations.GetString ("More Information..."));
 			info_button.OnClicked += (_, _) => HandleInfoButtonClicked ();
+			info_button.Visible = false;
 
 			install_button = Gtk.Button.NewWithLabel (Translations.GetString ("Install..."));
 			install_button.AddCssClass (AdwaitaStyles.SuggestedAction);
 			install_button.OnClicked += (_, _) => HandleInstallButtonClicked ();
+			install_button.Visible = false;
 
 			uninstall_button = Gtk.Button.NewWithLabel (Translations.GetString ("Uninstall..."));
 			uninstall_button.AddCssClass (AdwaitaStyles.DestructiveAction);
 			uninstall_button.OnClicked += (_, _) => HandleUninstallButtonClicked ();
+			uninstall_button.Visible = false;
+
+			enable_switch.Visible = false;
 
 			// TODO - add an update button
 
