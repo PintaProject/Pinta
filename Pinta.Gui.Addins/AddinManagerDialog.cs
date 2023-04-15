@@ -3,6 +3,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using Mono.Addins;
 using Mono.Addins.Setup;
+using Pinta.Core;
 using Pinta.Resources;
 
 namespace Pinta.Gui.Addins
@@ -16,6 +17,7 @@ namespace Pinta.Gui.Addins
 
 		private Adw.ToastOverlay toast_overlay = new ();
 		private StatusProgressBar progress_bar;
+		private Gtk.Button install_file_button;
 
 		public AddinManagerDialog (Gtk.Window parent, SetupService service)
 		{
@@ -31,6 +33,11 @@ namespace Pinta.Gui.Addins
 			header_bar.CenteringPolicy = Adw.CenteringPolicy.Strict;
 			header_bar.TitleWidget = view_switcher_title;
 
+			install_file_button = Gtk.Button.NewFromIconName (StandardIcons.DocumentOpen);
+			install_file_button.TooltipText = Translations.GetString ("Install from file...");
+			install_file_button.OnClicked += (_, _) => HandleInstallFromFileClicked ();
+			header_bar.PackStart (install_file_button);
+
 			var content = Gtk.Box.New (Gtk.Orientation.Vertical, 0);
 			content.Append (header_bar);
 			progress_bar = new StatusProgressBar (view_stack, new ToastErrorReporter (toast_overlay));
@@ -40,11 +47,11 @@ namespace Pinta.Gui.Addins
 
 			// TODO - set icons for these panes
 			installed_list = new AddinListView ();
-			view_stack.AddTitledWithIcon (installed_list, null, Pinta.Core.Translations.GetString ("Installed"), StandardIcons.ApplicationAddon);
+			view_stack.AddTitledWithIcon (installed_list, null, Translations.GetString ("Installed"), StandardIcons.ApplicationAddon);
 			updates_list = new AddinListView ();
-			view_stack.AddTitledWithIcon (updates_list, "updates", Pinta.Core.Translations.GetString ("Updates"), StandardIcons.SoftwareUpdateAvailable);
+			view_stack.AddTitledWithIcon (updates_list, "updates", Translations.GetString ("Updates"), StandardIcons.SoftwareUpdateAvailable);
 			gallery_list = new AddinListView ();
-			view_stack.AddTitledWithIcon (gallery_list, null, Pinta.Core.Translations.GetString ("Gallery"), StandardIcons.SystemSoftwareInstall);
+			view_stack.AddTitledWithIcon (gallery_list, null, Translations.GetString ("Gallery"), StandardIcons.SystemSoftwareInstall);
 
 			installed_list.OnAddinChanged += (_, _) => LoadAll ();
 			updates_list.OnAddinChanged += (_, _) => LoadAll ();
@@ -128,6 +135,44 @@ namespace Pinta.Gui.Addins
 
 				gallery_list.AddAddinRepositoryEntry (service, arep.Addin, arep, status);
 			}
+		}
+
+		private void HandleInstallFromFileClicked ()
+		{
+			var dialog = Gtk.FileChooserNative.New (
+				Translations.GetString ("Install Extension Package"),
+				this,
+				Gtk.FileChooserAction.Open,
+				Translations.GetString ("Open"),
+				Translations.GetString ("Cancel"));
+			dialog.Modal = true;
+			dialog.SelectMultiple = true;
+
+			var filter = Gtk.FileFilter.New ();
+			filter.AddPattern ("*.mpack");
+			filter.Name = Translations.GetString ("Extension packages");
+			dialog.AddFilter (filter);
+
+			filter = Gtk.FileFilter.New ();
+			filter.AddPattern ("*");
+			filter.Name = Translations.GetString ("All files");
+			dialog.AddFilter (filter);
+
+			dialog.OnResponse += (_, e) => {
+				if (e.ResponseId != (int) Gtk.ResponseType.Accept)
+					return;
+
+				string[] files = dialog.GetFileList ()
+					.Select (f => f.GetPath () ?? string.Empty)
+					.Where (f => !string.IsNullOrEmpty (f))
+					.ToArray ();
+				var install_dialog = new InstallDialog (this, service);
+				install_dialog.OnSuccess += (_, _) => LoadAll ();
+				install_dialog.InitForInstall (files);
+				install_dialog.Show ();
+			};
+
+			dialog.Show ();
 		}
 	}
 

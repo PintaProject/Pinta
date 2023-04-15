@@ -4,7 +4,8 @@
   </PropertyGroup>
   <ItemGroup>
     <PackageReference Include="NGettext" Version="0.6.7" />
-    <PackageReference Include="SharpZipLib" Version="1.4.2" />
+    <!-- Note: this matches the SharpZipLib version used by Mono.Addins.Setup. Later versions like 1.4.x are incompatible due to some function signature changes -->
+    <PackageReference Include="SharpZipLib" Version="1.3.3" />
     <PackageReference Include="ParagonClipper" Version="6.4.2" />
     <PackageReference Include="GirCore.Adw-1" Version="0.3.0" />
     <PackageReference Include="GirCore.PangoCairo-1.0" Version="0.3.0" />

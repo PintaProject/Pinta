@@ -13,3 +13,6 @@ updates:
     directory: "/"
     schedule:
       interval: "weekly"
+    ignore:
+      # This needs to match the version used by Mono.Addins.Setup, so we cannot upgrade to the latest version
+      - dependency-name: "SharpZipLib"
