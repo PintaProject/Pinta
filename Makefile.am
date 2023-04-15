@@ -62,6 +62,7 @@ updatepotfiles:
 		Pinta.Core \
 		Pinta.Docking \
 		Pinta.Effects \
+		Pinta.Gui.Addins \
 		Pinta.Gui.Widgets \
 		Pinta.Resources \
 		Pinta.Tools \
@@ -79,11 +80,11 @@ clean-local: cleanobj cleanbin
 maintainer-clean-local:
 	rm -rf autom4te.cache
 
-# target: cleanbin - Removes built files. 
-cleanbin: 
+# target: cleanbin - Removes built files.
+cleanbin:
 	rm -rvf $(BINDIR)/*
 
-# target: cleanobj - Removes temporary build files. 
+# target: cleanobj - Removes temporary build files.
 cleanobj:
 	find $(srcdir)/ -type d -name obj | xargs rm -rvf
 
@@ -102,7 +103,7 @@ releasezip:
 	$(DOTNET_CMD) publish Pinta.sln $(PINTA_BUILD_OPTS) -r linux-x64 --self-contained true -p:PublishDir=$(abs_srcdir)/release
 	cd $(abs_srcdir)/release && zip -r ../$(RELEASE_FILE).zip * -x "*.pdb"
 
-EXTRA_DIST = Pinta Pinta.Core Pinta.Docking Pinta.Effects Pinta.Gui.Widgets Pinta.Resources Pinta.Tools po xdg tests license-mit.txt \
+EXTRA_DIST = Pinta Pinta.Core Pinta.Docking Pinta.Effects Pinta.Gui.Addins Pinta.Gui.Widgets Pinta.Resources Pinta.Tools po xdg tests license-mit.txt \
            license-pdn.txt Pinta.sln pinta.pc.in readme.md intltool-extract.in \
            intltool-merge.in intltool-update.in installer/linux/install.proj Directory.Build.props
 
