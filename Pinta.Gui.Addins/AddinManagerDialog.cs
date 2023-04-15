@@ -45,7 +45,6 @@ namespace Pinta.Gui.Addins
 			content.Append (toast_overlay);
 			Content = content;
 
-			// TODO - set icons for these panes
 			installed_list = new AddinListView ();
 			view_stack.AddTitledWithIcon (installed_list, null, Translations.GetString ("Installed"), StandardIcons.ApplicationAddon);
 			updates_list = new AddinListView ();
@@ -74,6 +73,8 @@ namespace Pinta.Gui.Addins
 
 					progress_bar.HideProgress ();
 					LoadGallery ();
+
+					// TODO - populate the 'updates_list' view
 
 					return false;
 				});
