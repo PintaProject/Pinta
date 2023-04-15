@@ -96,8 +96,16 @@ namespace Pinta.Gui.Addins
 			dependencies_label.AddCssClass (AdwaitaStyles.Error);
 			labels.Append (dependencies_label);
 
+			// Left align all labels.
+			Gtk.Widget? label = labels.GetFirstChild ();
+			while (label != null) {
+				label.Halign = Gtk.Align.Start;
+				label = label.GetNextSibling ();
+			}
+
 			var scroll = Gtk.ScrolledWindow.New ();
 			scroll.Child = labels;
+			scroll.HscrollbarPolicy = Gtk.PolicyType.Never;
 			scroll.Vexpand = true;
 
 			progress_bar = new StatusProgressBar (scroll, error_reporter);
