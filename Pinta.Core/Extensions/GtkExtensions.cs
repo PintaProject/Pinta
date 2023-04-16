@@ -40,14 +40,20 @@ namespace Pinta.Core
 	/// </summary>
 	public static class AdwaitaStyles
 	{
+		public const string Body = "body";
+		public const string DestructiveAction = "destructive-action";
 		public const string DimLabel = "dim-label";
+		public const string Error = "error";
 		public const string Flat = "flat";
+		public const string Heading = "heading";
 		public const string Inline = "inline";
 		public const string Linked = "linked";
+		public const string Osd = "osd";
 		public const string Spacer = "spacer";
 		public const string SuggestedAction = "suggested-action";
 		public const string Title4 = "title-4";
 		public const string Toolbar = "toolbar";
+		public const string Warning = "warning";
 	};
 
 	public static class GtkExtensions

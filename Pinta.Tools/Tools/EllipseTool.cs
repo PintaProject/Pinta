@@ -33,7 +33,7 @@ namespace Pinta.Tools
 	{
 		public EllipseTool (IServiceManager services) : base (services)
 		{
-			BaseEditEngine.CorrespondingTools.Add (ShapeType, this);
+			BaseEditEngine.CorrespondingTools[ShapeType] = this;
 		}
 
 		public override string Name => Translations.GetString ("Ellipse");

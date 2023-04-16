@@ -30,8 +30,7 @@ using Cairo;
 
 namespace Pinta.Core
 {
-	// TODO-GTK3 (addins)
-	// [TypeExtensionPoint]
+	[Mono.Addins.TypeExtensionPoint]
 	public interface IPaletteLoader
 	{
 		List<Color> Load (Gio.File file);

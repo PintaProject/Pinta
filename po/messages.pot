@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-04-01 11:19-0400\n"
+"POT-Creation-Date: 2023-04-15 15:12-0400\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -17,17 +17,12 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 
-#: Mono.Addins.Gui/Mono.Addins.Gui/InstallDialog.cs:142
+#: ../Pinta.Gui.Addins/InstallDialog.cs:198
 msgid " (in user directory)"
 msgstr ""
 
 #: ../Pinta.Core/Classes/SelectionModeHandler.cs:61
 msgid " Selection Mode: "
-msgstr ""
-
-#: Mono.Addins/Mono.Addins.Description/AssemblyDependency.cs:103
-#, csharp-format
-msgid "(provided by {0})"
 msgstr ""
 
 #: ../Pinta.Core/Managers/EffectsManager.cs:60
@@ -51,7 +46,7 @@ msgstr ""
 msgid "9 x 9 Region"
 msgstr ""
 
-#: ../Pinta/MainWindow.cs:353
+#: ../Pinta/MainWindow.cs:340
 msgid "A_dd-ins"
 msgstr ""
 
@@ -69,36 +64,16 @@ msgstr ""
 msgid "Add New Layer"
 msgstr ""
 
-#: Mono.Addins.Gui/gtk-gui/Mono.Addins.Gui.NewSiteDialog.cs:29
-msgid "Add New Repository"
-msgstr ""
-
 #: ../Pinta.Effects/Effects/AddNoiseEffect.cs:27
 msgid "Add Noise"
 msgstr ""
 
-#: Mono.Addins.Gui/Mono.Addins.Gui/AddinTreeWidget.cs:120
-msgid "Add-in"
-msgstr ""
-
 #: ../Pinta.Core/Actions/AddinActions.cs:39
-msgid "Add-in Manager"
-msgstr ""
-
-#: Mono.Addins.Gui/gtk-gui/Mono.Addins.Gui.ManageSitesDialog.cs:20
-msgid "Add-in Repository Management"
-msgstr ""
-
-#: Mono.Addins.Gui/Mono.Addins.Gui/AddinManagerDialog.cs:523
-msgid "Add-in packages"
+msgid "Add-in Manager..."
 msgstr ""
 
 #: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:772
 msgid "Added"
-msgstr ""
-
-#: Mono.Addins.Gui/gtk-gui/Mono.Addins.Gui.AddinInstallerDialog.cs:38
-msgid "Additional extensions are required to perform this operation."
 msgstr ""
 
 #: ../Pinta.Tools/Tools/ColorPickerTool.cs:194
@@ -107,11 +82,8 @@ msgstr ""
 
 #: ../Pinta/Actions/File/OpenDocumentAction.cs:81
 #: ../Pinta.Core/Actions/EditActions.cs:367
+#: ../Pinta.Gui.Addins/AddinManagerDialog.cs:159
 msgid "All files"
-msgstr ""
-
-#: Mono.Addins.Gui/Mono.Addins.Gui/AddinManagerDialog.cs:261
-msgid "All repositories"
 msgstr ""
 
 #: ../Pinta.Effects/Effects/BulgeEffect.cs:95
@@ -142,16 +114,12 @@ msgstr ""
 msgid "Antialias"
 msgstr ""
 
-#: ../Pinta.Core/Classes/BaseTool.cs:353
+#: ../Pinta.Core/Classes/BaseTool.cs:352
 msgid "Antialiasing Off"
 msgstr ""
 
-#: ../Pinta.Core/Classes/BaseTool.cs:352
+#: ../Pinta.Core/Classes/BaseTool.cs:351
 msgid "Antialiasing On"
-msgstr ""
-
-#: Mono.Addins.Gui/Mono.Addins.Gui/InstallDialog.cs:190
-msgid "Are you sure you want to cancel the installation?"
 msgstr ""
 
 #: ../Pinta.Tools/Editable/EditEngines/ArrowedEditEngine.cs:245
@@ -176,8 +144,9 @@ msgstr ""
 msgid "Auto Level"
 msgstr ""
 
-#: Mono.Addins.Gui/Mono.Addins.Gui/AddinInfoView.cs:217
-msgid "Available in repository:"
+#: ../Pinta.Gui.Addins/AddinInfoView.cs:116
+#, csharp-format
+msgid "Available in repository: {0}"
 msgstr ""
 
 #: ../Pinta.Core/Managers/WorkspaceManager.cs:177
@@ -239,10 +208,6 @@ msgstr ""
 msgid "Brightness / Contrast"
 msgstr ""
 
-#: Mono.Addins.Gui/gtk-gui/Mono.Addins.Gui.NewSiteDialog.cs:154
-msgid "Browse..."
-msgstr ""
-
 #: ../Pinta.Effects/Effects/OilPaintingEffect.cs:147
 msgid "Brush Size"
 msgstr ""
@@ -271,6 +236,8 @@ msgstr ""
 #: ../Pinta.Core/Actions/EditActions.cs:352
 #: ../Pinta.Core/Actions/EditActions.cs:392
 #: ../Pinta.Core/Actions/LayerActions.cs:169
+#: ../Pinta.Gui.Addins/AddinManagerDialog.cs:148
+#: ../Pinta.Gui.Addins/InstallDialog.cs:118
 msgid "Cancel"
 msgstr ""
 
@@ -384,6 +351,7 @@ msgid "Clone Stamp"
 msgstr ""
 
 #: ../Pinta.Core/Actions/FileActions.cs:54
+#: ../Pinta.Gui.Addins/InstallDialog.cs:253
 msgid "Close"
 msgstr ""
 
@@ -533,18 +501,11 @@ msgid "Deselect All"
 msgstr ""
 
 #: ../Pinta/Dialogs/ErrorDialog.cs:63
-#: Mono.Addins.Gui/gtk-gui/Mono.Addins.Gui.ErrorDialog.cs:92
-#: Mono.Addins.Gui/gtk-gui/Mono.Addins.Gui.ProgressDialog.cs:66
 msgid "Details"
 msgstr ""
 
 #: ../Pinta.Core/Effects/UserBlendOps.cs:38
 msgid "Difference"
-msgstr ""
-
-#: Mono.Addins.Gui/Mono.Addins.Gui/AddinInfoView.cs:163
-#: Mono.Addins.Gui/gtk-gui/Mono.Addins.Gui.AddinInfoView.cs:270
-msgid "Disable"
 msgstr ""
 
 #: ../Pinta/Main.cs:63
@@ -573,8 +534,9 @@ msgstr ""
 msgid "Don't change canvas size"
 msgstr ""
 
-#: Mono.Addins.Gui/Mono.Addins.Gui/AddinInfoView.cs:293
-msgid "Download size"
+#: ../Pinta.Gui.Addins/AddinInfoView.cs:111
+#, csharp-format
+msgid "Download size: {0}"
 msgstr ""
 
 #: ../Pinta.Core/Actions/LayerActions.cs:52
@@ -594,7 +556,7 @@ msgstr ""
 msgid "Edge Detect"
 msgstr ""
 
-#: ../Pinta/MainWindow.cs:346
+#: ../Pinta/MainWindow.cs:336
 msgid "Effe_cts"
 msgstr ""
 
@@ -612,10 +574,6 @@ msgstr ""
 msgid "Emboss"
 msgstr ""
 
-#: Mono.Addins.Gui/Mono.Addins.Gui/AddinInfoView.cs:160
-msgid "Enable"
-msgstr ""
-
 #: ../Pinta.Core/Actions/EditActions.cs:67
 #: ../Pinta.Core/Actions/EditActions.cs:246
 msgid "Erase Selection"
@@ -629,18 +587,16 @@ msgstr ""
 msgid "Error"
 msgstr ""
 
-#: Mono.Addins.Gui/Mono.Addins.Gui/Services.cs:64
-#: Mono.Addins.Gui/Mono.Addins.Gui/Services.cs:73
-#, csharp-format
-msgid "Exception occurred: {0}"
-msgstr ""
-
 #: ../Pinta.Core/Classes/SelectionModeHandler.cs:50
 msgid "Exclude (-) (Right Click)"
 msgstr ""
 
 #: ../Pinta/Actions/Edit/PasteAction.cs:173
 msgid "Expand canvas"
+msgstr ""
+
+#: ../Pinta.Gui.Addins/AddinManagerDialog.cs:154
+msgid "Extension packages"
 msgstr ""
 
 #: ../Pinta.Effects/Effects/JuliaFractalEffect.cs:126
@@ -762,9 +718,7 @@ msgstr ""
 msgid "Fullscreen"
 msgstr ""
 
-#: Mono.Addins.Gui/Mono.Addins.Gui/AddinManagerDialog.cs:131
-#: Mono.Addins.Gui/Mono.Addins.Gui/AddinManagerDialog.cs:325
-#: Mono.Addins.Gui/gtk-gui/Mono.Addins.Gui.AddinManagerDialog.cs:347
+#: ../Pinta.Gui.Addins/AddinManagerDialog.cs:53
 msgid "Gallery"
 msgstr ""
 
@@ -891,42 +845,25 @@ msgstr ""
 msgid "Input Histogram"
 msgstr ""
 
-#: Mono.Addins.Gui/gtk-gui/Mono.Addins.Gui.InstallDialog.cs:126
+#: ../Pinta.Gui.Addins/InstallDialog.cs:121
+#: ../Pinta.Gui.Addins/InstallDialog.cs:177
 msgid "Install"
 msgstr ""
 
-#: Mono.Addins.Gui/Mono.Addins.Gui/AddinManagerDialog.cs:513
-msgid "Install Add-in Package"
+#: ../Pinta.Gui.Addins/AddinManagerDialog.cs:144
+msgid "Install Extension Package"
 msgstr ""
 
-#: Mono.Addins.Gui/gtk-gui/Mono.Addins.Gui.AddinManagerDialog.cs:373
+#: ../Pinta.Gui.Addins/AddinManagerDialog.cs:37
 msgid "Install from file..."
 msgstr ""
 
-#: Mono.Addins.Gui/gtk-gui/Mono.Addins.Gui.AddinInfoView.cs:229
+#: ../Pinta.Gui.Addins/AddinInfoView.cs:72
 msgid "Install..."
 msgstr ""
 
-#: Mono.Addins.Gui/Mono.Addins.Gui/AddinInstaller.cs:16
-msgid "Installation cancelled"
-msgstr ""
-
-#: Mono.Addins.Gui/Mono.Addins.Gui/AddinInstallerDialog.cs:171
-msgid "Installation failed"
-msgstr ""
-
-#: Mono.Addins.Gui/Mono.Addins.Gui/AddinManagerDialog.cs:115
-#: Mono.Addins.Gui/Mono.Addins.Gui/AddinManagerDialog.cs:250
-#: Mono.Addins.Gui/gtk-gui/Mono.Addins.Gui.AddinManagerDialog.cs:122
+#: ../Pinta.Gui.Addins/AddinManagerDialog.cs:49
 msgid "Installed"
-msgstr ""
-
-#: Mono.Addins.Gui/Mono.Addins.Gui/AddinInfoView.cs:286
-msgid "Installed version"
-msgstr ""
-
-#: Mono.Addins.Gui/Mono.Addins.Gui/InstallDialog.cs:209
-msgid "Installing Add-ins"
 msgstr ""
 
 #: ../Pinta.Effects/Effects/AddNoiseEffect.cs:174
@@ -1002,7 +939,7 @@ msgstr ""
 msgid "Layer {0}"
 msgstr ""
 
-#: ../Pinta/Pads/LayersPad.cs:40 ../Pinta/Pads/LayersPad.cs:60
+#: ../Pinta/Pads/LayersPad.cs:40 ../Pinta/Pads/LayersPad.cs:53
 msgid "Layers"
 msgstr ""
 
@@ -1057,7 +994,7 @@ msgid ""
 msgstr ""
 
 #: ../Pinta.Tools/Tools/FreeformShapeTool.cs:55
-#: ../Pinta.Tools/Tools/PaintBrushTool.cs:62
+#: ../Pinta.Tools/Tools/PaintBrushTool.cs:59
 msgid ""
 "Left click to draw with primary color, right click to draw with secondary "
 "color."
@@ -1171,10 +1108,6 @@ msgstr ""
 msgid "Maintain aspect ratio"
 msgstr ""
 
-#: Mono.Addins.Gui/Mono.Addins.Gui/AddinManagerDialog.cs:268
-msgid "Manage Repositories..."
-msgstr ""
-
 #: ../Pinta.Effects/Effects/MandelbrotFractalEffect.cs:22
 msgid "Mandelbrot Fractal"
 msgstr ""
@@ -1188,11 +1121,6 @@ msgstr ""
 msgid "Merge Layer Down"
 msgstr ""
 
-#: Mono.Addins.Gui/Mono.Addins.Gui/AddinInfoView.cs:272
-#, csharp-format
-msgid "Missing: {0} v{1}"
-msgstr ""
-
 #: ../Pinta.Tools/Tools/GradientTool.cs:195
 msgid "Mode"
 msgstr ""
@@ -1201,8 +1129,8 @@ msgstr ""
 msgid "Modified"
 msgstr ""
 
-#: Mono.Addins.Gui/gtk-gui/Mono.Addins.Gui.AddinInfoView.cs:181
-msgid "More information"
+#: ../Pinta.Gui.Addins/AddinInfoView.cs:68
+msgid "More Information..."
 msgstr ""
 
 #: ../Pinta.Effects/Effects/MotionBlurEffect.cs:22
@@ -1225,12 +1153,6 @@ msgstr ""
 
 #: ../Pinta.Tools/Tools/MoveSelectionTool.cs:42
 msgid "Move Selection"
-msgstr ""
-
-#: Mono.Addins.Gui/Mono.Addins.Gui/AddinInfoView.cs:123
-msgid ""
-"Multiple selection:\n"
-"\n"
 msgstr ""
 
 #: ../Pinta.Core/Effects/UserBlendOps.cs:34
@@ -1262,18 +1184,6 @@ msgstr ""
 msgid "New..."
 msgstr ""
 
-#: Mono.Addins.Gui/Mono.Addins.Gui/AddinTreeWidget.cs:102
-msgid "No add-ins found"
-msgstr ""
-
-#: Mono.Addins.Gui/Mono.Addins.Gui/AddinInfoView.cs:178
-msgid "No selection"
-msgstr ""
-
-#: Mono.Addins.Gui/gtk-gui/Mono.Addins.Gui.AddinManagerDialog.cs:143
-msgid "No updates found"
-msgstr ""
-
 #: ../Pinta.Effects/Effects/AddNoiseEffect.cs:35
 #: ../Pinta.Effects/Effects/MedianEffect.cs:33
 #: ../Pinta.Effects/Effects/ReduceNoiseEffect.cs:33
@@ -1286,7 +1196,7 @@ msgstr ""
 msgid "Normal"
 msgstr ""
 
-#: ../Pinta.Core/Classes/BaseTool.cs:337
+#: ../Pinta.Core/Classes/BaseTool.cs:336
 msgid "Normal Blending"
 msgstr ""
 
@@ -1316,6 +1226,7 @@ msgstr ""
 #: ../Pinta.Core/Actions/EditActions.cs:351
 #: ../Pinta.Core/Actions/FileActions.cs:60
 #: ../Pinta.Core/Actions/LayerActions.cs:168
+#: ../Pinta.Gui.Addins/AddinManagerDialog.cs:147
 msgid "Open"
 msgstr ""
 
@@ -1361,10 +1272,6 @@ msgstr ""
 msgid "Original"
 msgstr ""
 
-#: Mono.Addins.Gui/Mono.Addins.Gui/AddinTreeWidget.cs:213
-msgid "Other"
-msgstr ""
-
 #: ../Pinta.Effects/Effects/OutlineEffect.cs:25
 #: ../Pinta.Tools/Tools/TextTool.cs:247
 msgid "Outline"
@@ -1391,7 +1298,7 @@ msgstr ""
 msgid "Overlay"
 msgstr ""
 
-#: ../Pinta.Core/Classes/BaseTool.cs:338
+#: ../Pinta.Core/Classes/BaseTool.cs:337
 msgid "Overwrite"
 msgstr ""
 
@@ -1399,7 +1306,7 @@ msgstr ""
 msgid "Paint Bucket"
 msgstr ""
 
-#: ../Pinta.Tools/Tools/PaintBrushTool.cs:60
+#: ../Pinta.Tools/Tools/PaintBrushTool.cs:57
 msgid "Paintbrush"
 msgstr ""
 
@@ -1431,10 +1338,6 @@ msgstr ""
 msgid "Paste Into New Layer"
 msgstr ""
 
-#: Mono.Addins.Gui/gtk-gui/Mono.Addins.Gui.NewSiteDialog.cs:130
-msgid "Path:"
-msgstr ""
-
 #: ../Pinta.Tools/Tools/PencilTool.cs:48
 msgid "Pencil"
 msgstr ""
@@ -1459,15 +1362,15 @@ msgid "Photo"
 msgstr ""
 
 #: ../xdg/pinta.desktop.in.h:1 ../Pinta/Actions/Help/AboutDialogAction.cs:55
-#: ../Pinta/MainWindow.cs:61
+#: ../Pinta/MainWindow.cs:62
 msgid "Pinta"
 msgstr ""
 
-#: ../Pinta/AddinSetupService.cs:54
+#: ../Pinta/AddinSetupService.cs:52
 msgid "Pinta Community Addins - Cross-Platform"
 msgstr ""
 
-#: ../Pinta/AddinSetupService.cs:50
+#: ../Pinta/AddinSetupService.cs:48
 msgid "Pinta Community Addins - Platform-Specific"
 msgstr ""
 
@@ -1554,10 +1457,6 @@ msgstr ""
 msgid "Print"
 msgstr ""
 
-#: Mono.Addins.Gui/gtk-gui/Mono.Addins.Gui.ProgressDialog.cs:21
-msgid "Progress"
-msgstr ""
-
 #: ../Pinta.Effects/Effects/JuliaFractalEffect.cs:129
 #: ../Pinta.Effects/Effects/MandelbrotFractalEffect.cs:141
 #: ../Pinta.Effects/Effects/RadialBlurEffect.cs:163
@@ -1635,22 +1534,6 @@ msgstr ""
 msgid "Reflect"
 msgstr ""
 
-#: Mono.Addins.Gui/gtk-gui/Mono.Addins.Gui.AddinManagerDialog.cs:166
-msgid "Refresh"
-msgstr ""
-
-#: Mono.Addins.Gui/gtk-gui/Mono.Addins.Gui.NewSiteDialog.cs:103
-msgid "Register a local repository"
-msgstr ""
-
-#: Mono.Addins.Gui/gtk-gui/Mono.Addins.Gui.NewSiteDialog.cs:54
-msgid "Register an on-line repository"
-msgstr ""
-
-#: Mono.Addins.Gui/Mono.Addins.Gui/ManageSitesDialog.cs:98
-msgid "Registering repository"
-msgstr ""
-
 #: ../Pinta/Actions/Help/AboutDialogAction.cs:80
 msgid "Released under the MIT X11 License."
 msgstr ""
@@ -1679,19 +1562,6 @@ msgstr ""
 
 #: ../Pinta/Dialogs/ErrorDialog.cs:69
 msgid "Report Bug..."
-msgstr ""
-
-#: Mono.Addins.Gui/Mono.Addins.Gui/AddinInfoView.cs:287
-msgid "Repository version"
-msgstr ""
-
-#: Mono.Addins.Gui/gtk-gui/Mono.Addins.Gui.AddinManagerDialog.cs:268
-msgid "Repository:"
-msgstr ""
-
-#: Mono.Addins.Gui/Mono.Addins.Gui/AddinInfoView.cs:270
-#, csharp-format
-msgid "Required: {0} v{1}, found v{2}"
 msgstr ""
 
 #: ../Pinta.Gui.Widgets/Widgets/ReseedButtonWidget.cs:63
@@ -1844,10 +1714,6 @@ msgstr ""
 msgid "Select All"
 msgstr ""
 
-#: Mono.Addins.Gui/gtk-gui/Mono.Addins.Gui.NewSiteDialog.cs:47
-msgid "Select the location of the repository you want to register:"
-msgstr ""
-
 #: ../Pinta.Effects/Adjustments/SepiaEffect.cs:26
 msgid "Sepia"
 msgstr ""
@@ -1905,10 +1771,6 @@ msgstr ""
 msgid "Softness"
 msgstr ""
 
-#: Mono.Addins.Gui/Mono.Addins.Gui/AddinInstallerDialog.cs:159
-msgid "Some of the required add-ins were not found"
-msgstr ""
-
 #: ../Pinta.Tools/Brushes/SplatterBrush.cs:37
 msgid "Splatter"
 msgstr ""
@@ -1956,27 +1818,19 @@ msgstr ""
 msgid "The clipboard does not contain an image."
 msgstr ""
 
-#: Mono.Addins.Gui/gtk-gui/Mono.Addins.Gui.AddinInstallerDialog.cs:48
-msgid "The following add-ins will be installed:"
-msgstr ""
-
-#: Mono.Addins.Gui/Mono.Addins.Gui/AddinInfoView.cs:295
-msgid "The following depedencies required by this add-in are not available:"
-msgstr ""
-
-#: Mono.Addins.Gui/Mono.Addins.Gui/InstallDialog.cs:156
+#: ../Pinta.Gui.Addins/InstallDialog.cs:90
 msgid "The following dependencies could not be resolved:"
 msgstr ""
 
-#: Mono.Addins.Gui/Mono.Addins.Gui/InstallDialog.cs:148
+#: ../Pinta.Gui.Addins/InstallDialog.cs:81
 msgid "The following packages need to be uninstalled:"
 msgstr ""
 
-#: Mono.Addins.Gui/Mono.Addins.Gui/InstallDialog.cs:138
+#: ../Pinta.Gui.Addins/InstallDialog.cs:73
 msgid "The following packages will be installed:"
 msgstr ""
 
-#: Mono.Addins.Gui/Mono.Addins.Gui/InstallDialog.cs:82
+#: ../Pinta.Gui.Addins/InstallDialog.cs:159
 msgid "The following packages will be uninstalled:"
 msgstr ""
 
@@ -1986,40 +1840,36 @@ msgid ""
 "to do?"
 msgstr ""
 
-#: Mono.Addins.Gui/Mono.Addins.Gui/InstallDialog.cs:211
+#: ../Pinta.Gui.Addins/InstallDialog.cs:275
 msgid "The installation failed!"
 msgstr ""
 
-#: Mono.Addins.Gui/Mono.Addins.Gui/InstallDialog.cs:212
+#: ../Pinta.Gui.Addins/InstallDialog.cs:276
 msgid "The installation has completed with warnings."
 msgstr ""
 
-#: Mono.Addins.Gui/Mono.Addins.Gui/InstallDialog.cs:124
+#: ../Pinta.Gui.Addins/InstallDialog.cs:55
 msgid ""
-"The selected add-ins can't be installed because there are dependency "
-"conflicts."
+"The selected extension packages can't be installed because there are "
+"dependency conflicts."
 msgstr ""
 
-#: Mono.Addins.Gui/Mono.Addins.Gui/InstallDialog.cs:216
+#: ../Pinta.Gui.Addins/InstallDialog.cs:285
 msgid "The uninstallation failed!"
 msgstr ""
 
-#: Mono.Addins.Gui/Mono.Addins.Gui/InstallDialog.cs:217
+#: ../Pinta.Gui.Addins/InstallDialog.cs:286
 msgid "The uninstallation has completed with warnings."
 msgstr ""
 
-#: Mono.Addins.Gui/Mono.Addins.Gui/InstallDialog.cs:89
+#: ../Pinta.Gui.Addins/InstallDialog.cs:170
 msgid ""
-"There are other add-ins that depend on the previous ones which will also be "
-"uninstalled:"
+"There are other extension packages that depend on the previous ones which "
+"will also be uninstalled:"
 msgstr ""
 
 #: ../Pinta.Effects/Effects/OutlineEffect.cs:139
 msgid "Thickness"
-msgstr ""
-
-#: Mono.Addins.Gui/Mono.Addins.Gui/AddinInfoView.cs:263
-msgid "This add-in can't be loaded due to missing dependencies"
 msgstr ""
 
 #: ../Pinta.Effects/Effects/TileEffect.cs:22
@@ -2040,7 +1890,7 @@ msgstr ""
 msgid "Tolerance"
 msgstr ""
 
-#: ../Pinta.Core/Managers/ToolManager.cs:344
+#: ../Pinta.Core/Managers/ToolManager.cs:354
 msgid "Tool"
 msgstr ""
 
@@ -2048,7 +1898,7 @@ msgstr ""
 msgid "Tool Box"
 msgstr ""
 
-#: ../Pinta/MainWindow.cs:368
+#: ../Pinta/MainWindow.cs:354
 msgid "Tool Windows"
 msgstr ""
 
@@ -2094,12 +1944,13 @@ msgstr ""
 msgid "Unfocus"
 msgstr ""
 
-#: Mono.Addins.Gui/Mono.Addins.Gui/InstallDialog.cs:77
+#: ../Pinta.Gui.Addins/InstallDialog.cs:149
+#: ../Pinta.Gui.Addins/InstallDialog.cs:150
 msgid "Uninstall"
 msgstr ""
 
-#: Mono.Addins.Gui/Mono.Addins.Gui/InstallDialog.cs:214
-msgid "Uninstalling Add-ins"
+#: ../Pinta.Gui.Addins/AddinInfoView.cs:77
+msgid "Uninstall..."
 msgstr ""
 
 #. Translators: {0} is 'Ctrl', or a platform-specific key such as 'Command' on macOS.
@@ -2121,30 +1972,8 @@ msgstr ""
 msgid "Unsupported palette format"
 msgstr ""
 
-#: Mono.Addins.Gui/gtk-gui/Mono.Addins.Gui.AddinInfoView.cs:255
-msgid "Update"
-msgstr ""
-
-#: Mono.Addins.Gui/gtk-gui/Mono.Addins.Gui.AddinManagerDialog.cs:194
-msgid "Update All"
-msgstr ""
-
-#: Mono.Addins.Gui/Mono.Addins.Gui/AddinInfoView.cs:256
-msgid "Update available"
-msgstr ""
-
-#: Mono.Addins.Gui/Mono.Addins.Gui/AddinManagerDialog.cs:123
-#: Mono.Addins.Gui/Mono.Addins.Gui/AddinManagerDialog.cs:364
-#: Mono.Addins.Gui/gtk-gui/Mono.Addins.Gui.AddinManagerDialog.cs:247
+#: ../Pinta.Gui.Addins/AddinManagerDialog.cs:51
 msgid "Updates"
-msgstr ""
-
-#: Mono.Addins.Gui/Mono.Addins.Gui/AddinManagerDialog.cs:419
-msgid "Updating repository"
-msgstr ""
-
-#: Mono.Addins.Gui/gtk-gui/Mono.Addins.Gui.NewSiteDialog.cs:82
-msgid "Url:"
 msgstr ""
 
 #: ../Pinta/Main.cs:132
@@ -2159,6 +1988,11 @@ msgstr ""
 
 #: ../Pinta/Actions/Help/AboutDialogAction.cs:87
 msgid "Using some icons from:"
+msgstr ""
+
+#: ../Pinta.Gui.Addins/AddinInfoView.cs:105
+#, csharp-format
+msgid "Version: {0}"
 msgstr ""
 
 #: ../Pinta/Dialogs/LayerPropertiesDialog.cs:202
@@ -2236,7 +2070,7 @@ msgstr ""
 msgid "Zoom to Selection"
 msgstr ""
 
-#: ../Pinta/MainWindow.cs:343
+#: ../Pinta/MainWindow.cs:333
 msgid "_Adjustments"
 msgstr ""
 
@@ -2249,23 +2083,23 @@ msgstr ""
 msgid "_Discard"
 msgstr ""
 
-#: ../Pinta/MainWindow.cs:328
+#: ../Pinta/MainWindow.cs:318
 msgid "_Edit"
 msgstr ""
 
-#: ../Pinta/MainWindow.cs:324
+#: ../Pinta/MainWindow.cs:314
 msgid "_File"
 msgstr ""
 
-#: ../Pinta/MainWindow.cs:362
+#: ../Pinta/MainWindow.cs:348
 msgid "_Help"
 msgstr ""
 
-#: ../Pinta/MainWindow.cs:336
+#: ../Pinta/MainWindow.cs:326
 msgid "_Image"
 msgstr ""
 
-#: ../Pinta/MainWindow.cs:340
+#: ../Pinta/MainWindow.cs:330
 msgid "_Layers"
 msgstr ""
 
@@ -2277,15 +2111,11 @@ msgstr ""
 msgid "_Save"
 msgstr ""
 
-#: Mono.Addins.Gui/gtk-gui/Mono.Addins.Gui.AddinInfoView.cs:281
-msgid "_Uninstall..."
-msgstr ""
-
-#: ../Pinta/MainWindow.cs:332
+#: ../Pinta/MainWindow.cs:322
 msgid "_View"
 msgstr ""
 
-#: ../Pinta/MainWindow.cs:358
+#: ../Pinta/MainWindow.cs:344
 msgid "_Window"
 msgstr ""
 
@@ -2337,13 +2167,6 @@ msgstr ""
 #, csharp-format
 msgid "{0} palette ({1})"
 msgstr ""
-
-#: Mono.Addins.Gui/Mono.Addins.Gui/AddinManagerDialog.cs:363
-#, csharp-format
-msgid "{0} update available"
-msgid_plural "{0} updates available"
-msgstr[0] ""
-msgstr[1] ""
 
 #. Translators: This specifies the format of the zoom percentage choices
 #. in the toolbar.

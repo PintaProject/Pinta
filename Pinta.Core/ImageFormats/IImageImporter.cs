@@ -28,8 +28,7 @@ using System;
 
 namespace Pinta.Core
 {
-	// TODO-GTK3 (addins)
-	// [TypeExtensionPoint]
+	[Mono.Addins.TypeExtensionPoint]
 	public interface IImageImporter
 	{
 		/// <summary>

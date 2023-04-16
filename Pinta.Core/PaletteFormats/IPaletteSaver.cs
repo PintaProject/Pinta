@@ -30,8 +30,7 @@ using Cairo;
 
 namespace Pinta.Core
 {
-	// TODO-GTK3 (addins)
-	// [TypeExtensionPoint]
+	[Mono.Addins.TypeExtensionPoint]
 	public interface IPaletteSaver
 	{
 		void Save (List<Color> colors, Gio.File file);

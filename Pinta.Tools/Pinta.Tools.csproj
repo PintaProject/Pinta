@@ -5,4 +5,7 @@
   <ItemGroup>
     <ProjectReference Include="..\Pinta.Core\Pinta.Core.csproj" />
   </ItemGroup>
+  <ItemGroup>
+    <PackageReference Include="Mono.Addins" Version="1.4.1" />
+  </ItemGroup>
 </Project>

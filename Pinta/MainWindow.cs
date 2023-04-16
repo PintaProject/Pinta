@@ -30,6 +30,7 @@ using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
 using Gtk;
+using Mono.Addins;
 using Pinta.Core;
 using Pinta.Docking;
 using Pinta.Gui.Widgets;
@@ -76,22 +77,14 @@ namespace Pinta
 			PintaCore.Initialize ();
 
 			// Initialize extensions
-			// TODO-GTK3 (addins)
-#if false
 			AddinManager.Initialize ();
 			AddinManager.Registry.Update ();
-			AddinSetupService setupService = new AddinSetupService (AddinManager.Registry);
+			var setupService = new AddinSetupService (AddinManager.Registry);
 			if (!setupService.AreRepositoriesRegistered ())
 				setupService.RegisterRepositories (true);
 
-			//Look out for any changes in extensions
+			// Look out for any changes in extensions
 			AddinManager.AddExtensionNodeHandler (typeof (IExtension), OnExtensionChanged);
-#else
-			var tools = new Pinta.Tools.CoreToolsExtension ();
-			tools.Initialize ();
-			var effects = new Pinta.Effects.CoreEffectsExtension ();
-			effects.Initialize ();
-#endif
 
 			// Load the user's previous settings
 			LoadUserSettings ();
@@ -260,8 +253,6 @@ namespace Pinta
 		}
 
 		// Called when an extension node is added or removed
-		// TODO-GTK3 (addins)
-#if false
 		private void OnExtensionChanged (object s, ExtensionNodeEventArgs args)
 		{
 			IExtension extension = (IExtension) args.ExtensionObject;
@@ -270,7 +261,6 @@ namespace Pinta
 			else
 				extension.Uninitialize ();
 		}
-#endif
 
 		#region GUI Construction
 		private void CreateWindow ()
@@ -345,13 +335,9 @@ namespace Pinta
 			var effects_menu = Gio.Menu.New ();
 			menu_bar.AppendSubmenu (Translations.GetString ("Effe_cts"), effects_menu);
 
-			// TODO-GTK3 (addins)
-			// Addins are disabled until Mono.Addins (or a replacement) is ported to .NET 6 / GTK3
-#if false
-			var addins_menu = new GLib.Menu ();
-			PintaCore.Actions.Addins.RegisterActions (this, addins_menu);
+			var addins_menu = Gio.Menu.New ();
+			PintaCore.Actions.Addins.RegisterActions (app, addins_menu);
 			menu_bar.AppendSubmenu (Translations.GetString ("A_dd-ins"), addins_menu);
-#endif
 
 			var window_menu = Gio.Menu.New ();
 			PintaCore.Actions.Window.RegisterActions (app, window_menu);

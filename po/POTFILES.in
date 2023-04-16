@@ -242,6 +242,13 @@ Pinta.Effects/Effects/UnfocusEffect.cs
 Pinta.Effects/Effects/WarpEffect.cs
 Pinta.Effects/Effects/ZoomBlurEffect.cs
 Pinta.Effects/Utilities/EffectHelper.cs
+Pinta.Gui.Addins/AddinInfoView.cs
+Pinta.Gui.Addins/AddinListView.cs
+Pinta.Gui.Addins/AddinListViewItem.cs
+Pinta.Gui.Addins/AddinManagerDialog.cs
+Pinta.Gui.Addins/InstallDialog.cs
+Pinta.Gui.Addins/StatusProgressBar.cs
+Pinta.Gui.Addins/Utilities.cs
 Pinta.Gui.Widgets/DialogAttributes.cs
 Pinta.Gui.Widgets/Dialogs/SimpleEffectDialog.cs
 Pinta.Gui.Widgets/Widgets/AnglePickerGraphic.cs

@@ -33,8 +33,7 @@ using Gtk;
 
 namespace Pinta.Core
 {
-	// TODO-GTK3 (addins)
-	// [TypeExtensionPoint]
+	[Mono.Addins.TypeExtensionPoint]
 	public abstract class BaseTool
 	{
 		private readonly IToolService tools;

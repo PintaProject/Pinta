@@ -32,8 +32,7 @@ namespace Pinta.Core
 	/// <summary>
 	/// The base class for all brushes.
 	/// </summary>
-	// TODO-GTK3 (addins)
-	// [TypeExtensionPoint]
+	[Mono.Addins.TypeExtensionPoint]
 	public abstract class BasePaintBrush
 	{
 		private static Random random = new Random ();
