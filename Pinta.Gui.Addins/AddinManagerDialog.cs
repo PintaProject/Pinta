@@ -1,7 +1,9 @@
 using System;
+using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Mono.Addins;
+using Mono.Addins.Description;
 using Mono.Addins.Setup;
 using Pinta.Core;
 using Pinta.Resources;
@@ -110,7 +112,8 @@ namespace Pinta.Gui.Addins
 			gallery_list.Clear ();
 
 			// TODO - support filtering the list of repositories.
-			AddinRepositoryEntry[] reps = service.Repositories.GetAvailableAddins (RepositorySearchFlags.LatestVersionsOnly);
+			AddinRepositoryEntry[] reps = service.Repositories.GetAvailableAddins (RepositorySearchFlags.None);
+			reps = FilterToLatestCompatibleVersion (reps);
 
 			foreach (var arep in reps) {
 				if (!Utilities.InApplicationNamespace (service, arep.Addin.Id))
@@ -124,7 +127,7 @@ namespace Pinta.Gui.Addins
 				AddinStatus status = AddinStatus.NotInstalled;
 
 				// Find whatever version is installed
-				Addin sinfo = AddinManager.Registry.GetAddin (Addin.GetIdName (arep.Addin.Id));
+				Addin? sinfo = AddinManager.Registry.GetAddin (Addin.GetIdName (arep.Addin.Id));
 
 				if (sinfo != null) {
 					status |= AddinStatus.Installed;
@@ -136,6 +139,30 @@ namespace Pinta.Gui.Addins
 
 				gallery_list.AddAddinRepositoryEntry (service, arep.Addin, arep, status);
 			}
+		}
+
+		// Similar to RepositoryRegistry.FilterOldVersions(), but also filters out newer versions that require an
+		// updated version of the application.
+		private AddinRepositoryEntry[] FilterToLatestCompatibleVersion (AddinRepositoryEntry[] addins)
+		{
+			Dictionary<string, string> latest_versions = new ();
+			foreach (var a in addins) {
+				if (!Utilities.IsCompatibleWithAddinRoots (a))
+					continue;
+
+				Addin.GetIdParts (a.Addin.Id, out string id, out string version);
+				if (!latest_versions.TryGetValue (id, out string? last) || Addin.CompareVersions (last, version) > 0)
+					latest_versions[id] = version;
+			}
+
+			var filtered_addins = addins.Where (a => {
+				Addin.GetIdParts (a.Addin.Id, out string id, out string version);
+				return latest_versions.TryGetValue (id, out string? latest_version) && latest_version == version;
+			}).ToArray ();
+
+			Array.Sort (filtered_addins);
+
+			return filtered_addins;
 		}
 
 		private void HandleInstallFromFileClicked ()

@@ -49,9 +49,12 @@ namespace Pinta.Gui.Addins
 			public string Found;
 		}
 
-		public static IEnumerable<MissingDepInfo> GetMissingDependencies (Addin addin)
+		public static IEnumerable<MissingDepInfo> GetMissingDependencies (Addin addin, bool roots_only = false)
 		{
-			IEnumerable<Addin> allAddins = AddinManager.Registry.GetAddins ().Union (AddinManager.Registry.GetAddinRoots ());
+			IEnumerable<Addin> allAddins = AddinManager.Registry.GetAddinRoots ();
+			if (!roots_only)
+				allAddins = allAddins.Union (AddinManager.Registry.GetAddins ());
+
 			foreach (var dep in addin.Description.MainModule.Dependencies) {
 				if (dep is AddinDependency adep) {
 					if (!allAddins.Any (a => Addin.GetIdName (a.Id) == Addin.GetIdName (adep.FullAddinId) && a.SupportsVersion (adep.Version))) {
@@ -60,6 +63,25 @@ namespace Pinta.Gui.Addins
 					}
 				}
 			}
+		}
+
+		/// <summary>
+		/// Returns whether the add-in repository entry is compatible with the addin roots (e.g. compatible with this version of the application).
+		/// </summary>
+		public static bool IsCompatibleWithAddinRoots (AddinRepositoryEntry a)
+		{
+			var roots = AddinManager.Registry.GetAddinRoots ();
+
+			foreach (var dep in a.Addin.Dependencies) {
+				if (dep is not AddinDependency adep)
+					continue;
+
+				if (roots.Any (root => Addin.GetIdName (root.Id) == Addin.GetIdName (adep.FullAddinId) && !root.SupportsVersion (adep.Version))) {
+					return false;
+				}
+			}
+
+			return true;
 		}
 	}
 }
