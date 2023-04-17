@@ -68,6 +68,7 @@ namespace Pinta.Resources
 		public const string OpenMenu = "open-menu-symbolic";
 
 		public const string ApplicationAddon = "application-x-addon-symbolic";
+		public const string SystemSearch = "system-search-symbolic";
 		public const string SystemSoftwareInstall = "system-software-install-symbolic";
 		public const string SoftwareUpdateAvailable = "software-update-available-symbolic";
 

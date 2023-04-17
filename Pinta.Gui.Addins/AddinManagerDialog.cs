@@ -40,6 +40,9 @@ namespace Pinta.Gui.Addins
 			install_file_button.OnClicked += (_, _) => HandleInstallFromFileClicked ();
 			header_bar.PackStart (install_file_button);
 
+			// TODO - add a dialog for managing the list of repositories.
+			// TODO - support searching through the gallery
+
 			var content = Gtk.Box.New (Gtk.Orientation.Vertical, 0);
 			content.Append (header_bar);
 			progress_bar = new StatusProgressBar (view_stack, new ToastErrorReporter (toast_overlay));
@@ -75,8 +78,7 @@ namespace Pinta.Gui.Addins
 
 					progress_bar.HideProgress ();
 					LoadGallery ();
-
-					// TODO - populate the 'updates_list' view
+					LoadUpdates ();
 
 					return false;
 				});
@@ -90,10 +92,7 @@ namespace Pinta.Gui.Addins
 			foreach (Addin ainfo in AddinManager.Registry.GetModules (AddinSearchFlags.IncludeAddins | AddinSearchFlags.LatestVersionsOnly)) {
 				if (Utilities.InApplicationNamespace (service, ainfo.Id) && !ainfo.Description.IsHidden) {
 					AddinHeader ah = SetupService.GetAddinHeader (ainfo);
-#if false // TODO
-					if (IsFiltered (ah))
-						continue;
-#endif
+
 					AddinStatus st = AddinStatus.Installed;
 					if (!ainfo.Enabled || Utilities.GetMissingDependencies (ainfo).Any ())
 						st |= AddinStatus.Disabled;
@@ -111,18 +110,12 @@ namespace Pinta.Gui.Addins
 		{
 			gallery_list.Clear ();
 
-			// TODO - support filtering the list of repositories.
 			AddinRepositoryEntry[] reps = service.Repositories.GetAvailableAddins (RepositorySearchFlags.None);
 			reps = FilterToLatestCompatibleVersion (reps);
 
 			foreach (var arep in reps) {
 				if (!Utilities.InApplicationNamespace (service, arep.Addin.Id))
 					continue;
-
-#if false // TODO
-				if (IsFiltered (arep.Addin))
-					continue;
-#endif
 
 				AddinStatus status = AddinStatus.NotInstalled;
 
@@ -138,6 +131,30 @@ namespace Pinta.Gui.Addins
 				}
 
 				gallery_list.AddAddinRepositoryEntry (service, arep.Addin, arep, status);
+			}
+		}
+
+		private void LoadUpdates ()
+		{
+			updates_list.Clear ();
+
+			AddinRepositoryEntry[] reps = service.Repositories.GetAvailableAddins (RepositorySearchFlags.None);
+			reps = FilterToLatestCompatibleVersion (reps);
+
+			foreach (var arep in reps) {
+				if (!Utilities.InApplicationNamespace (service, arep.Addin.Id))
+					continue;
+
+				// Check if this addin is installed and is an earlier version.
+				Addin? installed = AddinManager.Registry.GetAddin (Addin.GetIdName (arep.Addin.Id));
+				if (installed is null || !installed.Enabled || Addin.CompareVersions (installed.Version, arep.Addin.Version) <= 0)
+					continue;
+
+				AddinStatus status = AddinStatus.Installed | AddinStatus.HasUpdate;
+				if (!installed.Enabled || Utilities.GetMissingDependencies (installed).Any ())
+					status |= AddinStatus.Disabled;
+
+				updates_list.AddAddinRepositoryEntry (service, arep.Addin, arep, status);
 			}
 		}
 

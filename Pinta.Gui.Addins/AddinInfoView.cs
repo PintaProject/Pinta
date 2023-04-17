@@ -1,11 +1,17 @@
 using System;
+using Mono.Addins;
 using Mono.Addins.Setup;
 using Pinta.Core;
+using Pinta.Resources;
 
 namespace Pinta.Gui.Addins
 {
-	internal class AddinInfoView : Gtk.Box
+	internal class AddinInfoView : Adw.Bin
 	{
+		private Adw.ViewStack view_stack;
+		private Gtk.Box content_box;
+		private Adw.Bin empty_page = new ();
+
 		private Gtk.Label title_label;
 		private Gtk.Label version_label;
 		private Gtk.Label size_label;
@@ -13,6 +19,7 @@ namespace Pinta.Gui.Addins
 		private Gtk.Label desc_label;
 		private Gtk.Button info_button;
 		private Gtk.Button install_button;
+		private Gtk.Button update_button;
 		private Gtk.Button uninstall_button;
 		private Gtk.Switch enable_switch = new ();
 
@@ -25,34 +32,38 @@ namespace Pinta.Gui.Addins
 
 		public AddinInfoView ()
 		{
-			this.SetAllMargins (10);
-			SetOrientation (Gtk.Orientation.Vertical);
-			Spacing = 10;
 			WidthRequest = 300;
+
+			view_stack = Adw.ViewStack.New ();
+			view_stack.Add (empty_page);
+
+			content_box = Gtk.Box.New (Gtk.Orientation.Vertical, 10);
+			content_box.SetAllMargins (10);
+			view_stack.Add (content_box);
 
 			title_label = new Gtk.Label () {
 				Halign = Gtk.Align.Start
 			};
 			title_label.AddCssClass (AdwaitaStyles.Title4);
-			Append (title_label);
+			content_box.Append (title_label);
 
 			version_label = new Gtk.Label () {
 				Halign = Gtk.Align.Start
 			};
 			version_label.AddCssClass (AdwaitaStyles.Heading);
-			Append (version_label);
+			content_box.Append (version_label);
 
 			size_label = new Gtk.Label () {
 				Halign = Gtk.Align.Start
 			};
 			size_label.AddCssClass (AdwaitaStyles.Heading);
-			Append (size_label);
+			content_box.Append (size_label);
 
 			repo_label = new Gtk.Label () {
 				Halign = Gtk.Align.Start
 			};
 			repo_label.AddCssClass (AdwaitaStyles.Heading);
-			Append (repo_label);
+			content_box.Append (repo_label);
 
 			desc_label = new Gtk.Label () {
 				Halign = Gtk.Align.Start,
@@ -63,7 +74,7 @@ namespace Pinta.Gui.Addins
 				Wrap = true,
 			};
 			desc_label.AddCssClass (AdwaitaStyles.Body);
-			Append (desc_label);
+			content_box.Append (desc_label);
 
 			info_button = Gtk.Button.NewWithLabel (Translations.GetString ("More Information..."));
 			info_button.OnClicked += (_, _) => HandleInfoButtonClicked ();
@@ -74,6 +85,11 @@ namespace Pinta.Gui.Addins
 			install_button.OnClicked += (_, _) => HandleInstallButtonClicked ();
 			install_button.Visible = false;
 
+			update_button = Gtk.Button.NewWithLabel (Translations.GetString ("Update..."));
+			update_button.AddCssClass (AdwaitaStyles.SuggestedAction);
+			update_button.OnClicked += (_, _) => HandleUpdateButtonClicked ();
+			update_button.Visible = false;
+
 			uninstall_button = Gtk.Button.NewWithLabel (Translations.GetString ("Uninstall..."));
 			uninstall_button.AddCssClass (AdwaitaStyles.DestructiveAction);
 			uninstall_button.OnClicked += (_, _) => HandleUninstallButtonClicked ();
@@ -81,15 +97,16 @@ namespace Pinta.Gui.Addins
 
 			enable_switch.Visible = false;
 
-			// TODO - add an update button
-
 			var hbox = Gtk.Box.New (Gtk.Orientation.Horizontal, 6);
 			hbox.AddCssClass (AdwaitaStyles.Toolbar);
-			hbox.Append (uninstall_button);
-			hbox.Append (install_button);
-			hbox.Append (info_button);
 			hbox.Append (enable_switch);
-			Append (hbox);
+			hbox.Append (install_button);
+			hbox.Append (update_button);
+			hbox.Append (info_button);
+			hbox.Append (uninstall_button);
+			uninstall_button.Hexpand = true;
+			uninstall_button.Halign = Gtk.Align.End;
+			content_box.Append (hbox);
 
 			enable_switch.OnNotify += (o, e) => {
 				if (e.Pspec.GetName () != "active")
@@ -97,31 +114,41 @@ namespace Pinta.Gui.Addins
 
 				HandleEnableSwitched ();
 			};
+
+			view_stack.SetVisibleChild (empty_page);
+			Child = view_stack;
 		}
 
-		public void Update (AddinListViewItem item)
+		public void Update (AddinListViewItem? item)
 		{
-			title_label.SetLabel (item.Name);
-			version_label.SetLabel (Translations.GetString ("Version: {0}", item.Version));
-			desc_label.SetLabel (item.Description);
+			if (item is null) {
+				view_stack.SetVisibleChild (empty_page);
+			} else {
+				view_stack.SetVisibleChild (content_box);
 
-			string? download_size = item.DownloadSize;
-			size_label.Visible = download_size != null;
-			if (download_size is not null)
-				size_label.SetLabel (Translations.GetString ("Download size: {0}", download_size));
+				title_label.SetLabel (item.Name);
+				version_label.SetLabel (Translations.GetString ("Version: {0}", item.Version));
+				desc_label.SetLabel (item.Description);
 
-			string? repo_name = item.RepositoryName;
-			repo_label.Visible = repo_name != null;
-			if (repo_name is not null)
-				repo_label.SetLabel (Translations.GetString ("Available in repository: {0}", repo_name));
+				string? download_size = item.DownloadSize;
+				size_label.Visible = download_size != null;
+				if (download_size is not null)
+					size_label.SetLabel (Translations.GetString ("Download size: {0}", download_size));
 
-			info_button.Visible = !string.IsNullOrEmpty (item.Url);
-			install_button.Visible = !item.Installed;
-			uninstall_button.Visible = item.CanUninstall;
+				string? repo_name = item.RepositoryName;
+				repo_label.Visible = repo_name != null;
+				if (repo_name is not null)
+					repo_label.SetLabel (Translations.GetString ("Available in repository: {0}", repo_name));
 
-			enable_switch.Visible = item.Installed && item.CanDisable;
-			if (item.CanDisable)
-				enable_switch.Active = item.Enabled;
+				info_button.Visible = !string.IsNullOrEmpty (item.Url);
+				install_button.Visible = !item.Installed;
+				update_button.Visible = item.Addin is not null && Addin.CompareVersions (item.Addin.Version, item.Version) > 0;
+				uninstall_button.Visible = item.CanUninstall;
+
+				enable_switch.Visible = item.Installed && item.CanDisable;
+				if (item.CanDisable)
+					enable_switch.Active = item.Enabled;
+			}
 
 			current_item = item;
 		}
@@ -142,6 +169,18 @@ namespace Pinta.Gui.Addins
 			ArgumentNullException.ThrowIfNull (current_item);
 			if (current_item.RepositoryEntry is null)
 				throw new Exception ("The install button should not be available unless there is a repository entry");
+
+			var dialog = new InstallDialog (PintaCore.Chrome.MainWindow, current_item.Service);
+			dialog.OnSuccess += (_, _) => OnAddinChanged?.Invoke (this, EventArgs.Empty);
+			dialog.InitForInstall (new[] { current_item.RepositoryEntry });
+			dialog.Show ();
+		}
+
+		private void HandleUpdateButtonClicked ()
+		{
+			ArgumentNullException.ThrowIfNull (current_item);
+			if (current_item.RepositoryEntry is null)
+				throw new Exception ("The update button should not be available unless there is a repository entry");
 
 			var dialog = new InstallDialog (PintaCore.Chrome.MainWindow, current_item.Service);
 			dialog.OnSuccess += (_, _) => OnAddinChanged?.Invoke (this, EventArgs.Empty);

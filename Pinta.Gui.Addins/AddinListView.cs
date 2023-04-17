@@ -3,6 +3,7 @@ using Gtk;
 using Mono.Addins;
 using Mono.Addins.Setup;
 using Pinta.Core;
+using Pinta.Resources;
 
 namespace Pinta.Gui.Addins
 {
@@ -12,6 +13,11 @@ namespace Pinta.Gui.Addins
 		private Gtk.SingleSelection selection_model;
 		private Gtk.SignalListItemFactory factory;
 		private Gtk.ListView list_view;
+
+		private Adw.StatusPage empty_list_page;
+		private Gtk.ScrolledWindow list_view_scroll;
+		private Adw.ViewStack list_view_stack;
+
 		private AddinInfoView info_view;
 
 		/// <summary>
@@ -39,12 +45,23 @@ namespace Pinta.Gui.Addins
 				widget.Update (model_item);
 			};
 
+			// TODO - have an option to group by category like the old GTK2 addin dialog.
 			list_view = ListView.New (selection_model, factory);
 
-			var list_view_scroll = Gtk.ScrolledWindow.New ();
+			list_view_scroll = Gtk.ScrolledWindow.New ();
 			list_view_scroll.SetChild (list_view);
 			list_view_scroll.SetSizeRequest (300, 400);
 			list_view_scroll.SetPolicy (PolicyType.Automatic, PolicyType.Automatic);
+
+			empty_list_page = new Adw.StatusPage () {
+				IconName = StandardIcons.SystemSearch,
+				Title = Translations.GetString ("No Items Found")
+			};
+			empty_list_page.AddCssClass (AdwaitaStyles.Compact);
+
+			list_view_stack = Adw.ViewStack.New ();
+			list_view_stack.Add (list_view_scroll);
+			list_view_stack.Add (empty_list_page);
 
 			info_view = new AddinInfoView ();
 			info_view.OnAddinChanged += (o, e) => OnAddinChanged?.Invoke (o, e);
@@ -52,7 +69,7 @@ namespace Pinta.Gui.Addins
 			var flap = Adw.Flap.New ();
 			flap.FoldPolicy = Adw.FlapFoldPolicy.Never;
 			flap.Locked = true;
-			flap.Content = list_view_scroll;
+			flap.Content = list_view_stack;
 			flap.Separator = Gtk.Separator.New (Orientation.Vertical);
 			flap.FlapPosition = PackType.End;
 			flap.SetFlap (info_view);
@@ -62,10 +79,13 @@ namespace Pinta.Gui.Addins
 		public void Clear ()
 		{
 			model.RemoveAll ();
+			list_view_stack.VisibleChild = empty_list_page;
 		}
 
 		public void AddAddin (SetupService service, AddinHeader info, Addin addin, AddinStatus status)
 		{
+			list_view_stack.VisibleChild = list_view_scroll;
+
 			model.Append (new AddinListViewItem (service, info, addin, status));
 
 			// Adding items may not cause a selection-changed signal, as mentioned in the SelectionModel docs
@@ -75,6 +95,8 @@ namespace Pinta.Gui.Addins
 
 		public void AddAddinRepositoryEntry (SetupService service, AddinHeader info, AddinRepositoryEntry addin, AddinStatus status)
 		{
+			list_view_stack.VisibleChild = list_view_scroll;
+
 			model.Append (new AddinListViewItem (service, info, addin, status));
 
 			// Adding items may not cause a selection-changed signal, as mentioned in the SelectionModel docs
@@ -86,6 +108,8 @@ namespace Pinta.Gui.Addins
 		{
 			if (model.GetObject (selection_model.Selected) is AddinListViewItem item)
 				info_view.Update (item);
+			else
+				info_view.Update (null);
 		}
 	}
 
