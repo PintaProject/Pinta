@@ -1,8 +1,8 @@
 <Project Sdk="Microsoft.NET.Sdk">
   <ItemGroup>
-    <PackageReference Include="GirCore.Adw-1" Version="0.3.0" />
-    <PackageReference Include="Mono.Addins" Version="1.4.2-alpha.4" />
-    <PackageReference Include="Mono.Addins.Setup" Version="1.4.2-alpha.4" />
+    <PackageReference Include="GirCore.Adw-1" />
+    <PackageReference Include="Mono.Addins" />
+    <PackageReference Include="Mono.Addins.Setup" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Pinta.Core\Pinta.Core.csproj" />

@@ -11,13 +11,11 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="Tmds.DBus" Version="0.14.0" />
-    <PackageReference Include="GirCore.Adw-1" Version="0.3.0" />
-
-    <!-- Note: at least 1.4.2-alpha3 is required for fixes to uninstalling addins, from https://github.com/mono/mono-addins/pull/198 -->
-    <PackageReference Include="Mono.Addins" Version="1.4.2-alpha.4" />
-    <PackageReference Include="Mono.Addins.Setup" Version="1.4.2-alpha.4" />
-    <PackageReference Include="Mono.Addins.CecilReflector" Version="1.4.2-alpha.4" />
+    <PackageReference Include="Tmds.DBus" />
+    <PackageReference Include="GirCore.Adw-1" />
+    <PackageReference Include="Mono.Addins" />
+    <PackageReference Include="Mono.Addins.Setup" />
+    <PackageReference Include="Mono.Addins.CecilReflector" />
   </ItemGroup>
 
   <ItemGroup>
