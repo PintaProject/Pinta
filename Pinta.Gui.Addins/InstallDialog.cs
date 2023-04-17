@@ -50,6 +50,7 @@ namespace Pinta.Gui.Addins
 			});
 
 			var labels = Gtk.Box.New (Gtk.Orientation.Vertical, 12);
+			labels.SetAllMargins (6);
 
 			error_heading_label = Gtk.Label.New (
 				Translations.GetString ("The selected extension packages can't be installed because there are dependency conflicts."));
