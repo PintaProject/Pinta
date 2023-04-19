@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-04-15 15:12-0400\n"
+"POT-Creation-Date: 2023-04-18 22:48-0400\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -17,7 +17,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 
-#: ../Pinta.Gui.Addins/InstallDialog.cs:198
+#: ../Pinta.Gui.Addins/InstallDialog.cs:217
 msgid " (in user directory)"
 msgstr ""
 
@@ -82,7 +82,7 @@ msgstr ""
 
 #: ../Pinta/Actions/File/OpenDocumentAction.cs:81
 #: ../Pinta.Core/Actions/EditActions.cs:367
-#: ../Pinta.Gui.Addins/AddinManagerDialog.cs:159
+#: ../Pinta.Gui.Addins/AddinManagerDialog.cs:210
 msgid "All files"
 msgstr ""
 
@@ -144,7 +144,7 @@ msgstr ""
 msgid "Auto Level"
 msgstr ""
 
-#: ../Pinta.Gui.Addins/AddinInfoView.cs:116
+#: ../Pinta.Gui.Addins/AddinInfoView.cs:141
 #, csharp-format
 msgid "Available in repository: {0}"
 msgstr ""
@@ -236,8 +236,8 @@ msgstr ""
 #: ../Pinta.Core/Actions/EditActions.cs:352
 #: ../Pinta.Core/Actions/EditActions.cs:392
 #: ../Pinta.Core/Actions/LayerActions.cs:169
-#: ../Pinta.Gui.Addins/AddinManagerDialog.cs:148
-#: ../Pinta.Gui.Addins/InstallDialog.cs:118
+#: ../Pinta.Gui.Addins/AddinManagerDialog.cs:199
+#: ../Pinta.Gui.Addins/InstallDialog.cs:119
 msgid "Cancel"
 msgstr ""
 
@@ -351,7 +351,7 @@ msgid "Clone Stamp"
 msgstr ""
 
 #: ../Pinta.Core/Actions/FileActions.cs:54
-#: ../Pinta.Gui.Addins/InstallDialog.cs:253
+#: ../Pinta.Gui.Addins/InstallDialog.cs:272
 msgid "Close"
 msgstr ""
 
@@ -534,7 +534,7 @@ msgstr ""
 msgid "Don't change canvas size"
 msgstr ""
 
-#: ../Pinta.Gui.Addins/AddinInfoView.cs:111
+#: ../Pinta.Gui.Addins/AddinInfoView.cs:136
 #, csharp-format
 msgid "Download size: {0}"
 msgstr ""
@@ -595,7 +595,7 @@ msgstr ""
 msgid "Expand canvas"
 msgstr ""
 
-#: ../Pinta.Gui.Addins/AddinManagerDialog.cs:154
+#: ../Pinta.Gui.Addins/AddinManagerDialog.cs:205
 msgid "Extension packages"
 msgstr ""
 
@@ -606,6 +606,10 @@ msgstr ""
 
 #: ../Pinta/Actions/File/NewScreenshotAction.cs:99
 msgid "Failed to access XDG Desktop Portals"
+msgstr ""
+
+#: ../Pinta.Gui.Addins/InstallDialog.cs:151
+msgid "Failed to load extension package"
 msgstr ""
 
 #: ../Pinta.Core/Managers/WorkspaceManager.cs:407
@@ -718,7 +722,7 @@ msgstr ""
 msgid "Fullscreen"
 msgstr ""
 
-#: ../Pinta.Gui.Addins/AddinManagerDialog.cs:53
+#: ../Pinta.Gui.Addins/AddinManagerDialog.cs:65
 msgid "Gallery"
 msgstr ""
 
@@ -845,24 +849,24 @@ msgstr ""
 msgid "Input Histogram"
 msgstr ""
 
-#: ../Pinta.Gui.Addins/InstallDialog.cs:121
-#: ../Pinta.Gui.Addins/InstallDialog.cs:177
+#: ../Pinta.Gui.Addins/InstallDialog.cs:122
+#: ../Pinta.Gui.Addins/InstallDialog.cs:196
 msgid "Install"
 msgstr ""
 
-#: ../Pinta.Gui.Addins/AddinManagerDialog.cs:144
+#: ../Pinta.Gui.Addins/AddinManagerDialog.cs:195
 msgid "Install Extension Package"
 msgstr ""
 
-#: ../Pinta.Gui.Addins/AddinManagerDialog.cs:37
+#: ../Pinta.Gui.Addins/AddinManagerDialog.cs:41
 msgid "Install from file..."
 msgstr ""
 
-#: ../Pinta.Gui.Addins/AddinInfoView.cs:72
+#: ../Pinta.Gui.Addins/AddinInfoView.cs:83
 msgid "Install..."
 msgstr ""
 
-#: ../Pinta.Gui.Addins/AddinManagerDialog.cs:49
+#: ../Pinta.Gui.Addins/AddinManagerDialog.cs:61
 msgid "Installed"
 msgstr ""
 
@@ -1129,7 +1133,7 @@ msgstr ""
 msgid "Modified"
 msgstr ""
 
-#: ../Pinta.Gui.Addins/AddinInfoView.cs:68
+#: ../Pinta.Gui.Addins/AddinInfoView.cs:79
 msgid "More Information..."
 msgstr ""
 
@@ -1184,6 +1188,10 @@ msgstr ""
 msgid "New..."
 msgstr ""
 
+#: ../Pinta.Gui.Addins/AddinListView.cs:58
+msgid "No Items Found"
+msgstr ""
+
 #: ../Pinta.Effects/Effects/AddNoiseEffect.cs:35
 #: ../Pinta.Effects/Effects/MedianEffect.cs:33
 #: ../Pinta.Effects/Effects/ReduceNoiseEffect.cs:33
@@ -1226,7 +1234,7 @@ msgstr ""
 #: ../Pinta.Core/Actions/EditActions.cs:351
 #: ../Pinta.Core/Actions/FileActions.cs:60
 #: ../Pinta.Core/Actions/LayerActions.cs:168
-#: ../Pinta.Gui.Addins/AddinManagerDialog.cs:147
+#: ../Pinta.Gui.Addins/AddinManagerDialog.cs:198
 msgid "Open"
 msgstr ""
 
@@ -1534,6 +1542,10 @@ msgstr ""
 msgid "Reflect"
 msgstr ""
 
+#: ../Pinta.Gui.Addins/AddinManagerDialog.cs:46
+msgid "Refresh"
+msgstr ""
+
 #: ../Pinta/Actions/Help/AboutDialogAction.cs:80
 msgid "Released under the MIT X11 License."
 msgstr ""
@@ -1818,19 +1830,23 @@ msgstr ""
 msgid "The clipboard does not contain an image."
 msgstr ""
 
-#: ../Pinta.Gui.Addins/InstallDialog.cs:90
+#: ../Pinta.Gui.Addins/InstallDialog.cs:152
+msgid "The file may be an invalid or corrupt extension package"
+msgstr ""
+
+#: ../Pinta.Gui.Addins/InstallDialog.cs:91
 msgid "The following dependencies could not be resolved:"
 msgstr ""
 
-#: ../Pinta.Gui.Addins/InstallDialog.cs:81
+#: ../Pinta.Gui.Addins/InstallDialog.cs:82
 msgid "The following packages need to be uninstalled:"
 msgstr ""
 
-#: ../Pinta.Gui.Addins/InstallDialog.cs:73
+#: ../Pinta.Gui.Addins/InstallDialog.cs:74
 msgid "The following packages will be installed:"
 msgstr ""
 
-#: ../Pinta.Gui.Addins/InstallDialog.cs:159
+#: ../Pinta.Gui.Addins/InstallDialog.cs:178
 msgid "The following packages will be uninstalled:"
 msgstr ""
 
@@ -1840,29 +1856,29 @@ msgid ""
 "to do?"
 msgstr ""
 
-#: ../Pinta.Gui.Addins/InstallDialog.cs:275
+#: ../Pinta.Gui.Addins/InstallDialog.cs:294
 msgid "The installation failed!"
 msgstr ""
 
-#: ../Pinta.Gui.Addins/InstallDialog.cs:276
+#: ../Pinta.Gui.Addins/InstallDialog.cs:295
 msgid "The installation has completed with warnings."
 msgstr ""
 
-#: ../Pinta.Gui.Addins/InstallDialog.cs:55
+#: ../Pinta.Gui.Addins/InstallDialog.cs:56
 msgid ""
 "The selected extension packages can't be installed because there are "
 "dependency conflicts."
 msgstr ""
 
-#: ../Pinta.Gui.Addins/InstallDialog.cs:285
+#: ../Pinta.Gui.Addins/InstallDialog.cs:304
 msgid "The uninstallation failed!"
 msgstr ""
 
-#: ../Pinta.Gui.Addins/InstallDialog.cs:286
+#: ../Pinta.Gui.Addins/InstallDialog.cs:305
 msgid "The uninstallation has completed with warnings."
 msgstr ""
 
-#: ../Pinta.Gui.Addins/InstallDialog.cs:170
+#: ../Pinta.Gui.Addins/InstallDialog.cs:189
 msgid ""
 "There are other extension packages that depend on the previous ones which "
 "will also be uninstalled:"
@@ -1944,12 +1960,12 @@ msgstr ""
 msgid "Unfocus"
 msgstr ""
 
-#: ../Pinta.Gui.Addins/InstallDialog.cs:149
-#: ../Pinta.Gui.Addins/InstallDialog.cs:150
+#: ../Pinta.Gui.Addins/InstallDialog.cs:168
+#: ../Pinta.Gui.Addins/InstallDialog.cs:169
 msgid "Uninstall"
 msgstr ""
 
-#: ../Pinta.Gui.Addins/AddinInfoView.cs:77
+#: ../Pinta.Gui.Addins/AddinInfoView.cs:93
 msgid "Uninstall..."
 msgstr ""
 
@@ -1972,7 +1988,11 @@ msgstr ""
 msgid "Unsupported palette format"
 msgstr ""
 
-#: ../Pinta.Gui.Addins/AddinManagerDialog.cs:51
+#: ../Pinta.Gui.Addins/AddinInfoView.cs:88
+msgid "Update..."
+msgstr ""
+
+#: ../Pinta.Gui.Addins/AddinManagerDialog.cs:63
 msgid "Updates"
 msgstr ""
 
@@ -1990,7 +2010,7 @@ msgstr ""
 msgid "Using some icons from:"
 msgstr ""
 
-#: ../Pinta.Gui.Addins/AddinInfoView.cs:105
+#: ../Pinta.Gui.Addins/AddinInfoView.cs:130
 #, csharp-format
 msgid "Version: {0}"
 msgstr ""
@@ -2104,6 +2124,7 @@ msgid "_Layers"
 msgstr ""
 
 #: ../Pinta/Dialogs/ErrorDialog.cs:43 ../Pinta/Dialogs/ErrorDialog.cs:71
+#: ../Pinta.Gui.Addins/InstallDialog.cs:155
 msgid "_OK"
 msgstr ""
 

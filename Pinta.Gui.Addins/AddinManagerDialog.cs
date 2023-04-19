@@ -220,8 +220,8 @@ namespace Pinta.Gui.Addins
 					.ToArray ();
 				var install_dialog = new InstallDialog (this, service);
 				install_dialog.OnSuccess += (_, _) => LoadAll ();
-				install_dialog.InitForInstall (files);
-				install_dialog.Show ();
+				if (install_dialog.InitForInstall (files))
+					install_dialog.Show ();
 			};
 
 			dialog.Show ();

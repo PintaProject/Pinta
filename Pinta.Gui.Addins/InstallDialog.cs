@@ -137,12 +137,30 @@ namespace Pinta.Gui.Addins
 			DisplayInstallInfo ();
 		}
 
-		public void InitForInstall (string[] files_to_install)
+		public bool InitForInstall (string[] files_to_install)
 		{
-			foreach (string file in files_to_install)
-				packages_to_install.Add (Package.FromFile (file));
+			try {
+				foreach (string file in files_to_install)
+					packages_to_install.Add (Package.FromFile (file));
 
-			DisplayInstallInfo ();
+				DisplayInstallInfo ();
+
+			} catch (Exception) {
+				var dialog = Adw.MessageDialog.New (
+					TransientFor,
+					Translations.GetString ("Failed to load extension package"),
+					Translations.GetString ("The file may be an invalid or corrupt extension package"));
+
+				const string ok_response = "ok";
+				dialog.AddResponse (ok_response, Translations.GetString ("_OK"));
+				dialog.DefaultResponse = ok_response;
+				dialog.CloseResponse = ok_response;
+
+				dialog.Present ();
+				return false;
+			}
+
+			return true;
 		}
 
 		public void InitForUninstall (Addin[] addins_to_uninstall)
