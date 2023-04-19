@@ -19,7 +19,9 @@ namespace Pinta.Gui.Addins
 
 		private Adw.ToastOverlay toast_overlay = new ();
 		private StatusProgressBar progress_bar;
+
 		private Gtk.Button install_file_button;
+		private Gtk.Button refresh_button;
 
 		public AddinManagerDialog (Gtk.Window parent, SetupService service)
 		{
@@ -39,6 +41,11 @@ namespace Pinta.Gui.Addins
 			install_file_button.TooltipText = Translations.GetString ("Install from file...");
 			install_file_button.OnClicked += (_, _) => HandleInstallFromFileClicked ();
 			header_bar.PackStart (install_file_button);
+
+			refresh_button = Gtk.Button.NewFromIconName (StandardIcons.ViewRefresh);
+			refresh_button.TooltipText = Translations.GetString ("Refresh");
+			refresh_button.OnClicked += (_, _) => LoadAll ();
+			header_bar.PackStart (refresh_button);
 
 			// TODO - add a dialog for managing the list of repositories.
 			// TODO - support searching through the gallery
