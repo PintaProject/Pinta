@@ -73,6 +73,7 @@ namespace Pinta
 			PintaCore.Chrome.InitializeProgessDialog (new ProgressDialog ());
 			PintaCore.Chrome.InitializeErrorDialogHandler (ErrorDialog.ShowError);
 			PintaCore.Chrome.InitializeMessageDialog (ErrorDialog.ShowMessage);
+			PintaCore.Chrome.InitializeSimpleEffectDialog (SimpleEffectDialog.Launch);
 
 			PintaCore.Initialize ();
 

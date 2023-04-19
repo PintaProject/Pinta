@@ -26,6 +26,7 @@
 
 using System;
 using Gtk;
+using Mono.Addins.Localization;
 
 namespace Pinta.Core
 {
@@ -42,6 +43,7 @@ namespace Pinta.Core
 		private IProgressDialog progress_dialog = null!;
 		private ErrorDialogHandler error_dialog_handler = null!;
 		private MessageDialogHandler message_dialog_handler = null!;
+		private SimpleEffectDialogHandler simple_effect_dialog_handler = null!;
 
 		public Box MainToolBar { get; private set; } = null!;
 		public Box ToolToolBar { get; private set; } = null!;
@@ -140,6 +142,11 @@ namespace Pinta.Core
 			message_dialog_handler = handler;
 		}
 
+		public void InitializeSimpleEffectDialog (SimpleEffectDialogHandler handler)
+		{
+			simple_effect_dialog_handler = handler;
+		}
+
 		public void ShowErrorDialog (Window parent, string message, string body, string details)
 		{
 			error_dialog_handler (parent, message, body, details);
@@ -153,6 +160,11 @@ namespace Pinta.Core
 		public void SetStatusBarText (string text)
 		{
 			OnStatusBarTextChanged (text);
+		}
+
+		public void LaunchSimpleEffectDialog (BaseEffect effect, IAddinLocalizer localizer)
+		{
+			simple_effect_dialog_handler (effect, localizer);
 		}
 		#endregion
 		#region Protected Methods
@@ -187,4 +199,5 @@ namespace Pinta.Core
 
 	public delegate void ErrorDialogHandler (Window parent, string message, string body, string details);
 	public delegate void MessageDialogHandler (Window parent, string message, string body);
+	public delegate void SimpleEffectDialogHandler (BaseEffect effect, IAddinLocalizer localizer);
 }

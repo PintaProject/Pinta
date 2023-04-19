@@ -34,6 +34,7 @@ using System.ComponentModel;
 using System.Reflection;
 using System.Text;
 using Gtk;
+using Mono.Addins;
 using Mono.Addins.Localization;
 using Pinta.Core;
 
@@ -71,6 +72,32 @@ namespace Pinta.Gui.Widgets
 			BuildDialog (localizer);
 
 			OnClose += (_, _) => HandleClose ();
+		}
+
+		/// <summary>
+		/// Helper function for launching the dialog and connecting its signals.
+		/// The IAddinLocalizer provides a generic way to get translated strings both for
+		/// Pinta's effects and for effect add-ins.
+		/// </summary>
+		public static void Launch (BaseEffect effect, IAddinLocalizer localizer)
+		{
+			ArgumentNullException.ThrowIfNull (effect.EffectData);
+
+			var dialog = new SimpleEffectDialog (
+				effect.Name, effect.Icon, effect.EffectData, localizer);
+
+			// Hookup event handling for live preview.
+			dialog.EffectDataChanged += (o, e) => {
+				if (effect.EffectData != null)
+					effect.EffectData.FirePropertyChanged (e.PropertyName);
+			};
+
+			dialog.OnResponse += (_, args) => {
+				effect.OnConfigDialogResponse (args.ResponseId == (int) Gtk.ResponseType.Ok);
+				dialog.Destroy ();
+			};
+
+			dialog.Present ();
 		}
 
 		public object EffectData { get; private set; }

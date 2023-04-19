@@ -26,6 +26,8 @@
 
 using System;
 using Cairo;
+using Mono.Addins;
+using Mono.Addins.Localization;
 using Pinta.Core;
 
 namespace Pinta.Core
@@ -79,6 +81,18 @@ namespace Pinta.Core
 		{
 			if (IsConfigurable)
 				throw new NotImplementedException (string.Format ("{0} is marked as configurable, but has not implemented LaunchConfiguration", this.GetType ()));
+		}
+
+		/// <summary>
+		/// Launches the standard configuration dialog for this effect.
+		/// </summary>
+		/// <param name="localizer">
+		/// The localizer for the effect add-in. This is used to fetch translations for the
+		/// strings in the dialog.
+		/// </param>
+		protected void LaunchSimpleEffectDialog (AddinLocalizer localizer)
+		{
+			PintaCore.Chrome.LaunchSimpleEffectDialog (this, new AddinLocalizerWrapper (localizer));
 		}
 
 		/// <summary>
@@ -206,4 +220,22 @@ namespace Pinta.Core
 		/// </summary>
 		public virtual bool IsDefault { get { return false; } }
 	}
+
+	/// <summary>
+	/// Wrapper around the AddinLocalizer of an add-in.
+	/// </summary>
+	internal class AddinLocalizerWrapper : IAddinLocalizer
+	{
+		private AddinLocalizer localizer;
+
+		public AddinLocalizerWrapper (AddinLocalizer localizer)
+		{
+			this.localizer = localizer;
+		}
+
+		public string GetString (string msgid)
+		{
+			return localizer.GetString (msgid);
+		}
+	};
 }

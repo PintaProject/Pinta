@@ -34,71 +34,25 @@ using Pinta.Gui.Widgets;
 
 namespace Pinta
 {
-
-	public static class EffectHelper
+	internal static class EffectHelper
 	{
-		/// <summary>
-		/// Launchs an effect dialog.
-		/// </summary>
-		/// <param name="localizer">
-		/// The localizer for the effect add-in. This is used to fetch translations for the
-		/// strings in the dialog.
-		/// </param>
-		public static void LaunchSimpleEffectDialog (BaseEffect effect, AddinLocalizer localizer)
-		{
-			LaunchSimpleEffectDialog (effect, new AddinLocalizerWrapper (localizer));
-		}
-
 		/// <summary>
 		/// Launchs an effect dialog using Pinta's translation template.
 		/// </summary>
 		internal static void LaunchSimpleEffectDialog (BaseEffect effect)
 		{
-			LaunchSimpleEffectDialog (effect, new PintaLocalizer ());
+			PintaCore.Chrome.LaunchSimpleEffectDialog (effect, new PintaLocalizer ());
 		}
-
-		/// <summary>
-		/// Helper function for the above methods. The IAddinLocalizer provides a generic way to
-		/// get translated strings both for Pinta's effects and for effect add-ins.
-		/// </summary>
-		private static void LaunchSimpleEffectDialog (BaseEffect effect, IAddinLocalizer localizer)
-		{
-			ArgumentNullException.ThrowIfNull (effect);
-			ArgumentNullException.ThrowIfNull (effect.EffectData);
-
-			var dialog = new SimpleEffectDialog (
-				effect.Name, effect.Icon, effect.EffectData, localizer);
-
-			// Hookup event handling for live preview.
-			dialog.EffectDataChanged += (o, e) => {
-				if (effect.EffectData != null)
-					effect.EffectData.FirePropertyChanged (e.PropertyName);
-			};
-
-			dialog.OnResponse += (_, args) => {
-				effect.OnConfigDialogResponse (args.ResponseId == (int) Gtk.ResponseType.Ok);
-				dialog.Destroy ();
-			};
-
-			dialog.Present ();
-		}
-
-		/// <summary>
-		/// Wrapper around the AddinLocalizer of an add-in.
-		/// </summary>
-		private class AddinLocalizerWrapper : IAddinLocalizer
-		{
-			private AddinLocalizer localizer;
-
-			public AddinLocalizerWrapper (AddinLocalizer localizer)
-			{
-				this.localizer = localizer;
-			}
-
-			public string GetString (string msgid)
-			{
-				return localizer.GetString (msgid);
-			}
-		};
 	}
+
+	/// <summary>
+	/// Wrapper around Pinta's translation template.
+	/// </summary>
+	internal class PintaLocalizer : IAddinLocalizer
+	{
+		public string GetString (string msgid)
+		{
+			return Pinta.Core.Translations.GetString (msgid);
+		}
+	};
 }
