@@ -25,9 +25,12 @@ namespace Pinta.Gui.Widgets
 		{
 			var index = PintaCore.Tools.ToList ().IndexOf (item.Tool);
 
-			Widget? prev_widget = GetFirstChild ();
-			for (int i = 1; i < index; ++i)
-				prev_widget = prev_widget!.GetNextSibling ();
+			Widget? prev_widget = null;
+			if (index > 0) {
+				prev_widget = GetFirstChild ();
+				for (int i = 1; i < index; ++i)
+					prev_widget = prev_widget!.GetNextSibling ();
+			}
 
 			InsertChildAfter (item.Tool.ToolItem, prev_widget);
 		}
