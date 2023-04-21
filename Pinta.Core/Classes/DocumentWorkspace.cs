@@ -61,13 +61,13 @@ namespace Pinta.Core
 				int window_x = view.GetAllocatedWidth ();
 				int window_y = view.GetAllocatedHeight ();
 
-				if (CanvasSize.Width <= window_x && CanvasSize.Height <= window_y)
-					return true;
-
-				return false;
+				return CanvasSize.Width <= window_x && CanvasSize.Height <= window_y;
 			}
 		}
 
+		/// <summary>
+		/// Size of the zoomed image.
+		/// </summary>
 		public Size CanvasSize {
 			get { return canvas_size; }
 			set {
@@ -85,7 +85,7 @@ namespace Pinta.Core
 				Gtk.Viewport view = (Gtk.Viewport) Canvas.Parent!;
 
 				int window_x = view.GetAllocatedWidth ();
-				int window_y = view.Child!.GetAllocatedHeight ();
+				int window_y = view.GetAllocatedHeight ();
 
 				if (document.ImageSize.Width <= window_x && document.ImageSize.Height <= window_y)
 					return true;
@@ -94,10 +94,17 @@ namespace Pinta.Core
 			}
 		}
 
-		public PointD Offset {
-			get { return new PointD ((Canvas.GetAllocatedWidth () - canvas_size.Width) / 2, (Canvas.GetAllocatedHeight () - canvas_size.Height) / 2); }
-		}
+		/// <summary>
+		/// Offset to center the canvas in the canvas widget.
+		/// (When zoomed out, the canvas widget will have a larger allocated size than the canvas size).
+		/// </summary>
+		public PointD Offset => new PointD (
+			(Canvas.GetAllocatedWidth () - canvas_size.Width) / 2,
+			(Canvas.GetAllocatedHeight () - canvas_size.Height) / 2);
 
+		/// <summary>
+		/// Scale factor for the canvas vs the image.
+		/// </summary>
 		public double Scale {
 			get { return (double) CanvasSize.Width / (double) document.ImageSize.Width; }
 			set {
@@ -282,8 +289,7 @@ namespace Pinta.Core
 
 		public void OnCanvasSizeChanged ()
 		{
-			if (CanvasSizeChanged != null)
-				CanvasSizeChanged (this, EventArgs.Empty);
+			CanvasSizeChanged?.Invoke (this, EventArgs.Empty);
 		}
 
 		private void ZoomAndRecenterView (ZoomType zoomType, in PointD point)
