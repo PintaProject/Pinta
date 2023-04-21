@@ -272,25 +272,25 @@ namespace Pinta.Core
 		}
 
 		/// <summary>
-		/// Converts a point from the active document's window coordinates to canvas coordinates.
+		/// Converts a point from the active document's view coordinates to canvas coordinates.
 		/// </summary>
 		/// <param name='canvas_pos'>
-		/// The position of the window point
+		/// The position of the view point
 		/// </param>
-		public PointD WindowPointToCanvas (PointD window_pos)
+		public PointD ViewPointToCanvas (PointD view_pos)
 		{
-			return ActiveWorkspace.WindowPointToCanvas (window_pos.X, window_pos.Y);
+			return ActiveWorkspace.ViewPointToCanvas (view_pos.X, view_pos.Y);
 		}
 
 		/// <summary>
-		/// Converts a point from the active document's canvas coordinates to window coordinates.
+		/// Converts a point from the active document's canvas coordinates to view coordinates.
 		/// </summary>
 		/// <param name='canvas_pos'>
 		/// The position of the canvas point
 		/// </param>
-		public PointD CanvasPointToWindow (PointD canvas_pos)
+		public PointD CanvasPointToView (PointD canvas_pos)
 		{
-			return ActiveWorkspace.CanvasPointToWindow (canvas_pos.X, canvas_pos.Y);
+			return ActiveWorkspace.CanvasPointToView (canvas_pos.X, canvas_pos.Y);
 		}
 
 		public RectangleI ClampToImageSize (RectangleI r)

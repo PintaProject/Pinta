@@ -91,7 +91,7 @@ namespace Pinta.Tools
 		protected override void OnMouseMove (Document document, ToolMouseEventArgs e)
 		{
 			if (mouseDown == MouseButton.Left) {
-				var shape_origin_window = document.Workspace.CanvasPointToWindow (shape_origin.X, shape_origin.Y);
+				var shape_origin_window = document.Workspace.CanvasPointToView (shape_origin.X, shape_origin.Y);
 				if (shape_origin_window.Distance (e.WindowPoint) > tolerance) // if they've moved the mouse more than 10 pixels since they clicked
 					is_drawing = true;
 
@@ -110,7 +110,7 @@ namespace Pinta.Tools
 
 			if (mouseDown == MouseButton.Left || mouseDown == MouseButton.Right) {
 				if (e.MouseButton == MouseButton.Left) {
-					var shape_origin_window = document.Workspace.CanvasPointToWindow (shape_origin.X, shape_origin.Y);
+					var shape_origin_window = document.Workspace.CanvasPointToView (shape_origin.X, shape_origin.Y);
 					if (shape_origin_window.Distance (e.WindowPoint) <= tolerance) {
 						document.Workspace.ZoomIn ();
 						document.Workspace.RecenterView (x, y);

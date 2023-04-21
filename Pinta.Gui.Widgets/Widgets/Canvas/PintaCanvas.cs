@@ -92,7 +92,7 @@ namespace Pinta.Gui.Widgets
 					PintaCore.Workspace.SetActiveDocument (document);
 
 				var window_point = new PointD (args.X, args.Y);
-				var canvas_point = document.Workspace.WindowPointToCanvas (window_point);
+				var canvas_point = document.Workspace.ViewPointToCanvas (window_point);
 
 				var tool_args = new ToolMouseEventArgs () {
 					State = click_controller.GetCurrentEventState (),
@@ -107,7 +107,7 @@ namespace Pinta.Gui.Widgets
 
 			click_controller.OnReleased += (_, args) => {
 				var window_point = new PointD (args.X, args.Y);
-				var canvas_point = document.Workspace.WindowPointToCanvas (window_point);
+				var canvas_point = document.Workspace.ViewPointToCanvas (window_point);
 
 				var tool_args = new ToolMouseEventArgs () {
 					State = click_controller.GetCurrentEventState (),
@@ -126,7 +126,7 @@ namespace Pinta.Gui.Widgets
 			var motion_controller = Gtk.EventControllerMotion.New ();
 			motion_controller.OnMotion += (_, args) => {
 				var window_point = new PointD (args.X, args.Y);
-				var canvas_point = document.Workspace.WindowPointToCanvas (window_point);
+				var canvas_point = document.Workspace.ViewPointToCanvas (window_point);
 
 				if (document.Workspace.PointInCanvas (canvas_point))
 					PintaCore.Chrome.LastCanvasCursorPoint = canvas_point.ToInt ();

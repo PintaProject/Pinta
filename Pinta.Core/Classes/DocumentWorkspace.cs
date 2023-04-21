@@ -153,8 +153,8 @@ namespace Pinta.Core
 			var canvasTopLeft = new PointD (canvasRect.Left, canvasRect.Top);
 			var canvasBtmRight = new PointD (canvasRect.Right + 1, canvasRect.Bottom + 1);
 
-			var winTopLeft = CanvasPointToWindow (canvasTopLeft.X, canvasTopLeft.Y);
-			var winBtmRight = CanvasPointToWindow (canvasBtmRight.X, canvasBtmRight.Y);
+			var winTopLeft = CanvasPointToView (canvasTopLeft.X, canvasTopLeft.Y);
+			var winBtmRight = CanvasPointToView (canvasBtmRight.X, canvasBtmRight.Y);
 
 			RectangleI winRect = CairoExtensions.PointsToRectangle (winTopLeft, winBtmRight).ToInt ();
 
@@ -210,25 +210,25 @@ namespace Pinta.Core
 		}
 
 		/// <summary>
-		/// Converts a point from window coordinates to canvas coordinates
+		/// Converts a point from image view coordinates to canvas coordinates
 		/// </summary>
 		/// <param name='x'>
-		/// The X coordinate of the window point
+		/// The X coordinate of the view point
 		/// </param>
 		/// <param name='y'>
-		/// The Y coordinate of the window point
+		/// The Y coordinate of the view point
 		/// </param>
-		public PointD WindowPointToCanvas (double x, double y)
+		public PointD ViewPointToCanvas (double x, double y)
 		{
 			var sf = new ScaleFactor (document.ImageSize.Width, ViewSize.Width);
 			var pt = sf.ScalePoint (new PointD (x - Offset.X, y - Offset.Y));
 			return new PointD (pt.X, pt.Y);
 		}
 
-		public PointD WindowPointToCanvas (in PointD point) => WindowPointToCanvas (point.X, point.Y);
+		public PointD ViewPointToCanvas (in PointD point) => ViewPointToCanvas (point.X, point.Y);
 
 		/// <summary>
-		/// Converts a point from canvas coordinates to window coordinates
+		/// Converts a point from canvas coordinates to view coordinates
 		/// </summary>
 		/// <param name='x'>
 		/// The X coordinate of the canvas point
@@ -236,7 +236,7 @@ namespace Pinta.Core
 		/// <param name='y'>
 		/// The Y coordinate of the canvas point
 		/// </param>
-		public PointD CanvasPointToWindow (double x, double y)
+		public PointD CanvasPointToView (double x, double y)
 		{
 			var sf = new ScaleFactor (document.ImageSize.Width, ViewSize.Width);
 			var pt = sf.UnscalePoint (new PointD (x, y));

@@ -50,7 +50,7 @@ namespace Pinta.Actions
 			// Get the scroll position in canvas co-ordinates
 			var view = (Viewport) doc.Workspace.Canvas.Parent!;
 
-			var canvasPos = doc.Workspace.WindowPointToCanvas (
+			var canvasPos = doc.Workspace.ViewPointToCanvas (
 				view.Hadjustment!.Value,
 				view.Vadjustment!.Value);
 

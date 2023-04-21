@@ -702,7 +702,7 @@ namespace Pinta.Tools
 			bool clicked_control_point = false;
 			bool clicked_generated_point = false;
 			{
-				var current_window_point = PintaCore.Workspace.CanvasPointToWindow (unclamped_point);
+				var current_window_point = PintaCore.Workspace.CanvasPointToView (unclamped_point);
 				var test_handle = new MoveHandle ();
 
 				// Check if the user is directly clicking on a control point.
@@ -1184,7 +1184,7 @@ namespace Pinta.Tools
 			hover_handle.Active = hover_handle.Selected = false;
 
 			if (!changing_tension && draw_selection) {
-				var current_window_point = PintaCore.Workspace.CanvasPointToWindow (current_point);
+				var current_window_point = PintaCore.Workspace.CanvasPointToView (current_point);
 
 				int closestCPIndex, closestCPShapeIndex;
 				ControlPoint? closestControlPoint;

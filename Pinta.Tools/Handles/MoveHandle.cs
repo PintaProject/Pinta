@@ -64,7 +64,7 @@ namespace Pinta.Tools
 			const double radius = 4.5;
 			const double diameter = 2 * radius;
 
-			var window_pt = PintaCore.Workspace.CanvasPointToWindow (CanvasPosition);
+			var window_pt = PintaCore.Workspace.CanvasPointToView (CanvasPosition);
 			return new RectangleD (window_pt.X - radius, window_pt.Y - radius, diameter, diameter);
 		}
 
