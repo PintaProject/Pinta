@@ -63,7 +63,10 @@ namespace Pinta
 					return;
 
 				current_window_pos = new PointD (args.X, args.Y);
-				current_canvas_pos = PintaCore.Workspace.WindowPointToCanvas (current_window_pos);
+				// These coordinates are relative to our grid widget, so transform into the child image
+				// view's coordinates, and then to the canvas coordinates.
+				this.TranslateCoordinates (Canvas, current_window_pos, out PointD view_pos);
+				current_canvas_pos = PintaCore.Workspace.WindowPointToCanvas (view_pos);
 
 				horizontal_ruler.Position = current_canvas_pos.X;
 				vertical_ruler.Position = current_canvas_pos.Y;

@@ -526,5 +526,16 @@ namespace Pinta.Core
 
 			return result.ToArray ();
 		}
+
+		// TODO-GTK4 (bindings) - this manual binding will be unnecessary in v0.4 of gir.core (https://github.com/gircore/gir.core/pull/795)
+		[DllImport (GtkLibraryName, EntryPoint = "gtk_widget_translate_coordinates")]
+		private static extern bool TranslateCoordinates (IntPtr srcWidget, IntPtr destWidget, double srcX, double srcY, out double destX, out double destY);
+
+		public static bool TranslateCoordinates (this Widget src, Widget dest, PointD src_pos, out PointD dest_pos)
+		{
+			bool result = TranslateCoordinates (src.Handle, dest.Handle, src_pos.X, src_pos.Y, out double x, out double y);
+			dest_pos = new PointD (x, y);
+			return result;
+		}
 	}
 }
