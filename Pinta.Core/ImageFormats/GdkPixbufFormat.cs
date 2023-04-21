@@ -62,7 +62,7 @@ namespace Pinta.Core
 
 			Document doc = PintaCore.Workspace.CreateAndActivateDocument (file, filetype, imagesize);
 			doc.ImageSize = imagesize;
-			doc.Workspace.CanvasSize = imagesize;
+			doc.Workspace.ViewSize = imagesize;
 
 			Layer layer = doc.Layers.AddNewLayer (file.GetDisplayName ());
 

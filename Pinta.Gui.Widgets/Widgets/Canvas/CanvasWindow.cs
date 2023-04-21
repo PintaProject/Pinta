@@ -54,7 +54,7 @@ namespace Pinta
 
 			scrolled_window.Hadjustment!.OnValueChanged += UpdateRulerRange;
 			scrolled_window.Vadjustment!.OnValueChanged += UpdateRulerRange;
-			document.Workspace.CanvasSizeChanged += UpdateRulerRange;
+			document.Workspace.ViewSizeChanged += UpdateRulerRange;
 			Canvas.OnResize += UpdateRulerRange;
 
 			motion_controller = Gtk.EventControllerMotion.New ();

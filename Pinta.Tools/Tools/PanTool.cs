@@ -53,7 +53,7 @@ namespace Pinta.Tools
 				return;
 
 			// Don't scroll if the whole canvas fits (no scrollbars)
-			if (!document.Workspace.CanvasFitsInWindow)
+			if (!document.Workspace.ImageViewFitsInWindow)
 				active = true;
 
 			last_point = new PointD (e.RootPoint.X, e.RootPoint.Y);

@@ -380,7 +380,7 @@ namespace Pinta.Core
 				layer.Rotate (angle, ImageSize, new_size);
 
 			ImageSize = new_size;
-			Workspace.CanvasSize = new_size;
+			Workspace.ViewSize = new_size;
 
 			PintaCore.Actions.View.UpdateCanvasScale ();
 			ResetSelectionPaths ();

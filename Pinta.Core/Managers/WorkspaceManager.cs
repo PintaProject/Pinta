@@ -89,8 +89,8 @@ namespace Pinta.Core
 		}
 
 		public Size CanvasSize {
-			get { return ActiveWorkspace.CanvasSize; }
-			set { ActiveWorkspace.CanvasSize = value; }
+			get { return ActiveWorkspace.ViewSize; }
+			set { ActiveWorkspace.ViewSize = value; }
 		}
 
 		public PointD Offset {
@@ -171,7 +171,7 @@ namespace Pinta.Core
 		public Document NewDocument (Size imageSize, Color backgroundColor)
 		{
 			Document doc = CreateAndActivateDocument (null, null, imageSize);
-			doc.Workspace.CanvasSize = imageSize;
+			doc.Workspace.ViewSize = imageSize;
 
 			// Start with an empty white layer
 			Layer background = doc.Layers.AddNewLayer (Translations.GetString ("Background"));

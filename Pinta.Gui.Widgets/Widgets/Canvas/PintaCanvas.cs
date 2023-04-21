@@ -52,8 +52,8 @@ namespace Pinta.Gui.Widgets
 			cr = new CanvasRenderer (true, true);
 
 			// Keep the widget the same size as the canvas
-			document.Workspace.CanvasSizeChanged += delegate (object? sender, EventArgs e) {
-				SetRequisition (document.Workspace.CanvasSize);
+			document.Workspace.ViewSizeChanged += delegate (object? sender, EventArgs e) {
+				SetRequisition (document.Workspace.ViewSize);
 			};
 
 			// Update the canvas when the image changes
@@ -157,7 +157,7 @@ namespace Pinta.Gui.Widgets
 			var y = (int) document.Workspace.Offset.Y;
 
 			// Translate our expose area for the whole drawingarea to just our canvas
-			var canvas_bounds = new RectangleI (x, y, document.Workspace.CanvasSize.Width, document.Workspace.CanvasSize.Height);
+			var canvas_bounds = new RectangleI (x, y, document.Workspace.ViewSize.Width, document.Workspace.ViewSize.Height);
 
 			if (CairoExtensions.GetClipRectangle (context, out RectangleI expose_rect))
 				canvas_bounds = canvas_bounds.Intersect (expose_rect);
@@ -173,17 +173,17 @@ namespace Pinta.Gui.Widgets
 				canvas = CairoExtensions.CreateImageSurface (Cairo.Format.Argb32, canvas_bounds.Width, canvas_bounds.Height);
 			}
 
-			cr.Initialize (document.ImageSize, document.Workspace.CanvasSize);
+			cr.Initialize (document.ImageSize, document.Workspace.ViewSize);
 
 			var g = context;
 
 			// Draw our canvas drop shadow
-			g.DrawRectangle (new RectangleD (x - 1, y - 1, document.Workspace.CanvasSize.Width + 2, document.Workspace.CanvasSize.Height + 2), new Cairo.Color (.5, .5, .5), 1);
-			g.DrawRectangle (new RectangleD (x - 2, y - 2, document.Workspace.CanvasSize.Width + 4, document.Workspace.CanvasSize.Height + 4), new Cairo.Color (.8, .8, .8), 1);
-			g.DrawRectangle (new RectangleD (x - 3, y - 3, document.Workspace.CanvasSize.Width + 6, document.Workspace.CanvasSize.Height + 6), new Cairo.Color (.9, .9, .9), 1);
+			g.DrawRectangle (new RectangleD (x - 1, y - 1, document.Workspace.ViewSize.Width + 2, document.Workspace.ViewSize.Height + 2), new Cairo.Color (.5, .5, .5), 1);
+			g.DrawRectangle (new RectangleD (x - 2, y - 2, document.Workspace.ViewSize.Width + 4, document.Workspace.ViewSize.Height + 4), new Cairo.Color (.8, .8, .8), 1);
+			g.DrawRectangle (new RectangleD (x - 3, y - 3, document.Workspace.ViewSize.Width + 6, document.Workspace.ViewSize.Height + 6), new Cairo.Color (.9, .9, .9), 1);
 
 			// Set up our clip rectangle
-			g.Rectangle (new RectangleD (x, y, document.Workspace.CanvasSize.Width, document.Workspace.CanvasSize.Height));
+			g.Rectangle (new RectangleD (x, y, document.Workspace.ViewSize.Width, document.Workspace.ViewSize.Height));
 			g.Clip ();
 
 			g.Translate (x, y);

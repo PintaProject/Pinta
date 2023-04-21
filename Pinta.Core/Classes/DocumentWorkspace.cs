@@ -32,7 +32,7 @@ namespace Pinta.Core
 	public class DocumentWorkspace
 	{
 		private Document document;
-		private Size canvas_size;
+		private Size view_size;
 		private enum ZoomType
 		{
 			ZoomIn,
@@ -48,38 +48,44 @@ namespace Pinta.Core
 
 		#region Public Events
 		public event EventHandler<CanvasInvalidatedEventArgs>? CanvasInvalidated;
-		public event EventHandler? CanvasSizeChanged;
+		public event EventHandler? ViewSizeChanged;
 		#endregion
 
 		#region Public Properties
 		public Gtk.DrawingArea Canvas { get; set; } = null!; // NRT - This is set soon after creation
 
-		public bool CanvasFitsInWindow {
+		/// <summary>
+		/// Returns whether the zoomed image fits in the window without requiring scrolling.
+		/// </summary>
+		public bool ImageViewFitsInWindow {
 			get {
 				Gtk.Viewport view = (Gtk.Viewport) Canvas.Parent!;
 
 				int window_x = view.GetAllocatedWidth ();
 				int window_y = view.GetAllocatedHeight ();
 
-				return CanvasSize.Width <= window_x && CanvasSize.Height <= window_y;
+				return ViewSize.Width <= window_x && ViewSize.Height <= window_y;
 			}
 		}
 
 		/// <summary>
 		/// Size of the zoomed image.
 		/// </summary>
-		public Size CanvasSize {
-			get { return canvas_size; }
+		public Size ViewSize {
+			get { return view_size; }
 			set {
-				if (canvas_size.Width != value.Width || canvas_size.Height != value.Height) {
-					canvas_size = value;
-					OnCanvasSizeChanged ();
+				if (view_size.Width != value.Width || view_size.Height != value.Height) {
+					view_size = value;
+					OnViewSizeChanged ();
 				}
 			}
 		}
 
 		public DocumentHistory History { get; private set; }
 
+		/// <summary>
+		/// Returns whether the image (at 100% zoom) would fit in the window without requiring scrolling.
+		/// </summary>
 		public bool ImageFitsInWindow {
 			get {
 				Gtk.Viewport view = (Gtk.Viewport) Canvas.Parent!;
@@ -87,28 +93,25 @@ namespace Pinta.Core
 				int window_x = view.GetAllocatedWidth ();
 				int window_y = view.GetAllocatedHeight ();
 
-				if (document.ImageSize.Width <= window_x && document.ImageSize.Height <= window_y)
-					return true;
-
-				return false;
+				return document.ImageSize.Width <= window_x && document.ImageSize.Height <= window_y;
 			}
 		}
 
 		/// <summary>
-		/// Offset to center the canvas in the canvas widget.
-		/// (When zoomed out, the canvas widget will have a larger allocated size than the canvas size).
+		/// Offset to center the image view in the canvas widget.
+		/// (When zoomed out, the widget will have a larger allocated size than the image view size).
 		/// </summary>
 		public PointD Offset => new PointD (
-			(Canvas.GetAllocatedWidth () - canvas_size.Width) / 2,
-			(Canvas.GetAllocatedHeight () - canvas_size.Height) / 2);
+			(Canvas.GetAllocatedWidth () - view_size.Width) / 2,
+			(Canvas.GetAllocatedHeight () - view_size.Height) / 2);
 
 		/// <summary>
-		/// Scale factor for the canvas vs the image.
+		/// Scale factor for the zoomed image.
 		/// </summary>
 		public double Scale {
-			get { return (double) CanvasSize.Width / (double) document.ImageSize.Width; }
+			get { return (double) ViewSize.Width / (double) document.ImageSize.Width; }
 			set {
-				if (value != (double) CanvasSize.Width / (double) document.ImageSize.Width || value != (double) CanvasSize.Height / (double) document.ImageSize.Height) {
+				if (value != (double) ViewSize.Width / (double) document.ImageSize.Width || value != (double) ViewSize.Height / (double) document.ImageSize.Height) {
 					if (document.ImageSize.Width == 0) {
 						document.ImageSize = new Size (1, document.ImageSize.Height);
 					}
@@ -120,7 +123,7 @@ namespace Pinta.Core
 					int new_x = Math.Max ((int) (document.ImageSize.Width * value), 1);
 					int new_y = Math.Max ((int) (((long) new_x * document.ImageSize.Height) / document.ImageSize.Width), 1);
 
-					CanvasSize = new Size (new_x, new_y);
+					ViewSize = new Size (new_x, new_y);
 					Invalidate ();
 
 					if (PintaCore.Tools.CurrentTool?.CursorChangesOnZoom == true) {
@@ -217,7 +220,7 @@ namespace Pinta.Core
 		/// </param>
 		public PointD WindowPointToCanvas (double x, double y)
 		{
-			var sf = new ScaleFactor (document.ImageSize.Width, CanvasSize.Width);
+			var sf = new ScaleFactor (document.ImageSize.Width, ViewSize.Width);
 			var pt = sf.ScalePoint (new PointD (x - Offset.X, y - Offset.Y));
 			return new PointD (pt.X, pt.Y);
 		}
@@ -235,7 +238,7 @@ namespace Pinta.Core
 		/// </param>
 		public PointD CanvasPointToWindow (double x, double y)
 		{
-			var sf = new ScaleFactor (document.ImageSize.Width, CanvasSize.Width);
+			var sf = new ScaleFactor (document.ImageSize.Width, ViewSize.Width);
 			var pt = sf.UnscalePoint (new PointD (x, y));
 			return new PointD (pt.X + Offset.X, pt.Y + Offset.Y);
 		}
@@ -287,14 +290,14 @@ namespace Pinta.Core
 				CanvasInvalidated (this, e);
 		}
 
-		public void OnCanvasSizeChanged ()
+		public void OnViewSizeChanged ()
 		{
-			CanvasSizeChanged?.Invoke (this, EventArgs.Empty);
+			ViewSizeChanged?.Invoke (this, EventArgs.Empty);
 		}
 
 		private void ZoomAndRecenterView (ZoomType zoomType, in PointD point)
 		{
-			if (zoomType == ZoomType.ZoomOut && (CanvasSize.Width == 1 || CanvasSize.Height == 1))
+			if (zoomType == ZoomType.ZoomOut && (ViewSize.Width == 1 || ViewSize.Height == 1))
 				return; //Can't zoom in past a 1x1 px canvas
 
 			double zoom;
@@ -362,8 +365,8 @@ namespace Pinta.Core
 
 			// Quick fix : need to manually update Upper limit because the value is not changing after updating the canvas scale.
 			// TODO : I think there is an event need to be fired so that those values updated automatically.
-			view.Hadjustment!.Upper = CanvasSize.Width < view.Hadjustment.PageSize ? view.Hadjustment.PageSize : CanvasSize.Width;
-			view.Vadjustment!.Upper = CanvasSize.Height < view.Vadjustment.PageSize ? view.Vadjustment.PageSize : CanvasSize.Height;
+			view.Hadjustment!.Upper = ViewSize.Width < view.Hadjustment.PageSize ? view.Hadjustment.PageSize : ViewSize.Width;
+			view.Vadjustment!.Upper = ViewSize.Height < view.Vadjustment.PageSize ? view.Vadjustment.PageSize : ViewSize.Height;
 
 			RecenterView (center_x, center_y);
 

@@ -63,7 +63,7 @@ namespace Pinta.Core
 				throw new XmlException ("No layers found in OpenRaster file");
 
 			doc.ImageSize = imagesize;
-			doc.Workspace.CanvasSize = imagesize;
+			doc.Workspace.ViewSize = imagesize;
 
 			for (int i = 0; i < layerElements.Count; i++) {
 				XmlElement layerElement = (XmlElement) layerElements[i]!;
