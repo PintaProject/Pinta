@@ -39,13 +39,13 @@ namespace Pinta.Tools
 
 		private MouseButton mouseDown;
 		private bool is_drawing;
-		protected PointD shape_origin;
+		private PointD shape_origin;
 		private RectangleD last_dirty;
 		private static readonly int tolerance = 10;
 
 		public ZoomTool (IServiceManager services) : base (services)
 		{
-			mouseDown = 0;
+			mouseDown = MouseButton.None;
 
 			cursorZoomIn = Gdk.Cursor.NewFromName (Pinta.Resources.StandardCursors.ZoomIn, null);
 			cursorZoomOut = Gdk.Cursor.NewFromName (Pinta.Resources.StandardCursors.ZoomOut, null);
@@ -91,7 +91,7 @@ namespace Pinta.Tools
 		protected override void OnMouseMove (Document document, ToolMouseEventArgs e)
 		{
 			if (mouseDown == MouseButton.Left) {
-				var shape_origin_window = document.Workspace.CanvasPointToView (shape_origin.X, shape_origin.Y);
+				var shape_origin_window = document.Workspace.CanvasPointToView (shape_origin);
 				if (shape_origin_window.Distance (e.WindowPoint) > tolerance) // if they've moved the mouse more than 10 pixels since they clicked
 					is_drawing = true;
 
@@ -104,22 +104,18 @@ namespace Pinta.Tools
 
 		protected override void OnMouseUp (Document document, ToolMouseEventArgs e)
 		{
-			var x = e.PointDouble.X;
-			var y = e.PointDouble.Y;
 			document.Layers.ToolLayer.Hidden = true;
 
 			if (mouseDown == MouseButton.Left || mouseDown == MouseButton.Right) {
 				if (e.MouseButton == MouseButton.Left) {
-					var shape_origin_window = document.Workspace.CanvasPointToView (shape_origin.X, shape_origin.Y);
+					var shape_origin_window = document.Workspace.CanvasPointToView (shape_origin);
 					if (shape_origin_window.Distance (e.WindowPoint) <= tolerance) {
-						document.Workspace.ZoomIn ();
-						document.Workspace.RecenterView (x, y);
+						document.Workspace.ZoomInAroundCanvasPoint (e.PointDouble);
 					} else {
-						document.Workspace.ZoomToRectangle (CairoExtensions.PointsToRectangle (shape_origin.Rounded (), e.PointDouble.Rounded ()));
+						document.Workspace.ZoomToCanvasRectangle (CairoExtensions.PointsToRectangle (shape_origin, e.PointDouble));
 					}
 				} else {
-					document.Workspace.ZoomOut ();
-					document.Workspace.RecenterView (x, y);
+					document.Workspace.ZoomOutAroundCanvasPoint (e.PointDouble);
 				}
 			}
 

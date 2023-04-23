@@ -225,6 +225,9 @@ namespace Pinta.Core
 			return new PointD (pt.X, pt.Y);
 		}
 
+		/// <summary>
+		/// Converts a point from image view coordinates to canvas coordinates
+		/// </summary>
 		public PointD ViewPointToCanvas (in PointD point) => ViewPointToCanvas (point.X, point.Y);
 
 		/// <summary>
@@ -243,32 +246,47 @@ namespace Pinta.Core
 			return new PointD (pt.X + Offset.X, pt.Y + Offset.Y);
 		}
 
+		/// <summary>
+		/// Converts a point from canvas coordinates to view coordinates
+		/// </summary>
+		public PointD CanvasPointToView (in PointD point) => CanvasPointToView (point.X, point.Y);
+
 		public void ZoomIn ()
 		{
-			ZoomAndRecenterView (ZoomType.ZoomIn, new PointD (-1, -1)); // Zoom in relative to the center of the viewport.
+			ZoomAndRecenterView (ZoomType.ZoomIn, center_point: null); // Zoom in relative to the center of the viewport.
 		}
 
 		public void ZoomOut ()
 		{
-			ZoomAndRecenterView (ZoomType.ZoomOut, new PointD (-1, -1)); // Zoom out relative to the center of the viewport.
+			ZoomAndRecenterView (ZoomType.ZoomOut, center_point: null); // Zoom out relative to the center of the viewport.
 		}
 
-		public void ZoomInFromMouseScroll (in PointD point)
+		public void ZoomInAroundViewPoint (in PointD view_point)
 		{
-			ZoomAndRecenterView (ZoomType.ZoomIn, point); // Zoom in relative to mouse position.
+			ZoomAndRecenterView (ZoomType.ZoomIn, view_point); // Zoom in relative to mouse position.
 		}
 
-		public void ZoomOutFromMouseScroll (in PointD point)
+		public void ZoomInAroundCanvasPoint (in PointD canvas_point)
 		{
-			ZoomAndRecenterView (ZoomType.ZoomOut, point); // Zoom out relative to mouse position.
+			ZoomInAroundViewPoint (CanvasPointToView (canvas_point));
+		}
+
+		public void ZoomOutAroundViewPoint (in PointD view_point)
+		{
+			ZoomAndRecenterView (ZoomType.ZoomOut, view_point); // Zoom out relative to mouse position.
+		}
+
+		public void ZoomOutAroundCanvasPoint (in PointD canvas_point)
+		{
+			ZoomOutAroundViewPoint (CanvasPointToView (canvas_point));
 		}
 
 		public void ZoomManually ()
 		{
-			ZoomAndRecenterView (ZoomType.ZoomManually, new PointD (-1, -1));
+			ZoomAndRecenterView (ZoomType.ZoomManually, center_point: null);
 		}
 
-		public void ZoomToRectangle (RectangleD rect)
+		public void ZoomToCanvasRectangle (RectangleD rect)
 		{
 			double ratio;
 
@@ -295,7 +313,11 @@ namespace Pinta.Core
 			ViewSizeChanged?.Invoke (this, EventArgs.Empty);
 		}
 
-		private void ZoomAndRecenterView (ZoomType zoomType, in PointD point)
+		/// <summary>
+		/// Zoom in/out around a specific point.
+		/// </summary>
+		/// <param name="center_point">Center point to zoom around, in view coordinates</param>
+		private void ZoomAndRecenterView (ZoomType zoomType, PointD? center_point)
 		{
 			if (zoomType == ZoomType.ZoomOut && (ViewSize.Width == 1 || ViewSize.Height == 1))
 				return; //Can't zoom in past a 1x1 px canvas
@@ -311,15 +333,17 @@ namespace Pinta.Core
 
 			Gtk.Viewport view = (Gtk.Viewport) Canvas.Parent!;
 
-			bool adjustOnMousePosition = point.X >= 0.0 && point.Y >= 0.0;
+			// If no point was specified, zoom relative to the center of the screen.
+			if (!center_point.HasValue) {
+				center_point = new PointD (
+					view.Hadjustment!.Value + (view.Hadjustment.PageSize / 2.0),
+					view.Vadjustment!.Value + (view.Vadjustment.PageSize / 2.0));
+			}
 
-			double center_x = adjustOnMousePosition ?
-				point.X : view.Hadjustment!.Value + (view.Hadjustment.PageSize / 2.0);
-			double center_y = adjustOnMousePosition ?
-				point.Y : view.Vadjustment!.Value + (view.Vadjustment.PageSize / 2.0);
+			var scroll_offset_x = center_point.Value.X - view.Hadjustment!.Value - Offset.X;
+			var scroll_offset_y = center_point.Value.Y - view.Vadjustment!.Value - Offset.Y;
 
-			center_x = (center_x - Offset.X) / Scale;
-			center_y = (center_y - Offset.Y) / Scale;
+			var canvas_point = ViewPointToCanvas (center_point.Value);
 
 			if (zoomType == ZoomType.ZoomIn || zoomType == ZoomType.ZoomOut) {
 				int i = 0;
@@ -368,7 +392,12 @@ namespace Pinta.Core
 			view.Hadjustment!.Upper = ViewSize.Width < view.Hadjustment.PageSize ? view.Hadjustment.PageSize : ViewSize.Width;
 			view.Vadjustment!.Upper = ViewSize.Height < view.Vadjustment.PageSize ? view.Vadjustment.PageSize : ViewSize.Height;
 
-			RecenterView (center_x, center_y);
+			// Scroll so that the canvas position under 'center_point' is still the same after zooming.
+			// Note that the canvas widget might not have resized yet, so using Offset is important for taking
+			// the size difference into account.
+			var new_center_point = CanvasPointToView (canvas_point);
+			view.Hadjustment.Value = new_center_point.X - scroll_offset_x - Offset.X;
+			view.Vadjustment.Value = new_center_point.Y - scroll_offset_y - Offset.Y;
 
 			PintaCore.Actions.View.ResumeZoomUpdate ();
 		}
