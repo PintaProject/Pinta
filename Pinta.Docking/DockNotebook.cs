@@ -27,6 +27,7 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Linq;
 using Gtk;
+using Pinta.Core;
 
 namespace Pinta.Docking
 {
@@ -55,9 +56,9 @@ namespace Pinta.Docking
 			SetOrientation (Orientation.Vertical);
 
 			tab_bar.SetView (tab_view);
-			tab_bar.Autohide = false;
-			tab_bar.AddCssClass (Pinta.Core.AdwaitaStyles.Inline);
-			tab_bar.ExpandTabs = false;
+			tab_bar.Autohide = true;
+			tab_bar.AddCssClass (AdwaitaStyles.Inline);
+			tab_bar.ExpandTabs = true;
 
 			tab_view.Vexpand = true;
 			tab_view.Valign = Align.Fill;
