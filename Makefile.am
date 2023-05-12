@@ -26,8 +26,8 @@ pkgconfig_DATA = $(PINTA_ASSEMBLY_PC)
 
 #end
 
-# target: all - Default target: build
-all: build
+# target: all - Default target: publish
+all: publish
 
 # target: run - Launch the uninstalled copy
 run: build
@@ -37,9 +37,17 @@ run: build
 help:
 	egrep "^# target:" Makefile | sed 's/^# target:/make/'
 
-# target: build - Build Pinta.
-build: Pinta.sln
+bin/Pinta.dll: Pinta.sln
 	cd $(srcdir) && $(DOTNET_CMD) build Pinta.sln $(PINTA_BUILD_OPTS)
+
+# target: build - Build Pinta.
+build: bin/Pinta.dll
+
+publish/Pinta.dll: Pinta.sln
+	cd $(srcdir) && $(DOTNET_CMD) publish Pinta.sln $(PINTA_BUILD_OPTS) --self-contained false -p:PublishDir=$(abs_srcdir)/publish
+
+# target: publish - Build Pinta for deployment.
+publish: publish/Pinta.dll
 
 test: build
 	$(DOTNET_CMD) test Pinta.sln $(PINTA_BUILD_OPTS)
@@ -89,8 +97,7 @@ cleanobj:
 	find $(srcdir)/ -type d -name obj | xargs rm -rvf
 
 # target: install - Installs Pinta.
-install-exec-local: build
-	$(DOTNET_CMD) publish Pinta.sln $(PINTA_BUILD_OPTS) --self-contained false -p:PublishDir=$(abs_srcdir)/publish
+install-exec-local: publish
 	$(DOTNET_CMD) msbuild installer/linux/install.proj -target:Install $(PINTA_INSTALL_OPTS)
 	$(INSTALL_SCRIPT) installer/linux/pinta $(DESTDIR)$(bindir)/$(PACKAGE)
 
