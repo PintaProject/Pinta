@@ -15,6 +15,7 @@ Thanks to the following contributors who worked on this release:
   - The add-in manager dialog now filters out old versions incompatible with the current version of Pinta, or new addins requiring future version of Pinta ([#1580205](https://bugs.launchpad.net/pinta/+bug/1580205))
 
 ### Changed
+- When building Pinta using the Makefile, 'dotnet publish' is now run during the build step rather than the install step.
 
 ### Fixed
 - Fixed an issue where the Pan tool's cursor could show up as a missing icon ([#2013047](https://bugs.launchpad.net/pinta/+bug/2013047))
