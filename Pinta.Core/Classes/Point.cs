@@ -4,7 +4,7 @@
 // Author:
 //       Cameron White <cameronwhite91@gmail.com>
 //
-// Copyright (c) 2022 
+// Copyright (c) 2022
 //
 // Permission is hereby granted, free of charge, to any person obtaining a copy
 // of this software and associated documentation files (the "Software"), to deal
@@ -55,6 +55,8 @@ public readonly record struct PointI (int X, int Y)
 
 public readonly record struct PointD (double X, double Y)
 {
+	public static readonly PointD Zero;
+
 	public override readonly string ToString () => $"{X}, {Y}";
 
 	public readonly PointI ToInt () => new ((int) X, (int) Y);

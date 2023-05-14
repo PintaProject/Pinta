@@ -1123,7 +1123,7 @@ public abstract class BaseEditEngine
 		if (((RectangleD?) dirty).UnionRectangles (last_dirty) is RectangleD r)
 			dirty = r;
 
-		dirty = dirty.Clamp ();
+		dirty = dirty.ClampLocation ();
 		doc.Workspace.Invalidate (dirty.ToInt ());
 
 		last_dirty = dirty;

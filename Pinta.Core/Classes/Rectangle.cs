@@ -4,7 +4,7 @@
 // Author:
 //       Cameron White <cameronwhite91@gmail.com>
 //
-// Copyright (c) 2022 
+// Copyright (c) 2022
 //
 // Permission is hereby granted, free of charge, to any person obtaining a copy
 // of this software and associated documentation files (the "Software"), to deal
@@ -48,6 +48,31 @@ public readonly record struct RectangleD
 	{
 	}
 
+	/// <summary>
+	/// Create a rectangle from the provided points.
+	/// </summary>
+	/// <param name="invert_if_negative">
+	/// Flips the start and end points if necessary to produce a rectangle with positive width and height.
+	/// Otherwise, a negative width or height is clamped to zero.
+	/// </param>
+	public static RectangleD FromPoints (in PointD start, in PointD end, bool invert_if_negative = false)
+	{
+		if (invert_if_negative) {
+			double y1 = Math.Min (start.Y, end.Y);
+			double y2 = Math.Max (start.Y, end.Y);
+			double x1 = Math.Min (start.X, end.X);
+			double x2 = Math.Max (start.X, end.X);
+			return new RectangleD (x1, y1, x2 - x1, y2 - y1);
+		} else {
+			return new RectangleD (start.X,
+				start.Y,
+				Math.Max (0.0, end.X - start.X),
+				Math.Max (0.0, end.Y - start.Y));
+		}
+	}
+
+	public static readonly RectangleD Zero;
+
 	public readonly RectangleI ToInt () => new ((int) Math.Floor (X), (int) Math.Floor (Y),
 						      (int) Math.Ceiling (Width), (int) Math.Ceiling (Height));
 
@@ -72,6 +97,7 @@ public readonly record struct RectangleD
 	public readonly bool ContainsPoint (in PointD point) => ContainsPoint (point.X, point.Y);
 
 	public readonly PointD Location () => new (X, Y);
+	public readonly PointD EndLocation () => new (X + Width, Y + Height);
 	public readonly PointD GetCenter () => new (X + 0.5 * Width, Y + 0.5 * Height);
 
 	public readonly RectangleD Inflated (double width, double height)
@@ -83,7 +109,7 @@ public readonly record struct RectangleD
 		return new (newX, newY, newWidth, newHeight);
 	}
 
-	public readonly RectangleD Clamp ()
+	public readonly RectangleD ClampLocation ()
 	{
 		double x = this.X;
 		double y = this.Y;
