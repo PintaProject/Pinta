@@ -126,7 +126,7 @@ public sealed class ZoomTool : BaseTool
 				if (shape_origin_window.Distance (e.WindowPoint) <= tolerance) {
 					document.Workspace.ZoomInAroundCanvasPoint (e.PointDouble);
 				} else {
-					document.Workspace.ZoomToCanvasRectangle (CairoExtensions.PointsToRectangle (shape_origin, e.PointDouble));
+					document.Workspace.ZoomToCanvasRectangle (RectangleD.FromPoints (shape_origin, e.PointDouble));
 				}
 			} else {
 				document.Workspace.ZoomOutAroundCanvasPoint (e.PointDouble);
@@ -145,7 +145,7 @@ public sealed class ZoomTool : BaseTool
 		if (!is_drawing)
 			return;
 
-		var r = CairoExtensions.PointsToRectangle (shape_origin.Rounded (), point.Rounded ());
+		var r = RectangleD.FromPoints (shape_origin.Rounded (), point.Rounded ());
 
 		document.Layers.ToolLayer.Clear ();
 		document.Layers.ToolLayer.Hidden = false;

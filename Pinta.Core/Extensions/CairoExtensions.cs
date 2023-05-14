@@ -1078,19 +1078,6 @@ namespace Pinta.Core
 			return rect;
 		}
 
-		/// <summary>
-		/// Create a rectangle with a positive width / height from the provided points.
-		/// </summary>
-		public static RectangleD PointsToRectangle (PointD p1, PointD p2)
-		{
-			double y1 = Math.Min (p1.Y, p2.Y);
-			double y2 = Math.Max (p1.Y, p2.Y);
-			double x1 = Math.Min (p1.X, p2.X);
-			double x2 = Math.Max (p1.X, p2.X);
-
-			return new RectangleD (x1, y1, x2 - x1, y2 - y1);
-		}
-
 		// TODO-GTK4 (bindings) - remove once gir.core has improved bindings for Cairo.Region (https://github.com/gircore/gir.core/pull/621)
 		[StructLayout (LayoutKind.Sequential)]
 		private struct CairoRectangleInt
