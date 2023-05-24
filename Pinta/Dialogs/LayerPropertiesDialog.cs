@@ -75,8 +75,8 @@ namespace Pinta
 
 			layerNameEntry.SetText (initial_properties.Name);
 			visibilityCheckbox.Active = !initial_properties.Hidden;
-			opacitySpinner.Value = (int) (initial_properties.Opacity * 100);
-			opacitySlider.SetValue ((int) (initial_properties.Opacity * 100));
+			opacitySpinner.Value = Math.Round (initial_properties.Opacity * 100);
+			opacitySlider.SetValue (Math.Round (initial_properties.Opacity * 100));
 
 			var all_blendmodes = UserBlendOps.GetAllBlendModeNames ().ToList ();
 			var index = all_blendmodes.IndexOf (UserBlendOps.GetBlendModeName (blendmode));
