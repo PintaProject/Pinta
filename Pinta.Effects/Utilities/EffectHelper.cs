@@ -37,7 +37,7 @@ namespace Pinta
 	internal static class EffectHelper
 	{
 		/// <summary>
-		/// Launchs an effect dialog using Pinta's translation template.
+		/// Launch an effect dialog using Pinta's translation template.
 		/// </summary>
 		internal static void LaunchSimpleEffectDialog (BaseEffect effect)
 		{
