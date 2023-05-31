@@ -1,4 +1,5 @@
 [codespell]
-skip = .git,*.pdf,*.svg
-#
-# ignore-words-list =
+skip = .git,*.pdf,*.svg,po,configure.ac,*.sln
+# gir - name of project
+# aCount,wll - variables
+ignore-words-list = gir,acount,wll
