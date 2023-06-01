@@ -55,7 +55,7 @@ namespace Pinta.Effects
 
 		public override ColorBgra ApplyWithAlpha (in ColorBgra src, int area, int sum, Span<int> hb, Span<int> hg, Span<int> hr)
 		{
-			//each slot of the histgram can contain up to area * 255. This will overflow an int when area > 32k
+			//each slot of the histogram can contain up to area * 255. This will overflow an int when area > 32k
 			if (area < 32768) {
 				int b = 0;
 				int g = 0;

@@ -68,7 +68,7 @@
           <li>Added support for loading files from virtual filesystems such as Google Drive mounts (#215, #1958763)</li>
           <li>Improved support for <code>.ora</code> files<ul>
               <li>Hidden layers are now round-tripped correctly for <code>.ora</code> files (#1377566)</li>
-              <li>When saving a <code>.ora</code> file, a flattened image (<code>mergedimage.png</code>) is now included in the archive. This is required by the spec to accomodate viewer software (#1377566)</li>
+              <li>When saving a <code>.ora</code> file, a flattened image (<code>mergedimage.png</code>) is now included in the archive. This is required by the spec to accommodate viewer software (#1377566)</li>
             </ul>
           </li>
           <li>Image or palette files that have an unknown extension but have valid contents can now be loaded (#1679570)<ul>

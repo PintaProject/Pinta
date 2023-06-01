@@ -201,10 +201,10 @@ namespace Pinta.Gui.Widgets
 
 		private RectangleD GetSwatchBounds (int index, bool recentColorPalette = false)
 		{
-			// Normal swatches are layed out like this:
+			// Normal swatches are laid out like this:
 			// 0 | 2 | 4 | 6
 			// 1 | 3 | 5 | 7
-			// Recent swatches are layed out like this (it's less visually jarring as they change):
+			// Recent swatches are laid out like this (it's less visually jarring as they change):
 			// 0 | 1 | 2 | 3
 			// 4 | 5 | 6 | 7
 

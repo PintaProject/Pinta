@@ -301,7 +301,7 @@ namespace Pinta.Core
 
 		/// <summary>
 		/// Similar to gtk_dialog_run() in GTK3, this runs the dialog in a blocking manner with a nested event loop.
-		/// This can be useful for compability with old code that relies on this behaviour, but new code should be
+		/// This can be useful for compatibility with old code that relies on this behaviour, but new code should be
 		/// structured to use event handlers.
 		/// </summary>
 		public static string RunBlocking (this Adw.MessageDialog dialog)
@@ -326,7 +326,7 @@ namespace Pinta.Core
 
 		/// <summary>
 		/// Similar to gtk_dialog_run() in GTK3, this runs the dialog in a blocking manner with a nested event loop.
-		/// This can be useful for compability with old code that relies on this behaviour, but new code should be
+		/// This can be useful for compatibility with old code that relies on this behaviour, but new code should be
 		/// structured to use event handlers.
 		/// </summary>
 		public static ResponseType RunBlocking (this Gtk.NativeDialog dialog)
@@ -351,7 +351,7 @@ namespace Pinta.Core
 
 		/// <summary>
 		/// Similar to gtk_dialog_run() in GTK3, this runs the dialog in a blocking manner with a nested event loop.
-		/// This can be useful for compability with old code that relies on this behaviour, but new code should be
+		/// This can be useful for compatibility with old code that relies on this behaviour, but new code should be
 		/// structured to use event handlers.
 		/// </summary>
 		public static ResponseType RunBlocking (this Gtk.Dialog dialog)

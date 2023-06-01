@@ -201,7 +201,7 @@ namespace Pinta.Tools
 				//There are 3 "layers" in a cubic Bezier curve's calculation. These "layers"
 				//must be calculated for each intermediate Point (for each value of t from
 				//tInterval to 1d). The Points in each "layer" store [the distance between
-				//two consecutive Points from the previous "layer" multipled by the value
+				//two consecutive Points from the previous "layer" multiplied by the value
 				//of t (which is between 0d-1d)] plus [the position of the first Point of
 				//the two consecutive Points from the previous "layer"]. This must be
 				//calculated for the X and Y of every consecutive Point in every layer

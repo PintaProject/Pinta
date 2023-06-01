@@ -39,7 +39,7 @@ When you are satisfied that you have a great fix to share with the
 world, commit it to your GitHub fork. (See the second part of
 [this page](http://help.github.com/create-a-repo/).) Make sure that the commit
 message includes the bug number and a short description, this is vital
-so that the devlopers know what exactly they are looking at. Then it
+so that the developers know what exactly they are looking at. Then it
 will be publicly visible for scrutiny, which comes in handy for the next
 step.
 
@@ -54,5 +54,5 @@ get a lovely warm feeling inside from helping make the world a better
 place!
 
 
-Questions on this proccess can be asked (as always) through the methods
+Questions on this process can be asked (as always) through the methods
 described in `readme.md`

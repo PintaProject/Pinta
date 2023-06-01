@@ -1589,7 +1589,7 @@ namespace Pinta.Tools
 			ShapeEngine? selEngine = SelectedShapeEngine;
 
 			if (selEngine != null && selEngine.Closed && controlPoints.Count == 4) {
-				//Figure out the indeces of the surrounding points. The lowest point index should be 0 and the highest 3.
+				//Figure out the indices of the surrounding points. The lowest point index should be 0 and the highest 3.
 
 				int previousPointIndex = SelectedPointIndex - 1;
 				int nextPointIndex = SelectedPointIndex + 1;

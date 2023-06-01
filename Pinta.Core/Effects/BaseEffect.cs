@@ -108,7 +108,7 @@ namespace Pinta.Core
 			ConfigDialogResponse?.Invoke (this, new ConfigDialogResponseEventArgs (accepted));
 		}
 
-		#region Overrideable Render Methods
+		#region Overridable Render Methods
 		/// <summary>
 		/// Performs the actual work of rendering an effect. Do not call base.Render ().
 		/// </summary>

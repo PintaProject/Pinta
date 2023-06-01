@@ -37,7 +37,7 @@ namespace Pinta.Core
 		private const string JpgCompressionQualitySetting = "jpg-quality";
 
 		//The default JPG compression quality to use when no saved setting is loaded. This will usually
-		//occur when Pinta is first run on a machine, although there are other possibile cases as well.
+		//occur when Pinta is first run on a machine, although there are other possible cases as well.
 		private const int defaultQuality = 85;
 
 		public JpegFormat ()
