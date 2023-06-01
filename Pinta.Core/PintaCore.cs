@@ -53,7 +53,7 @@ namespace Pinta.Core
 
 		static PintaCore ()
 		{
-			// Resources and Settings are intialized first so later
+			// Resources and Settings are initialized first so later
 			// Managers can access them as needed.
 			Resources = new ResourceManager ();
 			System = new SystemManager ();

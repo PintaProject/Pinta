@@ -206,7 +206,7 @@ namespace Pinta.Gui.Widgets
 
 			last_mouse_pos = new (px, py);
 
-			// to avoid unnessesary costly redrawing
+			// to avoid unnecessary costly redrawing
 			if (index != -1)
 				QueueDraw ();
 		}

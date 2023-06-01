@@ -226,12 +226,12 @@ namespace Pinta.Core
 		public class RedEyeRemove
 		    : UnaryPixelOp
 		{
-			private int tolerence;
+			private int tolerance;
 			private double setSaturation;
 
 			public RedEyeRemove (int tol, int sat)
 			{
-				tolerence = tol;
+				tolerance = tol;
 				setSaturation = (double) sat / 100;
 			}
 
@@ -243,8 +243,8 @@ namespace Pinta.Core
 				// The higher the difference between the other colors, the more red it is
 				int difference = color.R - Math.Max (color.B, color.G);
 
-				// If it is within tolerence, and the saturation is high
-				if ((difference > tolerence) && (saturation > 100)) {
+				// If it is within tolerance, and the saturation is high
+				if ((difference > tolerance) && (saturation > 100)) {
 					double i = 255.0 * color.GetIntensity ();
 					byte ib = (byte) (i * setSaturation); // adjust the red color for user inputted saturation
 					return ColorBgra.FromBgra ((byte) color.B, (byte) color.G, ib, color.A);

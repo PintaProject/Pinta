@@ -71,7 +71,7 @@ namespace Pinta.Effects
 		#region Algorithm Code Ported From PDN
 		public override void Render (ImageSurface src, ImageSurface dest, Core.RectangleI[] rois)
 		{
-			// Glow backgound 
+			// Glow background 
 			glowEffect.Data.Radius = 6;
 			glowEffect.Data.Brightness = -(Data.Coloring - 50) * 2;
 			glowEffect.Data.Contrast = -(Data.Coloring - 50) * 2;

@@ -41,7 +41,7 @@ namespace Pinta.Effects
 			return src;
 		}
 
-		//same as Aply, except the histogram is alpha-weighted instead of keeping a separate alpha channel histogram.
+		//same as Apply, except the histogram is alpha-weighted instead of keeping a separate alpha channel histogram.
 		public virtual ColorBgra ApplyWithAlpha (in ColorBgra src, int area, int sum, Span<int> hb, Span<int> hg, Span<int> hr)
 		{
 			return src;

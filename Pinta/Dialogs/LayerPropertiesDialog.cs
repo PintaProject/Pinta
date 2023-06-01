@@ -130,7 +130,7 @@ namespace Pinta
 			hidden = !visibilityCheckbox.Active;
 			doc.Layers.CurrentUserLayer.Hidden = hidden;
 			if (doc.Layers.SelectionLayer != null) {
-				//Update Visiblity for SelectionLayer and force redraw			
+				//Update Visibility for SelectionLayer and force redraw			
 				doc.Layers.SelectionLayer.Hidden = doc.Layers.CurrentUserLayer.Hidden;
 			}
 			PintaCore.Workspace.Invalidate ();

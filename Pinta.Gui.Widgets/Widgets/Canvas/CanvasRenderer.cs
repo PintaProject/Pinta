@@ -80,7 +80,7 @@ namespace Pinta.Gui.Widgets
 
 				g.Save ();
 				if (!is_one_to_one) {
-					// Scale the source surface based on the zoom leve.
+					// Scale the source surface based on the zoom level.
 					double inv_scale = 1.0 / scale_factor.Ratio;
 					g.Scale (inv_scale, inv_scale);
 				}

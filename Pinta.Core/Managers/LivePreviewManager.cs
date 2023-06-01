@@ -379,7 +379,7 @@ namespace Pinta.Core
 			x2 += offset.X;
 			y2 += offset.Y;
 
-			// Convert to integer, carefull not to miss paritally covered
+			// Convert to integer, carefully not to miss partially covered
 			// pixels by rounding incorrectly.
 			int x = (int) Math.Floor (x1);
 			int y = (int) Math.Floor (y1);

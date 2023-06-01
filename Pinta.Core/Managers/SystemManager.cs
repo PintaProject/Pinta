@@ -102,7 +102,7 @@ namespace Pinta.Core
 
 		/// <summary>
 		/// Returns true if Pinta is executing in a .app bundle (macOS).
-		/// This requires some differents paths to locate resources, GTK libraries, etc
+		/// This requires some different paths to locate resources, GTK libraries, etc
 		/// </summary>
 		public static bool IsExecutableInMacBundle ()
 		{

@@ -91,7 +91,7 @@ namespace Pinta.Core
 		/// <param name="shape">The shape to draw.</param>
 		/// <param name="shapeWidth">The width of the shape.</param>
 		/// <param name="imgToShapeX">The horizontal distance between the image's top-left corner and the shape center.</param>
-		/// <param name="imgToShapeY">The verical distance between the image's top-left corner and the shape center.</param>
+		/// <param name="imgToShapeY">The vertical distance between the image's top-left corner and the shape center.</param>
 		/// <param name="shapeX">The X position in the returned Pixbuf that will be the center of the shape.</param>
 		/// <param name="shapeY">The Y position in the returned Pixbuf that will be the center of the shape.</param>
 		/// <returns>The new cursor icon with an shape that represents the tool's thickness.</returns>
@@ -126,11 +126,11 @@ namespace Pinta.Core
 			// (still relative to image top-left corner)
 			RectangleI iconBBox = imgBBox.Union (shapeBBox);
 
-			// Image top-left corner in icon co-ordinates
+			// Image top-left corner in icon coordinates
 			int imgX = imgBBox.Left - iconBBox.Left;
 			int imgY = imgBBox.Top - iconBBox.Top;
 
-			// Shape center point in icon co-ordinates
+			// Shape center point in icon coordinates
 			shapeX = imgToShapeX - iconBBox.Left;
 			shapeY = imgToShapeY - iconBBox.Top;
 
