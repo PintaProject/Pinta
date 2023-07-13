@@ -302,8 +302,6 @@ namespace Mono.Options
 
 		protected Option (string prototype, string description, int maxValueCount)
 		{
-			if (prototype == null)
-				throw new ArgumentNullException (nameof(prototype));
 			if (prototype.Length == 0)
 				throw new ArgumentException ("Cannot be the empty string.", "prototype");
 			if (maxValueCount < 0)
@@ -525,8 +523,6 @@ namespace Mono.Options
 
 		protected override string GetKeyForItem (Option item)
 		{
-			if (item == null)
-				throw new ArgumentNullException (nameof(item));
 			if (item.Names != null && item.Names.Length > 0)
 				return item.Names[0];
 			// This should never happen, as it's invalid for Option to be
@@ -537,8 +533,6 @@ namespace Mono.Options
 		[Obsolete ("Use KeyedCollection.this[string]")]
 		protected Option GetOptionForName (string option)
 		{
-			if (option == null)
-				throw new ArgumentNullException (nameof(option));
 			try {
 				return base[option];
 			} catch (KeyNotFoundException) {
@@ -571,8 +565,6 @@ namespace Mono.Options
 
 		private void AddImpl (Option option)
 		{
-			if (option == null)
-				throw new ArgumentNullException (nameof(option));
 			List<string> added = new List<string> (option.Names.Length);
 			try {
 				// KeyedCollection.InsertItem/SetItem handle the 0th name.
@@ -600,8 +592,6 @@ namespace Mono.Options
 			public ActionOption (string prototype, string description, int count, Action<OptionValueCollection> action)
 				: base (prototype, description, count)
 			{
-				if (action == null)
-					throw new ArgumentNullException (nameof(action));
 				this.action = action;
 			}
 
@@ -618,8 +608,6 @@ namespace Mono.Options
 
 		public OptionSet Add (string prototype, string description, Action<string> action)
 		{
-			if (action == null)
-				throw new ArgumentNullException (nameof(action));
 			Option p = new ActionOption (prototype, description, 1,
 					delegate (OptionValueCollection v) { action (v[0]); });
 			base.Add (p);
@@ -633,8 +621,6 @@ namespace Mono.Options
 
 		public OptionSet Add (string prototype, string description, OptionAction<string, string> action)
 		{
-			if (action == null)
-				throw new ArgumentNullException (nameof(action));
 			Option p = new ActionOption (prototype, description, 2,
 					delegate (OptionValueCollection v) { action (v[0], v[1]); });
 			base.Add (p);
@@ -648,8 +634,6 @@ namespace Mono.Options
 			public ActionOption (string prototype, string description, Action<T> action)
 				: base (prototype, description, 1)
 			{
-				if (action == null)
-					throw new ArgumentNullException (nameof(action));
 				this.action = action;
 			}
 
@@ -666,8 +650,6 @@ namespace Mono.Options
 			public ActionOption (string prototype, string description, OptionAction<TKey, TValue> action)
 				: base (prototype, description, 2)
 			{
-				if (action == null)
-					throw new ArgumentNullException (nameof(action));
 				this.action = action;
 			}
 
@@ -776,9 +758,6 @@ namespace Mono.Options
 
 		protected bool GetOptionParts (string argument, out string flag, out string name, out string sep, out string value)
 		{
-			if (argument == null)
-				throw new ArgumentNullException (nameof(argument));
-
 			flag = name = sep = value = null;
 			Match m = ValueOption.Match (argument);
 			if (!m.Success) {

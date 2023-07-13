@@ -126,9 +126,6 @@ namespace Pinta.Core
 
 		public void InitializeProgessDialog (IProgressDialog progressDialog)
 		{
-			if (progressDialog == null)
-				throw new ArgumentNullException (nameof(progressDialog));
-
 			progress_dialog = progressDialog;
 		}
 

@@ -127,8 +127,6 @@ namespace Pinta.Core
 
 		public override int Read (byte[] buffer, int offset, int count)
 		{
-			if (buffer == null)
-				throw new ArgumentNullException (nameof(buffer));
 			if (offset + count - 1 > buffer.Length)
 				throw new ArgumentException ("(offset + count - 1) is greater than the length of buffer");
 			if (offset < 0)
@@ -159,8 +157,6 @@ namespace Pinta.Core
 
 		public override void Write (byte[] buffer, int offset, int count)
 		{
-			if (buffer == null)
-				throw new ArgumentNullException (nameof(buffer));
 			if (offset + count > buffer.Length)
 				throw new ArgumentException ("(offset + count) is greater than the length of buffer");
 			if (offset < 0)

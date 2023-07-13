@@ -122,15 +122,6 @@ namespace Pinta.Core
 		{
 			Debug.WriteLine ("AsyncEffectRenderer.Start ()");
 
-			if (effect == null)
-				throw new ArgumentNullException (nameof(effect));
-
-			if (source == null)
-				throw new ArgumentNullException (nameof(source));
-
-			if (dest == null)
-				throw new ArgumentNullException (nameof(dest));
-
 			// It is important the effect's properties don't change during rendering.
 			// So a copy is made for the render.
 			this.effect = effect.Clone ();
