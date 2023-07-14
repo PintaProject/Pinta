@@ -122,7 +122,7 @@ namespace Pinta.Effects
 
 			set {
 				if (value == null)
-					throw new ArgumentNullException ();
+					throw new ArgumentNullException (nameof(value));
 
 				EffectData.Levels = value;
 			}
