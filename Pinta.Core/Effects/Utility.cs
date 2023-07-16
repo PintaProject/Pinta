@@ -288,11 +288,11 @@ namespace Pinta.Core
 		public static void GetRgssOffsets (Span<PointD> samplesArray, int sampleCount, int quality)
 		{
 			if (sampleCount < 1) {
-				throw new ArgumentOutOfRangeException ("sampleCount", "sampleCount must be [0, int.MaxValue]");
+				throw new ArgumentOutOfRangeException (nameof(sampleCount), "sampleCount must be [0, int.MaxValue]");
 			}
 
 			if (sampleCount != quality * quality) {
-				throw new ArgumentOutOfRangeException ("sampleCount != (quality * quality)");
+				throw new ArgumentOutOfRangeException (nameof(sampleCount), $"{nameof(sampleCount)} != ({nameof(quality)} * {nameof(quality)})");
 			}
 
 			if (sampleCount == 1) {

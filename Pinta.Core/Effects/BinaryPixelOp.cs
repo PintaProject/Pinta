@@ -57,15 +57,15 @@ namespace Pinta.Core
 
 			// If any of those Rectangles actually got clipped, then throw an exception
 			if (dstRect != dstClip) {
-				throw new ArgumentOutOfRangeException ("roiSize", "Destination roi out of bounds");
+				throw new ArgumentOutOfRangeException (nameof(roiSize), "Destination roi out of bounds");
 			}
 
 			if (lhsRect != lhsClip) {
-				throw new ArgumentOutOfRangeException ("roiSize", "lhs roi out of bounds");
+				throw new ArgumentOutOfRangeException (nameof(roiSize), "lhs roi out of bounds");
 			}
 
 			if (rhsRect != rhsClip) {
-				throw new ArgumentOutOfRangeException ("roiSize", "rhs roi out of bounds");
+				throw new ArgumentOutOfRangeException (nameof(roiSize), "rhs roi out of bounds");
 			}
 #endif
 
