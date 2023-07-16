@@ -207,7 +207,7 @@ namespace Mono.Options
 			if (c.Option == null)
 				throw new InvalidOperationException ("OptionContext.Option is null.");
 			if (index >= c.Option.MaxValueCount)
-				throw new ArgumentOutOfRangeException ("index");
+				throw new ArgumentOutOfRangeException (nameof(index));
 			if (c.Option.OptionValueType == OptionValueType.Required &&
 					index >= values.Count)
 				throw new OptionException (string.Format (
@@ -303,9 +303,9 @@ namespace Mono.Options
 		protected Option (string prototype, string description, int maxValueCount)
 		{
 			if (prototype.Length == 0)
-				throw new ArgumentException ("Cannot be the empty string.", "prototype");
+				throw new ArgumentException ("Cannot be the empty string.", nameof(prototype));
 			if (maxValueCount < 0)
-				throw new ArgumentOutOfRangeException ("maxValueCount");
+				throw new ArgumentOutOfRangeException (nameof(maxValueCount));
 
 			this.prototype = prototype;
 			this.names = prototype.Split ('|');
@@ -317,17 +317,17 @@ namespace Mono.Options
 				throw new ArgumentException (
 						"Cannot provide maxValueCount of 0 for OptionValueType.Required or " +
 							"OptionValueType.Optional.",
-						"maxValueCount");
+						nameof(maxValueCount));
 			if (this.type == OptionValueType.None && maxValueCount > 1)
 				throw new ArgumentException (
 						string.Format ("Cannot provide maxValueCount of {0} for OptionValueType.None.", maxValueCount),
-						"maxValueCount");
+						nameof(maxValueCount));
 			if (Array.IndexOf (names, "<>") >= 0 &&
 					((names.Length == 1 && this.type != OptionValueType.None) ||
 					 (names.Length > 1 && this.MaxValueCount > 1)))
 				throw new ArgumentException (
 						"The default option handler '<>' cannot require values.",
-						"prototype");
+						nameof(prototype));
 		}
 
 		public string Prototype { get { return prototype; } }
@@ -381,7 +381,7 @@ namespace Mono.Options
 			for (int i = 0; i < names.Length; ++i) {
 				string name = names[i];
 				if (name.Length == 0)
-					throw new ArgumentException ("Empty option names are not supported.", "prototype");
+					throw new ArgumentException ("Empty option names are not supported.", nameof(prototype));
 
 				int end = name.IndexOfAny (NameTerminator);
 				if (end == -1)
@@ -392,7 +392,7 @@ namespace Mono.Options
 				else
 					throw new ArgumentException (
 							string.Format ("Conflicting option types: '{0}' vs. '{1}'.", type, name[end]),
-							"prototype");
+							nameof(prototype));
 				AddSeparators (name, end, seps);
 			}
 
@@ -402,7 +402,7 @@ namespace Mono.Options
 			if (count <= 1 && seps.Count != 0)
 				throw new ArgumentException (
 						string.Format ("Cannot provide key/value separators for Options taking {0} value(s).", count),
-						"prototype");
+						nameof(prototype));
 			if (count > 1) {
 				if (seps.Count == 0)
 					this.separators = new string[] { ":", "=" };
@@ -424,14 +424,14 @@ namespace Mono.Options
 						if (start != -1)
 							throw new ArgumentException (
 									string.Format ("Ill-formed name/value separator found in \"{0}\".", name),
-									"prototype");
+									nameof(prototype));
 						start = i + 1;
 						break;
 					case '}':
 						if (start == -1)
 							throw new ArgumentException (
 									string.Format ("Ill-formed name/value separator found in \"{0}\".", name),
-									"prototype");
+									nameof(prototype));
 						seps.Add (name.Substring (start, i - start));
 						start = -1;
 						break;
@@ -444,7 +444,7 @@ namespace Mono.Options
 			if (start != -1)
 				throw new ArgumentException (
 						string.Format ("Ill-formed name/value separator found in \"{0}\".", name),
-						"prototype");
+						nameof(prototype));
 		}
 
 		public void Invoke (OptionContext c)

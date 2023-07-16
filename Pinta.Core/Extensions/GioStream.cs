@@ -128,11 +128,11 @@ namespace Pinta.Core
 		public override int Read (byte[] buffer, int offset, int count)
 		{
 			if (offset + count - 1 > buffer.Length)
-				throw new ArgumentException ("(offset + count - 1) is greater than the length of buffer");
+				throw new ArgumentException ($"({nameof(offset)} + {nameof(count)} - {1}) is greater than the length of buffer");
 			if (offset < 0)
-				throw new ArgumentOutOfRangeException ("offset");
+				throw new ArgumentOutOfRangeException (nameof(offset));
 			if (count < 0)
-				throw new ArgumentOutOfRangeException ("count");
+				throw new ArgumentOutOfRangeException (nameof(count));
 			if (!CanRead)
 				throw new NotSupportedException ("The stream does not support reading");
 			if (is_disposed)
@@ -158,11 +158,11 @@ namespace Pinta.Core
 		public override void Write (byte[] buffer, int offset, int count)
 		{
 			if (offset + count > buffer.Length)
-				throw new ArgumentException ("(offset + count) is greater than the length of buffer");
+				throw new ArgumentException ($"({nameof(offset)} + {nameof(count)}) is greater than the length of buffer");
 			if (offset < 0)
-				throw new ArgumentOutOfRangeException ("offset");
+				throw new ArgumentOutOfRangeException (nameof(offset));
 			if (count < 0)
-				throw new ArgumentOutOfRangeException ("count");
+				throw new ArgumentOutOfRangeException (nameof(count));
 			if (!CanWrite)
 				throw new NotSupportedException ("The stream does not support writing");
 			if (is_disposed)
