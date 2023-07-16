@@ -573,7 +573,7 @@ namespace Pinta.Core
 			public float GetGamma (int index)
 			{
 				if (index < 0 || index >= 3) {
-					throw new ArgumentOutOfRangeException ("index", index, "Index must be between 0 and 2");
+					throw new ArgumentOutOfRangeException (nameof(index), index, "Index must be between 0 and 2");
 				}
 
 				return gamma[index];
@@ -582,7 +582,7 @@ namespace Pinta.Core
 			public void SetGamma (int index, float val)
 			{
 				if (index < 0 || index >= 3) {
-					throw new ArgumentOutOfRangeException ("index", index, "Index must be between 0 and 2");
+					throw new ArgumentOutOfRangeException (nameof(index), index, "Index must be between 0 and 2");
 				}
 
 				gamma[index] = Utility.Clamp (val, 0.1f, 10.0f);

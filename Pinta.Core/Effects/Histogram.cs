@@ -28,7 +28,7 @@ namespace Pinta.Core
 					this.histogram = value;
 					OnHistogramUpdated ();
 				} else {
-					throw new ArgumentException ("value muse be an array of arrays of matching size", "value");
+					throw new ArgumentException ("value muse be an array of arrays of matching size", nameof(value));
 				}
 			}
 		}

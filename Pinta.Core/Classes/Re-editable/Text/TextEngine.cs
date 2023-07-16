@@ -392,7 +392,7 @@ namespace Pinta.Core
 		private void ForeachLine (TextPosition start, TextPosition end, Action action)
 		{
 			if (start.CompareTo (end) > 0)
-				throw new ArgumentException ("Invalid start position", "start");
+				throw new ArgumentException ("Invalid start position", nameof(start));
 
 			while (start.Line < end.Line) {
 				action (start.Line, start.Offset, lines[start.Line].Length);
@@ -473,7 +473,7 @@ namespace Pinta.Core
 		private void DeleteText (TextPosition start, TextPosition end)
 		{
 			if (start.CompareTo (end) >= 0)
-				throw new ArgumentException ("Invalid start position", "start");
+				throw new ArgumentException ("Invalid start position", nameof(start));
 
 			lines[start.Line] = lines[start.Line].Substring (0, start.Offset) +
 					    lines[end.Line].Substring (end.Offset);

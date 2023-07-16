@@ -49,15 +49,15 @@ namespace Pinta.Core
 		public HsvColor (int hue, int saturation, int value)
 		{
 			if (hue < 0 || hue > 360) {
-				throw new ArgumentOutOfRangeException ("hue", "must be in the range [0, 360]");
+				throw new ArgumentOutOfRangeException (nameof(hue), "must be in the range [0, 360]");
 			}
 
 			if (saturation < 0 || saturation > 100) {
-				throw new ArgumentOutOfRangeException ("saturation", "must be in the range [0, 100]");
+				throw new ArgumentOutOfRangeException (nameof(saturation), "must be in the range [0, 100]");
 			}
 
 			if (value < 0 || value > 100) {
-				throw new ArgumentOutOfRangeException ("value", "must be in the range [0, 100]");
+				throw new ArgumentOutOfRangeException (nameof(value), "must be in the range [0, 100]");
 			}
 
 			Hue = hue;
