@@ -31,7 +31,7 @@ namespace Pinta.Core
 {
 	public class PaletteFormatManager
 	{
-		private List<PaletteDescriptor> formats;
+		private readonly List<PaletteDescriptor> formats;
 
 		public PaletteFormatManager ()
 		{

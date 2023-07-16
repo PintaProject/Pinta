@@ -35,8 +35,8 @@ namespace Pinta
 	{
 		private readonly ApplicationWindow app_window;
 		private readonly Adw.HeaderBar? header_bar;
-		private Box shell_layout;
-		private Box menu_layout;
+		private readonly Box shell_layout;
+		private readonly Box menu_layout;
 		private Box? workspace_layout;
 		private Box? main_toolbar;
 

@@ -15,8 +15,8 @@ namespace Pinta.Effects
 {
 	public class SepiaEffect : BaseEffect
 	{
-		UnaryPixelOp desat = new UnaryPixelOps.Desaturate ();
-		UnaryPixelOp level = new UnaryPixelOps.Desaturate ();
+		readonly UnaryPixelOp desat = new UnaryPixelOps.Desaturate ();
+		readonly UnaryPixelOp level = new UnaryPixelOps.Desaturate ();
 
 		public override string Icon {
 			get { return Pinta.Resources.Icons.AdjustmentsSepia; }

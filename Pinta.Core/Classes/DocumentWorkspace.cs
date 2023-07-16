@@ -31,7 +31,7 @@ namespace Pinta.Core
 {
 	public class DocumentWorkspace
 	{
-		private Document document;
+		private readonly Document document;
 		private Size view_size;
 		private enum ZoomType
 		{

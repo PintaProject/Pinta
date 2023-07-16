@@ -37,7 +37,7 @@ namespace Pinta.Core
 
 	public class PaintBrushManager : IPaintBrushService
 	{
-		private List<BasePaintBrush> paint_brushes = new List<BasePaintBrush> ();
+		private readonly List<BasePaintBrush> paint_brushes = new List<BasePaintBrush> ();
 
 		public event EventHandler<BrushEventArgs>? BrushAdded;
 		public event EventHandler<BrushEventArgs>? BrushRemoved;

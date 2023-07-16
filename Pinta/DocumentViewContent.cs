@@ -32,7 +32,7 @@ namespace Pinta
 {
 	class DocumentViewContent : IDockNotebookItem
 	{
-		private CanvasWindow canvas_window;
+		private readonly CanvasWindow canvas_window;
 
 		public Document Document { get; private set; }
 

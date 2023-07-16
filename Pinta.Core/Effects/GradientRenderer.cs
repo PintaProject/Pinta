@@ -15,7 +15,7 @@ namespace Pinta.Core
 {
 	public abstract class GradientRenderer
 	{
-		private BinaryPixelOp normalBlendOp;
+		private readonly BinaryPixelOp normalBlendOp;
 		private ColorBgra startColor;
 		private ColorBgra endColor;
 		private PointD startPoint;
@@ -24,8 +24,8 @@ namespace Pinta.Core
 		private bool alphaOnly;
 
 		private bool lerpCacheIsValid = false;
-		private byte[] lerpAlphas;
-		private ColorBgra[] lerpColors;
+		private readonly byte[] lerpAlphas;
+		private readonly ColorBgra[] lerpColors;
 
 		public ColorBgra StartColor {
 			get { return this.startColor; }

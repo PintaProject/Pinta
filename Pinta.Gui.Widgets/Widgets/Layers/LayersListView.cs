@@ -37,10 +37,10 @@ namespace Pinta.Gui.Widgets
 {
 	public class LayersListView : ScrolledWindow
 	{
-		private ListView view;
-		private Gio.ListStore model;
-		private Gtk.SingleSelection selection_model;
-		private Gtk.SignalListItemFactory factory;
+		private readonly ListView view;
+		private readonly Gio.ListStore model;
+		private readonly Gtk.SingleSelection selection_model;
+		private readonly Gtk.SignalListItemFactory factory;
 		private Document? active_document;
 
 		public LayersListView ()

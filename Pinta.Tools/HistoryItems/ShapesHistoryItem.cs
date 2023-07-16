@@ -32,18 +32,18 @@ namespace Pinta.Tools
 {
 	public class ShapesHistoryItem : BaseHistoryItem
 	{
-		private BaseEditEngine ee;
+		private readonly BaseEditEngine ee;
 
-		private UserLayer userLayer;
+		private readonly UserLayer userLayer;
 
-		private SurfaceDiff? userSurfaceDiff;
+		private readonly SurfaceDiff? userSurfaceDiff;
 		private ImageSurface? userSurface;
 
 		private ShapeEngineCollection sEngines;
 
 		private int selectedPointIndex, selectedShapeIndex;
 
-		private bool redrawEverything;
+		private readonly bool redrawEverything;
 
 		/// <summary>
 		/// A history item for when shapes are finalized.

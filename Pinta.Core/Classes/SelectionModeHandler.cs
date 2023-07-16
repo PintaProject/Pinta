@@ -37,7 +37,7 @@ namespace Pinta.Core
 		private ToolBarComboBox? selection_combo_box;
 
 		private CombineMode selected_mode;
-		private Dictionary<string, CombineMode> combine_modes;
+		private readonly Dictionary<string, CombineMode> combine_modes;
 
 		private const string COMBINE_MODE_SETTING = "selection-combine-mode";
 

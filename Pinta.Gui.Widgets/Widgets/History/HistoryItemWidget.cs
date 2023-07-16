@@ -30,7 +30,7 @@ namespace Pinta.Gui.Widgets
 	// GObject subclass for use with Gio.ListStore
 	public class HistoryListViewItem : GObject.Object
 	{
-		private BaseHistoryItem item;
+		private readonly BaseHistoryItem item;
 
 		public HistoryListViewItem (BaseHistoryItem item) : base (true, Array.Empty<GObject.ConstructArgument> ())
 		{
@@ -47,8 +47,8 @@ namespace Pinta.Gui.Widgets
 
 	public class HistoryItemWidget : Box
 	{
-		private Gtk.Image image;
-		private Gtk.Label label;
+		private readonly Gtk.Image image;
+		private readonly Gtk.Label label;
 
 		public HistoryItemWidget ()
 		{

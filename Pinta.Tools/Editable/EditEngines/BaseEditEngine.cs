@@ -175,7 +175,7 @@ namespace Pinta.Tools
 		/// </summary>
 		public IEnumerable<IToolHandle> Handles =>
 			SEngines.SelectMany (engine => engine.ControlPointHandles).Append (hover_handle);
-		private MoveHandle hover_handle = new ();
+		private readonly MoveHandle hover_handle = new ();
 
 		private readonly Gdk.Cursor grab_cursor = Gdk.Cursor.NewFromName (Pinta.Resources.StandardCursors.Grab, null);
 

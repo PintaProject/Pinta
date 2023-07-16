@@ -47,8 +47,8 @@ namespace Pinta.Tools
 		private SpinButton? arrowLengthOffset;
 		private Label? arrowLengthOffsetLabel;
 
-		private Arrow previousSettings1 = new Arrow ();
-		private Arrow previousSettings2 = new Arrow ();
+		private readonly Arrow previousSettings1 = new Arrow ();
+		private readonly Arrow previousSettings2 = new Arrow ();
 
 		// NRT - These are all set by HandleBuildToolBar
 		private ISettingsService settings = null!;

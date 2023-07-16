@@ -32,8 +32,8 @@ namespace Pinta.Core
 	// the action: invert colors, rotate 180 degrees, etc
 	public class SwapLayersHistoryItem : BaseHistoryItem
 	{
-		private int layer_index_1;
-		private int layer_index_2;
+		private readonly int layer_index_1;
+		private readonly int layer_index_2;
 
 		public SwapLayersHistoryItem (string icon, string text, int layer1, int layer2) : base (icon, text)
 		{

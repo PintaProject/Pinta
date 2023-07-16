@@ -30,14 +30,14 @@ namespace Pinta.MacInterop
 {
 	public static class ApplicationEvents
 	{
-		static object lockObj = new object ();
+		static readonly object lockObj = new object ();
 
 		#region Quit
 
 		static EventHandler<ApplicationQuitEventArgs>? quit;
 		// Create a delegate instance with static lifetime to avoid the GC destroying it.
 		// The delegate can be invoked by native code at any point.
-		private static EventDelegate quit_delegate = HandleQuit;
+		private static readonly EventDelegate quit_delegate = HandleQuit;
 		static IntPtr quitHandlerRef = IntPtr.Zero;
 
 		public static event EventHandler<ApplicationQuitEventArgs> Quit {
@@ -71,7 +71,7 @@ namespace Pinta.MacInterop
 		#region Reopen
 
 		static EventHandler<ApplicationEventArgs>? reopen;
-		private static EventDelegate reopen_delegate = HandleReopen;
+		private static readonly EventDelegate reopen_delegate = HandleReopen;
 		static IntPtr reopenHandlerRef = IntPtr.Zero;
 
 		public static event EventHandler<ApplicationEventArgs> Reopen {
@@ -105,7 +105,7 @@ namespace Pinta.MacInterop
 		#region OpenDocuments
 
 		static EventHandler<ApplicationDocumentEventArgs>? openDocuments;
-		private static EventDelegate open_delegate = HandleOpenDocuments;
+		private static readonly EventDelegate open_delegate = HandleOpenDocuments;
 		static IntPtr openDocumentsHandlerRef = IntPtr.Zero;
 
 		public static event EventHandler<ApplicationDocumentEventArgs> OpenDocuments {
@@ -145,7 +145,7 @@ namespace Pinta.MacInterop
 		#region OpenUrls
 
 		static EventHandler<ApplicationUrlEventArgs>? openUrls;
-		private static EventDelegate open_urls_delegate = HandleOpenUrls;
+		private static readonly EventDelegate open_urls_delegate = HandleOpenUrls;
 		static IntPtr openUrlsHandlerRef = IntPtr.Zero;
 
 		public static event EventHandler<ApplicationUrlEventArgs> OpenUrls {

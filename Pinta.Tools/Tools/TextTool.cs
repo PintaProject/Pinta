@@ -24,7 +24,7 @@ namespace Pinta.Tools
 		private PointD startMouseXY;
 		private PointI startClickPoint;
 		private bool tracking;
-		private Gdk.Cursor cursor_hand;
+		private readonly Gdk.Cursor cursor_hand;
 
 		private PointI clickPoint;
 		private bool is_editing;
@@ -38,8 +38,8 @@ namespace Pinta.Tools
 		// if the selection changes before the text is finalized.
 		private DocumentSelection? selection;
 
-		private Gtk.IMMulticontext imContext;
-		private Pinta.Core.TextLayout layout;
+		private readonly Gtk.IMMulticontext imContext;
+		private readonly Pinta.Core.TextLayout layout;
 
 		private RectangleI CurrentTextBounds {
 			get {

@@ -10,9 +10,9 @@ namespace Pinta.Core
 	{
 		private const string action_prefix = "tool";
 
-		private bool show_label;
-		private Gio.Menu dropdown;
-		private Gio.SimpleActionGroup action_group;
+		private readonly bool show_label;
+		private readonly Gio.Menu dropdown;
+		private readonly Gio.SimpleActionGroup action_group;
 		private ToolBarItem? selected_item;
 
 		public List<ToolBarItem> Items { get; private set; }

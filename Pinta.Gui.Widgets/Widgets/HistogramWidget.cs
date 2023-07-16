@@ -42,7 +42,7 @@ namespace Pinta.Gui.Widgets
 {
 	public class HistogramWidget : Gtk.DrawingArea
 	{
-		private bool[] selected;
+		private readonly bool[] selected;
 
 		public HistogramWidget ()
 		{

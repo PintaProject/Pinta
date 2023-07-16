@@ -50,7 +50,7 @@ namespace Pinta.Core
 			}
 		};
 
-		private static Dictionary<string, LibraryInfo> library_infos = new ();
+		private static readonly Dictionary<string, LibraryInfo> library_infos = new ();
 
 		static NativeImportResolver ()
 		{

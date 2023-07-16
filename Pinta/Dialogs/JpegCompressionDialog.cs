@@ -32,7 +32,7 @@ namespace Pinta
 {
 	public class JpegCompressionDialog : Dialog
 	{
-		private Scale compressionLevel;
+		private readonly Scale compressionLevel;
 
 		public JpegCompressionDialog (int defaultQuality, Gtk.Window parent)
 		{

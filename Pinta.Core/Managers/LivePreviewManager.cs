@@ -303,7 +303,7 @@ namespace Pinta.Core
 
 		class Renderer : AsyncEffectRenderer
 		{
-			LivePreviewManager manager;
+			readonly LivePreviewManager manager;
 
 			internal Renderer (LivePreviewManager manager, AsyncEffectRenderer.Settings settings)
 				: base (settings)

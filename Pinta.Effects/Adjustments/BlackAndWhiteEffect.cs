@@ -15,7 +15,7 @@ namespace Pinta.Effects
 {
 	public class BlackAndWhiteEffect : BaseEffect
 	{
-		UnaryPixelOp op = new UnaryPixelOps.Desaturate ();
+		readonly UnaryPixelOp op = new UnaryPixelOps.Desaturate ();
 
 		public override string Icon {
 			get { return Pinta.Resources.Icons.AdjustmentsBlackAndWhite; }

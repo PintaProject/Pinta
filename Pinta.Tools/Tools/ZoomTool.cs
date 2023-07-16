@@ -32,10 +32,10 @@ namespace Pinta.Tools
 {
 	public class ZoomTool : BaseTool
 	{
-		private Gdk.Cursor cursorZoomIn;
-		private Gdk.Cursor cursorZoomOut;
-		private Gdk.Cursor cursorZoom;
-		private Gdk.Cursor cursorZoomPan;
+		private readonly Gdk.Cursor cursorZoomIn;
+		private readonly Gdk.Cursor cursorZoomOut;
+		private readonly Gdk.Cursor cursorZoom;
+		private readonly Gdk.Cursor cursorZoomPan;
 
 		private MouseButton mouseDown;
 		private bool is_drawing;

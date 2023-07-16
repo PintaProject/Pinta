@@ -36,8 +36,8 @@ namespace Pinta
 {
 	public class NewImageDialog : Dialog
 	{
-		private bool allow_background_color;
-		private bool has_clipboard;
+		private readonly bool allow_background_color;
+		private readonly bool has_clipboard;
 		private bool suppress_events;
 
 		private Size clipboard_size;
@@ -501,7 +501,7 @@ namespace Pinta
 			private Size size;
 			private Cairo.Color color;
 
-			private int max_size = 250;
+			private readonly int max_size = 250;
 
 			public PreviewArea ()
 			{

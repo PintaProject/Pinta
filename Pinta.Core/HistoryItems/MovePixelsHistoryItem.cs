@@ -36,7 +36,7 @@ namespace Pinta.Core
 		//   and then moves it to the new spot
 		// - Subsequent moves only move the selection
 		//   around the temporary layer
-		private Document doc;
+		private readonly Document doc;
 		private DocumentSelection? old_selection;
 		private Matrix old_transform = CairoExtensions.CreateIdentityMatrix ();
 		private ImageSurface? old_surface;

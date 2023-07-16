@@ -40,7 +40,7 @@ namespace Pinta
 {
 	public class MainWindow
 	{
-		Adw.Application app;
+		readonly Adw.Application app;
 		// NRT - Created in OnActivated
 		WindowShell window_shell = null!;
 		Dock dock = null!;

@@ -33,10 +33,10 @@ namespace Pinta.Core
 {
 	public class GioStream : System.IO.Stream
 	{
-		object stream;
-		bool can_read;
-		bool can_seek;
-		bool can_write;
+		readonly object stream;
+		readonly bool can_read;
+		readonly bool can_seek;
+		readonly bool can_write;
 		bool is_disposed;
 
 		public GioStream (Uri uri, System.IO.FileMode mode)

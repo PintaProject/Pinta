@@ -41,7 +41,7 @@ namespace Pinta.Tools
 		//Don't change this; it's automatically calculated.
 		public static readonly int BorderingSectionRange = (int) Math.Ceiling (BaseEditEngine.ShapeClickStartingRange / SectionSize);
 
-		private Dictionary<int, Dictionary<int, List<OrganizedPoint>>> collection;
+		private readonly Dictionary<int, Dictionary<int, List<OrganizedPoint>>> collection;
 
 		/// <summary>
 		/// A collection of points that is organized using spatial hashing to optimize and speed up nearest point detection.

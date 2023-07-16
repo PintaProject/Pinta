@@ -226,7 +226,7 @@ namespace Pinta.Core
 	/// </summary>
 	internal class AddinLocalizerWrapper : IAddinLocalizer
 	{
-		private AddinLocalizer localizer;
+		private readonly AddinLocalizer localizer;
 
 		public AddinLocalizerWrapper (AddinLocalizer localizer)
 		{

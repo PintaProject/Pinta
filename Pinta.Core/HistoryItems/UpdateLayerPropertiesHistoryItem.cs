@@ -30,9 +30,9 @@ namespace Pinta.Core
 {
 	public class UpdateLayerPropertiesHistoryItem : BaseHistoryItem
 	{
-		int layer_index;
-		LayerProperties initial_properties;
-		LayerProperties updated_properties;
+		readonly int layer_index;
+		readonly LayerProperties initial_properties;
+		readonly LayerProperties updated_properties;
 
 		public UpdateLayerPropertiesHistoryItem (
 				 string icon,

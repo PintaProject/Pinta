@@ -35,7 +35,7 @@ namespace Pinta
 {
 	public class LayerPropertiesDialog : Dialog
 	{
-		private LayerProperties initial_properties;
+		private readonly LayerProperties initial_properties;
 
 		private double opacity;
 		private bool hidden;

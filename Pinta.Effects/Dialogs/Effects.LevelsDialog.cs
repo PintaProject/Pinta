@@ -45,7 +45,7 @@ namespace Pinta.Effects
 {
 	public partial class LevelsDialog : Gtk.Dialog
 	{
-		private bool[] mask;
+		private readonly bool[] mask;
 
 		private CheckButton checkRed;
 		private CheckButton checkGreen;

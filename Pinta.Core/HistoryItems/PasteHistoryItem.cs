@@ -32,7 +32,7 @@ namespace Pinta.Core
 {
 	public class PasteHistoryItem : BaseHistoryItem
 	{
-		private Cairo.ImageSurface paste_image;
+		private readonly Cairo.ImageSurface paste_image;
 		private DocumentSelection old_selection;
 
 		public override bool CausesDirty { get { return true; } }

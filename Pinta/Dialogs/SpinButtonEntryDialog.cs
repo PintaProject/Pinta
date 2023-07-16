@@ -31,7 +31,7 @@ namespace Pinta
 {
 	public class SpinButtonEntryDialog : Dialog
 	{
-		private SpinButton spinButton;
+		private readonly SpinButton spinButton;
 
 		public SpinButtonEntryDialog (string title, Window parent, string label, int min, int max, int current)
 		{
