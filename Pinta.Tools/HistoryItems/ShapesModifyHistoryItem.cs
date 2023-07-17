@@ -32,7 +32,7 @@ namespace Pinta.Tools
 {
 	public class ShapesModifyHistoryItem : BaseHistoryItem
 	{
-		private BaseEditEngine ee;
+		private readonly BaseEditEngine ee;
 
 		private ShapeEngineCollection sEngines;
 

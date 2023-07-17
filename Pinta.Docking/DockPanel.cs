@@ -63,7 +63,7 @@ namespace Pinta.Docking
 			public DockItem Item { get; private set; }
 			public Paned Pane { get; private set; }
 			public ToggleButton ReopenButton { get; private set; }
-			private Popover popover;
+			private readonly Popover popover;
 
 			public bool IsMinimized => popover.Child != null;
 
@@ -94,12 +94,12 @@ namespace Pinta.Docking
 		/// <summary>
 		/// Contains the buttons to re-open any minimized dock items.
 		/// </summary>
-		private Box dock_bar = Box.New (Orientation.Vertical, 0);
+		private readonly Box dock_bar = Box.New (Orientation.Vertical, 0);
 
 		/// <summary>
 		/// List of the items in this panel, which may be minimized or maximized.
 		/// </summary>
-		private List<DockPanelItem> items = new List<DockPanelItem> ();
+		private readonly List<DockPanelItem> items = new List<DockPanelItem> ();
 
 		public DockPanel ()
 		{

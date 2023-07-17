@@ -12,27 +12,27 @@ namespace Pinta.Gui.Addins
 {
 	internal class InstallDialog : Adw.Window
 	{
-		private SetupService service;
-		private PackageCollection packages_to_install = new ();
+		private readonly SetupService service;
+		private readonly PackageCollection packages_to_install = new ();
 		private List<string> addins_to_remove = new ();
-		private InstallErrorReporter error_reporter = new ();
+		private readonly InstallErrorReporter error_reporter = new ();
 
-		private Adw.WindowTitle window_title = new ();
-		private StatusProgressBar progress_bar;
+		private readonly Adw.WindowTitle window_title = new ();
+		private readonly StatusProgressBar progress_bar;
 
-		private Gtk.Label error_heading_label;
-		private Gtk.Label error_label;
-		private Gtk.Label warning_heading_label;
-		private Gtk.Label warning_label;
-		private Gtk.Label install_heading_label;
-		private Gtk.Label install_label;
-		private Gtk.Label uninstall_heading_label;
-		private Gtk.Label uninstall_label;
-		private Gtk.Label dependencies_heading_label;
-		private Gtk.Label dependencies_label;
+		private readonly Gtk.Label error_heading_label;
+		private readonly Gtk.Label error_label;
+		private readonly Gtk.Label warning_heading_label;
+		private readonly Gtk.Label warning_label;
+		private readonly Gtk.Label install_heading_label;
+		private readonly Gtk.Label install_label;
+		private readonly Gtk.Label uninstall_heading_label;
+		private readonly Gtk.Label uninstall_label;
+		private readonly Gtk.Label dependencies_heading_label;
+		private readonly Gtk.Label dependencies_label;
 
-		private Gtk.Button install_button;
-		private Gtk.Button cancel_button;
+		private readonly Gtk.Button install_button;
+		private readonly Gtk.Button cancel_button;
 
 		public event EventHandler? OnSuccess;
 

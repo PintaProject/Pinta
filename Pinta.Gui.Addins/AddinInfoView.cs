@@ -8,20 +8,20 @@ namespace Pinta.Gui.Addins
 {
 	internal class AddinInfoView : Adw.Bin
 	{
-		private Adw.ViewStack view_stack;
-		private Gtk.Box content_box;
-		private Adw.Bin empty_page = new ();
+		private readonly Adw.ViewStack view_stack;
+		private readonly Gtk.Box content_box;
+		private readonly Adw.Bin empty_page = new ();
 
-		private Gtk.Label title_label;
-		private Gtk.Label version_label;
-		private Gtk.Label size_label;
-		private Gtk.Label repo_label;
-		private Gtk.Label desc_label;
-		private Gtk.Button info_button;
-		private Gtk.Button install_button;
-		private Gtk.Button update_button;
-		private Gtk.Button uninstall_button;
-		private Gtk.Switch enable_switch = new ();
+		private readonly Gtk.Label title_label;
+		private readonly Gtk.Label version_label;
+		private readonly Gtk.Label size_label;
+		private readonly Gtk.Label repo_label;
+		private readonly Gtk.Label desc_label;
+		private readonly Gtk.Button info_button;
+		private readonly Gtk.Button install_button;
+		private readonly Gtk.Button update_button;
+		private readonly Gtk.Button uninstall_button;
+		private readonly Gtk.Switch enable_switch = new ();
 
 		private AddinListViewItem? current_item;
 

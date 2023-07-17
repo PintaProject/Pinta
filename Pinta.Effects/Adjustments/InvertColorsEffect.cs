@@ -15,7 +15,7 @@ namespace Pinta.Effects
 {
 	public class InvertColorsEffect : BaseEffect
 	{
-		UnaryPixelOp op = new UnaryPixelOps.Invert ();
+		readonly UnaryPixelOp op = new UnaryPixelOps.Invert ();
 
 		public override string Icon {
 			get { return Pinta.Resources.Icons.AdjustmentsInvertColors; }

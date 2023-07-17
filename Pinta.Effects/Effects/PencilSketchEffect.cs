@@ -17,11 +17,11 @@ namespace Pinta.Effects
 {
 	public class PencilSketchEffect : BaseEffect
 	{
-		private GaussianBlurEffect blurEffect;
-		private UnaryPixelOps.Desaturate desaturateOp;
-		private InvertColorsEffect invertEffect;
-		private BrightnessContrastEffect bacAdjustment;
-		private UserBlendOps.ColorDodgeBlendOp colorDodgeOp;
+		private readonly GaussianBlurEffect blurEffect;
+		private readonly UnaryPixelOps.Desaturate desaturateOp;
+		private readonly InvertColorsEffect invertEffect;
+		private readonly BrightnessContrastEffect bacAdjustment;
+		private readonly UserBlendOps.ColorDodgeBlendOp colorDodgeOp;
 
 		public override string Icon => Pinta.Resources.Icons.EffectsArtisticPencilSketch;
 

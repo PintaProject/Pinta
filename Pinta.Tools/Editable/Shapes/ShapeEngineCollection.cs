@@ -110,7 +110,7 @@ namespace Pinta.Tools
 		//An organized collection of the GeneratedPoints's points for optimized nearest point detection.
 		public OrganizedPointCollection OrganizedPoints = new OrganizedPointCollection ();
 
-		private UserLayer parent_layer;
+		private readonly UserLayer parent_layer;
 		public ReEditableLayer DrawingLayer;
 
 		public bool AntiAliasing;

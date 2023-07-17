@@ -61,11 +61,11 @@ namespace Pinta.Core
 		int render_id;
 		int current_tile;
 		int total_tiles;
-		List<Exception> render_exceptions;
+		readonly List<Exception> render_exceptions;
 
 		uint timer_tick_id;
 
-		object updated_lock;
+		readonly object updated_lock;
 		bool is_updated;
 		int updated_x1;
 		int updated_y1;

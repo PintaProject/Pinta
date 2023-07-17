@@ -33,7 +33,7 @@ namespace Pinta
 {
 	public class ActionHandlers
 	{
-		private List<IActionHandler> action_handlers = new ();
+		private readonly List<IActionHandler> action_handlers = new ();
 
 		public ActionHandlers ()
 		{

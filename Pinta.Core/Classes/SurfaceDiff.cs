@@ -63,9 +63,9 @@ namespace Pinta.Core
 		// don't use it and store the whole surface instead
 		private const int MINIMUM_SAVINGS_PERCENT = 10;
 
-		private BitArray bitmask;
+		private readonly BitArray bitmask;
 		private RectangleI bounds;
-		private ColorBgra[] pixels;
+		private readonly ColorBgra[] pixels;
 
 		#region Constructors
 		private SurfaceDiff (BitArray bitmask, RectangleI bounds, ColorBgra[] pixels)

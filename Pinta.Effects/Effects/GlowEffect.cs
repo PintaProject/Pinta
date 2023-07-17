@@ -17,9 +17,9 @@ namespace Pinta.Effects
 {
 	public class GlowEffect : BaseEffect
 	{
-		private GaussianBlurEffect blurEffect;
-		private BrightnessContrastEffect contrastEffect;
-		private UserBlendOps.ScreenBlendOp screenBlendOp;
+		private readonly GaussianBlurEffect blurEffect;
+		private readonly BrightnessContrastEffect contrastEffect;
+		private readonly UserBlendOps.ScreenBlendOp screenBlendOp;
 
 		public override string Icon => Pinta.Resources.Icons.EffectsPhotoGlow;
 

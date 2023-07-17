@@ -33,8 +33,8 @@ namespace Pinta.Gui.Widgets
 	{
 		CanvasRenderer? canvas_renderer;
 
-		private Document doc;
-		private UserLayer layer;
+		private readonly Document doc;
+		private readonly UserLayer layer;
 
 		public LayersListViewItem (Document doc, UserLayer layer) : base (true, Array.Empty<GObject.ConstructArgument> ())
 		{
@@ -94,9 +94,9 @@ namespace Pinta.Gui.Widgets
 		private LayersListViewItem? item;
 		private Cairo.ImageSurface? thumbnail_surface;
 
-		private Gtk.DrawingArea thumbnail;
-		private Gtk.Label label;
-		private Gtk.CheckButton visible_button;
+		private readonly Gtk.DrawingArea thumbnail;
+		private readonly Gtk.Label label;
+		private readonly Gtk.CheckButton visible_button;
 
 		public LayersListViewItemWidget ()
 		{

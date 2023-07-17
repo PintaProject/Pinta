@@ -17,9 +17,9 @@ namespace Pinta.Gui.Addins
 	/// </summary>
 	internal class StatusProgressBar : Adw.Bin, IProgressStatus
 	{
-		private Gtk.Overlay progress_overlay = new ();
-		private Gtk.ProgressBar progress_bar;
-		private IErrorReporter error_reporter;
+		private readonly Gtk.Overlay progress_overlay = new ();
+		private readonly Gtk.ProgressBar progress_bar;
+		private readonly IErrorReporter error_reporter;
 
 		public StatusProgressBar (Gtk.Widget primary_widget, IErrorReporter error_reporter)
 		{

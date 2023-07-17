@@ -12,9 +12,9 @@ namespace Pinta.Core
 {
 	public struct Scanline
 	{
-		private int x;
-		private int y;
-		private int length;
+		private readonly int x;
+		private readonly int y;
+		private readonly int length;
 
 		public int X {
 			get {

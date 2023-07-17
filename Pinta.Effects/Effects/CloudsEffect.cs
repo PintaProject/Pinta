@@ -18,8 +18,8 @@ namespace Pinta.Effects
 	public class CloudsEffect : BaseEffect
 	{
 		// This is so that repetition of the effect with CTRL+F actually shows up differently.
-		private byte instanceSeed = unchecked((byte) DateTime.Now.Ticks);
-		private static object render_lock = new object ();
+		private readonly byte instanceSeed = unchecked((byte) DateTime.Now.Ticks);
+		private static readonly object render_lock = new object ();
 
 		public override string Icon => Pinta.Resources.Icons.EffectsRenderClouds;
 
@@ -58,9 +58,9 @@ namespace Pinta.Effects
 		}
 
 		// Adapted to 2-D version in C# from 3-D version in Java from http://mrl.nyu.edu/~perlin/noise/
-		static private int[] permuteLookup = new int[512];
+		private static readonly int[] permuteLookup = new int[512];
 
-		static private int[] permutationTable = new int[]
+		private static readonly int[] permutationTable = new int[]
 		{
 	    151, 160, 137, 91, 90, 15, 131, 13, 201, 95, 96, 53, 194, 233, 7,
 	    225, 140, 36, 103, 30, 69, 142, 8, 99, 37, 240, 21, 10, 23, 190, 6,
@@ -204,7 +204,7 @@ namespace Pinta.Effects
 			public static Dictionary<string, object> BlendOps;
 
 			[Skip]
-			private static string defaultBlendOp;
+			private static readonly string defaultBlendOp;
 
 			static CloudsData ()
 			{

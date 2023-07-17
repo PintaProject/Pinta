@@ -34,7 +34,7 @@ namespace Pinta.Core
 {
 	public class GdkPixbufFormat : IImageImporter, IImageExporter
 	{
-		private string filetype;
+		private readonly string filetype;
 
 		public GdkPixbufFormat (string filetype)
 		{

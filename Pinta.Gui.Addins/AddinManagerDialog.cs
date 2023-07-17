@@ -12,16 +12,16 @@ namespace Pinta.Gui.Addins
 {
 	public class AddinManagerDialog : Adw.Window
 	{
-		private SetupService service;
-		private AddinListView installed_list;
-		private AddinListView updates_list;
-		private AddinListView gallery_list;
+		private readonly SetupService service;
+		private readonly AddinListView installed_list;
+		private readonly AddinListView updates_list;
+		private readonly AddinListView gallery_list;
 
-		private Adw.ToastOverlay toast_overlay = new ();
-		private StatusProgressBar progress_bar;
+		private readonly Adw.ToastOverlay toast_overlay = new ();
+		private readonly StatusProgressBar progress_bar;
 
-		private Gtk.Button install_file_button;
-		private Gtk.Button refresh_button;
+		private readonly Gtk.Button install_file_button;
+		private readonly Gtk.Button refresh_button;
 
 		public AddinManagerDialog (Gtk.Window parent, SetupService service)
 		{
@@ -230,7 +230,7 @@ namespace Pinta.Gui.Addins
 
 	internal class ToastErrorReporter : IErrorReporter
 	{
-		private Adw.ToastOverlay toast_overlay;
+		private readonly Adw.ToastOverlay toast_overlay;
 
 		public ToastErrorReporter (Adw.ToastOverlay toast_overlay)
 		{

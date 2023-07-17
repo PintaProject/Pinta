@@ -44,10 +44,10 @@ namespace Pinta.Effects
 {
 	public class SoftenPortraitEffect : BaseEffect
 	{
-		private GaussianBlurEffect blurEffect;
-		private BrightnessContrastEffect bacAdjustment;
-		private UnaryPixelOps.Desaturate desaturateOp;
-		private UserBlendOps.OverlayBlendOp overlayOp;
+		private readonly GaussianBlurEffect blurEffect;
+		private readonly BrightnessContrastEffect bacAdjustment;
+		private readonly UnaryPixelOps.Desaturate desaturateOp;
+		private readonly UserBlendOps.OverlayBlendOp overlayOp;
 
 		public override string Icon => Pinta.Resources.Icons.EffectsPhotoSoftenPortrait;
 

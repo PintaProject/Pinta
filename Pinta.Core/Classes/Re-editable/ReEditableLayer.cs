@@ -39,7 +39,7 @@ namespace Pinta.Core
 		//Whether or not the actualLayer has already been setup.
 		private bool isLayerSetup = false;
 
-		private UserLayer parent;
+		private readonly UserLayer parent;
 
 		private bool inTheLoop = false;
 

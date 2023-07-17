@@ -30,7 +30,7 @@ namespace Pinta.Core
 {
 	public class AddLayerHistoryItem : BaseHistoryItem
 	{
-		private int layer_index;
+		private readonly int layer_index;
 		private UserLayer? layer;
 
 		public AddLayerHistoryItem (string icon, string text, int newLayerIndex) : base (icon, text)

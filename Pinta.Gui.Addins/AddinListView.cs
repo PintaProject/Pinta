@@ -9,16 +9,16 @@ namespace Pinta.Gui.Addins
 {
 	internal class AddinListView : Adw.Bin
 	{
-		private Gio.ListStore model;
-		private Gtk.SingleSelection selection_model;
-		private Gtk.SignalListItemFactory factory;
-		private Gtk.ListView list_view;
+		private readonly Gio.ListStore model;
+		private readonly Gtk.SingleSelection selection_model;
+		private readonly Gtk.SignalListItemFactory factory;
+		private readonly Gtk.ListView list_view;
 
-		private Adw.StatusPage empty_list_page;
-		private Gtk.ScrolledWindow list_view_scroll;
-		private Adw.ViewStack list_view_stack;
+		private readonly Adw.StatusPage empty_list_page;
+		private readonly Gtk.ScrolledWindow list_view_scroll;
+		private readonly Adw.ViewStack list_view_stack;
 
-		private AddinInfoView info_view;
+		private readonly AddinInfoView info_view;
 
 		/// <summary>
 		/// Event raised when addins are installed or uninstalled.

@@ -32,8 +32,8 @@ namespace Pinta.Core
 	// the action: invert colors, rotate 180 degrees, etc
 	public class InvertHistoryItem : BaseHistoryItem
 	{
-		private InvertType type;
-		private int layer_index;
+		private readonly InvertType type;
+		private readonly int layer_index;
 
 		public InvertHistoryItem (InvertType type)
 		{

@@ -111,8 +111,8 @@ namespace Pinta.Core
 		public class SetChannel
 		    : UnaryPixelOp
 		{
-			private int channel;
-			private byte setValue;
+			private readonly int channel;
+			private readonly byte setValue;
 
 			public override ColorBgra Apply (in ColorBgra color)
 			{
@@ -153,7 +153,7 @@ namespace Pinta.Core
 		public class SetAlphaChannel
 		    : UnaryPixelOp
 		{
-			private UInt32 addValue;
+			private readonly UInt32 addValue;
 
 			public override ColorBgra Apply (in ColorBgra color)
 			{
@@ -226,8 +226,8 @@ namespace Pinta.Core
 		public class RedEyeRemove
 		    : UnaryPixelOp
 		{
-			private int tolerance;
-			private double setSaturation;
+			private readonly int tolerance;
+			private readonly double setSaturation;
 
 			public RedEyeRemove (int tol, int sat)
 			{
@@ -569,7 +569,7 @@ namespace Pinta.Core
 				}
 			}
 
-			private float[] gamma = new float[3];
+			private readonly float[] gamma = new float[3];
 			public float GetGamma (int index)
 			{
 				if (index < 0 || index >= 3) {
@@ -711,9 +711,9 @@ namespace Pinta.Core
 		public class HueSaturationLightness
 		    : UnaryPixelOp
 		{
-			private int hueDelta;
-			private int satFactor;
-			private UnaryPixelOp blendOp;
+			private readonly int hueDelta;
+			private readonly int satFactor;
+			private readonly UnaryPixelOp blendOp;
 
 			public HueSaturationLightness (int hueDelta, int satDelta, int lightness)
 			{
@@ -768,9 +768,9 @@ namespace Pinta.Core
 		public class PosterizePixel
 	    : UnaryPixelOp
 		{
-			private byte[] redLevels;
-			private byte[] greenLevels;
-			private byte[] blueLevels;
+			private readonly byte[] redLevels;
+			private readonly byte[] greenLevels;
+			private readonly byte[] blueLevels;
 
 			public PosterizePixel (int red, int green, int blue)
 			{

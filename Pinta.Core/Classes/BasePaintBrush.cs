@@ -35,7 +35,7 @@ namespace Pinta.Core
 	[Mono.Addins.TypeExtensionPoint]
 	public abstract class BasePaintBrush
 	{
-		private static Random random = new Random ();
+		private static readonly Random random = new Random ();
 
 		/// <summary>
 		/// The name of the brush.

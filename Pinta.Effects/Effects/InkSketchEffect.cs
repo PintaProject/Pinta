@@ -20,9 +20,9 @@ namespace Pinta.Effects
 		private const int size = 5;
 		private const int radius = (size - 1) / 2;
 
-		private GlowEffect glowEffect;
-		private UnaryPixelOps.Desaturate desaturateOp;
-		private UserBlendOps.DarkenBlendOp darkenOp;
+		private readonly GlowEffect glowEffect;
+		private readonly UnaryPixelOps.Desaturate desaturateOp;
+		private readonly UserBlendOps.DarkenBlendOp darkenOp;
 
 		public override string Icon => Pinta.Resources.Icons.EffectsArtisticInkSketch;
 

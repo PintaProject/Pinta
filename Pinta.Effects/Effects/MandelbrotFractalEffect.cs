@@ -45,14 +45,14 @@ namespace Pinta.Effects
 		#region Algorithm Code Ported From PDN
 		private const double max = 100000;
 		private static readonly double invLogMax = 1.0 / Math.Log (max);
-		private static double zoomFactor = 20.0;
+		private static readonly double zoomFactor = 20.0;
 		private const double xOffsetBasis = -0.7;
-		private double xOffset = xOffsetBasis;
+		private readonly double xOffset = xOffsetBasis;
 
 		private const double yOffsetBasis = -0.29;
-		private double yOffset = yOffsetBasis;
+		private readonly double yOffset = yOffsetBasis;
 
-		private InvertColorsEffect invert_effect = new ();
+		private readonly InvertColorsEffect invert_effect = new ();
 
 		private static double Mandelbrot (double r, double i, int factor)
 		{

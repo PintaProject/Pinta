@@ -49,7 +49,7 @@ namespace Pinta.Docking
 	{
 		private readonly Adw.TabView tab_view = new ();
 		private readonly Adw.TabBar tab_bar = new ();
-		private HashSet<IDockNotebookItem> items = new ();
+		private readonly HashSet<IDockNotebookItem> items = new ();
 
 		public DockNotebook ()
 		{

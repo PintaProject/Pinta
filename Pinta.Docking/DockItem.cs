@@ -35,10 +35,10 @@ namespace Pinta.Docking
 	/// </summary>
 	public class DockItem : Box
 	{
-		private Label label_widget;
-		private Stack button_stack;
-		private Button minimize_button;
-		private Button maximize_button;
+		private readonly Label label_widget;
+		private readonly Stack button_stack;
+		private readonly Button minimize_button;
+		private readonly Button maximize_button;
 
 		/// <summary>
 		/// Unique identifier for the dock item. Used e.g. when saving the dock layout to disk.

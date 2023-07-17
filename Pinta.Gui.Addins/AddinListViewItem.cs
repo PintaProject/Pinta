@@ -9,11 +9,11 @@ namespace Pinta.Gui.Addins
 	// GObject subclass for use with Gio.ListStore
 	internal class AddinListViewItem : GObject.Object
 	{
-		private SetupService service;
-		private AddinHeader info;
-		private AddinStatus status;
-		private Addin? installed_addin;
-		private AddinRepositoryEntry? available_addin;
+		private readonly SetupService service;
+		private readonly AddinHeader info;
+		private readonly AddinStatus status;
+		private readonly Addin? installed_addin;
+		private readonly AddinRepositoryEntry? available_addin;
 
 		/// <summary>
 		/// Constructor for the list of installed addins.
@@ -78,8 +78,8 @@ namespace Pinta.Gui.Addins
 	internal class AddinListViewItemWidget : Box
 	{
 		private AddinListViewItem? item;
-		private Gtk.Label name_label;
-		private Gtk.Label desc_label;
+		private readonly Gtk.Label name_label;
+		private readonly Gtk.Label desc_label;
 
 		public AddinListViewItemWidget ()
 		{

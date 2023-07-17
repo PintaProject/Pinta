@@ -249,7 +249,7 @@ namespace Pinta.MacInterop
 	{
 		//this is an 80-char opaque byte array
 #pragma warning disable 0169
-		private byte hidden;
+		private readonly byte hidden;
 #pragma warning restore 0169
 	}
 
@@ -476,16 +476,16 @@ namespace Pinta.MacInterop
 	struct CarbonHICommand //technically HICommandExtended, but they're compatible
 	{
 		[FieldOffset (0)]
-		CarbonHICommandAttributes attributes;
+		readonly CarbonHICommandAttributes attributes;
 
 		[FieldOffset (4)]
-		uint commandID;
+		readonly uint commandID;
 
 		[FieldOffset (8)]
-		IntPtr controlRef;
+		readonly IntPtr controlRef;
 
 		[FieldOffset (8)]
-		IntPtr windowRef;
+		readonly IntPtr windowRef;
 
 		[FieldOffset (8)]
 		HIMenuItem menuItem;
@@ -520,8 +520,8 @@ namespace Pinta.MacInterop
 	[StructLayout (LayoutKind.Sequential, Pack = 2)]
 	struct HIMenuItem
 	{
-		IntPtr menuRef;
-		ushort index;
+		readonly IntPtr menuRef;
+		readonly ushort index;
 
 		public HIMenuItem (IntPtr menuRef, ushort index)
 		{
@@ -543,7 +543,7 @@ namespace Pinta.MacInterop
 
 	struct OSType
 	{
-		int value;
+		readonly int value;
 
 		public int Value {
 			get { return value; }

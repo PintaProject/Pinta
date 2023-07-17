@@ -33,7 +33,7 @@ namespace Pinta.Tools.Brushes
 {
 	public class SquaresBrush : BasePaintBrush
 	{
-		private static double theta = Math.PI / 2;
+		private static readonly double theta = Math.PI / 2;
 
 		public override string Name {
 			get { return Translations.GetString ("Squares"); }

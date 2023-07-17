@@ -35,11 +35,11 @@ namespace Pinta
 {
 	public class CanvasWindow : Grid
 	{
-		private Document document;
+		private readonly Document document;
 		private Ruler horizontal_ruler;
 		private Ruler vertical_ruler;
 		private ScrolledWindow scrolled_window;
-		private EventControllerMotion motion_controller;
+		private readonly EventControllerMotion motion_controller;
 		private PointD current_window_pos = new ();
 		private PointD current_canvas_pos = new ();
 
