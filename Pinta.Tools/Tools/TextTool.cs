@@ -136,8 +136,10 @@ namespace Pinta.Tools
 		{
 			base.OnBuildToolBar (tb);
 
-			if (font_label == null)
-				font_label = Label.New (string.Format (" {0}: ", Translations.GetString ("Font")));
+			if (font_label == null) {
+				var fontText = Translations.GetString ("Font");
+				font_label = Label.New ($" {fontText}: ");
+			}
 
 			tb.Append (font_label);
 
@@ -234,8 +236,10 @@ namespace Pinta.Tools
 
 			tb.Append (fill_sep);
 
-			if (fill_label == null)
-				fill_label = Label.New (string.Format (" {0}: ", Translations.GetString ("Text Style")));
+			if (fill_label == null) {
+				var textStyleText = Translations.GetString ("Text Style");
+				fill_label = Label.New ($" {textStyleText}: ");
+			}
 
 			tb.Append (fill_label);
 
@@ -258,8 +262,10 @@ namespace Pinta.Tools
 
 			tb.Append (outline_sep);
 
-			if (outline_width_label == null)
-				outline_width_label = Label.New (string.Format (" {0}: ", Translations.GetString ("Outline width")));
+			if (outline_width_label == null) {
+				var outlineWidthText = Translations.GetString ("Outline width");
+				outline_width_label = Label.New ($" {outlineWidthText}: ");
+			}
 
 			tb.Append (outline_width_label);
 

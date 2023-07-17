@@ -98,6 +98,6 @@ namespace Pinta.Tools
 		private Label? brush_width_label;
 
 		protected SpinButton BrushWidthSpinButton => brush_width ??= GtkExtensions.CreateToolBarSpinButton (1, 1e5, 1, Settings.GetSetting (BRUSH_WIDTH_SETTING, DEFAULT_BRUSH_WIDTH));
-		protected Label BrushWidthLabel => brush_width_label ??= Label.New (string.Format (" {0}: ", Translations.GetString ("Brush width")));
+		protected Label BrushWidthLabel => brush_width_label ??= Label.New ($" {Translations.GetString ("Brush width")}: ");
 	}
 }

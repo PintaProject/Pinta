@@ -198,7 +198,7 @@ namespace Pinta.Tools
 		private Scale? tolerance_slider;
 		private Separator? separator;
 
-		private Label ToleranceLabel => tolerance_label ??= Label.New (string.Format ("  {0}: ", Translations.GetString ("Tolerance")));
+		private Label ToleranceLabel => tolerance_label ??= Label.New ($"  {Translations.GetString ("Tolerance")}: ");
 		private Scale ToleranceSlider => tolerance_slider ??= GtkExtensions.CreateToolBarSlider (0, 100, 1, Settings.GetSetting (TOLERANCE_SETTING, 50));
 		private Separator Separator => separator ??= GtkExtensions.CreateToolBarSeparator ();
 	}

@@ -95,8 +95,10 @@ namespace Pinta.Tools
 
 			tb.Append (radius_sep);
 
-			if (radius_label == null)
-				radius_label = Gtk.Label.New (string.Format ("  {0}: ", Translations.GetString ("Radius")));
+			if (radius_label == null) {
+				var radiusText = Translations.GetString ("Radius");
+				radius_label = Gtk.Label.New ($"  {radiusText}: ");
+			}
 
 			tb.Append (radius_label);
 

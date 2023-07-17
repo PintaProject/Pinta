@@ -98,14 +98,14 @@ namespace Pinta.Core
 		private void AddDocumentMenuItem (int idx)
 		{
 			var doc = PintaCore.Workspace.OpenDocuments[idx];
-			var action_id = string.Format ("app.{0}({1})", doc_action_id, idx);
-			var label = string.Format ("{0}{1}", doc.DisplayName, doc.IsDirty ? "*" : string.Empty);
+			var action_id = $"app.{doc_action_id}({idx})";
+			var label = $"{doc.DisplayName}{(doc.IsDirty ? '*' : string.Empty)}";
 			var menu_item = Gio.MenuItem.New (label, action_id);
 			doc_section.AppendItem (menu_item);
 
 			// We only assign accelerators up to Alt-9
 			if (idx < 9)
-				PintaCore.Chrome.Application.SetAccelsForAction (action_id, new[] { string.Format ("<Alt>{0}", idx + 1) });
+				PintaCore.Chrome.Application.SetAccelsForAction (action_id, new[] { $"<Alt>{idx + 1}" });
 		}
 
 		private void RebuildDocumentMenu ()

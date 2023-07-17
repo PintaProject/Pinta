@@ -261,8 +261,10 @@ namespace Pinta.Tools
 
 		public virtual void HandleBuildToolBar (Gtk.Box tb, ISettingsService settings, string toolPrefix)
 		{
-			if (brush_width_label == null)
-				brush_width_label = Gtk.Label.New (string.Format (" {0}: ", Translations.GetString ("Brush width")));
+			if (brush_width_label == null) {
+				var brushWidthText = Translations.GetString ("Brush width");
+				brush_width_label = Gtk.Label.New ($" {brushWidthText}: ");
+			}
 
 			tb.Append (brush_width_label);
 
@@ -287,8 +289,10 @@ namespace Pinta.Tools
 
 			tb.Append (fill_sep);
 
-			if (fill_label == null)
-				fill_label = Gtk.Label.New (string.Format (" {0}: ", Translations.GetString ("Fill Style")));
+			if (fill_label == null) {
+				var fillStyleText = Translations.GetString ("Fill Style");
+				fill_label = Gtk.Label.New ($" {fillStyleText}: ");
+			}
 
 			tb.Append (fill_label);
 
@@ -310,8 +314,10 @@ namespace Pinta.Tools
 
 			tb.Append (shape_type_sep);
 
-			if (shape_type_label == null)
-				shape_type_label = Gtk.Label.New (string.Format (" {0}: ", Translations.GetString ("Shape Type")));
+			if (shape_type_label == null) {
+				var shapeTypeText = Translations.GetString ("Shape Type");
+				shape_type_label = Gtk.Label.New ($" {shapeTypeText}: ");
+			}
 
 			tb.Append (shape_type_label);
 

@@ -64,7 +64,8 @@ namespace Pinta.Tools
 			tb.Append (dashPatternSep);
 
 			if (dashPatternLabel == null) {
-				dashPatternLabel = Label.New (string.Format (" {0}: ", Translations.GetString ("Dash")));
+				var dashString = Translations.GetString ("Dash");
+				dashPatternLabel = Label.New ($" {dashString}: ");
 			}
 
 			tb.Append (dashPatternLabel);

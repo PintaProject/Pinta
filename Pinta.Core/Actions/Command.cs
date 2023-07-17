@@ -49,7 +49,7 @@ namespace Pinta.Core
 		public string? ShortLabel { get; set; }
 		public string? Tooltip { get; private set; }
 		public string? IconName { get; private set; }
-		public string FullName { get { return string.Format ("app.{0}", Name); } }
+		public string FullName { get { return $"app.{Name}"; } }
 		public bool IsImportant { get; set; } = false;
 		public bool Sensitive { get { return Action.Enabled; } set { Action.Enabled = value; } }
 

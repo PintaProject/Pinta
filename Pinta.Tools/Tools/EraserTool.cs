@@ -255,7 +255,7 @@ namespace Pinta.Tools
 		private Label? type_label;
 		private ToolBarComboBox? type_combobox;
 
-		private Label TypeLabel => type_label ??= Label.New (string.Format (" {0}: ", Translations.GetString ("Type")));
+		private Label TypeLabel => type_label ??= Label.New ($" {Translations.GetString ("Type")}: ");
 		private ToolBarComboBox TypeComboBox {
 			get {
 				if (type_combobox is null) {

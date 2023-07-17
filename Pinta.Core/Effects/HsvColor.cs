@@ -173,7 +173,7 @@ namespace Pinta.Core
 
 		public override string ToString ()
 		{
-			return String.Format ("({0}, {1}, {2})", Hue, Saturation, Value);
+			return $"({Hue}, {Saturation}, {Value})";
 		}
 	}
 }

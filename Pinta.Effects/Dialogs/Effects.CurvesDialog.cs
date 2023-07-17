@@ -281,7 +281,7 @@ namespace Pinta.Effects
 				g.LineTo (size, y);
 				g.Stroke ();
 
-				this.labelPoint.SetText (string.Format ("({0}, {1})", x, y));
+				this.labelPoint.SetText ($"({x}, {y})");
 			} else
 				this.labelPoint.SetText (string.Empty);
 		}

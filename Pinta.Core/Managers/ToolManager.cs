@@ -351,7 +351,7 @@ namespace Pinta.Core
 		private Image? tool_image;
 		private Separator? tool_sep;
 
-		private Label ToolLabel => tool_label ??= Label.New (string.Format (" {0}:  ", Translations.GetString ("Tool")));
+		private Label ToolLabel => tool_label ??= Label.New ($" {Translations.GetString ("Tool")}:  ");
 		private Image ToolImage => tool_image ??= new Image ();
 		private Separator ToolSeparator => tool_sep ??= GtkExtensions.CreateToolBarSeparator ();
 	}

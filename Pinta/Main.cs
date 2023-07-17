@@ -159,7 +159,7 @@ namespace Pinta
 		{
 			Exception ex = (Exception) args.ExceptionObject;
 			PintaCore.Chrome.ShowErrorDialog (PintaCore.Chrome.MainWindow,
-							  string.Format ("{0}:\n{1}", "Unhandled exception", ex.Message),
+							  $"{"Unhandled exception"}:\n{ex.Message}",
 							  ex.ToString ());
 		}
 #endif

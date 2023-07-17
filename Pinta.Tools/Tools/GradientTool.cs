@@ -173,7 +173,7 @@ namespace Pinta.Tools
 		private Gtk.Label? color_mode_label;
 		private ToolBarDropDownButton? color_mode_button;
 
-		private Gtk.Label GradientLabel => gradient_label ??= Gtk.Label.New (string.Format (" {0}: ", Translations.GetString ("Gradient")));
+		private Gtk.Label GradientLabel => gradient_label ??= Gtk.Label.New ($" {Translations.GetString ("Gradient")}: ");
 		private ToolBarDropDownButton GradientDropDown {
 			get {
 				if (gradient_button == null) {
@@ -192,7 +192,7 @@ namespace Pinta.Tools
 			}
 		}
 
-		private Gtk.Label ModeLabel => color_mode_label ??= Gtk.Label.New (string.Format (" {0}: ", Translations.GetString ("Mode")));
+		private Gtk.Label ModeLabel => color_mode_label ??= Gtk.Label.New ($" {Translations.GetString ("Mode")}: ");
 		private ToolBarDropDownButton ColorModeDropDown {
 			get {
 				if (color_mode_button == null) {

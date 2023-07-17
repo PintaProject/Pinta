@@ -158,7 +158,7 @@ namespace Pinta.Tools
 		private Gtk.Separator? separator;
 
 		private Gtk.Separator Separator => separator ??= GtkExtensions.CreateToolBarSeparator ();
-		private Label BrushLabel => brush_label ??= Label.New (string.Format (" {0}:  ", Translations.GetString ("Type")));
+		private Label BrushLabel => brush_label ??= Label.New ($" {Translations.GetString ("Type")}:  ");
 
 		private ToolBarComboBox BrushComboBox {
 			get {

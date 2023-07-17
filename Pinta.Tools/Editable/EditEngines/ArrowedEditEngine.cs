@@ -242,7 +242,7 @@ namespace Pinta.Tools
 		}
 
 		private Separator ArrowSeparator => arrowSep ??= GtkExtensions.CreateToolBarSeparator ();
-		private Label ArrowLabel => arrowLabel ??= Label.New (string.Format (" {0}: ", Translations.GetString ("Arrow")));
+		private Label ArrowLabel => arrowLabel ??= Label.New ($" {Translations.GetString ("Arrow")}: ");
 
 		private CheckButton ArrowOneEnabledCheckBox {
 			get {
@@ -268,7 +268,7 @@ namespace Pinta.Tools
 			}
 		}
 
-		private Label ArrowSizeLabel => arrowSizeLabel ??= Label.New (string.Format (" {0}: ", Translations.GetString ("Size")));
+		private Label ArrowSizeLabel => arrowSizeLabel ??= Label.New ($" {Translations.GetString ("Size")}: ");
 
 		private SpinButton ArrowSize {
 			get {
@@ -294,7 +294,7 @@ namespace Pinta.Tools
 			}
 		}
 
-		private Label ArrowAngleOffsetLabel => arrowAngleOffsetLabel ??= Label.New (string.Format (" {0}: ", Translations.GetString ("Angle")));
+		private Label ArrowAngleOffsetLabel => arrowAngleOffsetLabel ??= Label.New ($" {Translations.GetString ("Angle")}: ");
 
 		private SpinButton ArrowAngleOffset {
 			get {
@@ -320,7 +320,7 @@ namespace Pinta.Tools
 			}
 		}
 
-		private Label ArrowLengthOffsetLabel => arrowLengthOffsetLabel ??= Label.New (string.Format (" {0}: ", Translations.GetString ("Length")));
+		private Label ArrowLengthOffsetLabel => arrowLengthOffsetLabel ??= Label.New ($" {Translations.GetString ("Length")}: ");
 
 		private SpinButton ArrowLengthOffset {
 			get {
