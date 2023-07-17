@@ -191,8 +191,8 @@ namespace Pinta.Tools
 		private ToolBarDropDownButton? sample_type;
 		private Separator? sample_sep;
 
-		private Label ToolSelectionLabel => tool_select_label ??= Label.New ($" {Translations.GetString ("After select")}: ");
-		private Label SamplingLabel => sampling_label ??= Label.New ($" {Translations.GetString ("Sampling")}: ");
+		private Label ToolSelectionLabel => tool_select_label ??= Label.New (string.Format (" {0}: ", Translations.GetString ("After select")));
+		private Label SamplingLabel => sampling_label ??= Label.New (string.Format (" {0}: ", Translations.GetString ("Sampling")));
 		private Separator Separator => sample_sep ??= GtkExtensions.CreateToolBarSeparator ();
 
 		private ToolBarDropDownButton ToolSelectionDropDown {

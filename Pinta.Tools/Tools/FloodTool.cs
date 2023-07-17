@@ -120,8 +120,8 @@ namespace Pinta.Tools
 		protected virtual void OnFillRegionComputed (Document document, PointI[][] polygonSet) { }
 		protected virtual void OnFillRegionComputed (Document document, BitMask stencil) { }
 
-		protected Label ModeLabel => mode_label ??= Label.New ($" {Translations.GetString ("Flood Mode")}: ");
-		protected Label ToleranceLabel => tolerance_label ??= Label.New ($" {Translations.GetString ("Tolerance")}: ");
+		protected Label ModeLabel => mode_label ??= Label.New (string.Format (" {0}: ", Translations.GetString ("Flood Mode")));
+		protected Label ToleranceLabel => tolerance_label ??= Label.New (string.Format (" {0}: ", Translations.GetString ("Tolerance")));
 		protected Scale ToleranceSlider => tolerance_slider ??= GtkExtensions.CreateToolBarSlider (0, 100, 1, Settings.GetSetting (FILL_TOLERANCE_SETTING, 0));
 		protected Separator Separator => mode_sep ??= GtkExtensions.CreateToolBarSeparator ();
 

@@ -213,7 +213,7 @@ namespace Pinta.Tools
 		private Separator? fill_sep;
 
 		private Separator Separator => fill_sep ??= GtkExtensions.CreateToolBarSeparator ();
-		private Label FillLabel => fill_label ??= Label.New ($" {Translations.GetString ("Fill Style")}: ");
+		private Label FillLabel => fill_label ??= Label.New (string.Format (" {0}: ", Translations.GetString ("Fill Style")));
 		private ToolBarDropDownButton FillDropDown {
 			get {
 				if (fill_button == null) {
