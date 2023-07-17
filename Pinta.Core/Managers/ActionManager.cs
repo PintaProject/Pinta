@@ -107,7 +107,7 @@ namespace Pinta.Core
 
 			PintaCore.Chrome.LastCanvasCursorPointChanged += delegate {
 				var pt = PintaCore.Chrome.LastCanvasCursorPoint;
-				cursor.SetText (string.Format ("  {0}, {1}", pt.X, pt.Y));
+				cursor.SetText ($"  {pt.X}, {pt.Y}");
 			};
 
 			statusbar.Append (GtkExtensions.CreateToolBarSeparator ());
@@ -119,7 +119,7 @@ namespace Pinta.Core
 
 			PintaCore.Workspace.SelectionChanged += delegate {
 				var bounds = PintaCore.Workspace.HasOpenDocuments ? PintaCore.Workspace.ActiveDocument.Selection.GetBounds () : new RectangleD ();
-				selection_size.SetText (string.Format ("  {0}, {1}", bounds.Width, bounds.Height));
+				selection_size.SetText ($"  {bounds.Width}, {bounds.Height}");
 			};
 
 			// Document zoom widget

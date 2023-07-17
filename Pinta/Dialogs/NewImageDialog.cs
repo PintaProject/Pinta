@@ -204,7 +204,7 @@ namespace Pinta
 				preset_entries.Add (Translations.GetString ("Clipboard"));
 
 			preset_entries.Add (Translations.GetString ("Custom"));
-			preset_entries.AddRange (preset_sizes.Select (p => string.Format ("{0} x {1}", p.Width, p.Height)));
+			preset_entries.AddRange (preset_sizes.Select (p => $"{p.Width} x {p.Height}"));
 
 			preset_dropdown_model = StringList.New (preset_entries.ToArray ());
 			preset_dropdown = DropDown.New (preset_dropdown_model, expression: null);
@@ -472,7 +472,7 @@ namespace Pinta
 				var height = int.Parse (text_parts[1].Trim ());
 
 				var new_size = new Size (NewImageWidth < NewImageHeight ? Math.Min (width, height) : Math.Max (width, height), NewImageWidth < NewImageHeight ? Math.Max (width, height) : Math.Min (width, height));
-				var new_text = string.Format ("{0} x {1}", new_size.Width, new_size.Height);
+				var new_text = $"{new_size.Width} x {new_size.Height}";
 
 				if (new_text != text)
 					preset_dropdown_model.Splice (i, 1, new[] { new_text });
@@ -490,7 +490,7 @@ namespace Pinta
 			if (!IsValidSize)
 				return;
 
-			var text = string.Format ("{0} x {1}", NewImageWidth, NewImageHeight);
+			var text = $"{NewImageWidth} x {NewImageHeight}";
 			if (preset_dropdown_model.FindString (text, out uint index) && preset_dropdown.Selected != index) {
 				preset_dropdown.Selected = index;
 			}

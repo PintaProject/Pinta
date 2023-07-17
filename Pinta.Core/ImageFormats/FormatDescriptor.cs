@@ -92,7 +92,7 @@ namespace Pinta.Core
 				if (formatNames.Length > 0)
 					formatNames.Append (", ");
 
-				string wildcard = string.Format ("*.{0}", ext);
+				string wildcard = $"*.{ext}";
 				ff.AddPattern (wildcard);
 				formatNames.Append (wildcard);
 			}

@@ -40,7 +40,7 @@ namespace Pinta.Core
 		{
 			ToolBarItem item = new ToolBarItem (text, imageId, tag);
 			action_group.AddAction (item.Action);
-			dropdown.AppendItem (Gio.MenuItem.New (text, string.Format ("{0}.{1}", action_prefix, item.Action.Name)));
+			dropdown.AppendItem (Gio.MenuItem.New (text, $"{action_prefix}.{item.Action.Name}"));
 
 			Items.Add (item);
 			item.Action.OnActivate += delegate { SetSelectedItem (item); };

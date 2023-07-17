@@ -71,10 +71,10 @@ namespace Pinta.Core
 				(
 				    nameof(roiSize),
 				    "Destination roi out of bounds" +
-				    string.Format (", dst.Size=({0},{1}", dst.Width, dst.Height) +
+				    $", dst.Size=({dst.Width},{dst.Height}" +
 				    ", dst.Bounds=" + dst.GetBounds ().ToString () +
 				    ", dstOffset=" + dstOffset.ToString () +
-				    string.Format (", src.Size=({0},{1}", src.Width, src.Height) +
+				    $", src.Size=({src.Width},{src.Height}" +
 				    ", srcOffset=" + srcOffset.ToString () +
 				    ", roiSize=" + roiSize.ToString () +
 				    ", dstRect=" + dstRect.ToString () +

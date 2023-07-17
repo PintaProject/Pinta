@@ -67,9 +67,9 @@ namespace Pinta.Actions
 
 		private string BuildCopyrightText ()
 		{
-			return string.Format ("{0} (c) 2010-2023 {1}",
-				Translations.GetString ("Copyright"),
-				Translations.GetString ("by Pinta contributors"));
+			var copyrightText = Translations.GetString ("Copyright");
+			var contributorsText = Translations.GetString ("by Pinta contributors");
+			return $"{copyrightText} (c) 2010-2023 {contributorsText}";
 		}
 
 		private string BuildLicenseText ()

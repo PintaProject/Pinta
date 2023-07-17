@@ -45,7 +45,7 @@ namespace Pinta.Core
 
 		public override string ToString ()
 		{
-			return string.Format ("({0}, {1})", line, offset);
+			return $"({line}, {offset})";
 		}
 
 		public static bool operator == (TextPosition x, TextPosition y)

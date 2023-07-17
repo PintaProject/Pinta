@@ -176,7 +176,7 @@ namespace Pinta.Core
 			foreach (var format in PintaCore.ImageFormats.Formats) {
 				if (!format.IsWriteOnly ()) {
 					foreach (var ext in format.Extensions)
-						ff.AddPattern (string.Format ("*.{0}", ext));
+						ff.AddPattern ($"*.{ext}");
 				}
 			}
 

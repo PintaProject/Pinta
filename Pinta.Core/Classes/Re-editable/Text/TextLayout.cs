@@ -125,7 +125,7 @@ namespace Pinta.Core
 			string? markup = SecurityElement.Escape (engine.ToString ());
 
 			if (engine.Underline)
-				markup = string.Format ("<u>{0}</u>", markup);
+				markup = $"<u>{markup}</u>";
 
 			switch (engine.Alignment) {
 				case TextAlignment.Right:

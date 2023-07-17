@@ -69,7 +69,7 @@ namespace Pinta.Core
 				XmlElement layerElement = (XmlElement) layerElements[i]!;
 				int x = int.Parse (GetAttribute (layerElement, "x", "0"));
 				int y = int.Parse (GetAttribute (layerElement, "y", "0"));
-				string name = GetAttribute (layerElement, "name", string.Format ("Layer {0}", i));
+				string name = GetAttribute (layerElement, "name", $"Layer {i}");
 
 				try {
 					// Write the file to a temporary file first

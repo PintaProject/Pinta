@@ -80,7 +80,7 @@ namespace Pinta.Core
 		public virtual void LaunchConfiguration ()
 		{
 			if (IsConfigurable)
-				throw new NotImplementedException (string.Format ("{0} is marked as configurable, but has not implemented LaunchConfiguration", this.GetType ()));
+				throw new NotImplementedException ($"{this.GetType ()} is marked as configurable, but has not implemented LaunchConfiguration");
 		}
 
 		/// <summary>

@@ -102,7 +102,7 @@ namespace Pinta.Core
 					Gio.FileInfo info = iostream.QueryInfo ("standard::size", null);
 					return info.GetSize ();
 				}
-				throw new NotImplementedException (String.Format ("not implemented for {0} streams", stream.GetType ()));
+				throw new NotImplementedException ($"not implemented for {stream.GetType ()} streams");
 			}
 		}
 

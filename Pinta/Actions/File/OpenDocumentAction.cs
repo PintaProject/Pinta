@@ -63,7 +63,7 @@ namespace Pinta.Actions
 			foreach (var format in PintaCore.ImageFormats.Formats) {
 				if (!format.IsWriteOnly ()) {
 					foreach (var ext in format.Extensions)
-						ff.AddPattern (string.Format ("*.{0}", ext));
+						ff.AddPattern ($"*.{ext}");
 
 					// On Unix-like systems, file extensions are often considered optional.
 					// Files can often also be identified by their MIME types.
