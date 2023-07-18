@@ -25,16 +25,12 @@
 // THE SOFTWARE.
 
 using System;
-using System.Collections.Generic;
-using System.IO;
 using System.Linq;
-using System.Threading.Tasks;
 using Gtk;
 using Mono.Addins;
 using Pinta.Core;
 using Pinta.Docking;
 using Pinta.Gui.Widgets;
-using Pinta.MacInterop;
 
 namespace Pinta
 {

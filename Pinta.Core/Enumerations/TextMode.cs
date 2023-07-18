@@ -24,14 +24,11 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 // THE SOFTWARE.
 
-using System;
+namespace Pinta.Core;
 
-namespace Pinta.Core
+public enum TextMode
 {
-	public enum TextMode
-	{
-		Unchanged,
-		Uncommitted,
-		NotFinalized,
-	}
+	Unchanged,
+	Uncommitted,
+	NotFinalized,
 }

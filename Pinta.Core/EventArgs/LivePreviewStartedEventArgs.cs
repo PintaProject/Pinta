@@ -26,12 +26,11 @@
 
 using System;
 
-namespace Pinta.Core
+namespace Pinta.Core;
+
+public class LivePreviewStartedEventArgs : EventArgs
 {
-	public class LivePreviewStartedEventArgs : EventArgs
+	public LivePreviewStartedEventArgs ()
 	{
-		public LivePreviewStartedEventArgs ()
-		{
-		}
 	}
 }

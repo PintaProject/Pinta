@@ -26,15 +26,14 @@
 
 using System;
 
-namespace Pinta.Core
-{
-	public class DocumentEventArgs : EventArgs
-	{
-		public Document Document { get; set; }
+namespace Pinta.Core;
 
-		public DocumentEventArgs (Document document)
-		{
-			Document = document;
-		}
+public class DocumentEventArgs : EventArgs
+{
+	public Document Document { get; set; }
+
+	public DocumentEventArgs (Document document)
+	{
+		Document = document;
 	}
 }

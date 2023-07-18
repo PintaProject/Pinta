@@ -24,10 +24,6 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 // THE SOFTWARE.
 
-using System;
-using Cairo;
-using Gtk;
-
 namespace Pinta.Core
 {
 	public class PasteHistoryItem : BaseHistoryItem

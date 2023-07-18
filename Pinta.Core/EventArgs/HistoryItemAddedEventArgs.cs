@@ -26,15 +26,14 @@
 
 using System;
 
-namespace Pinta.Core
-{
-	public class HistoryItemAddedEventArgs : EventArgs
-	{
-		public BaseHistoryItem Item { get; set; }
+namespace Pinta.Core;
 
-		public HistoryItemAddedEventArgs (BaseHistoryItem item)
-		{
-			Item = item;
-		}
+public class HistoryItemAddedEventArgs : EventArgs
+{
+	public BaseHistoryItem Item { get; set; }
+
+	public HistoryItemAddedEventArgs (BaseHistoryItem item)
+	{
+		Item = item;
 	}
 }

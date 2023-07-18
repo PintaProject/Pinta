@@ -24,13 +24,10 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 // THE SOFTWARE.
 
-using System;
+namespace Pinta.Core;
 
-namespace Pinta.Core
+public enum EffectAdjustment
 {
-	public enum EffectAdjustment
-	{
-		Effect,
-		Adjustment
-	}
+	Effect,
+	Adjustment
 }

@@ -26,15 +26,14 @@
 
 using System;
 
-namespace Pinta.Core
-{
-	public class TextChangedEventArgs : EventArgs
-	{
-		public string Text { get; set; }
+namespace Pinta.Core;
 
-		public TextChangedEventArgs (string text)
-		{
-			Text = text;
-		}
+public class TextChangedEventArgs : EventArgs
+{
+	public string Text { get; set; }
+
+	public TextChangedEventArgs (string text)
+	{
+		Text = text;
 	}
 }

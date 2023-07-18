@@ -5,8 +5,6 @@
 // See license-pdn.txt for full licensing and attribution details.             //
 /////////////////////////////////////////////////////////////////////////////////
 
-using System;
-using System.Collections;
 using System.Collections.Generic;
 
 namespace Pinta.Core

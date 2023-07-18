@@ -28,7 +28,6 @@ using System;
 using Cairo;
 using Mono.Addins;
 using Mono.Addins.Localization;
-using Pinta.Core;
 
 namespace Pinta.Core
 {

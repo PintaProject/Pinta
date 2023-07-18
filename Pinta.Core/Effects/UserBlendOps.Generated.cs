@@ -8,7 +8,6 @@
 /////////////////////////////////////////////////////////////////////////////////
 
 using System;
-using System.Diagnostics;
 
 // The generalized alpha compositing formula, "B OVER A" is:
 // C(A,a,B,b) = bB + aA - baA

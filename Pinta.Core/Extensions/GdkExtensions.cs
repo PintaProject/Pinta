@@ -27,7 +27,6 @@
 using System;
 using System.Threading.Tasks;
 using Gdk;
-using GdkPixbuf;
 
 namespace Pinta.Core
 {

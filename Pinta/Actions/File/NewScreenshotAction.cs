@@ -27,7 +27,6 @@
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
-using Gdk;
 using Pinta.Core;
 using ScreenshotPortal.DBus;
 using Tmds.DBus;

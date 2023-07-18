@@ -26,10 +26,7 @@
 
 using System;
 using System.Collections.Generic;
-using System.Collections.Specialized;
-using System.ComponentModel;
 using Cairo;
-using Gdk;
 
 namespace Pinta.Core
 {

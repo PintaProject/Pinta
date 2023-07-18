@@ -25,7 +25,6 @@
 // THE SOFTWARE.
 
 using System;
-using System.IO;
 using System.Linq;
 using Cairo;
 using Gtk;

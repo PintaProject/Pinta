@@ -26,7 +26,6 @@
 
 using Gtk;
 using Pinta.Core;
-using Pinta.Gui.Widgets;
 
 namespace Pinta
 {
