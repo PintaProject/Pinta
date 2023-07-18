@@ -43,8 +43,8 @@ namespace Pinta.Core
 			this.Exception = exception;
 		}
 
-		public RenderStatus Status { get; private set; }
+		public RenderStatus Status { get; }
 
-		public Exception? Exception { get; private set; }
+		public Exception? Exception { get; }
 	}
 }

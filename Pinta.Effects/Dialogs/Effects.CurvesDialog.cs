@@ -86,7 +86,7 @@ namespace Pinta.Effects
 			}
 		}
 
-		public CurvesData EffectData { get; private set; }
+		public CurvesData EffectData { get; }
 
 		public CurvesDialog (CurvesData effectData)
 		{

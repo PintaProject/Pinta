@@ -40,7 +40,7 @@ namespace Pinta.Gui.Widgets
 
 		private Cairo.ImageSurface? canvas;
 
-		public CanvasWindow CanvasWindow { get; private set; }
+		public CanvasWindow CanvasWindow { get; }
 
 		public PintaCanvas (CanvasWindow window, Document document)
 		{

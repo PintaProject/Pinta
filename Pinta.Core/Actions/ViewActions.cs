@@ -32,22 +32,22 @@ namespace Pinta.Core
 {
 	public class ViewActions
 	{
-		public Command ZoomIn { get; private set; }
-		public Command ZoomOut { get; private set; }
-		public Command ZoomToWindow { get; private set; }
-		public Command ZoomToSelection { get; private set; }
-		public Command ActualSize { get; private set; }
-		public ToggleCommand ToolBar { get; private set; }
-		public ToggleCommand ImageTabs { get; private set; }
-		public ToggleCommand PixelGrid { get; private set; }
-		public ToggleCommand StatusBar { get; private set; }
-		public ToggleCommand ToolBox { get; private set; }
-		public ToggleCommand Rulers { get; private set; }
-		public Gio.SimpleAction RulerMetric { get; private set; }
-		public Command Fullscreen { get; private set; }
+		public Command ZoomIn { get; }
+		public Command ZoomOut { get; }
+		public Command ZoomToWindow { get; }
+		public Command ZoomToSelection { get; }
+		public Command ActualSize { get; }
+		public ToggleCommand ToolBar { get; }
+		public ToggleCommand ImageTabs { get; }
+		public ToggleCommand PixelGrid { get; }
+		public ToggleCommand StatusBar { get; }
+		public ToggleCommand ToolBox { get; }
+		public ToggleCommand Rulers { get; }
+		public Gio.SimpleAction RulerMetric { get; }
+		public Command Fullscreen { get; }
 
-		public ToolBarComboBox ZoomComboBox { get; private set; }
-		public string[] ZoomCollection { get; private set; }
+		public ToolBarComboBox ZoomComboBox { get; }
+		public string[] ZoomCollection { get; }
 
 		private string old_zoom_text = "";
 		private bool zoom_to_window_activated = false;

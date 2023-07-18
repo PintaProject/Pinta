@@ -43,12 +43,12 @@ namespace Pinta.Docking
 		/// <summary>
 		/// Unique identifier for the dock item. Used e.g. when saving the dock layout to disk.
 		/// </summary>
-		public string UniqueName { get; private set; }
+		public string UniqueName { get; }
 
 		/// <summary>
 		/// Icon name for the dock item, used when minimized.
 		/// </summary>
-		public string IconName { get; private set; }
+		public string IconName { get; }
 
 		/// <summary>
 		/// Visible label for the dock item.

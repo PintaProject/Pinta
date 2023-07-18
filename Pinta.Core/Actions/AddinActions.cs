@@ -32,7 +32,7 @@ namespace Pinta.Core
 	{
 		private Gio.Menu addins_menu = null!; // NRT - Set by RegisterActions
 
-		public Command AddinManager { get; private set; }
+		public Command AddinManager { get; }
 
 		public AddinActions ()
 		{

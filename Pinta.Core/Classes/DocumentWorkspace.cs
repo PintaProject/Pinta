@@ -81,7 +81,7 @@ namespace Pinta.Core
 			}
 		}
 
-		public DocumentHistory History { get; private set; }
+		public DocumentHistory History { get; }
 
 		/// <summary>
 		/// Returns whether the image (at 100% zoom) would fit in the window without requiring scrolling.

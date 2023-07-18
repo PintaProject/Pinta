@@ -32,7 +32,7 @@ namespace Pinta.Core
 	public class DocumentCancelEventArgs : CancelEventArgs
 	{
 		public Document Document { get; set; }
-		public bool SaveAs { get; private set; }
+		public bool SaveAs { get; }
 
 		public DocumentCancelEventArgs (Document document, bool saveAs)
 		{

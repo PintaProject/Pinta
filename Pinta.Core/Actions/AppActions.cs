@@ -34,8 +34,8 @@ namespace Pinta.Core
 {
 	public class AppActions
 	{
-		public Command About { get; private set; }
-		public Command Exit { get; private set; }
+		public Command About { get; }
+		public Command Exit { get; }
 
 		public event EventHandler? BeforeQuit;
 

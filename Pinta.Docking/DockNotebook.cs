@@ -35,14 +35,14 @@ namespace Pinta.Docking
 	{
 		public TabClosedEventArgs (IDockNotebookItem item) { Item = item; }
 
-		public IDockNotebookItem Item { get; private set; }
+		public IDockNotebookItem Item { get; }
 	}
 
 	public class TabEventArgs : EventArgs
 	{
 		public TabEventArgs (IDockNotebookItem? item) { Item = item; }
 
-		public IDockNotebookItem? Item { get; private set; }
+		public IDockNotebookItem? Item { get; }
 	}
 
 	public class DockNotebook : Box

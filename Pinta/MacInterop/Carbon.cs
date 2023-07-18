@@ -447,9 +447,7 @@ namespace Pinta.MacInterop
 			StatusCode = status;
 		}
 
-		public EventStatus StatusCode {
-			get; private set;
-		}
+		public EventStatus StatusCode { get; }
 	}
 
 	enum EventStatus // this is an OSStatus

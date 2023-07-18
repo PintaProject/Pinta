@@ -12,7 +12,7 @@ namespace Pinta.Core
 	public sealed class IndexEventArgs : EventArgs
 	{
 
-		public int Index { get; private set; }
+		public int Index { get; }
 
 		public IndexEventArgs (int i)
 		{

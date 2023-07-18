@@ -33,17 +33,17 @@ namespace Pinta.Core
 {
 	public class LayerActions
 	{
-		public Command AddNewLayer { get; private set; }
-		public Command DeleteLayer { get; private set; }
-		public Command DuplicateLayer { get; private set; }
-		public Command MergeLayerDown { get; private set; }
-		public Command ImportFromFile { get; private set; }
-		public Command FlipHorizontal { get; private set; }
-		public Command FlipVertical { get; private set; }
-		public Command RotateZoom { get; private set; }
-		public Command MoveLayerUp { get; private set; }
-		public Command MoveLayerDown { get; private set; }
-		public Command Properties { get; private set; }
+		public Command AddNewLayer { get; }
+		public Command DeleteLayer { get; }
+		public Command DuplicateLayer { get; }
+		public Command MergeLayerDown { get; }
+		public Command ImportFromFile { get; }
+		public Command FlipHorizontal { get; }
+		public Command FlipVertical { get; }
+		public Command RotateZoom { get; }
+		public Command MoveLayerUp { get; }
+		public Command MoveLayerDown { get; }
+		public Command Properties { get; }
 
 		public LayerActions ()
 		{

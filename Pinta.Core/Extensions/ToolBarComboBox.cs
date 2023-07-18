@@ -31,7 +31,7 @@ namespace Pinta.Core
 {
 	public class ToolBarComboBox : Box
 	{
-		public ComboBoxText ComboBox { get; private set; }
+		public ComboBoxText ComboBox { get; }
 
 		public ToolBarComboBox (int width, int activeIndex, bool allowEntry, params string[] contents)
 		{

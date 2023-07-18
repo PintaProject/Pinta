@@ -32,13 +32,13 @@ namespace Pinta.Core
 {
 	public sealed class PaletteDescriptor
 	{
-		public string[] Extensions { get; private set; }
+		public string[] Extensions { get; }
 
-		public IPaletteLoader Loader { get; private set; }
+		public IPaletteLoader Loader { get; }
 
-		public IPaletteSaver Saver { get; private set; }
+		public IPaletteSaver Saver { get; }
 
-		public FileFilter Filter { get; private set; }
+		public FileFilter Filter { get; }
 
 		public PaletteDescriptor (string displayPrefix, string[] extensions, IPaletteLoader loader, IPaletteSaver saver)
 		{

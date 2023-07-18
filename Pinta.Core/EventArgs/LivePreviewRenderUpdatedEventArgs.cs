@@ -37,7 +37,7 @@ namespace Pinta.Core
 			this.Bounds = bounds;
 		}
 
-		public double Progress { get; private set; }
-		public RectangleI Bounds { get; private set; }
+		public double Progress { get; }
+		public RectangleI Bounds { get; }
 	}
 }

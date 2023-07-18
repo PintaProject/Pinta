@@ -60,9 +60,9 @@ namespace Pinta.Docking
 				};
 			}
 
-			public DockItem Item { get; private set; }
-			public Paned Pane { get; private set; }
-			public ToggleButton ReopenButton { get; private set; }
+			public DockItem Item { get; }
+			public Paned Pane { get; }
+			public ToggleButton ReopenButton { get; }
 			private readonly Popover popover;
 
 			public bool IsMinimized => popover.Child != null;

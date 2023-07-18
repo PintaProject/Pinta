@@ -41,29 +41,29 @@ namespace Pinta.Core
 		/// <summary>
 		/// A list of the supported extensions (for example, "jpeg" and "JPEG").
 		/// </summary>
-		public string[] Extensions { get; private set; }
+		public string[] Extensions { get; }
 
 		/// <summary>
 		/// A list of supported MIME types (for example, "image/jpg" and "image/png").
 		/// </summary>
-		public string[] Mimes { get; private set; }
+		public string[] Mimes { get; }
 
 		/// <summary>
 		/// The importer for this file format. This may be null if only exporting
 		/// is supported for this format.
 		/// </summary>
-		public IImageImporter? Importer { get; private set; }
+		public IImageImporter? Importer { get; }
 
 		/// <summary>
 		/// The exporter for this file format. This may be null if only importing
 		/// is supported for this format.
 		/// </summary>
-		public IImageExporter? Exporter { get; private set; }
+		public IImageExporter? Exporter { get; }
 
 		/// <summary>
 		/// A file filter for use in the file dialog.
 		/// </summary>
-		public FileFilter Filter { get; private set; }
+		public FileFilter Filter { get; }
 
 		/// <param name="displayPrefix">
 		/// A descriptive name for the format, such as "OpenRaster". This will be displayed

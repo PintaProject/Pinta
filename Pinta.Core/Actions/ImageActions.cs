@@ -31,16 +31,16 @@ namespace Pinta.Core
 {
 	public class ImageActions
 	{
-		public Command CropToSelection { get; private set; }
-		public Command AutoCrop { get; private set; }
-		public Command Resize { get; private set; }
-		public Command CanvasSize { get; private set; }
-		public Command FlipHorizontal { get; private set; }
-		public Command FlipVertical { get; private set; }
-		public Command RotateCW { get; private set; }
-		public Command RotateCCW { get; private set; }
-		public Command Rotate180 { get; private set; }
-		public Command Flatten { get; private set; }
+		public Command CropToSelection { get; }
+		public Command AutoCrop { get; }
+		public Command Resize { get; }
+		public Command CanvasSize { get; }
+		public Command FlipHorizontal { get; }
+		public Command FlipVertical { get; }
+		public Command RotateCW { get; }
+		public Command RotateCCW { get; }
+		public Command Rotate180 { get; }
+		public Command Flatten { get; }
 
 		public ImageActions ()
 		{
