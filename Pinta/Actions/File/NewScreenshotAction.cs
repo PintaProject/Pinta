@@ -82,13 +82,14 @@ namespace Pinta.Actions
 							// response 0 == success, 1 == undefined error, 2 == user cancelled (not an error)
 							// However the response 1 can occur when the user presses "Cancel" on the second stage of the UI
 							// As a result, it's not reliable to throw error messages when the retval == 1
-							if (reply.response == 0) {
-								string? uri = reply.results["uri"].ToString ();
-								if (uri is not null && PintaCore.Workspace.OpenFile (Gio.FileHelper.NewForUri (uri))) {
-									// Mark as not having a file, so that the user doesn't unintentionally
-									// save using the temp file.
-									PintaCore.Workspace.ActiveDocument.ClearFileReference ();
-								}
+							if (reply.response != 0)
+								return;
+
+							string? uri = reply.results["uri"].ToString ();
+							if (uri is not null && PintaCore.Workspace.OpenFile (Gio.FileHelper.NewForUri (uri))) {
+								// Mark as not having a file, so that the user doesn't unintentionally
+								// save using the temp file.
+								PintaCore.Workspace.ActiveDocument.ClearFileReference ();
 							}
 						}
 					);

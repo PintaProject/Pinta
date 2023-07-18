@@ -87,14 +87,16 @@ namespace Pinta.Actions
 			// Add all the formats we support to the save dialog
 			var filetypes = new Dictionary<FileFilter, FormatDescriptor> ();
 			foreach (var format in PintaCore.ImageFormats.Formats) {
-				if (!format.IsReadOnly ()) {
-					fcd.AddFilter (format.Filter);
-					filetypes.Add (format.Filter, format);
 
-					// Set the filter to anything we found
-					// We want to ensure that *something* is selected in the filetype
-					fcd.Filter = format.Filter;
-				}
+				if (format.IsReadOnly ())
+					continue;
+
+				fcd.AddFilter (format.Filter);
+				filetypes.Add (format.Filter, format);
+
+				// Set the filter to anything we found
+				// We want to ensure that *something* is selected in the filetype
+				fcd.Filter = format.Filter;
 			}
 
 			// If we already have a format, set it to the default.

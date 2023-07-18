@@ -159,8 +159,9 @@ namespace Pinta.MacInterop
 			var items = new List<string> ();
 			for (int i = 1; i <= count; i++) {
 				string? str = AppleEvent.GetUtf8StringFromAEPtr (ref list, i);
-				if (!string.IsNullOrEmpty (str))
-					items.Add (str);
+				if (string.IsNullOrEmpty (str))
+					continue;
+				items.Add (str);
 			}
 			return items;
 		}

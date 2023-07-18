@@ -553,20 +553,21 @@ namespace Pinta
 
 		private void ActiveDocumentChanged (object? sender, EventArgs e)
 		{
-			if (PintaCore.Workspace.HasOpenDocuments) {
-				PintaCore.Actions.View.SuspendZoomUpdate ();
-				PintaCore.Actions.View.ZoomComboBox.ComboBox.GetEntry ().SetText (ViewActions.ToPercent (PintaCore.Workspace.Scale));
-				PintaCore.Actions.View.ResumeZoomUpdate ();
+			if (!PintaCore.Workspace.HasOpenDocuments)
+				return;
 
-				var doc = PintaCore.Workspace.ActiveDocument;
-				var tab = FindTabWithCanvas ((PintaCanvas) doc.Workspace.Canvas);
+			PintaCore.Actions.View.SuspendZoomUpdate ();
+			PintaCore.Actions.View.ZoomComboBox.ComboBox.GetEntry ().SetText (ViewActions.ToPercent (PintaCore.Workspace.Scale));
+			PintaCore.Actions.View.ResumeZoomUpdate ();
 
-				if (tab != null) {
-					canvas_pad.Notebook.ActiveItem = tab;
-				}
+			var doc = PintaCore.Workspace.ActiveDocument;
+			var tab = FindTabWithCanvas ((PintaCanvas) doc.Workspace.Canvas);
 
-				doc.Workspace.Canvas.GrabFocus ();
+			if (tab != null) {
+				canvas_pad.Notebook.ActiveItem = tab;
 			}
+
+			doc.Workspace.Canvas.GrabFocus ();
 		}
 
 		private IDockNotebookItem? FindTabWithCanvas (PintaCanvas canvas)

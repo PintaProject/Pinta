@@ -110,11 +110,12 @@ namespace Pinta
 			if (value_changing)
 				return;
 
-			if (aspectCheckbox.Active) {
-				value_changing = true;
-				widthSpinner.Value = (int) ((heightSpinner.Value * PintaCore.Workspace.ImageSize.Width) / PintaCore.Workspace.ImageSize.Height);
-				value_changing = false;
-			}
+			if (!aspectCheckbox.Active)
+				return;
+
+			value_changing = true;
+			widthSpinner.Value = (int) ((heightSpinner.Value * PintaCore.Workspace.ImageSize.Width) / PintaCore.Workspace.ImageSize.Height);
+			value_changing = false;
 		}
 
 		private void widthSpinner_ValueChanged (object? sender, EventArgs e)
@@ -122,11 +123,12 @@ namespace Pinta
 			if (value_changing)
 				return;
 
-			if (aspectCheckbox.Active) {
-				value_changing = true;
-				heightSpinner.Value = (int) ((widthSpinner.Value * PintaCore.Workspace.ImageSize.Height) / PintaCore.Workspace.ImageSize.Width);
-				value_changing = false;
-			}
+			if (!aspectCheckbox.Active)
+				return;
+
+			value_changing = true;
+			heightSpinner.Value = (int) ((widthSpinner.Value * PintaCore.Workspace.ImageSize.Height) / PintaCore.Workspace.ImageSize.Width);
+			value_changing = false;
 		}
 
 		private void percentageSpinner_ValueChanged (object? sender, EventArgs e)

@@ -278,31 +278,32 @@ namespace Pinta.Core
 
 		static void CropImageToRectangle (Document doc, RectangleI rect, Path? selection)
 		{
-			if (rect.Width > 0 && rect.Height > 0) {
-				ResizeHistoryItem hist = new ResizeHistoryItem (doc.ImageSize);
+			if (rect.Width <= 0 || rect.Height <= 0)
+				return;
 
-				hist.Icon = Resources.Icons.ImageCrop;
-				hist.Text = Translations.GetString ("Crop to Selection");
-				hist.StartSnapshotOfImage ();
-				hist.RestoreSelection = doc.Selection.Clone ();
+			ResizeHistoryItem hist = new ResizeHistoryItem (doc.ImageSize);
 
-				double original_scale = doc.Workspace.Scale;
-				doc.ImageSize = rect.Size;
-				doc.Workspace.ViewSize = rect.Size;
-				doc.Workspace.Scale = original_scale;
+			hist.Icon = Resources.Icons.ImageCrop;
+			hist.Text = Translations.GetString ("Crop to Selection");
+			hist.StartSnapshotOfImage ();
+			hist.RestoreSelection = doc.Selection.Clone ();
 
-				PintaCore.Actions.View.UpdateCanvasScale ();
+			double original_scale = doc.Workspace.Scale;
+			doc.ImageSize = rect.Size;
+			doc.Workspace.ViewSize = rect.Size;
+			doc.Workspace.Scale = original_scale;
 
-				foreach (var layer in doc.Layers.UserLayers)
-					layer.Crop (rect, selection);
+			PintaCore.Actions.View.UpdateCanvasScale ();
 
-				hist.FinishSnapshotOfImage ();
+			foreach (var layer in doc.Layers.UserLayers)
+				layer.Crop (rect, selection);
 
-				doc.History.PushNewItem (hist);
-				doc.ResetSelectionPaths ();
+			hist.FinishSnapshotOfImage ();
 
-				doc.Workspace.Invalidate ();
-			}
+			doc.History.PushNewItem (hist);
+			doc.ResetSelectionPaths ();
+
+			doc.Workspace.Invalidate ();
 		}
 	}
 }

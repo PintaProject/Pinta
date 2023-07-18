@@ -88,19 +88,15 @@ namespace Pinta.Actions
 			fcd.SelectMultiple = true;
 
 			fcd.OnResponse += (_, e) => {
-				if (e.ResponseId == (int) Gtk.ResponseType.Accept) {
-
-					foreach (var file in fcd.GetFileList ()) {
-						if (!PintaCore.Workspace.OpenFile (file))
-							continue;
-
-						PintaCore.RecentFiles.AddFile (file);
-
-						var directory = file.GetParent ();
-						if (directory is not null)
-							PintaCore.RecentFiles.LastDialogDirectory = directory;
-
-					}
+				if (e.ResponseId != (int) Gtk.ResponseType.Accept)
+					return;
+				foreach (var file in fcd.GetFileList ()) {
+					if (!PintaCore.Workspace.OpenFile (file))
+						continue;
+					PintaCore.RecentFiles.AddFile (file);
+					var directory = file.GetParent ();
+					if (directory is not null)
+						PintaCore.RecentFiles.LastDialogDirectory = directory;
 				}
 			};
 

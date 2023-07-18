@@ -55,13 +55,14 @@ namespace Pinta
 
 		private void RegisterRepository (string url, string name, bool enable)
 		{
-			if (!Repositories.ContainsRepository (url)) {
-				var rep = Repositories.RegisterRepository (null, url, false);
-				rep.Name = name;
-				// Although repositories are enabled by default, we should always call this method to ensure
-				// that the repository name from the previous line ends up being saved to disk.
-				Repositories.SetRepositoryEnabled (url, enable);
-			}
+			if (Repositories.ContainsRepository (url))
+				return;
+
+			var rep = Repositories.RegisterRepository (null, url, false);
+			rep.Name = name;
+			// Although repositories are enabled by default, we should always call this method to ensure
+			// that the repository name from the previous line ends up being saved to disk.
+			Repositories.SetRepositoryEnabled (url, enable);
 		}
 
 		private static string GetPlatformRepositoryUrl ()

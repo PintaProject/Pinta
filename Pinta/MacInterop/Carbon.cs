@@ -176,10 +176,10 @@ namespace Pinta.MacInterop
 
 		public static void CheckReturn (int osErr)
 		{
-			if (osErr != 0) {
-				string s = GetMacOSStatusCommentString (osErr);
-				throw new SystemException ("Unexpected OS error code " + osErr + ": " + s);
-			}
+			if (osErr == 0)
+				return;
+			string s = GetMacOSStatusCommentString (osErr);
+			throw new SystemException ("Unexpected OS error code " + osErr + ": " + s);
 		}
 
 		[DllImport (CarbonLib)]
@@ -224,8 +224,9 @@ namespace Pinta.MacInterop
 					(OSType) (int) CarbonEventParameterType.FSRef);
 				var files = new Dictionary<string, int> ();
 				foreach (var s in arr) {
-					if (!string.IsNullOrEmpty (s))
-						files[s] = line;
+					if (string.IsNullOrEmpty (s))
+						continue;
+					files[s] = line;
 				}
 				return files;
 			} finally {

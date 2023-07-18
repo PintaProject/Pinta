@@ -93,7 +93,6 @@ namespace Pinta
 		private void Workspace_DocumentClosed (object? sender, DocumentEventArgs e)
 		{
 			PintaCore.Actions.Window.RemoveDocument (e.Document);
-
 			if (!PintaCore.Workspace.HasOpenDocuments) {
 				ToggleActions (false);
 			}
