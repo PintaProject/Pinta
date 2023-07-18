@@ -94,9 +94,10 @@ namespace Pinta
 		{
 			PintaCore.Actions.Window.RemoveDocument (e.Document);
 
-			if (!PintaCore.Workspace.HasOpenDocuments) {
-				ToggleActions (false);
-			}
+			if (PintaCore.Workspace.HasOpenDocuments)
+				return;
+
+			ToggleActions (false);
 		}
 
 		private void Workspace_DocumentCreated (object? sender, DocumentEventArgs e)

@@ -71,12 +71,10 @@ namespace Pinta.Actions
 
 			// TODO - support scaling to fit page, centering image, etc.
 
-			using (var surface = doc.GetFlattenedImage ()) {
-				using (var context = args.Context.CairoContext) {
-					context.SetSourceSurface (surface, 0, 0);
-					context.Paint ();
-				}
-			}
+			using var surface = doc.GetFlattenedImage ();
+			using var context = args.Context.CairoContext;
+			context.SetSourceSurface (surface, 0, 0);
+			context.Paint ();
 		}
 
 		void HandleBeginPrint (object o, BeginPrintArgs args)

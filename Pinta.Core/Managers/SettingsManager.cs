@@ -157,20 +157,21 @@ namespace Pinta.Core
 				// Just in case the directory got deleted after the application started
 				Directory.CreateDirectory (settings_dir);
 
-				using (var xw = new XmlTextWriter (settings_file, Encoding.UTF8)) {
-					xw.Formatting = Formatting.Indented;
-					xw.WriteStartElement ("settings");
+				using var xw = new XmlTextWriter (settings_file, Encoding.UTF8);
 
-					foreach (var item in settings) {
-						xw.WriteStartElement ("setting");
-						xw.WriteAttributeString ("name", item.Key);
-						xw.WriteAttributeString ("type", item.Value.GetType ().ToString ());
-						xw.WriteValue (item.Value.ToString ());
-						xw.WriteEndElement ();
-					}
+				xw.Formatting = Formatting.Indented;
+				xw.WriteStartElement ("settings");
 
+				foreach (var item in settings) {
+					xw.WriteStartElement ("setting");
+					xw.WriteAttributeString ("name", item.Key);
+					xw.WriteAttributeString ("type", item.Value.GetType ().ToString ());
+					xw.WriteValue (item.Value.ToString ());
 					xw.WriteEndElement ();
 				}
+
+				xw.WriteEndElement ();
+
 			} catch (Exception ex) {
 				// Not much we can do at this point since the application is exiting,
 				// but I could imagine scenarios where the user doesn't have write permission.

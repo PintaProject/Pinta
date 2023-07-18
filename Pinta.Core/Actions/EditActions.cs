@@ -355,10 +355,10 @@ namespace Pinta.Core
 			ff.Name = Translations.GetString ("Palette files");
 
 			foreach (var format in PintaCore.PaletteFormats.Formats) {
-				if (!format.IsWriteOnly ()) {
-					foreach (var ext in format.Extensions)
-						ff.AddPattern ($"*.{ext}");
-				}
+				if (format.IsWriteOnly ())
+					continue;
+				foreach (var ext in format.Extensions)
+					ff.AddPattern ($"*.{ext}");
 			}
 
 			fcd.AddFilter (ff);
@@ -374,11 +374,12 @@ namespace Pinta.Core
 			fcd.OnResponse += (_, args) => {
 				var response = (ResponseType) args.ResponseId;
 
-				if (response == ResponseType.Accept) {
-					Gio.File file = fcd.GetFile ()!;
-					last_palette_dir = file.GetParent ();
-					PintaCore.Palette.CurrentPalette.Load (file);
-				}
+				if (response != ResponseType.Accept)
+					return;
+
+				Gio.File file = fcd.GetFile ()!;
+				last_palette_dir = file.GetParent ();
+				PintaCore.Palette.CurrentPalette.Load (file);
 			};
 		}
 
@@ -392,10 +393,10 @@ namespace Pinta.Core
 				Translations.GetString ("Cancel"));
 
 			foreach (var format in PintaCore.PaletteFormats.Formats) {
-				if (!format.IsReadOnly ()) {
-					FileFilter fileFilter = format.Filter;
-					fcd.AddFilter (fileFilter);
-				}
+				if (format.IsReadOnly ())
+					continue;
+				FileFilter fileFilter = format.Filter;
+				fcd.AddFilter (fileFilter);
 			}
 
 			if (last_palette_dir != null)
@@ -404,27 +405,28 @@ namespace Pinta.Core
 			fcd.OnResponse += (_, args) => {
 				var response = (ResponseType) args.ResponseId;
 
-				if (response == Gtk.ResponseType.Accept) {
-					Gio.File file = fcd.GetFile ()!;
+				if (response != Gtk.ResponseType.Accept)
+					return;
 
-					// Add in the extension if necessary, based on the current selected file filter.
-					// Note: on macOS, fcd.Filter doesn't seem to properly update to the current filter.
-					// However, on macOS the dialog always adds the extension automatically, so this issue doesn't matter.
-					var basename = file.GetParent ()!.GetRelativePath (file)!;
-					string extension = System.IO.Path.GetExtension (basename);
-					if (string.IsNullOrEmpty (extension)) {
-						var currentFormat = PintaCore.PaletteFormats.Formats.First (f => f.Filter == fcd.Filter);
-						basename += "." + currentFormat.Extensions.First ();
-						file = file.GetParent ()!.GetChild (basename);
-					}
+				Gio.File file = fcd.GetFile ()!;
 
-					var format = PintaCore.PaletteFormats.GetFormatByFilename (basename);
-					if (format is null)
-						throw new FormatException ();
-
-					PintaCore.Palette.CurrentPalette.Save (file, format.Saver);
-					last_palette_dir = file.GetParent ();
+				// Add in the extension if necessary, based on the current selected file filter.
+				// Note: on macOS, fcd.Filter doesn't seem to properly update to the current filter.
+				// However, on macOS the dialog always adds the extension automatically, so this issue doesn't matter.
+				var basename = file.GetParent ()!.GetRelativePath (file)!;
+				string extension = System.IO.Path.GetExtension (basename);
+				if (string.IsNullOrEmpty (extension)) {
+					var currentFormat = PintaCore.PaletteFormats.Formats.First (f => f.Filter == fcd.Filter);
+					basename += "." + currentFormat.Extensions.First ();
+					file = file.GetParent ()!.GetChild (basename);
 				}
+
+				var format = PintaCore.PaletteFormats.GetFormatByFilename (basename);
+				if (format is null)
+					throw new FormatException ();
+
+				PintaCore.Palette.CurrentPalette.Save (file, format.Saver);
+				last_palette_dir = file.GetParent ();
 			};
 		}
 
