@@ -34,10 +34,10 @@ namespace Pinta.Core
 {
 	public class HelpActions
 	{
-		public Command Contents { get; private set; }
-		public Command Website { get; private set; }
-		public Command Bugs { get; private set; }
-		public Command Translate { get; private set; }
+		public Command Contents { get; }
+		public Command Website { get; }
+		public Command Bugs { get; }
+		public Command Translate { get; }
 
 		public HelpActions ()
 		{

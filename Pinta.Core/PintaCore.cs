@@ -32,22 +32,22 @@ namespace Pinta.Core
 {
 	public static class PintaCore
 	{
-		public static ActionManager Actions { get; private set; }
-		public static ChromeManager Chrome { get; private set; }
-		public static EffectsManager Effects { get; private set; }
-		public static ImageConverterManager ImageFormats { get; private set; }
+		public static ActionManager Actions { get; }
+		public static ChromeManager Chrome { get; }
+		public static EffectsManager Effects { get; }
+		public static ImageConverterManager ImageFormats { get; }
 		public static IServiceManager Services { get; }
-		public static LayerManager Layers { get; private set; }
-		public static LivePreviewManager LivePreview { get; private set; }
-		public static PaintBrushManager PaintBrushes { get; private set; }
-		public static PaletteFormatManager PaletteFormats { get; private set; }
-		public static PaletteManager Palette { get; private set; }
-		public static RecentFileManager RecentFiles { get; private set; }
-		public static ResourceManager Resources { get; private set; }
-		public static SettingsManager Settings { get; private set; }
-		public static SystemManager System { get; private set; }
-		public static ToolManager Tools { get; private set; }
-		public static WorkspaceManager Workspace { get; private set; }
+		public static LayerManager Layers { get; }
+		public static LivePreviewManager LivePreview { get; }
+		public static PaintBrushManager PaintBrushes { get; }
+		public static PaletteFormatManager PaletteFormats { get; }
+		public static PaletteManager Palette { get; }
+		public static RecentFileManager RecentFiles { get; }
+		public static ResourceManager Resources { get; }
+		public static SettingsManager Settings { get; }
+		public static SystemManager System { get; }
+		public static ToolManager Tools { get; }
+		public static WorkspaceManager Workspace { get; }
 
 		public const string ApplicationVersion = "2.2";
 

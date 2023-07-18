@@ -34,13 +34,13 @@ namespace Pinta.Core
 {
 	public class FileActions
 	{
-		public Command New { get; private set; }
-		public Command NewScreenshot { get; private set; }
-		public Command Open { get; private set; }
-		public Command Close { get; private set; }
-		public Command Save { get; private set; }
-		public Command SaveAs { get; private set; }
-		public Command Print { get; private set; }
+		public Command New { get; }
+		public Command NewScreenshot { get; }
+		public Command Open { get; }
+		public Command Close { get; }
+		public Command Save { get; }
+		public Command SaveAs { get; }
+		public Command Print { get; }
 
 		public event EventHandler<ModifyCompressionEventArgs>? ModifyCompression;
 		public event EventHandler<DocumentCancelEventArgs>? SaveDocument;

@@ -72,7 +72,7 @@ namespace Pinta.Core
 
 		public Document? ActiveDocumentOrDefault => HasOpenDocuments ? OpenDocuments[active_document_index] : null;
 
-		public SelectionModeHandler SelectionHandler { get; private set; }
+		public SelectionModeHandler SelectionHandler { get; }
 
 		public DocumentWorkspace ActiveWorkspace {
 			get {
@@ -102,7 +102,7 @@ namespace Pinta.Core
 			set { ActiveWorkspace.Scale = value; }
 		}
 
-		public List<Document> OpenDocuments { get; private set; }
+		public List<Document> OpenDocuments { get; }
 		public bool HasOpenDocuments { get { return OpenDocuments.Count > 0; } }
 
 		public Document CreateAndActivateDocument (Gio.File? file, string? file_type, Size size)

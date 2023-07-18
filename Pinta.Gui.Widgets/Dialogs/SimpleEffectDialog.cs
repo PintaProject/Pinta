@@ -100,7 +100,7 @@ namespace Pinta.Gui.Widgets
 			dialog.Present ();
 		}
 
-		public object EffectData { get; private set; }
+		public object EffectData { get; }
 
 		public event PropertyChangedEventHandler? EffectDataChanged;
 

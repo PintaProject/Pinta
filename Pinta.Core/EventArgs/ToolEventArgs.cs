@@ -31,7 +31,7 @@ namespace Pinta.Core
 {
 	public class ToolEventArgs : EventArgs
 	{
-		public BaseTool Tool { get; private set; }
+		public BaseTool Tool { get; }
 
 		public ToolEventArgs (BaseTool tool)
 		{

@@ -212,7 +212,7 @@ namespace Pinta.MacInterop
 			this.Documents = documents;
 		}
 
-		public IDictionary<string, int> Documents { get; private set; }
+		public IDictionary<string, int> Documents { get; }
 	}
 
 	public class ApplicationUrlEventArgs : ApplicationEventArgs
@@ -222,7 +222,7 @@ namespace Pinta.MacInterop
 			this.Urls = urls;
 		}
 
-		public IList<string> Urls { get; private set; }
+		public IList<string> Urls { get; }
 	}
 }
 

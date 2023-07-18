@@ -34,7 +34,7 @@ namespace Pinta
 	{
 		private readonly CanvasWindow canvas_window;
 
-		public Document Document { get; private set; }
+		public Document Document { get; }
 
 		public DocumentViewContent (Document document, CanvasWindow canvasWindow)
 		{

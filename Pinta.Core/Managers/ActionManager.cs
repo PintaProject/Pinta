@@ -33,17 +33,17 @@ namespace Pinta.Core
 {
 	public class ActionManager
 	{
-		public AppActions App { get; private set; } = new ();
-		public FileActions File { get; private set; } = new ();
-		public EditActions Edit { get; private set; } = new ();
-		public ViewActions View { get; private set; } = new ();
-		public ImageActions Image { get; private set; } = new ();
-		public LayerActions Layers { get; private set; } = new ();
-		public AdjustmentsActions Adjustments { get; private set; } = new ();
-		public EffectsActions Effects { get; private set; } = new ();
-		public WindowActions Window { get; private set; } = new ();
-		public HelpActions Help { get; private set; } = new ();
-		public AddinActions Addins { get; private set; } = new ();
+		public AppActions App { get; } = new ();
+		public FileActions File { get; } = new ();
+		public EditActions Edit { get; } = new ();
+		public ViewActions View { get; } = new ();
+		public ImageActions Image { get; } = new ();
+		public LayerActions Layers { get; } = new ();
+		public AdjustmentsActions Adjustments { get; } = new ();
+		public EffectsActions Effects { get; } = new ();
+		public WindowActions Window { get; } = new ();
+		public HelpActions Help { get; } = new ();
+		public AddinActions Addins { get; } = new ();
 
 		public ActionManager ()
 		{

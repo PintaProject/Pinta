@@ -37,8 +37,8 @@ namespace Pinta.Core
 		private static readonly string doc_action_id = "active_document";
 		private readonly Gio.SimpleAction active_doc_action;
 
-		public Command SaveAll { get; private set; }
-		public Command CloseAll { get; private set; }
+		public Command SaveAll { get; }
+		public Command CloseAll { get; }
 
 		public WindowActions ()
 		{

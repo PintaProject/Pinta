@@ -35,7 +35,7 @@ namespace Pinta.Core
 	/// </summary>
 	public class Command
 	{
-		public Gio.SimpleAction Action { get; private set; }
+		public Gio.SimpleAction Action { get; }
 		public string Name {
 			get { return Action.Name!; }
 		}
@@ -45,10 +45,10 @@ namespace Pinta.Core
 			Action.Activate (null);
 		}
 
-		public string Label { get; private set; }
+		public string Label { get; }
 		public string? ShortLabel { get; set; }
-		public string? Tooltip { get; private set; }
-		public string? IconName { get; private set; }
+		public string? Tooltip { get; }
+		public string? IconName { get; }
 		public string FullName { get { return $"app.{Name}"; } }
 		public bool IsImportant { get; set; } = false;
 		public bool Sensitive { get { return Action.Enabled; } set { Action.Enabled = value; } }

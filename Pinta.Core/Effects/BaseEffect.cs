@@ -186,7 +186,7 @@ namespace Pinta.Core
 		{
 			public ConfigDialogResponseEventArgs (bool accepted) { Accepted = accepted; }
 
-			public bool Accepted { get; private set; }
+			public bool Accepted { get; }
 		}
 	}
 

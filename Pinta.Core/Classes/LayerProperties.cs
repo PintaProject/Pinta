@@ -40,10 +40,10 @@ namespace Pinta.Core
 			this.BlendMode = blendmode;
 		}
 
-		public string Name { get; private set; }
-		public bool Hidden { get; private set; }
-		public double Opacity { get; private set; }
-		public BlendMode BlendMode { get; private set; }
+		public string Name { get; }
+		public bool Hidden { get; }
+		public double Opacity { get; }
+		public BlendMode BlendMode { get; }
 
 		public void SetProperties (Layer layer)
 		{

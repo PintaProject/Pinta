@@ -67,7 +67,7 @@ namespace Pinta.Effects
 		private HistogramWidget histogramInput;
 		private HistogramWidget histogramOutput;
 
-		public LevelsData EffectData { get; private set; }
+		public LevelsData EffectData { get; }
 
 		public LevelsDialog (LevelsData effectData)
 		{

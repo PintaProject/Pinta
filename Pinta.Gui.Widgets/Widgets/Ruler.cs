@@ -50,7 +50,7 @@ namespace Pinta.Gui.Widgets
 		/// <summary>
 		/// Whether the ruler is horizontal or vertical.
 		/// </summary>
-		public Orientation Orientation { get; private set; }
+		public Orientation Orientation { get; }
 
 		/// <summary>
 		/// Metric type used for the ruler.

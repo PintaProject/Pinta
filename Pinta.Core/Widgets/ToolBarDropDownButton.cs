@@ -15,7 +15,7 @@ namespace Pinta.Core
 		private readonly Gio.SimpleActionGroup action_group;
 		private ToolBarItem? selected_item;
 
-		public List<ToolBarItem> Items { get; private set; }
+		public List<ToolBarItem> Items { get; }
 
 		public ToolBarDropDownButton (bool showLabel = false)
 		{

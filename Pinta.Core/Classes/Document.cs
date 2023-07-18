@@ -135,7 +135,7 @@ namespace Pinta.Core
 
 		public DocumentLayers Layers { get; }
 
-		public DocumentWorkspace Workspace { get; private set; }
+		public DocumentWorkspace Workspace { get; }
 
 		public delegate void LayerCloneEvent ();
 		#endregion

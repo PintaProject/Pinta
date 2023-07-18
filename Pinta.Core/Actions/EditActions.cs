@@ -34,23 +34,23 @@ namespace Pinta.Core
 {
 	public class EditActions
 	{
-		public Command Undo { get; private set; }
-		public Command Redo { get; private set; }
-		public Command Cut { get; private set; }
-		public Command Copy { get; private set; }
-		public Command CopyMerged { get; private set; }
-		public Command Paste { get; private set; }
-		public Command PasteIntoNewLayer { get; private set; }
-		public Command PasteIntoNewImage { get; private set; }
-		public Command EraseSelection { get; private set; }
-		public Command FillSelection { get; private set; }
-		public Command InvertSelection { get; private set; }
-		public Command SelectAll { get; private set; }
-		public Command Deselect { get; private set; }
-		public Command LoadPalette { get; private set; }
-		public Command SavePalette { get; private set; }
-		public Command ResetPalette { get; private set; }
-		public Command ResizePalette { get; private set; }
+		public Command Undo { get; }
+		public Command Redo { get; }
+		public Command Cut { get; }
+		public Command Copy { get; }
+		public Command CopyMerged { get; }
+		public Command Paste { get; }
+		public Command PasteIntoNewLayer { get; }
+		public Command PasteIntoNewImage { get; }
+		public Command EraseSelection { get; }
+		public Command FillSelection { get; }
+		public Command InvertSelection { get; }
+		public Command SelectAll { get; }
+		public Command Deselect { get; }
+		public Command LoadPalette { get; }
+		public Command SavePalette { get; }
+		public Command ResetPalette { get; }
+		public Command ResizePalette { get; }
 
 		private Gio.File? last_palette_dir = null;
 

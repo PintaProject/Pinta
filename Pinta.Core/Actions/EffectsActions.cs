@@ -32,8 +32,8 @@ namespace Pinta.Core
 {
 	public class EffectsActions
 	{
-		public Dictionary<string, Gio.Menu> Menus { get; private set; } = new ();
-		public List<Command> Actions { get; private set; } = new ();
+		public Dictionary<string, Gio.Menu> Menus { get; } = new ();
+		public List<Command> Actions { get; } = new ();
 
 		public EffectsActions ()
 		{
