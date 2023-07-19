@@ -26,44 +26,42 @@
 
 using System;
 using Gdk;
-using Gtk;
 
-namespace Pinta.Core
+namespace Pinta.Core;
+
+public class ToolKeyEventArgs : EventArgs
 {
-	public class ToolKeyEventArgs : EventArgs
-	{
-		/// <summary>
-		/// Specifies whether the Alt key is currently pressed.
-		/// </summary>
-		public bool IsAltPressed => State.IsAltPressed ();
+	/// <summary>
+	/// Specifies whether the Alt key is currently pressed.
+	/// </summary>
+	public bool IsAltPressed => State.IsAltPressed ();
 
-		/// <summary>
-		/// Specifies whether the Control key is currently pressed.
-		/// </summary>
-		public bool IsControlPressed => State.IsControlPressed ();
+	/// <summary>
+	/// Specifies whether the Control key is currently pressed.
+	/// </summary>
+	public bool IsControlPressed => State.IsControlPressed ();
 
-		/// <summary>
-		/// Specifies whether the left mouse button is currently pressed.
-		/// </summary>
-		public bool IsLeftMousePressed => State.IsLeftMousePressed ();
+	/// <summary>
+	/// Specifies whether the left mouse button is currently pressed.
+	/// </summary>
+	public bool IsLeftMousePressed => State.IsLeftMousePressed ();
 
-		/// <summary>
-		/// Specifies whether the right mouse button is currently pressed.
-		/// </summary>
-		public bool IsRightMousePressed => State.IsRightMousePressed ();
+	/// <summary>
+	/// Specifies whether the right mouse button is currently pressed.
+	/// </summary>
+	public bool IsRightMousePressed => State.IsRightMousePressed ();
 
-		/// <summary>
-		/// Specifies whether the Shift key is currently pressed.
-		/// </summary>
-		public bool IsShiftPressed => State.IsShiftPressed ();
+	/// <summary>
+	/// Specifies whether the Shift key is currently pressed.
+	/// </summary>
+	public bool IsShiftPressed => State.IsShiftPressed ();
 
-		/// <summary>
-		/// Specifies the key that has been pressed or released.
-		/// </summary>
-		public Gdk.Key Key { get; init; }
+	/// <summary>
+	/// Specifies the key that has been pressed or released.
+	/// </summary>
+	public Gdk.Key Key { get; init; }
 
-		public ModifierType State { get; init; }
+	public ModifierType State { get; init; }
 
-		public Event? Event { get; init; }
-	}
+	public Event? Event { get; init; }
 }

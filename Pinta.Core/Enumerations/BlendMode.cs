@@ -24,27 +24,24 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 // THE SOFTWARE.
 
-using System;
+namespace Pinta.Core;
 
-namespace Pinta.Core
+public enum BlendMode
 {
-	public enum BlendMode
-	{
-		Normal,
-		Multiply,
-		ColorBurn,
-		ColorDodge,
-		Overlay,
-		Difference,
-		Lighten,
-		Darken,
-		Screen,
-		Xor,
-		HardLight,
-		SoftLight,
-		Color,
-		Luminosity,
-		Hue,
-		Saturation
-	}
+	Normal,
+	Multiply,
+	ColorBurn,
+	ColorDodge,
+	Overlay,
+	Difference,
+	Lighten,
+	Darken,
+	Screen,
+	Xor,
+	HardLight,
+	SoftLight,
+	Color,
+	Luminosity,
+	Hue,
+	Saturation
 }

@@ -25,13 +25,7 @@
 // THE SOFTWARE.
 
 using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Linq;
 using Cairo;
-using Gdk;
-using Gtk;
-using Pinta;
 
 namespace Pinta.Core
 {

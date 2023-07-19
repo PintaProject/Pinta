@@ -7,14 +7,11 @@
 // Ported to Pinta by: Olivier Dufour <olivier.duff@gmail.com>                 //
 /////////////////////////////////////////////////////////////////////////////////
 
-using System;
+namespace Pinta.Core;
 
-namespace Pinta.Core
+public enum TextAlignment
 {
-	public enum TextAlignment
-	{
-		Right,
-		Center,
-		Left
-	}
+	Right,
+	Center,
+	Left
 }

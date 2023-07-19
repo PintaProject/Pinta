@@ -7,17 +7,16 @@
 
 using System;
 
-namespace Pinta.Core
+namespace Pinta.Core;
+
+public sealed class IndexEventArgs : EventArgs
 {
-	public sealed class IndexEventArgs : EventArgs
+
+	public int Index { get; }
+
+	public IndexEventArgs (int i)
 	{
-
-		public int Index { get; }
-
-		public IndexEventArgs (int i)
-		{
-			Index = i;
-		}
+		Index = i;
 	}
 }
 

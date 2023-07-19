@@ -24,13 +24,12 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 // THE SOFTWARE.
 
-namespace Pinta.Core
+namespace Pinta.Core;
+
+public enum MouseButton
 {
-	public enum MouseButton
-	{
-		None,
-		Left,
-		Middle,
-		Right
-	}
+	None,
+	Left,
+	Middle,
+	Right
 }

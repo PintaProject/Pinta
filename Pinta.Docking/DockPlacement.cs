@@ -22,11 +22,10 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 // THE SOFTWARE.
 
-namespace Pinta.Docking
+namespace Pinta.Docking;
+
+public enum DockPlacement
 {
-	public enum DockPlacement
-	{
-		Center,
-		Right
-	}
+	Center,
+	Right
 }

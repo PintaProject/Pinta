@@ -28,7 +28,6 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using Cairo;
-using Gtk;
 
 namespace Pinta.Core
 {

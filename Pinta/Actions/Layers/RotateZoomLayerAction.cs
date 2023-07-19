@@ -25,7 +25,6 @@
 // THE SOFTWARE.
 
 using System;
-using System.ComponentModel;
 using Cairo;
 using Pinta.Core;
 using Pinta.Gui.Widgets;

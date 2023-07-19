@@ -25,10 +25,6 @@
 // THE SOFTWARE.
 
 using System;
-using System.Diagnostics;
-using System.IO;
-using System.Reflection;
-using Gtk;
 
 namespace Pinta.Core
 {

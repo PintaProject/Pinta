@@ -5,13 +5,10 @@
 // See license-pdn.txt for full licensing and attribution details.             //
 /////////////////////////////////////////////////////////////////////////////////
 
-using System;
+namespace Pinta.Core;
 
-namespace Pinta.Core
+public enum ColorTransferMode
 {
-	public enum ColorTransferMode
-	{
-		Rgb,
-		Luminosity
-	}
+	Rgb,
+	Luminosity
 }

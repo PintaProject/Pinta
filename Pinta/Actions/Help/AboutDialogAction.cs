@@ -26,8 +26,6 @@
 
 using System;
 using System.Text;
-using System.Xml.Linq;
-using Gtk;
 using Pinta.Core;
 
 namespace Pinta.Actions

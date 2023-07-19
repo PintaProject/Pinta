@@ -24,20 +24,17 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 // THE SOFTWARE.
 
-using System;
+namespace Pinta.Core;
 
-namespace Pinta.Core
+[Mono.Addins.TypeExtensionPoint]
+public interface IImageImporter
 {
-	[Mono.Addins.TypeExtensionPoint]
-	public interface IImageImporter
-	{
-		/// <summary>
-		/// Imports a document into Pinta.
-		/// </summary>
-		/// <param name='file'>The identifier of the file to be imported.</param>
-		/// <param name='parent'>
-		/// Window to be used as a parent for any dialogs that are shown.
-		/// </param>
-		void Import (Gio.File file, Gtk.Window parent);
-	}
+	/// <summary>
+	/// Imports a document into Pinta.
+	/// </summary>
+	/// <param name='file'>The identifier of the file to be imported.</param>
+	/// <param name='parent'>
+	/// Window to be used as a parent for any dialogs that are shown.
+	/// </param>
+	void Import (Gio.File file, Gtk.Window parent);
 }

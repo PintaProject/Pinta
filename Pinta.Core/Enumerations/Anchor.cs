@@ -24,20 +24,17 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 // THE SOFTWARE.
 
-using System;
+namespace Pinta.Core;
 
-namespace Pinta.Core
+public enum Anchor
 {
-	public enum Anchor
-	{
-		NW,
-		N,
-		NE,
-		E,
-		SE,
-		S,
-		SW,
-		W,
-		Center
-	}
+	NW,
+	N,
+	NE,
+	E,
+	SE,
+	S,
+	SW,
+	W,
+	Center
 }

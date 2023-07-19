@@ -26,18 +26,17 @@
 
 using System;
 
-namespace Pinta.Core
-{
-	public class LivePreviewRenderUpdatedEventArgs : EventArgs
-	{
-		public LivePreviewRenderUpdatedEventArgs (double progress,
-							   RectangleI bounds)
-		{
-			this.Progress = progress;
-			this.Bounds = bounds;
-		}
+namespace Pinta.Core;
 
-		public double Progress { get; }
-		public RectangleI Bounds { get; }
+public class LivePreviewRenderUpdatedEventArgs : EventArgs
+{
+	public LivePreviewRenderUpdatedEventArgs (double progress,
+						   RectangleI bounds)
+	{
+		this.Progress = progress;
+		this.Bounds = bounds;
 	}
+
+	public double Progress { get; }
+	public RectangleI Bounds { get; }
 }

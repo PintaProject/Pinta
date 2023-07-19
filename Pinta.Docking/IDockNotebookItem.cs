@@ -24,23 +24,22 @@
 
 using System;
 
-namespace Pinta.Docking
+namespace Pinta.Docking;
+
+public interface IDockNotebookItem
 {
-	public interface IDockNotebookItem
-	{
-		/// <summary>
-		/// The widget to be displayed in the notebook.
-		/// </summary>
-		Gtk.Widget Widget { get; }
+	/// <summary>
+	/// The widget to be displayed in the notebook.
+	/// </summary>
+	Gtk.Widget Widget { get; }
 
-		/// <summary>
-		/// Label to be displayed in the tab bar (e.g. the document title).
-		/// </summary>
-		string Label { get; }
+	/// <summary>
+	/// Label to be displayed in the tab bar (e.g. the document title).
+	/// </summary>
+	string Label { get; }
 
-		/// <summary>
-		/// Notifies the notebook when the document title should be updated.
-		/// </summary>
-		event EventHandler LabelChanged;
-	}
+	/// <summary>
+	/// Notifies the notebook when the document title should be updated.
+	/// </summary>
+	event EventHandler LabelChanged;
 }

@@ -25,9 +25,7 @@
 // THE SOFTWARE.
 
 using System;
-using Cairo;
 using Gdk;
-using Gtk;
 
 namespace Pinta.Core
 {
