@@ -1,21 +1,21 @@
-// 
+//
 // GtkExtensions.cs
-//  
+//
 // Author:
 //       Jonathan Pobst <monkey@jpobst.com>
-// 
+//
 // Copyright (c) 2010 Jonathan Pobst
-// 
+//
 // Permission is hereby granted, free of charge, to any person obtaining a copy
 // of this software and associated documentation files (the "Software"), to deal
 // in the Software without restriction, including without limitation the rights
 // to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
 // copies of the Software, and to permit persons to whom the Software is
 // furnished to do so, subject to the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be included in
 // all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
 // IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
 // FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
@@ -281,24 +281,6 @@ namespace Pinta.Core
 			return false;
 		}
 
-		// TODO-GTK4 (bindings) - this will be added in v0.4 (https://github.com/gircore/gir.core/issues/756)
-		public static bool SetCurrentFolder (this FileChooser chooser, Gio.File file)
-		{
-			GLib.Internal.ErrorOwnedHandle error;
-			bool result = Gtk.Internal.FileChooser.SetCurrentFolder (chooser.Handle, file.Handle, out error);
-			GLib.Error.ThrowOnError (error);
-			return result;
-		}
-
-		// TODO-GTK4 (bindings) - this will be added in v0.4 (https://github.com/gircore/gir.core/issues/756)
-		public static bool SetFile (this FileChooser chooser, Gio.File file)
-		{
-			GLib.Internal.ErrorOwnedHandle error;
-			bool result = Gtk.Internal.FileChooser.SetFile (chooser.Handle, file.Handle, out error);
-			GLib.Error.ThrowOnError (error);
-			return result;
-		}
-
 		/// <summary>
 		/// Similar to gtk_dialog_run() in GTK3, this runs the dialog in a blocking manner with a nested event loop.
 		/// This can be useful for compatibility with old code that relies on this behaviour, but new code should be
@@ -527,13 +509,10 @@ namespace Pinta.Core
 			return result.ToArray ();
 		}
 
-		// TODO-GTK4 (bindings) - this manual binding will be unnecessary in v0.4 of gir.core (https://github.com/gircore/gir.core/pull/795)
-		[DllImport (GtkLibraryName, EntryPoint = "gtk_widget_translate_coordinates")]
-		private static extern bool TranslateCoordinates (IntPtr srcWidget, IntPtr destWidget, double srcX, double srcY, out double destX, out double destY);
-
+		/// Wrapper around TranslateCoordinates which uses PointD instead of separate x/y parameters.
 		public static bool TranslateCoordinates (this Widget src, Widget dest, PointD src_pos, out PointD dest_pos)
 		{
-			bool result = TranslateCoordinates (src.Handle, dest.Handle, src_pos.X, src_pos.Y, out double x, out double y);
+			bool result = src.TranslateCoordinates (dest, src_pos.X, src_pos.Y, out double x, out double y);
 			dest_pos = new PointD (x, y);
 			return result;
 		}

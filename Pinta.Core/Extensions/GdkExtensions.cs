@@ -1,21 +1,21 @@
-// 
+//
 // GdkExtensions.cs
-//  
+//
 // Author:
 //       Jonathan Pobst <monkey@jpobst.com>
-// 
+//
 // Copyright (c) 2010 Jonathan Pobst
-// 
+//
 // Permission is hereby granted, free of charge, to any person obtaining a copy
 // of this software and associated documentation files (the "Software"), to deal
 // in the Software without restriction, including without limitation the rights
 // to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
 // copies of the Software, and to permit persons to whom the Software is
 // furnished to do so, subject to the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be included in
 // all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
 // IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
 // FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
@@ -181,9 +181,9 @@ namespace Pinta.Core
 		{
 			var tcs = new TaskCompletionSource<string?> ();
 
-			Gdk.Internal.Clipboard.ReadTextAsync (clipboard.Handle, IntPtr.Zero, new Gio.Internal.AsyncReadyCallbackAsyncHandler ((_, args) => {
+			Gdk.Internal.Clipboard.ReadTextAsync (clipboard.Handle, IntPtr.Zero, new Gio.Internal.AsyncReadyCallbackAsyncHandler ((_, args, _) => {
 				GLib.Internal.ErrorOwnedHandle error;
-				string? result = Gdk.Internal.Clipboard.ReadTextFinish (clipboard.Handle, args.Handle, out error);
+				string? result = Gdk.Internal.Clipboard.ReadTextFinish (clipboard.Handle, args.Handle, out error).ConvertToString ();
 				GLib.Error.ThrowOnError (error);
 
 				tcs.SetResult (result);
@@ -197,13 +197,11 @@ namespace Pinta.Core
 		{
 			var tcs = new TaskCompletionSource<Texture?> ();
 
-			Gdk.Internal.Clipboard.ReadTextureAsync (clipboard.Handle, IntPtr.Zero, new Gio.Internal.AsyncReadyCallbackAsyncHandler ((_, args) => {
+			Gdk.Internal.Clipboard.ReadTextureAsync (clipboard.Handle, IntPtr.Zero, new Gio.Internal.AsyncReadyCallbackAsyncHandler ((_, args, _) => {
 				GLib.Internal.ErrorOwnedHandle error;
 				IntPtr result = Gdk.Internal.Clipboard.ReadTextureFinish (clipboard.Handle, args.Handle, out error);
 
-				Texture? texture = null;
-				if (result != IntPtr.Zero)
-					texture = new TextureWrapper (result, ownedRef: true);
+				Texture? texture = texture = GObject.Internal.ObjectWrapper.WrapNullableHandle<Texture> (result, ownedRef: true);
 
 				try {
 					GLib.Error.ThrowOnError (error);
@@ -215,13 +213,6 @@ namespace Pinta.Core
 			}).NativeCallback, IntPtr.Zero);
 
 			return tcs.Task;
-		}
-
-		internal class TextureWrapper : Gdk.Texture
-		{
-			internal TextureWrapper (IntPtr ptr, bool ownedRef) : base (ptr, ownedRef)
-			{
-			}
 		}
 
 		/// <summary>
@@ -238,14 +229,15 @@ namespace Pinta.Core
 		/// <summary>
 		/// Convert a texture to a Cairo surface.
 		/// </summary>
-		public static Cairo.ImageSurface ToSurface (this Gdk.Texture texture)
+		public unsafe static Cairo.ImageSurface ToSurface (this Gdk.Texture texture)
 		{
 			var surf = CairoExtensions.CreateImageSurface (Cairo.Format.Argb32, texture.Width, texture.Height);
 			Span<byte> surf_data = surf.GetData ();
 
 			// TODO-GTK4 (bindings, unsubmitted) - needs support for primitive value arrays
 			var buffer = new byte[surf_data.Length];
-			Gdk.Internal.Texture.Download (texture.Handle, buffer, (uint) surf.Stride);
+			fixed (byte* buffer_data = buffer)
+				Gdk.Internal.Texture.Download (texture.Handle, ref *buffer_data, (uint) surf.Stride);
 
 			buffer.CopyTo (surf_data);
 			surf.MarkDirty ();

@@ -82,7 +82,7 @@ namespace Pinta.Gui.Widgets
 			[MemberNotNull (nameof (vals))]
 			set {
 				if (value < 2 || value > 3)
-					throw new ArgumentOutOfRangeException (nameof(value), value, "Count must be 2 or 3");
+					throw new ArgumentOutOfRangeException (nameof (value), value, "Count must be 2 or 3");
 
 				vals = new double[value];
 

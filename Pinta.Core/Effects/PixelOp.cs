@@ -68,7 +68,7 @@ namespace Pinta.Core
 			if (dstRect != dstClip)
 				throw new ArgumentOutOfRangeException
 				(
-				    nameof(roiSize),
+				    nameof (roiSize),
 				    "Destination roi out of bounds" +
 				    $", dst.Size=({dst.Width},{dst.Height}" +
 				    ", dst.Bounds=" + dst.GetBounds ().ToString () +
@@ -83,7 +83,7 @@ namespace Pinta.Core
 				);
 
 			if (srcRect != srcClip)
-				throw new ArgumentOutOfRangeException (nameof(roiSize), "Source roi out of bounds");
+				throw new ArgumentOutOfRangeException (nameof (roiSize), "Source roi out of bounds");
 
 			// Cache the width and height properties
 			int width = roiSize.Width;

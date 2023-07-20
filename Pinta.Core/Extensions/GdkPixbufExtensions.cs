@@ -1,21 +1,21 @@
-// 
+//
 // GdkExtensions.cs
-//  
+//
 // Author:
 //       Jonathan Pobst <monkey@jpobst.com>
-// 
+//
 // Copyright (c) 2010 Jonathan Pobst
-// 
+//
 // Permission is hereby granted, free of charge, to any person obtaining a copy
 // of this software and associated documentation files (the "Software"), to deal
 // in the Software without restriction, including without limitation the rights
 // to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
 // copies of the Software, and to permit persons to whom the Software is
 // furnished to do so, subject to the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be included in
 // all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
 // IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
 // FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
@@ -43,33 +43,6 @@ namespace Pinta.Core
 			);
 		}
 
-		// TODO-GTK4 (bindings) - this will be added in v0.4 (https://github.com/gircore/gir.core/issues/756)
-		public static Pixbuf NewPixbufFromStream (Gio.InputStream stream, Gio.Cancellable? cancellable)
-		{
-			GLib.Internal.ErrorOwnedHandle error;
-			IntPtr result = GdkPixbuf.Internal.Pixbuf.NewFromStream (stream.Handle, cancellable == null ? IntPtr.Zero : cancellable.Handle, out error);
-			GLib.Error.ThrowOnError (error);
-			return new PixbufWrapper (result, ownedRef: true);
-		}
-
-		// TODO-GTK4 (bindings) - this will be added in v0.4 (https://github.com/gircore/gir.core/issues/756)
-		public static Pixbuf NewPixbufFromFileAtScale (string filename, int width, int height, bool preserve_aspect_ratio)
-		{
-			GLib.Internal.ErrorOwnedHandle error;
-			IntPtr result = GdkPixbuf.Internal.Pixbuf.NewFromFileAtScale (filename, width, height, preserve_aspect_ratio, out error);
-			GLib.Error.ThrowOnError (error);
-			return new PixbufWrapper (result, ownedRef: true);
-		}
-
-		// TODO-GTK4 (bindings) - this will be added in v0.4 (https://github.com/gircore/gir.core/issues/756)
-		public static bool SaveToStream (this Pixbuf pixbuf, Gio.OutputStream stream, string type, Gio.Cancellable? cancellable)
-		{
-			GLib.Internal.ErrorOwnedHandle error;
-			bool result = GdkPixbuf.Internal.Pixbuf.SaveToStreamv (pixbuf.Handle, stream.Handle, type, IntPtr.Zero, IntPtr.Zero, cancellable == null ? IntPtr.Zero : cancellable.Handle, out error);
-			GLib.Error.ThrowOnError (error);
-			return result;
-		}
-
 		// TODO-GTK4 (bindings, unsubmitted) - needs support for primitive value arrays
 		public static byte[] SaveToBuffer (this Pixbuf pixbuf, string type)
 		{
@@ -81,24 +54,6 @@ namespace Pinta.Core
 			Marshal.Copy (buffer, result, 0, (int) buffer_size);
 			Marshal.FreeHGlobal (buffer);
 			return result;
-		}
-
-		// TODO-GTK4 (bindings) - this will be added in v0.4 (https://github.com/gircore/gir.core/issues/756)
-		public static bool SaveToStreamv (this Pixbuf pixbuf, Gio.OutputStream stream, string type, string[] option_keys, string[] option_values, Gio.Cancellable? cancellable)
-		{
-			GLib.Internal.ErrorOwnedHandle error;
-			using var option_keys_native = new GLib.Internal.StringArrayNullTerminatedSafeHandle (option_keys);
-			using var option_values_native = new GLib.Internal.StringArrayNullTerminatedSafeHandle (option_values);
-			bool result = SaveToStreamv (pixbuf.Handle, stream.Handle, type, option_keys_native.DangerousGetHandle (), option_values_native.DangerousGetHandle (), cancellable == null ? IntPtr.Zero : cancellable.Handle, out error);
-			GLib.Error.ThrowOnError (error);
-			return result;
-		}
-
-		internal class PixbufWrapper : Pixbuf
-		{
-			internal PixbufWrapper (IntPtr ptr, bool ownedRef) : base (ptr, ownedRef)
-			{
-			}
 		}
 
 		// Higher-level wrapper around GdkPixbuf.Pixbuf.GetFormats(), which returns only a GLib.SList.
@@ -120,7 +75,7 @@ namespace Pinta.Core
 		// TODO-GTK4 (bindings) - record methods are not generated (https://github.com/gircore/gir.core/issues/743)
 		public static string GetName (this PixbufFormat format)
 		{
-			return GdkPixbuf.Internal.PixbufFormat.GetName (format.Handle);
+			return GdkPixbuf.Internal.PixbufFormat.GetName (format.Handle).ConvertToString ();
 		}
 
 		// TODO-GTK4 (bindings) - record methods are not generated (https://github.com/gircore/gir.core/issues/743)
@@ -145,8 +100,5 @@ namespace Pinta.Core
 
 		[DllImport (PixbufLibraryName, EntryPoint = "gdk_pixbuf_save_to_bufferv")]
 		private static extern bool SaveToBufferv (IntPtr pixbuf, out IntPtr buffer, out uint buffer_size, [MarshalAs (UnmanagedType.LPUTF8Str)] string type, IntPtr option_keys, IntPtr option_values, out GLib.Internal.ErrorOwnedHandle error);
-
-		[DllImport (PixbufLibraryName, EntryPoint = "gdk_pixbuf_save_to_streamv")]
-		private static extern bool SaveToStreamv (IntPtr pixbuf, IntPtr stream, [MarshalAs (UnmanagedType.LPUTF8Str)] string type, IntPtr option_keys, IntPtr option_values, IntPtr cancellable, out GLib.Internal.ErrorOwnedHandle error);
 	}
 }

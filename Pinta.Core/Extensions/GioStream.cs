@@ -6,7 +6,7 @@
  *
  * Copyright (c) 2008 Novell, Inc.
  *
- * 
+ *
  * Permission is hereby granted, free of charge, to any person obtaining
  * a copy of this software and associated documentation files (the
  * "Software"), to deal in the Software without restriction, including
@@ -14,10 +14,10 @@
  * distribute, sublicense, and/or sell copies of the Software, and to
  * permit persons to whom the Software is furnished to do so, subject to
  * the following conditions:
- * 
+ *
  * The above copyright notice and this permission notice shall be
  * included in all copies or substantial portions of the Software.
- * 
+ *
  * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
  * EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
  * MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -128,11 +128,11 @@ namespace Pinta.Core
 		public override int Read (byte[] buffer, int offset, int count)
 		{
 			if (offset + count - 1 > buffer.Length)
-				throw new ArgumentException ($"({nameof(offset)} + {nameof(count)} - {1}) is greater than the length of buffer");
+				throw new ArgumentException ($"({nameof (offset)} + {nameof (count)} - {1}) is greater than the length of buffer");
 			if (offset < 0)
-				throw new ArgumentOutOfRangeException (nameof(offset));
+				throw new ArgumentOutOfRangeException (nameof (offset));
 			if (count < 0)
-				throw new ArgumentOutOfRangeException (nameof(count));
+				throw new ArgumentOutOfRangeException (nameof (count));
 			if (!CanRead)
 				throw new NotSupportedException ("The stream does not support reading");
 			if (is_disposed)
@@ -145,24 +145,17 @@ namespace Pinta.Core
 			if (input_stream == null)
 				throw new System.Exception ("this shouldn't happen");
 
-			if (offset == 0)
-				return (int) input_stream.Read (buffer, (uint) count, null);
-			else {
-				byte[] buf = new byte[count];
-				int ret = (int) input_stream.Read (buf, (uint) count, null);
-				buf.CopyTo (buffer, offset);
-				return ret;
-			}
+			return (int) input_stream.Read (new Span<byte> (buffer, offset, count), null);
 		}
 
 		public override void Write (byte[] buffer, int offset, int count)
 		{
 			if (offset + count > buffer.Length)
-				throw new ArgumentException ($"({nameof(offset)} + {nameof(count)}) is greater than the length of buffer");
+				throw new ArgumentException ($"({nameof (offset)} + {nameof (count)}) is greater than the length of buffer");
 			if (offset < 0)
-				throw new ArgumentOutOfRangeException (nameof(offset));
+				throw new ArgumentOutOfRangeException (nameof (offset));
 			if (count < 0)
-				throw new ArgumentOutOfRangeException (nameof(count));
+				throw new ArgumentOutOfRangeException (nameof (count));
 			if (!CanWrite)
 				throw new NotSupportedException ("The stream does not support writing");
 			if (is_disposed)
@@ -174,15 +167,8 @@ namespace Pinta.Core
 				output_stream = iostream.OutputStream;
 			if (output_stream == null)
 				throw new System.Exception ("this shouldn't happen");
-			if (offset == 0) {
-				output_stream.Write (buffer, (uint) count, null);
-				return;
-			} else {
-				byte[] buf = new byte[count];
-				Array.Copy (buffer, offset, buf, 0, count);
-				output_stream.Write (buf, (uint) count, null);
-				return;
-			}
+
+			output_stream.Write (new Span<byte> (buffer, offset, count), null);
 		}
 
 		public override long Seek (long offset, System.IO.SeekOrigin origin)
@@ -222,11 +208,8 @@ namespace Pinta.Core
 
 			if (is_disposed)
 				throw new ObjectDisposedException ("The stream is closed");
-#if false // TODO-GTK4 (bindings) - this will be added in v0.4 (https://github.com/gircore/gir.core/issues/756)
+
 			seekable.Truncate (value, null);
-#else
-			throw new NotImplementedException ();
-#endif
 		}
 
 		public override void Close ()

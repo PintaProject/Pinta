@@ -1,21 +1,21 @@
-// 
+//
 // Main.cs
-//  
+//
 // Author:
 //       Jonathan Pobst <monkey@jpobst.com>
-// 
+//
 // Copyright (c) 2010 Jonathan Pobst
-// 
+//
 // Permission is hereby granted, free of charge, to any person obtaining a copy
 // of this software and associated documentation files (the "Software"), to deal
 // in the Software without restriction, including without limitation the rights
 // to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
 // copies of the Software, and to permit persons to whom the Software is
 // furnished to do so, subject to the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be included in
 // all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
 // IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
 // FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
@@ -84,9 +84,7 @@ namespace Pinta
 				return;
 			}
 
-#if false // TODO-GTK4 (bindings) - there isn't any support for dealing with unhandled exceptions from signal callbacks (https://github.com/gircore/gir.core/issues/845)
-			GLib.ExceptionManager.UnhandledException += new GLib.UnhandledExceptionHandler (ExceptionManager_UnhandledException);
-#endif
+			GLib.UnhandledException.SetHandler (OnUnhandledException);
 
 			// For testing a dark variant of the theme.
 			//Gtk.Settings.Default.SetProperty("gtk-application-prefer-dark-theme", new GLib.Value(true));
@@ -95,7 +93,6 @@ namespace Pinta
 			Pango.Module.Initialize ();
 			PangoCairo.Module.Initialize ();
 			var app = Adw.Application.New ("com.github.PintaProject.Pinta", Gio.ApplicationFlags.NonUnique);
-			SynchronizationContext.SetSynchronizationContext (new GLibExtensions.GLibSynchronizationContext ());
 
 			// Add our icons to the search path.
 			GtkExtensions.GetDefaultIconTheme ().AddSearchPath (Pinta.Core.SystemManager.GetDataRootDirectory () + "/icons");
@@ -124,7 +121,8 @@ namespace Pinta
 #endif
 			};
 
-			app.Run ();
+			// Run with a SynchronizationContext to integrate async methods with GLib.MainLoop.
+			app.RunWithSynchronizationContext ();
 		}
 
 		private static void ShowHelp (OptionSet p)
@@ -154,15 +152,11 @@ namespace Pinta
 			}
 		}
 
-#if false // TODO-GTK4 (bindings) - there isn't any support for dealing with unhandled exceptions from signal callbacks (https://github.com/gircore/gir.core/issues/845)
-		private static void ExceptionManager_UnhandledException (GLib.UnhandledExceptionArgs args)
+		private static void OnUnhandledException (Exception e)
 		{
-			Exception ex = (Exception) args.ExceptionObject;
 			PintaCore.Chrome.ShowErrorDialog (PintaCore.Chrome.MainWindow,
-							  $"{"Unhandled exception"}:\n{ex.Message}",
-							  ex.ToString ());
+					"Unhandled exception", e.Message, e.ToString ());
 		}
-#endif
 
 		/// <summary>
 		/// Registers for OSX-specific events, like quitting from the dock.
@@ -170,7 +164,7 @@ namespace Pinta
 		static void RegisterForAppleEvents ()
 		{
 			MacInterop.ApplicationEvents.Quit += (sender, e) => {
-				GLib.Functions.TimeoutAddFull (0, 10, delegate {
+				GLib.Functions.TimeoutAdd (0, 10, () => {
 					PintaCore.Actions.App.Exit.Activate ();
 					return false;
 				});
@@ -188,7 +182,7 @@ namespace Pinta
 
 			MacInterop.ApplicationEvents.OpenDocuments += (sender, e) => {
 				if (e.Documents != null) {
-					GLib.Functions.TimeoutAddFull (0, 10, delegate {
+					GLib.Functions.TimeoutAdd (0, 10, () => {
 						foreach (string filename in e.Documents.Keys) {
 							System.Console.Error.WriteLine ("Opening: {0}", filename);
 							PintaCore.Workspace.OpenFile (Gio.FileHelper.NewForCommandlineArg (filename));

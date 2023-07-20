@@ -287,8 +287,8 @@ namespace Pinta.Core
 		{
 			if (sampleCount < 1) {
 				throw new ArgumentOutOfRangeException (
-					nameof(sampleCount),
-					$"{nameof(sampleCount)} must be [0, int.MaxValue]"
+					nameof (sampleCount),
+					$"{nameof (sampleCount)} must be [0, int.MaxValue]"
 				);
 			}
 

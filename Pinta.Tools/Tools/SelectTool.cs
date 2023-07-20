@@ -279,7 +279,7 @@ namespace Pinta.Tools
 					}
 					break;
 				default:
-					throw new ArgumentOutOfRangeException (nameof(handle));
+					throw new ArgumentOutOfRangeException (nameof (handle));
 			}
 		}
 

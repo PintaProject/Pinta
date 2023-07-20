@@ -68,7 +68,7 @@ namespace Pinta.Gui.Addins
 
 		public void SetMessage (string msg)
 		{
-			GLib.Functions.IdleAddFull (0, (_) => {
+			GLib.Functions.IdleAdd (0, () => {
 				progress_bar.Text = msg;
 				return false;
 			});
@@ -76,7 +76,7 @@ namespace Pinta.Gui.Addins
 
 		public void SetProgress (double progress)
 		{
-			GLib.Functions.IdleAddFull (0, (_) => {
+			GLib.Functions.IdleAdd (0, () => {
 				progress_bar.Fraction = progress;
 				return false;
 			});
