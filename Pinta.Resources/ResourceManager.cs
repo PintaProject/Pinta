@@ -1,21 +1,21 @@
-// 
+//
 // ResourceLoader.cs
-//  
+//
 // Author:
 //       Jonathan Pobst <monkey@jpobst.com>
-// 
+//
 // Copyright (c) 2010 Jonathan Pobst
-// 
+//
 // Permission is hereby granted, free of charge, to any person obtaining a copy
 // of this software and associated documentation files (the "Software"), to deal
 // in the Software without restriction, including without limitation the rights
 // to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
 // copies of the Software, and to permit persons to whom the Software is
 // furnished to do so, subject to the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be included in
 // all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
 // IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
 // FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
@@ -62,7 +62,7 @@ namespace Pinta.Resources
 			image = null;
 
 			try {
-				// This will also load any icons added by Gtk.IconFactory.AddDefault() . 
+				// This will also load any icons added by Gtk.IconFactory.AddDefault() .
 				var icon_theme = Gtk.IconTheme.GetForDisplay (Gdk.Display.GetDefault ()!);
 				var icon_paintable = icon_theme.LookupIcon (name, Array.Empty<string> (), size, 1, TextDirection.None, Gtk.IconLookupFlags.Preload);
 				if (icon_paintable == null || (name != StandardIcons.ImageMissing && icon_paintable.IconName!.StartsWith ("image-missing")))
@@ -79,7 +79,8 @@ namespace Pinta.Resources
 				if (node == null || node.GetNodeType () != Gsk.RenderNodeType.TextureNode)
 					return false;
 
-				image = new TextureWrapper (Gsk.Internal.TextureNode.GetTexture (node.Handle), ownedRef: false);
+				// TODO-GTK4 (bindings, unsubmitted) - the node should be a Gsk.TextureNode instance.
+				image = GObject.Internal.ObjectWrapper.WrapHandle<Gdk.Texture>(Gsk.Internal.TextureNode.GetTexture(node.Handle), false);
 			} catch (Exception ex) {
 				Console.Error.WriteLine (ex.Message);
 			}
@@ -111,11 +112,8 @@ namespace Pinta.Resources
 					var buffer = new byte[stream.Length];
 					stream.Read (buffer, 0, buffer.Length);
 
-					// TODO-GTK4 (bindings) - this should be available in v0.4 (https://github.com/gircore/gir.core/issues/756)
 					var bytes = GLib.Bytes.From (buffer);
-					GLib.Internal.ErrorOwnedHandle error;
-					image = new TextureWrapper (Gdk.Internal.Texture.NewFromBytes (bytes.Handle, out error), ownedRef: true);
-					GLib.Error.ThrowOnError (error);
+					image = Gdk.Texture.NewFromBytes (bytes);
 				}
 			} catch (Exception ex) {
 				Console.Error.WriteLine (ex.Message);
@@ -123,13 +121,6 @@ namespace Pinta.Resources
 			}
 
 			return image != null;
-		}
-
-		private class TextureWrapper : Gdk.Texture
-		{
-			internal TextureWrapper (IntPtr ptr, bool ownedRef) : base (ptr, ownedRef)
-			{
-			}
 		}
 
 		private static bool HasResource (Assembly asm, string name)

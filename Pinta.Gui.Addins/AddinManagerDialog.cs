@@ -81,7 +81,7 @@ namespace Pinta.Gui.Addins
 				service.Repositories.UpdateAllRepositories (progress_bar);
 			}).ContinueWith ((_) => {
 				// Execute UI updates on the main thread.
-				GLib.Functions.IdleAddFull (0, (_) => {
+				GLib.Functions.IdleAdd (0, () => {
 
 					progress_bar.HideProgress ();
 					LoadGallery ();
@@ -241,7 +241,7 @@ namespace Pinta.Gui.Addins
 		{
 			Console.WriteLine ("Error: {0}\n{1}", message, exception);
 
-			GLib.Functions.IdleAddFull (0, (_) => {
+			GLib.Functions.IdleAdd (0, () => {
 				toast_overlay.AddToast (Adw.Toast.New (message));
 				return false;
 			});
@@ -251,7 +251,7 @@ namespace Pinta.Gui.Addins
 		{
 			Console.WriteLine ("Warning: {0}", message);
 
-			GLib.Functions.IdleAddFull (0, (_) => {
+			GLib.Functions.IdleAdd (0, () => {
 				toast_overlay.AddToast (Adw.Toast.New (message));
 				return false;
 			});
