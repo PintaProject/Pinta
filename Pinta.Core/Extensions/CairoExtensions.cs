@@ -1156,7 +1156,7 @@ namespace Pinta.Core
 					scans[i] = cairo_rect.ToRectangleI ();
 				}
 			} else {
-				scans = new RectangleI[0];
+				scans = Array.Empty<RectangleI> ();
 			}
 
 			foreach (var rect in scans) {
@@ -1270,7 +1270,7 @@ namespace Pinta.Core
 					scans[i] = cairo_rect.ToRectangleI ();
 				}
 			} else {
-				scans = new RectangleI[0];
+				scans = Array.Empty<RectangleI> ();
 			}
 
 			foreach (var rect in scans)

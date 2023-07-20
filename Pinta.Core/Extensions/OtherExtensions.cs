@@ -65,40 +65,58 @@ namespace Pinta.Core
 
 				PointI last = new (start.X, start.Y + 1);
 				PointI curr = new (start.X, start.Y);
-				PointI next = curr;
-				PointI left = new ();
-				PointI right = new ();
-
+				
 				// trace island outline
 				while (true) {
-					left.X = ((curr.X - last.X) + (curr.Y - last.Y) + 2) / 2 + curr.X - 1;
-					left.Y = ((curr.Y - last.Y) - (curr.X - last.X) + 2) / 2 + curr.Y - 1;
 
-					right.X = ((curr.X - last.X) - (curr.Y - last.Y) + 2) / 2 + curr.X - 1;
-					right.Y = ((curr.Y - last.Y) + (curr.X - last.X) + 2) / 2 + curr.Y - 1;
+					// Calculation zone
 
-					if (bounds.ContainsPoint (left.X, left.Y) && stencil[left]) {
+					int currLastDiffX = curr.X - last.X;
+					int currLastDiffY = curr.Y - last.Y;
+					int currXDecreased = curr.X - 1;
+					int currYDecreased = curr.Y - 1;
+
+					int leftX = currXDecreased + ((currLastDiffX + currLastDiffY + 2) / 2);
+					int leftY = currYDecreased + ((currLastDiffY - currLastDiffX + 2) / 2);
+
+					int rightX = currXDecreased + ((currLastDiffX - currLastDiffY + 2) / 2);
+					int rightY = currYDecreased + ((currLastDiffY + currLastDiffX + 2) / 2);
+
+					PointI left = new (leftX, leftY);
+					PointI right = new (rightX, rightY);
+
+					int nextXAddition;
+					int nextYAddition;
+					if (bounds.ContainsPoint (leftX, leftY) && stencil[left]) {
 						// go left
-						next.X += curr.Y - last.Y;
-						next.Y -= curr.X - last.X;
-					} else if (bounds.ContainsPoint (right.X, right.Y) && stencil[right]) {
+						nextXAddition = currLastDiffY;
+						nextYAddition = -currLastDiffX;
+					} else if (bounds.ContainsPoint (rightX, rightY) && stencil[right]) {
 						// go straight
-						next.X += curr.X - last.X;
-						next.Y += curr.Y - last.Y;
+						nextXAddition = currLastDiffX;
+						nextYAddition = currLastDiffY;
 					} else {
 						// turn right
-						next.X -= curr.Y - last.Y;
-						next.Y += curr.X - last.X;
+						nextXAddition = -currLastDiffY;
+						nextYAddition = currLastDiffX;
 					}
 
-					if (Math.Sign (next.X - curr.X) != Math.Sign (curr.X - last.X) ||
-					    Math.Sign (next.Y - curr.Y) != Math.Sign (curr.Y - last.Y)) {
+					var nextX = curr.X + nextXAddition;
+					var nextY = curr.Y + nextYAddition;
+					PointI next = new (nextX, nextY);
+
+					// Mutation zone
+
+					if (Math.Sign (nextX - curr.X) != Math.Sign (currLastDiffX) ||
+					    Math.Sign (nextY - curr.Y) != Math.Sign (currLastDiffY)) {
 						pts.Add (curr);
 						++count;
 					}
 
 					last = curr;
 					curr = next;
+
+					// Continue?
 
 					if (next.X == start.X && next.Y == start.Y)
 						break;
