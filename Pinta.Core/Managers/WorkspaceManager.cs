@@ -314,13 +314,13 @@ namespace Pinta.Core
 		{
 			if (index >= OpenDocuments.Count)
 				throw new ArgumentOutOfRangeException (
-					nameof(index),
-					$"Tried to {nameof(WorkspaceManager)}.{nameof(SetActiveDocument)} greater than {nameof(OpenDocuments)}."
+					nameof (index),
+					$"Tried to {nameof (WorkspaceManager)}.{nameof (SetActiveDocument)} greater than {nameof (OpenDocuments)}."
 				);
 			if (index < 0)
 				throw new ArgumentOutOfRangeException (
-					nameof(index),
-					$"Tried to {nameof(WorkspaceManager)}.{nameof(SetActiveDocument)} less that zero."
+					nameof (index),
+					$"Tried to {nameof (WorkspaceManager)}.{nameof (SetActiveDocument)} less that zero."
 				);
 
 			SetActiveDocument (OpenDocuments[index]);

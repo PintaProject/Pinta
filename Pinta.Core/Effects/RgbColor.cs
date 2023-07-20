@@ -29,13 +29,13 @@ namespace Pinta.Core
 		{
 #if DEBUG
 			if (R < 0 || R > 255) {
-				throw new ArgumentOutOfRangeException (nameof(R), R, $"{nameof(R)} must correspond to a byte value");
+				throw new ArgumentOutOfRangeException (nameof (R), R, $"{nameof (R)} must correspond to a byte value");
 			}
 			if (G < 0 || G > 255) {
-				throw new ArgumentOutOfRangeException (nameof(G), G, $"{nameof(G)} must correspond to a byte value");
+				throw new ArgumentOutOfRangeException (nameof (G), G, $"{nameof (G)} must correspond to a byte value");
 			}
 			if (B < 0 || B > 255) {
-				throw new ArgumentOutOfRangeException (nameof(B), B, $"{nameof(B)} must correspond to a byte value");
+				throw new ArgumentOutOfRangeException (nameof (B), B, $"{nameof (B)} must correspond to a byte value");
 			}
 #endif
 			Red = R;

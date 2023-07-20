@@ -51,7 +51,7 @@ namespace Pinta.Core
 			RectangleI regionBounds = Utility.GetRegionBounds (roi, startIndex, length);
 
 			if (regionBounds != RectangleI.Intersect (surface.GetBounds (), regionBounds))
-				throw new ArgumentOutOfRangeException (nameof(roi), "Region is out of bounds");
+				throw new ArgumentOutOfRangeException (nameof (roi), "Region is out of bounds");
 
 			for (int x = startIndex; x < startIndex + length; ++x)
 				ApplyRectangle (surface, roi[x]);

@@ -201,7 +201,7 @@ namespace Pinta.Core
 				GLib.Internal.ErrorOwnedHandle error;
 				IntPtr result = Gdk.Internal.Clipboard.ReadTextureFinish (clipboard.Handle, args.Handle, out error);
 
-				Texture? texture = texture = GObject.Internal.ObjectWrapper.WrapNullableHandle<Texture>(result, ownedRef: true);
+				Texture? texture = texture = GObject.Internal.ObjectWrapper.WrapNullableHandle<Texture> (result, ownedRef: true);
 
 				try {
 					GLib.Error.ThrowOnError (error);
@@ -236,7 +236,7 @@ namespace Pinta.Core
 
 			// TODO-GTK4 (bindings, unsubmitted) - needs support for primitive value arrays
 			var buffer = new byte[surf_data.Length];
-			fixed (byte *buffer_data = buffer)
+			fixed (byte* buffer_data = buffer)
 				Gdk.Internal.Texture.Download (texture.Handle, ref *buffer_data, (uint) surf.Stride);
 
 			buffer.CopyTo (surf_data);

@@ -80,7 +80,7 @@ namespace Pinta.Resources
 					return false;
 
 				// TODO-GTK4 (bindings, unsubmitted) - the node should be a Gsk.TextureNode instance.
-				image = GObject.Internal.ObjectWrapper.WrapHandle<Gdk.Texture>(Gsk.Internal.TextureNode.GetTexture(node.Handle), false);
+				image = GObject.Internal.ObjectWrapper.WrapHandle<Gdk.Texture> (Gsk.Internal.TextureNode.GetTexture (node.Handle), false);
 			} catch (Exception ex) {
 				Console.Error.WriteLine (ex.Message);
 			}

@@ -145,7 +145,7 @@ namespace Pinta.Core
 			if (input_stream == null)
 				throw new System.Exception ("this shouldn't happen");
 
-			return (int) input_stream.Read (new Span<byte>(buffer, offset, count), null);
+			return (int) input_stream.Read (new Span<byte> (buffer, offset, count), null);
 		}
 
 		public override void Write (byte[] buffer, int offset, int count)
@@ -168,7 +168,7 @@ namespace Pinta.Core
 			if (output_stream == null)
 				throw new System.Exception ("this shouldn't happen");
 
-			output_stream.Write(new Span<byte>(buffer, offset, count), null);
+			output_stream.Write (new Span<byte> (buffer, offset, count), null);
 		}
 
 		public override long Seek (long offset, System.IO.SeekOrigin origin)
