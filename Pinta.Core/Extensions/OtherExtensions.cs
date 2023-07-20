@@ -9,7 +9,6 @@
 
 using System;
 using System.Collections.Generic;
-using Cairo;
 
 namespace Pinta.Core
 {
@@ -29,90 +28,90 @@ namespace Pinta.Core
 
 		public static PointI[][] CreatePolygonSet (this BitMask stencil, RectangleD bounds, int translateX, int translateY)
 		{
+			if (stencil.IsEmpty)
+				return Array.Empty<PointI[]> ();
+
 			var polygons = new List<PointI[]> ();
 
-			if (!stencil.IsEmpty) {
-				PointI start = bounds.Location ().ToInt ();
-				var pts = new List<PointI> ();
-				int count = 0;
+			PointI start = bounds.Location ().ToInt ();
+			var pts = new List<PointI> ();
+			int count = 0;
 
-				// find all islands
+			// find all islands
+			while (true) {
+				bool startFound = false;
+
 				while (true) {
-					bool startFound = false;
-
-					while (true) {
-						if (stencil[start]) {
-							startFound = true;
-							break;
-						}
-
-						++start.X;
-
-						if (start.X >= bounds.Right) {
-							++start.Y;
-							start.X = (int) bounds.X;
-
-							if (start.Y >= bounds.Bottom) {
-								break;
-							}
-						}
-					}
-
-					if (!startFound)
+					if (stencil[start]) {
+						startFound = true;
 						break;
-
-					pts.Clear ();
-
-					PointI last = new (start.X, start.Y + 1);
-					PointI curr = new (start.X, start.Y);
-					PointI next = curr;
-					PointI left = new ();
-					PointI right = new ();
-
-					// trace island outline
-					while (true) {
-						left.X = ((curr.X - last.X) + (curr.Y - last.Y) + 2) / 2 + curr.X - 1;
-						left.Y = ((curr.Y - last.Y) - (curr.X - last.X) + 2) / 2 + curr.Y - 1;
-
-						right.X = ((curr.X - last.X) - (curr.Y - last.Y) + 2) / 2 + curr.X - 1;
-						right.Y = ((curr.Y - last.Y) + (curr.X - last.X) + 2) / 2 + curr.Y - 1;
-
-						if (bounds.ContainsPoint (left.X, left.Y) && stencil[left]) {
-							// go left
-							next.X += curr.Y - last.Y;
-							next.Y -= curr.X - last.X;
-						} else if (bounds.ContainsPoint (right.X, right.Y) && stencil[right]) {
-							// go straight
-							next.X += curr.X - last.X;
-							next.Y += curr.Y - last.Y;
-						} else {
-							// turn right
-							next.X -= curr.Y - last.Y;
-							next.Y += curr.X - last.X;
-						}
-
-						if (Math.Sign (next.X - curr.X) != Math.Sign (curr.X - last.X) ||
-						    Math.Sign (next.Y - curr.Y) != Math.Sign (curr.Y - last.Y)) {
-							pts.Add (curr);
-							++count;
-						}
-
-						last = curr;
-						curr = next;
-
-						if (next.X == start.X && next.Y == start.Y)
-							break;
 					}
 
-					PointI[] points = pts.ToArray ();
-					Scanline[] scans = points.GetScans ();
+					++start.X;
 
-					foreach (Scanline scan in scans)
-						stencil.Invert (scan);
+					if (start.X >= bounds.Right) {
+						++start.Y;
+						start.X = (int) bounds.X;
 
-					points.TranslatePointsInPlace (translateX, translateY);
-					polygons.Add (points);
+						if (start.Y >= bounds.Bottom)
+							break;
+					}
 				}
+
+				if (!startFound)
+					break;
+
+				pts.Clear ();
+
+				PointI last = new (start.X, start.Y + 1);
+				PointI curr = new (start.X, start.Y);
+				PointI next = curr;
+				PointI left = new ();
+				PointI right = new ();
+
+				// trace island outline
+				while (true) {
+					left.X = ((curr.X - last.X) + (curr.Y - last.Y) + 2) / 2 + curr.X - 1;
+					left.Y = ((curr.Y - last.Y) - (curr.X - last.X) + 2) / 2 + curr.Y - 1;
+
+					right.X = ((curr.X - last.X) - (curr.Y - last.Y) + 2) / 2 + curr.X - 1;
+					right.Y = ((curr.Y - last.Y) + (curr.X - last.X) + 2) / 2 + curr.Y - 1;
+
+					if (bounds.ContainsPoint (left.X, left.Y) && stencil[left]) {
+						// go left
+						next.X += curr.Y - last.Y;
+						next.Y -= curr.X - last.X;
+					} else if (bounds.ContainsPoint (right.X, right.Y) && stencil[right]) {
+						// go straight
+						next.X += curr.X - last.X;
+						next.Y += curr.Y - last.Y;
+					} else {
+						// turn right
+						next.X -= curr.Y - last.Y;
+						next.Y += curr.X - last.X;
+					}
+
+					if (Math.Sign (next.X - curr.X) != Math.Sign (curr.X - last.X) ||
+					    Math.Sign (next.Y - curr.Y) != Math.Sign (curr.Y - last.Y)) {
+						pts.Add (curr);
+						++count;
+					}
+
+					last = curr;
+					curr = next;
+
+					if (next.X == start.X && next.Y == start.Y)
+						break;
+				}
+
+				PointI[] points = pts.ToArray ();
+				Scanline[] scans = points.GetScans ();
+
+				foreach (Scanline scan in scans)
+					stencil.Invert (scan);
+
+				points.TranslatePointsInPlace (translateX, translateY);
+				polygons.Add (points);
 			}
 
 			return polygons.ToArray ();

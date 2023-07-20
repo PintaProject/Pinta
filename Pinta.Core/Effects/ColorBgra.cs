@@ -373,9 +373,8 @@ namespace Pinta.Core
 		public static ColorBgra BlendColors4W16IP (in ColorBgra c1, uint w1, in ColorBgra c2, uint w2, in ColorBgra c3, uint w3, in ColorBgra c4, uint w4)
 		{
 #if DEBUG
-			if ((w1 + w2 + w3 + w4) != 65536) {
-				throw new ArgumentOutOfRangeException ("w1 + w2 + w3 + w4 must equal 65536!");
-			}
+			if ((w1 + w2 + w3 + w4) != 65536)
+				throw new ArgumentException ($"{nameof(w1)} + {nameof(w2)} + {nameof(w3)} + {nameof(w4)} must equal 65536!");
 #endif
 
 			const uint ww = 32768;

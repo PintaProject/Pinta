@@ -82,24 +82,24 @@ namespace Pinta.Core
 		public class BlendConstant
 		    : UnaryPixelOp
 		{
-			private ColorBgra blendColor;
+			private ColorBgra blend_color;
 
 			public override ColorBgra Apply (in ColorBgra color)
 			{
-				int a = blendColor.A;
+				int a = blend_color.A;
 				int invA = 255 - a;
 
-				int r = ((color.R * invA) + (blendColor.R * a)) / 256;
-				int g = ((color.G * invA) + (blendColor.G * a)) / 256;
-				int b = ((color.B * invA) + (blendColor.B * a)) / 256;
-				byte a2 = ComputeAlpha (color.A, blendColor.A);
+				int r = ((color.R * invA) + (blend_color.R * a)) / 256;
+				int g = ((color.G * invA) + (blend_color.G * a)) / 256;
+				int b = ((color.B * invA) + (blend_color.B * a)) / 256;
+				byte a2 = ComputeAlpha (color.A, blend_color.A);
 
 				return ColorBgra.FromBgra ((byte) b, (byte) g, (byte) r, a2);
 			}
 
 			public BlendConstant (ColorBgra blendColor)
 			{
-				this.blendColor = blendColor;
+				this.blend_color = blendColor;
 			}
 		}
 
@@ -112,12 +112,12 @@ namespace Pinta.Core
 		    : UnaryPixelOp
 		{
 			private readonly int channel;
-			private readonly byte setValue;
+			private readonly byte set_value;
 
 			public override ColorBgra Apply (in ColorBgra color)
 			{
 				ColorBgra result = color;
-				result[channel] = setValue;
+				result[channel] = set_value;
 				return color;
 			}
 
@@ -125,20 +125,20 @@ namespace Pinta.Core
 			{
 				for (int i = 0; i < src.Length; ++i) {
 					dst[i] = src[i];
-					dst[i][channel] = setValue;
+					dst[i][channel] = set_value;
 				}
 			}
 
 			public override void Apply (Span<ColorBgra> dst)
 			{
 				for (int i = 0; i < dst.Length; ++i)
-					dst[i][channel] = setValue;
+					dst[i][channel] = set_value;
 			}
 
 			public SetChannel (int channel, byte setValue)
 			{
 				this.channel = channel;
-				this.setValue = setValue;
+				this.set_value = setValue;
 			}
 		}
 
@@ -153,28 +153,28 @@ namespace Pinta.Core
 		public class SetAlphaChannel
 		    : UnaryPixelOp
 		{
-			private readonly UInt32 addValue;
+			private readonly UInt32 add_value;
 
 			public override ColorBgra Apply (in ColorBgra color)
 			{
-				return ColorBgra.FromUInt32 ((color.Bgra & 0x00ffffff) + addValue);
+				return ColorBgra.FromUInt32 ((color.Bgra & 0x00ffffff) + add_value);
 			}
 
 			public override void Apply (Span<ColorBgra> dst, ReadOnlySpan<ColorBgra> src)
 			{
 				for (int i = 0; i < src.Length; ++i)
-					dst[i].Bgra = (src[i].Bgra & 0x00ffffff) + addValue;
+					dst[i].Bgra = (src[i].Bgra & 0x00ffffff) + add_value;
 			}
 
 			public override void Apply (Span<ColorBgra> dst)
 			{
 				for (int i = 0; i < dst.Length; ++i)
-					dst[i].Bgra = (dst[i].Bgra & 0x00ffffff) + addValue;
+					dst[i].Bgra = (dst[i].Bgra & 0x00ffffff) + add_value;
 			}
 
 			public SetAlphaChannel (byte alphaValue)
 			{
-				addValue = (uint) alphaValue << 24;
+				add_value = (uint) alphaValue << 24;
 			}
 		}
 
@@ -227,12 +227,12 @@ namespace Pinta.Core
 		    : UnaryPixelOp
 		{
 			private readonly int tolerance;
-			private readonly double setSaturation;
+			private readonly double set_saturation;
 
 			public RedEyeRemove (int tol, int sat)
 			{
 				tolerance = tol;
-				setSaturation = (double) sat / 100;
+				set_saturation = (double) sat / 100;
 			}
 
 			public override ColorBgra Apply (in ColorBgra color)
@@ -246,7 +246,7 @@ namespace Pinta.Core
 				// If it is within tolerance, and the saturation is high
 				if ((difference > tolerance) && (saturation > 100)) {
 					double i = 255.0 * color.GetIntensity ();
-					byte ib = (byte) (i * setSaturation); // adjust the red color for user inputted saturation
+					byte ib = (byte) (i * set_saturation); // adjust the red color for user inputted saturation
 					return ColorBgra.FromBgra ((byte) color.B, (byte) color.G, ib, color.A);
 				} else {
 					return color;
@@ -425,10 +425,10 @@ namespace Pinta.Core
 		    : ChannelCurve,
 		      ICloneable
 		{
-			private ColorBgra colorInLow;
+			private ColorBgra color_in_low;
 			public ColorBgra ColorInLow {
 				get {
-					return colorInLow;
+					return color_in_low;
 				}
 
 				set {
@@ -444,27 +444,27 @@ namespace Pinta.Core
 						value.B = 254;
 					}
 
-					if (colorInHigh.R < value.R + 1) {
-						colorInHigh.R = (byte) (value.R + 1);
+					if (color_in_high.R < value.R + 1) {
+						color_in_high.R = (byte) (value.R + 1);
 					}
 
-					if (colorInHigh.G < value.G + 1) {
-						colorInHigh.G = (byte) (value.R + 1);
+					if (color_in_high.G < value.G + 1) {
+						color_in_high.G = (byte) (value.R + 1);
 					}
 
-					if (colorInHigh.B < value.B + 1) {
-						colorInHigh.B = (byte) (value.R + 1);
+					if (color_in_high.B < value.B + 1) {
+						color_in_high.B = (byte) (value.R + 1);
 					}
 
-					colorInLow = value;
+					color_in_low = value;
 					UpdateLookupTable ();
 				}
 			}
 
-			private ColorBgra colorInHigh;
+			private ColorBgra color_in_high;
 			public ColorBgra ColorInHigh {
 				get {
-					return colorInHigh;
+					return color_in_high;
 				}
 
 				set {
@@ -480,27 +480,27 @@ namespace Pinta.Core
 						value.B = 1;
 					}
 
-					if (colorInLow.R > value.R - 1) {
-						colorInLow.R = (byte) (value.R - 1);
+					if (color_in_low.R > value.R - 1) {
+						color_in_low.R = (byte) (value.R - 1);
 					}
 
-					if (colorInLow.G > value.G - 1) {
-						colorInLow.G = (byte) (value.R - 1);
+					if (color_in_low.G > value.G - 1) {
+						color_in_low.G = (byte) (value.R - 1);
 					}
 
-					if (colorInLow.B > value.B - 1) {
-						colorInLow.B = (byte) (value.R - 1);
+					if (color_in_low.B > value.B - 1) {
+						color_in_low.B = (byte) (value.R - 1);
 					}
 
-					colorInHigh = value;
+					color_in_high = value;
 					UpdateLookupTable ();
 				}
 			}
 
-			private ColorBgra colorOutLow;
+			private ColorBgra color_out_low;
 			public ColorBgra ColorOutLow {
 				get {
-					return colorOutLow;
+					return color_out_low;
 				}
 
 				set {
@@ -516,27 +516,27 @@ namespace Pinta.Core
 						value.B = 254;
 					}
 
-					if (colorOutHigh.R < value.R + 1) {
-						colorOutHigh.R = (byte) (value.R + 1);
+					if (color_out_high.R < value.R + 1) {
+						color_out_high.R = (byte) (value.R + 1);
 					}
 
-					if (colorOutHigh.G < value.G + 1) {
-						colorOutHigh.G = (byte) (value.G + 1);
+					if (color_out_high.G < value.G + 1) {
+						color_out_high.G = (byte) (value.G + 1);
 					}
 
-					if (colorOutHigh.B < value.B + 1) {
-						colorOutHigh.B = (byte) (value.B + 1);
+					if (color_out_high.B < value.B + 1) {
+						color_out_high.B = (byte) (value.B + 1);
 					}
 
-					colorOutLow = value;
+					color_out_low = value;
 					UpdateLookupTable ();
 				}
 			}
 
-			private ColorBgra colorOutHigh;
+			private ColorBgra color_out_high;
 			public ColorBgra ColorOutHigh {
 				get {
-					return colorOutHigh;
+					return color_out_high;
 				}
 
 				set {
@@ -552,19 +552,19 @@ namespace Pinta.Core
 						value.B = 1;
 					}
 
-					if (colorOutLow.R > value.R - 1) {
-						colorOutLow.R = (byte) (value.R - 1);
+					if (color_out_low.R > value.R - 1) {
+						color_out_low.R = (byte) (value.R - 1);
 					}
 
-					if (colorOutLow.G > value.G - 1) {
-						colorOutLow.G = (byte) (value.G - 1);
+					if (color_out_low.G > value.G - 1) {
+						color_out_low.G = (byte) (value.G - 1);
 					}
 
-					if (colorOutLow.B > value.B - 1) {
-						colorOutLow.B = (byte) (value.B - 1);
+					if (color_out_low.B > value.B - 1) {
+						color_out_low.B = (byte) (value.B - 1);
 					}
 
-					colorOutHigh = value;
+					color_out_high = value;
 					UpdateLookupTable ();
 				}
 			}
@@ -609,8 +609,8 @@ namespace Pinta.Core
 			private void UpdateLookupTable ()
 			{
 				for (int i = 0; i < 3; i++) {
-					if (colorOutHigh[i] < colorOutLow[i] ||
-					    colorInHigh[i] <= colorInLow[i] ||
+					if (color_out_high[i] < color_out_low[i] ||
+					    color_in_high[i] <= color_in_low[i] ||
 					    gamma[i] < 0) {
 						isValid = false;
 						return;
@@ -636,14 +636,13 @@ namespace Pinta.Core
 
 			public Level (ColorBgra in_lo, ColorBgra in_hi, float[] gamma, ColorBgra out_lo, ColorBgra out_hi)
 			{
-				colorInLow = in_lo;
-				colorInHigh = in_hi;
-				colorOutLow = out_lo;
-				colorOutHigh = out_hi;
+				color_in_low = in_lo;
+				color_in_high = in_hi;
+				color_out_low = out_lo;
+				color_out_high = out_hi;
 
-				if (gamma.Length != 3) {
-					throw new ArgumentException ("gamma", "gamma must be a float[3]");
-				}
+				if (gamma.Length != 3)
+					throw new ArgumentException ($"{nameof(gamma)} must be a float[3]", nameof(gamma));
 
 				this.gamma = gamma;
 				UpdateLookupTable ();
@@ -655,15 +654,15 @@ namespace Pinta.Core
 				float[] input = new float[] { b, g, r };
 
 				for (int i = 0; i < 3; i++) {
-					float v = (input[i] - colorInLow[i]);
+					float v = (input[i] - color_in_low[i]);
 
 					if (v < 0) {
-						ret[i] = colorOutLow[i];
-					} else if (v + colorInLow[i] >= colorInHigh[i]) {
-						ret[i] = colorOutHigh[i];
+						ret[i] = color_out_low[i];
+					} else if (v + color_in_low[i] >= color_in_high[i]) {
+						ret[i] = color_out_high[i];
 					} else {
 						ret[i] = (byte) Utility.Clamp (
-						    colorOutLow[i] + (colorOutHigh[i] - colorOutLow[i]) * Math.Pow (v / (colorInHigh[i] - colorInLow[i]), gamma[i]),
+						    color_out_low[i] + (color_out_high[i] - color_out_low[i]) * Math.Pow (v / (color_in_high[i] - color_in_low[i]), gamma[i]),
 						    0.0f,
 						    255.0f);
 					}
@@ -674,30 +673,28 @@ namespace Pinta.Core
 
 			public void UnApply (ColorBgra after, float[] beforeOut, float[] slopesOut)
 			{
-				if (beforeOut.Length != 3) {
-					throw new ArgumentException ("before must be a float[3]", "before");
-				}
+				if (beforeOut.Length != 3)
+					throw new ArgumentException ($"{nameof(beforeOut)} must be a float[3]", nameof(beforeOut));
 
-				if (slopesOut.Length != 3) {
-					throw new ArgumentException ("slopes must be a float[3]", "slopes");
-				}
+				if (slopesOut.Length != 3)
+					throw new ArgumentException ($"{nameof(slopesOut)} must be a float[3]", nameof(slopesOut));
 
 				for (int i = 0; i < 3; i++) {
-					beforeOut[i] = colorInLow[i] + (colorInHigh[i] - colorInLow[i]) *
-					    (float) Math.Pow ((float) (after[i] - colorOutLow[i]) / (colorOutHigh[i] - colorOutLow[i]), 1 / gamma[i]);
 
-					slopesOut[i] = (float) (colorInHigh[i] - colorInLow[i]) / ((colorOutHigh[i] - colorOutLow[i]) * gamma[i]) *
-					    (float) Math.Pow ((float) (after[i] - colorOutLow[i]) / (colorOutHigh[i] - colorOutLow[i]), 1 / gamma[i] - 1);
+					beforeOut[i] = color_in_low[i] + (color_in_high[i] - color_in_low[i]) *
+					    (float) Math.Pow ((float) (after[i] - color_out_low[i]) / (color_out_high[i] - color_out_low[i]), 1 / gamma[i]);
 
-					if (float.IsInfinity (slopesOut[i]) || float.IsNaN (slopesOut[i])) {
+					slopesOut[i] = (float) (color_in_high[i] - color_in_low[i]) / ((color_out_high[i] - color_out_low[i]) * gamma[i]) *
+					    (float) Math.Pow ((float) (after[i] - color_out_low[i]) / (color_out_high[i] - color_out_low[i]), 1 / gamma[i] - 1);
+
+					if (float.IsInfinity (slopesOut[i]) || float.IsNaN (slopesOut[i]))
 						slopesOut[i] = 0;
-					}
 				}
 			}
 
 			public object Clone ()
 			{
-				Level copy = new Level (colorInLow, colorInHigh, (float[]) gamma.Clone (), colorOutLow, colorOutHigh);
+				Level copy = new Level (color_in_low, color_in_high, (float[]) gamma.Clone (), color_out_low, color_out_high);
 
 				copy.CurveB = (byte[]) this.CurveB.Clone ();
 				copy.CurveG = (byte[]) this.CurveG.Clone ();
@@ -711,22 +708,22 @@ namespace Pinta.Core
 		public class HueSaturationLightness
 		    : UnaryPixelOp
 		{
-			private readonly int hueDelta;
-			private readonly int satFactor;
-			private readonly UnaryPixelOp blendOp;
+			private readonly int hue_delta;
+			private readonly int sat_factor;
+			private readonly UnaryPixelOp blend_op;
 
 			public HueSaturationLightness (int hueDelta, int satDelta, int lightness)
 			{
-				this.hueDelta = hueDelta;
-				this.satFactor = (satDelta * 1024) / 100;
+				this.hue_delta = hueDelta;
+				this.sat_factor = (satDelta * 1024) / 100;
 
 				if (lightness == 0) {
-					blendOp = new UnaryPixelOps.Identity ();
+					blend_op = new UnaryPixelOps.Identity ();
 				} else if (lightness > 0) {
-					blendOp = new UnaryPixelOps.BlendConstant (ColorBgra.FromBgra (255, 255, 255, (byte) ((lightness * 255) / 100)));
+					blend_op = new UnaryPixelOps.BlendConstant (ColorBgra.FromBgra (255, 255, 255, (byte) ((lightness * 255) / 100)));
 				} else // if (lightness < 0)
 				  {
-					blendOp = new UnaryPixelOps.BlendConstant (ColorBgra.FromBgra (0, 0, 0, (byte) ((-lightness * 255) / 100)));
+					blend_op = new UnaryPixelOps.BlendConstant (ColorBgra.FromBgra (0, 0, 0, (byte) ((-lightness * 255) / 100)));
 				}
 			}
 
@@ -735,14 +732,14 @@ namespace Pinta.Core
 				//adjust saturation
 				ColorBgra color = src_color;
 				byte intensity = color.GetIntensityByte ();
-				color.R = Utility.ClampToByte ((intensity * 1024 + (color.R - intensity) * satFactor) >> 10);
-				color.G = Utility.ClampToByte ((intensity * 1024 + (color.G - intensity) * satFactor) >> 10);
-				color.B = Utility.ClampToByte ((intensity * 1024 + (color.B - intensity) * satFactor) >> 10);
+				color.R = Utility.ClampToByte ((intensity * 1024 + (color.R - intensity) * sat_factor) >> 10);
+				color.G = Utility.ClampToByte ((intensity * 1024 + (color.G - intensity) * sat_factor) >> 10);
+				color.B = Utility.ClampToByte ((intensity * 1024 + (color.B - intensity) * sat_factor) >> 10);
 
 				HsvColor hsvColor = (new RgbColor (color.R, color.G, color.B)).ToHsv ();
 				int hue = hsvColor.Hue;
 
-				hue += hueDelta;
+				hue += hue_delta;
 
 				while (hue < 0) {
 					hue += 360;
@@ -756,7 +753,7 @@ namespace Pinta.Core
 
 				RgbColor rgbColor = hsvColor.ToRgb ();
 				ColorBgra newColor = ColorBgra.FromBgr ((byte) rgbColor.Blue, (byte) rgbColor.Green, (byte) rgbColor.Red);
-				newColor = blendOp.Apply (newColor);
+				newColor = blend_op.Apply (newColor);
 				newColor.A = color.A;
 
 				return newColor;
@@ -768,15 +765,15 @@ namespace Pinta.Core
 		public class PosterizePixel
 	    : UnaryPixelOp
 		{
-			private readonly byte[] redLevels;
-			private readonly byte[] greenLevels;
-			private readonly byte[] blueLevels;
+			private readonly byte[] red_levels;
+			private readonly byte[] green_levels;
+			private readonly byte[] blue_levels;
 
 			public PosterizePixel (int red, int green, int blue)
 			{
-				this.redLevels = CalcLevels (red);
-				this.greenLevels = CalcLevels (green);
-				this.blueLevels = CalcLevels (blue);
+				this.red_levels = CalcLevels (red);
+				this.green_levels = CalcLevels (green);
+				this.blue_levels = CalcLevels (blue);
 			}
 
 			private static byte[] CalcLevels (int levelCount)
@@ -808,7 +805,7 @@ namespace Pinta.Core
 
 			public override ColorBgra Apply (in ColorBgra color)
 			{
-				return ColorBgra.FromBgra (blueLevels[color.B], greenLevels[color.G], redLevels[color.R], color.A);
+				return ColorBgra.FromBgra (blue_levels[color.B], green_levels[color.G], red_levels[color.R], color.A);
 			}
 
 			public override void Apply (Span<ColorBgra> dst, ReadOnlySpan<ColorBgra> src)
@@ -816,9 +813,9 @@ namespace Pinta.Core
 				for (int i = 0; i < src.Length; ++i) {
 					ref ColorBgra d = ref dst[i];
 					ref readonly ColorBgra s = ref src[i];
-					d.B = blueLevels[s.B];
-					d.G = greenLevels[s.G];
-					d.R = redLevels[s.R];
+					d.B = blue_levels[s.B];
+					d.G = green_levels[s.G];
+					d.R = red_levels[s.R];
 					d.A = s.A;
 				}
 			}
@@ -827,9 +824,9 @@ namespace Pinta.Core
 			{
 				for (int i = 0; i < dst.Length; ++i) {
 					ref ColorBgra d = ref dst[i];
-					d.B = blueLevels[d.B];
-					d.G = greenLevels[d.G];
-					d.R = redLevels[d.R];
+					d.B = blue_levels[d.B];
+					d.G = green_levels[d.G];
+					d.R = red_levels[d.R];
 
 				}
 			}
