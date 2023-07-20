@@ -49,14 +49,13 @@ namespace Pinta.Core
 
 					++start.X;
 
-					if (start.X < bounds.Right)
-						continue;
+					if (start.X >= bounds.Right) {
+						++start.Y;
+						start.X = (int) bounds.X;
 
-					++start.Y;
-					start.X = (int) bounds.X;
-
-					if (start.Y >= bounds.Bottom)
-						break;
+						if (start.Y >= bounds.Bottom)
+							break;
+					}
 				}
 
 				if (!startFound)
