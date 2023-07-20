@@ -293,7 +293,7 @@ namespace Pinta.Core
 			}
 
 			if (sampleCount != quality * quality) {
-				throw new ArgumentOutOfRangeException ("sampleCount != (quality * quality)");
+				throw new ArgumentException ($"{nameof(sampleCount)} != ({nameof(quality)} * {nameof(quality)})");
 			}
 
 			if (sampleCount == 1) {

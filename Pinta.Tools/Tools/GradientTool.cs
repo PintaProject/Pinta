@@ -164,7 +164,7 @@ namespace Pinta.Tools
 				GradientType.Radial => new GradientRenderers.Radial (alpha_only, op),
 				GradientType.Diamond => new GradientRenderers.LinearDiamond (alpha_only, op),
 				GradientType.Conical => new GradientRenderers.Conical (alpha_only, op),
-				_ => throw new ArgumentOutOfRangeException ("Unknown gradient type."),
+				_ => throw new InvalidOperationException ("Unknown gradient type."),
 			};
 		}
 
