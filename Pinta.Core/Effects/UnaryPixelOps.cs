@@ -82,24 +82,24 @@ namespace Pinta.Core
 		public class BlendConstant
 		    : UnaryPixelOp
 		{
-			private ColorBgra blendColor;
+			private ColorBgra blend_color;
 
 			public override ColorBgra Apply (in ColorBgra color)
 			{
-				int a = blendColor.A;
+				int a = blend_color.A;
 				int invA = 255 - a;
 
-				int r = ((color.R * invA) + (blendColor.R * a)) / 256;
-				int g = ((color.G * invA) + (blendColor.G * a)) / 256;
-				int b = ((color.B * invA) + (blendColor.B * a)) / 256;
-				byte a2 = ComputeAlpha (color.A, blendColor.A);
+				int r = ((color.R * invA) + (blend_color.R * a)) / 256;
+				int g = ((color.G * invA) + (blend_color.G * a)) / 256;
+				int b = ((color.B * invA) + (blend_color.B * a)) / 256;
+				byte a2 = ComputeAlpha (color.A, blend_color.A);
 
 				return ColorBgra.FromBgra ((byte) b, (byte) g, (byte) r, a2);
 			}
 
 			public BlendConstant (ColorBgra blendColor)
 			{
-				this.blendColor = blendColor;
+				this.blend_color = blendColor;
 			}
 		}
 
@@ -112,12 +112,12 @@ namespace Pinta.Core
 		    : UnaryPixelOp
 		{
 			private readonly int channel;
-			private readonly byte setValue;
+			private readonly byte set_value;
 
 			public override ColorBgra Apply (in ColorBgra color)
 			{
 				ColorBgra result = color;
-				result[channel] = setValue;
+				result[channel] = set_value;
 				return color;
 			}
 
@@ -125,20 +125,20 @@ namespace Pinta.Core
 			{
 				for (int i = 0; i < src.Length; ++i) {
 					dst[i] = src[i];
-					dst[i][channel] = setValue;
+					dst[i][channel] = set_value;
 				}
 			}
 
 			public override void Apply (Span<ColorBgra> dst)
 			{
 				for (int i = 0; i < dst.Length; ++i)
-					dst[i][channel] = setValue;
+					dst[i][channel] = set_value;
 			}
 
 			public SetChannel (int channel, byte setValue)
 			{
 				this.channel = channel;
-				this.setValue = setValue;
+				this.set_value = setValue;
 			}
 		}
 
@@ -153,28 +153,28 @@ namespace Pinta.Core
 		public class SetAlphaChannel
 		    : UnaryPixelOp
 		{
-			private readonly UInt32 addValue;
+			private readonly UInt32 add_value;
 
 			public override ColorBgra Apply (in ColorBgra color)
 			{
-				return ColorBgra.FromUInt32 ((color.Bgra & 0x00ffffff) + addValue);
+				return ColorBgra.FromUInt32 ((color.Bgra & 0x00ffffff) + add_value);
 			}
 
 			public override void Apply (Span<ColorBgra> dst, ReadOnlySpan<ColorBgra> src)
 			{
 				for (int i = 0; i < src.Length; ++i)
-					dst[i].Bgra = (src[i].Bgra & 0x00ffffff) + addValue;
+					dst[i].Bgra = (src[i].Bgra & 0x00ffffff) + add_value;
 			}
 
 			public override void Apply (Span<ColorBgra> dst)
 			{
 				for (int i = 0; i < dst.Length; ++i)
-					dst[i].Bgra = (dst[i].Bgra & 0x00ffffff) + addValue;
+					dst[i].Bgra = (dst[i].Bgra & 0x00ffffff) + add_value;
 			}
 
 			public SetAlphaChannel (byte alphaValue)
 			{
-				addValue = (uint) alphaValue << 24;
+				add_value = (uint) alphaValue << 24;
 			}
 		}
 
@@ -227,12 +227,12 @@ namespace Pinta.Core
 		    : UnaryPixelOp
 		{
 			private readonly int tolerance;
-			private readonly double setSaturation;
+			private readonly double set_saturation;
 
 			public RedEyeRemove (int tol, int sat)
 			{
 				tolerance = tol;
-				setSaturation = (double) sat / 100;
+				set_saturation = (double) sat / 100;
 			}
 
 			public override ColorBgra Apply (in ColorBgra color)
@@ -246,7 +246,7 @@ namespace Pinta.Core
 				// If it is within tolerance, and the saturation is high
 				if ((difference > tolerance) && (saturation > 100)) {
 					double i = 255.0 * color.GetIntensity ();
-					byte ib = (byte) (i * setSaturation); // adjust the red color for user inputted saturation
+					byte ib = (byte) (i * set_saturation); // adjust the red color for user inputted saturation
 					return ColorBgra.FromBgra ((byte) color.B, (byte) color.G, ib, color.A);
 				} else {
 					return color;
