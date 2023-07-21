@@ -36,14 +36,14 @@ namespace Pinta.Effects
 
 	public class CurvesDialog : Gtk.Dialog
 	{
-		private ComboBoxText comboMap;
-		private Label labelPoint;
+		private ComboBoxText combo_map;
+		private Label label_point;
 		private DrawingArea drawing;
-		private CheckButton checkRed;
-		private CheckButton checkGreen;
-		private CheckButton checkBlue;
-		private Button buttonReset;
-		private Label labelTip;
+		private CheckButton check_red;
+		private CheckButton check_green;
+		private CheckButton check_blue;
+		private Button button_reset;
+		private Label label_tip;
 
 		private class ControlPointDrawingInfo
 		{
@@ -80,7 +80,7 @@ namespace Pinta.Effects
 
 		public ColorTransferMode Mode {
 			get {
-				return (comboMap.Active == 0) ?
+				return (combo_map.Active == 0) ?
 						ColorTransferMode.Rgb :
 						ColorTransferMode.Luminosity;
 			}
@@ -100,11 +100,11 @@ namespace Pinta.Effects
 
 			EffectData = effectData;
 
-			comboMap.OnChanged += HandleComboMapChanged;
-			buttonReset.OnClicked += HandleButtonResetClicked;
-			checkRed.OnToggled += HandleCheckToggled;
-			checkGreen.OnToggled += HandleCheckToggled;
-			checkBlue.OnToggled += HandleCheckToggled;
+			combo_map.OnChanged += HandleComboMapChanged;
+			button_reset.OnClicked += HandleButtonResetClicked;
+			check_red.OnToggled += HandleCheckToggled;
+			check_green.OnToggled += HandleCheckToggled;
+			check_blue.OnToggled += HandleCheckToggled;
 
 			drawing.SetDrawFunc ((area, context, width, height) => HandleDrawingDrawnEvent (context));
 
@@ -165,7 +165,7 @@ namespace Pinta.Effects
 				UpdateLivePreview ("Mode");
 
 			bool visible = (Mode == ColorTransferMode.Rgb);
-			checkRed.Visible = checkGreen.Visible = checkBlue.Visible = visible;
+			check_red.Visible = check_green.Visible = check_blue.Visible = visible;
 
 			InvalidateDrawing ();
 		}
@@ -181,13 +181,13 @@ namespace Pinta.Effects
 			if (Mode == ColorTransferMode.Luminosity)
 				yield return ControlPoints[0];
 			else {
-				if (checkRed.Active)
+				if (check_red.Active)
 					yield return ControlPoints[0];
 
-				if (checkGreen.Active)
+				if (check_green.Active)
 					yield return ControlPoints[1];
 
-				if (checkBlue.Active)
+				if (check_blue.Active)
 					yield return ControlPoints[2];
 			}
 		}
@@ -281,9 +281,9 @@ namespace Pinta.Effects
 				g.LineTo (size, y);
 				g.Stroke ();
 
-				this.labelPoint.SetText ($"({x}, {y})");
+				this.label_point.SetText ($"({x}, {y})");
 			} else
-				this.labelPoint.SetText (string.Empty);
+				this.label_point.SetText (string.Empty);
 		}
 
 		private void DrawGrid (Context g)
@@ -322,15 +322,15 @@ namespace Pinta.Effects
 			} else {
 				yield return new ControlPointDrawingInfo () {
 					Color = new Color (0.9, 0, 0),
-					IsActive = checkRed.Active
+					IsActive = check_red.Active
 				};
 				yield return new ControlPointDrawingInfo () {
 					Color = new Color (0, 0.9, 0),
-					IsActive = checkGreen.Active
+					IsActive = check_green.Active
 				};
 				yield return new ControlPointDrawingInfo () {
 					Color = new Color (0, 0, 0.9),
-					IsActive = checkBlue.Active
+					IsActive = check_blue.Active
 				};
 			}
 		}
@@ -425,7 +425,7 @@ namespace Pinta.Effects
 			DrawControlPoints (g);
 		}
 
-		[MemberNotNull (nameof (comboMap), nameof (labelPoint), nameof (labelTip), nameof (checkRed), nameof (checkGreen), nameof (checkBlue), nameof (buttonReset), nameof (drawing))]
+		[MemberNotNull (nameof (combo_map), nameof (label_point), nameof (label_tip), nameof (check_red), nameof (check_green), nameof (check_blue), nameof (button_reset), nameof (drawing))]
 		private void Build ()
 		{
 			Resizable = false;
@@ -439,16 +439,16 @@ namespace Pinta.Effects
 			hbox1.SetOrientation (Orientation.Horizontal);
 			hbox1.Append (Label.New (Translations.GetString ("Transfer Map")));
 
-			comboMap = new ComboBoxText ();
-			comboMap.AppendText (Translations.GetString ("RGB"));
-			comboMap.AppendText (Translations.GetString ("Luminosity"));
-			comboMap.Active = 1;
-			hbox1.Append (comboMap);
+			combo_map = new ComboBoxText ();
+			combo_map.AppendText (Translations.GetString ("RGB"));
+			combo_map.AppendText (Translations.GetString ("Luminosity"));
+			combo_map.Active = 1;
+			hbox1.Append (combo_map);
 
-			labelPoint = Label.New ("(256, 256)");
-			labelPoint.Hexpand = true;
-			labelPoint.Halign = Align.End;
-			hbox1.Append (labelPoint);
+			label_point = Label.New ("(256, 256)");
+			label_point.Hexpand = true;
+			label_point.Halign = Align.End;
+			hbox1.Append (label_point);
 			content_area.Append (hbox1);
 
 			drawing = new DrawingArea () {
@@ -461,29 +461,29 @@ namespace Pinta.Effects
 
 			var hbox2 = new Box ();
 			hbox2.SetOrientation (Orientation.Horizontal);
-			checkRed = new CheckButton () { Label = Translations.GetString ("Red  "), Active = true };
-			checkGreen = new CheckButton () { Label = Translations.GetString ("Green"), Active = true };
-			checkBlue = new CheckButton () { Label = Translations.GetString ("Blue "), Active = true };
-			hbox2.Prepend (checkRed);
-			hbox2.Prepend (checkGreen);
-			hbox2.Prepend (checkBlue);
+			check_red = new CheckButton () { Label = Translations.GetString ("Red  "), Active = true };
+			check_green = new CheckButton () { Label = Translations.GetString ("Green"), Active = true };
+			check_blue = new CheckButton () { Label = Translations.GetString ("Blue "), Active = true };
+			hbox2.Prepend (check_red);
+			hbox2.Prepend (check_green);
+			hbox2.Prepend (check_blue);
 
-			buttonReset = new Button () {
+			button_reset = new Button () {
 				WidthRequest = 81,
 				HeightRequest = 30,
 				Label = Translations.GetString ("Reset"),
 				Halign = Align.End,
 				Hexpand = true
 			};
-			hbox2.Append (buttonReset);
+			hbox2.Append (button_reset);
 			content_area.Append (hbox2);
 
-			labelTip = Label.New (Translations.GetString ("Tip: Right-click to remove control points."));
-			content_area.Append (labelTip);
+			label_tip = Label.New (Translations.GetString ("Tip: Right-click to remove control points."));
+			content_area.Append (label_tip);
 
-			checkRed.Hide ();
-			checkGreen.Hide ();
-			checkBlue.Hide ();
+			check_red.Hide ();
+			check_green.Hide ();
+			check_blue.Hide ();
 		}
 	}
 }

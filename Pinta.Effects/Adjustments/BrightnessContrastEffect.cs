@@ -7,7 +7,6 @@
 // Ported to Pinta by: Krzysztof Marecki <marecki.krzysztof@gmail.com>         //
 /////////////////////////////////////////////////////////////////////////////////
 
-using System;
 using Cairo;
 using Pinta.Core;
 using Pinta.Gui.Widgets;
@@ -18,7 +17,7 @@ namespace Pinta.Effects
 	{
 		private int multiply;
 		private int divide;
-		private byte[]? rgbTable;
+		private byte[]? rgb_table;
 		private bool table_calculated;
 
 		public override string Icon {
@@ -75,7 +74,7 @@ namespace Pinta.Effects
 					if (divide == 0) {
 						for (int i = 0; i < src_row.Length; ++i) {
 							ref readonly ColorBgra col = ref src_row[i];
-							uint c = rgbTable![col.GetIntensityByte ()]; // NRT - Set in Calculate
+							uint c = rgb_table![col.GetIntensityByte ()]; // NRT - Set in Calculate
 							dst_row[i].Bgra = (col.Bgra & 0xff000000) | c | (c << 8) | (c << 16);
 						}
 					} else {
@@ -84,9 +83,9 @@ namespace Pinta.Effects
 							int intensity = col.GetIntensityByte ();
 							int shiftIndex = intensity * 256;
 
-							col.R = rgbTable![shiftIndex + col.R];
-							col.G = rgbTable[shiftIndex + col.G];
-							col.B = rgbTable[shiftIndex + col.B];
+							col.R = rgb_table![shiftIndex + col.R];
+							col.G = rgb_table[shiftIndex + col.G];
+							col.B = rgb_table[shiftIndex + col.B];
 
 							dst_row[i] = col;
 						}
@@ -108,15 +107,15 @@ namespace Pinta.Effects
 				divide = 1;
 			}
 
-			if (rgbTable == null)
-				rgbTable = new byte[65536];
+			if (rgb_table == null)
+				rgb_table = new byte[65536];
 
 			if (divide == 0) {
 				for (int intensity = 0; intensity < 256; intensity++) {
 					if (intensity + Data.Brightness < 128)
-						rgbTable[intensity] = 0;
+						rgb_table[intensity] = 0;
 					else
-						rgbTable[intensity] = 255;
+						rgb_table[intensity] = 255;
 				}
 			} else if (divide == 100) {
 				for (int intensity = 0; intensity < 256; intensity++) {
@@ -124,7 +123,7 @@ namespace Pinta.Effects
 
 					for (int col = 0; col < 256; ++col) {
 						int index = (intensity * 256) + col;
-						rgbTable[index] = Utility.ClampToByte (col + shift);
+						rgb_table[index] = Utility.ClampToByte (col + shift);
 					}
 				}
 			} else {
@@ -133,7 +132,7 @@ namespace Pinta.Effects
 
 					for (int col = 0; col < 256; ++col) {
 						int index = (intensity * 256) + col;
-						rgbTable[index] = Utility.ClampToByte (col + shift);
+						rgb_table[index] = Utility.ClampToByte (col + shift);
 					}
 				}
 			}

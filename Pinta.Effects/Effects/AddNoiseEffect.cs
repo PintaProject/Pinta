@@ -18,7 +18,7 @@ namespace Pinta.Effects
 	public class AddNoiseEffect : BaseEffect
 	{
 		private int intensity;
-		private int colorSaturation;
+		private int color_saturation;
 		private double coverage;
 
 		public override string Icon => Pinta.Resources.Icons.EffectsNoiseAddNoise;
@@ -54,8 +54,8 @@ namespace Pinta.Effects
 
 		#region Algorithm Code Ported From PDN
 		[ThreadStatic]
-		private static Random threadRand = new Random ();
-		private const int tableSize = 16384;
+		private static Random thread_rand = new Random ();
+		private const int TableSize = 16384;
 		private static int[] lookup;
 
 		private static double NormalCurve (double x, double scale)
@@ -75,34 +75,34 @@ namespace Pinta.Effects
 				sum = 0;
 				scale = (l + r) * 0.5;
 
-				for (int i = 0; i < tableSize; ++i) {
-					sum += NormalCurve (16.0 * ((double) i - tableSize / 2) / tableSize, scale);
+				for (int i = 0; i < TableSize; ++i) {
+					sum += NormalCurve (16.0 * ((double) i - TableSize / 2) / TableSize, scale);
 
 					if (sum > 1000000) {
 						break;
 					}
 				}
 
-				if (sum > tableSize) {
+				if (sum > TableSize) {
 					r = scale;
-				} else if (sum < tableSize) {
+				} else if (sum < TableSize) {
 					l = scale;
 				} else {
 					break;
 				}
 			}
 
-			lookup = new int[tableSize];
+			lookup = new int[TableSize];
 			sum = 0;
 			int roundedSum = 0, lastRoundedSum;
 
-			for (int i = 0; i < tableSize; ++i) {
-				sum += NormalCurve (16.0 * ((double) i - tableSize / 2) / tableSize, scale);
+			for (int i = 0; i < TableSize; ++i) {
+				sum += NormalCurve (16.0 * ((double) i - TableSize / 2) / TableSize, scale);
 				lastRoundedSum = roundedSum;
 				roundedSum = (int) sum;
 
 				for (int j = lastRoundedSum; j < roundedSum; ++j) {
-					lookup[j] = (i - tableSize / 2) * 65536 / tableSize;
+					lookup[j] = (i - TableSize / 2) * 65536 / TableSize;
 				}
 			}
 		}
@@ -110,18 +110,18 @@ namespace Pinta.Effects
 		public override void Render (ImageSurface src, ImageSurface dst, Core.RectangleI[] rois)
 		{
 			this.intensity = Data.Intensity;
-			this.colorSaturation = Data.ColorSaturation;
+			this.color_saturation = Data.ColorSaturation;
 			this.coverage = 0.01 * Data.Coverage;
 
 			int dev = this.intensity * this.intensity / 4;
-			int sat = this.colorSaturation * 4096 / 100;
+			int sat = this.color_saturation * 4096 / 100;
 
-			if (threadRand == null) {
-				threadRand = new Random (unchecked(System.Threading.Thread.CurrentThread.GetHashCode () ^
+			if (thread_rand == null) {
+				thread_rand = new Random (unchecked(System.Threading.Thread.CurrentThread.GetHashCode () ^
 				    unchecked((int) DateTime.Now.Ticks)));
 			}
 
-			Random localRand = threadRand;
+			Random localRand = thread_rand;
 			int[] localLookup = lookup;
 
 			ReadOnlySpan<ColorBgra> src_data = src.GetReadOnlyPixelData ();
@@ -144,9 +144,9 @@ namespace Pinta.Effects
 							int b;
 							int i;
 
-							r = localLookup[localRand.Next (tableSize)];
-							g = localLookup[localRand.Next (tableSize)];
-							b = localLookup[localRand.Next (tableSize)];
+							r = localLookup[localRand.Next (TableSize)];
+							g = localLookup[localRand.Next (TableSize)];
+							b = localLookup[localRand.Next (TableSize)];
 
 							i = (4899 * r + 9618 * g + 1867 * b) >> 14;
 

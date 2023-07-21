@@ -34,20 +34,18 @@ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 THE SOFTWARE. 
 */
 using System;
-using System.Security.Cryptography;
 using Cairo;
 using Pinta.Core;
-using Pinta.Effects;
 using Pinta.Gui.Widgets;
 
 namespace Pinta.Effects
 {
 	public class SoftenPortraitEffect : BaseEffect
 	{
-		private readonly GaussianBlurEffect blurEffect;
-		private readonly BrightnessContrastEffect bacAdjustment;
-		private readonly UnaryPixelOps.Desaturate desaturateOp;
-		private readonly UserBlendOps.OverlayBlendOp overlayOp;
+		private readonly GaussianBlurEffect blur_effect;
+		private readonly BrightnessContrastEffect bac_adjustment;
+		private readonly UnaryPixelOps.Desaturate desaturate_op;
+		private readonly UserBlendOps.OverlayBlendOp overlay_op;
 
 		public override string Icon => Pinta.Resources.Icons.EffectsPhotoSoftenPortrait;
 
@@ -69,10 +67,10 @@ namespace Pinta.Effects
 		{
 			EffectData = new SoftenPortraitData ();
 
-			blurEffect = new GaussianBlurEffect ();
-			bacAdjustment = new BrightnessContrastEffect ();
-			desaturateOp = new UnaryPixelOps.Desaturate ();
-			overlayOp = new UserBlendOps.OverlayBlendOp ();
+			blur_effect = new GaussianBlurEffect ();
+			bac_adjustment = new BrightnessContrastEffect ();
+			desaturate_op = new UnaryPixelOps.Desaturate ();
+			overlay_op = new UserBlendOps.OverlayBlendOp ();
 		}
 
 		public override void LaunchConfiguration ()
@@ -86,8 +84,8 @@ namespace Pinta.Effects
 			float redAdjust = 1.0f + (warmth / 100.0f);
 			float blueAdjust = 1.0f - (warmth / 100.0f);
 
-			this.blurEffect.Render (src, dest, rois);
-			this.bacAdjustment.Render (src, dest, rois);
+			this.blur_effect.Render (src, dest, rois);
+			this.bac_adjustment.Render (src, dest, rois);
 
 			ReadOnlySpan<ColorBgra> src_data = src.GetReadOnlyPixelData ();
 			Span<ColorBgra> dst_data = dest.GetPixelData ();
@@ -99,12 +97,12 @@ namespace Pinta.Effects
 					var dst_row = dst_data.Slice (y * width, width);
 
 					for (int x = roi.Left; x <= roi.Right; ++x) {
-						ColorBgra srcGrey = this.desaturateOp.Apply (src_row[x]);
+						ColorBgra srcGrey = this.desaturate_op.Apply (src_row[x]);
 
 						srcGrey.R = Utility.ClampToByte ((int) ((float) srcGrey.R * redAdjust));
 						srcGrey.B = Utility.ClampToByte ((int) ((float) srcGrey.B * blueAdjust));
 
-						dst_row[x] = this.overlayOp.Apply (srcGrey, dst_row[x]);
+						dst_row[x] = this.overlay_op.Apply (srcGrey, dst_row[x]);
 					}
 				}
 			}

@@ -18,7 +18,7 @@ namespace Pinta.Effects
 	public class CloudsEffect : BaseEffect
 	{
 		// This is so that repetition of the effect with CTRL+F actually shows up differently.
-		private readonly byte instanceSeed = unchecked((byte) DateTime.Now.Ticks);
+		private readonly byte instance_seed = unchecked((byte) DateTime.Now.Ticks);
 		private static readonly object render_lock = new object ();
 
 		public override string Icon => Pinta.Resources.Icons.EffectsRenderClouds;
@@ -171,7 +171,7 @@ namespace Pinta.Effects
 
 			var temp = CairoExtensions.CreateImageSurface (Format.Argb32, roi.Width, roi.Height);
 
-			RenderClouds (temp, roi, Data.Scale, (byte) (Data.Seed ^ instanceSeed), Data.Power / 100.0,
+			RenderClouds (temp, roi, Data.Scale, (byte) (Data.Seed ^ instance_seed), Data.Power / 100.0,
 					PintaCore.Palette.PrimaryColor.ToColorBgra (), PintaCore.Palette.SecondaryColor.ToColorBgra ());
 
 			temp.MarkDirty ();

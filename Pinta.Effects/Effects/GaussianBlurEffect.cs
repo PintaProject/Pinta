@@ -8,7 +8,6 @@
 /////////////////////////////////////////////////////////////////////////////////
 
 using System;
-using System.Security.Cryptography;
 using Cairo;
 using Pinta.Core;
 using Pinta.Gui.Widgets;

@@ -7,21 +7,19 @@
 // Ported to Pinta by: Jonathan Pobst <monkey@jpobst.com>                      //
 /////////////////////////////////////////////////////////////////////////////////
 
-using System;
 using Cairo;
 using Pinta.Core;
-using Pinta.Effects;
 using Pinta.Gui.Widgets;
 
 namespace Pinta.Effects
 {
 	public class PencilSketchEffect : BaseEffect
 	{
-		private readonly GaussianBlurEffect blurEffect;
-		private readonly UnaryPixelOps.Desaturate desaturateOp;
-		private readonly InvertColorsEffect invertEffect;
-		private readonly BrightnessContrastEffect bacAdjustment;
-		private readonly UserBlendOps.ColorDodgeBlendOp colorDodgeOp;
+		private readonly GaussianBlurEffect blur_effect;
+		private readonly UnaryPixelOps.Desaturate desaturate_op;
+		private readonly InvertColorsEffect invert_effect;
+		private readonly BrightnessContrastEffect bac_adjustment;
+		private readonly UserBlendOps.ColorDodgeBlendOp color_dodge_op;
 
 		public override string Icon => Pinta.Resources.Icons.EffectsArtisticPencilSketch;
 
@@ -43,11 +41,11 @@ namespace Pinta.Effects
 		{
 			EffectData = new PencilSketchData ();
 
-			blurEffect = new GaussianBlurEffect ();
-			desaturateOp = new UnaryPixelOps.Desaturate ();
-			invertEffect = new InvertColorsEffect ();
-			bacAdjustment = new BrightnessContrastEffect ();
-			colorDodgeOp = new UserBlendOps.ColorDodgeBlendOp ();
+			blur_effect = new GaussianBlurEffect ();
+			desaturate_op = new UnaryPixelOps.Desaturate ();
+			invert_effect = new InvertColorsEffect ();
+			bac_adjustment = new BrightnessContrastEffect ();
+			color_dodge_op = new UserBlendOps.ColorDodgeBlendOp ();
 		}
 
 		public override void LaunchConfiguration ()
@@ -58,15 +56,15 @@ namespace Pinta.Effects
 		#region Algorithm Code Ported From PDN
 		public override void Render (ImageSurface src, ImageSurface dest, Core.RectangleI[] rois)
 		{
-			bacAdjustment.Data.Brightness = -Data.ColorRange;
-			bacAdjustment.Data.Contrast = -Data.ColorRange;
-			bacAdjustment.Render (src, dest, rois);
+			bac_adjustment.Data.Brightness = -Data.ColorRange;
+			bac_adjustment.Data.Contrast = -Data.ColorRange;
+			bac_adjustment.Render (src, dest, rois);
 
-			blurEffect.Data.Radius = Data.PencilTipSize;
-			blurEffect.Render (src, dest, rois);
+			blur_effect.Data.Radius = Data.PencilTipSize;
+			blur_effect.Render (src, dest, rois);
 
-			invertEffect.Render (dest, dest, rois);
-			desaturateOp.Apply (dest, dest, rois);
+			invert_effect.Render (dest, dest, rois);
+			desaturate_op.Apply (dest, dest, rois);
 
 			var dst_data = dest.GetPixelData ();
 			int dst_width = dest.Width;
@@ -79,8 +77,8 @@ namespace Pinta.Effects
 					var dst_row = dst_data.Slice (y * dst_width, dst_width);
 
 					for (int x = roi.Left; x <= roi.Right; ++x) {
-						ColorBgra srcGrey = desaturateOp.Apply (src_row[x]);
-						dst_row[x] = colorDodgeOp.Apply (srcGrey, dst_row[x]);
+						ColorBgra srcGrey = desaturate_op.Apply (src_row[x]);
+						dst_row[x] = color_dodge_op.Apply (srcGrey, dst_row[x]);
 					}
 				}
 			}

@@ -49,18 +49,18 @@ namespace Pinta.Effects
 			EffectHelper.LaunchSimpleEffectDialog (this);
 		}
 
-		private double defaultRadius = 0;
-		private double defaultRadius2 = 0;
+		private double default_radius = 0;
+		private double default_radius_2 = 0;
 
-		protected double DefaultRadius { get { return this.defaultRadius; } }
-		protected double DefaultRadius2 { get { return this.defaultRadius2; } }
+		protected double DefaultRadius { get { return this.default_radius; } }
+		protected double DefaultRadius2 { get { return this.default_radius_2; } }
 
 		#region Algorithm Code Ported From PDN
 		public override void Render (ImageSurface src, ImageSurface dst, Core.RectangleI[] rois)
 		{
 			var selection = PintaCore.LivePreview.RenderBounds;
-			this.defaultRadius = Math.Min (selection.Width, selection.Height) * 0.5;
-			this.defaultRadius2 = this.defaultRadius * this.defaultRadius;
+			this.default_radius = Math.Min (selection.Width, selection.Height) * 0.5;
+			this.default_radius_2 = this.default_radius * this.default_radius;
 
 			var x_center_offset = selection.Left + (selection.Width * (1.0 + Data.CenterOffset.X) * 0.5);
 			var y_center_offset = selection.Top + (selection.Height * (1.0 + Data.CenterOffset.Y) * 0.5);
