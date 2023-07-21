@@ -1138,7 +1138,7 @@ namespace Pinta.Tools
 					}
 				}
 
-				g.SetDash (new double[] { }, 0.0);
+				g.SetDash (Array.Empty<double> (), 0.0);
 
 				//Draw anything extra (that not every shape has), like arrows.
 				DrawExtras (ref dirty, g, engine);

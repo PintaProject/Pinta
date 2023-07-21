@@ -302,7 +302,7 @@ namespace Pinta.Effects
 			g.LineTo (size - 1, 0);
 			g.Stroke ();
 
-			g.SetDash (new double[] { }, 0);
+			g.SetDash (Array.Empty<double> (), 0);
 		}
 
 		//cpx, cpyx - control point's x and y coordinates
