@@ -7,19 +7,17 @@
 // Ported to Pinta by: Jonathan Pobst <monkey@jpobst.com>                      //
 /////////////////////////////////////////////////////////////////////////////////
 
-using System;
 using Cairo;
 using Pinta.Core;
-using Pinta.Effects;
 using Pinta.Gui.Widgets;
 
 namespace Pinta.Effects
 {
 	public class GlowEffect : BaseEffect
 	{
-		private readonly GaussianBlurEffect blurEffect;
-		private readonly BrightnessContrastEffect contrastEffect;
-		private readonly UserBlendOps.ScreenBlendOp screenBlendOp;
+		private readonly GaussianBlurEffect blur_effect;
+		private readonly BrightnessContrastEffect contrast_effect;
+		private readonly UserBlendOps.ScreenBlendOp screen_blend_op;
 
 		public override string Icon => Pinta.Resources.Icons.EffectsPhotoGlow;
 
@@ -41,9 +39,9 @@ namespace Pinta.Effects
 		{
 			EffectData = new GlowData ();
 
-			blurEffect = new GaussianBlurEffect ();
-			contrastEffect = new BrightnessContrastEffect ();
-			screenBlendOp = new UserBlendOps.ScreenBlendOp ();
+			blur_effect = new GaussianBlurEffect ();
+			contrast_effect = new BrightnessContrastEffect ();
+			screen_blend_op = new UserBlendOps.ScreenBlendOp ();
 		}
 
 		public override void LaunchConfiguration ()
@@ -54,12 +52,12 @@ namespace Pinta.Effects
 		#region Algorithm Code Ported From PDN
 		public override void Render (ImageSurface src, ImageSurface dest, Core.RectangleI[] rois)
 		{
-			blurEffect.Data.Radius = Data.Radius;
-			blurEffect.Render (src, dest, rois);
+			blur_effect.Data.Radius = Data.Radius;
+			blur_effect.Render (src, dest, rois);
 
-			contrastEffect.Data.Brightness = Data.Brightness;
-			contrastEffect.Data.Contrast = Data.Contrast;
-			contrastEffect.Render (dest, dest, rois);
+			contrast_effect.Data.Brightness = Data.Brightness;
+			contrast_effect.Data.Contrast = Data.Contrast;
+			contrast_effect.Render (dest, dest, rois);
 
 			var dst_data = dest.GetPixelData ();
 			var src_data = src.GetReadOnlyPixelData ();
@@ -70,7 +68,7 @@ namespace Pinta.Effects
 				for (int y = roi.Top; y <= roi.Bottom; ++y) {
 					var dst_row = dst_data.Slice (y * dst_width + roi.Left, roi.Width);
 					var src_row = dst_data.Slice (y * src_width + roi.Left, roi.Width);
-					screenBlendOp.Apply (dst_row, src_row, dst_row);
+					screen_blend_op.Apply (dst_row, src_row, dst_row);
 				}
 			}
 		}

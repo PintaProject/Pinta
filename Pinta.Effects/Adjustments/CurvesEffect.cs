@@ -7,7 +7,6 @@
 // Ported to Pinta by: Krzysztof Marecki <marecki.krzysztof@gmail.com>         //
 /////////////////////////////////////////////////////////////////////////////////
 
-using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using Cairo;

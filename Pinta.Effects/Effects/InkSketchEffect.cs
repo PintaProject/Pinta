@@ -7,7 +7,6 @@
 // Ported to Pinta by: Jonathan Pobst <monkey@jpobst.com>                      //
 /////////////////////////////////////////////////////////////////////////////////
 
-using System;
 using Cairo;
 using Pinta.Core;
 using Pinta.Gui.Widgets;
@@ -20,9 +19,9 @@ namespace Pinta.Effects
 		private const int size = 5;
 		private const int radius = (size - 1) / 2;
 
-		private readonly GlowEffect glowEffect;
-		private readonly UnaryPixelOps.Desaturate desaturateOp;
-		private readonly UserBlendOps.DarkenBlendOp darkenOp;
+		private readonly GlowEffect glow_effect;
+		private readonly UnaryPixelOps.Desaturate desaturate_op;
+		private readonly UserBlendOps.DarkenBlendOp darken_op;
 
 		public override string Icon => Pinta.Resources.Icons.EffectsArtisticInkSketch;
 
@@ -44,9 +43,9 @@ namespace Pinta.Effects
 		{
 			EffectData = new InkSketchData ();
 
-			glowEffect = new GlowEffect ();
-			desaturateOp = new UnaryPixelOps.Desaturate ();
-			darkenOp = new UserBlendOps.DarkenBlendOp ();
+			glow_effect = new GlowEffect ();
+			desaturate_op = new UnaryPixelOps.Desaturate ();
+			darken_op = new UserBlendOps.DarkenBlendOp ();
 		}
 
 		static InkSketchEffect ()
@@ -72,11 +71,11 @@ namespace Pinta.Effects
 		public override void Render (ImageSurface src, ImageSurface dest, Core.RectangleI[] rois)
 		{
 			// Glow background 
-			glowEffect.Data.Radius = 6;
-			glowEffect.Data.Brightness = -(Data.Coloring - 50) * 2;
-			glowEffect.Data.Contrast = -(Data.Coloring - 50) * 2;
+			glow_effect.Data.Radius = 6;
+			glow_effect.Data.Brightness = -(Data.Coloring - 50) * 2;
+			glow_effect.Data.Contrast = -(Data.Coloring - 50) * 2;
 
-			this.glowEffect.Render (src, dest, rois);
+			this.glow_effect.Render (src, dest, rois);
 
 			var src_data = src.GetReadOnlyPixelData ();
 			int width = src.Width;
@@ -136,7 +135,7 @@ namespace Pinta.Effects
 						    Utility.ClampToByte (r));
 
 						// Desaturate 
-						topLayer = this.desaturateOp.Apply (topLayer);
+						topLayer = this.desaturate_op.Apply (topLayer);
 
 						// Adjust Brightness and Contrast 
 						if (topLayer.R > (Data.InkOutline * 255 / 100)) {
@@ -147,7 +146,7 @@ namespace Pinta.Effects
 
 						// Change Blend Mode to Darken
 						ref ColorBgra dst_pixel = ref dst_row[x];
-						dst_pixel = this.darkenOp.Apply (topLayer, dst_pixel);
+						dst_pixel = this.darken_op.Apply (topLayer, dst_pixel);
 					}
 				}
 			}

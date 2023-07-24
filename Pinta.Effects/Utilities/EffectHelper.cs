@@ -24,35 +24,29 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 // THE SOFTWARE.
 
-using System;
-using System.ComponentModel;
-using GLib;
-using Mono.Addins;
 using Mono.Addins.Localization;
 using Pinta.Core;
-using Pinta.Gui.Widgets;
 
-namespace Pinta
+namespace Pinta;
+
+internal static class EffectHelper
 {
-	internal static class EffectHelper
-	{
-		/// <summary>
-		/// Launch an effect dialog using Pinta's translation template.
-		/// </summary>
-		internal static void LaunchSimpleEffectDialog (BaseEffect effect)
-		{
-			PintaCore.Chrome.LaunchSimpleEffectDialog (effect, new PintaLocalizer ());
-		}
-	}
-
 	/// <summary>
-	/// Wrapper around Pinta's translation template.
+	/// Launch an effect dialog using Pinta's translation template.
 	/// </summary>
-	internal class PintaLocalizer : IAddinLocalizer
+	internal static void LaunchSimpleEffectDialog (BaseEffect effect)
 	{
-		public string GetString (string msgid)
-		{
-			return Pinta.Core.Translations.GetString (msgid);
-		}
-	};
+		PintaCore.Chrome.LaunchSimpleEffectDialog (effect, new PintaLocalizer ());
+	}
 }
+
+/// <summary>
+/// Wrapper around Pinta's translation template.
+/// </summary>
+internal class PintaLocalizer : IAddinLocalizer
+{
+	public string GetString (string msgid)
+	{
+		return Pinta.Core.Translations.GetString (msgid);
+	}
+};

@@ -44,13 +44,13 @@ namespace Pinta.Effects
 
 		#region Algorithm Code Ported From PDN
 		private const double max = 100000;
-		private static readonly double invLogMax = 1.0 / Math.Log (max);
-		private static readonly double zoomFactor = 20.0;
+		private static readonly double inv_log_max = 1.0 / Math.Log (max);
+		private static readonly double zoom_factor = 20.0;
 		private const double xOffsetBasis = -0.7;
-		private readonly double xOffset = xOffsetBasis;
+		private readonly double x_offset = xOffsetBasis;
 
 		private const double yOffsetBasis = -0.29;
-		private readonly double yOffset = yOffsetBasis;
+		private readonly double y_offset = yOffsetBasis;
 
 		private readonly InvertColorsEffect invert_effect = new ();
 
@@ -69,7 +69,7 @@ namespace Pinta.Effects
 				++c;
 			}
 
-			return c - Math.Log (y * y + x * x) * invLogMax;
+			return c - Math.Log (y * y + x * x) * inv_log_max;
 		}
 
 		public override void Render (ImageSurface src, ImageSurface dst, Core.RectangleI[] rois)
@@ -78,7 +78,7 @@ namespace Pinta.Effects
 			int h = dst.Height;
 
 			double invH = 1.0 / h;
-			double zoom = 1 + zoomFactor * Data.Zoom;
+			double zoom = 1 + zoom_factor * Data.Zoom;
 			double invZoom = 1.0 / zoom;
 
 			double invQuality = 1.0 / (double) Data.Quality;
@@ -112,7 +112,7 @@ namespace Pinta.Effects
 							double uP = radiusP * Math.Cos (thetaP);
 							double vP = radiusP * Math.Sin (thetaP);
 
-							double m = Mandelbrot ((uP * invZoom) + this.xOffset, (vP * invZoom) + this.yOffset, Data.Factor);
+							double m = Mandelbrot ((uP * invZoom) + this.x_offset, (vP * invZoom) + this.y_offset, Data.Factor);
 
 							double c = 64 + Data.Factor * m;
 

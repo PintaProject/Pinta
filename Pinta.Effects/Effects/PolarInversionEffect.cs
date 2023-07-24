@@ -7,8 +7,6 @@
 // Ported to Pinta by: Olivier Dufour <olivier.duff@gmail.com>                 //
 /////////////////////////////////////////////////////////////////////////////////
 
-using System;
-using Cairo;
 using Pinta.Core;
 using Pinta.Gui.Widgets;
 
