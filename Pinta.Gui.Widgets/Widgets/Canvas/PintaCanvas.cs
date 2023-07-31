@@ -27,7 +27,6 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using Gdk;
 using Gtk;
 using Pinta.Core;
 

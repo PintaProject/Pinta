@@ -24,7 +24,6 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 // THE SOFTWARE.
 
-using System;
 using Cairo;
 using Pinta.Core;
 
@@ -32,12 +31,12 @@ namespace Pinta.Tools
 {
 	public class ZoomTool : BaseTool
 	{
-		private readonly Gdk.Cursor cursorZoomIn;
-		private readonly Gdk.Cursor cursorZoomOut;
-		private readonly Gdk.Cursor cursorZoom;
-		private readonly Gdk.Cursor cursorZoomPan;
+		private readonly Gdk.Cursor cursor_zoom_in;
+		private readonly Gdk.Cursor cursor_zoom_out;
+		private readonly Gdk.Cursor cursor_zoom;
+		private readonly Gdk.Cursor cursor_zoom_pan;
 
-		private MouseButton mouseDown;
+		private MouseButton mouse_down;
 		private bool is_drawing;
 		private PointD shape_origin;
 		private RectangleD last_dirty;
@@ -45,12 +44,12 @@ namespace Pinta.Tools
 
 		public ZoomTool (IServiceManager services) : base (services)
 		{
-			mouseDown = MouseButton.None;
+			mouse_down = MouseButton.None;
 
-			cursorZoomIn = Gdk.Cursor.NewFromName (Pinta.Resources.StandardCursors.ZoomIn, null);
-			cursorZoomOut = Gdk.Cursor.NewFromName (Pinta.Resources.StandardCursors.ZoomOut, null);
-			cursorZoom = Gdk.Cursor.NewFromTexture (Resources.GetIcon (Pinta.Resources.Icons.ToolZoom), 0, 0, null);
-			cursorZoomPan = Gdk.Cursor.NewFromTexture (Resources.GetIcon (Pinta.Resources.Icons.ToolPan), 0, 0, null);
+			cursor_zoom_in = Gdk.Cursor.NewFromName (Pinta.Resources.StandardCursors.ZoomIn, null);
+			cursor_zoom_out = Gdk.Cursor.NewFromName (Pinta.Resources.StandardCursors.ZoomOut, null);
+			cursor_zoom = Gdk.Cursor.NewFromTexture (Resources.GetIcon (Pinta.Resources.Icons.ToolZoom), 0, 0, null);
+			cursor_zoom_pan = Gdk.Cursor.NewFromTexture (Resources.GetIcon (Pinta.Resources.Icons.ToolPan), 0, 0, null);
 		}
 
 		public override string Name => Translations.GetString ("Zoom");
@@ -59,45 +58,45 @@ namespace Pinta.Tools
 			"Left click to zoom in." +
 			"\nRight click to zoom out." +
 			"\nClick and drag to zoom in selection.");
-		public override Gdk.Cursor DefaultCursor => cursorZoom;
+		public override Gdk.Cursor DefaultCursor => cursor_zoom;
 		public override Gdk.Key ShortcutKey => Gdk.Key.Z;
 		public override int Priority => 9;
 
 		protected override void OnMouseDown (Document document, ToolMouseEventArgs e)
 		{
 			// If we are already tracking, ignore any additional mouse down events
-			if (mouseDown != MouseButton.None)
+			if (mouse_down != MouseButton.None)
 				return;
 
 			shape_origin = e.PointDouble;
 
 			switch (e.MouseButton) {
 				case MouseButton.Left:
-					SetCursor (cursorZoomIn);
+					SetCursor (cursor_zoom_in);
 					break;
 
 				case MouseButton.Middle:
-					SetCursor (cursorZoomPan);
+					SetCursor (cursor_zoom_pan);
 					break;
 
 				case MouseButton.Right:
-					SetCursor (cursorZoomOut);
+					SetCursor (cursor_zoom_out);
 					break;
 			}
 
-			mouseDown = e.MouseButton;
+			mouse_down = e.MouseButton;
 		}
 
 		protected override void OnMouseMove (Document document, ToolMouseEventArgs e)
 		{
-			if (mouseDown == MouseButton.Left) {
+			if (mouse_down == MouseButton.Left) {
 				var shape_origin_window = document.Workspace.CanvasPointToView (shape_origin);
 				if (shape_origin_window.Distance (e.WindowPoint) > tolerance) // if they've moved the mouse more than 10 pixels since they clicked
 					is_drawing = true;
 
 				//still draw rectangle after we have draw it one time...
 				UpdateRectangle (document, e.PointDouble);
-			} else if (mouseDown == MouseButton.Middle) {
+			} else if (mouse_down == MouseButton.Middle) {
 				document.Workspace.ScrollCanvas ((int) ((shape_origin.X - e.PointDouble.X) * document.Workspace.Scale), (int) ((shape_origin.Y - e.PointDouble.Y) * document.Workspace.Scale));
 			}
 		}
@@ -106,7 +105,7 @@ namespace Pinta.Tools
 		{
 			document.Layers.ToolLayer.Hidden = true;
 
-			if (mouseDown == MouseButton.Left || mouseDown == MouseButton.Right) {
+			if (mouse_down == MouseButton.Left || mouse_down == MouseButton.Right) {
 				if (e.MouseButton == MouseButton.Left) {
 					var shape_origin_window = document.Workspace.CanvasPointToView (shape_origin);
 					if (shape_origin_window.Distance (e.WindowPoint) <= tolerance) {
@@ -119,11 +118,11 @@ namespace Pinta.Tools
 				}
 			}
 
-			mouseDown = MouseButton.None;
+			mouse_down = MouseButton.None;
 
 			is_drawing = false;
 
-			SetCursor (cursorZoom);//restore regular cursor
+			SetCursor (cursor_zoom);//restore regular cursor
 		}
 
 		private void UpdateRectangle (Document document, PointD point)

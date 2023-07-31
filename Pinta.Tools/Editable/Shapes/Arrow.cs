@@ -25,9 +25,6 @@
 // THE SOFTWARE.
 
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using Cairo;
 using Pinta.Core;
 
@@ -38,8 +35,8 @@ namespace Pinta.Tools
 		public bool Show = false;
 		public double ArrowSize = 10d, AngleOffset = 15d, LengthOffset = 10d;
 
-		private const double radiansToDegrees = Math.PI / 180d;
-		private const double invRadiansToDegrees = 180d / Math.PI;
+		private const double RadiansToDegrees = Math.PI / 180d;
+		private const double InvRadiansToDegrees = 180d / Math.PI;
 
 		/// <summary>
 		/// Returns a clone of the Arrow.
@@ -66,7 +63,7 @@ namespace Pinta.Tools
 		public RectangleD? Draw (Context g, Color outlineColor, PointD endPoint, PointD almostEndPoint)
 		{
 			//First, calculate the ending angle.
-			double endingAngle = Math.Atan (Math.Abs (endPoint.Y - almostEndPoint.Y) / Math.Abs (endPoint.X - almostEndPoint.X)) * invRadiansToDegrees;
+			double endingAngle = Math.Atan (Math.Abs (endPoint.Y - almostEndPoint.Y) / Math.Abs (endPoint.X - almostEndPoint.X)) * InvRadiansToDegrees;
 
 			//This is necessary to have a properly calculated ending angle.
 			if (endPoint.Y - almostEndPoint.Y > 0) {
@@ -86,14 +83,14 @@ namespace Pinta.Tools
 							{
 								endPoint,
 								new PointD(
-									endPoint.X + Math.Cos((endingAngle + 270 + AngleOffset) * radiansToDegrees) * ArrowSize,
-									endPoint.Y + Math.Sin((endingAngle + 270 + AngleOffset) * radiansToDegrees) * ArrowSize * -1d),
+									endPoint.X + Math.Cos((endingAngle + 270 + AngleOffset) * RadiansToDegrees) * ArrowSize,
+									endPoint.Y + Math.Sin((endingAngle + 270 + AngleOffset) * RadiansToDegrees) * ArrowSize * -1d),
 								new PointD(
-									endPoint.X + Math.Cos((endingAngle + 180) * radiansToDegrees) * (ArrowSize + LengthOffset),
-									endPoint.Y + Math.Sin((endingAngle + 180) * radiansToDegrees) * (ArrowSize + LengthOffset) * -1d),
+									endPoint.X + Math.Cos((endingAngle + 180) * RadiansToDegrees) * (ArrowSize + LengthOffset),
+									endPoint.Y + Math.Sin((endingAngle + 180) * RadiansToDegrees) * (ArrowSize + LengthOffset) * -1d),
 								new PointD(
-									endPoint.X + Math.Cos((endingAngle + 90 - AngleOffset) * radiansToDegrees) * ArrowSize,
-									endPoint.Y + Math.Sin((endingAngle + 90 - AngleOffset) * radiansToDegrees) * ArrowSize * -1d)
+									endPoint.X + Math.Cos((endingAngle + 90 - AngleOffset) * RadiansToDegrees) * ArrowSize,
+									endPoint.Y + Math.Sin((endingAngle + 90 - AngleOffset) * RadiansToDegrees) * ArrowSize * -1d)
 							};
 
 			//Draw the arrow.

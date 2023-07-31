@@ -28,7 +28,6 @@ using System;
 using System.Diagnostics.CodeAnalysis;
 using System.Linq;
 using Cairo;
-using GObject;
 using Gtk;
 using Pinta.Core;
 

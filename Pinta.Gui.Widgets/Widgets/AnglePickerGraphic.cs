@@ -9,7 +9,6 @@
 
 using System;
 using Cairo;
-using Gdk;
 using Pinta.Core;
 
 namespace Pinta.Gui.Widgets

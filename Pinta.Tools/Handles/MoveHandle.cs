@@ -1,8 +1,5 @@
-using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Reflection.Metadata;
-using Gtk;
 using Pinta.Core;
 
 namespace Pinta.Tools
