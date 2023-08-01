@@ -88,7 +88,7 @@ namespace Pinta.Actions
 			dialog.Present ();
 		}
 
-		private string GetLayerPropertyUpdateMessage (LayerProperties initial, LayerProperties updated)
+		private static string GetLayerPropertyUpdateMessage (LayerProperties initial, LayerProperties updated)
 		{
 
 			string? ret = null;

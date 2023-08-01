@@ -435,7 +435,7 @@ namespace Pinta.Core
 			return index;
 		}
 
-		private int StringToUTF8Size (string s)
+		private static int StringToUTF8Size (string s)
 		{
 			System.Text.UTF8Encoding enc = new System.Text.UTF8Encoding ();
 			return (enc.GetBytes (s)).Length;

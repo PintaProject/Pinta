@@ -865,7 +865,7 @@ namespace Pinta.Tools
 		/// <summary>
 		/// Clears the entire TextLayer and redraw the previous text boundary.
 		/// </summary>
-		private void ClearTextLayer ()
+		private static void ClearTextLayer ()
 		{
 			//Clear the TextLayer.
 			PintaCore.Workspace.ActiveDocument.Layers.CurrentUserLayer.TextLayer.Layer.Surface.Clear ();
@@ -1040,7 +1040,7 @@ namespace Pinta.Tools
 			}
 		}
 
-		private void InflateAndInvalidate (in RectangleI passedRectangle)
+		private static void InflateAndInvalidate (in RectangleI passedRectangle)
 		{
 			//Create a new instance to preserve the passed Rectangle.
 			var r = new RectangleI (passedRectangle.Location, passedRectangle.Size);

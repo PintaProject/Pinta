@@ -139,7 +139,7 @@ namespace Pinta.Tools
 			}
 		}
 
-		private ImageSurface CopySurfacePart (ImageSurface surf, RectangleI dest_rect)
+		private static ImageSurface CopySurfacePart (ImageSurface surf, RectangleI dest_rect)
 		{
 			var tmp_surface = CairoExtensions.CreateImageSurface (Format.Argb32, dest_rect.Width, dest_rect.Height);
 
@@ -155,7 +155,7 @@ namespace Pinta.Tools
 			return tmp_surface;
 		}
 
-		private void PasteSurfacePart (Context g, ImageSurface tmp_surface, RectangleI dest_rect)
+		private static void PasteSurfacePart (Context g, ImageSurface tmp_surface, RectangleI dest_rect)
 		{
 			g.Operator = Operator.Source;
 			g.SetSourceSurface (tmp_surface, dest_rect.Left, dest_rect.Top);

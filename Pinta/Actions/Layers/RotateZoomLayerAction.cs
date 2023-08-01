@@ -95,7 +95,7 @@ namespace Pinta.Actions
 			return xform;
 		}
 
-		private void ApplyTransform (RotateZoomData data)
+		private static void ApplyTransform (RotateZoomData data)
 		{
 			var doc = PintaCore.Workspace.ActiveDocument;
 			PintaCore.Tools.Commit ();

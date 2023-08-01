@@ -278,7 +278,7 @@ namespace Pinta.Gui.Widgets
 				QueueDraw ();
 		}
 
-		private Color GetUserChosenColor (Color initialColor, string title)
+		private static Color GetUserChosenColor (Color initialColor, string title)
 		{
 			var ccd = Gtk.ColorChooserDialog.New (title, PintaCore.Chrome.MainWindow);
 			ccd.UseAlpha = true;

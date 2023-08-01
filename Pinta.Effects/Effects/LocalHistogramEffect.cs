@@ -31,7 +31,7 @@ namespace Pinta.Effects
 			return area;
 		}
 
-		private void SetToZero (Span<int> data)
+		private static void SetToZero (Span<int> data)
 		{
 			data.Clear ();
 		}

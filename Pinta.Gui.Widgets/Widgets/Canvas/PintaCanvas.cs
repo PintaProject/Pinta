@@ -215,7 +215,7 @@ namespace Pinta.Gui.Widgets
 			}
 		}
 
-		private void DrawHandles (Cairo.Context cr, IEnumerable<IToolHandle> controls)
+		private static void DrawHandles (Cairo.Context cr, IEnumerable<IToolHandle> controls)
 		{
 			foreach (var control in controls.Where (c => c.Active)) {
 				control.Draw (cr);

@@ -385,13 +385,13 @@ namespace Pinta.Core
 		#endregion
 
 
-		private void ShowOpenFileErrorDialog (Window parent, string filename, string primary_text, string details)
+		private static void ShowOpenFileErrorDialog (Window parent, string filename, string primary_text, string details)
 		{
 			string secondary_text = Translations.GetString ("Could not open file: {0}", filename);
 			PintaCore.Chrome.ShowErrorDialog (parent, primary_text, secondary_text, details);
 		}
 
-		private void ShowUnsupportedFormatDialog (Window parent, string filename, string message, string errors)
+		private static void ShowUnsupportedFormatDialog (Window parent, string filename, string message, string errors)
 		{
 			var body = new StringBuilder ();
 			body.AppendLine (Translations.GetString ("Could not open file: {0}", filename));

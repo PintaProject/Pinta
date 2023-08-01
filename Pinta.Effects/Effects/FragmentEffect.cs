@@ -43,7 +43,7 @@ namespace Pinta.Effects
 		}
 
 		#region Algorithm Code Ported From PDN
-		private Core.PointI[] RecalcPointOffsets (int fragments, double rotationAngle, int distance)
+		private static Core.PointI[] RecalcPointOffsets (int fragments, double rotationAngle, int distance)
 		{
 			double pointStep = 2 * Math.PI / (double) fragments;
 			double rotationRadians = ((rotationAngle - 90.0) * Math.PI) / 180.0;

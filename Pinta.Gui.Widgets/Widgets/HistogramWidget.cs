@@ -69,7 +69,7 @@ namespace Pinta.Gui.Widgets
 			QueueDraw ();
 		}
 
-		private void CheckPoint (RectangleD rect, PointD point)
+		private static void CheckPoint (RectangleD rect, PointD point)
 		{
 			if (point.X < rect.X)
 				point.X = rect.X;

@@ -145,7 +145,7 @@ namespace Pinta.Actions
 			return false;
 		}
 
-		private bool SaveFile (Document document, Gio.File? file, FormatDescriptor? format, Window parent)
+		private static bool SaveFile (Document document, Gio.File? file, FormatDescriptor? format, Window parent)
 		{
 			if (file is null)
 				file = document.File;

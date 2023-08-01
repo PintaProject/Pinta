@@ -131,7 +131,7 @@ namespace Pinta.Core
 			return string.IsNullOrEmpty (ret) ? defValue : ret;
 		}
 
-		private Size GetThumbDimensions (int width, int height)
+		private static Size GetThumbDimensions (int width, int height)
 		{
 			if (width <= ThumbMaxSize && height <= ThumbMaxSize)
 				return new Size (width, height);
@@ -217,7 +217,7 @@ namespace Pinta.Core
 			stream.Write (databytes, 0, databytes.Length);
 		}
 
-		private string BlendModeToStandard (BlendMode mode)
+		private static string BlendModeToStandard (BlendMode mode)
 		{
 			switch (mode) {
 				case BlendMode.Normal:
@@ -256,7 +256,7 @@ namespace Pinta.Core
 			}
 		}
 
-		private BlendMode StandardToBlendMode (string mode)
+		private static BlendMode StandardToBlendMode (string mode)
 		{
 			switch (mode) {
 				case "svg:src-over":

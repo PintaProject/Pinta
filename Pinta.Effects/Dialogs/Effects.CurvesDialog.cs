@@ -261,7 +261,7 @@ namespace Pinta.Effects
 			InvalidateDrawing ();
 		}
 
-		private void DrawBorder (Context g)
+		private static void DrawBorder (Context g)
 		{
 			g.Rectangle (0, 0, size - 1, size - 1);
 			g.LineWidth = 1;
@@ -286,7 +286,7 @@ namespace Pinta.Effects
 				this.label_point.SetText (string.Empty);
 		}
 
-		private void DrawGrid (Context g)
+		private static void DrawGrid (Context g)
 		{
 			g.SetDash (new double[] { 4, 4 }, 2);
 			g.LineWidth = 1;
@@ -306,7 +306,7 @@ namespace Pinta.Effects
 		}
 
 		//cpx, cpyx - control point's x and y coordinates
-		private bool CheckControlPointProximity (int cpx, int cpy, int x, int y)
+		private static bool CheckControlPointProximity (int cpx, int cpy, int x, int y)
 		{
 			return (Math.Sqrt (Math.Pow (cpx - x, 2) + Math.Pow (cpy - y, 2)) < radius);
 		}

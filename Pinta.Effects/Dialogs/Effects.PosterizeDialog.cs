@@ -94,7 +94,7 @@ namespace Pinta.Effects
 			EffectData.FirePropertyChanged ("_all_");
 		}
 
-		private void InitSpinBox (HScaleSpinButtonWidget spinbox)
+		private static void InitSpinBox (HScaleSpinButtonWidget spinbox)
 		{
 			spinbox.DefaultValue = 16;
 			spinbox.MaximumValue = 64;

@@ -15,7 +15,7 @@ namespace Pinta.Core.Tests
 			"bc\u0327a\u0304\u0308"
 		};
 
-		private string LinesToString (string[] lines) => string.Join (Environment.NewLine, lines);
+		private static string LinesToString (string[] lines) => string.Join (Environment.NewLine, lines);
 
 		[OneTimeSetUp]
 		public void Init ()

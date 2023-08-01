@@ -242,7 +242,7 @@ namespace Pinta.Core
 			return shortcut_tools[next_index];
 		}
 
-		private void DeactivateTool (BaseTool tool, BaseTool? newTool)
+		private static void DeactivateTool (BaseTool tool, BaseTool? newTool)
 		{
 			var toolbar = PintaCore.Chrome.ToolToolBar;
 

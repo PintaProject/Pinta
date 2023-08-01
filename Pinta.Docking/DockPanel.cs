@@ -155,7 +155,7 @@ namespace Pinta.Docking
 			}
 		}
 
-		private string BaseSettingKey (DockPanelItem item) => $"dock-{item.Item.UniqueName.ToLower ()}";
+		private static string BaseSettingKey (DockPanelItem item) => $"dock-{item.Item.UniqueName.ToLower ()}";
 		private string MinimizeKey (DockPanelItem item) => BaseSettingKey (item) + "-minimized";
 		private string SplitPosKey (DockPanelItem item) => BaseSettingKey (item) + "-splitpos";
 	}

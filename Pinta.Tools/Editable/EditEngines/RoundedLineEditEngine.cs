@@ -75,7 +75,7 @@ namespace Pinta.Tools
 			}
 		}
 
-		private string RADIUS_SETTING (string prefix) => $"{prefix}-radius";
+		private static string RADIUS_SETTING (string prefix) => $"{prefix}-radius";
 
 		public override void OnSaveSettings (ISettingsService settings, string toolPrefix)
 		{

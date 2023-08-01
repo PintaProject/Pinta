@@ -62,7 +62,7 @@ namespace Pinta.Core
 		{
 		}
 
-		protected void Swap<T> (ref T x, ref T y)
+		protected static void Swap<T> (ref T x, ref T y)
 		{
 			T temp = x;
 			x = y;
