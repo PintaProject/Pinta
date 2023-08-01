@@ -192,7 +192,7 @@ namespace Pinta
 			};
 		}
 
-		private MetricType GetCurrentRulerMetric ()
+		private static MetricType GetCurrentRulerMetric ()
 		{
 			return (MetricType) PintaCore.Actions.View.RulerMetric.GetState ().GetInt ();
 		}
@@ -373,7 +373,7 @@ namespace Pinta
 			PintaCore.Chrome.InitializeToolToolBar (tool_toolbar);
 		}
 
-		private void CreateStatusBar (WindowShell shell)
+		private static void CreateStatusBar (WindowShell shell)
 		{
 			var statusbar = shell.CreateStatusBar ("statusbar");
 

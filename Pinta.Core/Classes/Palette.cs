@@ -188,7 +188,7 @@ namespace Pinta.Core
 			saver.Save (colors, file);
 		}
 
-		private void ShowUnsupportedFormatDialog (Window parent, string filename, string message, string errors)
+		private static void ShowUnsupportedFormatDialog (Window parent, string filename, string message, string errors)
 		{
 			var details = new StringBuilder ();
 			details.AppendLine (Translations.GetString ("Could not open file: {0}", filename));

@@ -55,11 +55,11 @@ namespace Pinta.Tools
 		private Box toolbar = null!;
 		private bool extra_toolbar_items_added = false;
 
-		private string ARROW1_SETTING (string prefix) => $"{prefix}-arrow1";
-		private string ARROW2_SETTING (string prefix) => $"{prefix}-arrow2";
-		private string ARROW_SIZE_SETTING (string prefix) => $"{prefix}-arrow-size";
-		private string ARROW_ANGLE_SETTING (string prefix) => $"{prefix}-arrow-angle";
-		private string ARROW_LENGTH_SETTING (string prefix) => $"{prefix}-arrow-length";
+		private static string ARROW1_SETTING (string prefix) => $"{prefix}-arrow1";
+		private static string ARROW2_SETTING (string prefix) => $"{prefix}-arrow2";
+		private static string ARROW_SIZE_SETTING (string prefix) => $"{prefix}-arrow-size";
+		private static string ARROW_ANGLE_SETTING (string prefix) => $"{prefix}-arrow-angle";
+		private static string ARROW_LENGTH_SETTING (string prefix) => $"{prefix}-arrow-length";
 
 		private bool ArrowOneEnabled => ArrowOneEnabledCheckBox.Active;
 		private bool ArrowTwoEnabled => ArrowTwoEnabledCheckBox.Active;

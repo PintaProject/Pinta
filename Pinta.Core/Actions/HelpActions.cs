@@ -97,7 +97,7 @@ namespace Pinta.Core
 			OpenUrl ("https://www.pinta-project.com");
 		}
 
-		private void OpenUrl (string url)
+		private static void OpenUrl (string url)
 		{
 			// TODO-GTK4 - this produces an "unsupported on current backend" error on macOS
 			Gtk.Functions.ShowUri (PintaCore.Chrome.MainWindow, url, /* GDK_CURRENT_TIME */ 0);

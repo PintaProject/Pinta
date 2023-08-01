@@ -65,7 +65,7 @@ namespace Pinta.Effects
 			return c.ToPremultipliedAlpha ();
 		}
 
-		private Core.RectangleI GetCellBox (int x, int y, int cellSize)
+		private static Core.RectangleI GetCellBox (int x, int y, int cellSize)
 		{
 			int widthBoxNum = x % cellSize;
 			int heightBoxNum = y % cellSize;

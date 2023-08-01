@@ -254,7 +254,7 @@ namespace Pinta.Core
 			}
 
 			//Saturation formula from RgbColor.cs, public HsvColor ToHsv()
-			private int GetSaturation (in ColorBgra color)
+			private static int GetSaturation (in ColorBgra color)
 			{
 				double min;
 				double max;

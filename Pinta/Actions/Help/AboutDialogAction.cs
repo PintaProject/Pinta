@@ -63,14 +63,14 @@ namespace Pinta.Actions
 			dialog.Present ();
 		}
 
-		private string BuildCopyrightText ()
+		private static string BuildCopyrightText ()
 		{
 			var copyrightText = Translations.GetString ("Copyright");
 			var contributorsText = Translations.GetString ("by Pinta contributors");
 			return $"{copyrightText} (c) 2010-2023 {contributorsText}";
 		}
 
-		private string BuildLicenseText ()
+		private static string BuildLicenseText ()
 		{
 			var sb = new StringBuilder ();
 

@@ -166,7 +166,7 @@ namespace Pinta.Gui.Addins
 
 		// Similar to RepositoryRegistry.FilterOldVersions(), but also filters out newer versions that require an
 		// updated version of the application.
-		private AddinRepositoryEntry[] FilterToLatestCompatibleVersion (AddinRepositoryEntry[] addins)
+		private static AddinRepositoryEntry[] FilterToLatestCompatibleVersion (AddinRepositoryEntry[] addins)
 		{
 			Dictionary<string, string> latest_versions = new ();
 			foreach (var a in addins) {

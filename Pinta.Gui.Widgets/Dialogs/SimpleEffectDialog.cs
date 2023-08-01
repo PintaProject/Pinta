@@ -391,7 +391,7 @@ namespace Pinta.Gui.Widgets
 			return widget;
 		}
 
-		private Gtk.Label CreateHintLabel (string hint)
+		private static Gtk.Label CreateHintLabel (string hint)
 		{
 			var label = Gtk.Label.New (hint);
 			label.Wrap = true;
@@ -473,7 +473,7 @@ namespace Pinta.Gui.Widgets
 			return sb.ToString ();
 		}
 
-		private object? GetValue (string name, object o)
+		private static object? GetValue (string name, object o)
 		{
 			if (o.GetType ().GetField (name) is FieldInfo fi)
 				return fi.GetValue (o);

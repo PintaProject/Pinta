@@ -237,7 +237,7 @@ namespace Pinta.Tools
 		/// <param name="y3">Ending point Y (included in the returned Point(s)).</param>
 		/// <param name="cPIndex">The index of the previous ControlPoint to the generated points.</param>
 		/// <returns></returns>
-		protected List<GeneratedPoint> calculateCurvePoints (
+		protected static List<GeneratedPoint> calculateCurvePoints (
 			double tInterval,
 			double x0, double y0, double x1, double y1, double x2, double y2, double x3, double y3,
 			int cPIndex)

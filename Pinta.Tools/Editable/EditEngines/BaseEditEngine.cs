@@ -242,10 +242,10 @@ namespace Pinta.Tools
 			ResetShapes ();
 		}
 
-		private string BRUSH_WIDTH_SETTING (string prefix) => $"{prefix}-brush-width";
-		private string FILL_TYPE_SETTING (string prefix) => $"{prefix}-fill-style";
-		private string SHAPE_TYPE_SETTING (string prefix) => $"{prefix}-shape-type";
-		private string DASH_PATTERN_SETTING (string prefix) => $"{prefix}-dash-pattern";
+		private static string BRUSH_WIDTH_SETTING (string prefix) => $"{prefix}-brush-width";
+		private static string FILL_TYPE_SETTING (string prefix) => $"{prefix}-fill-style";
+		private static string SHAPE_TYPE_SETTING (string prefix) => $"{prefix}-shape-type";
+		private static string DASH_PATTERN_SETTING (string prefix) => $"{prefix}-dash-pattern";
 
 		public virtual void OnSaveSettings (ISettingsService settings, string toolPrefix)
 		{
@@ -1064,7 +1064,7 @@ namespace Pinta.Tools
 		/// Do not call. Use DrawActiveShape.
 		/// </summary>
 		/// <param name="engine"></param>
-		private void OrganizePoints (ShapeEngine engine)
+		private static void OrganizePoints (ShapeEngine engine)
 		{
 			Document doc = PintaCore.Workspace.ActiveDocument;
 
