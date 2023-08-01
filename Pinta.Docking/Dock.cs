@@ -22,7 +22,6 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 // THE SOFTWARE.
 
-using System;
 using Gtk;
 using Pinta.Core;
 
@@ -33,7 +32,7 @@ namespace Pinta.Docking
 	/// </summary>
 	public class Dock : Box
 	{
-		private readonly DockPanel right_panel = new DockPanel ();
+		private readonly DockPanel right_panel = new ();
 		private readonly Paned pane = Paned.New (Orientation.Horizontal);
 
 		public Dock ()

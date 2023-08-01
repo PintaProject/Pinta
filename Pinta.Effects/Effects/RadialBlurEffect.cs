@@ -158,7 +158,7 @@ namespace Pinta.Effects
 			public Double Angle = 2;
 
 			[Caption ("Offset")]
-			public PointD Offset = new PointD (0, 0);
+			public PointD Offset = new (0, 0);
 
 			[Caption ("Quality"), MinimumValue (1), MaximumValue (5)]
 			[Hint ("Use low quality for previews, small images, and small angles.  Use high quality for final quality, large images, and large angles.")]
