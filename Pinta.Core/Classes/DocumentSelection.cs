@@ -36,8 +36,8 @@ namespace Pinta.Core
 	{
 		private Path? selection_path;
 
-		public List<List<IntPoint>> SelectionPolygons = new();
-		public Clipper SelectionClipper = new();
+		public List<List<IntPoint>> SelectionPolygons = new ();
+		public Clipper SelectionClipper = new ();
 
 		public PointD Origin;
 		public PointD End;

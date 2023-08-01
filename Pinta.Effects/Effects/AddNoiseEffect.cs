@@ -54,7 +54,7 @@ namespace Pinta.Effects
 
 		#region Algorithm Code Ported From PDN
 		[ThreadStatic]
-		private static Random thread_rand = new();
+		private static Random thread_rand = new ();
 		private const int TableSize = 16384;
 		private static int[] lookup;
 

@@ -154,7 +154,7 @@ namespace Mono.Options
 	public class OptionValueCollection : IList, IList<string>
 	{
 
-		readonly List<string> values = new();
+		readonly List<string> values = new ();
 		readonly OptionContext c;
 
 		internal OptionValueCollection (OptionContext c)
@@ -377,7 +377,7 @@ namespace Mono.Options
 		private OptionValueType ParsePrototype ()
 		{
 			char type = '\0';
-			List<string> seps = new();
+			List<string> seps = new ();
 			for (int i = 0; i < names.Length; ++i) {
 				string name = names[i];
 				if (name.Length == 0)
@@ -720,7 +720,7 @@ namespace Mono.Options
 			OptionContext c = CreateOptionContext ();
 			c.OptionIndex = -1;
 			bool process = true;
-			List<string> unprocessed = new();
+			List<string> unprocessed = new ();
 			Option def = Contains ("<>") ? this["<>"] : null;
 			foreach (string argument in arguments) {
 				++c.OptionIndex;
@@ -753,7 +753,7 @@ namespace Mono.Options
 			return false;
 		}
 
-		private readonly Regex value_option = new(
+		private readonly Regex value_option = new (
 			@"^(?<flag>--|-|/)(?<name>[^:=]+)((?<sep>[:=])(?<value>.*))?$");
 
 		protected bool GetOptionParts (string argument, out string flag, out string name, out string sep, out string value)

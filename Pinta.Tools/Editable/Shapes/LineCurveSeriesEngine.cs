@@ -32,7 +32,7 @@ namespace Pinta.Tools
 {
 	public class LineCurveSeriesEngine : ShapeEngine
 	{
-		public Arrow Arrow1 = new(), Arrow2 = new();
+		public Arrow Arrow1 = new (), Arrow2 = new ();
 
 		/// <summary>
 		/// Create a new LineCurveSeriesEngine.
@@ -71,7 +71,7 @@ namespace Pinta.Tools
 		/// </summary>
 		public override void GeneratePoints (int brush_width)
 		{
-			List<GeneratedPoint> generatedPoints = new();
+			List<GeneratedPoint> generatedPoints = new ();
 
 			if (ControlPoints.Count < 2) {
 				generatedPoints.Add (new GeneratedPoint (ControlPoints[0].Position, 0));
@@ -82,7 +82,7 @@ namespace Pinta.Tools
 				//control point's tension and the following control point's tension.
 
 				//Stores all of the tangent values.
-				List<PointD> bezierTangents = new();
+				List<PointD> bezierTangents = new ();
 
 				int pointCount = ControlPoints.Count - 1;
 				double pointCountDouble = (double) pointCount;
@@ -177,7 +177,7 @@ namespace Pinta.Tools
 		/// <returns>The List of generated points.</returns>
 		protected static List<GeneratedPoint> GenerateCubicBezierCurvePoints (PointD p0, PointD p1, PointD p2, PointD p3, int cPIndex)
 		{
-			List<GeneratedPoint> resultList = new();
+			List<GeneratedPoint> resultList = new ();
 
 
 			//Note: this must be low enough for mouse clicks to be properly considered on/off the curve at any given point.

@@ -23,7 +23,7 @@ namespace Pinta.Core
 	/// </summary>
 	public sealed partial class UserBlendOps
 	{
-		private static readonly Dictionary<string, BlendMode> blend_modes = new();
+		private static readonly Dictionary<string, BlendMode> blend_modes = new ();
 
 		static UserBlendOps ()
 		{
