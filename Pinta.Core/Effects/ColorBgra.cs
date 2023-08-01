@@ -374,7 +374,7 @@ namespace Pinta.Core
 		{
 #if DEBUG
 			if ((w1 + w2 + w3 + w4) != 65536)
-				throw new ArgumentException ($"{nameof(w1)} + {nameof(w2)} + {nameof(w3)} + {nameof(w4)} must equal 65536!");
+				throw new ArgumentException ($"{nameof (w1)} + {nameof (w2)} + {nameof (w3)} + {nameof (w4)} must equal 65536!");
 #endif
 
 			const uint ww = 32768;

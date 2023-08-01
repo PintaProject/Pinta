@@ -642,7 +642,7 @@ namespace Pinta.Core
 				color_out_high = out_hi;
 
 				if (gamma.Length != 3)
-					throw new ArgumentException ($"{nameof(gamma)} must be a float[3]", nameof(gamma));
+					throw new ArgumentException ($"{nameof (gamma)} must be a float[3]", nameof (gamma));
 
 				this.gamma = gamma;
 				UpdateLookupTable ();
@@ -674,10 +674,10 @@ namespace Pinta.Core
 			public void UnApply (ColorBgra after, float[] beforeOut, float[] slopesOut)
 			{
 				if (beforeOut.Length != 3)
-					throw new ArgumentException ($"{nameof(beforeOut)} must be a float[3]", nameof(beforeOut));
+					throw new ArgumentException ($"{nameof (beforeOut)} must be a float[3]", nameof (beforeOut));
 
 				if (slopesOut.Length != 3)
-					throw new ArgumentException ($"{nameof(slopesOut)} must be a float[3]", nameof(slopesOut));
+					throw new ArgumentException ($"{nameof (slopesOut)} must be a float[3]", nameof (slopesOut));
 
 				for (int i = 0; i < 3; i++) {
 
