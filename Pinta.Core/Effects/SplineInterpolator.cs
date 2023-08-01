@@ -11,7 +11,7 @@ namespace Pinta.Core
 {
 	public sealed class SplineInterpolator
 	{
-		private readonly SortedList<double, double> points = new SortedList<double, double> ();
+		private readonly SortedList<double, double> points = new();
 		private double[]? y2;
 
 		public int Count {

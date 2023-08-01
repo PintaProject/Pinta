@@ -1096,7 +1096,7 @@ namespace Pinta.Core
 			public int Width;
 			public int Height;
 
-			public RectangleI ToRectangleI () => new RectangleI (X, Y, Width, Height);
+			public RectangleI ToRectangleI () => new(X, Y, Width, Height);
 		}
 
 		[DllImport (CairoLibraryName, EntryPoint = "cairo_region_create_rectangle")]

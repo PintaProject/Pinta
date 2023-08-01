@@ -154,7 +154,7 @@ namespace Mono.Options
 	public class OptionValueCollection : IList, IList<string>
 	{
 
-		readonly List<string> values = new List<string> ();
+		readonly List<string> values = new();
 		readonly OptionContext c;
 
 		internal OptionValueCollection (OptionContext c)
@@ -372,18 +372,18 @@ namespace Mono.Options
 		internal string[] Names { get { return names; } }
 		internal string[] ValueSeparators { get { return separators; } }
 
-		static readonly char[] NameTerminator = new char[] { '=', ':' };
+		static readonly char[] name_terminator = new char[] { '=', ':' };
 
 		private OptionValueType ParsePrototype ()
 		{
 			char type = '\0';
-			List<string> seps = new List<string> ();
+			List<string> seps = new();
 			for (int i = 0; i < names.Length; ++i) {
 				string name = names[i];
 				if (name.Length == 0)
 					throw new ArgumentException ("Empty option names are not supported.", nameof (prototype));
 
-				int end = name.IndexOfAny (NameTerminator);
+				int end = name.IndexOfAny (name_terminator);
 				if (end == -1)
 					continue;
 				names[i] = name.Substring (0, end);
@@ -720,7 +720,7 @@ namespace Mono.Options
 			OptionContext c = CreateOptionContext ();
 			c.OptionIndex = -1;
 			bool process = true;
-			List<string> unprocessed = new List<string> ();
+			List<string> unprocessed = new();
 			Option def = Contains ("<>") ? this["<>"] : null;
 			foreach (string argument in arguments) {
 				++c.OptionIndex;
@@ -753,13 +753,13 @@ namespace Mono.Options
 			return false;
 		}
 
-		private readonly Regex ValueOption = new Regex (
+		private readonly Regex value_option = new(
 			@"^(?<flag>--|-|/)(?<name>[^:=]+)((?<sep>[:=])(?<value>.*))?$");
 
 		protected bool GetOptionParts (string argument, out string flag, out string name, out string sep, out string value)
 		{
 			flag = name = sep = value = null;
-			Match m = ValueOption.Match (argument);
+			Match m = value_option.Match (argument);
 			if (!m.Success) {
 				return false;
 			}

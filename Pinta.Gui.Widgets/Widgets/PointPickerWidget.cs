@@ -65,7 +65,7 @@ namespace Pinta.Gui.Widgets
 		public PointI DefaultPoint { get; set; }
 
 		public PointI Point {
-			get => new PointI (spin_x.GetValueAsInt (), spin_y.GetValueAsInt ());
+			get => new(spin_x.GetValueAsInt (), spin_y.GetValueAsInt ());
 			set {
 				if (value.X != spin_x.GetValueAsInt () || value.Y != spin_y.GetValueAsInt ()) {
 					spin_x.Value = value.X;
@@ -87,7 +87,7 @@ namespace Pinta.Gui.Widgets
 		}
 
 		public PointD Offset
-			=> new PointD ((spin_x.Value * 2.0 / PintaCore.Workspace.ImageSize.Width) - 1.0, (spin_y.Value * 2.0 / PintaCore.Workspace.ImageSize.Height) - 1.0);
+			=> new((spin_x.Value * 2.0 / PintaCore.Workspace.ImageSize.Width) - 1.0, (spin_y.Value * 2.0 / PintaCore.Workspace.ImageSize.Height) - 1.0);
 
 		private void HandlePointpickergraphic1PositionChanged (object? sender, EventArgs e)
 		{

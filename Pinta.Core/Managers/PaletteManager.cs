@@ -50,7 +50,7 @@ namespace Pinta.Core
 		private const string SECONDARY_COLOR_SETTINGS_KEY = "secondary-color";
 		private const string RECENT_COLORS_SETTINGS_KEY = "recently-used-colors";
 
-		private readonly List<Color> recently_used = new List<Color> (MAX_RECENT_COLORS);
+		private readonly List<Color> recently_used = new(MAX_RECENT_COLORS);
 
 		public Color PrimaryColor {
 			get => primary;

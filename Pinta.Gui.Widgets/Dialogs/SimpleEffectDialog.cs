@@ -41,7 +41,7 @@ namespace Pinta.Gui.Widgets
 {
 	public class SimpleEffectDialog : Gtk.Dialog
 	{
-		readonly Random random = new Random ();
+		readonly Random random = new();
 
 		const uint event_delay_millis = 100;
 		uint event_delay_timeout_id;

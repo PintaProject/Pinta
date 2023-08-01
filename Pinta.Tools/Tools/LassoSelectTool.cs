@@ -42,7 +42,7 @@ namespace Pinta.Tools
 		private SelectionHistoryItem? hist;
 
 		private Path? path;
-		private readonly List<IntPoint> lasso_polygon = new List<IntPoint> ();
+		private readonly List<IntPoint> lasso_polygon = new();
 
 		public LassoSelectTool (IServiceManager services) : base (services)
 		{

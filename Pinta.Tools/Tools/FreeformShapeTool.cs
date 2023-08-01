@@ -38,7 +38,7 @@ namespace Pinta.Tools
 		private Color fill_color;
 		private Color outline_color;
 
-		private readonly DashPatternBox dash_p_box = new DashPatternBox ();
+		private readonly DashPatternBox dash_p_box = new();
 
 		private string dash_pattern = "-";
 
