@@ -1,8 +1,6 @@
 using System;
 using Mono.Addins;
-using Mono.Addins.Setup;
 using Pinta.Core;
-using Pinta.Resources;
 
 namespace Pinta.Gui.Addins
 {

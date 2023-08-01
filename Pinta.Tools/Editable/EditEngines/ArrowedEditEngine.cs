@@ -24,7 +24,6 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 // THE SOFTWARE.
 
-using System;
 using System.Collections.Generic;
 using Cairo;
 using Gtk;
@@ -34,21 +33,21 @@ namespace Pinta.Tools
 {
 	public abstract class ArrowedEditEngine : BaseEditEngine
 	{
-		private Separator? arrowSep;
-		private Label? arrowLabel;
-		private CheckButton? showArrowOneBox, showArrowTwoBox;
+		private Separator? arrow_sep;
+		private Label? arrow_label;
+		private CheckButton? show_arrow_one_box, show_arrow_two_box;
 
-		private SpinButton? arrowSize;
-		private Label? arrowSizeLabel;
+		private SpinButton? arrow_size;
+		private Label? arrow_size_label;
 
-		private SpinButton? arrowAngleOffset;
-		private Label? arrowAngleOffsetLabel;
+		private SpinButton? arrow_angle_offset;
+		private Label? arrow_angle_offset_label;
 
-		private SpinButton? arrowLengthOffset;
-		private Label? arrowLengthOffsetLabel;
+		private SpinButton? arrow_length_offset;
+		private Label? arrow_length_offset_label;
 
-		private readonly Arrow previousSettings1 = new Arrow ();
-		private readonly Arrow previousSettings2 = new Arrow ();
+		private readonly Arrow previous_settings_1 = new Arrow ();
+		private readonly Arrow previous_settings_2 = new Arrow ();
 
 		// NRT - These are all set by HandleBuildToolBar
 		private ISettingsService settings = null!;
@@ -73,16 +72,16 @@ namespace Pinta.Tools
 		{
 			base.OnSaveSettings (settings, toolPrefix);
 
-			if (showArrowOneBox is not null)
-				settings.PutSetting (ARROW1_SETTING (toolPrefix), showArrowOneBox.Active);
-			if (showArrowTwoBox is not null)
-				settings.PutSetting (ARROW2_SETTING (toolPrefix), showArrowTwoBox.Active);
-			if (arrowSize is not null)
-				settings.PutSetting (ARROW_SIZE_SETTING (toolPrefix), arrowSize.GetValueAsInt ());
-			if (arrowAngleOffset is not null)
-				settings.PutSetting (ARROW_ANGLE_SETTING (toolPrefix), arrowAngleOffset.GetValueAsInt ());
-			if (arrowLengthOffset is not null)
-				settings.PutSetting (ARROW_LENGTH_SETTING (toolPrefix), arrowLengthOffset.GetValueAsInt ());
+			if (show_arrow_one_box is not null)
+				settings.PutSetting (ARROW1_SETTING (toolPrefix), show_arrow_one_box.Active);
+			if (show_arrow_two_box is not null)
+				settings.PutSetting (ARROW2_SETTING (toolPrefix), show_arrow_two_box.Active);
+			if (arrow_size is not null)
+				settings.PutSetting (ARROW_SIZE_SETTING (toolPrefix), arrow_size.GetValueAsInt ());
+			if (arrow_angle_offset is not null)
+				settings.PutSetting (ARROW_ANGLE_SETTING (toolPrefix), arrow_angle_offset.GetValueAsInt ());
+			if (arrow_length_offset is not null)
+				settings.PutSetting (ARROW_LENGTH_SETTING (toolPrefix), arrow_length_offset.GetValueAsInt ());
 		}
 
 		public override void HandleBuildToolBar (Box tb, ISettingsService settings, string toolPrefix)
@@ -148,7 +147,7 @@ namespace Pinta.Tools
 		/// </summary>
 		protected void setNewArrowSettings (LineCurveSeriesEngine newEngine)
 		{
-			if (showArrowOneBox != null) {
+			if (show_arrow_one_box != null) {
 				newEngine.Arrow1.Show = ArrowOneEnabled;
 				newEngine.Arrow2.Show = ArrowTwoEnabled;
 
@@ -166,7 +165,7 @@ namespace Pinta.Tools
 		public override void UpdateToolbarSettings (ShapeEngine engine)
 		{
 			if (engine != null && engine.ShapeType == ShapeTypes.OpenLineCurveSeries) {
-				if (showArrowOneBox != null) {
+				if (show_arrow_one_box != null) {
 					LineCurveSeriesEngine lCSEngine = (LineCurveSeriesEngine) engine;
 
 					ArrowOneEnabledCheckBox.Active = lCSEngine.Arrow1.Show;
@@ -185,14 +184,14 @@ namespace Pinta.Tools
 
 		protected override void RecallPreviousSettings ()
 		{
-			if (showArrowOneBox != null) {
-				ArrowOneEnabledCheckBox.Active = previousSettings1.Show;
-				ArrowTwoEnabledCheckBox.Active = previousSettings2.Show;
+			if (show_arrow_one_box != null) {
+				ArrowOneEnabledCheckBox.Active = previous_settings_1.Show;
+				ArrowTwoEnabledCheckBox.Active = previous_settings_2.Show;
 
 				if (ArrowOneEnabled || ArrowTwoEnabled) {
-					ArrowSize.Value = previousSettings1.ArrowSize;
-					ArrowAngleOffset.Value = previousSettings1.AngleOffset;
-					ArrowLengthOffset.Value = previousSettings1.LengthOffset;
+					ArrowSize.Value = previous_settings_1.ArrowSize;
+					ArrowAngleOffset.Value = previous_settings_1.AngleOffset;
+					ArrowLengthOffset.Value = previous_settings_1.LengthOffset;
 				}
 			}
 
@@ -201,13 +200,13 @@ namespace Pinta.Tools
 
 		protected override void StorePreviousSettings ()
 		{
-			if (showArrowOneBox != null) {
-				previousSettings1.Show = ArrowOneEnabled;
-				previousSettings2.Show = ArrowTwoEnabled;
+			if (show_arrow_one_box != null) {
+				previous_settings_1.Show = ArrowOneEnabled;
+				previous_settings_2.Show = ArrowTwoEnabled;
 
-				previousSettings1.ArrowSize = ArrowSize.Value;
-				previousSettings1.AngleOffset = ArrowAngleOffset.Value;
-				previousSettings1.LengthOffset = ArrowLengthOffset.Value;
+				previous_settings_1.ArrowSize = ArrowSize.Value;
+				previous_settings_1.AngleOffset = ArrowAngleOffset.Value;
+				previous_settings_1.LengthOffset = ArrowLengthOffset.Value;
 
 				//Other Arrow2 settings are unnecessary since they are the same as Arrow1's.
 			}
@@ -241,45 +240,45 @@ namespace Pinta.Tools
 			base.DrawExtras (ref dirty, g, engine);
 		}
 
-		private Separator ArrowSeparator => arrowSep ??= GtkExtensions.CreateToolBarSeparator ();
-		private Label ArrowLabel => arrowLabel ??= Label.New (string.Format (" {0}: ", Translations.GetString ("Arrow")));
+		private Separator ArrowSeparator => arrow_sep ??= GtkExtensions.CreateToolBarSeparator ();
+		private Label ArrowLabel => arrow_label ??= Label.New (string.Format (" {0}: ", Translations.GetString ("Arrow")));
 
 		private CheckButton ArrowOneEnabledCheckBox {
 			get {
-				if (showArrowOneBox is null) {
-					showArrowOneBox = CheckButton.NewWithLabel ("1");
-					showArrowOneBox.Active = settings.GetSetting (ARROW1_SETTING (tool_prefix), previousSettings1.Show);
-					showArrowOneBox.OnToggled += (o, e) => ArrowEnabledToggled (true);
+				if (show_arrow_one_box is null) {
+					show_arrow_one_box = CheckButton.NewWithLabel ("1");
+					show_arrow_one_box.Active = settings.GetSetting (ARROW1_SETTING (tool_prefix), previous_settings_1.Show);
+					show_arrow_one_box.OnToggled += (o, e) => ArrowEnabledToggled (true);
 				}
 
-				return showArrowOneBox;
+				return show_arrow_one_box;
 			}
 		}
 
 		private CheckButton ArrowTwoEnabledCheckBox {
 			get {
-				if (showArrowTwoBox is null) {
-					showArrowTwoBox = CheckButton.NewWithLabel ("2");
-					showArrowTwoBox.Active = settings.GetSetting (ARROW2_SETTING (tool_prefix), previousSettings2.Show);
-					showArrowTwoBox.OnToggled += (o, e) => ArrowEnabledToggled (false);
+				if (show_arrow_two_box is null) {
+					show_arrow_two_box = CheckButton.NewWithLabel ("2");
+					show_arrow_two_box.Active = settings.GetSetting (ARROW2_SETTING (tool_prefix), previous_settings_2.Show);
+					show_arrow_two_box.OnToggled += (o, e) => ArrowEnabledToggled (false);
 				}
 
-				return showArrowTwoBox;
+				return show_arrow_two_box;
 			}
 		}
 
-		private Label ArrowSizeLabel => arrowSizeLabel ??= Label.New (string.Format (" {0}: ", Translations.GetString ("Size")));
+		private Label ArrowSizeLabel => arrow_size_label ??= Label.New (string.Format (" {0}: ", Translations.GetString ("Size")));
 
 		private SpinButton ArrowSize {
 			get {
-				if (arrowSize == null) {
-					arrowSize = GtkExtensions.CreateToolBarSpinButton (1, 100, 1, settings.GetSetting (ARROW_SIZE_SETTING (tool_prefix), 10));
+				if (arrow_size == null) {
+					arrow_size = GtkExtensions.CreateToolBarSpinButton (1, 100, 1, settings.GetSetting (ARROW_SIZE_SETTING (tool_prefix), 10));
 
-					arrowSize.OnValueChanged += (o, e) => {
+					arrow_size.OnValueChanged += (o, e) => {
 						var activeEngine = (LineCurveSeriesEngine?) ActiveShapeEngine;
 
 						if (activeEngine != null) {
-							var size = arrowSize.Value;
+							var size = arrow_size.Value;
 							activeEngine.Arrow1.ArrowSize = size;
 							activeEngine.Arrow2.ArrowSize = size;
 
@@ -290,22 +289,22 @@ namespace Pinta.Tools
 					};
 				}
 
-				return arrowSize;
+				return arrow_size;
 			}
 		}
 
-		private Label ArrowAngleOffsetLabel => arrowAngleOffsetLabel ??= Label.New (string.Format (" {0}: ", Translations.GetString ("Angle")));
+		private Label ArrowAngleOffsetLabel => arrow_angle_offset_label ??= Label.New (string.Format (" {0}: ", Translations.GetString ("Angle")));
 
 		private SpinButton ArrowAngleOffset {
 			get {
-				if (arrowAngleOffset == null) {
-					arrowAngleOffset = GtkExtensions.CreateToolBarSpinButton (-89, 89, 1, settings.GetSetting (ARROW_ANGLE_SETTING (tool_prefix), 15));
+				if (arrow_angle_offset == null) {
+					arrow_angle_offset = GtkExtensions.CreateToolBarSpinButton (-89, 89, 1, settings.GetSetting (ARROW_ANGLE_SETTING (tool_prefix), 15));
 
-					arrowAngleOffset.OnValueChanged += (o, e) => {
+					arrow_angle_offset.OnValueChanged += (o, e) => {
 
 						var activeEngine = (LineCurveSeriesEngine?) ActiveShapeEngine;
 						if (activeEngine != null) {
-							var angle = arrowAngleOffset.Value;
+							var angle = arrow_angle_offset.Value;
 							activeEngine.Arrow1.AngleOffset = angle;
 							activeEngine.Arrow2.AngleOffset = angle;
 
@@ -316,22 +315,22 @@ namespace Pinta.Tools
 					};
 				}
 
-				return arrowAngleOffset;
+				return arrow_angle_offset;
 			}
 		}
 
-		private Label ArrowLengthOffsetLabel => arrowLengthOffsetLabel ??= Label.New (string.Format (" {0}: ", Translations.GetString ("Length")));
+		private Label ArrowLengthOffsetLabel => arrow_length_offset_label ??= Label.New (string.Format (" {0}: ", Translations.GetString ("Length")));
 
 		private SpinButton ArrowLengthOffset {
 			get {
-				if (arrowLengthOffset == null) {
-					arrowLengthOffset = GtkExtensions.CreateToolBarSpinButton (-100, 100, 1, settings.GetSetting (ARROW_LENGTH_SETTING (tool_prefix), 10));
+				if (arrow_length_offset == null) {
+					arrow_length_offset = GtkExtensions.CreateToolBarSpinButton (-100, 100, 1, settings.GetSetting (ARROW_LENGTH_SETTING (tool_prefix), 10));
 
-					arrowLengthOffset.OnValueChanged += (o, e) => {
+					arrow_length_offset.OnValueChanged += (o, e) => {
 
 						var activeEngine = (LineCurveSeriesEngine?) ActiveShapeEngine;
 						if (activeEngine != null) {
-							var length = arrowLengthOffset.Value;
+							var length = arrow_length_offset.Value;
 							activeEngine.Arrow1.LengthOffset = length;
 							activeEngine.Arrow2.LengthOffset = length;
 
@@ -342,7 +341,7 @@ namespace Pinta.Tools
 					};
 				}
 
-				return arrowLengthOffset;
+				return arrow_length_offset;
 			}
 		}
 

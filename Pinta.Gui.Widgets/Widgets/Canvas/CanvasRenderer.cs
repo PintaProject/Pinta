@@ -7,7 +7,6 @@
 // Ported to Pinta by: Jonathan Pobst <monkey@jpobst.com>                      //
 /////////////////////////////////////////////////////////////////////////////////
 
-using System;
 using System.Collections.Generic;
 using Pinta.Core;
 
@@ -24,10 +23,10 @@ namespace Pinta.Gui.Widgets
 		private Size destination_size;
 		private ScaleFactor scale_factor;
 
-		private int[]? d2sLookupX;
-		private int[]? d2sLookupY;
-		private int[]? s2dLookupX;
-		private int[]? s2dLookupY;
+		private int[]? d_2_s_lookup_x;
+		private int[]? d_2_s_lookup_y;
+		private int[]? s_2_d_lookup_x;
+		private int[]? s_2_d_lookup_y;
 
 		public CanvasRenderer (bool enable_pixel_grid, bool enableLivePreview)
 		{
@@ -50,10 +49,10 @@ namespace Pinta.Gui.Widgets
 
 			scale_factor = new ScaleFactor (source_size.Width, destination_size.Width);
 
-			d2sLookupX = null;
-			d2sLookupY = null;
-			s2dLookupX = null;
-			s2dLookupY = null;
+			d_2_s_lookup_x = null;
+			d_2_s_lookup_y = null;
+			s_2_d_lookup_x = null;
+			s_2_d_lookup_y = null;
 		}
 
 		public void Render (List<Layer> layers, Cairo.ImageSurface dst, PointI offset)
@@ -105,10 +104,10 @@ namespace Pinta.Gui.Widgets
 		}
 
 		// Lazily create and cache these
-		private int[] D2SLookupX => d2sLookupX ??= CreateLookupX (source_size.Width, destination_size.Width, scale_factor);
-		private int[] D2SLookupY => d2sLookupY ??= CreateLookupY (source_size.Height, destination_size.Height, scale_factor);
-		private int[] S2DLookupX => s2dLookupX ??= CreateS2DLookupX (source_size.Width, destination_size.Width, scale_factor);
-		private int[] S2DLookupY => s2dLookupY ??= CreateS2DLookupY (source_size.Height, destination_size.Height, scale_factor);
+		private int[] D2SLookupX => d_2_s_lookup_x ??= CreateLookupX (source_size.Width, destination_size.Width, scale_factor);
+		private int[] D2SLookupY => d_2_s_lookup_y ??= CreateLookupY (source_size.Height, destination_size.Height, scale_factor);
+		private int[] S2DLookupX => s_2_d_lookup_x ??= CreateS2DLookupX (source_size.Width, destination_size.Width, scale_factor);
+		private int[] S2DLookupY => s_2_d_lookup_y ??= CreateS2DLookupY (source_size.Height, destination_size.Height, scale_factor);
 
 		#region Algorithms ported from PDN
 		private void RenderPixelGrid (Cairo.ImageSurface dst, PointI offset)

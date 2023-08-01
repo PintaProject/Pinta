@@ -24,8 +24,6 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 // THE SOFTWARE.
 
-using System;
-using Cairo;
 using Pinta.Core;
 
 namespace Pinta.Tools
@@ -34,9 +32,9 @@ namespace Pinta.Tools
 	{
 		private readonly BaseEditEngine ee;
 
-		private ShapeEngineCollection sEngines;
+		private ShapeEngineCollection s_engines;
 
-		private int selectedPointIndex, selectedShapeIndex;
+		private int selected_point_index, selected_shape_index;
 
 		/// <summary>
 		/// A history item for when shapes are modified.
@@ -48,9 +46,9 @@ namespace Pinta.Tools
 		{
 			ee = passedEE;
 
-			sEngines = BaseEditEngine.SEngines.PartialClone ();
-			selectedPointIndex = ee.SelectedPointIndex;
-			selectedShapeIndex = ee.SelectedShapeIndex;
+			s_engines = BaseEditEngine.SEngines.PartialClone ();
+			selected_point_index = ee.SelectedPointIndex;
+			selected_shape_index = ee.SelectedShapeIndex;
 		}
 
 		public override void Undo ()
@@ -65,10 +63,10 @@ namespace Pinta.Tools
 
 		private void Swap ()
 		{
-			Swap (ref sEngines, ref BaseEditEngine.SEngines);
+			Swap (ref s_engines, ref BaseEditEngine.SEngines);
 
 			//Ensure that all of the shapes that should no longer be drawn have their ReEditableLayer removed from the drawing loop.
-			foreach (ShapeEngine se in sEngines) {
+			foreach (ShapeEngine se in s_engines) {
 				//Determine if it is currently in the drawing loop and should no longer be. Note: a DrawingLayer could be both removed and then
 				//later added in the same swap operation, but this is faster than looping through each ShapeEngine in BaseEditEngine.SEngines.
 				if (se.DrawingLayer.InTheLoop && !BaseEditEngine.SEngines.Contains (se)) {
@@ -85,11 +83,11 @@ namespace Pinta.Tools
 				}
 			}
 
-			Swap (ref selectedPointIndex, ref ee.SelectedPointIndex);
-			Swap (ref selectedShapeIndex, ref ee.SelectedShapeIndex);
+			Swap (ref selected_point_index, ref ee.SelectedPointIndex);
+			Swap (ref selected_shape_index, ref ee.SelectedShapeIndex);
 
 			//Determine if the currently active tool matches the shape's corresponding tool, and if not, switch to it.
-			BaseEditEngine.ActivateCorrespondingTool (selectedShapeIndex, true);
+			BaseEditEngine.ActivateCorrespondingTool (selected_shape_index, true);
 		}
 	}
 }

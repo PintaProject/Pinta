@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Mono.Addins;
-using Mono.Addins.Description;
 using Mono.Addins.Setup;
 using Pinta.Core;
 using Pinta.Resources;

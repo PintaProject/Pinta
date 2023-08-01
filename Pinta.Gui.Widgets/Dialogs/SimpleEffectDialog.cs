@@ -34,7 +34,6 @@ using System.ComponentModel;
 using System.Reflection;
 using System.Text;
 using Gtk;
-using Mono.Addins;
 using Mono.Addins.Localization;
 using Pinta.Core;
 

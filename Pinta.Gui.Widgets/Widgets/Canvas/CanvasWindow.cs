@@ -26,7 +26,6 @@
 
 using System;
 using System.Diagnostics.CodeAnalysis;
-using Gdk;
 using Gtk;
 using Pinta.Core;
 using Pinta.Gui.Widgets;

@@ -38,7 +38,7 @@ namespace Pinta.Tools
 		private Color fill_color;
 		private Color outline_color;
 
-		private readonly DashPatternBox dashPBox = new DashPatternBox ();
+		private readonly DashPatternBox dash_p_box = new DashPatternBox ();
 
 		private string dash_pattern = "-";
 
@@ -66,7 +66,7 @@ namespace Pinta.Tools
 
 			// TODO: This could be cleaner.
 			// This will only return an item on the first setup so we only add the handler once.
-			var dash_pattern_box = dashPBox.SetupToolbar (tb);
+			var dash_pattern_box = dash_p_box.SetupToolbar (tb);
 
 			if (dash_pattern_box != null) {
 				dash_pattern_box.GetEntry ().SetText (Settings.GetSetting (DASH_PATTERN_SETTING, "-"));
@@ -201,8 +201,8 @@ namespace Pinta.Tools
 
 			if (fill_button is not null)
 				settings.PutSetting (FILL_TYPE_SETTING, fill_button.SelectedIndex);
-			if (dashPBox?.comboBox is not null)
-				settings.PutSetting (DASH_PATTERN_SETTING, dashPBox.comboBox.ComboBox.GetActiveText ()!);
+			if (dash_p_box?.comboBox is not null)
+				settings.PutSetting (DASH_PATTERN_SETTING, dash_p_box.comboBox.ComboBox.GetActiveText ()!);
 		}
 
 		private bool StrokeShape => FillDropDown.SelectedItem.GetTagOrDefault (0) % 2 == 0;
