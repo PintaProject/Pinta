@@ -25,6 +25,8 @@
 // THE SOFTWARE.
 
 using System;
+using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Diagnostics.CodeAnalysis;
 using System.Text;
 
@@ -41,12 +43,12 @@ namespace Pinta.Core
 		/// <summary>
 		/// A list of the supported extensions (for example, "jpeg" and "JPEG").
 		/// </summary>
-		public string[] Extensions { get; }
+		public ReadOnlyCollection<string> Extensions { get; }
 
 		/// <summary>
 		/// A list of supported MIME types (for example, "image/jpg" and "image/png").
 		/// </summary>
-		public string[] Mimes { get; }
+		public ReadOnlyCollection<string> Mimes { get; }
 
 		/// <summary>
 		/// The importer for this file format. This may be null if only exporting
@@ -73,22 +75,24 @@ namespace Pinta.Core
 		/// <param name="mimes">A list of supported file MIME types (for example, "image/jpeg" and "image/png").</param>
 		/// <param name="importer">The importer for this file format, or null if importing is not supported.</param>
 		/// <param name="exporter">The exporter for this file format, or null if exporting is not supported.</param>
-		public FormatDescriptor (string displayPrefix, string[] extensions, string[] mimes,
+		public FormatDescriptor (string displayPrefix, IEnumerable<string> extensions, IEnumerable<string> mimes,
 					 IImageImporter? importer, IImageExporter? exporter)
 		{
-			if (extensions == null || (importer == null && exporter == null)) {
+			if (extensions == null || (importer == null && exporter == null))
 				throw new ArgumentNullException ("Format descriptor is initialized incorrectly");
-			}
 
-			this.Extensions = extensions;
-			this.Mimes = mimes;
+			var materializedExtensions = extensions.ToReadOnlyCollection ();
+			var materializedMimes = mimes.ToReadOnlyCollection ();
+
+			this.Extensions = materializedExtensions;
+			this.Mimes = materializedMimes;
 			this.Importer = importer;
 			this.Exporter = exporter;
 
 			FileFilter ff = FileFilter.New ();
 			StringBuilder formatNames = new StringBuilder ();
 
-			foreach (string ext in extensions) {
+			foreach (string ext in materializedExtensions) {
 				if (formatNames.Length > 0)
 					formatNames.Append (", ");
 
@@ -102,7 +106,7 @@ namespace Pinta.Core
 			// Windows does not understand MIME types natively.
 			// Adding a MIME filter on Windows would break the native file picker and force a GTK file picker instead.
 			if (SystemManager.GetOperatingSystem () != OS.Windows) {
-				foreach (string mime in mimes) {
+				foreach (string mime in materializedMimes) {
 					ff.AddMimeType (mime);
 				}
 			}

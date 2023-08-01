@@ -9,11 +9,38 @@
 
 using System;
 using System.Collections.Generic;
+using System.Collections.Immutable;
+using System.Collections.ObjectModel;
 
 namespace Pinta.Core
 {
 	public static class OtherExtensions
 	{
+		/// <returns>Collection wrapper backed by immutable collection</returns>
+		public static ReadOnlyCollection<T> ToReadOnlyCollection <T> (this IEnumerable<T> values)
+		{
+			switch (values) {
+				case ImmutableBackedReadOnlyCollection<T> transparent:
+					return transparent;
+				case ImmutableArray<T> array:
+					return new ImmutableBackedReadOnlyCollection<T> (array);
+				case ImmutableList<T> list:
+					return new ImmutableBackedReadOnlyCollection<T> (list);
+				default:
+					return new ImmutableBackedReadOnlyCollection<T> (values.ToImmutableArray ());
+			}
+		}
+
+		private sealed class ImmutableBackedReadOnlyCollection<T> : ReadOnlyCollection<T>
+		{
+			internal ImmutableBackedReadOnlyCollection (ImmutableList<T> list) : base (list)
+			{
+			}
+			internal ImmutableBackedReadOnlyCollection (ImmutableArray<T> array) : base(array)
+			{
+			}
+		}
+
 		public static bool In<T> (this T enumeration, params T[] values)
 		{
 			if (enumeration is null)
