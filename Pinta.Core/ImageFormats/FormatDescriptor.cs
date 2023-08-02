@@ -116,15 +116,9 @@ namespace Pinta.Core
 		}
 
 		[MemberNotNullWhen (returnValue: false, member: nameof (Exporter))]
-		public bool IsReadOnly ()
-		{
-			return Exporter == null;
-		}
+		public bool IsReadOnly () => Exporter == null;
 
 		[MemberNotNullWhen (returnValue: false, member: nameof (Importer))]
-		public bool IsWriteOnly ()
-		{
-			return Importer == null;
-		}
+		public bool IsWriteOnly () => Importer == null;
 	}
 }
