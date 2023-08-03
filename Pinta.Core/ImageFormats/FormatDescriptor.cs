@@ -78,21 +78,21 @@ namespace Pinta.Core
 		public FormatDescriptor (string displayPrefix, IEnumerable<string> extensions, IEnumerable<string> mimes,
 					 IImageImporter? importer, IImageExporter? exporter)
 		{
-			if (extensions == null || (importer == null && exporter == null))
-				throw new ArgumentNullException ("Format descriptor is initialized incorrectly");
+			if (extensions is null)
+				throw new ArgumentNullException (nameof (extensions));
 
-			var materializedExtensions = extensions.ToReadOnlyCollection ();
-			var materializedMimes = mimes.ToReadOnlyCollection ();
+			if (importer == null && exporter == null)
+				throw new ArgumentException ("Format descriptor is initialized incorrectly", $"{nameof(importer)}, {nameof(exporter)}");
 
-			this.Extensions = materializedExtensions;
-			this.Mimes = materializedMimes;
+			this.Extensions = extensions.ToReadOnlyCollection (); // Create a read-only copy
+			this.Mimes = mimes.ToReadOnlyCollection (); // Create a read-only copy
 			this.Importer = importer;
 			this.Exporter = exporter;
 
 			FileFilter ff = FileFilter.New ();
 			StringBuilder formatNames = new StringBuilder ();
 
-			foreach (string ext in materializedExtensions) {
+			foreach (string ext in Extensions) {
 				if (formatNames.Length > 0)
 					formatNames.Append (", ");
 
@@ -106,7 +106,7 @@ namespace Pinta.Core
 			// Windows does not understand MIME types natively.
 			// Adding a MIME filter on Windows would break the native file picker and force a GTK file picker instead.
 			if (SystemManager.GetOperatingSystem () != OS.Windows) {
-				foreach (string mime in materializedMimes) {
+				foreach (string mime in Mimes) {
 					ff.AddMimeType (mime);
 				}
 			}
