@@ -21,7 +21,7 @@ namespace Pinta.Core
 		/// <see cref="IEnumerable{T}"/> argument, except if the argument is of type
 		/// <see cref="ImmutableArray{T}"/> or <see cref="ImmutableList{T}"/>, in which case only
 		/// the wrapping (not the copying) is necessary; or if the argument is an object that has
-		/// been previously returned from this method, in which case the object is returned as is.
+		/// been previously returned from this method, in which case the reference is returned as is.
 		/// </summary>
 		/// <param name="values">Sequence of values to be materialized</param>
 		/// <returns>
