@@ -78,11 +78,8 @@ namespace Pinta.Core
 		public FormatDescriptor (string displayPrefix, IEnumerable<string> extensions, IEnumerable<string> mimes,
 					 IImageImporter? importer, IImageExporter? exporter)
 		{
-			if (extensions is null)
-				throw new ArgumentNullException (nameof (extensions));
-
 			if (importer == null && exporter == null)
-				throw new ArgumentException ("Format descriptor is initialized incorrectly", $"{nameof(importer)}, {nameof(exporter)}");
+				throw new ArgumentException ("Format descriptor is initialized incorrectly", $"{nameof (importer)}, {nameof (exporter)}");
 
 			this.Extensions = extensions.ToReadOnlyCollection (); // Create a read-only copy
 			this.Mimes = mimes.ToReadOnlyCollection (); // Create a read-only copy
