@@ -45,10 +45,10 @@ namespace Pinta.Core
 		}
 
 		public static FontDescription CreateFontDescription ()
-			=> new(Pango.Internal.FontDescription.New ());
+			=> new (Pango.Internal.FontDescription.New ());
 
 		public static FontDescription Copy (this FontDescription desc)
-			=> new(Pango.Internal.FontDescription.Copy (desc.Handle));
+			=> new (Pango.Internal.FontDescription.Copy (desc.Handle));
 
 		public static int GetSize (this FontDescription desc)
 			=> Pango.Internal.FontDescription.GetSize (desc.Handle);
@@ -107,7 +107,7 @@ namespace Pinta.Core
 			public int Width;
 			public int Height;
 
-			public RectangleI ToRectangleI () => new(X, Y, Width, Height);
+			public RectangleI ToRectangleI () => new (X, Y, Width, Height);
 		}
 
 		public static int UnitsToPixels (int units)

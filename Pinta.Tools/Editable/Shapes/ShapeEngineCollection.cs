@@ -100,14 +100,14 @@ namespace Pinta.Tools
 	public abstract class ShapeEngine
 	{
 		//A collection of the original ControlPoints that the shape is based on and that the user interacts with.
-		public List<ControlPoint> ControlPoints = new();
+		public List<ControlPoint> ControlPoints = new ();
 		public List<MoveHandle> ControlPointHandles = new ();
 
 		//A collection of calculated GeneratedPoints that make up the entirety of the shape being drawn.
 		public GeneratedPoint[] GeneratedPoints = Array.Empty<GeneratedPoint> ();
 
 		//An organized collection of the GeneratedPoints's points for optimized nearest point detection.
-		public OrganizedPointCollection OrganizedPoints = new();
+		public OrganizedPointCollection OrganizedPoints = new ();
 
 		private readonly UserLayer parent_layer;
 		public ReEditableLayer DrawingLayer;

@@ -32,7 +32,7 @@ namespace Pinta.Docking;
 /// </summary>
 public class Dock : Box
 {
-	private readonly DockPanel right_panel = new();
+	private readonly DockPanel right_panel = new ();
 	private readonly Paned pane = Paned.New (Orientation.Horizontal);
 
 	public Dock ()

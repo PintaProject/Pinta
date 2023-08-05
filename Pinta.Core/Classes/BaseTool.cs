@@ -357,7 +357,7 @@ namespace Pinta.Core
 			}
 		}
 
-		private ToolBoxButton CreateToolButton () => new(this);
+		private ToolBoxButton CreateToolButton () => new (this);
 		#endregion
 
 		#region Event Invokers

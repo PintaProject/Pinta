@@ -154,7 +154,7 @@ namespace Mono.Options
 	public class OptionValueCollection : IList, IList<string>
 	{
 
-		readonly List<string> values = new();
+		readonly List<string> values = new ();
 		readonly OptionContext c;
 
 		internal OptionValueCollection (OptionContext c)
@@ -753,7 +753,7 @@ namespace Mono.Options
 			return false;
 		}
 
-		private readonly Regex ValueOption = new(
+		private readonly Regex ValueOption = new (
 			@"^(?<flag>--|-|/)(?<name>[^:=]+)((?<sep>[:=])(?<value>.*))?$");
 
 		protected bool GetOptionParts (string argument, out string flag, out string name, out string sep, out string value)

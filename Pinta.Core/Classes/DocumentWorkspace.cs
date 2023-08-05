@@ -100,7 +100,7 @@ namespace Pinta.Core
 		/// Offset to center the image view in the canvas widget.
 		/// (When zoomed out, the widget will have a larger allocated size than the image view size).
 		/// </summary>
-		public PointD Offset => new(
+		public PointD Offset => new (
 			(Canvas.GetAllocatedWidth () - view_size.Width) / 2,
 			(Canvas.GetAllocatedHeight () - view_size.Height) / 2);
 
