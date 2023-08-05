@@ -14,84 +14,84 @@ namespace Pinta.Core
 {
 	public abstract class GradientRenderer
 	{
-		private readonly BinaryPixelOp normalBlendOp;
-		private ColorBgra startColor;
-		private ColorBgra endColor;
-		private PointD startPoint;
-		private PointD endPoint;
-		private bool alphaBlending;
-		private bool alphaOnly;
+		private readonly BinaryPixelOp normal_blend_op;
+		private ColorBgra start_color;
+		private ColorBgra end_color;
+		private PointD start_point;
+		private PointD end_point;
+		private bool alpha_blending;
+		private bool alpha_only;
 
-		private bool lerpCacheIsValid = false;
-		private readonly byte[] lerpAlphas;
-		private readonly ColorBgra[] lerpColors;
+		private bool lerp_cache_is_valid = false;
+		private readonly byte[] lerp_alphas;
+		private readonly ColorBgra[] lerp_colors;
 
 		public ColorBgra StartColor {
-			get { return this.startColor; }
+			get { return this.start_color; }
 
 			set {
-				if (this.startColor != value) {
-					this.startColor = value;
-					this.lerpCacheIsValid = false;
+				if (this.start_color != value) {
+					this.start_color = value;
+					this.lerp_cache_is_valid = false;
 				}
 			}
 		}
 
 		public ColorBgra EndColor {
-			get { return this.endColor; }
+			get { return this.end_color; }
 
 			set {
-				if (this.endColor != value) {
-					this.endColor = value;
-					this.lerpCacheIsValid = false;
+				if (this.end_color != value) {
+					this.end_color = value;
+					this.lerp_cache_is_valid = false;
 				}
 			}
 		}
 
 		public PointD StartPoint {
-			get { return this.startPoint; }
+			get { return this.start_point; }
 
-			set { this.startPoint = value; }
+			set { this.start_point = value; }
 		}
 
 		public PointD EndPoint {
-			get { return this.endPoint; }
+			get { return this.end_point; }
 
-			set { this.endPoint = value; }
+			set { this.end_point = value; }
 		}
 
 		public bool AlphaBlending {
-			get { return this.alphaBlending; }
+			get { return this.alpha_blending; }
 
-			set { this.alphaBlending = value; }
+			set { this.alpha_blending = value; }
 		}
 
 		public bool AlphaOnly {
-			get { return this.alphaOnly; }
+			get { return this.alpha_only; }
 
-			set { this.alphaOnly = value; }
+			set { this.alpha_only = value; }
 		}
 
 		public virtual void BeforeRender ()
 		{
-			if (!this.lerpCacheIsValid) {
+			if (!this.lerp_cache_is_valid) {
 				byte startAlpha;
 				byte endAlpha;
 
-				if (this.alphaOnly) {
-					ComputeAlphaOnlyValuesFromColors (this.startColor, this.endColor, out startAlpha, out endAlpha);
+				if (this.alpha_only) {
+					ComputeAlphaOnlyValuesFromColors (this.start_color, this.end_color, out startAlpha, out endAlpha);
 				} else {
-					startAlpha = this.startColor.A;
-					endAlpha = this.endColor.A;
+					startAlpha = this.start_color.A;
+					endAlpha = this.end_color.A;
 				}
 
 				for (int i = 0; i < 256; ++i) {
 					byte a = (byte) i;
-					this.lerpColors[a] = ColorBgra.Blend (this.startColor, this.endColor, a);
-					this.lerpAlphas[a] = (byte) (startAlpha + ((endAlpha - startAlpha) * a) / 255);
+					this.lerp_colors[a] = ColorBgra.Blend (this.start_color, this.end_color, a);
+					this.lerp_alphas[a] = (byte) (startAlpha + ((endAlpha - startAlpha) * a) / 255);
 				}
 
-				this.lerpCacheIsValid = true;
+				this.lerp_cache_is_valid = true;
 			}
 		}
 
@@ -112,11 +112,11 @@ namespace Pinta.Core
 			byte startAlpha;
 			byte endAlpha;
 
-			if (this.alphaOnly) {
-				ComputeAlphaOnlyValuesFromColors (this.startColor, this.endColor, out startAlpha, out endAlpha);
+			if (this.alpha_only) {
+				ComputeAlphaOnlyValuesFromColors (this.start_color, this.end_color, out startAlpha, out endAlpha);
 			} else {
-				startAlpha = this.startColor.A;
-				endAlpha = this.endColor.A;
+				startAlpha = this.start_color.A;
+				endAlpha = this.end_color.A;
 			}
 
 			surface.Flush ();
@@ -127,7 +127,7 @@ namespace Pinta.Core
 			for (int ri = 0; ri < rois.Length; ++ri) {
 				RectangleI rect = rois[ri];
 
-				if (this.startPoint.X == this.endPoint.X && this.startPoint.Y == this.endPoint.Y) {
+				if (this.start_point.X == this.end_point.X && this.start_point.Y == this.end_point.Y) {
 					// Start and End point are the same ... fill with solid color.
 					for (int y = rect.Top; y <= rect.Bottom; ++y) {
 						var row = src_data.Slice (y * src_width, src_width);
@@ -136,18 +136,18 @@ namespace Pinta.Core
 							ref ColorBgra pixel = ref row[x];
 							ColorBgra result;
 
-							if (this.alphaOnly && this.alphaBlending) {
+							if (this.alpha_only && this.alpha_blending) {
 								byte resultAlpha = (byte) Utility.FastDivideShortByByte ((ushort) (pixel.A * endAlpha), 255);
 								result = pixel;
 								result.A = resultAlpha;
-							} else if (this.alphaOnly && !this.alphaBlending) {
+							} else if (this.alpha_only && !this.alpha_blending) {
 								result = pixel;
 								result.A = endAlpha;
-							} else if (!this.alphaOnly && this.alphaBlending) {
-								result = this.normalBlendOp.Apply (pixel, this.endColor);
+							} else if (!this.alpha_only && this.alpha_blending) {
+								result = this.normal_blend_op.Apply (pixel, this.end_color);
 								//if (!this.alphaOnly && !this.alphaBlending)
 							} else {
-								result = this.endColor;
+								result = this.end_color;
 							}
 
 							pixel = result;
@@ -170,10 +170,10 @@ namespace Pinta.Core
 			var right = rect.Right;
 
 			// Note that Cairo uses premultiplied alpha.
-			if (alphaOnly && alphaBlending) {
+			if (alpha_only && alpha_blending) {
 				for (var x = rect.Left; x <= right; ++x) {
 					var lerpByte = ComputeByteLerp (x, y);
-					var lerpAlpha = lerpAlphas[lerpByte];
+					var lerpAlpha = lerp_alphas[lerpByte];
 					ref ColorBgra pixel = ref row[x];
 
 					pixel.B = Utility.FastScaleByteByByte (pixel.B, lerpAlpha);
@@ -181,29 +181,29 @@ namespace Pinta.Core
 					pixel.R = Utility.FastScaleByteByByte (pixel.R, lerpAlpha);
 					pixel.A = Utility.FastScaleByteByByte (pixel.A, lerpAlpha);
 				}
-			} else if (alphaOnly && !alphaBlending) {
+			} else if (alpha_only && !alpha_blending) {
 				for (var x = rect.Left; x <= right; ++x) {
 					var lerpByte = ComputeByteLerp (x, y);
-					var lerpAlpha = lerpAlphas[lerpByte];
+					var lerpAlpha = lerp_alphas[lerpByte];
 					ref ColorBgra pixel = ref row[x];
 
 					var color = pixel.ToStraightAlpha ();
 					color.A = lerpAlpha;
 					pixel = color.ToPremultipliedAlpha ();
 				}
-			} else if (!alphaOnly && (alphaBlending && (startAlpha != 255 || endAlpha != 255))) {
+			} else if (!alpha_only && (alpha_blending && (startAlpha != 255 || endAlpha != 255))) {
 				// If we're doing all color channels, and we're doing alpha blending, and if alpha blending is necessary
 				for (var x = rect.Left; x <= right; ++x) {
 					var lerpByte = ComputeByteLerp (x, y);
-					var lerpColor = lerpColors[lerpByte];
+					var lerpColor = lerp_colors[lerpByte];
 					ref ColorBgra pixel = ref row[x];
-					pixel = normalBlendOp.Apply (pixel, lerpColor);
+					pixel = normal_blend_op.Apply (pixel, lerpColor);
 				}
 				//if (!this.alphaOnly && !this.alphaBlending) // or sC.A == 255 && eC.A == 255
 			} else {
 				for (var x = rect.Left; x <= right; ++x) {
 					var lerpByte = ComputeByteLerp (x, y);
-					var lerpColor = lerpColors[lerpByte];
+					var lerpColor = lerp_colors[lerpByte];
 					row[x] = lerpColor;
 				}
 			}
@@ -212,10 +212,10 @@ namespace Pinta.Core
 
 		protected internal GradientRenderer (bool alphaOnly, BinaryPixelOp normalBlendOp)
 		{
-			this.normalBlendOp = normalBlendOp;
-			this.alphaOnly = alphaOnly;
-			this.lerpAlphas = new byte[256];
-			this.lerpColors = new ColorBgra[256];
+			this.normal_blend_op = normalBlendOp;
+			this.alpha_only = alphaOnly;
+			this.lerp_alphas = new byte[256];
+			this.lerp_colors = new ColorBgra[256];
 		}
 	}
 }
