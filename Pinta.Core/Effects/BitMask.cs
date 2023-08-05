@@ -15,7 +15,6 @@ public sealed class BitMask
 	{
 		if (width < 0)
 			throw new ArgumentOutOfRangeException (nameof (width));
-
 		if (height < 0)
 			throw new ArgumentOutOfRangeException (nameof (height));
 
@@ -55,7 +54,6 @@ public sealed class BitMask
 	public void Invert (Scanline scan)
 	{
 		var x = scan.X;
-
 		while (x < scan.X + scan.Length) {
 			Invert (x, scan.Y);
 			++x;
