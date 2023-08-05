@@ -2,9 +2,11 @@ using System.Collections;
 
 namespace Pinta.Core
 {
-	// Represent a two dimensional matrix of bits used to store a
-	// true/false value for each pixel in an image.
-	public class BitMask
+	/// <summary>
+	/// Represents a two-dimensional matrix of bits used to store a
+	/// true/false value for each pixel in an image.
+	/// </summary>
+	public sealed class BitMask
 	{
 		private readonly BitArray array;
 
