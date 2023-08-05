@@ -27,65 +27,64 @@
 using System;
 using Pinta.Core;
 
-namespace Pinta.Actions
+namespace Pinta.Actions;
+
+class CloseDocumentAction : IActionHandler
 {
-	class CloseDocumentAction : IActionHandler
+	#region IActionHandler Members
+	public void Initialize ()
 	{
-		#region IActionHandler Members
-		public void Initialize ()
-		{
-			PintaCore.Actions.File.Close.Activated += Activated;
+		PintaCore.Actions.File.Close.Activated += Activated;
+	}
+
+	public void Uninitialize ()
+	{
+		PintaCore.Actions.File.Close.Activated -= Activated;
+	}
+	#endregion
+
+	private void Activated (object sender, EventArgs e)
+	{
+		// Commit any pending changes
+		PintaCore.Tools.Commit ();
+
+		// If it's not dirty, just close it
+		if (!PintaCore.Workspace.ActiveDocument.IsDirty) {
+			PintaCore.Workspace.CloseActiveDocument ();
+			return;
 		}
 
-		public void Uninitialize ()
-		{
-			PintaCore.Actions.File.Close.Activated -= Activated;
-		}
-		#endregion
+		var heading = Translations.GetString ("Save changes to image \"{0}\" before closing?",
+			PintaCore.Workspace.ActiveDocument.DisplayName);
+		var body = Translations.GetString ("If you don't save, all changes will be permanently lost.");
 
-		private void Activated (object sender, EventArgs e)
-		{
-			// Commit any pending changes
-			PintaCore.Tools.Commit ();
+		var dialog = Adw.MessageDialog.New (PintaCore.Chrome.MainWindow, heading, body);
 
-			// If it's not dirty, just close it
-			if (!PintaCore.Workspace.ActiveDocument.IsDirty) {
+		const string cancel_response = "cancel";
+		const string discard_response = "discard";
+		const string save_response = "save";
+		dialog.AddResponse (cancel_response, Translations.GetString ("_Cancel"));
+		dialog.AddResponse (discard_response, Translations.GetString ("_Discard"));
+		dialog.AddResponse (save_response, Translations.GetString ("_Save"));
+
+		// Configure the styling for the save / discard buttons.
+		dialog.SetResponseAppearance (discard_response, Adw.ResponseAppearance.Destructive);
+		dialog.SetResponseAppearance (save_response, Adw.ResponseAppearance.Suggested);
+
+		dialog.CloseResponse = cancel_response;
+		dialog.DefaultResponse = save_response;
+
+		string response = dialog.RunBlocking ();
+		if (response == save_response) {
+			PintaCore.Workspace.ActiveDocument.Save (false);
+
+			// If the image is still dirty, the user
+			// must have cancelled the Save dialog
+			if (!PintaCore.Workspace.ActiveDocument.IsDirty)
 				PintaCore.Workspace.CloseActiveDocument ();
-				return;
-			}
-
-			var heading = Translations.GetString ("Save changes to image \"{0}\" before closing?",
-				PintaCore.Workspace.ActiveDocument.DisplayName);
-			var body = Translations.GetString ("If you don't save, all changes will be permanently lost.");
-
-			var dialog = Adw.MessageDialog.New (PintaCore.Chrome.MainWindow, heading, body);
-
-			const string cancel_response = "cancel";
-			const string discard_response = "discard";
-			const string save_response = "save";
-			dialog.AddResponse (cancel_response, Translations.GetString ("_Cancel"));
-			dialog.AddResponse (discard_response, Translations.GetString ("_Discard"));
-			dialog.AddResponse (save_response, Translations.GetString ("_Save"));
-
-			// Configure the styling for the save / discard buttons.
-			dialog.SetResponseAppearance (discard_response, Adw.ResponseAppearance.Destructive);
-			dialog.SetResponseAppearance (save_response, Adw.ResponseAppearance.Suggested);
-
-			dialog.CloseResponse = cancel_response;
-			dialog.DefaultResponse = save_response;
-
-			string response = dialog.RunBlocking ();
-			if (response == save_response) {
-				PintaCore.Workspace.ActiveDocument.Save (false);
-
-				// If the image is still dirty, the user
-				// must have cancelled the Save dialog
-				if (!PintaCore.Workspace.ActiveDocument.IsDirty)
-					PintaCore.Workspace.CloseActiveDocument ();
-			} else if (response == discard_response) {
-				PintaCore.Workspace.CloseActiveDocument ();
-			}
-
+		} else if (response == discard_response) {
+			PintaCore.Workspace.CloseActiveDocument ();
 		}
+
 	}
 }

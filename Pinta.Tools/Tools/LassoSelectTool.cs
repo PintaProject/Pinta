@@ -31,115 +31,114 @@ using ClipperLib;
 using Gtk;
 using Pinta.Core;
 
-namespace Pinta.Tools
+namespace Pinta.Tools;
+
+public class LassoSelectTool : BaseTool
 {
-	public class LassoSelectTool : BaseTool
+	private readonly IWorkspaceService workspace;
+
+	private bool is_drawing = false;
+	private CombineMode combine_mode;
+	private SelectionHistoryItem? hist;
+
+	private Path? path;
+	private readonly List<IntPoint> lasso_polygon = new List<IntPoint> ();
+
+	public LassoSelectTool (IServiceManager services) : base (services)
 	{
-		private readonly IWorkspaceService workspace;
+		workspace = services.GetService<IWorkspaceService> ();
+	}
 
-		private bool is_drawing = false;
-		private CombineMode combine_mode;
-		private SelectionHistoryItem? hist;
+	public override string Name => Translations.GetString ("Lasso Select");
+	public override string Icon => Pinta.Resources.Icons.ToolSelectLasso;
+	public override string StatusBarText => Translations.GetString ("Click and drag to draw the outline for a selection area.");
+	public override Gdk.Key ShortcutKey => Gdk.Key.S;
+	public override Gdk.Cursor DefaultCursor => Gdk.Cursor.NewFromTexture (Resources.GetIcon ("Cursor.LassoSelect.png"), 9, 18, null);
+	public override int Priority => 17;
 
-		private Path? path;
-		private readonly List<IntPoint> lasso_polygon = new List<IntPoint> ();
+	protected override void OnBuildToolBar (Box tb)
+	{
+		base.OnBuildToolBar (tb);
 
-		public LassoSelectTool (IServiceManager services) : base (services)
-		{
-			workspace = services.GetService<IWorkspaceService> ();
+		workspace.SelectionHandler.BuildToolbar (tb, Settings);
+	}
+
+	protected override void OnMouseDown (Document document, ToolMouseEventArgs e)
+	{
+		if (is_drawing)
+			return;
+
+		hist = new SelectionHistoryItem (Icon, Name);
+		hist.TakeSnapshot ();
+
+		combine_mode = workspace.SelectionHandler.DetermineCombineMode (e);
+		path = null;
+		is_drawing = true;
+
+		document.PreviousSelection = document.Selection.Clone ();
+	}
+
+	protected override void OnMouseMove (Document document, ToolMouseEventArgs e)
+	{
+		if (!is_drawing)
+			return;
+
+		var x = Utility.Clamp (e.PointDouble.X, 0, document.ImageSize.Width - 1);
+		var y = Utility.Clamp (e.PointDouble.Y, 0, document.ImageSize.Height - 1);
+
+		document.Selection.Visible = true;
+
+		var surf = document.Layers.SelectionLayer.Surface;
+
+		var g = new Context (surf);
+		g.Antialias = Antialias.Subpixel;
+
+		if (path != null) {
+			g.AppendPath (path);
+		} else {
+			g.MoveTo (x, y);
 		}
 
-		public override string Name => Translations.GetString ("Lasso Select");
-		public override string Icon => Pinta.Resources.Icons.ToolSelectLasso;
-		public override string StatusBarText => Translations.GetString ("Click and drag to draw the outline for a selection area.");
-		public override Gdk.Key ShortcutKey => Gdk.Key.S;
-		public override Gdk.Cursor DefaultCursor => Gdk.Cursor.NewFromTexture (Resources.GetIcon ("Cursor.LassoSelect.png"), 9, 18, null);
-		public override int Priority => 17;
+		g.LineTo (x, y);
+		lasso_polygon.Add (new IntPoint ((long) x, (long) y));
 
-		protected override void OnBuildToolBar (Box tb)
-		{
-			base.OnBuildToolBar (tb);
+		path = g.CopyPath ();
 
-			workspace.SelectionHandler.BuildToolbar (tb, Settings);
-		}
+		g.FillRule = FillRule.EvenOdd;
+		g.ClosePath ();
 
-		protected override void OnMouseDown (Document document, ToolMouseEventArgs e)
-		{
-			if (is_drawing)
-				return;
+		document.Selection.SelectionPolygons.Clear ();
+		document.Selection.SelectionPolygons.Add (lasso_polygon.ToList ());
 
-			hist = new SelectionHistoryItem (Icon, Name);
-			hist.TakeSnapshot ();
+		SelectionModeHandler.PerformSelectionMode (document, combine_mode, document.Selection.SelectionPolygons);
 
-			combine_mode = workspace.SelectionHandler.DetermineCombineMode (e);
+		document.Workspace.Invalidate ();
+	}
+
+	protected override void OnMouseUp (Document document, ToolMouseEventArgs e)
+	{
+		var surf = document.Layers.SelectionLayer.Surface;
+
+		var g = new Context (surf);
+		if (path != null) {
+			g.AppendPath (path);
 			path = null;
-			is_drawing = true;
-
-			document.PreviousSelection = document.Selection.Clone ();
 		}
 
-		protected override void OnMouseMove (Document document, ToolMouseEventArgs e)
-		{
-			if (!is_drawing)
-				return;
+		g.FillRule = FillRule.EvenOdd;
+		g.ClosePath ();
 
-			var x = Utility.Clamp (e.PointDouble.X, 0, document.ImageSize.Width - 1);
-			var y = Utility.Clamp (e.PointDouble.Y, 0, document.ImageSize.Height - 1);
+		document.Selection.SelectionPolygons.Clear ();
+		document.Selection.SelectionPolygons.Add (lasso_polygon.ToList ());
+		SelectionModeHandler.PerformSelectionMode (document, combine_mode, document.Selection.SelectionPolygons);
+		document.Workspace.Invalidate ();
 
-			document.Selection.Visible = true;
-
-			var surf = document.Layers.SelectionLayer.Surface;
-
-			var g = new Context (surf);
-			g.Antialias = Antialias.Subpixel;
-
-			if (path != null) {
-				g.AppendPath (path);
-			} else {
-				g.MoveTo (x, y);
-			}
-
-			g.LineTo (x, y);
-			lasso_polygon.Add (new IntPoint ((long) x, (long) y));
-
-			path = g.CopyPath ();
-
-			g.FillRule = FillRule.EvenOdd;
-			g.ClosePath ();
-
-			document.Selection.SelectionPolygons.Clear ();
-			document.Selection.SelectionPolygons.Add (lasso_polygon.ToList ());
-
-			SelectionModeHandler.PerformSelectionMode (document, combine_mode, document.Selection.SelectionPolygons);
-
-			document.Workspace.Invalidate ();
+		if (hist != null) {
+			document.History.PushNewItem (hist);
+			hist = null;
 		}
 
-		protected override void OnMouseUp (Document document, ToolMouseEventArgs e)
-		{
-			var surf = document.Layers.SelectionLayer.Surface;
-
-			var g = new Context (surf);
-			if (path != null) {
-				g.AppendPath (path);
-				path = null;
-			}
-
-			g.FillRule = FillRule.EvenOdd;
-			g.ClosePath ();
-
-			document.Selection.SelectionPolygons.Clear ();
-			document.Selection.SelectionPolygons.Add (lasso_polygon.ToList ());
-			SelectionModeHandler.PerformSelectionMode (document, combine_mode, document.Selection.SelectionPolygons);
-			document.Workspace.Invalidate ();
-
-			if (hist != null) {
-				document.History.PushNewItem (hist);
-				hist = null;
-			}
-
-			lasso_polygon.Clear ();
-			is_drawing = false;
-		}
+		lasso_polygon.Clear ();
+		is_drawing = false;
 	}
 }

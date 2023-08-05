@@ -10,12 +10,11 @@ using System.Threading.Tasks;
 using Tmds.DBus;
 
 [assembly: InternalsVisibleTo (Tmds.DBus.Connection.DynamicAssemblyName)]
-namespace Requests.DBus
+namespace Requests.DBus;
+
+[DBusInterface ("org.freedesktop.portal.Request")]
+interface IRequest : IDBusObject
 {
-	[DBusInterface ("org.freedesktop.portal.Request")]
-	interface IRequest : IDBusObject
-	{
-		Task CloseAsync ();
-		Task<IDisposable> WatchResponseAsync (Action<(uint response, IDictionary<string, object> results)> handler, Action<Exception>? onError = null);
-	}
+	Task CloseAsync ();
+	Task<IDisposable> WatchResponseAsync (Action<(uint response, IDictionary<string, object> results)> handler, Action<Exception>? onError = null);
 }
