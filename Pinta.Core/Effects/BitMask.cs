@@ -14,10 +14,10 @@ public sealed class BitMask
 	public BitMask (int width, int height)
 	{
 		if (width < 0)
-			throw new ArgumentOutOfRangeException (nameof(width));
+			throw new ArgumentOutOfRangeException (nameof (width));
 
 		if (height < 0)
-			throw new ArgumentOutOfRangeException (nameof(height));
+			throw new ArgumentOutOfRangeException (nameof (height));
 
 		Width = width;
 		Height = height;

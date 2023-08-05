@@ -97,7 +97,7 @@ internal sealed class BitMaskTest
 		var mask = new BitMask (maskWidth, maskHeight);
 		var coordinates = new PointI (bitToSetX, bitToSetY);
 		foreach (var value in valuesToSetAndTest) {
-			mask.Set(bitToSetX, bitToSetY, value);
+			mask.Set (bitToSetX, bitToSetY, value);
 			Assert.AreEqual (value, mask[bitToSetX, bitToSetY]);
 			Assert.AreEqual (value, mask[coordinates]);
 		}
