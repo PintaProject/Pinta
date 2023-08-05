@@ -38,7 +38,7 @@ namespace Pinta.Core
 
 	public class ServiceManager : IServiceManager
 	{
-		private readonly Dictionary<Type, object> services = new Dictionary<Type, object> ();
+		private readonly Dictionary<Type, object> services = new();
 
 		public T AddService<T> (T implementation) where T : class
 		{

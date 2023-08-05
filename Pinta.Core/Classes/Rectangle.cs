@@ -48,7 +48,7 @@ namespace Pinta.Core
 		{
 		}
 
-		public RectangleI ToInt () => new RectangleI ((int) Math.Floor (X), (int) Math.Floor (Y),
+		public RectangleI ToInt () => new((int) Math.Floor (X), (int) Math.Floor (Y),
 							      (int) Math.Ceiling (Width), (int) Math.Ceiling (Height));
 
 		public double Left => X;
@@ -71,8 +71,8 @@ namespace Pinta.Core
 
 		public bool ContainsPoint (in PointD point) => ContainsPoint (point.X, point.Y);
 
-		public PointD Location () => new PointD (X, Y);
-		public PointD GetCenter () => new PointD (X + 0.5 * Width, Y + 0.5 * Height);
+		public PointD Location () => new(X, Y);
+		public PointD GetCenter () => new(X + 0.5 * Width, Y + 0.5 * Height);
 
 		public void Inflate (double width, double height)
 		{
@@ -138,9 +138,9 @@ namespace Pinta.Core
 		public static readonly RectangleI Zero;
 
 		public static RectangleI FromLTRB (int left, int top, int right, int bottom)
-			=> new RectangleI (left, top, right - left + 1, bottom - top + 1);
+			=> new(left, top, right - left + 1, bottom - top + 1);
 
-		public RectangleD ToDouble () => new RectangleD (X, Y, Width, Height);
+		public RectangleD ToDouble () => new(X, Y, Width, Height);
 
 		public int Left => X;
 		public int Top => Y;
@@ -149,8 +149,8 @@ namespace Pinta.Core
 
 		public bool IsEmpty => (Width == 0) || (Height == 0);
 
-		public PointI Location => new PointI (X, Y);
-		public Size Size => new Size (Width, Height);
+		public PointI Location => new(X, Y);
+		public Size Size => new(Width, Height);
 
 		public override string ToString () => $"x:{X} y:{Y} w:{Width} h:{Height}";
 

@@ -19,7 +19,7 @@ namespace Pinta.Effects
 	{
 		// This is so that repetition of the effect with CTRL+F actually shows up differently.
 		private readonly byte instance_seed = unchecked((byte) DateTime.Now.Ticks);
-		private static readonly object render_lock = new object ();
+		private static readonly object render_lock = new();
 
 		public override string Icon => Pinta.Resources.Icons.EffectsRenderClouds;
 

@@ -37,7 +37,7 @@ namespace Pinta.Core
 	public class UserLayer : Layer
 	{
 		//Special layers to be drawn on to keep things editable by drawing them separately from the UserLayers.
-		public List<ReEditableLayer> ReEditableLayers = new List<ReEditableLayer> ();
+		public List<ReEditableLayer> ReEditableLayers = new();
 		public ReEditableLayer TextLayer;
 
 		//Call the base class constructor and setup the engines.
