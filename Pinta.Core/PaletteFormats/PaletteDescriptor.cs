@@ -24,6 +24,8 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 // THE SOFTWARE.
 
+using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Text;
 using Gtk;
 
@@ -31,7 +33,7 @@ namespace Pinta.Core
 {
 	public sealed class PaletteDescriptor
 	{
-		public string[] Extensions { get; }
+		public ReadOnlyCollection<string> Extensions { get; }
 
 		public IPaletteLoader Loader { get; }
 
@@ -39,16 +41,16 @@ namespace Pinta.Core
 
 		public FileFilter Filter { get; }
 
-		public PaletteDescriptor (string displayPrefix, string[] extensions, IPaletteLoader loader, IPaletteSaver saver)
+		public PaletteDescriptor (string displayPrefix, IEnumerable<string> extensions, IPaletteLoader loader, IPaletteSaver saver)
 		{
-			this.Extensions = extensions;
+			this.Extensions = extensions.ToReadOnlyCollection ();
 			this.Loader = loader;
 			this.Saver = saver;
 
 			var ff = FileFilter.New ();
 			StringBuilder formatNames = new StringBuilder ();
 
-			foreach (string ext in extensions) {
+			foreach (string ext in Extensions) {
 				if (formatNames.Length > 0)
 					formatNames.Append (", ");
 
