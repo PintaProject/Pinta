@@ -22,61 +22,59 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 // THE SOFTWARE.
 
-using System;
 using Gtk;
 using Pinta.Core;
 
-namespace Pinta.Docking
+namespace Pinta.Docking;
+
+/// <summary>
+/// The root widget, containing all dock items underneath it.
+/// </summary>
+public class Dock : Box
 {
-	/// <summary>
-	/// The root widget, containing all dock items underneath it.
-	/// </summary>
-	public class Dock : Box
+	private readonly DockPanel right_panel = new DockPanel ();
+	private readonly Paned pane = Paned.New (Orientation.Horizontal);
+
+	public Dock ()
 	{
-		private readonly DockPanel right_panel = new DockPanel ();
-		private readonly Paned pane = Paned.New (Orientation.Horizontal);
+		SetOrientation (Orientation.Horizontal);
 
-		public Dock ()
-		{
-			SetOrientation (Orientation.Horizontal);
+		pane.EndChild = right_panel;
+		pane.ResizeEndChild = false;
+		pane.ShrinkEndChild = false;
+		Append (pane);
+	}
 
-			pane.EndChild = right_panel;
-			pane.ResizeEndChild = false;
-			pane.ShrinkEndChild = false;
-			Append (pane);
+	public void AddItem (DockItem item, DockPlacement placement)
+	{
+		switch (placement) {
+			case DockPlacement.Center:
+				pane.StartChild = item;
+				pane.ResizeStartChild = true;
+				pane.ShrinkStartChild = false;
+				break;
+			case DockPlacement.Right:
+				right_panel.AddItem (item);
+				break;
 		}
+	}
 
-		public void AddItem (DockItem item, DockPlacement placement)
-		{
-			switch (placement) {
-				case DockPlacement.Center:
-					pane.StartChild = item;
-					pane.ResizeStartChild = true;
-					pane.ShrinkStartChild = false;
-					break;
-				case DockPlacement.Right:
-					right_panel.AddItem (item);
-					break;
-			}
-		}
+	private const string RightSplitPosKey = "dock-right-splitpos";
 
-		private const string RightSplitPosKey = "dock-right-splitpos";
-
-		public void SaveSettings (ISettingsService settings)
-		{
+	public void SaveSettings (ISettingsService settings)
+	{
 #if false
-			settings.PutSetting (RightSplitPosKey, pane.Position);
+		settings.PutSetting (RightSplitPosKey, pane.Position);
 #endif
-			right_panel.SaveSettings (settings);
-		}
+		right_panel.SaveSettings (settings);
+	}
 
-		public void LoadSettings (ISettingsService settings)
-		{
-			// TODO-GTK3(docking) Disabled for now, as the size isn't quite restored properly (gradually increases over time)
+	public void LoadSettings (ISettingsService settings)
+	{
+		// TODO-GTK3(docking) Disabled for now, as the size isn't quite restored properly (gradually increases over time)
 #if false
-			pane.Position = settings.GetSetting<int> (RightSplitPosKey, pane.Position);
+		pane.Position = settings.GetSetting<int> (RightSplitPosKey, pane.Position);
 #endif
-			right_panel.LoadSettings (settings);
-		}
+		right_panel.LoadSettings (settings);
 	}
 }
