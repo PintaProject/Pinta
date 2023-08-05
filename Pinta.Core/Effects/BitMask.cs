@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 
 namespace Pinta.Core
@@ -12,6 +13,12 @@ namespace Pinta.Core
 
 		public BitMask (int width, int height)
 		{
+			if (width < 0)
+				throw new ArgumentOutOfRangeException (nameof(width));
+
+			if (height < 0)
+				throw new ArgumentOutOfRangeException (nameof(height));
+
 			Width = width;
 			Height = height;
 
