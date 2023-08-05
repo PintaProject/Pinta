@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -10,7 +11,7 @@ using Pinta.Core;
 
 namespace Pinta.Gui.Addins;
 
-internal class InstallDialog : Adw.Window
+internal sealed class InstallDialog : Adw.Window
 {
 	private readonly SetupService service;
 	private readonly PackageCollection packages_to_install = new ();
@@ -310,28 +311,37 @@ internal class InstallDialog : Adw.Window
 	}
 }
 
-internal class InstallErrorReporter : IErrorReporter
+internal sealed class InstallErrorReporter : IErrorReporter
 {
-	public List<string> Errors { get; private init; } = new ();
-	public List<string> Warnings { get; private init; } = new ();
+	private readonly List<string> errors_backing;
+	public ReadOnlyCollection<string> Errors { get; }
+
+	private readonly List<string> warnings_backing;
+	public ReadOnlyCollection<string> Warnings { get; }
 
 	public InstallErrorReporter ()
 	{
+		var errorsBacking = new List<string> ();
+		var warningsBacking = new List<string> ();
+		errors_backing = errorsBacking;
+		Errors = new ReadOnlyCollection<string> (errorsBacking);
+		warnings_backing = warningsBacking;
+		Warnings = new ReadOnlyCollection<string> (warningsBacking);
 	}
 
 	public void ReportError (string message, Exception exception)
 	{
-		Errors.Add (message);
+		errors_backing.Add (message);
 	}
 
 	public void ReportWarning (string message)
 	{
-		Warnings.Add (message);
+		warnings_backing.Add (message);
 	}
 
 	public void Clear ()
 	{
-		Errors.Clear ();
-		Warnings.Clear ();
+		errors_backing.Clear ();
+		warnings_backing.Clear ();
 	}
 }

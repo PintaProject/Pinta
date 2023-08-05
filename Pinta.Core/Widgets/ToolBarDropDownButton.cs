@@ -1,10 +1,11 @@
 using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Linq;
 
 namespace Pinta.Core
 {
-	public class ToolBarDropDownButton : Gtk.MenuButton
+	public sealed class ToolBarDropDownButton : Gtk.MenuButton
 	{
 		private const string action_prefix = "tool";
 
@@ -13,13 +14,16 @@ namespace Pinta.Core
 		private readonly Gio.SimpleActionGroup action_group;
 		private ToolBarItem? selected_item;
 
-		public List<ToolBarItem> Items { get; }
+		private readonly List<ToolBarItem> items_backing;
+		public ReadOnlyCollection<ToolBarItem> Items { get; }
 
 		public ToolBarDropDownButton (bool showLabel = false)
 		{
 			this.show_label = showLabel;
 
-			Items = new List<ToolBarItem> ();
+			var itemsBacking = new List<ToolBarItem> ();
+			items_backing = itemsBacking;
+			Items = new ReadOnlyCollection<ToolBarItem> (itemsBacking);
 			AlwaysShowArrow = true;
 
 			dropdown = Gio.Menu.New ();
@@ -40,7 +44,7 @@ namespace Pinta.Core
 			action_group.AddAction (item.Action);
 			dropdown.AppendItem (Gio.MenuItem.New (text, $"{action_prefix}.{item.Action.Name}"));
 
-			Items.Add (item);
+			items_backing.Add (item);
 			item.Action.OnActivate += delegate { SetSelectedItem (item); };
 
 			if (selected_item == null)
@@ -63,12 +67,12 @@ namespace Pinta.Core
 		}
 
 		public int SelectedIndex {
-			get => selected_item is null ? -1 : Items.IndexOf (selected_item);
+			get => selected_item is null ? -1 : items_backing.IndexOf (selected_item);
 			set {
-				if (value < 0 || value >= Items.Count)
+				if (value < 0 || value >= items_backing.Count)
 					return;
 
-				var item = Items[value];
+				var item = items_backing[value];
 
 				if (item != selected_item)
 					SetSelectedItem (item);
@@ -97,7 +101,7 @@ namespace Pinta.Core
 		public event EventHandler? SelectedItemChanged;
 	}
 
-	public class ToolBarItem
+	public sealed class ToolBarItem
 	{
 		public ToolBarItem (string text, string imageId)
 		{
@@ -116,7 +120,7 @@ namespace Pinta.Core
 		public string ImageId { get; set; }
 		public object? Tag { get; set; }
 		public string Text { get; set; }
-		public Gio.SimpleAction Action { get; private set; }
+		public Gio.SimpleAction Action { get; }
 
 		public T GetTagOrDefault<T> (T defaultValue)
 		{
