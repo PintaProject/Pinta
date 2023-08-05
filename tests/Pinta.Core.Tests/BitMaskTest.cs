@@ -103,23 +103,23 @@ internal sealed class BitMaskTest
 		}
 	}
 
-	static readonly IReadOnlyList<TestCaseData> out_of_bounds_access_cases = new[]
+	static readonly IReadOnlyList<TestCaseData> out_of_bounds_access_cases = new TestCaseData[]
 	{
-		new TestCaseData(0, 0),
-		new TestCaseData(0, 1),
-		new TestCaseData(1, 1),
-		new TestCaseData(1, 2),
-		new TestCaseData(1, -1),
-		new TestCaseData(1, int.MinValue),
-		new TestCaseData(1, int.MinValue + 1),
-		new TestCaseData(1, int.MaxValue),
-		new TestCaseData(1, int.MaxValue - 1),
-		new TestCaseData(2, 2),
+		new (0, 0),
+		new (0, 1),
+		new (1, 1),
+		new (1, 2),
+		new (1, -1),
+		new (1, int.MinValue),
+		new (1, int.MinValue + 1),
+		new (1, int.MaxValue),
+		new (1, int.MaxValue - 1),
+		new (2, 2),
 	};
 
-	static readonly IReadOnlyList<TestCaseData> within_bounds_access_cases = new[]
+	static readonly IReadOnlyList<TestCaseData> within_bounds_access_cases = new TestCaseData[]
 	{
-		new TestCaseData(DEFAULT_SIZE, DEFAULT_OFFSET),
-		new TestCaseData(2, 1),
+		new (DEFAULT_SIZE, DEFAULT_OFFSET),
+		new (2, 1),
 	};
 }

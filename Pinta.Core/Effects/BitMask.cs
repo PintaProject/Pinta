@@ -66,11 +66,9 @@ public sealed class BitMask
 
 	public void Set (RectangleI rect, bool newValue)
 	{
-		for (var y = rect.Y; y <= rect.Bottom; ++y) {
-			for (var x = rect.X; x <= rect.Right; ++x) {
+		for (var y = rect.Y; y <= rect.Bottom; ++y)
+			for (var x = rect.X; x <= rect.Right; ++x)
 				Set (x, y, newValue);
-			}
-		}
 	}
 
 	private int GetIndex (int x, int y) => (y * Width) + x;
