@@ -79,7 +79,7 @@ namespace Pinta.Core
 			}
 		}
 
-		protected void SetSelectedItem (ToolBarItem item)
+		private void SetSelectedItem (ToolBarItem item)
 		{
 			IconName = item.ImageId;
 
@@ -92,7 +92,7 @@ namespace Pinta.Core
 			OnSelectedItemChanged ();
 		}
 
-		protected void OnSelectedItemChanged ()
+		private void OnSelectedItemChanged ()
 		{
 			if (SelectedItemChanged != null)
 				SelectedItemChanged (this, EventArgs.Empty);

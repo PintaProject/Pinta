@@ -340,8 +340,7 @@ namespace Pinta.Core
 			OnActiveDocumentChanged (EventArgs.Empty);
 		}
 
-		#region Protected Methods
-		protected void OnActiveDocumentChanged (EventArgs e)
+		private void OnActiveDocumentChanged (EventArgs e)
 		{
 			if (ActiveDocumentChanged != null)
 				ActiveDocumentChanged (this, EventArgs.Empty);
@@ -351,7 +350,7 @@ namespace Pinta.Core
 			ResetTitle ();
 		}
 
-		protected internal void OnDocumentCreated (DocumentEventArgs e)
+		private void OnDocumentCreated (DocumentEventArgs e)
 		{
 			e.Document.SelectionChanged += (sender, args) => {
 				OnSelectionChanged ();
@@ -361,13 +360,13 @@ namespace Pinta.Core
 				DocumentCreated (this, e);
 		}
 
-		protected internal void OnDocumentOpened (DocumentEventArgs e)
+		private void OnDocumentOpened (DocumentEventArgs e)
 		{
 			if (DocumentOpened != null)
 				DocumentOpened (this, e);
 		}
 
-		protected internal void OnDocumentClosed (DocumentEventArgs e)
+		private void OnDocumentClosed (DocumentEventArgs e)
 		{
 			if (DocumentClosed != null)
 				DocumentClosed (this, e);
@@ -378,8 +377,6 @@ namespace Pinta.Core
 			if (SelectionChanged != null)
 				SelectionChanged.Invoke (this, EventArgs.Empty);
 		}
-		#endregion
-
 
 		private static void ShowOpenFileErrorDialog (Window parent, string filename, string primary_text, string details)
 		{
