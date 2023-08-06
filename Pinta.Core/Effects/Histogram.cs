@@ -33,17 +33,9 @@ namespace Pinta.Core
 			}
 		}
 
-		public int Channels {
-			get {
-				return this.histogram.Length;
-			}
-		}
+		public int Channels => this.histogram.Length;
 
-		public int Entries {
-			get {
-				return this.histogram[0].Length;
-			}
-		}
+		public int Entries => this.histogram[0].Length;
 
 		protected internal Histogram (int channels, int entries)
 		{

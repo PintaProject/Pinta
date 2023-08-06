@@ -13,23 +13,11 @@ namespace Pinta.Core
 		private readonly int y;
 		private readonly int length;
 
-		public int X {
-			get {
-				return x;
-			}
-		}
+		public readonly int X => x;
 
-		public int Y {
-			get {
-				return y;
-			}
-		}
+		public readonly int Y => y;
 
-		public int Length {
-			get {
-				return length;
-			}
-		}
+		public readonly int Length => length;
 
 		public override int GetHashCode ()
 		{
