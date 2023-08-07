@@ -23,27 +23,27 @@ namespace Pinta.Core
 		}
 
 		public int Line {
-			get { return line; }
+			readonly get { return line; }
 			set { line = Math.Max (value, 0); }
 		}
 
 		public int Offset {
-			get { return offset; }
+			readonly get { return offset; }
 			set { offset = Math.Max (value, 0); }
 		}
 
 		#region Operators
-		public override bool Equals (object? obj)
+		public override readonly bool Equals (object? obj)
 		{
 			return obj is TextPosition && this == (TextPosition) obj;
 		}
 
-		public override int GetHashCode ()
+		public override readonly int GetHashCode ()
 		{
 			return new { line, offset }.GetHashCode ();
 		}
 
-		public override string ToString ()
+		public override readonly string ToString ()
 		{
 			return $"({line}, {offset})";
 		}
@@ -58,7 +58,7 @@ namespace Pinta.Core
 			return x.CompareTo (y) != 0;
 		}
 
-		public int CompareTo (TextPosition other)
+		public readonly int CompareTo (TextPosition other)
 		{
 			if (line.CompareTo (other.line) != 0)
 				return line.CompareTo (other.line);

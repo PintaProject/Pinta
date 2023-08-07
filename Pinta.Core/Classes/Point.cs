@@ -42,7 +42,7 @@ namespace Pinta.Core
 		public int X;
 		public int Y;
 
-		public override string ToString () => $"{X}, {Y}";
+		public override readonly string ToString () => $"{X}, {Y}";
 	}
 
 	public record struct PointD
@@ -56,16 +56,16 @@ namespace Pinta.Core
 		public double X;
 		public double Y;
 
-		public override string ToString () => $"{X}, {Y}";
+		public override readonly string ToString () => $"{X}, {Y}";
 
-		public PointI ToInt () => new ((int) X, (int) Y);
+		public readonly PointI ToInt () => new ((int) X, (int) Y);
 
-		public double Distance (in PointD e)
+		public readonly double Distance (in PointD e)
 		{
 			return new PointD (X - e.X, Y - e.Y).Magnitude ();
 		}
 
-		public double Magnitude ()
+		public readonly double Magnitude ()
 		{
 			return Math.Sqrt (X * X + Y * Y);
 		}
@@ -73,7 +73,7 @@ namespace Pinta.Core
 		/// <summary>
 		/// Returns a new point, rounded to the nearest integer coordinates.
 		/// </summary>
-		public PointD Rounded () => new (Math.Round (X), Math.Round (Y));
+		public readonly PointD Rounded () => new (Math.Round (X), Math.Round (Y));
 
 		public static PointD operator + (in PointD a, in PointD b)
 		{
@@ -94,9 +94,9 @@ namespace Pinta.Core
 
 		public static readonly Size Empty;
 
-		public override string ToString () => $"{Width}, {Height}";
+		public override readonly string ToString () => $"{Width}, {Height}";
 
-		public bool IsEmpty => (Width == 0 && Height == 0);
+		public readonly bool IsEmpty => (Width == 0 && Height == 0);
 	}
 }
 

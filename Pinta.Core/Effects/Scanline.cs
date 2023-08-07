@@ -19,14 +19,14 @@ namespace Pinta.Core
 
 		public readonly int Length => length;
 
-		public override int GetHashCode ()
+		public override readonly int GetHashCode ()
 		{
 			unchecked {
 				return length.GetHashCode () + x.GetHashCode () + y.GetHashCode ();
 			}
 		}
 
-		public override bool Equals (object? obj)
+		public override readonly bool Equals (object? obj)
 		{
 			if (obj is Scanline) {
 				Scanline rhs = (Scanline) obj;
@@ -46,7 +46,7 @@ namespace Pinta.Core
 			return !(lhs == rhs);
 		}
 
-		public override string ToString ()
+		public override readonly string ToString ()
 		{
 			return "(" + x + "," + y + "):[" + length.ToString () + "]";
 		}
