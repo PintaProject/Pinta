@@ -72,7 +72,7 @@ public sealed class BitMask
 	private int GetIndex (int x, int y)
 	{
 		if (x < 0)
-			throw new ArgumentOutOfRangeException (nameof(x));
+			throw new ArgumentOutOfRangeException (nameof (x));
 		if (y < 0)
 			throw new ArgumentOutOfRangeException (nameof (y));
 		return (y * Width) + x;
