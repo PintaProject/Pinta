@@ -14,16 +14,15 @@ namespace Pinta.Core
 		private readonly Gio.SimpleActionGroup action_group;
 		private ToolBarItem? selected_item;
 
-		private readonly List<ToolBarItem> items_backing;
+		private readonly List<ToolBarItem> items;
 		public ReadOnlyCollection<ToolBarItem> Items { get; }
 
 		public ToolBarDropDownButton (bool showLabel = false)
 		{
 			this.show_label = showLabel;
 
-			var itemsBacking = new List<ToolBarItem> ();
-			items_backing = itemsBacking;
-			Items = new ReadOnlyCollection<ToolBarItem> (itemsBacking);
+			items = new List<ToolBarItem> ();
+			Items = new ReadOnlyCollection<ToolBarItem> (items);
 			AlwaysShowArrow = true;
 
 			dropdown = Gio.Menu.New ();
@@ -44,7 +43,7 @@ namespace Pinta.Core
 			action_group.AddAction (item.Action);
 			dropdown.AppendItem (Gio.MenuItem.New (text, $"{action_prefix}.{item.Action.Name}"));
 
-			items_backing.Add (item);
+			items.Add (item);
 			item.Action.OnActivate += delegate { SetSelectedItem (item); };
 
 			if (selected_item == null)
@@ -67,12 +66,12 @@ namespace Pinta.Core
 		}
 
 		public int SelectedIndex {
-			get => selected_item is null ? -1 : items_backing.IndexOf (selected_item);
+			get => selected_item is null ? -1 : items.IndexOf (selected_item);
 			set {
-				if (value < 0 || value >= items_backing.Count)
+				if (value < 0 || value >= items.Count)
 					return;
 
-				var item = items_backing[value];
+				var item = items[value];
 
 				if (item != selected_item)
 					SetSelectedItem (item);

@@ -52,9 +52,8 @@ namespace Pinta.Core
 
 		public WorkspaceManager ()
 		{
-			var openDocumentsBacking = new List<Document> ();
-			open_documents_backing = openDocumentsBacking;
-			OpenDocuments = new ReadOnlyCollection<Document> (openDocumentsBacking);
+			open_documents = new List<Document> ();
+			OpenDocuments = new ReadOnlyCollection<Document> (open_documents);
 			SelectionHandler = new SelectionModeHandler ();
 		}
 
@@ -63,20 +62,20 @@ namespace Pinta.Core
 		public Document ActiveDocument {
 			get {
 				if (HasOpenDocuments)
-					return open_documents_backing[active_document_index];
+					return open_documents[active_document_index];
 
 				throw new InvalidOperationException ("Tried to get WorkspaceManager.ActiveDocument when there are no open Documents.  Check HasOpenDocuments first.");
 			}
 		}
 
-		public Document? ActiveDocumentOrDefault => HasOpenDocuments ? open_documents_backing[active_document_index] : null;
+		public Document? ActiveDocumentOrDefault => HasOpenDocuments ? open_documents[active_document_index] : null;
 
 		public SelectionModeHandler SelectionHandler { get; }
 
 		public DocumentWorkspace ActiveWorkspace {
 			get {
 				if (HasOpenDocuments)
-					return open_documents_backing[active_document_index].Workspace;
+					return open_documents[active_document_index].Workspace;
 
 				throw new InvalidOperationException ("Tried to get WorkspaceManager.ActiveWorkspace when there are no open Documents.  Check HasOpenDocuments first.");
 			}
@@ -99,9 +98,9 @@ namespace Pinta.Core
 			set => ActiveWorkspace.Scale = value;
 		}
 
-		private readonly List<Document> open_documents_backing;
+		private readonly List<Document> open_documents;
 		public ReadOnlyCollection<Document> OpenDocuments { get; }
-		public bool HasOpenDocuments => open_documents_backing.Count > 0;
+		public bool HasOpenDocuments => open_documents.Count > 0;
 
 		public Document CreateAndActivateDocument (Gio.File? file, string? file_type, Size size)
 		{
@@ -114,7 +113,7 @@ namespace Pinta.Core
 			} else
 				doc.DisplayName = Translations.GetString ("Unsaved Image {0}", new_file_name++);
 
-			open_documents_backing.Add (doc);
+			open_documents.Add (doc);
 			OnDocumentCreated (new DocumentEventArgs (doc));
 
 			SetActiveDocument (doc);
@@ -129,8 +128,8 @@ namespace Pinta.Core
 
 		public void CloseDocument (Document document)
 		{
-			int index = open_documents_backing.IndexOf (document);
-			open_documents_backing.Remove (document);
+			int index = open_documents.IndexOf (document);
+			open_documents.Remove (document);
 
 			if (index == active_document_index) {
 				// If there's other documents open, switch to one of them
@@ -308,7 +307,7 @@ namespace Pinta.Core
 
 		public void SetActiveDocument (int index)
 		{
-			if (index >= open_documents_backing.Count)
+			if (index >= open_documents.Count)
 				throw new ArgumentOutOfRangeException (
 					nameof (index),
 					$"Tried to {nameof (WorkspaceManager)}.{nameof (SetActiveDocument)} greater than {nameof (OpenDocuments)}."
@@ -319,7 +318,7 @@ namespace Pinta.Core
 					$"Tried to {nameof (WorkspaceManager)}.{nameof (SetActiveDocument)} less that zero."
 				);
 
-			SetActiveDocument (open_documents_backing[index]);
+			SetActiveDocument (open_documents[index]);
 		}
 
 		public void SetActiveDocument (Document document)
@@ -331,10 +330,10 @@ namespace Pinta.Core
 		{
 			// Work around a case where we closed a document but haven't updated
 			// the active_document_index yet and it points to the closed document
-			if (HasOpenDocuments && active_document_index != -1 && open_documents_backing.Count > active_document_index)
+			if (HasOpenDocuments && active_document_index != -1 && open_documents.Count > active_document_index)
 				PintaCore.Tools.Commit ();
 
-			int index = open_documents_backing.IndexOf (document);
+			int index = open_documents.IndexOf (document);
 			active_document_index = index;
 
 			OnActiveDocumentChanged (EventArgs.Empty);

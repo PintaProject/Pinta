@@ -313,35 +313,33 @@ internal sealed class InstallDialog : Adw.Window
 
 internal sealed class InstallErrorReporter : IErrorReporter
 {
-	private readonly List<string> errors_backing;
+	private readonly List<string> errors;
 	public ReadOnlyCollection<string> Errors { get; }
 
-	private readonly List<string> warnings_backing;
+	private readonly List<string> warnings;
 	public ReadOnlyCollection<string> Warnings { get; }
 
 	public InstallErrorReporter ()
 	{
-		var errorsBacking = new List<string> ();
-		var warningsBacking = new List<string> ();
-		errors_backing = errorsBacking;
-		Errors = new ReadOnlyCollection<string> (errorsBacking);
-		warnings_backing = warningsBacking;
-		Warnings = new ReadOnlyCollection<string> (warningsBacking);
+		errors = new List<string> ();
+		Errors = new ReadOnlyCollection<string> (errors);
+		warnings = new List<string> ();
+		Warnings = new ReadOnlyCollection<string> (warnings);
 	}
 
 	public void ReportError (string message, Exception exception)
 	{
-		errors_backing.Add (message);
+		errors.Add (message);
 	}
 
 	public void ReportWarning (string message)
 	{
-		warnings_backing.Add (message);
+		warnings.Add (message);
 	}
 
 	public void Clear ()
 	{
-		errors_backing.Clear ();
-		warnings_backing.Clear ();
+		errors.Clear ();
+		warnings.Clear ();
 	}
 }
