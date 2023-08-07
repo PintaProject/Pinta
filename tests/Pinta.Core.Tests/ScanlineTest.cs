@@ -31,7 +31,7 @@ internal sealed class ScanlineTest
 		Assert.IsTrue (comparison);
 	}
 
-	[TestCaseSource (nameof (sample_unequal))]
+	[TestCaseSource (nameof (unequal_values))]
 	public void EqualsOperator_FalseWithUnequal (int x1, int y1, int length1, int x2, int y2, int length2)
 	{
 		var scanline1 = new Scanline (x1, y1, length1);
@@ -49,13 +49,38 @@ internal sealed class ScanlineTest
 		Assert.IsFalse (comparison);
 	}
 
-	[TestCaseSource (nameof (sample_unequal))]
+	[TestCaseSource (nameof (unequal_values))]
 	public void NotEqualsOperator_TrueWithUnequal (int x1, int y1, int length1, int x2, int y2, int length2)
 	{
 		var scanline1 = new Scanline (x1, y1, length1);
 		var scanline2 = new Scanline (x2, y2, length2);
 		bool comparison = scanline1 != scanline2;
 		Assert.IsTrue (comparison);
+	}
+
+	[TestCaseSource (nameof (sample_initializations))]
+	public void EqualsMethod_TrueWithEqual (int x, int y, int length)
+	{
+		var scanline1 = new Scanline (x, y, length);
+		var scanline2 = new Scanline (x, y, length);
+		bool comparison = scanline1.Equals (scanline2);
+		Assert.IsTrue (comparison);
+	}
+
+	[TestCaseSource (nameof (unequal_types_scanline))]
+	public void EqualsMethod_FalseWithUnequalTypes (Scanline scanline, object? other)
+	{
+		bool comparison = scanline.Equals (other);
+		Assert.IsFalse (comparison);
+	}
+
+	[TestCaseSource (nameof (unequal_values))]
+	public void EqualsMethod_FalseWithUnequalValues (int x1, int y1, int length1, int x2, int y2, int length2)
+	{
+		var scanline1 = new Scanline (x1, y1, length1);
+		var scanline2 = new Scanline (x2, y2, length2);
+		bool comparison = scanline1.Equals (scanline2);
+		Assert.IsFalse (comparison);
 	}
 
 	[TestCaseSource (nameof (overflowing_hash_code_cases))]
@@ -71,13 +96,20 @@ internal sealed class ScanlineTest
 		Assert.DoesNotThrow (() => _ = scanline.GetHashCode ());
 	}
 
+	static readonly IReadOnlyList<TestCaseData> unequal_types_scanline = new TestCaseData[] {
+		new (new Scanline(1, 1, 1), "This is not a scanline"),
+		new (new Scanline(1, 1, 1), null),
+		new (new Scanline(1, 1, 1), new [] { 1, 1, 1 }),
+		new (new Scanline(1, 1, 1), 111),
+	};
+
 	static readonly IReadOnlyList<TestCaseData> sample_initializations = new TestCaseData[] {
 		new (1, 2, 3),
 		new (3, 1, 2),
 		new (2, 3, 1),
 	};
 
-	static readonly IReadOnlyList<TestCaseData> sample_unequal = new TestCaseData[] {
+	static readonly IReadOnlyList<TestCaseData> unequal_values = new TestCaseData[] {
 		new (
 			1, 1, 1,
 			2, 2, 2),
@@ -90,6 +122,18 @@ internal sealed class ScanlineTest
 		new (
 			1, 1, 1,
 			2, 1, 1),
+		new (
+			2, 2, 2,
+			1, 1, 1),
+		new (
+			1, 1, 2,
+			1, 1, 1),
+		new (
+			1, 2, 1,
+			1, 1, 1),
+		new (
+			2, 1, 1,
+			1, 1, 1),
 	};
 
 	static readonly IReadOnlyList<TestCaseData> overflowing_hash_code_cases = new TestCaseData[] {
