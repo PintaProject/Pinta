@@ -27,8 +27,7 @@ namespace Pinta.Core
 		private readonly ColorBgra[] lerp_colors;
 
 		public ColorBgra StartColor {
-			get { return this.start_color; }
-
+			get => this.start_color;
 			set {
 				if (this.start_color != value) {
 					this.start_color = value;
@@ -38,8 +37,7 @@ namespace Pinta.Core
 		}
 
 		public ColorBgra EndColor {
-			get { return this.end_color; }
-
+			get => this.end_color;
 			set {
 				if (this.end_color != value) {
 					this.end_color = value;
@@ -49,27 +47,23 @@ namespace Pinta.Core
 		}
 
 		public PointD StartPoint {
-			get { return this.start_point; }
-
-			set { this.start_point = value; }
+			get => this.start_point;
+			set => this.start_point = value;
 		}
 
 		public PointD EndPoint {
-			get { return this.end_point; }
-
-			set { this.end_point = value; }
+			get => this.end_point;
+			set => this.end_point = value;
 		}
 
 		public bool AlphaBlending {
-			get { return this.alpha_blending; }
-
-			set { this.alpha_blending = value; }
+			get => this.alpha_blending;
+			set => this.alpha_blending = value;
 		}
 
 		public bool AlphaOnly {
-			get { return this.alpha_only; }
-
-			set { this.alpha_only = value; }
+			get => this.alpha_only;
+			set => this.alpha_only = value;
 		}
 
 		public virtual void BeforeRender ()

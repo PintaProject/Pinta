@@ -50,22 +50,22 @@ namespace Pinta.Core
 		/// <summary>
 		/// Returns whether this effect can display a configuration dialog to the user. (Implemented by LaunchConfiguration ().)
 		/// </summary>
-		public virtual bool IsConfigurable { get { return false; } }
+		public virtual bool IsConfigurable => false;
 
 		/// <summary>
 		/// Returns the keyboard shortcut for this adjustment. Only affects adjustments, not effects. Default is no shortcut.
 		/// </summary>
-		public virtual string? AdjustmentMenuKey { get { return null; } }
+		public virtual string? AdjustmentMenuKey => null;
 
 		/// <summary>
 		/// Returns the modifier(s) to the keyboard shortcut. Only affects adjustments, not effects. Default is Primary+Shift.
 		/// </summary>
-		public virtual string AdjustmentMenuKeyModifiers { get { return "<Primary><Shift>"; } }
+		public virtual string AdjustmentMenuKeyModifiers => "<Primary><Shift>";
 
 		/// <summary>
 		/// Returns the menu category for an effect. Only affects effects, not adjustments. Default is "General".
 		/// </summary>
-		public virtual string EffectMenuCategory { get { return "General"; } }
+		public virtual string EffectMenuCategory => "General";
 
 		/// <summary>
 		/// The user configurable data this effect uses.
@@ -217,7 +217,7 @@ namespace Pinta.Core
 		/// <summary>
 		/// Returns true if the current values of this EffectData do not modify the image. Returns false if current values modify the image.
 		/// </summary>
-		public virtual bool IsDefault { get { return false; } }
+		public virtual bool IsDefault => false;
 	}
 
 	/// <summary>
