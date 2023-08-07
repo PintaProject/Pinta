@@ -73,7 +73,7 @@ namespace Pinta.Core
 		/// <summary>
 		/// Returns a new point, rounded to the nearest integer coordinates.
 		/// </summary>
-		public PointD Rounded () => new PointD (Math.Round (X), Math.Round (Y));
+		public PointD Rounded () => new (Math.Round (X), Math.Round (Y));
 
 		public static PointD operator + (in PointD a, in PointD b)
 		{

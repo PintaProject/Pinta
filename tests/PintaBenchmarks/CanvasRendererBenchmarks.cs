@@ -19,8 +19,8 @@ public class CanvasRendererBenchmarks
 	private readonly Size dest_size_zoom_in;
 	private readonly Size dest_size_zoom_out;
 
-	private readonly List<Layer> layers = new List<Layer> ();
-	private readonly List<Layer> ten_laters = new List<Layer> ();
+	private readonly List<Layer> layers = new ();
+	private readonly List<Layer> ten_laters = new ();
 
 	public CanvasRendererBenchmarks ()
 	{

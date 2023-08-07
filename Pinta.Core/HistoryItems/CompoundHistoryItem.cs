@@ -31,7 +31,7 @@ namespace Pinta.Core
 {
 	public class CompoundHistoryItem : BaseHistoryItem
 	{
-		protected List<BaseHistoryItem> history_stack = new List<BaseHistoryItem> ();
+		protected List<BaseHistoryItem> history_stack = new ();
 		private List<ImageSurface>? snapshots;
 
 		public CompoundHistoryItem () : base ()

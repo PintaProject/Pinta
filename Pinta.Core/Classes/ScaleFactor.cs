@@ -25,9 +25,9 @@ namespace Pinta.Core
 		public int Numerator { get { return numerator; } }
 		public double Ratio { get; }
 
-		public static readonly ScaleFactor OneToOne = new ScaleFactor (1, 1);
-		public static readonly ScaleFactor MinValue = new ScaleFactor (1, 100);
-		public static readonly ScaleFactor MaxValue = new ScaleFactor (32, 1);
+		public static readonly ScaleFactor OneToOne = new (1, 1);
+		public static readonly ScaleFactor MinValue = new (1, 100);
+		public static readonly ScaleFactor MaxValue = new (32, 1);
 
 		private void Clamp ()
 		{
