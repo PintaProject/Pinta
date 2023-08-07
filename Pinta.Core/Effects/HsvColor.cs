@@ -36,12 +36,12 @@ namespace Pinta.Core
 			return !(lhs == rhs);
 		}
 
-		public override bool Equals (object? obj)
+		public override readonly bool Equals (object? obj)
 		{
 			return obj is HsvColor hsv && this == hsv;
 		}
 
-		public override int GetHashCode ()
+		public override readonly int GetHashCode ()
 		{
 			return (Hue + (Saturation << 8) + (Value << 16)).GetHashCode (); ;
 		}
@@ -77,7 +77,7 @@ namespace Pinta.Core
 		//            return Color.FromArgb(rgb.Red, rgb.Green, rgb.Blue);
 		//        }
 
-		public RgbColor ToRgb ()
+		public readonly RgbColor ToRgb ()
 		{
 			// HsvColor contains values scaled as in the color wheel:
 
@@ -171,7 +171,7 @@ namespace Pinta.Core
 			return new RgbColor ((int) (r * 255), (int) (g * 255), (int) (b * 255));
 		}
 
-		public override string ToString ()
+		public override readonly string ToString ()
 		{
 			return $"({Hue}, {Saturation}, {Value})";
 		}

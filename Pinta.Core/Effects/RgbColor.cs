@@ -53,7 +53,7 @@ namespace Pinta.Core
 		//            return Color.FromArgb(Red, Green, Blue);
 		//        }
 
-		public HsvColor ToHsv ()
+		public readonly HsvColor ToHsv ()
 		{
 			// In this function, R, G, and B values must be scaled 
 			// to be between 0 and 1.
@@ -111,7 +111,7 @@ namespace Pinta.Core
 			return new HsvColor ((int) h, (int) (s * 100), (int) (v * 100));
 		}
 
-		public override string ToString ()
+		public override readonly string ToString ()
 		{
 			return $"({Red}, {Green}, {Blue})";
 		}

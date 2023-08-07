@@ -497,21 +497,21 @@ namespace Pinta.MacInterop
 			this.attributes = CarbonHICommandAttributes.FromMenu;
 		}
 
-		public CarbonHICommandAttributes Attributes { get { return attributes; } }
-		public uint CommandID { get { return commandID; } }
-		public IntPtr ControlRef { get { return controlRef; } }
-		public IntPtr WindowRef { get { return windowRef; } }
-		public HIMenuItem MenuItem { get { return menuItem; } }
+		public readonly CarbonHICommandAttributes Attributes { get { return attributes; } }
+		public readonly uint CommandID { get { return commandID; } }
+		public readonly IntPtr ControlRef { get { return controlRef; } }
+		public readonly IntPtr WindowRef { get { return windowRef; } }
+		public readonly HIMenuItem MenuItem { get { return menuItem; } }
 
-		public bool IsFromMenu {
+		public readonly bool IsFromMenu {
 			get { return attributes == CarbonHICommandAttributes.FromMenu; }
 		}
 
-		public bool IsFromControl {
+		public readonly bool IsFromControl {
 			get { return attributes == CarbonHICommandAttributes.FromControl; }
 		}
 
-		public bool IsFromWindow {
+		public readonly bool IsFromWindow {
 			get { return attributes == CarbonHICommandAttributes.FromWindow; }
 		}
 	}
@@ -528,8 +528,8 @@ namespace Pinta.MacInterop
 			this.menuRef = menuRef;
 		}
 
-		public IntPtr MenuRef { get { return menuRef; } }
-		public ushort Index { get { return index; } }
+		public readonly IntPtr MenuRef { get { return menuRef; } }
+		public readonly ushort Index { get { return index; } }
 	}
 
 	//*NOT* flags
@@ -544,7 +544,7 @@ namespace Pinta.MacInterop
 	{
 		readonly int value;
 
-		public int Value {
+		public readonly int Value {
 			get { return value; }
 		}
 

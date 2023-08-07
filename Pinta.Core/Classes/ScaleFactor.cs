@@ -21,8 +21,8 @@ namespace Pinta.Core
 		private readonly int denominator;
 		private readonly int numerator;
 
-		public int Denominator { get { return denominator; } }
-		public int Numerator { get { return numerator; } }
+		public readonly int Denominator { get { return denominator; } }
+		public readonly int Numerator { get { return numerator; } }
 		public double Ratio { get; }
 
 		public static readonly ScaleFactor OneToOne = new (1, 1);
@@ -109,7 +109,7 @@ namespace Pinta.Core
 			return (lhs.numerator * rhs.denominator) >= (rhs.numerator * lhs.denominator);
 		}
 
-		public override bool Equals (object? obj)
+		public override readonly bool Equals (object? obj)
 		{
 			if (obj is ScaleFactor) {
 				ScaleFactor rhs = (ScaleFactor) obj;
@@ -119,7 +119,7 @@ namespace Pinta.Core
 			}
 		}
 
-		public override int GetHashCode ()
+		public override readonly int GetHashCode ()
 		{
 			return numerator.GetHashCode () ^ denominator.GetHashCode ();
 		}
@@ -138,32 +138,32 @@ namespace Pinta.Core
 		//    }
 		//}
 
-		public int ScaleScalar (int x)
+		public readonly int ScaleScalar (int x)
 		{
 			return (int) (((long) x * numerator) / denominator);
 		}
 
-		public int UnscaleScalar (int x)
+		public readonly int UnscaleScalar (int x)
 		{
 			return (int) (((long) x * denominator) / numerator);
 		}
 
-		public float ScaleScalar (float x)
+		public readonly float ScaleScalar (float x)
 		{
 			return (x * (float) numerator) / (float) denominator;
 		}
 
-		public float UnscaleScalar (float x)
+		public readonly float UnscaleScalar (float x)
 		{
 			return (x * (float) denominator) / (float) numerator;
 		}
 
-		public double ScaleScalar (double x)
+		public readonly double ScaleScalar (double x)
 		{
 			return (x * (double) numerator) / (double) denominator;
 		}
 
-		public double UnscaleScalar (double x)
+		public readonly double UnscaleScalar (double x)
 		{
 			return (x * (double) denominator) / (double) numerator;
 		}
@@ -293,7 +293,7 @@ namespace Pinta.Core
 		/// Rounds the current scaling factor up to the next power of two.
 		/// </summary>
 		/// <returns>The new ScaleFactor value.</returns>
-		public ScaleFactor GetNextLarger ()
+		public readonly ScaleFactor GetNextLarger ()
 		{
 			double ratio = Ratio + 0.005;
 
@@ -312,7 +312,7 @@ namespace Pinta.Core
 			return ScaleFactor.FromDouble (scales[index]);
 		}
 
-		public ScaleFactor GetNextSmaller ()
+		public readonly ScaleFactor GetNextSmaller ()
 		{
 			double ratio = Ratio - 0.005;
 
