@@ -28,13 +28,12 @@ using System;
 
 namespace Pinta.Core;
 
-public class LivePreviewRenderUpdatedEventArgs : EventArgs
+public sealed class LivePreviewRenderUpdatedEventArgs : EventArgs
 {
-	public LivePreviewRenderUpdatedEventArgs (double progress,
-						   RectangleI bounds)
+	public LivePreviewRenderUpdatedEventArgs (double progress, RectangleI bounds)
 	{
-		this.Progress = progress;
-		this.Bounds = bounds;
+		Progress = progress;
+		Bounds = bounds;
 	}
 
 	public double Progress { get; }

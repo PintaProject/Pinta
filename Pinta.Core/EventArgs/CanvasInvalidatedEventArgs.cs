@@ -26,22 +26,22 @@
 
 using System;
 
-namespace Pinta.Core
+namespace Pinta.Core;
+
+public sealed class CanvasInvalidatedEventArgs : EventArgs
 {
-	public class CanvasInvalidatedEventArgs : EventArgs
+	public bool EntireSurface { get; }
+	public RectangleI Rectangle { get; }
+
+	public CanvasInvalidatedEventArgs ()
 	{
-		public bool EntireSurface { get; set; }
-		public RectangleI Rectangle { get; set; }
+		EntireSurface = true;
+		Rectangle = default;
+	}
 
-		public CanvasInvalidatedEventArgs ()
-		{
-			EntireSurface = true;
-		}
-
-		public CanvasInvalidatedEventArgs (RectangleI rect)
-		{
-			EntireSurface = false;
-			Rectangle = rect;
-		}
+	public CanvasInvalidatedEventArgs (RectangleI rect)
+	{
+		EntireSurface = false;
+		Rectangle = rect;
 	}
 }
