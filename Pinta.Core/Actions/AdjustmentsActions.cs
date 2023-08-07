@@ -24,25 +24,19 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 // THE SOFTWARE.
 
-using System.Collections.Generic;
+using System.Collections.ObjectModel;
 
-namespace Pinta.Core
+namespace Pinta.Core;
+
+public sealed class AdjustmentsActions
 {
-	public class AdjustmentsActions
+	public Collection<Command> Actions { get; } = new ();
+
+	#region Public Methods
+	public void ToggleActionsSensitive (bool sensitive)
 	{
-		public List<Command> Actions { get; }
-
-		public AdjustmentsActions ()
-		{
-			Actions = new List<Command> ();
-		}
-
-		#region Public Methods
-		public void ToggleActionsSensitive (bool sensitive)
-		{
-			foreach (var a in Actions)
-				a.Sensitive = sensitive;
-		}
-		#endregion
+		foreach (var a in Actions)
+			a.Sensitive = sensitive;
 	}
+	#endregion
 }

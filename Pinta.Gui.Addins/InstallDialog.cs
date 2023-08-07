@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -10,7 +11,7 @@ using Pinta.Core;
 
 namespace Pinta.Gui.Addins;
 
-internal class InstallDialog : Adw.Window
+internal sealed class InstallDialog : Adw.Window
 {
 	private readonly SetupService service;
 	private readonly PackageCollection packages_to_install = new ();
@@ -310,28 +311,35 @@ internal class InstallDialog : Adw.Window
 	}
 }
 
-internal class InstallErrorReporter : IErrorReporter
+internal sealed class InstallErrorReporter : IErrorReporter
 {
-	public List<string> Errors { get; private init; } = new ();
-	public List<string> Warnings { get; private init; } = new ();
+	private readonly List<string> errors;
+	public ReadOnlyCollection<string> Errors { get; }
+
+	private readonly List<string> warnings;
+	public ReadOnlyCollection<string> Warnings { get; }
 
 	public InstallErrorReporter ()
 	{
+		errors = new List<string> ();
+		Errors = new ReadOnlyCollection<string> (errors);
+		warnings = new List<string> ();
+		Warnings = new ReadOnlyCollection<string> (warnings);
 	}
 
 	public void ReportError (string message, Exception exception)
 	{
-		Errors.Add (message);
+		errors.Add (message);
 	}
 
 	public void ReportWarning (string message)
 	{
-		Warnings.Add (message);
+		warnings.Add (message);
 	}
 
 	public void Clear ()
 	{
-		Errors.Clear ();
-		Warnings.Clear ();
+		errors.Clear ();
+		warnings.Clear ();
 	}
 }
