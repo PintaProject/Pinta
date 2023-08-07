@@ -134,7 +134,7 @@ namespace Pinta.Core
 		/// </summary>
 		/// <param name="pintaPolygonSet">A Pinta Polygon set.</param>
 		/// <returns>A Clipper Polygon collection.</returns>
-		public static List<List<IntPoint>> ConvertToPolygons (PointI[][] pintaPolygonSet)
+		public static List<List<IntPoint>> ConvertToPolygons (IReadOnlyList<IReadOnlyList<PointI>> pintaPolygonSet)
 		{
 			List<List<IntPoint>> newPolygons = new List<List<IntPoint>> ();
 

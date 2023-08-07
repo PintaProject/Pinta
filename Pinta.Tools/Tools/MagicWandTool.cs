@@ -24,6 +24,7 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 // THE SOFTWARE.
 
+using System.Collections.Generic;
 using Gtk;
 using Pinta.Core;
 
@@ -68,7 +69,7 @@ namespace Pinta.Tools
 			document.Selection.Visible = true;
 		}
 
-		protected override void OnFillRegionComputed (Document document, PointI[][] polygonSet)
+		protected override void OnFillRegionComputed (Document document, IReadOnlyList<IReadOnlyList<PointI>> polygonSet)
 		{
 			var undoAction = new SelectionHistoryItem (Icon, Name);
 			undoAction.TakeSnapshot ();

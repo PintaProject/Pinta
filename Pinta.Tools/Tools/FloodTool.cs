@@ -34,6 +34,7 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 // THE SOFTWARE.
 
+using System.Collections.Generic;
 using Gtk;
 using Pinta.Core;
 
@@ -117,7 +118,7 @@ namespace Pinta.Tools
 				settings.PutSetting (FILL_TOLERANCE_SETTING, (int) tolerance_slider.GetValue ());
 		}
 
-		protected virtual void OnFillRegionComputed (Document document, PointI[][] polygonSet) { }
+		protected virtual void OnFillRegionComputed (Document document, IReadOnlyList<IReadOnlyList<PointI>> polygonSet) { }
 		protected virtual void OnFillRegionComputed (Document document, BitMask stencil) { }
 
 		protected Label ModeLabel => mode_label ??= Label.New (string.Format (" {0}: ", Translations.GetString ("Flood Mode")));
