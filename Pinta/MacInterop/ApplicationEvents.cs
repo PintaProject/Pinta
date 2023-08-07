@@ -30,7 +30,7 @@ namespace Pinta.MacInterop
 {
 	public static class ApplicationEvents
 	{
-		static readonly object lockObj = new object ();
+		static readonly object lockObj = new ();
 
 		#region Quit
 

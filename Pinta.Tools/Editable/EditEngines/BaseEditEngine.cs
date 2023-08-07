@@ -46,7 +46,7 @@ namespace Pinta.Tools
 			RoundedLineSeries
 		}
 
-		public static Dictionary<ShapeTypes, ShapeTool> CorrespondingTools = new Dictionary<ShapeTypes, ShapeTool> ();
+		public static Dictionary<ShapeTypes, ShapeTool> CorrespondingTools = new ();
 
 		protected abstract string ShapeName { get; }
 
@@ -80,7 +80,7 @@ namespace Pinta.Tools
 		protected ToolBarDropDownButton shape_type_button = null!;
 		protected Gtk.Separator shape_type_sep = null!;
 
-		protected DashPatternBox dash_pattern_box = new DashPatternBox ();
+		protected DashPatternBox dash_pattern_box = new ();
 		private string prev_dash_pattern = "-";
 
 		private bool prev_antialiasing = true;
@@ -180,13 +180,13 @@ namespace Pinta.Tools
 		private readonly Gdk.Cursor grab_cursor = Gdk.Cursor.NewFromName (Pinta.Resources.StandardCursors.Grab, null);
 
 		protected bool changing_tension = false;
-		protected PointD last_mouse_pos = new PointD (0d, 0d);
+		protected PointD last_mouse_pos = new (0d, 0d);
 
 		//Helps to keep track of the first modification on a shape after the mouse is clicked, to prevent unnecessary history items.
 		protected bool clicked_without_modifying = false;
 
 		//Stores the editable shape data.
-		public static ShapeEngineCollection SEngines = new ShapeEngineCollection ();
+		public static ShapeEngineCollection SEngines = new ();
 
 		#region ToolbarEventHandlers
 

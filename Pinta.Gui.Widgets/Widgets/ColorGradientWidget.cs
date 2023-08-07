@@ -116,7 +116,7 @@ namespace Pinta.Gui.Widgets
 			}
 		}
 
-		private RectangleD GetAllocation () => new RectangleD (0, 0, GetAllocatedWidth (), GetAllocatedHeight ());
+		private RectangleD GetAllocation () => new (0, 0, GetAllocatedWidth (), GetAllocatedHeight ());
 
 		private double GetYFromValue (double val)
 		{

@@ -32,7 +32,7 @@ namespace Pinta.Tools
 {
 	public class LineCurveSeriesEngine : ShapeEngine
 	{
-		public Arrow Arrow1 = new Arrow (), Arrow2 = new Arrow ();
+		public Arrow Arrow1 = new (), Arrow2 = new ();
 
 		/// <summary>
 		/// Create a new LineCurveSeriesEngine.

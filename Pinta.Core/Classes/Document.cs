@@ -55,7 +55,7 @@ namespace Pinta.Core
 			}
 		}
 
-		public DocumentSelection PreviousSelection = new DocumentSelection ();
+		public DocumentSelection PreviousSelection = new ();
 
 		public Document (Core.Size size)
 		{
