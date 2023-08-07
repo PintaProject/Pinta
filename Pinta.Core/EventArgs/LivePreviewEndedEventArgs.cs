@@ -32,15 +32,15 @@ public enum RenderStatus
 {
 	Completed,
 	Canceled,
-	Faulted
+	Faulted,
 }
 
-public class LivePreviewEndedEventArgs : EventArgs
+public sealed class LivePreviewEndedEventArgs : EventArgs
 {
 	public LivePreviewEndedEventArgs (RenderStatus status, Exception? exception)
 	{
-		this.Status = status;
-		this.Exception = exception;
+		Status = status;
+		Exception = exception;
 	}
 
 	public RenderStatus Status { get; }

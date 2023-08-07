@@ -28,7 +28,7 @@ using System;
 
 namespace Pinta.Core;
 
-public class ToolEventArgs : EventArgs
+public sealed class ToolEventArgs : EventArgs
 {
 	public BaseTool Tool { get; }
 

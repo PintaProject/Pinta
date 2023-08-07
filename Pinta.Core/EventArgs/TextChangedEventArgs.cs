@@ -28,9 +28,9 @@ using System;
 
 namespace Pinta.Core;
 
-public class TextChangedEventArgs : EventArgs
+public sealed class TextChangedEventArgs : EventArgs
 {
-	public string Text { get; set; }
+	public string Text { get; }
 
 	public TextChangedEventArgs (string text)
 	{
