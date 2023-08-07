@@ -25,13 +25,14 @@
 // THE SOFTWARE.
 
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 
 namespace Pinta.Core
 {
-	public class EffectsActions
+	public sealed class EffectsActions
 	{
 		public Dictionary<string, Gio.Menu> Menus { get; } = new ();
-		public List<Command> Actions { get; } = new ();
+		public Collection<Command> Actions { get; } = new ();
 
 		public EffectsActions ()
 		{
