@@ -69,5 +69,12 @@ public sealed class BitMask
 				Set (x, y, newValue);
 	}
 
-	private int GetIndex (int x, int y) => (y * Width) + x;
+	private int GetIndex (int x, int y)
+	{
+		if (x < 0)
+			throw new ArgumentOutOfRangeException (nameof(x));
+		if (y < 0)
+			throw new ArgumentOutOfRangeException (nameof (y));
+		return (y * Width) + x;
+	}
 }
