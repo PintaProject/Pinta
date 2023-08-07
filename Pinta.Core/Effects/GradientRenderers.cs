@@ -43,8 +43,8 @@ namespace Pinta.Core
 
 		public abstract class LinearStraight : LinearBase
 		{
-			private int _startY;
-			private int _startX;
+			private int start_y;
+			private int start_x;
 
 			protected internal LinearStraight (bool alphaOnly, BinaryPixelOp normalBlendOp)
 				: base (alphaOnly, normalBlendOp)
@@ -60,15 +60,15 @@ namespace Pinta.Core
 			{
 				base.BeforeRender ();
 
-				_startX = (int) StartPoint.X;
-				_startY = (int) StartPoint.Y;
+				start_x = (int) StartPoint.X;
+				start_y = (int) StartPoint.Y;
 
 			}
 
 			public override byte ComputeByteLerp (int x, int y)
 			{
-				var dx = x - _startX;
-				var dy = y - _startY;
+				var dx = x - start_x;
+				var dy = y - start_y;
 
 				var lerp = (dx * dtdx) + (dy * dtdy);
 
@@ -118,37 +118,37 @@ namespace Pinta.Core
 
 		public sealed class Radial : GradientRenderer
 		{
-			private double invDistanceScale;
+			private double inv_distance_scale;
 
 			public Radial (bool alphaOnly, BinaryPixelOp normalBlendOp) : base (alphaOnly, normalBlendOp)
 			{
 			}
 
-			int _startX, _startY;
+			int start_x, start_y;
 
 			public override void BeforeRender ()
 			{
 				var distanceScale = StartPoint.Distance (EndPoint);
 
-				_startX = (int) StartPoint.X;
-				_startY = (int) StartPoint.Y;
+				start_x = (int) StartPoint.X;
+				start_y = (int) StartPoint.Y;
 
 				if (distanceScale == 0)
-					invDistanceScale = 0;
+					inv_distance_scale = 0;
 				else
-					invDistanceScale = 1f / distanceScale;
+					inv_distance_scale = 1f / distanceScale;
 
 				base.BeforeRender ();
 			}
 
 			public override byte ComputeByteLerp (int x, int y)
 			{
-				var dx = x - _startX;
-				var dy = y - _startY;
+				var dx = x - start_x;
+				var dy = y - start_y;
 
 				var distance = Math.Sqrt (dx * dx + dy * dy);
 
-				var result = distance * invDistanceScale;
+				var result = distance * inv_distance_scale;
 				if (result < 0.0)
 					return 0;
 				return result > 1.0 ? (byte) 255 : (byte) (result * 255f);
@@ -157,8 +157,8 @@ namespace Pinta.Core
 
 		public sealed class Conical : GradientRenderer
 		{
-			private const double invPi = 1.0 / Math.PI;
-			private double tOffset;
+			private const double InvPi = 1.0 / Math.PI;
+			private double t_offset;
 
 			public Conical (bool alphaOnly, BinaryPixelOp normalBlendOp) : base (alphaOnly, normalBlendOp)
 			{
@@ -171,9 +171,9 @@ namespace Pinta.Core
 
 				var theta = Math.Atan2 (ay, ax);
 
-				var t = theta * invPi;
+				var t = theta * InvPi;
 
-				tOffset = -t;
+				t_offset = -t;
 				base.BeforeRender ();
 			}
 
@@ -184,9 +184,9 @@ namespace Pinta.Core
 
 				var theta = Math.Atan2 (ay, ax);
 
-				var t = theta * invPi;
+				var t = theta * InvPi;
 
-				return (byte) (BoundLerp (t + tOffset) * 255f);
+				return (byte) (BoundLerp (t + t_offset) * 255f);
 			}
 
 			public double BoundLerp (double t)
