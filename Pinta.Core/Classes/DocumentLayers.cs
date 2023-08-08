@@ -287,32 +287,28 @@ namespace Pinta.Core
 		/// Returns all layers that are visible and need to be painted, optionally
 		/// including tool and selection layers.
 		/// </summary>
-		public List<Layer> GetLayersToPaint (bool includeToolLayer = true)
+		public IEnumerable<Layer> GetLayersToPaint (bool includeToolLayer = true)
 		{
-			var paint_layers = new List<Layer> ();
-
 			foreach (var layer in user_layers) {
 				if (!layer.Hidden)
-					paint_layers.Add (layer);
+					yield return (layer);
 
 				if (layer == CurrentUserLayer) {
 					if (includeToolLayer && tool_layer is not null && !ToolLayer.Hidden)
-						paint_layers.Add (ToolLayer);
+						yield return (ToolLayer);
 
 					if (ShowSelectionLayer && (!SelectionLayer.Hidden))
-						paint_layers.Add (SelectionLayer);
+						yield return (SelectionLayer);
 				}
 
 				if (!layer.Hidden) {
 					foreach (var rel in layer.ReEditableLayers) {
 						//Make sure that each UserLayer's ReEditableLayer is in use before adding it to the List of Layers to Paint.
 						if (rel.IsLayerSetup)
-							paint_layers.Add (rel.Layer);
+							yield return (rel.Layer);
 					}
 				}
 			}
-
-			return paint_layers;
 		}
 
 		/// <summary>
