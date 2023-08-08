@@ -18,23 +18,15 @@ namespace Pinta.Effects
 	{
 		UnaryPixelOp? op = null;
 
-		public override string Icon {
-			get { return Pinta.Resources.Icons.AdjustmentsCurves; }
-		}
+		public override string Icon => Pinta.Resources.Icons.AdjustmentsCurves;
 
-		public override string Name {
-			get { return Translations.GetString ("Curves"); }
-		}
+		public override string Name => Translations.GetString ("Curves");
 
-		public override bool IsConfigurable {
-			get { return true; }
-		}
+		public override bool IsConfigurable => true;
 
-		public override string AdjustmentMenuKey {
-			get { return "M"; }
-		}
+		public override string AdjustmentMenuKey => "M";
 
-		public CurvesData Data { get { return (CurvesData) EffectData!; } } // NRT - Set in constructor
+		public CurvesData Data => (CurvesData) EffectData!;  // NRT - Set in constructor
 
 		public CurvesEffect ()
 		{

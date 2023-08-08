@@ -18,21 +18,13 @@ namespace Pinta.Effects
 	{
 		public override string Icon => Pinta.Resources.Icons.EffectsDistortBulge;
 
-		public override string Name {
-			get { return Translations.GetString ("Bulge"); }
-		}
+		public override string Name => Translations.GetString ("Bulge");
 
-		public override bool IsConfigurable {
-			get { return true; }
-		}
+		public override bool IsConfigurable => true;
 
-		public override string EffectMenuCategory {
-			get { return Translations.GetString ("Distort"); }
-		}
+		public override string EffectMenuCategory => Translations.GetString ("Distort");
 
-		public BulgeData Data {
-			get { return (BulgeData) EffectData!; } // NRT - Set in constructor
-		}
+		public BulgeData Data => (BulgeData) EffectData!;
 
 		public BulgeEffect ()
 		{
@@ -99,9 +91,7 @@ namespace Pinta.Effects
 			public Core.PointD Offset = new (0.0, 0.0);
 
 			[Skip]
-			public override bool IsDefault {
-				get { return Amount == 0; }
-			}
+			public override bool IsDefault => Amount == 0;
 		}
 	}
 }

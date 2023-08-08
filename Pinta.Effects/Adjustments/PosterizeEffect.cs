@@ -16,23 +16,15 @@ namespace Pinta.Effects
 	{
 		UnaryPixelOps.PosterizePixel? op = null;
 
-		public override string Icon {
-			get { return Pinta.Resources.Icons.AdjustmentsPosterize; }
-		}
+		public override string Icon => Pinta.Resources.Icons.AdjustmentsPosterize;
 
-		public override string Name {
-			get { return Translations.GetString ("Posterize"); }
-		}
+		public override string Name => Translations.GetString ("Posterize");
 
-		public override bool IsConfigurable {
-			get { return true; }
-		}
+		public override bool IsConfigurable => true;
 
-		public override string AdjustmentMenuKey {
-			get { return "P"; }
-		}
+		public override string AdjustmentMenuKey => "P";
 
-		public PosterizeData Data { get { return (PosterizeData) EffectData!; } } // NRT - Set in constructor
+		public PosterizeData Data => (PosterizeData) EffectData!;  // NRT - Set in constructor
 
 		public PosterizeEffect ()
 		{

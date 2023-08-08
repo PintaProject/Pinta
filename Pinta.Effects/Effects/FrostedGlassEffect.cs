@@ -18,21 +18,13 @@ namespace Pinta.Effects
 	{
 		public override string Icon => Pinta.Resources.Icons.EffectsDistortFrostedGlass;
 
-		public override string Name {
-			get { return Translations.GetString ("Frosted Glass"); }
-		}
+		public override string Name => Translations.GetString ("Frosted Glass");
 
-		public override bool IsConfigurable {
-			get { return true; }
-		}
+		public override bool IsConfigurable => true;
 
-		public override string EffectMenuCategory {
-			get { return Translations.GetString ("Distort"); }
-		}
+		public override string EffectMenuCategory => Translations.GetString ("Distort");
 
-		public FrostedGlassData Data {
-			get { return (FrostedGlassData) EffectData!; } // NRT - Set in constructor
-		}
+		public FrostedGlassData Data => (FrostedGlassData) EffectData!;
 
 		private readonly Random random = new ();
 

@@ -18,21 +18,13 @@ namespace Pinta.Effects
 	{
 		public override string Icon => Pinta.Resources.Icons.EffectsDistortPixelate;
 
-		public override string Name {
-			get { return Translations.GetString ("Pixelate"); }
-		}
+		public override string Name => Translations.GetString ("Pixelate");
 
-		public override bool IsConfigurable {
-			get { return true; }
-		}
+		public override bool IsConfigurable => true;
 
-		public PixelateData Data {
-			get { return (PixelateData) EffectData!; } // NRT - Set in constructor
-		}
+		public PixelateData Data => (PixelateData) EffectData!;
 
-		public override string EffectMenuCategory {
-			get { return Translations.GetString ("Distort"); }
-		}
+		public override string EffectMenuCategory => Translations.GetString ("Distort");
 
 		public PixelateEffect ()
 		{

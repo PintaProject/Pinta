@@ -16,17 +16,11 @@ namespace Pinta.Effects
 	{
 		UnaryPixelOps.Level? op;
 
-		public override string Icon {
-			get { return Pinta.Resources.Icons.AdjustmentsAutoLevel; }
-		}
+		public override string Icon => Pinta.Resources.Icons.AdjustmentsAutoLevel;
 
-		public override string Name {
-			get { return Translations.GetString ("Auto Level"); }
-		}
+		public override string Name => Translations.GetString ("Auto Level");
 
-		public override string AdjustmentMenuKey {
-			get { return "L"; }
-		}
+		public override string AdjustmentMenuKey => "L";
 
 		public override void Render (ImageSurface src, ImageSurface dest, RectangleI[] rois)
 		{

@@ -18,19 +18,13 @@ namespace Pinta.Effects
 	{
 		public override string Icon => Pinta.Resources.Icons.EffectsRenderJuliaFractal;
 
-		public override string Name {
-			get { return Translations.GetString ("Julia Fractal"); }
-		}
+		public override string Name => Translations.GetString ("Julia Fractal");
 
-		public override bool IsConfigurable {
-			get { return true; }
-		}
+		public override bool IsConfigurable => true;
 
-		public override string EffectMenuCategory {
-			get { return Translations.GetString ("Render"); }
-		}
+		public override string EffectMenuCategory => Translations.GetString ("Render");
 
-		public JuliaFractalData Data { get { return (JuliaFractalData) EffectData!; } } // NRT - Set in constructor
+		public JuliaFractalData Data => (JuliaFractalData) EffectData!;  // NRT - Set in constructor
 
 		public JuliaFractalEffect ()
 		{

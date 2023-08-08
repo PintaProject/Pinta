@@ -39,17 +39,11 @@ namespace Pinta.Effects
 		private HScaleSpinButtonWidget blue_spinbox;
 		private CheckButton link_button;
 
-		public int Red {
-			get { return red_spinbox.ValueAsInt; }
-		}
+		public int Red => red_spinbox.ValueAsInt;
 
-		public int Green {
-			get { return green_spinbox.ValueAsInt; }
-		}
+		public int Green => green_spinbox.ValueAsInt;
 
-		public int Blue {
-			get { return blue_spinbox.ValueAsInt; }
-		}
+		public int Blue => blue_spinbox.ValueAsInt;
 
 		public PosterizeData? EffectData { get; set; }
 

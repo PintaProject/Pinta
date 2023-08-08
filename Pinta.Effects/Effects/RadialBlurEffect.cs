@@ -18,19 +18,13 @@ namespace Pinta.Effects
 	{
 		public override string Icon => Pinta.Resources.Icons.EffectsBlursRadialBlur;
 
-		public override string Name {
-			get { return Translations.GetString ("Radial Blur"); }
-		}
+		public override string Name => Translations.GetString ("Radial Blur");
 
-		public override bool IsConfigurable {
-			get { return true; }
-		}
+		public override bool IsConfigurable => true;
 
-		public override string EffectMenuCategory {
-			get { return Translations.GetString ("Blurs"); }
-		}
+		public override string EffectMenuCategory => Translations.GetString ("Blurs");
 
-		public RadialBlurData Data { get { return (RadialBlurData) EffectData!; } } // NRT - Set in constructor
+		public RadialBlurData Data => (RadialBlurData) EffectData!;  // NRT - Set in constructor
 
 		public RadialBlurEffect ()
 		{
@@ -164,7 +158,7 @@ namespace Pinta.Effects
 			public int Quality = 2;
 
 			[Skip]
-			public override bool IsDefault { get { return Angle == 0; } }
+			public override bool IsDefault => Angle == 0;
 		}
 	}
 }

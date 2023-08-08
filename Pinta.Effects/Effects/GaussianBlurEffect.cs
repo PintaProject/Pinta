@@ -18,19 +18,13 @@ namespace Pinta.Effects
 	{
 		public override string Icon => Pinta.Resources.Icons.EffectsBlursGaussianBlur;
 
-		public override string Name {
-			get { return Translations.GetString ("Gaussian Blur"); }
-		}
+		public override string Name => Translations.GetString ("Gaussian Blur");
 
-		public override bool IsConfigurable {
-			get { return true; }
-		}
+		public override bool IsConfigurable => true;
 
-		public override string EffectMenuCategory {
-			get { return Translations.GetString ("Blurs"); }
-		}
+		public override string EffectMenuCategory => Translations.GetString ("Blurs");
 
-		public GaussianBlurData Data { get { return (GaussianBlurData) EffectData!; } } // NRT - Set in constructor
+		public GaussianBlurData Data => (GaussianBlurData) EffectData!;  // NRT - Set in constructor
 
 		public GaussianBlurEffect ()
 		{
@@ -242,7 +236,7 @@ namespace Pinta.Effects
 			public int Radius = 2;
 
 			[Skip]
-			public override bool IsDefault { get { return Radius == 0; } }
+			public override bool IsDefault => Radius == 0;
 		}
 	}
 }

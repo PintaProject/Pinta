@@ -35,9 +35,7 @@ namespace Pinta.Effects
 	public abstract class WarpEffect : BaseEffect
 	{
 
-		public WarpData Data {
-			get { return (WarpData) EffectData!; } // NRT - Set in constructor
-		}
+		public WarpData Data => (WarpData) EffectData!;
 
 		public WarpEffect ()
 		{
@@ -52,8 +50,8 @@ namespace Pinta.Effects
 		private double default_radius = 0;
 		private double default_radius_2 = 0;
 
-		protected double DefaultRadius { get { return this.default_radius; } }
-		protected double DefaultRadius2 { get { return this.default_radius_2; } }
+		protected double DefaultRadius => this.default_radius;
+		protected double DefaultRadius2 => this.default_radius_2;
 
 		#region Algorithm Code Ported From PDN
 		public override void Render (ImageSurface src, ImageSurface dst, Core.RectangleI[] rois)

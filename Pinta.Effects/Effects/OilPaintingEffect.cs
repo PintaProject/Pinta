@@ -18,19 +18,13 @@ namespace Pinta.Effects
 	{
 		public override string Icon => Pinta.Resources.Icons.EffectsArtisticOilPainting;
 
-		public override string Name {
-			get { return Translations.GetString ("Oil Painting"); }
-		}
+		public override string Name => Translations.GetString ("Oil Painting");
 
-		public override bool IsConfigurable {
-			get { return true; }
-		}
+		public override bool IsConfigurable => true;
 
-		public override string EffectMenuCategory {
-			get { return Translations.GetString ("Artistic"); }
-		}
+		public override string EffectMenuCategory => Translations.GetString ("Artistic");
 
-		public OilPaintingData Data { get { return (OilPaintingData) EffectData!; } } // NRT - Set in constructor
+		public OilPaintingData Data => (OilPaintingData) EffectData!;  // NRT - Set in constructor
 
 		public OilPaintingEffect ()
 		{
