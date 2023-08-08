@@ -32,32 +32,28 @@ using Cairo;
 
 namespace Pinta.Core
 {
-	public class PaintDotNetPalette : IPaletteLoader, IPaletteSaver
+	public sealed class PaintDotNetPalette : IPaletteLoader, IPaletteSaver
 	{
 		public List<Color> Load (Gio.File file)
 		{
 			List<Color> colors = new List<Color> ();
 			using var stream = new GioStream (file.Read (null));
-			StreamReader reader = new StreamReader (stream);
+			using var reader = new StreamReader (stream);
 
-			try {
-				string? line = reader.ReadLine ();
-				do {
-					if (line is null || line.IndexOf (';') == 0)
-						continue;
+			string? line = reader.ReadLine ();
+			do {
+				if (line is null || line.IndexOf (';') == 0)
+					continue;
 
-					uint color = uint.Parse (line.Substring (0, 8), NumberStyles.HexNumber);
-					double b = (color & 0xff) / 255f;
-					double g = ((color >> 8) & 0xff) / 255f;
-					double r = ((color >> 16) & 0xff) / 255f;
-					double a = (color >> 24) / 255f;
-					colors.Add (new Color (r, g, b, a));
-				} while ((line = reader.ReadLine ()) != null);
+				uint color = uint.Parse (line.Substring (0, 8), NumberStyles.HexNumber);
+				double b = (color & 0xff) / 255f;
+				double g = ((color >> 8) & 0xff) / 255f;
+				double r = ((color >> 16) & 0xff) / 255f;
+				double a = (color >> 24) / 255f;
+				colors.Add (new Color (r, g, b, a));
+			} while ((line = reader.ReadLine ()) != null);
 
-				return colors;
-			} finally {
-				reader.Close ();
-			}
+			return colors;
 		}
 
 		public void Save (List<Color> colors, Gio.File file)
