@@ -92,7 +92,7 @@ namespace Pinta.Core
 			return false;
 		}
 
-		public static PointI[][] CreatePolygonSet (this BitMask stencil, RectangleD bounds, int translateX, int translateY)
+		public static IReadOnlyList<IReadOnlyList<PointI>> CreatePolygonSet (this BitMask stencil, RectangleD bounds, int translateX, int translateY)
 		{
 			if (stencil.IsEmpty)
 				return Array.Empty<PointI[]> ();
@@ -180,7 +180,7 @@ namespace Pinta.Core
 				polygons.Add (points);
 			}
 
-			return polygons.ToArray ();
+			return polygons;
 		}
 	}
 }
