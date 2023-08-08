@@ -291,21 +291,21 @@ namespace Pinta.Core
 		{
 			foreach (var layer in user_layers) {
 				if (!layer.Hidden)
-					yield return (layer);
+					yield return layer;
 
 				if (layer == CurrentUserLayer) {
 					if (includeToolLayer && tool_layer is not null && !ToolLayer.Hidden)
-						yield return (ToolLayer);
+						yield return ToolLayer;
 
 					if (ShowSelectionLayer && (!SelectionLayer.Hidden))
-						yield return (SelectionLayer);
+						yield return SelectionLayer;
 				}
 
 				if (!layer.Hidden) {
 					foreach (var rel in layer.ReEditableLayers) {
 						//Make sure that each UserLayer's ReEditableLayer is in use before adding it to the List of Layers to Paint.
 						if (rel.IsLayerSetup)
-							yield return (rel.Layer);
+							yield return rel.Layer;
 					}
 				}
 			}
