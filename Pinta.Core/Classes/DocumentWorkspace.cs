@@ -71,7 +71,7 @@ namespace Pinta.Core
 		/// Size of the zoomed image.
 		/// </summary>
 		public Size ViewSize {
-			get { return view_size; }
+			get => view_size;
 			set {
 				if (view_size.Width != value.Width || view_size.Height != value.Height) {
 					view_size = value;
@@ -108,7 +108,7 @@ namespace Pinta.Core
 		/// Scale factor for the zoomed image.
 		/// </summary>
 		public double Scale {
-			get { return (double) ViewSize.Width / (double) document.ImageSize.Width; }
+			get => (double) ViewSize.Width / (double) document.ImageSize.Width;
 			set {
 				if (value != (double) ViewSize.Width / (double) document.ImageSize.Width || value != (double) ViewSize.Height / (double) document.ImageSize.Height) {
 					if (document.ImageSize.Width == 0) {

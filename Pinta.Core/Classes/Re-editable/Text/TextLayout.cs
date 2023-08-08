@@ -35,7 +35,7 @@ namespace Pinta.Core
 		private TextEngine engine = null!; // NRT - Not sure how this is set, but all callers assume it is not-null
 
 		public TextEngine Engine {
-			get { return engine; }
+			get => engine;
 			set {
 				if (engine != null)
 					engine.Modified -= OnEngineModified;

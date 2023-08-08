@@ -108,9 +108,7 @@ namespace Pinta.Core
 					throw new ObjectDisposedException ("The stream is closed");
 				return ((Gio.Seekable) stream).Tell ();
 			}
-			set {
-				Seek (value, System.IO.SeekOrigin.Begin);
-			}
+			set => Seek (value, System.IO.SeekOrigin.Begin);
 		}
 
 		public override void Flush ()

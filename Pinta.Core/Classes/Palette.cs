@@ -53,9 +53,7 @@ namespace Pinta.Core
 		public int Count => colors.Count;
 
 		public Color this[int index] {
-			get {
-				return colors[index];
-			}
+			get => colors[index];
 
 			set {
 				colors[index] = value;

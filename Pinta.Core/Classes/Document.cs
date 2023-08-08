@@ -41,7 +41,7 @@ namespace Pinta.Core
 
 		private DocumentSelection selection = null!; // NRT - Set by constructor via Selection property
 		public DocumentSelection Selection {
-			get { return selection; }
+			get => selection;
 			set {
 				selection = value;
 
@@ -118,7 +118,7 @@ namespace Pinta.Core
 		public Core.Size ImageSize { get; set; }
 
 		public bool IsDirty {
-			get { return is_dirty; }
+			get => is_dirty;
 			set {
 				if (is_dirty != value) {
 					is_dirty = value;

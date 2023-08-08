@@ -23,13 +23,13 @@ namespace Pinta.Core
 		}
 
 		public int Line {
-			readonly get { return line; }
-			set { line = Math.Max (value, 0); }
+			readonly get => line;
+			set => line = Math.Max (value, 0);
 		}
 
 		public int Offset {
-			readonly get { return offset; }
-			set { offset = Math.Max (value, 0); }
+			readonly get => offset;
+			set => offset = Math.Max (value, 0);
 		}
 
 		#region Operators

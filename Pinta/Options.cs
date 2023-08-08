@@ -194,7 +194,7 @@ namespace Mono.Options
 		void IList.Remove (object value) { (values as IList).Remove (value); }
 		void IList.RemoveAt (int index) { (values as IList).RemoveAt (index); }
 		bool IList.IsFixedSize => false;
-		object IList.this[int index] { get { return this[index]; } set { (values as IList)[index] = value; } }
+		object IList.this[int index] { get => this[index]; set => (values as IList)[index] = value; }
 		#endregion
 
 		#region IList<T>
@@ -220,9 +220,7 @@ namespace Mono.Options
 				AssertValid (index);
 				return index >= values.Count ? null : values[index];
 			}
-			set {
-				values[index] = value;
-			}
+			set => values[index] = value;
 		}
 		#endregion
 
@@ -257,18 +255,18 @@ namespace Mono.Options
 		}
 
 		public Option Option {
-			get { return option; }
-			set { option = value; }
+			get => option;
+			set => option = value;
 		}
 
 		public string OptionName {
-			get { return name; }
-			set { name = value; }
+			get => name;
+			set => name = value;
 		}
 
 		public int OptionIndex {
-			get { return index; }
-			set { index = value; }
+			get => index;
+			set => index = value;
 		}
 
 		public OptionSet OptionSet => set;

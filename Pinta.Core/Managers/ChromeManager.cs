@@ -60,7 +60,7 @@ namespace Pinta.Core
 
 		#region Public Properties
 		public PointI LastCanvasCursorPoint {
-			get { return last_canvas_cursor_point; }
+			get => last_canvas_cursor_point;
 			set {
 				if (last_canvas_cursor_point != value) {
 					last_canvas_cursor_point = value;
@@ -70,7 +70,7 @@ namespace Pinta.Core
 		}
 
 		public bool MainWindowBusy {
-			get { return main_window_busy; }
+			get => main_window_busy;
 			set {
 				main_window_busy = value;
 

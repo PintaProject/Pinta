@@ -55,13 +55,13 @@ namespace Pinta
 		}
 
 		public string Text {
-			get { return label.GetText (); }
-			set { label.SetText (value); }
+			get => label.GetText ();
+			set => label.SetText (value);
 		}
 
 		public double Progress {
-			get { return progress_bar.Fraction; }
-			set { progress_bar.Fraction = value; }
+			get => progress_bar.Fraction;
+			set => progress_bar.Fraction = value;
 		}
 
 		public event EventHandler<EventArgs>? Canceled;

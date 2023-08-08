@@ -19,9 +19,7 @@ namespace Pinta.Core
 	{
 		protected long[][] histogram;
 		public long[][] HistogramValues {
-			get {
-				return this.histogram;
-			}
+			get => this.histogram;
 
 			set {
 				if (value.Length == this.histogram.Length && value[0].Length == this.histogram[0].Length) {

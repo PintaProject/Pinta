@@ -67,9 +67,7 @@ namespace Pinta.Effects
 		private SortedList<int, int>[] rgb_cps = null!;
 
 		public SortedList<int, int>[] ControlPoints {
-			get {
-				return (Mode == ColorTransferMode.Luminosity) ? luminosity_cps : rgb_cps;
-			}
+			get => (Mode == ColorTransferMode.Luminosity) ? luminosity_cps : rgb_cps;
 			set {
 				if (Mode == ColorTransferMode.Luminosity)
 					luminosity_cps = value;

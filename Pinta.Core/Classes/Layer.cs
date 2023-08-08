@@ -62,22 +62,22 @@ namespace Pinta.Core
 		public static readonly string BlendModeProperty = "BlendMode";
 
 		public double Opacity {
-			get { return opacity; }
+			get => opacity;
 			set { if (opacity != value) SetValue (OpacityProperty, ref opacity, value); }
 		}
 
 		public bool Hidden {
-			get { return hidden; }
+			get => hidden;
 			set { if (hidden != value) SetValue (HiddenProperty, ref hidden, value); }
 		}
 
 		public string Name {
-			get { return name; }
+			get => name;
 			set { if (name != value) SetValue (NameProperty, ref name, value); }
 		}
 
 		public BlendMode BlendMode {
-			get { return blend_mode; }
+			get => blend_mode;
 			set { if (blend_mode != value) SetValue (BlendModeProperty, ref blend_mode, value); }
 		}
 

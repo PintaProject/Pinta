@@ -39,7 +39,7 @@ namespace Pinta.Core
 		}
 
 		public Gio.File? LastDialogDirectory {
-			get { return last_dialog_directory; }
+			get => last_dialog_directory;
 			set {
 				// The file chooser dialog may return null for the current folder in certain cases,
 				// such as the Recently Used pane in the Gnome file chooser.

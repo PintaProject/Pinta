@@ -139,7 +139,7 @@ namespace Pinta.Effects
 
 			[Caption ("Brightness")]
 			public int Brightness {
-				get { return brightness; }
+				get => brightness;
 				set {
 					if (value != brightness) {
 						brightness = value;
@@ -150,7 +150,7 @@ namespace Pinta.Effects
 
 			[Caption ("Contrast")]
 			public int Contrast {
-				get { return contrast; }
+				get => contrast;
 				set {
 					if (value != contrast) {
 						contrast = value;
