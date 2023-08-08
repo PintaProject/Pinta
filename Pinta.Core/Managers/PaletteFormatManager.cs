@@ -47,7 +47,7 @@ namespace Pinta.Core
 			formats.Add (new PaletteDescriptor ("PaintShop Pro", new string[] { "pal", "PAL" }, pspHandler, pspHandler));
 		}
 
-		public IEnumerable<PaletteDescriptor> Formats { get { return formats; } }
+		public IEnumerable<PaletteDescriptor> Formats => formats;
 
 		public PaletteDescriptor? GetFormatByFilename (string fileName)
 		{

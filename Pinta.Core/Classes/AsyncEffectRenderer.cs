@@ -100,9 +100,7 @@ namespace Pinta.Core
 			timer_tick_id = 0;
 		}
 
-		internal bool IsRendering {
-			get { return is_rendering; }
-		}
+		internal bool IsRendering => is_rendering;
 
 		internal double Progress {
 			get {

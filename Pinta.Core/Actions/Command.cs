@@ -35,9 +35,7 @@ namespace Pinta.Core
 	public class Command
 	{
 		public Gio.SimpleAction Action { get; }
-		public string Name {
-			get { return Action.Name!; }
-		}
+		public string Name => Action.Name!;
 		public SignalHandler<SimpleAction, SimpleAction.ActivateSignalArgs>? Activated;
 		public void Activate ()
 		{
@@ -48,7 +46,7 @@ namespace Pinta.Core
 		public string? ShortLabel { get; set; }
 		public string? Tooltip { get; }
 		public string? IconName { get; }
-		public string FullName { get { return $"app.{Name}"; } }
+		public string FullName => $"app.{Name}";
 		public bool IsImportant { get; set; } = false;
 		public bool Sensitive { get { return Action.Enabled; } set { Action.Enabled = value; } }
 

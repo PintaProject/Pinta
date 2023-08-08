@@ -49,6 +49,6 @@ namespace Pinta
 
 		public string Label => Document.DisplayName + (Document.IsDirty ? "*" : string.Empty);
 
-		public Gtk.Widget Widget { get { return canvas_window; } }
+		public Gtk.Widget Widget => canvas_window;
 	}
 }

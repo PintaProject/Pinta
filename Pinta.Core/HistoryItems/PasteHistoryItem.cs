@@ -31,7 +31,7 @@ namespace Pinta.Core
 		private readonly Cairo.ImageSurface paste_image;
 		private DocumentSelection old_selection;
 
-		public override bool CausesDirty { get { return true; } }
+		public override bool CausesDirty => true;
 
 		public PasteHistoryItem (Cairo.ImageSurface pasteImage, DocumentSelection oldSelection)
 		{

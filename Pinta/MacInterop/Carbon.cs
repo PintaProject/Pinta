@@ -497,23 +497,17 @@ namespace Pinta.MacInterop
 			this.attributes = CarbonHICommandAttributes.FromMenu;
 		}
 
-		public readonly CarbonHICommandAttributes Attributes { get { return attributes; } }
-		public readonly uint CommandID { get { return commandID; } }
-		public readonly IntPtr ControlRef { get { return controlRef; } }
-		public readonly IntPtr WindowRef { get { return windowRef; } }
-		public readonly HIMenuItem MenuItem { get { return menuItem; } }
+		public readonly CarbonHICommandAttributes Attributes => attributes;
+		public readonly uint CommandID => commandID;
+		public readonly IntPtr ControlRef => controlRef;
+		public readonly IntPtr WindowRef => windowRef;
+		public readonly HIMenuItem MenuItem => menuItem;
 
-		public readonly bool IsFromMenu {
-			get { return attributes == CarbonHICommandAttributes.FromMenu; }
-		}
+		public readonly bool IsFromMenu => attributes == CarbonHICommandAttributes.FromMenu;
 
-		public readonly bool IsFromControl {
-			get { return attributes == CarbonHICommandAttributes.FromControl; }
-		}
+		public readonly bool IsFromControl => attributes == CarbonHICommandAttributes.FromControl;
 
-		public readonly bool IsFromWindow {
-			get { return attributes == CarbonHICommandAttributes.FromWindow; }
-		}
+		public readonly bool IsFromWindow => attributes == CarbonHICommandAttributes.FromWindow;
 	}
 
 	[StructLayout (LayoutKind.Sequential, Pack = 2)]
@@ -528,8 +522,8 @@ namespace Pinta.MacInterop
 			this.menuRef = menuRef;
 		}
 
-		public readonly IntPtr MenuRef { get { return menuRef; } }
-		public readonly ushort Index { get { return index; } }
+		public readonly IntPtr MenuRef => menuRef;
+		public readonly ushort Index => index;
 	}
 
 	//*NOT* flags
@@ -544,9 +538,7 @@ namespace Pinta.MacInterop
 	{
 		readonly int value;
 
-		public readonly int Value {
-			get { return value; }
-		}
+		public readonly int Value => value;
 
 		public OSType (int value)
 		{

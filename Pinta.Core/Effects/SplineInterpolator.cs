@@ -14,11 +14,7 @@ namespace Pinta.Core
 		private readonly SortedList<double, double> points = new ();
 		private double[]? y2;
 
-		public int Count {
-			get {
-				return this.points.Count;
-			}
-		}
+		public int Count => this.points.Count;
 
 		public void Add (double x, double y)
 		{
