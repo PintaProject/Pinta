@@ -35,7 +35,7 @@ namespace Pinta.Tools
 {
 	public class EllipseEditEngine : BaseEditEngine
 	{
-		protected override string ShapeName { get { return Translations.GetString ("Ellipse"); } }
+		protected override string ShapeName => Translations.GetString ("Ellipse");
 
 		public EllipseEditEngine (ShapeTool owner)
 		    : base (owner)

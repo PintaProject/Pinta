@@ -35,9 +35,7 @@ namespace Pinta.Tools.Brushes
 	{
 		private static readonly double theta = Math.PI / 2;
 
-		public override string Name {
-			get { return Translations.GetString ("Squares"); }
-		}
+		public override string Name => Translations.GetString ("Squares");
 
 		protected override RectangleI OnMouseMove (Context g, Color strokeColor, ImageSurface surface,
 							      int x, int y, int lastX, int lastY)

@@ -107,7 +107,7 @@ namespace Pinta.Docking
 		/// <summary>
 		/// The items currently in the notebook.
 		/// </summary>
-		public IEnumerable<IDockNotebookItem> Items { get { return items; } }
+		public IEnumerable<IDockNotebookItem> Items => items;
 
 		/// <summary>
 		/// Whether to show the tab bar.

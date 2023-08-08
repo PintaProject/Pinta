@@ -33,13 +33,9 @@ namespace Pinta.Tools.Brushes
 {
 	public class SplatterBrush : BasePaintBrush
 	{
-		public override string Name {
-			get { return Translations.GetString ("Splatter"); }
-		}
+		public override string Name => Translations.GetString ("Splatter");
 
-		public override double StrokeAlphaMultiplier {
-			get { return 0.5; }
-		}
+		public override double StrokeAlphaMultiplier => 0.5;
 
 		protected override RectangleI OnMouseMove (Context g, Color strokeColor, ImageSurface surface,
 							      int x, int y, int lastX, int lastY)
