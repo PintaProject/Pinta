@@ -1,6 +1,5 @@
 using System;
 using System.Collections.Generic;
-using Gtk;
 using NUnit.Framework;
 
 namespace Pinta.Core.Tests;
