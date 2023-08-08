@@ -92,26 +92,14 @@ namespace Pinta
 			opacitySpinner.SetActivatesDefault (true);
 		}
 
-		public bool AreLayerPropertiesUpdated {
-			get {
-				return initial_properties.Opacity != opacity
+		public bool AreLayerPropertiesUpdated => initial_properties.Opacity != opacity
 					|| initial_properties.Hidden != hidden
 					|| initial_properties.Name != name
 					|| initial_properties.BlendMode != blendmode;
-			}
-		}
 
-		public LayerProperties InitialLayerProperties {
-			get {
-				return initial_properties;
-			}
-		}
+		public LayerProperties InitialLayerProperties => initial_properties;
 
-		public LayerProperties UpdatedLayerProperties {
-			get {
-				return new LayerProperties (name, hidden, opacity, blendmode);
-			}
-		}
+		public LayerProperties UpdatedLayerProperties => new LayerProperties (name, hidden, opacity, blendmode);
 
 		#region Private Methods
 		private void OnLayerNameChanged (object? sender, EventArgs e)

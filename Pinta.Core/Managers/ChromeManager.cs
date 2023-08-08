@@ -50,7 +50,7 @@ namespace Pinta.Core
 		public Box ToolBox { get; private set; } = null!;
 		public Box StatusBar { get; private set; } = null!;
 
-		public IProgressDialog ProgressDialog { get { return progress_dialog; } }
+		public IProgressDialog ProgressDialog => progress_dialog;
 		public Gio.Menu AdjustmentsMenu { get; private set; } = null!;
 		public Gio.Menu EffectsMenu { get; private set; } = null!;
 

@@ -60,9 +60,9 @@ namespace Pinta.Core
 			RenderUpdated += LivePreview_RenderUpdated;
 		}
 
-		public bool IsEnabled { get { return live_preview_enabled; } }
-		public Cairo.ImageSurface LivePreviewSurface { get { return live_preview_surface; } }
-		public RectangleI RenderBounds { get { return render_bounds; } }
+		public bool IsEnabled => live_preview_enabled;
+		public Cairo.ImageSurface LivePreviewSurface => live_preview_surface;
+		public RectangleI RenderBounds => render_bounds;
 
 		public event EventHandler<LivePreviewStartedEventArgs>? Started;
 		public event EventHandler<LivePreviewRenderUpdatedEventArgs>? RenderUpdated;

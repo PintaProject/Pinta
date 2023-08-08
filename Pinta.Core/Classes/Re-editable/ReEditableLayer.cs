@@ -37,7 +37,7 @@ namespace Pinta.Core
 
 		private bool inTheLoop = false;
 
-		public bool InTheLoop { get { return inTheLoop; } }
+		public bool InTheLoop => inTheLoop;
 
 		public Layer Layer {
 			get {
@@ -53,11 +53,7 @@ namespace Pinta.Core
 			}
 		}
 
-		public bool IsLayerSetup {
-			get {
-				return isLayerSetup;
-			}
-		}
+		public bool IsLayerSetup => isLayerSetup;
 
 		/// <summary>
 		/// Creates a new ReEditableLayer for drawing and editing on separately from the rest of the image.

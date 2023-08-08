@@ -164,8 +164,8 @@ namespace Mono.Options
 
 		#region ICollection
 		void ICollection.CopyTo (Array array, int index) { (values as ICollection).CopyTo (array, index); }
-		bool ICollection.IsSynchronized { get { return (values as ICollection).IsSynchronized; } }
-		object ICollection.SyncRoot { get { return (values as ICollection).SyncRoot; } }
+		bool ICollection.IsSynchronized => (values as ICollection).IsSynchronized;
+		object ICollection.SyncRoot => (values as ICollection).SyncRoot;
 		#endregion
 
 		#region ICollection<T>
@@ -174,8 +174,8 @@ namespace Mono.Options
 		public bool Contains (string item) { return values.Contains (item); }
 		public void CopyTo (string[] array, int arrayIndex) { values.CopyTo (array, arrayIndex); }
 		public bool Remove (string item) { return values.Remove (item); }
-		public int Count { get { return values.Count; } }
-		public bool IsReadOnly { get { return false; } }
+		public int Count => values.Count;
+		public bool IsReadOnly => false;
 		#endregion
 
 		#region IEnumerable
@@ -193,7 +193,7 @@ namespace Mono.Options
 		void IList.Insert (int index, object value) { (values as IList).Insert (index, value); }
 		void IList.Remove (object value) { (values as IList).Remove (value); }
 		void IList.RemoveAt (int index) { (values as IList).RemoveAt (index); }
-		bool IList.IsFixedSize { get { return false; } }
+		bool IList.IsFixedSize => false;
 		object IList.this[int index] { get { return this[index]; } set { (values as IList)[index] = value; } }
 		#endregion
 
@@ -271,13 +271,9 @@ namespace Mono.Options
 			set { index = value; }
 		}
 
-		public OptionSet OptionSet {
-			get { return set; }
-		}
+		public OptionSet OptionSet => set;
 
-		public OptionValueCollection OptionValues {
-			get { return c; }
-		}
+		public OptionValueCollection OptionValues => c;
 	}
 
 	public enum OptionValueType
@@ -330,10 +326,10 @@ namespace Mono.Options
 						nameof (prototype));
 		}
 
-		public string Prototype { get { return prototype; } }
-		public string Description { get { return description; } }
-		public OptionValueType OptionValueType { get { return type; } }
-		public int MaxValueCount { get { return count; } }
+		public string Prototype => prototype;
+		public string Description => description;
+		public OptionValueType OptionValueType => type;
+		public int MaxValueCount => count;
 
 		public string[] GetNames ()
 		{
@@ -369,8 +365,8 @@ namespace Mono.Options
 			return t;
 		}
 
-		internal string[] Names { get { return names; } }
-		internal string[] ValueSeparators { get { return separators; } }
+		internal string[] Names => names;
+		internal string[] ValueSeparators => separators;
 
 		static readonly char[] NameTerminator = new char[] { '=', ':' };
 
@@ -490,9 +486,7 @@ namespace Mono.Options
 			this.option = info.GetString ("OptionName");
 		}
 
-		public string OptionName {
-			get { return this.option; }
-		}
+		public string OptionName => this.option;
 
 		public override void GetObjectData (SerializationInfo info, StreamingContext context)
 		{
@@ -517,9 +511,7 @@ namespace Mono.Options
 
 		readonly Converter<string, string> localizer;
 
-		public Converter<string, string> MessageLocalizer {
-			get { return localizer; }
-		}
+		public Converter<string, string> MessageLocalizer => localizer;
 
 		protected override string GetKeyForItem (Option item)
 		{

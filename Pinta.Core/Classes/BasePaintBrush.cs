@@ -46,25 +46,19 @@ namespace Pinta.Core
 		/// Priority value for ordering brushes. If the priority is zero, then
 		/// alphabetical ordering is used.
 		/// </summary>
-		public virtual int Priority {
-			get { return 0; }
-		}
+		public virtual int Priority => 0;
 
 		/// <summary>
 		/// Random number generator. This can be used to implement brushes with
 		/// random effects.
 		/// </summary>
-		public Random Random {
-			get { return random; }
-		}
+		public Random Random => random;
 
 		/// <summary>
 		/// Used to multiply the alpha value of the stroke color by a
 		/// constant factor.
 		/// </summary>
-		public virtual double StrokeAlphaMultiplier {
-			get { return 1; }
-		}
+		public virtual double StrokeAlphaMultiplier => 1;
 
 		public virtual void DoMouseUp ()
 		{

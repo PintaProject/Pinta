@@ -71,17 +71,11 @@ namespace Pinta.Core
 			can_seek = stream is Gio.Seekable s && s.CanSeek ();
 		}
 
-		public override bool CanSeek {
-			get { return can_seek; }
-		}
+		public override bool CanSeek => can_seek;
 
-		public override bool CanRead {
-			get { return can_read; }
-		}
+		public override bool CanRead => can_read;
 
-		public override bool CanWrite {
-			get { return can_write; }
-		}
+		public override bool CanWrite => can_write;
 
 		public override long Length {
 			get {

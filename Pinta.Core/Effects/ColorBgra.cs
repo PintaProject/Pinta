@@ -671,16 +671,16 @@ namespace Pinta.Core
 		//// Colors: copied from System.Drawing.Color's list (don't worry I didn't type it in 
 		//// manually, I used a code generator w/ reflection ...)
 
-		public static ColorBgra Transparent { get { return ColorBgra.FromBgra (255, 255, 255, 0); } }
-		public static ColorBgra Zero { get { return (ColorBgra) 0; } }
+		public static ColorBgra Transparent => ColorBgra.FromBgra (255, 255, 255, 0);
+		public static ColorBgra Zero => (ColorBgra) 0;
 
-		public static ColorBgra Black { get { return ColorBgra.FromBgra (0, 0, 0, 255); } }
-		public static ColorBgra Blue { get { return ColorBgra.FromBgra (255, 0, 0, 255); } }
-		public static ColorBgra Cyan { get { return ColorBgra.FromBgra (255, 255, 0, 255); } }
-		public static ColorBgra Green { get { return ColorBgra.FromBgra (0, 128, 0, 255); } }
-		public static ColorBgra Magenta { get { return ColorBgra.FromBgra (255, 0, 255, 255); } }
-		public static ColorBgra Red { get { return ColorBgra.FromBgra (0, 0, 255, 255); } }
-		public static ColorBgra White { get { return ColorBgra.FromBgra (255, 255, 255, 255); } }
-		public static ColorBgra Yellow { get { return ColorBgra.FromBgra (0, 255, 255, 255); } }
+		public static ColorBgra Black => ColorBgra.FromBgra (0, 0, 0, 255);
+		public static ColorBgra Blue => ColorBgra.FromBgra (255, 0, 0, 255);
+		public static ColorBgra Cyan => ColorBgra.FromBgra (255, 255, 0, 255);
+		public static ColorBgra Green => ColorBgra.FromBgra (0, 128, 0, 255);
+		public static ColorBgra Magenta => ColorBgra.FromBgra (255, 0, 255, 255);
+		public static ColorBgra Red => ColorBgra.FromBgra (0, 0, 255, 255);
+		public static ColorBgra White => ColorBgra.FromBgra (255, 255, 255, 255);
+		public static ColorBgra Yellow => ColorBgra.FromBgra (0, 255, 255, 255);
 	}
 }

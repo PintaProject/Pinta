@@ -76,7 +76,7 @@ namespace Pinta.Core
 			RegisterFormat (new FormatDescriptor ("OpenRaster", new string[] { "ora", "ORA" }, new string[] { "image/openraster" }, oraHandler, oraHandler));
 		}
 
-		public IEnumerable<FormatDescriptor> Formats { get { return formats; } }
+		public IEnumerable<FormatDescriptor> Formats => formats;
 
 		/// <summary>
 		/// Registers a new file format.

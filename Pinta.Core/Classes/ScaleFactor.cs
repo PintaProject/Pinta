@@ -21,8 +21,8 @@ namespace Pinta.Core
 		private readonly int denominator;
 		private readonly int numerator;
 
-		public readonly int Denominator { get { return denominator; } }
-		public readonly int Numerator { get { return numerator; } }
+		public readonly int Denominator => denominator;
+		public readonly int Numerator => numerator;
 		public double Ratio { get; }
 
 		public static readonly ScaleFactor OneToOne = new (1, 1);
