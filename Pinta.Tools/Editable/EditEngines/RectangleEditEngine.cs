@@ -35,11 +35,7 @@ namespace Pinta.Tools
 {
 	public class RectangleEditEngine : BaseEditEngine
 	{
-		protected override string ShapeName {
-			get {
-				return Translations.GetString ("Closed Curve Shape");
-			}
-		}
+		protected override string ShapeName => Translations.GetString ("Closed Curve Shape");
 
 		public RectangleEditEngine (ShapeTool passedOwner) : base (passedOwner)
 		{

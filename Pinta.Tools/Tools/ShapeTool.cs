@@ -43,10 +43,9 @@ namespace Pinta.Tools
 		public virtual BaseEditEngine.ShapeTypes ShapeType => BaseEditEngine.ShapeTypes.ClosedLineCurveSeries;
 		public override bool IsEditableShapeTool => true;
 
-		public override string StatusBarText {
-			get {
+		public override string StatusBarText =>
 				// Translators: {0} is 'Ctrl', or a platform-specific key such as 'Command' on macOS.
-				return Translations.GetString ("Left click to draw a shape with the primary color." +
+				Translations.GetString ("Left click to draw a shape with the primary color." +
 				    "\nLeft click on a shape to add a control point." +
 				    "\nLeft click on a control point and drag to move it." +
 				    "\nRight click on a control point and drag to change its tension." +
@@ -58,8 +57,6 @@ namespace Pinta.Tools
 				    "\nHold {0} while pressing Space to create the control point at the exact same position." +
 				    "\nHold {0} while left clicking on a control point to create a new shape at the exact same position." +
 				    "\nPress Enter to finalize the shape.", GtkExtensions.CtrlLabel ());
-			}
-		}
 
 		protected abstract BaseEditEngine CreateEditEngine ();
 

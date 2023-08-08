@@ -35,11 +35,7 @@ namespace Pinta.Tools
 {
 	public class LineCurveEditEngine : ArrowedEditEngine
 	{
-		protected override string ShapeName {
-			get {
-				return Translations.GetString ("Open Curve Shape");
-			}
-		}
+		protected override string ShapeName => Translations.GetString ("Open Curve Shape");
 
 		public LineCurveEditEngine (ShapeTool passedOwner) : base (passedOwner)
 		{

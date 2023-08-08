@@ -81,15 +81,13 @@ namespace Pinta.Tools
 		//Whether or not the previous TextTool mouse cursor shown was the normal one.
 		private bool previous_mouse_cursor_normal = true;
 
-		public override string Name { get { return Translations.GetString ("Text"); } }
-		private string FinalizeName { get { return Translations.GetString ("Text - Finalize"); } }
-		public override string Icon { get { return Pinta.Resources.Icons.ToolText; } }
-		public override Gdk.Key ShortcutKey { get { return Gdk.Key.T; } }
-		public override int Priority { get { return 35; } }
+		public override string Name => Translations.GetString ("Text");
+		private string FinalizeName => Translations.GetString ("Text - Finalize");
+		public override string Icon => Pinta.Resources.Icons.ToolText;
+		public override Gdk.Key ShortcutKey => Gdk.Key.T;
+		public override int Priority => 35;
 
-		public override string StatusBarText {
-			get { return Translations.GetString ("Left click to place cursor, then type desired text. Text color is primary color."); }
-		}
+		public override string StatusBarText => Translations.GetString ("Left click to place cursor, then type desired text. Text color is primary color.");
 
 		public override Gdk.Cursor DefaultCursor => Gdk.Cursor.NewFromTexture (Resources.GetIcon ("Cursor.Text.png"), 16, 16, null);
 		public Gdk.Cursor InvalidEditCursor => Gdk.Cursor.NewFromTexture (Resources.GetIcon (Pinta.Resources.Icons.EditSelectionErase), 0, 0, null);
@@ -407,9 +405,9 @@ namespace Pinta.Tools
 
 		private int OutlineWidth => outline_width.GetValueAsInt ();
 
-		protected bool StrokeText { get { return (fill_button.SelectedItem.GetTagOrDefault (0) >= 1 && fill_button.SelectedItem.GetTagOrDefault (0) != 3); } }
-		protected bool FillText { get { return fill_button.SelectedItem.GetTagOrDefault (0) <= 1 || fill_button.SelectedItem.GetTagOrDefault (0) == 3; } }
-		protected bool BackgroundFill { get { return fill_button.SelectedItem.GetTagOrDefault (0) == 3; } }
+		protected bool StrokeText => (fill_button.SelectedItem.GetTagOrDefault (0) >= 1 && fill_button.SelectedItem.GetTagOrDefault (0) != 3);
+		protected bool FillText => fill_button.SelectedItem.GetTagOrDefault (0) <= 1 || fill_button.SelectedItem.GetTagOrDefault (0) == 3;
+		protected bool BackgroundFill => fill_button.SelectedItem.GetTagOrDefault (0) == 3;
 		#endregion
 
 		#region Activation/Deactivation

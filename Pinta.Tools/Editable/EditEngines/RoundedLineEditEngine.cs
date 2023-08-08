@@ -35,11 +35,7 @@ namespace Pinta.Tools
 {
 	public class RoundedLineEditEngine : BaseEditEngine
 	{
-		protected override string ShapeName {
-			get {
-				return Translations.GetString ("Rounded Line Shape");
-			}
-		}
+		protected override string ShapeName => Translations.GetString ("Rounded Line Shape");
 
 		public const double DefaultRadius = 20d;
 

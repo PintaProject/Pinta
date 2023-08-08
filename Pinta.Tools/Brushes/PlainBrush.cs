@@ -32,13 +32,9 @@ namespace Pinta.Tools.Brushes
 {
 	public class PlainBrush : BasePaintBrush
 	{
-		public override string Name {
-			get { return Translations.GetString ("Normal"); }
-		}
+		public override string Name => Translations.GetString ("Normal");
 
-		public override int Priority {
-			get { return -100; }
-		}
+		public override int Priority => -100;
 
 		protected override RectangleI OnMouseMove (Context g, Color strokeColor, ImageSurface surface,
 							      int x, int y, int lastX, int lastY)
