@@ -30,7 +30,7 @@ using Pinta.Core;
 
 namespace Pinta.Tools
 {
-	public class GradientTool : BaseTool
+	public sealed class GradientTool : BaseTool
 	{
 		private readonly IPaletteService palette;
 		PointD startpoint;
