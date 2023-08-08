@@ -24,44 +24,36 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 // THE SOFTWARE.
 
-using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using Cairo;
 using Pinta.Core;
 
-namespace Pinta.Tools
+namespace Pinta.Tools;
+
+public sealed class EllipseEditEngine : BaseEditEngine
 {
-	public class EllipseEditEngine : BaseEditEngine
+	protected override string ShapeName => Translations.GetString ("Ellipse");
+
+	public EllipseEditEngine (ShapeTool owner) : base (owner) { }
+
+	protected override ShapeEngine CreateShape (bool ctrlKey, bool clickedOnControlPoint, PointD prevSelPoint)
 	{
-		protected override string ShapeName => Translations.GetString ("Ellipse");
+		Document doc = PintaCore.Workspace.ActiveDocument;
 
-		public EllipseEditEngine (ShapeTool owner)
-		    : base (owner)
-		{
-		}
+		ShapeEngine newEngine = new EllipseEngine (doc.Layers.CurrentUserLayer, null, owner.UseAntialiasing,
+			BaseEditEngine.OutlineColor, BaseEditEngine.FillColor, owner.EditEngine.BrushWidth);
 
-		protected override ShapeEngine CreateShape (bool ctrlKey, bool clickedOnControlPoint, PointD prevSelPoint)
-		{
-			Document doc = PintaCore.Workspace.ActiveDocument;
+		AddRectanglePoints (ctrlKey, clickedOnControlPoint, newEngine, prevSelPoint);
 
-			ShapeEngine newEngine = new EllipseEngine (doc.Layers.CurrentUserLayer, null, owner.UseAntialiasing,
-				BaseEditEngine.OutlineColor, BaseEditEngine.FillColor, owner.EditEngine.BrushWidth);
+		//Set the new shape's DashPattern option.
+		newEngine.DashPattern = dash_pattern_box.comboBox!.ComboBox.GetActiveText ()!; // NRT - Code assumes this is not-null
 
-			AddRectanglePoints (ctrlKey, clickedOnControlPoint, newEngine, prevSelPoint);
+		return newEngine;
+	}
 
-			//Set the new shape's DashPattern option.
-			newEngine.DashPattern = dash_pattern_box.comboBox!.ComboBox.GetActiveText ()!; // NRT - Code assumes this is not-null
+	protected override void MovePoint (List<ControlPoint> controlPoints)
+	{
+		MoveRectangularPoint (controlPoints);
 
-			return newEngine;
-		}
-
-		protected override void MovePoint (List<ControlPoint> controlPoints)
-		{
-			MoveRectangularPoint (controlPoints);
-
-			base.MovePoint (controlPoints);
-		}
+		base.MovePoint (controlPoints);
 	}
 }
