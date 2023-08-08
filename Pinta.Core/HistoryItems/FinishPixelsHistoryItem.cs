@@ -34,7 +34,7 @@ namespace Pinta.Core
 		private ImageSurface? old_surface;
 		private Matrix old_transform = CairoExtensions.CreateIdentityMatrix ();
 
-		public override bool CausesDirty { get { return false; } }
+		public override bool CausesDirty => false;
 
 		public FinishPixelsHistoryItem ()
 		{

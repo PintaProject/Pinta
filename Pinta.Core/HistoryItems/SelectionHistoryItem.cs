@@ -33,7 +33,7 @@ namespace Pinta.Core
 
 		private bool hide_tool_layer;
 
-		public override bool CausesDirty { get { return false; } }
+		public override bool CausesDirty => false;
 
 		public SelectionHistoryItem (string icon, string text) : base (icon, text)
 		{

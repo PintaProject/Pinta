@@ -107,9 +107,9 @@ namespace Pinta
 			preview.Update (NewImageSize, NewImageBackground);
 		}
 
-		public int NewImageWidth { get { return int.Parse (width_entry.Buffer!.Text!); } }
-		public int NewImageHeight { get { return int.Parse (height_entry.Buffer!.Text!); } }
-		public Size NewImageSize { get { return new Size (NewImageWidth, NewImageHeight); } }
+		public int NewImageWidth => int.Parse (width_entry.Buffer!.Text!);
+		public int NewImageHeight => int.Parse (height_entry.Buffer!.Text!);
+		public Size NewImageSize => new Size (NewImageWidth, NewImageHeight);
 
 		public enum BackgroundType
 		{

@@ -29,8 +29,8 @@ namespace Pinta.Core
 		public TextAlignment Alignment { get; private set; }
 		public bool Underline { get; private set; }
 
-		public TextPosition CurrentPosition { get { return currentPos; } }
-		public int LineCount { get { return lines.Count; } }
+		public TextPosition CurrentPosition => currentPos;
+		public int LineCount => lines.Count;
 		public TextMode State;
 		public PointI Origin { get; set; }
 

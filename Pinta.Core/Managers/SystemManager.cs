@@ -35,7 +35,7 @@ namespace Pinta.Core
 		private static readonly OS operating_system;
 
 		public int RenderThreads { get; set; }
-		public OS OperatingSystem { get { return operating_system; } }
+		public OS OperatingSystem => operating_system;
 
 		public SystemManager ()
 		{

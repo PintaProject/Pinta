@@ -50,11 +50,7 @@ namespace Pinta.Core
 				PaletteChanged (this, EventArgs.Empty);
 		}
 
-		public int Count {
-			get {
-				return colors.Count;
-			}
-		}
+		public int Count => colors.Count;
 
 		public Color this[int index] {
 			get {

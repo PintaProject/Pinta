@@ -34,7 +34,7 @@ namespace Pinta.Core
 		public string? Text { get; set; }
 		public HistoryItemState State { get; set; }
 		public uint Id;
-		public virtual bool CausesDirty { get { return true; } }
+		public virtual bool CausesDirty => true;
 
 		public BaseHistoryItem ()
 		{

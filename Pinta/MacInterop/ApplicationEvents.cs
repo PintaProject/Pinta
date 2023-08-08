@@ -193,11 +193,7 @@ namespace Pinta.MacInterop
 	{
 		public bool Handled { get; set; }
 
-		internal CarbonEventHandlerStatus HandledStatus {
-			get {
-				return Handled ? CarbonEventHandlerStatus.Handled : CarbonEventHandlerStatus.NotHandled;
-			}
-		}
+		internal CarbonEventHandlerStatus HandledStatus => Handled ? CarbonEventHandlerStatus.Handled : CarbonEventHandlerStatus.NotHandled;
 	}
 
 	public class ApplicationQuitEventArgs : ApplicationEventArgs

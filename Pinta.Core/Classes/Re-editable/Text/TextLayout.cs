@@ -46,7 +46,7 @@ namespace Pinta.Core
 		}
 
 		public Pango.Layout Layout { get; }
-		public int FontHeight { get { return GetCursorLocation ().Height; } }
+		public int FontHeight => GetCursorLocation ().Height;
 
 		public TextLayout ()
 		{
