@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using NUnit.Framework;
 
@@ -8,6 +9,12 @@ internal sealed class ScanlineTest
 {
 	// Perhaps most (all?) of these tests can be removed if Scanline is
 	// made into a record struct (a feature offered by C#10+)
+
+	[TestCaseSource (nameof (invalid_constructor_argument_combinations))]
+	public void Constructor_RejectsInvalidArguments (int x, int y, int length)
+	{
+		Assert.Throws<ArgumentOutOfRangeException> (() => _ = new Scanline (x, y, length));
+	}
 
 	[TestCaseSource (nameof (sample_initializations))]
 	public void MembersInitializingCorrectly (int x, int y, int length)
@@ -101,6 +108,10 @@ internal sealed class ScanlineTest
 		new (new Scanline(1, 1, 1), null),
 		new (new Scanline(1, 1, 1), new [] { 1, 1, 1 }),
 		new (new Scanline(1, 1, 1), 111),
+	};
+
+	static readonly IReadOnlyList<TestCaseData> invalid_constructor_argument_combinations = new TestCaseData[] {
+		new (0, 0, -1),
 	};
 
 	static readonly IReadOnlyList<TestCaseData> sample_initializations = new TestCaseData[] {
