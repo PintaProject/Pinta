@@ -61,7 +61,7 @@ namespace Pinta.Core
 			public byte pixelDepth;          // Pixel Depth
 			public byte imageDesc;           // Image Descriptor
 
-			public void WriteTo (BinaryWriter output)
+			public readonly void WriteTo (BinaryWriter output)
 			{
 				output.Write (this.idLength);
 				output.Write (this.cmapType);

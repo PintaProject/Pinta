@@ -57,7 +57,7 @@ namespace Pinta.Core
 			}
 		}
 
-		public string ToHexString ()
+		public readonly string ToHexString ()
 		{
 			int rgbNumber = (this.R << 16) | (this.G << 8) | this.B;
 			string colorString = Convert.ToString (rgbNumber, 16);
@@ -106,7 +106,7 @@ namespace Pinta.Core
 		/// Gets the luminance intensity of the pixel based on the values of the red, green, and blue components. Alpha is ignored.
 		/// </summary>
 		/// <returns>A value in the range 0 to 1 inclusive.</returns>
-		public double GetIntensity ()
+		public readonly double GetIntensity ()
 		{
 			return ((0.114 * (double) B) + (0.587 * (double) G) + (0.299 * (double) R)) / 255.0;
 		}
@@ -115,7 +115,7 @@ namespace Pinta.Core
 		/// Gets the luminance intensity of the pixel based on the values of the red, green, and blue components. Alpha is ignored.
 		/// </summary>
 		/// <returns>A value in the range 0 to 255 inclusive.</returns>
-		public byte GetIntensityByte ()
+		public readonly byte GetIntensityByte ()
 		{
 			return (byte) ((7471 * B + 38470 * G + 19595 * R) >> 16);
 		}
@@ -124,7 +124,7 @@ namespace Pinta.Core
 		/// Returns the maximum value out of the B, G, and R values. Alpha is ignored.
 		/// </summary>
 		/// <returns></returns>
-		public byte GetMaxColorChannelValue ()
+		public readonly byte GetMaxColorChannelValue ()
 		{
 			return Math.Max (this.B, Math.Max (this.G, this.R));
 		}
@@ -133,7 +133,7 @@ namespace Pinta.Core
 		/// Returns the average of the B, G, and R values. Alpha is ignored.
 		/// </summary>
 		/// <returns></returns>
-		public byte GetAverageColorChannelValue ()
+		public readonly byte GetAverageColorChannelValue ()
 		{
 			return (byte) ((this.B + this.G + this.R) / 3);
 		}
@@ -157,7 +157,7 @@ namespace Pinta.Core
 		/// <summary>
 		/// Compares two ColorBgra instance to determine if they are equal.
 		/// </summary>
-		public override bool Equals (object? obj)
+		public override readonly bool Equals (object? obj)
 		{
 
 			if (obj != null && obj is ColorBgra && ((ColorBgra) obj).Bgra == this.Bgra) {
@@ -171,7 +171,7 @@ namespace Pinta.Core
 		/// Returns a hash code for this color value.
 		/// </summary>
 		/// <returns></returns>
-		public override int GetHashCode ()
+		public override readonly int GetHashCode ()
 		{
 			unchecked {
 				return (int) Bgra;
@@ -181,7 +181,7 @@ namespace Pinta.Core
 		/// <summary>
 		/// Returns a new ColorBgra with the same color values but with a new alpha component value.
 		/// </summary>
-		public ColorBgra NewAlpha (byte newA)
+		public readonly ColorBgra NewAlpha (byte newA)
 		{
 			return ColorBgra.FromBgra (B, G, R, newA);
 		}
@@ -595,7 +595,7 @@ namespace Pinta.Core
 			return ColorBgra.FromBgra (b, g, r, a);
 		}
 
-		public override string ToString ()
+		public override readonly string ToString ()
 		{
 			return "B: " + B + ", G: " + G + ", R: " + R + ", A: " + A;
 		}
@@ -625,7 +625,7 @@ namespace Pinta.Core
 		/// http://cairographics.org/manual/cairo-Image-Surfaces.html#cairo-format-t
 		/// </summary>
 		/// <returns>A ColorBgra value in premultiplied alpha form</returns> 
-		public ColorBgra ToPremultipliedAlpha ()
+		public readonly ColorBgra ToPremultipliedAlpha ()
 		{
 			return ColorBgra.FromBgra ((byte) (B * A / 255), (byte) (G * A / 255), (byte) (R * A / 255), A);
 		}
@@ -660,7 +660,7 @@ namespace Pinta.Core
 		/// http://cairographics.org/manual/cairo-Image-Surfaces.html#cairo-format-t
 		/// </summary>
 		/// <returns>A ColorBgra value in straight alpha form</returns> 
-		public ColorBgra ToStraightAlpha ()
+		public readonly ColorBgra ToStraightAlpha ()
 		{
 			if (this.A > 0)
 				return ColorBgra.FromBgra ((byte) (B * 255 / A), (byte) (G * 255 / A), (byte) (R * 255 / A), A);
