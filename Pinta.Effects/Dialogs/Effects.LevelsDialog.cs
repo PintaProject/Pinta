@@ -62,7 +62,7 @@ namespace Pinta.Effects
 		private ColorPanelWidget colorpanel_in_high;
 		private ColorPanelWidget colorpanel_in_low;
 		private ColorPanelWidget colorpanel_out_high;
-		private ColorPanelWidget colorpanelOutMid;
+		private ColorPanelWidget colorpanel_out_mid;
 		private ColorPanelWidget colorpanel_out_low;
 		private HistogramWidget histogram_input;
 		private HistogramWidget histogram_output;
@@ -120,18 +120,12 @@ namespace Pinta.Effects
 				return EffectData.Levels;
 			}
 
-			set {
-				if (value == null)
-					throw new ArgumentNullException (nameof (value));
-
-				EffectData.Levels = value;
-			}
+			set => EffectData.Levels = value ?? throw new ArgumentNullException (nameof (value));
 		}
 
 		private void UpdateLivePreview ()
 		{
-			if (EffectData != null)
-				EffectData.FirePropertyChanged ("Levels");
+			EffectData?.FirePropertyChanged (nameof (Levels));
 		}
 
 		private void UpdateInputHistogram ()
@@ -359,7 +353,7 @@ namespace Pinta.Effects
 				colorpanel_in_high.CairoColor = Levels.ColorInHigh.ToCairoColor ();
 
 				colorpanel_out_low.CairoColor = Levels.ColorOutLow.ToCairoColor ();
-				colorpanelOutMid.CairoColor = GetOutMidColor ();
+				colorpanel_out_mid.CairoColor = GetOutMidColor ();
 				colorpanel_out_high.CairoColor = Levels.ColorOutHigh.ToCairoColor ();
 
 				UpdateOutputHistogram ();
@@ -511,7 +505,7 @@ namespace Pinta.Effects
 
 		[MemberNotNull (nameof (check_red), nameof (check_green), nameof (check_blue), nameof (button_reset), nameof (button_auto), nameof (spin_in_low), nameof (spin_in_high),
 				nameof (spin_out_low), nameof (spin_out_high), nameof (spin_out_gamma), nameof (gradient_input), nameof (gradient_output), nameof (colorpanel_in_high),
-				nameof (colorpanel_in_low), nameof (colorpanel_out_low), nameof (colorpanelOutMid), nameof (colorpanel_out_high), nameof (histogram_input), nameof (histogram_output))]
+				nameof (colorpanel_in_low), nameof (colorpanel_out_low), nameof (colorpanel_out_mid), nameof (colorpanel_out_high), nameof (histogram_input), nameof (histogram_output))]
 		private void Build ()
 		{
 			const int spacing = 6;
@@ -550,7 +544,7 @@ namespace Pinta.Effects
 			colorpanel_in_high = new ColorPanelWidget () { HeightRequest = 24 };
 			colorpanel_in_low = new ColorPanelWidget () { HeightRequest = 24 };
 			colorpanel_out_low = new ColorPanelWidget () { HeightRequest = 24 };
-			colorpanelOutMid = new ColorPanelWidget () { HeightRequest = 24 };
+			colorpanel_out_mid = new ColorPanelWidget () { HeightRequest = 24 };
 			colorpanel_out_high = new ColorPanelWidget () { HeightRequest = 24 };
 
 			histogram_input = new HistogramWidget () { WidthRequest = 130, FlipHorizontal = true };
@@ -597,7 +591,7 @@ namespace Pinta.Effects
 			vboxOutput.Append (spin_out_high);
 			vboxOutput.Append (colorpanel_out_high);
 			vboxOutput.Append (spin_out_gamma);
-			vboxOutput.Append (colorpanelOutMid);
+			vboxOutput.Append (colorpanel_out_mid);
 			vboxOutput.Append (colorpanel_out_low);
 			vboxOutput.Append (spin_out_low);
 
