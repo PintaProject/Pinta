@@ -18,19 +18,13 @@ namespace Pinta.Effects
 	{
 		public override string Icon => Pinta.Resources.Icons.EffectsRenderMandelbrotFractal;
 
-		public override string Name {
-			get { return Translations.GetString ("Mandelbrot Fractal"); }
-		}
+		public override string Name => Translations.GetString ("Mandelbrot Fractal");
 
-		public override bool IsConfigurable {
-			get { return true; }
-		}
+		public override bool IsConfigurable => true;
 
-		public override string EffectMenuCategory {
-			get { return Translations.GetString ("Render"); }
-		}
+		public override string EffectMenuCategory => Translations.GetString ("Render");
 
-		public MandelbrotFractalData Data { get { return (MandelbrotFractalData) EffectData!; } } // NRT - Set in constructor
+		public MandelbrotFractalData Data => (MandelbrotFractalData) EffectData!;  // NRT - Set in constructor
 
 		public MandelbrotFractalEffect ()
 		{

@@ -21,19 +21,13 @@ namespace Pinta.Effects
 
 		public override string Icon => Pinta.Resources.Icons.EffectsNoiseMedian;
 
-		public override string Name {
-			get { return Translations.GetString ("Median"); }
-		}
+		public override string Name => Translations.GetString ("Median");
 
-		public override bool IsConfigurable {
-			get { return true; }
-		}
+		public override bool IsConfigurable => true;
 
-		public override string EffectMenuCategory {
-			get { return Translations.GetString ("Noise"); }
-		}
+		public override string EffectMenuCategory => Translations.GetString ("Noise");
 
-		public MedianData Data { get { return (MedianData) EffectData!; } } // NRT - Set in constructor
+		public MedianData Data => (MedianData) EffectData!;  // NRT - Set in constructor
 
 		public MedianEffect ()
 		{
@@ -71,7 +65,7 @@ namespace Pinta.Effects
 			public int Percentile = 50;
 
 			[Skip]
-			public override bool IsDefault { get { return Radius == 0; } }
+			public override bool IsDefault => Radius == 0;
 		}
 	}
 }

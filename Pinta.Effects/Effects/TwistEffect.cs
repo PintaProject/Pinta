@@ -18,19 +18,13 @@ namespace Pinta.Effects
 	{
 		public override string Icon => Pinta.Resources.Icons.EffectsDistortTwist;
 
-		public override string Name {
-			get { return Translations.GetString ("Twist"); }
-		}
+		public override string Name => Translations.GetString ("Twist");
 
-		public override bool IsConfigurable {
-			get { return true; }
-		}
+		public override bool IsConfigurable => true;
 
-		public override string EffectMenuCategory {
-			get { return Translations.GetString ("Distort"); }
-		}
+		public override string EffectMenuCategory => Translations.GetString ("Distort");
 
-		public TwistData Data { get { return (TwistData) EffectData!; } } // NRT - Set in constructor
+		public TwistData Data => (TwistData) EffectData!;  // NRT - Set in constructor
 
 		public TwistEffect ()
 		{

@@ -16,17 +16,11 @@ namespace Pinta.Effects
 	{
 		readonly UnaryPixelOp op = new UnaryPixelOps.Desaturate ();
 
-		public override string Icon {
-			get { return Pinta.Resources.Icons.AdjustmentsBlackAndWhite; }
-		}
+		public override string Icon => Pinta.Resources.Icons.AdjustmentsBlackAndWhite;
 
-		public override string Name {
-			get { return Translations.GetString ("Black and White"); }
-		}
+		public override string Name => Translations.GetString ("Black and White");
 
-		public override string AdjustmentMenuKey {
-			get { return "G"; }
-		}
+		public override string AdjustmentMenuKey => "G";
 
 		public override void Render (ImageSurface src, ImageSurface dest, Core.RectangleI[] rois)
 		{

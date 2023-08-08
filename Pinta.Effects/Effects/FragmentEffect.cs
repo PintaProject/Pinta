@@ -18,19 +18,13 @@ namespace Pinta.Effects
 	{
 		public override string Icon => Pinta.Resources.Icons.EffectsBlursFragment;
 
-		public override string Name {
-			get { return Translations.GetString ("Fragment"); }
-		}
+		public override string Name => Translations.GetString ("Fragment");
 
-		public override bool IsConfigurable {
-			get { return true; }
-		}
+		public override bool IsConfigurable => true;
 
-		public override string EffectMenuCategory {
-			get { return Translations.GetString ("Blurs"); }
-		}
+		public override string EffectMenuCategory => Translations.GetString ("Blurs");
 
-		public FragmentData Data { get { return (FragmentData) EffectData!; } } // NRT - Set in constructor
+		public FragmentData Data => (FragmentData) EffectData!;  // NRT - Set in constructor
 
 		public FragmentEffect ()
 		{

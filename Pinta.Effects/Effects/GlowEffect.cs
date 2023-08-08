@@ -21,19 +21,13 @@ namespace Pinta.Effects
 
 		public override string Icon => Pinta.Resources.Icons.EffectsPhotoGlow;
 
-		public override string Name {
-			get { return Translations.GetString ("Glow"); }
-		}
+		public override string Name => Translations.GetString ("Glow");
 
-		public override bool IsConfigurable {
-			get { return true; }
-		}
+		public override bool IsConfigurable => true;
 
-		public override string EffectMenuCategory {
-			get { return Translations.GetString ("Photo"); }
-		}
+		public override string EffectMenuCategory => Translations.GetString ("Photo");
 
-		public GlowData Data { get { return (GlowData) EffectData!; } } // NRT - Set in constructor
+		public GlowData Data => (GlowData) EffectData!;  // NRT - Set in constructor
 
 		public GlowEffect ()
 		{

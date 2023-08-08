@@ -18,19 +18,13 @@ namespace Pinta.Effects
 	{
 		public override string Icon => Pinta.Resources.Icons.EffectsBlursMotionBlur;
 
-		public override string Name {
-			get { return Translations.GetString ("Motion Blur"); }
-		}
+		public override string Name => Translations.GetString ("Motion Blur");
 
-		public override bool IsConfigurable {
-			get { return true; }
-		}
+		public override bool IsConfigurable => true;
 
-		public override string EffectMenuCategory {
-			get { return Translations.GetString ("Blurs"); }
-		}
+		public override string EffectMenuCategory => Translations.GetString ("Blurs");
 
-		public MotionBlurData Data { get { return (MotionBlurData) EffectData!; } } // NRT - Set in constructor
+		public MotionBlurData Data => (MotionBlurData) EffectData!;  // NRT - Set in constructor
 
 		public MotionBlurEffect ()
 		{
@@ -103,7 +97,7 @@ namespace Pinta.Effects
 		public class MotionBlurData : EffectData
 		{
 			[Skip]
-			public override bool IsDefault { get { return Distance == 0; } }
+			public override bool IsDefault => Distance == 0;
 
 			[Caption ("Angle")]
 			public double Angle = 25;

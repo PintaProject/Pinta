@@ -18,19 +18,13 @@ namespace Pinta.Effects
 	{
 		public override string Icon => Pinta.Resources.Icons.EffectsBlursZoomBlur;
 
-		public override string Name {
-			get { return Translations.GetString ("Zoom Blur"); }
-		}
+		public override string Name => Translations.GetString ("Zoom Blur");
 
-		public override bool IsConfigurable {
-			get { return true; }
-		}
+		public override bool IsConfigurable => true;
 
-		public override string EffectMenuCategory {
-			get { return Translations.GetString ("Blurs"); }
-		}
+		public override string EffectMenuCategory => Translations.GetString ("Blurs");
 
-		public ZoomBlurData Data { get { return (ZoomBlurData) EffectData!; } } // NRT - Set in constructor
+		public ZoomBlurData Data => (ZoomBlurData) EffectData!;  // NRT - Set in constructor
 
 		public ZoomBlurEffect ()
 		{
@@ -132,7 +126,7 @@ namespace Pinta.Effects
 			public Core.PointI Offset = new (0, 0);
 
 			[Skip]
-			public override bool IsDefault { get { return Amount == 0; } }
+			public override bool IsDefault => Amount == 0;
 		}
 	}
 }

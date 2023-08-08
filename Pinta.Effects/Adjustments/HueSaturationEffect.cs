@@ -17,21 +17,13 @@ namespace Pinta.Effects
 	{
 		UnaryPixelOp? op;
 
-		public override string Icon {
-			get { return Pinta.Resources.Icons.AdjustmentsHueSaturation; }
-		}
+		public override string Icon => Pinta.Resources.Icons.AdjustmentsHueSaturation;
 
-		public override string Name {
-			get { return Translations.GetString ("Hue / Saturation"); }
-		}
+		public override string Name => Translations.GetString ("Hue / Saturation");
 
-		public override bool IsConfigurable {
-			get { return true; }
-		}
+		public override bool IsConfigurable => true;
 
-		public override string AdjustmentMenuKey {
-			get { return "U"; }
-		}
+		public override string AdjustmentMenuKey => "U";
 
 		public HueSaturationEffect ()
 		{
@@ -59,7 +51,7 @@ namespace Pinta.Effects
 			op.Apply (dest, src, rois);
 		}
 
-		private HueSaturationData Data { get { return (HueSaturationData) EffectData!; } } // NRT - Set in constructor
+		private HueSaturationData Data => (HueSaturationData) EffectData!;  // NRT - Set in constructor
 
 		private class HueSaturationData : EffectData
 		{
@@ -73,9 +65,7 @@ namespace Pinta.Effects
 			public int Lightness = 0;
 
 			[Skip]
-			public override bool IsDefault {
-				get { return Hue == 0 && Saturation == 100 && Lightness == 0; }
-			}
+			public override bool IsDefault => Hue == 0 && Saturation == 100 && Lightness == 0;
 		}
 	}
 }

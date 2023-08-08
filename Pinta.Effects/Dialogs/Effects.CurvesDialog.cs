@@ -78,13 +78,9 @@ namespace Pinta.Effects
 			}
 		}
 
-		public ColorTransferMode Mode {
-			get {
-				return (combo_map.Active == 0) ?
+		public ColorTransferMode Mode => (combo_map.Active == 0) ?
 						ColorTransferMode.Rgb :
 						ColorTransferMode.Luminosity;
-			}
-		}
 
 		public CurvesData EffectData { get; }
 

@@ -16,21 +16,13 @@ namespace Pinta.Effects
 	{
 		public override string Icon => Pinta.Resources.Icons.EffectsDistortPolarInversion;
 
-		public override string Name {
-			get { return Translations.GetString ("Polar Inversion"); }
-		}
+		public override string Name => Translations.GetString ("Polar Inversion");
 
-		public override bool IsConfigurable {
-			get { return true; }
-		}
+		public override bool IsConfigurable => true;
 
-		public new PolarInversionData Data {
-			get { return (PolarInversionData) EffectData!; } // NRT - Set in constructor
-		}
+		public new PolarInversionData Data => (PolarInversionData) EffectData!;
 
-		public override string EffectMenuCategory {
-			get { return Translations.GetString ("Distort"); }
-		}
+		public override string EffectMenuCategory => Translations.GetString ("Distort");
 
 		public PolarInversionEffect ()
 		{

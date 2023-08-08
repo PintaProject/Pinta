@@ -21,19 +21,13 @@ namespace Pinta.Effects
 
 		public override string Icon => Pinta.Resources.Icons.EffectsStylizeOutline;
 
-		public override string Name {
-			get { return Translations.GetString ("Outline"); }
-		}
+		public override string Name => Translations.GetString ("Outline");
 
-		public override bool IsConfigurable {
-			get { return true; }
-		}
+		public override bool IsConfigurable => true;
 
-		public override string EffectMenuCategory {
-			get { return Translations.GetString ("Stylize"); }
-		}
+		public override string EffectMenuCategory => Translations.GetString ("Stylize");
 
-		public OutlineData Data { get { return (OutlineData) EffectData!; } } // NRT - Set in constructor
+		public OutlineData Data => (OutlineData) EffectData!;  // NRT - Set in constructor
 
 		public OutlineEffect ()
 		{
@@ -143,7 +137,7 @@ namespace Pinta.Effects
 			public int Intensity = 50;
 
 			[Skip]
-			public override bool IsDefault { get { return Thickness == 0; } }
+			public override bool IsDefault => Thickness == 0;
 		}
 	}
 }

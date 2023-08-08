@@ -49,19 +49,13 @@ namespace Pinta.Effects
 
 		public override string Icon => Pinta.Resources.Icons.EffectsPhotoSoftenPortrait;
 
-		public override string Name {
-			get { return Translations.GetString ("Soften Portrait"); }
-		}
+		public override string Name => Translations.GetString ("Soften Portrait");
 
-		public override bool IsConfigurable {
-			get { return true; }
-		}
+		public override bool IsConfigurable => true;
 
-		public override string EffectMenuCategory {
-			get { return Translations.GetString ("Photo"); }
-		}
+		public override string EffectMenuCategory => Translations.GetString ("Photo");
 
-		public SoftenPortraitData Data { get { return (SoftenPortraitData) EffectData!; } } // NRT - Set in constructor
+		public SoftenPortraitData Data => (SoftenPortraitData) EffectData!;  // NRT - Set in constructor
 
 		public SoftenPortraitEffect ()
 		{
