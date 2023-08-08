@@ -33,13 +33,9 @@ namespace Pinta.Tools.Brushes
 {
 	public class CircleBrush : BasePaintBrush
 	{
-		public override string Name {
-			get { return Translations.GetString ("Circles"); }
-		}
+		public override string Name => Translations.GetString ("Circles");
 
-		public override double StrokeAlphaMultiplier {
-			get { return 0.05; }
-		}
+		public override double StrokeAlphaMultiplier => 0.05;
 
 		protected override RectangleI OnMouseMove (Context g, Color strokeColor, ImageSurface surface,
 							      int x, int y, int lastX, int lastY)

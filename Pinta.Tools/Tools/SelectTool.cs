@@ -50,8 +50,8 @@ namespace Pinta.Tools
 		private int? active_handle;
 		private string? active_cursor_name;
 
-		public override Gdk.Key ShortcutKey { get { return Gdk.Key.S; } }
-		protected override bool ShowAntialiasingButton { get { return false; } }
+		public override Gdk.Key ShortcutKey => Gdk.Key.S;
+		protected override bool ShowAntialiasingButton => false;
 		public override IEnumerable<MoveHandle> Handles => handles;
 
 		public SelectTool (IServiceManager services) : base (services)
