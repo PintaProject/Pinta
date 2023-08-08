@@ -103,6 +103,44 @@ internal sealed class BitMaskTest
 		}
 	}
 
+	[TestCaseSource (nameof (invalid_indexing))]
+	public void RejectsInvalidIndexing_PairIndexer (int width, int height, int x, int y)
+	{
+		var bitmask = new BitMask (width, height);
+		Assert.Throws<ArgumentOutOfRangeException> (() => _ = bitmask[x, y]);
+	}
+
+	[TestCaseSource (nameof (invalid_indexing))]
+	public void RejectsInvalidIndexing_PointIndexer (int width, int height, int x, int y)
+	{
+		var bitmask = new BitMask (width, height);
+		var point = new PointI (x, y);
+		Assert.Throws<ArgumentOutOfRangeException> (() => _ = bitmask[point]);
+	}
+
+	[TestCaseSource (nameof (invalid_indexing))]
+	public void RejectsInvalidIndexing_GetMethod (int width, int height, int x, int y)
+	{
+		var bitmask = new BitMask (width, height);
+		Assert.Throws<ArgumentOutOfRangeException> (() => _ = bitmask.Get (x, y));
+	}
+
+	[TestCaseSource (nameof (invalid_indexing))]
+	public void RejectsInvalidIndexing_Invert (int width, int height, int x, int y)
+	{
+		var bitmask = new BitMask (width, height);
+		Assert.Throws<ArgumentOutOfRangeException> (() => bitmask.Invert (x, y));
+	}
+
+	[TestCaseSource (nameof (invalid_indexing))]
+	public void RejectsInvalidIndexing_SetPair (int width, int height, int x, int y)
+	{
+		var bitmask1 = new BitMask (width, height);
+		var bitmask2 = new BitMask (width, height);
+		Assert.Throws<ArgumentOutOfRangeException> (() => bitmask1.Set (x, y, true));
+		Assert.Throws<ArgumentOutOfRangeException> (() => bitmask2.Set (x, y, false));
+	}
+
 	static readonly IReadOnlyList<TestCaseData> out_of_bounds_access_cases = new TestCaseData[]
 	{
 		new (0, 0),
@@ -121,5 +159,12 @@ internal sealed class BitMaskTest
 	{
 		new (DEFAULT_SIZE, DEFAULT_OFFSET),
 		new (2, 1),
+	};
+
+	static readonly IReadOnlyList<TestCaseData> invalid_indexing = new TestCaseData[]
+	{
+		new (DEFAULT_WIDTH, DEFAULT_HEIGHT, -1, 0),
+		new (DEFAULT_WIDTH, DEFAULT_HEIGHT, 0, -1),
+		new (DEFAULT_WIDTH, DEFAULT_HEIGHT, -1, -1),
 	};
 }
