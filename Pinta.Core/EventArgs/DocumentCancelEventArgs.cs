@@ -28,9 +28,9 @@ using System.ComponentModel;
 
 namespace Pinta.Core;
 
-public class DocumentCancelEventArgs : CancelEventArgs
+public sealed class DocumentCancelEventArgs : CancelEventArgs
 {
-	public Document Document { get; set; }
+	public Document Document { get; }
 	public bool SaveAs { get; }
 
 	public DocumentCancelEventArgs (Document document, bool saveAs)

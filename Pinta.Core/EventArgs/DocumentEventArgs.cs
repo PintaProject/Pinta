@@ -28,9 +28,9 @@ using System;
 
 namespace Pinta.Core;
 
-public class DocumentEventArgs : EventArgs
+public sealed class DocumentEventArgs : EventArgs
 {
-	public Document Document { get; set; }
+	public Document Document { get; }
 
 	public DocumentEventArgs (Document document)
 	{

@@ -28,9 +28,9 @@ using System;
 
 namespace Pinta.Core;
 
-public class HistoryItemAddedEventArgs : EventArgs
+public sealed class HistoryItemAddedEventArgs : EventArgs
 {
-	public BaseHistoryItem Item { get; set; }
+	public BaseHistoryItem Item { get; }
 
 	public HistoryItemAddedEventArgs (BaseHistoryItem item)
 	{

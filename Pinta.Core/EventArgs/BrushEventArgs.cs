@@ -26,16 +26,15 @@
 
 using System;
 
-namespace Pinta.Core
-{
-	public class BrushEventArgs : EventArgs
-	{
-		public BasePaintBrush Brush { get; set; }
+namespace Pinta.Core;
 
-		public BrushEventArgs (BasePaintBrush brush)
-		{
-			Brush = brush;
-		}
+public sealed class BrushEventArgs : EventArgs
+{
+	public BasePaintBrush Brush { get; }
+
+	public BrushEventArgs (BasePaintBrush brush)
+	{
+		Brush = brush;
 	}
 }
 
