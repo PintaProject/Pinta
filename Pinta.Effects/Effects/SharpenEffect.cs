@@ -18,19 +18,13 @@ namespace Pinta.Effects
 	{
 		public override string Icon => Pinta.Resources.Icons.EffectsPhotoSharpen;
 
-		public override string Name {
-			get { return Translations.GetString ("Sharpen"); }
-		}
+		public override string Name => Translations.GetString ("Sharpen");
 
-		public override bool IsConfigurable {
-			get { return true; }
-		}
+		public override bool IsConfigurable => true;
 
-		public override string EffectMenuCategory {
-			get { return Translations.GetString ("Photo"); }
-		}
+		public override string EffectMenuCategory => Translations.GetString ("Photo");
 
-		public SharpenData Data { get { return (SharpenData) EffectData!; } } // NRT - Set in constructor
+		public SharpenData Data => (SharpenData) EffectData!;  // NRT - Set in constructor
 
 		public SharpenEffect ()
 		{

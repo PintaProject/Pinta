@@ -17,17 +17,11 @@ namespace Pinta.Effects
 		readonly UnaryPixelOp desat = new UnaryPixelOps.Desaturate ();
 		readonly UnaryPixelOp level = new UnaryPixelOps.Desaturate ();
 
-		public override string Icon {
-			get { return Pinta.Resources.Icons.AdjustmentsSepia; }
-		}
+		public override string Icon => Pinta.Resources.Icons.AdjustmentsSepia;
 
-		public override string Name {
-			get { return Translations.GetString ("Sepia"); }
-		}
+		public override string Name => Translations.GetString ("Sepia");
 
-		public override string AdjustmentMenuKey {
-			get { return "E"; }
-		}
+		public override string AdjustmentMenuKey => "E";
 
 		public SepiaEffect ()
 		{

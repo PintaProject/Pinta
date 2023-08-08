@@ -23,19 +23,13 @@ namespace Pinta.Effects
 
 		public override string Icon => Pinta.Resources.Icons.EffectsArtisticPencilSketch;
 
-		public override string Name {
-			get { return Translations.GetString ("Pencil Sketch"); }
-		}
+		public override string Name => Translations.GetString ("Pencil Sketch");
 
-		public override bool IsConfigurable {
-			get { return true; }
-		}
+		public override bool IsConfigurable => true;
 
-		public override string EffectMenuCategory {
-			get { return Translations.GetString ("Artistic"); }
-		}
+		public override string EffectMenuCategory => Translations.GetString ("Artistic");
 
-		public PencilSketchData Data { get { return (PencilSketchData) EffectData!; } } // NRT - Set in constructor
+		public PencilSketchData Data => (PencilSketchData) EffectData!;  // NRT - Set in constructor
 
 		public PencilSketchEffect ()
 		{

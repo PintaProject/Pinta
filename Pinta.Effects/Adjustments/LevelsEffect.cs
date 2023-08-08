@@ -14,27 +14,17 @@ namespace Pinta.Effects
 {
 	public class LevelsEffect : BaseEffect
 	{
-		public override string Icon {
-			get { return Pinta.Resources.Icons.AdjustmentsLevels; }
-		}
+		public override string Icon => Pinta.Resources.Icons.AdjustmentsLevels;
 
-		public override string Name {
-			get { return Translations.GetString ("Levels"); }
-		}
+		public override string Name => Translations.GetString ("Levels");
 
-		public override bool IsConfigurable {
-			get { return true; }
-		}
+		public override bool IsConfigurable => true;
 
-		public override string AdjustmentMenuKey {
-			get { return "L"; }
-		}
+		public override string AdjustmentMenuKey => "L";
 
-		public override string AdjustmentMenuKeyModifiers {
-			get { return "<Primary>"; }
-		}
+		public override string AdjustmentMenuKeyModifiers => "<Primary>";
 
-		public LevelsData Data { get { return (LevelsData) EffectData!; } } // NRT - Set in constructor
+		public LevelsData Data => (LevelsData) EffectData!;  // NRT - Set in constructor
 
 		public LevelsEffect ()
 		{

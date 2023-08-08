@@ -20,23 +20,15 @@ namespace Pinta.Effects
 		private byte[]? rgb_table;
 		private bool table_calculated;
 
-		public override string Icon {
-			get { return Pinta.Resources.Icons.AdjustmentsBrightnessContrast; }
-		}
+		public override string Icon => Pinta.Resources.Icons.AdjustmentsBrightnessContrast;
 
-		public override string Name {
-			get { return Translations.GetString ("Brightness / Contrast"); }
-		}
+		public override string Name => Translations.GetString ("Brightness / Contrast");
 
-		public override bool IsConfigurable {
-			get { return true; }
-		}
+		public override bool IsConfigurable => true;
 
-		public override string AdjustmentMenuKey {
-			get { return "B"; }
-		}
+		public override string AdjustmentMenuKey => "B";
 
-		public BrightnessContrastData Data { get { return (BrightnessContrastData) EffectData!; } } // NRT - Set in constructor
+		public BrightnessContrastData Data => (BrightnessContrastData) EffectData!;  // NRT - Set in constructor
 
 		public BrightnessContrastEffect ()
 		{
@@ -168,9 +160,7 @@ namespace Pinta.Effects
 			}
 
 			[Skip]
-			public override bool IsDefault {
-				get { return Brightness == 0 && Contrast == 0; }
-			}
+			public override bool IsDefault => Brightness == 0 && Contrast == 0;
 		}
 	}
 }

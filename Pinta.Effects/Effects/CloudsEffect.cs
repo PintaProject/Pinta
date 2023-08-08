@@ -23,19 +23,13 @@ namespace Pinta.Effects
 
 		public override string Icon => Pinta.Resources.Icons.EffectsRenderClouds;
 
-		public override string Name {
-			get { return Translations.GetString ("Clouds"); }
-		}
+		public override string Name => Translations.GetString ("Clouds");
 
-		public override bool IsConfigurable {
-			get { return true; }
-		}
+		public override bool IsConfigurable => true;
 
-		public override string EffectMenuCategory {
-			get { return Translations.GetString ("Render"); }
-		}
+		public override string EffectMenuCategory => Translations.GetString ("Render");
 
-		public CloudsData Data { get { return (CloudsData) EffectData!; } } // NRT - Set in constructor
+		public CloudsData Data => (CloudsData) EffectData!;  // NRT - Set in constructor
 
 		public CloudsEffect ()
 		{
@@ -192,7 +186,7 @@ namespace Pinta.Effects
 		public class CloudsData : EffectData
 		{
 			[Skip]
-			public override bool IsDefault { get { return Power == 0; } }
+			public override bool IsDefault => Power == 0;
 
 			[Caption ("Scale"), MinimumValue (2), MaximumValue (1000)]
 			public int Scale = 250;

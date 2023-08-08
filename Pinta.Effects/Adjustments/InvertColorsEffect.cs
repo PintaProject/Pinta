@@ -16,17 +16,11 @@ namespace Pinta.Effects
 	{
 		readonly UnaryPixelOp op = new UnaryPixelOps.Invert ();
 
-		public override string Icon {
-			get { return Pinta.Resources.Icons.AdjustmentsInvertColors; }
-		}
+		public override string Icon => Pinta.Resources.Icons.AdjustmentsInvertColors;
 
-		public override string Name {
-			get { return Translations.GetString ("Invert Colors"); }
-		}
+		public override string Name => Translations.GetString ("Invert Colors");
 
-		public override string AdjustmentMenuKey {
-			get { return "I"; }
-		}
+		public override string AdjustmentMenuKey => "I";
 
 		public override void Render (ImageSurface src, ImageSurface dest, Core.RectangleI[] rois)
 		{

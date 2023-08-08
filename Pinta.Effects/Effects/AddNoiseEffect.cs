@@ -23,19 +23,13 @@ namespace Pinta.Effects
 
 		public override string Icon => Pinta.Resources.Icons.EffectsNoiseAddNoise;
 
-		public override string Name {
-			get { return Translations.GetString ("Add Noise"); }
-		}
+		public override string Name => Translations.GetString ("Add Noise");
 
-		public override bool IsConfigurable {
-			get { return true; }
-		}
+		public override bool IsConfigurable => true;
 
-		public override string EffectMenuCategory {
-			get { return Translations.GetString ("Noise"); }
-		}
+		public override string EffectMenuCategory => Translations.GetString ("Noise");
 
-		public NoiseData Data { get { return (NoiseData) EffectData!; } } // NRT - Set in constructor
+		public NoiseData Data => (NoiseData) EffectData!;  // NRT - Set in constructor
 
 		static AddNoiseEffect ()
 		{

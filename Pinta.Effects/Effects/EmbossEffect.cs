@@ -18,21 +18,13 @@ namespace Pinta.Effects
 	{
 		public override string Icon => Pinta.Resources.Icons.EffectsStylizeEmboss;
 
-		public override string Name {
-			get { return Translations.GetString ("Emboss"); }
-		}
+		public override string Name => Translations.GetString ("Emboss");
 
-		public override bool IsConfigurable {
-			get { return true; }
-		}
+		public override bool IsConfigurable => true;
 
-		public override string EffectMenuCategory {
-			get { return Translations.GetString ("Stylize"); }
-		}
+		public override string EffectMenuCategory => Translations.GetString ("Stylize");
 
-		public EmbossData Data {
-			get { return (EmbossData) EffectData!; } // NRT - Set in constructor
-		}
+		public EmbossData Data => (EmbossData) EffectData!;
 
 		public EmbossEffect ()
 		{

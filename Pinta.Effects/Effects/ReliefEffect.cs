@@ -20,17 +20,11 @@ namespace Pinta.Effects
 			EffectData = new ReliefData ();
 		}
 
-		public ReliefData Data {
-			get { return (ReliefData) EffectData!; } // NRT - Set in constructor
-		}
+		public ReliefData Data => (ReliefData) EffectData!;
 
-		public override bool IsConfigurable {
-			get { return true; }
-		}
+		public override bool IsConfigurable => true;
 
-		public override string EffectMenuCategory {
-			get { return Translations.GetString ("Stylize"); }
-		}
+		public override string EffectMenuCategory => Translations.GetString ("Stylize");
 
 		public override void LaunchConfiguration ()
 		{
@@ -39,9 +33,7 @@ namespace Pinta.Effects
 
 		public override string Icon => Pinta.Resources.Icons.EffectsStylizeRelief;
 
-		public override string Name {
-			get { return Translations.GetString ("Relief"); }
-		}
+		public override string Name => Translations.GetString ("Relief");
 
 		#region Algorithm Code Ported From PDN
 		public override void Render (Cairo.ImageSurface src, Cairo.ImageSurface dst, Core.RectangleI[] rois)

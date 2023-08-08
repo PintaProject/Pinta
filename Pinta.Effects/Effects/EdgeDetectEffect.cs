@@ -21,19 +21,13 @@ namespace Pinta.Effects
 
 		public override string Icon => Pinta.Resources.Icons.EffectsStylizeEdgeDetect;
 
-		public override string Name {
-			get { return Translations.GetString ("Edge Detect"); }
-		}
+		public override string Name => Translations.GetString ("Edge Detect");
 
-		public override bool IsConfigurable {
-			get { return true; }
-		}
+		public override bool IsConfigurable => true;
 
-		public override string EffectMenuCategory {
-			get { return Translations.GetString ("Stylize"); }
-		}
+		public override string EffectMenuCategory => Translations.GetString ("Stylize");
 
-		public EdgeDetectData Data { get { return (EdgeDetectData) EffectData!; } } // NRT - Set in constructor
+		public EdgeDetectData Data => (EdgeDetectData) EffectData!;  // NRT - Set in constructor
 
 		public EdgeDetectEffect ()
 		{

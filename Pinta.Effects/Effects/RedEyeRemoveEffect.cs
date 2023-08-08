@@ -19,19 +19,13 @@ namespace Pinta.Effects
 
 		public override string Icon => Pinta.Resources.Icons.EffectsPhotoRedEyeRemove;
 
-		public override string Name {
-			get { return Translations.GetString ("Red Eye Removal"); }
-		}
+		public override string Name => Translations.GetString ("Red Eye Removal");
 
-		public override bool IsConfigurable {
-			get { return true; }
-		}
+		public override bool IsConfigurable => true;
 
-		public override string EffectMenuCategory {
-			get { return Translations.GetString ("Photo"); }
-		}
+		public override string EffectMenuCategory => Translations.GetString ("Photo");
 
-		public RedEyeRemoveData Data { get { return (RedEyeRemoveData) EffectData!; } } // NRT - Set in constructor
+		public RedEyeRemoveData Data => (RedEyeRemoveData) EffectData!;  // NRT - Set in constructor
 
 		public RedEyeRemoveEffect ()
 		{
