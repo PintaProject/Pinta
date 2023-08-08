@@ -29,33 +29,32 @@ using Cairo;
 
 using Pinta.Core;
 
-namespace Pinta.Tools.Brushes
+namespace Pinta.Tools.Brushes;
+
+public sealed class CircleBrush : BasePaintBrush
 {
-	public class CircleBrush : BasePaintBrush
+	public override string Name => Translations.GetString ("Circles");
+
+	public override double StrokeAlphaMultiplier => 0.05;
+
+	protected override RectangleI OnMouseMove (Context g, Color strokeColor, ImageSurface surface,
+						      int x, int y, int lastX, int lastY)
 	{
-		public override string Name => Translations.GetString ("Circles");
+		int dx = x - lastX;
+		int dy = y - lastY;
+		double d = Math.Sqrt (dx * dx + dy * dy) * 2.0;
 
-		public override double StrokeAlphaMultiplier => 0.05;
+		double cx = Math.Floor (x / 100.0) * 100 + 50;
+		double cy = Math.Floor (y / 100.0) * 100 + 50;
 
-		protected override RectangleI OnMouseMove (Context g, Color strokeColor, ImageSurface surface,
-							      int x, int y, int lastX, int lastY)
-		{
-			int dx = x - lastX;
-			int dy = y - lastY;
-			double d = Math.Sqrt (dx * dx + dy * dy) * 2.0;
+		int steps = Random.Next (1, 10);
+		double step_delta = d / steps;
 
-			double cx = Math.Floor (x / 100.0) * 100 + 50;
-			double cy = Math.Floor (y / 100.0) * 100 + 50;
-
-			int steps = Random.Next (1, 10);
-			double step_delta = d / steps;
-
-			for (int i = 0; i < steps; i++) {
-				g.Arc (cx, cy, (steps - i) * step_delta, 0, Math.PI * 2);
-				g.Stroke ();
-			}
-
-			return RectangleI.Zero;
+		for (int i = 0; i < steps; i++) {
+			g.Arc (cx, cy, (steps - i) * step_delta, 0, Math.PI * 2);
+			g.Stroke ();
 		}
+
+		return RectangleI.Zero;
 	}
 }

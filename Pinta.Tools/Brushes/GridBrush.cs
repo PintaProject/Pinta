@@ -29,33 +29,32 @@ using Cairo;
 
 using Pinta.Core;
 
-namespace Pinta.Tools.Brushes
+namespace Pinta.Tools.Brushes;
+
+public sealed class GridBrush : BasePaintBrush
 {
-	public class GridBrush : BasePaintBrush
+	public override string Name => Translations.GetString ("Grid");
+
+	public override double StrokeAlphaMultiplier => 0.05;
+
+	protected override RectangleI OnMouseMove (Context g, Color strokeColor, ImageSurface surface,
+						      int x, int y, int lastX, int lastY)
 	{
-		public override string Name => Translations.GetString ("Grid");
+		double cx = Math.Round (x / 100.0) * 100.0;
+		double cy = Math.Round (y / 100.0) * 100.0;
+		double dx = (cx - x) * 10.0;
+		double dy = (cy - y) * 10.0;
 
-		public override double StrokeAlphaMultiplier => 0.05;
-
-		protected override RectangleI OnMouseMove (Context g, Color strokeColor, ImageSurface surface,
-							      int x, int y, int lastX, int lastY)
-		{
-			double cx = Math.Round (x / 100.0) * 100.0;
-			double cy = Math.Round (y / 100.0) * 100.0;
-			double dx = (cx - x) * 10.0;
-			double dy = (cy - y) * 10.0;
-
-			for (int i = 0; i < 50; i++) {
-				g.MoveTo (cx, cy);
-				g.QuadraticCurveTo (
-					x + Random.NextDouble () * dx,
-					y + Random.NextDouble () * dy,
-					cx,
-					cy);
-				g.Stroke ();
-			}
-
-			return RectangleI.Zero;
+		for (int i = 0; i < 50; i++) {
+			g.MoveTo (cx, cy);
+			g.QuadraticCurveTo (
+				x + Random.NextDouble () * dx,
+				y + Random.NextDouble () * dy,
+				cx,
+				cy);
+			g.Stroke ();
 		}
+
+		return RectangleI.Zero;
 	}
 }
