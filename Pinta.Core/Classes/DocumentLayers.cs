@@ -6,7 +6,7 @@ using Cairo;
 
 namespace Pinta.Core
 {
-	public class DocumentLayers
+	public sealed class DocumentLayers
 	{
 		private readonly Document document;
 		private readonly List<UserLayer> user_layers = new ();
