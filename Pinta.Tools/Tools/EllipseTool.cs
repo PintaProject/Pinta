@@ -26,22 +26,21 @@
 
 using Pinta.Core;
 
-namespace Pinta.Tools
+namespace Pinta.Tools;
+
+public sealed class EllipseTool : ShapeTool
 {
-	public class EllipseTool : ShapeTool
+	public EllipseTool (IServiceManager services) : base (services)
 	{
-		public EllipseTool (IServiceManager services) : base (services)
-		{
-			BaseEditEngine.CorrespondingTools[ShapeType] = this;
-		}
-
-		public override string Name => Translations.GetString ("Ellipse");
-		public override string Icon => Pinta.Resources.Icons.ToolEllipse;
-		public override Gdk.Cursor DefaultCursor => Gdk.Cursor.NewFromTexture (Resources.GetIcon ("Cursor.Ellipse.png"), 9, 18, null);
-		public override int Priority => 43;
-
-		public override BaseEditEngine.ShapeTypes ShapeType => BaseEditEngine.ShapeTypes.Ellipse;
-
-		protected override BaseEditEngine CreateEditEngine () => new EllipseEditEngine (this);
+		BaseEditEngine.CorrespondingTools[ShapeType] = this;
 	}
+
+	public override string Name => Translations.GetString ("Ellipse");
+	public override string Icon => Pinta.Resources.Icons.ToolEllipse;
+	public override Gdk.Cursor DefaultCursor => Gdk.Cursor.NewFromTexture (Resources.GetIcon ("Cursor.Ellipse.png"), 9, 18, null);
+	public override int Priority => 43;
+
+	public override BaseEditEngine.ShapeTypes ShapeType => BaseEditEngine.ShapeTypes.Ellipse;
+
+	protected override BaseEditEngine CreateEditEngine () => new EllipseEditEngine (this);
 }

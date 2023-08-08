@@ -26,22 +26,21 @@
 
 using Pinta.Core;
 
-namespace Pinta.Tools
+namespace Pinta.Tools;
+
+public sealed class LineCurveTool : ShapeTool
 {
-	public class LineCurveTool : ShapeTool
+	public LineCurveTool (IServiceManager services) : base (services)
 	{
-		public LineCurveTool (IServiceManager services) : base (services)
-		{
-			BaseEditEngine.CorrespondingTools[ShapeType] = this;
-		}
-
-		public override string Name => Translations.GetString ("Line/Curve");
-		public override string Icon => Pinta.Resources.Icons.ToolLine;
-		public override Gdk.Cursor DefaultCursor => Gdk.Cursor.NewFromTexture (Resources.GetIcon ("Cursor.Line.png"), 9, 18, null);
-		public override int Priority => 37;
-
-		public override BaseEditEngine.ShapeTypes ShapeType => BaseEditEngine.ShapeTypes.OpenLineCurveSeries;
-
-		protected override BaseEditEngine CreateEditEngine () => new LineCurveEditEngine (this);
+		BaseEditEngine.CorrespondingTools[ShapeType] = this;
 	}
+
+	public override string Name => Translations.GetString ("Line/Curve");
+	public override string Icon => Pinta.Resources.Icons.ToolLine;
+	public override Gdk.Cursor DefaultCursor => Gdk.Cursor.NewFromTexture (Resources.GetIcon ("Cursor.Line.png"), 9, 18, null);
+	public override int Priority => 37;
+
+	public override BaseEditEngine.ShapeTypes ShapeType => BaseEditEngine.ShapeTypes.OpenLineCurveSeries;
+
+	protected override BaseEditEngine CreateEditEngine () => new LineCurveEditEngine (this);
 }
