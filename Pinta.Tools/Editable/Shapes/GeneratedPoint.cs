@@ -26,23 +26,22 @@
 
 using Pinta.Core;
 
-namespace Pinta.Tools
-{
-	public class GeneratedPoint
-	{
-		//Note: not using get/set because this is used in time-critical code that is sped up without it.
-		public PointD Position;
-		public int ControlPointIndex;
+namespace Pinta.Tools;
 
-		/// <summary>
-		/// A wrapper class for a PointD with knowledge of its previous ControlPoint.
-		/// </summary>
-		/// <param name="passedPosition">The position of the PointD on the Canvas.</param>
-		/// <param name="passedControlPointIndex">The index of the previous ControlPoint to the new GeneratedPoint.</param>
-		public GeneratedPoint (PointD passedPosition, int passedControlPointIndex)
-		{
-			Position = passedPosition;
-			ControlPointIndex = passedControlPointIndex;
-		}
+public sealed class GeneratedPoint
+{
+	//Note: not using get/set because this is used in time-critical code that is sped up without it.
+	public PointD Position;
+	public int ControlPointIndex;
+
+	/// <summary>
+	/// A wrapper class for a PointD with knowledge of its previous ControlPoint.
+	/// </summary>
+	/// <param name="passedPosition">The position of the PointD on the Canvas.</param>
+	/// <param name="passedControlPointIndex">The index of the previous ControlPoint to the new GeneratedPoint.</param>
+	public GeneratedPoint (PointD passedPosition, int passedControlPointIndex)
+	{
+		Position = passedPosition;
+		ControlPointIndex = passedControlPointIndex;
 	}
 }
