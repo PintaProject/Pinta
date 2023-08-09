@@ -1418,7 +1418,7 @@ namespace Pinta.Core
 				// From above, the dash pattern must already have a space at the end so
 				// we can just increase its size.
 				// The list is non-empty since patterns containing only a space result in an early exit.
-				dashes[dashes.Count - 1] += offset_from_end.Value;
+				dashes[^1] += offset_from_end.Value;
 			}
 
 			// Each dash / space is the size of the brush width.
