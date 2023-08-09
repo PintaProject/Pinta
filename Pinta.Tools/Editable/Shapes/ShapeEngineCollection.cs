@@ -104,7 +104,7 @@ namespace Pinta.Tools
 		public List<MoveHandle> ControlPointHandles { get; private set; } = new ();
 
 		//A collection of calculated GeneratedPoints that make up the entirety of the shape being drawn.
-		public GeneratedPoint[] GeneratedPoints { get; protected set; } = Array.Empty<GeneratedPoint> ();
+		public GeneratedPoint[] GeneratedPoints { get; private protected set; } = Array.Empty<GeneratedPoint> ();
 
 		//An organized collection of the GeneratedPoints's points for optimized nearest point detection.
 		public OrganizedPointCollection OrganizedPoints { get; } = new ();
