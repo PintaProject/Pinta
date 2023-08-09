@@ -146,11 +146,11 @@ namespace Pinta.Core
 						y: ((curr.Y - last.Y) + (curr.X - last.X) + 2) / 2 + curr.Y - 1
 					);
 
-					if (bounds.ContainsPoint (left.X, left.Y) && stencil[left]) {
+					if (bounds.ContainsPoint ((PointD) left) && stencil[left]) {
 						// go left
 						next.X += curr.Y - last.Y;
 						next.Y -= curr.X - last.X;
-					} else if (bounds.ContainsPoint (right.X, right.Y) && stencil[right]) {
+					} else if (bounds.ContainsPoint ((PointD) right) && stencil[right]) {
 						// go straight
 						next.X += curr.X - last.X;
 						next.Y += curr.Y - last.Y;
