@@ -1,8 +1,11 @@
 // Generated File.  Do not modify.
 
+using System.Diagnostics.CodeAnalysis;
+
 namespace Gdk
 {
 	// TODO-GTK4 (bindings) - remove this once gir.core generates the key values as 'const' (https://github.com/gircore/gir.core/issues/820)
+	[SuppressMessage ("Design", "CA1069:Enums values should not be duplicated")]
 	public enum Key
 	{
 		VoidSymbol = 0xFFFFFF,
