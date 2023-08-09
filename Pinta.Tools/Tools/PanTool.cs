@@ -26,48 +26,46 @@
 
 using Pinta.Core;
 
-namespace Pinta.Tools
+namespace Pinta.Tools;
+
+public sealed class PanTool : BaseTool
 {
-	public class PanTool : BaseTool
+	private bool active;
+	private PointD last_point;
+
+	public PanTool (IServiceManager services) : base (services) { }
+
+	public override string Name => Translations.GetString ("Pan");
+	public override string Icon => Pinta.Resources.Icons.ToolPan;
+	public override string StatusBarText => Translations.GetString ("Click and drag to navigate image.");
+	public override Gdk.Cursor DefaultCursor => Gdk.Cursor.NewFromTexture (Resources.GetIcon ("Cursor.Pan.png"), 8, 8, null);
+	public override Gdk.Key ShortcutKey => Gdk.Key.H;
+	public override int Priority => 11;
+
+	protected override void OnMouseDown (Document document, ToolMouseEventArgs e)
 	{
-		private bool active;
-		private PointD last_point;
+		// If we are already panning, ignore any additional mouse down events
+		if (active)
+			return;
 
-		public PanTool (IServiceManager services) : base (services)
-		{
-		}
+		// Don't scroll if the whole canvas fits (no scrollbars)
+		if (!document.Workspace.ImageViewFitsInWindow)
+			active = true;
 
-		public override string Name => Translations.GetString ("Pan");
-		public override string Icon => Pinta.Resources.Icons.ToolPan;
-		public override string StatusBarText => Translations.GetString ("Click and drag to navigate image.");
-		public override Gdk.Cursor DefaultCursor => Gdk.Cursor.NewFromTexture (Resources.GetIcon ("Cursor.Pan.png"), 8, 8, null);
-		public override Gdk.Key ShortcutKey => Gdk.Key.H;
-		public override int Priority => 11;
+		last_point = new PointD (e.RootPoint.X, e.RootPoint.Y);
+	}
 
-		protected override void OnMouseDown (Document document, ToolMouseEventArgs e)
-		{
-			// If we are already panning, ignore any additional mouse down events
-			if (active)
-				return;
+	protected override void OnMouseMove (Document document, ToolMouseEventArgs e)
+	{
+		if (!active)
+			return;
 
-			// Don't scroll if the whole canvas fits (no scrollbars)
-			if (!document.Workspace.ImageViewFitsInWindow)
-				active = true;
+		document.Workspace.ScrollCanvas ((int) (last_point.X - e.RootPoint.X), (int) (last_point.Y - e.RootPoint.Y));
+		last_point = new PointD (e.RootPoint.X, e.RootPoint.Y);
+	}
 
-			last_point = new PointD (e.RootPoint.X, e.RootPoint.Y);
-		}
-
-		protected override void OnMouseMove (Document document, ToolMouseEventArgs e)
-		{
-			if (active) {
-				document.Workspace.ScrollCanvas ((int) (last_point.X - e.RootPoint.X), (int) (last_point.Y - e.RootPoint.Y));
-				last_point = new PointD (e.RootPoint.X, e.RootPoint.Y);
-			}
-		}
-
-		protected override void OnMouseUp (Document document, ToolMouseEventArgs e)
-		{
-			active = false;
-		}
+	protected override void OnMouseUp (Document document, ToolMouseEventArgs e)
+	{
+		active = false;
 	}
 }
