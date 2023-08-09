@@ -26,22 +26,21 @@
 
 using Pinta.Core;
 
-namespace Pinta.Tools
+namespace Pinta.Tools;
+
+public sealed class RoundedRectangleTool : ShapeTool
 {
-	public class RoundedRectangleTool : ShapeTool
+	public RoundedRectangleTool (IServiceManager services) : base (services)
 	{
-		public RoundedRectangleTool (IServiceManager services) : base (services)
-		{
-			BaseEditEngine.CorrespondingTools[ShapeType] = this;
-		}
-
-		public override string Name => Translations.GetString ("Rounded Rectangle");
-		public override string Icon => Pinta.Resources.Icons.ToolRectangleRounded;
-		public override Gdk.Cursor DefaultCursor => Gdk.Cursor.NewFromTexture (Resources.GetIcon ("Cursor.RoundedRectangle.png"), 9, 18, null);
-		public override int Priority => 41;
-
-		public override BaseEditEngine.ShapeTypes ShapeType => BaseEditEngine.ShapeTypes.RoundedLineSeries;
-
-		protected override BaseEditEngine CreateEditEngine () => new RoundedLineEditEngine (this);
+		BaseEditEngine.CorrespondingTools[ShapeType] = this;
 	}
+
+	public override string Name => Translations.GetString ("Rounded Rectangle");
+	public override string Icon => Pinta.Resources.Icons.ToolRectangleRounded;
+	public override Gdk.Cursor DefaultCursor => Gdk.Cursor.NewFromTexture (Resources.GetIcon ("Cursor.RoundedRectangle.png"), 9, 18, null);
+	public override int Priority => 41;
+
+	public override BaseEditEngine.ShapeTypes ShapeType => BaseEditEngine.ShapeTypes.RoundedLineSeries;
+
+	protected override BaseEditEngine CreateEditEngine () => new RoundedLineEditEngine (this);
 }
