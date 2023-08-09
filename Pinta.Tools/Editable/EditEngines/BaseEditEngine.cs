@@ -60,13 +60,13 @@ namespace Pinta.Tools
 		protected PointD current_point;
 
 		public static Color OutlineColor {
-			get { return PintaCore.Palette.PrimaryColor; }
-			set { PintaCore.Palette.PrimaryColor = value; }
+			get => PintaCore.Palette.PrimaryColor;
+			set => PintaCore.Palette.PrimaryColor = value;
 		}
 
 		public static Color FillColor {
-			get { return PintaCore.Palette.SecondaryColor; }
-			set { PintaCore.Palette.SecondaryColor = value; }
+			get => PintaCore.Palette.SecondaryColor;
+			set => PintaCore.Palette.SecondaryColor = value;
 		}
 
 		// NRT - Created by HandleBuildToolBar

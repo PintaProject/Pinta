@@ -48,9 +48,7 @@ namespace Pinta.Core
 				return actualLayer!; // NRT - Set in SetupLayer
 			}
 
-			set {
-				actualLayer = value;
-			}
+			set => actualLayer = value;
 		}
 
 		public bool IsLayerSetup => isLayerSetup;

@@ -48,7 +48,7 @@ namespace Pinta.Core
 		public string? IconName { get; }
 		public string FullName => $"app.{Name}";
 		public bool IsImportant { get; set; } = false;
-		public bool Sensitive { get { return Action.Enabled; } set { Action.Enabled = value; } }
+		public bool Sensitive { get => Action.Enabled; set => Action.Enabled = value; }
 
 		public Command (string name, string label, string? tooltip, string? icon_name, GLib.Variant? state = null)
 		{
@@ -85,7 +85,7 @@ namespace Pinta.Core
 		}
 
 		public bool Value {
-			get { return GetBoolValue (Action.GetState ()); }
+			get => GetBoolValue (Action.GetState ());
 			set {
 				if (value != Value) {
 					Toggled?.Invoke (value);

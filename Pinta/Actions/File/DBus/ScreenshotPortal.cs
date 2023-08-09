@@ -28,13 +28,9 @@ class ScreenshotProperties
 {
 	private uint _version = default (uint);
 	public uint Version {
-		get {
-			return _version;
-		}
+		get => _version;
 
-		set {
-			_version = (value);
-		}
+		set => _version = (value);
 	}
 }
 

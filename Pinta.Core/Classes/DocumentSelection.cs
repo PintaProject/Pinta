@@ -44,7 +44,7 @@ namespace Pinta.Core
 
 		private bool _visible = true;
 		public bool Visible {
-			get { return _visible; }
+			get => _visible;
 			set {
 				_visible = value;
 

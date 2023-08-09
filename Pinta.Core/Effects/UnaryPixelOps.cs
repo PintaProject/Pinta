@@ -427,9 +427,7 @@ namespace Pinta.Core
 		{
 			private ColorBgra color_in_low;
 			public ColorBgra ColorInLow {
-				get {
-					return color_in_low;
-				}
+				get => color_in_low;
 
 				set {
 					if (value.R == 255) {
@@ -463,9 +461,7 @@ namespace Pinta.Core
 
 			private ColorBgra color_in_high;
 			public ColorBgra ColorInHigh {
-				get {
-					return color_in_high;
-				}
+				get => color_in_high;
 
 				set {
 					if (value.R == 0) {
@@ -499,9 +495,7 @@ namespace Pinta.Core
 
 			private ColorBgra color_out_low;
 			public ColorBgra ColorOutLow {
-				get {
-					return color_out_low;
-				}
+				get => color_out_low;
 
 				set {
 					if (value.R == 255) {
@@ -535,9 +529,7 @@ namespace Pinta.Core
 
 			private ColorBgra color_out_high;
 			public ColorBgra ColorOutHigh {
-				get {
-					return color_out_high;
-				}
+				get => color_out_high;
 
 				set {
 					if (value.R == 0) {

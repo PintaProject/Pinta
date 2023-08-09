@@ -41,9 +41,7 @@ namespace Pinta.Tools
 		private readonly Pinta.Core.TextLayout layout;
 
 		private RectangleI CurrentTextBounds {
-			get {
-				return PintaCore.Workspace.ActiveDocument.Layers.CurrentUserLayer.textBounds;
-			}
+			get => PintaCore.Workspace.ActiveDocument.Layers.CurrentUserLayer.textBounds;
 
 			set {
 				PintaCore.Workspace.ActiveDocument.Layers.CurrentUserLayer.previousTextBounds = PintaCore.Workspace.ActiveDocument.Layers.CurrentUserLayer.textBounds;

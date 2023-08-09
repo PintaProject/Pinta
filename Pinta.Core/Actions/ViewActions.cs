@@ -53,7 +53,7 @@ namespace Pinta.Core
 		private bool zoom_to_window_activated = false;
 
 		public bool ZoomToWindowActivated {
-			get { return zoom_to_window_activated; }
+			get => zoom_to_window_activated;
 			set {
 				zoom_to_window_activated = value;
 				old_zoom_text = ZoomComboBox.ComboBox.GetActiveText ()!;
