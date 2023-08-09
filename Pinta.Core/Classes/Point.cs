@@ -79,6 +79,8 @@ namespace Pinta.Core
 		{
 			return new PointD (a.X + b.X, a.Y + b.Y);
 		}
+
+		public static explicit operator PointD (PointI p) => new PointD (p.X, p.Y);
 	}
 
 	public record struct Size
