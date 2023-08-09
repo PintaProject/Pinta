@@ -26,7 +26,7 @@
 
 namespace Pinta.Core
 {
-	public class ResizeHistoryItem : CompoundHistoryItem
+	public sealed class ResizeHistoryItem : CompoundHistoryItem
 	{
 		private Size old_size;
 

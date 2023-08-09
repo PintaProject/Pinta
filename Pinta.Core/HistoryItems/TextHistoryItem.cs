@@ -28,7 +28,7 @@ using Cairo;
 
 namespace Pinta.Core
 {
-	public class TextHistoryItem : BaseHistoryItem
+	public sealed class TextHistoryItem : BaseHistoryItem
 	{
 		readonly UserLayer userLayer;
 

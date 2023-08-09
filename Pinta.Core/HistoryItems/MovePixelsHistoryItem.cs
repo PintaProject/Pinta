@@ -28,7 +28,7 @@ using Cairo;
 
 namespace Pinta.Core
 {
-	public class MovePixelsHistoryItem : BaseHistoryItem
+	public sealed class MovePixelsHistoryItem : BaseHistoryItem
 	{
 		// There's 2 types of move pixel operations to handle
 		// - The first move "lifts" the selection up into a temporary layer

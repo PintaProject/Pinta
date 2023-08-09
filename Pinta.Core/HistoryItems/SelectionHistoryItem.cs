@@ -26,7 +26,7 @@
 
 namespace Pinta.Core
 {
-	public class SelectionHistoryItem : BaseHistoryItem
+	public sealed class SelectionHistoryItem : BaseHistoryItem
 	{
 		private DocumentSelection? old_selection;
 		private DocumentSelection? old_previous_selection;

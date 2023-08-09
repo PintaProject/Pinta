@@ -26,7 +26,7 @@
 
 namespace Pinta.Core
 {
-	public class PasteHistoryItem : BaseHistoryItem
+	public sealed class PasteHistoryItem : BaseHistoryItem
 	{
 		private readonly Cairo.ImageSurface paste_image;
 		private DocumentSelection old_selection;

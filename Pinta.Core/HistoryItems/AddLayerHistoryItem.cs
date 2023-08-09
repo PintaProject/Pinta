@@ -26,7 +26,7 @@
 
 namespace Pinta.Core
 {
-	public class AddLayerHistoryItem : BaseHistoryItem
+	public sealed class AddLayerHistoryItem : BaseHistoryItem
 	{
 		private readonly int layer_index;
 		private UserLayer? layer;

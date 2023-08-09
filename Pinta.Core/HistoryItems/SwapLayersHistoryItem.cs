@@ -30,7 +30,7 @@ namespace Pinta.Core
 {
 	// These are actions that can be undone by simply repeating
 	// the action: invert colors, rotate 180 degrees, etc
-	public class SwapLayersHistoryItem : BaseHistoryItem
+	public sealed class SwapLayersHistoryItem : BaseHistoryItem
 	{
 		private readonly int layer_index_1;
 		private readonly int layer_index_2;
