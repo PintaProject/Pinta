@@ -32,7 +32,7 @@ using Pinta.Core;
 
 namespace Pinta.Tools
 {
-	public class EraserTool : BaseBrushTool
+	public sealed class EraserTool : BaseBrushTool
 	{
 		private enum EraserType
 		{
@@ -121,20 +121,21 @@ namespace Pinta.Tools
 		[MemberNotNull (nameof (lut_factor))]
 		private void InitLookupTable ()
 		{
-			if (lut_factor is null) {
-				lut_factor = new byte[LUT_Resolution + 1][];
+			if (lut_factor is not null)
+				return;
 
-				for (var dy = 0; dy < LUT_Resolution + 1; dy++) {
-					lut_factor[dy] = new byte[LUT_Resolution + 1];
+			lut_factor = new byte[LUT_Resolution + 1][];
 
-					for (var dx = 0; dx < LUT_Resolution + 1; dx++) {
-						var d = Math.Sqrt (dx * dx + dy * dy) / LUT_Resolution;
+			for (var dy = 0; dy < LUT_Resolution + 1; dy++) {
+				lut_factor[dy] = new byte[LUT_Resolution + 1];
 
-						if (d > 1.0)
-							lut_factor[dy][dx] = 255;
-						else
-							lut_factor[dy][dx] = (byte) (255.0 - Math.Cos (Math.Sqrt (d) * Math.PI / 2.0) * 255.0);
-					}
+				for (var dx = 0; dx < LUT_Resolution + 1; dx++) {
+					var d = Math.Sqrt (dx * dx + dy * dy) / LUT_Resolution;
+
+					if (d > 1.0)
+						lut_factor[dy][dx] = 255;
+					else
+						lut_factor[dy][dx] = (byte) (255.0 - Math.Cos (Math.Sqrt (d) * Math.PI / 2.0) * 255.0);
 				}
 			}
 		}
@@ -208,47 +209,48 @@ namespace Pinta.Tools
 				var brush_rect = new RectangleI (x - rad, y - rad, 2 * rad, 2 * rad);
 				var dest_rect = RectangleI.Intersect (surface_rect, brush_rect);
 
-				if ((dest_rect.Width > 0) && (dest_rect.Height > 0)) {
-					// Allow Clipping through a temporary surface
-					var tmp_surface = CopySurfacePart (surf, dest_rect);
-					var tmp_data = tmp_surface.GetPixelData ();
+				if (dest_rect.Width <= 0 || dest_rect.Height <= 0)
+					continue;
 
-					for (var iy = dest_rect.Top; iy < dest_rect.Bottom; iy++) {
-						var srcRow = tmp_data.Slice (tmp_surface.Width * (iy - dest_rect.Top));
-						var dy = ((iy - y) * LUT_Resolution) / rad;
+				// Allow Clipping through a temporary surface
+				var tmp_surface = CopySurfacePart (surf, dest_rect);
+				var tmp_data = tmp_surface.GetPixelData ();
 
-						if (dy < 0)
-							dy = -dy;
+				for (var iy = dest_rect.Top; iy < dest_rect.Bottom; iy++) {
+					var srcRow = tmp_data.Slice (tmp_surface.Width * (iy - dest_rect.Top));
+					var dy = ((iy - y) * LUT_Resolution) / rad;
 
-						var lut_factor_row = lut_factor[dy];
+					if (dy < 0)
+						dy = -dy;
 
-						for (var ix = dest_rect.Left; ix < dest_rect.Right; ix++) {
-							ref ColorBgra col = ref srcRow[ix - dest_rect.Left];
-							var dx = ((ix - x) * LUT_Resolution) / rad;
+					var lut_factor_row = lut_factor[dy];
 
-							if (dx < 0)
-								dx = -dx;
+					for (var ix = dest_rect.Left; ix < dest_rect.Right; ix++) {
+						ref ColorBgra col = ref srcRow[ix - dest_rect.Left];
+						var dx = ((ix - x) * LUT_Resolution) / rad;
 
-							var force = lut_factor_row[dx];
+						if (dx < 0)
+							dx = -dx;
 
-							// Note: premultiplied alpha is used!
-							if (mouse_button == MouseButton.Right) {
-								col.A = (byte) ((col.A * force + bk_col_a * (255 - force)) / 255);
-								col.R = (byte) ((col.R * force + bk_col_r * (255 - force)) / 255);
-								col.G = (byte) ((col.G * force + bk_col_g * (255 - force)) / 255);
-								col.B = (byte) ((col.B * force + bk_col_b * (255 - force)) / 255);
-							} else {
-								col.A = (byte) (col.A * force / 255);
-								col.R = (byte) (col.R * force / 255);
-								col.G = (byte) (col.G * force / 255);
-								col.B = (byte) (col.B * force / 255);
-							}
+						var force = lut_factor_row[dx];
+
+						// Note: premultiplied alpha is used!
+						if (mouse_button == MouseButton.Right) {
+							col.A = (byte) ((col.A * force + bk_col_a * (255 - force)) / 255);
+							col.R = (byte) ((col.R * force + bk_col_r * (255 - force)) / 255);
+							col.G = (byte) ((col.G * force + bk_col_g * (255 - force)) / 255);
+							col.B = (byte) ((col.B * force + bk_col_b * (255 - force)) / 255);
+						} else {
+							col.A = (byte) (col.A * force / 255);
+							col.R = (byte) (col.R * force / 255);
+							col.G = (byte) (col.G * force / 255);
+							col.B = (byte) (col.B * force / 255);
 						}
 					}
-
-					// Draw the final result on the surface
-					PasteSurfacePart (g, tmp_surface, dest_rect);
 				}
+
+				// Draw the final result on the surface
+				PasteSurfacePart (g, tmp_surface, dest_rect);
 			}
 		}
 

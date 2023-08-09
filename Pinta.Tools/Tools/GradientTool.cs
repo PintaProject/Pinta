@@ -30,12 +30,12 @@ using Pinta.Core;
 
 namespace Pinta.Tools
 {
-	public class GradientTool : BaseTool
+	public sealed class GradientTool : BaseTool
 	{
 		private readonly IPaletteService palette;
 		PointD startpoint;
 		bool tracking;
-		protected ImageSurface? undo_surface;
+		private ImageSurface? undo_surface;
 		MouseButton button;
 
 		private const string GRADIENT_TYPE_SETTING = "gradient-type";
@@ -100,47 +100,48 @@ namespace Pinta.Tools
 
 		protected override void OnMouseMove (Document document, ToolMouseEventArgs e)
 		{
-			if (tracking) {
-				var gr = CreateGradientRenderer ();
+			if (!tracking)
+				return;
 
-				if (button == MouseButton.Right) {
-					gr.StartColor = palette.SecondaryColor.ToColorBgra ();
-					gr.EndColor = palette.PrimaryColor.ToColorBgra ();
-				} else {
-					gr.StartColor = palette.PrimaryColor.ToColorBgra ();
-					gr.EndColor = palette.SecondaryColor.ToColorBgra ();
-				}
+			var gr = CreateGradientRenderer ();
 
-				gr.StartPoint = startpoint;
-				gr.EndPoint = e.PointDouble;
-				gr.AlphaBlending = UseAlphaBlending;
-
-				gr.BeforeRender ();
-
-				var selection_bounds = document.GetSelectedBounds (true);
-				var scratch_layer = document.Layers.ToolLayer.Surface;
-				document.Layers.ToolLayer.Hidden = true;
-
-				// Initialize the scratch layer with the (original) current layer, if any blending is required.
-				if (gr.AlphaOnly || (gr.AlphaBlending && (gr.StartColor.A != 255 || gr.EndColor.A != 255))) {
-					var g = new Context (scratch_layer);
-					document.Selection.Clip (g);
-					g.SetSourceSurface (undo_surface!, 0, 0);
-					g.Operator = Operator.Source;
-					g.Paint ();
-				}
-
-				gr.Render (scratch_layer, new[] { selection_bounds });
-
-				// Transfer the result back to the current layer.
-				var context = document.CreateClippedContext ();
-				context.SetSourceSurface (scratch_layer, 0, 0);
-				context.Operator = Operator.Source;
-				context.Paint ();
-
-				selection_bounds.Inflate (5, 5);
-				document.Workspace.Invalidate (selection_bounds);
+			if (button == MouseButton.Right) {
+				gr.StartColor = palette.SecondaryColor.ToColorBgra ();
+				gr.EndColor = palette.PrimaryColor.ToColorBgra ();
+			} else {
+				gr.StartColor = palette.PrimaryColor.ToColorBgra ();
+				gr.EndColor = palette.SecondaryColor.ToColorBgra ();
 			}
+
+			gr.StartPoint = startpoint;
+			gr.EndPoint = e.PointDouble;
+			gr.AlphaBlending = UseAlphaBlending;
+
+			gr.BeforeRender ();
+
+			var selection_bounds = document.GetSelectedBounds (true);
+			var scratch_layer = document.Layers.ToolLayer.Surface;
+			document.Layers.ToolLayer.Hidden = true;
+
+			// Initialize the scratch layer with the (original) current layer, if any blending is required.
+			if (gr.AlphaOnly || (gr.AlphaBlending && (gr.StartColor.A != 255 || gr.EndColor.A != 255))) {
+				var g = new Context (scratch_layer);
+				document.Selection.Clip (g);
+				g.SetSourceSurface (undo_surface!, 0, 0);
+				g.Operator = Operator.Source;
+				g.Paint ();
+			}
+
+			gr.Render (scratch_layer, new[] { selection_bounds });
+
+			// Transfer the result back to the current layer.
+			var context = document.CreateClippedContext ();
+			context.SetSourceSurface (scratch_layer, 0, 0);
+			context.Operator = Operator.Source;
+			context.Paint ();
+
+			selection_bounds.Inflate (5, 5);
+			document.Workspace.Invalidate (selection_bounds);
 		}
 
 		protected override void OnSaveSettings (ISettingsService settings)
