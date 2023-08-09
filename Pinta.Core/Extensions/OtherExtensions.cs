@@ -100,7 +100,6 @@ namespace Pinta.Core
 			var polygons = new List<PointI[]> ();
 
 			PointI start = bounds.Location ().ToInt ();
-			var pts = new List<PointI> ();
 			int count = 0;
 
 			// find all islands
@@ -127,7 +126,7 @@ namespace Pinta.Core
 				if (!startFound)
 					break;
 
-				pts.Clear ();
+				var pts = new List<PointI> ();
 
 				PointI last = new (start.X, start.Y + 1);
 				PointI curr = new (start.X, start.Y);
