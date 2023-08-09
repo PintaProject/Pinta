@@ -5,6 +5,8 @@
 // See license-pdn.txt for full licensing and attribution details.             //
 /////////////////////////////////////////////////////////////////////////////////
 
+using System;
+
 namespace Pinta.Core
 {
 	public struct Scanline
@@ -53,6 +55,9 @@ namespace Pinta.Core
 
 		public Scanline (int x, int y, int length)
 		{
+			if (length < 0)
+				throw new ArgumentOutOfRangeException (nameof (length));
+
 			this.x = x;
 			this.y = y;
 			this.length = length;
