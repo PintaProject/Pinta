@@ -35,7 +35,7 @@ namespace Pinta.Tools
 		private readonly IPaletteService palette;
 		PointD startpoint;
 		bool tracking;
-		protected ImageSurface? undo_surface;
+		private ImageSurface? undo_surface;
 		MouseButton button;
 
 		private const string GRADIENT_TYPE_SETTING = "gradient-type";
