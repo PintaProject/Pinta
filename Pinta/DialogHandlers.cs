@@ -30,51 +30,54 @@ using Pinta.Core;
 
 namespace Pinta
 {
-	public class ActionHandlers
+	public sealed class ActionHandlers
 	{
-		private readonly List<IActionHandler> action_handlers = new ();
+		private readonly List<IActionHandler> action_handlers;
 
 		public ActionHandlers ()
 		{
-			// File
-			action_handlers.Add (new NewDocumentAction ());
-			action_handlers.Add (new NewScreenshotAction ());
-			action_handlers.Add (new OpenDocumentAction ());
-			action_handlers.Add (new SaveDocumentAction ());
-			action_handlers.Add (new SaveDocumentAsAction ());
-			action_handlers.Add (new SaveDocumentImplmentationAction ());
-			action_handlers.Add (new ModifyCompressionAction ());
-			//action_handlers.Add (new PrintDocumentAction ());
-			action_handlers.Add (new CloseDocumentAction ());
-			action_handlers.Add (new ExitProgramAction ());
+			action_handlers = new ()
+			{
+				// File
+				new NewDocumentAction (),
+				new NewScreenshotAction (),
+				new OpenDocumentAction (),
+				new SaveDocumentAction (),
+				new SaveDocumentAsAction (),
+				new SaveDocumentImplmentationAction (),
+				new ModifyCompressionAction (),
+				//new PrintDocumentAction ();
+				new CloseDocumentAction (),
+				new ExitProgramAction (),
 
-			// Edit
-			action_handlers.Add (new PasteAction ());
-			action_handlers.Add (new PasteIntoNewLayerAction ());
-			action_handlers.Add (new PasteIntoNewImageAction ());
-			action_handlers.Add (new ResizePaletteAction ());
-			action_handlers.Add (new AddinManagerAction ());
+				// Edit
+				new PasteAction (),
+				new PasteIntoNewLayerAction (),
+				new PasteIntoNewImageAction (),
+				new ResizePaletteAction (),
+				new AddinManagerAction (),
 
-			// Image
-			action_handlers.Add (new ResizeImageAction ());
-			action_handlers.Add (new ResizeCanvasAction ());
+				// Image
+				new ResizeImageAction (),
+				new ResizeCanvasAction (),
 
-			// Layers
-			action_handlers.Add (new LayerPropertiesAction ());
-			action_handlers.Add (new RotateZoomLayerAction ());
+				// Layers
+				new LayerPropertiesAction (),
+				new RotateZoomLayerAction (),
 
-			// View
-			action_handlers.Add (new ToolBarToggledAction ());
-			action_handlers.Add (new ImageTabsToggledAction ());
-			action_handlers.Add (new StatusBarToggledAction ());
-			action_handlers.Add (new ToolBoxToggledAction ());
+				// View
+				new ToolBarToggledAction (),
+				new ImageTabsToggledAction (),
+				new StatusBarToggledAction (),
+				new ToolBoxToggledAction (),
 
-			// Window
-			action_handlers.Add (new CloseAllDocumentsAction ());
-			action_handlers.Add (new SaveAllDocumentsAction ());
+				// Window
+				new CloseAllDocumentsAction (),
+				new SaveAllDocumentsAction (),
 
-			// Help
-			action_handlers.Add (new AboutDialogAction ());
+				// Help
+				new AboutDialogAction ()
+			};
 
 			// Initialize each action handler
 			foreach (var action in action_handlers)
