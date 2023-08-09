@@ -26,23 +26,20 @@
 
 using Pinta.Core;
 
-namespace Pinta.Tools
+namespace Pinta.Tools;
+
+public sealed class EllipseSelectTool : SelectTool
 {
-	public class EllipseSelectTool : SelectTool
+	public EllipseSelectTool (IServiceManager services) : base (services) { }
+
+	public override string Name => Translations.GetString ("Ellipse Select");
+	public override string Icon => Pinta.Resources.Icons.ToolSelectEllipse;
+	public override string StatusBarText => Translations.GetString ("Click and drag to draw an elliptical selection.\nHold Shift to constrain to a circle.");
+	public override Gdk.Cursor DefaultCursor => Gdk.Cursor.NewFromTexture (Resources.GetIcon ("Cursor.EllipseSelect.png"), 9, 18, null);
+	public override int Priority => 15;
+
+	protected override void DrawShape (Document document, RectangleD r, Layer l)
 	{
-		public EllipseSelectTool (IServiceManager services) : base (services)
-		{
-		}
-
-		public override string Name => Translations.GetString ("Ellipse Select");
-		public override string Icon => Pinta.Resources.Icons.ToolSelectEllipse;
-		public override string StatusBarText => Translations.GetString ("Click and drag to draw an elliptical selection.\nHold Shift to constrain to a circle.");
-		public override Gdk.Cursor DefaultCursor => Gdk.Cursor.NewFromTexture (Resources.GetIcon ("Cursor.EllipseSelect.png"), 9, 18, null);
-		public override int Priority => 15;
-
-		protected override void DrawShape (Document document, RectangleD r, Layer l)
-		{
-			document.Selection.CreateEllipseSelection (r);
-		}
+		document.Selection.CreateEllipseSelection (r);
 	}
 }
