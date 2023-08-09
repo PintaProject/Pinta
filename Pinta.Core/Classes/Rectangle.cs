@@ -69,7 +69,7 @@ namespace Pinta.Core
 			return true;
 		}
 
-		public bool ContainsPoint (in PointD point) => ContainsPoint (point.X, point.Y);
+		public readonly bool ContainsPoint (in PointD point) => ContainsPoint (point.X, point.Y);
 
 		public readonly PointD Location () => new (X, Y);
 		public readonly PointD GetCenter () => new (X + 0.5 * Width, Y + 0.5 * Height);
@@ -154,12 +154,12 @@ namespace Pinta.Core
 
 		public override readonly string ToString () => $"x:{X} y:{Y} w:{Width} h:{Height}";
 
-		public bool Contains (int x, int y)
+		public readonly bool Contains (int x, int y)
 		{
 			return x >= Left && x <= Right && y >= Top && y <= Bottom;
 		}
 
-		public bool Contains (in PointI pt) => Contains (pt.X, pt.Y);
+		public readonly bool Contains (in PointI pt) => Contains (pt.X, pt.Y);
 
 		public readonly RectangleI Intersect (RectangleI r) => Intersect (this, r);
 
