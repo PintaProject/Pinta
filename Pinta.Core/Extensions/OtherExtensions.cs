@@ -132,16 +132,19 @@ namespace Pinta.Core
 				PointI last = new (start.X, start.Y + 1);
 				PointI curr = new (start.X, start.Y);
 				PointI next = curr;
-				PointI left = new ();
-				PointI right = new ();
 
 				// trace island outline
 				while (true) {
-					left.X = ((curr.X - last.X) + (curr.Y - last.Y) + 2) / 2 + curr.X - 1;
-					left.Y = ((curr.Y - last.Y) - (curr.X - last.X) + 2) / 2 + curr.Y - 1;
 
-					right.X = ((curr.X - last.X) - (curr.Y - last.Y) + 2) / 2 + curr.X - 1;
-					right.Y = ((curr.Y - last.Y) + (curr.X - last.X) + 2) / 2 + curr.Y - 1;
+					PointI left = new (
+						x: ((curr.X - last.X) + (curr.Y - last.Y) + 2) / 2 + curr.X - 1,
+						y: ((curr.Y - last.Y) - (curr.X - last.X) + 2) / 2 + curr.Y - 1
+					);
+
+					PointI right = new (
+						x: ((curr.X - last.X) - (curr.Y - last.Y) + 2) / 2 + curr.X - 1,
+						y: ((curr.Y - last.Y) + (curr.X - last.X) + 2) / 2 + curr.Y - 1
+					);
 
 					if (bounds.ContainsPoint (left.X, left.Y) && stencil[left]) {
 						// go left
