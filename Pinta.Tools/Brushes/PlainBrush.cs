@@ -28,35 +28,34 @@ using Cairo;
 
 using Pinta.Core;
 
-namespace Pinta.Tools.Brushes
+namespace Pinta.Tools.Brushes;
+
+public sealed class PlainBrush : BasePaintBrush
 {
-	public class PlainBrush : BasePaintBrush
+	public override string Name => Translations.GetString ("Normal");
+
+	public override int Priority => -100;
+
+	protected override RectangleI OnMouseMove (Context g, Color strokeColor, ImageSurface surface,
+						      int x, int y, int lastX, int lastY)
 	{
-		public override string Name => Translations.GetString ("Normal");
-
-		public override int Priority => -100;
-
-		protected override RectangleI OnMouseMove (Context g, Color strokeColor, ImageSurface surface,
-							      int x, int y, int lastX, int lastY)
-		{
-			// Cairo does not support a single-pixel-long single-pixel-wide line
-			if (x == lastX && y == lastY && g.LineWidth == 1 &&
-			    PintaCore.Workspace.ActiveWorkspace.PointInCanvas (new PointD (x, y))) {
-				g.Rectangle (x, y, 1.0, 1.0);
-				g.Fill ();
-			} else {
-				g.MoveTo (lastX + 0.5, lastY + 0.5);
-				g.LineTo (x + 0.5, y + 0.5);
-				g.StrokePreserve ();
-			}
-
-			RectangleI dirty = g.StrokeExtents ().ToInt ();
-
-			// For some reason (?!) we need to inflate the dirty
-			// rectangle for small brush widths in zoomed images
-			dirty.Inflate (1, 1);
-
-			return dirty;
+		// Cairo does not support a single-pixel-long single-pixel-wide line
+		if (x == lastX && y == lastY && g.LineWidth == 1 &&
+		    PintaCore.Workspace.ActiveWorkspace.PointInCanvas (new PointD (x, y))) {
+			g.Rectangle (x, y, 1.0, 1.0);
+			g.Fill ();
+		} else {
+			g.MoveTo (lastX + 0.5, lastY + 0.5);
+			g.LineTo (x + 0.5, y + 0.5);
+			g.StrokePreserve ();
 		}
+
+		RectangleI dirty = g.StrokeExtents ().ToInt ();
+
+		// For some reason (?!) we need to inflate the dirty
+		// rectangle for small brush widths in zoomed images
+		dirty.Inflate (1, 1);
+
+		return dirty;
 	}
 }

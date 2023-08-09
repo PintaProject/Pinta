@@ -29,52 +29,51 @@ using Cairo;
 
 using Pinta.Core;
 
-namespace Pinta.Tools.Brushes
+namespace Pinta.Tools.Brushes;
+
+public sealed class SplatterBrush : BasePaintBrush
 {
-	public class SplatterBrush : BasePaintBrush
+	public override string Name => Translations.GetString ("Splatter");
+
+	public override double StrokeAlphaMultiplier => 0.5;
+
+	protected override RectangleI OnMouseMove (Context g, Color strokeColor, ImageSurface surface,
+						      int x, int y, int lastX, int lastY)
 	{
-		public override string Name => Translations.GetString ("Splatter");
+		int line_width = (int) g.LineWidth;
+		int size;
 
-		public override double StrokeAlphaMultiplier => 0.5;
-
-		protected override RectangleI OnMouseMove (Context g, Color strokeColor, ImageSurface surface,
-							      int x, int y, int lastX, int lastY)
-		{
-			int line_width = (int) g.LineWidth;
-			int size;
-
-			// we want a minimum size of 2 for the splatter (except for when the brush width is 1), since a splatter of size 1 is very small
-			if (line_width == 1) {
-				size = 1;
-			} else {
-				size = Random.Next (2, line_width);
-			}
-
-			var r = new RectangleD (x - Random.Next (-15, 15), y - Random.Next (-15, 15), size, size);
-
-			double rx = r.Width / 2;
-			double ry = r.Height / 2;
-			double cx = r.X + rx;
-			double cy = r.Y + ry;
-			double c1 = 0.552285;
-
-			g.Save ();
-
-			g.MoveTo (cx + rx, cy);
-
-			g.CurveTo (cx + rx, cy - c1 * ry, cx + c1 * rx, cy - ry, cx, cy - ry);
-			g.CurveTo (cx - c1 * rx, cy - ry, cx - rx, cy - c1 * ry, cx - rx, cy);
-			g.CurveTo (cx - rx, cy + c1 * ry, cx - c1 * rx, cy + ry, cx, cy + ry);
-			g.CurveTo (cx + c1 * rx, cy + ry, cx + rx, cy + c1 * ry, cx + rx, cy);
-
-			g.ClosePath ();
-
-			RectangleI dirty = g.StrokeExtents ().ToInt ();
-
-			g.Fill ();
-			g.Restore ();
-
-			return dirty;
+		// we want a minimum size of 2 for the splatter (except for when the brush width is 1), since a splatter of size 1 is very small
+		if (line_width == 1) {
+			size = 1;
+		} else {
+			size = Random.Next (2, line_width);
 		}
+
+		var r = new RectangleD (x - Random.Next (-15, 15), y - Random.Next (-15, 15), size, size);
+
+		double rx = r.Width / 2;
+		double ry = r.Height / 2;
+		double cx = r.X + rx;
+		double cy = r.Y + ry;
+		double c1 = 0.552285;
+
+		g.Save ();
+
+		g.MoveTo (cx + rx, cy);
+
+		g.CurveTo (cx + rx, cy - c1 * ry, cx + c1 * rx, cy - ry, cx, cy - ry);
+		g.CurveTo (cx - c1 * rx, cy - ry, cx - rx, cy - c1 * ry, cx - rx, cy);
+		g.CurveTo (cx - rx, cy + c1 * ry, cx - c1 * rx, cy + ry, cx, cy + ry);
+		g.CurveTo (cx + c1 * rx, cy + ry, cx + rx, cy + c1 * ry, cx + rx, cy);
+
+		g.ClosePath ();
+
+		RectangleI dirty = g.StrokeExtents ().ToInt ();
+
+		g.Fill ();
+		g.Restore ();
+
+		return dirty;
 	}
 }

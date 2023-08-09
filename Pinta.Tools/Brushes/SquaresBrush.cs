@@ -29,31 +29,30 @@ using Cairo;
 
 using Pinta.Core;
 
-namespace Pinta.Tools.Brushes
+namespace Pinta.Tools.Brushes;
+
+public sealed class SquaresBrush : BasePaintBrush
 {
-	public class SquaresBrush : BasePaintBrush
+	private static readonly double theta = Math.PI / 2;
+
+	public override string Name => Translations.GetString ("Squares");
+
+	protected override RectangleI OnMouseMove (Context g, Color strokeColor, ImageSurface surface,
+						      int x, int y, int lastX, int lastY)
 	{
-		private static readonly double theta = Math.PI / 2;
+		int dx = x - lastX;
+		int dy = y - lastY;
+		double px = Math.Cos (theta) * dx - Math.Sin (theta) * dy;
+		double py = Math.Sin (theta) * dx + Math.Cos (theta) * dy;
 
-		public override string Name => Translations.GetString ("Squares");
+		g.MoveTo (lastX - px, lastY - py);
+		g.LineTo (lastX + px, lastY + py);
+		g.LineTo (x + px, y + py);
+		g.LineTo (x - px, y - py);
+		g.LineTo (lastX - px, lastY - py);
 
-		protected override RectangleI OnMouseMove (Context g, Color strokeColor, ImageSurface surface,
-							      int x, int y, int lastX, int lastY)
-		{
-			int dx = x - lastX;
-			int dy = y - lastY;
-			double px = Math.Cos (theta) * dx - Math.Sin (theta) * dy;
-			double py = Math.Sin (theta) * dx + Math.Cos (theta) * dy;
+		g.StrokePreserve ();
 
-			g.MoveTo (lastX - px, lastY - py);
-			g.LineTo (lastX + px, lastY + py);
-			g.LineTo (x + px, y + py);
-			g.LineTo (x - px, y - py);
-			g.LineTo (lastX - px, lastY - py);
-
-			g.StrokePreserve ();
-
-			return g.StrokeExtents ().ToInt ();
-		}
+		return g.StrokeExtents ().ToInt ();
 	}
 }
