@@ -29,7 +29,7 @@ using Pinta.Core;
 
 namespace Pinta.Tools
 {
-	public class ZoomTool : BaseTool
+	public sealed class ZoomTool : BaseTool
 	{
 		private readonly Gdk.Cursor cursor_zoom_in;
 		private readonly Gdk.Cursor cursor_zoom_out;
@@ -89,16 +89,31 @@ namespace Pinta.Tools
 
 		protected override void OnMouseMove (Document document, ToolMouseEventArgs e)
 		{
-			if (mouse_down == MouseButton.Left) {
-				var shape_origin_window = document.Workspace.CanvasPointToView (shape_origin);
-				if (shape_origin_window.Distance (e.WindowPoint) > tolerance) // if they've moved the mouse more than 10 pixels since they clicked
-					is_drawing = true;
-
-				//still draw rectangle after we have draw it one time...
-				UpdateRectangle (document, e.PointDouble);
-			} else if (mouse_down == MouseButton.Middle) {
-				document.Workspace.ScrollCanvas ((int) ((shape_origin.X - e.PointDouble.X) * document.Workspace.Scale), (int) ((shape_origin.Y - e.PointDouble.Y) * document.Workspace.Scale));
+			switch (mouse_down) {
+				case MouseButton.Left:
+					OnMouseMove_LeftPressed (document, e);
+					break;
+				case MouseButton.Middle:
+					OnMouseMove_MiddlePressed (document, e);
+					break;
 			}
+		}
+
+		private void OnMouseMove_MiddlePressed (Document document, ToolMouseEventArgs e)
+		{
+			var deltaX = (int) ((shape_origin.X - e.PointDouble.X) * document.Workspace.Scale);
+			var deltaY = (int) ((shape_origin.Y - e.PointDouble.Y) * document.Workspace.Scale);
+			document.Workspace.ScrollCanvas (deltaX, deltaY);
+		}
+
+		private void OnMouseMove_LeftPressed (Document document, ToolMouseEventArgs e)
+		{
+			var shape_origin_window = document.Workspace.CanvasPointToView (shape_origin);
+			if (shape_origin_window.Distance (e.WindowPoint) > tolerance) // if they've moved the mouse more than 10 pixels since they clicked
+				is_drawing = true;
+
+			//still draw rectangle after we have draw it one time...
+			UpdateRectangle (document, e.PointDouble);
 		}
 
 		protected override void OnMouseUp (Document document, ToolMouseEventArgs e)
