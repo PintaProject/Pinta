@@ -24,45 +24,37 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 // THE SOFTWARE.
 
-using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using Cairo;
 using Pinta.Core;
 
-namespace Pinta.Tools
+namespace Pinta.Tools;
+
+public sealed class LineCurveEditEngine : ArrowedEditEngine
 {
-	public class LineCurveEditEngine : ArrowedEditEngine
+	protected override string ShapeName => Translations.GetString ("Open Curve Shape");
+
+	public LineCurveEditEngine (ShapeTool passedOwner) : base (passedOwner) { }
+
+	protected override ShapeEngine CreateShape (bool ctrlKey, bool clickedOnControlPoint, PointD prevSelPoint)
 	{
-		protected override string ShapeName => Translations.GetString ("Open Curve Shape");
+		Document doc = PintaCore.Workspace.ActiveDocument;
 
-		public LineCurveEditEngine (ShapeTool passedOwner) : base (passedOwner)
-		{
+		LineCurveSeriesEngine newEngine = new LineCurveSeriesEngine (doc.Layers.CurrentUserLayer, null, BaseEditEngine.ShapeTypes.OpenLineCurveSeries,
+			owner.UseAntialiasing, false, BaseEditEngine.OutlineColor, BaseEditEngine.FillColor, owner.EditEngine.BrushWidth);
 
-		}
+		AddLinePoints (ctrlKey, clickedOnControlPoint, newEngine, prevSelPoint);
 
-		protected override ShapeEngine CreateShape (bool ctrlKey, bool clickedOnControlPoint, PointD prevSelPoint)
-		{
-			Document doc = PintaCore.Workspace.ActiveDocument;
+		//Set the new shape's DashPattern option.
+		newEngine.DashPattern = dash_pattern_box.comboBox!.ComboBox.GetActiveText ()!; // NRT - Code assumes this is not-null
 
-			LineCurveSeriesEngine newEngine = new LineCurveSeriesEngine (doc.Layers.CurrentUserLayer, null, BaseEditEngine.ShapeTypes.OpenLineCurveSeries,
-				owner.UseAntialiasing, false, BaseEditEngine.OutlineColor, BaseEditEngine.FillColor, owner.EditEngine.BrushWidth);
+		//Set the new arrow's settings to be the same as what's in the toolbar settings.
+		setNewArrowSettings (newEngine);
 
-			AddLinePoints (ctrlKey, clickedOnControlPoint, newEngine, prevSelPoint);
+		return newEngine;
+	}
 
-			//Set the new shape's DashPattern option.
-			newEngine.DashPattern = dash_pattern_box.comboBox!.ComboBox.GetActiveText ()!; // NRT - Code assumes this is not-null
-
-			//Set the new arrow's settings to be the same as what's in the toolbar settings.
-			setNewArrowSettings (newEngine);
-
-			return newEngine;
-		}
-
-		protected override void MovePoint (List<ControlPoint> controlPoints)
-		{
-			base.MovePoint (controlPoints);
-		}
+	protected override void MovePoint (List<ControlPoint> controlPoints)
+	{
+		base.MovePoint (controlPoints);
 	}
 }
