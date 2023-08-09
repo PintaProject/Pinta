@@ -60,6 +60,20 @@ namespace Pinta.Tools
 			return new EllipseEngine (this);
 		}
 
+		private static bool IsPerfectRectangle (PointD cp0, PointD cp1, PointD cp2, PointD cp3)
+		{
+			if (cp0.X == cp1.X) {
+				if (cp0.Y == cp3.Y && cp1.Y == cp2.Y && cp2.X == cp3.X) {
+					return true;
+				}
+			} else if (cp0.Y == cp1.Y) {
+				if (cp0.X == cp3.X && cp1.X == cp2.X && cp2.Y == cp3.Y) {
+					return true;
+				}
+			}
+			return false;
+		}
+
 		/// <summary>
 		/// Generate each point in an elliptic shape and store the result in GeneratedPoints.
 		/// <param name="brush_width">The width of the brush that will be used to draw the shape.</param>
@@ -77,17 +91,7 @@ namespace Pinta.Tools
 				//An ellipse also requires that all 4 control points compose a perfect rectangle parallel/perpendicular to the window.
 				//So, confirm that it is indeed a perfect rectangle.
 
-				bool perfectRectangle = false;
-
-				if (cp0.X == cp1.X) {
-					if (cp0.Y == cp3.Y && cp1.Y == cp2.Y && cp2.X == cp3.X) {
-						perfectRectangle = true;
-					}
-				} else if (cp0.Y == cp1.Y) {
-					if (cp0.X == cp3.X && cp1.X == cp2.X && cp2.Y == cp3.Y) {
-						perfectRectangle = true;
-					}
-				}
+				bool perfectRectangle = IsPerfectRectangle (cp0, cp1, cp2, cp3);
 
 				if (perfectRectangle) {
 					//It is expected that the 4 control points always form a perfect rectangle parallel/perpendicular to the window.
