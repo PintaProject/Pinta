@@ -31,7 +31,7 @@ using Pinta.Core;
 
 namespace Pinta.Tools
 {
-	public class OrganizedPointCollection
+	public sealed class OrganizedPointCollection
 	{
 		//Must be an integer.
 		public const double SectionSize = 15;
@@ -151,35 +151,38 @@ namespace Pinta.Tools
 					Dictionary<int, List<OrganizedPoint>>? xSection;
 
 					//If the xSection doesn't exist, move on.
-					if (oP.TryGetValue (x, out xSection)) {
-						//Since the mouse and/or shape points can be close to the edge of a section,
-						//the points in the surrounding sections must also be checked.
-						for (int y = yMin; y <= yMax; ++y) {
-							List<OrganizedPoint>? ySection;
+					if (!oP.TryGetValue (x, out xSection))
+						continue;
 
-							//If the ySection doesn't exist, move on.
-							if (xSection.TryGetValue (y, out ySection)) {
-								foreach (OrganizedPoint p in ySection) {
-									currentDistance = p.Position.Distance (currentPoint);
+					//Since the mouse and/or shape points can be close to the edge of a section,
+					//the points in the surrounding sections must also be checked.
+					for (int y = yMin; y <= yMax; ++y) {
+						List<OrganizedPoint>? ySection;
 
-									if (currentDistance < closestDistance) {
-										closestDistance = currentDistance;
+						//If the ySection doesn't exist, move on.
+						if (!xSection.TryGetValue (y, out ySection))
+							continue;
 
-										closestPointIndex = p.Index;
-										closestShapeIndex = n;
+						foreach (OrganizedPoint p in ySection) {
+							currentDistance = p.Position.Distance (currentPoint);
 
-										closestPoint = p.Position;
-									}
-								}
-							}
-						} //for each organized row
-					}
+							if (currentDistance >= closestDistance)
+								continue;
+
+							closestDistance = currentDistance;
+
+							closestPointIndex = p.Index;
+							closestShapeIndex = n;
+
+							closestPoint = p.Position;
+						}
+					} //for each organized row
 				} //for each organized column
 			} //for each ShapeEngine List
 		} //FindClosestPoint
 	}
 
-	public class OrganizedPoint
+	public sealed class OrganizedPoint
 	{
 		//Note: not using get/set because this is used in time-critical code that is sped up without it.
 		public PointD Position;
