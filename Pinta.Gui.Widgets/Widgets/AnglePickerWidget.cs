@@ -94,9 +94,10 @@ namespace Pinta.Gui.Widgets
 			var hbox2 = new Box () { Spacing = spacing };
 			hbox2.SetOrientation (Orientation.Horizontal);
 
-			anglepickergraphic1 = new AnglePickerGraphic ();
-			anglepickergraphic1.Hexpand = true;
-			anglepickergraphic1.Halign = Align.Center;
+			anglepickergraphic1 = new AnglePickerGraphic {
+				Hexpand = true,
+				Halign = Align.Center
+			};
 			hbox2.Append (anglepickergraphic1);
 
 			spin = SpinButton.NewWithRange (0, 360, 1);

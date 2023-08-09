@@ -201,9 +201,9 @@ namespace Pinta.Core
 					HandleRenderCompletion ();
 					return false; // don't call the timer again
 				});
-			});
-
-			master.Priority = settings.ThreadPriority;
+			}) {
+				Priority = settings.ThreadPriority
+			};
 			master.Start ();
 
 			// Start timer used to periodically fire update events on the UI thread.
@@ -214,9 +214,9 @@ namespace Pinta.Core
 		{
 			var slave = new Thread (() => {
 				Render (renderId, threadId);
-			});
-
-			slave.Priority = settings.ThreadPriority;
+			}) {
+				Priority = settings.ThreadPriority
+			};
 			slave.Start ();
 
 			return slave;

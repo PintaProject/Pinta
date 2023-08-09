@@ -180,9 +180,10 @@ namespace Pinta
 			name_label.Halign = Align.End;
 			grid.Attach (name_label, 0, 0, 1, 1);
 
-			layerNameEntry = new Entry ();
-			layerNameEntry.Hexpand = true;
-			layerNameEntry.Halign = Align.Fill;
+			layerNameEntry = new Entry {
+				Hexpand = true,
+				Halign = Align.Fill
+			};
 			grid.Attach (layerNameEntry, 1, 0, 1, 1);
 
 			// Visible checkbox

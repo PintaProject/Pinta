@@ -188,10 +188,10 @@ namespace Pinta
 		private void BuildDialog ()
 		{
 			// Layout table for preset, width, and height
-			var layout_grid = new Grid ();
-
-			layout_grid.RowSpacing = 5;
-			layout_grid.ColumnSpacing = 6;
+			var layout_grid = new Grid {
+				RowSpacing = 5,
+				ColumnSpacing = 6
+			};
 
 			// Preset Combo
 			var size_label = Label.New (Translations.GetString ("Preset:"));
@@ -217,9 +217,10 @@ namespace Pinta
 			width_label.Xalign = 1f;
 			width_label.Yalign = .5f;
 
-			width_entry = new Entry ();
-			width_entry.WidthRequest = 50;
-			width_entry.ActivatesDefault = true;
+			width_entry = new Entry {
+				WidthRequest = 50,
+				ActivatesDefault = true
+			};
 
 			var width_units = Label.New (Translations.GetString ("pixels"));
 			width_units.MarginStart = 5;
@@ -236,9 +237,10 @@ namespace Pinta
 			height_label.Xalign = 1f;
 			height_label.Yalign = .5f;
 
-			height_entry = new Entry ();
-			height_entry.WidthRequest = 50;
-			height_entry.ActivatesDefault = true;
+			height_entry = new Entry {
+				WidthRequest = 50,
+				ActivatesDefault = true
+			};
 
 			var height_units = Label.New (Translations.GetString ("pixels"));
 			height_units.MarginStart = 5;
@@ -343,9 +345,10 @@ namespace Pinta
 			options_vbox.Append (background_vbox);
 
 			// Layout the preview + the options
-			preview = new PreviewArea ();
-			preview.Vexpand = true;
-			preview.Valign = Align.Fill;
+			preview = new PreviewArea {
+				Vexpand = true,
+				Valign = Align.Fill
+			};
 
 			var preview_label = Label.New (Translations.GetString ("Preview"));
 

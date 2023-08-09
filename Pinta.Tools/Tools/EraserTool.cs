@@ -144,8 +144,9 @@ namespace Pinta.Tools
 		{
 			var tmp_surface = CairoExtensions.CreateImageSurface (Format.Argb32, dest_rect.Width, dest_rect.Height);
 
-			var g = new Context (tmp_surface);
-			g.Operator = Operator.Source;
+			var g = new Context (tmp_surface) {
+				Operator = Operator.Source
+			};
 			g.SetSourceSurface (surf, -dest_rect.Left, -dest_rect.Top);
 			g.Rectangle (new RectangleD (0, 0, dest_rect.Width, dest_rect.Height));
 			g.Fill ();

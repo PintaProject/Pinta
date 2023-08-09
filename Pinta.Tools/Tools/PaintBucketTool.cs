@@ -62,8 +62,9 @@ namespace Pinta.Tools
 		{
 			var surf = document.Layers.ToolLayer.Surface;
 
-			var g = new Context (surf);
-			g.Operator = Operator.Source;
+			var g = new Context (surf) {
+				Operator = Operator.Source
+			};
 			g.SetSourceSurface (document.Layers.CurrentUserLayer.Surface, 0, 0);
 			g.Paint ();
 
