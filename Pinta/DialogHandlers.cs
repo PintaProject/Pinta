@@ -25,6 +25,7 @@
 // THE SOFTWARE.
 
 using System.Collections.Generic;
+using System.Diagnostics.CodeAnalysis;
 using Pinta.Actions;
 using Pinta.Core;
 
@@ -32,6 +33,7 @@ namespace Pinta
 {
 	public sealed class ActionHandlers
 	{
+		[SuppressMessage ("CodeQuality", "IDE0052:Remove unread private members", Justification = "Objects contained herein have to be kept alive")]
 		private readonly List<IActionHandler> action_handlers;
 
 		public ActionHandlers ()
