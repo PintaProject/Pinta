@@ -90,7 +90,6 @@ namespace Pinta.Tools
 
 				//An ellipse also requires that all 4 control points compose a perfect rectangle parallel/perpendicular to the window.
 				//So, confirm that it is indeed a perfect rectangle.
-
 				bool perfectRectangle = IsPerfectRectangle (cp0, cp1, cp2, cp3);
 
 				if (perfectRectangle) {
