@@ -24,31 +24,15 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 // THE SOFTWARE.
 
-namespace Pinta.Core
+namespace Pinta.Core;
+
+public sealed record LayerProperties (string Name, bool Hidden, double Opacity, BlendMode BlendMode)
 {
-
-	public class LayerProperties
+	public void SetProperties (Layer layer)
 	{
-
-		public LayerProperties (string name, bool hidden, double opacity, BlendMode blendmode)
-		{
-			this.Opacity = opacity;
-			this.Hidden = hidden;
-			this.Name = name;
-			this.BlendMode = blendmode;
-		}
-
-		public string Name { get; }
-		public bool Hidden { get; }
-		public double Opacity { get; }
-		public BlendMode BlendMode { get; }
-
-		public void SetProperties (Layer layer)
-		{
-			layer.Name = Name;
-			layer.Opacity = Opacity;
-			layer.Hidden = Hidden;
-			layer.BlendMode = BlendMode;
-		}
+		layer.Name = Name;
+		layer.Opacity = Opacity;
+		layer.Hidden = Hidden;
+		layer.BlendMode = BlendMode;
 	}
 }
