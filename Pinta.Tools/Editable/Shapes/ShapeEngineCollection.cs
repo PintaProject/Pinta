@@ -32,7 +32,7 @@ using Pinta.Core;
 
 namespace Pinta.Tools
 {
-	public class ShapeEngineCollection : List<ShapeEngine>
+	public sealed class ShapeEngineCollection : List<ShapeEngine>
 	{
 		/// <summary>
 		/// A partially cloneable ShapeEngine collection.
@@ -100,27 +100,28 @@ namespace Pinta.Tools
 	public abstract class ShapeEngine
 	{
 		//A collection of the original ControlPoints that the shape is based on and that the user interacts with.
-		public List<ControlPoint> ControlPoints = new ();
-		public List<MoveHandle> ControlPointHandles = new ();
+		public List<ControlPoint> ControlPoints { get; private set; } = new ();
+		public List<MoveHandle> ControlPointHandles { get; private set; } = new ();
 
 		//A collection of calculated GeneratedPoints that make up the entirety of the shape being drawn.
-		public GeneratedPoint[] GeneratedPoints = Array.Empty<GeneratedPoint> ();
+		public GeneratedPoint[] GeneratedPoints { get; protected set; } = Array.Empty<GeneratedPoint> ();
 
 		//An organized collection of the GeneratedPoints's points for optimized nearest point detection.
-		public OrganizedPointCollection OrganizedPoints = new ();
+		public OrganizedPointCollection OrganizedPoints { get; } = new ();
 
 		private readonly UserLayer parent_layer;
-		public ReEditableLayer DrawingLayer;
+		public ReEditableLayer DrawingLayer { get; }
 
-		public bool AntiAliasing;
-		public string DashPattern = "-";
-		public bool Closed;
+		public bool AntiAliasing { get; internal set; }
+		public string DashPattern { get; internal set; } = "-";
+		public bool Closed { get; }
 
-		public Color OutlineColor, FillColor;
+		public Color OutlineColor { get; internal set; }
+		public Color FillColor { get; internal set; }
 
-		public int BrushWidth;
+		public int BrushWidth { get; internal set; }
 
-		public BaseEditEngine.ShapeTypes ShapeType;
+		public BaseEditEngine.ShapeTypes ShapeType { get; }
 
 		/// <summary>
 		/// Create a new ShapeEngine.
