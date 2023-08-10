@@ -26,7 +26,7 @@
 
 namespace Pinta.Core
 {
-	public class UpdateLayerPropertiesHistoryItem : BaseHistoryItem
+	public sealed class UpdateLayerPropertiesHistoryItem : BaseHistoryItem
 	{
 		readonly int layer_index;
 		readonly LayerProperties initial_properties;

@@ -26,7 +26,7 @@
 
 namespace Pinta.Core
 {
-	public class DeleteLayerHistoryItem : BaseHistoryItem
+	public sealed class DeleteLayerHistoryItem : BaseHistoryItem
 	{
 		private readonly int layer_index;
 		private UserLayer? layer;

@@ -28,7 +28,7 @@ using Cairo;
 
 namespace Pinta.Core
 {
-	public class SimpleHistoryItem : BaseHistoryItem
+	public sealed class SimpleHistoryItem : BaseHistoryItem
 	{
 		private readonly SurfaceDiff? surface_diff;
 		ImageSurface? old_surface;

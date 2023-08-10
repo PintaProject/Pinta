@@ -28,7 +28,7 @@ using Cairo;
 
 namespace Pinta.Core
 {
-	public class FinishPixelsHistoryItem : BaseHistoryItem
+	public sealed class FinishPixelsHistoryItem : BaseHistoryItem
 	{
 		private ImageSurface? old_selection_layer;
 		private ImageSurface? old_surface;
