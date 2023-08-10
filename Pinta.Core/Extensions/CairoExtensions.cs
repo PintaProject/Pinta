@@ -404,24 +404,24 @@ namespace Pinta.Core
 
 		public static ColorBgra ToColorBgra (this Cairo.Color color)
 		{
-			ColorBgra c = new ColorBgra ();
-
-			c.R = (byte) (color.R * 255);
-			c.G = (byte) (color.G * 255);
-			c.B = (byte) (color.B * 255);
-			c.A = (byte) (color.A * 255);
+			ColorBgra c = new ColorBgra {
+				R = (byte) (color.R * 255),
+				G = (byte) (color.G * 255),
+				B = (byte) (color.B * 255),
+				A = (byte) (color.A * 255)
+			};
 
 			return c;
 		}
 
 		public static Cairo.Color ToCairoColor (this ColorBgra color)
 		{
-			Cairo.Color c = new Cairo.Color ();
-
-			c.R = color.R / 255d;
-			c.G = color.G / 255d;
-			c.B = color.B / 255d;
-			c.A = color.A / 255d;
+			Cairo.Color c = new Cairo.Color {
+				R = color.R / 255d,
+				G = color.G / 255d,
+				B = color.B / 255d,
+				A = color.A / 255d
+			};
 
 			return c;
 		}
@@ -455,8 +455,9 @@ namespace Pinta.Core
 
 		public static void Clear (this ImageSurface surface)
 		{
-			var g = new Context (surface);
-			g.Operator = Operator.Clear;
+			var g = new Context (surface) {
+				Operator = Operator.Clear
+			};
 			g.Paint ();
 		}
 
@@ -966,8 +967,9 @@ namespace Pinta.Core
 
 		public static Pattern ToTiledPattern (this Surface surface)
 		{
-			var pattern = new Cairo.SurfacePattern (surface);
-			pattern.Extend = Extend.Repeat;
+			var pattern = new Cairo.SurfacePattern (surface) {
+				Extend = Extend.Repeat
+			};
 
 			return pattern;
 		}

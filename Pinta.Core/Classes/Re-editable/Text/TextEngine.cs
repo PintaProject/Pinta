@@ -68,16 +68,16 @@ namespace Pinta.Core
 		/// <returns>A clone of this TextEngine instance.</returns>
 		public TextEngine Clone ()
 		{
-			TextEngine clonedTE = new TextEngine ();
-
-			clonedTE.lines = lines.ToList ();
-			clonedTE.State = State;
-			clonedTE.currentPos = currentPos;
-			clonedTE.selectionStart = selectionStart;
-			clonedTE.Font = Font.Copy ();
-			clonedTE.Alignment = Alignment;
-			clonedTE.Underline = Underline;
-			clonedTE.Origin = new PointI (Origin.X, Origin.Y);
+			TextEngine clonedTE = new TextEngine {
+				lines = lines.ToList (),
+				State = State,
+				currentPos = currentPos,
+				selectionStart = selectionStart,
+				Font = Font.Copy (),
+				Alignment = Alignment,
+				Underline = Underline,
+				Origin = new PointI (Origin.X, Origin.Y)
+			};
 
 			//The rest of the variables are calculated on the spot.
 
