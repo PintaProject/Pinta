@@ -26,116 +26,115 @@
 
 using Cairo;
 
-namespace Pinta.Core
+namespace Pinta.Core;
+
+public sealed class TextHistoryItem : BaseHistoryItem
 {
-	public sealed class TextHistoryItem : BaseHistoryItem
+	readonly UserLayer user_layer;
+
+	readonly SurfaceDiff? text_surface_diff;
+	ImageSurface? text_surface;
+
+	readonly SurfaceDiff? user_surface_diff;
+	ImageSurface? user_surface;
+
+	TextEngine t_engine;
+	RectangleI text_bounds;
+
+	/// <summary>
+	/// A history item for when text is created, edited, and/or finalized.
+	/// </summary>
+	/// <param name="icon">The history item's icon.</param>
+	/// <param name="text">The history item's title.</param>
+	/// <param name="passedTextSurface">The stored TextLayer surface.</param>
+	/// <param name="passedUserSurface">The stored UserLayer surface.</param>
+	/// <param name="passedTextEngine">The text engine being used.</param>
+	/// <param name="passedUserLayer">The UserLayer being modified.</param>
+	public TextHistoryItem (string icon, string text, ImageSurface passedTextSurface,
+			       ImageSurface passedUserSurface, TextEngine passedTextEngine,
+			       UserLayer passedUserLayer) : base (icon, text)
 	{
-		readonly UserLayer user_layer;
-
-		readonly SurfaceDiff? text_surface_diff;
-		ImageSurface? text_surface;
-
-		readonly SurfaceDiff? user_surface_diff;
-		ImageSurface? user_surface;
-
-		TextEngine t_engine;
-		RectangleI text_bounds;
-
-		/// <summary>
-		/// A history item for when text is created, edited, and/or finalized.
-		/// </summary>
-		/// <param name="icon">The history item's icon.</param>
-		/// <param name="text">The history item's title.</param>
-		/// <param name="passedTextSurface">The stored TextLayer surface.</param>
-		/// <param name="passedUserSurface">The stored UserLayer surface.</param>
-		/// <param name="passedTextEngine">The text engine being used.</param>
-		/// <param name="passedUserLayer">The UserLayer being modified.</param>
-		public TextHistoryItem (string icon, string text, ImageSurface passedTextSurface,
-				       ImageSurface passedUserSurface, TextEngine passedTextEngine,
-				       UserLayer passedUserLayer) : base (icon, text)
-		{
-			user_layer = passedUserLayer;
+		user_layer = passedUserLayer;
 
 
-			text_surface_diff = SurfaceDiff.Create (passedTextSurface, user_layer.TextLayer.Layer.Surface, true);
+		text_surface_diff = SurfaceDiff.Create (passedTextSurface, user_layer.TextLayer.Layer.Surface, true);
 
-			if (text_surface_diff == null) {
-				text_surface = passedTextSurface;
-			}
-
-
-			user_surface_diff = SurfaceDiff.Create (passedUserSurface, user_layer.Surface, true);
-
-			if (user_surface_diff == null) {
-				user_surface = passedUserSurface;
-			}
-
-
-			t_engine = passedTextEngine;
-
-			text_bounds = new RectangleI (user_layer.textBounds.X, user_layer.textBounds.Y, user_layer.textBounds.Width, user_layer.textBounds.Height);
+		if (text_surface_diff == null) {
+			text_surface = passedTextSurface;
 		}
 
-		public override void Undo ()
-		{
-			Swap ();
+
+		user_surface_diff = SurfaceDiff.Create (passedUserSurface, user_layer.Surface, true);
+
+		if (user_surface_diff == null) {
+			user_surface = passedUserSurface;
 		}
 
-		public override void Redo ()
-		{
-			Swap ();
+
+		t_engine = passedTextEngine;
+
+		text_bounds = new RectangleI (user_layer.textBounds.X, user_layer.textBounds.Y, user_layer.textBounds.Width, user_layer.textBounds.Height);
+	}
+
+	public override void Undo ()
+	{
+		Swap ();
+	}
+
+	public override void Redo ()
+	{
+		Swap ();
+	}
+
+	private void Swap ()
+	{
+		// Grab the original surface
+		ImageSurface surf = user_layer.TextLayer.Layer.Surface;
+
+		if (text_surface_diff != null) {
+			text_surface_diff.ApplyAndSwap (surf);
+			PintaCore.Workspace.Invalidate (text_surface_diff.GetBounds ());
+		} else {
+			// Undo to the "old" surface
+			user_layer.TextLayer.Layer.Surface = text_surface!; // NRT - Will be not-null if text_surface_diff is null
+
+			// Store the original surface for Redo
+			text_surface = surf;
 		}
 
-		private void Swap ()
-		{
-			// Grab the original surface
-			ImageSurface surf = user_layer.TextLayer.Layer.Surface;
-
-			if (text_surface_diff != null) {
-				text_surface_diff.ApplyAndSwap (surf);
-				PintaCore.Workspace.Invalidate (text_surface_diff.GetBounds ());
-			} else {
-				// Undo to the "old" surface
-				user_layer.TextLayer.Layer.Surface = text_surface!; // NRT - Will be not-null if text_surface_diff is null
-
-				// Store the original surface for Redo
-				text_surface = surf;
-			}
 
 
+		// Grab the original surface
+		surf = user_layer.Surface;
 
-			// Grab the original surface
-			surf = user_layer.Surface;
+		if (user_surface_diff != null) {
+			user_surface_diff.ApplyAndSwap (surf);
+			PintaCore.Workspace.Invalidate (user_surface_diff.GetBounds ());
+		} else {
+			// Undo to the "old" surface
+			user_layer.Surface = user_surface!; // NRT - Will be not-null if user_surface_diff is null
 
-			if (user_surface_diff != null) {
-				user_surface_diff.ApplyAndSwap (surf);
-				PintaCore.Workspace.Invalidate (user_surface_diff.GetBounds ());
-			} else {
-				// Undo to the "old" surface
-				user_layer.Surface = user_surface!; // NRT - Will be not-null if user_surface_diff is null
-
-				// Store the original surface for Redo
-				user_surface = surf;
-			}
-
-
-
-			//Redraw everything since surfaces were swapped.
-			PintaCore.Workspace.Invalidate ();
-
-
-
-			//Store the old text data temporarily.
-			TextEngine oldTEngine = t_engine;
-			RectangleI oldTextBounds = text_bounds;
-
-			//Swap half of the data.
-			t_engine = user_layer.tEngine;
-			text_bounds = user_layer.textBounds;
-
-			//Swap the other half.
-			user_layer.tEngine = oldTEngine;
-			user_layer.textBounds = oldTextBounds;
+			// Store the original surface for Redo
+			user_surface = surf;
 		}
+
+
+
+		//Redraw everything since surfaces were swapped.
+		PintaCore.Workspace.Invalidate ();
+
+
+
+		//Store the old text data temporarily.
+		TextEngine oldTEngine = t_engine;
+		RectangleI oldTextBounds = text_bounds;
+
+		//Swap half of the data.
+		t_engine = user_layer.tEngine;
+		text_bounds = user_layer.textBounds;
+
+		//Swap the other half.
+		user_layer.tEngine = oldTEngine;
+		user_layer.textBounds = oldTextBounds;
 	}
 }

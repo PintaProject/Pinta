@@ -24,69 +24,68 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 // THE SOFTWARE.
 
-namespace Pinta.Core
+namespace Pinta.Core;
+
+public sealed class ResizeHistoryItem : CompoundHistoryItem
 {
-	public sealed class ResizeHistoryItem : CompoundHistoryItem
+	private Size old_size;
+
+	public ResizeHistoryItem (Size oldSize) : base ()
 	{
-		private Size old_size;
+		old_size = oldSize;
 
-		public ResizeHistoryItem (Size oldSize) : base ()
-		{
-			old_size = oldSize;
+		Icon = Resources.Icons.ImageResize;
+		Text = Translations.GetString ("Resize Image");
+	}
 
-			Icon = Resources.Icons.ImageResize;
-			Text = Translations.GetString ("Resize Image");
-		}
+	public DocumentSelection? RestoreSelection;
 
-		public DocumentSelection? RestoreSelection;
+	public override void Undo ()
+	{
+		var doc = PintaCore.Workspace.ActiveDocument;
 
-		public override void Undo ()
-		{
-			var doc = PintaCore.Workspace.ActiveDocument;
+		// maintain the current scaling setting after the operation
+		double scale = PintaCore.Workspace.Scale;
 
-			// maintain the current scaling setting after the operation
-			double scale = PintaCore.Workspace.Scale;
+		Size swap = PintaCore.Workspace.ImageSize;
 
-			Size swap = PintaCore.Workspace.ImageSize;
+		PintaCore.Workspace.ImageSize = old_size;
+		PintaCore.Workspace.CanvasSize = old_size;
 
-			PintaCore.Workspace.ImageSize = old_size;
-			PintaCore.Workspace.CanvasSize = old_size;
+		old_size = swap;
 
-			old_size = swap;
+		base.Undo ();
 
-			base.Undo ();
-
-			if (RestoreSelection != null) {
-				doc.Selection = RestoreSelection.Clone ();
-			} else {
-				doc.ResetSelectionPaths ();
-			}
-
-			PintaCore.Workspace.Invalidate ();
-
-			PintaCore.Workspace.Scale = scale;
-		}
-
-		public override void Redo ()
-		{
-			var doc = PintaCore.Workspace.ActiveDocument;
-
-			// maintain the current scaling setting after the operation
-			double scale = PintaCore.Workspace.Scale;
-
-			Size swap = PintaCore.Workspace.ImageSize;
-
-			PintaCore.Workspace.ImageSize = old_size;
-			PintaCore.Workspace.CanvasSize = old_size;
-
-			old_size = swap;
-
-			base.Redo ();
-
+		if (RestoreSelection != null) {
+			doc.Selection = RestoreSelection.Clone ();
+		} else {
 			doc.ResetSelectionPaths ();
-			PintaCore.Workspace.Invalidate ();
-
-			PintaCore.Workspace.Scale = scale;
 		}
+
+		PintaCore.Workspace.Invalidate ();
+
+		PintaCore.Workspace.Scale = scale;
+	}
+
+	public override void Redo ()
+	{
+		var doc = PintaCore.Workspace.ActiveDocument;
+
+		// maintain the current scaling setting after the operation
+		double scale = PintaCore.Workspace.Scale;
+
+		Size swap = PintaCore.Workspace.ImageSize;
+
+		PintaCore.Workspace.ImageSize = old_size;
+		PintaCore.Workspace.CanvasSize = old_size;
+
+		old_size = swap;
+
+		base.Redo ();
+
+		doc.ResetSelectionPaths ();
+		PintaCore.Workspace.Invalidate ();
+
+		PintaCore.Workspace.Scale = scale;
 	}
 }

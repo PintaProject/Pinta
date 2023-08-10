@@ -26,81 +26,80 @@
 
 using Cairo;
 
-namespace Pinta.Core
+namespace Pinta.Core;
+
+public sealed class MovePixelsHistoryItem : BaseHistoryItem
 {
-	public sealed class MovePixelsHistoryItem : BaseHistoryItem
+	// There's 2 types of move pixel operations to handle
+	// - The first move "lifts" the selection up into a temporary layer
+	//   and then moves it to the new spot
+	// - Subsequent moves only move the selection
+	//   around the temporary layer
+	private readonly Document doc;
+	private DocumentSelection? old_selection;
+	private Matrix old_transform = CairoExtensions.CreateIdentityMatrix ();
+	private ImageSurface? old_surface;
+	private int layer_index;
+	private bool lifted;            // Whether this item has lift
+	private bool is_lifted;         // Track state of undo/redo lift
+
+	public MovePixelsHistoryItem (string icon, string text, Document document) : base (icon, text)
 	{
-		// There's 2 types of move pixel operations to handle
-		// - The first move "lifts" the selection up into a temporary layer
-		//   and then moves it to the new spot
-		// - Subsequent moves only move the selection
-		//   around the temporary layer
-		private readonly Document doc;
-		private DocumentSelection? old_selection;
-		private Matrix old_transform = CairoExtensions.CreateIdentityMatrix ();
-		private ImageSurface? old_surface;
-		private int layer_index;
-		private bool lifted;            // Whether this item has lift
-		private bool is_lifted;         // Track state of undo/redo lift
+		doc = document;
+	}
 
-		public MovePixelsHistoryItem (string icon, string text, Document document) : base (icon, text)
-		{
-			doc = document;
+	public override void Undo ()
+	{
+		Swap ();
+	}
+
+	public override void Redo ()
+	{
+		Swap ();
+	}
+
+	private void Swap ()
+	{
+		var doc = PintaCore.Workspace.ActiveDocument;
+
+		DocumentSelection swap_selection = doc.Selection;
+		doc.Selection = old_selection!; // NRT - Set in TakeSnapshot
+		old_selection = swap_selection;
+
+		Matrix swap_transform = doc.Layers.SelectionLayer.Transform;
+		doc.Layers.SelectionLayer.Transform = old_transform;
+		old_transform = swap_transform;
+
+		if (lifted) {
+			// Grab the original surface
+			ImageSurface surf = doc.Layers[layer_index].Surface;
+
+			// Undo to the "old" surface
+			doc.Layers[layer_index].Surface = old_surface!; // NRT - Set in TakeSnapshot
+
+			// Store the original surface for Redo
+			old_surface = surf;
+
+			is_lifted = !is_lifted;
+			doc.Layers.ShowSelectionLayer = is_lifted;
 		}
 
-		public override void Undo ()
-		{
-			Swap ();
+		PintaCore.Workspace.Invalidate ();
+	}
+
+	public void TakeSnapshot (bool lift)
+	{
+		var doc = PintaCore.Workspace.ActiveDocument;
+
+		lifted = lift;
+		is_lifted = true;
+
+		if (lift) {
+			layer_index = doc.Layers.CurrentUserLayerIndex;
+			old_surface = doc.Layers.CurrentUserLayer.Surface.Clone ();
 		}
 
-		public override void Redo ()
-		{
-			Swap ();
-		}
-
-		private void Swap ()
-		{
-			var doc = PintaCore.Workspace.ActiveDocument;
-
-			DocumentSelection swap_selection = doc.Selection;
-			doc.Selection = old_selection!; // NRT - Set in TakeSnapshot
-			old_selection = swap_selection;
-
-			Matrix swap_transform = doc.Layers.SelectionLayer.Transform;
-			doc.Layers.SelectionLayer.Transform = old_transform;
-			old_transform = swap_transform;
-
-			if (lifted) {
-				// Grab the original surface
-				ImageSurface surf = doc.Layers[layer_index].Surface;
-
-				// Undo to the "old" surface
-				doc.Layers[layer_index].Surface = old_surface!; // NRT - Set in TakeSnapshot
-
-				// Store the original surface for Redo
-				old_surface = surf;
-
-				is_lifted = !is_lifted;
-				doc.Layers.ShowSelectionLayer = is_lifted;
-			}
-
-			PintaCore.Workspace.Invalidate ();
-		}
-
-		public void TakeSnapshot (bool lift)
-		{
-			var doc = PintaCore.Workspace.ActiveDocument;
-
-			lifted = lift;
-			is_lifted = true;
-
-			if (lift) {
-				layer_index = doc.Layers.CurrentUserLayerIndex;
-				old_surface = doc.Layers.CurrentUserLayer.Surface.Clone ();
-			}
-
-			old_selection = doc.Selection.Clone ();
-			old_transform = doc.Layers.SelectionLayer.Transform.Clone ();
-		}
+		old_selection = doc.Selection.Clone ();
+		old_transform = doc.Layers.SelectionLayer.Transform.Clone ();
 	}
 }
