@@ -8,64 +8,64 @@
 /////////////////////////////////////////////////////////////////////////////////
 
 using Cairo;
+using Gtk;
 using Pinta.Core;
 
-namespace Pinta.Effects
+namespace Pinta.Effects;
+
+public sealed class LevelsEffect : BaseEffect
 {
-	public class LevelsEffect : BaseEffect
+	public override string Icon => Pinta.Resources.Icons.AdjustmentsLevels;
+
+	public override string Name => Translations.GetString ("Levels");
+
+	public override bool IsConfigurable => true;
+
+	public override string AdjustmentMenuKey => "L";
+
+	public override string AdjustmentMenuKeyModifiers => "<Primary>";
+
+	public LevelsData Data => (LevelsData) EffectData!;  // NRT - Set in constructor
+
+	public LevelsEffect ()
 	{
-		public override string Icon => Pinta.Resources.Icons.AdjustmentsLevels;
-
-		public override string Name => Translations.GetString ("Levels");
-
-		public override bool IsConfigurable => true;
-
-		public override string AdjustmentMenuKey => "L";
-
-		public override string AdjustmentMenuKeyModifiers => "<Primary>";
-
-		public LevelsData Data => (LevelsData) EffectData!;  // NRT - Set in constructor
-
-		public LevelsEffect ()
-		{
-			EffectData = new LevelsData ();
-		}
-
-		public override void LaunchConfiguration ()
-		{
-			var dialog = new LevelsDialog (Data) {
-				Title = Name,
-				IconName = Icon,
-			};
-
-			dialog.OnResponse += (_, args) => {
-				if (args.ResponseId != (int) Gtk.ResponseType.None) {
-					OnConfigDialogResponse (args.ResponseId == (int) Gtk.ResponseType.Ok);
-					dialog.Destroy ();
-				}
-			};
-
-			dialog.Present ();
-		}
-
-		public override void Render (ImageSurface src, ImageSurface dest, Core.RectangleI[] rois)
-		{
-			Data.Levels.Apply (dest, src, rois);
-		}
+		EffectData = new LevelsData ();
 	}
 
-	public class LevelsData : EffectData
+	public override void LaunchConfiguration ()
 	{
-		public UnaryPixelOps.Level Levels { get; set; }
+		var dialog = new LevelsDialog (Data) {
+			Title = Name,
+			IconName = Icon,
+		};
 
-		public LevelsData ()
-		{
-			Levels = new UnaryPixelOps.Level ();
-		}
+		dialog.OnResponse += (_, args) => {
+			if (args.ResponseId != (int) Gtk.ResponseType.None) {
+				OnConfigDialogResponse (args.ResponseId == (int) Gtk.ResponseType.Ok);
+				dialog.Destroy ();
+			}
+		};
 
-		public override EffectData Clone ()
-		{
-			return new LevelsData () { Levels = (UnaryPixelOps.Level) Levels.Clone () };
-		}
+		dialog.Present ();
+	}
+
+	public override void Render (ImageSurface src, ImageSurface dest, Core.RectangleI[] rois)
+	{
+		Data.Levels.Apply (dest, src, rois);
+	}
+}
+
+public class LevelsData : EffectData
+{
+	public UnaryPixelOps.Level Levels { get; set; }
+
+	public LevelsData ()
+	{
+		Levels = new UnaryPixelOps.Level ();
+	}
+
+	public override EffectData Clone ()
+	{
+		return new LevelsData () { Levels = (UnaryPixelOps.Level) Levels.Clone () };
 	}
 }
