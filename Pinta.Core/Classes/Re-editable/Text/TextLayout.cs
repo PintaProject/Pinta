@@ -28,117 +28,116 @@ using System;
 using System.Collections.Generic;
 using System.Security;
 
-namespace Pinta.Core
+namespace Pinta.Core;
+
+public sealed class TextLayout
 {
-	public class TextLayout
+	private TextEngine engine = null!; // NRT - Not sure how this is set, but all callers assume it is not-null
+
+	public TextEngine Engine {
+		get => engine;
+		set {
+			if (engine != null)
+				engine.Modified -= OnEngineModified;
+			engine = value;
+			engine.Modified += OnEngineModified;
+			OnEngineModified (this, EventArgs.Empty);
+		}
+	}
+
+	public Pango.Layout Layout { get; }
+	public int FontHeight => GetCursorLocation ().Height;
+
+	public TextLayout ()
 	{
-		private TextEngine engine = null!; // NRT - Not sure how this is set, but all callers assume it is not-null
+		Layout = Pango.Layout.New (PintaCore.Chrome.MainWindow.GetPangoContext ());
+	}
 
-		public TextEngine Engine {
-			get => engine;
-			set {
-				if (engine != null)
-					engine.Modified -= OnEngineModified;
-				engine = value;
-				engine.Modified += OnEngineModified;
-				OnEngineModified (this, EventArgs.Empty);
-			}
-		}
+	public RectangleI[] SelectionRectangles {
+		get {
+			var regions = engine.SelectionRegions;
+			var rects = new List<RectangleI> ();
 
-		public Pango.Layout Layout { get; }
-		public int FontHeight => GetCursorLocation ().Height;
-
-		public TextLayout ()
-		{
-			Layout = Pango.Layout.New (PintaCore.Chrome.MainWindow.GetPangoContext ());
-		}
-
-		public RectangleI[] SelectionRectangles {
-			get {
-				var regions = engine.SelectionRegions;
-				var rects = new List<RectangleI> ();
-
-				foreach (var region in regions) {
-					PointI p1 = TextPositionToPoint (region.Key);
-					PointI p2 = TextPositionToPoint (region.Value);
-					rects.Add (new RectangleI (p1, new Size (p2.X - p1.X, FontHeight)));
-				}
-
-				return rects.ToArray ();
-			}
-		}
-
-		public RectangleI GetCursorLocation ()
-		{
-			int index = engine.PositionToUTF8Index (engine.CurrentPosition);
-
-			Layout.GetCursorPos (index, out RectangleI strong, out RectangleI weak);
-
-			int x = PangoExtensions.UnitsToPixels (strong.X) + engine.Origin.X;
-			int y = PangoExtensions.UnitsToPixels (strong.Y) + engine.Origin.Y;
-			int w = PangoExtensions.UnitsToPixels (strong.Width);
-			int h = PangoExtensions.UnitsToPixels (strong.Height);
-
-			return new RectangleI (x, y, w, h);
-		}
-
-		public RectangleI GetLayoutBounds ()
-		{
-			Layout.GetPixelExtents (out RectangleI ink, out RectangleI logical);
-			var cursor = GetCursorLocation ();
-
-			// GetPixelExtents() doesn't really return a very sensible height.
-			// Instead of doing some hacky arithmetic to correct it, the height will just
-			// be the cursor's height times the number of lines.
-			return new RectangleI (engine.Origin.X, engine.Origin.Y,
-					      ink.Width, cursor.Height * engine.LineCount);
-		}
-
-		public TextPosition PointToTextPosition (PointI point)
-		{
-			int index, trailing;
-			int x = PangoExtensions.UnitsFromPixels (point.X - engine.Origin.X);
-			int y = PangoExtensions.UnitsFromPixels (point.Y - engine.Origin.Y);
-
-			Layout.XyToIndex (x, y, out index, out trailing);
-
-			return engine.UTF8IndexToPosition (index + trailing);
-		}
-
-		public PointI TextPositionToPoint (TextPosition p)
-		{
-			int index = engine.PositionToUTF8Index (p);
-
-			Layout.IndexToPos (index, out RectangleI rect);
-
-			int x = PangoExtensions.UnitsToPixels (rect.X) + engine.Origin.X;
-			int y = PangoExtensions.UnitsToPixels (rect.Y) + engine.Origin.Y;
-
-			return new PointI (x, y);
-		}
-
-		private void OnEngineModified (object? sender, EventArgs e)
-		{
-			string? markup = SecurityElement.Escape (engine.ToString ());
-
-			if (engine.Underline)
-				markup = $"<u>{markup}</u>";
-
-			switch (engine.Alignment) {
-				case TextAlignment.Right:
-					Layout.SetAlignment (Pango.Alignment.Right);
-					break;
-				case TextAlignment.Center:
-					Layout.SetAlignment (Pango.Alignment.Center);
-					break;
-				case TextAlignment.Left:
-					Layout.SetAlignment (Pango.Alignment.Left);
-					break;
+			foreach (var region in regions) {
+				PointI p1 = TextPositionToPoint (region.Key);
+				PointI p2 = TextPositionToPoint (region.Value);
+				rects.Add (new RectangleI (p1, new Size (p2.X - p1.X, FontHeight)));
 			}
 
-			Layout.SetFontDescription (engine.Font);
-
-			Layout.SetMarkup (markup, -1);
+			return rects.ToArray ();
 		}
+	}
+
+	public RectangleI GetCursorLocation ()
+	{
+		int index = engine.PositionToUTF8Index (engine.CurrentPosition);
+
+		Layout.GetCursorPos (index, out RectangleI strong, out RectangleI weak);
+
+		int x = PangoExtensions.UnitsToPixels (strong.X) + engine.Origin.X;
+		int y = PangoExtensions.UnitsToPixels (strong.Y) + engine.Origin.Y;
+		int w = PangoExtensions.UnitsToPixels (strong.Width);
+		int h = PangoExtensions.UnitsToPixels (strong.Height);
+
+		return new RectangleI (x, y, w, h);
+	}
+
+	public RectangleI GetLayoutBounds ()
+	{
+		Layout.GetPixelExtents (out RectangleI ink, out RectangleI logical);
+		var cursor = GetCursorLocation ();
+
+		// GetPixelExtents() doesn't really return a very sensible height.
+		// Instead of doing some hacky arithmetic to correct it, the height will just
+		// be the cursor's height times the number of lines.
+		return new RectangleI (engine.Origin.X, engine.Origin.Y,
+				      ink.Width, cursor.Height * engine.LineCount);
+	}
+
+	public TextPosition PointToTextPosition (PointI point)
+	{
+		int index, trailing;
+		int x = PangoExtensions.UnitsFromPixels (point.X - engine.Origin.X);
+		int y = PangoExtensions.UnitsFromPixels (point.Y - engine.Origin.Y);
+
+		Layout.XyToIndex (x, y, out index, out trailing);
+
+		return engine.UTF8IndexToPosition (index + trailing);
+	}
+
+	public PointI TextPositionToPoint (TextPosition p)
+	{
+		int index = engine.PositionToUTF8Index (p);
+
+		Layout.IndexToPos (index, out RectangleI rect);
+
+		int x = PangoExtensions.UnitsToPixels (rect.X) + engine.Origin.X;
+		int y = PangoExtensions.UnitsToPixels (rect.Y) + engine.Origin.Y;
+
+		return new PointI (x, y);
+	}
+
+	private void OnEngineModified (object? sender, EventArgs e)
+	{
+		string? markup = SecurityElement.Escape (engine.ToString ());
+
+		if (engine.Underline)
+			markup = $"<u>{markup}</u>";
+
+		switch (engine.Alignment) {
+			case TextAlignment.Right:
+				Layout.SetAlignment (Pango.Alignment.Right);
+				break;
+			case TextAlignment.Center:
+				Layout.SetAlignment (Pango.Alignment.Center);
+				break;
+			case TextAlignment.Left:
+				Layout.SetAlignment (Pango.Alignment.Left);
+				break;
+		}
+
+		Layout.SetFontDescription (engine.Font);
+
+		Layout.SetMarkup (markup, -1);
 	}
 }
