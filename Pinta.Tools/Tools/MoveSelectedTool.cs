@@ -29,7 +29,7 @@ using Pinta.Core;
 
 namespace Pinta.Tools
 {
-	public class MoveSelectedTool : BaseTransformTool
+	public sealed class MoveSelectedTool : BaseTransformTool
 	{
 		private MovePixelsHistoryItem? hist;
 		private DocumentSelection? original_selection;
@@ -64,8 +64,8 @@ namespace Pinta.Tools
 
 			// If there is no selection, select the whole image.
 			if (document.Selection.SelectionPolygons.Count == 0) {
-				document.Selection.CreateRectangleSelection (
-					new RectangleD (0, 0, document.ImageSize.Width, document.ImageSize.Height));
+				RectangleD imageBounds = new (0, 0, document.ImageSize.Width, document.ImageSize.Height);
+				document.Selection.CreateRectangleSelection (imageBounds);
 			}
 
 			original_selection = document.Selection.Clone ();
