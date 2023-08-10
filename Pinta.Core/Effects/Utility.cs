@@ -8,327 +8,327 @@
 using System;
 using System.Reflection;
 
-namespace Pinta.Core
+namespace Pinta.Core;
+
+public static class Utility
 {
-	public static class Utility
+	internal static bool IsNumber (float x)
 	{
-		internal static bool IsNumber (float x)
-		{
-			return x >= float.MinValue && x <= float.MaxValue;
+		return x >= float.MinValue && x <= float.MaxValue;
+	}
+
+	public static double Clamp (double x, double min, double max)
+	{
+		if (x < min) {
+			return min;
+		} else if (x > max) {
+			return max;
+		} else {
+			return x;
+		}
+	}
+
+	public static float Clamp (float x, float min, float max)
+	{
+		if (x < min) {
+			return min;
+		} else if (x > max) {
+			return max;
+		} else {
+			return x;
+		}
+	}
+
+	public static int Clamp (int x, int min, int max)
+	{
+		if (x < min) {
+			return min;
+		} else if (x > max) {
+			return max;
+		} else {
+			return x;
+		}
+	}
+
+	public static byte ClampToByte (double x)
+	{
+		if (x > 255) {
+			return 255;
+		} else if (x < 0) {
+			return 0;
+		} else {
+			return (byte) x;
+		}
+	}
+
+	public static byte ClampToByte (float x)
+	{
+		if (x > 255) {
+			return 255;
+		} else if (x < 0) {
+			return 0;
+		} else {
+			return (byte) x;
+		}
+	}
+
+	public static byte ClampToByte (int x)
+	{
+		if (x > 255) {
+			return 255;
+		} else if (x < 0) {
+			return 0;
+		} else {
+			return (byte) x;
+		}
+	}
+
+	public static float Lerp (float from, float to, float frac)
+	{
+		return (from + frac * (to - from));
+	}
+
+	public static double Lerp (double from, double to, double frac)
+	{
+		return (from + frac * (to - from));
+	}
+
+	public static PointD Lerp (PointD from, PointD to, float frac)
+	{
+		return new PointD (Lerp (from.X, to.X, frac), Lerp (from.Y, to.Y, frac));
+	}
+
+	public static void Swap (ref int a, ref int b)
+	{
+		int t;
+
+		t = a;
+		a = b;
+		b = t;
+	}
+
+	/// <summary>
+	/// Smoothly blends between two colors.
+	/// </summary>
+	public static ColorBgra Blend (ColorBgra ca, ColorBgra cb, byte cbAlpha)
+	{
+		uint caA = (uint) Utility.FastScaleByteByByte ((byte) (255 - cbAlpha), ca.A);
+		uint cbA = (uint) Utility.FastScaleByteByByte (cbAlpha, cb.A);
+		uint cbAT = caA + cbA;
+
+		uint r;
+		uint g;
+		uint b;
+
+		if (cbAT == 0) {
+			r = 0;
+			g = 0;
+			b = 0;
+		} else {
+			r = ((ca.R * caA) + (cb.R * cbA)) / cbAT;
+			g = ((ca.G * caA) + (cb.G * cbA)) / cbAT;
+			b = ((ca.B * caA) + (cb.B * cbA)) / cbAT;
 		}
 
-		public static double Clamp (double x, double min, double max)
-		{
-			if (x < min) {
-				return min;
-			} else if (x > max) {
-				return max;
-			} else {
-				return x;
+		return ColorBgra.FromBgra ((byte) b, (byte) g, (byte) r, (byte) cbAT);
+	}
+
+	/// <summary>
+	/// Allows you to find the bounding box for a "region" that is described as an
+	/// array of bounding boxes.
+	/// </summary>
+	/// <param name="rects">The "region" you want to find a bounding box for.</param>
+	/// <param name="startIndex">Index of the first rectangle in the array to examine.</param>
+	/// <param name="length">Number of rectangles to examine, beginning at <b>startIndex</b>.</param>
+	/// <returns>A rectangle that surrounds the region.</returns>
+	public static RectangleI GetRegionBounds (RectangleI[] rects, int startIndex, int length)
+	{
+		if (rects.Length == 0) {
+			return RectangleI.Zero;
+		}
+
+		int left = rects[startIndex].Left;
+		int top = rects[startIndex].Top;
+		int right = rects[startIndex].Right;
+		int bottom = rects[startIndex].Bottom;
+
+		for (int i = startIndex + 1; i < startIndex + length; ++i) {
+			RectangleI rect = rects[i];
+
+			if (rect.Left < left) {
+				left = rect.Left;
+			}
+
+			if (rect.Top < top) {
+				top = rect.Top;
+			}
+
+			if (rect.Right > right) {
+				right = rect.Right;
+			}
+
+			if (rect.Bottom > bottom) {
+				bottom = rect.Bottom;
 			}
 		}
 
-		public static float Clamp (float x, float min, float max)
-		{
-			if (x < min) {
-				return min;
-			} else if (x > max) {
-				return max;
-			} else {
-				return x;
-			}
-		}
+		return RectangleI.FromLTRB (left, top, right, bottom);
+	}
 
-		public static int Clamp (int x, int min, int max)
-		{
-			if (x < min) {
-				return min;
-			} else if (x > max) {
-				return max;
-			} else {
-				return x;
-			}
-		}
+	public static int ColorDifference (ColorBgra a, ColorBgra b)
+	{
+		return (int) Math.Ceiling (Math.Sqrt (ColorDifferenceSquared (a, b)));
+	}
 
-		public static byte ClampToByte (double x)
-		{
-			if (x > 255) {
-				return 255;
-			} else if (x < 0) {
-				return 0;
-			} else {
-				return (byte) x;
-			}
-		}
+	public static int ColorDifferenceSquared (ColorBgra a, ColorBgra b)
+	{
+		int diffSq = 0, tmp;
 
-		public static byte ClampToByte (float x)
-		{
-			if (x > 255) {
-				return 255;
-			} else if (x < 0) {
-				return 0;
-			} else {
-				return (byte) x;
-			}
-		}
+		tmp = a.R - b.R;
+		diffSq += tmp * tmp;
+		tmp = a.G - b.G;
+		diffSq += tmp * tmp;
+		tmp = a.B - b.B;
+		diffSq += tmp * tmp;
 
-		public static byte ClampToByte (int x)
-		{
-			if (x > 255) {
-				return 255;
-			} else if (x < 0) {
-				return 0;
-			} else {
-				return (byte) x;
-			}
-		}
+		return diffSq / 3;
+	}
 
-		public static float Lerp (float from, float to, float frac)
-		{
-			return (from + frac * (to - from));
-		}
+	public static RectangleI[] InflateRectangles (RectangleI[] rects, int len)
+	{
+		RectangleI[] inflated = new RectangleI[rects.Length];
 
-		public static double Lerp (double from, double to, double frac)
-		{
-			return (from + frac * (to - from));
-		}
+		for (int i = 0; i < rects.Length; ++i)
+			inflated[i] = new RectangleI (rects[i].X - len, rects[i].Y - len, rects[i].Width + 2 * len, rects[i].Height + 2 * len);
 
-		public static PointD Lerp (PointD from, PointD to, float frac)
-		{
-			return new PointD (Lerp (from.X, to.X, frac), Lerp (from.Y, to.Y, frac));
-		}
+		return inflated;
+	}
 
-		public static void Swap (ref int a, ref int b)
-		{
-			int t;
+	public static string GetStaticName (Type type)
+	{
+		var pi = type.GetProperty ("StaticName", BindingFlags.Static | BindingFlags.Public | BindingFlags.GetProperty);
 
-			t = a;
-			a = b;
-			b = t;
-		}
+		if (pi != null)
+			return (pi.GetValue (null, null) as string) ?? type.Name;
 
-		/// <summary>
-		/// Smoothly blends between two colors.
-		/// </summary>
-		public static ColorBgra Blend (ColorBgra ca, ColorBgra cb, byte cbAlpha)
-		{
-			uint caA = (uint) Utility.FastScaleByteByByte ((byte) (255 - cbAlpha), ca.A);
-			uint cbA = (uint) Utility.FastScaleByteByByte (cbAlpha, cb.A);
-			uint cbAT = caA + cbA;
+		return type.Name;
+	}
 
-			uint r;
-			uint g;
-			uint b;
+	public static byte FastScaleByteByByte (byte a, byte b)
+	{
+		int r1 = a * b + 0x80;
+		int r2 = ((r1 >> 8) + r1) >> 8;
+		return (byte) r2;
+	}
 
-			if (cbAT == 0) {
-				r = 0;
-				g = 0;
-				b = 0;
-			} else {
-				r = ((ca.R * caA) + (cb.R * cbA)) / cbAT;
-				g = ((ca.G * caA) + (cb.G * cbA)) / cbAT;
-				b = ((ca.B * caA) + (cb.B * cbA)) / cbAT;
-			}
+	public static PointI[] GetLinePoints (PointI first, PointI second)
+	{
+		PointI[]? coords = null;
 
-			return ColorBgra.FromBgra ((byte) b, (byte) g, (byte) r, (byte) cbAT);
-		}
+		int x1 = first.X;
+		int y1 = first.Y;
+		int x2 = second.X;
+		int y2 = second.Y;
+		int dx = x2 - x1;
+		int dy = y2 - y1;
+		int dxabs = Math.Abs (dx);
+		int dyabs = Math.Abs (dy);
+		int px = x1;
+		int py = y1;
+		int sdx = Math.Sign (dx);
+		int sdy = Math.Sign (dy);
+		int x = 0;
+		int y = 0;
 
-		/// <summary>
-		/// Allows you to find the bounding box for a "region" that is described as an
-		/// array of bounding boxes.
-		/// </summary>
-		/// <param name="rects">The "region" you want to find a bounding box for.</param>
-		/// <param name="startIndex">Index of the first rectangle in the array to examine.</param>
-		/// <param name="length">Number of rectangles to examine, beginning at <b>startIndex</b>.</param>
-		/// <returns>A rectangle that surrounds the region.</returns>
-		public static RectangleI GetRegionBounds (RectangleI[] rects, int startIndex, int length)
-		{
-			if (rects.Length == 0) {
-				return RectangleI.Zero;
-			}
+		if (dxabs > dyabs) {
+			coords = new PointI[dxabs + 1];
 
-			int left = rects[startIndex].Left;
-			int top = rects[startIndex].Top;
-			int right = rects[startIndex].Right;
-			int bottom = rects[startIndex].Bottom;
+			for (int i = 0; i <= dxabs; i++) {
+				y += dyabs;
 
-			for (int i = startIndex + 1; i < startIndex + length; ++i) {
-				RectangleI rect = rects[i];
-
-				if (rect.Left < left) {
-					left = rect.Left;
-				}
-
-				if (rect.Top < top) {
-					top = rect.Top;
-				}
-
-				if (rect.Right > right) {
-					right = rect.Right;
-				}
-
-				if (rect.Bottom > bottom) {
-					bottom = rect.Bottom;
-				}
-			}
-
-			return RectangleI.FromLTRB (left, top, right, bottom);
-		}
-
-		public static int ColorDifference (ColorBgra a, ColorBgra b)
-		{
-			return (int) Math.Ceiling (Math.Sqrt (ColorDifferenceSquared (a, b)));
-		}
-
-		public static int ColorDifferenceSquared (ColorBgra a, ColorBgra b)
-		{
-			int diffSq = 0, tmp;
-
-			tmp = a.R - b.R;
-			diffSq += tmp * tmp;
-			tmp = a.G - b.G;
-			diffSq += tmp * tmp;
-			tmp = a.B - b.B;
-			diffSq += tmp * tmp;
-
-			return diffSq / 3;
-		}
-
-		public static RectangleI[] InflateRectangles (RectangleI[] rects, int len)
-		{
-			RectangleI[] inflated = new RectangleI[rects.Length];
-
-			for (int i = 0; i < rects.Length; ++i)
-				inflated[i] = new RectangleI (rects[i].X - len, rects[i].Y - len, rects[i].Width + 2 * len, rects[i].Height + 2 * len);
-
-			return inflated;
-		}
-
-		public static string GetStaticName (Type type)
-		{
-			var pi = type.GetProperty ("StaticName", BindingFlags.Static | BindingFlags.Public | BindingFlags.GetProperty);
-
-			if (pi != null)
-				return (pi.GetValue (null, null) as string) ?? type.Name;
-
-			return type.Name;
-		}
-
-		public static byte FastScaleByteByByte (byte a, byte b)
-		{
-			int r1 = a * b + 0x80;
-			int r2 = ((r1 >> 8) + r1) >> 8;
-			return (byte) r2;
-		}
-
-		public static PointI[] GetLinePoints (PointI first, PointI second)
-		{
-			PointI[]? coords = null;
-
-			int x1 = first.X;
-			int y1 = first.Y;
-			int x2 = second.X;
-			int y2 = second.Y;
-			int dx = x2 - x1;
-			int dy = y2 - y1;
-			int dxabs = Math.Abs (dx);
-			int dyabs = Math.Abs (dy);
-			int px = x1;
-			int py = y1;
-			int sdx = Math.Sign (dx);
-			int sdy = Math.Sign (dy);
-			int x = 0;
-			int y = 0;
-
-			if (dxabs > dyabs) {
-				coords = new PointI[dxabs + 1];
-
-				for (int i = 0; i <= dxabs; i++) {
-					y += dyabs;
-
-					if (y >= dxabs) {
-						y -= dxabs;
-						py += sdy;
-					}
-
-					coords[i] = new PointI (px, py);
-					px += sdx;
-				}
-			} else
-			    // had to add in this cludge for slopes of 1 ... wasn't drawing half the line
-			    if (dxabs == dyabs) {
-				coords = new PointI[dxabs + 1];
-
-				for (int i = 0; i <= dxabs; i++) {
-					coords[i] = new PointI (px, py);
-					px += sdx;
+				if (y >= dxabs) {
+					y -= dxabs;
 					py += sdy;
 				}
-			} else {
-				coords = new PointI[dyabs + 1];
 
-				for (int i = 0; i <= dyabs; i++) {
-					x += dxabs;
+				coords[i] = new PointI (px, py);
+				px += sdx;
+			}
+		} else
+		    // had to add in this cludge for slopes of 1 ... wasn't drawing half the line
+		    if (dxabs == dyabs) {
+			coords = new PointI[dxabs + 1];
 
-					if (x >= dyabs) {
-						x -= dyabs;
-						px += sdx;
-					}
+			for (int i = 0; i <= dxabs; i++) {
+				coords[i] = new PointI (px, py);
+				px += sdx;
+				py += sdy;
+			}
+		} else {
+			coords = new PointI[dyabs + 1];
 
-					coords[i] = new PointI (px, py);
-					py += sdy;
+			for (int i = 0; i <= dyabs; i++) {
+				x += dxabs;
+
+				if (x >= dyabs) {
+					x -= dyabs;
+					px += sdx;
 				}
-			}
 
-			return coords;
-		}
-
-		public static void GetRgssOffsets (Span<PointD> samplesArray, int sampleCount, int quality)
-		{
-			if (sampleCount < 1) {
-				throw new ArgumentOutOfRangeException (
-					nameof (sampleCount),
-					$"{nameof (sampleCount)} must be [0, int.MaxValue]"
-				);
-			}
-
-			if (sampleCount != quality * quality) {
-				throw new ArgumentException ($"{nameof (sampleCount)} != ({nameof (quality)} * {nameof (quality)})");
-			}
-
-			if (sampleCount == 1) {
-				samplesArray[0] = new PointD (0.0, 0.0);
-			} else {
-				for (int i = 0; i < sampleCount; ++i) {
-					double y = (i + 1d) / (sampleCount + 1d);
-					double x = y * quality;
-
-					x -= (int) x;
-
-					samplesArray[i] = new PointD (x - 0.5d, y - 0.5d);
-				}
+				coords[i] = new PointI (px, py);
+				py += sdy;
 			}
 		}
 
-		public static int FastDivideShortByByte (ushort n, byte d)
-		{
-			int i = d * 3;
-			uint m = masTable[i];
-			uint a = masTable[i + 1];
-			uint s = masTable[i + 2];
+		return coords;
+	}
 
-			uint nTimesMPlusA = unchecked((n * m) + a);
-			uint shifted = nTimesMPlusA >> (int) s;
-			int r = (int) shifted;
-
-			return r;
+	public static void GetRgssOffsets (Span<PointD> samplesArray, int sampleCount, int quality)
+	{
+		if (sampleCount < 1) {
+			throw new ArgumentOutOfRangeException (
+				nameof (sampleCount),
+				$"{nameof (sampleCount)} must be [0, int.MaxValue]"
+			);
 		}
 
-		// i = z * 3;
-		// (x / z) = ((x * masTable[i]) + masTable[i + 1]) >> masTable[i + 2)
-		private static readonly uint[] masTable =
-		{
-	    0x00000000, 0x00000000, 0,  // 0
+		if (sampleCount != quality * quality) {
+			throw new ArgumentException ($"{nameof (sampleCount)} != ({nameof (quality)} * {nameof (quality)})");
+		}
+
+		if (sampleCount == 1) {
+			samplesArray[0] = new PointD (0.0, 0.0);
+		} else {
+			for (int i = 0; i < sampleCount; ++i) {
+				double y = (i + 1d) / (sampleCount + 1d);
+				double x = y * quality;
+
+				x -= (int) x;
+
+				samplesArray[i] = new PointD (x - 0.5d, y - 0.5d);
+			}
+		}
+	}
+
+	public static int FastDivideShortByByte (ushort n, byte d)
+	{
+		int i = d * 3;
+		uint m = masTable[i];
+		uint a = masTable[i + 1];
+		uint s = masTable[i + 2];
+
+		uint nTimesMPlusA = unchecked((n * m) + a);
+		uint shifted = nTimesMPlusA >> (int) s;
+		int r = (int) shifted;
+
+		return r;
+	}
+
+	// i = z * 3;
+	// (x / z) = ((x * masTable[i]) + masTable[i + 1]) >> masTable[i + 2)
+	private static readonly uint[] masTable =
+	{
+    0x00000000, 0x00000000, 0,  // 0
             0x00000001, 0x00000000, 0,  // 1
             0x00000001, 0x00000000, 1,  // 2
             0xAAAAAAAB, 0x00000000, 33, // 3
@@ -586,26 +586,25 @@ namespace Pinta.Core
             0x80808081, 0x00000000, 39  // 255
         };
 
-		/// <summary>
-		/// Gets the nearest step angle in radians.
-		/// </summary>
-		/// <returns>The nearest step angle in radians.</returns>
-		/// <param name="angle">Angle in radians.</param>
-		/// <param name="steps">Number of steps to divide the circle.</param>
-		public static double GetNearestStepAngle (double angle, int steps)
-		{
-			double fullTurn = 2 * Math.PI;
-			double stepAngle = fullTurn / steps;
-			double normalizedAngle = angle % fullTurn;
-			int sector = Convert.ToInt32 (Math.Truncate ((normalizedAngle % fullTurn) / stepAngle));
+	/// <summary>
+	/// Gets the nearest step angle in radians.
+	/// </summary>
+	/// <returns>The nearest step angle in radians.</returns>
+	/// <param name="angle">Angle in radians.</param>
+	/// <param name="steps">Number of steps to divide the circle.</param>
+	public static double GetNearestStepAngle (double angle, int steps)
+	{
+		double fullTurn = 2 * Math.PI;
+		double stepAngle = fullTurn / steps;
+		double normalizedAngle = angle % fullTurn;
+		int sector = Convert.ToInt32 (Math.Truncate ((normalizedAngle % fullTurn) / stepAngle));
 
-			var leftStepAngle = sector * stepAngle;
-			var rightStepAngle = (sector + 1) * stepAngle;
+		var leftStepAngle = sector * stepAngle;
+		var rightStepAngle = (sector + 1) * stepAngle;
 
-			if ((angle - leftStepAngle) < (rightStepAngle - angle))
-				return leftStepAngle;
-			else
-				return rightStepAngle;
-		}
+		if ((angle - leftStepAngle) < (rightStepAngle - angle))
+			return leftStepAngle;
+		else
+			return rightStepAngle;
 	}
 }
