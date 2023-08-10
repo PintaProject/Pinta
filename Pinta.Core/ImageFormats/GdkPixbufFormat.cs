@@ -27,66 +27,65 @@
 using System;
 using GdkPixbuf;
 
-namespace Pinta.Core
+namespace Pinta.Core;
+
+public class GdkPixbufFormat : IImageImporter, IImageExporter
 {
-	public class GdkPixbufFormat : IImageImporter, IImageExporter
+	private readonly string filetype;
+
+	public GdkPixbufFormat (string filetype)
 	{
-		private readonly string filetype;
+		this.filetype = filetype;
+	}
 
-		public GdkPixbufFormat (string filetype)
-		{
-			this.filetype = filetype;
-		}
+	#region IImageImporter implementation
 
-		#region IImageImporter implementation
+	public void Import (Gio.File file, Gtk.Window parent)
+	{
+		Pixbuf bg;
 
-		public void Import (Gio.File file, Gtk.Window parent)
-		{
-			Pixbuf bg;
-
-			// Handle any EXIF orientation flags
-			using (var fs = file.Read (cancellable: null)) {
-				try {
-					bg = Pixbuf.NewFromStream (fs, cancellable: null);
-				} finally {
-					fs.Close (null);
-				}
-			}
-
-			bg = bg.ApplyEmbeddedOrientation () ?? bg;
-
-			Size imagesize = new Size (bg.Width, bg.Height);
-
-			Document doc = PintaCore.Workspace.CreateAndActivateDocument (file, filetype, imagesize);
-			doc.ImageSize = imagesize;
-			doc.Workspace.ViewSize = imagesize;
-
-			Layer layer = doc.Layers.AddNewLayer (file.GetDisplayName ());
-
-			var g = new Cairo.Context (layer.Surface);
-			g.DrawPixbuf (bg, 0, 0);
-		}
-		#endregion
-
-		protected virtual void DoSave (Pixbuf pb, Gio.File file, string fileType, Gtk.Window parent)
-		{
-			using var stream = file.Replace ();
+		// Handle any EXIF orientation flags
+		using (var fs = file.Read (cancellable: null)) {
 			try {
-				pb.SaveToStreamv (stream, fileType,
-						optionKeys: Array.Empty<string> (),
-						optionValues: Array.Empty<string> (),
-						cancellable: null);
+				bg = Pixbuf.NewFromStream (fs, cancellable: null);
 			} finally {
-				stream.Close (null);
+				fs.Close (null);
 			}
 		}
 
-		public void Export (Document document, Gio.File file, Gtk.Window parent)
-		{
-			var surf = document.GetFlattenedImage ();
+		bg = bg.ApplyEmbeddedOrientation () ?? bg;
 
-			using Pixbuf pb = surf.ToPixbuf ();
-			DoSave (pb, file, filetype, parent);
+		Size imagesize = new Size (bg.Width, bg.Height);
+
+		Document doc = PintaCore.Workspace.CreateAndActivateDocument (file, filetype, imagesize);
+		doc.ImageSize = imagesize;
+		doc.Workspace.ViewSize = imagesize;
+
+		Layer layer = doc.Layers.AddNewLayer (file.GetDisplayName ());
+
+		var g = new Cairo.Context (layer.Surface);
+		g.DrawPixbuf (bg, 0, 0);
+	}
+	#endregion
+
+	protected virtual void DoSave (Pixbuf pb, Gio.File file, string fileType, Gtk.Window parent)
+	{
+		using var stream = file.Replace ();
+		try {
+			pb.SaveToStreamv (stream, fileType,
+					optionKeys: Array.Empty<string> (),
+					optionValues: Array.Empty<string> (),
+					cancellable: null);
+		} finally {
+			stream.Close (null);
 		}
+	}
+
+	public void Export (Document document, Gio.File file, Gtk.Window parent)
+	{
+		var surf = document.GetFlattenedImage ();
+
+		using Pixbuf pb = surf.ToPixbuf ();
+		DoSave (pb, file, filetype, parent);
 	}
 }
