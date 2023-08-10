@@ -30,7 +30,7 @@ namespace Pinta.MacInterop
 {
 	public static class ApplicationEvents
 	{
-		static readonly object lockObj = new ();
+		static readonly object lock_obj = new ();
 
 		#region Quit
 
@@ -42,14 +42,14 @@ namespace Pinta.MacInterop
 
 		public static event EventHandler<ApplicationQuitEventArgs> Quit {
 			add {
-				lock (lockObj) {
+				lock (lock_obj) {
 					quit += value;
 					if (quitHandlerRef == IntPtr.Zero)
 						quitHandlerRef = Carbon.InstallApplicationEventHandler (quit_delegate, CarbonEventApple.QuitApplication);
 				}
 			}
 			remove {
-				lock (lockObj) {
+				lock (lock_obj) {
 					quit -= value;
 					if (quit == null && quitHandlerRef != IntPtr.Zero) {
 						Carbon.RemoveEventHandler (quitHandlerRef);
@@ -76,14 +76,14 @@ namespace Pinta.MacInterop
 
 		public static event EventHandler<ApplicationEventArgs> Reopen {
 			add {
-				lock (lockObj) {
+				lock (lock_obj) {
 					reopen += value;
 					if (reopenHandlerRef == IntPtr.Zero)
 						reopenHandlerRef = Carbon.InstallApplicationEventHandler (reopen_delegate, CarbonEventApple.ReopenApplication);
 				}
 			}
 			remove {
-				lock (lockObj) {
+				lock (lock_obj) {
 					reopen -= value;
 					if (reopen == null && reopenHandlerRef != IntPtr.Zero) {
 						Carbon.RemoveEventHandler (reopenHandlerRef);
@@ -110,14 +110,14 @@ namespace Pinta.MacInterop
 
 		public static event EventHandler<ApplicationDocumentEventArgs> OpenDocuments {
 			add {
-				lock (lockObj) {
+				lock (lock_obj) {
 					openDocuments += value;
 					if (openDocumentsHandlerRef == IntPtr.Zero)
 						openDocumentsHandlerRef = Carbon.InstallApplicationEventHandler (open_delegate, CarbonEventApple.OpenDocuments);
 				}
 			}
 			remove {
-				lock (lockObj) {
+				lock (lock_obj) {
 					openDocuments -= value;
 					if (openDocuments == null && openDocumentsHandlerRef != IntPtr.Zero) {
 						Carbon.RemoveEventHandler (openDocumentsHandlerRef);
@@ -150,7 +150,7 @@ namespace Pinta.MacInterop
 
 		public static event EventHandler<ApplicationUrlEventArgs> OpenUrls {
 			add {
-				lock (lockObj) {
+				lock (lock_obj) {
 					openUrls += value;
 					if (openUrlsHandlerRef == IntPtr.Zero)
 						openUrlsHandlerRef = Carbon.InstallApplicationEventHandler (open_urls_delegate,
@@ -163,7 +163,7 @@ namespace Pinta.MacInterop
 				}
 			}
 			remove {
-				lock (lockObj) {
+				lock (lock_obj) {
 					openUrls -= value;
 					if (openUrls == null && openUrlsHandlerRef != IntPtr.Zero) {
 						Carbon.RemoveEventHandler (openUrlsHandlerRef);
@@ -196,12 +196,12 @@ namespace Pinta.MacInterop
 		internal CarbonEventHandlerStatus HandledStatus => Handled ? CarbonEventHandlerStatus.Handled : CarbonEventHandlerStatus.NotHandled;
 	}
 
-	public class ApplicationQuitEventArgs : ApplicationEventArgs
+	public sealed class ApplicationQuitEventArgs : ApplicationEventArgs
 	{
 		public bool UserCancelled { get; set; }
 	}
 
-	public class ApplicationDocumentEventArgs : ApplicationEventArgs
+	public sealed class ApplicationDocumentEventArgs : ApplicationEventArgs
 	{
 		public ApplicationDocumentEventArgs (IDictionary<string, int> documents)
 		{
@@ -211,7 +211,7 @@ namespace Pinta.MacInterop
 		public IDictionary<string, int> Documents { get; }
 	}
 
-	public class ApplicationUrlEventArgs : ApplicationEventArgs
+	public sealed class ApplicationUrlEventArgs : ApplicationEventArgs
 	{
 		public ApplicationUrlEventArgs (IList<string> urls)
 		{
