@@ -29,106 +29,105 @@ using System;
 using Gtk;
 using Pinta.Core;
 
-namespace Pinta.Gui.Widgets
+namespace Pinta.Gui.Widgets;
+
+public sealed class HistoryListView : ScrolledWindow
 {
-	public class HistoryListView : ScrolledWindow
+	private readonly ListView view;
+	private readonly Gio.ListStore model;
+	private readonly Gtk.SingleSelection selection_model;
+	private readonly Gtk.SignalListItemFactory factory;
+	private Document? active_document;
+
+	public HistoryListView ()
 	{
-		private readonly ListView view;
-		private readonly Gio.ListStore model;
-		private readonly Gtk.SingleSelection selection_model;
-		private readonly Gtk.SignalListItemFactory factory;
-		private Document? active_document;
+		CanFocus = false;
+		SetSizeRequest (200, 200);
+		SetPolicy (PolicyType.Automatic, PolicyType.Automatic);
 
-		public HistoryListView ()
-		{
-			CanFocus = false;
-			SetSizeRequest (200, 200);
-			SetPolicy (PolicyType.Automatic, PolicyType.Automatic);
+		model = Gio.ListStore.New (HistoryListViewItem.GetGType ());
 
-			model = Gio.ListStore.New (HistoryListViewItem.GetGType ());
+		selection_model = Gtk.SingleSelection.New (model);
+		selection_model.OnSelectionChanged ((o, args) => HandleSelectionChanged (o, args));
 
-			selection_model = Gtk.SingleSelection.New (model);
-			selection_model.OnSelectionChanged ((o, args) => HandleSelectionChanged (o, args));
+		factory = Gtk.SignalListItemFactory.New ();
+		factory.OnSetup += (factory, args) => {
+			var item = (Gtk.ListItem) args.Object;
+			item.SetChild (new HistoryItemWidget ());
+		};
+		factory.OnBind += (factory, args) => {
+			var list_item = (Gtk.ListItem) args.Object;
+			var model_item = (HistoryListViewItem) list_item.GetItem ()!;
+			var widget = (HistoryItemWidget) list_item.GetChild ()!;
+			widget.Update (model_item);
+		};
 
-			factory = Gtk.SignalListItemFactory.New ();
-			factory.OnSetup += (factory, args) => {
-				var item = (Gtk.ListItem) args.Object;
-				item.SetChild (new HistoryItemWidget ());
-			};
-			factory.OnBind += (factory, args) => {
-				var list_item = (Gtk.ListItem) args.Object;
-				var model_item = (HistoryListViewItem) list_item.GetItem ()!;
-				var widget = (HistoryItemWidget) list_item.GetChild ()!;
-				widget.Update (model_item);
-			};
+		view = ListView.New (selection_model, factory);
+		view.CanFocus = false;
 
-			view = ListView.New (selection_model, factory);
-			view.CanFocus = false;
+		SetChild (view);
 
-			SetChild (view);
+		PintaCore.Workspace.ActiveDocumentChanged += OnActiveDocumentChanged;
+	}
 
-			PintaCore.Workspace.ActiveDocumentChanged += OnActiveDocumentChanged;
+	private void HandleSelectionChanged (object? sender, GtkExtensions.SelectionChangedSignalArgs e)
+	{
+		ArgumentNullException.ThrowIfNull (active_document);
+
+		int index = (int) selection_model.Selected;
+		while (active_document.History.Pointer < index)
+			active_document.History.Redo ();
+		while (active_document.History.Pointer > index)
+			active_document.History.Undo ();
+	}
+
+	private void OnActiveDocumentChanged (object? sender, EventArgs e)
+	{
+		var doc = PintaCore.Workspace.HasOpenDocuments ? PintaCore.Workspace.ActiveDocument : null;
+		if (active_document == doc)
+			return;
+
+		if (active_document is not null) {
+			active_document.History.HistoryItemAdded -= OnHistoryItemAdded;
+			active_document.History.ActionUndone -= OnUndoOrRedo;
+			active_document.History.ActionRedone -= OnUndoOrRedo;
 		}
 
-		private void HandleSelectionChanged (object? sender, GtkExtensions.SelectionChangedSignalArgs e)
-		{
-			ArgumentNullException.ThrowIfNull (active_document);
+		// Clear out old items and rebuild.
+		model.RemoveMultiple (0, model.GetNItems ());
 
-			int index = (int) selection_model.Selected;
-			while (active_document.History.Pointer < index)
-				active_document.History.Redo ();
-			while (active_document.History.Pointer > index)
-				active_document.History.Undo ();
-		}
-
-		private void OnActiveDocumentChanged (object? sender, EventArgs e)
-		{
-			var doc = PintaCore.Workspace.HasOpenDocuments ? PintaCore.Workspace.ActiveDocument : null;
-			if (active_document == doc)
-				return;
-
-			if (active_document is not null) {
-				active_document.History.HistoryItemAdded -= OnHistoryItemAdded;
-				active_document.History.ActionUndone -= OnUndoOrRedo;
-				active_document.History.ActionRedone -= OnUndoOrRedo;
+		if (doc is not null) {
+			foreach (BaseHistoryItem item in doc.History.Items) {
+				model.Append (new HistoryListViewItem (item));
 			}
 
-			// Clear out old items and rebuild.
-			model.RemoveMultiple (0, model.GetNItems ());
-
-			if (doc is not null) {
-				foreach (BaseHistoryItem item in doc.History.Items) {
-					model.Append (new HistoryListViewItem (item));
-				}
-
-				doc.History.HistoryItemAdded += OnHistoryItemAdded;
-				doc.History.ActionUndone += OnUndoOrRedo;
-				doc.History.ActionRedone += OnUndoOrRedo;
-			}
-
-			active_document = doc;
+			doc.History.HistoryItemAdded += OnHistoryItemAdded;
+			doc.History.ActionUndone += OnUndoOrRedo;
+			doc.History.ActionRedone += OnUndoOrRedo;
 		}
 
-		private void OnHistoryItemAdded (object? sender, HistoryItemAddedEventArgs args)
-		{
-			ArgumentNullException.ThrowIfNull (active_document);
+		active_document = doc;
+	}
 
-			uint idx = (uint) active_document.History.Pointer;
+	private void OnHistoryItemAdded (object? sender, HistoryItemAddedEventArgs args)
+	{
+		ArgumentNullException.ThrowIfNull (active_document);
 
-			// Remove any stale (previously undone) items before adding the new item.
-			model.RemoveMultiple (idx, model.GetNItems () - idx);
+		uint idx = (uint) active_document.History.Pointer;
 
-			model.Append (new HistoryListViewItem (args.Item));
-			selection_model.SetSelected (idx);
-		}
+		// Remove any stale (previously undone) items before adding the new item.
+		model.RemoveMultiple (idx, model.GetNItems () - idx);
 
-		private void OnUndoOrRedo (object? sender, EventArgs args)
-		{
-			ArgumentNullException.ThrowIfNull (active_document);
+		model.Append (new HistoryListViewItem (args.Item));
+		selection_model.SetSelected (idx);
+	}
 
-			// Update the selected history item.
-			uint selected_idx = (uint) active_document.History.Pointer;
-			selection_model.SetSelected (selected_idx);
-		}
+	private void OnUndoOrRedo (object? sender, EventArgs args)
+	{
+		ArgumentNullException.ThrowIfNull (active_document);
+
+		// Update the selected history item.
+		uint selected_idx = (uint) active_document.History.Pointer;
+		selection_model.SetSelected (selected_idx);
 	}
 }
