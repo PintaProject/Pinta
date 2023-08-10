@@ -152,54 +152,54 @@ namespace Pinta.Gui.Widgets
 
 		private static ImmutableArray<int> CreateLookupX (int srcWidth, int dstWidth, ScaleFactor scaleFactor)
 		{
-			var lookup = new int[dstWidth + 1];
+			var lookup = ImmutableArray.CreateBuilder<int> (dstWidth + 1);
 
 			// Sometimes the scale factor is slightly different on one axis than
 			// on another, simply due to accuracy. So we have to clamp this value to
 			// be within bounds.
-			for (var x = 0; x < lookup.Length; ++x)
+			for (var x = 0; x < lookup.Count; ++x)
 				lookup[x] = Utility.Clamp (scaleFactor.ScaleScalar (x), 0, srcWidth - 1);
 
-			return lookup.ToImmutableArray ();
+			return lookup.MoveToImmutable ();
 		}
 
 		private static ImmutableArray<int> CreateLookupY (int srcHeight, int dstHeight, ScaleFactor scaleFactor)
 		{
-			var lookup = new int[dstHeight + 1];
+			var lookup = ImmutableArray.CreateBuilder<int> (dstHeight + 1); ;
 
 			// Sometimes the scale factor is slightly different on one axis than
 			// on another, simply due to accuracy. So we have to clamp this value to
 			// be within bounds.
-			for (var y = 0; y < lookup.Length; ++y)
+			for (var y = 0; y < lookup.Count; ++y)
 				lookup[y] = Utility.Clamp (scaleFactor.ScaleScalar (y), 0, srcHeight - 1);
 
-			return lookup.ToImmutableArray ();
+			return lookup.MoveToImmutable ();
 		}
 
 		private static ImmutableArray<int> CreateS2DLookupX (int srcWidth, int dstWidth, ScaleFactor scaleFactor)
 		{
-			var lookup = new int[srcWidth + 1];
+			var lookup = ImmutableArray.CreateBuilder<int> (srcWidth + 1);
 
 			// Sometimes the scale factor is slightly different on one axis than
 			// on another, simply due to accuracy. So we have to clamp this value to
 			// be within bounds.
-			for (var x = 0; x < lookup.Length; ++x)
+			for (var x = 0; x < lookup.Count; ++x)
 				lookup[x] = Utility.Clamp (scaleFactor.UnscaleScalar (x), 0, dstWidth - 1);
 
-			return lookup.ToImmutableArray ();
+			return lookup.MoveToImmutable ();
 		}
 
 		private static ImmutableArray<int> CreateS2DLookupY (int srcHeight, int dstHeight, ScaleFactor scaleFactor)
 		{
-			var lookup = new int[srcHeight + 1];
+			var lookup = ImmutableArray.CreateBuilder<int> (srcHeight + 1);
 
 			// Sometimes the scale factor is slightly different on one axis than
 			// on another, simply due to accuracy. So we have to clamp this value to
 			// be within bounds.
-			for (var y = 0; y < lookup.Length; ++y)
+			for (var y = 0; y < lookup.Count; ++y)
 				lookup[y] = Utility.Clamp (scaleFactor.UnscaleScalar (y), 0, dstHeight - 1);
 
-			return lookup.ToImmutableArray ();
+			return lookup.MoveToImmutable ();
 		}
 		#endregion
 	}
