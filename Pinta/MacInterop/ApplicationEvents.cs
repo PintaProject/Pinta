@@ -26,199 +26,198 @@
 using System;
 using System.Collections.Generic;
 
-namespace Pinta.MacInterop
+namespace Pinta.MacInterop;
+
+public static class ApplicationEvents
 {
-	public static class ApplicationEvents
+	static readonly object lock_obj = new ();
+
+	#region Quit
+
+	static EventHandler<ApplicationQuitEventArgs>? quit;
+	// Create a delegate instance with static lifetime to avoid the GC destroying it.
+	// The delegate can be invoked by native code at any point.
+	private static readonly EventDelegate quit_delegate = HandleQuit;
+	static IntPtr quitHandlerRef = IntPtr.Zero;
+
+	public static event EventHandler<ApplicationQuitEventArgs> Quit {
+		add {
+			lock (lock_obj) {
+				quit += value;
+				if (quitHandlerRef == IntPtr.Zero)
+					quitHandlerRef = Carbon.InstallApplicationEventHandler (quit_delegate, CarbonEventApple.QuitApplication);
+			}
+		}
+		remove {
+			lock (lock_obj) {
+				quit -= value;
+				if (quit == null && quitHandlerRef != IntPtr.Zero) {
+					Carbon.RemoveEventHandler (quitHandlerRef);
+					quitHandlerRef = IntPtr.Zero;
+				}
+			}
+		}
+	}
+
+	static CarbonEventHandlerStatus HandleQuit (IntPtr callRef, IntPtr eventRef, IntPtr user_data)
 	{
-		static readonly object lock_obj = new ();
+		var args = new ApplicationQuitEventArgs ();
+		quit?.Invoke (null, args);
+		return args.UserCancelled ? CarbonEventHandlerStatus.UserCancelled : args.HandledStatus;
+	}
 
-		#region Quit
+	#endregion
 
-		static EventHandler<ApplicationQuitEventArgs>? quit;
-		// Create a delegate instance with static lifetime to avoid the GC destroying it.
-		// The delegate can be invoked by native code at any point.
-		private static readonly EventDelegate quit_delegate = HandleQuit;
-		static IntPtr quitHandlerRef = IntPtr.Zero;
+	#region Reopen
 
-		public static event EventHandler<ApplicationQuitEventArgs> Quit {
-			add {
-				lock (lock_obj) {
-					quit += value;
-					if (quitHandlerRef == IntPtr.Zero)
-						quitHandlerRef = Carbon.InstallApplicationEventHandler (quit_delegate, CarbonEventApple.QuitApplication);
-				}
+	static EventHandler<ApplicationEventArgs>? reopen;
+	private static readonly EventDelegate reopen_delegate = HandleReopen;
+	static IntPtr reopenHandlerRef = IntPtr.Zero;
+
+	public static event EventHandler<ApplicationEventArgs> Reopen {
+		add {
+			lock (lock_obj) {
+				reopen += value;
+				if (reopenHandlerRef == IntPtr.Zero)
+					reopenHandlerRef = Carbon.InstallApplicationEventHandler (reopen_delegate, CarbonEventApple.ReopenApplication);
 			}
-			remove {
-				lock (lock_obj) {
-					quit -= value;
-					if (quit == null && quitHandlerRef != IntPtr.Zero) {
-						Carbon.RemoveEventHandler (quitHandlerRef);
-						quitHandlerRef = IntPtr.Zero;
-					}
+		}
+		remove {
+			lock (lock_obj) {
+				reopen -= value;
+				if (reopen == null && reopenHandlerRef != IntPtr.Zero) {
+					Carbon.RemoveEventHandler (reopenHandlerRef);
+					reopenHandlerRef = IntPtr.Zero;
 				}
 			}
 		}
+	}
 
-		static CarbonEventHandlerStatus HandleQuit (IntPtr callRef, IntPtr eventRef, IntPtr user_data)
-		{
-			var args = new ApplicationQuitEventArgs ();
-			quit?.Invoke (null, args);
-			return args.UserCancelled ? CarbonEventHandlerStatus.UserCancelled : args.HandledStatus;
-		}
+	static CarbonEventHandlerStatus HandleReopen (IntPtr callRef, IntPtr eventRef, IntPtr user_data)
+	{
+		var args = new ApplicationEventArgs ();
+		reopen?.Invoke (null, args);
+		return args.HandledStatus;
+	}
 
-		#endregion
+	#endregion
 
-		#region Reopen
+	#region OpenDocuments
 
-		static EventHandler<ApplicationEventArgs>? reopen;
-		private static readonly EventDelegate reopen_delegate = HandleReopen;
-		static IntPtr reopenHandlerRef = IntPtr.Zero;
+	static EventHandler<ApplicationDocumentEventArgs>? openDocuments;
+	private static readonly EventDelegate open_delegate = HandleOpenDocuments;
+	static IntPtr openDocumentsHandlerRef = IntPtr.Zero;
 
-		public static event EventHandler<ApplicationEventArgs> Reopen {
-			add {
-				lock (lock_obj) {
-					reopen += value;
-					if (reopenHandlerRef == IntPtr.Zero)
-						reopenHandlerRef = Carbon.InstallApplicationEventHandler (reopen_delegate, CarbonEventApple.ReopenApplication);
-				}
-			}
-			remove {
-				lock (lock_obj) {
-					reopen -= value;
-					if (reopen == null && reopenHandlerRef != IntPtr.Zero) {
-						Carbon.RemoveEventHandler (reopenHandlerRef);
-						reopenHandlerRef = IntPtr.Zero;
-					}
-				}
+	public static event EventHandler<ApplicationDocumentEventArgs> OpenDocuments {
+		add {
+			lock (lock_obj) {
+				openDocuments += value;
+				if (openDocumentsHandlerRef == IntPtr.Zero)
+					openDocumentsHandlerRef = Carbon.InstallApplicationEventHandler (open_delegate, CarbonEventApple.OpenDocuments);
 			}
 		}
+		remove {
+			lock (lock_obj) {
+				openDocuments -= value;
+				if (openDocuments == null && openDocumentsHandlerRef != IntPtr.Zero) {
+					Carbon.RemoveEventHandler (openDocumentsHandlerRef);
+					openDocumentsHandlerRef = IntPtr.Zero;
+				}
+			}
+		}
+	}
 
-		static CarbonEventHandlerStatus HandleReopen (IntPtr callRef, IntPtr eventRef, IntPtr user_data)
-		{
-			var args = new ApplicationEventArgs ();
-			reopen?.Invoke (null, args);
+	static CarbonEventHandlerStatus HandleOpenDocuments (IntPtr callRef, IntPtr eventRef, IntPtr user_data)
+	{
+		try {
+			var docs = Carbon.GetFileListFromEventRef (eventRef);
+			var args = new ApplicationDocumentEventArgs (docs);
+			openDocuments?.Invoke (null, args);
 			return args.HandledStatus;
+		} catch (Exception ex) {
+			System.Console.WriteLine (ex);
+			return CarbonEventHandlerStatus.NotHandled;
 		}
+	}
 
-		#endregion
+	#endregion
 
-		#region OpenDocuments
+	#region OpenUrls
 
-		static EventHandler<ApplicationDocumentEventArgs>? openDocuments;
-		private static readonly EventDelegate open_delegate = HandleOpenDocuments;
-		static IntPtr openDocumentsHandlerRef = IntPtr.Zero;
+	static EventHandler<ApplicationUrlEventArgs>? openUrls;
+	private static readonly EventDelegate open_urls_delegate = HandleOpenUrls;
+	static IntPtr openUrlsHandlerRef = IntPtr.Zero;
 
-		public static event EventHandler<ApplicationDocumentEventArgs> OpenDocuments {
-			add {
-				lock (lock_obj) {
-					openDocuments += value;
-					if (openDocumentsHandlerRef == IntPtr.Zero)
-						openDocumentsHandlerRef = Carbon.InstallApplicationEventHandler (open_delegate, CarbonEventApple.OpenDocuments);
-				}
-			}
-			remove {
-				lock (lock_obj) {
-					openDocuments -= value;
-					if (openDocuments == null && openDocumentsHandlerRef != IntPtr.Zero) {
-						Carbon.RemoveEventHandler (openDocumentsHandlerRef);
-						openDocumentsHandlerRef = IntPtr.Zero;
-					}
-				}
-			}
-		}
-
-		static CarbonEventHandlerStatus HandleOpenDocuments (IntPtr callRef, IntPtr eventRef, IntPtr user_data)
-		{
-			try {
-				var docs = Carbon.GetFileListFromEventRef (eventRef);
-				var args = new ApplicationDocumentEventArgs (docs);
-				openDocuments?.Invoke (null, args);
-				return args.HandledStatus;
-			} catch (Exception ex) {
-				System.Console.WriteLine (ex);
-				return CarbonEventHandlerStatus.NotHandled;
+	public static event EventHandler<ApplicationUrlEventArgs> OpenUrls {
+		add {
+			lock (lock_obj) {
+				openUrls += value;
+				if (openUrlsHandlerRef == IntPtr.Zero)
+					openUrlsHandlerRef = Carbon.InstallApplicationEventHandler (open_urls_delegate,
+						new CarbonEventTypeSpec[] {
+							//For some reason GetUrl doesn't take CarbonEventClass.AppleEvent
+							//need to use GURL, GURL
+							new CarbonEventTypeSpec (CarbonEventClass.Internet, (int)CarbonEventApple.GetUrl)
+						}
+					);
 			}
 		}
-
-		#endregion
-
-		#region OpenUrls
-
-		static EventHandler<ApplicationUrlEventArgs>? openUrls;
-		private static readonly EventDelegate open_urls_delegate = HandleOpenUrls;
-		static IntPtr openUrlsHandlerRef = IntPtr.Zero;
-
-		public static event EventHandler<ApplicationUrlEventArgs> OpenUrls {
-			add {
-				lock (lock_obj) {
-					openUrls += value;
-					if (openUrlsHandlerRef == IntPtr.Zero)
-						openUrlsHandlerRef = Carbon.InstallApplicationEventHandler (open_urls_delegate,
-							new CarbonEventTypeSpec[] {
-								//For some reason GetUrl doesn't take CarbonEventClass.AppleEvent
-								//need to use GURL, GURL
-								new CarbonEventTypeSpec (CarbonEventClass.Internet, (int)CarbonEventApple.GetUrl)
-							}
-						);
-				}
-			}
-			remove {
-				lock (lock_obj) {
-					openUrls -= value;
-					if (openUrls == null && openUrlsHandlerRef != IntPtr.Zero) {
-						Carbon.RemoveEventHandler (openUrlsHandlerRef);
-						openUrlsHandlerRef = IntPtr.Zero;
-					}
+		remove {
+			lock (lock_obj) {
+				openUrls -= value;
+				if (openUrls == null && openUrlsHandlerRef != IntPtr.Zero) {
+					Carbon.RemoveEventHandler (openUrlsHandlerRef);
+					openUrlsHandlerRef = IntPtr.Zero;
 				}
 			}
 		}
+	}
 
-		static CarbonEventHandlerStatus HandleOpenUrls (IntPtr callRef, IntPtr eventRef, IntPtr user_data)
-		{
-			try {
-				var urls = Carbon.GetUrlListFromEventRef (eventRef);
-				var args = new ApplicationUrlEventArgs (urls);
-				openUrls?.Invoke (null, args);
-				return args.HandledStatus;
-			} catch (Exception ex) {
-				System.Console.WriteLine (ex);
-				return CarbonEventHandlerStatus.NotHandled;
-			}
+	static CarbonEventHandlerStatus HandleOpenUrls (IntPtr callRef, IntPtr eventRef, IntPtr user_data)
+	{
+		try {
+			var urls = Carbon.GetUrlListFromEventRef (eventRef);
+			var args = new ApplicationUrlEventArgs (urls);
+			openUrls?.Invoke (null, args);
+			return args.HandledStatus;
+		} catch (Exception ex) {
+			System.Console.WriteLine (ex);
+			return CarbonEventHandlerStatus.NotHandled;
 		}
-
-		#endregion
 	}
 
-	public class ApplicationEventArgs : EventArgs
+	#endregion
+}
+
+public class ApplicationEventArgs : EventArgs
+{
+	public bool Handled { get; set; }
+
+	internal CarbonEventHandlerStatus HandledStatus => Handled ? CarbonEventHandlerStatus.Handled : CarbonEventHandlerStatus.NotHandled;
+}
+
+public sealed class ApplicationQuitEventArgs : ApplicationEventArgs
+{
+	public bool UserCancelled { get; set; }
+}
+
+public sealed class ApplicationDocumentEventArgs : ApplicationEventArgs
+{
+	public ApplicationDocumentEventArgs (IDictionary<string, int> documents)
 	{
-		public bool Handled { get; set; }
-
-		internal CarbonEventHandlerStatus HandledStatus => Handled ? CarbonEventHandlerStatus.Handled : CarbonEventHandlerStatus.NotHandled;
+		this.Documents = documents;
 	}
 
-	public sealed class ApplicationQuitEventArgs : ApplicationEventArgs
+	public IDictionary<string, int> Documents { get; }
+}
+
+public sealed class ApplicationUrlEventArgs : ApplicationEventArgs
+{
+	public ApplicationUrlEventArgs (IList<string> urls)
 	{
-		public bool UserCancelled { get; set; }
+		this.Urls = urls;
 	}
 
-	public sealed class ApplicationDocumentEventArgs : ApplicationEventArgs
-	{
-		public ApplicationDocumentEventArgs (IDictionary<string, int> documents)
-		{
-			this.Documents = documents;
-		}
-
-		public IDictionary<string, int> Documents { get; }
-	}
-
-	public sealed class ApplicationUrlEventArgs : ApplicationEventArgs
-	{
-		public ApplicationUrlEventArgs (IList<string> urls)
-		{
-			this.Urls = urls;
-		}
-
-		public IList<string> Urls { get; }
-	}
+	public IList<string> Urls { get; }
 }
 
