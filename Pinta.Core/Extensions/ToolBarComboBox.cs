@@ -35,11 +35,11 @@ namespace Pinta.Core
 		public ComboBoxText ComboBox { get; }
 
 		public ToolBarComboBox (int width, int activeIndex, bool allowEntry)
-			: this (width, activeIndex, allowEntry, Enumerable.Empty<string>())
+			: this (width, activeIndex, allowEntry, Enumerable.Empty<string> ())
 		{ }
 
 		public ToolBarComboBox (int width, int activeIndex, bool allowEntry, params string[] contents)
-			: this(width, activeIndex, allowEntry, (IEnumerable<string>) contents)
+			: this (width, activeIndex, allowEntry, (IEnumerable<string>) contents)
 		{ }
 
 		public ToolBarComboBox (int width, int activeIndex, bool allowEntry, IEnumerable<string> contents)
