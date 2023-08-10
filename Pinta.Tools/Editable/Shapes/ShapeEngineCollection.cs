@@ -30,212 +30,211 @@ using System.Linq;
 using Cairo;
 using Pinta.Core;
 
-namespace Pinta.Tools
+namespace Pinta.Tools;
+
+public sealed class ShapeEngineCollection : List<ShapeEngine>
 {
-	public sealed class ShapeEngineCollection : List<ShapeEngine>
+	/// <summary>
+	/// A partially cloneable ShapeEngine collection.
+	/// </summary>
+	public ShapeEngineCollection ()
 	{
-		/// <summary>
-		/// A partially cloneable ShapeEngine collection.
-		/// </summary>
-		public ShapeEngineCollection ()
-		{
+	}
+
+	/// <summary>
+	/// A partially cloneable ShapeEngine collection. This constructor creates a partial clone of an existing ShapeEngineCollection.
+	/// </summary>
+	/// <param name="passedCEC">An existing ShapeEngineCollection to partially clone.</param>
+	public ShapeEngineCollection (ShapeEngineCollection passedCEC)
+	{
+		for (int n = 0; n < passedCEC.Count; ++n) {
+			Add (passedCEC[n].Clone ());
 		}
+	}
 
-		/// <summary>
-		/// A partially cloneable ShapeEngine collection. This constructor creates a partial clone of an existing ShapeEngineCollection.
-		/// </summary>
-		/// <param name="passedCEC">An existing ShapeEngineCollection to partially clone.</param>
-		public ShapeEngineCollection (ShapeEngineCollection passedCEC)
-		{
-			for (int n = 0; n < passedCEC.Count; ++n) {
-				Add (passedCEC[n].Clone ());
-			}
-		}
-
-		/// <summary>
-		/// Clone the necessary data in each of the ShapeEngines in the collection.
-		/// </summary>
-		/// <returns>The partially cloned ShapeEngineCollection.</returns>
-		public ShapeEngineCollection PartialClone ()
-		{
-			return new ShapeEngineCollection (this);
-		}
+	/// <summary>
+	/// Clone the necessary data in each of the ShapeEngines in the collection.
+	/// </summary>
+	/// <returns>The partially cloned ShapeEngineCollection.</returns>
+	public ShapeEngineCollection PartialClone ()
+	{
+		return new ShapeEngineCollection (this);
+	}
 
 
-		/// <summary>
-		/// Calculate the closest ControlPoint to currentPoint.
-		/// </summary>
-		/// <param name="currentPoint">The point to calculate the closest ControlPoint to.</param>
-		/// <param name="closestCPShapeIndex">The index of the shape with the closest ControlPoint.</param>
-		/// <param name="closestCPIndex">The index of the closest ControlPoint.</param>
-		/// <param name="closestControlPoint">The closest ControlPoint to currentPoint.</param>
-		/// <param name="closestCPDistance">The closest ControlPoint's distance from currentPoint.</param>
-		public void FindClosestControlPoint (PointD currentPoint,
-			out int closestCPShapeIndex, out int closestCPIndex, out ControlPoint? closestControlPoint, out double closestCPDistance)
-		{
-			closestCPShapeIndex = 0;
-			closestCPIndex = 0;
-			closestControlPoint = null;
-			closestCPDistance = double.MaxValue;
+	/// <summary>
+	/// Calculate the closest ControlPoint to currentPoint.
+	/// </summary>
+	/// <param name="currentPoint">The point to calculate the closest ControlPoint to.</param>
+	/// <param name="closestCPShapeIndex">The index of the shape with the closest ControlPoint.</param>
+	/// <param name="closestCPIndex">The index of the closest ControlPoint.</param>
+	/// <param name="closestControlPoint">The closest ControlPoint to currentPoint.</param>
+	/// <param name="closestCPDistance">The closest ControlPoint's distance from currentPoint.</param>
+	public void FindClosestControlPoint (PointD currentPoint,
+		out int closestCPShapeIndex, out int closestCPIndex, out ControlPoint? closestControlPoint, out double closestCPDistance)
+	{
+		closestCPShapeIndex = 0;
+		closestCPIndex = 0;
+		closestControlPoint = null;
+		closestCPDistance = double.MaxValue;
 
-			double currentDistance;
+		double currentDistance;
 
-			for (int shapeIndex = 0; shapeIndex < Count; ++shapeIndex) {
-				List<ControlPoint> controlPoints = this[shapeIndex].ControlPoints;
+		for (int shapeIndex = 0; shapeIndex < Count; ++shapeIndex) {
+			List<ControlPoint> controlPoints = this[shapeIndex].ControlPoints;
 
-				for (int cPIndex = 0; cPIndex < controlPoints.Count; ++cPIndex) {
-					currentDistance = controlPoints[cPIndex].Position.Distance (currentPoint);
+			for (int cPIndex = 0; cPIndex < controlPoints.Count; ++cPIndex) {
+				currentDistance = controlPoints[cPIndex].Position.Distance (currentPoint);
 
-					if (currentDistance < closestCPDistance) {
-						closestCPShapeIndex = shapeIndex;
-						closestCPIndex = cPIndex;
-						closestControlPoint = controlPoints[cPIndex];
-						closestCPDistance = currentDistance;
-					}
+				if (currentDistance < closestCPDistance) {
+					closestCPShapeIndex = shapeIndex;
+					closestCPIndex = cPIndex;
+					closestControlPoint = controlPoints[cPIndex];
+					closestCPDistance = currentDistance;
 				}
 			}
 		}
 	}
+}
 
-	public abstract class ShapeEngine
+public abstract class ShapeEngine
+{
+	//A collection of the original ControlPoints that the shape is based on and that the user interacts with.
+	public List<ControlPoint> ControlPoints { get; private set; } = new ();
+	public List<MoveHandle> ControlPointHandles { get; private set; } = new ();
+
+	//A collection of calculated GeneratedPoints that make up the entirety of the shape being drawn.
+	public GeneratedPoint[] GeneratedPoints { get; private protected set; } = Array.Empty<GeneratedPoint> ();
+
+	//An organized collection of the GeneratedPoints's points for optimized nearest point detection.
+	public OrganizedPointCollection OrganizedPoints { get; } = new ();
+
+	private readonly UserLayer parent_layer;
+	public ReEditableLayer DrawingLayer { get; }
+
+	public bool AntiAliasing { get; internal set; }
+	public string DashPattern { get; internal set; } = "-";
+	public bool Closed { get; }
+
+	public Color OutlineColor { get; internal set; }
+	public Color FillColor { get; internal set; }
+
+	public int BrushWidth { get; internal set; }
+
+	public BaseEditEngine.ShapeTypes ShapeType { get; }
+
+	/// <summary>
+	/// Create a new ShapeEngine.
+	/// </summary>
+	/// <param name="parent_layer">The parent UserLayer for the ReEditable DrawingLayer.</param>
+	/// <param name="drawing_layer">An existing ReEditableLayer to reuse. This is for cloning only. If not cloning, pass in null.</param>
+	/// <param name="shape_type">The type of shape to create.</param>
+	/// <param name="antialiasing">Whether or not antialiasing is enabled.</param>
+	/// <param name="closed">Whether or not the shape is closed (first and last points are connected).</param>
+	/// <param name="outline_color">The outline color for the shape.</param>
+	/// <param name="fill_color">The fill color for the shape.</param>
+	/// <param name="brush_width">The width of the outline of the shape.</param>
+	public ShapeEngine (UserLayer parent_layer, ReEditableLayer? drawing_layer,
+			    BaseEditEngine.ShapeTypes shape_type, bool antialiasing,
+			    bool closed, Color outline_color, Color fill_color,
+			    int brush_width)
 	{
-		//A collection of the original ControlPoints that the shape is based on and that the user interacts with.
-		public List<ControlPoint> ControlPoints { get; private set; } = new ();
-		public List<MoveHandle> ControlPointHandles { get; private set; } = new ();
+		this.parent_layer = parent_layer;
 
-		//A collection of calculated GeneratedPoints that make up the entirety of the shape being drawn.
-		public GeneratedPoint[] GeneratedPoints { get; private protected set; } = Array.Empty<GeneratedPoint> ();
+		if (drawing_layer == null)
+			DrawingLayer = new ReEditableLayer (parent_layer);
+		else
+			DrawingLayer = drawing_layer;
 
-		//An organized collection of the GeneratedPoints's points for optimized nearest point detection.
-		public OrganizedPointCollection OrganizedPoints { get; } = new ();
+		ShapeType = shape_type;
+		AntiAliasing = antialiasing;
+		Closed = closed;
+		OutlineColor = outline_color;
+		FillColor = fill_color;
+		BrushWidth = brush_width;
+	}
 
-		private readonly UserLayer parent_layer;
-		public ReEditableLayer DrawingLayer { get; }
+	protected ShapeEngine (ShapeEngine src)
+	{
+		DrawingLayer = src.DrawingLayer;
+		ShapeType = src.ShapeType;
+		AntiAliasing = src.AntiAliasing;
+		Closed = src.Closed;
+		OutlineColor = src.OutlineColor;
+		FillColor = src.FillColor;
+		BrushWidth = src.BrushWidth;
 
-		public bool AntiAliasing { get; internal set; }
-		public string DashPattern { get; internal set; } = "-";
-		public bool Closed { get; }
+		// Don't clone the GeneratedPoints or OrganizedPoints, as they will be calculated.
+		ControlPoints = src.ControlPoints.Select (i => i.Clone ()).ToList ();
+		DashPattern = src.DashPattern;
+		parent_layer = null!; // NRT - This constructor needs to set parent_layer somehow as code expects it to be not-null
+	}
 
-		public Color OutlineColor { get; internal set; }
-		public Color FillColor { get; internal set; }
+	public abstract ShapeEngine Clone ();
 
-		public int BrushWidth { get; internal set; }
+	/// <summary>
+	/// Converts the ShapeEngine instance into a new instance of a different
+	/// ShapeEngine (child) type, copying the common data.
+	/// </summary>
+	/// <param name="newShapeType">The new ShapeEngine type to create.</param>
+	/// <param name="shapeIndex">The index to insert the ShapeEngine clone into SEngines at.
+	/// This ensures that the clone is as transparent as possible.</param>
+	/// <returns>A new ShapeEngine instance of the specified type with the common data copied over.</returns>
+	public ShapeEngine Convert (BaseEditEngine.ShapeTypes newShapeType, int shapeIndex)
+	{
+		//Remove the old ShapeEngine instance.
+		BaseEditEngine.SEngines.Remove (this);
 
-		public BaseEditEngine.ShapeTypes ShapeType { get; }
+		ShapeEngine clone;
 
-		/// <summary>
-		/// Create a new ShapeEngine.
-		/// </summary>
-		/// <param name="parent_layer">The parent UserLayer for the ReEditable DrawingLayer.</param>
-		/// <param name="drawing_layer">An existing ReEditableLayer to reuse. This is for cloning only. If not cloning, pass in null.</param>
-		/// <param name="shape_type">The type of shape to create.</param>
-		/// <param name="antialiasing">Whether or not antialiasing is enabled.</param>
-		/// <param name="closed">Whether or not the shape is closed (first and last points are connected).</param>
-		/// <param name="outline_color">The outline color for the shape.</param>
-		/// <param name="fill_color">The fill color for the shape.</param>
-		/// <param name="brush_width">The width of the outline of the shape.</param>
-		public ShapeEngine (UserLayer parent_layer, ReEditableLayer? drawing_layer,
-				    BaseEditEngine.ShapeTypes shape_type, bool antialiasing,
-				    bool closed, Color outline_color, Color fill_color,
-				    int brush_width)
-		{
-			this.parent_layer = parent_layer;
+		switch (newShapeType) {
+			case BaseEditEngine.ShapeTypes.ClosedLineCurveSeries:
+				clone = new LineCurveSeriesEngine (parent_layer, DrawingLayer, newShapeType, AntiAliasing, true,
+				    OutlineColor, FillColor, BrushWidth);
 
-			if (drawing_layer == null)
-				DrawingLayer = new ReEditableLayer (parent_layer);
-			else
-				DrawingLayer = drawing_layer;
+				break;
+			case BaseEditEngine.ShapeTypes.Ellipse:
+				clone = new EllipseEngine (parent_layer, DrawingLayer, AntiAliasing, OutlineColor, FillColor, BrushWidth);
 
-			ShapeType = shape_type;
-			AntiAliasing = antialiasing;
-			Closed = closed;
-			OutlineColor = outline_color;
-			FillColor = fill_color;
-			BrushWidth = brush_width;
+				break;
+			case BaseEditEngine.ShapeTypes.RoundedLineSeries:
+				clone = new RoundedLineEngine (parent_layer, DrawingLayer, RoundedLineEditEngine.DefaultRadius,
+				    AntiAliasing, OutlineColor, FillColor, BrushWidth);
+
+				break;
+			default:
+				//Defaults to OpenLineCurveSeries.
+				clone = new LineCurveSeriesEngine (parent_layer, DrawingLayer, newShapeType, AntiAliasing, false,
+				    OutlineColor, FillColor, BrushWidth);
+
+				break;
 		}
 
-		protected ShapeEngine (ShapeEngine src)
-		{
-			DrawingLayer = src.DrawingLayer;
-			ShapeType = src.ShapeType;
-			AntiAliasing = src.AntiAliasing;
-			Closed = src.Closed;
-			OutlineColor = src.OutlineColor;
-			FillColor = src.FillColor;
-			BrushWidth = src.BrushWidth;
+		// Don't clone the GeneratedPoints or OrganizedPoints, as they will be calculated.
+		clone.ControlPoints = ControlPoints.Select (i => i.Clone ()).ToList ();
+		clone.DashPattern = DashPattern;
 
-			// Don't clone the GeneratedPoints or OrganizedPoints, as they will be calculated.
-			ControlPoints = src.ControlPoints.Select (i => i.Clone ()).ToList ();
-			DashPattern = src.DashPattern;
-			parent_layer = null!; // NRT - This constructor needs to set parent_layer somehow as code expects it to be not-null
-		}
+		// Add the new ShapeEngine instance at the specified index to
+		// ensure as transparent of a cloning as possible.
+		BaseEditEngine.SEngines.Insert (shapeIndex, clone);
 
-		public abstract ShapeEngine Clone ();
+		return clone;
+	}
 
-		/// <summary>
-		/// Converts the ShapeEngine instance into a new instance of a different
-		/// ShapeEngine (child) type, copying the common data.
-		/// </summary>
-		/// <param name="newShapeType">The new ShapeEngine type to create.</param>
-		/// <param name="shapeIndex">The index to insert the ShapeEngine clone into SEngines at.
-		/// This ensures that the clone is as transparent as possible.</param>
-		/// <returns>A new ShapeEngine instance of the specified type with the common data copied over.</returns>
-		public ShapeEngine Convert (BaseEditEngine.ShapeTypes newShapeType, int shapeIndex)
-		{
-			//Remove the old ShapeEngine instance.
-			BaseEditEngine.SEngines.Remove (this);
+	/// <summary>
+	/// Generate the points that make up the entirety of the shape being drawn.
+	/// <param name="brush_width">The width of the brush that will be used to draw the shape.</param>
+	/// </summary>
+	public abstract void GeneratePoints (int brush_width);
 
-			ShapeEngine clone;
+	public PointD[] GetActualPoints ()
+	{
+		int n = GeneratedPoints.Length;
+		PointD[] points = new PointD[n];
 
-			switch (newShapeType) {
-				case BaseEditEngine.ShapeTypes.ClosedLineCurveSeries:
-					clone = new LineCurveSeriesEngine (parent_layer, DrawingLayer, newShapeType, AntiAliasing, true,
-					    OutlineColor, FillColor, BrushWidth);
+		for (int i = 0; i < n; ++i)
+			points[i] = GeneratedPoints[i].Position;
 
-					break;
-				case BaseEditEngine.ShapeTypes.Ellipse:
-					clone = new EllipseEngine (parent_layer, DrawingLayer, AntiAliasing, OutlineColor, FillColor, BrushWidth);
-
-					break;
-				case BaseEditEngine.ShapeTypes.RoundedLineSeries:
-					clone = new RoundedLineEngine (parent_layer, DrawingLayer, RoundedLineEditEngine.DefaultRadius,
-					    AntiAliasing, OutlineColor, FillColor, BrushWidth);
-
-					break;
-				default:
-					//Defaults to OpenLineCurveSeries.
-					clone = new LineCurveSeriesEngine (parent_layer, DrawingLayer, newShapeType, AntiAliasing, false,
-					    OutlineColor, FillColor, BrushWidth);
-
-					break;
-			}
-
-			// Don't clone the GeneratedPoints or OrganizedPoints, as they will be calculated.
-			clone.ControlPoints = ControlPoints.Select (i => i.Clone ()).ToList ();
-			clone.DashPattern = DashPattern;
-
-			// Add the new ShapeEngine instance at the specified index to
-			// ensure as transparent of a cloning as possible.
-			BaseEditEngine.SEngines.Insert (shapeIndex, clone);
-
-			return clone;
-		}
-
-		/// <summary>
-		/// Generate the points that make up the entirety of the shape being drawn.
-		/// <param name="brush_width">The width of the brush that will be used to draw the shape.</param>
-		/// </summary>
-		public abstract void GeneratePoints (int brush_width);
-
-		public PointD[] GetActualPoints ()
-		{
-			int n = GeneratedPoints.Length;
-			PointD[] points = new PointD[n];
-
-			for (int i = 0; i < n; ++i)
-				points[i] = GeneratedPoints[i].Position;
-
-			return points;
-		}
+		return points;
 	}
 }

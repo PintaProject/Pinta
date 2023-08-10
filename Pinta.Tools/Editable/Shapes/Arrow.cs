@@ -28,84 +28,83 @@ using System;
 using Cairo;
 using Pinta.Core;
 
-namespace Pinta.Tools
+namespace Pinta.Tools;
+
+public class Arrow
 {
-	public class Arrow
+	public bool Show = false;
+	public double ArrowSize = 10d, AngleOffset = 15d, LengthOffset = 10d;
+
+	private const double RadiansToDegrees = Math.PI / 180d;
+	private const double InvRadiansToDegrees = 180d / Math.PI;
+
+	/// <summary>
+	/// Returns a clone of the Arrow.
+	/// </summary>
+	/// <returns>A clone of the Arrow.</returns>
+	public Arrow Clone ()
 	{
-		public bool Show = false;
-		public double ArrowSize = 10d, AngleOffset = 15d, LengthOffset = 10d;
+		Arrow clonedA = new Arrow {
+			Show = Show,
+			ArrowSize = ArrowSize,
+			AngleOffset = AngleOffset,
+			LengthOffset = LengthOffset
+		};
 
-		private const double RadiansToDegrees = Math.PI / 180d;
-		private const double InvRadiansToDegrees = 180d / Math.PI;
+		return clonedA;
+	}
 
-		/// <summary>
-		/// Returns a clone of the Arrow.
-		/// </summary>
-		/// <returns>A clone of the Arrow.</returns>
-		public Arrow Clone ()
-		{
-			Arrow clonedA = new Arrow {
-				Show = Show,
-				ArrowSize = ArrowSize,
-				AngleOffset = AngleOffset,
-				LengthOffset = LengthOffset
-			};
+	/// <summary>
+	/// Draws the arrow.
+	/// </summary>
+	/// <param name="g">The drawing context.</param>
+	/// <param name="endPoint">The end point of a shape.</param>
+	/// <param name="almostEndPoint">The point right before the end point.</param>
+	public RectangleD? Draw (Context g, Color outlineColor, PointD endPoint, PointD almostEndPoint)
+	{
+		//First, calculate the ending angle.
+		double endingAngle = Math.Atan (Math.Abs (endPoint.Y - almostEndPoint.Y) / Math.Abs (endPoint.X - almostEndPoint.X)) * InvRadiansToDegrees;
 
-			return clonedA;
-		}
-
-		/// <summary>
-		/// Draws the arrow.
-		/// </summary>
-		/// <param name="g">The drawing context.</param>
-		/// <param name="endPoint">The end point of a shape.</param>
-		/// <param name="almostEndPoint">The point right before the end point.</param>
-		public RectangleD? Draw (Context g, Color outlineColor, PointD endPoint, PointD almostEndPoint)
-		{
-			//First, calculate the ending angle.
-			double endingAngle = Math.Atan (Math.Abs (endPoint.Y - almostEndPoint.Y) / Math.Abs (endPoint.X - almostEndPoint.X)) * InvRadiansToDegrees;
-
-			//This is necessary to have a properly calculated ending angle.
-			if (endPoint.Y - almostEndPoint.Y > 0) {
-				if (endPoint.X - almostEndPoint.X > 0) {
-					endingAngle = 180d - endingAngle;
-				}
-			} else {
-				if (endPoint.X - almostEndPoint.X > 0) {
-					endingAngle += 180d;
-				} else {
-					endingAngle = 360d - endingAngle;
-				}
+		//This is necessary to have a properly calculated ending angle.
+		if (endPoint.Y - almostEndPoint.Y > 0) {
+			if (endPoint.X - almostEndPoint.X > 0) {
+				endingAngle = 180d - endingAngle;
 			}
-
-			//Calculate the points of the arrow.
-			PointD[] arrowPoints =
-							{
-								endPoint,
-								new PointD(
-									endPoint.X + Math.Cos((endingAngle + 270 + AngleOffset) * RadiansToDegrees) * ArrowSize,
-									endPoint.Y + Math.Sin((endingAngle + 270 + AngleOffset) * RadiansToDegrees) * ArrowSize * -1d),
-								new PointD(
-									endPoint.X + Math.Cos((endingAngle + 180) * RadiansToDegrees) * (ArrowSize + LengthOffset),
-									endPoint.Y + Math.Sin((endingAngle + 180) * RadiansToDegrees) * (ArrowSize + LengthOffset) * -1d),
-								new PointD(
-									endPoint.X + Math.Cos((endingAngle + 90 - AngleOffset) * RadiansToDegrees) * ArrowSize,
-									endPoint.Y + Math.Sin((endingAngle + 90 - AngleOffset) * RadiansToDegrees) * ArrowSize * -1d)
-							};
-
-			//Draw the arrow.
-			g.FillPolygonal (arrowPoints, outlineColor);
-
-
-			//Calculate the minimum bounding rectangle for the arrowhead and return it so
-			//that it can be unioned with the existing invalidation rectangle.
-
-			double minX = Math.Min (Math.Min (arrowPoints[1].X, arrowPoints[2].X), arrowPoints[3].X);
-			double minY = Math.Min (Math.Min (arrowPoints[1].Y, arrowPoints[2].Y), arrowPoints[3].Y);
-
-			return new RectangleD (minX, minY,
-				Math.Max (Math.Max (arrowPoints[1].X, arrowPoints[2].X), arrowPoints[3].X) - minX,
-				Math.Max (Math.Max (arrowPoints[1].Y, arrowPoints[2].Y), arrowPoints[3].Y) - minY);
+		} else {
+			if (endPoint.X - almostEndPoint.X > 0) {
+				endingAngle += 180d;
+			} else {
+				endingAngle = 360d - endingAngle;
+			}
 		}
+
+		//Calculate the points of the arrow.
+		PointD[] arrowPoints =
+						{
+							endPoint,
+							new PointD(
+								endPoint.X + Math.Cos((endingAngle + 270 + AngleOffset) * RadiansToDegrees) * ArrowSize,
+								endPoint.Y + Math.Sin((endingAngle + 270 + AngleOffset) * RadiansToDegrees) * ArrowSize * -1d),
+							new PointD(
+								endPoint.X + Math.Cos((endingAngle + 180) * RadiansToDegrees) * (ArrowSize + LengthOffset),
+								endPoint.Y + Math.Sin((endingAngle + 180) * RadiansToDegrees) * (ArrowSize + LengthOffset) * -1d),
+							new PointD(
+								endPoint.X + Math.Cos((endingAngle + 90 - AngleOffset) * RadiansToDegrees) * ArrowSize,
+								endPoint.Y + Math.Sin((endingAngle + 90 - AngleOffset) * RadiansToDegrees) * ArrowSize * -1d)
+						};
+
+		//Draw the arrow.
+		g.FillPolygonal (arrowPoints, outlineColor);
+
+
+		//Calculate the minimum bounding rectangle for the arrowhead and return it so
+		//that it can be unioned with the existing invalidation rectangle.
+
+		double minX = Math.Min (Math.Min (arrowPoints[1].X, arrowPoints[2].X), arrowPoints[3].X);
+		double minY = Math.Min (Math.Min (arrowPoints[1].Y, arrowPoints[2].Y), arrowPoints[3].Y);
+
+		return new RectangleD (minX, minY,
+			Math.Max (Math.Max (arrowPoints[1].X, arrowPoints[2].X), arrowPoints[3].X) - minX,
+			Math.Max (Math.Max (arrowPoints[1].Y, arrowPoints[2].Y), arrowPoints[3].Y) - minY);
 	}
 }
