@@ -26,24 +26,23 @@
 
 using Pinta.Resources;
 
-namespace Pinta
+namespace Pinta;
+
+public interface IResourceService
 {
-	public interface IResourceService
+	Gdk.Texture GetIcon (string name);
+	Gdk.Texture GetIcon (string name, int size);
+}
+
+public sealed class ResourceManager : IResourceService
+{
+	public Gdk.Texture GetIcon (string name)
 	{
-		Gdk.Texture GetIcon (string name);
-		Gdk.Texture GetIcon (string name, int size);
+		return GetIcon (name, 16);
 	}
 
-	public class ResourceManager : IResourceService
+	public Gdk.Texture GetIcon (string name, int size)
 	{
-		public Gdk.Texture GetIcon (string name)
-		{
-			return GetIcon (name, 16);
-		}
-
-		public Gdk.Texture GetIcon (string name, int size)
-		{
-			return ResourceLoader.GetIcon (name, size);
-		}
+		return ResourceLoader.GetIcon (name, size);
 	}
 }

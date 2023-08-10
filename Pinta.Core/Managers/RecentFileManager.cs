@@ -27,49 +27,48 @@
 using System;
 using Gtk;
 
-namespace Pinta.Core
+namespace Pinta.Core;
+
+public sealed class RecentFileManager
 {
-	public class RecentFileManager
+	private Gio.File? last_dialog_directory;
+
+	public RecentFileManager ()
 	{
-		private Gio.File? last_dialog_directory;
+		last_dialog_directory = DefaultDialogDirectory;
+	}
 
-		public RecentFileManager ()
-		{
-			last_dialog_directory = DefaultDialogDirectory;
+	public Gio.File? LastDialogDirectory {
+		get => last_dialog_directory;
+		set {
+			// The file chooser dialog may return null for the current folder in certain cases,
+			// such as the Recently Used pane in the Gnome file chooser.
+			if (value != null)
+				last_dialog_directory = value;
 		}
+	}
 
-		public Gio.File? LastDialogDirectory {
-			get => last_dialog_directory;
-			set {
-				// The file chooser dialog may return null for the current folder in certain cases,
-				// such as the Recently Used pane in the Gnome file chooser.
-				if (value != null)
-					last_dialog_directory = value;
-			}
+	public Gio.File? DefaultDialogDirectory {
+		get {
+			string path = System.Environment.GetFolderPath (Environment.SpecialFolder.MyPictures);
+			return !string.IsNullOrEmpty (path) ? Gio.FileHelper.NewForPath (path) : null;
 		}
+	}
 
-		public Gio.File? DefaultDialogDirectory {
-			get {
-				string path = System.Environment.GetFolderPath (Environment.SpecialFolder.MyPictures);
-				return !string.IsNullOrEmpty (path) ? Gio.FileHelper.NewForPath (path) : null;
-			}
-		}
+	/// <summary>
+	/// Returns a directory for use in a dialog. The last dialog directory is
+	/// returned if it exists, otherwise the default directory is used.
+	/// </summary>
+	public Gio.File? GetDialogDirectory ()
+	{
+		return (last_dialog_directory != null && last_dialog_directory.QueryExists (null)) ? last_dialog_directory : DefaultDialogDirectory;
+	}
 
-		/// <summary>
-		/// Returns a directory for use in a dialog. The last dialog directory is
-		/// returned if it exists, otherwise the default directory is used.
-		/// </summary>
-		public Gio.File? GetDialogDirectory ()
-		{
-			return (last_dialog_directory != null && last_dialog_directory.QueryExists (null)) ? last_dialog_directory : DefaultDialogDirectory;
-		}
-
-		/// <summary>
-		/// Add a file to the list of recently-used files.
-		/// </summary>
-		public void AddFile (Gio.File file)
-		{
-			RecentManager.GetDefault ().AddItem (file.GetUri ());
-		}
+	/// <summary>
+	/// Add a file to the list of recently-used files.
+	/// </summary>
+	public void AddFile (Gio.File file)
+	{
+		RecentManager.GetDefault ().AddItem (file.GetUri ());
 	}
 }

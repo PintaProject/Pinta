@@ -27,38 +27,37 @@ using System.Collections.Generic;
 using System.Linq;
 
 
-namespace Pinta.Core
+namespace Pinta.Core;
+
+public sealed class PaletteFormatManager
 {
-	public class PaletteFormatManager
+	private readonly List<PaletteDescriptor> formats;
+
+	public PaletteFormatManager ()
 	{
-		private readonly List<PaletteDescriptor> formats;
+		formats = new List<PaletteDescriptor> ();
 
-		public PaletteFormatManager ()
-		{
-			formats = new List<PaletteDescriptor> ();
+		PaintDotNetPalette pdnHandler = new PaintDotNetPalette ();
+		formats.Add (new PaletteDescriptor ("Paint.NET", new string[] { "txt", "TXT" }, pdnHandler, pdnHandler));
 
-			PaintDotNetPalette pdnHandler = new PaintDotNetPalette ();
-			formats.Add (new PaletteDescriptor ("Paint.NET", new string[] { "txt", "TXT" }, pdnHandler, pdnHandler));
+		GimpPalette gimpHandler = new GimpPalette ();
+		formats.Add (new PaletteDescriptor ("GIMP", new string[] { "gpl", "GPL" }, gimpHandler, gimpHandler));
 
-			GimpPalette gimpHandler = new GimpPalette ();
-			formats.Add (new PaletteDescriptor ("GIMP", new string[] { "gpl", "GPL" }, gimpHandler, gimpHandler));
+		PaintShopProPalette pspHandler = new PaintShopProPalette ();
+		formats.Add (new PaletteDescriptor ("PaintShop Pro", new string[] { "pal", "PAL" }, pspHandler, pspHandler));
+	}
 
-			PaintShopProPalette pspHandler = new PaintShopProPalette ();
-			formats.Add (new PaletteDescriptor ("PaintShop Pro", new string[] { "pal", "PAL" }, pspHandler, pspHandler));
-		}
+	public IEnumerable<PaletteDescriptor> Formats => formats;
 
-		public IEnumerable<PaletteDescriptor> Formats => formats;
+	public PaletteDescriptor? GetFormatByFilename (string fileName)
+	{
+		string extension = System.IO.Path.GetExtension (fileName);
+		extension = NormalizeExtension (extension);
+		return formats.Where (p => p.Extensions.Contains (extension)).FirstOrDefault ();
+	}
 
-		public PaletteDescriptor? GetFormatByFilename (string fileName)
-		{
-			string extension = System.IO.Path.GetExtension (fileName);
-			extension = NormalizeExtension (extension);
-			return formats.Where (p => p.Extensions.Contains (extension)).FirstOrDefault ();
-		}
-
-		private static string NormalizeExtension (string extension)
-		{
-			return extension.ToLowerInvariant ().TrimStart ('.').Trim ();
-		}
+	private static string NormalizeExtension (string extension)
+	{
+		return extension.ToLowerInvariant ().TrimStart ('.').Trim ();
 	}
 }

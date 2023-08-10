@@ -28,108 +28,107 @@ using System;
 using System.Collections.Generic;
 using Gtk;
 
-namespace Pinta.Core
+namespace Pinta.Core;
+
+/// <summary>
+/// Provides methods for registering and unregistering effects and adjustments.
+/// </summary>
+public sealed class EffectsManager
 {
-	/// <summary>
-	/// Provides methods for registering and unregistering effects and adjustments.
-	/// </summary>
-	public sealed class EffectsManager
+	private readonly Dictionary<BaseEffect, Command> adjustments;
+	private readonly Dictionary<BaseEffect, Command> effects;
+
+	internal EffectsManager ()
 	{
-		private readonly Dictionary<BaseEffect, Command> adjustments;
-		private readonly Dictionary<BaseEffect, Command> effects;
+		adjustments = new Dictionary<BaseEffect, Command> ();
+		effects = new Dictionary<BaseEffect, Command> ();
+	}
 
-		internal EffectsManager ()
-		{
-			adjustments = new Dictionary<BaseEffect, Command> ();
-			effects = new Dictionary<BaseEffect, Command> ();
-		}
-
-		/// <summary>
-		/// Register a new adjustment with Pinta, causing it to be added to the Adjustments menu.
-		/// </summary>
-		/// <param name="adjustment">The adjustment to register</param>
-		/// <returns>The action created for this adjustment</returns>
-		public void RegisterAdjustment (BaseEffect adjustment)
-		{
+	/// <summary>
+	/// Register a new adjustment with Pinta, causing it to be added to the Adjustments menu.
+	/// </summary>
+	/// <param name="adjustment">The adjustment to register</param>
+	/// <returns>The action created for this adjustment</returns>
+	public void RegisterAdjustment (BaseEffect adjustment)
+	{
 #if false // For testing purposes to detect any missing icons. This implies more disk accesses on startup so we may not want this on by default.
-			if (!GtkExtensions.GetDefaultIconTheme ().HasIcon (adjustment.Icon))
-				Console.Error.WriteLine ($"Icon {adjustment.Icon} for adjustment {adjustment.Name} not found");
+		if (!GtkExtensions.GetDefaultIconTheme ().HasIcon (adjustment.Icon))
+			Console.Error.WriteLine ($"Icon {adjustment.Icon} for adjustment {adjustment.Name} not found");
 #endif
 
-			// Create a gtk action for each adjustment
-			var act = new Command (adjustment.GetType ().Name, adjustment.Name + (adjustment.IsConfigurable ? Translations.GetString ("...") : ""), string.Empty, adjustment.Icon);
-			act.Activated += (o, args) => { PintaCore.LivePreview.Start (adjustment); };
+		// Create a gtk action for each adjustment
+		var act = new Command (adjustment.GetType ().Name, adjustment.Name + (adjustment.IsConfigurable ? Translations.GetString ("...") : ""), string.Empty, adjustment.Icon);
+		act.Activated += (o, args) => { PintaCore.LivePreview.Start (adjustment); };
 
-			PintaCore.Actions.Adjustments.Actions.Add (act);
+		PintaCore.Actions.Adjustments.Actions.Add (act);
 
-			// If no key is specified, don't use an accelerated menu item
-			if (adjustment.AdjustmentMenuKey is null)
-				PintaCore.Chrome.Application.AddAction (act);
-			else {
-				PintaCore.Chrome.Application.AddAccelAction (act, adjustment.AdjustmentMenuKeyModifiers + adjustment.AdjustmentMenuKey);
-			}
-
-			PintaCore.Chrome.AdjustmentsMenu.AppendMenuItemSorted (act.CreateMenuItem ());
-
-			adjustments.Add (adjustment, act);
-		}
-
-		/// <summary>
-		/// Register a new effect with Pinta, causing it to be added to the Effects menu.
-		/// </summary>
-		/// <param name="effect">The effect to register</param>
-		/// <returns>The action created for this effect</returns>
-		public void RegisterEffect (BaseEffect effect)
-		{
-#if false // For testing purposes to detect any missing icons. This implies more disk accesses on startup so we may not want this on by default.
-			if (!GtkExtensions.GetDefaultIconTheme ().HasIcon (effect.Icon))
-				Console.Error.WriteLine ($"Icon {effect.Icon} for effect {effect.Name} not found");
-#endif
-
-			// Create a gtk action and menu item for each effect
-			var act = new Command (effect.GetType ().Name, effect.Name + (effect.IsConfigurable ? Translations.GetString ("...") : ""), string.Empty, effect.Icon);
+		// If no key is specified, don't use an accelerated menu item
+		if (adjustment.AdjustmentMenuKey is null)
 			PintaCore.Chrome.Application.AddAction (act);
-			act.Activated += (o, args) => { PintaCore.LivePreview.Start (effect); };
-
-			PintaCore.Actions.Effects.AddEffect (effect.EffectMenuCategory, act);
-
-			effects.Add (effect, act);
+		else {
+			PintaCore.Chrome.Application.AddAccelAction (act, adjustment.AdjustmentMenuKeyModifiers + adjustment.AdjustmentMenuKey);
 		}
 
-		/// <summary>
-		/// Unregister an effect with Pinta, causing it to be removed from the Effects menu.
-		/// </summary>
-		/// <param name="effect_type">The type of the effect to unregister</param>
-		public void UnregisterInstanceOfEffect (System.Type effect_type)
-		{
-			foreach (BaseEffect effect in effects.Keys) {
-				if (effect.GetType () == effect_type) {
-					var action = effects[effect];
+		PintaCore.Chrome.AdjustmentsMenu.AppendMenuItemSorted (act.CreateMenuItem ());
 
-					effects.Remove (effect);
-					PintaCore.Actions.Effects.RemoveEffect (effect.EffectMenuCategory, action);
-					return;
-				}
+		adjustments.Add (adjustment, act);
+	}
+
+	/// <summary>
+	/// Register a new effect with Pinta, causing it to be added to the Effects menu.
+	/// </summary>
+	/// <param name="effect">The effect to register</param>
+	/// <returns>The action created for this effect</returns>
+	public void RegisterEffect (BaseEffect effect)
+	{
+#if false // For testing purposes to detect any missing icons. This implies more disk accesses on startup so we may not want this on by default.
+		if (!GtkExtensions.GetDefaultIconTheme ().HasIcon (effect.Icon))
+			Console.Error.WriteLine ($"Icon {effect.Icon} for effect {effect.Name} not found");
+#endif
+
+		// Create a gtk action and menu item for each effect
+		var act = new Command (effect.GetType ().Name, effect.Name + (effect.IsConfigurable ? Translations.GetString ("...") : ""), string.Empty, effect.Icon);
+		PintaCore.Chrome.Application.AddAction (act);
+		act.Activated += (o, args) => { PintaCore.LivePreview.Start (effect); };
+
+		PintaCore.Actions.Effects.AddEffect (effect.EffectMenuCategory, act);
+
+		effects.Add (effect, act);
+	}
+
+	/// <summary>
+	/// Unregister an effect with Pinta, causing it to be removed from the Effects menu.
+	/// </summary>
+	/// <param name="effect_type">The type of the effect to unregister</param>
+	public void UnregisterInstanceOfEffect (System.Type effect_type)
+	{
+		foreach (BaseEffect effect in effects.Keys) {
+			if (effect.GetType () == effect_type) {
+				var action = effects[effect];
+
+				effects.Remove (effect);
+				PintaCore.Actions.Effects.RemoveEffect (effect.EffectMenuCategory, action);
+				return;
 			}
 		}
+	}
 
-		/// <summary>
-		/// Unregister an effect with Pinta, causing it to be removed from the Adjustments menu.
-		/// </summary>
-		/// <param name="adjustment_type">The type of the adjustment to unregister</param>
-		public void UnregisterInstanceOfAdjustment (System.Type adjustment_type)
-		{
-			foreach (BaseEffect adjustment in adjustments.Keys) {
-				if (adjustment.GetType () == adjustment_type) {
+	/// <summary>
+	/// Unregister an effect with Pinta, causing it to be removed from the Adjustments menu.
+	/// </summary>
+	/// <param name="adjustment_type">The type of the adjustment to unregister</param>
+	public void UnregisterInstanceOfAdjustment (System.Type adjustment_type)
+	{
+		foreach (BaseEffect adjustment in adjustments.Keys) {
+			if (adjustment.GetType () == adjustment_type) {
 
-					var action = adjustments[adjustment];
+				var action = adjustments[adjustment];
 
-					adjustments.Remove (adjustment);
-					PintaCore.Actions.Adjustments.Actions.Remove (action);
-					PintaCore.Chrome.AdjustmentsMenu.Remove (action);
+				adjustments.Remove (adjustment);
+				PintaCore.Actions.Adjustments.Actions.Remove (action);
+				PintaCore.Chrome.AdjustmentsMenu.Remove (action);
 
-					return;
-				}
+				return;
 			}
 		}
 	}
