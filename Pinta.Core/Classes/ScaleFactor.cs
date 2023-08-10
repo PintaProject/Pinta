@@ -168,62 +168,62 @@ namespace Pinta.Core
 			return (x * (double) denominator) / (double) numerator;
 		}
 
-		public PointI ScalePoint (PointI p)
+		public readonly PointI ScalePoint (PointI p)
 		{
 			return new PointI (ScaleScalar (p.X), ScaleScalar (p.Y));
 		}
 
-		public PointD ScalePoint (PointD p)
+		public readonly PointD ScalePoint (PointD p)
 		{
 			return new PointD (ScaleScalar (p.X), ScaleScalar (p.Y));
 		}
 
-		public PointD ScalePointJustX (PointD p)
+		public readonly PointD ScalePointJustX (PointD p)
 		{
 			return new PointD (ScaleScalar (p.X), p.Y);
 		}
 
-		public PointD ScalePointJustY (PointD p)
+		public readonly PointD ScalePointJustY (PointD p)
 		{
 			return new PointD (p.X, ScaleScalar (p.Y));
 		}
 
-		public PointD UnscalePoint (PointD p)
+		public readonly PointD UnscalePoint (PointD p)
 		{
 			return new PointD (UnscaleScalar (p.X), UnscaleScalar (p.Y));
 		}
 
-		public PointD UnscalePointJustX (PointD p)
+		public readonly PointD UnscalePointJustX (PointD p)
 		{
 			return new PointD (UnscaleScalar (p.X), p.Y);
 		}
 
-		public PointD UnscalePointJustY (PointD p)
+		public readonly PointD UnscalePointJustY (PointD p)
 		{
 			return new PointD (p.X, UnscaleScalar (p.Y));
 		}
 
-		public PointI ScalePointJustX (PointI p)
+		public readonly PointI ScalePointJustX (PointI p)
 		{
 			return new PointI (ScaleScalar (p.X), p.Y);
 		}
 
-		public PointI ScalePointJustY (PointI p)
+		public readonly PointI ScalePointJustY (PointI p)
 		{
 			return new PointI (p.X, ScaleScalar (p.Y));
 		}
 
-		public PointI UnscalePoint (PointI p)
+		public readonly PointI UnscalePoint (PointI p)
 		{
 			return new PointI (UnscaleScalar (p.X), UnscaleScalar (p.Y));
 		}
 
-		public PointI UnscalePointJustX (PointI p)
+		public readonly PointI UnscalePointJustX (PointI p)
 		{
 			return new PointI (UnscaleScalar (p.X), p.Y);
 		}
 
-		public PointI UnscalePointJustY (PointI p)
+		public readonly PointI UnscalePointJustY (PointI p)
 		{
 			return new PointI (p.X, UnscaleScalar (p.Y));
 		}
@@ -238,12 +238,12 @@ namespace Pinta.Core
 		//    return new SizeF(UnscaleScalar(s.Width), UnscaleScalar(s.Height));
 		//}
 
-		public Size ScaleSize (Size s)
+		public readonly Size ScaleSize (Size s)
 		{
 			return new Size (ScaleScalar (s.Width), ScaleScalar (s.Height));
 		}
 
-		public Size UnscaleSize (Size s)
+		public readonly Size UnscaleSize (Size s)
 		{
 			return new Size (UnscaleScalar (s.Width), UnscaleScalar (s.Height));
 		}
@@ -258,12 +258,12 @@ namespace Pinta.Core
 		//    return new RectangleF(UnscalePoint(rectF.Location), UnscaleSize(rectF.Size));
 		//}
 
-		public RectangleI ScaleRectangle (RectangleI rect)
+		public readonly RectangleI ScaleRectangle (RectangleI rect)
 		{
 			return new RectangleI (ScalePoint (rect.Location), ScaleSize (rect.Size));
 		}
 
-		public RectangleI UnscaleRectangle (RectangleI rect)
+		public readonly RectangleI UnscaleRectangle (RectangleI rect)
 		{
 			return new RectangleI (UnscalePoint (rect.Location), UnscaleSize (rect.Size));
 		}
