@@ -28,36 +28,35 @@ using System;
 using Gtk;
 using Pinta.Core;
 
-namespace Pinta.Actions
+namespace Pinta.Actions;
+
+internal sealed class ResizePaletteAction : IActionHandler
 {
-	class ResizePaletteAction : IActionHandler
+	#region IActionHandler Members
+	public void Initialize ()
 	{
-		#region IActionHandler Members
-		public void Initialize ()
-		{
-			PintaCore.Actions.Edit.ResizePalette.Activated += Activated;
-		}
+		PintaCore.Actions.Edit.ResizePalette.Activated += Activated;
+	}
 
-		public void Uninitialize ()
-		{
-			PintaCore.Actions.Edit.ResizePalette.Activated -= Activated;
-		}
-		#endregion
+	public void Uninitialize ()
+	{
+		PintaCore.Actions.Edit.ResizePalette.Activated -= Activated;
+	}
+	#endregion
 
-		private void Activated (object sender, EventArgs e)
-		{
-			var dialog = new SpinButtonEntryDialog (Translations.GetString ("Resize Palette"),
-					PintaCore.Chrome.MainWindow, Translations.GetString ("New palette size:"), 1, 96,
-					PintaCore.Palette.CurrentPalette.Count);
+	private void Activated (object sender, EventArgs e)
+	{
+		var dialog = new SpinButtonEntryDialog (Translations.GetString ("Resize Palette"),
+				PintaCore.Chrome.MainWindow, Translations.GetString ("New palette size:"), 1, 96,
+				PintaCore.Palette.CurrentPalette.Count);
 
-			dialog.OnResponse += (_, args) => {
-				if (args.ResponseId == (int) ResponseType.Ok)
-					PintaCore.Palette.CurrentPalette.Resize (dialog.GetValue ());
+		dialog.OnResponse += (_, args) => {
+			if (args.ResponseId == (int) ResponseType.Ok)
+				PintaCore.Palette.CurrentPalette.Resize (dialog.GetValue ());
 
-				dialog.Destroy ();
-			};
+			dialog.Destroy ();
+		};
 
-			dialog.Present ();
-		}
+		dialog.Present ();
 	}
 }

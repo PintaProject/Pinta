@@ -26,25 +26,24 @@
 
 using Pinta.Core;
 
-namespace Pinta.Actions
+namespace Pinta.Actions;
+
+internal sealed class StatusBarToggledAction : IActionHandler
 {
-	class StatusBarToggledAction : IActionHandler
+	#region IActionHandler Members
+	public void Initialize ()
 	{
-		#region IActionHandler Members
-		public void Initialize ()
-		{
-			PintaCore.Actions.View.StatusBar.Toggled += Activated;
-		}
+		PintaCore.Actions.View.StatusBar.Toggled += Activated;
+	}
 
-		public void Uninitialize ()
-		{
-			PintaCore.Actions.View.StatusBar.Toggled -= Activated;
-		}
-		#endregion
+	public void Uninitialize ()
+	{
+		PintaCore.Actions.View.StatusBar.Toggled -= Activated;
+	}
+	#endregion
 
-		private void Activated (bool value)
-		{
-			PintaCore.Chrome.StatusBar.Visible = value;
-		}
+	private void Activated (bool value)
+	{
+		PintaCore.Chrome.StatusBar.Visible = value;
 	}
 }

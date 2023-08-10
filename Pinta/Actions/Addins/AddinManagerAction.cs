@@ -28,27 +28,26 @@ using System;
 using Pinta.Core;
 using Pinta.Gui.Addins;
 
-namespace Pinta.Actions
+namespace Pinta.Actions;
+
+internal sealed class AddinManagerAction : IActionHandler
 {
-	class AddinManagerAction : IActionHandler
+	#region IActionHandler Members
+	public void Initialize ()
 	{
-		#region IActionHandler Members
-		public void Initialize ()
-		{
-			PintaCore.Actions.Addins.AddinManager.Activated += Activated;
-		}
+		PintaCore.Actions.Addins.AddinManager.Activated += Activated;
+	}
 
-		public void Uninitialize ()
-		{
-			PintaCore.Actions.Addins.AddinManager.Activated -= Activated;
-		}
-		#endregion
+	public void Uninitialize ()
+	{
+		PintaCore.Actions.Addins.AddinManager.Activated -= Activated;
+	}
+	#endregion
 
-		private void Activated (object sender, EventArgs e)
-		{
-			var service = new AddinSetupService (Mono.Addins.AddinManager.Registry);
-			var dialog = new AddinManagerDialog (PintaCore.Chrome.MainWindow, service);
-			dialog.Show ();
-		}
+	private void Activated (object sender, EventArgs e)
+	{
+		var service = new AddinSetupService (Mono.Addins.AddinManager.Registry);
+		var dialog = new AddinManagerDialog (PintaCore.Chrome.MainWindow, service);
+		dialog.Show ();
 	}
 }

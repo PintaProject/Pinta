@@ -27,34 +27,33 @@
 using System;
 using Pinta.Core;
 
-namespace Pinta.Actions
+namespace Pinta.Actions;
+
+internal sealed class ResizeCanvasAction : IActionHandler
 {
-	class ResizeCanvasAction : IActionHandler
+	#region IActionHandler Members
+	public void Initialize ()
 	{
-		#region IActionHandler Members
-		public void Initialize ()
-		{
-			PintaCore.Actions.Image.CanvasSize.Activated += Activated;
-		}
+		PintaCore.Actions.Image.CanvasSize.Activated += Activated;
+	}
 
-		public void Uninitialize ()
-		{
-			PintaCore.Actions.Image.CanvasSize.Activated -= Activated;
-		}
-		#endregion
+	public void Uninitialize ()
+	{
+		PintaCore.Actions.Image.CanvasSize.Activated -= Activated;
+	}
+	#endregion
 
-		private void Activated (object sender, EventArgs e)
-		{
-			var dialog = new ResizeCanvasDialog ();
+	private void Activated (object sender, EventArgs e)
+	{
+		var dialog = new ResizeCanvasDialog ();
 
-			dialog.OnResponse += (_, args) => {
-				if (args.ResponseId == (int) Gtk.ResponseType.Ok)
-					dialog.SaveChanges ();
+		dialog.OnResponse += (_, args) => {
+			if (args.ResponseId == (int) Gtk.ResponseType.Ok)
+				dialog.SaveChanges ();
 
-				dialog.Destroy ();
-			};
+			dialog.Destroy ();
+		};
 
-			dialog.Show ();
-		}
+		dialog.Show ();
 	}
 }

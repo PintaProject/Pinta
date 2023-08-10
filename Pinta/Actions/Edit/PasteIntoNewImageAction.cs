@@ -27,23 +27,22 @@
 using System;
 using Pinta.Core;
 
-namespace Pinta.Actions
+namespace Pinta.Actions;
+
+internal sealed class PasteIntoNewImageAction : IActionHandler
 {
-	class PasteIntoNewImageAction : IActionHandler
+	public void Initialize () => PintaCore.Actions.Edit.PasteIntoNewImage.Activated += Activated;
+
+	public void Uninitialize () => PintaCore.Actions.Edit.PasteIntoNewImage.Activated -= Activated;
+
+	private async void Activated (object sender, EventArgs e)
 	{
-		public void Initialize () => PintaCore.Actions.Edit.PasteIntoNewImage.Activated += Activated;
+		var cb = GdkExtensions.GetDefaultClipboard ();
+		Gdk.Texture? cb_texture = await cb.ReadTextureAsync ();
 
-		public void Uninitialize () => PintaCore.Actions.Edit.PasteIntoNewImage.Activated -= Activated;
-
-		private async void Activated (object sender, EventArgs e)
-		{
-			var cb = GdkExtensions.GetDefaultClipboard ();
-			Gdk.Texture? cb_texture = await cb.ReadTextureAsync ();
-
-			if (cb_texture is not null)
-				PintaCore.Workspace.NewDocumentFromImage (cb_texture.ToSurface ());
-			else
-				PasteAction.ShowClipboardEmptyDialog ();
-		}
+		if (cb_texture is not null)
+			PintaCore.Workspace.NewDocumentFromImage (cb_texture.ToSurface ());
+		else
+			PasteAction.ShowClipboardEmptyDialog ();
 	}
 }

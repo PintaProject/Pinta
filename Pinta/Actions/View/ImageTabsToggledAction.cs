@@ -26,26 +26,25 @@
 
 using Pinta.Core;
 
-namespace Pinta.Actions
+namespace Pinta.Actions;
+
+internal sealed class ImageTabsToggledAction : IActionHandler
 {
-	class ImageTabsToggledAction : IActionHandler
+	#region IActionHandler Members
+	public void Initialize ()
 	{
-		#region IActionHandler Members
-		public void Initialize ()
-		{
-			PintaCore.Actions.View.ImageTabs.Toggled += Activated;
-		}
+		PintaCore.Actions.View.ImageTabs.Toggled += Activated;
+	}
 
-		public void Uninitialize ()
-		{
-			PintaCore.Actions.View.ImageTabs.Toggled -= Activated;
-		}
-		#endregion
+	public void Uninitialize ()
+	{
+		PintaCore.Actions.View.ImageTabs.Toggled -= Activated;
+	}
+	#endregion
 
-		private void Activated (bool value)
-		{
-			var notebook = (Docking.DockNotebook) PintaCore.Chrome.ImageTabsNotebook;
-			notebook.EnableTabs = value;
-		}
+	private void Activated (bool value)
+	{
+		var notebook = (Docking.DockNotebook) PintaCore.Chrome.ImageTabsNotebook;
+		notebook.EnableTabs = value;
 	}
 }

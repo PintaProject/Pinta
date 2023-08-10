@@ -27,25 +27,24 @@
 using System;
 using Pinta.Core;
 
-namespace Pinta.Actions
+namespace Pinta.Actions;
+
+internal sealed class SaveDocumentAction : IActionHandler
 {
-	class SaveDocumentAction : IActionHandler
+	#region IActionHandler Members
+	public void Initialize ()
 	{
-		#region IActionHandler Members
-		public void Initialize ()
-		{
-			PintaCore.Actions.File.Save.Activated += Activated;
-		}
+		PintaCore.Actions.File.Save.Activated += Activated;
+	}
 
-		public void Uninitialize ()
-		{
-			PintaCore.Actions.File.Save.Activated -= Activated;
-		}
-		#endregion
+	public void Uninitialize ()
+	{
+		PintaCore.Actions.File.Save.Activated -= Activated;
+	}
+	#endregion
 
-		private void Activated (object sender, EventArgs e)
-		{
-			PintaCore.Workspace.ActiveDocument.Save (false);
-		}
+	private void Activated (object sender, EventArgs e)
+	{
+		PintaCore.Workspace.ActiveDocument.Save (false);
 	}
 }
