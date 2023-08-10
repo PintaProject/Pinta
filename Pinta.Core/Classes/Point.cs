@@ -27,78 +27,77 @@
 using System;
 
 /// Replacements for Cairo / GDK points that GtkSharp provided in the GTK3 build.
-namespace Pinta.Core
+namespace Pinta.Core;
+
+public record struct PointI
 {
-	public record struct PointI
+	public PointI (int x, int y)
 	{
-		public PointI (int x, int y)
-		{
-			this.X = x;
-			this.Y = y;
-		}
-
-		public static readonly PointI Zero;
-
-		public int X;
-		public int Y;
-
-		public override readonly string ToString () => $"{X}, {Y}";
+		this.X = x;
+		this.Y = y;
 	}
 
-	public record struct PointD
+	public static readonly PointI Zero;
+
+	public int X;
+	public int Y;
+
+	public override readonly string ToString () => $"{X}, {Y}";
+}
+
+public record struct PointD
+{
+	public PointD (double x, double y)
 	{
-		public PointD (double x, double y)
-		{
-			this.X = x;
-			this.Y = y;
-		}
-
-		public double X;
-		public double Y;
-
-		public override readonly string ToString () => $"{X}, {Y}";
-
-		public readonly PointI ToInt () => new ((int) X, (int) Y);
-
-		public readonly double Distance (in PointD e)
-		{
-			return new PointD (X - e.X, Y - e.Y).Magnitude ();
-		}
-
-		public readonly double Magnitude ()
-		{
-			return Math.Sqrt (X * X + Y * Y);
-		}
-
-		/// <summary>
-		/// Returns a new point, rounded to the nearest integer coordinates.
-		/// </summary>
-		public readonly PointD Rounded () => new (Math.Round (X), Math.Round (Y));
-
-		public static PointD operator + (in PointD a, in PointD b)
-		{
-			return new PointD (a.X + b.X, a.Y + b.Y);
-		}
-
-		public static explicit operator PointD (PointI p) => new PointD (p.X, p.Y);
+		this.X = x;
+		this.Y = y;
 	}
 
-	public record struct Size
+	public double X;
+	public double Y;
+
+	public override readonly string ToString () => $"{X}, {Y}";
+
+	public readonly PointI ToInt () => new ((int) X, (int) Y);
+
+	public readonly double Distance (in PointD e)
 	{
-		public Size (int width, int height)
-		{
-			Width = width;
-			Height = height;
-		}
-
-		public int Width;
-		public int Height;
-
-		public static readonly Size Empty;
-
-		public override readonly string ToString () => $"{Width}, {Height}";
-
-		public readonly bool IsEmpty => (Width == 0 && Height == 0);
+		return new PointD (X - e.X, Y - e.Y).Magnitude ();
 	}
+
+	public readonly double Magnitude ()
+	{
+		return Math.Sqrt (X * X + Y * Y);
+	}
+
+	/// <summary>
+	/// Returns a new point, rounded to the nearest integer coordinates.
+	/// </summary>
+	public readonly PointD Rounded () => new (Math.Round (X), Math.Round (Y));
+
+	public static PointD operator + (in PointD a, in PointD b)
+	{
+		return new PointD (a.X + b.X, a.Y + b.Y);
+	}
+
+	public static explicit operator PointD (PointI p) => new PointD (p.X, p.Y);
+}
+
+public record struct Size
+{
+	public Size (int width, int height)
+	{
+		Width = width;
+		Height = height;
+	}
+
+	public int Width;
+	public int Height;
+
+	public static readonly Size Empty;
+
+	public override readonly string ToString () => $"{Width}, {Height}";
+
+	public readonly bool IsEmpty => (Width == 0 && Height == 0);
 }
 
