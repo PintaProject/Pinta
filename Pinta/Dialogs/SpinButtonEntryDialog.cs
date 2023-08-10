@@ -27,41 +27,40 @@
 using Gtk;
 using Pinta.Core;
 
-namespace Pinta
+namespace Pinta;
+
+public sealed class SpinButtonEntryDialog : Dialog
 {
-	public class SpinButtonEntryDialog : Dialog
+	private readonly SpinButton spinButton;
+
+	public SpinButtonEntryDialog (string title, Window parent, string label, int min, int max, int current)
 	{
-		private readonly SpinButton spinButton;
+		Title = title;
+		TransientFor = parent;
+		Modal = true;
+		this.AddCancelOkButtons ();
+		this.SetDefaultResponse (ResponseType.Ok);
 
-		public SpinButtonEntryDialog (string title, Window parent, string label, int min, int max, int current)
-		{
-			Title = title;
-			TransientFor = parent;
-			Modal = true;
-			this.AddCancelOkButtons ();
-			this.SetDefaultResponse (ResponseType.Ok);
+		var hbox = new Box () { Spacing = 6 };
+		hbox.SetOrientation (Orientation.Horizontal);
 
-			var hbox = new Box () { Spacing = 6 };
-			hbox.SetOrientation (Orientation.Horizontal);
+		var lbl = Label.New (label);
+		lbl.Xalign = 0;
+		hbox.Append (lbl);
 
-			var lbl = Label.New (label);
-			lbl.Xalign = 0;
-			hbox.Append (lbl);
+		spinButton = SpinButton.NewWithRange (min, max, 1);
+		spinButton.Value = current;
+		hbox.Append (spinButton);
 
-			spinButton = SpinButton.NewWithRange (min, max, 1);
-			spinButton.Value = current;
-			hbox.Append (spinButton);
+		var content_area = this.GetContentAreaBox ();
+		content_area.SetAllMargins (12);
+		content_area.Append (hbox);
 
-			var content_area = this.GetContentAreaBox ();
-			content_area.SetAllMargins (12);
-			content_area.Append (hbox);
+		spinButton.SetActivatesDefault (true);
+	}
 
-			spinButton.SetActivatesDefault (true);
-		}
-
-		public int GetValue ()
-		{
-			return spinButton.GetValueAsInt ();
-		}
+	public int GetValue ()
+	{
+		return spinButton.GetValueAsInt ();
 	}
 }

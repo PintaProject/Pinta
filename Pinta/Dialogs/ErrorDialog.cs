@@ -27,56 +27,55 @@
 using Gtk;
 using Pinta.Core;
 
-namespace Pinta
+namespace Pinta;
+
+public static class ErrorDialog
 {
-	public static class ErrorDialog
+	public static void ShowMessage (Window parent, string message, string body)
 	{
-		public static void ShowMessage (Window parent, string message, string body)
-		{
-			System.Console.Error.WriteLine ("Pinta: {0}\n{1}", message, body);
+		System.Console.Error.WriteLine ("Pinta: {0}\n{1}", message, body);
 
-			var dialog = Adw.MessageDialog.New (parent, message, body);
+		var dialog = Adw.MessageDialog.New (parent, message, body);
 
-			const string ok_response = "ok";
-			dialog.AddResponse (ok_response, Translations.GetString ("_OK"));
-			dialog.DefaultResponse = ok_response;
-			dialog.CloseResponse = ok_response;
+		const string ok_response = "ok";
+		dialog.AddResponse (ok_response, Translations.GetString ("_OK"));
+		dialog.DefaultResponse = ok_response;
+		dialog.CloseResponse = ok_response;
 
-			dialog.Present ();
-		}
+		dialog.Present ();
+	}
 
-		public static void ShowError (Window parent, string message, string body, string details)
-		{
-			System.Console.Error.WriteLine ("Pinta: {0}\n{1}", message, details);
+	public static void ShowError (Window parent, string message, string body, string details)
+	{
+		System.Console.Error.WriteLine ("Pinta: {0}\n{1}", message, details);
 
-			var dialog = Adw.MessageDialog.New (parent, message, body);
+		var dialog = Adw.MessageDialog.New (parent, message, body);
 
-			var text_view = Gtk.TextView.New ();
-			text_view.Buffer!.SetText (details, -1);
+		var text_view = Gtk.TextView.New ();
+		text_view.Buffer!.SetText (details, -1);
 
-			var scroll = Gtk.ScrolledWindow.New ();
-			scroll.HeightRequest = 250;
-			scroll.SetChild (text_view);
+		var scroll = Gtk.ScrolledWindow.New ();
+		scroll.HeightRequest = 250;
+		scroll.SetChild (text_view);
 
-			var expander = Gtk.Expander.New (Translations.GetString ("Details"));
-			expander.SetChild (scroll);
-			dialog.SetExtraChild (expander);
+		var expander = Gtk.Expander.New (Translations.GetString ("Details"));
+		expander.SetChild (scroll);
+		dialog.SetExtraChild (expander);
 
-			const string bug_response = "bug";
-			const string ok_response = "ok";
-			dialog.AddResponse (bug_response, Translations.GetString ("Report Bug..."));
-			dialog.SetResponseAppearance (bug_response, Adw.ResponseAppearance.Suggested);
-			dialog.AddResponse (ok_response, Translations.GetString ("_OK"));
-			dialog.DefaultResponse = ok_response;
-			dialog.CloseResponse = ok_response;
+		const string bug_response = "bug";
+		const string ok_response = "ok";
+		dialog.AddResponse (bug_response, Translations.GetString ("Report Bug..."));
+		dialog.SetResponseAppearance (bug_response, Adw.ResponseAppearance.Suggested);
+		dialog.AddResponse (ok_response, Translations.GetString ("_OK"));
+		dialog.DefaultResponse = ok_response;
+		dialog.CloseResponse = ok_response;
 
-			dialog.OnResponse += (_, args) => {
-				if (args.Response == bug_response)
-					PintaCore.Actions.Help.Bugs.Activate ();
-			};
+		dialog.OnResponse += (_, args) => {
+			if (args.Response == bug_response)
+				PintaCore.Actions.Help.Bugs.Activate ();
+		};
 
-			dialog.Present ();
-		}
+		dialog.Present ();
 	}
 }
 
