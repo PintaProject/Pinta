@@ -37,168 +37,167 @@ using Cairo;
 using Gtk;
 using Pinta.Core;
 
-namespace Pinta.Tools
+namespace Pinta.Tools;
+
+public class RecolorTool : BaseBrushTool
 {
-	public class RecolorTool : BaseBrushTool
+	private readonly IWorkspaceService workspace;
+
+	private PointI last_point = point_empty;
+	private BitMask? stencil;
+
+	private const string TOLERANCE_SETTING = "recolor-tolerance";
+
+	public RecolorTool (IServiceManager services) : base (services)
 	{
-		private readonly IWorkspaceService workspace;
+		workspace = services.GetService<IWorkspaceService> ();
+	}
 
-		private PointI last_point = point_empty;
-		private BitMask? stencil;
+	public override string Name => Translations.GetString ("Recolor");
+	public override string Icon => Pinta.Resources.Icons.ToolRecolor;
+	public override string StatusBarText => Translations.GetString (
+		"Left click to replace the secondary color with the primary color." +
+		"\nRight click to reverse.");
+	public override Gdk.Cursor DefaultCursor => Gdk.Cursor.NewFromTexture (Resources.GetIcon ("Cursor.Recolor.png"), 9, 18, null);
+	public override Gdk.Key ShortcutKey => Gdk.Key.R;
+	protected float Tolerance => (float) (ToleranceSlider.GetValue () / 100);
+	public override int Priority => 49;
 
-		private const string TOLERANCE_SETTING = "recolor-tolerance";
+	protected override void OnBuildToolBar (Box tb)
+	{
+		base.OnBuildToolBar (tb);
 
-		public RecolorTool (IServiceManager services) : base (services)
-		{
-			workspace = services.GetService<IWorkspaceService> ();
+		tb.Append (Separator);
+
+		tb.Append (ToleranceLabel);
+		tb.Append (ToleranceSlider);
+	}
+
+	protected override void OnMouseDown (Document document, ToolMouseEventArgs e)
+	{
+		document.Layers.ToolLayer.Clear ();
+		stencil = new BitMask (document.ImageSize.Width, document.ImageSize.Height);
+
+		base.OnMouseDown (document, e);
+	}
+
+	protected override void OnMouseMove (Document document, ToolMouseEventArgs e)
+	{
+		ColorBgra old_color;
+		ColorBgra new_color;
+
+		// This should have been created in OnMouseDown
+		if (stencil is null)
+			return;
+
+		if (mouse_button == MouseButton.Left) {
+			old_color = Palette.PrimaryColor.ToColorBgra ();
+			new_color = Palette.SecondaryColor.ToColorBgra ();
+		} else if (mouse_button == MouseButton.Right) {
+			old_color = Palette.SecondaryColor.ToColorBgra ();
+			new_color = Palette.PrimaryColor.ToColorBgra ();
+		} else {
+			last_point = point_empty;
+			return;
 		}
 
-		public override string Name => Translations.GetString ("Recolor");
-		public override string Icon => Pinta.Resources.Icons.ToolRecolor;
-		public override string StatusBarText => Translations.GetString (
-			"Left click to replace the secondary color with the primary color." +
-			"\nRight click to reverse.");
-		public override Gdk.Cursor DefaultCursor => Gdk.Cursor.NewFromTexture (Resources.GetIcon ("Cursor.Recolor.png"), 9, 18, null);
-		public override Gdk.Key ShortcutKey => Gdk.Key.R;
-		protected float Tolerance => (float) (ToleranceSlider.GetValue () / 100);
-		public override int Priority => 49;
+		var x = e.Point.X;
+		var y = e.Point.Y;
 
-		protected override void OnBuildToolBar (Box tb)
-		{
-			base.OnBuildToolBar (tb);
+		if (last_point.Equals (point_empty))
+			last_point = new PointI (x, y);
 
-			tb.Append (Separator);
+		if (document.Workspace.PointInCanvas (e.PointDouble))
+			surface_modified = true;
 
-			tb.Append (ToleranceLabel);
-			tb.Append (ToleranceSlider);
-		}
+		var surf = document.Layers.CurrentUserLayer.Surface;
+		var tmp_layer = document.Layers.ToolLayer.Surface;
 
-		protected override void OnMouseDown (Document document, ToolMouseEventArgs e)
-		{
-			document.Layers.ToolLayer.Clear ();
-			stencil = new BitMask (document.ImageSize.Width, document.ImageSize.Height);
+		var roi = CairoExtensions.GetRectangleFromPoints (last_point, new PointI (x, y), BrushWidth + 2);
 
-			base.OnMouseDown (document, e);
-		}
+		roi = workspace.ClampToImageSize (roi);
+		var myTolerance = (int) (Tolerance * 256);
 
-		protected override void OnMouseMove (Document document, ToolMouseEventArgs e)
-		{
-			ColorBgra old_color;
-			ColorBgra new_color;
+		tmp_layer.Flush ();
 
-			// This should have been created in OnMouseDown
-			if (stencil is null)
-				return;
+		var tmp_data = tmp_layer.GetPixelData ();
+		var tmp_width = tmp_layer.Width;
+		var surf_data = surf.GetReadOnlyPixelData ();
+		var surf_width = surf.Width;
 
-			if (mouse_button == MouseButton.Left) {
-				old_color = Palette.PrimaryColor.ToColorBgra ();
-				new_color = Palette.SecondaryColor.ToColorBgra ();
-			} else if (mouse_button == MouseButton.Right) {
-				old_color = Palette.SecondaryColor.ToColorBgra ();
-				new_color = Palette.PrimaryColor.ToColorBgra ();
-			} else {
-				last_point = point_empty;
-				return;
+		// The stencil lets us know if we've already checked this
+		// pixel, providing a nice perf boost
+		// Maybe this should be changed to a BitVector2DSurfaceAdapter?
+		for (var i = roi.X; i <= roi.Right; i++)
+			for (var j = roi.Y; j <= roi.Bottom; j++) {
+				if (stencil[i, j])
+					continue;
+
+				ref readonly ColorBgra surf_color = ref surf_data[j * surf_width + i];
+				if (ColorBgra.ColorsWithinTolerance (new_color, surf_color, myTolerance))
+					tmp_data[j * tmp_width + i] = AdjustColorDifference (new_color, old_color, surf_color);
+
+				stencil[i, j] = true;
 			}
 
-			var x = e.Point.X;
-			var y = e.Point.Y;
+		tmp_layer.MarkDirty ();
 
-			if (last_point.Equals (point_empty))
-				last_point = new PointI (x, y);
+		var g = document.CreateClippedContext ();
+		g.Antialias = UseAntialiasing ? Antialias.Subpixel : Antialias.None;
 
-			if (document.Workspace.PointInCanvas (e.PointDouble))
-				surface_modified = true;
+		g.MoveTo (last_point.X, last_point.Y);
+		g.LineTo (x, y);
 
-			var surf = document.Layers.CurrentUserLayer.Surface;
-			var tmp_layer = document.Layers.ToolLayer.Surface;
+		g.LineWidth = BrushWidth;
+		g.LineJoin = LineJoin.Round;
+		g.LineCap = LineCap.Round;
 
-			var roi = CairoExtensions.GetRectangleFromPoints (last_point, new PointI (x, y), BrushWidth + 2);
+		g.SetSourceSurface (tmp_layer, 0, 0);
 
-			roi = workspace.ClampToImageSize (roi);
-			var myTolerance = (int) (Tolerance * 256);
+		g.Stroke ();
 
-			tmp_layer.Flush ();
+		document.Workspace.Invalidate (roi);
 
-			var tmp_data = tmp_layer.GetPixelData ();
-			var tmp_width = tmp_layer.Width;
-			var surf_data = surf.GetReadOnlyPixelData ();
-			var surf_width = surf.Width;
-
-			// The stencil lets us know if we've already checked this
-			// pixel, providing a nice perf boost
-			// Maybe this should be changed to a BitVector2DSurfaceAdapter?
-			for (var i = roi.X; i <= roi.Right; i++)
-				for (var j = roi.Y; j <= roi.Bottom; j++) {
-					if (stencil[i, j])
-						continue;
-
-					ref readonly ColorBgra surf_color = ref surf_data[j * surf_width + i];
-					if (ColorBgra.ColorsWithinTolerance (new_color, surf_color, myTolerance))
-						tmp_data[j * tmp_width + i] = AdjustColorDifference (new_color, old_color, surf_color);
-
-					stencil[i, j] = true;
-				}
-
-			tmp_layer.MarkDirty ();
-
-			var g = document.CreateClippedContext ();
-			g.Antialias = UseAntialiasing ? Antialias.Subpixel : Antialias.None;
-
-			g.MoveTo (last_point.X, last_point.Y);
-			g.LineTo (x, y);
-
-			g.LineWidth = BrushWidth;
-			g.LineJoin = LineJoin.Round;
-			g.LineCap = LineCap.Round;
-
-			g.SetSourceSurface (tmp_layer, 0, 0);
-
-			g.Stroke ();
-
-			document.Workspace.Invalidate (roi);
-
-			last_point = new PointI (x, y);
-		}
-
-		protected override void OnSaveSettings (ISettingsService settings)
-		{
-			base.OnSaveSettings (settings);
-
-			if (tolerance_slider is not null)
-				settings.PutSetting (TOLERANCE_SETTING, (int) tolerance_slider.GetValue ());
-		}
-
-		#region Private PDN Methods
-		private static ColorBgra AdjustColorDifference (ColorBgra oldColor, ColorBgra newColor, ColorBgra basisColor)
-		{
-			ColorBgra returnColor;
-
-			// eliminate testing for the "equal to" case
-			returnColor = basisColor;
-
-			returnColor.B = AdjustColorByte (oldColor.B, newColor.B, basisColor.B);
-			returnColor.G = AdjustColorByte (oldColor.G, newColor.G, basisColor.G);
-			returnColor.R = AdjustColorByte (oldColor.R, newColor.R, basisColor.R);
-
-			return returnColor;
-		}
-
-		private static byte AdjustColorByte (byte oldByte, byte newByte, byte basisByte)
-		{
-			if (oldByte > newByte)
-				return Utility.ClampToByte (basisByte - (oldByte - newByte));
-			else
-				return Utility.ClampToByte (basisByte + (newByte - oldByte));
-		}
-		#endregion
-
-		private Label? tolerance_label;
-		private Scale? tolerance_slider;
-		private Separator? separator;
-
-		private Label ToleranceLabel => tolerance_label ??= Label.New (string.Format ("  {0}: ", Translations.GetString ("Tolerance")));
-		private Scale ToleranceSlider => tolerance_slider ??= GtkExtensions.CreateToolBarSlider (0, 100, 1, Settings.GetSetting (TOLERANCE_SETTING, 50));
-		private Separator Separator => separator ??= GtkExtensions.CreateToolBarSeparator ();
+		last_point = new PointI (x, y);
 	}
+
+	protected override void OnSaveSettings (ISettingsService settings)
+	{
+		base.OnSaveSettings (settings);
+
+		if (tolerance_slider is not null)
+			settings.PutSetting (TOLERANCE_SETTING, (int) tolerance_slider.GetValue ());
+	}
+
+	#region Private PDN Methods
+	private static ColorBgra AdjustColorDifference (ColorBgra oldColor, ColorBgra newColor, ColorBgra basisColor)
+	{
+		ColorBgra returnColor;
+
+		// eliminate testing for the "equal to" case
+		returnColor = basisColor;
+
+		returnColor.B = AdjustColorByte (oldColor.B, newColor.B, basisColor.B);
+		returnColor.G = AdjustColorByte (oldColor.G, newColor.G, basisColor.G);
+		returnColor.R = AdjustColorByte (oldColor.R, newColor.R, basisColor.R);
+
+		return returnColor;
+	}
+
+	private static byte AdjustColorByte (byte oldByte, byte newByte, byte basisByte)
+	{
+		if (oldByte > newByte)
+			return Utility.ClampToByte (basisByte - (oldByte - newByte));
+		else
+			return Utility.ClampToByte (basisByte + (newByte - oldByte));
+	}
+	#endregion
+
+	private Label? tolerance_label;
+	private Scale? tolerance_slider;
+	private Separator? separator;
+
+	private Label ToleranceLabel => tolerance_label ??= Label.New (string.Format ("  {0}: ", Translations.GetString ("Tolerance")));
+	private Scale ToleranceSlider => tolerance_slider ??= GtkExtensions.CreateToolBarSlider (0, 100, 1, Settings.GetSetting (TOLERANCE_SETTING, 50));
+	private Separator Separator => separator ??= GtkExtensions.CreateToolBarSeparator ();
 }

@@ -28,75 +28,74 @@ using Cairo;
 using Gtk;
 using Pinta.Core;
 
-namespace Pinta.Tools
+namespace Pinta.Tools;
+
+// This is a base class for brush type tools (paintbrush, eraser, etc)
+public abstract class BaseBrushTool : BaseTool
 {
-	// This is a base class for brush type tools (paintbrush, eraser, etc)
-	public abstract class BaseBrushTool : BaseTool
+	protected IPaletteService Palette { get; }
+
+	protected ImageSurface? undo_surface;
+	protected bool surface_modified;
+	protected MouseButton mouse_button;
+
+	private string BRUSH_WIDTH_SETTING => $"{GetType ().Name.ToLowerInvariant ()}-brush-width";
+
+	protected BaseBrushTool (IServiceManager services) : base (services)
 	{
-		protected IPaletteService Palette { get; }
-
-		protected ImageSurface? undo_surface;
-		protected bool surface_modified;
-		protected MouseButton mouse_button;
-
-		private string BRUSH_WIDTH_SETTING => $"{GetType ().Name.ToLowerInvariant ()}-brush-width";
-
-		protected BaseBrushTool (IServiceManager services) : base (services)
-		{
-			Palette = services.GetService<IPaletteService> ();
-		}
-
-		protected override bool ShowAntialiasingButton => true;
-
-		protected int BrushWidth => brush_width?.GetValueAsInt () ?? DEFAULT_BRUSH_WIDTH;
-
-		protected override void OnBuildToolBar (Box tb)
-		{
-			base.OnBuildToolBar (tb);
-
-			tb.Append (BrushWidthLabel);
-			tb.Append (BrushWidthSpinButton);
-
-			// Change the cursor when the BrushWidth is changed.
-			BrushWidthSpinButton.OnValueChanged += (sender, e) => SetCursor (DefaultCursor);
-		}
-
-		protected override void OnMouseDown (Document document, ToolMouseEventArgs e)
-		{
-			// If we are already drawing, ignore any additional mouse down events
-			if (mouse_button != MouseButton.None)
-				return;
-
-			surface_modified = false;
-			undo_surface = document.Layers.CurrentUserLayer.Surface.Clone ();
-			mouse_button = e.MouseButton;
-
-			OnMouseMove (document, e);
-		}
-
-		protected override void OnMouseUp (Document document, ToolMouseEventArgs e)
-		{
-			if (undo_surface != null && surface_modified) {
-				document.History.PushNewItem (new SimpleHistoryItem (Icon, Name, undo_surface, document.Layers.CurrentUserLayerIndex));
-			}
-
-			surface_modified = false;
-			undo_surface = null;
-			mouse_button = MouseButton.None;
-		}
-
-		protected override void OnSaveSettings (ISettingsService settings)
-		{
-			base.OnSaveSettings (settings);
-
-			if (brush_width is not null)
-				settings.PutSetting (BRUSH_WIDTH_SETTING, brush_width.GetValueAsInt ());
-		}
-
-		private SpinButton? brush_width;
-		private Label? brush_width_label;
-
-		protected SpinButton BrushWidthSpinButton => brush_width ??= GtkExtensions.CreateToolBarSpinButton (1, 1e5, 1, Settings.GetSetting (BRUSH_WIDTH_SETTING, DEFAULT_BRUSH_WIDTH));
-		protected Label BrushWidthLabel => brush_width_label ??= Label.New (string.Format (" {0}: ", Translations.GetString ("Brush width")));
+		Palette = services.GetService<IPaletteService> ();
 	}
+
+	protected override bool ShowAntialiasingButton => true;
+
+	protected int BrushWidth => brush_width?.GetValueAsInt () ?? DEFAULT_BRUSH_WIDTH;
+
+	protected override void OnBuildToolBar (Box tb)
+	{
+		base.OnBuildToolBar (tb);
+
+		tb.Append (BrushWidthLabel);
+		tb.Append (BrushWidthSpinButton);
+
+		// Change the cursor when the BrushWidth is changed.
+		BrushWidthSpinButton.OnValueChanged += (sender, e) => SetCursor (DefaultCursor);
+	}
+
+	protected override void OnMouseDown (Document document, ToolMouseEventArgs e)
+	{
+		// If we are already drawing, ignore any additional mouse down events
+		if (mouse_button != MouseButton.None)
+			return;
+
+		surface_modified = false;
+		undo_surface = document.Layers.CurrentUserLayer.Surface.Clone ();
+		mouse_button = e.MouseButton;
+
+		OnMouseMove (document, e);
+	}
+
+	protected override void OnMouseUp (Document document, ToolMouseEventArgs e)
+	{
+		if (undo_surface != null && surface_modified) {
+			document.History.PushNewItem (new SimpleHistoryItem (Icon, Name, undo_surface, document.Layers.CurrentUserLayerIndex));
+		}
+
+		surface_modified = false;
+		undo_surface = null;
+		mouse_button = MouseButton.None;
+	}
+
+	protected override void OnSaveSettings (ISettingsService settings)
+	{
+		base.OnSaveSettings (settings);
+
+		if (brush_width is not null)
+			settings.PutSetting (BRUSH_WIDTH_SETTING, brush_width.GetValueAsInt ());
+	}
+
+	private SpinButton? brush_width;
+	private Label? brush_width_label;
+
+	protected SpinButton BrushWidthSpinButton => brush_width ??= GtkExtensions.CreateToolBarSpinButton (1, 1e5, 1, Settings.GetSetting (BRUSH_WIDTH_SETTING, DEFAULT_BRUSH_WIDTH));
+	protected Label BrushWidthLabel => brush_width_label ??= Label.New (string.Format (" {0}: ", Translations.GetString ("Brush width")));
 }

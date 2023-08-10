@@ -28,69 +28,68 @@ using System.Collections.Generic;
 using Gtk;
 using Pinta.Core;
 
-namespace Pinta.Tools
+namespace Pinta.Tools;
+
+public sealed class MagicWandTool : FloodTool
 {
-	public class MagicWandTool : FloodTool
+	private readonly IWorkspaceService workspace;
+
+	private CombineMode combine_mode;
+
+	public MagicWandTool (IServiceManager services) : base (services)
 	{
-		private readonly IWorkspaceService workspace;
+		workspace = services.GetService<IWorkspaceService> ();
 
-		private CombineMode combine_mode;
-
-		public MagicWandTool (IServiceManager services) : base (services)
-		{
-			workspace = services.GetService<IWorkspaceService> ();
-
-			LimitToSelection = false;
-		}
-
-		public override Gdk.Key ShortcutKey => Gdk.Key.S;
-		public override string Name => Translations.GetString ("Magic Wand Select");
-		public override string Icon => Pinta.Resources.Icons.ToolSelectMagicWand;
-		public override string StatusBarText => Translations.GetString ("Click to select region of similar color.");
-		public override Gdk.Cursor DefaultCursor => Gdk.Cursor.NewFromTexture (Resources.GetIcon ("Cursor.MagicWand.png"), 21, 10, null);
-		public override int Priority => 19;
-
-		protected override void OnBuildToolBar (Gtk.Box tb)
-		{
-			base.OnBuildToolBar (tb);
-
-			tb.Append (SelectionSeparator);
-
-			workspace.SelectionHandler.BuildToolbar (tb, Settings);
-		}
-
-
-		protected override void OnMouseDown (Document document, ToolMouseEventArgs e)
-		{
-			combine_mode = workspace.SelectionHandler.DetermineCombineMode (e);
-
-			base.OnMouseDown (document, e);
-
-			document.Selection.Visible = true;
-		}
-
-		protected override void OnFillRegionComputed (Document document, IReadOnlyList<IReadOnlyList<PointI>> polygonSet)
-		{
-			var undoAction = new SelectionHistoryItem (Icon, Name);
-			undoAction.TakeSnapshot ();
-
-			document.PreviousSelection = document.Selection.Clone ();
-
-			document.Selection.SelectionPolygons.Clear ();
-			SelectionModeHandler.PerformSelectionMode (document, combine_mode, DocumentSelection.ConvertToPolygons (polygonSet));
-
-			document.History.PushNewItem (undoAction);
-			document.Workspace.Invalidate ();
-		}
-
-		protected override void OnSaveSettings (ISettingsService settings)
-		{
-			base.OnSaveSettings (settings);
-
-			workspace.SelectionHandler.OnSaveSettings (settings);
-		}
-
-		private Separator? selection_sep;
-		private Separator SelectionSeparator => selection_sep ??= GtkExtensions.CreateToolBarSeparator ();
+		LimitToSelection = false;
 	}
+
+	public override Gdk.Key ShortcutKey => Gdk.Key.S;
+	public override string Name => Translations.GetString ("Magic Wand Select");
+	public override string Icon => Pinta.Resources.Icons.ToolSelectMagicWand;
+	public override string StatusBarText => Translations.GetString ("Click to select region of similar color.");
+	public override Gdk.Cursor DefaultCursor => Gdk.Cursor.NewFromTexture (Resources.GetIcon ("Cursor.MagicWand.png"), 21, 10, null);
+	public override int Priority => 19;
+
+	protected override void OnBuildToolBar (Gtk.Box tb)
+	{
+		base.OnBuildToolBar (tb);
+
+		tb.Append (SelectionSeparator);
+
+		workspace.SelectionHandler.BuildToolbar (tb, Settings);
+	}
+
+
+	protected override void OnMouseDown (Document document, ToolMouseEventArgs e)
+	{
+		combine_mode = workspace.SelectionHandler.DetermineCombineMode (e);
+
+		base.OnMouseDown (document, e);
+
+		document.Selection.Visible = true;
+	}
+
+	protected override void OnFillRegionComputed (Document document, IReadOnlyList<IReadOnlyList<PointI>> polygonSet)
+	{
+		var undoAction = new SelectionHistoryItem (Icon, Name);
+		undoAction.TakeSnapshot ();
+
+		document.PreviousSelection = document.Selection.Clone ();
+
+		document.Selection.SelectionPolygons.Clear ();
+		SelectionModeHandler.PerformSelectionMode (document, combine_mode, DocumentSelection.ConvertToPolygons (polygonSet));
+
+		document.History.PushNewItem (undoAction);
+		document.Workspace.Invalidate ();
+	}
+
+	protected override void OnSaveSettings (ISettingsService settings)
+	{
+		base.OnSaveSettings (settings);
+
+		workspace.SelectionHandler.OnSaveSettings (settings);
+	}
+
+	private Separator? selection_sep;
+	private Separator SelectionSeparator => selection_sep ??= GtkExtensions.CreateToolBarSeparator ();
 }

@@ -27,136 +27,135 @@
 using Cairo;
 using Pinta.Core;
 
-namespace Pinta.Tools
+namespace Pinta.Tools;
+
+public sealed class ZoomTool : BaseTool
 {
-	public sealed class ZoomTool : BaseTool
+	private readonly Gdk.Cursor cursor_zoom_in;
+	private readonly Gdk.Cursor cursor_zoom_out;
+	private readonly Gdk.Cursor cursor_zoom;
+	private readonly Gdk.Cursor cursor_zoom_pan;
+
+	private MouseButton mouse_down;
+	private bool is_drawing;
+	private PointD shape_origin;
+	private RectangleD last_dirty;
+	private static readonly int tolerance = 10;
+
+	public ZoomTool (IServiceManager services) : base (services)
 	{
-		private readonly Gdk.Cursor cursor_zoom_in;
-		private readonly Gdk.Cursor cursor_zoom_out;
-		private readonly Gdk.Cursor cursor_zoom;
-		private readonly Gdk.Cursor cursor_zoom_pan;
+		mouse_down = MouseButton.None;
 
-		private MouseButton mouse_down;
-		private bool is_drawing;
-		private PointD shape_origin;
-		private RectangleD last_dirty;
-		private static readonly int tolerance = 10;
+		cursor_zoom_in = Gdk.Cursor.NewFromName (Pinta.Resources.StandardCursors.ZoomIn, null);
+		cursor_zoom_out = Gdk.Cursor.NewFromName (Pinta.Resources.StandardCursors.ZoomOut, null);
+		cursor_zoom = Gdk.Cursor.NewFromTexture (Resources.GetIcon (Pinta.Resources.Icons.ToolZoom), 0, 0, null);
+		cursor_zoom_pan = Gdk.Cursor.NewFromTexture (Resources.GetIcon (Pinta.Resources.Icons.ToolPan), 0, 0, null);
+	}
 
-		public ZoomTool (IServiceManager services) : base (services)
-		{
-			mouse_down = MouseButton.None;
+	public override string Name => Translations.GetString ("Zoom");
+	public override string Icon => Pinta.Resources.Icons.ToolZoom;
+	public override string StatusBarText => Translations.GetString (
+		"Left click to zoom in." +
+		"\nRight click to zoom out." +
+		"\nClick and drag to zoom in selection.");
+	public override Gdk.Cursor DefaultCursor => cursor_zoom;
+	public override Gdk.Key ShortcutKey => Gdk.Key.Z;
+	public override int Priority => 9;
 
-			cursor_zoom_in = Gdk.Cursor.NewFromName (Pinta.Resources.StandardCursors.ZoomIn, null);
-			cursor_zoom_out = Gdk.Cursor.NewFromName (Pinta.Resources.StandardCursors.ZoomOut, null);
-			cursor_zoom = Gdk.Cursor.NewFromTexture (Resources.GetIcon (Pinta.Resources.Icons.ToolZoom), 0, 0, null);
-			cursor_zoom_pan = Gdk.Cursor.NewFromTexture (Resources.GetIcon (Pinta.Resources.Icons.ToolPan), 0, 0, null);
+	protected override void OnMouseDown (Document document, ToolMouseEventArgs e)
+	{
+		// If we are already tracking, ignore any additional mouse down events
+		if (mouse_down != MouseButton.None)
+			return;
+
+		shape_origin = e.PointDouble;
+
+		switch (e.MouseButton) {
+			case MouseButton.Left:
+				SetCursor (cursor_zoom_in);
+				break;
+
+			case MouseButton.Middle:
+				SetCursor (cursor_zoom_pan);
+				break;
+
+			case MouseButton.Right:
+				SetCursor (cursor_zoom_out);
+				break;
 		}
 
-		public override string Name => Translations.GetString ("Zoom");
-		public override string Icon => Pinta.Resources.Icons.ToolZoom;
-		public override string StatusBarText => Translations.GetString (
-			"Left click to zoom in." +
-			"\nRight click to zoom out." +
-			"\nClick and drag to zoom in selection.");
-		public override Gdk.Cursor DefaultCursor => cursor_zoom;
-		public override Gdk.Key ShortcutKey => Gdk.Key.Z;
-		public override int Priority => 9;
+		mouse_down = e.MouseButton;
+	}
 
-		protected override void OnMouseDown (Document document, ToolMouseEventArgs e)
-		{
-			// If we are already tracking, ignore any additional mouse down events
-			if (mouse_down != MouseButton.None)
-				return;
-
-			shape_origin = e.PointDouble;
-
-			switch (e.MouseButton) {
-				case MouseButton.Left:
-					SetCursor (cursor_zoom_in);
-					break;
-
-				case MouseButton.Middle:
-					SetCursor (cursor_zoom_pan);
-					break;
-
-				case MouseButton.Right:
-					SetCursor (cursor_zoom_out);
-					break;
-			}
-
-			mouse_down = e.MouseButton;
+	protected override void OnMouseMove (Document document, ToolMouseEventArgs e)
+	{
+		switch (mouse_down) {
+			case MouseButton.Left:
+				OnMouseMove_LeftPressed (document, e);
+				break;
+			case MouseButton.Middle:
+				OnMouseMove_MiddlePressed (document, e);
+				break;
 		}
+	}
 
-		protected override void OnMouseMove (Document document, ToolMouseEventArgs e)
-		{
-			switch (mouse_down) {
-				case MouseButton.Left:
-					OnMouseMove_LeftPressed (document, e);
-					break;
-				case MouseButton.Middle:
-					OnMouseMove_MiddlePressed (document, e);
-					break;
-			}
-		}
+	private void OnMouseMove_MiddlePressed (Document document, ToolMouseEventArgs e)
+	{
+		var deltaX = (int) ((shape_origin.X - e.PointDouble.X) * document.Workspace.Scale);
+		var deltaY = (int) ((shape_origin.Y - e.PointDouble.Y) * document.Workspace.Scale);
+		document.Workspace.ScrollCanvas (deltaX, deltaY);
+	}
 
-		private void OnMouseMove_MiddlePressed (Document document, ToolMouseEventArgs e)
-		{
-			var deltaX = (int) ((shape_origin.X - e.PointDouble.X) * document.Workspace.Scale);
-			var deltaY = (int) ((shape_origin.Y - e.PointDouble.Y) * document.Workspace.Scale);
-			document.Workspace.ScrollCanvas (deltaX, deltaY);
-		}
+	private void OnMouseMove_LeftPressed (Document document, ToolMouseEventArgs e)
+	{
+		var shape_origin_window = document.Workspace.CanvasPointToView (shape_origin);
+		if (shape_origin_window.Distance (e.WindowPoint) > tolerance) // if they've moved the mouse more than 10 pixels since they clicked
+			is_drawing = true;
 
-		private void OnMouseMove_LeftPressed (Document document, ToolMouseEventArgs e)
-		{
-			var shape_origin_window = document.Workspace.CanvasPointToView (shape_origin);
-			if (shape_origin_window.Distance (e.WindowPoint) > tolerance) // if they've moved the mouse more than 10 pixels since they clicked
-				is_drawing = true;
+		//still draw rectangle after we have draw it one time...
+		UpdateRectangle (document, e.PointDouble);
+	}
 
-			//still draw rectangle after we have draw it one time...
-			UpdateRectangle (document, e.PointDouble);
-		}
+	protected override void OnMouseUp (Document document, ToolMouseEventArgs e)
+	{
+		document.Layers.ToolLayer.Hidden = true;
 
-		protected override void OnMouseUp (Document document, ToolMouseEventArgs e)
-		{
-			document.Layers.ToolLayer.Hidden = true;
-
-			if (mouse_down == MouseButton.Left || mouse_down == MouseButton.Right) {
-				if (e.MouseButton == MouseButton.Left) {
-					var shape_origin_window = document.Workspace.CanvasPointToView (shape_origin);
-					if (shape_origin_window.Distance (e.WindowPoint) <= tolerance) {
-						document.Workspace.ZoomInAroundCanvasPoint (e.PointDouble);
-					} else {
-						document.Workspace.ZoomToCanvasRectangle (CairoExtensions.PointsToRectangle (shape_origin, e.PointDouble));
-					}
+		if (mouse_down == MouseButton.Left || mouse_down == MouseButton.Right) {
+			if (e.MouseButton == MouseButton.Left) {
+				var shape_origin_window = document.Workspace.CanvasPointToView (shape_origin);
+				if (shape_origin_window.Distance (e.WindowPoint) <= tolerance) {
+					document.Workspace.ZoomInAroundCanvasPoint (e.PointDouble);
 				} else {
-					document.Workspace.ZoomOutAroundCanvasPoint (e.PointDouble);
+					document.Workspace.ZoomToCanvasRectangle (CairoExtensions.PointsToRectangle (shape_origin, e.PointDouble));
 				}
+			} else {
+				document.Workspace.ZoomOutAroundCanvasPoint (e.PointDouble);
 			}
-
-			mouse_down = MouseButton.None;
-
-			is_drawing = false;
-
-			SetCursor (cursor_zoom);//restore regular cursor
 		}
 
-		private void UpdateRectangle (Document document, PointD point)
-		{
-			if (!is_drawing)
-				return;
+		mouse_down = MouseButton.None;
 
-			var r = CairoExtensions.PointsToRectangle (shape_origin.Rounded (), point.Rounded ());
+		is_drawing = false;
 
-			document.Layers.ToolLayer.Clear ();
-			document.Layers.ToolLayer.Hidden = false;
+		SetCursor (cursor_zoom);//restore regular cursor
+	}
 
-			var g = new Context (document.Layers.ToolLayer.Surface);
-			var dirty = g.FillRectangle (r, new Cairo.Color (0.7, 0.8, 0.9, 0.4));
+	private void UpdateRectangle (Document document, PointD point)
+	{
+		if (!is_drawing)
+			return;
 
-			document.Workspace.Invalidate (last_dirty.ToInt ());
-			document.Workspace.Invalidate (dirty.ToInt ());
+		var r = CairoExtensions.PointsToRectangle (shape_origin.Rounded (), point.Rounded ());
 
-			last_dirty = dirty;
-		}
+		document.Layers.ToolLayer.Clear ();
+		document.Layers.ToolLayer.Hidden = false;
+
+		var g = new Context (document.Layers.ToolLayer.Surface);
+		var dirty = g.FillRectangle (r, new Cairo.Color (0.7, 0.8, 0.9, 0.4));
+
+		document.Workspace.Invalidate (last_dirty.ToInt ());
+		document.Workspace.Invalidate (dirty.ToInt ());
+
+		last_dirty = dirty;
 	}
 }

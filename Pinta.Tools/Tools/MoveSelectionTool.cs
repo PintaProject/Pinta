@@ -27,74 +27,73 @@
 using Cairo;
 using Pinta.Core;
 
-namespace Pinta.Tools
+namespace Pinta.Tools;
+
+public sealed class MoveSelectionTool : BaseTransformTool
 {
-	public class MoveSelectionTool : BaseTransformTool
+	private SelectionHistoryItem? hist;
+	private DocumentSelection? original_selection;
+
+	public MoveSelectionTool (IServiceManager service) : base (service)
 	{
-		private SelectionHistoryItem? hist;
-		private DocumentSelection? original_selection;
+	}
 
-		public MoveSelectionTool (IServiceManager service) : base (service)
-		{
-		}
+	public override string Name => Translations.GetString ("Move Selection");
+	public override string Icon => Pinta.Resources.Icons.ToolMoveSelection;
+	// Translators: {0} is 'Ctrl', or a platform-specific key such as 'Command' on macOS.
+	public override string StatusBarText => Translations.GetString (
+		"Left click and drag the selection to move selection outline." +
+		"\nHold {0} to scale instead of move." +
+		"\nRight click and drag the selection to rotate selection outline." +
+		"\nHold Shift to rotate in steps." +
+		"\nUse arrow keys to move selection outline by a single pixel.",
+		GtkExtensions.CtrlLabel ());
+	public override Gdk.Cursor DefaultCursor => Gdk.Cursor.NewFromTexture (Resources.GetIcon (Pinta.Resources.Icons.ToolMoveSelection), 0, 0, null);
+	public override Gdk.Key ShortcutKey => Gdk.Key.M;
+	public override int Priority => 7;
 
-		public override string Name => Translations.GetString ("Move Selection");
-		public override string Icon => Pinta.Resources.Icons.ToolMoveSelection;
-		// Translators: {0} is 'Ctrl', or a platform-specific key such as 'Command' on macOS.
-		public override string StatusBarText => Translations.GetString (
-			"Left click and drag the selection to move selection outline." +
-			"\nHold {0} to scale instead of move." +
-			"\nRight click and drag the selection to rotate selection outline." +
-			"\nHold Shift to rotate in steps." +
-			"\nUse arrow keys to move selection outline by a single pixel.",
-			GtkExtensions.CtrlLabel ());
-		public override Gdk.Cursor DefaultCursor => Gdk.Cursor.NewFromTexture (Resources.GetIcon (Pinta.Resources.Icons.ToolMoveSelection), 0, 0, null);
-		public override Gdk.Key ShortcutKey => Gdk.Key.M;
-		public override int Priority => 7;
+	protected override RectangleD GetSourceRectangle (Document document)
+	{
+		return document.Selection.SelectionPath.GetBounds ().ToDouble ();
+	}
 
-		protected override RectangleD GetSourceRectangle (Document document)
-		{
-			return document.Selection.SelectionPath.GetBounds ().ToDouble ();
-		}
+	protected override void OnStartTransform (Document document)
+	{
+		base.OnStartTransform (document);
 
-		protected override void OnStartTransform (Document document)
-		{
-			base.OnStartTransform (document);
+		original_selection = document.Selection.Clone ();
 
-			original_selection = document.Selection.Clone ();
+		hist = new SelectionHistoryItem (Icon, Name);
+		hist.TakeSnapshot ();
+	}
 
-			hist = new SelectionHistoryItem (Icon, Name);
-			hist.TakeSnapshot ();
-		}
+	protected override void OnUpdateTransform (Document document, Matrix transform)
+	{
+		base.OnUpdateTransform (document, transform);
 
-		protected override void OnUpdateTransform (Document document, Matrix transform)
-		{
-			base.OnUpdateTransform (document, transform);
+		// Should never be null, set in OnStartTransform
+		if (original_selection is null)
+			return;
 
-			// Should never be null, set in OnStartTransform
-			if (original_selection is null)
-				return;
+		document.Selection = original_selection.Transform (transform);
+		document.Selection.Visible = true;
 
-			document.Selection = original_selection.Transform (transform);
-			document.Selection.Visible = true;
+		document.Workspace.Invalidate ();
+	}
 
-			document.Workspace.Invalidate ();
-		}
+	protected override void OnFinishTransform (Document document, Matrix transform)
+	{
+		base.OnFinishTransform (document, transform);
 
-		protected override void OnFinishTransform (Document document, Matrix transform)
-		{
-			base.OnFinishTransform (document, transform);
+		// Also transform the base selection used for the various select modes.
+		var prev_selection = document.PreviousSelection;
+		document.PreviousSelection = prev_selection.Transform (transform);
 
-			// Also transform the base selection used for the various select modes.
-			var prev_selection = document.PreviousSelection;
-			document.PreviousSelection = prev_selection.Transform (transform);
+		if (hist != null)
+			document.History.PushNewItem (hist);
 
-			if (hist != null)
-				document.History.PushNewItem (hist);
+		hist = null;
 
-			hist = null;
-
-			original_selection = null;
-		}
+		original_selection = null;
 	}
 }
