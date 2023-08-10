@@ -24,72 +24,71 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 // THE SOFTWARE.
 
-namespace Pinta.Core
+namespace Pinta.Core;
+
+public static class PintaCore
 {
-	public static class PintaCore
+	public static ActionManager Actions { get; }
+	public static ChromeManager Chrome { get; }
+	public static EffectsManager Effects { get; }
+	public static ImageConverterManager ImageFormats { get; }
+	public static IServiceManager Services { get; }
+	public static LayerManager Layers { get; }
+	public static LivePreviewManager LivePreview { get; }
+	public static PaintBrushManager PaintBrushes { get; }
+	public static PaletteFormatManager PaletteFormats { get; }
+	public static PaletteManager Palette { get; }
+	public static RecentFileManager RecentFiles { get; }
+	public static ResourceManager Resources { get; }
+	public static SettingsManager Settings { get; }
+	public static SystemManager System { get; }
+	public static ToolManager Tools { get; }
+	public static WorkspaceManager Workspace { get; }
+
+	public const string ApplicationVersion = "2.2";
+
+	static PintaCore ()
 	{
-		public static ActionManager Actions { get; }
-		public static ChromeManager Chrome { get; }
-		public static EffectsManager Effects { get; }
-		public static ImageConverterManager ImageFormats { get; }
-		public static IServiceManager Services { get; }
-		public static LayerManager Layers { get; }
-		public static LivePreviewManager LivePreview { get; }
-		public static PaintBrushManager PaintBrushes { get; }
-		public static PaletteFormatManager PaletteFormats { get; }
-		public static PaletteManager Palette { get; }
-		public static RecentFileManager RecentFiles { get; }
-		public static ResourceManager Resources { get; }
-		public static SettingsManager Settings { get; }
-		public static SystemManager System { get; }
-		public static ToolManager Tools { get; }
-		public static WorkspaceManager Workspace { get; }
+		// Resources and Settings are initialized first so later
+		// Managers can access them as needed.
+		Resources = new ResourceManager ();
+		System = new SystemManager ();
+		Settings = new SettingsManager ();
+		Actions = new ActionManager ();
+		Workspace = new WorkspaceManager ();
+		Layers = new LayerManager ();
+		PaintBrushes = new PaintBrushManager ();
+		Tools = new ToolManager ();
+		ImageFormats = new ImageConverterManager ();
+		PaletteFormats = new PaletteFormatManager ();
+		RecentFiles = new RecentFileManager ();
+		LivePreview = new LivePreviewManager ();
+		Palette = new PaletteManager ();
+		Chrome = new ChromeManager ();
+		Effects = new EffectsManager ();
 
-		public const string ApplicationVersion = "2.2";
+		Services = new ServiceManager ();
 
-		static PintaCore ()
-		{
-			// Resources and Settings are initialized first so later
-			// Managers can access them as needed.
-			Resources = new ResourceManager ();
-			System = new SystemManager ();
-			Settings = new SettingsManager ();
-			Actions = new ActionManager ();
-			Workspace = new WorkspaceManager ();
-			Layers = new LayerManager ();
-			PaintBrushes = new PaintBrushManager ();
-			Tools = new ToolManager ();
-			ImageFormats = new ImageConverterManager ();
-			PaletteFormats = new PaletteFormatManager ();
-			RecentFiles = new RecentFileManager ();
-			LivePreview = new LivePreviewManager ();
-			Palette = new PaletteManager ();
-			Chrome = new ChromeManager ();
-			Effects = new EffectsManager ();
+		Services.AddService<IResourceService> (Resources);
+		Services.AddService<ISettingsService> (Settings);
+		Services.AddService (Actions);
+		Services.AddService<IWorkspaceService> (Workspace);
+		Services.AddService (Layers);
+		Services.AddService<IPaintBrushService> (PaintBrushes);
+		Services.AddService<IToolService> (Tools);
+		Services.AddService (ImageFormats);
+		Services.AddService (PaletteFormats);
+		Services.AddService (System);
+		Services.AddService (RecentFiles);
 
-			Services = new ServiceManager ();
+		Services.AddService (LivePreview);
+		Services.AddService<IPaletteService> (Palette);
+		Services.AddService (Chrome);
+		Services.AddService (Effects);
+	}
 
-			Services.AddService<IResourceService> (Resources);
-			Services.AddService<ISettingsService> (Settings);
-			Services.AddService (Actions);
-			Services.AddService<IWorkspaceService> (Workspace);
-			Services.AddService (Layers);
-			Services.AddService<IPaintBrushService> (PaintBrushes);
-			Services.AddService<IToolService> (Tools);
-			Services.AddService (ImageFormats);
-			Services.AddService (PaletteFormats);
-			Services.AddService (System);
-			Services.AddService (RecentFiles);
-
-			Services.AddService (LivePreview);
-			Services.AddService<IPaletteService> (Palette);
-			Services.AddService (Chrome);
-			Services.AddService (Effects);
-		}
-
-		public static void Initialize ()
-		{
-			Actions.RegisterHandlers ();
-		}
+	public static void Initialize ()
+	{
+		Actions.RegisterHandlers ();
 	}
 }
