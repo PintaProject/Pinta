@@ -301,7 +301,7 @@ namespace Pinta.Core
 		#endregion
 
 		#region Private Methods
-		protected internal void OnCanvasInvalidated (CanvasInvalidatedEventArgs e)
+		private void OnCanvasInvalidated (CanvasInvalidatedEventArgs e)
 		{
 			if (CanvasInvalidated != null)
 				CanvasInvalidated (this, e);
