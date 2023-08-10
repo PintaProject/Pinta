@@ -29,67 +29,65 @@ using System.Collections.Generic;
 using System.Reflection;
 using System.Runtime.InteropServices;
 
-namespace Pinta.Core
+namespace Pinta.Core;
+
+// Utility to simplify DllImport's with platform-specific library names, adapted from gir.core
+// TODO-GTK4 (bindings) - remove once manual bindings are no longer needed.
+internal static class NativeImportResolver
 {
-	// Utility to simplify DllImport's with platform-specific library names, adapted from gir.core
-	// TODO-GTK4 (bindings) - remove once manual bindings are no longer needed.
-	internal static class NativeImportResolver
+	private class LibraryInfo
 	{
-		private class LibraryInfo
+		public string WindowsName;
+		public string LinuxName;
+		public string OsxName;
+		public IntPtr LibraryPointer = IntPtr.Zero;
+
+		public LibraryInfo (string windowsLibraryName, string linuxLibraryName, string osxLibraryName)
 		{
-			public string WindowsName;
-			public string LinuxName;
-			public string OsxName;
-			public IntPtr LibraryPointer = IntPtr.Zero;
-
-			public LibraryInfo (string windowsLibraryName, string linuxLibraryName, string osxLibraryName)
-			{
-				WindowsName = windowsLibraryName;
-				OsxName = osxLibraryName;
-				LinuxName = linuxLibraryName;
-			}
-		};
-
-		private static readonly Dictionary<string, LibraryInfo> library_infos = new ();
-
-		static NativeImportResolver ()
-		{
-			NativeLibrary.SetDllImportResolver (typeof (NativeImportResolver).Assembly, Resolve);
+			WindowsName = windowsLibraryName;
+			OsxName = osxLibraryName;
+			LinuxName = linuxLibraryName;
 		}
+	};
 
-		public static void RegisterLibrary (string library, string windowsLibraryName, string linuxLibraryName, string osxLibraryName)
-		{
-			library_infos.Add (library, new LibraryInfo (windowsLibraryName, linuxLibraryName, osxLibraryName));
-		}
+	private static readonly Dictionary<string, LibraryInfo> library_infos = new ();
 
-		public static IntPtr Resolve (string libraryName, Assembly assembly, DllImportSearchPath? searchPath)
-		{
-			if (!library_infos.TryGetValue (libraryName, out var libraryInfo))
-				return IntPtr.Zero;
-
-			if (libraryInfo.LibraryPointer != IntPtr.Zero)
-				return libraryInfo.LibraryPointer;
-
-			var osDependentLibraryName = GetOsDependentLibraryName (libraryInfo);
-			libraryInfo.LibraryPointer = NativeLibrary.Load (osDependentLibraryName, assembly, searchPath);
-
-			return libraryInfo.LibraryPointer;
-		}
-
-		private static string GetOsDependentLibraryName (LibraryInfo libraryInfo)
-		{
-			if (RuntimeInformation.IsOSPlatform (OSPlatform.Windows))
-				return libraryInfo.WindowsName;
-
-			if (RuntimeInformation.IsOSPlatform (OSPlatform.OSX))
-				return libraryInfo.OsxName;
-
-			if (RuntimeInformation.IsOSPlatform (OSPlatform.Linux))
-				return libraryInfo.LinuxName;
-
-			throw new System.Exception ("Unknown platform");
-		}
+	static NativeImportResolver ()
+	{
+		NativeLibrary.SetDllImportResolver (typeof (NativeImportResolver).Assembly, Resolve);
 	}
 
+	public static void RegisterLibrary (string library, string windowsLibraryName, string linuxLibraryName, string osxLibraryName)
+	{
+		library_infos.Add (library, new LibraryInfo (windowsLibraryName, linuxLibraryName, osxLibraryName));
+	}
+
+	public static IntPtr Resolve (string libraryName, Assembly assembly, DllImportSearchPath? searchPath)
+	{
+		if (!library_infos.TryGetValue (libraryName, out var libraryInfo))
+			return IntPtr.Zero;
+
+		if (libraryInfo.LibraryPointer != IntPtr.Zero)
+			return libraryInfo.LibraryPointer;
+
+		var osDependentLibraryName = GetOsDependentLibraryName (libraryInfo);
+		libraryInfo.LibraryPointer = NativeLibrary.Load (osDependentLibraryName, assembly, searchPath);
+
+		return libraryInfo.LibraryPointer;
+	}
+
+	private static string GetOsDependentLibraryName (LibraryInfo libraryInfo)
+	{
+		if (RuntimeInformation.IsOSPlatform (OSPlatform.Windows))
+			return libraryInfo.WindowsName;
+
+		if (RuntimeInformation.IsOSPlatform (OSPlatform.OSX))
+			return libraryInfo.OsxName;
+
+		if (RuntimeInformation.IsOSPlatform (OSPlatform.Linux))
+			return libraryInfo.LinuxName;
+
+		throw new System.Exception ("Unknown platform");
+	}
 }
 

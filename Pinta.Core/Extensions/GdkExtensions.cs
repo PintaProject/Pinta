@@ -28,243 +28,242 @@ using System;
 using System.Threading.Tasks;
 using Gdk;
 
-namespace Pinta.Core
+namespace Pinta.Core;
+
+public static class GdkExtensions
 {
-	public static class GdkExtensions
+	public static bool IsShiftPressed (this ModifierType m)
 	{
-		public static bool IsShiftPressed (this ModifierType m)
-		{
-			return m.HasFlag (ModifierType.ShiftMask);
+		return m.HasFlag (ModifierType.ShiftMask);
+	}
+
+	/// <summary>
+	/// Returns whether a Ctrl modifier is pressed (or the Cmd key on macOS).
+	/// </summary>
+	public static bool IsControlPressed (this ModifierType m)
+	{
+		// The Cmd key is GDK_MOD2_MASK, which is no longer a public constant as of GTK4
+		if (PintaCore.System.OperatingSystem == OS.Mac) {
+			var modifier_val = (uint) m;
+			return (modifier_val & 16) != 0;
+		} else
+			return m.HasFlag (ModifierType.ControlMask);
+	}
+
+	public static bool IsAltPressed (this ModifierType m)
+	{
+		return m.HasFlag (ModifierType.AltMask);
+	}
+
+	public static bool IsLeftMousePressed (this ModifierType m)
+	{
+		return m.HasFlag (ModifierType.Button1Mask);
+	}
+
+	public static bool IsRightMousePressed (this ModifierType m)
+	{
+		return m.HasFlag (ModifierType.Button3Mask);
+	}
+
+	/// <summary>
+	/// Returns whether this key is a Ctrl key (or the Cmd key on macOS).
+	/// </summary>
+	public static bool IsControlKey (this Key key)
+	{
+		if (PintaCore.System.OperatingSystem == OS.Mac)
+			return key == Key.Meta_L || key == Key.Meta_R;
+		else
+			return key == Key.Control_L || key == Key.Control_R;
+	}
+
+	/// <summary>
+	/// Returns whether any of the Ctrl/Cmd/Shift/Alt modifiers are active.
+	/// This prevents Caps Lock, Num Lock, etc from appearing as active modifier keys.
+	/// </summary>
+	public static bool HasModifierKey (this ModifierType current_state)
+		=> current_state.IsControlPressed () || current_state.IsShiftPressed () || current_state.IsAltPressed ();
+
+	/// <summary>
+	/// Create a cursor icon with a shape that visually represents the tool's thickness.
+	/// </summary>
+	/// <param name="imgName">A string containing the name of the tool's icon image to use.</param>
+	/// <param name="shape">The shape to draw.</param>
+	/// <param name="shapeWidth">The width of the shape.</param>
+	/// <param name="imgToShapeX">The horizontal distance between the image's top-left corner and the shape center.</param>
+	/// <param name="imgToShapeY">The vertical distance between the image's top-left corner and the shape center.</param>
+	/// <param name="shapeX">The X position in the returned Pixbuf that will be the center of the shape.</param>
+	/// <param name="shapeY">The Y position in the returned Pixbuf that will be the center of the shape.</param>
+	/// <returns>The new cursor icon with an shape that represents the tool's thickness.</returns>
+	public static Gdk.Texture CreateIconWithShape (string imgName, CursorShape shape, int shapeWidth,
+						  int imgToShapeX, int imgToShapeY,
+						  out int shapeX, out int shapeY)
+	{
+		Gdk.Texture img = PintaCore.Resources.GetIcon (imgName);
+
+		double zoom = 1d;
+		if (PintaCore.Workspace.HasOpenDocuments) {
+			zoom = Math.Min (30d, PintaCore.Workspace.ActiveDocument.Workspace.Scale);
 		}
 
-		/// <summary>
-		/// Returns whether a Ctrl modifier is pressed (or the Cmd key on macOS).
-		/// </summary>
-		public static bool IsControlPressed (this ModifierType m)
-		{
-			// The Cmd key is GDK_MOD2_MASK, which is no longer a public constant as of GTK4
-			if (PintaCore.System.OperatingSystem == OS.Mac) {
-				var modifier_val = (uint) m;
-				return (modifier_val & 16) != 0;
-			} else
-				return m.HasFlag (ModifierType.ControlMask);
-		}
+		shapeWidth = (int) Math.Min (800d, ((double) shapeWidth) * zoom);
+		int halfOfShapeWidth = shapeWidth / 2;
 
-		public static bool IsAltPressed (this ModifierType m)
-		{
-			return m.HasFlag (ModifierType.AltMask);
-		}
+		// Calculate bounding boxes around the both image and shape
+		// relative to the image top-left corner.
+		var imgBBox = new RectangleI (0, 0, img.Width, img.Height);
+		var shapeBBox = new RectangleI (
+			imgToShapeX - halfOfShapeWidth,
+			imgToShapeY - halfOfShapeWidth,
+			shapeWidth,
+			shapeWidth);
 
-		public static bool IsLeftMousePressed (this ModifierType m)
-		{
-			return m.HasFlag (ModifierType.Button1Mask);
-		}
+		// Inflate shape bounding box to allow for anti-aliasing
+		shapeBBox.Inflate (2, 2);
 
-		public static bool IsRightMousePressed (this ModifierType m)
-		{
-			return m.HasFlag (ModifierType.Button3Mask);
-		}
+		// To determine required size of icon,
+		// find union of the image and shape bounding boxes
+		// (still relative to image top-left corner)
+		RectangleI iconBBox = imgBBox.Union (shapeBBox);
 
-		/// <summary>
-		/// Returns whether this key is a Ctrl key (or the Cmd key on macOS).
-		/// </summary>
-		public static bool IsControlKey (this Key key)
-		{
-			if (PintaCore.System.OperatingSystem == OS.Mac)
-				return key == Key.Meta_L || key == Key.Meta_R;
-			else
-				return key == Key.Control_L || key == Key.Control_R;
-		}
+		// Image top-left corner in icon coordinates
+		int imgX = imgBBox.Left - iconBBox.Left;
+		int imgY = imgBBox.Top - iconBBox.Top;
 
-		/// <summary>
-		/// Returns whether any of the Ctrl/Cmd/Shift/Alt modifiers are active.
-		/// This prevents Caps Lock, Num Lock, etc from appearing as active modifier keys.
-		/// </summary>
-		public static bool HasModifierKey (this ModifierType current_state)
-			=> current_state.IsControlPressed () || current_state.IsShiftPressed () || current_state.IsAltPressed ();
+		// Shape center point in icon coordinates
+		shapeX = imgToShapeX - iconBBox.Left;
+		shapeY = imgToShapeY - iconBBox.Top;
 
-		/// <summary>
-		/// Create a cursor icon with a shape that visually represents the tool's thickness.
-		/// </summary>
-		/// <param name="imgName">A string containing the name of the tool's icon image to use.</param>
-		/// <param name="shape">The shape to draw.</param>
-		/// <param name="shapeWidth">The width of the shape.</param>
-		/// <param name="imgToShapeX">The horizontal distance between the image's top-left corner and the shape center.</param>
-		/// <param name="imgToShapeY">The vertical distance between the image's top-left corner and the shape center.</param>
-		/// <param name="shapeX">The X position in the returned Pixbuf that will be the center of the shape.</param>
-		/// <param name="shapeY">The Y position in the returned Pixbuf that will be the center of the shape.</param>
-		/// <returns>The new cursor icon with an shape that represents the tool's thickness.</returns>
-		public static Gdk.Texture CreateIconWithShape (string imgName, CursorShape shape, int shapeWidth,
-							  int imgToShapeX, int imgToShapeY,
-							  out int shapeX, out int shapeY)
-		{
-			Gdk.Texture img = PintaCore.Resources.GetIcon (imgName);
+		var i = CairoExtensions.CreateImageSurface (Cairo.Format.Argb32, iconBBox.Width, iconBBox.Height);
+		var g = new Cairo.Context (i);
+		// Don't show shape if shapeWidth less than 3,
+		if (shapeWidth > 3) {
+			int diam = Math.Max (1, shapeWidth - 2);
+			var shapeRect = new RectangleD (shapeX - halfOfShapeWidth,
+									 shapeY - halfOfShapeWidth,
+									 diam,
+									 diam);
 
-			double zoom = 1d;
-			if (PintaCore.Workspace.HasOpenDocuments) {
-				zoom = Math.Min (30d, PintaCore.Workspace.ActiveDocument.Workspace.Scale);
+			Cairo.Color outerColor = new Cairo.Color (255, 255, 255, 0.75);
+			Cairo.Color innerColor = new Cairo.Color (0, 0, 0);
+
+			switch (shape) {
+				case CursorShape.Ellipse:
+					g.DrawEllipse (shapeRect, outerColor, 2);
+					shapeRect = shapeRect.Inflated (-1, -1);
+					g.DrawEllipse (shapeRect, innerColor, 1);
+					break;
+				case CursorShape.Rectangle:
+					g.DrawRectangle (shapeRect, outerColor, 1);
+					shapeRect = shapeRect.Inflated (-1, -1);
+					g.DrawRectangle (shapeRect, innerColor, 1);
+					break;
 			}
-
-			shapeWidth = (int) Math.Min (800d, ((double) shapeWidth) * zoom);
-			int halfOfShapeWidth = shapeWidth / 2;
-
-			// Calculate bounding boxes around the both image and shape
-			// relative to the image top-left corner.
-			var imgBBox = new RectangleI (0, 0, img.Width, img.Height);
-			var shapeBBox = new RectangleI (
-				imgToShapeX - halfOfShapeWidth,
-				imgToShapeY - halfOfShapeWidth,
-				shapeWidth,
-				shapeWidth);
-
-			// Inflate shape bounding box to allow for anti-aliasing
-			shapeBBox.Inflate (2, 2);
-
-			// To determine required size of icon,
-			// find union of the image and shape bounding boxes
-			// (still relative to image top-left corner)
-			RectangleI iconBBox = imgBBox.Union (shapeBBox);
-
-			// Image top-left corner in icon coordinates
-			int imgX = imgBBox.Left - iconBBox.Left;
-			int imgY = imgBBox.Top - iconBBox.Top;
-
-			// Shape center point in icon coordinates
-			shapeX = imgToShapeX - iconBBox.Left;
-			shapeY = imgToShapeY - iconBBox.Top;
-
-			var i = CairoExtensions.CreateImageSurface (Cairo.Format.Argb32, iconBBox.Width, iconBBox.Height);
-			var g = new Cairo.Context (i);
-			// Don't show shape if shapeWidth less than 3,
-			if (shapeWidth > 3) {
-				int diam = Math.Max (1, shapeWidth - 2);
-				var shapeRect = new RectangleD (shapeX - halfOfShapeWidth,
-										 shapeY - halfOfShapeWidth,
-										 diam,
-										 diam);
-
-				Cairo.Color outerColor = new Cairo.Color (255, 255, 255, 0.75);
-				Cairo.Color innerColor = new Cairo.Color (0, 0, 0);
-
-				switch (shape) {
-					case CursorShape.Ellipse:
-						g.DrawEllipse (shapeRect, outerColor, 2);
-						shapeRect = shapeRect.Inflated (-1, -1);
-						g.DrawEllipse (shapeRect, innerColor, 1);
-						break;
-					case CursorShape.Rectangle:
-						g.DrawRectangle (shapeRect, outerColor, 1);
-						shapeRect = shapeRect.Inflated (-1, -1);
-						g.DrawRectangle (shapeRect, innerColor, 1);
-						break;
-				}
-			}
-
-			// Draw the image
-			var img_surf = img.ToSurface ();
-			g.SetSourceSurface (img_surf, imgX, imgY);
-			g.Paint ();
-
-			return Texture.NewForPixbuf (i.ToPixbuf ());
 		}
 
-		public static Key ToUpper (this Key k1)
-		{
-			if (Enum.TryParse (k1.ToString ().ToUpperInvariant (), out Key result))
-				return result;
+		// Draw the image
+		var img_surf = img.ToSurface ();
+		g.SetSourceSurface (img_surf, imgX, imgY);
+		g.Paint ();
 
-			return k1;
-		}
+		return Texture.NewForPixbuf (i.ToPixbuf ());
+	}
 
-		// TODO-GTK4 (bindings, unsubmitted) - need gir.core async bindings for Gdk.Clipboard
-		public static Task<string?> ReadTextAsync (this Gdk.Clipboard clipboard)
-		{
-			var tcs = new TaskCompletionSource<string?> ();
-
-			Gdk.Internal.Clipboard.ReadTextAsync (clipboard.Handle, IntPtr.Zero, new Gio.Internal.AsyncReadyCallbackAsyncHandler ((_, args, _) => {
-				GLib.Internal.ErrorOwnedHandle error;
-				string? result = Gdk.Internal.Clipboard.ReadTextFinish (clipboard.Handle, args.Handle, out error).ConvertToString ();
-				GLib.Error.ThrowOnError (error);
-
-				tcs.SetResult (result);
-			}).NativeCallback, IntPtr.Zero);
-
-			return tcs.Task;
-		}
-
-		// TODO-GTK4 (bindings, unsubmitted) - need gir.core async bindings for Gdk.Clipboard
-		public static Task<Texture?> ReadTextureAsync (this Gdk.Clipboard clipboard)
-		{
-			var tcs = new TaskCompletionSource<Texture?> ();
-
-			Gdk.Internal.Clipboard.ReadTextureAsync (clipboard.Handle, IntPtr.Zero, new Gio.Internal.AsyncReadyCallbackAsyncHandler ((_, args, _) => {
-				GLib.Internal.ErrorOwnedHandle error;
-				IntPtr result = Gdk.Internal.Clipboard.ReadTextureFinish (clipboard.Handle, args.Handle, out error);
-
-				Texture? texture = texture = GObject.Internal.ObjectWrapper.WrapNullableHandle<Texture> (result, ownedRef: true);
-
-				try {
-					GLib.Error.ThrowOnError (error);
-				} catch (Exception) {
-					texture = null;
-				}
-
-				tcs.SetResult (texture);
-			}).NativeCallback, IntPtr.Zero);
-
-			return tcs.Task;
-		}
-
-		/// <summary>
-		/// Helper function to set the clipboard's contents to an image.
-		/// </summary>
-		public static void SetImage (this Gdk.Clipboard clipboard, Cairo.ImageSurface surf)
-			=> clipboard.SetTexture (Gdk.Texture.NewForPixbuf (surf.ToPixbuf ()));
-
-		/// <summary>
-		/// Helper function to return the clipboard for the default display.
-		/// </summary>
-		public static Gdk.Clipboard GetDefaultClipboard () => Gdk.Display.GetDefault ()!.GetClipboard ();
-
-		/// <summary>
-		/// Convert a texture to a Cairo surface.
-		/// </summary>
-		public unsafe static Cairo.ImageSurface ToSurface (this Gdk.Texture texture)
-		{
-			var surf = CairoExtensions.CreateImageSurface (Cairo.Format.Argb32, texture.Width, texture.Height);
-			Span<byte> surf_data = surf.GetData ();
-
-			// TODO-GTK4 (bindings, unsubmitted) - needs support for primitive value arrays
-			var buffer = new byte[surf_data.Length];
-			fixed (byte* buffer_data = buffer)
-				Gdk.Internal.Texture.Download (texture.Handle, ref *buffer_data, (uint) surf.Stride);
-
-			buffer.CopyTo (surf_data);
-			surf.MarkDirty ();
-
-			return surf;
-		}
-
-		// TODO-GTK4 (bindings) - structs are not generated (https://github.com/gircore/gir.core/issues/622)
-		public static nuint GetFileListGType () => Gdk.Internal.FileList.GetGType ();
-
-		// TODO-GTK4 (bindings) - structs are not generated (https://github.com/gircore/gir.core/issues/622)
-		public static Gio.File[] GetFiles (this Gdk.FileList file_list)
-		{
-			// FIXME: this is needed to avoid errors because SListOwnedHandle doesn't have a free function.
-			var slist_owned_handle = Gdk.Internal.FileList.GetFiles (file_list.Handle);
-			var slist_handle = new GLib.Internal.SListUnownedHandle (slist_owned_handle.DangerousGetHandle ());
-			slist_owned_handle.SetHandleAsInvalid ();
-
-			uint n = GLib.Internal.SList.Length (slist_handle);
-			var result = new Gio.File[n];
-			for (uint i = 0; i < n; ++i) {
-				result[i] = new Gio.FileHelper (GLib.Internal.SList.NthData (slist_handle, i), ownedRef: false);
-			}
-
-			GLib.Internal.SList.Free (slist_handle);
-
+	public static Key ToUpper (this Key k1)
+	{
+		if (Enum.TryParse (k1.ToString ().ToUpperInvariant (), out Key result))
 			return result;
+
+		return k1;
+	}
+
+	// TODO-GTK4 (bindings, unsubmitted) - need gir.core async bindings for Gdk.Clipboard
+	public static Task<string?> ReadTextAsync (this Gdk.Clipboard clipboard)
+	{
+		var tcs = new TaskCompletionSource<string?> ();
+
+		Gdk.Internal.Clipboard.ReadTextAsync (clipboard.Handle, IntPtr.Zero, new Gio.Internal.AsyncReadyCallbackAsyncHandler ((_, args, _) => {
+			GLib.Internal.ErrorOwnedHandle error;
+			string? result = Gdk.Internal.Clipboard.ReadTextFinish (clipboard.Handle, args.Handle, out error).ConvertToString ();
+			GLib.Error.ThrowOnError (error);
+
+			tcs.SetResult (result);
+		}).NativeCallback, IntPtr.Zero);
+
+		return tcs.Task;
+	}
+
+	// TODO-GTK4 (bindings, unsubmitted) - need gir.core async bindings for Gdk.Clipboard
+	public static Task<Texture?> ReadTextureAsync (this Gdk.Clipboard clipboard)
+	{
+		var tcs = new TaskCompletionSource<Texture?> ();
+
+		Gdk.Internal.Clipboard.ReadTextureAsync (clipboard.Handle, IntPtr.Zero, new Gio.Internal.AsyncReadyCallbackAsyncHandler ((_, args, _) => {
+			GLib.Internal.ErrorOwnedHandle error;
+			IntPtr result = Gdk.Internal.Clipboard.ReadTextureFinish (clipboard.Handle, args.Handle, out error);
+
+			Texture? texture = texture = GObject.Internal.ObjectWrapper.WrapNullableHandle<Texture> (result, ownedRef: true);
+
+			try {
+				GLib.Error.ThrowOnError (error);
+			} catch (Exception) {
+				texture = null;
+			}
+
+			tcs.SetResult (texture);
+		}).NativeCallback, IntPtr.Zero);
+
+		return tcs.Task;
+	}
+
+	/// <summary>
+	/// Helper function to set the clipboard's contents to an image.
+	/// </summary>
+	public static void SetImage (this Gdk.Clipboard clipboard, Cairo.ImageSurface surf)
+		=> clipboard.SetTexture (Gdk.Texture.NewForPixbuf (surf.ToPixbuf ()));
+
+	/// <summary>
+	/// Helper function to return the clipboard for the default display.
+	/// </summary>
+	public static Gdk.Clipboard GetDefaultClipboard () => Gdk.Display.GetDefault ()!.GetClipboard ();
+
+	/// <summary>
+	/// Convert a texture to a Cairo surface.
+	/// </summary>
+	public unsafe static Cairo.ImageSurface ToSurface (this Gdk.Texture texture)
+	{
+		var surf = CairoExtensions.CreateImageSurface (Cairo.Format.Argb32, texture.Width, texture.Height);
+		Span<byte> surf_data = surf.GetData ();
+
+		// TODO-GTK4 (bindings, unsubmitted) - needs support for primitive value arrays
+		var buffer = new byte[surf_data.Length];
+		fixed (byte* buffer_data = buffer)
+			Gdk.Internal.Texture.Download (texture.Handle, ref *buffer_data, (uint) surf.Stride);
+
+		buffer.CopyTo (surf_data);
+		surf.MarkDirty ();
+
+		return surf;
+	}
+
+	// TODO-GTK4 (bindings) - structs are not generated (https://github.com/gircore/gir.core/issues/622)
+	public static nuint GetFileListGType () => Gdk.Internal.FileList.GetGType ();
+
+	// TODO-GTK4 (bindings) - structs are not generated (https://github.com/gircore/gir.core/issues/622)
+	public static Gio.File[] GetFiles (this Gdk.FileList file_list)
+	{
+		// FIXME: this is needed to avoid errors because SListOwnedHandle doesn't have a free function.
+		var slist_owned_handle = Gdk.Internal.FileList.GetFiles (file_list.Handle);
+		var slist_handle = new GLib.Internal.SListUnownedHandle (slist_owned_handle.DangerousGetHandle ());
+		slist_owned_handle.SetHandleAsInvalid ();
+
+		uint n = GLib.Internal.SList.Length (slist_handle);
+		var result = new Gio.File[n];
+		for (uint i = 0; i < n; ++i) {
+			result[i] = new Gio.FileHelper (GLib.Internal.SList.NthData (slist_handle, i), ownedRef: false);
 		}
+
+		GLib.Internal.SList.Free (slist_handle);
+
+		return result;
 	}
 }
