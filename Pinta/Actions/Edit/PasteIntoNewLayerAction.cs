@@ -28,36 +28,35 @@ using System;
 using Gtk;
 using Pinta.Core;
 
-namespace Pinta.Actions
+namespace Pinta.Actions;
+
+internal sealed class PasteIntoNewLayerAction : IActionHandler
 {
-	class PasteIntoNewLayerAction : IActionHandler
+	public void Initialize () => PintaCore.Actions.Edit.PasteIntoNewLayer.Activated += Activated;
+
+	public void Uninitialize () => PintaCore.Actions.Edit.PasteIntoNewLayer.Activated -= Activated;
+
+	private void Activated (object sender, EventArgs e)
 	{
-		public void Initialize () => PintaCore.Actions.Edit.PasteIntoNewLayer.Activated += Activated;
-
-		public void Uninitialize () => PintaCore.Actions.Edit.PasteIntoNewLayer.Activated -= Activated;
-
-		private void Activated (object sender, EventArgs e)
-		{
-			// If no documents are open, activate the
-			// PasteIntoNewImage action and abort this Paste action.
-			if (!PintaCore.Workspace.HasOpenDocuments) {
-				PintaCore.Actions.Edit.PasteIntoNewImage.Activate ();
-				return;
-			}
-
-			var doc = PintaCore.Workspace.ActiveDocument;
-
-			// Get the scroll position in canvas coordinates
-			var view = (Viewport) doc.Workspace.Canvas.Parent!;
-
-			var canvasPos = doc.Workspace.ViewPointToCanvas (
-				view.Hadjustment!.Value,
-				view.Vadjustment!.Value);
-
-			// Paste into the active document.
-			// The 'true' argument indicates that paste should be
-			// performed into a new layer.
-			PasteAction.Paste (doc, true, (int) canvasPos.X, (int) canvasPos.Y);
+		// If no documents are open, activate the
+		// PasteIntoNewImage action and abort this Paste action.
+		if (!PintaCore.Workspace.HasOpenDocuments) {
+			PintaCore.Actions.Edit.PasteIntoNewImage.Activate ();
+			return;
 		}
+
+		var doc = PintaCore.Workspace.ActiveDocument;
+
+		// Get the scroll position in canvas coordinates
+		var view = (Viewport) doc.Workspace.Canvas.Parent!;
+
+		var canvasPos = doc.Workspace.ViewPointToCanvas (
+			view.Hadjustment!.Value,
+			view.Vadjustment!.Value);
+
+		// Paste into the active document.
+		// The 'true' argument indicates that paste should be
+		// performed into a new layer.
+		PasteAction.Paste (doc, true, (int) canvasPos.X, (int) canvasPos.Y);
 	}
 }

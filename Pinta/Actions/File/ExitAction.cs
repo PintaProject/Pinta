@@ -27,39 +27,38 @@
 using System;
 using Pinta.Core;
 
-namespace Pinta.Actions
+namespace Pinta.Actions;
+
+internal sealed class ExitProgramAction : IActionHandler
 {
-	class ExitProgramAction : IActionHandler
+	#region IActionHandler Members
+	public void Initialize ()
 	{
-		#region IActionHandler Members
-		public void Initialize ()
-		{
-			PintaCore.Actions.App.Exit.Activated += Activated;
+		PintaCore.Actions.App.Exit.Activated += Activated;
+	}
+
+	public void Uninitialize ()
+	{
+		PintaCore.Actions.App.Exit.Activated -= Activated;
+	}
+	#endregion
+
+	private void Activated (object sender, EventArgs e)
+	{
+		while (PintaCore.Workspace.HasOpenDocuments) {
+			int count = PintaCore.Workspace.OpenDocuments.Count;
+
+			PintaCore.Actions.File.Close.Activate ();
+
+			// If we still have the same number of open documents,
+			// the user cancelled on a Save prompt.
+			if (count == PintaCore.Workspace.OpenDocuments.Count)
+				return;
 		}
 
-		public void Uninitialize ()
-		{
-			PintaCore.Actions.App.Exit.Activated -= Activated;
-		}
-		#endregion
+		// Let everyone know we are quitting
+		PintaCore.Actions.App.RaiseBeforeQuit ();
 
-		private void Activated (object sender, EventArgs e)
-		{
-			while (PintaCore.Workspace.HasOpenDocuments) {
-				int count = PintaCore.Workspace.OpenDocuments.Count;
-
-				PintaCore.Actions.File.Close.Activate ();
-
-				// If we still have the same number of open documents,
-				// the user cancelled on a Save prompt.
-				if (count == PintaCore.Workspace.OpenDocuments.Count)
-					return;
-			}
-
-			// Let everyone know we are quitting
-			PintaCore.Actions.App.RaiseBeforeQuit ();
-
-			PintaCore.Chrome.Application.Quit ();
-		}
+		PintaCore.Chrome.Application.Quit ();
 	}
 }

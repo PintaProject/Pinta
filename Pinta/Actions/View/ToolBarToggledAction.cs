@@ -26,25 +26,24 @@
 
 using Pinta.Core;
 
-namespace Pinta.Actions
+namespace Pinta.Actions;
+
+internal sealed class ToolBarToggledAction : IActionHandler
 {
-	class ToolBarToggledAction : IActionHandler
+	#region IActionHandler Members
+	public void Initialize ()
 	{
-		#region IActionHandler Members
-		public void Initialize ()
-		{
-			PintaCore.Actions.View.ToolBar.Toggled += Activated;
-		}
+		PintaCore.Actions.View.ToolBar.Toggled += Activated;
+	}
 
-		public void Uninitialize ()
-		{
-			PintaCore.Actions.View.ToolBar.Toggled -= Activated;
-		}
-		#endregion
+	public void Uninitialize ()
+	{
+		PintaCore.Actions.View.ToolBar.Toggled -= Activated;
+	}
+	#endregion
 
-		private void Activated (bool value)
-		{
-			PintaCore.Chrome.MainToolBar.Visible = value;
-		}
+	private void Activated (bool value)
+	{
+		PintaCore.Chrome.MainToolBar.Visible = value;
 	}
 }

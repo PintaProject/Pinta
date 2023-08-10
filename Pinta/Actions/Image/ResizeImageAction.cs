@@ -27,34 +27,33 @@
 using System;
 using Pinta.Core;
 
-namespace Pinta.Actions
+namespace Pinta.Actions;
+
+internal sealed class ResizeImageAction : IActionHandler
 {
-	class ResizeImageAction : IActionHandler
+	#region IActionHandler Members
+	public void Initialize ()
 	{
-		#region IActionHandler Members
-		public void Initialize ()
-		{
-			PintaCore.Actions.Image.Resize.Activated += Activated;
-		}
+		PintaCore.Actions.Image.Resize.Activated += Activated;
+	}
 
-		public void Uninitialize ()
-		{
-			PintaCore.Actions.Image.Resize.Activated -= Activated;
-		}
-		#endregion
+	public void Uninitialize ()
+	{
+		PintaCore.Actions.Image.Resize.Activated -= Activated;
+	}
+	#endregion
 
-		private void Activated (object sender, EventArgs e)
-		{
-			var dialog = new ResizeImageDialog ();
+	private void Activated (object sender, EventArgs e)
+	{
+		var dialog = new ResizeImageDialog ();
 
-			dialog.OnResponse += (_, args) => {
-				if (args.ResponseId == (int) Gtk.ResponseType.Ok)
-					dialog.SaveChanges ();
+		dialog.OnResponse += (_, args) => {
+			if (args.ResponseId == (int) Gtk.ResponseType.Ok)
+				dialog.SaveChanges ();
 
-				dialog.Destroy ();
-			};
+			dialog.Destroy ();
+		};
 
-			dialog.Show ();
-		}
+		dialog.Show ();
 	}
 }

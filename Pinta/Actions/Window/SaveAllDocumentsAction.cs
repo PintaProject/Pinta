@@ -27,34 +27,33 @@
 using System;
 using Pinta.Core;
 
-namespace Pinta.Actions
+namespace Pinta.Actions;
+
+internal sealed class SaveAllDocumentsAction : IActionHandler
 {
-	class SaveAllDocumentsAction : IActionHandler
+	#region IActionHandler Members
+	public void Initialize ()
 	{
-		#region IActionHandler Members
-		public void Initialize ()
-		{
-			PintaCore.Actions.Window.SaveAll.Activated += Activated;
-		}
+		PintaCore.Actions.Window.SaveAll.Activated += Activated;
+	}
 
-		public void Uninitialize ()
-		{
-			PintaCore.Actions.Window.SaveAll.Activated -= Activated;
-		}
-		#endregion
+	public void Uninitialize ()
+	{
+		PintaCore.Actions.Window.SaveAll.Activated -= Activated;
+	}
+	#endregion
 
-		private void Activated (object sender, EventArgs e)
-		{
-			foreach (Document doc in PintaCore.Workspace.OpenDocuments) {
-				if (!doc.IsDirty && doc.HasFile)
-					continue;
+	private void Activated (object sender, EventArgs e)
+	{
+		foreach (Document doc in PintaCore.Workspace.OpenDocuments) {
+			if (!doc.IsDirty && doc.HasFile)
+				continue;
 
-				PintaCore.Workspace.SetActiveDocument (doc);
+			PintaCore.Workspace.SetActiveDocument (doc);
 
-				// Loop through all of these until we get a cancel
-				if (!doc.Save (false))
-					break;
-			}
+			// Loop through all of these until we get a cancel
+			if (!doc.Save (false))
+				break;
 		}
 	}
 }

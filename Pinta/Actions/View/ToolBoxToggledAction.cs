@@ -26,25 +26,24 @@
 
 using Pinta.Core;
 
-namespace Pinta.Actions
+namespace Pinta.Actions;
+
+internal sealed class ToolBoxToggledAction : IActionHandler
 {
-	class ToolBoxToggledAction : IActionHandler
+	#region IActionHandler Members
+	public void Initialize ()
 	{
-		#region IActionHandler Members
-		public void Initialize ()
-		{
-			PintaCore.Actions.View.ToolBox.Toggled += Activated;
-		}
+		PintaCore.Actions.View.ToolBox.Toggled += Activated;
+	}
 
-		public void Uninitialize ()
-		{
-			PintaCore.Actions.View.ToolBox.Toggled -= Activated;
-		}
-		#endregion
+	public void Uninitialize ()
+	{
+		PintaCore.Actions.View.ToolBox.Toggled -= Activated;
+	}
+	#endregion
 
-		private void Activated (bool value)
-		{
-			PintaCore.Chrome.ToolBox.Visible = value;
-		}
+	private void Activated (bool value)
+	{
+		PintaCore.Chrome.ToolBox.Visible = value;
 	}
 }
