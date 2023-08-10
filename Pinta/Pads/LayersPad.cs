@@ -29,41 +29,40 @@ using Pinta.Core;
 using Pinta.Docking;
 using Pinta.Gui.Widgets;
 
-namespace Pinta
+namespace Pinta;
+
+public sealed class LayersPad : IDockPad
 {
-	public class LayersPad : IDockPad
+	public void Initialize (Dock workspace, Application app, Gio.Menu padMenu)
 	{
-		public void Initialize (Dock workspace, Application app, Gio.Menu padMenu)
-		{
-			var layers = new LayersListView ();
-			DockItem layers_item = new DockItem (layers, "Layers", icon_name: Pinta.Resources.Icons.LayerDuplicate) {
-				Label = Translations.GetString ("Layers")
-			};
+		var layers = new LayersListView ();
+		DockItem layers_item = new DockItem (layers, "Layers", icon_name: Pinta.Resources.Icons.LayerDuplicate) {
+			Label = Translations.GetString ("Layers")
+		};
 
-			var layers_tb = layers_item.AddToolBar ();
-			layers_tb.Append (PintaCore.Actions.Layers.AddNewLayer.CreateDockToolBarItem ());
-			layers_tb.Append (PintaCore.Actions.Layers.DeleteLayer.CreateDockToolBarItem ());
-			layers_tb.Append (PintaCore.Actions.Layers.DuplicateLayer.CreateDockToolBarItem ());
-			layers_tb.Append (PintaCore.Actions.Layers.MergeLayerDown.CreateDockToolBarItem ());
-			layers_tb.Append (PintaCore.Actions.Layers.MoveLayerUp.CreateDockToolBarItem ());
-			layers_tb.Append (PintaCore.Actions.Layers.MoveLayerDown.CreateDockToolBarItem ());
+		var layers_tb = layers_item.AddToolBar ();
+		layers_tb.Append (PintaCore.Actions.Layers.AddNewLayer.CreateDockToolBarItem ());
+		layers_tb.Append (PintaCore.Actions.Layers.DeleteLayer.CreateDockToolBarItem ());
+		layers_tb.Append (PintaCore.Actions.Layers.DuplicateLayer.CreateDockToolBarItem ());
+		layers_tb.Append (PintaCore.Actions.Layers.MergeLayerDown.CreateDockToolBarItem ());
+		layers_tb.Append (PintaCore.Actions.Layers.MoveLayerUp.CreateDockToolBarItem ());
+		layers_tb.Append (PintaCore.Actions.Layers.MoveLayerDown.CreateDockToolBarItem ());
 
-			workspace.AddItem (layers_item, DockPlacement.Right);
+		workspace.AddItem (layers_item, DockPlacement.Right);
 
-			var show_layers = new ToggleCommand ("layers", Translations.GetString ("Layers"), null, Resources.Icons.LayerMergeDown) {
-				Value = true
-			};
-			app.AddAction (show_layers);
-			padMenu.AppendItem (show_layers.CreateMenuItem ());
+		var show_layers = new ToggleCommand ("layers", Translations.GetString ("Layers"), null, Resources.Icons.LayerMergeDown) {
+			Value = true
+		};
+		app.AddAction (show_layers);
+		padMenu.AppendItem (show_layers.CreateMenuItem ());
 
-			show_layers.Toggled += (val) => {
-				if (val)
-					layers_item.Maximize ();
-				else
-					layers_item.Minimize ();
-			};
-			layers_item.MaximizeClicked += (_, _) => show_layers.Value = true;
-			layers_item.MinimizeClicked += (_, _) => show_layers.Value = false;
-		}
+		show_layers.Toggled += (val) => {
+			if (val)
+				layers_item.Maximize ();
+			else
+				layers_item.Minimize ();
+		};
+		layers_item.MaximizeClicked += (_, _) => show_layers.Value = true;
+		layers_item.MinimizeClicked += (_, _) => show_layers.Value = false;
 	}
 }

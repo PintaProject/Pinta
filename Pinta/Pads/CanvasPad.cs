@@ -27,20 +27,19 @@
 using Pinta.Core;
 using Pinta.Docking;
 
-namespace Pinta
+namespace Pinta;
+
+public sealed class CanvasPad : IDockPad
 {
-	public class CanvasPad : IDockPad
+	public DockNotebook Notebook { get; private set; } = null!; // NRT - Set in Initialize
+
+	public void Initialize (Dock workspace)
 	{
-		public DockNotebook Notebook { get; private set; } = null!; // NRT - Set in Initialize
+		Notebook = new DockNotebook ();
 
-		public void Initialize (Dock workspace)
-		{
-			Notebook = new DockNotebook ();
-
-			var canvas_dock = new DockItem (Notebook, "Canvas", icon_name: string.Empty, locked: true) {
-				Label = Translations.GetString ("Canvas")
-			};
-			workspace.AddItem (canvas_dock, DockPlacement.Center);
-		}
+		var canvas_dock = new DockItem (Notebook, "Canvas", icon_name: string.Empty, locked: true) {
+			Label = Translations.GetString ("Canvas")
+		};
+		workspace.AddItem (canvas_dock, DockPlacement.Center);
 	}
 }
