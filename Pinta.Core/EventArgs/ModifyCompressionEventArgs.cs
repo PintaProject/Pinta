@@ -28,7 +28,7 @@ using System;
 
 namespace Pinta.Core;
 
-public class ModifyCompressionEventArgs : EventArgs
+public sealed class ModifyCompressionEventArgs : EventArgs
 {
 	public int Quality { get; set; }
 	public bool Cancel { get; set; }
