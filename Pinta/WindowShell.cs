@@ -27,79 +27,78 @@
 using Gtk;
 using Pinta.Core;
 
-namespace Pinta
+namespace Pinta;
+
+public sealed class WindowShell
 {
-	public class WindowShell
+	private readonly ApplicationWindow app_window;
+	private readonly Adw.HeaderBar? header_bar;
+	private readonly Box shell_layout;
+	private readonly Box menu_layout;
+	private Box? workspace_layout;
+	private Box? main_toolbar;
+
+	public WindowShell (Application app, string name, string title, int width, int height, bool maximize)
 	{
-		private readonly ApplicationWindow app_window;
-		private readonly Adw.HeaderBar? header_bar;
-		private readonly Box shell_layout;
-		private readonly Box menu_layout;
-		private Box? workspace_layout;
-		private Box? main_toolbar;
+		app_window = Gtk.ApplicationWindow.New (app);
 
-		public WindowShell (Application app, string name, string title, int width, int height, bool maximize)
-		{
-			app_window = Gtk.ApplicationWindow.New (app);
+		app_window.Name = name;
+		app_window.Title = title;
+		app_window.DefaultWidth = width;
+		app_window.DefaultHeight = height;
+		app_window.Resizable = true;
 
-			app_window.Name = name;
-			app_window.Title = title;
-			app_window.DefaultWidth = width;
-			app_window.DefaultHeight = height;
-			app_window.Resizable = true;
+		if (maximize)
+			app_window.Maximize ();
 
-			if (maximize)
-				app_window.Maximize ();
-
-			// On macOS the global menubar is used, but otherwise use a header bar.
-			if (PintaCore.System.OperatingSystem != OS.Mac) {
-				header_bar = Adw.HeaderBar.New ();
-				app_window.SetTitlebar (header_bar);
-			}
-
-			shell_layout = Box.New (Orientation.Vertical, 0);
-			menu_layout = Box.New (Orientation.Vertical, 0);
-
-			shell_layout.Prepend (menu_layout);
-
-			app_window.SetChild (shell_layout);
-			app_window.Present ();
+		// On macOS the global menubar is used, but otherwise use a header bar.
+		if (PintaCore.System.OperatingSystem != OS.Mac) {
+			header_bar = Adw.HeaderBar.New ();
+			app_window.SetTitlebar (header_bar);
 		}
 
-		public ApplicationWindow Window => app_window;
-		public Adw.HeaderBar? HeaderBar => header_bar;
+		shell_layout = Box.New (Orientation.Vertical, 0);
+		menu_layout = Box.New (Orientation.Vertical, 0);
 
-		public Box CreateToolBar (string name)
-		{
-			main_toolbar = GtkExtensions.CreateToolBar ();
-			main_toolbar.Name = name;
+		shell_layout.Prepend (menu_layout);
 
-			menu_layout.Append (main_toolbar);
-			main_toolbar.Show ();
+		app_window.SetChild (shell_layout);
+		app_window.Present ();
+	}
 
-			return main_toolbar;
-		}
+	public ApplicationWindow Window => app_window;
+	public Adw.HeaderBar? HeaderBar => header_bar;
 
-		public Box CreateStatusBar (string name)
-		{
-			var statusbar = GtkExtensions.CreateToolBar ();
-			statusbar.Name = name;
+	public Box CreateToolBar (string name)
+	{
+		main_toolbar = GtkExtensions.CreateToolBar ();
+		main_toolbar.Name = name;
 
-			shell_layout.Append (statusbar);
+		menu_layout.Append (main_toolbar);
+		main_toolbar.Show ();
 
-			return statusbar;
-		}
+		return main_toolbar;
+	}
 
-		public Box CreateWorkspace ()
-		{
-			workspace_layout = Box.New (Orientation.Horizontal, 0);
-			workspace_layout.Name = "workspace_layout";
-			workspace_layout.Hexpand = true;
-			workspace_layout.Halign = Align.Fill;
+	public Box CreateStatusBar (string name)
+	{
+		var statusbar = GtkExtensions.CreateToolBar ();
+		statusbar.Name = name;
 
-			shell_layout.Append (workspace_layout);
+		shell_layout.Append (statusbar);
 
-			return workspace_layout;
-		}
+		return statusbar;
+	}
+
+	public Box CreateWorkspace ()
+	{
+		workspace_layout = Box.New (Orientation.Horizontal, 0);
+		workspace_layout.Name = "workspace_layout";
+		workspace_layout.Hexpand = true;
+		workspace_layout.Halign = Align.Fill;
+
+		shell_layout.Append (workspace_layout);
+
+		return workspace_layout;
 	}
 }

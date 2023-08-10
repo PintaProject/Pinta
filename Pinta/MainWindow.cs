@@ -32,546 +32,545 @@ using Pinta.Core;
 using Pinta.Docking;
 using Pinta.Gui.Widgets;
 
-namespace Pinta
+namespace Pinta;
+
+public sealed class MainWindow
 {
-	public class MainWindow
+	readonly Adw.Application app;
+	// NRT - Created in OnActivated
+	WindowShell window_shell = null!;
+	Dock dock = null!;
+	Gio.Menu show_pad = null!;
+
+	CanvasPad canvas_pad = null!;
+
+	private DropTarget drop_target = null!;
+
+	public MainWindow (Adw.Application app)
 	{
-		readonly Adw.Application app;
-		// NRT - Created in OnActivated
-		WindowShell window_shell = null!;
-		Dock dock = null!;
-		Gio.Menu show_pad = null!;
+		this.app = app;
 
-		CanvasPad canvas_pad = null!;
+		// This needs to match the name of the .desktop file in order to
+		// show the correct application icon under some environments (e.g.
+		// KDE Wayland). See bug 1967687.
+		GLib.Functions.SetPrgname ("pinta");
+		// Set the human-readable application name, used by e.g. gtk_recent_manager_add_item().
+		GLib.Functions.SetApplicationName (Translations.GetString ("Pinta"));
+	}
 
-		private DropTarget drop_target = null!;
+	public void Activate ()
+	{
+		// Build our window
+		CreateWindow ();
 
-		public MainWindow (Adw.Application app)
-		{
-			this.app = app;
+		// Initialize interface things
+		new ActionHandlers ();
 
-			// This needs to match the name of the .desktop file in order to
-			// show the correct application icon under some environments (e.g.
-			// KDE Wayland). See bug 1967687.
-			GLib.Functions.SetPrgname ("pinta");
-			// Set the human-readable application name, used by e.g. gtk_recent_manager_add_item().
-			GLib.Functions.SetApplicationName (Translations.GetString ("Pinta"));
-		}
+		PintaCore.Chrome.InitializeProgessDialog (new ProgressDialog ());
+		PintaCore.Chrome.InitializeErrorDialogHandler (ErrorDialog.ShowError);
+		PintaCore.Chrome.InitializeMessageDialog (ErrorDialog.ShowMessage);
+		PintaCore.Chrome.InitializeSimpleEffectDialog (SimpleEffectDialog.Launch);
 
-		public void Activate ()
-		{
-			// Build our window
-			CreateWindow ();
+		PintaCore.Initialize ();
 
-			// Initialize interface things
-			new ActionHandlers ();
+		// Initialize extensions
+		AddinManager.Initialize ();
+		AddinManager.Registry.Update ();
+		var setupService = new AddinSetupService (AddinManager.Registry);
+		if (!setupService.AreRepositoriesRegistered ())
+			setupService.RegisterRepositories (true);
 
-			PintaCore.Chrome.InitializeProgessDialog (new ProgressDialog ());
-			PintaCore.Chrome.InitializeErrorDialogHandler (ErrorDialog.ShowError);
-			PintaCore.Chrome.InitializeMessageDialog (ErrorDialog.ShowMessage);
-			PintaCore.Chrome.InitializeSimpleEffectDialog (SimpleEffectDialog.Launch);
+		// Look out for any changes in extensions
+		AddinManager.AddExtensionNodeHandler (typeof (IExtension), OnExtensionChanged);
 
-			PintaCore.Initialize ();
+		// Load the user's previous settings
+		LoadUserSettings ();
+		PintaCore.Actions.App.BeforeQuit += delegate { SaveUserSettings (); };
 
-			// Initialize extensions
-			AddinManager.Initialize ();
-			AddinManager.Registry.Update ();
-			var setupService = new AddinSetupService (AddinManager.Registry);
-			if (!setupService.AreRepositoriesRegistered ())
-				setupService.RegisterRepositories (true);
+		// We support drag and drop for URIs, which are converted into a Gdk.FileList.
+		drop_target = Gtk.DropTarget.New (GdkExtensions.GetFileListGType (), Gdk.DragAction.Copy);
+		drop_target.OnDrop += HandleDrop;
+		window_shell.Window.AddController (drop_target);
 
-			// Look out for any changes in extensions
-			AddinManager.AddExtensionNodeHandler (typeof (IExtension), OnExtensionChanged);
+		// Handle a few main window specific actions
+		window_shell.Window.OnCloseRequest += HandleCloseRequest;
 
-			// Load the user's previous settings
-			LoadUserSettings ();
-			PintaCore.Actions.App.BeforeQuit += delegate { SaveUserSettings (); };
+		// Add custom key handling during the capture phase. For example, this ensures that the "-" key
+		// can be typed into the dash pattern box instead of being handled as a shortcut
+		var key_controller = Gtk.EventControllerKey.New ();
+		key_controller.SetPropagationPhase (PropagationPhase.Capture);
+		key_controller.OnKeyPressed += HandleGlobalKeyPress;
+		key_controller.OnKeyReleased += HandleGlobalKeyRelease;
+		window_shell.Window.AddController (key_controller);
 
-			// We support drag and drop for URIs, which are converted into a Gdk.FileList.
-			drop_target = Gtk.DropTarget.New (GdkExtensions.GetFileListGType (), Gdk.DragAction.Copy);
-			drop_target.OnDrop += HandleDrop;
-			window_shell.Window.AddController (drop_target);
+		// TODO: These need to be [re]moved when we redo zoom support
+		PintaCore.Actions.View.ZoomToWindow.Activated += ZoomToWindow_Activated;
+		PintaCore.Actions.View.ZoomToSelection.Activated += ZoomToSelection_Activated;
 
-			// Handle a few main window specific actions
-			window_shell.Window.OnCloseRequest += HandleCloseRequest;
+		PintaCore.Workspace.ActiveDocumentChanged += ActiveDocumentChanged;
 
-			// Add custom key handling during the capture phase. For example, this ensures that the "-" key
-			// can be typed into the dash pattern box instead of being handled as a shortcut
-			var key_controller = Gtk.EventControllerKey.New ();
-			key_controller.SetPropagationPhase (PropagationPhase.Capture);
-			key_controller.OnKeyPressed += HandleGlobalKeyPress;
-			key_controller.OnKeyReleased += HandleGlobalKeyRelease;
-			window_shell.Window.AddController (key_controller);
+		PintaCore.Workspace.DocumentCreated += Workspace_DocumentCreated;
+		PintaCore.Workspace.DocumentClosed += Workspace_DocumentClosed;
 
-			// TODO: These need to be [re]moved when we redo zoom support
-			PintaCore.Actions.View.ZoomToWindow.Activated += ZoomToWindow_Activated;
-			PintaCore.Actions.View.ZoomToSelection.Activated += ZoomToSelection_Activated;
+		var notebook = canvas_pad.Notebook;
+		notebook.TabClosed += DockNotebook_TabClosed;
+		notebook.ActiveTabChanged += DockNotebook_ActiveTabChanged;
+	}
 
-			PintaCore.Workspace.ActiveDocumentChanged += ActiveDocumentChanged;
+	private void Workspace_DocumentClosed (object? sender, DocumentEventArgs e)
+	{
+		var tab = FindTabWithCanvas ((PintaCanvas) e.Document.Workspace.Canvas);
 
-			PintaCore.Workspace.DocumentCreated += Workspace_DocumentCreated;
-			PintaCore.Workspace.DocumentClosed += Workspace_DocumentClosed;
+		if (tab != null)
+			canvas_pad.Notebook.RemoveTab (tab);
+	}
 
-			var notebook = canvas_pad.Notebook;
-			notebook.TabClosed += DockNotebook_TabClosed;
-			notebook.ActiveTabChanged += DockNotebook_ActiveTabChanged;
-		}
+	private void DockNotebook_TabClosed (object? sender, TabClosedEventArgs e)
+	{
+		var view = (DocumentViewContent) e.Item;
 
-		private void Workspace_DocumentClosed (object? sender, DocumentEventArgs e)
-		{
-			var tab = FindTabWithCanvas ((PintaCanvas) e.Document.Workspace.Canvas);
-
-			if (tab != null)
-				canvas_pad.Notebook.RemoveTab (tab);
-		}
-
-		private void DockNotebook_TabClosed (object? sender, TabClosedEventArgs e)
-		{
-			var view = (DocumentViewContent) e.Item;
-
-			if (PintaCore.Workspace.OpenDocuments.IndexOf (view.Document) > -1) {
-				PintaCore.Workspace.SetActiveDocument (view.Document);
-				PintaCore.Actions.File.Close.Activate ();
-
-				// User must have canceled the close
-				if (PintaCore.Workspace.OpenDocuments.IndexOf (view.Document) > -1)
-					e.Cancel = true;
-			}
-		}
-
-		private void DockNotebook_ActiveTabChanged (object? sender, EventArgs e)
-		{
-			var item = canvas_pad.Notebook.ActiveItem;
-
-			if (item == null)
-				return;
-
-			var view = (DocumentViewContent) item;
-
+		if (PintaCore.Workspace.OpenDocuments.IndexOf (view.Document) > -1) {
 			PintaCore.Workspace.SetActiveDocument (view.Document);
-			((CanvasWindow) view.Widget).Canvas.Cursor = PintaCore.Tools.CurrentTool?.CurrentCursor;
+			PintaCore.Actions.File.Close.Activate ();
+
+			// User must have canceled the close
+			if (PintaCore.Workspace.OpenDocuments.IndexOf (view.Document) > -1)
+				e.Cancel = true;
 		}
+	}
 
-		private void Workspace_DocumentCreated (object? sender, DocumentEventArgs e)
-		{
-			var doc = e.Document;
+	private void DockNotebook_ActiveTabChanged (object? sender, EventArgs e)
+	{
+		var item = canvas_pad.Notebook.ActiveItem;
 
-			var notebook = canvas_pad.Notebook;
-			var selected_index = notebook.ActiveItemIndex;
+		if (item == null)
+			return;
 
-			var canvas = new CanvasWindow (doc) {
-				RulersVisible = PintaCore.Actions.View.Rulers.Value,
-				RulerMetric = GetCurrentRulerMetric ()
-			};
-			doc.Workspace.Canvas = canvas.Canvas;
+		var view = (DocumentViewContent) item;
 
-			var my_content = new DocumentViewContent (doc, canvas);
+		PintaCore.Workspace.SetActiveDocument (view.Document);
+		((CanvasWindow) view.Widget).Canvas.Cursor = PintaCore.Tools.CurrentTool?.CurrentCursor;
+	}
 
-			// Insert our tab to the right of the currently selected tab
-			notebook.InsertTab (my_content, selected_index + 1);
+	private void Workspace_DocumentCreated (object? sender, DocumentEventArgs e)
+	{
+		var doc = e.Document;
 
-			// Zoom to window only on first show (if we do it always, it will be called on every resize)
-			// Note: this does seem to allow a small flicker where large images are shown at 100% zoom before
-			// zooming out (Bug 1959673)
-			canvas.Canvas.OnResize += (o, e2) => {
-				if (!canvas.HasBeenShown) {
-					GLib.Functions.TimeoutAdd (0, 0, () => {
-						ZoomToWindow_Activated (o, e);
-						PintaCore.Workspace.Invalidate ();
-						return false;
-					});
-				}
+		var notebook = canvas_pad.Notebook;
+		var selected_index = notebook.ActiveItemIndex;
 
-				canvas.HasBeenShown = true;
-			};
+		var canvas = new CanvasWindow (doc) {
+			RulersVisible = PintaCore.Actions.View.Rulers.Value,
+			RulerMetric = GetCurrentRulerMetric ()
+		};
+		doc.Workspace.Canvas = canvas.Canvas;
 
-			PintaCore.Actions.View.Rulers.Toggled += (active) => { canvas.RulersVisible = active; };
-			PintaCore.Actions.View.RulerMetric.OnActivate += (o, args) => {
-				PintaCore.Actions.View.RulerMetric.ChangeState (args.Parameter!);
-				canvas.RulerMetric = GetCurrentRulerMetric ();
-			};
-		}
+		var my_content = new DocumentViewContent (doc, canvas);
 
-		private static MetricType GetCurrentRulerMetric ()
-		{
-			return (MetricType) PintaCore.Actions.View.RulerMetric.GetState ().GetInt ();
-		}
+		// Insert our tab to the right of the currently selected tab
+		notebook.InsertTab (my_content, selected_index + 1);
 
-		private bool HandleGlobalKeyPress (Gtk.EventControllerKey controller, Gtk.EventControllerKey.KeyPressedSignalArgs args)
-		{
-			// Give the widget that has focus a first shot at handling the event.
-			// Otherwise, key presses may be intercepted by shortcuts for menu items.
-			if (SendToFocusWidget (controller))
-				return true;
-
-			// Give the Canvas (and by extension the tools)
-			// first shot at handling the event if
-			// the mouse pointer is on the canvas
-			if (PintaCore.Workspace.HasOpenDocuments) {
-				var canvas_window = ((PintaCanvas) PintaCore.Workspace.ActiveWorkspace.Canvas).CanvasWindow;
-
-				if ((canvas_window.Canvas.HasFocus || canvas_window.IsMouseOnCanvas) &&
-				     canvas_window.Canvas.DoKeyPressEvent (controller, args)) {
-					return true;
-				}
-			}
-
-			// If the canvas/tool didn't consume it, see if its a toolbox shortcut
-			if (!args.State.HasModifierKey () && PintaCore.Tools.SetCurrentTool (args.GetKey ())) {
-				return true;
-			}
-
-			// Finally, see if the palette widget wants it.
-			return PintaCore.Palette.DoKeyPress (args);
-		}
-
-		private void HandleGlobalKeyRelease (Gtk.EventControllerKey controller, Gtk.EventControllerKey.KeyReleasedSignalArgs args)
-		{
-			if (SendToFocusWidget (controller) || !PintaCore.Workspace.HasOpenDocuments)
-				return;
-
-			// Give the Canvas (and by extension the tools)
-			// first shot at handling the event if
-			// the mouse pointer is on the canvas
-			var canvas_window = ((PintaCanvas) PintaCore.Workspace.ActiveWorkspace.Canvas).CanvasWindow;
-
-			if (canvas_window.Canvas.HasFocus || canvas_window.IsMouseOnCanvas)
-				canvas_window.Canvas.DoKeyReleaseEvent (controller, args);
-		}
-
-		private bool SendToFocusWidget (Gtk.EventControllerKey key_controller)
-		{
-			var widget = window_shell.Window.FocusWidget;
-			if (widget != null && key_controller.Forward (widget)) {
-				return true;
-			}
-
-			return false;
-		}
-
-		// Called when an extension node is added or removed
-		private void OnExtensionChanged (object s, ExtensionNodeEventArgs args)
-		{
-			IExtension extension = (IExtension) args.ExtensionObject;
-			if (args.Change == ExtensionChange.Add)
-				extension.Initialize ();
-			else
-				extension.Uninitialize ();
-		}
-
-		#region GUI Construction
-		private void CreateWindow ()
-		{
-			// Check for stored window settings
-			var width = PintaCore.Settings.GetSetting<int> ("window-size-width", 1100);
-			var height = PintaCore.Settings.GetSetting<int> ("window-size-height", 750);
-			var maximize = PintaCore.Settings.GetSetting<bool> ("window-maximized", false);
-
-			window_shell = new WindowShell (app, "Pinta.GenericWindow", "Pinta", width, height, maximize);
-
-			CreateMainMenu (window_shell);
-			CreateMainToolBar (window_shell);
-			CreateToolToolBar (window_shell);
-
-			CreatePanels (window_shell);
-			CreateStatusBar (window_shell);
-
-			app.AddWindow (window_shell.Window);
-
-			PintaCore.Chrome.InitializeApplication (app);
-			PintaCore.Chrome.InitializeWindowShell (window_shell.Window);
-		}
-		#endregion
-
-		private void CreateMainMenu (WindowShell shell)
-		{
-			var menu_bar = Gio.Menu.New ();
-
-			if (window_shell.HeaderBar is null) {
-				app.Menubar = menu_bar;
-
-				if (PintaCore.System.OperatingSystem == OS.Mac) {
-					// Only use the application menu on macOS. On other platforms, these
-					// menu items appear under File, Help, etc.
-					// The first menu seems to be treated as the application menu.
-					var app_menu = Gio.Menu.New ();
-					PintaCore.Actions.App.RegisterActions (app, app_menu);
-					menu_bar.AppendSubmenu ("_Application", app_menu);
-				}
-			} else {
-				var header_bar = window_shell.HeaderBar;
-				header_bar.PackEnd (new Gtk.MenuButton () {
-					MenuModel = menu_bar,
-					IconName = Resources.StandardIcons.OpenMenu
+		// Zoom to window only on first show (if we do it always, it will be called on every resize)
+		// Note: this does seem to allow a small flicker where large images are shown at 100% zoom before
+		// zooming out (Bug 1959673)
+		canvas.Canvas.OnResize += (o, e2) => {
+			if (!canvas.HasBeenShown) {
+				GLib.Functions.TimeoutAdd (0, 0, () => {
+					ZoomToWindow_Activated (o, e);
+					PintaCore.Workspace.Invalidate ();
+					return false;
 				});
 			}
 
-			var file_menu = Gio.Menu.New ();
-			PintaCore.Actions.File.RegisterActions (app, file_menu);
-			menu_bar.AppendSubmenu (Translations.GetString ("_File"), file_menu);
+			canvas.HasBeenShown = true;
+		};
 
-			var edit_menu = Gio.Menu.New ();
-			PintaCore.Actions.Edit.RegisterActions (app, edit_menu);
-			menu_bar.AppendSubmenu (Translations.GetString ("_Edit"), edit_menu);
+		PintaCore.Actions.View.Rulers.Toggled += (active) => { canvas.RulersVisible = active; };
+		PintaCore.Actions.View.RulerMetric.OnActivate += (o, args) => {
+			PintaCore.Actions.View.RulerMetric.ChangeState (args.Parameter!);
+			canvas.RulerMetric = GetCurrentRulerMetric ();
+		};
+	}
 
-			var view_menu = Gio.Menu.New ();
-			PintaCore.Actions.View.RegisterActions (app, view_menu);
-			menu_bar.AppendSubmenu (Translations.GetString ("_View"), view_menu);
+	private static MetricType GetCurrentRulerMetric ()
+	{
+		return (MetricType) PintaCore.Actions.View.RulerMetric.GetState ().GetInt ();
+	}
 
-			var image_menu = Gio.Menu.New ();
-			PintaCore.Actions.Image.RegisterActions (app, image_menu);
-			menu_bar.AppendSubmenu (Translations.GetString ("_Image"), image_menu);
+	private bool HandleGlobalKeyPress (Gtk.EventControllerKey controller, Gtk.EventControllerKey.KeyPressedSignalArgs args)
+	{
+		// Give the widget that has focus a first shot at handling the event.
+		// Otherwise, key presses may be intercepted by shortcuts for menu items.
+		if (SendToFocusWidget (controller))
+			return true;
 
-			var layers_menu = Gio.Menu.New ();
-			PintaCore.Actions.Layers.RegisterActions (app, layers_menu);
-			menu_bar.AppendSubmenu (Translations.GetString ("_Layers"), layers_menu);
+		// Give the Canvas (and by extension the tools)
+		// first shot at handling the event if
+		// the mouse pointer is on the canvas
+		if (PintaCore.Workspace.HasOpenDocuments) {
+			var canvas_window = ((PintaCanvas) PintaCore.Workspace.ActiveWorkspace.Canvas).CanvasWindow;
 
-			var adj_menu = Gio.Menu.New ();
-			menu_bar.AppendSubmenu (Translations.GetString ("_Adjustments"), adj_menu);
-
-			var effects_menu = Gio.Menu.New ();
-			menu_bar.AppendSubmenu (Translations.GetString ("Effe_cts"), effects_menu);
-
-			var addins_menu = Gio.Menu.New ();
-			PintaCore.Actions.Addins.RegisterActions (app, addins_menu);
-			menu_bar.AppendSubmenu (Translations.GetString ("A_dd-ins"), addins_menu);
-
-			var window_menu = Gio.Menu.New ();
-			PintaCore.Actions.Window.RegisterActions (app, window_menu);
-			menu_bar.AppendSubmenu (Translations.GetString ("_Window"), window_menu);
-
-			var help_menu = Gio.Menu.New ();
-			PintaCore.Actions.Help.RegisterActions (app, help_menu);
-			menu_bar.AppendSubmenu (Translations.GetString ("_Help"), help_menu);
-
-			var pad_section = Gio.Menu.New ();
-			view_menu.AppendSection (null, pad_section);
-
-			show_pad = Gio.Menu.New ();
-			pad_section.AppendSubmenu (Translations.GetString ("Tool Windows"), show_pad);
-
-			PintaCore.Chrome.InitializeMainMenu (adj_menu, effects_menu);
+			if ((canvas_window.Canvas.HasFocus || canvas_window.IsMouseOnCanvas) &&
+			     canvas_window.Canvas.DoKeyPressEvent (controller, args)) {
+				return true;
+			}
 		}
 
-		private void CreateMainToolBar (WindowShell shell)
-		{
-			var main_toolbar = window_shell.CreateToolBar ("main_toolbar");
-
-			if (window_shell.HeaderBar is not null)
-				PintaCore.Actions.CreateHeaderToolBar (window_shell.HeaderBar!);
-			else
-				PintaCore.Actions.CreateToolBar (main_toolbar);
-
-			PintaCore.Chrome.InitializeMainToolBar (main_toolbar);
+		// If the canvas/tool didn't consume it, see if its a toolbox shortcut
+		if (!args.State.HasModifierKey () && PintaCore.Tools.SetCurrentTool (args.GetKey ())) {
+			return true;
 		}
 
-		private void CreateToolToolBar (WindowShell shell)
-		{
-			var tool_toolbar = window_shell.CreateToolBar ("tool_toolbar");
-			tool_toolbar.HeightRequest = 42;
+		// Finally, see if the palette widget wants it.
+		return PintaCore.Palette.DoKeyPress (args);
+	}
 
-			PintaCore.Chrome.InitializeToolToolBar (tool_toolbar);
+	private void HandleGlobalKeyRelease (Gtk.EventControllerKey controller, Gtk.EventControllerKey.KeyReleasedSignalArgs args)
+	{
+		if (SendToFocusWidget (controller) || !PintaCore.Workspace.HasOpenDocuments)
+			return;
+
+		// Give the Canvas (and by extension the tools)
+		// first shot at handling the event if
+		// the mouse pointer is on the canvas
+		var canvas_window = ((PintaCanvas) PintaCore.Workspace.ActiveWorkspace.Canvas).CanvasWindow;
+
+		if (canvas_window.Canvas.HasFocus || canvas_window.IsMouseOnCanvas)
+			canvas_window.Canvas.DoKeyReleaseEvent (controller, args);
+	}
+
+	private bool SendToFocusWidget (Gtk.EventControllerKey key_controller)
+	{
+		var widget = window_shell.Window.FocusWidget;
+		if (widget != null && key_controller.Forward (widget)) {
+			return true;
 		}
 
-		private static void CreateStatusBar (WindowShell shell)
-		{
-			var statusbar = shell.CreateStatusBar ("statusbar");
+		return false;
+	}
 
-			statusbar.Append (new StatusBarColorPaletteWidget () {
-				Hexpand = true,
-				Halign = Align.Fill
+	// Called when an extension node is added or removed
+	private void OnExtensionChanged (object s, ExtensionNodeEventArgs args)
+	{
+		IExtension extension = (IExtension) args.ExtensionObject;
+		if (args.Change == ExtensionChange.Add)
+			extension.Initialize ();
+		else
+			extension.Uninitialize ();
+	}
+
+	#region GUI Construction
+	private void CreateWindow ()
+	{
+		// Check for stored window settings
+		var width = PintaCore.Settings.GetSetting<int> ("window-size-width", 1100);
+		var height = PintaCore.Settings.GetSetting<int> ("window-size-height", 750);
+		var maximize = PintaCore.Settings.GetSetting<bool> ("window-maximized", false);
+
+		window_shell = new WindowShell (app, "Pinta.GenericWindow", "Pinta", width, height, maximize);
+
+		CreateMainMenu (window_shell);
+		CreateMainToolBar (window_shell);
+		CreateToolToolBar (window_shell);
+
+		CreatePanels (window_shell);
+		CreateStatusBar (window_shell);
+
+		app.AddWindow (window_shell.Window);
+
+		PintaCore.Chrome.InitializeApplication (app);
+		PintaCore.Chrome.InitializeWindowShell (window_shell.Window);
+	}
+	#endregion
+
+	private void CreateMainMenu (WindowShell shell)
+	{
+		var menu_bar = Gio.Menu.New ();
+
+		if (window_shell.HeaderBar is null) {
+			app.Menubar = menu_bar;
+
+			if (PintaCore.System.OperatingSystem == OS.Mac) {
+				// Only use the application menu on macOS. On other platforms, these
+				// menu items appear under File, Help, etc.
+				// The first menu seems to be treated as the application menu.
+				var app_menu = Gio.Menu.New ();
+				PintaCore.Actions.App.RegisterActions (app, app_menu);
+				menu_bar.AppendSubmenu ("_Application", app_menu);
+			}
+		} else {
+			var header_bar = window_shell.HeaderBar;
+			header_bar.PackEnd (new Gtk.MenuButton () {
+				MenuModel = menu_bar,
+				IconName = Resources.StandardIcons.OpenMenu
 			});
-
-			PintaCore.Actions.CreateStatusBar (statusbar);
-
-			PintaCore.Chrome.InitializeStatusBar (statusbar);
 		}
 
-		private void CreatePanels (WindowShell shell)
-		{
-			Box panel_container = shell.CreateWorkspace ();
-			CreateDockAndPads (panel_container);
+		var file_menu = Gio.Menu.New ();
+		PintaCore.Actions.File.RegisterActions (app, file_menu);
+		menu_bar.AppendSubmenu (Translations.GetString ("_File"), file_menu);
+
+		var edit_menu = Gio.Menu.New ();
+		PintaCore.Actions.Edit.RegisterActions (app, edit_menu);
+		menu_bar.AppendSubmenu (Translations.GetString ("_Edit"), edit_menu);
+
+		var view_menu = Gio.Menu.New ();
+		PintaCore.Actions.View.RegisterActions (app, view_menu);
+		menu_bar.AppendSubmenu (Translations.GetString ("_View"), view_menu);
+
+		var image_menu = Gio.Menu.New ();
+		PintaCore.Actions.Image.RegisterActions (app, image_menu);
+		menu_bar.AppendSubmenu (Translations.GetString ("_Image"), image_menu);
+
+		var layers_menu = Gio.Menu.New ();
+		PintaCore.Actions.Layers.RegisterActions (app, layers_menu);
+		menu_bar.AppendSubmenu (Translations.GetString ("_Layers"), layers_menu);
+
+		var adj_menu = Gio.Menu.New ();
+		menu_bar.AppendSubmenu (Translations.GetString ("_Adjustments"), adj_menu);
+
+		var effects_menu = Gio.Menu.New ();
+		menu_bar.AppendSubmenu (Translations.GetString ("Effe_cts"), effects_menu);
+
+		var addins_menu = Gio.Menu.New ();
+		PintaCore.Actions.Addins.RegisterActions (app, addins_menu);
+		menu_bar.AppendSubmenu (Translations.GetString ("A_dd-ins"), addins_menu);
+
+		var window_menu = Gio.Menu.New ();
+		PintaCore.Actions.Window.RegisterActions (app, window_menu);
+		menu_bar.AppendSubmenu (Translations.GetString ("_Window"), window_menu);
+
+		var help_menu = Gio.Menu.New ();
+		PintaCore.Actions.Help.RegisterActions (app, help_menu);
+		menu_bar.AppendSubmenu (Translations.GetString ("_Help"), help_menu);
+
+		var pad_section = Gio.Menu.New ();
+		view_menu.AppendSection (null, pad_section);
+
+		show_pad = Gio.Menu.New ();
+		pad_section.AppendSubmenu (Translations.GetString ("Tool Windows"), show_pad);
+
+		PintaCore.Chrome.InitializeMainMenu (adj_menu, effects_menu);
+	}
+
+	private void CreateMainToolBar (WindowShell shell)
+	{
+		var main_toolbar = window_shell.CreateToolBar ("main_toolbar");
+
+		if (window_shell.HeaderBar is not null)
+			PintaCore.Actions.CreateHeaderToolBar (window_shell.HeaderBar!);
+		else
+			PintaCore.Actions.CreateToolBar (main_toolbar);
+
+		PintaCore.Chrome.InitializeMainToolBar (main_toolbar);
+	}
+
+	private void CreateToolToolBar (WindowShell shell)
+	{
+		var tool_toolbar = window_shell.CreateToolBar ("tool_toolbar");
+		tool_toolbar.HeightRequest = 42;
+
+		PintaCore.Chrome.InitializeToolToolBar (tool_toolbar);
+	}
+
+	private static void CreateStatusBar (WindowShell shell)
+	{
+		var statusbar = shell.CreateStatusBar ("statusbar");
+
+		statusbar.Append (new StatusBarColorPaletteWidget () {
+			Hexpand = true,
+			Halign = Align.Fill
+		});
+
+		PintaCore.Actions.CreateStatusBar (statusbar);
+
+		PintaCore.Chrome.InitializeStatusBar (statusbar);
+	}
+
+	private void CreatePanels (WindowShell shell)
+	{
+		Box panel_container = shell.CreateWorkspace ();
+		CreateDockAndPads (panel_container);
+	}
+
+	private void CreateDockAndPads (Box container)
+	{
+		var toolbox = new ToolBoxWidget ();
+		var toolbox_scroll = new ScrolledWindow () {
+			Child = toolbox,
+			HscrollbarPolicy = PolicyType.Never,
+			VscrollbarPolicy = PolicyType.Automatic,
+			HasFrame = false,
+			OverlayScrolling = true,
+			WindowPlacement = CornerType.BottomRight
+		};
+		container.Append (toolbox_scroll);
+		PintaCore.Chrome.InitializeToolBox (toolbox);
+
+		// Dock widget
+		dock = new Dock {
+			Hexpand = true,
+			Halign = Align.Fill
+		};
+
+		// Canvas pad
+		canvas_pad = new CanvasPad ();
+		canvas_pad.Initialize (dock);
+		PintaCore.Chrome.InitializeImageTabsNotebook (canvas_pad.Notebook);
+
+		// Layer pad
+		var layers_pad = new LayersPad ();
+		layers_pad.Initialize (dock, app, show_pad);
+
+		// History pad
+		var history_pad = new HistoryPad ();
+		history_pad.Initialize (dock, app, show_pad);
+
+		container.Append (dock);
+	}
+
+	#region User Settings
+	private const string LastDialogDirSettingKey = "last-dialog-directory";
+	private const string LastSelectedToolSettingKey = "last-selected-tool";
+
+	private void LoadUserSettings ()
+	{
+		dock.LoadSettings (PintaCore.Settings);
+
+		// Set selected tool to last selected or default to the PaintBrush
+		PintaCore.Tools.SetCurrentTool (PintaCore.Settings.GetSetting (LastSelectedToolSettingKey, "PaintBrushTool"));
+
+		PintaCore.Actions.View.Rulers.Value = PintaCore.Settings.GetSetting ("ruler-shown", false);
+		PintaCore.Actions.View.ToolBar.Value = PintaCore.Settings.GetSetting ("toolbar-shown", true);
+		PintaCore.Actions.View.StatusBar.Value = PintaCore.Settings.GetSetting ("statusbar-shown", true);
+		PintaCore.Actions.View.ToolBox.Value = PintaCore.Settings.GetSetting ("toolbox-shown", true);
+		PintaCore.Actions.View.ImageTabs.Value = PintaCore.Settings.GetSetting ("image-tabs-shown", true);
+		PintaCore.Actions.View.PixelGrid.Value = PintaCore.Settings.GetSetting ("pixel-grid-shown", false);
+
+		var dialog_uri = PintaCore.Settings.GetSetting (LastDialogDirSettingKey, PintaCore.RecentFiles.DefaultDialogDirectory?.GetUri () ?? "");
+		PintaCore.RecentFiles.LastDialogDirectory = Gio.FileHelper.NewForUri (dialog_uri);
+
+		var ruler_metric = (MetricType) PintaCore.Settings.GetSetting ("ruler-metric", (int) MetricType.Pixels);
+		PintaCore.Actions.View.RulerMetric.Activate (GLib.Variant.Create ((int) ruler_metric));
+	}
+
+	private void SaveUserSettings ()
+	{
+		dock.SaveSettings (PintaCore.Settings);
+
+		// Don't store the maximized height if the window is maximized
+		if (!window_shell.Window.IsMaximized ()) {
+			PintaCore.Settings.PutSetting ("window-size-width", window_shell.Window.GetWidth ());
+			PintaCore.Settings.PutSetting ("window-size-height", window_shell.Window.GetHeight ());
 		}
 
-		private void CreateDockAndPads (Box container)
-		{
-			var toolbox = new ToolBoxWidget ();
-			var toolbox_scroll = new ScrolledWindow () {
-				Child = toolbox,
-				HscrollbarPolicy = PolicyType.Never,
-				VscrollbarPolicy = PolicyType.Automatic,
-				HasFrame = false,
-				OverlayScrolling = true,
-				WindowPlacement = CornerType.BottomRight
-			};
-			container.Append (toolbox_scroll);
-			PintaCore.Chrome.InitializeToolBox (toolbox);
+		PintaCore.Settings.PutSetting ("ruler-metric", (int) GetCurrentRulerMetric ());
+		PintaCore.Settings.PutSetting ("window-maximized", window_shell.Window.IsMaximized ());
+		PintaCore.Settings.PutSetting ("ruler-shown", PintaCore.Actions.View.Rulers.Value);
+		PintaCore.Settings.PutSetting ("image-tabs-shown", PintaCore.Actions.View.ImageTabs.Value);
+		PintaCore.Settings.PutSetting ("toolbar-shown", PintaCore.Actions.View.ToolBar.Value);
+		PintaCore.Settings.PutSetting ("statusbar-shown", PintaCore.Actions.View.StatusBar.Value);
+		PintaCore.Settings.PutSetting ("toolbox-shown", PintaCore.Actions.View.ToolBox.Value);
+		PintaCore.Settings.PutSetting ("pixel-grid-shown", PintaCore.Actions.View.PixelGrid.Value);
+		PintaCore.Settings.PutSetting (LastDialogDirSettingKey, PintaCore.RecentFiles.LastDialogDirectory?.GetUri () ?? "");
 
-			// Dock widget
-			dock = new Dock {
-				Hexpand = true,
-				Halign = Align.Fill
-			};
+		if (PintaCore.Tools.CurrentTool is BaseTool tool)
+			PintaCore.Settings.PutSetting (LastSelectedToolSettingKey, tool.GetType ().Name);
 
-			// Canvas pad
-			canvas_pad = new CanvasPad ();
-			canvas_pad.Initialize (dock);
-			PintaCore.Chrome.InitializeImageTabsNotebook (canvas_pad.Notebook);
+		PintaCore.Settings.DoSaveSettingsBeforeQuit ();
+	}
+	#endregion
 
-			// Layer pad
-			var layers_pad = new LayersPad ();
-			layers_pad.Initialize (dock, app, show_pad);
+	#region Action Handlers
+	private bool HandleCloseRequest (object o, EventArgs args)
+	{
+		PintaCore.Actions.App.Exit.Activate ();
 
-			// History pad
-			var history_pad = new HistoryPad ();
-			history_pad.Initialize (dock, app, show_pad);
+		// Stop the default handler from running so the user can cancel quitting.
+		return true;
+	}
 
-			container.Append (dock);
-		}
+	private bool HandleDrop (DropTarget sender, DropTarget.DropSignalArgs args)
+	{
+		if (args.Value.GetBoxed (GdkExtensions.GetFileListGType ()) is not Gdk.FileList file_list)
+			return false;
 
-		#region User Settings
-		private const string LastDialogDirSettingKey = "last-dialog-directory";
-		private const string LastSelectedToolSettingKey = "last-selected-tool";
+		foreach (Gio.File file in file_list.GetFiles ()) {
+			PintaCore.Workspace.OpenFile (file);
 
-		private void LoadUserSettings ()
-		{
-			dock.LoadSettings (PintaCore.Settings);
-
-			// Set selected tool to last selected or default to the PaintBrush
-			PintaCore.Tools.SetCurrentTool (PintaCore.Settings.GetSetting (LastSelectedToolSettingKey, "PaintBrushTool"));
-
-			PintaCore.Actions.View.Rulers.Value = PintaCore.Settings.GetSetting ("ruler-shown", false);
-			PintaCore.Actions.View.ToolBar.Value = PintaCore.Settings.GetSetting ("toolbar-shown", true);
-			PintaCore.Actions.View.StatusBar.Value = PintaCore.Settings.GetSetting ("statusbar-shown", true);
-			PintaCore.Actions.View.ToolBox.Value = PintaCore.Settings.GetSetting ("toolbox-shown", true);
-			PintaCore.Actions.View.ImageTabs.Value = PintaCore.Settings.GetSetting ("image-tabs-shown", true);
-			PintaCore.Actions.View.PixelGrid.Value = PintaCore.Settings.GetSetting ("pixel-grid-shown", false);
-
-			var dialog_uri = PintaCore.Settings.GetSetting (LastDialogDirSettingKey, PintaCore.RecentFiles.DefaultDialogDirectory?.GetUri () ?? "");
-			PintaCore.RecentFiles.LastDialogDirectory = Gio.FileHelper.NewForUri (dialog_uri);
-
-			var ruler_metric = (MetricType) PintaCore.Settings.GetSetting ("ruler-metric", (int) MetricType.Pixels);
-			PintaCore.Actions.View.RulerMetric.Activate (GLib.Variant.Create ((int) ruler_metric));
-		}
-
-		private void SaveUserSettings ()
-		{
-			dock.SaveSettings (PintaCore.Settings);
-
-			// Don't store the maximized height if the window is maximized
-			if (!window_shell.Window.IsMaximized ()) {
-				PintaCore.Settings.PutSetting ("window-size-width", window_shell.Window.GetWidth ());
-				PintaCore.Settings.PutSetting ("window-size-height", window_shell.Window.GetHeight ());
+			if (file.GetUriScheme () is string scheme &&
+			   (scheme.StartsWith ("http") || scheme.StartsWith ("ftp"))) {
+				// If the file was likely dragged from a browser, mark as not having a file
+				// so that the user must choose a new file to save to instead of hitting a permission error.
+				PintaCore.Workspace.ActiveDocument.ClearFileReference ();
 			}
-
-			PintaCore.Settings.PutSetting ("ruler-metric", (int) GetCurrentRulerMetric ());
-			PintaCore.Settings.PutSetting ("window-maximized", window_shell.Window.IsMaximized ());
-			PintaCore.Settings.PutSetting ("ruler-shown", PintaCore.Actions.View.Rulers.Value);
-			PintaCore.Settings.PutSetting ("image-tabs-shown", PintaCore.Actions.View.ImageTabs.Value);
-			PintaCore.Settings.PutSetting ("toolbar-shown", PintaCore.Actions.View.ToolBar.Value);
-			PintaCore.Settings.PutSetting ("statusbar-shown", PintaCore.Actions.View.StatusBar.Value);
-			PintaCore.Settings.PutSetting ("toolbox-shown", PintaCore.Actions.View.ToolBox.Value);
-			PintaCore.Settings.PutSetting ("pixel-grid-shown", PintaCore.Actions.View.PixelGrid.Value);
-			PintaCore.Settings.PutSetting (LastDialogDirSettingKey, PintaCore.RecentFiles.LastDialogDirectory?.GetUri () ?? "");
-
-			if (PintaCore.Tools.CurrentTool is BaseTool tool)
-				PintaCore.Settings.PutSetting (LastSelectedToolSettingKey, tool.GetType ().Name);
-
-			PintaCore.Settings.DoSaveSettingsBeforeQuit ();
-		}
-		#endregion
-
-		#region Action Handlers
-		private bool HandleCloseRequest (object o, EventArgs args)
-		{
-			PintaCore.Actions.App.Exit.Activate ();
-
-			// Stop the default handler from running so the user can cancel quitting.
-			return true;
 		}
 
-		private bool HandleDrop (DropTarget sender, DropTarget.DropSignalArgs args)
-		{
-			if (args.Value.GetBoxed (GdkExtensions.GetFileListGType ()) is not Gdk.FileList file_list)
-				return false;
+		return true;
+	}
 
-			foreach (Gio.File file in file_list.GetFiles ()) {
-				PintaCore.Workspace.OpenFile (file);
+	private void ZoomToSelection_Activated (object sender, EventArgs e)
+	{
+		PintaCore.Workspace.ActiveWorkspace.ZoomToCanvasRectangle (PintaCore.Workspace.ActiveDocument.Selection.SelectionPath.GetBounds ().ToDouble ());
+	}
 
-				if (file.GetUriScheme () is string scheme &&
-				   (scheme.StartsWith ("http") || scheme.StartsWith ("ftp"))) {
-					// If the file was likely dragged from a browser, mark as not having a file
-					// so that the user must choose a new file to save to instead of hitting a permission error.
-					PintaCore.Workspace.ActiveDocument.ClearFileReference ();
-				}
-			}
+	private void ZoomToWindow_Activated (object sender, EventArgs e)
+	{
+		// The image is small enough to fit in the window
+		if (PintaCore.Workspace.ImageFitsInWindow) {
+			PintaCore.Actions.View.ActualSize.Activate ();
+		} else {
+			int image_x = PintaCore.Workspace.ImageSize.Width;
+			int image_y = PintaCore.Workspace.ImageSize.Height;
 
-			return true;
-		}
+			var canvas_window = PintaCore.Workspace.ActiveWorkspace.Canvas.Parent!;
 
-		private void ZoomToSelection_Activated (object sender, EventArgs e)
-		{
-			PintaCore.Workspace.ActiveWorkspace.ZoomToCanvasRectangle (PintaCore.Workspace.ActiveDocument.Selection.SelectionPath.GetBounds ().ToDouble ());
-		}
+			var window_x = canvas_window.GetAllocatedWidth ();
+			var window_y = canvas_window.GetAllocatedHeight ();
 
-		private void ZoomToWindow_Activated (object sender, EventArgs e)
-		{
-			// The image is small enough to fit in the window
-			if (PintaCore.Workspace.ImageFitsInWindow) {
-				PintaCore.Actions.View.ActualSize.Activate ();
+			double ratio;
+
+			// The image is more constrained by width than height
+			if ((double) image_x / (double) window_x >= (double) image_y / (double) window_y) {
+				ratio = (double) (window_x - 20) / (double) image_x;
 			} else {
-				int image_x = PintaCore.Workspace.ImageSize.Width;
-				int image_y = PintaCore.Workspace.ImageSize.Height;
-
-				var canvas_window = PintaCore.Workspace.ActiveWorkspace.Canvas.Parent!;
-
-				var window_x = canvas_window.GetAllocatedWidth ();
-				var window_y = canvas_window.GetAllocatedHeight ();
-
-				double ratio;
-
-				// The image is more constrained by width than height
-				if ((double) image_x / (double) window_x >= (double) image_y / (double) window_y) {
-					ratio = (double) (window_x - 20) / (double) image_x;
-				} else {
-					ratio = (double) (window_y - 20) / (double) image_y;
-				}
-
-				PintaCore.Workspace.Scale = ratio;
-				PintaCore.Actions.View.SuspendZoomUpdate ();
-				PintaCore.Actions.View.ZoomComboBox.ComboBox.GetEntry ().SetText (ViewActions.ToPercent (PintaCore.Workspace.Scale));
-				PintaCore.Actions.View.ResumeZoomUpdate ();
+				ratio = (double) (window_y - 20) / (double) image_y;
 			}
 
-			PintaCore.Actions.View.ZoomToWindowActivated = true;
-		}
-		#endregion
-
-
-		private void ActiveDocumentChanged (object? sender, EventArgs e)
-		{
-			if (!PintaCore.Workspace.HasOpenDocuments)
-				return;
-
+			PintaCore.Workspace.Scale = ratio;
 			PintaCore.Actions.View.SuspendZoomUpdate ();
 			PintaCore.Actions.View.ZoomComboBox.ComboBox.GetEntry ().SetText (ViewActions.ToPercent (PintaCore.Workspace.Scale));
 			PintaCore.Actions.View.ResumeZoomUpdate ();
-
-			var doc = PintaCore.Workspace.ActiveDocument;
-			var tab = FindTabWithCanvas ((PintaCanvas) doc.Workspace.Canvas);
-
-			if (tab != null) {
-				canvas_pad.Notebook.ActiveItem = tab;
-			}
-
-			doc.Workspace.Canvas.GrabFocus ();
 		}
 
-		private IDockNotebookItem? FindTabWithCanvas (PintaCanvas canvas)
-		{
-			return canvas_pad.Notebook.Items
-				.Where (i => ((CanvasWindow) i.Widget).Canvas == canvas)
-				.FirstOrDefault ();
+		PintaCore.Actions.View.ZoomToWindowActivated = true;
+	}
+	#endregion
+
+
+	private void ActiveDocumentChanged (object? sender, EventArgs e)
+	{
+		if (!PintaCore.Workspace.HasOpenDocuments)
+			return;
+
+		PintaCore.Actions.View.SuspendZoomUpdate ();
+		PintaCore.Actions.View.ZoomComboBox.ComboBox.GetEntry ().SetText (ViewActions.ToPercent (PintaCore.Workspace.Scale));
+		PintaCore.Actions.View.ResumeZoomUpdate ();
+
+		var doc = PintaCore.Workspace.ActiveDocument;
+		var tab = FindTabWithCanvas ((PintaCanvas) doc.Workspace.Canvas);
+
+		if (tab != null) {
+			canvas_pad.Notebook.ActiveItem = tab;
 		}
+
+		doc.Workspace.Canvas.GrabFocus ();
+	}
+
+	private IDockNotebookItem? FindTabWithCanvas (PintaCanvas canvas)
+	{
+		return canvas_pad.Notebook.Items
+			.Where (i => ((CanvasWindow) i.Widget).Canvas == canvas)
+			.FirstOrDefault ();
 	}
 }
