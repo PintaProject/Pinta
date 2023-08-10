@@ -26,28 +26,27 @@
 
 using Pinta.Core;
 
-namespace Pinta.Tools
+namespace Pinta.Tools;
+
+public sealed class ControlPoint
 {
-	public class ControlPoint
+	//Note: not using get/set because this is used in time-critical code that is sped up without it.
+	public PointD Position;
+	public double Tension;
+
+	/// <summary>
+	/// A wrapper class for a PointD with its own tension value.
+	/// </summary>
+	/// <param name="passedPosition">The position of the PointD on the Canvas.</param>
+	/// <param name="passedTension">The tension of the ControlPoint on the shape.</param>
+	public ControlPoint (PointD passedPosition, double passedTension)
 	{
-		//Note: not using get/set because this is used in time-critical code that is sped up without it.
-		public PointD Position;
-		public double Tension;
+		Position = passedPosition;
+		Tension = passedTension;
+	}
 
-		/// <summary>
-		/// A wrapper class for a PointD with its own tension value.
-		/// </summary>
-		/// <param name="passedPosition">The position of the PointD on the Canvas.</param>
-		/// <param name="passedTension">The tension of the ControlPoint on the shape.</param>
-		public ControlPoint (PointD passedPosition, double passedTension)
-		{
-			Position = passedPosition;
-			Tension = passedTension;
-		}
-
-		public ControlPoint Clone ()
-		{
-			return new ControlPoint (Position, Tension);
-		}
+	public ControlPoint Clone ()
+	{
+		return new ControlPoint (Position, Tension);
 	}
 }
