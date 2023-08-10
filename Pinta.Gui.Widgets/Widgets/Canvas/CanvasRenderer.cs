@@ -8,11 +8,12 @@
 /////////////////////////////////////////////////////////////////////////////////
 
 using System.Collections.Generic;
+using System.Collections.Immutable;
 using Pinta.Core;
 
 namespace Pinta.Gui.Widgets
 {
-	public class CanvasRenderer
+	public sealed class CanvasRenderer
 	{
 		private static readonly Cairo.Pattern tranparent_pattern;
 
@@ -23,10 +24,10 @@ namespace Pinta.Gui.Widgets
 		private Size destination_size;
 		private ScaleFactor scale_factor;
 
-		private int[]? d_2_s_lookup_x;
-		private int[]? d_2_s_lookup_y;
-		private int[]? s_2_d_lookup_x;
-		private int[]? s_2_d_lookup_y;
+		private ImmutableArray<int>? d_2_s_lookup_x;
+		private ImmutableArray<int>? d_2_s_lookup_y;
+		private ImmutableArray<int>? s_2_d_lookup_x;
+		private ImmutableArray<int>? s_2_d_lookup_y;
 
 		public CanvasRenderer (bool enable_pixel_grid, bool enableLivePreview)
 		{
@@ -104,10 +105,10 @@ namespace Pinta.Gui.Widgets
 		}
 
 		// Lazily create and cache these
-		private int[] D2SLookupX => d_2_s_lookup_x ??= CreateLookupX (source_size.Width, destination_size.Width, scale_factor);
-		private int[] D2SLookupY => d_2_s_lookup_y ??= CreateLookupY (source_size.Height, destination_size.Height, scale_factor);
-		private int[] S2DLookupX => s_2_d_lookup_x ??= CreateS2DLookupX (source_size.Width, destination_size.Width, scale_factor);
-		private int[] S2DLookupY => s_2_d_lookup_y ??= CreateS2DLookupY (source_size.Height, destination_size.Height, scale_factor);
+		private ImmutableArray<int> D2SLookupX => d_2_s_lookup_x ??= CreateLookupX (source_size.Width, destination_size.Width, scale_factor);
+		private ImmutableArray<int> D2SLookupY => d_2_s_lookup_y ??= CreateLookupY (source_size.Height, destination_size.Height, scale_factor);
+		private ImmutableArray<int> S2DLookupX => s_2_d_lookup_x ??= CreateS2DLookupX (source_size.Width, destination_size.Width, scale_factor);
+		private ImmutableArray<int> S2DLookupY => s_2_d_lookup_y ??= CreateS2DLookupY (source_size.Height, destination_size.Height, scale_factor);
 
 		#region Algorithms ported from PDN
 		private void RenderPixelGrid (Cairo.ImageSurface dst, PointI offset)
@@ -149,56 +150,56 @@ namespace Pinta.Gui.Widgets
 			}
 		}
 
-		private static int[] CreateLookupX (int srcWidth, int dstWidth, ScaleFactor scaleFactor)
+		private static ImmutableArray<int> CreateLookupX (int srcWidth, int dstWidth, ScaleFactor scaleFactor)
 		{
-			var lookup = new int[dstWidth + 1];
+			var lookup = ImmutableArray.CreateBuilder<int> (dstWidth + 1);
 
 			// Sometimes the scale factor is slightly different on one axis than
 			// on another, simply due to accuracy. So we have to clamp this value to
 			// be within bounds.
-			for (var x = 0; x < lookup.Length; ++x)
+			for (var x = 0; x < lookup.Count; ++x)
 				lookup[x] = Utility.Clamp (scaleFactor.ScaleScalar (x), 0, srcWidth - 1);
 
-			return lookup;
+			return lookup.MoveToImmutable ();
 		}
 
-		private static int[] CreateLookupY (int srcHeight, int dstHeight, ScaleFactor scaleFactor)
+		private static ImmutableArray<int> CreateLookupY (int srcHeight, int dstHeight, ScaleFactor scaleFactor)
 		{
-			var lookup = new int[dstHeight + 1];
+			var lookup = ImmutableArray.CreateBuilder<int> (dstHeight + 1); ;
 
 			// Sometimes the scale factor is slightly different on one axis than
 			// on another, simply due to accuracy. So we have to clamp this value to
 			// be within bounds.
-			for (var y = 0; y < lookup.Length; ++y)
+			for (var y = 0; y < lookup.Count; ++y)
 				lookup[y] = Utility.Clamp (scaleFactor.ScaleScalar (y), 0, srcHeight - 1);
 
-			return lookup;
+			return lookup.MoveToImmutable ();
 		}
 
-		private static int[] CreateS2DLookupX (int srcWidth, int dstWidth, ScaleFactor scaleFactor)
+		private static ImmutableArray<int> CreateS2DLookupX (int srcWidth, int dstWidth, ScaleFactor scaleFactor)
 		{
-			var lookup = new int[srcWidth + 1];
+			var lookup = ImmutableArray.CreateBuilder<int> (srcWidth + 1);
 
 			// Sometimes the scale factor is slightly different on one axis than
 			// on another, simply due to accuracy. So we have to clamp this value to
 			// be within bounds.
-			for (var x = 0; x < lookup.Length; ++x)
+			for (var x = 0; x < lookup.Count; ++x)
 				lookup[x] = Utility.Clamp (scaleFactor.UnscaleScalar (x), 0, dstWidth - 1);
 
-			return lookup;
+			return lookup.MoveToImmutable ();
 		}
 
-		private static int[] CreateS2DLookupY (int srcHeight, int dstHeight, ScaleFactor scaleFactor)
+		private static ImmutableArray<int> CreateS2DLookupY (int srcHeight, int dstHeight, ScaleFactor scaleFactor)
 		{
-			var lookup = new int[srcHeight + 1];
+			var lookup = ImmutableArray.CreateBuilder<int> (srcHeight + 1);
 
 			// Sometimes the scale factor is slightly different on one axis than
 			// on another, simply due to accuracy. So we have to clamp this value to
 			// be within bounds.
-			for (var y = 0; y < lookup.Length; ++y)
+			for (var y = 0; y < lookup.Count; ++y)
 				lookup[y] = Utility.Clamp (scaleFactor.UnscaleScalar (y), 0, dstHeight - 1);
 
-			return lookup;
+			return lookup.MoveToImmutable ();
 		}
 		#endregion
 	}
