@@ -400,7 +400,7 @@ namespace Pinta.Core
 			text.SetActivatesDefault (activates);
 		}
 
-		internal class TextWrapper : Gtk.Text
+		internal sealed class TextWrapper : Gtk.Text
 		{
 			internal TextWrapper (IntPtr ptr, bool ownedRef) : base (ptr, ownedRef)
 			{

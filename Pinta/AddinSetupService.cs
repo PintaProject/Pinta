@@ -30,7 +30,7 @@ using Pinta.Core;
 
 namespace Pinta
 {
-	public class AddinSetupService : SetupService
+	public sealed class AddinSetupService : SetupService
 	{
 		internal AddinSetupService (AddinRegistry r) : base (r)
 		{

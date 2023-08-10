@@ -29,7 +29,7 @@ using System.Collections.Generic;
 
 namespace Pinta.Core
 {
-	public class DocumentHistory
+	public sealed class DocumentHistory
 	{
 		private readonly Document document;
 		private readonly List<BaseHistoryItem> history = new ();

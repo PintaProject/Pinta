@@ -33,7 +33,7 @@ using Cairo;
 
 namespace Pinta.Core
 {
-	public class SurfaceDiff
+	public sealed class SurfaceDiff
 	{
 		private struct DiffBounds
 		{

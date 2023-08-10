@@ -28,7 +28,7 @@ using System;
 
 namespace Pinta.Core
 {
-	public class DocumentWorkspace
+	public sealed class DocumentWorkspace
 	{
 		private readonly Document document;
 		private Size view_size;
@@ -301,7 +301,7 @@ namespace Pinta.Core
 		#endregion
 
 		#region Private Methods
-		protected internal void OnCanvasInvalidated (CanvasInvalidatedEventArgs e)
+		private void OnCanvasInvalidated (CanvasInvalidatedEventArgs e)
 		{
 			if (CanvasInvalidated != null)
 				CanvasInvalidated (this, e);

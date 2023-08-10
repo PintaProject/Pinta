@@ -33,7 +33,7 @@ namespace Pinta.Core
 	/// <summary>
 	/// Provides methods for registering and unregistering effects and adjustments.
 	/// </summary>
-	public class EffectsManager
+	public sealed class EffectsManager
 	{
 		private readonly Dictionary<BaseEffect, Command> adjustments;
 		private readonly Dictionary<BaseEffect, Command> effects;
