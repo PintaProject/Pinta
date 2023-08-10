@@ -97,7 +97,7 @@ namespace Pinta.Core
 			if (stencil.IsEmpty)
 				return Array.Empty<PointI[]> ();
 
-			var polygons = new List<PointI[]> ();
+			var polygons = new List<IReadOnlyList<PointI>> ();
 
 			PointI start = bounds.Location ().ToInt ();
 			var pts = new List<PointI> ();
