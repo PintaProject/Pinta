@@ -421,7 +421,7 @@ namespace Pinta.Core
 			}
 
 			// It's below all of our lines, return the end of the last line
-			return new TextPosition (lines.Count - 1, lines[lines.Count - 1].Length);
+			return new TextPosition (lines.Count - 1, lines[^1].Length);
 		}
 
 		public int PositionToUTF8Index (TextPosition p)

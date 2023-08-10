@@ -1343,7 +1343,7 @@ namespace Pinta.Tools
 						adjacentPoint = selEngine.ControlPoints[SelectedPointIndex - 1];
 					} else if (selEngine.ControlPoints.Count > 1) {
 						//Previous point (looping around to the end) if there is more than 1 point.
-						adjacentPoint = selEngine.ControlPoints[selEngine.ControlPoints.Count - 1];
+						adjacentPoint = selEngine.ControlPoints[^1];
 					} else {
 						//Don't bother calculating a modified point because there is no reference point to align it with (there is only 1 point).
 						return;
