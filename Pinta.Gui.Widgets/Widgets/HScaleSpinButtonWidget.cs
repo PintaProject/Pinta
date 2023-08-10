@@ -29,165 +29,164 @@ using System.Diagnostics.CodeAnalysis;
 using Gtk;
 using Pinta.Core;
 
-namespace Pinta.Gui.Widgets
+namespace Pinta.Gui.Widgets;
+
+public class HScaleSpinButtonWidget : Box
 {
-	public class HScaleSpinButtonWidget : Box
+	private Scale hscale;
+	private SpinButton spin;
+	private Button button;
+	private Label label;
+
+	private int max_value;
+	private int min_value;
+	private int digits_value;
+	private double inc_value;
+
+	public HScaleSpinButtonWidget ()
 	{
-		private Scale hscale;
-		private SpinButton spin;
-		private Button button;
-		private Label label;
+		Build ();
 
-		private int max_value;
-		private int min_value;
-		private int digits_value;
-		private double inc_value;
+		hscale.OnValueChanged += HandleHscaleValueChanged;
+		spin.OnValueChanged += HandleSpinValueChanged;
+		button.OnClicked += HandleButtonClicked;
 
-		public HScaleSpinButtonWidget ()
-		{
-			Build ();
+		OnRealize += (_, _) => Value = DefaultValue;
 
-			hscale.OnValueChanged += HandleHscaleValueChanged;
-			spin.OnValueChanged += HandleSpinValueChanged;
-			button.OnClicked += HandleButtonClicked;
+		spin.SetActivatesDefault (true);
+	}
 
-			OnRealize += (_, _) => Value = DefaultValue;
+	public string Label {
+		get => label.GetText ();
+		set => label.SetText (value);
+	}
 
-			spin.SetActivatesDefault (true);
+	public double DefaultValue { get; set; }
+
+	public int MaximumValue {
+		get => max_value;
+		set {
+			max_value = value;
+			hscale.Adjustment!.Upper = value;
+			spin.Adjustment!.Upper = value;
 		}
+	}
 
-		public string Label {
-			get => label.GetText ();
-			set => label.SetText (value);
+	public int MinimumValue {
+		get => min_value;
+		set {
+			min_value = value;
+			hscale.Adjustment!.Lower = value;
+			spin.Adjustment!.Lower = value;
 		}
+	}
 
-		public double DefaultValue { get; set; }
-
-		public int MaximumValue {
-			get => max_value;
-			set {
-				max_value = value;
-				hscale.Adjustment!.Upper = value;
-				spin.Adjustment!.Upper = value;
+	public int DigitsValue {
+		get => digits_value;
+		set {
+			if (value > 0) {
+				digits_value = value;
+				hscale.Digits = value;
+				spin.Digits = Convert.ToUInt32 (value);
 			}
 		}
+	}
 
-		public int MinimumValue {
-			get => min_value;
-			set {
-				min_value = value;
-				hscale.Adjustment!.Lower = value;
-				spin.Adjustment!.Lower = value;
-			}
+	public double IncrementValue {
+		get => inc_value;
+		set {
+			inc_value = value;
+			hscale.Adjustment!.StepIncrement = value;
+			spin.Adjustment!.StepIncrement = value;
 		}
+	}
 
-		public int DigitsValue {
-			get => digits_value;
-			set {
-				if (value > 0) {
-					digits_value = value;
-					hscale.Digits = value;
-					spin.Digits = Convert.ToUInt32 (value);
-				}
-			}
-		}
+	public int ValueAsInt => spin.GetValueAsInt ();
 
-		public double IncrementValue {
-			get => inc_value;
-			set {
-				inc_value = value;
-				hscale.Adjustment!.StepIncrement = value;
-				spin.Adjustment!.StepIncrement = value;
-			}
-		}
-
-		public int ValueAsInt => spin.GetValueAsInt ();
-
-		public double Value {
-			get => spin.Value;
-			set {
-				if (spin.Value != value) {
-					spin.Value = value;
-					OnValueChanged ();
-				}
-			}
-		}
-
-		private void HandleHscaleValueChanged (object? sender, EventArgs e)
-		{
-			if (spin.Value != hscale.GetValue ()) {
-				spin.Value = hscale.GetValue ();
+	public double Value {
+		get => spin.Value;
+		set {
+			if (spin.Value != value) {
+				spin.Value = value;
 				OnValueChanged ();
 			}
 		}
+	}
 
-		private void HandleSpinValueChanged (object? sender, EventArgs e)
-		{
-			if (hscale.GetValue () != spin.Value) {
-				hscale.SetValue (spin.Value);
-				OnValueChanged ();
-			}
+	private void HandleHscaleValueChanged (object? sender, EventArgs e)
+	{
+		if (spin.Value != hscale.GetValue ()) {
+			spin.Value = hscale.GetValue ();
+			OnValueChanged ();
 		}
+	}
 
-		private void HandleButtonClicked (object? sender, EventArgs e)
-		{
-			Value = DefaultValue;
+	private void HandleSpinValueChanged (object? sender, EventArgs e)
+	{
+		if (hscale.GetValue () != spin.Value) {
+			hscale.SetValue (spin.Value);
+			OnValueChanged ();
 		}
+	}
 
-		protected void OnValueChanged () => ValueChanged?.Invoke (this, EventArgs.Empty);
+	private void HandleButtonClicked (object? sender, EventArgs e)
+	{
+		Value = DefaultValue;
+	}
 
-		public event EventHandler? ValueChanged;
+	protected void OnValueChanged () => ValueChanged?.Invoke (this, EventArgs.Empty);
 
-		[MemberNotNull (nameof (label), nameof (hscale), nameof (spin), nameof (button))]
-		private void Build ()
-		{
-			const int spacing = 6;
+	public event EventHandler? ValueChanged;
 
-			// Section label + line
-			var hbox1 = new Box () { Spacing = spacing };
-			hbox1.SetOrientation (Orientation.Horizontal);
+	[MemberNotNull (nameof (label), nameof (hscale), nameof (spin), nameof (button))]
+	private void Build ()
+	{
+		const int spacing = 6;
 
-			label = new Label ();
-			label.AddCssClass (AdwaitaStyles.Title4);
-			hbox1.Append (label);
+		// Section label + line
+		var hbox1 = new Box () { Spacing = spacing };
+		hbox1.SetOrientation (Orientation.Horizontal);
 
-			// Slider + spinner + reset button
-			var hbox2 = new Box () { Spacing = spacing };
-			hbox2.SetOrientation (Orientation.Horizontal);
+		label = new Label ();
+		label.AddCssClass (AdwaitaStyles.Title4);
+		hbox1.Append (label);
 
-			hscale = Scale.NewWithRange (Orientation.Horizontal, 2, 64, 1);
-			hscale.CanFocus = true;
-			hscale.DrawValue = false;
-			hscale.Digits = 0;
-			hscale.ValuePos = PositionType.Top;
-			hscale.Hexpand = true;
-			hscale.Halign = Align.Fill;
+		// Slider + spinner + reset button
+		var hbox2 = new Box () { Spacing = spacing };
+		hbox2.SetOrientation (Orientation.Horizontal);
 
-			hbox2.Append (hscale);
+		hscale = Scale.NewWithRange (Orientation.Horizontal, 2, 64, 1);
+		hscale.CanFocus = true;
+		hscale.DrawValue = false;
+		hscale.Digits = 0;
+		hscale.ValuePos = PositionType.Top;
+		hscale.Hexpand = true;
+		hscale.Halign = Align.Fill;
 
-			spin = SpinButton.NewWithRange (0, 100, 1);
-			spin.CanFocus = true;
-			spin.ClimbRate = 1;
-			spin.Numeric = true;
-			spin.Adjustment!.PageIncrement = 10;
+		hbox2.Append (hscale);
 
-			hbox2.Append (spin);
+		spin = SpinButton.NewWithRange (0, 100, 1);
+		spin.CanFocus = true;
+		spin.ClimbRate = 1;
+		spin.Numeric = true;
+		spin.Adjustment!.PageIncrement = 10;
 
-			// Reset button
-			button = new Button {
-				IconName = Resources.StandardIcons.GoPrevious,
-				WidthRequest = 28,
-				HeightRequest = 24,
-				CanFocus = true,
-				UseUnderline = true
-			};
-			hbox2.Append (button);
+		hbox2.Append (spin);
 
-			// Main layout
-			SetOrientation (Orientation.Vertical);
-			Spacing = spacing;
-			Append (hbox1);
-			Append (hbox2);
-		}
+		// Reset button
+		button = new Button {
+			IconName = Resources.StandardIcons.GoPrevious,
+			WidthRequest = 28,
+			HeightRequest = 24,
+			CanFocus = true,
+			UseUnderline = true
+		};
+		hbox2.Append (button);
+
+		// Main layout
+		SetOrientation (Orientation.Vertical);
+		Spacing = spacing;
+		Append (hbox1);
+		Append (hbox2);
 	}
 }

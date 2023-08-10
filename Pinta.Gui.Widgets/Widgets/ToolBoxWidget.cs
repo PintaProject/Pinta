@@ -2,49 +2,48 @@ using System.Linq;
 using Gtk;
 using Pinta.Core;
 
-namespace Pinta.Gui.Widgets
+namespace Pinta.Gui.Widgets;
+
+public sealed class ToolBoxWidget : Box
 {
-	public class ToolBoxWidget : Box
+	public ToolBoxWidget ()
 	{
-		public ToolBoxWidget ()
-		{
-			HeightRequest = 375;
-			AddCssClass (AdwaitaStyles.Linked);
+		HeightRequest = 375;
+		AddCssClass (AdwaitaStyles.Linked);
 
-			PintaCore.Tools.ToolAdded += HandleToolAdded;
-			PintaCore.Tools.ToolRemoved += HandleToolRemoved;
+		PintaCore.Tools.ToolAdded += HandleToolAdded;
+		PintaCore.Tools.ToolRemoved += HandleToolRemoved;
 
-			SetOrientation (Orientation.Vertical);
-			Spacing = 0;
+		SetOrientation (Orientation.Vertical);
+		Spacing = 0;
+	}
+
+	public void AddItem (ToolBoxButton item)
+	{
+		var index = PintaCore.Tools.ToList ().IndexOf (item.Tool);
+
+		Widget? prev_widget = null;
+		if (index > 0) {
+			prev_widget = GetFirstChild ();
+			for (int i = 1; i < index; ++i)
+				prev_widget = prev_widget!.GetNextSibling ();
 		}
 
-		public void AddItem (ToolBoxButton item)
-		{
-			var index = PintaCore.Tools.ToList ().IndexOf (item.Tool);
+		InsertChildAfter (item.Tool.ToolItem, prev_widget);
+	}
 
-			Widget? prev_widget = null;
-			if (index > 0) {
-				prev_widget = GetFirstChild ();
-				for (int i = 1; i < index; ++i)
-					prev_widget = prev_widget!.GetNextSibling ();
-			}
+	public void RemoveItem (ToolBoxButton item)
+	{
+		Remove (item);
+	}
 
-			InsertChildAfter (item.Tool.ToolItem, prev_widget);
-		}
+	private void HandleToolAdded (object? sender, ToolEventArgs e)
+	{
+		AddItem (e.Tool.ToolItem);
+	}
 
-		public void RemoveItem (ToolBoxButton item)
-		{
-			Remove (item);
-		}
-
-		private void HandleToolAdded (object? sender, ToolEventArgs e)
-		{
-			AddItem (e.Tool.ToolItem);
-		}
-
-		private void HandleToolRemoved (object? sender, ToolEventArgs e)
-		{
-			RemoveItem (e.Tool.ToolItem);
-		}
+	private void HandleToolRemoved (object? sender, ToolEventArgs e)
+	{
+		RemoveItem (e.Tool.ToolItem);
 	}
 }

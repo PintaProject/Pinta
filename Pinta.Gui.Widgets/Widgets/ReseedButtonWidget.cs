@@ -29,48 +29,47 @@ using System.Diagnostics.CodeAnalysis;
 using Gtk;
 using Pinta.Core;
 
-namespace Pinta.Gui.Widgets
+namespace Pinta.Gui.Widgets;
+
+public sealed class ReseedButtonWidget : Box
 {
-	public class ReseedButtonWidget : Box
+	private Button button;
+
+	public event EventHandler? Clicked;
+
+	public ReseedButtonWidget ()
 	{
-		private Button button;
+		Build ();
 
-		public event EventHandler? Clicked;
+		button.OnClicked += (_, _) => Clicked?.Invoke (this, EventArgs.Empty);
+	}
 
-		public ReseedButtonWidget ()
-		{
-			Build ();
+	[MemberNotNull (nameof (button))]
+	private void Build ()
+	{
+		const int spacing = 6;
 
-			button.OnClicked += (_, _) => Clicked?.Invoke (this, EventArgs.Empty);
-		}
+		// Section label + line
+		var label = Label.New (Pinta.Core.Translations.GetString ("Random Noise"));
+		label.AddCssClass (AdwaitaStyles.Title4);
+		label.Hexpand = false;
+		label.Halign = Align.Start;
 
-		[MemberNotNull (nameof (button))]
-		private void Build ()
-		{
-			const int spacing = 6;
+		// Reseed button
+		button = new Button {
+			WidthRequest = 88,
+			CanFocus = true,
+			UseUnderline = true,
+			Label = Pinta.Core.Translations.GetString ("Reseed"),
+			Hexpand = false,
+			Halign = Align.Start
+		};
 
-			// Section label + line
-			var label = Label.New (Pinta.Core.Translations.GetString ("Random Noise"));
-			label.AddCssClass (AdwaitaStyles.Title4);
-			label.Hexpand = false;
-			label.Halign = Align.Start;
-
-			// Reseed button
-			button = new Button {
-				WidthRequest = 88,
-				CanFocus = true,
-				UseUnderline = true,
-				Label = Pinta.Core.Translations.GetString ("Reseed"),
-				Hexpand = false,
-				Halign = Align.Start
-			};
-
-			// Main layout
-			SetOrientation (Orientation.Vertical);
-			Spacing = spacing;
-			Append (label);
-			Append (button);
-		}
+		// Main layout
+		SetOrientation (Orientation.Vertical);
+		Spacing = spacing;
+		Append (label);
+		Append (button);
 	}
 }
 
