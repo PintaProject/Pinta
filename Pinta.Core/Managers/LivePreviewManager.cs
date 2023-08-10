@@ -36,7 +36,7 @@ using Debug = System.Diagnostics.Debug;
 namespace Pinta.Core
 {
 
-	public class LivePreviewManager
+	public sealed class LivePreviewManager
 	{
 		// NRT - These are set in Start(). This should be rewritten to be provably non-null.
 		bool live_preview_enabled;
@@ -300,7 +300,7 @@ namespace Pinta.Core
 			renderer.Start (effect, layer.Surface, live_preview_surface, render_bounds);
 		}
 
-		class Renderer : AsyncEffectRenderer
+		private sealed class Renderer : AsyncEffectRenderer
 		{
 			readonly LivePreviewManager manager;
 

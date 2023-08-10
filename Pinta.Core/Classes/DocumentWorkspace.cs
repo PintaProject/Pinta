@@ -28,7 +28,7 @@ using System;
 
 namespace Pinta.Core
 {
-	public class DocumentWorkspace
+	public sealed class DocumentWorkspace
 	{
 		private readonly Document document;
 		private Size view_size;
