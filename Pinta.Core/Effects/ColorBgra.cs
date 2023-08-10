@@ -191,8 +191,9 @@ namespace Pinta.Core
 		/// </summary>
 		public static ColorBgra FromBgra (byte b, byte g, byte r, byte a)
 		{
-			ColorBgra color = new ColorBgra ();
-			color.Bgra = BgraToUInt32 (b, g, r, a);
+			ColorBgra color = new ColorBgra {
+				Bgra = BgraToUInt32 (b, g, r, a)
+			};
 			return color;
 		}
 
@@ -259,8 +260,9 @@ namespace Pinta.Core
 		/// </summary>
 		public static ColorBgra FromUInt32 (UInt32 bgra)
 		{
-			ColorBgra color = new ColorBgra ();
-			color.Bgra = bgra;
+			ColorBgra color = new ColorBgra {
+				Bgra = bgra
+			};
 			return color;
 		}
 
@@ -313,12 +315,12 @@ namespace Pinta.Core
 		/// </remarks>
 		public static ColorBgra Lerp (ColorBgra from, ColorBgra to, float frac)
 		{
-			ColorBgra ret = new ColorBgra ();
-
-			ret.B = (byte) ClampToByte (Lerp (from.B, to.B, frac));
-			ret.G = (byte) ClampToByte (Lerp (from.G, to.G, frac));
-			ret.R = (byte) ClampToByte (Lerp (from.R, to.R, frac));
-			ret.A = (byte) ClampToByte (Lerp (from.A, to.A, frac));
+			ColorBgra ret = new ColorBgra {
+				B = (byte) ClampToByte (Lerp (from.B, to.B, frac)),
+				G = (byte) ClampToByte (Lerp (from.G, to.G, frac)),
+				R = (byte) ClampToByte (Lerp (from.R, to.R, frac)),
+				A = (byte) ClampToByte (Lerp (from.A, to.A, frac))
+			};
 
 			return ret;
 		}
@@ -343,12 +345,12 @@ namespace Pinta.Core
 		/// </remarks>
 		public static ColorBgra Lerp (ColorBgra from, ColorBgra to, double frac)
 		{
-			ColorBgra ret = new ColorBgra ();
-
-			ret.B = (byte) ClampToByte (Lerp (from.B, to.B, frac));
-			ret.G = (byte) ClampToByte (Lerp (from.G, to.G, frac));
-			ret.R = (byte) ClampToByte (Lerp (from.R, to.R, frac));
-			ret.A = (byte) ClampToByte (Lerp (from.A, to.A, frac));
+			ColorBgra ret = new ColorBgra {
+				B = (byte) ClampToByte (Lerp (from.B, to.B, frac)),
+				G = (byte) ClampToByte (Lerp (from.G, to.G, frac)),
+				R = (byte) ClampToByte (Lerp (from.R, to.R, frac)),
+				A = (byte) ClampToByte (Lerp (from.A, to.A, frac))
+			};
 
 			return ret;
 		}

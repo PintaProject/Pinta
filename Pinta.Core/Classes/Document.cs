@@ -294,9 +294,10 @@ namespace Pinta.Core
 
 			PintaCore.Tools.Commit ();
 
-			ResizeHistoryItem hist = new ResizeHistoryItem (ImageSize);
-			hist.Icon = Resources.Icons.ImageResizeCanvas;
-			hist.Text = Translations.GetString ("Resize Canvas");
+			ResizeHistoryItem hist = new ResizeHistoryItem (ImageSize) {
+				Icon = Resources.Icons.ImageResizeCanvas,
+				Text = Translations.GetString ("Resize Canvas")
+			};
 			hist.StartSnapshotOfImage ();
 
 			scale = Workspace.Scale;

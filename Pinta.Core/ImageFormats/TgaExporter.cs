@@ -95,20 +95,20 @@ namespace Pinta.Core
 			using var file_stream = new GioStream (file.Replace ());
 			using var writer = new BinaryWriter (file_stream);
 
-			TgaHeader header = new TgaHeader ();
-
-			header.idLength = (byte) (ImageIdField.Length + 1);
-			header.cmapType = 0;
-			header.imageType = 2; // uncompressed RGB
-			header.cmapIndex = 0;
-			header.cmapLength = 0;
-			header.cmapEntrySize = 0;
-			header.xOrigin = 0;
-			header.yOrigin = 0;
-			header.imageWidth = (ushort) surf.Width;
-			header.imageHeight = (ushort) surf.Height;
-			header.pixelDepth = 32;
-			header.imageDesc = 8; // 32-bit, lower-left origin, which is weird but hey...
+			TgaHeader header = new TgaHeader {
+				idLength = (byte) (ImageIdField.Length + 1),
+				cmapType = 0,
+				imageType = 2, // uncompressed RGB
+				cmapIndex = 0,
+				cmapLength = 0,
+				cmapEntrySize = 0,
+				xOrigin = 0,
+				yOrigin = 0,
+				imageWidth = (ushort) surf.Width,
+				imageHeight = (ushort) surf.Height,
+				pixelDepth = 32,
+				imageDesc = 8 // 32-bit, lower-left origin, which is weird but hey...
+			};
 			header.WriteTo (writer);
 
 			writer.Write (ImageIdField);

@@ -145,8 +145,9 @@ namespace Pinta.Core
 		private byte[] GetLayerXmlData (IReadOnlyList<UserLayer> layers)
 		{
 			MemoryStream ms = new MemoryStream ();
-			XmlTextWriter writer = new XmlTextWriter (ms, System.Text.Encoding.UTF8);
-			writer.Formatting = Formatting.Indented;
+			XmlTextWriter writer = new XmlTextWriter (ms, System.Text.Encoding.UTF8) {
+				Formatting = Formatting.Indented
+			};
 
 			writer.WriteStartElement ("image");
 			writer.WriteAttributeString ("w", layers[0].Surface.Width.ToString ());
@@ -183,8 +184,9 @@ namespace Pinta.Core
 			using var stream = new ZipOutputStream (file_stream) {
 				UseZip64 = UseZip64.Off // For backwards compatibility with older versions.
 			};
-			ZipEntry mimetype = new ZipEntry ("mimetype");
-			mimetype.CompressionMethod = CompressionMethod.Stored;
+			ZipEntry mimetype = new ZipEntry ("mimetype") {
+				CompressionMethod = CompressionMethod.Stored
+			};
 			stream.PutNextEntry (mimetype);
 
 			byte[] databytes = System.Text.Encoding.ASCII.GetBytes ("image/openraster");

@@ -105,18 +105,21 @@ namespace Pinta.Effects
 			content_area.SetAllMargins (6);
 			content_area.Spacing = 6;
 
-			red_spinbox = new HScaleSpinButtonWidget ();
-			red_spinbox.Label = Translations.GetString ("Red");
+			red_spinbox = new HScaleSpinButtonWidget {
+				Label = Translations.GetString ("Red")
+			};
 			InitSpinBox (red_spinbox);
 			content_area.Append (red_spinbox);
 
-			green_spinbox = new HScaleSpinButtonWidget ();
-			green_spinbox.Label = Translations.GetString ("Green");
+			green_spinbox = new HScaleSpinButtonWidget {
+				Label = Translations.GetString ("Green")
+			};
 			InitSpinBox (green_spinbox);
 			content_area.Append (green_spinbox);
 
-			blue_spinbox = new HScaleSpinButtonWidget ();
-			blue_spinbox.Label = Translations.GetString ("Blue");
+			blue_spinbox = new HScaleSpinButtonWidget {
+				Label = Translations.GetString ("Blue")
+			};
 			InitSpinBox (blue_spinbox);
 			content_area.Append (blue_spinbox);
 

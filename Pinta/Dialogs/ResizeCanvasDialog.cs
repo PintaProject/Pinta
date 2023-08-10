@@ -370,9 +370,12 @@ namespace Pinta
 			SButton = CreateAnchorButton ();
 			SEButton = CreateAnchorButton ();
 
-			var grid = new Grid () { RowSpacing = spacing, ColumnSpacing = spacing };
-			grid.Halign = Align.Center;
-			grid.Valign = Align.Center;
+			var grid = new Grid {
+				RowSpacing = spacing,
+				ColumnSpacing = spacing,
+				Halign = Align.Center,
+				Valign = Align.Center
+			};
 			grid.Attach (NWButton, 0, 0, 1, 1);
 			grid.Attach (NButton, 1, 0, 1, 1);
 			grid.Attach (NEButton, 2, 0, 1, 1);

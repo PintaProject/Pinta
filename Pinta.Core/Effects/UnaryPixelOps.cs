@@ -686,11 +686,11 @@ namespace Pinta.Core
 
 			public object Clone ()
 			{
-				Level copy = new Level (color_in_low, color_in_high, (float[]) gamma.Clone (), color_out_low, color_out_high);
-
-				copy.CurveB = (byte[]) this.CurveB.Clone ();
-				copy.CurveG = (byte[]) this.CurveG.Clone ();
-				copy.CurveR = (byte[]) this.CurveR.Clone ();
+				Level copy = new Level (color_in_low, color_in_high, (float[]) gamma.Clone (), color_out_low, color_out_high) {
+					CurveB = (byte[]) this.CurveB.Clone (),
+					CurveG = (byte[]) this.CurveG.Clone (),
+					CurveR = (byte[]) this.CurveR.Clone ()
+				};
 
 				return copy;
 			}

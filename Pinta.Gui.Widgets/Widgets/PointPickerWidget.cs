@@ -157,9 +157,10 @@ namespace Pinta.Gui.Widgets
 			var hbox2 = new Box () { Spacing = spacing };
 			hbox2.SetOrientation (Orientation.Horizontal);
 
-			pointpickergraphic1 = new PointPickerGraphic ();
-			pointpickergraphic1.Hexpand = true;
-			pointpickergraphic1.Halign = Align.Center;
+			pointpickergraphic1 = new PointPickerGraphic {
+				Hexpand = true,
+				Halign = Align.Center
+			};
 			hbox2.Append (pointpickergraphic1);
 
 			// X spinner

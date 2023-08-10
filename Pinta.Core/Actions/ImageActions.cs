@@ -281,10 +281,10 @@ namespace Pinta.Core
 			if (rect.Width <= 0 || rect.Height <= 0)
 				return;
 
-			ResizeHistoryItem hist = new ResizeHistoryItem (doc.ImageSize);
-
-			hist.Icon = Resources.Icons.ImageCrop;
-			hist.Text = Translations.GetString ("Crop to Selection");
+			ResizeHistoryItem hist = new ResizeHistoryItem (doc.ImageSize) {
+				Icon = Resources.Icons.ImageCrop,
+				Text = Translations.GetString ("Crop to Selection")
+			};
 			hist.StartSnapshotOfImage ();
 			hist.RestoreSelection = doc.Selection.Clone ();
 

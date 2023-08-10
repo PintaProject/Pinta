@@ -408,9 +408,10 @@ namespace Pinta
 			PintaCore.Chrome.InitializeToolBox (toolbox);
 
 			// Dock widget
-			dock = new Dock ();
-			dock.Hexpand = true;
-			dock.Halign = Align.Fill;
+			dock = new Dock {
+				Hexpand = true,
+				Halign = Align.Fill
+			};
 
 			// Canvas pad
 			canvas_pad = new CanvasPad ();

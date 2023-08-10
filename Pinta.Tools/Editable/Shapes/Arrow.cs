@@ -44,12 +44,12 @@ namespace Pinta.Tools
 		/// <returns>A clone of the Arrow.</returns>
 		public Arrow Clone ()
 		{
-			Arrow clonedA = new Arrow ();
-
-			clonedA.Show = Show;
-			clonedA.ArrowSize = ArrowSize;
-			clonedA.AngleOffset = AngleOffset;
-			clonedA.LengthOffset = LengthOffset;
+			Arrow clonedA = new Arrow {
+				Show = Show,
+				ArrowSize = ArrowSize,
+				AngleOffset = AngleOffset,
+				LengthOffset = LengthOffset
+			};
 
 			return clonedA;
 		}
