@@ -24,15 +24,25 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 // THE SOFTWARE.
 
+using System.Collections.Generic;
+using System.Linq;
 using Gtk;
 
 namespace Pinta.Core
 {
-	public class ToolBarComboBox : Box
+	public sealed class ToolBarComboBox : Box
 	{
 		public ComboBoxText ComboBox { get; }
 
+		public ToolBarComboBox (int width, int activeIndex, bool allowEntry)
+			: this (width, activeIndex, allowEntry, Enumerable.Empty<string> ())
+		{ }
+
 		public ToolBarComboBox (int width, int activeIndex, bool allowEntry, params string[] contents)
+			: this (width, activeIndex, allowEntry, (IEnumerable<string>) contents)
+		{ }
+
+		public ToolBarComboBox (int width, int activeIndex, bool allowEntry, IEnumerable<string> contents)
 		{
 			SetOrientation (Orientation.Horizontal);
 			Spacing = 0;
