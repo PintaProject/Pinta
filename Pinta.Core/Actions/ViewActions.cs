@@ -25,12 +25,13 @@
 // THE SOFTWARE.
 
 using System;
+using System.Collections.ObjectModel;
 using System.Globalization;
 using Gtk;
 
 namespace Pinta.Core
 {
-	public class ViewActions
+	public sealed class ViewActions
 	{
 		public Command ZoomIn { get; }
 		public Command ZoomOut { get; }
@@ -47,7 +48,7 @@ namespace Pinta.Core
 		public Command Fullscreen { get; }
 
 		public ToolBarComboBox ZoomComboBox { get; }
-		public string[] ZoomCollection { get; }
+		public ReadOnlyCollection<string> ZoomCollection { get; }
 
 		private string old_zoom_text = "";
 		private bool zoom_to_window_activated = false;
@@ -76,32 +77,7 @@ namespace Pinta.Core
 			RulerMetric = Gio.SimpleAction.NewStateful ("rulermetric", GtkExtensions.IntVariantType, GLib.Variant.Create (0));
 			Fullscreen = new Command ("Fullscreen", Translations.GetString ("Fullscreen"), null, Resources.StandardIcons.DocumentNew);
 
-			ZoomCollection = new string[] {
-				ToPercent (36),
-				ToPercent (24),
-				ToPercent (16),
-				ToPercent (12),
-				ToPercent (8),
-				ToPercent (7),
-				ToPercent (6),
-				ToPercent (5),
-				ToPercent (4),
-				ToPercent (3),
-				ToPercent (2),
-				ToPercent (1.75),
-				ToPercent (1.5),
-				ToPercent (1.25),
-				ToPercent (1),
-				ToPercent (0.66),
-				ToPercent (0.5),
-				ToPercent (0.33),
-				ToPercent (0.25),
-				ToPercent (0.16),
-				ToPercent (0.12),
-				ToPercent (0.08),
-				ToPercent (0.05),
-				Translations.GetString ("Window")
-			};
+			ZoomCollection = default_zoom_levels;
 			ZoomComboBox = new ToolBarComboBox (90, DefaultZoomIndex (), true, ZoomCollection);
 
 			// The toolbar is shown by default.
@@ -110,6 +86,33 @@ namespace Pinta.Core
 			StatusBar.Value = true;
 			ToolBox.Value = true;
 		}
+
+		private static readonly ReadOnlyCollection<string> default_zoom_levels = new[] {
+			ToPercent (36),
+			ToPercent (24),
+			ToPercent (16),
+			ToPercent (12),
+			ToPercent (8),
+			ToPercent (7),
+			ToPercent (6),
+			ToPercent (5),
+			ToPercent (4),
+			ToPercent (3),
+			ToPercent (2),
+			ToPercent (1.75),
+			ToPercent (1.5),
+			ToPercent (1.25),
+			ToPercent (1),
+			ToPercent (0.66),
+			ToPercent (0.5),
+			ToPercent (0.33),
+			ToPercent (0.25),
+			ToPercent (0.16),
+			ToPercent (0.12),
+			ToPercent (0.08),
+			ToPercent (0.05),
+			Translations.GetString ("Window")
+		}.ToReadOnlyCollection ();
 
 		#region Initialization
 		public void RegisterActions (Gtk.Application app, Gio.Menu menu)
@@ -336,7 +339,7 @@ namespace Pinta.Core
 		/// </summary>
 		private int DefaultZoomIndex ()
 		{
-			return Array.IndexOf (ZoomCollection, ToPercent (1));
+			return ZoomCollection.IndexOf (ToPercent (1));
 		}
 	}
 }
