@@ -97,9 +97,10 @@ namespace Pinta.Core
 			if (stencil.IsEmpty)
 				return Array.Empty<PointI[]> ();
 
-			var polygons = new List<PointI[]> ();
+			var polygons = new List<IReadOnlyList<PointI>> ();
 
 			PointI start = bounds.Location ().ToInt ();
+			var pts = new List<PointI> ();
 			int count = 0;
 
 			// find all islands
@@ -126,7 +127,7 @@ namespace Pinta.Core
 				if (!startFound)
 					break;
 
-				var pts = new List<PointI> ();
+				pts.Clear ();
 
 				PointI last = new (start.X, start.Y + 1);
 				PointI curr = new (start.X, start.Y);
