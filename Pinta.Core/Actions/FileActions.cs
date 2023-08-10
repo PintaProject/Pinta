@@ -26,106 +26,105 @@
 
 using System;
 
-namespace Pinta.Core
+namespace Pinta.Core;
+
+public sealed class FileActions
 {
-	public class FileActions
+	public Command New { get; }
+	public Command NewScreenshot { get; }
+	public Command Open { get; }
+	public Command Close { get; }
+	public Command Save { get; }
+	public Command SaveAs { get; }
+	public Command Print { get; }
+
+	public event EventHandler<ModifyCompressionEventArgs>? ModifyCompression;
+	public event EventHandler<DocumentCancelEventArgs>? SaveDocument;
+
+	public FileActions ()
 	{
-		public Command New { get; }
-		public Command NewScreenshot { get; }
-		public Command Open { get; }
-		public Command Close { get; }
-		public Command Save { get; }
-		public Command SaveAs { get; }
-		public Command Print { get; }
+		New = new Command ("new", Translations.GetString ("New..."), null, Resources.StandardIcons.DocumentNew);
+		NewScreenshot = new Command ("NewScreenshot", Translations.GetString ("New Screenshot..."), null, Resources.StandardIcons.ViewFullscreen);
+		Open = new Command ("open", Translations.GetString ("Open..."), null, Resources.StandardIcons.DocumentOpen);
 
-		public event EventHandler<ModifyCompressionEventArgs>? ModifyCompression;
-		public event EventHandler<DocumentCancelEventArgs>? SaveDocument;
+		Close = new Command ("close", Translations.GetString ("Close"), null, Resources.StandardIcons.WindowClose);
+		Save = new Command ("save", Translations.GetString ("Save"), null, Resources.StandardIcons.DocumentSave);
+		SaveAs = new Command ("saveAs", Translations.GetString ("Save As..."), null, Resources.StandardIcons.DocumentSaveAs);
+		Print = new Command ("print", Translations.GetString ("Print"), null, Resources.StandardIcons.DocumentPrint);
 
-		public FileActions ()
-		{
-			New = new Command ("new", Translations.GetString ("New..."), null, Resources.StandardIcons.DocumentNew);
-			NewScreenshot = new Command ("NewScreenshot", Translations.GetString ("New Screenshot..."), null, Resources.StandardIcons.ViewFullscreen);
-			Open = new Command ("open", Translations.GetString ("Open..."), null, Resources.StandardIcons.DocumentOpen);
-
-			Close = new Command ("close", Translations.GetString ("Close"), null, Resources.StandardIcons.WindowClose);
-			Save = new Command ("save", Translations.GetString ("Save"), null, Resources.StandardIcons.DocumentSave);
-			SaveAs = new Command ("saveAs", Translations.GetString ("Save As..."), null, Resources.StandardIcons.DocumentSaveAs);
-			Print = new Command ("print", Translations.GetString ("Print"), null, Resources.StandardIcons.DocumentPrint);
-
-			New.ShortLabel = Translations.GetString ("New");
-			Open.ShortLabel = Translations.GetString ("Open");
-			Open.IsImportant = true;
-			Save.IsImportant = true;
-		}
-
-		#region Initialization
-		public void RegisterActions (Gtk.Application app, Gio.Menu menu)
-		{
-			app.AddAccelAction (New, "<Primary>N");
-			menu.AppendItem (New.CreateMenuItem ());
-
-			app.AddAction (NewScreenshot);
-			menu.AppendItem (NewScreenshot.CreateMenuItem ());
-
-			app.AddAccelAction (Open, "<Primary>O");
-			menu.AppendItem (Open.CreateMenuItem ());
-
-			var save_section = Gio.Menu.New ();
-			menu.AppendSection (null, save_section);
-
-			app.AddAccelAction (Save, "<Primary>S");
-			save_section.AppendItem (Save.CreateMenuItem ());
-
-			app.AddAccelAction (SaveAs, "<Primary><Shift>S");
-			save_section.AppendItem (SaveAs.CreateMenuItem ());
-
-			var close_section = Gio.Menu.New ();
-			menu.AppendSection (null, close_section);
-
-			app.AddAccelAction (Close, "<Primary>W");
-			close_section.AppendItem (Close.CreateMenuItem ());
-
-			// This is part of the application menu on macOS.
-			if (PintaCore.System.OperatingSystem != OS.Mac) {
-				var exit = PintaCore.Actions.App.Exit;
-				app.AddAccelAction (exit, "<Primary>Q");
-				close_section.AppendItem (exit.CreateMenuItem ());
-			}
-
-			// Printing is disabled for now until it is fully functional.
-#if false
-			menu.Append (Print.CreateAcceleratedMenuItem (Gdk.Key.P, Gdk.ModifierType.ControlMask));
-			menu.AppendSeparator ();
-#endif
-		}
-
-		public void RegisterHandlers ()
-		{
-		}
-		#endregion
-
-		#region Event Invokers
-		internal bool RaiseSaveDocument (Document document, bool saveAs)
-		{
-			DocumentCancelEventArgs e = new DocumentCancelEventArgs (document, saveAs);
-
-			if (SaveDocument == null)
-				throw new InvalidOperationException ("GUI is not handling PintaCore.Workspace.SaveDocument");
-			else
-				SaveDocument (this, e);
-
-			return !e.Cancel;
-		}
-
-		internal int RaiseModifyCompression (int defaultCompression, Gtk.Window parent)
-		{
-			ModifyCompressionEventArgs e = new ModifyCompressionEventArgs (defaultCompression, parent);
-
-			if (ModifyCompression != null)
-				ModifyCompression (this, e);
-
-			return e.Cancel ? -1 : e.Quality;
-		}
-		#endregion
+		New.ShortLabel = Translations.GetString ("New");
+		Open.ShortLabel = Translations.GetString ("Open");
+		Open.IsImportant = true;
+		Save.IsImportant = true;
 	}
+
+	#region Initialization
+	public void RegisterActions (Gtk.Application app, Gio.Menu menu)
+	{
+		app.AddAccelAction (New, "<Primary>N");
+		menu.AppendItem (New.CreateMenuItem ());
+
+		app.AddAction (NewScreenshot);
+		menu.AppendItem (NewScreenshot.CreateMenuItem ());
+
+		app.AddAccelAction (Open, "<Primary>O");
+		menu.AppendItem (Open.CreateMenuItem ());
+
+		var save_section = Gio.Menu.New ();
+		menu.AppendSection (null, save_section);
+
+		app.AddAccelAction (Save, "<Primary>S");
+		save_section.AppendItem (Save.CreateMenuItem ());
+
+		app.AddAccelAction (SaveAs, "<Primary><Shift>S");
+		save_section.AppendItem (SaveAs.CreateMenuItem ());
+
+		var close_section = Gio.Menu.New ();
+		menu.AppendSection (null, close_section);
+
+		app.AddAccelAction (Close, "<Primary>W");
+		close_section.AppendItem (Close.CreateMenuItem ());
+
+		// This is part of the application menu on macOS.
+		if (PintaCore.System.OperatingSystem != OS.Mac) {
+			var exit = PintaCore.Actions.App.Exit;
+			app.AddAccelAction (exit, "<Primary>Q");
+			close_section.AppendItem (exit.CreateMenuItem ());
+		}
+
+		// Printing is disabled for now until it is fully functional.
+#if false
+		menu.Append (Print.CreateAcceleratedMenuItem (Gdk.Key.P, Gdk.ModifierType.ControlMask));
+		menu.AppendSeparator ();
+#endif
+	}
+
+	public void RegisterHandlers ()
+	{
+	}
+	#endregion
+
+	#region Event Invokers
+	internal bool RaiseSaveDocument (Document document, bool saveAs)
+	{
+		DocumentCancelEventArgs e = new DocumentCancelEventArgs (document, saveAs);
+
+		if (SaveDocument == null)
+			throw new InvalidOperationException ("GUI is not handling PintaCore.Workspace.SaveDocument");
+		else
+			SaveDocument (this, e);
+
+		return !e.Cancel;
+	}
+
+	internal int RaiseModifyCompression (int defaultCompression, Gtk.Window parent)
+	{
+		ModifyCompressionEventArgs e = new ModifyCompressionEventArgs (defaultCompression, parent);
+
+		if (ModifyCompression != null)
+			ModifyCompression (this, e);
+
+		return e.Cancel ? -1 : e.Quality;
+	}
+	#endregion
 }
