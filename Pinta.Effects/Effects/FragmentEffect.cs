@@ -12,101 +12,100 @@ using Cairo;
 using Pinta.Core;
 using Pinta.Gui.Widgets;
 
-namespace Pinta.Effects
+namespace Pinta.Effects;
+
+public sealed class FragmentEffect : BaseEffect
 {
-	public class FragmentEffect : BaseEffect
+	public override string Icon => Pinta.Resources.Icons.EffectsBlursFragment;
+
+	public override string Name => Translations.GetString ("Fragment");
+
+	public override bool IsConfigurable => true;
+
+	public override string EffectMenuCategory => Translations.GetString ("Blurs");
+
+	public FragmentData Data => (FragmentData) EffectData!;  // NRT - Set in constructor
+
+	public FragmentEffect ()
 	{
-		public override string Icon => Pinta.Resources.Icons.EffectsBlursFragment;
+		EffectData = new FragmentData ();
+	}
 
-		public override string Name => Translations.GetString ("Fragment");
+	public override void LaunchConfiguration ()
+	{
+		EffectHelper.LaunchSimpleEffectDialog (this);
+	}
 
-		public override bool IsConfigurable => true;
+	#region Algorithm Code Ported From PDN
+	private static Core.PointI[] RecalcPointOffsets (int fragments, double rotationAngle, int distance)
+	{
+		double pointStep = 2 * Math.PI / (double) fragments;
+		double rotationRadians = ((rotationAngle - 90.0) * Math.PI) / 180.0;
 
-		public override string EffectMenuCategory => Translations.GetString ("Blurs");
+		var pointOffsets = new Core.PointI[fragments];
 
-		public FragmentData Data => (FragmentData) EffectData!;  // NRT - Set in constructor
+		for (int i = 0; i < fragments; i++) {
+			double currentRadians = rotationRadians + (pointStep * i);
 
-		public FragmentEffect ()
-		{
-			EffectData = new FragmentData ();
+			pointOffsets[i] = new Core.PointI (
+			    (int) Math.Round (distance * -Math.Sin (currentRadians), MidpointRounding.AwayFromZero),
+			    (int) Math.Round (distance * -Math.Cos (currentRadians), MidpointRounding.AwayFromZero));
 		}
 
-		public override void LaunchConfiguration ()
-		{
-			EffectHelper.LaunchSimpleEffectDialog (this);
-		}
+		return pointOffsets;
+	}
 
-		#region Algorithm Code Ported From PDN
-		private static Core.PointI[] RecalcPointOffsets (int fragments, double rotationAngle, int distance)
-		{
-			double pointStep = 2 * Math.PI / (double) fragments;
-			double rotationRadians = ((rotationAngle - 90.0) * Math.PI) / 180.0;
+	public override void Render (ImageSurface src, ImageSurface dst, Core.RectangleI[] rois)
+	{
+		Core.PointI[] pointOffsets = RecalcPointOffsets (Data.Fragments, Data.Rotation, Data.Distance);
 
-			var pointOffsets = new Core.PointI[fragments];
+		int poLength = pointOffsets.Length;
+		Span<Core.PointI> pointOffsetsPtr = stackalloc Core.PointI[poLength];
 
-			for (int i = 0; i < fragments; i++) {
-				double currentRadians = rotationRadians + (pointStep * i);
+		for (int i = 0; i < poLength; ++i)
+			pointOffsetsPtr[i] = pointOffsets[i];
 
-				pointOffsets[i] = new Core.PointI (
-				    (int) Math.Round (distance * -Math.Sin (currentRadians), MidpointRounding.AwayFromZero),
-				    (int) Math.Round (distance * -Math.Cos (currentRadians), MidpointRounding.AwayFromZero));
-			}
+		Span<ColorBgra> samples = stackalloc ColorBgra[poLength];
 
-			return pointOffsets;
-		}
+		// Cache these for a massive performance boost
+		int src_width = src.Width;
+		int src_height = src.Height;
+		ReadOnlySpan<ColorBgra> src_data = src.GetReadOnlyPixelData ();
+		Span<ColorBgra> dst_data = dst.GetPixelData ();
 
-		public override void Render (ImageSurface src, ImageSurface dst, Core.RectangleI[] rois)
-		{
-			Core.PointI[] pointOffsets = RecalcPointOffsets (Data.Fragments, Data.Rotation, Data.Distance);
+		foreach (Core.RectangleI rect in rois) {
+			for (int y = rect.Top; y <= rect.Bottom; y++) {
+				var dst_row = dst_data.Slice (y * src_width, src_width);
 
-			int poLength = pointOffsets.Length;
-			Span<Core.PointI> pointOffsetsPtr = stackalloc Core.PointI[poLength];
+				for (int x = rect.Left; x <= rect.Right; x++) {
+					int sampleCount = 0;
 
-			for (int i = 0; i < poLength; ++i)
-				pointOffsetsPtr[i] = pointOffsets[i];
+					for (int i = 0; i < poLength; ++i) {
+						int u = x - pointOffsetsPtr[i].X;
+						int v = y - pointOffsetsPtr[i].Y;
 
-			Span<ColorBgra> samples = stackalloc ColorBgra[poLength];
-
-			// Cache these for a massive performance boost
-			int src_width = src.Width;
-			int src_height = src.Height;
-			ReadOnlySpan<ColorBgra> src_data = src.GetReadOnlyPixelData ();
-			Span<ColorBgra> dst_data = dst.GetPixelData ();
-
-			foreach (Core.RectangleI rect in rois) {
-				for (int y = rect.Top; y <= rect.Bottom; y++) {
-					var dst_row = dst_data.Slice (y * src_width, src_width);
-
-					for (int x = rect.Left; x <= rect.Right; x++) {
-						int sampleCount = 0;
-
-						for (int i = 0; i < poLength; ++i) {
-							int u = x - pointOffsetsPtr[i].X;
-							int v = y - pointOffsetsPtr[i].Y;
-
-							if (u >= 0 && u < src_width && v >= 0 && v < src_height) {
-								samples[sampleCount] = src.GetColorBgra (src_data, src_width, u, v);
-								++sampleCount;
-							}
+						if (u >= 0 && u < src_width && v >= 0 && v < src_height) {
+							samples[sampleCount] = src.GetColorBgra (src_data, src_width, u, v);
+							++sampleCount;
 						}
-
-						dst_row[x] = ColorBgra.Blend (samples.Slice (0, sampleCount));
 					}
+
+					dst_row[x] = ColorBgra.Blend (samples.Slice (0, sampleCount));
 				}
 			}
 		}
-		#endregion
+	}
+	#endregion
 
-		public class FragmentData : EffectData
-		{
-			[Caption ("Fragments"), MinimumValue (2), MaximumValue (50)]
-			public int Fragments = 4;
+	public sealed class FragmentData : EffectData
+	{
+		[Caption ("Fragments"), MinimumValue (2), MaximumValue (50)]
+		public int Fragments = 4;
 
-			[Caption ("Distance"), MinimumValue (0), MaximumValue (100)]
-			public int Distance = 8;
+		[Caption ("Distance"), MinimumValue (0), MaximumValue (100)]
+		public int Distance = 8;
 
-			[Caption ("Rotation")]
-			public double Rotation = 0;
-		}
+		[Caption ("Rotation")]
+		public double Rotation = 0;
 	}
 }
