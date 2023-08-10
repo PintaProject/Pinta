@@ -27,59 +27,58 @@
 using Gtk;
 using Pinta.Core;
 
-namespace Pinta.Tools
+namespace Pinta.Tools;
+
+public sealed class DashPatternBox
 {
-	public class DashPatternBox
+	private bool dash_change_setup = false;
+
+	private Label? dash_pattern_label;
+	private Separator? dash_pattern_sep;
+
+	public ToolBarComboBox? comboBox;
+
+
+
+	/// <summary>
+	/// Sets up the DashPatternBox in the Toolbar.
+	/// 
+	/// Note that the dash pattern change event response code must be created manually outside of the DashPatternBox
+	/// (using the returned Gtk.ComboBox from the SetupToolbar method) so that each tool that uses it
+	/// can react to the change in pattern according to its usage.
+	/// 
+	/// Returns null if the DashPatternBox has already been setup; otherwise, returns the DashPatternBox itself.
+	/// </summary>
+	/// <param name="tb">The Toolbar to add the DashPatternBox to.</param>
+	/// <returns>null if the DashPatternBox has already been setup; otherwise, returns the DashPatternBox itself.</returns>
+	public Gtk.ComboBoxText? SetupToolbar (Box tb)
 	{
-		private bool dash_change_setup = false;
+		if (dash_pattern_sep == null) {
+			dash_pattern_sep = GtkExtensions.CreateToolBarSeparator ();
+		}
 
-		private Label? dash_pattern_label;
-		private Separator? dash_pattern_sep;
+		tb.Append (dash_pattern_sep);
 
-		public ToolBarComboBox? comboBox;
+		if (dash_pattern_label == null) {
+			var dashString = Translations.GetString ("Dash");
+			dash_pattern_label = Label.New ($" {dashString}: ");
+		}
 
+		tb.Append (dash_pattern_label);
 
+		if (comboBox == null) {
+			comboBox = new ToolBarComboBox (50, 0, true,
+				"-", " -", " --", " ---", "  -", "   -", " - --", " - - --------", " - - ---- - ----");
+		}
 
-		/// <summary>
-		/// Sets up the DashPatternBox in the Toolbar.
-		/// 
-		/// Note that the dash pattern change event response code must be created manually outside of the DashPatternBox
-		/// (using the returned Gtk.ComboBox from the SetupToolbar method) so that each tool that uses it
-		/// can react to the change in pattern according to its usage.
-		/// 
-		/// Returns null if the DashPatternBox has already been setup; otherwise, returns the DashPatternBox itself.
-		/// </summary>
-		/// <param name="tb">The Toolbar to add the DashPatternBox to.</param>
-		/// <returns>null if the DashPatternBox has already been setup; otherwise, returns the DashPatternBox itself.</returns>
-		public Gtk.ComboBoxText? SetupToolbar (Box tb)
-		{
-			if (dash_pattern_sep == null) {
-				dash_pattern_sep = GtkExtensions.CreateToolBarSeparator ();
-			}
+		tb.Append (comboBox);
 
-			tb.Append (dash_pattern_sep);
+		if (dash_change_setup) {
+			return null;
+		} else {
+			dash_change_setup = true;
 
-			if (dash_pattern_label == null) {
-				var dashString = Translations.GetString ("Dash");
-				dash_pattern_label = Label.New ($" {dashString}: ");
-			}
-
-			tb.Append (dash_pattern_label);
-
-			if (comboBox == null) {
-				comboBox = new ToolBarComboBox (50, 0, true,
-					"-", " -", " --", " ---", "  -", "   -", " - --", " - - --------", " - - ---- - ----");
-			}
-
-			tb.Append (comboBox);
-
-			if (dash_change_setup) {
-				return null;
-			} else {
-				dash_change_setup = true;
-
-				return comboBox.ComboBox;
-			}
+			return comboBox.ComboBox;
 		}
 	}
 }
