@@ -41,571 +41,570 @@ using Gtk;
 using Pinta.Core;
 using Pinta.Gui.Widgets;
 
-namespace Pinta.Effects
+namespace Pinta.Effects;
+
+public partial class LevelsDialog : Gtk.Dialog
 {
-	public partial class LevelsDialog : Gtk.Dialog
+	private readonly bool[] mask;
+
+	private CheckButton check_red;
+	private CheckButton check_green;
+	private CheckButton check_blue;
+	private Button button_auto;
+	private Button button_reset;
+	private SpinButton spin_in_low;
+	private SpinButton spin_in_high;
+	private SpinButton spin_out_low;
+	private SpinButton spin_out_high;
+	private SpinButton spin_out_gamma;
+	private ColorGradientWidget gradient_input;
+	private ColorGradientWidget gradient_output;
+	private ColorPanelWidget colorpanel_in_high;
+	private ColorPanelWidget colorpanel_in_low;
+	private ColorPanelWidget colorpanel_out_high;
+	private ColorPanelWidget colorpanel_out_mid;
+	private ColorPanelWidget colorpanel_out_low;
+	private HistogramWidget histogram_input;
+	private HistogramWidget histogram_output;
+
+	public LevelsData EffectData { get; }
+
+	public LevelsDialog (LevelsData effectData)
 	{
-		private readonly bool[] mask;
+		Title = Translations.GetString ("Levels Adjustment");
+		TransientFor = PintaCore.Chrome.MainWindow;
+		Modal = true;
 
-		private CheckButton check_red;
-		private CheckButton check_green;
-		private CheckButton check_blue;
-		private Button button_auto;
-		private Button button_reset;
-		private SpinButton spin_in_low;
-		private SpinButton spin_in_high;
-		private SpinButton spin_out_low;
-		private SpinButton spin_out_high;
-		private SpinButton spin_out_gamma;
-		private ColorGradientWidget gradient_input;
-		private ColorGradientWidget gradient_output;
-		private ColorPanelWidget colorpanel_in_high;
-		private ColorPanelWidget colorpanel_in_low;
-		private ColorPanelWidget colorpanel_out_high;
-		private ColorPanelWidget colorpanel_out_mid;
-		private ColorPanelWidget colorpanel_out_low;
-		private HistogramWidget histogram_input;
-		private HistogramWidget histogram_output;
+		Build ();
 
-		public LevelsData EffectData { get; }
+		EffectData = effectData;
+		mask = new bool[] { true, true, true };
 
-		public LevelsDialog (LevelsData effectData)
-		{
-			Title = Translations.GetString ("Levels Adjustment");
-			TransientFor = PintaCore.Chrome.MainWindow;
-			Modal = true;
+		UpdateInputHistogram ();
+		Reset ();
+		UpdateLevels ();
 
-			Build ();
+		check_red.OnToggled += HandleCheckRedToggled;
+		check_green.OnToggled += HandleCheckGreenToggled;
+		check_blue.OnToggled += HandleCheckBlueToggled;
+		button_reset.OnClicked += HandleButtonResetClicked;
+		button_auto.OnClicked += HandleButtonAutoClicked;
+		spin_in_low.OnValueChanged += HandleSpinInLowValueChanged;
+		spin_in_high.OnValueChanged += HandleSpinInHighValueChanged;
+		spin_out_low.OnValueChanged += HandleSpinOutLowValueChanged;
+		spin_out_gamma.OnValueChanged += HandleSpinOutGammaValueChanged;
+		spin_out_high.OnValueChanged += HandleSpinOutHighValueChanged;
+		gradient_input.ValueChanged += HandleGradientInputValueChanged;
+		gradient_output.ValueChanged += HandleGradientOutputValueChanged;
+		gradient_input.ClickGesture.OnReleased += HandleGradientButtonReleaseEvent;
+		gradient_output.ClickGesture.OnReleased += HandleGradientButtonReleaseEvent;
+		gradient_input.ClickGesture.OnPressed += HandleGradientButtonPressEvent;
+		gradient_output.ClickGesture.OnPressed += HandleGradientButtonPressEvent;
+		colorpanel_in_low.ClickGesture.OnPressed += HandleColorPanelButtonPressEvent;
+		colorpanel_in_high.ClickGesture.OnPressed += HandleColorPanelButtonPressEvent;
+		colorpanel_out_low.ClickGesture.OnPressed += HandleColorPanelButtonPressEvent;
+		colorpanel_out_high.ClickGesture.OnPressed += HandleColorPanelButtonPressEvent;
 
-			EffectData = effectData;
-			mask = new bool[] { true, true, true };
+		spin_in_low.SetActivatesDefault (true);
+		spin_in_high.SetActivatesDefault (true);
+		spin_out_gamma.SetActivatesDefault (true);
+		spin_out_low.SetActivatesDefault (true);
+		spin_out_high.SetActivatesDefault (true);
+	}
 
-			UpdateInputHistogram ();
-			Reset ();
-			UpdateLevels ();
+	private UnaryPixelOps.Level Levels {
+		get {
+			if (EffectData == null)
+				throw new InvalidOperationException ("Effect data not set on levels dialog.");
 
-			check_red.OnToggled += HandleCheckRedToggled;
-			check_green.OnToggled += HandleCheckGreenToggled;
-			check_blue.OnToggled += HandleCheckBlueToggled;
-			button_reset.OnClicked += HandleButtonResetClicked;
-			button_auto.OnClicked += HandleButtonAutoClicked;
-			spin_in_low.OnValueChanged += HandleSpinInLowValueChanged;
-			spin_in_high.OnValueChanged += HandleSpinInHighValueChanged;
-			spin_out_low.OnValueChanged += HandleSpinOutLowValueChanged;
-			spin_out_gamma.OnValueChanged += HandleSpinOutGammaValueChanged;
-			spin_out_high.OnValueChanged += HandleSpinOutHighValueChanged;
-			gradient_input.ValueChanged += HandleGradientInputValueChanged;
-			gradient_output.ValueChanged += HandleGradientOutputValueChanged;
-			gradient_input.ClickGesture.OnReleased += HandleGradientButtonReleaseEvent;
-			gradient_output.ClickGesture.OnReleased += HandleGradientButtonReleaseEvent;
-			gradient_input.ClickGesture.OnPressed += HandleGradientButtonPressEvent;
-			gradient_output.ClickGesture.OnPressed += HandleGradientButtonPressEvent;
-			colorpanel_in_low.ClickGesture.OnPressed += HandleColorPanelButtonPressEvent;
-			colorpanel_in_high.ClickGesture.OnPressed += HandleColorPanelButtonPressEvent;
-			colorpanel_out_low.ClickGesture.OnPressed += HandleColorPanelButtonPressEvent;
-			colorpanel_out_high.ClickGesture.OnPressed += HandleColorPanelButtonPressEvent;
-
-			spin_in_low.SetActivatesDefault (true);
-			spin_in_high.SetActivatesDefault (true);
-			spin_out_gamma.SetActivatesDefault (true);
-			spin_out_low.SetActivatesDefault (true);
-			spin_out_high.SetActivatesDefault (true);
+			return EffectData.Levels;
 		}
 
-		private UnaryPixelOps.Level Levels {
-			get {
-				if (EffectData == null)
-					throw new InvalidOperationException ("Effect data not set on levels dialog.");
+		set => EffectData.Levels = value ?? throw new ArgumentNullException (nameof (value));
+	}
 
-				return EffectData.Levels;
+	private void UpdateLivePreview ()
+	{
+		EffectData?.FirePropertyChanged (nameof (Levels));
+	}
+
+	private void UpdateInputHistogram ()
+	{
+		var doc = PintaCore.Workspace.ActiveDocument;
+
+		ImageSurface surface = doc.Layers.CurrentUserLayer.Surface;
+		RectangleI rect = doc.Selection.SelectionPath.GetBounds ();
+		histogram_input.Histogram.UpdateHistogram (surface, rect);
+		UpdateOutputHistogram ();
+	}
+
+	private void UpdateOutputHistogram ()
+	{
+		histogram_output.Histogram.SetFromLeveledHistogram (histogram_input.Histogram, Levels);
+	}
+
+	private void Reset ()
+	{
+		histogram_output.ResetHistogram ();
+
+		spin_in_low.Value = 0;
+		spin_in_high.Value = 255;
+		spin_out_low.Value = 0;
+		spin_out_gamma.Value = 1.0;
+		spin_out_high.Value = 255;
+	}
+
+	private void HandleButtonResetClicked (object? sender, EventArgs e)
+	{
+		Reset ();
+	}
+
+	private void UpdateFromLevelsOp ()
+	{
+		disable_updating = true;
+
+		spin_in_high.Value = MaskAvg (Levels.ColorInHigh);
+		spin_in_low.Value = MaskAvg (Levels.ColorInLow);
+
+		float gamma = MaskGamma ();
+		int lo = MaskAvg (Levels.ColorOutLow);
+		int hi = MaskAvg (Levels.ColorOutHigh);
+
+		spin_out_high.Value = hi;
+		spin_out_gamma.Value = gamma;
+		spin_out_low.Value = lo;
+
+		disable_updating = false;
+	}
+
+	private void HandleButtonAutoClicked (object? sender, EventArgs e)
+	{
+		Levels = histogram_input.Histogram.MakeLevelsAuto ();
+
+		UpdateFromLevelsOp ();
+		UpdateLevels ();
+	}
+
+	private void HandleSpinInLowValueChanged (object? sender, EventArgs e)
+	{
+		gradient_input.SetValue (0, spin_in_low.GetValueAsInt ());
+	}
+
+	private void HandleSpinInHighValueChanged (object? sender, EventArgs e)
+	{
+		gradient_input.SetValue (1, spin_in_high.GetValueAsInt ());
+	}
+
+	private void HandleSpinOutLowValueChanged (object? sender, EventArgs e)
+	{
+		gradient_output.SetValue (0, spin_out_low.GetValueAsInt ());
+	}
+
+	private int FromGammaValue ()
+	{
+		int lo = gradient_output.GetValue (0);
+		int hi = gradient_output.GetValue (2);
+		int med = (int) (lo + (hi - lo) * Math.Pow (0.5, spin_out_gamma.Value));
+
+		return med;
+	}
+
+	private void HandleSpinOutGammaValueChanged (object? sender, EventArgs e)
+	{
+		gradient_output.SetValue (1, FromGammaValue ());
+	}
+
+	private void HandleSpinOutHighValueChanged (object? sender, EventArgs e)
+	{
+		gradient_output.SetValue (2, spin_out_high.GetValueAsInt ());
+	}
+
+	private int MaskAvg (ColorBgra before)
+	{
+		int count = 0, total = 0;
+
+		for (int c = 0; c < 3; c++) {
+			if (mask[c]) {
+				total += before[c];
+				count++;
 			}
-
-			set => EffectData.Levels = value ?? throw new ArgumentNullException (nameof (value));
 		}
 
-		private void UpdateLivePreview ()
-		{
-			EffectData?.FirePropertyChanged (nameof (Levels));
+		if (count > 0) {
+			return total / count;
+		} else {
+			return 0;
+		}
+	}
+
+	private ColorBgra UpdateByMask (ColorBgra before, byte val)
+	{
+		ColorBgra after = before;
+		int average = -1, oldaverage = -1;
+
+		if (!(mask[0] || mask[1] || mask[2])) {
+			return before;
 		}
 
-		private void UpdateInputHistogram ()
-		{
-			var doc = PintaCore.Workspace.ActiveDocument;
+		do {
+			float factor;
 
-			ImageSurface surface = doc.Layers.CurrentUserLayer.Surface;
-			RectangleI rect = doc.Selection.SelectionPath.GetBounds ();
-			histogram_input.Histogram.UpdateHistogram (surface, rect);
+			oldaverage = average;
+			average = MaskAvg (after);
+
+			if (average == 0) {
+				break;
+			}
+			factor = (float) val / average;
+
+			for (int c = 0; c < 3; c++) {
+				if (mask[c]) {
+					after[c] = (byte) Utility.ClampToByte (after[c] * factor);
+				}
+			}
+		} while (average != val && oldaverage != average);
+
+		while (average != val) {
+			average = MaskAvg (after);
+			int diff = val - average;
+
+			for (int c = 0; c < 3; c++) {
+				if (mask[c]) {
+					after[c] = (byte) Utility.ClampToByte (after[c] + diff);
+				}
+			}
+		}
+
+		after.A = 255;
+		return after;
+	}
+
+	private float MaskGamma ()
+	{
+		int count = 0;
+		float total = 0;
+
+		for (int c = 0; c < 3; c++) {
+			if (mask[c]) {
+				total += Levels.GetGamma (c);
+				count++;
+			}
+		}
+
+		if (count > 0) {
+			return total / count;
+		} else {
+			return 1;
+		}
+
+	}
+
+	private void UpdateGammaByMask (float val)
+	{
+		float average = -1;
+
+		if (!(mask[0] || mask[1] || mask[2]))
+			return;
+
+		do {
+			average = MaskGamma ();
+			float factor = val / average;
+
+			for (int c = 0; c < 3; c++) {
+				if (mask[c]) {
+					Levels.SetGamma (c, factor * Levels.GetGamma (c));
+				}
+			}
+		} while (Math.Abs (val - average) > 0.001);
+	}
+
+	private Color GetOutMidColor ()
+	{
+		return Levels.Apply (histogram_input.Histogram.GetMeanColor ()).ToCairoColor ();
+	}
+
+	//hack to avoid reccurent invocation of UpdateLevels
+	private bool disable_updating;
+	//when user moves triangles inside gradient widget,
+	//we don't want to redraw histogram each time Levels values change.
+	//maximum number of skipped updates
+	private const int max_skip = 5;
+	//skipped updates counter
+	private int skip_counter = max_skip;
+	private bool button_down = false;
+
+	private void UpdateLevels ()
+	{
+		if (disable_updating)
+			return;
+
+		disable_updating = true;
+
+		if (skip_counter == max_skip || !button_down) {
+
+			Levels.ColorOutHigh = UpdateByMask (Levels.ColorOutHigh, (byte) spin_out_high.Value);
+			Levels.ColorOutLow = UpdateByMask (Levels.ColorOutLow, (byte) spin_out_low.Value);
+			UpdateGammaByMask ((float) spin_out_gamma.Value);
+
+			Levels.ColorInHigh = UpdateByMask (Levels.ColorInHigh, (byte) spin_in_high.Value);
+			Levels.ColorInLow = UpdateByMask (Levels.ColorInLow, (byte) spin_in_low.Value);
+
+			colorpanel_in_low.CairoColor = Levels.ColorInLow.ToCairoColor ();
+			colorpanel_in_high.CairoColor = Levels.ColorInHigh.ToCairoColor ();
+
+			colorpanel_out_low.CairoColor = Levels.ColorOutLow.ToCairoColor ();
+			colorpanel_out_mid.CairoColor = GetOutMidColor ();
+			colorpanel_out_high.CairoColor = Levels.ColorOutHigh.ToCairoColor ();
+
 			UpdateOutputHistogram ();
-		}
+			skip_counter = 0;
+		} else
+			skip_counter++;
 
-		private void UpdateOutputHistogram ()
-		{
-			histogram_output.Histogram.SetFromLeveledHistogram (histogram_input.Histogram, Levels);
-		}
+		disable_updating = false;
 
-		private void Reset ()
-		{
-			histogram_output.ResetHistogram ();
+		UpdateLivePreview ();
+	}
 
-			spin_in_low.Value = 0;
-			spin_in_high.Value = 255;
-			spin_out_low.Value = 0;
-			spin_out_gamma.Value = 1.0;
-			spin_out_high.Value = 255;
-		}
+	private void HandleGradientButtonPressEvent (GestureClick controller, GestureClick.PressedSignalArgs args)
+	{
+		button_down = true;
+	}
 
-		private void HandleButtonResetClicked (object? sender, EventArgs e)
-		{
-			Reset ();
-		}
+	private void HandleGradientButtonReleaseEvent (GestureClick controller, GestureClick.ReleasedSignalArgs args)
+	{
+		button_down = false;
 
-		private void UpdateFromLevelsOp ()
-		{
-			disable_updating = true;
-
-			spin_in_high.Value = MaskAvg (Levels.ColorInHigh);
-			spin_in_low.Value = MaskAvg (Levels.ColorInLow);
-
-			float gamma = MaskGamma ();
-			int lo = MaskAvg (Levels.ColorOutLow);
-			int hi = MaskAvg (Levels.ColorOutHigh);
-
-			spin_out_high.Value = hi;
-			spin_out_gamma.Value = gamma;
-			spin_out_low.Value = lo;
-
-			disable_updating = false;
-		}
-
-		private void HandleButtonAutoClicked (object? sender, EventArgs e)
-		{
-			Levels = histogram_input.Histogram.MakeLevelsAuto ();
-
-			UpdateFromLevelsOp ();
+		if (skip_counter != 0)
 			UpdateLevels ();
+	}
+
+	private void HandleGradientInputValueChanged (object? sender, IndexEventArgs e)
+	{
+		int val = gradient_input.GetValue (e.Index);
+
+		if (e.Index == 0)
+			spin_in_low.Value = val;
+		else
+			spin_in_high.Value = val;
+
+		UpdateLevels ();
+	}
+
+	private void HandleGradientOutputValueChanged (object? sender, IndexEventArgs e)
+	{
+		if (gradient_output.ValueIndex != -1 && gradient_output.ValueIndex != e.Index)
+			return;
+
+		int val = gradient_output.GetValue (e.Index);
+		int hi = gradient_output.GetValue (2);
+		int lo = gradient_output.GetValue (0);
+		int med = FromGammaValue ();
+
+		switch (e.Index) {
+			case 0:
+				spin_out_low.Value = val;
+				gradient_output.SetValue (1, med);
+				break;
+
+			case 1:
+				med = gradient_output.GetValue (1);
+				spin_out_gamma.Value = Utility.Clamp (1 / Math.Log (0.5, (float) (med - lo) / (float) (hi - lo)), 0.1, 10.0);
+				break;
+
+			case 2:
+				spin_out_high.Value = val;
+				gradient_output.SetValue (1, med);
+				break;
 		}
 
-		private void HandleSpinInLowValueChanged (object? sender, EventArgs e)
-		{
-			gradient_input.SetValue (0, spin_in_low.GetValueAsInt ());
+		UpdateLevels ();
+	}
+
+	private void MaskChanged ()
+	{
+		ColorBgra max = ColorBgra.Black;
+
+		max.Bgra |= mask[0] ? (uint) 0xFF0000 : 0;
+		max.Bgra |= mask[1] ? (uint) 0xFF00 : 0;
+		max.Bgra |= mask[2] ? (uint) 0xFF : 0;
+
+		Color maxcolor = max.ToCairoColor ();
+		gradient_input.MaxColor = maxcolor;
+		gradient_output.MaxColor = maxcolor;
+
+		for (int i = 0; i < 3; i++) {
+			histogram_input.SetSelected (i, mask[i]);
+			histogram_output.SetSelected (i, mask[i]);
 		}
+	}
 
-		private void HandleSpinInHighValueChanged (object? sender, EventArgs e)
-		{
-			gradient_input.SetValue (1, spin_in_high.GetValueAsInt ());
-		}
+	private void HandleCheckRedToggled (object? sender, EventArgs e)
+	{
+		mask[0] = check_red.Active;
+		MaskChanged ();
+	}
 
-		private void HandleSpinOutLowValueChanged (object? sender, EventArgs e)
-		{
-			gradient_output.SetValue (0, spin_out_low.GetValueAsInt ());
-		}
+	private void HandleCheckGreenToggled (object? sender, EventArgs e)
+	{
+		mask[1] = check_green.Active;
+		MaskChanged ();
+	}
 
-		private int FromGammaValue ()
-		{
-			int lo = gradient_output.GetValue (0);
-			int hi = gradient_output.GetValue (2);
-			int med = (int) (lo + (hi - lo) * Math.Pow (0.5, spin_out_gamma.Value));
+	private void HandleCheckBlueToggled (object? sender, EventArgs e)
+	{
+		mask[2] = check_blue.Active;
+		MaskChanged ();
+	}
 
-			return med;
-		}
+	private void HandleColorPanelButtonPressEvent (GestureClick controller, GestureClick.PressedSignalArgs args)
+	{
+		if (args.NPress != 2) // double click
+			return;
 
-		private void HandleSpinOutGammaValueChanged (object? sender, EventArgs e)
-		{
-			gradient_output.SetValue (1, FromGammaValue ());
-		}
+		ColorPanelWidget panel = (ColorPanelWidget) controller.GetWidget ();
+		var ccd = Gtk.ColorChooserDialog.New (Translations.GetString ("Choose Color"), PintaCore.Chrome.MainWindow);
+		ccd.UseAlpha = true;
+		ccd.SetColor (panel.CairoColor);
 
-		private void HandleSpinOutHighValueChanged (object? sender, EventArgs e)
-		{
-			gradient_output.SetValue (2, spin_out_high.GetValueAsInt ());
-		}
+		var response = (Gtk.ResponseType) ccd.RunBlocking ();
+		if (response == Gtk.ResponseType.Ok) {
+			ccd.GetColor (out var cairo_color);
+			ColorBgra col = cairo_color.ToColorBgra ();
 
-		private int MaskAvg (ColorBgra before)
-		{
-			int count = 0, total = 0;
-
-			for (int c = 0; c < 3; c++) {
-				if (mask[c]) {
-					total += before[c];
-					count++;
-				}
-			}
-
-			if (count > 0) {
-				return total / count;
-			} else {
-				return 0;
-			}
-		}
-
-		private ColorBgra UpdateByMask (ColorBgra before, byte val)
-		{
-			ColorBgra after = before;
-			int average = -1, oldaverage = -1;
-
-			if (!(mask[0] || mask[1] || mask[2])) {
-				return before;
-			}
-
-			do {
-				float factor;
-
-				oldaverage = average;
-				average = MaskAvg (after);
-
-				if (average == 0) {
-					break;
-				}
-				factor = (float) val / average;
-
-				for (int c = 0; c < 3; c++) {
-					if (mask[c]) {
-						after[c] = (byte) Utility.ClampToByte (after[c] * factor);
-					}
-				}
-			} while (average != val && oldaverage != average);
-
-			while (average != val) {
-				average = MaskAvg (after);
-				int diff = val - average;
-
-				for (int c = 0; c < 3; c++) {
-					if (mask[c]) {
-						after[c] = (byte) Utility.ClampToByte (after[c] + diff);
-					}
-				}
-			}
-
-			after.A = 255;
-			return after;
-		}
-
-		private float MaskGamma ()
-		{
-			int count = 0;
-			float total = 0;
-
-			for (int c = 0; c < 3; c++) {
-				if (mask[c]) {
-					total += Levels.GetGamma (c);
-					count++;
-				}
-			}
-
-			if (count > 0) {
-				return total / count;
-			} else {
-				return 1;
-			}
-
-		}
-
-		private void UpdateGammaByMask (float val)
-		{
-			float average = -1;
-
-			if (!(mask[0] || mask[1] || mask[2]))
-				return;
-
-			do {
-				average = MaskGamma ();
-				float factor = val / average;
-
-				for (int c = 0; c < 3; c++) {
-					if (mask[c]) {
-						Levels.SetGamma (c, factor * Levels.GetGamma (c));
-					}
-				}
-			} while (Math.Abs (val - average) > 0.001);
-		}
-
-		private Color GetOutMidColor ()
-		{
-			return Levels.Apply (histogram_input.Histogram.GetMeanColor ()).ToCairoColor ();
-		}
-
-		//hack to avoid reccurent invocation of UpdateLevels
-		private bool disable_updating;
-		//when user moves triangles inside gradient widget,
-		//we don't want to redraw histogram each time Levels values change.
-		//maximum number of skipped updates
-		private const int max_skip = 5;
-		//skipped updates counter
-		private int skip_counter = max_skip;
-		private bool button_down = false;
-
-		private void UpdateLevels ()
-		{
-			if (disable_updating)
-				return;
-
-			disable_updating = true;
-
-			if (skip_counter == max_skip || !button_down) {
-
-				Levels.ColorOutHigh = UpdateByMask (Levels.ColorOutHigh, (byte) spin_out_high.Value);
-				Levels.ColorOutLow = UpdateByMask (Levels.ColorOutLow, (byte) spin_out_low.Value);
-				UpdateGammaByMask ((float) spin_out_gamma.Value);
-
-				Levels.ColorInHigh = UpdateByMask (Levels.ColorInHigh, (byte) spin_in_high.Value);
-				Levels.ColorInLow = UpdateByMask (Levels.ColorInLow, (byte) spin_in_low.Value);
-
-				colorpanel_in_low.CairoColor = Levels.ColorInLow.ToCairoColor ();
-				colorpanel_in_high.CairoColor = Levels.ColorInHigh.ToCairoColor ();
-
-				colorpanel_out_low.CairoColor = Levels.ColorOutLow.ToCairoColor ();
-				colorpanel_out_mid.CairoColor = GetOutMidColor ();
-				colorpanel_out_high.CairoColor = Levels.ColorOutHigh.ToCairoColor ();
-
-				UpdateOutputHistogram ();
-				skip_counter = 0;
-			} else
-				skip_counter++;
-
-			disable_updating = false;
-
-			UpdateLivePreview ();
-		}
-
-		private void HandleGradientButtonPressEvent (GestureClick controller, GestureClick.PressedSignalArgs args)
-		{
-			button_down = true;
-		}
-
-		private void HandleGradientButtonReleaseEvent (GestureClick controller, GestureClick.ReleasedSignalArgs args)
-		{
-			button_down = false;
-
-			if (skip_counter != 0)
-				UpdateLevels ();
-		}
-
-		private void HandleGradientInputValueChanged (object? sender, IndexEventArgs e)
-		{
-			int val = gradient_input.GetValue (e.Index);
-
-			if (e.Index == 0)
-				spin_in_low.Value = val;
-			else
-				spin_in_high.Value = val;
-
-			UpdateLevels ();
-		}
-
-		private void HandleGradientOutputValueChanged (object? sender, IndexEventArgs e)
-		{
-			if (gradient_output.ValueIndex != -1 && gradient_output.ValueIndex != e.Index)
-				return;
-
-			int val = gradient_output.GetValue (e.Index);
-			int hi = gradient_output.GetValue (2);
-			int lo = gradient_output.GetValue (0);
-			int med = FromGammaValue ();
-
-			switch (e.Index) {
-				case 0:
-					spin_out_low.Value = val;
-					gradient_output.SetValue (1, med);
-					break;
-
-				case 1:
-					med = gradient_output.GetValue (1);
-					spin_out_gamma.Value = Utility.Clamp (1 / Math.Log (0.5, (float) (med - lo) / (float) (hi - lo)), 0.1, 10.0);
-					break;
-
-				case 2:
-					spin_out_high.Value = val;
-					gradient_output.SetValue (1, med);
-					break;
-			}
-
-			UpdateLevels ();
-		}
-
-		private void MaskChanged ()
-		{
-			ColorBgra max = ColorBgra.Black;
-
-			max.Bgra |= mask[0] ? (uint) 0xFF0000 : 0;
-			max.Bgra |= mask[1] ? (uint) 0xFF00 : 0;
-			max.Bgra |= mask[2] ? (uint) 0xFF : 0;
-
-			Color maxcolor = max.ToCairoColor ();
-			gradient_input.MaxColor = maxcolor;
-			gradient_output.MaxColor = maxcolor;
-
-			for (int i = 0; i < 3; i++) {
-				histogram_input.SetSelected (i, mask[i]);
-				histogram_output.SetSelected (i, mask[i]);
+			if (panel == colorpanel_in_low) {
+				Levels.ColorInLow = col;
+			} else if (panel == colorpanel_in_high) {
+				Levels.ColorInHigh = col;
+			} else if (panel == colorpanel_out_low) {
+				Levels.ColorOutLow = col;
+				//                } else if (panel == colorpanelOutMid) {
+				//                    ColorBgra lo = Levels.ColorInLow;
+				//                    ColorBgra md = histogramInput.Histogram.GetMeanColor();
+				//                    ColorBgra hi = Levels.ColorInHigh;
+				//                    ColorBgra out_lo = Levels.ColorOutLow;
+				//                    ColorBgra out_hi = Levels.ColorOutHigh;
+				//
+				//                    for (int i = 0; i < 3; i++) {
+				//                        double logA = (col[i] - out_lo[i]) / (out_hi[i] - out_lo[i]);
+				//                        double logBase = (md[i] - lo[i]) / (hi[i] - lo[i]);
+				//                        double logVal = (logBase == 1.0) ? 0.0 : Math.Log (logA, logBase);
+				//
+				//                        Levels.SetGamma(i, (float)Utility.Clamp (logVal, 0.1, 10.0));
+				//                    }
+			} else if (panel == colorpanel_out_high) {
+				Levels.ColorOutHigh = col;
 			}
 		}
 
-		private void HandleCheckRedToggled (object? sender, EventArgs e)
+		ccd.Destroy ();
+
+		UpdateFromLevelsOp ();
+		UpdateLevels ();
+	}
+
+	[MemberNotNull (nameof (check_red), nameof (check_green), nameof (check_blue), nameof (button_reset), nameof (button_auto), nameof (spin_in_low), nameof (spin_in_high),
+			nameof (spin_out_low), nameof (spin_out_high), nameof (spin_out_gamma), nameof (gradient_input), nameof (gradient_output), nameof (colorpanel_in_high),
+			nameof (colorpanel_in_low), nameof (colorpanel_out_low), nameof (colorpanel_out_mid), nameof (colorpanel_out_high), nameof (histogram_input), nameof (histogram_output))]
+	private void Build ()
+	{
+		const int spacing = 6;
+
+		Resizable = false;
+
+		var hboxChecks = new Box () { Spacing = spacing };
+		hboxChecks.SetOrientation (Orientation.Horizontal);
+		check_red = new CheckButton () { Label = Translations.GetString ("Red"), Active = true };
+		hboxChecks.Append (check_red);
+		check_green = new CheckButton () { Label = Translations.GetString ("Green"), Active = true };
+		hboxChecks.Append (check_green);
+		check_blue = new CheckButton () { Label = Translations.GetString ("Blue"), Active = true };
+		hboxChecks.Append (check_blue);
+
+		button_auto = (Button) AddButton (Translations.GetString ("Auto"), (int) ResponseType.None);
+		button_reset = (Button) AddButton (Translations.GetString ("Reset"), (int) ResponseType.None);
+		AddActionWidget (hboxChecks, (int) ResponseType.None);
+
+		this.AddCancelOkButtons ();
+		this.SetDefaultResponse (ResponseType.Ok);
+
+		spin_in_low = SpinButton.NewWithRange (0, 254, 1);
+		spin_in_high = SpinButton.NewWithRange (1, 255, 1);
+		spin_in_high.Value = 255;
+
+		spin_out_low = SpinButton.NewWithRange (0, 252, 1);
+		spin_out_high = SpinButton.NewWithRange (2, 255, 1);
+		spin_out_high.Value = 255;
+		spin_out_gamma = SpinButton.NewWithRange (0, 100, 0.1);
+		spin_out_gamma.Value = 1;
+
+		gradient_input = new ColorGradientWidget (2) { WidthRequest = 40 };
+		gradient_output = new ColorGradientWidget (3) { WidthRequest = 40 };
+
+		colorpanel_in_high = new ColorPanelWidget () { HeightRequest = 24 };
+		colorpanel_in_low = new ColorPanelWidget () { HeightRequest = 24 };
+		colorpanel_out_low = new ColorPanelWidget () { HeightRequest = 24 };
+		colorpanel_out_mid = new ColorPanelWidget () { HeightRequest = 24 };
+		colorpanel_out_high = new ColorPanelWidget () { HeightRequest = 24 };
+
+		histogram_input = new HistogramWidget () { WidthRequest = 130, FlipHorizontal = true };
+		histogram_output = new HistogramWidget () { WidthRequest = 130 };
+
+		var hboxLayout = new Box () { Spacing = spacing };
+		hboxLayout.SetOrientation (Orientation.Horizontal);
+		hboxLayout.SetAllMargins (spacing);
+
+		static Box CreateLabelledWidget (Widget widget, string label)
 		{
-			mask[0] = check_red.Active;
-			MaskChanged ();
+			var vbox = new Box () { Spacing = spacing };
+			vbox.SetOrientation (Orientation.Vertical);
+			var label_widget = Label.New (label);
+			label_widget.Halign = Align.Start;
+			vbox.Append (label_widget);
+			widget.Vexpand = true;
+			widget.Valign = Align.Fill;
+			vbox.Append (widget);
+
+			return vbox;
 		}
 
-		private void HandleCheckGreenToggled (object? sender, EventArgs e)
-		{
-			mask[1] = check_green.Active;
-			MaskChanged ();
-		}
+		hboxLayout.Append (CreateLabelledWidget (histogram_input, Translations.GetString ("Input Histogram")));
 
-		private void HandleCheckBlueToggled (object? sender, EventArgs e)
-		{
-			mask[2] = check_blue.Active;
-			MaskChanged ();
-		}
+		var vboxInput = new Box () { Spacing = spacing };
+		vboxInput.SetOrientation (Orientation.Vertical);
+		vboxInput.Append (spin_in_high);
+		vboxInput.Append (colorpanel_in_high);
+		colorpanel_in_low.Valign = Align.End;
+		colorpanel_in_low.Vexpand = true;
+		vboxInput.Append (colorpanel_in_low);
+		vboxInput.Append (spin_in_low);
 
-		private void HandleColorPanelButtonPressEvent (GestureClick controller, GestureClick.PressedSignalArgs args)
-		{
-			if (args.NPress != 2) // double click
-				return;
+		var hboxInput = new Box () { Spacing = spacing };
+		hboxInput.SetOrientation (Orientation.Horizontal);
+		hboxInput.Append (vboxInput);
+		hboxInput.Append (gradient_input);
 
-			ColorPanelWidget panel = (ColorPanelWidget) controller.GetWidget ();
-			var ccd = Gtk.ColorChooserDialog.New (Translations.GetString ("Choose Color"), PintaCore.Chrome.MainWindow);
-			ccd.UseAlpha = true;
-			ccd.SetColor (panel.CairoColor);
+		hboxLayout.Append (CreateLabelledWidget (hboxInput, Translations.GetString ("Input")));
 
-			var response = (Gtk.ResponseType) ccd.RunBlocking ();
-			if (response == Gtk.ResponseType.Ok) {
-				ccd.GetColor (out var cairo_color);
-				ColorBgra col = cairo_color.ToColorBgra ();
+		var vboxOutput = new Box () { Spacing = spacing };
+		vboxOutput.SetOrientation (Orientation.Vertical);
+		vboxOutput.Append (spin_out_high);
+		vboxOutput.Append (colorpanel_out_high);
+		vboxOutput.Append (spin_out_gamma);
+		vboxOutput.Append (colorpanel_out_mid);
+		vboxOutput.Append (colorpanel_out_low);
+		vboxOutput.Append (spin_out_low);
 
-				if (panel == colorpanel_in_low) {
-					Levels.ColorInLow = col;
-				} else if (panel == colorpanel_in_high) {
-					Levels.ColorInHigh = col;
-				} else if (panel == colorpanel_out_low) {
-					Levels.ColorOutLow = col;
-					//                } else if (panel == colorpanelOutMid) {
-					//                    ColorBgra lo = Levels.ColorInLow;
-					//                    ColorBgra md = histogramInput.Histogram.GetMeanColor();
-					//                    ColorBgra hi = Levels.ColorInHigh;
-					//                    ColorBgra out_lo = Levels.ColorOutLow;
-					//                    ColorBgra out_hi = Levels.ColorOutHigh;
-					//
-					//                    for (int i = 0; i < 3; i++) {
-					//                        double logA = (col[i] - out_lo[i]) / (out_hi[i] - out_lo[i]);
-					//                        double logBase = (md[i] - lo[i]) / (hi[i] - lo[i]);
-					//                        double logVal = (logBase == 1.0) ? 0.0 : Math.Log (logA, logBase);
-					//
-					//                        Levels.SetGamma(i, (float)Utility.Clamp (logVal, 0.1, 10.0));
-					//                    }
-				} else if (panel == colorpanel_out_high) {
-					Levels.ColorOutHigh = col;
-				}
-			}
+		var hboxOutput = new Box () { Spacing = spacing };
+		hboxOutput.SetOrientation (Orientation.Horizontal);
+		hboxOutput.Append (gradient_output);
+		hboxOutput.Append (vboxOutput);
 
-			ccd.Destroy ();
+		hboxLayout.Append (CreateLabelledWidget (hboxOutput, Translations.GetString ("Output")));
 
-			UpdateFromLevelsOp ();
-			UpdateLevels ();
-		}
+		hboxLayout.Append (CreateLabelledWidget (histogram_output, Translations.GetString ("Output Histogram")));
 
-		[MemberNotNull (nameof (check_red), nameof (check_green), nameof (check_blue), nameof (button_reset), nameof (button_auto), nameof (spin_in_low), nameof (spin_in_high),
-				nameof (spin_out_low), nameof (spin_out_high), nameof (spin_out_gamma), nameof (gradient_input), nameof (gradient_output), nameof (colorpanel_in_high),
-				nameof (colorpanel_in_low), nameof (colorpanel_out_low), nameof (colorpanel_out_mid), nameof (colorpanel_out_high), nameof (histogram_input), nameof (histogram_output))]
-		private void Build ()
-		{
-			const int spacing = 6;
-
-			Resizable = false;
-
-			var hboxChecks = new Box () { Spacing = spacing };
-			hboxChecks.SetOrientation (Orientation.Horizontal);
-			check_red = new CheckButton () { Label = Translations.GetString ("Red"), Active = true };
-			hboxChecks.Append (check_red);
-			check_green = new CheckButton () { Label = Translations.GetString ("Green"), Active = true };
-			hboxChecks.Append (check_green);
-			check_blue = new CheckButton () { Label = Translations.GetString ("Blue"), Active = true };
-			hboxChecks.Append (check_blue);
-
-			button_auto = (Button) AddButton (Translations.GetString ("Auto"), (int) ResponseType.None);
-			button_reset = (Button) AddButton (Translations.GetString ("Reset"), (int) ResponseType.None);
-			AddActionWidget (hboxChecks, (int) ResponseType.None);
-
-			this.AddCancelOkButtons ();
-			this.SetDefaultResponse (ResponseType.Ok);
-
-			spin_in_low = SpinButton.NewWithRange (0, 254, 1);
-			spin_in_high = SpinButton.NewWithRange (1, 255, 1);
-			spin_in_high.Value = 255;
-
-			spin_out_low = SpinButton.NewWithRange (0, 252, 1);
-			spin_out_high = SpinButton.NewWithRange (2, 255, 1);
-			spin_out_high.Value = 255;
-			spin_out_gamma = SpinButton.NewWithRange (0, 100, 0.1);
-			spin_out_gamma.Value = 1;
-
-			gradient_input = new ColorGradientWidget (2) { WidthRequest = 40 };
-			gradient_output = new ColorGradientWidget (3) { WidthRequest = 40 };
-
-			colorpanel_in_high = new ColorPanelWidget () { HeightRequest = 24 };
-			colorpanel_in_low = new ColorPanelWidget () { HeightRequest = 24 };
-			colorpanel_out_low = new ColorPanelWidget () { HeightRequest = 24 };
-			colorpanel_out_mid = new ColorPanelWidget () { HeightRequest = 24 };
-			colorpanel_out_high = new ColorPanelWidget () { HeightRequest = 24 };
-
-			histogram_input = new HistogramWidget () { WidthRequest = 130, FlipHorizontal = true };
-			histogram_output = new HistogramWidget () { WidthRequest = 130 };
-
-			var hboxLayout = new Box () { Spacing = spacing };
-			hboxLayout.SetOrientation (Orientation.Horizontal);
-			hboxLayout.SetAllMargins (spacing);
-
-			static Box CreateLabelledWidget (Widget widget, string label)
-			{
-				var vbox = new Box () { Spacing = spacing };
-				vbox.SetOrientation (Orientation.Vertical);
-				var label_widget = Label.New (label);
-				label_widget.Halign = Align.Start;
-				vbox.Append (label_widget);
-				widget.Vexpand = true;
-				widget.Valign = Align.Fill;
-				vbox.Append (widget);
-
-				return vbox;
-			}
-
-			hboxLayout.Append (CreateLabelledWidget (histogram_input, Translations.GetString ("Input Histogram")));
-
-			var vboxInput = new Box () { Spacing = spacing };
-			vboxInput.SetOrientation (Orientation.Vertical);
-			vboxInput.Append (spin_in_high);
-			vboxInput.Append (colorpanel_in_high);
-			colorpanel_in_low.Valign = Align.End;
-			colorpanel_in_low.Vexpand = true;
-			vboxInput.Append (colorpanel_in_low);
-			vboxInput.Append (spin_in_low);
-
-			var hboxInput = new Box () { Spacing = spacing };
-			hboxInput.SetOrientation (Orientation.Horizontal);
-			hboxInput.Append (vboxInput);
-			hboxInput.Append (gradient_input);
-
-			hboxLayout.Append (CreateLabelledWidget (hboxInput, Translations.GetString ("Input")));
-
-			var vboxOutput = new Box () { Spacing = spacing };
-			vboxOutput.SetOrientation (Orientation.Vertical);
-			vboxOutput.Append (spin_out_high);
-			vboxOutput.Append (colorpanel_out_high);
-			vboxOutput.Append (spin_out_gamma);
-			vboxOutput.Append (colorpanel_out_mid);
-			vboxOutput.Append (colorpanel_out_low);
-			vboxOutput.Append (spin_out_low);
-
-			var hboxOutput = new Box () { Spacing = spacing };
-			hboxOutput.SetOrientation (Orientation.Horizontal);
-			hboxOutput.Append (gradient_output);
-			hboxOutput.Append (vboxOutput);
-
-			hboxLayout.Append (CreateLabelledWidget (hboxOutput, Translations.GetString ("Output")));
-
-			hboxLayout.Append (CreateLabelledWidget (histogram_output, Translations.GetString ("Output Histogram")));
-
-			var content_area = this.GetContentAreaBox ();
-			content_area.Append (hboxLayout);
-		}
+		var content_area = this.GetContentAreaBox ();
+		content_area.Append (hboxLayout);
 	}
 }
