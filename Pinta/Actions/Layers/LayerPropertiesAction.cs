@@ -28,91 +28,90 @@ using System;
 using Gtk;
 using Pinta.Core;
 
-namespace Pinta.Actions
+namespace Pinta.Actions;
+
+internal sealed class LayerPropertiesAction : IActionHandler
 {
-	class LayerPropertiesAction : IActionHandler
+	#region IActionHandler Members
+	public void Initialize ()
 	{
-		#region IActionHandler Members
-		public void Initialize ()
-		{
-			PintaCore.Actions.Layers.Properties.Activated += Activated;
-		}
+		PintaCore.Actions.Layers.Properties.Activated += Activated;
+	}
 
-		public void Uninitialize ()
-		{
-			PintaCore.Actions.Layers.Properties.Activated -= Activated;
-		}
-		#endregion
+	public void Uninitialize ()
+	{
+		PintaCore.Actions.Layers.Properties.Activated -= Activated;
+	}
+	#endregion
 
-		private void Activated (object sender, EventArgs e)
-		{
-			var doc = PintaCore.Workspace.ActiveDocument;
+	private void Activated (object sender, EventArgs e)
+	{
+		var doc = PintaCore.Workspace.ActiveDocument;
 
-			var dialog = new LayerPropertiesDialog ();
+		var dialog = new LayerPropertiesDialog ();
 
-			dialog.OnResponse += (_, args) => {
-				var response = (ResponseType) args.ResponseId;
-				if (response == Gtk.ResponseType.Ok && dialog.AreLayerPropertiesUpdated) {
+		dialog.OnResponse += (_, args) => {
+			var response = (ResponseType) args.ResponseId;
+			if (response == Gtk.ResponseType.Ok && dialog.AreLayerPropertiesUpdated) {
 
-					var historyMessage = GetLayerPropertyUpdateMessage (
-							dialog.InitialLayerProperties,
-							dialog.UpdatedLayerProperties);
-
-					var historyItem = new UpdateLayerPropertiesHistoryItem (
-						Resources.Icons.LayerProperties,
-						historyMessage,
-						doc.Layers.CurrentUserLayerIndex,
+				var historyMessage = GetLayerPropertyUpdateMessage (
 						dialog.InitialLayerProperties,
 						dialog.UpdatedLayerProperties);
 
-					doc.History.PushNewItem (historyItem);
+				var historyItem = new UpdateLayerPropertiesHistoryItem (
+					Resources.Icons.LayerProperties,
+					historyMessage,
+					doc.Layers.CurrentUserLayerIndex,
+					dialog.InitialLayerProperties,
+					dialog.UpdatedLayerProperties);
 
+				doc.History.PushNewItem (historyItem);
+
+				PintaCore.Workspace.ActiveWorkspace.Invalidate ();
+
+			} else {
+
+				var layer = doc.Layers.CurrentUserLayer;
+				var selectionLayer = doc.Layers.SelectionLayer;
+				var initial = dialog.InitialLayerProperties;
+				initial.SetProperties (layer);
+				if (selectionLayer != null)
+					initial.SetProperties (selectionLayer);
+
+				if ((layer.Opacity != initial.Opacity) || (layer.BlendMode != initial.BlendMode) || (layer.Hidden != initial.Hidden))
 					PintaCore.Workspace.ActiveWorkspace.Invalidate ();
+			}
 
-				} else {
+			dialog.Destroy ();
+		};
 
-					var layer = doc.Layers.CurrentUserLayer;
-					var selectionLayer = doc.Layers.SelectionLayer;
-					var initial = dialog.InitialLayerProperties;
-					initial.SetProperties (layer);
-					if (selectionLayer != null)
-						initial.SetProperties (selectionLayer);
+		dialog.Present ();
+	}
 
-					if ((layer.Opacity != initial.Opacity) || (layer.BlendMode != initial.BlendMode) || (layer.Hidden != initial.Hidden))
-						PintaCore.Workspace.ActiveWorkspace.Invalidate ();
-				}
+	private static string GetLayerPropertyUpdateMessage (LayerProperties initial, LayerProperties updated)
+	{
 
-				dialog.Destroy ();
-			};
+		string? ret = null;
+		int count = 0;
 
-			dialog.Present ();
+		if (updated.Opacity != initial.Opacity) {
+			ret = Translations.GetString ("Layer Opacity");
+			count++;
 		}
 
-		private static string GetLayerPropertyUpdateMessage (LayerProperties initial, LayerProperties updated)
-		{
-
-			string? ret = null;
-			int count = 0;
-
-			if (updated.Opacity != initial.Opacity) {
-				ret = Translations.GetString ("Layer Opacity");
-				count++;
-			}
-
-			if (updated.Name != initial.Name) {
-				ret = Translations.GetString ("Rename Layer");
-				count++;
-			}
-
-			if (updated.Hidden != initial.Hidden) {
-				ret = (updated.Hidden) ? Translations.GetString ("Hide Layer") : Translations.GetString ("Show Layer");
-				count++;
-			}
-
-			if (ret == null || count > 1)
-				ret = Translations.GetString ("Layer Properties");
-
-			return ret;
+		if (updated.Name != initial.Name) {
+			ret = Translations.GetString ("Rename Layer");
+			count++;
 		}
+
+		if (updated.Hidden != initial.Hidden) {
+			ret = (updated.Hidden) ? Translations.GetString ("Hide Layer") : Translations.GetString ("Show Layer");
+			count++;
+		}
+
+		if (ret == null || count > 1)
+			ret = Translations.GetString ("Layer Properties");
+
+		return ret;
 	}
 }
