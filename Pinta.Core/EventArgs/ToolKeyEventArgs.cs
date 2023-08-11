@@ -29,7 +29,7 @@ using Gdk;
 
 namespace Pinta.Core;
 
-public class ToolKeyEventArgs : EventArgs
+public sealed class ToolKeyEventArgs : EventArgs
 {
 	/// <summary>
 	/// Specifies whether the Alt key is currently pressed.
