@@ -26,25 +26,24 @@
 
 using NGettext;
 
-namespace Pinta.Core
+namespace Pinta.Core;
+
+public static class Translations
 {
-	public static class Translations
+	private static ICatalog? catalog;
+
+	public static void Init (string domain, string locale_dir)
 	{
-		private static ICatalog? catalog;
+		catalog = new Catalog (domain, locale_dir);
+	}
 
-		public static void Init (string domain, string locale_dir)
-		{
-			catalog = new Catalog (domain, locale_dir);
-		}
+	public static string GetString (string text)
+	{
+		return catalog?.GetString (text) ?? text;
+	}
 
-		public static string GetString (string text)
-		{
-			return catalog?.GetString (text) ?? text;
-		}
-
-		public static string GetString (string text, params object[] args)
-		{
-			return catalog?.GetString (text, args) ?? text;
-		}
+	public static string GetString (string text, params object[] args)
+	{
+		return catalog?.GetString (text, args) ?? text;
 	}
 }
