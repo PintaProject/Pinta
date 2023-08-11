@@ -29,69 +29,68 @@ using System.Linq;
 using System.Runtime.InteropServices;
 using Gio;
 
-namespace Pinta.Core
+namespace Pinta.Core;
+
+public static class GioExtensions
 {
-	public static class GioExtensions
+	private const string GioLibraryName = "Gio";
+
+	static GioExtensions ()
 	{
-		private const string GioLibraryName = "Gio";
+		NativeImportResolver.RegisterLibrary (GioLibraryName,
+			windowsLibraryName: "libgio-2.0-0.dll",
+			linuxLibraryName: "libgio-2.0.so.0",
+			osxLibraryName: "libgio-2.0.0.dylib"
+		);
+	}
 
-		static GioExtensions ()
-		{
-			NativeImportResolver.RegisterLibrary (GioLibraryName,
-				windowsLibraryName: "libgio-2.0-0.dll",
-				linuxLibraryName: "libgio-2.0.so.0",
-				osxLibraryName: "libgio-2.0.0.dylib"
-			);
+	/// <summary>
+	/// Return the display name for the file. Note that this can be very different from file.Basename,
+	/// and should only be used for display purposes rather than identifying the file.
+	/// </summary>
+	public static string GetDisplayName (this Gio.File file)
+	{
+		var info = file.QueryInfo (Constants.FILE_ATTRIBUTE_STANDARD_DISPLAY_NAME, Gio.FileQueryInfoFlags.None, cancellable: null);
+		return info.GetDisplayName ();
+	}
+
+	/// <summary>
+	/// Returns an output stream for creating or overwriting the file.
+	/// NOTE: if you don't wrap this in a GLib.GioStream, you must call Close() !
+	/// </summary>
+	public static Gio.OutputStream Replace (this Gio.File file)
+	{
+		return file.Replace (null, false, Gio.FileCreateFlags.None, null);
+	}
+
+	public static void Remove (this Gio.Menu menu, Command action)
+	{
+		for (int i = 0; i < menu.GetNItems (); ++i) {
+			var name_attr = menu.GetItemAttributeValue (i, "action", GLib.VariantType.String).GetString ();
+			if (name_attr == action.FullName) {
+				menu.Remove (i);
+				return;
+			}
 		}
+	}
 
-		/// <summary>
-		/// Return the display name for the file. Note that this can be very different from file.Basename,
-		/// and should only be used for display purposes rather than identifying the file.
-		/// </summary>
-		public static string GetDisplayName (this Gio.File file)
-		{
-			var info = file.QueryInfo (Constants.FILE_ATTRIBUTE_STANDARD_DISPLAY_NAME, Gio.FileQueryInfoFlags.None, cancellable: null);
-			return info.GetDisplayName ();
-		}
+	public static void AppendMenuItemSorted (this Gio.Menu menu, Gio.MenuItem item)
+	{
+		var new_label = item.GetAttributeValue ("label", GLib.VariantType.String).GetString ();
 
-		/// <summary>
-		/// Returns an output stream for creating or overwriting the file.
-		/// NOTE: if you don't wrap this in a GLib.GioStream, you must call Close() !
-		/// </summary>
-		public static Gio.OutputStream Replace (this Gio.File file)
-		{
-			return file.Replace (null, false, Gio.FileCreateFlags.None, null);
-		}
-
-		public static void Remove (this Gio.Menu menu, Command action)
-		{
-			for (int i = 0; i < menu.GetNItems (); ++i) {
-				var name_attr = menu.GetItemAttributeValue (i, "action", GLib.VariantType.String).GetString ();
-				if (name_attr == action.FullName) {
-					menu.Remove (i);
-					return;
-				}
+		for (int i = 0; i < menu.GetNItems (); i++) {
+			var label = menu.GetItemAttributeValue (i, "label", GLib.VariantType.String).GetString ();
+			if (string.Compare (label, new_label) > 0) {
+				menu.InsertItem (i, item);
+				return;
 			}
 		}
 
-		public static void AppendMenuItemSorted (this Gio.Menu menu, Gio.MenuItem item)
-		{
-			var new_label = item.GetAttributeValue ("label", GLib.VariantType.String).GetString ();
+		menu.AppendItem (item);
+	}
 
-			for (int i = 0; i < menu.GetNItems (); i++) {
-				var label = menu.GetItemAttributeValue (i, "label", GLib.VariantType.String).GetString ();
-				if (string.Compare (label, new_label) > 0) {
-					menu.InsertItem (i, item);
-					return;
-				}
-			}
-
-			menu.AppendItem (item);
-		}
-
-		public static void RemoveMultiple (this Gio.ListStore store, uint position, uint n_removals)
-		{
-			store.Splice (position, n_removals, Array.Empty<GObject.Object> (), 0);
-		}
+	public static void RemoveMultiple (this Gio.ListStore store, uint position, uint n_removals)
+	{
+		store.Splice (position, n_removals, Array.Empty<GObject.Object> (), 0);
 	}
 }

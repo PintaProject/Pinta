@@ -28,92 +28,91 @@ using System;
 using System.Runtime.InteropServices;
 using Pango;
 
-namespace Pinta.Core
+namespace Pinta.Core;
+
+// TODO-GTK4 - these need a proper binding in gir.core
+public static class PangoExtensions
 {
-	// TODO-GTK4 - these need a proper binding in gir.core
-	public static class PangoExtensions
+	private const string PangoLibraryName = "Pango";
+
+	static PangoExtensions ()
 	{
-		private const string PangoLibraryName = "Pango";
-
-		static PangoExtensions ()
-		{
-			NativeImportResolver.RegisterLibrary (PangoLibraryName,
-				windowsLibraryName: "libpango-1.0-0.dll",
-				linuxLibraryName: "libpango-1.0.so.0",
-				osxLibraryName: "libpango-1.0.0.dylib"
-			);
-		}
-
-		public static FontDescription CreateFontDescription ()
-			=> new (Pango.Internal.FontDescription.New ());
-
-		public static FontDescription Copy (this FontDescription desc)
-			=> new (Pango.Internal.FontDescription.Copy (desc.Handle));
-
-		public static int GetSize (this FontDescription desc)
-			=> Pango.Internal.FontDescription.GetSize (desc.Handle);
-
-		public static bool GetSizeIsAbsolute (this FontDescription desc)
-			=> Pango.Internal.FontDescription.GetSizeIsAbsolute (desc.Handle);
-
-		public static void SetWeight (this FontDescription desc, Weight weight)
-			=> Pango.Internal.FontDescription.SetWeight (desc.Handle, weight);
-
-		public static void SetStyle (this FontDescription desc, Style style)
-			=> Pango.Internal.FontDescription.SetStyle (desc.Handle, style);
-
-		public static void GetCursorPos (this Layout layout, int index, out RectangleI strong_pos, out RectangleI weak_pos)
-		{
-			InternalGetCursorPos (layout.Handle, index, out var strong_pos_pango, out var weak_pos_pango);
-			strong_pos = strong_pos_pango.ToRectangleI ();
-			weak_pos = weak_pos_pango.ToRectangleI ();
-		}
-
-		[DllImport (PangoLibraryName, EntryPoint = "pango_layout_get_cursor_pos")]
-		private static extern void InternalGetCursorPos (IntPtr layout, int index, out PangoRectangle strong_pos, out PangoRectangle weak_pos);
-
-		public static void GetPixelExtents (this Layout layout, out RectangleI ink_rect, out RectangleI logical_rect)
-		{
-			InternalGetPixelExtents (layout.Handle, out var ink_rect_pango, out var logical_rect_pango);
-			ink_rect = ink_rect_pango.ToRectangleI ();
-			logical_rect = logical_rect_pango.ToRectangleI ();
-		}
-
-		[DllImport (PangoLibraryName, EntryPoint = "pango_layout_get_pixel_extents")]
-		private static extern void InternalGetPixelExtents (IntPtr layout, out PangoRectangle ink_rect, out PangoRectangle logical_rect);
-
-		public static void IndexToPos (this Layout layout, int index, out RectangleI pos)
-		{
-			InternalIndexToPos (layout.Handle, index, out var pos_pango);
-			pos = pos_pango.ToRectangleI ();
-		}
-
-		[DllImport (PangoLibraryName, EntryPoint = "pango_layout_index_to_pos")]
-		private static extern void InternalIndexToPos (IntPtr layout, int index, out PangoRectangle pos);
-
-		public static void XyToIndex (this Layout layout, int x, int y, out int index, out int trailing)
-		{
-			InternalXyToIndex (layout.Handle, x, y, out index, out trailing);
-		}
-
-		[DllImport (PangoLibraryName, EntryPoint = "pango_layout_xy_to_index")]
-		private static extern void InternalXyToIndex (IntPtr layout, int x, int y, out int index, out int trailing);
-
-		[StructLayout (LayoutKind.Sequential)]
-		private struct PangoRectangle
-		{
-			public int X;
-			public int Y;
-			public int Width;
-			public int Height;
-
-			public readonly RectangleI ToRectangleI () => new (X, Y, Width, Height);
-		}
-
-		public static int UnitsToPixels (int units)
-			=> (int) Math.Round (Pango.Functions.UnitsToDouble (units));
-
-		public static int UnitsFromPixels (int pixels)
-			=> Pango.Functions.UnitsFromDouble (pixels);
+		NativeImportResolver.RegisterLibrary (PangoLibraryName,
+			windowsLibraryName: "libpango-1.0-0.dll",
+			linuxLibraryName: "libpango-1.0.so.0",
+			osxLibraryName: "libpango-1.0.0.dylib"
+		);
 	}
+
+	public static FontDescription CreateFontDescription ()
+		=> new (Pango.Internal.FontDescription.New ());
+
+	public static FontDescription Copy (this FontDescription desc)
+		=> new (Pango.Internal.FontDescription.Copy (desc.Handle));
+
+	public static int GetSize (this FontDescription desc)
+		=> Pango.Internal.FontDescription.GetSize (desc.Handle);
+
+	public static bool GetSizeIsAbsolute (this FontDescription desc)
+		=> Pango.Internal.FontDescription.GetSizeIsAbsolute (desc.Handle);
+
+	public static void SetWeight (this FontDescription desc, Weight weight)
+		=> Pango.Internal.FontDescription.SetWeight (desc.Handle, weight);
+
+	public static void SetStyle (this FontDescription desc, Style style)
+		=> Pango.Internal.FontDescription.SetStyle (desc.Handle, style);
+
+	public static void GetCursorPos (this Layout layout, int index, out RectangleI strong_pos, out RectangleI weak_pos)
+	{
+		InternalGetCursorPos (layout.Handle, index, out var strong_pos_pango, out var weak_pos_pango);
+		strong_pos = strong_pos_pango.ToRectangleI ();
+		weak_pos = weak_pos_pango.ToRectangleI ();
+	}
+
+	[DllImport (PangoLibraryName, EntryPoint = "pango_layout_get_cursor_pos")]
+	private static extern void InternalGetCursorPos (IntPtr layout, int index, out PangoRectangle strong_pos, out PangoRectangle weak_pos);
+
+	public static void GetPixelExtents (this Layout layout, out RectangleI ink_rect, out RectangleI logical_rect)
+	{
+		InternalGetPixelExtents (layout.Handle, out var ink_rect_pango, out var logical_rect_pango);
+		ink_rect = ink_rect_pango.ToRectangleI ();
+		logical_rect = logical_rect_pango.ToRectangleI ();
+	}
+
+	[DllImport (PangoLibraryName, EntryPoint = "pango_layout_get_pixel_extents")]
+	private static extern void InternalGetPixelExtents (IntPtr layout, out PangoRectangle ink_rect, out PangoRectangle logical_rect);
+
+	public static void IndexToPos (this Layout layout, int index, out RectangleI pos)
+	{
+		InternalIndexToPos (layout.Handle, index, out var pos_pango);
+		pos = pos_pango.ToRectangleI ();
+	}
+
+	[DllImport (PangoLibraryName, EntryPoint = "pango_layout_index_to_pos")]
+	private static extern void InternalIndexToPos (IntPtr layout, int index, out PangoRectangle pos);
+
+	public static void XyToIndex (this Layout layout, int x, int y, out int index, out int trailing)
+	{
+		InternalXyToIndex (layout.Handle, x, y, out index, out trailing);
+	}
+
+	[DllImport (PangoLibraryName, EntryPoint = "pango_layout_xy_to_index")]
+	private static extern void InternalXyToIndex (IntPtr layout, int x, int y, out int index, out int trailing);
+
+	[StructLayout (LayoutKind.Sequential)]
+	private struct PangoRectangle
+	{
+		public int X;
+		public int Y;
+		public int Width;
+		public int Height;
+
+		public readonly RectangleI ToRectangleI () => new (X, Y, Width, Height);
+	}
+
+	public static int UnitsToPixels (int units)
+		=> (int) Math.Round (Pango.Functions.UnitsToDouble (units));
+
+	public static int UnitsFromPixels (int pixels)
+		=> Pango.Functions.UnitsFromDouble (pixels);
 }

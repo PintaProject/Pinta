@@ -28,42 +28,41 @@ using System.Collections.Generic;
 using System.Linq;
 using Gtk;
 
-namespace Pinta.Core
+namespace Pinta.Core;
+
+public sealed class ToolBarComboBox : Box
 {
-	public sealed class ToolBarComboBox : Box
+	public ComboBoxText ComboBox { get; }
+
+	public ToolBarComboBox (int width, int activeIndex, bool allowEntry)
+		: this (width, activeIndex, allowEntry, Enumerable.Empty<string> ())
+	{ }
+
+	public ToolBarComboBox (int width, int activeIndex, bool allowEntry, params string[] contents)
+		: this (width, activeIndex, allowEntry, (IEnumerable<string>) contents)
+	{ }
+
+	public ToolBarComboBox (int width, int activeIndex, bool allowEntry, IEnumerable<string> contents)
 	{
-		public ComboBoxText ComboBox { get; }
+		SetOrientation (Orientation.Horizontal);
+		Spacing = 0;
+		Hexpand = false;
 
-		public ToolBarComboBox (int width, int activeIndex, bool allowEntry)
-			: this (width, activeIndex, allowEntry, Enumerable.Empty<string> ())
-		{ }
-
-		public ToolBarComboBox (int width, int activeIndex, bool allowEntry, params string[] contents)
-			: this (width, activeIndex, allowEntry, (IEnumerable<string>) contents)
-		{ }
-
-		public ToolBarComboBox (int width, int activeIndex, bool allowEntry, IEnumerable<string> contents)
-		{
-			SetOrientation (Orientation.Horizontal);
-			Spacing = 0;
-			Hexpand = false;
-
-			if (allowEntry)
-				ComboBox = ComboBoxText.NewWithEntry ();
-			else {
-				ComboBox = new ComboBoxText ();
-				CanFocus = false;
-			}
-
-			foreach (string entry in contents)
-				ComboBox.AppendText (entry);
-
-			ComboBox.WidthRequest = width;
-
-			if (activeIndex >= 0)
-				ComboBox.Active = activeIndex;
-
-			Append (ComboBox);
+		if (allowEntry)
+			ComboBox = ComboBoxText.NewWithEntry ();
+		else {
+			ComboBox = new ComboBoxText ();
+			CanFocus = false;
 		}
+
+		foreach (string entry in contents)
+			ComboBox.AppendText (entry);
+
+		ComboBox.WidthRequest = width;
+
+		if (activeIndex >= 0)
+			ComboBox.Active = activeIndex;
+
+		Append (ComboBox);
 	}
 }
