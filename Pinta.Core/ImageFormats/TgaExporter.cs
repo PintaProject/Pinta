@@ -40,86 +40,85 @@ using System.IO;
 
 using Cairo;
 
-namespace Pinta.Core
+namespace Pinta.Core;
+
+public sealed class TgaExporter : IImageExporter
 {
-	public class TgaExporter : IImageExporter
+	private struct TgaHeader
 	{
-		private struct TgaHeader
+		public byte idLength;            // Image ID Field Length
+		public byte cmapType;            // Color Map Type
+		public byte imageType;           // Image Type
+
+		public ushort cmapIndex;         // First Entry Index
+		public ushort cmapLength;        // Color Map Length
+		public byte cmapEntrySize;       // Color Map Entry Size
+
+		public ushort xOrigin;           // X-origin of Image
+		public ushort yOrigin;           // Y-origin of Image
+		public ushort imageWidth;        // Image Width
+		public ushort imageHeight;       // Image Height
+		public byte pixelDepth;          // Pixel Depth
+		public byte imageDesc;           // Image Descriptor
+
+		public readonly void WriteTo (BinaryWriter output)
 		{
-			public byte idLength;            // Image ID Field Length
-			public byte cmapType;            // Color Map Type
-			public byte imageType;           // Image Type
+			output.Write (this.idLength);
+			output.Write (this.cmapType);
+			output.Write (this.imageType);
 
-			public ushort cmapIndex;         // First Entry Index
-			public ushort cmapLength;        // Color Map Length
-			public byte cmapEntrySize;       // Color Map Entry Size
+			output.Write (this.cmapIndex);
+			output.Write (this.cmapLength);
+			output.Write (this.cmapEntrySize);
 
-			public ushort xOrigin;           // X-origin of Image
-			public ushort yOrigin;           // Y-origin of Image
-			public ushort imageWidth;        // Image Width
-			public ushort imageHeight;       // Image Height
-			public byte pixelDepth;          // Pixel Depth
-			public byte imageDesc;           // Image Descriptor
-
-			public readonly void WriteTo (BinaryWriter output)
-			{
-				output.Write (this.idLength);
-				output.Write (this.cmapType);
-				output.Write (this.imageType);
-
-				output.Write (this.cmapIndex);
-				output.Write (this.cmapLength);
-				output.Write (this.cmapEntrySize);
-
-				output.Write (this.xOrigin);
-				output.Write (this.yOrigin);
-				output.Write (this.imageWidth);
-				output.Write (this.imageHeight);
-				output.Write (this.pixelDepth);
-				output.Write (this.imageDesc);
-			}
+			output.Write (this.xOrigin);
+			output.Write (this.yOrigin);
+			output.Write (this.imageWidth);
+			output.Write (this.imageHeight);
+			output.Write (this.pixelDepth);
+			output.Write (this.imageDesc);
 		}
+	}
 
-		/// <summary>
-		/// The image ID field contents. It is important for this field to be non-empty, since
-		/// GDK incorrectly identifies the mime type as image/x-win-bitmap if the idLength
-		/// value is 0 (see bug #987641).
-		/// </summary>
-		private const string ImageIdField = "Created by Pinta";
+	/// <summary>
+	/// The image ID field contents. It is important for this field to be non-empty, since
+	/// GDK incorrectly identifies the mime type as image/x-win-bitmap if the idLength
+	/// value is 0 (see bug #987641).
+	/// </summary>
+	private const string ImageIdField = "Created by Pinta";
 
-		// For now, we only export in uncompressed ARGB32 format. If someone requests this functionality,
-		// we can always add more through an export dialog.
-		public void Export (Document document, Gio.File file, Gtk.Window parent)
-		{
-			ImageSurface surf = document.GetFlattenedImage (); // Assumes the surface is in ARGB32 format
-			using var file_stream = new GioStream (file.Replace ());
-			using var writer = new BinaryWriter (file_stream);
+	// For now, we only export in uncompressed ARGB32 format. If someone requests this functionality,
+	// we can always add more through an export dialog.
+	public void Export (Document document, Gio.File file, Gtk.Window parent)
+	{
+		ImageSurface surf = document.GetFlattenedImage (); // Assumes the surface is in ARGB32 format
+		using var file_stream = new GioStream (file.Replace ());
+		using var writer = new BinaryWriter (file_stream);
 
-			TgaHeader header = new TgaHeader {
-				idLength = (byte) (ImageIdField.Length + 1),
-				cmapType = 0,
-				imageType = 2, // uncompressed RGB
-				cmapIndex = 0,
-				cmapLength = 0,
-				cmapEntrySize = 0,
-				xOrigin = 0,
-				yOrigin = 0,
-				imageWidth = (ushort) surf.Width,
-				imageHeight = (ushort) surf.Height,
-				pixelDepth = 32,
-				imageDesc = 8 // 32-bit, lower-left origin, which is weird but hey...
-			};
-			header.WriteTo (writer);
+		TgaHeader header = new TgaHeader {
+			idLength = (byte) (ImageIdField.Length + 1),
+			cmapType = 0,
+			imageType = 2, // uncompressed RGB
+			cmapIndex = 0,
+			cmapLength = 0,
+			cmapEntrySize = 0,
+			xOrigin = 0,
+			yOrigin = 0,
+			imageWidth = (ushort) surf.Width,
+			imageHeight = (ushort) surf.Height,
+			pixelDepth = 32,
+			imageDesc = 8 // 32-bit, lower-left origin, which is weird but hey...
+		};
+		header.WriteTo (writer);
 
-			writer.Write (ImageIdField);
+		writer.Write (ImageIdField);
 
-			Span<byte> data = surf.GetData ();
+		Span<byte> data = surf.GetData ();
 
-			// It just so happens that the Cairo ARGB32 internal representation matches
-			// the TGA format, except vertically-flipped. In little-endian, of course.
-			for (int y = surf.Height - 1; y >= 0; y--)
-				writer.Write (data.Slice (surf.Stride * y, surf.Stride));
+		// It just so happens that the Cairo ARGB32 internal representation matches
+		// the TGA format, except vertically-flipped. In little-endian, of course.
+		for (int y = surf.Height - 1; y >= 0; y--)
+			writer.Write (data.Slice (surf.Stride * y, surf.Stride));
 
-		}
 	}
 }
