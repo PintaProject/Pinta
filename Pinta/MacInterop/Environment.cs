@@ -26,38 +26,37 @@ using System.IO;
 using System.Runtime.InteropServices;
 using Pinta.Core;
 
-namespace Pinta.MacInterop
+namespace Pinta.MacInterop;
+
+public sealed class Environment
 {
-	public class Environment
+	[DllImport ("/usr/lib/system/libsystem_c.dylib")]
+	static extern int setenv (string name, string value);
+
+	/// <summary>
+	/// Initialize any environment variables for macOS (e.g. for GTK).
+	/// </summary>
+	public static void Init ()
 	{
-		[DllImport ("/usr/lib/system/libsystem_c.dylib")]
-		static extern int setenv (string name, string value);
+		// Set environment variables used to locate the GTK installation in the .app bundle.
+		if (SystemManager.IsExecutableInMacBundle ()) {
+			// XDG_DATA_DIRS is used to find {prefix}/share/glib-2.0/schemas
+			var share_dir = SystemManager.GetDataRootDirectory ();
+			SetEnvVar ("XDG_DATA_DIRS", share_dir);
 
-		/// <summary>
-		/// Initialize any environment variables for macOS (e.g. for GTK).
-		/// </summary>
-		public static void Init ()
-		{
-			// Set environment variables used to locate the GTK installation in the .app bundle.
-			if (SystemManager.IsExecutableInMacBundle ()) {
-				// XDG_DATA_DIRS is used to find {prefix}/share/glib-2.0/schemas
-				var share_dir = SystemManager.GetDataRootDirectory ();
-				SetEnvVar ("XDG_DATA_DIRS", share_dir);
-
-				// Set environment variables used for loading pixbuf modules.
-				var resources_dir = Directory.GetParent (share_dir)!.FullName;
-				SetEnvVar ("GDK_PIXBUF_MODULE_FILE", Path.Combine (resources_dir, "lib/gdk-pixbuf-2.0/2.10.0/loaders.cache"));
-			}
+			// Set environment variables used for loading pixbuf modules.
+			var resources_dir = Directory.GetParent (share_dir)!.FullName;
+			SetEnvVar ("GDK_PIXBUF_MODULE_FILE", Path.Combine (resources_dir, "lib/gdk-pixbuf-2.0/2.10.0/loaders.cache"));
 		}
+	}
 
-		private static void SetEnvVar (string name, string value)
-		{
-			// We need to use setenv() for the GTK libraries, but also set using the
-			// .NET apis for consistency.
-			// See https://yizhang82.dev/set-environment-variable
-			System.Environment.SetEnvironmentVariable (name, value);
-			setenv (name, value);
-		}
+	private static void SetEnvVar (string name, string value)
+	{
+		// We need to use setenv() for the GTK libraries, but also set using the
+		// .NET apis for consistency.
+		// See https://yizhang82.dev/set-environment-variable
+		System.Environment.SetEnvironmentVariable (name, value);
+		setenv (name, value);
 	}
 }
 

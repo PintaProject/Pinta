@@ -30,539 +30,538 @@ using System.Collections.Generic;
 using System.Diagnostics;
 using System.Runtime.InteropServices;
 
-namespace Pinta.MacInterop
+namespace Pinta.MacInterop;
+
+internal delegate CarbonEventHandlerStatus EventDelegate (IntPtr callRef, IntPtr eventRef, IntPtr userData);
+internal delegate CarbonEventHandlerStatus AEHandlerDelegate (IntPtr inEvnt, IntPtr outEvt, uint refConst);
+
+internal static class Carbon
 {
-	internal delegate CarbonEventHandlerStatus EventDelegate (IntPtr callRef, IntPtr eventRef, IntPtr userData);
-	internal delegate CarbonEventHandlerStatus AEHandlerDelegate (IntPtr inEvnt, IntPtr outEvt, uint refConst);
+	public const string CarbonLib = "/System/Library/Frameworks/Carbon.framework/Versions/Current/Carbon";
 
-	internal static class Carbon
+	[DllImport (CarbonLib)]
+	static extern int Gestalt (int selector, out int result);
+
+	public static int Gestalt (string selector)
 	{
-		public const string CarbonLib = "/System/Library/Frameworks/Carbon.framework/Versions/Current/Carbon";
+		int cc = ConvertCharCode (selector);
+		int result;
+		int ret = Gestalt (cc, out result);
+		CheckReturn (ret);
+		return result;
+	}
 
-		[DllImport (CarbonLib)]
-		static extern int Gestalt (int selector, out int result);
+	[DllImport (CarbonLib)]
+	public static extern IntPtr GetApplicationEventTarget ();
 
-		public static int Gestalt (string selector)
-		{
-			int cc = ConvertCharCode (selector);
-			int result;
-			int ret = Gestalt (cc, out result);
-			CheckReturn (ret);
-			return result;
-		}
+	[DllImport (CarbonLib)]
+	public static extern IntPtr GetControlEventTarget (IntPtr control);
 
-		[DllImport (CarbonLib)]
-		public static extern IntPtr GetApplicationEventTarget ();
+	[DllImport (CarbonLib)]
+	public static extern IntPtr GetWindowEventTarget (IntPtr window);
 
-		[DllImport (CarbonLib)]
-		public static extern IntPtr GetControlEventTarget (IntPtr control);
+	[DllImport (CarbonLib)]
+	public static extern IntPtr GetMenuEventTarget (IntPtr menu);
 
-		[DllImport (CarbonLib)]
-		public static extern IntPtr GetWindowEventTarget (IntPtr window);
+	[DllImport (CarbonLib)]
+	public static extern CarbonEventClass GetEventClass (IntPtr eventref);
 
-		[DllImport (CarbonLib)]
-		public static extern IntPtr GetMenuEventTarget (IntPtr menu);
+	[DllImport (CarbonLib)]
+	public static extern uint GetEventKind (IntPtr eventref);
 
-		[DllImport (CarbonLib)]
-		public static extern CarbonEventClass GetEventClass (IntPtr eventref);
+	#region Event handler installation
 
-		[DllImport (CarbonLib)]
-		public static extern uint GetEventKind (IntPtr eventref);
+	[DllImport (CarbonLib)]
+	static extern EventStatus InstallEventHandler (IntPtr target, EventDelegate handler, uint count,
+						       CarbonEventTypeSpec[] types, IntPtr user_data, out IntPtr handlerRef);
 
-		#region Event handler installation
+	[DllImport (CarbonLib)]
+	public static extern EventStatus RemoveEventHandler (IntPtr handlerRef);
 
-		[DllImport (CarbonLib)]
-		static extern EventStatus InstallEventHandler (IntPtr target, EventDelegate handler, uint count,
-							       CarbonEventTypeSpec[] types, IntPtr user_data, out IntPtr handlerRef);
+	public static IntPtr InstallEventHandler (IntPtr target, EventDelegate handler, CarbonEventTypeSpec[] types)
+	{
+		IntPtr handlerRef;
+		CheckReturn (InstallEventHandler (target, handler, (uint) types.Length, types, IntPtr.Zero, out handlerRef));
+		return handlerRef;
+	}
 
-		[DllImport (CarbonLib)]
-		public static extern EventStatus RemoveEventHandler (IntPtr handlerRef);
+	public static IntPtr InstallEventHandler (IntPtr target, EventDelegate handler, CarbonEventTypeSpec type)
+	{
+		return InstallEventHandler (target, handler, new CarbonEventTypeSpec[] { type });
+	}
 
-		public static IntPtr InstallEventHandler (IntPtr target, EventDelegate handler, CarbonEventTypeSpec[] types)
-		{
-			IntPtr handlerRef;
-			CheckReturn (InstallEventHandler (target, handler, (uint) types.Length, types, IntPtr.Zero, out handlerRef));
-			return handlerRef;
-		}
+	public static IntPtr InstallApplicationEventHandler (EventDelegate handler, CarbonEventTypeSpec[] types)
+	{
+		return InstallEventHandler (GetApplicationEventTarget (), handler, types);
+	}
 
-		public static IntPtr InstallEventHandler (IntPtr target, EventDelegate handler, CarbonEventTypeSpec type)
-		{
-			return InstallEventHandler (target, handler, new CarbonEventTypeSpec[] { type });
-		}
+	public static IntPtr InstallApplicationEventHandler (EventDelegate handler, CarbonEventTypeSpec type)
+	{
+		return InstallEventHandler (GetApplicationEventTarget (), handler, new CarbonEventTypeSpec[] { type });
+	}
 
-		public static IntPtr InstallApplicationEventHandler (EventDelegate handler, CarbonEventTypeSpec[] types)
-		{
-			return InstallEventHandler (GetApplicationEventTarget (), handler, types);
-		}
+	#endregion
 
-		public static IntPtr InstallApplicationEventHandler (EventDelegate handler, CarbonEventTypeSpec type)
-		{
-			return InstallEventHandler (GetApplicationEventTarget (), handler, new CarbonEventTypeSpec[] { type });
-		}
+	#region Event parameter extraction
 
-		#endregion
+	[DllImport (CarbonLib)]
+	public static extern EventStatus GetEventParameter (IntPtr eventRef, CarbonEventParameterName name, CarbonEventParameterType desiredType,
+							    out CarbonEventParameterType actualType, uint size, ref uint outSize, ref IntPtr outPtr);
 
-		#region Event parameter extraction
+	public static IntPtr GetEventParameter (IntPtr eventRef, CarbonEventParameterName name, CarbonEventParameterType desiredType)
+	{
+		CarbonEventParameterType actualType;
+		uint outSize = 0;
+		IntPtr val = IntPtr.Zero;
+		CheckReturn (GetEventParameter (eventRef, name, desiredType, out actualType, (uint) IntPtr.Size, ref outSize, ref val));
+		return val;
+	}
 
-		[DllImport (CarbonLib)]
-		public static extern EventStatus GetEventParameter (IntPtr eventRef, CarbonEventParameterName name, CarbonEventParameterType desiredType,
-								    out CarbonEventParameterType actualType, uint size, ref uint outSize, ref IntPtr outPtr);
+	[DllImport (CarbonLib)]
+	static extern EventStatus GetEventParameter (IntPtr eventRef, CarbonEventParameterName name, CarbonEventParameterType desiredType,
+						     out CarbonEventParameterType actualType, uint size, ref uint outSize, IntPtr dataBuffer);
 
-		public static IntPtr GetEventParameter (IntPtr eventRef, CarbonEventParameterName name, CarbonEventParameterType desiredType)
-		{
-			CarbonEventParameterType actualType;
-			uint outSize = 0;
-			IntPtr val = IntPtr.Zero;
-			CheckReturn (GetEventParameter (eventRef, name, desiredType, out actualType, (uint) IntPtr.Size, ref outSize, ref val));
-			return val;
-		}
+	[DllImport (CarbonLib)]
+	static extern EventStatus GetEventParameter (IntPtr eventRef, CarbonEventParameterName name, CarbonEventParameterType desiredType,
+						     uint zero, uint size, uint zero2, IntPtr dataBuffer);
 
-		[DllImport (CarbonLib)]
-		static extern EventStatus GetEventParameter (IntPtr eventRef, CarbonEventParameterName name, CarbonEventParameterType desiredType,
-							     out CarbonEventParameterType actualType, uint size, ref uint outSize, IntPtr dataBuffer);
+	public static T GetEventParameter<T> (IntPtr eventRef, CarbonEventParameterName name, CarbonEventParameterType desiredType) where T : struct
+	{
+		int len = Marshal.SizeOf (typeof (T));
+		IntPtr bufferPtr = Marshal.AllocHGlobal (len);
+		CheckReturn (GetEventParameter (eventRef, name, desiredType, 0, (uint) len, 0, bufferPtr));
+		T val = (T) Marshal.PtrToStructure (bufferPtr, typeof (T))!; // NRT - Not sure
+		Marshal.FreeHGlobal (bufferPtr);
+		return val;
+	}
 
-		[DllImport (CarbonLib)]
-		static extern EventStatus GetEventParameter (IntPtr eventRef, CarbonEventParameterName name, CarbonEventParameterType desiredType,
-							     uint zero, uint size, uint zero2, IntPtr dataBuffer);
+	#endregion
 
-		public static T GetEventParameter<T> (IntPtr eventRef, CarbonEventParameterName name, CarbonEventParameterType desiredType) where T : struct
-		{
-			int len = Marshal.SizeOf (typeof (T));
-			IntPtr bufferPtr = Marshal.AllocHGlobal (len);
-			CheckReturn (GetEventParameter (eventRef, name, desiredType, 0, (uint) len, 0, bufferPtr));
-			T val = (T) Marshal.PtrToStructure (bufferPtr, typeof (T))!; // NRT - Not sure
-			Marshal.FreeHGlobal (bufferPtr);
-			return val;
-		}
+	#region Sending events
 
-		#endregion
+	[DllImport (CarbonLib)]
+	static extern EventStatus SendEventToEventTarget (IntPtr eventRef, IntPtr eventTarget);
 
-		#region Sending events
+	[DllImport (CarbonLib)]
+	static extern EventStatus CreateEvent (IntPtr allocator, CarbonEventClass classID, uint kind, double eventTime,
+					       CarbonEventAttributes flags, out IntPtr eventHandle);
 
-		[DllImport (CarbonLib)]
-		static extern EventStatus SendEventToEventTarget (IntPtr eventRef, IntPtr eventTarget);
+	[DllImport (CarbonLib)]
+	static extern void ReleaseEvent (IntPtr eventHandle);
 
-		[DllImport (CarbonLib)]
-		static extern EventStatus CreateEvent (IntPtr allocator, CarbonEventClass classID, uint kind, double eventTime,
-						       CarbonEventAttributes flags, out IntPtr eventHandle);
-
-		[DllImport (CarbonLib)]
-		static extern void ReleaseEvent (IntPtr eventHandle);
-
-		static EventStatus SendApplicationEvent (CarbonEventClass classID, uint kind, CarbonEventAttributes flags)
-		{
-			IntPtr eventHandle;
-			EventStatus s = CreateEvent (IntPtr.Zero, classID, kind, 0, flags, out eventHandle);
-			if (s != EventStatus.Ok)
-				return s;
-			s = SendEventToEventTarget (eventHandle, GetApplicationEventTarget ());
-			ReleaseEvent (eventHandle);
+	static EventStatus SendApplicationEvent (CarbonEventClass classID, uint kind, CarbonEventAttributes flags)
+	{
+		IntPtr eventHandle;
+		EventStatus s = CreateEvent (IntPtr.Zero, classID, kind, 0, flags, out eventHandle);
+		if (s != EventStatus.Ok)
 			return s;
-		}
+		s = SendEventToEventTarget (eventHandle, GetApplicationEventTarget ());
+		ReleaseEvent (eventHandle);
+		return s;
+	}
 
-		[DllImport (CarbonLib)]
-		public static extern CarbonEventHandlerStatus ProcessHICommand (ref CarbonHICommand command);
+	[DllImport (CarbonLib)]
+	public static extern CarbonEventHandlerStatus ProcessHICommand (ref CarbonHICommand command);
 
-		#endregion
+	#endregion
 
-		#region Error checking
+	#region Error checking
 
-		public static void CheckReturn (EventStatus status)
-		{
-			int intStatus = (int) status;
-			if (intStatus < 0)
-				throw new EventStatusException (status);
-		}
+	public static void CheckReturn (EventStatus status)
+	{
+		int intStatus = (int) status;
+		if (intStatus < 0)
+			throw new EventStatusException (status);
+	}
 
-		public static void CheckReturn (int osErr)
-		{
-			if (osErr == 0)
-				return;
-			string s = GetMacOSStatusCommentString (osErr);
-			throw new SystemException ("Unexpected OS error code " + osErr + ": " + s);
-		}
+	public static void CheckReturn (int osErr)
+	{
+		if (osErr == 0)
+			return;
+		string s = GetMacOSStatusCommentString (osErr);
+		throw new SystemException ("Unexpected OS error code " + osErr + ": " + s);
+	}
 
-		[DllImport (CarbonLib)]
-		static extern string GetMacOSStatusCommentString (int osErr);
+	[DllImport (CarbonLib)]
+	static extern string GetMacOSStatusCommentString (int osErr);
 
-		#endregion
+	#endregion
 
-		#region Char code conversion
+	#region Char code conversion
 
-		internal static int ConvertCharCode (string fourcc)
-		{
-			Debug.Assert (fourcc != null);
-			Debug.Assert (fourcc.Length == 4);
-			return (fourcc[3]) | (fourcc[2] << 8) | (fourcc[1] << 16) | (fourcc[0] << 24);
-		}
+	internal static int ConvertCharCode (string fourcc)
+	{
+		Debug.Assert (fourcc != null);
+		Debug.Assert (fourcc.Length == 4);
+		return (fourcc[3]) | (fourcc[2] << 8) | (fourcc[1] << 16) | (fourcc[0] << 24);
+	}
 
-		internal static string UnConvertCharCode (int i)
-		{
-			return new string (new char[] {
-				(char)(i >> 24),
-				(char)(0xFF & (i >> 16)),
-				(char)(0xFF & (i >> 8)),
-				(char)(0xFF & i),
-			});
-		}
+	internal static string UnConvertCharCode (int i)
+	{
+		return new string (new char[] {
+			(char)(i >> 24),
+			(char)(0xFF & (i >> 16)),
+			(char)(0xFF & (i >> 8)),
+			(char)(0xFF & i),
+		});
+	}
 
-		#endregion
+	#endregion
 
-		public static Dictionary<string, int> GetFileListFromEventRef (IntPtr eventRef)
-		{
-			AEDesc list = GetEventParameter<AEDesc> (eventRef, CarbonEventParameterName.DirectObject, CarbonEventParameterType.AEList);
+	public static Dictionary<string, int> GetFileListFromEventRef (IntPtr eventRef)
+	{
+		AEDesc list = GetEventParameter<AEDesc> (eventRef, CarbonEventParameterName.DirectObject, CarbonEventParameterType.AEList);
+		try {
+			int line;
 			try {
-				int line;
-				try {
-					SelectionRange range = GetEventParameter<SelectionRange> (eventRef, CarbonEventParameterName.AEPosition, CarbonEventParameterType.Char);
-					line = range.lineNum + 1;
-				} catch (Exception) {
-					line = 0;
-				}
-
-				var arr = AppleEvent.GetListFromAEDesc<string?, FSRef> (ref list, CoreFoundation.FSRefToString,
-					(OSType) (int) CarbonEventParameterType.FSRef);
-				var files = new Dictionary<string, int> ();
-				foreach (var s in arr) {
-					if (string.IsNullOrEmpty (s))
-						continue;
-					files[s] = line;
-				}
-				return files;
-			} finally {
-				CheckReturn ((int) AppleEvent.AEDisposeDesc (ref list));
+				SelectionRange range = GetEventParameter<SelectionRange> (eventRef, CarbonEventParameterName.AEPosition, CarbonEventParameterType.Char);
+				line = range.lineNum + 1;
+			} catch (Exception) {
+				line = 0;
 			}
-		}
 
-		public static IList<string> GetUrlListFromEventRef (IntPtr eventRef)
-		{
-			AEDesc list = GetEventParameter<AEDesc> (eventRef, CarbonEventParameterName.DirectObject, CarbonEventParameterType.AEList);
-			try {
-				return AppleEvent.GetUtf8StringListFromAEDesc (ref list, true);
-			} finally {
-				Carbon.CheckReturn ((int) AppleEvent.AEDisposeDesc (ref list));
+			var arr = AppleEvent.GetListFromAEDesc<string?, FSRef> (ref list, CoreFoundation.FSRefToString,
+				(OSType) (int) CarbonEventParameterType.FSRef);
+			var files = new Dictionary<string, int> ();
+			foreach (var s in arr) {
+				if (string.IsNullOrEmpty (s))
+					continue;
+				files[s] = line;
 			}
+			return files;
+		} finally {
+			CheckReturn ((int) AppleEvent.AEDisposeDesc (ref list));
 		}
 	}
 
-	[StructLayout (LayoutKind.Sequential, Pack = 2, Size = 80)]
-	struct FSRef
+	public static IList<string> GetUrlListFromEventRef (IntPtr eventRef)
 	{
-		//this is an 80-char opaque byte array
+		AEDesc list = GetEventParameter<AEDesc> (eventRef, CarbonEventParameterName.DirectObject, CarbonEventParameterType.AEList);
+		try {
+			return AppleEvent.GetUtf8StringListFromAEDesc (ref list, true);
+		} finally {
+			Carbon.CheckReturn ((int) AppleEvent.AEDisposeDesc (ref list));
+		}
+	}
+}
+
+[StructLayout (LayoutKind.Sequential, Pack = 2, Size = 80)]
+struct FSRef
+{
+	//this is an 80-char opaque byte array
 #pragma warning disable 0169
-		private readonly byte hidden;
+	private readonly byte hidden;
 #pragma warning restore 0169
+}
+
+[StructLayout (LayoutKind.Sequential)]
+struct SelectionRange
+{
+	public short unused1; // 0 (not used)
+	public short lineNum; // line to select (<0 to specify range)
+	public int startRange; // start of selection range (if line < 0)
+	public int endRange; // end of selection range (if line < 0)
+	public int unused2; // 0 (not used)
+	public int theDate; // modification date/time
+}
+
+internal enum CarbonEventHandlerStatus //this is an OSStatus
+{
+	Handled = 0,
+	NotHandled = -9874,
+	UserCancelled = -128,
+}
+
+internal enum CarbonEventParameterName : uint
+{
+	DirectObject = 757935405, // '----'
+	AEPosition = 1802530675, // 'kpos'
+}
+
+internal enum CarbonEventParameterType : uint
+{
+	HICommand = 1751346532, // 'hcmd'
+	MenuRef = 1835363957, // 'menu'
+	WindowRef = 2003398244, // 'wind'
+	Char = 1413830740, // 'TEXT'
+	UInt32 = 1835100014, // 'magn'
+	UTF8Text = 1970562616, // 'utf8'
+	UnicodeText = 1970567284, // 'utxt'
+	AEList = 1818850164, // 'list'
+	WildCard = 707406378, // '****'
+	FSRef = 1718841958, // 'fsrf' 
+}
+
+internal enum CarbonEventClass : uint
+{
+	Mouse = 1836021107, // 'mous'
+	Keyboard = 1801812322, // 'keyb'
+	TextInput = 1952807028, // 'text'
+	Application = 1634758764, // 'appl'
+	RemoteAppleEvent = 1701867619,  //'eppc' //remote apple event?
+	Menu = 1835363957, // 'menu'
+	Window = 2003398244, // 'wind'
+	Control = 1668183148, // 'cntl'
+	Command = 1668113523, // 'cmds'
+	Tablet = 1952607348, // 'tblt'
+	Volume = 1987013664, // 'vol '
+	Appearance = 1634758765, // 'appm'
+	Service = 1936028278, // 'serv'
+	Toolbar = 1952604530, // 'tbar'
+	ToolbarItem = 1952606580, // 'tbit'
+	Accessibility = 1633903461, // 'acce'
+	HIObject = 1751740258, // 'hiob'
+	AppleEvent = 1634039412, // 'aevt'
+	Internet = 1196773964, // 'GURL'
+}
+
+public enum CarbonCommandID : uint
+{
+	OK = 1869291552, // 'ok  '
+	Cancel = 1852797985, // 'not!'
+	Quit = 1903520116, // 'quit'
+	Undo = 1970168943, // 'undo'
+	Redo = 1919247471, // 'redo'
+	Cut = 1668641824, // 'cut '
+	Copy = 1668247673, // 'copy'
+	Paste = 1885434740, // 'past'
+	Clear = 1668048225, // 'clea',
+	SelectAll = 1935764588, // 'sall',
+	Preferences = 1886545254, //'pref'
+	About = 1633841013, // 'abou'
+	New = 1852143392, // 'new ',
+	Open = 1869636974, // 'open'
+	Close = 1668050803, // 'clos'
+	Save = 1935767141, // 'save',
+	SaveAs = 1937138035, // 'svas'
+	Revert = 1920365172, // 'rvrt'
+	Print = 1886547572, // 'prnt'
+	PageSetup = 1885431653, // 'page',
+	AppHelp = 1634233456, //'ahlp'
+
+	//menu manager handles these automatically
+
+	Hide = 1751737445, // 'hide'
+	HideOthers = 1751737455, // 'hido'
+	ShowAll = 1936220524, // 'shal'
+	ZoomWindow = 2054123373, // 'zoom'
+	MinimizeWindow = 1835626089, // 'mini'
+	MinimizeAll = 1835626081, // 'mina'
+	MaximizeAll = 1835104353, // 'maxa'
+	ArrangeInFront = 1718775412, // 'frnt'
+	BringAllToFront = 1650881140, // 'bfrt'
+	SelectWindow = 1937205614, // 'swin'
+	RotateWindowsForward = 1919906935, // 'rotw'
+	RotateWindowsBackward = 1919906914, // 'rotb'
+	RotateFloatingWindowsForward = 1920231031, // 'rtfw'
+	RotateFloatingWindowsBackward = 1920231010, // 'rtfb'
+	QuitAndCloseAllWindows = 1903520631, // 'qukw'
+
+	//created automatically -- used for inserting before/after the default window list
+	WindowListSeparator = 2003592310, // 'wldv'
+	WindowListTerminator = 2003596148, // 'wlst'
+}
+
+internal enum CarbonEventCommand : uint
+{
+	Process = 1,
+	UpdateStatus = 2,
+}
+
+internal enum CarbonEventMenu : uint
+{
+	BeginTracking = 1,
+	EndTracking = 2,
+	ChangeTrackingMode = 3,
+	Opening = 4,
+	Closed = 5,
+	TargetItem = 6,
+	MatchKey = 7,
+}
+
+internal enum CarbonEventAttributes : uint
+{
+	None = 0,
+	UserEvent = (1 << 0),
+	Monitored = 1 << 3,
+}
+
+internal enum CarbonEventApple
+{
+	OpenApplication = 1868656752, // 'oapp'
+	ReopenApplication = 1918988400, //'rapp'
+	OpenDocuments = 1868853091, // 'odoc'
+	PrintDocuments = 188563030, // 'pdoc'
+	OpenContents = 1868787566, // 'ocon'
+	QuitApplication = 1903520116, // 'quit'
+	ShowPreferences = 1886545254, // 'pref'
+	ApplicationDied = 1868720500, // 'obit'
+	GetUrl = 1196773964, // 'GURL'
+}
+
+[StructLayout (LayoutKind.Sequential, Pack = 2)]
+struct CarbonEventTypeSpec
+{
+	public CarbonEventClass EventClass;
+	public uint EventKind;
+
+	public CarbonEventTypeSpec (CarbonEventClass eventClass, UInt32 eventKind)
+	{
+		this.EventClass = eventClass;
+		this.EventKind = eventKind;
 	}
 
-	[StructLayout (LayoutKind.Sequential)]
-	struct SelectionRange
+	public CarbonEventTypeSpec (CarbonEventMenu kind) : this (CarbonEventClass.Menu, (uint) kind)
 	{
-		public short unused1; // 0 (not used)
-		public short lineNum; // line to select (<0 to specify range)
-		public int startRange; // start of selection range (if line < 0)
-		public int endRange; // end of selection range (if line < 0)
-		public int unused2; // 0 (not used)
-		public int theDate; // modification date/time
 	}
 
-	internal enum CarbonEventHandlerStatus //this is an OSStatus
+	public CarbonEventTypeSpec (CarbonEventCommand kind) : this (CarbonEventClass.Command, (uint) kind)
 	{
-		Handled = 0,
-		NotHandled = -9874,
-		UserCancelled = -128,
 	}
 
-	internal enum CarbonEventParameterName : uint
+
+	public CarbonEventTypeSpec (CarbonEventApple kind) : this (CarbonEventClass.AppleEvent, (uint) kind)
 	{
-		DirectObject = 757935405, // '----'
-		AEPosition = 1802530675, // 'kpos'
 	}
 
-	internal enum CarbonEventParameterType : uint
+	public static implicit operator CarbonEventTypeSpec (CarbonEventMenu kind)
 	{
-		HICommand = 1751346532, // 'hcmd'
-		MenuRef = 1835363957, // 'menu'
-		WindowRef = 2003398244, // 'wind'
-		Char = 1413830740, // 'TEXT'
-		UInt32 = 1835100014, // 'magn'
-		UTF8Text = 1970562616, // 'utf8'
-		UnicodeText = 1970567284, // 'utxt'
-		AEList = 1818850164, // 'list'
-		WildCard = 707406378, // '****'
-		FSRef = 1718841958, // 'fsrf' 
+		return new CarbonEventTypeSpec (kind);
 	}
 
-	internal enum CarbonEventClass : uint
+	public static implicit operator CarbonEventTypeSpec (CarbonEventCommand kind)
 	{
-		Mouse = 1836021107, // 'mous'
-		Keyboard = 1801812322, // 'keyb'
-		TextInput = 1952807028, // 'text'
-		Application = 1634758764, // 'appl'
-		RemoteAppleEvent = 1701867619,  //'eppc' //remote apple event?
-		Menu = 1835363957, // 'menu'
-		Window = 2003398244, // 'wind'
-		Control = 1668183148, // 'cntl'
-		Command = 1668113523, // 'cmds'
-		Tablet = 1952607348, // 'tblt'
-		Volume = 1987013664, // 'vol '
-		Appearance = 1634758765, // 'appm'
-		Service = 1936028278, // 'serv'
-		Toolbar = 1952604530, // 'tbar'
-		ToolbarItem = 1952606580, // 'tbit'
-		Accessibility = 1633903461, // 'acce'
-		HIObject = 1751740258, // 'hiob'
-		AppleEvent = 1634039412, // 'aevt'
-		Internet = 1196773964, // 'GURL'
+		return new CarbonEventTypeSpec (kind);
 	}
 
-	public enum CarbonCommandID : uint
+	public static implicit operator CarbonEventTypeSpec (CarbonEventApple kind)
 	{
-		OK = 1869291552, // 'ok  '
-		Cancel = 1852797985, // 'not!'
-		Quit = 1903520116, // 'quit'
-		Undo = 1970168943, // 'undo'
-		Redo = 1919247471, // 'redo'
-		Cut = 1668641824, // 'cut '
-		Copy = 1668247673, // 'copy'
-		Paste = 1885434740, // 'past'
-		Clear = 1668048225, // 'clea',
-		SelectAll = 1935764588, // 'sall',
-		Preferences = 1886545254, //'pref'
-		About = 1633841013, // 'abou'
-		New = 1852143392, // 'new ',
-		Open = 1869636974, // 'open'
-		Close = 1668050803, // 'clos'
-		Save = 1935767141, // 'save',
-		SaveAs = 1937138035, // 'svas'
-		Revert = 1920365172, // 'rvrt'
-		Print = 1886547572, // 'prnt'
-		PageSetup = 1885431653, // 'page',
-		AppHelp = 1634233456, //'ahlp'
+		return new CarbonEventTypeSpec (kind);
+	}
+}
 
-		//menu manager handles these automatically
-
-		Hide = 1751737445, // 'hide'
-		HideOthers = 1751737455, // 'hido'
-		ShowAll = 1936220524, // 'shal'
-		ZoomWindow = 2054123373, // 'zoom'
-		MinimizeWindow = 1835626089, // 'mini'
-		MinimizeAll = 1835626081, // 'mina'
-		MaximizeAll = 1835104353, // 'maxa'
-		ArrangeInFront = 1718775412, // 'frnt'
-		BringAllToFront = 1650881140, // 'bfrt'
-		SelectWindow = 1937205614, // 'swin'
-		RotateWindowsForward = 1919906935, // 'rotw'
-		RotateWindowsBackward = 1919906914, // 'rotb'
-		RotateFloatingWindowsForward = 1920231031, // 'rtfw'
-		RotateFloatingWindowsBackward = 1920231010, // 'rtfb'
-		QuitAndCloseAllWindows = 1903520631, // 'qukw'
-
-		//created automatically -- used for inserting before/after the default window list
-		WindowListSeparator = 2003592310, // 'wldv'
-		WindowListTerminator = 2003596148, // 'wlst'
+class EventStatusException : SystemException
+{
+	public EventStatusException (EventStatus status)
+	{
+		StatusCode = status;
 	}
 
-	internal enum CarbonEventCommand : uint
+	public EventStatus StatusCode { get; }
+}
+
+enum EventStatus // this is an OSStatus
+{
+	Ok = 0,
+
+	//event manager
+	EventAlreadyPostedErr = -9860,
+	EventTargetBusyErr = -9861,
+	EventClassInvalidErr = -9862,
+	EventClassIncorrectErr = -9864,
+	EventHandlerAlreadyInstalledErr = -9866,
+	EventInternalErr = -9868,
+	EventKindIncorrectErr = -9869,
+	EventParameterNotFoundErr = -9870,
+	EventNotHandledErr = -9874,
+	EventLoopTimedOutErr = -9875,
+	EventLoopQuitErr = -9876,
+	EventNotInQueueErr = -9877,
+	EventHotKeyExistsErr = -9878,
+	EventHotKeyInvalidErr = -9879,
+}
+
+[StructLayout (LayoutKind.Explicit)]
+struct CarbonHICommand //technically HICommandExtended, but they're compatible
+{
+	[FieldOffset (0)]
+	readonly CarbonHICommandAttributes attributes;
+
+	[FieldOffset (4)]
+	readonly uint commandID;
+
+	[FieldOffset (8)]
+	readonly IntPtr controlRef;
+
+	[FieldOffset (8)]
+	readonly IntPtr windowRef;
+
+	[FieldOffset (8)]
+	HIMenuItem menuItem;
+
+	public CarbonHICommand (uint commandID, HIMenuItem item)
 	{
-		Process = 1,
-		UpdateStatus = 2,
+		windowRef = controlRef = IntPtr.Zero;
+		this.commandID = commandID;
+		this.menuItem = item;
+		this.attributes = CarbonHICommandAttributes.FromMenu;
 	}
 
-	internal enum CarbonEventMenu : uint
+	public readonly CarbonHICommandAttributes Attributes => attributes;
+	public readonly uint CommandID => commandID;
+	public readonly IntPtr ControlRef => controlRef;
+	public readonly IntPtr WindowRef => windowRef;
+	public readonly HIMenuItem MenuItem => menuItem;
+
+	public readonly bool IsFromMenu => attributes == CarbonHICommandAttributes.FromMenu;
+
+	public readonly bool IsFromControl => attributes == CarbonHICommandAttributes.FromControl;
+
+	public readonly bool IsFromWindow => attributes == CarbonHICommandAttributes.FromWindow;
+}
+
+[StructLayout (LayoutKind.Sequential, Pack = 2)]
+struct HIMenuItem
+{
+	readonly IntPtr menuRef;
+	readonly ushort index;
+
+	public HIMenuItem (IntPtr menuRef, ushort index)
 	{
-		BeginTracking = 1,
-		EndTracking = 2,
-		ChangeTrackingMode = 3,
-		Opening = 4,
-		Closed = 5,
-		TargetItem = 6,
-		MatchKey = 7,
+		this.index = index;
+		this.menuRef = menuRef;
 	}
 
-	internal enum CarbonEventAttributes : uint
+	public readonly IntPtr MenuRef => menuRef;
+	public readonly ushort Index => index;
+}
+
+//*NOT* flags
+enum CarbonHICommandAttributes : uint
+{
+	FromMenu = 1,
+	FromControl = 1 << 1,
+	FromWindow = 1 << 2,
+}
+
+struct OSType
+{
+	readonly int value;
+
+	public readonly int Value => value;
+
+	public OSType (int value)
 	{
-		None = 0,
-		UserEvent = (1 << 0),
-		Monitored = 1 << 3,
+		this.value = value;
 	}
 
-	internal enum CarbonEventApple
+	public OSType (string fourcc)
 	{
-		OpenApplication = 1868656752, // 'oapp'
-		ReopenApplication = 1918988400, //'rapp'
-		OpenDocuments = 1868853091, // 'odoc'
-		PrintDocuments = 188563030, // 'pdoc'
-		OpenContents = 1868787566, // 'ocon'
-		QuitApplication = 1903520116, // 'quit'
-		ShowPreferences = 1886545254, // 'pref'
-		ApplicationDied = 1868720500, // 'obit'
-		GetUrl = 1196773964, // 'GURL'
+		value = Carbon.ConvertCharCode (fourcc);
 	}
 
-	[StructLayout (LayoutKind.Sequential, Pack = 2)]
-	struct CarbonEventTypeSpec
+	public static explicit operator OSType (string fourcc)
 	{
-		public CarbonEventClass EventClass;
-		public uint EventKind;
-
-		public CarbonEventTypeSpec (CarbonEventClass eventClass, UInt32 eventKind)
-		{
-			this.EventClass = eventClass;
-			this.EventKind = eventKind;
-		}
-
-		public CarbonEventTypeSpec (CarbonEventMenu kind) : this (CarbonEventClass.Menu, (uint) kind)
-		{
-		}
-
-		public CarbonEventTypeSpec (CarbonEventCommand kind) : this (CarbonEventClass.Command, (uint) kind)
-		{
-		}
-
-
-		public CarbonEventTypeSpec (CarbonEventApple kind) : this (CarbonEventClass.AppleEvent, (uint) kind)
-		{
-		}
-
-		public static implicit operator CarbonEventTypeSpec (CarbonEventMenu kind)
-		{
-			return new CarbonEventTypeSpec (kind);
-		}
-
-		public static implicit operator CarbonEventTypeSpec (CarbonEventCommand kind)
-		{
-			return new CarbonEventTypeSpec (kind);
-		}
-
-		public static implicit operator CarbonEventTypeSpec (CarbonEventApple kind)
-		{
-			return new CarbonEventTypeSpec (kind);
-		}
+		return new OSType (fourcc);
 	}
 
-	class EventStatusException : SystemException
+	public static implicit operator int (OSType o)
 	{
-		public EventStatusException (EventStatus status)
-		{
-			StatusCode = status;
-		}
-
-		public EventStatus StatusCode { get; }
+		return o.value;
 	}
 
-	enum EventStatus // this is an OSStatus
+	public static implicit operator OSType (int i)
 	{
-		Ok = 0,
-
-		//event manager
-		EventAlreadyPostedErr = -9860,
-		EventTargetBusyErr = -9861,
-		EventClassInvalidErr = -9862,
-		EventClassIncorrectErr = -9864,
-		EventHandlerAlreadyInstalledErr = -9866,
-		EventInternalErr = -9868,
-		EventKindIncorrectErr = -9869,
-		EventParameterNotFoundErr = -9870,
-		EventNotHandledErr = -9874,
-		EventLoopTimedOutErr = -9875,
-		EventLoopQuitErr = -9876,
-		EventNotInQueueErr = -9877,
-		EventHotKeyExistsErr = -9878,
-		EventHotKeyInvalidErr = -9879,
-	}
-
-	[StructLayout (LayoutKind.Explicit)]
-	struct CarbonHICommand //technically HICommandExtended, but they're compatible
-	{
-		[FieldOffset (0)]
-		readonly CarbonHICommandAttributes attributes;
-
-		[FieldOffset (4)]
-		readonly uint commandID;
-
-		[FieldOffset (8)]
-		readonly IntPtr controlRef;
-
-		[FieldOffset (8)]
-		readonly IntPtr windowRef;
-
-		[FieldOffset (8)]
-		HIMenuItem menuItem;
-
-		public CarbonHICommand (uint commandID, HIMenuItem item)
-		{
-			windowRef = controlRef = IntPtr.Zero;
-			this.commandID = commandID;
-			this.menuItem = item;
-			this.attributes = CarbonHICommandAttributes.FromMenu;
-		}
-
-		public readonly CarbonHICommandAttributes Attributes => attributes;
-		public readonly uint CommandID => commandID;
-		public readonly IntPtr ControlRef => controlRef;
-		public readonly IntPtr WindowRef => windowRef;
-		public readonly HIMenuItem MenuItem => menuItem;
-
-		public readonly bool IsFromMenu => attributes == CarbonHICommandAttributes.FromMenu;
-
-		public readonly bool IsFromControl => attributes == CarbonHICommandAttributes.FromControl;
-
-		public readonly bool IsFromWindow => attributes == CarbonHICommandAttributes.FromWindow;
-	}
-
-	[StructLayout (LayoutKind.Sequential, Pack = 2)]
-	struct HIMenuItem
-	{
-		readonly IntPtr menuRef;
-		readonly ushort index;
-
-		public HIMenuItem (IntPtr menuRef, ushort index)
-		{
-			this.index = index;
-			this.menuRef = menuRef;
-		}
-
-		public readonly IntPtr MenuRef => menuRef;
-		public readonly ushort Index => index;
-	}
-
-	//*NOT* flags
-	enum CarbonHICommandAttributes : uint
-	{
-		FromMenu = 1,
-		FromControl = 1 << 1,
-		FromWindow = 1 << 2,
-	}
-
-	struct OSType
-	{
-		readonly int value;
-
-		public readonly int Value => value;
-
-		public OSType (int value)
-		{
-			this.value = value;
-		}
-
-		public OSType (string fourcc)
-		{
-			value = Carbon.ConvertCharCode (fourcc);
-		}
-
-		public static explicit operator OSType (string fourcc)
-		{
-			return new OSType (fourcc);
-		}
-
-		public static implicit operator int (OSType o)
-		{
-			return o.value;
-		}
-
-		public static implicit operator OSType (int i)
-		{
-			return new OSType (i);
-		}
+		return new OSType (i);
 	}
 }
