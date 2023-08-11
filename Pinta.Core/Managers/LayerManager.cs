@@ -27,46 +27,45 @@
 using System;
 using System.ComponentModel;
 
-namespace Pinta.Core
+namespace Pinta.Core;
+
+public class LayerManager
 {
-	public class LayerManager
+	#region Protected Methods
+	protected internal void OnLayerAdded ()
 	{
-		#region Protected Methods
-		protected internal void OnLayerAdded ()
-		{
-			if (LayerAdded != null)
-				LayerAdded.Invoke (this, EventArgs.Empty);
-		}
-
-		protected internal void OnLayerRemoved ()
-		{
-			if (LayerRemoved != null)
-				LayerRemoved.Invoke (this, EventArgs.Empty);
-		}
-
-		protected internal void OnSelectedLayerChanged ()
-		{
-			if (SelectedLayerChanged != null)
-				SelectedLayerChanged.Invoke (this, EventArgs.Empty);
-		}
-		#endregion
-
-		#region Private Methods
-		internal void RaiseLayerPropertyChangedEvent (object? sender, PropertyChangedEventArgs e)
-		{
-			if (LayerPropertyChanged != null)
-				LayerPropertyChanged (sender, e);
-
-			//TODO Get the workspace to subscribe to this event, and invalidate itself.
-			PintaCore.Workspace.Invalidate ();
-		}
-		#endregion
-
-		#region Events
-		public event EventHandler? LayerAdded;
-		public event EventHandler? LayerRemoved;
-		public event EventHandler? SelectedLayerChanged;
-		public event PropertyChangedEventHandler? LayerPropertyChanged;
-		#endregion
+		if (LayerAdded != null)
+			LayerAdded.Invoke (this, EventArgs.Empty);
 	}
+
+	protected internal void OnLayerRemoved ()
+	{
+		if (LayerRemoved != null)
+			LayerRemoved.Invoke (this, EventArgs.Empty);
+	}
+
+	protected internal void OnSelectedLayerChanged ()
+	{
+		if (SelectedLayerChanged != null)
+			SelectedLayerChanged.Invoke (this, EventArgs.Empty);
+	}
+	#endregion
+
+	#region Private Methods
+	internal void RaiseLayerPropertyChangedEvent (object? sender, PropertyChangedEventArgs e)
+	{
+		if (LayerPropertyChanged != null)
+			LayerPropertyChanged (sender, e);
+
+		//TODO Get the workspace to subscribe to this event, and invalidate itself.
+		PintaCore.Workspace.Invalidate ();
+	}
+	#endregion
+
+	#region Events
+	public event EventHandler? LayerAdded;
+	public event EventHandler? LayerRemoved;
+	public event EventHandler? SelectedLayerChanged;
+	public event PropertyChangedEventHandler? LayerPropertyChanged;
+	#endregion
 }

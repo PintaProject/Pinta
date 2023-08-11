@@ -29,111 +29,110 @@ using System.Collections.Generic;
 using ClipperLib;
 using Gtk;
 
-namespace Pinta.Core
+namespace Pinta.Core;
+
+public sealed class ActionManager
 {
-	public class ActionManager
+	public AppActions App { get; } = new ();
+	public FileActions File { get; } = new ();
+	public EditActions Edit { get; } = new ();
+	public ViewActions View { get; } = new ();
+	public ImageActions Image { get; } = new ();
+	public LayerActions Layers { get; } = new ();
+	public AdjustmentsActions Adjustments { get; } = new ();
+	public EffectsActions Effects { get; } = new ();
+	public WindowActions Window { get; } = new ();
+	public HelpActions Help { get; } = new ();
+	public AddinActions Addins { get; } = new ();
+
+	public ActionManager ()
 	{
-		public AppActions App { get; } = new ();
-		public FileActions File { get; } = new ();
-		public EditActions Edit { get; } = new ();
-		public ViewActions View { get; } = new ();
-		public ImageActions Image { get; } = new ();
-		public LayerActions Layers { get; } = new ();
-		public AdjustmentsActions Adjustments { get; } = new ();
-		public EffectsActions Effects { get; } = new ();
-		public WindowActions Window { get; } = new ();
-		public HelpActions Help { get; } = new ();
-		public AddinActions Addins { get; } = new ();
+	}
 
-		public ActionManager ()
-		{
-		}
-
-		public void CreateToolBar (Gtk.Box toolbar)
-		{
-			toolbar.Append (File.New.CreateToolBarItem ());
-			toolbar.Append (File.Open.CreateToolBarItem ());
-			toolbar.Append (File.Save.CreateToolBarItem ());
-			// Printing is disabled for now until it is fully functional.
+	public void CreateToolBar (Gtk.Box toolbar)
+	{
+		toolbar.Append (File.New.CreateToolBarItem ());
+		toolbar.Append (File.Open.CreateToolBarItem ());
+		toolbar.Append (File.Save.CreateToolBarItem ());
+		// Printing is disabled for now until it is fully functional.
 #if false
-			toolbar.AppendItem (File.Print.CreateToolBarItem ());
+		toolbar.AppendItem (File.Print.CreateToolBarItem ());
 #endif
+		toolbar.Append (GtkExtensions.CreateToolBarSeparator ());
+
+		// Cut/Copy/Paste comes before Undo/Redo on Windows
+		if (PintaCore.System.OperatingSystem == OS.Windows) {
+			toolbar.Append (Edit.Cut.CreateToolBarItem ());
+			toolbar.Append (Edit.Copy.CreateToolBarItem ());
+			toolbar.Append (Edit.Paste.CreateToolBarItem ());
 			toolbar.Append (GtkExtensions.CreateToolBarSeparator ());
-
-			// Cut/Copy/Paste comes before Undo/Redo on Windows
-			if (PintaCore.System.OperatingSystem == OS.Windows) {
-				toolbar.Append (Edit.Cut.CreateToolBarItem ());
-				toolbar.Append (Edit.Copy.CreateToolBarItem ());
-				toolbar.Append (Edit.Paste.CreateToolBarItem ());
-				toolbar.Append (GtkExtensions.CreateToolBarSeparator ());
-				toolbar.Append (Edit.Undo.CreateToolBarItem ());
-				toolbar.Append (Edit.Redo.CreateToolBarItem ());
-			} else {
-				toolbar.Append (Edit.Undo.CreateToolBarItem ());
-				toolbar.Append (Edit.Redo.CreateToolBarItem ());
-				toolbar.Append (GtkExtensions.CreateToolBarSeparator ());
-				toolbar.Append (Edit.Cut.CreateToolBarItem ());
-				toolbar.Append (Edit.Copy.CreateToolBarItem ());
-				toolbar.Append (Edit.Paste.CreateToolBarItem ());
-			}
-
+			toolbar.Append (Edit.Undo.CreateToolBarItem ());
+			toolbar.Append (Edit.Redo.CreateToolBarItem ());
+		} else {
+			toolbar.Append (Edit.Undo.CreateToolBarItem ());
+			toolbar.Append (Edit.Redo.CreateToolBarItem ());
 			toolbar.Append (GtkExtensions.CreateToolBarSeparator ());
-			toolbar.Append (Image.CropToSelection.CreateToolBarItem ());
-			toolbar.Append (Edit.Deselect.CreateToolBarItem ());
+			toolbar.Append (Edit.Cut.CreateToolBarItem ());
+			toolbar.Append (Edit.Copy.CreateToolBarItem ());
+			toolbar.Append (Edit.Paste.CreateToolBarItem ());
 		}
 
-		public void CreateHeaderToolBar (Adw.HeaderBar header)
-		{
-			header.PackStart (File.New.CreateToolBarItem ());
-			header.PackStart (File.Open.CreateToolBarItem ());
-			header.PackStart (File.Save.CreateToolBarItem ());
+		toolbar.Append (GtkExtensions.CreateToolBarSeparator ());
+		toolbar.Append (Image.CropToSelection.CreateToolBarItem ());
+		toolbar.Append (Edit.Deselect.CreateToolBarItem ());
+	}
 
-			header.PackStart (GtkExtensions.CreateToolBarSeparator ());
-			header.PackStart (Edit.Undo.CreateToolBarItem ());
-			header.PackStart (Edit.Redo.CreateToolBarItem ());
+	public void CreateHeaderToolBar (Adw.HeaderBar header)
+	{
+		header.PackStart (File.New.CreateToolBarItem ());
+		header.PackStart (File.Open.CreateToolBarItem ());
+		header.PackStart (File.Save.CreateToolBarItem ());
 
-			header.PackStart (GtkExtensions.CreateToolBarSeparator ());
-			header.PackStart (Edit.Cut.CreateToolBarItem ());
-			header.PackStart (Edit.Copy.CreateToolBarItem ());
-			header.PackStart (Edit.Paste.CreateToolBarItem ());
-		}
+		header.PackStart (GtkExtensions.CreateToolBarSeparator ());
+		header.PackStart (Edit.Undo.CreateToolBarItem ());
+		header.PackStart (Edit.Redo.CreateToolBarItem ());
 
-		public void CreateStatusBar (Box statusbar)
-		{
-			// Cursor position widget
-			statusbar.Append (Gtk.Image.NewFromIconName (Resources.Icons.CursorPosition));
-			var cursor = Label.New ("  0, 0");
-			statusbar.Append (cursor);
+		header.PackStart (GtkExtensions.CreateToolBarSeparator ());
+		header.PackStart (Edit.Cut.CreateToolBarItem ());
+		header.PackStart (Edit.Copy.CreateToolBarItem ());
+		header.PackStart (Edit.Paste.CreateToolBarItem ());
+	}
 
-			PintaCore.Chrome.LastCanvasCursorPointChanged += delegate {
-				var pt = PintaCore.Chrome.LastCanvasCursorPoint;
-				cursor.SetText ($"  {pt.X}, {pt.Y}");
-			};
+	public void CreateStatusBar (Box statusbar)
+	{
+		// Cursor position widget
+		statusbar.Append (Gtk.Image.NewFromIconName (Resources.Icons.CursorPosition));
+		var cursor = Label.New ("  0, 0");
+		statusbar.Append (cursor);
 
-			statusbar.Append (GtkExtensions.CreateToolBarSeparator ());
+		PintaCore.Chrome.LastCanvasCursorPointChanged += delegate {
+			var pt = PintaCore.Chrome.LastCanvasCursorPoint;
+			cursor.SetText ($"  {pt.X}, {pt.Y}");
+		};
 
-			// Selection size widget
-			statusbar.Append (Gtk.Image.NewFromIconName (Resources.Icons.ToolSelectRectangle));
-			var selection_size = Label.New ("  0, 0");
-			statusbar.Append (selection_size);
+		statusbar.Append (GtkExtensions.CreateToolBarSeparator ());
 
-			PintaCore.Workspace.SelectionChanged += delegate {
-				var bounds = PintaCore.Workspace.HasOpenDocuments ? PintaCore.Workspace.ActiveDocument.Selection.GetBounds () : new RectangleD ();
-				selection_size.SetText ($"  {bounds.Width}, {bounds.Height}");
-			};
+		// Selection size widget
+		statusbar.Append (Gtk.Image.NewFromIconName (Resources.Icons.ToolSelectRectangle));
+		var selection_size = Label.New ("  0, 0");
+		statusbar.Append (selection_size);
 
-			// Document zoom widget
-			View.CreateStatusBar (statusbar);
-		}
+		PintaCore.Workspace.SelectionChanged += delegate {
+			var bounds = PintaCore.Workspace.HasOpenDocuments ? PintaCore.Workspace.ActiveDocument.Selection.GetBounds () : new RectangleD ();
+			selection_size.SetText ($"  {bounds.Width}, {bounds.Height}");
+		};
 
-		public void RegisterHandlers ()
-		{
-			File.RegisterHandlers ();
-			Edit.RegisterHandlers ();
-			Image.RegisterHandlers ();
-			Layers.RegisterHandlers ();
-			View.RegisterHandlers ();
-			Help.RegisterHandlers ();
-		}
+		// Document zoom widget
+		View.CreateStatusBar (statusbar);
+	}
+
+	public void RegisterHandlers ()
+	{
+		File.RegisterHandlers ();
+		Edit.RegisterHandlers ();
+		Image.RegisterHandlers ();
+		Layers.RegisterHandlers ();
+		View.RegisterHandlers ();
+		Help.RegisterHandlers ();
 	}
 }

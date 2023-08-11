@@ -28,107 +28,106 @@ using System;
 using System.IO;
 using System.Runtime.InteropServices;
 
-namespace Pinta.Core
+namespace Pinta.Core;
+
+public sealed class SystemManager
 {
-	public class SystemManager
+	private static readonly OS operating_system;
+
+	public int RenderThreads { get; set; }
+	public OS OperatingSystem => operating_system;
+
+	public SystemManager ()
 	{
-		private static readonly OS operating_system;
+		RenderThreads = Environment.ProcessorCount;
+	}
 
-		public int RenderThreads { get; set; }
-		public OS OperatingSystem => operating_system;
+	static SystemManager ()
+	{
+		if (RuntimeInformation.IsOSPlatform (OSPlatform.Windows))
+			operating_system = OS.Windows;
+		else if (RuntimeInformation.IsOSPlatform (OSPlatform.OSX))
+			operating_system = OS.Mac;
+		else if (RuntimeInformation.IsOSPlatform (OSPlatform.Linux) ||
+			 RuntimeInformation.IsOSPlatform (OSPlatform.FreeBSD))
+			operating_system = OS.X11;
+		else
+			operating_system = OS.Other;
+	}
 
-		public SystemManager ()
-		{
-			RenderThreads = Environment.ProcessorCount;
-		}
+	public static string GetExecutablePathName ()
+	{
+		string executablePathName = System.Environment.GetCommandLineArgs ()[0];
+		executablePathName = System.IO.Path.GetFullPath (executablePathName);
 
-		static SystemManager ()
-		{
-			if (RuntimeInformation.IsOSPlatform (OSPlatform.Windows))
-				operating_system = OS.Windows;
-			else if (RuntimeInformation.IsOSPlatform (OSPlatform.OSX))
-				operating_system = OS.Mac;
-			else if (RuntimeInformation.IsOSPlatform (OSPlatform.Linux) ||
-				 RuntimeInformation.IsOSPlatform (OSPlatform.FreeBSD))
-				operating_system = OS.X11;
-			else
-				operating_system = OS.Other;
-		}
+		return executablePathName;
+	}
 
-		public static string GetExecutablePathName ()
-		{
-			string executablePathName = System.Environment.GetCommandLineArgs ()[0];
-			executablePathName = System.IO.Path.GetFullPath (executablePathName);
+	public static string GetExecutableDirectory ()
+	{
+		// NRT - We use Path.GetFullPath so it should contain a directory
+		return Path.GetDirectoryName (GetExecutablePathName ())!;
+	}
 
-			return executablePathName;
-		}
+	/// <summary>
+	/// Return the root directory to search under for translations, documentation, etc.
+	/// </summary>
+	public static string GetDataRootDirectory ()
+	{
+		string app_dir = SystemManager.GetExecutableDirectory ();
 
-		public static string GetExecutableDirectory ()
-		{
-			// NRT - We use Path.GetFullPath so it should contain a directory
-			return Path.GetDirectoryName (GetExecutablePathName ())!;
-		}
-
-		/// <summary>
-		/// Return the root directory to search under for translations, documentation, etc.
-		/// </summary>
-		public static string GetDataRootDirectory ()
-		{
-			string app_dir = SystemManager.GetExecutableDirectory ();
-
-			// If Pinta is located at $prefix/lib/pinta, we want to use $prefix/share.
-			if (GetOperatingSystem () == OS.X11) {
-				var lib_dir = Directory.GetParent (app_dir);
-				if (lib_dir?.Name == "lib") {
-					var prefix = lib_dir.Parent;
-					if (prefix is not null)
-						return Path.Combine (prefix.FullName, "share");
-				}
+		// If Pinta is located at $prefix/lib/pinta, we want to use $prefix/share.
+		if (GetOperatingSystem () == OS.X11) {
+			var lib_dir = Directory.GetParent (app_dir);
+			if (lib_dir?.Name == "lib") {
+				var prefix = lib_dir.Parent;
+				if (prefix is not null)
+					return Path.Combine (prefix.FullName, "share");
 			}
-
-			// If Pinta is in Pinta.app/Contents/MacOS, we want Pinta.app/Contents/Resources/share.
-			if (GetOperatingSystem () == OS.Mac && IsExecutableInMacBundle ()) {
-				var contents_dir = Directory.GetParent (app_dir);
-				return Path.Combine (contents_dir!.FullName, "Resources", "share");
-			}
-
-			// Otherwise, translations etc are contained under the executable's folder.
-			return app_dir;
 		}
 
-		/// <summary>
-		/// Returns true if Pinta is executing in a .app bundle (macOS).
-		/// This requires some different paths to locate resources, GTK libraries, etc
-		/// </summary>
-		public static bool IsExecutableInMacBundle ()
-		{
-			if (GetOperatingSystem () != OS.Mac) {
-				return false;
-			}
-
-			string app_dir = SystemManager.GetExecutableDirectory ();
-
-			// For a bundle, the executable would be Pinta.app/Contents/MacOS/Pinta
+		// If Pinta is in Pinta.app/Contents/MacOS, we want Pinta.app/Contents/Resources/share.
+		if (GetOperatingSystem () == OS.Mac && IsExecutableInMacBundle ()) {
 			var contents_dir = Directory.GetParent (app_dir);
-			return contents_dir?.Name == "Contents";
+			return Path.Combine (contents_dir!.FullName, "Resources", "share");
 		}
 
-		public static OS GetOperatingSystem ()
-		{
-			return operating_system;
-		}
-
-		public T[] GetExtensions<T> ()
-		{
-			return Mono.Addins.AddinManager.GetExtensionObjects<T> ();
-		}
+		// Otherwise, translations etc are contained under the executable's folder.
+		return app_dir;
 	}
 
-	public enum OS
+	/// <summary>
+	/// Returns true if Pinta is executing in a .app bundle (macOS).
+	/// This requires some different paths to locate resources, GTK libraries, etc
+	/// </summary>
+	public static bool IsExecutableInMacBundle ()
 	{
-		Windows,
-		Mac,
-		X11,
-		Other
+		if (GetOperatingSystem () != OS.Mac) {
+			return false;
+		}
+
+		string app_dir = SystemManager.GetExecutableDirectory ();
+
+		// For a bundle, the executable would be Pinta.app/Contents/MacOS/Pinta
+		var contents_dir = Directory.GetParent (app_dir);
+		return contents_dir?.Name == "Contents";
 	}
+
+	public static OS GetOperatingSystem ()
+	{
+		return operating_system;
+	}
+
+	public T[] GetExtensions<T> ()
+	{
+		return Mono.Addins.AddinManager.GetExtensionObjects<T> ();
+	}
+}
+
+public enum OS
+{
+	Windows,
+	Mac,
+	X11,
+	Other
 }

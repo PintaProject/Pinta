@@ -29,186 +29,185 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 
-namespace Pinta.Core
+namespace Pinta.Core;
+
+public sealed class ImageConverterManager
 {
-	public class ImageConverterManager
+	private readonly List<FormatDescriptor> formats;
+
+	public ImageConverterManager ()
 	{
-		private readonly List<FormatDescriptor> formats;
+		formats = new List<FormatDescriptor> ();
 
-		public ImageConverterManager ()
-		{
-			formats = new List<FormatDescriptor> ();
+		// Create all the formats supported by Gdk
+		foreach (var format in GdkPixbufExtensions.GetFormats ()) {
+			string formatName = format.GetName ().ToLowerInvariant ();
+			string formatNameUpperCase = formatName.ToUpperInvariant ();
+			string[] extensions;
 
-			// Create all the formats supported by Gdk
-			foreach (var format in GdkPixbufExtensions.GetFormats ()) {
-				string formatName = format.GetName ().ToLowerInvariant ();
-				string formatNameUpperCase = formatName.ToUpperInvariant ();
-				string[] extensions;
-
-				switch (formatName) {
-					case "jpeg":
-						extensions = new string[] { "jpg", "jpeg", "JPG", "JPEG" };
-						break;
-					case "tiff":
-						extensions = new string[] { "tif", "tiff", "TIF", "TIFF" };
-						break;
-					default:
-						extensions = new string[] { formatName, formatNameUpperCase };
-						break;
-				}
-
-				GdkPixbufFormat importer = new GdkPixbufFormat (formatName);
-				IImageExporter? exporter;
-				if (formatName == "jpeg")
-					exporter = importer = new JpegFormat ();
-				else if (formatName == "tga")
-					exporter = new TgaExporter ();
-				else if (format.IsWritable ())
-					exporter = importer;
-				else
-					exporter = null;
-
-				RegisterFormat (new FormatDescriptor (formatNameUpperCase, extensions, format.GetMimeTypes (), importer, exporter));
+			switch (formatName) {
+				case "jpeg":
+					extensions = new string[] { "jpg", "jpeg", "JPG", "JPEG" };
+					break;
+				case "tiff":
+					extensions = new string[] { "tif", "tiff", "TIF", "TIFF" };
+					break;
+				default:
+					extensions = new string[] { formatName, formatNameUpperCase };
+					break;
 			}
 
-			// Create all the formats we have our own importers/exporters for
-			OraFormat oraHandler = new OraFormat ();
-			RegisterFormat (new FormatDescriptor ("OpenRaster", new string[] { "ora", "ORA" }, new string[] { "image/openraster" }, oraHandler, oraHandler));
+			GdkPixbufFormat importer = new GdkPixbufFormat (formatName);
+			IImageExporter? exporter;
+			if (formatName == "jpeg")
+				exporter = importer = new JpegFormat ();
+			else if (formatName == "tga")
+				exporter = new TgaExporter ();
+			else if (format.IsWritable ())
+				exporter = importer;
+			else
+				exporter = null;
+
+			RegisterFormat (new FormatDescriptor (formatNameUpperCase, extensions, format.GetMimeTypes (), importer, exporter));
 		}
 
-		public IEnumerable<FormatDescriptor> Formats => formats;
+		// Create all the formats we have our own importers/exporters for
+		OraFormat oraHandler = new OraFormat ();
+		RegisterFormat (new FormatDescriptor ("OpenRaster", new string[] { "ora", "ORA" }, new string[] { "image/openraster" }, oraHandler, oraHandler));
+	}
 
-		/// <summary>
-		/// Registers a new file format.
-		/// </summary>
-		public void RegisterFormat (FormatDescriptor fd)
-		{
-			formats.Add (fd);
+	public IEnumerable<FormatDescriptor> Formats => formats;
+
+	/// <summary>
+	/// Registers a new file format.
+	/// </summary>
+	public void RegisterFormat (FormatDescriptor fd)
+	{
+		formats.Add (fd);
+	}
+
+	/// <summary>
+	/// Unregisters the file format for the given extension.
+	/// </summary>
+	public void UnregisterFormatByExtension (string extension)
+	{
+		extension = NormalizeExtension (extension);
+
+		formats.RemoveAll (f => f.Extensions.Contains (extension));
+	}
+
+	/// <summary>
+	/// Returns the default format that should be used when saving a file.
+	/// This is normally the last format that was chosen by the user.
+	/// </summary>
+	public FormatDescriptor GetDefaultSaveFormat ()
+	{
+		string extension = PintaCore.Settings.GetSetting<string> ("default-image-type", "jpeg");
+
+		var fd = GetFormatByExtension (extension);
+
+		// We found the last one we used
+		if (fd != null)
+			return fd;
+
+		// Return any format we have
+		foreach (var f in Formats)
+			if (!f.IsReadOnly ())
+				return f;
+
+		// We don't have any formats
+		throw new InvalidOperationException ("There are no image formats supported.");
+	}
+
+	/// <summary>
+	/// Finds the correct exporter to use for opening the given file, or null
+	/// if no exporter exists for the file.
+	/// </summary>
+	public IImageExporter? GetExporterByFile (string file)
+	{
+		string extension = Path.GetExtension (file);
+		return GetExporterByExtension (extension);
+	}
+
+	/// <summary>
+	/// Finds the file format for the given file name, or null
+	/// if no file format exists for that file.
+	/// </summary>
+	public FormatDescriptor? GetFormatByFile (string file)
+	{
+		string extension = Path.GetExtension (file);
+		return GetFormatByExtension (extension);
+	}
+
+	/// <summary>
+	/// Finds the correct importer to use for opening the given file, or null
+	/// if no importer exists for the file.
+	/// </summary>
+	public IImageImporter? GetImporterByFile (string file)
+	{
+		string extension = Path.GetExtension (file);
+
+		if (extension == null) {
+			return null;
+		} else {
+			return GetImporterByExtension (extension);
 		}
+	}
 
-		/// <summary>
-		/// Unregisters the file format for the given extension.
-		/// </summary>
-		public void UnregisterFormatByExtension (string extension)
-		{
-			extension = NormalizeExtension (extension);
+	/// <summary>
+	/// Sets the default format used when saving files to the given extension.
+	/// </summary>
+	public void SetDefaultFormat (string extension)
+	{
+		extension = NormalizeExtension (extension);
 
-			formats.RemoveAll (f => f.Extensions.Contains (extension));
-		}
+		PintaCore.Settings.PutSetting ("default-image-type", extension);
+	}
 
-		/// <summary>
-		/// Returns the default format that should be used when saving a file.
-		/// This is normally the last format that was chosen by the user.
-		/// </summary>
-		public FormatDescriptor GetDefaultSaveFormat ()
-		{
-			string extension = PintaCore.Settings.GetSetting<string> ("default-image-type", "jpeg");
+	/// <summary>
+	/// Finds the correct exporter to use for the given file extension, or null
+	/// if no exporter exists for that extension.
+	/// </summary>
+	private IImageExporter? GetExporterByExtension (string extension)
+	{
+		FormatDescriptor? format = GetFormatByExtension (extension);
 
-			var fd = GetFormatByExtension (extension);
+		if (format == null)
+			return null;
 
-			// We found the last one we used
-			if (fd != null)
-				return fd;
+		return format.Exporter;
+	}
 
-			// Return any format we have
-			foreach (var f in Formats)
-				if (!f.IsReadOnly ())
-					return f;
+	/// <summary>
+	/// Finds the correct importer to use for the given file extension, or null
+	/// if no importer exists for that extension.
+	/// </summary>
+	private IImageImporter? GetImporterByExtension (string extension)
+	{
+		FormatDescriptor? format = GetFormatByExtension (extension);
 
-			// We don't have any formats
-			throw new InvalidOperationException ("There are no image formats supported.");
-		}
+		if (format == null)
+			return null;
 
-		/// <summary>
-		/// Finds the correct exporter to use for opening the given file, or null
-		/// if no exporter exists for the file.
-		/// </summary>
-		public IImageExporter? GetExporterByFile (string file)
-		{
-			string extension = Path.GetExtension (file);
-			return GetExporterByExtension (extension);
-		}
+		return format.Importer;
+	}
 
-		/// <summary>
-		/// Finds the file format for the given file name, or null
-		/// if no file format exists for that file.
-		/// </summary>
-		public FormatDescriptor? GetFormatByFile (string file)
-		{
-			string extension = Path.GetExtension (file);
-			return GetFormatByExtension (extension);
-		}
+	/// <summary>
+	/// Finds the file format for the given file extension, or null
+	/// if no file format exists for that extension.
+	/// </summary>
+	public FormatDescriptor? GetFormatByExtension (string extension)
+	{
+		extension = NormalizeExtension (extension);
 
-		/// <summary>
-		/// Finds the correct importer to use for opening the given file, or null
-		/// if no importer exists for the file.
-		/// </summary>
-		public IImageImporter? GetImporterByFile (string file)
-		{
-			string extension = Path.GetExtension (file);
+		return Formats.Where (p => p.Extensions.Contains (extension)).FirstOrDefault ();
+	}
 
-			if (extension == null) {
-				return null;
-			} else {
-				return GetImporterByExtension (extension);
-			}
-		}
-
-		/// <summary>
-		/// Sets the default format used when saving files to the given extension.
-		/// </summary>
-		public void SetDefaultFormat (string extension)
-		{
-			extension = NormalizeExtension (extension);
-
-			PintaCore.Settings.PutSetting ("default-image-type", extension);
-		}
-
-		/// <summary>
-		/// Finds the correct exporter to use for the given file extension, or null
-		/// if no exporter exists for that extension.
-		/// </summary>
-		private IImageExporter? GetExporterByExtension (string extension)
-		{
-			FormatDescriptor? format = GetFormatByExtension (extension);
-
-			if (format == null)
-				return null;
-
-			return format.Exporter;
-		}
-
-		/// <summary>
-		/// Finds the correct importer to use for the given file extension, or null
-		/// if no importer exists for that extension.
-		/// </summary>
-		private IImageImporter? GetImporterByExtension (string extension)
-		{
-			FormatDescriptor? format = GetFormatByExtension (extension);
-
-			if (format == null)
-				return null;
-
-			return format.Importer;
-		}
-
-		/// <summary>
-		/// Finds the file format for the given file extension, or null
-		/// if no file format exists for that extension.
-		/// </summary>
-		public FormatDescriptor? GetFormatByExtension (string extension)
-		{
-			extension = NormalizeExtension (extension);
-
-			return Formats.Where (p => p.Extensions.Contains (extension)).FirstOrDefault ();
-		}
-
-		/// <summary>
-		/// Normalizes the extension.
-		/// </summary>
-		private static string NormalizeExtension (string extension)
-		{
-			return extension.ToLowerInvariant ().TrimStart ('.').Trim ();
-		}
+	/// <summary>
+	/// Normalizes the extension.
+	/// </summary>
+	private static string NormalizeExtension (string extension)
+	{
+		return extension.ToLowerInvariant ().TrimStart ('.').Trim ();
 	}
 }

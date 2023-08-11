@@ -27,40 +27,39 @@
 using System;
 using System.Collections.Generic;
 
-namespace Pinta.Core
+namespace Pinta.Core;
+
+public interface IServiceManager
 {
-	public interface IServiceManager
+	T AddService<T> (T implementation) where T : class;
+	T GetService<T> () where T : class;
+	T? GetOptionalService<T> () where T : class;
+}
+
+public sealed class ServiceManager : IServiceManager
+{
+	private readonly Dictionary<Type, object> services = new ();
+
+	public T AddService<T> (T implementation) where T : class
 	{
-		T AddService<T> (T implementation) where T : class;
-		T GetService<T> () where T : class;
-		T? GetOptionalService<T> () where T : class;
+		services.Add (typeof (T), implementation);
+
+		return implementation;
 	}
 
-	public class ServiceManager : IServiceManager
+	public T GetService<T> () where T : class
 	{
-		private readonly Dictionary<Type, object> services = new ();
+		if (services.TryGetValue (typeof (T), out var implementation))
+			return (T) implementation;
 
-		public T AddService<T> (T implementation) where T : class
-		{
-			services.Add (typeof (T), implementation);
+		throw new ApplicationException ($"Could not resolve service type {typeof (T)}");
+	}
 
-			return implementation;
-		}
+	public T? GetOptionalService<T> () where T : class
+	{
+		if (services.TryGetValue (typeof (T), out var implementation))
+			return (T) implementation;
 
-		public T GetService<T> () where T : class
-		{
-			if (services.TryGetValue (typeof (T), out var implementation))
-				return (T) implementation;
-
-			throw new ApplicationException ($"Could not resolve service type {typeof (T)}");
-		}
-
-		public T? GetOptionalService<T> () where T : class
-		{
-			if (services.TryGetValue (typeof (T), out var implementation))
-				return (T) implementation;
-
-			return null;
-		}
+		return null;
 	}
 }

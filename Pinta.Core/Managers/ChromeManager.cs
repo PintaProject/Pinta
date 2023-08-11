@@ -28,173 +28,172 @@ using System;
 using Gtk;
 using Mono.Addins.Localization;
 
-namespace Pinta.Core
+namespace Pinta.Core;
+
+public class ChromeManager
 {
-	public class ChromeManager
+	private PointI last_canvas_cursor_point;
+	private bool main_window_busy;
+
+	// NRT - These are all initialized via the Initialize* functions
+	// but it would be nice to rewrite it to provably non-null.
+	public Application Application { get; private set; } = null!;
+	public Window MainWindow { get; private set; } = null!;
+	public Widget ImageTabsNotebook { get; private set; } = null!;
+	private IProgressDialog progress_dialog = null!;
+	private ErrorDialogHandler error_dialog_handler = null!;
+	private MessageDialogHandler message_dialog_handler = null!;
+	private SimpleEffectDialogHandler simple_effect_dialog_handler = null!;
+
+	public Box MainToolBar { get; private set; } = null!;
+	public Box ToolToolBar { get; private set; } = null!;
+	public Box ToolBox { get; private set; } = null!;
+	public Box StatusBar { get; private set; } = null!;
+
+	public IProgressDialog ProgressDialog => progress_dialog;
+	public Gio.Menu AdjustmentsMenu { get; private set; } = null!;
+	public Gio.Menu EffectsMenu { get; private set; } = null!;
+
+	public ChromeManager ()
 	{
-		private PointI last_canvas_cursor_point;
-		private bool main_window_busy;
-
-		// NRT - These are all initialized via the Initialize* functions
-		// but it would be nice to rewrite it to provably non-null.
-		public Application Application { get; private set; } = null!;
-		public Window MainWindow { get; private set; } = null!;
-		public Widget ImageTabsNotebook { get; private set; } = null!;
-		private IProgressDialog progress_dialog = null!;
-		private ErrorDialogHandler error_dialog_handler = null!;
-		private MessageDialogHandler message_dialog_handler = null!;
-		private SimpleEffectDialogHandler simple_effect_dialog_handler = null!;
-
-		public Box MainToolBar { get; private set; } = null!;
-		public Box ToolToolBar { get; private set; } = null!;
-		public Box ToolBox { get; private set; } = null!;
-		public Box StatusBar { get; private set; } = null!;
-
-		public IProgressDialog ProgressDialog => progress_dialog;
-		public Gio.Menu AdjustmentsMenu { get; private set; } = null!;
-		public Gio.Menu EffectsMenu { get; private set; } = null!;
-
-		public ChromeManager ()
-		{
-		}
-
-		#region Public Properties
-		public PointI LastCanvasCursorPoint {
-			get => last_canvas_cursor_point;
-			set {
-				if (last_canvas_cursor_point != value) {
-					last_canvas_cursor_point = value;
-					OnLastCanvasCursorPointChanged ();
-				}
-			}
-		}
-
-		public bool MainWindowBusy {
-			get => main_window_busy;
-			set {
-				main_window_busy = value;
-
-				if (main_window_busy)
-					MainWindow.Cursor = Gdk.Cursor.NewFromName (Pinta.Resources.StandardCursors.Progress, null);
-				else
-					MainWindow.Cursor = Gdk.Cursor.NewFromName (Pinta.Resources.StandardCursors.Default, null);
-			}
-		}
-		#endregion
-
-		#region Public Methods
-		public void InitializeApplication (Gtk.Application application)
-		{
-			Application = application;
-		}
-
-		public void InitializeWindowShell (Window shell)
-		{
-			MainWindow = shell;
-		}
-
-		public void InitializeToolToolBar (Box toolToolBar)
-		{
-			ToolToolBar = toolToolBar;
-		}
-
-		public void InitializeMainToolBar (Box mainToolBar)
-		{
-			MainToolBar = mainToolBar;
-		}
-
-		public void InitializeStatusBar (Box statusbar)
-		{
-			StatusBar = statusbar;
-		}
-
-		public void InitializeToolBox (Box toolbox)
-		{
-			ToolBox = toolbox;
-		}
-
-		public void InitializeImageTabsNotebook (Widget notebook)
-		{
-			ImageTabsNotebook = notebook;
-		}
-
-		public void InitializeMainMenu (Gio.Menu adj_menu, Gio.Menu effects_menu)
-		{
-			AdjustmentsMenu = adj_menu;
-			EffectsMenu = effects_menu;
-		}
-
-		public void InitializeProgessDialog (IProgressDialog progressDialog)
-		{
-			progress_dialog = progressDialog;
-		}
-
-		public void InitializeErrorDialogHandler (ErrorDialogHandler handler)
-		{
-			error_dialog_handler = handler;
-		}
-
-		public void InitializeMessageDialog (MessageDialogHandler handler)
-		{
-			message_dialog_handler = handler;
-		}
-
-		public void InitializeSimpleEffectDialog (SimpleEffectDialogHandler handler)
-		{
-			simple_effect_dialog_handler = handler;
-		}
-
-		public void ShowErrorDialog (Window parent, string message, string body, string details)
-		{
-			error_dialog_handler (parent, message, body, details);
-		}
-
-		public void ShowMessageDialog (Window parent, string message, string body)
-		{
-			message_dialog_handler (parent, message, body);
-		}
-
-		public void SetStatusBarText (string text)
-		{
-			OnStatusBarTextChanged (text);
-		}
-
-		public void LaunchSimpleEffectDialog (BaseEffect effect, IAddinLocalizer localizer)
-		{
-			simple_effect_dialog_handler (effect, localizer);
-		}
-		#endregion
-		#region Protected Methods
-		protected void OnLastCanvasCursorPointChanged ()
-		{
-			if (LastCanvasCursorPointChanged != null)
-				LastCanvasCursorPointChanged (this, EventArgs.Empty);
-		}
-
-		protected void OnStatusBarTextChanged (string text)
-		{
-			if (StatusBarTextChanged != null)
-				StatusBarTextChanged (this, new TextChangedEventArgs (text));
-		}
-		#endregion
-
-		#region Public Events
-		public event EventHandler? LastCanvasCursorPointChanged;
-		public event EventHandler<TextChangedEventArgs>? StatusBarTextChanged;
-		#endregion
 	}
 
-	public interface IProgressDialog
-	{
-		void Show ();
-		void Hide ();
-		string Title { get; set; }
-		string Text { get; set; }
-		double Progress { get; set; }
-		event EventHandler<EventArgs> Canceled;
+	#region Public Properties
+	public PointI LastCanvasCursorPoint {
+		get => last_canvas_cursor_point;
+		set {
+			if (last_canvas_cursor_point != value) {
+				last_canvas_cursor_point = value;
+				OnLastCanvasCursorPointChanged ();
+			}
+		}
 	}
 
-	public delegate void ErrorDialogHandler (Window parent, string message, string body, string details);
-	public delegate void MessageDialogHandler (Window parent, string message, string body);
-	public delegate void SimpleEffectDialogHandler (BaseEffect effect, IAddinLocalizer localizer);
+	public bool MainWindowBusy {
+		get => main_window_busy;
+		set {
+			main_window_busy = value;
+
+			if (main_window_busy)
+				MainWindow.Cursor = Gdk.Cursor.NewFromName (Pinta.Resources.StandardCursors.Progress, null);
+			else
+				MainWindow.Cursor = Gdk.Cursor.NewFromName (Pinta.Resources.StandardCursors.Default, null);
+		}
+	}
+	#endregion
+
+	#region Public Methods
+	public void InitializeApplication (Gtk.Application application)
+	{
+		Application = application;
+	}
+
+	public void InitializeWindowShell (Window shell)
+	{
+		MainWindow = shell;
+	}
+
+	public void InitializeToolToolBar (Box toolToolBar)
+	{
+		ToolToolBar = toolToolBar;
+	}
+
+	public void InitializeMainToolBar (Box mainToolBar)
+	{
+		MainToolBar = mainToolBar;
+	}
+
+	public void InitializeStatusBar (Box statusbar)
+	{
+		StatusBar = statusbar;
+	}
+
+	public void InitializeToolBox (Box toolbox)
+	{
+		ToolBox = toolbox;
+	}
+
+	public void InitializeImageTabsNotebook (Widget notebook)
+	{
+		ImageTabsNotebook = notebook;
+	}
+
+	public void InitializeMainMenu (Gio.Menu adj_menu, Gio.Menu effects_menu)
+	{
+		AdjustmentsMenu = adj_menu;
+		EffectsMenu = effects_menu;
+	}
+
+	public void InitializeProgessDialog (IProgressDialog progressDialog)
+	{
+		progress_dialog = progressDialog;
+	}
+
+	public void InitializeErrorDialogHandler (ErrorDialogHandler handler)
+	{
+		error_dialog_handler = handler;
+	}
+
+	public void InitializeMessageDialog (MessageDialogHandler handler)
+	{
+		message_dialog_handler = handler;
+	}
+
+	public void InitializeSimpleEffectDialog (SimpleEffectDialogHandler handler)
+	{
+		simple_effect_dialog_handler = handler;
+	}
+
+	public void ShowErrorDialog (Window parent, string message, string body, string details)
+	{
+		error_dialog_handler (parent, message, body, details);
+	}
+
+	public void ShowMessageDialog (Window parent, string message, string body)
+	{
+		message_dialog_handler (parent, message, body);
+	}
+
+	public void SetStatusBarText (string text)
+	{
+		OnStatusBarTextChanged (text);
+	}
+
+	public void LaunchSimpleEffectDialog (BaseEffect effect, IAddinLocalizer localizer)
+	{
+		simple_effect_dialog_handler (effect, localizer);
+	}
+	#endregion
+	#region Protected Methods
+	protected void OnLastCanvasCursorPointChanged ()
+	{
+		if (LastCanvasCursorPointChanged != null)
+			LastCanvasCursorPointChanged (this, EventArgs.Empty);
+	}
+
+	protected void OnStatusBarTextChanged (string text)
+	{
+		if (StatusBarTextChanged != null)
+			StatusBarTextChanged (this, new TextChangedEventArgs (text));
+	}
+	#endregion
+
+	#region Public Events
+	public event EventHandler? LastCanvasCursorPointChanged;
+	public event EventHandler<TextChangedEventArgs>? StatusBarTextChanged;
+	#endregion
 }
+
+public interface IProgressDialog
+{
+	void Show ();
+	void Hide ();
+	string Title { get; set; }
+	string Text { get; set; }
+	double Progress { get; set; }
+	event EventHandler<EventArgs> Canceled;
+}
+
+public delegate void ErrorDialogHandler (Window parent, string message, string body, string details);
+public delegate void MessageDialogHandler (Window parent, string message, string body);
+public delegate void SimpleEffectDialogHandler (BaseEffect effect, IAddinLocalizer localizer);
