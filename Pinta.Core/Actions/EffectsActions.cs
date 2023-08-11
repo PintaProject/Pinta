@@ -27,51 +27,50 @@
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 
-namespace Pinta.Core
+namespace Pinta.Core;
+
+public sealed class EffectsActions
 {
-	public sealed class EffectsActions
+	public Dictionary<string, Gio.Menu> Menus { get; } = new ();
+	public Collection<Command> Actions { get; } = new ();
+
+	public EffectsActions ()
 	{
-		public Dictionary<string, Gio.Menu> Menus { get; } = new ();
-		public Collection<Command> Actions { get; } = new ();
-
-		public EffectsActions ()
-		{
-		}
-
-		#region Initialization
-		public void AddEffect (string category, Command action)
-		{
-			var effects_menu = PintaCore.Chrome.EffectsMenu;
-
-			if (!Menus.ContainsKey (category)) {
-				var category_menu = Gio.Menu.New ();
-				effects_menu.AppendMenuItemSorted (Gio.MenuItem.NewSubmenu (Translations.GetString (category), category_menu));
-				Menus.Add (category, category_menu);
-			}
-
-			Actions.Add (action);
-
-			Gio.Menu m = Menus[category];
-			m.AppendMenuItemSorted (action.CreateMenuItem ());
-		}
-
-		// TODO: Remove menu category if empty
-		internal void RemoveEffect (string category, Command action)
-		{
-			if (!Menus.ContainsKey (category))
-				return;
-
-			var menu = Menus[category];
-			menu.Remove (action);
-		}
-		#endregion
-
-		#region Public Methods
-		public void ToggleActionsSensitive (bool sensitive)
-		{
-			foreach (Command a in Actions)
-				a.Sensitive = sensitive;
-		}
-		#endregion
 	}
+
+	#region Initialization
+	public void AddEffect (string category, Command action)
+	{
+		var effects_menu = PintaCore.Chrome.EffectsMenu;
+
+		if (!Menus.ContainsKey (category)) {
+			var category_menu = Gio.Menu.New ();
+			effects_menu.AppendMenuItemSorted (Gio.MenuItem.NewSubmenu (Translations.GetString (category), category_menu));
+			Menus.Add (category, category_menu);
+		}
+
+		Actions.Add (action);
+
+		Gio.Menu m = Menus[category];
+		m.AppendMenuItemSorted (action.CreateMenuItem ());
+	}
+
+	// TODO: Remove menu category if empty
+	internal void RemoveEffect (string category, Command action)
+	{
+		if (!Menus.ContainsKey (category))
+			return;
+
+		var menu = Menus[category];
+		menu.Remove (action);
+	}
+	#endregion
+
+	#region Public Methods
+	public void ToggleActionsSensitive (bool sensitive)
+	{
+		foreach (Command a in Actions)
+			a.Sensitive = sensitive;
+	}
+	#endregion
 }

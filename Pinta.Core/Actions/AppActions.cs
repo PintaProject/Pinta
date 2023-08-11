@@ -26,42 +26,41 @@
 
 using System;
 
-namespace Pinta.Core
+namespace Pinta.Core;
+
+public sealed class AppActions
 {
-	public class AppActions
+	public Command About { get; }
+	public Command Exit { get; }
+
+	public event EventHandler? BeforeQuit;
+
+	public AppActions ()
 	{
-		public Command About { get; }
-		public Command Exit { get; }
-
-		public event EventHandler? BeforeQuit;
-
-		public AppActions ()
-		{
-			About = new Command ("about", Translations.GetString ("About"), null, Resources.StandardIcons.HelpAbout);
-			Exit = new Command ("quit", Translations.GetString ("Quit"), null, Resources.StandardIcons.ApplicationExit);
-		}
-
-		#region Initialization
-		public void RegisterActions (Gtk.Application app, Gio.Menu menu)
-		{
-			app.AddAction (About);
-			menu.AppendItem (About.CreateMenuItem ());
-
-			app.AddAccelAction (Exit, "<Primary>Q");
-			menu.AppendItem (Exit.CreateMenuItem ());
-		}
-
-		public void RegisterHandlers ()
-		{
-		}
-		#endregion
-
-		#region Event Invokers
-		public void RaiseBeforeQuit ()
-		{
-			if (BeforeQuit != null)
-				BeforeQuit (this, EventArgs.Empty);
-		}
-		#endregion
+		About = new Command ("about", Translations.GetString ("About"), null, Resources.StandardIcons.HelpAbout);
+		Exit = new Command ("quit", Translations.GetString ("Quit"), null, Resources.StandardIcons.ApplicationExit);
 	}
+
+	#region Initialization
+	public void RegisterActions (Gtk.Application app, Gio.Menu menu)
+	{
+		app.AddAction (About);
+		menu.AppendItem (About.CreateMenuItem ());
+
+		app.AddAccelAction (Exit, "<Primary>Q");
+		menu.AppendItem (Exit.CreateMenuItem ());
+	}
+
+	public void RegisterHandlers ()
+	{
+	}
+	#endregion
+
+	#region Event Invokers
+	public void RaiseBeforeQuit ()
+	{
+		if (BeforeQuit != null)
+			BeforeQuit (this, EventArgs.Empty);
+	}
+	#endregion
 }

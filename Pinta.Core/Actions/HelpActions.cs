@@ -26,82 +26,81 @@
 
 using System;
 
-namespace Pinta.Core
+namespace Pinta.Core;
+
+public sealed class HelpActions
 {
-	public class HelpActions
+	public Command Contents { get; }
+	public Command Website { get; }
+	public Command Bugs { get; }
+	public Command Translate { get; }
+
+	public HelpActions ()
 	{
-		public Command Contents { get; }
-		public Command Website { get; }
-		public Command Bugs { get; }
-		public Command Translate { get; }
-
-		public HelpActions ()
-		{
-			Contents = new Command ("contents", Translations.GetString ("Contents"), null, Resources.StandardIcons.HelpBrowser);
-			Website = new Command ("website", Translations.GetString ("Pinta Website"), null, Resources.Icons.HelpWebsite);
-			Bugs = new Command ("bugs", Translations.GetString ("File a Bug"), null, Resources.Icons.HelpBug);
-			Translate = new Command ("translate", Translations.GetString ("Translate This Application"), null, Resources.Icons.HelpTranslate);
-		}
-
-		#region Initialization
-		public void RegisterActions (Gtk.Application app, Gio.Menu menu)
-		{
-			app.AddAccelAction (Contents, "F1");
-			menu.AppendItem (Contents.CreateMenuItem ());
-
-			app.AddAction (Website);
-			menu.AppendItem (Website.CreateMenuItem ());
-
-			app.AddAction (Bugs);
-			menu.AppendItem (Bugs.CreateMenuItem ());
-
-			app.AddAction (Translate);
-			menu.AppendItem (Translate.CreateMenuItem ());
-
-			// This is part of the application menu on macOS.
-			if (PintaCore.System.OperatingSystem != OS.Mac) {
-				var about_section = Gio.Menu.New ();
-				menu.AppendSection (null, about_section);
-
-				var about = PintaCore.Actions.App.About;
-				app.AddAction (about);
-				about_section.AppendItem (about.CreateMenuItem ());
-			}
-		}
-
-		public void RegisterHandlers ()
-		{
-			Contents.Activated += DisplayHelp;
-			Website.Activated += Website_Activated;
-			Bugs.Activated += Bugs_Activated;
-			Translate.Activated += Translate_Activated;
-		}
-
-		private void Bugs_Activated (object sender, EventArgs e)
-		{
-			OpenUrl ("https://bugs.launchpad.net/pinta");
-		}
-
-		private void DisplayHelp (object sender, EventArgs e)
-		{
-			OpenUrl ("https://pinta-project.com/user-guide");
-		}
-
-		private void Translate_Activated (object sender, EventArgs e)
-		{
-			OpenUrl ("https://translations.launchpad.net/pinta");
-		}
-
-		private void Website_Activated (object sender, EventArgs e)
-		{
-			OpenUrl ("https://www.pinta-project.com");
-		}
-
-		private static void OpenUrl (string url)
-		{
-			// TODO-GTK4 - this produces an "unsupported on current backend" error on macOS
-			Gtk.Functions.ShowUri (PintaCore.Chrome.MainWindow, url, /* GDK_CURRENT_TIME */ 0);
-		}
-		#endregion
+		Contents = new Command ("contents", Translations.GetString ("Contents"), null, Resources.StandardIcons.HelpBrowser);
+		Website = new Command ("website", Translations.GetString ("Pinta Website"), null, Resources.Icons.HelpWebsite);
+		Bugs = new Command ("bugs", Translations.GetString ("File a Bug"), null, Resources.Icons.HelpBug);
+		Translate = new Command ("translate", Translations.GetString ("Translate This Application"), null, Resources.Icons.HelpTranslate);
 	}
+
+	#region Initialization
+	public void RegisterActions (Gtk.Application app, Gio.Menu menu)
+	{
+		app.AddAccelAction (Contents, "F1");
+		menu.AppendItem (Contents.CreateMenuItem ());
+
+		app.AddAction (Website);
+		menu.AppendItem (Website.CreateMenuItem ());
+
+		app.AddAction (Bugs);
+		menu.AppendItem (Bugs.CreateMenuItem ());
+
+		app.AddAction (Translate);
+		menu.AppendItem (Translate.CreateMenuItem ());
+
+		// This is part of the application menu on macOS.
+		if (PintaCore.System.OperatingSystem != OS.Mac) {
+			var about_section = Gio.Menu.New ();
+			menu.AppendSection (null, about_section);
+
+			var about = PintaCore.Actions.App.About;
+			app.AddAction (about);
+			about_section.AppendItem (about.CreateMenuItem ());
+		}
+	}
+
+	public void RegisterHandlers ()
+	{
+		Contents.Activated += DisplayHelp;
+		Website.Activated += Website_Activated;
+		Bugs.Activated += Bugs_Activated;
+		Translate.Activated += Translate_Activated;
+	}
+
+	private void Bugs_Activated (object sender, EventArgs e)
+	{
+		OpenUrl ("https://bugs.launchpad.net/pinta");
+	}
+
+	private void DisplayHelp (object sender, EventArgs e)
+	{
+		OpenUrl ("https://pinta-project.com/user-guide");
+	}
+
+	private void Translate_Activated (object sender, EventArgs e)
+	{
+		OpenUrl ("https://translations.launchpad.net/pinta");
+	}
+
+	private void Website_Activated (object sender, EventArgs e)
+	{
+		OpenUrl ("https://www.pinta-project.com");
+	}
+
+	private static void OpenUrl (string url)
+	{
+		// TODO-GTK4 - this produces an "unsupported on current backend" error on macOS
+		Gtk.Functions.ShowUri (PintaCore.Chrome.MainWindow, url, /* GDK_CURRENT_TIME */ 0);
+	}
+	#endregion
 }

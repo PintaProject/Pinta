@@ -27,78 +27,77 @@
 using Gio;
 using GObject;
 
-namespace Pinta.Core
+namespace Pinta.Core;
+
+/// <summary>
+/// Wrapper around a Glib.SimpleAction to store additional data such as the label.
+/// </summary>
+public class Command
 {
-	/// <summary>
-	/// Wrapper around a Glib.SimpleAction to store additional data such as the label.
-	/// </summary>
-	public class Command
+	public Gio.SimpleAction Action { get; }
+	public string Name => Action.Name!;
+	public SignalHandler<SimpleAction, SimpleAction.ActivateSignalArgs>? Activated;
+	public void Activate ()
 	{
-		public Gio.SimpleAction Action { get; }
-		public string Name => Action.Name!;
-		public SignalHandler<SimpleAction, SimpleAction.ActivateSignalArgs>? Activated;
-		public void Activate ()
-		{
-			Action.Activate (null);
-		}
-
-		public string Label { get; }
-		public string? ShortLabel { get; set; }
-		public string? Tooltip { get; }
-		public string? IconName { get; }
-		public string FullName => $"app.{Name}";
-		public bool IsImportant { get; set; } = false;
-		public bool Sensitive { get => Action.Enabled; set => Action.Enabled = value; }
-
-		public Command (string name, string label, string? tooltip, string? icon_name, GLib.Variant? state = null)
-		{
-			if (state is not null)
-				Action = Gio.SimpleAction.NewStateful (name, null, state);
-			else
-				Action = Gio.SimpleAction.New (name, null);
-
-			Action.OnActivate += (o, args) => {
-				Activated?.Invoke (o, args);
-			};
-
-			Label = label;
-			Tooltip = tooltip;
-			IconName = icon_name;
-		}
-
-		public Gio.MenuItem CreateMenuItem ()
-		{
-			return Gio.MenuItem.New (Label, FullName);
-		}
+		Action.Activate (null);
 	}
 
-	public class ToggleCommand : Command
-	{
-		public ToggleCommand (string name, string label, string? tooltip, string? stock_id)
-		    : base (name, label, tooltip, stock_id, CreateBoolVariant (false))
-		{
-			Activated += (o, args) => {
-				var active = !GetBoolValue (Action.GetState ());
-				Toggled?.Invoke (active);
-				Action.ChangeState (CreateBoolVariant (active));
-			};
-		}
+	public string Label { get; }
+	public string? ShortLabel { get; set; }
+	public string? Tooltip { get; }
+	public string? IconName { get; }
+	public string FullName => $"app.{Name}";
+	public bool IsImportant { get; set; } = false;
+	public bool Sensitive { get => Action.Enabled; set => Action.Enabled = value; }
 
-		public bool Value {
-			get => GetBoolValue (Action.GetState ());
-			set {
-				if (value != Value) {
-					Toggled?.Invoke (value);
-					Action.ChangeState (CreateBoolVariant (value));
-				}
+	public Command (string name, string label, string? tooltip, string? icon_name, GLib.Variant? state = null)
+	{
+		if (state is not null)
+			Action = Gio.SimpleAction.NewStateful (name, null, state);
+		else
+			Action = Gio.SimpleAction.New (name, null);
+
+		Action.OnActivate += (o, args) => {
+			Activated?.Invoke (o, args);
+		};
+
+		Label = label;
+		Tooltip = tooltip;
+		IconName = icon_name;
+	}
+
+	public Gio.MenuItem CreateMenuItem ()
+	{
+		return Gio.MenuItem.New (Label, FullName);
+	}
+}
+
+public sealed class ToggleCommand : Command
+{
+	public ToggleCommand (string name, string label, string? tooltip, string? stock_id)
+	    : base (name, label, tooltip, stock_id, CreateBoolVariant (false))
+	{
+		Activated += (o, args) => {
+			var active = !GetBoolValue (Action.GetState ());
+			Toggled?.Invoke (active);
+			Action.ChangeState (CreateBoolVariant (active));
+		};
+	}
+
+	public bool Value {
+		get => GetBoolValue (Action.GetState ());
+		set {
+			if (value != Value) {
+				Toggled?.Invoke (value);
+				Action.ChangeState (CreateBoolVariant (value));
 			}
 		}
-
-		public delegate void ToggledHandler (bool value);
-		public ToggledHandler? Toggled;
-
-		// TODO-GTK4 (bindings) - missing GLib.Variant bindings (https://github.com/gircore/gir.core/issues/843)
-		private static GLib.Variant CreateBoolVariant (bool v) => new (GLib.Internal.Variant.NewBoolean (v));
-		private static bool GetBoolValue (GLib.Variant val) => GLib.Internal.Variant.GetBoolean (val.Handle);
 	}
+
+	public delegate void ToggledHandler (bool value);
+	public ToggledHandler? Toggled;
+
+	// TODO-GTK4 (bindings) - missing GLib.Variant bindings (https://github.com/gircore/gir.core/issues/843)
+	private static GLib.Variant CreateBoolVariant (bool v) => new (GLib.Internal.Variant.NewBoolean (v));
+	private static bool GetBoolValue (GLib.Variant val) => GLib.Internal.Variant.GetBoolean (val.Handle);
 }

@@ -24,93 +24,92 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 // THE SOFTWARE.
 
-namespace Pinta.Core
+namespace Pinta.Core;
+
+public sealed class WindowActions
 {
-	public class WindowActions
+	private Gio.Menu doc_section = null!; // NRT - Set in RegisterActions
+	private static readonly string doc_action_id = "active_document";
+	private readonly Gio.SimpleAction active_doc_action;
+
+	public Command SaveAll { get; }
+	public Command CloseAll { get; }
+
+	public WindowActions ()
 	{
-		private Gio.Menu doc_section = null!; // NRT - Set in RegisterActions
-		private static readonly string doc_action_id = "active_document";
-		private readonly Gio.SimpleAction active_doc_action;
+		SaveAll = new Command ("SaveAll", Translations.GetString ("Save All"), null, Resources.StandardIcons.DocumentSave);
+		CloseAll = new Command ("CloseAll", Translations.GetString ("Close All"), null, Resources.StandardIcons.WindowClose);
 
-		public Command SaveAll { get; }
-		public Command CloseAll { get; }
+		active_doc_action = Gio.SimpleAction.NewStateful (doc_action_id, GtkExtensions.IntVariantType, GLib.Variant.Create (-1));
 
-		public WindowActions ()
-		{
-			SaveAll = new Command ("SaveAll", Translations.GetString ("Save All"), null, Resources.StandardIcons.DocumentSave);
-			CloseAll = new Command ("CloseAll", Translations.GetString ("Close All"), null, Resources.StandardIcons.WindowClose);
-
-			active_doc_action = Gio.SimpleAction.NewStateful (doc_action_id, GtkExtensions.IntVariantType, GLib.Variant.Create (-1));
-
-			active_doc_action.OnActivate += (o, e) => {
-				var idx = e.Parameter!.GetInt ();
-				if (idx < PintaCore.Workspace.OpenDocuments.Count) {
-					PintaCore.Workspace.SetActiveDocumentInternal (PintaCore.Workspace.OpenDocuments[idx]);
-					active_doc_action.ChangeState (e.Parameter);
-				}
-			};
-		}
-
-		#region Initialization
-		public void RegisterActions (Gtk.Application app, Gio.Menu menu)
-		{
-			app.AddAccelAction (SaveAll, "<Ctrl><Alt>A");
-			menu.AppendItem (SaveAll.CreateMenuItem ());
-
-			app.AddAccelAction (CloseAll, "<Primary><Shift>W");
-			menu.AppendItem (CloseAll.CreateMenuItem ());
-
-			doc_section = Gio.Menu.New ();
-			menu.AppendSection (null, doc_section);
-
-			app.AddAction (active_doc_action);
-		}
-		#endregion
-
-		#region Public Methods
-
-		public void SetActiveDocument (Document doc)
-		{
-			var idx = PintaCore.Workspace.OpenDocuments.IndexOf (doc);
-			active_doc_action.Activate (GLib.Variant.Create (idx));
-		}
-
-		public void AddDocument (Document doc)
-		{
-			doc.Renamed += (o, e) => { RebuildDocumentMenu (); };
-			doc.IsDirtyChanged += (o, e) => { RebuildDocumentMenu (); };
-
-			AddDocumentMenuItem (PintaCore.Workspace.OpenDocuments.IndexOf (doc));
-		}
-
-		public void RemoveDocument (Document doc)
-		{
-			RebuildDocumentMenu ();
-		}
-		#endregion
-
-		#region Private Methods
-		private void AddDocumentMenuItem (int idx)
-		{
-			var doc = PintaCore.Workspace.OpenDocuments[idx];
-			var action_id = $"app.{doc_action_id}({idx})";
-			var label = $"{doc.DisplayName}{(doc.IsDirty ? '*' : string.Empty)}";
-			var menu_item = Gio.MenuItem.New (label, action_id);
-			doc_section.AppendItem (menu_item);
-
-			// We only assign accelerators up to Alt-9
-			if (idx < 9)
-				PintaCore.Chrome.Application.SetAccelsForAction (action_id, new[] { $"<Alt>{idx + 1}" });
-		}
-
-		private void RebuildDocumentMenu ()
-		{
-			doc_section.RemoveAll ();
-			for (int i = 0; i < PintaCore.Workspace.OpenDocuments.Count; ++i)
-				AddDocumentMenuItem (i);
-
-			PintaCore.Workspace.ResetTitle ();
-		}
-		#endregion
+		active_doc_action.OnActivate += (o, e) => {
+			var idx = e.Parameter!.GetInt ();
+			if (idx < PintaCore.Workspace.OpenDocuments.Count) {
+				PintaCore.Workspace.SetActiveDocumentInternal (PintaCore.Workspace.OpenDocuments[idx]);
+				active_doc_action.ChangeState (e.Parameter);
+			}
+		};
 	}
+
+	#region Initialization
+	public void RegisterActions (Gtk.Application app, Gio.Menu menu)
+	{
+		app.AddAccelAction (SaveAll, "<Ctrl><Alt>A");
+		menu.AppendItem (SaveAll.CreateMenuItem ());
+
+		app.AddAccelAction (CloseAll, "<Primary><Shift>W");
+		menu.AppendItem (CloseAll.CreateMenuItem ());
+
+		doc_section = Gio.Menu.New ();
+		menu.AppendSection (null, doc_section);
+
+		app.AddAction (active_doc_action);
+	}
+	#endregion
+
+	#region Public Methods
+
+	public void SetActiveDocument (Document doc)
+	{
+		var idx = PintaCore.Workspace.OpenDocuments.IndexOf (doc);
+		active_doc_action.Activate (GLib.Variant.Create (idx));
+	}
+
+	public void AddDocument (Document doc)
+	{
+		doc.Renamed += (o, e) => { RebuildDocumentMenu (); };
+		doc.IsDirtyChanged += (o, e) => { RebuildDocumentMenu (); };
+
+		AddDocumentMenuItem (PintaCore.Workspace.OpenDocuments.IndexOf (doc));
+	}
+
+	public void RemoveDocument (Document doc)
+	{
+		RebuildDocumentMenu ();
+	}
+	#endregion
+
+	#region Private Methods
+	private void AddDocumentMenuItem (int idx)
+	{
+		var doc = PintaCore.Workspace.OpenDocuments[idx];
+		var action_id = $"app.{doc_action_id}({idx})";
+		var label = $"{doc.DisplayName}{(doc.IsDirty ? '*' : string.Empty)}";
+		var menu_item = Gio.MenuItem.New (label, action_id);
+		doc_section.AppendItem (menu_item);
+
+		// We only assign accelerators up to Alt-9
+		if (idx < 9)
+			PintaCore.Chrome.Application.SetAccelsForAction (action_id, new[] { $"<Alt>{idx + 1}" });
+	}
+
+	private void RebuildDocumentMenu ()
+	{
+		doc_section.RemoveAll ();
+		for (int i = 0; i < PintaCore.Workspace.OpenDocuments.Count; ++i)
+			AddDocumentMenuItem (i);
+
+		PintaCore.Workspace.ResetTitle ();
+	}
+	#endregion
 }
