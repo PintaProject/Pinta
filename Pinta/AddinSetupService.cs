@@ -28,57 +28,56 @@ using Mono.Addins;
 using Mono.Addins.Setup;
 using Pinta.Core;
 
-namespace Pinta
+namespace Pinta;
+
+public sealed class AddinSetupService : SetupService
 {
-	public sealed class AddinSetupService : SetupService
+	internal AddinSetupService (AddinRegistry r) : base (r)
 	{
-		internal AddinSetupService (AddinRegistry r) : base (r)
-		{
-		}
+	}
 
-		public bool AreRepositoriesRegistered ()
-		{
-			string url = GetPlatformRepositoryUrl ();
-			return Repositories.ContainsRepository (url);
-		}
+	public bool AreRepositoriesRegistered ()
+	{
+		string url = GetPlatformRepositoryUrl ();
+		return Repositories.ContainsRepository (url);
+	}
 
-		public void RegisterRepositories (bool enable)
-		{
-			RegisterRepository (GetPlatformRepositoryUrl (),
-					    Translations.GetString ("Pinta Community Addins - Platform-Specific"),
-					    enable);
+	public void RegisterRepositories (bool enable)
+	{
+		RegisterRepository (GetPlatformRepositoryUrl (),
+				    Translations.GetString ("Pinta Community Addins - Platform-Specific"),
+				    enable);
 
-			RegisterRepository (GetAllRepositoryUrl (),
-					    Translations.GetString ("Pinta Community Addins - Cross-Platform"),
-					    enable);
-		}
+		RegisterRepository (GetAllRepositoryUrl (),
+				    Translations.GetString ("Pinta Community Addins - Cross-Platform"),
+				    enable);
+	}
 
-		private void RegisterRepository (string url, string name, bool enable)
-		{
-			if (Repositories.ContainsRepository (url))
-				return;
+	private void RegisterRepository (string url, string name, bool enable)
+	{
+		if (Repositories.ContainsRepository (url))
+			return;
 
-			var rep = Repositories.RegisterRepository (null, url, false);
-			rep.Name = name;
-			// Although repositories are enabled by default, we should always call this method to ensure
-			// that the repository name from the previous line ends up being saved to disk.
-			Repositories.SetRepositoryEnabled (url, enable);
-		}
+		var rep = Repositories.RegisterRepository (null, url, false);
+		rep.Name = name;
+		// Although repositories are enabled by default, we should always call this method to ensure
+		// that the repository name from the previous line ends up being saved to disk.
+		Repositories.SetRepositoryEnabled (url, enable);
+	}
 
-		private static string GetPlatformRepositoryUrl ()
-		{
-			string platform = SystemManager.GetOperatingSystem () switch {
-				OS.Windows => "Windows",
-				OS.Mac => "Mac",
-				_ => "Linux"
-			};
+	private static string GetPlatformRepositoryUrl ()
+	{
+		string platform = SystemManager.GetOperatingSystem () switch {
+			OS.Windows => "Windows",
+			OS.Mac => "Mac",
+			_ => "Linux"
+		};
 
-			return "http://pintaproject.github.io/Pinta-Community-Addins/repository/" + platform + "/main.mrep";
-		}
+		return "http://pintaproject.github.io/Pinta-Community-Addins/repository/" + platform + "/main.mrep";
+	}
 
-		private static string GetAllRepositoryUrl ()
-		{
-			return "http://pintaproject.github.io/Pinta-Community-Addins/repository/All/main.mrep";
-		}
+	private static string GetAllRepositoryUrl ()
+	{
+		return "http://pintaproject.github.io/Pinta-Community-Addins/repository/All/main.mrep";
 	}
 }

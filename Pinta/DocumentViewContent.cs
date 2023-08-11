@@ -28,27 +28,26 @@ using System;
 using Pinta.Core;
 using Pinta.Docking;
 
-namespace Pinta
+namespace Pinta;
+
+internal sealed class DocumentViewContent : IDockNotebookItem
 {
-	class DocumentViewContent : IDockNotebookItem
+	private readonly CanvasWindow canvas_window;
+
+	public Document Document { get; }
+
+	public DocumentViewContent (Document document, CanvasWindow canvasWindow)
 	{
-		private readonly CanvasWindow canvas_window;
+		this.Document = document;
+		this.canvas_window = canvasWindow;
 
-		public Document Document { get; }
-
-		public DocumentViewContent (Document document, CanvasWindow canvasWindow)
-		{
-			this.Document = document;
-			this.canvas_window = canvasWindow;
-
-			document.IsDirtyChanged += (o, e) => LabelChanged?.Invoke (this, EventArgs.Empty);
-			document.Renamed += (o, e) => { LabelChanged?.Invoke (this, EventArgs.Empty); };
-		}
-
-		public event EventHandler? LabelChanged;
-
-		public string Label => Document.DisplayName + (Document.IsDirty ? "*" : string.Empty);
-
-		public Gtk.Widget Widget => canvas_window;
+		document.IsDirtyChanged += (o, e) => LabelChanged?.Invoke (this, EventArgs.Empty);
+		document.Renamed += (o, e) => { LabelChanged?.Invoke (this, EventArgs.Empty); };
 	}
+
+	public event EventHandler? LabelChanged;
+
+	public string Label => Document.DisplayName + (Document.IsDirty ? "*" : string.Empty);
+
+	public Gtk.Widget Widget => canvas_window;
 }
