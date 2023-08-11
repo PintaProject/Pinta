@@ -24,58 +24,57 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 // THE SOFTWARE.
 
-namespace Pinta.Core
+namespace Pinta.Core;
+
+public sealed class UpdateLayerPropertiesHistoryItem : BaseHistoryItem
 {
-	public sealed class UpdateLayerPropertiesHistoryItem : BaseHistoryItem
+	readonly int layer_index;
+	readonly LayerProperties initial_properties;
+	readonly LayerProperties updated_properties;
+
+	public UpdateLayerPropertiesHistoryItem (
+			 string icon,
+			 string text,
+			 int layerIndex,
+			 LayerProperties initialProperties,
+			 LayerProperties updatedProperties)
+		: base (icon, text)
 	{
-		readonly int layer_index;
-		readonly LayerProperties initial_properties;
-		readonly LayerProperties updated_properties;
+		layer_index = layerIndex;
+		initial_properties = initialProperties;
+		updated_properties = updatedProperties;
+	}
 
-		public UpdateLayerPropertiesHistoryItem (
-				 string icon,
-				 string text,
-				 int layerIndex,
-				 LayerProperties initialProperties,
-				 LayerProperties updatedProperties)
-			: base (icon, text)
-		{
-			layer_index = layerIndex;
-			initial_properties = initialProperties;
-			updated_properties = updatedProperties;
-		}
+	public override void Undo ()
+	{
+		var doc = PintaCore.Workspace.ActiveDocument;
 
-		public override void Undo ()
-		{
-			var doc = PintaCore.Workspace.ActiveDocument;
+		var layer = doc.Layers[layer_index];
+		layer.Opacity = initial_properties.Opacity;
+		layer.Hidden = initial_properties.Hidden;
+		layer.Name = initial_properties.Name;
+		layer.BlendMode = initial_properties.BlendMode;
 
-			var layer = doc.Layers[layer_index];
-			layer.Opacity = initial_properties.Opacity;
-			layer.Hidden = initial_properties.Hidden;
-			layer.Name = initial_properties.Name;
-			layer.BlendMode = initial_properties.BlendMode;
+		UpdateSelectionLayer (doc, layer);
+	}
 
-			UpdateSelectionLayer (doc, layer);
-		}
+	public override void Redo ()
+	{
+		var doc = PintaCore.Workspace.ActiveDocument;
 
-		public override void Redo ()
-		{
-			var doc = PintaCore.Workspace.ActiveDocument;
+		var layer = doc.Layers[layer_index];
+		layer.Opacity = updated_properties.Opacity;
+		layer.Hidden = updated_properties.Hidden;
+		layer.Name = updated_properties.Name;
+		layer.BlendMode = updated_properties.BlendMode;
 
-			var layer = doc.Layers[layer_index];
-			layer.Opacity = updated_properties.Opacity;
-			layer.Hidden = updated_properties.Hidden;
-			layer.Name = updated_properties.Name;
-			layer.BlendMode = updated_properties.BlendMode;
+		UpdateSelectionLayer (doc, layer);
+	}
 
-			UpdateSelectionLayer (doc, layer);
-		}
-
-		private static void UpdateSelectionLayer (Document doc, Layer layer)
-		{
-			// Keep the selection layer's visibility in sync with the current layer.
-			if (doc.Layers.CurrentUserLayer == layer)
-				doc.Layers.SelectionLayer.Hidden = layer.Hidden;
-		}
+	private static void UpdateSelectionLayer (Document doc, Layer layer)
+	{
+		// Keep the selection layer's visibility in sync with the current layer.
+		if (doc.Layers.CurrentUserLayer == layer)
+			doc.Layers.SelectionLayer.Hidden = layer.Hidden;
 	}
 }

@@ -26,71 +26,70 @@
 
 using Cairo;
 
-namespace Pinta.Core
+namespace Pinta.Core;
+
+public sealed class FinishPixelsHistoryItem : BaseHistoryItem
 {
-	public sealed class FinishPixelsHistoryItem : BaseHistoryItem
+	private ImageSurface? old_selection_layer;
+	private ImageSurface? old_surface;
+	private Matrix old_transform = CairoExtensions.CreateIdentityMatrix ();
+
+	public override bool CausesDirty => false;
+
+	public FinishPixelsHistoryItem ()
 	{
-		private ImageSurface? old_selection_layer;
-		private ImageSurface? old_surface;
-		private Matrix old_transform = CairoExtensions.CreateIdentityMatrix ();
+		Text = Translations.GetString ("Finish Pixels");
+		Icon = Resources.Icons.ToolMove; ;
+	}
 
-		public override bool CausesDirty => false;
+	public override void Undo ()
+	{
+		var doc = PintaCore.Workspace.ActiveDocument;
 
-		public FinishPixelsHistoryItem ()
-		{
-			Text = Translations.GetString ("Finish Pixels");
-			Icon = Resources.Icons.ToolMove; ;
-		}
+		doc.Layers.ShowSelectionLayer = true;
 
-		public override void Undo ()
-		{
-			var doc = PintaCore.Workspace.ActiveDocument;
+		Matrix swap_transform = doc.Layers.SelectionLayer.Transform;
+		ImageSurface swap_surf = doc.Layers.CurrentUserLayer.Surface;
+		ImageSurface swap_sel = doc.Layers.SelectionLayer.Surface;
 
-			doc.Layers.ShowSelectionLayer = true;
+		doc.Layers.SelectionLayer.Surface = old_selection_layer!; // NRT - Set in TakeSnapshot
+		doc.Layers.SelectionLayer.Transform = old_transform;
+		doc.Layers.CurrentUserLayer.Surface = old_surface!;
 
-			Matrix swap_transform = doc.Layers.SelectionLayer.Transform;
-			ImageSurface swap_surf = doc.Layers.CurrentUserLayer.Surface;
-			ImageSurface swap_sel = doc.Layers.SelectionLayer.Surface;
+		old_transform = swap_transform;
+		old_surface = swap_surf;
+		old_selection_layer = swap_sel;
 
-			doc.Layers.SelectionLayer.Surface = old_selection_layer!; // NRT - Set in TakeSnapshot
-			doc.Layers.SelectionLayer.Transform = old_transform;
-			doc.Layers.CurrentUserLayer.Surface = old_surface!;
+		PintaCore.Workspace.Invalidate ();
+		PintaCore.Tools.SetCurrentTool ("MoveSelectedTool");
+	}
 
-			old_transform = swap_transform;
-			old_surface = swap_surf;
-			old_selection_layer = swap_sel;
+	public override void Redo ()
+	{
+		var doc = PintaCore.Workspace.ActiveDocument;
 
-			PintaCore.Workspace.Invalidate ();
-			PintaCore.Tools.SetCurrentTool ("MoveSelectedTool");
-		}
+		Matrix swap_transfrom = doc.Layers.SelectionLayer.Transform;
+		ImageSurface swap_surf = doc.Layers.CurrentUserLayer.Surface.Clone ();
+		ImageSurface swap_sel = doc.Layers.SelectionLayer.Surface;
 
-		public override void Redo ()
-		{
-			var doc = PintaCore.Workspace.ActiveDocument;
+		doc.Layers.CurrentUserLayer.Surface = old_surface!; // NRT - Set in TakeSnapshot
+		doc.Layers.SelectionLayer.Surface = old_selection_layer!;
+		doc.Layers.SelectionLayer.Transform = old_transform;
 
-			Matrix swap_transfrom = doc.Layers.SelectionLayer.Transform;
-			ImageSurface swap_surf = doc.Layers.CurrentUserLayer.Surface.Clone ();
-			ImageSurface swap_sel = doc.Layers.SelectionLayer.Surface;
+		old_surface = swap_surf;
+		old_selection_layer = swap_sel;
+		old_transform = swap_transfrom;
 
-			doc.Layers.CurrentUserLayer.Surface = old_surface!; // NRT - Set in TakeSnapshot
-			doc.Layers.SelectionLayer.Surface = old_selection_layer!;
-			doc.Layers.SelectionLayer.Transform = old_transform;
+		doc.Layers.DestroySelectionLayer ();
+		PintaCore.Workspace.Invalidate ();
+	}
 
-			old_surface = swap_surf;
-			old_selection_layer = swap_sel;
-			old_transform = swap_transfrom;
+	public void TakeSnapshot ()
+	{
+		var doc = PintaCore.Workspace.ActiveDocument;
 
-			doc.Layers.DestroySelectionLayer ();
-			PintaCore.Workspace.Invalidate ();
-		}
-
-		public void TakeSnapshot ()
-		{
-			var doc = PintaCore.Workspace.ActiveDocument;
-
-			old_selection_layer = doc.Layers.SelectionLayer.Surface.Clone ();
-			old_surface = doc.Layers.CurrentUserLayer.Surface.Clone ();
-			old_transform = doc.Layers.SelectionLayer.Transform.Clone ();
-		}
+		old_selection_layer = doc.Layers.SelectionLayer.Surface.Clone ();
+		old_surface = doc.Layers.CurrentUserLayer.Surface.Clone ();
+		old_transform = doc.Layers.SelectionLayer.Transform.Clone ();
 	}
 }

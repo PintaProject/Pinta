@@ -24,39 +24,38 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 // THE SOFTWARE.
 
-namespace Pinta.Core
+namespace Pinta.Core;
+
+public sealed class DeleteLayerHistoryItem : BaseHistoryItem
 {
-	public sealed class DeleteLayerHistoryItem : BaseHistoryItem
+	private readonly int layer_index;
+	private UserLayer? layer;
+
+	public DeleteLayerHistoryItem (string icon, string text, UserLayer layer, int layerIndex) : base (icon, text)
 	{
-		private readonly int layer_index;
-		private UserLayer? layer;
+		layer_index = layerIndex;
+		this.layer = layer;
+	}
 
-		public DeleteLayerHistoryItem (string icon, string text, UserLayer layer, int layerIndex) : base (icon, text)
-		{
-			layer_index = layerIndex;
-			this.layer = layer;
-		}
+	public override void Undo ()
+	{
+		var doc = PintaCore.Workspace.ActiveDocument;
 
-		public override void Undo ()
-		{
-			var doc = PintaCore.Workspace.ActiveDocument;
+		doc.Layers.Insert (layer!, layer_index); // NRT - layer is set by constructor
 
-			doc.Layers.Insert (layer!, layer_index); // NRT - layer is set by constructor
+		// Make new layer the current layer
+		doc.Layers.SetCurrentUserLayer (layer!);
 
-			// Make new layer the current layer
-			doc.Layers.SetCurrentUserLayer (layer!);
+		layer = null;
+	}
 
-			layer = null;
-		}
+	public override void Redo ()
+	{
+		var doc = PintaCore.Workspace.ActiveDocument;
 
-		public override void Redo ()
-		{
-			var doc = PintaCore.Workspace.ActiveDocument;
+		// Store the layer for "undo"
+		layer = doc.Layers[layer_index];
 
-			// Store the layer for "undo"
-			layer = doc.Layers[layer_index];
-
-			doc.Layers.DeleteLayer (layer_index);
-		}
+		doc.Layers.DeleteLayer (layer_index);
 	}
 }
