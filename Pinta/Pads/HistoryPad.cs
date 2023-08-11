@@ -29,37 +29,36 @@ using Pinta.Core;
 using Pinta.Docking;
 using Pinta.Gui.Widgets;
 
-namespace Pinta
+namespace Pinta;
+
+public sealed class HistoryPad : IDockPad
 {
-	public class HistoryPad : IDockPad
+	public void Initialize (Dock workspace, Application app, Gio.Menu padMenu)
 	{
-		public void Initialize (Dock workspace, Application app, Gio.Menu padMenu)
-		{
-			var history = new HistoryListView ();
-			DockItem history_item = new DockItem (history, "History", icon_name: Pinta.Resources.Icons.HistoryList) {
-				Label = Translations.GetString ("History")
-			};
+		var history = new HistoryListView ();
+		DockItem history_item = new DockItem (history, "History", icon_name: Pinta.Resources.Icons.HistoryList) {
+			Label = Translations.GetString ("History")
+		};
 
-			var history_tb = history_item.AddToolBar ();
-			history_tb.Append (PintaCore.Actions.Edit.Undo.CreateDockToolBarItem ());
-			history_tb.Append (PintaCore.Actions.Edit.Redo.CreateDockToolBarItem ());
+		var history_tb = history_item.AddToolBar ();
+		history_tb.Append (PintaCore.Actions.Edit.Undo.CreateDockToolBarItem ());
+		history_tb.Append (PintaCore.Actions.Edit.Redo.CreateDockToolBarItem ());
 
-			workspace.AddItem (history_item, DockPlacement.Right);
+		workspace.AddItem (history_item, DockPlacement.Right);
 
-			var show_history = new ToggleCommand ("history", Translations.GetString ("History"), null, Resources.Icons.LayerDuplicate) {
-				Value = true
-			};
-			app.AddAction (show_history);
-			padMenu.AppendItem (show_history.CreateMenuItem ());
+		var show_history = new ToggleCommand ("history", Translations.GetString ("History"), null, Resources.Icons.LayerDuplicate) {
+			Value = true
+		};
+		app.AddAction (show_history);
+		padMenu.AppendItem (show_history.CreateMenuItem ());
 
-			show_history.Toggled += (val) => {
-				if (val)
-					history_item.Maximize ();
-				else
-					history_item.Minimize ();
-			};
-			history_item.MaximizeClicked += (_, _) => show_history.Value = true;
-			history_item.MinimizeClicked += (_, _) => show_history.Value = false;
-		}
+		show_history.Toggled += (val) => {
+			if (val)
+				history_item.Maximize ();
+			else
+				history_item.Minimize ();
+		};
+		history_item.MaximizeClicked += (_, _) => show_history.Value = true;
+		history_item.MinimizeClicked += (_, _) => show_history.Value = false;
 	}
 }
