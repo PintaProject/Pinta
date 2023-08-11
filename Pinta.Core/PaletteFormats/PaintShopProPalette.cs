@@ -28,55 +28,54 @@ using System.Collections.Generic;
 using System.IO;
 using Cairo;
 
-namespace Pinta.Core
+namespace Pinta.Core;
+
+public sealed class PaintShopProPalette : IPaletteLoader, IPaletteSaver
 {
-	public class PaintShopProPalette : IPaletteLoader, IPaletteSaver
+	public List<Color> Load (Gio.File file)
 	{
-		public List<Color> Load (Gio.File file)
-		{
-			List<Color> colors = new List<Color> ();
-			using var stream = new GioStream (file.Read (null));
-			StreamReader reader = new StreamReader (stream);
+		List<Color> colors = new List<Color> ();
+		using var stream = new GioStream (file.Read (null));
+		StreamReader reader = new StreamReader (stream);
 
-			string? line = reader.ReadLine ();
-			if (line is null || !line.StartsWith ("JASC-PAL"))
-				throw new InvalidDataException ("Not a valid PaintShopPro palette file.");
+		string? line = reader.ReadLine ();
+		if (line is null || !line.StartsWith ("JASC-PAL"))
+			throw new InvalidDataException ("Not a valid PaintShopPro palette file.");
 
-			line = reader.ReadLine (); // version
+		line = reader.ReadLine (); // version
 
-			int numberOfColors = int.Parse (reader.ReadLine ()!); // NRT - Assumes valid formatted file
-			PintaCore.Palette.CurrentPalette.Resize (numberOfColors);
+		int numberOfColors = int.Parse (reader.ReadLine ()!); // NRT - Assumes valid formatted file
+		PintaCore.Palette.CurrentPalette.Resize (numberOfColors);
 
-			while (!reader.EndOfStream) {
-				line = reader.ReadLine ();
+		while (!reader.EndOfStream) {
+			line = reader.ReadLine ();
 
-				if (line is null)
-					break;
+			if (line is null)
+				break;
 
-				string[] split = line.Split (' ');
-				double r = int.Parse (split[0]) / 255f;
-				double g = int.Parse (split[1]) / 255f;
-				double b = int.Parse (split[2]) / 255f;
-				colors.Add (new Color (r, g, b));
-			}
-
-			return colors;
+			string[] split = line.Split (' ');
+			double r = int.Parse (split[0]) / 255f;
+			double g = int.Parse (split[1]) / 255f;
+			double b = int.Parse (split[2]) / 255f;
+			colors.Add (new Color (r, g, b));
 		}
 
-		public void Save (List<Color> colors, Gio.File file)
-		{
-			using var stream = new GioStream (file.Replace ());
-			StreamWriter writer = new StreamWriter (stream);
-			writer.WriteLine ("JASC-PAL");
-			writer.WriteLine ("0100");
-			writer.WriteLine (colors.Count.ToString ());
+		return colors;
+	}
 
-			foreach (Color color in colors) {
-				writer.WriteLine ("{0} {1} {2}", (int) (color.R * 255), (int) (color.G * 255), (int) (color.B * 255));
-			}
+	public void Save (List<Color> colors, Gio.File file)
+	{
+		using var stream = new GioStream (file.Replace ());
+		StreamWriter writer = new StreamWriter (stream);
+		writer.WriteLine ("JASC-PAL");
+		writer.WriteLine ("0100");
+		writer.WriteLine (colors.Count.ToString ());
 
-			writer.Close ();
+		foreach (Color color in colors) {
+			writer.WriteLine ("{0} {1} {2}", (int) (color.R * 255), (int) (color.G * 255), (int) (color.B * 255));
 		}
+
+		writer.Close ();
 	}
 }
 

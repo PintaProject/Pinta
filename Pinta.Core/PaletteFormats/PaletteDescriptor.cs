@@ -29,49 +29,48 @@ using System.Collections.ObjectModel;
 using System.Text;
 using Gtk;
 
-namespace Pinta.Core
+namespace Pinta.Core;
+
+public sealed class PaletteDescriptor
 {
-	public sealed class PaletteDescriptor
+	public ReadOnlyCollection<string> Extensions { get; }
+
+	public IPaletteLoader Loader { get; }
+
+	public IPaletteSaver Saver { get; }
+
+	public FileFilter Filter { get; }
+
+	public PaletteDescriptor (string displayPrefix, IEnumerable<string> extensions, IPaletteLoader loader, IPaletteSaver saver)
 	{
-		public ReadOnlyCollection<string> Extensions { get; }
+		this.Extensions = extensions.ToReadOnlyCollection ();
+		this.Loader = loader;
+		this.Saver = saver;
 
-		public IPaletteLoader Loader { get; }
+		var ff = FileFilter.New ();
+		StringBuilder formatNames = new StringBuilder ();
 
-		public IPaletteSaver Saver { get; }
+		foreach (string ext in Extensions) {
+			if (formatNames.Length > 0)
+				formatNames.Append (", ");
 
-		public FileFilter Filter { get; }
-
-		public PaletteDescriptor (string displayPrefix, IEnumerable<string> extensions, IPaletteLoader loader, IPaletteSaver saver)
-		{
-			this.Extensions = extensions.ToReadOnlyCollection ();
-			this.Loader = loader;
-			this.Saver = saver;
-
-			var ff = FileFilter.New ();
-			StringBuilder formatNames = new StringBuilder ();
-
-			foreach (string ext in Extensions) {
-				if (formatNames.Length > 0)
-					formatNames.Append (", ");
-
-				string wildcard = $"*.{ext}";
-				ff.AddPattern (wildcard);
-				formatNames.Append (wildcard);
-			}
-
-			// Translators: {0} is the palette format (e.g. "GIMP") and {1} is a list of file extensions.
-			ff.Name = Translations.GetString ("{0} palette ({1})", displayPrefix, formatNames);
-			this.Filter = ff;
+			string wildcard = $"*.{ext}";
+			ff.AddPattern (wildcard);
+			formatNames.Append (wildcard);
 		}
 
-		public bool IsReadOnly ()
-		{
-			return Saver == null;
-		}
+		// Translators: {0} is the palette format (e.g. "GIMP") and {1} is a list of file extensions.
+		ff.Name = Translations.GetString ("{0} palette ({1})", displayPrefix, formatNames);
+		this.Filter = ff;
+	}
 
-		public bool IsWriteOnly ()
-		{
-			return Loader == null;
-		}
+	public bool IsReadOnly ()
+	{
+		return Saver == null;
+	}
+
+	public bool IsWriteOnly ()
+	{
+		return Loader == null;
 	}
 }
