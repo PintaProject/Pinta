@@ -30,105 +30,104 @@ using Gtk;
 using Pinta.Core;
 using Pinta.Gui.Widgets;
 
-namespace Pinta.Effects
+namespace Pinta.Effects;
+
+public sealed class PosterizeDialog : Gtk.Dialog
 {
-	public class PosterizeDialog : Gtk.Dialog
+	private HScaleSpinButtonWidget red_spinbox;
+	private HScaleSpinButtonWidget green_spinbox;
+	private HScaleSpinButtonWidget blue_spinbox;
+	private CheckButton link_button;
+
+	public int Red => red_spinbox.ValueAsInt;
+
+	public int Green => green_spinbox.ValueAsInt;
+
+	public int Blue => blue_spinbox.ValueAsInt;
+
+	public PosterizeData? EffectData { get; set; }
+
+	public PosterizeDialog ()
 	{
-		private HScaleSpinButtonWidget red_spinbox;
-		private HScaleSpinButtonWidget green_spinbox;
-		private HScaleSpinButtonWidget blue_spinbox;
-		private CheckButton link_button;
+		Title = Translations.GetString ("Posterize");
+		TransientFor = PintaCore.Chrome.MainWindow;
+		Modal = true;
+		this.AddCancelOkButtons ();
+		this.SetDefaultResponse (ResponseType.Ok);
 
-		public int Red => red_spinbox.ValueAsInt;
+		Build ();
 
-		public int Green => green_spinbox.ValueAsInt;
+		red_spinbox.ValueChanged += HandleValueChanged;
+		green_spinbox.ValueChanged += HandleValueChanged;
+		blue_spinbox.ValueChanged += HandleValueChanged;
+	}
 
-		public int Blue => blue_spinbox.ValueAsInt;
+	private void HandleValueChanged (object? sender, EventArgs e)
+	{
+		var widget = sender as HScaleSpinButtonWidget;
 
-		public PosterizeData? EffectData { get; set; }
+		if (widget is null)
+			return;
 
-		public PosterizeDialog ()
-		{
-			Title = Translations.GetString ("Posterize");
-			TransientFor = PintaCore.Chrome.MainWindow;
-			Modal = true;
-			this.AddCancelOkButtons ();
-			this.SetDefaultResponse (ResponseType.Ok);
+		if (link_button.Active)
+			green_spinbox.Value = blue_spinbox.Value = red_spinbox.Value = widget.Value;
 
-			Build ();
+		UpdateEffectData ();
+	}
 
-			red_spinbox.ValueChanged += HandleValueChanged;
-			green_spinbox.ValueChanged += HandleValueChanged;
-			blue_spinbox.ValueChanged += HandleValueChanged;
-		}
+	private void UpdateEffectData ()
+	{
+		if (EffectData == null)
+			return;
 
-		private void HandleValueChanged (object? sender, EventArgs e)
-		{
-			var widget = sender as HScaleSpinButtonWidget;
+		EffectData.Red = red_spinbox.ValueAsInt;
+		EffectData.Green = green_spinbox.ValueAsInt;
+		EffectData.Blue = blue_spinbox.ValueAsInt;
 
-			if (widget is null)
-				return;
+		// Only fire event once, even if all properties have changed.
+		EffectData.FirePropertyChanged ("_all_");
+	}
 
-			if (link_button.Active)
-				green_spinbox.Value = blue_spinbox.Value = red_spinbox.Value = widget.Value;
+	private static void InitSpinBox (HScaleSpinButtonWidget spinbox)
+	{
+		spinbox.DefaultValue = 16;
+		spinbox.MaximumValue = 64;
+		spinbox.MinimumValue = 2;
+	}
 
-			UpdateEffectData ();
-		}
+	[MemberNotNull (nameof (red_spinbox), nameof (green_spinbox), nameof (blue_spinbox), nameof (link_button))]
+	private void Build ()
+	{
+		Resizable = false;
 
-		private void UpdateEffectData ()
-		{
-			if (EffectData == null)
-				return;
+		var content_area = this.GetContentAreaBox ();
+		content_area.WidthRequest = 400;
+		content_area.SetAllMargins (6);
+		content_area.Spacing = 6;
 
-			EffectData.Red = red_spinbox.ValueAsInt;
-			EffectData.Green = green_spinbox.ValueAsInt;
-			EffectData.Blue = blue_spinbox.ValueAsInt;
+		red_spinbox = new HScaleSpinButtonWidget {
+			Label = Translations.GetString ("Red")
+		};
+		InitSpinBox (red_spinbox);
+		content_area.Append (red_spinbox);
 
-			// Only fire event once, even if all properties have changed.
-			EffectData.FirePropertyChanged ("_all_");
-		}
+		green_spinbox = new HScaleSpinButtonWidget {
+			Label = Translations.GetString ("Green")
+		};
+		InitSpinBox (green_spinbox);
+		content_area.Append (green_spinbox);
 
-		private static void InitSpinBox (HScaleSpinButtonWidget spinbox)
-		{
-			spinbox.DefaultValue = 16;
-			spinbox.MaximumValue = 64;
-			spinbox.MinimumValue = 2;
-		}
+		blue_spinbox = new HScaleSpinButtonWidget {
+			Label = Translations.GetString ("Blue")
+		};
+		InitSpinBox (blue_spinbox);
+		content_area.Append (blue_spinbox);
 
-		[MemberNotNull (nameof (red_spinbox), nameof (green_spinbox), nameof (blue_spinbox), nameof (link_button))]
-		private void Build ()
-		{
-			Resizable = false;
+		link_button = CheckButton.NewWithLabel (Translations.GetString ("Linked"));
+		link_button.Active = true;
+		content_area.Append (link_button);
 
-			var content_area = this.GetContentAreaBox ();
-			content_area.WidthRequest = 400;
-			content_area.SetAllMargins (6);
-			content_area.Spacing = 6;
-
-			red_spinbox = new HScaleSpinButtonWidget {
-				Label = Translations.GetString ("Red")
-			};
-			InitSpinBox (red_spinbox);
-			content_area.Append (red_spinbox);
-
-			green_spinbox = new HScaleSpinButtonWidget {
-				Label = Translations.GetString ("Green")
-			};
-			InitSpinBox (green_spinbox);
-			content_area.Append (green_spinbox);
-
-			blue_spinbox = new HScaleSpinButtonWidget {
-				Label = Translations.GetString ("Blue")
-			};
-			InitSpinBox (blue_spinbox);
-			content_area.Append (blue_spinbox);
-
-			link_button = CheckButton.NewWithLabel (Translations.GetString ("Linked"));
-			link_button.Active = true;
-			content_area.Append (link_button);
-
-			DefaultWidth = 400;
-			DefaultHeight = 300;
-		}
+		DefaultWidth = 400;
+		DefaultHeight = 300;
 	}
 }
