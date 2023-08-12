@@ -119,38 +119,42 @@ public abstract class GradientRenderer
 		int src_width = surface.Width;
 
 		for (int ri = 0; ri < rois.Length; ++ri) {
+
 			RectangleI rect = rois[ri];
 
-			if (this.start_point.X == this.end_point.X && this.start_point.Y == this.end_point.Y) {
-				// Start and End point are the same ... fill with solid color.
-				for (int y = rect.Top; y <= rect.Bottom; ++y) {
-					var row = src_data.Slice (y * src_width, src_width);
-
-					for (int x = rect.Left; x <= rect.Right; ++x) {
-						ref ColorBgra pixel = ref row[x];
-						ColorBgra result;
-
-						if (this.alpha_only && this.alpha_blending) {
-							byte resultAlpha = (byte) Utility.FastDivideShortByByte ((ushort) (pixel.A * endAlpha), 255);
-							result = pixel;
-							result.A = resultAlpha;
-						} else if (this.alpha_only && !this.alpha_blending) {
-							result = pixel;
-							result.A = endAlpha;
-						} else if (!this.alpha_only && this.alpha_blending) {
-							result = this.normal_blend_op.Apply (pixel, this.end_color);
-							//if (!this.alphaOnly && !this.alphaBlending)
-						} else {
-							result = this.end_color;
-						}
-
-						pixel = result;
-					}
-				}
-			} else {
+			if (this.start_point.X != this.end_point.X || this.start_point.Y != this.end_point.Y) {
 				var mainrect = rect;
-				Parallel.ForEach (Enumerable.Range (rect.Top, rect.Height),
-					(y) => ProcessGradientLine (startAlpha, endAlpha, y, mainrect, surface.GetPixelData (), src_width));
+				Parallel.ForEach (
+					Enumerable.Range (rect.Top, rect.Height),
+					(y) => ProcessGradientLine (startAlpha, endAlpha, y, mainrect, surface.GetPixelData (), src_width)
+				);
+				continue;
+			}
+
+			// Start and End point are the same ... fill with solid color.
+			for (int y = rect.Top; y <= rect.Bottom; ++y) {
+				var row = src_data.Slice (y * src_width, src_width);
+
+				for (int x = rect.Left; x <= rect.Right; ++x) {
+					ref ColorBgra pixel = ref row[x];
+					ColorBgra result;
+
+					if (this.alpha_only && this.alpha_blending) {
+						byte resultAlpha = (byte) Utility.FastDivideShortByByte ((ushort) (pixel.A * endAlpha), 255);
+						result = pixel;
+						result.A = resultAlpha;
+					} else if (this.alpha_only && !this.alpha_blending) {
+						result = pixel;
+						result.A = endAlpha;
+					} else if (!this.alpha_only && this.alpha_blending) {
+						result = this.normal_blend_op.Apply (pixel, this.end_color);
+						//if (!this.alphaOnly && !this.alphaBlending)
+					} else {
+						result = this.end_color;
+					}
+
+					pixel = result;
+				}
 			}
 		}
 
