@@ -37,120 +37,119 @@
 using Cairo;
 using Pinta.Core;
 
-namespace Pinta.Gui.Widgets
+namespace Pinta.Gui.Widgets;
+
+public sealed class HistogramWidget : Gtk.DrawingArea
 {
-	public class HistogramWidget : Gtk.DrawingArea
+	private readonly bool[] selected;
+
+	public HistogramWidget ()
 	{
-		private readonly bool[] selected;
+		Histogram = new HistogramRgb ();
+		selected = new bool[] { true, true, true };
 
-		public HistogramWidget ()
-		{
-			Histogram = new HistogramRgb ();
-			selected = new bool[] { true, true, true };
+		SetDrawFunc ((_, context, _, _) => Draw (context));
+	}
 
-			SetDrawFunc ((_, context, _, _) => Draw (context));
+	public bool FlipHorizontal { get; set; }
+
+	public bool FlipVertical { get; set; }
+
+	public HistogramRgb Histogram { get; private set; }
+
+	public void ResetHistogram ()
+	{
+		Histogram = new HistogramRgb ();
+		Histogram.HistogramChanged += (_, _) => QueueDraw ();
+	}
+
+	public void SetSelected (int channel, bool val)
+	{
+		selected[channel] = val;
+		QueueDraw ();
+	}
+
+	private static void CheckPoint (RectangleD rect, PointD point)
+	{
+		if (point.X < rect.X)
+			point.X = rect.X;
+		else if (point.X > rect.X + rect.Width)
+			point.X = rect.X + rect.Width;
+
+		if (point.Y < rect.Y)
+			point.Y = rect.Y;
+		else if (point.Y > rect.Y + rect.Height)
+			point.Y = rect.Y + rect.Height;
+	}
+
+	private void DrawChannel (Context g, ColorBgra color, int channel, long max, float mean)
+	{
+		var rect = new RectangleD (0, 0, GetAllocatedWidth (), GetAllocatedHeight ());
+
+		var l = (int) rect.X;
+		var t = (int) rect.Y;
+		var r = (int) (rect.X + rect.Width);
+		var b = (int) (rect.Y + rect.Height);
+
+		var entries = Histogram.Entries;
+		var hist = Histogram.HistogramValues[channel];
+
+		++max;
+
+		if (FlipHorizontal)
+			Utility.Swap (ref l, ref r);
+
+		if (!FlipVertical)
+			Utility.Swap (ref t, ref b);
+
+		var points = new PointD[entries + 2];
+
+		points[entries] = new PointD (Utility.Lerp (l, r, -1), Utility.Lerp (t, b, 20));
+		points[entries + 1] = new PointD (Utility.Lerp (l, r, -1), Utility.Lerp (b, t, 20));
+
+		for (var i = 0; i < entries; i += entries - 1) {
+			points[i] = new PointD (
+			    Utility.Lerp (l, r, (float) hist[i] / (float) max),
+			    Utility.Lerp (t, b, (float) i / (float) entries));
+
+			CheckPoint (rect, points[i]);
 		}
 
-		public bool FlipHorizontal { get; set; }
+		var sum3 = hist[0] + hist[1];
 
-		public bool FlipVertical { get; set; }
+		for (var i = 1; i < entries - 1; ++i) {
+			sum3 += hist[i + 1];
 
-		public HistogramRgb Histogram { get; private set; }
+			points[i] = new PointD (
+			    Utility.Lerp (l, r, (float) (sum3) / (float) (max * 3.1f)),
+			    Utility.Lerp (t, b, (float) i / (float) entries));
 
-		public void ResetHistogram ()
-		{
-			Histogram = new HistogramRgb ();
-			Histogram.HistogramChanged += (_, _) => QueueDraw ();
+			CheckPoint (rect, points[i]);
+			sum3 -= hist[i - 1];
 		}
 
-		public void SetSelected (int channel, bool val)
-		{
-			selected[channel] = val;
-			QueueDraw ();
-		}
+		var intensity = selected[channel] ? (byte) 96 : (byte) 32;
+		var pen_color = ColorBgra.Blend (ColorBgra.Black, color, intensity);
+		var brush_color = color;
 
-		private static void CheckPoint (RectangleD rect, PointD point)
-		{
-			if (point.X < rect.X)
-				point.X = rect.X;
-			else if (point.X > rect.X + rect.Width)
-				point.X = rect.X + rect.Width;
+		brush_color.A = intensity;
 
-			if (point.Y < rect.Y)
-				point.Y = rect.Y;
-			else if (point.Y > rect.Y + rect.Height)
-				point.Y = rect.Y + rect.Height;
-		}
+		g.LineWidth = 1;
 
-		private void DrawChannel (Context g, ColorBgra color, int channel, long max, float mean)
-		{
-			var rect = new RectangleD (0, 0, GetAllocatedWidth (), GetAllocatedHeight ());
+		g.Rectangle (rect);
+		g.Clip ();
+		g.DrawPolygonal (points, pen_color.ToCairoColor ());
+		g.FillPolygonal (points, brush_color.ToCairoColor ());
+	}
 
-			var l = (int) rect.X;
-			var t = (int) rect.Y;
-			var r = (int) (rect.X + rect.Width);
-			var b = (int) (rect.Y + rect.Height);
+	private void Draw (Context g)
+	{
+		var max = Histogram.GetMax ();
+		var mean = Histogram.GetMean ();
 
-			var entries = Histogram.Entries;
-			var hist = Histogram.HistogramValues[channel];
+		var channels = Histogram.Channels;
 
-			++max;
-
-			if (FlipHorizontal)
-				Utility.Swap (ref l, ref r);
-
-			if (!FlipVertical)
-				Utility.Swap (ref t, ref b);
-
-			var points = new PointD[entries + 2];
-
-			points[entries] = new PointD (Utility.Lerp (l, r, -1), Utility.Lerp (t, b, 20));
-			points[entries + 1] = new PointD (Utility.Lerp (l, r, -1), Utility.Lerp (b, t, 20));
-
-			for (var i = 0; i < entries; i += entries - 1) {
-				points[i] = new PointD (
-				    Utility.Lerp (l, r, (float) hist[i] / (float) max),
-				    Utility.Lerp (t, b, (float) i / (float) entries));
-
-				CheckPoint (rect, points[i]);
-			}
-
-			var sum3 = hist[0] + hist[1];
-
-			for (var i = 1; i < entries - 1; ++i) {
-				sum3 += hist[i + 1];
-
-				points[i] = new PointD (
-				    Utility.Lerp (l, r, (float) (sum3) / (float) (max * 3.1f)),
-				    Utility.Lerp (t, b, (float) i / (float) entries));
-
-				CheckPoint (rect, points[i]);
-				sum3 -= hist[i - 1];
-			}
-
-			var intensity = selected[channel] ? (byte) 96 : (byte) 32;
-			var pen_color = ColorBgra.Blend (ColorBgra.Black, color, intensity);
-			var brush_color = color;
-
-			brush_color.A = intensity;
-
-			g.LineWidth = 1;
-
-			g.Rectangle (rect);
-			g.Clip ();
-			g.DrawPolygonal (points, pen_color.ToCairoColor ());
-			g.FillPolygonal (points, brush_color.ToCairoColor ());
-		}
-
-		private void Draw (Context g)
-		{
-			var max = Histogram.GetMax ();
-			var mean = Histogram.GetMean ();
-
-			var channels = Histogram.Channels;
-
-			for (var i = 0; i < channels; ++i)
-				DrawChannel (g, Histogram.GetVisualColor (i), i, max, mean[i]);
-		}
+		for (var i = 0; i < channels; ++i)
+			DrawChannel (g, Histogram.GetVisualColor (i), i, max, mean[i]);
 	}
 }

@@ -29,61 +29,60 @@ using System.Diagnostics.CodeAnalysis;
 using Gtk;
 using Pinta.Core;
 
-namespace Pinta.Gui.Widgets
+namespace Pinta.Gui.Widgets;
+
+public sealed class ComboBoxWidget : Box
 {
-	public class ComboBoxWidget : Box
+	private Label label;
+	private ComboBoxText combobox;
+
+	public ComboBoxWidget (string[] entries)
 	{
-		private Label label;
-		private ComboBoxText combobox;
+		Build ();
 
-		public ComboBoxWidget (string[] entries)
-		{
-			Build ();
+		foreach (var s in entries)
+			combobox.AppendText (s);
 
-			foreach (var s in entries)
-				combobox.AppendText (s);
+		combobox.OnChanged += delegate {
+			Changed?.Invoke (this, EventArgs.Empty);
+		};
+	}
 
-			combobox.OnChanged += delegate {
-				Changed?.Invoke (this, EventArgs.Empty);
-			};
-		}
+	public string Label {
+		get => label.GetText ();
+		set => label.SetText (value);
+	}
 
-		public string Label {
-			get => label.GetText ();
-			set => label.SetText (value);
-		}
+	public int Active {
+		get => combobox.Active;
+		set => combobox.Active = value;
+	}
 
-		public int Active {
-			get => combobox.Active;
-			set => combobox.Active = value;
-		}
+	public string ActiveText => combobox.GetActiveText ()!;
 
-		public string ActiveText => combobox.GetActiveText ()!;
+	public event EventHandler? Changed;
 
-		public event EventHandler? Changed;
+	[MemberNotNull (nameof (label), nameof (combobox))]
+	private void Build ()
+	{
+		const int spacing = 6;
 
-		[MemberNotNull (nameof (label), nameof (combobox))]
-		private void Build ()
-		{
-			const int spacing = 6;
+		// Section label + line
+		var hbox1 = new Box () { Spacing = spacing };
+		hbox1.SetOrientation (Orientation.Horizontal);
 
-			// Section label + line
-			var hbox1 = new Box () { Spacing = spacing };
-			hbox1.SetOrientation (Orientation.Horizontal);
+		label = new Label ();
+		label.AddCssClass (AdwaitaStyles.Title4);
+		hbox1.Append (label);
 
-			label = new Label ();
-			label.AddCssClass (AdwaitaStyles.Title4);
-			hbox1.Append (label);
+		// Combobox
+		combobox = new ComboBoxText ();
 
-			// Combobox
-			combobox = new ComboBoxText ();
-
-			// Main layout
-			// Main layout
-			SetOrientation (Orientation.Vertical);
-			Spacing = spacing;
-			Append (hbox1);
-			Append (combobox);
-		}
+		// Main layout
+		// Main layout
+		SetOrientation (Orientation.Vertical);
+		Spacing = spacing;
+		Append (hbox1);
+		Append (combobox);
 	}
 }

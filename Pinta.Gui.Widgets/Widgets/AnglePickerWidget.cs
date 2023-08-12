@@ -12,119 +12,118 @@ using System.Diagnostics.CodeAnalysis;
 using Gtk;
 using Pinta.Core;
 
-namespace Pinta.Gui.Widgets
+namespace Pinta.Gui.Widgets;
+
+public class AnglePickerWidget : Box
 {
-	public class AnglePickerWidget : Box
+	private AnglePickerGraphic anglepickergraphic1;
+	private SpinButton spin;
+	private Button button;
+	private Label label;
+
+	public AnglePickerWidget ()
 	{
-		private AnglePickerGraphic anglepickergraphic1;
-		private SpinButton spin;
-		private Button button;
-		private Label label;
+		Build ();
 
-		public AnglePickerWidget ()
-		{
-			Build ();
+		anglepickergraphic1.ValueChanged += HandleAnglePickerValueChanged;
+		spin.OnValueChanged += HandleSpinValueChanged;
+		button.OnClicked += HandleButtonClicked;
 
-			anglepickergraphic1.ValueChanged += HandleAnglePickerValueChanged;
-			spin.OnValueChanged += HandleSpinValueChanged;
-			button.OnClicked += HandleButtonClicked;
+		OnRealize += (_, _) => anglepickergraphic1.ValueDouble = DefaultValue;
 
-			OnRealize += (_, _) => anglepickergraphic1.ValueDouble = DefaultValue;
+		spin.SetActivatesDefault (true);
+	}
 
-			spin.SetActivatesDefault (true);
-		}
+	public double DefaultValue { get; set; }
 
-		public double DefaultValue { get; set; }
+	public string Label {
+		get => label.GetText ();
+		set => label.SetText (value);
+	}
 
-		public string Label {
-			get => label.GetText ();
-			set => label.SetText (value);
-		}
-
-		public double Value {
-			get => anglepickergraphic1.ValueDouble;
-			set {
-				if (anglepickergraphic1.ValueDouble != value) {
-					anglepickergraphic1.ValueDouble = value;
-					OnValueChanged ();
-				}
-			}
-		}
-
-		private void HandleAnglePickerValueChanged (object? sender, EventArgs e)
-		{
-			if (spin.Value != anglepickergraphic1.ValueDouble) {
-				spin.Value = anglepickergraphic1.ValueDouble;
+	public double Value {
+		get => anglepickergraphic1.ValueDouble;
+		set {
+			if (anglepickergraphic1.ValueDouble != value) {
+				anglepickergraphic1.ValueDouble = value;
 				OnValueChanged ();
 			}
 		}
+	}
 
-		private void HandleSpinValueChanged (object? sender, EventArgs e)
-		{
-			if (anglepickergraphic1.ValueDouble != spin.Value) {
-				anglepickergraphic1.ValueDouble = spin.Value;
-				OnValueChanged ();
-			}
+	private void HandleAnglePickerValueChanged (object? sender, EventArgs e)
+	{
+		if (spin.Value != anglepickergraphic1.ValueDouble) {
+			spin.Value = anglepickergraphic1.ValueDouble;
+			OnValueChanged ();
 		}
+	}
 
-		private void HandleButtonClicked (object? sender, EventArgs e)
-		{
-			Value = DefaultValue;
+	private void HandleSpinValueChanged (object? sender, EventArgs e)
+	{
+		if (anglepickergraphic1.ValueDouble != spin.Value) {
+			anglepickergraphic1.ValueDouble = spin.Value;
+			OnValueChanged ();
 		}
+	}
 
-		protected void OnValueChanged () => ValueChanged?.Invoke (this, EventArgs.Empty);
+	private void HandleButtonClicked (object? sender, EventArgs e)
+	{
+		Value = DefaultValue;
+	}
 
-		public event EventHandler? ValueChanged;
+	protected void OnValueChanged () => ValueChanged?.Invoke (this, EventArgs.Empty);
 
-		[MemberNotNull (nameof (anglepickergraphic1), nameof (spin), nameof (button), nameof (label))]
-		private void Build ()
-		{
-			const int spacing = 6;
+	public event EventHandler? ValueChanged;
 
-			// Section label + line
-			var hbox1 = new Box () { Spacing = spacing };
-			hbox1.SetOrientation (Orientation.Horizontal);
+	[MemberNotNull (nameof (anglepickergraphic1), nameof (spin), nameof (button), nameof (label))]
+	private void Build ()
+	{
+		const int spacing = 6;
 
-			label = new Label ();
-			label.AddCssClass (AdwaitaStyles.Title4);
+		// Section label + line
+		var hbox1 = new Box () { Spacing = spacing };
+		hbox1.SetOrientation (Orientation.Horizontal);
 
-			hbox1.Append (label);
+		label = new Label ();
+		label.AddCssClass (AdwaitaStyles.Title4);
 
-			// Angle graphic + spinner + reset button
-			var hbox2 = new Box () { Spacing = spacing };
-			hbox2.SetOrientation (Orientation.Horizontal);
+		hbox1.Append (label);
 
-			anglepickergraphic1 = new AnglePickerGraphic {
-				Hexpand = true,
-				Halign = Align.Center
-			};
-			hbox2.Append (anglepickergraphic1);
+		// Angle graphic + spinner + reset button
+		var hbox2 = new Box () { Spacing = spacing };
+		hbox2.SetOrientation (Orientation.Horizontal);
 
-			spin = SpinButton.NewWithRange (0, 360, 1);
-			spin.CanFocus = true;
-			spin.ClimbRate = 1;
-			spin.Numeric = true;
-			spin.Adjustment!.PageIncrement = 10;
-			spin.Valign = Align.Start;
+		anglepickergraphic1 = new AnglePickerGraphic {
+			Hexpand = true,
+			Halign = Align.Center
+		};
+		hbox2.Append (anglepickergraphic1);
 
-			hbox2.Append (spin);
+		spin = SpinButton.NewWithRange (0, 360, 1);
+		spin.CanFocus = true;
+		spin.ClimbRate = 1;
+		spin.Numeric = true;
+		spin.Adjustment!.PageIncrement = 10;
+		spin.Valign = Align.Start;
 
-			// Reset button
-			button = new Button {
-				IconName = Resources.StandardIcons.GoPrevious,
-				WidthRequest = 28,
-				HeightRequest = 24,
-				CanFocus = true,
-				UseUnderline = true,
-				Valign = Align.Start
-			};
-			hbox2.Append (button);
+		hbox2.Append (spin);
 
-			// Main layout
-			SetOrientation (Orientation.Vertical);
-			Spacing = spacing;
-			Append (hbox1);
-			Append (hbox2);
-		}
+		// Reset button
+		button = new Button {
+			IconName = Resources.StandardIcons.GoPrevious,
+			WidthRequest = 28,
+			HeightRequest = 24,
+			CanFocus = true,
+			UseUnderline = true,
+			Valign = Align.Start
+		};
+		hbox2.Append (button);
+
+		// Main layout
+		SetOrientation (Orientation.Vertical);
+		Spacing = spacing;
+		Append (hbox1);
+		Append (hbox2);
 	}
 }
