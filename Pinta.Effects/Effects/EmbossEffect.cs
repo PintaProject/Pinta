@@ -39,7 +39,7 @@ public sealed class EmbossEffect : BaseEffect
 	#region Algorithm Code Ported From PDN
 	public override void Render (ImageSurface src, ImageSurface dst, Core.RectangleI[] rois)
 	{
-		double[,] weights = Weights();
+		double[,] weights = Weights ();
 
 		var srcWidth = src.Width;
 		var srcHeight = src.Height;
