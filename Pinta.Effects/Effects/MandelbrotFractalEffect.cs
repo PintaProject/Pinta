@@ -37,14 +37,14 @@ public sealed class MandelbrotFractalEffect : BaseEffect
 	}
 
 	#region Algorithm Code Ported From PDN
-	private const double max = 100000;
-	private static readonly double inv_log_max = 1.0 / Math.Log (max);
+	private const double Max = 100000;
+	private static readonly double inv_log_max = 1.0 / Math.Log (Max);
 	private static readonly double zoom_factor = 20.0;
-	private const double xOffsetBasis = -0.7;
-	private readonly double x_offset = xOffsetBasis;
+	private const double XOffsetBasis = -0.7;
+	private readonly double x_offset = XOffsetBasis;
 
-	private const double yOffsetBasis = -0.29;
-	private readonly double y_offset = yOffsetBasis;
+	private const double YOffsetBasis = -0.29;
+	private readonly double y_offset = YOffsetBasis;
 
 	private readonly InvertColorsEffect invert_effect = new ();
 
@@ -54,7 +54,7 @@ public sealed class MandelbrotFractalEffect : BaseEffect
 		double x = 0;
 		double y = 0;
 
-		while ((c * factor) < 1024 && ((x * x) + (y * y)) < max) {
+		while ((c * factor) < 1024 && ((x * x) + (y * y)) < Max) {
 			double t = x;
 
 			x = x * x - y * y + r;
