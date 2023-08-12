@@ -29,170 +29,169 @@ using Cairo;
 using Gtk;
 using Pinta.Core;
 
-namespace Pinta.Tools
+namespace Pinta.Tools;
+
+public sealed class PaintBrushTool : BaseBrushTool
 {
-	public class PaintBrushTool : BaseBrushTool
+	private readonly IPaintBrushService brushes;
+
+	private BasePaintBrush? default_brush;
+	private BasePaintBrush? active_brush;
+	private Color stroke_color;
+	private PointI last_point;
+
+	private const string BRUSH_SETTING = "paint-brush-brush";
+
+	public PaintBrushTool (IServiceManager services) : base (services)
 	{
-		private readonly IPaintBrushService brushes;
+		brushes = services.GetService<IPaintBrushService> ();
 
-		private BasePaintBrush? default_brush;
-		private BasePaintBrush? active_brush;
-		private Color stroke_color;
-		private PointI last_point;
+		default_brush = brushes.FirstOrDefault ();
+		active_brush = default_brush;
 
-		private const string BRUSH_SETTING = "paint-brush-brush";
+		brushes.BrushAdded += (_, _) => RebuildBrushComboBox ();
+		brushes.BrushRemoved += (_, _) => RebuildBrushComboBox ();
+	}
 
-		public PaintBrushTool (IServiceManager services) : base (services)
-		{
-			brushes = services.GetService<IPaintBrushService> ();
+	public override string Name => Translations.GetString ("Paintbrush");
+	public override string Icon => Pinta.Resources.Icons.ToolPaintBrush;
+	public override string StatusBarText => Translations.GetString ("Left click to draw with primary color, right click to draw with secondary color.");
+	public override bool CursorChangesOnZoom => true;
+	public override Gdk.Key ShortcutKey => Gdk.Key.B;
+	public override int Priority => 21;
 
-			default_brush = brushes.FirstOrDefault ();
-			active_brush = default_brush;
+	public override Gdk.Cursor DefaultCursor {
+		get {
+			var icon = GdkExtensions.CreateIconWithShape ("Cursor.Paintbrush.png",
+							CursorShape.Ellipse, BrushWidth, 8, 24,
+							out var iconOffsetX, out var iconOffsetY);
 
-			brushes.BrushAdded += (_, _) => RebuildBrushComboBox ();
-			brushes.BrushRemoved += (_, _) => RebuildBrushComboBox ();
+			return Gdk.Cursor.NewFromTexture (icon, iconOffsetX, iconOffsetY, null);
+		}
+	}
+
+	protected override void OnBuildToolBar (Box tb)
+	{
+		base.OnBuildToolBar (tb);
+
+		tb.Append (Separator);
+
+		tb.Append (BrushLabel);
+		tb.Append (BrushComboBox);
+	}
+
+	protected override void OnMouseDown (Document document, ToolMouseEventArgs e)
+	{
+		base.OnMouseDown (document, e);
+
+		active_brush?.DoMouseDown ();
+	}
+
+	protected override void OnMouseMove (Document document, ToolMouseEventArgs e)
+	{
+		if (mouse_button == MouseButton.Left) {
+			stroke_color = Palette.PrimaryColor;
+		} else if (mouse_button == MouseButton.Right) {
+			stroke_color = Palette.SecondaryColor;
+		} else {
+			last_point = point_empty;
+			return;
 		}
 
-		public override string Name => Translations.GetString ("Paintbrush");
-		public override string Icon => Pinta.Resources.Icons.ToolPaintBrush;
-		public override string StatusBarText => Translations.GetString ("Left click to draw with primary color, right click to draw with secondary color.");
-		public override bool CursorChangesOnZoom => true;
-		public override Gdk.Key ShortcutKey => Gdk.Key.B;
-		public override int Priority => 21;
+		if (active_brush is null)
+			return;
 
-		public override Gdk.Cursor DefaultCursor {
-			get {
-				var icon = GdkExtensions.CreateIconWithShape ("Cursor.Paintbrush.png",
-								CursorShape.Ellipse, BrushWidth, 8, 24,
-								out var iconOffsetX, out var iconOffsetY);
+		// TODO: also multiply by pressure
+		stroke_color = new Color (stroke_color.R, stroke_color.G, stroke_color.B,
+			stroke_color.A * active_brush.StrokeAlphaMultiplier);
 
-				return Gdk.Cursor.NewFromTexture (icon, iconOffsetX, iconOffsetY, null);
-			}
-		}
+		var x = e.Point.X;
+		var y = e.Point.Y;
 
-		protected override void OnBuildToolBar (Box tb)
-		{
-			base.OnBuildToolBar (tb);
-
-			tb.Append (Separator);
-
-			tb.Append (BrushLabel);
-			tb.Append (BrushComboBox);
-		}
-
-		protected override void OnMouseDown (Document document, ToolMouseEventArgs e)
-		{
-			base.OnMouseDown (document, e);
-
-			active_brush?.DoMouseDown ();
-		}
-
-		protected override void OnMouseMove (Document document, ToolMouseEventArgs e)
-		{
-			if (mouse_button == MouseButton.Left) {
-				stroke_color = Palette.PrimaryColor;
-			} else if (mouse_button == MouseButton.Right) {
-				stroke_color = Palette.SecondaryColor;
-			} else {
-				last_point = point_empty;
-				return;
-			}
-
-			if (active_brush is null)
-				return;
-
-			// TODO: also multiply by pressure
-			stroke_color = new Color (stroke_color.R, stroke_color.G, stroke_color.B,
-				stroke_color.A * active_brush.StrokeAlphaMultiplier);
-
-			var x = e.Point.X;
-			var y = e.Point.Y;
-
-			if (last_point.Equals (point_empty))
-				last_point = e.Point;
-
-			if (document.Workspace.PointInCanvas (e.PointDouble))
-				surface_modified = true;
-
-			var surf = document.Layers.CurrentUserLayer.Surface;
-			var invalidate_rect = RectangleI.Zero;
-			var brush_width = BrushWidth;
-
-			var g = document.CreateClippedContext ();
-			g.Antialias = UseAntialiasing ? Antialias.Subpixel : Antialias.None;
-			g.LineWidth = brush_width;
-			g.LineJoin = LineJoin.Round;
-			g.LineCap = BrushWidth == 1 ? LineCap.Butt : LineCap.Round;
-			g.SetSourceColor (stroke_color);
-
-			invalidate_rect = active_brush.DoMouseMove (g, stroke_color, surf, x, y, last_point.X, last_point.Y);
-
-			// If we draw partially offscreen, Cairo gives us a bogus
-			// dirty rectangle, so redraw everything.
-			if (document.Workspace.IsPartiallyOffscreen (invalidate_rect))
-				document.Workspace.Invalidate ();
-			else
-				document.Workspace.Invalidate (document.ClampToImageSize (invalidate_rect));
-
+		if (last_point.Equals (point_empty))
 			last_point = e.Point;
-		}
 
-		protected override void OnMouseUp (Document document, ToolMouseEventArgs e)
-		{
-			base.OnMouseUp (document, e);
+		if (document.Workspace.PointInCanvas (e.PointDouble))
+			surface_modified = true;
 
-			active_brush?.DoMouseUp ();
-		}
+		var surf = document.Layers.CurrentUserLayer.Surface;
+		var invalidate_rect = RectangleI.Zero;
+		var brush_width = BrushWidth;
 
-		protected override void OnSaveSettings (ISettingsService settings)
-		{
-			base.OnSaveSettings (settings);
+		var g = document.CreateClippedContext ();
+		g.Antialias = UseAntialiasing ? Antialias.Subpixel : Antialias.None;
+		g.LineWidth = brush_width;
+		g.LineJoin = LineJoin.Round;
+		g.LineCap = BrushWidth == 1 ? LineCap.Butt : LineCap.Round;
+		g.SetSourceColor (stroke_color);
 
-			if (brush_combo_box is not null)
-				settings.PutSetting (BRUSH_SETTING, brush_combo_box.ComboBox.Active);
-		}
+		invalidate_rect = active_brush.DoMouseMove (g, stroke_color, surf, x, y, last_point.X, last_point.Y);
 
-		private Label? brush_label;
-		private ToolBarComboBox? brush_combo_box;
-		private Gtk.Separator? separator;
+		// If we draw partially offscreen, Cairo gives us a bogus
+		// dirty rectangle, so redraw everything.
+		if (document.Workspace.IsPartiallyOffscreen (invalidate_rect))
+			document.Workspace.Invalidate ();
+		else
+			document.Workspace.Invalidate (document.ClampToImageSize (invalidate_rect));
 
-		private Gtk.Separator Separator => separator ??= GtkExtensions.CreateToolBarSeparator ();
-		private Label BrushLabel => brush_label ??= Label.New (string.Format (" {0}:  ", Translations.GetString ("Type")));
+		last_point = e.Point;
+	}
 
-		private ToolBarComboBox BrushComboBox {
-			get {
-				if (brush_combo_box is null) {
-					brush_combo_box = new ToolBarComboBox (100, 0, false);
-					brush_combo_box.ComboBox.OnChanged += (o, e) => {
-						var brush_name = brush_combo_box.ComboBox.GetActiveText ();
-						active_brush = brushes.SingleOrDefault (brush => brush.Name == brush_name) ?? default_brush;
-					};
+	protected override void OnMouseUp (Document document, ToolMouseEventArgs e)
+	{
+		base.OnMouseUp (document, e);
 
-					RebuildBrushComboBox ();
+		active_brush?.DoMouseUp ();
+	}
 
-					var brush = Settings.GetSetting (BRUSH_SETTING, 0);
+	protected override void OnSaveSettings (ISettingsService settings)
+	{
+		base.OnSaveSettings (settings);
 
-					if (brush < brush_combo_box.ComboBox.Model.IterNChildren (null))
-						brush_combo_box.ComboBox.Active = brush;
-				}
+		if (brush_combo_box is not null)
+			settings.PutSetting (BRUSH_SETTING, brush_combo_box.ComboBox.Active);
+	}
 
-				return brush_combo_box;
+	private Label? brush_label;
+	private ToolBarComboBox? brush_combo_box;
+	private Gtk.Separator? separator;
+
+	private Gtk.Separator Separator => separator ??= GtkExtensions.CreateToolBarSeparator ();
+	private Label BrushLabel => brush_label ??= Label.New (string.Format (" {0}:  ", Translations.GetString ("Type")));
+
+	private ToolBarComboBox BrushComboBox {
+		get {
+			if (brush_combo_box is null) {
+				brush_combo_box = new ToolBarComboBox (100, 0, false);
+				brush_combo_box.ComboBox.OnChanged += (o, e) => {
+					var brush_name = brush_combo_box.ComboBox.GetActiveText ();
+					active_brush = brushes.SingleOrDefault (brush => brush.Name == brush_name) ?? default_brush;
+				};
+
+				RebuildBrushComboBox ();
+
+				var brush = Settings.GetSetting (BRUSH_SETTING, 0);
+
+				if (brush < brush_combo_box.ComboBox.Model.IterNChildren (null))
+					brush_combo_box.ComboBox.Active = brush;
 			}
+
+			return brush_combo_box;
 		}
+	}
 
-		/// <summary>
-		/// Rebuild the list of brushes.
-		/// </summary>
-		private void RebuildBrushComboBox ()
-		{
-			default_brush = brushes.FirstOrDefault ();
+	/// <summary>
+	/// Rebuild the list of brushes.
+	/// </summary>
+	private void RebuildBrushComboBox ()
+	{
+		default_brush = brushes.FirstOrDefault ();
 
-			BrushComboBox.ComboBox.RemoveAll ();
+		BrushComboBox.ComboBox.RemoveAll ();
 
-			foreach (var brush in brushes)
-				BrushComboBox.ComboBox.AppendText (brush.Name);
+		foreach (var brush in brushes)
+			BrushComboBox.ComboBox.AppendText (brush.Name);
 
-			BrushComboBox.ComboBox.Active = 0;
-		}
+		BrushComboBox.ComboBox.Active = 0;
 	}
 }

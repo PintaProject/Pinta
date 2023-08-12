@@ -27,134 +27,133 @@
 using Gdk;
 using Pinta.Core;
 
-namespace Pinta.Tools
+namespace Pinta.Tools;
+
+public sealed class CloneStampTool : BaseBrushTool
 {
-	public class CloneStampTool : BaseBrushTool
+	private bool painting;
+	private PointI? origin = null;
+	private PointI? offset = null;
+	private PointI? last_point = null;
+
+	public CloneStampTool (IServiceManager services) : base (services)
 	{
-		private bool painting;
-		private PointI? origin = null;
-		private PointI? offset = null;
-		private PointI? last_point = null;
+	}
 
-		public CloneStampTool (IServiceManager services) : base (services)
-		{
+	public override string Name => Translations.GetString ("Clone Stamp");
+	public override string Icon => Pinta.Resources.Icons.ToolCloneStamp;
+	// Translators: {0} is 'Ctrl', or a platform-specific key such as 'Command' on macOS.
+	public override string StatusBarText => Translations.GetString ("{0} + left click to set origin, left click to paint.", GtkExtensions.CtrlLabel ());
+	public override bool CursorChangesOnZoom => true;
+	public override Key ShortcutKey => Key.L;
+	public override int Priority => 47;
+	protected override bool ShowAntialiasingButton => true;
+
+	public override Cursor DefaultCursor {
+		get {
+			var icon = GdkExtensions.CreateIconWithShape ("Cursor.CloneStamp.png",
+							CursorShape.Ellipse, BrushWidth, 16, 26,
+							out var iconOffsetX, out var iconOffsetY);
+			return Gdk.Cursor.NewFromTexture (icon, iconOffsetX, iconOffsetY, null);
 		}
+	}
 
-		public override string Name => Translations.GetString ("Clone Stamp");
-		public override string Icon => Pinta.Resources.Icons.ToolCloneStamp;
-		// Translators: {0} is 'Ctrl', or a platform-specific key such as 'Command' on macOS.
-		public override string StatusBarText => Translations.GetString ("{0} + left click to set origin, left click to paint.", GtkExtensions.CtrlLabel ());
-		public override bool CursorChangesOnZoom => true;
-		public override Key ShortcutKey => Key.L;
-		public override int Priority => 47;
-		protected override bool ShowAntialiasingButton => true;
+	protected override void OnMouseDown (Document document, ToolMouseEventArgs e)
+	{
+		// We only do stuff with the left mouse button
+		if (e.MouseButton != MouseButton.Left)
+			return;
 
-		public override Cursor DefaultCursor {
-			get {
-				var icon = GdkExtensions.CreateIconWithShape ("Cursor.CloneStamp.png",
-								CursorShape.Ellipse, BrushWidth, 16, 26,
-								out var iconOffsetX, out var iconOffsetY);
-				return Gdk.Cursor.NewFromTexture (icon, iconOffsetX, iconOffsetY, null);
-			}
-		}
-
-		protected override void OnMouseDown (Document document, ToolMouseEventArgs e)
-		{
-			// We only do stuff with the left mouse button
-			if (e.MouseButton != MouseButton.Left)
+		// Ctrl click is set origin, regular click is begin drawing
+		if (!e.IsControlPressed) {
+			if (!origin.HasValue)
 				return;
 
-			// Ctrl click is set origin, regular click is begin drawing
-			if (!e.IsControlPressed) {
-				if (!origin.HasValue)
-					return;
+			painting = true;
 
-				painting = true;
-
-				if (!offset.HasValue)
-					offset = new (e.Point.X - origin.Value.X, e.Point.Y - origin.Value.Y);
-
-				document.Layers.ToolLayer.Clear ();
-				document.Layers.ToolLayer.Hidden = false;
-
-				surface_modified = false;
-				undo_surface = document.Layers.CurrentUserLayer.Surface.Clone ();
-			} else {
-				origin = e.Point;
-			}
-		}
-
-		protected override void OnMouseMove (Document document, ToolMouseEventArgs e)
-		{
-			if (!painting || !offset.HasValue)
-				return;
-
-			var x = e.Point.X;
-			var y = e.Point.Y;
-
-			if (!last_point.HasValue) {
-				last_point = e.Point;
-				return;
-			}
-
-			var g = document.CreateClippedToolContext ();
-			g.Antialias = UseAntialiasing ? Cairo.Antialias.Subpixel : Cairo.Antialias.None;
-
-			g.MoveTo (last_point.Value.X, last_point.Value.Y);
-			g.LineTo (x, y);
-
-			g.SetSourceSurface (document.Layers.CurrentUserLayer.Surface, offset.Value.X, offset.Value.Y);
-			g.LineWidth = BrushWidth;
-			g.LineCap = Cairo.LineCap.Round;
-
-			g.Stroke ();
-
-			var dirty_rect = CairoExtensions.GetRectangleFromPoints (last_point.Value, e.Point, BrushWidth + 2);
-
-			last_point = e.Point;
-			surface_modified = true;
-			document.Workspace.Invalidate (dirty_rect);
-		}
-
-		protected override void OnMouseUp (Document document, ToolMouseEventArgs e)
-		{
-			painting = false;
-
-			var g = new Cairo.Context (document.Layers.CurrentUserLayer.Surface);
-			g.SetSourceSurface (document.Layers.ToolLayer.Surface, 0, 0);
-			g.Paint ();
-
-			base.OnMouseUp (document, e);
-
-			offset = null;
-			last_point = null;
+			if (!offset.HasValue)
+				offset = new (e.Point.X - origin.Value.X, e.Point.Y - origin.Value.Y);
 
 			document.Layers.ToolLayer.Clear ();
-			document.Layers.ToolLayer.Hidden = true;
-			document.Workspace.Invalidate ();
+			document.Layers.ToolLayer.Hidden = false;
+
+			surface_modified = false;
+			undo_surface = document.Layers.CurrentUserLayer.Surface.Clone ();
+		} else {
+			origin = e.Point;
+		}
+	}
+
+	protected override void OnMouseMove (Document document, ToolMouseEventArgs e)
+	{
+		if (!painting || !offset.HasValue)
+			return;
+
+		var x = e.Point.X;
+		var y = e.Point.Y;
+
+		if (!last_point.HasValue) {
+			last_point = e.Point;
+			return;
 		}
 
-		protected override bool OnKeyDown (Document document, ToolKeyEventArgs e)
-		{
-			// Note that this WON'T work if user presses control key and THEN selects the tool!
-			if (e.Key.IsControlKey ()) {
-				SetCursor (Gdk.Cursor.NewFromTexture (Resources.GetIcon ("Cursor.CloneStampSetSource.png"), 16, 26, null));
-			}
+		var g = document.CreateClippedToolContext ();
+		g.Antialias = UseAntialiasing ? Cairo.Antialias.Subpixel : Cairo.Antialias.None;
 
-			return false;
+		g.MoveTo (last_point.Value.X, last_point.Value.Y);
+		g.LineTo (x, y);
+
+		g.SetSourceSurface (document.Layers.CurrentUserLayer.Surface, offset.Value.X, offset.Value.Y);
+		g.LineWidth = BrushWidth;
+		g.LineCap = Cairo.LineCap.Round;
+
+		g.Stroke ();
+
+		var dirty_rect = CairoExtensions.GetRectangleFromPoints (last_point.Value, e.Point, BrushWidth + 2);
+
+		last_point = e.Point;
+		surface_modified = true;
+		document.Workspace.Invalidate (dirty_rect);
+	}
+
+	protected override void OnMouseUp (Document document, ToolMouseEventArgs e)
+	{
+		painting = false;
+
+		var g = new Cairo.Context (document.Layers.CurrentUserLayer.Surface);
+		g.SetSourceSurface (document.Layers.ToolLayer.Surface, 0, 0);
+		g.Paint ();
+
+		base.OnMouseUp (document, e);
+
+		offset = null;
+		last_point = null;
+
+		document.Layers.ToolLayer.Clear ();
+		document.Layers.ToolLayer.Hidden = true;
+		document.Workspace.Invalidate ();
+	}
+
+	protected override bool OnKeyDown (Document document, ToolKeyEventArgs e)
+	{
+		// Note that this WON'T work if user presses control key and THEN selects the tool!
+		if (e.Key.IsControlKey ()) {
+			SetCursor (Gdk.Cursor.NewFromTexture (Resources.GetIcon ("Cursor.CloneStampSetSource.png"), 16, 26, null));
 		}
 
-		protected override bool OnKeyUp (Document document, ToolKeyEventArgs e)
-		{
-			if (e.Key.IsControlKey ())
-				SetCursor (DefaultCursor);
+		return false;
+	}
 
-			return false;
-		}
+	protected override bool OnKeyUp (Document document, ToolKeyEventArgs e)
+	{
+		if (e.Key.IsControlKey ())
+			SetCursor (DefaultCursor);
 
-		protected override void OnDeactivated (Document? document, BaseTool? newTool)
-		{
-			origin = null;
-		}
+		return false;
+	}
+
+	protected override void OnDeactivated (Document? document, BaseTool? newTool)
+	{
+		origin = null;
 	}
 }

@@ -27,120 +27,119 @@
 using Cairo;
 using Pinta.Core;
 
-namespace Pinta.Tools
+namespace Pinta.Tools;
+
+public sealed class MoveSelectedTool : BaseTransformTool
 {
-	public sealed class MoveSelectedTool : BaseTransformTool
+	private MovePixelsHistoryItem? hist;
+	private DocumentSelection? original_selection;
+	private readonly Matrix original_transform = CairoExtensions.CreateIdentityMatrix ();
+
+	public MoveSelectedTool (IServiceManager services) : base (services)
 	{
-		private MovePixelsHistoryItem? hist;
-		private DocumentSelection? original_selection;
-		private readonly Matrix original_transform = CairoExtensions.CreateIdentityMatrix ();
+	}
 
-		public MoveSelectedTool (IServiceManager services) : base (services)
-		{
+	public override string Name => Translations.GetString ("Move Selected Pixels");
+	public override string Icon => Pinta.Resources.Icons.ToolMove;
+	// Translators: {0} is 'Ctrl', or a platform-specific key such as 'Command' on macOS.
+	public override string StatusBarText => Translations.GetString (
+		"Left click and drag the selection to move selected content." +
+		"\nHold {0} to scale instead of move." +
+		"\nRight click and drag the selection to rotate selected content." +
+		"\nHold Shift to rotate in steps." +
+		"\nUse arrow keys to move selected content by a single pixel.",
+		GtkExtensions.CtrlLabel ());
+	public override Gdk.Cursor DefaultCursor => Gdk.Cursor.NewFromTexture (Resources.GetIcon (Pinta.Resources.Icons.ToolMoveCursor), 0, 0, null);
+	public override Gdk.Key ShortcutKey => Gdk.Key.M;
+	public override int Priority => 5;
+
+	protected override RectangleD GetSourceRectangle (Document document)
+	{
+		return document.Selection.SelectionPath.GetBounds ().ToDouble ();
+	}
+
+	protected override void OnStartTransform (Document document)
+	{
+		base.OnStartTransform (document);
+
+		// If there is no selection, select the whole image.
+		if (document.Selection.SelectionPolygons.Count == 0) {
+			RectangleD imageBounds = new (0, 0, document.ImageSize.Width, document.ImageSize.Height);
+			document.Selection.CreateRectangleSelection (imageBounds);
 		}
 
-		public override string Name => Translations.GetString ("Move Selected Pixels");
-		public override string Icon => Pinta.Resources.Icons.ToolMove;
-		// Translators: {0} is 'Ctrl', or a platform-specific key such as 'Command' on macOS.
-		public override string StatusBarText => Translations.GetString (
-			"Left click and drag the selection to move selected content." +
-			"\nHold {0} to scale instead of move." +
-			"\nRight click and drag the selection to rotate selected content." +
-			"\nHold Shift to rotate in steps." +
-			"\nUse arrow keys to move selected content by a single pixel.",
-			GtkExtensions.CtrlLabel ());
-		public override Gdk.Cursor DefaultCursor => Gdk.Cursor.NewFromTexture (Resources.GetIcon (Pinta.Resources.Icons.ToolMoveCursor), 0, 0, null);
-		public override Gdk.Key ShortcutKey => Gdk.Key.M;
-		public override int Priority => 5;
+		original_selection = document.Selection.Clone ();
+		original_transform.InitMatrix (document.Layers.SelectionLayer.Transform);
 
-		protected override RectangleD GetSourceRectangle (Document document)
-		{
-			return document.Selection.SelectionPath.GetBounds ().ToDouble ();
+		hist = new MovePixelsHistoryItem (Icon, Name, document);
+		hist.TakeSnapshot (!document.Layers.ShowSelectionLayer);
+
+		if (!document.Layers.ShowSelectionLayer) {
+			// Copy the selection to the temp layer
+			document.Layers.CreateSelectionLayer ();
+			document.Layers.ShowSelectionLayer = true;
+			// Use same BlendMode, Opacity and Visibility for SelectionLayer
+			document.Layers.SelectionLayer.BlendMode = document.Layers.CurrentUserLayer.BlendMode;
+			document.Layers.SelectionLayer.Opacity = document.Layers.CurrentUserLayer.Opacity;
+			document.Layers.SelectionLayer.Hidden = document.Layers.CurrentUserLayer.Hidden;
+
+			var g = new Context (document.Layers.SelectionLayer.Surface);
+			g.AppendPath (document.Selection.SelectionPath);
+			g.FillRule = FillRule.EvenOdd;
+			g.SetSourceSurface (document.Layers.CurrentUserLayer.Surface, 0, 0);
+			g.Clip ();
+			g.Paint ();
+
+			var surf = document.Layers.CurrentUserLayer.Surface;
+
+			g = new Context (surf);
+			g.AppendPath (document.Selection.SelectionPath);
+			g.FillRule = FillRule.EvenOdd;
+			g.Operator = Cairo.Operator.Clear;
+			g.Fill ();
 		}
 
-		protected override void OnStartTransform (Document document)
-		{
-			base.OnStartTransform (document);
+		document.Workspace.Invalidate ();
+	}
 
-			// If there is no selection, select the whole image.
-			if (document.Selection.SelectionPolygons.Count == 0) {
-				RectangleD imageBounds = new (0, 0, document.ImageSize.Width, document.ImageSize.Height);
-				document.Selection.CreateRectangleSelection (imageBounds);
-			}
+	protected override void OnUpdateTransform (Document document, Matrix transform)
+	{
+		base.OnUpdateTransform (document, transform);
 
-			original_selection = document.Selection.Clone ();
-			original_transform.InitMatrix (document.Layers.SelectionLayer.Transform);
+		document.Selection = original_selection!.Transform (transform); // NRT - Set in OnStartTransform
+		document.Selection.Visible = true;
 
-			hist = new MovePixelsHistoryItem (Icon, Name, document);
-			hist.TakeSnapshot (!document.Layers.ShowSelectionLayer);
+		document.Layers.SelectionLayer.Transform.InitMatrix (original_transform);
+		document.Layers.SelectionLayer.Transform.Multiply (transform);
 
-			if (!document.Layers.ShowSelectionLayer) {
-				// Copy the selection to the temp layer
-				document.Layers.CreateSelectionLayer ();
-				document.Layers.ShowSelectionLayer = true;
-				// Use same BlendMode, Opacity and Visibility for SelectionLayer
-				document.Layers.SelectionLayer.BlendMode = document.Layers.CurrentUserLayer.BlendMode;
-				document.Layers.SelectionLayer.Opacity = document.Layers.CurrentUserLayer.Opacity;
-				document.Layers.SelectionLayer.Hidden = document.Layers.CurrentUserLayer.Hidden;
+		document.Workspace.Invalidate ();
+	}
 
-				var g = new Context (document.Layers.SelectionLayer.Surface);
-				g.AppendPath (document.Selection.SelectionPath);
-				g.FillRule = FillRule.EvenOdd;
-				g.SetSourceSurface (document.Layers.CurrentUserLayer.Surface, 0, 0);
-				g.Clip ();
-				g.Paint ();
+	protected override void OnFinishTransform (Document document, Matrix transform)
+	{
+		base.OnFinishTransform (document, transform);
 
-				var surf = document.Layers.CurrentUserLayer.Surface;
+		// Also transform the base selection used for the various select modes.
+		var prev_selection = document.PreviousSelection;
+		document.PreviousSelection = prev_selection.Transform (transform);
 
-				g = new Context (surf);
-				g.AppendPath (document.Selection.SelectionPath);
-				g.FillRule = FillRule.EvenOdd;
-				g.Operator = Cairo.Operator.Clear;
-				g.Fill ();
-			}
+		if (hist != null)
+			document.History.PushNewItem (hist);
 
-			document.Workspace.Invalidate ();
-		}
+		hist = null;
+		original_selection = null;
+		original_transform.InitIdentity ();
+	}
 
-		protected override void OnUpdateTransform (Document document, Matrix transform)
-		{
-			base.OnUpdateTransform (document, transform);
+	protected override void OnCommit (Document? document)
+	{
+		document?.FinishSelection ();
+	}
 
-			document.Selection = original_selection!.Transform (transform); // NRT - Set in OnStartTransform
-			document.Selection.Visible = true;
+	protected override void OnDeactivated (Document? document, BaseTool? newTool)
+	{
+		base.OnDeactivated (document, newTool);
 
-			document.Layers.SelectionLayer.Transform.InitMatrix (original_transform);
-			document.Layers.SelectionLayer.Transform.Multiply (transform);
-
-			document.Workspace.Invalidate ();
-		}
-
-		protected override void OnFinishTransform (Document document, Matrix transform)
-		{
-			base.OnFinishTransform (document, transform);
-
-			// Also transform the base selection used for the various select modes.
-			var prev_selection = document.PreviousSelection;
-			document.PreviousSelection = prev_selection.Transform (transform);
-
-			if (hist != null)
-				document.History.PushNewItem (hist);
-
-			hist = null;
-			original_selection = null;
-			original_transform.InitIdentity ();
-		}
-
-		protected override void OnCommit (Document? document)
-		{
-			document?.FinishSelection ();
-		}
-
-		protected override void OnDeactivated (Document? document, BaseTool? newTool)
-		{
-			base.OnDeactivated (document, newTool);
-
-			document?.FinishSelection ();
-		}
+		document?.FinishSelection ();
 	}
 }

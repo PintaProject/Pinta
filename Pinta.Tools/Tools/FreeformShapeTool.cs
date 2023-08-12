@@ -28,206 +28,205 @@ using Cairo;
 using Gtk;
 using Pinta.Core;
 
-namespace Pinta.Tools
+namespace Pinta.Tools;
+
+public sealed class FreeformShapeTool : BaseBrushTool
 {
-	public class FreeformShapeTool : BaseBrushTool
+	private PointI last_point = point_empty;
+
+	private Path? path;
+	private Color fill_color;
+	private Color outline_color;
+
+	private readonly DashPatternBox dash_p_box = new ();
+
+	private string dash_pattern = "-";
+
+	private const string FILL_TYPE_SETTING = "freeform-shape-fill-type";
+	private const string DASH_PATTERN_SETTING = "freeform-shape-dash_pattern";
+
+	public FreeformShapeTool (IServiceManager services) : base (services)
 	{
-		private PointI last_point = point_empty;
+	}
 
-		private Path? path;
-		private Color fill_color;
-		private Color outline_color;
+	public override string Name => Translations.GetString ("Freeform Shape");
+	public override string Icon => Pinta.Resources.Icons.ToolFreeformShape;
+	public override string StatusBarText => Translations.GetString ("Left click to draw with primary color, right click to draw with secondary color.");
+	public override Gdk.Cursor DefaultCursor => Gdk.Cursor.NewFromTexture (Resources.GetIcon ("Cursor.FreeformShape.png"), 9, 18, null);
+	public override Gdk.Key ShortcutKey => Gdk.Key.O;
+	public override int Priority => 45;
 
-		private readonly DashPatternBox dash_p_box = new ();
+	protected override void OnBuildToolBar (Box tb)
+	{
+		base.OnBuildToolBar (tb);
 
-		private string dash_pattern = "-";
+		tb.Append (Separator);
+		tb.Append (FillLabel);
+		tb.Append (FillDropDown);
 
-		private const string FILL_TYPE_SETTING = "freeform-shape-fill-type";
-		private const string DASH_PATTERN_SETTING = "freeform-shape-dash_pattern";
+		// TODO: This could be cleaner.
+		// This will only return an item on the first setup so we only add the handler once.
+		var dash_pattern_box = dash_p_box.SetupToolbar (tb);
 
-		public FreeformShapeTool (IServiceManager services) : base (services)
-		{
+		if (dash_pattern_box != null) {
+			dash_pattern_box.GetEntry ().SetText (Settings.GetSetting (DASH_PATTERN_SETTING, "-"));
+
+			dash_pattern_box.OnChanged += (o, e) => {
+				dash_pattern = dash_pattern_box.GetActiveText ()!;
+			};
+		}
+	}
+
+	protected override void OnMouseDown (Document document, ToolMouseEventArgs e)
+	{
+		surface_modified = false;
+		undo_surface = document.Layers.CurrentUserLayer.Surface.Clone ();
+		path = null;
+
+		document.Layers.ToolLayer.Clear ();
+		document.Layers.ToolLayer.Hidden = false;
+	}
+
+	protected override void OnMouseMove (Document document, ToolMouseEventArgs e)
+	{
+		if (e.IsLeftMousePressed) {
+			outline_color = Palette.PrimaryColor;
+			fill_color = Palette.SecondaryColor;
+		} else if (e.IsRightMousePressed) {
+			outline_color = Palette.SecondaryColor;
+			fill_color = Palette.PrimaryColor;
+		} else {
+			last_point = point_empty;
+			return;
 		}
 
-		public override string Name => Translations.GetString ("Freeform Shape");
-		public override string Icon => Pinta.Resources.Icons.ToolFreeformShape;
-		public override string StatusBarText => Translations.GetString ("Left click to draw with primary color, right click to draw with secondary color.");
-		public override Gdk.Cursor DefaultCursor => Gdk.Cursor.NewFromTexture (Resources.GetIcon ("Cursor.FreeformShape.png"), 9, 18, null);
-		public override Gdk.Key ShortcutKey => Gdk.Key.O;
-		public override int Priority => 45;
+		var x = e.Point.X;
+		var y = e.Point.Y;
 
-		protected override void OnBuildToolBar (Box tb)
-		{
-			base.OnBuildToolBar (tb);
-
-			tb.Append (Separator);
-			tb.Append (FillLabel);
-			tb.Append (FillDropDown);
-
-			// TODO: This could be cleaner.
-			// This will only return an item on the first setup so we only add the handler once.
-			var dash_pattern_box = dash_p_box.SetupToolbar (tb);
-
-			if (dash_pattern_box != null) {
-				dash_pattern_box.GetEntry ().SetText (Settings.GetSetting (DASH_PATTERN_SETTING, "-"));
-
-				dash_pattern_box.OnChanged += (o, e) => {
-					dash_pattern = dash_pattern_box.GetActiveText ()!;
-				};
-			}
+		if (last_point.Equals (point_empty)) {
+			last_point = e.Point;
+			return;
 		}
 
-		protected override void OnMouseDown (Document document, ToolMouseEventArgs e)
-		{
-			surface_modified = false;
-			undo_surface = document.Layers.CurrentUserLayer.Surface.Clone ();
+		if (document.Workspace.PointInCanvas (e.PointDouble))
+			surface_modified = true;
+
+		document.Layers.ToolLayer.Clear ();
+
+		var g = document.CreateClippedToolContext ();
+		g.Antialias = UseAntialiasing ? Antialias.Subpixel : Antialias.None;
+
+		g.SetDashFromString (dash_pattern, BrushWidth);
+
+		if (path != null) {
+			g.AppendPath (path);
+		} else {
+			g.MoveTo (x, y);
+		}
+
+		g.LineTo (x, y);
+
+		path = g.CopyPath ();
+
+		g.ClosePath ();
+		g.LineWidth = BrushWidth;
+		g.FillRule = FillRule.EvenOdd;
+
+		if (FillShape && StrokeShape) {
+			g.SetSourceColor (fill_color);
+			g.FillPreserve ();
+			g.SetSourceColor (outline_color);
+			g.Stroke ();
+		} else if (FillShape) {
+			g.SetSourceColor (outline_color);
+			g.FillPreserve ();
+			g.SetSourceColor (outline_color);
+			g.Stroke ();
+		} else {
+			g.SetSourceColor (outline_color);
+			g.Stroke ();
+		}
+
+		document.Workspace.Invalidate ();
+
+		last_point = new PointI (x, y);
+	}
+
+	protected override void OnMouseUp (Document document, ToolMouseEventArgs e)
+	{
+		document.Layers.ToolLayer.Clear ();
+		document.Layers.ToolLayer.Hidden = true;
+
+		Context g = document.CreateClippedContext ();
+		g.Antialias = UseAntialiasing ? Antialias.Subpixel : Antialias.None;
+
+		g.SetDashFromString (dash_pattern, BrushWidth);
+
+		if (path != null) {
+			g.AppendPath (path);
 			path = null;
-
-			document.Layers.ToolLayer.Clear ();
-			document.Layers.ToolLayer.Hidden = false;
 		}
 
-		protected override void OnMouseMove (Document document, ToolMouseEventArgs e)
-		{
-			if (e.IsLeftMousePressed) {
-				outline_color = Palette.PrimaryColor;
-				fill_color = Palette.SecondaryColor;
-			} else if (e.IsRightMousePressed) {
-				outline_color = Palette.SecondaryColor;
-				fill_color = Palette.PrimaryColor;
-			} else {
-				last_point = point_empty;
-				return;
-			}
+		g.ClosePath ();
+		g.LineWidth = BrushWidth;
+		g.FillRule = FillRule.EvenOdd;
 
-			var x = e.Point.X;
-			var y = e.Point.Y;
-
-			if (last_point.Equals (point_empty)) {
-				last_point = e.Point;
-				return;
-			}
-
-			if (document.Workspace.PointInCanvas (e.PointDouble))
-				surface_modified = true;
-
-			document.Layers.ToolLayer.Clear ();
-
-			var g = document.CreateClippedToolContext ();
-			g.Antialias = UseAntialiasing ? Antialias.Subpixel : Antialias.None;
-
-			g.SetDashFromString (dash_pattern, BrushWidth);
-
-			if (path != null) {
-				g.AppendPath (path);
-			} else {
-				g.MoveTo (x, y);
-			}
-
-			g.LineTo (x, y);
-
-			path = g.CopyPath ();
-
-			g.ClosePath ();
-			g.LineWidth = BrushWidth;
-			g.FillRule = FillRule.EvenOdd;
-
-			if (FillShape && StrokeShape) {
-				g.SetSourceColor (fill_color);
-				g.FillPreserve ();
-				g.SetSourceColor (outline_color);
-				g.Stroke ();
-			} else if (FillShape) {
-				g.SetSourceColor (outline_color);
-				g.FillPreserve ();
-				g.SetSourceColor (outline_color);
-				g.Stroke ();
-			} else {
-				g.SetSourceColor (outline_color);
-				g.Stroke ();
-			}
-
-			document.Workspace.Invalidate ();
-
-			last_point = new PointI (x, y);
+		if (FillShape && StrokeShape) {
+			g.SetSourceColor (fill_color);
+			g.FillPreserve ();
+			g.SetSourceColor (outline_color);
+			g.Stroke ();
+		} else if (FillShape) {
+			g.SetSourceColor (outline_color);
+			g.FillPreserve ();
+			g.SetSourceColor (outline_color);
+			g.Stroke ();
+		} else {
+			g.SetSourceColor (outline_color);
+			g.Stroke ();
 		}
 
-		protected override void OnMouseUp (Document document, ToolMouseEventArgs e)
-		{
-			document.Layers.ToolLayer.Clear ();
-			document.Layers.ToolLayer.Hidden = true;
+		if (surface_modified && undo_surface != null)
+			document.History.PushNewItem (new SimpleHistoryItem (Icon, Name, undo_surface, document.Layers.CurrentUserLayerIndex));
 
-			Context g = document.CreateClippedContext ();
-			g.Antialias = UseAntialiasing ? Antialias.Subpixel : Antialias.None;
+		undo_surface = null;
+		surface_modified = false;
 
-			g.SetDashFromString (dash_pattern, BrushWidth);
+		document.Workspace.Invalidate ();
+	}
 
-			if (path != null) {
-				g.AppendPath (path);
-				path = null;
+	protected override void OnSaveSettings (ISettingsService settings)
+	{
+		base.OnSaveSettings (settings);
+
+		if (fill_button is not null)
+			settings.PutSetting (FILL_TYPE_SETTING, fill_button.SelectedIndex);
+		if (dash_p_box?.comboBox is not null)
+			settings.PutSetting (DASH_PATTERN_SETTING, dash_p_box.comboBox.ComboBox.GetActiveText ()!);
+	}
+
+	private bool StrokeShape => FillDropDown.SelectedItem.GetTagOrDefault (0) % 2 == 0;
+	private bool FillShape => FillDropDown.SelectedItem.GetTagOrDefault (0) >= 1;
+
+	private Label? fill_label;
+	private ToolBarDropDownButton? fill_button;
+	private Separator? fill_sep;
+
+	private Separator Separator => fill_sep ??= GtkExtensions.CreateToolBarSeparator ();
+	private Label FillLabel => fill_label ??= Label.New (string.Format (" {0}: ", Translations.GetString ("Fill Style")));
+	private ToolBarDropDownButton FillDropDown {
+		get {
+			if (fill_button == null) {
+				fill_button = new ToolBarDropDownButton ();
+
+				fill_button.AddItem (Translations.GetString ("Outline Shape"), Pinta.Resources.Icons.FillStyleOutline, 0);
+				fill_button.AddItem (Translations.GetString ("Fill Shape"), Pinta.Resources.Icons.FillStyleFill, 1);
+				fill_button.AddItem (Translations.GetString ("Fill and Outline Shape"), Pinta.Resources.Icons.FillStyleOutlineFill, 2);
+
+				fill_button.SelectedIndex = Settings.GetSetting (FILL_TYPE_SETTING, 0);
 			}
 
-			g.ClosePath ();
-			g.LineWidth = BrushWidth;
-			g.FillRule = FillRule.EvenOdd;
-
-			if (FillShape && StrokeShape) {
-				g.SetSourceColor (fill_color);
-				g.FillPreserve ();
-				g.SetSourceColor (outline_color);
-				g.Stroke ();
-			} else if (FillShape) {
-				g.SetSourceColor (outline_color);
-				g.FillPreserve ();
-				g.SetSourceColor (outline_color);
-				g.Stroke ();
-			} else {
-				g.SetSourceColor (outline_color);
-				g.Stroke ();
-			}
-
-			if (surface_modified && undo_surface != null)
-				document.History.PushNewItem (new SimpleHistoryItem (Icon, Name, undo_surface, document.Layers.CurrentUserLayerIndex));
-
-			undo_surface = null;
-			surface_modified = false;
-
-			document.Workspace.Invalidate ();
-		}
-
-		protected override void OnSaveSettings (ISettingsService settings)
-		{
-			base.OnSaveSettings (settings);
-
-			if (fill_button is not null)
-				settings.PutSetting (FILL_TYPE_SETTING, fill_button.SelectedIndex);
-			if (dash_p_box?.comboBox is not null)
-				settings.PutSetting (DASH_PATTERN_SETTING, dash_p_box.comboBox.ComboBox.GetActiveText ()!);
-		}
-
-		private bool StrokeShape => FillDropDown.SelectedItem.GetTagOrDefault (0) % 2 == 0;
-		private bool FillShape => FillDropDown.SelectedItem.GetTagOrDefault (0) >= 1;
-
-		private Label? fill_label;
-		private ToolBarDropDownButton? fill_button;
-		private Separator? fill_sep;
-
-		private Separator Separator => fill_sep ??= GtkExtensions.CreateToolBarSeparator ();
-		private Label FillLabel => fill_label ??= Label.New (string.Format (" {0}: ", Translations.GetString ("Fill Style")));
-		private ToolBarDropDownButton FillDropDown {
-			get {
-				if (fill_button == null) {
-					fill_button = new ToolBarDropDownButton ();
-
-					fill_button.AddItem (Translations.GetString ("Outline Shape"), Pinta.Resources.Icons.FillStyleOutline, 0);
-					fill_button.AddItem (Translations.GetString ("Fill Shape"), Pinta.Resources.Icons.FillStyleFill, 1);
-					fill_button.AddItem (Translations.GetString ("Fill and Outline Shape"), Pinta.Resources.Icons.FillStyleOutlineFill, 2);
-
-					fill_button.SelectedIndex = Settings.GetSetting (FILL_TYPE_SETTING, 0);
-				}
-
-				return fill_button;
-			}
+			return fill_button;
 		}
 	}
 }

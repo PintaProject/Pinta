@@ -29,221 +29,220 @@ using Cairo;
 using Gtk;
 using Pinta.Core;
 
-namespace Pinta.Tools
+namespace Pinta.Tools;
+
+public sealed class ColorPickerTool : BaseTool
 {
-	public class ColorPickerTool : BaseTool
+	private readonly IPaletteService palette;
+	private readonly IToolService tools;
+
+	private MouseButton button_down;
+
+	private const string TOOL_SELECTION_SETTING = "color-picker-tool-selection";
+	private const string SAMPLE_SIZE_SETTING = "color-picker-sample-size";
+	private const string SAMPLE_TYPE_SETTING = "color-picker-sample-type";
+
+	public ColorPickerTool (IServiceManager services) : base (services)
 	{
-		private readonly IPaletteService palette;
-		private readonly IToolService tools;
+		palette = services.GetService<IPaletteService> ();
+		tools = services.GetService<IToolService> ();
+	}
 
-		private MouseButton button_down;
+	public override string Name => Translations.GetString ("Color Picker");
+	public override string Icon => Pinta.Resources.Icons.ToolColorPicker;
+	public override string StatusBarText => Translations.GetString ("Left click to set primary color.\nRight click to set secondary color.");
+	public override bool CursorChangesOnZoom => true;
+	public override Gdk.Key ShortcutKey => Gdk.Key.K;
+	public override int Priority => 33;
+	private int SampleSize => SampleSizeDropDown.SelectedItem.GetTagOrDefault (1);
+	private bool SampleLayerOnly => SampleTypeDropDown.SelectedItem.GetTagOrDefault (false);
 
-		private const string TOOL_SELECTION_SETTING = "color-picker-tool-selection";
-		private const string SAMPLE_SIZE_SETTING = "color-picker-sample-size";
-		private const string SAMPLE_TYPE_SETTING = "color-picker-sample-type";
-
-		public ColorPickerTool (IServiceManager services) : base (services)
-		{
-			palette = services.GetService<IPaletteService> ();
-			tools = services.GetService<IToolService> ();
+	public override Gdk.Cursor DefaultCursor {
+		get {
+			var icon = GdkExtensions.CreateIconWithShape ("Cursor.ColorPicker.png",
+							CursorShape.Rectangle, SampleSize, 7, 27,
+							out var iconOffsetX, out var iconOffsetY);
+			return Gdk.Cursor.NewFromTexture (icon, iconOffsetX, iconOffsetY, null);
 		}
+	}
 
-		public override string Name => Translations.GetString ("Color Picker");
-		public override string Icon => Pinta.Resources.Icons.ToolColorPicker;
-		public override string StatusBarText => Translations.GetString ("Left click to set primary color.\nRight click to set secondary color.");
-		public override bool CursorChangesOnZoom => true;
-		public override Gdk.Key ShortcutKey => Gdk.Key.K;
-		public override int Priority => 33;
-		private int SampleSize => SampleSizeDropDown.SelectedItem.GetTagOrDefault (1);
-		private bool SampleLayerOnly => SampleTypeDropDown.SelectedItem.GetTagOrDefault (false);
+	protected override void OnBuildToolBar (Box tb)
+	{
+		base.OnBuildToolBar (tb);
 
-		public override Gdk.Cursor DefaultCursor {
-			get {
-				var icon = GdkExtensions.CreateIconWithShape ("Cursor.ColorPicker.png",
-								CursorShape.Rectangle, SampleSize, 7, 27,
-								out var iconOffsetX, out var iconOffsetY);
-				return Gdk.Cursor.NewFromTexture (icon, iconOffsetX, iconOffsetY, null);
+		tb.Append (SamplingLabel);
+		tb.Append (SampleSizeDropDown);
+		tb.Append (SampleTypeDropDown);
+
+		tb.Append (Separator);
+
+		tb.Append (ToolSelectionLabel);
+		tb.Append (ToolSelectionDropDown);
+	}
+
+	protected override void OnMouseDown (Document document, ToolMouseEventArgs e)
+	{
+		if (e.MouseButton == MouseButton.Left)
+			button_down = MouseButton.Left;
+		else if (e.MouseButton == MouseButton.Right)
+			button_down = MouseButton.Right;
+
+		if (!document.Workspace.PointInCanvas (e.PointDouble))
+			return;
+
+		var color = GetColorFromPoint (document, e.Point);
+
+		if (button_down == MouseButton.Left)
+			palette.SetColor (true, color, false);
+		else if (button_down == MouseButton.Right)
+			palette.SetColor (false, color, false);
+	}
+
+	protected override void OnMouseMove (Document document, ToolMouseEventArgs e)
+	{
+		if (button_down == MouseButton.None)
+			return;
+
+		if (!document.Workspace.PointInCanvas (e.PointDouble))
+			return;
+
+		var color = GetColorFromPoint (document, e.Point);
+
+		if (button_down == MouseButton.Left)
+			palette.SetColor (true, color, false);
+		else if (button_down == MouseButton.Right)
+			palette.SetColor (false, color, false);
+	}
+
+	protected override void OnMouseUp (Document document, ToolMouseEventArgs e)
+	{
+		// Even though we've already set the color, we don't add it to the
+		// recently used while we're moving the mouse around.  We only want
+		// to set it now, when the user releasing the mouse button.
+		if (button_down == MouseButton.Left)
+			palette.SetColor (true, palette.PrimaryColor, true);
+		else if (button_down == MouseButton.Right)
+			palette.SetColor (false, palette.SecondaryColor, true);
+
+		button_down = MouseButton.None;
+
+		if (ToolSelectionDropDown.SelectedItem.GetTagOrDefault (0) == 1 && tools.PreviousTool is not null)
+			tools.SetCurrentTool (tools.PreviousTool);
+		else if (ToolSelectionDropDown.SelectedItem.GetTagOrDefault (0) == 2)
+			tools.SetCurrentTool (nameof (PencilTool));
+	}
+
+	protected override void OnSaveSettings (ISettingsService settings)
+	{
+		base.OnSaveSettings (settings);
+
+		if (tool_select is not null)
+			settings.PutSetting (TOOL_SELECTION_SETTING, tool_select.SelectedIndex);
+		if (sample_size is not null)
+			settings.PutSetting (SAMPLE_SIZE_SETTING, sample_size.SelectedIndex);
+		if (sample_type is not null)
+			settings.PutSetting (SAMPLE_TYPE_SETTING, sample_type.SelectedIndex);
+	}
+
+	private Color GetColorFromPoint (Document document, PointI point)
+	{
+		var pixels = GetPixelsFromPoint (document, point);
+		var color = ColorBgra.BlendPremultiplied (pixels);
+		return color.ToStraightAlpha ().ToCairoColor ();
+	}
+
+	private ColorBgra[] GetPixelsFromPoint (Document document, PointI point)
+	{
+		var x = point.X;
+		var y = point.Y;
+		var size = SampleSize;
+		var half = size / 2;
+
+		// Short circuit for single pixel
+		if (size == 1)
+			return new[] { GetPixel (document, x, y) };
+
+		// Find the pixels we need (clamp to the size of the image)
+		var rect = new RectangleI (x - half, y - half, size, size);
+		rect = rect.Intersect (new RectangleI (PointI.Zero, document.ImageSize));
+
+		var pixels = new List<ColorBgra> ();
+
+		for (var i = rect.Left; i <= rect.Right; i++)
+			for (var j = rect.Top; j <= rect.Bottom; j++)
+				pixels.Add (GetPixel (document, i, j));
+
+		return pixels.ToArray ();
+	}
+
+	private ColorBgra GetPixel (Document document, int x, int y)
+	{
+		if (SampleLayerOnly)
+			return document.Layers.CurrentUserLayer.Surface.GetColorBgra (x, y);
+		else
+			return document.GetComputedPixel (x, y);
+	}
+
+	private ToolBarDropDownButton? tool_select;
+	private Label? tool_select_label;
+	private Label? sampling_label;
+	private ToolBarDropDownButton? sample_size;
+	private ToolBarDropDownButton? sample_type;
+	private Separator? sample_sep;
+
+	private Label ToolSelectionLabel => tool_select_label ??= Label.New (string.Format (" {0}: ", Translations.GetString ("After select")));
+	private Label SamplingLabel => sampling_label ??= Label.New (string.Format (" {0}: ", Translations.GetString ("Sampling")));
+	private Separator Separator => sample_sep ??= GtkExtensions.CreateToolBarSeparator ();
+
+	private ToolBarDropDownButton ToolSelectionDropDown {
+		get {
+			if (tool_select is null) {
+				tool_select = new ToolBarDropDownButton (true);
+
+				tool_select.AddItem (Translations.GetString ("Do not switch tool"), Pinta.Resources.Icons.ToolColorPicker, 0);
+				tool_select.AddItem (Translations.GetString ("Switch to previous tool"), Pinta.Resources.Icons.ToolColorPickerPreviousTool, 1);
+				tool_select.AddItem (Translations.GetString ("Switch to Pencil tool"), Pinta.Resources.Icons.ToolPencil, 2);
+
+				tool_select.SelectedIndex = Settings.GetSetting (TOOL_SELECTION_SETTING, 0);
 			}
+
+			return tool_select;
 		}
+	}
 
-		protected override void OnBuildToolBar (Box tb)
-		{
-			base.OnBuildToolBar (tb);
+	private ToolBarDropDownButton SampleSizeDropDown {
+		get {
+			if (sample_size is null) {
+				sample_size = new ToolBarDropDownButton (true);
 
-			tb.Append (SamplingLabel);
-			tb.Append (SampleSizeDropDown);
-			tb.Append (SampleTypeDropDown);
+				// Change the cursor when the SampleSize is changed.
+				sample_size.SelectedItemChanged += (sender, e) => SetCursor (DefaultCursor);
 
-			tb.Append (Separator);
+				sample_size.AddItem (Translations.GetString ("Single Pixel"), Pinta.Resources.Icons.Sampling1, 1);
+				sample_size.AddItem (Translations.GetString ("3 x 3 Region"), Pinta.Resources.Icons.Sampling3, 3);
+				sample_size.AddItem (Translations.GetString ("5 x 5 Region"), Pinta.Resources.Icons.Sampling5, 5);
+				sample_size.AddItem (Translations.GetString ("7 x 7 Region"), Pinta.Resources.Icons.Sampling7, 7);
+				sample_size.AddItem (Translations.GetString ("9 x 9 Region"), Pinta.Resources.Icons.Sampling9, 9);
 
-			tb.Append (ToolSelectionLabel);
-			tb.Append (ToolSelectionDropDown);
-		}
-
-		protected override void OnMouseDown (Document document, ToolMouseEventArgs e)
-		{
-			if (e.MouseButton == MouseButton.Left)
-				button_down = MouseButton.Left;
-			else if (e.MouseButton == MouseButton.Right)
-				button_down = MouseButton.Right;
-
-			if (!document.Workspace.PointInCanvas (e.PointDouble))
-				return;
-
-			var color = GetColorFromPoint (document, e.Point);
-
-			if (button_down == MouseButton.Left)
-				palette.SetColor (true, color, false);
-			else if (button_down == MouseButton.Right)
-				palette.SetColor (false, color, false);
-		}
-
-		protected override void OnMouseMove (Document document, ToolMouseEventArgs e)
-		{
-			if (button_down == MouseButton.None)
-				return;
-
-			if (!document.Workspace.PointInCanvas (e.PointDouble))
-				return;
-
-			var color = GetColorFromPoint (document, e.Point);
-
-			if (button_down == MouseButton.Left)
-				palette.SetColor (true, color, false);
-			else if (button_down == MouseButton.Right)
-				palette.SetColor (false, color, false);
-		}
-
-		protected override void OnMouseUp (Document document, ToolMouseEventArgs e)
-		{
-			// Even though we've already set the color, we don't add it to the
-			// recently used while we're moving the mouse around.  We only want
-			// to set it now, when the user releasing the mouse button.
-			if (button_down == MouseButton.Left)
-				palette.SetColor (true, palette.PrimaryColor, true);
-			else if (button_down == MouseButton.Right)
-				palette.SetColor (false, palette.SecondaryColor, true);
-
-			button_down = MouseButton.None;
-
-			if (ToolSelectionDropDown.SelectedItem.GetTagOrDefault (0) == 1 && tools.PreviousTool is not null)
-				tools.SetCurrentTool (tools.PreviousTool);
-			else if (ToolSelectionDropDown.SelectedItem.GetTagOrDefault (0) == 2)
-				tools.SetCurrentTool (nameof (PencilTool));
-		}
-
-		protected override void OnSaveSettings (ISettingsService settings)
-		{
-			base.OnSaveSettings (settings);
-
-			if (tool_select is not null)
-				settings.PutSetting (TOOL_SELECTION_SETTING, tool_select.SelectedIndex);
-			if (sample_size is not null)
-				settings.PutSetting (SAMPLE_SIZE_SETTING, sample_size.SelectedIndex);
-			if (sample_type is not null)
-				settings.PutSetting (SAMPLE_TYPE_SETTING, sample_type.SelectedIndex);
-		}
-
-		private Color GetColorFromPoint (Document document, PointI point)
-		{
-			var pixels = GetPixelsFromPoint (document, point);
-			var color = ColorBgra.BlendPremultiplied (pixels);
-			return color.ToStraightAlpha ().ToCairoColor ();
-		}
-
-		private ColorBgra[] GetPixelsFromPoint (Document document, PointI point)
-		{
-			var x = point.X;
-			var y = point.Y;
-			var size = SampleSize;
-			var half = size / 2;
-
-			// Short circuit for single pixel
-			if (size == 1)
-				return new[] { GetPixel (document, x, y) };
-
-			// Find the pixels we need (clamp to the size of the image)
-			var rect = new RectangleI (x - half, y - half, size, size);
-			rect = rect.Intersect (new RectangleI (PointI.Zero, document.ImageSize));
-
-			var pixels = new List<ColorBgra> ();
-
-			for (var i = rect.Left; i <= rect.Right; i++)
-				for (var j = rect.Top; j <= rect.Bottom; j++)
-					pixels.Add (GetPixel (document, i, j));
-
-			return pixels.ToArray ();
-		}
-
-		private ColorBgra GetPixel (Document document, int x, int y)
-		{
-			if (SampleLayerOnly)
-				return document.Layers.CurrentUserLayer.Surface.GetColorBgra (x, y);
-			else
-				return document.GetComputedPixel (x, y);
-		}
-
-		private ToolBarDropDownButton? tool_select;
-		private Label? tool_select_label;
-		private Label? sampling_label;
-		private ToolBarDropDownButton? sample_size;
-		private ToolBarDropDownButton? sample_type;
-		private Separator? sample_sep;
-
-		private Label ToolSelectionLabel => tool_select_label ??= Label.New (string.Format (" {0}: ", Translations.GetString ("After select")));
-		private Label SamplingLabel => sampling_label ??= Label.New (string.Format (" {0}: ", Translations.GetString ("Sampling")));
-		private Separator Separator => sample_sep ??= GtkExtensions.CreateToolBarSeparator ();
-
-		private ToolBarDropDownButton ToolSelectionDropDown {
-			get {
-				if (tool_select is null) {
-					tool_select = new ToolBarDropDownButton (true);
-
-					tool_select.AddItem (Translations.GetString ("Do not switch tool"), Pinta.Resources.Icons.ToolColorPicker, 0);
-					tool_select.AddItem (Translations.GetString ("Switch to previous tool"), Pinta.Resources.Icons.ToolColorPickerPreviousTool, 1);
-					tool_select.AddItem (Translations.GetString ("Switch to Pencil tool"), Pinta.Resources.Icons.ToolPencil, 2);
-
-					tool_select.SelectedIndex = Settings.GetSetting (TOOL_SELECTION_SETTING, 0);
-				}
-
-				return tool_select;
+				sample_size.SelectedIndex = Settings.GetSetting (SAMPLE_SIZE_SETTING, 0);
 			}
+
+			return sample_size;
 		}
+	}
 
-		private ToolBarDropDownButton SampleSizeDropDown {
-			get {
-				if (sample_size is null) {
-					sample_size = new ToolBarDropDownButton (true);
+	private ToolBarDropDownButton SampleTypeDropDown {
+		get {
+			if (sample_type is null) {
+				sample_type = new ToolBarDropDownButton (true);
 
-					// Change the cursor when the SampleSize is changed.
-					sample_size.SelectedItemChanged += (sender, e) => SetCursor (DefaultCursor);
+				sample_type.AddItem (Translations.GetString ("Layer"), Pinta.Resources.Icons.LayerMergeDown, true);
+				sample_type.AddItem (Translations.GetString ("Image"), Pinta.Resources.Icons.ResizeCanvasBase, false);
 
-					sample_size.AddItem (Translations.GetString ("Single Pixel"), Pinta.Resources.Icons.Sampling1, 1);
-					sample_size.AddItem (Translations.GetString ("3 x 3 Region"), Pinta.Resources.Icons.Sampling3, 3);
-					sample_size.AddItem (Translations.GetString ("5 x 5 Region"), Pinta.Resources.Icons.Sampling5, 5);
-					sample_size.AddItem (Translations.GetString ("7 x 7 Region"), Pinta.Resources.Icons.Sampling7, 7);
-					sample_size.AddItem (Translations.GetString ("9 x 9 Region"), Pinta.Resources.Icons.Sampling9, 9);
-
-					sample_size.SelectedIndex = Settings.GetSetting (SAMPLE_SIZE_SETTING, 0);
-				}
-
-				return sample_size;
+				sample_type.SelectedIndex = Settings.GetSetting (SAMPLE_TYPE_SETTING, 0);
 			}
-		}
 
-		private ToolBarDropDownButton SampleTypeDropDown {
-			get {
-				if (sample_type is null) {
-					sample_type = new ToolBarDropDownButton (true);
-
-					sample_type.AddItem (Translations.GetString ("Layer"), Pinta.Resources.Icons.LayerMergeDown, true);
-					sample_type.AddItem (Translations.GetString ("Image"), Pinta.Resources.Icons.ResizeCanvasBase, false);
-
-					sample_type.SelectedIndex = Settings.GetSetting (SAMPLE_TYPE_SETTING, 0);
-				}
-
-				return sample_type;
-			}
+			return sample_type;
 		}
 	}
 }

@@ -28,194 +28,193 @@ using System;
 using Cairo;
 using Pinta.Core;
 
-namespace Pinta.Tools
+namespace Pinta.Tools;
+
+public sealed class GradientTool : BaseTool
 {
-	public sealed class GradientTool : BaseTool
+	private readonly IPaletteService palette;
+	PointD startpoint;
+	bool tracking;
+	private ImageSurface? undo_surface;
+	MouseButton button;
+
+	private const string GRADIENT_TYPE_SETTING = "gradient-type";
+	private const string GRADIENT_COLOR_MODE_SETTING = "gradient-color-mode";
+
+	public GradientTool (IServiceManager services) : base (services)
 	{
-		private readonly IPaletteService palette;
-		PointD startpoint;
-		bool tracking;
-		private ImageSurface? undo_surface;
-		MouseButton button;
+		palette = services.GetService<IPaletteService> ();
+	}
 
-		private const string GRADIENT_TYPE_SETTING = "gradient-type";
-		private const string GRADIENT_COLOR_MODE_SETTING = "gradient-color-mode";
+	public override string Name => Translations.GetString ("Gradient");
+	public override string Icon => Pinta.Resources.Icons.ToolGradient;
+	public override string StatusBarText => Translations.GetString ("Click and drag to draw gradient from primary to secondary color.\nRight click to reverse.");
+	public override Gdk.Key ShortcutKey => Gdk.Key.G;
+	public override Gdk.Cursor DefaultCursor => Gdk.Cursor.NewFromTexture (Resources.GetIcon ("Cursor.Gradient.png"), 9, 18, null);
+	public override int Priority => 31;
+	protected override bool ShowAlphaBlendingButton => true;
+	private GradientType SelectedGradientType => GradientDropDown.SelectedItem.GetTagOrDefault (GradientType.Linear);
+	private GradientColorMode SelectedGradientColorMode => ColorModeDropDown.SelectedItem.GetTagOrDefault (GradientColorMode.Color);
 
-		public GradientTool (IServiceManager services) : base (services)
-		{
-			palette = services.GetService<IPaletteService> ();
+	protected override void OnBuildToolBar (Gtk.Box tb)
+	{
+		base.OnBuildToolBar (tb);
+
+		tb.Append (GradientLabel);
+		tb.Append (GradientDropDown);
+		tb.Append (GtkExtensions.CreateToolBarSeparator ());
+		tb.Append (ModeLabel);
+		tb.Append (ColorModeDropDown);
+	}
+
+	protected override void OnMouseDown (Document document, ToolMouseEventArgs e)
+	{
+		// Protect against history corruption
+		if (tracking)
+			return;
+
+		startpoint = e.PointDouble;
+
+		if (!document.Workspace.PointInCanvas (e.PointDouble))
+			return;
+
+		tracking = true;
+		button = e.MouseButton;
+		undo_surface = document.Layers.CurrentUserLayer.Surface.Clone ();
+	}
+
+	protected override void OnMouseUp (Document document, ToolMouseEventArgs e)
+	{
+		if (!tracking || e.MouseButton != button)
+			return;
+
+		tracking = false;
+
+		// Clear the temporary scratch surface, which we don't clear in OnMouseMove
+		// because it's overwritten on subsequent moves
+		document.Layers.ToolLayer.Clear ();
+
+		if (undo_surface != null)
+			document.History.PushNewItem (new SimpleHistoryItem (Icon, Name, undo_surface, document.Layers.CurrentUserLayerIndex));
+	}
+
+	protected override void OnMouseMove (Document document, ToolMouseEventArgs e)
+	{
+		if (!tracking)
+			return;
+
+		var gr = CreateGradientRenderer ();
+
+		if (button == MouseButton.Right) {
+			gr.StartColor = palette.SecondaryColor.ToColorBgra ();
+			gr.EndColor = palette.PrimaryColor.ToColorBgra ();
+		} else {
+			gr.StartColor = palette.PrimaryColor.ToColorBgra ();
+			gr.EndColor = palette.SecondaryColor.ToColorBgra ();
 		}
 
-		public override string Name => Translations.GetString ("Gradient");
-		public override string Icon => Pinta.Resources.Icons.ToolGradient;
-		public override string StatusBarText => Translations.GetString ("Click and drag to draw gradient from primary to secondary color.\nRight click to reverse.");
-		public override Gdk.Key ShortcutKey => Gdk.Key.G;
-		public override Gdk.Cursor DefaultCursor => Gdk.Cursor.NewFromTexture (Resources.GetIcon ("Cursor.Gradient.png"), 9, 18, null);
-		public override int Priority => 31;
-		protected override bool ShowAlphaBlendingButton => true;
-		private GradientType SelectedGradientType => GradientDropDown.SelectedItem.GetTagOrDefault (GradientType.Linear);
-		private GradientColorMode SelectedGradientColorMode => ColorModeDropDown.SelectedItem.GetTagOrDefault (GradientColorMode.Color);
+		gr.StartPoint = startpoint;
+		gr.EndPoint = e.PointDouble;
+		gr.AlphaBlending = UseAlphaBlending;
 
-		protected override void OnBuildToolBar (Gtk.Box tb)
-		{
-			base.OnBuildToolBar (tb);
+		gr.BeforeRender ();
 
-			tb.Append (GradientLabel);
-			tb.Append (GradientDropDown);
-			tb.Append (GtkExtensions.CreateToolBarSeparator ());
-			tb.Append (ModeLabel);
-			tb.Append (ColorModeDropDown);
+		var selection_bounds = document.GetSelectedBounds (true);
+		var scratch_layer = document.Layers.ToolLayer.Surface;
+		document.Layers.ToolLayer.Hidden = true;
+
+		// Initialize the scratch layer with the (original) current layer, if any blending is required.
+		if (gr.AlphaOnly || (gr.AlphaBlending && (gr.StartColor.A != 255 || gr.EndColor.A != 255))) {
+			var g = new Context (scratch_layer);
+			document.Selection.Clip (g);
+			g.SetSourceSurface (undo_surface!, 0, 0);
+			g.Operator = Operator.Source;
+			g.Paint ();
 		}
 
-		protected override void OnMouseDown (Document document, ToolMouseEventArgs e)
-		{
-			// Protect against history corruption
-			if (tracking)
-				return;
+		gr.Render (scratch_layer, new[] { selection_bounds });
 
-			startpoint = e.PointDouble;
+		// Transfer the result back to the current layer.
+		var context = document.CreateClippedContext ();
+		context.SetSourceSurface (scratch_layer, 0, 0);
+		context.Operator = Operator.Source;
+		context.Paint ();
 
-			if (!document.Workspace.PointInCanvas (e.PointDouble))
-				return;
+		selection_bounds.Inflate (5, 5);
+		document.Workspace.Invalidate (selection_bounds);
+	}
 
-			tracking = true;
-			button = e.MouseButton;
-			undo_surface = document.Layers.CurrentUserLayer.Surface.Clone ();
-		}
+	protected override void OnSaveSettings (ISettingsService settings)
+	{
+		base.OnSaveSettings (settings);
 
-		protected override void OnMouseUp (Document document, ToolMouseEventArgs e)
-		{
-			if (!tracking || e.MouseButton != button)
-				return;
+		if (gradient_button is not null)
+			settings.PutSetting (GRADIENT_TYPE_SETTING, gradient_button.SelectedIndex);
+		if (color_mode_button is not null)
+			settings.PutSetting (GRADIENT_COLOR_MODE_SETTING, color_mode_button.SelectedIndex);
+	}
 
-			tracking = false;
+	private GradientRenderer CreateGradientRenderer ()
+	{
+		var op = new UserBlendOps.NormalBlendOp ();
+		bool alpha_only = SelectedGradientColorMode == GradientColorMode.Transparency;
 
-			// Clear the temporary scratch surface, which we don't clear in OnMouseMove
-			// because it's overwritten on subsequent moves
-			document.Layers.ToolLayer.Clear ();
+		return SelectedGradientType switch {
+			GradientType.Linear => new GradientRenderers.LinearClamped (alpha_only, op),
+			GradientType.LinearReflected => new GradientRenderers.LinearReflected (alpha_only, op),
+			GradientType.Radial => new GradientRenderers.Radial (alpha_only, op),
+			GradientType.Diamond => new GradientRenderers.LinearDiamond (alpha_only, op),
+			GradientType.Conical => new GradientRenderers.Conical (alpha_only, op),
+			_ => throw new InvalidOperationException ("Unknown gradient type."),
+		};
+	}
 
-			if (undo_surface != null)
-				document.History.PushNewItem (new SimpleHistoryItem (Icon, Name, undo_surface, document.Layers.CurrentUserLayerIndex));
-		}
+	private Gtk.Label? gradient_label;
+	private ToolBarDropDownButton? gradient_button;
+	private Gtk.Label? color_mode_label;
+	private ToolBarDropDownButton? color_mode_button;
 
-		protected override void OnMouseMove (Document document, ToolMouseEventArgs e)
-		{
-			if (!tracking)
-				return;
+	private Gtk.Label GradientLabel => gradient_label ??= Gtk.Label.New (string.Format (" {0}: ", Translations.GetString ("Gradient")));
+	private ToolBarDropDownButton GradientDropDown {
+		get {
+			if (gradient_button == null) {
+				gradient_button = new ToolBarDropDownButton ();
 
-			var gr = CreateGradientRenderer ();
+				gradient_button.AddItem (Translations.GetString ("Linear Gradient"), Pinta.Resources.Icons.GradientLinear, GradientType.Linear);
+				gradient_button.AddItem (Translations.GetString ("Linear Reflected Gradient"), Pinta.Resources.Icons.GradientLinearReflected, GradientType.LinearReflected);
+				gradient_button.AddItem (Translations.GetString ("Linear Diamond Gradient"), Pinta.Resources.Icons.GradientDiamond, GradientType.Diamond);
+				gradient_button.AddItem (Translations.GetString ("Radial Gradient"), Pinta.Resources.Icons.GradientRadial, GradientType.Radial);
+				gradient_button.AddItem (Translations.GetString ("Conical Gradient"), Pinta.Resources.Icons.GradientConical, GradientType.Conical);
 
-			if (button == MouseButton.Right) {
-				gr.StartColor = palette.SecondaryColor.ToColorBgra ();
-				gr.EndColor = palette.PrimaryColor.ToColorBgra ();
-			} else {
-				gr.StartColor = palette.PrimaryColor.ToColorBgra ();
-				gr.EndColor = palette.SecondaryColor.ToColorBgra ();
+				gradient_button.SelectedIndex = Settings.GetSetting (GRADIENT_TYPE_SETTING, 0);
 			}
 
-			gr.StartPoint = startpoint;
-			gr.EndPoint = e.PointDouble;
-			gr.AlphaBlending = UseAlphaBlending;
+			return gradient_button;
+		}
+	}
 
-			gr.BeforeRender ();
+	private Gtk.Label ModeLabel => color_mode_label ??= Gtk.Label.New (string.Format (" {0}: ", Translations.GetString ("Mode")));
+	private ToolBarDropDownButton ColorModeDropDown {
+		get {
+			if (color_mode_button == null) {
+				color_mode_button = new ToolBarDropDownButton ();
 
-			var selection_bounds = document.GetSelectedBounds (true);
-			var scratch_layer = document.Layers.ToolLayer.Surface;
-			document.Layers.ToolLayer.Hidden = true;
+				color_mode_button.AddItem (Translations.GetString ("Color Mode"), Pinta.Resources.Icons.ColorModeColor, GradientColorMode.Color);
+				color_mode_button.AddItem (Translations.GetString ("Transparency Mode"), Pinta.Resources.Icons.ColorModeTransparency, GradientColorMode.Transparency);
 
-			// Initialize the scratch layer with the (original) current layer, if any blending is required.
-			if (gr.AlphaOnly || (gr.AlphaBlending && (gr.StartColor.A != 255 || gr.EndColor.A != 255))) {
-				var g = new Context (scratch_layer);
-				document.Selection.Clip (g);
-				g.SetSourceSurface (undo_surface!, 0, 0);
-				g.Operator = Operator.Source;
-				g.Paint ();
+				color_mode_button.SelectedIndex = Settings.GetSetting (GRADIENT_COLOR_MODE_SETTING, 0);
 			}
 
-			gr.Render (scratch_layer, new[] { selection_bounds });
-
-			// Transfer the result back to the current layer.
-			var context = document.CreateClippedContext ();
-			context.SetSourceSurface (scratch_layer, 0, 0);
-			context.Operator = Operator.Source;
-			context.Paint ();
-
-			selection_bounds.Inflate (5, 5);
-			document.Workspace.Invalidate (selection_bounds);
+			return color_mode_button;
 		}
+	}
 
-		protected override void OnSaveSettings (ISettingsService settings)
-		{
-			base.OnSaveSettings (settings);
-
-			if (gradient_button is not null)
-				settings.PutSetting (GRADIENT_TYPE_SETTING, gradient_button.SelectedIndex);
-			if (color_mode_button is not null)
-				settings.PutSetting (GRADIENT_COLOR_MODE_SETTING, color_mode_button.SelectedIndex);
-		}
-
-		private GradientRenderer CreateGradientRenderer ()
-		{
-			var op = new UserBlendOps.NormalBlendOp ();
-			bool alpha_only = SelectedGradientColorMode == GradientColorMode.Transparency;
-
-			return SelectedGradientType switch {
-				GradientType.Linear => new GradientRenderers.LinearClamped (alpha_only, op),
-				GradientType.LinearReflected => new GradientRenderers.LinearReflected (alpha_only, op),
-				GradientType.Radial => new GradientRenderers.Radial (alpha_only, op),
-				GradientType.Diamond => new GradientRenderers.LinearDiamond (alpha_only, op),
-				GradientType.Conical => new GradientRenderers.Conical (alpha_only, op),
-				_ => throw new InvalidOperationException ("Unknown gradient type."),
-			};
-		}
-
-		private Gtk.Label? gradient_label;
-		private ToolBarDropDownButton? gradient_button;
-		private Gtk.Label? color_mode_label;
-		private ToolBarDropDownButton? color_mode_button;
-
-		private Gtk.Label GradientLabel => gradient_label ??= Gtk.Label.New (string.Format (" {0}: ", Translations.GetString ("Gradient")));
-		private ToolBarDropDownButton GradientDropDown {
-			get {
-				if (gradient_button == null) {
-					gradient_button = new ToolBarDropDownButton ();
-
-					gradient_button.AddItem (Translations.GetString ("Linear Gradient"), Pinta.Resources.Icons.GradientLinear, GradientType.Linear);
-					gradient_button.AddItem (Translations.GetString ("Linear Reflected Gradient"), Pinta.Resources.Icons.GradientLinearReflected, GradientType.LinearReflected);
-					gradient_button.AddItem (Translations.GetString ("Linear Diamond Gradient"), Pinta.Resources.Icons.GradientDiamond, GradientType.Diamond);
-					gradient_button.AddItem (Translations.GetString ("Radial Gradient"), Pinta.Resources.Icons.GradientRadial, GradientType.Radial);
-					gradient_button.AddItem (Translations.GetString ("Conical Gradient"), Pinta.Resources.Icons.GradientConical, GradientType.Conical);
-
-					gradient_button.SelectedIndex = Settings.GetSetting (GRADIENT_TYPE_SETTING, 0);
-				}
-
-				return gradient_button;
-			}
-		}
-
-		private Gtk.Label ModeLabel => color_mode_label ??= Gtk.Label.New (string.Format (" {0}: ", Translations.GetString ("Mode")));
-		private ToolBarDropDownButton ColorModeDropDown {
-			get {
-				if (color_mode_button == null) {
-					color_mode_button = new ToolBarDropDownButton ();
-
-					color_mode_button.AddItem (Translations.GetString ("Color Mode"), Pinta.Resources.Icons.ColorModeColor, GradientColorMode.Color);
-					color_mode_button.AddItem (Translations.GetString ("Transparency Mode"), Pinta.Resources.Icons.ColorModeTransparency, GradientColorMode.Transparency);
-
-					color_mode_button.SelectedIndex = Settings.GetSetting (GRADIENT_COLOR_MODE_SETTING, 0);
-				}
-
-				return color_mode_button;
-			}
-		}
-
-		enum GradientType
-		{
-			Linear,
-			LinearReflected,
-			Diamond,
-			Radial,
-			Conical
-		}
+	enum GradientType
+	{
+		Linear,
+		LinearReflected,
+		Diamond,
+		Radial,
+		Conical
 	}
 }
