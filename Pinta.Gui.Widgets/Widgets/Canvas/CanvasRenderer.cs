@@ -9,7 +9,6 @@
 
 using System.Collections.Generic;
 using System.Collections.Immutable;
-using System.Reflection.Metadata.Ecma335;
 using Pinta.Core;
 
 namespace Pinta.Gui.Widgets;
