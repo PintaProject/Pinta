@@ -25,55 +25,54 @@ using System;
 using Gtk;
 using Pinta.Core;
 
-namespace Pinta.Gui.Widgets
+namespace Pinta.Gui.Widgets;
+
+// GObject subclass for use with Gio.ListStore
+public class HistoryListViewItem : GObject.Object
 {
-	// GObject subclass for use with Gio.ListStore
-	public class HistoryListViewItem : GObject.Object
+	private readonly BaseHistoryItem item;
+
+	public HistoryListViewItem (BaseHistoryItem item) : base (true, Array.Empty<GObject.ConstructArgument> ())
 	{
-		private readonly BaseHistoryItem item;
+		ArgumentNullException.ThrowIfNullOrEmpty (item.Text);
+		ArgumentNullException.ThrowIfNullOrEmpty (item.Icon);
 
-		public HistoryListViewItem (BaseHistoryItem item) : base (true, Array.Empty<GObject.ConstructArgument> ())
-		{
-			ArgumentNullException.ThrowIfNullOrEmpty (item.Text);
-			ArgumentNullException.ThrowIfNullOrEmpty (item.Icon);
-
-			this.item = item;
-		}
-
-		public string Label => item.Text!;
-		public string IconName => item.Icon!;
-		public bool Active => item.State == HistoryItemState.Undo;
+		this.item = item;
 	}
 
-	public class HistoryItemWidget : Box
+	public string Label => item.Text!;
+	public string IconName => item.Icon!;
+	public bool Active => item.State == HistoryItemState.Undo;
+}
+
+public class HistoryItemWidget : Box
+{
+	private readonly Gtk.Image image;
+	private readonly Gtk.Label label;
+
+	public HistoryItemWidget ()
 	{
-		private readonly Gtk.Image image;
-		private readonly Gtk.Label label;
+		Spacing = 6;
+		this.SetAllMargins (2);
+		SetOrientation (Orientation.Horizontal);
 
-		public HistoryItemWidget ()
-		{
-			Spacing = 6;
-			this.SetAllMargins (2);
-			SetOrientation (Orientation.Horizontal);
+		image = Gtk.Image.New ();
+		Append (image);
 
-			image = Gtk.Image.New ();
-			Append (image);
+		label = Gtk.Label.New (string.Empty);
+		label.Halign = Align.Start;
+		Append (label);
+	}
 
-			label = Gtk.Label.New (string.Empty);
-			label.Halign = Align.Start;
-			Append (label);
-		}
+	// Set the widget's contents to the provided history item.
+	public void Update (HistoryListViewItem item)
+	{
+		image.IconName = item.IconName;
+		label.SetText (item.Label);
 
-		// Set the widget's contents to the provided history item.
-		public void Update (HistoryListViewItem item)
-		{
-			image.IconName = item.IconName;
-			label.SetText (item.Label);
-
-			if (item.Active)
-				RemoveCssClass (AdwaitaStyles.DimLabel);
-			else
-				AddCssClass (AdwaitaStyles.DimLabel);
-		}
+		if (item.Active)
+			RemoveCssClass (AdwaitaStyles.DimLabel);
+		else
+			AddCssClass (AdwaitaStyles.DimLabel);
 	}
 }
