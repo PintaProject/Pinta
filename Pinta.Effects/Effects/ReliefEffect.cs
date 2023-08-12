@@ -38,38 +38,38 @@ public sealed class ReliefEffect : ColorDifferenceEffect
 	#region Algorithm Code Ported From PDN
 	public override void Render (Cairo.ImageSurface src, Cairo.ImageSurface dst, Core.RectangleI[] rois)
 	{
-		base.RenderColorDifferenceEffect (Weights, src, dst, rois);
+		var weights = Weights ();
+		base.RenderColorDifferenceEffect (weights, src, dst, rois);
 	}
 
-	private double[][] Weights {
-		get {
-			// adjust and convert angle to radians
-			double r = (double) Data.Angle * 2.0 * Math.PI / 360.0;
+	private double[][] Weights ()
+	{
+		// adjust and convert angle to radians
+		double r = (double) Data.Angle * 2.0 * Math.PI / 360.0;
 
-			// angle delta for each weight
-			double dr = Math.PI / 4.0;
+		// angle delta for each weight
+		double dr = Math.PI / 4.0;
 
-			// for r = 0 this builds an Relief filter pointing straight left
-			double[][] weights = new double[3][];
+		// for r = 0 this builds an Relief filter pointing straight left
+		double[][] weights = new double[3][];
 
-			for (uint idx = 0; idx < 3; ++idx) {
-				weights[idx] = new double[3];
-			}
-
-			weights[0][0] = Math.Cos (r + dr);
-			weights[0][1] = Math.Cos (r + 2.0 * dr);
-			weights[0][2] = Math.Cos (r + 3.0 * dr);
-
-			weights[1][0] = Math.Cos (r);
-			weights[1][1] = 1;
-			weights[1][2] = Math.Cos (r + 4.0 * dr);
-
-			weights[2][0] = Math.Cos (r - dr);
-			weights[2][1] = Math.Cos (r - 2.0 * dr);
-			weights[2][2] = Math.Cos (r - 3.0 * dr);
-
-			return weights;
+		for (uint idx = 0; idx < 3; ++idx) {
+			weights[idx] = new double[3];
 		}
+
+		weights[0][0] = Math.Cos (r + dr);
+		weights[0][1] = Math.Cos (r + 2.0 * dr);
+		weights[0][2] = Math.Cos (r + 3.0 * dr);
+
+		weights[1][0] = Math.Cos (r);
+		weights[1][1] = 1;
+		weights[1][2] = Math.Cos (r + 4.0 * dr);
+
+		weights[2][0] = Math.Cos (r - dr);
+		weights[2][1] = Math.Cos (r - 2.0 * dr);
+		weights[2][2] = Math.Cos (r - 3.0 * dr);
+
+		return weights;
 	}
 	#endregion
 }
