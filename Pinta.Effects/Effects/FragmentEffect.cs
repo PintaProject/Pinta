@@ -45,7 +45,7 @@ public sealed class FragmentEffect : BaseEffect
 		double pointStep = 2 * Math.PI / (double) fragments;
 		double rotationRadians = ((rotationAngle - 90.0) * Math.PI) / 180.0;
 
-		var pointOffsets = ImmutableArray.CreateBuilder<Core.PointI>(fragments);
+		var pointOffsets = ImmutableArray.CreateBuilder<Core.PointI> (fragments);
 		pointOffsets.Count = fragments;
 
 		for (int i = 0; i < fragments; i++) {
@@ -56,7 +56,7 @@ public sealed class FragmentEffect : BaseEffect
 			    (int) Math.Round (distance * -Math.Cos (currentRadians), MidpointRounding.AwayFromZero));
 		}
 
-		return pointOffsets.MoveToImmutable();
+		return pointOffsets.MoveToImmutable ();
 	}
 
 	public override void Render (ImageSurface src, ImageSurface dst, Core.RectangleI[] rois)
