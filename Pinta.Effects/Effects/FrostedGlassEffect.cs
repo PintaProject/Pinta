@@ -12,144 +12,143 @@ using Cairo;
 using Pinta.Core;
 using Pinta.Gui.Widgets;
 
-namespace Pinta.Effects
+namespace Pinta.Effects;
+
+public sealed class FrostedGlassEffect : BaseEffect
 {
-	public class FrostedGlassEffect : BaseEffect
+	public override string Icon => Pinta.Resources.Icons.EffectsDistortFrostedGlass;
+
+	public override string Name => Translations.GetString ("Frosted Glass");
+
+	public override bool IsConfigurable => true;
+
+	public override string EffectMenuCategory => Translations.GetString ("Distort");
+
+	public FrostedGlassData Data => (FrostedGlassData) EffectData!;
+
+	private readonly Random random = new ();
+
+	public FrostedGlassEffect ()
 	{
-		public override string Icon => Pinta.Resources.Icons.EffectsDistortFrostedGlass;
+		EffectData = new FrostedGlassData ();
+	}
 
-		public override string Name => Translations.GetString ("Frosted Glass");
+	public override void LaunchConfiguration ()
+	{
+		EffectHelper.LaunchSimpleEffectDialog (this);
+	}
 
-		public override bool IsConfigurable => true;
+	#region Algorithm Code Ported From PDN
+	public override void Render (ImageSurface src, ImageSurface dst, Core.RectangleI[] rois)
+	{
+		int width = src.Width;
+		int height = src.Height;
+		int r = Data.Amount;
+		Random localRandom = this.random;
 
-		public override string EffectMenuCategory => Translations.GetString ("Distort");
+		Span<int> intensityCount = stackalloc int[256];
+		Span<uint> avgRed = stackalloc uint[256];
+		Span<uint> avgGreen = stackalloc uint[256];
+		Span<uint> avgBlue = stackalloc uint[256];
+		Span<uint> avgAlpha = stackalloc uint[256];
+		Span<byte> intensityChoices = stackalloc byte[(1 + (r * 2)) * (1 + (r * 2))];
 
-		public FrostedGlassData Data => (FrostedGlassData) EffectData!;
+		ReadOnlySpan<ColorBgra> src_data = src.GetReadOnlyPixelData ();
+		Span<ColorBgra> dst_data = dst.GetPixelData ();
 
-		private readonly Random random = new ();
+		foreach (var rect in rois) {
+			int rectTop = rect.Top;
+			int rectBottom = rect.Bottom;
+			int rectLeft = rect.Left;
+			int rectRight = rect.Right;
 
-		public FrostedGlassEffect ()
-		{
-			EffectData = new FrostedGlassData ();
-		}
+			for (int y = rectTop; y <= rectBottom; ++y) {
+				var dst_row = dst_data.Slice (y * width, width);
 
-		public override void LaunchConfiguration ()
-		{
-			EffectHelper.LaunchSimpleEffectDialog (this);
-		}
+				int top = y - r;
+				int bottom = y + r + 1;
 
-		#region Algorithm Code Ported From PDN
-		public override void Render (ImageSurface src, ImageSurface dst, Core.RectangleI[] rois)
-		{
-			int width = src.Width;
-			int height = src.Height;
-			int r = Data.Amount;
-			Random localRandom = this.random;
+				if (top < 0) {
+					top = 0;
+				}
 
-			Span<int> intensityCount = stackalloc int[256];
-			Span<uint> avgRed = stackalloc uint[256];
-			Span<uint> avgGreen = stackalloc uint[256];
-			Span<uint> avgBlue = stackalloc uint[256];
-			Span<uint> avgAlpha = stackalloc uint[256];
-			Span<byte> intensityChoices = stackalloc byte[(1 + (r * 2)) * (1 + (r * 2))];
+				if (bottom > height) {
+					bottom = height;
+				}
 
-			ReadOnlySpan<ColorBgra> src_data = src.GetReadOnlyPixelData ();
-			Span<ColorBgra> dst_data = dst.GetPixelData ();
+				for (int x = rectLeft; x <= rectRight; ++x) {
+					int intensityChoicesIndex = 0;
 
-			foreach (var rect in rois) {
-				int rectTop = rect.Top;
-				int rectBottom = rect.Bottom;
-				int rectLeft = rect.Left;
-				int rectRight = rect.Right;
-
-				for (int y = rectTop; y <= rectBottom; ++y) {
-					var dst_row = dst_data.Slice (y * width, width);
-
-					int top = y - r;
-					int bottom = y + r + 1;
-
-					if (top < 0) {
-						top = 0;
+					for (int i = 0; i < 256; ++i) {
+						intensityCount[i] = 0;
+						avgRed[i] = 0;
+						avgGreen[i] = 0;
+						avgBlue[i] = 0;
+						avgAlpha[i] = 0;
 					}
 
-					if (bottom > height) {
-						bottom = height;
+					int left = x - r;
+					int right = x + r + 1;
+
+					if (left < 0) {
+						left = 0;
 					}
 
-					for (int x = rectLeft; x <= rectRight; ++x) {
-						int intensityChoicesIndex = 0;
+					if (right > width) {
+						right = width;
+					}
 
-						for (int i = 0; i < 256; ++i) {
-							intensityCount[i] = 0;
-							avgRed[i] = 0;
-							avgGreen[i] = 0;
-							avgBlue[i] = 0;
-							avgAlpha[i] = 0;
+					for (int j = top; j < bottom; ++j) {
+						if (j < 0 || j >= height) {
+							continue;
 						}
 
-						int left = x - r;
-						int right = x + r + 1;
+						var src_row = src_data.Slice (j * width, width);
 
-						if (left < 0) {
-							left = 0;
+						for (int i = left; i < right; ++i) {
+							ref readonly ColorBgra src_pixel = ref src_row[i];
+							byte intensity = src_pixel.GetIntensityByte ();
+
+							intensityChoices[intensityChoicesIndex] = intensity;
+							++intensityChoicesIndex;
+
+							++intensityCount[intensity];
+
+							avgRed[intensity] += src_pixel.R;
+							avgGreen[intensity] += src_pixel.G;
+							avgBlue[intensity] += src_pixel.B;
+							avgAlpha[intensity] += src_pixel.A;
 						}
+					}
 
-						if (right > width) {
-							right = width;
-						}
+					int randNum;
 
-						for (int j = top; j < bottom; ++j) {
-							if (j < 0 || j >= height) {
-								continue;
-							}
+					lock (localRandom) {
+						randNum = localRandom.Next (intensityChoicesIndex);
+					}
 
-							var src_row = src_data.Slice (j * width, width);
+					byte chosenIntensity = intensityChoices[randNum];
 
-							for (int i = left; i < right; ++i) {
-								ref readonly ColorBgra src_pixel = ref src_row[i];
-								byte intensity = src_pixel.GetIntensityByte ();
+					byte R = (byte) (avgRed[chosenIntensity] / intensityCount[chosenIntensity]);
+					byte G = (byte) (avgGreen[chosenIntensity] / intensityCount[chosenIntensity]);
+					byte B = (byte) (avgBlue[chosenIntensity] / intensityCount[chosenIntensity]);
+					byte A = (byte) (avgAlpha[chosenIntensity] / intensityCount[chosenIntensity]);
 
-								intensityChoices[intensityChoicesIndex] = intensity;
-								++intensityChoicesIndex;
+					dst_row[x] = ColorBgra.FromBgra (B, G, R, A);
 
-								++intensityCount[intensity];
-
-								avgRed[intensity] += src_pixel.R;
-								avgGreen[intensity] += src_pixel.G;
-								avgBlue[intensity] += src_pixel.B;
-								avgAlpha[intensity] += src_pixel.A;
-							}
-						}
-
-						int randNum;
-
-						lock (localRandom) {
-							randNum = localRandom.Next (intensityChoicesIndex);
-						}
-
-						byte chosenIntensity = intensityChoices[randNum];
-
-						byte R = (byte) (avgRed[chosenIntensity] / intensityCount[chosenIntensity]);
-						byte G = (byte) (avgGreen[chosenIntensity] / intensityCount[chosenIntensity]);
-						byte B = (byte) (avgBlue[chosenIntensity] / intensityCount[chosenIntensity]);
-						byte A = (byte) (avgAlpha[chosenIntensity] / intensityCount[chosenIntensity]);
-
-						dst_row[x] = ColorBgra.FromBgra (B, G, R, A);
-
-						// prepare the array for the next loop iteration
-						for (int i = 0; i < intensityChoicesIndex; ++i) {
-							intensityChoices[i] = 0;
-						}
+					// prepare the array for the next loop iteration
+					for (int i = 0; i < intensityChoicesIndex; ++i) {
+						intensityChoices[i] = 0;
 					}
 				}
 			}
 		}
-		#endregion
+	}
+	#endregion
 
-		public class FrostedGlassData : EffectData
-		{
-			[Caption ("Amount"), MinimumValue (1), MaximumValue (10)]
-			public int Amount = 1;
-		}
+	public sealed class FrostedGlassData : EffectData
+	{
+		[Caption ("Amount"), MinimumValue (1), MaximumValue (10)]
+		public int Amount = 1;
 	}
 }

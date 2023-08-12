@@ -10,49 +10,48 @@
 using Pinta.Core;
 using Pinta.Gui.Widgets;
 
-namespace Pinta.Effects
+namespace Pinta.Effects;
+
+public sealed class PolarInversionEffect : WarpEffect
 {
-	public class PolarInversionEffect : WarpEffect
+	public override string Icon => Pinta.Resources.Icons.EffectsDistortPolarInversion;
+
+	public override string Name => Translations.GetString ("Polar Inversion");
+
+	public override bool IsConfigurable => true;
+
+	public new PolarInversionData Data => (PolarInversionData) EffectData!;
+
+	public override string EffectMenuCategory => Translations.GetString ("Distort");
+
+	public PolarInversionEffect ()
 	{
-		public override string Icon => Pinta.Resources.Icons.EffectsDistortPolarInversion;
+		EffectData = new PolarInversionData ();
+	}
 
-		public override string Name => Translations.GetString ("Polar Inversion");
+	#region Algorithm Code Ported From PDN
+	protected override void InverseTransform (ref TransformData transData)
+	{
+		double x = transData.X;
+		double y = transData.Y;
 
-		public override bool IsConfigurable => true;
+		// NOTE: when x and y are zero, this will divide by zero and return NaN
+		double invertDistance = Utility.Lerp (1.0, DefaultRadius2 / ((x * x) + (y * y)), Data.Amount);
 
-		public new PolarInversionData Data => (PolarInversionData) EffectData!;
+		transData.X = x * invertDistance;
+		transData.Y = y * invertDistance;
+	}
+	#endregion
 
-		public override string EffectMenuCategory => Translations.GetString ("Distort");
+	public sealed class PolarInversionData : WarpEffect.WarpData
+	{
+		[MinimumValue (-4), MaximumValue (4)]
+		public double Amount = 0;
 
-		public PolarInversionEffect ()
+		public PolarInversionData () : base ()
 		{
-			EffectData = new PolarInversionData ();
+			EdgeBehavior = WarpEdgeBehavior.Reflect;
 		}
 
-		#region Algorithm Code Ported From PDN
-		protected override void InverseTransform (ref TransformData transData)
-		{
-			double x = transData.X;
-			double y = transData.Y;
-
-			// NOTE: when x and y are zero, this will divide by zero and return NaN
-			double invertDistance = Utility.Lerp (1.0, DefaultRadius2 / ((x * x) + (y * y)), Data.Amount);
-
-			transData.X = x * invertDistance;
-			transData.Y = y * invertDistance;
-		}
-		#endregion
-
-		public class PolarInversionData : WarpEffect.WarpData
-		{
-			[MinimumValue (-4), MaximumValue (4)]
-			public double Amount = 0;
-
-			public PolarInversionData () : base ()
-			{
-				EdgeBehavior = WarpEdgeBehavior.Reflect;
-			}
-
-		}
 	}
 }

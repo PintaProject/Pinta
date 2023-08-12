@@ -12,137 +12,136 @@ using Cairo;
 using Pinta.Core;
 using Pinta.Gui.Widgets;
 
-namespace Pinta.Effects
+namespace Pinta.Effects;
+
+public sealed class OilPaintingEffect : BaseEffect
 {
-	public class OilPaintingEffect : BaseEffect
+	public override string Icon => Pinta.Resources.Icons.EffectsArtisticOilPainting;
+
+	public override string Name => Translations.GetString ("Oil Painting");
+
+	public override bool IsConfigurable => true;
+
+	public override string EffectMenuCategory => Translations.GetString ("Artistic");
+
+	public OilPaintingData Data => (OilPaintingData) EffectData!;  // NRT - Set in constructor
+
+	public OilPaintingEffect ()
 	{
-		public override string Icon => Pinta.Resources.Icons.EffectsArtisticOilPainting;
+		EffectData = new OilPaintingData ();
+	}
 
-		public override string Name => Translations.GetString ("Oil Painting");
+	public override void LaunchConfiguration ()
+	{
+		EffectHelper.LaunchSimpleEffectDialog (this);
+	}
 
-		public override bool IsConfigurable => true;
+	#region Algorithm Code Ported From PDN
+	public override void Render (ImageSurface src, ImageSurface dest, RectangleI[] rois)
+	{
+		int width = src.Width;
+		int height = src.Height;
 
-		public override string EffectMenuCategory => Translations.GetString ("Artistic");
+		int arrayLens = 1 + Data.Coarseness;
+		Span<int> intensityCount = stackalloc int[arrayLens];
+		Span<uint> avgRed = stackalloc uint[arrayLens];
+		Span<uint> avgGreen = stackalloc uint[arrayLens];
+		Span<uint> avgBlue = stackalloc uint[arrayLens];
+		Span<uint> avgAlpha = stackalloc uint[arrayLens];
 
-		public OilPaintingData Data => (OilPaintingData) EffectData!;  // NRT - Set in constructor
+		byte maxIntensity = (byte) Data.Coarseness;
 
-		public OilPaintingEffect ()
-		{
-			EffectData = new OilPaintingData ();
-		}
+		ReadOnlySpan<ColorBgra> src_data = src.GetReadOnlyPixelData ();
+		Span<ColorBgra> dst_data = dest.GetPixelData ();
 
-		public override void LaunchConfiguration ()
-		{
-			EffectHelper.LaunchSimpleEffectDialog (this);
-		}
+		foreach (var rect in rois) {
 
-		#region Algorithm Code Ported From PDN
-		public override void Render (ImageSurface src, ImageSurface dest, RectangleI[] rois)
-		{
-			int width = src.Width;
-			int height = src.Height;
+			int rectTop = rect.Top;
+			int rectBottom = rect.Bottom;
+			int rectLeft = rect.Left;
+			int rectRight = rect.Right;
 
-			int arrayLens = 1 + Data.Coarseness;
-			Span<int> intensityCount = stackalloc int[arrayLens];
-			Span<uint> avgRed = stackalloc uint[arrayLens];
-			Span<uint> avgGreen = stackalloc uint[arrayLens];
-			Span<uint> avgBlue = stackalloc uint[arrayLens];
-			Span<uint> avgAlpha = stackalloc uint[arrayLens];
+			for (int y = rectTop; y <= rectBottom; ++y) {
+				var dst_row = dst_data.Slice (y * width, width);
 
-			byte maxIntensity = (byte) Data.Coarseness;
+				int top = y - Data.BrushSize;
+				int bottom = y + Data.BrushSize + 1;
 
-			ReadOnlySpan<ColorBgra> src_data = src.GetReadOnlyPixelData ();
-			Span<ColorBgra> dst_data = dest.GetPixelData ();
+				if (top < 0) {
+					top = 0;
+				}
 
-			foreach (var rect in rois) {
+				if (bottom > height) {
+					bottom = height;
+				}
 
-				int rectTop = rect.Top;
-				int rectBottom = rect.Bottom;
-				int rectLeft = rect.Left;
-				int rectRight = rect.Right;
+				for (int x = rectLeft; x <= rectRight; ++x) {
+					intensityCount.Clear ();
+					avgRed.Clear ();
+					avgGreen.Clear ();
+					avgBlue.Clear ();
+					avgAlpha.Clear ();
 
-				for (int y = rectTop; y <= rectBottom; ++y) {
-					var dst_row = dst_data.Slice (y * width, width);
+					int left = x - Data.BrushSize;
+					int right = x + Data.BrushSize + 1;
 
-					int top = y - Data.BrushSize;
-					int bottom = y + Data.BrushSize + 1;
-
-					if (top < 0) {
-						top = 0;
+					if (left < 0) {
+						left = 0;
 					}
 
-					if (bottom > height) {
-						bottom = height;
+					if (right > width) {
+						right = width;
 					}
 
-					for (int x = rectLeft; x <= rectRight; ++x) {
-						intensityCount.Clear ();
-						avgRed.Clear ();
-						avgGreen.Clear ();
-						avgBlue.Clear ();
-						avgAlpha.Clear ();
+					int numInt = 0;
 
-						int left = x - Data.BrushSize;
-						int right = x + Data.BrushSize + 1;
+					for (int j = top; j < bottom; ++j) {
+						var src_row = src_data.Slice (j * width, width);
 
-						if (left < 0) {
-							left = 0;
+						for (int i = left; i < right; ++i) {
+							ref readonly ColorBgra src_pixel = ref src_row[i];
+							byte intensity = Utility.FastScaleByteByByte (src_pixel.GetIntensityByte (), maxIntensity);
+
+							++intensityCount[intensity];
+							++numInt;
+
+							avgRed[intensity] += src_pixel.R;
+							avgGreen[intensity] += src_pixel.G;
+							avgBlue[intensity] += src_pixel.B;
+							avgAlpha[intensity] += src_pixel.A;
 						}
-
-						if (right > width) {
-							right = width;
-						}
-
-						int numInt = 0;
-
-						for (int j = top; j < bottom; ++j) {
-							var src_row = src_data.Slice (j * width, width);
-
-							for (int i = left; i < right; ++i) {
-								ref readonly ColorBgra src_pixel = ref src_row[i];
-								byte intensity = Utility.FastScaleByteByByte (src_pixel.GetIntensityByte (), maxIntensity);
-
-								++intensityCount[intensity];
-								++numInt;
-
-								avgRed[intensity] += src_pixel.R;
-								avgGreen[intensity] += src_pixel.G;
-								avgBlue[intensity] += src_pixel.B;
-								avgAlpha[intensity] += src_pixel.A;
-							}
-						}
-
-						byte chosenIntensity = 0;
-						int maxInstance = 0;
-
-						for (int i = 0; i <= maxIntensity; ++i) {
-							if (intensityCount[i] > maxInstance) {
-								chosenIntensity = (byte) i;
-								maxInstance = intensityCount[i];
-							}
-						}
-
-						// TODO: correct handling of alpha values?
-
-						byte R = (byte) (avgRed[chosenIntensity] / maxInstance);
-						byte G = (byte) (avgGreen[chosenIntensity] / maxInstance);
-						byte B = (byte) (avgBlue[chosenIntensity] / maxInstance);
-						byte A = (byte) (avgAlpha[chosenIntensity] / maxInstance);
-
-						dst_row[x] = ColorBgra.FromBgra (B, G, R, A);
 					}
+
+					byte chosenIntensity = 0;
+					int maxInstance = 0;
+
+					for (int i = 0; i <= maxIntensity; ++i) {
+						if (intensityCount[i] > maxInstance) {
+							chosenIntensity = (byte) i;
+							maxInstance = intensityCount[i];
+						}
+					}
+
+					// TODO: correct handling of alpha values?
+
+					byte R = (byte) (avgRed[chosenIntensity] / maxInstance);
+					byte G = (byte) (avgGreen[chosenIntensity] / maxInstance);
+					byte B = (byte) (avgBlue[chosenIntensity] / maxInstance);
+					byte A = (byte) (avgAlpha[chosenIntensity] / maxInstance);
+
+					dst_row[x] = ColorBgra.FromBgra (B, G, R, A);
 				}
 			}
 		}
-		#endregion
+	}
+	#endregion
 
-		public class OilPaintingData : EffectData
-		{
-			[Caption ("Brush Size"), MinimumValue (1), MaximumValue (8)]
-			public int BrushSize = 3;
+	public sealed class OilPaintingData : EffectData
+	{
+		[Caption ("Brush Size"), MinimumValue (1), MaximumValue (8)]
+		public int BrushSize = 3;
 
-			[Caption ("Coarseness"), MinimumValue (3), MaximumValue (255)]
-			public int Coarseness = 50;
-		}
+		[Caption ("Coarseness"), MinimumValue (3), MaximumValue (255)]
+		public int Coarseness = 50;
 	}
 }

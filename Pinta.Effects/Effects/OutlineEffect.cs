@@ -12,132 +12,131 @@ using Cairo;
 using Pinta.Core;
 using Pinta.Gui.Widgets;
 
-namespace Pinta.Effects
+namespace Pinta.Effects;
+
+public sealed class OutlineEffect : LocalHistogramEffect
 {
-	public class OutlineEffect : LocalHistogramEffect
+	private int thickness;
+	private int intensity;
+
+	public override string Icon => Pinta.Resources.Icons.EffectsStylizeOutline;
+
+	public override string Name => Translations.GetString ("Outline");
+
+	public override bool IsConfigurable => true;
+
+	public override string EffectMenuCategory => Translations.GetString ("Stylize");
+
+	public OutlineData Data => (OutlineData) EffectData!;  // NRT - Set in constructor
+
+	public OutlineEffect ()
 	{
-		private int thickness;
-		private int intensity;
+		EffectData = new OutlineData ();
+	}
 
-		public override string Icon => Pinta.Resources.Icons.EffectsStylizeOutline;
+	public override void LaunchConfiguration ()
+	{
+		EffectHelper.LaunchSimpleEffectDialog (this);
+	}
 
-		public override string Name => Translations.GetString ("Outline");
+	#region Algorithm Code Ported From PDN
+	public override ColorBgra Apply (in ColorBgra src, int area, Span<int> hb, Span<int> hg, Span<int> hr, Span<int> ha)
+	{
+		int minCount1 = area * (100 - this.intensity) / 200;
+		int minCount2 = area * (100 + this.intensity) / 200;
 
-		public override bool IsConfigurable => true;
+		int bCount = 0;
+		int b1 = 0;
 
-		public override string EffectMenuCategory => Translations.GetString ("Stylize");
+		while (b1 < 255 && hb[b1] == 0)
+			++b1;
 
-		public OutlineData Data => (OutlineData) EffectData!;  // NRT - Set in constructor
-
-		public OutlineEffect ()
-		{
-			EffectData = new OutlineData ();
+		while (b1 < 255 && bCount < minCount1) {
+			bCount += hb[b1];
+			++b1;
 		}
 
-		public override void LaunchConfiguration ()
-		{
-			EffectHelper.LaunchSimpleEffectDialog (this);
+		int b2 = b1;
+		while (b2 < 255 && bCount < minCount2) {
+			bCount += hb[b2];
+			++b2;
 		}
 
-		#region Algorithm Code Ported From PDN
-		public override ColorBgra Apply (in ColorBgra src, int area, Span<int> hb, Span<int> hg, Span<int> hr, Span<int> ha)
-		{
-			int minCount1 = area * (100 - this.intensity) / 200;
-			int minCount2 = area * (100 + this.intensity) / 200;
+		int gCount = 0;
+		int g1 = 0;
+		while (g1 < 255 && hg[g1] == 0)
+			++g1;
 
-			int bCount = 0;
-			int b1 = 0;
-
-			while (b1 < 255 && hb[b1] == 0)
-				++b1;
-
-			while (b1 < 255 && bCount < minCount1) {
-				bCount += hb[b1];
-				++b1;
-			}
-
-			int b2 = b1;
-			while (b2 < 255 && bCount < minCount2) {
-				bCount += hb[b2];
-				++b2;
-			}
-
-			int gCount = 0;
-			int g1 = 0;
-			while (g1 < 255 && hg[g1] == 0)
-				++g1;
-
-			while (g1 < 255 && gCount < minCount1) {
-				gCount += hg[g1];
-				++g1;
-			}
-
-			int g2 = g1;
-			while (g2 < 255 && gCount < minCount2) {
-				gCount += hg[g2];
-				++g2;
-			}
-
-			int rCount = 0;
-			int r1 = 0;
-			while (r1 < 255 && hr[r1] == 0)
-				++r1;
-
-			while (r1 < 255 && rCount < minCount1) {
-				rCount += hr[r1];
-				++r1;
-			}
-
-			int r2 = r1;
-			while (r2 < 255 && rCount < minCount2) {
-				rCount += hr[r2];
-				++r2;
-			}
-
-			int aCount = 0;
-			int a1 = 0;
-			while (a1 < 255 && hb[a1] == 0)
-				++a1;
-
-			while (a1 < 255 && aCount < minCount1) {
-				aCount += ha[a1];
-				++a1;
-			}
-
-			int a2 = a1;
-			while (a2 < 255 && aCount < minCount2) {
-				aCount += ha[a2];
-				++a2;
-			}
-
-			return ColorBgra.FromBgra (
-			    (byte) (255 - (b2 - b1)),
-			    (byte) (255 - (g2 - g1)),
-			    (byte) (255 - (r2 - r1)),
-			    (byte) (a2));
+		while (g1 < 255 && gCount < minCount1) {
+			gCount += hg[g1];
+			++g1;
 		}
 
-		public override void Render (ImageSurface src, ImageSurface dest, Core.RectangleI[] rois)
-		{
-			this.thickness = Data.Thickness;
-			this.intensity = Data.Intensity;
-
-			foreach (var rect in rois)
-				RenderRect (this.thickness, src, dest, rect);
+		int g2 = g1;
+		while (g2 < 255 && gCount < minCount2) {
+			gCount += hg[g2];
+			++g2;
 		}
 
-		#endregion
+		int rCount = 0;
+		int r1 = 0;
+		while (r1 < 255 && hr[r1] == 0)
+			++r1;
 
-		public class OutlineData : EffectData
-		{
-			[Caption ("Thickness"), MinimumValue (1), MaximumValue (200)]
-			public int Thickness = 3;
-
-			[Caption ("Intensity"), MinimumValue (0), MaximumValue (100)]
-			public int Intensity = 50;
-
-			[Skip]
-			public override bool IsDefault => Thickness == 0;
+		while (r1 < 255 && rCount < minCount1) {
+			rCount += hr[r1];
+			++r1;
 		}
+
+		int r2 = r1;
+		while (r2 < 255 && rCount < minCount2) {
+			rCount += hr[r2];
+			++r2;
+		}
+
+		int aCount = 0;
+		int a1 = 0;
+		while (a1 < 255 && hb[a1] == 0)
+			++a1;
+
+		while (a1 < 255 && aCount < minCount1) {
+			aCount += ha[a1];
+			++a1;
+		}
+
+		int a2 = a1;
+		while (a2 < 255 && aCount < minCount2) {
+			aCount += ha[a2];
+			++a2;
+		}
+
+		return ColorBgra.FromBgra (
+		    (byte) (255 - (b2 - b1)),
+		    (byte) (255 - (g2 - g1)),
+		    (byte) (255 - (r2 - r1)),
+		    (byte) (a2));
+	}
+
+	public override void Render (ImageSurface src, ImageSurface dest, Core.RectangleI[] rois)
+	{
+		this.thickness = Data.Thickness;
+		this.intensity = Data.Intensity;
+
+		foreach (var rect in rois)
+			RenderRect (this.thickness, src, dest, rect);
+	}
+
+	#endregion
+
+	public sealed class OutlineData : EffectData
+	{
+		[Caption ("Thickness"), MinimumValue (1), MaximumValue (200)]
+		public int Thickness = 3;
+
+		[Caption ("Intensity"), MinimumValue (0), MaximumValue (100)]
+		public int Intensity = 50;
+
+		[Skip]
+		public override bool IsDefault => Thickness == 0;
 	}
 }

@@ -38,80 +38,79 @@ using Cairo;
 using Pinta.Core;
 using Pinta.Gui.Widgets;
 
-namespace Pinta.Effects
+namespace Pinta.Effects;
+
+public sealed class SoftenPortraitEffect : BaseEffect
 {
-	public class SoftenPortraitEffect : BaseEffect
+	private readonly GaussianBlurEffect blur_effect;
+	private readonly BrightnessContrastEffect bac_adjustment;
+	private readonly UnaryPixelOps.Desaturate desaturate_op;
+	private readonly UserBlendOps.OverlayBlendOp overlay_op;
+
+	public override string Icon => Pinta.Resources.Icons.EffectsPhotoSoftenPortrait;
+
+	public override string Name => Translations.GetString ("Soften Portrait");
+
+	public override bool IsConfigurable => true;
+
+	public override string EffectMenuCategory => Translations.GetString ("Photo");
+
+	public SoftenPortraitData Data => (SoftenPortraitData) EffectData!;  // NRT - Set in constructor
+
+	public SoftenPortraitEffect ()
 	{
-		private readonly GaussianBlurEffect blur_effect;
-		private readonly BrightnessContrastEffect bac_adjustment;
-		private readonly UnaryPixelOps.Desaturate desaturate_op;
-		private readonly UserBlendOps.OverlayBlendOp overlay_op;
+		EffectData = new SoftenPortraitData ();
 
-		public override string Icon => Pinta.Resources.Icons.EffectsPhotoSoftenPortrait;
+		blur_effect = new GaussianBlurEffect ();
+		bac_adjustment = new BrightnessContrastEffect ();
+		desaturate_op = new UnaryPixelOps.Desaturate ();
+		overlay_op = new UserBlendOps.OverlayBlendOp ();
+	}
 
-		public override string Name => Translations.GetString ("Soften Portrait");
+	public override void LaunchConfiguration ()
+	{
+		EffectHelper.LaunchSimpleEffectDialog (this);
+	}
 
-		public override bool IsConfigurable => true;
+	public override void Render (ImageSurface src, ImageSurface dest, Core.RectangleI[] rois)
+	{
+		int warmth = Data.Warmth;
+		float redAdjust = 1.0f + (warmth / 100.0f);
+		float blueAdjust = 1.0f - (warmth / 100.0f);
 
-		public override string EffectMenuCategory => Translations.GetString ("Photo");
+		this.blur_effect.Render (src, dest, rois);
+		this.bac_adjustment.Render (src, dest, rois);
 
-		public SoftenPortraitData Data => (SoftenPortraitData) EffectData!;  // NRT - Set in constructor
+		ReadOnlySpan<ColorBgra> src_data = src.GetReadOnlyPixelData ();
+		Span<ColorBgra> dst_data = dest.GetPixelData ();
+		int width = dest.Width;
 
-		public SoftenPortraitEffect ()
-		{
-			EffectData = new SoftenPortraitData ();
+		foreach (var roi in rois) {
+			for (int y = roi.Top; y <= roi.Bottom; ++y) {
+				var src_row = src_data.Slice (y * width, width);
+				var dst_row = dst_data.Slice (y * width, width);
 
-			blur_effect = new GaussianBlurEffect ();
-			bac_adjustment = new BrightnessContrastEffect ();
-			desaturate_op = new UnaryPixelOps.Desaturate ();
-			overlay_op = new UserBlendOps.OverlayBlendOp ();
-		}
+				for (int x = roi.Left; x <= roi.Right; ++x) {
+					ColorBgra srcGrey = this.desaturate_op.Apply (src_row[x]);
 
-		public override void LaunchConfiguration ()
-		{
-			EffectHelper.LaunchSimpleEffectDialog (this);
-		}
+					srcGrey.R = Utility.ClampToByte ((int) ((float) srcGrey.R * redAdjust));
+					srcGrey.B = Utility.ClampToByte ((int) ((float) srcGrey.B * blueAdjust));
 
-		public override void Render (ImageSurface src, ImageSurface dest, Core.RectangleI[] rois)
-		{
-			int warmth = Data.Warmth;
-			float redAdjust = 1.0f + (warmth / 100.0f);
-			float blueAdjust = 1.0f - (warmth / 100.0f);
-
-			this.blur_effect.Render (src, dest, rois);
-			this.bac_adjustment.Render (src, dest, rois);
-
-			ReadOnlySpan<ColorBgra> src_data = src.GetReadOnlyPixelData ();
-			Span<ColorBgra> dst_data = dest.GetPixelData ();
-			int width = dest.Width;
-
-			foreach (var roi in rois) {
-				for (int y = roi.Top; y <= roi.Bottom; ++y) {
-					var src_row = src_data.Slice (y * width, width);
-					var dst_row = dst_data.Slice (y * width, width);
-
-					for (int x = roi.Left; x <= roi.Right; ++x) {
-						ColorBgra srcGrey = this.desaturate_op.Apply (src_row[x]);
-
-						srcGrey.R = Utility.ClampToByte ((int) ((float) srcGrey.R * redAdjust));
-						srcGrey.B = Utility.ClampToByte ((int) ((float) srcGrey.B * blueAdjust));
-
-						dst_row[x] = this.overlay_op.Apply (srcGrey, dst_row[x]);
-					}
+					dst_row[x] = this.overlay_op.Apply (srcGrey, dst_row[x]);
 				}
 			}
 		}
 	}
+}
 
-	public class SoftenPortraitData : EffectData
-	{
-		[Caption ("Softness"), MinimumValue (0), MaximumValue (10)]
-		public int Softness = 5;
+public sealed class SoftenPortraitData : EffectData
+{
+	[Caption ("Softness"), MinimumValue (0), MaximumValue (10)]
+	public int Softness = 5;
 
-		[Caption ("Lighting"), MinimumValue (-20), MaximumValue (20)]
-		public int Lighting = 0;
+	[Caption ("Lighting"), MinimumValue (-20), MaximumValue (20)]
+	public int Lighting = 0;
 
-		[Caption ("Warmth"), MinimumValue (0), MaximumValue (20)]
-		public int Warmth = 10;
-	}
+	[Caption ("Warmth"), MinimumValue (0), MaximumValue (20)]
+	public int Warmth = 10;
 }

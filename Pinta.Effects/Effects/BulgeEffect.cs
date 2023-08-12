@@ -12,86 +12,85 @@ using Cairo;
 using Pinta.Core;
 using Pinta.Gui.Widgets;
 
-namespace Pinta.Effects
+namespace Pinta.Effects;
+
+public sealed class BulgeEffect : BaseEffect
 {
-	public class BulgeEffect : BaseEffect
+	public override string Icon => Pinta.Resources.Icons.EffectsDistortBulge;
+
+	public override string Name => Translations.GetString ("Bulge");
+
+	public override bool IsConfigurable => true;
+
+	public override string EffectMenuCategory => Translations.GetString ("Distort");
+
+	public BulgeData Data => (BulgeData) EffectData!;
+
+	public BulgeEffect ()
 	{
-		public override string Icon => Pinta.Resources.Icons.EffectsDistortBulge;
+		EffectData = new BulgeData ();
+	}
 
-		public override string Name => Translations.GetString ("Bulge");
+	public override void LaunchConfiguration ()
+	{
+		EffectHelper.LaunchSimpleEffectDialog (this);
+	}
 
-		public override bool IsConfigurable => true;
+	#region Algorithm Code Ported From PDN
+	public override void Render (ImageSurface src, ImageSurface dst, Core.RectangleI[] rois)
+	{
+		float bulge = (float) Data.Amount;
 
-		public override string EffectMenuCategory => Translations.GetString ("Distort");
+		float hw = dst.Width / 2f;
+		float hh = dst.Height / 2f;
+		float maxrad = Math.Min (hw, hh);
+		float amt = bulge / 100f;
 
-		public BulgeData Data => (BulgeData) EffectData!;
+		hh = hh + (float) Data.Offset.Y * hh;
+		hw = hw + (float) Data.Offset.X * hw;
 
-		public BulgeEffect ()
-		{
-			EffectData = new BulgeData ();
-		}
+		int src_width = src.Width;
+		int src_height = src.Height;
+		ReadOnlySpan<ColorBgra> src_data = src.GetReadOnlyPixelData ();
+		Span<ColorBgra> dst_data = dst.GetPixelData ();
 
-		public override void LaunchConfiguration ()
-		{
-			EffectHelper.LaunchSimpleEffectDialog (this);
-		}
+		foreach (Core.RectangleI rect in rois) {
 
-		#region Algorithm Code Ported From PDN
-		public override void Render (ImageSurface src, ImageSurface dst, Core.RectangleI[] rois)
-		{
-			float bulge = (float) Data.Amount;
+			for (int y = rect.Top; y <= rect.Bottom; y++) {
+				var src_row = src_data.Slice (y * src_width, src_width);
+				var dst_row = dst_data.Slice (y * src_width, src_width);
+				float v = y - hh;
 
-			float hw = dst.Width / 2f;
-			float hh = dst.Height / 2f;
-			float maxrad = Math.Min (hw, hh);
-			float amt = bulge / 100f;
+				for (int x = rect.Left; x <= rect.Right; x++) {
+					float u = x - hw;
+					float r = (float) Math.Sqrt (u * u + v * v);
+					float rscale1 = (1f - (r / maxrad));
 
-			hh = hh + (float) Data.Offset.Y * hh;
-			hw = hw + (float) Data.Offset.X * hw;
+					if (rscale1 > 0) {
+						float rscale2 = 1 - amt * rscale1 * rscale1;
 
-			int src_width = src.Width;
-			int src_height = src.Height;
-			ReadOnlySpan<ColorBgra> src_data = src.GetReadOnlyPixelData ();
-			Span<ColorBgra> dst_data = dst.GetPixelData ();
+						float xp = u * rscale2;
+						float yp = v * rscale2;
 
-			foreach (Core.RectangleI rect in rois) {
-
-				for (int y = rect.Top; y <= rect.Bottom; y++) {
-					var src_row = src_data.Slice (y * src_width, src_width);
-					var dst_row = dst_data.Slice (y * src_width, src_width);
-					float v = y - hh;
-
-					for (int x = rect.Left; x <= rect.Right; x++) {
-						float u = x - hw;
-						float r = (float) Math.Sqrt (u * u + v * v);
-						float rscale1 = (1f - (r / maxrad));
-
-						if (rscale1 > 0) {
-							float rscale2 = 1 - amt * rscale1 * rscale1;
-
-							float xp = u * rscale2;
-							float yp = v * rscale2;
-
-							dst_row[x] = src.GetBilinearSampleClamped (src_data, src_width, src_height, xp + hw, yp + hh);
-						} else {
-							dst_row[x] = src_row[x];
-						}
+						dst_row[x] = src.GetBilinearSampleClamped (src_data, src_width, src_height, xp + hw, yp + hh);
+					} else {
+						dst_row[x] = src_row[x];
 					}
 				}
 			}
 		}
-		#endregion
+	}
+	#endregion
 
-		public class BulgeData : EffectData
-		{
-			[Caption ("Amount"), MinimumValue (-200), MaximumValue (100)]
-			public int Amount = 45;
+	public sealed class BulgeData : EffectData
+	{
+		[Caption ("Amount"), MinimumValue (-200), MaximumValue (100)]
+		public int Amount = 45;
 
-			[Caption ("Offset")]
-			public Core.PointD Offset = new (0.0, 0.0);
+		[Caption ("Offset")]
+		public Core.PointD Offset = new (0.0, 0.0);
 
-			[Skip]
-			public override bool IsDefault => Amount == 0;
-		}
+		[Skip]
+		public override bool IsDefault => Amount == 0;
 	}
 }
