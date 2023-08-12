@@ -10,56 +10,55 @@
 using Cairo;
 using Pinta.Core;
 
-namespace Pinta.Effects
+namespace Pinta.Effects;
+
+public sealed class PosterizeEffect : BaseEffect
 {
-	public class PosterizeEffect : BaseEffect
+	UnaryPixelOps.PosterizePixel? op = null;
+
+	public override string Icon => Pinta.Resources.Icons.AdjustmentsPosterize;
+
+	public override string Name => Translations.GetString ("Posterize");
+
+	public override bool IsConfigurable => true;
+
+	public override string AdjustmentMenuKey => "P";
+
+	public PosterizeData Data => (PosterizeData) EffectData!;  // NRT - Set in constructor
+
+	public PosterizeEffect ()
 	{
-		UnaryPixelOps.PosterizePixel? op = null;
-
-		public override string Icon => Pinta.Resources.Icons.AdjustmentsPosterize;
-
-		public override string Name => Translations.GetString ("Posterize");
-
-		public override bool IsConfigurable => true;
-
-		public override string AdjustmentMenuKey => "P";
-
-		public PosterizeData Data => (PosterizeData) EffectData!;  // NRT - Set in constructor
-
-		public PosterizeEffect ()
-		{
-			EffectData = new PosterizeData ();
-		}
-
-		public override void LaunchConfiguration ()
-		{
-			var dialog = new PosterizeDialog () {
-				Title = Name,
-				IconName = Icon,
-				EffectData = Data
-			};
-
-			dialog.OnResponse += (_, args) => {
-				OnConfigDialogResponse (args.ResponseId == (int) Gtk.ResponseType.Ok);
-				dialog.Destroy ();
-			};
-
-			dialog.Present ();
-		}
-
-		public override void Render (ImageSurface src, ImageSurface dest, Core.RectangleI[] rois)
-		{
-			if (op == null)
-				op = new UnaryPixelOps.PosterizePixel (Data.Red, Data.Green, Data.Blue);
-
-			op.Apply (dest, src, rois);
-		}
+		EffectData = new PosterizeData ();
 	}
 
-	public class PosterizeData : EffectData
+	public override void LaunchConfiguration ()
 	{
-		public int Red = 16;
-		public int Green = 16;
-		public int Blue = 16;
+		var dialog = new PosterizeDialog () {
+			Title = Name,
+			IconName = Icon,
+			EffectData = Data
+		};
+
+		dialog.OnResponse += (_, args) => {
+			OnConfigDialogResponse (args.ResponseId == (int) Gtk.ResponseType.Ok);
+			dialog.Destroy ();
+		};
+
+		dialog.Present ();
 	}
+
+	public override void Render (ImageSurface src, ImageSurface dest, Core.RectangleI[] rois)
+	{
+		if (op == null)
+			op = new UnaryPixelOps.PosterizePixel (Data.Red, Data.Green, Data.Blue);
+
+		op.Apply (dest, src, rois);
+	}
+}
+
+public class PosterizeData : EffectData
+{
+	public int Red = 16;
+	public int Green = 16;
+	public int Blue = 16;
 }

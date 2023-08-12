@@ -10,34 +10,33 @@
 using Cairo;
 using Pinta.Core;
 
-namespace Pinta.Effects
+namespace Pinta.Effects;
+
+public sealed class SepiaEffect : BaseEffect
 {
-	public class SepiaEffect : BaseEffect
+	readonly UnaryPixelOp desat = new UnaryPixelOps.Desaturate ();
+	readonly UnaryPixelOp level = new UnaryPixelOps.Desaturate ();
+
+	public override string Icon => Pinta.Resources.Icons.AdjustmentsSepia;
+
+	public override string Name => Translations.GetString ("Sepia");
+
+	public override string AdjustmentMenuKey => "E";
+
+	public SepiaEffect ()
 	{
-		readonly UnaryPixelOp desat = new UnaryPixelOps.Desaturate ();
-		readonly UnaryPixelOp level = new UnaryPixelOps.Desaturate ();
+		desat = new UnaryPixelOps.Desaturate ();
+		level = new UnaryPixelOps.Level (
+			ColorBgra.Black,
+			ColorBgra.White,
+			new float[] { 1.2f, 1.0f, 0.8f },
+			ColorBgra.Black,
+			ColorBgra.White);
+	}
 
-		public override string Icon => Pinta.Resources.Icons.AdjustmentsSepia;
-
-		public override string Name => Translations.GetString ("Sepia");
-
-		public override string AdjustmentMenuKey => "E";
-
-		public SepiaEffect ()
-		{
-			desat = new UnaryPixelOps.Desaturate ();
-			level = new UnaryPixelOps.Level (
-				ColorBgra.Black,
-				ColorBgra.White,
-				new float[] { 1.2f, 1.0f, 0.8f },
-				ColorBgra.Black,
-				ColorBgra.White);
-		}
-
-		public override void Render (ImageSurface src, ImageSurface dest, Core.RectangleI[] rois)
-		{
-			desat.Apply (dest, src, rois);
-			level.Apply (dest, dest, rois);
-		}
+	public override void Render (ImageSurface src, ImageSurface dest, Core.RectangleI[] rois)
+	{
+		desat.Apply (dest, src, rois);
+		level.Apply (dest, dest, rois);
 	}
 }

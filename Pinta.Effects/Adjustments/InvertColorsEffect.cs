@@ -10,21 +10,20 @@
 using Cairo;
 using Pinta.Core;
 
-namespace Pinta.Effects
+namespace Pinta.Effects;
+
+public sealed class InvertColorsEffect : BaseEffect
 {
-	public class InvertColorsEffect : BaseEffect
+	readonly UnaryPixelOp op = new UnaryPixelOps.Invert ();
+
+	public override string Icon => Pinta.Resources.Icons.AdjustmentsInvertColors;
+
+	public override string Name => Translations.GetString ("Invert Colors");
+
+	public override string AdjustmentMenuKey => "I";
+
+	public override void Render (ImageSurface src, ImageSurface dest, Core.RectangleI[] rois)
 	{
-		readonly UnaryPixelOp op = new UnaryPixelOps.Invert ();
-
-		public override string Icon => Pinta.Resources.Icons.AdjustmentsInvertColors;
-
-		public override string Name => Translations.GetString ("Invert Colors");
-
-		public override string AdjustmentMenuKey => "I";
-
-		public override void Render (ImageSurface src, ImageSurface dest, Core.RectangleI[] rois)
-		{
-			op.Apply (dest, src, rois);
-		}
+		op.Apply (dest, src, rois);
 	}
 }

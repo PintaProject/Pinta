@@ -10,29 +10,28 @@
 using Cairo;
 using Pinta.Core;
 
-namespace Pinta.Effects
+namespace Pinta.Effects;
+
+public sealed class AutoLevelEffect : BaseEffect
 {
-	public class AutoLevelEffect : BaseEffect
+	UnaryPixelOps.Level? op;
+
+	public override string Icon => Pinta.Resources.Icons.AdjustmentsAutoLevel;
+
+	public override string Name => Translations.GetString ("Auto Level");
+
+	public override string AdjustmentMenuKey => "L";
+
+	public override void Render (ImageSurface src, ImageSurface dest, RectangleI[] rois)
 	{
-		UnaryPixelOps.Level? op;
+		if (op == null) {
+			HistogramRgb histogram = new HistogramRgb ();
+			histogram.UpdateHistogram (src, new RectangleI (0, 0, src.Width, src.Height));
 
-		public override string Icon => Pinta.Resources.Icons.AdjustmentsAutoLevel;
-
-		public override string Name => Translations.GetString ("Auto Level");
-
-		public override string AdjustmentMenuKey => "L";
-
-		public override void Render (ImageSurface src, ImageSurface dest, RectangleI[] rois)
-		{
-			if (op == null) {
-				HistogramRgb histogram = new HistogramRgb ();
-				histogram.UpdateHistogram (src, new RectangleI (0, 0, src.Width, src.Height));
-
-				op = histogram.MakeLevelsAuto ();
-			}
-
-			if (op.isValid)
-				op.Apply (dest, src, rois);
+			op = histogram.MakeLevelsAuto ();
 		}
+
+		if (op.isValid)
+			op.Apply (dest, src, rois);
 	}
 }
