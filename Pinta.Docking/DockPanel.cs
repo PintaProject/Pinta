@@ -27,136 +27,135 @@ using System.Linq;
 using Gtk;
 using Pinta.Core;
 
-namespace Pinta.Docking
+namespace Pinta.Docking;
+
+public sealed class DockPanel : Box
 {
-	public class DockPanel : Box
+	private sealed class DockPanelItem
 	{
-		private class DockPanelItem
+		public DockPanelItem (DockItem item)
 		{
-			public DockPanelItem (DockItem item)
-			{
-				Item = item;
-				Pane = Paned.New (Orientation.Vertical);
+			Item = item;
+			Pane = Paned.New (Orientation.Vertical);
 
-				var icon = Image.NewFromIconName (item.IconName);
-				ReopenButton = ToggleButton.New ();
-				ReopenButton.TooltipText = item.Label;
-				ReopenButton.SetChild (icon);
+			var icon = Image.NewFromIconName (item.IconName);
+			ReopenButton = ToggleButton.New ();
+			ReopenButton.TooltipText = item.Label;
+			ReopenButton.SetChild (icon);
 
-				// Autohide is set to false since it seems to cause the popover to close even when clicking inside it, on macOS at least
-				// Instead, the reopen button is a toggle button to close the popover.
-				popover = new Popover () {
-					Autohide = false,
-					Position = PositionType.Left
-				};
-				popover.SetParent (ReopenButton);
-
-				ReopenButton.OnToggled += (o, args) => {
-					if (ReopenButton.Active)
-						popover.Popup ();
-					else
-						popover.Popdown ();
-				};
-			}
-
-			public DockItem Item { get; }
-			public Paned Pane { get; }
-			public ToggleButton ReopenButton { get; }
-			private readonly Popover popover;
-
-			public bool IsMinimized => popover.Child != null;
-
-			public void UpdateOnMaximize (Box dock_bar)
-			{
-				// Remove the reopen button from the dock bar.
-				// Note that it might not already be in the dock bar, e.g. on startup.
-				dock_bar.RemoveIfChild (ReopenButton);
-
-				popover.Popdown ();
-				popover.Child = null;
-
-				Pane.StartChild = Item;
-				Pane.ResizeStartChild = false;
-				Pane.ShrinkStartChild = false;
-			}
-
-			public void UpdateOnMinimize (Box dock_bar)
-			{
-				Pane.StartChild = null;
-				popover.Child = Item;
-
-				dock_bar.Append (ReopenButton);
-				ReopenButton.Active = false;
-			}
-		}
-
-		/// <summary>
-		/// Contains the buttons to re-open any minimized dock items.
-		/// </summary>
-		private readonly Box dock_bar = Box.New (Orientation.Vertical, 0);
-
-		/// <summary>
-		/// List of the items in this panel, which may be minimized or maximized.
-		/// </summary>
-		private readonly List<DockPanelItem> items = new ();
-
-		public DockPanel ()
-		{
-			SetOrientation (Orientation.Horizontal);
-			Append (dock_bar);
-		}
-
-		public void AddItem (DockItem item)
-		{
-			var panel_item = new DockPanelItem (item);
-
-			// Connect to the previous pane in the list.
-			if (items.Count > 0) {
-				var pane = items.Last ().Pane;
-				pane.EndChild = panel_item.Pane;
-			} else {
-				panel_item.Pane.Hexpand = true;
-				panel_item.Pane.Halign = Align.Fill;
-				Prepend (panel_item.Pane);
-			}
-
-			items.Add (panel_item);
-			panel_item.UpdateOnMaximize (dock_bar);
-
-			item.MinimizeClicked += (o, args) => {
-				panel_item.UpdateOnMinimize (dock_bar);
+			// Autohide is set to false since it seems to cause the popover to close even when clicking inside it, on macOS at least
+			// Instead, the reopen button is a toggle button to close the popover.
+			popover = new Popover () {
+				Autohide = false,
+				Position = PositionType.Left
 			};
-			item.MaximizeClicked += (o, args) => {
-				panel_item.UpdateOnMaximize (dock_bar);
+			popover.SetParent (ReopenButton);
+
+			ReopenButton.OnToggled += (o, args) => {
+				if (ReopenButton.Active)
+					popover.Popup ();
+				else
+					popover.Popdown ();
 			};
 		}
 
-		public void SaveSettings (ISettingsService settings)
+		public DockItem Item { get; }
+		public Paned Pane { get; }
+		public ToggleButton ReopenButton { get; }
+		private readonly Popover popover;
+
+		public bool IsMinimized => popover.Child != null;
+
+		public void UpdateOnMaximize (Box dock_bar)
 		{
-			foreach (var panel_item in items) {
-				settings.PutSetting (MinimizeKey (panel_item), panel_item.IsMinimized);
-#if false
-				settings.PutSetting (SplitPosKey (panel_item), panel_item.Pane.Position);
-#endif
-			}
+			// Remove the reopen button from the dock bar.
+			// Note that it might not already be in the dock bar, e.g. on startup.
+			dock_bar.RemoveIfChild (ReopenButton);
+
+			popover.Popdown ();
+			popover.Child = null;
+
+			Pane.StartChild = Item;
+			Pane.ResizeStartChild = false;
+			Pane.ShrinkStartChild = false;
 		}
 
-		public void LoadSettings (ISettingsService settings)
+		public void UpdateOnMinimize (Box dock_bar)
 		{
-			foreach (var panel_item in items) {
-				if (settings.GetSetting<bool> (MinimizeKey (panel_item), false)) {
-					panel_item.Item.Minimize ();
-				}
+			Pane.StartChild = null;
+			popover.Child = Item;
 
-#if false
-				panel_item.Pane.Position = settings.GetSetting<int> (
-					SplitPosKey (panel_item), panel_item.Pane.Position);
-#endif
-			}
+			dock_bar.Append (ReopenButton);
+			ReopenButton.Active = false;
 		}
-
-		private static string BaseSettingKey (DockPanelItem item) => $"dock-{item.Item.UniqueName.ToLower ()}";
-		private string MinimizeKey (DockPanelItem item) => BaseSettingKey (item) + "-minimized";
-		private string SplitPosKey (DockPanelItem item) => BaseSettingKey (item) + "-splitpos";
 	}
+
+	/// <summary>
+	/// Contains the buttons to re-open any minimized dock items.
+	/// </summary>
+	private readonly Box dock_bar = Box.New (Orientation.Vertical, 0);
+
+	/// <summary>
+	/// List of the items in this panel, which may be minimized or maximized.
+	/// </summary>
+	private readonly List<DockPanelItem> items = new ();
+
+	public DockPanel ()
+	{
+		SetOrientation (Orientation.Horizontal);
+		Append (dock_bar);
+	}
+
+	public void AddItem (DockItem item)
+	{
+		var panel_item = new DockPanelItem (item);
+
+		// Connect to the previous pane in the list.
+		if (items.Count > 0) {
+			var pane = items.Last ().Pane;
+			pane.EndChild = panel_item.Pane;
+		} else {
+			panel_item.Pane.Hexpand = true;
+			panel_item.Pane.Halign = Align.Fill;
+			Prepend (panel_item.Pane);
+		}
+
+		items.Add (panel_item);
+		panel_item.UpdateOnMaximize (dock_bar);
+
+		item.MinimizeClicked += (o, args) => {
+			panel_item.UpdateOnMinimize (dock_bar);
+		};
+		item.MaximizeClicked += (o, args) => {
+			panel_item.UpdateOnMaximize (dock_bar);
+		};
+	}
+
+	public void SaveSettings (ISettingsService settings)
+	{
+		foreach (var panel_item in items) {
+			settings.PutSetting (MinimizeKey (panel_item), panel_item.IsMinimized);
+#if false
+			settings.PutSetting (SplitPosKey (panel_item), panel_item.Pane.Position);
+#endif
+		}
+	}
+
+	public void LoadSettings (ISettingsService settings)
+	{
+		foreach (var panel_item in items) {
+			if (settings.GetSetting<bool> (MinimizeKey (panel_item), false)) {
+				panel_item.Item.Minimize ();
+			}
+
+#if false
+			panel_item.Pane.Position = settings.GetSetting<int> (
+				SplitPosKey (panel_item), panel_item.Pane.Position);
+#endif
+		}
+	}
+
+	private static string BaseSettingKey (DockPanelItem item) => $"dock-{item.Item.UniqueName.ToLower ()}";
+	private string MinimizeKey (DockPanelItem item) => BaseSettingKey (item) + "-minimized";
+	private string SplitPosKey (DockPanelItem item) => BaseSettingKey (item) + "-splitpos";
 }
