@@ -32,56 +32,55 @@ using Mono.Addins;
 using Mono.Addins.Description;
 using Mono.Addins.Setup;
 
-namespace Pinta.Gui.Addins
+namespace Pinta.Gui.Addins;
+
+internal static class Utilities
 {
-	internal static class Utilities
+	public static bool InApplicationNamespace (SetupService service, string id)
 	{
-		public static bool InApplicationNamespace (SetupService service, string id)
-		{
-			return service.ApplicationNamespace == null || id.StartsWith (service.ApplicationNamespace + ".");
-		}
+		return service.ApplicationNamespace == null || id.StartsWith (service.ApplicationNamespace + ".");
+	}
 
-		public struct MissingDepInfo
-		{
-			public string Addin;
-			public string Required;
-			public string Found;
-		}
+	public struct MissingDepInfo
+	{
+		public string Addin;
+		public string Required;
+		public string Found;
+	}
 
-		public static IEnumerable<MissingDepInfo> GetMissingDependencies (Addin addin, bool roots_only = false)
-		{
-			IEnumerable<Addin> allAddins = AddinManager.Registry.GetAddinRoots ();
-			if (!roots_only)
-				allAddins = allAddins.Union (AddinManager.Registry.GetAddins ());
+	public static IEnumerable<MissingDepInfo> GetMissingDependencies (Addin addin, bool roots_only = false)
+	{
+		IEnumerable<Addin> allAddins = AddinManager.Registry.GetAddinRoots ();
+		if (!roots_only)
+			allAddins = allAddins.Union (AddinManager.Registry.GetAddins ());
 
-			foreach (var dep in addin.Description.MainModule.Dependencies) {
-				if (dep is AddinDependency adep) {
-					if (!allAddins.Any (a => Addin.GetIdName (a.Id) == Addin.GetIdName (adep.FullAddinId) && a.SupportsVersion (adep.Version))) {
-						Addin? found = allAddins.FirstOrDefault (a => Addin.GetIdName (a.Id) == Addin.GetIdName (adep.FullAddinId));
-						yield return new MissingDepInfo () { Addin = Addin.GetIdName (adep.FullAddinId), Required = adep.Version, Found = found?.Version ?? string.Empty };
-					}
+		foreach (var dep in addin.Description.MainModule.Dependencies) {
+			if (dep is AddinDependency adep) {
+				if (!allAddins.Any (a => Addin.GetIdName (a.Id) == Addin.GetIdName (adep.FullAddinId) && a.SupportsVersion (adep.Version))) {
+					Addin? found = allAddins.FirstOrDefault (a => Addin.GetIdName (a.Id) == Addin.GetIdName (adep.FullAddinId));
+					yield return new MissingDepInfo () { Addin = Addin.GetIdName (adep.FullAddinId), Required = adep.Version, Found = found?.Version ?? string.Empty };
 				}
 			}
 		}
+	}
 
-		/// <summary>
-		/// Returns whether the add-in repository entry is compatible with the addin roots (e.g. compatible with this version of the application).
-		/// </summary>
-		public static bool IsCompatibleWithAddinRoots (AddinRepositoryEntry a)
-		{
-			var roots = AddinManager.Registry.GetAddinRoots ();
+	/// <summary>
+	/// Returns whether the add-in repository entry is compatible with the addin roots (e.g. compatible with this version of the application).
+	/// </summary>
+	public static bool IsCompatibleWithAddinRoots (AddinRepositoryEntry a)
+	{
+		var roots = AddinManager.Registry.GetAddinRoots ();
 
-			foreach (var dep in a.Addin.Dependencies) {
-				if (dep is not AddinDependency adep)
-					continue;
+		foreach (var dep in a.Addin.Dependencies) {
+			if (dep is not AddinDependency adep)
+				continue;
 
-				if (roots.Any (root => Addin.GetIdName (root.Id) == Addin.GetIdName (adep.FullAddinId) && !root.SupportsVersion (adep.Version))) {
-					return false;
-				}
+			if (roots.Any (root => Addin.GetIdName (root.Id) == Addin.GetIdName (adep.FullAddinId) && !root.SupportsVersion (adep.Version))) {
+				return false;
 			}
-
-			return true;
 		}
+
+		return true;
 	}
 }
 
