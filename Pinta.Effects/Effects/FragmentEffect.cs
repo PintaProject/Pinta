@@ -8,6 +8,7 @@
 /////////////////////////////////////////////////////////////////////////////////
 
 using System;
+using System.Collections.Immutable;
 using Cairo;
 using Pinta.Core;
 using Pinta.Gui.Widgets;
@@ -37,12 +38,14 @@ public sealed class FragmentEffect : BaseEffect
 	}
 
 	#region Algorithm Code Ported From PDN
-	private static Core.PointI[] RecalcPointOffsets (int fragments, double rotationAngle, int distance)
+
+	private static ImmutableArray<Core.PointI> RecalcPointOffsets (int fragments, double rotationAngle, int distance)
 	{
 		double pointStep = 2 * Math.PI / (double) fragments;
 		double rotationRadians = ((rotationAngle - 90.0) * Math.PI) / 180.0;
 
-		var pointOffsets = new Core.PointI[fragments];
+		var pointOffsets = ImmutableArray.CreateBuilder<Core.PointI> (fragments);
+		pointOffsets.Count = fragments;
 
 		for (int i = 0; i < fragments; i++) {
 			double currentRadians = rotationRadians + (pointStep * i);
@@ -52,12 +55,12 @@ public sealed class FragmentEffect : BaseEffect
 			    (int) Math.Round (distance * -Math.Cos (currentRadians), MidpointRounding.AwayFromZero));
 		}
 
-		return pointOffsets;
+		return pointOffsets.MoveToImmutable ();
 	}
 
 	public override void Render (ImageSurface src, ImageSurface dst, Core.RectangleI[] rois)
 	{
-		Core.PointI[] pointOffsets = RecalcPointOffsets (Data.Fragments, Data.Rotation, Data.Distance);
+		var pointOffsets = RecalcPointOffsets (Data.Fragments, Data.Rotation, Data.Distance);
 
 		int poLength = pointOffsets.Length;
 		Span<Core.PointI> pointOffsetsPtr = stackalloc Core.PointI[poLength];
