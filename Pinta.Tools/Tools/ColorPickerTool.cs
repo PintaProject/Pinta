@@ -25,6 +25,7 @@
 // THE SOFTWARE.
 
 using System.Collections.Generic;
+using System.Collections.Immutable;
 using Cairo;
 using Gtk;
 using Pinta.Core;
@@ -147,11 +148,11 @@ public sealed class ColorPickerTool : BaseTool
 	private Color GetColorFromPoint (Document document, PointI point)
 	{
 		var pixels = GetPixelsFromPoint (document, point);
-		var color = ColorBgra.BlendPremultiplied (pixels);
+		var color = ColorBgra.BlendPremultiplied (pixels.AsSpan ());
 		return color.ToStraightAlpha ().ToCairoColor ();
 	}
 
-	private ColorBgra[] GetPixelsFromPoint (Document document, PointI point)
+	private ImmutableArray<ColorBgra> GetPixelsFromPoint (Document document, PointI point)
 	{
 		var x = point.X;
 		var y = point.Y;
@@ -160,19 +161,21 @@ public sealed class ColorPickerTool : BaseTool
 
 		// Short circuit for single pixel
 		if (size == 1)
-			return new[] { GetPixel (document, x, y) };
+			return ImmutableArray.Create (GetPixel (document, x, y));
 
 		// Find the pixels we need (clamp to the size of the image)
 		var rect = new RectangleI (x - half, y - half, size, size);
-		rect = rect.Intersect (new RectangleI (PointI.Zero, document.ImageSize));
+		var intersected = rect.Intersect (new RectangleI (PointI.Zero, document.ImageSize));
 
-		var pixels = new List<ColorBgra> ();
+		var totalRectanglePixels = intersected.Size.Width * intersected.Size.Height;
 
-		for (var i = rect.Left; i <= rect.Right; i++)
-			for (var j = rect.Top; j <= rect.Bottom; j++)
+		var pixels = ImmutableArray.CreateBuilder<ColorBgra> (totalRectanglePixels);
+
+		for (var i = intersected.Left; i <= intersected.Right; i++)
+			for (var j = intersected.Top; j <= intersected.Bottom; j++)
 				pixels.Add (GetPixel (document, i, j));
 
-		return pixels.ToArray ();
+		return pixels.MoveToImmutable ();
 	}
 
 	private ColorBgra GetPixel (Document document, int x, int y)
