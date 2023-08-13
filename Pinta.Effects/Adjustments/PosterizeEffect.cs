@@ -56,7 +56,7 @@ public sealed class PosterizeEffect : BaseEffect
 	}
 }
 
-public class PosterizeData : EffectData
+public sealed class PosterizeData : EffectData
 {
 	public int Red = 16;
 	public int Green = 16;

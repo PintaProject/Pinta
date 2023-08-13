@@ -6,6 +6,7 @@
 /////////////////////////////////////////////////////////////////////////////////
 
 using System;
+using System.Collections.Immutable;
 
 namespace Pinta.Core;
 
@@ -754,12 +755,11 @@ public sealed class UnaryPixelOps
 	}
 
 	[Serializable]
-	public class PosterizePixel
-    : UnaryPixelOp
+	public sealed class PosterizePixel : UnaryPixelOp
 	{
-		private readonly byte[] red_levels;
-		private readonly byte[] green_levels;
-		private readonly byte[] blue_levels;
+		private readonly ImmutableArray<byte> red_levels;
+		private readonly ImmutableArray<byte> green_levels;
+		private readonly ImmutableArray<byte> blue_levels;
 
 		public PosterizePixel (int red, int green, int blue)
 		{
@@ -768,15 +768,16 @@ public sealed class UnaryPixelOps
 			this.blue_levels = CalcLevels (blue);
 		}
 
-		private static byte[] CalcLevels (int levelCount)
+		private static ImmutableArray<byte> CalcLevels (int levelCount)
 		{
-			byte[] t1 = new byte[levelCount];
+			Span<byte> t1 = stackalloc byte[levelCount];
 
 			for (int i = 1; i < levelCount; i++) {
 				t1[i] = (byte) ((255 * i) / (levelCount - 1));
 			}
 
-			byte[] levels = new byte[256];
+			var levels = ImmutableArray.CreateBuilder<byte> (256);
+			levels.Count = 256;
 
 			int j = 0;
 			int k = 0;
@@ -792,7 +793,7 @@ public sealed class UnaryPixelOps
 				}
 			}
 
-			return levels;
+			return levels.MoveToImmutable ();
 		}
 
 		public override ColorBgra Apply (in ColorBgra color)
