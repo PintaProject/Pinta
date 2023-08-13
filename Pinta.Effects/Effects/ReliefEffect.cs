@@ -38,11 +38,11 @@ public sealed class ReliefEffect : ColorDifferenceEffect
 	#region Algorithm Code Ported From PDN
 	public override void Render (Cairo.ImageSurface src, Cairo.ImageSurface dst, Core.RectangleI[] rois)
 	{
-		var weights = Weights ();
+		var weights = ComputeWeights ();
 		base.RenderColorDifferenceEffect (weights, src, dst, rois);
 	}
 
-	private double[][] Weights ()
+	private double[][] ComputeWeights ()
 	{
 		// adjust and convert angle to radians
 		double r = (double) Data.Angle * 2.0 * Math.PI / 360.0;
