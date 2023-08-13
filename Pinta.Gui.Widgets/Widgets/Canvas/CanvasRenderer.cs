@@ -152,7 +152,9 @@ public sealed class CanvasRenderer
 
 	private static ImmutableArray<int> CreateLookupX (int srcWidth, int dstWidth, ScaleFactor scaleFactor)
 	{
-		var lookup = ImmutableArray.CreateBuilder<int> (dstWidth + 1);
+		var length = dstWidth + 1;
+		var lookup = ImmutableArray.CreateBuilder<int> (length);
+		lookup.Count = length;
 
 		// Sometimes the scale factor is slightly different on one axis than
 		// on another, simply due to accuracy. So we have to clamp this value to
@@ -165,7 +167,9 @@ public sealed class CanvasRenderer
 
 	private static ImmutableArray<int> CreateLookupY (int srcHeight, int dstHeight, ScaleFactor scaleFactor)
 	{
-		var lookup = ImmutableArray.CreateBuilder<int> (dstHeight + 1); ;
+		var length = dstHeight + 1;
+		var lookup = ImmutableArray.CreateBuilder<int> (length);
+		lookup.Count = length;
 
 		// Sometimes the scale factor is slightly different on one axis than
 		// on another, simply due to accuracy. So we have to clamp this value to
@@ -178,7 +182,9 @@ public sealed class CanvasRenderer
 
 	private static ImmutableArray<int> CreateS2DLookupX (int srcWidth, int dstWidth, ScaleFactor scaleFactor)
 	{
-		var lookup = ImmutableArray.CreateBuilder<int> (srcWidth + 1);
+		var length = srcWidth + 1;
+		var lookup = ImmutableArray.CreateBuilder<int> (length);
+		lookup.Count = length;
 
 		// Sometimes the scale factor is slightly different on one axis than
 		// on another, simply due to accuracy. So we have to clamp this value to
@@ -191,7 +197,9 @@ public sealed class CanvasRenderer
 
 	private static ImmutableArray<int> CreateS2DLookupY (int srcHeight, int dstHeight, ScaleFactor scaleFactor)
 	{
-		var lookup = ImmutableArray.CreateBuilder<int> (srcHeight + 1);
+		var length = srcHeight + 1;
+		var lookup = ImmutableArray.CreateBuilder<int> (length);
+		lookup.Count = length;
 
 		// Sometimes the scale factor is slightly different on one axis than
 		// on another, simply due to accuracy. So we have to clamp this value to
