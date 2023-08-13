@@ -22,14 +22,14 @@ public sealed class TextEngine
 {
 	private List<string> lines;
 
-	private TextPosition currentPos;
-	private TextPosition selectionStart;
+	private TextPosition current_pos;
+	private TextPosition selection_start;
 
 	public Pango.FontDescription Font { get; private set; } = PangoExtensions.CreateFontDescription ();
 	public TextAlignment Alignment { get; private set; }
 	public bool Underline { get; private set; }
 
-	public TextPosition CurrentPosition => currentPos;
+	public TextPosition CurrentPosition => current_pos;
 	public int LineCount => lines.Count;
 	public TextMode State;
 	public PointI Origin { get; set; }
@@ -54,7 +54,7 @@ public sealed class TextEngine
 		lines.Add (string.Empty);
 		State = TextMode.Unchanged;
 
-		currentPos = new TextPosition (0, 0);
+		current_pos = new TextPosition (0, 0);
 		ClearSelection ();
 
 		Origin = PointI.Zero;
@@ -71,8 +71,8 @@ public sealed class TextEngine
 		TextEngine clonedTE = new TextEngine {
 			lines = lines.ToList (),
 			State = State,
-			currentPos = currentPos,
-			selectionStart = selectionStart,
+			current_pos = current_pos,
+			selection_start = selection_start,
 			Font = Font.Copy (),
 			Alignment = Alignment,
 			Underline = Underline,
@@ -98,8 +98,8 @@ public sealed class TextEngine
 			var regions = new List<KeyValuePair<TextPosition, TextPosition>> ();
 			TextPosition p1, p2;
 
-			TextPosition start = TextPosition.Min (currentPos, selectionStart);
-			TextPosition end = TextPosition.Max (currentPos, selectionStart);
+			TextPosition start = TextPosition.Min (current_pos, selection_start);
+			TextPosition end = TextPosition.Max (current_pos, selection_start);
 
 			p1 = start;
 			ForeachLine (start, end, (currentLinePos, strpos, endpos) => {
@@ -115,7 +115,7 @@ public sealed class TextEngine
 
 	public void SetCursorPosition (TextPosition position, bool clearSelection)
 	{
-		currentPos = position;
+		current_pos = position;
 
 		if (clearSelection)
 			ClearSelection ();
@@ -137,10 +137,10 @@ public sealed class TextEngine
 		if (HasSelection ())
 			DeleteSelection ();
 
-		lines[currentPos.Line] = lines[currentPos.Line].Insert (currentPos.Offset, str);
+		lines[current_pos.Line] = lines[current_pos.Line].Insert (current_pos.Offset, str);
 		State = TextMode.Uncommitted;
-		currentPos.Offset += str.Length;
-		selectionStart = currentPos;
+		current_pos.Offset += str.Length;
+		selection_start = current_pos;
 
 		OnModified ();
 	}
@@ -150,21 +150,21 @@ public sealed class TextEngine
 		if (HasSelection ())
 			DeleteSelection ();
 
-		string currentLine = lines[currentPos.Line];
+		string currentLine = lines[current_pos.Line];
 
-		if (currentPos.Offset == currentLine.Length) {
+		if (current_pos.Offset == currentLine.Length) {
 			// If we are at the end of a line, insert an empty line at the next line
-			lines.Insert (currentPos.Line + 1, string.Empty);
+			lines.Insert (current_pos.Line + 1, string.Empty);
 		} else {
-			lines.Insert (currentPos.Line + 1, currentLine.Substring (currentPos.Offset, currentLine.Length - currentPos.Offset));
-			lines[currentPos.Line] = lines[currentPos.Line].Substring (0, currentPos.Offset);
+			lines.Insert (current_pos.Line + 1, currentLine.Substring (current_pos.Offset, currentLine.Length - current_pos.Offset));
+			lines[current_pos.Line] = lines[current_pos.Line].Substring (0, current_pos.Offset);
 		}
 
 		State = TextMode.Uncommitted;
 
-		currentPos.Line++;
-		currentPos.Offset = 0;
-		selectionStart = currentPos;
+		current_pos.Line++;
+		current_pos.Offset = 0;
+		selection_start = current_pos;
 		OnModified ();
 	}
 
@@ -175,20 +175,20 @@ public sealed class TextEngine
 			return;
 		}
 
-		if (currentPos.Offset == 0 && currentPos.Line > 0) {
+		if (current_pos.Offset == 0 && current_pos.Line > 0) {
 			// We're at the beginning of a line and there's
 			// a line above us, go to the end of the prior line
-			int prevLength = lines[currentPos.Line - 1].Length;
-			lines[currentPos.Line - 1] += lines[currentPos.Line];
-			lines.RemoveAt (currentPos.Line);
-			currentPos.Line--;
-			currentPos.Offset = prevLength;
-		} else if (currentPos.Offset > 0) {
+			int prevLength = lines[current_pos.Line - 1].Length;
+			lines[current_pos.Line - 1] += lines[current_pos.Line];
+			lines.RemoveAt (current_pos.Line);
+			current_pos.Line--;
+			current_pos.Offset = prevLength;
+		} else if (current_pos.Offset > 0) {
 			// We're in the middle of a line, delete the previous text element.
 			RemoveNextTextElement (-1);
 		}
 
-		selectionStart = currentPos;
+		selection_start = current_pos;
 		State = TextMode.Uncommitted;
 		OnModified ();
 	}
@@ -200,14 +200,14 @@ public sealed class TextEngine
 			return;
 		}
 
-		var currentLine = lines[currentPos.Line];
-		if (currentPos.Offset < currentLine.Length) {
+		var currentLine = lines[current_pos.Line];
+		if (current_pos.Offset < currentLine.Length) {
 			// In the middle of a line - delete the next text element.
 			RemoveNextTextElement (0);
-		} else if (currentPos.Line < lines.Count - 1) {
+		} else if (current_pos.Line < lines.Count - 1) {
 			// End of a line - merge strings.
-			lines[currentPos.Line] += lines[currentPos.Line + 1];
-			lines.RemoveAt (currentPos.Line + 1);
+			lines[current_pos.Line] += lines[current_pos.Line + 1];
+			lines.RemoveAt (current_pos.Line + 1);
 		}
 
 		State = TextMode.Uncommitted;
@@ -217,21 +217,21 @@ public sealed class TextEngine
 	public void PerformLeft (bool control, bool shift)
 	{
 		// Move caret to the left, or to the previous line
-		if (currentPos.Offset > 0) {
-			var currentLine = lines[currentPos.Line];
+		if (current_pos.Offset > 0) {
+			var currentLine = lines[current_pos.Line];
 			if (control) {
 				// Move to the beginning of the previous word.
-				currentPos.Offset = FindWords (currentLine)
-					.Where (i => i < currentPos.Offset)
+				current_pos.Offset = FindWords (currentLine)
+					.Where (i => i < current_pos.Offset)
 					.DefaultIfEmpty (0)
 					.Last ();
 			} else {
-				(var elements, var elementIndex) = FindTextElementIndex (currentLine, currentPos.Offset);
-				currentPos.Offset = elements[elementIndex - 1];
+				(var elements, var elementIndex) = FindTextElementIndex (currentLine, current_pos.Offset);
+				current_pos.Offset = elements[elementIndex - 1];
 			}
-		} else if (currentPos.Offset == 0 && currentPos.Line > 0) {
-			currentPos.Line--;
-			currentPos.Offset = lines[currentPos.Line].Length;
+		} else if (current_pos.Offset == 0 && current_pos.Line > 0) {
+			current_pos.Line--;
+			current_pos.Offset = lines[current_pos.Line].Length;
 		}
 
 		if (!shift)
@@ -240,26 +240,26 @@ public sealed class TextEngine
 
 	public void PerformRight (bool control, bool shift)
 	{
-		var currentLine = lines[currentPos.Line];
-		if (currentPos.Offset < currentLine.Length) {
+		var currentLine = lines[current_pos.Line];
+		if (current_pos.Offset < currentLine.Length) {
 			if (control) {
 				// Move to the beginning of the next word.
-				currentPos.Offset = FindWords (currentLine)
-					.Where (i => i > currentPos.Offset)
+				current_pos.Offset = FindWords (currentLine)
+					.Where (i => i > current_pos.Offset)
 					.DefaultIfEmpty (currentLine.Length)
 					.First ();
 			} else {
 				// Move to the next text element.
-				(var elements, var elementIndex) = FindTextElementIndex (currentLine, currentPos.Offset);
+				(var elements, var elementIndex) = FindTextElementIndex (currentLine, current_pos.Offset);
 				if (elementIndex < elements.Length - 1)
-					currentPos.Offset = elements[elementIndex + 1];
+					current_pos.Offset = elements[elementIndex + 1];
 				else
-					currentPos.Offset = currentLine.Length;
+					current_pos.Offset = currentLine.Length;
 			}
 
-		} else if (currentPos.Offset == currentLine.Length && currentPos.Line < lines.Count - 1) {
-			currentPos.Line++;
-			currentPos.Offset = 0;
+		} else if (current_pos.Offset == currentLine.Length && current_pos.Line < lines.Count - 1) {
+			current_pos.Line++;
+			current_pos.Offset = 0;
 
 		}
 
@@ -271,11 +271,11 @@ public sealed class TextEngine
 	{
 		// For Ctrl-Home, we go to the top line
 		if (control) {
-			currentPos.Line = 0;
+			current_pos.Line = 0;
 		}
 
 		// Go to the beginning of the line
-		currentPos.Offset = 0;
+		current_pos.Offset = 0;
 
 		if (!shift)
 			ClearSelection ();
@@ -285,10 +285,10 @@ public sealed class TextEngine
 	{
 		// For Ctrl-End, we go to the last line
 		if (control)
-			currentPos.Line = lines.Count - 1;
+			current_pos.Line = lines.Count - 1;
 
 		// Go to the end of the line
-		currentPos.Offset = lines[currentPos.Line].Length;
+		current_pos.Offset = lines[current_pos.Line].Length;
 
 		if (!shift)
 			ClearSelection ();
@@ -296,7 +296,7 @@ public sealed class TextEngine
 
 	public void PerformUp (bool shift)
 	{
-		if (currentPos.Line == 0)
+		if (current_pos.Line == 0)
 			return;
 
 		MoveToAdjacentLine (-1);
@@ -308,7 +308,7 @@ public sealed class TextEngine
 
 	public void PerformDown (bool shift)
 	{
-		if (currentPos.Line < LineCount - 1) {
+		if (current_pos.Line < LineCount - 1) {
 			MoveToAdjacentLine (1);
 
 			if (!shift)
@@ -321,8 +321,8 @@ public sealed class TextEngine
 		if (HasSelection ()) {
 			StringBuilder strbld = new StringBuilder ();
 
-			TextPosition start = TextPosition.Min (currentPos, selectionStart);
-			TextPosition end = TextPosition.Max (currentPos, selectionStart);
+			TextPosition start = TextPosition.Min (current_pos, selection_start);
+			TextPosition end = TextPosition.Max (current_pos, selection_start);
 			ForeachLine (start, end, (currentLinePos, strpos, endpos) => {
 				if (endpos - strpos > 0)
 					strbld.AppendLine (lines[currentLinePos].Substring (strpos, endpos - strpos));
@@ -357,23 +357,23 @@ public sealed class TextEngine
 			DeleteSelection ();
 
 		string[] ins_lines = txt.Split (Environment.NewLine.ToCharArray (), StringSplitOptions.RemoveEmptyEntries);
-		string endline = lines[currentPos.Line].Substring (currentPos.Offset);
-		lines[currentPos.Line] = lines[currentPos.Line].Substring (0, currentPos.Offset);
+		string endline = lines[current_pos.Line].Substring (current_pos.Offset);
+		lines[current_pos.Line] = lines[current_pos.Line].Substring (0, current_pos.Offset);
 		bool first = true;
 		foreach (string ins_txt in ins_lines) {
 			if (!first) {
-				currentPos.Line++;
-				lines.Insert (currentPos.Line, ins_txt);
-				currentPos.Offset = ins_txt.Length;
+				current_pos.Line++;
+				lines.Insert (current_pos.Line, ins_txt);
+				current_pos.Offset = ins_txt.Length;
 			} else {
 				first = false;
-				lines[currentPos.Line] += ins_txt;
-				currentPos.Offset += ins_txt.Length;
+				lines[current_pos.Line] += ins_txt;
+				current_pos.Offset += ins_txt.Length;
 			}
 		}
-		lines[currentPos.Line] += endline;
+		lines[current_pos.Line] += endline;
 
-		selectionStart = currentPos;
+		selection_start = current_pos;
 		State = TextMode.Uncommitted;
 
 		OnModified ();
@@ -459,11 +459,11 @@ public sealed class TextEngine
 
 	private void DeleteSelection ()
 	{
-		TextPosition start = TextPosition.Min (currentPos, selectionStart);
-		TextPosition end = TextPosition.Max (currentPos, selectionStart);
+		TextPosition start = TextPosition.Min (current_pos, selection_start);
+		TextPosition end = TextPosition.Max (current_pos, selection_start);
 		DeleteText (start, end);
 
-		currentPos = start;
+		current_pos = start;
 		ClearSelection ();
 	}
 
@@ -485,12 +485,12 @@ public sealed class TextEngine
 
 	private bool HasSelection ()
 	{
-		return selectionStart != currentPos;
+		return selection_start != current_pos;
 	}
 
 	private void ClearSelection ()
 	{
-		selectionStart = currentPos;
+		selection_start = current_pos;
 	}
 
 	/// <summary>
@@ -520,34 +520,34 @@ public sealed class TextEngine
 	/// <param name="elementOffset"></param>
 	private void RemoveNextTextElement (int elementOffset)
 	{
-		var line = lines[currentPos.Line];
+		var line = lines[current_pos.Line];
 		var lineInfo = new StringInfo (line);
 
-		(var elements, var elementIndex) = FindTextElementIndex (line, currentPos.Offset);
+		(var elements, var elementIndex) = FindTextElementIndex (line, current_pos.Offset);
 		elementIndex += elementOffset;
 		var before = lineInfo.SubstringByTextElements (0, elementIndex);
 		var after = (elementIndex < elements.Length - 1) ? lineInfo.SubstringByTextElements (elementIndex + 1) : string.Empty;
 
-		lines[currentPos.Line] = before + after;
-		currentPos.Offset = before.Length;
+		lines[current_pos.Line] = before + after;
+		current_pos.Offset = before.Length;
 	}
 
 	private void MoveToAdjacentLine (int lineOffset)
 	{
-		var currentLine = lines[currentPos.Line];
-		var nextLine = lines[currentPos.Line + lineOffset];
+		var currentLine = lines[current_pos.Line];
+		var nextLine = lines[current_pos.Line + lineOffset];
 
 		// Remain at the same text element index (if possible) when changing lines.
-		(_, var elementIndex) = FindTextElementIndex (currentLine, currentPos.Offset);
+		(_, var elementIndex) = FindTextElementIndex (currentLine, current_pos.Offset);
 		var nextLineElements = StringInfo.ParseCombiningCharacters (nextLine);
 
 		if (elementIndex < nextLineElements.Length) {
-			currentPos.Offset = nextLineElements[elementIndex];
+			current_pos.Offset = nextLineElements[elementIndex];
 		} else {
-			currentPos.Offset = nextLine.Length;
+			current_pos.Offset = nextLine.Length;
 		}
 
-		currentPos.Line += lineOffset;
+		current_pos.Line += lineOffset;
 	}
 
 	/// <summary>

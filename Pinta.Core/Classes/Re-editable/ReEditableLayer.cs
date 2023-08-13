@@ -28,30 +28,30 @@ namespace Pinta.Core;
 
 public sealed class ReEditableLayer
 {
-	Layer? actualLayer;
+	Layer? actual_layer;
 
 	//Whether or not the actualLayer has already been setup.
-	private bool isLayerSetup = false;
+	private bool is_layer_setup = false;
 
 	private readonly UserLayer parent;
 
-	private bool inTheLoop = false;
+	private bool in_the_loop = false;
 
-	public bool InTheLoop => inTheLoop;
+	public bool InTheLoop => in_the_loop;
 
 	public Layer Layer {
 		get {
-			if (!isLayerSetup) {
+			if (!is_layer_setup) {
 				SetupLayer ();
 			}
 
-			return actualLayer!; // NRT - Set in SetupLayer
+			return actual_layer!; // NRT - Set in SetupLayer
 		}
 
-		set => actualLayer = value;
+		set => actual_layer = value;
 	}
 
-	public bool IsLayerSetup => isLayerSetup;
+	public bool IsLayerSetup => is_layer_setup;
 
 	/// <summary>
 	/// Creates a new ReEditableLayer for drawing and editing on separately from the rest of the image.
@@ -77,7 +77,7 @@ public sealed class ReEditableLayer
 			parent.ReEditableLayers.Remove (this);
 		}
 
-		inTheLoop = false;
+		in_the_loop = false;
 	}
 
 	/// <summary>
@@ -93,7 +93,7 @@ public sealed class ReEditableLayer
 			parent.ReEditableLayers.Add (this);
 		}
 
-		inTheLoop = true;
+		in_the_loop = true;
 	}
 
 	/// <summary>
@@ -103,9 +103,9 @@ public sealed class ReEditableLayer
 	{
 		var surface = CairoExtensions.CreateImageSurface (parent.Surface.Format, parent.Surface.Width, parent.Surface.Height);
 
-		actualLayer = new Layer (surface);
+		actual_layer = new Layer (surface);
 
 
-		isLayerSetup = true;
+		is_layer_setup = true;
 	}
 }
