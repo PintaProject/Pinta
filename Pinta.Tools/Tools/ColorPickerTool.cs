@@ -167,13 +167,15 @@ public sealed class ColorPickerTool : BaseTool
 		var rect = new RectangleI (x - half, y - half, size, size);
 		rect = rect.Intersect (new RectangleI (PointI.Zero, document.ImageSize));
 
-		var pixels = new List<ColorBgra> ();
+		var totalRectanglePixels = rect.Size.Width * rect.Size.Height;
+
+		var pixels = ImmutableArray.CreateBuilder<ColorBgra> (totalRectanglePixels);
 
 		for (var i = rect.Left; i <= rect.Right; i++)
 			for (var j = rect.Top; j <= rect.Bottom; j++)
 				pixels.Add (GetPixel (document, i, j));
 
-		return pixels.ToImmutableArray ();
+		return pixels.MoveToImmutable ();
 	}
 
 	private ColorBgra GetPixel (Document document, int x, int y)
