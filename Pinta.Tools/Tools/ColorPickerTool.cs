@@ -165,14 +165,14 @@ public sealed class ColorPickerTool : BaseTool
 
 		// Find the pixels we need (clamp to the size of the image)
 		var rect = new RectangleI (x - half, y - half, size, size);
-		rect = rect.Intersect (new RectangleI (PointI.Zero, document.ImageSize));
+		var intersected = rect.Intersect (new RectangleI (PointI.Zero, document.ImageSize));
 
-		var totalRectanglePixels = rect.Size.Width * rect.Size.Height;
+		var totalRectanglePixels = intersected.Size.Width * intersected.Size.Height;
 
 		var pixels = ImmutableArray.CreateBuilder<ColorBgra> (totalRectanglePixels);
 
-		for (var i = rect.Left; i <= rect.Right; i++)
-			for (var j = rect.Top; j <= rect.Bottom; j++)
+		for (var i = intersected.Left; i <= intersected.Right; i++)
+			for (var j = intersected.Top; j <= intersected.Bottom; j++)
 				pixels.Add (GetPixel (document, i, j));
 
 		return pixels.MoveToImmutable ();
