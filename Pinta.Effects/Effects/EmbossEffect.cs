@@ -39,7 +39,7 @@ public sealed class EmbossEffect : BaseEffect
 	#region Algorithm Code Ported From PDN
 	public override void Render (ImageSurface src, ImageSurface dst, Core.RectangleI[] rois)
 	{
-		double[,] weights = Weights;
+		double[,] weights = ComputeWeights ();
 
 		var srcWidth = src.Width;
 		var srcHeight = src.Height;
@@ -100,31 +100,30 @@ public sealed class EmbossEffect : BaseEffect
 	}
 
 
-	public double[,] Weights {
-		get {
-			// adjust and convert angle to radians
-			double r = (double) Data.Angle * 2.0 * Math.PI / 360.0;
+	public double[,] ComputeWeights ()
+	{
+		// adjust and convert angle to radians
+		double r = (double) Data.Angle * 2.0 * Math.PI / 360.0;
 
-			// angle delta for each weight
-			double dr = Math.PI / 4.0;
+		// angle delta for each weight
+		double dr = Math.PI / 4.0;
 
-			// for r = 0 this builds an emboss filter pointing straight left
-			double[,] weights = new double[3, 3];
+		// for r = 0 this builds an emboss filter pointing straight left
+		double[,] weights = new double[3, 3];
 
-			weights[0, 0] = Math.Cos (r + dr);
-			weights[0, 1] = Math.Cos (r + 2.0 * dr);
-			weights[0, 2] = Math.Cos (r + 3.0 * dr);
+		weights[0, 0] = Math.Cos (r + dr);
+		weights[0, 1] = Math.Cos (r + 2.0 * dr);
+		weights[0, 2] = Math.Cos (r + 3.0 * dr);
 
-			weights[1, 0] = Math.Cos (r);
-			weights[1, 1] = 0;
-			weights[1, 2] = Math.Cos (r + 4.0 * dr);
+		weights[1, 0] = Math.Cos (r);
+		weights[1, 1] = 0;
+		weights[1, 2] = Math.Cos (r + 4.0 * dr);
 
-			weights[2, 0] = Math.Cos (r - dr);
-			weights[2, 1] = Math.Cos (r - 2.0 * dr);
-			weights[2, 2] = Math.Cos (r - 3.0 * dr);
+		weights[2, 0] = Math.Cos (r - dr);
+		weights[2, 1] = Math.Cos (r - 2.0 * dr);
+		weights[2, 2] = Math.Cos (r - 3.0 * dr);
 
-			return weights;
-		}
+		return weights;
 	}
 	#endregion
 
