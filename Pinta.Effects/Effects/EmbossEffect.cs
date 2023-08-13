@@ -39,7 +39,7 @@ public sealed class EmbossEffect : BaseEffect
 	#region Algorithm Code Ported From PDN
 	public override void Render (ImageSurface src, ImageSurface dst, Core.RectangleI[] rois)
 	{
-		double[,] weights = Weights ();
+		double[,] weights = ComputeWeights ();
 
 		var srcWidth = src.Width;
 		var srcHeight = src.Height;
@@ -100,7 +100,7 @@ public sealed class EmbossEffect : BaseEffect
 	}
 
 
-	public double[,] Weights ()
+	public double[,] ComputeWeights ()
 	{
 		// adjust and convert angle to radians
 		double r = (double) Data.Angle * 2.0 * Math.PI / 360.0;
