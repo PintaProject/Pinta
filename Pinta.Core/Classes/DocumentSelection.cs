@@ -37,7 +37,7 @@ public sealed class DocumentSelection
 	private Path? selection_path;
 
 	public List<List<IntPoint>> SelectionPolygons = new ();
-	public Clipper SelectionClipper = new ();
+	public Clipper SelectionClipper { get; } = new ();
 
 	public PointD Origin;
 	public PointD End;
@@ -122,7 +122,6 @@ public sealed class DocumentSelection
 	{
 		return new DocumentSelection {
 			SelectionPolygons = SelectionPolygons.ToList (),
-			SelectionClipper = new Clipper (),
 			Origin = new PointD (Origin.X, Origin.Y),
 			End = new PointD (End.X, End.Y),
 			_visible = this._visible
@@ -206,7 +205,6 @@ public sealed class DocumentSelection
 
 		return new DocumentSelection {
 			SelectionPolygons = newPolygons,
-			SelectionClipper = new Clipper (),
 			Origin = origin,
 			End = end,
 			_visible = this._visible
