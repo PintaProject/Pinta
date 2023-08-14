@@ -5,6 +5,7 @@
 // See license-pdn.txt for full licensing and attribution details.             //
 /////////////////////////////////////////////////////////////////////////////////
 
+using System;
 using System.Collections.Generic;
 
 namespace Pinta.Core;
@@ -67,7 +68,7 @@ public sealed class SplineInterpolator
 	private void PreCompute ()
 	{
 		int n = points.Count;
-		double[] u = new double[n];
+		Span<double> u = stackalloc double[n];
 		IList<double> xa = points.Keys;
 		IList<double> ya = points.Values;
 
