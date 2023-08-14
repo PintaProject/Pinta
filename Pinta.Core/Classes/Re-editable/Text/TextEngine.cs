@@ -156,8 +156,8 @@ public sealed class TextEngine
 			// If we are at the end of a line, insert an empty line at the next line
 			lines.Insert (current_pos.Line + 1, string.Empty);
 		} else {
-			lines.Insert (current_pos.Line + 1, currentLine.Substring (current_pos.Offset, currentLine.Length - current_pos.Offset));
-			lines[current_pos.Line] = lines[current_pos.Line].Substring (0, current_pos.Offset);
+			lines.Insert (current_pos.Line + 1, currentLine[current_pos.Offset..]);
+			lines[current_pos.Line] = lines[current_pos.Line][..current_pos.Offset];
 		}
 
 		State = TextMode.Uncommitted;
@@ -325,7 +325,7 @@ public sealed class TextEngine
 			TextPosition end = TextPosition.Max (current_pos, selection_start);
 			ForeachLine (start, end, (currentLinePos, strpos, endpos) => {
 				if (endpos - strpos > 0)
-					strbld.AppendLine (lines[currentLinePos].Substring (strpos, endpos - strpos));
+					strbld.AppendLine (lines[currentLinePos][strpos..endpos]);
 				else if (endpos == strpos)
 					strbld.AppendLine ();
 			});
@@ -357,8 +357,8 @@ public sealed class TextEngine
 			DeleteSelection ();
 
 		string[] ins_lines = txt.Split (Environment.NewLine.ToCharArray (), StringSplitOptions.RemoveEmptyEntries);
-		string endline = lines[current_pos.Line].Substring (current_pos.Offset);
-		lines[current_pos.Line] = lines[current_pos.Line].Substring (0, current_pos.Offset);
+		string endline = lines[current_pos.Line][current_pos.Offset..];
+		lines[current_pos.Line] = lines[current_pos.Line][..current_pos.Offset];
 		bool first = true;
 		foreach (string ins_txt in ins_lines) {
 			if (!first) {
@@ -431,7 +431,7 @@ public sealed class TextEngine
 		for (int i = 0; i < p.Line; i++)
 			index += StringToUTF8Size (lines[i]) + 1;
 
-		index += StringToUTF8Size (lines[p.Line].Substring (0, p.Offset));
+		index += StringToUTF8Size (lines[p.Line][..p.Offset]);
 		return index;
 	}
 
@@ -445,7 +445,7 @@ public sealed class TextEngine
 	{
 		int i = 0;
 		for (i = 0; i < offset; i++) {
-			if (StringToUTF8Size (s.Substring (0, i)) >= offset) break;
+			if (StringToUTF8Size (s[..i]) >= offset) break;
 		}
 		return i;
 	}
@@ -472,8 +472,8 @@ public sealed class TextEngine
 		if (start.CompareTo (end) >= 0)
 			throw new ArgumentException ("Invalid start position", nameof (start));
 
-		lines[start.Line] = lines[start.Line].Substring (0, start.Offset) +
-				    lines[end.Line].Substring (end.Offset);
+		lines[start.Line] = lines[start.Line][..start.Offset] +
+				    lines[end.Line][end.Offset..];
 
 		// If this was a multi-line delete, remove all lines in between,
 		// including the end line.

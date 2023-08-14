@@ -45,7 +45,7 @@ public sealed class PaintDotNetPalette : IPaletteLoader, IPaletteSaver
 			if (line is null || line.IndexOf (';') == 0)
 				continue;
 
-			uint color = uint.Parse (line.Substring (0, 8), NumberStyles.HexNumber);
+			uint color = uint.Parse (line[..8], NumberStyles.HexNumber);
 			double b = (color & 0xff) / 255f;
 			double g = ((color >> 8) & 0xff) / 255f;
 			double r = ((color >> 16) & 0xff) / 255f;
