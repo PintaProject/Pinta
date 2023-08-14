@@ -195,7 +195,7 @@ namespace Pinta.Core
 			return dirty;
 		}
 
-		public static RectangleD DrawPolygonal (this Context g, PointD[] points, Color color)
+		public static RectangleD DrawPolygonal (this Context g, ReadOnlySpan<PointD> points, Color color)
 		{
 			g.Save ();
 			g.MoveTo (points[0].X, points[0].Y);
@@ -214,7 +214,7 @@ namespace Pinta.Core
 			return dirty;
 		}
 
-		public static RectangleD FillPolygonal (this Context g, PointD[] points, Color color)
+		public static RectangleD FillPolygonal (this Context g, ReadOnlySpan<PointD> points, Color color)
 		{
 			g.Save ();
 
