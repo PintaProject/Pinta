@@ -60,27 +60,18 @@ public record struct PointD
 
 	public readonly PointI ToInt () => new ((int) X, (int) Y);
 
-	public readonly double Distance (in PointD e)
-	{
-		return new PointD (X - e.X, Y - e.Y).Magnitude ();
-	}
+	public readonly double Distance (in PointD e) => new PointD (X - e.X, Y - e.Y).Magnitude ();
 
-	public readonly double Magnitude ()
-	{
-		return Math.Sqrt (X * X + Y * Y);
-	}
+	public readonly double Magnitude () => Math.Sqrt (X * X + Y * Y);
 
 	/// <summary>
 	/// Returns a new point, rounded to the nearest integer coordinates.
 	/// </summary>
 	public readonly PointD Rounded () => new (Math.Round (X), Math.Round (Y));
 
-	public static PointD operator + (in PointD a, in PointD b)
-	{
-		return new PointD (a.X + b.X, a.Y + b.Y);
-	}
+	public static PointD operator + (in PointD a, in PointD b) => new PointD (a.X + b.X, a.Y + b.Y);
 
-	public static explicit operator PointD (PointI p) => new PointD (p.X, p.Y);
+	public static explicit operator PointD (PointI p) => new (p.X, p.Y);
 }
 
 public record struct Size
