@@ -24,8 +24,7 @@ public sealed class UnaryPixelOps
 	/// result(color) = color
 	/// </summary>
 	[Serializable]
-	public class Identity
-	    : UnaryPixelOp
+	public sealed class Identity : UnaryPixelOp
 	{
 		public override ColorBgra Apply (in ColorBgra color)
 		{
@@ -48,31 +47,30 @@ public sealed class UnaryPixelOps
 	/// Always returns a constant color.
 	/// </summary>
 	[Serializable]
-	public class Constant
-	    : UnaryPixelOp
+	public sealed class Constant : UnaryPixelOp
 	{
-		private ColorBgra setColor;
+		private ColorBgra set_color;
 
 		public override ColorBgra Apply (in ColorBgra color)
 		{
-			return setColor;
+			return set_color;
 		}
 
 		public override void Apply (Span<ColorBgra> dst, ReadOnlySpan<ColorBgra> src)
 		{
 			for (int i = 0; i < src.Length; i++)
-				dst[i] = setColor;
+				dst[i] = set_color;
 		}
 
 		public override void Apply (Span<ColorBgra> dst)
 		{
 			for (int i = 0; i < dst.Length; i++)
-				dst[i] = setColor;
+				dst[i] = set_color;
 		}
 
 		public Constant (ColorBgra setColor)
 		{
-			this.setColor = setColor;
+			this.set_color = setColor;
 		}
 	}
 
@@ -80,8 +78,7 @@ public sealed class UnaryPixelOps
 	/// Blends pixels with the specified constant color.
 	/// </summary>
 	[Serializable]
-	public class BlendConstant
-	    : UnaryPixelOp
+	public sealed class BlendConstant : UnaryPixelOp
 	{
 		private ColorBgra blend_color;
 
@@ -109,8 +106,7 @@ public sealed class UnaryPixelOps
 	/// Useful if you want to set only the alpha value of a given region.
 	/// </summary>
 	[Serializable]
-	public class SetChannel
-	    : UnaryPixelOp
+	public sealed class SetChannel : UnaryPixelOp
 	{
 		private readonly int channel;
 		private readonly byte set_value;
@@ -151,8 +147,7 @@ public sealed class UnaryPixelOps
 	/// By the way, we use addition instead of bitwise-OR because an addition can be
 	/// perform very fast (0.5 cycles) on a Pentium 4.</remarks>
 	[Serializable]
-	public class SetAlphaChannel
-	    : UnaryPixelOp
+	public sealed class SetAlphaChannel : UnaryPixelOp
 	{
 		private readonly UInt32 add_value;
 
@@ -183,8 +178,7 @@ public sealed class UnaryPixelOps
 	/// Specialization of SetAlphaChannel that always sets alpha to 255.
 	/// </summary>
 	[Serializable]
-	public class SetAlphaChannelTo255
-	    : UnaryPixelOp
+	public sealed class SetAlphaChannelTo255 : UnaryPixelOp
 	{
 		public override ColorBgra Apply (in ColorBgra color)
 		{
@@ -208,8 +202,7 @@ public sealed class UnaryPixelOps
 	/// Inverts a pixel's color, and passes through the alpha component.
 	/// </summary>
 	[Serializable]
-	public class Invert
-	    : UnaryPixelOp
+	public sealed class Invert : UnaryPixelOp
 	{
 		public override ColorBgra Apply (in ColorBgra color)
 		{
@@ -224,8 +217,7 @@ public sealed class UnaryPixelOps
 	/// If the color is within the red tolerance, remove it
 	/// </summary>
 	[Serializable]
-	public class RedEyeRemove
-	    : UnaryPixelOp
+	public sealed class RedEyeRemove : UnaryPixelOp
 	{
 		private readonly int tolerance;
 		private readonly double set_saturation;
@@ -288,8 +280,7 @@ public sealed class UnaryPixelOps
 	/// Inverts a pixel's color and its alpha component.
 	/// </summary>
 	[Serializable]
-	public class InvertWithAlpha
-	    : UnaryPixelOp
+	public sealed class InvertWithAlpha : UnaryPixelOp
 	{
 		public override ColorBgra Apply (in ColorBgra color)
 		{
@@ -302,8 +293,7 @@ public sealed class UnaryPixelOps
 	/// is unaffected.
 	/// </summary>
 	[Serializable]
-	public class AverageChannels
-	    : UnaryPixelOp
+	public sealed class AverageChannels : UnaryPixelOp
 	{
 		public override ColorBgra Apply (in ColorBgra color)
 		{
@@ -313,8 +303,7 @@ public sealed class UnaryPixelOps
 	}
 
 	[Serializable]
-	public class Desaturate
-	    : UnaryPixelOp
+	public sealed class Desaturate : UnaryPixelOp
 	{
 		public override ColorBgra Apply (in ColorBgra color)
 		{
@@ -345,8 +334,7 @@ public sealed class UnaryPixelOps
 	}
 
 	[Serializable]
-	public class LuminosityCurve
-	    : UnaryPixelOp
+	public sealed class LuminosityCurve : UnaryPixelOp
 	{
 		public byte[] Curve = new byte[256];
 
@@ -371,8 +359,7 @@ public sealed class UnaryPixelOps
 	}
 
 	[Serializable]
-	public class ChannelCurve
-	    : UnaryPixelOp
+	public class ChannelCurve : UnaryPixelOp
 	{
 		public byte[] CurveB = new byte[256];
 		public byte[] CurveG = new byte[256];
@@ -422,9 +409,7 @@ public sealed class UnaryPixelOps
 	}
 
 	[Serializable]
-	public class Level
-	    : ChannelCurve,
-	      ICloneable
+	public sealed class Level : ChannelCurve, ICloneable
 	{
 		private ColorBgra color_in_low;
 		public ColorBgra ColorInLow {
@@ -698,8 +683,7 @@ public sealed class UnaryPixelOps
 	}
 
 	[Serializable]
-	public class HueSaturationLightness
-	    : UnaryPixelOp
+	public sealed class HueSaturationLightness : UnaryPixelOp
 	{
 		private readonly int hue_delta;
 		private readonly int sat_factor;
