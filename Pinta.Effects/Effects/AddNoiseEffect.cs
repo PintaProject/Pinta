@@ -8,7 +8,6 @@
 /////////////////////////////////////////////////////////////////////////////////
 
 using System;
-using System.Diagnostics.CodeAnalysis;
 using Cairo;
 using Pinta.Core;
 using Pinta.Gui.Widgets;
@@ -33,7 +32,7 @@ public sealed class AddNoiseEffect : BaseEffect
 
 	static AddNoiseEffect ()
 	{
-		InitLookup ();
+		lookup = CreateLookup ();
 	}
 
 	public AddNoiseEffect ()
@@ -50,15 +49,14 @@ public sealed class AddNoiseEffect : BaseEffect
 	[ThreadStatic]
 	private static Random thread_rand = new ();
 	private const int TableSize = 16384;
-	private static int[] lookup;
+	private static readonly int[] lookup;
 
 	private static double NormalCurve (double x, double scale)
 	{
 		return scale * Math.Exp (-x * x / 2);
 	}
 
-	[MemberNotNull (nameof (lookup))]
-	private static void InitLookup ()
+	private static int[] CreateLookup ()
 	{
 		double l = 5;
 		double r = 10;
@@ -86,7 +84,7 @@ public sealed class AddNoiseEffect : BaseEffect
 			}
 		}
 
-		lookup = new int[TableSize];
+		var result = new int[TableSize];
 		sum = 0;
 		int roundedSum = 0, lastRoundedSum;
 
@@ -96,9 +94,11 @@ public sealed class AddNoiseEffect : BaseEffect
 			roundedSum = (int) sum;
 
 			for (int j = lastRoundedSum; j < roundedSum; ++j) {
-				lookup[j] = (i - TableSize / 2) * 65536 / TableSize;
+				result[j] = (i - TableSize / 2) * 65536 / TableSize;
 			}
 		}
+
+		return result;
 	}
 
 	public override void Render (ImageSurface src, ImageSurface dst, Core.RectangleI[] rois)
@@ -116,7 +116,7 @@ public sealed class AddNoiseEffect : BaseEffect
 		}
 
 		Random localRand = thread_rand;
-		int[] localLookup = lookup;
+		ReadOnlySpan<int> localLookup = lookup;
 
 		ReadOnlySpan<ColorBgra> src_data = src.GetReadOnlyPixelData ();
 		Span<ColorBgra> dst_data = dst.GetPixelData ();
