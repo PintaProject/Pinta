@@ -380,7 +380,7 @@ public abstract class Option
 			int end = name.IndexOfAny (NameTerminator);
 			if (end == -1)
 				continue;
-			names[i] = name.Substring (0, end);
+			names[i] = name[..end];
 			if (type == '\0' || type == name[end])
 				type = name[end];
 			else
@@ -426,7 +426,7 @@ public abstract class Option
 						throw new ArgumentException (
 								$"Ill-formed name/value separator found in \"{name}\".",
 								nameof (prototype));
-					seps.Add (name.Substring (start, i - start));
+					seps.Add (name[start..i]);
 					start = -1;
 					break;
 				default:
@@ -822,7 +822,7 @@ public class OptionSet : KeyedCollection<string, Option>
 		Option p;
 		string rn;
 		if (n.Length >= 1 && (n[^1] == '+' || n[^1] == '-') &&
-				Contains ((rn = n.Substring (0, n.Length - 1)))) {
+				Contains (rn = n[..^1])) {
 			p = this[rn];
 			string v = n[^1] == '+' ? option : null;
 			c.OptionName = option;
@@ -855,7 +855,7 @@ public class OptionSet : KeyedCollection<string, Option>
 					break;
 				case OptionValueType.Optional:
 				case OptionValueType.Required: {
-						string v = n.Substring (i + 1);
+						string v = n[(i + 1)..];
 						c.Option = p;
 						c.OptionName = opt;
 						ParseValue (v.Length != 0 ? v : null, c);
@@ -1003,9 +1003,9 @@ public class OptionSet : KeyedCollection<string, Option>
 						if ((i + 1) == description.Length || description[i + 1] != '}')
 							throw new InvalidOperationException ("Invalid option description: " + description);
 						++i;
-						sb.Append ("}");
+						sb.Append ('}');
 					} else {
-						sb.Append (description.Substring (start, i - start));
+						sb.Append (description[start..i]);
 						start = -1;
 					}
 					break;
@@ -1037,7 +1037,7 @@ public class OptionSet : KeyedCollection<string, Option>
 			if (char.IsWhiteSpace (c))
 				--end;
 			bool writeContinuation = end != description.Length && !IsEolChar (c);
-			string line = description.Substring (start, end - start) +
+			string line = description[start..end] +
 					(writeContinuation ? "-" : "");
 			yield return line;
 			start = end;
