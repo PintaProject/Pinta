@@ -40,7 +40,7 @@ public class TextTool : BaseTool
 	private readonly Gtk.IMMulticontext im_context;
 	private readonly Pinta.Core.TextLayout layout;
 
-	private RectangleI CurrentTextBounds {
+	private static RectangleI CurrentTextBounds {
 		get => PintaCore.Workspace.ActiveDocument.Layers.CurrentUserLayer.textBounds;
 
 		set {
@@ -50,7 +50,7 @@ public class TextTool : BaseTool
 		}
 	}
 
-	private TextEngine CurrentTextEngine {
+	private static TextEngine CurrentTextEngine {
 		get {
 			if (!PintaCore.Workspace.HasOpenDocuments)
 				throw new InvalidOperationException ("Attempting to get CurrentTextEngine when there are no open documents");
@@ -80,7 +80,7 @@ public class TextTool : BaseTool
 	private bool previous_mouse_cursor_normal = true;
 
 	public override string Name => Translations.GetString ("Text");
-	private string FinalizeName => Translations.GetString ("Text - Finalize");
+	private static string FinalizeName => Translations.GetString ("Text - Finalize");
 	public override string Icon => Pinta.Resources.Icons.ToolText;
 	public override Gdk.Key ShortcutKey => Gdk.Key.T;
 	public override int Priority => 35;
