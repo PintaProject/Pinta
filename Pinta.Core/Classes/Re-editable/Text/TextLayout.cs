@@ -53,14 +53,18 @@ public sealed class TextLayout
 		Layout = Pango.Layout.New (PintaCore.Chrome.MainWindow.GetPangoContext ());
 	}
 
-	public IEnumerable<RectangleI> SelectionRectangles {
+	public RectangleI[] SelectionRectangles {
 		get {
 			var regions = engine.SelectionRegions;
+			var rects = new List<RectangleI> ();
+
 			foreach (var region in regions) {
 				PointI p1 = TextPositionToPoint (region.Key);
 				PointI p2 = TextPositionToPoint (region.Value);
-				yield return new RectangleI (p1, new Size (p2.X - p1.X, FontHeight));
+				rects.Add (new RectangleI (p1, new Size (p2.X - p1.X, FontHeight)));
 			}
+
+			return rects.ToArray ();
 		}
 	}
 
