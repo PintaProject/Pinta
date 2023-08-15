@@ -69,7 +69,7 @@ public record struct PointD
 	/// </summary>
 	public readonly PointD Rounded () => new (Math.Round (X), Math.Round (Y));
 
-	public static PointD operator + (in PointD a, in PointD b) => new PointD (a.X + b.X, a.Y + b.Y);
+	public static PointD operator + (in PointD a, in PointD b) => new (a.X + b.X, a.Y + b.Y);
 
 	public static explicit operator PointD (PointI p) => new (p.X, p.Y);
 }

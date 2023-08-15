@@ -76,7 +76,7 @@ public class PointPickerWidget : Box
 	}
 
 	public PointD DefaultOffset {
-		get => new PointD ((DefaultPoint.X * 2.0 / PintaCore.Workspace.ImageSize.Width) - 1.0,
+		get => new ((DefaultPoint.X * 2.0 / PintaCore.Workspace.ImageSize.Width) - 1.0,
 						 (DefaultPoint.Y * 2.0 / PintaCore.Workspace.ImageSize.Height) - 1.0);
 		set => DefaultPoint = new PointI ((int) ((value.X + 1.0) * PintaCore.Workspace.ImageSize.Width / 2.0),
 						      (int) ((value.Y + 1.0) * PintaCore.Workspace.ImageSize.Height / 2.0));
