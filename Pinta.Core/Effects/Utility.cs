@@ -6,6 +6,8 @@
 /////////////////////////////////////////////////////////////////////////////////
 
 using System;
+using System.Collections;
+using System.Collections.Generic;
 using System.Reflection;
 
 namespace Pinta.Core;
@@ -19,68 +21,62 @@ public static class Utility
 
 	public static double Clamp (double x, double min, double max)
 	{
-		if (x < min) {
+		if (x < min)
 			return min;
-		} else if (x > max) {
+		else if (x > max)
 			return max;
-		} else {
+		else
 			return x;
-		}
 	}
 
 	public static float Clamp (float x, float min, float max)
 	{
-		if (x < min) {
+		if (x < min)
 			return min;
-		} else if (x > max) {
+		else if (x > max)
 			return max;
-		} else {
+		else
 			return x;
-		}
 	}
 
 	public static int Clamp (int x, int min, int max)
 	{
-		if (x < min) {
+		if (x < min)
 			return min;
-		} else if (x > max) {
+		else if (x > max)
 			return max;
-		} else {
+		else
 			return x;
-		}
 	}
 
 	public static byte ClampToByte (double x)
 	{
-		if (x > 255) {
+		if (x > 255)
 			return 255;
-		} else if (x < 0) {
+		else if (x < 0)
 			return 0;
-		} else {
+		else
 			return (byte) x;
-		}
 	}
 
 	public static byte ClampToByte (float x)
 	{
-		if (x > 255) {
+		if (x > 255)
 			return 255;
-		} else if (x < 0) {
+		else if (x < 0)
 			return 0;
-		} else {
+		else
 			return (byte) x;
-		}
 	}
 
 	public static byte ClampToByte (int x)
 	{
-		if (x > 255) {
+		if (x > 255)
 			return 255;
-		} else if (x < 0) {
+		else if (x < 0)
 			return 0;
-		} else {
+		else
 			return (byte) x;
-		}
 	}
 
 	public static float Lerp (float from, float to, float frac)
@@ -141,11 +137,10 @@ public static class Utility
 	/// <param name="startIndex">Index of the first rectangle in the array to examine.</param>
 	/// <param name="length">Number of rectangles to examine, beginning at <b>startIndex</b>.</param>
 	/// <returns>A rectangle that surrounds the region.</returns>
-	public static RectangleI GetRegionBounds (RectangleI[] rects, int startIndex, int length)
+	public static RectangleI GetRegionBounds (ReadOnlySpan<RectangleI> rects, int startIndex, int length)
 	{
-		if (rects.Length == 0) {
+		if (rects.Length == 0)
 			return RectangleI.Zero;
-		}
 
 		int left = rects[startIndex].Left;
 		int top = rects[startIndex].Top;
@@ -194,14 +189,10 @@ public static class Utility
 		return diffSq / 3;
 	}
 
-	public static RectangleI[] InflateRectangles (RectangleI[] rects, int len)
+	public static IEnumerable<RectangleI> InflateRectangles (IEnumerable<RectangleI> rects, int len)
 	{
-		RectangleI[] inflated = new RectangleI[rects.Length];
-
-		for (int i = 0; i < rects.Length; ++i)
-			inflated[i] = new RectangleI (rects[i].X - len, rects[i].Y - len, rects[i].Width + 2 * len, rects[i].Height + 2 * len);
-
-		return inflated;
+		foreach (var rect in rects)
+			yield return new RectangleI (rect.X - len, rect.Y - len, rect.Width + 2 * len, rect.Height + 2 * len);
 	}
 
 	public static string GetStaticName (Type type)
@@ -223,7 +214,7 @@ public static class Utility
 
 	public static PointI[] GetLinePoints (PointI first, PointI second)
 	{
-		PointI[]? coords = null;
+		PointI[] coords;
 
 		int x1 = first.X;
 		int y1 = first.Y;
