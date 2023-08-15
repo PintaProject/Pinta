@@ -142,7 +142,7 @@ public sealed class OraFormat : IImageImporter, IImageExporter
 			return new Size ((int) ((double) width / height * ThumbMaxSize), ThumbMaxSize);
 	}
 
-	private byte[] GetLayerXmlData (IReadOnlyList<UserLayer> layers)
+	private static byte[] GetLayerXmlData (IReadOnlyList<UserLayer> layers)
 	{
 		MemoryStream ms = new MemoryStream ();
 		XmlTextWriter writer = new XmlTextWriter (ms, System.Text.Encoding.UTF8) {

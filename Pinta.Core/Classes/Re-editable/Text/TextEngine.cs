@@ -441,7 +441,7 @@ public sealed class TextEngine
 		return (enc.GetBytes (s)).Length;
 	}
 
-	private int UTF8OffsetToCharacterOffset (string s, int offset)
+	private static int UTF8OffsetToCharacterOffset (string s, int offset)
 	{
 		int i = 0;
 		for (i = 0; i < offset; i++) {
