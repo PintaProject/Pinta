@@ -174,9 +174,9 @@ public static class OtherExtensions
 			}
 
 			PointI[] points = pts.ToArray ();
-			Scanline[] scans = points.GetScans ();
+			var scans = points.GetScans ();
 
-			foreach (Scanline scan in scans)
+			foreach (var scan in scans)
 				stencil.Invert (scan);
 
 			points.TranslatePointsInPlace (translateX, translateY);
