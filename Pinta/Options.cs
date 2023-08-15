@@ -222,6 +222,16 @@ public class OptionValueCollection : IList, IList<string>
 	}
 	#endregion
 
+	public List<string> ToList ()
+	{
+		return new List<string> (values);
+	}
+
+	public string[] ToArray ()
+	{
+		return values.ToArray ();
+	}
+
 	public override string ToString ()
 	{
 		return string.Join (", ", values.ToArray ());
