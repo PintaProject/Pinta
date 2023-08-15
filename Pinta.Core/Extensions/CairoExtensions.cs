@@ -35,6 +35,7 @@
 
 using System;
 using System.Collections.Generic;
+using System.Collections.Immutable;
 using System.Linq;
 using System.Runtime.InteropServices;
 using System.Threading.Tasks;
@@ -728,7 +729,7 @@ namespace Pinta.Core
 			}
 		}
 
-		public static Scanline[] GetScans (this PointI[] points)
+		public static ImmutableArray<Scanline> GetScans (this PointI[] points)
 		{
 			int ymax = 0;
 
@@ -811,7 +812,8 @@ namespace Pinta.Core
 			}
 
 			// Allocate scanlines that we'll return
-			Scanline[] scans = new Scanline[scanCount];
+			var scans = ImmutableArray.CreateBuilder<Scanline> (scanCount);
+			scans.Count = scanCount;
 
 			// Active Edge Table (AET): it is indices into the Edge Table (ET)
 			int[] active = new int[edgeCount];
@@ -876,7 +878,7 @@ namespace Pinta.Core
 					edgeTable[active[i]].x += edgeTable[active[i]].dxdy;
 			}
 
-			return scans;
+			return scans.MoveToImmutable ();
 		}
 
 		public static Path CreatePolygonPath (this Context g, PointI[][] polygonSet)
