@@ -63,7 +63,7 @@ public sealed class PaintShopProPalette : IPaletteLoader, IPaletteSaver
 		return colors;
 	}
 
-	public void Save (List<Color> colors, Gio.File file)
+	public void Save (IReadOnlyList<Color> colors, Gio.File file)
 	{
 		using var stream = new GioStream (file.Replace ());
 		StreamWriter writer = new StreamWriter (stream);
