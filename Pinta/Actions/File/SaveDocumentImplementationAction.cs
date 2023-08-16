@@ -63,7 +63,7 @@ internal sealed class SaveDocumentImplmentationAction : IActionHandler
 
 	// This is actually both for "Save As" and saving a file that never
 	// been saved before.  Either way, we need to prompt for a filename.
-	private bool SaveFileAs (Document document)
+	private static bool SaveFileAs (Document document)
 	{
 		var fcd = FileChooserNative.New (
 			Translations.GetString ("Save Image File"),

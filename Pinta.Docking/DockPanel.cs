@@ -156,6 +156,6 @@ public sealed class DockPanel : Box
 	}
 
 	private static string BaseSettingKey (DockPanelItem item) => $"dock-{item.Item.UniqueName.ToLower ()}";
-	private string MinimizeKey (DockPanelItem item) => BaseSettingKey (item) + "-minimized";
-	private string SplitPosKey (DockPanelItem item) => BaseSettingKey (item) + "-splitpos";
+	private static string MinimizeKey (DockPanelItem item) => BaseSettingKey (item) + "-minimized";
+	private static string SplitPosKey (DockPanelItem item) => BaseSettingKey (item) + "-splitpos";
 }

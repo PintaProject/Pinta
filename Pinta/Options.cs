@@ -130,10 +130,8 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
-using System.Globalization;
 using System.IO;
 using System.Runtime.Serialization;
-using System.Security.Permissions;
 using System.Text;
 using System.Text.RegularExpressions;
 
@@ -297,7 +295,7 @@ public abstract class Option
 	protected Option (string prototype, string description, int maxValueCount)
 	{
 		if (prototype.Length == 0)
-			throw new ArgumentException ("Cannot be the empty string.", nameof (prototype));
+			throw new ArgumentException ("String cannot be empty.", nameof (prototype));
 		if (maxValueCount < 0)
 			throw new ArgumentOutOfRangeException (nameof (maxValueCount));
 
@@ -387,7 +385,8 @@ public abstract class Option
 				throw new ArgumentException (
 						$"Conflicting option types: '{type}' vs. '{name[end]}'.",
 						nameof (prototype));
-			AddSeparators (name, end, seps);
+
+			seps.AddRange (GenerateSeparators (name, end));
 		}
 
 		if (type == '\0')
@@ -409,7 +408,7 @@ public abstract class Option
 		return type == '=' ? OptionValueType.Required : OptionValueType.Optional;
 	}
 
-	private static void AddSeparators (string name, int end, ICollection<string> seps)
+	private static IEnumerable<string> GenerateSeparators (string name, int end)
 	{
 		int start = -1;
 		for (int i = end + 1; i < name.Length; ++i) {
@@ -426,12 +425,12 @@ public abstract class Option
 						throw new ArgumentException (
 								$"Ill-formed name/value separator found in \"{name}\".",
 								nameof (prototype));
-					seps.Add (name[start..i]);
+					yield return name[start..i];
 					start = -1;
 					break;
 				default:
 					if (start == -1)
-						seps.Add (name[i].ToString ());
+						yield return name[i].ToString ();
 					break;
 			}
 		}

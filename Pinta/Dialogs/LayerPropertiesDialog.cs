@@ -99,7 +99,7 @@ public sealed class LayerPropertiesDialog : Dialog
 
 	public LayerProperties InitialLayerProperties => initial_properties;
 
-	public LayerProperties UpdatedLayerProperties => new LayerProperties (name, hidden, opacity, blendmode);
+	public LayerProperties UpdatedLayerProperties => new (name, hidden, opacity, blendmode);
 
 	#region Private Methods
 	private void OnLayerNameChanged (object? sender, EventArgs e)

@@ -37,7 +37,7 @@ public sealed class PixelateEffect : BaseEffect
 	}
 
 	#region Algorithm Code Ported From PDN
-	private ColorBgra ComputeCellColor (int x, int y, ReadOnlySpan<ColorBgra> src_data, int cellSize, Core.RectangleI srcBounds)
+	private static ColorBgra ComputeCellColor (int x, int y, ReadOnlySpan<ColorBgra> src_data, int cellSize, Core.RectangleI srcBounds)
 	{
 		Core.RectangleI cell = GetCellBox (x, y, cellSize);
 		cell = cell.Intersect (srcBounds);

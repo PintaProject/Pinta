@@ -109,7 +109,7 @@ public sealed class NewImageDialog : Dialog
 
 	public int NewImageWidth => int.Parse (width_entry.Buffer!.Text!);
 	public int NewImageHeight => int.Parse (height_entry.Buffer!.Text!);
-	public Size NewImageSize => new Size (NewImageWidth, NewImageHeight);
+	public Size NewImageSize => new (NewImageWidth, NewImageHeight);
 
 	public enum BackgroundType
 	{
