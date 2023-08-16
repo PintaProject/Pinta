@@ -67,7 +67,7 @@ internal sealed class TextEngineTest
 	[Test]
 	public void BackspaceJoinLines ()
 	{
-		var engine = new TextEngine (new () { "foo", "bar" });
+		var engine = new TextEngine (new[] { "foo", "bar" });
 		engine.SetCursorPosition (new TextPosition (1, 0), true);
 		engine.PerformBackspace ();
 
@@ -106,7 +106,7 @@ internal sealed class TextEngineTest
 	[Test]
 	public void DeleteJoinLines ()
 	{
-		var engine = new TextEngine (new () { "foo", "bar" });
+		var engine = new TextEngine (new[] { "foo", "bar" });
 		engine.SetCursorPosition (new TextPosition (0, 3), true);
 		engine.PerformDelete ();
 
@@ -183,7 +183,7 @@ internal sealed class TextEngineTest
 	[Test]
 	public void PerformControlLeftRight ()
 	{
-		var engine = new TextEngine (new () { string.Join ("  ", testSnippet) });
+		var engine = new TextEngine (new[] { string.Join ("  ", testSnippet) });
 
 		engine.SetCursorPosition (new TextPosition (0, 0), true);
 		engine.PerformRight (true, false);
