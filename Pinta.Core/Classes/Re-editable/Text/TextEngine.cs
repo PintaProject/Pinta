@@ -36,12 +36,11 @@ public sealed class TextEngine
 
 	public event EventHandler? Modified;
 
-	public TextEngine ()
-	    : this (new List<string> () { string.Empty })
+	public TextEngine () : this (new[] { string.Empty })
 	{
 	}
 
-	public TextEngine (List<string> lines)
+	public TextEngine (IEnumerable<string> lines)
 	{
 		this.lines = new (lines);
 		State = TextMode.Unchanged;
