@@ -189,8 +189,8 @@ public sealed class OraFormat : IImageImporter, IImageExporter
 		};
 		stream.PutNextEntry (mimetype);
 
-		byte[] databytes = System.Text.Encoding.ASCII.GetBytes ("image/openraster");
-		stream.Write (databytes, 0, databytes.Length);
+		var mimeBytes = System.Text.Encoding.ASCII.GetBytes ("image/openraster");
+		stream.Write (mimeBytes, 0, mimeBytes.Length);
 
 		for (int i = 0; i < document.Layers.UserLayers.Count; i++) {
 			var pb = document.Layers.UserLayers[i].Surface.ToPixbuf ();
@@ -201,22 +201,22 @@ public sealed class OraFormat : IImageImporter, IImageExporter
 		}
 
 		stream.PutNextEntry (new ZipEntry ("stack.xml"));
-		databytes = GetLayerXmlData (document.Layers.UserLayers);
-		stream.Write (databytes, 0, databytes.Length);
+		var userLayerBytes = GetLayerXmlData (document.Layers.UserLayers);
+		stream.Write (userLayerBytes, 0, userLayerBytes.Length);
 
 		var flattenedPb = document.GetFlattenedImage ().ToPixbuf ();
 
 		// Add merged image.
 		stream.PutNextEntry (new ZipEntry ("mergedimage.png"));
-		databytes = flattenedPb.SaveToBuffer ("png");
-		stream.Write (databytes, 0, databytes.Length);
+		var mergedImageBytes = flattenedPb.SaveToBuffer ("png");
+		stream.Write (mergedImageBytes, 0, mergedImageBytes.Length);
 
 		// Add thumbnail.
 		Size newSize = GetThumbDimensions (flattenedPb.Width, flattenedPb.Height);
 		var thumb = flattenedPb.ScaleSimple (newSize.Width, newSize.Height, GdkPixbuf.InterpType.Bilinear)!;
 		stream.PutNextEntry (new ZipEntry ("Thumbnails/thumbnail.png"));
-		databytes = thumb.SaveToBuffer ("png");
-		stream.Write (databytes, 0, databytes.Length);
+		var thumbnailBytes = thumb.SaveToBuffer ("png");
+		stream.Write (thumbnailBytes, 0, thumbnailBytes.Length);
 	}
 
 	private static string BlendModeToStandard (BlendMode mode)
