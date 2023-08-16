@@ -906,7 +906,7 @@ public class TextTool : BaseTool
 		if (useTextLayer) {
 			// Selected Text
 			Cairo.Color c = new Cairo.Color (0.7, 0.8, 0.9, 0.5);
-			foreach (RectangleI rect in CurrentTextLayout.SelectionRectangles)
+			foreach (RectangleI rect in CurrentTextLayout.GetSelectionRectangles ())
 				g.FillRectangle (rect.ToDouble (), c);
 		}
 
