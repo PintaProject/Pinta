@@ -7,6 +7,7 @@
 // Ported to Pinta by: Jonathan Pobst <monkey@jpobst.com>                      //
 /////////////////////////////////////////////////////////////////////////////////
 
+using System;
 using System.Collections.Generic;
 using System.Collections.Immutable;
 using Pinta.Core;
@@ -160,7 +161,7 @@ public sealed class CanvasRenderer
 		// on another, simply due to accuracy. So we have to clamp this value to
 		// be within bounds.
 		for (var x = 0; x < lookup.Count; ++x)
-			lookup[x] = Utility.Clamp (scaleFactor.ScaleScalar (x), 0, srcWidth - 1);
+			lookup[x] = Math.Clamp (scaleFactor.ScaleScalar (x), 0, srcWidth - 1);
 
 		return lookup.MoveToImmutable ();
 	}
@@ -175,7 +176,7 @@ public sealed class CanvasRenderer
 		// on another, simply due to accuracy. So we have to clamp this value to
 		// be within bounds.
 		for (var y = 0; y < lookup.Count; ++y)
-			lookup[y] = Utility.Clamp (scaleFactor.ScaleScalar (y), 0, srcHeight - 1);
+			lookup[y] = Math.Clamp (scaleFactor.ScaleScalar (y), 0, srcHeight - 1);
 
 		return lookup.MoveToImmutable ();
 	}
@@ -190,7 +191,7 @@ public sealed class CanvasRenderer
 		// on another, simply due to accuracy. So we have to clamp this value to
 		// be within bounds.
 		for (var x = 0; x < lookup.Count; ++x)
-			lookup[x] = Utility.Clamp (scaleFactor.UnscaleScalar (x), 0, dstWidth - 1);
+			lookup[x] = Math.Clamp (scaleFactor.UnscaleScalar (x), 0, dstWidth - 1);
 
 		return lookup.MoveToImmutable ();
 	}
@@ -205,7 +206,7 @@ public sealed class CanvasRenderer
 		// on another, simply due to accuracy. So we have to clamp this value to
 		// be within bounds.
 		for (var y = 0; y < lookup.Count; ++y)
-			lookup[y] = Utility.Clamp (scaleFactor.UnscaleScalar (y), 0, dstHeight - 1);
+			lookup[y] = Math.Clamp (scaleFactor.UnscaleScalar (y), 0, dstHeight - 1);
 
 		return lookup.MoveToImmutable ();
 	}

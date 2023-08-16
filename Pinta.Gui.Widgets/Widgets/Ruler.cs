@@ -44,8 +44,8 @@ public enum MetricType
 /// </summary>
 public sealed class Ruler : DrawingArea
 {
-	private double _position = 0;
-	private MetricType _metric = MetricType.Pixels;
+	private double position = 0;
+	private MetricType metric = MetricType.Pixels;
 
 	/// <summary>
 	/// Whether the ruler is horizontal or vertical.
@@ -56,9 +56,9 @@ public sealed class Ruler : DrawingArea
 	/// Metric type used for the ruler.
 	/// </summary>
 	public MetricType Metric {
-		get => _metric;
+		get => metric;
 		set {
-			_metric = value;
+			metric = value;
 			QueueDraw ();
 		}
 	}
@@ -67,9 +67,9 @@ public sealed class Ruler : DrawingArea
 	/// The position of the mark along the ruler.
 	/// </summary>
 	public double Position {
-		get => _position;
+		get => position;
 		set {
-			_position = value;
+			position = value;
 			QueueDraw ();
 		}
 	}
@@ -143,9 +143,9 @@ public sealed class Ruler : DrawingArea
 		}
 		cr.Fill ();
 
-		double[]? ruler_scale;
-		int[]? subdivide;
-		double pixels_per_unit = 1.0;
+		double[] ruler_scale;
+		int[] subdivide;
+		double pixels_per_unit;
 
 		switch (Metric) {
 			case MetricType.Pixels:

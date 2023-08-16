@@ -668,7 +668,7 @@ public abstract class BaseEditEngine
 
 		Document doc = PintaCore.Workspace.ActiveDocument;
 
-		shape_origin = new PointD (Utility.Clamp (unclamped_point.X, 0, doc.ImageSize.Width - 1), Utility.Clamp (unclamped_point.Y, 0, doc.ImageSize.Height - 1));
+		shape_origin = new PointD (Math.Clamp (unclamped_point.X, 0, doc.ImageSize.Width - 1), Math.Clamp (unclamped_point.Y, 0, doc.ImageSize.Height - 1));
 		current_point = shape_origin;
 
 		bool shiftKey = e.IsShiftPressed;
@@ -839,7 +839,7 @@ public abstract class BaseEditEngine
 			//Redraw the active shape to show a (temporary) highlighted control point (over any shape) when applicable.
 			DrawActiveShape (false, false, true, shiftKey, false, e.IsControlPressed);
 		} else {
-			current_point = new PointD (Utility.Clamp (current_point.X, 0, doc.ImageSize.Width - 1), Utility.Clamp (current_point.Y, 0, doc.ImageSize.Height - 1));
+			current_point = new PointD (Math.Clamp (current_point.X, 0, doc.ImageSize.Width - 1), Math.Clamp (current_point.Y, 0, doc.ImageSize.Height - 1));
 
 
 			if (shiftKey) {
@@ -923,11 +923,11 @@ public abstract class BaseEditEngine
 
 					//Note: the difference factors are to be inverted for x and y change because this is perpendicular motion.
 					controlPoints[SelectedPointIndex].Tension +=
-					    Math.Round (Utility.Clamp ((xChange * yDiff + yChange * xDiff) / totalDiff, -1d, 1d)) / 50d;
+					    Math.Round (Math.Clamp ((xChange * yDiff + yChange * xDiff) / totalDiff, -1d, 1d)) / 50d;
 
 					//Restrict the new tension to range from 0d to 1d.
 					controlPoints[SelectedPointIndex].Tension =
-									Utility.Clamp (selPoint.Tension, 0d, 1d);
+									Math.Clamp (selPoint.Tension, 0d, 1d);
 				}
 
 				DrawActiveShape (false, false, true, shiftKey, false, e.IsControlPressed);

@@ -137,8 +137,8 @@ public class Document
 	#region Public Methods
 	public RectangleI ClampToImageSize (RectangleI r)
 	{
-		int x = Utility.Clamp (r.X, 0, ImageSize.Width);
-		int y = Utility.Clamp (r.Y, 0, ImageSize.Height);
+		int x = Math.Clamp (r.X, 0, ImageSize.Width);
+		int y = Math.Clamp (r.Y, 0, ImageSize.Height);
 		int width = Math.Min (r.Width, ImageSize.Width - x);
 		int height = Math.Min (r.Height, ImageSize.Height - y);
 

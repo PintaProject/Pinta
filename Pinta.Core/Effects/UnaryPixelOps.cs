@@ -563,7 +563,7 @@ public sealed class UnaryPixelOps
 				throw new ArgumentOutOfRangeException (nameof (index), index, "Index must be between 0 and 2");
 			}
 
-			gamma[index] = Utility.Clamp (val, 0.1f, 10.0f);
+			gamma[index] = Math.Clamp (val, 0.1f, 10.0f);
 			UpdateLookupTable ();
 		}
 
@@ -575,7 +575,7 @@ public sealed class UnaryPixelOps
 
 			for (int i = 0; i < 3; i++) {
 				if (lo[i] < md[i] && md[i] < hi[i]) {
-					gamma[i] = (float) Utility.Clamp (Math.Log (0.5, (float) (md[i] - lo[i]) / (float) (hi[i] - lo[i])), 0.1, 10.0);
+					gamma[i] = (float) Math.Clamp (Math.Log (0.5, (float) (md[i] - lo[i]) / (float) (hi[i] - lo[i])), 0.1, 10.0);
 				} else {
 					gamma[i] = 1.0f;
 				}
@@ -629,7 +629,7 @@ public sealed class UnaryPixelOps
 		public ColorBgra Apply (float r, float g, float b)
 		{
 			ColorBgra ret = new ColorBgra ();
-			float[] input = new float[] { b, g, r };
+			ReadOnlySpan<float> input = stackalloc float[] { b, g, r };
 
 			for (int i = 0; i < 3; i++) {
 				float v = (input[i] - color_in_low[i]);
@@ -639,7 +639,7 @@ public sealed class UnaryPixelOps
 				} else if (v + color_in_low[i] >= color_in_high[i]) {
 					ret[i] = color_out_high[i];
 				} else {
-					ret[i] = (byte) Utility.Clamp (
+					ret[i] = (byte) Math.Clamp (
 					    color_out_low[i] + (color_out_high[i] - color_out_low[i]) * Math.Pow (v / (color_in_high[i] - color_in_low[i]), gamma[i]),
 					    0.0f,
 					    255.0f);

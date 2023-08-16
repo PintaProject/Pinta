@@ -385,7 +385,7 @@ public sealed class CurvesDialog : Gtk.Dialog
 
 			for (int i = 0; i < line.Length; i++) {
 				line[i].X = (float) i;
-				line[i].Y = (float) (Utility.Clamp (size - 1 - interpolator.Interpolate (i), 0, size - 1));
+				line[i].Y = (float) (Math.Clamp (size - 1 - interpolator.Interpolate (i), 0, size - 1));
 
 			}
 
