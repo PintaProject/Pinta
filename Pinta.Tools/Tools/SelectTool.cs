@@ -95,8 +95,8 @@ public abstract class SelectTool : BaseTool
 		if (!active_handle.HasValue) {
 			combine_mode = PintaCore.Workspace.SelectionHandler.DetermineCombineMode (e);
 
-			var x = Math.Round (Utility.Clamp (e.PointDouble.X, 0, document.ImageSize.Width));
-			var y = Math.Round (Utility.Clamp (e.PointDouble.Y, 0, document.ImageSize.Height));
+			var x = Math.Round (Math.Clamp (e.PointDouble.X, 0, document.ImageSize.Width));
+			var y = Math.Round (Math.Clamp (e.PointDouble.Y, 0, document.ImageSize.Height));
 			shape_origin = new PointD (x, y);
 
 			document.PreviousSelection = document.Selection.Clone ();
@@ -122,8 +122,8 @@ public abstract class SelectTool : BaseTool
 			return;
 		}
 
-		var x = Math.Round (Utility.Clamp (e.PointDouble.X, 0, document.ImageSize.Width));
-		var y = Math.Round (Utility.Clamp (e.PointDouble.Y, 0, document.ImageSize.Height));
+		var x = Math.Round (Math.Clamp (e.PointDouble.X, 0, document.ImageSize.Width));
+		var y = Math.Round (Math.Clamp (e.PointDouble.Y, 0, document.ImageSize.Height));
 
 		// Should always be true, set in OnMouseDown
 		if (active_handle.HasValue)

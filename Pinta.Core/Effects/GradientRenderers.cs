@@ -53,7 +53,7 @@ public static class GradientRenderers
 
 		protected virtual byte BoundLerp (double t)
 		{
-			return (byte) (Utility.Clamp (t, 0, 1) * 255f);
+			return (byte) (Math.Clamp (t, 0, 1) * 255f);
 		}
 
 		public override void BeforeRender ()
@@ -84,7 +84,7 @@ public static class GradientRenderers
 
 		protected override byte BoundLerp (double t)
 		{
-			return (byte) (Utility.Clamp (Math.Abs (t), 0, 1) * 255f);
+			return (byte) (Math.Clamp (Math.Abs (t), 0, 1) * 255f);
 		}
 	}
 
@@ -196,7 +196,7 @@ public static class GradientRenderers
 			else if (t < -1)
 				t += 2;
 
-			return Utility.Clamp (Math.Abs (t), 0, 1);
+			return Math.Clamp (Math.Abs (t), 0, 1);
 		}
 	}
 }

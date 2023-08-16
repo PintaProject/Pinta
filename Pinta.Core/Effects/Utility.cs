@@ -18,36 +18,6 @@ public static class Utility
 		return x >= float.MinValue && x <= float.MaxValue;
 	}
 
-	public static double Clamp (double x, double min, double max)
-	{
-		if (x < min)
-			return min;
-		else if (x > max)
-			return max;
-		else
-			return x;
-	}
-
-	public static float Clamp (float x, float min, float max)
-	{
-		if (x < min)
-			return min;
-		else if (x > max)
-			return max;
-		else
-			return x;
-	}
-
-	public static int Clamp (int x, int min, int max)
-	{
-		if (x < min)
-			return min;
-		else if (x > max)
-			return max;
-		else
-			return x;
-	}
-
 	public static byte ClampToByte (double x)
 	{
 		if (x > 255)
@@ -186,12 +156,6 @@ public static class Utility
 		diffSq += tmp * tmp;
 
 		return diffSq / 3;
-	}
-
-	public static IEnumerable<RectangleI> InflateRectangles (IEnumerable<RectangleI> rects, int len)
-	{
-		foreach (var rect in rects)
-			yield return new RectangleI (rect.X - len, rect.Y - len, rect.Width + 2 * len, rect.Height + 2 * len);
 	}
 
 	public static string GetStaticName (Type type)

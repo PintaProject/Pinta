@@ -409,7 +409,7 @@ public partial class LevelsDialog : Gtk.Dialog
 
 			case 1:
 				med = gradient_output.GetValue (1);
-				spin_out_gamma.Value = Utility.Clamp (1 / Math.Log (0.5, (float) (med - lo) / (float) (hi - lo)), 0.1, 10.0);
+				spin_out_gamma.Value = Math.Clamp (1 / Math.Log (0.5, (float) (med - lo) / (float) (hi - lo)), 0.1, 10.0);
 				break;
 
 			case 2:

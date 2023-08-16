@@ -193,9 +193,9 @@ public sealed class DocumentWorkspace
 		Gtk.Viewport view = (Gtk.Viewport) Canvas.Parent!;
 
 		var h_adjust = view.GetHadjustment ()!;
-		h_adjust.Value = Utility.Clamp (x * Scale - h_adjust.PageSize / 2, h_adjust.Lower, h_adjust.Upper);
+		h_adjust.Value = Math.Clamp (x * Scale - h_adjust.PageSize / 2, h_adjust.Lower, h_adjust.Upper);
 		var v_adjust = view.GetVadjustment ()!;
-		v_adjust.Value = Utility.Clamp (y * Scale - v_adjust.PageSize / 2, v_adjust.Lower, v_adjust.Upper);
+		v_adjust.Value = Math.Clamp (y * Scale - v_adjust.PageSize / 2, v_adjust.Lower, v_adjust.Upper);
 	}
 
 	public void ScrollCanvas (int dx, int dy)
@@ -203,9 +203,9 @@ public sealed class DocumentWorkspace
 		Gtk.Viewport view = (Gtk.Viewport) Canvas.Parent!;
 
 		var h_adjust = view.GetHadjustment ()!;
-		h_adjust.Value = Utility.Clamp (dx + h_adjust.Value, h_adjust.Lower, h_adjust.Upper - h_adjust.PageSize);
+		h_adjust.Value = Math.Clamp (dx + h_adjust.Value, h_adjust.Lower, h_adjust.Upper - h_adjust.PageSize);
 		var v_adjust = view.GetVadjustment ()!;
-		v_adjust.Value = Utility.Clamp (dy + v_adjust.Value, v_adjust.Lower, v_adjust.Upper - v_adjust.PageSize);
+		v_adjust.Value = Math.Clamp (dy + v_adjust.Value, v_adjust.Lower, v_adjust.Upper - v_adjust.PageSize);
 	}
 
 	/// <summary>

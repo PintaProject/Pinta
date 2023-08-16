@@ -24,6 +24,7 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 // THE SOFTWARE.
 
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using Cairo;
@@ -83,8 +84,8 @@ public class LassoSelectTool : BaseTool
 		if (!is_drawing)
 			return;
 
-		var x = Utility.Clamp (e.PointDouble.X, 0, document.ImageSize.Width - 1);
-		var y = Utility.Clamp (e.PointDouble.Y, 0, document.ImageSize.Height - 1);
+		var x = Math.Clamp (e.PointDouble.X, 0, document.ImageSize.Width - 1);
+		var y = Math.Clamp (e.PointDouble.Y, 0, document.ImageSize.Height - 1);
 
 		document.Selection.Visible = true;
 
