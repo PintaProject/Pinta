@@ -18,35 +18,11 @@ public static class Utility
 		return x >= float.MinValue && x <= float.MaxValue;
 	}
 
-	public static byte ClampToByte (double x)
-	{
-		if (x > 255)
-			return 255;
-		else if (x < 0)
-			return 0;
-		else
-			return (byte) x;
-	}
+	public static byte ClampToByte (double x) => (byte) Math.Clamp (x, byte.MinValue, byte.MaxValue);
 
-	public static byte ClampToByte (float x)
-	{
-		if (x > 255)
-			return 255;
-		else if (x < 0)
-			return 0;
-		else
-			return (byte) x;
-	}
+	public static byte ClampToByte (float x) => (byte) Math.Clamp (x, byte.MinValue, byte.MaxValue);
 
-	public static byte ClampToByte (int x)
-	{
-		if (x > 255)
-			return 255;
-		else if (x < 0)
-			return 0;
-		else
-			return (byte) x;
-	}
+	public static byte ClampToByte (int x) => (byte) Math.Clamp (x, byte.MinValue, byte.MaxValue);
 
 	public static float Lerp (float from, float to, float frac)
 	{
