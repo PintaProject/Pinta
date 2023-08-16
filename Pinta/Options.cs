@@ -135,10 +135,6 @@ using System.Runtime.Serialization;
 using System.Text;
 using System.Text.RegularExpressions;
 
-#if LINQ
-using System.Linq;
-#endif
-
 #if TEST
 using NDesk.Options;
 #endif
@@ -675,35 +671,6 @@ public class OptionSet : KeyedCollection<string, Option>
 		return new OptionContext (this);
 	}
 
-#if LINQ
-	public List<string> Parse (IEnumerable<string> arguments)
-	{
-		bool process = true;
-		OptionContext c = CreateOptionContext ();
-		c.OptionIndex = -1;
-		var def = GetOptionForName ("<>");
-		var unprocessed = 
-			from argument in arguments
-			where ++c.OptionIndex >= 0 && (process || def != null)
-				? process
-					? argument == "--" 
-						? (process = false)
-						: !Parse (argument, c)
-							? def != null 
-								? Unprocessed (null, def, c, argument) 
-								: true
-							: false
-					: def != null 
-						? Unprocessed (null, def, c, argument)
-						: true
-				: true
-			select argument;
-		List<string> r = unprocessed.ToList ();
-		if (c.Option != null)
-			c.Option.Invoke (c);
-		return r;
-	}
-#else
 	public List<string> Parse (IEnumerable<string> arguments)
 	{
 		OptionContext c = CreateOptionContext ();
@@ -728,7 +695,6 @@ public class OptionSet : KeyedCollection<string, Option>
 			c.Option.Invoke (c);
 		return unprocessed;
 	}
-#endif
 
 	private static bool Unprocessed (ICollection<string> extra, Option def, OptionContext c, string argument)
 	{
