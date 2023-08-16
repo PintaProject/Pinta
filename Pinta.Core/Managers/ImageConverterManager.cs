@@ -28,6 +28,7 @@ using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
+using GdkPixbuf;
 
 namespace Pinta.Core;
 
@@ -41,39 +42,38 @@ public sealed class ImageConverterManager
 
 		// Create all the formats supported by Gdk
 		foreach (var format in GdkPixbufExtensions.GetFormats ()) {
-			string formatName = format.GetName ().ToLowerInvariant ();
-			string formatNameUpperCase = formatName.ToUpperInvariant ();
-			string[] extensions;
-
-			switch (formatName) {
-				case "jpeg":
-					extensions = new string[] { "jpg", "jpeg", "JPG", "JPEG" };
-					break;
-				case "tiff":
-					extensions = new string[] { "tif", "tiff", "TIF", "TIFF" };
-					break;
-				default:
-					extensions = new string[] { formatName, formatNameUpperCase };
-					break;
-			}
-
-			GdkPixbufFormat importer = new GdkPixbufFormat (formatName);
-			IImageExporter? exporter;
-			if (formatName == "jpeg")
-				exporter = importer = new JpegFormat ();
-			else if (formatName == "tga")
-				exporter = new TgaExporter ();
-			else if (format.IsWritable ())
-				exporter = importer;
-			else
-				exporter = null;
-
-			RegisterFormat (new FormatDescriptor (formatNameUpperCase, extensions, format.GetMimeTypes (), importer, exporter));
+			var gdkFormatDescriptor = CreateFormatDescriptor (format);
+			RegisterFormat (gdkFormatDescriptor);
 		}
 
 		// Create all the formats we have our own importers/exporters for
 		OraFormat oraHandler = new OraFormat ();
-		RegisterFormat (new FormatDescriptor ("OpenRaster", new string[] { "ora", "ORA" }, new string[] { "image/openraster" }, oraHandler, oraHandler));
+		var oraFormatDescriptor = new FormatDescriptor ("OpenRaster", new string[] { "ora", "ORA" }, new string[] { "image/openraster" }, oraHandler, oraHandler);
+		RegisterFormat (oraFormatDescriptor);
+	}
+
+	private static FormatDescriptor CreateFormatDescriptor (PixbufFormat format)
+	{
+		string formatName = format.GetName ().ToLowerInvariant ();
+		string formatNameUpperCase = formatName.ToUpperInvariant ();
+		var extensions = formatName switch {
+			"jpeg" => new string[] { "jpg", "jpeg", "JPG", "JPEG" },
+			"tiff" => new string[] { "tif", "tiff", "TIF", "TIFF" },
+			_ => new string[] { formatName, formatNameUpperCase },
+		};
+		GdkPixbufFormat importer = new (formatName);
+		IImageExporter? exporter;
+		if (formatName == "jpeg")
+			exporter = importer = new JpegFormat ();
+		else if (formatName == "tga")
+			exporter = new TgaExporter ();
+		else if (format.IsWritable ())
+			exporter = importer;
+		else
+			exporter = null;
+
+		var formatDescriptor = new FormatDescriptor (formatNameUpperCase, extensions, format.GetMimeTypes (), importer, exporter);
+		return formatDescriptor;
 	}
 
 	public IEnumerable<FormatDescriptor> Formats => formats;
