@@ -243,9 +243,9 @@ public static class Utility
 	public static int FastDivideShortByByte (ushort n, byte d)
 	{
 		int i = d * 3;
-		uint m = masTable[i];
-		uint a = masTable[i + 1];
-		uint s = masTable[i + 2];
+		uint m = mas_table[i];
+		uint a = mas_table[i + 1];
+		uint s = mas_table[i + 2];
 
 		uint nTimesMPlusA = unchecked((n * m) + a);
 		uint shifted = nTimesMPlusA >> (int) s;
@@ -256,9 +256,9 @@ public static class Utility
 
 	// i = z * 3;
 	// (x / z) = ((x * masTable[i]) + masTable[i + 1]) >> masTable[i + 2)
-	private static readonly uint[] masTable =
+	private static readonly uint[] mas_table =
 	{
-    0x00000000, 0x00000000, 0,  // 0
+            0x00000000, 0x00000000, 0,  // 0
             0x00000001, 0x00000000, 0,  // 1
             0x00000001, 0x00000000, 1,  // 2
             0xAAAAAAAB, 0x00000000, 33, // 3
