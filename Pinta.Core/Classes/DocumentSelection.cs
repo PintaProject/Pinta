@@ -135,18 +135,14 @@ public sealed class DocumentSelection
 	/// <returns>A Clipper Polygon collection.</returns>
 	public static List<List<IntPoint>> ConvertToPolygons (IReadOnlyList<IReadOnlyList<PointI>> pintaPolygonSet)
 	{
-		List<List<IntPoint>> newPolygons = new List<List<IntPoint>> ();
-
-		foreach (PointI[] pA in pintaPolygonSet) {
-			List<IntPoint> newPolygon = new List<IntPoint> ();
-
-			foreach (PointI p in pA) {
+		List<List<IntPoint>> newPolygons = new List<List<IntPoint>> (pintaPolygonSet.Count);
+		foreach (var pA in pintaPolygonSet) {
+			List<IntPoint> newPolygon = new List<IntPoint> (pA.Count);
+			foreach (var p in pA) {
 				newPolygon.Add (new IntPoint ((long) p.X, (long) p.Y));
 			}
-
 			newPolygons.Add (newPolygon);
 		}
-
 		return newPolygons;
 	}
 
