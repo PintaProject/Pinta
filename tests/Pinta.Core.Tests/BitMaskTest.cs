@@ -1,5 +1,7 @@
 using System;
 using System.Collections.Generic;
+using System.Linq;
+using System.Security.Cryptography;
 using NUnit.Framework;
 
 namespace Pinta.Core.Tests;
@@ -81,16 +83,6 @@ internal sealed class BitMaskTest
 		Assert.IsTrue (bit);
 	}
 
-	[TestCase (DEFAULT_WIDTH, DEFAULT_HEIGHT, DEFAULT_WIDTH_INDEX, DEFAULT_HEIGHT_INDEX)]
-	public void BitInvertsWithScanline (int maskWidth, int maskHeight, int bitToInvertX, int bitToInvertY)
-	{
-		var mask = new BitMask (maskWidth, maskHeight);
-		var scanline = new Scanline (bitToInvertX, bitToInvertY, 1);
-		mask.Invert (scanline);
-		var bit = mask[bitToInvertX, bitToInvertY];
-		Assert.IsTrue (bit);
-	}
-
 	[TestCase (DEFAULT_WIDTH, DEFAULT_HEIGHT, DEFAULT_WIDTH_INDEX, DEFAULT_HEIGHT_INDEX, new[] { true, false, true, false })]
 	public void BitGetsSetXY (int maskWidth, int maskHeight, int bitToSetX, int bitToSetY, bool[] valuesToSetAndTest)
 	{
@@ -139,6 +131,89 @@ internal sealed class BitMaskTest
 		var bitmask2 = new BitMask (width, height);
 		Assert.Throws<ArgumentOutOfRangeException> (() => bitmask1.Set (x, y, true));
 		Assert.Throws<ArgumentOutOfRangeException> (() => bitmask2.Set (x, y, false));
+	}
+
+	[TestCaseSource (nameof (rectangle_set_test_cases))]
+	public void RectangleSetCorrectly (int width, int height, IEnumerable<KeyValuePair<RectangleI, bool>> areasToSet, IReadOnlyDictionary<PointI, bool> checks)
+	{
+		var bitmask = new BitMask (width, height);
+		foreach (var kvp in areasToSet) {
+			bitmask.Set (kvp.Key, kvp.Value);
+		}
+		foreach (var kvp in checks) {
+			Assert.AreEqual (bitmask[kvp.Key], kvp.Value);
+			Assert.AreEqual (bitmask[kvp.Key.X, kvp.Key.Y], kvp.Value);
+		}
+	}
+
+	[TestCaseSource (nameof (scanline_invert_test_cases))]
+	public void ScanlineInvertedCorrectly (int width, int height, IEnumerable<Scanline> scanlineInversionSequence, IReadOnlyDictionary<PointI, bool> checks)
+	{
+		var bitmask = new BitMask (width, height);
+		foreach (var scanline in scanlineInversionSequence) {
+			bitmask.Invert (scanline);
+		}
+		foreach (var kvp in checks) {
+			Assert.AreEqual (bitmask[kvp.Key], kvp.Value);
+			Assert.AreEqual (bitmask[kvp.Key.X, kvp.Key.Y], kvp.Value);
+		}
+	}
+
+	static readonly IReadOnlyList<TestCaseData> scanline_invert_test_cases = CreateScanlineInvertTestCases ().ToArray ();
+	static IEnumerable<TestCaseData> CreateScanlineInvertTestCases ()
+	{
+		const int WIDTH = 16;
+		const int HEIGHT = 16;
+
+		Scanline topLeftLine = new (0, 0, 4);
+
+		var singleTopLeftSequence = new[] { topLeftLine };
+		var singleTopLeftChecks = new Dictionary<PointI, bool> {
+			[new(0, 0)] = true,
+			[new(3, 0)] = true,
+			[new(4, 0)] = false,
+			[new(0, 1)] = false,
+		};
+		yield return new TestCaseData (WIDTH, HEIGHT, singleTopLeftSequence, singleTopLeftChecks);
+
+		//var doubleTopLeftSequence = Enumerable.Repeat(topLeftLine, 2);
+		//var doubleTopLeftChecks = singleTopLeftChecks.ToDictionary (kvp => kvp.Key, kvp => !kvp.Value);
+		//yield return new TestCaseData (WIDTH, HEIGHT, doubleTopLeftSequence, doubleTopLeftChecks);
+
+		var singlePixelSequence = new[] { new Scanline(DEFAULT_WIDTH_INDEX, DEFAULT_HEIGHT_INDEX, 1) };
+		var singlePixelChecks = new Dictionary<PointI, bool> { [new(DEFAULT_WIDTH_INDEX, DEFAULT_HEIGHT_INDEX)] = true };
+		yield return new TestCaseData (DEFAULT_WIDTH, DEFAULT_HEIGHT, singlePixelSequence, singlePixelChecks);
+	}
+
+	static readonly IReadOnlyList<TestCaseData> rectangle_set_test_cases = CreateRectangleSetTestCases ().ToArray ();
+	static IEnumerable<TestCaseData> CreateRectangleSetTestCases ()
+	{
+		const int WIDTH = 4;
+		const int HEIGHT = 4;
+
+		RectangleI topLeftArea = new (0, 0, 2, 2);
+		var topLeftAreaSequence = new[] { KeyValuePair.Create (topLeftArea, true) };
+		var topLeftChecks = new Dictionary<PointI, bool> {
+			[new (0, 0)] = true,
+			[new (3, 0)] = false,
+			[new (3, 3)] = false,
+			[new (0, 3)] = false,
+			[new (1, 1)] = true,
+			[new (2, 2)] = false,
+		};
+		yield return new TestCaseData (WIDTH, HEIGHT, topLeftAreaSequence, topLeftChecks);
+
+		RectangleI bottomRightArea = new (2, 2, 2, 2);
+		var bottomRightAreaSequence = new[] { KeyValuePair.Create(bottomRightArea, true) };
+		var bottomRightChecks = new Dictionary<PointI, bool> {
+			[new (0, 0)] = false,
+			[new (3, 0)] = false,
+			[new (3, 3)] = true,
+			[new (0, 3)] = false,
+			[new (1, 1)] = false,
+			[new (2, 2)] = true,
+		};
+		yield return new TestCaseData (WIDTH, HEIGHT, bottomRightAreaSequence, bottomRightChecks);
 	}
 
 	static readonly IReadOnlyList<TestCaseData> out_of_bounds_access_cases = new TestCaseData[]
