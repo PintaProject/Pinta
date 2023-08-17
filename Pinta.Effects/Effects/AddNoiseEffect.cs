@@ -86,6 +86,7 @@ public sealed class AddNoiseEffect : BaseEffect
 		}
 
 		var result = ImmutableArray.CreateBuilder<int> (TableSize);
+		result.Count = TableSize;
 		sum = 0;
 		int roundedSum = 0, lastRoundedSum;
 
