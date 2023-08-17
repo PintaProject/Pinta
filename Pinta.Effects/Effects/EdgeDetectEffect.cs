@@ -8,7 +8,6 @@
 /////////////////////////////////////////////////////////////////////////////////
 
 using System;
-using System.Diagnostics.CodeAnalysis;
 using Cairo;
 using Pinta.Core;
 using Pinta.Gui.Widgets;
@@ -17,8 +16,6 @@ namespace Pinta.Effects;
 
 public sealed class EdgeDetectEffect : ColorDifferenceEffect
 {
-	private double[][]? weights;
-
 	public override string Icon => Pinta.Resources.Icons.EffectsStylizeEdgeDetect;
 
 	public override string Name => Translations.GetString ("Edge Detect");
@@ -41,16 +38,15 @@ public sealed class EdgeDetectEffect : ColorDifferenceEffect
 
 	public override void Render (ImageSurface src, ImageSurface dest, Core.RectangleI[] rois)
 	{
-		SetWeights ();
+		var weights = ComputeWeights ();
 		base.RenderColorDifferenceEffect (weights, src, dest, rois);
 	}
 
-	[MemberNotNull (nameof (weights))]
-	private void SetWeights ()
+	private double[][] ComputeWeights ()
 	{
-		weights = new double[3][];
-		for (int i = 0; i < this.weights.Length; ++i) {
-			this.weights[i] = new double[3];
+		var weights = new double[3][];
+		for (int i = 0; i < weights.Length; ++i) {
+			weights[i] = new double[3];
 		}
 
 		// adjust and convert angle to radians
@@ -61,17 +57,19 @@ public sealed class EdgeDetectEffect : ColorDifferenceEffect
 
 		// for r = 0 this builds an edge detect filter pointing straight left
 
-		this.weights[0][0] = Math.Cos (r + dr);
-		this.weights[0][1] = Math.Cos (r + 2.0 * dr);
-		this.weights[0][2] = Math.Cos (r + 3.0 * dr);
+		weights[0][0] = Math.Cos (r + dr);
+		weights[0][1] = Math.Cos (r + 2.0 * dr);
+		weights[0][2] = Math.Cos (r + 3.0 * dr);
 
-		this.weights[1][0] = Math.Cos (r);
-		this.weights[1][1] = 0;
-		this.weights[1][2] = Math.Cos (r + 4.0 * dr);
+		weights[1][0] = Math.Cos (r);
+		weights[1][1] = 0;
+		weights[1][2] = Math.Cos (r + 4.0 * dr);
 
-		this.weights[2][0] = Math.Cos (r - dr);
-		this.weights[2][1] = Math.Cos (r - 2.0 * dr);
-		this.weights[2][2] = Math.Cos (r - 3.0 * dr);
+		weights[2][0] = Math.Cos (r - dr);
+		weights[2][1] = Math.Cos (r - 2.0 * dr);
+		weights[2][2] = Math.Cos (r - 3.0 * dr);
+
+		return weights;
 	}
 }
 
