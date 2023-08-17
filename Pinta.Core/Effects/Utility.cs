@@ -257,7 +257,7 @@ public static class Utility
 	// (x / z) = ((x * masTable[i]) + masTable[i + 1]) >> masTable[i + 2)
 	private static readonly uint[] mas_table =
 	{
-            0x00000000, 0x00000000, 0,  // 0
+    0x00000000, 0x00000000, 0,  // 0
             0x00000001, 0x00000000, 0,  // 1
             0x00000001, 0x00000000, 1,  // 2
             0xAAAAAAAB, 0x00000000, 33, // 3
