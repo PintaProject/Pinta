@@ -117,7 +117,7 @@ public sealed class AddNoiseEffect : BaseEffect
 		}
 
 		Random localRand = thread_rand;
-		ReadOnlySpan<int> localLookup = lookup;
+		ReadOnlySpan<int> localLookup = lookup.AsSpan ();
 
 		ReadOnlySpan<ColorBgra> src_data = src.GetReadOnlyPixelData ();
 		Span<ColorBgra> dst_data = dst.GetPixelData ();
