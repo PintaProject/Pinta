@@ -43,9 +43,9 @@ public sealed class HistogramRgb
 
 	protected override void AddSurfaceRectangleToHistogram (ImageSurface surface, RectangleI rect)
 	{
-		long[] histogramB = histogram[0];
-		long[] histogramG = histogram[1];
-		long[] histogramR = histogram[2];
+		var histogramB = histogram[0];
+		var histogramG = histogram[1];
+		var histogramR = histogram[2];
 
 		var data = surface.GetReadOnlyPixelData ();
 		int rect_right = rect.Right;
@@ -70,8 +70,8 @@ public sealed class HistogramRgb
 
 		Clear ();
 
-		float[] before = new float[3];
-		float[] slopes = new float[3];
+		Span<float> before = stackalloc float[3];
+		Span<float> slopes = stackalloc float[3];
 
 		for (int c = 0; c < 3; c++) {
 			long[] channelHistogramOutput = histogram[c];
