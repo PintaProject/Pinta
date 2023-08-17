@@ -34,6 +34,7 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 // THE SOFTWARE.
 
+using System;
 using Cairo;
 using Pinta.Core;
 
@@ -102,7 +103,7 @@ public sealed class HistogramWidget : Gtk.DrawingArea
 		if (!FlipVertical)
 			Utility.Swap (ref t, ref b);
 
-		var points = new PointD[entries + 2];
+		Span<PointD> points = stackalloc PointD[entries + 2];
 
 		points[entries] = new PointD (Utility.Lerp (l, r, -1), Utility.Lerp (t, b, 20));
 		points[entries + 1] = new PointD (Utility.Lerp (l, r, -1), Utility.Lerp (b, t, 20));
