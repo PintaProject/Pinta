@@ -24,14 +24,9 @@ interface IScreenshot : IDBusObject
 }
 
 [Dictionary]
-class ScreenshotProperties
+internal sealed class ScreenshotProperties
 {
-	private uint _version = default (uint);
-	public uint Version {
-		get => _version;
-
-		set => _version = (value);
-	}
+	public uint Version { get; set; }
 }
 
 static class ScreenshotExtensions
