@@ -33,9 +33,7 @@ public sealed class SplineInterpolator
 
 	public double Interpolate (double x)
 	{
-		if (y2 == null) {
-			PreCompute ();
-		}
+		y2 ??= PreCompute ();
 
 		IList<double> xa = this.points.Keys;
 		IList<double> ya = this.points.Values;
@@ -64,26 +62,26 @@ public sealed class SplineInterpolator
 		    ((a * a * a - a) * y2![klo] + (b * b * b - b) * y2[khi]) * (h * h) / 6.0; // NRT - y2 is set above by PreCompute ()
 	}
 
-	private void PreCompute ()
+	private double[] PreCompute ()
 	{
 		int n = points.Count;
 		double[] u = new double[n];
 		IList<double> xa = points.Keys;
 		IList<double> ya = points.Values;
 
-		this.y2 = new double[n];
+		var resultingY2 = new double[n];
 
 		u[0] = 0;
-		this.y2[0] = 0;
+		resultingY2[0] = 0;
 
 		for (int i = 1; i < n - 1; ++i) {
 			// This is the decomposition loop of the tridiagonal algorithm. 
 			// y2 and u are used for temporary storage of the decomposed factors.
 			double wx = xa[i + 1] - xa[i - 1];
 			double sig = (xa[i] - xa[i - 1]) / wx;
-			double p = sig * y2[i - 1] + 2.0;
+			double p = sig * resultingY2[i - 1] + 2.0;
 
-			this.y2[i] = (sig - 1.0) / p;
+			resultingY2[i] = (sig - 1.0) / p;
 
 			double ddydx =
 			    (ya[i + 1] - ya[i]) / (xa[i + 1] - xa[i]) -
@@ -92,12 +90,14 @@ public sealed class SplineInterpolator
 			u[i] = (6.0 * ddydx / wx - sig * u[i - 1]) / p;
 		}
 
-		this.y2[n - 1] = 0;
+		resultingY2[n - 1] = 0;
 
 		// This is the backsubstitution loop of the tridiagonal algorithm
 		for (int i = n - 2; i >= 0; --i) {
-			this.y2[i] = this.y2[i] * this.y2[i + 1] + u[i];
+			resultingY2[i] = resultingY2[i] * resultingY2[i + 1] + u[i];
 		}
+
+		return resultingY2;
 	}
 }
 
