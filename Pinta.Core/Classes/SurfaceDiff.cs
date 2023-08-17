@@ -50,12 +50,21 @@ public sealed class SurfaceDiff
 			bottom = -1;
 		}
 
-		public void Merge (DiffBounds other)
+		private DiffBounds (int newLeft, int newRight, int newTop, int newBottom)
 		{
-			this.left = System.Math.Min (this.left, other.left);
-			this.right = System.Math.Max (this.right, other.right);
-			this.top = System.Math.Min (this.top, other.top);
-			this.bottom = System.Math.Max (this.bottom, other.bottom);
+			left = newLeft;
+			right = newRight;
+			top = newTop;
+			bottom = newBottom;
+		}
+
+		public readonly DiffBounds AsMerged (DiffBounds other)
+		{
+			var newLeft = Math.Min (left, other.left);
+			var newRight = Math.Max (right, other.right);
+			var newTop = Math.Min (top, other.top);
+			var newBottom = Math.Max (bottom, other.bottom);
+			return new (newLeft, newRight, newTop, newBottom);
 		}
 	}
 
@@ -98,7 +107,7 @@ public sealed class SurfaceDiff
 
 		// STEP 1 - Find the bounds of the changed pixels.
 		DiffBounds diff_bounds = new DiffBounds (orig_width, orig_height);
-		object diff_bounds_lock = new Object ();
+		object diff_bounds_lock = new ();
 
 		// Split up the work among several threads, each of which processes one row at a time
 		// and updates the bounds of the changed pixels it has seen so far. At the end, the
@@ -129,7 +138,7 @@ public sealed class SurfaceDiff
 
 			     }, (my_bounds) => {
 				     lock (diff_bounds_lock) {
-					     diff_bounds.Merge (my_bounds);
+					     diff_bounds = diff_bounds.AsMerged (my_bounds);
 				     }
 				     return;
 			     });
