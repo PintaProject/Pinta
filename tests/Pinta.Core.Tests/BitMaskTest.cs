@@ -168,10 +168,10 @@ internal sealed class BitMaskTest
 
 		var singleTopLeftSequence = new[] { topLeftLine };
 		var singleTopLeftChecks = new Dictionary<PointI, bool> {
-			[new(0, 0)] = true,
-			[new(3, 0)] = true,
-			[new(4, 0)] = false,
-			[new(0, 1)] = false,
+			[new (0, 0)] = true,
+			[new (3, 0)] = true,
+			[new (4, 0)] = false,
+			[new (0, 1)] = false,
 		};
 		yield return new TestCaseData (WIDTH, HEIGHT, singleTopLeftSequence, singleTopLeftChecks);
 
@@ -180,8 +180,8 @@ internal sealed class BitMaskTest
 		//var doubleTopLeftChecks = singleTopLeftChecks.ToDictionary (kvp => kvp.Key, kvp => !kvp.Value);
 		//yield return new TestCaseData (WIDTH, HEIGHT, doubleTopLeftSequence, doubleTopLeftChecks);
 
-		var singlePixelSequence = new[] { new Scanline(DEFAULT_WIDTH_INDEX, DEFAULT_HEIGHT_INDEX, 1) };
-		var singlePixelChecks = new Dictionary<PointI, bool> { [new(DEFAULT_WIDTH_INDEX, DEFAULT_HEIGHT_INDEX)] = true };
+		var singlePixelSequence = new[] { new Scanline (DEFAULT_WIDTH_INDEX, DEFAULT_HEIGHT_INDEX, 1) };
+		var singlePixelChecks = new Dictionary<PointI, bool> { [new (DEFAULT_WIDTH_INDEX, DEFAULT_HEIGHT_INDEX)] = true };
 		yield return new TestCaseData (DEFAULT_WIDTH, DEFAULT_HEIGHT, singlePixelSequence, singlePixelChecks);
 	}
 
@@ -204,7 +204,7 @@ internal sealed class BitMaskTest
 		yield return new TestCaseData (WIDTH, HEIGHT, topLeftAreaSequence, topLeftChecks);
 
 		RectangleI bottomRightArea = new (2, 2, 2, 2);
-		var bottomRightAreaSequence = new[] { KeyValuePair.Create(bottomRightArea, true) };
+		var bottomRightAreaSequence = new[] { KeyValuePair.Create (bottomRightArea, true) };
 		var bottomRightChecks = new Dictionary<PointI, bool> {
 			[new (0, 0)] = false,
 			[new (3, 0)] = false,
