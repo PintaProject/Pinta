@@ -246,7 +246,7 @@ internal static class Carbon
 }
 
 [StructLayout (LayoutKind.Sequential, Pack = 2, Size = 80)]
-struct FSRef
+readonly struct FSRef
 {
 	//this is an 80-char opaque byte array
 #pragma warning disable 0169
@@ -511,7 +511,7 @@ struct CarbonHICommand //technically HICommandExtended, but they're compatible
 }
 
 [StructLayout (LayoutKind.Sequential, Pack = 2)]
-struct HIMenuItem
+readonly struct HIMenuItem
 {
 	readonly IntPtr menuRef;
 	readonly ushort index;
@@ -534,7 +534,7 @@ enum CarbonHICommandAttributes : uint
 	FromWindow = 1 << 2,
 }
 
-struct OSType
+readonly struct OSType
 {
 	readonly int value;
 
