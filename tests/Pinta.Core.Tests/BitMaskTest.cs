@@ -1,7 +1,6 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Security.Cryptography;
 using NUnit.Framework;
 
 namespace Pinta.Core.Tests;
@@ -176,6 +175,7 @@ internal sealed class BitMaskTest
 		};
 		yield return new TestCaseData (WIDTH, HEIGHT, singleTopLeftSequence, singleTopLeftChecks);
 
+		// TODO: Test fails with this test case. Find out why
 		//var doubleTopLeftSequence = Enumerable.Repeat(topLeftLine, 2);
 		//var doubleTopLeftChecks = singleTopLeftChecks.ToDictionary (kvp => kvp.Key, kvp => !kvp.Value);
 		//yield return new TestCaseData (WIDTH, HEIGHT, doubleTopLeftSequence, doubleTopLeftChecks);
