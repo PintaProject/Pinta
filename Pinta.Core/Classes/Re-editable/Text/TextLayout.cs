@@ -57,15 +57,14 @@ public sealed class TextLayout
 	public ImmutableArray<RectangleI> GetSelectionRectangles ()
 	{
 		var regions = engine.SelectionRegions;
-		var rects = new List<RectangleI> ();
-
+		var rects = ImmutableArray.CreateBuilder<RectangleI> (regions.Length);
 		foreach (var region in regions) {
 			PointI p1 = TextPositionToPoint (region.Key);
 			PointI p2 = TextPositionToPoint (region.Value);
-			rects.Add (new RectangleI (p1, new Size (p2.X - p1.X, FontHeight)));
+			RectangleI regionRectangle = new (p1, new Size (p2.X - p1.X, FontHeight));
+			rects.Add (regionRectangle);
 		}
-
-		return rects.ToImmutableArray ();
+		return rects.MoveToImmutable ();
 	}
 
 	public RectangleI GetCursorLocation ()
