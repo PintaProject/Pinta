@@ -29,7 +29,7 @@ internal sealed class ScreenshotProperties
 	public uint Version { get; set; }
 }
 
-static class ScreenshotExtensions
+internal static class ScreenshotExtensions
 {
 	public static Task<uint> GetVersionAsync (this IScreenshot o) => o.GetAsync<uint> ("version");
 }
