@@ -45,18 +45,18 @@ namespace Pinta.Core;
 public sealed class TgaExporter : IImageExporter
 {
 	private record struct TgaHeader (
-		byte   idLength,      // Image ID Field Length
-		byte   cmapType,      // Color Map Type
-		byte   imageType,     // Image Type
-		ushort cmapIndex,     // First Entry Index
-		ushort cmapLength,    // Color Map Length
-		byte   cmapEntrySize, // Color Map Entry Size
-		ushort xOrigin,       // X-origin of Image
-		ushort yOrigin,       // Y-origin of Image
-		ushort imageWidth,    // Image Width
-		ushort imageHeight,   // Image Height
-		byte   pixelDepth,    // Pixel Depth
-		byte   imageDesc      // Image Descriptor
+		byte idLength,      // Image ID Field Length
+		byte cmapType,      // Color Map Type
+		byte imageType,     // Image Type
+		ushort cmapIndex,   // First Entry Index
+		ushort cmapLength,  // Color Map Length
+		byte cmapEntrySize, // Color Map Entry Size
+		ushort xOrigin,     // X-origin of Image
+		ushort yOrigin,     // Y-origin of Image
+		ushort imageWidth,  // Image Width
+		ushort imageHeight, // Image Height
+		byte pixelDepth,    // Pixel Depth
+		byte imageDesc      // Image Descriptor
 	)
 	{
 		public readonly void WriteTo (BinaryWriter output)
@@ -94,18 +94,18 @@ public sealed class TgaExporter : IImageExporter
 		using var writer = new BinaryWriter (file_stream);
 
 		TgaHeader header = new (
-			idLength      : (byte) (ImageIdField.Length + 1),
-			cmapType      : 0,
-			imageType     : 2,
-			cmapIndex     : 0,
-			cmapLength    : 0,
-			cmapEntrySize : 0,
-			xOrigin       : 0,
-			yOrigin       : 0,
-			imageWidth    : (ushort) surf.Width,
-			imageHeight   : (ushort) surf.Height,
-			pixelDepth    : 32,
-			imageDesc     : 8);
+			idLength: (byte) (ImageIdField.Length + 1),
+			cmapType: 0,
+			imageType: 2,
+			cmapIndex: 0,
+			cmapLength: 0,
+			cmapEntrySize: 0,
+			xOrigin: 0,
+			yOrigin: 0,
+			imageWidth: (ushort) surf.Width,
+			imageHeight: (ushort) surf.Height,
+			pixelDepth: 32,
+			imageDesc: 8);
 		header.WriteTo (writer);
 
 		writer.Write (ImageIdField);
