@@ -124,20 +124,6 @@ public struct ScaleFactor
 		return numerator.GetHashCode () ^ denominator.GetHashCode ();
 	}
 
-	//private static string percentageFormat = PdnResources.GetString("ScaleFactor.Percentage.Format");
-	//public override string ToString()
-	//{
-	//    try
-	//    {
-	//        return string.Format(percentageFormat, unchecked(Math.Round(unchecked(100 * Ratio))));
-	//    }
-
-	//    catch (ArithmeticException)
-	//    {
-	//        return "--";
-	//    }
-	//}
-
 	public readonly int ScaleScalar (int x)
 	{
 		return (int) (((long) x * numerator) / denominator);
@@ -228,16 +214,6 @@ public struct ScaleFactor
 		return new PointI (p.X, UnscaleScalar (p.Y));
 	}
 
-	//public SizeF ScaleSize(C s)
-	//{
-	//    return new SizeF(ScaleScalar(s.Width), ScaleScalar(s.Height));
-	//}
-
-	//public SizeF UnscaleSize(SizeF s)
-	//{
-	//    return new SizeF(UnscaleScalar(s.Width), UnscaleScalar(s.Height));
-	//}
-
 	public readonly Size ScaleSize (Size s)
 	{
 		return new Size (ScaleScalar (s.Width), ScaleScalar (s.Height));
@@ -247,16 +223,6 @@ public struct ScaleFactor
 	{
 		return new Size (UnscaleScalar (s.Width), UnscaleScalar (s.Height));
 	}
-
-	//public RectangleF ScaleRectangle(RectangleF rectF)
-	//{
-	//    return new RectangleF(ScalePoint(rectF.Location), ScaleSize(rectF.Size));
-	//}
-
-	//public RectangleF UnscaleRectangle(RectangleF rectF)
-	//{
-	//    return new RectangleF(UnscalePoint(rectF.Location), UnscaleSize(rectF.Size));
-	//}
 
 	public readonly RectangleI ScaleRectangle (RectangleI rect)
 	{
