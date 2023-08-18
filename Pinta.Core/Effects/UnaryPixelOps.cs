@@ -7,6 +7,7 @@
 
 using System;
 using System.Collections.Immutable;
+using System.Linq;
 
 namespace Pinta.Core;
 
@@ -336,13 +337,14 @@ public sealed class UnaryPixelOps
 	[Serializable]
 	public sealed class LuminosityCurve : UnaryPixelOp
 	{
-		public byte[] Curve = new byte[256];
-
+		public byte[] Curve { get; }
 		public LuminosityCurve ()
 		{
+			var curve = new byte[256];
 			for (int i = 0; i < 256; ++i) {
-				Curve[i] = (byte) i;
+				curve[i] = (byte) i;
 			}
+			Curve = curve;
 		}
 
 		public override ColorBgra Apply (in ColorBgra color)
@@ -361,17 +363,23 @@ public sealed class UnaryPixelOps
 	[Serializable]
 	public class ChannelCurve : UnaryPixelOp
 	{
-		public byte[] CurveB = new byte[256];
-		public byte[] CurveG = new byte[256];
-		public byte[] CurveR = new byte[256];
+		public byte[] CurveB { get; internal set; }
+		public byte[] CurveG { get; internal set; }
+		public byte[] CurveR { get; internal set; }
 
 		public ChannelCurve ()
 		{
+			var curveB = new byte[256];
+			var curveG = new byte[256];
+			var curveR = new byte[256];
 			for (int i = 0; i < 256; ++i) {
-				CurveB[i] = (byte) i;
-				CurveG[i] = (byte) i;
-				CurveR[i] = (byte) i;
+				curveB[i] = (byte) i;
+				curveG[i] = (byte) i;
+				curveR[i] = (byte) i;
 			}
+			CurveB = curveB;
+			CurveG = curveG;
+			CurveR = curveR;
 		}
 
 		public override void Apply (Span<ColorBgra> dst, ReadOnlySpan<ColorBgra> src)
@@ -673,9 +681,9 @@ public sealed class UnaryPixelOps
 		public object Clone ()
 		{
 			Level copy = new Level (color_in_low, color_in_high, (float[]) gamma.Clone (), color_out_low, color_out_high) {
-				CurveB = (byte[]) this.CurveB.Clone (),
-				CurveG = (byte[]) this.CurveG.Clone (),
-				CurveR = (byte[]) this.CurveR.Clone ()
+				CurveB = CurveB.ToArray (),
+				CurveG = CurveG.ToArray (),
+				CurveR = CurveR.ToArray ()
 			};
 
 			return copy;
