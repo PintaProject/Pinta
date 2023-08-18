@@ -5,6 +5,7 @@
 // See license-pdn.txt for full licensing and attribution details.             //
 /////////////////////////////////////////////////////////////////////////////////
 
+using System;
 using Cairo;
 
 namespace Pinta.Core;
@@ -20,7 +21,7 @@ namespace Pinta.Core;
 /// </summary>
 public abstract class ColorDifferenceEffect : BaseEffect
 {
-	public void RenderColorDifferenceEffect (double[][] weights, ImageSurface src, ImageSurface dest, RectangleI[] rois)
+	public void RenderColorDifferenceEffect (double[][] weights, ImageSurface src, ImageSurface dest, ReadOnlySpan<RectangleI> rois)
 	{
 		RectangleI src_rect = src.GetBounds ();
 
