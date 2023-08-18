@@ -39,7 +39,7 @@ public sealed class BrightnessContrastEffect : BaseEffect
 	{
 		var fraction = GetFraction (Data);
 
-		var rgb_table = CreateRgbTable (fraction.Multiply, fraction.Divide);
+		var rgbTable = CreateRgbTable (fraction.Multiply, fraction.Divide);
 
 		var src_data = src.GetReadOnlyPixelData ();
 		var dst_data = dest.GetPixelData ();
@@ -53,7 +53,7 @@ public sealed class BrightnessContrastEffect : BaseEffect
 				if (fraction.Divide == 0) {
 					for (int i = 0; i < src_row.Length; ++i) {
 						ref readonly ColorBgra col = ref src_row[i];
-						uint c = rgb_table![col.GetIntensityByte ()]; // NRT - Set in Calculate
+						uint c = rgbTable![col.GetIntensityByte ()]; // NRT - Set in Calculate
 						dst_row[i].Bgra = (col.Bgra & 0xff000000) | c | (c << 8) | (c << 16);
 					}
 				} else {
@@ -62,9 +62,9 @@ public sealed class BrightnessContrastEffect : BaseEffect
 						int intensity = col.GetIntensityByte ();
 						int shiftIndex = intensity * 256;
 
-						col.R = rgb_table![shiftIndex + col.R];
-						col.G = rgb_table[shiftIndex + col.G];
-						col.B = rgb_table[shiftIndex + col.B];
+						col.R = rgbTable![shiftIndex + col.R];
+						col.G = rgbTable[shiftIndex + col.G];
+						col.B = rgbTable[shiftIndex + col.B];
 
 						dst_row[i] = col;
 					}
@@ -94,14 +94,14 @@ public sealed class BrightnessContrastEffect : BaseEffect
 
 	private byte[] CreateRgbTable (int multiply, int divide)
 	{
-		var rgb_table = new byte[65536];
+		var rgbTable = new byte[65536];
 
 		if (divide == 0) {
 			for (int intensity = 0; intensity < 256; intensity++) {
 				if (intensity + Data.Brightness < 128)
-					rgb_table[intensity] = 0;
+					rgbTable[intensity] = 0;
 				else
-					rgb_table[intensity] = 255;
+					rgbTable[intensity] = 255;
 			}
 		} else if (divide == 100) {
 			for (int intensity = 0; intensity < 256; intensity++) {
@@ -109,7 +109,7 @@ public sealed class BrightnessContrastEffect : BaseEffect
 
 				for (int col = 0; col < 256; ++col) {
 					int index = (intensity * 256) + col;
-					rgb_table[index] = Utility.ClampToByte (col + shift);
+					rgbTable[index] = Utility.ClampToByte (col + shift);
 				}
 			}
 		} else {
@@ -118,12 +118,12 @@ public sealed class BrightnessContrastEffect : BaseEffect
 
 				for (int col = 0; col < 256; ++col) {
 					int index = (intensity * 256) + col;
-					rgb_table[index] = Utility.ClampToByte (col + shift);
+					rgbTable[index] = Utility.ClampToByte (col + shift);
 				}
 			}
 		}
 
-		return rgb_table;
+		return rgbTable;
 	}
 
 	public sealed class BrightnessContrastData : EffectData
