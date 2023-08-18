@@ -7,6 +7,7 @@
 
 using System;
 using System.Collections.Immutable;
+using System.Linq;
 
 namespace Pinta.Core;
 
@@ -680,9 +681,9 @@ public sealed class UnaryPixelOps
 		public object Clone ()
 		{
 			Level copy = new Level (color_in_low, color_in_high, (float[]) gamma.Clone (), color_out_low, color_out_high) {
-				CurveB = (byte[]) this.CurveB.Clone (),
-				CurveG = (byte[]) this.CurveG.Clone (),
-				CurveR = (byte[]) this.CurveR.Clone ()
+				CurveB = CurveB.ToArray (),
+				CurveG = CurveG.ToArray (),
+				CurveR = CurveR.ToArray ()
 			};
 
 			return copy;
