@@ -39,7 +39,7 @@ public sealed class GimpPalette : IPaletteLoader, IPaletteSaver
 	{
 		List<Color> colors = new List<Color> ();
 		using var stream = new GioStream (file.Read (null));
-		StreamReader reader = new StreamReader (stream);
+		using var reader = new StreamReader (stream);
 		string? line = reader.ReadLine ();
 
 		if (line is null || !line.StartsWith ("GIMP"))
@@ -67,7 +67,8 @@ public sealed class GimpPalette : IPaletteLoader, IPaletteSaver
 	public void Save (IReadOnlyList<Color> colors, Gio.File file)
 	{
 		using var stream = new GioStream (file.Replace ());
-		StreamWriter writer = new StreamWriter (stream);
+		using var writer = new StreamWriter (stream);
+
 		writer.WriteLine ("GIMP Palette");
 		writer.WriteLine ("Name: Pinta Created {0}", DateTime.Now.ToString (DateTimeFormatInfo.InvariantInfo.RFC1123Pattern));
 		writer.WriteLine ("#");
