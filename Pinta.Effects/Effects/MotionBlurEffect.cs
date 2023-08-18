@@ -52,7 +52,7 @@ public sealed class MotionBlurEffect : BaseEffect
 			end.Y /= 2.0f;
 		}
 
-		PointD[] points = new PointD[((1 + Data.Distance) * 3) / 2];
+		Span<PointD> points = stackalloc PointD[(1 + Data.Distance) * 3 / 2];
 
 		if (points.Length == 1) {
 			points[0] = new PointD (0, 0);
