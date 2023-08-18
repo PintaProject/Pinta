@@ -132,7 +132,8 @@ public sealed class GradientTool : BaseTool
 			g.Paint ();
 		}
 
-		gr.Render (scratch_layer, new[] { selection_bounds });
+		ReadOnlySpan<RectangleI> selection_bounds_array = stackalloc[] { selection_bounds };
+		gr.Render (scratch_layer, selection_bounds_array);
 
 		// Transfer the result back to the current layer.
 		var context = document.CreateClippedContext ();

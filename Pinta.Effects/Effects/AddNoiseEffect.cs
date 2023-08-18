@@ -8,6 +8,7 @@
 /////////////////////////////////////////////////////////////////////////////////
 
 using System;
+using System.Collections.Immutable;
 using Cairo;
 using Pinta.Core;
 using Pinta.Gui.Widgets;
@@ -49,14 +50,14 @@ public sealed class AddNoiseEffect : BaseEffect
 	[ThreadStatic]
 	private static Random thread_rand = new ();
 	private const int TableSize = 16384;
-	private static readonly int[] lookup;
+	private static readonly ImmutableArray<int> lookup;
 
 	private static double NormalCurve (double x, double scale)
 	{
 		return scale * Math.Exp (-x * x / 2);
 	}
 
-	private static int[] CreateLookup ()
+	private static ImmutableArray<int> CreateLookup ()
 	{
 		double l = 5;
 		double r = 10;
@@ -84,7 +85,8 @@ public sealed class AddNoiseEffect : BaseEffect
 			}
 		}
 
-		var result = new int[TableSize];
+		var result = ImmutableArray.CreateBuilder<int> (TableSize);
+		result.Count = TableSize;
 		sum = 0;
 		int roundedSum = 0, lastRoundedSum;
 
@@ -98,7 +100,7 @@ public sealed class AddNoiseEffect : BaseEffect
 			}
 		}
 
-		return result;
+		return result.ToImmutable ();
 	}
 
 	public override void Render (ImageSurface src, ImageSurface dst, Core.RectangleI[] rois)
@@ -116,7 +118,7 @@ public sealed class AddNoiseEffect : BaseEffect
 		}
 
 		Random localRand = thread_rand;
-		ReadOnlySpan<int> localLookup = lookup;
+		ReadOnlySpan<int> localLookup = lookup.AsSpan ();
 
 		ReadOnlySpan<ColorBgra> src_data = src.GetReadOnlyPixelData ();
 		Span<ColorBgra> dst_data = dst.GetPixelData ();

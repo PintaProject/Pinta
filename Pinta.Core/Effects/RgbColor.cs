@@ -18,12 +18,12 @@ namespace Pinta.Core;
 /// should be using it!
 /// </summary>
 [Serializable]
-public struct RgbColor
+public readonly struct RgbColor
 {
 	// All values are between 0 and 255.
-	public int Red;
-	public int Green;
-	public int Blue;
+	public readonly int Red;
+	public readonly int Green;
+	public readonly int Blue;
 
 	public RgbColor (int R, int G, int B)
 	{

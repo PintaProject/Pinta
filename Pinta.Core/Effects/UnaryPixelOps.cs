@@ -649,7 +649,7 @@ public sealed class UnaryPixelOps
 			return ret;
 		}
 
-		public void UnApply (ColorBgra after, float[] beforeOut, float[] slopesOut)
+		public void UnApply (ColorBgra after, Span<float> beforeOut, Span<float> slopesOut)
 		{
 			if (beforeOut.Length != 3)
 				throw new ArgumentException ($"{nameof (beforeOut)} must be a float[3]", nameof (beforeOut));

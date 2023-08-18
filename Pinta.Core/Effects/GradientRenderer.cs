@@ -101,7 +101,7 @@ public abstract class GradientRenderer
 		endAlpha = (byte) (255 - endColor.A);
 	}
 
-	public void Render (ImageSurface surface, RectangleI[] rois)
+	public void Render (ImageSurface surface, ReadOnlySpan<RectangleI> rois)
 	{
 		byte startAlpha;
 		byte endAlpha;
