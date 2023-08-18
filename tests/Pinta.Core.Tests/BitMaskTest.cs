@@ -167,18 +167,21 @@ internal sealed class BitMaskTest
 		Scanline topLeftLine = new (0, 0, 4);
 
 		var singleTopLeftSequence = new[] { topLeftLine };
-		var singleTopLeftChecks = new Dictionary<PointI, bool> {
+		var singleTopLeftChangedChecks = new Dictionary<PointI, bool> {
 			[new (0, 0)] = true,
 			[new (3, 0)] = true,
+		};
+		var singleTopLeftOutOfRangeChecks = new Dictionary<PointI, bool> {
 			[new (4, 0)] = false,
 			[new (0, 1)] = false,
 		};
-		yield return new TestCaseData (WIDTH, HEIGHT, singleTopLeftSequence, singleTopLeftChecks);
+		yield return new TestCaseData (WIDTH, HEIGHT, singleTopLeftSequence, singleTopLeftChangedChecks);
+		yield return new TestCaseData (WIDTH, HEIGHT, singleTopLeftSequence, singleTopLeftOutOfRangeChecks);
 
-		// TODO: Test fails with this test case. Find out why
-		//var doubleTopLeftSequence = Enumerable.Repeat(topLeftLine, 2);
-		//var doubleTopLeftChecks = singleTopLeftChecks.ToDictionary (kvp => kvp.Key, kvp => !kvp.Value);
-		//yield return new TestCaseData (WIDTH, HEIGHT, doubleTopLeftSequence, doubleTopLeftChecks);
+		var doubleTopLeftSequence = Enumerable.Repeat (topLeftLine, 2);
+		var doubleTopLeftChecks = singleTopLeftChangedChecks.ToDictionary (kvp => kvp.Key, kvp => !kvp.Value);
+		yield return new TestCaseData (WIDTH, HEIGHT, doubleTopLeftSequence, doubleTopLeftChecks);
+		yield return new TestCaseData (WIDTH, HEIGHT, doubleTopLeftSequence, singleTopLeftOutOfRangeChecks);
 
 		var singlePixelSequence = new[] { new Scanline (DEFAULT_WIDTH_INDEX, DEFAULT_HEIGHT_INDEX, 1) };
 		var singlePixelChecks = new Dictionary<PointI, bool> { [new (DEFAULT_WIDTH_INDEX, DEFAULT_HEIGHT_INDEX)] = true };
