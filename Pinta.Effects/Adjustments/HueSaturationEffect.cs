@@ -39,11 +39,7 @@ public sealed class HueSaturationEffect : BaseEffect
 		int sat_delta = Data.Saturation;
 		int lightness = Data.Lightness;
 
-		UnaryPixelOp op;
-		if (hue_delta == 0 && sat_delta == 100 && lightness == 0)
-			op = new UnaryPixelOps.Identity ();
-		else
-			op = new UnaryPixelOps.HueSaturationLightness (hue_delta, sat_delta, lightness);
+		UnaryPixelOp op = Data.IsDefault ? new UnaryPixelOps.Identity () : new UnaryPixelOps.HueSaturationLightness (hue_delta, sat_delta, lightness);
 
 		op.Apply (dest, src, rois);
 	}
