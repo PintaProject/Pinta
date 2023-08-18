@@ -23,26 +23,28 @@ namespace Pinta.Core;
 /// </summary>
 public sealed partial class UserBlendOps
 {
-	private static readonly Dictionary<string, BlendMode> blend_modes = new ();
+	private static readonly IReadOnlyDictionary<string, BlendMode> blend_modes;
 
 	static UserBlendOps ()
 	{
-		blend_modes.Add (Translations.GetString ("Normal"), BlendMode.Normal);
-		blend_modes.Add (Translations.GetString ("Multiply"), BlendMode.Multiply);
-		blend_modes.Add (Translations.GetString ("Color Burn"), BlendMode.ColorBurn);
-		blend_modes.Add (Translations.GetString ("Color Dodge"), BlendMode.ColorDodge);
-		blend_modes.Add (Translations.GetString ("Overlay"), BlendMode.Overlay);
-		blend_modes.Add (Translations.GetString ("Difference"), BlendMode.Difference);
-		blend_modes.Add (Translations.GetString ("Lighten"), BlendMode.Lighten);
-		blend_modes.Add (Translations.GetString ("Darken"), BlendMode.Darken);
-		blend_modes.Add (Translations.GetString ("Screen"), BlendMode.Screen);
-		blend_modes.Add (Translations.GetString ("Xor"), BlendMode.Xor);
-		blend_modes.Add (Translations.GetString ("Hard Light"), BlendMode.HardLight);
-		blend_modes.Add (Translations.GetString ("Soft Light"), BlendMode.SoftLight);
-		blend_modes.Add (Translations.GetString ("Color"), BlendMode.Color);
-		blend_modes.Add (Translations.GetString ("Luminosity"), BlendMode.Luminosity);
-		blend_modes.Add (Translations.GetString ("Hue"), BlendMode.Hue);
-		blend_modes.Add (Translations.GetString ("Saturation"), BlendMode.Saturation);
+		blend_modes = new Dictionary<string, BlendMode> {
+			[Translations.GetString ("Normal")] = BlendMode.Normal,
+			[Translations.GetString ("Multiply")] = BlendMode.Multiply,
+			[Translations.GetString ("Color Burn")] = BlendMode.ColorBurn,
+			[Translations.GetString ("Color Dodge")] = BlendMode.ColorDodge,
+			[Translations.GetString ("Overlay")] = BlendMode.Overlay,
+			[Translations.GetString ("Difference")] = BlendMode.Difference,
+			[Translations.GetString ("Lighten")] = BlendMode.Lighten,
+			[Translations.GetString ("Darken")] = BlendMode.Darken,
+			[Translations.GetString ("Screen")] = BlendMode.Screen,
+			[Translations.GetString ("Xor")] = BlendMode.Xor,
+			[Translations.GetString ("Hard Light")] = BlendMode.HardLight,
+			[Translations.GetString ("Soft Light")] = BlendMode.SoftLight,
+			[Translations.GetString ("Color")] = BlendMode.Color,
+			[Translations.GetString ("Luminosity")] = BlendMode.Luminosity,
+			[Translations.GetString ("Hue")] = BlendMode.Hue,
+			[Translations.GetString ("Saturation")] = BlendMode.Saturation,
+		};
 	}
 
 	private UserBlendOps ()
