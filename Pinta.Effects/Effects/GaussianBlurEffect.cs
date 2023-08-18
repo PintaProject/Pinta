@@ -8,9 +8,7 @@
 /////////////////////////////////////////////////////////////////////////////////
 
 using System;
-using System.Collections.Generic;
 using System.Collections.Immutable;
-using System.Linq;
 using Cairo;
 using Pinta.Core;
 using Pinta.Gui.Widgets;
@@ -170,7 +168,7 @@ public sealed class GaussianBlurEffect : BaseEffect
 
 					int wx;
 					for (wx = 0; wx < wlen - 1; ++wx) {
-						long wwx = (long) w[wx];
+						long wwx = w[wx];
 						waSum += wwx * waSums[wx];
 						wcSum += wwx * wcSums[wx];
 						aSum += wwx * aSums[wx];
@@ -214,12 +212,12 @@ public sealed class GaussianBlurEffect : BaseEffect
 						}
 
 						int wr = w[wx];
-						waSum += (long) wr * waSums[wx];
-						wcSum += (long) wr * wcSums[wx];
-						aSum += (long) wr * aSums[wx];
-						bSum += (long) wr * bSums[wx];
-						gSum += (long) wr * gSums[wx];
-						rSum += (long) wr * rSums[wx];
+						waSum += wr * waSums[wx];
+						wcSum += wr * wcSums[wx];
+						aSum += wr * aSums[wx];
+						bSum += wr * bSums[wx];
+						gSum += wr * gSums[wx];
+						rSum += wr * rSums[wx];
 					}
 
 					wcSum >>= 8;
