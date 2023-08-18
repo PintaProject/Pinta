@@ -15,11 +15,6 @@ namespace Pinta.Effects;
 
 public sealed class BrightnessContrastEffect : BaseEffect
 {
-	private int multiply;
-	private int divide;
-	private byte[]? rgb_table;
-	private bool table_calculated;
-
 	public override string Icon => Pinta.Resources.Icons.AdjustmentsBrightnessContrast;
 
 	public override string Name => Translations.GetString ("Brightness / Contrast");
@@ -33,15 +28,6 @@ public sealed class BrightnessContrastEffect : BaseEffect
 	public BrightnessContrastEffect ()
 	{
 		EffectData = new BrightnessContrastData ();
-		EffectData.PropertyChanged += HandleEffectDataPropertyChanged;
-	}
-
-	/// <summary>
-	/// If any of the effect data was changed, we need to recalculate the rgb table before rendering
-	/// </summary>
-	void HandleEffectDataPropertyChanged (object? sender, System.ComponentModel.PropertyChangedEventArgs e)
-	{
-		table_calculated = false;
 	}
 
 	public override void LaunchConfiguration ()
@@ -51,19 +37,20 @@ public sealed class BrightnessContrastEffect : BaseEffect
 
 	public override void Render (ImageSurface src, ImageSurface dest, Core.RectangleI[] rois)
 	{
-		if (!table_calculated)
-			Calculate ();
+		var fraction = GetFraction (Data);
+
+		var rgb_table = CreateRgbTable (fraction.Multiply, fraction.Divide);
 
 		var src_data = src.GetReadOnlyPixelData ();
 		var dst_data = dest.GetPixelData ();
 		int width = src.Width;
 
-		foreach (Core.RectangleI rect in rois) {
+		foreach (var rect in rois) {
 			for (int y = rect.Top; y <= rect.Bottom; y++) {
 				var src_row = src_data.Slice (y * width + rect.Left, rect.Width);
 				var dst_row = dst_data.Slice (y * width + rect.Left, rect.Width);
 
-				if (divide == 0) {
+				if (fraction.Divide == 0) {
 					for (int i = 0; i < src_row.Length; ++i) {
 						ref readonly ColorBgra col = ref src_row[i];
 						uint c = rgb_table![col.GetIntensityByte ()]; // NRT - Set in Calculate
@@ -86,21 +73,28 @@ public sealed class BrightnessContrastEffect : BaseEffect
 		}
 	}
 
-	private void Calculate ()
+	private static (int Multiply, int Divide) GetFraction (BrightnessContrastData data)
 	{
-		if (Data.Contrast < 0) {
-			multiply = Data.Contrast + 100;
+		int multiply;
+		int divide;
+
+		if (data.Contrast < 0) {
+			multiply = data.Contrast + 100;
 			divide = 100;
-		} else if (Data.Contrast > 0) {
+		} else if (data.Contrast > 0) {
 			multiply = 100;
-			divide = 100 - Data.Contrast;
+			divide = 100 - data.Contrast;
 		} else {
 			multiply = 1;
 			divide = 1;
 		}
 
-		if (rgb_table == null)
-			rgb_table = new byte[65536];
+		return (multiply, divide);
+	}
+
+	private byte[] CreateRgbTable (int multiply, int divide)
+	{
+		var rgb_table = new byte[65536];
 
 		if (divide == 0) {
 			for (int intensity = 0; intensity < 256; intensity++) {
@@ -129,35 +123,16 @@ public sealed class BrightnessContrastEffect : BaseEffect
 			}
 		}
 
-		table_calculated = true;
+		return rgb_table;
 	}
 
-	public class BrightnessContrastData : EffectData
+	public sealed class BrightnessContrastData : EffectData
 	{
-		private int brightness = 0;
-		private int contrast = 0;
-
 		[Caption ("Brightness")]
-		public int Brightness {
-			get => brightness;
-			set {
-				if (value != brightness) {
-					brightness = value;
-					FirePropertyChanged ("Brightness");
-				}
-			}
-		}
+		public int Brightness { get; set; } = 0;
 
 		[Caption ("Contrast")]
-		public int Contrast {
-			get => contrast;
-			set {
-				if (value != contrast) {
-					contrast = value;
-					FirePropertyChanged ("Contrast");
-				}
-			}
-		}
+		public int Contrast { get; set; } = 0;
 
 		[Skip]
 		public override bool IsDefault => Brightness == 0 && Contrast == 0;
