@@ -48,32 +48,6 @@ public static class Utility
 	}
 
 	/// <summary>
-	/// Smoothly blends between two colors.
-	/// </summary>
-	public static ColorBgra Blend (ColorBgra ca, ColorBgra cb, byte cbAlpha)
-	{
-		uint caA = (uint) Utility.FastScaleByteByByte ((byte) (255 - cbAlpha), ca.A);
-		uint cbA = (uint) Utility.FastScaleByteByByte (cbAlpha, cb.A);
-		uint cbAT = caA + cbA;
-
-		uint r;
-		uint g;
-		uint b;
-
-		if (cbAT == 0) {
-			r = 0;
-			g = 0;
-			b = 0;
-		} else {
-			r = ((ca.R * caA) + (cb.R * cbA)) / cbAT;
-			g = ((ca.G * caA) + (cb.G * cbA)) / cbAT;
-			b = ((ca.B * caA) + (cb.B * cbA)) / cbAT;
-		}
-
-		return ColorBgra.FromBgra ((byte) b, (byte) g, (byte) r, (byte) cbAT);
-	}
-
-	/// <summary>
 	/// Allows you to find the bounding box for a "region" that is described as an
 	/// array of bounding boxes.
 	/// </summary>
@@ -114,11 +88,6 @@ public static class Utility
 		return RectangleI.FromLTRB (left, top, right, bottom);
 	}
 
-	public static int ColorDifference (ColorBgra a, ColorBgra b)
-	{
-		return (int) Math.Ceiling (Math.Sqrt (ColorDifferenceSquared (a, b)));
-	}
-
 	public static int ColorDifferenceSquared (ColorBgra a, ColorBgra b)
 	{
 		int diffSq = 0, tmp;
@@ -148,68 +117,6 @@ public static class Utility
 		int r1 = a * b + 0x80;
 		int r2 = ((r1 >> 8) + r1) >> 8;
 		return (byte) r2;
-	}
-
-	public static PointI[] GetLinePoints (PointI first, PointI second)
-	{
-		PointI[] coords;
-
-		int x1 = first.X;
-		int y1 = first.Y;
-		int x2 = second.X;
-		int y2 = second.Y;
-		int dx = x2 - x1;
-		int dy = y2 - y1;
-		int dxabs = Math.Abs (dx);
-		int dyabs = Math.Abs (dy);
-		int px = x1;
-		int py = y1;
-		int sdx = Math.Sign (dx);
-		int sdy = Math.Sign (dy);
-		int x = 0;
-		int y = 0;
-
-		if (dxabs > dyabs) {
-			coords = new PointI[dxabs + 1];
-
-			for (int i = 0; i <= dxabs; i++) {
-				y += dyabs;
-
-				if (y >= dxabs) {
-					y -= dxabs;
-					py += sdy;
-				}
-
-				coords[i] = new PointI (px, py);
-				px += sdx;
-			}
-		} else
-		    // had to add in this cludge for slopes of 1 ... wasn't drawing half the line
-		    if (dxabs == dyabs) {
-			coords = new PointI[dxabs + 1];
-
-			for (int i = 0; i <= dxabs; i++) {
-				coords[i] = new PointI (px, py);
-				px += sdx;
-				py += sdy;
-			}
-		} else {
-			coords = new PointI[dyabs + 1];
-
-			for (int i = 0; i <= dyabs; i++) {
-				x += dxabs;
-
-				if (x >= dyabs) {
-					x -= dyabs;
-					px += sdx;
-				}
-
-				coords[i] = new PointI (px, py);
-				py += sdy;
-			}
-		}
-
-		return coords;
 	}
 
 	public static void GetRgssOffsets (Span<PointD> samplesArray, int sampleCount, int quality)
