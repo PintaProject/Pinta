@@ -203,10 +203,10 @@ public struct ColorBgra
 	public static ColorBgra FromBgraClamped (int b, int g, int r, int a)
 	{
 		return FromBgra (
-		    ClampToByte (b),
-		    ClampToByte (g),
-		    ClampToByte (r),
-		    ClampToByte (a));
+		    Utility.ClampToByte (b),
+		    Utility.ClampToByte (g),
+		    Utility.ClampToByte (r),
+		    Utility.ClampToByte (a));
 	}
 
 	/// <summary>
@@ -215,22 +215,12 @@ public struct ColorBgra
 	public static ColorBgra FromBgraClamped (float b, float g, float r, float a)
 	{
 		return FromBgra (
-		    ClampToByte (b),
-		    ClampToByte (g),
-		    ClampToByte (r),
-		    ClampToByte (a));
+		    Utility.ClampToByte (b),
+		    Utility.ClampToByte (g),
+		    Utility.ClampToByte (r),
+		    Utility.ClampToByte (a));
 	}
 
-	public static byte ClampToByte (float x)
-	{
-		if (x > 255) {
-			return 255;
-		} else if (x < 0) {
-			return 0;
-		} else {
-			return (byte) x;
-		}
-	}
 	/// <summary>
 	/// Packs color and alpha values into a 32-bit integer.
 	/// </summary>
@@ -264,17 +254,6 @@ public struct ColorBgra
 			Bgra = bgra
 		};
 		return color;
-	}
-
-	public static byte ClampToByte (int x)
-	{
-		if (x > 255) {
-			return 255;
-		} else if (x < 0) {
-			return 0;
-		} else {
-			return (byte) x;
-		}
 	}
 
 	/// <summary>
@@ -316,10 +295,10 @@ public struct ColorBgra
 	public static ColorBgra Lerp (ColorBgra from, ColorBgra to, float frac)
 	{
 		ColorBgra ret = new ColorBgra {
-			B = (byte) ClampToByte (Lerp (from.B, to.B, frac)),
-			G = (byte) ClampToByte (Lerp (from.G, to.G, frac)),
-			R = (byte) ClampToByte (Lerp (from.R, to.R, frac)),
-			A = (byte) ClampToByte (Lerp (from.A, to.A, frac))
+			B = Utility.ClampToByte (Lerp (from.B, to.B, frac)),
+			G = Utility.ClampToByte (Lerp (from.G, to.G, frac)),
+			R = Utility.ClampToByte (Lerp (from.R, to.R, frac)),
+			A = Utility.ClampToByte (Lerp (from.A, to.A, frac))
 		};
 
 		return ret;
@@ -346,24 +325,15 @@ public struct ColorBgra
 	public static ColorBgra Lerp (ColorBgra from, ColorBgra to, double frac)
 	{
 		ColorBgra ret = new ColorBgra {
-			B = (byte) ClampToByte (Lerp (from.B, to.B, frac)),
-			G = (byte) ClampToByte (Lerp (from.G, to.G, frac)),
-			R = (byte) ClampToByte (Lerp (from.R, to.R, frac)),
-			A = (byte) ClampToByte (Lerp (from.A, to.A, frac))
+			B = Utility.ClampToByte (Lerp (from.B, to.B, frac)),
+			G = Utility.ClampToByte (Lerp (from.G, to.G, frac)),
+			R = Utility.ClampToByte (Lerp (from.R, to.R, frac)),
+			A = Utility.ClampToByte (Lerp (from.A, to.A, frac))
 		};
 
 		return ret;
 	}
-	public static byte ClampToByte (double x)
-	{
-		if (x > 255) {
-			return 255;
-		} else if (x < 0) {
-			return 0;
-		} else {
-			return (byte) x;
-		}
-	}
+
 	/// <summary>
 	/// Blends four colors together based on the given weight values.
 	/// </summary>
