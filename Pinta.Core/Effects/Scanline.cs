@@ -9,7 +9,7 @@ using System;
 
 namespace Pinta.Core;
 
-public struct Scanline
+public readonly struct Scanline
 {
 	private readonly int x;
 	private readonly int y;
