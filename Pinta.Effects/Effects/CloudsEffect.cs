@@ -46,6 +46,7 @@ public sealed class CloudsEffect : BaseEffect
 
 	static CloudsEffect ()
 	{
+#pragma warning disable format
 		ReadOnlySpan<int> permutationTable = stackalloc int[] {
 			151, 160, 137, 91, 90, 15, 131, 13, 201, 95, 96, 53, 194, 233, 7,
 			225, 140, 36, 103, 30, 69, 142, 8, 99, 37, 240, 21, 10, 23, 190, 6,
@@ -66,6 +67,7 @@ public sealed class CloudsEffect : BaseEffect
 			254, 138, 236, 205, 93, 222, 114, 67, 29, 24, 72, 243, 141, 128,
 			195, 78, 66, 215, 61, 156, 180
 		};
+#pragma warning restore format
 		var permuteLookup = ImmutableArray.CreateBuilder<int> (512);
 		for (int i = 0; i < 256; i++) {
 			permuteLookup[256 + i] = permutationTable[i];
