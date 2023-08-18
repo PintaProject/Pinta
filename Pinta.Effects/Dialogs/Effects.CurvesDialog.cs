@@ -371,22 +371,25 @@ public sealed class CurvesDialog : Gtk.Dialog
 		var infos = GetDrawingInfos ();
 		g.Save ();
 
+		Span<PointD> line = stackalloc PointD[size];
+
 		foreach (var controlPoints in ControlPoints) {
 
 			int points = controlPoints.Count;
 			SplineInterpolator interpolator = new SplineInterpolator ();
 			IList<int> xa = controlPoints.Keys;
 			IList<int> ya = controlPoints.Values;
-			PointD[] line = new PointD[size];
 
 			for (int i = 0; i < points; i++) {
 				interpolator.Add (xa[i], ya[i]);
 			}
 
 			for (int i = 0; i < line.Length; i++) {
-				line[i].X = (float) i;
-				line[i].Y = (float) (Math.Clamp (size - 1 - interpolator.Interpolate (i), 0, size - 1));
-
+				PointD linePoint = new (
+					x: (float) i,
+					y: (float) (Math.Clamp (size - 1 - interpolator.Interpolate (i), 0, size - 1))
+				);
+				line[i] = linePoint;
 			}
 
 			g.LineWidth = 2;
