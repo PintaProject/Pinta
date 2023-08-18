@@ -61,8 +61,7 @@ public sealed class TextLayout
 		foreach (var region in regions) {
 			PointI p1 = TextPositionToPoint (region.Key);
 			PointI p2 = TextPositionToPoint (region.Value);
-			RectangleI regionRectangle = new (p1, new Size (p2.X - p1.X, FontHeight));
-			rects.Add (regionRectangle);
+			rects.Add (new (p1, new Size (p2.X - p1.X, FontHeight)));
 		}
 		return rects.MoveToImmutable ();
 	}
