@@ -21,8 +21,6 @@ public struct ScaleFactor
 	private readonly int denominator;
 	private readonly int numerator;
 
-	public readonly int Denominator => denominator;
-	public readonly int Numerator => numerator;
 	public double Ratio { get; }
 
 	public static readonly ScaleFactor OneToOne = new (1, 1);
@@ -38,90 +36,14 @@ public struct ScaleFactor
 		}
 	}
 
-	public static ScaleFactor UseIfValid (int numerator, int denominator, ScaleFactor lastResort)
-	{
-		if (numerator <= 0 || denominator <= 0) {
-			return lastResort;
-		} else {
-			return new ScaleFactor (numerator, denominator);
-		}
-	}
-
-	public static ScaleFactor Min (int n1, int d1, int n2, int d2, ScaleFactor lastResort)
-	{
-		ScaleFactor a = UseIfValid (n1, d1, lastResort);
-		ScaleFactor b = UseIfValid (n2, d2, lastResort);
-		return ScaleFactor.Min (a, b);
-	}
-
-	public static ScaleFactor Max (int n1, int d1, int n2, int d2, ScaleFactor lastResort)
-	{
-		ScaleFactor a = UseIfValid (n1, d1, lastResort);
-		ScaleFactor b = UseIfValid (n2, d2, lastResort);
-		return ScaleFactor.Max (a, b);
-	}
-
-	public static ScaleFactor Min (ScaleFactor lhs, ScaleFactor rhs)
-	{
-		if (lhs < rhs) {
-			return lhs;
-		} else {
-			return rhs;
-		}
-	}
-
-	public static ScaleFactor Max (ScaleFactor lhs, ScaleFactor rhs)
-	{
-		if (lhs > rhs) {
-			return lhs;
-		} else {
-			return lhs;
-		}
-	}
-
-	public static bool operator == (ScaleFactor lhs, ScaleFactor rhs)
-	{
-		return (lhs.numerator * rhs.denominator) == (rhs.numerator * lhs.denominator);
-	}
-
-	public static bool operator != (ScaleFactor lhs, ScaleFactor rhs)
-	{
-		return !(lhs == rhs);
-	}
-
 	public static bool operator < (ScaleFactor lhs, ScaleFactor rhs)
 	{
 		return (lhs.numerator * rhs.denominator) < (rhs.numerator * lhs.denominator);
 	}
 
-	public static bool operator <= (ScaleFactor lhs, ScaleFactor rhs)
-	{
-		return (lhs.numerator * rhs.denominator) <= (rhs.numerator * lhs.denominator);
-	}
-
 	public static bool operator > (ScaleFactor lhs, ScaleFactor rhs)
 	{
 		return (lhs.numerator * rhs.denominator) > (rhs.numerator * lhs.denominator);
-	}
-
-	public static bool operator >= (ScaleFactor lhs, ScaleFactor rhs)
-	{
-		return (lhs.numerator * rhs.denominator) >= (rhs.numerator * lhs.denominator);
-	}
-
-	public override readonly bool Equals (object? obj)
-	{
-		if (obj is ScaleFactor) {
-			ScaleFactor rhs = (ScaleFactor) obj;
-			return this == rhs;
-		} else {
-			return false;
-		}
-	}
-
-	public override readonly int GetHashCode ()
-	{
-		return numerator.GetHashCode () ^ denominator.GetHashCode ();
 	}
 
 	public readonly int ScaleScalar (int x)
@@ -134,16 +56,6 @@ public struct ScaleFactor
 		return (int) (((long) x * denominator) / numerator);
 	}
 
-	public readonly float ScaleScalar (float x)
-	{
-		return (x * (float) numerator) / (float) denominator;
-	}
-
-	public readonly float UnscaleScalar (float x)
-	{
-		return (x * (float) denominator) / (float) numerator;
-	}
-
 	public readonly double ScaleScalar (double x)
 	{
 		return (x * (double) numerator) / (double) denominator;
@@ -154,172 +66,14 @@ public struct ScaleFactor
 		return (x * (double) denominator) / (double) numerator;
 	}
 
-	public readonly PointI ScalePoint (PointI p)
-	{
-		return new PointI (ScaleScalar (p.X), ScaleScalar (p.Y));
-	}
-
 	public readonly PointD ScalePoint (PointD p)
 	{
 		return new PointD (ScaleScalar (p.X), ScaleScalar (p.Y));
 	}
 
-	public readonly PointD ScalePointJustX (PointD p)
-	{
-		return new PointD (ScaleScalar (p.X), p.Y);
-	}
-
-	public readonly PointD ScalePointJustY (PointD p)
-	{
-		return new PointD (p.X, ScaleScalar (p.Y));
-	}
-
 	public readonly PointD UnscalePoint (PointD p)
 	{
 		return new PointD (UnscaleScalar (p.X), UnscaleScalar (p.Y));
-	}
-
-	public readonly PointD UnscalePointJustX (PointD p)
-	{
-		return new PointD (UnscaleScalar (p.X), p.Y);
-	}
-
-	public readonly PointD UnscalePointJustY (PointD p)
-	{
-		return new PointD (p.X, UnscaleScalar (p.Y));
-	}
-
-	public readonly PointI ScalePointJustX (PointI p)
-	{
-		return new PointI (ScaleScalar (p.X), p.Y);
-	}
-
-	public readonly PointI ScalePointJustY (PointI p)
-	{
-		return new PointI (p.X, ScaleScalar (p.Y));
-	}
-
-	public readonly PointI UnscalePoint (PointI p)
-	{
-		return new PointI (UnscaleScalar (p.X), UnscaleScalar (p.Y));
-	}
-
-	public readonly PointI UnscalePointJustX (PointI p)
-	{
-		return new PointI (UnscaleScalar (p.X), p.Y);
-	}
-
-	public readonly PointI UnscalePointJustY (PointI p)
-	{
-		return new PointI (p.X, UnscaleScalar (p.Y));
-	}
-
-	public readonly Size ScaleSize (Size s)
-	{
-		return new Size (ScaleScalar (s.Width), ScaleScalar (s.Height));
-	}
-
-	public readonly Size UnscaleSize (Size s)
-	{
-		return new Size (UnscaleScalar (s.Width), UnscaleScalar (s.Height));
-	}
-
-	public readonly RectangleI ScaleRectangle (RectangleI rect)
-	{
-		return new RectangleI (ScalePoint (rect.Location), ScaleSize (rect.Size));
-	}
-
-	public readonly RectangleI UnscaleRectangle (RectangleI rect)
-	{
-		return new RectangleI (UnscalePoint (rect.Location), UnscaleSize (rect.Size));
-	}
-
-	private static readonly double[] scales =
-    {
-	0.01, 0.02, 0.03, 0.04, 0.05, 0.06, 0.08, 0.12, 0.16, 0.25, 0.33, 0.50, 0.66, 1,
-	2, 3, 4, 5, 6, 7, 8, 12, 16, 24, 32
-    };
-
-	/// <summary>
-	/// Gets a list of values that GetNextLarger() and GetNextSmaller() will cycle through.
-	/// </summary>
-	/// <remarks>
-	/// 1.0 is guaranteed to be in the array returned by this property. This list is also
-	/// sorted in ascending order.
-	/// </remarks>
-	public static double[] PresetValues {
-		get {
-			double[] returnValue = new double[scales.Length];
-			scales.CopyTo (returnValue, 0);
-			return returnValue;
-		}
-	}
-
-	/// <summary>
-	/// Rounds the current scaling factor up to the next power of two.
-	/// </summary>
-	/// <returns>The new ScaleFactor value.</returns>
-	public readonly ScaleFactor GetNextLarger ()
-	{
-		double ratio = Ratio + 0.005;
-
-		int index = Array.FindIndex (
-		    scales,
-		    delegate (double scale) {
-			    return ratio <= scale;
-		    });
-
-		if (index == -1) {
-			index = scales.Length;
-		}
-
-		index = Math.Min (index, scales.Length - 1);
-
-		return ScaleFactor.FromDouble (scales[index]);
-	}
-
-	public readonly ScaleFactor GetNextSmaller ()
-	{
-		double ratio = Ratio - 0.005;
-
-		int index = Array.FindIndex (
-		    scales,
-		    delegate (double scale) {
-			    return ratio <= scale;
-		    });
-
-		--index;
-
-		if (index == -1) {
-			index = 0;
-		}
-
-		index = Math.Max (index, 0);
-
-		return ScaleFactor.FromDouble (scales[index]);
-	}
-
-	private static ScaleFactor Reduce (int numerator, int denominator)
-	{
-		int factor = 2;
-
-		while (factor < denominator && factor < numerator) {
-			if ((numerator % factor) == 0 && (denominator % factor) == 0) {
-				numerator /= factor;
-				denominator /= factor;
-			} else {
-				++factor;
-			}
-		}
-
-		return new ScaleFactor (numerator, denominator);
-	}
-
-	public static ScaleFactor FromDouble (double scalar)
-	{
-		int numerator = (int) (Math.Floor (scalar * 1000.0));
-		int denominator = 1000;
-		return Reduce (numerator, denominator);
 	}
 
 	public ScaleFactor (int numerator, int denominator)
