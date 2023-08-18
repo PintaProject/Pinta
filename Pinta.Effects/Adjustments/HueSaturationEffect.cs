@@ -15,8 +15,6 @@ namespace Pinta.Effects;
 
 public sealed class HueSaturationEffect : BaseEffect
 {
-	UnaryPixelOp? op;
-
 	public override string Icon => Pinta.Resources.Icons.AdjustmentsHueSaturation;
 
 	public override string Name => Translations.GetString ("Hue / Saturation");
@@ -41,12 +39,11 @@ public sealed class HueSaturationEffect : BaseEffect
 		int sat_delta = Data.Saturation;
 		int lightness = Data.Lightness;
 
-		if (op == null) {
-			if (hue_delta == 0 && sat_delta == 100 && lightness == 0)
-				op = new UnaryPixelOps.Identity ();
-			else
-				op = new UnaryPixelOps.HueSaturationLightness (hue_delta, sat_delta, lightness);
-		}
+		UnaryPixelOp op;
+		if (hue_delta == 0 && sat_delta == 100 && lightness == 0)
+			op = new UnaryPixelOps.Identity ();
+		else
+			op = new UnaryPixelOps.HueSaturationLightness (hue_delta, sat_delta, lightness);
 
 		op.Apply (dest, src, rois);
 	}
