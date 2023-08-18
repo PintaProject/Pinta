@@ -15,8 +15,6 @@ namespace Pinta.Effects;
 
 public sealed class RedEyeRemoveEffect : BaseEffect
 {
-	private UnaryPixelOp? op = null;
-
 	public override string Icon => Pinta.Resources.Icons.EffectsPhotoRedEyeRemove;
 
 	public override string Name => Translations.GetString ("Red Eye Removal");
@@ -30,10 +28,6 @@ public sealed class RedEyeRemoveEffect : BaseEffect
 	public RedEyeRemoveEffect ()
 	{
 		EffectData = new RedEyeRemoveData ();
-
-		EffectData.PropertyChanged += (_, _) => {
-			op = new UnaryPixelOps.RedEyeRemove (Data.Tolerance, Data.Saturation);
-		};
 	}
 
 	public override void LaunchConfiguration ()
@@ -43,7 +37,8 @@ public sealed class RedEyeRemoveEffect : BaseEffect
 
 	public override void Render (ImageSurface src, ImageSurface dest, Core.RectangleI[] rois)
 	{
-		op?.Apply (dest, src, rois);
+		var op = new UnaryPixelOps.RedEyeRemove (Data.Tolerance, Data.Saturation);
+		op.Apply (dest, src, rois);
 	}
 }
 
