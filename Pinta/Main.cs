@@ -26,8 +26,9 @@
 
 using System;
 using System.Collections.Generic;
+using System.CommandLine;
 using System.IO;
-using Mono.Options;
+using System.Linq;
 using Pinta.Core;
 
 namespace Pinta;
@@ -35,7 +36,7 @@ namespace Pinta;
 internal sealed class MainClass
 {
 	[STAThread]
-	public static void Main (string[] args)
+	public static int Main (string[] args)
 	{
 		if (SystemManager.GetOperatingSystem () == OS.Mac) {
 			MacInterop.Environment.Init ();
@@ -49,36 +50,34 @@ internal sealed class MainClass
 			Console.WriteLine (ex);
 		}
 
-		int threads = -1;
-		bool show_help = false;
-		bool show_version = false;
+		var threads_option = new Option<int> (
+			name: "--render-threads",
+			description: Translations.GetString ("Number of threads to use for rendering"),
+			getDefaultValue: () => -1);
+		threads_option.AddAlias ("-rt");
 
-		var p = new OptionSet () {
-			{ "h|help", Translations.GetString("Show this message and exit."), v => show_help = v != null },
-			{ "v|version", Translations.GetString("Display the application version."), v => show_version = v != null },
-			{ "rt|render-threads=", Translations.GetString ("number of threads to use for rendering"), (int v) => threads = v }
-		};
+		var files_arg = new Argument<string[]> (
+			name: "files",
+			description: Translations.GetString ("Files to open"));
 
-		List<string> extra;
+		// Note the implicit '--version' argument uses the InformationalVersion from the assembly.
+		var root_command = new RootCommand (Translations.GetString ("Pinta"));
+		root_command.AddOption (threads_option);
+		root_command.AddArgument (files_arg);
 
-		try {
-			extra = p.Parse (args);
-		} catch (OptionException e) {
-			Console.WriteLine (e.Message);
-			ShowHelp (p);
-			return;
-		}
+		root_command.SetHandler ((threads, files) => {
+			if (threads > 0)
+				Pinta.Core.PintaCore.System.RenderThreads = threads;
 
-		if (show_version) {
-			Console.WriteLine (PintaCore.ApplicationVersion);
-			return;
-		}
+			OpenMainWindow (files);
 
-		if (show_help) {
-			ShowHelp (p);
-			return;
-		}
+		}, threads_option, files_arg);
 
+		return root_command.Invoke (args);
+	}
+
+	private static void OpenMainWindow (IEnumerable<string> files)
+	{
 		GLib.UnhandledException.SetHandler (OnUnhandledException);
 
 		// For testing a dark variant of the theme.
@@ -94,16 +93,13 @@ internal sealed class MainClass
 
 		var main_window = new MainWindow (app);
 
-		if (threads != -1)
-			Pinta.Core.PintaCore.System.RenderThreads = threads;
-
 		if (SystemManager.GetOperatingSystem () == OS.Mac) {
 			RegisterForAppleEvents ();
 		}
 
 		app.OnActivate += (_, _) => {
 			main_window.Activate ();
-			OpenFilesFromCommandLine (extra);
+			OpenFilesFromCommandLine (files);
 
 			// For debugging, run the garbage collector much more frequently.
 			// This can be useful to detect certain memory management issues in the GTK bindings.
@@ -120,25 +116,17 @@ internal sealed class MainClass
 		app.RunWithSynchronizationContext ();
 	}
 
-	private static void ShowHelp (OptionSet p)
-	{
-		Console.WriteLine (Translations.GetString ("Usage: pinta [files]"));
-		Console.WriteLine ();
-		Console.WriteLine (Translations.GetString ("Options: "));
-		p.WriteOptionDescriptions (Console.Out);
-	}
-
-	private static void OpenFilesFromCommandLine (List<string> extra)
+	private static void OpenFilesFromCommandLine (IEnumerable<string> files)
 	{
 		// Ignore the process serial number parameter on Mac OS X
-		if (PintaCore.System.OperatingSystem == OS.Mac && extra.Count > 0) {
-			if (extra[0].StartsWith ("-psn_")) {
-				extra.RemoveAt (0);
+		if (PintaCore.System.OperatingSystem == OS.Mac && files.Any ()) {
+			if (files.First ().StartsWith ("-psn_")) {
+				files = files.Skip (1);
 			}
 		}
 
-		if (extra.Count > 0) {
-			foreach (var file in extra) {
+		if (files.Any ()) {
+			foreach (var file in files) {
 				PintaCore.Workspace.OpenFile (Gio.FileHelper.NewForCommandlineArg (file));
 			}
 		} else {

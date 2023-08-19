@@ -16,6 +16,7 @@
     <PackageReference Include="Mono.Addins" />
     <PackageReference Include="Mono.Addins.Setup" />
     <PackageReference Include="Mono.Addins.CecilReflector" />
+    <PackageReference Include="System.CommandLine" />
   </ItemGroup>
 
   <ItemGroup>

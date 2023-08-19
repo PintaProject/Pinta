@@ -6,6 +6,8 @@
 
     <!-- Versioning and assembly info -->
     <Version>2.2.0.0</Version>
+    <!-- User-facing version number, used for the version command line argument -->
+    <InformationalVersion>2.2</InformationalVersion>
     <Authors>PintaProject</Authors>
     <Company />
     <Product />
