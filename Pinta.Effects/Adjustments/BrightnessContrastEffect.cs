@@ -53,7 +53,7 @@ public sealed class BrightnessContrastEffect : BaseEffect
 				if (fraction.Divide == 0) {
 					for (int i = 0; i < src_row.Length; ++i) {
 						ref readonly ColorBgra col = ref src_row[i];
-						uint c = rgbTable![col.GetIntensityByte ()]; // NRT - Set in Calculate
+						uint c = rgbTable[col.GetIntensityByte ()];
 						dst_row[i].Bgra = (col.Bgra & 0xff000000) | c | (c << 8) | (c << 16);
 					}
 				} else {
@@ -62,7 +62,7 @@ public sealed class BrightnessContrastEffect : BaseEffect
 						int intensity = col.GetIntensityByte ();
 						int shiftIndex = intensity * 256;
 
-						col.R = rgbTable![shiftIndex + col.R];
+						col.R = rgbTable[shiftIndex + col.R];
 						col.G = rgbTable[shiftIndex + col.G];
 						col.B = rgbTable[shiftIndex + col.B];
 
