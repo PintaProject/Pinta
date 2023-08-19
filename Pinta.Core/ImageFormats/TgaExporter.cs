@@ -44,39 +44,37 @@ namespace Pinta.Core;
 
 public sealed class TgaExporter : IImageExporter
 {
-	private struct TgaHeader
+	private record struct TgaHeader (
+		byte idLength,      // Image ID Field Length
+		byte cmapType,      // Color Map Type
+		byte imageType,     // Image Type
+		ushort cmapIndex,   // First Entry Index
+		ushort cmapLength,  // Color Map Length
+		byte cmapEntrySize, // Color Map Entry Size
+		ushort xOrigin,     // X-origin of Image
+		ushort yOrigin,     // Y-origin of Image
+		ushort imageWidth,  // Image Width
+		ushort imageHeight, // Image Height
+		byte pixelDepth,    // Pixel Depth
+		byte imageDesc      // Image Descriptor
+	)
 	{
-		public byte idLength;            // Image ID Field Length
-		public byte cmapType;            // Color Map Type
-		public byte imageType;           // Image Type
-
-		public ushort cmapIndex;         // First Entry Index
-		public ushort cmapLength;        // Color Map Length
-		public byte cmapEntrySize;       // Color Map Entry Size
-
-		public ushort xOrigin;           // X-origin of Image
-		public ushort yOrigin;           // Y-origin of Image
-		public ushort imageWidth;        // Image Width
-		public ushort imageHeight;       // Image Height
-		public byte pixelDepth;          // Pixel Depth
-		public byte imageDesc;           // Image Descriptor
-
 		public readonly void WriteTo (BinaryWriter output)
 		{
-			output.Write (this.idLength);
-			output.Write (this.cmapType);
-			output.Write (this.imageType);
+			output.Write (idLength);
+			output.Write (cmapType);
+			output.Write (imageType);
 
-			output.Write (this.cmapIndex);
-			output.Write (this.cmapLength);
-			output.Write (this.cmapEntrySize);
+			output.Write (cmapIndex);
+			output.Write (cmapLength);
+			output.Write (cmapEntrySize);
 
-			output.Write (this.xOrigin);
-			output.Write (this.yOrigin);
-			output.Write (this.imageWidth);
-			output.Write (this.imageHeight);
-			output.Write (this.pixelDepth);
-			output.Write (this.imageDesc);
+			output.Write (xOrigin);
+			output.Write (yOrigin);
+			output.Write (imageWidth);
+			output.Write (imageHeight);
+			output.Write (pixelDepth);
+			output.Write (imageDesc);
 		}
 	}
 
@@ -95,20 +93,20 @@ public sealed class TgaExporter : IImageExporter
 		using var file_stream = new GioStream (file.Replace ());
 		using var writer = new BinaryWriter (file_stream);
 
-		TgaHeader header = new TgaHeader {
-			idLength = (byte) (ImageIdField.Length + 1),
-			cmapType = 0,
-			imageType = 2, // uncompressed RGB
-			cmapIndex = 0,
-			cmapLength = 0,
-			cmapEntrySize = 0,
-			xOrigin = 0,
-			yOrigin = 0,
-			imageWidth = (ushort) surf.Width,
-			imageHeight = (ushort) surf.Height,
-			pixelDepth = 32,
-			imageDesc = 8 // 32-bit, lower-left origin, which is weird but hey...
-		};
+		TgaHeader header = new (
+			idLength: (byte) (ImageIdField.Length + 1),
+			cmapType: 0,
+			imageType: 2, // Uncompressed RGB
+			cmapIndex: 0,
+			cmapLength: 0,
+			cmapEntrySize: 0,
+			xOrigin: 0,
+			yOrigin: 0,
+			imageWidth: (ushort) surf.Width,
+			imageHeight: (ushort) surf.Height,
+			pixelDepth: 32,
+			imageDesc: 8 // 32-bit, lower-left origin, which is weird but hey...
+		);
 		header.WriteTo (writer);
 
 		writer.Write (ImageIdField);
