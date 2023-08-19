@@ -41,7 +41,7 @@ public sealed class MotionBlurEffect : BaseEffect
 	{
 		PointD start = new PointD (0, 0);
 		double theta = ((double) (Data.Angle + 180) * 2 * Math.PI) / 360.0;
-		double alpha = (double) Data.Distance;
+		double alpha = Data.Distance;
 		PointD end = new PointD ((float) alpha * Math.Cos (theta), (float) (-alpha * Math.Sin (theta)));
 
 		if (Data.Centered) {
@@ -58,7 +58,7 @@ public sealed class MotionBlurEffect : BaseEffect
 			points[0] = new PointD (0, 0);
 		} else {
 			for (int i = 0; i < points.Length; ++i) {
-				float frac = (float) i / (float) (points.Length - 1);
+				float frac = i / (float) (points.Length - 1);
 				points[i] = Utility.Lerp (start, end, frac);
 			}
 		}
@@ -79,7 +79,7 @@ public sealed class MotionBlurEffect : BaseEffect
 					int sampleCount = 0;
 
 					for (int j = 0; j < points.Length; ++j) {
-						PointD pt = new PointD (points[j].X + (float) x, points[j].Y + (float) y);
+						PointD pt = new PointD (points[j].X + x, points[j].Y + y);
 
 						if (pt.X >= 0 && pt.Y >= 0 && pt.X <= (src_width - 1) && pt.Y <= (src_height - 1)) {
 							samples[sampleCount] = src.GetBilinearSample (src_data, src_width, src_height, (float) pt.X, (float) pt.Y);
