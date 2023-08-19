@@ -96,7 +96,7 @@ public sealed class TgaExporter : IImageExporter
 		TgaHeader header = new (
 			idLength: (byte) (ImageIdField.Length + 1),
 			cmapType: 0,
-			imageType: 2,
+			imageType: 2, // Uncompressed RGB
 			cmapIndex: 0,
 			cmapLength: 0,
 			cmapEntrySize: 0,
@@ -105,7 +105,8 @@ public sealed class TgaExporter : IImageExporter
 			imageWidth: (ushort) surf.Width,
 			imageHeight: (ushort) surf.Height,
 			pixelDepth: 32,
-			imageDesc: 8);
+			imageDesc: 8 // 32-bit, lower-left origin, which is weird but hey...
+		);
 		header.WriteTo (writer);
 
 		writer.Write (ImageIdField);
