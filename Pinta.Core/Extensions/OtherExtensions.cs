@@ -174,12 +174,12 @@ public static class OtherExtensions
 			}
 
 			PointI[] points = pts.ToArray ();
-			var scans = points.GetScans ();
+			var scans = CairoExtensions.GetScans (points);
 
 			foreach (var scan in scans)
 				stencil.Invert (scan);
 
-			points.TranslatePointsInPlace (translateX, translateY);
+			CairoExtensions.TranslatePointsInPlace (points, translateX, translateY);
 			polygons.Add (points);
 		}
 
