@@ -134,6 +134,17 @@ public sealed class BrightnessContrastEffect : BaseEffect
 		[Caption ("Contrast")]
 		public int Contrast { get; set; } = 0;
 
+		public override bool Equals (object? obj)
+		{
+			if (obj is not BrightnessContrastData brightnessContrast) return false;
+			return brightnessContrast.Brightness == Brightness && brightnessContrast.Contrast == Contrast;
+		}
+
+		public override int GetHashCode ()
+		{
+			return Brightness ^ Contrast;
+		}
+
 		[Skip]
 		public override bool IsDefault => Brightness == 0 && Contrast == 0;
 	}
