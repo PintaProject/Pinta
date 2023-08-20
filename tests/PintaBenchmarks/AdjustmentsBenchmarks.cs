@@ -11,34 +11,34 @@ public sealed class AdjustmentsBenchmarks
 {
 	private readonly ImageSurface surface;
 	private readonly ImageSurface dest_surface;
-	private readonly RectangleI[] wrapped_bounds;
+	private readonly RectangleI[] bounds;
 
 	public AdjustmentsBenchmarks ()
 	{
 		surface = TestData.Get2000PixelImage ();
 		dest_surface = new ImageSurface (Format.Argb32, 2000, 2000);
-		wrapped_bounds = new[] { surface.GetBounds () };
+		bounds = new[] { surface.GetBounds () };
 	}
 
 	[Benchmark]
 	public void AutoLevelEffect ()
 	{
 		var effect = new AutoLevelEffect ();
-		effect.Render (surface, dest_surface, wrapped_bounds);
+		effect.Render (surface, dest_surface, bounds);
 	}
 
 	[Benchmark]
 	public void BlackAndWhiteEffect ()
 	{
 		var effect = new BlackAndWhiteEffect ();
-		effect.Render (surface, dest_surface, wrapped_bounds);
+		effect.Render (surface, dest_surface, bounds);
 	}
 
 	[Benchmark]
 	public void BrightnessContrastEffect ()
 	{
 		var effect = new BrightnessContrastEffect ();
-		effect.Render (surface, dest_surface, wrapped_bounds);
+		effect.Render (surface, dest_surface, bounds);
 	}
 
 	[Benchmark]
@@ -56,41 +56,41 @@ public sealed class AdjustmentsBenchmarks
 		(effect.EffectData as CurvesData)!.ControlPoints = new[] { points };
 		(effect.EffectData as CurvesData)!.Mode = ColorTransferMode.Luminosity;
 
-		effect.Render (surface, dest_surface, wrapped_bounds);
+		effect.Render (surface, dest_surface, bounds);
 	}
 
 	[Benchmark]
 	public void HueSaturationEffect ()
 	{
 		var effect = new HueSaturationEffect ();
-		effect.Render (surface, dest_surface, wrapped_bounds);
+		effect.Render (surface, dest_surface, bounds);
 	}
 
 	[Benchmark]
 	public void InvertColorsEffect ()
 	{
 		var effect = new InvertColorsEffect ();
-		effect.Render (surface, dest_surface, wrapped_bounds);
+		effect.Render (surface, dest_surface, bounds);
 	}
 
 	[Benchmark]
 	public void LevelsEffect ()
 	{
 		var effect = new LevelsEffect ();
-		effect.Render (surface, dest_surface, wrapped_bounds);
+		effect.Render (surface, dest_surface, bounds);
 	}
 
 	[Benchmark]
 	public void PosterizeEffect ()
 	{
 		var effect = new PosterizeEffect ();
-		effect.Render (surface, dest_surface, wrapped_bounds);
+		effect.Render (surface, dest_surface, bounds);
 	}
 
 	[Benchmark]
 	public void SepiaEffect ()
 	{
 		var effect = new SepiaEffect ();
-		effect.Render (surface, dest_surface, wrapped_bounds);
+		effect.Render (surface, dest_surface, bounds);
 	}
 }
