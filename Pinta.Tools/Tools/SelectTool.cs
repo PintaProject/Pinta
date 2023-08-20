@@ -26,7 +26,6 @@
 
 using System;
 using System.Collections.Generic;
-using System.Collections.ObjectModel;
 using System.Linq;
 using Gdk;
 using Gtk;
@@ -78,10 +77,6 @@ public abstract class SelectTool : BaseTool
 		internal MoveHandle ResizeE { get; } = new MoveHandle { CursorName = Pinta.Resources.StandardCursors.ResizeE };
 		internal MoveHandle ResizeS { get; } = new MoveHandle { CursorName = Pinta.Resources.StandardCursors.ResizeS };
 
-		internal ReadOnlyCollection<MoveHandle> Collection { get; }
-
-		internal MoveHandleBundle () => Collection = Enumerate ().ToReadOnlyCollection ();
-
 		internal IEnumerable<MoveHandle> Enumerate ()
 		{
 			yield return ResizeNW;
@@ -92,6 +87,22 @@ public abstract class SelectTool : BaseTool
 			yield return ResizeN;
 			yield return ResizeE;
 			yield return ResizeS;
+		}
+
+		/// <returns>
+		/// The type of handle represented by the argument
+		/// </returns>
+		internal HandleType DetermineType (MoveHandle handle)
+		{
+			if (ReferenceEquals (handle, ResizeNW)) return HandleType.ResizeNW;
+			if (ReferenceEquals (handle, ResizeSW)) return HandleType.ResizeSW;
+			if (ReferenceEquals (handle, ResizeNE)) return HandleType.ResizeNE;
+			if (ReferenceEquals (handle, ResizeSE)) return HandleType.ResizeSE;
+			if (ReferenceEquals (handle, ResizeW)) return HandleType.ResizeW;
+			if (ReferenceEquals (handle, ResizeN)) return HandleType.ResizeN;
+			if (ReferenceEquals (handle, ResizeE)) return HandleType.ResizeE;
+			if (ReferenceEquals (handle, ResizeS)) return HandleType.ResizeS;
+			throw new ArgumentException ("Handle not found in bundle", nameof (handle));
 		}
 	}
 
@@ -369,11 +380,8 @@ public abstract class SelectTool : BaseTool
 	private HandleType? FindHandleIndexUnderPoint (PointD window_point)
 	{
 		var handle = FindHandleUnderPoint (window_point);
-		if (handle is not null) {
-			return (HandleType) handles.Collection.IndexOf (handle); // TODO: Don't rely on index
-		} else {
-			return null;
-		}
+		if (handle is null) return null;
+		return handles.DetermineType (handle);
 	}
 
 	private void UpdateCursor (Document document, PointD window_point)
