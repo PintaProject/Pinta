@@ -30,7 +30,7 @@ using Pinta.Core;
 
 namespace Pinta.Tools;
 
-public class Arrow
+public sealed class Arrow
 {
 	public bool Show = false;
 	public double ArrowSize = 10d, AngleOffset = 15d, LengthOffset = 10d;
@@ -79,19 +79,18 @@ public class Arrow
 		}
 
 		//Calculate the points of the arrow.
-		PointD[] arrowPoints =
-						{
-							endPoint,
-							new PointD(
-								endPoint.X + Math.Cos((endingAngle + 270 + AngleOffset) * RadiansToDegrees) * ArrowSize,
-								endPoint.Y + Math.Sin((endingAngle + 270 + AngleOffset) * RadiansToDegrees) * ArrowSize * -1d),
-							new PointD(
-								endPoint.X + Math.Cos((endingAngle + 180) * RadiansToDegrees) * (ArrowSize + LengthOffset),
-								endPoint.Y + Math.Sin((endingAngle + 180) * RadiansToDegrees) * (ArrowSize + LengthOffset) * -1d),
-							new PointD(
-								endPoint.X + Math.Cos((endingAngle + 90 - AngleOffset) * RadiansToDegrees) * ArrowSize,
-								endPoint.Y + Math.Sin((endingAngle + 90 - AngleOffset) * RadiansToDegrees) * ArrowSize * -1d)
-						};
+		ReadOnlySpan<PointD> arrowPoints = stackalloc[] {
+			endPoint,
+			new PointD (
+				endPoint.X + Math.Cos ((endingAngle + 270 + AngleOffset) * RadiansToDegrees) * ArrowSize,
+				endPoint.Y + Math.Sin ((endingAngle + 270 + AngleOffset) * RadiansToDegrees) * ArrowSize * -1d),
+			new PointD (
+				endPoint.X + Math.Cos ((endingAngle + 180) * RadiansToDegrees) * (ArrowSize + LengthOffset),
+				endPoint.Y + Math.Sin ((endingAngle + 180) * RadiansToDegrees) * (ArrowSize + LengthOffset) * -1d),
+			new PointD (
+				endPoint.X + Math.Cos ((endingAngle + 90 - AngleOffset) * RadiansToDegrees) * ArrowSize,
+				endPoint.Y + Math.Sin ((endingAngle + 90 - AngleOffset) * RadiansToDegrees) * ArrowSize * -1d),
+		};
 
 		//Draw the arrow.
 		g.FillPolygonal (arrowPoints, outlineColor);
