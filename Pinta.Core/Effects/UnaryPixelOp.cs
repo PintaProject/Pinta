@@ -46,7 +46,7 @@ public abstract class UnaryPixelOp : PixelOp
 		}
 	}
 
-	public void Apply (ImageSurface surface, RectangleI[] roi, int startIndex, int length)
+	public void Apply (ImageSurface surface, ReadOnlySpan<RectangleI> roi, int startIndex, int length)
 	{
 		RectangleI regionBounds = Utility.GetRegionBounds (roi, startIndex, length);
 
@@ -57,7 +57,7 @@ public abstract class UnaryPixelOp : PixelOp
 			ApplyRectangle (surface, roi[x]);
 	}
 
-	public void Apply (ImageSurface surface, RectangleI[] roi)
+	public void Apply (ImageSurface surface, ReadOnlySpan<RectangleI> roi)
 	{
 		Apply (surface, roi, 0, roi.Length);
 	}
@@ -80,7 +80,7 @@ public abstract class UnaryPixelOp : PixelOp
 		}
 	}
 
-	public void Apply (ImageSurface dst, ImageSurface src, RectangleI[] rois)
+	public void Apply (ImageSurface dst, ImageSurface src, ReadOnlySpan<RectangleI> rois)
 	{
 		foreach (RectangleI roi in rois)
 			Apply (dst, src, roi);

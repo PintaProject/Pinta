@@ -39,7 +39,7 @@ public sealed class FrostedGlassEffect : BaseEffect
 	}
 
 	#region Algorithm Code Ported From PDN
-	public override void Render (ImageSurface src, ImageSurface dst, Core.RectangleI[] rois)
+	public override void Render (ImageSurface src, ImageSurface dst, ReadOnlySpan<RectangleI> rois)
 	{
 		int width = src.Width;
 		int height = src.Height;

@@ -54,7 +54,7 @@ public sealed class GaussianBlurEffect : BaseEffect
 		return weights.MoveToImmutable ();
 	}
 
-	public override void Render (ImageSurface src, ImageSurface dest, Core.RectangleI[] rois)
+	public override void Render (ImageSurface src, ImageSurface dest, ReadOnlySpan<RectangleI> rois)
 	{
 		if (Data.Radius == 0) {
 			// Copy src to dest

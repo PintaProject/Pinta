@@ -7,6 +7,7 @@
 // Ported to Pinta by: Jonathan Pobst <monkey@jpobst.com>                      //
 /////////////////////////////////////////////////////////////////////////////////
 
+using System;
 using Cairo;
 using Pinta.Core;
 
@@ -22,7 +23,7 @@ public sealed class InvertColorsEffect : BaseEffect
 
 	public override string AdjustmentMenuKey => "I";
 
-	public override void Render (ImageSurface src, ImageSurface dest, Core.RectangleI[] rois)
+	public override void Render (ImageSurface src, ImageSurface dest, ReadOnlySpan<RectangleI> rois)
 	{
 		op.Apply (dest, src, rois);
 	}

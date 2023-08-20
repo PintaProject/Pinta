@@ -114,7 +114,7 @@ public abstract class BaseEffect
 	/// <param name="src">The source surface. DO NOT MODIFY.</param>
 	/// <param name="dst">The destination surface.</param>
 	/// <param name="rois">An array of rectangles of interest (roi) specifying the area(s) to modify. Only these areas should be modified.</param>
-	public virtual void Render (ImageSurface src, ImageSurface dst, RectangleI[] rois)
+	public virtual void Render (ImageSurface src, ImageSurface dst, ReadOnlySpan<RectangleI> rois)
 	{
 		foreach (var rect in rois)
 			Render (src, dst, rect);

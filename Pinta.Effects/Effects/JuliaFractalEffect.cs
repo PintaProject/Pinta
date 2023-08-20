@@ -55,7 +55,7 @@ public sealed class JuliaFractalEffect : BaseEffect
 		return c;
 	}
 
-	public override void Render (ImageSurface src, ImageSurface dst, Core.RectangleI[] rois)
+	public override void Render (ImageSurface src, ImageSurface dst, ReadOnlySpan<RectangleI> rois)
 	{
 		const double jr = 0.3125;
 		const double ji = 0.03;

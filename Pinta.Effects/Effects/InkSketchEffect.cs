@@ -7,6 +7,7 @@
 // Ported to Pinta by: Jonathan Pobst <monkey@jpobst.com>                      //
 /////////////////////////////////////////////////////////////////////////////////
 
+using System;
 using Cairo;
 using Pinta.Core;
 using Pinta.Gui.Widgets;
@@ -62,7 +63,7 @@ public sealed class InkSketchEffect : BaseEffect
 	}
 
 	#region Algorithm Code Ported From PDN
-	public override void Render (ImageSurface src, ImageSurface dest, Core.RectangleI[] rois)
+	public override void Render (ImageSurface src, ImageSurface dest, ReadOnlySpan<RectangleI> rois)
 	{
 		// Glow background 
 		glow_effect.Data.Radius = 6;

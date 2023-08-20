@@ -37,7 +37,7 @@ public sealed class OilPaintingEffect : BaseEffect
 	}
 
 	#region Algorithm Code Ported From PDN
-	public override void Render (ImageSurface src, ImageSurface dest, RectangleI[] rois)
+	public override void Render (ImageSurface src, ImageSurface dest, ReadOnlySpan<RectangleI> rois)
 	{
 		int width = src.Width;
 		int height = src.Height;

@@ -37,7 +37,7 @@ public sealed class MotionBlurEffect : BaseEffect
 	}
 
 	#region Algorithm Code Ported From PDN
-	public override void Render (ImageSurface src, ImageSurface dst, Core.RectangleI[] rois)
+	public override void Render (ImageSurface src, ImageSurface dst, ReadOnlySpan<RectangleI> rois)
 	{
 		PointD start = new PointD (0, 0);
 		double theta = ((double) (Data.Angle + 180) * 2 * Math.PI) / 360.0;
