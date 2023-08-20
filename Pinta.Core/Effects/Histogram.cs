@@ -6,6 +6,7 @@
 /////////////////////////////////////////////////////////////////////////////////
 
 using System;
+using System.Collections.Immutable;
 using Cairo;
 
 namespace Pinta.Core;
@@ -35,8 +36,13 @@ public abstract class Histogram
 
 	public int Entries => this.histogram[0].Length;
 
-	protected internal Histogram (int channels, int entries)
+	protected internal Histogram (int channels, int entries, ImmutableArray<ColorBgra> visualColors)
 	{
+		if (visualColors.IsDefault)
+			throw new ArgumentException ("Not initialized", nameof (visualColors));
+
+		this.visual_colors = visualColors;
+
 		this.histogram = new long[channels][];
 
 		for (int channel = 0; channel < channels; ++channel) {
@@ -52,10 +58,10 @@ public abstract class Histogram
 		}
 	}
 
-	protected ColorBgra[] visualColors = null!; // NRT - Set by constructor of only subclass
+	protected readonly ImmutableArray<ColorBgra> visual_colors;
 	public ColorBgra GetVisualColor (int channel)
 	{
-		return visualColors[channel];
+		return visual_colors[channel];
 	}
 
 	public long GetOccurrences (int channel, int val)

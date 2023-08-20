@@ -6,6 +6,7 @@
 /////////////////////////////////////////////////////////////////////////////////
 
 using System;
+using System.Collections.Immutable;
 using Cairo;
 
 namespace Pinta.Core;
@@ -15,18 +16,14 @@ namespace Pinta.Core;
 /// if desired). This can then be used to retrieve percentile, average, peak,
 /// and distribution information.
 /// </summary>
-public sealed class HistogramRgb
-    : Histogram
+public sealed class HistogramRgb : Histogram
 {
-	public HistogramRgb ()
-	    : base (3, 256)
+	public HistogramRgb () : base (3, 256, rgb_visual_colors)
 	{
-		visualColors = new ColorBgra[]{
-				      ColorBgra.Blue,
-				      ColorBgra.Green,
-				      ColorBgra.Red
-				  };
 	}
+
+	private static ImmutableArray<ColorBgra> CreateVisualColors () => ImmutableArray.CreateRange (new[] { ColorBgra.Blue, ColorBgra.Green, ColorBgra.Red });
+	private static readonly ImmutableArray<ColorBgra> rgb_visual_colors = CreateVisualColors ();
 
 	public override ColorBgra GetMeanColor ()
 	{
