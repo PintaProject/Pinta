@@ -48,7 +48,7 @@ public sealed class RadialBlurEffect : BaseEffect
 		fy = cy + ((cx >> 8) * fr >> 8) - ((cy >> 14) * (fr * fr >> 11) >> 8);
 	}
 
-	public override void Render (ImageSurface src, ImageSurface dst, Core.RectangleI[] rois)
+	public override void Render (ImageSurface src, ImageSurface dst, ReadOnlySpan<RectangleI> rois)
 	{
 		if (Data.Angle == 0) {
 			// Copy src to dest

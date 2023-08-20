@@ -70,7 +70,7 @@ public sealed class ReduceNoiseEffect : LocalHistogramEffect
 		return ColorBgra.FromBgr ((byte) bc, (byte) gc, (byte) rc);
 	}
 
-	public override void Render (ImageSurface src, ImageSurface dest, Core.RectangleI[] rois)
+	public override void Render (ImageSurface src, ImageSurface dest, ReadOnlySpan<RectangleI> rois)
 	{
 		this.radius = Data.Radius;
 		this.strength = -0.2 * Data.Strength;

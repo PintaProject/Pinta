@@ -103,7 +103,7 @@ public sealed class AddNoiseEffect : BaseEffect
 		return result.ToImmutable ();
 	}
 
-	public override void Render (ImageSurface src, ImageSurface dst, Core.RectangleI[] rois)
+	public override void Render (ImageSurface src, ImageSurface dst, ReadOnlySpan<RectangleI> rois)
 	{
 		this.intensity = Data.Intensity;
 		this.color_saturation = Data.ColorSaturation;

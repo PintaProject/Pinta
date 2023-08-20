@@ -7,6 +7,7 @@
 // Ported to Pinta by: Krzysztof Marecki <marecki.krzysztof@gmail.com>         //
 /////////////////////////////////////////////////////////////////////////////////
 
+using System;
 using Cairo;
 using Pinta.Core;
 
@@ -47,7 +48,7 @@ public sealed class PosterizeEffect : BaseEffect
 		dialog.Present ();
 	}
 
-	public override void Render (ImageSurface src, ImageSurface dest, Core.RectangleI[] rois)
+	public override void Render (ImageSurface src, ImageSurface dest, ReadOnlySpan<RectangleI> rois)
 	{
 		if (op == null)
 			op = new UnaryPixelOps.PosterizePixel (Data.Red, Data.Green, Data.Blue);

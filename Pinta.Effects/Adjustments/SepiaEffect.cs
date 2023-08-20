@@ -7,6 +7,7 @@
 // Ported to Pinta by: Jonathan Pobst <monkey@jpobst.com>                      //
 /////////////////////////////////////////////////////////////////////////////////
 
+using System;
 using Cairo;
 using Pinta.Core;
 
@@ -34,7 +35,7 @@ public sealed class SepiaEffect : BaseEffect
 			ColorBgra.White);
 	}
 
-	public override void Render (ImageSurface src, ImageSurface dest, Core.RectangleI[] rois)
+	public override void Render (ImageSurface src, ImageSurface dest, ReadOnlySpan<RectangleI> rois)
 	{
 		desat.Apply (dest, src, rois);
 		level.Apply (dest, dest, rois);

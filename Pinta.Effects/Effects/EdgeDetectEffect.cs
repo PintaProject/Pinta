@@ -36,7 +36,7 @@ public sealed class EdgeDetectEffect : ColorDifferenceEffect
 		EffectHelper.LaunchSimpleEffectDialog (this);
 	}
 
-	public override void Render (ImageSurface src, ImageSurface dest, Core.RectangleI[] rois)
+	public override void Render (ImageSurface src, ImageSurface dest, ReadOnlySpan<RectangleI> rois)
 	{
 		var weights = ComputeWeights ();
 		base.RenderColorDifferenceEffect (weights, src, dest, rois);

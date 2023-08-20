@@ -67,7 +67,7 @@ public sealed class PixelateEffect : BaseEffect
 	}
 
 
-	public override void Render (ImageSurface src, ImageSurface dest, Core.RectangleI[] rois)
+	public override void Render (ImageSurface src, ImageSurface dest, ReadOnlySpan<RectangleI> rois)
 	{
 		var cellSize = Data.CellSize;
 

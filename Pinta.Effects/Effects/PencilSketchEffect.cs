@@ -7,6 +7,7 @@
 // Ported to Pinta by: Jonathan Pobst <monkey@jpobst.com>                      //
 /////////////////////////////////////////////////////////////////////////////////
 
+using System;
 using Cairo;
 using Pinta.Core;
 using Pinta.Gui.Widgets;
@@ -48,7 +49,7 @@ public sealed class PencilSketchEffect : BaseEffect
 	}
 
 	#region Algorithm Code Ported From PDN
-	public override void Render (ImageSurface src, ImageSurface dest, Core.RectangleI[] rois)
+	public override void Render (ImageSurface src, ImageSurface dest, ReadOnlySpan<RectangleI> rois)
 	{
 		bac_adjustment.Data.Brightness = -Data.ColorRange;
 		bac_adjustment.Data.Contrast = -Data.ColorRange;
