@@ -58,7 +58,7 @@ public sealed class FragmentEffect : BaseEffect
 		return pointOffsets.MoveToImmutable ();
 	}
 
-	public override void Render (ImageSurface src, ImageSurface dst, Core.RectangleI[] rois)
+	public override void Render (ImageSurface src, ImageSurface dst, ReadOnlySpan<RectangleI> rois)
 	{
 		var pointOffsets = RecalcPointOffsets (Data.Fragments, Data.Rotation, Data.Distance);
 

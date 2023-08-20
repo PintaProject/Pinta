@@ -39,7 +39,7 @@ public sealed class UnfocusEffect : LocalHistogramEffect
 	}
 
 	#region Algorithm Code Ported From PDN
-	public override void Render (ImageSurface src, ImageSurface dest, Core.RectangleI[] rois)
+	public override void Render (ImageSurface src, ImageSurface dest, ReadOnlySpan<RectangleI> rois)
 	{
 		this.radius = Data.Radius;
 

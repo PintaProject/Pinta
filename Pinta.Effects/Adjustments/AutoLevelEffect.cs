@@ -7,6 +7,7 @@
 // Ported to Pinta by: Jonathan Pobst <monkey@jpobst.com>                      //
 /////////////////////////////////////////////////////////////////////////////////
 
+using System;
 using Cairo;
 using Pinta.Core;
 
@@ -22,7 +23,7 @@ public sealed class AutoLevelEffect : BaseEffect
 
 	public override string AdjustmentMenuKey => "L";
 
-	public override void Render (ImageSurface src, ImageSurface dest, RectangleI[] rois)
+	public override void Render (ImageSurface src, ImageSurface dest, ReadOnlySpan<RectangleI> rois)
 	{
 		if (op == null) {
 			HistogramRgb histogram = new HistogramRgb ();

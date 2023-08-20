@@ -72,7 +72,7 @@ public sealed class SoftenPortraitEffect : BaseEffect
 		EffectHelper.LaunchSimpleEffectDialog (this);
 	}
 
-	public override void Render (ImageSurface src, ImageSurface dest, Core.RectangleI[] rois)
+	public override void Render (ImageSurface src, ImageSurface dest, ReadOnlySpan<RectangleI> rois)
 	{
 		int warmth = Data.Warmth;
 		float redAdjust = 1.0f + (warmth / 100.0f);

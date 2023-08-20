@@ -117,7 +117,7 @@ public sealed class OutlineEffect : LocalHistogramEffect
 		    (byte) (a2));
 	}
 
-	public override void Render (ImageSurface src, ImageSurface dest, Core.RectangleI[] rois)
+	public override void Render (ImageSurface src, ImageSurface dest, ReadOnlySpan<RectangleI> rois)
 	{
 		this.thickness = Data.Thickness;
 		this.intensity = Data.Intensity;

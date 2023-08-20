@@ -37,7 +37,7 @@ public sealed class TwistEffect : BaseEffect
 	}
 
 	#region Algorithm Code Ported From PDN
-	public override void Render (ImageSurface src, ImageSurface dst, Core.RectangleI[] rois)
+	public override void Render (ImageSurface src, ImageSurface dst, ReadOnlySpan<RectangleI> rois)
 	{
 		float twist = Data.Amount;
 

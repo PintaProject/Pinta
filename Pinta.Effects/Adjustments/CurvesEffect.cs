@@ -7,6 +7,7 @@
 // Ported to Pinta by: Krzysztof Marecki <marecki.krzysztof@gmail.com>         //
 /////////////////////////////////////////////////////////////////////////////////
 
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using Cairo;
@@ -48,7 +49,7 @@ public sealed class CurvesEffect : BaseEffect
 		dialog.Present ();
 	}
 
-	public override void Render (ImageSurface src, ImageSurface dest, Core.RectangleI[] rois)
+	public override void Render (ImageSurface src, ImageSurface dest, ReadOnlySpan<RectangleI> rois)
 	{
 		if (Data.ControlPoints == null)
 			return;

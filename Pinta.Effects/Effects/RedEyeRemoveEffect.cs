@@ -7,6 +7,7 @@
 // Ported to Pinta by: Krzysztof Marecki <marecki.krzysztof@gmail.com>         //
 /////////////////////////////////////////////////////////////////////////////////
 
+using System;
 using Cairo;
 using Pinta.Core;
 using Pinta.Gui.Widgets;
@@ -35,7 +36,7 @@ public sealed class RedEyeRemoveEffect : BaseEffect
 		EffectHelper.LaunchSimpleEffectDialog (this);
 	}
 
-	public override void Render (ImageSurface src, ImageSurface dest, Core.RectangleI[] rois)
+	public override void Render (ImageSurface src, ImageSurface dest, ReadOnlySpan<RectangleI> rois)
 	{
 		var op = new UnaryPixelOps.RedEyeRemove (Data.Tolerance, Data.Saturation);
 		op.Apply (dest, src, rois);

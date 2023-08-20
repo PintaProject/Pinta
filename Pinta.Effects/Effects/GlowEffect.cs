@@ -7,6 +7,7 @@
 // Ported to Pinta by: Jonathan Pobst <monkey@jpobst.com>                      //
 /////////////////////////////////////////////////////////////////////////////////
 
+using System;
 using Cairo;
 using Pinta.Core;
 using Pinta.Gui.Widgets;
@@ -44,7 +45,7 @@ public sealed class GlowEffect : BaseEffect
 	}
 
 	#region Algorithm Code Ported From PDN
-	public override void Render (ImageSurface src, ImageSurface dest, Core.RectangleI[] rois)
+	public override void Render (ImageSurface src, ImageSurface dest, ReadOnlySpan<RectangleI> rois)
 	{
 		blur_effect.Data.Radius = Data.Radius;
 		blur_effect.Render (src, dest, rois);

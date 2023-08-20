@@ -54,7 +54,7 @@ public abstract class WarpEffect : BaseEffect
 	protected double DefaultRadius2 => this.default_radius_2;
 
 	#region Algorithm Code Ported From PDN
-	public override void Render (ImageSurface src, ImageSurface dst, Core.RectangleI[] rois)
+	public override void Render (ImageSurface src, ImageSurface dst, ReadOnlySpan<RectangleI> rois)
 	{
 		var selection = PintaCore.LivePreview.RenderBounds;
 		this.default_radius = Math.Min (selection.Width, selection.Height) * 0.5;

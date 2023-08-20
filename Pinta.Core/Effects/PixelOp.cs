@@ -25,11 +25,10 @@ public abstract class PixelOp //: IPixelOp
 		return (byte) (((la * (256 - (ra + (ra >> 7)))) >> 8) + ra);
 	}
 
-	public void Apply (ImageSurface dst, ImageSurface src, RectangleI[] rois, int startIndex, int length)
+	public void Apply (ImageSurface dst, ImageSurface src, ReadOnlySpan<RectangleI> rois, int startIndex, int length)
 	{
-		for (int i = startIndex; i < startIndex + length; ++i) {
+		for (int i = startIndex; i < startIndex + length; ++i)
 			ApplyBase (dst, rois[i].Location, src, rois[i].Location, rois[i].Size);
-		}
 	}
 
 	public void Apply (ImageSurface dst, PointI dstOffset, ImageSurface src, PointI srcOffset, Size roiSize)

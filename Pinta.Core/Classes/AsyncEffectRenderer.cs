@@ -250,7 +250,7 @@ internal abstract class AsyncEffectRenderer
 			// NRT - These are set in Start () before getting here
 			if (!cancel_render_flag) {
 				dest_surface!.Flush ();
-				effect!.Render (source_surface!, dest_surface, new[] { bounds });
+				effect!.Render (source_surface!, dest_surface, stackalloc[] { bounds });
 				dest_surface.MarkDirty (bounds);
 			}
 

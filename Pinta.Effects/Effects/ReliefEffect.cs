@@ -36,7 +36,7 @@ public sealed class ReliefEffect : ColorDifferenceEffect
 	public override string Name => Translations.GetString ("Relief");
 
 	#region Algorithm Code Ported From PDN
-	public override void Render (Cairo.ImageSurface src, Cairo.ImageSurface dst, Core.RectangleI[] rois)
+	public override void Render (Cairo.ImageSurface src, Cairo.ImageSurface dst, ReadOnlySpan<RectangleI> rois)
 	{
 		var weights = ComputeWeights ();
 		base.RenderColorDifferenceEffect (weights, src, dst, rois);

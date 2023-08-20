@@ -7,6 +7,7 @@
 // Ported to Pinta by: Krzysztof Marecki <marecki.krzysztof@gmail.com>         //
 /////////////////////////////////////////////////////////////////////////////////
 
+using System;
 using Cairo;
 using Pinta.Core;
 using Pinta.Gui.Widgets;
@@ -33,7 +34,7 @@ public sealed class HueSaturationEffect : BaseEffect
 		EffectHelper.LaunchSimpleEffectDialog (this);
 	}
 
-	public override void Render (ImageSurface src, ImageSurface dest, Core.RectangleI[] rois)
+	public override void Render (ImageSurface src, ImageSurface dest, ReadOnlySpan<RectangleI> rois)
 	{
 		int hue_delta = Data.Hue;
 		int sat_delta = Data.Saturation;

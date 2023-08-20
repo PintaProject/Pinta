@@ -66,7 +66,7 @@ public sealed class MandelbrotFractalEffect : BaseEffect
 		return c - Math.Log (y * y + x * x) * inv_log_max;
 	}
 
-	public override void Render (ImageSurface src, ImageSurface dst, Core.RectangleI[] rois)
+	public override void Render (ImageSurface src, ImageSurface dst, ReadOnlySpan<RectangleI> rois)
 	{
 		int w = dst.Width;
 		int h = dst.Height;
