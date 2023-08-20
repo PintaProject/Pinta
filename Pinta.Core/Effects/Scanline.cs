@@ -30,12 +30,8 @@ public readonly struct Scanline
 
 	public override readonly bool Equals (object? obj)
 	{
-		if (obj is Scanline) {
-			Scanline rhs = (Scanline) obj;
-			return x == rhs.x && y == rhs.y && length == rhs.length;
-		} else {
-			return false;
-		}
+		if (obj is not Scanline rhs) return false;
+		return x == rhs.x && y == rhs.y && length == rhs.length;
 	}
 
 	public static bool operator == (Scanline lhs, Scanline rhs)
@@ -50,7 +46,7 @@ public readonly struct Scanline
 
 	public override readonly string ToString ()
 	{
-		return "(" + x + "," + y + "):[" + length.ToString () + "]";
+		return $"({x},{y}):[{length}]";
 	}
 
 	public Scanline (int x, int y, int length)
