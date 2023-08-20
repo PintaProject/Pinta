@@ -7,7 +7,6 @@
 
 using System;
 using System.Collections.Immutable;
-using Adw;
 using Cairo;
 
 namespace Pinta.Core;
