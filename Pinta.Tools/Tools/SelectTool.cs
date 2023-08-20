@@ -26,6 +26,7 @@
 
 using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Linq;
 using Gdk;
 using Gtk;
@@ -46,28 +47,58 @@ public abstract class SelectTool : BaseTool
 	private SelectionHistoryItem? hist;
 	private CombineMode combine_mode;
 
-	private readonly MoveHandle[] handles = new MoveHandle[8];
-	private int? active_handle;
+	private readonly MoveHandleBundle handles = new ();
+	private HandleType? active_handle;
 	private string? active_cursor_name;
 
 	public override Gdk.Key ShortcutKey => Gdk.Key.S;
 	protected override bool ShowAntialiasingButton => false;
-	public override IEnumerable<MoveHandle> Handles => handles;
+	public override IEnumerable<MoveHandle> Handles => handles.Enumerate ();
+
+	private enum HandleType
+	{
+		ResizeNW = 0,
+		ResizeSW = 1,
+		ResizeNE = 2,
+		ResizeSE = 3,
+		ResizeW = 4,
+		ResizeN = 5,
+		ResizeE = 6,
+		ResizeS = 7,
+	}
+
+	private sealed class MoveHandleBundle
+	{
+		internal MoveHandle ResizeNW { get; } = new MoveHandle { CursorName = Pinta.Resources.StandardCursors.ResizeNW };
+		internal MoveHandle ResizeSW { get; } = new MoveHandle { CursorName = Pinta.Resources.StandardCursors.ResizeSW };
+		internal MoveHandle ResizeNE { get; } = new MoveHandle { CursorName = Pinta.Resources.StandardCursors.ResizeNE };
+		internal MoveHandle ResizeSE { get; } = new MoveHandle { CursorName = Pinta.Resources.StandardCursors.ResizeSE };
+		internal MoveHandle ResizeW { get; } = new MoveHandle { CursorName = Pinta.Resources.StandardCursors.ResizeW };
+		internal MoveHandle ResizeN { get; } = new MoveHandle { CursorName = Pinta.Resources.StandardCursors.ResizeN };
+		internal MoveHandle ResizeE { get; } = new MoveHandle { CursorName = Pinta.Resources.StandardCursors.ResizeE };
+		internal MoveHandle ResizeS { get; } = new MoveHandle { CursorName = Pinta.Resources.StandardCursors.ResizeS };
+
+		internal ReadOnlyCollection<MoveHandle> Collection { get; }
+
+		internal MoveHandleBundle () => Collection = Enumerate ().ToReadOnlyCollection ();
+
+		internal IEnumerable<MoveHandle> Enumerate ()
+		{
+			yield return ResizeNW;
+			yield return ResizeSW;
+			yield return ResizeNE;
+			yield return ResizeSE;
+			yield return ResizeW;
+			yield return ResizeN;
+			yield return ResizeE;
+			yield return ResizeS;
+		}
+	}
 
 	public SelectTool (IServiceManager services) : base (services)
 	{
 		tools = services.GetService<IToolService> ();
 		workspace = services.GetService<IWorkspaceService> ();
-
-		handles[0] = new MoveHandle { CursorName = Pinta.Resources.StandardCursors.ResizeNW };
-		handles[1] = new MoveHandle { CursorName = Pinta.Resources.StandardCursors.ResizeSW };
-		handles[2] = new MoveHandle { CursorName = Pinta.Resources.StandardCursors.ResizeNE };
-		handles[3] = new MoveHandle { CursorName = Pinta.Resources.StandardCursors.ResizeSE };
-		handles[4] = new MoveHandle { CursorName = Pinta.Resources.StandardCursors.ResizeW };
-		handles[5] = new MoveHandle { CursorName = Pinta.Resources.StandardCursors.ResizeN };
-		handles[6] = new MoveHandle { CursorName = Pinta.Resources.StandardCursors.ResizeE };
-		handles[7] = new MoveHandle { CursorName = Pinta.Resources.StandardCursors.ResizeS };
-
 		workspace.SelectionChanged += AfterSelectionChange;
 	}
 
@@ -103,7 +134,7 @@ public abstract class SelectTool : BaseTool
 			document.Selection.SelectionPolygons.Clear ();
 
 			// The bottom right corner should be selected.
-			active_handle = 3;
+			active_handle = HandleType.ResizeSE;
 		}
 
 		// Do a full redraw for modes that can wipe existing selections outside the rectangle being drawn.
@@ -202,10 +233,10 @@ public abstract class SelectTool : BaseTool
 		workspace.SelectionHandler.OnSaveSettings (settings);
 	}
 
-	private void OnHandleMoved (int handle, double x, double y, bool shift_pressed)
+	private void OnHandleMoved (HandleType handle, double x, double y, bool shift_pressed)
 	{
 		switch (handle) {
-			case 0:
+			case HandleType.ResizeNW:
 				shape_origin.X = x;
 				shape_origin.Y = y;
 				if (shift_pressed) {
@@ -215,7 +246,7 @@ public abstract class SelectTool : BaseTool
 						shape_origin.Y = shape_end.Y - shape_end.X + shape_origin.X;
 				}
 				break;
-			case 1:
+			case HandleType.ResizeSW:
 				shape_origin.X = x;
 				shape_end.Y = y;
 				if (shift_pressed) {
@@ -225,7 +256,7 @@ public abstract class SelectTool : BaseTool
 						shape_end.Y = shape_origin.Y + shape_end.X - shape_origin.X;
 				}
 				break;
-			case 2:
+			case HandleType.ResizeNE:
 				shape_end.X = x;
 				shape_origin.Y = y;
 				if (shift_pressed) {
@@ -235,7 +266,7 @@ public abstract class SelectTool : BaseTool
 						shape_origin.Y = shape_end.Y - shape_end.X + shape_origin.X;
 				}
 				break;
-			case 3:
+			case HandleType.ResizeSE:
 				shape_end.X = x;
 				shape_end.Y = y;
 				if (shift_pressed) {
@@ -245,7 +276,7 @@ public abstract class SelectTool : BaseTool
 						shape_end.Y = shape_origin.Y + shape_end.X - shape_origin.X;
 				}
 				break;
-			case 4:
+			case HandleType.ResizeW:
 				shape_origin.X = x;
 				if (shift_pressed) {
 					var d = shape_end.X - shape_origin.X;
@@ -253,7 +284,7 @@ public abstract class SelectTool : BaseTool
 					shape_end.Y = (shape_origin.Y + shape_end.Y + d) / 2;
 				}
 				break;
-			case 5:
+			case HandleType.ResizeN:
 				shape_origin.Y = y;
 				if (shift_pressed) {
 					var d = shape_end.Y - shape_origin.Y;
@@ -261,7 +292,7 @@ public abstract class SelectTool : BaseTool
 					shape_end.X = (shape_origin.X + shape_end.X + d) / 2;
 				}
 				break;
-			case 6:
+			case HandleType.ResizeE:
 				shape_end.X = x;
 				if (shift_pressed) {
 					var d = shape_end.X - shape_origin.X;
@@ -269,7 +300,7 @@ public abstract class SelectTool : BaseTool
 					shape_end.Y = (shape_origin.Y + shape_end.Y + d) / 2;
 				}
 				break;
-			case 7:
+			case HandleType.ResizeS:
 				shape_end.Y = y;
 				if (shift_pressed) {
 					var d = shape_end.Y - shape_origin.Y;
@@ -291,18 +322,18 @@ public abstract class SelectTool : BaseTool
 			if (PintaCore.Workspace.CanvasSize.IsEmpty)
 				return RectangleI.Zero;
 
-			return MoveHandle.UnionInvalidateRects (handles);
+			return MoveHandle.UnionInvalidateRects (handles.Enumerate ());
 		}
 
 		var dirty = ComputeHandleBounds ();
-		handles[0].CanvasPosition = new PointD (shape_origin.X, shape_origin.Y);
-		handles[1].CanvasPosition = new PointD (shape_origin.X, shape_end.Y);
-		handles[2].CanvasPosition = new PointD (shape_end.X, shape_origin.Y);
-		handles[3].CanvasPosition = new PointD (shape_end.X, shape_end.Y);
-		handles[4].CanvasPosition = new PointD (shape_origin.X, (shape_origin.Y + shape_end.Y) / 2);
-		handles[5].CanvasPosition = new PointD ((shape_origin.X + shape_end.X) / 2, shape_origin.Y);
-		handles[6].CanvasPosition = new PointD (shape_end.X, (shape_origin.Y + shape_end.Y) / 2);
-		handles[7].CanvasPosition = new PointD ((shape_origin.X + shape_end.X) / 2, shape_end.Y);
+		handles.ResizeNW.CanvasPosition = new PointD (shape_origin.X, shape_origin.Y);
+		handles.ResizeSW.CanvasPosition = new PointD (shape_origin.X, shape_end.Y);
+		handles.ResizeNE.CanvasPosition = new PointD (shape_end.X, shape_origin.Y);
+		handles.ResizeSE.CanvasPosition = new PointD (shape_end.X, shape_end.Y);
+		handles.ResizeW.CanvasPosition = new PointD (shape_origin.X, (shape_origin.Y + shape_end.Y) / 2);
+		handles.ResizeN.CanvasPosition = new PointD ((shape_origin.X + shape_end.X) / 2, shape_origin.Y);
+		handles.ResizeE.CanvasPosition = new PointD (shape_end.X, (shape_origin.Y + shape_end.Y) / 2);
+		handles.ResizeS.CanvasPosition = new PointD ((shape_origin.X + shape_end.X) / 2, shape_end.Y);
 		dirty = dirty.Union (ComputeHandleBounds ());
 
 		// Repaint at the old and new handle positions.
@@ -326,20 +357,20 @@ public abstract class SelectTool : BaseTool
 
 	private void ShowHandles (bool visible)
 	{
-		foreach (var handle in handles)
+		foreach (var handle in handles.Enumerate ())
 			handle.Active = visible;
 	}
 
 	private MoveHandle? FindHandleUnderPoint (PointD window_point)
 	{
-		return handles.FirstOrDefault (c => c.Active && c.ContainsPoint (window_point));
+		return handles.Enumerate ().FirstOrDefault (c => c.Active && c.ContainsPoint (window_point));
 	}
 
-	private int? FindHandleIndexUnderPoint (PointD window_point)
+	private HandleType? FindHandleIndexUnderPoint (PointD window_point)
 	{
 		var handle = FindHandleUnderPoint (window_point);
 		if (handle is not null) {
-			return Array.IndexOf (handles, handle);
+			return (HandleType) handles.Collection.IndexOf (handle); // TODO: Don't rely on index
 		} else {
 			return null;
 		}
