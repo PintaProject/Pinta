@@ -7,7 +7,7 @@ namespace PintaBenchmarks;
 
 [MemoryDiagnoser]
 [Config (typeof (MillisecondConfig))]
-public class EffectsBenchmarks
+public sealed class EffectsBenchmarks
 {
 	private readonly ImageSurface surface;
 	private readonly ImageSurface dest_surface;
