@@ -69,6 +69,7 @@ public sealed class CloudsEffect : BaseEffect
 		};
 #pragma warning restore format
 		var permuteLookup = ImmutableArray.CreateBuilder<int> (512);
+		permuteLookup.Count = 512;
 		for (int i = 0; i < 256; i++) {
 			permuteLookup[256 + i] = permutationTable[i];
 			permuteLookup[i] = permutationTable[i];
