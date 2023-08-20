@@ -705,7 +705,7 @@ namespace Pinta.Core
 			}
 		}
 
-		public static void TranslatePointsInPlace (this PointI[] points, int dx, int dy)
+		public static void TranslatePointsInPlace (this Span<PointI> points, int dx, int dy)
 		{
 			for (int i = 0; i < points.Length; ++i) {
 				points[i].X += dx;
@@ -729,7 +729,7 @@ namespace Pinta.Core
 			}
 		}
 
-		public static ImmutableArray<Scanline> GetScans (this PointI[] points)
+		public static ImmutableArray<Scanline> GetScans (this ReadOnlySpan<PointI> points)
 		{
 			int ymax = 0;
 
