@@ -26,6 +26,7 @@
 
 using System;
 using System.Collections.Generic;
+using System.Collections.Immutable;
 using System.Linq;
 using Cairo;
 using Pinta.Core;
@@ -227,14 +228,13 @@ public abstract class ShapeEngine
 	/// </summary>
 	public abstract void GeneratePoints (int brush_width);
 
-	public PointD[] GetActualPoints ()
+	public ImmutableArray<PointD> GetActualPoints ()
 	{
 		int n = GeneratedPoints.Length;
-		PointD[] points = new PointD[n];
-
+		var points = ImmutableArray.CreateBuilder<PointD> (n);
+		points.Count = n;
 		for (int i = 0; i < n; ++i)
 			points[i] = GeneratedPoints[i].Position;
-
-		return points;
+		return points.MoveToImmutable ();
 	}
 }

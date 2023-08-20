@@ -1123,17 +1123,17 @@ public abstract class BaseEditEngine
 				//Generate the points that make up the shape.
 				activeEngine.GeneratePoints (activeEngine.BrushWidth);
 
-				PointD[] points = activeEngine.GetActualPoints ();
+				var points = activeEngine.GetActualPoints ();
 
 				//Expand the invalidation rectangle as necessary.
 
 				if (FillShape) {
 					Color fill_color = StrokeShape ? activeEngine.FillColor : activeEngine.OutlineColor;
-					dirty = dirty.UnionRectangles (g.FillPolygonal (points, fill_color));
+					dirty = dirty.UnionRectangles (g.FillPolygonal (points.AsSpan (), fill_color));
 				}
 
 				if (StrokeShape) {
-					dirty = dirty.UnionRectangles (g.DrawPolygonal (points, activeEngine.OutlineColor));
+					dirty = dirty.UnionRectangles (g.DrawPolygonal (points.AsSpan (), activeEngine.OutlineColor));
 				}
 			}
 
