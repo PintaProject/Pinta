@@ -106,8 +106,5 @@ public abstract class PixelOp //: IPixelOp
 		       src.GetPixelData ().Slice (srcOffset.Y * src.Width + srcOffset.X, scanLength));
 	}
 
-	public virtual void Apply (Span<ColorBgra> dst, ReadOnlySpan<ColorBgra> src)
-	{
-		throw new System.NotImplementedException ("Derived class must implement Apply(Span<ColorBgra> dst, ReadOnlySpan<ColorBgra> src)");
-	}
+	public abstract void Apply (Span<ColorBgra> dst, ReadOnlySpan<ColorBgra> src);
 }
