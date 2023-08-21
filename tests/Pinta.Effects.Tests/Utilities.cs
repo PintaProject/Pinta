@@ -47,13 +47,19 @@ internal static class Utilities
 		Assert.AreEqual (0, diffs);
 	}
 
-	public static void TestEffect (BaseEffect effect, string result_image_name)
+	public static void TestEffect (BaseEffect effect, string result_image_name, string? save_image_name = null)
 	{
 		var source = Utilities.LoadImage ("input.png");
 		var result = CairoExtensions.CreateImageSurface (Format.Argb32, source.Width, source.Height);
 		var expected = LoadImage (result_image_name);
 
 		effect.Render (source, result, stackalloc[] { source.GetBounds () });
+
+		// For debugging, optionally save out the result to a file.
+		if (save_image_name != null) {
+			result.ToPixbuf ().Savev (save_image_name, "png",
+				System.Array.Empty<string> (), System.Array.Empty<string> ());
+		}
 
 		CompareImages (result, expected);
 	}
