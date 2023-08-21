@@ -45,9 +45,9 @@ public sealed class HueSaturationEffect : BaseEffect
 		op.Apply (dest, src, rois);
 	}
 
-	private HueSaturationData Data => (HueSaturationData) EffectData!;  // NRT - Set in constructor
+	public HueSaturationData Data => (HueSaturationData) EffectData!;  // NRT - Set in constructor
 
-	private class HueSaturationData : EffectData
+	public sealed class HueSaturationData : EffectData
 	{
 		[Caption ("Hue"), MinimumValue (-180), MaximumValue (180)]
 		public int Hue = 0;
