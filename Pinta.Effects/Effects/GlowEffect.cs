@@ -62,7 +62,7 @@ public sealed class GlowEffect : BaseEffect
 		foreach (Core.RectangleI roi in rois) {
 			for (int y = roi.Top; y <= roi.Bottom; ++y) {
 				var dst_row = dst_data.Slice (y * dst_width + roi.Left, roi.Width);
-				var src_row = dst_data.Slice (y * src_width + roi.Left, roi.Width);
+				var src_row = src_data.Slice (y * src_width + roi.Left, roi.Width);
 				screen_blend_op.Apply (dst_row, src_row, dst_row);
 			}
 		}
