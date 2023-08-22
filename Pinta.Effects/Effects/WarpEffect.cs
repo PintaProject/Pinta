@@ -77,8 +77,6 @@ public abstract class WarpEffect : BaseEffect
 		var src_data = src.GetReadOnlyPixelData ();
 		int src_width = src.Width;
 
-		TransformData td;
-
 		foreach (Core.RectangleI rect in rois) {
 
 			for (int y = rect.Top; y <= rect.Bottom; y++) {
@@ -92,10 +90,13 @@ public abstract class WarpEffect : BaseEffect
 					int sampleCount = 0;
 
 					for (int p = 0; p < aaSampleCount; ++p) {
-						td.X = relativeX + aaPoints[p].X;
-						td.Y = relativeY - aaPoints[p].Y;
 
-						InverseTransform (ref td);
+						TransformData initialTd = new (
+							X: relativeX + aaPoints[p].X,
+							Y: relativeY - aaPoints[p].Y
+						);
+
+						TransformData td = InverseTransform (initialTd);
 
 						float sampleX = (float) (td.X + x_center_offset);
 						float sampleY = (float) (td.Y + y_center_offset);
@@ -150,13 +151,9 @@ public abstract class WarpEffect : BaseEffect
 		}
 	}
 
-	protected abstract void InverseTransform (ref TransformData data);
+	protected abstract TransformData InverseTransform (TransformData data);
 
-	protected struct TransformData
-	{
-		public double X;
-		public double Y;
-	}
+	protected readonly record struct TransformData (double X, double Y);
 
 	private static bool IsOnSurface (ImageSurface src, float u, float v)
 	{
