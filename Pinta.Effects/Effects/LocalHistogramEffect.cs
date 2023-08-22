@@ -162,9 +162,9 @@ public abstract class LocalHistogramEffect : BaseEffect
 					if ((u * u + v * v) <= cutoff) {
 						++area;
 						++hb[psamp.B];
-						++hb[psamp.G];
-						++hb[psamp.R];
-						++hb[psamp.A];
+						++hg[psamp.G];
+						++hr[psamp.R];
+						++ha[psamp.A];
 					}
 				}
 			}
