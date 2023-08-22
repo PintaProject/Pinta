@@ -38,7 +38,7 @@ public sealed class JpegFormat : GdkPixbufFormat
 
 	//The default JPG compression quality to use when no saved setting is loaded. This will usually
 	//occur when Pinta is first run on a machine, although there are other possible cases as well.
-	private const int defaultQuality = 85;
+	private const int DefaultQuality = 85;
 
 	public JpegFormat ()
 		: base ("jpeg")
@@ -48,7 +48,7 @@ public sealed class JpegFormat : GdkPixbufFormat
 	protected override void DoSave (Pixbuf pb, Gio.File file, string fileType, Gtk.Window parent)
 	{
 		//Load the JPG compression quality, but use the default value if there is no saved value.
-		int level = PintaCore.Settings.GetSetting<int> (JpgCompressionQualitySetting, defaultQuality);
+		int level = PintaCore.Settings.GetSetting<int> (JpgCompressionQualitySetting, DefaultQuality);
 
 		//Check to see if the Document has been saved before.
 		if (!PintaCore.Workspace.ActiveDocument.HasBeenSavedInSession) {
