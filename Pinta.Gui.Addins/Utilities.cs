@@ -41,12 +41,7 @@ internal static class Utilities
 		return service.ApplicationNamespace == null || id.StartsWith (service.ApplicationNamespace + ".");
 	}
 
-	public struct MissingDepInfo
-	{
-		public string Addin;
-		public string Required;
-		public string Found;
-	}
+	public readonly record struct MissingDepInfo (string Addin, string Required, string Found);
 
 	public static IEnumerable<MissingDepInfo> GetMissingDependencies (Addin addin, bool roots_only = false)
 	{
@@ -58,7 +53,11 @@ internal static class Utilities
 			if (dep is AddinDependency adep) {
 				if (!allAddins.Any (a => Addin.GetIdName (a.Id) == Addin.GetIdName (adep.FullAddinId) && a.SupportsVersion (adep.Version))) {
 					Addin? found = allAddins.FirstOrDefault (a => Addin.GetIdName (a.Id) == Addin.GetIdName (adep.FullAddinId));
-					yield return new MissingDepInfo () { Addin = Addin.GetIdName (adep.FullAddinId), Required = adep.Version, Found = found?.Version ?? string.Empty };
+					yield return new MissingDepInfo (
+						Addin: Addin.GetIdName (adep.FullAddinId),
+						Required: adep.Version,
+						Found: found?.Version ?? string.Empty
+					);
 				}
 			}
 		}
