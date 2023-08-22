@@ -376,9 +376,9 @@ public struct ColorBgra
 	/// <param name="c">The array of color values.</param>
 	/// <param name="w">The array of weight values.</param>
 	/// <returns>
-	/// The weights should be fixed point numbers. 
+	/// The weights should be fixed point numbers.
 	/// The total summation of the weight values will be treated as "1.0".
-	/// Each color will be blended in proportionally to its weight value respective to 
+	/// Each color will be blended in proportionally to its weight value respective to
 	/// the total summation of the weight values.
 	/// </returns>
 	/// <remarks>
@@ -436,7 +436,7 @@ public struct ColorBgra
 	/// <param name="c">The array of color values.</param>
 	/// <param name="w">The array of weight values.</param>
 	/// <returns>
-	/// Each color will be blended in proportionally to its weight value respective to 
+	/// Each color will be blended in proportionally to its weight value respective to
 	/// the total summation of the weight values.
 	/// </returns>
 	/// <remarks>
@@ -491,49 +491,9 @@ public struct ColorBgra
 
 	/// <summary>
 	/// Smoothly blends the given colors together, assuming equal weighting for each one.
-	/// </summary>
-	public static ColorBgra Blend (ReadOnlySpan<ColorBgra> colors)
-	{
-		int count = colors.Length;
-		if (count == 0) {
-			return ColorBgra.Transparent;
-		}
-
-		ulong aSum = 0;
-
-		for (int i = 0; i < count; ++i) {
-			aSum += (ulong) colors[i].A;
-		}
-
-		byte b = 0;
-		byte g = 0;
-		byte r = 0;
-		byte a = (byte) (aSum / (ulong) count);
-
-		if (aSum != 0) {
-			ulong bSum = 0;
-			ulong gSum = 0;
-			ulong rSum = 0;
-
-			for (int i = 0; i < count; ++i) {
-				bSum += (ulong) (colors[i].A * colors[i].B);
-				gSum += (ulong) (colors[i].A * colors[i].G);
-				rSum += (ulong) (colors[i].A * colors[i].R);
-			}
-
-			b = (byte) (bSum / aSum);
-			g = (byte) (gSum / aSum);
-			r = (byte) (rSum / aSum);
-		}
-
-		return ColorBgra.FromBgra (b, g, r, a);
-	}
-
-	/// <summary>
-	/// Smoothly blends the given colors together, assuming equal weighting for each one.
 	/// It is assumed that pre-multiplied alpha is used.
 	/// </summary>
-	public static ColorBgra BlendPremultiplied (ReadOnlySpan<ColorBgra> colors)
+	public static ColorBgra Blend (ReadOnlySpan<ColorBgra> colors)
 	{
 		int count = colors.Length;
 		if (count == 0)
@@ -596,7 +556,7 @@ public struct ColorBgra
 	/// https://en.wikipedia.org/wiki/Alpha_compositing
 	/// http://cairographics.org/manual/cairo-Image-Surfaces.html#cairo-format-t
 	/// </summary>
-	/// <returns>A ColorBgra value in premultiplied alpha form</returns> 
+	/// <returns>A ColorBgra value in premultiplied alpha form</returns>
 	public readonly ColorBgra ToPremultipliedAlpha ()
 	{
 		return ColorBgra.FromBgra ((byte) (B * A / 255), (byte) (G * A / 255), (byte) (R * A / 255), A);
@@ -631,7 +591,7 @@ public struct ColorBgra
 	/// https://en.wikipedia.org/wiki/Alpha_compositing
 	/// http://cairographics.org/manual/cairo-Image-Surfaces.html#cairo-format-t
 	/// </summary>
-	/// <returns>A ColorBgra value in straight alpha form</returns> 
+	/// <returns>A ColorBgra value in straight alpha form</returns>
 	public readonly ColorBgra ToStraightAlpha ()
 	{
 		if (this.A > 0)
@@ -640,10 +600,10 @@ public struct ColorBgra
 			return ColorBgra.Zero;
 	}
 
-	//// Colors: copied from System.Drawing.Color's list (don't worry I didn't type it in 
+	//// Colors: copied from System.Drawing.Color's list (don't worry I didn't type it in
 	//// manually, I used a code generator w/ reflection ...)
 
-	public static ColorBgra Transparent => ColorBgra.FromBgra (255, 255, 255, 0);
+	public static ColorBgra Transparent => Zero; // Note pre-multiplied alpha is used.
 	public static ColorBgra Zero => (ColorBgra) 0;
 
 	public static ColorBgra Black => ColorBgra.FromBgra (0, 0, 0, 255);
