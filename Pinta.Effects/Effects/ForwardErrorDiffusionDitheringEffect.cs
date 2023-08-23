@@ -25,7 +25,7 @@ public sealed class ForwardErrorDiffusionDitheringEffect : BaseEffect
 	{
 		var src_data = src.GetReadOnlyPixelData ();
 		var src_copy = new ColorBgra[src_data.Length];
-		src_data.CopyTo (src_copy); // Assume this is a writable copy or original
+		src_data.CopyTo (src_copy);
 		var dst_data = dest.GetPixelData ();
 		foreach (var rect in rois) {
 			for (int y = 0; y < rect.Height - Data.DiffusionMatrix.RowsBelow; y++) {
