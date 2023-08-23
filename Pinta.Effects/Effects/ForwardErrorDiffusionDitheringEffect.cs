@@ -313,10 +313,10 @@ public sealed class ForwardErrorDiffusionDitheringEffect : BaseEffect
 
 		private static IEnumerable<ColorBgra> EnumerateWebSafeColorCube ()
 		{
-			for (byte r = 0; r <= 255; r += 51) {
-				for (byte g = 0; g <= 255; g += 51) {
-					for (byte b = 0; b <= 255; b += 51) {
-						yield return ColorBgra.FromBgr (b, g, r);
+			for (short r = 0; r <= 255; r += 51) {
+				for (short g = 0; g <= 255; g += 51) {
+					for (short b = 0; b <= 255; b += 51) {
+						yield return ColorBgra.FromBgr ((byte) b, (byte) g, (byte) r);
 					}
 				}
 			}
