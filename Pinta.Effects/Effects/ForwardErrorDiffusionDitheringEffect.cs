@@ -279,6 +279,7 @@ public sealed class ForwardErrorDiffusionDitheringEffect : BaseEffect
 	{
 		public static ImmutableArray<ColorBgra> OldWindows16 => old_windows_16.Value;
 		public static ImmutableArray<ColorBgra> WebSafe => web_safe.Value;
+		public static ImmutableArray<ColorBgra> BlackWhite { get; }
 
 		private static readonly Lazy<ImmutableArray<ColorBgra>> web_safe;
 		private static readonly Lazy<ImmutableArray<ColorBgra>> old_windows_16;
@@ -287,6 +288,7 @@ public sealed class ForwardErrorDiffusionDitheringEffect : BaseEffect
 		{
 			web_safe = new (() => EnumerateWebSafeColorCube ().ToImmutableArray ());
 			old_windows_16 = new (() => EnumerateOldWindowsColors ().ToImmutableArray ());
+			BlackWhite = ImmutableArray.CreateRange (new[] { ColorBgra.FromBgr (0, 0, 0), ColorBgra.FromBgr (255, 255, 255) });
 		}
 
 		private static IEnumerable<ColorBgra> EnumerateOldWindowsColors ()
