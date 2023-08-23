@@ -6,7 +6,7 @@ using Cairo;
 using Pinta.Core;
 using Pinta.Gui.Widgets;
 
-namespace Pinta.Effects.Effects;
+namespace Pinta.Effects;
 
 public sealed class ForwardErrorDiffusionDitheringEffect : BaseEffect
 {

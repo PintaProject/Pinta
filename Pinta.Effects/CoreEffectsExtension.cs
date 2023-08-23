@@ -26,7 +26,6 @@
 
 using Mono.Addins;
 using Pinta.Core;
-using Pinta.Effects.Effects;
 
 [assembly: Addin ("DefaultEffects", PintaCore.ApplicationVersion, Category = "Core")]
 [assembly: AddinName ("Default Effects")]
