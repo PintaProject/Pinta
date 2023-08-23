@@ -26,6 +26,7 @@
 
 using Mono.Addins;
 using Pinta.Core;
+using Pinta.Effects.Effects;
 
 [assembly: Addin ("DefaultEffects", PintaCore.ApplicationVersion, Category = "Core")]
 [assembly: AddinName ("Default Effects")]
@@ -81,6 +82,11 @@ internal sealed class CoreEffectsExtension : IExtension
 		PintaCore.Effects.RegisterEffect (new TwistEffect ());
 		PintaCore.Effects.RegisterEffect (new UnfocusEffect ());
 		PintaCore.Effects.RegisterEffect (new ZoomBlurEffect ());
+
+		// Effects under development
+#if DEBUG
+		PintaCore.Effects.RegisterEffect (new ForwardErrorDiffusionDitheringEffect ());
+#endif
 	}
 
 	public void Uninitialize ()
@@ -126,6 +132,11 @@ internal sealed class CoreEffectsExtension : IExtension
 		PintaCore.Effects.UnregisterInstanceOfEffect (typeof (TwistEffect));
 		PintaCore.Effects.UnregisterInstanceOfEffect (typeof (UnfocusEffect));
 		PintaCore.Effects.UnregisterInstanceOfEffect (typeof (ZoomBlurEffect));
+
+		// Effects under development
+#if DEBUG
+		PintaCore.Effects.UnregisterInstanceOfEffect (typeof (ForwardErrorDiffusionDitheringEffect));
+#endif
 	}
 	#endregion
 }
