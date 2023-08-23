@@ -62,12 +62,12 @@ public sealed class ForwardErrorDiffusionDitheringEffect : BaseEffect
 		}
 	}
 
-	private static ColorBgra AddError (ColorBgra color, double factor, int errorR, int errorG, int errorB)
+	private static ColorBgra AddError (ColorBgra color, double factor, int errorRed, int errorGreen, int errorBlue)
 	{
 		// This function will add the error to the color based on the provided factor
-		byte newR = (byte) Math.Clamp (color.R + (int) (factor * errorR), byte.MinValue, byte.MaxValue);
-		byte newG = (byte) Math.Clamp (color.G + (int) (factor * errorG), byte.MinValue, byte.MaxValue);
-		byte newB = (byte) Math.Clamp (color.B + (int) (factor * errorB), byte.MinValue, byte.MaxValue);
+		byte newR = (byte) Math.Clamp (color.R + (int) (factor * errorRed), byte.MinValue, byte.MaxValue);
+		byte newG = (byte) Math.Clamp (color.G + (int) (factor * errorGreen), byte.MinValue, byte.MaxValue);
+		byte newB = (byte) Math.Clamp (color.B + (int) (factor * errorBlue), byte.MinValue, byte.MaxValue);
 		return ColorBgra.FromBgra (newB, newG, newR, 255);
 	}
 
