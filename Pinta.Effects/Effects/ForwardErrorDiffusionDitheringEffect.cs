@@ -24,20 +24,20 @@ public sealed class ForwardErrorDiffusionDitheringEffect : BaseEffect
 	public override void Render (ImageSurface src, ImageSurface dest, ReadOnlySpan<RectangleI> rois)
 	{
 		var src_data = src.GetReadOnlyPixelData ();
-		var original_data = new ColorBgra[src_data.Length];
-		src_data.CopyTo (original_data); // Assume this is a writable copy or original
+		var src_copy = new ColorBgra[src_data.Length];
+		src_data.CopyTo (src_copy); // Assume this is a writable copy or original
 		var dst_data = dest.GetPixelData ();
 		foreach (var rect in rois) {
 			for (int y = 0; y < rect.Height - Data.DiffusionMatrix.RowsBelow; y++) {
 				for (int x = Data.DiffusionMatrix.ColumnsToLeft; x < rect.Width - Data.DiffusionMatrix.ColumnsToRight; x++) {
 					var currentIndex = y * src.Width + x;
-					var originalPixel = original_data[currentIndex];
+					var originalPixel = src_copy[currentIndex];
 					var closestColor = FindClosestPaletteColor (originalPixel);
 					dst_data[currentIndex] = closestColor;
 					int errorRed = originalPixel.R - closestColor.R;
 					int errorGreen = originalPixel.G - closestColor.G;
 					int errorBlue = originalPixel.B - closestColor.B;
-					DistributeError (original_data, x, y, errorRed, errorGreen, errorBlue, src.Width, src.Height);
+					DistributeError (src_copy, x, y, errorRed, errorGreen, errorBlue, src.Width, src.Height);
 				}
 			}
 		}
@@ -65,9 +65,9 @@ public sealed class ForwardErrorDiffusionDitheringEffect : BaseEffect
 	private static ColorBgra AddError (ColorBgra color, double factor, int errorRed, int errorGreen, int errorBlue)
 	{
 		// This function will add the error to the color based on the provided factor
-		byte newR = (byte) Math.Clamp (color.R + (int) (factor * errorRed), byte.MinValue, byte.MaxValue);
-		byte newG = (byte) Math.Clamp (color.G + (int) (factor * errorGreen), byte.MinValue, byte.MaxValue);
-		byte newB = (byte) Math.Clamp (color.B + (int) (factor * errorBlue), byte.MinValue, byte.MaxValue);
+		byte newR = Utility.ClampToByte (color.R + (int) (factor * errorRed));
+		byte newG = Utility.ClampToByte (color.G + (int) (factor * errorGreen));
+		byte newB = Utility.ClampToByte (color.B + (int) (factor * errorBlue));
 		return ColorBgra.FromBgra (newB, newG, newR, 255);
 	}
 
