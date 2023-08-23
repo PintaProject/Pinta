@@ -34,30 +34,30 @@ public sealed class ForwardErrorDiffusionDitheringEffect : BaseEffect
 					var originalPixel = original_data[currentIndex];
 					var closestColor = FindClosestPaletteColor (originalPixel);
 					dst_data[currentIndex] = closestColor;
-					int errorR = originalPixel.R - closestColor.R;
-					int errorG = originalPixel.G - closestColor.G;
-					int errorB = originalPixel.B - closestColor.B;
-					DistributeError (original_data, x, y, errorR, errorG, errorB, src.Width, src.Height);
+					int errorRed = originalPixel.R - closestColor.R;
+					int errorGreen = originalPixel.G - closestColor.G;
+					int errorBlue = originalPixel.B - closestColor.B;
+					DistributeError (original_data, x, y, errorRed, errorGreen, errorBlue, src.Width, src.Height);
 				}
 			}
 		}
 	}
 
-	private void DistributeError (Span<ColorBgra> original, int x, int y, int errorR, int errorG, int errorB, int sourceWidth, int sourceHeight)
+	private void DistributeError (Span<ColorBgra> original, int x, int y, int errorRed, int errorGreen, int errorBlue, int sourceWidth, int sourceHeight)
 	{
 		for (int r = 0; r < Data.DiffusionMatrix.Rows; r++) {
 			for (int c = 0; c < Data.DiffusionMatrix.Columns; c++) {
 				if (Data.DiffusionMatrix[r, c] is not WeightElement weight)
 					continue;
-				var thisY = y + r;
-				var thisX = x + c - Data.DiffusionMatrix.ColumnsToLeft;
-				if (thisX >= sourceWidth)
+				var this_y = y + r;
+				var this_x = x + c - Data.DiffusionMatrix.ColumnsToLeft;
+				if (this_x >= sourceWidth)
 					continue;
-				if (thisY >= sourceHeight)
+				if (this_y >= sourceHeight)
 					continue;
-				int idx = (thisY * sourceWidth) + thisX;
+				int idx = (this_y * sourceWidth) + this_x;
 				double factor = ((double) weight.Weight) / Data.DiffusionMatrix.TotalWeight;
-				original[idx] = AddError (original[idx], factor, errorR, errorG, errorB);
+				original[idx] = AddError (original[idx], factor, errorRed, errorGreen, errorBlue);
 			}
 		}
 	}
