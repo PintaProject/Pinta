@@ -74,17 +74,8 @@ public record struct PointD
 	public static explicit operator PointD (PointI p) => new (p.X, p.Y);
 }
 
-public record struct Size
+public readonly record struct Size (int Width, int Height)
 {
-	public Size (int width, int height)
-	{
-		Width = width;
-		Height = height;
-	}
-
-	public int Width;
-	public int Height;
-
 	public static readonly Size Empty;
 
 	public override readonly string ToString () => $"{Width}, {Height}";
