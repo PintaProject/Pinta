@@ -331,9 +331,98 @@ internal sealed class EffectsTest
 	}
 
 	[Test]
-	[Ignore ("Depends on PintaCore being initialized")]
-	public void WarpEffect ()
+	public void Sharpen1 ()
 	{
-		// TODO
+		var effect = new SharpenEffect ();
+		Utilities.TestEffect (effect, "sharpen1.png");
+	}
+
+	[Test]
+	public void Sharpen2 ()
+	{
+		var effect = new SharpenEffect ();
+		effect.Data.Amount = 16;
+		Utilities.TestEffect (effect, "sharpen2.png");
+	}
+
+	[Test]
+	public void SoftenPortrait1 ()
+	{
+		var effect = new SoftenPortraitEffect ();
+		Utilities.TestEffect (effect, "softenportrait1.png");
+	}
+
+	[Test]
+	public void SoftenPortrait2 ()
+	{
+		var effect = new SoftenPortraitEffect ();
+		effect.Data.Softness = 8;
+		effect.Data.Lighting = -10;
+		effect.Data.Warmth = 15;
+		Utilities.TestEffect (effect, "softenportrait2.png");
+	}
+
+	[Test]
+	public void Tile1 ()
+	{
+		var effect = new TileEffect ();
+		Utilities.TestEffect (effect, "tile1.png");
+	}
+
+	[Test]
+	public void Tile2 ()
+	{
+		var effect = new TileEffect ();
+		effect.Data.Rotation = 90;
+		effect.Data.TileSize = 32;
+		effect.Data.Intensity = 4;
+		Utilities.TestEffect (effect, "tile2.png");
+	}
+
+	[Test]
+	public void Twist1 ()
+	{
+		var effect = new TwistEffect ();
+		Utilities.TestEffect (effect, "twist1.png");
+	}
+
+	[Test]
+	public void Twist2 ()
+	{
+		var effect = new TwistEffect ();
+		effect.Data.Amount = -20;
+		effect.Data.Antialias = 4;
+		Utilities.TestEffect (effect, "twist2.png");
+	}
+
+	[Test]
+	public void Unfocus1 ()
+	{
+		var effect = new UnfocusEffect ();
+		Utilities.TestEffect (effect, "unfocus1.png");
+	}
+
+	[Test]
+	public void Unfocus2 ()
+	{
+		var effect = new UnfocusEffect ();
+		effect.Data.Radius = 50;
+		Utilities.TestEffect (effect, "unfocus2.png");
+	}
+
+	[Test]
+	public void ZoomBlur1 ()
+	{
+		var effect = new ZoomBlurEffect ();
+		Utilities.TestEffect (effect, "zoomblur1.png");
+	}
+
+	[Test]
+	public void ZoomBlur2 ()
+	{
+		var effect = new ZoomBlurEffect ();
+		effect.Data.Amount = 50;
+		effect.Data.Offset = new (10, 20);
+		Utilities.TestEffect (effect, "zoomblur2.png");
 	}
 }
