@@ -881,7 +881,7 @@ public class TextTool : BaseTool
 	private void RedrawText (bool showCursor, bool useTextLayer)
 	{
 		RectangleI r = CurrentTextLayout.GetLayoutBounds ();
-		r.Inflate (10 + OutlineWidth, 10 + OutlineWidth);
+		r = r.Inflated (10 + OutlineWidth, 10 + OutlineWidth);
 		InflateAndInvalidate (r);
 		CurrentTextBounds = r;
 
@@ -956,7 +956,7 @@ public class TextTool : BaseTool
 					color, 1);
 
 			cursorBounds = loc;
-			cursorBounds.Inflate (2, 10);
+			cursorBounds = cursorBounds.Inflated (2, 10);
 		}
 
 		g.Restore ();
@@ -1044,7 +1044,7 @@ public class TextTool : BaseTool
 		//Create a new instance to preserve the passed Rectangle.
 		var r = new RectangleI (passedRectangle.Location, passedRectangle.Size);
 
-		r.Inflate (2, 2);
+		r = r.Inflated (2, 2);
 		PintaCore.Workspace.Invalidate (r);
 	}
 	#endregion

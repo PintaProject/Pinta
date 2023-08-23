@@ -320,7 +320,7 @@ public abstract class SelectTool : BaseTool
 
 		// Figure out a bounding box for everything that was drawn, and add a bit of padding.
 		var dirty = rect.ToInt ();
-		dirty.Inflate (2, 2);
+		dirty = dirty.Inflated (2, 2);
 		return dirty;
 	}
 

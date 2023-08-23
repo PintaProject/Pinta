@@ -181,12 +181,13 @@ public record struct RectangleI
 		return FromLTRB (left, top, right, bottom);
 	}
 
-	public void Inflate (int width, int height)
+	public readonly RectangleI Inflated (int width, int height)
 	{
-		X -= width;
-		Y -= height;
-		Width += width * 2;
-		Height += height * 2;
+		var newX = X - width;
+		var newY = Y - height;
+		var newWidth = Width + (width * 2);
+		var newHeight = Height + (height * 2);
+		return new (newX, newY, newWidth, newHeight);
 	}
 }
 

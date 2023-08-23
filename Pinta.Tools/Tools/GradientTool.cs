@@ -141,7 +141,7 @@ public sealed class GradientTool : BaseTool
 		context.Operator = Operator.Source;
 		context.Paint ();
 
-		selection_bounds.Inflate (5, 5);
+		selection_bounds = selection_bounds.Inflated (5, 5);
 		document.Workspace.Invalidate (selection_bounds);
 	}
 

@@ -1073,7 +1073,7 @@ namespace Pinta.Core
 			var y2 = Math.Max (a.Y, b.Y);
 
 			var rect = new RectangleI (x1, y1, x2 - x1, y2 - y1);
-			rect.Inflate (inflate, inflate);
+			rect = rect.Inflated (inflate, inflate);
 
 			return rect;
 		}
