@@ -74,19 +74,13 @@ public record struct RectangleD
 	public readonly PointD Location () => new (X, Y);
 	public readonly PointD GetCenter () => new (X + 0.5 * Width, Y + 0.5 * Height);
 
-	public void Inflate (double width, double height)
-	{
-		X -= width;
-		Y -= height;
-		Width += width * 2;
-		Height += height * 2;
-	}
-
 	public readonly RectangleD Inflated (double width, double height)
 	{
-		RectangleD copy = this;
-		copy.Inflate (width, height);
-		return copy;
+		var newX = X - width;
+		var newY = Y - height;
+		var newWidth = Width + (width * 2);
+		var newHeight = Height + (height * 2);
+		return new (newX, newY, newWidth, newHeight);
 	}
 
 	public readonly RectangleD Clamp ()
