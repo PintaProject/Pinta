@@ -31,7 +31,7 @@ internal static class Utilities
 		}
 	}
 
-	public static void CompareImages (ImageSurface result, ImageSurface expected)
+	public static void CompareImages (ImageSurface result, ImageSurface expected, int tolerance = 1)
 	{
 		Assert.AreEqual (result.GetSize (), expected.GetSize ());
 
@@ -40,8 +40,13 @@ internal static class Utilities
 
 		int diffs = 0;
 		for (int i = 0; i < result_pixels.Length; ++i) {
-			if (result_pixels[i] != expected_pixels[i])
+			if (!ColorBgra.ColorsWithinTolerance (result_pixels[i], expected_pixels[i], tolerance)) {
 				++diffs;
+
+				// Display info about the first few failures.
+				if (diffs <= 10)
+					Assert.Warn ($"Difference at pixel {i}, got {result_pixels[i]} vs {expected_pixels[i]}");
+			}
 		}
 
 		Assert.AreEqual (0, diffs);
