@@ -30,7 +30,7 @@ public sealed class PolarInversionEffect : WarpEffect
 	}
 
 	#region Algorithm Code Ported From PDN
-	protected override void InverseTransform (ref TransformData transData)
+	protected override TransformData InverseTransform (TransformData transData)
 	{
 		double x = transData.X;
 		double y = transData.Y;
@@ -38,8 +38,10 @@ public sealed class PolarInversionEffect : WarpEffect
 		// NOTE: when x and y are zero, this will divide by zero and return NaN
 		double invertDistance = Utility.Lerp (1.0, DefaultRadius2 / ((x * x) + (y * y)), Data.Amount);
 
-		transData.X = x * invertDistance;
-		transData.Y = y * invertDistance;
+		return new (
+			X: x * invertDistance,
+			Y: y * invertDistance
+		);
 	}
 	#endregion
 
