@@ -45,17 +45,8 @@ public record struct PointI
 	public override readonly string ToString () => $"{X}, {Y}";
 }
 
-public record struct PointD
+public readonly record struct PointD (double X, double Y)
 {
-	public PointD (double x, double y)
-	{
-		this.X = x;
-		this.Y = y;
-	}
-
-	public double X;
-	public double Y;
-
 	public override readonly string ToString () => $"{X}, {Y}";
 
 	public readonly PointI ToInt () => new ((int) X, (int) Y);

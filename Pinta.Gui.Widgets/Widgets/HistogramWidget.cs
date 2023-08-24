@@ -69,17 +69,17 @@ public sealed class HistogramWidget : Gtk.DrawingArea
 		QueueDraw ();
 	}
 
-	private static void CheckPoint (RectangleD rect, PointD point)
+	private static void CheckPoint (RectangleD rect, ref PointD point)
 	{
 		if (point.X < rect.X)
-			point.X = rect.X;
+			point = point with { X = rect.X };
 		else if (point.X > rect.X + rect.Width)
-			point.X = rect.X + rect.Width;
+			point = point with { X = rect.X + rect.Width };
 
 		if (point.Y < rect.Y)
-			point.Y = rect.Y;
+			point = point with { Y = rect.Y };
 		else if (point.Y > rect.Y + rect.Height)
-			point.Y = rect.Y + rect.Height;
+			point = point with { Y = rect.Y + rect.Height };
 	}
 
 	private void DrawChannel (Context g, ColorBgra color, int channel, long max, float mean)
@@ -112,7 +112,7 @@ public sealed class HistogramWidget : Gtk.DrawingArea
 			    Utility.Lerp (l, r, (float) hist[i] / (float) max),
 			    Utility.Lerp (t, b, (float) i / (float) entries));
 
-			CheckPoint (rect, points[i]);
+			CheckPoint (rect, ref points[i]);
 		}
 
 		var sum3 = hist[0] + hist[1];
@@ -124,7 +124,7 @@ public sealed class HistogramWidget : Gtk.DrawingArea
 			    Utility.Lerp (l, r, (float) (sum3) / (float) (max * 3.1f)),
 			    Utility.Lerp (t, b, (float) i / (float) entries));
 
-			CheckPoint (rect, points[i]);
+			CheckPoint (rect, ref points[i]);
 			sum3 -= hist[i - 1];
 		}
 

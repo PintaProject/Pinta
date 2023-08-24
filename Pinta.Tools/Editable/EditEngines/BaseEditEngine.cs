@@ -564,7 +564,9 @@ public abstract class BaseEditEngine
 			//Make sure a control point is selected.
 			if (SelectedPointIndex > -1) {
 				//Move the selected control point.
-				SelectedPoint!.Position.Y -= 1d; // NRT - Checked by SelectedPointIndex
+				var originalPosition = SelectedPoint!.Position; // NRT - Checked by SelectedPointIndex
+				var newPositionY = originalPosition.Y - 1d;
+				SelectedPoint.Position = originalPosition with { Y = newPositionY };
 
 				DrawActiveShape (true, false, true, false, false);
 			}
@@ -574,7 +576,9 @@ public abstract class BaseEditEngine
 			//Make sure a control point is selected.
 			if (SelectedPointIndex > -1) {
 				//Move the selected control point.
-				SelectedPoint!.Position.Y += 1d; // NRT - Checked by SelectedPointIndex
+				var originalPosition = SelectedPoint!.Position; // NRT - Checked by SelectedPointIndex
+				var newPositionY = originalPosition.Y + 1d;
+				SelectedPoint.Position = originalPosition with { Y = newPositionY };
 
 				DrawActiveShape (true, false, true, false, false);
 			}
@@ -597,7 +601,9 @@ public abstract class BaseEditEngine
 					}
 				} else {
 					//Move the selected control point.
-					SelectedPoint!.Position.X -= 1d; // NRT - Checked by SelectedPointIndex
+					var originalPosition = SelectedPoint!.Position; // NRT - Checked by SelectedPointIndex
+					var newPositionX = originalPosition.X - 1d;
+					SelectedPoint.Position = originalPosition with { X = newPositionX };
 				}
 
 				DrawActiveShape (true, false, true, false, false);
@@ -621,7 +627,9 @@ public abstract class BaseEditEngine
 					}
 				} else {
 					//Move the selected control point.
-					SelectedPoint!.Position.X += 1d; // NRT - Checked by SelectedPointIndex
+					var originalPosition = SelectedPoint!.Position; // NRT - Checked by SelectedPointIndex
+					var newPositionX = originalPosition.X + 1d;
+					SelectedPoint.Position = originalPosition with { X = newPositionX };
 				}
 
 				DrawActiveShape (true, false, true, false, false);

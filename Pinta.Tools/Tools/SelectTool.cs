@@ -206,75 +206,93 @@ public abstract class SelectTool : BaseTool
 	{
 		switch (handle) {
 			case 0:
-				shape_origin.X = x;
-				shape_origin.Y = y;
+				shape_origin = new (x, y);
 				if (shift_pressed) {
-					if (shape_end.X - shape_origin.X <= shape_end.Y - shape_origin.Y)
-						shape_origin.X = shape_end.X - shape_end.Y + shape_origin.Y;
-					else
-						shape_origin.Y = shape_end.Y - shape_end.X + shape_origin.X;
+					if (shape_end.X - shape_origin.X <= shape_end.Y - shape_origin.Y) {
+						var newOriginX = shape_end.X - shape_end.Y + shape_origin.Y;
+						shape_origin = shape_origin with { X = newOriginX };
+					} else {
+						var newOriginY = shape_end.Y - shape_end.X + shape_origin.X;
+						shape_origin = shape_origin with { Y = newOriginY };
+					}
 				}
 				break;
 			case 1:
-				shape_origin.X = x;
-				shape_end.Y = y;
+				shape_origin = shape_origin with { X = x };
+				shape_end = shape_end with { Y = y };
 				if (shift_pressed) {
-					if (shape_end.X - shape_origin.X <= shape_end.Y - shape_origin.Y)
-						shape_origin.X = shape_end.X - shape_end.Y + shape_origin.Y;
-					else
-						shape_end.Y = shape_origin.Y + shape_end.X - shape_origin.X;
+					if (shape_end.X - shape_origin.X <= shape_end.Y - shape_origin.Y) {
+						var newOriginX = shape_end.X - shape_end.Y + shape_origin.Y;
+						shape_origin = shape_origin with { X = newOriginX };
+					} else {
+						var newEndY = shape_origin.Y + shape_end.X - shape_origin.X;
+						shape_end = shape_end with { Y = newEndY };
+					}
 				}
 				break;
 			case 2:
-				shape_end.X = x;
-				shape_origin.Y = y;
+				shape_end = shape_end with { X = x };
+				shape_origin = shape_origin with { Y = y };
 				if (shift_pressed) {
-					if (shape_end.X - shape_origin.X <= shape_end.Y - shape_origin.Y)
-						shape_end.X = shape_origin.X + shape_end.Y - shape_origin.Y;
-					else
-						shape_origin.Y = shape_end.Y - shape_end.X + shape_origin.X;
+					if (shape_end.X - shape_origin.X <= shape_end.Y - shape_origin.Y) {
+						var newEndX = shape_origin.X + shape_end.Y - shape_origin.Y;
+						shape_end = shape_end with { X = newEndX };
+					} else {
+						var newOriginY = shape_end.Y - shape_end.X + shape_origin.X;
+						shape_origin = shape_origin with { Y = newOriginY };
+					}
 				}
 				break;
 			case 3:
-				shape_end.X = x;
-				shape_end.Y = y;
+				shape_end = new (x, y);
 				if (shift_pressed) {
-					if (shape_end.X - shape_origin.X <= shape_end.Y - shape_origin.Y)
-						shape_end.X = shape_origin.X + shape_end.Y - shape_origin.Y;
-					else
-						shape_end.Y = shape_origin.Y + shape_end.X - shape_origin.X;
+					if (shape_end.X - shape_origin.X <= shape_end.Y - shape_origin.Y) {
+						var newEndX = shape_origin.X + shape_end.Y - shape_origin.Y;
+						shape_end = shape_end with { X = newEndX };
+					} else {
+						var newEndY = shape_origin.Y + shape_end.X - shape_origin.X;
+						shape_end = shape_end with { Y = newEndY };
+					}
 				}
 				break;
 			case 4:
-				shape_origin.X = x;
+				shape_origin = shape_origin with { X = x };
 				if (shift_pressed) {
 					var d = shape_end.X - shape_origin.X;
-					shape_origin.Y = (shape_origin.Y + shape_end.Y - d) / 2;
-					shape_end.Y = (shape_origin.Y + shape_end.Y + d) / 2;
+					var newOriginY = (shape_origin.Y + shape_end.Y - d) / 2;
+					var newEndY = (shape_origin.Y + shape_end.Y + d) / 2;
+					shape_origin = shape_origin with { Y = newOriginY };
+					shape_end = shape_end with { Y = newEndY };
 				}
 				break;
 			case 5:
-				shape_origin.Y = y;
+				shape_origin = shape_origin with { Y = y };
 				if (shift_pressed) {
 					var d = shape_end.Y - shape_origin.Y;
-					shape_origin.X = (shape_origin.X + shape_end.X - d) / 2;
-					shape_end.X = (shape_origin.X + shape_end.X + d) / 2;
+					var newOriginX = (shape_origin.X + shape_end.X - d) / 2;
+					var newEndX = (shape_origin.X + shape_end.X + d) / 2;
+					shape_origin = shape_origin with { X = newOriginX };
+					shape_end = shape_end with { X = newEndX };
 				}
 				break;
 			case 6:
-				shape_end.X = x;
+				shape_end = shape_end with { X = x };
 				if (shift_pressed) {
 					var d = shape_end.X - shape_origin.X;
-					shape_origin.Y = (shape_origin.Y + shape_end.Y - d) / 2;
-					shape_end.Y = (shape_origin.Y + shape_end.Y + d) / 2;
+					var newOriginY = (shape_origin.Y + shape_end.Y - d) / 2;
+					var newEndY = (shape_origin.Y + shape_end.Y + d) / 2;
+					shape_origin = shape_origin with { Y = newOriginY };
+					shape_end = shape_end with { Y = newEndY };
 				}
 				break;
 			case 7:
-				shape_end.Y = y;
+				shape_end = shape_end with { Y = y };
 				if (shift_pressed) {
 					var d = shape_end.Y - shape_origin.Y;
-					shape_origin.X = (shape_origin.X + shape_end.X - d) / 2;
-					shape_end.X = (shape_origin.X + shape_end.X + d) / 2;
+					var newOriginX = (shape_origin.X + shape_end.X - d) / 2;
+					var newEndX = (shape_origin.X + shape_end.X + d) / 2;
+					shape_origin = shape_origin with { X = newOriginX };
+					shape_end = shape_end with { X = newEndX };
 				}
 				break;
 			default:

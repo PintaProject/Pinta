@@ -107,18 +107,26 @@ public sealed class CanvasWindow : Grid
 
 		if (PintaCore.Workspace.HasOpenDocuments) {
 			if (PintaCore.Workspace.Offset.X > 0) {
-				lower.X = -PintaCore.Workspace.Offset.X / PintaCore.Workspace.Scale;
-				upper.X = PintaCore.Workspace.ImageSize.Width - lower.X;
+				var newLowerX = -PintaCore.Workspace.Offset.X / PintaCore.Workspace.Scale;
+				lower = lower with { X = newLowerX };
+				var newUpperX = PintaCore.Workspace.ImageSize.Width - lower.X;
+				upper = upper with { X = newUpperX };
 			} else {
-				lower.X = scrolled_window.Hadjustment.Value / PintaCore.Workspace.Scale;
-				upper.X = (scrolled_window.Hadjustment.Value + scrolled_window.Hadjustment.PageSize) / PintaCore.Workspace.Scale;
+				var newLowerX = scrolled_window.Hadjustment.Value / PintaCore.Workspace.Scale;
+				lower = lower with { X = newLowerX };
+				var newUpperX = (scrolled_window.Hadjustment.Value + scrolled_window.Hadjustment.PageSize) / PintaCore.Workspace.Scale;
+				upper = upper with { X = newUpperX };
 			}
 			if (PintaCore.Workspace.Offset.Y > 0) {
-				lower.Y = -PintaCore.Workspace.Offset.Y / PintaCore.Workspace.Scale;
-				upper.Y = PintaCore.Workspace.ImageSize.Height - lower.Y;
+				var newLowerY = -PintaCore.Workspace.Offset.Y / PintaCore.Workspace.Scale;
+				lower = lower with { Y = newLowerY };
+				var newUpperY = PintaCore.Workspace.ImageSize.Height - lower.Y;
+				upper = upper with { Y = newUpperY };
 			} else {
-				lower.Y = scrolled_window.Vadjustment.Value / PintaCore.Workspace.Scale;
-				upper.Y = (scrolled_window.Vadjustment.Value + scrolled_window.Vadjustment.PageSize) / PintaCore.Workspace.Scale;
+				var newLowerY = scrolled_window.Vadjustment.Value / PintaCore.Workspace.Scale;
+				lower = lower with { Y = newLowerY };
+				var newUpperY = (scrolled_window.Vadjustment.Value + scrolled_window.Vadjustment.PageSize) / PintaCore.Workspace.Scale;
+				upper = upper with { Y = newUpperY };
 			}
 		}
 

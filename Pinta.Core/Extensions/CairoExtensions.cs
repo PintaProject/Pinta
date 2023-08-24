@@ -1517,7 +1517,10 @@ namespace Pinta.Core
 
 		public static void TransformPoint (this Matrix m, ref Core.PointD p)
 		{
-			m.TransformPoint (ref p.X, ref p.Y);
+			var newX = p.X;
+			var newY = p.Y;
+			m.TransformPoint (ref newX, ref newY);
+			p = new Core.PointD (newX, newY);
 		}
 
 		/// <summary>
