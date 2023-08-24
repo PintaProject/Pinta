@@ -21,6 +21,11 @@ public sealed class ForwardErrorDiffusionDitheringEffect : BaseEffect
 		EffectData = new ForwardErrorDiffusionDitheringData ();
 	}
 
+	public override void LaunchConfiguration ()
+	{
+		// TODO:
+	}
+
 	public override void Render (ImageSurface src, ImageSurface dest, ReadOnlySpan<RectangleI> rois)
 	{
 		var src_data = src.GetReadOnlyPixelData ();
