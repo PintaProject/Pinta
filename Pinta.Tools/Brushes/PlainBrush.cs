@@ -54,7 +54,7 @@ public sealed class PlainBrush : BasePaintBrush
 
 		// For some reason (?!) we need to inflate the dirty
 		// rectangle for small brush widths in zoomed images
-		dirty.Inflate (1, 1);
+		dirty = dirty.Inflated (1, 1);
 
 		return dirty;
 	}

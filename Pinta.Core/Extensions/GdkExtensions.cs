@@ -118,7 +118,7 @@ public static class GdkExtensions
 			shapeWidth);
 
 		// Inflate shape bounding box to allow for anti-aliasing
-		shapeBBox.Inflate (2, 2);
+		shapeBBox = shapeBBox.Inflated (2, 2);
 
 		// To determine required size of icon,
 		// find union of the image and shape bounding boxes

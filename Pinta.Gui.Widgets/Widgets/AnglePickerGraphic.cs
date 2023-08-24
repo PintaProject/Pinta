@@ -68,7 +68,7 @@ public class AnglePickerGraphic : Gtk.DrawingArea
 	private RectangleD GetDrawBounds ()
 	{
 		var rect = new RectangleD (0, 0, GetAllocatedWidth (), GetAllocatedHeight ());
-		rect.Inflate (-1, -1);
+		rect = rect.Inflated (-1, -1);
 		return rect;
 	}
 

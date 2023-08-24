@@ -36,7 +36,7 @@ public sealed class MoveHandle : IToolHandle
 		const int tolerance = 5;
 
 		var bounds = ComputeWindowRect ();
-		bounds.Inflate (tolerance, tolerance);
+		bounds = bounds.Inflated (tolerance, tolerance);
 		return bounds.ContainsPoint (window_point);
 	}
 
