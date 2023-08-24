@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using System.Collections.Immutable;
+using System.ComponentModel;
 using System.Linq;
 using Cairo;
 using Pinta.Core;
@@ -32,9 +33,10 @@ public sealed class ForwardErrorDiffusionDitheringEffect : BaseEffect
 		var src_copy = new ColorBgra[src_data.Length];
 		src_data.CopyTo (src_copy);
 		var dst_data = dest.GetPixelData ();
+		var diffusionMatrix = GetPredefinedDiffusionMatrix (Data.DiffusionMatrix);
 		foreach (var rect in rois) {
-			for (int y = 0; y < rect.Height - Data.DiffusionMatrix.RowsBelow; y++) {
-				for (int x = Data.DiffusionMatrix.ColumnsToLeft; x < rect.Width - Data.DiffusionMatrix.ColumnsToRight; x++) {
+			for (int y = 0; y < rect.Height - diffusionMatrix.RowsBelow; y++) {
+				for (int x = diffusionMatrix.ColumnsToLeft; x < rect.Width - diffusionMatrix.ColumnsToRight; x++) {
 					var currentIndex = y * src.Width + x;
 					var originalPixel = src_copy[currentIndex];
 					var closestColor = FindClosestPaletteColor (originalPixel);
@@ -50,18 +52,19 @@ public sealed class ForwardErrorDiffusionDitheringEffect : BaseEffect
 
 	private void DistributeError (Span<ColorBgra> original, int x, int y, int errorRed, int errorGreen, int errorBlue, int sourceWidth, int sourceHeight)
 	{
-		for (int r = 0; r < Data.DiffusionMatrix.Rows; r++) {
-			for (int c = 0; c < Data.DiffusionMatrix.Columns; c++) {
-				if (Data.DiffusionMatrix[r, c] is not WeightElement weight)
+		var diffusionMatrix = GetPredefinedDiffusionMatrix (Data.DiffusionMatrix);
+		for (int r = 0; r < diffusionMatrix.Rows; r++) {
+			for (int c = 0; c < diffusionMatrix.Columns; c++) {
+				if (diffusionMatrix[r, c] is not WeightElement weight)
 					continue;
 				var this_y = y + r;
-				var this_x = x + c - Data.DiffusionMatrix.ColumnsToLeft;
+				var this_x = x + c - diffusionMatrix.ColumnsToLeft;
 				if (this_x >= sourceWidth)
 					continue;
 				if (this_y >= sourceHeight)
 					continue;
 				int idx = (this_y * sourceWidth) + this_x;
-				double factor = ((double) weight.Weight) / Data.DiffusionMatrix.TotalWeight;
+				double factor = ((double) weight.Weight) / diffusionMatrix.TotalWeight;
 				original[idx] = AddError (original[idx], factor, errorRed, errorGreen, errorBlue);
 			}
 		}
@@ -80,7 +83,8 @@ public sealed class ForwardErrorDiffusionDitheringEffect : BaseEffect
 	{
 		double minDistance = double.MaxValue;
 		ColorBgra closestColor = ColorBgra.FromBgra (0, 0, 0, 1);
-		foreach (var paletteColor in Data.Palette) {
+		var palette = GetPredefinedPalette (Data.Palette);
+		foreach (var paletteColor in palette) {
 			double distance = CalculateDistance (original, paletteColor);
 			if (distance < minDistance) {
 				minDistance = distance;
@@ -199,20 +203,73 @@ public sealed class ForwardErrorDiffusionDitheringEffect : BaseEffect
 		}
 	}
 
+	public enum PredefinedPalettes
+	{
+		OldWindows16,
+		WebSafe,
+		BlackWhite,
+	}
+
+	private static ImmutableArray<ColorBgra> GetPredefinedPalette (PredefinedPalettes choice)
+	{
+		switch (choice) {
+			case PredefinedPalettes.OldWindows16:
+				return DefaultPalettes.OldWindows16;
+			case PredefinedPalettes.WebSafe:
+				return DefaultPalettes.WebSafe;
+			case PredefinedPalettes.BlackWhite:
+				return DefaultPalettes.BlackWhite;
+			default:
+				throw new InvalidEnumArgumentException (nameof (choice), (int) choice, typeof (PredefinedPalettes));
+		}
+	}
+
+	public enum PredefinedDiffusionMatrices
+	{
+		Sierra,
+		TwoRowSierra,
+		SierraLite,
+		Burkes,
+		Atkinson,
+		Stucki,
+		JarvisJudiceNinke,
+		FloydSteinberg,
+		FakeFloydSteinberg,
+	}
+
+	private static ErrorDiffusionMatrix GetPredefinedDiffusionMatrix (PredefinedDiffusionMatrices choice)
+	{
+		switch (choice) {
+			case PredefinedDiffusionMatrices.Sierra:
+				return DefaultMatrices.Sierra;
+			case PredefinedDiffusionMatrices.TwoRowSierra:
+				return DefaultMatrices.TwoRowSierra;
+			case PredefinedDiffusionMatrices.SierraLite:
+				return DefaultMatrices.SierraLite;
+			case PredefinedDiffusionMatrices.Burkes:
+				return DefaultMatrices.Burkes;
+			case PredefinedDiffusionMatrices.Atkinson:
+				return DefaultMatrices.Atkinson;
+			case PredefinedDiffusionMatrices.Stucki:
+				return DefaultMatrices.Stucki;
+			case PredefinedDiffusionMatrices.JarvisJudiceNinke:
+				return DefaultMatrices.JarvisJudiceNinke;
+			case PredefinedDiffusionMatrices.FloydSteinberg:
+				return DefaultMatrices.FloydSteinberg;
+			case PredefinedDiffusionMatrices.FakeFloydSteinberg:
+				return DefaultMatrices.FakeFloydSteinberg;
+			default:
+				throw new InvalidEnumArgumentException (nameof (choice), (int) choice, typeof (PredefinedDiffusionMatrices));
+		}
+	}
+
 	public sealed class ForwardErrorDiffusionDitheringData : EffectData
 	{
 		[Caption ("Diffusion Matrix")]
-		public ErrorDiffusionMatrix DiffusionMatrix { get; set; } = DefaultMatrices.FloydSteinberg;
+		public PredefinedDiffusionMatrices DiffusionMatrix { get; set; } = PredefinedDiffusionMatrices.FloydSteinberg;
 
-		private ImmutableArray<ColorBgra> palette = DefaultPalettes.OldWindows16;
 		[Caption ("Palette")]
-		public ImmutableArray<ColorBgra> Palette {
-			get => palette;
-			set {
-				if (palette.IsDefault) throw new ArgumentException ("Palette array has to be valid", nameof (palette));
-				palette = value;
-			}
-		}
+		public PredefinedPalettes Palette { get; set; } = PredefinedPalettes.OldWindows16;
 	}
 
 	public static class DefaultMatrices
