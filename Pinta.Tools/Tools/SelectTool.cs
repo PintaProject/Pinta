@@ -260,8 +260,8 @@ public abstract class SelectTool : BaseTool
 				if (shift_pressed) {
 					var d = shape_end.X - shape_origin.X;
 					var newOriginY = (shape_origin.Y + shape_end.Y - d) / 2;
-					var newEndY = (shape_origin.Y + shape_end.Y + d) / 2;
 					shape_origin = shape_origin with { Y = newOriginY };
+					var newEndY = (shape_origin.Y + shape_end.Y + d) / 2;
 					shape_end = shape_end with { Y = newEndY };
 				}
 				break;
@@ -270,8 +270,8 @@ public abstract class SelectTool : BaseTool
 				if (shift_pressed) {
 					var d = shape_end.Y - shape_origin.Y;
 					var newOriginX = (shape_origin.X + shape_end.X - d) / 2;
-					var newEndX = (shape_origin.X + shape_end.X + d) / 2;
 					shape_origin = shape_origin with { X = newOriginX };
+					var newEndX = (shape_origin.X + shape_end.X + d) / 2;
 					shape_end = shape_end with { X = newEndX };
 				}
 				break;
@@ -280,8 +280,8 @@ public abstract class SelectTool : BaseTool
 				if (shift_pressed) {
 					var d = shape_end.X - shape_origin.X;
 					var newOriginY = (shape_origin.Y + shape_end.Y - d) / 2;
-					var newEndY = (shape_origin.Y + shape_end.Y + d) / 2;
 					shape_origin = shape_origin with { Y = newOriginY };
+					var newEndY = (shape_origin.Y + shape_end.Y + d) / 2;
 					shape_end = shape_end with { Y = newEndY };
 				}
 				break;
@@ -290,8 +290,8 @@ public abstract class SelectTool : BaseTool
 				if (shift_pressed) {
 					var d = shape_end.Y - shape_origin.Y;
 					var newOriginX = (shape_origin.X + shape_end.X - d) / 2;
-					var newEndX = (shape_origin.X + shape_end.X + d) / 2;
 					shape_origin = shape_origin with { X = newOriginX };
+					var newEndX = (shape_origin.X + shape_end.X + d) / 2;
 					shape_end = shape_end with { X = newEndX };
 				}
 				break;
