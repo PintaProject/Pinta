@@ -34,19 +34,19 @@ public sealed class ForwardErrorDiffusionDitheringEffect : BaseEffect
 		src_data.CopyTo (dst_data);
 		var diffusionMatrix = GetPredefinedDiffusionMatrix (Data.DiffusionMatrix);
 #if DEBUG
-		System.Console.WriteLine($"ROIs: {rois.Length}");
+		System.Console.WriteLine ($"ROIs: {rois.Length}");
 #endif
 		foreach (var rect in rois) {
 #if DEBUG
-			System.Console.WriteLine($"ROI (top: {rect.Top}, left: {rect.Left}, height: {rect.Height}, width: {rect.Width}, bottom: {rect.Bottom}, right: {rect.Right})");
+			System.Console.WriteLine ($"ROI (top: {rect.Top}, left: {rect.Left}, height: {rect.Height}, width: {rect.Width}, bottom: {rect.Bottom}, right: {rect.Right})");
 #endif
 			for (int y = rect.Top; y <= rect.Bottom; y++) {
 #if DEBUG
-				System.Console.WriteLine("C");
+				System.Console.WriteLine ("C");
 #endif
 				for (int x = rect.Left; x <= rect.Right; x++) {
 #if DEBUG
-					System.Console.WriteLine("D");
+					System.Console.WriteLine ("D");
 #endif
 					var currentIndex = y * src.Width + x;
 					var originalPixel = src_data[currentIndex];
