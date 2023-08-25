@@ -45,14 +45,8 @@ public sealed class MotionBlurEffect : BaseEffect
 		PointD end = new PointD ((float) alpha * Math.Cos (theta), (float) (-alpha * Math.Sin (theta)));
 
 		if (Data.Centered) {
-
-			var newStartX = -end.X / 2.0f;
-			var newStartY = -end.Y / 2.0f;
-			start = new (newStartX, newStartY);
-
-			var newEndX = end.X / 2.0f;
-			var newEndY = end.Y / 2.0f;
-			end = new (newEndX, newEndY);
+			start = new (-end.X / 2.0f, -end.Y / 2.0f);
+			end = new (end.X / 2.0f, end.Y / 2.0f);
 		}
 
 		Span<PointD> points = stackalloc PointD[(1 + Data.Distance) * 3 / 2];

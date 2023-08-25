@@ -56,9 +56,7 @@ public sealed class TwistEffect : BaseEffect
 			    ((i * aaLevel) / (float) aaSamples),
 			    i / (float) aaSamples);
 
-			var newX = pt.X - ((int) pt.X);
-			pt = pt with { X = newX };
-
+			pt = pt with { X = pt.X - ((int) pt.X) };
 			aaPoints[i] = pt;
 		}
 

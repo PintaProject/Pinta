@@ -107,26 +107,18 @@ public sealed class CanvasWindow : Grid
 
 		if (PintaCore.Workspace.HasOpenDocuments) {
 			if (PintaCore.Workspace.Offset.X > 0) {
-				var newLowerX = -PintaCore.Workspace.Offset.X / PintaCore.Workspace.Scale;
-				lower = lower with { X = newLowerX };
-				var newUpperX = PintaCore.Workspace.ImageSize.Width - lower.X;
-				upper = upper with { X = newUpperX };
+				lower = lower with { X = -PintaCore.Workspace.Offset.X / PintaCore.Workspace.Scale };
+				upper = upper with { X = PintaCore.Workspace.ImageSize.Width - lower.X };
 			} else {
-				var newLowerX = scrolled_window.Hadjustment.Value / PintaCore.Workspace.Scale;
-				lower = lower with { X = newLowerX };
-				var newUpperX = (scrolled_window.Hadjustment.Value + scrolled_window.Hadjustment.PageSize) / PintaCore.Workspace.Scale;
-				upper = upper with { X = newUpperX };
+				lower = lower with { X = scrolled_window.Hadjustment.Value / PintaCore.Workspace.Scale };
+				upper = upper with { X = (scrolled_window.Hadjustment.Value + scrolled_window.Hadjustment.PageSize) / PintaCore.Workspace.Scale };
 			}
 			if (PintaCore.Workspace.Offset.Y > 0) {
-				var newLowerY = -PintaCore.Workspace.Offset.Y / PintaCore.Workspace.Scale;
-				lower = lower with { Y = newLowerY };
-				var newUpperY = PintaCore.Workspace.ImageSize.Height - lower.Y;
-				upper = upper with { Y = newUpperY };
+				lower = lower with { Y = -PintaCore.Workspace.Offset.Y / PintaCore.Workspace.Scale };
+				upper = upper with { Y = PintaCore.Workspace.ImageSize.Height - lower.Y };
 			} else {
-				var newLowerY = scrolled_window.Vadjustment.Value / PintaCore.Workspace.Scale;
-				lower = lower with { Y = newLowerY };
-				var newUpperY = (scrolled_window.Vadjustment.Value + scrolled_window.Vadjustment.PageSize) / PintaCore.Workspace.Scale;
-				upper = upper with { Y = newUpperY };
+				lower = lower with { Y = scrolled_window.Vadjustment.Value / PintaCore.Workspace.Scale };
+				upper = upper with { Y = (scrolled_window.Vadjustment.Value + scrolled_window.Vadjustment.PageSize) / PintaCore.Workspace.Scale };
 			}
 		}
 
