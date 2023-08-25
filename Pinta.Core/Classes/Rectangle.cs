@@ -28,12 +28,12 @@ using System;
 /// Replacements for Cairo / GDK rectangles that GtkSharp provided in the GTK3 build.
 namespace Pinta.Core;
 
-public record struct RectangleD
+public readonly record struct RectangleD
 {
-	public double X;
-	public double Y;
-	public double Width;
-	public double Height;
+	public readonly double X;
+	public readonly double Y;
+	public readonly double Width;
+	public readonly double Height;
 
 	public RectangleD (double x, double y, double width, double height)
 	{
