@@ -30,21 +30,32 @@ public sealed class ForwardErrorDiffusionDitheringEffect : BaseEffect
 	public override void Render (ImageSurface src, ImageSurface dest, ReadOnlySpan<RectangleI> rois)
 	{
 		var src_data = src.GetReadOnlyPixelData ();
-		var src_copy = new ColorBgra[src_data.Length];
-		src_data.CopyTo (src_copy);
 		var dst_data = dest.GetPixelData ();
+		src_data.CopyTo (dst_data);
 		var diffusionMatrix = GetPredefinedDiffusionMatrix (Data.DiffusionMatrix);
+#if DEBUG
+		System.Console.WriteLine($"ROIs: {rois.Length}");
+#endif
 		foreach (var rect in rois) {
-			for (int y = 0; y < rect.Height - diffusionMatrix.RowsBelow; y++) {
-				for (int x = diffusionMatrix.ColumnsToLeft; x < rect.Width - diffusionMatrix.ColumnsToRight; x++) {
+#if DEBUG
+			System.Console.WriteLine($"ROI (top: {rect.Top}, left: {rect.Left}, height: {rect.Height}, width: {rect.Width}, bottom: {rect.Bottom}, right: {rect.Right})");
+#endif
+			for (int y = rect.Top; y <= rect.Bottom; y++) {
+#if DEBUG
+				System.Console.WriteLine("C");
+#endif
+				for (int x = rect.Left; x <= rect.Right; x++) {
+#if DEBUG
+					System.Console.WriteLine("D");
+#endif
 					var currentIndex = y * src.Width + x;
-					var originalPixel = src_copy[currentIndex];
+					var originalPixel = src_data[currentIndex];
 					var closestColor = FindClosestPaletteColor (originalPixel);
 					dst_data[currentIndex] = closestColor;
 					int errorRed = originalPixel.R - closestColor.R;
 					int errorGreen = originalPixel.G - closestColor.G;
 					int errorBlue = originalPixel.B - closestColor.B;
-					DistributeError (src_copy, x, y, errorRed, errorGreen, errorBlue, src.Width, src.Height);
+					DistributeError (dst_data, x, y, errorRed, errorGreen, errorBlue, src.Width, src.Height);
 				}
 			}
 		}
@@ -59,6 +70,10 @@ public sealed class ForwardErrorDiffusionDitheringEffect : BaseEffect
 					continue;
 				var this_y = y + r;
 				var this_x = x + c - diffusionMatrix.ColumnsToLeft;
+				if (this_x < 0)
+					continue;
+				if (this_y < 0)
+					continue;
 				if (this_x >= sourceWidth)
 					continue;
 				if (this_y >= sourceHeight)
