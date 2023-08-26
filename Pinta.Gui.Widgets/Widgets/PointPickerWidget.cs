@@ -25,7 +25,6 @@
 // THE SOFTWARE.
 
 using System;
-using System.Diagnostics.CodeAnalysis;
 using Gtk;
 using Pinta.Core;
 
@@ -33,18 +32,107 @@ namespace Pinta.Gui.Widgets;
 
 public class PointPickerWidget : Box
 {
-	private Label label;
-	private PointPickerGraphic pointpickergraphic1;
-	private Button button1;
-	private Button button2;
-	private SpinButton spin_x;
-	private SpinButton spin_y;
+	private readonly Label label;
+	private readonly PointPickerGraphic pointpickergraphic1;
+	private readonly Button button1;
+	private readonly Button button2;
+	private readonly SpinButton spin_x;
+	private readonly SpinButton spin_y;
 
 	bool active = true;
 
 	public PointPickerWidget ()
 	{
-		Build ();
+		// Build
+
+		const int spacing = 6;
+
+		// Section label + line
+		var hbox1 = new Box () { Spacing = spacing };
+		hbox1.SetOrientation (Orientation.Horizontal);
+
+
+		label = new Label ();
+		label.AddCssClass (AdwaitaStyles.Title4);
+		hbox1.Append (label);
+
+		// PointPickerGraphic
+		var hbox2 = new Box () { Spacing = spacing };
+		hbox2.SetOrientation (Orientation.Horizontal);
+
+		pointpickergraphic1 = new PointPickerGraphic {
+			Hexpand = true,
+			Halign = Align.Center
+		};
+		hbox2.Append (pointpickergraphic1);
+
+		// X spinner
+		var label2 = Gtk.Label.New ("X:");
+
+		spin_x = SpinButton.NewWithRange (0, 100, 1);
+		spin_x.CanFocus = true;
+		spin_x.ClimbRate = 1;
+		spin_x.Numeric = true;
+		spin_x.Adjustment!.PageIncrement = 10;
+		spin_x.Valign = Align.Start;
+
+		button1 = new Button {
+			IconName = Resources.StandardIcons.GoPrevious,
+			WidthRequest = 28,
+			HeightRequest = 24,
+			CanFocus = true,
+			UseUnderline = true,
+			Valign = Align.Start
+		};
+
+		var x_hbox = new Box () { Spacing = spacing };
+		x_hbox.SetOrientation (Orientation.Horizontal);
+
+		x_hbox.Append (label2);
+		x_hbox.Append (spin_x);
+		x_hbox.Append (button1);
+
+		// Y spinner
+		var label3 = Gtk.Label.New ("Y:");
+
+		spin_y = SpinButton.NewWithRange (0, 100, 1);
+		spin_y.CanFocus = true;
+		spin_y.ClimbRate = 1;
+		spin_y.Numeric = true;
+		spin_y.Adjustment!.PageIncrement = 10;
+		spin_y.Valign = Align.Start;
+
+		button2 = new Button {
+			IconName = Resources.StandardIcons.GoPrevious,
+			WidthRequest = 28,
+			HeightRequest = 24,
+			CanFocus = true,
+			UseUnderline = true,
+			Valign = Align.Start
+		};
+
+		var y_hbox = new Box () { Spacing = spacing };
+		y_hbox.SetOrientation (Orientation.Horizontal);
+
+		y_hbox.Append (label3);
+		y_hbox.Append (spin_y);
+		y_hbox.Append (button2);
+
+		// Vbox for spinners
+		var spin_vbox = new Box () { Spacing = spacing };
+		spin_vbox.SetOrientation (Orientation.Vertical);
+		spin_vbox.Append (x_hbox);
+		spin_vbox.Append (y_hbox);
+
+		hbox2.Append (spin_vbox);
+
+		// Main layout
+		SetOrientation (Orientation.Vertical);
+		Spacing = spacing;
+		Append (hbox1);
+		Append (hbox2);
+
+		// ---------------
 
 		spin_x.Adjustment!.Upper = PintaCore.Workspace.ImageSize.Width;
 		spin_y.Adjustment!.Upper = PintaCore.Workspace.ImageSize.Height;
@@ -138,95 +226,4 @@ public class PointPickerWidget : Box
 	protected void OnPointPicked () => PointPicked?.Invoke (this, EventArgs.Empty);
 
 	public event EventHandler? PointPicked;
-
-	[MemberNotNull (nameof (label), nameof (spin_x), nameof (spin_y), nameof (button1), nameof (button2), nameof (pointpickergraphic1))]
-	private void Build ()
-	{
-		const int spacing = 6;
-
-		// Section label + line
-		var hbox1 = new Box () { Spacing = spacing };
-		hbox1.SetOrientation (Orientation.Horizontal);
-
-
-		label = new Label ();
-		label.AddCssClass (AdwaitaStyles.Title4);
-		hbox1.Append (label);
-
-		// PointPickerGraphic
-		var hbox2 = new Box () { Spacing = spacing };
-		hbox2.SetOrientation (Orientation.Horizontal);
-
-		pointpickergraphic1 = new PointPickerGraphic {
-			Hexpand = true,
-			Halign = Align.Center
-		};
-		hbox2.Append (pointpickergraphic1);
-
-		// X spinner
-		var label2 = Gtk.Label.New ("X:");
-
-		spin_x = SpinButton.NewWithRange (0, 100, 1);
-		spin_x.CanFocus = true;
-		spin_x.ClimbRate = 1;
-		spin_x.Numeric = true;
-		spin_x.Adjustment!.PageIncrement = 10;
-		spin_x.Valign = Align.Start;
-
-		button1 = new Button {
-			IconName = Resources.StandardIcons.GoPrevious,
-			WidthRequest = 28,
-			HeightRequest = 24,
-			CanFocus = true,
-			UseUnderline = true,
-			Valign = Align.Start
-		};
-
-		var x_hbox = new Box () { Spacing = spacing };
-		x_hbox.SetOrientation (Orientation.Horizontal);
-
-		x_hbox.Append (label2);
-		x_hbox.Append (spin_x);
-		x_hbox.Append (button1);
-
-		// Y spinner
-		var label3 = Gtk.Label.New ("Y:");
-
-		spin_y = SpinButton.NewWithRange (0, 100, 1);
-		spin_y.CanFocus = true;
-		spin_y.ClimbRate = 1;
-		spin_y.Numeric = true;
-		spin_y.Adjustment!.PageIncrement = 10;
-		spin_y.Valign = Align.Start;
-
-		button2 = new Button {
-			IconName = Resources.StandardIcons.GoPrevious,
-			WidthRequest = 28,
-			HeightRequest = 24,
-			CanFocus = true,
-			UseUnderline = true,
-			Valign = Align.Start
-		};
-
-		var y_hbox = new Box () { Spacing = spacing };
-		y_hbox.SetOrientation (Orientation.Horizontal);
-
-		y_hbox.Append (label3);
-		y_hbox.Append (spin_y);
-		y_hbox.Append (button2);
-
-		// Vbox for spinners
-		var spin_vbox = new Box () { Spacing = spacing };
-		spin_vbox.SetOrientation (Orientation.Vertical);
-		spin_vbox.Append (x_hbox);
-		spin_vbox.Append (y_hbox);
-
-		hbox2.Append (spin_vbox);
-
-		// Main layout
-		SetOrientation (Orientation.Vertical);
-		Spacing = spacing;
-		Append (hbox1);
-		Append (hbox2);
-	}
 }
