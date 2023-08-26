@@ -242,8 +242,7 @@ public sealed class ImageActions
 			if (!IsConstantRow (image, border_color, y))
 				break;
 
-			++rect.Y;
-			--rect.Height;
+			rect = rect with { Y = rect.Y + 1, Height = rect.Height - 1 };
 		}
 
 		// Bottom up.
@@ -251,7 +250,7 @@ public sealed class ImageActions
 			if (!IsConstantRow (image, border_color, y))
 				break;
 
-			--rect.Height;
+			rect = rect with { Height = rect.Height - 1 };
 		}
 
 		// Left side.
@@ -259,8 +258,7 @@ public sealed class ImageActions
 			if (!IsConstantColumn (image, border_color, rect, x))
 				break;
 
-			++rect.X;
-			--rect.Width;
+			rect = rect with { X = rect.X + 1, Width = rect.Width - 1 };
 		}
 
 		// Right side.
@@ -268,7 +266,7 @@ public sealed class ImageActions
 			if (!IsConstantColumn (image, border_color, rect, x))
 				break;
 
-			--rect.Width;
+			rect = rect with { Width = rect.Width - 1 };
 		}
 
 		// Ignore the current selection when auto-cropping.

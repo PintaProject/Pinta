@@ -164,8 +164,7 @@ public sealed class PintaCanvas : DrawingArea
 		if (canvas_bounds.IsEmpty)
 			return;
 
-		canvas_bounds.X -= x;
-		canvas_bounds.Y -= y;
+		canvas_bounds = canvas_bounds with { X = canvas_bounds.X - x, Y = canvas_bounds.Y - y };
 
 		// Resize our offscreen surface to a surface the size of our drawing area
 		if (canvas == null || canvas.Width != canvas_bounds.Width || canvas.Height != canvas_bounds.Height) {
