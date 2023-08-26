@@ -30,7 +30,7 @@ using Pinta.Core;
 
 namespace Pinta.Gui.Widgets;
 
-public class PointPickerWidget : Box
+public sealed class PointPickerWidget : Box
 {
 	private readonly Label label;
 	private readonly PointPickerGraphic pointpickergraphic1;
@@ -223,7 +223,7 @@ public class PointPickerWidget : Box
 		spin_y.Value = DefaultPoint.Y;
 	}
 
-	protected void OnPointPicked () => PointPicked?.Invoke (this, EventArgs.Empty);
+	private void OnPointPicked () => PointPicked?.Invoke (this, EventArgs.Empty);
 
 	public event EventHandler? PointPicked;
 }
