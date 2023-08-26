@@ -30,7 +30,7 @@ using Pinta.Core;
 
 namespace Pinta.Gui.Widgets;
 
-public class HScaleSpinButtonWidget : Box
+public sealed class HScaleSpinButtonWidget : Box
 {
 	private readonly Scale hscale;
 	private readonly SpinButton spin;
@@ -183,7 +183,7 @@ public class HScaleSpinButtonWidget : Box
 		Value = DefaultValue;
 	}
 
-	protected void OnValueChanged () => ValueChanged?.Invoke (this, EventArgs.Empty);
+	private void OnValueChanged () => ValueChanged?.Invoke (this, EventArgs.Empty);
 
 	public event EventHandler? ValueChanged;
 }
