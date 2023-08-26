@@ -25,7 +25,6 @@
 // THE SOFTWARE.
 
 using System;
-using System.Diagnostics.CodeAnalysis;
 using Gtk;
 using Pinta.Core;
 
@@ -33,10 +32,10 @@ namespace Pinta.Gui.Widgets;
 
 public class HScaleSpinButtonWidget : Box
 {
-	private Scale hscale;
-	private SpinButton spin;
-	private Button button;
-	private Label label;
+	private readonly Scale hscale;
+	private readonly SpinButton spin;
+	private readonly Button button;
+	private readonly Label label;
 
 	private int max_value;
 	private int min_value;
@@ -45,7 +44,57 @@ public class HScaleSpinButtonWidget : Box
 
 	public HScaleSpinButtonWidget ()
 	{
-		Build ();
+		// Build
+
+		const int spacing = 6;
+
+		// Section label + line
+		var hbox1 = new Box () { Spacing = spacing };
+		hbox1.SetOrientation (Orientation.Horizontal);
+
+		label = new Label ();
+		label.AddCssClass (AdwaitaStyles.Title4);
+		hbox1.Append (label);
+
+		// Slider + spinner + reset button
+		var hbox2 = new Box () { Spacing = spacing };
+		hbox2.SetOrientation (Orientation.Horizontal);
+
+		hscale = Scale.NewWithRange (Orientation.Horizontal, 2, 64, 1);
+		hscale.CanFocus = true;
+		hscale.DrawValue = false;
+		hscale.Digits = 0;
+		hscale.ValuePos = PositionType.Top;
+		hscale.Hexpand = true;
+		hscale.Halign = Align.Fill;
+
+		hbox2.Append (hscale);
+
+		spin = SpinButton.NewWithRange (0, 100, 1);
+		spin.CanFocus = true;
+		spin.ClimbRate = 1;
+		spin.Numeric = true;
+		spin.Adjustment!.PageIncrement = 10;
+
+		hbox2.Append (spin);
+
+		// Reset button
+		button = new Button {
+			IconName = Resources.StandardIcons.GoPrevious,
+			WidthRequest = 28,
+			HeightRequest = 24,
+			CanFocus = true,
+			UseUnderline = true
+		};
+		hbox2.Append (button);
+
+		// Main layout
+		SetOrientation (Orientation.Vertical);
+		Spacing = spacing;
+		Append (hbox1);
+		Append (hbox2);
+
+		// ---------------
 
 		hscale.OnValueChanged += HandleHscaleValueChanged;
 		spin.OnValueChanged += HandleSpinValueChanged;
@@ -137,56 +186,4 @@ public class HScaleSpinButtonWidget : Box
 	protected void OnValueChanged () => ValueChanged?.Invoke (this, EventArgs.Empty);
 
 	public event EventHandler? ValueChanged;
-
-	[MemberNotNull (nameof (label), nameof (hscale), nameof (spin), nameof (button))]
-	private void Build ()
-	{
-		const int spacing = 6;
-
-		// Section label + line
-		var hbox1 = new Box () { Spacing = spacing };
-		hbox1.SetOrientation (Orientation.Horizontal);
-
-		label = new Label ();
-		label.AddCssClass (AdwaitaStyles.Title4);
-		hbox1.Append (label);
-
-		// Slider + spinner + reset button
-		var hbox2 = new Box () { Spacing = spacing };
-		hbox2.SetOrientation (Orientation.Horizontal);
-
-		hscale = Scale.NewWithRange (Orientation.Horizontal, 2, 64, 1);
-		hscale.CanFocus = true;
-		hscale.DrawValue = false;
-		hscale.Digits = 0;
-		hscale.ValuePos = PositionType.Top;
-		hscale.Hexpand = true;
-		hscale.Halign = Align.Fill;
-
-		hbox2.Append (hscale);
-
-		spin = SpinButton.NewWithRange (0, 100, 1);
-		spin.CanFocus = true;
-		spin.ClimbRate = 1;
-		spin.Numeric = true;
-		spin.Adjustment!.PageIncrement = 10;
-
-		hbox2.Append (spin);
-
-		// Reset button
-		button = new Button {
-			IconName = Resources.StandardIcons.GoPrevious,
-			WidthRequest = 28,
-			HeightRequest = 24,
-			CanFocus = true,
-			UseUnderline = true
-		};
-		hbox2.Append (button);
-
-		// Main layout
-		SetOrientation (Orientation.Vertical);
-		Spacing = spacing;
-		Append (hbox1);
-		Append (hbox2);
-	}
 }
