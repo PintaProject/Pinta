@@ -545,7 +545,7 @@ public class TextTool : BaseTool
 					click_point = pt;
 					CurrentTextEngine.Clear ();
 					UpdateFont ();
-					click_point.Y -= CurrentTextLayout.FontHeight / 2;
+					click_point = click_point with { Y = click_point.Y - (CurrentTextLayout.FontHeight / 2) };
 					CurrentTextEngine.Origin = click_point;
 					StartEditing ();
 					RedrawText (true, true);

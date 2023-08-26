@@ -113,12 +113,10 @@ public static class OtherExtensions
 					break;
 				}
 
-				++start.X;
+				start = start with { X = start.X + 1 };
 
 				if (start.X >= bounds.Right) {
-					++start.Y;
-					start.X = (int) bounds.X;
-
+					start = start with { X = (int) bounds.X, Y = start.Y + 1 };
 					if (start.Y >= bounds.Bottom)
 						break;
 				}
@@ -137,27 +135,33 @@ public static class OtherExtensions
 			while (true) {
 
 				PointI left = new (
-					x: ((curr.X - last.X) + (curr.Y - last.Y) + 2) / 2 + curr.X - 1,
-					y: ((curr.Y - last.Y) - (curr.X - last.X) + 2) / 2 + curr.Y - 1
+					X: ((curr.X - last.X) + (curr.Y - last.Y) + 2) / 2 + curr.X - 1,
+					Y: ((curr.Y - last.Y) - (curr.X - last.X) + 2) / 2 + curr.Y - 1
 				);
 
 				PointI right = new (
-					x: ((curr.X - last.X) - (curr.Y - last.Y) + 2) / 2 + curr.X - 1,
-					y: ((curr.Y - last.Y) + (curr.X - last.X) + 2) / 2 + curr.Y - 1
+					X: ((curr.X - last.X) - (curr.Y - last.Y) + 2) / 2 + curr.X - 1,
+					Y: ((curr.Y - last.Y) + (curr.X - last.X) + 2) / 2 + curr.Y - 1
 				);
 
 				if (bounds.ContainsPoint ((PointD) left) && stencil[left]) {
 					// go left
-					next.X += curr.Y - last.Y;
-					next.Y -= curr.X - last.X;
+					next = new (
+						X: next.X + (curr.Y - last.Y),
+						Y: next.Y - (curr.X - last.X)
+					);
 				} else if (bounds.ContainsPoint ((PointD) right) && stencil[right]) {
 					// go straight
-					next.X += curr.X - last.X;
-					next.Y += curr.Y - last.Y;
+					next = new (
+						X: next.X + (curr.X - last.X),
+						Y: next.Y + (curr.Y - last.Y)
+					);
 				} else {
 					// turn right
-					next.X -= curr.Y - last.Y;
-					next.Y += curr.X - last.X;
+					next = new (
+						X: next.X - (curr.Y - last.Y),
+						Y: next.Y + (curr.X - last.X)
+					);
 				}
 
 				if (Math.Sign (next.X - curr.X) != Math.Sign (curr.X - last.X) ||
