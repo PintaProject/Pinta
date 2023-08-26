@@ -131,15 +131,20 @@ public sealed class SimpleEffectDialog : Gtk.Dialog
 			var attrs = mi.GetCustomAttributes (false);
 
 			foreach (var attr in attrs) {
-				if (attr is SkipAttribute)
-					skip = true;
-				else if (attr is CaptionAttribute)
-					caption = ((CaptionAttribute) attr).Caption;
-				else if (attr is HintAttribute)
-					hint = ((HintAttribute) attr).Hint;
-				else if (attr is StaticListAttribute)
-					combo = true;
-
+				switch (attr) {
+					case SkipAttribute:
+						skip = true;
+						break;
+					case CaptionAttribute captionAttr:
+						caption = captionAttr.Caption;
+						break;
+					case HintAttribute hintAttr:
+						hint = hintAttr.Hint;
+						break;
+					case StaticListAttribute:
+						combo = true;
+						break;
+				}
 			}
 
 			if (skip || string.Compare (mi.Name, "IsDefault", true) == 0)
@@ -254,14 +259,20 @@ public sealed class SimpleEffectDialog : Gtk.Dialog
 		var digits_value = 2;
 
 		foreach (var attr in attributes) {
-			if (attr is MinimumValueAttribute min)
-				min_value = min.Value;
-			else if (attr is MaximumValueAttribute max)
-				max_value = max.Value;
-			else if (attr is IncrementValueAttribute inc)
-				inc_value = inc.Value;
-			else if (attr is DigitsValueAttribute digits)
-				digits_value = digits.Value;
+			switch (attr) {
+				case MinimumValueAttribute min:
+					min_value = min.Value;
+					break;
+				case MaximumValueAttribute max:
+					max_value = max.Value;
+					break;
+				case IncrementValueAttribute inc:
+					inc_value = inc.Value;
+					break;
+				case DigitsValueAttribute digits:
+					digits_value = digits.Value;
+					break;
+			}
 		}
 
 		var widget = new HScaleSpinButtonWidget {
@@ -293,14 +304,20 @@ public sealed class SimpleEffectDialog : Gtk.Dialog
 		var digits_value = 0;
 
 		foreach (var attr in attributes) {
-			if (attr is MinimumValueAttribute min)
-				min_value = min.Value;
-			else if (attr is MaximumValueAttribute max)
-				max_value = max.Value;
-			else if (attr is IncrementValueAttribute inc)
-				inc_value = inc.Value;
-			else if (attr is DigitsValueAttribute digits)
-				digits_value = digits.Value;
+			switch (attr) {
+				case MinimumValueAttribute min:
+					min_value = min.Value;
+					break;
+				case MaximumValueAttribute max:
+					max_value = max.Value;
+					break;
+				case IncrementValueAttribute inc:
+					inc_value = inc.Value;
+					break;
+				case DigitsValueAttribute digits:
+					digits_value = digits.Value;
+					break;
+			}
 		}
 
 		var widget = new HScaleSpinButtonWidget {
@@ -427,12 +444,15 @@ public sealed class SimpleEffectDialog : Gtk.Dialog
 	{
 		string? fieldName = null;
 
-		if (mi is FieldInfo fi) {
-			fi.SetValue (o, val);
-			fieldName = fi.Name;
-		} else if (mi is PropertyInfo pi) {
-			pi.GetSetMethod ()?.Invoke (o, new object[] { val });
-			fieldName = pi.Name;
+		switch (mi) {
+			case FieldInfo fi:
+				fi.SetValue (o, val);
+				fieldName = fi.Name;
+				break;
+			case PropertyInfo pi:
+				pi.GetSetMethod ()?.Invoke (o, new object[] { val });
+				fieldName = pi.Name;
+				break;
 		}
 
 		EffectDataChanged?.Invoke (this, new PropertyChangedEventArgs (fieldName));
@@ -441,12 +461,14 @@ public sealed class SimpleEffectDialog : Gtk.Dialog
 	// Returns the type for fields and properties and null for everything else
 	private static Type? GetTypeForMember (MemberInfo mi)
 	{
-		if (mi is FieldInfo fi)
-			return fi.FieldType;
-		else if (mi is PropertyInfo pi)
-			return pi.PropertyType;
-
-		return null;
+		switch (mi) {
+			case FieldInfo fi:
+				return fi.FieldType;
+			case PropertyInfo pi:
+				return pi.PropertyType;
+			default:
+				return null;
+		}
 	}
 
 	private static string MakeCaption (string name)
