@@ -29,19 +29,9 @@ using System;
 /// Replacements for Cairo / GDK points that GtkSharp provided in the GTK3 build.
 namespace Pinta.Core;
 
-public record struct PointI
+public readonly record struct PointI (int X, int Y)
 {
-	public PointI (int x, int y)
-	{
-		this.X = x;
-		this.Y = y;
-	}
-
 	public static readonly PointI Zero;
-
-	public int X;
-	public int Y;
-
 	public override readonly string ToString () => $"{X}, {Y}";
 }
 
