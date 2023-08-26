@@ -104,21 +104,8 @@ public readonly record struct RectangleD
 	}
 }
 
-public record struct RectangleI
+public readonly record struct RectangleI (int X, int Y, int Width, int Height)
 {
-	public int X;
-	public int Y;
-	public int Width;
-	public int Height;
-
-	public RectangleI (int x, int y, int width, int height)
-	{
-		this.X = x;
-		this.Y = y;
-		this.Width = width;
-		this.Height = height;
-	}
-
 	public RectangleI (in PointI point, int width, int height)
 		: this (point.X, point.Y, width, height)
 	{
