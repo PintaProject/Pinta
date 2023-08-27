@@ -30,6 +30,19 @@ public sealed class ForwardErrorDiffusionDitheringEffect : BaseEffect
 	public override void Render (ImageSurface src, ImageSurface dest, ReadOnlySpan<RectangleI> rois)
 	{
 		var src_data = src.GetReadOnlyPixelData ();
+		var working_surface = new ColorBgra[src_data.Length];
+		src_data.CopyTo(working_surface);
+		//{
+			//for (int i = 0; i < 10; i++) {
+				//dst_data[i] = ColorBgra.FromBgr(0,0,255);
+			//}
+			//return;
+		//}
+		var pixelsToTouch = new BitMask(src.Width, src.Height); // Keeping track of pixels inside the ROIs, so that our effect doesn't 'spill over' to pixels outside of them
+		foreach (var roi in rois) {
+			pixelsToTouch.Set(roi, true);
+		}
+		return;
 		var dst_data = dest.GetPixelData ();
 		src_data.CopyTo (dst_data);
 		var diffusionMatrix = GetPredefinedDiffusionMatrix (Data.DiffusionMatrix);
