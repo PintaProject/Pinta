@@ -32,44 +32,31 @@ public sealed class ForwardErrorDiffusionDitheringEffect : BaseEffect
 		var src_data = src.GetReadOnlyPixelData ();
 		var working_surface = new ColorBgra[src_data.Length];
 		src_data.CopyTo (working_surface);
-		//{
-		//for (int i = 0; i < 10; i++) {
-		//dst_data[i] = ColorBgra.FromBgr(0,0,255);
-		//}
-		//return;
-		//}
-		var pixelsToTouch = new BitMask (src.Width, src.Height); // Keeping track of pixels inside the ROIs, so that our effect doesn't 'spill over' to pixels outside of them
+		var pixelsToTouch = new BitMask (src.Width, src.Height); // So that effect doesn't 'spill over' to pixels outside ROIs
 		foreach (var roi in rois) {
 			pixelsToTouch.Set (roi, true);
 		}
-		return;
-		var dst_data = dest.GetPixelData ();
-		src_data.CopyTo (dst_data);
-		var diffusionMatrix = GetPredefinedDiffusionMatrix (Data.DiffusionMatrix);
-#if DEBUG
-		Console.WriteLine ($"ROIs: {rois.Length}");
-#endif
 		foreach (var rect in rois) {
-#if DEBUG
-			Console.WriteLine ($"ROI (top: {rect.Top}, left: {rect.Left}, height: {rect.Height}, width: {rect.Width}, bottom: {rect.Bottom}, right: {rect.Right})");
-#endif
 			for (int y = rect.Top; y <= rect.Bottom; y++) {
-#if DEBUG
-				Console.WriteLine ("C");
-#endif
 				for (int x = rect.Left; x <= rect.Right; x++) {
-#if DEBUG
-					Console.WriteLine ("D");
-#endif
 					var currentIndex = y * src.Width + x;
 					var originalPixel = src_data[currentIndex];
 					var closestColor = FindClosestPaletteColor (originalPixel);
-					dst_data[currentIndex] = closestColor;
+					working_surface[currentIndex] = closestColor;
 					int errorRed = originalPixel.R - closestColor.R;
 					int errorGreen = originalPixel.G - closestColor.G;
 					int errorBlue = originalPixel.B - closestColor.B;
-					DistributeError (dst_data, x, y, errorRed, errorGreen, errorBlue, src.Width, src.Height);
+					DistributeError (working_surface, x, y, errorRed, errorGreen, errorBlue, src.Width, src.Height);
 				}
+			}
+		}
+		var dst_data = dest.GetPixelData ();
+		src_data.CopyTo (dst_data);
+		for (int y = 0; y < pixelsToTouch.Height; y++) {
+			for (int x = 0; x < pixelsToTouch.Width; x++) {
+				if (!pixelsToTouch[x, y]) continue;
+				var index = y * dest.Width + x;
+				dst_data[index] = working_surface[index];
 			}
 		}
 	}
