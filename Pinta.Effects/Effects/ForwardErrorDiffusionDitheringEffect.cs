@@ -30,33 +30,19 @@ public sealed class ForwardErrorDiffusionDitheringEffect : BaseEffect
 	public override void Render (ImageSurface src, ImageSurface dest, ReadOnlySpan<RectangleI> rois)
 	{
 		var src_data = src.GetReadOnlyPixelData ();
-		var working_surface = new ColorBgra[src_data.Length];
-		src_data.CopyTo (working_surface);
-		var pixelsToTouch = new BitMask (src.Width, src.Height); // So that effect doesn't 'spill over' to pixels outside ROIs
-		foreach (var roi in rois) {
-			pixelsToTouch.Set (roi, true);
-		}
+		var dst_data = dest.GetPixelData ();
 		foreach (var rect in rois) {
 			for (int y = rect.Top; y <= rect.Bottom; y++) {
 				for (int x = rect.Left; x <= rect.Right; x++) {
 					var currentIndex = y * src.Width + x;
 					var originalPixel = src_data[currentIndex];
 					var closestColor = FindClosestPaletteColor (originalPixel);
-					working_surface[currentIndex] = closestColor;
+					dst_data[currentIndex] = closestColor;
 					int errorRed = originalPixel.R - closestColor.R;
 					int errorGreen = originalPixel.G - closestColor.G;
 					int errorBlue = originalPixel.B - closestColor.B;
-					DistributeError (working_surface, x, y, errorRed, errorGreen, errorBlue, src.Width, src.Height);
+					DistributeError (dst_data, x, y, errorRed, errorGreen, errorBlue, src.Width, src.Height);
 				}
-			}
-		}
-		var dst_data = dest.GetPixelData ();
-		src_data.CopyTo (dst_data);
-		for (int y = 0; y < pixelsToTouch.Height; y++) {
-			for (int x = 0; x < pixelsToTouch.Width; x++) {
-				if (!pixelsToTouch[x, y]) continue;
-				var index = y * dest.Width + x;
-				dst_data[index] = working_surface[index];
 			}
 		}
 	}
