@@ -35,7 +35,7 @@ public sealed class ForwardErrorDiffusionDitheringEffect : BaseEffect
 			for (int y = rect.Top; y <= rect.Bottom; y++) {
 				for (int x = rect.Left; x <= rect.Right; x++) {
 					var currentIndex = y * src.Width + x;
-					var originalPixel = src_data[currentIndex];
+					var originalPixel = dst_data[currentIndex];
 					var closestColor = FindClosestPaletteColor (originalPixel);
 					dst_data[currentIndex] = closestColor;
 					int errorRed = originalPixel.R - closestColor.R;
