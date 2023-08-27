@@ -29,7 +29,7 @@ public sealed class ForwardErrorDiffusionDitheringEffect : BaseEffect
 
 	public override void Render (ImageSurface src, ImageSurface dest, ReadOnlySpan<RectangleI> rois)
 	{
-		var src_data = src.GetReadOnlyPixelData ();
+		//var src_data = src.GetReadOnlyPixelData ();
 		var dst_data = dest.GetPixelData ();
 		foreach (var rect in rois) {
 			for (int y = rect.Top; y <= rect.Bottom; y++) {
