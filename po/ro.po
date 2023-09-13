@@ -7,19 +7,19 @@ msgid ""
 msgstr ""
 "Project-Id-Version: pinta\n"
 "Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
-"POT-Creation-Date: 2022-12-18 22:26-0500\n"
-"PO-Revision-Date: 2020-04-16 09:35+0000\n"
-"Last-Translator: Mircea <mirceanis@gmail.com>\n"
+"POT-Creation-Date: 2023-04-18 22:48-0400\n"
+"PO-Revision-Date: 2023-04-24 16:26+0000\n"
+"Last-Translator: Miron Cristea <Unknown>\n"
 "Language-Team: Romanian <ro@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=3; plural=(n == 1 ? 0: (((n % 100 > 19) || ((n % 100 "
 "== 0) && (n != 0))) ? 2: 1));\n"
-"X-Launchpad-Export-Date: 2023-02-26 03:56+0000\n"
-"X-Generator: Launchpad (build b826c8bc42f0c41016fa141bf50faee47f7ecd80)\n"
+"X-Launchpad-Export-Date: 2023-09-13 22:40+0000\n"
+"X-Generator: Launchpad (build 32eed776db4e1fe74faaa77122cde19862d565ac)\n"
 
-#: Mono.Addins.Gui/Mono.Addins.Gui/InstallDialog.cs:142
+#: ../Pinta.Gui.Addins/InstallDialog.cs:217
 msgid " (in user directory)"
 msgstr " (în directorul utilizatorului)"
 
@@ -27,33 +27,28 @@ msgstr " (în directorul utilizatorului)"
 msgid " Selection Mode: "
 msgstr " Modul de selecție: "
 
-#: Mono.Addins/Mono.Addins.Description/AssemblyDependency.cs:103
-#, csharp-format
-msgid "(provided by {0})"
-msgstr "(furnizat de către {0})"
-
 #: ../Pinta.Core/Managers/EffectsManager.cs:60
 #: ../Pinta.Core/Managers/EffectsManager.cs:90
 msgid "..."
 msgstr "..."
 
-#: ../Pinta.Tools/Tools/ColorPickerTool.cs:226
+#: ../Pinta.Tools/Tools/ColorPickerTool.cs:223
 msgid "3 x 3 Region"
 msgstr "Regiune 3 x 3"
 
-#: ../Pinta.Tools/Tools/ColorPickerTool.cs:227
+#: ../Pinta.Tools/Tools/ColorPickerTool.cs:224
 msgid "5 x 5 Region"
 msgstr "Regiune 5 x 5"
 
-#: ../Pinta.Tools/Tools/ColorPickerTool.cs:228
+#: ../Pinta.Tools/Tools/ColorPickerTool.cs:225
 msgid "7 x 7 Region"
 msgstr "Regiune 7 x 7"
 
-#: ../Pinta.Tools/Tools/ColorPickerTool.cs:229
+#: ../Pinta.Tools/Tools/ColorPickerTool.cs:226
 msgid "9 x 9 Region"
 msgstr "Regiune 9 x 9"
 
-#: ../Pinta/MainWindow.cs:353
+#: ../Pinta/MainWindow.cs:340
 msgid "A_dd-ins"
 msgstr "E_xtensii"
 
@@ -61,86 +56,63 @@ msgstr "E_xtensii"
 msgid "About"
 msgstr "Despre aplicație"
 
-#: ../Pinta/Actions/Help/AboutDialogAction.cs:52
+#: ../Pinta/Actions/Help/AboutDialogAction.cs:53
 msgid "About Pinta"
 msgstr "Despre Pinta"
 
-#: ../Pinta/Actions/Edit/PasteAction.cs:130
+#: ../Pinta/Actions/Edit/PasteAction.cs:127
 #: ../Pinta.Core/Actions/LayerActions.cs:50
-#: ../Pinta.Core/Actions/LayerActions.cs:330
+#: ../Pinta.Core/Actions/LayerActions.cs:331
 msgid "Add New Layer"
 msgstr "Adaugă strat nou"
 
-#: Mono.Addins.Gui/gtk-gui/Mono.Addins.Gui.NewSiteDialog.cs:29
-msgid "Add New Repository"
-msgstr "Adaugă sursă nouă"
-
-#: ../Pinta.Effects/Effects/AddNoiseEffect.cs:29
+#: ../Pinta.Effects/Effects/AddNoiseEffect.cs:27
 msgid "Add Noise"
 msgstr "Adaugă zgomot"
 
-#: Mono.Addins.Gui/Mono.Addins.Gui/AddinTreeWidget.cs:120
-msgid "Add-in"
-msgstr "Extensie"
-
 #: ../Pinta.Core/Actions/AddinActions.cs:39
-msgid "Add-in Manager"
-msgstr "Administrator de module"
+msgid "Add-in Manager..."
+msgstr "Managerul de suplimente"
 
-#: Mono.Addins.Gui/gtk-gui/Mono.Addins.Gui.ManageSitesDialog.cs:20
-msgid "Add-in Repository Management"
-msgstr "Management surse extensii"
-
-#: Mono.Addins.Gui/Mono.Addins.Gui/AddinManagerDialog.cs:523
-msgid "Add-in packages"
-msgstr "Pachete cu actualizări"
-
-#: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:766
+#: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:772
 msgid "Added"
 msgstr "Adăugat"
 
-#: Mono.Addins.Gui/gtk-gui/Mono.Addins.Gui.AddinInstallerDialog.cs:38
-msgid "Additional extensions are required to perform this operation."
-msgstr "Sunt necesare extensii adiționale pentru a efectua această operație."
-
-#: ../Pinta.Tools/Tools/ColorPickerTool.cs:197
+#: ../Pinta.Tools/Tools/ColorPickerTool.cs:194
 msgid "After select"
 msgstr "După selecţie"
 
-#: ../Pinta/Actions/File/OpenDocumentAction.cs:83
-#: ../Pinta.Core/Actions/EditActions.cs:380
+#: ../Pinta/Actions/File/OpenDocumentAction.cs:81
+#: ../Pinta.Core/Actions/EditActions.cs:367
+#: ../Pinta.Gui.Addins/AddinManagerDialog.cs:210
 msgid "All files"
 msgstr "Toate fişierele"
 
-#: Mono.Addins.Gui/Mono.Addins.Gui/AddinManagerDialog.cs:261
-msgid "All repositories"
-msgstr "Toate sursele"
-
-#: ../Pinta.Effects/Effects/BulgeEffect.cs:100
-#: ../Pinta.Effects/Effects/FrostedGlassEffect.cs:163
-#: ../Pinta.Effects/Effects/SharpenEffect.cs:62
-#: ../Pinta.Effects/Effects/TwistEffect.cs:130
-#: ../Pinta.Effects/Effects/ZoomBlurEffect.cs:130
+#: ../Pinta.Effects/Effects/BulgeEffect.cs:95
+#: ../Pinta.Effects/Effects/FrostedGlassEffect.cs:159
+#: ../Pinta.Effects/Effects/SharpenEffect.cs:60
+#: ../Pinta.Effects/Effects/TwistEffect.cs:126
+#: ../Pinta.Effects/Effects/ZoomBlurEffect.cs:128
 msgid "Amount"
 msgstr "Cantitate"
 
-#: ../Pinta/Dialogs/ResizeCanvasDialog.cs:347
+#: ../Pinta/Dialogs/ResizeCanvasDialog.cs:357
 msgid "Anchor:"
 msgstr "Ancoră:"
 
-#: ../Pinta/Actions/Layers/RotateZoomLayerAction.cs:112
-#: ../Pinta.Effects/Effects/EdgeDetectEffect.cs:88
-#: ../Pinta.Effects/Effects/EmbossEffect.cs:145
-#: ../Pinta.Effects/Effects/JuliaFractalEffect.cs:139
-#: ../Pinta.Effects/Effects/MandelbrotFractalEffect.cs:163
-#: ../Pinta.Effects/Effects/MotionBlurEffect.cs:110
+#: ../Pinta/Actions/Layers/RotateZoomLayerAction.cs:116
+#: ../Pinta.Effects/Effects/EdgeDetectEffect.cs:86
+#: ../Pinta.Effects/Effects/EmbossEffect.cs:142
+#: ../Pinta.Effects/Effects/JuliaFractalEffect.cs:135
+#: ../Pinta.Effects/Effects/MandelbrotFractalEffect.cs:148
+#: ../Pinta.Effects/Effects/MotionBlurEffect.cs:108
 #: ../Pinta.Effects/Effects/RadialBlurEffect.cs:157
-#: ../Pinta.Effects/Effects/ReliefEffect.cs:90
-#: ../Pinta.Tools/Editable/EditEngines/ArrowedEditEngine.cs:306
+#: ../Pinta.Effects/Effects/ReliefEffect.cs:88
+#: ../Pinta.Tools/Editable/EditEngines/ArrowedEditEngine.cs:297
 msgid "Angle"
 msgstr "Unghi"
 
-#: ../Pinta.Effects/Effects/TwistEffect.cs:132
+#: ../Pinta.Effects/Effects/TwistEffect.cs:128
 msgid "Antialias"
 msgstr "Anticrenelare"
 
@@ -152,21 +124,17 @@ msgstr "Finisare margini deactivată"
 msgid "Antialiasing On"
 msgstr "Finisare margini activată"
 
-#: Mono.Addins.Gui/Mono.Addins.Gui/InstallDialog.cs:190
-msgid "Are you sure you want to cancel the installation?"
-msgstr "Sigur doriți anularea instalării?"
-
-#: ../Pinta.Tools/Editable/EditEngines/ArrowedEditEngine.cs:254
+#: ../Pinta.Tools/Editable/EditEngines/ArrowedEditEngine.cs:245
 msgid "Arrow"
 msgstr "Săgeată"
 
-#: ../Pinta.Effects/Effects/InkSketchEffect.cs:40
-#: ../Pinta.Effects/Effects/OilPaintingEffect.cs:32
-#: ../Pinta.Effects/Effects/PencilSketchEffect.cs:39
+#: ../Pinta.Effects/Effects/InkSketchEffect.cs:38
+#: ../Pinta.Effects/Effects/OilPaintingEffect.cs:30
+#: ../Pinta.Effects/Effects/PencilSketchEffect.cs:37
 msgid "Artistic"
 msgstr "Artistic"
 
-#: ../Pinta.Effects/Dialogs/Effects.LevelsDialog.cs:529
+#: ../Pinta.Effects/Dialogs/Effects.LevelsDialog.cs:530
 msgid "Auto"
 msgstr "Automat"
 
@@ -178,23 +146,24 @@ msgstr "Auto Decupare"
 msgid "Auto Level"
 msgstr "Nivel automat"
 
-#: Mono.Addins.Gui/Mono.Addins.Gui/AddinInfoView.cs:217
-msgid "Available in repository:"
-msgstr "Disponibil în repository"
+#: ../Pinta.Gui.Addins/AddinInfoView.cs:141
+#, csharp-format
+msgid "Available in repository: {0}"
+msgstr "Disponibile in catalog: {0}"
 
-#: ../Pinta.Core/Managers/WorkspaceManager.cs:175
+#: ../Pinta.Core/Managers/WorkspaceManager.cs:177
 msgid "Background"
 msgstr "Fundal"
 
-#: ../Pinta/Dialogs/NewImageDialog.cs:281
+#: ../Pinta/Dialogs/NewImageDialog.cs:305
 msgid "Background Color"
 msgstr "Culoare de fundal"
 
-#: ../Pinta/Dialogs/NewImageDialog.cs:271
+#: ../Pinta/Dialogs/NewImageDialog.cs:291
 msgid "Background:"
 msgstr "Fundal:"
 
-#: ../Pinta/Actions/Help/AboutDialogAction.cs:82
+#: ../Pinta/Actions/Help/AboutDialogAction.cs:83
 msgid "Based on the work of Paint.NET:"
 msgstr "Bazat pe munca la programul Paint.NET:"
 
@@ -206,34 +175,34 @@ msgstr "Cea mai bună încadrare"
 msgid "Black and White"
 msgstr "Negru și alb"
 
-#: ../Pinta/Dialogs/LayerPropertiesDialog.cs:206
+#: ../Pinta/Dialogs/LayerPropertiesDialog.cs:207
 msgid "Blend Mode"
 msgstr "Mod contopire"
 
-#: ../Pinta.Effects/Dialogs/Effects.LevelsDialog.cs:525
-#: ../Pinta.Effects/Dialogs/Effects.PosterizeDialog.cs:121
+#: ../Pinta.Effects/Dialogs/Effects.LevelsDialog.cs:527
+#: ../Pinta.Effects/Dialogs/Effects.PosterizeDialog.cs:125
 msgid "Blue"
 msgstr "Albastru"
 
-#: ../Pinta.Effects/Dialogs/Effects.CurvesDialog.cs:454
+#: ../Pinta.Effects/Dialogs/Effects.CurvesDialog.cs:466
 msgid "Blue "
 msgstr "Albastru "
 
-#: ../Pinta.Effects/Effects/FragmentEffect.cs:32
-#: ../Pinta.Effects/Effects/GaussianBlurEffect.cs:32
-#: ../Pinta.Effects/Effects/MotionBlurEffect.cs:32
-#: ../Pinta.Effects/Effects/RadialBlurEffect.cs:32
-#: ../Pinta.Effects/Effects/UnfocusEffect.cs:34
-#: ../Pinta.Effects/Effects/ZoomBlurEffect.cs:32
+#: ../Pinta.Effects/Effects/FragmentEffect.cs:30
+#: ../Pinta.Effects/Effects/GaussianBlurEffect.cs:31
+#: ../Pinta.Effects/Effects/MotionBlurEffect.cs:30
+#: ../Pinta.Effects/Effects/RadialBlurEffect.cs:31
+#: ../Pinta.Effects/Effects/UnfocusEffect.cs:32
+#: ../Pinta.Effects/Effects/ZoomBlurEffect.cs:30
 msgid "Blurs"
 msgstr "Neclarități"
 
-#: ../Pinta.Tools/Tools/TextTool.cs:162
+#: ../Pinta.Tools/Tools/TextTool.cs:159
 msgid "Bold"
 msgstr "Aldin"
 
-#: ../Pinta.Effects/Adjustments/BrightnessContrastEffect.cs:152
-#: ../Pinta.Effects/Effects/GlowEffect.cs:81
+#: ../Pinta.Effects/Adjustments/BrightnessContrastEffect.cs:149
+#: ../Pinta.Effects/Effects/GlowEffect.cs:83
 msgid "Brightness"
 msgstr "Luminozitate"
 
@@ -241,58 +210,56 @@ msgstr "Luminozitate"
 msgid "Brightness / Contrast"
 msgstr "Luminozitate / contrast"
 
-#: Mono.Addins.Gui/gtk-gui/Mono.Addins.Gui.NewSiteDialog.cs:154
-msgid "Browse..."
-msgstr "Navighează..."
-
-#: ../Pinta.Effects/Effects/OilPaintingEffect.cs:175
+#: ../Pinta.Effects/Effects/OilPaintingEffect.cs:147
 msgid "Brush Size"
 msgstr "Mărime pensulă"
 
-#: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:266
-#: ../Pinta.Tools/Tools/BaseBrushTool.cs:104
+#: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:265
+#: ../Pinta.Tools/Tools/BaseBrushTool.cs:101
 msgid "Brush width"
 msgstr "Grosime pensulă"
 
-#: ../Pinta.Effects/Effects/BulgeEffect.cs:24
+#: ../Pinta.Effects/Effects/BulgeEffect.cs:22
 msgid "Bulge"
 msgstr "Umflare"
 
-#: ../Pinta/Dialogs/ResizeCanvasDialog.cs:313
-#: ../Pinta/Dialogs/ResizeImageDialog.cs:149
+#: ../Pinta/Dialogs/ResizeCanvasDialog.cs:315
+#: ../Pinta/Dialogs/ResizeImageDialog.cs:151
 msgid "By absolute size:"
 msgstr "După dimensiune absolută:"
 
-#: ../Pinta/Dialogs/ResizeCanvasDialog.cs:312
-#: ../Pinta/Dialogs/ResizeImageDialog.cs:148
+#: ../Pinta/Dialogs/ResizeCanvasDialog.cs:314
+#: ../Pinta/Dialogs/ResizeImageDialog.cs:150
 msgid "By percentage:"
 msgstr "După procentaj:"
 
-#: ../Pinta/Actions/File/OpenDocumentAction.cs:54
-#: ../Pinta/Actions/File/SaveDocumentImplementationAction.cs:76
-#: ../Pinta.Core/Actions/EditActions.cs:362
-#: ../Pinta.Core/Actions/EditActions.cs:404
+#: ../Pinta/Actions/File/OpenDocumentAction.cs:55
+#: ../Pinta/Actions/File/SaveDocumentImplementationAction.cs:74
+#: ../Pinta.Core/Actions/EditActions.cs:352
+#: ../Pinta.Core/Actions/EditActions.cs:392
 #: ../Pinta.Core/Actions/LayerActions.cs:169
+#: ../Pinta.Gui.Addins/AddinManagerDialog.cs:199
+#: ../Pinta.Gui.Addins/InstallDialog.cs:119
 msgid "Cancel"
-msgstr ""
+msgstr "Anulează"
 
 #: ../Pinta/Pads/CanvasPad.cs:43
 msgid "Canvas"
 msgstr "Spațiu de desen"
 
-#: ../Pinta.Effects/Effects/PixelateEffect.cs:123
+#: ../Pinta.Effects/Effects/PixelateEffect.cs:121
 msgid "Cell Size"
 msgstr "Mărime celulă"
 
-#: ../Pinta.Tools/Tools/TextTool.cs:210
+#: ../Pinta.Tools/Tools/TextTool.cs:211
 msgid "Center Align"
 msgstr "Aliniază centrat"
 
-#: ../Pinta.Effects/Effects/WarpEffect.cs:191
+#: ../Pinta.Effects/Effects/WarpEffect.cs:195
 msgid "Center Offset"
 msgstr "Centrare decalaj"
 
-#: ../Pinta.Effects/Effects/MotionBlurEffect.cs:116
+#: ../Pinta.Effects/Effects/MotionBlurEffect.cs:114
 msgid "Centered"
 msgstr "Centrat"
 
@@ -300,23 +267,23 @@ msgstr "Centrat"
 msgid "Centimeters"
 msgstr "Centimetri"
 
-#: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:339
+#: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:338
 msgid "Changed Shape Type"
 msgstr "Modificare tip formă"
 
-#: ../Pinta.Effects/Dialogs/Effects.LevelsDialog.cs:473
+#: ../Pinta.Effects/Dialogs/Effects.LevelsDialog.cs:472
 msgid "Choose Color"
-msgstr ""
+msgstr "Alege culoarea"
 
-#: ../Pinta.Gui.Widgets/Widgets/StatusBarColorPaletteWidget.cs:113
+#: ../Pinta.Gui.Widgets/Widgets/StatusBarColorPaletteWidget.cs:108
 msgid "Choose Palette Color"
 msgstr "Alege culoarea din paletă"
 
-#: ../Pinta.Gui.Widgets/Widgets/StatusBarColorPaletteWidget.cs:83
+#: ../Pinta.Gui.Widgets/Widgets/StatusBarColorPaletteWidget.cs:78
 msgid "Choose Primary Color"
 msgstr "Alege culoarea principală"
 
-#: ../Pinta.Gui.Widgets/Widgets/StatusBarColorPaletteWidget.cs:86
+#: ../Pinta.Gui.Widgets/Widgets/StatusBarColorPaletteWidget.cs:81
 msgid "Choose Secondary Color"
 msgstr "Alege culoarea secundară"
 
@@ -328,29 +295,29 @@ msgstr "Cercuri"
 msgid "Clamp"
 msgstr "Restrânge"
 
-#: ../Pinta.Tools/Tools/RectangleSelectTool.cs:41
+#: ../Pinta.Tools/Tools/RectangleSelectTool.cs:42
 msgid ""
-"Click and drag to draw a rectangular selection. Hold Shift to constrain to a "
-"square."
+"Click and drag to draw a rectangular selection.\n"
+"Hold Shift to constrain to a square."
 msgstr ""
-"Click și trage pentru a desena o selecție rectangulară. Ține apăsată tasta "
-"Shift pentru a constrânge selecția la forma de pătrat."
+"Faceți clic cu mouse-ul si trageți pentru a desena un dreptunghi. Țineți "
+"apăsată tasta Shift pentru a descrie un pătrat."
 
 #: ../Pinta.Tools/Tools/EllipseSelectTool.cs:41
 msgid ""
-"Click and drag to draw an elliptical selection. Hold Shift to constrain to a "
-"circle."
+"Click and drag to draw an elliptical selection.\n"
+"Hold Shift to constrain to a circle."
 msgstr ""
-"Click și trage pentru a desena o selecție eliptică. Ține apăsată tasta Shift "
-"pentru a constrânge selecția la forma de cerc."
+"Faceți clic cu mouse-ul si trageți pentru a desena o elipsa. Țineți apăsată "
+"tasta Shift pentru a descrie un cerc."
 
 #: ../Pinta.Tools/Tools/GradientTool.cs:51
 msgid ""
-"Click and drag to draw gradient from primary to secondary color.  Right "
-"click to reverse."
+"Click and drag to draw gradient from primary to secondary color.\n"
+"Right click to reverse."
 msgstr ""
-"Clic pentru a desena un gradient de la culoarea principală la cea secundară. "
-"Clic dreapta pentru inversare."
+"Faceți clic cu mouse-ul si trageți pentru a desena o tranziție de la "
+"culoarea primara la cea secundara."
 
 #: ../Pinta.Tools/Tools/LassoSelectTool.cs:55
 msgid "Click and drag to draw the outline for a selection area."
@@ -360,11 +327,11 @@ msgstr "Clic și trage pentru a desena o margine zonei selectate."
 msgid "Click and drag to navigate image."
 msgstr "Clic şi trage pentru a naviga în imagine."
 
-#: ../Pinta.Gui.Widgets/Widgets/StatusBarColorPaletteWidget.cs:241
+#: ../Pinta.Gui.Widgets/Widgets/StatusBarColorPaletteWidget.cs:265
 msgid "Click to reset primary and secondary color."
 msgstr "Click pentru a reseta culoarea principală și cea secundară."
 
-#: ../Pinta.Gui.Widgets/Widgets/StatusBarColorPaletteWidget.cs:230
+#: ../Pinta.Gui.Widgets/Widgets/StatusBarColorPaletteWidget.cs:254
 msgid "Click to select primary color."
 msgstr "Clic pentru selectarea culorii primare."
 
@@ -372,18 +339,20 @@ msgstr "Clic pentru selectarea culorii primare."
 msgid "Click to select region of similar color."
 msgstr "Clic pentru a selecta regiunea de culoare similară."
 
-#: ../Pinta.Gui.Widgets/Widgets/StatusBarColorPaletteWidget.cs:233
+#: ../Pinta.Gui.Widgets/Widgets/StatusBarColorPaletteWidget.cs:257
 msgid "Click to select secondary color."
 msgstr "Clic pentru selectarea culorii secundare."
 
-#: ../Pinta.Gui.Widgets/Widgets/StatusBarColorPaletteWidget.cs:236
+#: ../Pinta.Gui.Widgets/Widgets/StatusBarColorPaletteWidget.cs:260
 msgid "Click to switch between primary and secondary color."
 msgstr ""
+"Faceți clic cu mouse-ul si trageți pentru a schimba intre culoarea primara "
+"si cea secundara."
 
-#: ../Pinta/Dialogs/NewImageDialog.cs:161
-#: ../Pinta/Dialogs/NewImageDialog.cs:199
-#: ../Pinta/Dialogs/NewImageDialog.cs:341
-#: ../Pinta/Dialogs/NewImageDialog.cs:431
+#: ../Pinta/Dialogs/NewImageDialog.cs:164
+#: ../Pinta/Dialogs/NewImageDialog.cs:204
+#: ../Pinta/Dialogs/NewImageDialog.cs:378
+#: ../Pinta/Dialogs/NewImageDialog.cs:467
 msgid "Clipboard"
 msgstr "Clipboard"
 
@@ -392,6 +361,7 @@ msgid "Clone Stamp"
 msgstr "Ștampilă de clonare"
 
 #: ../Pinta.Core/Actions/FileActions.cs:54
+#: ../Pinta.Gui.Addins/InstallDialog.cs:272
 msgid "Close"
 msgstr "Închide"
 
@@ -399,24 +369,19 @@ msgstr "Închide"
 msgid "Close All"
 msgstr "Închide tot"
 
-#: ../Pinta/Actions/File/CloseDocumentAction.cs:72
-#: ../Pinta/Actions/File/CloseDocumentAction.cs:75
-msgid "Close _without Saving"
-msgstr ""
-
 #: ../Pinta.Tools/Editable/EditEngines/RectangleEditEngine.cs:40
 msgid "Closed Curve Shape"
 msgstr "Formă curbă închisă"
 
-#: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:323
+#: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:322
 msgid "Closed Line/Curve Series"
 msgstr "Serie linii/curbe închise"
 
-#: ../Pinta.Effects/Effects/CloudsEffect.cs:29
+#: ../Pinta.Effects/Effects/CloudsEffect.cs:27
 msgid "Clouds"
 msgstr "Nori"
 
-#: ../Pinta.Effects/Effects/OilPaintingEffect.cs:178
+#: ../Pinta.Effects/Effects/OilPaintingEffect.cs:150
 msgid "Coarseness"
 msgstr "Asprime"
 
@@ -432,27 +397,27 @@ msgstr "Culoare arsă"
 msgid "Color Dodge"
 msgstr "Culoare evitată"
 
-#: ../Pinta.Tools/Tools/GradientTool.cs:203
+#: ../Pinta.Tools/Tools/GradientTool.cs:201
 msgid "Color Mode"
-msgstr ""
+msgstr "Mod color"
 
 #: ../Pinta.Tools/Tools/ColorPickerTool.cs:52
 msgid "Color Picker"
 msgstr "Selector de culoare"
 
-#: ../Pinta.Effects/Effects/PencilSketchEffect.cs:101
+#: ../Pinta.Effects/Effects/PencilSketchEffect.cs:95
 msgid "Color Range"
 msgstr "Interval culoare"
 
-#: ../Pinta.Effects/Effects/AddNoiseEffect.cs:173
+#: ../Pinta.Effects/Effects/AddNoiseEffect.cs:177
 msgid "Color Saturation"
 msgstr "Saturație culoare"
 
-#: ../Pinta.Effects/Effects/InkSketchEffect.cs:167
+#: ../Pinta.Effects/Effects/InkSketchEffect.cs:162
 msgid "Coloring"
 msgstr "Colorare"
 
-#: ../Pinta.Tools/Tools/GradientTool.cs:188
+#: ../Pinta.Tools/Tools/GradientTool.cs:186
 msgid "Conical Gradient"
 msgstr "Gradient conic"
 
@@ -460,12 +425,12 @@ msgstr "Gradient conic"
 msgid "Contents"
 msgstr "Conținut"
 
-#: ../Pinta.Tools/Tools/FloodTool.cs:136
+#: ../Pinta.Tools/Tools/FloodTool.cs:135
 msgid "Contiguous"
 msgstr "Continuu"
 
-#: ../Pinta.Effects/Adjustments/BrightnessContrastEffect.cs:163
-#: ../Pinta.Effects/Effects/GlowEffect.cs:83
+#: ../Pinta.Effects/Adjustments/BrightnessContrastEffect.cs:160
+#: ../Pinta.Effects/Effects/GlowEffect.cs:85
 msgid "Contrast"
 msgstr "Contrast"
 
@@ -477,45 +442,46 @@ msgstr "Copiază"
 msgid "Copy Merged"
 msgstr "Copiază mixat"
 
-#: ../Pinta/Actions/Help/AboutDialogAction.cs:70
+#: ../Pinta/Actions/Help/AboutDialogAction.cs:71
 msgid "Copyright"
 msgstr "Copyright"
 
-#: ../Pinta/Actions/File/NewScreenshotAction.cs:124
+#. Translators: {0} is the name of a layer, and {1} is the path to a .ora file.
+#: ../Pinta.Core/ImageFormats/OraFormat.cs:114
 #, csharp-format
-msgid "Could not obtain the size of display '{0}'"
-msgstr ""
+msgid "Could not import layer \"{0}\" from {1}"
+msgstr "Nu s-a putut importa stratul \"{0}\" din {1}"
 
-#: ../Pinta.Core/Classes/Palette.cs:197
-#: ../Pinta.Core/Managers/WorkspaceManager.cs:395
-#: ../Pinta.Core/Managers/WorkspaceManager.cs:404
+#: ../Pinta.Core/Classes/Palette.cs:196
+#: ../Pinta.Core/Managers/WorkspaceManager.cs:384
+#: ../Pinta.Core/Managers/WorkspaceManager.cs:391
 #, csharp-format
 msgid "Could not open file: {0}"
 msgstr "Nu am putut deschide fişierul: {0}"
 
-#: ../Pinta.Effects/Effects/AddNoiseEffect.cs:176
+#: ../Pinta.Effects/Effects/AddNoiseEffect.cs:180
 msgid "Coverage"
 msgstr "Acoperire"
 
 #: ../Pinta.Core/Actions/ImageActions.cs:47
-#: ../Pinta.Core/Actions/ImageActions.cs:286
+#: ../Pinta.Core/Actions/ImageActions.cs:285
 msgid "Crop to Selection"
 msgstr "Decupează selecția"
 
 #: ../Pinta.Effects/Adjustments/CurvesEffect.cs:27
-#: ../Pinta.Effects/Dialogs/Effects.CurvesDialog.cs:90
+#: ../Pinta.Effects/Dialogs/Effects.CurvesDialog.cs:93
 msgid "Curves"
 msgstr "Curbe"
 
-#: ../Pinta/Dialogs/NewImageDialog.cs:161
-#: ../Pinta/Dialogs/NewImageDialog.cs:201
-#: ../Pinta/Dialogs/NewImageDialog.cs:343
-#: ../Pinta/Dialogs/NewImageDialog.cs:431
+#: ../Pinta/Dialogs/NewImageDialog.cs:164
+#: ../Pinta/Dialogs/NewImageDialog.cs:206
+#: ../Pinta/Dialogs/NewImageDialog.cs:380
+#: ../Pinta/Dialogs/NewImageDialog.cs:467
 msgid "Custom"
 msgstr "Personalizat"
 
 #: ../Pinta.Core/Actions/EditActions.cs:61
-#: ../Pinta.Core/Actions/EditActions.cs:247
+#: ../Pinta.Core/Actions/EditActions.cs:244
 msgid "Cut"
 msgstr "Taie"
 
@@ -523,24 +489,20 @@ msgstr "Taie"
 msgid "Darken"
 msgstr "Închide culoarea"
 
-#: ../Pinta.Tools/Dashes/DashPatternBox.cs:71
+#: ../Pinta.Tools/Dashes/DashPatternBox.cs:67
 msgid "Dash"
 msgstr "Liniuţă"
 
-#: ../Pinta/Actions/File/NewScreenshotAction.cs:106
-msgid "Delay before taking a screenshot (seconds):"
-msgstr "Întârziere înaintea capturii de ecran (secunde):"
-
 #: ../Pinta.Core/Actions/LayerActions.cs:51
-#: ../Pinta.Core/Actions/LayerActions.cs:313
+#: ../Pinta.Core/Actions/LayerActions.cs:314
 msgid "Delete Layer"
 msgstr "Şterge strat"
 
-#: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:481
+#: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:480
 msgid "Deleted"
 msgstr "Şters"
 
-#: ../Pinta.Core/Actions/EditActions.cs:258
+#: ../Pinta.Core/Actions/EditActions.cs:255
 msgid "Deselect"
 msgstr "Deselectează"
 
@@ -548,9 +510,7 @@ msgstr "Deselectează"
 msgid "Deselect All"
 msgstr "Deselectează tot"
 
-#: ../Pinta/Dialogs/ErrorDialog.cs:98
-#: Mono.Addins.Gui/gtk-gui/Mono.Addins.Gui.ErrorDialog.cs:92
-#: Mono.Addins.Gui/gtk-gui/Mono.Addins.Gui.ProgressDialog.cs:66
+#: ../Pinta/Dialogs/ErrorDialog.cs:63
 msgid "Details"
 msgstr "Detalii"
 
@@ -558,55 +518,43 @@ msgstr "Detalii"
 msgid "Difference"
 msgstr "Diferenţă"
 
-#: Mono.Addins.Gui/Mono.Addins.Gui/AddinInfoView.cs:163
-#: Mono.Addins.Gui/gtk-gui/Mono.Addins.Gui.AddinInfoView.cs:270
-msgid "Disable"
-msgstr "Dezactivează"
-
-#: ../Pinta/Main.cs:61
+#: ../Pinta/Main.cs:63
 msgid "Display the application version."
 msgstr "Afișează versiunea aplicației"
 
-#: ../Pinta.Effects/Effects/FragmentEffect.cs:113
-#: ../Pinta.Effects/Effects/MotionBlurEffect.cs:113
+#: ../Pinta.Effects/Effects/FragmentEffect.cs:111
+#: ../Pinta.Effects/Effects/MotionBlurEffect.cs:111
 msgid "Distance"
 msgstr "Distanță"
 
-#: ../Pinta.Effects/Effects/BulgeEffect.cs:32
-#: ../Pinta.Effects/Effects/FrostedGlassEffect.cs:32
-#: ../Pinta.Effects/Effects/PixelateEffect.cs:36
-#: ../Pinta.Effects/Effects/PolarInversionEffect.cs:36
-#: ../Pinta.Effects/Effects/TileEffect.cs:32
-#: ../Pinta.Effects/Effects/TwistEffect.cs:32
+#: ../Pinta.Effects/Effects/BulgeEffect.cs:30
+#: ../Pinta.Effects/Effects/FrostedGlassEffect.cs:30
+#: ../Pinta.Effects/Effects/PixelateEffect.cs:34
+#: ../Pinta.Effects/Effects/PolarInversionEffect.cs:34
+#: ../Pinta.Effects/Effects/TileEffect.cs:30
+#: ../Pinta.Effects/Effects/TwistEffect.cs:30
 msgid "Distort"
 msgstr "Distorsionează"
 
-#: ../Pinta.Tools/Tools/ColorPickerTool.cs:206
+#: ../Pinta.Tools/Tools/ColorPickerTool.cs:203
 msgid "Do not switch tool"
 msgstr "Nu schimba unealta"
 
-#: ../Pinta/Actions/Edit/PasteAction.cs:174
+#: ../Pinta/Actions/Edit/PasteAction.cs:172
 msgid "Don't change canvas size"
 msgstr "Nu schimba dimensiunea spațiului de desen"
 
-#: ../Pinta/MainWindow.cs:544
-msgid "Download failed"
-msgstr ""
-
-#: Mono.Addins.Gui/Mono.Addins.Gui/AddinInfoView.cs:293
-msgid "Download size"
-msgstr "Dimensiune download"
-
-#: ../Pinta/MainWindow.cs:525
-msgid "Downloading Image"
-msgstr ""
+#: ../Pinta.Gui.Addins/AddinInfoView.cs:136
+#, csharp-format
+msgid "Download size: {0}"
+msgstr "Dimensiunea descarcarii: {0}"
 
 #: ../Pinta.Core/Actions/LayerActions.cs:52
-#: ../Pinta.Core/Actions/LayerActions.cs:304
+#: ../Pinta.Core/Actions/LayerActions.cs:305
 msgid "Duplicate Layer"
 msgstr "Clonează stratul"
 
-#: ../xdg/pinta.desktop.in.h:2 ../Pinta/Actions/Help/AboutDialogAction.cs:58
+#: ../xdg/pinta.desktop.in.h:2 ../Pinta/Actions/Help/AboutDialogAction.cs:59
 msgid "Easily create and edit images"
 msgstr "Creați și editați imagini cu ușurință"
 
@@ -614,15 +562,15 @@ msgstr "Creați și editați imagini cu ușurință"
 msgid "Edge Behavior"
 msgstr "Comportament la margine"
 
-#: ../Pinta.Effects/Effects/EdgeDetectEffect.cs:27
+#: ../Pinta.Effects/Effects/EdgeDetectEffect.cs:25
 msgid "Edge Detect"
 msgstr "Detectează muchii"
 
-#: ../Pinta/MainWindow.cs:346
+#: ../Pinta/MainWindow.cs:336
 msgid "Effe_cts"
 msgstr "Efe_cte"
 
-#: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:324
+#: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:323
 #: ../Pinta.Tools/Editable/EditEngines/EllipseEditEngine.cs:38
 #: ../Pinta.Tools/Tools/EllipseTool.cs:39
 msgid "Ellipse"
@@ -632,16 +580,12 @@ msgstr "Elipsă"
 msgid "Ellipse Select"
 msgstr "Selecție eliptică"
 
-#: ../Pinta.Effects/Effects/EmbossEffect.cs:24
+#: ../Pinta.Effects/Effects/EmbossEffect.cs:22
 msgid "Emboss"
 msgstr "Reliefare"
 
-#: Mono.Addins.Gui/Mono.Addins.Gui/AddinInfoView.cs:160
-msgid "Enable"
-msgstr "Activează"
-
 #: ../Pinta.Core/Actions/EditActions.cs:67
-#: ../Pinta.Core/Actions/EditActions.cs:249
+#: ../Pinta.Core/Actions/EditActions.cs:246
 msgid "Erase Selection"
 msgstr "Șterge selecția"
 
@@ -649,15 +593,9 @@ msgstr "Șterge selecția"
 msgid "Eraser"
 msgstr "Gumă de șters"
 
-#: ../Pinta/Actions/File/SaveDocumentImplementationAction.cs:163
+#: ../Pinta.Core/ImageFormats/OraFormat.cs:115
 msgid "Error"
 msgstr "Eroare"
-
-#: Mono.Addins.Gui/Mono.Addins.Gui/Services.cs:64
-#: Mono.Addins.Gui/Mono.Addins.Gui/Services.cs:73
-#, csharp-format
-msgid "Exception occurred: {0}"
-msgstr "A apărut o excepție: {0}"
 
 #: ../Pinta.Core/Classes/SelectionModeHandler.cs:50
 msgid "Exclude (-) (Right Click)"
@@ -667,58 +605,67 @@ msgstr "Exclude (-) (Click dreapta)"
 msgid "Expand canvas"
 msgstr "Mărește spațiul de desen"
 
-#: ../Pinta.Effects/Effects/JuliaFractalEffect.cs:130
-#: ../Pinta.Effects/Effects/MandelbrotFractalEffect.cs:153
+#: ../Pinta.Gui.Addins/AddinManagerDialog.cs:205
+msgid "Extension packages"
+msgstr "Pachete de extensie"
+
+#: ../Pinta.Effects/Effects/JuliaFractalEffect.cs:126
+#: ../Pinta.Effects/Effects/MandelbrotFractalEffect.cs:138
 msgid "Factor"
 msgstr "Factor"
 
-#: ../Pinta/Actions/File/NewScreenshotAction.cs:95
+#: ../Pinta/Actions/File/NewScreenshotAction.cs:99
 msgid "Failed to access XDG Desktop Portals"
-msgstr ""
+msgstr "Nu s-au putut accesa Portalele Desktop XDG"
 
-#: ../Pinta.Core/Managers/WorkspaceManager.cs:422
+#: ../Pinta.Gui.Addins/InstallDialog.cs:151
+msgid "Failed to load extension package"
+msgstr "Nu s-a putut încarca pachetul de extensie"
+
+#: ../Pinta.Core/Managers/WorkspaceManager.cs:407
 msgid "Failed to open image"
-msgstr ""
+msgstr "Nu s-a putut deschide imaginea"
 
-#: ../Pinta/Actions/File/SaveDocumentImplementationAction.cs:186
+#: ../Pinta/Actions/File/SaveDocumentImplementationAction.cs:180
 msgid "Failed to save image"
-msgstr ""
+msgstr "Salvarea imaginii a eșuat"
 
-#: ../Pinta/Actions/File/NewScreenshotAction.cs:94
-#: ../Pinta/Actions/File/NewScreenshotAction.cs:123
+#: ../Pinta/Actions/File/NewScreenshotAction.cs:98
+#: ../Pinta/Actions/File/NewScreenshotAction.cs:118
+#: ../Pinta/Actions/File/NewScreenshotAction.cs:125
 msgid "Failed to take screenshot"
-msgstr ""
+msgstr "Captura de ecran a esuat"
 
 #: ../Pinta.Core/Actions/HelpActions.cs:46
 msgid "File a Bug"
 msgstr "Reportează o eroare"
 
-#: ../Pinta.Tools/Tools/TextTool.cs:245
+#: ../Pinta.Tools/Tools/TextTool.cs:248
 msgid "Fill Background"
 msgstr "Umple fundalul"
 
 #: ../Pinta.Core/Actions/EditActions.cs:68
-#: ../Pinta.Core/Actions/EditActions.cs:209
+#: ../Pinta.Core/Actions/EditActions.cs:207
 msgid "Fill Selection"
 msgstr "Umple selecția"
 
-#: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:300
-#: ../Pinta.Tools/Tools/FreeformShapeTool.cs:229
+#: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:299
+#: ../Pinta.Tools/Tools/FreeformShapeTool.cs:224
 msgid "Fill Shape"
 msgstr "Umple formă"
 
-#: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:292
-#: ../Pinta.Tools/Tools/FreeformShapeTool.cs:222
+#: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:291
+#: ../Pinta.Tools/Tools/FreeformShapeTool.cs:217
 msgid "Fill Style"
 msgstr "Stil de umplere"
 
-#: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:301
-#: ../Pinta.Tools/Tools/FreeformShapeTool.cs:230
+#: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:300
+#: ../Pinta.Tools/Tools/FreeformShapeTool.cs:225
 msgid "Fill and Outline Shape"
 msgstr "Umple și conturează formă"
 
-#: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:1030
-#: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:1291
+#: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:1036
+#: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:1298
 msgid "Finalized"
 msgstr "Finalizat"
 
@@ -757,19 +704,19 @@ msgstr "Oglindeşte vertical stratul"
 msgid "Flip Vertical"
 msgstr "Răstoarnă pe verticală"
 
-#: ../Pinta.Tools/Tools/FloodTool.cs:126
+#: ../Pinta.Tools/Tools/FloodTool.cs:125
 msgid "Flood Mode"
 msgstr "Mod de umplere"
 
-#: ../Pinta.Tools/Tools/TextTool.cs:143
+#: ../Pinta.Tools/Tools/TextTool.cs:140
 msgid "Font"
 msgstr "Font"
 
-#: ../Pinta.Effects/Effects/FragmentEffect.cs:24
+#: ../Pinta.Effects/Effects/FragmentEffect.cs:22
 msgid "Fragment"
 msgstr "Fragment"
 
-#: ../Pinta.Effects/Effects/FragmentEffect.cs:110
+#: ../Pinta.Effects/Effects/FragmentEffect.cs:108
 msgid "Fragments"
 msgstr "Fragmente"
 
@@ -777,7 +724,7 @@ msgstr "Fragmente"
 msgid "Freeform Shape"
 msgstr "Formă liberă"
 
-#: ../Pinta.Effects/Effects/FrostedGlassEffect.cs:24
+#: ../Pinta.Effects/Effects/FrostedGlassEffect.cs:22
 msgid "Frosted Glass"
 msgstr "Sticlă înghețată"
 
@@ -785,32 +732,30 @@ msgstr "Sticlă înghețată"
 msgid "Fullscreen"
 msgstr "Afişare pe tot ecranul"
 
-#: Mono.Addins.Gui/Mono.Addins.Gui/AddinManagerDialog.cs:131
-#: Mono.Addins.Gui/Mono.Addins.Gui/AddinManagerDialog.cs:325
-#: Mono.Addins.Gui/gtk-gui/Mono.Addins.Gui.AddinManagerDialog.cs:347
+#: ../Pinta.Gui.Addins/AddinManagerDialog.cs:65
 msgid "Gallery"
 msgstr "Galerie"
 
-#: ../Pinta.Effects/Effects/GaussianBlurEffect.cs:24
+#: ../Pinta.Effects/Effects/GaussianBlurEffect.cs:23
 msgid "Gaussian Blur"
 msgstr "Neclaritate gaussiană"
 
-#: ../Pinta.Tools/Tools/FloodTool.cs:137
+#: ../Pinta.Tools/Tools/FloodTool.cs:136
 msgid "Global"
 msgstr "Global"
 
-#: ../Pinta.Effects/Effects/GlowEffect.cs:29
+#: ../Pinta.Effects/Effects/GlowEffect.cs:27
 msgid "Glow"
 msgstr "luminiscență"
 
 #: ../Pinta.Tools/Tools/GradientTool.cs:49
-#: ../Pinta.Tools/Tools/GradientTool.cs:178
+#: ../Pinta.Tools/Tools/GradientTool.cs:176
 msgid "Gradient"
 msgstr "Gradient"
 
-#: ../Pinta.Effects/Dialogs/Effects.CurvesDialog.cs:453
-#: ../Pinta.Effects/Dialogs/Effects.LevelsDialog.cs:523
-#: ../Pinta.Effects/Dialogs/Effects.PosterizeDialog.cs:117
+#: ../Pinta.Effects/Dialogs/Effects.CurvesDialog.cs:465
+#: ../Pinta.Effects/Dialogs/Effects.LevelsDialog.cs:525
+#: ../Pinta.Effects/Dialogs/Effects.PosterizeDialog.cs:120
 msgid "Green"
 msgstr "Verde"
 
@@ -822,23 +767,23 @@ msgstr "Grilă"
 msgid "Hard Light"
 msgstr "Lumină aspră"
 
-#: ../Pinta/Dialogs/NewImageDialog.cs:230
-#: ../Pinta/Dialogs/ResizeCanvasDialog.cs:339
-#: ../Pinta/Dialogs/ResizeImageDialog.cs:175
+#: ../Pinta/Dialogs/NewImageDialog.cs:235
+#: ../Pinta/Dialogs/ResizeCanvasDialog.cs:344
+#: ../Pinta/Dialogs/ResizeImageDialog.cs:180
 msgid "Height:"
 msgstr "Înălțime:"
 
-#: ../Pinta/Actions/Layers/LayerPropertiesAction.cs:104
+#: ../Pinta/Actions/Layers/LayerPropertiesAction.cs:108
 msgid "Hide Layer"
 msgstr "Ascunde Strat"
 
-#: ../Pinta.Effects/Effects/RedEyeRemoveEffect.cs:75
+#: ../Pinta.Effects/Effects/RedEyeRemoveEffect.cs:64
 msgid "Hint: For best results, first use selection tools to select each eye."
 msgstr ""
 "Sfat: Pentru rezultate optime folosiți mai întâi uneltele de selecție pentru "
 "încadrarea fiecărui ochi."
 
-#: ../Pinta/Pads/HistoryPad.cs:40 ../Pinta/Pads/HistoryPad.cs:56
+#: ../Pinta/Pads/HistoryPad.cs:40 ../Pinta/Pads/HistoryPad.cs:49
 msgid "History"
 msgstr "Istoric"
 
@@ -851,15 +796,15 @@ msgstr "Nuanță"
 msgid "Hue / Saturation"
 msgstr "Nuanță / Saturație"
 
-#: ../Pinta/Actions/File/SaveDocumentImplementationAction.cs:177
+#: ../Pinta/Actions/File/SaveDocumentImplementationAction.cs:175
 msgid "ICO files can not be larger than 255 x 255 pixels."
 msgstr "Fișierele cu extensia ICO nu pot fi mai mare de 255 x 255 pixeli."
 
-#: ../Pinta/Actions/File/CloseDocumentAction.cs:61
+#: ../Pinta/Actions/File/CloseDocumentAction.cs:60
 msgid "If you don't save, all changes will be permanently lost."
 msgstr "Dacă nu salvați, toate modificările vor fi pierdute definitiv."
 
-#: ../Pinta.Tools/Tools/ColorPickerTool.cs:244
+#: ../Pinta.Tools/Tools/ColorPickerTool.cs:241
 msgid "Image"
 msgstr "Imagine"
 
@@ -871,24 +816,24 @@ msgstr "Editor imagini"
 msgid "Image Tabs"
 msgstr "File de imagine"
 
-#: ../Pinta/Actions/Edit/PasteAction.cs:159
+#: ../Pinta/Actions/Edit/PasteAction.cs:157
 msgid "Image cannot be pasted"
 msgstr "Imaginea nu poate fi lipită"
 
-#: ../Pinta/Actions/File/OpenDocumentAction.cs:58
-#: ../Pinta.Core/Actions/LayerActions.cs:196
+#: ../Pinta/Actions/File/OpenDocumentAction.cs:61
+#: ../Pinta.Core/Actions/LayerActions.cs:195
 msgid "Image files"
 msgstr "Fișiere imagine"
 
-#: ../Pinta/Actions/Edit/PasteAction.cs:168
+#: ../Pinta/Actions/Edit/PasteAction.cs:164
 msgid "Image larger than canvas"
 msgstr "Imagine mai mare decât canvas"
 
-#: ../Pinta/Actions/File/SaveDocumentImplementationAction.cs:176
+#: ../Pinta/Actions/File/SaveDocumentImplementationAction.cs:174
 msgid "Image too large"
 msgstr "Imagine prea mare"
 
-#: ../Pinta.Core/Actions/LayerActions.cs:224
+#: ../Pinta.Core/Actions/LayerActions.cs:222
 msgid "Import From File"
 msgstr "Importă din fişier"
 
@@ -900,63 +845,46 @@ msgstr "Importă din fișier..."
 msgid "Inches"
 msgstr "Țoli"
 
-#: ../Pinta.Effects/Effects/InkSketchEffect.cs:164
+#: ../Pinta.Effects/Effects/InkSketchEffect.cs:159
 msgid "Ink Outline"
 msgstr "Cerneală contur"
 
-#: ../Pinta.Effects/Effects/InkSketchEffect.cs:32
+#: ../Pinta.Effects/Effects/InkSketchEffect.cs:30
 msgid "Ink Sketch"
 msgstr "Schiță în cerneală"
 
-#: ../Pinta.Effects/Dialogs/Effects.LevelsDialog.cs:585
+#: ../Pinta.Effects/Dialogs/Effects.LevelsDialog.cs:593
 msgid "Input"
 msgstr "Intrare"
 
-#: ../Pinta.Effects/Dialogs/Effects.LevelsDialog.cs:573
+#: ../Pinta.Effects/Dialogs/Effects.LevelsDialog.cs:577
 msgid "Input Histogram"
 msgstr "Histogramă de intrare"
 
-#: Mono.Addins.Gui/gtk-gui/Mono.Addins.Gui.InstallDialog.cs:126
+#: ../Pinta.Gui.Addins/InstallDialog.cs:122
+#: ../Pinta.Gui.Addins/InstallDialog.cs:196
 msgid "Install"
 msgstr "Instalează"
 
-#: Mono.Addins.Gui/Mono.Addins.Gui/AddinManagerDialog.cs:513
-msgid "Install Add-in Package"
-msgstr "Instalează pachet actualizare"
+#: ../Pinta.Gui.Addins/AddinManagerDialog.cs:195
+msgid "Install Extension Package"
+msgstr "Instalare Pachet de Extensie"
 
-#: Mono.Addins.Gui/gtk-gui/Mono.Addins.Gui.AddinManagerDialog.cs:373
+#: ../Pinta.Gui.Addins/AddinManagerDialog.cs:41
 msgid "Install from file..."
 msgstr "Instalează din fișier..."
 
-#: Mono.Addins.Gui/gtk-gui/Mono.Addins.Gui.AddinInfoView.cs:229
+#: ../Pinta.Gui.Addins/AddinInfoView.cs:83
 msgid "Install..."
 msgstr "Instalează..."
 
-#: Mono.Addins.Gui/Mono.Addins.Gui/AddinInstaller.cs:16
-msgid "Installation cancelled"
-msgstr "Instalare anulată"
-
-#: Mono.Addins.Gui/Mono.Addins.Gui/AddinInstallerDialog.cs:171
-msgid "Installation failed"
-msgstr "Instalare nereușită"
-
-#: Mono.Addins.Gui/Mono.Addins.Gui/AddinManagerDialog.cs:115
-#: Mono.Addins.Gui/Mono.Addins.Gui/AddinManagerDialog.cs:250
-#: Mono.Addins.Gui/gtk-gui/Mono.Addins.Gui.AddinManagerDialog.cs:122
+#: ../Pinta.Gui.Addins/AddinManagerDialog.cs:61
 msgid "Installed"
 msgstr "Instalat"
 
-#: Mono.Addins.Gui/Mono.Addins.Gui/AddinInfoView.cs:286
-msgid "Installed version"
-msgstr "Versiune instalată"
-
-#: Mono.Addins.Gui/Mono.Addins.Gui/InstallDialog.cs:209
-msgid "Installing Add-ins"
-msgstr "Instalează extensii"
-
-#: ../Pinta.Effects/Effects/AddNoiseEffect.cs:170
-#: ../Pinta.Effects/Effects/OutlineEffect.cs:144
-#: ../Pinta.Effects/Effects/TileEffect.cs:144
+#: ../Pinta.Effects/Effects/AddNoiseEffect.cs:174
+#: ../Pinta.Effects/Effects/OutlineEffect.cs:142
+#: ../Pinta.Effects/Effects/TileEffect.cs:143
 msgid "Intensity"
 msgstr "Intensitate"
 
@@ -964,31 +892,31 @@ msgstr "Intensitate"
 #: ../Pinta.Core/Classes/SelectionModeHandler.cs:54
 #, csharp-format
 msgid "Intersect ({0} + Left Click)"
-msgstr ""
+msgstr "Intersectie ({0} + Click-stanga)"
 
 #: ../Pinta.Effects/Adjustments/InvertColorsEffect.cs:25
-#: ../Pinta.Effects/Effects/MandelbrotFractalEffect.cs:166
+#: ../Pinta.Effects/Effects/MandelbrotFractalEffect.cs:151
 msgid "Invert Colors"
 msgstr "Inversează culorile"
 
 #: ../Pinta.Core/Actions/EditActions.cs:69
-#: ../Pinta.Core/Actions/EditActions.cs:460
+#: ../Pinta.Core/Actions/EditActions.cs:446
 msgid "Invert Selection"
 msgstr "Inversează selecția"
 
-#: ../Pinta.Tools/Tools/TextTool.cs:173
+#: ../Pinta.Tools/Tools/TextTool.cs:171
 msgid "Italic"
 msgstr "Cursiv"
 
-#: ../Pinta/Dialogs/JpegCompressionDialog.cs:38
+#: ../Pinta/Dialogs/JpegCompressionDialog.cs:39
 msgid "JPEG Quality"
 msgstr "Calitate JPEG"
 
-#: ../Pinta.Effects/Effects/JuliaFractalEffect.cs:24
+#: ../Pinta.Effects/Effects/JuliaFractalEffect.cs:22
 msgid "Julia Fractal"
 msgstr "Fractal Julia"
 
-#: ../Pinta/Dialogs/NewImageDialog.cs:256
+#: ../Pinta/Dialogs/NewImageDialog.cs:270
 msgid "Landscape"
 msgstr "Panoramă"
 
@@ -996,20 +924,20 @@ msgstr "Panoramă"
 msgid "Lasso Select"
 msgstr "Selecție lasou"
 
-#: ../Pinta.Tools/Tools/ColorPickerTool.cs:243
+#: ../Pinta.Tools/Tools/ColorPickerTool.cs:240
 msgid "Layer"
 msgstr "Strat"
 
-#: ../Pinta.Gui.Widgets/Widgets/Layers/LayersListWidget.cs:293
+#: ../Pinta.Gui.Widgets/Widgets/Layers/LayersListViewItemWidget.cs:80
 msgid "Layer Hidden"
 msgstr "Ascundere strat"
 
-#: ../Pinta/Actions/Layers/LayerPropertiesAction.cs:94
+#: ../Pinta/Actions/Layers/LayerPropertiesAction.cs:98
 msgid "Layer Opacity"
 msgstr "Opacitatea stratului"
 
-#: ../Pinta/Actions/Layers/LayerPropertiesAction.cs:109
-#: ../Pinta/Dialogs/LayerPropertiesDialog.cs:51
+#: ../Pinta/Actions/Layers/LayerPropertiesAction.cs:113
+#: ../Pinta/Dialogs/LayerPropertiesDialog.cs:53
 msgid "Layer Properties"
 msgstr "Proprietățile stratului"
 
@@ -1017,17 +945,17 @@ msgstr "Proprietățile stratului"
 msgid "Layer Properties..."
 msgstr "Proprietăţile stratului..."
 
-#: ../Pinta.Gui.Widgets/Widgets/Layers/LayersListWidget.cs:293
+#: ../Pinta.Gui.Widgets/Widgets/Layers/LayersListViewItemWidget.cs:80
 msgid "Layer Shown"
 msgstr "Afișare strat"
 
 #. Translators: {0} is a unique id for new layers, e.g. "Layer 2".
-#: ../Pinta.Core/Classes/DocumentLayers.cs:135
+#: ../Pinta.Core/Classes/DocumentLayers.cs:128
 #, csharp-format
 msgid "Layer {0}"
-msgstr ""
+msgstr "Stratul {0}"
 
-#: ../Pinta/Pads/LayersPad.cs:40 ../Pinta/Pads/LayersPad.cs:60
+#: ../Pinta/Pads/LayersPad.cs:40 ../Pinta/Pads/LayersPad.cs:53
 msgid "Layers"
 msgstr "Straturi"
 
@@ -1035,24 +963,24 @@ msgstr "Straturi"
 msgid "Left Align"
 msgstr "Aliniază la stânga"
 
-#. Translators: {0} is 'Ctrl', or a platform-specific key such as 'Command' on macOS.
-#: ../Pinta.Tools/Tools/MoveSelectedTool.cs:46
+#: ../Pinta.Tools/Tools/MoveSelectedTool.cs:47
 #, csharp-format
 msgid ""
-"Left click and drag the selection to move selected content. Hold {0} to "
-"scale instead of move. Right click and drag the selection to rotate selected "
-"content. Hold Shift to rotate in steps. Use arrow keys to move selected "
-"content by a single pixel."
+"Left click and drag the selection to move selected content.\n"
+"Hold {0} to scale instead of move.\n"
+"Right click and drag the selection to rotate selected content.\n"
+"Hold Shift to rotate in steps.\n"
+"Use arrow keys to move selected content by a single pixel."
 msgstr ""
 
-#. Translators: {0} is 'Ctrl', or a platform-specific key such as 'Command' on macOS.
-#: ../Pinta.Tools/Tools/MoveSelectionTool.cs:45
+#: ../Pinta.Tools/Tools/MoveSelectionTool.cs:46
 #, csharp-format
 msgid ""
-"Left click and drag the selection to move selection outline. Hold {0} to "
-"scale instead of move. Right click and drag the selection to rotate "
-"selection outline. Hold Shift to rotate in steps. Use arrow keys to move "
-"selection outline by a single pixel."
+"Left click and drag the selection to move selection outline.\n"
+"Hold {0} to scale instead of move.\n"
+"Right click and drag the selection to rotate selection outline.\n"
+"Hold Shift to rotate in steps.\n"
+"Use arrow keys to move selection outline by a single pixel."
 msgstr ""
 
 #. Translators: {0} is 'Ctrl', or a platform-specific key such as 'Command' on macOS.
@@ -1075,16 +1003,14 @@ msgid ""
 "Press Enter to finalize the shape."
 msgstr ""
 
-#: ../Pinta.Tools/Tools/PencilTool.cs:50
+#: ../Pinta.Tools/Tools/PencilTool.cs:51
 msgid ""
-"Left click to draw freeform one-pixel wide lines with the primary color. "
+"Left click to draw freeform one-pixel wide lines with the primary color.\n"
 "Right click to use the secondary color."
 msgstr ""
-"Click stânga pentru a desena linii arbitrare cu lățimea de un pixel folosind "
-"culoarea principală. Click dreapta pentru a folosi culoarea secundară."
 
 #: ../Pinta.Tools/Tools/FreeformShapeTool.cs:55
-#: ../Pinta.Tools/Tools/PaintBrushTool.cs:62
+#: ../Pinta.Tools/Tools/PaintBrushTool.cs:59
 msgid ""
 "Left click to draw with primary color, right click to draw with secondary "
 "color."
@@ -1107,7 +1033,7 @@ msgstr ""
 "Clic pentru a umple o regiune folosind culoarea principală, clic dreapta "
 "pentru culoarea secundară."
 
-#: ../Pinta.Tools/Tools/TextTool.cs:91
+#: ../Pinta.Tools/Tools/TextTool.cs:92
 msgid ""
 "Left click to place cursor, then type desired text. Text color is primary "
 "color."
@@ -1115,22 +1041,25 @@ msgstr ""
 "Clic stânga pentru a plasa cursorul, apoi tastează textul dorit. Culoarea "
 "textului este culoarea primară."
 
-#: ../Pinta.Tools/Tools/RecolorTool.cs:59
+#: ../Pinta.Tools/Tools/RecolorTool.cs:60
 msgid ""
-"Left click to replace the secondary color with the primary color. Right "
-"click to reverse."
+"Left click to replace the secondary color with the primary color.\n"
+"Right click to reverse."
 msgstr ""
-"Clic stânga pentru a înlocui culoarea secundară cu culoarea primară. Clic "
-"dreapta pentru a inversa."
 
-#: ../Pinta.Gui.Widgets/Widgets/StatusBarColorPaletteWidget.cs:227
 #: ../Pinta.Tools/Tools/ColorPickerTool.cs:54
+msgid ""
+"Left click to set primary color.\n"
+"Right click to set secondary color."
+msgstr ""
+
+#: ../Pinta.Gui.Widgets/Widgets/StatusBarColorPaletteWidget.cs:251
 msgid "Left click to set primary color. Right click to set secondary color."
 msgstr ""
 "Clic stânga pentru stabilirea culorii principale. Clic dreapta pentru "
 "stabilirea culorii secundare."
 
-#: ../Pinta.Gui.Widgets/Widgets/StatusBarColorPaletteWidget.cs:223
+#: ../Pinta.Gui.Widgets/Widgets/StatusBarColorPaletteWidget.cs:247
 msgid ""
 "Left click to set primary color. Right click to set secondary color. Middle "
 "click to choose palette color."
@@ -1138,15 +1067,14 @@ msgstr ""
 "Clic stânga pentru culoarea primară. Clic dreapta pentru culoarea secundară. "
 "Clic mijloc pentru a selecta o culoare de pe paletă."
 
-#: ../Pinta.Tools/Tools/ZoomTool.cs:58
+#: ../Pinta.Tools/Tools/ZoomTool.cs:59
 msgid ""
-"Left click to zoom in. Right click to zoom out. Click and drag to zoom in "
-"selection."
+"Left click to zoom in.\n"
+"Right click to zoom out.\n"
+"Click and drag to zoom in selection."
 msgstr ""
-"Clic stânga pentru mărire. Clic dreapta pentru micșorare. Clic și trage "
-"pentru a mări o zonă selectată."
 
-#: ../Pinta.Tools/Editable/EditEngines/ArrowedEditEngine.cs:332
+#: ../Pinta.Tools/Editable/EditEngines/ArrowedEditEngine.cs:323
 msgid "Length"
 msgstr "Lungime"
 
@@ -1154,11 +1082,11 @@ msgstr "Lungime"
 msgid "Levels"
 msgstr "Niveluri"
 
-#: ../Pinta.Effects/Dialogs/Effects.LevelsDialog.cs:72
+#: ../Pinta.Effects/Dialogs/Effects.LevelsDialog.cs:74
 msgid "Levels Adjustment"
 msgstr "Ajustează niveluri"
 
-#: ../Pinta/Actions/Help/AboutDialogAction.cs:78
+#: ../Pinta/Actions/Help/AboutDialogAction.cs:79
 msgid "License"
 msgstr "Licenţă"
 
@@ -1166,7 +1094,7 @@ msgstr "Licenţă"
 msgid "Lighten"
 msgstr "Iluminare"
 
-#: ../Pinta.Effects/Effects/SoftenPortraitEffect.cs:120
+#: ../Pinta.Effects/Effects/SoftenPortraitEffect.cs:119
 msgid "Lighting"
 msgstr "Iluminare"
 
@@ -1178,24 +1106,24 @@ msgstr "Luminozitate"
 msgid "Line/Curve"
 msgstr "Linie/Curbă"
 
-#: ../Pinta.Tools/Tools/GradientTool.cs:186
+#: ../Pinta.Tools/Tools/GradientTool.cs:184
 msgid "Linear Diamond Gradient"
 msgstr "Gradient liniar în diamant"
 
-#: ../Pinta.Tools/Tools/GradientTool.cs:184
+#: ../Pinta.Tools/Tools/GradientTool.cs:182
 msgid "Linear Gradient"
 msgstr "Gradient liniar"
 
-#: ../Pinta.Tools/Tools/GradientTool.cs:185
+#: ../Pinta.Tools/Tools/GradientTool.cs:183
 msgid "Linear Reflected Gradient"
 msgstr "Gradient liniar oglindit"
 
-#: ../Pinta.Effects/Dialogs/Effects.PosterizeDialog.cs:124
+#: ../Pinta.Effects/Dialogs/Effects.PosterizeDialog.cs:129
 msgid "Linked"
 msgstr "Legat"
 
 #: ../Pinta.Core/Effects/UserBlendOps.cs:46
-#: ../Pinta.Effects/Dialogs/Effects.CurvesDialog.cs:433
+#: ../Pinta.Effects/Dialogs/Effects.CurvesDialog.cs:444
 msgid "Luminosity"
 msgstr "Luminozitate"
 
@@ -1203,56 +1131,47 @@ msgstr "Luminozitate"
 msgid "Magic Wand Select"
 msgstr "Selectează cu bagheta magică"
 
-#: ../Pinta/Dialogs/ResizeCanvasDialog.cs:319
-#: ../Pinta/Dialogs/ResizeImageDialog.cs:155
+#: ../Pinta/Dialogs/ResizeCanvasDialog.cs:322
+#: ../Pinta/Dialogs/ResizeImageDialog.cs:158
 msgid "Maintain aspect ratio"
 msgstr "Menține raportul de aspect"
 
-#: Mono.Addins.Gui/Mono.Addins.Gui/AddinManagerDialog.cs:268
-msgid "Manage Repositories..."
-msgstr "Management Surse..."
-
-#: ../Pinta.Effects/Effects/MandelbrotFractalEffect.cs:24
+#: ../Pinta.Effects/Effects/MandelbrotFractalEffect.cs:22
 msgid "Mandelbrot Fractal"
 msgstr "Fractal Mandelbrot"
 
-#: ../Pinta.Effects/Effects/MedianEffect.cs:27
+#: ../Pinta.Effects/Effects/MedianEffect.cs:25
 msgid "Median"
 msgstr "Mediană"
 
 #: ../Pinta.Core/Actions/LayerActions.cs:53
-#: ../Pinta.Core/Actions/LayerActions.cs:282
+#: ../Pinta.Core/Actions/LayerActions.cs:283
 msgid "Merge Layer Down"
 msgstr "Combină cu stratul inferior"
 
-#: Mono.Addins.Gui/Mono.Addins.Gui/AddinInfoView.cs:272
-#, csharp-format
-msgid "Missing: {0} v{1}"
-msgstr "Lipsește: {0} v{1}"
-
-#: ../Pinta.Tools/Tools/GradientTool.cs:197
+#: ../Pinta.Tools/Tools/GradientTool.cs:195
 msgid "Mode"
-msgstr ""
+msgstr "Mod"
 
-#: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:844
+#: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:850
 msgid "Modified"
 msgstr "Modificat"
 
-#: Mono.Addins.Gui/gtk-gui/Mono.Addins.Gui.AddinInfoView.cs:181
-msgid "More information"
-msgstr "Informații suplimentare"
+#: ../Pinta.Gui.Addins/AddinInfoView.cs:79
+msgid "More Information..."
+msgstr "Mai multe detalii..."
 
-#: ../Pinta.Effects/Effects/MotionBlurEffect.cs:24
+#: ../Pinta.Effects/Effects/MotionBlurEffect.cs:22
 msgid "Motion Blur"
 msgstr "Efect de estompare în mișcare"
 
 #: ../Pinta.Core/Actions/LayerActions.cs:59
-#: ../Pinta.Core/Actions/LayerActions.cs:268
+#: ../Pinta.Core/Actions/LayerActions.cs:269
 msgid "Move Layer Down"
 msgstr "Mută stratul mai jos"
 
 #: ../Pinta.Core/Actions/LayerActions.cs:58
-#: ../Pinta.Core/Actions/LayerActions.cs:257
+#: ../Pinta.Core/Actions/LayerActions.cs:258
 msgid "Move Layer Up"
 msgstr "Mută stratul mai sus"
 
@@ -1264,19 +1183,11 @@ msgstr "Mută pixelii selectați"
 msgid "Move Selection"
 msgstr "Mută selecția"
 
-#: Mono.Addins.Gui/Mono.Addins.Gui/AddinInfoView.cs:123
-msgid ""
-"Multiple selection:\n"
-"\n"
-msgstr ""
-"Selecție multiplă:\n"
-"\n"
-
 #: ../Pinta.Core/Effects/UserBlendOps.cs:34
 msgid "Multiply"
 msgstr "Multiplicare"
 
-#: ../Pinta/Dialogs/LayerPropertiesDialog.cs:187
+#: ../Pinta/Dialogs/LayerPropertiesDialog.cs:192
 msgid "Name:"
 msgstr "Nume:"
 
@@ -1285,7 +1196,7 @@ msgid "New"
 msgstr "Nou"
 
 #: ../Pinta/Dialogs/NewImageDialog.cs:68
-#: ../Pinta.Core/Managers/WorkspaceManager.cs:184
+#: ../Pinta.Core/Managers/WorkspaceManager.cs:185
 msgid "New Image"
 msgstr "Imagine nouă"
 
@@ -1301,27 +1212,19 @@ msgstr "Noua mărime a paletei:"
 msgid "New..."
 msgstr "Nou..."
 
-#: Mono.Addins.Gui/Mono.Addins.Gui/AddinTreeWidget.cs:102
-msgid "No add-ins found"
-msgstr "Nu a fost găsită nici o extensie"
+#: ../Pinta.Gui.Addins/AddinListView.cs:58
+msgid "No Items Found"
+msgstr "Nu s-au gasit instante"
 
-#: Mono.Addins.Gui/Mono.Addins.Gui/AddinInfoView.cs:178
-msgid "No selection"
-msgstr "Nici o selecție"
-
-#: Mono.Addins.Gui/gtk-gui/Mono.Addins.Gui.AddinManagerDialog.cs:143
-msgid "No updates found"
-msgstr "Nu au fost găsite actualizări"
-
-#: ../Pinta.Effects/Effects/AddNoiseEffect.cs:37
-#: ../Pinta.Effects/Effects/MedianEffect.cs:35
-#: ../Pinta.Effects/Effects/ReduceNoiseEffect.cs:35
+#: ../Pinta.Effects/Effects/AddNoiseEffect.cs:35
+#: ../Pinta.Effects/Effects/MedianEffect.cs:33
+#: ../Pinta.Effects/Effects/ReduceNoiseEffect.cs:33
 msgid "Noise"
 msgstr "Zgomot"
 
 #: ../Pinta.Core/Effects/UserBlendOps.cs:33
 #: ../Pinta.Tools/Brushes/PlainBrush.cs:37
-#: ../Pinta.Tools/Tools/EraserTool.cs:267 ../Pinta.Tools/Tools/TextTool.cs:242
+#: ../Pinta.Tools/Tools/EraserTool.cs:262 ../Pinta.Tools/Tools/TextTool.cs:245
 msgid "Normal"
 msgstr "Normal"
 
@@ -1333,17 +1236,17 @@ msgstr "Contopire normală"
 msgid "Normal Size"
 msgstr "Mărime normală"
 
-#: ../Pinta.Tools/Tools/TextTool.cs:243
+#: ../Pinta.Tools/Tools/TextTool.cs:246
 msgid "Normal and Outline"
 msgstr "Normal și contur"
 
-#: ../Pinta.Effects/Effects/BulgeEffect.cs:103
+#: ../Pinta.Effects/Effects/BulgeEffect.cs:98
 #: ../Pinta.Effects/Effects/RadialBlurEffect.cs:160
-#: ../Pinta.Effects/Effects/ZoomBlurEffect.cs:133
+#: ../Pinta.Effects/Effects/ZoomBlurEffect.cs:131
 msgid "Offset"
 msgstr "Decalaj"
 
-#: ../Pinta.Effects/Effects/OilPaintingEffect.cs:24
+#: ../Pinta.Effects/Effects/OilPaintingEffect.cs:22
 msgid "Oil Painting"
 msgstr "Pictură în ulei"
 
@@ -1351,10 +1254,11 @@ msgstr "Pictură în ulei"
 msgid "Opacity:"
 msgstr "Opacitate:"
 
-#: ../Pinta/Actions/File/OpenDocumentAction.cs:53
-#: ../Pinta.Core/Actions/EditActions.cs:361
+#: ../Pinta/Actions/File/OpenDocumentAction.cs:54
+#: ../Pinta.Core/Actions/EditActions.cs:351
 #: ../Pinta.Core/Actions/FileActions.cs:60
 #: ../Pinta.Core/Actions/LayerActions.cs:168
+#: ../Pinta.Gui.Addins/AddinManagerDialog.cs:198
 msgid "Open"
 msgstr "Deschide"
 
@@ -1362,20 +1266,20 @@ msgstr "Deschide"
 msgid "Open Curve Shape"
 msgstr "Formă curbă deschisă"
 
-#: ../Pinta.Core/Managers/WorkspaceManager.cs:255
+#: ../Pinta.Core/Managers/WorkspaceManager.cs:251
 msgid "Open Image"
 msgstr "Deschide imagine"
 
-#: ../Pinta/Actions/File/OpenDocumentAction.cs:50
+#: ../Pinta/Actions/File/OpenDocumentAction.cs:51
 #: ../Pinta.Core/Actions/LayerActions.cs:165
 msgid "Open Image File"
 msgstr "Deschide fişier imagine"
 
-#: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:322
+#: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:321
 msgid "Open Line/Curve Series"
 msgstr "Serie linii/curbe deschise"
 
-#: ../Pinta.Core/Actions/EditActions.cs:358
+#: ../Pinta.Core/Actions/EditActions.cs:348
 msgid "Open Palette File"
 msgstr "Deschide fișier paletă"
 
@@ -1388,11 +1292,11 @@ msgstr "Deschide..."
 msgid "OptionName"
 msgstr "NumeOpțiune"
 
-#: ../Pinta/Main.cs:113
+#: ../Pinta/Main.cs:134
 msgid "Options: "
 msgstr "Opțiuni "
 
-#: ../Pinta/Dialogs/NewImageDialog.cs:246
+#: ../Pinta/Dialogs/NewImageDialog.cs:254
 msgid "Orientation:"
 msgstr "Orientare:"
 
@@ -1400,29 +1304,25 @@ msgstr "Orientare:"
 msgid "Original"
 msgstr "Original"
 
-#: Mono.Addins.Gui/Mono.Addins.Gui/AddinTreeWidget.cs:213
-msgid "Other"
-msgstr "Altele"
-
-#: ../Pinta.Effects/Effects/OutlineEffect.cs:27
-#: ../Pinta.Tools/Tools/TextTool.cs:244
+#: ../Pinta.Effects/Effects/OutlineEffect.cs:25
+#: ../Pinta.Tools/Tools/TextTool.cs:247
 msgid "Outline"
 msgstr "Evidențiază contururi"
 
-#: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:299
-#: ../Pinta.Tools/Tools/FreeformShapeTool.cs:228
+#: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:298
+#: ../Pinta.Tools/Tools/FreeformShapeTool.cs:223
 msgid "Outline Shape"
 msgstr "Evidiențiere margini formă"
 
-#: ../Pinta.Tools/Tools/TextTool.cs:259
+#: ../Pinta.Tools/Tools/TextTool.cs:262
 msgid "Outline width"
 msgstr "Lățimea conturului"
 
-#: ../Pinta.Effects/Dialogs/Effects.LevelsDialog.cs:599
+#: ../Pinta.Effects/Dialogs/Effects.LevelsDialog.cs:609
 msgid "Output"
 msgstr "Rezultat"
 
-#: ../Pinta.Effects/Dialogs/Effects.LevelsDialog.cs:601
+#: ../Pinta.Effects/Dialogs/Effects.LevelsDialog.cs:611
 msgid "Output Histogram"
 msgstr "Histogramă de ieșire"
 
@@ -1438,24 +1338,24 @@ msgstr "Suprascrie"
 msgid "Paint Bucket"
 msgstr "Găleată cu vopsea"
 
-#: ../Pinta.Tools/Tools/PaintBrushTool.cs:60
+#: ../Pinta.Tools/Tools/PaintBrushTool.cs:57
 msgid "Paintbrush"
 msgstr "Pensulă de pictură"
 
-#: ../Pinta.Core/Actions/EditActions.cs:138
+#: ../Pinta.Core/Actions/EditActions.cs:137
 msgid "Palette"
 msgstr "Paletă"
 
-#: ../Pinta.Core/Actions/EditActions.cs:367
+#: ../Pinta.Core/Actions/EditActions.cs:355
 msgid "Palette files"
-msgstr ""
+msgstr "Fisiere de paleta"
 
-#: ../Pinta/Actions/Layers/RotateZoomLayerAction.cs:115
+#: ../Pinta/Actions/Layers/RotateZoomLayerAction.cs:119
 #: ../Pinta.Tools/Tools/PanTool.cs:42
 msgid "Pan"
 msgstr "Mișcă"
 
-#: ../Pinta/Actions/Edit/PasteAction.cs:78
+#: ../Pinta/Actions/Edit/PasteAction.cs:79
 #: ../Pinta.Core/Actions/EditActions.cs:64
 #: ../Pinta.Core/HistoryItems/PasteHistoryItem.cs:42
 msgid "Paste"
@@ -1465,47 +1365,44 @@ msgstr "Lipeşte"
 msgid "Paste Into New Image"
 msgstr "Lipește într-o imagine nouă"
 
-#: ../Pinta/Actions/Edit/PasteAction.cs:78
+#: ../Pinta/Actions/Edit/PasteAction.cs:79
 #: ../Pinta.Core/Actions/EditActions.cs:65
 msgid "Paste Into New Layer"
 msgstr "Lipește într-un strat nou"
-
-#: Mono.Addins.Gui/gtk-gui/Mono.Addins.Gui.NewSiteDialog.cs:130
-msgid "Path:"
-msgstr "Cale:"
 
 #: ../Pinta.Tools/Tools/PencilTool.cs:48
 msgid "Pencil"
 msgstr "Creion"
 
-#: ../Pinta.Effects/Effects/PencilSketchEffect.cs:31
+#: ../Pinta.Effects/Effects/PencilSketchEffect.cs:29
 msgid "Pencil Sketch"
 msgstr "Schiță în creion"
 
-#: ../Pinta.Effects/Effects/PencilSketchEffect.cs:98
+#: ../Pinta.Effects/Effects/PencilSketchEffect.cs:92
 msgid "Pencil Tip Size"
 msgstr "Mărime vârf pensulă"
 
-#: ../Pinta.Effects/Effects/MedianEffect.cs:72
+#: ../Pinta.Effects/Effects/MedianEffect.cs:70
 msgid "Percentile"
 msgstr "Percentilă"
 
-#: ../Pinta.Effects/Effects/GlowEffect.cs:37
-#: ../Pinta.Effects/Effects/RedEyeRemoveEffect.cs:34
-#: ../Pinta.Effects/Effects/SharpenEffect.cs:32
-#: ../Pinta.Effects/Effects/SoftenPortraitEffect.cs:64
+#: ../Pinta.Effects/Effects/GlowEffect.cs:35
+#: ../Pinta.Effects/Effects/RedEyeRemoveEffect.cs:32
+#: ../Pinta.Effects/Effects/SharpenEffect.cs:30
+#: ../Pinta.Effects/Effects/SoftenPortraitEffect.cs:63
 msgid "Photo"
 msgstr "Fotografie"
 
-#: ../xdg/pinta.desktop.in.h:1 ../Pinta/Actions/Help/AboutDialogAction.cs:54
+#: ../xdg/pinta.desktop.in.h:1 ../Pinta/Actions/Help/AboutDialogAction.cs:55
+#: ../Pinta/MainWindow.cs:62
 msgid "Pinta"
 msgstr "Pinta"
 
-#: ../Pinta/AddinSetupService.cs:54
+#: ../Pinta/AddinSetupService.cs:52
 msgid "Pinta Community Addins - Cross-Platform"
 msgstr "Module comunitare Pinta - agnostice platformei"
 
-#: ../Pinta/AddinSetupService.cs:50
+#: ../Pinta/AddinSetupService.cs:48
 msgid "Pinta Community Addins - Platform-Specific"
 msgstr "Module comunitare Pinta - specifice platformei"
 
@@ -1535,19 +1432,19 @@ msgstr ""
 "efecte aplicabile pe imaginile dvs. și are capacitatea de a crea straturi "
 "nelimitate pentru a vă ajuta să vă organizați creativitatea."
 
-#: ../Pinta.Core/Managers/WorkspaceManager.cs:405
+#: ../Pinta.Core/Managers/WorkspaceManager.cs:392
 msgid "Pinta supports the following file formats:"
-msgstr ""
+msgstr "Pinta suporta urmatoarele formate de fisiere"
 
-#: ../Pinta.Core/Classes/Palette.cs:198
+#: ../Pinta.Core/Classes/Palette.cs:197
 msgid "Pinta supports the following palette formats:"
-msgstr ""
+msgstr "Pinta suporta urmatoarele formate de palete"
 
 #: ../Pinta.Core/Actions/ViewActions.cs:72
 msgid "Pixel Grid"
 msgstr "Grilă pixeli"
 
-#: ../Pinta.Effects/Effects/PixelateEffect.cs:24
+#: ../Pinta.Effects/Effects/PixelateEffect.cs:22
 msgid "Pixelate"
 msgstr "Pixelează"
 
@@ -1555,37 +1452,37 @@ msgstr "Pixelează"
 msgid "Pixels"
 msgstr "Pixeli"
 
-#: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:522
-#: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:736
+#: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:521
+#: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:742
 msgid "Point Added"
 msgstr "Punct adăugat"
 
-#: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:467
+#: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:466
 msgid "Point Deleted"
 msgstr "Punct şters"
 
-#: ../Pinta.Effects/Effects/PolarInversionEffect.cs:24
+#: ../Pinta.Effects/Effects/PolarInversionEffect.cs:22
 msgid "Polar Inversion"
 msgstr "Inversie polară"
 
-#: ../Pinta/Dialogs/NewImageDialog.cs:248
+#: ../Pinta/Dialogs/NewImageDialog.cs:258
 msgid "Portrait"
 msgstr "Portret"
 
 #: ../Pinta.Effects/Adjustments/PosterizeEffect.cs:25
-#: ../Pinta.Effects/Dialogs/Effects.PosterizeDialog.cs:56
+#: ../Pinta.Effects/Dialogs/Effects.PosterizeDialog.cs:58
 msgid "Posterize"
 msgstr "Posterizează"
 
-#: ../Pinta.Effects/Effects/CloudsEffect.cs:203
+#: ../Pinta.Effects/Effects/CloudsEffect.cs:200
 msgid "Power"
 msgstr "Putere"
 
-#: ../Pinta/Dialogs/NewImageDialog.cs:194
+#: ../Pinta/Dialogs/NewImageDialog.cs:197
 msgid "Preset:"
 msgstr "Prestabilit:"
 
-#: ../Pinta/Dialogs/NewImageDialog.cs:318
+#: ../Pinta/Dialogs/NewImageDialog.cs:350
 msgid "Preview"
 msgstr "Previzualizare"
 
@@ -1597,18 +1494,14 @@ msgstr "Primar"
 msgid "Print"
 msgstr "Tipărește"
 
-#: Mono.Addins.Gui/gtk-gui/Mono.Addins.Gui.ProgressDialog.cs:21
-msgid "Progress"
-msgstr "În desfășurare"
-
-#: ../Pinta.Effects/Effects/JuliaFractalEffect.cs:133
-#: ../Pinta.Effects/Effects/MandelbrotFractalEffect.cs:156
+#: ../Pinta.Effects/Effects/JuliaFractalEffect.cs:129
+#: ../Pinta.Effects/Effects/MandelbrotFractalEffect.cs:141
 #: ../Pinta.Effects/Effects/RadialBlurEffect.cs:163
-#: ../Pinta.Effects/Effects/WarpEffect.cs:188
+#: ../Pinta.Effects/Effects/WarpEffect.cs:192
 msgid "Quality"
 msgstr "Calitate"
 
-#: ../Pinta/Dialogs/JpegCompressionDialog.cs:48
+#: ../Pinta/Dialogs/JpegCompressionDialog.cs:49
 msgid "Quality: "
 msgstr "Calitate: "
 
@@ -1616,23 +1509,23 @@ msgstr "Calitate: "
 msgid "Quit"
 msgstr "Ieșire"
 
-#: ../Pinta.Effects/Dialogs/Effects.CurvesDialog.cs:432
+#: ../Pinta.Effects/Dialogs/Effects.CurvesDialog.cs:443
 msgid "RGB"
 msgstr "RGB"
 
-#: ../Pinta.Effects/Effects/RadialBlurEffect.cs:24
+#: ../Pinta.Effects/Effects/RadialBlurEffect.cs:23
 msgid "Radial Blur"
 msgstr "Neclaritate radială"
 
-#: ../Pinta.Tools/Tools/GradientTool.cs:187
+#: ../Pinta.Tools/Tools/GradientTool.cs:185
 msgid "Radial Gradient"
 msgstr "Gradient radial"
 
-#: ../Pinta.Effects/Effects/GaussianBlurEffect.cs:263
-#: ../Pinta.Effects/Effects/GlowEffect.cs:79
-#: ../Pinta.Effects/Effects/MedianEffect.cs:69
-#: ../Pinta.Effects/Effects/ReduceNoiseEffect.cs:93
-#: ../Pinta.Effects/Effects/UnfocusEffect.cs:97
+#: ../Pinta.Effects/Effects/GaussianBlurEffect.cs:242
+#: ../Pinta.Effects/Effects/GlowEffect.cs:81
+#: ../Pinta.Effects/Effects/MedianEffect.cs:67
+#: ../Pinta.Effects/Effects/ReduceNoiseEffect.cs:91
+#: ../Pinta.Effects/Effects/UnfocusEffect.cs:95
 #: ../Pinta.Tools/Editable/EditEngines/RoundedLineEditEngine.cs:99
 msgid "Radius"
 msgstr "Rază"
@@ -1653,16 +1546,16 @@ msgstr "Dreptunghi"
 msgid "Rectangle Select"
 msgstr "Selecție dreptunghiulară"
 
-#: ../Pinta.Effects/Dialogs/Effects.LevelsDialog.cs:521
-#: ../Pinta.Effects/Dialogs/Effects.PosterizeDialog.cs:113
+#: ../Pinta.Effects/Dialogs/Effects.LevelsDialog.cs:523
+#: ../Pinta.Effects/Dialogs/Effects.PosterizeDialog.cs:115
 msgid "Red"
 msgstr "Roșu"
 
-#: ../Pinta.Effects/Dialogs/Effects.CurvesDialog.cs:452
+#: ../Pinta.Effects/Dialogs/Effects.CurvesDialog.cs:464
 msgid "Red  "
 msgstr "Roșu  "
 
-#: ../Pinta.Effects/Effects/RedEyeRemoveEffect.cs:26
+#: ../Pinta.Effects/Effects/RedEyeRemoveEffect.cs:24
 msgid "Red Eye Removal"
 msgstr "Îndepărtare efect de ochi roșii"
 
@@ -1670,7 +1563,7 @@ msgstr "Îndepărtare efect de ochi roșii"
 msgid "Redo"
 msgstr "Refă"
 
-#: ../Pinta.Effects/Effects/ReduceNoiseEffect.cs:27
+#: ../Pinta.Effects/Effects/ReduceNoiseEffect.cs:25
 msgid "Reduce Noise"
 msgstr "Reducere zgomot"
 
@@ -1678,41 +1571,29 @@ msgstr "Reducere zgomot"
 msgid "Reflect"
 msgstr "Reflectă"
 
-#: Mono.Addins.Gui/gtk-gui/Mono.Addins.Gui.AddinManagerDialog.cs:166
+#: ../Pinta.Gui.Addins/AddinManagerDialog.cs:46
 msgid "Refresh"
 msgstr "Reactualizare"
 
-#: Mono.Addins.Gui/gtk-gui/Mono.Addins.Gui.NewSiteDialog.cs:103
-msgid "Register a local repository"
-msgstr "Înregistrează o sursă locală"
-
-#: Mono.Addins.Gui/gtk-gui/Mono.Addins.Gui.NewSiteDialog.cs:54
-msgid "Register an on-line repository"
-msgstr "Înregistrează o sursă online"
-
-#: Mono.Addins.Gui/Mono.Addins.Gui/ManageSitesDialog.cs:98
-msgid "Registering repository"
-msgstr "Înregistrare sursă"
-
-#: ../Pinta/Actions/Help/AboutDialogAction.cs:79
+#: ../Pinta/Actions/Help/AboutDialogAction.cs:80
 msgid "Released under the MIT X11 License."
 msgstr "Publicat sub licenţă MIT X11."
 
-#: ../Pinta.Effects/Effects/ReliefEffect.cs:45
+#: ../Pinta.Effects/Effects/ReliefEffect.cs:43
 msgid "Relief"
 msgstr "Relief"
 
-#: ../Pinta/Actions/Layers/LayerPropertiesAction.cs:99
+#: ../Pinta/Actions/Layers/LayerPropertiesAction.cs:103
 msgid "Rename Layer"
 msgstr "Redenumește stratul"
 
-#: ../Pinta.Effects/Effects/CloudsEffect.cs:37
-#: ../Pinta.Effects/Effects/JuliaFractalEffect.cs:32
-#: ../Pinta.Effects/Effects/MandelbrotFractalEffect.cs:32
+#: ../Pinta.Effects/Effects/CloudsEffect.cs:35
+#: ../Pinta.Effects/Effects/JuliaFractalEffect.cs:30
+#: ../Pinta.Effects/Effects/MandelbrotFractalEffect.cs:30
 msgid "Render"
 msgstr "Randează"
 
-#: ../Pinta.Core/Managers/LivePreviewManager.cs:223
+#: ../Pinta.Core/Managers/LivePreviewManager.cs:232
 msgid "Rendering Effect"
 msgstr "Efect de randare"
 
@@ -1720,29 +1601,16 @@ msgstr "Efect de randare"
 msgid "Replace"
 msgstr "Înlocuiește"
 
-#: ../Pinta/Dialogs/ErrorDialog.cs:109
-msgid "Report Bug...."
-msgstr "Raportează o problemă"
+#: ../Pinta/Dialogs/ErrorDialog.cs:69
+msgid "Report Bug..."
+msgstr "Raportează eroare..."
 
-#: Mono.Addins.Gui/Mono.Addins.Gui/AddinInfoView.cs:287
-msgid "Repository version"
-msgstr "Versiune Repository"
-
-#: Mono.Addins.Gui/gtk-gui/Mono.Addins.Gui.AddinManagerDialog.cs:268
-msgid "Repository:"
-msgstr "Sursă:"
-
-#: Mono.Addins.Gui/Mono.Addins.Gui/AddinInfoView.cs:270
-#, csharp-format
-msgid "Required: {0} v{1}, found v{2}"
-msgstr "Necesar: {0} v{1}, găsit v{2}"
-
-#: ../Pinta.Gui.Widgets/Widgets/ReseedButtonWidget.cs:64
+#: ../Pinta.Gui.Widgets/Widgets/ReseedButtonWidget.cs:63
 msgid "Reseed"
 msgstr "Reorganizează"
 
-#: ../Pinta.Effects/Dialogs/Effects.CurvesDialog.cs:462
-#: ../Pinta.Effects/Dialogs/Effects.LevelsDialog.cs:528
+#: ../Pinta.Effects/Dialogs/Effects.CurvesDialog.cs:474
+#: ../Pinta.Effects/Dialogs/Effects.LevelsDialog.cs:531
 msgid "Reset"
 msgstr "Resetează"
 
@@ -1750,8 +1618,8 @@ msgstr "Resetează"
 msgid "Reset to Default"
 msgstr "Restaurează la valorile implicite"
 
-#: ../Pinta/Dialogs/ResizeCanvasDialog.cs:56
-#: ../Pinta.Core/Classes/Document.cs:304
+#: ../Pinta/Dialogs/ResizeCanvasDialog.cs:58
+#: ../Pinta.Core/Classes/Document.cs:305
 msgid "Resize Canvas"
 msgstr "Redimensionează pânza"
 
@@ -1759,7 +1627,7 @@ msgstr "Redimensionează pânza"
 msgid "Resize Canvas..."
 msgstr "Redimensionează Canvas"
 
-#: ../Pinta/Dialogs/ResizeImageDialog.cs:45
+#: ../Pinta/Dialogs/ResizeImageDialog.cs:47
 #: ../Pinta.Core/HistoryItems/ResizeHistoryItem.cs:42
 msgid "Resize Image"
 msgstr "Redimensionează imaginea"
@@ -1772,12 +1640,12 @@ msgstr "Redimensionare imagine..."
 msgid "Resize Palette"
 msgstr "Redimensionează paleta"
 
-#: ../Pinta.Tools/Tools/TextTool.cs:221
+#: ../Pinta.Tools/Tools/TextTool.cs:223
 msgid "Right Align"
 msgstr "Aliniază la dreapta"
 
-#: ../Pinta/Actions/Layers/RotateZoomLayerAction.cs:53
-#: ../Pinta/Actions/Layers/RotateZoomLayerAction.cs:107
+#: ../Pinta/Actions/Layers/RotateZoomLayerAction.cs:54
+#: ../Pinta/Actions/Layers/RotateZoomLayerAction.cs:111
 msgid "Rotate / Zoom Layer"
 msgstr "Rotire / Zoom Strat"
 
@@ -1800,12 +1668,12 @@ msgstr "Roteşte 90° în sensul acelor de ceas"
 msgid "Rotate 90° Counter-Clockwise"
 msgstr "Roteşte 90° contra acelor de ceas"
 
-#: ../Pinta.Effects/Effects/FragmentEffect.cs:116
-#: ../Pinta.Effects/Effects/TileEffect.cs:140
+#: ../Pinta.Effects/Effects/FragmentEffect.cs:114
+#: ../Pinta.Effects/Effects/TileEffect.cs:139
 msgid "Rotation"
 msgstr "Rotație"
 
-#: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:325
+#: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:324
 msgid "Rounded Line Series"
 msgstr "Serie linii rotunjite"
 
@@ -1825,7 +1693,7 @@ msgstr "Unităţi de măsură riglă"
 msgid "Rulers"
 msgstr "Rigle"
 
-#: ../Pinta.Tools/Tools/ColorPickerTool.cs:198
+#: ../Pinta.Tools/Tools/ColorPickerTool.cs:195
 msgid "Sampling"
 msgstr "Prelevare de probe"
 
@@ -1834,12 +1702,12 @@ msgstr "Prelevare de probe"
 msgid "Saturation"
 msgstr "Saturație"
 
-#: ../Pinta.Effects/Effects/RedEyeRemoveEffect.cs:74
+#: ../Pinta.Effects/Effects/RedEyeRemoveEffect.cs:63
 msgid "Saturation Percentage"
 msgstr "Procent saturaţie"
 
-#: ../Pinta/Actions/File/SaveDocumentImplementationAction.cs:75
-#: ../Pinta.Core/Actions/EditActions.cs:403
+#: ../Pinta/Actions/File/SaveDocumentImplementationAction.cs:73
+#: ../Pinta.Core/Actions/EditActions.cs:391
 #: ../Pinta.Core/Actions/FileActions.cs:55
 msgid "Save"
 msgstr "Salvează"
@@ -1853,20 +1721,20 @@ msgstr "Salvează toate"
 msgid "Save As..."
 msgstr "Salvează Ca..."
 
-#: ../Pinta/Actions/File/SaveDocumentImplementationAction.cs:72
+#: ../Pinta/Actions/File/SaveDocumentImplementationAction.cs:70
 msgid "Save Image File"
 msgstr "Salvează fișierul imagine"
 
-#: ../Pinta.Core/Actions/EditActions.cs:400
+#: ../Pinta.Core/Actions/EditActions.cs:388
 msgid "Save Palette File"
 msgstr "Salvează fișier paletă"
 
-#: ../Pinta/Actions/File/CloseDocumentAction.cs:60
+#: ../Pinta/Actions/File/CloseDocumentAction.cs:58
 #, csharp-format
 msgid "Save changes to image \"{0}\" before closing?"
-msgstr ""
+msgstr "Salvati schimbarile la imaginea {0} inainte de inchidere?"
 
-#: ../Pinta.Effects/Effects/CloudsEffect.cs:200
+#: ../Pinta.Effects/Effects/CloudsEffect.cs:197
 msgid "Scale"
 msgstr "Scalează"
 
@@ -1878,18 +1746,14 @@ msgstr "Ecran"
 msgid "Secondary"
 msgstr "Secundar"
 
-#: ../Pinta.Effects/Effects/CloudsEffect.cs:225
+#: ../Pinta.Effects/Effects/CloudsEffect.cs:222
 msgid "Seed"
 msgstr "Sămânță"
 
 #: ../Pinta.Core/Actions/EditActions.cs:70
-#: ../Pinta.Core/Actions/EditActions.cs:218
+#: ../Pinta.Core/Actions/EditActions.cs:216
 msgid "Select All"
 msgstr "Selectează tot"
-
-#: Mono.Addins.Gui/gtk-gui/Mono.Addins.Gui.NewSiteDialog.cs:47
-msgid "Select the location of the repository you want to register:"
-msgstr "Selectați locația sursei pe care doriți să o înregistrați:"
 
 #: ../Pinta.Effects/Adjustments/SepiaEffect.cs:26
 msgid "Sepia"
@@ -1899,40 +1763,40 @@ msgstr "Sepia"
 msgid "Set Number of Colors"
 msgstr "Alege numărul de culori"
 
-#: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:315
+#: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:314
 msgid "Shape Type"
 msgstr "Tipul formei"
 
-#: ../Pinta.Effects/Effects/SharpenEffect.cs:24
+#: ../Pinta.Effects/Effects/SharpenEffect.cs:22
 msgid "Sharpen"
 msgstr "Accentuează claritatea"
 
-#: ../Pinta.Core/Extensions/ToolBoxButton.cs:52
-#: ../Pinta.Gui.Widgets/Widgets/StatusBarColorPaletteWidget.cs:237
+#: ../Pinta.Core/Extensions/ToolBoxButton.cs:50
+#: ../Pinta.Gui.Widgets/Widgets/StatusBarColorPaletteWidget.cs:261
 msgid "Shortcut key"
 msgstr "Combinaţie de taste"
 
-#: ../Pinta/Actions/Layers/LayerPropertiesAction.cs:104
+#: ../Pinta/Actions/Layers/LayerPropertiesAction.cs:108
 msgid "Show Layer"
 msgstr "Arată Strat"
 
-#: ../Pinta/Main.cs:60
+#: ../Pinta/Main.cs:62
 msgid "Show this message and exit."
 msgstr "Afișează acest mesaj și ieșiți"
 
 #: ../Pinta.Core/Actions/ViewActions.cs:150
 msgid "Show/Hide"
-msgstr ""
+msgstr "Arată/Ascunde"
 
-#: ../Pinta.Tools/Tools/ColorPickerTool.cs:225
+#: ../Pinta.Tools/Tools/ColorPickerTool.cs:222
 msgid "Single Pixel"
 msgstr "Un Singur Pixel"
 
-#: ../Pinta.Tools/Editable/EditEngines/ArrowedEditEngine.cs:280
+#: ../Pinta.Tools/Editable/EditEngines/ArrowedEditEngine.cs:271
 msgid "Size"
 msgstr "Mărime"
 
-#: ../Pinta.Tools/Tools/EraserTool.cs:267
+#: ../Pinta.Tools/Tools/EraserTool.cs:262
 msgid "Smooth"
 msgstr "Ștergere lină"
 
@@ -1940,17 +1804,13 @@ msgstr "Ștergere lină"
 msgid "Soft Light"
 msgstr "Lumină blândă"
 
-#: ../Pinta.Effects/Effects/SoftenPortraitEffect.cs:56
+#: ../Pinta.Effects/Effects/SoftenPortraitEffect.cs:55
 msgid "Soften Portrait"
 msgstr "Portret înmuiat"
 
-#: ../Pinta.Effects/Effects/SoftenPortraitEffect.cs:117
+#: ../Pinta.Effects/Effects/SoftenPortraitEffect.cs:116
 msgid "Softness"
 msgstr "Finețe"
-
-#: Mono.Addins.Gui/Mono.Addins.Gui/AddinInstallerDialog.cs:159
-msgid "Some of the required add-ins were not found"
-msgstr "O parte din modulele obligatorii nu au fost găsite"
 
 #: ../Pinta.Tools/Brushes/SplatterBrush.cs:37
 msgid "Splatter"
@@ -1962,73 +1822,64 @@ msgstr "Pătrate"
 
 #: ../Pinta.Core/Actions/ViewActions.cs:73
 msgid "Status Bar"
-msgstr ""
+msgstr "Bara de stare"
 
-#: ../Pinta.Effects/Effects/ReduceNoiseEffect.cs:96
+#: ../Pinta.Effects/Effects/ReduceNoiseEffect.cs:94
 msgid "Strength"
 msgstr "Putere"
 
-#: ../Pinta.Effects/Effects/EdgeDetectEffect.cs:35
-#: ../Pinta.Effects/Effects/EmbossEffect.cs:32
-#: ../Pinta.Effects/Effects/OutlineEffect.cs:35
+#: ../Pinta.Effects/Effects/EdgeDetectEffect.cs:33
+#: ../Pinta.Effects/Effects/EmbossEffect.cs:30
+#: ../Pinta.Effects/Effects/OutlineEffect.cs:33
 #: ../Pinta.Effects/Effects/ReliefEffect.cs:32
 msgid "Stylize"
 msgstr "Stilizează"
 
-#: ../Pinta.Tools/Tools/ColorPickerTool.cs:208
+#: ../Pinta.Tools/Tools/ColorPickerTool.cs:205
 msgid "Switch to Pencil tool"
 msgstr "Schimbă la creion"
 
-#: ../Pinta.Tools/Tools/ColorPickerTool.cs:207
+#: ../Pinta.Tools/Tools/ColorPickerTool.cs:204
 msgid "Switch to previous tool"
 msgstr "Schimbă la unealta precedentă"
 
-#: ../Pinta/Actions/File/NewScreenshotAction.cs:105
-msgid "Take Screenshot"
-msgstr "Capturează ecran"
-
-#: ../Pinta.Tools/Tools/TextTool.cs:84
+#: ../Pinta.Tools/Tools/TextTool.cs:85
 msgid "Text"
 msgstr "Text"
 
-#: ../Pinta.Tools/Tools/TextTool.cs:85
+#: ../Pinta.Tools/Tools/TextTool.cs:86
 msgid "Text - Finalize"
 msgstr "Text - Finalizare"
 
-#: ../Pinta.Tools/Tools/TextTool.cs:235
+#: ../Pinta.Tools/Tools/TextTool.cs:238
 msgid "Text Style"
 msgstr "Stilul textului"
 
-#: ../Pinta/Actions/Edit/PasteAction.cs:160
+#: ../Pinta/Actions/Edit/PasteAction.cs:158
 msgid "The clipboard does not contain an image."
 msgstr "Nu există nici o imagine în Clipboard"
 
-#: Mono.Addins.Gui/gtk-gui/Mono.Addins.Gui.AddinInstallerDialog.cs:48
-msgid "The following add-ins will be installed:"
-msgstr "Următoarele extensii vor fi instalate:"
+#: ../Pinta.Gui.Addins/InstallDialog.cs:152
+msgid "The file may be an invalid or corrupt extension package"
+msgstr "Fisierul poate fi un pachet de extensie invalid sau corupt"
 
-#: Mono.Addins.Gui/Mono.Addins.Gui/AddinInfoView.cs:295
-msgid "The following depedencies required by this add-in are not available:"
-msgstr ""
-"Următoarele dependințe necesare pentru această extensie nu sunt disponibile:"
-
-#: Mono.Addins.Gui/Mono.Addins.Gui/InstallDialog.cs:156
+#: ../Pinta.Gui.Addins/InstallDialog.cs:91
 msgid "The following dependencies could not be resolved:"
 msgstr "Următoarele dependențe nu au putut fi rezolvate:"
 
-#: Mono.Addins.Gui/Mono.Addins.Gui/InstallDialog.cs:148
+#: ../Pinta.Gui.Addins/InstallDialog.cs:82
 msgid "The following packages need to be uninstalled:"
 msgstr "Următoarele pachete trebuie dezinstalate:"
 
-#: Mono.Addins.Gui/Mono.Addins.Gui/InstallDialog.cs:138
+#: ../Pinta.Gui.Addins/InstallDialog.cs:74
 msgid "The following packages will be installed:"
 msgstr "Următoarele pachete vor fi instalate:"
 
-#: Mono.Addins.Gui/Mono.Addins.Gui/InstallDialog.cs:82
+#: ../Pinta.Gui.Addins/InstallDialog.cs:178
 msgid "The following packages will be uninstalled:"
 msgstr "Următoarele pachete vor fi dezinstalate:"
 
-#: ../Pinta/Actions/Edit/PasteAction.cs:169
+#: ../Pinta/Actions/Edit/PasteAction.cs:165
 msgid ""
 "The image being pasted is larger than the canvas size. What would you like "
 "to do?"
@@ -2036,75 +1887,69 @@ msgstr ""
 "Imaginea care trebuie lipită este mai mare decât spațiul de desen. Ce doriți "
 "să faceți?"
 
-#: Mono.Addins.Gui/Mono.Addins.Gui/InstallDialog.cs:211
+#: ../Pinta.Gui.Addins/InstallDialog.cs:294
 msgid "The installation failed!"
 msgstr "Instalare eșuată!"
 
-#: Mono.Addins.Gui/Mono.Addins.Gui/InstallDialog.cs:212
+#: ../Pinta.Gui.Addins/InstallDialog.cs:295
 msgid "The installation has completed with warnings."
 msgstr "Instalarea s-a terminat cu avertizări."
 
-#: Mono.Addins.Gui/Mono.Addins.Gui/InstallDialog.cs:124
+#: ../Pinta.Gui.Addins/InstallDialog.cs:56
 msgid ""
-"The selected add-ins can't be installed because there are dependency "
-"conflicts."
+"The selected extension packages can't be installed because there are "
+"dependency conflicts."
 msgstr ""
-"Următoarele extensii nu pot fi instalate pentru că există conflicte în "
-"dependințe."
+"Pachetul de extensie selectat nu poate fi instalat deoarece sunt conflicte "
+"de versiuni."
 
-#: Mono.Addins.Gui/Mono.Addins.Gui/InstallDialog.cs:216
+#: ../Pinta.Gui.Addins/InstallDialog.cs:304
 msgid "The uninstallation failed!"
 msgstr "Dezinstalarea a eșuat!"
 
-#: Mono.Addins.Gui/Mono.Addins.Gui/InstallDialog.cs:217
+#: ../Pinta.Gui.Addins/InstallDialog.cs:305
 msgid "The uninstallation has completed with warnings."
 msgstr "Dezinstalarea s-a terminat cu avertizări."
 
-#: Mono.Addins.Gui/Mono.Addins.Gui/InstallDialog.cs:89
+#: ../Pinta.Gui.Addins/InstallDialog.cs:189
 msgid ""
-"There are other add-ins that depend on the previous ones which will also be "
-"uninstalled:"
+"There are other extension packages that depend on the previous ones which "
+"will also be uninstalled:"
 msgstr ""
-"Există alte extensii care depind de extensiile anteriaore care vor fi de "
-"asemenea dezinstalate:"
+"Sunt si alte pachete de extensie care depind de cel anterior si care vor fi "
+"dezinstalate deasemenea."
 
-#: ../Pinta.Effects/Effects/OutlineEffect.cs:141
+#: ../Pinta.Effects/Effects/OutlineEffect.cs:139
 msgid "Thickness"
 msgstr "Grosime"
 
-#: Mono.Addins.Gui/Mono.Addins.Gui/AddinInfoView.cs:263
-msgid "This add-in can't be loaded due to missing dependencies"
-msgstr ""
-"Această extensie nu poate fi încărcată deoarece nu au putut fi găsite "
-"dependințele"
-
-#: ../Pinta.Effects/Effects/TileEffect.cs:24
+#: ../Pinta.Effects/Effects/TileEffect.cs:22
 msgid "Tile Reflection"
 msgstr "Reflecție mozaic"
 
-#: ../Pinta.Effects/Effects/TileEffect.cs:142
+#: ../Pinta.Effects/Effects/TileEffect.cs:141
 msgid "Tile Size"
 msgstr "Mărime mozaic"
 
-#: ../Pinta.Effects/Dialogs/Effects.CurvesDialog.cs:467
+#: ../Pinta.Effects/Dialogs/Effects.CurvesDialog.cs:481
 msgid "Tip: Right-click to remove control points."
 msgstr "Truc: Click dreapta ca să elimini puncte de control"
 
-#: ../Pinta.Effects/Effects/RedEyeRemoveEffect.cs:70
-#: ../Pinta.Tools/Tools/FloodTool.cs:127
-#: ../Pinta.Tools/Tools/RecolorTool.cs:200
+#: ../Pinta.Effects/Effects/RedEyeRemoveEffect.cs:59
+#: ../Pinta.Tools/Tools/FloodTool.cs:126
+#: ../Pinta.Tools/Tools/RecolorTool.cs:201
 msgid "Tolerance"
 msgstr "Toleranţă"
 
-#: ../Pinta.Core/Managers/ToolManager.cs:339
+#: ../Pinta.Core/Managers/ToolManager.cs:354
 msgid "Tool"
 msgstr "Unealtă"
 
 #: ../Pinta.Core/Actions/ViewActions.cs:74
 msgid "Tool Box"
-msgstr ""
+msgstr "Trusă de unelte"
 
-#: ../Pinta/MainWindow.cs:368
+#: ../Pinta/MainWindow.cs:354
 msgid "Tool Windows"
 msgstr "Ferestre cu unelte"
 
@@ -2112,7 +1957,7 @@ msgstr "Ferestre cu unelte"
 msgid "Toolbar"
 msgstr "Bară de unelte"
 
-#: ../Pinta.Effects/Dialogs/Effects.CurvesDialog.cs:426
+#: ../Pinta.Effects/Dialogs/Effects.CurvesDialog.cs:440
 msgid "Transfer Map"
 msgstr "Hartă de transfer"
 
@@ -2120,32 +1965,25 @@ msgstr "Hartă de transfer"
 msgid "Translate This Application"
 msgstr "Tradu această aplicaţie"
 
-#: ../Pinta.Tools/Tools/GradientTool.cs:204
+#: ../Pinta.Tools/Tools/GradientTool.cs:202
 msgid "Transparency Mode"
-msgstr ""
+msgstr "Mod transparent"
 
-#: ../Pinta/Dialogs/NewImageDialog.cs:289
+#: ../Pinta/Dialogs/NewImageDialog.cs:315
 #: ../Pinta.Effects/Effects/WarpEffect.cs:29
 msgid "Transparent"
 msgstr "Transparent"
 
-#: ../Pinta.Effects/Effects/TwistEffect.cs:24
+#: ../Pinta.Effects/Effects/TwistEffect.cs:22
 msgid "Twist"
 msgstr "Răsucește"
 
-#: ../Pinta.Tools/Tools/EraserTool.cs:263
-#: ../Pinta.Tools/Tools/PaintBrushTool.cs:162
+#: ../Pinta.Tools/Tools/EraserTool.cs:258
+#: ../Pinta.Tools/Tools/PaintBrushTool.cs:161
 msgid "Type"
 msgstr "Tip"
 
-#: ../Pinta/MainWindow.cs:545
-#, csharp-format
-msgid ""
-"Unable to download image from {0}.\n"
-"Details: {1}"
-msgstr ""
-
-#: ../Pinta.Tools/Tools/TextTool.cs:184
+#: ../Pinta.Tools/Tools/TextTool.cs:183
 msgid "Underline"
 msgstr "Subliniat"
 
@@ -2153,60 +1991,47 @@ msgstr "Subliniat"
 msgid "Undo"
 msgstr "Anulează"
 
-#: ../Pinta.Effects/Effects/UnfocusEffect.cs:26
+#: ../Pinta.Effects/Effects/UnfocusEffect.cs:24
 msgid "Unfocus"
 msgstr "Defocusează"
 
-#: Mono.Addins.Gui/Mono.Addins.Gui/InstallDialog.cs:77
+#: ../Pinta.Gui.Addins/InstallDialog.cs:168
+#: ../Pinta.Gui.Addins/InstallDialog.cs:169
 msgid "Uninstall"
 msgstr "Dezinstalează"
 
-#: Mono.Addins.Gui/Mono.Addins.Gui/InstallDialog.cs:214
-msgid "Uninstalling Add-ins"
-msgstr "Dezinstalează extensii"
+#: ../Pinta.Gui.Addins/AddinInfoView.cs:93
+msgid "Uninstall..."
+msgstr "Dezinstalează..."
 
 #. Translators: {0} is 'Ctrl', or a platform-specific key such as 'Command' on macOS.
 #: ../Pinta.Core/Classes/SelectionModeHandler.cs:49
 #, csharp-format
 msgid "Union (+) ({0} + Left Click)"
-msgstr ""
+msgstr "Unire (+) ({0} + Click-stanga)"
 
-#: ../Pinta.Core/Managers/WorkspaceManager.cs:115
+#: ../Pinta.Core/Managers/WorkspaceManager.cs:117
 #, csharp-format
 msgid "Unsaved Image {0}"
 msgstr "Imagine nesalvată {0}"
 
-#: ../Pinta.Core/Managers/WorkspaceManager.cs:250
+#: ../Pinta.Core/Managers/WorkspaceManager.cs:246
 msgid "Unsupported file format"
 msgstr "Format fișier nerecunoscut"
 
-#: Mono.Addins.Gui/gtk-gui/Mono.Addins.Gui.AddinInfoView.cs:255
-msgid "Update"
-msgstr "Actualizare"
+#: ../Pinta.Core/Classes/Palette.cs:184
+msgid "Unsupported palette format"
+msgstr "Format de paleta nesuportat"
 
-#: Mono.Addins.Gui/gtk-gui/Mono.Addins.Gui.AddinManagerDialog.cs:194
-msgid "Update All"
-msgstr "Actualizează toate"
+#: ../Pinta.Gui.Addins/AddinInfoView.cs:88
+msgid "Update..."
+msgstr "Actualizați..."
 
-#: Mono.Addins.Gui/Mono.Addins.Gui/AddinInfoView.cs:256
-msgid "Update available"
-msgstr "Actualizare disponibilă"
-
-#: Mono.Addins.Gui/Mono.Addins.Gui/AddinManagerDialog.cs:123
-#: Mono.Addins.Gui/Mono.Addins.Gui/AddinManagerDialog.cs:364
-#: Mono.Addins.Gui/gtk-gui/Mono.Addins.Gui.AddinManagerDialog.cs:247
+#: ../Pinta.Gui.Addins/AddinManagerDialog.cs:63
 msgid "Updates"
 msgstr "Actualizări"
 
-#: Mono.Addins.Gui/Mono.Addins.Gui/AddinManagerDialog.cs:419
-msgid "Updating repository"
-msgstr "Actualizare sursă"
-
-#: Mono.Addins.Gui/gtk-gui/Mono.Addins.Gui.NewSiteDialog.cs:82
-msgid "Url:"
-msgstr "Url:"
-
-#: ../Pinta/Main.cs:111
+#: ../Pinta/Main.cs:132
 msgid "Usage: pinta [files]"
 msgstr "Utilizat in Pinta [fișiere]"
 
@@ -2218,32 +2043,37 @@ msgstr ""
 "Folosiți calitatea redusă pentru previzualizări, imagini și unghiuri mici. "
 "Folosiți calitatea înaltă pentru calitatea finală, imagini și unghiuri mari."
 
-#: ../Pinta/Actions/Help/AboutDialogAction.cs:86
+#: ../Pinta/Actions/Help/AboutDialogAction.cs:87
 msgid "Using some icons from:"
 msgstr "Sunt utilizate unele pictograme din:"
 
-#: ../Pinta/Dialogs/LayerPropertiesDialog.cs:195
+#: ../Pinta.Gui.Addins/AddinInfoView.cs:130
+#, csharp-format
+msgid "Version: {0}"
+msgstr "Versiunea: {0}"
+
+#: ../Pinta/Dialogs/LayerPropertiesDialog.cs:202
 msgid "Visible"
 msgstr "Vizibil"
 
-#: ../Pinta.Effects/Effects/SoftenPortraitEffect.cs:123
+#: ../Pinta.Effects/Effects/SoftenPortraitEffect.cs:122
 msgid "Warmth"
 msgstr "Căldură"
 
-#: ../Pinta/Dialogs/NewImageDialog.cs:273
+#: ../Pinta/Dialogs/NewImageDialog.cs:296
 msgid "White"
 msgstr "Alb"
 
-#: ../Pinta/Dialogs/NewImageDialog.cs:214
-#: ../Pinta/Dialogs/ResizeCanvasDialog.cs:333
-#: ../Pinta/Dialogs/ResizeImageDialog.cs:169
+#: ../Pinta/Dialogs/NewImageDialog.cs:216
+#: ../Pinta/Dialogs/ResizeCanvasDialog.cs:338
+#: ../Pinta/Dialogs/ResizeImageDialog.cs:174
 msgid "Width:"
 msgstr "Lungime:"
 
 #: ../Pinta.Core/Actions/ViewActions.cs:103
-#: ../Pinta.Core/Actions/ViewActions.cs:282
-#: ../Pinta.Core/Classes/DocumentWorkspace.cs:324
-#: ../Pinta.Core/Classes/DocumentWorkspace.cs:332
+#: ../Pinta.Core/Actions/ViewActions.cs:286
+#: ../Pinta.Core/Classes/DocumentWorkspace.cs:325
+#: ../Pinta.Core/Classes/DocumentWorkspace.cs:333
 msgid "Window"
 msgstr "Fereastră"
 
@@ -2259,29 +2089,29 @@ msgstr "Xor"
 #: ../Pinta.Core/Classes/SelectionModeHandler.cs:52
 #, csharp-format
 msgid "Xor ({0} + Right Click)"
-msgstr ""
+msgstr "XOR ({0} + Click-dreapta)"
 
 #. Translators: {0} is the name of a file that the user does not have permission to open.
-#: ../Pinta.Core/Managers/WorkspaceManager.cs:424
+#: ../Pinta.Core/Managers/WorkspaceManager.cs:409
 #, csharp-format
 msgid "You do not have access to '{0}'."
-msgstr ""
+msgstr "Nu aveti acces la '{0}'"
 
 #. Translators: {0} is the name of a file that the user does not have write permission for.
-#: ../Pinta/Actions/File/SaveDocumentImplementationAction.cs:188
+#: ../Pinta/Actions/File/SaveDocumentImplementationAction.cs:182
 #, csharp-format
 msgid ""
 "You do not have access to modify '{0}'. The file or folder may be read-only."
 msgstr ""
 
-#: ../Pinta/Actions/Layers/RotateZoomLayerAction.cs:118
-#: ../Pinta.Effects/Effects/JuliaFractalEffect.cs:136
-#: ../Pinta.Effects/Effects/MandelbrotFractalEffect.cs:160
+#: ../Pinta/Actions/Layers/RotateZoomLayerAction.cs:122
+#: ../Pinta.Effects/Effects/JuliaFractalEffect.cs:132
+#: ../Pinta.Effects/Effects/MandelbrotFractalEffect.cs:145
 #: ../Pinta.Tools/Tools/ZoomTool.cs:56
 msgid "Zoom"
 msgstr "Mărire/Micşorare"
 
-#: ../Pinta.Effects/Effects/ZoomBlurEffect.cs:24
+#: ../Pinta.Effects/Effects/ZoomBlurEffect.cs:22
 msgid "Zoom Blur"
 msgstr "Efect de estompare de focalizare"
 
@@ -2297,43 +2127,57 @@ msgstr "Depărtează"
 msgid "Zoom to Selection"
 msgstr "Panoramează la selecție"
 
-#: ../Pinta/MainWindow.cs:343
+#: ../Pinta/MainWindow.cs:333
 msgid "_Adjustments"
 msgstr "Ajustări"
 
-#: ../Pinta/MainWindow.cs:328
+#: ../Pinta/Actions/Edit/PasteAction.cs:171
+#: ../Pinta/Actions/File/CloseDocumentAction.cs:67
+msgid "_Cancel"
+msgstr "_Anulează"
+
+#: ../Pinta/Actions/File/CloseDocumentAction.cs:68
+msgid "_Discard"
+msgstr "_Renunță"
+
+#: ../Pinta/MainWindow.cs:318
 msgid "_Edit"
 msgstr "_Editare"
 
-#: ../Pinta/MainWindow.cs:324
+#: ../Pinta/MainWindow.cs:314
 msgid "_File"
 msgstr "_Fișier"
 
-#: ../Pinta/MainWindow.cs:362
+#: ../Pinta/MainWindow.cs:348
 msgid "_Help"
 msgstr "_Ajutor"
 
-#: ../Pinta/MainWindow.cs:336
+#: ../Pinta/MainWindow.cs:326
 msgid "_Image"
 msgstr "_Imagine"
 
-#: ../Pinta/MainWindow.cs:340
+#: ../Pinta/MainWindow.cs:330
 msgid "_Layers"
 msgstr "_Straturi"
 
-#: Mono.Addins.Gui/gtk-gui/Mono.Addins.Gui.AddinInfoView.cs:281
-msgid "_Uninstall..."
-msgstr "_Dezinstalează..."
+#: ../Pinta/Dialogs/ErrorDialog.cs:43 ../Pinta/Dialogs/ErrorDialog.cs:71
+#: ../Pinta.Gui.Addins/InstallDialog.cs:155
+msgid "_OK"
+msgstr "_Ok"
 
-#: ../Pinta/MainWindow.cs:332
+#: ../Pinta/Actions/File/CloseDocumentAction.cs:69
+msgid "_Save"
+msgstr "_Salvează"
+
+#: ../Pinta/MainWindow.cs:322
 msgid "_View"
 msgstr "_Vizualizare"
 
-#: ../Pinta/MainWindow.cs:358
+#: ../Pinta/MainWindow.cs:344
 msgid "_Window"
 msgstr "_Fereastră"
 
-#: ../Pinta/Actions/Help/AboutDialogAction.cs:71
+#: ../Pinta/Actions/Help/AboutDialogAction.cs:72
 msgid "by Pinta contributors"
 msgstr "de contribuitorii Pinta"
 
@@ -2341,20 +2185,20 @@ msgstr "de contribuitorii Pinta"
 msgid "draw;drawing;paint;painting;graphics;raster;2d;"
 msgstr ""
 
-#: ../Pinta/Main.cs:62
+#: ../Pinta/Main.cs:64
 msgid "number of threads to use for rendering"
 msgstr "numărul firelor de execuţie utilizate pentru randare"
 
-#: ../Pinta/Dialogs/NewImageDialog.cs:220
-#: ../Pinta/Dialogs/NewImageDialog.cs:236
-#: ../Pinta/Dialogs/ResizeCanvasDialog.cs:335
-#: ../Pinta/Dialogs/ResizeCanvasDialog.cs:341
-#: ../Pinta/Dialogs/ResizeImageDialog.cs:171
-#: ../Pinta/Dialogs/ResizeImageDialog.cs:177
+#: ../Pinta/Dialogs/NewImageDialog.cs:224
+#: ../Pinta/Dialogs/NewImageDialog.cs:243
+#: ../Pinta/Dialogs/ResizeCanvasDialog.cs:342
+#: ../Pinta/Dialogs/ResizeCanvasDialog.cs:348
+#: ../Pinta/Dialogs/ResizeImageDialog.cs:178
+#: ../Pinta/Dialogs/ResizeImageDialog.cs:184
 msgid "pixels"
 msgstr "pixeli"
 
-#: ../Pinta/Actions/Help/AboutDialogAction.cs:62
+#: ../Pinta/Actions/Help/AboutDialogAction.cs:63
 msgid "translator-credits"
 msgstr ""
 "Launchpad Contributions:\n"
@@ -2367,6 +2211,7 @@ msgstr ""
 "  Istrate Sebastian https://launchpad.net/~sebyx87\n"
 "  Jonathan Pobst https://launchpad.net/~jpobst\n"
 "  Mircea https://launchpad.net/~mirceanis\n"
+"  Miron Cristea https://launchpad.net/~mcristea\n"
 "  Nagy Ákos https://launchpad.net/~e-contact-pecska-ro\n"
 "  Nicolae Crefelean https://launchpad.net/~kneekoo\n"
 "  Radu Zoran https://launchpad.net/~radu-r2dev\n"
@@ -2381,10 +2226,10 @@ msgstr ""
 
 #. Translators: this is the auto-generated name for a duplicated layer.
 #. {0} is the name of the source layer. Example: "Layer 3 copy".
-#: ../Pinta.Core/Classes/DocumentLayers.cs:234
+#: ../Pinta.Core/Classes/DocumentLayers.cs:201
 #, csharp-format
 msgid "{0} copy"
-msgstr ""
+msgstr "copiaza {0}"
 
 #: ../Pinta.Core/ImageFormats/FormatDescriptor.cs:110
 #, csharp-format
@@ -2395,21 +2240,11 @@ msgstr "{0} imagine ({1})"
 #: ../Pinta.Core/PaletteFormats/PaletteDescriptor.cs:62
 #, csharp-format
 msgid "{0} palette ({1})"
-msgstr ""
-
-#: Mono.Addins.Gui/Mono.Addins.Gui/AddinManagerDialog.cs:363
-#, csharp-format
-msgid "{0} update available"
-msgid_plural "{0} updates available"
-msgstr[0] "{0} actualizare disponibilă"
-msgstr[1] "{0} actualizări disponibile"
-msgstr[2] ""
-"{0} actualizare disponibilă\r\n"
-"{0} actualizări disponibile"
+msgstr "{0} paleta ({1})"
 
 #. Translators: This specifies the format of the zoom percentage choices
 #. in the toolbar.
-#: ../Pinta.Core/Actions/ViewActions.cs:263
+#: ../Pinta.Core/Actions/ViewActions.cs:267
 #, csharp-format
 msgid "{0}%"
 msgstr "{0}%"
@@ -2426,8 +2261,28 @@ msgstr "{0}%"
 #~ msgid "Path"
 #~ msgstr "Cale"
 
+#~ msgid "Delay before taking a screenshot (seconds):"
+#~ msgstr "Întârziere înaintea capturii de ecran (secunde):"
+
 #~ msgid "Ctrl-left click to set origin, left click to paint."
 #~ msgstr "Control-clic pentru alegerea originii, clic stânga pentru desenare."
+
+#~ msgid ""
+#~ "Click and drag to draw gradient from primary to secondary color.  Right "
+#~ "click to reverse."
+#~ msgstr ""
+#~ "Clic pentru a desena un gradient de la culoarea principală la cea secundară. "
+#~ "Clic dreapta pentru inversare."
+
+#~ msgid ""
+#~ "Left click to zoom in. Right click to zoom out. Click and drag to zoom in "
+#~ "selection."
+#~ msgstr ""
+#~ "Clic stânga pentru mărire. Clic dreapta pentru micșorare. Clic și trage "
+#~ "pentru a mări o zonă selectată."
+
+#~ msgid "Take Screenshot"
+#~ msgstr "Capturează ecran"
 
 #, csharp-format
 #~ msgid ""
@@ -2443,8 +2298,32 @@ msgstr "{0}%"
 #~ msgid "Version Info"
 #~ msgstr "Informaţii despre versiune"
 
+#~ msgid ""
+#~ "Left click to draw freeform one-pixel wide lines with the primary color. "
+#~ "Right click to use the secondary color."
+#~ msgstr ""
+#~ "Click stânga pentru a desena linii arbitrare cu lățimea de un pixel folosind "
+#~ "culoarea principală. Click dreapta pentru a folosi culoarea secundară."
+
 #~ msgid "Union (+) (Ctrl + Left Click)"
 #~ msgstr "Uniune (+) (Ctrl + Click stânga)"
+
+#~ msgid ""
+#~ "Click and drag to draw an elliptical selection. Hold Shift to constrain to a "
+#~ "circle."
+#~ msgstr ""
+#~ "Click și trage pentru a desena o selecție eliptică. Ține apăsată tasta Shift "
+#~ "pentru a constrânge selecția la forma de cerc."
+
+#~ msgid ""
+#~ "Click and drag to draw a rectangular selection. Hold Shift to constrain to a "
+#~ "square."
+#~ msgstr ""
+#~ "Click și trage pentru a desena o selecție rectangulară. Ține apăsată tasta "
+#~ "Shift pentru a constrânge selecția la forma de pătrat."
+
+#~ msgid "Add-in Manager"
+#~ msgstr "Administrator de module"
 
 #~ msgid "Xor (Ctrl + Right Click)"
 #~ msgstr "Xor (Ctrl + Click dreapta)"
@@ -2460,6 +2339,181 @@ msgstr "{0}%"
 
 #~ msgid "Contributors to this release:"
 #~ msgstr "Au contribuit la această versiune:"
+
+#~ msgid ""
+#~ "Multiple selection:\n"
+#~ "\n"
+#~ msgstr ""
+#~ "Selecție multiplă:\n"
+#~ "\n"
+
+#~ msgid "This add-in can't be loaded due to missing dependencies"
+#~ msgstr ""
+#~ "Această extensie nu poate fi încărcată deoarece nu au putut fi găsite "
+#~ "dependințele"
+
+#~ msgid "Available in repository:"
+#~ msgstr "Disponibil în repository"
+
+#~ msgid "No selection"
+#~ msgstr "Nici o selecție"
+
+#~ msgid "Disable"
+#~ msgstr "Dezactivează"
+
+#~ msgid "Enable"
+#~ msgstr "Activează"
+
+#, csharp-format
+#~ msgid "Required: {0} v{1}, found v{2}"
+#~ msgstr "Necesar: {0} v{1}, găsit v{2}"
+
+#~ msgid "Update available"
+#~ msgstr "Actualizare disponibilă"
+
+#, csharp-format
+#~ msgid "Missing: {0} v{1}"
+#~ msgstr "Lipsește: {0} v{1}"
+
+#~ msgid "Installation cancelled"
+#~ msgstr "Instalare anulată"
+
+#~ msgid "Some of the required add-ins were not found"
+#~ msgstr "O parte din modulele obligatorii nu au fost găsite"
+
+#~ msgid "Installation failed"
+#~ msgstr "Instalare nereușită"
+
+#~ msgid "Installed version"
+#~ msgstr "Versiune instalată"
+
+#~ msgid "Repository version"
+#~ msgstr "Versiune Repository"
+
+#~ msgid "Download size"
+#~ msgstr "Dimensiune download"
+
+#~ msgid "The following depedencies required by this add-in are not available:"
+#~ msgstr ""
+#~ "Următoarele dependințe necesare pentru această extensie nu sunt disponibile:"
+
+#~ msgid "Add-in packages"
+#~ msgstr "Pachete cu actualizări"
+
+#~ msgid "Install Add-in Package"
+#~ msgstr "Instalează pachet actualizare"
+
+#~ msgid "No add-ins found"
+#~ msgstr "Nu a fost găsită nici o extensie"
+
+#, csharp-format
+#~ msgid "{0} update available"
+#~ msgid_plural "{0} updates available"
+#~ msgstr[0] "{0} actualizare disponibilă"
+#~ msgstr[1] "{0} actualizări disponibile"
+#~ msgstr[2] ""
+#~ "{0} actualizare disponibilă\r\n"
+#~ "{0} actualizări disponibile"
+
+#~ msgid "Add-in"
+#~ msgstr "Extensie"
+
+#~ msgid "Other"
+#~ msgstr "Altele"
+
+#~ msgid ""
+#~ "The selected add-ins can't be installed because there are dependency "
+#~ "conflicts."
+#~ msgstr ""
+#~ "Următoarele extensii nu pot fi instalate pentru că există conflicte în "
+#~ "dependințe."
+
+#~ msgid ""
+#~ "There are other add-ins that depend on the previous ones which will also be "
+#~ "uninstalled:"
+#~ msgstr ""
+#~ "Există alte extensii care depind de extensiile anteriaore care vor fi de "
+#~ "asemenea dezinstalate:"
+
+#~ msgid "Uninstalling Add-ins"
+#~ msgstr "Dezinstalează extensii"
+
+#~ msgid "More information"
+#~ msgstr "Informații suplimentare"
+
+#, csharp-format
+#~ msgid "Exception occurred: {0}"
+#~ msgstr "A apărut o excepție: {0}"
+
+#~ msgid "Are you sure you want to cancel the installation?"
+#~ msgstr "Sigur doriți anularea instalării?"
+
+#~ msgid "Installing Add-ins"
+#~ msgstr "Instalează extensii"
+
+#~ msgid "_Uninstall..."
+#~ msgstr "_Dezinstalează..."
+
+#~ msgid "Update"
+#~ msgstr "Actualizare"
+
+#~ msgid "Additional extensions are required to perform this operation."
+#~ msgstr "Sunt necesare extensii adiționale pentru a efectua această operație."
+
+#~ msgid "The following add-ins will be installed:"
+#~ msgstr "Următoarele extensii vor fi instalate:"
+
+#~ msgid "No updates found"
+#~ msgstr "Nu au fost găsite actualizări"
+
+#~ msgid "Update All"
+#~ msgstr "Actualizează toate"
+
+#~ msgid "Browse..."
+#~ msgstr "Navighează..."
+
+#~ msgid "Select the location of the repository you want to register:"
+#~ msgstr "Selectați locația sursei pe care doriți să o înregistrați:"
+
+#~ msgid "Add New Repository"
+#~ msgstr "Adaugă sursă nouă"
+
+#~ msgid "Url:"
+#~ msgstr "Url:"
+
+#~ msgid "Register an on-line repository"
+#~ msgstr "Înregistrează o sursă online"
+
+#~ msgid "Path:"
+#~ msgstr "Cale:"
+
+#~ msgid "Register a local repository"
+#~ msgstr "Înregistrează o sursă locală"
+
+#~ msgid "Add-in Repository Management"
+#~ msgstr "Management surse extensii"
+
+#~ msgid "Manage Repositories..."
+#~ msgstr "Management Surse..."
+
+#~ msgid "Updating repository"
+#~ msgstr "Actualizare sursă"
+
+#~ msgid "Registering repository"
+#~ msgstr "Înregistrare sursă"
+
+#~ msgid "All repositories"
+#~ msgstr "Toate sursele"
+
+#, csharp-format
+#~ msgid "(provided by {0})"
+#~ msgstr "(furnizat de către {0})"
+
+#~ msgid "Progress"
+#~ msgstr "În desfășurare"
+
+#~ msgid "Repository:"
+#~ msgstr "Sursă:"
 
 #~ msgid ""
 #~ "Left click to draw a shape with the primary color.\n"
@@ -2498,3 +2552,13 @@ msgstr "{0}%"
 #~ "Țineți apăsat Ctrl în timp ce faceți clic în afara limitelor imaginii pentru "
 #~ "a crea o nouă formă începând de la margine.\n"
 #~ "Apăsați Enter pentru a finaliza forma."
+
+#~ msgid ""
+#~ "Left click to replace the secondary color with the primary color. Right "
+#~ "click to reverse."
+#~ msgstr ""
+#~ "Clic stânga pentru a înlocui culoarea secundară cu culoarea primară. Clic "
+#~ "dreapta pentru a inversa."
+
+#~ msgid "Report Bug...."
+#~ msgstr "Raportează o problemă"

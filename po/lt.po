@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: pinta\n"
 "Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
-"POT-Creation-Date: 2022-12-18 22:26-0500\n"
+"POT-Creation-Date: 2023-04-18 22:48-0400\n"
 "PO-Revision-Date: 2016-06-06 03:46+0000\n"
 "Last-Translator: Cameron White <cameronwhite91@gmail.com>\n"
 "Language-Team: Lithuanian <lt@li.org>\n"
@@ -16,10 +16,10 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=3; plural=n%10==1 && n%100!=11 ? 0 : n%10>=2 && "
 "(n%100<10 || n%100>=20) ? 1 : 2;\n"
-"X-Launchpad-Export-Date: 2023-02-26 03:56+0000\n"
-"X-Generator: Launchpad (build b826c8bc42f0c41016fa141bf50faee47f7ecd80)\n"
+"X-Launchpad-Export-Date: 2023-09-13 22:40+0000\n"
+"X-Generator: Launchpad (build 32eed776db4e1fe74faaa77122cde19862d565ac)\n"
 
-#: Mono.Addins.Gui/Mono.Addins.Gui/InstallDialog.cs:142
+#: ../Pinta.Gui.Addins/InstallDialog.cs:217
 msgid " (in user directory)"
 msgstr ""
 
@@ -27,33 +27,28 @@ msgstr ""
 msgid " Selection Mode: "
 msgstr ""
 
-#: Mono.Addins/Mono.Addins.Description/AssemblyDependency.cs:103
-#, csharp-format
-msgid "(provided by {0})"
-msgstr ""
-
 #: ../Pinta.Core/Managers/EffectsManager.cs:60
 #: ../Pinta.Core/Managers/EffectsManager.cs:90
 msgid "..."
 msgstr ""
 
-#: ../Pinta.Tools/Tools/ColorPickerTool.cs:226
+#: ../Pinta.Tools/Tools/ColorPickerTool.cs:223
 msgid "3 x 3 Region"
 msgstr ""
 
-#: ../Pinta.Tools/Tools/ColorPickerTool.cs:227
+#: ../Pinta.Tools/Tools/ColorPickerTool.cs:224
 msgid "5 x 5 Region"
 msgstr ""
 
-#: ../Pinta.Tools/Tools/ColorPickerTool.cs:228
+#: ../Pinta.Tools/Tools/ColorPickerTool.cs:225
 msgid "7 x 7 Region"
 msgstr ""
 
-#: ../Pinta.Tools/Tools/ColorPickerTool.cs:229
+#: ../Pinta.Tools/Tools/ColorPickerTool.cs:226
 msgid "9 x 9 Region"
 msgstr ""
 
-#: ../Pinta/MainWindow.cs:353
+#: ../Pinta/MainWindow.cs:340
 msgid "A_dd-ins"
 msgstr ""
 
@@ -61,86 +56,63 @@ msgstr ""
 msgid "About"
 msgstr "Apie"
 
-#: ../Pinta/Actions/Help/AboutDialogAction.cs:52
+#: ../Pinta/Actions/Help/AboutDialogAction.cs:53
 msgid "About Pinta"
 msgstr "Apie Pinta"
 
-#: ../Pinta/Actions/Edit/PasteAction.cs:130
+#: ../Pinta/Actions/Edit/PasteAction.cs:127
 #: ../Pinta.Core/Actions/LayerActions.cs:50
-#: ../Pinta.Core/Actions/LayerActions.cs:330
+#: ../Pinta.Core/Actions/LayerActions.cs:331
 msgid "Add New Layer"
 msgstr ""
 
-#: Mono.Addins.Gui/gtk-gui/Mono.Addins.Gui.NewSiteDialog.cs:29
-msgid "Add New Repository"
-msgstr ""
-
-#: ../Pinta.Effects/Effects/AddNoiseEffect.cs:29
+#: ../Pinta.Effects/Effects/AddNoiseEffect.cs:27
 msgid "Add Noise"
 msgstr "Pridėti triukšmo"
 
-#: Mono.Addins.Gui/Mono.Addins.Gui/AddinTreeWidget.cs:120
-msgid "Add-in"
-msgstr ""
-
 #: ../Pinta.Core/Actions/AddinActions.cs:39
-msgid "Add-in Manager"
+msgid "Add-in Manager..."
 msgstr ""
 
-#: Mono.Addins.Gui/gtk-gui/Mono.Addins.Gui.ManageSitesDialog.cs:20
-msgid "Add-in Repository Management"
-msgstr ""
-
-#: Mono.Addins.Gui/Mono.Addins.Gui/AddinManagerDialog.cs:523
-msgid "Add-in packages"
-msgstr ""
-
-#: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:766
+#: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:772
 msgid "Added"
 msgstr ""
 
-#: Mono.Addins.Gui/gtk-gui/Mono.Addins.Gui.AddinInstallerDialog.cs:38
-msgid "Additional extensions are required to perform this operation."
-msgstr ""
-
-#: ../Pinta.Tools/Tools/ColorPickerTool.cs:197
+#: ../Pinta.Tools/Tools/ColorPickerTool.cs:194
 msgid "After select"
 msgstr "Po pasirinkimo"
 
-#: ../Pinta/Actions/File/OpenDocumentAction.cs:83
-#: ../Pinta.Core/Actions/EditActions.cs:380
+#: ../Pinta/Actions/File/OpenDocumentAction.cs:81
+#: ../Pinta.Core/Actions/EditActions.cs:367
+#: ../Pinta.Gui.Addins/AddinManagerDialog.cs:210
 msgid "All files"
 msgstr ""
 
-#: Mono.Addins.Gui/Mono.Addins.Gui/AddinManagerDialog.cs:261
-msgid "All repositories"
-msgstr ""
-
-#: ../Pinta.Effects/Effects/BulgeEffect.cs:100
-#: ../Pinta.Effects/Effects/FrostedGlassEffect.cs:163
-#: ../Pinta.Effects/Effects/SharpenEffect.cs:62
-#: ../Pinta.Effects/Effects/TwistEffect.cs:130
-#: ../Pinta.Effects/Effects/ZoomBlurEffect.cs:130
+#: ../Pinta.Effects/Effects/BulgeEffect.cs:95
+#: ../Pinta.Effects/Effects/FrostedGlassEffect.cs:159
+#: ../Pinta.Effects/Effects/SharpenEffect.cs:60
+#: ../Pinta.Effects/Effects/TwistEffect.cs:126
+#: ../Pinta.Effects/Effects/ZoomBlurEffect.cs:128
 msgid "Amount"
 msgstr "Kiekis"
 
-#: ../Pinta/Dialogs/ResizeCanvasDialog.cs:347
+#: ../Pinta/Dialogs/ResizeCanvasDialog.cs:357
 msgid "Anchor:"
 msgstr ""
 
-#: ../Pinta/Actions/Layers/RotateZoomLayerAction.cs:112
-#: ../Pinta.Effects/Effects/EdgeDetectEffect.cs:88
-#: ../Pinta.Effects/Effects/EmbossEffect.cs:145
-#: ../Pinta.Effects/Effects/JuliaFractalEffect.cs:139
-#: ../Pinta.Effects/Effects/MandelbrotFractalEffect.cs:163
-#: ../Pinta.Effects/Effects/MotionBlurEffect.cs:110
+#: ../Pinta/Actions/Layers/RotateZoomLayerAction.cs:116
+#: ../Pinta.Effects/Effects/EdgeDetectEffect.cs:86
+#: ../Pinta.Effects/Effects/EmbossEffect.cs:142
+#: ../Pinta.Effects/Effects/JuliaFractalEffect.cs:135
+#: ../Pinta.Effects/Effects/MandelbrotFractalEffect.cs:148
+#: ../Pinta.Effects/Effects/MotionBlurEffect.cs:108
 #: ../Pinta.Effects/Effects/RadialBlurEffect.cs:157
-#: ../Pinta.Effects/Effects/ReliefEffect.cs:90
-#: ../Pinta.Tools/Editable/EditEngines/ArrowedEditEngine.cs:306
+#: ../Pinta.Effects/Effects/ReliefEffect.cs:88
+#: ../Pinta.Tools/Editable/EditEngines/ArrowedEditEngine.cs:297
 msgid "Angle"
 msgstr "Kampas"
 
-#: ../Pinta.Effects/Effects/TwistEffect.cs:132
+#: ../Pinta.Effects/Effects/TwistEffect.cs:128
 msgid "Antialias"
 msgstr "Glotninimas"
 
@@ -152,21 +124,17 @@ msgstr ""
 msgid "Antialiasing On"
 msgstr ""
 
-#: Mono.Addins.Gui/Mono.Addins.Gui/InstallDialog.cs:190
-msgid "Are you sure you want to cancel the installation?"
-msgstr ""
-
-#: ../Pinta.Tools/Editable/EditEngines/ArrowedEditEngine.cs:254
+#: ../Pinta.Tools/Editable/EditEngines/ArrowedEditEngine.cs:245
 msgid "Arrow"
 msgstr ""
 
-#: ../Pinta.Effects/Effects/InkSketchEffect.cs:40
-#: ../Pinta.Effects/Effects/OilPaintingEffect.cs:32
-#: ../Pinta.Effects/Effects/PencilSketchEffect.cs:39
+#: ../Pinta.Effects/Effects/InkSketchEffect.cs:38
+#: ../Pinta.Effects/Effects/OilPaintingEffect.cs:30
+#: ../Pinta.Effects/Effects/PencilSketchEffect.cs:37
 msgid "Artistic"
 msgstr "Meninis"
 
-#: ../Pinta.Effects/Dialogs/Effects.LevelsDialog.cs:529
+#: ../Pinta.Effects/Dialogs/Effects.LevelsDialog.cs:530
 msgid "Auto"
 msgstr "Automatinis"
 
@@ -178,23 +146,24 @@ msgstr ""
 msgid "Auto Level"
 msgstr ""
 
-#: Mono.Addins.Gui/Mono.Addins.Gui/AddinInfoView.cs:217
-msgid "Available in repository:"
+#: ../Pinta.Gui.Addins/AddinInfoView.cs:141
+#, csharp-format
+msgid "Available in repository: {0}"
 msgstr ""
 
-#: ../Pinta.Core/Managers/WorkspaceManager.cs:175
+#: ../Pinta.Core/Managers/WorkspaceManager.cs:177
 msgid "Background"
 msgstr ""
 
-#: ../Pinta/Dialogs/NewImageDialog.cs:281
+#: ../Pinta/Dialogs/NewImageDialog.cs:305
 msgid "Background Color"
 msgstr ""
 
-#: ../Pinta/Dialogs/NewImageDialog.cs:271
+#: ../Pinta/Dialogs/NewImageDialog.cs:291
 msgid "Background:"
 msgstr ""
 
-#: ../Pinta/Actions/Help/AboutDialogAction.cs:82
+#: ../Pinta/Actions/Help/AboutDialogAction.cs:83
 msgid "Based on the work of Paint.NET:"
 msgstr ""
 
@@ -206,34 +175,34 @@ msgstr ""
 msgid "Black and White"
 msgstr "Juoda ir balta"
 
-#: ../Pinta/Dialogs/LayerPropertiesDialog.cs:206
+#: ../Pinta/Dialogs/LayerPropertiesDialog.cs:207
 msgid "Blend Mode"
 msgstr ""
 
-#: ../Pinta.Effects/Dialogs/Effects.LevelsDialog.cs:525
-#: ../Pinta.Effects/Dialogs/Effects.PosterizeDialog.cs:121
+#: ../Pinta.Effects/Dialogs/Effects.LevelsDialog.cs:527
+#: ../Pinta.Effects/Dialogs/Effects.PosterizeDialog.cs:125
 msgid "Blue"
 msgstr "Mėlyna"
 
-#: ../Pinta.Effects/Dialogs/Effects.CurvesDialog.cs:454
+#: ../Pinta.Effects/Dialogs/Effects.CurvesDialog.cs:466
 msgid "Blue "
 msgstr "Mėlyna "
 
-#: ../Pinta.Effects/Effects/FragmentEffect.cs:32
-#: ../Pinta.Effects/Effects/GaussianBlurEffect.cs:32
-#: ../Pinta.Effects/Effects/MotionBlurEffect.cs:32
-#: ../Pinta.Effects/Effects/RadialBlurEffect.cs:32
-#: ../Pinta.Effects/Effects/UnfocusEffect.cs:34
-#: ../Pinta.Effects/Effects/ZoomBlurEffect.cs:32
+#: ../Pinta.Effects/Effects/FragmentEffect.cs:30
+#: ../Pinta.Effects/Effects/GaussianBlurEffect.cs:31
+#: ../Pinta.Effects/Effects/MotionBlurEffect.cs:30
+#: ../Pinta.Effects/Effects/RadialBlurEffect.cs:31
+#: ../Pinta.Effects/Effects/UnfocusEffect.cs:32
+#: ../Pinta.Effects/Effects/ZoomBlurEffect.cs:30
 msgid "Blurs"
 msgstr "Suliejimas"
 
-#: ../Pinta.Tools/Tools/TextTool.cs:162
+#: ../Pinta.Tools/Tools/TextTool.cs:159
 msgid "Bold"
 msgstr ""
 
-#: ../Pinta.Effects/Adjustments/BrightnessContrastEffect.cs:152
-#: ../Pinta.Effects/Effects/GlowEffect.cs:81
+#: ../Pinta.Effects/Adjustments/BrightnessContrastEffect.cs:149
+#: ../Pinta.Effects/Effects/GlowEffect.cs:83
 msgid "Brightness"
 msgstr "Šviesumas"
 
@@ -241,38 +210,36 @@ msgstr "Šviesumas"
 msgid "Brightness / Contrast"
 msgstr "Šviesumas/ Kontrastas"
 
-#: Mono.Addins.Gui/gtk-gui/Mono.Addins.Gui.NewSiteDialog.cs:154
-msgid "Browse..."
-msgstr ""
-
-#: ../Pinta.Effects/Effects/OilPaintingEffect.cs:175
+#: ../Pinta.Effects/Effects/OilPaintingEffect.cs:147
 msgid "Brush Size"
 msgstr "Teptuko dydis"
 
-#: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:266
-#: ../Pinta.Tools/Tools/BaseBrushTool.cs:104
+#: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:265
+#: ../Pinta.Tools/Tools/BaseBrushTool.cs:101
 msgid "Brush width"
 msgstr ""
 
-#: ../Pinta.Effects/Effects/BulgeEffect.cs:24
+#: ../Pinta.Effects/Effects/BulgeEffect.cs:22
 msgid "Bulge"
 msgstr "Bumbulas"
 
-#: ../Pinta/Dialogs/ResizeCanvasDialog.cs:313
-#: ../Pinta/Dialogs/ResizeImageDialog.cs:149
+#: ../Pinta/Dialogs/ResizeCanvasDialog.cs:315
+#: ../Pinta/Dialogs/ResizeImageDialog.cs:151
 msgid "By absolute size:"
 msgstr ""
 
-#: ../Pinta/Dialogs/ResizeCanvasDialog.cs:312
-#: ../Pinta/Dialogs/ResizeImageDialog.cs:148
+#: ../Pinta/Dialogs/ResizeCanvasDialog.cs:314
+#: ../Pinta/Dialogs/ResizeImageDialog.cs:150
 msgid "By percentage:"
 msgstr ""
 
-#: ../Pinta/Actions/File/OpenDocumentAction.cs:54
-#: ../Pinta/Actions/File/SaveDocumentImplementationAction.cs:76
-#: ../Pinta.Core/Actions/EditActions.cs:362
-#: ../Pinta.Core/Actions/EditActions.cs:404
+#: ../Pinta/Actions/File/OpenDocumentAction.cs:55
+#: ../Pinta/Actions/File/SaveDocumentImplementationAction.cs:74
+#: ../Pinta.Core/Actions/EditActions.cs:352
+#: ../Pinta.Core/Actions/EditActions.cs:392
 #: ../Pinta.Core/Actions/LayerActions.cs:169
+#: ../Pinta.Gui.Addins/AddinManagerDialog.cs:199
+#: ../Pinta.Gui.Addins/InstallDialog.cs:119
 msgid "Cancel"
 msgstr ""
 
@@ -280,19 +247,19 @@ msgstr ""
 msgid "Canvas"
 msgstr ""
 
-#: ../Pinta.Effects/Effects/PixelateEffect.cs:123
+#: ../Pinta.Effects/Effects/PixelateEffect.cs:121
 msgid "Cell Size"
 msgstr ""
 
-#: ../Pinta.Tools/Tools/TextTool.cs:210
+#: ../Pinta.Tools/Tools/TextTool.cs:211
 msgid "Center Align"
 msgstr ""
 
-#: ../Pinta.Effects/Effects/WarpEffect.cs:191
+#: ../Pinta.Effects/Effects/WarpEffect.cs:195
 msgid "Center Offset"
 msgstr ""
 
-#: ../Pinta.Effects/Effects/MotionBlurEffect.cs:116
+#: ../Pinta.Effects/Effects/MotionBlurEffect.cs:114
 msgid "Centered"
 msgstr "Centruotas"
 
@@ -300,23 +267,23 @@ msgstr "Centruotas"
 msgid "Centimeters"
 msgstr ""
 
-#: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:339
+#: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:338
 msgid "Changed Shape Type"
 msgstr ""
 
-#: ../Pinta.Effects/Dialogs/Effects.LevelsDialog.cs:473
+#: ../Pinta.Effects/Dialogs/Effects.LevelsDialog.cs:472
 msgid "Choose Color"
 msgstr ""
 
-#: ../Pinta.Gui.Widgets/Widgets/StatusBarColorPaletteWidget.cs:113
+#: ../Pinta.Gui.Widgets/Widgets/StatusBarColorPaletteWidget.cs:108
 msgid "Choose Palette Color"
 msgstr "Pasirinkti paletės spalvas"
 
-#: ../Pinta.Gui.Widgets/Widgets/StatusBarColorPaletteWidget.cs:83
+#: ../Pinta.Gui.Widgets/Widgets/StatusBarColorPaletteWidget.cs:78
 msgid "Choose Primary Color"
 msgstr "Pasirinkti pirmines spalvas"
 
-#: ../Pinta.Gui.Widgets/Widgets/StatusBarColorPaletteWidget.cs:86
+#: ../Pinta.Gui.Widgets/Widgets/StatusBarColorPaletteWidget.cs:81
 msgid "Choose Secondary Color"
 msgstr "Pasirinkti antrines spalvas"
 
@@ -328,25 +295,23 @@ msgstr ""
 msgid "Clamp"
 msgstr ""
 
-#: ../Pinta.Tools/Tools/RectangleSelectTool.cs:41
+#: ../Pinta.Tools/Tools/RectangleSelectTool.cs:42
 msgid ""
-"Click and drag to draw a rectangular selection. Hold Shift to constrain to a "
-"square."
+"Click and drag to draw a rectangular selection.\n"
+"Hold Shift to constrain to a square."
 msgstr ""
 
 #: ../Pinta.Tools/Tools/EllipseSelectTool.cs:41
 msgid ""
-"Click and drag to draw an elliptical selection. Hold Shift to constrain to a "
-"circle."
+"Click and drag to draw an elliptical selection.\n"
+"Hold Shift to constrain to a circle."
 msgstr ""
 
 #: ../Pinta.Tools/Tools/GradientTool.cs:51
 msgid ""
-"Click and drag to draw gradient from primary to secondary color.  Right "
-"click to reverse."
+"Click and drag to draw gradient from primary to secondary color.\n"
+"Right click to reverse."
 msgstr ""
-"Spustelėkite ir tempkite, kad nupiešti perėjimą (gradientą) iš pirminės į "
-"antrinę spalvą. Dešinys pelės mygtukas atvirkščiam efektui."
 
 #: ../Pinta.Tools/Tools/LassoSelectTool.cs:55
 msgid "Click and drag to draw the outline for a selection area."
@@ -356,11 +321,11 @@ msgstr ""
 msgid "Click and drag to navigate image."
 msgstr ""
 
-#: ../Pinta.Gui.Widgets/Widgets/StatusBarColorPaletteWidget.cs:241
+#: ../Pinta.Gui.Widgets/Widgets/StatusBarColorPaletteWidget.cs:265
 msgid "Click to reset primary and secondary color."
 msgstr ""
 
-#: ../Pinta.Gui.Widgets/Widgets/StatusBarColorPaletteWidget.cs:230
+#: ../Pinta.Gui.Widgets/Widgets/StatusBarColorPaletteWidget.cs:254
 msgid "Click to select primary color."
 msgstr ""
 
@@ -368,18 +333,18 @@ msgstr ""
 msgid "Click to select region of similar color."
 msgstr "Spustelėkite kad pasirinkti tos pačios spalvos regioną"
 
-#: ../Pinta.Gui.Widgets/Widgets/StatusBarColorPaletteWidget.cs:233
+#: ../Pinta.Gui.Widgets/Widgets/StatusBarColorPaletteWidget.cs:257
 msgid "Click to select secondary color."
 msgstr ""
 
-#: ../Pinta.Gui.Widgets/Widgets/StatusBarColorPaletteWidget.cs:236
+#: ../Pinta.Gui.Widgets/Widgets/StatusBarColorPaletteWidget.cs:260
 msgid "Click to switch between primary and secondary color."
 msgstr ""
 
-#: ../Pinta/Dialogs/NewImageDialog.cs:161
-#: ../Pinta/Dialogs/NewImageDialog.cs:199
-#: ../Pinta/Dialogs/NewImageDialog.cs:341
-#: ../Pinta/Dialogs/NewImageDialog.cs:431
+#: ../Pinta/Dialogs/NewImageDialog.cs:164
+#: ../Pinta/Dialogs/NewImageDialog.cs:204
+#: ../Pinta/Dialogs/NewImageDialog.cs:378
+#: ../Pinta/Dialogs/NewImageDialog.cs:467
 msgid "Clipboard"
 msgstr ""
 
@@ -388,6 +353,7 @@ msgid "Clone Stamp"
 msgstr "Kopijuoti pažymėtą"
 
 #: ../Pinta.Core/Actions/FileActions.cs:54
+#: ../Pinta.Gui.Addins/InstallDialog.cs:272
 msgid "Close"
 msgstr "Užverti"
 
@@ -395,24 +361,19 @@ msgstr "Užverti"
 msgid "Close All"
 msgstr ""
 
-#: ../Pinta/Actions/File/CloseDocumentAction.cs:72
-#: ../Pinta/Actions/File/CloseDocumentAction.cs:75
-msgid "Close _without Saving"
-msgstr ""
-
 #: ../Pinta.Tools/Editable/EditEngines/RectangleEditEngine.cs:40
 msgid "Closed Curve Shape"
 msgstr ""
 
-#: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:323
+#: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:322
 msgid "Closed Line/Curve Series"
 msgstr ""
 
-#: ../Pinta.Effects/Effects/CloudsEffect.cs:29
+#: ../Pinta.Effects/Effects/CloudsEffect.cs:27
 msgid "Clouds"
 msgstr "Debesys"
 
-#: ../Pinta.Effects/Effects/OilPaintingEffect.cs:178
+#: ../Pinta.Effects/Effects/OilPaintingEffect.cs:150
 msgid "Coarseness"
 msgstr ""
 
@@ -428,7 +389,7 @@ msgstr ""
 msgid "Color Dodge"
 msgstr ""
 
-#: ../Pinta.Tools/Tools/GradientTool.cs:203
+#: ../Pinta.Tools/Tools/GradientTool.cs:201
 msgid "Color Mode"
 msgstr ""
 
@@ -436,19 +397,19 @@ msgstr ""
 msgid "Color Picker"
 msgstr "Spalvų pipetė"
 
-#: ../Pinta.Effects/Effects/PencilSketchEffect.cs:101
+#: ../Pinta.Effects/Effects/PencilSketchEffect.cs:95
 msgid "Color Range"
 msgstr ""
 
-#: ../Pinta.Effects/Effects/AddNoiseEffect.cs:173
+#: ../Pinta.Effects/Effects/AddNoiseEffect.cs:177
 msgid "Color Saturation"
 msgstr ""
 
-#: ../Pinta.Effects/Effects/InkSketchEffect.cs:167
+#: ../Pinta.Effects/Effects/InkSketchEffect.cs:162
 msgid "Coloring"
 msgstr ""
 
-#: ../Pinta.Tools/Tools/GradientTool.cs:188
+#: ../Pinta.Tools/Tools/GradientTool.cs:186
 msgid "Conical Gradient"
 msgstr ""
 
@@ -456,12 +417,12 @@ msgstr ""
 msgid "Contents"
 msgstr ""
 
-#: ../Pinta.Tools/Tools/FloodTool.cs:136
+#: ../Pinta.Tools/Tools/FloodTool.cs:135
 msgid "Contiguous"
 msgstr "Vientisas"
 
-#: ../Pinta.Effects/Adjustments/BrightnessContrastEffect.cs:163
-#: ../Pinta.Effects/Effects/GlowEffect.cs:83
+#: ../Pinta.Effects/Adjustments/BrightnessContrastEffect.cs:160
+#: ../Pinta.Effects/Effects/GlowEffect.cs:85
 msgid "Contrast"
 msgstr ""
 
@@ -473,45 +434,46 @@ msgstr "Kopijuoti"
 msgid "Copy Merged"
 msgstr ""
 
-#: ../Pinta/Actions/Help/AboutDialogAction.cs:70
+#: ../Pinta/Actions/Help/AboutDialogAction.cs:71
 msgid "Copyright"
 msgstr "Autorinės teisės"
 
-#: ../Pinta/Actions/File/NewScreenshotAction.cs:124
+#. Translators: {0} is the name of a layer, and {1} is the path to a .ora file.
+#: ../Pinta.Core/ImageFormats/OraFormat.cs:114
 #, csharp-format
-msgid "Could not obtain the size of display '{0}'"
+msgid "Could not import layer \"{0}\" from {1}"
 msgstr ""
 
-#: ../Pinta.Core/Classes/Palette.cs:197
-#: ../Pinta.Core/Managers/WorkspaceManager.cs:395
-#: ../Pinta.Core/Managers/WorkspaceManager.cs:404
+#: ../Pinta.Core/Classes/Palette.cs:196
+#: ../Pinta.Core/Managers/WorkspaceManager.cs:384
+#: ../Pinta.Core/Managers/WorkspaceManager.cs:391
 #, csharp-format
 msgid "Could not open file: {0}"
 msgstr ""
 
-#: ../Pinta.Effects/Effects/AddNoiseEffect.cs:176
+#: ../Pinta.Effects/Effects/AddNoiseEffect.cs:180
 msgid "Coverage"
 msgstr ""
 
 #: ../Pinta.Core/Actions/ImageActions.cs:47
-#: ../Pinta.Core/Actions/ImageActions.cs:286
+#: ../Pinta.Core/Actions/ImageActions.cs:285
 msgid "Crop to Selection"
 msgstr ""
 
 #: ../Pinta.Effects/Adjustments/CurvesEffect.cs:27
-#: ../Pinta.Effects/Dialogs/Effects.CurvesDialog.cs:90
+#: ../Pinta.Effects/Dialogs/Effects.CurvesDialog.cs:93
 msgid "Curves"
 msgstr "Kreivės"
 
-#: ../Pinta/Dialogs/NewImageDialog.cs:161
-#: ../Pinta/Dialogs/NewImageDialog.cs:201
-#: ../Pinta/Dialogs/NewImageDialog.cs:343
-#: ../Pinta/Dialogs/NewImageDialog.cs:431
+#: ../Pinta/Dialogs/NewImageDialog.cs:164
+#: ../Pinta/Dialogs/NewImageDialog.cs:206
+#: ../Pinta/Dialogs/NewImageDialog.cs:380
+#: ../Pinta/Dialogs/NewImageDialog.cs:467
 msgid "Custom"
 msgstr ""
 
 #: ../Pinta.Core/Actions/EditActions.cs:61
-#: ../Pinta.Core/Actions/EditActions.cs:247
+#: ../Pinta.Core/Actions/EditActions.cs:244
 msgid "Cut"
 msgstr "Iškirpti"
 
@@ -519,24 +481,20 @@ msgstr "Iškirpti"
 msgid "Darken"
 msgstr ""
 
-#: ../Pinta.Tools/Dashes/DashPatternBox.cs:71
+#: ../Pinta.Tools/Dashes/DashPatternBox.cs:67
 msgid "Dash"
 msgstr ""
 
-#: ../Pinta/Actions/File/NewScreenshotAction.cs:106
-msgid "Delay before taking a screenshot (seconds):"
-msgstr ""
-
 #: ../Pinta.Core/Actions/LayerActions.cs:51
-#: ../Pinta.Core/Actions/LayerActions.cs:313
+#: ../Pinta.Core/Actions/LayerActions.cs:314
 msgid "Delete Layer"
 msgstr ""
 
-#: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:481
+#: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:480
 msgid "Deleted"
 msgstr ""
 
-#: ../Pinta.Core/Actions/EditActions.cs:258
+#: ../Pinta.Core/Actions/EditActions.cs:255
 msgid "Deselect"
 msgstr "Panaikinti žymėjimą"
 
@@ -544,9 +502,7 @@ msgstr "Panaikinti žymėjimą"
 msgid "Deselect All"
 msgstr "Atžymėti viską"
 
-#: ../Pinta/Dialogs/ErrorDialog.cs:98
-#: Mono.Addins.Gui/gtk-gui/Mono.Addins.Gui.ErrorDialog.cs:92
-#: Mono.Addins.Gui/gtk-gui/Mono.Addins.Gui.ProgressDialog.cs:66
+#: ../Pinta/Dialogs/ErrorDialog.cs:63
 msgid "Details"
 msgstr ""
 
@@ -554,55 +510,43 @@ msgstr ""
 msgid "Difference"
 msgstr ""
 
-#: Mono.Addins.Gui/Mono.Addins.Gui/AddinInfoView.cs:163
-#: Mono.Addins.Gui/gtk-gui/Mono.Addins.Gui.AddinInfoView.cs:270
-msgid "Disable"
-msgstr ""
-
-#: ../Pinta/Main.cs:61
+#: ../Pinta/Main.cs:63
 msgid "Display the application version."
 msgstr ""
 
-#: ../Pinta.Effects/Effects/FragmentEffect.cs:113
-#: ../Pinta.Effects/Effects/MotionBlurEffect.cs:113
+#: ../Pinta.Effects/Effects/FragmentEffect.cs:111
+#: ../Pinta.Effects/Effects/MotionBlurEffect.cs:111
 msgid "Distance"
 msgstr ""
 
-#: ../Pinta.Effects/Effects/BulgeEffect.cs:32
-#: ../Pinta.Effects/Effects/FrostedGlassEffect.cs:32
-#: ../Pinta.Effects/Effects/PixelateEffect.cs:36
-#: ../Pinta.Effects/Effects/PolarInversionEffect.cs:36
-#: ../Pinta.Effects/Effects/TileEffect.cs:32
-#: ../Pinta.Effects/Effects/TwistEffect.cs:32
+#: ../Pinta.Effects/Effects/BulgeEffect.cs:30
+#: ../Pinta.Effects/Effects/FrostedGlassEffect.cs:30
+#: ../Pinta.Effects/Effects/PixelateEffect.cs:34
+#: ../Pinta.Effects/Effects/PolarInversionEffect.cs:34
+#: ../Pinta.Effects/Effects/TileEffect.cs:30
+#: ../Pinta.Effects/Effects/TwistEffect.cs:30
 msgid "Distort"
 msgstr "Iškraipymas"
 
-#: ../Pinta.Tools/Tools/ColorPickerTool.cs:206
+#: ../Pinta.Tools/Tools/ColorPickerTool.cs:203
 msgid "Do not switch tool"
 msgstr "Neperjungti įrankio"
 
-#: ../Pinta/Actions/Edit/PasteAction.cs:174
+#: ../Pinta/Actions/Edit/PasteAction.cs:172
 msgid "Don't change canvas size"
 msgstr "Nekeisti darbinės drobės dydžio"
 
-#: ../Pinta/MainWindow.cs:544
-msgid "Download failed"
-msgstr ""
-
-#: Mono.Addins.Gui/Mono.Addins.Gui/AddinInfoView.cs:293
-msgid "Download size"
-msgstr ""
-
-#: ../Pinta/MainWindow.cs:525
-msgid "Downloading Image"
+#: ../Pinta.Gui.Addins/AddinInfoView.cs:136
+#, csharp-format
+msgid "Download size: {0}"
 msgstr ""
 
 #: ../Pinta.Core/Actions/LayerActions.cs:52
-#: ../Pinta.Core/Actions/LayerActions.cs:304
+#: ../Pinta.Core/Actions/LayerActions.cs:305
 msgid "Duplicate Layer"
 msgstr ""
 
-#: ../xdg/pinta.desktop.in.h:2 ../Pinta/Actions/Help/AboutDialogAction.cs:58
+#: ../xdg/pinta.desktop.in.h:2 ../Pinta/Actions/Help/AboutDialogAction.cs:59
 msgid "Easily create and edit images"
 msgstr ""
 
@@ -610,15 +554,15 @@ msgstr ""
 msgid "Edge Behavior"
 msgstr ""
 
-#: ../Pinta.Effects/Effects/EdgeDetectEffect.cs:27
+#: ../Pinta.Effects/Effects/EdgeDetectEffect.cs:25
 msgid "Edge Detect"
 msgstr "Krašto suradimas"
 
-#: ../Pinta/MainWindow.cs:346
+#: ../Pinta/MainWindow.cs:336
 msgid "Effe_cts"
 msgstr "_Efektai"
 
-#: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:324
+#: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:323
 #: ../Pinta.Tools/Editable/EditEngines/EllipseEditEngine.cs:38
 #: ../Pinta.Tools/Tools/EllipseTool.cs:39
 msgid "Ellipse"
@@ -628,16 +572,12 @@ msgstr ""
 msgid "Ellipse Select"
 msgstr "Elipsinis pažymėjimas"
 
-#: ../Pinta.Effects/Effects/EmbossEffect.cs:24
+#: ../Pinta.Effects/Effects/EmbossEffect.cs:22
 msgid "Emboss"
 msgstr "Reljefinis ornamentas"
 
-#: Mono.Addins.Gui/Mono.Addins.Gui/AddinInfoView.cs:160
-msgid "Enable"
-msgstr ""
-
 #: ../Pinta.Core/Actions/EditActions.cs:67
-#: ../Pinta.Core/Actions/EditActions.cs:249
+#: ../Pinta.Core/Actions/EditActions.cs:246
 msgid "Erase Selection"
 msgstr ""
 
@@ -645,15 +585,9 @@ msgstr ""
 msgid "Eraser"
 msgstr "Trintukas"
 
-#: ../Pinta/Actions/File/SaveDocumentImplementationAction.cs:163
+#: ../Pinta.Core/ImageFormats/OraFormat.cs:115
 msgid "Error"
 msgstr "Klaida"
-
-#: Mono.Addins.Gui/Mono.Addins.Gui/Services.cs:64
-#: Mono.Addins.Gui/Mono.Addins.Gui/Services.cs:73
-#, csharp-format
-msgid "Exception occurred: {0}"
-msgstr ""
 
 #: ../Pinta.Core/Classes/SelectionModeHandler.cs:50
 msgid "Exclude (-) (Right Click)"
@@ -663,25 +597,34 @@ msgstr ""
 msgid "Expand canvas"
 msgstr "Išplėsti darbinę drobę"
 
-#: ../Pinta.Effects/Effects/JuliaFractalEffect.cs:130
-#: ../Pinta.Effects/Effects/MandelbrotFractalEffect.cs:153
+#: ../Pinta.Gui.Addins/AddinManagerDialog.cs:205
+msgid "Extension packages"
+msgstr ""
+
+#: ../Pinta.Effects/Effects/JuliaFractalEffect.cs:126
+#: ../Pinta.Effects/Effects/MandelbrotFractalEffect.cs:138
 msgid "Factor"
 msgstr ""
 
-#: ../Pinta/Actions/File/NewScreenshotAction.cs:95
+#: ../Pinta/Actions/File/NewScreenshotAction.cs:99
 msgid "Failed to access XDG Desktop Portals"
 msgstr ""
 
-#: ../Pinta.Core/Managers/WorkspaceManager.cs:422
+#: ../Pinta.Gui.Addins/InstallDialog.cs:151
+msgid "Failed to load extension package"
+msgstr ""
+
+#: ../Pinta.Core/Managers/WorkspaceManager.cs:407
 msgid "Failed to open image"
 msgstr ""
 
-#: ../Pinta/Actions/File/SaveDocumentImplementationAction.cs:186
+#: ../Pinta/Actions/File/SaveDocumentImplementationAction.cs:180
 msgid "Failed to save image"
 msgstr ""
 
-#: ../Pinta/Actions/File/NewScreenshotAction.cs:94
-#: ../Pinta/Actions/File/NewScreenshotAction.cs:123
+#: ../Pinta/Actions/File/NewScreenshotAction.cs:98
+#: ../Pinta/Actions/File/NewScreenshotAction.cs:118
+#: ../Pinta/Actions/File/NewScreenshotAction.cs:125
 msgid "Failed to take screenshot"
 msgstr ""
 
@@ -689,32 +632,32 @@ msgstr ""
 msgid "File a Bug"
 msgstr ""
 
-#: ../Pinta.Tools/Tools/TextTool.cs:245
+#: ../Pinta.Tools/Tools/TextTool.cs:248
 msgid "Fill Background"
 msgstr ""
 
 #: ../Pinta.Core/Actions/EditActions.cs:68
-#: ../Pinta.Core/Actions/EditActions.cs:209
+#: ../Pinta.Core/Actions/EditActions.cs:207
 msgid "Fill Selection"
 msgstr ""
 
-#: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:300
-#: ../Pinta.Tools/Tools/FreeformShapeTool.cs:229
+#: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:299
+#: ../Pinta.Tools/Tools/FreeformShapeTool.cs:224
 msgid "Fill Shape"
 msgstr ""
 
-#: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:292
-#: ../Pinta.Tools/Tools/FreeformShapeTool.cs:222
+#: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:291
+#: ../Pinta.Tools/Tools/FreeformShapeTool.cs:217
 msgid "Fill Style"
 msgstr ""
 
-#: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:301
-#: ../Pinta.Tools/Tools/FreeformShapeTool.cs:230
+#: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:300
+#: ../Pinta.Tools/Tools/FreeformShapeTool.cs:225
 msgid "Fill and Outline Shape"
 msgstr ""
 
-#: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:1030
-#: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:1291
+#: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:1036
+#: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:1298
 msgid "Finalized"
 msgstr ""
 
@@ -753,19 +696,19 @@ msgstr ""
 msgid "Flip Vertical"
 msgstr ""
 
-#: ../Pinta.Tools/Tools/FloodTool.cs:126
+#: ../Pinta.Tools/Tools/FloodTool.cs:125
 msgid "Flood Mode"
 msgstr "Užpilimo režimas"
 
-#: ../Pinta.Tools/Tools/TextTool.cs:143
+#: ../Pinta.Tools/Tools/TextTool.cs:140
 msgid "Font"
 msgstr ""
 
-#: ../Pinta.Effects/Effects/FragmentEffect.cs:24
+#: ../Pinta.Effects/Effects/FragmentEffect.cs:22
 msgid "Fragment"
 msgstr "Fragmentas"
 
-#: ../Pinta.Effects/Effects/FragmentEffect.cs:110
+#: ../Pinta.Effects/Effects/FragmentEffect.cs:108
 msgid "Fragments"
 msgstr ""
 
@@ -773,7 +716,7 @@ msgstr ""
 msgid "Freeform Shape"
 msgstr ""
 
-#: ../Pinta.Effects/Effects/FrostedGlassEffect.cs:24
+#: ../Pinta.Effects/Effects/FrostedGlassEffect.cs:22
 msgid "Frosted Glass"
 msgstr "Matinis stiklas"
 
@@ -781,32 +724,30 @@ msgstr "Matinis stiklas"
 msgid "Fullscreen"
 msgstr ""
 
-#: Mono.Addins.Gui/Mono.Addins.Gui/AddinManagerDialog.cs:131
-#: Mono.Addins.Gui/Mono.Addins.Gui/AddinManagerDialog.cs:325
-#: Mono.Addins.Gui/gtk-gui/Mono.Addins.Gui.AddinManagerDialog.cs:347
+#: ../Pinta.Gui.Addins/AddinManagerDialog.cs:65
 msgid "Gallery"
 msgstr ""
 
-#: ../Pinta.Effects/Effects/GaussianBlurEffect.cs:24
+#: ../Pinta.Effects/Effects/GaussianBlurEffect.cs:23
 msgid "Gaussian Blur"
 msgstr "Gauso suliejimas"
 
-#: ../Pinta.Tools/Tools/FloodTool.cs:137
+#: ../Pinta.Tools/Tools/FloodTool.cs:136
 msgid "Global"
 msgstr "Globalus"
 
-#: ../Pinta.Effects/Effects/GlowEffect.cs:29
+#: ../Pinta.Effects/Effects/GlowEffect.cs:27
 msgid "Glow"
 msgstr "Švytėjimas"
 
 #: ../Pinta.Tools/Tools/GradientTool.cs:49
-#: ../Pinta.Tools/Tools/GradientTool.cs:178
+#: ../Pinta.Tools/Tools/GradientTool.cs:176
 msgid "Gradient"
 msgstr "Gradientas"
 
-#: ../Pinta.Effects/Dialogs/Effects.CurvesDialog.cs:453
-#: ../Pinta.Effects/Dialogs/Effects.LevelsDialog.cs:523
-#: ../Pinta.Effects/Dialogs/Effects.PosterizeDialog.cs:117
+#: ../Pinta.Effects/Dialogs/Effects.CurvesDialog.cs:465
+#: ../Pinta.Effects/Dialogs/Effects.LevelsDialog.cs:525
+#: ../Pinta.Effects/Dialogs/Effects.PosterizeDialog.cs:120
 msgid "Green"
 msgstr "Žalia"
 
@@ -818,23 +759,23 @@ msgstr ""
 msgid "Hard Light"
 msgstr ""
 
-#: ../Pinta/Dialogs/NewImageDialog.cs:230
-#: ../Pinta/Dialogs/ResizeCanvasDialog.cs:339
-#: ../Pinta/Dialogs/ResizeImageDialog.cs:175
+#: ../Pinta/Dialogs/NewImageDialog.cs:235
+#: ../Pinta/Dialogs/ResizeCanvasDialog.cs:344
+#: ../Pinta/Dialogs/ResizeImageDialog.cs:180
 msgid "Height:"
 msgstr "Aukštis:"
 
-#: ../Pinta/Actions/Layers/LayerPropertiesAction.cs:104
+#: ../Pinta/Actions/Layers/LayerPropertiesAction.cs:108
 msgid "Hide Layer"
 msgstr "Paslėpti sluoksnį"
 
-#: ../Pinta.Effects/Effects/RedEyeRemoveEffect.cs:75
+#: ../Pinta.Effects/Effects/RedEyeRemoveEffect.cs:64
 msgid "Hint: For best results, first use selection tools to select each eye."
 msgstr ""
 "Patarimas: geriausiems rezultatas gaunamas gaunamas prieš tai pasirinkimo "
 "įrankiu pažymėjus abi akis."
 
-#: ../Pinta/Pads/HistoryPad.cs:40 ../Pinta/Pads/HistoryPad.cs:56
+#: ../Pinta/Pads/HistoryPad.cs:40 ../Pinta/Pads/HistoryPad.cs:49
 msgid "History"
 msgstr "Istorija"
 
@@ -847,15 +788,15 @@ msgstr ""
 msgid "Hue / Saturation"
 msgstr ""
 
-#: ../Pinta/Actions/File/SaveDocumentImplementationAction.cs:177
+#: ../Pinta/Actions/File/SaveDocumentImplementationAction.cs:175
 msgid "ICO files can not be larger than 255 x 255 pixels."
 msgstr ""
 
-#: ../Pinta/Actions/File/CloseDocumentAction.cs:61
+#: ../Pinta/Actions/File/CloseDocumentAction.cs:60
 msgid "If you don't save, all changes will be permanently lost."
 msgstr "Neišsaugojus, visi pakeitimai bus negrįžtamai prarasti."
 
-#: ../Pinta.Tools/Tools/ColorPickerTool.cs:244
+#: ../Pinta.Tools/Tools/ColorPickerTool.cs:241
 msgid "Image"
 msgstr ""
 
@@ -867,24 +808,24 @@ msgstr ""
 msgid "Image Tabs"
 msgstr ""
 
-#: ../Pinta/Actions/Edit/PasteAction.cs:159
+#: ../Pinta/Actions/Edit/PasteAction.cs:157
 msgid "Image cannot be pasted"
 msgstr ""
 
-#: ../Pinta/Actions/File/OpenDocumentAction.cs:58
-#: ../Pinta.Core/Actions/LayerActions.cs:196
+#: ../Pinta/Actions/File/OpenDocumentAction.cs:61
+#: ../Pinta.Core/Actions/LayerActions.cs:195
 msgid "Image files"
 msgstr ""
 
-#: ../Pinta/Actions/Edit/PasteAction.cs:168
+#: ../Pinta/Actions/Edit/PasteAction.cs:164
 msgid "Image larger than canvas"
 msgstr ""
 
-#: ../Pinta/Actions/File/SaveDocumentImplementationAction.cs:176
+#: ../Pinta/Actions/File/SaveDocumentImplementationAction.cs:174
 msgid "Image too large"
 msgstr ""
 
-#: ../Pinta.Core/Actions/LayerActions.cs:224
+#: ../Pinta.Core/Actions/LayerActions.cs:222
 msgid "Import From File"
 msgstr ""
 
@@ -896,63 +837,46 @@ msgstr ""
 msgid "Inches"
 msgstr ""
 
-#: ../Pinta.Effects/Effects/InkSketchEffect.cs:164
+#: ../Pinta.Effects/Effects/InkSketchEffect.cs:159
 msgid "Ink Outline"
 msgstr ""
 
-#: ../Pinta.Effects/Effects/InkSketchEffect.cs:32
+#: ../Pinta.Effects/Effects/InkSketchEffect.cs:30
 msgid "Ink Sketch"
 msgstr "Rašalo eskizas"
 
-#: ../Pinta.Effects/Dialogs/Effects.LevelsDialog.cs:585
+#: ../Pinta.Effects/Dialogs/Effects.LevelsDialog.cs:593
 msgid "Input"
 msgstr "Įvestis"
 
-#: ../Pinta.Effects/Dialogs/Effects.LevelsDialog.cs:573
+#: ../Pinta.Effects/Dialogs/Effects.LevelsDialog.cs:577
 msgid "Input Histogram"
 msgstr "Įvesties histograma"
 
-#: Mono.Addins.Gui/gtk-gui/Mono.Addins.Gui.InstallDialog.cs:126
+#: ../Pinta.Gui.Addins/InstallDialog.cs:122
+#: ../Pinta.Gui.Addins/InstallDialog.cs:196
 msgid "Install"
 msgstr ""
 
-#: Mono.Addins.Gui/Mono.Addins.Gui/AddinManagerDialog.cs:513
-msgid "Install Add-in Package"
+#: ../Pinta.Gui.Addins/AddinManagerDialog.cs:195
+msgid "Install Extension Package"
 msgstr ""
 
-#: Mono.Addins.Gui/gtk-gui/Mono.Addins.Gui.AddinManagerDialog.cs:373
+#: ../Pinta.Gui.Addins/AddinManagerDialog.cs:41
 msgid "Install from file..."
 msgstr ""
 
-#: Mono.Addins.Gui/gtk-gui/Mono.Addins.Gui.AddinInfoView.cs:229
+#: ../Pinta.Gui.Addins/AddinInfoView.cs:83
 msgid "Install..."
 msgstr ""
 
-#: Mono.Addins.Gui/Mono.Addins.Gui/AddinInstaller.cs:16
-msgid "Installation cancelled"
-msgstr ""
-
-#: Mono.Addins.Gui/Mono.Addins.Gui/AddinInstallerDialog.cs:171
-msgid "Installation failed"
-msgstr ""
-
-#: Mono.Addins.Gui/Mono.Addins.Gui/AddinManagerDialog.cs:115
-#: Mono.Addins.Gui/Mono.Addins.Gui/AddinManagerDialog.cs:250
-#: Mono.Addins.Gui/gtk-gui/Mono.Addins.Gui.AddinManagerDialog.cs:122
+#: ../Pinta.Gui.Addins/AddinManagerDialog.cs:61
 msgid "Installed"
 msgstr ""
 
-#: Mono.Addins.Gui/Mono.Addins.Gui/AddinInfoView.cs:286
-msgid "Installed version"
-msgstr ""
-
-#: Mono.Addins.Gui/Mono.Addins.Gui/InstallDialog.cs:209
-msgid "Installing Add-ins"
-msgstr ""
-
-#: ../Pinta.Effects/Effects/AddNoiseEffect.cs:170
-#: ../Pinta.Effects/Effects/OutlineEffect.cs:144
-#: ../Pinta.Effects/Effects/TileEffect.cs:144
+#: ../Pinta.Effects/Effects/AddNoiseEffect.cs:174
+#: ../Pinta.Effects/Effects/OutlineEffect.cs:142
+#: ../Pinta.Effects/Effects/TileEffect.cs:143
 msgid "Intensity"
 msgstr "Intensyvumas"
 
@@ -963,28 +887,28 @@ msgid "Intersect ({0} + Left Click)"
 msgstr ""
 
 #: ../Pinta.Effects/Adjustments/InvertColorsEffect.cs:25
-#: ../Pinta.Effects/Effects/MandelbrotFractalEffect.cs:166
+#: ../Pinta.Effects/Effects/MandelbrotFractalEffect.cs:151
 msgid "Invert Colors"
 msgstr "Invertuoti spalvas"
 
 #: ../Pinta.Core/Actions/EditActions.cs:69
-#: ../Pinta.Core/Actions/EditActions.cs:460
+#: ../Pinta.Core/Actions/EditActions.cs:446
 msgid "Invert Selection"
 msgstr "Invertuoti pažymėjimą"
 
-#: ../Pinta.Tools/Tools/TextTool.cs:173
+#: ../Pinta.Tools/Tools/TextTool.cs:171
 msgid "Italic"
 msgstr ""
 
-#: ../Pinta/Dialogs/JpegCompressionDialog.cs:38
+#: ../Pinta/Dialogs/JpegCompressionDialog.cs:39
 msgid "JPEG Quality"
 msgstr ""
 
-#: ../Pinta.Effects/Effects/JuliaFractalEffect.cs:24
+#: ../Pinta.Effects/Effects/JuliaFractalEffect.cs:22
 msgid "Julia Fractal"
 msgstr "Julijos fraktalas"
 
-#: ../Pinta/Dialogs/NewImageDialog.cs:256
+#: ../Pinta/Dialogs/NewImageDialog.cs:270
 msgid "Landscape"
 msgstr ""
 
@@ -992,20 +916,20 @@ msgstr ""
 msgid "Lasso Select"
 msgstr ""
 
-#: ../Pinta.Tools/Tools/ColorPickerTool.cs:243
+#: ../Pinta.Tools/Tools/ColorPickerTool.cs:240
 msgid "Layer"
 msgstr "Sluoksnis"
 
-#: ../Pinta.Gui.Widgets/Widgets/Layers/LayersListWidget.cs:293
+#: ../Pinta.Gui.Widgets/Widgets/Layers/LayersListViewItemWidget.cs:80
 msgid "Layer Hidden"
 msgstr ""
 
-#: ../Pinta/Actions/Layers/LayerPropertiesAction.cs:94
+#: ../Pinta/Actions/Layers/LayerPropertiesAction.cs:98
 msgid "Layer Opacity"
 msgstr "Sluoksnio permatomumas"
 
-#: ../Pinta/Actions/Layers/LayerPropertiesAction.cs:109
-#: ../Pinta/Dialogs/LayerPropertiesDialog.cs:51
+#: ../Pinta/Actions/Layers/LayerPropertiesAction.cs:113
+#: ../Pinta/Dialogs/LayerPropertiesDialog.cs:53
 msgid "Layer Properties"
 msgstr "Sluoksnio savybės"
 
@@ -1013,17 +937,17 @@ msgstr "Sluoksnio savybės"
 msgid "Layer Properties..."
 msgstr ""
 
-#: ../Pinta.Gui.Widgets/Widgets/Layers/LayersListWidget.cs:293
+#: ../Pinta.Gui.Widgets/Widgets/Layers/LayersListViewItemWidget.cs:80
 msgid "Layer Shown"
 msgstr ""
 
 #. Translators: {0} is a unique id for new layers, e.g. "Layer 2".
-#: ../Pinta.Core/Classes/DocumentLayers.cs:135
+#: ../Pinta.Core/Classes/DocumentLayers.cs:128
 #, csharp-format
 msgid "Layer {0}"
 msgstr ""
 
-#: ../Pinta/Pads/LayersPad.cs:40 ../Pinta/Pads/LayersPad.cs:60
+#: ../Pinta/Pads/LayersPad.cs:40 ../Pinta/Pads/LayersPad.cs:53
 msgid "Layers"
 msgstr "Sluoksniai"
 
@@ -1031,24 +955,24 @@ msgstr "Sluoksniai"
 msgid "Left Align"
 msgstr ""
 
-#. Translators: {0} is 'Ctrl', or a platform-specific key such as 'Command' on macOS.
-#: ../Pinta.Tools/Tools/MoveSelectedTool.cs:46
+#: ../Pinta.Tools/Tools/MoveSelectedTool.cs:47
 #, csharp-format
 msgid ""
-"Left click and drag the selection to move selected content. Hold {0} to "
-"scale instead of move. Right click and drag the selection to rotate selected "
-"content. Hold Shift to rotate in steps. Use arrow keys to move selected "
-"content by a single pixel."
+"Left click and drag the selection to move selected content.\n"
+"Hold {0} to scale instead of move.\n"
+"Right click and drag the selection to rotate selected content.\n"
+"Hold Shift to rotate in steps.\n"
+"Use arrow keys to move selected content by a single pixel."
 msgstr ""
 
-#. Translators: {0} is 'Ctrl', or a platform-specific key such as 'Command' on macOS.
-#: ../Pinta.Tools/Tools/MoveSelectionTool.cs:45
+#: ../Pinta.Tools/Tools/MoveSelectionTool.cs:46
 #, csharp-format
 msgid ""
-"Left click and drag the selection to move selection outline. Hold {0} to "
-"scale instead of move. Right click and drag the selection to rotate "
-"selection outline. Hold Shift to rotate in steps. Use arrow keys to move "
-"selection outline by a single pixel."
+"Left click and drag the selection to move selection outline.\n"
+"Hold {0} to scale instead of move.\n"
+"Right click and drag the selection to rotate selection outline.\n"
+"Hold Shift to rotate in steps.\n"
+"Use arrow keys to move selection outline by a single pixel."
 msgstr ""
 
 #. Translators: {0} is 'Ctrl', or a platform-specific key such as 'Command' on macOS.
@@ -1071,14 +995,14 @@ msgid ""
 "Press Enter to finalize the shape."
 msgstr ""
 
-#: ../Pinta.Tools/Tools/PencilTool.cs:50
+#: ../Pinta.Tools/Tools/PencilTool.cs:51
 msgid ""
-"Left click to draw freeform one-pixel wide lines with the primary color. "
+"Left click to draw freeform one-pixel wide lines with the primary color.\n"
 "Right click to use the secondary color."
 msgstr ""
 
 #: ../Pinta.Tools/Tools/FreeformShapeTool.cs:55
-#: ../Pinta.Tools/Tools/PaintBrushTool.cs:62
+#: ../Pinta.Tools/Tools/PaintBrushTool.cs:59
 msgid ""
 "Left click to draw with primary color, right click to draw with secondary "
 "color."
@@ -1095,36 +1019,42 @@ msgid ""
 "the secondary color."
 msgstr ""
 
-#: ../Pinta.Tools/Tools/TextTool.cs:91
+#: ../Pinta.Tools/Tools/TextTool.cs:92
 msgid ""
 "Left click to place cursor, then type desired text. Text color is primary "
 "color."
 msgstr ""
 
-#: ../Pinta.Tools/Tools/RecolorTool.cs:59
+#: ../Pinta.Tools/Tools/RecolorTool.cs:60
 msgid ""
-"Left click to replace the secondary color with the primary color. Right "
-"click to reverse."
+"Left click to replace the secondary color with the primary color.\n"
+"Right click to reverse."
 msgstr ""
 
-#: ../Pinta.Gui.Widgets/Widgets/StatusBarColorPaletteWidget.cs:227
 #: ../Pinta.Tools/Tools/ColorPickerTool.cs:54
+msgid ""
+"Left click to set primary color.\n"
+"Right click to set secondary color."
+msgstr ""
+
+#: ../Pinta.Gui.Widgets/Widgets/StatusBarColorPaletteWidget.cs:251
 msgid "Left click to set primary color. Right click to set secondary color."
 msgstr ""
 
-#: ../Pinta.Gui.Widgets/Widgets/StatusBarColorPaletteWidget.cs:223
+#: ../Pinta.Gui.Widgets/Widgets/StatusBarColorPaletteWidget.cs:247
 msgid ""
 "Left click to set primary color. Right click to set secondary color. Middle "
 "click to choose palette color."
 msgstr ""
 
-#: ../Pinta.Tools/Tools/ZoomTool.cs:58
+#: ../Pinta.Tools/Tools/ZoomTool.cs:59
 msgid ""
-"Left click to zoom in. Right click to zoom out. Click and drag to zoom in "
-"selection."
+"Left click to zoom in.\n"
+"Right click to zoom out.\n"
+"Click and drag to zoom in selection."
 msgstr ""
 
-#: ../Pinta.Tools/Editable/EditEngines/ArrowedEditEngine.cs:332
+#: ../Pinta.Tools/Editable/EditEngines/ArrowedEditEngine.cs:323
 msgid "Length"
 msgstr ""
 
@@ -1132,11 +1062,11 @@ msgstr ""
 msgid "Levels"
 msgstr "Lygiai"
 
-#: ../Pinta.Effects/Dialogs/Effects.LevelsDialog.cs:72
+#: ../Pinta.Effects/Dialogs/Effects.LevelsDialog.cs:74
 msgid "Levels Adjustment"
 msgstr "Lygių koregavimas"
 
-#: ../Pinta/Actions/Help/AboutDialogAction.cs:78
+#: ../Pinta/Actions/Help/AboutDialogAction.cs:79
 msgid "License"
 msgstr "Licencija"
 
@@ -1144,7 +1074,7 @@ msgstr "Licencija"
 msgid "Lighten"
 msgstr ""
 
-#: ../Pinta.Effects/Effects/SoftenPortraitEffect.cs:120
+#: ../Pinta.Effects/Effects/SoftenPortraitEffect.cs:119
 msgid "Lighting"
 msgstr "Apšvietimas"
 
@@ -1156,24 +1086,24 @@ msgstr ""
 msgid "Line/Curve"
 msgstr ""
 
-#: ../Pinta.Tools/Tools/GradientTool.cs:186
+#: ../Pinta.Tools/Tools/GradientTool.cs:184
 msgid "Linear Diamond Gradient"
 msgstr "Tiesinis rombo formos perėjimas (gradientas)"
 
-#: ../Pinta.Tools/Tools/GradientTool.cs:184
+#: ../Pinta.Tools/Tools/GradientTool.cs:182
 msgid "Linear Gradient"
 msgstr "Tiesinis perėjimas (gradientas)"
 
-#: ../Pinta.Tools/Tools/GradientTool.cs:185
+#: ../Pinta.Tools/Tools/GradientTool.cs:183
 msgid "Linear Reflected Gradient"
 msgstr "Tiesinis atspindėtas perėjimas (gradientas)"
 
-#: ../Pinta.Effects/Dialogs/Effects.PosterizeDialog.cs:124
+#: ../Pinta.Effects/Dialogs/Effects.PosterizeDialog.cs:129
 msgid "Linked"
 msgstr "Sujungtas"
 
 #: ../Pinta.Core/Effects/UserBlendOps.cs:46
-#: ../Pinta.Effects/Dialogs/Effects.CurvesDialog.cs:433
+#: ../Pinta.Effects/Dialogs/Effects.CurvesDialog.cs:444
 msgid "Luminosity"
 msgstr "Šviesumas"
 
@@ -1181,56 +1111,47 @@ msgstr "Šviesumas"
 msgid "Magic Wand Select"
 msgstr "Magiškos lazdelės parinktis"
 
-#: ../Pinta/Dialogs/ResizeCanvasDialog.cs:319
-#: ../Pinta/Dialogs/ResizeImageDialog.cs:155
+#: ../Pinta/Dialogs/ResizeCanvasDialog.cs:322
+#: ../Pinta/Dialogs/ResizeImageDialog.cs:158
 msgid "Maintain aspect ratio"
 msgstr ""
 
-#: Mono.Addins.Gui/Mono.Addins.Gui/AddinManagerDialog.cs:268
-msgid "Manage Repositories..."
-msgstr ""
-
-#: ../Pinta.Effects/Effects/MandelbrotFractalEffect.cs:24
+#: ../Pinta.Effects/Effects/MandelbrotFractalEffect.cs:22
 msgid "Mandelbrot Fractal"
 msgstr "Mandelbroto fraktalas"
 
-#: ../Pinta.Effects/Effects/MedianEffect.cs:27
+#: ../Pinta.Effects/Effects/MedianEffect.cs:25
 msgid "Median"
 msgstr "Mediana"
 
 #: ../Pinta.Core/Actions/LayerActions.cs:53
-#: ../Pinta.Core/Actions/LayerActions.cs:282
+#: ../Pinta.Core/Actions/LayerActions.cs:283
 msgid "Merge Layer Down"
 msgstr ""
 
-#: Mono.Addins.Gui/Mono.Addins.Gui/AddinInfoView.cs:272
-#, csharp-format
-msgid "Missing: {0} v{1}"
-msgstr ""
-
-#: ../Pinta.Tools/Tools/GradientTool.cs:197
+#: ../Pinta.Tools/Tools/GradientTool.cs:195
 msgid "Mode"
 msgstr ""
 
-#: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:844
+#: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:850
 msgid "Modified"
 msgstr ""
 
-#: Mono.Addins.Gui/gtk-gui/Mono.Addins.Gui.AddinInfoView.cs:181
-msgid "More information"
+#: ../Pinta.Gui.Addins/AddinInfoView.cs:79
+msgid "More Information..."
 msgstr ""
 
-#: ../Pinta.Effects/Effects/MotionBlurEffect.cs:24
+#: ../Pinta.Effects/Effects/MotionBlurEffect.cs:22
 msgid "Motion Blur"
 msgstr "Suliejimas judesiu"
 
 #: ../Pinta.Core/Actions/LayerActions.cs:59
-#: ../Pinta.Core/Actions/LayerActions.cs:268
+#: ../Pinta.Core/Actions/LayerActions.cs:269
 msgid "Move Layer Down"
 msgstr ""
 
 #: ../Pinta.Core/Actions/LayerActions.cs:58
-#: ../Pinta.Core/Actions/LayerActions.cs:257
+#: ../Pinta.Core/Actions/LayerActions.cs:258
 msgid "Move Layer Up"
 msgstr ""
 
@@ -1242,17 +1163,11 @@ msgstr ""
 msgid "Move Selection"
 msgstr "Perkelti pažymėjimą"
 
-#: Mono.Addins.Gui/Mono.Addins.Gui/AddinInfoView.cs:123
-msgid ""
-"Multiple selection:\n"
-"\n"
-msgstr ""
-
 #: ../Pinta.Core/Effects/UserBlendOps.cs:34
 msgid "Multiply"
 msgstr ""
 
-#: ../Pinta/Dialogs/LayerPropertiesDialog.cs:187
+#: ../Pinta/Dialogs/LayerPropertiesDialog.cs:192
 msgid "Name:"
 msgstr "Pavadinimas:"
 
@@ -1261,7 +1176,7 @@ msgid "New"
 msgstr "Naujas"
 
 #: ../Pinta/Dialogs/NewImageDialog.cs:68
-#: ../Pinta.Core/Managers/WorkspaceManager.cs:184
+#: ../Pinta.Core/Managers/WorkspaceManager.cs:185
 msgid "New Image"
 msgstr "Naujas paveikslėlis"
 
@@ -1277,27 +1192,19 @@ msgstr ""
 msgid "New..."
 msgstr "Naujas..."
 
-#: Mono.Addins.Gui/Mono.Addins.Gui/AddinTreeWidget.cs:102
-msgid "No add-ins found"
+#: ../Pinta.Gui.Addins/AddinListView.cs:58
+msgid "No Items Found"
 msgstr ""
 
-#: Mono.Addins.Gui/Mono.Addins.Gui/AddinInfoView.cs:178
-msgid "No selection"
-msgstr ""
-
-#: Mono.Addins.Gui/gtk-gui/Mono.Addins.Gui.AddinManagerDialog.cs:143
-msgid "No updates found"
-msgstr ""
-
-#: ../Pinta.Effects/Effects/AddNoiseEffect.cs:37
-#: ../Pinta.Effects/Effects/MedianEffect.cs:35
-#: ../Pinta.Effects/Effects/ReduceNoiseEffect.cs:35
+#: ../Pinta.Effects/Effects/AddNoiseEffect.cs:35
+#: ../Pinta.Effects/Effects/MedianEffect.cs:33
+#: ../Pinta.Effects/Effects/ReduceNoiseEffect.cs:33
 msgid "Noise"
 msgstr "Triukšmas"
 
 #: ../Pinta.Core/Effects/UserBlendOps.cs:33
 #: ../Pinta.Tools/Brushes/PlainBrush.cs:37
-#: ../Pinta.Tools/Tools/EraserTool.cs:267 ../Pinta.Tools/Tools/TextTool.cs:242
+#: ../Pinta.Tools/Tools/EraserTool.cs:262 ../Pinta.Tools/Tools/TextTool.cs:245
 msgid "Normal"
 msgstr ""
 
@@ -1309,17 +1216,17 @@ msgstr ""
 msgid "Normal Size"
 msgstr ""
 
-#: ../Pinta.Tools/Tools/TextTool.cs:243
+#: ../Pinta.Tools/Tools/TextTool.cs:246
 msgid "Normal and Outline"
 msgstr ""
 
-#: ../Pinta.Effects/Effects/BulgeEffect.cs:103
+#: ../Pinta.Effects/Effects/BulgeEffect.cs:98
 #: ../Pinta.Effects/Effects/RadialBlurEffect.cs:160
-#: ../Pinta.Effects/Effects/ZoomBlurEffect.cs:133
+#: ../Pinta.Effects/Effects/ZoomBlurEffect.cs:131
 msgid "Offset"
 msgstr "Poslinkis"
 
-#: ../Pinta.Effects/Effects/OilPaintingEffect.cs:24
+#: ../Pinta.Effects/Effects/OilPaintingEffect.cs:22
 msgid "Oil Painting"
 msgstr "Tapyba aliejiniais dažais"
 
@@ -1327,10 +1234,11 @@ msgstr "Tapyba aliejiniais dažais"
 msgid "Opacity:"
 msgstr "Permatomumas:"
 
-#: ../Pinta/Actions/File/OpenDocumentAction.cs:53
-#: ../Pinta.Core/Actions/EditActions.cs:361
+#: ../Pinta/Actions/File/OpenDocumentAction.cs:54
+#: ../Pinta.Core/Actions/EditActions.cs:351
 #: ../Pinta.Core/Actions/FileActions.cs:60
 #: ../Pinta.Core/Actions/LayerActions.cs:168
+#: ../Pinta.Gui.Addins/AddinManagerDialog.cs:198
 msgid "Open"
 msgstr "Atverti"
 
@@ -1338,20 +1246,20 @@ msgstr "Atverti"
 msgid "Open Curve Shape"
 msgstr ""
 
-#: ../Pinta.Core/Managers/WorkspaceManager.cs:255
+#: ../Pinta.Core/Managers/WorkspaceManager.cs:251
 msgid "Open Image"
 msgstr ""
 
-#: ../Pinta/Actions/File/OpenDocumentAction.cs:50
+#: ../Pinta/Actions/File/OpenDocumentAction.cs:51
 #: ../Pinta.Core/Actions/LayerActions.cs:165
 msgid "Open Image File"
 msgstr ""
 
-#: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:322
+#: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:321
 msgid "Open Line/Curve Series"
 msgstr ""
 
-#: ../Pinta.Core/Actions/EditActions.cs:358
+#: ../Pinta.Core/Actions/EditActions.cs:348
 msgid "Open Palette File"
 msgstr "Atidaryti paletės failą"
 
@@ -1364,11 +1272,11 @@ msgstr ""
 msgid "OptionName"
 msgstr ""
 
-#: ../Pinta/Main.cs:113
+#: ../Pinta/Main.cs:134
 msgid "Options: "
 msgstr ""
 
-#: ../Pinta/Dialogs/NewImageDialog.cs:246
+#: ../Pinta/Dialogs/NewImageDialog.cs:254
 msgid "Orientation:"
 msgstr ""
 
@@ -1376,29 +1284,25 @@ msgstr ""
 msgid "Original"
 msgstr ""
 
-#: Mono.Addins.Gui/Mono.Addins.Gui/AddinTreeWidget.cs:213
-msgid "Other"
-msgstr ""
-
-#: ../Pinta.Effects/Effects/OutlineEffect.cs:27
-#: ../Pinta.Tools/Tools/TextTool.cs:244
+#: ../Pinta.Effects/Effects/OutlineEffect.cs:25
+#: ../Pinta.Tools/Tools/TextTool.cs:247
 msgid "Outline"
 msgstr "Kontūras"
 
-#: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:299
-#: ../Pinta.Tools/Tools/FreeformShapeTool.cs:228
+#: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:298
+#: ../Pinta.Tools/Tools/FreeformShapeTool.cs:223
 msgid "Outline Shape"
 msgstr ""
 
-#: ../Pinta.Tools/Tools/TextTool.cs:259
+#: ../Pinta.Tools/Tools/TextTool.cs:262
 msgid "Outline width"
 msgstr ""
 
-#: ../Pinta.Effects/Dialogs/Effects.LevelsDialog.cs:599
+#: ../Pinta.Effects/Dialogs/Effects.LevelsDialog.cs:609
 msgid "Output"
 msgstr "Išvestis"
 
-#: ../Pinta.Effects/Dialogs/Effects.LevelsDialog.cs:601
+#: ../Pinta.Effects/Dialogs/Effects.LevelsDialog.cs:611
 msgid "Output Histogram"
 msgstr "Išvesties histograma"
 
@@ -1414,24 +1318,24 @@ msgstr ""
 msgid "Paint Bucket"
 msgstr ""
 
-#: ../Pinta.Tools/Tools/PaintBrushTool.cs:60
+#: ../Pinta.Tools/Tools/PaintBrushTool.cs:57
 msgid "Paintbrush"
 msgstr "Teptukas"
 
-#: ../Pinta.Core/Actions/EditActions.cs:138
+#: ../Pinta.Core/Actions/EditActions.cs:137
 msgid "Palette"
 msgstr "Paletė"
 
-#: ../Pinta.Core/Actions/EditActions.cs:367
+#: ../Pinta.Core/Actions/EditActions.cs:355
 msgid "Palette files"
 msgstr ""
 
-#: ../Pinta/Actions/Layers/RotateZoomLayerAction.cs:115
+#: ../Pinta/Actions/Layers/RotateZoomLayerAction.cs:119
 #: ../Pinta.Tools/Tools/PanTool.cs:42
 msgid "Pan"
 msgstr ""
 
-#: ../Pinta/Actions/Edit/PasteAction.cs:78
+#: ../Pinta/Actions/Edit/PasteAction.cs:79
 #: ../Pinta.Core/Actions/EditActions.cs:64
 #: ../Pinta.Core/HistoryItems/PasteHistoryItem.cs:42
 msgid "Paste"
@@ -1441,47 +1345,44 @@ msgstr "Įklijuoti"
 msgid "Paste Into New Image"
 msgstr ""
 
-#: ../Pinta/Actions/Edit/PasteAction.cs:78
+#: ../Pinta/Actions/Edit/PasteAction.cs:79
 #: ../Pinta.Core/Actions/EditActions.cs:65
 msgid "Paste Into New Layer"
-msgstr ""
-
-#: Mono.Addins.Gui/gtk-gui/Mono.Addins.Gui.NewSiteDialog.cs:130
-msgid "Path:"
 msgstr ""
 
 #: ../Pinta.Tools/Tools/PencilTool.cs:48
 msgid "Pencil"
 msgstr "Pieštukas"
 
-#: ../Pinta.Effects/Effects/PencilSketchEffect.cs:31
+#: ../Pinta.Effects/Effects/PencilSketchEffect.cs:29
 msgid "Pencil Sketch"
 msgstr "Pieštukinis eskizas"
 
-#: ../Pinta.Effects/Effects/PencilSketchEffect.cs:98
+#: ../Pinta.Effects/Effects/PencilSketchEffect.cs:92
 msgid "Pencil Tip Size"
 msgstr "Pieštuko galiuko dydis (smailumas)"
 
-#: ../Pinta.Effects/Effects/MedianEffect.cs:72
+#: ../Pinta.Effects/Effects/MedianEffect.cs:70
 msgid "Percentile"
 msgstr "Procentai"
 
-#: ../Pinta.Effects/Effects/GlowEffect.cs:37
-#: ../Pinta.Effects/Effects/RedEyeRemoveEffect.cs:34
-#: ../Pinta.Effects/Effects/SharpenEffect.cs:32
-#: ../Pinta.Effects/Effects/SoftenPortraitEffect.cs:64
+#: ../Pinta.Effects/Effects/GlowEffect.cs:35
+#: ../Pinta.Effects/Effects/RedEyeRemoveEffect.cs:32
+#: ../Pinta.Effects/Effects/SharpenEffect.cs:30
+#: ../Pinta.Effects/Effects/SoftenPortraitEffect.cs:63
 msgid "Photo"
 msgstr "Nuotrauka"
 
-#: ../xdg/pinta.desktop.in.h:1 ../Pinta/Actions/Help/AboutDialogAction.cs:54
+#: ../xdg/pinta.desktop.in.h:1 ../Pinta/Actions/Help/AboutDialogAction.cs:55
+#: ../Pinta/MainWindow.cs:62
 msgid "Pinta"
 msgstr "Pinta"
 
-#: ../Pinta/AddinSetupService.cs:54
+#: ../Pinta/AddinSetupService.cs:52
 msgid "Pinta Community Addins - Cross-Platform"
 msgstr ""
 
-#: ../Pinta/AddinSetupService.cs:50
+#: ../Pinta/AddinSetupService.cs:48
 msgid "Pinta Community Addins - Platform-Specific"
 msgstr ""
 
@@ -1506,11 +1407,11 @@ msgid ""
 "help organize your creativity."
 msgstr ""
 
-#: ../Pinta.Core/Managers/WorkspaceManager.cs:405
+#: ../Pinta.Core/Managers/WorkspaceManager.cs:392
 msgid "Pinta supports the following file formats:"
 msgstr ""
 
-#: ../Pinta.Core/Classes/Palette.cs:198
+#: ../Pinta.Core/Classes/Palette.cs:197
 msgid "Pinta supports the following palette formats:"
 msgstr ""
 
@@ -1518,7 +1419,7 @@ msgstr ""
 msgid "Pixel Grid"
 msgstr ""
 
-#: ../Pinta.Effects/Effects/PixelateEffect.cs:24
+#: ../Pinta.Effects/Effects/PixelateEffect.cs:22
 msgid "Pixelate"
 msgstr "Vaizdo taškinimas"
 
@@ -1526,37 +1427,37 @@ msgstr "Vaizdo taškinimas"
 msgid "Pixels"
 msgstr ""
 
-#: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:522
-#: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:736
+#: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:521
+#: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:742
 msgid "Point Added"
 msgstr ""
 
-#: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:467
+#: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:466
 msgid "Point Deleted"
 msgstr ""
 
-#: ../Pinta.Effects/Effects/PolarInversionEffect.cs:24
+#: ../Pinta.Effects/Effects/PolarInversionEffect.cs:22
 msgid "Polar Inversion"
 msgstr "Šaltoji inversija"
 
-#: ../Pinta/Dialogs/NewImageDialog.cs:248
+#: ../Pinta/Dialogs/NewImageDialog.cs:258
 msgid "Portrait"
 msgstr ""
 
 #: ../Pinta.Effects/Adjustments/PosterizeEffect.cs:25
-#: ../Pinta.Effects/Dialogs/Effects.PosterizeDialog.cs:56
+#: ../Pinta.Effects/Dialogs/Effects.PosterizeDialog.cs:58
 msgid "Posterize"
 msgstr ""
 
-#: ../Pinta.Effects/Effects/CloudsEffect.cs:203
+#: ../Pinta.Effects/Effects/CloudsEffect.cs:200
 msgid "Power"
 msgstr ""
 
-#: ../Pinta/Dialogs/NewImageDialog.cs:194
+#: ../Pinta/Dialogs/NewImageDialog.cs:197
 msgid "Preset:"
 msgstr ""
 
-#: ../Pinta/Dialogs/NewImageDialog.cs:318
+#: ../Pinta/Dialogs/NewImageDialog.cs:350
 msgid "Preview"
 msgstr ""
 
@@ -1568,18 +1469,14 @@ msgstr ""
 msgid "Print"
 msgstr "Spausdinti"
 
-#: Mono.Addins.Gui/gtk-gui/Mono.Addins.Gui.ProgressDialog.cs:21
-msgid "Progress"
-msgstr ""
-
-#: ../Pinta.Effects/Effects/JuliaFractalEffect.cs:133
-#: ../Pinta.Effects/Effects/MandelbrotFractalEffect.cs:156
+#: ../Pinta.Effects/Effects/JuliaFractalEffect.cs:129
+#: ../Pinta.Effects/Effects/MandelbrotFractalEffect.cs:141
 #: ../Pinta.Effects/Effects/RadialBlurEffect.cs:163
-#: ../Pinta.Effects/Effects/WarpEffect.cs:188
+#: ../Pinta.Effects/Effects/WarpEffect.cs:192
 msgid "Quality"
 msgstr "Kokybė"
 
-#: ../Pinta/Dialogs/JpegCompressionDialog.cs:48
+#: ../Pinta/Dialogs/JpegCompressionDialog.cs:49
 msgid "Quality: "
 msgstr ""
 
@@ -1587,23 +1484,23 @@ msgstr ""
 msgid "Quit"
 msgstr "Išeiti"
 
-#: ../Pinta.Effects/Dialogs/Effects.CurvesDialog.cs:432
+#: ../Pinta.Effects/Dialogs/Effects.CurvesDialog.cs:443
 msgid "RGB"
 msgstr "RGB"
 
-#: ../Pinta.Effects/Effects/RadialBlurEffect.cs:24
+#: ../Pinta.Effects/Effects/RadialBlurEffect.cs:23
 msgid "Radial Blur"
 msgstr "Radialinis suliejimas"
 
-#: ../Pinta.Tools/Tools/GradientTool.cs:187
+#: ../Pinta.Tools/Tools/GradientTool.cs:185
 msgid "Radial Gradient"
 msgstr "Radialinis perėjimas (gradientas)"
 
-#: ../Pinta.Effects/Effects/GaussianBlurEffect.cs:263
-#: ../Pinta.Effects/Effects/GlowEffect.cs:79
-#: ../Pinta.Effects/Effects/MedianEffect.cs:69
-#: ../Pinta.Effects/Effects/ReduceNoiseEffect.cs:93
-#: ../Pinta.Effects/Effects/UnfocusEffect.cs:97
+#: ../Pinta.Effects/Effects/GaussianBlurEffect.cs:242
+#: ../Pinta.Effects/Effects/GlowEffect.cs:81
+#: ../Pinta.Effects/Effects/MedianEffect.cs:67
+#: ../Pinta.Effects/Effects/ReduceNoiseEffect.cs:91
+#: ../Pinta.Effects/Effects/UnfocusEffect.cs:95
 #: ../Pinta.Tools/Editable/EditEngines/RoundedLineEditEngine.cs:99
 msgid "Radius"
 msgstr ""
@@ -1624,16 +1521,16 @@ msgstr "Stačiakampis"
 msgid "Rectangle Select"
 msgstr "Stačiakampis pažymėjimas"
 
-#: ../Pinta.Effects/Dialogs/Effects.LevelsDialog.cs:521
-#: ../Pinta.Effects/Dialogs/Effects.PosterizeDialog.cs:113
+#: ../Pinta.Effects/Dialogs/Effects.LevelsDialog.cs:523
+#: ../Pinta.Effects/Dialogs/Effects.PosterizeDialog.cs:115
 msgid "Red"
 msgstr "Raudona"
 
-#: ../Pinta.Effects/Dialogs/Effects.CurvesDialog.cs:452
+#: ../Pinta.Effects/Dialogs/Effects.CurvesDialog.cs:464
 msgid "Red  "
 msgstr "Raudona  "
 
-#: ../Pinta.Effects/Effects/RedEyeRemoveEffect.cs:26
+#: ../Pinta.Effects/Effects/RedEyeRemoveEffect.cs:24
 msgid "Red Eye Removal"
 msgstr "Raudonų akių pašalinimas"
 
@@ -1641,7 +1538,7 @@ msgstr "Raudonų akių pašalinimas"
 msgid "Redo"
 msgstr ""
 
-#: ../Pinta.Effects/Effects/ReduceNoiseEffect.cs:27
+#: ../Pinta.Effects/Effects/ReduceNoiseEffect.cs:25
 msgid "Reduce Noise"
 msgstr "Sumažinti triukšmą"
 
@@ -1649,41 +1546,29 @@ msgstr "Sumažinti triukšmą"
 msgid "Reflect"
 msgstr ""
 
-#: Mono.Addins.Gui/gtk-gui/Mono.Addins.Gui.AddinManagerDialog.cs:166
+#: ../Pinta.Gui.Addins/AddinManagerDialog.cs:46
 msgid "Refresh"
 msgstr ""
 
-#: Mono.Addins.Gui/gtk-gui/Mono.Addins.Gui.NewSiteDialog.cs:103
-msgid "Register a local repository"
-msgstr ""
-
-#: Mono.Addins.Gui/gtk-gui/Mono.Addins.Gui.NewSiteDialog.cs:54
-msgid "Register an on-line repository"
-msgstr ""
-
-#: Mono.Addins.Gui/Mono.Addins.Gui/ManageSitesDialog.cs:98
-msgid "Registering repository"
-msgstr ""
-
-#: ../Pinta/Actions/Help/AboutDialogAction.cs:79
+#: ../Pinta/Actions/Help/AboutDialogAction.cs:80
 msgid "Released under the MIT X11 License."
 msgstr ""
 
-#: ../Pinta.Effects/Effects/ReliefEffect.cs:45
+#: ../Pinta.Effects/Effects/ReliefEffect.cs:43
 msgid "Relief"
 msgstr "Reljefas"
 
-#: ../Pinta/Actions/Layers/LayerPropertiesAction.cs:99
+#: ../Pinta/Actions/Layers/LayerPropertiesAction.cs:103
 msgid "Rename Layer"
 msgstr "Pervadinti sluoksnį"
 
-#: ../Pinta.Effects/Effects/CloudsEffect.cs:37
-#: ../Pinta.Effects/Effects/JuliaFractalEffect.cs:32
-#: ../Pinta.Effects/Effects/MandelbrotFractalEffect.cs:32
+#: ../Pinta.Effects/Effects/CloudsEffect.cs:35
+#: ../Pinta.Effects/Effects/JuliaFractalEffect.cs:30
+#: ../Pinta.Effects/Effects/MandelbrotFractalEffect.cs:30
 msgid "Render"
 msgstr "Generuoti"
 
-#: ../Pinta.Core/Managers/LivePreviewManager.cs:223
+#: ../Pinta.Core/Managers/LivePreviewManager.cs:232
 msgid "Rendering Effect"
 msgstr ""
 
@@ -1691,29 +1576,16 @@ msgstr ""
 msgid "Replace"
 msgstr ""
 
-#: ../Pinta/Dialogs/ErrorDialog.cs:109
-msgid "Report Bug...."
+#: ../Pinta/Dialogs/ErrorDialog.cs:69
+msgid "Report Bug..."
 msgstr ""
 
-#: Mono.Addins.Gui/Mono.Addins.Gui/AddinInfoView.cs:287
-msgid "Repository version"
-msgstr ""
-
-#: Mono.Addins.Gui/gtk-gui/Mono.Addins.Gui.AddinManagerDialog.cs:268
-msgid "Repository:"
-msgstr ""
-
-#: Mono.Addins.Gui/Mono.Addins.Gui/AddinInfoView.cs:270
-#, csharp-format
-msgid "Required: {0} v{1}, found v{2}"
-msgstr ""
-
-#: ../Pinta.Gui.Widgets/Widgets/ReseedButtonWidget.cs:64
+#: ../Pinta.Gui.Widgets/Widgets/ReseedButtonWidget.cs:63
 msgid "Reseed"
 msgstr "Pakrauti iš naujo"
 
-#: ../Pinta.Effects/Dialogs/Effects.CurvesDialog.cs:462
-#: ../Pinta.Effects/Dialogs/Effects.LevelsDialog.cs:528
+#: ../Pinta.Effects/Dialogs/Effects.CurvesDialog.cs:474
+#: ../Pinta.Effects/Dialogs/Effects.LevelsDialog.cs:531
 msgid "Reset"
 msgstr "Atstatyti"
 
@@ -1721,8 +1593,8 @@ msgstr "Atstatyti"
 msgid "Reset to Default"
 msgstr "Atstatyti į numatytąjį"
 
-#: ../Pinta/Dialogs/ResizeCanvasDialog.cs:56
-#: ../Pinta.Core/Classes/Document.cs:304
+#: ../Pinta/Dialogs/ResizeCanvasDialog.cs:58
+#: ../Pinta.Core/Classes/Document.cs:305
 msgid "Resize Canvas"
 msgstr ""
 
@@ -1730,7 +1602,7 @@ msgstr ""
 msgid "Resize Canvas..."
 msgstr ""
 
-#: ../Pinta/Dialogs/ResizeImageDialog.cs:45
+#: ../Pinta/Dialogs/ResizeImageDialog.cs:47
 #: ../Pinta.Core/HistoryItems/ResizeHistoryItem.cs:42
 msgid "Resize Image"
 msgstr "Keisti paveikslėlio dydį"
@@ -1743,12 +1615,12 @@ msgstr ""
 msgid "Resize Palette"
 msgstr ""
 
-#: ../Pinta.Tools/Tools/TextTool.cs:221
+#: ../Pinta.Tools/Tools/TextTool.cs:223
 msgid "Right Align"
 msgstr ""
 
-#: ../Pinta/Actions/Layers/RotateZoomLayerAction.cs:53
-#: ../Pinta/Actions/Layers/RotateZoomLayerAction.cs:107
+#: ../Pinta/Actions/Layers/RotateZoomLayerAction.cs:54
+#: ../Pinta/Actions/Layers/RotateZoomLayerAction.cs:111
 msgid "Rotate / Zoom Layer"
 msgstr ""
 
@@ -1771,12 +1643,12 @@ msgstr ""
 msgid "Rotate 90° Counter-Clockwise"
 msgstr ""
 
-#: ../Pinta.Effects/Effects/FragmentEffect.cs:116
-#: ../Pinta.Effects/Effects/TileEffect.cs:140
+#: ../Pinta.Effects/Effects/FragmentEffect.cs:114
+#: ../Pinta.Effects/Effects/TileEffect.cs:139
 msgid "Rotation"
 msgstr "Posūkis"
 
-#: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:325
+#: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:324
 msgid "Rounded Line Series"
 msgstr ""
 
@@ -1796,7 +1668,7 @@ msgstr ""
 msgid "Rulers"
 msgstr ""
 
-#: ../Pinta.Tools/Tools/ColorPickerTool.cs:198
+#: ../Pinta.Tools/Tools/ColorPickerTool.cs:195
 msgid "Sampling"
 msgstr ""
 
@@ -1805,12 +1677,12 @@ msgstr ""
 msgid "Saturation"
 msgstr ""
 
-#: ../Pinta.Effects/Effects/RedEyeRemoveEffect.cs:74
+#: ../Pinta.Effects/Effects/RedEyeRemoveEffect.cs:63
 msgid "Saturation Percentage"
 msgstr ""
 
-#: ../Pinta/Actions/File/SaveDocumentImplementationAction.cs:75
-#: ../Pinta.Core/Actions/EditActions.cs:403
+#: ../Pinta/Actions/File/SaveDocumentImplementationAction.cs:73
+#: ../Pinta.Core/Actions/EditActions.cs:391
 #: ../Pinta.Core/Actions/FileActions.cs:55
 msgid "Save"
 msgstr "Išsaugoti"
@@ -1824,20 +1696,20 @@ msgstr ""
 msgid "Save As..."
 msgstr "Išsaugoti kaip..."
 
-#: ../Pinta/Actions/File/SaveDocumentImplementationAction.cs:72
+#: ../Pinta/Actions/File/SaveDocumentImplementationAction.cs:70
 msgid "Save Image File"
 msgstr ""
 
-#: ../Pinta.Core/Actions/EditActions.cs:400
+#: ../Pinta.Core/Actions/EditActions.cs:388
 msgid "Save Palette File"
 msgstr "Išsaugoti paletės failą"
 
-#: ../Pinta/Actions/File/CloseDocumentAction.cs:60
+#: ../Pinta/Actions/File/CloseDocumentAction.cs:58
 #, csharp-format
 msgid "Save changes to image \"{0}\" before closing?"
 msgstr ""
 
-#: ../Pinta.Effects/Effects/CloudsEffect.cs:200
+#: ../Pinta.Effects/Effects/CloudsEffect.cs:197
 msgid "Scale"
 msgstr "Mastelis"
 
@@ -1849,18 +1721,14 @@ msgstr ""
 msgid "Secondary"
 msgstr ""
 
-#: ../Pinta.Effects/Effects/CloudsEffect.cs:225
+#: ../Pinta.Effects/Effects/CloudsEffect.cs:222
 msgid "Seed"
 msgstr ""
 
 #: ../Pinta.Core/Actions/EditActions.cs:70
-#: ../Pinta.Core/Actions/EditActions.cs:218
+#: ../Pinta.Core/Actions/EditActions.cs:216
 msgid "Select All"
 msgstr "Pasirinkti viską"
-
-#: Mono.Addins.Gui/gtk-gui/Mono.Addins.Gui.NewSiteDialog.cs:47
-msgid "Select the location of the repository you want to register:"
-msgstr ""
 
 #: ../Pinta.Effects/Adjustments/SepiaEffect.cs:26
 msgid "Sepia"
@@ -1870,24 +1738,24 @@ msgstr "Sepija"
 msgid "Set Number of Colors"
 msgstr "Nustatyti spalvų skaičių"
 
-#: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:315
+#: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:314
 msgid "Shape Type"
 msgstr ""
 
-#: ../Pinta.Effects/Effects/SharpenEffect.cs:24
+#: ../Pinta.Effects/Effects/SharpenEffect.cs:22
 msgid "Sharpen"
 msgstr "Paryškinti"
 
-#: ../Pinta.Core/Extensions/ToolBoxButton.cs:52
-#: ../Pinta.Gui.Widgets/Widgets/StatusBarColorPaletteWidget.cs:237
+#: ../Pinta.Core/Extensions/ToolBoxButton.cs:50
+#: ../Pinta.Gui.Widgets/Widgets/StatusBarColorPaletteWidget.cs:261
 msgid "Shortcut key"
 msgstr "Greitasis klavišas"
 
-#: ../Pinta/Actions/Layers/LayerPropertiesAction.cs:104
+#: ../Pinta/Actions/Layers/LayerPropertiesAction.cs:108
 msgid "Show Layer"
 msgstr "Rodyti sluoksnį"
 
-#: ../Pinta/Main.cs:60
+#: ../Pinta/Main.cs:62
 msgid "Show this message and exit."
 msgstr ""
 
@@ -1895,15 +1763,15 @@ msgstr ""
 msgid "Show/Hide"
 msgstr ""
 
-#: ../Pinta.Tools/Tools/ColorPickerTool.cs:225
+#: ../Pinta.Tools/Tools/ColorPickerTool.cs:222
 msgid "Single Pixel"
 msgstr ""
 
-#: ../Pinta.Tools/Editable/EditEngines/ArrowedEditEngine.cs:280
+#: ../Pinta.Tools/Editable/EditEngines/ArrowedEditEngine.cs:271
 msgid "Size"
 msgstr ""
 
-#: ../Pinta.Tools/Tools/EraserTool.cs:267
+#: ../Pinta.Tools/Tools/EraserTool.cs:262
 msgid "Smooth"
 msgstr ""
 
@@ -1911,17 +1779,13 @@ msgstr ""
 msgid "Soft Light"
 msgstr ""
 
-#: ../Pinta.Effects/Effects/SoftenPortraitEffect.cs:56
+#: ../Pinta.Effects/Effects/SoftenPortraitEffect.cs:55
 msgid "Soften Portrait"
 msgstr "Švelnesnis portretas"
 
-#: ../Pinta.Effects/Effects/SoftenPortraitEffect.cs:117
+#: ../Pinta.Effects/Effects/SoftenPortraitEffect.cs:116
 msgid "Softness"
 msgstr "Švelnumas"
-
-#: Mono.Addins.Gui/Mono.Addins.Gui/AddinInstallerDialog.cs:159
-msgid "Some of the required add-ins were not found"
-msgstr ""
 
 #: ../Pinta.Tools/Brushes/SplatterBrush.cs:37
 msgid "Splatter"
@@ -1935,70 +1799,62 @@ msgstr ""
 msgid "Status Bar"
 msgstr ""
 
-#: ../Pinta.Effects/Effects/ReduceNoiseEffect.cs:96
+#: ../Pinta.Effects/Effects/ReduceNoiseEffect.cs:94
 msgid "Strength"
 msgstr "Stiprumas"
 
-#: ../Pinta.Effects/Effects/EdgeDetectEffect.cs:35
-#: ../Pinta.Effects/Effects/EmbossEffect.cs:32
-#: ../Pinta.Effects/Effects/OutlineEffect.cs:35
+#: ../Pinta.Effects/Effects/EdgeDetectEffect.cs:33
+#: ../Pinta.Effects/Effects/EmbossEffect.cs:30
+#: ../Pinta.Effects/Effects/OutlineEffect.cs:33
 #: ../Pinta.Effects/Effects/ReliefEffect.cs:32
 msgid "Stylize"
 msgstr "Stilizuoti"
 
-#: ../Pinta.Tools/Tools/ColorPickerTool.cs:208
+#: ../Pinta.Tools/Tools/ColorPickerTool.cs:205
 msgid "Switch to Pencil tool"
 msgstr "Perjungti į pieštuką"
 
-#: ../Pinta.Tools/Tools/ColorPickerTool.cs:207
+#: ../Pinta.Tools/Tools/ColorPickerTool.cs:204
 msgid "Switch to previous tool"
 msgstr "Perjungti į ankstenį įrankį"
 
-#: ../Pinta/Actions/File/NewScreenshotAction.cs:105
-msgid "Take Screenshot"
-msgstr ""
-
-#: ../Pinta.Tools/Tools/TextTool.cs:84
+#: ../Pinta.Tools/Tools/TextTool.cs:85
 msgid "Text"
 msgstr ""
 
-#: ../Pinta.Tools/Tools/TextTool.cs:85
+#: ../Pinta.Tools/Tools/TextTool.cs:86
 msgid "Text - Finalize"
 msgstr ""
 
-#: ../Pinta.Tools/Tools/TextTool.cs:235
+#: ../Pinta.Tools/Tools/TextTool.cs:238
 msgid "Text Style"
 msgstr ""
 
-#: ../Pinta/Actions/Edit/PasteAction.cs:160
+#: ../Pinta/Actions/Edit/PasteAction.cs:158
 msgid "The clipboard does not contain an image."
 msgstr ""
 
-#: Mono.Addins.Gui/gtk-gui/Mono.Addins.Gui.AddinInstallerDialog.cs:48
-msgid "The following add-ins will be installed:"
+#: ../Pinta.Gui.Addins/InstallDialog.cs:152
+msgid "The file may be an invalid or corrupt extension package"
 msgstr ""
 
-#: Mono.Addins.Gui/Mono.Addins.Gui/AddinInfoView.cs:295
-msgid "The following depedencies required by this add-in are not available:"
-msgstr ""
-
-#: Mono.Addins.Gui/Mono.Addins.Gui/InstallDialog.cs:156
+#: ../Pinta.Gui.Addins/InstallDialog.cs:91
 msgid "The following dependencies could not be resolved:"
 msgstr ""
 
-#: Mono.Addins.Gui/Mono.Addins.Gui/InstallDialog.cs:148
+#: ../Pinta.Gui.Addins/InstallDialog.cs:82
 msgid "The following packages need to be uninstalled:"
 msgstr ""
 
-#: Mono.Addins.Gui/Mono.Addins.Gui/InstallDialog.cs:138
+#: ../Pinta.Gui.Addins/InstallDialog.cs:74
 msgid "The following packages will be installed:"
 msgstr ""
 
-#: Mono.Addins.Gui/Mono.Addins.Gui/InstallDialog.cs:82
+#: ../Pinta.Gui.Addins/InstallDialog.cs:178
 msgid "The following packages will be uninstalled:"
 msgstr ""
 
-#: ../Pinta/Actions/Edit/PasteAction.cs:169
+#: ../Pinta/Actions/Edit/PasteAction.cs:165
 msgid ""
 "The image being pasted is larger than the canvas size. What would you like "
 "to do?"
@@ -2006,62 +1862,58 @@ msgstr ""
 "Įklijuojamas paveikslėlis yra didesnis už darbinę drobę. Ką norėtumėte "
 "daryti?"
 
-#: Mono.Addins.Gui/Mono.Addins.Gui/InstallDialog.cs:211
+#: ../Pinta.Gui.Addins/InstallDialog.cs:294
 msgid "The installation failed!"
 msgstr ""
 
-#: Mono.Addins.Gui/Mono.Addins.Gui/InstallDialog.cs:212
+#: ../Pinta.Gui.Addins/InstallDialog.cs:295
 msgid "The installation has completed with warnings."
 msgstr ""
 
-#: Mono.Addins.Gui/Mono.Addins.Gui/InstallDialog.cs:124
+#: ../Pinta.Gui.Addins/InstallDialog.cs:56
 msgid ""
-"The selected add-ins can't be installed because there are dependency "
-"conflicts."
+"The selected extension packages can't be installed because there are "
+"dependency conflicts."
 msgstr ""
 
-#: Mono.Addins.Gui/Mono.Addins.Gui/InstallDialog.cs:216
+#: ../Pinta.Gui.Addins/InstallDialog.cs:304
 msgid "The uninstallation failed!"
 msgstr ""
 
-#: Mono.Addins.Gui/Mono.Addins.Gui/InstallDialog.cs:217
+#: ../Pinta.Gui.Addins/InstallDialog.cs:305
 msgid "The uninstallation has completed with warnings."
 msgstr ""
 
-#: Mono.Addins.Gui/Mono.Addins.Gui/InstallDialog.cs:89
+#: ../Pinta.Gui.Addins/InstallDialog.cs:189
 msgid ""
-"There are other add-ins that depend on the previous ones which will also be "
-"uninstalled:"
+"There are other extension packages that depend on the previous ones which "
+"will also be uninstalled:"
 msgstr ""
 
-#: ../Pinta.Effects/Effects/OutlineEffect.cs:141
+#: ../Pinta.Effects/Effects/OutlineEffect.cs:139
 msgid "Thickness"
 msgstr "Storis"
 
-#: Mono.Addins.Gui/Mono.Addins.Gui/AddinInfoView.cs:263
-msgid "This add-in can't be loaded due to missing dependencies"
-msgstr ""
-
-#: ../Pinta.Effects/Effects/TileEffect.cs:24
+#: ../Pinta.Effects/Effects/TileEffect.cs:22
 msgid "Tile Reflection"
 msgstr "Plytelių refleksija"
 
-#: ../Pinta.Effects/Effects/TileEffect.cs:142
+#: ../Pinta.Effects/Effects/TileEffect.cs:141
 msgid "Tile Size"
 msgstr ""
 
-#: ../Pinta.Effects/Dialogs/Effects.CurvesDialog.cs:467
+#: ../Pinta.Effects/Dialogs/Effects.CurvesDialog.cs:481
 msgid "Tip: Right-click to remove control points."
 msgstr ""
 "Patarimas:dešiniu pelės klavišu paspauskite, kad pašalintumėte valdymo tašką."
 
-#: ../Pinta.Effects/Effects/RedEyeRemoveEffect.cs:70
-#: ../Pinta.Tools/Tools/FloodTool.cs:127
-#: ../Pinta.Tools/Tools/RecolorTool.cs:200
+#: ../Pinta.Effects/Effects/RedEyeRemoveEffect.cs:59
+#: ../Pinta.Tools/Tools/FloodTool.cs:126
+#: ../Pinta.Tools/Tools/RecolorTool.cs:201
 msgid "Tolerance"
 msgstr "Toletantiškumas"
 
-#: ../Pinta.Core/Managers/ToolManager.cs:339
+#: ../Pinta.Core/Managers/ToolManager.cs:354
 msgid "Tool"
 msgstr "Įrankis"
 
@@ -2069,7 +1921,7 @@ msgstr "Įrankis"
 msgid "Tool Box"
 msgstr ""
 
-#: ../Pinta/MainWindow.cs:368
+#: ../Pinta/MainWindow.cs:354
 msgid "Tool Windows"
 msgstr ""
 
@@ -2077,7 +1929,7 @@ msgstr ""
 msgid "Toolbar"
 msgstr ""
 
-#: ../Pinta.Effects/Dialogs/Effects.CurvesDialog.cs:426
+#: ../Pinta.Effects/Dialogs/Effects.CurvesDialog.cs:440
 msgid "Transfer Map"
 msgstr "Perduoti žemėlapį"
 
@@ -2085,32 +1937,25 @@ msgstr "Perduoti žemėlapį"
 msgid "Translate This Application"
 msgstr ""
 
-#: ../Pinta.Tools/Tools/GradientTool.cs:204
+#: ../Pinta.Tools/Tools/GradientTool.cs:202
 msgid "Transparency Mode"
 msgstr ""
 
-#: ../Pinta/Dialogs/NewImageDialog.cs:289
+#: ../Pinta/Dialogs/NewImageDialog.cs:315
 #: ../Pinta.Effects/Effects/WarpEffect.cs:29
 msgid "Transparent"
 msgstr ""
 
-#: ../Pinta.Effects/Effects/TwistEffect.cs:24
+#: ../Pinta.Effects/Effects/TwistEffect.cs:22
 msgid "Twist"
 msgstr "Susukimas"
 
-#: ../Pinta.Tools/Tools/EraserTool.cs:263
-#: ../Pinta.Tools/Tools/PaintBrushTool.cs:162
+#: ../Pinta.Tools/Tools/EraserTool.cs:258
+#: ../Pinta.Tools/Tools/PaintBrushTool.cs:161
 msgid "Type"
 msgstr "Tipas"
 
-#: ../Pinta/MainWindow.cs:545
-#, csharp-format
-msgid ""
-"Unable to download image from {0}.\n"
-"Details: {1}"
-msgstr ""
-
-#: ../Pinta.Tools/Tools/TextTool.cs:184
+#: ../Pinta.Tools/Tools/TextTool.cs:183
 msgid "Underline"
 msgstr ""
 
@@ -2118,16 +1963,17 @@ msgstr ""
 msgid "Undo"
 msgstr ""
 
-#: ../Pinta.Effects/Effects/UnfocusEffect.cs:26
+#: ../Pinta.Effects/Effects/UnfocusEffect.cs:24
 msgid "Unfocus"
 msgstr "Nefokusuoti"
 
-#: Mono.Addins.Gui/Mono.Addins.Gui/InstallDialog.cs:77
+#: ../Pinta.Gui.Addins/InstallDialog.cs:168
+#: ../Pinta.Gui.Addins/InstallDialog.cs:169
 msgid "Uninstall"
 msgstr ""
 
-#: Mono.Addins.Gui/Mono.Addins.Gui/InstallDialog.cs:214
-msgid "Uninstalling Add-ins"
+#: ../Pinta.Gui.Addins/AddinInfoView.cs:93
+msgid "Uninstall..."
 msgstr ""
 
 #. Translators: {0} is 'Ctrl', or a platform-specific key such as 'Command' on macOS.
@@ -2136,42 +1982,28 @@ msgstr ""
 msgid "Union (+) ({0} + Left Click)"
 msgstr ""
 
-#: ../Pinta.Core/Managers/WorkspaceManager.cs:115
+#: ../Pinta.Core/Managers/WorkspaceManager.cs:117
 #, csharp-format
 msgid "Unsaved Image {0}"
 msgstr ""
 
-#: ../Pinta.Core/Managers/WorkspaceManager.cs:250
+#: ../Pinta.Core/Managers/WorkspaceManager.cs:246
 msgid "Unsupported file format"
 msgstr ""
 
-#: Mono.Addins.Gui/gtk-gui/Mono.Addins.Gui.AddinInfoView.cs:255
-msgid "Update"
+#: ../Pinta.Core/Classes/Palette.cs:184
+msgid "Unsupported palette format"
 msgstr ""
 
-#: Mono.Addins.Gui/gtk-gui/Mono.Addins.Gui.AddinManagerDialog.cs:194
-msgid "Update All"
+#: ../Pinta.Gui.Addins/AddinInfoView.cs:88
+msgid "Update..."
 msgstr ""
 
-#: Mono.Addins.Gui/Mono.Addins.Gui/AddinInfoView.cs:256
-msgid "Update available"
-msgstr ""
-
-#: Mono.Addins.Gui/Mono.Addins.Gui/AddinManagerDialog.cs:123
-#: Mono.Addins.Gui/Mono.Addins.Gui/AddinManagerDialog.cs:364
-#: Mono.Addins.Gui/gtk-gui/Mono.Addins.Gui.AddinManagerDialog.cs:247
+#: ../Pinta.Gui.Addins/AddinManagerDialog.cs:63
 msgid "Updates"
 msgstr ""
 
-#: Mono.Addins.Gui/Mono.Addins.Gui/AddinManagerDialog.cs:419
-msgid "Updating repository"
-msgstr ""
-
-#: Mono.Addins.Gui/gtk-gui/Mono.Addins.Gui.NewSiteDialog.cs:82
-msgid "Url:"
-msgstr ""
-
-#: ../Pinta/Main.cs:111
+#: ../Pinta/Main.cs:132
 msgid "Usage: pinta [files]"
 msgstr ""
 
@@ -2184,32 +2016,37 @@ msgstr ""
 "Naudokite aukštą kokybę užbaigtiems darbams, dideliems paveikslėliams ir "
 "kampams."
 
-#: ../Pinta/Actions/Help/AboutDialogAction.cs:86
+#: ../Pinta/Actions/Help/AboutDialogAction.cs:87
 msgid "Using some icons from:"
 msgstr "Dalis ikonų naudojama iš:"
 
-#: ../Pinta/Dialogs/LayerPropertiesDialog.cs:195
+#: ../Pinta.Gui.Addins/AddinInfoView.cs:130
+#, csharp-format
+msgid "Version: {0}"
+msgstr ""
+
+#: ../Pinta/Dialogs/LayerPropertiesDialog.cs:202
 msgid "Visible"
 msgstr "Matomas"
 
-#: ../Pinta.Effects/Effects/SoftenPortraitEffect.cs:123
+#: ../Pinta.Effects/Effects/SoftenPortraitEffect.cs:122
 msgid "Warmth"
 msgstr ""
 
-#: ../Pinta/Dialogs/NewImageDialog.cs:273
+#: ../Pinta/Dialogs/NewImageDialog.cs:296
 msgid "White"
 msgstr ""
 
-#: ../Pinta/Dialogs/NewImageDialog.cs:214
-#: ../Pinta/Dialogs/ResizeCanvasDialog.cs:333
-#: ../Pinta/Dialogs/ResizeImageDialog.cs:169
+#: ../Pinta/Dialogs/NewImageDialog.cs:216
+#: ../Pinta/Dialogs/ResizeCanvasDialog.cs:338
+#: ../Pinta/Dialogs/ResizeImageDialog.cs:174
 msgid "Width:"
 msgstr "Plotis:"
 
 #: ../Pinta.Core/Actions/ViewActions.cs:103
-#: ../Pinta.Core/Actions/ViewActions.cs:282
-#: ../Pinta.Core/Classes/DocumentWorkspace.cs:324
-#: ../Pinta.Core/Classes/DocumentWorkspace.cs:332
+#: ../Pinta.Core/Actions/ViewActions.cs:286
+#: ../Pinta.Core/Classes/DocumentWorkspace.cs:325
+#: ../Pinta.Core/Classes/DocumentWorkspace.cs:333
 msgid "Window"
 msgstr ""
 
@@ -2228,26 +2065,26 @@ msgid "Xor ({0} + Right Click)"
 msgstr ""
 
 #. Translators: {0} is the name of a file that the user does not have permission to open.
-#: ../Pinta.Core/Managers/WorkspaceManager.cs:424
+#: ../Pinta.Core/Managers/WorkspaceManager.cs:409
 #, csharp-format
 msgid "You do not have access to '{0}'."
 msgstr ""
 
 #. Translators: {0} is the name of a file that the user does not have write permission for.
-#: ../Pinta/Actions/File/SaveDocumentImplementationAction.cs:188
+#: ../Pinta/Actions/File/SaveDocumentImplementationAction.cs:182
 #, csharp-format
 msgid ""
 "You do not have access to modify '{0}'. The file or folder may be read-only."
 msgstr ""
 
-#: ../Pinta/Actions/Layers/RotateZoomLayerAction.cs:118
-#: ../Pinta.Effects/Effects/JuliaFractalEffect.cs:136
-#: ../Pinta.Effects/Effects/MandelbrotFractalEffect.cs:160
+#: ../Pinta/Actions/Layers/RotateZoomLayerAction.cs:122
+#: ../Pinta.Effects/Effects/JuliaFractalEffect.cs:132
+#: ../Pinta.Effects/Effects/MandelbrotFractalEffect.cs:145
 #: ../Pinta.Tools/Tools/ZoomTool.cs:56
 msgid "Zoom"
 msgstr ""
 
-#: ../Pinta.Effects/Effects/ZoomBlurEffect.cs:24
+#: ../Pinta.Effects/Effects/ZoomBlurEffect.cs:22
 msgid "Zoom Blur"
 msgstr "Priartinimo suliejimas"
 
@@ -2263,43 +2100,57 @@ msgstr ""
 msgid "Zoom to Selection"
 msgstr ""
 
-#: ../Pinta/MainWindow.cs:343
+#: ../Pinta/MainWindow.cs:333
 msgid "_Adjustments"
 msgstr ""
 
-#: ../Pinta/MainWindow.cs:328
+#: ../Pinta/Actions/Edit/PasteAction.cs:171
+#: ../Pinta/Actions/File/CloseDocumentAction.cs:67
+msgid "_Cancel"
+msgstr ""
+
+#: ../Pinta/Actions/File/CloseDocumentAction.cs:68
+msgid "_Discard"
+msgstr ""
+
+#: ../Pinta/MainWindow.cs:318
 msgid "_Edit"
 msgstr "_Keisti"
 
-#: ../Pinta/MainWindow.cs:324
+#: ../Pinta/MainWindow.cs:314
 msgid "_File"
 msgstr "_Failas"
 
-#: ../Pinta/MainWindow.cs:362
+#: ../Pinta/MainWindow.cs:348
 msgid "_Help"
 msgstr "_Pagalba"
 
-#: ../Pinta/MainWindow.cs:336
+#: ../Pinta/MainWindow.cs:326
 msgid "_Image"
 msgstr "_Paveikslėlis"
 
-#: ../Pinta/MainWindow.cs:340
+#: ../Pinta/MainWindow.cs:330
 msgid "_Layers"
 msgstr "_Sluoksniai"
 
-#: Mono.Addins.Gui/gtk-gui/Mono.Addins.Gui.AddinInfoView.cs:281
-msgid "_Uninstall..."
+#: ../Pinta/Dialogs/ErrorDialog.cs:43 ../Pinta/Dialogs/ErrorDialog.cs:71
+#: ../Pinta.Gui.Addins/InstallDialog.cs:155
+msgid "_OK"
 msgstr ""
 
-#: ../Pinta/MainWindow.cs:332
+#: ../Pinta/Actions/File/CloseDocumentAction.cs:69
+msgid "_Save"
+msgstr ""
+
+#: ../Pinta/MainWindow.cs:322
 msgid "_View"
 msgstr "_Rodymas"
 
-#: ../Pinta/MainWindow.cs:358
+#: ../Pinta/MainWindow.cs:344
 msgid "_Window"
 msgstr "_Langas"
 
-#: ../Pinta/Actions/Help/AboutDialogAction.cs:71
+#: ../Pinta/Actions/Help/AboutDialogAction.cs:72
 msgid "by Pinta contributors"
 msgstr ""
 
@@ -2307,20 +2158,20 @@ msgstr ""
 msgid "draw;drawing;paint;painting;graphics;raster;2d;"
 msgstr ""
 
-#: ../Pinta/Main.cs:62
+#: ../Pinta/Main.cs:64
 msgid "number of threads to use for rendering"
 msgstr ""
 
-#: ../Pinta/Dialogs/NewImageDialog.cs:220
-#: ../Pinta/Dialogs/NewImageDialog.cs:236
-#: ../Pinta/Dialogs/ResizeCanvasDialog.cs:335
-#: ../Pinta/Dialogs/ResizeCanvasDialog.cs:341
-#: ../Pinta/Dialogs/ResizeImageDialog.cs:171
-#: ../Pinta/Dialogs/ResizeImageDialog.cs:177
+#: ../Pinta/Dialogs/NewImageDialog.cs:224
+#: ../Pinta/Dialogs/NewImageDialog.cs:243
+#: ../Pinta/Dialogs/ResizeCanvasDialog.cs:342
+#: ../Pinta/Dialogs/ResizeCanvasDialog.cs:348
+#: ../Pinta/Dialogs/ResizeImageDialog.cs:178
+#: ../Pinta/Dialogs/ResizeImageDialog.cs:184
 msgid "pixels"
 msgstr "tašk."
 
-#: ../Pinta/Actions/Help/AboutDialogAction.cs:62
+#: ../Pinta/Actions/Help/AboutDialogAction.cs:63
 msgid "translator-credits"
 msgstr ""
 "Launchpad Contributions:\n"
@@ -2339,7 +2190,7 @@ msgstr ""
 
 #. Translators: this is the auto-generated name for a duplicated layer.
 #. {0} is the name of the source layer. Example: "Layer 3 copy".
-#: ../Pinta.Core/Classes/DocumentLayers.cs:234
+#: ../Pinta.Core/Classes/DocumentLayers.cs:201
 #, csharp-format
 msgid "{0} copy"
 msgstr ""
@@ -2355,16 +2206,9 @@ msgstr ""
 msgid "{0} palette ({1})"
 msgstr ""
 
-#: Mono.Addins.Gui/Mono.Addins.Gui/AddinManagerDialog.cs:363
-#, csharp-format
-msgid "{0} update available"
-msgid_plural "{0} updates available"
-msgstr[0] ""
-msgstr[1] ""
-
 #. Translators: This specifies the format of the zoom percentage choices
 #. in the toolbar.
-#: ../Pinta.Core/Actions/ViewActions.cs:263
+#: ../Pinta.Core/Actions/ViewActions.cs:267
 #, csharp-format
 msgid "{0}%"
 msgstr ""
@@ -2387,3 +2231,10 @@ msgstr ""
 #~ msgid "Ctrl-left click to set origin, left click to paint."
 #~ msgstr ""
 #~ "Vald+kairys pelės klavišas kad palikti originalą, tik kaitys kad perkelti."
+
+#~ msgid ""
+#~ "Click and drag to draw gradient from primary to secondary color.  Right "
+#~ "click to reverse."
+#~ msgstr ""
+#~ "Spustelėkite ir tempkite, kad nupiešti perėjimą (gradientą) iš pirminės į "
+#~ "antrinę spalvą. Dešinys pelės mygtukas atvirkščiam efektui."
