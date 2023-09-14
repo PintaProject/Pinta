@@ -25,7 +25,6 @@
 // THE SOFTWARE.
 
 using System;
-using System.Diagnostics.CodeAnalysis;
 using Gtk;
 using Pinta.Core;
 using Pinta.Gui.Widgets;
@@ -35,9 +34,9 @@ namespace Pinta;
 public sealed class CanvasWindow : Grid
 {
 	private readonly Document document;
-	private Ruler horizontal_ruler;
-	private Ruler vertical_ruler;
-	private ScrolledWindow scrolled_window;
+	private readonly Ruler horizontal_ruler;
+	private readonly Ruler vertical_ruler;
+	private readonly ScrolledWindow scrolled_window;
 	private readonly EventControllerMotion motion_controller;
 	private PointD current_window_pos = new ();
 	private PointD current_canvas_pos = new ();
@@ -49,7 +48,44 @@ public sealed class CanvasWindow : Grid
 	{
 		this.document = document;
 
-		Build (document);
+		ColumnHomogeneous = false;
+		RowHomogeneous = false;
+
+		scrolled_window = new ScrolledWindow ();
+
+		var vp = new Viewport ();
+
+		var scroll_controller = Gtk.EventControllerScroll.New (EventControllerScrollFlags.Vertical);
+		scroll_controller.OnScroll += HandleScrollEvent;
+		vp.AddController (scroll_controller);
+
+		Canvas = new PintaCanvas (this, document) {
+			Name = "canvas",
+			CanFocus = true,
+		};
+
+		// Rulers
+		horizontal_ruler = new Ruler (Orientation.Horizontal) {
+			Metric = MetricType.Pixels
+		};
+
+		Attach (horizontal_ruler, 1, 0, 1, 1);
+
+		vertical_ruler = new Ruler (Orientation.Vertical) {
+			Metric = MetricType.Pixels
+		};
+
+		Attach (vertical_ruler, 0, 1, 1, 1);
+
+		scrolled_window.Hexpand = true;
+		scrolled_window.Vexpand = true;
+		Attach (scrolled_window, 1, 1, 1, 1);
+
+		scrolled_window.Child = vp;
+		vp.Child = Canvas;
+
+		horizontal_ruler.Visible = false;
+		vertical_ruler.Visible = false;
 
 		scrolled_window.Hadjustment!.OnValueChanged += UpdateRulerRange;
 		scrolled_window.Vadjustment!.OnValueChanged += UpdateRulerRange;
@@ -124,49 +160,6 @@ public sealed class CanvasWindow : Grid
 
 		horizontal_ruler.SetRange (lower.X, upper.X);
 		vertical_ruler.SetRange (lower.Y, upper.Y);
-	}
-
-	[MemberNotNull (nameof (Canvas), nameof (horizontal_ruler), nameof (vertical_ruler), nameof (scrolled_window))]
-	private void Build (Document document)
-	{
-		ColumnHomogeneous = false;
-		RowHomogeneous = false;
-
-		scrolled_window = new ScrolledWindow ();
-
-		var vp = new Viewport ();
-
-		var scroll_controller = Gtk.EventControllerScroll.New (EventControllerScrollFlags.Vertical);
-		scroll_controller.OnScroll += HandleScrollEvent;
-		vp.AddController (scroll_controller);
-
-		Canvas = new PintaCanvas (this, document) {
-			Name = "canvas",
-			CanFocus = true,
-		};
-
-		// Rulers
-		horizontal_ruler = new Ruler (Orientation.Horizontal) {
-			Metric = MetricType.Pixels
-		};
-
-		Attach (horizontal_ruler, 1, 0, 1, 1);
-
-		vertical_ruler = new Ruler (Orientation.Vertical) {
-			Metric = MetricType.Pixels
-		};
-
-		Attach (vertical_ruler, 0, 1, 1, 1);
-
-		scrolled_window.Hexpand = true;
-		scrolled_window.Vexpand = true;
-		Attach (scrolled_window, 1, 1, 1, 1);
-
-		scrolled_window.Child = vp;
-		vp.Child = Canvas;
-
-		horizontal_ruler.Visible = false;
-		vertical_ruler.Visible = false;
 	}
 
 	private bool HandleScrollEvent (EventControllerScroll controller, EventControllerScroll.ScrollSignalArgs args)
