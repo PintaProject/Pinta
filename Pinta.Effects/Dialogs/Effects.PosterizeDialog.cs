@@ -25,7 +25,6 @@
 // THE SOFTWARE.
 
 using System;
-using System.Diagnostics.CodeAnalysis;
 using Gtk;
 using Pinta.Core;
 using Pinta.Gui.Widgets;
@@ -34,10 +33,10 @@ namespace Pinta.Effects;
 
 public sealed class PosterizeDialog : Gtk.Dialog
 {
-	private HScaleSpinButtonWidget red_spinbox;
-	private HScaleSpinButtonWidget green_spinbox;
-	private HScaleSpinButtonWidget blue_spinbox;
-	private CheckButton link_button;
+	private readonly HScaleSpinButtonWidget red_spinbox;
+	private readonly HScaleSpinButtonWidget green_spinbox;
+	private readonly HScaleSpinButtonWidget blue_spinbox;
+	private readonly CheckButton link_button;
 
 	public int Red => red_spinbox.ValueAsInt;
 
@@ -55,7 +54,37 @@ public sealed class PosterizeDialog : Gtk.Dialog
 		this.AddCancelOkButtons ();
 		this.SetDefaultResponse (ResponseType.Ok);
 
-		Build ();
+		Resizable = false;
+
+		var content_area = this.GetContentAreaBox ();
+		content_area.WidthRequest = 400;
+		content_area.SetAllMargins (6);
+		content_area.Spacing = 6;
+
+		red_spinbox = new HScaleSpinButtonWidget {
+			Label = Translations.GetString ("Red")
+		};
+		InitSpinBox (red_spinbox);
+		content_area.Append (red_spinbox);
+
+		green_spinbox = new HScaleSpinButtonWidget {
+			Label = Translations.GetString ("Green")
+		};
+		InitSpinBox (green_spinbox);
+		content_area.Append (green_spinbox);
+
+		blue_spinbox = new HScaleSpinButtonWidget {
+			Label = Translations.GetString ("Blue")
+		};
+		InitSpinBox (blue_spinbox);
+		content_area.Append (blue_spinbox);
+
+		link_button = CheckButton.NewWithLabel (Translations.GetString ("Linked"));
+		link_button.Active = true;
+		content_area.Append (link_button);
+
+		DefaultWidth = 400;
+		DefaultHeight = 300;
 
 		red_spinbox.ValueChanged += HandleValueChanged;
 		green_spinbox.ValueChanged += HandleValueChanged;
@@ -93,41 +122,5 @@ public sealed class PosterizeDialog : Gtk.Dialog
 		spinbox.DefaultValue = 16;
 		spinbox.MaximumValue = 64;
 		spinbox.MinimumValue = 2;
-	}
-
-	[MemberNotNull (nameof (red_spinbox), nameof (green_spinbox), nameof (blue_spinbox), nameof (link_button))]
-	private void Build ()
-	{
-		Resizable = false;
-
-		var content_area = this.GetContentAreaBox ();
-		content_area.WidthRequest = 400;
-		content_area.SetAllMargins (6);
-		content_area.Spacing = 6;
-
-		red_spinbox = new HScaleSpinButtonWidget {
-			Label = Translations.GetString ("Red")
-		};
-		InitSpinBox (red_spinbox);
-		content_area.Append (red_spinbox);
-
-		green_spinbox = new HScaleSpinButtonWidget {
-			Label = Translations.GetString ("Green")
-		};
-		InitSpinBox (green_spinbox);
-		content_area.Append (green_spinbox);
-
-		blue_spinbox = new HScaleSpinButtonWidget {
-			Label = Translations.GetString ("Blue")
-		};
-		InitSpinBox (blue_spinbox);
-		content_area.Append (blue_spinbox);
-
-		link_button = CheckButton.NewWithLabel (Translations.GetString ("Linked"));
-		link_button.Active = true;
-		content_area.Append (link_button);
-
-		DefaultWidth = 400;
-		DefaultHeight = 300;
 	}
 }
