@@ -25,7 +25,6 @@
 // THE SOFTWARE.
 
 using System;
-using System.Diagnostics.CodeAnalysis;
 using Gtk;
 using Pinta.Core;
 
@@ -33,12 +32,30 @@ namespace Pinta.Gui.Widgets;
 
 public sealed class ComboBoxWidget : Box
 {
-	private Label label;
-	private ComboBoxText combobox;
+	private readonly Label label;
+	private readonly ComboBoxText combobox;
 
 	public ComboBoxWidget (string[] entries)
 	{
-		Build ();
+		const int spacing = 6;
+
+		// Section label + line
+		var hbox1 = new Box { Spacing = spacing };
+		hbox1.SetOrientation (Orientation.Horizontal);
+
+		label = new Label ();
+		label.AddCssClass (AdwaitaStyles.Title4);
+		hbox1.Append (label);
+
+		// Combobox
+		combobox = new ComboBoxText ();
+
+		// Main layout
+		// Main layout
+		SetOrientation (Orientation.Vertical);
+		Spacing = spacing;
+		Append (hbox1);
+		Append (combobox);
 
 		foreach (var s in entries)
 			combobox.AppendText (s);
@@ -61,28 +78,4 @@ public sealed class ComboBoxWidget : Box
 	public string ActiveText => combobox.GetActiveText ()!;
 
 	public event EventHandler? Changed;
-
-	[MemberNotNull (nameof (label), nameof (combobox))]
-	private void Build ()
-	{
-		const int spacing = 6;
-
-		// Section label + line
-		var hbox1 = new Box () { Spacing = spacing };
-		hbox1.SetOrientation (Orientation.Horizontal);
-
-		label = new Label ();
-		label.AddCssClass (AdwaitaStyles.Title4);
-		hbox1.Append (label);
-
-		// Combobox
-		combobox = new ComboBoxText ();
-
-		// Main layout
-		// Main layout
-		SetOrientation (Orientation.Vertical);
-		Spacing = spacing;
-		Append (hbox1);
-		Append (combobox);
-	}
 }
