@@ -25,7 +25,6 @@
 // THE SOFTWARE.
 
 using System;
-using System.Diagnostics.CodeAnalysis;
 using Gtk;
 using Pinta.Core;
 
@@ -33,22 +32,22 @@ namespace Pinta;
 
 public sealed class ResizeCanvasDialog : Dialog
 {
-	private CheckButton percentage_radio;
-	private CheckButton absolute_radio;
-	private SpinButton percentage_spinner;
-	private SpinButton width_spinner;
-	private SpinButton height_spinner;
-	private CheckButton aspect_checkbox;
+	private readonly CheckButton percentage_radio;
+	private readonly CheckButton absolute_radio;
+	private readonly SpinButton percentage_spinner;
+	private readonly SpinButton width_spinner;
+	private readonly SpinButton height_spinner;
+	private readonly CheckButton aspect_checkbox;
 
-	private Button nw_button;
-	private Button n_button;
-	private Button ne_button;
-	private Button w_button;
-	private Button e_button;
-	private Button center_button;
-	private Button sw_button;
-	private Button s_button;
-	private Button se_button;
+	private readonly Button nw_button;
+	private readonly Button n_button;
+	private readonly Button ne_button;
+	private readonly Button w_button;
+	private readonly Button e_button;
+	private readonly Button center_button;
+	private readonly Button sw_button;
+	private readonly Button s_button;
+	private readonly Button se_button;
 
 	private bool value_changing;
 	private Anchor anchor;
@@ -61,7 +60,89 @@ public sealed class ResizeCanvasDialog : Dialog
 		this.AddCancelOkButtons ();
 		this.SetDefaultResponse (ResponseType.Ok);
 
-		Build ();
+		IconName = Resources.Icons.ImageResizeCanvas;
+
+		DefaultWidth = 300;
+		DefaultHeight = 200;
+
+		percentage_radio = CheckButton.NewWithLabel (Translations.GetString ("By percentage:"));
+		absolute_radio = CheckButton.NewWithLabel (Translations.GetString ("By absolute size:"));
+		absolute_radio.SetGroup (percentage_radio);
+
+		percentage_spinner = SpinButton.NewWithRange (1, int.MaxValue, 1);
+		width_spinner = SpinButton.NewWithRange (1, int.MaxValue, 1);
+		height_spinner = SpinButton.NewWithRange (1, int.MaxValue, 1);
+
+		aspect_checkbox = CheckButton.NewWithLabel (Translations.GetString ("Maintain aspect ratio"));
+
+		const int spacing = 6;
+		var main_vbox = new Box { Spacing = spacing };
+		main_vbox.SetOrientation (Orientation.Vertical);
+
+		var hbox_percent = new Box { Spacing = spacing };
+		hbox_percent.SetOrientation (Orientation.Horizontal);
+		hbox_percent.Append (percentage_radio);
+		hbox_percent.Append (percentage_spinner);
+		hbox_percent.Append (Label.New ("%"));
+		main_vbox.Append (hbox_percent);
+
+		main_vbox.Append (absolute_radio);
+
+		var hw_grid = new Grid { RowSpacing = spacing, ColumnSpacing = spacing, ColumnHomogeneous = false };
+		var width_label = Label.New (Translations.GetString ("Width:"));
+		width_label.Halign = Align.End;
+		hw_grid.Attach (width_label, 0, 0, 1, 1);
+		hw_grid.Attach (width_spinner, 1, 0, 1, 1);
+		hw_grid.Attach (Label.New (Translations.GetString ("pixels")), 2, 0, 1, 1);
+
+		var height_label = Label.New (Translations.GetString ("Height:"));
+		height_label.Halign = Align.End;
+		hw_grid.Attach (height_label, 0, 1, 1, 1);
+		hw_grid.Attach (height_spinner, 1, 1, 1, 1);
+		hw_grid.Attach (Label.New (Translations.GetString ("pixels")), 2, 1, 1, 1);
+
+		main_vbox.Append (hw_grid);
+
+		main_vbox.Append (aspect_checkbox);
+		var sep = new Separator ();
+		sep.SetOrientation (Orientation.Horizontal);
+		main_vbox.Append (sep);
+
+		var align_label = Label.New (Translations.GetString ("Anchor:"));
+		align_label.Xalign = 0;
+		main_vbox.Append (align_label);
+
+		nw_button = CreateAnchorButton ();
+		n_button = CreateAnchorButton ();
+		ne_button = CreateAnchorButton ();
+		w_button = CreateAnchorButton ();
+		e_button = CreateAnchorButton ();
+		center_button = CreateAnchorButton ();
+		sw_button = CreateAnchorButton ();
+		s_button = CreateAnchorButton ();
+		se_button = CreateAnchorButton ();
+
+		var grid = new Grid {
+			RowSpacing = spacing,
+			ColumnSpacing = spacing,
+			Halign = Align.Center,
+			Valign = Align.Center
+		};
+		grid.Attach (nw_button, 0, 0, 1, 1);
+		grid.Attach (n_button, 1, 0, 1, 1);
+		grid.Attach (ne_button, 2, 0, 1, 1);
+		grid.Attach (w_button, 0, 1, 1, 1);
+		grid.Attach (center_button, 1, 1, 1, 1);
+		grid.Attach (e_button, 2, 1, 1, 1);
+		grid.Attach (sw_button, 0, 2, 1, 1);
+		grid.Attach (s_button, 1, 2, 1, 1);
+		grid.Attach (se_button, 2, 2, 1, 1);
+
+		main_vbox.Append (grid);
+
+		var content_area = this.GetContentAreaBox ();
+		content_area.SetAllMargins (12);
+		content_area.Append (main_vbox);
 
 		aspect_checkbox.Active = true;
 
@@ -303,99 +384,9 @@ public sealed class ResizeCanvasDialog : Dialog
 		}
 	}
 
-	[MemberNotNull (nameof (percentage_radio), nameof (absolute_radio), nameof (percentage_spinner), nameof (width_spinner), nameof (height_spinner),
-			nameof (aspect_checkbox), nameof (nw_button), nameof (n_button), nameof (ne_button), nameof (e_button), nameof (se_button),
-			nameof (s_button), nameof (sw_button), nameof (w_button), nameof (center_button))]
-	private void Build ()
-	{
-		IconName = Resources.Icons.ImageResizeCanvas;
-
-		DefaultWidth = 300;
-		DefaultHeight = 200;
-
-		percentage_radio = CheckButton.NewWithLabel (Translations.GetString ("By percentage:"));
-		absolute_radio = CheckButton.NewWithLabel (Translations.GetString ("By absolute size:"));
-		absolute_radio.SetGroup (percentage_radio);
-
-		percentage_spinner = SpinButton.NewWithRange (1, int.MaxValue, 1);
-		width_spinner = SpinButton.NewWithRange (1, int.MaxValue, 1);
-		height_spinner = SpinButton.NewWithRange (1, int.MaxValue, 1);
-
-		aspect_checkbox = CheckButton.NewWithLabel (Translations.GetString ("Maintain aspect ratio"));
-
-		const int spacing = 6;
-		var main_vbox = new Box () { Spacing = spacing };
-		main_vbox.SetOrientation (Orientation.Vertical);
-
-		var hbox_percent = new Box () { Spacing = spacing };
-		hbox_percent.SetOrientation (Orientation.Horizontal);
-		hbox_percent.Append (percentage_radio);
-		hbox_percent.Append (percentage_spinner);
-		hbox_percent.Append (Label.New ("%"));
-		main_vbox.Append (hbox_percent);
-
-		main_vbox.Append (absolute_radio);
-
-		var hw_grid = new Grid () { RowSpacing = spacing, ColumnSpacing = spacing, ColumnHomogeneous = false };
-		var width_label = Label.New (Translations.GetString ("Width:"));
-		width_label.Halign = Align.End;
-		hw_grid.Attach (width_label, 0, 0, 1, 1);
-		hw_grid.Attach (width_spinner, 1, 0, 1, 1);
-		hw_grid.Attach (Label.New (Translations.GetString ("pixels")), 2, 0, 1, 1);
-
-		var height_label = Label.New (Translations.GetString ("Height:"));
-		height_label.Halign = Align.End;
-		hw_grid.Attach (height_label, 0, 1, 1, 1);
-		hw_grid.Attach (height_spinner, 1, 1, 1, 1);
-		hw_grid.Attach (Label.New (Translations.GetString ("pixels")), 2, 1, 1, 1);
-
-		main_vbox.Append (hw_grid);
-
-		main_vbox.Append (aspect_checkbox);
-		var sep = new Separator ();
-		sep.SetOrientation (Orientation.Horizontal);
-		main_vbox.Append (sep);
-
-		var align_label = Label.New (Translations.GetString ("Anchor:"));
-		align_label.Xalign = 0;
-		main_vbox.Append (align_label);
-
-		nw_button = CreateAnchorButton ();
-		n_button = CreateAnchorButton ();
-		ne_button = CreateAnchorButton ();
-		w_button = CreateAnchorButton ();
-		e_button = CreateAnchorButton ();
-		center_button = CreateAnchorButton ();
-		sw_button = CreateAnchorButton ();
-		s_button = CreateAnchorButton ();
-		se_button = CreateAnchorButton ();
-
-		var grid = new Grid {
-			RowSpacing = spacing,
-			ColumnSpacing = spacing,
-			Halign = Align.Center,
-			Valign = Align.Center
-		};
-		grid.Attach (nw_button, 0, 0, 1, 1);
-		grid.Attach (n_button, 1, 0, 1, 1);
-		grid.Attach (ne_button, 2, 0, 1, 1);
-		grid.Attach (w_button, 0, 1, 1, 1);
-		grid.Attach (center_button, 1, 1, 1, 1);
-		grid.Attach (e_button, 2, 1, 1, 1);
-		grid.Attach (sw_button, 0, 2, 1, 1);
-		grid.Attach (s_button, 1, 2, 1, 1);
-		grid.Attach (se_button, 2, 2, 1, 1);
-
-		main_vbox.Append (grid);
-
-		var content_area = this.GetContentAreaBox ();
-		content_area.SetAllMargins (12);
-		content_area.Append (main_vbox);
-	}
-
 	private static Button CreateAnchorButton ()
 	{
-		return new Button () { WidthRequest = 30, HeightRequest = 30 };
+		return new Button { WidthRequest = 30, HeightRequest = 30 };
 	}
 	#endregion
 }
