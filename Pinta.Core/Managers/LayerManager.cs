@@ -29,43 +29,33 @@ using System.ComponentModel;
 
 namespace Pinta.Core;
 
-public class LayerManager
+public sealed class LayerManager
 {
-	#region Protected Methods
-	protected internal void OnLayerAdded ()
+	internal void OnLayerAdded ()
 	{
-		if (LayerAdded != null)
-			LayerAdded.Invoke (this, EventArgs.Empty);
+		LayerAdded.Invoke (this, EventArgs.Empty);
 	}
 
-	protected internal void OnLayerRemoved ()
+	internal void OnLayerRemoved ()
 	{
-		if (LayerRemoved != null)
-			LayerRemoved.Invoke (this, EventArgs.Empty);
+		LayerRemoved.Invoke (this, EventArgs.Empty);
 	}
 
-	protected internal void OnSelectedLayerChanged ()
+	internal void OnSelectedLayerChanged ()
 	{
-		if (SelectedLayerChanged != null)
-			SelectedLayerChanged.Invoke (this, EventArgs.Empty);
+		SelectedLayerChanged.Invoke (this, EventArgs.Empty);
 	}
-	#endregion
 
-	#region Private Methods
 	internal void RaiseLayerPropertyChangedEvent (object? sender, PropertyChangedEventArgs e)
 	{
-		if (LayerPropertyChanged != null)
-			LayerPropertyChanged (sender, e);
+		LayerPropertyChanged (sender, e);
 
 		//TODO Get the workspace to subscribe to this event, and invalidate itself.
 		PintaCore.Workspace.Invalidate ();
 	}
-	#endregion
 
-	#region Events
-	public event EventHandler? LayerAdded;
-	public event EventHandler? LayerRemoved;
-	public event EventHandler? SelectedLayerChanged;
-	public event PropertyChangedEventHandler? LayerPropertyChanged;
-	#endregion
+	public event EventHandler LayerAdded = delegate { };
+	public event EventHandler LayerRemoved = delegate { };
+	public event EventHandler SelectedLayerChanged = delegate { };
+	public event PropertyChangedEventHandler LayerPropertyChanged = delegate { };
 }
