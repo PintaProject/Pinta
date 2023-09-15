@@ -25,7 +25,6 @@
 // THE SOFTWARE.
 
 using System;
-using System.Diagnostics.CodeAnalysis;
 using Gtk;
 using Pinta.Core;
 
@@ -33,19 +32,11 @@ namespace Pinta.Gui.Widgets;
 
 public sealed class ReseedButtonWidget : Box
 {
-	private Button button;
+	private readonly Button button;
 
 	public event EventHandler? Clicked;
 
 	public ReseedButtonWidget ()
-	{
-		Build ();
-
-		button.OnClicked += (_, _) => Clicked?.Invoke (this, EventArgs.Empty);
-	}
-
-	[MemberNotNull (nameof (button))]
-	private void Build ()
 	{
 		const int spacing = 6;
 
@@ -70,6 +61,8 @@ public sealed class ReseedButtonWidget : Box
 		Spacing = spacing;
 		Append (label);
 		Append (button);
+
+		button.OnClicked += (_, _) => Clicked?.Invoke (this, EventArgs.Empty);
 	}
 }
 
