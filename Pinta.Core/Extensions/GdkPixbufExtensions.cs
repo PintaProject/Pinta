@@ -47,7 +47,8 @@ public static class GdkPixbufExtensions
 	public static byte[] SaveToBuffer (this Pixbuf pixbuf, string type)
 	{
 		SaveToBufferv (pixbuf.Handle, out IntPtr buffer, out uint buffer_size, type, IntPtr.Zero, IntPtr.Zero, out var error);
-		GLib.Error.ThrowOnError (error);
+		if (!error.IsInvalid)
+			throw new GLib.GException (error);
 
 		var result = new byte[buffer_size];
 		Marshal.Copy (buffer, result, 0, (int) buffer_size);
