@@ -33,10 +33,10 @@ using Pinta.Core;
 
 namespace Pinta.Gui.Widgets;
 
-public class ColorGradientWidget : Gtk.DrawingArea
+public sealed class ColorGradientWidget : Gtk.DrawingArea
 {
-	private const double xpad = 0.15;       // gradient horizontal padding							
-	private const double ypad = 0.03;       // gradient vertical padding
+	private const double X_pad = 0.15; // gradient horizontal padding
+	private const double Y_pad = 0.03; // gradient vertical padding
 
 	private double[] vals;
 	private PointI last_mouse_pos = new (0, 0);
@@ -67,10 +67,10 @@ public class ColorGradientWidget : Gtk.DrawingArea
 	private RectangleD GradientRectangle {
 		get {
 			var rect = GetAllocation ();
-			var x = rect.X + xpad * rect.Width;
-			var y = rect.Y + ypad * rect.Height;
-			var width = (1 - 2 * xpad) * rect.Width;
-			var height = (1 - 2 * ypad) * rect.Height;
+			var x = rect.X + X_pad * rect.Width;
+			var y = rect.Y + Y_pad * rect.Height;
+			var width = (1 - 2 * X_pad) * rect.Width;
+			var height = (1 - 2 * Y_pad) * rect.Height;
 
 			return new RectangleD (x, y, width, height);
 		}
@@ -123,7 +123,7 @@ public class ColorGradientWidget : Gtk.DrawingArea
 		var rect = GradientRectangle;
 		var all = GetAllocation ();
 
-		return all.Y + ypad * all.Height + rect.Height * (255 - val) / 255;
+		return all.Y + Y_pad * all.Height + rect.Height * (255 - val) / 255;
 	}
 
 	private double NormalizeY (int index, double py)
@@ -147,7 +147,7 @@ public class ColorGradientWidget : Gtk.DrawingArea
 		var rect = GradientRectangle;
 		var all = GetAllocation ();
 
-		py -= all.Y + ypad * all.Height;
+		py -= all.Y + Y_pad * all.Height;
 		return ((int) (255 * (rect.Height - py) / rect.Height));
 	}
 
@@ -264,22 +264,35 @@ public class ColorGradientWidget : Gtk.DrawingArea
 			var hover = ((index == i)) && (all.ContainsPoint (px, py) || ValueIndex != -1);
 			var color = hover ? hover_color : inactive_color;
 
-			// left triangle
-			var points = new PointD[] { new PointD (rect.X, y),
-						    new PointD (rect.X - xpad * rect.Width, y + ypad * rect.Height),
-						    new PointD (rect.X - xpad * rect.Width, y - ypad * rect.Height)};
-
-			g.FillPolygonal (points, color);
-
-			var x = rect.X + rect.Width;
-
-			// right triangle
-			var points2 = new PointD[] { new PointD (x , y),
-						     new PointD (x + xpad * rect.Width, y + ypad * rect.Height),
-						     new PointD (x + xpad * rect.Width, y - ypad * rect.Height)};
-
-			g.FillPolygonal (points2, color);
+			DrawLeftTriangle (g, rect, y, color);
+			DrawRightTriangle (g, rect, y, color);
 		}
+	}
+
+	private static void DrawRightTriangle (Context g, RectangleD rect, double y, Color color)
+	{
+		var x = rect.X + rect.Width;
+
+		// right triangle
+		ReadOnlySpan<PointD> points = stackalloc PointD[] {
+			new PointD (x, y),
+			new PointD (x + X_pad * rect.Width, y + Y_pad * rect.Height),
+			new PointD (x + X_pad * rect.Width, y - Y_pad * rect.Height),
+		};
+
+		g.FillPolygonal (points, color);
+	}
+
+	private static void DrawLeftTriangle (Context g, RectangleD rect, double y, Color color)
+	{
+		// left triangle
+		ReadOnlySpan<PointD> points = stackalloc PointD[] {
+			new PointD (rect.X, y),
+			new PointD (rect.X - X_pad * rect.Width, y + Y_pad * rect.Height),
+			new PointD (rect.X - X_pad * rect.Width, y - Y_pad * rect.Height),
+		};
+
+		g.FillPolygonal (points, color);
 	}
 
 	private void Draw (Context g)
@@ -288,7 +301,7 @@ public class ColorGradientWidget : Gtk.DrawingArea
 		DrawTriangles (g);
 	}
 
-	protected void OnValueChanged (int index) => ValueChanged?.Invoke (this, new IndexEventArgs (index));
+	private void OnValueChanged (int index) => ValueChanged?.Invoke (this, new IndexEventArgs (index));
 
 	public event EventHandler<IndexEventArgs>? ValueChanged;
 }
