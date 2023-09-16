@@ -881,19 +881,19 @@ namespace Pinta.Core
 			return scans.MoveToImmutable ();
 		}
 
-		public static Path CreatePolygonPath (this Context g, PointI[][] polygonSet)
+		public static Path CreatePolygonPath (this Context g, IReadOnlyList<IReadOnlyList<PointI>> polygonSet)
 		{
 			g.Save ();
 			PointI p;
 
-			for (int i = 0; i < polygonSet.Length; i++) {
-				if (polygonSet[i].Length == 0)
+			for (int i = 0; i < polygonSet.Count; i++) {
+				if (polygonSet[i].Count == 0)
 					continue;
 
 				p = polygonSet[i][0];
 				g.MoveTo (p.X, p.Y);
 
-				for (int j = 1; j < polygonSet[i].Length; j++) {
+				for (int j = 1; j < polygonSet[i].Count; j++) {
 					p = polygonSet[i][j];
 					g.LineTo (p.X, p.Y);
 				}

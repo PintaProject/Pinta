@@ -151,13 +151,13 @@ public sealed class DocumentSelection
 	/// </summary>
 	/// <param name="clipperPolygons">A Clipper Polygon collection.</param>
 	/// <returns>A Pinta Polygon set.</returns>
-	public static PointI[][] ConvertToPolygonSet (List<List<IntPoint>> clipperPolygons)
+	public static IReadOnlyList<IReadOnlyList<PointI>> ConvertToPolygonSet (IReadOnlyList<IReadOnlyList<IntPoint>> clipperPolygons)
 	{
 		var resultingPolygonSet = new PointI[clipperPolygons.Count][];
 
 		int polygonNumber = 0;
 
-		foreach (List<IntPoint> ipL in clipperPolygons) {
+		foreach (var ipL in clipperPolygons) {
 			resultingPolygonSet[polygonNumber] = new PointI[ipL.Count];
 
 			int pointNumber = 0;
@@ -181,8 +181,8 @@ public sealed class DocumentSelection
 	{
 		var newPolygons = new List<List<IntPoint>> ();
 
-		foreach (List<IntPoint> ipL in SelectionPolygons) {
-			List<IntPoint> newPolygon = new List<IntPoint> ();
+		foreach (var ipL in SelectionPolygons) {
+			var newPolygon = new List<IntPoint> ();
 
 			foreach (IntPoint ip in ipL) {
 				double x = ip.X;
