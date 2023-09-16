@@ -301,7 +301,7 @@ public sealed class ColorGradientWidget : Gtk.DrawingArea
 		DrawTriangles (g);
 	}
 
-	private void OnValueChanged (int index) => ValueChanged.Invoke (this, new IndexEventArgs (index));
+	private void OnValueChanged (int index) => ValueChanged?.Invoke (this, new IndexEventArgs (index));
 
-	public event EventHandler<IndexEventArgs> ValueChanged = delegate { };
+	public event EventHandler<IndexEventArgs>? ValueChanged;
 }
