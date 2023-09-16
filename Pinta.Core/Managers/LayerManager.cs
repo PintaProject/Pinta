@@ -33,29 +33,29 @@ public sealed class LayerManager
 {
 	internal void OnLayerAdded ()
 	{
-		LayerAdded.Invoke (this, EventArgs.Empty);
+		LayerAdded?.Invoke (this, EventArgs.Empty);
 	}
 
 	internal void OnLayerRemoved ()
 	{
-		LayerRemoved.Invoke (this, EventArgs.Empty);
+		LayerRemoved?.Invoke (this, EventArgs.Empty);
 	}
 
 	internal void OnSelectedLayerChanged ()
 	{
-		SelectedLayerChanged.Invoke (this, EventArgs.Empty);
+		SelectedLayerChanged?.Invoke (this, EventArgs.Empty);
 	}
 
 	internal void RaiseLayerPropertyChangedEvent (object? sender, PropertyChangedEventArgs e)
 	{
-		LayerPropertyChanged (sender, e);
+		LayerPropertyChanged?.Invoke (sender, e);
 
 		//TODO Get the workspace to subscribe to this event, and invalidate itself.
 		PintaCore.Workspace.Invalidate ();
 	}
 
-	public event EventHandler LayerAdded = delegate { };
-	public event EventHandler LayerRemoved = delegate { };
-	public event EventHandler SelectedLayerChanged = delegate { };
-	public event PropertyChangedEventHandler LayerPropertyChanged = delegate { };
+	public event EventHandler? LayerAdded;
+	public event EventHandler? LayerRemoved;
+	public event EventHandler? SelectedLayerChanged;
+	public event PropertyChangedEventHandler? LayerPropertyChanged;
 }
