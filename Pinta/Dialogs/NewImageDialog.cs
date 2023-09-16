@@ -26,7 +26,6 @@
 
 using System;
 using System.Collections.Generic;
-using System.Diagnostics.CodeAnalysis;
 using System.Linq;
 using Cairo;
 using Gtk;
@@ -42,7 +41,7 @@ public sealed class NewImageDialog : Dialog
 
 	private readonly Size clipboard_size;
 
-	private List<Size> preset_sizes;
+	private readonly List<Size> preset_sizes;
 	private readonly PreviewArea preview;
 
 	private readonly Gtk.StringList preset_dropdown_model;
@@ -84,7 +83,13 @@ public sealed class NewImageDialog : Dialog
 		has_clipboard = isClipboardSize;
 		clipboard_size = new Size (initialWidth, initialHeight);
 
-		InitializePresets ();
+		// Some arbitrary presets
+		preset_sizes = new List<Size> {
+			new Size (640, 480),
+			new Size (800, 600),
+			new Size (1024, 768),
+			new Size (1600, 1200)
+		};
 
 		// Layout table for preset, width, and height
 		var layout_grid = new Grid {
@@ -347,18 +352,6 @@ public sealed class NewImageDialog : Dialog
 
 			return new Size (width, height);
 		}
-	}
-
-	[MemberNotNull (nameof (preset_sizes))]
-	private void InitializePresets ()
-	{
-		// Some arbitrary presets
-		preset_sizes = new List<Size> ();
-
-		preset_sizes.Add (new Size (640, 480));
-		preset_sizes.Add (new Size (800, 600));
-		preset_sizes.Add (new Size (1024, 768));
-		preset_sizes.Add (new Size (1600, 1200));
 	}
 
 	private void WireUpEvents ()
