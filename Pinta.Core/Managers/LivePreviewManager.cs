@@ -1,21 +1,21 @@
-// 
+//
 // LivePreviewManager.cs
-//  
+//
 // Author:
 //       Greg Lowe <greg@vis.net.nz>
-// 
+//
 // Copyright (c) 2010 Greg Lowe
-// 
+//
 // Permission is hereby granted, free of charge, to any person obtaining a copy
 // of this software and associated documentation files (the "Software"), to deal
 // in the Software without restriction, including without limitation the rights
 // to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
 // copies of the Software, and to permit persons to whom the Software is
 // furnished to do so, subject to the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be included in
 // all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
 // IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
 // FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
@@ -149,44 +149,7 @@ public sealed class LivePreviewManager
 		}
 	}
 
-	// Used by the workspace drawing area expose render loop.
-	// Takes care of the clipping.
-	public void RenderLivePreviewLayer (Cairo.Context ctx, double opacity)
-	{
-		if (!IsEnabled)
-			throw new InvalidOperationException ("Tried to render a live preview after live preview has ended.");
-
-		// TODO remove seam around selection during live preview.
-
-		ctx.Save ();
-		if (selection_path != null) {
-
-			// Paint area outsize of the selection path, with the pre-effect image.
-			var imageSize = PintaCore.Workspace.ImageSize;
-			ctx.Rectangle (0, 0, imageSize.Width, imageSize.Height);
-			ctx.AppendPath (selection_path);
-			ctx.Clip ();
-			layer.Draw (ctx, layer.Surface, opacity);
-			ctx.ResetClip ();
-
-			// Paint area inside the selection path, with the post-effect image.
-			ctx.AppendPath (selection_path);
-			ctx.Clip ();
-
-			layer.Draw (ctx, live_preview_surface, opacity);
-			ctx.PaintWithAlpha (opacity);
-
-			ctx.AppendPath (selection_path);
-			ctx.FillRule = Cairo.FillRule.EvenOdd;
-			ctx.Clip ();
-		} else {
-
-			layer.Draw (ctx, live_preview_surface, opacity);
-		}
-		ctx.Restore ();
-	}
-
-	// Method asks render task to complete, and then returns immediately. The cancel 
+	// Method asks render task to complete, and then returns immediately. The cancel
 	// is not actually complete until the LivePreviewRenderCompleted event is fired.
 	void Cancel ()
 	{
@@ -385,7 +348,7 @@ public sealed class LivePreviewManager
 		int width = (int) Math.Ceiling (x2) - x;
 		int height = (int) Math.Ceiling (y2) - y;
 
-		// Tell GTK to expose the drawing area.			
+		// Tell GTK to expose the drawing area.
 		PintaCore.Workspace.ActiveWorkspace.InvalidateWindowRect (new RectangleI (x, y, width, height));
 	}
 }
