@@ -1,21 +1,21 @@
-// 
+//
 // BaseEditEngine.cs
-//  
+//
 // Author:
 //       Andrew Davis <andrew.3.1415@gmail.com>
-// 
+//
 // Copyright (c) 2014 Andrew Davis, GSoC 2014
-// 
+//
 // Permission is hereby granted, free of charge, to any person obtaining a copy
 // of this software and associated documentation files (the "Software"), to deal
 // in the Software without restriction, including without limitation the rights
 // to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
 // copies of the Software, and to permit persons to whom the Software is
 // furnished to do so, subject to the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be included in
 // all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
 // IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
 // FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
@@ -176,7 +176,7 @@ public abstract class BaseEditEngine
 		SEngines.SelectMany (engine => engine.ControlPointHandles).Append (hover_handle);
 	private readonly MoveHandle hover_handle = new ();
 
-	private readonly Gdk.Cursor grab_cursor = Gdk.Cursor.NewFromName (Pinta.Resources.StandardCursors.Grab, null);
+	private readonly Gdk.Cursor grab_cursor = GdkExtensions.CursorFromName (Pinta.Resources.StandardCursors.Grab);
 
 	protected bool changing_tension = false;
 	protected PointD last_mouse_pos = new (0d, 0d);
@@ -353,7 +353,7 @@ public abstract class BaseEditEngine
 				int previousSSI = SelectedShapeIndex;
 				ActivateCorrespondingTool (selEngine.ShapeType, true);
 				SelectedShapeIndex = previousSSI;
-				//Draw the updated shape with organized points generation (for mouse detection). 
+				//Draw the updated shape with organized points generation (for mouse detection).
 				DrawActiveShape (true, false, true, false, true);
 			};
 		}

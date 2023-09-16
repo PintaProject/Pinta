@@ -1,21 +1,21 @@
-// 
+//
 // OraFormat.cs
-//  
+//
 // Author:
 //       Maia Kozheva <sikon@ubuntu.com>
-// 
+//
 // Copyright (c) 2010 Maia Kozheva <sikon@ubuntu.com>
-// 
+//
 // Permission is hereby granted, free of charge, to any person obtaining a copy
 // of this software and associated documentation files (the "Software"), to deal
 // in the Software without restriction, including without limitation the rights
 // to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
 // copies of the Software, and to permit persons to whom the Software is
 // furnished to do so, subject to the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be included in
 // all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
 // IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
 // FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
@@ -102,7 +102,7 @@ public sealed class OraFormat : IImageImporter, IImageExporter
 				layer.Opacity = double.Parse (GetAttribute (layerElement, "opacity", "1"), GetFormat ());
 				layer.BlendMode = StandardToBlendMode (GetAttribute (layerElement, "composite-op", "svg:src-over"));
 
-				var pb = GdkPixbuf.Pixbuf.NewFromFile (tmp_file);
+				var pb = GdkPixbuf.Pixbuf.NewFromFile (tmp_file)!; // NRT: only nullable when an error is thrown
 				var g = new Context (layer.Surface);
 				g.DrawPixbuf (pb, x, y);
 

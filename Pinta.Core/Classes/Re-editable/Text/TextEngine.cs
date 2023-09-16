@@ -72,7 +72,7 @@ public sealed class TextEngine
 			State = State,
 			current_pos = current_pos,
 			selection_start = selection_start,
-			Font = Font.Copy (),
+			Font = Font.Copy ()!, // NRT: pango_font_description_copy only returns null when given nullptr
 			Alignment = Alignment,
 			Underline = Underline,
 			Origin = new PointI (Origin.X, Origin.Y)

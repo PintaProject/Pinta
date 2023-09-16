@@ -47,7 +47,7 @@ public class GdkPixbufFormat : IImageImporter, IImageExporter
 		// Handle any EXIF orientation flags
 		using (var fs = file.Read (cancellable: null)) {
 			try {
-				bg = Pixbuf.NewFromStream (fs, cancellable: null);
+				bg = Pixbuf.NewFromStream (fs, cancellable: null)!; // NRT: only nullable when an error is thrown
 			} finally {
 				fs.Close (null);
 			}

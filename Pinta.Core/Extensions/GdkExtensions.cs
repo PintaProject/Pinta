@@ -254,4 +254,16 @@ public static class GdkExtensions
 
 		return result;
 	}
+
+	/// <summary>
+	/// Wrapper for Gdk.Cursor.NewFromName which handles errors instead of returning null.
+	/// </summary>
+	public static Gdk.Cursor CursorFromName (string name)
+	{
+		var cursor = Gdk.Cursor.NewFromName (name, null);
+		if (cursor is null)
+			throw new ArgumentException ("Cursor does not exist", nameof (name));
+
+		return cursor;
+	}
 }

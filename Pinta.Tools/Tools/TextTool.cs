@@ -391,7 +391,7 @@ public sealed class TextTool : BaseTool
 	private void UpdateFont ()
 	{
 		if (PintaCore.Workspace.HasOpenDocuments) {
-			var font = font_button.GetFontDesc ().Copy ();
+			var font = font_button.GetFontDesc ()!.Copy ()!; // NRT: Only nullable when nullptr is passed.
 			font.SetWeight (bold_btn.Active ? Pango.Weight.Bold : Pango.Weight.Normal);
 			font.SetStyle (italic_btn.Active ? Pango.Style.Italic : Pango.Style.Normal);
 
