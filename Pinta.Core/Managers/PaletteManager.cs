@@ -198,16 +198,14 @@ public class PaletteManager : IPaletteService
 	#region Protected Methods
 	protected void OnPrimaryColorChanged ()
 	{
-		if (PrimaryColorChanged != null)
-			PrimaryColorChanged.Invoke (this, EventArgs.Empty);
+		PrimaryColorChanged?.Invoke (this, EventArgs.Empty);
 	}
 
 	protected void OnRecentColorsChanged () => RecentColorsChanged?.Invoke (this, EventArgs.Empty);
 
 	protected void OnSecondaryColorChanged ()
 	{
-		if (SecondaryColorChanged != null)
-			SecondaryColorChanged.Invoke (this, EventArgs.Empty);
+		SecondaryColorChanged?.Invoke (this, EventArgs.Empty);
 	}
 	#endregion
 

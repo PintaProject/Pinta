@@ -416,8 +416,7 @@ public class Document
 	#region Private Methods
 	private void OnSelectionChanged ()
 	{
-		if (SelectionChanged != null)
-			SelectionChanged.Invoke (this, EventArgs.Empty);
+		SelectionChanged?.Invoke (this, EventArgs.Empty);
 	}
 	#endregion
 
