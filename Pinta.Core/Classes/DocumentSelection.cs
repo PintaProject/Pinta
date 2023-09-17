@@ -49,8 +49,7 @@ public sealed class DocumentSelection
 			_visible = value;
 
 			// Notify any listeners.
-			if (SelectionModified != null)
-				SelectionModified.Invoke (this, EventArgs.Empty);
+			SelectionModified?.Invoke (this, EventArgs.Empty);
 		}
 	}
 
@@ -77,8 +76,7 @@ public sealed class DocumentSelection
 		selection_path = null;
 
 		// Notify any listeners.
-		if (SelectionModified != null)
-			SelectionModified.Invoke (this, EventArgs.Empty);
+		SelectionModified?.Invoke (this, EventArgs.Empty);
 	}
 
 	public void Clip (Context g)

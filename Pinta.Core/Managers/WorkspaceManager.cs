@@ -373,8 +373,7 @@ public sealed class WorkspaceManager : IWorkspaceService
 
 	private void OnSelectionChanged ()
 	{
-		if (SelectionChanged != null)
-			SelectionChanged.Invoke (this, EventArgs.Empty);
+		SelectionChanged?.Invoke (this, EventArgs.Empty);
 	}
 
 	private static void ShowOpenFileErrorDialog (Window parent, string filename, string primary_text, string details)
