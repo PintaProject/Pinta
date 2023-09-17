@@ -57,8 +57,8 @@ partial class UserBlendOps
 	// i = z * 3;
 	// (x / z) = ((x * masTable[i]) + masTable[i + 1]) >> masTable[i + 2)
 	private static readonly uint[] masTable =
-        {
-            0x00000000, 0x00000000, 0,  // 0
+	{
+	    0x00000000, 0x00000000, 0,  // 0
             0x00000001, 0x00000000, 0,  // 1
             0x00000001, 0x00000000, 1,  // 2
             0xAAAAAAAB, 0x00000000, 33, // 3
@@ -319,7 +319,7 @@ partial class UserBlendOps
 	[Serializable]
 	public sealed class NormalBlendOp : UserBlendOp
 	{
-		public static string StaticName { get { return "Normal"; } }
+		public static string StaticName => "Normal";
 		public override ColorBgra Apply (in ColorBgra lhs, in ColorBgra rhs) { int lhsA; { lhsA = ((lhs).A); }; int rhsA; { rhsA = ((rhs).A); }; int y; { y = ((lhsA) * (255 - rhsA) + 0x80); y = ((((y) >> 8) + (y)) >> 8); }; int totalA = y + rhsA; uint ret; if (totalA == 0) { ret = 0; } else { int fB; int fG; int fR; { fB = ((rhs).B); }; { fG = ((rhs).G); }; { fR = ((rhs).R); }; int x; { x = ((lhsA) * (rhsA) + 0x80); x = ((((x) >> 8) + (x)) >> 8); }; int z = rhsA - x; int masIndex = totalA * 3; uint taM = masTable[masIndex]; uint taA = masTable[masIndex + 1]; uint taS = masTable[masIndex + 2]; uint b = (uint) (((((long) ((((lhs).B * y) + ((rhs).B * z) + (fB * x)))) * taM) + taA) >> (int) taS); uint g = (uint) (((((long) ((((lhs).G * y) + ((rhs).G * z) + (fG * x)))) * taM) + taA) >> (int) taS); uint r = (uint) (((((long) ((((lhs).R * y) + ((rhs).R * z) + (fR * x)))) * taM) + taA) >> (int) taS); int a; { { a = ((lhsA) * (255 - (rhsA)) + 0x80); a = ((((a) >> 8) + (a)) >> 8); }; a += (rhsA); }; ret = b + (g << 8) + (r << 16) + ((uint) a << 24); }; return ColorBgra.FromUInt32 (ret); }
 		public override void Apply (Span<ColorBgra> dst, ReadOnlySpan<ColorBgra> src)
 		{
@@ -338,7 +338,7 @@ partial class UserBlendOps
 		{
 			private int opacity;
 			private byte ApplyOpacity (byte a) { int r; { r = (a); }; { r = ((r) * (this.opacity) + 0x80); r = ((((r) >> 8) + (r)) >> 8); }; return (byte) r; }
-			public static string StaticName { get { return "Normal"; } }
+			public static string StaticName => "Normal";
 			public override ColorBgra Apply (in ColorBgra lhs, in ColorBgra rhs) { int lhsA; { lhsA = ((lhs).A); }; int rhsA; { rhsA = ApplyOpacity ((rhs).A); }; int y; { y = ((lhsA) * (255 - rhsA) + 0x80); y = ((((y) >> 8) + (y)) >> 8); }; int totalA = y + rhsA; uint ret; if (totalA == 0) { ret = 0; } else { int fB; int fG; int fR; { fB = ((rhs).B); }; { fG = ((rhs).G); }; { fR = ((rhs).R); }; int x; { x = ((lhsA) * (rhsA) + 0x80); x = ((((x) >> 8) + (x)) >> 8); }; int z = rhsA - x; int masIndex = totalA * 3; uint taM = masTable[masIndex]; uint taA = masTable[masIndex + 1]; uint taS = masTable[masIndex + 2]; uint b = (uint) (((((long) ((((lhs).B * y) + ((rhs).B * z) + (fB * x)))) * taM) + taA) >> (int) taS); uint g = (uint) (((((long) ((((lhs).G * y) + ((rhs).G * z) + (fG * x)))) * taM) + taA) >> (int) taS); uint r = (uint) (((((long) ((((lhs).R * y) + ((rhs).R * z) + (fR * x)))) * taM) + taA) >> (int) taS); int a; { { a = ((lhsA) * (255 - (rhsA)) + 0x80); a = ((((a) >> 8) + (a)) >> 8); }; a += (rhsA); }; ret = b + (g << 8) + (r << 16) + ((uint) a << 24); }; return ColorBgra.FromUInt32 (ret); }
 			public override void Apply (Span<ColorBgra> dst, ReadOnlySpan<ColorBgra> src)
 			{
@@ -357,7 +357,7 @@ partial class UserBlendOps
 	[Serializable]
 	public sealed class MultiplyBlendOp : UserBlendOp
 	{
-		public static string StaticName { get { return "Multiply"; } }
+		public static string StaticName => "Multiply";
 		public override ColorBgra Apply (in ColorBgra lhs, in ColorBgra rhs) { int lhsA; { lhsA = ((lhs).A); }; int rhsA; { rhsA = ((rhs).A); }; int y; { y = ((lhsA) * (255 - rhsA) + 0x80); y = ((((y) >> 8) + (y)) >> 8); }; int totalA = y + rhsA; uint ret; if (totalA == 0) { ret = 0; } else { int fB; int fG; int fR; { { fB = ((((lhs).B)) * (((rhs).B)) + 0x80); fB = ((((fB) >> 8) + (fB)) >> 8); }; }; { { fG = ((((lhs).G)) * (((rhs).G)) + 0x80); fG = ((((fG) >> 8) + (fG)) >> 8); }; }; { { fR = ((((lhs).R)) * (((rhs).R)) + 0x80); fR = ((((fR) >> 8) + (fR)) >> 8); }; }; int x; { x = ((lhsA) * (rhsA) + 0x80); x = ((((x) >> 8) + (x)) >> 8); }; int z = rhsA - x; int masIndex = totalA * 3; uint taM = masTable[masIndex]; uint taA = masTable[masIndex + 1]; uint taS = masTable[masIndex + 2]; uint b = (uint) (((((long) ((((lhs).B * y) + ((rhs).B * z) + (fB * x)))) * taM) + taA) >> (int) taS); uint g = (uint) (((((long) ((((lhs).G * y) + ((rhs).G * z) + (fG * x)))) * taM) + taA) >> (int) taS); uint r = (uint) (((((long) ((((lhs).R * y) + ((rhs).R * z) + (fR * x)))) * taM) + taA) >> (int) taS); int a; { { a = ((lhsA) * (255 - (rhsA)) + 0x80); a = ((((a) >> 8) + (a)) >> 8); }; a += (rhsA); }; ret = b + (g << 8) + (r << 16) + ((uint) a << 24); }; return ColorBgra.FromUInt32 (ret); }
 		public override void Apply (Span<ColorBgra> dst, ReadOnlySpan<ColorBgra> src)
 		{
@@ -374,7 +374,7 @@ partial class UserBlendOps
 		private sealed class MultiplyBlendOpWithOpacity : UserBlendOp
 		{
 			private int opacity; private byte ApplyOpacity (byte a) { int r; { r = (a); }; { r = ((r) * (this.opacity) + 0x80); r = ((((r) >> 8) + (r)) >> 8); }; return (byte) r; }
-			public static string StaticName { get { return "UserBlendOps." + "Multiply" + "BlendOp.Name"; } }
+			public static string StaticName => "UserBlendOps." + "Multiply" + "BlendOp.Name";
 			public override ColorBgra Apply (in ColorBgra lhs, in ColorBgra rhs) { int lhsA; { lhsA = ((lhs).A); }; int rhsA; { rhsA = ApplyOpacity ((rhs).A); }; int y; { y = ((lhsA) * (255 - rhsA) + 0x80); y = ((((y) >> 8) + (y)) >> 8); }; int totalA = y + rhsA; uint ret; if (totalA == 0) { ret = 0; } else { int fB; int fG; int fR; { { fB = ((((lhs).B)) * (((rhs).B)) + 0x80); fB = ((((fB) >> 8) + (fB)) >> 8); }; }; { { fG = ((((lhs).G)) * (((rhs).G)) + 0x80); fG = ((((fG) >> 8) + (fG)) >> 8); }; }; { { fR = ((((lhs).R)) * (((rhs).R)) + 0x80); fR = ((((fR) >> 8) + (fR)) >> 8); }; }; int x; { x = ((lhsA) * (rhsA) + 0x80); x = ((((x) >> 8) + (x)) >> 8); }; int z = rhsA - x; int masIndex = totalA * 3; uint taM = masTable[masIndex]; uint taA = masTable[masIndex + 1]; uint taS = masTable[masIndex + 2]; uint b = (uint) (((((long) ((((lhs).B * y) + ((rhs).B * z) + (fB * x)))) * taM) + taA) >> (int) taS); uint g = (uint) (((((long) ((((lhs).G * y) + ((rhs).G * z) + (fG * x)))) * taM) + taA) >> (int) taS); uint r = (uint) (((((long) ((((lhs).R * y) + ((rhs).R * z) + (fR * x)))) * taM) + taA) >> (int) taS); int a; { { a = ((lhsA) * (255 - (rhsA)) + 0x80); a = ((((a) >> 8) + (a)) >> 8); }; a += (rhsA); }; ret = b + (g << 8) + (r << 16) + ((uint) a << 24); }; return ColorBgra.FromUInt32 (ret); }
 			public override void Apply (Span<ColorBgra> dst, ReadOnlySpan<ColorBgra> src)
 			{
@@ -392,7 +392,7 @@ partial class UserBlendOps
 	[Serializable]
 	public sealed class AdditiveBlendOp : UserBlendOp
 	{
-		public static string StaticName { get { return "Additive"; } }
+		public static string StaticName => "Additive";
 		public override ColorBgra Apply (in ColorBgra lhs, in ColorBgra rhs) { int lhsA; { lhsA = ((lhs).A); }; int rhsA; { rhsA = ((rhs).A); }; int y; { y = ((lhsA) * (255 - rhsA) + 0x80); y = ((((y) >> 8) + (y)) >> 8); }; int totalA = y + rhsA; uint ret; if (totalA == 0) { ret = 0; } else { int fB; int fG; int fR; { fB = Math.Min (255, ((lhs).B) + ((rhs).B)); }; { fG = Math.Min (255, ((lhs).G) + ((rhs).G)); }; { fR = Math.Min (255, ((lhs).R) + ((rhs).R)); }; int x; { x = ((lhsA) * (rhsA) + 0x80); x = ((((x) >> 8) + (x)) >> 8); }; int z = rhsA - x; int masIndex = totalA * 3; uint taM = masTable[masIndex]; uint taA = masTable[masIndex + 1]; uint taS = masTable[masIndex + 2]; uint b = (uint) (((((long) ((((lhs).B * y) + ((rhs).B * z) + (fB * x)))) * taM) + taA) >> (int) taS); uint g = (uint) (((((long) ((((lhs).G * y) + ((rhs).G * z) + (fG * x)))) * taM) + taA) >> (int) taS); uint r = (uint) (((((long) ((((lhs).R * y) + ((rhs).R * z) + (fR * x)))) * taM) + taA) >> (int) taS); int a; { { a = ((lhsA) * (255 - (rhsA)) + 0x80); a = ((((a) >> 8) + (a)) >> 8); }; a += (rhsA); }; ret = b + (g << 8) + (r << 16) + ((uint) a << 24); }; return ColorBgra.FromUInt32 (ret); }
 		public override void Apply (Span<ColorBgra> dst, ReadOnlySpan<ColorBgra> src)
 		{
@@ -409,7 +409,7 @@ partial class UserBlendOps
 		private sealed class AdditiveBlendOpWithOpacity : UserBlendOp
 		{
 			private int opacity; private byte ApplyOpacity (byte a) { int r; { r = (a); }; { r = ((r) * (this.opacity) + 0x80); r = ((((r) >> 8) + (r)) >> 8); }; return (byte) r; }
-			public static string StaticName { get { return "UserBlendOps." + "Additive" + "BlendOp.Name"; } }
+			public static string StaticName => "UserBlendOps." + "Additive" + "BlendOp.Name";
 			public override ColorBgra Apply (in ColorBgra lhs, in ColorBgra rhs) { int lhsA; { lhsA = ((lhs).A); }; int rhsA; { rhsA = ApplyOpacity ((rhs).A); }; int y; { y = ((lhsA) * (255 - rhsA) + 0x80); y = ((((y) >> 8) + (y)) >> 8); }; int totalA = y + rhsA; uint ret; if (totalA == 0) { ret = 0; } else { int fB; int fG; int fR; { fB = Math.Min (255, ((lhs).B) + ((rhs).B)); }; { fG = Math.Min (255, ((lhs).G) + ((rhs).G)); }; { fR = Math.Min (255, ((lhs).R) + ((rhs).R)); }; int x; { x = ((lhsA) * (rhsA) + 0x80); x = ((((x) >> 8) + (x)) >> 8); }; int z = rhsA - x; int masIndex = totalA * 3; uint taM = masTable[masIndex]; uint taA = masTable[masIndex + 1]; uint taS = masTable[masIndex + 2]; uint b = (uint) (((((long) ((((lhs).B * y) + ((rhs).B * z) + (fB * x)))) * taM) + taA) >> (int) taS); uint g = (uint) (((((long) ((((lhs).G * y) + ((rhs).G * z) + (fG * x)))) * taM) + taA) >> (int) taS); uint r = (uint) (((((long) ((((lhs).R * y) + ((rhs).R * z) + (fR * x)))) * taM) + taA) >> (int) taS); int a; { { a = ((lhsA) * (255 - (rhsA)) + 0x80); a = ((((a) >> 8) + (a)) >> 8); }; a += (rhsA); }; ret = b + (g << 8) + (r << 16) + ((uint) a << 24); }; return ColorBgra.FromUInt32 (ret); }
 			public override void Apply (Span<ColorBgra> dst, ReadOnlySpan<ColorBgra> src)
 			{
@@ -427,7 +427,7 @@ partial class UserBlendOps
 	[Serializable]
 	public sealed class ColorBurnBlendOp : UserBlendOp
 	{
-		public static string StaticName { get { return "ColorBurn"; } }
+		public static string StaticName => "ColorBurn";
 		public override ColorBgra Apply (in ColorBgra lhs, in ColorBgra rhs) { int lhsA; { lhsA = ((lhs).A); }; int rhsA; { rhsA = ((rhs).A); }; int y; { y = ((lhsA) * (255 - rhsA) + 0x80); y = ((((y) >> 8) + (y)) >> 8); }; int totalA = y + rhsA; uint ret; if (totalA == 0) { ret = 0; } else { int fB; int fG; int fR; { if (((rhs).B) == 0) { fB = 0; } else { { int i = (((rhs).B)) * 3; uint M = masTable[i]; uint A = masTable[i + 1]; uint S = masTable[i + 2]; fB = (int) (((((255 - ((lhs).B)) * 255) * M) + A) >> (int) S); }; fB = 255 - fB; fB = Math.Max (0, fB); } }; { if (((rhs).G) == 0) { fG = 0; } else { { int i = (((rhs).G)) * 3; uint M = masTable[i]; uint A = masTable[i + 1]; uint S = masTable[i + 2]; fG = (int) (((((255 - ((lhs).G)) * 255) * M) + A) >> (int) S); }; fG = 255 - fG; fG = Math.Max (0, fG); } }; { if (((rhs).R) == 0) { fR = 0; } else { { int i = (((rhs).R)) * 3; uint M = masTable[i]; uint A = masTable[i + 1]; uint S = masTable[i + 2]; fR = (int) (((((255 - ((lhs).R)) * 255) * M) + A) >> (int) S); }; fR = 255 - fR; fR = Math.Max (0, fR); } }; int x; { x = ((lhsA) * (rhsA) + 0x80); x = ((((x) >> 8) + (x)) >> 8); }; int z = rhsA - x; int masIndex = totalA * 3; uint taM = masTable[masIndex]; uint taA = masTable[masIndex + 1]; uint taS = masTable[masIndex + 2]; uint b = (uint) (((((long) ((((lhs).B * y) + ((rhs).B * z) + (fB * x)))) * taM) + taA) >> (int) taS); uint g = (uint) (((((long) ((((lhs).G * y) + ((rhs).G * z) + (fG * x)))) * taM) + taA) >> (int) taS); uint r = (uint) (((((long) ((((lhs).R * y) + ((rhs).R * z) + (fR * x)))) * taM) + taA) >> (int) taS); int a; { { a = ((lhsA) * (255 - (rhsA)) + 0x80); a = ((((a) >> 8) + (a)) >> 8); }; a += (rhsA); }; ret = b + (g << 8) + (r << 16) + ((uint) a << 24); }; return ColorBgra.FromUInt32 (ret); }
 		public override void Apply (Span<ColorBgra> dst, ReadOnlySpan<ColorBgra> src)
 		{
@@ -444,7 +444,7 @@ partial class UserBlendOps
 		private sealed class ColorBurnBlendOpWithOpacity : UserBlendOp
 		{
 			private int opacity; private byte ApplyOpacity (byte a) { int r; { r = (a); }; { r = ((r) * (this.opacity) + 0x80); r = ((((r) >> 8) + (r)) >> 8); }; return (byte) r; }
-			public static string StaticName { get { return "UserBlendOps." + "ColorBurn" + "BlendOp.Name"; } }
+			public static string StaticName => "UserBlendOps." + "ColorBurn" + "BlendOp.Name";
 			public override ColorBgra Apply (in ColorBgra lhs, in ColorBgra rhs) { int lhsA; { lhsA = ((lhs).A); }; int rhsA; { rhsA = ApplyOpacity ((rhs).A); }; int y; { y = ((lhsA) * (255 - rhsA) + 0x80); y = ((((y) >> 8) + (y)) >> 8); }; int totalA = y + rhsA; uint ret; if (totalA == 0) { ret = 0; } else { int fB; int fG; int fR; { if (((rhs).B) == 0) { fB = 0; } else { { int i = (((rhs).B)) * 3; uint M = masTable[i]; uint A = masTable[i + 1]; uint S = masTable[i + 2]; fB = (int) (((((255 - ((lhs).B)) * 255) * M) + A) >> (int) S); }; fB = 255 - fB; fB = Math.Max (0, fB); } }; { if (((rhs).G) == 0) { fG = 0; } else { { int i = (((rhs).G)) * 3; uint M = masTable[i]; uint A = masTable[i + 1]; uint S = masTable[i + 2]; fG = (int) (((((255 - ((lhs).G)) * 255) * M) + A) >> (int) S); }; fG = 255 - fG; fG = Math.Max (0, fG); } }; { if (((rhs).R) == 0) { fR = 0; } else { { int i = (((rhs).R)) * 3; uint M = masTable[i]; uint A = masTable[i + 1]; uint S = masTable[i + 2]; fR = (int) (((((255 - ((lhs).R)) * 255) * M) + A) >> (int) S); }; fR = 255 - fR; fR = Math.Max (0, fR); } }; int x; { x = ((lhsA) * (rhsA) + 0x80); x = ((((x) >> 8) + (x)) >> 8); }; int z = rhsA - x; int masIndex = totalA * 3; uint taM = masTable[masIndex]; uint taA = masTable[masIndex + 1]; uint taS = masTable[masIndex + 2]; uint b = (uint) (((((long) ((((lhs).B * y) + ((rhs).B * z) + (fB * x)))) * taM) + taA) >> (int) taS); uint g = (uint) (((((long) ((((lhs).G * y) + ((rhs).G * z) + (fG * x)))) * taM) + taA) >> (int) taS); uint r = (uint) (((((long) ((((lhs).R * y) + ((rhs).R * z) + (fR * x)))) * taM) + taA) >> (int) taS); int a; { { a = ((lhsA) * (255 - (rhsA)) + 0x80); a = ((((a) >> 8) + (a)) >> 8); }; a += (rhsA); }; ret = b + (g << 8) + (r << 16) + ((uint) a << 24); }; return ColorBgra.FromUInt32 (ret); }
 			public override void Apply (Span<ColorBgra> dst, ReadOnlySpan<ColorBgra> src)
 			{
@@ -462,7 +462,7 @@ partial class UserBlendOps
 	[Serializable]
 	public sealed class ColorDodgeBlendOp : UserBlendOp
 	{
-		public static string StaticName { get { return "ColorDodge"; } }
+		public static string StaticName => "ColorDodge";
 		public override ColorBgra Apply (in ColorBgra lhs, in ColorBgra rhs) { int lhsA; { lhsA = ((lhs).A); }; int rhsA; { rhsA = ((rhs).A); }; int y; { y = ((lhsA) * (255 - rhsA) + 0x80); y = ((((y) >> 8) + (y)) >> 8); }; int totalA = y + rhsA; uint ret; if (totalA == 0) { ret = 0; } else { int fB; int fG; int fR; { if (((rhs).B) == 255) { fB = 255; } else { { int i = ((255 - ((rhs).B))) * 3; uint M = masTable[i]; uint A = masTable[i + 1]; uint S = masTable[i + 2]; fB = (int) ((((((lhs).B) * 255) * M) + A) >> (int) S); }; fB = Math.Min (255, fB); } }; { if (((rhs).G) == 255) { fG = 255; } else { { int i = ((255 - ((rhs).G))) * 3; uint M = masTable[i]; uint A = masTable[i + 1]; uint S = masTable[i + 2]; fG = (int) ((((((lhs).G) * 255) * M) + A) >> (int) S); }; fG = Math.Min (255, fG); } }; { if (((rhs).R) == 255) { fR = 255; } else { { int i = ((255 - ((rhs).R))) * 3; uint M = masTable[i]; uint A = masTable[i + 1]; uint S = masTable[i + 2]; fR = (int) ((((((lhs).R) * 255) * M) + A) >> (int) S); }; fR = Math.Min (255, fR); } }; int x; { x = ((lhsA) * (rhsA) + 0x80); x = ((((x) >> 8) + (x)) >> 8); }; int z = rhsA - x; int masIndex = totalA * 3; uint taM = masTable[masIndex]; uint taA = masTable[masIndex + 1]; uint taS = masTable[masIndex + 2]; uint b = (uint) (((((long) ((((lhs).B * y) + ((rhs).B * z) + (fB * x)))) * taM) + taA) >> (int) taS); uint g = (uint) (((((long) ((((lhs).G * y) + ((rhs).G * z) + (fG * x)))) * taM) + taA) >> (int) taS); uint r = (uint) (((((long) ((((lhs).R * y) + ((rhs).R * z) + (fR * x)))) * taM) + taA) >> (int) taS); int a; { { a = ((lhsA) * (255 - (rhsA)) + 0x80); a = ((((a) >> 8) + (a)) >> 8); }; a += (rhsA); }; ret = b + (g << 8) + (r << 16) + ((uint) a << 24); }; return ColorBgra.FromUInt32 (ret); }
 		public override void Apply (Span<ColorBgra> dst, ReadOnlySpan<ColorBgra> src)
 		{
@@ -479,7 +479,7 @@ partial class UserBlendOps
 		private sealed class ColorDodgeBlendOpWithOpacity : UserBlendOp
 		{
 			private int opacity; private byte ApplyOpacity (byte a) { int r; { r = (a); }; { r = ((r) * (this.opacity) + 0x80); r = ((((r) >> 8) + (r)) >> 8); }; return (byte) r; }
-			public static string StaticName { get { return "UserBlendOps." + "ColorDodge" + "BlendOp.Name"; } }
+			public static string StaticName => "UserBlendOps." + "ColorDodge" + "BlendOp.Name";
 			public override ColorBgra Apply (in ColorBgra lhs, in ColorBgra rhs) { int lhsA; { lhsA = ((lhs).A); }; int rhsA; { rhsA = ApplyOpacity ((rhs).A); }; int y; { y = ((lhsA) * (255 - rhsA) + 0x80); y = ((((y) >> 8) + (y)) >> 8); }; int totalA = y + rhsA; uint ret; if (totalA == 0) { ret = 0; } else { int fB; int fG; int fR; { if (((rhs).B) == 255) { fB = 255; } else { { int i = ((255 - ((rhs).B))) * 3; uint M = masTable[i]; uint A = masTable[i + 1]; uint S = masTable[i + 2]; fB = (int) ((((((lhs).B) * 255) * M) + A) >> (int) S); }; fB = Math.Min (255, fB); } }; { if (((rhs).G) == 255) { fG = 255; } else { { int i = ((255 - ((rhs).G))) * 3; uint M = masTable[i]; uint A = masTable[i + 1]; uint S = masTable[i + 2]; fG = (int) ((((((lhs).G) * 255) * M) + A) >> (int) S); }; fG = Math.Min (255, fG); } }; { if (((rhs).R) == 255) { fR = 255; } else { { int i = ((255 - ((rhs).R))) * 3; uint M = masTable[i]; uint A = masTable[i + 1]; uint S = masTable[i + 2]; fR = (int) ((((((lhs).R) * 255) * M) + A) >> (int) S); }; fR = Math.Min (255, fR); } }; int x; { x = ((lhsA) * (rhsA) + 0x80); x = ((((x) >> 8) + (x)) >> 8); }; int z = rhsA - x; int masIndex = totalA * 3; uint taM = masTable[masIndex]; uint taA = masTable[masIndex + 1]; uint taS = masTable[masIndex + 2]; uint b = (uint) (((((long) ((((lhs).B * y) + ((rhs).B * z) + (fB * x)))) * taM) + taA) >> (int) taS); uint g = (uint) (((((long) ((((lhs).G * y) + ((rhs).G * z) + (fG * x)))) * taM) + taA) >> (int) taS); uint r = (uint) (((((long) ((((lhs).R * y) + ((rhs).R * z) + (fR * x)))) * taM) + taA) >> (int) taS); int a; { { a = ((lhsA) * (255 - (rhsA)) + 0x80); a = ((((a) >> 8) + (a)) >> 8); }; a += (rhsA); }; ret = b + (g << 8) + (r << 16) + ((uint) a << 24); }; return ColorBgra.FromUInt32 (ret); }
 			public override void Apply (Span<ColorBgra> dst, ReadOnlySpan<ColorBgra> src)
 			{
@@ -497,7 +497,7 @@ partial class UserBlendOps
 	[Serializable]
 	public sealed class ReflectBlendOp : UserBlendOp
 	{
-		public static string StaticName { get { return "Reflect"; } }
+		public static string StaticName => "Reflect";
 		public override ColorBgra Apply (in ColorBgra lhs, in ColorBgra rhs) { int lhsA; { lhsA = ((lhs).A); }; int rhsA; { rhsA = ((rhs).A); }; int y; { y = ((lhsA) * (255 - rhsA) + 0x80); y = ((((y) >> 8) + (y)) >> 8); }; int totalA = y + rhsA; uint ret; if (totalA == 0) { ret = 0; } else { int fB; int fG; int fR; { if (((rhs).B) == 255) { fB = 255; } else { { int i = (255 - ((rhs).B)) * 3; uint M = masTable[i]; uint A = masTable[i + 1]; uint S = masTable[i + 2]; fB = (int) (((((lhs).B) * ((lhs).B) * M) + A) >> (int) S); }; fB = Math.Min (255, fB); } }; { if (((rhs).G) == 255) { fG = 255; } else { { int i = (255 - ((rhs).G)) * 3; uint M = masTable[i]; uint A = masTable[i + 1]; uint S = masTable[i + 2]; fG = (int) (((((lhs).G) * ((lhs).G) * M) + A) >> (int) S); }; fG = Math.Min (255, fG); } }; { if (((rhs).R) == 255) { fR = 255; } else { { int i = (255 - ((rhs).R)) * 3; uint M = masTable[i]; uint A = masTable[i + 1]; uint S = masTable[i + 2]; fR = (int) (((((lhs).R) * ((lhs).R) * M) + A) >> (int) S); }; fR = Math.Min (255, fR); } }; int x; { x = ((lhsA) * (rhsA) + 0x80); x = ((((x) >> 8) + (x)) >> 8); }; int z = rhsA - x; int masIndex = totalA * 3; uint taM = masTable[masIndex]; uint taA = masTable[masIndex + 1]; uint taS = masTable[masIndex + 2]; uint b = (uint) (((((long) ((((lhs).B * y) + ((rhs).B * z) + (fB * x)))) * taM) + taA) >> (int) taS); uint g = (uint) (((((long) ((((lhs).G * y) + ((rhs).G * z) + (fG * x)))) * taM) + taA) >> (int) taS); uint r = (uint) (((((long) ((((lhs).R * y) + ((rhs).R * z) + (fR * x)))) * taM) + taA) >> (int) taS); int a; { { a = ((lhsA) * (255 - (rhsA)) + 0x80); a = ((((a) >> 8) + (a)) >> 8); }; a += (rhsA); }; ret = b + (g << 8) + (r << 16) + ((uint) a << 24); }; return ColorBgra.FromUInt32 (ret); }
 		public override void Apply (Span<ColorBgra> dst, ReadOnlySpan<ColorBgra> src)
 		{
@@ -514,7 +514,7 @@ partial class UserBlendOps
 		private sealed class ReflectBlendOpWithOpacity : UserBlendOp
 		{
 			private int opacity; private byte ApplyOpacity (byte a) { int r; { r = (a); }; { r = ((r) * (this.opacity) + 0x80); r = ((((r) >> 8) + (r)) >> 8); }; return (byte) r; }
-			public static string StaticName { get { return "UserBlendOps." + "Reflect" + "BlendOp.Name"; } }
+			public static string StaticName => "UserBlendOps." + "Reflect" + "BlendOp.Name";
 			public override ColorBgra Apply (in ColorBgra lhs, in ColorBgra rhs) { int lhsA; { lhsA = ((lhs).A); }; int rhsA; { rhsA = ApplyOpacity ((rhs).A); }; int y; { y = ((lhsA) * (255 - rhsA) + 0x80); y = ((((y) >> 8) + (y)) >> 8); }; int totalA = y + rhsA; uint ret; if (totalA == 0) { ret = 0; } else { int fB; int fG; int fR; { if (((rhs).B) == 255) { fB = 255; } else { { int i = (255 - ((rhs).B)) * 3; uint M = masTable[i]; uint A = masTable[i + 1]; uint S = masTable[i + 2]; fB = (int) (((((lhs).B) * ((lhs).B) * M) + A) >> (int) S); }; fB = Math.Min (255, fB); } }; { if (((rhs).G) == 255) { fG = 255; } else { { int i = (255 - ((rhs).G)) * 3; uint M = masTable[i]; uint A = masTable[i + 1]; uint S = masTable[i + 2]; fG = (int) (((((lhs).G) * ((lhs).G) * M) + A) >> (int) S); }; fG = Math.Min (255, fG); } }; { if (((rhs).R) == 255) { fR = 255; } else { { int i = (255 - ((rhs).R)) * 3; uint M = masTable[i]; uint A = masTable[i + 1]; uint S = masTable[i + 2]; fR = (int) (((((lhs).R) * ((lhs).R) * M) + A) >> (int) S); }; fR = Math.Min (255, fR); } }; int x; { x = ((lhsA) * (rhsA) + 0x80); x = ((((x) >> 8) + (x)) >> 8); }; int z = rhsA - x; int masIndex = totalA * 3; uint taM = masTable[masIndex]; uint taA = masTable[masIndex + 1]; uint taS = masTable[masIndex + 2]; uint b = (uint) (((((long) ((((lhs).B * y) + ((rhs).B * z) + (fB * x)))) * taM) + taA) >> (int) taS); uint g = (uint) (((((long) ((((lhs).G * y) + ((rhs).G * z) + (fG * x)))) * taM) + taA) >> (int) taS); uint r = (uint) (((((long) ((((lhs).R * y) + ((rhs).R * z) + (fR * x)))) * taM) + taA) >> (int) taS); int a; { { a = ((lhsA) * (255 - (rhsA)) + 0x80); a = ((((a) >> 8) + (a)) >> 8); }; a += (rhsA); }; ret = b + (g << 8) + (r << 16) + ((uint) a << 24); }; return ColorBgra.FromUInt32 (ret); }
 			public override void Apply (Span<ColorBgra> dst, ReadOnlySpan<ColorBgra> src)
 			{
@@ -532,7 +532,7 @@ partial class UserBlendOps
 	[Serializable]
 	public sealed class GlowBlendOp : UserBlendOp
 	{
-		public static string StaticName { get { return "Glow"; } }
+		public static string StaticName => "Glow";
 		public override ColorBgra Apply (in ColorBgra lhs, in ColorBgra rhs) { int lhsA; { lhsA = ((lhs).A); }; int rhsA; { rhsA = ((rhs).A); }; int y; { y = ((lhsA) * (255 - rhsA) + 0x80); y = ((((y) >> 8) + (y)) >> 8); }; int totalA = y + rhsA; uint ret; if (totalA == 0) { ret = 0; } else { int fB; int fG; int fR; { if (((lhs).B) == 255) { fB = 255; } else { { int i = (255 - ((lhs).B)) * 3; uint M = masTable[i]; uint A = masTable[i + 1]; uint S = masTable[i + 2]; fB = (int) (((((rhs).B) * ((rhs).B) * M) + A) >> (int) S); }; fB = Math.Min (255, fB); } }; { if (((lhs).G) == 255) { fG = 255; } else { { int i = (255 - ((lhs).G)) * 3; uint M = masTable[i]; uint A = masTable[i + 1]; uint S = masTable[i + 2]; fG = (int) (((((rhs).G) * ((rhs).G) * M) + A) >> (int) S); }; fG = Math.Min (255, fG); } }; { if (((lhs).R) == 255) { fR = 255; } else { { int i = (255 - ((lhs).R)) * 3; uint M = masTable[i]; uint A = masTable[i + 1]; uint S = masTable[i + 2]; fR = (int) (((((rhs).R) * ((rhs).R) * M) + A) >> (int) S); }; fR = Math.Min (255, fR); } }; int x; { x = ((lhsA) * (rhsA) + 0x80); x = ((((x) >> 8) + (x)) >> 8); }; int z = rhsA - x; int masIndex = totalA * 3; uint taM = masTable[masIndex]; uint taA = masTable[masIndex + 1]; uint taS = masTable[masIndex + 2]; uint b = (uint) (((((long) ((((lhs).B * y) + ((rhs).B * z) + (fB * x)))) * taM) + taA) >> (int) taS); uint g = (uint) (((((long) ((((lhs).G * y) + ((rhs).G * z) + (fG * x)))) * taM) + taA) >> (int) taS); uint r = (uint) (((((long) ((((lhs).R * y) + ((rhs).R * z) + (fR * x)))) * taM) + taA) >> (int) taS); int a; { { a = ((lhsA) * (255 - (rhsA)) + 0x80); a = ((((a) >> 8) + (a)) >> 8); }; a += (rhsA); }; ret = b + (g << 8) + (r << 16) + ((uint) a << 24); }; return ColorBgra.FromUInt32 (ret); }
 		public override void Apply (Span<ColorBgra> dst, ReadOnlySpan<ColorBgra> src)
 		{
@@ -549,7 +549,7 @@ partial class UserBlendOps
 		private sealed class GlowBlendOpWithOpacity : UserBlendOp
 		{
 			private int opacity; private byte ApplyOpacity (byte a) { int r; { r = (a); }; { r = ((r) * (this.opacity) + 0x80); r = ((((r) >> 8) + (r)) >> 8); }; return (byte) r; }
-			public static string StaticName { get { return "UserBlendOps." + "Glow" + "BlendOp.Name"; } }
+			public static string StaticName => "UserBlendOps." + "Glow" + "BlendOp.Name";
 			public override ColorBgra Apply (in ColorBgra lhs, in ColorBgra rhs) { int lhsA; { lhsA = ((lhs).A); }; int rhsA; { rhsA = ApplyOpacity ((rhs).A); }; int y; { y = ((lhsA) * (255 - rhsA) + 0x80); y = ((((y) >> 8) + (y)) >> 8); }; int totalA = y + rhsA; uint ret; if (totalA == 0) { ret = 0; } else { int fB; int fG; int fR; { if (((lhs).B) == 255) { fB = 255; } else { { int i = (255 - ((lhs).B)) * 3; uint M = masTable[i]; uint A = masTable[i + 1]; uint S = masTable[i + 2]; fB = (int) (((((rhs).B) * ((rhs).B) * M) + A) >> (int) S); }; fB = Math.Min (255, fB); } }; { if (((lhs).G) == 255) { fG = 255; } else { { int i = (255 - ((lhs).G)) * 3; uint M = masTable[i]; uint A = masTable[i + 1]; uint S = masTable[i + 2]; fG = (int) (((((rhs).G) * ((rhs).G) * M) + A) >> (int) S); }; fG = Math.Min (255, fG); } }; { if (((lhs).R) == 255) { fR = 255; } else { { int i = (255 - ((lhs).R)) * 3; uint M = masTable[i]; uint A = masTable[i + 1]; uint S = masTable[i + 2]; fR = (int) (((((rhs).R) * ((rhs).R) * M) + A) >> (int) S); }; fR = Math.Min (255, fR); } }; int x; { x = ((lhsA) * (rhsA) + 0x80); x = ((((x) >> 8) + (x)) >> 8); }; int z = rhsA - x; int masIndex = totalA * 3; uint taM = masTable[masIndex]; uint taA = masTable[masIndex + 1]; uint taS = masTable[masIndex + 2]; uint b = (uint) (((((long) ((((lhs).B * y) + ((rhs).B * z) + (fB * x)))) * taM) + taA) >> (int) taS); uint g = (uint) (((((long) ((((lhs).G * y) + ((rhs).G * z) + (fG * x)))) * taM) + taA) >> (int) taS); uint r = (uint) (((((long) ((((lhs).R * y) + ((rhs).R * z) + (fR * x)))) * taM) + taA) >> (int) taS); int a; { { a = ((lhsA) * (255 - (rhsA)) + 0x80); a = ((((a) >> 8) + (a)) >> 8); }; a += (rhsA); }; ret = b + (g << 8) + (r << 16) + ((uint) a << 24); }; return ColorBgra.FromUInt32 (ret); }
 			public override void Apply (Span<ColorBgra> dst, ReadOnlySpan<ColorBgra> src)
 			{
@@ -567,7 +567,7 @@ partial class UserBlendOps
 	[Serializable]
 	public sealed class OverlayBlendOp : UserBlendOp
 	{
-		public static string StaticName { get { return "Overlay"; } }
+		public static string StaticName => "Overlay";
 		public override ColorBgra Apply (in ColorBgra lhs, in ColorBgra rhs) { int lhsA; { lhsA = ((lhs).A); }; int rhsA; { rhsA = ((rhs).A); }; int y; { y = ((lhsA) * (255 - rhsA) + 0x80); y = ((((y) >> 8) + (y)) >> 8); }; int totalA = y + rhsA; uint ret; if (totalA == 0) { ret = 0; } else { int fB; int fG; int fR; { if (((lhs).B) < 128) { { fB = ((2 * ((lhs).B)) * (((rhs).B)) + 0x80); fB = ((((fB) >> 8) + (fB)) >> 8); }; } else { { fB = ((2 * (255 - ((lhs).B))) * (255 - ((rhs).B)) + 0x80); fB = ((((fB) >> 8) + (fB)) >> 8); }; fB = 255 - fB; } }; { if (((lhs).G) < 128) { { fG = ((2 * ((lhs).G)) * (((rhs).G)) + 0x80); fG = ((((fG) >> 8) + (fG)) >> 8); }; } else { { fG = ((2 * (255 - ((lhs).G))) * (255 - ((rhs).G)) + 0x80); fG = ((((fG) >> 8) + (fG)) >> 8); }; fG = 255 - fG; } }; { if (((lhs).R) < 128) { { fR = ((2 * ((lhs).R)) * (((rhs).R)) + 0x80); fR = ((((fR) >> 8) + (fR)) >> 8); }; } else { { fR = ((2 * (255 - ((lhs).R))) * (255 - ((rhs).R)) + 0x80); fR = ((((fR) >> 8) + (fR)) >> 8); }; fR = 255 - fR; } }; int x; { x = ((lhsA) * (rhsA) + 0x80); x = ((((x) >> 8) + (x)) >> 8); }; int z = rhsA - x; int masIndex = totalA * 3; uint taM = masTable[masIndex]; uint taA = masTable[masIndex + 1]; uint taS = masTable[masIndex + 2]; uint b = (uint) (((((long) ((((lhs).B * y) + ((rhs).B * z) + (fB * x)))) * taM) + taA) >> (int) taS); uint g = (uint) (((((long) ((((lhs).G * y) + ((rhs).G * z) + (fG * x)))) * taM) + taA) >> (int) taS); uint r = (uint) (((((long) ((((lhs).R * y) + ((rhs).R * z) + (fR * x)))) * taM) + taA) >> (int) taS); int a; { { a = ((lhsA) * (255 - (rhsA)) + 0x80); a = ((((a) >> 8) + (a)) >> 8); }; a += (rhsA); }; ret = b + (g << 8) + (r << 16) + ((uint) a << 24); }; return ColorBgra.FromUInt32 (ret); }
 		public override void Apply (Span<ColorBgra> dst, ReadOnlySpan<ColorBgra> src)
 		{
@@ -584,7 +584,7 @@ partial class UserBlendOps
 		private sealed class OverlayBlendOpWithOpacity : UserBlendOp
 		{
 			private int opacity; private byte ApplyOpacity (byte a) { int r; { r = (a); }; { r = ((r) * (this.opacity) + 0x80); r = ((((r) >> 8) + (r)) >> 8); }; return (byte) r; }
-			public static string StaticName { get { return "UserBlendOps." + "Overlay" + "BlendOp.Name"; } }
+			public static string StaticName => "UserBlendOps." + "Overlay" + "BlendOp.Name";
 			public override ColorBgra Apply (in ColorBgra lhs, in ColorBgra rhs) { int lhsA; { lhsA = ((lhs).A); }; int rhsA; { rhsA = ApplyOpacity ((rhs).A); }; int y; { y = ((lhsA) * (255 - rhsA) + 0x80); y = ((((y) >> 8) + (y)) >> 8); }; int totalA = y + rhsA; uint ret; if (totalA == 0) { ret = 0; } else { int fB; int fG; int fR; { if (((lhs).B) < 128) { { fB = ((2 * ((lhs).B)) * (((rhs).B)) + 0x80); fB = ((((fB) >> 8) + (fB)) >> 8); }; } else { { fB = ((2 * (255 - ((lhs).B))) * (255 - ((rhs).B)) + 0x80); fB = ((((fB) >> 8) + (fB)) >> 8); }; fB = 255 - fB; } }; { if (((lhs).G) < 128) { { fG = ((2 * ((lhs).G)) * (((rhs).G)) + 0x80); fG = ((((fG) >> 8) + (fG)) >> 8); }; } else { { fG = ((2 * (255 - ((lhs).G))) * (255 - ((rhs).G)) + 0x80); fG = ((((fG) >> 8) + (fG)) >> 8); }; fG = 255 - fG; } }; { if (((lhs).R) < 128) { { fR = ((2 * ((lhs).R)) * (((rhs).R)) + 0x80); fR = ((((fR) >> 8) + (fR)) >> 8); }; } else { { fR = ((2 * (255 - ((lhs).R))) * (255 - ((rhs).R)) + 0x80); fR = ((((fR) >> 8) + (fR)) >> 8); }; fR = 255 - fR; } }; int x; { x = ((lhsA) * (rhsA) + 0x80); x = ((((x) >> 8) + (x)) >> 8); }; int z = rhsA - x; int masIndex = totalA * 3; uint taM = masTable[masIndex]; uint taA = masTable[masIndex + 1]; uint taS = masTable[masIndex + 2]; uint b = (uint) (((((long) ((((lhs).B * y) + ((rhs).B * z) + (fB * x)))) * taM) + taA) >> (int) taS); uint g = (uint) (((((long) ((((lhs).G * y) + ((rhs).G * z) + (fG * x)))) * taM) + taA) >> (int) taS); uint r = (uint) (((((long) ((((lhs).R * y) + ((rhs).R * z) + (fR * x)))) * taM) + taA) >> (int) taS); int a; { { a = ((lhsA) * (255 - (rhsA)) + 0x80); a = ((((a) >> 8) + (a)) >> 8); }; a += (rhsA); }; ret = b + (g << 8) + (r << 16) + ((uint) a << 24); }; return ColorBgra.FromUInt32 (ret); }
 			public override void Apply (Span<ColorBgra> dst, ReadOnlySpan<ColorBgra> src)
 			{
@@ -602,7 +602,7 @@ partial class UserBlendOps
 	[Serializable]
 	public sealed class DifferenceBlendOp : UserBlendOp
 	{
-		public static string StaticName { get { return "Difference"; } }
+		public static string StaticName => "Difference";
 		public override ColorBgra Apply (in ColorBgra lhs, in ColorBgra rhs) { int lhsA; { lhsA = ((lhs).A); }; int rhsA; { rhsA = ((rhs).A); }; int y; { y = ((lhsA) * (255 - rhsA) + 0x80); y = ((((y) >> 8) + (y)) >> 8); }; int totalA = y + rhsA; uint ret; if (totalA == 0) { ret = 0; } else { int fB; int fG; int fR; { fB = Math.Abs (((rhs).B) - ((lhs).B)); }; { fG = Math.Abs (((rhs).G) - ((lhs).G)); }; { fR = Math.Abs (((rhs).R) - ((lhs).R)); }; int x; { x = ((lhsA) * (rhsA) + 0x80); x = ((((x) >> 8) + (x)) >> 8); }; int z = rhsA - x; int masIndex = totalA * 3; uint taM = masTable[masIndex]; uint taA = masTable[masIndex + 1]; uint taS = masTable[masIndex + 2]; uint b = (uint) (((((long) ((((lhs).B * y) + ((rhs).B * z) + (fB * x)))) * taM) + taA) >> (int) taS); uint g = (uint) (((((long) ((((lhs).G * y) + ((rhs).G * z) + (fG * x)))) * taM) + taA) >> (int) taS); uint r = (uint) (((((long) ((((lhs).R * y) + ((rhs).R * z) + (fR * x)))) * taM) + taA) >> (int) taS); int a; { { a = ((lhsA) * (255 - (rhsA)) + 0x80); a = ((((a) >> 8) + (a)) >> 8); }; a += (rhsA); }; ret = b + (g << 8) + (r << 16) + ((uint) a << 24); }; return ColorBgra.FromUInt32 (ret); }
 		public override void Apply (Span<ColorBgra> dst, ReadOnlySpan<ColorBgra> src)
 		{
@@ -619,7 +619,7 @@ partial class UserBlendOps
 		private sealed class DifferenceBlendOpWithOpacity : UserBlendOp
 		{
 			private int opacity; private byte ApplyOpacity (byte a) { int r; { r = (a); }; { r = ((r) * (this.opacity) + 0x80); r = ((((r) >> 8) + (r)) >> 8); }; return (byte) r; }
-			public static string StaticName { get { return "UserBlendOps." + "Difference" + "BlendOp.Name"; } }
+			public static string StaticName => "UserBlendOps." + "Difference" + "BlendOp.Name";
 			public override ColorBgra Apply (in ColorBgra lhs, in ColorBgra rhs) { int lhsA; { lhsA = ((lhs).A); }; int rhsA; { rhsA = ApplyOpacity ((rhs).A); }; int y; { y = ((lhsA) * (255 - rhsA) + 0x80); y = ((((y) >> 8) + (y)) >> 8); }; int totalA = y + rhsA; uint ret; if (totalA == 0) { ret = 0; } else { int fB; int fG; int fR; { fB = Math.Abs (((rhs).B) - ((lhs).B)); }; { fG = Math.Abs (((rhs).G) - ((lhs).G)); }; { fR = Math.Abs (((rhs).R) - ((lhs).R)); }; int x; { x = ((lhsA) * (rhsA) + 0x80); x = ((((x) >> 8) + (x)) >> 8); }; int z = rhsA - x; int masIndex = totalA * 3; uint taM = masTable[masIndex]; uint taA = masTable[masIndex + 1]; uint taS = masTable[masIndex + 2]; uint b = (uint) (((((long) ((((lhs).B * y) + ((rhs).B * z) + (fB * x)))) * taM) + taA) >> (int) taS); uint g = (uint) (((((long) ((((lhs).G * y) + ((rhs).G * z) + (fG * x)))) * taM) + taA) >> (int) taS); uint r = (uint) (((((long) ((((lhs).R * y) + ((rhs).R * z) + (fR * x)))) * taM) + taA) >> (int) taS); int a; { { a = ((lhsA) * (255 - (rhsA)) + 0x80); a = ((((a) >> 8) + (a)) >> 8); }; a += (rhsA); }; ret = b + (g << 8) + (r << 16) + ((uint) a << 24); }; return ColorBgra.FromUInt32 (ret); }
 			public override void Apply (Span<ColorBgra> dst, ReadOnlySpan<ColorBgra> src)
 			{
@@ -637,7 +637,7 @@ partial class UserBlendOps
 	[Serializable]
 	public sealed class NegationBlendOp : UserBlendOp
 	{
-		public static string StaticName { get { return "Negation"; } }
+		public static string StaticName => "Negation";
 		public override ColorBgra Apply (in ColorBgra lhs, in ColorBgra rhs) { int lhsA; { lhsA = ((lhs).A); }; int rhsA; { rhsA = ((rhs).A); }; int y; { y = ((lhsA) * (255 - rhsA) + 0x80); y = ((((y) >> 8) + (y)) >> 8); }; int totalA = y + rhsA; uint ret; if (totalA == 0) { ret = 0; } else { int fB; int fG; int fR; { fB = (255 - Math.Abs (255 - ((lhs).B) - ((rhs).B))); }; { fG = (255 - Math.Abs (255 - ((lhs).G) - ((rhs).G))); }; { fR = (255 - Math.Abs (255 - ((lhs).R) - ((rhs).R))); }; int x; { x = ((lhsA) * (rhsA) + 0x80); x = ((((x) >> 8) + (x)) >> 8); }; int z = rhsA - x; int masIndex = totalA * 3; uint taM = masTable[masIndex]; uint taA = masTable[masIndex + 1]; uint taS = masTable[masIndex + 2]; uint b = (uint) (((((long) ((((lhs).B * y) + ((rhs).B * z) + (fB * x)))) * taM) + taA) >> (int) taS); uint g = (uint) (((((long) ((((lhs).G * y) + ((rhs).G * z) + (fG * x)))) * taM) + taA) >> (int) taS); uint r = (uint) (((((long) ((((lhs).R * y) + ((rhs).R * z) + (fR * x)))) * taM) + taA) >> (int) taS); int a; { { a = ((lhsA) * (255 - (rhsA)) + 0x80); a = ((((a) >> 8) + (a)) >> 8); }; a += (rhsA); }; ret = b + (g << 8) + (r << 16) + ((uint) a << 24); }; return ColorBgra.FromUInt32 (ret); }
 		public override void Apply (Span<ColorBgra> dst, ReadOnlySpan<ColorBgra> src)
 		{
@@ -654,7 +654,7 @@ partial class UserBlendOps
 		private sealed class NegationBlendOpWithOpacity : UserBlendOp
 		{
 			private int opacity; private byte ApplyOpacity (byte a) { int r; { r = (a); }; { r = ((r) * (this.opacity) + 0x80); r = ((((r) >> 8) + (r)) >> 8); }; return (byte) r; }
-			public static string StaticName { get { return "UserBlendOps." + "Negation" + "BlendOp.Name"; } }
+			public static string StaticName => "UserBlendOps." + "Negation" + "BlendOp.Name";
 			public override ColorBgra Apply (in ColorBgra lhs, in ColorBgra rhs) { int lhsA; { lhsA = ((lhs).A); }; int rhsA; { rhsA = ApplyOpacity ((rhs).A); }; int y; { y = ((lhsA) * (255 - rhsA) + 0x80); y = ((((y) >> 8) + (y)) >> 8); }; int totalA = y + rhsA; uint ret; if (totalA == 0) { ret = 0; } else { int fB; int fG; int fR; { fB = (255 - Math.Abs (255 - ((lhs).B) - ((rhs).B))); }; { fG = (255 - Math.Abs (255 - ((lhs).G) - ((rhs).G))); }; { fR = (255 - Math.Abs (255 - ((lhs).R) - ((rhs).R))); }; int x; { x = ((lhsA) * (rhsA) + 0x80); x = ((((x) >> 8) + (x)) >> 8); }; int z = rhsA - x; int masIndex = totalA * 3; uint taM = masTable[masIndex]; uint taA = masTable[masIndex + 1]; uint taS = masTable[masIndex + 2]; uint b = (uint) (((((long) ((((lhs).B * y) + ((rhs).B * z) + (fB * x)))) * taM) + taA) >> (int) taS); uint g = (uint) (((((long) ((((lhs).G * y) + ((rhs).G * z) + (fG * x)))) * taM) + taA) >> (int) taS); uint r = (uint) (((((long) ((((lhs).R * y) + ((rhs).R * z) + (fR * x)))) * taM) + taA) >> (int) taS); int a; { { a = ((lhsA) * (255 - (rhsA)) + 0x80); a = ((((a) >> 8) + (a)) >> 8); }; a += (rhsA); }; ret = b + (g << 8) + (r << 16) + ((uint) a << 24); }; return ColorBgra.FromUInt32 (ret); }
 			public override void Apply (Span<ColorBgra> dst, ReadOnlySpan<ColorBgra> src)
 			{
@@ -672,7 +672,7 @@ partial class UserBlendOps
 	[Serializable]
 	public sealed class LightenBlendOp : UserBlendOp
 	{
-		public static string StaticName { get { return "Lighten"; } }
+		public static string StaticName => "Lighten";
 		public override ColorBgra Apply (in ColorBgra lhs, in ColorBgra rhs) { int lhsA; { lhsA = ((lhs).A); }; int rhsA; { rhsA = ((rhs).A); }; int y; { y = ((lhsA) * (255 - rhsA) + 0x80); y = ((((y) >> 8) + (y)) >> 8); }; int totalA = y + rhsA; uint ret; if (totalA == 0) { ret = 0; } else { int fB; int fG; int fR; { fB = Math.Max ((lhs).B, (rhs).B); }; { fG = Math.Max ((lhs).G, (rhs).G); }; { fR = Math.Max ((lhs).R, (rhs).R); }; int x; { x = ((lhsA) * (rhsA) + 0x80); x = ((((x) >> 8) + (x)) >> 8); }; int z = rhsA - x; int masIndex = totalA * 3; uint taM = masTable[masIndex]; uint taA = masTable[masIndex + 1]; uint taS = masTable[masIndex + 2]; uint b = (uint) (((((long) ((((lhs).B * y) + ((rhs).B * z) + (fB * x)))) * taM) + taA) >> (int) taS); uint g = (uint) (((((long) ((((lhs).G * y) + ((rhs).G * z) + (fG * x)))) * taM) + taA) >> (int) taS); uint r = (uint) (((((long) ((((lhs).R * y) + ((rhs).R * z) + (fR * x)))) * taM) + taA) >> (int) taS); int a; { { a = ((lhsA) * (255 - (rhsA)) + 0x80); a = ((((a) >> 8) + (a)) >> 8); }; a += (rhsA); }; ret = b + (g << 8) + (r << 16) + ((uint) a << 24); }; return ColorBgra.FromUInt32 (ret); }
 		public override void Apply (Span<ColorBgra> dst, ReadOnlySpan<ColorBgra> src)
 		{
@@ -689,7 +689,7 @@ partial class UserBlendOps
 		private sealed class LightenBlendOpWithOpacity : UserBlendOp
 		{
 			private int opacity; private byte ApplyOpacity (byte a) { int r; { r = (a); }; { r = ((r) * (this.opacity) + 0x80); r = ((((r) >> 8) + (r)) >> 8); }; return (byte) r; }
-			public static string StaticName { get { return "UserBlendOps." + "Lighten" + "BlendOp.Name"; } }
+			public static string StaticName => "UserBlendOps." + "Lighten" + "BlendOp.Name";
 			public override ColorBgra Apply (in ColorBgra lhs, in ColorBgra rhs) { int lhsA; { lhsA = ((lhs).A); }; int rhsA; { rhsA = ApplyOpacity ((rhs).A); }; int y; { y = ((lhsA) * (255 - rhsA) + 0x80); y = ((((y) >> 8) + (y)) >> 8); }; int totalA = y + rhsA; uint ret; if (totalA == 0) { ret = 0; } else { int fB; int fG; int fR; { fB = Math.Max ((lhs).B, (rhs).B); }; { fG = Math.Max ((lhs).G, (rhs).G); }; { fR = Math.Max ((lhs).R, (rhs).R); }; int x; { x = ((lhsA) * (rhsA) + 0x80); x = ((((x) >> 8) + (x)) >> 8); }; int z = rhsA - x; int masIndex = totalA * 3; uint taM = masTable[masIndex]; uint taA = masTable[masIndex + 1]; uint taS = masTable[masIndex + 2]; uint b = (uint) (((((long) ((((lhs).B * y) + ((rhs).B * z) + (fB * x)))) * taM) + taA) >> (int) taS); uint g = (uint) (((((long) ((((lhs).G * y) + ((rhs).G * z) + (fG * x)))) * taM) + taA) >> (int) taS); uint r = (uint) (((((long) ((((lhs).R * y) + ((rhs).R * z) + (fR * x)))) * taM) + taA) >> (int) taS); int a; { { a = ((lhsA) * (255 - (rhsA)) + 0x80); a = ((((a) >> 8) + (a)) >> 8); }; a += (rhsA); }; ret = b + (g << 8) + (r << 16) + ((uint) a << 24); }; return ColorBgra.FromUInt32 (ret); }
 			public override void Apply (Span<ColorBgra> dst, ReadOnlySpan<ColorBgra> src)
 			{
@@ -707,7 +707,7 @@ partial class UserBlendOps
 	[Serializable]
 	public sealed class DarkenBlendOp : UserBlendOp
 	{
-		public static string StaticName { get { return "Darken"; } }
+		public static string StaticName => "Darken";
 		public override ColorBgra Apply (in ColorBgra lhs, in ColorBgra rhs) { int lhsA; { lhsA = ((lhs).A); }; int rhsA; { rhsA = ((rhs).A); }; int y; { y = ((lhsA) * (255 - rhsA) + 0x80); y = ((((y) >> 8) + (y)) >> 8); }; int totalA = y + rhsA; uint ret; if (totalA == 0) { ret = 0; } else { int fB; int fG; int fR; { fB = Math.Min ((lhs).B, (rhs).B); }; { fG = Math.Min ((lhs).G, (rhs).G); }; { fR = Math.Min ((lhs).R, (rhs).R); }; int x; { x = ((lhsA) * (rhsA) + 0x80); x = ((((x) >> 8) + (x)) >> 8); }; int z = rhsA - x; int masIndex = totalA * 3; uint taM = masTable[masIndex]; uint taA = masTable[masIndex + 1]; uint taS = masTable[masIndex + 2]; uint b = (uint) (((((long) ((((lhs).B * y) + ((rhs).B * z) + (fB * x)))) * taM) + taA) >> (int) taS); uint g = (uint) (((((long) ((((lhs).G * y) + ((rhs).G * z) + (fG * x)))) * taM) + taA) >> (int) taS); uint r = (uint) (((((long) ((((lhs).R * y) + ((rhs).R * z) + (fR * x)))) * taM) + taA) >> (int) taS); int a; { { a = ((lhsA) * (255 - (rhsA)) + 0x80); a = ((((a) >> 8) + (a)) >> 8); }; a += (rhsA); }; ret = b + (g << 8) + (r << 16) + ((uint) a << 24); }; return ColorBgra.FromUInt32 (ret); }
 		public override void Apply (Span<ColorBgra> dst, ReadOnlySpan<ColorBgra> src)
 		{
@@ -724,7 +724,7 @@ partial class UserBlendOps
 		private sealed class DarkenBlendOpWithOpacity : UserBlendOp
 		{
 			private int opacity; private byte ApplyOpacity (byte a) { int r; { r = (a); }; { r = ((r) * (this.opacity) + 0x80); r = ((((r) >> 8) + (r)) >> 8); }; return (byte) r; }
-			public static string StaticName { get { return "UserBlendOps." + "Darken" + "BlendOp.Name"; } }
+			public static string StaticName => "UserBlendOps." + "Darken" + "BlendOp.Name";
 			public override ColorBgra Apply (in ColorBgra lhs, in ColorBgra rhs) { int lhsA; { lhsA = ((lhs).A); }; int rhsA; { rhsA = ApplyOpacity ((rhs).A); }; int y; { y = ((lhsA) * (255 - rhsA) + 0x80); y = ((((y) >> 8) + (y)) >> 8); }; int totalA = y + rhsA; uint ret; if (totalA == 0) { ret = 0; } else { int fB; int fG; int fR; { fB = Math.Min ((lhs).B, (rhs).B); }; { fG = Math.Min ((lhs).G, (rhs).G); }; { fR = Math.Min ((lhs).R, (rhs).R); }; int x; { x = ((lhsA) * (rhsA) + 0x80); x = ((((x) >> 8) + (x)) >> 8); }; int z = rhsA - x; int masIndex = totalA * 3; uint taM = masTable[masIndex]; uint taA = masTable[masIndex + 1]; uint taS = masTable[masIndex + 2]; uint b = (uint) (((((long) ((((lhs).B * y) + ((rhs).B * z) + (fB * x)))) * taM) + taA) >> (int) taS); uint g = (uint) (((((long) ((((lhs).G * y) + ((rhs).G * z) + (fG * x)))) * taM) + taA) >> (int) taS); uint r = (uint) (((((long) ((((lhs).R * y) + ((rhs).R * z) + (fR * x)))) * taM) + taA) >> (int) taS); int a; { { a = ((lhsA) * (255 - (rhsA)) + 0x80); a = ((((a) >> 8) + (a)) >> 8); }; a += (rhsA); }; ret = b + (g << 8) + (r << 16) + ((uint) a << 24); }; return ColorBgra.FromUInt32 (ret); }
 			public override void Apply (Span<ColorBgra> dst, ReadOnlySpan<ColorBgra> src)
 			{
@@ -742,7 +742,7 @@ partial class UserBlendOps
 	[Serializable]
 	public sealed class ScreenBlendOp : UserBlendOp
 	{
-		public static string StaticName { get { return "Screen"; } }
+		public static string StaticName => "Screen";
 		public override ColorBgra Apply (in ColorBgra lhs, in ColorBgra rhs) { int lhsA; { lhsA = ((lhs).A); }; int rhsA; { rhsA = ((rhs).A); }; int y; { y = ((lhsA) * (255 - rhsA) + 0x80); y = ((((y) >> 8) + (y)) >> 8); }; int totalA = y + rhsA; uint ret; if (totalA == 0) { ret = 0; } else { int fB; int fG; int fR; { { fB = ((((rhs).B)) * (((lhs).B)) + 0x80); fB = ((((fB) >> 8) + (fB)) >> 8); }; fB = ((rhs).B) + ((lhs).B) - fB; }; { { fG = ((((rhs).G)) * (((lhs).G)) + 0x80); fG = ((((fG) >> 8) + (fG)) >> 8); }; fG = ((rhs).G) + ((lhs).G) - fG; }; { { fR = ((((rhs).R)) * (((lhs).R)) + 0x80); fR = ((((fR) >> 8) + (fR)) >> 8); }; fR = ((rhs).R) + ((lhs).R) - fR; }; int x; { x = ((lhsA) * (rhsA) + 0x80); x = ((((x) >> 8) + (x)) >> 8); }; int z = rhsA - x; int masIndex = totalA * 3; uint taM = masTable[masIndex]; uint taA = masTable[masIndex + 1]; uint taS = masTable[masIndex + 2]; uint b = (uint) (((((long) ((((lhs).B * y) + ((rhs).B * z) + (fB * x)))) * taM) + taA) >> (int) taS); uint g = (uint) (((((long) ((((lhs).G * y) + ((rhs).G * z) + (fG * x)))) * taM) + taA) >> (int) taS); uint r = (uint) (((((long) ((((lhs).R * y) + ((rhs).R * z) + (fR * x)))) * taM) + taA) >> (int) taS); int a; { { a = ((lhsA) * (255 - (rhsA)) + 0x80); a = ((((a) >> 8) + (a)) >> 8); }; a += (rhsA); }; ret = b + (g << 8) + (r << 16) + ((uint) a << 24); }; return ColorBgra.FromUInt32 (ret); }
 		public override void Apply (Span<ColorBgra> dst, ReadOnlySpan<ColorBgra> src)
 		{
@@ -759,7 +759,7 @@ partial class UserBlendOps
 		private sealed class ScreenBlendOpWithOpacity : UserBlendOp
 		{
 			private int opacity; private byte ApplyOpacity (byte a) { int r; { r = (a); }; { r = ((r) * (this.opacity) + 0x80); r = ((((r) >> 8) + (r)) >> 8); }; return (byte) r; }
-			public static string StaticName { get { return "UserBlendOps." + "Screen" + "BlendOp.Name"; } }
+			public static string StaticName => "UserBlendOps." + "Screen" + "BlendOp.Name";
 			public override ColorBgra Apply (in ColorBgra lhs, in ColorBgra rhs) { int lhsA; { lhsA = ((lhs).A); }; int rhsA; { rhsA = ApplyOpacity ((rhs).A); }; int y; { y = ((lhsA) * (255 - rhsA) + 0x80); y = ((((y) >> 8) + (y)) >> 8); }; int totalA = y + rhsA; uint ret; if (totalA == 0) { ret = 0; } else { int fB; int fG; int fR; { { fB = ((((rhs).B)) * (((lhs).B)) + 0x80); fB = ((((fB) >> 8) + (fB)) >> 8); }; fB = ((rhs).B) + ((lhs).B) - fB; }; { { fG = ((((rhs).G)) * (((lhs).G)) + 0x80); fG = ((((fG) >> 8) + (fG)) >> 8); }; fG = ((rhs).G) + ((lhs).G) - fG; }; { { fR = ((((rhs).R)) * (((lhs).R)) + 0x80); fR = ((((fR) >> 8) + (fR)) >> 8); }; fR = ((rhs).R) + ((lhs).R) - fR; }; int x; { x = ((lhsA) * (rhsA) + 0x80); x = ((((x) >> 8) + (x)) >> 8); }; int z = rhsA - x; int masIndex = totalA * 3; uint taM = masTable[masIndex]; uint taA = masTable[masIndex + 1]; uint taS = masTable[masIndex + 2]; uint b = (uint) (((((long) ((((lhs).B * y) + ((rhs).B * z) + (fB * x)))) * taM) + taA) >> (int) taS); uint g = (uint) (((((long) ((((lhs).G * y) + ((rhs).G * z) + (fG * x)))) * taM) + taA) >> (int) taS); uint r = (uint) (((((long) ((((lhs).R * y) + ((rhs).R * z) + (fR * x)))) * taM) + taA) >> (int) taS); int a; { { a = ((lhsA) * (255 - (rhsA)) + 0x80); a = ((((a) >> 8) + (a)) >> 8); }; a += (rhsA); }; ret = b + (g << 8) + (r << 16) + ((uint) a << 24); }; return ColorBgra.FromUInt32 (ret); }
 			public override void Apply (Span<ColorBgra> dst, ReadOnlySpan<ColorBgra> src)
 			{
@@ -777,7 +777,7 @@ partial class UserBlendOps
 	[Serializable]
 	public sealed class XorBlendOp : UserBlendOp
 	{
-		public static string StaticName { get { return "Xor"; } }
+		public static string StaticName => "Xor";
 		public override ColorBgra Apply (in ColorBgra lhs, in ColorBgra rhs) { int lhsA; { lhsA = ((lhs).A); }; int rhsA; { rhsA = ((rhs).A); }; int y; { y = ((lhsA) * (255 - rhsA) + 0x80); y = ((((y) >> 8) + (y)) >> 8); }; int totalA = y + rhsA; uint ret; if (totalA == 0) { ret = 0; } else { int fB; int fG; int fR; { fB = (((lhs).B) ^ ((rhs).B)); }; { fG = (((lhs).G) ^ ((rhs).G)); }; { fR = (((lhs).R) ^ ((rhs).R)); }; int x; { x = ((lhsA) * (rhsA) + 0x80); x = ((((x) >> 8) + (x)) >> 8); }; int z = rhsA - x; int masIndex = totalA * 3; uint taM = masTable[masIndex]; uint taA = masTable[masIndex + 1]; uint taS = masTable[masIndex + 2]; uint b = (uint) (((((long) ((((lhs).B * y) + ((rhs).B * z) + (fB * x)))) * taM) + taA) >> (int) taS); uint g = (uint) (((((long) ((((lhs).G * y) + ((rhs).G * z) + (fG * x)))) * taM) + taA) >> (int) taS); uint r = (uint) (((((long) ((((lhs).R * y) + ((rhs).R * z) + (fR * x)))) * taM) + taA) >> (int) taS); int a; { { a = ((lhsA) * (255 - (rhsA)) + 0x80); a = ((((a) >> 8) + (a)) >> 8); }; a += (rhsA); }; ret = b + (g << 8) + (r << 16) + ((uint) a << 24); }; return ColorBgra.FromUInt32 (ret); }
 		public override void Apply (Span<ColorBgra> dst, ReadOnlySpan<ColorBgra> src)
 		{
@@ -794,7 +794,7 @@ partial class UserBlendOps
 		private sealed class XorBlendOpWithOpacity : UserBlendOp
 		{
 			private int opacity; private byte ApplyOpacity (byte a) { int r; { r = (a); }; { r = ((r) * (this.opacity) + 0x80); r = ((((r) >> 8) + (r)) >> 8); }; return (byte) r; }
-			public static string StaticName { get { return "UserBlendOps." + "Xor" + "BlendOp.Name"; } }
+			public static string StaticName => "UserBlendOps." + "Xor" + "BlendOp.Name";
 			public override ColorBgra Apply (in ColorBgra lhs, in ColorBgra rhs) { int lhsA; { lhsA = ((lhs).A); }; int rhsA; { rhsA = ApplyOpacity ((rhs).A); }; int y; { y = ((lhsA) * (255 - rhsA) + 0x80); y = ((((y) >> 8) + (y)) >> 8); }; int totalA = y + rhsA; uint ret; if (totalA == 0) { ret = 0; } else { int fB; int fG; int fR; { fB = (((lhs).B) ^ ((rhs).B)); }; { fG = (((lhs).G) ^ ((rhs).G)); }; { fR = (((lhs).R) ^ ((rhs).R)); }; int x; { x = ((lhsA) * (rhsA) + 0x80); x = ((((x) >> 8) + (x)) >> 8); }; int z = rhsA - x; int masIndex = totalA * 3; uint taM = masTable[masIndex]; uint taA = masTable[masIndex + 1]; uint taS = masTable[masIndex + 2]; uint b = (uint) (((((long) ((((lhs).B * y) + ((rhs).B * z) + (fB * x)))) * taM) + taA) >> (int) taS); uint g = (uint) (((((long) ((((lhs).G * y) + ((rhs).G * z) + (fG * x)))) * taM) + taA) >> (int) taS); uint r = (uint) (((((long) ((((lhs).R * y) + ((rhs).R * z) + (fR * x)))) * taM) + taA) >> (int) taS); int a; { { a = ((lhsA) * (255 - (rhsA)) + 0x80); a = ((((a) >> 8) + (a)) >> 8); }; a += (rhsA); }; ret = b + (g << 8) + (r << 16) + ((uint) a << 24); }; return ColorBgra.FromUInt32 (ret); }
 			public override void Apply (Span<ColorBgra> dst, ReadOnlySpan<ColorBgra> src)
 			{
