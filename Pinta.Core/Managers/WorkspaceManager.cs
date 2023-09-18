@@ -209,8 +209,7 @@ public sealed class WorkspaceManager : IWorkspaceService
 	{
 		bool fileOpened = false;
 
-		if (parent == null)
-			parent = PintaCore.Chrome.MainWindow;
+		parent ??= PintaCore.Chrome.MainWindow;
 
 		try {
 			// Open the image and add it to the layers

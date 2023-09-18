@@ -53,9 +53,7 @@ public sealed class DashPatternBox
 	/// <returns>null if the DashPatternBox has already been setup; otherwise, returns the DashPatternBox itself.</returns>
 	public Gtk.ComboBoxText? SetupToolbar (Box tb)
 	{
-		if (dash_pattern_sep == null) {
-			dash_pattern_sep = GtkExtensions.CreateToolBarSeparator ();
-		}
+		dash_pattern_sep ??= GtkExtensions.CreateToolBarSeparator ();
 
 		tb.Append (dash_pattern_sep);
 
@@ -66,10 +64,8 @@ public sealed class DashPatternBox
 
 		tb.Append (dash_pattern_label);
 
-		if (comboBox == null) {
-			comboBox = new ToolBarComboBox (50, 0, true,
+		comboBox ??= new ToolBarComboBox (50, 0, true,
 				"-", " -", " --", " ---", "  -", "   -", " - --", " - - --------", " - - ---- - ----");
-		}
 
 		tb.Append (comboBox);
 

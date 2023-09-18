@@ -50,8 +50,7 @@ public sealed class PosterizeEffect : BaseEffect
 
 	public override void Render (ImageSurface src, ImageSurface dest, ReadOnlySpan<RectangleI> rois)
 	{
-		if (op == null)
-			op = new UnaryPixelOps.PosterizePixel (Data.Red, Data.Green, Data.Blue);
+		op ??= new UnaryPixelOps.PosterizePixel (Data.Red, Data.Green, Data.Blue);
 
 		op.Apply (dest, src, rois);
 	}

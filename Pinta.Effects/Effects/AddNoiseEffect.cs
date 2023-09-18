@@ -112,10 +112,8 @@ public sealed class AddNoiseEffect : BaseEffect
 		int dev = this.intensity * this.intensity / 4;
 		int sat = this.color_saturation * 4096 / 100;
 
-		if (thread_rand == null) {
-			thread_rand = new Random (unchecked(System.Threading.Thread.CurrentThread.GetHashCode () ^
+		thread_rand ??= new Random (unchecked(System.Threading.Thread.CurrentThread.GetHashCode () ^
 			    unchecked((int) DateTime.Now.Ticks)));
-		}
 
 		Random localRand = thread_rand;
 		ReadOnlySpan<int> localLookup = lookup.AsSpan ();

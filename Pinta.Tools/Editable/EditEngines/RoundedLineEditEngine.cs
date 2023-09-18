@@ -29,7 +29,7 @@ using Pinta.Core;
 
 namespace Pinta.Tools;
 
-public class RoundedLineEditEngine : BaseEditEngine
+public sealed class RoundedLineEditEngine : BaseEditEngine
 {
 	protected override string ShapeName => Translations.GetString ("Rounded Line Shape");
 
@@ -82,8 +82,7 @@ public class RoundedLineEditEngine : BaseEditEngine
 		base.HandleBuildToolBar (tb, settings, toolPrefix);
 
 
-		if (radius_sep == null)
-			radius_sep = GtkExtensions.CreateToolBarSeparator ();
+		radius_sep ??= GtkExtensions.CreateToolBarSeparator ();
 
 		tb.Append (radius_sep);
 

@@ -38,7 +38,7 @@ public interface IPaletteService
 	void SetColor (bool setPrimary, Color color, bool addToRecent = true);
 }
 
-public class PaletteManager : IPaletteService
+public sealed class PaletteManager : IPaletteService
 {
 	private Color primary;
 	private Color secondary;
@@ -69,9 +69,7 @@ public class PaletteManager : IPaletteService
 
 	public Palette CurrentPalette {
 		get {
-			if (palette == null) {
-				palette = Palette.GetDefault ();
-			}
+			palette ??= Palette.GetDefault ();
 
 			return palette;
 		}
