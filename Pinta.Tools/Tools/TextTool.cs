@@ -404,9 +404,9 @@ public sealed class TextTool : BaseTool
 
 	private int OutlineWidth => outline_width.GetValueAsInt ();
 
-	protected bool StrokeText => (fill_button.SelectedItem.GetTagOrDefault (0) >= 1 && fill_button.SelectedItem.GetTagOrDefault (0) != 3);
-	protected bool FillText => fill_button.SelectedItem.GetTagOrDefault (0) <= 1 || fill_button.SelectedItem.GetTagOrDefault (0) == 3;
-	protected bool BackgroundFill => fill_button.SelectedItem.GetTagOrDefault (0) == 3;
+	private bool StrokeText => (fill_button.SelectedItem.GetTagOrDefault (0) >= 1 && fill_button.SelectedItem.GetTagOrDefault (0) != 3);
+	private bool FillText => fill_button.SelectedItem.GetTagOrDefault (0) <= 1 || fill_button.SelectedItem.GetTagOrDefault (0) == 3;
+	private bool BackgroundFill => fill_button.SelectedItem.GetTagOrDefault (0) == 3;
 	#endregion
 
 	#region Activation/Deactivation
