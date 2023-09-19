@@ -35,12 +35,12 @@ public sealed class RoundedLineEditEngine : BaseEditEngine
 
 	public const double DefaultRadius = 20d;
 
-	protected double previousRadius = DefaultRadius;
+	private double previous_radius = DefaultRadius;
 
 	// NRT - Created in HandleBuildToolBar
-	protected Gtk.SpinButton radius = null!;
-	protected Gtk.Label radius_label = null!;
-	protected Gtk.Separator radius_sep = null!;
+	private Gtk.SpinButton radius = null!;
+	private Gtk.Label radius_label = null!;
+	private Gtk.Separator radius_sep = null!;
 
 	public double Radius {
 		get {
@@ -147,14 +147,14 @@ public sealed class RoundedLineEditEngine : BaseEditEngine
 
 	protected override void RecallPreviousSettings ()
 	{
-		Radius = previousRadius;
+		Radius = previous_radius;
 
 		base.RecallPreviousSettings ();
 	}
 
 	protected override void StorePreviousSettings ()
 	{
-		previousRadius = Radius;
+		previous_radius = Radius;
 
 		base.StorePreviousSettings ();
 	}

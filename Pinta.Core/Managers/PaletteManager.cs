@@ -193,19 +193,17 @@ public sealed class PaletteManager : IPaletteService
 		PintaCore.Settings.PutSetting (RECENT_COLORS_SETTINGS_KEY, colors);
 	}
 
-	#region Protected Methods
-	protected void OnPrimaryColorChanged ()
+	private void OnPrimaryColorChanged ()
 	{
 		PrimaryColorChanged?.Invoke (this, EventArgs.Empty);
 	}
 
-	protected void OnRecentColorsChanged () => RecentColorsChanged?.Invoke (this, EventArgs.Empty);
+	private void OnRecentColorsChanged () => RecentColorsChanged?.Invoke (this, EventArgs.Empty);
 
-	protected void OnSecondaryColorChanged ()
+	private void OnSecondaryColorChanged ()
 	{
 		SecondaryColorChanged?.Invoke (this, EventArgs.Empty);
 	}
-	#endregion
 
 	#region Events
 	public event EventHandler? PrimaryColorChanged;
