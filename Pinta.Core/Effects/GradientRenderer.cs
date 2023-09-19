@@ -173,11 +173,12 @@ public abstract class GradientRenderer
 				var lerpByte = ComputeByteLerp (x, y);
 				var lerpAlpha = lerp_alphas[lerpByte];
 				ref ColorBgra pixel = ref row[x];
-
-				pixel.B = Utility.FastScaleByteByByte (pixel.B, lerpAlpha);
-				pixel.G = Utility.FastScaleByteByByte (pixel.G, lerpAlpha);
-				pixel.R = Utility.FastScaleByteByByte (pixel.R, lerpAlpha);
-				pixel.A = Utility.FastScaleByteByByte (pixel.A, lerpAlpha);
+				pixel = ColorBgra.FromBgra (
+					b: Utility.FastScaleByteByByte (pixel.B, lerpAlpha),
+					g: Utility.FastScaleByteByByte (pixel.G, lerpAlpha),
+					r: Utility.FastScaleByteByByte (pixel.R, lerpAlpha),
+					a: Utility.FastScaleByteByByte (pixel.A, lerpAlpha)
+				);
 			}
 		} else if (alpha_only && !alpha_blending) {
 			for (var x = rect.Left; x <= right; ++x) {

@@ -387,10 +387,12 @@ public sealed class UnaryPixelOps
 			for (int i = 0; i < src.Length; ++i) {
 				ref ColorBgra d = ref dst[i];
 				ref readonly ColorBgra s = ref src[i];
-				d.B = CurveB[s.B];
-				d.G = CurveG[s.G];
-				d.R = CurveR[s.R];
-				d.A = s.A;
+				d = ColorBgra.FromBgra (
+					b: CurveB[s.B],
+					g: CurveG[s.G],
+					r: CurveR[s.R],
+					a: s.A
+				);
 			}
 		}
 
