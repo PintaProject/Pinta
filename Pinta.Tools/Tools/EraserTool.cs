@@ -237,15 +237,19 @@ public sealed class EraserTool : BaseBrushTool
 
 					// Note: premultiplied alpha is used!
 					if (mouse_button == MouseButton.Right) {
-						col.A = (byte) ((col.A * force + bk_col_a * (255 - force)) / 255);
-						col.R = (byte) ((col.R * force + bk_col_r * (255 - force)) / 255);
-						col.G = (byte) ((col.G * force + bk_col_g * (255 - force)) / 255);
-						col.B = (byte) ((col.B * force + bk_col_b * (255 - force)) / 255);
+						col = ColorBgra.FromBgra (
+							b: (byte) ((col.B * force + bk_col_b * (255 - force)) / 255),
+							g: (byte) ((col.G * force + bk_col_g * (255 - force)) / 255),
+							r: (byte) ((col.R * force + bk_col_r * (255 - force)) / 255),
+							a: (byte) ((col.A * force + bk_col_a * (255 - force)) / 255)
+						);
 					} else {
-						col.A = (byte) (col.A * force / 255);
-						col.R = (byte) (col.R * force / 255);
-						col.G = (byte) (col.G * force / 255);
-						col.B = (byte) (col.B * force / 255);
+						col = ColorBgra.FromBgra (
+							b: (byte) (col.B * force / 255),
+							g: (byte) (col.G * force / 255),
+							r: (byte) (col.R * force / 255),
+							a: (byte) (col.A * force / 255)
+						);
 					}
 				}
 			}
