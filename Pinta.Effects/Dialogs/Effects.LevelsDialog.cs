@@ -335,23 +335,21 @@ public partial class LevelsDialog : Gtk.Dialog
 
 	private ColorBgra UpdateByMask (ColorBgra before, byte val)
 	{
-		ColorBgra after = before;
-		int average = -1, oldaverage = -1;
-
-		if (!(mask[0] || mask[1] || mask[2])) {
+		if (!(mask[0] || mask[1] || mask[2]))
 			return before;
-		}
+
+		ColorBgra after = before;
+		int average = -1;
+		int oldaverage;
 
 		do {
-			float factor;
-
 			oldaverage = average;
 			average = MaskAvg (after);
 
-			if (average == 0) {
+			if (average == 0)
 				break;
-			}
-			factor = (float) val / average;
+
+			float factor = (float) val / average;
 
 			for (int c = 0; c < 3; c++) {
 				if (mask[c]) {
@@ -397,13 +395,14 @@ public partial class LevelsDialog : Gtk.Dialog
 
 	private void UpdateGammaByMask (float val)
 	{
-		float average = -1;
-
 		if (!(mask[0] || mask[1] || mask[2]))
 			return;
 
+		float average;
+
 		do {
 			average = MaskGamma ();
+
 			float factor = val / average;
 
 			for (int c = 0; c < 3; c++) {
