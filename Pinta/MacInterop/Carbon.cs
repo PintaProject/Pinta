@@ -487,7 +487,7 @@ struct CarbonHICommand //technically HICommandExtended, but they're compatible
 	readonly IntPtr windowRef;
 
 	[FieldOffset (8)]
-	HIMenuItem menuItem;
+	readonly HIMenuItem menuItem;
 
 	public CarbonHICommand (uint commandID, HIMenuItem item)
 	{
