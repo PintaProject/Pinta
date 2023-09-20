@@ -77,7 +77,6 @@ internal sealed class AddinListViewItem : GObject.Object
 
 internal sealed class AddinListViewItemWidget : Box
 {
-	private AddinListViewItem? item;
 	private readonly Gtk.Label name_label;
 	private readonly Gtk.Label desc_label;
 
@@ -107,8 +106,6 @@ internal sealed class AddinListViewItemWidget : Box
 	// Set the widget's contents to the provided item.
 	public void Update (AddinListViewItem item)
 	{
-		this.item = item;
-
 		name_label.SetLabel (item.Name);
 		desc_label.SetLabel (item.Description);
 	}
