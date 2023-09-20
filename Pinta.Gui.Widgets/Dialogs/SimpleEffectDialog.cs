@@ -150,8 +150,7 @@ public sealed class SimpleEffectDialog : Gtk.Dialog
 			if (skip || string.Compare (mi.Name, "IsDefault", true) == 0)
 				continue;
 
-			if (caption == null)
-				caption = MakeCaption (mi.Name);
+			caption ??= MakeCaption (mi.Name);
 
 			if (mType == typeof (int) && (caption == "Seed"))
 				AddWidget (CreateSeed (localizer.GetString (caption), EffectData, mi, attrs));

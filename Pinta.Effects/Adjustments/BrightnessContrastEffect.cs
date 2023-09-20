@@ -100,8 +100,7 @@ public sealed class BrightnessContrastEffect : BaseEffect
 			divide = 1;
 		}
 
-		if (rgb_table == null)
-			rgb_table = new byte[65536];
+		rgb_table ??= new byte[65536];
 
 		if (divide == 0) {
 			for (int intensity = 0; intensity < 256; intensity++) {

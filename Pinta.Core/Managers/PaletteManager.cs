@@ -38,7 +38,7 @@ public interface IPaletteService
 	void SetColor (bool setPrimary, Color color, bool addToRecent = true);
 }
 
-public class PaletteManager : IPaletteService
+public sealed class PaletteManager : IPaletteService
 {
 	private Color primary;
 	private Color secondary;
@@ -69,9 +69,7 @@ public class PaletteManager : IPaletteService
 
 	public Palette CurrentPalette {
 		get {
-			if (palette == null) {
-				palette = Palette.GetDefault ();
-			}
+			palette ??= Palette.GetDefault ();
 
 			return palette;
 		}
@@ -195,19 +193,17 @@ public class PaletteManager : IPaletteService
 		PintaCore.Settings.PutSetting (RECENT_COLORS_SETTINGS_KEY, colors);
 	}
 
-	#region Protected Methods
-	protected void OnPrimaryColorChanged ()
+	private void OnPrimaryColorChanged ()
 	{
 		PrimaryColorChanged?.Invoke (this, EventArgs.Empty);
 	}
 
-	protected void OnRecentColorsChanged () => RecentColorsChanged?.Invoke (this, EventArgs.Empty);
+	private void OnRecentColorsChanged () => RecentColorsChanged?.Invoke (this, EventArgs.Empty);
 
-	protected void OnSecondaryColorChanged ()
+	private void OnSecondaryColorChanged ()
 	{
 		SecondaryColorChanged?.Invoke (this, EventArgs.Empty);
 	}
-	#endregion
 
 	#region Events
 	public event EventHandler? PrimaryColorChanged;

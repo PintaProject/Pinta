@@ -29,18 +29,18 @@ using Pinta.Core;
 
 namespace Pinta.Tools;
 
-public class RoundedLineEditEngine : BaseEditEngine
+public sealed class RoundedLineEditEngine : BaseEditEngine
 {
 	protected override string ShapeName => Translations.GetString ("Rounded Line Shape");
 
 	public const double DefaultRadius = 20d;
 
-	protected double previousRadius = DefaultRadius;
+	private double previous_radius = DefaultRadius;
 
 	// NRT - Created in HandleBuildToolBar
-	protected Gtk.SpinButton radius = null!;
-	protected Gtk.Label radius_label = null!;
-	protected Gtk.Separator radius_sep = null!;
+	private Gtk.SpinButton radius = null!;
+	private Gtk.Label radius_label = null!;
+	private Gtk.Separator radius_sep = null!;
 
 	public double Radius {
 		get {
@@ -82,8 +82,7 @@ public class RoundedLineEditEngine : BaseEditEngine
 		base.HandleBuildToolBar (tb, settings, toolPrefix);
 
 
-		if (radius_sep == null)
-			radius_sep = GtkExtensions.CreateToolBarSeparator ();
+		radius_sep ??= GtkExtensions.CreateToolBarSeparator ();
 
 		tb.Append (radius_sep);
 
@@ -148,14 +147,14 @@ public class RoundedLineEditEngine : BaseEditEngine
 
 	protected override void RecallPreviousSettings ()
 	{
-		Radius = previousRadius;
+		Radius = previous_radius;
 
 		base.RecallPreviousSettings ();
 	}
 
 	protected override void StorePreviousSettings ()
 	{
-		previousRadius = Radius;
+		previous_radius = Radius;
 
 		base.StorePreviousSettings ();
 	}

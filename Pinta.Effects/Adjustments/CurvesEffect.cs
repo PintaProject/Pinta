@@ -54,8 +54,7 @@ public sealed class CurvesEffect : BaseEffect
 		if (Data.ControlPoints == null)
 			return;
 
-		if (op == null)
-			op = MakeUop ();
+		op ??= MakeUop ();
 
 		op.Apply (dest, src, rois);
 	}

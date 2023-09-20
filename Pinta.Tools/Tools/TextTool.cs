@@ -17,7 +17,7 @@ using Pinta.Core;
 
 namespace Pinta.Tools;
 
-public class TextTool : BaseTool
+public sealed class TextTool : BaseTool
 {
 	// Variables for dragging
 	private PointD start_mouse_xy;
@@ -229,8 +229,7 @@ public class TextTool : BaseTool
 
 		tb.Append (right_alignment_btn);
 
-		if (fill_sep == null)
-			fill_sep = GtkExtensions.CreateToolBarSeparator ();
+		fill_sep ??= GtkExtensions.CreateToolBarSeparator ();
 
 		tb.Append (fill_sep);
 
@@ -255,8 +254,7 @@ public class TextTool : BaseTool
 
 		tb.Append (fill_button);
 
-		if (outline_sep == null)
-			outline_sep = GtkExtensions.CreateToolBarSeparator ();
+		outline_sep ??= GtkExtensions.CreateToolBarSeparator ();
 
 		tb.Append (outline_sep);
 
@@ -406,9 +404,9 @@ public class TextTool : BaseTool
 
 	private int OutlineWidth => outline_width.GetValueAsInt ();
 
-	protected bool StrokeText => (fill_button.SelectedItem.GetTagOrDefault (0) >= 1 && fill_button.SelectedItem.GetTagOrDefault (0) != 3);
-	protected bool FillText => fill_button.SelectedItem.GetTagOrDefault (0) <= 1 || fill_button.SelectedItem.GetTagOrDefault (0) == 3;
-	protected bool BackgroundFill => fill_button.SelectedItem.GetTagOrDefault (0) == 3;
+	private bool StrokeText => (fill_button.SelectedItem.GetTagOrDefault (0) >= 1 && fill_button.SelectedItem.GetTagOrDefault (0) != 3);
+	private bool FillText => fill_button.SelectedItem.GetTagOrDefault (0) <= 1 || fill_button.SelectedItem.GetTagOrDefault (0) == 3;
+	private bool BackgroundFill => fill_button.SelectedItem.GetTagOrDefault (0) == 3;
 	#endregion
 
 	#region Activation/Deactivation
@@ -802,8 +800,7 @@ public class TextTool : BaseTool
 
 		im_context.SetClientWidget (PintaCore.Workspace.ActiveWorkspace.Canvas);
 
-		if (selection == null)
-			selection = PintaCore.Workspace.ActiveDocument.Selection.Clone ();
+		selection ??= PintaCore.Workspace.ActiveDocument.Selection.Clone ();
 
 		//Start ignoring any Surface.Clone calls from this point on (so that it doesn't start to loop).
 		ignore_clone_finalizations = true;

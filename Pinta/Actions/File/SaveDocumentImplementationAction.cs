@@ -147,8 +147,7 @@ internal sealed class SaveDocumentImplmentationAction : IActionHandler
 
 	private static bool SaveFile (Document document, Gio.File? file, FormatDescriptor? format, Window parent)
 	{
-		if (file is null)
-			file = document.File;
+		file ??= document.File;
 
 		if (file is null)
 			throw new ArgumentException ("Attempted to save a document with no associated file");

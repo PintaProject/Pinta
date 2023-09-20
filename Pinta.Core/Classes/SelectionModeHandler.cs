@@ -56,8 +56,7 @@ public sealed class SelectionModeHandler
 
 	public void BuildToolbar (Gtk.Box tb, ISettingsService settings)
 	{
-		if (selection_label == null)
-			selection_label = Gtk.Label.New (Translations.GetString (" Selection Mode: "));
+		selection_label ??= Gtk.Label.New (Translations.GetString (" Selection Mode: "));
 
 		tb.Append (selection_label);
 

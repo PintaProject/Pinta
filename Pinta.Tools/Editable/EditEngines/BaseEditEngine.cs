@@ -283,8 +283,7 @@ public abstract class BaseEditEngine
 
 		tb.Append (brush_width);
 
-		if (fill_sep == null)
-			fill_sep = GtkExtensions.CreateToolBarSeparator ();
+		fill_sep ??= GtkExtensions.CreateToolBarSeparator ();
 
 		tb.Append (fill_sep);
 
@@ -308,8 +307,7 @@ public abstract class BaseEditEngine
 
 		tb.Append (fill_button);
 
-		if (shape_type_sep == null)
-			shape_type_sep = GtkExtensions.CreateToolBarSeparator ();
+		shape_type_sep ??= GtkExtensions.CreateToolBarSeparator ();
 
 		tb.Append (shape_type_sep);
 
