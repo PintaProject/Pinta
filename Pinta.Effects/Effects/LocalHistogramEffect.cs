@@ -155,7 +155,7 @@ public abstract class LocalHistogramEffect : BaseEffect
 			int right = Math.Min (rad, width - 1 - rect.Left);
 
 			for (int v = top; v <= bottom; ++v) {
-				ReadOnlySpan<ColorBgra> psamples = src_data.Slice ((y + v) * width + rect.Left + left);
+				ReadOnlySpan<ColorBgra> psamples = src_data[((y + v) * width + rect.Left + left)..];
 
 				for (int u = left, i = 0; u <= right; ++u, ++i) {
 					ref readonly ColorBgra psamp = ref psamples[i];
@@ -337,7 +337,7 @@ public abstract class LocalHistogramEffect : BaseEffect
 			int right = Math.Min (rad, width - 1 - rect.Left);
 
 			for (int v = top; v <= bottom; ++v) {
-				ReadOnlySpan<ColorBgra> psamples = src_data.Slice ((y + v) * width + rect.Left + left);
+				ReadOnlySpan<ColorBgra> psamples = src_data[((y + v) * width + rect.Left + left)..];
 
 				for (int u = left, i = 0; u <= right; ++u, ++i) {
 					ref readonly ColorBgra psamp = ref psamples[i];
