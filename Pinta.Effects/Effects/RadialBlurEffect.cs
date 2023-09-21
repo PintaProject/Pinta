@@ -82,17 +82,11 @@ public sealed class RadialBlurEffect : BaseEffect
 
 					int fsr = fr / n;
 
-					int sr = 0;
-					int sg = 0;
-					int sb = 0;
-					int sa = 0;
-					int sc = 0;
-
-					sr += src_pixel.R * src_pixel.A;
-					sg += src_pixel.G * src_pixel.A;
-					sb += src_pixel.B * src_pixel.A;
-					sa += src_pixel.A;
-					++sc;
+					int sr = src_pixel.R * src_pixel.A;
+					int sg = src_pixel.G * src_pixel.A;
+					int sb = src_pixel.B * src_pixel.A;
+					int sa = src_pixel.A;
+					int sc = 1;
 
 					int ox1 = fx;
 					int ox2 = fx;
