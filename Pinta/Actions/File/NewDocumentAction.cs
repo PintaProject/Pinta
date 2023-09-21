@@ -26,7 +26,6 @@
 
 using System;
 using Pinta.Core;
-
 namespace Pinta.Actions;
 
 internal sealed class NewDocumentAction : IActionHandler
@@ -45,10 +44,10 @@ internal sealed class NewDocumentAction : IActionHandler
 
 	private async void Activated (object sender, EventArgs e)
 	{
-		int imgWidth = 0;
-		int imgHeight = 0;
-		var bg_type = NewImageDialog.BackgroundType.White;
-		var using_clipboard = true;
+		int imgWidth;
+		int imgHeight;
+		NewImageDialog.BackgroundType bg_type;
+		bool using_clipboard;
 
 		// Try to get the dimensions of an image on the clipboard
 		// for the initial width and height values on the NewImageDialog
@@ -64,6 +63,8 @@ internal sealed class NewDocumentAction : IActionHandler
 		} else {
 			imgWidth = cb_texture.Width;
 			imgHeight = cb_texture.Height;
+			bg_type = NewImageDialog.BackgroundType.White;
+			using_clipboard = true;
 		}
 
 		var dialog = new NewImageDialog (imgWidth, imgHeight, bg_type, using_clipboard);
