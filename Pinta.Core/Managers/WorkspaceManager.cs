@@ -340,8 +340,7 @@ public sealed class WorkspaceManager : IWorkspaceService
 
 	private void OnActiveDocumentChanged (EventArgs e)
 	{
-		if (ActiveDocumentChanged != null)
-			ActiveDocumentChanged (this, EventArgs.Empty);
+		ActiveDocumentChanged?.Invoke (this, EventArgs.Empty);
 
 		OnSelectionChanged ();
 
@@ -354,20 +353,17 @@ public sealed class WorkspaceManager : IWorkspaceService
 			OnSelectionChanged ();
 		};
 
-		if (DocumentCreated != null)
-			DocumentCreated (this, e);
+		DocumentCreated?.Invoke (this, e);
 	}
 
 	private void OnDocumentOpened (DocumentEventArgs e)
 	{
-		if (DocumentOpened != null)
-			DocumentOpened (this, e);
+		DocumentOpened?.Invoke (this, e);
 	}
 
 	private void OnDocumentClosed (DocumentEventArgs e)
 	{
-		if (DocumentClosed != null)
-			DocumentClosed (this, e);
+		DocumentClosed?.Invoke (this, e);
 	}
 
 	private void OnSelectionChanged ()

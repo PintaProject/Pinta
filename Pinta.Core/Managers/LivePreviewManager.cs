@@ -108,9 +108,7 @@ public sealed class LivePreviewManager
 		if (effect.EffectData != null)
 			effect.EffectData.PropertyChanged += EffectData_PropertyChanged;
 
-		if (Started != null) {
-			Started (this, new LivePreviewStartedEventArgs ());
-		}
+		Started?.Invoke (this, new LivePreviewStartedEventArgs ());
 
 		var settings = new AsyncEffectRenderer.Settings () {
 			ThreadCount = PintaCore.System.RenderThreads,
@@ -305,9 +303,7 @@ public sealed class LivePreviewManager
 	void FireLivePreviewRenderUpdatedEvent (double progress, RectangleI bounds)
 	{
 
-		if (RenderUpdated != null) {
-			RenderUpdated (this, new LivePreviewRenderUpdatedEventArgs (progress, bounds));
-		}
+		RenderUpdated?.Invoke (this, new LivePreviewRenderUpdatedEventArgs (progress, bounds));
 	}
 
 	private void LivePreview_RenderUpdated (object? o, LivePreviewRenderUpdatedEventArgs args)

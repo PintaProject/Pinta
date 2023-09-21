@@ -303,8 +303,7 @@ public sealed class DocumentWorkspace
 	#region Private Methods
 	private void OnCanvasInvalidated (CanvasInvalidatedEventArgs e)
 	{
-		if (CanvasInvalidated != null)
-			CanvasInvalidated (this, e);
+		CanvasInvalidated?.Invoke (this, e);
 	}
 
 	public void OnViewSizeChanged ()

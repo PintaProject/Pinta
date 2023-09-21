@@ -30,7 +30,7 @@ using Mono.Addins.Localization;
 
 namespace Pinta.Core;
 
-public class ChromeManager
+public sealed class ChromeManager
 {
 	private PointI last_canvas_cursor_point;
 	private bool main_window_busy;
@@ -164,19 +164,16 @@ public class ChromeManager
 		simple_effect_dialog_handler (effect, localizer);
 	}
 	#endregion
-	#region Protected Methods
-	protected void OnLastCanvasCursorPointChanged ()
+
+	private void OnLastCanvasCursorPointChanged ()
 	{
-		if (LastCanvasCursorPointChanged != null)
-			LastCanvasCursorPointChanged (this, EventArgs.Empty);
+		LastCanvasCursorPointChanged?.Invoke (this, EventArgs.Empty);
 	}
 
-	protected void OnStatusBarTextChanged (string text)
+	private void OnStatusBarTextChanged (string text)
 	{
-		if (StatusBarTextChanged != null)
-			StatusBarTextChanged (this, new TextChangedEventArgs (text));
+		StatusBarTextChanged?.Invoke (this, new TextChangedEventArgs (text));
 	}
-	#endregion
 
 	#region Public Events
 	public event EventHandler? LastCanvasCursorPointChanged;
