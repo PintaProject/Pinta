@@ -26,6 +26,7 @@
 
 using System;
 using Pinta.Core;
+
 namespace Pinta.Actions;
 
 internal sealed class NewDocumentAction : IActionHandler
