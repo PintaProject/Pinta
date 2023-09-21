@@ -198,11 +198,11 @@ internal static class Carbon
 
 	internal static string UnConvertCharCode (int i)
 	{
-		return new string (new char[] {
-			(char)(i >> 24),
-			(char)(0xFF & (i >> 16)),
-			(char)(0xFF & (i >> 8)),
-			(char)(0xFF & i),
+		return new string (stackalloc char[] {
+			(char) (i >> 24),
+			(char) (0xFF & (i >> 16)),
+			(char) (0xFF & (i >> 8)),
+			(char) (0xFF & i),
 		});
 	}
 
