@@ -49,7 +49,7 @@ public sealed class HistogramRgb : Histogram
 		int width = surface.Width;
 
 		for (int y = rect.Y; y <= rect.Bottom; ++y) {
-			var row = data.Slice (y * width);
+			var row = data[(y * width)..];
 			for (int x = rect.X; x <= rect_right; ++x) {
 				ref readonly ColorBgra c = ref row[x];
 				++histogramB[c.B];

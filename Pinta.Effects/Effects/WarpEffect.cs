@@ -145,7 +145,7 @@ public abstract class WarpEffect : BaseEffect
 						++sampleCount;
 					}
 
-					dst_row[x] = ColorBgra.Blend (samples.Slice (0, sampleCount));
+					dst_row[x] = ColorBgra.Blend (samples[..sampleCount]);
 				}
 			}
 		}
