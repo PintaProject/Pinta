@@ -83,16 +83,12 @@ public sealed class PaintBrushManager : IPaintBrushService
 
 	private void OnBrushAdded (BasePaintBrush brush)
 	{
-		var handler = BrushAdded;
-		if (handler != null)
-			handler (this, new BrushEventArgs (brush));
+		BrushAdded?.Invoke (this, new BrushEventArgs (brush));
 	}
 
 	private void OnBrushRemoved (BasePaintBrush brush)
 	{
-		var handler = BrushRemoved;
-		if (handler != null)
-			handler (this, new BrushEventArgs (brush));
+		BrushRemoved?.Invoke (this, new BrushEventArgs (brush));
 	}
 
 	private sealed class BrushSorter : Comparer<BasePaintBrush>

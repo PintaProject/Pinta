@@ -93,8 +93,7 @@ public sealed class ToolBarDropDownButton : Gtk.MenuButton
 
 	private void OnSelectedItemChanged ()
 	{
-		if (SelectedItemChanged != null)
-			SelectedItemChanged (this, EventArgs.Empty);
+		SelectedItemChanged?.Invoke (this, EventArgs.Empty);
 	}
 
 	public event EventHandler? SelectedItemChanged;

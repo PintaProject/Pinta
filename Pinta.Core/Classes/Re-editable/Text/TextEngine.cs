@@ -451,9 +451,7 @@ public sealed class TextEngine
 
 	private void OnModified ()
 	{
-		EventHandler? handler = Modified;
-		if (handler != null)
-			handler (this, EventArgs.Empty);
+		Modified?.Invoke (this, EventArgs.Empty);
 	}
 
 	private void DeleteSelection ()
