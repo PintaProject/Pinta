@@ -43,18 +43,25 @@ public static class ApplicationEvents
 	public static event EventHandler<ApplicationQuitEventArgs> Quit {
 		add {
 			lock (lock_obj) {
+
 				quit += value;
-				if (quitHandlerRef == IntPtr.Zero)
-					quitHandlerRef = Carbon.InstallApplicationEventHandler (quit_delegate, CarbonEventApple.QuitApplication);
+
+				if (quitHandlerRef != IntPtr.Zero)
+					return;
+
+				quitHandlerRef = Carbon.InstallApplicationEventHandler (quit_delegate, CarbonEventApple.QuitApplication);
 			}
 		}
 		remove {
 			lock (lock_obj) {
+
 				quit -= value;
-				if (quit == null && quitHandlerRef != IntPtr.Zero) {
-					Carbon.RemoveEventHandler (quitHandlerRef);
-					quitHandlerRef = IntPtr.Zero;
-				}
+
+				if (quit != null || quitHandlerRef == IntPtr.Zero)
+					return;
+
+				Carbon.RemoveEventHandler (quitHandlerRef);
+				quitHandlerRef = IntPtr.Zero;
 			}
 		}
 	}
@@ -77,18 +84,25 @@ public static class ApplicationEvents
 	public static event EventHandler<ApplicationEventArgs> Reopen {
 		add {
 			lock (lock_obj) {
+
 				reopen += value;
-				if (reopenHandlerRef == IntPtr.Zero)
-					reopenHandlerRef = Carbon.InstallApplicationEventHandler (reopen_delegate, CarbonEventApple.ReopenApplication);
+
+				if (reopenHandlerRef != IntPtr.Zero)
+					return;
+
+				reopenHandlerRef = Carbon.InstallApplicationEventHandler (reopen_delegate, CarbonEventApple.ReopenApplication);
 			}
 		}
 		remove {
 			lock (lock_obj) {
+
 				reopen -= value;
-				if (reopen == null && reopenHandlerRef != IntPtr.Zero) {
-					Carbon.RemoveEventHandler (reopenHandlerRef);
-					reopenHandlerRef = IntPtr.Zero;
-				}
+
+				if (reopen != null || reopenHandlerRef == IntPtr.Zero)
+					return;
+
+				Carbon.RemoveEventHandler (reopenHandlerRef);
+				reopenHandlerRef = IntPtr.Zero;
 			}
 		}
 	}
@@ -112,17 +126,22 @@ public static class ApplicationEvents
 		add {
 			lock (lock_obj) {
 				openDocuments += value;
-				if (openDocumentsHandlerRef == IntPtr.Zero)
-					openDocumentsHandlerRef = Carbon.InstallApplicationEventHandler (open_delegate, CarbonEventApple.OpenDocuments);
+
+				if (openDocumentsHandlerRef != IntPtr.Zero)
+					return;
+
+				openDocumentsHandlerRef = Carbon.InstallApplicationEventHandler (open_delegate, CarbonEventApple.OpenDocuments);
 			}
 		}
 		remove {
 			lock (lock_obj) {
 				openDocuments -= value;
-				if (openDocuments == null && openDocumentsHandlerRef != IntPtr.Zero) {
-					Carbon.RemoveEventHandler (openDocumentsHandlerRef);
-					openDocumentsHandlerRef = IntPtr.Zero;
-				}
+
+				if (openDocuments != null || openDocumentsHandlerRef == IntPtr.Zero)
+					return;
+
+				Carbon.RemoveEventHandler (openDocumentsHandlerRef);
+				openDocumentsHandlerRef = IntPtr.Zero;
 			}
 		}
 	}
@@ -151,24 +170,32 @@ public static class ApplicationEvents
 	public static event EventHandler<ApplicationUrlEventArgs> OpenUrls {
 		add {
 			lock (lock_obj) {
+
 				openUrls += value;
-				if (openUrlsHandlerRef == IntPtr.Zero)
-					openUrlsHandlerRef = Carbon.InstallApplicationEventHandler (open_urls_delegate,
-						new CarbonEventTypeSpec[] {
-							//For some reason GetUrl doesn't take CarbonEventClass.AppleEvent
-							//need to use GURL, GURL
-							new CarbonEventTypeSpec (CarbonEventClass.Internet, (int)CarbonEventApple.GetUrl)
-						}
-					);
+
+				if (openUrlsHandlerRef != IntPtr.Zero)
+					return;
+
+				openUrlsHandlerRef = Carbon.InstallApplicationEventHandler (
+					open_urls_delegate,
+					new CarbonEventTypeSpec[] {
+						//For some reason GetUrl doesn't take CarbonEventClass.AppleEvent
+						//need to use GURL, GURL
+						new CarbonEventTypeSpec (CarbonEventClass.Internet, (int)CarbonEventApple.GetUrl)
+					}
+				);
 			}
 		}
 		remove {
 			lock (lock_obj) {
+
 				openUrls -= value;
-				if (openUrls == null && openUrlsHandlerRef != IntPtr.Zero) {
-					Carbon.RemoveEventHandler (openUrlsHandlerRef);
-					openUrlsHandlerRef = IntPtr.Zero;
-				}
+
+				if (openUrls != null || openUrlsHandlerRef == IntPtr.Zero)
+					return;
+
+				Carbon.RemoveEventHandler (openUrlsHandlerRef);
+				openUrlsHandlerRef = IntPtr.Zero;
 			}
 		}
 	}
