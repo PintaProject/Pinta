@@ -73,7 +73,7 @@ public sealed class SurfaceDiff
 	private const int MINIMUM_SAVINGS_PERCENT = 10;
 
 	private readonly BitArray bitmask;
-	private RectangleI bounds;
+	private readonly RectangleI bounds;
 	private readonly ColorBgra[] pixels;
 
 	#region Constructors
