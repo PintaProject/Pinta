@@ -32,12 +32,12 @@ namespace Pinta;
 
 public sealed class ResizeImageDialog : Dialog
 {
-	private readonly CheckButton percentageRadio;
-	private readonly CheckButton absoluteRadio;
-	private readonly SpinButton percentageSpinner;
-	private readonly SpinButton widthSpinner;
-	private readonly SpinButton heightSpinner;
-	private readonly CheckButton aspectCheckbox;
+	private readonly CheckButton percentage_radio;
+	private readonly CheckButton absolute_radio;
+	private readonly SpinButton percentage_spinner;
+	private readonly SpinButton width_spinner;
+	private readonly SpinButton height_spinner;
+	private readonly CheckButton aspect_checkbox;
 
 	private bool value_changing;
 
@@ -54,15 +54,15 @@ public sealed class ResizeImageDialog : Dialog
 		DefaultWidth = 300;
 		DefaultHeight = 200;
 
-		percentageRadio = CheckButton.NewWithLabel (Translations.GetString ("By percentage:"));
-		absoluteRadio = CheckButton.NewWithLabel (Translations.GetString ("By absolute size:"));
-		absoluteRadio.SetGroup (percentageRadio);
+		percentage_radio = CheckButton.NewWithLabel (Translations.GetString ("By percentage:"));
+		absolute_radio = CheckButton.NewWithLabel (Translations.GetString ("By absolute size:"));
+		absolute_radio.SetGroup (percentage_radio);
 
-		percentageSpinner = SpinButton.NewWithRange (1, int.MaxValue, 1);
-		widthSpinner = SpinButton.NewWithRange (1, int.MaxValue, 1);
-		heightSpinner = SpinButton.NewWithRange (1, int.MaxValue, 1);
+		percentage_spinner = SpinButton.NewWithRange (1, int.MaxValue, 1);
+		width_spinner = SpinButton.NewWithRange (1, int.MaxValue, 1);
+		height_spinner = SpinButton.NewWithRange (1, int.MaxValue, 1);
 
-		aspectCheckbox = CheckButton.NewWithLabel (Translations.GetString ("Maintain aspect ratio"));
+		aspect_checkbox = CheckButton.NewWithLabel (Translations.GetString ("Maintain aspect ratio"));
 
 		const int spacing = 6;
 		var main_vbox = new Box { Spacing = spacing };
@@ -70,60 +70,60 @@ public sealed class ResizeImageDialog : Dialog
 
 		var hbox_percent = new Box { Spacing = spacing };
 		hbox_percent.SetOrientation (Orientation.Horizontal);
-		hbox_percent.Append (percentageRadio);
-		hbox_percent.Append (percentageSpinner);
+		hbox_percent.Append (percentage_radio);
+		hbox_percent.Append (percentage_spinner);
 		hbox_percent.Append (Label.New ("%"));
 		main_vbox.Append (hbox_percent);
 
-		main_vbox.Append (absoluteRadio);
+		main_vbox.Append (absolute_radio);
 
 		var grid = new Grid { RowSpacing = spacing, ColumnSpacing = spacing, ColumnHomogeneous = false };
 		var width_label = Label.New (Translations.GetString ("Width:"));
 		width_label.Halign = Align.End;
 		grid.Attach (width_label, 0, 0, 1, 1);
-		grid.Attach (widthSpinner, 1, 0, 1, 1);
+		grid.Attach (width_spinner, 1, 0, 1, 1);
 		grid.Attach (Label.New (Translations.GetString ("pixels")), 2, 0, 1, 1);
 
 		var height_label = Label.New (Translations.GetString ("Height:"));
 		height_label.Halign = Align.End;
 		grid.Attach (height_label, 0, 1, 1, 1);
-		grid.Attach (heightSpinner, 1, 1, 1, 1);
+		grid.Attach (height_spinner, 1, 1, 1, 1);
 		grid.Attach (Label.New (Translations.GetString ("pixels")), 2, 1, 1, 1);
 
 		main_vbox.Append (grid);
 
-		main_vbox.Append (aspectCheckbox);
+		main_vbox.Append (aspect_checkbox);
 
 		var content_area = this.GetContentAreaBox ();
 		content_area.SetAllMargins (12);
 		content_area.Append (main_vbox);
 
-		aspectCheckbox.Active = true;
+		aspect_checkbox.Active = true;
 
-		widthSpinner.Value = PintaCore.Workspace.ImageSize.Width;
-		heightSpinner.Value = PintaCore.Workspace.ImageSize.Height;
+		width_spinner.Value = PintaCore.Workspace.ImageSize.Width;
+		height_spinner.Value = PintaCore.Workspace.ImageSize.Height;
 
-		percentageRadio.OnToggled += percentageRadio_Toggled;
-		absoluteRadio.OnToggled += absoluteRadio_Toggled;
-		percentageRadio.Active = true;
+		percentage_radio.OnToggled += percentageRadio_Toggled;
+		absolute_radio.OnToggled += absoluteRadio_Toggled;
+		percentage_radio.Active = true;
 
-		percentageSpinner.Value = 100;
-		percentageSpinner.OnValueChanged += percentageSpinner_ValueChanged;
+		percentage_spinner.Value = 100;
+		percentage_spinner.OnValueChanged += percentageSpinner_ValueChanged;
 
-		widthSpinner.OnValueChanged += widthSpinner_ValueChanged;
-		heightSpinner.OnValueChanged += heightSpinner_ValueChanged;
+		width_spinner.OnValueChanged += widthSpinner_ValueChanged;
+		height_spinner.OnValueChanged += heightSpinner_ValueChanged;
 
-		widthSpinner.SetActivatesDefault (true);
-		heightSpinner.SetActivatesDefault (true);
-		percentageSpinner.SetActivatesDefault (true);
+		width_spinner.SetActivatesDefault (true);
+		height_spinner.SetActivatesDefault (true);
+		percentage_spinner.SetActivatesDefault (true);
 
-		percentageSpinner.GrabFocus ();
+		percentage_spinner.GrabFocus ();
 	}
 
 	#region Public Methods
 	public void SaveChanges ()
 	{
-		PintaCore.Workspace.ResizeImage (widthSpinner.GetValueAsInt (), heightSpinner.GetValueAsInt ());
+		PintaCore.Workspace.ResizeImage (width_spinner.GetValueAsInt (), height_spinner.GetValueAsInt ());
 	}
 	#endregion
 
@@ -133,11 +133,11 @@ public sealed class ResizeImageDialog : Dialog
 		if (value_changing)
 			return;
 
-		if (!aspectCheckbox.Active)
+		if (!aspect_checkbox.Active)
 			return;
 
 		value_changing = true;
-		widthSpinner.Value = (int) ((heightSpinner.Value * PintaCore.Workspace.ImageSize.Width) / PintaCore.Workspace.ImageSize.Height);
+		width_spinner.Value = (int) ((height_spinner.Value * PintaCore.Workspace.ImageSize.Width) / PintaCore.Workspace.ImageSize.Height);
 		value_changing = false;
 	}
 
@@ -146,18 +146,18 @@ public sealed class ResizeImageDialog : Dialog
 		if (value_changing)
 			return;
 
-		if (!aspectCheckbox.Active)
+		if (!aspect_checkbox.Active)
 			return;
 
 		value_changing = true;
-		heightSpinner.Value = (int) ((widthSpinner.Value * PintaCore.Workspace.ImageSize.Height) / PintaCore.Workspace.ImageSize.Width);
+		height_spinner.Value = (int) ((width_spinner.Value * PintaCore.Workspace.ImageSize.Height) / PintaCore.Workspace.ImageSize.Width);
 		value_changing = false;
 	}
 
 	private void percentageSpinner_ValueChanged (object? sender, EventArgs e)
 	{
-		widthSpinner.Value = (int) (PintaCore.Workspace.ImageSize.Width * (percentageSpinner.GetValueAsInt () / 100f));
-		heightSpinner.Value = (int) (PintaCore.Workspace.ImageSize.Height * (percentageSpinner.GetValueAsInt () / 100f));
+		width_spinner.Value = (int) (PintaCore.Workspace.ImageSize.Width * (percentage_spinner.GetValueAsInt () / 100f));
+		height_spinner.Value = (int) (PintaCore.Workspace.ImageSize.Height * (percentage_spinner.GetValueAsInt () / 100f));
 	}
 
 	private void absoluteRadio_Toggled (object? sender, EventArgs e)
@@ -172,18 +172,18 @@ public sealed class ResizeImageDialog : Dialog
 
 	private void RadioToggle ()
 	{
-		if (percentageRadio.Active) {
-			percentageSpinner.Sensitive = true;
+		if (percentage_radio.Active) {
+			percentage_spinner.Sensitive = true;
 
-			widthSpinner.Sensitive = false;
-			heightSpinner.Sensitive = false;
-			aspectCheckbox.Sensitive = false;
+			width_spinner.Sensitive = false;
+			height_spinner.Sensitive = false;
+			aspect_checkbox.Sensitive = false;
 		} else {
-			percentageSpinner.Sensitive = false;
+			percentage_spinner.Sensitive = false;
 
-			widthSpinner.Sensitive = true;
-			heightSpinner.Sensitive = true;
-			aspectCheckbox.Sensitive = true;
+			width_spinner.Sensitive = true;
+			height_spinner.Sensitive = true;
+			aspect_checkbox.Sensitive = true;
 		}
 	}
 
