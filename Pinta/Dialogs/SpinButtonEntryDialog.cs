@@ -31,7 +31,7 @@ namespace Pinta;
 
 public sealed class SpinButtonEntryDialog : Dialog
 {
-	private readonly SpinButton spinButton;
+	private readonly SpinButton spin_button;
 
 	public SpinButtonEntryDialog (string title, Window parent, string label, int min, int max, int current)
 	{
@@ -48,19 +48,19 @@ public sealed class SpinButtonEntryDialog : Dialog
 		lbl.Xalign = 0;
 		hbox.Append (lbl);
 
-		spinButton = SpinButton.NewWithRange (min, max, 1);
-		spinButton.Value = current;
-		hbox.Append (spinButton);
+		spin_button = SpinButton.NewWithRange (min, max, 1);
+		spin_button.Value = current;
+		hbox.Append (spin_button);
 
 		var content_area = this.GetContentAreaBox ();
 		content_area.SetAllMargins (12);
 		content_area.Append (hbox);
 
-		spinButton.SetActivatesDefault (true);
+		spin_button.SetActivatesDefault (true);
 	}
 
 	public int GetValue ()
 	{
-		return spinButton.GetValueAsInt ();
+		return spin_button.GetValueAsInt ();
 	}
 }
