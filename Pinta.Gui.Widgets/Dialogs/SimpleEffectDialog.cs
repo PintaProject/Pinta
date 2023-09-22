@@ -206,7 +206,7 @@ public sealed class SimpleEffectDialog : Gtk.Dialog
 			labels.Add (label);
 		}
 
-		var widget = new ComboBoxWidget (labels.ToArray ()) {
+		var widget = new ComboBoxWidget (labels) {
 			Label = caption
 		};
 
@@ -232,7 +232,7 @@ public sealed class SimpleEffectDialog : Gtk.Dialog
 		if (dict != null)
 			entries.AddRange (dict.Keys);
 
-		var widget = new ComboBoxWidget (entries.ToArray ()) {
+		var widget = new ComboBoxWidget (entries) {
 			Label = caption
 		};
 
