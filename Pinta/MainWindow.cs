@@ -129,16 +129,16 @@ public sealed class MainWindow
 	{
 		var view = (DocumentViewContent) e.Item;
 
-		if (PintaCore.Workspace.OpenDocuments.IndexOf (view.Document) <= -1)
+		if (PintaCore.Workspace.OpenDocuments.IndexOf (view.Document) < 0)
 			return;
 
 		PintaCore.Workspace.SetActiveDocument (view.Document);
 		PintaCore.Actions.File.Close.Activate ();
 
-		// User must have canceled the close
-		if (PintaCore.Workspace.OpenDocuments.IndexOf (view.Document) <= -1)
+		if (PintaCore.Workspace.OpenDocuments.IndexOf (view.Document) < 0)
 			return;
 
+		// User must have canceled the close
 		e.Cancel = true;
 	}
 
