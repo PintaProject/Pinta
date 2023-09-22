@@ -24,7 +24,6 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 // THE SOFTWARE.
 
-using System;
 using Cairo;
 
 using Pinta.Core;
@@ -33,10 +32,13 @@ namespace Pinta.Tools.Brushes;
 
 public sealed class SquaresBrush : BasePaintBrush
 {
-	private const double Theta = Math.PI / 2;
+	// Let's take theta to be Pi / 2...
 
-	private static readonly double theta_sin = Math.Sin (Theta);
-	private static readonly double theta_cos = Math.Cos (Theta);
+	// ...its sine is clearly 1
+	private const double Theta_sin = 1;
+
+	// ...and its cosine is clearly
+	private const double Theta_cos = 0;
 
 	public override string Name => Translations.GetString ("Squares");
 
@@ -51,8 +53,8 @@ public sealed class SquaresBrush : BasePaintBrush
 	{
 		int dx = x - lastX;
 		int dy = y - lastY;
-		double px = theta_cos * dx - theta_sin * dy;
-		double py = theta_sin * dx + theta_cos * dy;
+		double px = Theta_cos * dx - Theta_sin * dy;
+		double py = Theta_sin * dx + Theta_cos * dy;
 
 		g.MoveTo (lastX - px, lastY - py);
 		g.LineTo (lastX + px, lastY + py);
