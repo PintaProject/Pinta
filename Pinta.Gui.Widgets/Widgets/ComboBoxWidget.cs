@@ -25,6 +25,7 @@
 // THE SOFTWARE.
 
 using System;
+using System.Collections.Generic;
 using Gtk;
 using Pinta.Core;
 
@@ -35,7 +36,7 @@ public sealed class ComboBoxWidget : Box
 	private readonly Label label;
 	private readonly ComboBoxText combobox;
 
-	public ComboBoxWidget (string[] entries)
+	public ComboBoxWidget (IEnumerable<string> entries)
 	{
 		const int spacing = 6;
 
