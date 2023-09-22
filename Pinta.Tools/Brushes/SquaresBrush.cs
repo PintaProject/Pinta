@@ -33,17 +33,26 @@ namespace Pinta.Tools.Brushes;
 
 public sealed class SquaresBrush : BasePaintBrush
 {
-	private static readonly double theta = Math.PI / 2;
+	private const double Theta = Math.PI / 2;
+
+	private static readonly double theta_sin = Math.Sin (Theta);
+	private static readonly double theta_cos = Math.Cos (Theta);
 
 	public override string Name => Translations.GetString ("Squares");
 
-	protected override RectangleI OnMouseMove (Context g, Color strokeColor, ImageSurface surface,
-						      int x, int y, int lastX, int lastY)
+	protected override RectangleI OnMouseMove (
+		Context g,
+		Color strokeColor,
+		ImageSurface surface,
+		int x,
+		int y,
+		int lastX,
+		int lastY)
 	{
 		int dx = x - lastX;
 		int dy = y - lastY;
-		double px = Math.Cos (theta) * dx - Math.Sin (theta) * dy;
-		double py = Math.Sin (theta) * dx + Math.Cos (theta) * dy;
+		double px = theta_cos * dx - theta_sin * dy;
+		double py = theta_sin * dx + theta_cos * dy;
 
 		g.MoveTo (lastX - px, lastY - py);
 		g.LineTo (lastX + px, lastY + py);
