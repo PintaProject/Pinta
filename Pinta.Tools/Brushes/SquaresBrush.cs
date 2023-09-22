@@ -37,7 +37,7 @@ public sealed class SquaresBrush : BasePaintBrush
 	// ...its sine is clearly 1
 	private const double Theta_sin = 1;
 
-	// ...and its cosine is clearly
+	// ...and its cosine is clearly 0
 	private const double Theta_cos = 0;
 
 	public override string Name => Translations.GetString ("Squares");
