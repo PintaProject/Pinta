@@ -61,9 +61,7 @@ public sealed class ComboBoxWidget : Box
 		foreach (var s in entries)
 			combobox.AppendText (s);
 
-		combobox.OnChanged += delegate {
-			Changed?.Invoke (this, EventArgs.Empty);
-		};
+		combobox.OnChanged += (_, _) => Changed?.Invoke (this, EventArgs.Empty);
 	}
 
 	public string Label {
