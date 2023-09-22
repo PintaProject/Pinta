@@ -437,7 +437,6 @@ public sealed class SimpleEffectDialog : Gtk.Dialog
 		EffectDataChanged?.Invoke (this, new PropertyChangedEventArgs (fieldName));
 	}
 
-	// Returns the type for fields and properties and null for everything else
 	private static Type GetTypeForMember (MemberInfo mi)
 	{
 		return mi switch {
