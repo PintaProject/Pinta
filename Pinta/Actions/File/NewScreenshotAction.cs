@@ -71,9 +71,11 @@ internal sealed class NewScreenshotAction : IActionHandler
 				// The empty string means that the compositor may unfortunately place the dialog wherever it pleases.
 				// https://flatpak.github.io/xdg-desktop-portal/#parent_window
 				var rootWindowID = "";
-				var portalOptions = new Dictionary<string, object> {
-					{ "modal", true },
-					{ "interactive", true }}; // Enables options such as delay, specific windows, etc.
+				var portalOptions = new Dictionary<string, object> // Enables options such as delay, specific windows, etc.
+				{
+					["modal"] = true,
+					["interactive"] = true,
+				};
 
 				var handle = await portal.ScreenshotAsync (rootWindowID, portalOptions);
 				await handle.WatchResponseAsync (
@@ -85,11 +87,13 @@ internal sealed class NewScreenshotAction : IActionHandler
 							return;
 
 						string? uri = reply.results["uri"].ToString ();
-						if (uri is not null && PintaCore.Workspace.OpenFile (Gio.FileHelper.NewForUri (uri))) {
-							// Mark as not having a file, so that the user doesn't unintentionally
-							// save using the temp file.
-							PintaCore.Workspace.ActiveDocument.ClearFileReference ();
-						}
+
+						if (uri is null || !PintaCore.Workspace.OpenFile (Gio.FileHelper.NewForUri (uri)))
+							return;
+
+						// Mark as not having a file, so that the user doesn't unintentionally
+						// save using the temp file.
+						PintaCore.Workspace.ActiveDocument.ClearFileReference ();
 					}
 				);
 
