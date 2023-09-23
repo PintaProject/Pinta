@@ -36,9 +36,7 @@ public sealed class DashPatternBox
 	private Label? dash_pattern_label;
 	private Separator? dash_pattern_sep;
 
-	public ToolBarComboBox? comboBox;
-
-
+	public ToolBarComboBox? ComboBox { get; private set; }
 
 	/// <summary>
 	/// Sets up the DashPatternBox in the Toolbar.
@@ -64,17 +62,17 @@ public sealed class DashPatternBox
 
 		tb.Append (dash_pattern_label);
 
-		comboBox ??= new ToolBarComboBox (50, 0, true,
+		ComboBox ??= new ToolBarComboBox (50, 0, true,
 				"-", " -", " --", " ---", "  -", "   -", " - --", " - - --------", " - - ---- - ----");
 
-		tb.Append (comboBox);
+		tb.Append (ComboBox);
 
 		if (dash_change_setup) {
 			return null;
 		} else {
 			dash_change_setup = true;
 
-			return comboBox.ComboBox;
+			return ComboBox.ComboBox;
 		}
 	}
 }
