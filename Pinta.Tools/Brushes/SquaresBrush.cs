@@ -32,14 +32,6 @@ namespace Pinta.Tools.Brushes;
 
 public sealed class SquaresBrush : BasePaintBrush
 {
-	// Let's take theta to be Pi / 2...
-
-	// ...its sine is clearly 1
-	private const double Theta_sin = 1;
-
-	// ...and its cosine is clearly 0
-	private const double Theta_cos = 0;
-
 	public override string Name => Translations.GetString ("Squares");
 
 	protected override RectangleI OnMouseMove (
@@ -53,8 +45,10 @@ public sealed class SquaresBrush : BasePaintBrush
 	{
 		int dx = x - lastX;
 		int dy = y - lastY;
-		double px = Theta_cos * dx - Theta_sin * dy;
-		double py = Theta_sin * dx + Theta_cos * dy;
+
+		// 90-degree rotation
+		double px = -dy;
+		double py = +dx;
 
 		g.MoveTo (lastX - px, lastY - py);
 		g.LineTo (lastX + px, lastY + py);
