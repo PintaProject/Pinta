@@ -31,6 +31,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.ComponentModel;
+using System.Linq;
 using System.Reflection;
 using System.Text;
 using Gtk;
@@ -115,13 +116,11 @@ public sealed class SimpleEffectDialog : Gtk.Dialog
 	#region EffectData Parser
 	private void BuildDialog (IAddinLocalizer localizer)
 	{
-		var members = EffectData.GetType ().GetMembers ();
+		var members = EffectData.GetType ().GetMembers ().Where (m => m is FieldInfo || m is PropertyInfo);
 
 		foreach (var mi in members) {
-			var mType = GetTypeForMember (mi);
 
-			if (mType == null)
-				continue;
+			var mType = GetTypeForMember (mi);
 
 			string? caption = null;
 			string? hint = null;
@@ -207,16 +206,14 @@ public sealed class SimpleEffectDialog : Gtk.Dialog
 			labels.Add (label);
 		}
 
-		var widget = new ComboBoxWidget (labels.ToArray ()) {
+		var widget = new ComboBoxWidget (labels) {
 			Label = caption
 		};
 
 		if (GetValue (member, o) is object obj)
 			widget.Active = ((IList) member_names).IndexOf (obj.ToString ());
 
-		widget.Changed += delegate (object? sender, EventArgs e) {
-			SetValue (member, o, Enum.Parse (myType, label_to_member[widget.ActiveText]));
-		};
+		widget.Changed += (_, _) => SetValue (member, o, Enum.Parse (myType, label_to_member[widget.ActiveText]));
 
 		return widget;
 	}
@@ -233,19 +230,16 @@ public sealed class SimpleEffectDialog : Gtk.Dialog
 		var entries = new List<string> ();
 
 		if (dict != null)
-			foreach (var str in dict.Keys)
-				entries.Add (str);
+			entries.AddRange (dict.Keys);
 
-		var widget = new ComboBoxWidget (entries.ToArray ()) {
+		var widget = new ComboBoxWidget (entries) {
 			Label = caption
 		};
 
 		if (GetValue (member, o) is string s)
 			widget.Active = entries.IndexOf (s);
 
-		widget.Changed += delegate (object? sender, EventArgs e) {
-			SetValue (member, o, widget.ActiveText);
-		};
+		widget.Changed += (_, _) => SetValue (member, o, widget.ActiveText);
 
 		return widget;
 	}
@@ -285,7 +279,7 @@ public sealed class SimpleEffectDialog : Gtk.Dialog
 		if (GetValue (member, o) is double d)
 			widget.DefaultValue = d;
 
-		widget.ValueChanged += delegate (object? sender, EventArgs e) {
+		widget.ValueChanged += (_, _) => {
 			DelayedUpdate (() => {
 				SetValue (member, o, widget.Value);
 				return false;
@@ -330,7 +324,7 @@ public sealed class SimpleEffectDialog : Gtk.Dialog
 		if (GetValue (member, o) is int i)
 			widget.DefaultValue = i;
 
-		widget.ValueChanged += delegate (object? sender, EventArgs e) {
+		widget.ValueChanged += (_, _) => {
 			DelayedUpdate (() => {
 				SetValue (member, o, widget.ValueAsInt);
 				return false;
@@ -342,48 +336,36 @@ public sealed class SimpleEffectDialog : Gtk.Dialog
 
 	private Gtk.CheckButton CreateCheckBox (string caption, object o, MemberInfo member, object[] attributes)
 	{
-		var widget = new Gtk.CheckButton {
-			Label = caption
-		};
+		var widget = new Gtk.CheckButton { Label = caption };
 
 		if (GetValue (member, o) is bool b)
 			widget.Active = b;
 
-		widget.OnToggled += (_, _) => {
-			SetValue (member, o, widget.Active);
-		};
+		widget.OnToggled += (_, _) => SetValue (member, o, widget.Active);
 
 		return widget;
 	}
 
 	private PointPickerWidget CreateOffsetPicker (string caption, object o, MemberInfo member, object[] attributes)
 	{
-		var widget = new PointPickerWidget {
-			Label = caption
-		};
+		var widget = new PointPickerWidget { Label = caption };
 
 		if (GetValue (member, o) is PointD p)
 			widget.DefaultOffset = p;
 
-		widget.PointPicked += delegate (object? sender, EventArgs e) {
-			SetValue (member, o, widget.Offset);
-		};
+		widget.PointPicked += (_, _) => SetValue (member, o, widget.Offset);
 
 		return widget;
 	}
 
 	private PointPickerWidget CreatePointPicker (string caption, object o, MemberInfo member, object[] attributes)
 	{
-		var widget = new PointPickerWidget {
-			Label = caption
-		};
+		var widget = new PointPickerWidget { Label = caption };
 
 		if (GetValue (member, o) is PointI p)
 			widget.DefaultPoint = p;
 
-		widget.PointPicked += delegate (object? sender, EventArgs e) {
-			SetValue (member, o, widget.Point);
-		};
+		widget.PointPicked += (_, _) => SetValue (member, o, widget.Point);
 
 		return widget;
 	}
@@ -397,7 +379,7 @@ public sealed class SimpleEffectDialog : Gtk.Dialog
 		if (GetValue (member, o) is double d)
 			widget.DefaultValue = d;
 
-		widget.ValueChanged += delegate (object? sender, EventArgs e) {
+		widget.ValueChanged += (_, _) => {
 			DelayedUpdate (() => {
 				SetValue (member, o, widget.Value);
 				return false;
@@ -419,11 +401,7 @@ public sealed class SimpleEffectDialog : Gtk.Dialog
 	private ReseedButtonWidget CreateSeed (string caption, object o, MemberInfo member, object[] attributes)
 	{
 		var widget = new ReseedButtonWidget ();
-
-		widget.Clicked += (_, _) => {
-			SetValue (member, o, random.Next ());
-		};
-
+		widget.Clicked += (_, _) => SetValue (member, o, random.Next ());
 		return widget;
 	}
 	#endregion
@@ -441,7 +419,7 @@ public sealed class SimpleEffectDialog : Gtk.Dialog
 
 	private void SetValue (MemberInfo mi, object o, object val)
 	{
-		string? fieldName = null;
+		string fieldName;
 
 		switch (mi) {
 			case FieldInfo fi:
@@ -452,22 +430,20 @@ public sealed class SimpleEffectDialog : Gtk.Dialog
 				pi.GetSetMethod ()?.Invoke (o, new object[] { val });
 				fieldName = pi.Name;
 				break;
+			default:
+				throw new ArgumentException ("Invalid member type", nameof (mi));
 		}
 
 		EffectDataChanged?.Invoke (this, new PropertyChangedEventArgs (fieldName));
 	}
 
-	// Returns the type for fields and properties and null for everything else
-	private static Type? GetTypeForMember (MemberInfo mi)
+	private static Type GetTypeForMember (MemberInfo mi)
 	{
-		switch (mi) {
-			case FieldInfo fi:
-				return fi.FieldType;
-			case PropertyInfo pi:
-				return pi.PropertyType;
-			default:
-				return null;
-		}
+		return mi switch {
+			FieldInfo fi => fi.FieldType,
+			PropertyInfo pi => pi.PropertyType,
+			_ => throw new ArgumentException ("Invalid member type", nameof (mi)),
+		};
 	}
 
 	private static string MakeCaption (string name)
