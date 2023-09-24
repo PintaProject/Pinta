@@ -24,7 +24,6 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 // THE SOFTWARE.
 
-using System;
 using Cairo;
 
 using Pinta.Core;
@@ -33,17 +32,23 @@ namespace Pinta.Tools.Brushes;
 
 public sealed class SquaresBrush : BasePaintBrush
 {
-	private static readonly double theta = Math.PI / 2;
-
 	public override string Name => Translations.GetString ("Squares");
 
-	protected override RectangleI OnMouseMove (Context g, Color strokeColor, ImageSurface surface,
-						      int x, int y, int lastX, int lastY)
+	protected override RectangleI OnMouseMove (
+		Context g,
+		Color strokeColor,
+		ImageSurface surface,
+		int x,
+		int y,
+		int lastX,
+		int lastY)
 	{
 		int dx = x - lastX;
 		int dy = y - lastY;
-		double px = Math.Cos (theta) * dx - Math.Sin (theta) * dy;
-		double py = Math.Sin (theta) * dx + Math.Cos (theta) * dy;
+
+		// 90-degree rotation
+		double px = -dy;
+		double py = +dx;
 
 		g.MoveTo (lastX - px, lastY - py);
 		g.LineTo (lastX + px, lastY + py);
