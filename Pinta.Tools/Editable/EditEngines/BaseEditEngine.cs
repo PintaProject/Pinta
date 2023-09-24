@@ -254,8 +254,8 @@ public abstract class BaseEditEngine
 			settings.PutSetting (FILL_TYPE_SETTING (toolPrefix), fill_button.SelectedIndex);
 		if (shape_type_button is not null)
 			settings.PutSetting (SHAPE_TYPE_SETTING (toolPrefix), shape_type_button.SelectedIndex);
-		if (dash_pattern_box?.comboBox is not null)
-			settings.PutSetting (DASH_PATTERN_SETTING (toolPrefix), dash_pattern_box.comboBox.ComboBox.GetActiveText ()!);
+		if (dash_pattern_box?.ComboBox is not null)
+			settings.PutSetting (DASH_PATTERN_SETTING (toolPrefix), dash_pattern_box.ComboBox.ComboBox.GetActiveText ()!);
 	}
 
 	public virtual void HandleBuildToolBar (Gtk.Box tb, ISettingsService settings, string toolPrefix)
@@ -1485,7 +1485,7 @@ public abstract class BaseEditEngine
 			owner.UseAntialiasing = engine.AntiAliasing;
 
 			//Update the DashPatternBox to represent the current shape's DashPattern.
-			dash_pattern_box.comboBox!.ComboBox.GetEntry ().SetText (engine.DashPattern); // NRT - Code assumes this is not-null
+			dash_pattern_box.ComboBox!.ComboBox.GetEntry ().SetText (engine.DashPattern); // NRT - Code assumes this is not-null
 
 			OutlineColor = engine.OutlineColor;
 			FillColor = engine.FillColor;
@@ -1501,8 +1501,8 @@ public abstract class BaseEditEngine
 	/// </summary>
 	protected virtual void RecallPreviousSettings ()
 	{
-		if (dash_pattern_box.comboBox != null) {
-			dash_pattern_box.comboBox.ComboBox.GetEntry ().SetText (prev_dash_pattern);
+		if (dash_pattern_box.ComboBox != null) {
+			dash_pattern_box.ComboBox.ComboBox.GetEntry ().SetText (prev_dash_pattern);
 		}
 
 		owner.UseAntialiasing = prev_antialiasing;
@@ -1514,8 +1514,8 @@ public abstract class BaseEditEngine
 	/// </summary>
 	protected virtual void StorePreviousSettings ()
 	{
-		if (dash_pattern_box.comboBox != null) {
-			prev_dash_pattern = dash_pattern_box.comboBox.ComboBox.GetEntry ().GetText ();
+		if (dash_pattern_box.ComboBox != null) {
+			prev_dash_pattern = dash_pattern_box.ComboBox.ComboBox.GetEntry ().GetText ();
 		}
 
 		prev_antialiasing = owner.UseAntialiasing;
