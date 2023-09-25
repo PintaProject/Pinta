@@ -153,23 +153,23 @@ public sealed class SimpleEffectDialog : Gtk.Dialog
 			caption ??= MakeCaption (mi.Name);
 
 			if (mType == typeof (int) && (caption == "Seed"))
-				yield return CreateSeed (localizer.GetString (caption), effectData, random, mi, attrs);
+				yield return CreateSeed (localizer.GetString (caption), effectData, mi, attrs);
 			else if (mType == typeof (int))
-				yield return CreateSlider (localizer.GetString (caption), effectData, random, mi, attrs);
+				yield return CreateSlider (localizer.GetString (caption), effectData, mi, attrs);
 			else if (mType == typeof (double) && (caption == "Angle" || caption == "Rotation"))
-				yield return CreateAnglePicker (localizer.GetString (caption), effectData, random, mi, attrs);
+				yield return CreateAnglePicker (localizer.GetString (caption), effectData, mi, attrs);
 			else if (mType == typeof (double))
-				yield return CreateDoubleSlider (localizer.GetString (caption), effectData, random, mi, attrs);
+				yield return CreateDoubleSlider (localizer.GetString (caption), effectData, mi, attrs);
 			else if (combo && mType == typeof (string))
-				yield return CreateComboBox (localizer.GetString (caption), effectData, random, mi, attrs);
+				yield return CreateComboBox (localizer.GetString (caption), effectData, mi, attrs);
 			else if (mType == typeof (bool))
-				yield return CreateCheckBox (localizer.GetString (caption), effectData, random, mi, attrs);
+				yield return CreateCheckBox (localizer.GetString (caption), effectData, mi, attrs);
 			else if (mType == typeof (PointI))
-				yield return CreatePointPicker (localizer.GetString (caption), effectData, random, mi, attrs);
+				yield return CreatePointPicker (localizer.GetString (caption), effectData, mi, attrs);
 			else if (mType == typeof (PointD))
-				yield return CreateOffsetPicker (localizer.GetString (caption), effectData, random, mi, attrs);
+				yield return CreateOffsetPicker (localizer.GetString (caption), effectData, mi, attrs);
 			else if (mType.IsEnum)
-				yield return CreateEnumComboBox (localizer.GetString (caption), effectData, random, mi, attrs);
+				yield return CreateEnumComboBox (localizer.GetString (caption), effectData, mi, attrs);
 
 			if (hint != null)
 				yield return CreateHintLabel (localizer.GetString (hint));
@@ -179,7 +179,7 @@ public sealed class SimpleEffectDialog : Gtk.Dialog
 	#endregion
 
 	#region Control Builders
-	private ComboBoxWidget CreateEnumComboBox (string caption, object o, Random random, MemberInfo member, object[] attributes)
+	private ComboBoxWidget CreateEnumComboBox (string caption, object o, MemberInfo member, object[] attributes)
 	{
 		var myType = GetTypeForMember (member)!; // NRT - We're looping through members we got from reflection
 
@@ -213,7 +213,7 @@ public sealed class SimpleEffectDialog : Gtk.Dialog
 		return widget;
 	}
 
-	private ComboBoxWidget CreateComboBox (string caption, object o, Random random, MemberInfo member, object[] attributes)
+	private ComboBoxWidget CreateComboBox (string caption, object o, MemberInfo member, object[] attributes)
 	{
 		Dictionary<string, object>? dict = null;
 
@@ -239,7 +239,7 @@ public sealed class SimpleEffectDialog : Gtk.Dialog
 		return widget;
 	}
 
-	private HScaleSpinButtonWidget CreateDoubleSlider (string caption, object o, Random random, MemberInfo member, object[] attributes)
+	private HScaleSpinButtonWidget CreateDoubleSlider (string caption, object o, MemberInfo member, object[] attributes)
 	{
 		var min_value = -100;
 		var max_value = 100;
@@ -284,7 +284,7 @@ public sealed class SimpleEffectDialog : Gtk.Dialog
 		return widget;
 	}
 
-	private HScaleSpinButtonWidget CreateSlider (string caption, object o, Random random, MemberInfo member, object[] attributes)
+	private HScaleSpinButtonWidget CreateSlider (string caption, object o, MemberInfo member, object[] attributes)
 	{
 		var min_value = -100;
 		var max_value = 100;
@@ -329,7 +329,7 @@ public sealed class SimpleEffectDialog : Gtk.Dialog
 		return widget;
 	}
 
-	private Gtk.CheckButton CreateCheckBox (string caption, object o, Random random, MemberInfo member, object[] attributes)
+	private Gtk.CheckButton CreateCheckBox (string caption, object o, MemberInfo member, object[] attributes)
 	{
 		var widget = new Gtk.CheckButton { Label = caption };
 
@@ -341,7 +341,7 @@ public sealed class SimpleEffectDialog : Gtk.Dialog
 		return widget;
 	}
 
-	private PointPickerWidget CreateOffsetPicker (string caption, object o, Random random, MemberInfo member, object[] attributes)
+	private PointPickerWidget CreateOffsetPicker (string caption, object o, MemberInfo member, object[] attributes)
 	{
 		var widget = new PointPickerWidget { Label = caption };
 
@@ -353,7 +353,7 @@ public sealed class SimpleEffectDialog : Gtk.Dialog
 		return widget;
 	}
 
-	private PointPickerWidget CreatePointPicker (string caption, object o, Random random, MemberInfo member, object[] attributes)
+	private PointPickerWidget CreatePointPicker (string caption, object o, MemberInfo member, object[] attributes)
 	{
 		var widget = new PointPickerWidget { Label = caption };
 
@@ -365,7 +365,7 @@ public sealed class SimpleEffectDialog : Gtk.Dialog
 		return widget;
 	}
 
-	private AnglePickerWidget CreateAnglePicker (string caption, object o, Random random, MemberInfo member, object[] attributes)
+	private AnglePickerWidget CreateAnglePicker (string caption, object o, MemberInfo member, object[] attributes)
 	{
 		var widget = new AnglePickerWidget {
 			Label = caption
@@ -393,7 +393,8 @@ public sealed class SimpleEffectDialog : Gtk.Dialog
 		return label;
 	}
 
-	private ReseedButtonWidget CreateSeed (string caption, object o, Random random, MemberInfo member, object[] attributes)
+	private static readonly Random random = new ();
+	private ReseedButtonWidget CreateSeed (string caption, object o, MemberInfo member, object[] attributes)
 	{
 		var widget = new ReseedButtonWidget ();
 		widget.Clicked += (_, _) => SetValue (member, o, random.Next ());
