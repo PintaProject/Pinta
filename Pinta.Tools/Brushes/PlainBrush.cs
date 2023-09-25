@@ -36,26 +36,51 @@ public sealed class PlainBrush : BasePaintBrush
 
 	public override int Priority => -100;
 
-	protected override RectangleI OnMouseMove (Context g, Color strokeColor, ImageSurface surface,
-						      int x, int y, int lastX, int lastY)
+	protected override RectangleI OnMouseMove (
+		Context g,
+		Color strokeColor,
+		ImageSurface surface,
+		int x,
+		int y,
+		int lastX,
+		int lastY)
 	{
 		// Cairo does not support a single-pixel-long single-pixel-wide line
-		if (x == lastX && y == lastY && g.LineWidth == 1 &&
-		    PintaCore.Workspace.ActiveWorkspace.PointInCanvas (new PointD (x, y))) {
-			g.Rectangle (x, y, 1.0, 1.0);
-			g.Fill ();
-		} else {
-			g.MoveTo (lastX + 0.5, lastY + 0.5);
-			g.LineTo (x + 0.5, y + 0.5);
-			g.StrokePreserve ();
-		}
+		bool isSinglePixelLine = IsSinglePixelLine (g, x, y, lastX, lastY);
+		if (isSinglePixelLine)
+			Draw_SinglePixelLine (g, x, y);
+		else
+			Draw_NonSinglePixelLine (g, x, y, lastX, lastY);
 
 		RectangleI dirty = g.StrokeExtents ().ToInt ();
 
 		// For some reason (?!) we need to inflate the dirty
 		// rectangle for small brush widths in zoomed images
-		dirty = dirty.Inflated (1, 1);
+		var inflated = dirty.Inflated (1, 1);
 
-		return dirty;
+		return inflated;
+	}
+
+	private static bool IsSinglePixelLine (Context g, int x, int y, int lastX, int lastY)
+	{
+		return
+			(x == lastX) &&
+			(y == lastY) &&
+			(g.LineWidth == 1) &&
+			PintaCore.Workspace.ActiveWorkspace.PointInCanvas (new PointD (x, y))
+		;
+	}
+
+	private static void Draw_SinglePixelLine (Context g, int x, int y)
+	{
+		g.Rectangle (x, y, 1.0, 1.0);
+		g.Fill ();
+	}
+
+	private static void Draw_NonSinglePixelLine (Context g, int x, int y, int lastX, int lastY)
+	{
+		g.MoveTo (lastX + 0.5, lastY + 0.5);
+		g.LineTo (x + 0.5, y + 0.5);
+		g.StrokePreserve ();
 	}
 }
