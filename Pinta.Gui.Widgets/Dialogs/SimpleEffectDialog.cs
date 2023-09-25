@@ -367,9 +367,7 @@ public sealed class SimpleEffectDialog : Gtk.Dialog
 
 	private AnglePickerWidget CreateAnglePicker (string caption, object o, MemberInfo member, object[] attributes)
 	{
-		var widget = new AnglePickerWidget {
-			Label = caption
-		};
+		var widget = new AnglePickerWidget { Label = caption };
 
 		if (GetValue (member, o) is double d)
 			widget.DefaultValue = d;
