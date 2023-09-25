@@ -91,9 +91,8 @@ public sealed class ImageConverterManager
 	/// </summary>
 	public void UnregisterFormatByExtension (string extension)
 	{
-		extension = NormalizeExtension (extension);
-
-		formats.RemoveAll (f => f.Extensions.Contains (extension));
+		var normalized = NormalizeExtension (extension);
+		formats.RemoveAll (f => f.Extensions.Contains (normalized));
 	}
 
 	/// <summary>
@@ -159,9 +158,8 @@ public sealed class ImageConverterManager
 	/// </summary>
 	public void SetDefaultFormat (string extension)
 	{
-		extension = NormalizeExtension (extension);
-
-		PintaCore.Settings.PutSetting ("default-image-type", extension);
+		var normalized = NormalizeExtension (extension);
+		PintaCore.Settings.PutSetting ("default-image-type", normalized);
 	}
 
 	/// <summary>
@@ -198,16 +196,12 @@ public sealed class ImageConverterManager
 	/// </summary>
 	public FormatDescriptor? GetFormatByExtension (string extension)
 	{
-		extension = NormalizeExtension (extension);
-
-		return Formats.Where (p => p.Extensions.Contains (extension)).FirstOrDefault ();
+		var normalized = NormalizeExtension (extension);
+		return Formats.Where (p => p.Extensions.Contains (normalized)).FirstOrDefault ();
 	}
 
 	/// <summary>
 	/// Normalizes the extension.
 	/// </summary>
-	private static string NormalizeExtension (string extension)
-	{
-		return extension.ToLowerInvariant ().TrimStart ('.').Trim ();
-	}
+	private static string NormalizeExtension (string extension) => extension.ToLowerInvariant ().TrimStart ('.').Trim ();
 }
