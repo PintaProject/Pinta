@@ -209,19 +209,13 @@ public partial class LevelsDialog : Gtk.Dialog
 	}
 
 	private UnaryPixelOps.Level Levels {
-		get {
-			if (EffectData == null)
-				throw new InvalidOperationException ("Effect data not set on levels dialog.");
-
-			return EffectData.Levels;
-		}
-
-		set => EffectData.Levels = value ?? throw new ArgumentNullException (nameof (value));
+		get => EffectData.Levels;
+		set => EffectData.Levels = value;
 	}
 
 	private void UpdateLivePreview ()
 	{
-		EffectData?.FirePropertyChanged (nameof (Levels));
+		EffectData.FirePropertyChanged (nameof (Levels));
 	}
 
 	private void UpdateInputHistogram ()
