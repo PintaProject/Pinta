@@ -59,7 +59,7 @@ public interface ISettingsService
 	event EventHandler? SaveSettingsBeforeQuit;
 }
 
-public class SettingsManager : ISettingsService
+public sealed class SettingsManager : ISettingsService
 {
 	private const string SETTINGS_FILE = "settings.xml";
 
