@@ -164,22 +164,23 @@ public abstract class ArrowedEditEngine : BaseEditEngine
 
 	public override void UpdateToolbarSettings (ShapeEngine engine)
 	{
-		if (engine != null && engine.ShapeType == ShapeTypes.OpenLineCurveSeries) {
-			if (show_arrow_one_box != null) {
-				LineCurveSeriesEngine lCSEngine = (LineCurveSeriesEngine) engine;
+		if (engine.ShapeType != ShapeTypes.OpenLineCurveSeries)
+			return;
 
-				ArrowOneEnabledCheckBox.Active = lCSEngine.Arrow1.Show;
-				ArrowTwoEnabledCheckBox.Active = lCSEngine.Arrow2.Show;
+		if (show_arrow_one_box != null) {
+			LineCurveSeriesEngine lCSEngine = (LineCurveSeriesEngine) engine;
 
-				if (ArrowOneEnabled || ArrowTwoEnabled) {
-					ArrowSize.Value = lCSEngine.Arrow1.ArrowSize;
-					ArrowAngleOffset.Value = lCSEngine.Arrow1.AngleOffset;
-					ArrowLengthOffset.Value = lCSEngine.Arrow1.LengthOffset;
-				}
+			ArrowOneEnabledCheckBox.Active = lCSEngine.Arrow1.Show;
+			ArrowTwoEnabledCheckBox.Active = lCSEngine.Arrow2.Show;
+
+			if (ArrowOneEnabled || ArrowTwoEnabled) {
+				ArrowSize.Value = lCSEngine.Arrow1.ArrowSize;
+				ArrowAngleOffset.Value = lCSEngine.Arrow1.AngleOffset;
+				ArrowLengthOffset.Value = lCSEngine.Arrow1.LengthOffset;
 			}
-
-			base.UpdateToolbarSettings (engine);
 		}
+
+		base.UpdateToolbarSettings (engine);
 	}
 
 	protected override void RecallPreviousSettings ()
