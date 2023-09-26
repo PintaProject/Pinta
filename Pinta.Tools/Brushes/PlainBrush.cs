@@ -48,9 +48,9 @@ public sealed class PlainBrush : BasePaintBrush
 		// Cairo does not support a single-pixel-long single-pixel-wide line
 		bool isSinglePixelLine = IsSinglePixelLine (g, x, y, lastX, lastY);
 		if (isSinglePixelLine)
-			Draw_SinglePixelLine (g, x, y);
+			DrawSinglePixelLine (g, x, y);
 		else
-			Draw_NonSinglePixelLine (g, x, y, lastX, lastY);
+			DrawNonSinglePixelLine (g, x, y, lastX, lastY);
 
 		RectangleI dirty = g.StrokeExtents ().ToInt ();
 
@@ -71,13 +71,13 @@ public sealed class PlainBrush : BasePaintBrush
 		;
 	}
 
-	private static void Draw_SinglePixelLine (Context g, int x, int y)
+	private static void DrawSinglePixelLine (Context g, int x, int y)
 	{
 		g.Rectangle (x, y, 1.0, 1.0);
 		g.Fill ();
 	}
 
-	private static void Draw_NonSinglePixelLine (Context g, int x, int y, int lastX, int lastY)
+	private static void DrawNonSinglePixelLine (Context g, int x, int y, int lastX, int lastY)
 	{
 		g.MoveTo (lastX + 0.5, lastY + 0.5);
 		g.LineTo (x + 0.5, y + 0.5);
