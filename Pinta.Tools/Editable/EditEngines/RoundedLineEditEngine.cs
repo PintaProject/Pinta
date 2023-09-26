@@ -56,9 +56,7 @@ public sealed class RoundedLineEditEngine : BaseEditEngine
 
 			radius.Value = value;
 
-			ShapeEngine? selEngine = SelectedShapeEngine;
-
-			if (selEngine == null || selEngine is not RoundedLineEngine roundedLineEngine)
+			if (SelectedShapeEngine is not RoundedLineEngine roundedLineEngine)
 				return;
 
 			roundedLineEngine.Radius = Radius;
