@@ -907,9 +907,7 @@ public sealed class TextTool : BaseTool
 				g.FillRectangle (rect.ToDouble (), c);
 		}
 
-		if (selection != null) {
-			selection.Clip (g);
-		}
+		selection?.Clip (g);
 
 		g.MoveTo (CurrentTextEngine.Origin.X, CurrentTextEngine.Origin.Y);
 
@@ -918,9 +916,7 @@ public sealed class TextTool : BaseTool
 		//Fill in background
 		if (BackgroundFill) {
 			var g2 = new Cairo.Context (surf);
-			if (selection != null) {
-				selection.Clip (g2);
-			}
+			selection?.Clip (g2);
 
 			g2.FillRectangle (CurrentTextLayout.GetLayoutBounds ().ToDouble (), PintaCore.Palette.SecondaryColor);
 		}

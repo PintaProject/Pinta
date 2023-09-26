@@ -42,7 +42,7 @@ public abstract class BaseEditEngine
 		OpenLineCurveSeries,
 		ClosedLineCurveSeries,
 		Ellipse,
-		RoundedLineSeries
+		RoundedLineSeries,
 	}
 
 	public static Dictionary<ShapeTypes, ShapeTool> CorrespondingTools = new ();
@@ -1501,9 +1501,7 @@ public abstract class BaseEditEngine
 	/// </summary>
 	protected virtual void RecallPreviousSettings ()
 	{
-		if (dash_pattern_box.ComboBox != null) {
-			dash_pattern_box.ComboBox.ComboBox.GetEntry ().SetText (prev_dash_pattern);
-		}
+		dash_pattern_box.ComboBox?.ComboBox.GetEntry ().SetText (prev_dash_pattern);
 
 		owner.UseAntialiasing = prev_antialiasing;
 		BrushWidth = prev_brush_width;
