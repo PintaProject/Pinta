@@ -48,6 +48,8 @@ public sealed class SimpleEffectDialog : Gtk.Dialog
 	private delegate bool TimeoutHandler ();
 	TimeoutHandler? timeout_func;
 
+	private readonly Random random = new ();
+
 	/// Since this dialog is used by add-ins, the IAddinLocalizer allows for translations to be
 	/// fetched from the appropriate place.
 	/// </param>
@@ -391,7 +393,6 @@ public sealed class SimpleEffectDialog : Gtk.Dialog
 		return label;
 	}
 
-	private readonly Random random = new ();
 	private ReseedButtonWidget CreateSeed (string caption, object o, MemberInfo member, object[] attributes)
 	{
 		var widget = new ReseedButtonWidget ();
