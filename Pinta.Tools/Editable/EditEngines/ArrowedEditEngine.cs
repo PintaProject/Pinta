@@ -244,9 +244,9 @@ public abstract class ArrowedEditEngine : BaseEditEngine
 	private Separator ArrowSeparator => arrow_sep ??= GtkExtensions.CreateToolBarSeparator ();
 	private Label ArrowLabel => arrow_label ??= Label.New (string.Format (" {0}: ", Translations.GetString ("Arrow")));
 
-	private CheckButton ArrowOneEnabledCheckBox => show_arrow_one_box ??= Create_ArrowOneEnagledCheckBox ();
+	private CheckButton ArrowOneEnabledCheckBox => show_arrow_one_box ??= CreateArrowOneEnabledCheckBox ();
 
-	private CheckButton Create_ArrowOneEnagledCheckBox ()
+	private CheckButton CreateArrowOneEnabledCheckBox ()
 	{
 		var result = CheckButton.NewWithLabel ("1");
 		result.Active = settings.GetSetting (ARROW1_SETTING (tool_prefix), previous_settings_1.Show);
@@ -254,9 +254,9 @@ public abstract class ArrowedEditEngine : BaseEditEngine
 		return result;
 	}
 
-	private CheckButton ArrowTwoEnabledCheckBox => show_arrow_two_box ??= Create_ArrowTwoEnabledCheckBox ();
+	private CheckButton ArrowTwoEnabledCheckBox => show_arrow_two_box ??= CreateArrowTwoEnabledCheckBox ();
 
-	private CheckButton Create_ArrowTwoEnabledCheckBox ()
+	private CheckButton CreateArrowTwoEnabledCheckBox ()
 	{
 		var result = CheckButton.NewWithLabel ("2");
 		result.Active = settings.GetSetting (ARROW2_SETTING (tool_prefix), previous_settings_2.Show);
@@ -266,9 +266,9 @@ public abstract class ArrowedEditEngine : BaseEditEngine
 
 	private Label ArrowSizeLabel => arrow_size_label ??= Label.New (string.Format (" {0}: ", Translations.GetString ("Size")));
 
-	private SpinButton ArrowSize => arrow_size ??= Create_ArrowSize ();
+	private SpinButton ArrowSize => arrow_size ??= CreateArrowSize ();
 
-	private SpinButton Create_ArrowSize ()
+	private SpinButton CreateArrowSize ()
 	{
 		var result = GtkExtensions.CreateToolBarSpinButton (1, 100, 1, settings.GetSetting (ARROW_SIZE_SETTING (tool_prefix), 10));
 
@@ -291,9 +291,9 @@ public abstract class ArrowedEditEngine : BaseEditEngine
 
 	private Label ArrowAngleOffsetLabel => arrow_angle_offset_label ??= Label.New (string.Format (" {0}: ", Translations.GetString ("Angle")));
 
-	private SpinButton ArrowAngleOffset => arrow_angle_offset ??= Create_ArrowAngleOffset ();
+	private SpinButton ArrowAngleOffset => arrow_angle_offset ??= CreateArrowAngleOffset ();
 
-	private SpinButton Create_ArrowAngleOffset ()
+	private SpinButton CreateArrowAngleOffset ()
 	{
 		var result = GtkExtensions.CreateToolBarSpinButton (-89, 89, 1, settings.GetSetting (ARROW_ANGLE_SETTING (tool_prefix), 15));
 
@@ -316,9 +316,9 @@ public abstract class ArrowedEditEngine : BaseEditEngine
 
 	private Label ArrowLengthOffsetLabel => arrow_length_offset_label ??= Label.New (string.Format (" {0}: ", Translations.GetString ("Length")));
 
-	private SpinButton ArrowLengthOffset => arrow_length_offset ??= Create_ArrowLengthOffset ();
+	private SpinButton ArrowLengthOffset => arrow_length_offset ??= CreateArrowLengthOffset ();
 
-	private SpinButton Create_ArrowLengthOffset ()
+	private SpinButton CreateArrowLengthOffset ()
 	{
 		var result = GtkExtensions.CreateToolBarSpinButton (-100, 100, 1, settings.GetSetting (ARROW_LENGTH_SETTING (tool_prefix), 10));
 
