@@ -59,7 +59,7 @@ public interface ISettingsService
 	event EventHandler? SaveSettingsBeforeQuit;
 }
 
-public class SettingsManager : ISettingsService
+public sealed class SettingsManager : ISettingsService
 {
 	private const string SETTINGS_FILE = "settings.xml";
 
@@ -72,43 +72,6 @@ public class SettingsManager : ISettingsService
 	public event EventHandler? SaveSettingsBeforeQuit;
 
 	public SettingsManager ()
-	{
-		LoadSettings ();
-	}
-
-	public string GetUserSettingsDirectory ()
-	{
-		var appdata_folder = Environment.GetFolderPath (Environment.SpecialFolder.ApplicationData, Environment.SpecialFolderOption.Create);
-		var settings_directory = Path.Combine (appdata_folder, "Pinta");
-
-		// If someone is getting this, they probably are going to need
-		// the directory created, so just handle that here.
-		Directory.CreateDirectory (settings_directory);
-
-		return settings_directory;
-	}
-
-	public T GetSetting<T> (string key, T defaultValue)
-	{
-		if (settings.TryGetValue (key, out var value))
-			return (T) value;
-
-		return defaultValue;
-	}
-
-	public void PutSetting (string key, object value)
-	{
-		settings[key] = value;
-	}
-
-	public void DoSaveSettingsBeforeQuit ()
-	{
-		SaveSettingsBeforeQuit?.Invoke (this, EventArgs.Empty);
-
-		SaveSettings ();
-	}
-
-	private void LoadSettings ()
 	{
 		var settings_file = Path.Combine (GetUserSettingsDirectory (), SETTINGS_FILE);
 
@@ -148,34 +111,64 @@ public class SettingsManager : ISettingsService
 		}
 	}
 
-	private void SaveSettings ()
+	public string GetUserSettingsDirectory ()
 	{
+		var appdata_folder = Environment.GetFolderPath (Environment.SpecialFolder.ApplicationData, Environment.SpecialFolderOption.Create);
+		var settings_directory = Path.Combine (appdata_folder, "Pinta");
+
+		// If someone is getting this, they probably are going to need
+		// the directory created, so just handle that here.
+		Directory.CreateDirectory (settings_directory);
+
+		return settings_directory;
+	}
+
+	public T GetSetting<T> (string key, T defaultValue)
+	{
+		if (settings.TryGetValue (key, out var value))
+			return (T) value;
+
+		return defaultValue;
+	}
+
+	public void PutSetting (string key, object value)
+	{
+		settings[key] = value;
+	}
+
+	public void DoSaveSettingsBeforeQuit ()
+	{
+		SaveSettingsBeforeQuit?.Invoke (this, EventArgs.Empty);
 		try {
-			var settings_dir = GetUserSettingsDirectory ();
-			var settings_file = Path.Combine (settings_dir, SETTINGS_FILE);
-
-			// Just in case the directory got deleted after the application started
-			Directory.CreateDirectory (settings_dir);
-
-			using var xw = new XmlTextWriter (settings_file, Encoding.UTF8);
-
-			xw.Formatting = Formatting.Indented;
-			xw.WriteStartElement ("settings");
-
-			foreach (var item in settings) {
-				xw.WriteStartElement ("setting");
-				xw.WriteAttributeString ("name", item.Key);
-				xw.WriteAttributeString ("type", item.Value.GetType ().ToString ());
-				xw.WriteValue (item.Value.ToString ());
-				xw.WriteEndElement ();
-			}
-
-			xw.WriteEndElement ();
-
+			SaveSettings ();
 		} catch (Exception ex) {
 			// Not much we can do at this point since the application is exiting,
 			// but I could imagine scenarios where the user doesn't have write permission.
 			Console.Error.WriteLine (ex);
 		}
+	}
+
+	private void SaveSettings ()
+	{
+		var settings_dir = GetUserSettingsDirectory ();
+		var settings_file = Path.Combine (settings_dir, SETTINGS_FILE);
+
+		// Just in case the directory got deleted after the application started
+		Directory.CreateDirectory (settings_dir);
+
+		using var xw = new XmlTextWriter (settings_file, Encoding.UTF8);
+
+		xw.Formatting = Formatting.Indented;
+		xw.WriteStartElement ("settings");
+
+		foreach (var item in settings) {
+			xw.WriteStartElement ("setting");
+			xw.WriteAttributeString ("name", item.Key);
+			xw.WriteAttributeString ("type", item.Value.GetType ().ToString ());
+			xw.WriteValue (item.Value.ToString ());
+			xw.WriteEndElement ();
+		}
+
+		xw.WriteEndElement ();
 	}
 }
