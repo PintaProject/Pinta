@@ -34,22 +34,18 @@ namespace Pinta.Core;
 
 public sealed class ImageConverterManager
 {
-	private readonly List<FormatDescriptor> formats;
+	private readonly List<FormatDescriptor> formats = GetInitialFormats ().ToList ();
 
-	public ImageConverterManager ()
+	private static IEnumerable<FormatDescriptor> GetInitialFormats ()
 	{
-		formats = new List<FormatDescriptor> ();
-
-		// Create all the formats supported by Gdk
-		foreach (var format in GdkPixbufExtensions.GetFormats ()) {
-			var gdkFormatDescriptor = CreateFormatDescriptor (format);
-			RegisterFormat (gdkFormatDescriptor);
-		}
+		// All the formats supported by Gdk
+		foreach (var format in GdkPixbufExtensions.GetFormats ())
+			yield return CreateFormatDescriptor (format);
 
 		// Create all the formats we have our own importers/exporters for
 		OraFormat oraHandler = new OraFormat ();
 		var oraFormatDescriptor = new FormatDescriptor ("OpenRaster", new string[] { "ora", "ORA" }, new string[] { "image/openraster" }, oraHandler, oraHandler);
-		RegisterFormat (oraFormatDescriptor);
+		yield return oraFormatDescriptor;
 	}
 
 	private static FormatDescriptor CreateFormatDescriptor (PixbufFormat format)
