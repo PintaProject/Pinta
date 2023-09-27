@@ -25,6 +25,7 @@
 // THE SOFTWARE.
 
 using System;
+using System.ComponentModel;
 using Cairo;
 
 namespace Pinta.Core;
@@ -185,40 +186,30 @@ public class Layer : ObservableObject
 
 		int delta_x = Surface.Width - width;
 		int delta_y = Surface.Height - height;
+		var anchorPoint = GetAnchorPoint (delta_x, delta_y, anchor);
 
 		var g = new Context (dest);
-		switch (anchor) {
-			case Anchor.NW:
-				g.SetSourceSurface (Surface, 0, 0);
-				break;
-			case Anchor.N:
-				g.SetSourceSurface (Surface, -delta_x / 2, 0);
-				break;
-			case Anchor.NE:
-				g.SetSourceSurface (Surface, -delta_x, 0);
-				break;
-			case Anchor.E:
-				g.SetSourceSurface (Surface, -delta_x, -delta_y / 2);
-				break;
-			case Anchor.SE:
-				g.SetSourceSurface (Surface, -delta_x, -delta_y);
-				break;
-			case Anchor.S:
-				g.SetSourceSurface (Surface, -delta_x / 2, -delta_y);
-				break;
-			case Anchor.SW:
-				g.SetSourceSurface (Surface, 0, -delta_y);
-				break;
-			case Anchor.W:
-				g.SetSourceSurface (Surface, 0, -delta_y / 2);
-				break;
-			case Anchor.Center:
-				g.SetSourceSurface (Surface, -delta_x / 2, -delta_y / 2);
-				break;
-		}
+
+		g.SetSourceSurface (Surface, anchorPoint.X, anchorPoint.Y);
 		g.Paint ();
 
 		Surface = dest;
+	}
+
+	private static PointD GetAnchorPoint (int delta_x, int delta_y, Anchor anchor)
+	{
+		return anchor switch {
+			Anchor.NW => new (0, 0),
+			Anchor.N => new (-delta_x / 2, 0),
+			Anchor.NE => new (-delta_x, 0),
+			Anchor.E => new (-delta_x, -delta_y / 2),
+			Anchor.SE => new (-delta_x, -delta_y),
+			Anchor.S => new (-delta_x / 2, -delta_y),
+			Anchor.SW => new (0, -delta_y),
+			Anchor.W => new (0, -delta_y / 2),
+			Anchor.Center => new (-delta_x / 2, -delta_y / 2),
+			_ => throw new InvalidEnumArgumentException (nameof (anchor), (int) anchor, typeof (Anchor)),
+		};
 	}
 
 	public virtual void Crop (RectangleI rect, Path? selection)
