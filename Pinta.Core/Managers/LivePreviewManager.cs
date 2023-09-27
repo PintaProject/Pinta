@@ -155,8 +155,7 @@ public sealed class LivePreviewManager
 
 		cancel_live_preview_flag = true;
 
-		if (renderer != null)
-			renderer.Cancel ();
+		renderer?.Cancel ();
 
 		// Show a busy cursor, and make the main window insensitive,
 		// until the cancel has completed.
