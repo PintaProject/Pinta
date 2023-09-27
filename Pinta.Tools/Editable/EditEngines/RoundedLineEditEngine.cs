@@ -51,19 +51,18 @@ public sealed class RoundedLineEditEngine : BaseEditEngine
 		}
 
 		set {
-			if (radius != null) {
-				radius.Value = value;
+			if (radius == null)
+				return;
 
-				ShapeEngine? selEngine = SelectedShapeEngine;
+			radius.Value = value;
 
-				if (selEngine != null && selEngine.ShapeType == ShapeTypes.RoundedLineSeries) {
-					((RoundedLineEngine) selEngine).Radius = Radius;
+			if (SelectedShapeEngine is not RoundedLineEngine roundedLineEngine)
+				return;
 
-					StorePreviousSettings ();
+			roundedLineEngine.Radius = Radius;
 
-					DrawActiveShape (false, false, true, false, false);
-				}
-			}
+			StorePreviousSettings ();
+			DrawActiveShape (false, false, true, false, false);
 		}
 	}
 
@@ -72,7 +71,6 @@ public sealed class RoundedLineEditEngine : BaseEditEngine
 	public override void OnSaveSettings (ISettingsService settings, string toolPrefix)
 	{
 		base.OnSaveSettings (settings, toolPrefix);
-
 		if (radius is not null)
 			settings.PutSetting (RADIUS_SETTING (toolPrefix), (int) radius.Value);
 	}
@@ -106,10 +104,7 @@ public sealed class RoundedLineEditEngine : BaseEditEngine
 	}
 
 
-	public RoundedLineEditEngine (ShapeTool passedOwner) : base (passedOwner)
-	{
-
-	}
+	public RoundedLineEditEngine (ShapeTool passedOwner) : base (passedOwner) { }
 
 	protected override ShapeEngine CreateShape (bool ctrlKey, bool clickedOnControlPoint, PointD prevSelPoint)
 	{
@@ -129,33 +124,30 @@ public sealed class RoundedLineEditEngine : BaseEditEngine
 	protected override void MovePoint (List<ControlPoint> controlPoints)
 	{
 		MoveRectangularPoint (controlPoints);
-
 		base.MovePoint (controlPoints);
 	}
 
-
 	public override void UpdateToolbarSettings (ShapeEngine engine)
 	{
-		if (engine != null && engine.ShapeType == ShapeTypes.RoundedLineSeries) {
-			RoundedLineEngine rLEngine = (RoundedLineEngine) engine;
+		if (engine == null || engine.ShapeType != ShapeTypes.RoundedLineSeries)
+			return;
 
-			Radius = rLEngine.Radius;
+		RoundedLineEngine rLEngine = (RoundedLineEngine) engine;
 
-			base.UpdateToolbarSettings (engine);
-		}
+		Radius = rLEngine.Radius;
+
+		base.UpdateToolbarSettings (engine);
 	}
 
 	protected override void RecallPreviousSettings ()
 	{
 		Radius = previous_radius;
-
 		base.RecallPreviousSettings ();
 	}
 
 	protected override void StorePreviousSettings ()
 	{
 		previous_radius = Radius;
-
 		base.StorePreviousSettings ();
 	}
 }
