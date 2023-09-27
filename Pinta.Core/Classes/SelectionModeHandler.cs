@@ -82,21 +82,22 @@ public sealed class SelectionModeHandler
 	/// </summary>
 	public CombineMode DetermineCombineMode (ToolMouseEventArgs args)
 	{
-		CombineMode mode = selected_mode;
-
-		if (args.MouseButton == MouseButton.Left) {
-			if (args.IsControlPressed)
-				mode = CombineMode.Union;
-			else if (args.IsAltPressed)
-				mode = CombineMode.Intersect;
-		} else if (args.MouseButton == MouseButton.Right) {
-			if (args.IsControlPressed)
-				mode = CombineMode.Xor;
-			else
-				mode = CombineMode.Exclude;
+		switch (args.MouseButton) {
+			case MouseButton.Left:
+				if (args.IsControlPressed)
+					return CombineMode.Union;
+				else if (args.IsAltPressed)
+					return CombineMode.Intersect;
+				else
+					return selected_mode;
+			case MouseButton.Right:
+				if (args.IsControlPressed)
+					return CombineMode.Xor;
+				else
+					return CombineMode.Exclude;
+			default:
+				return selected_mode;
 		}
-
-		return mode;
 	}
 
 	public static void PerformSelectionMode (Document doc, CombineMode mode, List<List<IntPoint>> polygons)
@@ -104,53 +105,65 @@ public sealed class SelectionModeHandler
 		doc.Selection = doc.PreviousSelection.Clone ();
 		doc.Selection.Visible = true;
 
-		var g = new Context (doc.Layers.CurrentUserLayer.Surface);
 		//Make sure time isn't wasted if the CombineMode is Replace - Replace is much simpler than the other 4 selection modes.
-		if (mode == CombineMode.Replace) {
-			//Clear any previously stored Polygons.
-			doc.Selection.SelectionPolygons.Clear ();
-
-			//Set the resulting selection path to the new selection path.
-			doc.Selection.SelectionPolygons = polygons;
-		} else {
-			var resultingPolygons = new List<List<IntPoint>> ();
-
-			//Specify the Clipper Subject (the previous Polygons) and the Clipper Clip (the new Polygons).
-			//Note: for Union, ignore the Clipper Library instructions - the new polygon(s) should be Clips, not Subjects!
-			doc.Selection.SelectionClipper.AddPaths (doc.Selection.SelectionPolygons, PolyType.ptSubject, true);
-			doc.Selection.SelectionClipper.AddPaths (polygons, PolyType.ptClip, true);
-
-			switch (mode) {
-				case CombineMode.Xor:
-					//Xor means "Combine both Polygon sets, but leave out any areas of intersection between the two."
-					doc.Selection.SelectionClipper.Execute (ClipType.ctXor, resultingPolygons);
-					break;
-				case CombineMode.Exclude:
-					//Exclude == Difference
-
-					//Exclude/Difference means "Subtract any overlapping areas of the new Polygon set from the old Polygon set."
-					doc.Selection.SelectionClipper.Execute (ClipType.ctDifference, resultingPolygons);
-					break;
-				case CombineMode.Intersect:
-					//Intersect means "Leave only the overlapping areas between the new and old Polygon sets."
-					doc.Selection.SelectionClipper.Execute (ClipType.ctIntersection, resultingPolygons);
-					break;
-				default:
-					//Default should only be *CombineMode.Union*, but just in case...
-
-					//Union means "Combine both Polygon sets, and keep any overlapping areas as well."
-					doc.Selection.SelectionClipper.Execute (ClipType.ctUnion, resultingPolygons);
-					break;
-			}
-
-			//After using Clipper, it has to be cleared so there are no conflicts with its next usage.
-			doc.Selection.SelectionClipper.Clear ();
-
-			//Set the resulting selection path to the calculated ("clipped") selection path.
-			doc.Selection.SelectionPolygons = resultingPolygons;
+		switch (mode) {
+			case CombineMode.Replace:
+				PerformSelectionReplace (doc, polygons);
+				break;
+			default:
+				PerformSelectionNoReplace (doc, mode, polygons);
+				break;
 		}
 
 		doc.Selection.MarkDirty ();
+	}
+
+	private static void PerformSelectionNoReplace (Document doc, CombineMode mode, List<List<IntPoint>> polygons)
+	{
+		var resultingPolygons = new List<List<IntPoint>> ();
+
+		//Specify the Clipper Subject (the previous Polygons) and the Clipper Clip (the new Polygons).
+		//Note: for Union, ignore the Clipper Library instructions - the new polygon(s) should be Clips, not Subjects!
+		doc.Selection.SelectionClipper.AddPaths (doc.Selection.SelectionPolygons, PolyType.ptSubject, true);
+		doc.Selection.SelectionClipper.AddPaths (polygons, PolyType.ptClip, true);
+
+		switch (mode) {
+			case CombineMode.Xor:
+				//Xor means "Combine both Polygon sets, but leave out any areas of intersection between the two."
+				doc.Selection.SelectionClipper.Execute (ClipType.ctXor, resultingPolygons);
+				break;
+			case CombineMode.Exclude:
+				//Exclude == Difference
+
+				//Exclude/Difference means "Subtract any overlapping areas of the new Polygon set from the old Polygon set."
+				doc.Selection.SelectionClipper.Execute (ClipType.ctDifference, resultingPolygons);
+				break;
+			case CombineMode.Intersect:
+				//Intersect means "Leave only the overlapping areas between the new and old Polygon sets."
+				doc.Selection.SelectionClipper.Execute (ClipType.ctIntersection, resultingPolygons);
+				break;
+			default:
+				//Default should only be *CombineMode.Union*, but just in case...
+
+				//Union means "Combine both Polygon sets, and keep any overlapping areas as well."
+				doc.Selection.SelectionClipper.Execute (ClipType.ctUnion, resultingPolygons);
+				break;
+		}
+
+		//After using Clipper, it has to be cleared so there are no conflicts with its next usage.
+		doc.Selection.SelectionClipper.Clear ();
+
+		//Set the resulting selection path to the calculated ("clipped") selection path.
+		doc.Selection.SelectionPolygons = resultingPolygons;
+	}
+
+	private static void PerformSelectionReplace (Document doc, List<List<IntPoint>> polygons)
+	{
+		//Clear any previously stored Polygons.
+		doc.Selection.SelectionPolygons.Clear ();
+
+		//Set the resulting selection path to the new selection path.
+		doc.Selection.SelectionPolygons = polygons;
 	}
 
 	public void OnSaveSettings (ISettingsService settings)
