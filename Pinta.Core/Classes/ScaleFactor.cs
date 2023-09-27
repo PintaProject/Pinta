@@ -67,6 +67,8 @@ public struct ScaleFactor
 		if (numerator < 0)
 			throw new ArgumentOutOfRangeException (nameof (numerator), "must be greater than 0(numerator = " + numerator + ")");
 
+		// TODO: Simplify fraction
+
 		this.numerator = numerator;
 		this.denominator = denominator;
 		Ratio = numerator / (double) denominator;
