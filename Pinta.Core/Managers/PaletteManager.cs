@@ -67,13 +67,7 @@ public sealed class PaletteManager : IPaletteService
 		set => SetColor (false, value, true);
 	}
 
-	public Palette CurrentPalette {
-		get {
-			palette ??= Palette.GetDefault ();
-
-			return palette;
-		}
-	}
+	public Palette CurrentPalette => palette ??= Palette.GetDefault ();
 
 	public PaletteManager ()
 	{
@@ -88,15 +82,14 @@ public sealed class PaletteManager : IPaletteService
 
 	public bool DoKeyPress (Gtk.EventControllerKey.KeyPressedSignalArgs args)
 	{
-		if (!args.State.HasModifierKey () && args.GetKey ().ToUpper () == Gdk.Key.X) {
-			Color temp = PintaCore.Palette.PrimaryColor;
-			PintaCore.Palette.PrimaryColor = PintaCore.Palette.SecondaryColor;
-			PintaCore.Palette.SecondaryColor = temp;
+		if (args.State.HasModifierKey () || args.GetKey ().ToUpper () != Gdk.Key.X)
+			return false;
 
-			return true;
-		}
+		Color temp = PintaCore.Palette.PrimaryColor;
+		PintaCore.Palette.PrimaryColor = PintaCore.Palette.SecondaryColor;
+		PintaCore.Palette.SecondaryColor = temp;
 
-		return false;
+		return true;
 	}
 
 	// This allows callers to bypass affecting the recently used list
