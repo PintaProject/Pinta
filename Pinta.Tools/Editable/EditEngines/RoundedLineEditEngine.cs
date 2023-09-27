@@ -129,10 +129,8 @@ public sealed class RoundedLineEditEngine : BaseEditEngine
 
 	public override void UpdateToolbarSettings (ShapeEngine engine)
 	{
-		if (engine == null || engine.ShapeType != ShapeTypes.RoundedLineSeries)
+		if (engine is not RoundedLineEngine rLEngine)
 			return;
-
-		RoundedLineEngine rLEngine = (RoundedLineEngine) engine;
 
 		Radius = rLEngine.Radius;
 

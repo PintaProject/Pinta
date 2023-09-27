@@ -1481,19 +1481,17 @@ public abstract class BaseEditEngine
 	/// <param name="engine"></param>
 	public virtual void UpdateToolbarSettings (ShapeEngine engine)
 	{
-		if (engine != null) {
-			owner.UseAntialiasing = engine.AntiAliasing;
+		owner.UseAntialiasing = engine.AntiAliasing;
 
-			//Update the DashPatternBox to represent the current shape's DashPattern.
-			dash_pattern_box.ComboBox!.ComboBox.GetEntry ().SetText (engine.DashPattern); // NRT - Code assumes this is not-null
+		//Update the DashPatternBox to represent the current shape's DashPattern.
+		dash_pattern_box.ComboBox!.ComboBox.GetEntry ().SetText (engine.DashPattern); // NRT - Code assumes this is not-null
 
-			OutlineColor = engine.OutlineColor;
-			FillColor = engine.FillColor;
+		OutlineColor = engine.OutlineColor;
+		FillColor = engine.FillColor;
 
-			BrushWidth = engine.BrushWidth;
+		BrushWidth = engine.BrushWidth;
 
-			StorePreviousSettings ();
-		}
+		StorePreviousSettings ();
 	}
 
 	/// <summary>
