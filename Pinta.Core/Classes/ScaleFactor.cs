@@ -45,6 +45,12 @@ public readonly struct ScaleFactor
 	public readonly PointD UnscalePoint (PointD p) =>
 		new (UnscaleScalar (p.X), UnscaleScalar (p.Y));
 
+	public static bool operator < (ScaleFactor lhs, ScaleFactor rhs) =>
+		(lhs.numerator * rhs.denominator) < (rhs.numerator * lhs.denominator);
+
+	public static bool operator > (ScaleFactor lhs, ScaleFactor rhs) =>
+		(lhs.numerator * rhs.denominator) > (rhs.numerator * lhs.denominator);
+
 	public ScaleFactor (int numerator, int denominator)
 	{
 		if (denominator <= 0)
