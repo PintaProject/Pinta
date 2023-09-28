@@ -32,7 +32,7 @@ public sealed class AutoLevelEffect : BaseEffect
 			op = histogram.MakeLevelsAuto ();
 		}
 
-		if (op.isValid)
+		if (op.IsValid)
 			op.Apply (dest, src, rois);
 	}
 }
