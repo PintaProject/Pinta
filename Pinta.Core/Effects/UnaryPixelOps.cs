@@ -14,12 +14,8 @@ namespace Pinta.Core;
 /// <summary>
 /// Provides a set of standard UnaryPixelOps.
 /// </summary>
-public sealed class UnaryPixelOps
+public static class UnaryPixelOps
 {
-	private UnaryPixelOps ()
-	{
-	}
-
 	/// <summary>
 	/// Passes through the given color value.
 	/// result(color) = color
@@ -577,7 +573,7 @@ public sealed class UnaryPixelOps
 			UpdateLookupTable ();
 		}
 
-		public bool isValid = true;
+		public bool IsValid { get; private set; } = true;
 
 		public static Level AutoFromLoMdHi (ColorBgra lo, ColorBgra md, ColorBgra hi)
 		{
@@ -600,7 +596,7 @@ public sealed class UnaryPixelOps
 				if (color_out_high[i] < color_out_low[i] ||
 				    color_in_high[i] <= color_in_low[i] ||
 				    gamma[i] < 0) {
-					isValid = false;
+					IsValid = false;
 					return;
 				}
 
