@@ -37,21 +37,33 @@ public sealed class CircleBrush : BasePaintBrush
 
 	public override double StrokeAlphaMultiplier => 0.05;
 
-	protected override RectangleI OnMouseMove (Context g, Color strokeColor, ImageSurface surface,
-						      int x, int y, int lastX, int lastY)
+	const double Full_Turn = Math.PI * 2;
+
+	protected override RectangleI OnMouseMove (
+		Context g,
+		Color strokeColor,
+		ImageSurface surface,
+		int x,
+		int y,
+		int lastX,
+		int lastY)
 	{
-		int dx = x - lastX;
-		int dy = y - lastY;
-		double d = Math.Sqrt (dx * dx + dy * dy) * 2.0;
+		PointI mouseDelta = new (
+			X: x - lastX,
+			Y: y - lastY
+		);
 
-		double cx = Math.Floor (x / 100.0) * 100 + 50;
-		double cy = Math.Floor (y / 100.0) * 100 + 50;
+		PointD center = new (
+			X: Math.Floor (x / 100.0) * 100 + 50,
+			Y: Math.Floor (y / 100.0) * 100 + 50
+		);
 
+		double d = mouseDelta.Magnitude () * 2.0;
 		int steps = Random.Next (1, 10);
 		double step_delta = d / steps;
-
 		for (int i = 0; i < steps; i++) {
-			g.Arc (cx, cy, (steps - i) * step_delta, 0, Math.PI * 2);
+			var radius = (steps - i) * step_delta;
+			g.Arc (center.X, center.Y, radius, 0, Full_Turn);
 			g.Stroke ();
 		}
 

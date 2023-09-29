@@ -33,6 +33,12 @@ public readonly record struct PointI (int X, int Y)
 {
 	public static readonly PointI Zero;
 	public override readonly string ToString () => $"{X}, {Y}";
+	public readonly double Magnitude ()
+	{
+		double x = X;
+		double y = Y;
+		return Math.Sqrt (x * x + y * y);
+	}
 }
 
 public readonly record struct PointD (double X, double Y)
