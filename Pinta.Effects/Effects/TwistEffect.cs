@@ -100,15 +100,12 @@ public sealed class TwistEffect : BaseEffect
 
 		float hw = dst.Width / 2.0f;
 		float hh = dst.Height / 2.0f;
-
-		PointD[] antialiasPoints = InitializeAntialiasPoints (Data.Antialias);
-
 		return new (
 			halfWidth: hw,
 			halfHeight: hh,
 			maxrad: Math.Min (hw, hh),
 			twist: preliminaryTwist * preliminaryTwist * Math.Sign (preliminaryTwist),
-			antialiasPoints: antialiasPoints
+			antialiasPoints: InitializeAntialiasPoints (Data.Antialias)
 		);
 	}
 
