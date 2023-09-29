@@ -62,7 +62,7 @@ public sealed class TwistEffect : BaseEffect
 		}
 	}
 
-	private readonly record struct MaterializedSettings (float halfWidth, float halfHeight, float maxrad, float twist, IReadOnlyList<PointD> antialiasPoints);
+	private sealed record MaterializedSettings (float halfWidth, float halfHeight, float maxrad, float twist, IReadOnlyList<PointD> antialiasPoints);
 
 	private static ColorBgra GetFinalPixelColor (ImageSurface src, MaterializedSettings settings, ReadOnlySpan<ColorBgra> src_data, float j, float i)
 	{
@@ -76,17 +76,12 @@ public sealed class TwistEffect : BaseEffect
 			float v = j + (float) settings.antialiasPoints[p].Y;
 			double rad = Math.Sqrt (u * u + v * v);
 			double preTheta = Math.Atan2 (v, u);
-
 			double preT = 1 - rad / settings.maxrad;
-
 			double t = (preT < 0) ? 0 : (preT * preT * preT);
-
 			double theta = preTheta + ((t * settings.twist) / 100);
-
 			var sampleX = (int) (settings.halfWidth + (float) (rad * Math.Cos (theta)));
 			var sampleY = (int) (settings.halfHeight + (float) (rad * Math.Sin (theta)));
 			ref readonly ColorBgra sample = ref src.GetColorBgra (src_data, src.Width, sampleX, sampleY);
-
 			b += sample.B;
 			g += sample.G;
 			r += sample.R;
