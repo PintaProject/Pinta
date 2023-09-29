@@ -205,7 +205,7 @@ public sealed class ApplicationDocumentEventArgs : ApplicationEventArgs
 {
 	public ApplicationDocumentEventArgs (IReadOnlyDictionary<string, int> documents)
 	{
-		this.Documents = documents;
+		Documents = documents;
 	}
 
 	public IReadOnlyDictionary<string, int> Documents { get; }
@@ -215,7 +215,7 @@ public sealed class ApplicationUrlEventArgs : ApplicationEventArgs
 {
 	public ApplicationUrlEventArgs (IList<string> urls)
 	{
-		this.Urls = urls;
+		Urls = urls;
 	}
 
 	public IList<string> Urls { get; }
