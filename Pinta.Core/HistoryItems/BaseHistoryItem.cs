@@ -33,7 +33,6 @@ public class BaseHistoryItem
 	public string? Icon { get; set; }
 	public string? Text { get; set; }
 	public HistoryItemState State { get; set; }
-	public uint Id;
 	public virtual bool CausesDirty => true;
 
 	public BaseHistoryItem ()
