@@ -37,8 +37,6 @@ public sealed class CircleBrush : BasePaintBrush
 
 	public override double StrokeAlphaMultiplier => 0.05;
 
-	const double Full_Turn = Math.PI * 2;
-
 	protected override RectangleI OnMouseMove (
 		Context g,
 		Color strokeColor,
@@ -63,7 +61,7 @@ public sealed class CircleBrush : BasePaintBrush
 		double step_delta = d / steps;
 		for (int i = 0; i < steps; i++) {
 			var radius = (steps - i) * step_delta;
-			g.Arc (center.X, center.Y, radius, 0, Full_Turn);
+			g.Arc (center.X, center.Y, radius, 0, Math.PI * 2);
 			g.Stroke ();
 		}
 
