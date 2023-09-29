@@ -277,7 +277,7 @@ public sealed class LivePreviewManager
 			manager.FireLivePreviewRenderUpdatedEvent (progress, updatedBounds);
 		}
 
-		protected override void OnCompletion (bool cancelled, Exception[]? exceptions)
+		protected override void OnCompletion (bool cancelled, Exception[] exceptions)
 		{
 			Debug.WriteLine (DateTime.Now.ToString ("HH:mm:ss:ffff") + " LivePreviewManager.OnCompletion() cancelled: " + cancelled);
 
