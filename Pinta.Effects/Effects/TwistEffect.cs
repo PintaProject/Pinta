@@ -47,13 +47,13 @@ public sealed class TwistEffect : BaseEffect
 
 		foreach (var rect in rois) {
 			for (int y = rect.Top; y <= rect.Bottom; y++) {
-				float j = y - settings.halfHeight;
+				float j = y - settings.HalfHeight;
 				var rowOffset = y * src.Width;
 				var src_row = src_data.Slice (rowOffset, src.Width);
 				var dst_row = dst_data.Slice (rowOffset, src.Width);
 				for (int x = rect.Left; x <= rect.Right; x++) {
-					float i = x - settings.halfWidth;
-					if (i * i + j * j > (settings.maxrad + 1) * (settings.maxrad + 1))
+					float i = x - settings.HalfWidth;
+					if (i * i + j * j > (settings.Maxrad + 1) * (settings.Maxrad + 1))
 						dst_row[x] = src_row[x];
 					else
 						dst_row[x] = GetFinalPixelColor (src, settings, src_data, j, i);
@@ -62,7 +62,7 @@ public sealed class TwistEffect : BaseEffect
 		}
 	}
 
-	private sealed record MaterializedSettings (float halfWidth, float halfHeight, float maxrad, float twist, IReadOnlyList<PointD> antialiasPoints);
+	private sealed record MaterializedSettings (float HalfWidth, float HalfHeight, float Maxrad, float Twist, IReadOnlyList<PointD> AntialiasPoints);
 
 	private static ColorBgra GetFinalPixelColor (ImageSurface src, MaterializedSettings settings, ReadOnlySpan<ColorBgra> src_data, float j, float i)
 	{
@@ -70,17 +70,17 @@ public sealed class TwistEffect : BaseEffect
 		int g = 0;
 		int r = 0;
 		int a = 0;
-		int antialiasSamples = settings.antialiasPoints.Count;
+		int antialiasSamples = settings.AntialiasPoints.Count;
 		for (int p = 0; p < antialiasSamples; ++p) {
-			float u = i + (float) settings.antialiasPoints[p].X;
-			float v = j + (float) settings.antialiasPoints[p].Y;
+			float u = i + (float) settings.AntialiasPoints[p].X;
+			float v = j + (float) settings.AntialiasPoints[p].Y;
 			double rad = Math.Sqrt (u * u + v * v);
 			double preTheta = Math.Atan2 (v, u);
-			double preT = 1 - rad / settings.maxrad;
+			double preT = 1 - rad / settings.Maxrad;
 			double t = (preT < 0) ? 0 : (preT * preT * preT);
-			double theta = preTheta + ((t * settings.twist) / 100);
-			var sampleX = (int) (settings.halfWidth + (float) (rad * Math.Cos (theta)));
-			var sampleY = (int) (settings.halfHeight + (float) (rad * Math.Sin (theta)));
+			double theta = preTheta + ((t * settings.Twist) / 100);
+			var sampleX = (int) (settings.HalfWidth + (float) (rad * Math.Cos (theta)));
+			var sampleY = (int) (settings.HalfHeight + (float) (rad * Math.Sin (theta)));
 			ref readonly ColorBgra sample = ref src.GetColorBgra (src_data, src.Width, sampleX, sampleY);
 			b += sample.B;
 			g += sample.G;
@@ -101,11 +101,11 @@ public sealed class TwistEffect : BaseEffect
 		float hw = dst.Width / 2.0f;
 		float hh = dst.Height / 2.0f;
 		return new (
-			halfWidth: hw,
-			halfHeight: hh,
-			maxrad: Math.Min (hw, hh),
-			twist: preliminaryTwist * preliminaryTwist * Math.Sign (preliminaryTwist),
-			antialiasPoints: InitializeAntialiasPoints (Data.Antialias)
+			HalfWidth: hw,
+			HalfHeight: hh,
+			Maxrad: Math.Min (hw, hh),
+			Twist: preliminaryTwist * preliminaryTwist * Math.Sign (preliminaryTwist),
+			AntialiasPoints: InitializeAntialiasPoints (Data.Antialias)
 		);
 	}
 
