@@ -37,35 +37,47 @@ public sealed class SplatterBrush : BasePaintBrush
 
 	public override double StrokeAlphaMultiplier => 0.5;
 
-	protected override RectangleI OnMouseMove (Context g, Color strokeColor, ImageSurface surface,
-						      int x, int y, int lastX, int lastY)
+	protected override RectangleI OnMouseMove (
+		Context g,
+		Color strokeColor,
+		ImageSurface surface,
+		int x,
+		int y,
+		int lastX,
+		int lastY)
 	{
 		int line_width = (int) g.LineWidth;
-		int size;
 
 		// we want a minimum size of 2 for the splatter (except for when the brush width is 1), since a splatter of size 1 is very small
-		if (line_width == 1) {
-			size = 1;
-		} else {
-			size = Random.Next (2, line_width);
-		}
+		int size = (line_width == 1) ? 1 : Random.Next (2, line_width);
 
-		var r = new RectangleD (x - Random.Next (-15, 15), y - Random.Next (-15, 15), size, size);
+		RectangleD rect = new (
+			x: x - Random.Next (-15, 15),
+			y: y - Random.Next (-15, 15),
+			width: size,
+			height: size
+		);
 
-		double rx = r.Width / 2;
-		double ry = r.Height / 2;
-		double cx = r.X + rx;
-		double cy = r.Y + ry;
-		double c1 = 0.552285;
+		PointD r = new (
+			X: rect.Width / 2,
+			Y: rect.Height / 2
+		);
+
+		PointD c = new (
+			X: rect.X + r.X,
+			Y: rect.Y + r.Y
+		);
+
+		const double c_1 = 0.552285;
 
 		g.Save ();
 
-		g.MoveTo (cx + rx, cy);
+		g.MoveTo (c.X + r.X, c.Y);
 
-		g.CurveTo (cx + rx, cy - c1 * ry, cx + c1 * rx, cy - ry, cx, cy - ry);
-		g.CurveTo (cx - c1 * rx, cy - ry, cx - rx, cy - c1 * ry, cx - rx, cy);
-		g.CurveTo (cx - rx, cy + c1 * ry, cx - c1 * rx, cy + ry, cx, cy + ry);
-		g.CurveTo (cx + c1 * rx, cy + ry, cx + rx, cy + c1 * ry, cx + rx, cy);
+		g.CurveTo (c.X + r.X, c.Y - c_1 * r.Y, c.X + c_1 * r.X, c.Y - r.Y, c.X, c.Y - r.Y);
+		g.CurveTo (c.X - c_1 * r.X, c.Y - r.Y, c.X - r.X, c.Y - c_1 * r.Y, c.X - r.X, c.Y);
+		g.CurveTo (c.X - r.X, c.Y + c_1 * r.Y, c.X - c_1 * r.X, c.Y + r.Y, c.X, c.Y + r.Y);
+		g.CurveTo (c.X + c_1 * r.X, c.Y + r.Y, c.X + r.X, c.Y + c_1 * r.Y, c.X + r.X, c.Y);
 
 		g.ClosePath ();
 

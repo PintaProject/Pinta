@@ -43,18 +43,21 @@ public sealed class SquaresBrush : BasePaintBrush
 		int lastX,
 		int lastY)
 	{
-		int dx = x - lastX;
-		int dy = y - lastY;
+		PointI mouseDelta = new (
+			X: x - lastX,
+			Y: y - lastY
+		);
 
-		// 90-degree rotation
-		double px = -dy;
-		double py = +dx;
+		PointD rotated = new ( // 90 degrees
+			X: -mouseDelta.Y,
+			Y: +mouseDelta.X
+		);
 
-		g.MoveTo (lastX - px, lastY - py);
-		g.LineTo (lastX + px, lastY + py);
-		g.LineTo (x + px, y + py);
-		g.LineTo (x - px, y - py);
-		g.LineTo (lastX - px, lastY - py);
+		g.MoveTo (lastX - rotated.X, lastY - rotated.Y);
+		g.LineTo (lastX + rotated.X, lastY + rotated.Y);
+		g.LineTo (x + rotated.X, y + rotated.Y);
+		g.LineTo (x - rotated.X, y - rotated.Y);
+		g.LineTo (lastX - rotated.X, lastY - rotated.Y);
 
 		g.StrokePreserve ();
 
