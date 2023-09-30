@@ -48,8 +48,7 @@ public sealed class JuliaFractalEffect : BaseEffect
 			y = (2 * t * y) + i;
 			++c;
 		}
-		c -= 2 - 2 * log2_10000 / Math.Log ((x * x) + (y * y));
-		return c;
+		return c - (2 - 2 * log2_10000 / Math.Log ((x * x) + (y * y)));
 	}
 
 	public override void Render (ImageSurface src, ImageSurface dst, ReadOnlySpan<RectangleI> rois)
