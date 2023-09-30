@@ -40,7 +40,7 @@ public sealed class TwistEffect : BaseEffect
 	#region Algorithm Code Ported From PDN
 	public override void Render (ImageSurface src, ImageSurface dst, ReadOnlySpan<RectangleI> rois)
 	{
-		MaterializedSettings settings = CreateSettings (dst);
+		RenderSettings settings = CreateSettings (dst);
 
 		ReadOnlySpan<ColorBgra> src_data = src.GetReadOnlyPixelData ();
 		Span<ColorBgra> dst_data = dst.GetPixelData ();
@@ -62,9 +62,9 @@ public sealed class TwistEffect : BaseEffect
 		}
 	}
 
-	private sealed record MaterializedSettings (float HalfWidth, float HalfHeight, float Maxrad, float Twist, IReadOnlyList<PointD> AntialiasPoints);
+	private sealed record RenderSettings (float HalfWidth, float HalfHeight, float Maxrad, float Twist, IReadOnlyList<PointD> AntialiasPoints);
 
-	private static ColorBgra GetFinalPixelColor (ImageSurface src, MaterializedSettings settings, ReadOnlySpan<ColorBgra> src_data, float j, float i)
+	private static ColorBgra GetFinalPixelColor (ImageSurface src, RenderSettings settings, ReadOnlySpan<ColorBgra> src_data, float j, float i)
 	{
 		int b = 0;
 		int g = 0;
@@ -94,7 +94,7 @@ public sealed class TwistEffect : BaseEffect
 			(byte) (a / antialiasSamples));
 	}
 
-	private MaterializedSettings CreateSettings (ImageSurface dst)
+	private RenderSettings CreateSettings (ImageSurface dst)
 	{
 		float preliminaryTwist = Data.Amount;
 
