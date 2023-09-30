@@ -53,77 +53,95 @@ public sealed class MandelbrotFractalEffect : BaseEffect
 		int c = 0;
 		double x = 0;
 		double y = 0;
-
 		while ((c * factor) < 1024 && ((x * x) + (y * y)) < Max) {
 			double t = x;
-
-			x = x * x - y * y + r;
-			y = 2 * t * y + i;
-
+			x = (x * x) - (y * y) + r;
+			y = (2 * t * y) + i;
 			++c;
 		}
-
-		return c - Math.Log (y * y + x * x) * inv_log_max;
+		return c - Math.Log ((y * y) + (x * x)) * inv_log_max;
 	}
+
+	private sealed record MandelbrotSettings (
+		int w,
+		int h,
+		double invH,
+		double invZoom,
+		double invQuality,
+		int count,
+		double invCount,
+		double angleTheta);
+	private MandelbrotSettings CreateSettings (ImageSurface dst)
+	{
+		int h = dst.Height;
+		double zoom = 1 + zoom_factor * Data.Zoom;
+		int count = Data.Quality * Data.Quality + 1;
+
+		return new (
+
+			w: dst.Width,
+			h: h,
+
+			invH: 1.0 / h,
+			invZoom: 1.0 / zoom,
+
+			invQuality: 1.0 / (double) Data.Quality,
+
+			count: count,
+			invCount: 1.0 / (double) count,
+			angleTheta: (Data.Angle * 2 * Math.PI) / 360
+		);
+	}
+
+	private readonly record struct LoopContext (int y, int x);
 
 	public override void Render (ImageSurface src, ImageSurface dst, ReadOnlySpan<RectangleI> rois)
 	{
-		int w = dst.Width;
-		int h = dst.Height;
-
-		double invH = 1.0 / h;
-		double zoom = 1 + zoom_factor * Data.Zoom;
-		double invZoom = 1.0 / zoom;
-
-		double invQuality = 1.0 / (double) Data.Quality;
-
-		int count = Data.Quality * Data.Quality + 1;
-		double invCount = 1.0 / (double) count;
-		double angleTheta = (Data.Angle * 2 * Math.PI) / 360;
+		MandelbrotSettings settings = CreateSettings (dst);
 
 		Span<ColorBgra> dst_data = dst.GetPixelData ();
-		int dst_width = dst.Width;
-
 		foreach (Core.RectangleI rect in rois) {
 			for (int y = rect.Top; y <= rect.Bottom; y++) {
-				var dst_row = dst_data.Slice (y * dst_width, dst_width);
-
+				var dst_row = dst_data.Slice (y * settings.w, settings.w);
 				for (int x = rect.Left; x <= rect.Right; x++) {
-					int r = 0;
-					int g = 0;
-					int b = 0;
-					int a = 0;
-
-					for (double i = 0; i < count; i++) {
-						double u = (2.0 * x - w + (i * invCount)) * invH;
-						double v = (2.0 * y - h + ((i * invQuality) % 1)) * invH;
-
-						double radius = Math.Sqrt ((u * u) + (v * v));
-						double radiusP = radius;
-						double theta = Math.Atan2 (v, u);
-						double thetaP = theta + angleTheta;
-
-						double uP = radiusP * Math.Cos (thetaP);
-						double vP = radiusP * Math.Sin (thetaP);
-
-						double m = Mandelbrot ((uP * invZoom) + this.x_offset, (vP * invZoom) + this.y_offset, Data.Factor);
-
-						double c = 64 + Data.Factor * m;
-
-						r += Utility.ClampToByte (c - 768);
-						g += Utility.ClampToByte (c - 512);
-						b += Utility.ClampToByte (c - 256);
-						a += Utility.ClampToByte (c - 0);
-					}
-
-					dst_row[x] = ColorBgra.FromBgra (Utility.ClampToByte (b / count), Utility.ClampToByte (g / count), Utility.ClampToByte (r / count), Utility.ClampToByte (a / count));
+					LoopContext context = new (y, x);
+					dst_row[x] = GetPixelColor (settings, context);
 				}
 			}
 		}
 
-		if (Data.InvertColors) {
+		if (Data.InvertColors)
 			invert_effect.Render (dst, dst, rois);
+	}
+
+	private ColorBgra GetPixelColor (MandelbrotSettings settings, LoopContext context)
+	{
+		int r = 0;
+		int g = 0;
+		int b = 0;
+		int a = 0;
+		for (double i = 0; i < settings.count; i++) {
+			double u = (2.0 * context.x - settings.w + (i * settings.invCount)) * settings.invH;
+			double v = (2.0 * context.y - settings.h + ((i * settings.invQuality) % 1)) * settings.invH;
+
+			double radius = Math.Sqrt ((u * u) + (v * v));
+			double radiusP = radius;
+			double theta = Math.Atan2 (v, u);
+			double thetaP = theta + settings.angleTheta;
+
+			double uP = radiusP * Math.Cos (thetaP);
+			double vP = radiusP * Math.Sin (thetaP);
+
+			double m = Mandelbrot ((uP * settings.invZoom) + this.x_offset, (vP * settings.invZoom) + this.y_offset, Data.Factor);
+
+			double c = 64 + Data.Factor * m;
+
+			r += Utility.ClampToByte (c - 768);
+			g += Utility.ClampToByte (c - 512);
+			b += Utility.ClampToByte (c - 256);
+			a += Utility.ClampToByte (c - 0);
 		}
+		return ColorBgra.FromBgra (Utility.ClampToByte (b / settings.count), Utility.ClampToByte (g / settings.count), Utility.ClampToByte (r / settings.count), Utility.ClampToByte (a / settings.count));
 	}
 	#endregion
 
