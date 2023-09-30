@@ -70,7 +70,10 @@ public sealed class MandelbrotFractalEffect : BaseEffect
 		double invQuality,
 		int count,
 		double invCount,
-		double angleTheta);
+		double angleTheta,
+		int factor,
+		double xOffset,
+		double yOffset);
 	private MandelbrotSettings CreateSettings (ImageSurface dst)
 	{
 		int h = dst.Height;
@@ -89,7 +92,12 @@ public sealed class MandelbrotFractalEffect : BaseEffect
 
 			count: count,
 			invCount: 1.0 / (double) count,
-			angleTheta: (Data.Angle * 2 * Math.PI) / 360
+			angleTheta: (Data.Angle * 2 * Math.PI) / 360,
+
+			factor: Data.Factor,
+
+			xOffset: x_offset,
+			yOffset: y_offset
 		);
 	}
 
@@ -114,7 +122,7 @@ public sealed class MandelbrotFractalEffect : BaseEffect
 			invert_effect.Render (dst, dst, rois);
 	}
 
-	private ColorBgra GetPixelColor (MandelbrotSettings settings, LoopContext context)
+	private static ColorBgra GetPixelColor (MandelbrotSettings settings, LoopContext context)
 	{
 		int r = 0;
 		int g = 0;
@@ -132,9 +140,9 @@ public sealed class MandelbrotFractalEffect : BaseEffect
 			double uP = radiusP * Math.Cos (thetaP);
 			double vP = radiusP * Math.Sin (thetaP);
 
-			double m = Mandelbrot ((uP * settings.invZoom) + this.x_offset, (vP * settings.invZoom) + this.y_offset, Data.Factor);
+			double m = Mandelbrot ((uP * settings.invZoom) + settings.xOffset, (vP * settings.invZoom) + settings.yOffset, settings.factor);
 
-			double c = 64 + Data.Factor * m;
+			double c = 64 + settings.factor * m;
 
 			r += Utility.ClampToByte (c - 768);
 			g += Utility.ClampToByte (c - 512);
