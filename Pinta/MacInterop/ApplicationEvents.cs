@@ -38,22 +38,22 @@ public static class ApplicationEvents
 	// Create a delegate instance with static lifetime to avoid the GC destroying it.
 	// The delegate can be invoked by native code at any point.
 	private static readonly EventDelegate quit_delegate = HandleQuit;
-	static IntPtr quitHandlerRef = IntPtr.Zero;
+	static IntPtr quit_handler_ref = IntPtr.Zero;
 
 	public static event EventHandler<ApplicationQuitEventArgs> Quit {
 		add {
 			lock (lock_obj) {
 				quit += value;
-				if (quitHandlerRef == IntPtr.Zero)
-					quitHandlerRef = Carbon.InstallApplicationEventHandler (quit_delegate, CarbonEventApple.QuitApplication);
+				if (quit_handler_ref == IntPtr.Zero)
+					quit_handler_ref = Carbon.InstallApplicationEventHandler (quit_delegate, CarbonEventApple.QuitApplication);
 			}
 		}
 		remove {
 			lock (lock_obj) {
 				quit -= value;
-				if (quit == null && quitHandlerRef != IntPtr.Zero) {
-					Carbon.RemoveEventHandler (quitHandlerRef);
-					quitHandlerRef = IntPtr.Zero;
+				if (quit == null && quit_handler_ref != IntPtr.Zero) {
+					Carbon.RemoveEventHandler (quit_handler_ref);
+					quit_handler_ref = IntPtr.Zero;
 				}
 			}
 		}
@@ -72,22 +72,22 @@ public static class ApplicationEvents
 
 	static EventHandler<ApplicationEventArgs>? reopen;
 	private static readonly EventDelegate reopen_delegate = HandleReopen;
-	static IntPtr reopenHandlerRef = IntPtr.Zero;
+	static IntPtr reopen_handler_ref = IntPtr.Zero;
 
 	public static event EventHandler<ApplicationEventArgs> Reopen {
 		add {
 			lock (lock_obj) {
 				reopen += value;
-				if (reopenHandlerRef == IntPtr.Zero)
-					reopenHandlerRef = Carbon.InstallApplicationEventHandler (reopen_delegate, CarbonEventApple.ReopenApplication);
+				if (reopen_handler_ref == IntPtr.Zero)
+					reopen_handler_ref = Carbon.InstallApplicationEventHandler (reopen_delegate, CarbonEventApple.ReopenApplication);
 			}
 		}
 		remove {
 			lock (lock_obj) {
 				reopen -= value;
-				if (reopen == null && reopenHandlerRef != IntPtr.Zero) {
-					Carbon.RemoveEventHandler (reopenHandlerRef);
-					reopenHandlerRef = IntPtr.Zero;
+				if (reopen == null && reopen_handler_ref != IntPtr.Zero) {
+					Carbon.RemoveEventHandler (reopen_handler_ref);
+					reopen_handler_ref = IntPtr.Zero;
 				}
 			}
 		}
@@ -104,24 +104,24 @@ public static class ApplicationEvents
 
 	#region OpenDocuments
 
-	static EventHandler<ApplicationDocumentEventArgs>? openDocuments;
+	static EventHandler<ApplicationDocumentEventArgs>? open_documents;
 	private static readonly EventDelegate open_delegate = HandleOpenDocuments;
-	static IntPtr openDocumentsHandlerRef = IntPtr.Zero;
+	static IntPtr open_documents_handler_ref = IntPtr.Zero;
 
 	public static event EventHandler<ApplicationDocumentEventArgs> OpenDocuments {
 		add {
 			lock (lock_obj) {
-				openDocuments += value;
-				if (openDocumentsHandlerRef == IntPtr.Zero)
-					openDocumentsHandlerRef = Carbon.InstallApplicationEventHandler (open_delegate, CarbonEventApple.OpenDocuments);
+				open_documents += value;
+				if (open_documents_handler_ref == IntPtr.Zero)
+					open_documents_handler_ref = Carbon.InstallApplicationEventHandler (open_delegate, CarbonEventApple.OpenDocuments);
 			}
 		}
 		remove {
 			lock (lock_obj) {
-				openDocuments -= value;
-				if (openDocuments == null && openDocumentsHandlerRef != IntPtr.Zero) {
-					Carbon.RemoveEventHandler (openDocumentsHandlerRef);
-					openDocumentsHandlerRef = IntPtr.Zero;
+				open_documents -= value;
+				if (open_documents == null && open_documents_handler_ref != IntPtr.Zero) {
+					Carbon.RemoveEventHandler (open_documents_handler_ref);
+					open_documents_handler_ref = IntPtr.Zero;
 				}
 			}
 		}
@@ -132,7 +132,7 @@ public static class ApplicationEvents
 		try {
 			var docs = Carbon.GetFileListFromEventRef (eventRef);
 			var args = new ApplicationDocumentEventArgs (docs);
-			openDocuments?.Invoke (null, args);
+			open_documents?.Invoke (null, args);
 			return args.HandledStatus;
 		} catch (Exception ex) {
 			System.Console.WriteLine (ex);
@@ -144,16 +144,16 @@ public static class ApplicationEvents
 
 	#region OpenUrls
 
-	static EventHandler<ApplicationUrlEventArgs>? openUrls;
+	static EventHandler<ApplicationUrlEventArgs>? open_urls;
 	private static readonly EventDelegate open_urls_delegate = HandleOpenUrls;
-	static IntPtr openUrlsHandlerRef = IntPtr.Zero;
+	static IntPtr open_urls_handler_ref = IntPtr.Zero;
 
 	public static event EventHandler<ApplicationUrlEventArgs> OpenUrls {
 		add {
 			lock (lock_obj) {
-				openUrls += value;
-				if (openUrlsHandlerRef == IntPtr.Zero)
-					openUrlsHandlerRef = Carbon.InstallApplicationEventHandler (open_urls_delegate,
+				open_urls += value;
+				if (open_urls_handler_ref == IntPtr.Zero)
+					open_urls_handler_ref = Carbon.InstallApplicationEventHandler (open_urls_delegate,
 						new CarbonEventTypeSpec[] {
 							//For some reason GetUrl doesn't take CarbonEventClass.AppleEvent
 							//need to use GURL, GURL
@@ -164,10 +164,10 @@ public static class ApplicationEvents
 		}
 		remove {
 			lock (lock_obj) {
-				openUrls -= value;
-				if (openUrls == null && openUrlsHandlerRef != IntPtr.Zero) {
-					Carbon.RemoveEventHandler (openUrlsHandlerRef);
-					openUrlsHandlerRef = IntPtr.Zero;
+				open_urls -= value;
+				if (open_urls == null && open_urls_handler_ref != IntPtr.Zero) {
+					Carbon.RemoveEventHandler (open_urls_handler_ref);
+					open_urls_handler_ref = IntPtr.Zero;
 				}
 			}
 		}
@@ -178,7 +178,7 @@ public static class ApplicationEvents
 		try {
 			var urls = Carbon.GetUrlListFromEventRef (eventRef);
 			var args = new ApplicationUrlEventArgs (urls);
-			openUrls?.Invoke (null, args);
+			open_urls?.Invoke (null, args);
 			return args.HandledStatus;
 		} catch (Exception ex) {
 			System.Console.WriteLine (ex);
@@ -203,19 +203,19 @@ public sealed class ApplicationQuitEventArgs : ApplicationEventArgs
 
 public sealed class ApplicationDocumentEventArgs : ApplicationEventArgs
 {
-	public ApplicationDocumentEventArgs (IDictionary<string, int> documents)
+	public ApplicationDocumentEventArgs (IReadOnlyDictionary<string, int> documents)
 	{
-		this.Documents = documents;
+		Documents = documents;
 	}
 
-	public IDictionary<string, int> Documents { get; }
+	public IReadOnlyDictionary<string, int> Documents { get; }
 }
 
 public sealed class ApplicationUrlEventArgs : ApplicationEventArgs
 {
 	public ApplicationUrlEventArgs (IList<string> urls)
 	{
-		this.Urls = urls;
+		Urls = urls;
 	}
 
 	public IList<string> Urls { get; }

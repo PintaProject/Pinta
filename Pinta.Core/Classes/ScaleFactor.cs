@@ -16,7 +16,7 @@ namespace Pinta.Core;
 /// Includes methods for Size[F]'s, Point[F]'s, Rectangle[F]'s,
 /// and various scalars
 /// </summary>
-public struct ScaleFactor
+public readonly struct ScaleFactor
 {
 	private readonly int denominator;
 	private readonly int numerator;
@@ -27,68 +27,51 @@ public struct ScaleFactor
 	public static readonly ScaleFactor MinValue = new (1, 100);
 	public static readonly ScaleFactor MaxValue = new (32, 1);
 
-	private void Clamp ()
-	{
-		if (this < MinValue) {
-			this = MinValue;
-		} else if (this > MaxValue) {
-			this = MaxValue;
-		}
-	}
+	public readonly int ScaleScalar (int x) =>
+		(int) (((long) x * numerator) / denominator);
 
-	public static bool operator < (ScaleFactor lhs, ScaleFactor rhs)
-	{
-		return (lhs.numerator * rhs.denominator) < (rhs.numerator * lhs.denominator);
-	}
+	public readonly int UnscaleScalar (int x) =>
+		(int) (((long) x * denominator) / numerator);
 
-	public static bool operator > (ScaleFactor lhs, ScaleFactor rhs)
-	{
-		return (lhs.numerator * rhs.denominator) > (rhs.numerator * lhs.denominator);
-	}
+	public readonly double ScaleScalar (double x) =>
+		x * numerator / denominator;
 
-	public readonly int ScaleScalar (int x)
-	{
-		return (int) (((long) x * numerator) / denominator);
-	}
+	public readonly double UnscaleScalar (double x) =>
+		x * denominator / numerator;
 
-	public readonly int UnscaleScalar (int x)
-	{
-		return (int) (((long) x * denominator) / numerator);
-	}
+	public readonly PointD ScalePoint (PointD p) =>
+		new (ScaleScalar (p.X), ScaleScalar (p.Y));
 
-	public readonly double ScaleScalar (double x)
-	{
-		return (x * (double) numerator) / (double) denominator;
-	}
+	public readonly PointD UnscalePoint (PointD p) =>
+		new (UnscaleScalar (p.X), UnscaleScalar (p.Y));
 
-	public readonly double UnscaleScalar (double x)
-	{
-		return (x * (double) denominator) / (double) numerator;
-	}
+	public static bool operator < (ScaleFactor lhs, ScaleFactor rhs) =>
+		(lhs.numerator * rhs.denominator) < (rhs.numerator * lhs.denominator);
 
-	public readonly PointD ScalePoint (PointD p)
-	{
-		return new PointD (ScaleScalar (p.X), ScaleScalar (p.Y));
-	}
-
-	public readonly PointD UnscalePoint (PointD p)
-	{
-		return new PointD (UnscaleScalar (p.X), UnscaleScalar (p.Y));
-	}
+	public static bool operator > (ScaleFactor lhs, ScaleFactor rhs) =>
+		(lhs.numerator * rhs.denominator) > (rhs.numerator * lhs.denominator);
 
 	public ScaleFactor (int numerator, int denominator)
 	{
-		if (denominator <= 0) {
+		if (denominator <= 0)
 			throw new ArgumentOutOfRangeException (nameof (denominator), "must be greater than 0(denominator = " + denominator + ")");
+
+		if (numerator < 0)
+			throw new ArgumentOutOfRangeException (nameof (numerator), "must be greater than 0(numerator = " + numerator + ")");
+
+		// Clamp
+		if ((numerator * MinValue.denominator) < (MinValue.numerator * denominator)) {
+			numerator = MinValue.numerator;
+			denominator = MinValue.denominator;
+		} else if ((MaxValue.numerator * denominator) > (MaxValue.numerator * denominator)) {
+			numerator = MaxValue.numerator;
+			denominator = MaxValue.denominator;
 		}
 
-		if (numerator < 0) {
-			throw new ArgumentOutOfRangeException (nameof (numerator), "must be greater than 0(numerator = " + numerator + ")");
-		}
+		// TODO: Simplify fraction
 
 		this.numerator = numerator;
 		this.denominator = denominator;
-		Ratio = (double) numerator / (double) denominator;
-		this.Clamp ();
+		Ratio = numerator / (double) denominator;
 	}
 }

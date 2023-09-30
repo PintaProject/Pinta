@@ -37,21 +37,32 @@ public sealed class GridBrush : BasePaintBrush
 
 	public override double StrokeAlphaMultiplier => 0.05;
 
-	protected override RectangleI OnMouseMove (Context g, Color strokeColor, ImageSurface surface,
-						      int x, int y, int lastX, int lastY)
+	protected override RectangleI OnMouseMove (
+		Context g,
+		Color strokeColor,
+		ImageSurface surface,
+		int x,
+		int y,
+		int lastX,
+		int lastY)
 	{
-		double cx = Math.Round (x / 100.0) * 100.0;
-		double cy = Math.Round (y / 100.0) * 100.0;
-		double dx = (cx - x) * 10.0;
-		double dy = (cy - y) * 10.0;
+		PointD c = new (
+			X: Math.Round (x / 100.0) * 100.0,
+			Y: Math.Round (y / 100.0) * 100.0
+		);
+
+		PointD d = new (
+			X: (c.X - x) * 10.0,
+			Y: (c.Y - y) * 10.0
+		);
 
 		for (int i = 0; i < 50; i++) {
-			g.MoveTo (cx, cy);
+			g.MoveTo (c.X, c.Y);
 			g.QuadraticCurveTo (
-				x + Random.NextDouble () * dx,
-				y + Random.NextDouble () * dy,
-				cx,
-				cy);
+				x + Random.NextDouble () * d.X,
+				y + Random.NextDouble () * d.Y,
+				c.X,
+				c.Y);
 			g.Stroke ();
 		}
 

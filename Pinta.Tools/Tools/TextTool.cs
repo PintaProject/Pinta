@@ -41,12 +41,12 @@ public sealed class TextTool : BaseTool
 	private readonly Pinta.Core.TextLayout layout;
 
 	private static RectangleI CurrentTextBounds {
-		get => PintaCore.Workspace.ActiveDocument.Layers.CurrentUserLayer.textBounds;
+		get => PintaCore.Workspace.ActiveDocument.Layers.CurrentUserLayer.TextBounds;
 
 		set {
-			PintaCore.Workspace.ActiveDocument.Layers.CurrentUserLayer.previousTextBounds = PintaCore.Workspace.ActiveDocument.Layers.CurrentUserLayer.textBounds;
+			PintaCore.Workspace.ActiveDocument.Layers.CurrentUserLayer.PreviousTextBounds = PintaCore.Workspace.ActiveDocument.Layers.CurrentUserLayer.TextBounds;
 
-			PintaCore.Workspace.ActiveDocument.Layers.CurrentUserLayer.textBounds = value;
+			PintaCore.Workspace.ActiveDocument.Layers.CurrentUserLayer.TextBounds = value;
 		}
 	}
 
@@ -55,7 +55,7 @@ public sealed class TextTool : BaseTool
 			if (!PintaCore.Workspace.HasOpenDocuments)
 				throw new InvalidOperationException ("Attempting to get CurrentTextEngine when there are no open documents");
 
-			return PintaCore.Workspace.ActiveDocument.Layers.CurrentUserLayer.tEngine;
+			return PintaCore.Workspace.ActiveDocument.Layers.CurrentUserLayer.TextEngine;
 		}
 	}
 
@@ -512,7 +512,7 @@ public sealed class TextTool : BaseTool
 				//Go through every UserLayer.
 				foreach (UserLayer ul in document.Layers.UserLayers) {
 					//Check each UserLayer's editable text boundaries to see if they contain the mouse position.
-					if (ul.textBounds.Contains (pt)) {
+					if (ul.TextBounds.Contains (pt)) {
 						//The mouse clicked on editable text.
 
 						//Change the current UserLayer to the Layer that contains the text that was clicked on.
@@ -595,7 +595,7 @@ public sealed class TextTool : BaseTool
 			//Go through every UserLayer.
 			foreach (UserLayer ul in document.Layers.UserLayers) {
 				//Check each UserLayer's editable text boundaries to see if they contain the mouse position.
-				if (ul.textBounds.Contains (last_mouse_position)) {
+				if (ul.TextBounds.Contains (last_mouse_position)) {
 					//The mouse is over editable text.
 					showNormalCursor = true;
 				}
@@ -867,7 +867,7 @@ public sealed class TextTool : BaseTool
 		PintaCore.Workspace.ActiveDocument.Layers.CurrentUserLayer.TextLayer.Layer.Surface.Clear ();
 
 		//Redraw the previous text boundary.
-		InflateAndInvalidate (PintaCore.Workspace.ActiveDocument.Layers.CurrentUserLayer.previousTextBounds);
+		InflateAndInvalidate (PintaCore.Workspace.ActiveDocument.Layers.CurrentUserLayer.PreviousTextBounds);
 	}
 
 	/// <summary>
@@ -977,7 +977,7 @@ public sealed class TextTool : BaseTool
 			g.Restore ();
 		}
 
-		InflateAndInvalidate (PintaCore.Workspace.ActiveDocument.Layers.CurrentUserLayer.previousTextBounds);
+		InflateAndInvalidate (PintaCore.Workspace.ActiveDocument.Layers.CurrentUserLayer.PreviousTextBounds);
 		PintaCore.Workspace.Invalidate (old_cursor_bounds);
 		InflateAndInvalidate (r);
 		PintaCore.Workspace.Invalidate (cursorBounds);

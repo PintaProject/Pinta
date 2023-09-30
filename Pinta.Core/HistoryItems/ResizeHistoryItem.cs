@@ -38,7 +38,7 @@ public sealed class ResizeHistoryItem : CompoundHistoryItem
 		Text = Translations.GetString ("Resize Image");
 	}
 
-	public DocumentSelection? RestoreSelection;
+	public DocumentSelection? RestoreSelection { get; internal set; }
 
 	public override void Undo ()
 	{
