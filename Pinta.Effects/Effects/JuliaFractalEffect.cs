@@ -77,7 +77,8 @@ public sealed class JuliaFractalEffect : BaseEffect
 		double aspect,
 		int count,
 		double invCount,
-		double angleTheta);
+		double angleTheta,
+		int factor);
 	private JuliaSettings CreateSettings (ImageSurface dst)
 	{
 		var w = dst.Width;
@@ -92,13 +93,14 @@ public sealed class JuliaFractalEffect : BaseEffect
 			aspect: (double) h / (double) w,
 			count: count,
 			invCount: 1.0 / (double) count,
-			angleTheta: (Data.Angle * Math.PI * 2) / 360.0
+			angleTheta: (Data.Angle * Math.PI * 2) / 360.0,
+			factor: Data.Factor
 		);
 	}
 
 	const double Jr = 0.3125;
 	const double Ji = 0.03;
-	private ColorBgra GetPixelColor (JuliaSettings settings, LoopContext context)
+	private static ColorBgra GetPixelColor (JuliaSettings settings, LoopContext context)
 	{
 		int r = 0;
 		int g = 0;
@@ -122,7 +124,7 @@ public sealed class JuliaFractalEffect : BaseEffect
 
 			double j = Julia (jX, jY, Jr, Ji);
 
-			double c = Data.Factor * j;
+			double c = settings.factor * j;
 
 			b += Utility.ClampToByte (c - 768);
 			g += Utility.ClampToByte (c - 512);
