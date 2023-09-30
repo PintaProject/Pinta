@@ -8,6 +8,7 @@
 /////////////////////////////////////////////////////////////////////////////////
 
 using System;
+using System.Collections.Generic;
 using Cairo;
 using Pinta.Core;
 using Pinta.Gui.Widgets;
@@ -39,87 +40,96 @@ public sealed class TwistEffect : BaseEffect
 	#region Algorithm Code Ported From PDN
 	public override void Render (ImageSurface src, ImageSurface dst, ReadOnlySpan<RectangleI> rois)
 	{
-		float twist = Data.Amount;
+		RenderSettings settings = CreateSettings (dst);
 
-		float hw = dst.Width / 2.0f;
-		float hh = dst.Height / 2.0f;
-		float maxrad = Math.Min (hw, hh);
-
-		twist = twist * twist * Math.Sign (twist);
-
-		int aaLevel = Data.Antialias;
-		int aaSamples = aaLevel * aaLevel + 1;
-		Span<PointD> aaPoints = stackalloc PointD[aaSamples];
-
-		for (int i = 0; i < aaSamples; ++i) {
-			PointD pt = new PointD (
-			    ((i * aaLevel) / (float) aaSamples),
-			    i / (float) aaSamples);
-
-			pt = pt with { X = pt.X - ((int) pt.X) };
-			aaPoints[i] = pt;
-		}
-
-		int width = src.Width;
 		ReadOnlySpan<ColorBgra> src_data = src.GetReadOnlyPixelData ();
 		Span<ColorBgra> dst_data = dst.GetPixelData ();
 
 		foreach (var rect in rois) {
 			for (int y = rect.Top; y <= rect.Bottom; y++) {
-				float j = y - hh;
-				var src_row = src_data.Slice (y * width, width);
-				var dst_row = dst_data.Slice (y * width, width);
-
+				float j = y - settings.HalfHeight;
+				var rowOffset = y * src.Width;
+				var src_row = src_data.Slice (rowOffset, src.Width);
+				var dst_row = dst_data.Slice (rowOffset, src.Width);
 				for (int x = rect.Left; x <= rect.Right; x++) {
-					float i = x - hw;
-
-					if (i * i + j * j > (maxrad + 1) * (maxrad + 1)) {
+					float i = x - settings.HalfWidth;
+					if (i * i + j * j > (settings.Maxrad + 1) * (settings.Maxrad + 1))
 						dst_row[x] = src_row[x];
-					} else {
-						int b = 0;
-						int g = 0;
-						int r = 0;
-						int a = 0;
-
-						for (int p = 0; p < aaSamples; ++p) {
-							float u = i + (float) aaPoints[p].X;
-							float v = j + (float) aaPoints[p].Y;
-							double rad = Math.Sqrt (u * u + v * v);
-							double theta = Math.Atan2 (v, u);
-
-							double t = 1 - rad / maxrad;
-
-							t = (t < 0) ? 0 : (t * t * t);
-
-							theta += (t * twist) / 100;
-
-							ref readonly ColorBgra sample = ref src.GetColorBgra (src_data, width,
-							    (int) (hw + (float) (rad * Math.Cos (theta))),
-							    (int) (hh + (float) (rad * Math.Sin (theta))));
-
-							b += sample.B;
-							g += sample.G;
-							r += sample.R;
-							a += sample.A;
-						}
-
-						dst_row[x] = ColorBgra.FromBgra (
-						    (byte) (b / aaSamples),
-						    (byte) (g / aaSamples),
-						    (byte) (r / aaSamples),
-						    (byte) (a / aaSamples));
-					}
+					else
+						dst_row[x] = GetFinalPixelColor (src, settings, src_data, j, i);
 				}
 			}
 		}
 	}
+
+	private sealed record RenderSettings (float HalfWidth, float HalfHeight, float Maxrad, float Twist, IReadOnlyList<PointD> AntialiasPoints);
+
+	private static ColorBgra GetFinalPixelColor (ImageSurface src, RenderSettings settings, ReadOnlySpan<ColorBgra> src_data, float j, float i)
+	{
+		int b = 0;
+		int g = 0;
+		int r = 0;
+		int a = 0;
+		int antialiasSamples = settings.AntialiasPoints.Count;
+		for (int p = 0; p < antialiasSamples; ++p) {
+			float u = i + (float) settings.AntialiasPoints[p].X;
+			float v = j + (float) settings.AntialiasPoints[p].Y;
+			double rad = Math.Sqrt (u * u + v * v);
+			double theta = Math.Atan2 (v, u);
+			double t = 1 - rad / settings.Maxrad;
+			t = (t < 0) ? 0 : (t * t * t);
+			theta += ((t * settings.Twist) / 100);
+			var sampleX = (int) (settings.HalfWidth + (float) (rad * Math.Cos (theta)));
+			var sampleY = (int) (settings.HalfHeight + (float) (rad * Math.Sin (theta)));
+			ref readonly ColorBgra sample = ref src.GetColorBgra (src_data, src.Width, sampleX, sampleY);
+			b += sample.B;
+			g += sample.G;
+			r += sample.R;
+			a += sample.A;
+		}
+		return ColorBgra.FromBgra (
+			(byte) (b / antialiasSamples),
+			(byte) (g / antialiasSamples),
+			(byte) (r / antialiasSamples),
+			(byte) (a / antialiasSamples));
+	}
+
+	private RenderSettings CreateSettings (ImageSurface dst)
+	{
+		float preliminaryTwist = Data.Amount;
+
+		float hw = dst.Width / 2.0f;
+		float hh = dst.Height / 2.0f;
+		return new (
+			HalfWidth: hw,
+			HalfHeight: hh,
+			Maxrad: Math.Min (hw, hh),
+			Twist: preliminaryTwist * preliminaryTwist * Math.Sign (preliminaryTwist),
+			AntialiasPoints: InitializeAntialiasPoints (Data.Antialias)
+		);
+	}
+
+	private static PointD[] InitializeAntialiasPoints (int aaLevel)
+	{
+		int aaSamples = aaLevel * aaLevel + 1;
+		PointD[] aaPoints = new PointD[aaSamples];
+		for (int i = 0; i < aaSamples; ++i) {
+			var prePtX = ((i * aaLevel) / (float) aaSamples);
+			var ptX = prePtX - ((int) prePtX);
+			var ptY = i / (float) aaSamples;
+			aaPoints[i] = new (ptX, ptY);
+		}
+		return aaPoints;
+	}
+
 	#endregion
 
 	public sealed class TwistData : EffectData
 	{
 		[Caption ("Amount"), MinimumValue (-100), MaximumValue (100)]
-		public int Amount = 45;
+		public int Amount { get; set; } = 45;
+
 		[Caption ("Antialias"), MinimumValue (0), MaximumValue (5)]
-		public int Antialias = 2;
+		public int Antialias { get; set; } = 2;
 	}
 }
