@@ -465,32 +465,27 @@ public abstract class BaseEditEngine
 				return true;
 			case Gdk.Key.Return:
 			case Gdk.Key.KP_Enter:
-				//Finalize every editable shape not yet finalized.
 				FinalizeAllShapes ();
 				return true;
 			case Gdk.Key.space:
 				HandleSpace (e);
 				return true;
 			case Gdk.Key.Up:
-				//Make sure a control point is selected.
 				HandleUp ();
 				return true;
 			case Gdk.Key.Down:
-				//Make sure a control point is selected.
 				HandleDown ();
 				return true;
 			case Gdk.Key.Left:
-				//Make sure a control point is selected.
 				HandleLeft (e);
 				return true;
 			case Gdk.Key.Right:
-				//Make sure a control point is selected.
 				HandleRight (e);
 				return true;
 			default:
 				if (keyPressed.IsControlKey ()) {
 					// Redraw since the Ctrl key affects the hover cursor, etc
-					HandleControls (e);
+					DrawActiveShape (false, false, true, e.IsShiftPressed, false, true);
 					return true;
 				}
 				break;
@@ -498,13 +493,10 @@ public abstract class BaseEditEngine
 		return false;
 	}
 
-	private void HandleControls (ToolKeyEventArgs e)
-	{
-		DrawActiveShape (false, false, true, e.IsShiftPressed, false, true);
-	}
-
 	private void HandleRight (ToolKeyEventArgs e)
 	{
+		//Make sure a control point is selected.
+
 		if (SelectedPointIndex < 0)
 			return;
 
@@ -531,6 +523,8 @@ public abstract class BaseEditEngine
 
 	private void HandleLeft (ToolKeyEventArgs e)
 	{
+		//Make sure a control point is selected.
+
 		if (SelectedPointIndex < 0)
 			return;
 
@@ -557,6 +551,8 @@ public abstract class BaseEditEngine
 
 	private void HandleDown ()
 	{
+		//Make sure a control point is selected.
+
 		if (SelectedPointIndex < 0)
 			return;
 
@@ -569,6 +565,8 @@ public abstract class BaseEditEngine
 
 	private void HandleUp ()
 	{
+		//Make sure a control point is selected.
+
 		if (SelectedPointIndex < 0)
 			return;
 
@@ -1304,6 +1302,8 @@ public abstract class BaseEditEngine
 	/// </summary>
 	protected void FinalizeAllShapes ()
 	{
+		//Finalize every editable shape not yet finalized.
+
 		if (SEngines.Count == 0)
 			return;
 
