@@ -72,12 +72,16 @@ public abstract class ArrowedEditEngine : BaseEditEngine
 
 		if (show_arrow_one_box is not null)
 			settings.PutSetting (ARROW1_SETTING (toolPrefix), show_arrow_one_box.Active);
+
 		if (show_arrow_two_box is not null)
 			settings.PutSetting (ARROW2_SETTING (toolPrefix), show_arrow_two_box.Active);
+
 		if (arrow_size is not null)
 			settings.PutSetting (ARROW_SIZE_SETTING (toolPrefix), arrow_size.GetValueAsInt ());
+
 		if (arrow_angle_offset is not null)
 			settings.PutSetting (ARROW_ANGLE_SETTING (toolPrefix), arrow_angle_offset.GetValueAsInt ());
+
 		if (arrow_length_offset is not null)
 			settings.PutSetting (ARROW_LENGTH_SETTING (toolPrefix), arrow_length_offset.GetValueAsInt ());
 	}
@@ -122,6 +126,7 @@ public abstract class ArrowedEditEngine : BaseEditEngine
 	private void UpdateArrowOptionToolbarItems ()
 	{
 		if (ArrowOneEnabled || ArrowTwoEnabled) {
+
 			if (extra_toolbar_items_added)
 				return;
 
@@ -134,6 +139,7 @@ public abstract class ArrowedEditEngine : BaseEditEngine
 
 			extra_toolbar_items_added = true;
 		} else if (extra_toolbar_items_added) {
+
 			foreach (var widget in GetArrowOptionToolbarItems ())
 				toolbar.Remove (widget);
 
@@ -218,23 +224,27 @@ public abstract class ArrowedEditEngine : BaseEditEngine
 
 	protected override void DrawExtras (ref RectangleD? dirty, Context g, ShapeEngine engine)
 	{
-		LineCurveSeriesEngine? lCSEngine = engine as LineCurveSeriesEngine;
-		if (lCSEngine != null && engine.ControlPoints.Count > 0) {
+		if (engine is LineCurveSeriesEngine lCSEngine && engine.ControlPoints.Count > 0) {
+
 			// Draw the arrows for the currently active shape.
 			GeneratedPoint[] genPoints = engine.GeneratedPoints;
 
-			if (lCSEngine.Arrow1.Show) {
-				if (genPoints.Length > 1) {
-					dirty = dirty.UnionRectangles (lCSEngine.Arrow1.Draw (g, lCSEngine.OutlineColor,
-					    genPoints[0].Position, genPoints[1].Position));
-				}
+			if (lCSEngine.Arrow1.Show && genPoints.Length > 1) {
+				var rect = lCSEngine.Arrow1.Draw (
+					g,
+					lCSEngine.OutlineColor,
+					genPoints[0].Position,
+					genPoints[1].Position);
+				dirty = dirty.UnionRectangles (rect);
 			}
 
-			if (lCSEngine.Arrow2.Show) {
-				if (genPoints.Length > 1) {
-					dirty = dirty.UnionRectangles (lCSEngine.Arrow2.Draw (g, lCSEngine.OutlineColor,
-					    genPoints[^1].Position, genPoints[^2].Position));
-				}
+			if (lCSEngine.Arrow2.Show && genPoints.Length > 1) {
+				var rect = lCSEngine.Arrow2.Draw (
+					g,
+					lCSEngine.OutlineColor,
+					genPoints[^1].Position,
+					genPoints[^2].Position);
+				dirty = dirty.UnionRectangles (rect);
 			}
 		}
 
@@ -271,21 +281,16 @@ public abstract class ArrowedEditEngine : BaseEditEngine
 	private SpinButton CreateArrowSize ()
 	{
 		var result = GtkExtensions.CreateToolBarSpinButton (1, 100, 1, settings.GetSetting (ARROW_SIZE_SETTING (tool_prefix), 10));
-
 		result.OnValueChanged += (o, e) => {
 			var activeEngine = (LineCurveSeriesEngine?) ActiveShapeEngine;
-
-			if (activeEngine != null) {
-				var size = result.Value;
-				activeEngine.Arrow1.ArrowSize = size;
-				activeEngine.Arrow2.ArrowSize = size;
-
-				DrawActiveShape (false, false, true, false, false);
-
-				StorePreviousSettings ();
-			}
+			if (activeEngine == null)
+				return;
+			var size = result.Value;
+			activeEngine.Arrow1.ArrowSize = size;
+			activeEngine.Arrow2.ArrowSize = size;
+			DrawActiveShape (false, false, true, false, false);
+			StorePreviousSettings ();
 		};
-
 		return result;
 	}
 
@@ -296,21 +301,16 @@ public abstract class ArrowedEditEngine : BaseEditEngine
 	private SpinButton CreateArrowAngleOffset ()
 	{
 		var result = GtkExtensions.CreateToolBarSpinButton (-89, 89, 1, settings.GetSetting (ARROW_ANGLE_SETTING (tool_prefix), 15));
-
 		result.OnValueChanged += (o, e) => {
-
 			var activeEngine = (LineCurveSeriesEngine?) ActiveShapeEngine;
-			if (activeEngine != null) {
-				var angle = result.Value;
-				activeEngine.Arrow1.AngleOffset = angle;
-				activeEngine.Arrow2.AngleOffset = angle;
-
-				DrawActiveShape (false, false, true, false, false);
-
-				StorePreviousSettings ();
-			}
+			if (activeEngine == null)
+				return;
+			var angle = result.Value;
+			activeEngine.Arrow1.AngleOffset = angle;
+			activeEngine.Arrow2.AngleOffset = angle;
+			DrawActiveShape (false, false, true, false, false);
+			StorePreviousSettings ();
 		};
-
 		return result;
 	}
 
@@ -321,21 +321,16 @@ public abstract class ArrowedEditEngine : BaseEditEngine
 	private SpinButton CreateArrowLengthOffset ()
 	{
 		var result = GtkExtensions.CreateToolBarSpinButton (-100, 100, 1, settings.GetSetting (ARROW_LENGTH_SETTING (tool_prefix), 10));
-
 		result.OnValueChanged += (o, e) => {
-
 			var activeEngine = (LineCurveSeriesEngine?) ActiveShapeEngine;
-			if (activeEngine != null) {
-				var length = result.Value;
-				activeEngine.Arrow1.LengthOffset = length;
-				activeEngine.Arrow2.LengthOffset = length;
-
-				DrawActiveShape (false, false, true, false, false);
-
-				StorePreviousSettings ();
-			}
+			if (activeEngine == null)
+				return;
+			var length = result.Value;
+			activeEngine.Arrow1.LengthOffset = length;
+			activeEngine.Arrow2.LengthOffset = length;
+			DrawActiveShape (false, false, true, false, false);
+			StorePreviousSettings ();
 		};
-
 		return result;
 	}
 
