@@ -25,7 +25,6 @@
 // THE SOFTWARE.
 
 using System.Collections.Generic;
-using Cairo;
 using ClipperLib;
 
 namespace Pinta.Core;
@@ -36,21 +35,21 @@ public sealed class SelectionModeHandler
 	private ToolBarComboBox? selection_combo_box;
 
 	private CombineMode selected_mode;
-	private readonly Dictionary<string, CombineMode> combine_modes;
+	private readonly IReadOnlyDictionary<string, CombineMode> combine_modes;
 
 	private const string COMBINE_MODE_SETTING = "selection-combine-mode";
 
 	public SelectionModeHandler ()
 	{
 		combine_modes = new Dictionary<string, CombineMode> () {
-			{ Translations.GetString ("Replace"), CombineMode.Replace},
+			[Translations.GetString ("Replace")] = CombineMode.Replace,
 			// Translators: {0} is 'Ctrl', or a platform-specific key such as 'Command' on macOS.
-			{ Translations.GetString ("Union (+) ({0} + Left Click)", GtkExtensions.CtrlLabel ()), CombineMode.Union},
-			{ Translations.GetString ("Exclude (-) (Right Click)"), CombineMode.Exclude},
+			[Translations.GetString ("Union (+) ({0} + Left Click)", GtkExtensions.CtrlLabel ())] = CombineMode.Union,
+			[Translations.GetString ("Exclude (-) (Right Click)")] = CombineMode.Exclude,
 			// Translators: {0} is 'Ctrl', or a platform-specific key such as 'Command' on macOS.
-			{ Translations.GetString ("Xor ({0} + Right Click)", GtkExtensions.CtrlLabel ()), CombineMode.Xor},
+			[Translations.GetString ("Xor ({0} + Right Click)", GtkExtensions.CtrlLabel ())] = CombineMode.Xor,
 			// Translators: {0} is 'Alt', or a platform-specific key such as 'Option' on macOS.
-			{ Translations.GetString ("Intersect ({0} + Left Click)", GtkExtensions.AltLabel ()), CombineMode.Intersect},
+			[Translations.GetString ("Intersect ({0} + Left Click)", GtkExtensions.AltLabel ())] = CombineMode.Intersect,
 		};
 	}
 
@@ -111,14 +110,14 @@ public sealed class SelectionModeHandler
 				PerformSelectionReplace (doc, polygons);
 				break;
 			default:
-				PerformSelectionNoReplace (doc, mode, polygons);
+				PerformSelectionWithMode (doc, mode, polygons);
 				break;
 		}
 
 		doc.Selection.MarkDirty ();
 	}
 
-	private static void PerformSelectionNoReplace (Document doc, CombineMode mode, List<List<IntPoint>> polygons)
+	private static void PerformSelectionWithMode (Document doc, CombineMode mode, List<List<IntPoint>> polygons)
 	{
 		var resultingPolygons = new List<List<IntPoint>> ();
 
@@ -179,5 +178,5 @@ public enum CombineMode
 	Xor,
 	Exclude,
 	Replace,
-	Intersect
+	Intersect,
 }
