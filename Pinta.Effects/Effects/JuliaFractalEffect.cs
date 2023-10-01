@@ -59,14 +59,12 @@ public sealed class JuliaFractalEffect : BaseEffect
 			for (int y = rect.Top; y <= rect.Bottom; y++) {
 				var dst_row = dst_data.Slice (y * settings.w, settings.w);
 				for (int x = rect.Left; x <= rect.Right; x++) {
-					LoopContext context = new (y, x);
-					dst_row[x] = GetPixelColor (settings, context);
+					PointI target = new (x, y);
+					dst_row[x] = GetPixelColor (settings, target);
 				}
 			}
 		}
 	}
-
-	private readonly record struct LoopContext (int y, int x);
 
 	private sealed record JuliaSettings (
 		int w,
@@ -100,7 +98,7 @@ public sealed class JuliaFractalEffect : BaseEffect
 
 	const double Jr = 0.3125;
 	const double Ji = 0.03;
-	private static ColorBgra GetPixelColor (JuliaSettings settings, LoopContext context)
+	private static ColorBgra GetPixelColor (JuliaSettings settings, PointI target)
 	{
 		int r = 0;
 		int g = 0;
@@ -108,8 +106,8 @@ public sealed class JuliaFractalEffect : BaseEffect
 		int a = 0;
 
 		for (double i = 0; i < settings.count; i++) {
-			double u = (2.0 * context.x - settings.w + (i * settings.invCount)) * settings.invH;
-			double v = (2.0 * context.y - settings.h + ((i * settings.invQuality) % 1)) * settings.invH;
+			double u = (2.0 * target.X - settings.w + (i * settings.invCount)) * settings.invH;
+			double v = (2.0 * target.Y - settings.h + ((i * settings.invQuality) % 1)) * settings.invH;
 
 			double radius = Math.Sqrt ((u * u) + (v * v));
 			double radiusP = radius;
@@ -139,15 +137,15 @@ public sealed class JuliaFractalEffect : BaseEffect
 	public sealed class JuliaFractalData : EffectData
 	{
 		[Caption ("Factor"), MinimumValue (1), MaximumValue (10)]
-		public int Factor = 4;
+		public int Factor { get; set; } = 4;
 
 		[Caption ("Quality"), MinimumValue (1), MaximumValue (5)]
-		public int Quality = 2;
+		public int Quality { get; set; } = 2;
 
 		[Caption ("Zoom"), MinimumValue (0), MaximumValue (50)]
-		public int Zoom = 1;
+		public int Zoom { get; set; } = 1;
 
 		[Caption ("Angle")]
-		public double Angle = 0;
+		public double Angle { get; set; } = 0;
 	}
 }
