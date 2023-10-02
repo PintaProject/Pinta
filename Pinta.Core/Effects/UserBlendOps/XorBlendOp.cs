@@ -129,7 +129,7 @@ public sealed partial class UserBlendOps
 			}
 			public XorBlendOpWithOpacity (int opacity)
 			{
-				if (this.opacity < 0 || this.opacity > 255)
+				if (opacity < 0 || opacity > 255)
 					throw new ArgumentOutOfRangeException (nameof (opacity));
 
 				this.opacity = opacity;
