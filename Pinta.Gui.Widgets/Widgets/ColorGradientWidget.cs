@@ -62,17 +62,17 @@ public sealed class ColorGradientWidget : Gtk.DrawingArea
 		AddController (ClickGesture);
 	}
 
-	public Gtk.GestureClick ClickGesture { get; private init; }
+	public Gtk.GestureClick ClickGesture { get; }
 
 	private RectangleD GradientRectangle {
 		get {
 			var rect = GetAllocation ();
-			var x = rect.X + X_pad * rect.Width;
-			var y = rect.Y + Y_pad * rect.Height;
-			var width = (1 - 2 * X_pad) * rect.Width;
-			var height = (1 - 2 * Y_pad) * rect.Height;
-
-			return new RectangleD (x, y, width, height);
+			return new RectangleD (
+				x: rect.X + X_pad * rect.Width,
+				y: rect.Y + Y_pad * rect.Height,
+				width: (1 - 2 * X_pad) * rect.Width,
+				height: (1 - 2 * Y_pad) * rect.Height
+			);
 		}
 	}
 
@@ -122,16 +122,27 @@ public sealed class ColorGradientWidget : Gtk.DrawingArea
 	{
 		var rect = GradientRectangle;
 		var all = GetAllocation ();
-
 		return all.Y + Y_pad * all.Height + rect.Height * (255 - val) / 255;
 	}
 
 	private double NormalizeY (int index, double py)
 	{
 		var rect = GradientRectangle;
-		var yvals = (from val in vals select GetYFromValue (val)).Concat (
-			      new double[] { rect.Y, rect.Y + rect.Height }).OrderByDescending (
-			      v => v).ToArray ();
+		var yvals = (
+			(
+				from val in vals
+				select GetYFromValue (val)
+			)
+			.Concat (
+				new double[]
+				{
+					rect.Y,
+					rect.Y + rect.Height
+				}
+			)
+			.OrderByDescending (v => v)
+			.ToArray ()
+		);
 		index++;
 
 		if (py >= yvals[index - 1])
@@ -146,64 +157,64 @@ public sealed class ColorGradientWidget : Gtk.DrawingArea
 	{
 		var rect = GradientRectangle;
 		var all = GetAllocation ();
-
-		py -= all.Y + Y_pad * all.Height;
-		return ((int) (255 * (rect.Height - py) / rect.Height));
+		var y = py - (all.Y + Y_pad * all.Height);
+		return ((int) (255 * (rect.Height - y) / rect.Height));
 	}
 
 	private int FindValueIndex (int y)
 	{
-		if (ValueIndex == -1) {
-			var yvals = (from val in vals select GetYFromValue (val)).ToArray ();
-			var count = Count - 1;
-
-			for (var i = 0; i < count; i++) {
-				var y1 = yvals[i];
-				var y2 = yvals[i + 1];
-				var h = (y1 - y2) / 2;
-
-				// pointer is below the lowest value triangle
-				if (i == 0 && y1 < y)
-					return i;
-
-				// pointer is above the highest value triangle
-				if (i == (count - 1) && y2 > y)
-					return i + 1;
-
-				// pointer is outside i and i + 1 value triangles
-				if (!(y1 >= y && y >= y2))
-					continue;
-
-				// pointer is closer to lower value triangle
-				if (y1 - y <= h) return i;
-				// pointer is closer to higher value triangle
-				if (y - y2 <= h) return i + 1;
-			}
-
-			return -1;
-		} else {
+		if (ValueIndex != -1)
 			return ValueIndex;
+
+		var yvals = (from val in vals select GetYFromValue (val)).ToArray ();
+		var count = Count - 1;
+
+		for (var i = 0; i < count; i++) {
+			var y1 = yvals[i];
+			var y2 = yvals[i + 1];
+			var h = (y1 - y2) / 2;
+
+			// pointer is below the lowest value triangle
+			if (i == 0 && y1 < y)
+				return i;
+
+			// pointer is above the highest value triangle
+			if (i == (count - 1) && y2 > y)
+				return i + 1;
+
+			// pointer is outside i and i + 1 value triangles
+			if (!(y1 >= y && y >= y2))
+				continue;
+
+			// pointer is closer to lower value triangle
+			if (y1 - y <= h) return i;
+			// pointer is closer to higher value triangle
+			if (y - y2 <= h) return i + 1;
 		}
+
+		return -1;
 	}
 
 	private void HandleMotionNotifyEvent (EventControllerMotion controller, EventControllerMotion.MotionSignalArgs args)
 	{
-		int px = (int) args.X;
-		int py = (int) args.Y;
+		PointI p = new (
+			X: (int) args.X,
+			Y: (int) args.Y
+		);
 
-		var index = FindValueIndex (py);
-		py = (int) NormalizeY (index, py);
+		var index = FindValueIndex (p.Y);
+		p = p with { Y = (int) NormalizeY (index, p.Y) };
 
 		if (controller.GetCurrentEventState ().IsLeftMousePressed ()) {
 			if (index != -1) {
-				var y = GetValueFromY (py);
+				var y = GetValueFromY (p.Y);
 
 				vals[index] = y;
 				OnValueChanged (index);
 			}
 		}
 
-		last_mouse_pos = new (px, py);
+		last_mouse_pos = p;
 
 		// to avoid unnecessary costly redrawing
 		if (index != -1)
@@ -234,8 +245,8 @@ public sealed class ColorGradientWidget : Gtk.DrawingArea
 	private void DrawGradient (Context g)
 	{
 		var rect = GradientRectangle;
-
 		var pat = new LinearGradient (rect.X, rect.Y, rect.X, rect.Y + rect.Height);
+
 		pat.AddColorStop (0, MaxColor);
 		pat.AddColorStop (1, new Cairo.Color (0, 0, 0));
 
