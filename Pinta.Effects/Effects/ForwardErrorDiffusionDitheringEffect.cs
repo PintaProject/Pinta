@@ -29,7 +29,6 @@ public sealed class ForwardErrorDiffusionDitheringEffect : BaseEffect
 
 	public override void Render (ImageSurface src, ImageSurface dest, ReadOnlySpan<RectangleI> rois)
 	{
-		//var src_data = src.GetReadOnlyPixelData ();
 		var dst_data = dest.GetPixelData ();
 		foreach (var rect in rois) {
 			for (int y = rect.Top; y <= rect.Bottom; y++) {
@@ -158,11 +157,9 @@ public sealed class ForwardErrorDiffusionDitheringEffect : BaseEffect
 
 		private static IEnumerable<T> Flatten2DArray<T> (T[,] array)
 		{
-			for (int i = 0; i < array.GetLength (0); i++) {
-				for (int j = 0; j < array.GetLength (1); j++) {
+			for (int i = 0; i < array.GetLength (0); i++)
+				for (int j = 0; j < array.GetLength (1); j++)
 					yield return array[i, j];
-				}
-			}
 		}
 	}
 
@@ -214,18 +211,13 @@ public sealed class ForwardErrorDiffusionDitheringEffect : BaseEffect
 
 	private static ImmutableArray<ColorBgra> GetPredefinedPalette (PredefinedPalettes choice)
 	{
-		switch (choice) {
-			case PredefinedPalettes.OldWindows16:
-				return DefaultPalettes.OldWindows16;
-			case PredefinedPalettes.WebSafe:
-				return DefaultPalettes.WebSafe;
-			case PredefinedPalettes.BlackWhite:
-				return DefaultPalettes.BlackWhite;
-			case PredefinedPalettes.OldMsPaint:
-				return DefaultPalettes.OldMsPaint;
-			default:
-				throw new InvalidEnumArgumentException (nameof (choice), (int) choice, typeof (PredefinedPalettes));
-		}
+		return choice switch {
+			PredefinedPalettes.OldWindows16 => DefaultPalettes.OldWindows16,
+			PredefinedPalettes.WebSafe => DefaultPalettes.WebSafe,
+			PredefinedPalettes.BlackWhite => DefaultPalettes.BlackWhite,
+			PredefinedPalettes.OldMsPaint => DefaultPalettes.OldMsPaint,
+			_ => throw new InvalidEnumArgumentException (nameof (choice), (int) choice, typeof (PredefinedPalettes)),
+		};
 	}
 
 	public enum PredefinedDiffusionMatrices
@@ -243,28 +235,18 @@ public sealed class ForwardErrorDiffusionDitheringEffect : BaseEffect
 
 	private static ErrorDiffusionMatrix GetPredefinedDiffusionMatrix (PredefinedDiffusionMatrices choice)
 	{
-		switch (choice) {
-			case PredefinedDiffusionMatrices.Sierra:
-				return DefaultMatrices.Sierra;
-			case PredefinedDiffusionMatrices.TwoRowSierra:
-				return DefaultMatrices.TwoRowSierra;
-			case PredefinedDiffusionMatrices.SierraLite:
-				return DefaultMatrices.SierraLite;
-			case PredefinedDiffusionMatrices.Burkes:
-				return DefaultMatrices.Burkes;
-			case PredefinedDiffusionMatrices.Atkinson:
-				return DefaultMatrices.Atkinson;
-			case PredefinedDiffusionMatrices.Stucki:
-				return DefaultMatrices.Stucki;
-			case PredefinedDiffusionMatrices.JarvisJudiceNinke:
-				return DefaultMatrices.JarvisJudiceNinke;
-			case PredefinedDiffusionMatrices.FloydSteinberg:
-				return DefaultMatrices.FloydSteinberg;
-			case PredefinedDiffusionMatrices.FakeFloydSteinberg:
-				return DefaultMatrices.FakeFloydSteinberg;
-			default:
-				throw new InvalidEnumArgumentException (nameof (choice), (int) choice, typeof (PredefinedDiffusionMatrices));
-		}
+		return choice switch {
+			PredefinedDiffusionMatrices.Sierra => DefaultMatrices.Sierra,
+			PredefinedDiffusionMatrices.TwoRowSierra => DefaultMatrices.TwoRowSierra,
+			PredefinedDiffusionMatrices.SierraLite => DefaultMatrices.SierraLite,
+			PredefinedDiffusionMatrices.Burkes => DefaultMatrices.Burkes,
+			PredefinedDiffusionMatrices.Atkinson => DefaultMatrices.Atkinson,
+			PredefinedDiffusionMatrices.Stucki => DefaultMatrices.Stucki,
+			PredefinedDiffusionMatrices.JarvisJudiceNinke => DefaultMatrices.JarvisJudiceNinke,
+			PredefinedDiffusionMatrices.FloydSteinberg => DefaultMatrices.FloydSteinberg,
+			PredefinedDiffusionMatrices.FakeFloydSteinberg => DefaultMatrices.FakeFloydSteinberg,
+			_ => throw new InvalidEnumArgumentException (nameof (choice), (int) choice, typeof (PredefinedDiffusionMatrices)),
+		};
 	}
 
 	public sealed class ForwardErrorDiffusionDitheringData : EffectData
@@ -292,52 +274,52 @@ public sealed class ForwardErrorDiffusionDitheringEffect : BaseEffect
 	private static class DefaultMatrixArrays
 	{
 		public static DiffusionMatrixElement[,] Sierra { get; } = {
-		    { IgnoreElement.Instance, IgnoreElement.Instance, TargetPixelElement.Instance, new WeightElement(5), new WeightElement(3), },
-		    { new WeightElement(2), new WeightElement(4), new WeightElement(5), new WeightElement(4), new WeightElement(2), },
-		    { IgnoreElement.Instance, new WeightElement(2), new WeightElement(3), new WeightElement(2), IgnoreElement.Instance, },
+			{ IgnoreElement.Instance, IgnoreElement.Instance, TargetPixelElement.Instance, new WeightElement(5), new WeightElement(3), },
+			{ new WeightElement(2), new WeightElement(4), new WeightElement(5), new WeightElement(4), new WeightElement(2), },
+			{ IgnoreElement.Instance, new WeightElement(2), new WeightElement(3), new WeightElement(2), IgnoreElement.Instance, },
 		};
 
 		public static DiffusionMatrixElement[,] TwoRowSierra { get; } = {
-		    { IgnoreElement.Instance, IgnoreElement.Instance, TargetPixelElement.Instance, new WeightElement(4), new WeightElement(3), },
-		    { new WeightElement(1), new WeightElement(2), new WeightElement(3), new WeightElement(2), new WeightElement(1), },
+			{ IgnoreElement.Instance, IgnoreElement.Instance, TargetPixelElement.Instance, new WeightElement(4), new WeightElement(3), },
+			{ new WeightElement(1), new WeightElement(2), new WeightElement(3), new WeightElement(2), new WeightElement(1), },
 		};
 
 		public static DiffusionMatrixElement[,] SierraLite { get; } = {
-		    { IgnoreElement.Instance, TargetPixelElement.Instance, new WeightElement(2), },
-		    { new WeightElement(1), new WeightElement(1), IgnoreElement.Instance, },
+			{ IgnoreElement.Instance, TargetPixelElement.Instance, new WeightElement(2), },
+			{ new WeightElement(1), new WeightElement(1), IgnoreElement.Instance, },
 		};
 
 		public static DiffusionMatrixElement[,] Burkes { get; } = {
-		    { IgnoreElement.Instance, IgnoreElement.Instance, TargetPixelElement.Instance, new WeightElement(8), new WeightElement(4), },
-		    { new WeightElement(2), new WeightElement(4), new WeightElement(8), new WeightElement(4), new WeightElement(2), },
+			{ IgnoreElement.Instance, IgnoreElement.Instance, TargetPixelElement.Instance, new WeightElement(8), new WeightElement(4), },
+			{ new WeightElement(2), new WeightElement(4), new WeightElement(8), new WeightElement(4), new WeightElement(2), },
 		};
 
 		public static DiffusionMatrixElement[,] Atkinson { get; } = {
-		    { IgnoreElement.Instance, TargetPixelElement.Instance, new WeightElement(1), new WeightElement(1), },
-		    { new WeightElement(1), new WeightElement(1), new WeightElement(1), IgnoreElement.Instance, },
-		    { IgnoreElement.Instance, new WeightElement(1), IgnoreElement.Instance, IgnoreElement.Instance, },
+			{ IgnoreElement.Instance, TargetPixelElement.Instance, new WeightElement(1), new WeightElement(1), },
+			{ new WeightElement(1), new WeightElement(1), new WeightElement(1), IgnoreElement.Instance, },
+			{ IgnoreElement.Instance, new WeightElement(1), IgnoreElement.Instance, IgnoreElement.Instance, },
 		};
 
 		public static DiffusionMatrixElement[,] Stucki { get; } = {
-		    { IgnoreElement.Instance, IgnoreElement.Instance, TargetPixelElement.Instance, new WeightElement(8), new WeightElement(4), },
-		    { new WeightElement(2), new WeightElement(4), new WeightElement(8), new WeightElement(4), new WeightElement(2), },
-		    { new WeightElement(1), new WeightElement(2), new WeightElement(4), new WeightElement(2), new WeightElement(1), },
+			{ IgnoreElement.Instance, IgnoreElement.Instance, TargetPixelElement.Instance, new WeightElement(8), new WeightElement(4), },
+			{ new WeightElement(2), new WeightElement(4), new WeightElement(8), new WeightElement(4), new WeightElement(2), },
+			{ new WeightElement(1), new WeightElement(2), new WeightElement(4), new WeightElement(2), new WeightElement(1), },
 		};
 
 		public static DiffusionMatrixElement[,] JarvisJudiceNinke { get; } = {
-		    { IgnoreElement.Instance, IgnoreElement.Instance, TargetPixelElement.Instance, new WeightElement(7), new WeightElement(5), },
-		    { new WeightElement(3), new WeightElement(5), new WeightElement(7), new WeightElement(5), new WeightElement(3), },
-		    { new WeightElement(1), new WeightElement(3), new WeightElement(5), new WeightElement(3), new WeightElement(1), },
+			{ IgnoreElement.Instance, IgnoreElement.Instance, TargetPixelElement.Instance, new WeightElement(7), new WeightElement(5), },
+			{ new WeightElement(3), new WeightElement(5), new WeightElement(7), new WeightElement(5), new WeightElement(3), },
+			{ new WeightElement(1), new WeightElement(3), new WeightElement(5), new WeightElement(3), new WeightElement(1), },
 		};
 
 		public static DiffusionMatrixElement[,] FloydSteinberg { get; } = {
-		    { IgnoreElement.Instance, TargetPixelElement.Instance, new WeightElement(7), },
-		    { new WeightElement(3), new WeightElement(5), new WeightElement(1), }
+			{ IgnoreElement.Instance, TargetPixelElement.Instance, new WeightElement(7), },
+			{ new WeightElement(3), new WeightElement(5), new WeightElement(1), }
 		};
 
 		public static DiffusionMatrixElement[,] FakeFloydSteinberg { get; } = {
-		    { TargetPixelElement.Instance, new WeightElement(3), },
-		    { new WeightElement(3), new WeightElement(2), }
+			{ TargetPixelElement.Instance, new WeightElement(3), },
+			{ new WeightElement(3), new WeightElement(2), }
 		};
 	}
 
@@ -415,13 +397,10 @@ public sealed class ForwardErrorDiffusionDitheringEffect : BaseEffect
 
 		private static IEnumerable<ColorBgra> EnumerateWebSafeColorCube ()
 		{
-			for (short r = 0; r <= 255; r += 51) {
-				for (short g = 0; g <= 255; g += 51) {
-					for (short b = 0; b <= 255; b += 51) {
+			for (short r = 0; r <= 255; r += 51)
+				for (short g = 0; g <= 255; g += 51)
+					for (short b = 0; b <= 255; b += 51)
 						yield return ColorBgra.FromBgr ((byte) b, (byte) g, (byte) r);
-					}
-				}
-			}
 		}
 	}
 }
