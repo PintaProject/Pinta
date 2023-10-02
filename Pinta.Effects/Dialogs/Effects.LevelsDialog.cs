@@ -10,22 +10,22 @@
 // Additional code:
 //
 // LevelsDialog.cs
-//  
+//
 // Author:
 //      Krzysztof Marecki <marecki.krzysztof@gmail.com>
-// 
+//
 // Copyright (c) 2010 Krzysztof Marecki
-// 
+//
 // Permission is hereby granted, free of charge, to any person obtaining a copy
 // of this software and associated documentation files (the "Software"), to deal
 // in the Software without restriction, including without limitation the rights
 // to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
 // copies of the Software, and to permit persons to whom the Software is
 // furnished to do so, subject to the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be included in
 // all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
 // IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
 // FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
@@ -412,7 +412,7 @@ public partial class LevelsDialog : Gtk.Dialog
 		return Levels.Apply (histogram_input.Histogram.GetMeanColor ()).ToCairoColor ();
 	}
 
-	//hack to avoid reccurent invocation of UpdateLevels
+	//hack to avoid recurrent invocation of UpdateLevels
 	private bool disable_updating;
 	//when user moves triangles inside gradient widget,
 	//we don't want to redraw histogram each time Levels values change.
