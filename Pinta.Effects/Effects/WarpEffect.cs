@@ -53,19 +53,16 @@ public abstract class WarpEffect : BaseEffect
 		EffectHelper.LaunchSimpleEffectDialog (this);
 	}
 
-	private double default_radius = 0;
-	private double default_radius_2 = 0;
-
-	protected double DefaultRadius => default_radius;
-	protected double DefaultRadius2 => default_radius_2;
+	protected double DefaultRadius { get; private set; } = 0;
+	protected double DefaultRadius2 { get; private set; } = 0;
 
 	#region Algorithm Code Ported From PDN
 	public override void Render (ImageSurface src, ImageSurface dst, ReadOnlySpan<RectangleI> rois)
 	{
 		WarpSettings settings = CreateSettings ();
 
-		default_radius = Math.Min (settings.selection.Width, settings.selection.Height) * 0.5;
-		default_radius_2 = default_radius * default_radius;
+		this.DefaultRadius = Math.Min (settings.selection.Width, settings.selection.Height) * 0.5;
+		this.DefaultRadius2 = DefaultRadius * DefaultRadius;
 
 		Span<PointD> aaPoints = stackalloc PointD[settings.aaSampleCount];
 		Utility.GetRgssOffsets (aaPoints, settings.aaSampleCount, Data.Quality);
