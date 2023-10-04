@@ -43,9 +43,20 @@ public sealed class ImageConverterManager
 			yield return CreateFormatDescriptor (format);
 
 		// Create all the formats we have our own importers/exporters for
-		OraFormat oraHandler = new OraFormat ();
-		var oraFormatDescriptor = new FormatDescriptor ("OpenRaster", new string[] { "ora", "ORA" }, new string[] { "image/openraster" }, oraHandler, oraHandler);
+
+		OraFormat oraHandler = new ();
+		FormatDescriptor oraFormatDescriptor = new ("OpenRaster", new[] { "ora", "ORA" }, new[] { "image/openraster" }, oraHandler, oraHandler);
 		yield return oraFormatDescriptor;
+
+		NetpbmPortablePixmap netpbmPortablePixmap = new ();
+		FormatDescriptor netpbmPortablePixmapDescriptor = new (
+			displayPrefix: "Netpbm Portable Pixmap",
+			extensions: new[] { "ppm", "PPM" },
+			mimes: new[] { "image/x-portable-pixmap" }, // Not official, but conventional
+			importer: null,
+			exporter: netpbmPortablePixmap
+		);
+		yield return netpbmPortablePixmapDescriptor;
 	}
 
 	private static FormatDescriptor CreateFormatDescriptor (PixbufFormat format)
