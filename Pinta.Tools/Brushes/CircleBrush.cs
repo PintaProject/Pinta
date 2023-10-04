@@ -41,21 +41,14 @@ public sealed class CircleBrush : BasePaintBrush
 		Context g,
 		Color strokeColor,
 		ImageSurface surface,
-		int x,
-		int y,
-		int lastX,
-		int lastY)
+		PointI current,
+		PointI last)
 	{
-		PointI mouseDelta = new (
-			X: x - lastX,
-			Y: y - lastY
-		);
-
+		PointI mouseDelta = current - last;
 		PointD center = new (
-			X: Math.Floor (x / 100.0) * 100 + 50,
-			Y: Math.Floor (y / 100.0) * 100 + 50
+			X: Math.Floor (current.X / 100.0) * 100 + 50,
+			Y: Math.Floor (current.Y / 100.0) * 100 + 50
 		);
-
 		double d = mouseDelta.Magnitude () * 2.0;
 		int steps = Random.Next (1, 10);
 		double step_delta = d / steps;

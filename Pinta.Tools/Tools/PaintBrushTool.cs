@@ -102,11 +102,12 @@ public sealed class PaintBrushTool : BaseBrushTool
 			return;
 
 		// TODO: also multiply by pressure
-		stroke_color = new Color (stroke_color.R, stroke_color.G, stroke_color.B,
-			stroke_color.A * active_brush.StrokeAlphaMultiplier);
-
-		var x = e.Point.X;
-		var y = e.Point.Y;
+		stroke_color = new Color (
+			stroke_color.R,
+			stroke_color.G,
+			stroke_color.B,
+			stroke_color.A * active_brush.StrokeAlphaMultiplier
+		);
 
 		if (last_point.Equals (point_empty))
 			last_point = e.Point;
@@ -115,7 +116,6 @@ public sealed class PaintBrushTool : BaseBrushTool
 			surface_modified = true;
 
 		var surf = document.Layers.CurrentUserLayer.Surface;
-		var invalidate_rect = RectangleI.Zero;
 		var brush_width = BrushWidth;
 
 		var g = document.CreateClippedContext ();
@@ -125,7 +125,7 @@ public sealed class PaintBrushTool : BaseBrushTool
 		g.LineCap = BrushWidth == 1 ? LineCap.Butt : LineCap.Round;
 		g.SetSourceColor (stroke_color);
 
-		invalidate_rect = active_brush.DoMouseMove (g, stroke_color, surf, x, y, last_point.X, last_point.Y);
+		var invalidate_rect = active_brush.DoMouseMove (g, stroke_color, surf, e.Point, last_point);
 
 		// If we draw partially offscreen, Cairo gives us a bogus
 		// dirty rectangle, so redraw everything.
@@ -140,7 +140,6 @@ public sealed class PaintBrushTool : BaseBrushTool
 	protected override void OnMouseUp (Document document, ToolMouseEventArgs e)
 	{
 		base.OnMouseUp (document, e);
-
 		active_brush?.DoMouseUp ();
 	}
 

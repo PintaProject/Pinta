@@ -41,26 +41,24 @@ public sealed class GridBrush : BasePaintBrush
 		Context g,
 		Color strokeColor,
 		ImageSurface surface,
-		int x,
-		int y,
-		int lastX,
-		int lastY)
+		PointI current,
+		PointI last)
 	{
 		PointD c = new (
-			X: Math.Round (x / 100.0) * 100.0,
-			Y: Math.Round (y / 100.0) * 100.0
+			X: Math.Round (current.X / 100.0) * 100.0,
+			Y: Math.Round (current.Y / 100.0) * 100.0
 		);
 
 		PointD d = new (
-			X: (c.X - x) * 10.0,
-			Y: (c.Y - y) * 10.0
+			X: (c.X - current.X) * 10.0,
+			Y: (c.Y - current.Y) * 10.0
 		);
 
 		for (int i = 0; i < 50; i++) {
 			g.MoveTo (c.X, c.Y);
 			g.QuadraticCurveTo (
-				x + Random.NextDouble () * d.X,
-				y + Random.NextDouble () * d.Y,
+				current.X + Random.NextDouble () * d.X,
+				current.Y + Random.NextDouble () * d.Y,
 				c.X,
 				c.Y);
 			g.Stroke ();

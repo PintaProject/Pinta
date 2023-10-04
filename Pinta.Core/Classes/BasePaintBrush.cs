@@ -70,10 +70,14 @@ public abstract class BasePaintBrush
 		OnMouseDown ();
 	}
 
-	public virtual RectangleI DoMouseMove (Context g, Color strokeColor, ImageSurface surface,
-					       int x, int y, int lastX, int lastY)
+	public virtual RectangleI DoMouseMove (
+		Context g,
+		Color strokeColor,
+		ImageSurface surface,
+		PointI current,
+		PointI last)
 	{
-		return OnMouseMove (g, strokeColor, surface, x, y, lastX, lastY);
+		return OnMouseMove (g, strokeColor, surface, current, last);
 	}
 
 	/// <summary>
@@ -102,6 +106,10 @@ public abstract class BasePaintBrush
 	/// <param name="lastX">The previous x coordinate of the mouse.</param>
 	/// <param name="lastY">The previous y coordinate of the mouse.</param>
 	/// <returns>A rectangle containing the area of the canvas that should be redrawn.</returns>
-	protected abstract RectangleI OnMouseMove (Context g, Color strokeColor, ImageSurface surface,
-						   int x, int y, int lastX, int lastY);
+	protected abstract RectangleI OnMouseMove (
+		Context g,
+		Color strokeColor,
+		ImageSurface surface,
+		PointI current,
+		PointI last);
 }
