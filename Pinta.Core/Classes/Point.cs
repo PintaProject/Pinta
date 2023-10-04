@@ -39,6 +39,18 @@ public readonly record struct PointI (int X, int Y)
 		double y = Y;
 		return Math.Sqrt (x * x + y * y);
 	}
+
+	public static PointI operator + (PointI left, PointI right)
+		=> new (
+			X: left.X + right.X,
+			Y: left.Y + right.Y
+		);
+
+	public static PointI operator - (PointI left, PointI right)
+		=> new (
+			X: left.X - right.X,
+			Y: left.Y - right.Y
+		);
 }
 
 public readonly record struct PointD (double X, double Y)
@@ -59,6 +71,18 @@ public readonly record struct PointD (double X, double Y)
 	public static PointD operator + (in PointD a, in PointD b) => new (a.X + b.X, a.Y + b.Y);
 
 	public static explicit operator PointD (PointI p) => new (p.X, p.Y);
+
+	public static PointD operator + (PointD left, PointD right)
+	=> new (
+		X: left.X + right.X,
+		Y: left.Y + right.Y
+	);
+
+	public static PointD operator - (PointD left, PointD right)
+		=> new (
+			X: left.X - right.X,
+			Y: left.Y - right.Y
+		);
 }
 
 public readonly record struct Size (int Width, int Height)
