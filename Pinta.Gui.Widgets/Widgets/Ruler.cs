@@ -148,7 +148,8 @@ public sealed class Ruler : DrawingArea
 		double marker_position,
 		RectangleD rect,
 		Size effectiveSize,
-		Color color);
+		Color color,
+		Orientation orientation);
 	private RulerDrawSettings CreateSettings (Size preliminarySize)
 	{
 		GetStyleContext ().GetColor (out Color color);
@@ -248,7 +249,8 @@ public sealed class Ruler : DrawingArea
 			marker_position: (Position - Lower) * (effectiveSize.Width / (Upper - Lower)),
 			rect: rect,
 			effectiveSize: effectiveSize,
-			color: color
+			color: color,
+			orientation: Orientation
 		);
 	}
 
@@ -280,7 +282,7 @@ public sealed class Ruler : DrawingArea
 				var layout = CreatePangoLayout (label);
 				layout.SetFontDescription (settings.font);
 
-				switch (Orientation) {
+				switch (settings.orientation) {
 					case Orientation.Horizontal:
 						cr.MoveTo (position + 2, 0);
 						PangoCairo.Functions.ShowLayout (cr, layout);
@@ -296,7 +298,7 @@ public sealed class Ruler : DrawingArea
 			}
 
 			// Draw ticks
-			switch (Orientation) {
+			switch (settings.orientation) {
 				case Orientation.Horizontal:
 					cr.MoveTo (position, settings.effectiveSize.Height - tick_height);
 					cr.LineTo (position, settings.effectiveSize.Height);
@@ -311,7 +313,7 @@ public sealed class Ruler : DrawingArea
 		}
 
 		// Draw marker
-		switch (Orientation) {
+		switch (settings.orientation) {
 			case Orientation.Horizontal:
 				cr.MoveTo (settings.marker_position, 0);
 				cr.LineTo (settings.marker_position, settings.effectiveSize.Height);
