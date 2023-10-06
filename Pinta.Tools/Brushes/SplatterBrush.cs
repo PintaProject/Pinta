@@ -41,10 +41,8 @@ public sealed class SplatterBrush : BasePaintBrush
 		Context g,
 		Color strokeColor,
 		ImageSurface surface,
-		int x,
-		int y,
-		int lastX,
-		int lastY)
+		PointI current,
+		PointI last)
 	{
 		int line_width = (int) g.LineWidth;
 
@@ -52,8 +50,8 @@ public sealed class SplatterBrush : BasePaintBrush
 		int size = (line_width == 1) ? 1 : Random.Next (2, line_width);
 
 		RectangleD rect = new (
-			x: x - Random.Next (-15, 15),
-			y: y - Random.Next (-15, 15),
+			x: current.X - Random.Next (-15, 15),
+			y: current.Y - Random.Next (-15, 15),
 			width: size,
 			height: size
 		);

@@ -38,26 +38,20 @@ public sealed class SquaresBrush : BasePaintBrush
 		Context g,
 		Color strokeColor,
 		ImageSurface surface,
-		int x,
-		int y,
-		int lastX,
-		int lastY)
+		PointI current,
+		PointI last)
 	{
-		PointI mouseDelta = new (
-			X: x - lastX,
-			Y: y - lastY
-		);
-
+		PointI mouseDelta = current - last;
 		PointD rotated = new ( // 90 degrees
 			X: -mouseDelta.Y,
 			Y: +mouseDelta.X
 		);
 
-		g.MoveTo (lastX - rotated.X, lastY - rotated.Y);
-		g.LineTo (lastX + rotated.X, lastY + rotated.Y);
-		g.LineTo (x + rotated.X, y + rotated.Y);
-		g.LineTo (x - rotated.X, y - rotated.Y);
-		g.LineTo (lastX - rotated.X, lastY - rotated.Y);
+		g.MoveTo (last.X - rotated.X, last.Y - rotated.Y);
+		g.LineTo (last.X + rotated.X, last.Y + rotated.Y);
+		g.LineTo (current.X + rotated.X, current.Y + rotated.Y);
+		g.LineTo (current.X - rotated.X, current.Y - rotated.Y);
+		g.LineTo (last.X - rotated.X, last.Y - rotated.Y);
 
 		g.StrokePreserve ();
 

@@ -40,17 +40,15 @@ public sealed class PlainBrush : BasePaintBrush
 		Context g,
 		Color strokeColor,
 		ImageSurface surface,
-		int x,
-		int y,
-		int lastX,
-		int lastY)
+		PointI current,
+		PointI last)
 	{
 		// Cairo does not support a single-pixel-long single-pixel-wide line
-		bool isSinglePixelLine = IsSinglePixelLine (g, x, y, lastX, lastY);
+		bool isSinglePixelLine = IsSinglePixelLine (g, current, last);
 		if (isSinglePixelLine)
-			DrawSinglePixelLine (g, x, y);
+			DrawSinglePixelLine (g, current);
 		else
-			DrawNonSinglePixelLine (g, x, y, lastX, lastY);
+			DrawNonSinglePixelLine (g, current, last);
 
 		RectangleI dirty = g.StrokeExtents ().ToInt ();
 
@@ -61,26 +59,26 @@ public sealed class PlainBrush : BasePaintBrush
 		return inflated;
 	}
 
-	private static bool IsSinglePixelLine (Context g, int x, int y, int lastX, int lastY)
+	private static bool IsSinglePixelLine (Context g, PointI current, PointI last)
 	{
 		return
-			(x == lastX) &&
-			(y == lastY) &&
+			(current.X == last.X) &&
+			(current.Y == last.Y) &&
 			(g.LineWidth == 1) &&
-			PintaCore.Workspace.ActiveWorkspace.PointInCanvas (new PointD (x, y))
+			PintaCore.Workspace.ActiveWorkspace.PointInCanvas ((PointD) current)
 		;
 	}
 
-	private static void DrawSinglePixelLine (Context g, int x, int y)
+	private static void DrawSinglePixelLine (Context g, PointI current)
 	{
-		g.Rectangle (x, y, 1.0, 1.0);
+		g.Rectangle (current.X, current.Y, 1.0, 1.0);
 		g.Fill ();
 	}
 
-	private static void DrawNonSinglePixelLine (Context g, int x, int y, int lastX, int lastY)
+	private static void DrawNonSinglePixelLine (Context g, PointI current, PointI last)
 	{
-		g.MoveTo (lastX + 0.5, lastY + 0.5);
-		g.LineTo (x + 0.5, y + 0.5);
+		g.MoveTo (last.X + 0.5, last.Y + 0.5);
+		g.LineTo (current.X + 0.5, current.Y + 0.5);
 		g.StrokePreserve ();
 	}
 }
