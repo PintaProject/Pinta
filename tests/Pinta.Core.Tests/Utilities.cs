@@ -11,14 +11,21 @@ internal static class Utilities
 	/// </returns>
 	internal static bool AreFilesEqual (string fileName1, string fileName2)
 	{
-		var context1 = new DataInputStreamContext (fileName1);
-		var context2 = new DataInputStreamContext (fileName2);
+		var context1 = OpenFile (fileName1);
+		var context2 = OpenFile (fileName2);
 		return AreFilesEqual (context1.DataStream, context2.DataStream); ;
 	}
 
-	internal static DataInputStreamContext OpenFile (string fileName)
+	internal static DataInputStreamContext OpenFile (string filePath)
 	{
-		return new (fileName);
+		return new (filePath);
+	}
+
+	internal static string GetAssetPath (string fileName)
+	{
+		const string ASSETS_FOLDER = "Assets";
+		string assemblyPath = System.IO.Path.GetDirectoryName (typeof (Utilities).Assembly.Location)!;
+		return System.IO.Path.Combine (assemblyPath, ASSETS_FOLDER, fileName);
 	}
 
 	internal sealed class DataInputStreamContext : IDisposable
@@ -26,11 +33,9 @@ internal static class Utilities
 		private Gio.FileInputStream FileStream { get; }
 		public Gio.DataInputStream DataStream { get; }
 
-		internal DataInputStreamContext(string fileName)
+		internal DataInputStreamContext (string filePath)
 		{
-			const string ASSETS_FOLDER = "Assets";
-			string assemblyPath = System.IO.Path.GetDirectoryName (typeof (Utilities).Assembly.Location)!;
-			Gio.File file = Gio.FileHelper.NewForPath (System.IO.Path.Combine (assemblyPath, ASSETS_FOLDER, fileName));
+			Gio.File file = Gio.FileHelper.NewForPath (filePath);
 			Gio.FileInputStream fs = file.Read (null);
 			FileStream = fs;
 			DataStream = Gio.DataInputStream.New (fs);
@@ -64,11 +69,9 @@ internal static class Utilities
 		}
 	}
 
-	public static ImageSurface LoadImage (string image_name)
+	public static ImageSurface LoadImage (string imageFilePath)
 	{
-		var assembly_path = System.IO.Path.GetDirectoryName (typeof (Utilities).Assembly.Location);
-		var file = Gio.FileHelper.NewForPath (System.IO.Path.Combine (assembly_path!, "Assets", image_name));
-
+		var file = Gio.FileHelper.NewForPath (imageFilePath);
 		using var fs = file.Read (null);
 		try {
 			var bg = GdkPixbuf.Pixbuf.NewFromStream (fs, cancellable: null);
