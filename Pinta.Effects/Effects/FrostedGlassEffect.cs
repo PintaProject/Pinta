@@ -39,9 +39,23 @@ public sealed class FrostedGlassEffect : BaseEffect
 	}
 
 	#region Algorithm Code Ported From PDN
+
+	private sealed record FrostedGlassSettings (
+		int amount,
+		int src_width,
+		int src_height);
+	private FrostedGlassSettings CreateSettings (ImageSurface src)
+	{
+		return new (
+			amount: Data.Amount,
+			src_width: src.Width,
+			src_height: src.Height
+		);
+	}
+
 	public override void Render (ImageSurface src, ImageSurface dst, ReadOnlySpan<RectangleI> rois)
 	{
-		int amount = Data.Amount;
+		FrostedGlassSettings settings = CreateSettings (src);
 
 		ReadOnlySpan<ColorBgra> src_data = src.GetReadOnlyPixelData ();
 		Span<ColorBgra> dst_data = dst.GetPixelData ();
@@ -49,27 +63,23 @@ public sealed class FrostedGlassEffect : BaseEffect
 		foreach (var rect in rois) {
 			for (int y = rect.Top; y <= rect.Bottom; ++y) {
 
-				var dst_row = dst_data.Slice (y * src.Width, src.Width);
+				var dst_row = dst_data.Slice (y * settings.src_width, settings.src_width);
+				int top = y - settings.amount;
+				int bottom = y + settings.amount + 1;
 
-				int top = y - amount;
-				int bottom = y + amount + 1;
-
-				if (top < 0) {
+				if (top < 0)
 					top = 0;
-				}
 
-				if (bottom > src.Height) {
-					bottom = src.Height;
-				}
+				if (bottom > settings.src_height)
+					bottom = settings.src_height;
 
-				for (int x = rect.Left; x <= rect.Right; ++x) {
-					dst_row[x] = GetFinalPixelColor (src, src_data, amount, top, bottom, x);
-				}
+				for (int x = rect.Left; x <= rect.Right; ++x)
+					dst_row[x] = GetFinalPixelColor (settings, src_data, top, bottom, x);
 			}
 		}
 	}
 
-	private ColorBgra GetFinalPixelColor (ImageSurface src, ReadOnlySpan<ColorBgra> src_data, int amount, int top, int bottom, int x)
+	private ColorBgra GetFinalPixelColor (FrostedGlassSettings settings, ReadOnlySpan<ColorBgra> src_data, int top, int bottom, int x)
 	{
 		int intensityChoicesIndex = 0;
 
@@ -78,7 +88,7 @@ public sealed class FrostedGlassEffect : BaseEffect
 		Span<uint> avgGreen = stackalloc uint[256];
 		Span<uint> avgBlue = stackalloc uint[256];
 		Span<uint> avgAlpha = stackalloc uint[256];
-		Span<byte> intensityChoices = stackalloc byte[(1 + (amount * 2)) * (1 + (amount * 2))];
+		Span<byte> intensityChoices = stackalloc byte[(1 + (settings.amount * 2)) * (1 + (settings.amount * 2))];
 
 		intensityCount.Clear ();
 		avgRed.Clear ();
@@ -87,23 +97,23 @@ public sealed class FrostedGlassEffect : BaseEffect
 		avgAlpha.Clear ();
 		intensityChoices.Clear ();
 
-		int left = x - amount;
-		int right = x + amount + 1;
+		int left = x - settings.amount;
+		int right = x + settings.amount + 1;
 
 		if (left < 0) {
 			left = 0;
 		}
 
-		if (right > src.Width) {
-			right = src.Width;
+		if (right > settings.src_width) {
+			right = settings.src_width;
 		}
 
 		for (int j = top; j < bottom; ++j) {
-			if (j < 0 || j >= src.Height) {
-				continue;
-			}
 
-			var src_row = src_data.Slice (j * src.Width, src.Width);
+			if (j < 0 || j >= settings.src_height)
+				continue;
+
+			var src_row = src_data.Slice (j * settings.src_width, settings.src_width);
 
 			for (int i = left; i < right; ++i) {
 				ColorBgra src_pixel = src_row[i];
@@ -122,8 +132,8 @@ public sealed class FrostedGlassEffect : BaseEffect
 		}
 
 		int randNum;
-		lock (this.random) {
-			randNum = this.random.Next (intensityChoicesIndex);
+		lock (random) {
+			randNum = random.Next (intensityChoicesIndex);
 		}
 
 		byte chosenIntensity = intensityChoices[randNum];
