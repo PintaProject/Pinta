@@ -1,30 +1,58 @@
 using System;
-using System.IO;
+using Cairo;
 
 namespace Pinta.Core.Tests;
 
 internal static class Utilities
 {
 	/// <returns>
-	/// <see langword="true"/> if the files are byte-for-byte the same,
-	/// <see langword="false"/> if not
+	/// <see langword="true"/> if the files with these file names
+	/// are byte-for-byte the same, <see langword="false"/> if not
 	/// </returns>
 	internal static bool AreFilesEqual (string fileName1, string fileName2)
 	{
-		const string ASSETS_FOLDER = "Assets";
-		string assemblyPath = Path.GetDirectoryName (typeof (Utilities).Assembly.Location)!;
-		Gio.File file1 = Gio.FileHelper.NewForPath (Path.Combine (assemblyPath, ASSETS_FOLDER, fileName1));
-		Gio.File file2 = Gio.FileHelper.NewForPath (Path.Combine (assemblyPath, ASSETS_FOLDER, fileName2));
-		using Gio.FileInputStream fs1 = file1.Read (null);
-		using Gio.FileInputStream fs2 = file2.Read (null);
-		using Gio.DataInputStream ds1 = Gio.DataInputStream.New (fs1);
-		using Gio.DataInputStream ds2 = Gio.DataInputStream.New (fs2);
+		var context1 = new DataInputStreamContext (fileName1);
+		var context2 = new DataInputStreamContext (fileName2);
+		return AreFilesEqual (context1.DataStream, context2.DataStream); ;
+	}
+
+	internal static DataInputStreamContext OpenFile (string fileName)
+	{
+		return new (fileName);
+	}
+
+	internal sealed class DataInputStreamContext : IDisposable
+	{
+		private Gio.FileInputStream FileStream { get; }
+		public Gio.DataInputStream DataStream { get; }
+
+		internal DataInputStreamContext(string fileName)
+		{
+			const string ASSETS_FOLDER = "Assets";
+			string assemblyPath = System.IO.Path.GetDirectoryName (typeof (Utilities).Assembly.Location)!;
+			Gio.File file = Gio.FileHelper.NewForPath (System.IO.Path.Combine (assemblyPath, ASSETS_FOLDER, fileName));
+			Gio.FileInputStream fs = file.Read (null);
+			FileStream = fs;
+			DataStream = Gio.DataInputStream.New (fs);
+		}
+
+		public void Dispose ()
+		{
+			DataStream.Dispose ();
+			FileStream.Dispose ();
+		}
+	}
+
+	internal static bool AreFilesEqual (Gio.DataInputStream dataStream1, Gio.DataInputStream dataStream2)
+	{
+		dataStream1.Seek (0, GLib.SeekType.Set, null);
+		dataStream2.Seek (0, GLib.SeekType.Set, null);
 		const int BUFFER_SIZE = 4096;
 		Span<byte> buffer1 = stackalloc byte[BUFFER_SIZE];
 		Span<byte> buffer2 = stackalloc byte[BUFFER_SIZE];
 		while (true) {
-			long bytesRead1 = ds1.Read (buffer1, null);
-			long bytesRead2 = ds1.Read (buffer2, null);
+			long bytesRead1 = dataStream1.Read (buffer1, null);
+			long bytesRead2 = dataStream1.Read (buffer2, null);
 			if (bytesRead1 != bytesRead2) // Different file sizes
 				return false;
 			if (bytesRead1 == 0) // End of file
@@ -33,6 +61,23 @@ internal static class Utilities
 				if (buffer1[i] != buffer2[i]) // Differing byte
 					return false;
 			}
+		}
+	}
+
+	public static ImageSurface LoadImage (string image_name)
+	{
+		var assembly_path = System.IO.Path.GetDirectoryName (typeof (Utilities).Assembly.Location);
+		var file = Gio.FileHelper.NewForPath (System.IO.Path.Combine (assembly_path!, "Assets", image_name));
+
+		using var fs = file.Read (null);
+		try {
+			var bg = GdkPixbuf.Pixbuf.NewFromStream (fs, cancellable: null);
+			var surf = CairoExtensions.CreateImageSurface (Format.Argb32, bg.Width, bg.Height);
+			var context = new Cairo.Context (surf);
+			context.DrawPixbuf (bg, 0, 0);
+			return surf;
+		} finally {
+			fs.Close (null);
 		}
 	}
 }

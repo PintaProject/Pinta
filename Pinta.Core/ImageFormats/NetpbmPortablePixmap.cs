@@ -6,13 +6,11 @@ using Gtk;
 
 namespace Pinta.Core;
 
-internal sealed class NetpbmPortablePixmap : IImageExporter
+public sealed class NetpbmPortablePixmap : IImageExporter
 {
-	public void Export (Document document, Gio.File file, Window parent)
+	public void Export (ImageSurface flattenedImage, Stream outputStream)
 	{
-		using GioStream fileStream = new (file.Replace ());
-		using StreamWriter writer = new (fileStream, Encoding.ASCII);
-		ImageSurface flattenedImage = document.GetFlattenedImage ();
+		using StreamWriter writer = new (outputStream, Encoding.ASCII);
 		Size imageSize = flattenedImage.GetSize ();
 		ReadOnlySpan<ColorBgra> pixelData = flattenedImage.GetReadOnlyPixelData ();
 		writer.WriteLine ("P3"); // Magic number for text-based portable pixmap format
@@ -33,6 +31,12 @@ internal sealed class NetpbmPortablePixmap : IImageExporter
 			writer.WriteLine ();
 		}
 		writer.Close ();
+	}
 
+	public void Export (Document document, Gio.File file, Window parent)
+	{
+		ImageSurface flattenedImage = document.GetFlattenedImage ();
+		using GioStream outputStream = new (file.Replace ());
+		Export (flattenedImage, outputStream);
 	}
 }
