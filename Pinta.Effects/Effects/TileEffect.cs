@@ -37,91 +37,130 @@ public sealed class TileEffect : BaseEffect
 	}
 
 	#region Algorithm Code Ported From PDN
-	public override void Render (ImageSurface src, ImageSurface dst, ReadOnlySpan<RectangleI> rois)
+
+	private sealed record TileSettings (
+		int width,
+		int height,
+		float hw,
+		float hh,
+		float sin,
+		float cos,
+		float scale,
+		float intensity,
+		int aaLevel,
+		int aaSamples,
+		int src_width);
+	private TileSettings CreateSettings (ImageSurface src, ImageSurface dst)
 	{
 		int width = dst.Width;
 		int height = dst.Height;
-		float hw = width / 2f;
-		float hh = height / 2f;
-		float sin = (float) Math.Sin (Data.Rotation * Math.PI / 180.0);
-		float cos = (float) Math.Cos (Data.Rotation * Math.PI / 180.0);
-		float scale = (float) Math.PI / Data.TileSize;
-		float intensity = Data.Intensity;
-
-		intensity = intensity * intensity / 10 * Math.Sign (intensity);
+		double rotation = Data.Rotation;
+		float preliminaryIntensity = Data.Intensity;
+		int tileSize = Data.TileSize;
 
 		int aaLevel = 4;
-		int aaSamples = aaLevel * aaLevel + 1;
-		Span<PointD> aaPoints = stackalloc PointD[aaSamples];
 
-		for (int i = 0; i < aaSamples; ++i) {
-			double x = (i * aaLevel) / (double) aaSamples;
-			double y = i / (double) aaSamples;
+		return new (
+			width: width,
+			height: height,
+			hw: width / 2f,
+			hh: height / 2f,
+			sin: (float) Math.Sin (rotation * Math.PI / 180.0),
+			cos: (float) Math.Cos (rotation * Math.PI / 180.0),
+			scale: (float) Math.PI / tileSize,
+			intensity: preliminaryIntensity * preliminaryIntensity / 10 * Math.Sign (preliminaryIntensity),
+			aaLevel: aaLevel,
+			aaSamples: aaLevel * aaLevel + 1,
+			src_width: src.Width
+		);
+	}
+
+	private static void InitializeAntiAliasPoints (TileSettings settings, Span<PointD> destination)
+	{
+		for (int i = 0; i < settings.aaSamples; ++i) {
+			double x = (i * settings.aaLevel) / (double) settings.aaSamples;
+			double y = i / (double) settings.aaSamples;
 
 			x -= (int) x;
 
 			// RGSS + rotation to maximize AA quality
-			aaPoints[i] = new PointD ((double) (cos * x + sin * y), (double) (cos * y - sin * x));
+			destination[i] = new PointD ((double) (settings.cos * x + settings.sin * y), (double) (settings.cos * y - settings.sin * x));
 		}
+	}
 
-		int src_width = src.Width;
+	public override void Render (ImageSurface src, ImageSurface dst, ReadOnlySpan<RectangleI> rois)
+	{
+		TileSettings settings = CreateSettings (src, dst);
+
+		Span<PointD> aaPoints = stackalloc PointD[settings.aaSamples];
+		InitializeAntiAliasPoints (settings, aaPoints);
+
 		ReadOnlySpan<ColorBgra> src_data = src.GetReadOnlyPixelData ();
 		Span<ColorBgra> dst_data = dst.GetPixelData ();
 
 		foreach (var rect in rois) {
 			for (int y = rect.Top; y <= rect.Bottom; y++) {
-				float j = y - hh;
-				var dst_row = dst_data.Slice (y * width, width);
-
+				float j = y - settings.hh;
+				var dst_row = dst_data.Slice (y * settings.width, settings.width);
 				for (int x = rect.Left; x <= rect.Right; x++) {
-					int b = 0;
-					int g = 0;
-					int r = 0;
-					int a = 0;
-					float i = x - hw;
-
-					for (int p = 0; p < aaSamples; ++p) {
-						PointD pt = aaPoints[p];
-
-						float u = i + (float) pt.X;
-						float v = j - (float) pt.Y;
-
-						float s = cos * u + sin * v;
-						float t = -sin * u + cos * v;
-
-						s += intensity * (float) Math.Tan (s * scale);
-						t += intensity * (float) Math.Tan (t * scale);
-						u = cos * s - sin * t;
-						v = sin * s + cos * t;
-
-						int xSample = (int) (hw + u);
-						int ySample = (int) (hh + v);
-
-						xSample = (xSample + width) % width;
-						// This makes it a little faster
-						if (xSample < 0) {
-							xSample = (xSample + width) % width;
-						}
-
-						ySample = (ySample + height) % height;
-						// This makes it a little faster
-						if (ySample < 0) {
-							ySample = (ySample + height) % height;
-						}
-
-						ref readonly ColorBgra sample = ref src.GetColorBgra (src_data, src_width, xSample, ySample);
-
-						b += sample.B;
-						g += sample.G;
-						r += sample.R;
-						a += sample.A;
-					}
-
-					dst_row[x] = ColorBgra.FromBgra ((byte) (b / aaSamples), (byte) (g / aaSamples),
-						(byte) (r / aaSamples), (byte) (a / aaSamples));
+					dst_row[x] = GetFinalPixelColor (src, settings, aaPoints, src_data, j, x);
 				}
 			}
 		}
+	}
+
+	private static ColorBgra GetFinalPixelColor (ImageSurface src, TileSettings settings, ReadOnlySpan<PointD> aaPoints, ReadOnlySpan<ColorBgra> src_data, float j, int x)
+	{
+		int b = 0;
+		int g = 0;
+		int r = 0;
+		int a = 0;
+
+		float i = x - settings.hw;
+
+		for (int p = 0; p < settings.aaSamples; ++p) {
+			PointD pt = aaPoints[p];
+
+			float u = i + (float) pt.X;
+			float v = j - (float) pt.Y;
+
+			float s = settings.cos * u + settings.sin * v;
+			float t = -settings.sin * u + settings.cos * v;
+
+			s += settings.intensity * (float) Math.Tan (s * settings.scale);
+			t += settings.intensity * (float) Math.Tan (t * settings.scale);
+			u = settings.cos * s - settings.sin * t;
+			v = settings.sin * s + settings.cos * t;
+
+			int xSample = (int) (settings.hw + u);
+			int ySample = (int) (settings.hh + v);
+
+			xSample = (xSample + settings.width) % settings.width;
+			// This makes it a little faster
+			if (xSample < 0) {
+				xSample = (xSample + settings.width) % settings.width;
+			}
+
+			ySample = (ySample + settings.height) % settings.height;
+			// This makes it a little faster
+			if (ySample < 0) {
+				ySample = (ySample + settings.height) % settings.height;
+			}
+
+			ref readonly ColorBgra sample = ref src.GetColorBgra (src_data, settings.src_width, xSample, ySample);
+
+			b += sample.B;
+			g += sample.G;
+			r += sample.R;
+			a += sample.A;
+		}
+
+		return ColorBgra.FromBgra (
+			b: (byte) (b / settings.aaSamples),
+			g: (byte) (g / settings.aaSamples),
+			r: (byte) (r / settings.aaSamples),
+			a: (byte) (a / settings.aaSamples)
+		);
 	}
 	#endregion
 
@@ -129,10 +168,12 @@ public sealed class TileEffect : BaseEffect
 	public sealed class TileData : EffectData
 	{
 		[Caption ("Rotation"), MinimumValue (-45), MaximumValue (45)]
-		public double Rotation = 30;
+		public double Rotation { get; set; } = 30;
+
 		[Caption ("Tile Size"), MinimumValue (2), MaximumValue (200)]
-		public int TileSize = 40;
+		public int TileSize { get; set; } = 40;
+
 		[Caption ("Intensity"), MinimumValue (-20), MaximumValue (20)]
-		public int Intensity = 8;
+		public int Intensity { get; set; } = 8;
 	}
 }
