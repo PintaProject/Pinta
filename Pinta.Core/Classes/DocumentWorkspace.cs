@@ -320,9 +320,8 @@ public sealed class DocumentWorkspace
 		if (zoomType == ZoomType.ZoomOut && (ViewSize.Width == 1 || ViewSize.Height == 1))
 			return; //Can't zoom in past a 1x1 px canvas
 
-		double zoom;
 
-		if (!ViewActions.TryParsePercent (PintaCore.Actions.View.ZoomComboBox.ComboBox.GetActiveText ()!, out zoom))
+		if (!ViewActions.TryParsePercent (PintaCore.Actions.View.ZoomComboBox.ComboBox.GetActiveText ()!, out var zoom))
 			zoom = Scale * 100;
 
 		zoom = Math.Min (zoom, 3600);
@@ -347,8 +346,7 @@ public sealed class DocumentWorkspace
 			int i = 0;
 
 			Predicate<string> UpdateZoomLevel = zoomInList => {
-				double zoom_level;
-				if (!ViewActions.TryParsePercent (zoomInList, out zoom_level))
+				if (!ViewActions.TryParsePercent (zoomInList, out var zoom_level))
 					return false;
 
 				switch (zoomType) {

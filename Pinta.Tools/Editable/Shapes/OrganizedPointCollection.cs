@@ -82,18 +82,16 @@ public sealed class OrganizedPointCollection
 		int sX = (int) ((op.Position.X - op.Position.X % SectionSize) / SectionSize);
 		int sY = (int) ((op.Position.Y - op.Position.Y % SectionSize) / SectionSize);
 
-		Dictionary<int, List<OrganizedPoint>>? xSection;
-		List<OrganizedPoint>? ySection;
 
 		//Ensure that the xSection for this particular point exists.
-		if (!collection.TryGetValue (sX, out xSection)) {
+		if (!collection.TryGetValue (sX, out var xSection)) {
 			//This particular X section does not exist yet; create it.
 			xSection = new Dictionary<int, List<OrganizedPoint>> ();
 			collection.Add (sX, xSection);
 		}
 
 		//Ensure that the ySection (which is contained within the respective xSection) for this particular point exists.
-		if (!xSection.TryGetValue (sY, out ySection)) {
+		if (!xSection.TryGetValue (sY, out var ySection)) {
 			//This particular Y section does not exist yet; create it.
 			ySection = new List<OrganizedPoint> ();
 			xSection.Add (sY, ySection);
@@ -148,19 +146,17 @@ public sealed class OrganizedPointCollection
 			//the points in the surrounding sections must also be checked.
 			for (int x = xMin; x <= xMax; ++x) {
 				//This must be created each time to ensure that it is fresh for each loop iteration.
-				Dictionary<int, List<OrganizedPoint>>? xSection;
 
 				//If the xSection doesn't exist, move on.
-				if (!oP.TryGetValue (x, out xSection))
+				if (!oP.TryGetValue (x, out var xSection))
 					continue;
 
 				//Since the mouse and/or shape points can be close to the edge of a section,
 				//the points in the surrounding sections must also be checked.
 				for (int y = yMin; y <= yMax; ++y) {
-					List<OrganizedPoint>? ySection;
 
 					//If the ySection doesn't exist, move on.
-					if (!xSection.TryGetValue (y, out ySection))
+					if (!xSection.TryGetValue (y, out var ySection))
 						continue;
 
 					foreach (OrganizedPoint p in ySection) {

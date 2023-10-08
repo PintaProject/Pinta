@@ -96,8 +96,7 @@ internal static class AppleEvent
 
 	public static int AECountItems (ref AEDesc descList)
 	{
-		int count;
-		CheckReturn (AECountItems (ref descList, out count));
+		CheckReturn (AECountItems (ref descList, out var count));
 		return count;
 	}
 
@@ -116,17 +115,15 @@ internal static class AppleEvent
 
 	public static IntPtr AEGetNthPtr (ref AEDesc descList, int index, OSType desiredType)
 	{
-		IntPtr ret;
-		CheckReturn (AEGetNthPtr (ref descList, index, desiredType, 0, 0, out ret, 4, 0));
+		CheckReturn (AEGetNthPtr (ref descList, index, desiredType, 0, 0, out var ret, 4, 0));
 		return ret;
 	}
 
 	//FIXME: this might not work in some encodings. need to test more.
 	static string? GetUtf8StringFromAEPtr (ref AEDesc descList, int index)
 	{
-		int size;
 		var type = (OSType) (int) CarbonEventParameterType.UnicodeText;
-		if (AESizeOfNthItem (ref descList, index, ref type, out size) == AEDescStatus.Ok) {
+		if (AESizeOfNthItem (ref descList, index, ref type, out var size) == AEDescStatus.Ok) {
 			IntPtr buffer = Marshal.AllocHGlobal (size);
 			try {
 				if (AEGetNthPtr (ref descList, index, type, 0, 0, buffer, size, 0) == AEDescStatus.Ok)

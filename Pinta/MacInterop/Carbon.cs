@@ -45,8 +45,7 @@ internal static class Carbon
 	public static int Gestalt (string selector)
 	{
 		int cc = ConvertCharCode (selector);
-		int result;
-		int ret = Gestalt (cc, out result);
+		int ret = Gestalt (cc, out var result);
 		CheckReturn (ret);
 		return result;
 	}
@@ -80,8 +79,7 @@ internal static class Carbon
 
 	public static IntPtr InstallEventHandler (IntPtr target, EventDelegate handler, CarbonEventTypeSpec[] types)
 	{
-		IntPtr handlerRef;
-		CheckReturn (InstallEventHandler (target, handler, (uint) types.Length, types, IntPtr.Zero, out handlerRef));
+		CheckReturn (InstallEventHandler (target, handler, (uint) types.Length, types, IntPtr.Zero, out var handlerRef));
 		return handlerRef;
 	}
 
@@ -110,10 +108,9 @@ internal static class Carbon
 
 	public static IntPtr GetEventParameter (IntPtr eventRef, CarbonEventParameterName name, CarbonEventParameterType desiredType)
 	{
-		CarbonEventParameterType actualType;
 		uint outSize = 0;
 		IntPtr val = IntPtr.Zero;
-		CheckReturn (GetEventParameter (eventRef, name, desiredType, out actualType, (uint) IntPtr.Size, ref outSize, ref val));
+		CheckReturn (GetEventParameter (eventRef, name, desiredType, out var actualType, (uint) IntPtr.Size, ref outSize, ref val));
 		return val;
 	}
 
@@ -151,8 +148,7 @@ internal static class Carbon
 
 	static EventStatus SendApplicationEvent (CarbonEventClass classID, uint kind, CarbonEventAttributes flags)
 	{
-		IntPtr eventHandle;
-		EventStatus s = CreateEvent (IntPtr.Zero, classID, kind, 0, flags, out eventHandle);
+		EventStatus s = CreateEvent (IntPtr.Zero, classID, kind, 0, flags, out var eventHandle);
 		if (s != EventStatus.Ok)
 			return s;
 		s = SendEventToEventTarget (eventHandle, GetApplicationEventTarget ());

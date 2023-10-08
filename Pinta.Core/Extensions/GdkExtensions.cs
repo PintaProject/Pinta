@@ -182,8 +182,7 @@ public static class GdkExtensions
 		var tcs = new TaskCompletionSource<string?> ();
 
 		Gdk.Internal.Clipboard.ReadTextAsync (clipboard.Handle, IntPtr.Zero, new Gio.Internal.AsyncReadyCallbackAsyncHandler ((_, args, _) => {
-			GLib.Internal.ErrorOwnedHandle error;
-			string? result = Gdk.Internal.Clipboard.ReadTextFinish (clipboard.Handle, args.Handle, out error).ConvertToString ();
+			string? result = Gdk.Internal.Clipboard.ReadTextFinish (clipboard.Handle, args.Handle, out var error).ConvertToString ();
 			GLib.Error.ThrowOnError (error);
 
 			tcs.SetResult (result);
@@ -198,8 +197,7 @@ public static class GdkExtensions
 		var tcs = new TaskCompletionSource<Texture?> ();
 
 		Gdk.Internal.Clipboard.ReadTextureAsync (clipboard.Handle, IntPtr.Zero, new Gio.Internal.AsyncReadyCallbackAsyncHandler ((_, args, _) => {
-			GLib.Internal.ErrorOwnedHandle error;
-			IntPtr result = Gdk.Internal.Clipboard.ReadTextureFinish (clipboard.Handle, args.Handle, out error);
+			IntPtr result = Gdk.Internal.Clipboard.ReadTextureFinish (clipboard.Handle, args.Handle, out var error);
 
 			Texture? texture = texture = GObject.Internal.ObjectWrapper.WrapNullableHandle<Texture> (result, ownedRef: true);
 

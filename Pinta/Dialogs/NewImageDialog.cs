@@ -328,12 +328,11 @@ public sealed class NewImageDialog : Dialog
 
 	private bool IsValidSize {
 		get {
-			int width = 0;
-			int height = 0;
 
-			if (!int.TryParse (width_entry.Buffer!.Text!, out width))
+			if (!int.TryParse (width_entry.Buffer!.Text!, out var width))
 				return false;
-			if (!int.TryParse (height_entry.Buffer!.Text!, out height))
+
+			if (!int.TryParse (height_entry.Buffer!.Text!, out var height))
 				return false;
 
 			return width > 0 && height > 0;
