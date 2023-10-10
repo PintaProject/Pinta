@@ -37,7 +37,7 @@ public sealed class OrganizedPointCollection
 	public const double SectionSize = 15;
 
 	//Don't change this; it's automatically calculated.
-	public static readonly int BorderingSectionRange = (int) Math.Ceiling (BaseEditEngine.ShapeClickStartingRange / SectionSize);
+	private static readonly int bordering_section_range = (int) Math.Ceiling (BaseEditEngine.ShapeClickStartingRange / SectionSize);
 
 	private readonly Dictionary<int, Dictionary<int, List<OrganizedPoint>>> collection;
 
@@ -120,15 +120,17 @@ public sealed class OrganizedPointCollection
 	/// <param name="closestPoint">The position of the closest point.</param>
 	/// <param name="closestDistance">The closest point's distance away from currentPoint.</param>
 	public static void FindClosestPoint (
-    List<ShapeEngine> SEL, PointD currentPoint,
-		out int closestShapeIndex, out int closestPointIndex, out PointD? closestPoint, out double closestDistance)
+		List<ShapeEngine> SEL,
+		PointD currentPoint,
+		out int closestShapeIndex,
+		out int closestPointIndex,
+		out PointD? closestPoint,
+		out double closestDistance)
 	{
 		closestShapeIndex = 0;
 		closestPointIndex = 0;
 		closestPoint = null;
 		closestDistance = double.MaxValue;
-
-		double currentDistance = double.MaxValue;
 
 		for (int n = 0; n < SEL.Count; ++n) {
 			Dictionary<int, Dictionary<int, List<OrganizedPoint>>> oP = SEL[n].OrganizedPoints.collection;
@@ -137,10 +139,10 @@ public sealed class OrganizedPointCollection
 			int sX = (int) ((currentPoint.X - currentPoint.X % SectionSize) / SectionSize);
 			int sY = (int) ((currentPoint.Y - currentPoint.Y % SectionSize) / SectionSize);
 
-			int xMin = sX - BorderingSectionRange;
-			int xMax = sX + BorderingSectionRange;
-			int yMin = sY - BorderingSectionRange;
-			int yMax = sY + BorderingSectionRange;
+			int xMin = sX - bordering_section_range;
+			int xMax = sX + bordering_section_range;
+			int yMin = sY - bordering_section_range;
+			int yMax = sY + bordering_section_range;
 
 			//Since the mouse and/or shape points can be close to the edge of a section,
 			//the points in the surrounding sections must also be checked.
@@ -159,8 +161,8 @@ public sealed class OrganizedPointCollection
 					if (!xSection.TryGetValue (y, out var ySection))
 						continue;
 
-					foreach (OrganizedPoint p in ySection) {
-						currentDistance = p.Position.Distance (currentPoint);
+					foreach (var p in ySection) {
+						double currentDistance = p.Position.Distance (currentPoint);
 
 						if (currentDistance >= closestDistance)
 							continue;
