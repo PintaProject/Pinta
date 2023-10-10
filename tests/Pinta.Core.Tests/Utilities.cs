@@ -64,15 +64,31 @@ internal static class Utilities
 		Span<byte> buffer1 = stackalloc byte[BUFFER_SIZE];
 		Span<byte> buffer2 = stackalloc byte[BUFFER_SIZE];
 		while (true) {
+
 			long bytesRead1 = dataStream1.Read (buffer1, null);
 			long bytesRead2 = dataStream2.Read (buffer2, null);
+
+			//Console.WriteLine ($"1: {bytesRead1} bytes read");
+			//Console.WriteLine ($"2: {bytesRead2} bytes read");
+
 			if (bytesRead1 != bytesRead2) // Different file sizes
+			{
+				//Console.WriteLine ("Different file sizes");
 				return false;
+			}
+
 			if (bytesRead1 == 0) // End of file
+			{
+				//Console.WriteLine ("End of file");
 				return true;
+			}
+
 			for (int i = 0; i < bytesRead1; i++) {
 				if (buffer1[i] != buffer2[i]) // Differing byte
+				{
+					//Console.WriteLine ($"Differing byte at position {i} of buffer");
 					return false;
+				}
 			}
 		}
 	}
