@@ -25,7 +25,7 @@
 // THE SOFTWARE.
 
 using System;
-using System.Diagnostics.CodeAnalysis;
+using System.Collections.Generic;
 using Cairo;
 using Gtk;
 using Pinta.Core;
@@ -44,7 +44,7 @@ public sealed class EraserTool : BaseBrushTool
 	private EraserType eraser_type = EraserType.Normal;
 
 	private const int LUT_Resolution = 256;
-	private byte[][]? lut_factor;
+	private readonly Lazy<IReadOnlyList<IReadOnlyList<byte>>> lazy_lut_factor = new (CreateLookupTable);
 
 	private const string ERASER_TYPE_SETTING = "eraser-erase-type";
 
@@ -118,26 +118,20 @@ public sealed class EraserTool : BaseBrushTool
 			settings.PutSetting (ERASER_TYPE_SETTING, type_combobox.ComboBox.Active);
 	}
 
-	[MemberNotNull (nameof (lut_factor))]
-	private void InitLookupTable ()
+	private static IReadOnlyList<IReadOnlyList<byte>> CreateLookupTable ()
 	{
-		if (lut_factor is not null)
-			return;
-
-		lut_factor = new byte[LUT_Resolution + 1][];
-
+		var result = new byte[LUT_Resolution + 1][];
 		for (var dy = 0; dy < LUT_Resolution + 1; dy++) {
-			lut_factor[dy] = new byte[LUT_Resolution + 1];
-
+			result[dy] = new byte[LUT_Resolution + 1];
 			for (var dx = 0; dx < LUT_Resolution + 1; dx++) {
 				var d = Math.Sqrt (dx * dx + dy * dy) / LUT_Resolution;
-
 				if (d > 1.0)
-					lut_factor[dy][dx] = 255;
+					result[dy][dx] = 255;
 				else
-					lut_factor[dy][dx] = (byte) (255.0 - Math.Cos (Math.Sqrt (d) * Math.PI / 2.0) * 255.0);
+					result[dy][dx] = (byte) (255.0 - Math.Cos (Math.Sqrt (d) * Math.PI / 2.0) * 255.0);
 			}
 		}
+		return result;
 	}
 
 	private static ImageSurface CopySurfacePart (ImageSurface surf, RectangleI dest_rect)
@@ -200,7 +194,7 @@ public sealed class EraserTool : BaseBrushTool
 		var num_steps = (int) start.Distance (end) / rad + 1;
 
 		// Initialize lookup table when first used (to prevent slower startup of the application)
-		InitLookupTable ();
+		var lut_factor = lazy_lut_factor.Value;
 
 		for (var step = 0; step < num_steps; step++) {
 			var pt = Utility.Lerp (start, end, (float) step / num_steps);
