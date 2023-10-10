@@ -5,6 +5,14 @@ namespace Pinta.Core.Tests;
 
 internal static class Utilities
 {
+	static Utilities ()
+	{
+		Gio.Module.Initialize ();
+		GdkPixbuf.Module.Initialize ();
+		Cairo.Module.Initialize ();
+		Gdk.Module.Initialize ();
+	}
+
 	/// <returns>
 	/// <see langword="true"/> if the files with these file names
 	/// are byte-for-byte the same, <see langword="false"/> if not
