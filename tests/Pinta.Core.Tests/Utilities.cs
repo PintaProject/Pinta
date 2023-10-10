@@ -65,7 +65,7 @@ internal static class Utilities
 		Span<byte> buffer2 = stackalloc byte[BUFFER_SIZE];
 		while (true) {
 			long bytesRead1 = dataStream1.Read (buffer1, null);
-			long bytesRead2 = dataStream1.Read (buffer2, null);
+			long bytesRead2 = dataStream2.Read (buffer2, null);
 			if (bytesRead1 != bytesRead2) // Different file sizes
 				return false;
 			if (bytesRead1 == 0) // End of file
