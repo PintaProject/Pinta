@@ -452,104 +452,111 @@ public sealed class TextTool : BaseTool
 	protected override void OnMouseDown (Document document, ToolMouseEventArgs e)
 	{
 		ctrl_key = e.IsControlPressed;
+		im_context.FocusIn (); // Grab focus so we can get keystrokes
+		selection = document.Selection.Clone ();
 
+		switch (e.MouseButton) {
+			case MouseButton.Right:
+				HandleRightClick (e);
+				break;
+			case MouseButton.Left:
+				HandleLeftClick (document, e);
+				break;
+		}
+	}
+
+	private void HandleLeftClick (Document document, ToolMouseEventArgs e)
+	{
 		//Store the mouse position.
 		PointI pt = e.Point;
 
-		// Grab focus so we can get keystrokes
-		im_context.FocusIn ();
+		// If the user is [editing or holding down Ctrl] and clicked
+		//within the text, move the cursor to the click location
+		if ((is_editing || ctrl_key) && CurrentTextBounds.Contains (pt)) {
+			StartEditing ();
 
-		selection = document.Selection.Clone ();
+			//Change the position of the cursor to where the mouse clicked.
+			TextPosition p = CurrentTextLayout.PointToTextPosition (pt);
+			CurrentTextEngine.SetCursorPosition (p, true);
 
-		// A right click allows you to move the text around
-		if (e.MouseButton == MouseButton.Right) {
-			//The user is dragging text with the right mouse button held down, so track the mouse as it moves.
-			tracking = true;
-
-			//Remember the position of the mouse before the text is dragged.
-			start_mouse_xy = e.PointDouble;
-			start_click_point = click_point;
-
-			//Change the cursor to indicate that the text is being dragged.
-			SetCursor (cursor_hand);
+			//Redraw the text with the new cursor position.
+			RedrawText (true, true);
 
 			return;
 		}
 
-		// The user clicked the left mouse button			
-		if (e.MouseButton == MouseButton.Left) {
-			// If the user is [editing or holding down Ctrl] and clicked
-			//within the text, move the cursor to the click location
-			if ((is_editing || ctrl_key) && CurrentTextBounds.Contains (pt)) {
-				StartEditing ();
+		// We're already editing and the user clicked outside the text,
+		// commit the user's work, and start a new edit
+		switch (CurrentTextEngine.State) {
+			// We were editing, save and stop
+			case TextMode.Uncommitted:
+				StopEditing (true);
+				break;
 
-				//Change the position of the cursor to where the mouse clicked.
+			// We were editing, but nothing had been
+			// keyed. Stop editing.
+			case TextMode.Unchanged:
+				StopEditing (false);
+				break;
+		}
+
+		if (ctrl_key) {
+			//Go through every UserLayer.
+			foreach (UserLayer ul in document.Layers.UserLayers) {
+				//Check each UserLayer's editable text boundaries to see if they contain the mouse position.
+				if (!ul.TextBounds.Contains (pt))
+					continue;
+
+				//The mouse clicked on editable text.
+
+				//Change the current UserLayer to the Layer that contains the text that was clicked on.
+				document.Layers.SetCurrentUserLayer (ul);
+
+				//The user is editing text now.
+				is_editing = true;
+
+				//Set the cursor in the editable text where the mouse was clicked.
 				TextPosition p = CurrentTextLayout.PointToTextPosition (pt);
 				CurrentTextEngine.SetCursorPosition (p, true);
 
-				//Redraw the text with the new cursor position.
+				//Redraw the editable text with the cursor.
 				RedrawText (true, true);
 
+				//Don't check any more UserLayers - stop at the first UserLayer that has editable text containing the mouse position.
 				return;
 			}
-
-			// We're already editing and the user clicked outside the text,
-			// commit the user's work, and start a new edit
-			switch (CurrentTextEngine.State) {
-				// We were editing, save and stop
-				case TextMode.Uncommitted:
-					StopEditing (true);
-					break;
-
-				// We were editing, but nothing had been
-				// keyed. Stop editing.
-				case TextMode.Unchanged:
-					StopEditing (false);
-					break;
+		} else {
+			if (CurrentTextEngine.State == TextMode.NotFinalized) {
+				//The user is making a new text and the old text hasn't been finalized yet.
+				FinalizeText ();
 			}
 
-			if (ctrl_key) {
-				//Go through every UserLayer.
-				foreach (UserLayer ul in document.Layers.UserLayers) {
-					//Check each UserLayer's editable text boundaries to see if they contain the mouse position.
-					if (ul.TextBounds.Contains (pt)) {
-						//The mouse clicked on editable text.
-
-						//Change the current UserLayer to the Layer that contains the text that was clicked on.
-						document.Layers.SetCurrentUserLayer (ul);
-
-						//The user is editing text now.
-						is_editing = true;
-
-						//Set the cursor in the editable text where the mouse was clicked.
-						TextPosition p = CurrentTextLayout.PointToTextPosition (pt);
-						CurrentTextEngine.SetCursorPosition (p, true);
-
-						//Redraw the editable text with the cursor.
-						RedrawText (true, true);
-
-						//Don't check any more UserLayers - stop at the first UserLayer that has editable text containing the mouse position.
-						return;
-					}
-				}
-			} else {
-				if (CurrentTextEngine.State == TextMode.NotFinalized) {
-					//The user is making a new text and the old text hasn't been finalized yet.
-					FinalizeText ();
-				}
-
-				if (!is_editing) {
-					// Start editing at the cursor location
-					click_point = pt;
-					CurrentTextEngine.Clear ();
-					UpdateFont ();
-					click_point = click_point with { Y = click_point.Y - (CurrentTextLayout.FontHeight / 2) };
-					CurrentTextEngine.Origin = click_point;
-					StartEditing ();
-					RedrawText (true, true);
-				}
+			if (!is_editing) {
+				// Start editing at the cursor location
+				click_point = pt;
+				CurrentTextEngine.Clear ();
+				UpdateFont ();
+				click_point = click_point with { Y = click_point.Y - (CurrentTextLayout.FontHeight / 2) };
+				CurrentTextEngine.Origin = click_point;
+				StartEditing ();
+				RedrawText (true, true);
 			}
 		}
+	}
+
+	private void HandleRightClick (ToolMouseEventArgs e)
+	{
+		// A right click allows you to move the text around
+
+		//The user is dragging text with the right mouse button held down, so track the mouse as it moves.
+		tracking = true;
+
+		//Remember the position of the mouse before the text is dragged.
+		start_mouse_xy = e.PointDouble;
+		start_click_point = click_point;
+
+		//Change the cursor to indicate that the text is being dragged.
+		SetCursor (cursor_hand);
 	}
 
 	protected override void OnMouseMove (Document document, ToolMouseEventArgs e)
@@ -574,16 +581,17 @@ public sealed class TextTool : BaseTool
 	protected override void OnMouseUp (Document document, ToolMouseEventArgs e)
 	{
 		// If we were dragging the text around, finish that up
-		if (tracking) {
-			PointD delta = new (e.PointDouble.X - start_mouse_xy.X, e.PointDouble.Y - start_mouse_xy.Y);
+		if (!tracking)
+			return;
 
-			click_point = new PointI ((int) (start_click_point.X + delta.X), (int) (start_click_point.Y + delta.Y));
-			CurrentTextEngine.Origin = click_point;
+		PointD delta = new (e.PointDouble.X - start_mouse_xy.X, e.PointDouble.Y - start_mouse_xy.Y);
 
-			RedrawText (false, true);
-			tracking = false;
-			SetCursor (null);
-		}
+		click_point = new PointI ((int) (start_click_point.X + delta.X), (int) (start_click_point.Y + delta.Y));
+		CurrentTextEngine.Origin = click_point;
+
+		RedrawText (false, true);
+		tracking = false;
+		SetCursor (null);
 	}
 
 	private void UpdateMouseCursor (Document document)
@@ -629,9 +637,8 @@ public sealed class TextTool : BaseTool
 	#region Keyboard Handlers
 	protected override bool OnKeyDown (Document document, ToolKeyEventArgs e)
 	{
-		if (!PintaCore.Workspace.HasOpenDocuments) {
+		if (!PintaCore.Workspace.HasOpenDocuments)
 			return false;
-		}
 
 		// If we are dragging the text, we
 		// aren't going to handle key presses
@@ -761,9 +768,8 @@ public sealed class TextTool : BaseTool
 	private bool TryHandleChar (Event eventKey)
 	{
 		// Try to handle it as a character
-		if (im_context.FilterKeypress (eventKey)) {
+		if (im_context.FilterKeypress (eventKey))
 			return true;
-		}
 
 		// We didn't handle the key
 		return false;
@@ -783,7 +789,7 @@ public sealed class TextTool : BaseTool
 					utf32Char = args.Str[i];
 				}
 
-				str.Append (utf32Char.ToString ());
+				str.Append (utf32Char);
 			}
 
 			CurrentTextEngine.InsertText (str.ToString ());
@@ -991,45 +997,47 @@ public sealed class TextTool : BaseTool
 	public void FinalizeText ()
 	{
 		//If this is true, don't finalize any text - this is used to prevent the code from looping recursively.
-		if (!ignore_clone_finalizations) {
-			//Only bother finalizing text if editing.
-			if (CurrentTextEngine.State != TextMode.Unchanged) {
-				//Start ignoring any Surface.Clone calls from this point on (so that it doesn't start to loop).
-				ignore_clone_finalizations = true;
-				Document doc = PintaCore.Workspace.ActiveDocument;
+		if (ignore_clone_finalizations)
+			return;
 
-				//Create a backup of everything before redrawing the text and etc.
-				Cairo.ImageSurface oldTextSurface = doc.Layers.CurrentUserLayer.TextLayer.Layer.Surface.Clone ();
-				Cairo.ImageSurface oldUserSurface = doc.Layers.CurrentUserLayer.Surface.Clone ();
-				TextEngine oldTextEngine = CurrentTextEngine.Clone ();
+		//Only bother finalizing text if editing.
+		if (CurrentTextEngine.State == TextMode.Unchanged)
+			return;
 
-				//Draw the text onto the UserLayer (without the cursor) rather than the TextLayer.
-				RedrawText (false, false);
+		//Start ignoring any Surface.Clone calls from this point on (so that it doesn't start to loop).
+		ignore_clone_finalizations = true;
+		Document doc = PintaCore.Workspace.ActiveDocument;
 
-				//Clear the TextLayer.
-				doc.Layers.CurrentUserLayer.TextLayer.Layer.Clear ();
+		//Create a backup of everything before redrawing the text and etc.
+		Cairo.ImageSurface oldTextSurface = doc.Layers.CurrentUserLayer.TextLayer.Layer.Surface.Clone ();
+		Cairo.ImageSurface oldUserSurface = doc.Layers.CurrentUserLayer.Surface.Clone ();
+		TextEngine oldTextEngine = CurrentTextEngine.Clone ();
 
-				//Clear the text and its boundaries.
-				CurrentTextEngine.Clear ();
-				CurrentTextBounds = RectangleI.Zero;
+		//Draw the text onto the UserLayer (without the cursor) rather than the TextLayer.
+		RedrawText (false, false);
 
-				//Create a new TextHistoryItem so that the finalization of the text can be undone. Construct
-				//it on the spot so that it is more memory efficient if the changes are small.
-				TextHistoryItem hist = new TextHistoryItem (Icon, FinalizeName, oldTextSurface, oldUserSurface,
-						oldTextEngine, doc.Layers.CurrentUserLayer);
+		//Clear the TextLayer.
+		doc.Layers.CurrentUserLayer.TextLayer.Layer.Clear ();
 
-				//Add the new TextHistoryItem.
-				doc.History.PushNewItem (hist);
+		//Clear the text and its boundaries.
+		CurrentTextEngine.Clear ();
+		CurrentTextBounds = RectangleI.Zero;
 
-				//Stop ignoring any Surface.Clone calls from this point on.
-				ignore_clone_finalizations = false;
+		//Create a new TextHistoryItem so that the finalization of the text can be undone. Construct
+		//it on the spot so that it is more memory efficient if the changes are small.
+		TextHistoryItem hist = new TextHistoryItem (Icon, FinalizeName, oldTextSurface, oldUserSurface,
+				oldTextEngine, doc.Layers.CurrentUserLayer);
 
-				//Now that the text has been finalized, change its state.
-				CurrentTextEngine.State = TextMode.Unchanged;
+		//Add the new TextHistoryItem.
+		doc.History.PushNewItem (hist);
 
-				selection = null;
-			}
-		}
+		//Stop ignoring any Surface.Clone calls from this point on.
+		ignore_clone_finalizations = false;
+
+		//Now that the text has been finalized, change its state.
+		CurrentTextEngine.State = TextMode.Unchanged;
+
+		selection = null;
 	}
 
 	private static void InflateAndInvalidate (in RectangleI passedRectangle)
@@ -1071,9 +1079,8 @@ public sealed class TextTool : BaseTool
 
 	protected override async Task<bool> OnHandlePaste (Document document, Clipboard cb)
 	{
-		if (!is_editing) {
+		if (!is_editing)
 			return false;
-		}
 
 		if (await CurrentTextEngine.PerformPaste (cb)) {
 			RedrawText (true, true);
@@ -1085,18 +1092,18 @@ public sealed class TextTool : BaseTool
 
 	protected override bool OnHandleCopy (Document document, Clipboard cb)
 	{
-		if (!is_editing) {
+		if (!is_editing)
 			return false;
-		}
+
 		CurrentTextEngine.PerformCopy (cb);
 		return true;
 	}
 
 	protected override bool OnHandleCut (Document document, Clipboard cb)
 	{
-		if (!is_editing) {
+		if (!is_editing)
 			return false;
-		}
+
 		CurrentTextEngine.PerformCut (cb);
 		RedrawText (true, true);
 		return true;
