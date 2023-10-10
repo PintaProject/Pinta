@@ -729,19 +729,13 @@ public abstract class BaseEditEngine
 		bool ctrlKey = e.IsControlPressed;
 
 
-		int closestCPIndex, closestCPShapeIndex;
-		ControlPoint? closestControlPoint;
-		double closestCPDistance;
 
 		SEngines.FindClosestControlPoint (unclamped_point,
-			out closestCPShapeIndex, out closestCPIndex, out closestControlPoint, out closestCPDistance);
+			out var closestCPShapeIndex, out var closestCPIndex, out var closestControlPoint, out var closestCPDistance);
 
-		int closestShapeIndex, closestPointIndex;
-		PointD? closestPoint;
-		double closestDistance;
 
 		OrganizedPointCollection.FindClosestPoint (SEngines, unclamped_point,
-		    out closestShapeIndex, out closestPointIndex, out closestPoint, out closestDistance);
+		    out var closestShapeIndex, out var closestPointIndex, out var closestPoint, out var closestDistance);
 
 		bool clicked_control_point = false;
 		bool clicked_generated_point = false;
@@ -1230,11 +1224,8 @@ public abstract class BaseEditEngine
 		if (!changing_tension && draw_selection) {
 			var current_window_point = PintaCore.Workspace.CanvasPointToView (current_point);
 
-			int closestCPIndex, closestCPShapeIndex;
-			ControlPoint? closestControlPoint;
-			double closestCPDistance;
 			SEngines.FindClosestControlPoint (current_point,
-				out closestCPShapeIndex, out closestCPIndex, out closestControlPoint, out closestCPDistance);
+				out var closestCPShapeIndex, out var closestCPIndex, out var closestControlPoint, out var closestCPDistance);
 
 			// Check if the user is directly hovering over a control point.
 			if (closestControlPoint != null) {
@@ -1244,11 +1235,8 @@ public abstract class BaseEditEngine
 
 			// Otherwise, the user may be hovering over a generated point.
 			if (!hover_handle.Active) {
-				int closestShapeIndex, closestPointIndex;
-				PointD? closestPoint;
-				double closestDistance;
 				OrganizedPointCollection.FindClosestPoint (SEngines, current_point,
-					out closestShapeIndex, out closestPointIndex, out closestPoint, out closestDistance);
+					out var closestShapeIndex, out var closestPointIndex, out var closestPoint, out var closestDistance);
 
 				if (closestPoint.HasValue) {
 					hover_handle.CanvasPosition = closestPoint.Value;
@@ -1505,10 +1493,9 @@ public abstract class BaseEditEngine
 	/// <returns>The corresponding tool to the given shape type.</returns>
 	public static ShapeTool? GetCorrespondingTool (ShapeTypes shapeType)
 	{
-		ShapeTool? correspondingTool = null;
 
 		//Get the corresponding BaseTool reference to the shape type.
-		CorrespondingTools.TryGetValue (shapeType, out correspondingTool);
+		CorrespondingTools.TryGetValue (shapeType, out var correspondingTool);
 
 		return correspondingTool;
 	}

@@ -93,11 +93,10 @@ public sealed class TextLayout
 
 	public TextPosition PointToTextPosition (PointI point)
 	{
-		int index, trailing;
 		int x = PangoExtensions.UnitsFromPixels (point.X - engine.Origin.X);
 		int y = PangoExtensions.UnitsFromPixels (point.Y - engine.Origin.Y);
 
-		Layout.XyToIndex (x, y, out index, out trailing);
+		Layout.XyToIndex (x, y, out var index, out var trailing);
 
 		return engine.UTF8IndexToPosition (index + trailing);
 	}

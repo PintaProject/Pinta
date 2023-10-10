@@ -197,10 +197,8 @@ internal sealed class InstallDialog : Adw.Window
 		window_title.Title = Translations.GetString ("Install");
 		install_button.AddCssClass (AdwaitaStyles.SuggestedAction);
 
-		PackageCollection to_uninstall;
-		DependencyCollection unresolved;
 		error_reporter.Clear ();
-		bool success = service.ResolveDependencies (progress_bar, packages_to_install, out to_uninstall, out unresolved);
+		bool success = service.ResolveDependencies (progress_bar, packages_to_install, out var to_uninstall, out var unresolved);
 
 		error_heading_label.Visible = error_label.Visible = !success;
 		if (error_label.Visible)
