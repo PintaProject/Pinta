@@ -20,6 +20,8 @@ public sealed class UnfocusEffect : LocalHistogramEffect
 
 	public override string Icon => Pinta.Resources.Icons.EffectsBlursUnfocus;
 
+	public sealed override bool IsTileable => true;
+
 	public override string Name => Translations.GetString ("Unfocus");
 
 	public override bool IsConfigurable => true;
@@ -87,7 +89,7 @@ public sealed class UnfocusEffect : LocalHistogramEffect
 	public sealed class UnfocusData : EffectData
 	{
 		[Caption ("Radius"), MinimumValue (1), MaximumValue (200)]
-		public int Radius = 4;
+		public int Radius { get; set; } = 4;
 
 		[Skip]
 		public override bool IsDefault => Radius == 0;

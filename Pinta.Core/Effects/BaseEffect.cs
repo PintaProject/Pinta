@@ -38,6 +38,12 @@ namespace Pinta.Core;
 public abstract class BaseEffect
 {
 	/// <summary>
+	/// If the ROIs are subdivided (in rows, for example) and the effect is applied to each subdivision
+	/// separately, is the end result the same as applying it to the original ROIs?
+	/// </summary>
+	public abstract bool IsTileable { get; }
+
+	/// <summary>
 	/// Returns the name of the effect, displayed to the user in the Adjustments/Effects menu and history pad.
 	/// </summary>
 	public abstract string Name { get; }
@@ -223,7 +229,7 @@ public abstract class EffectData : ObservableObject
 /// <summary>
 /// Wrapper around the AddinLocalizer of an add-in.
 /// </summary>
-internal class AddinLocalizerWrapper : IAddinLocalizer
+internal sealed class AddinLocalizerWrapper : IAddinLocalizer
 {
 	private readonly AddinLocalizer localizer;
 

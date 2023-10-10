@@ -21,6 +21,8 @@ public sealed class MedianEffect : LocalHistogramEffect
 
 	public override string Icon => Pinta.Resources.Icons.EffectsNoiseMedian;
 
+	public sealed override bool IsTileable => true;
+
 	public override string Name => Translations.GetString ("Median");
 
 	public override bool IsConfigurable => true;
@@ -59,10 +61,10 @@ public sealed class MedianEffect : LocalHistogramEffect
 	public sealed class MedianData : EffectData
 	{
 		[Caption ("Radius"), MinimumValue (1), MaximumValue (200)]
-		public int Radius = 10;
+		public int Radius { get; set; } = 10;
 
 		[Caption ("Percentile"), MinimumValue (0), MaximumValue (100)]
-		public int Percentile = 50;
+		public int Percentile { get; set; } = 50;
 
 		[Skip]
 		public override bool IsDefault => Radius == 0;

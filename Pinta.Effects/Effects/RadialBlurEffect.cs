@@ -18,6 +18,8 @@ public sealed class RadialBlurEffect : BaseEffect
 {
 	public override string Icon => Pinta.Resources.Icons.EffectsBlursRadialBlur;
 
+	public sealed override bool IsTileable => true;
+
 	public override string Name => Translations.GetString ("Radial Blur");
 
 	public override bool IsConfigurable => true;
@@ -142,14 +144,14 @@ public sealed class RadialBlurEffect : BaseEffect
 	public sealed class RadialBlurData : EffectData
 	{
 		[Caption ("Angle")]
-		public Double Angle = 2;
+		public Double Angle { get; set; } = 2;
 
 		[Caption ("Offset")]
-		public PointD Offset = new (0, 0);
+		public PointD Offset { get; set; } = new (0, 0);
 
 		[Caption ("Quality"), MinimumValue (1), MaximumValue (5)]
 		[Hint ("Use low quality for previews, small images, and small angles.  Use high quality for final quality, large images, and large angles.")]
-		public int Quality = 2;
+		public int Quality { get; set; } = 2;
 
 		[Skip]
 		public override bool IsDefault => Angle == 0;

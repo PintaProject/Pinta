@@ -18,6 +18,8 @@ public sealed class SharpenEffect : LocalHistogramEffect
 {
 	public override string Icon => Pinta.Resources.Icons.EffectsPhotoSharpen;
 
+	public sealed override bool IsTileable => true;
+
 	public override string Name => Translations.GetString ("Sharpen");
 
 	public override bool IsConfigurable => true;
@@ -52,6 +54,6 @@ public sealed class SharpenEffect : LocalHistogramEffect
 public sealed class SharpenData : EffectData
 {
 	[Caption ("Amount"), MinimumValue (1), MaximumValue (20)]
-	public int Amount = 2;
+	public int Amount { get; set; } = 2;
 }
 

@@ -18,6 +18,8 @@ public sealed class OilPaintingEffect : BaseEffect
 {
 	public override string Icon => Pinta.Resources.Icons.EffectsArtisticOilPainting;
 
+	public sealed override bool IsTileable => true;
+
 	public override string Name => Translations.GetString ("Oil Painting");
 
 	public override bool IsConfigurable => true;

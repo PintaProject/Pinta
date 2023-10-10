@@ -18,6 +18,8 @@ public sealed class MandelbrotFractalEffect : BaseEffect
 {
 	public override string Icon => Pinta.Resources.Icons.EffectsRenderMandelbrotFractal;
 
+	public sealed override bool IsTileable => true;
+
 	public override string Name => Translations.GetString ("Mandelbrot Fractal");
 
 	public override bool IsConfigurable => true;

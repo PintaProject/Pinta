@@ -18,6 +18,8 @@ public sealed class MotionBlurEffect : BaseEffect
 {
 	public override string Icon => Pinta.Resources.Icons.EffectsBlursMotionBlur;
 
+	public sealed override bool IsTileable => true;
+
 	public override string Name => Translations.GetString ("Motion Blur");
 
 	public override bool IsConfigurable => true;
@@ -97,12 +99,12 @@ public sealed class MotionBlurEffect : BaseEffect
 		public override bool IsDefault => Distance == 0;
 
 		[Caption ("Angle")]
-		public double Angle = 25;
+		public double Angle { get; set; } = 25;
 
 		[Caption ("Distance"), MinimumValue (1), MaximumValue (200)]
-		public int Distance = 10;
+		public int Distance { get; set; } = 10;
 
 		[Caption ("Centered")]
-		public bool Centered = true;
+		public bool Centered { get; set; } = true;
 	}
 }

@@ -17,6 +17,8 @@ public sealed class InvertColorsEffect : BaseEffect
 {
 	readonly UnaryPixelOp op = new UnaryPixelOps.Invert ();
 
+	public sealed override bool IsTileable => true;
+
 	public override string Icon => Pinta.Resources.Icons.AdjustmentsInvertColors;
 
 	public override string Name => Translations.GetString ("Invert Colors");

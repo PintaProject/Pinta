@@ -18,6 +18,8 @@ public sealed class RedEyeRemoveEffect : BaseEffect
 {
 	public override string Icon => Pinta.Resources.Icons.EffectsPhotoRedEyeRemove;
 
+	public sealed override bool IsTileable => true;
+
 	public override string Name => Translations.GetString ("Red Eye Removal");
 
 	public override bool IsConfigurable => true;
@@ -46,11 +48,11 @@ public sealed class RedEyeRemoveEffect : BaseEffect
 public sealed class RedEyeRemoveData : EffectData
 {
 	[Caption ("Tolerance"), MinimumValue (0), MaximumValue (100)]
-	public int Tolerance = 70;
+	public int Tolerance { get; set; } = 70;
 
 	[MinimumValue (0), MaximumValue (100)]
 	[Caption ("Saturation Percentage")]
 	[Hint ("Hint: For best results, first use selection tools to select each eye.")]
-	public int Saturation = 90;
+	public int Saturation { get; set; } = 90;
 }
 

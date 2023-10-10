@@ -15,6 +15,8 @@ namespace Pinta.Effects;
 
 public sealed class LevelsEffect : BaseEffect
 {
+	public sealed override bool IsTileable => true;
+
 	public override string Icon => Pinta.Resources.Icons.AdjustmentsLevels;
 
 	public override string Name => Translations.GetString ("Levels");
@@ -55,7 +57,7 @@ public sealed class LevelsEffect : BaseEffect
 	}
 }
 
-public class LevelsData : EffectData
+public sealed class LevelsData : EffectData
 {
 	public UnaryPixelOps.Level Levels { get; set; }
 
@@ -66,6 +68,6 @@ public class LevelsData : EffectData
 
 	public override EffectData Clone ()
 	{
-		return new LevelsData () { Levels = (UnaryPixelOps.Level) Levels.Clone () };
+		return new LevelsData { Levels = (UnaryPixelOps.Level) Levels.Clone () };
 	}
 }

@@ -17,6 +17,8 @@ public sealed class PosterizeEffect : BaseEffect
 {
 	UnaryPixelOps.PosterizePixel? op = null;
 
+	public sealed override bool IsTileable => true;
+
 	public override string Icon => Pinta.Resources.Icons.AdjustmentsPosterize;
 
 	public override string Name => Translations.GetString ("Posterize");
@@ -58,7 +60,7 @@ public sealed class PosterizeEffect : BaseEffect
 
 public sealed class PosterizeData : EffectData
 {
-	public int Red = 16;
-	public int Green = 16;
-	public int Blue = 16;
+	public int Red { get; set; } = 16;
+	public int Green { get; set; } = 16;
+	public int Blue { get; set; } = 16;
 }

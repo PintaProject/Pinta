@@ -16,6 +16,8 @@ public sealed class PolarInversionEffect : WarpEffect
 {
 	public override string Icon => Pinta.Resources.Icons.EffectsDistortPolarInversion;
 
+	public sealed override bool IsTileable => true;
+
 	public override string Name => Translations.GetString ("Polar Inversion");
 
 	public override bool IsConfigurable => true;
@@ -48,7 +50,7 @@ public sealed class PolarInversionEffect : WarpEffect
 	public sealed class PolarInversionData : WarpEffect.WarpData
 	{
 		[MinimumValue (-4), MaximumValue (4)]
-		public double Amount = 0;
+		public double Amount { get; set; } = 0;
 
 		public PolarInversionData () : base ()
 		{

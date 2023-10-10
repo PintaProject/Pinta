@@ -16,6 +16,8 @@ namespace Pinta.Effects;
 
 public sealed class BulgeEffect : BaseEffect
 {
+	public sealed override bool IsTileable => true;
+
 	public override string Icon => Pinta.Resources.Icons.EffectsDistortBulge;
 
 	public override string Name => Translations.GetString ("Bulge");
@@ -85,10 +87,10 @@ public sealed class BulgeEffect : BaseEffect
 	public sealed class BulgeData : EffectData
 	{
 		[Caption ("Amount"), MinimumValue (-200), MaximumValue (100)]
-		public int Amount = 45;
+		public int Amount { get; set; } = 45;
 
 		[Caption ("Offset")]
-		public Core.PointD Offset = new (0.0, 0.0);
+		public Core.PointD Offset { get; set; } = new (0.0, 0.0);
 
 		[Skip]
 		public override bool IsDefault => Amount == 0;

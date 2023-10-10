@@ -19,6 +19,8 @@ public sealed class TwistEffect : BaseEffect
 {
 	public override string Icon => Pinta.Resources.Icons.EffectsDistortTwist;
 
+	public sealed override bool IsTileable => true;
+
 	public override string Name => Translations.GetString ("Twist");
 
 	public override bool IsConfigurable => true;

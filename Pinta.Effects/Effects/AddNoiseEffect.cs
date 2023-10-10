@@ -21,6 +21,8 @@ public sealed class AddNoiseEffect : BaseEffect
 	private int color_saturation;
 	private double coverage;
 
+	public sealed override bool IsTileable => true;
+
 	public override string Icon => Pinta.Resources.Icons.EffectsNoiseAddNoise;
 
 	public override string Name => Translations.GetString ("Add Noise");
@@ -166,12 +168,12 @@ public sealed class AddNoiseEffect : BaseEffect
 	public sealed class NoiseData : EffectData
 	{
 		[Caption ("Intensity"), MinimumValue (0), MaximumValue (100)]
-		public int Intensity = 64;
+		public int Intensity { get; set; } = 64;
 
 		[Caption ("Color Saturation"), MinimumValue (0), MaximumValue (400)]
-		public int ColorSaturation = 100;
+		public int ColorSaturation { get; set; } = 100;
 
 		[Caption ("Coverage"), MinimumValue (0), DigitsValue (2), MaximumValue (100)]
-		public double Coverage = 100.0;
+		public double Coverage { get; set; } = 100.0;
 	}
 }

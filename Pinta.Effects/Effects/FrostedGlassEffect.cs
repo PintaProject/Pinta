@@ -18,6 +18,8 @@ public sealed class FrostedGlassEffect : BaseEffect
 {
 	public override string Icon => Pinta.Resources.Icons.EffectsDistortFrostedGlass;
 
+	public sealed override bool IsTileable => true;
+
 	public override string Name => Translations.GetString ("Frosted Glass");
 
 	public override bool IsConfigurable => true;

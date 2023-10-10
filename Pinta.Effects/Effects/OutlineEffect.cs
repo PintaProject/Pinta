@@ -21,6 +21,8 @@ public sealed class OutlineEffect : LocalHistogramEffect
 
 	public override string Icon => Pinta.Resources.Icons.EffectsStylizeOutline;
 
+	public sealed override bool IsTileable => true;
+
 	public override string Name => Translations.GetString ("Outline");
 
 	public override bool IsConfigurable => true;
@@ -131,10 +133,10 @@ public sealed class OutlineEffect : LocalHistogramEffect
 	public sealed class OutlineData : EffectData
 	{
 		[Caption ("Thickness"), MinimumValue (1), MaximumValue (200)]
-		public int Thickness = 3;
+		public int Thickness { get; set; } = 3;
 
 		[Caption ("Intensity"), MinimumValue (0), MaximumValue (100)]
-		public int Intensity = 50;
+		public int Intensity { get; set; } = 50;
 
 		[Skip]
 		public override bool IsDefault => Thickness == 0;
