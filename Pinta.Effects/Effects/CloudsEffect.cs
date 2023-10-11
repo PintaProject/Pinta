@@ -22,6 +22,8 @@ public sealed class CloudsEffect : BaseEffect
 	private readonly byte instance_seed = unchecked((byte) DateTime.Now.Ticks);
 	private static readonly object render_lock = new ();
 
+	public sealed override bool IsTileable => true;
+
 	public override string Icon => Pinta.Resources.Icons.EffectsRenderClouds;
 
 	public override string Name => Translations.GetString ("Clouds");
@@ -193,16 +195,16 @@ public sealed class CloudsEffect : BaseEffect
 		public override bool IsDefault => Power == 0;
 
 		[Caption ("Scale"), MinimumValue (2), MaximumValue (1000)]
-		public int Scale = 250;
+		public int Scale { get; set; } = 250;
 
 		[Caption ("Power"), MinimumValue (0), MaximumValue (100)]
-		public int Power = 50;
+		public int Power { get; set; } = 50;
 
 		[Skip]
-		public static Dictionary<string, object> BlendOps;
+		public static Dictionary<string, object> BlendOps { get; }
 
 		[Skip]
-		private static readonly string defaultBlendOp;
+		private static readonly string default_blend_op;
 
 		static CloudsData ()
 		{
@@ -211,14 +213,14 @@ public sealed class CloudsEffect : BaseEffect
 			foreach (string name in UserBlendOps.GetAllBlendModeNames ()) {
 				BlendOps.Add (name, UserBlendOps.GetBlendModeByName (name));
 			}
-			defaultBlendOp = UserBlendOps.GetBlendModeName (Pinta.Core.BlendMode.Normal);
+			default_blend_op = UserBlendOps.GetBlendModeName (Pinta.Core.BlendMode.Normal);
 		}
 
 		[StaticList ("BlendOps")]
-		public string BlendMode = defaultBlendOp;
+		public string BlendMode { get; set; } = default_blend_op;
 
 		[Caption ("Seed"), MinimumValue (0), MaximumValue (255)]
-		public int Seed = 0;
+		public int Seed { get; set; } = 0;
 
 	}
 }

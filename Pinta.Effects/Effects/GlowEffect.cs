@@ -22,6 +22,8 @@ public sealed class GlowEffect : BaseEffect
 
 	public override string Icon => Pinta.Resources.Icons.EffectsPhotoGlow;
 
+	public sealed override bool IsTileable => true;
+
 	public override string Name => Translations.GetString ("Glow");
 
 	public override bool IsConfigurable => true;
@@ -72,10 +74,10 @@ public sealed class GlowEffect : BaseEffect
 	public sealed class GlowData : EffectData
 	{
 		[Caption ("Radius"), MinimumValue (1), MaximumValue (20)]
-		public int Radius = 6;
+		public int Radius { get; set; } = 6;
 		[Caption ("Brightness"), MinimumValue (-100), MaximumValue (100)]
-		public int Brightness = 10;
+		public int Brightness { get; set; } = 10;
 		[Caption ("Contrast"), MinimumValue (-100), MaximumValue (100)]
-		public int Contrast = 10;
+		public int Contrast { get; set; } = 10;
 	}
 }

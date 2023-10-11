@@ -18,6 +18,8 @@ public sealed class EmbossEffect : BaseEffect
 {
 	public override string Icon => Pinta.Resources.Icons.EffectsStylizeEmboss;
 
+	public sealed override bool IsTileable => true;
+
 	public override string Name => Translations.GetString ("Emboss");
 
 	public override bool IsConfigurable => true;
@@ -131,6 +133,6 @@ public sealed class EmbossEffect : BaseEffect
 	public sealed class EmbossData : EffectData
 	{
 		[Caption ("Angle")]
-		public double Angle = 0;
+		public double Angle { get; set; } = 0;
 	}
 }

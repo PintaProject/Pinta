@@ -18,6 +18,8 @@ public sealed class JuliaFractalEffect : BaseEffect
 {
 	public override string Icon => Pinta.Resources.Icons.EffectsRenderJuliaFractal;
 
+	public sealed override bool IsTileable => true;
+
 	public override string Name => Translations.GetString ("Julia Fractal");
 
 	public override bool IsConfigurable => true;

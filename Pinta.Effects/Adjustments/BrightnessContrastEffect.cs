@@ -21,6 +21,8 @@ public sealed class BrightnessContrastEffect : BaseEffect
 	private byte[]? rgb_table;
 	private bool table_calculated;
 
+	public sealed override bool IsTileable => true;
+
 	public override string Icon => Pinta.Resources.Icons.AdjustmentsBrightnessContrast;
 
 	public override string Name => Translations.GetString ("Brightness / Contrast");
@@ -132,7 +134,7 @@ public sealed class BrightnessContrastEffect : BaseEffect
 		table_calculated = true;
 	}
 
-	public class BrightnessContrastData : EffectData
+	public sealed class BrightnessContrastData : EffectData
 	{
 		private int brightness = 0;
 		private int contrast = 0;
@@ -143,7 +145,7 @@ public sealed class BrightnessContrastEffect : BaseEffect
 			set {
 				if (value != brightness) {
 					brightness = value;
-					FirePropertyChanged ("Brightness");
+					FirePropertyChanged (nameof (Brightness));
 				}
 			}
 		}
@@ -154,7 +156,7 @@ public sealed class BrightnessContrastEffect : BaseEffect
 			set {
 				if (value != contrast) {
 					contrast = value;
-					FirePropertyChanged ("Contrast");
+					FirePropertyChanged (nameof (Contrast));
 				}
 			}
 		}

@@ -16,6 +16,8 @@ namespace Pinta.Effects;
 
 public sealed class HueSaturationEffect : BaseEffect
 {
+	public sealed override bool IsTileable => true;
+
 	public override string Icon => Pinta.Resources.Icons.AdjustmentsHueSaturation;
 
 	public override string Name => Translations.GetString ("Hue / Saturation");

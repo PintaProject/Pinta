@@ -18,6 +18,8 @@ public sealed class TileEffect : BaseEffect
 {
 	public override string Icon => Pinta.Resources.Icons.EffectsDistortTile;
 
+	public sealed override bool IsTileable => true;
+
 	public override string Name => Translations.GetString ("Tile Reflection");
 
 	public override bool IsConfigurable => true;

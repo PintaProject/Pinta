@@ -21,6 +21,8 @@ public sealed class ReduceNoiseEffect : LocalHistogramEffect
 
 	public override string Icon => Pinta.Resources.Icons.EffectsNoiseReduceNoise;
 
+	public sealed override bool IsTileable => true;
+
 	public override string Name => Translations.GetString ("Reduce Noise");
 
 	public override bool IsConfigurable => true;
@@ -83,9 +85,9 @@ public sealed class ReduceNoiseEffect : LocalHistogramEffect
 	public sealed class ReduceNoiseData : EffectData
 	{
 		[Caption ("Radius"), MinimumValue (1), MaximumValue (200)]
-		public int Radius = 6;
+		public int Radius { get; set; } = 6;
 
 		[Caption ("Strength"), MinimumValue (0), IncrementValue (0.01), DigitsValue (2), MaximumValue (1)]
-		public double Strength = 0.4;
+		public double Strength { get; set; } = 0.4;
 	}
 }

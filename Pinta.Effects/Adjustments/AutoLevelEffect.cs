@@ -17,6 +17,8 @@ public sealed class AutoLevelEffect : BaseEffect
 {
 	UnaryPixelOps.Level? op;
 
+	public sealed override bool IsTileable => true;
+
 	public override string Icon => Pinta.Resources.Icons.AdjustmentsAutoLevel;
 
 	public override string Name => Translations.GetString ("Auto Level");
