@@ -403,9 +403,8 @@ public sealed class TextEngine
 	{
 		int current = 0;
 		int line = 0;
-		int offset = 0;
-
 		foreach (string s in lines) {
+
 			// It's past this line, move along
 			if (current + StringToUTF8Size (s) < index) {
 				current += StringToUTF8Size (s) + 1;
@@ -414,7 +413,7 @@ public sealed class TextEngine
 			}
 
 			// It's in this line
-			offset = index - current;
+			int offset = index - current;
 			offset = UTF8OffsetToCharacterOffset (lines[line], offset);
 			return new TextPosition (line, offset);
 		}
@@ -442,7 +441,7 @@ public sealed class TextEngine
 
 	private static int UTF8OffsetToCharacterOffset (string s, int offset)
 	{
-		int i = 0;
+		int i;
 		for (i = 0; i < offset; i++) {
 			if (StringToUTF8Size (s[..i]) >= offset) break;
 		}

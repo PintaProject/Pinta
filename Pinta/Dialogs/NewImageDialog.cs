@@ -523,7 +523,7 @@ public sealed class NewImageDialog : Dialog
 
 		private void Draw (Context cr, int widget_width, int widget_height)
 		{
-			var preview_size = Size.Empty;
+			Size preview_size;
 
 			// Figure out the dimensions of the preview to draw
 			if (size.Width <= max_size && size.Height <= max_size)

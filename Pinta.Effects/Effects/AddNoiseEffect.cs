@@ -64,23 +64,22 @@ public sealed class AddNoiseEffect : BaseEffect
 		double l = 5;
 		double r = 10;
 		double scale = 50;
-		double sum = 0;
 
 		while (r - l > 0.0000001) {
-			sum = 0;
+			double s = 0;
 			scale = (l + r) * 0.5;
 
 			for (int i = 0; i < TableSize; ++i) {
-				sum += NormalCurve (16.0 * ((double) i - TableSize / 2) / TableSize, scale);
+				s += NormalCurve (16.0 * ((double) i - TableSize / 2) / TableSize, scale);
 
-				if (sum > 1000000) {
+				if (s > 1000000) {
 					break;
 				}
 			}
 
-			if (sum > TableSize) {
+			if (s > TableSize) {
 				r = scale;
-			} else if (sum < TableSize) {
+			} else if (s < TableSize) {
 				l = scale;
 			} else {
 				break;
@@ -89,7 +88,8 @@ public sealed class AddNoiseEffect : BaseEffect
 
 		var result = ImmutableArray.CreateBuilder<int> (TableSize);
 		result.Count = TableSize;
-		sum = 0;
+
+		double sum = 0;
 		int roundedSum = 0, lastRoundedSum;
 
 		for (int i = 0; i < TableSize; ++i) {
