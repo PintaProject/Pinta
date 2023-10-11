@@ -68,7 +68,8 @@ public sealed class TextLayout
 	public RectangleI GetCursorLocation ()
 	{
 		int index = engine.PositionToUTF8Index (engine.CurrentPosition);
-		Layout.GetCursorPos (index, out RectangleI strong, out _);
+
+		Layout.GetCursorPos (index, out RectangleI strong, out RectangleI weak);
 
 		int x = PangoExtensions.UnitsToPixels (strong.X) + engine.Origin.X;
 		int y = PangoExtensions.UnitsToPixels (strong.Y) + engine.Origin.Y;
@@ -80,7 +81,7 @@ public sealed class TextLayout
 
 	public RectangleI GetLayoutBounds ()
 	{
-		Layout.GetPixelExtents (out RectangleI ink, out _);
+		Layout.GetPixelExtents (out RectangleI ink, out RectangleI logical);
 		var cursor = GetCursorLocation ();
 
 		// GetPixelExtents() doesn't really return a very sensible height.

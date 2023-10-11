@@ -190,7 +190,7 @@ public sealed class StatusBarColorPaletteWidget : Gtk.DrawingArea
 	private void HandleSizeAllocated (Gtk.DrawingArea.ResizeSignalArgs e)
 	{
 		int width = e.Width;
-		_ = e.Height;
+		int height = e.Height;
 
 		// Store the bounds allocated for our palette
 		var recent_cols = PintaCore.Palette.MaxRecentlyUsedColor / PALETTE_ROWS;

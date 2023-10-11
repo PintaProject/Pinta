@@ -727,10 +727,15 @@ public abstract class BaseEditEngine
 
 
 		bool ctrlKey = e.IsControlPressed;
+
+
+
 		SEngines.FindClosestControlPoint (unclamped_point,
-			out var closestCPShapeIndex, out var closestCPIndex, out var closestControlPoint, out _);
+			out var closestCPShapeIndex, out var closestCPIndex, out var closestControlPoint, out var closestCPDistance);
+
+
 		OrganizedPointCollection.FindClosestPoint (SEngines, unclamped_point,
-		    out var closestShapeIndex, out var closestPointIndex, out var closestPoint, out _);
+		    out var closestShapeIndex, out var closestPointIndex, out var closestPoint, out var closestDistance);
 
 		bool clicked_control_point = false;
 		bool clicked_generated_point = false;
@@ -1093,7 +1098,7 @@ public abstract class BaseEditEngine
 	/// <param name="engine"></param>
 	private static void OrganizePoints (ShapeEngine engine)
 	{
-		_ = PintaCore.Workspace.ActiveDocument;
+		Document doc = PintaCore.Workspace.ActiveDocument;
 
 		//Organize the generated points for quick mouse interaction detection.
 
@@ -1218,8 +1223,9 @@ public abstract class BaseEditEngine
 
 		if (!changing_tension && draw_selection) {
 			var current_window_point = PintaCore.Workspace.CanvasPointToView (current_point);
+
 			SEngines.FindClosestControlPoint (current_point,
-				out _, out _, out var closestControlPoint, out _);
+				out var closestCPShapeIndex, out var closestCPIndex, out var closestControlPoint, out var closestCPDistance);
 
 			// Check if the user is directly hovering over a control point.
 			if (closestControlPoint != null) {
@@ -1230,7 +1236,7 @@ public abstract class BaseEditEngine
 			// Otherwise, the user may be hovering over a generated point.
 			if (!hover_handle.Active) {
 				OrganizedPointCollection.FindClosestPoint (SEngines, current_point,
-					out _, out _, out var closestPoint, out _);
+					out var closestShapeIndex, out var closestPointIndex, out var closestPoint, out var closestDistance);
 
 				if (closestPoint.HasValue) {
 					hover_handle.CanvasPosition = closestPoint.Value;
@@ -1259,7 +1265,7 @@ public abstract class BaseEditEngine
 	/// </summary>
 	public void DrawAllShapes ()
 	{
-		_ = PintaCore.Workspace.ActiveDocument;
+		Document doc = PintaCore.Workspace.ActiveDocument;
 
 		//Store the SelectedShapeIndex value for later restoration.
 		int previousToolSI = SelectedShapeIndex;

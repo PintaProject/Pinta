@@ -118,7 +118,7 @@ public sealed class CanvasRenderer
 		var dst_data = dst.GetPixelData ();
 		var dstHeight = dst.Height;
 		var dstWidth = dst.Width;
-		_ = dst.Stride;
+		var dstStride = dst.Stride;
 		var sTop = D2SLookupY[offset.Y];
 		var sBottom = D2SLookupY[offset.Y + dstHeight];
 		var lookup_y = S2DLookupY;
