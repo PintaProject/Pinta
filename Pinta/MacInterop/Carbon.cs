@@ -110,7 +110,7 @@ internal static class Carbon
 	{
 		uint outSize = 0;
 		IntPtr val = IntPtr.Zero;
-		CheckReturn (GetEventParameter (eventRef, name, desiredType, out var actualType, (uint) IntPtr.Size, ref outSize, ref val));
+		CheckReturn (GetEventParameter (eventRef, name, desiredType, out _, (uint) IntPtr.Size, ref outSize, ref val));
 		return val;
 	}
 
