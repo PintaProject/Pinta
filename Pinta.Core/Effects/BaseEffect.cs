@@ -25,6 +25,7 @@
 // THE SOFTWARE.
 
 using System;
+using System.Diagnostics;
 using Cairo;
 using Mono.Addins;
 using Mono.Addins.Localization;
@@ -38,8 +39,9 @@ namespace Pinta.Core;
 public abstract class BaseEffect
 {
 	/// <summary>
-	/// If the ROIs are subdivided (in rows, for example) and the effect is applied to each subdivision
-	/// separately, is the end result the same as applying it to the original ROIs?
+	/// Specifies whether Render() can be called separately (and possibly in parallel) for different sub-regions of the image.
+	/// If false, Render () will be called once with the entire region the effect is applied to.
+	/// This is required for effects which cannot be applied independently to each pixel, e.g. if the effect accumulates information from previously processed pixels.
 	/// </summary>
 	public abstract bool IsTileable { get; }
 
