@@ -25,7 +25,6 @@
 // THE SOFTWARE.
 
 using System;
-using System.Collections.Generic;
 using Cairo;
 using Gtk;
 using Pinta.Core;
@@ -44,7 +43,7 @@ public sealed class EraserTool : BaseBrushTool
 	private EraserType eraser_type = EraserType.Normal;
 
 	private const int LUT_Resolution = 256;
-	private readonly Lazy<IReadOnlyList<IReadOnlyList<byte>>> lazy_lut_factor = new (CreateLookupTable);
+	private readonly Lazy<byte[,]> lazy_lut_factor = new (CreateLookupTable);
 
 	private const string ERASER_TYPE_SETTING = "eraser-erase-type";
 
@@ -118,17 +117,17 @@ public sealed class EraserTool : BaseBrushTool
 			settings.PutSetting (ERASER_TYPE_SETTING, type_combobox.ComboBox.Active);
 	}
 
-	private static IReadOnlyList<IReadOnlyList<byte>> CreateLookupTable ()
+	private static byte[,] CreateLookupTable ()
 	{
-		var result = new byte[LUT_Resolution + 1][];
-		for (var dy = 0; dy < LUT_Resolution + 1; dy++) {
-			result[dy] = new byte[LUT_Resolution + 1];
-			for (var dx = 0; dx < LUT_Resolution + 1; dx++) {
+		var arrayDimensions = LUT_Resolution + 1;
+		var result = new byte[arrayDimensions, arrayDimensions];
+		for (var dy = 0; dy < arrayDimensions; dy++) {
+			for (var dx = 0; dx < arrayDimensions; dx++) {
 				var d = Math.Sqrt (dx * dx + dy * dy) / LUT_Resolution;
 				if (d > 1.0)
-					result[dy][dx] = 255;
+					result[dy, dx] = 255;
 				else
-					result[dy][dx] = (byte) (255.0 - Math.Cos (Math.Sqrt (d) * Math.PI / 2.0) * 255.0);
+					result[dy, dx] = (byte) (255.0 - Math.Cos (Math.Sqrt (d) * Math.PI / 2.0) * 255.0);
 			}
 		}
 		return result;
@@ -218,8 +217,6 @@ public sealed class EraserTool : BaseBrushTool
 				if (dy < 0)
 					dy = -dy;
 
-				var lut_factor_row = lut_factor[dy];
-
 				for (var ix = dest_rect.Left; ix < dest_rect.Right; ix++) {
 					ref ColorBgra col = ref srcRow[ix - dest_rect.Left];
 					var dx = ((ix - x) * LUT_Resolution) / rad;
@@ -227,7 +224,7 @@ public sealed class EraserTool : BaseBrushTool
 					if (dx < 0)
 						dx = -dx;
 
-					var force = lut_factor_row[dx];
+					var force = lut_factor[dy, dx];
 
 					// Note: premultiplied alpha is used!
 					if (mouse_button == MouseButton.Right) {
