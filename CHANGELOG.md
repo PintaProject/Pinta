@@ -15,6 +15,7 @@ Thanks to the following contributors who worked on this release:
 - Restored support for add-ins, which had been disabled in Pinta 2.0 due to technical limitations
   - Ported the add-in manager dialog to GTK4
   - The add-in manager dialog now filters out old versions incompatible with the current version of Pinta, or new addins requiring future version of Pinta ([#1580205](https://bugs.launchpad.net/pinta/+bug/1580205))
+- Added support for exporting to portable pixmap (`.ppm`) files (#549)
 
 ### Changed
 - When building Pinta using the Makefile, 'dotnet publish' is now run during the build step rather than the install step.
