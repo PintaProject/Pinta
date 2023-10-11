@@ -30,7 +30,7 @@ using GdkPixbuf;
 
 namespace Pinta.Core;
 
-public static class GdkPixbufExtensions
+public static partial class GdkPixbufExtensions
 {
 	private const string PixbufLibraryName = "GdkPixbuf";
 
@@ -91,11 +91,11 @@ public static class GdkPixbufExtensions
 		return GLib.Internal.StringHelper.ToStringArrayUtf8 (resultNative);
 	}
 
-	[DllImport (PixbufLibraryName, EntryPoint = "gdk_pixbuf_format_get_mime_types")]
-	private static extern IntPtr GetMimeTypes (GdkPixbuf.Internal.PixbufFormatHandle format);
+	[LibraryImport (PixbufLibraryName, EntryPoint = "gdk_pixbuf_format_get_mime_types")]
+	private static partial IntPtr GetMimeTypes (GdkPixbuf.Internal.PixbufFormatHandle format);
 
-	[DllImport (PixbufLibraryName, EntryPoint = "gdk_pixbuf_get_formats")]
-	private static extern GLib.Internal.SListUnownedHandle GetFormatsNative ();
+	[LibraryImport (PixbufLibraryName, EntryPoint = "gdk_pixbuf_get_formats")]
+	private static partial GLib.Internal.SListUnownedHandle GetFormatsNative ();
 
 	[DllImport (PixbufLibraryName, EntryPoint = "gdk_pixbuf_save_to_bufferv")]
 	private static extern bool SaveToBufferv (IntPtr pixbuf, out IntPtr buffer, out uint buffer_size, [MarshalAs (UnmanagedType.LPUTF8Str)] string type, IntPtr option_keys, IntPtr option_values, out GLib.Internal.ErrorOwnedHandle error);

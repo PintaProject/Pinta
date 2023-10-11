@@ -35,12 +35,12 @@ namespace Pinta.MacInterop;
 internal delegate CarbonEventHandlerStatus EventDelegate (IntPtr callRef, IntPtr eventRef, IntPtr userData);
 internal delegate CarbonEventHandlerStatus AEHandlerDelegate (IntPtr inEvnt, IntPtr outEvt, uint refConst);
 
-internal static class Carbon
+internal static partial class Carbon
 {
 	public const string CarbonLib = "/System/Library/Frameworks/Carbon.framework/Versions/Current/Carbon";
 
-	[DllImport (CarbonLib)]
-	static extern int Gestalt (int selector, out int result);
+	[LibraryImport (CarbonLib)]
+	private static partial int Gestalt (int selector, out int result);
 
 	public static int Gestalt (string selector)
 	{
@@ -50,32 +50,32 @@ internal static class Carbon
 		return result;
 	}
 
-	[DllImport (CarbonLib)]
-	public static extern IntPtr GetApplicationEventTarget ();
+	[LibraryImport (CarbonLib)]
+	public static partial IntPtr GetApplicationEventTarget ();
 
-	[DllImport (CarbonLib)]
-	public static extern IntPtr GetControlEventTarget (IntPtr control);
+	[LibraryImport (CarbonLib)]
+	public static partial IntPtr GetControlEventTarget (IntPtr control);
 
-	[DllImport (CarbonLib)]
-	public static extern IntPtr GetWindowEventTarget (IntPtr window);
+	[LibraryImport (CarbonLib)]
+	public static partial IntPtr GetWindowEventTarget (IntPtr window);
 
-	[DllImport (CarbonLib)]
-	public static extern IntPtr GetMenuEventTarget (IntPtr menu);
+	[LibraryImport (CarbonLib)]
+	public static partial IntPtr GetMenuEventTarget (IntPtr menu);
 
-	[DllImport (CarbonLib)]
-	public static extern CarbonEventClass GetEventClass (IntPtr eventref);
+	[LibraryImport (CarbonLib)]
+	public static partial CarbonEventClass GetEventClass (IntPtr eventref);
 
-	[DllImport (CarbonLib)]
-	public static extern uint GetEventKind (IntPtr eventref);
+	[LibraryImport (CarbonLib)]
+	public static partial uint GetEventKind (IntPtr eventref);
 
 	#region Event handler installation
 
-	[DllImport (CarbonLib)]
-	static extern EventStatus InstallEventHandler (IntPtr target, EventDelegate handler, uint count,
+	[LibraryImport (CarbonLib)]
+	private static partial EventStatus InstallEventHandler (IntPtr target, EventDelegate handler, uint count,
 						       CarbonEventTypeSpec[] types, IntPtr user_data, out IntPtr handlerRef);
 
-	[DllImport (CarbonLib)]
-	public static extern EventStatus RemoveEventHandler (IntPtr handlerRef);
+	[LibraryImport (CarbonLib)]
+	public static partial EventStatus RemoveEventHandler (IntPtr handlerRef);
 
 	public static IntPtr InstallEventHandler (IntPtr target, EventDelegate handler, CarbonEventTypeSpec[] types)
 	{
@@ -102,8 +102,8 @@ internal static class Carbon
 
 	#region Event parameter extraction
 
-	[DllImport (CarbonLib)]
-	public static extern EventStatus GetEventParameter (IntPtr eventRef, CarbonEventParameterName name, CarbonEventParameterType desiredType,
+	[LibraryImport (CarbonLib)]
+	public static partial EventStatus GetEventParameter (IntPtr eventRef, CarbonEventParameterName name, CarbonEventParameterType desiredType,
 							    out CarbonEventParameterType actualType, uint size, ref uint outSize, ref IntPtr outPtr);
 
 	public static IntPtr GetEventParameter (IntPtr eventRef, CarbonEventParameterName name, CarbonEventParameterType desiredType)
@@ -114,12 +114,12 @@ internal static class Carbon
 		return val;
 	}
 
-	[DllImport (CarbonLib)]
-	static extern EventStatus GetEventParameter (IntPtr eventRef, CarbonEventParameterName name, CarbonEventParameterType desiredType,
+	[LibraryImport (CarbonLib)]
+	private static partial EventStatus GetEventParameter (IntPtr eventRef, CarbonEventParameterName name, CarbonEventParameterType desiredType,
 						     out CarbonEventParameterType actualType, uint size, ref uint outSize, IntPtr dataBuffer);
 
-	[DllImport (CarbonLib)]
-	static extern EventStatus GetEventParameter (IntPtr eventRef, CarbonEventParameterName name, CarbonEventParameterType desiredType,
+	[LibraryImport (CarbonLib)]
+	private static partial EventStatus GetEventParameter (IntPtr eventRef, CarbonEventParameterName name, CarbonEventParameterType desiredType,
 						     uint zero, uint size, uint zero2, IntPtr dataBuffer);
 
 	public static T GetEventParameter<T> (IntPtr eventRef, CarbonEventParameterName name, CarbonEventParameterType desiredType) where T : struct
@@ -136,15 +136,15 @@ internal static class Carbon
 
 	#region Sending events
 
-	[DllImport (CarbonLib)]
-	static extern EventStatus SendEventToEventTarget (IntPtr eventRef, IntPtr eventTarget);
+	[LibraryImport (CarbonLib)]
+	private static partial EventStatus SendEventToEventTarget (IntPtr eventRef, IntPtr eventTarget);
 
-	[DllImport (CarbonLib)]
-	static extern EventStatus CreateEvent (IntPtr allocator, CarbonEventClass classID, uint kind, double eventTime,
+	[LibraryImport (CarbonLib)]
+	private static partial EventStatus CreateEvent (IntPtr allocator, CarbonEventClass classID, uint kind, double eventTime,
 					       CarbonEventAttributes flags, out IntPtr eventHandle);
 
-	[DllImport (CarbonLib)]
-	static extern void ReleaseEvent (IntPtr eventHandle);
+	[LibraryImport (CarbonLib)]
+	static partial void ReleaseEvent (IntPtr eventHandle);
 
 	static EventStatus SendApplicationEvent (CarbonEventClass classID, uint kind, CarbonEventAttributes flags)
 	{
@@ -156,8 +156,8 @@ internal static class Carbon
 		return s;
 	}
 
-	[DllImport (CarbonLib)]
-	public static extern CarbonEventHandlerStatus ProcessHICommand (ref CarbonHICommand command);
+	[LibraryImport (CarbonLib)]
+	public static partial CarbonEventHandlerStatus ProcessHICommand (ref CarbonHICommand command);
 
 	#endregion
 
