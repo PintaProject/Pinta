@@ -14,11 +14,11 @@ namespace Pinta.Core;
 /// "A Primer on Building a Color Picker User Control with GDI+ in Visual Basic .NET or C#"
 /// http://www.msdnaa.net/Resources/display.aspx?ResID=2460
 /// </summary>
-public struct HsvColor
+public readonly struct HsvColor
 {
-	public int Hue; // 0-360
-	public int Saturation; // 0-100
-	public int Value; // 0-100
+	public readonly int Hue { get; } // 0-360
+	public readonly int Saturation { get; } // 0-100
+	public readonly int Value { get; } // 0-100
 
 	public static bool operator == (HsvColor lhs, HsvColor rhs)
 	{

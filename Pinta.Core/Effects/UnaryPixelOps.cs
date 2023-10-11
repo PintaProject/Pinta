@@ -720,19 +720,19 @@ public static class UnaryPixelOps
 			color.B = Utility.ClampToByte ((intensity * 1024 + (color.B - intensity) * sat_factor) >> 10);
 
 			HsvColor hsvColor = (new RgbColor (color.R, color.G, color.B)).ToHsv ();
-			int hue = hsvColor.Hue;
+			int newHue = hsvColor.Hue;
 
-			hue += hue_delta;
+			newHue += hue_delta;
 
-			while (hue < 0) {
-				hue += 360;
+			while (newHue < 0) {
+				newHue += 360;
 			}
 
-			while (hue > 360) {
-				hue -= 360;
+			while (newHue > 360) {
+				newHue -= 360;
 			}
 
-			hsvColor.Hue = hue;
+			hsvColor = new HsvColor (newHue, hsvColor.Saturation, hsvColor.Value);
 
 			RgbColor rgbColor = hsvColor.ToRgb ();
 			ColorBgra newColor = ColorBgra.FromBgr ((byte) rgbColor.Blue, (byte) rgbColor.Green, (byte) rgbColor.Red);
