@@ -29,7 +29,7 @@ public readonly struct Angle
 	{
 		return degrees switch {
 			>= 0 => new Angle (degrees % MAX_DEGREES, AngleUnit.Degree),
-			_ => new Angle (MAX_DEGREES - (degrees % MAX_DEGREES), AngleUnit.Radian)
+			_ => new Angle (MAX_DEGREES - (degrees % MAX_DEGREES), AngleUnit.Degree)
 		};
 	}
 
@@ -54,7 +54,7 @@ public readonly struct Angle
 	public static Angle operator - (Angle minuend, Angle subtrahend)
 	{
 		if (minuend.UnitType == subtrahend.UnitType) {
-			return new Angle (minuend.Magnitude + subtrahend.Magnitude, minuend.UnitType);
+			return new Angle (minuend.Magnitude - subtrahend.Magnitude, minuend.UnitType);
 		} else {
 			var normalizedSubtrahendMagnitude = ChangeUnit (subtrahend.Magnitude, subtrahend.UnitType, minuend.UnitType);
 			return new Angle (minuend.Magnitude - normalizedSubtrahendMagnitude, minuend.UnitType);
@@ -72,23 +72,21 @@ public readonly struct Angle
 
 	private static double ChangeUnit (double magnitude, AngleUnit originalUnit, AngleUnit destinationUnit)
 	{
+		if (originalUnit == destinationUnit) return magnitude;
 		return originalUnit switch {
 			AngleUnit.Radian => destinationUnit switch {
 				AngleUnit.Degree => magnitude * RADIANS_TO_DEGREES,
 				AngleUnit.Revolution => magnitude * RADIANS_TO_REVOLUTIONS,
-				AngleUnit.Radian => magnitude,
 				_ => throw new NotSupportedException ()
 			},
 			AngleUnit.Degree => destinationUnit switch {
 				AngleUnit.Radian => magnitude * DEGREES_TO_RADIANS,
 				AngleUnit.Revolution => magnitude * DEGREES_TO_REVOLUTIONS,
-				AngleUnit.Degree => magnitude,
 				_ => throw new NotSupportedException ()
 			},
 			AngleUnit.Revolution => destinationUnit switch {
 				AngleUnit.Radian => magnitude * REVOLUTIONS_TO_RADIANS,
 				AngleUnit.Degree => magnitude * REVOLUTIONS_TO_DEGREES,
-				AngleUnit.Revolution => magnitude,
 				_ => throw new NotSupportedException ()
 			},
 			_ => throw new NotSupportedException (),
