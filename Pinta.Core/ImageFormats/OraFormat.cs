@@ -221,41 +221,24 @@ public sealed class OraFormat : IImageImporter, IImageExporter
 
 	private static string BlendModeToStandard (BlendMode mode)
 	{
-		switch (mode) {
-			case BlendMode.Normal:
-			default:
-				return "svg:src-over";
-			case BlendMode.Multiply:
-				return "svg:multiply";
-			case BlendMode.ColorBurn:
-				return "svg:color-burn";
-			case BlendMode.ColorDodge:
-				return "svg:color-dodge";
-			case BlendMode.Overlay:
-				return "svg:overlay";
-			case BlendMode.Difference:
-				return "svg:difference";
-			case BlendMode.Lighten:
-				return "svg:lighten";
-			case BlendMode.Darken:
-				return "svg:darken";
-			case BlendMode.Screen:
-				return "svg:screen";
-			case BlendMode.Xor:
-				return "svg:xor";
-			case BlendMode.HardLight:
-				return "svg:hard-light";
-			case BlendMode.SoftLight:
-				return "svg:soft-light";
-			case BlendMode.Color:
-				return "svg:color";
-			case BlendMode.Luminosity:
-				return "svg:luminosity";
-			case BlendMode.Hue:
-				return "svg:hue";
-			case BlendMode.Saturation:
-				return "svg:saturation";
-		}
+		return mode switch {
+			BlendMode.Multiply => "svg:multiply",
+			BlendMode.ColorBurn => "svg:color-burn",
+			BlendMode.ColorDodge => "svg:color-dodge",
+			BlendMode.Overlay => "svg:overlay",
+			BlendMode.Difference => "svg:difference",
+			BlendMode.Lighten => "svg:lighten",
+			BlendMode.Darken => "svg:darken",
+			BlendMode.Screen => "svg:screen",
+			BlendMode.Xor => "svg:xor",
+			BlendMode.HardLight => "svg:hard-light",
+			BlendMode.SoftLight => "svg:soft-light",
+			BlendMode.Color => "svg:color",
+			BlendMode.Luminosity => "svg:luminosity",
+			BlendMode.Hue => "svg:hue",
+			BlendMode.Saturation => "svg:saturation",
+			_ => "svg:src-over",
+		};
 	}
 
 	private static BlendMode StandardToBlendMode (string mode)
