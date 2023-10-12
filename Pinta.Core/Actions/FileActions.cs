@@ -121,8 +121,7 @@ public sealed class FileActions
 	{
 		ModifyCompressionEventArgs e = new ModifyCompressionEventArgs (defaultCompression, parent);
 
-		if (ModifyCompression != null)
-			ModifyCompression (this, e);
+		ModifyCompression?.Invoke (this, e);
 
 		return e.Cancel ? -1 : e.Quality;
 	}

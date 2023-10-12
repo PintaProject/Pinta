@@ -14,12 +14,8 @@ namespace Pinta.Core;
 /// <summary>
 /// Provides a set of standard UnaryPixelOps.
 /// </summary>
-public sealed class UnaryPixelOps
+public static class UnaryPixelOps
 {
-	private UnaryPixelOps ()
-	{
-	}
-
 	/// <summary>
 	/// Passes through the given color value.
 	/// result(color) = color
@@ -387,10 +383,12 @@ public sealed class UnaryPixelOps
 			for (int i = 0; i < src.Length; ++i) {
 				ref ColorBgra d = ref dst[i];
 				ref readonly ColorBgra s = ref src[i];
-				d.B = CurveB[s.B];
-				d.G = CurveG[s.G];
-				d.R = CurveR[s.R];
-				d.A = s.A;
+				d = ColorBgra.FromBgra (
+					b: CurveB[s.B],
+					g: CurveG[s.G],
+					r: CurveR[s.R],
+					a: s.A
+				);
 			}
 		}
 
@@ -575,7 +573,7 @@ public sealed class UnaryPixelOps
 			UpdateLookupTable ();
 		}
 
-		public bool isValid = true;
+		public bool IsValid { get; private set; } = true;
 
 		public static Level AutoFromLoMdHi (ColorBgra lo, ColorBgra md, ColorBgra hi)
 		{
@@ -598,7 +596,7 @@ public sealed class UnaryPixelOps
 				if (color_out_high[i] < color_out_low[i] ||
 				    color_in_high[i] <= color_in_low[i] ||
 				    gamma[i] < 0) {
-					isValid = false;
+					IsValid = false;
 					return;
 				}
 
@@ -722,19 +720,19 @@ public sealed class UnaryPixelOps
 			color.B = Utility.ClampToByte ((intensity * 1024 + (color.B - intensity) * sat_factor) >> 10);
 
 			HsvColor hsvColor = (new RgbColor (color.R, color.G, color.B)).ToHsv ();
-			int hue = hsvColor.Hue;
+			int newHue = hsvColor.Hue;
 
-			hue += hue_delta;
+			newHue += hue_delta;
 
-			while (hue < 0) {
-				hue += 360;
+			while (newHue < 0) {
+				newHue += 360;
 			}
 
-			while (hue > 360) {
-				hue -= 360;
+			while (newHue > 360) {
+				newHue -= 360;
 			}
 
-			hsvColor.Hue = hue;
+			hsvColor = new HsvColor (newHue, hsvColor.Saturation, hsvColor.Value);
 
 			RgbColor rgbColor = hsvColor.ToRgb ();
 			ColorBgra newColor = ColorBgra.FromBgr ((byte) rgbColor.Blue, (byte) rgbColor.Green, (byte) rgbColor.Red);

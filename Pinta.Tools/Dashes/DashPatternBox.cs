@@ -36,9 +36,7 @@ public sealed class DashPatternBox
 	private Label? dash_pattern_label;
 	private Separator? dash_pattern_sep;
 
-	public ToolBarComboBox? comboBox;
-
-
+	public ToolBarComboBox? ComboBox { get; private set; }
 
 	/// <summary>
 	/// Sets up the DashPatternBox in the Toolbar.
@@ -53,9 +51,7 @@ public sealed class DashPatternBox
 	/// <returns>null if the DashPatternBox has already been setup; otherwise, returns the DashPatternBox itself.</returns>
 	public Gtk.ComboBoxText? SetupToolbar (Box tb)
 	{
-		if (dash_pattern_sep == null) {
-			dash_pattern_sep = GtkExtensions.CreateToolBarSeparator ();
-		}
+		dash_pattern_sep ??= GtkExtensions.CreateToolBarSeparator ();
 
 		tb.Append (dash_pattern_sep);
 
@@ -66,19 +62,17 @@ public sealed class DashPatternBox
 
 		tb.Append (dash_pattern_label);
 
-		if (comboBox == null) {
-			comboBox = new ToolBarComboBox (50, 0, true,
+		ComboBox ??= new ToolBarComboBox (50, 0, true,
 				"-", " -", " --", " ---", "  -", "   -", " - --", " - - --------", " - - ---- - ----");
-		}
 
-		tb.Append (comboBox);
+		tb.Append (ComboBox);
 
 		if (dash_change_setup) {
 			return null;
 		} else {
 			dash_change_setup = true;
 
-			return comboBox.ComboBox;
+			return ComboBox.ComboBox;
 		}
 	}
 }

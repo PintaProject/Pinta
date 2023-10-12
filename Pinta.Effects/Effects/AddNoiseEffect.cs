@@ -21,6 +21,8 @@ public sealed class AddNoiseEffect : BaseEffect
 	private int color_saturation;
 	private double coverage;
 
+	public sealed override bool IsTileable => true;
+
 	public override string Icon => Pinta.Resources.Icons.EffectsNoiseAddNoise;
 
 	public override string Name => Translations.GetString ("Add Noise");
@@ -62,23 +64,22 @@ public sealed class AddNoiseEffect : BaseEffect
 		double l = 5;
 		double r = 10;
 		double scale = 50;
-		double sum = 0;
 
 		while (r - l > 0.0000001) {
-			sum = 0;
+			double s = 0;
 			scale = (l + r) * 0.5;
 
 			for (int i = 0; i < TableSize; ++i) {
-				sum += NormalCurve (16.0 * ((double) i - TableSize / 2) / TableSize, scale);
+				s += NormalCurve (16.0 * ((double) i - TableSize / 2) / TableSize, scale);
 
-				if (sum > 1000000) {
+				if (s > 1000000) {
 					break;
 				}
 			}
 
-			if (sum > TableSize) {
+			if (s > TableSize) {
 				r = scale;
-			} else if (sum < TableSize) {
+			} else if (s < TableSize) {
 				l = scale;
 			} else {
 				break;
@@ -87,7 +88,8 @@ public sealed class AddNoiseEffect : BaseEffect
 
 		var result = ImmutableArray.CreateBuilder<int> (TableSize);
 		result.Count = TableSize;
-		sum = 0;
+
+		double sum = 0;
 		int roundedSum = 0, lastRoundedSum;
 
 		for (int i = 0; i < TableSize; ++i) {
@@ -112,10 +114,8 @@ public sealed class AddNoiseEffect : BaseEffect
 		int dev = this.intensity * this.intensity / 4;
 		int sat = this.color_saturation * 4096 / 100;
 
-		if (thread_rand == null) {
-			thread_rand = new Random (unchecked(System.Threading.Thread.CurrentThread.GetHashCode () ^
+		thread_rand ??= new Random (unchecked(System.Threading.Thread.CurrentThread.GetHashCode () ^
 			    unchecked((int) DateTime.Now.Ticks)));
-		}
 
 		Random localRand = thread_rand;
 		ReadOnlySpan<int> localLookup = lookup.AsSpan ();
@@ -168,12 +168,12 @@ public sealed class AddNoiseEffect : BaseEffect
 	public sealed class NoiseData : EffectData
 	{
 		[Caption ("Intensity"), MinimumValue (0), MaximumValue (100)]
-		public int Intensity = 64;
+		public int Intensity { get; set; } = 64;
 
 		[Caption ("Color Saturation"), MinimumValue (0), MaximumValue (400)]
-		public int ColorSaturation = 100;
+		public int ColorSaturation { get; set; } = 100;
 
 		[Caption ("Coverage"), MinimumValue (0), DigitsValue (2), MaximumValue (100)]
-		public double Coverage = 100.0;
+		public double Coverage { get; set; } = 100.0;
 	}
 }

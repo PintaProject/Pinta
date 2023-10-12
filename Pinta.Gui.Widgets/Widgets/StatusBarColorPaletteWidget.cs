@@ -33,10 +33,10 @@ namespace Pinta.Gui.Widgets;
 
 public sealed class StatusBarColorPaletteWidget : Gtk.DrawingArea
 {
-	private RectangleD primary_rect = new (4, 3, 24, 24);
-	private RectangleD secondary_rect = new (17, 16, 24, 24);
-	private RectangleD swap_rect = new (27, 2, 15, 15);
-	private RectangleD reset_rect = new (2, 27, 15, 15);
+	private readonly RectangleD primary_rect = new (4, 3, 24, 24);
+	private readonly RectangleD secondary_rect = new (17, 16, 24, 24);
+	private readonly RectangleD swap_rect = new (27, 2, 15, 15);
+	private readonly RectangleD reset_rect = new (2, 27, 15, 15);
 
 	private RectangleD palette_rect;
 	private RectangleD recent_palette_rect;

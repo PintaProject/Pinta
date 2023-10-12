@@ -19,6 +19,8 @@ public sealed class CurvesEffect : BaseEffect
 {
 	UnaryPixelOp? op = null;
 
+	public sealed override bool IsTileable => true;
+
 	public override string Icon => Pinta.Resources.Icons.AdjustmentsCurves;
 
 	public override string Name => Translations.GetString ("Curves");
@@ -54,8 +56,7 @@ public sealed class CurvesEffect : BaseEffect
 		if (Data.ControlPoints == null)
 			return;
 
-		if (op == null)
-			op = MakeUop ();
+		op ??= MakeUop ();
 
 		op.Apply (dest, src, rois);
 	}
@@ -108,7 +109,7 @@ public sealed class CurvesEffect : BaseEffect
 	}
 }
 
-public class CurvesData : EffectData
+public sealed class CurvesData : EffectData
 {
 	public SortedList<int, int>[]? ControlPoints { get; set; }
 

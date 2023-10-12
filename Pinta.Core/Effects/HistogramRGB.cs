@@ -27,15 +27,20 @@ public sealed class HistogramRgb : Histogram
 
 	public override ColorBgra GetMeanColor ()
 	{
-		float[] mean = GetMean ();
-		return ColorBgra.FromBgr ((byte) (mean[0] + 0.5f), (byte) (mean[1] + 0.5f), (byte) (mean[2] + 0.5f));
+		var mean = GetMean ();
+		return ColorBgra.FromBgr (
+			b: (byte) (mean[0] + 0.5f),
+			g: (byte) (mean[1] + 0.5f),
+			r: (byte) (mean[2] + 0.5f));
 	}
 
 	public override ColorBgra GetPercentileColor (float fraction)
 	{
-		int[] perc = GetPercentile (fraction);
-
-		return ColorBgra.FromBgr ((byte) (perc[0]), (byte) (perc[1]), (byte) (perc[2]));
+		var perc = GetPercentile (fraction);
+		return ColorBgra.FromBgr (
+			b: (byte) perc[0],
+			g: (byte) perc[1],
+			r: (byte) perc[2]);
 	}
 
 	protected override void AddSurfaceRectangleToHistogram (ImageSurface surface, RectangleI rect)
@@ -49,7 +54,7 @@ public sealed class HistogramRgb : Histogram
 		int width = surface.Width;
 
 		for (int y = rect.Y; y <= rect.Bottom; ++y) {
-			var row = data.Slice (y * width);
+			var row = data[(y * width)..];
 			for (int x = rect.X; x <= rect_right; ++x) {
 				ref readonly ColorBgra c = ref row[x];
 				++histogramB[c.B];

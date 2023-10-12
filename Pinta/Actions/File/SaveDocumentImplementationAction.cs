@@ -1,21 +1,21 @@
-// 
+//
 // SaveDocumentImplmentationAction.cs
-//  
+//
 // Author:
 //       Jonathan Pobst <monkey@jpobst.com>
-// 
+//
 // Copyright (c) 2010 Jonathan Pobst
-// 
+//
 // Permission is hereby granted, free of charge, to any person obtaining a copy
 // of this software and associated documentation files (the "Software"), to deal
 // in the Software without restriction, including without limitation the rights
 // to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
 // copies of the Software, and to permit persons to whom the Software is
 // furnished to do so, subject to the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be included in
 // all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
 // IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
 // FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
@@ -51,14 +51,15 @@ internal sealed class SaveDocumentImplmentationAction : IActionHandler
 		// Prompt for a new filename for "Save As", or a document that hasn't been saved before
 		if (e.SaveAs || !e.Document.HasFile) {
 			e.Cancel = !SaveFileAs (e.Document);
-		} else {
-			// Document hasn't changed, don't re-save it
-			if (!e.Document.IsDirty)
-				return;
-
-			// If the document already has a filename, just re-save it
-			e.Cancel = !SaveFile (e.Document, null, null, PintaCore.Chrome.MainWindow);
+			return;
 		}
+
+		// Document hasn't changed, don't re-save it
+		if (!e.Document.IsDirty)
+			return;
+
+		// If the document already has a filename, just re-save it
+		e.Cancel = !SaveFile (e.Document, null, null, PintaCore.Chrome.MainWindow);
 	}
 
 	// This is actually both for "Save As" and saving a file that never
@@ -147,14 +148,15 @@ internal sealed class SaveDocumentImplmentationAction : IActionHandler
 
 	private static bool SaveFile (Document document, Gio.File? file, FormatDescriptor? format, Window parent)
 	{
-		if (file is null)
-			file = document.File;
+		file ??= document.File;
 
 		if (file is null)
 			throw new ArgumentException ("Attempted to save a document with no associated file");
 
 		if (format == null) {
-			ArgumentNullException.ThrowIfNullOrEmpty (document.FileType);
+			if (string.IsNullOrEmpty (document.FileType))
+				throw new ArgumentNullException ($"nameof{document.FileType} must contain value.");
+
 			format = PintaCore.ImageFormats.GetFormatByExtension (document.FileType);
 		}
 

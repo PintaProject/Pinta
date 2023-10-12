@@ -18,6 +18,8 @@ public sealed class RadialBlurEffect : BaseEffect
 {
 	public override string Icon => Pinta.Resources.Icons.EffectsBlursRadialBlur;
 
+	public sealed override bool IsTileable => true;
+
 	public override string Name => Translations.GetString ("Radial Blur");
 
 	public override bool IsConfigurable => true;
@@ -82,17 +84,11 @@ public sealed class RadialBlurEffect : BaseEffect
 
 					int fsr = fr / n;
 
-					int sr = 0;
-					int sg = 0;
-					int sb = 0;
-					int sa = 0;
-					int sc = 0;
-
-					sr += src_pixel.R * src_pixel.A;
-					sg += src_pixel.G * src_pixel.A;
-					sb += src_pixel.B * src_pixel.A;
-					sa += src_pixel.A;
-					++sc;
+					int sr = src_pixel.R * src_pixel.A;
+					int sg = src_pixel.G * src_pixel.A;
+					int sb = src_pixel.B * src_pixel.A;
+					int sa = src_pixel.A;
+					int sc = 1;
 
 					int ox1 = fx;
 					int ox2 = fx;
@@ -148,14 +144,14 @@ public sealed class RadialBlurEffect : BaseEffect
 	public sealed class RadialBlurData : EffectData
 	{
 		[Caption ("Angle")]
-		public Double Angle = 2;
+		public Double Angle { get; set; } = 2;
 
 		[Caption ("Offset")]
-		public PointD Offset = new (0, 0);
+		public PointD Offset { get; set; } = new (0, 0);
 
 		[Caption ("Quality"), MinimumValue (1), MaximumValue (5)]
 		[Hint ("Use low quality for previews, small images, and small angles.  Use high quality for final quality, large images, and large angles.")]
-		public int Quality = 2;
+		public int Quality { get; set; } = 2;
 
 		[Skip]
 		public override bool IsDefault => Angle == 0;

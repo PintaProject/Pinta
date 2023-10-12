@@ -25,7 +25,6 @@
 // THE SOFTWARE.
 
 using System;
-using System.Diagnostics.CodeAnalysis;
 using Gtk;
 using Pinta.Core;
 
@@ -33,8 +32,8 @@ namespace Pinta;
 
 public sealed class ProgressDialog : Dialog, IProgressDialog
 {
-	private Label label;
-	private ProgressBar progress_bar;
+	private readonly Label label;
+	private readonly ProgressBar progress_bar;
 	uint timeout_id;
 
 	public ProgressDialog ()
@@ -44,7 +43,22 @@ public sealed class ProgressDialog : Dialog, IProgressDialog
 
 		OnResponse += (_, args) => Canceled?.Invoke (this, EventArgs.Empty);
 
-		this.Build ();
+		var content_area = this.GetContentAreaBox ();
+		content_area.Spacing = 6;
+		content_area.SetAllMargins (2);
+
+		label = new Label ();
+		content_area.Append (label);
+
+		progress_bar = new ProgressBar ();
+		content_area.Append (progress_bar);
+
+		// TODO-GTK4 - can this use the translations from GTK?
+		AddButton ("_Cancel", (int) ResponseType.Cancel);
+
+		DefaultWidth = 400;
+		DefaultHeight = 114;
+
 		timeout_id = 0;
 		Hide ();
 	}
@@ -80,25 +94,5 @@ public sealed class ProgressDialog : Dialog, IProgressDialog
 		if (timeout_id != 0)
 			GLib.Source.Remove (timeout_id);
 		this.Hide ();
-	}
-
-	[MemberNotNull (nameof (label), nameof (progress_bar))]
-	private void Build ()
-	{
-		var content_area = this.GetContentAreaBox ();
-		content_area.Spacing = 6;
-		content_area.SetAllMargins (2);
-
-		label = new Label ();
-		content_area.Append (label);
-
-		progress_bar = new ProgressBar ();
-		content_area.Append (progress_bar);
-
-		// TODO-GTK4 - can this use the translations from GTK?
-		AddButton ("_Cancel", (int) ResponseType.Cancel);
-
-		DefaultWidth = 400;
-		DefaultHeight = 114;
 	}
 }

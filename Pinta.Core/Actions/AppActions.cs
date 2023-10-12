@@ -59,8 +59,7 @@ public sealed class AppActions
 	#region Event Invokers
 	public void RaiseBeforeQuit ()
 	{
-		if (BeforeQuit != null)
-			BeforeQuit (this, EventArgs.Empty);
+		BeforeQuit?.Invoke (this, EventArgs.Empty);
 	}
 	#endregion
 }

@@ -18,6 +18,8 @@ public sealed class PixelateEffect : BaseEffect
 {
 	public override string Icon => Pinta.Resources.Icons.EffectsDistortPixelate;
 
+	public sealed override bool IsTileable => true;
+
 	public override string Name => Translations.GetString ("Pixelate");
 
 	public override bool IsConfigurable => true;
@@ -111,5 +113,5 @@ public sealed class PixelateEffect : BaseEffect
 public sealed class PixelateData : EffectData
 {
 	[Caption ("Cell Size"), MinimumValue (1), MaximumValue (100)]
-	public int CellSize = 2;
+	public int CellSize { get; set; } = 2;
 }

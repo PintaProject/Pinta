@@ -303,8 +303,7 @@ public sealed class DocumentWorkspace
 	#region Private Methods
 	private void OnCanvasInvalidated (CanvasInvalidatedEventArgs e)
 	{
-		if (CanvasInvalidated != null)
-			CanvasInvalidated (this, e);
+		CanvasInvalidated?.Invoke (this, e);
 	}
 
 	public void OnViewSizeChanged ()
@@ -321,9 +320,8 @@ public sealed class DocumentWorkspace
 		if (zoomType == ZoomType.ZoomOut && (ViewSize.Width == 1 || ViewSize.Height == 1))
 			return; //Can't zoom in past a 1x1 px canvas
 
-		double zoom;
 
-		if (!ViewActions.TryParsePercent (PintaCore.Actions.View.ZoomComboBox.ComboBox.GetActiveText ()!, out zoom))
+		if (!ViewActions.TryParsePercent (PintaCore.Actions.View.ZoomComboBox.ComboBox.GetActiveText ()!, out var zoom))
 			zoom = Scale * 100;
 
 		zoom = Math.Min (zoom, 3600);
@@ -345,15 +343,17 @@ public sealed class DocumentWorkspace
 		var canvas_point = ViewPointToCanvas (center_point.Value);
 
 		if (zoomType == ZoomType.ZoomIn || zoomType == ZoomType.ZoomOut) {
+
 			int i = 0;
 
-			Predicate<string> UpdateZoomLevel = zoomInList => {
-				double zoom_level;
-				if (!ViewActions.TryParsePercent (zoomInList, out zoom_level))
+			bool UpdateZoomLevel (string zoomInList)
+			{
+				if (!ViewActions.TryParsePercent (zoomInList, out var zoom_level))
 					return false;
 
 				switch (zoomType) {
 					case ZoomType.ZoomIn:
+
 						if (zoomInList == Translations.GetString ("Window") || zoom_level <= zoom) {
 							PintaCore.Actions.View.ZoomComboBox.ComboBox.Active = i - 1;
 							return true;
@@ -362,6 +362,7 @@ public sealed class DocumentWorkspace
 						break;
 
 					case ZoomType.ZoomOut:
+
 						if (zoomInList == Translations.GetString ("Window"))
 							return true;
 
@@ -372,11 +373,11 @@ public sealed class DocumentWorkspace
 
 						break;
 				}
-
 				return false;
-			};
+			}
 
 			foreach (string item in PintaCore.Actions.View.ZoomCollection) {
+
 				if (UpdateZoomLevel (item))
 					break;
 

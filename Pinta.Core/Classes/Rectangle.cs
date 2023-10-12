@@ -28,12 +28,12 @@ using System;
 /// Replacements for Cairo / GDK rectangles that GtkSharp provided in the GTK3 build.
 namespace Pinta.Core;
 
-public record struct RectangleD
+public readonly record struct RectangleD
 {
-	public double X;
-	public double Y;
-	public double Width;
-	public double Height;
+	public readonly double X;
+	public readonly double Y;
+	public readonly double Width;
+	public readonly double Height;
 
 	public RectangleD (double x, double y, double width, double height)
 	{
@@ -74,19 +74,13 @@ public record struct RectangleD
 	public readonly PointD Location () => new (X, Y);
 	public readonly PointD GetCenter () => new (X + 0.5 * Width, Y + 0.5 * Height);
 
-	public void Inflate (double width, double height)
-	{
-		X -= width;
-		Y -= height;
-		Width += width * 2;
-		Height += height * 2;
-	}
-
 	public readonly RectangleD Inflated (double width, double height)
 	{
-		RectangleD copy = this;
-		copy.Inflate (width, height);
-		return copy;
+		var newX = X - width;
+		var newY = Y - height;
+		var newWidth = Width + (width * 2);
+		var newHeight = Height + (height * 2);
+		return new (newX, newY, newWidth, newHeight);
 	}
 
 	public readonly RectangleD Clamp ()
@@ -110,21 +104,8 @@ public record struct RectangleD
 	}
 }
 
-public record struct RectangleI
+public readonly record struct RectangleI (int X, int Y, int Width, int Height)
 {
-	public int X;
-	public int Y;
-	public int Width;
-	public int Height;
-
-	public RectangleI (int x, int y, int width, int height)
-	{
-		this.X = x;
-		this.Y = y;
-		this.Width = width;
-		this.Height = height;
-	}
-
 	public RectangleI (in PointI point, int width, int height)
 		: this (point.X, point.Y, width, height)
 	{
@@ -187,12 +168,13 @@ public record struct RectangleI
 		return FromLTRB (left, top, right, bottom);
 	}
 
-	public void Inflate (int width, int height)
+	public readonly RectangleI Inflated (int width, int height)
 	{
-		X -= width;
-		Y -= height;
-		Width += width * 2;
-		Height += height * 2;
+		var newX = X - width;
+		var newY = Y - height;
+		var newWidth = Width + (width * 2);
+		var newHeight = Height + (height * 2);
+		return new (newX, newY, newWidth, newHeight);
 	}
 }
 

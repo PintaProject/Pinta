@@ -38,7 +38,7 @@ public sealed class TextHistoryItem : BaseHistoryItem
 	readonly SurfaceDiff? user_surface_diff;
 	ImageSurface? user_surface;
 
-	TextEngine t_engine;
+	TextEngine text_engine;
 	RectangleI text_bounds;
 
 	/// <summary>
@@ -71,9 +71,9 @@ public sealed class TextHistoryItem : BaseHistoryItem
 		}
 
 
-		t_engine = passedTextEngine;
+		text_engine = passedTextEngine;
 
-		text_bounds = new RectangleI (user_layer.textBounds.X, user_layer.textBounds.Y, user_layer.textBounds.Width, user_layer.textBounds.Height);
+		text_bounds = new RectangleI (user_layer.TextBounds.X, user_layer.TextBounds.Y, user_layer.TextBounds.Width, user_layer.TextBounds.Height);
 	}
 
 	public override void Undo ()
@@ -126,15 +126,15 @@ public sealed class TextHistoryItem : BaseHistoryItem
 
 
 		//Store the old text data temporarily.
-		TextEngine oldTEngine = t_engine;
+		TextEngine oldTextEngine = text_engine;
 		RectangleI oldTextBounds = text_bounds;
 
 		//Swap half of the data.
-		t_engine = user_layer.tEngine;
-		text_bounds = user_layer.textBounds;
+		text_engine = user_layer.TextEngine;
+		text_bounds = user_layer.TextBounds;
 
 		//Swap the other half.
-		user_layer.tEngine = oldTEngine;
-		user_layer.textBounds = oldTextBounds;
+		user_layer.TextEngine = oldTextEngine;
+		user_layer.TextBounds = oldTextBounds;
 	}
 }

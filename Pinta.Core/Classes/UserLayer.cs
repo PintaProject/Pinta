@@ -25,7 +25,7 @@
 // THE SOFTWARE.
 
 using System;
-using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using Cairo;
 
 namespace Pinta.Core;
@@ -37,8 +37,8 @@ namespace Pinta.Core;
 public sealed class UserLayer : Layer
 {
 	//Special layers to be drawn on to keep things editable by drawing them separately from the UserLayers.
-	public List<ReEditableLayer> ReEditableLayers = new ();
-	public ReEditableLayer TextLayer;
+	internal Collection<ReEditableLayer> ReEditableLayers { get; } = new ();
+	public ReEditableLayer TextLayer { get; }
 
 	//Call the base class constructor and setup the engines.
 	public UserLayer (ImageSurface surface) : this (surface, false, 1f, "")
@@ -48,16 +48,16 @@ public sealed class UserLayer : Layer
 	//Call the base class constructor and setup the engines.
 	public UserLayer (ImageSurface surface, bool hidden, double opacity, string name) : base (surface, hidden, opacity, name)
 	{
-		tEngine = new TextEngine ();
+		TextEngine = new TextEngine ();
 		TextLayer = new ReEditableLayer (this);
 	}
 
 	//Stores most of the editable text's data, including the text itself.
-	public TextEngine tEngine;
+	public TextEngine TextEngine { get; internal set; }
 
 	//Rectangular boundary surrounding the editable text.
-	public RectangleI textBounds = RectangleI.Zero;
-	public RectangleI previousTextBounds = RectangleI.Zero;
+	public RectangleI TextBounds { get; set; } = RectangleI.Zero;
+	public RectangleI PreviousTextBounds { get; set; } = RectangleI.Zero;
 
 	public override void ApplyTransform (Matrix xform, Size old_size, Size new_size)
 	{

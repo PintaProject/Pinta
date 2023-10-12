@@ -6,20 +6,21 @@
 /////////////////////////////////////////////////////////////////////////////////
 
 using System.Collections.Generic;
+using System.Collections.Immutable;
 
 namespace Pinta.Core;
 
 public sealed class SplineInterpolator
 {
 	private readonly SortedList<double, double> points = new ();
-	private double[]? y2;
+	private ImmutableArray<double> y2;
 
 	public int Count => this.points.Count;
 
 	public void Add (double x, double y)
 	{
 		points[x] = y;
-		this.y2 = null;
+		this.y2 = default;
 	}
 
 	public void Clear ()
@@ -33,7 +34,8 @@ public sealed class SplineInterpolator
 
 	public double Interpolate (double x)
 	{
-		y2 ??= PreCompute ();
+		if (y2.IsDefault)
+			y2 = PreCompute ();
 
 		IList<double> xa = this.points.Keys;
 		IList<double> ya = this.points.Values;
@@ -59,17 +61,18 @@ public sealed class SplineInterpolator
 
 		// Cubic spline polynomial is now evaluated.
 		return a * ya[klo] + b * ya[khi] +
-		    ((a * a * a - a) * y2![klo] + (b * b * b - b) * y2[khi]) * (h * h) / 6.0; // NRT - y2 is set above by PreCompute ()
+		    ((a * a * a - a) * y2[klo] + (b * b * b - b) * y2[khi]) * (h * h) / 6.0; // NRT - y2 is set above by PreCompute ()
 	}
 
-	private double[] PreCompute ()
+	private ImmutableArray<double> PreCompute ()
 	{
 		int n = points.Count;
 		double[] u = new double[n];
 		IList<double> xa = points.Keys;
 		IList<double> ya = points.Values;
 
-		var resultingY2 = new double[n];
+		var resultingY2 = ImmutableArray.CreateBuilder<double> (n);
+		resultingY2.Count = n;
 
 		u[0] = 0;
 		resultingY2[0] = 0;
@@ -97,7 +100,7 @@ public sealed class SplineInterpolator
 			resultingY2[i] = resultingY2[i] * resultingY2[i + 1] + u[i];
 		}
 
-		return resultingY2;
+		return resultingY2.MoveToImmutable ();
 	}
 }
 

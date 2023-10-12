@@ -42,7 +42,7 @@ public abstract class BaseEditEngine
 		OpenLineCurveSeries,
 		ClosedLineCurveSeries,
 		Ellipse,
-		RoundedLineSeries
+		RoundedLineSeries,
 	}
 
 	public static Dictionary<ShapeTypes, ShapeTool> CorrespondingTools = new ();
@@ -254,8 +254,8 @@ public abstract class BaseEditEngine
 			settings.PutSetting (FILL_TYPE_SETTING (toolPrefix), fill_button.SelectedIndex);
 		if (shape_type_button is not null)
 			settings.PutSetting (SHAPE_TYPE_SETTING (toolPrefix), shape_type_button.SelectedIndex);
-		if (dash_pattern_box?.comboBox is not null)
-			settings.PutSetting (DASH_PATTERN_SETTING (toolPrefix), dash_pattern_box.comboBox.ComboBox.GetActiveText ()!);
+		if (dash_pattern_box?.ComboBox is not null)
+			settings.PutSetting (DASH_PATTERN_SETTING (toolPrefix), dash_pattern_box.ComboBox.ComboBox.GetActiveText ()!);
 	}
 
 	public virtual void HandleBuildToolBar (Gtk.Box tb, ISettingsService settings, string toolPrefix)
@@ -283,8 +283,7 @@ public abstract class BaseEditEngine
 
 		tb.Append (brush_width);
 
-		if (fill_sep == null)
-			fill_sep = GtkExtensions.CreateToolBarSeparator ();
+		fill_sep ??= GtkExtensions.CreateToolBarSeparator ();
 
 		tb.Append (fill_sep);
 
@@ -308,8 +307,7 @@ public abstract class BaseEditEngine
 
 		tb.Append (fill_button);
 
-		if (shape_type_sep == null)
-			shape_type_sep = GtkExtensions.CreateToolBarSeparator ();
+		shape_type_sep ??= GtkExtensions.CreateToolBarSeparator ();
 
 		tb.Append (shape_type_sep);
 
@@ -335,26 +333,28 @@ public abstract class BaseEditEngine
 				ShapeEngine? selEngine = SelectedShapeEngine;
 
 				//Verify that the tool needs to be switched.
-				if (GetCorrespondingTool (newShapeType) != this.owner) {
-					//if shape is selected it will be converted to new shape and shape type will be changed, otherwise only shape type will be changed.
-					if (selEngine != null) {
-						//Create a new ShapesModifyHistoryItem so that the changing of the shape type can be undone.
-						PintaCore.Workspace.ActiveDocument.History.PushNewItem (new ShapesModifyHistoryItem (
-							this, owner.Icon, Translations.GetString ("Changed Shape Type")));
+				if (GetCorrespondingTool (newShapeType) == this.owner)
+					return;
 
-						//Clone the old shape; it should be automatically garbage-collected. newShapeType already has the updated value.
-						selEngine = selEngine.Convert (newShapeType, SelectedShapeIndex);
-
-						int previousSSI = SelectedShapeIndex;
-						ActivateCorrespondingTool (selEngine.ShapeType, true);
-						SelectedShapeIndex = previousSSI;
-						//Draw the updated shape with organized points generation (for mouse detection). 
-						DrawActiveShape (true, false, true, false, true);
-					} else {
-						ActivateCorrespondingTool (newShapeType, true);
-					}
-
+				if (selEngine == null) {
+					ActivateCorrespondingTool (newShapeType, true);
+					return;
 				}
+
+				//if shape is selected it will be converted to new shape and shape type will be changed, otherwise only shape type will be changed.
+
+				//Create a new ShapesModifyHistoryItem so that the changing of the shape type can be undone.
+				PintaCore.Workspace.ActiveDocument.History.PushNewItem (new ShapesModifyHistoryItem (
+					this, owner.Icon, Translations.GetString ("Changed Shape Type")));
+
+				//Clone the old shape; it should be automatically garbage-collected. newShapeType already has the updated value.
+				selEngine = selEngine.Convert (newShapeType, SelectedShapeIndex);
+
+				int previousSSI = SelectedShapeIndex;
+				ActivateCorrespondingTool (selEngine.ShapeType, true);
+				SelectedShapeIndex = previousSSI;
+				//Draw the updated shape with organized points generation (for mouse detection). 
+				DrawActiveShape (true, false, true, false, true);
 			};
 		}
 
@@ -459,182 +459,221 @@ public abstract class BaseEditEngine
 	public virtual bool HandleKeyDown (Document document, ToolKeyEventArgs e)
 	{
 		Gdk.Key keyPressed = e.Key;
-
-		if (keyPressed == Gdk.Key.Delete) {
-			if (SelectedPointIndex > -1) {
-				List<ControlPoint> controlPoints = SelectedShapeEngine!.ControlPoints; // NRT - Code assumes this is not-null
-
-				//Either delete a ControlPoint or an entire shape (if there's only 1 ControlPoint left).
-				if (controlPoints.Count > 1) {
-					//Create a new ShapesModifyHistoryItem so that the deletion of a control point can be undone.
-					PintaCore.Workspace.ActiveDocument.History.PushNewItem (
-						new ShapesModifyHistoryItem (this, owner.Icon, ShapeName + " " + Translations.GetString ("Point Deleted")));
-
-					//Delete the selected point from the shape.
-					controlPoints.RemoveAt (SelectedPointIndex);
-
-					//Set the newly selected point to be the median-most point on the shape, order-wise.
-					if (SelectedPointIndex > controlPoints.Count / 2) {
-						--SelectedPointIndex;
-					}
-				} else {
-					Document doc = PintaCore.Workspace.ActiveDocument;
-
-					//Create a new ShapesHistoryItem so that the deletion of a shape can be undone.
-					doc.History.PushNewItem (
-						new ShapesHistoryItem (this, owner.Icon, ShapeName + " " + Translations.GetString ("Deleted"),
-							doc.Layers.CurrentUserLayer.Surface.Clone (), doc.Layers.CurrentUserLayer, SelectedPointIndex, SelectedShapeIndex, false));
-
-
-					//Since the shape itself will be deleted, remove its ReEditableLayer from the drawing loop.
-
-					ReEditableLayer removeMe = SEngines.ElementAt (SelectedShapeIndex).DrawingLayer;
-
-					if (removeMe.InTheLoop) {
-						SEngines.ElementAt (SelectedShapeIndex).DrawingLayer.TryRemoveLayer ();
-					}
-
-
-					//Delete the selected shape.
-					SEngines.RemoveAt (SelectedShapeIndex);
-
-					//Redraw the workspace.
-					doc.Workspace.Invalidate ();
-
-					SelectedPointIndex = -1;
-					SelectedShapeIndex = -1;
+		switch (keyPressed) {
+			case Gdk.Key.Delete:
+				HandleDelete ();
+				return true;
+			case Gdk.Key.Return:
+			case Gdk.Key.KP_Enter:
+				FinalizeAllShapes ();
+				return true;
+			case Gdk.Key.space:
+				HandleSpace (e);
+				return true;
+			case Gdk.Key.Up:
+				HandleUp ();
+				return true;
+			case Gdk.Key.Down:
+				HandleDown ();
+				return true;
+			case Gdk.Key.Left:
+				HandleLeft (e);
+				return true;
+			case Gdk.Key.Right:
+				HandleRight (e);
+				return true;
+			default:
+				if (keyPressed.IsControlKey ()) {
+					// Redraw since the Ctrl key affects the hover cursor, etc
+					DrawActiveShape (false, false, true, e.IsShiftPressed, false, true);
+					return true;
 				}
-
-				DrawActiveShape (true, false, true, false, false);
-			}
-
-			return true;
-		} else if (keyPressed == Gdk.Key.Return || keyPressed == Gdk.Key.KP_Enter) {
-			//Finalize every editable shape not yet finalized.
-			FinalizeAllShapes ();
-
-			return true;
-		} else if (keyPressed == Gdk.Key.space) {
-			ControlPoint? selPoint = SelectedPoint;
-
-			if (selPoint != null) {
-				//This can be assumed not to be null since selPoint was not null.
-				ShapeEngine selEngine = SelectedShapeEngine!; // NRT - ^^
-
-				//Create a new ShapesModifyHistoryItem so that the adding of a control point can be undone.
-				PintaCore.Workspace.ActiveDocument.History.PushNewItem (
-							    new ShapesModifyHistoryItem (this, owner.Icon, ShapeName + " " + Translations.GetString ("Point Added")));
-
-
-				bool shiftKey = e.IsShiftPressed;
-				bool ctrlKey = e.IsControlPressed;
-
-				PointD newPointPos;
-
-				if (ctrlKey) {
-					//Ctrl + space combo: same position as currently selected point.
-					newPointPos = new PointD (selPoint.Position.X, selPoint.Position.Y);
-				} else {
-					shape_origin = new PointD (selPoint.Position.X, selPoint.Position.Y);
-
-					if (shiftKey) {
-						CalculateModifiedCurrentPoint ();
-					}
-
-					//Space only: position of mouse (after any potential shift alignment).
-					newPointPos = new PointD (current_point.X, current_point.Y);
-				}
-
-				//Place the new point on the outside-most end, order-wise.
-				if ((double) SelectedPointIndex < (double) selEngine.ControlPoints.Count / 2d) {
-					selEngine.ControlPoints.Insert (SelectedPointIndex,
-					    new ControlPoint (new PointD (newPointPos.X, newPointPos.Y), DefaultMidPointTension));
-				} else {
-					selEngine.ControlPoints.Insert (SelectedPointIndex + 1,
-					    new ControlPoint (new PointD (newPointPos.X, newPointPos.Y), DefaultMidPointTension));
-
-					++SelectedPointIndex;
-				}
-
-				DrawActiveShape (true, false, true, shiftKey, false, e.IsControlPressed);
-			}
-
-			return true;
-		} else if (keyPressed == Gdk.Key.Up) {
-			//Make sure a control point is selected.
-			if (SelectedPointIndex > -1) {
-				//Move the selected control point.
-				SelectedPoint!.Position.Y -= 1d; // NRT - Checked by SelectedPointIndex
-
-				DrawActiveShape (true, false, true, false, false);
-			}
-
-			return true;
-		} else if (keyPressed == Gdk.Key.Down) {
-			//Make sure a control point is selected.
-			if (SelectedPointIndex > -1) {
-				//Move the selected control point.
-				SelectedPoint!.Position.Y += 1d; // NRT - Checked by SelectedPointIndex
-
-				DrawActiveShape (true, false, true, false, false);
-			}
-
-			return true;
-		} else if (keyPressed == Gdk.Key.Left) {
-			//Make sure a control point is selected.
-			if (SelectedPointIndex > -1) {
-				if (e.IsControlPressed) {
-					//Change the selected control point to be the previous one.
-
-					--SelectedPointIndex;
-
-					if (SelectedPointIndex < 0) {
-						ShapeEngine? activeEngine = ActiveShapeEngine;
-
-						if (activeEngine != null) {
-							SelectedPointIndex = activeEngine.ControlPoints.Count - 1;
-						}
-					}
-				} else {
-					//Move the selected control point.
-					SelectedPoint!.Position.X -= 1d; // NRT - Checked by SelectedPointIndex
-				}
-
-				DrawActiveShape (true, false, true, false, false);
-			}
-
-			return true;
-		} else if (keyPressed == Gdk.Key.Right) {
-			//Make sure a control point is selected.
-			if (SelectedPointIndex > -1) {
-				if (e.IsControlPressed) {
-					//Change the selected control point to be the following one.
-
-					ShapeEngine? activeEngine = ActiveShapeEngine;
-
-					if (activeEngine != null) {
-						++SelectedPointIndex;
-
-						if (SelectedPointIndex > activeEngine.ControlPoints.Count - 1) {
-							SelectedPointIndex = 0;
-						}
-					}
-				} else {
-					//Move the selected control point.
-					SelectedPoint!.Position.X += 1d; // NRT - Checked by SelectedPointIndex
-				}
-
-				DrawActiveShape (true, false, true, false, false);
-			}
-
-			return true;
-		} else if (keyPressed.IsControlKey ()) {
-			// Redraw since the Ctrl key affects the hover cursor, etc
-			DrawActiveShape (false, false, true, e.IsShiftPressed, false, true);
-			return true;
-		} else {
-			return false;
+				break;
 		}
+		return false;
+	}
+
+	private void HandleRight (ToolKeyEventArgs e)
+	{
+		//Make sure a control point is selected.
+
+		if (SelectedPointIndex < 0)
+			return;
+
+		if (e.IsControlPressed) {
+			//Change the selected control point to be the following one.
+
+			ShapeEngine? activeEngine = ActiveShapeEngine;
+
+			if (activeEngine != null) {
+				++SelectedPointIndex;
+
+				if (SelectedPointIndex > activeEngine.ControlPoints.Count - 1) {
+					SelectedPointIndex = 0;
+				}
+			}
+		} else {
+			//Move the selected control point.
+			var originalPosition = SelectedPoint!.Position; // NRT - Checked by SelectedPointIndex
+			SelectedPoint.Position = originalPosition with { X = originalPosition.X + 1d };
+		}
+
+		DrawActiveShape (true, false, true, false, false);
+	}
+
+	private void HandleLeft (ToolKeyEventArgs e)
+	{
+		//Make sure a control point is selected.
+
+		if (SelectedPointIndex < 0)
+			return;
+
+		if (e.IsControlPressed) {
+			//Change the selected control point to be the previous one.
+
+			--SelectedPointIndex;
+
+			if (SelectedPointIndex < 0) {
+				ShapeEngine? activeEngine = ActiveShapeEngine;
+
+				if (activeEngine != null) {
+					SelectedPointIndex = activeEngine.ControlPoints.Count - 1;
+				}
+			}
+		} else {
+			//Move the selected control point.
+			var originalPosition = SelectedPoint!.Position; // NRT - Checked by SelectedPointIndex
+			SelectedPoint.Position = originalPosition with { X = originalPosition.X - 1d };
+		}
+
+		DrawActiveShape (true, false, true, false, false);
+	}
+
+	private void HandleDown ()
+	{
+		//Make sure a control point is selected.
+
+		if (SelectedPointIndex < 0)
+			return;
+
+		//Move the selected control point.
+		var originalPosition = SelectedPoint!.Position; // NRT - Checked by SelectedPointIndex
+		SelectedPoint.Position = originalPosition with { Y = originalPosition.Y + 1d };
+
+		DrawActiveShape (true, false, true, false, false);
+	}
+
+	private void HandleUp ()
+	{
+		//Make sure a control point is selected.
+
+		if (SelectedPointIndex < 0)
+			return;
+
+		//Move the selected control point.
+		var originalPosition = SelectedPoint!.Position; // NRT - Checked by SelectedPointIndex
+		SelectedPoint.Position = originalPosition with { Y = originalPosition.Y - 1d };
+
+		DrawActiveShape (true, false, true, false, false);
+	}
+
+	private void HandleSpace (ToolKeyEventArgs e)
+	{
+		ControlPoint? selPoint = SelectedPoint;
+
+		if (selPoint == null)
+			return;
+
+		//This can be assumed not to be null since selPoint was not null.
+		ShapeEngine selEngine = SelectedShapeEngine!; // NRT - ^^
+
+		//Create a new ShapesModifyHistoryItem so that the adding of a control point can be undone.
+		PintaCore.Workspace.ActiveDocument.History.PushNewItem (
+					    new ShapesModifyHistoryItem (this, owner.Icon, ShapeName + " " + Translations.GetString ("Point Added")));
+
+
+		bool shiftKey = e.IsShiftPressed;
+		bool ctrlKey = e.IsControlPressed;
+
+		PointD newPointPos;
+
+		if (ctrlKey) {
+			//Ctrl + space combo: same position as currently selected point.
+			newPointPos = new PointD (selPoint.Position.X, selPoint.Position.Y);
+		} else {
+			shape_origin = new PointD (selPoint.Position.X, selPoint.Position.Y);
+
+			if (shiftKey) {
+				CalculateModifiedCurrentPoint ();
+			}
+
+			//Space only: position of mouse (after any potential shift alignment).
+			newPointPos = new PointD (current_point.X, current_point.Y);
+		}
+
+		//Place the new point on the outside-most end, order-wise.
+		if ((double) SelectedPointIndex < (double) selEngine.ControlPoints.Count / 2d) {
+			selEngine.ControlPoints.Insert (SelectedPointIndex,
+			    new ControlPoint (new PointD (newPointPos.X, newPointPos.Y), DefaultMidPointTension));
+		} else {
+			selEngine.ControlPoints.Insert (SelectedPointIndex + 1,
+			    new ControlPoint (new PointD (newPointPos.X, newPointPos.Y), DefaultMidPointTension));
+
+			++SelectedPointIndex;
+		}
+
+		DrawActiveShape (true, false, true, shiftKey, false, e.IsControlPressed);
+	}
+
+	private void HandleDelete ()
+	{
+		if (SelectedPointIndex < 0)
+			return;
+
+		List<ControlPoint> controlPoints = SelectedShapeEngine!.ControlPoints; // NRT - Code assumes this is not-null
+
+		//Either delete a ControlPoint or an entire shape (if there's only 1 ControlPoint left).
+		if (controlPoints.Count > 1) {
+			//Create a new ShapesModifyHistoryItem so that the deletion of a control point can be undone.
+			PintaCore.Workspace.ActiveDocument.History.PushNewItem (
+				new ShapesModifyHistoryItem (this, owner.Icon, ShapeName + " " + Translations.GetString ("Point Deleted")));
+
+			//Delete the selected point from the shape.
+			controlPoints.RemoveAt (SelectedPointIndex);
+
+			//Set the newly selected point to be the median-most point on the shape, order-wise.
+			if (SelectedPointIndex > controlPoints.Count / 2) {
+				--SelectedPointIndex;
+			}
+		} else {
+			Document doc = PintaCore.Workspace.ActiveDocument;
+
+			//Create a new ShapesHistoryItem so that the deletion of a shape can be undone.
+			doc.History.PushNewItem (
+				new ShapesHistoryItem (this, owner.Icon, ShapeName + " " + Translations.GetString ("Deleted"),
+					doc.Layers.CurrentUserLayer.Surface.Clone (), doc.Layers.CurrentUserLayer, SelectedPointIndex, SelectedShapeIndex, false));
+
+
+			//Since the shape itself will be deleted, remove its ReEditableLayer from the drawing loop.
+
+			ReEditableLayer removeMe = SEngines.ElementAt (SelectedShapeIndex).DrawingLayer;
+
+			if (removeMe.InTheLoop) {
+				SEngines.ElementAt (SelectedShapeIndex).DrawingLayer.TryRemoveLayer ();
+			}
+
+
+			//Delete the selected shape.
+			SEngines.RemoveAt (SelectedShapeIndex);
+
+			//Redraw the workspace.
+			doc.Workspace.Invalidate ();
+
+			SelectedPointIndex = -1;
+			SelectedShapeIndex = -1;
+		}
+
+		DrawActiveShape (true, false, true, false, false);
 	}
 
 	public virtual bool HandleKeyUp (Document document, ToolKeyEventArgs e)
@@ -690,19 +729,13 @@ public abstract class BaseEditEngine
 		bool ctrlKey = e.IsControlPressed;
 
 
-		int closestCPIndex, closestCPShapeIndex;
-		ControlPoint? closestControlPoint;
-		double closestCPDistance;
 
 		SEngines.FindClosestControlPoint (unclamped_point,
-			out closestCPShapeIndex, out closestCPIndex, out closestControlPoint, out closestCPDistance);
+			out var closestCPShapeIndex, out var closestCPIndex, out var closestControlPoint, out var closestCPDistance);
 
-		int closestShapeIndex, closestPointIndex;
-		PointD? closestPoint;
-		double closestDistance;
 
 		OrganizedPointCollection.FindClosestPoint (SEngines, unclamped_point,
-		    out closestShapeIndex, out closestPointIndex, out closestPoint, out closestDistance);
+		    out var closestShapeIndex, out var closestPointIndex, out var closestPoint, out var closestDistance);
 
 		bool clicked_control_point = false;
 		bool clicked_generated_point = false;
@@ -902,9 +935,8 @@ public abstract class BaseEditEngine
 					//Calculate the midpoint in between the previous and following points.
 					PointD midPoint = new PointD ((prevPoint.X + nextPoint.X) / 2d, (prevPoint.Y + nextPoint.Y) / 2d);
 
-					double xChange = 0d, yChange = 0d;
-
 					//Calculate the x change in the mouse position.
+					double xChange;
 					if (curPoint.X <= midPoint.X) {
 						xChange = current_point.X - last_mouse_pos.X;
 					} else {
@@ -912,6 +944,7 @@ public abstract class BaseEditEngine
 					}
 
 					//Calculate the y change in the mouse position.
+					double yChange;
 					if (curPoint.Y <= midPoint.Y) {
 						yChange = current_point.Y - last_mouse_pos.Y;
 					} else {
@@ -1191,11 +1224,8 @@ public abstract class BaseEditEngine
 		if (!changing_tension && draw_selection) {
 			var current_window_point = PintaCore.Workspace.CanvasPointToView (current_point);
 
-			int closestCPIndex, closestCPShapeIndex;
-			ControlPoint? closestControlPoint;
-			double closestCPDistance;
 			SEngines.FindClosestControlPoint (current_point,
-				out closestCPShapeIndex, out closestCPIndex, out closestControlPoint, out closestCPDistance);
+				out var closestCPShapeIndex, out var closestCPIndex, out var closestControlPoint, out var closestCPDistance);
 
 			// Check if the user is directly hovering over a control point.
 			if (closestControlPoint != null) {
@@ -1205,11 +1235,8 @@ public abstract class BaseEditEngine
 
 			// Otherwise, the user may be hovering over a generated point.
 			if (!hover_handle.Active) {
-				int closestShapeIndex, closestPointIndex;
-				PointD? closestPoint;
-				double closestDistance;
 				OrganizedPointCollection.FindClosestPoint (SEngines, current_point,
-					out closestShapeIndex, out closestPointIndex, out closestPoint, out closestDistance);
+					out var closestShapeIndex, out var closestPointIndex, out var closestPoint, out var closestDistance);
 
 				if (closestPoint.HasValue) {
 					hover_handle.CanvasPosition = closestPoint.Value;
@@ -1263,6 +1290,8 @@ public abstract class BaseEditEngine
 	/// </summary>
 	protected void FinalizeAllShapes ()
 	{
+		//Finalize every editable shape not yet finalized.
+
 		if (SEngines.Count == 0)
 			return;
 
@@ -1464,10 +1493,9 @@ public abstract class BaseEditEngine
 	/// <returns>The corresponding tool to the given shape type.</returns>
 	public static ShapeTool? GetCorrespondingTool (ShapeTypes shapeType)
 	{
-		ShapeTool? correspondingTool = null;
 
 		//Get the corresponding BaseTool reference to the shape type.
-		CorrespondingTools.TryGetValue (shapeType, out correspondingTool);
+		CorrespondingTools.TryGetValue (shapeType, out var correspondingTool);
 
 		return correspondingTool;
 	}
@@ -1479,19 +1507,17 @@ public abstract class BaseEditEngine
 	/// <param name="engine"></param>
 	public virtual void UpdateToolbarSettings (ShapeEngine engine)
 	{
-		if (engine != null) {
-			owner.UseAntialiasing = engine.AntiAliasing;
+		owner.UseAntialiasing = engine.AntiAliasing;
 
-			//Update the DashPatternBox to represent the current shape's DashPattern.
-			dash_pattern_box.comboBox!.ComboBox.GetEntry ().SetText (engine.DashPattern); // NRT - Code assumes this is not-null
+		//Update the DashPatternBox to represent the current shape's DashPattern.
+		dash_pattern_box.ComboBox!.ComboBox.GetEntry ().SetText (engine.DashPattern); // NRT - Code assumes this is not-null
 
-			OutlineColor = engine.OutlineColor;
-			FillColor = engine.FillColor;
+		OutlineColor = engine.OutlineColor;
+		FillColor = engine.FillColor;
 
-			BrushWidth = engine.BrushWidth;
+		BrushWidth = engine.BrushWidth;
 
-			StorePreviousSettings ();
-		}
+		StorePreviousSettings ();
 	}
 
 	/// <summary>
@@ -1499,9 +1525,7 @@ public abstract class BaseEditEngine
 	/// </summary>
 	protected virtual void RecallPreviousSettings ()
 	{
-		if (dash_pattern_box.comboBox != null) {
-			dash_pattern_box.comboBox.ComboBox.GetEntry ().SetText (prev_dash_pattern);
-		}
+		dash_pattern_box.ComboBox?.ComboBox.GetEntry ().SetText (prev_dash_pattern);
 
 		owner.UseAntialiasing = prev_antialiasing;
 		BrushWidth = prev_brush_width;
@@ -1512,8 +1536,8 @@ public abstract class BaseEditEngine
 	/// </summary>
 	protected virtual void StorePreviousSettings ()
 	{
-		if (dash_pattern_box.comboBox != null) {
-			prev_dash_pattern = dash_pattern_box.comboBox.ComboBox.GetEntry ().GetText ();
+		if (dash_pattern_box.ComboBox != null) {
+			prev_dash_pattern = dash_pattern_box.ComboBox.ComboBox.GetEntry ().GetText ();
 		}
 
 		prev_antialiasing = owner.UseAntialiasing;

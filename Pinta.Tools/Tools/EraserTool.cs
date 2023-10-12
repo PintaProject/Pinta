@@ -25,7 +25,6 @@
 // THE SOFTWARE.
 
 using System;
-using System.Diagnostics.CodeAnalysis;
 using Cairo;
 using Gtk;
 using Pinta.Core;
@@ -44,7 +43,7 @@ public sealed class EraserTool : BaseBrushTool
 	private EraserType eraser_type = EraserType.Normal;
 
 	private const int LUT_Resolution = 256;
-	private byte[][]? lut_factor;
+	private readonly Lazy<byte[,]> lazy_lut_factor = new (CreateLookupTable);
 
 	private const string ERASER_TYPE_SETTING = "eraser-erase-type";
 
@@ -118,26 +117,20 @@ public sealed class EraserTool : BaseBrushTool
 			settings.PutSetting (ERASER_TYPE_SETTING, type_combobox.ComboBox.Active);
 	}
 
-	[MemberNotNull (nameof (lut_factor))]
-	private void InitLookupTable ()
+	private static byte[,] CreateLookupTable ()
 	{
-		if (lut_factor is not null)
-			return;
-
-		lut_factor = new byte[LUT_Resolution + 1][];
-
-		for (var dy = 0; dy < LUT_Resolution + 1; dy++) {
-			lut_factor[dy] = new byte[LUT_Resolution + 1];
-
-			for (var dx = 0; dx < LUT_Resolution + 1; dx++) {
+		var arrayDimensions = LUT_Resolution + 1;
+		var result = new byte[arrayDimensions, arrayDimensions];
+		for (var dy = 0; dy < arrayDimensions; dy++) {
+			for (var dx = 0; dx < arrayDimensions; dx++) {
 				var d = Math.Sqrt (dx * dx + dy * dy) / LUT_Resolution;
-
 				if (d > 1.0)
-					lut_factor[dy][dx] = 255;
+					result[dy, dx] = 255;
 				else
-					lut_factor[dy][dx] = (byte) (255.0 - Math.Cos (Math.Sqrt (d) * Math.PI / 2.0) * 255.0);
+					result[dy, dx] = (byte) (255.0 - Math.Cos (Math.Sqrt (d) * Math.PI / 2.0) * 255.0);
 			}
 		}
+		return result;
 	}
 
 	private static ImageSurface CopySurfacePart (ImageSurface surf, RectangleI dest_rect)
@@ -200,7 +193,7 @@ public sealed class EraserTool : BaseBrushTool
 		var num_steps = (int) start.Distance (end) / rad + 1;
 
 		// Initialize lookup table when first used (to prevent slower startup of the application)
-		InitLookupTable ();
+		var lut_factor = lazy_lut_factor.Value;
 
 		for (var step = 0; step < num_steps; step++) {
 			var pt = Utility.Lerp (start, end, (float) step / num_steps);
@@ -218,13 +211,11 @@ public sealed class EraserTool : BaseBrushTool
 			var tmp_data = tmp_surface.GetPixelData ();
 
 			for (var iy = dest_rect.Top; iy < dest_rect.Bottom; iy++) {
-				var srcRow = tmp_data.Slice (tmp_surface.Width * (iy - dest_rect.Top));
+				var srcRow = tmp_data[(tmp_surface.Width * (iy - dest_rect.Top))..];
 				var dy = ((iy - y) * LUT_Resolution) / rad;
 
 				if (dy < 0)
 					dy = -dy;
-
-				var lut_factor_row = lut_factor[dy];
 
 				for (var ix = dest_rect.Left; ix < dest_rect.Right; ix++) {
 					ref ColorBgra col = ref srcRow[ix - dest_rect.Left];
@@ -233,19 +224,23 @@ public sealed class EraserTool : BaseBrushTool
 					if (dx < 0)
 						dx = -dx;
 
-					var force = lut_factor_row[dx];
+					var force = lut_factor[dy, dx];
 
 					// Note: premultiplied alpha is used!
 					if (mouse_button == MouseButton.Right) {
-						col.A = (byte) ((col.A * force + bk_col_a * (255 - force)) / 255);
-						col.R = (byte) ((col.R * force + bk_col_r * (255 - force)) / 255);
-						col.G = (byte) ((col.G * force + bk_col_g * (255 - force)) / 255);
-						col.B = (byte) ((col.B * force + bk_col_b * (255 - force)) / 255);
+						col = ColorBgra.FromBgra (
+							b: (byte) ((col.B * force + bk_col_b * (255 - force)) / 255),
+							g: (byte) ((col.G * force + bk_col_g * (255 - force)) / 255),
+							r: (byte) ((col.R * force + bk_col_r * (255 - force)) / 255),
+							a: (byte) ((col.A * force + bk_col_a * (255 - force)) / 255)
+						);
 					} else {
-						col.A = (byte) (col.A * force / 255);
-						col.R = (byte) (col.R * force / 255);
-						col.G = (byte) (col.G * force / 255);
-						col.B = (byte) (col.B * force / 255);
+						col = ColorBgra.FromBgra (
+							b: (byte) (col.B * force / 255),
+							g: (byte) (col.G * force / 255),
+							r: (byte) (col.R * force / 255),
+							a: (byte) (col.A * force / 255)
+						);
 					}
 				}
 			}

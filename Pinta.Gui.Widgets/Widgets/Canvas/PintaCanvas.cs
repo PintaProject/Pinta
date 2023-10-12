@@ -24,7 +24,6 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 // THE SOFTWARE.
 
-using System;
 using System.Collections.Generic;
 using System.Linq;
 using Gtk;
@@ -51,12 +50,10 @@ public sealed class PintaCanvas : DrawingArea
 		cr = new CanvasRenderer (true, true);
 
 		// Keep the widget the same size as the canvas
-		document.Workspace.ViewSizeChanged += delegate (object? sender, EventArgs e) {
-			SetRequisition (document.Workspace.ViewSize);
-		};
+		document.Workspace.ViewSizeChanged += (_, _) => SetRequisition (document.Workspace.ViewSize);
 
 		// Update the canvas when the image changes
-		document.Workspace.CanvasInvalidated += delegate (object? sender, CanvasInvalidatedEventArgs e) {
+		document.Workspace.CanvasInvalidated += (_, _) => {
 			// If GTK+ hasn't created the canvas window yet, no need to invalidate it
 			if (!GetRealized ())
 				return;
@@ -93,12 +90,12 @@ public sealed class PintaCanvas : DrawingArea
 			var window_point = new PointD (args.X, args.Y);
 			var canvas_point = document.Workspace.ViewPointToCanvas (window_point);
 
-			var tool_args = new ToolMouseEventArgs () {
+			var tool_args = new ToolMouseEventArgs {
 				State = click_controller.GetCurrentEventState (),
 				MouseButton = click_controller.GetCurrentMouseButton (),
 				PointDouble = canvas_point,
 				WindowPoint = window_point,
-				RootPoint = CanvasWindow.WindowMousePosition
+				RootPoint = CanvasWindow.WindowMousePosition,
 			};
 
 			PintaCore.Tools.DoMouseDown (document, tool_args);
@@ -108,12 +105,12 @@ public sealed class PintaCanvas : DrawingArea
 			var window_point = new PointD (args.X, args.Y);
 			var canvas_point = document.Workspace.ViewPointToCanvas (window_point);
 
-			var tool_args = new ToolMouseEventArgs () {
+			var tool_args = new ToolMouseEventArgs {
 				State = click_controller.GetCurrentEventState (),
 				MouseButton = click_controller.GetCurrentMouseButton (),
 				PointDouble = canvas_point,
 				WindowPoint = window_point,
-				RootPoint = CanvasWindow.WindowMousePosition
+				RootPoint = CanvasWindow.WindowMousePosition,
 			};
 
 			PintaCore.Tools.DoMouseUp (document, tool_args);
@@ -131,12 +128,12 @@ public sealed class PintaCanvas : DrawingArea
 				PintaCore.Chrome.LastCanvasCursorPoint = canvas_point.ToInt ();
 
 			if (PintaCore.Tools.CurrentTool != null) {
-				var tool_args = new ToolMouseEventArgs () {
+				var tool_args = new ToolMouseEventArgs {
 					State = motion_controller.GetCurrentEventState (),
 					MouseButton = MouseButton.None,
 					PointDouble = canvas_point,
 					WindowPoint = window_point,
-					RootPoint = CanvasWindow.WindowMousePosition
+					RootPoint = CanvasWindow.WindowMousePosition,
 				};
 
 				PintaCore.Tools.DoMouseMove (document, tool_args);
@@ -164,8 +161,7 @@ public sealed class PintaCanvas : DrawingArea
 		if (canvas_bounds.IsEmpty)
 			return;
 
-		canvas_bounds.X -= x;
-		canvas_bounds.Y -= y;
+		canvas_bounds = canvas_bounds with { X = canvas_bounds.X - x, Y = canvas_bounds.Y - y };
 
 		// Resize our offscreen surface to a surface the size of our drawing area
 		if (canvas == null || canvas.Width != canvas_bounds.Width || canvas.Height != canvas_bounds.Height) {
@@ -233,10 +229,10 @@ public sealed class PintaCanvas : DrawingArea
 	public bool DoKeyPressEvent (Gtk.EventControllerKey controller, Gtk.EventControllerKey.KeyPressedSignalArgs args)
 	{
 		// Give the current tool a chance to handle the key press
-		var tool_args = new ToolKeyEventArgs () {
+		var tool_args = new ToolKeyEventArgs {
 			Event = controller.GetCurrentEvent (),
 			Key = args.GetKey (),
-			State = args.State
+			State = args.State,
 		};
 
 		return PintaCore.Tools.DoKeyDown (document, tool_args);
@@ -244,10 +240,10 @@ public sealed class PintaCanvas : DrawingArea
 
 	public bool DoKeyReleaseEvent (Gtk.EventControllerKey controller, Gtk.EventControllerKey.KeyReleasedSignalArgs args)
 	{
-		var tool_args = new ToolKeyEventArgs () {
+		var tool_args = new ToolKeyEventArgs {
 			Event = controller.GetCurrentEvent (),
 			Key = args.GetKey (),
-			State = args.State
+			State = args.State,
 		};
 
 		return PintaCore.Tools.DoKeyUp (document, tool_args);

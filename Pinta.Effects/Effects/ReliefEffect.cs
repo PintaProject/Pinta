@@ -24,6 +24,8 @@ public sealed class ReliefEffect : ColorDifferenceEffect
 
 	public override bool IsConfigurable => true;
 
+	public sealed override bool IsTileable => true;
+
 	public override string EffectMenuCategory => Translations.GetString ("Stylize");
 
 	public override void LaunchConfiguration ()
@@ -78,5 +80,5 @@ public sealed class ReliefEffect : ColorDifferenceEffect
 public sealed class ReliefData : EffectData
 {
 	[Caption ("Angle")]
-	public double Angle = 45;
+	public double Angle { get; set; } = 45;
 }

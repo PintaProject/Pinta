@@ -46,8 +46,7 @@ public sealed class Palette
 
 	private void OnPaletteChanged ()
 	{
-		if (PaletteChanged != null)
-			PaletteChanged (this, EventArgs.Empty);
+		PaletteChanged?.Invoke (this, EventArgs.Empty);
 	}
 
 	public int Count => colors.Count;

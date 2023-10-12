@@ -206,75 +206,73 @@ public abstract class SelectTool : BaseTool
 	{
 		switch (handle) {
 			case 0:
-				shape_origin.X = x;
-				shape_origin.Y = y;
+				shape_origin = new (x, y);
 				if (shift_pressed) {
 					if (shape_end.X - shape_origin.X <= shape_end.Y - shape_origin.Y)
-						shape_origin.X = shape_end.X - shape_end.Y + shape_origin.Y;
+						shape_origin = shape_origin with { X = shape_end.X - shape_end.Y + shape_origin.Y };
 					else
-						shape_origin.Y = shape_end.Y - shape_end.X + shape_origin.X;
+						shape_origin = shape_origin with { Y = shape_end.Y - shape_end.X + shape_origin.X };
 				}
 				break;
 			case 1:
-				shape_origin.X = x;
-				shape_end.Y = y;
+				shape_origin = shape_origin with { X = x };
+				shape_end = shape_end with { Y = y };
 				if (shift_pressed) {
 					if (shape_end.X - shape_origin.X <= shape_end.Y - shape_origin.Y)
-						shape_origin.X = shape_end.X - shape_end.Y + shape_origin.Y;
+						shape_origin = shape_origin with { X = shape_end.X - shape_end.Y + shape_origin.Y };
 					else
-						shape_end.Y = shape_origin.Y + shape_end.X - shape_origin.X;
+						shape_end = shape_end with { Y = shape_origin.Y + shape_end.X - shape_origin.X };
 				}
 				break;
 			case 2:
-				shape_end.X = x;
-				shape_origin.Y = y;
+				shape_end = shape_end with { X = x };
+				shape_origin = shape_origin with { Y = y };
 				if (shift_pressed) {
 					if (shape_end.X - shape_origin.X <= shape_end.Y - shape_origin.Y)
-						shape_end.X = shape_origin.X + shape_end.Y - shape_origin.Y;
+						shape_end = shape_end with { X = shape_origin.X + shape_end.Y - shape_origin.Y };
 					else
-						shape_origin.Y = shape_end.Y - shape_end.X + shape_origin.X;
+						shape_origin = shape_origin with { Y = shape_end.Y - shape_end.X + shape_origin.X };
 				}
 				break;
 			case 3:
-				shape_end.X = x;
-				shape_end.Y = y;
+				shape_end = new (x, y);
 				if (shift_pressed) {
 					if (shape_end.X - shape_origin.X <= shape_end.Y - shape_origin.Y)
-						shape_end.X = shape_origin.X + shape_end.Y - shape_origin.Y;
+						shape_end = shape_end with { X = shape_origin.X + shape_end.Y - shape_origin.Y };
 					else
-						shape_end.Y = shape_origin.Y + shape_end.X - shape_origin.X;
+						shape_end = shape_end with { Y = shape_origin.Y + shape_end.X - shape_origin.X };
 				}
 				break;
 			case 4:
-				shape_origin.X = x;
+				shape_origin = shape_origin with { X = x };
 				if (shift_pressed) {
 					var d = shape_end.X - shape_origin.X;
-					shape_origin.Y = (shape_origin.Y + shape_end.Y - d) / 2;
-					shape_end.Y = (shape_origin.Y + shape_end.Y + d) / 2;
+					shape_origin = shape_origin with { Y = (shape_origin.Y + shape_end.Y - d) / 2 };
+					shape_end = shape_end with { Y = (shape_origin.Y + shape_end.Y + d) / 2 };
 				}
 				break;
 			case 5:
-				shape_origin.Y = y;
+				shape_origin = shape_origin with { Y = y };
 				if (shift_pressed) {
 					var d = shape_end.Y - shape_origin.Y;
-					shape_origin.X = (shape_origin.X + shape_end.X - d) / 2;
-					shape_end.X = (shape_origin.X + shape_end.X + d) / 2;
+					shape_origin = shape_origin with { X = (shape_origin.X + shape_end.X - d) / 2 };
+					shape_end = shape_end with { X = (shape_origin.X + shape_end.X + d) / 2 };
 				}
 				break;
 			case 6:
-				shape_end.X = x;
+				shape_end = shape_end with { X = x };
 				if (shift_pressed) {
 					var d = shape_end.X - shape_origin.X;
-					shape_origin.Y = (shape_origin.Y + shape_end.Y - d) / 2;
-					shape_end.Y = (shape_origin.Y + shape_end.Y + d) / 2;
+					shape_origin = shape_origin with { Y = (shape_origin.Y + shape_end.Y - d) / 2 };
+					shape_end = shape_end with { Y = (shape_origin.Y + shape_end.Y + d) / 2 };
 				}
 				break;
 			case 7:
-				shape_end.Y = y;
+				shape_end = shape_end with { Y = y };
 				if (shift_pressed) {
 					var d = shape_end.Y - shape_origin.Y;
-					shape_origin.X = (shape_origin.X + shape_end.X - d) / 2;
-					shape_end.X = (shape_origin.X + shape_end.X + d) / 2;
+					shape_origin = shape_origin with { X = (shape_origin.X + shape_end.X - d) / 2 };
+					shape_end = shape_end with { X = (shape_origin.X + shape_end.X + d) / 2 };
 				}
 				break;
 			default:
@@ -320,7 +318,7 @@ public abstract class SelectTool : BaseTool
 
 		// Figure out a bounding box for everything that was drawn, and add a bit of padding.
 		var dirty = rect.ToInt ();
-		dirty.Inflate (2, 2);
+		dirty = dirty.Inflated (2, 2);
 		return dirty;
 	}
 

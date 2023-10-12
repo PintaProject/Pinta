@@ -129,14 +129,17 @@ public sealed class MainWindow
 	{
 		var view = (DocumentViewContent) e.Item;
 
-		if (PintaCore.Workspace.OpenDocuments.IndexOf (view.Document) > -1) {
-			PintaCore.Workspace.SetActiveDocument (view.Document);
-			PintaCore.Actions.File.Close.Activate ();
+		if (PintaCore.Workspace.OpenDocuments.IndexOf (view.Document) < 0)
+			return;
 
-			// User must have canceled the close
-			if (PintaCore.Workspace.OpenDocuments.IndexOf (view.Document) > -1)
-				e.Cancel = true;
-		}
+		PintaCore.Workspace.SetActiveDocument (view.Document);
+		PintaCore.Actions.File.Close.Activate ();
+
+		if (PintaCore.Workspace.OpenDocuments.IndexOf (view.Document) < 0)
+			return;
+
+		// User must have canceled the close
+		e.Cancel = true;
 	}
 
 	private void DockNotebook_ActiveTabChanged (object? sender, EventArgs e)

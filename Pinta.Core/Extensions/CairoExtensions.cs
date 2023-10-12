@@ -708,8 +708,8 @@ namespace Pinta.Core
 		public static void TranslatePointsInPlace (this Span<PointI> points, int dx, int dy)
 		{
 			for (int i = 0; i < points.Length; ++i) {
-				points[i].X += dx;
-				points[i].Y += dy;
+				var original = points[i];
+				points[i] = new (original.X + dx, original.Y + dy);
 			}
 		}
 
@@ -881,19 +881,19 @@ namespace Pinta.Core
 			return scans.MoveToImmutable ();
 		}
 
-		public static Path CreatePolygonPath (this Context g, PointI[][] polygonSet)
+		public static Path CreatePolygonPath (this Context g, IReadOnlyList<IReadOnlyList<PointI>> polygonSet)
 		{
 			g.Save ();
 			PointI p;
 
-			for (int i = 0; i < polygonSet.Length; i++) {
-				if (polygonSet[i].Length == 0)
+			for (int i = 0; i < polygonSet.Count; i++) {
+				if (polygonSet[i].Count == 0)
 					continue;
 
 				p = polygonSet[i][0];
 				g.MoveTo (p.X, p.Y);
 
-				for (int j = 1; j < polygonSet[i].Length; j++) {
+				for (int j = 1; j < polygonSet[i].Count; j++) {
 					p = polygonSet[i][j];
 					g.LineTo (p.X, p.Y);
 				}
@@ -1073,7 +1073,7 @@ namespace Pinta.Core
 			var y2 = Math.Max (a.Y, b.Y);
 
 			var rect = new RectangleI (x1, y1, x2 - x1, y2 - y1);
-			rect.Inflate (inflate, inflate);
+			rect = rect.Inflated (inflate, inflate);
 
 			return rect;
 		}
@@ -1517,7 +1517,10 @@ namespace Pinta.Core
 
 		public static void TransformPoint (this Matrix m, ref Core.PointD p)
 		{
-			m.TransformPoint (ref p.X, ref p.Y);
+			var newX = p.X;
+			var newY = p.Y;
+			m.TransformPoint (ref newX, ref newY);
+			p = new Core.PointD (newX, newY);
 		}
 
 		/// <summary>

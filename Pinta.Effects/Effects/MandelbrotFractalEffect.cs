@@ -18,6 +18,8 @@ public sealed class MandelbrotFractalEffect : BaseEffect
 {
 	public override string Icon => Pinta.Resources.Icons.EffectsRenderMandelbrotFractal;
 
+	public sealed override bool IsTileable => true;
+
 	public override string Name => Translations.GetString ("Mandelbrot Fractal");
 
 	public override bool IsConfigurable => true;
@@ -53,97 +55,121 @@ public sealed class MandelbrotFractalEffect : BaseEffect
 		int c = 0;
 		double x = 0;
 		double y = 0;
-
 		while ((c * factor) < 1024 && ((x * x) + (y * y)) < Max) {
 			double t = x;
-
-			x = x * x - y * y + r;
-			y = 2 * t * y + i;
-
+			x = (x * x) - (y * y) + r;
+			y = (2 * t * y) + i;
 			++c;
 		}
+		return c - Math.Log ((y * y) + (x * x)) * inv_log_max;
+	}
 
-		return c - Math.Log (y * y + x * x) * inv_log_max;
+	private sealed record MandelbrotSettings (
+		int w,
+		int h,
+		double invH,
+		double invZoom,
+		double invQuality,
+		int count,
+		double invCount,
+		double angleTheta,
+		int factor,
+		double xOffset,
+		double yOffset);
+	private MandelbrotSettings CreateSettings (ImageSurface dst)
+	{
+		int h = dst.Height;
+		double zoom = 1 + zoom_factor * Data.Zoom;
+		int count = Data.Quality * Data.Quality + 1;
+
+		return new (
+
+			w: dst.Width,
+			h: h,
+
+			invH: 1.0 / h,
+			invZoom: 1.0 / zoom,
+
+			invQuality: 1.0 / (double) Data.Quality,
+
+			count: count,
+			invCount: 1.0 / (double) count,
+			angleTheta: (Data.Angle * 2 * Math.PI) / 360,
+
+			factor: Data.Factor,
+
+			xOffset: x_offset,
+			yOffset: y_offset
+		);
 	}
 
 	public override void Render (ImageSurface src, ImageSurface dst, ReadOnlySpan<RectangleI> rois)
 	{
-		int w = dst.Width;
-		int h = dst.Height;
-
-		double invH = 1.0 / h;
-		double zoom = 1 + zoom_factor * Data.Zoom;
-		double invZoom = 1.0 / zoom;
-
-		double invQuality = 1.0 / (double) Data.Quality;
-
-		int count = Data.Quality * Data.Quality + 1;
-		double invCount = 1.0 / (double) count;
-		double angleTheta = (Data.Angle * 2 * Math.PI) / 360;
+		MandelbrotSettings settings = CreateSettings (dst);
 
 		Span<ColorBgra> dst_data = dst.GetPixelData ();
-		int dst_width = dst.Width;
-
 		foreach (Core.RectangleI rect in rois) {
 			for (int y = rect.Top; y <= rect.Bottom; y++) {
-				var dst_row = dst_data.Slice (y * dst_width, dst_width);
-
+				var dst_row = dst_data.Slice (y * settings.w, settings.w);
 				for (int x = rect.Left; x <= rect.Right; x++) {
-					int r = 0;
-					int g = 0;
-					int b = 0;
-					int a = 0;
-
-					for (double i = 0; i < count; i++) {
-						double u = (2.0 * x - w + (i * invCount)) * invH;
-						double v = (2.0 * y - h + ((i * invQuality) % 1)) * invH;
-
-						double radius = Math.Sqrt ((u * u) + (v * v));
-						double radiusP = radius;
-						double theta = Math.Atan2 (v, u);
-						double thetaP = theta + angleTheta;
-
-						double uP = radiusP * Math.Cos (thetaP);
-						double vP = radiusP * Math.Sin (thetaP);
-
-						double m = Mandelbrot ((uP * invZoom) + this.x_offset, (vP * invZoom) + this.y_offset, Data.Factor);
-
-						double c = 64 + Data.Factor * m;
-
-						r += Utility.ClampToByte (c - 768);
-						g += Utility.ClampToByte (c - 512);
-						b += Utility.ClampToByte (c - 256);
-						a += Utility.ClampToByte (c - 0);
-					}
-
-					dst_row[x] = ColorBgra.FromBgra (Utility.ClampToByte (b / count), Utility.ClampToByte (g / count), Utility.ClampToByte (r / count), Utility.ClampToByte (a / count));
+					PointI target = new (x, y);
+					dst_row[x] = GetPixelColor (settings, target);
 				}
 			}
 		}
 
-		if (Data.InvertColors) {
+		if (Data.InvertColors)
 			invert_effect.Render (dst, dst, rois);
+	}
+
+	private static ColorBgra GetPixelColor (MandelbrotSettings settings, PointI target)
+	{
+		int r = 0;
+		int g = 0;
+		int b = 0;
+		int a = 0;
+		for (double i = 0; i < settings.count; i++) {
+			double u = (2.0 * target.X - settings.w + (i * settings.invCount)) * settings.invH;
+			double v = (2.0 * target.Y - settings.h + ((i * settings.invQuality) % 1)) * settings.invH;
+
+			double radius = Math.Sqrt ((u * u) + (v * v));
+			double radiusP = radius;
+			double theta = Math.Atan2 (v, u);
+			double thetaP = theta + settings.angleTheta;
+
+			double uP = radiusP * Math.Cos (thetaP);
+			double vP = radiusP * Math.Sin (thetaP);
+
+			double m = Mandelbrot ((uP * settings.invZoom) + settings.xOffset, (vP * settings.invZoom) + settings.yOffset, settings.factor);
+
+			double c = 64 + settings.factor * m;
+
+			r += Utility.ClampToByte (c - 768);
+			g += Utility.ClampToByte (c - 512);
+			b += Utility.ClampToByte (c - 256);
+			a += Utility.ClampToByte (c - 0);
 		}
+		return ColorBgra.FromBgra (Utility.ClampToByte (b / settings.count), Utility.ClampToByte (g / settings.count), Utility.ClampToByte (r / settings.count), Utility.ClampToByte (a / settings.count));
 	}
 	#endregion
 
 	public sealed class MandelbrotFractalData : EffectData
 	{
 		[Caption ("Factor"), MinimumValue (1), MaximumValue (10)]
-		public int Factor = 1;
+		public int Factor { get; set; } = 1;
 
 		[Caption ("Quality"), MinimumValue (1), MaximumValue (5)]
-		public int Quality = 2;
+		public int Quality { get; set; } = 2;
 
 		//TODO double
 		[Caption ("Zoom"), MinimumValue (0), MaximumValue (100)]
-		public int Zoom = 10;
+		public int Zoom { get; set; } = 10;
 
 		[Caption ("Angle")]
-		public double Angle = 0;
+		public double Angle { get; set; } = 0;
 
 		[Caption ("Invert Colors")]
-		public bool InvertColors = false;
+		public bool InvertColors { get; set; } = false;
 
 	}
 }

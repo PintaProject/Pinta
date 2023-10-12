@@ -201,8 +201,8 @@ public sealed class FreeformShapeTool : BaseBrushTool
 
 		if (fill_button is not null)
 			settings.PutSetting (FILL_TYPE_SETTING, fill_button.SelectedIndex);
-		if (dash_p_box?.comboBox is not null)
-			settings.PutSetting (DASH_PATTERN_SETTING, dash_p_box.comboBox.ComboBox.GetActiveText ()!);
+		if (dash_p_box?.ComboBox is not null)
+			settings.PutSetting (DASH_PATTERN_SETTING, dash_p_box.ComboBox.ComboBox.GetActiveText ()!);
 	}
 
 	private bool StrokeShape => FillDropDown.SelectedItem.GetTagOrDefault (0) % 2 == 0;

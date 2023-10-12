@@ -113,10 +113,11 @@ internal abstract class AsyncEffectRenderer
 		}
 	}
 
-	internal void Start (BaseEffect effect,
-			     Cairo.ImageSurface source,
-			     Cairo.ImageSurface dest,
-			     RectangleI renderBounds)
+	internal void Start (
+		BaseEffect effect,
+		Cairo.ImageSurface source,
+		Cairo.ImageSurface dest,
+		RectangleI renderBounds)
 	{
 		Debug.WriteLine ("AsyncEffectRenderer.Start ()");
 
@@ -151,7 +152,7 @@ internal abstract class AsyncEffectRenderer
 
 	protected abstract void OnUpdate (double progress, RectangleI updatedBounds);
 
-	protected abstract void OnCompletion (bool canceled, Exception[]? exceptions);
+	protected abstract void OnCompletion (bool canceled, Exception[] exceptions);
 
 	internal void Dispose ()
 	{
@@ -227,12 +228,9 @@ internal abstract class AsyncEffectRenderer
 	{
 		// Fetch the next tile index and render it.
 		for (; ; ) {
-
 			int tileIndex = Interlocked.Increment (ref current_tile);
-
 			if (tileIndex >= total_tiles || cancel_render_flag)
 				return;
-
 			RenderTile (renderId, threadId, tileIndex);
 		}
 	}
@@ -334,9 +332,9 @@ internal abstract class AsyncEffectRenderer
 
 	void HandleRenderCompletion ()
 	{
-		var exceptions = (render_exceptions == null || render_exceptions.Count == 0)
-				  ? null
-				  : render_exceptions.ToArray ();
+		var exceptions = (render_exceptions.Count == 0)
+				? Array.Empty<Exception> ()
+				: render_exceptions.ToArray ();
 
 		HandleTimerTick ();
 

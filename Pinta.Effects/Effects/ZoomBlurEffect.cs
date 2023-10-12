@@ -18,6 +18,8 @@ public sealed class ZoomBlurEffect : BaseEffect
 {
 	public override string Icon => Pinta.Resources.Icons.EffectsBlursZoomBlur;
 
+	public sealed override bool IsTileable => true;
+
 	public override string Name => Translations.GetString ("Zoom Blur");
 
 	public override bool IsConfigurable => true;
@@ -120,10 +122,10 @@ public sealed class ZoomBlurEffect : BaseEffect
 	public sealed class ZoomBlurData : EffectData
 	{
 		[Caption ("Amount"), MinimumValue (0), MaximumValue (100)]
-		public int Amount = 10;
+		public int Amount { get; set; } = 10;
 
 		[Caption ("Offset")]
-		public Core.PointI Offset = new (0, 0);
+		public Core.PointI Offset { get; set; } = new (0, 0);
 
 		[Skip]
 		public override bool IsDefault => Amount == 0;

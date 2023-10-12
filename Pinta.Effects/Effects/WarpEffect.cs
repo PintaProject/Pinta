@@ -8,6 +8,7 @@
 /////////////////////////////////////////////////////////////////////////////////
 
 using System;
+using System.Drawing;
 using Cairo;
 using Pinta.Core;
 using Pinta.Gui.Widgets;
@@ -18,23 +19,28 @@ public enum WarpEdgeBehavior
 {
 	[Caption ("Clamp")]
 	Clamp,
+
 	[Caption ("Wrap")]
 	Wrap,
+
 	[Caption ("Reflect")]
 	Reflect,
+
 	[Caption ("Primary")]
 	Primary,
+
 	[Caption ("Secondary")]
 	Secondary,
+
 	[Caption ("Transparent")]
 	Transparent,
+
 	[Caption ("Original")]
-	Original
+	Original,
 }
 
 public abstract class WarpEffect : BaseEffect
 {
-
 	public WarpData Data => (WarpData) EffectData!;
 
 	public WarpEffect ()
@@ -47,108 +53,101 @@ public abstract class WarpEffect : BaseEffect
 		EffectHelper.LaunchSimpleEffectDialog (this);
 	}
 
-	private double default_radius = 0;
-	private double default_radius_2 = 0;
-
-	protected double DefaultRadius => this.default_radius;
-	protected double DefaultRadius2 => this.default_radius_2;
+	protected double DefaultRadius { get; private set; } = 0;
+	protected double DefaultRadius2 { get; private set; } = 0;
 
 	#region Algorithm Code Ported From PDN
 	public override void Render (ImageSurface src, ImageSurface dst, ReadOnlySpan<RectangleI> rois)
 	{
-		var selection = PintaCore.LivePreview.RenderBounds;
-		this.default_radius = Math.Min (selection.Width, selection.Height) * 0.5;
-		this.default_radius_2 = this.default_radius * this.default_radius;
+		WarpSettings settings = CreateSettings ();
 
-		var x_center_offset = selection.Left + (selection.Width * (1.0 + Data.CenterOffset.X) * 0.5);
-		var y_center_offset = selection.Top + (selection.Height * (1.0 + Data.CenterOffset.Y) * 0.5);
+		this.DefaultRadius = Math.Min (settings.selection.Width, settings.selection.Height) * 0.5;
+		this.DefaultRadius2 = DefaultRadius * DefaultRadius;
 
-		ColorBgra colPrimary = PintaCore.Palette.PrimaryColor.ToColorBgra ();
-		ColorBgra colSecondary = PintaCore.Palette.SecondaryColor.ToColorBgra ();
-		ColorBgra colTransparent = ColorBgra.Transparent;
+		Span<PointD> aaPoints = stackalloc PointD[settings.aaSampleCount];
+		Utility.GetRgssOffsets (aaPoints, settings.aaSampleCount, Data.Quality);
 
-		int aaSampleCount = Data.Quality * Data.Quality;
-		Span<PointD> aaPoints = stackalloc PointD[aaSampleCount];
-		Utility.GetRgssOffsets (aaPoints, aaSampleCount, Data.Quality);
-		Span<ColorBgra> samples = stackalloc ColorBgra[aaSampleCount];
+		Span<ColorBgra> dst_data = dst.GetPixelData ();
+		ReadOnlySpan<ColorBgra> src_data = src.GetReadOnlyPixelData ();
 
-		var dst_data = dst.GetPixelData ();
-		int dst_width = dst.Width;
-		var src_data = src.GetReadOnlyPixelData ();
-		int src_width = src.Width;
-
-		foreach (Core.RectangleI rect in rois) {
-
+		foreach (RectangleI rect in rois) {
 			for (int y = rect.Top; y <= rect.Bottom; y++) {
-				var dst_row = dst_data.Slice (y * dst_width, dst_width);
-
-				double relativeY = y - y_center_offset;
-
+				var dst_row = dst_data.Slice (y * dst.Width, dst.Width);
+				double relativeY = y - settings.y_center_offset;
 				for (int x = rect.Left; x <= rect.Right; x++) {
-					double relativeX = x - x_center_offset;
-
-					int sampleCount = 0;
-
-					for (int p = 0; p < aaSampleCount; ++p) {
-
-						TransformData initialTd = new (
-							X: relativeX + aaPoints[p].X,
-							Y: relativeY - aaPoints[p].Y
-						);
-
-						TransformData td = InverseTransform (initialTd);
-
-						float sampleX = (float) (td.X + x_center_offset);
-						float sampleY = (float) (td.Y + y_center_offset);
-
-						ColorBgra sample = colPrimary;
-
-						if (IsOnSurface (src, sampleX, sampleY)) {
-							sample = src.GetBilinearSample (sampleX, sampleY);
-						} else {
-							switch (Data.EdgeBehavior) {
-								case WarpEdgeBehavior.Clamp:
-									sample = src.GetBilinearSampleClamped (sampleX, sampleY);
-									break;
-
-								case WarpEdgeBehavior.Wrap:
-									sample = src.GetBilinearSampleWrapped (sampleX, sampleY);
-									break;
-
-								case WarpEdgeBehavior.Reflect:
-									sample = src.GetBilinearSampleClamped (ReflectCoord (sampleX, src.Width), ReflectCoord (sampleY, src.Height));
-
-									break;
-
-								case WarpEdgeBehavior.Primary:
-									sample = colPrimary;
-									break;
-
-								case WarpEdgeBehavior.Secondary:
-									sample = colSecondary;
-									break;
-
-								case WarpEdgeBehavior.Transparent:
-									sample = colTransparent;
-									break;
-
-								case WarpEdgeBehavior.Original:
-									sample = src_data[y * src_width + x];
-									break;
-								default:
-
-									break;
-							}
-						}
-
-						samples[sampleCount] = sample;
-						++sampleCount;
-					}
-
-					dst_row[x] = ColorBgra.Blend (samples.Slice (0, sampleCount));
+					PointI target = new (x, y);
+					dst_row[x] = GetPixelColor (settings, src, src_data, aaPoints, relativeY, target);
 				}
 			}
 		}
+	}
+
+	private sealed record WarpSettings (
+		RectangleI selection,
+		double x_center_offset,
+		double y_center_offset,
+		ColorBgra colPrimary,
+		ColorBgra colSecondary,
+		ColorBgra colTransparent,
+		int aaSampleCount,
+		WarpEdgeBehavior edgeBehavior);
+	private WarpSettings CreateSettings ()
+	{
+		var selection = PintaCore.LivePreview.RenderBounds;
+		return new (
+			selection: selection,
+			x_center_offset: selection.Left + (selection.Width * (1.0 + Data.CenterOffset.X) * 0.5),
+			y_center_offset: selection.Top + (selection.Height * (1.0 + Data.CenterOffset.Y) * 0.5),
+			colPrimary: PintaCore.Palette.PrimaryColor.ToColorBgra (),
+			colSecondary: PintaCore.Palette.SecondaryColor.ToColorBgra (),
+			colTransparent: ColorBgra.Transparent,
+			aaSampleCount: Data.Quality * Data.Quality,
+			edgeBehavior: Data.EdgeBehavior
+		);
+	}
+
+	private ColorBgra GetPixelColor (
+		WarpSettings settings,
+		ImageSurface src,
+		ReadOnlySpan<ColorBgra> src_data,
+		ReadOnlySpan<PointD> aaPoints,
+		double relativeY,
+		PointI target)
+	{
+		Span<ColorBgra> samples = stackalloc ColorBgra[settings.aaSampleCount];
+		double relativeX = target.X - settings.x_center_offset;
+		int sampleCount = 0;
+		for (int p = 0; p < settings.aaSampleCount; ++p) {
+			TransformData initialTd = new (
+				X: relativeX + aaPoints[p].X,
+				Y: relativeY - aaPoints[p].Y
+			);
+			TransformData td = InverseTransform (initialTd);
+			PointF preliminarySample = new (
+				x: (float) (td.X + settings.x_center_offset),
+				y: (float) (td.Y + settings.y_center_offset)
+			);
+			samples[sampleCount] = GetSample (settings, src, src_data, target, preliminarySample);
+			++sampleCount;
+		}
+		return ColorBgra.Blend (samples[..sampleCount]);
+	}
+
+	private static ColorBgra GetSample (WarpSettings settings, ImageSurface src, ReadOnlySpan<ColorBgra> src_data, PointI target, PointF preliminarySample)
+	{
+		if (IsOnSurface (src, preliminarySample.X, preliminarySample.Y))
+			return src.GetBilinearSample (preliminarySample.X, preliminarySample.Y);
+
+		return settings.edgeBehavior switch {
+			WarpEdgeBehavior.Clamp => src.GetBilinearSampleClamped (preliminarySample.X, preliminarySample.Y),
+			WarpEdgeBehavior.Wrap => src.GetBilinearSampleWrapped (preliminarySample.X, preliminarySample.Y),
+			WarpEdgeBehavior.Reflect => src.GetBilinearSampleClamped (ReflectCoord (preliminarySample.X, src.Width), ReflectCoord (preliminarySample.Y, src.Height)),
+			WarpEdgeBehavior.Primary => settings.colPrimary,
+			WarpEdgeBehavior.Secondary => settings.colSecondary,
+			WarpEdgeBehavior.Transparent => settings.colTransparent,
+			WarpEdgeBehavior.Original => src_data[target.Y * src.Width + target.X],
+			_ => settings.colPrimary,
+		};
 	}
 
 	protected abstract TransformData InverseTransform (TransformData data);
@@ -185,11 +184,11 @@ public abstract class WarpEffect : BaseEffect
 	public class WarpData : EffectData
 	{
 		[Caption ("Quality"), MinimumValue (1), MaximumValue (5)]
-		public int Quality = 2;
+		public int Quality { get; set; } = 2;
 
 		[Caption ("Center Offset")]
-		public Core.PointD CenterOffset;
+		public PointD CenterOffset { get; set; }
 
-		public WarpEdgeBehavior EdgeBehavior = WarpEdgeBehavior.Wrap;
+		public WarpEdgeBehavior EdgeBehavior { get; set; } = WarpEdgeBehavior.Wrap;
 	}
 }

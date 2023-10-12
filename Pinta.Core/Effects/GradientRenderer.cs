@@ -66,27 +66,34 @@ public abstract class GradientRenderer
 		set => this.alpha_only = value;
 	}
 
+	private readonly record struct AlphaBounds (byte StartAlpha, byte EndAlpha);
+
 	public virtual void BeforeRender ()
 	{
-		if (!this.lerp_cache_is_valid) {
-			byte startAlpha;
-			byte endAlpha;
+		if (lerp_cache_is_valid)
+			return;
 
-			if (this.alpha_only) {
-				ComputeAlphaOnlyValuesFromColors (this.start_color, this.end_color, out startAlpha, out endAlpha);
-			} else {
-				startAlpha = this.start_color.A;
-				endAlpha = this.end_color.A;
-			}
+		AlphaBounds bounds;
 
-			for (int i = 0; i < 256; ++i) {
-				byte a = (byte) i;
-				this.lerp_colors[a] = ColorBgra.Blend (this.start_color, this.end_color, a);
-				this.lerp_alphas[a] = (byte) (startAlpha + ((endAlpha - startAlpha) * a) / 255);
-			}
-
-			this.lerp_cache_is_valid = true;
+		if (this.alpha_only) {
+			bounds = ComputeAlphaOnlyValuesFromColors (
+				this.start_color,
+				this.end_color
+			);
+		} else {
+			bounds = new (
+				StartAlpha: this.start_color.A,
+				EndAlpha: this.end_color.A
+			);
 		}
+
+		for (int i = 0; i < 256; ++i) {
+			byte a = (byte) i;
+			this.lerp_colors[a] = ColorBgra.Blend (this.start_color, this.end_color, a);
+			this.lerp_alphas[a] = (byte) (bounds.StartAlpha + ((bounds.EndAlpha - bounds.StartAlpha) * a) / 255);
+		}
+
+		this.lerp_cache_is_valid = true;
 	}
 
 	public abstract byte ComputeByteLerp (int x, int y);
@@ -95,22 +102,25 @@ public abstract class GradientRenderer
 	{
 	}
 
-	private static void ComputeAlphaOnlyValuesFromColors (ColorBgra startColor, ColorBgra endColor, out byte startAlpha, out byte endAlpha)
+	private static AlphaBounds ComputeAlphaOnlyValuesFromColors (ColorBgra startColor, ColorBgra endColor)
 	{
-		startAlpha = startColor.A;
-		endAlpha = (byte) (255 - endColor.A);
+		return new (
+			StartAlpha: startColor.A,
+			EndAlpha: (byte) (255 - endColor.A)
+		);
 	}
 
 	public void Render (ImageSurface surface, ReadOnlySpan<RectangleI> rois)
 	{
-		byte startAlpha;
-		byte endAlpha;
+		AlphaBounds bounds;
 
 		if (this.alpha_only) {
-			ComputeAlphaOnlyValuesFromColors (this.start_color, this.end_color, out startAlpha, out endAlpha);
+			bounds = ComputeAlphaOnlyValuesFromColors (this.start_color, this.end_color);
 		} else {
-			startAlpha = this.start_color.A;
-			endAlpha = this.end_color.A;
+			bounds = new (
+				StartAlpha: this.start_color.A,
+				EndAlpha: this.end_color.A
+			);
 		}
 
 		surface.Flush ();
@@ -126,7 +136,7 @@ public abstract class GradientRenderer
 				var mainrect = rect;
 				Parallel.ForEach (
 					Enumerable.Range (rect.Top, rect.Height),
-					(y) => ProcessGradientLine (startAlpha, endAlpha, y, mainrect, surface.GetPixelData (), src_width)
+					(y) => ProcessGradientLine (bounds.StartAlpha, bounds.EndAlpha, y, mainrect, surface.GetPixelData (), src_width)
 				);
 				continue;
 			}
@@ -134,32 +144,34 @@ public abstract class GradientRenderer
 			// Start and End point are the same ... fill with solid color.
 			for (int y = rect.Top; y <= rect.Bottom; ++y) {
 				var row = src_data.Slice (y * src_width, src_width);
-
 				for (int x = rect.Left; x <= rect.Right; ++x) {
 					ref ColorBgra pixel = ref row[x];
-					ColorBgra result;
-
-					if (this.alpha_only && this.alpha_blending) {
-						byte resultAlpha = (byte) Utility.FastDivideShortByByte ((ushort) (pixel.A * endAlpha), 255);
-						result = pixel;
-						result.A = resultAlpha;
-					} else if (this.alpha_only && !this.alpha_blending) {
-						result = pixel;
-						result.A = endAlpha;
-					} else if (!this.alpha_only && this.alpha_blending) {
-						result = this.normal_blend_op.Apply (pixel, this.end_color);
-						//if (!this.alphaOnly && !this.alphaBlending)
-					} else {
-						result = this.end_color;
-					}
-
-					pixel = result;
+					pixel = GetFinalSolidColor (bounds, pixel);
 				}
 			}
 		}
 
 		surface.MarkDirty ();
 		AfterRender ();
+	}
+
+	private ColorBgra GetFinalSolidColor (AlphaBounds bounds, ColorBgra pixel)
+	{
+		ColorBgra result;
+		if (this.alpha_only && this.alpha_blending) {
+			byte resultAlpha = (byte) Utility.FastDivideShortByByte ((ushort) (pixel.A * bounds.EndAlpha), 255);
+			result = pixel;
+			result.A = resultAlpha;
+		} else if (this.alpha_only && !this.alpha_blending) {
+			result = pixel;
+			result.A = bounds.EndAlpha;
+		} else if (!this.alpha_only && this.alpha_blending) {
+			result = this.normal_blend_op.Apply (pixel, this.end_color);
+			//if (!this.alphaOnly && !this.alphaBlending)
+		} else {
+			result = this.end_color;
+		}
+		return result;
 	}
 
 	private bool ProcessGradientLine (byte startAlpha, byte endAlpha, int y, RectangleI rect, Span<ColorBgra> surface_data, int src_width)
@@ -173,11 +185,12 @@ public abstract class GradientRenderer
 				var lerpByte = ComputeByteLerp (x, y);
 				var lerpAlpha = lerp_alphas[lerpByte];
 				ref ColorBgra pixel = ref row[x];
-
-				pixel.B = Utility.FastScaleByteByByte (pixel.B, lerpAlpha);
-				pixel.G = Utility.FastScaleByteByByte (pixel.G, lerpAlpha);
-				pixel.R = Utility.FastScaleByteByByte (pixel.R, lerpAlpha);
-				pixel.A = Utility.FastScaleByteByByte (pixel.A, lerpAlpha);
+				pixel = ColorBgra.FromBgra (
+					b: Utility.FastScaleByteByByte (pixel.B, lerpAlpha),
+					g: Utility.FastScaleByteByByte (pixel.G, lerpAlpha),
+					r: Utility.FastScaleByteByByte (pixel.R, lerpAlpha),
+					a: Utility.FastScaleByteByByte (pixel.A, lerpAlpha)
+				);
 			}
 		} else if (alpha_only && !alpha_blending) {
 			for (var x = rect.Left; x <= right; ++x) {

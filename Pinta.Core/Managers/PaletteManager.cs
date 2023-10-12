@@ -38,7 +38,7 @@ public interface IPaletteService
 	void SetColor (bool setPrimary, Color color, bool addToRecent = true);
 }
 
-public class PaletteManager : IPaletteService
+public sealed class PaletteManager : IPaletteService
 {
 	private Color primary;
 	private Color secondary;
@@ -67,15 +67,7 @@ public class PaletteManager : IPaletteService
 		set => SetColor (false, value, true);
 	}
 
-	public Palette CurrentPalette {
-		get {
-			if (palette == null) {
-				palette = Palette.GetDefault ();
-			}
-
-			return palette;
-		}
-	}
+	public Palette CurrentPalette => palette ??= Palette.GetDefault ();
 
 	public PaletteManager ()
 	{
@@ -90,15 +82,14 @@ public class PaletteManager : IPaletteService
 
 	public bool DoKeyPress (Gtk.EventControllerKey.KeyPressedSignalArgs args)
 	{
-		if (!args.State.HasModifierKey () && args.GetKey ().ToUpper () == Gdk.Key.X) {
-			Color temp = PintaCore.Palette.PrimaryColor;
-			PintaCore.Palette.PrimaryColor = PintaCore.Palette.SecondaryColor;
-			PintaCore.Palette.SecondaryColor = temp;
+		if (args.State.HasModifierKey () || args.GetKey ().ToUpper () != Gdk.Key.X)
+			return false;
 
-			return true;
-		}
+		Color temp = PintaCore.Palette.PrimaryColor;
+		PintaCore.Palette.PrimaryColor = PintaCore.Palette.SecondaryColor;
+		PintaCore.Palette.SecondaryColor = temp;
 
-		return false;
+		return true;
 	}
 
 	// This allows callers to bypass affecting the recently used list
@@ -195,21 +186,17 @@ public class PaletteManager : IPaletteService
 		PintaCore.Settings.PutSetting (RECENT_COLORS_SETTINGS_KEY, colors);
 	}
 
-	#region Protected Methods
-	protected void OnPrimaryColorChanged ()
+	private void OnPrimaryColorChanged ()
 	{
-		if (PrimaryColorChanged != null)
-			PrimaryColorChanged.Invoke (this, EventArgs.Empty);
+		PrimaryColorChanged?.Invoke (this, EventArgs.Empty);
 	}
 
-	protected void OnRecentColorsChanged () => RecentColorsChanged?.Invoke (this, EventArgs.Empty);
+	private void OnRecentColorsChanged () => RecentColorsChanged?.Invoke (this, EventArgs.Empty);
 
-	protected void OnSecondaryColorChanged ()
+	private void OnSecondaryColorChanged ()
 	{
-		if (SecondaryColorChanged != null)
-			SecondaryColorChanged.Invoke (this, EventArgs.Empty);
+		SecondaryColorChanged?.Invoke (this, EventArgs.Empty);
 	}
-	#endregion
 
 	#region Events
 	public event EventHandler? PrimaryColorChanged;

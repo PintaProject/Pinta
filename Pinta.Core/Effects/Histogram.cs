@@ -53,9 +53,7 @@ public abstract class Histogram
 	public event EventHandler? HistogramChanged;
 	protected void OnHistogramUpdated ()
 	{
-		if (HistogramChanged != null) {
-			HistogramChanged (this, EventArgs.Empty);
-		}
+		HistogramChanged?.Invoke (this, EventArgs.Empty);
 	}
 
 	protected readonly ImmutableArray<ColorBgra> visual_colors;
@@ -97,10 +95,10 @@ public abstract class Histogram
 		return max;
 	}
 
-	public float[] GetMean ()
+	public ImmutableArray<float> GetMean ()
 	{
-		float[] ret = new float[Channels];
-
+		var ret = ImmutableArray.CreateBuilder<float> (Channels);
+		ret.Count = Channels;
 		for (int channel = 0; channel < Channels; ++channel) {
 			long[] channelHistogram = histogram[channel];
 			long avg = 0;
@@ -117,34 +115,29 @@ public abstract class Histogram
 				ret[channel] = 0;
 			}
 		}
-
-		return ret;
+		return ret.MoveToImmutable ();
 	}
 
-	public int[] GetPercentile (float fraction)
+	public ImmutableArray<int> GetPercentile (float fraction)
 	{
-		int[] ret = new int[Channels];
-
+		var ret = ImmutableArray.CreateBuilder<int> (Channels);
+		ret.Count = Channels;
 		for (int channel = 0; channel < Channels; ++channel) {
 			long[] channelHistogram = histogram[channel];
 			long integral = 0;
 			long sum = 0;
-
 			for (int j = 0; j < channelHistogram.Length; j++) {
 				sum += channelHistogram[j];
 			}
-
 			for (int j = 0; j < channelHistogram.Length; j++) {
 				integral += channelHistogram[j];
-
 				if (integral > sum * fraction) {
 					ret[channel] = j;
 					break;
 				}
 			}
 		}
-
-		return ret;
+		return ret.MoveToImmutable ();
 	}
 
 	public abstract ColorBgra GetMeanColor ();

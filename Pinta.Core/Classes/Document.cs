@@ -33,7 +33,7 @@ namespace Pinta.Core;
 // somewhat arbitrary.  In general:
 // Document - Data about the image itself
 // Workspace - Data about Pinta's state for the image
-public class Document
+public sealed class Document
 {
 	private string display_name = string.Empty;
 	private Gio.File? file = null;
@@ -393,31 +393,24 @@ public class Document
 	/// </summary>
 	public void SignalSurfaceCloned ()
 	{
-		if (LayerCloned != null) {
-			LayerCloned ();
-		}
+		LayerCloned?.Invoke ();
 	}
 	#endregion
 
-	#region Protected Methods
-	protected void OnIsDirtyChanged ()
+	private void OnIsDirtyChanged ()
 	{
-		if (IsDirtyChanged != null)
-			IsDirtyChanged (this, EventArgs.Empty);
+		IsDirtyChanged?.Invoke (this, EventArgs.Empty);
 	}
 
-	protected void OnRenamed ()
+	private void OnRenamed ()
 	{
-		if (Renamed != null)
-			Renamed (this, EventArgs.Empty);
+		Renamed?.Invoke (this, EventArgs.Empty);
 	}
-	#endregion
 
 	#region Private Methods
 	private void OnSelectionChanged ()
 	{
-		if (SelectionChanged != null)
-			SelectionChanged.Invoke (this, EventArgs.Empty);
+		SelectionChanged?.Invoke (this, EventArgs.Empty);
 	}
 	#endregion
 

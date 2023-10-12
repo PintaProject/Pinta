@@ -32,7 +32,8 @@ namespace Pinta.Tools;
 
 public sealed class LineCurveSeriesEngine : ShapeEngine
 {
-	public Arrow Arrow1 = new (), Arrow2 = new ();
+	public Arrow Arrow1 { get; }
+	public Arrow Arrow2 { get; }
 
 	/// <summary>
 	/// Create a new LineCurveSeriesEngine.
@@ -49,7 +50,8 @@ public sealed class LineCurveSeriesEngine : ShapeEngine
 		bool passedAA, bool passedClosed, Color passedOutlineColor, Color passedFillColor, int passedBrushWidth) : base (parentLayer,
 		passedDrawingLayer, passedShapeType, passedAA, passedClosed, passedOutlineColor, passedFillColor, passedBrushWidth)
 	{
-
+		Arrow1 = new ();
+		Arrow2 = new ();
 	}
 
 	private LineCurveSeriesEngine (LineCurveSeriesEngine src)
@@ -181,16 +183,6 @@ public sealed class LineCurveSeriesEngine : ShapeEngine
 		//Note: this must be low enough for mouse clicks to be properly considered on/off the curve at any given point.
 		double tInterval = .025d;
 
-		double oneMinusT;
-		double oneMinusTSquared;
-		double oneMinusTCubed;
-
-		double tSquared;
-		double tCubed;
-
-		double oneMinusTSquaredTimesTTimesThree;
-		double oneMinusTTimesTSquaredTimesThree;
-
 		//t will go from 0d to 1d at the interval of tInterval.
 		for (double t = 0d; t < 1d + tInterval; t += tInterval) {
 			//There are 3 "layers" in a cubic Bezier curve's calculation. These "layers"
@@ -204,15 +196,15 @@ public sealed class LineCurveSeriesEngine : ShapeEngine
 
 			//Note: the code below is an optimized version of the commented explanation above.
 
-			oneMinusT = 1d - t;
-			oneMinusTSquared = oneMinusT * oneMinusT;
-			oneMinusTCubed = oneMinusTSquared * oneMinusT;
+			double oneMinusT = 1d - t;
+			double oneMinusTSquared = oneMinusT * oneMinusT;
+			double oneMinusTCubed = oneMinusTSquared * oneMinusT;
 
-			tSquared = t * t;
-			tCubed = tSquared * t;
+			double tSquared = t * t;
+			double tCubed = tSquared * t;
 
-			oneMinusTSquaredTimesTTimesThree = oneMinusTSquared * t * 3d;
-			oneMinusTTimesTSquaredTimesThree = oneMinusT * tSquared * 3d;
+			double oneMinusTSquaredTimesTTimesThree = oneMinusTSquared * t * 3d;
+			double oneMinusTTimesTSquaredTimesThree = oneMinusT * tSquared * 3d;
 
 			//Resulting Point = (1 - t) ^ 3 * p0 + 3 * (1 - t) ^ 2 * t * p1 + 3 * (1 - t) * t ^ 2 * p2 + t ^ 3 * p3
 			//This is done for both the X and Y given a value t going from 0d to 1d at a very small interval

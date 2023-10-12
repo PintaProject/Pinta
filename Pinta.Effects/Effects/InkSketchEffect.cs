@@ -26,6 +26,8 @@ public sealed class InkSketchEffect : BaseEffect
 
 	public override string Icon => Pinta.Resources.Icons.EffectsArtisticInkSketch;
 
+	public sealed override bool IsTileable => true;
+
 	public override string Name => Translations.GetString ("Ink Sketch");
 
 	public override bool IsConfigurable => true;
@@ -151,9 +153,9 @@ public sealed class InkSketchEffect : BaseEffect
 	public sealed class InkSketchData : EffectData
 	{
 		[Caption ("Ink Outline"), MinimumValue (0), MaximumValue (99)]
-		public int InkOutline = 50;
+		public int InkOutline { get; set; } = 50;
 
 		[Caption ("Coloring"), MinimumValue (0), MaximumValue (100)]
-		public int Coloring = 50;
+		public int Coloring { get; set; } = 50;
 	}
 }

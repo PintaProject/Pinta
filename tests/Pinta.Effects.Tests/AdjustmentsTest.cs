@@ -5,6 +5,7 @@ using Pinta.Core;
 namespace Pinta.Effects.Tests;
 
 [TestFixture]
+[Parallelizable (ParallelScope.Children)]
 internal sealed class AdjustmentsTest
 {
 	[Test]

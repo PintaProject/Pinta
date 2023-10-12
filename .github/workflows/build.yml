@@ -32,11 +32,14 @@ jobs:
       GTK_LIBS: undefined
 
     steps:
-    - uses: actions/checkout@v3
+    - uses: actions/checkout@v4
     - name: Setup .NET
       uses: actions/setup-dotnet@v3
       with:
         dotnet-version: ${{matrix.dotnet_version}}
+    - name: Create temporary global.json
+      if: matrix.dotnet_version == '6.0.x'
+      run: mv .github/workflows/dotnet6.global.json ./global.json
     - name: Install Apt Dependencies
       run: |
         sudo apt update
@@ -68,7 +71,7 @@ jobs:
     runs-on: macos-11
 
     steps:
-    - uses: actions/checkout@v3
+    - uses: actions/checkout@v4
     - name: Setup .NET
       uses: actions/setup-dotnet@v3
       with:
@@ -110,7 +113,7 @@ jobs:
         shell: msys2 {0}
 
     steps:
-    - uses: actions/checkout@v3
+    - uses: actions/checkout@v4
     - uses: microsoft/setup-msbuild@v1.3.1
     - name: Setup .NET
       uses: actions/setup-dotnet@v3

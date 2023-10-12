@@ -10,22 +10,22 @@
 // Additional code:
 //
 // LevelsDialog.cs
-//  
+//
 // Author:
 //      Krzysztof Marecki <marecki.krzysztof@gmail.com>
-// 
+//
 // Copyright (c) 2010 Krzysztof Marecki
-// 
+//
 // Permission is hereby granted, free of charge, to any person obtaining a copy
 // of this software and associated documentation files (the "Software"), to deal
 // in the Software without restriction, including without limitation the rights
 // to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
 // copies of the Software, and to permit persons to whom the Software is
 // furnished to do so, subject to the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be included in
 // all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
 // IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
 // FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
@@ -35,7 +35,6 @@
 // THE SOFTWARE.
 
 using System;
-using System.Diagnostics.CodeAnalysis;
 using Cairo;
 using Gtk;
 using Pinta.Core;
@@ -47,25 +46,25 @@ public partial class LevelsDialog : Gtk.Dialog
 {
 	private readonly bool[] mask;
 
-	private CheckButton check_red;
-	private CheckButton check_green;
-	private CheckButton check_blue;
-	private Button button_auto;
-	private Button button_reset;
-	private SpinButton spin_in_low;
-	private SpinButton spin_in_high;
-	private SpinButton spin_out_low;
-	private SpinButton spin_out_high;
-	private SpinButton spin_out_gamma;
-	private ColorGradientWidget gradient_input;
-	private ColorGradientWidget gradient_output;
-	private ColorPanelWidget colorpanel_in_high;
-	private ColorPanelWidget colorpanel_in_low;
-	private ColorPanelWidget colorpanel_out_high;
-	private ColorPanelWidget colorpanel_out_mid;
-	private ColorPanelWidget colorpanel_out_low;
-	private HistogramWidget histogram_input;
-	private HistogramWidget histogram_output;
+	private readonly CheckButton check_red;
+	private readonly CheckButton check_green;
+	private readonly CheckButton check_blue;
+	private readonly Button button_auto;
+	private readonly Button button_reset;
+	private readonly SpinButton spin_in_low;
+	private readonly SpinButton spin_in_high;
+	private readonly SpinButton spin_out_low;
+	private readonly SpinButton spin_out_high;
+	private readonly SpinButton spin_out_gamma;
+	private readonly ColorGradientWidget gradient_input;
+	private readonly ColorGradientWidget gradient_output;
+	private readonly ColorPanelWidget colorpanel_in_high;
+	private readonly ColorPanelWidget colorpanel_in_low;
+	private readonly ColorPanelWidget colorpanel_out_high;
+	private readonly ColorPanelWidget colorpanel_out_mid;
+	private readonly ColorPanelWidget colorpanel_out_low;
+	private readonly HistogramWidget histogram_input;
+	private readonly HistogramWidget histogram_output;
 
 	public LevelsData EffectData { get; }
 
@@ -75,7 +74,104 @@ public partial class LevelsDialog : Gtk.Dialog
 		TransientFor = PintaCore.Chrome.MainWindow;
 		Modal = true;
 
-		Build ();
+		const int spacing = 6;
+
+		Resizable = false;
+
+		var hboxChecks = new Box { Spacing = spacing };
+		hboxChecks.SetOrientation (Orientation.Horizontal);
+		check_red = new CheckButton { Label = Translations.GetString ("Red"), Active = true };
+		hboxChecks.Append (check_red);
+		check_green = new CheckButton { Label = Translations.GetString ("Green"), Active = true };
+		hboxChecks.Append (check_green);
+		check_blue = new CheckButton { Label = Translations.GetString ("Blue"), Active = true };
+		hboxChecks.Append (check_blue);
+
+		button_auto = (Button) AddButton (Translations.GetString ("Auto"), (int) ResponseType.None);
+		button_reset = (Button) AddButton (Translations.GetString ("Reset"), (int) ResponseType.None);
+		AddActionWidget (hboxChecks, (int) ResponseType.None);
+
+		this.AddCancelOkButtons ();
+		this.SetDefaultResponse (ResponseType.Ok);
+
+		spin_in_low = SpinButton.NewWithRange (0, 254, 1);
+		spin_in_high = SpinButton.NewWithRange (1, 255, 1);
+		spin_in_high.Value = 255;
+
+		spin_out_low = SpinButton.NewWithRange (0, 252, 1);
+		spin_out_high = SpinButton.NewWithRange (2, 255, 1);
+		spin_out_high.Value = 255;
+		spin_out_gamma = SpinButton.NewWithRange (0, 100, 0.1);
+		spin_out_gamma.Value = 1;
+
+		gradient_input = new ColorGradientWidget (2) { WidthRequest = 40 };
+		gradient_output = new ColorGradientWidget (3) { WidthRequest = 40 };
+
+		colorpanel_in_high = new ColorPanelWidget { HeightRequest = 24 };
+		colorpanel_in_low = new ColorPanelWidget { HeightRequest = 24 };
+		colorpanel_out_low = new ColorPanelWidget { HeightRequest = 24 };
+		colorpanel_out_mid = new ColorPanelWidget { HeightRequest = 24 };
+		colorpanel_out_high = new ColorPanelWidget { HeightRequest = 24 };
+
+		histogram_input = new HistogramWidget { WidthRequest = 130, FlipHorizontal = true };
+		histogram_output = new HistogramWidget { WidthRequest = 130 };
+
+		var hboxLayout = new Box { Spacing = spacing };
+		hboxLayout.SetOrientation (Orientation.Horizontal);
+		hboxLayout.SetAllMargins (spacing);
+
+		static Box CreateLabelledWidget (Widget widget, string label)
+		{
+			var vbox = new Box { Spacing = spacing };
+			vbox.SetOrientation (Orientation.Vertical);
+			var label_widget = Label.New (label);
+			label_widget.Halign = Align.Start;
+			vbox.Append (label_widget);
+			widget.Vexpand = true;
+			widget.Valign = Align.Fill;
+			vbox.Append (widget);
+
+			return vbox;
+		}
+
+		hboxLayout.Append (CreateLabelledWidget (histogram_input, Translations.GetString ("Input Histogram")));
+
+		var vboxInput = new Box { Spacing = spacing };
+		vboxInput.SetOrientation (Orientation.Vertical);
+		vboxInput.Append (spin_in_high);
+		vboxInput.Append (colorpanel_in_high);
+		colorpanel_in_low.Valign = Align.End;
+		colorpanel_in_low.Vexpand = true;
+		vboxInput.Append (colorpanel_in_low);
+		vboxInput.Append (spin_in_low);
+
+		var hboxInput = new Box { Spacing = spacing };
+		hboxInput.SetOrientation (Orientation.Horizontal);
+		hboxInput.Append (vboxInput);
+		hboxInput.Append (gradient_input);
+
+		hboxLayout.Append (CreateLabelledWidget (hboxInput, Translations.GetString ("Input")));
+
+		var vboxOutput = new Box { Spacing = spacing };
+		vboxOutput.SetOrientation (Orientation.Vertical);
+		vboxOutput.Append (spin_out_high);
+		vboxOutput.Append (colorpanel_out_high);
+		vboxOutput.Append (spin_out_gamma);
+		vboxOutput.Append (colorpanel_out_mid);
+		vboxOutput.Append (colorpanel_out_low);
+		vboxOutput.Append (spin_out_low);
+
+		var hboxOutput = new Box { Spacing = spacing };
+		hboxOutput.SetOrientation (Orientation.Horizontal);
+		hboxOutput.Append (gradient_output);
+		hboxOutput.Append (vboxOutput);
+
+		hboxLayout.Append (CreateLabelledWidget (hboxOutput, Translations.GetString ("Output")));
+
+		hboxLayout.Append (CreateLabelledWidget (histogram_output, Translations.GetString ("Output Histogram")));
+
+		var content_area = this.GetContentAreaBox ();
+		content_area.Append (hboxLayout);
 
 		EffectData = effectData;
 		mask = new bool[] { true, true, true };
@@ -113,19 +209,13 @@ public partial class LevelsDialog : Gtk.Dialog
 	}
 
 	private UnaryPixelOps.Level Levels {
-		get {
-			if (EffectData == null)
-				throw new InvalidOperationException ("Effect data not set on levels dialog.");
-
-			return EffectData.Levels;
-		}
-
-		set => EffectData.Levels = value ?? throw new ArgumentNullException (nameof (value));
+		get => EffectData.Levels;
+		set => EffectData.Levels = value;
 	}
 
 	private void UpdateLivePreview ()
 	{
-		EffectData?.FirePropertyChanged (nameof (Levels));
+		EffectData.FirePropertyChanged (nameof (Levels));
 	}
 
 	private void UpdateInputHistogram ()
@@ -239,23 +329,21 @@ public partial class LevelsDialog : Gtk.Dialog
 
 	private ColorBgra UpdateByMask (ColorBgra before, byte val)
 	{
-		ColorBgra after = before;
-		int average = -1, oldaverage = -1;
-
-		if (!(mask[0] || mask[1] || mask[2])) {
+		if (!(mask[0] || mask[1] || mask[2]))
 			return before;
-		}
+
+		ColorBgra after = before;
+		int average = -1;
+		int oldaverage;
 
 		do {
-			float factor;
-
 			oldaverage = average;
 			average = MaskAvg (after);
 
-			if (average == 0) {
+			if (average == 0)
 				break;
-			}
-			factor = (float) val / average;
+
+			float factor = (float) val / average;
 
 			for (int c = 0; c < 3; c++) {
 				if (mask[c]) {
@@ -301,13 +389,14 @@ public partial class LevelsDialog : Gtk.Dialog
 
 	private void UpdateGammaByMask (float val)
 	{
-		float average = -1;
-
 		if (!(mask[0] || mask[1] || mask[2]))
 			return;
 
+		float average;
+
 		do {
 			average = MaskGamma ();
+
 			float factor = val / average;
 
 			for (int c = 0; c < 3; c++) {
@@ -323,7 +412,7 @@ public partial class LevelsDialog : Gtk.Dialog
 		return Levels.Apply (histogram_input.Histogram.GetMeanColor ()).ToCairoColor ();
 	}
 
-	//hack to avoid reccurent invocation of UpdateLevels
+	//hack to avoid recurrent invocation of UpdateLevels
 	private bool disable_updating;
 	//when user moves triangles inside gradient widget,
 	//we don't want to redraw histogram each time Levels values change.
@@ -501,110 +590,5 @@ public partial class LevelsDialog : Gtk.Dialog
 
 		UpdateFromLevelsOp ();
 		UpdateLevels ();
-	}
-
-	[MemberNotNull (nameof (check_red), nameof (check_green), nameof (check_blue), nameof (button_reset), nameof (button_auto), nameof (spin_in_low), nameof (spin_in_high),
-			nameof (spin_out_low), nameof (spin_out_high), nameof (spin_out_gamma), nameof (gradient_input), nameof (gradient_output), nameof (colorpanel_in_high),
-			nameof (colorpanel_in_low), nameof (colorpanel_out_low), nameof (colorpanel_out_mid), nameof (colorpanel_out_high), nameof (histogram_input), nameof (histogram_output))]
-	private void Build ()
-	{
-		const int spacing = 6;
-
-		Resizable = false;
-
-		var hboxChecks = new Box () { Spacing = spacing };
-		hboxChecks.SetOrientation (Orientation.Horizontal);
-		check_red = new CheckButton () { Label = Translations.GetString ("Red"), Active = true };
-		hboxChecks.Append (check_red);
-		check_green = new CheckButton () { Label = Translations.GetString ("Green"), Active = true };
-		hboxChecks.Append (check_green);
-		check_blue = new CheckButton () { Label = Translations.GetString ("Blue"), Active = true };
-		hboxChecks.Append (check_blue);
-
-		button_auto = (Button) AddButton (Translations.GetString ("Auto"), (int) ResponseType.None);
-		button_reset = (Button) AddButton (Translations.GetString ("Reset"), (int) ResponseType.None);
-		AddActionWidget (hboxChecks, (int) ResponseType.None);
-
-		this.AddCancelOkButtons ();
-		this.SetDefaultResponse (ResponseType.Ok);
-
-		spin_in_low = SpinButton.NewWithRange (0, 254, 1);
-		spin_in_high = SpinButton.NewWithRange (1, 255, 1);
-		spin_in_high.Value = 255;
-
-		spin_out_low = SpinButton.NewWithRange (0, 252, 1);
-		spin_out_high = SpinButton.NewWithRange (2, 255, 1);
-		spin_out_high.Value = 255;
-		spin_out_gamma = SpinButton.NewWithRange (0, 100, 0.1);
-		spin_out_gamma.Value = 1;
-
-		gradient_input = new ColorGradientWidget (2) { WidthRequest = 40 };
-		gradient_output = new ColorGradientWidget (3) { WidthRequest = 40 };
-
-		colorpanel_in_high = new ColorPanelWidget () { HeightRequest = 24 };
-		colorpanel_in_low = new ColorPanelWidget () { HeightRequest = 24 };
-		colorpanel_out_low = new ColorPanelWidget () { HeightRequest = 24 };
-		colorpanel_out_mid = new ColorPanelWidget () { HeightRequest = 24 };
-		colorpanel_out_high = new ColorPanelWidget () { HeightRequest = 24 };
-
-		histogram_input = new HistogramWidget () { WidthRequest = 130, FlipHorizontal = true };
-		histogram_output = new HistogramWidget () { WidthRequest = 130 };
-
-		var hboxLayout = new Box () { Spacing = spacing };
-		hboxLayout.SetOrientation (Orientation.Horizontal);
-		hboxLayout.SetAllMargins (spacing);
-
-		static Box CreateLabelledWidget (Widget widget, string label)
-		{
-			var vbox = new Box () { Spacing = spacing };
-			vbox.SetOrientation (Orientation.Vertical);
-			var label_widget = Label.New (label);
-			label_widget.Halign = Align.Start;
-			vbox.Append (label_widget);
-			widget.Vexpand = true;
-			widget.Valign = Align.Fill;
-			vbox.Append (widget);
-
-			return vbox;
-		}
-
-		hboxLayout.Append (CreateLabelledWidget (histogram_input, Translations.GetString ("Input Histogram")));
-
-		var vboxInput = new Box () { Spacing = spacing };
-		vboxInput.SetOrientation (Orientation.Vertical);
-		vboxInput.Append (spin_in_high);
-		vboxInput.Append (colorpanel_in_high);
-		colorpanel_in_low.Valign = Align.End;
-		colorpanel_in_low.Vexpand = true;
-		vboxInput.Append (colorpanel_in_low);
-		vboxInput.Append (spin_in_low);
-
-		var hboxInput = new Box () { Spacing = spacing };
-		hboxInput.SetOrientation (Orientation.Horizontal);
-		hboxInput.Append (vboxInput);
-		hboxInput.Append (gradient_input);
-
-		hboxLayout.Append (CreateLabelledWidget (hboxInput, Translations.GetString ("Input")));
-
-		var vboxOutput = new Box () { Spacing = spacing };
-		vboxOutput.SetOrientation (Orientation.Vertical);
-		vboxOutput.Append (spin_out_high);
-		vboxOutput.Append (colorpanel_out_high);
-		vboxOutput.Append (spin_out_gamma);
-		vboxOutput.Append (colorpanel_out_mid);
-		vboxOutput.Append (colorpanel_out_low);
-		vboxOutput.Append (spin_out_low);
-
-		var hboxOutput = new Box () { Spacing = spacing };
-		hboxOutput.SetOrientation (Orientation.Horizontal);
-		hboxOutput.Append (gradient_output);
-		hboxOutput.Append (vboxOutput);
-
-		hboxLayout.Append (CreateLabelledWidget (hboxOutput, Translations.GetString ("Output")));
-
-		hboxLayout.Append (CreateLabelledWidget (histogram_output, Translations.GetString ("Output Histogram")));
-
-		var content_area = this.GetContentAreaBox ();
-		content_area.Append (hboxLayout);
 	}
 }

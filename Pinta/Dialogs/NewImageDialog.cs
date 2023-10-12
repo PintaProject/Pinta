@@ -26,7 +26,6 @@
 
 using System;
 using System.Collections.Generic;
-using System.Diagnostics.CodeAnalysis;
 using System.Linq;
 using Cairo;
 using Gtk;
@@ -40,22 +39,22 @@ public sealed class NewImageDialog : Dialog
 	private readonly bool has_clipboard;
 	private bool suppress_events;
 
-	private Size clipboard_size;
+	private readonly Size clipboard_size;
 
-	private List<Size> preset_sizes;
-	private PreviewArea preview;
+	private readonly List<Size> preset_sizes;
+	private readonly PreviewArea preview;
 
-	private Gtk.StringList preset_dropdown_model;
-	private DropDown preset_dropdown;
-	private Entry width_entry;
-	private Entry height_entry;
+	private readonly Gtk.StringList preset_dropdown_model;
+	private readonly DropDown preset_dropdown;
+	private readonly Entry width_entry;
+	private readonly Entry height_entry;
 
-	private CheckButton portrait_radio;
-	private CheckButton landscape_radio;
+	private readonly CheckButton portrait_radio;
+	private readonly CheckButton landscape_radio;
 
-	private CheckButton white_bg_radio;
-	private CheckButton secondary_bg_radio;
-	private CheckButton trans_bg_radio;
+	private readonly CheckButton white_bg_radio;
+	private readonly CheckButton secondary_bg_radio;
+	private readonly CheckButton trans_bg_radio;
 
 	/// <summary>
 	/// Configures and builds a NewImageDialog object.
@@ -84,109 +83,14 @@ public sealed class NewImageDialog : Dialog
 		has_clipboard = isClipboardSize;
 		clipboard_size = new Size (initialWidth, initialHeight);
 
-		InitializePresets ();
-		BuildDialog ();
-
-		if (initial_bg_type == BackgroundType.SecondaryColor && allow_background_color)
-			secondary_bg_radio.Active = true;
-		else if (initial_bg_type == BackgroundType.Transparent)
-			trans_bg_radio.Active = true;
-		else
-			white_bg_radio.Active = true;
-
-		width_entry.Buffer!.Text = initialWidth.ToString ();
-		height_entry.Buffer!.Text = initialHeight.ToString ();
-
-		width_entry.GrabFocus ();
-		width_entry.SelectRegion (0, (int) width_entry.TextLength);
-
-		WireUpEvents ();
-
-		UpdateOrientation ();
-		UpdatePresetSelection ();
-		preview.Update (NewImageSize, NewImageBackground);
-	}
-
-	public int NewImageWidth => int.Parse (width_entry.Buffer!.Text!);
-	public int NewImageHeight => int.Parse (height_entry.Buffer!.Text!);
-	public Size NewImageSize => new (NewImageWidth, NewImageHeight);
-
-	public enum BackgroundType
-	{
-		White,
-		Transparent,
-		SecondaryColor
-	}
-
-	public BackgroundType NewImageBackgroundType {
-		get {
-			if (white_bg_radio.Active)
-				return BackgroundType.White;
-			else if (trans_bg_radio.Active)
-				return BackgroundType.Transparent;
-			else
-				return BackgroundType.SecondaryColor;
-		}
-	}
-
-	public Cairo.Color NewImageBackground {
-		get {
-			switch (NewImageBackgroundType) {
-				case BackgroundType.White:
-					return new Cairo.Color (1, 1, 1);
-				case BackgroundType.Transparent:
-					return new Cairo.Color (1, 1, 1, 0);
-				case BackgroundType.SecondaryColor:
-				default:
-					return PintaCore.Palette.SecondaryColor;
-			}
-		}
-	}
-
-
-	private bool IsValidSize {
-		get {
-			int width = 0;
-			int height = 0;
-
-			if (!int.TryParse (width_entry.Buffer!.Text!, out width))
-				return false;
-			if (!int.TryParse (height_entry.Buffer!.Text!, out height))
-				return false;
-
-			return width > 0 && height > 0;
-		}
-	}
-
-	private Size SelectedPresetSize {
-		get {
-			string text = preset_dropdown_model.GetString (preset_dropdown.Selected)!;
-			if (text == Translations.GetString ("Clipboard") || text == Translations.GetString ("Custom"))
-				return Size.Empty;
-
-			var text_parts = text.Split (' ');
-			var width = int.Parse (text_parts[0]);
-			var height = int.Parse (text_parts[2]);
-
-			return new Size (width, height);
-		}
-	}
-
-	[MemberNotNull (nameof (preset_sizes))]
-	private void InitializePresets ()
-	{
 		// Some arbitrary presets
-		preset_sizes = new List<Size> ();
+		preset_sizes = new List<Size> {
+			new Size (640, 480),
+			new Size (800, 600),
+			new Size (1024, 768),
+			new Size (1600, 1200)
+		};
 
-		preset_sizes.Add (new Size (640, 480));
-		preset_sizes.Add (new Size (800, 600));
-		preset_sizes.Add (new Size (1024, 768));
-		preset_sizes.Add (new Size (1600, 1200));
-	}
-
-	[MemberNotNull (nameof (preset_dropdown_model), nameof (preset_dropdown), nameof (portrait_radio), nameof (landscape_radio), nameof (white_bg_radio), nameof (secondary_bg_radio), nameof (trans_bg_radio), nameof (width_entry), nameof (height_entry), nameof (preview))]
-	private void BuildDialog ()
-	{
 		// Layout table for preset, width, and height
 		var layout_grid = new Grid {
 			RowSpacing = 5,
@@ -363,8 +267,90 @@ public sealed class NewImageDialog : Dialog
 		main_hbox.Append (options_vbox);
 		main_hbox.Append (preview_vbox);
 
-		var content_area = this.GetContentAreaBox ();
 		content_area.Append (main_hbox);
+
+		if (initial_bg_type == BackgroundType.SecondaryColor && allow_background_color)
+			secondary_bg_radio.Active = true;
+		else if (initial_bg_type == BackgroundType.Transparent)
+			trans_bg_radio.Active = true;
+		else
+			white_bg_radio.Active = true;
+
+		width_entry.Buffer!.Text = initialWidth.ToString ();
+		height_entry.Buffer!.Text = initialHeight.ToString ();
+
+		width_entry.GrabFocus ();
+		width_entry.SelectRegion (0, (int) width_entry.TextLength);
+
+		WireUpEvents ();
+
+		UpdateOrientation ();
+		UpdatePresetSelection ();
+		preview.Update (NewImageSize, NewImageBackground);
+	}
+
+	public int NewImageWidth => int.Parse (width_entry.Buffer!.Text!);
+	public int NewImageHeight => int.Parse (height_entry.Buffer!.Text!);
+	public Size NewImageSize => new (NewImageWidth, NewImageHeight);
+
+	public enum BackgroundType
+	{
+		White,
+		Transparent,
+		SecondaryColor
+	}
+
+	public BackgroundType NewImageBackgroundType {
+		get {
+			if (white_bg_radio.Active)
+				return BackgroundType.White;
+			else if (trans_bg_radio.Active)
+				return BackgroundType.Transparent;
+			else
+				return BackgroundType.SecondaryColor;
+		}
+	}
+
+	public Cairo.Color NewImageBackground {
+		get {
+			switch (NewImageBackgroundType) {
+				case BackgroundType.White:
+					return new Cairo.Color (1, 1, 1);
+				case BackgroundType.Transparent:
+					return new Cairo.Color (1, 1, 1, 0);
+				case BackgroundType.SecondaryColor:
+				default:
+					return PintaCore.Palette.SecondaryColor;
+			}
+		}
+	}
+
+
+	private bool IsValidSize {
+		get {
+
+			if (!int.TryParse (width_entry.Buffer!.Text!, out var width))
+				return false;
+
+			if (!int.TryParse (height_entry.Buffer!.Text!, out var height))
+				return false;
+
+			return width > 0 && height > 0;
+		}
+	}
+
+	private Size SelectedPresetSize {
+		get {
+			string text = preset_dropdown_model.GetString (preset_dropdown.Selected)!;
+			if (text == Translations.GetString ("Clipboard") || text == Translations.GetString ("Custom"))
+				return Size.Empty;
+
+			var text_parts = text.Split (' ');
+			var width = int.Parse (text_parts[0]);
+			var height = int.Parse (text_parts[2]);
+
+			return new Size (width, height);
+		}
 	}
 
 	private void WireUpEvents ()
@@ -537,7 +523,7 @@ public sealed class NewImageDialog : Dialog
 
 		private void Draw (Context cr, int widget_width, int widget_height)
 		{
-			var preview_size = Size.Empty;
+			Size preview_size;
 
 			// Figure out the dimensions of the preview to draw
 			if (size.Width <= max_size && size.Height <= max_size)

@@ -18,6 +18,8 @@ public sealed class MotionBlurEffect : BaseEffect
 {
 	public override string Icon => Pinta.Resources.Icons.EffectsBlursMotionBlur;
 
+	public sealed override bool IsTileable => true;
+
 	public override string Name => Translations.GetString ("Motion Blur");
 
 	public override bool IsConfigurable => true;
@@ -45,11 +47,8 @@ public sealed class MotionBlurEffect : BaseEffect
 		PointD end = new PointD ((float) alpha * Math.Cos (theta), (float) (-alpha * Math.Sin (theta)));
 
 		if (Data.Centered) {
-			start.X = -end.X / 2.0f;
-			start.Y = -end.Y / 2.0f;
-
-			end.X /= 2.0f;
-			end.Y /= 2.0f;
+			start = new (-end.X / 2.0f, -end.Y / 2.0f);
+			end = new (end.X / 2.0f, end.Y / 2.0f);
 		}
 
 		Span<PointD> points = stackalloc PointD[(1 + Data.Distance) * 3 / 2];
@@ -87,7 +86,7 @@ public sealed class MotionBlurEffect : BaseEffect
 						}
 					}
 
-					dst_row[x] = ColorBgra.Blend (samples.Slice (0, sampleCount));
+					dst_row[x] = ColorBgra.Blend (samples[..sampleCount]);
 				}
 			}
 		}
@@ -100,12 +99,12 @@ public sealed class MotionBlurEffect : BaseEffect
 		public override bool IsDefault => Distance == 0;
 
 		[Caption ("Angle")]
-		public double Angle = 25;
+		public double Angle { get; set; } = 25;
 
 		[Caption ("Distance"), MinimumValue (1), MaximumValue (200)]
-		public int Distance = 10;
+		public int Distance { get; set; } = 10;
 
 		[Caption ("Centered")]
-		public bool Centered = true;
+		public bool Centered { get; set; } = true;
 	}
 }

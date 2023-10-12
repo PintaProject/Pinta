@@ -9,9 +9,9 @@ namespace Pinta.Tools;
 /// </summary>
 public sealed class MoveHandle : IToolHandle
 {
-	public static readonly Cairo.Color FillColor = new (0, 0, 1, 1);
-	public static readonly Cairo.Color SelectionFillColor = new (1, 0.5, 0, 1);
-	public static readonly Cairo.Color StrokeColor = new (1, 1, 1, 0.7);
+	private static readonly Cairo.Color fill_color = new (0, 0, 1, 1);
+	private static readonly Cairo.Color selection_fill_color = new (1, 0.5, 0, 1);
+	private static readonly Cairo.Color stroke_color = new (1, 1, 1, 0.7);
 
 	public PointD CanvasPosition { get; set; }
 
@@ -35,8 +35,7 @@ public sealed class MoveHandle : IToolHandle
 	{
 		const int tolerance = 5;
 
-		var bounds = ComputeWindowRect ();
-		bounds.Inflate (tolerance, tolerance);
+		var bounds = ComputeWindowRect ().Inflated (tolerance, tolerance);
 		return bounds.ContainsPoint (window_point);
 	}
 
@@ -45,7 +44,7 @@ public sealed class MoveHandle : IToolHandle
 	/// </summary>
 	public void Draw (Cairo.Context cr)
 	{
-		cr.FillStrokedEllipse (ComputeWindowRect (), Selected ? SelectionFillColor : FillColor, StrokeColor, 1);
+		cr.FillStrokedEllipse (ComputeWindowRect (), Selected ? selection_fill_color : fill_color, stroke_color, 1);
 	}
 
 	/// <summary>
@@ -69,6 +68,9 @@ public sealed class MoveHandle : IToolHandle
 	/// Returns the union of the invalidate rectangles for a collection of handles.
 	/// </summary>
 	public static RectangleI UnionInvalidateRects (IEnumerable<MoveHandle> handles) =>
-		handles.Select (c => c.InvalidateRect).DefaultIfEmpty (RectangleI.Zero).Aggregate ((accum, r) => accum.Union (r));
+		handles
+		.Select (c => c.InvalidateRect)
+		.DefaultIfEmpty (RectangleI.Zero)
+		.Aggregate ((accum, r) => accum.Union (r));
 }
 

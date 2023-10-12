@@ -24,6 +24,8 @@ public sealed class PencilSketchEffect : BaseEffect
 
 	public override string Icon => Pinta.Resources.Icons.EffectsArtisticPencilSketch;
 
+	public sealed override bool IsTileable => true;
+
 	public override string Name => Translations.GetString ("Pencil Sketch");
 
 	public override bool IsConfigurable => true;
@@ -83,9 +85,9 @@ public sealed class PencilSketchEffect : BaseEffect
 	public sealed class PencilSketchData : EffectData
 	{
 		[Caption ("Pencil Tip Size"), MinimumValue (1), MaximumValue (20)]
-		public int PencilTipSize = 2;
+		public int PencilTipSize { get; set; } = 2;
 
 		[Caption ("Color Range"), MinimumValue (-20), MaximumValue (20)]
-		public int ColorRange = 0;
+		public int ColorRange { get; set; } = 0;
 	}
 }

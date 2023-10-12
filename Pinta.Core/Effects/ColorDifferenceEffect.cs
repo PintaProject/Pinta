@@ -42,7 +42,7 @@ public abstract class ColorDifferenceEffect : BaseEffect
 					fyEnd = 2;
 
 				// loop through each point in the line
-				var dst_row = dst_data.Slice (y * src_width);
+				var dst_row = dst_data[(y * src_width)..];
 
 				for (int x = rect.X; x < rect.X + rect.Width; ++x) {
 					int fxStart = 0;

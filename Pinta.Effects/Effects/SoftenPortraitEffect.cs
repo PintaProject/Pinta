@@ -49,6 +49,8 @@ public sealed class SoftenPortraitEffect : BaseEffect
 
 	public override string Icon => Pinta.Resources.Icons.EffectsPhotoSoftenPortrait;
 
+	public sealed override bool IsTileable => true;
+
 	public override string Name => Translations.GetString ("Soften Portrait");
 
 	public override bool IsConfigurable => true;
@@ -106,11 +108,11 @@ public sealed class SoftenPortraitEffect : BaseEffect
 public sealed class SoftenPortraitData : EffectData
 {
 	[Caption ("Softness"), MinimumValue (0), MaximumValue (10)]
-	public int Softness = 5;
+	public int Softness { get; set; } = 5;
 
 	[Caption ("Lighting"), MinimumValue (-20), MaximumValue (20)]
-	public int Lighting = 0;
+	public int Lighting { get; set; } = 0;
 
 	[Caption ("Warmth"), MinimumValue (0), MaximumValue (20)]
-	public int Warmth = 10;
+	public int Warmth { get; set; } = 10;
 }

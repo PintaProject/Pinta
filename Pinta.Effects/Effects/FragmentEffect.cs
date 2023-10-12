@@ -19,6 +19,8 @@ public sealed class FragmentEffect : BaseEffect
 {
 	public override string Icon => Pinta.Resources.Icons.EffectsBlursFragment;
 
+	public sealed override bool IsTileable => true;
+
 	public override string Name => Translations.GetString ("Fragment");
 
 	public override bool IsConfigurable => true;
@@ -93,7 +95,7 @@ public sealed class FragmentEffect : BaseEffect
 						}
 					}
 
-					dst_row[x] = ColorBgra.Blend (samples.Slice (0, sampleCount));
+					dst_row[x] = ColorBgra.Blend (samples[..sampleCount]);
 				}
 			}
 		}
@@ -103,12 +105,12 @@ public sealed class FragmentEffect : BaseEffect
 	public sealed class FragmentData : EffectData
 	{
 		[Caption ("Fragments"), MinimumValue (2), MaximumValue (50)]
-		public int Fragments = 4;
+		public int Fragments { get; set; } = 4;
 
 		[Caption ("Distance"), MinimumValue (0), MaximumValue (100)]
-		public int Distance = 8;
+		public int Distance { get; set; } = 8;
 
 		[Caption ("Rotation")]
-		public double Rotation = 0;
+		public double Rotation { get; set; } = 0;
 	}
 }

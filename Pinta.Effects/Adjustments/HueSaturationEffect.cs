@@ -16,6 +16,8 @@ namespace Pinta.Effects;
 
 public sealed class HueSaturationEffect : BaseEffect
 {
+	public sealed override bool IsTileable => true;
+
 	public override string Icon => Pinta.Resources.Icons.AdjustmentsHueSaturation;
 
 	public override string Name => Translations.GetString ("Hue / Saturation");
@@ -34,14 +36,22 @@ public sealed class HueSaturationEffect : BaseEffect
 		EffectHelper.LaunchSimpleEffectDialog (this);
 	}
 
+	private UnaryPixelOp CreateOptimalOp ()
+	{
+		if (Data.IsDefault) {
+			return new UnaryPixelOps.Identity ();
+		} else {
+			return new UnaryPixelOps.HueSaturationLightness (
+				hueDelta: Data.Hue,
+				satDelta: Data.Saturation,
+				lightness: Data.Lightness
+			);
+		}
+	}
+
 	public override void Render (ImageSurface src, ImageSurface dest, ReadOnlySpan<RectangleI> rois)
 	{
-		int hue_delta = Data.Hue;
-		int sat_delta = Data.Saturation;
-		int lightness = Data.Lightness;
-
-		UnaryPixelOp op = Data.IsDefault ? new UnaryPixelOps.Identity () : new UnaryPixelOps.HueSaturationLightness (hue_delta, sat_delta, lightness);
-
+		UnaryPixelOp op = CreateOptimalOp ();
 		op.Apply (dest, src, rois);
 	}
 
@@ -50,13 +60,13 @@ public sealed class HueSaturationEffect : BaseEffect
 	public sealed class HueSaturationData : EffectData
 	{
 		[Caption ("Hue"), MinimumValue (-180), MaximumValue (180)]
-		public int Hue = 0;
+		public int Hue { get; set; } = 0;
 
 		[Caption ("Saturation"), MinimumValue (0), MaximumValue (200)]
-		public int Saturation = 100;
+		public int Saturation { get; set; } = 100;
 
 		[Caption ("Lightness")]
-		public int Lightness = 0;
+		public int Lightness { get; set; } = 0;
 
 		[Skip]
 		public override bool IsDefault => Hue == 0 && Saturation == 100 && Lightness == 0;

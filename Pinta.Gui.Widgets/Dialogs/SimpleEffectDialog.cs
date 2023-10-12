@@ -31,6 +31,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.ComponentModel;
+using System.Linq;
 using System.Reflection;
 using System.Text;
 using Gtk;
@@ -41,13 +42,13 @@ namespace Pinta.Gui.Widgets;
 
 public sealed class SimpleEffectDialog : Gtk.Dialog
 {
-	readonly Random random = new ();
-
-	const uint event_delay_millis = 100;
+	const uint Event_delay_millis = 100;
 	uint event_delay_timeout_id;
 
 	private delegate bool TimeoutHandler ();
 	TimeoutHandler? timeout_func;
+
+	private readonly Random random = new ();
 
 	/// Since this dialog is used by add-ins, the IAddinLocalizer allows for translations to be
 	/// fetched from the appropriate place.
@@ -61,14 +62,18 @@ public sealed class SimpleEffectDialog : Gtk.Dialog
 		this.SetDefaultResponse (ResponseType.Ok);
 
 		IconName = icon_name;
-		EffectData = effectData;
 
-		this.GetContentAreaBox ().Spacing = 12;
-		this.GetContentAreaBox ().SetAllMargins (6);
+		var contentAreaBox = this.GetContentAreaBox ();
+
+		contentAreaBox.Spacing = 12;
+		contentAreaBox.SetAllMargins (6);
 		WidthRequest = 400;
 		Resizable = false;
 
-		BuildDialog (localizer);
+		// Build dialog
+		foreach (var widget in GenerateDialogWidgets (effectData, localizer)) {
+			contentAreaBox.Append (widget);
+		}
 
 		OnClose += (_, _) => HandleClose ();
 	}
@@ -99,8 +104,6 @@ public sealed class SimpleEffectDialog : Gtk.Dialog
 		dialog.Present ();
 	}
 
-	public object EffectData { get; }
-
 	public event PropertyChangedEventHandler? EffectDataChanged;
 
 	private void HandleClose ()
@@ -113,15 +116,14 @@ public sealed class SimpleEffectDialog : Gtk.Dialog
 	}
 
 	#region EffectData Parser
-	private void BuildDialog (IAddinLocalizer localizer)
+	private IEnumerable<Widget> GenerateDialogWidgets (object effectData, IAddinLocalizer localizer)
 	{
-		var members = EffectData.GetType ().GetMembers ();
+		Random random = new ();
+		var members = effectData.GetType ().GetMembers ().Where (m => m is FieldInfo || m is PropertyInfo);
 
 		foreach (var mi in members) {
-			var mType = GetTypeForMember (mi);
 
-			if (mType == null)
-				continue;
+			var mType = GetTypeForMember (mi);
 
 			string? caption = null;
 			string? hint = null;
@@ -131,51 +133,51 @@ public sealed class SimpleEffectDialog : Gtk.Dialog
 			var attrs = mi.GetCustomAttributes (false);
 
 			foreach (var attr in attrs) {
-				if (attr is SkipAttribute)
-					skip = true;
-				else if (attr is CaptionAttribute)
-					caption = ((CaptionAttribute) attr).Caption;
-				else if (attr is HintAttribute)
-					hint = ((HintAttribute) attr).Hint;
-				else if (attr is StaticListAttribute)
-					combo = true;
-
+				switch (attr) {
+					case SkipAttribute:
+						skip = true;
+						break;
+					case CaptionAttribute captionAttr:
+						caption = captionAttr.Caption;
+						break;
+					case HintAttribute hintAttr:
+						hint = hintAttr.Hint;
+						break;
+					case StaticListAttribute:
+						combo = true;
+						break;
+				}
 			}
 
 			if (skip || string.Compare (mi.Name, "IsDefault", true) == 0)
 				continue;
 
-			if (caption == null)
-				caption = MakeCaption (mi.Name);
+			caption ??= MakeCaption (mi.Name);
 
 			if (mType == typeof (int) && (caption == "Seed"))
-				AddWidget (CreateSeed (localizer.GetString (caption), EffectData, mi, attrs));
+				yield return CreateSeed (localizer.GetString (caption), effectData, mi, attrs);
 			else if (mType == typeof (int))
-				AddWidget (CreateSlider (localizer.GetString (caption), EffectData, mi, attrs));
+				yield return CreateSlider (localizer.GetString (caption), effectData, mi, attrs);
 			else if (mType == typeof (double) && (caption == "Angle" || caption == "Rotation"))
-				AddWidget (CreateAnglePicker (localizer.GetString (caption), EffectData, mi, attrs));
+				yield return CreateAnglePicker (localizer.GetString (caption), effectData, mi, attrs);
 			else if (mType == typeof (double))
-				AddWidget (CreateDoubleSlider (localizer.GetString (caption), EffectData, mi, attrs));
+				yield return CreateDoubleSlider (localizer.GetString (caption), effectData, mi, attrs);
 			else if (combo && mType == typeof (string))
-				AddWidget (CreateComboBox (localizer.GetString (caption), EffectData, mi, attrs));
+				yield return CreateComboBox (localizer.GetString (caption), effectData, mi, attrs);
 			else if (mType == typeof (bool))
-				AddWidget (CreateCheckBox (localizer.GetString (caption), EffectData, mi, attrs));
+				yield return CreateCheckBox (localizer.GetString (caption), effectData, mi, attrs);
 			else if (mType == typeof (PointI))
-				AddWidget (CreatePointPicker (localizer.GetString (caption), EffectData, mi, attrs));
+				yield return CreatePointPicker (localizer.GetString (caption), effectData, mi, attrs);
 			else if (mType == typeof (PointD))
-				AddWidget (CreateOffsetPicker (localizer.GetString (caption), EffectData, mi, attrs));
+				yield return CreateOffsetPicker (localizer.GetString (caption), effectData, mi, attrs);
 			else if (mType.IsEnum)
-				AddWidget (CreateEnumComboBox (localizer.GetString (caption), EffectData, mi, attrs));
+				yield return CreateEnumComboBox (localizer.GetString (caption), effectData, mi, attrs);
 
 			if (hint != null)
-				AddWidget (CreateHintLabel (localizer.GetString (hint)));
+				yield return CreateHintLabel (localizer.GetString (hint));
 		}
 	}
 
-	private void AddWidget (Gtk.Widget widget)
-	{
-		this.GetContentAreaBox ().Append (widget);
-	}
 	#endregion
 
 	#region Control Builders
@@ -203,16 +205,12 @@ public sealed class SimpleEffectDialog : Gtk.Dialog
 			labels.Add (label);
 		}
 
-		var widget = new ComboBoxWidget (labels.ToArray ()) {
-			Label = caption
-		};
+		var widget = new ComboBoxWidget (labels) { Label = caption };
 
 		if (GetValue (member, o) is object obj)
 			widget.Active = ((IList) member_names).IndexOf (obj.ToString ());
 
-		widget.Changed += delegate (object? sender, EventArgs e) {
-			SetValue (member, o, Enum.Parse (myType, label_to_member[widget.ActiveText]));
-		};
+		widget.Changed += (_, _) => SetValue (member, o, Enum.Parse (myType, label_to_member[widget.ActiveText]));
 
 		return widget;
 	}
@@ -229,19 +227,16 @@ public sealed class SimpleEffectDialog : Gtk.Dialog
 		var entries = new List<string> ();
 
 		if (dict != null)
-			foreach (var str in dict.Keys)
-				entries.Add (str);
+			entries.AddRange (dict.Keys);
 
-		var widget = new ComboBoxWidget (entries.ToArray ()) {
+		var widget = new ComboBoxWidget (entries) {
 			Label = caption
 		};
 
 		if (GetValue (member, o) is string s)
 			widget.Active = entries.IndexOf (s);
 
-		widget.Changed += delegate (object? sender, EventArgs e) {
-			SetValue (member, o, widget.ActiveText);
-		};
+		widget.Changed += (_, _) => SetValue (member, o, widget.ActiveText);
 
 		return widget;
 	}
@@ -254,14 +249,20 @@ public sealed class SimpleEffectDialog : Gtk.Dialog
 		var digits_value = 2;
 
 		foreach (var attr in attributes) {
-			if (attr is MinimumValueAttribute min)
-				min_value = min.Value;
-			else if (attr is MaximumValueAttribute max)
-				max_value = max.Value;
-			else if (attr is IncrementValueAttribute inc)
-				inc_value = inc.Value;
-			else if (attr is DigitsValueAttribute digits)
-				digits_value = digits.Value;
+			switch (attr) {
+				case MinimumValueAttribute min:
+					min_value = min.Value;
+					break;
+				case MaximumValueAttribute max:
+					max_value = max.Value;
+					break;
+				case IncrementValueAttribute inc:
+					inc_value = inc.Value;
+					break;
+				case DigitsValueAttribute digits:
+					digits_value = digits.Value;
+					break;
+			}
 		}
 
 		var widget = new HScaleSpinButtonWidget {
@@ -275,7 +276,7 @@ public sealed class SimpleEffectDialog : Gtk.Dialog
 		if (GetValue (member, o) is double d)
 			widget.DefaultValue = d;
 
-		widget.ValueChanged += delegate (object? sender, EventArgs e) {
+		widget.ValueChanged += (_, _) => {
 			DelayedUpdate (() => {
 				SetValue (member, o, widget.Value);
 				return false;
@@ -293,14 +294,20 @@ public sealed class SimpleEffectDialog : Gtk.Dialog
 		var digits_value = 0;
 
 		foreach (var attr in attributes) {
-			if (attr is MinimumValueAttribute min)
-				min_value = min.Value;
-			else if (attr is MaximumValueAttribute max)
-				max_value = max.Value;
-			else if (attr is IncrementValueAttribute inc)
-				inc_value = inc.Value;
-			else if (attr is DigitsValueAttribute digits)
-				digits_value = digits.Value;
+			switch (attr) {
+				case MinimumValueAttribute min:
+					min_value = min.Value;
+					break;
+				case MaximumValueAttribute max:
+					max_value = max.Value;
+					break;
+				case IncrementValueAttribute inc:
+					inc_value = inc.Value;
+					break;
+				case DigitsValueAttribute digits:
+					digits_value = digits.Value;
+					break;
+			}
 		}
 
 		var widget = new HScaleSpinButtonWidget {
@@ -314,7 +321,7 @@ public sealed class SimpleEffectDialog : Gtk.Dialog
 		if (GetValue (member, o) is int i)
 			widget.DefaultValue = i;
 
-		widget.ValueChanged += delegate (object? sender, EventArgs e) {
+		widget.ValueChanged += (_, _) => {
 			DelayedUpdate (() => {
 				SetValue (member, o, widget.ValueAsInt);
 				return false;
@@ -326,62 +333,48 @@ public sealed class SimpleEffectDialog : Gtk.Dialog
 
 	private Gtk.CheckButton CreateCheckBox (string caption, object o, MemberInfo member, object[] attributes)
 	{
-		var widget = new Gtk.CheckButton {
-			Label = caption
-		};
+		var widget = new Gtk.CheckButton { Label = caption };
 
 		if (GetValue (member, o) is bool b)
 			widget.Active = b;
 
-		widget.OnToggled += (_, _) => {
-			SetValue (member, o, widget.Active);
-		};
+		widget.OnToggled += (_, _) => SetValue (member, o, widget.Active);
 
 		return widget;
 	}
 
 	private PointPickerWidget CreateOffsetPicker (string caption, object o, MemberInfo member, object[] attributes)
 	{
-		var widget = new PointPickerWidget {
-			Label = caption
-		};
+		var widget = new PointPickerWidget { Label = caption };
 
 		if (GetValue (member, o) is PointD p)
 			widget.DefaultOffset = p;
 
-		widget.PointPicked += delegate (object? sender, EventArgs e) {
-			SetValue (member, o, widget.Offset);
-		};
+		widget.PointPicked += (_, _) => SetValue (member, o, widget.Offset);
 
 		return widget;
 	}
 
 	private PointPickerWidget CreatePointPicker (string caption, object o, MemberInfo member, object[] attributes)
 	{
-		var widget = new PointPickerWidget {
-			Label = caption
-		};
+		var widget = new PointPickerWidget { Label = caption };
 
 		if (GetValue (member, o) is PointI p)
 			widget.DefaultPoint = p;
 
-		widget.PointPicked += delegate (object? sender, EventArgs e) {
-			SetValue (member, o, widget.Point);
-		};
+		widget.PointPicked += (_, _) => SetValue (member, o, widget.Point);
 
 		return widget;
 	}
 
 	private AnglePickerWidget CreateAnglePicker (string caption, object o, MemberInfo member, object[] attributes)
 	{
-		var widget = new AnglePickerWidget {
-			Label = caption
-		};
+		var widget = new AnglePickerWidget { Label = caption };
 
 		if (GetValue (member, o) is double d)
 			widget.DefaultValue = d;
 
-		widget.ValueChanged += delegate (object? sender, EventArgs e) {
+		widget.ValueChanged += (_, _) => {
 			DelayedUpdate (() => {
 				SetValue (member, o, widget.Value);
 				return false;
@@ -403,13 +396,10 @@ public sealed class SimpleEffectDialog : Gtk.Dialog
 	private ReseedButtonWidget CreateSeed (string caption, object o, MemberInfo member, object[] attributes)
 	{
 		var widget = new ReseedButtonWidget ();
-
-		widget.Clicked += (_, _) => {
-			SetValue (member, o, random.Next ());
-		};
-
+		widget.Clicked += (_, _) => SetValue (member, o, random.Next ());
 		return widget;
 	}
+
 	#endregion
 
 	#region Static Reflection Methods
@@ -425,28 +415,31 @@ public sealed class SimpleEffectDialog : Gtk.Dialog
 
 	private void SetValue (MemberInfo mi, object o, object val)
 	{
-		string? fieldName = null;
+		string fieldName;
 
-		if (mi is FieldInfo fi) {
-			fi.SetValue (o, val);
-			fieldName = fi.Name;
-		} else if (mi is PropertyInfo pi) {
-			pi.GetSetMethod ()?.Invoke (o, new object[] { val });
-			fieldName = pi.Name;
+		switch (mi) {
+			case FieldInfo fi:
+				fi.SetValue (o, val);
+				fieldName = fi.Name;
+				break;
+			case PropertyInfo pi:
+				pi.GetSetMethod ()?.Invoke (o, new object[] { val });
+				fieldName = pi.Name;
+				break;
+			default:
+				throw new ArgumentException ("Invalid member type", nameof (mi));
 		}
 
 		EffectDataChanged?.Invoke (this, new PropertyChangedEventArgs (fieldName));
 	}
 
-	// Returns the type for fields and properties and null for everything else
-	private static Type? GetTypeForMember (MemberInfo mi)
+	private static Type GetTypeForMember (MemberInfo mi)
 	{
-		if (mi is FieldInfo fi)
-			return fi.FieldType;
-		else if (mi is PropertyInfo pi)
-			return pi.PropertyType;
-
-		return null;
+		return mi switch {
+			FieldInfo fi => fi.FieldType,
+			PropertyInfo pi => pi.PropertyType,
+			_ => throw new ArgumentException ("Invalid member type", nameof (mi)),
+		};
 	}
 
 	private static string MakeCaption (string name)
@@ -493,7 +486,7 @@ public sealed class SimpleEffectDialog : Gtk.Dialog
 		}
 
 		timeout_func = handler;
-		event_delay_timeout_id = GLib.Functions.TimeoutAdd (0, event_delay_millis, () => {
+		event_delay_timeout_id = GLib.Functions.TimeoutAdd (0, Event_delay_millis, () => {
 			event_delay_timeout_id = 0;
 			timeout_func.Invoke ();
 			timeout_func = null;

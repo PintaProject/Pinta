@@ -18,6 +18,8 @@ public sealed class EdgeDetectEffect : ColorDifferenceEffect
 {
 	public override string Icon => Pinta.Resources.Icons.EffectsStylizeEdgeDetect;
 
+	public sealed override bool IsTileable => true;
+
 	public override string Name => Translations.GetString ("Edge Detect");
 
 	public override bool IsConfigurable => true;
@@ -76,5 +78,5 @@ public sealed class EdgeDetectEffect : ColorDifferenceEffect
 public sealed class EdgeDetectData : EffectData
 {
 	[Caption ("Angle")]
-	public double Angle = 45;
+	public double Angle { get; set; } = 45;
 }

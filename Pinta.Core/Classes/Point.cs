@@ -29,33 +29,32 @@ using System;
 /// Replacements for Cairo / GDK points that GtkSharp provided in the GTK3 build.
 namespace Pinta.Core;
 
-public record struct PointI
+public readonly record struct PointI (int X, int Y)
 {
-	public PointI (int x, int y)
+	public static readonly PointI Zero;
+	public override readonly string ToString () => $"{X}, {Y}";
+	public readonly double Magnitude ()
 	{
-		this.X = x;
-		this.Y = y;
+		double x = X;
+		double y = Y;
+		return Math.Sqrt (x * x + y * y);
 	}
 
-	public static readonly PointI Zero;
+	public static PointI operator + (PointI left, PointI right)
+		=> new (
+			X: left.X + right.X,
+			Y: left.Y + right.Y
+		);
 
-	public int X;
-	public int Y;
-
-	public override readonly string ToString () => $"{X}, {Y}";
+	public static PointI operator - (PointI left, PointI right)
+		=> new (
+			X: left.X - right.X,
+			Y: left.Y - right.Y
+		);
 }
 
-public record struct PointD
+public readonly record struct PointD (double X, double Y)
 {
-	public PointD (double x, double y)
-	{
-		this.X = x;
-		this.Y = y;
-	}
-
-	public double X;
-	public double Y;
-
 	public override readonly string ToString () => $"{X}, {Y}";
 
 	public readonly PointI ToInt () => new ((int) X, (int) Y);
@@ -72,6 +71,18 @@ public record struct PointD
 	public static PointD operator + (in PointD a, in PointD b) => new (a.X + b.X, a.Y + b.Y);
 
 	public static explicit operator PointD (PointI p) => new (p.X, p.Y);
+
+	public static PointD operator + (PointD left, PointD right)
+	=> new (
+		X: left.X + right.X,
+		Y: left.Y + right.Y
+	);
+
+	public static PointD operator - (PointD left, PointD right)
+		=> new (
+			X: left.X - right.X,
+			Y: left.Y - right.Y
+		);
 }
 
 public readonly record struct Size (int Width, int Height)

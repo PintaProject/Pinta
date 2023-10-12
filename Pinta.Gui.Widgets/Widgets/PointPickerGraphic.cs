@@ -30,7 +30,7 @@ using Pinta.Core;
 
 namespace Pinta.Gui.Widgets;
 
-public class PointPickerGraphic : Gtk.DrawingArea
+public sealed class PointPickerGraphic : Gtk.DrawingArea
 {
 	private ImageSurface? thumbnail;
 	private PointI position;
@@ -138,11 +138,9 @@ public class PointPickerGraphic : Gtk.DrawingArea
 	#region Public Events
 	public event EventHandler? PositionChanged;
 
-	protected virtual void OnPositionChange ()
+	private void OnPositionChange ()
 	{
-		if (PositionChanged != null) {
-			PositionChanged (this, EventArgs.Empty);
-		}
+		PositionChanged?.Invoke (this, EventArgs.Empty);
 	}
 	#endregion
 

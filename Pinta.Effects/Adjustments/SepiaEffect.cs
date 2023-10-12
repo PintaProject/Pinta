@@ -18,6 +18,8 @@ public sealed class SepiaEffect : BaseEffect
 	readonly UnaryPixelOp desat = new UnaryPixelOps.Desaturate ();
 	readonly UnaryPixelOp level = new UnaryPixelOps.Desaturate ();
 
+	public sealed override bool IsTileable => true;
+
 	public override string Icon => Pinta.Resources.Icons.AdjustmentsSepia;
 
 	public override string Name => Translations.GetString ("Sepia");

@@ -24,7 +24,6 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 // THE SOFTWARE.
 
-using System;
 using Cairo;
 
 using Pinta.Core;
@@ -33,23 +32,26 @@ namespace Pinta.Tools.Brushes;
 
 public sealed class SquaresBrush : BasePaintBrush
 {
-	private static readonly double theta = Math.PI / 2;
-
 	public override string Name => Translations.GetString ("Squares");
 
-	protected override RectangleI OnMouseMove (Context g, Color strokeColor, ImageSurface surface,
-						      int x, int y, int lastX, int lastY)
+	protected override RectangleI OnMouseMove (
+		Context g,
+		Color strokeColor,
+		ImageSurface surface,
+		PointI current,
+		PointI last)
 	{
-		int dx = x - lastX;
-		int dy = y - lastY;
-		double px = Math.Cos (theta) * dx - Math.Sin (theta) * dy;
-		double py = Math.Sin (theta) * dx + Math.Cos (theta) * dy;
+		PointI mouseDelta = current - last;
+		PointD rotated = new ( // 90 degrees
+			X: -mouseDelta.Y,
+			Y: +mouseDelta.X
+		);
 
-		g.MoveTo (lastX - px, lastY - py);
-		g.LineTo (lastX + px, lastY + py);
-		g.LineTo (x + px, y + py);
-		g.LineTo (x - px, y - py);
-		g.LineTo (lastX - px, lastY - py);
+		g.MoveTo (last.X - rotated.X, last.Y - rotated.Y);
+		g.LineTo (last.X + rotated.X, last.Y + rotated.Y);
+		g.LineTo (current.X + rotated.X, current.Y + rotated.Y);
+		g.LineTo (current.X - rotated.X, current.Y - rotated.Y);
+		g.LineTo (last.X - rotated.X, last.Y - rotated.Y);
 
 		g.StrokePreserve ();
 

@@ -1,21 +1,21 @@
-// 
+//
 // WorkspaceManager.cs
-//  
+//
 // Author:
 //       Jonathan Pobst <monkey@jpobst.com>
-// 
+//
 // Copyright (c) 2010 Jonathan Pobst
-// 
+//
 // Permission is hereby granted, free of charge, to any person obtaining a copy
 // of this software and associated documentation files (the "Software"), to deal
 // in the Software without restriction, including without limitation the rights
 // to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
 // copies of the Software, and to permit persons to whom the Software is
 // furnished to do so, subject to the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be included in
 // all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
 // IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
 // FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
@@ -107,7 +107,9 @@ public sealed class WorkspaceManager : IWorkspaceService
 		Document doc = new Document (size);
 
 		if (file is not null) {
-			ArgumentNullException.ThrowIfNullOrEmpty (file_type);
+			if (string.IsNullOrEmpty (file_type))
+				throw new ArgumentNullException ($"nameof{file_type} must contain value.");
+
 			doc.File = file;
 			doc.FileType = file_type;
 		} else
@@ -209,8 +211,7 @@ public sealed class WorkspaceManager : IWorkspaceService
 	{
 		bool fileOpened = false;
 
-		if (parent == null)
-			parent = PintaCore.Chrome.MainWindow;
+		parent ??= PintaCore.Chrome.MainWindow;
 
 		try {
 			// Open the image and add it to the layers
@@ -341,8 +342,7 @@ public sealed class WorkspaceManager : IWorkspaceService
 
 	private void OnActiveDocumentChanged (EventArgs e)
 	{
-		if (ActiveDocumentChanged != null)
-			ActiveDocumentChanged (this, EventArgs.Empty);
+		ActiveDocumentChanged?.Invoke (this, EventArgs.Empty);
 
 		OnSelectionChanged ();
 
@@ -355,26 +355,22 @@ public sealed class WorkspaceManager : IWorkspaceService
 			OnSelectionChanged ();
 		};
 
-		if (DocumentCreated != null)
-			DocumentCreated (this, e);
+		DocumentCreated?.Invoke (this, e);
 	}
 
 	private void OnDocumentOpened (DocumentEventArgs e)
 	{
-		if (DocumentOpened != null)
-			DocumentOpened (this, e);
+		DocumentOpened?.Invoke (this, e);
 	}
 
 	private void OnDocumentClosed (DocumentEventArgs e)
 	{
-		if (DocumentClosed != null)
-			DocumentClosed (this, e);
+		DocumentClosed?.Invoke (this, e);
 	}
 
 	private void OnSelectionChanged ()
 	{
-		if (SelectionChanged != null)
-			SelectionChanged.Invoke (this, EventArgs.Empty);
+		SelectionChanged?.Invoke (this, EventArgs.Empty);
 	}
 
 	private static void ShowOpenFileErrorDialog (Window parent, string filename, string primary_text, string details)

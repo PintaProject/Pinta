@@ -25,6 +25,7 @@
 // THE SOFTWARE.
 
 using System;
+using System.Diagnostics;
 using Cairo;
 using Mono.Addins;
 using Mono.Addins.Localization;
@@ -37,6 +38,13 @@ namespace Pinta.Core;
 [Mono.Addins.TypeExtensionPoint]
 public abstract class BaseEffect
 {
+	/// <summary>
+	/// Specifies whether Render() can be called separately (and possibly in parallel) for different sub-regions of the image.
+	/// If false, Render () will be called once with the entire region the effect is applied to.
+	/// This is required for effects which cannot be applied independently to each pixel, e.g. if the effect accumulates information from previously processed pixels.
+	/// </summary>
+	public abstract bool IsTileable { get; }
+
 	/// <summary>
 	/// Returns the name of the effect, displayed to the user in the Adjustments/Effects menu and history pad.
 	/// </summary>
@@ -223,7 +231,7 @@ public abstract class EffectData : ObservableObject
 /// <summary>
 /// Wrapper around the AddinLocalizer of an add-in.
 /// </summary>
-internal class AddinLocalizerWrapper : IAddinLocalizer
+internal sealed class AddinLocalizerWrapper : IAddinLocalizer
 {
 	private readonly AddinLocalizer localizer;
 

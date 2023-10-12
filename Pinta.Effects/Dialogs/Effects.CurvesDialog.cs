@@ -26,7 +26,6 @@
 
 using System;
 using System.Collections.Generic;
-using System.Diagnostics.CodeAnalysis;
 using Cairo;
 using Gtk;
 using Pinta.Core;
@@ -36,16 +35,16 @@ namespace Pinta.Effects;
 
 public sealed class CurvesDialog : Gtk.Dialog
 {
-	private ComboBoxText combo_map;
-	private Label label_point;
-	private DrawingArea drawing;
-	private CheckButton check_red;
-	private CheckButton check_green;
-	private CheckButton check_blue;
-	private Button button_reset;
-	private Label label_tip;
+	private readonly ComboBoxText combo_map;
+	private readonly Label label_point;
+	private readonly DrawingArea drawing;
+	private readonly CheckButton check_red;
+	private readonly CheckButton check_green;
+	private readonly CheckButton check_blue;
+	private readonly Button button_reset;
+	private readonly Label label_tip;
 
-	private class ControlPointDrawingInfo
+	private sealed class ControlPointDrawingInfo
 	{
 		public Cairo.Color Color { get; set; }
 		public bool IsActive { get; set; }
@@ -90,7 +89,62 @@ public sealed class CurvesDialog : Gtk.Dialog
 		this.AddCancelOkButtons ();
 		this.SetDefaultResponse (ResponseType.Ok);
 
-		Build ();
+		Resizable = false;
+
+		var content_area = this.GetContentAreaBox ();
+		content_area.SetAllMargins (12);
+		content_area.Spacing = 6;
+
+		const int spacing = 6;
+		var hbox1 = new Box () { Spacing = spacing };
+		hbox1.SetOrientation (Orientation.Horizontal);
+		hbox1.Append (Label.New (Translations.GetString ("Transfer Map")));
+
+		combo_map = new ComboBoxText ();
+		combo_map.AppendText (Translations.GetString ("RGB"));
+		combo_map.AppendText (Translations.GetString ("Luminosity"));
+		combo_map.Active = 1;
+		hbox1.Append (combo_map);
+
+		label_point = Label.New ("(256, 256)");
+		label_point.Hexpand = true;
+		label_point.Halign = Align.End;
+		hbox1.Append (label_point);
+		content_area.Append (hbox1);
+
+		drawing = new DrawingArea () {
+			WidthRequest = 256,
+			HeightRequest = 256,
+			CanFocus = true
+		};
+		drawing.SetAllMargins (8);
+		content_area.Append (drawing);
+
+		var hbox2 = new Box ();
+		hbox2.SetOrientation (Orientation.Horizontal);
+		check_red = new CheckButton () { Label = Translations.GetString ("Red  "), Active = true };
+		check_green = new CheckButton () { Label = Translations.GetString ("Green"), Active = true };
+		check_blue = new CheckButton () { Label = Translations.GetString ("Blue "), Active = true };
+		hbox2.Prepend (check_red);
+		hbox2.Prepend (check_green);
+		hbox2.Prepend (check_blue);
+
+		button_reset = new Button () {
+			WidthRequest = 81,
+			HeightRequest = 30,
+			Label = Translations.GetString ("Reset"),
+			Halign = Align.End,
+			Hexpand = true
+		};
+		hbox2.Append (button_reset);
+		content_area.Append (hbox2);
+
+		label_tip = Label.New (Translations.GetString ("Tip: Right-click to remove control points."));
+		content_area.Append (label_tip);
+
+		check_red.Hide ();
+		check_green.Hide ();
+		check_blue.Hide ();
 
 		EffectData = effectData;
 
@@ -386,8 +440,8 @@ public sealed class CurvesDialog : Gtk.Dialog
 
 			for (int i = 0; i < line.Length; i++) {
 				PointD linePoint = new (
-					x: (float) i,
-					y: (float) (Math.Clamp (size - 1 - interpolator.Interpolate (i), 0, size - 1))
+					X: (float) i,
+					Y: (float) (Math.Clamp (size - 1 - interpolator.Interpolate (i), 0, size - 1))
 				);
 				line[i] = linePoint;
 			}
@@ -420,66 +474,5 @@ public sealed class CurvesDialog : Gtk.Dialog
 		DrawSpline (g);
 		DrawGrid (g);
 		DrawControlPoints (g);
-	}
-
-	[MemberNotNull (nameof (combo_map), nameof (label_point), nameof (label_tip), nameof (check_red), nameof (check_green), nameof (check_blue), nameof (button_reset), nameof (drawing))]
-	private void Build ()
-	{
-		Resizable = false;
-
-		var content_area = this.GetContentAreaBox ();
-		content_area.SetAllMargins (12);
-		content_area.Spacing = 6;
-
-		const int spacing = 6;
-		var hbox1 = new Box () { Spacing = spacing };
-		hbox1.SetOrientation (Orientation.Horizontal);
-		hbox1.Append (Label.New (Translations.GetString ("Transfer Map")));
-
-		combo_map = new ComboBoxText ();
-		combo_map.AppendText (Translations.GetString ("RGB"));
-		combo_map.AppendText (Translations.GetString ("Luminosity"));
-		combo_map.Active = 1;
-		hbox1.Append (combo_map);
-
-		label_point = Label.New ("(256, 256)");
-		label_point.Hexpand = true;
-		label_point.Halign = Align.End;
-		hbox1.Append (label_point);
-		content_area.Append (hbox1);
-
-		drawing = new DrawingArea () {
-			WidthRequest = 256,
-			HeightRequest = 256,
-			CanFocus = true
-		};
-		drawing.SetAllMargins (8);
-		content_area.Append (drawing);
-
-		var hbox2 = new Box ();
-		hbox2.SetOrientation (Orientation.Horizontal);
-		check_red = new CheckButton () { Label = Translations.GetString ("Red  "), Active = true };
-		check_green = new CheckButton () { Label = Translations.GetString ("Green"), Active = true };
-		check_blue = new CheckButton () { Label = Translations.GetString ("Blue "), Active = true };
-		hbox2.Prepend (check_red);
-		hbox2.Prepend (check_green);
-		hbox2.Prepend (check_blue);
-
-		button_reset = new Button () {
-			WidthRequest = 81,
-			HeightRequest = 30,
-			Label = Translations.GetString ("Reset"),
-			Halign = Align.End,
-			Hexpand = true
-		};
-		hbox2.Append (button_reset);
-		content_area.Append (hbox2);
-
-		label_tip = Label.New (Translations.GetString ("Tip: Right-click to remove control points."));
-		content_area.Append (label_tip);
-
-		check_red.Hide ();
-		check_green.Hide ();
-		check_blue.Hide ();
 	}
 }

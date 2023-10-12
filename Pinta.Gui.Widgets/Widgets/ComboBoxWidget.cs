@@ -25,7 +25,7 @@
 // THE SOFTWARE.
 
 using System;
-using System.Diagnostics.CodeAnalysis;
+using System.Collections.Generic;
 using Gtk;
 using Pinta.Core;
 
@@ -33,42 +33,15 @@ namespace Pinta.Gui.Widgets;
 
 public sealed class ComboBoxWidget : Box
 {
-	private Label label;
-	private ComboBoxText combobox;
+	private readonly Label label;
+	private readonly ComboBoxText combobox;
 
-	public ComboBoxWidget (string[] entries)
-	{
-		Build ();
-
-		foreach (var s in entries)
-			combobox.AppendText (s);
-
-		combobox.OnChanged += delegate {
-			Changed?.Invoke (this, EventArgs.Empty);
-		};
-	}
-
-	public string Label {
-		get => label.GetText ();
-		set => label.SetText (value);
-	}
-
-	public int Active {
-		get => combobox.Active;
-		set => combobox.Active = value;
-	}
-
-	public string ActiveText => combobox.GetActiveText ()!;
-
-	public event EventHandler? Changed;
-
-	[MemberNotNull (nameof (label), nameof (combobox))]
-	private void Build ()
+	public ComboBoxWidget (IEnumerable<string> entries)
 	{
 		const int spacing = 6;
 
 		// Section label + line
-		var hbox1 = new Box () { Spacing = spacing };
+		var hbox1 = new Box { Spacing = spacing };
 		hbox1.SetOrientation (Orientation.Horizontal);
 
 		label = new Label ();
@@ -84,5 +57,24 @@ public sealed class ComboBoxWidget : Box
 		Spacing = spacing;
 		Append (hbox1);
 		Append (combobox);
+
+		foreach (var s in entries)
+			combobox.AppendText (s);
+
+		combobox.OnChanged += (_, _) => Changed?.Invoke (this, EventArgs.Empty);
 	}
+
+	public string Label {
+		get => label.GetText ();
+		set => label.SetText (value);
+	}
+
+	public int Active {
+		get => combobox.Active;
+		set => combobox.Active = value;
+	}
+
+	public string ActiveText => combobox.GetActiveText ()!;
+
+	public event EventHandler? Changed;
 }

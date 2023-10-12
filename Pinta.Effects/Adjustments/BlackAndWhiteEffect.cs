@@ -17,6 +17,8 @@ public sealed class BlackAndWhiteEffect : BaseEffect
 {
 	readonly UnaryPixelOp op = new UnaryPixelOps.Desaturate ();
 
+	public sealed override bool IsTileable => true;
+
 	public override string Icon => Pinta.Resources.Icons.AdjustmentsBlackAndWhite;
 
 	public override string Name => Translations.GetString ("Black and White");

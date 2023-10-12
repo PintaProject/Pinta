@@ -219,9 +219,8 @@ public sealed class ViewActions
 	private void Entry_FocusOutEvent (object o, EventArgs args)
 	{
 		string text = PintaCore.Actions.View.ZoomComboBox.ComboBox.GetActiveText ()!;
-		double percent;
 
-		if (!TryParsePercent (text, out percent)) {
+		if (!TryParsePercent (text, out var percent)) {
 			PintaCore.Actions.View.ZoomComboBox.ComboBox.GetEntry ().SetText (temp_zoom!);
 			return;
 		}
@@ -294,9 +293,8 @@ public sealed class ViewActions
 			ZoomToWindowActivated = false;
 		}
 
-		double percent;
 
-		if (!TryParsePercent (text, out percent))
+		if (!TryParsePercent (text, out var percent))
 			return;
 
 		percent = Math.Min (percent, 3600);

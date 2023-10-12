@@ -31,7 +31,7 @@ using Pinta.Core;
 
 namespace Pinta.Tools;
 
-public class RoundedLineEngine : ShapeEngine
+public sealed class RoundedLineEngine : ShapeEngine
 {
 	public double Radius;
 
@@ -70,11 +70,9 @@ public class RoundedLineEngine : ShapeEngine
 	{
 		List<GeneratedPoint> generatedPoints = new List<GeneratedPoint> ();
 
-		int nextIndex;
-		PointD lineEndPoint, cornerEndPoint;
 
 		//Calculate the last ControlPoint's segment end points.
-		calculateSegmentEndPoints (ControlPoints.Count - 1, out nextIndex, out lineEndPoint, out cornerEndPoint);
+		calculateSegmentEndPoints (ControlPoints.Count - 1, out var nextIndex, out var lineEndPoint, out var cornerEndPoint);
 
 		//Start the first line at the last rounded corner's end point.
 		PointD lineStartPoint = cornerEndPoint;
@@ -103,7 +101,7 @@ public class RoundedLineEngine : ShapeEngine
 	/// <param name="p2">The second end point that the curve passes through.</param>
 	/// <param name="cPIndex">The index of the previous ControlPoint to the generated points.</param>
 	/// <returns>The List of generated points.</returns>
-	protected static List<GeneratedPoint> GenerateQuadraticBezierCurvePoints (PointD p0, PointD p1, PointD p2, int cPIndex)
+	private static List<GeneratedPoint> GenerateQuadraticBezierCurvePoints (PointD p0, PointD p1, PointD p2, int cPIndex)
 	{
 		List<GeneratedPoint> resultList = new List<GeneratedPoint> ();
 
