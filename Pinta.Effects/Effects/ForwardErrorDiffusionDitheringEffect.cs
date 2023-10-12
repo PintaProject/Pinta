@@ -17,6 +17,8 @@ public sealed class ForwardErrorDiffusionDitheringEffect : BaseEffect
 	public override string EffectMenuCategory => Translations.GetString ("Test"); // TODO:
 	public ForwardErrorDiffusionDitheringData Data => (ForwardErrorDiffusionDitheringData) EffectData!; // NRT - Set in constructor
 
+	public override bool IsTileable => false;
+
 	public ForwardErrorDiffusionDitheringEffect ()
 	{
 		EffectData = new ForwardErrorDiffusionDitheringData ();
@@ -74,10 +76,12 @@ public sealed class ForwardErrorDiffusionDitheringEffect : BaseEffect
 	private static ColorBgra AddError (ColorBgra color, double factor, int errorRed, int errorGreen, int errorBlue)
 	{
 		// This function will add the error to the color based on the provided factor
-		byte newR = Utility.ClampToByte (color.R + (int) (factor * errorRed));
-		byte newG = Utility.ClampToByte (color.G + (int) (factor * errorGreen));
-		byte newB = Utility.ClampToByte (color.B + (int) (factor * errorBlue));
-		return ColorBgra.FromBgra (newB, newG, newR, 255);
+		return ColorBgra.FromBgra (
+			b: Utility.ClampToByte (color.B + (int) (factor * errorBlue)),
+			g: Utility.ClampToByte (color.G + (int) (factor * errorGreen)),
+			r: Utility.ClampToByte (color.R + (int) (factor * errorRed)),
+			a: 255
+		);
 	}
 
 	private ColorBgra FindClosestPaletteColor (ColorBgra original)
@@ -87,10 +91,10 @@ public sealed class ForwardErrorDiffusionDitheringEffect : BaseEffect
 		var palette = GetPredefinedPalette (Data.Palette);
 		foreach (var paletteColor in palette) {
 			double distance = CalculateDistance (original, paletteColor);
-			if (distance < minDistance) {
-				minDistance = distance;
-				closestColor = paletteColor;
-			}
+			if (distance >= minDistance)
+				continue;
+			minDistance = distance;
+			closestColor = paletteColor;
 		}
 		return closestColor;
 	}
