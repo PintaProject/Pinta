@@ -935,9 +935,8 @@ public abstract class BaseEditEngine
 					//Calculate the midpoint in between the previous and following points.
 					PointD midPoint = new PointD ((prevPoint.X + nextPoint.X) / 2d, (prevPoint.Y + nextPoint.Y) / 2d);
 
-					double xChange = 0d, yChange = 0d;
-
 					//Calculate the x change in the mouse position.
+					double xChange;
 					if (curPoint.X <= midPoint.X) {
 						xChange = current_point.X - last_mouse_pos.X;
 					} else {
@@ -945,6 +944,7 @@ public abstract class BaseEditEngine
 					}
 
 					//Calculate the y change in the mouse position.
+					double yChange;
 					if (curPoint.Y <= midPoint.Y) {
 						yChange = current_point.Y - last_mouse_pos.Y;
 					} else {
