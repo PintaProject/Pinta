@@ -37,6 +37,9 @@ jobs:
       uses: actions/setup-dotnet@v3
       with:
         dotnet-version: ${{matrix.dotnet_version}}
+    - name: Create temporary global.json
+      if: matrix.dotnet_version == '6.0.x'
+      run: mv .github/workflows/dotnet6.global.json ./global.json
     - name: Install Apt Dependencies
       run: |
         sudo apt update
