@@ -170,20 +170,11 @@ public sealed class GioStream : System.IO.Stream
 		if (is_disposed)
 			throw new ObjectDisposedException ("The stream is closed");
 		var seekable = (Gio.Seekable) stream;
-
-		GLib.SeekType seek_type;
-		switch (origin) {
-			case System.IO.SeekOrigin.Current:
-				seek_type = GLib.SeekType.Cur;
-				break;
-			case System.IO.SeekOrigin.End:
-				seek_type = GLib.SeekType.End;
-				break;
-			case System.IO.SeekOrigin.Begin:
-			default:
-				seek_type = GLib.SeekType.Set;
-				break;
-		}
+		var seek_type = origin switch {
+			System.IO.SeekOrigin.Current => GLib.SeekType.Cur,
+			System.IO.SeekOrigin.End => GLib.SeekType.End,
+			_ => GLib.SeekType.Set,
+		};
 		seekable.Seek (offset, seek_type, null);
 		return Position;
 	}

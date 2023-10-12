@@ -313,15 +313,11 @@ public sealed class NewImageDialog : Dialog
 
 	public Cairo.Color NewImageBackground {
 		get {
-			switch (NewImageBackgroundType) {
-				case BackgroundType.White:
-					return new Cairo.Color (1, 1, 1);
-				case BackgroundType.Transparent:
-					return new Cairo.Color (1, 1, 1, 0);
-				case BackgroundType.SecondaryColor:
-				default:
-					return PintaCore.Palette.SecondaryColor;
-			}
+			return NewImageBackgroundType switch {
+				BackgroundType.White => new Cairo.Color (1, 1, 1),
+				BackgroundType.Transparent => new Cairo.Color (1, 1, 1, 0),
+				_ => PintaCore.Palette.SecondaryColor,
+			};
 		}
 	}
 

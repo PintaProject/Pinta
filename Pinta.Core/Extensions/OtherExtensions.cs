@@ -30,16 +30,12 @@ public static class OtherExtensions
 	/// </returns>
 	public static ReadOnlyCollection<T> ToReadOnlyCollection<T> (this IEnumerable<T> values)
 	{
-		switch (values) {
-			case ImmutableBackedReadOnlyCollection<T> transparent:
-				return transparent;
-			case ImmutableArray<T> array:
-				return array.ToReadOnlyCollection ();
-			case ImmutableList<T> list:
-				return list.ToReadOnlyCollection ();
-			default:
-				return values.ToImmutableArray ().ToReadOnlyCollection ();
-		}
+		return values switch {
+			ImmutableBackedReadOnlyCollection<T> transparent => transparent,
+			ImmutableArray<T> array => array.ToReadOnlyCollection (),
+			ImmutableList<T> list => list.ToReadOnlyCollection (),
+			_ => values.ToImmutableArray ().ToReadOnlyCollection (),
+		};
 	}
 
 	/// <summary>

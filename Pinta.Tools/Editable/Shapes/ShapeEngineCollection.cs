@@ -184,32 +184,52 @@ public abstract class ShapeEngine
 	public ShapeEngine Convert (BaseEditEngine.ShapeTypes newShapeType, int shapeIndex)
 	{
 		//Remove the old ShapeEngine instance.
+
 		BaseEditEngine.SEngines.Remove (this);
 
-		ShapeEngine clone;
+		ShapeEngine clone = newShapeType switch {
 
-		switch (newShapeType) {
-			case BaseEditEngine.ShapeTypes.ClosedLineCurveSeries:
-				clone = new LineCurveSeriesEngine (parent_layer, DrawingLayer, newShapeType, AntiAliasing, true,
-				    OutlineColor, FillColor, BrushWidth);
+			BaseEditEngine.ShapeTypes.ClosedLineCurveSeries => new LineCurveSeriesEngine (
+				parent_layer,
+				DrawingLayer,
+				newShapeType,
+				AntiAliasing,
+				true,
+				OutlineColor,
+				FillColor,
+				BrushWidth
+			),
 
-				break;
-			case BaseEditEngine.ShapeTypes.Ellipse:
-				clone = new EllipseEngine (parent_layer, DrawingLayer, AntiAliasing, OutlineColor, FillColor, BrushWidth);
+			BaseEditEngine.ShapeTypes.Ellipse => new EllipseEngine (
+				parent_layer,
+				DrawingLayer,
+				AntiAliasing,
+				OutlineColor,
+				FillColor,
+				BrushWidth
+			),
 
-				break;
-			case BaseEditEngine.ShapeTypes.RoundedLineSeries:
-				clone = new RoundedLineEngine (parent_layer, DrawingLayer, RoundedLineEditEngine.DefaultRadius,
-				    AntiAliasing, OutlineColor, FillColor, BrushWidth);
+			BaseEditEngine.ShapeTypes.RoundedLineSeries => new RoundedLineEngine (
+				parent_layer,
+				DrawingLayer,
+				RoundedLineEditEngine.DefaultRadius,
+				AntiAliasing,
+				OutlineColor,
+				FillColor,
+				BrushWidth
+			),
 
-				break;
-			default:
-				//Defaults to OpenLineCurveSeries.
-				clone = new LineCurveSeriesEngine (parent_layer, DrawingLayer, newShapeType, AntiAliasing, false,
-				    OutlineColor, FillColor, BrushWidth);
-
-				break;
-		}
+			_ => new LineCurveSeriesEngine (
+				parent_layer,
+				DrawingLayer,
+				newShapeType,
+				AntiAliasing,
+				false,
+				OutlineColor,
+				FillColor,
+				BrushWidth
+			),//Defaults to OpenLineCurveSeries.
+		};
 
 		// Don't clone the GeneratedPoints or OrganizedPoints, as they will be calculated.
 		clone.ControlPoints = ControlPoints.Select (i => i.Clone ()).ToList ();
