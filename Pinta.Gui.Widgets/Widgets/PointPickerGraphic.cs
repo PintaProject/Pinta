@@ -99,29 +99,63 @@ public sealed class PointPickerGraphic : Gtk.DrawingArea
 		}
 	}
 
+	private readonly record struct PointPickerVisualSettings (
+		Color outerFrameColor,
+		Color innerFrameColor,
+		Color lineColor,
+		Color pointMarkerColor,
+		RectangleD outerFrame,
+		RectangleD innerFrame,
+		PointD verticalLineStart,
+		PointD verticalLineEnd,
+		PointD horizontalLineStart,
+		PointD horizontalLineEnd,
+		RectangleD pointMarker,
+		ImageSurface imageThumbnail);
+	private PointPickerVisualSettings CreateSettings ()
+	{
+		var rect = GetDrawBounds ();
+		var pos = PositionToClientPt (Position);
+
+		Color black = new (0, 0, 0);
+		Color lightGray = new (.75, .75, .75);
+
+		return new (
+			outerFrameColor: lightGray,
+			innerFrameColor: black,
+			lineColor: black,
+			pointMarkerColor: black,
+			outerFrame: new (rect.X + 1, rect.Y + 1, rect.Width - 1, rect.Height - 1),
+			innerFrame: new (rect.X + 2, rect.Y + 2, rect.Width - 3, rect.Height - 3),
+			verticalLineStart: new (pos.X + 1, rect.Top + 2),
+			verticalLineEnd: new (pos.X + 1, rect.Bottom - 2),
+			horizontalLineStart: new (rect.Left + 2, pos.Y + 1),
+			horizontalLineEnd: new (rect.Right - 2, pos.Y + 1),
+			pointMarker: new (pos.X - 1, pos.Y - 1, 3, 3),
+			imageThumbnail: thumbnail!
+		);
+	}
+
 	private void Draw (Context g)
 	{
 		if (thumbnail == null)
 			UpdateThumbnail ();
 
-		var rect = GetDrawBounds ();
-		var pos = PositionToClientPt (Position);
-
-		var black = new Color (0, 0, 0);
+		PointPickerVisualSettings settings = CreateSettings ();
 
 		// Background
-		g.SetSourceSurface (thumbnail!, 0.0, 0.0);
+		g.SetSourceSurface (settings.imageThumbnail, 0.0, 0.0);
 		g.Paint ();
 
-		g.DrawRectangle (new RectangleD (rect.X + 1, rect.Y + 1, rect.Width - 1, rect.Height - 1), new Cairo.Color (.75, .75, .75), 1);
-		g.DrawRectangle (new RectangleD (rect.X + 2, rect.Y + 2, rect.Width - 3, rect.Height - 3), black, 1);
+		g.DrawRectangle (settings.outerFrame, settings.outerFrameColor, 1);
+		g.DrawRectangle (settings.innerFrame, settings.innerFrameColor, 1);
 
 		// Cursor
-		g.DrawLine (new PointD (pos.X + 1, rect.Top + 2), new PointD (pos.X + 1, rect.Bottom - 2), black, 1);
-		g.DrawLine (new PointD (rect.Left + 2, pos.Y + 1), new PointD (rect.Right - 2, pos.Y + 1), black, 1);
+		g.DrawLine (settings.verticalLineStart, settings.verticalLineEnd, settings.lineColor, 1);
+		g.DrawLine (settings.horizontalLineStart, settings.horizontalLineEnd, settings.lineColor, 1);
 
 		// Point
-		g.DrawEllipse (new RectangleD (pos.X - 1, pos.Y - 1, 3, 3), black, 2);
+		g.DrawEllipse (settings.pointMarker, settings.pointMarkerColor, 2);
 	}
 
 	private RectangleI GetDrawBounds ()
