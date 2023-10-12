@@ -114,7 +114,7 @@ public sealed class AnglePickerGraphic : Gtk.DrawingArea
 		return newAngle;
 	}
 
-	private record struct AngleGraphicSettings (
+	private readonly record struct AngleGraphicSettings (
 		RectangleD ellipseOutlineRect,
 		Color color,
 		RectangleD gripEllipseRect,
