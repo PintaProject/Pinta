@@ -343,14 +343,17 @@ public sealed class DocumentWorkspace
 		var canvas_point = ViewPointToCanvas (center_point.Value);
 
 		if (zoomType == ZoomType.ZoomIn || zoomType == ZoomType.ZoomOut) {
+
 			int i = 0;
 
-			Predicate<string> UpdateZoomLevel = zoomInList => {
+			bool UpdateZoomLevel (string zoomInList)
+			{
 				if (!ViewActions.TryParsePercent (zoomInList, out var zoom_level))
 					return false;
 
 				switch (zoomType) {
 					case ZoomType.ZoomIn:
+
 						if (zoomInList == Translations.GetString ("Window") || zoom_level <= zoom) {
 							PintaCore.Actions.View.ZoomComboBox.ComboBox.Active = i - 1;
 							return true;
@@ -359,6 +362,7 @@ public sealed class DocumentWorkspace
 						break;
 
 					case ZoomType.ZoomOut:
+
 						if (zoomInList == Translations.GetString ("Window"))
 							return true;
 
@@ -369,11 +373,11 @@ public sealed class DocumentWorkspace
 
 						break;
 				}
-
 				return false;
-			};
+			}
 
 			foreach (string item in PintaCore.Actions.View.ZoomCollection) {
+
 				if (UpdateZoomLevel (item))
 					break;
 
