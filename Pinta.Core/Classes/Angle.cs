@@ -2,101 +2,74 @@ using System;
 
 namespace Pinta.Core.Classes;
 
-public readonly struct Angle
+public readonly struct RadiansAngle
 {
-	public double Magnitude { get; }
-	public AngleUnit UnitType { get; }
-
-	private Angle (double magnitude, AngleUnit unitType)
-	{
-		Magnitude = magnitude;
-		UnitType = unitType;
-	}
-
 	private const double MAX_RADIANS = Math.PI * 2;
-	private const double MAX_DEGREES = 360;
-	private const double MAX_REVOLUTIONS = 1;
+	public double Radians { get; }
 
-	public static Angle Radians (double radians)
+	public RadiansAngle (double radians)
 	{
-		return radians switch {
-			>= 0 => new Angle (radians % MAX_RADIANS, AngleUnit.Radian),
-			_ => new Angle (MAX_RADIANS - (radians % MAX_RADIANS), AngleUnit.Radian)
+		Radians = radians switch {
+			0 => 0,
+			>= 0 => radians % MAX_RADIANS,
+			_ => MAX_RADIANS + (radians % MAX_RADIANS)
 		};
-	}
-
-	public static Angle Degrees (double degrees)
-	{
-		return degrees switch {
-			>= 0 => new Angle (degrees % MAX_DEGREES, AngleUnit.Degree),
-			_ => new Angle (MAX_DEGREES - (degrees % MAX_DEGREES), AngleUnit.Degree)
-		};
-	}
-
-	public static Angle Revolutions (double revolutions)
-	{
-		return revolutions switch {
-			>= 0 => new Angle (revolutions % MAX_REVOLUTIONS, AngleUnit.Revolution),
-			_ => new Angle (MAX_REVOLUTIONS - (revolutions % MAX_REVOLUTIONS), AngleUnit.Revolution)
-		};
-	}
-
-	public static Angle operator + (Angle augend, Angle addend)
-	{
-		if (augend.UnitType == addend.UnitType) {
-			return new Angle (augend.Magnitude + addend.Magnitude, augend.UnitType);
-		} else {
-			var normalizedAddendMagnitude = ChangeUnit (addend.Magnitude, addend.UnitType, augend.UnitType);
-			return new Angle (augend.Magnitude + normalizedAddendMagnitude, augend.UnitType);
-		}
-	}
-
-	public static Angle operator - (Angle minuend, Angle subtrahend)
-	{
-		if (minuend.UnitType == subtrahend.UnitType) {
-			return new Angle (minuend.Magnitude - subtrahend.Magnitude, minuend.UnitType);
-		} else {
-			var normalizedSubtrahendMagnitude = ChangeUnit (subtrahend.Magnitude, subtrahend.UnitType, minuend.UnitType);
-			return new Angle (minuend.Magnitude - normalizedSubtrahendMagnitude, minuend.UnitType);
-		}
 	}
 
 	const double RADIANS_TO_DEGREES = 180d / Math.PI;
-	const double DEGREES_TO_RADIANS = Math.PI / 180d;
-
-	const double REVOLUTIONS_TO_RADIANS = Math.PI * 2d;
 	const double RADIANS_TO_REVOLUTIONS = 1d / (Math.PI * 2);
 
-	const double REVOLUTIONS_TO_DEGREES = 360d;
-	const double DEGREES_TO_REVOLUTIONS = 1d / 360d;
+	public DegreesAngle ToDegrees () => new (Radians * RADIANS_TO_DEGREES);
+	public RevolutionsAngle ToRevolutions () => new (Radians * RADIANS_TO_REVOLUTIONS);
 
-	private static double ChangeUnit (double magnitude, AngleUnit originalUnit, AngleUnit destinationUnit)
-	{
-		if (originalUnit == destinationUnit) return magnitude;
-		return originalUnit switch {
-			AngleUnit.Radian => destinationUnit switch {
-				AngleUnit.Degree => magnitude * RADIANS_TO_DEGREES,
-				AngleUnit.Revolution => magnitude * RADIANS_TO_REVOLUTIONS,
-				_ => throw new NotSupportedException ()
-			},
-			AngleUnit.Degree => destinationUnit switch {
-				AngleUnit.Radian => magnitude * DEGREES_TO_RADIANS,
-				AngleUnit.Revolution => magnitude * DEGREES_TO_REVOLUTIONS,
-				_ => throw new NotSupportedException ()
-			},
-			AngleUnit.Revolution => destinationUnit switch {
-				AngleUnit.Radian => magnitude * REVOLUTIONS_TO_RADIANS,
-				AngleUnit.Degree => magnitude * REVOLUTIONS_TO_DEGREES,
-				_ => throw new NotSupportedException ()
-			},
-			_ => throw new NotSupportedException (),
-		};
-	}
+	public static RadiansAngle operator + (RadiansAngle a, RadiansAngle b) => new (a.Radians + b.Radians);
+	public static RadiansAngle operator - (RadiansAngle a, RadiansAngle b) => new (a.Radians - b.Radians);
 }
 
-public enum AngleUnit
+public readonly struct DegreesAngle
 {
-	Radian,
-	Degree,
-	Revolution,
+	private const double MAX_DEGREES = 360;
+	public double Degrees { get; }
+
+	public DegreesAngle (double degrees)
+	{
+		Degrees = degrees switch {
+			0 => 0,
+			>= 0 => degrees % MAX_DEGREES,
+			_ => MAX_DEGREES + (degrees % MAX_DEGREES)
+		};
+	}
+
+	const double DEGREES_TO_RADIANS = Math.PI / 180d;
+	const double DEGREES_TO_REVOLUTIONS = 1d / 360d;
+
+	public RadiansAngle ToRadians () => new (Degrees * DEGREES_TO_RADIANS);
+	public RevolutionsAngle ToRevolutions () => new (Degrees * DEGREES_TO_REVOLUTIONS);
+
+	public static DegreesAngle operator + (DegreesAngle a, DegreesAngle b) => new (a.Degrees + b.Degrees);
+	public static DegreesAngle operator - (DegreesAngle a, DegreesAngle b) => new (a.Degrees - b.Degrees);
+}
+
+public readonly struct RevolutionsAngle
+{
+	private const double MAX_REVOLUTIONS = 1;
+	public double Revolutions { get; }
+
+	public RevolutionsAngle (double revolutions)
+	{
+		Revolutions = revolutions switch {
+			0 => 0,
+			>= 0 => revolutions % MAX_REVOLUTIONS,
+			_ => MAX_REVOLUTIONS + (revolutions % MAX_REVOLUTIONS)
+		};
+	}
+
+	const double REVOLUTIONS_TO_RADIANS = Math.PI * 2d;
+	const double REVOLUTIONS_TO_DEGREES = 360d;
+
+	public RadiansAngle ToRadians () => new (Revolutions * REVOLUTIONS_TO_RADIANS);
+	public DegreesAngle ToDegrees () => new (Revolutions * REVOLUTIONS_TO_DEGREES);
+
+	public static RevolutionsAngle operator + (RevolutionsAngle a, RevolutionsAngle b) => new (a.Revolutions + b.Revolutions);
+	public static RevolutionsAngle operator - (RevolutionsAngle a, RevolutionsAngle b) => new (a.Revolutions - b.Revolutions);
 }
