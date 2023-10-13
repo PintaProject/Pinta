@@ -12,7 +12,7 @@ public readonly struct RadiansAngle
 		Radians = radians switch {
 			0 => 0,
 			>= 0 => radians % MAX_RADIANS,
-			_ => MAX_RADIANS + (radians % MAX_RADIANS)
+			_ => (MAX_RADIANS + (radians % MAX_RADIANS)) % MAX_RADIANS
 		};
 	}
 
@@ -36,7 +36,7 @@ public readonly struct DegreesAngle
 		Degrees = degrees switch {
 			0 => 0,
 			>= 0 => degrees % MAX_DEGREES,
-			_ => MAX_DEGREES + (degrees % MAX_DEGREES)
+			_ => (MAX_DEGREES + (degrees % MAX_DEGREES)) % MAX_DEGREES
 		};
 	}
 
@@ -60,7 +60,7 @@ public readonly struct RevolutionsAngle
 		Revolutions = revolutions switch {
 			0 => 0,
 			>= 0 => revolutions % MAX_REVOLUTIONS,
-			_ => MAX_REVOLUTIONS + (revolutions % MAX_REVOLUTIONS)
+			_ => (MAX_REVOLUTIONS + (revolutions % MAX_REVOLUTIONS)) % MAX_REVOLUTIONS
 		};
 	}
 
