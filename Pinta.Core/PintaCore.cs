@@ -32,7 +32,7 @@ public static class PintaCore
 	public static ChromeManager Chrome { get; }
 	public static EffectsManager Effects { get; }
 	public static ImageConverterManager ImageFormats { get; }
-	public static IServiceManager Services { get; }
+	public static PintaCoreServices Services { get; }
 	public static LayerManager Layers { get; }
 	public static LivePreviewManager LivePreview { get; }
 	public static PaintBrushManager PaintBrushes { get; }
@@ -67,24 +67,23 @@ public static class PintaCore
 		Chrome = new ChromeManager ();
 		Effects = new EffectsManager ();
 
-		Services = new ServiceManager ();
-
-		Services.AddService<IResourceService> (Resources);
-		Services.AddService<ISettingsService> (Settings);
-		Services.AddService (Actions);
-		Services.AddService<IWorkspaceService> (Workspace);
-		Services.AddService (Layers);
-		Services.AddService<IPaintBrushService> (PaintBrushes);
-		Services.AddService<IToolService> (Tools);
-		Services.AddService (ImageFormats);
-		Services.AddService (PaletteFormats);
-		Services.AddService (System);
-		Services.AddService (RecentFiles);
-
-		Services.AddService (LivePreview);
-		Services.AddService<IPaletteService> (Palette);
-		Services.AddService (Chrome);
-		Services.AddService (Effects);
+		Services = new PintaCoreServices (
+			Resources,
+			Settings,
+			Actions,
+			Workspace,
+			Layers,
+			PaintBrushes,
+			Tools,
+			ImageFormats,
+			PaletteFormats,
+			System,
+			RecentFiles,
+			LivePreview,
+			Palette,
+			Chrome,
+			Effects
+		);
 	}
 
 	public static void Initialize ()

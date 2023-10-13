@@ -39,7 +39,7 @@ using Pinta.Core;
 
 namespace Pinta.Tools;
 
-public class RecolorTool : BaseBrushTool
+public sealed class RecolorTool : BaseBrushTool
 {
 	private readonly IWorkspaceService workspace;
 
@@ -48,9 +48,9 @@ public class RecolorTool : BaseBrushTool
 
 	private const string TOLERANCE_SETTING = "recolor-tolerance";
 
-	public RecolorTool (IServiceManager services) : base (services)
+	public RecolorTool (PintaCoreServices services) : base (services)
 	{
-		workspace = services.GetService<IWorkspaceService> ();
+		workspace = services.Workspace;
 	}
 
 	public override string Name => Translations.GetString ("Recolor");
@@ -60,7 +60,7 @@ public class RecolorTool : BaseBrushTool
 		"\nRight click to reverse.");
 	public override Gdk.Cursor DefaultCursor => Gdk.Cursor.NewFromTexture (Resources.GetIcon ("Cursor.Recolor.png"), 9, 18, null);
 	public override Gdk.Key ShortcutKey => Gdk.Key.R;
-	protected float Tolerance => (float) (ToleranceSlider.GetValue () / 100);
+	private float Tolerance => (float) (ToleranceSlider.GetValue () / 100);
 	public override int Priority => 49;
 
 	protected override void OnBuildToolBar (Box tb)

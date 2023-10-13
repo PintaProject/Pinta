@@ -54,10 +54,10 @@ public abstract class SelectTool : BaseTool
 	protected override bool ShowAntialiasingButton => false;
 	public override IEnumerable<MoveHandle> Handles => handles;
 
-	public SelectTool (IServiceManager services) : base (services)
+	public SelectTool (PintaCoreServices services) : base (services)
 	{
-		tools = services.GetService<IToolService> ();
-		workspace = services.GetService<IWorkspaceService> ();
+		tools = services.Tools;
+		workspace = services.Workspace;
 
 		handles[0] = new MoveHandle { CursorName = Pinta.Resources.StandardCursors.ResizeNW };
 		handles[1] = new MoveHandle { CursorName = Pinta.Resources.StandardCursors.ResizeSW };

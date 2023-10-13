@@ -30,7 +30,7 @@ namespace Pinta.Tools;
 
 public sealed class EllipseSelectTool : SelectTool
 {
-	public EllipseSelectTool (IServiceManager services) : base (services) { }
+	public EllipseSelectTool (PintaCoreServices services) : base (services) { }
 
 	public override string Name => Translations.GetString ("Ellipse Select");
 	public override string Icon => Pinta.Resources.Icons.ToolSelectEllipse;

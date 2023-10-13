@@ -35,9 +35,9 @@ public sealed class PaintBucketTool : FloodTool
 	private readonly IPaletteService palette;
 	private Color fill_color;
 
-	public PaintBucketTool (IServiceManager services) : base (services)
+	public PaintBucketTool (PintaCoreServices services) : base (services)
 	{
-		palette = services.GetService<IPaletteService> ();
+		palette = services.Palette;
 	}
 
 	public override string Name => Translations.GetString ("Paint Bucket");

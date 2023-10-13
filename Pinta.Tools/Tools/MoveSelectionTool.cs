@@ -34,7 +34,7 @@ public sealed class MoveSelectionTool : BaseTransformTool
 	private SelectionHistoryItem? hist;
 	private DocumentSelection? original_selection;
 
-	public MoveSelectionTool (IServiceManager service) : base (service)
+	public MoveSelectionTool (PintaCoreServices service) : base (service)
 	{
 	}
 

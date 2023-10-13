@@ -30,7 +30,7 @@ namespace Pinta.Tools;
 
 public sealed class EllipseTool : ShapeTool
 {
-	public EllipseTool (IServiceManager services) : base (services)
+	public EllipseTool (PintaCoreServices services) : base (services)
 	{
 		BaseEditEngine.CorrespondingTools[ShapeType] = this;
 	}

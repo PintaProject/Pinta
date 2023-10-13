@@ -45,7 +45,7 @@ public sealed class FreeformShapeTool : BaseBrushTool
 	private const string FILL_TYPE_SETTING = "freeform-shape-fill-type";
 	private const string DASH_PATTERN_SETTING = "freeform-shape-dash_pattern";
 
-	public FreeformShapeTool (IServiceManager services) : base (services)
+	public FreeformShapeTool (PintaCoreServices services) : base (services)
 	{
 	}
 

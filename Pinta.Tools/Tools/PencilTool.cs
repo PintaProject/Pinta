@@ -39,9 +39,9 @@ public sealed class PencilTool : BaseTool
 	private bool surface_modified;
 	private MouseButton mouse_button;
 
-	public PencilTool (IServiceManager services) : base (services)
+	public PencilTool (PintaCoreServices services) : base (services)
 	{
-		palette = services.GetService<IPaletteService> ();
+		palette = services.Palette;
 	}
 
 	public override string Name => Translations.GetString ("Pencil");

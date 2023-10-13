@@ -44,7 +44,7 @@ public abstract class BaseTransformTool : BaseTool
 	/// <summary>
 	/// Initializes a new instance of the <see cref="Pinta.Tools.BaseTransformTool"/> class.
 	/// </summary>
-	public BaseTransformTool (IServiceManager services) : base (services)
+	public BaseTransformTool (PintaCoreServices services) : base (services)
 	{
 	}
 

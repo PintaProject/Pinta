@@ -30,7 +30,7 @@ namespace Pinta.Tools;
 
 public sealed class LineCurveTool : ShapeTool
 {
-	public LineCurveTool (IServiceManager services) : base (services)
+	public LineCurveTool (PintaCoreServices services) : base (services)
 	{
 		BaseEditEngine.CorrespondingTools[ShapeType] = this;
 	}

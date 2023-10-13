@@ -30,7 +30,7 @@ namespace Pinta.Tools;
 
 public sealed class RoundedRectangleTool : ShapeTool
 {
-	public RoundedRectangleTool (IServiceManager services) : base (services)
+	public RoundedRectangleTool (PintaCoreServices services) : base (services)
 	{
 		BaseEditEngine.CorrespondingTools[ShapeType] = this;
 	}

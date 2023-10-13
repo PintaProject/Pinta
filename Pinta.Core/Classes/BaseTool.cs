@@ -45,15 +45,14 @@ public abstract class BaseTool
 	private string ANTIALIAS_SETTING => $"{GetType ().Name.ToLowerInvariant ()}-antialias";
 	private string ALPHABLEND_SETTING => $"{GetType ().Name.ToLowerInvariant ()}-alpha-blend";
 
-	protected static PointI point_empty = new (-500, -500);
+	protected static readonly PointI point_empty = new (-500, -500);
 
-	protected BaseTool (IServiceManager services)
+	protected BaseTool (PintaCoreServices services)
 	{
-		Resources = services.GetService<IResourceService> ();
-		Settings = services.GetService<ISettingsService> ();
-
-		tools = services.GetService<IToolService> ();
-		workspace = services.GetService<IWorkspaceService> ();
+		Resources = services.Resources;
+		Settings = services.Settings;
+		tools = services.Tools;
+		workspace = services.Workspace;
 
 		CurrentCursor = DefaultCursor;
 

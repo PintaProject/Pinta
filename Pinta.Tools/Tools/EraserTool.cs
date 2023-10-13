@@ -47,7 +47,7 @@ public sealed class EraserTool : BaseBrushTool
 
 	private const string ERASER_TYPE_SETTING = "eraser-erase-type";
 
-	public EraserTool (IServiceManager services) : base (services)
+	public EraserTool (PintaCoreServices services) : base (services)
 	{
 	}
 

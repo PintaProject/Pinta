@@ -35,7 +35,7 @@ public sealed class MoveSelectedTool : BaseTransformTool
 	private DocumentSelection? original_selection;
 	private readonly Matrix original_transform = CairoExtensions.CreateIdentityMatrix ();
 
-	public MoveSelectedTool (IServiceManager services) : base (services)
+	public MoveSelectedTool (PintaCoreServices services) : base (services)
 	{
 	}
 

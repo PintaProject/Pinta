@@ -34,7 +34,7 @@ using Pinta.Core;
 
 namespace Pinta.Tools;
 
-public class LassoSelectTool : BaseTool
+public sealed class LassoSelectTool : BaseTool
 {
 	private readonly IWorkspaceService workspace;
 
@@ -45,9 +45,9 @@ public class LassoSelectTool : BaseTool
 	private Path? path;
 	private readonly List<IntPoint> lasso_polygon = new ();
 
-	public LassoSelectTool (IServiceManager services) : base (services)
+	public LassoSelectTool (PintaCoreServices services) : base (services)
 	{
-		workspace = services.GetService<IWorkspaceService> ();
+		workspace = services.Workspace;
 	}
 
 	public override string Name => Translations.GetString ("Lasso Select");

@@ -36,7 +36,7 @@ public sealed class CloneStampTool : BaseBrushTool
 	private PointI? offset = null;
 	private PointI? last_point = null;
 
-	public CloneStampTool (IServiceManager services) : base (services)
+	public CloneStampTool (PintaCoreServices services) : base (services)
 	{
 	}
 

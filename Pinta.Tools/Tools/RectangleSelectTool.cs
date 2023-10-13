@@ -30,7 +30,7 @@ namespace Pinta.Tools;
 
 public sealed class RectangleSelectTool : SelectTool
 {
-	public RectangleSelectTool (IServiceManager services) : base (services) { }
+	public RectangleSelectTool (PintaCoreServices services) : base (services) { }
 
 	public override string Name => Translations.GetString ("Rectangle Select");
 	public override string Icon => Pinta.Resources.Icons.ToolSelectRectangle;

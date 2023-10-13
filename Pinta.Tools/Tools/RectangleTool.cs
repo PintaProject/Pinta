@@ -30,7 +30,7 @@ namespace Pinta.Tools;
 
 public sealed class RectangleTool : ShapeTool
 {
-	public RectangleTool (IServiceManager services) : base (services)
+	public RectangleTool (PintaCoreServices services) : base (services)
 	{
 		BaseEditEngine.CorrespondingTools[ShapeType] = this;
 	}

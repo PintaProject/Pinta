@@ -33,7 +33,7 @@ public sealed class PanTool : BaseTool
 	private bool active;
 	private PointD last_point;
 
-	public PanTool (IServiceManager services) : base (services) { }
+	public PanTool (PintaCoreServices services) : base (services) { }
 
 	public override string Name => Translations.GetString ("Pan");
 	public override string Icon => Pinta.Resources.Icons.ToolPan;

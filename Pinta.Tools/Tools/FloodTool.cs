@@ -48,7 +48,7 @@ public abstract class FloodTool : BaseTool
 	protected Label? tolerance_label;
 	protected Scale? tolerance_slider;
 
-	public FloodTool (IServiceManager services) : base (services)
+	public FloodTool (PintaCoreServices services) : base (services)
 	{
 	}
 

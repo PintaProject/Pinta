@@ -36,9 +36,9 @@ public sealed class MagicWandTool : FloodTool
 
 	private CombineMode combine_mode;
 
-	public MagicWandTool (IServiceManager services) : base (services)
+	public MagicWandTool (PintaCoreServices services) : base (services)
 	{
-		workspace = services.GetService<IWorkspaceService> ();
+		workspace = services.Workspace;
 
 		LimitToSelection = false;
 	}

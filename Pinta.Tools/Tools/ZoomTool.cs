@@ -42,7 +42,7 @@ public sealed class ZoomTool : BaseTool
 	private RectangleD last_dirty;
 	private static readonly int tolerance = 10;
 
-	public ZoomTool (IServiceManager services) : base (services)
+	public ZoomTool (PintaCoreServices services) : base (services)
 	{
 		mouse_down = MouseButton.None;
 

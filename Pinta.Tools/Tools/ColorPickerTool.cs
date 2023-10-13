@@ -42,10 +42,10 @@ public sealed class ColorPickerTool : BaseTool
 	private const string SAMPLE_SIZE_SETTING = "color-picker-sample-size";
 	private const string SAMPLE_TYPE_SETTING = "color-picker-sample-type";
 
-	public ColorPickerTool (IServiceManager services) : base (services)
+	public ColorPickerTool (PintaCoreServices services) : base (services)
 	{
-		palette = services.GetService<IPaletteService> ();
-		tools = services.GetService<IToolService> ();
+		palette = services.Palette;
+		tools = services.Tools;
 	}
 
 	public override string Name => Translations.GetString ("Color Picker");

@@ -24,42 +24,22 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 // THE SOFTWARE.
 
-using System;
-using System.Collections.Generic;
-
 namespace Pinta.Core;
 
-public interface IServiceManager
-{
-	T AddService<T> (T implementation) where T : class;
-	T GetService<T> () where T : class;
-	T? GetOptionalService<T> () where T : class;
-}
-
-public sealed class ServiceManager : IServiceManager
-{
-	private readonly Dictionary<Type, object> services = new ();
-
-	public T AddService<T> (T implementation) where T : class
-	{
-		services.Add (typeof (T), implementation);
-
-		return implementation;
-	}
-
-	public T GetService<T> () where T : class
-	{
-		if (services.TryGetValue (typeof (T), out var implementation))
-			return (T) implementation;
-
-		throw new ApplicationException ($"Could not resolve service type {typeof (T)}");
-	}
-
-	public T? GetOptionalService<T> () where T : class
-	{
-		if (services.TryGetValue (typeof (T), out var implementation))
-			return (T) implementation;
-
-		return null;
-	}
-}
+public sealed record PintaCoreServices (
+	IResourceService Resources,
+	ISettingsService Settings,
+	ActionManager Actions,
+	IWorkspaceService Workspace,
+	LayerManager Layers,
+	IPaintBrushService PaintBrushes,
+	IToolService Tools,
+	ImageConverterManager ImageFormats,
+	PaletteFormatManager PaletteFormats,
+	SystemManager System,
+	RecentFileManager RecentFiles,
+	LivePreviewManager LivePreview,
+	IPaletteService Palette,
+	ChromeManager Chrome,
+	EffectsManager Effects
+);

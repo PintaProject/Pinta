@@ -41,9 +41,9 @@ public abstract class BaseBrushTool : BaseTool
 
 	private string BRUSH_WIDTH_SETTING => $"{GetType ().Name.ToLowerInvariant ()}-brush-width";
 
-	protected BaseBrushTool (IServiceManager services) : base (services)
+	protected BaseBrushTool (PintaCoreServices services) : base (services)
 	{
-		Palette = services.GetService<IPaletteService> ();
+		Palette = services.Palette;
 	}
 
 	protected override bool ShowAntialiasingButton => true;

@@ -91,7 +91,7 @@ public sealed class TextTool : BaseTool
 	public Gdk.Cursor InvalidEditCursor => Gdk.Cursor.NewFromTexture (Resources.GetIcon (Pinta.Resources.Icons.EditSelectionErase), 0, 0, null);
 
 	#region Constructor
-	public TextTool (IServiceManager services) : base (services)
+	public TextTool (PintaCoreServices services) : base (services)
 	{
 		cursor_hand = Gdk.Cursor.NewFromTexture (Resources.GetIcon ("Cursor.Pan.png"), 8, 8, null);
 

@@ -33,7 +33,7 @@ public abstract class ShapeTool : BaseTool
 {
 	public BaseEditEngine EditEngine { get; }
 
-	public ShapeTool (IServiceManager services) : base (services)
+	public ShapeTool (PintaCoreServices services) : base (services)
 	{
 		EditEngine = CreateEditEngine ();
 	}
