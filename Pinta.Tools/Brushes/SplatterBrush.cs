@@ -39,7 +39,7 @@ public sealed class SplatterBrush : BasePaintBrush
 
 	protected override RectangleI OnMouseMove (
 		Context g,
-		Color strokeColor,
+		StrokeContext strokeContext,
 		ImageSurface surface,
 		PointI current,
 		PointI last)

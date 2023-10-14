@@ -72,12 +72,12 @@ public abstract class BasePaintBrush
 
 	public virtual RectangleI DoMouseMove (
 		Context g,
-		Color strokeColor,
+		StrokeContext strokeContext,
 		ImageSurface surface,
 		PointI current,
 		PointI last)
 	{
-		return OnMouseMove (g, strokeColor, surface, current, last);
+		return OnMouseMove (g, strokeContext, surface, current, last);
 	}
 
 	/// <summary>
@@ -108,7 +108,7 @@ public abstract class BasePaintBrush
 	/// <returns>A rectangle containing the area of the canvas that should be redrawn.</returns>
 	protected abstract RectangleI OnMouseMove (
 		Context g,
-		Color strokeColor,
+		StrokeContext strokeContext,
 		ImageSurface surface,
 		PointI current,
 		PointI last);

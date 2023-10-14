@@ -37,7 +37,6 @@ public sealed class PaintBrushTool : BaseBrushTool
 
 	private BasePaintBrush? default_brush;
 	private BasePaintBrush? active_brush;
-	private Color stroke_color;
 	private PointI last_point;
 
 	private const string BRUSH_SETTING = "paint-brush-brush";
@@ -89,24 +88,29 @@ public sealed class PaintBrushTool : BaseBrushTool
 
 	protected override void OnMouseMove (Document document, ToolMouseEventArgs e)
 	{
-		if (mouse_button == MouseButton.Left) {
-			stroke_color = Palette.PrimaryColor;
-		} else if (mouse_button == MouseButton.Right) {
-			stroke_color = Palette.SecondaryColor;
-		} else {
+		if (active_brush is null)
+			return;
+
+		if (mouse_button is not MouseButton.Left or MouseButton.Right) {
 			last_point = point_empty;
 			return;
 		}
 
-		if (active_brush is null)
-			return;
-
-		// TODO: also multiply by pressure
-		stroke_color = new Color (
-			stroke_color.R,
-			stroke_color.G,
-			stroke_color.B,
-			stroke_color.A * active_brush.StrokeAlphaMultiplier
+		// TODO: also multiply color by pressure
+		StrokeContext strokeContext = new (
+			primaryColor: new (
+				Palette.PrimaryColor.R,
+				Palette.PrimaryColor.G,
+				Palette.PrimaryColor.B,
+				Palette.PrimaryColor.A * active_brush.StrokeAlphaMultiplier
+			),
+			secondaryColor: new (
+				Palette.SecondaryColor.R,
+				Palette.SecondaryColor.G,
+				Palette.SecondaryColor.B,
+				Palette.SecondaryColor.A * active_brush.StrokeAlphaMultiplier
+			),
+			mouseButton: mouse_button
 		);
 
 		if (last_point.Equals (point_empty))
@@ -123,9 +127,9 @@ public sealed class PaintBrushTool : BaseBrushTool
 		g.LineWidth = brush_width;
 		g.LineJoin = LineJoin.Round;
 		g.LineCap = BrushWidth == 1 ? LineCap.Butt : LineCap.Round;
-		g.SetSourceColor (stroke_color);
+		g.SetSourceColor (strokeContext.StrokeColor);
 
-		var invalidate_rect = active_brush.DoMouseMove (g, stroke_color, surf, e.Point, last_point);
+		var invalidate_rect = active_brush.DoMouseMove (g, strokeContext, surf, e.Point, last_point);
 
 		// If we draw partially offscreen, Cairo gives us a bogus
 		// dirty rectangle, so redraw everything.
