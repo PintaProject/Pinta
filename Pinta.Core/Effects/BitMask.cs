@@ -24,11 +24,11 @@ public sealed class BitMask : ICloneable
 		array = new BitArray (width * height);
 	}
 
-	private BitMask (BitMask source)
+	private BitMask (BitMask other)
 	{
-		Width = source.Width;
-		Height = source.Height;
-		array = (BitArray) source.array.Clone ();
+		Width = other.Width;
+		Height = other.Height;
+		array = (BitArray) other.array.Clone ();
 	}
 
 	object ICloneable.Clone () => Clone ();
