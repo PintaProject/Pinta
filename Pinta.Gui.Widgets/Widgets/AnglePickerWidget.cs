@@ -73,7 +73,7 @@ public sealed class AnglePickerWidget : Box
 		spin.OnValueChanged += HandleSpinValueChanged;
 		button.OnClicked += HandleButtonClicked;
 
-		OnRealize += (_, _) => anglepickergraphic1.ValueDouble = DefaultValue.Degrees;
+		OnRealize += (_, _) => anglepickergraphic1.Value = DefaultValue;
 
 		spin.SetActivatesDefault (true);
 	}
@@ -85,35 +85,38 @@ public sealed class AnglePickerWidget : Box
 		set => label.SetText (value);
 	}
 
-	public double Value {
-		get => anglepickergraphic1.ValueDouble;
+	public DegreesAngle Value {
+		get => anglepickergraphic1.Value;
 		set {
-			if (anglepickergraphic1.ValueDouble != value) {
-				anglepickergraphic1.ValueDouble = value;
-				OnValueChanged ();
-			}
+			if (anglepickergraphic1.Value == value)
+				return;
+
+			anglepickergraphic1.Value = value;
+			OnValueChanged ();
 		}
 	}
 
 	private void HandleAnglePickerValueChanged (object? sender, EventArgs e)
 	{
-		if (spin.Value != anglepickergraphic1.ValueDouble) {
-			spin.Value = anglepickergraphic1.ValueDouble;
-			OnValueChanged ();
-		}
+		if (spin.Value == anglepickergraphic1.Value.Degrees)
+			return;
+
+		spin.Value = anglepickergraphic1.Value.Degrees;
+		OnValueChanged ();
 	}
 
 	private void HandleSpinValueChanged (object? sender, EventArgs e)
 	{
-		if (anglepickergraphic1.ValueDouble != spin.Value) {
-			anglepickergraphic1.ValueDouble = spin.Value;
-			OnValueChanged ();
-		}
+		if (anglepickergraphic1.Value.Degrees == spin.Value)
+			return;
+
+		anglepickergraphic1.Value = new DegreesAngle (spin.Value);
+		OnValueChanged ();
 	}
 
 	private void HandleButtonClicked (object? sender, EventArgs e)
 	{
-		Value = DefaultValue.Degrees;
+		Value = DefaultValue;
 	}
 
 	private void OnValueChanged () => ValueChanged?.Invoke (this, EventArgs.Empty);

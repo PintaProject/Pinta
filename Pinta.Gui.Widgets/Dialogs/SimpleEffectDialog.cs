@@ -376,7 +376,7 @@ public sealed class SimpleEffectDialog : Gtk.Dialog
 
 		widget.ValueChanged += (_, _) => {
 			DelayedUpdate (() => {
-				SetValue (member, o, new DegreesAngle (widget.Value));
+				SetValue (member, o, widget.Value);
 				return false;
 			});
 		};

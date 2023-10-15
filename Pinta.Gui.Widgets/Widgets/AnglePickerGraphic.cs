@@ -43,26 +43,13 @@ public sealed class AnglePickerGraphic : Gtk.DrawingArea
 		ValueChanged += (_, _) => QueueDraw ();
 	}
 
-	public int Value {
-		get => (int) angle_value.Degrees;
+	public DegreesAngle Value {
+		get => angle_value;
 		set {
-			DegreesAngle v = new (value);
-			if (angle_value != v) {
-				angle_value = v;
-				OnValueChanged ();
-			}
-		}
-	}
-
-	public double ValueDouble {
-		get => angle_value.Degrees;
-		set {
-			//double v = Math.IEEERemainder (value, 360.0);
-			DegreesAngle wrapped = new (value);
-			if (angle_value.Degrees != wrapped.Degrees) {
-				angle_value = wrapped;
-				OnValueChanged ();
-			}
+			if (angle_value == value)
+				return;
+			angle_value = value;
+			OnValueChanged ();
 		}
 	}
 
@@ -75,10 +62,10 @@ public sealed class AnglePickerGraphic : Gtk.DrawingArea
 
 	private void ProcessMouseEvent (PointD pt, bool constrainAngle)
 	{
-		ValueDouble = CalculateNewAngle (pt, constrainAngle);
+		Value = CalculateNewAngle (pt, constrainAngle);
 	}
 
-	private double CalculateNewAngle (PointD pt, bool constrainAngle)
+	private DegreesAngle CalculateNewAngle (PointD pt, bool constrainAngle)
 	{
 		var rect = GetDrawBounds ();
 		var diameter = Math.Min (rect.Width, rect.Height);
@@ -112,7 +99,7 @@ public sealed class AnglePickerGraphic : Gtk.DrawingArea
 			newAngle = bestMultiple * constraintAngle;
 		}
 
-		return newAngle;
+		return new (newAngle);
 	}
 
 	private readonly record struct AngleGraphicSettings (
