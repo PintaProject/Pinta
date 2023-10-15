@@ -7,7 +7,7 @@ namespace Pinta.Core;
 /// Represents a two-dimensional matrix of bits used to store a
 /// true/false value for each pixel in an image.
 /// </summary>
-public sealed class BitMask : ICloneable
+public sealed class BitMask
 {
 	private readonly BitArray array;
 
@@ -30,8 +30,6 @@ public sealed class BitMask : ICloneable
 		Height = other.Height;
 		array = (BitArray) other.array.Clone ();
 	}
-
-	object ICloneable.Clone () => Clone ();
 
 	public BitMask Clone () => new (this);
 
