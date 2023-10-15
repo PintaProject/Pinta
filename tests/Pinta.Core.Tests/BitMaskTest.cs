@@ -591,16 +591,16 @@ internal sealed class BitMaskTest
 			}
 		);
 
-		//yield return new (
-		//	bottomLeftEnabled,
-		//	smallerEnabled,
-		//	new Dictionary<PointI, bool> {
-		//		[topLeft] = false,
-		//		[topRight] = false,
-		//		[bottomLeft] = false,
-		//		[bottomRight] = false,
-		//	}
-		//);
+		yield return new (
+			bottomLeftEnabled,
+			smallerEnabled,
+			new Dictionary<PointI, bool> {
+				[topLeft] = false,
+				[topRight] = false,
+				[bottomLeft] = true,
+				[bottomRight] = false,
+			}
+		);
 	}
 
 	static readonly IReadOnlyList<TestCaseData> and_offset_cases = CreateAndOffsetCases ().ToArray ();
