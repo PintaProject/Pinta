@@ -16,7 +16,7 @@ namespace Pinta.Gui.Widgets;
 public sealed class AnglePickerGraphic : Gtk.DrawingArea
 {
 	private PointD drag_start;
-	private double angle_value;
+	private DegreesAngle angle_value;
 
 	public AnglePickerGraphic ()
 	{
@@ -44,9 +44,9 @@ public sealed class AnglePickerGraphic : Gtk.DrawingArea
 	}
 
 	public int Value {
-		get => (int) angle_value;
+		get => (int) angle_value.Degrees;
 		set {
-			var v = value % 360;
+			DegreesAngle v = new (value);
 			if (angle_value != v) {
 				angle_value = v;
 				OnValueChanged ();
@@ -55,11 +55,12 @@ public sealed class AnglePickerGraphic : Gtk.DrawingArea
 	}
 
 	public double ValueDouble {
-		get => angle_value;
+		get => angle_value.Degrees;
 		set {
 			//double v = Math.IEEERemainder (value, 360.0);
-			if (angle_value != value) {
-				angle_value = value;
+			DegreesAngle wrapped = new (value);
+			if (angle_value.Degrees != wrapped.Degrees) {
+				angle_value = wrapped;
 				OnValueChanged ();
 			}
 		}
@@ -130,7 +131,7 @@ public sealed class AnglePickerGraphic : Gtk.DrawingArea
 
 		var center = new PointD (rect.X + radius, rect.Y + radius);
 
-		var theta = (angle_value * 2.0 * Math.PI) / 360.0;
+		var theta = (angle_value.Degrees * 2.0 * Math.PI) / 360.0;
 
 		var ellipseRect = new RectangleD (0, 0, diameter, diameter);
 

@@ -94,7 +94,7 @@ public sealed class MandelbrotFractalEffect : BaseEffect
 
 			count: count,
 			invCount: 1.0 / (double) count,
-			angleTheta: (Data.Angle * 2 * Math.PI) / 360,
+			angleTheta: (Data.Angle.Degrees * 2 * Math.PI) / 360,
 
 			factor: Data.Factor,
 
@@ -166,7 +166,7 @@ public sealed class MandelbrotFractalEffect : BaseEffect
 		public int Zoom { get; set; } = 10;
 
 		[Caption ("Angle")]
-		public double Angle { get; set; } = 0;
+		public DegreesAngle Angle { get; set; } = new (0);
 
 		[Caption ("Invert Colors")]
 		public bool InvertColors { get; set; } = false;

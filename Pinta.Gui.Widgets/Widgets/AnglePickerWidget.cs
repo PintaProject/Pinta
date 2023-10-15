@@ -13,7 +13,7 @@ using Pinta.Core;
 
 namespace Pinta.Gui.Widgets;
 
-public class AnglePickerWidget : Box
+public sealed class AnglePickerWidget : Box
 {
 	private readonly AnglePickerGraphic anglepickergraphic1;
 	private readonly SpinButton spin;
@@ -73,12 +73,12 @@ public class AnglePickerWidget : Box
 		spin.OnValueChanged += HandleSpinValueChanged;
 		button.OnClicked += HandleButtonClicked;
 
-		OnRealize += (_, _) => anglepickergraphic1.ValueDouble = DefaultValue;
+		OnRealize += (_, _) => anglepickergraphic1.ValueDouble = DefaultValue.Degrees;
 
 		spin.SetActivatesDefault (true);
 	}
 
-	public double DefaultValue { get; set; }
+	public DegreesAngle DefaultValue { get; set; }
 
 	public string Label {
 		get => label.GetText ();
@@ -113,10 +113,10 @@ public class AnglePickerWidget : Box
 
 	private void HandleButtonClicked (object? sender, EventArgs e)
 	{
-		Value = DefaultValue;
+		Value = DefaultValue.Degrees;
 	}
 
-	protected void OnValueChanged () => ValueChanged?.Invoke (this, EventArgs.Empty);
+	private void OnValueChanged () => ValueChanged?.Invoke (this, EventArgs.Empty);
 
 	public event EventHandler? ValueChanged;
 }

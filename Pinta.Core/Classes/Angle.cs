@@ -1,6 +1,6 @@
 using System;
 
-namespace Pinta.Core.Classes;
+namespace Pinta.Core;
 
 public readonly struct RadiansAngle
 {
@@ -24,6 +24,16 @@ public readonly struct RadiansAngle
 
 	public static RadiansAngle operator + (RadiansAngle a, RadiansAngle b) => new (a.Radians + b.Radians);
 	public static RadiansAngle operator - (RadiansAngle a, RadiansAngle b) => new (a.Radians - b.Radians);
+	public static bool operator == (RadiansAngle a, RadiansAngle b) => a.Equals (b);
+	public static bool operator != (RadiansAngle a, RadiansAngle b) => !a.Equals (b);
+	public static bool operator > (RadiansAngle a, RadiansAngle b) => a.Radians > b.Radians;
+	public static bool operator < (RadiansAngle a, RadiansAngle b) => a.Radians < b.Radians;
+	public override int GetHashCode () => Radians.GetHashCode ();
+	public override bool Equals (object? obj)
+	{
+		if (obj is not RadiansAngle other) return false;
+		return Radians == other.Radians;
+	}
 }
 
 public readonly struct DegreesAngle
@@ -48,6 +58,16 @@ public readonly struct DegreesAngle
 
 	public static DegreesAngle operator + (DegreesAngle a, DegreesAngle b) => new (a.Degrees + b.Degrees);
 	public static DegreesAngle operator - (DegreesAngle a, DegreesAngle b) => new (a.Degrees - b.Degrees);
+	public static bool operator == (DegreesAngle a, DegreesAngle b) => a.Equals (b);
+	public static bool operator != (DegreesAngle a, DegreesAngle b) => !a.Equals (b);
+	public static bool operator > (DegreesAngle a, DegreesAngle b) => a.Degrees > b.Degrees;
+	public static bool operator < (DegreesAngle a, DegreesAngle b) => a.Degrees < b.Degrees;
+	public override int GetHashCode () => Degrees.GetHashCode ();
+	public override bool Equals (object? obj)
+	{
+		if (obj is not DegreesAngle other) return false;
+		return Degrees == other.Degrees;
+	}
 }
 
 public readonly struct RevolutionsAngle
@@ -72,4 +92,14 @@ public readonly struct RevolutionsAngle
 
 	public static RevolutionsAngle operator + (RevolutionsAngle a, RevolutionsAngle b) => new (a.Revolutions + b.Revolutions);
 	public static RevolutionsAngle operator - (RevolutionsAngle a, RevolutionsAngle b) => new (a.Revolutions - b.Revolutions);
+	public static bool operator == (RevolutionsAngle a, RevolutionsAngle b) => a.Revolutions == b.Revolutions;
+	public static bool operator != (RevolutionsAngle a, RevolutionsAngle b) => a.Revolutions != b.Revolutions;
+	public static bool operator > (RevolutionsAngle a, RevolutionsAngle b) => a.Revolutions > b.Revolutions;
+	public static bool operator < (RevolutionsAngle a, RevolutionsAngle b) => a.Revolutions < b.Revolutions;
+	public override int GetHashCode () => Revolutions.GetHashCode ();
+	public override bool Equals (object? obj)
+	{
+		if (obj is not RevolutionsAngle other) return false;
+		return Revolutions == other.Revolutions;
+	}
 }

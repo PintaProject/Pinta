@@ -50,7 +50,7 @@ internal sealed class EffectsTest
 	public void EdgeDetect2 ()
 	{
 		var effect = new EdgeDetectEffect ();
-		effect.Data.Angle = 90;
+		effect.Data.Angle = new (90);
 		Utilities.TestEffect (effect, "edgedetect2.png");
 	}
 
@@ -65,7 +65,7 @@ internal sealed class EffectsTest
 	public void Emboss2 ()
 	{
 		var effect = new EmbossEffect ();
-		effect.Data.Angle = 45;
+		effect.Data.Angle = new (45);
 		Utilities.TestEffect (effect, "emboss2.png");
 	}
 
@@ -82,7 +82,7 @@ internal sealed class EffectsTest
 		var effect = new FragmentEffect ();
 		effect.Data.Fragments = 25;
 		effect.Data.Distance = 60;
-		effect.Data.Rotation = 90;
+		effect.Data.Rotation = new (90);
 		Utilities.TestEffect (effect, "fragment2.png");
 	}
 
@@ -155,7 +155,7 @@ internal sealed class EffectsTest
 		effect.Data.Factor = 6;
 		effect.Data.Quality = 4;
 		effect.Data.Zoom = 25;
-		effect.Data.Angle = 90;
+		effect.Data.Angle = new (90);
 		Utilities.TestEffect (effect, "juliafractal2.png");
 	}
 
@@ -174,7 +174,7 @@ internal sealed class EffectsTest
 		effect.Data.Factor = 6;
 		effect.Data.Quality = 4;
 		effect.Data.Zoom = 25;
-		effect.Data.Angle = 90;
+		effect.Data.Angle = new (90);
 		effect.Data.InvertColors = true;
 		Utilities.TestEffect (effect, "mandelbrotfractal2.png");
 	}
@@ -206,7 +206,7 @@ internal sealed class EffectsTest
 	public void MotionBlur2 ()
 	{
 		var effect = new MotionBlurEffect ();
-		effect.Data.Angle = 50;
+		effect.Data.Angle = new (50);
 		effect.Data.Distance = 25;
 		effect.Data.Centered = false;
 		Utilities.TestEffect (effect, "motionblur2.png");
@@ -293,7 +293,7 @@ internal sealed class EffectsTest
 	public void RadialBlur2 ()
 	{
 		var effect = new RadialBlurEffect ();
-		effect.Data.Angle = 90;
+		effect.Data.Angle = new (90);
 		effect.Data.Offset = new (20, 20);
 		effect.Data.Quality = 4;
 		Utilities.TestEffect (effect, "radialblur2.png");
@@ -326,7 +326,7 @@ internal sealed class EffectsTest
 	public void Relief2 ()
 	{
 		var effect = new ReliefEffect ();
-		effect.Data.Angle = 90;
+		effect.Data.Angle = new (90);
 		Utilities.TestEffect (effect, "relief2.png");
 	}
 

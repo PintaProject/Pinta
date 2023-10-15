@@ -42,7 +42,7 @@ public sealed class MotionBlurEffect : BaseEffect
 	public override void Render (ImageSurface src, ImageSurface dst, ReadOnlySpan<RectangleI> rois)
 	{
 		PointD start = new PointD (0, 0);
-		double theta = ((double) (Data.Angle + 180) * 2 * Math.PI) / 360.0;
+		double theta = ((double) (Data.Angle.Degrees + 180) * 2 * Math.PI) / 360.0;
 		double alpha = Data.Distance;
 		PointD end = new PointD ((float) alpha * Math.Cos (theta), (float) (-alpha * Math.Sin (theta)));
 
@@ -99,7 +99,7 @@ public sealed class MotionBlurEffect : BaseEffect
 		public override bool IsDefault => Distance == 0;
 
 		[Caption ("Angle")]
-		public double Angle { get; set; } = 25;
+		public DegreesAngle Angle { get; set; } = new (25);
 
 		[Caption ("Distance"), MinimumValue (1), MaximumValue (200)]
 		public int Distance { get; set; } = 10;

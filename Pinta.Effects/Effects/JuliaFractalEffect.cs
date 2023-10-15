@@ -93,7 +93,7 @@ public sealed class JuliaFractalEffect : BaseEffect
 			aspect: (double) h / (double) w,
 			count: count,
 			invCount: 1.0 / (double) count,
-			angleTheta: (Data.Angle * Math.PI * 2) / 360.0,
+			angleTheta: (Data.Angle.Degrees * Math.PI * 2) / 360.0,
 			factor: Data.Factor
 		);
 	}
@@ -148,6 +148,6 @@ public sealed class JuliaFractalEffect : BaseEffect
 		public int Zoom { get; set; } = 1;
 
 		[Caption ("Angle")]
-		public double Angle { get; set; } = 0;
+		public DegreesAngle Angle { get; set; } = new (0);
 	}
 }
