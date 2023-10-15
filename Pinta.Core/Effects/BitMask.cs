@@ -193,6 +193,21 @@ public sealed class BitMask : ICloneable
 				this[x, y] = this[x, y] ^ other[x - offset.X, y - offset.Y];
 	}
 
+	public BitMask CreateSubmask (RectangleI bounds)
+	{
+		if (bounds.X < 0 || bounds.Y < 0 || bounds.Right >= Width || bounds.Bottom >= Height)
+			throw new ArgumentOutOfRangeException (nameof (bounds), "Chosen area out of bounds");
+		BitMask submask = new (bounds.Width, bounds.Height);
+		int right = bounds.Right;
+		int bottom = bounds.Bottom;
+		for (int y = bounds.Top; y <= bottom; y++) {
+			for (int x = bounds.Left; x <= right; x++) {
+				submask[x - bounds.Left, y - bounds.Top] = this[x, y];
+			}
+		}
+		return submask;
+	}
+
 	private RectangleI GetOverlap (BitMask other, PointI offset)
 	{
 		if (Width == 0 || Height == 0) return RectangleI.Zero;
