@@ -71,12 +71,6 @@ public sealed class BitMask : ICloneable
 		}
 	}
 
-	public void InvertAll ()
-	{
-		for (int i = 0; i < array.Length; i++)
-			array[i] = !array[i];
-	}
-
 	public void Set (int x, int y, bool newValue) => array[GetIndex (x, y)] = newValue;
 
 	public void Set (RectangleI rect, bool newValue)
@@ -134,6 +128,8 @@ public sealed class BitMask : ICloneable
 		}
 		return true;
 	}
+
+	public void Not () => array.Not ();
 
 	public void And (BitMask other)
 	{
