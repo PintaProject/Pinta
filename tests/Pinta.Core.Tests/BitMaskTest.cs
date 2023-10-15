@@ -256,6 +256,8 @@ internal sealed class BitMaskTest
 			new Dictionary<PointI, bool> {
 				[topLeft] = true,
 				[topRight] = true,
+				[bottomLeft] = false,
+				[bottomRight] = false,
 			}
 		);
 
@@ -264,7 +266,9 @@ internal sealed class BitMaskTest
 			bottomLeftEnabled,
 			new Dictionary<PointI, bool> {
 				[topLeft] = true,
+				[topRight] = false,
 				[bottomLeft] = true,
+				[bottomRight] = false,
 			}
 		);
 
@@ -273,6 +277,8 @@ internal sealed class BitMaskTest
 			bottomRightEnabled,
 			new Dictionary<PointI, bool> {
 				[topLeft] = true,
+				[topRight] = false,
+				[bottomLeft] = false,
 				[bottomRight] = true,
 			}
 		);
@@ -323,6 +329,8 @@ internal sealed class BitMaskTest
 			new Dictionary<PointI, bool> {
 				[topLeft] = true,
 				[topRight] = true,
+				[bottomLeft] = false,
+				[bottomRight] = false,
 			}
 		);
 
@@ -333,6 +341,8 @@ internal sealed class BitMaskTest
 			new Dictionary<PointI, bool> {
 				[topLeft] = false,
 				[topRight] = false,
+				[bottomLeft] = false,
+				[bottomRight] = false,
 			}
 		);
 
@@ -342,7 +352,9 @@ internal sealed class BitMaskTest
 			shift_up,
 			new Dictionary<PointI, bool> {
 				[topLeft] = false,
+				[topRight] = false,
 				[bottomLeft] = false,
+				[bottomRight] = false,
 			}
 		);
 
@@ -352,6 +364,8 @@ internal sealed class BitMaskTest
 			shift_right_down,
 			new Dictionary<PointI, bool> {
 				[topLeft] = false,
+				[topRight] = false,
+				[bottomLeft] = false,
 				[bottomRight] = false,
 			}
 		);
@@ -382,6 +396,8 @@ internal sealed class BitMaskTest
 			new Dictionary<PointI, bool> {
 				[topLeft] = true,
 				[topRight] = true,
+				[bottomLeft] = false,
+				[bottomRight] = false,
 			}
 		);
 
@@ -390,7 +406,9 @@ internal sealed class BitMaskTest
 			bottomLeftEnabled,
 			new Dictionary<PointI, bool> {
 				[topLeft] = true,
+				[topRight] = false,
 				[bottomLeft] = true,
+				[bottomRight] = false,
 			}
 		);
 
@@ -399,6 +417,8 @@ internal sealed class BitMaskTest
 			bottomRightEnabled,
 			new Dictionary<PointI, bool> {
 				[topLeft] = true,
+				[topRight] = false,
+				[bottomLeft] = false,
 				[bottomRight] = true,
 			}
 		);
@@ -449,6 +469,8 @@ internal sealed class BitMaskTest
 			new Dictionary<PointI, bool> {
 				[topLeft] = true,
 				[topRight] = true,
+				[bottomLeft] = false,
+				[bottomRight] = false,
 			}
 		);
 
@@ -459,6 +481,8 @@ internal sealed class BitMaskTest
 			new Dictionary<PointI, bool> {
 				[topLeft] = true,
 				[topRight] = false,
+				[bottomLeft] = false,
+				[bottomRight] = false,
 			}
 		);
 
@@ -468,7 +492,9 @@ internal sealed class BitMaskTest
 			shift_up,
 			new Dictionary<PointI, bool> {
 				[topLeft] = true,
+				[topRight] = false,
 				[bottomLeft] = false,
+				[bottomRight] = false,
 			}
 		);
 
@@ -478,6 +504,8 @@ internal sealed class BitMaskTest
 			shift_right_down,
 			new Dictionary<PointI, bool> {
 				[topLeft] = false,
+				[topRight] = false,
+				[bottomLeft] = false,
 				[bottomRight] = true,
 			}
 		);
@@ -508,6 +536,8 @@ internal sealed class BitMaskTest
 			new Dictionary<PointI, bool> {
 				[topLeft] = false,
 				[topRight] = false,
+				[bottomLeft] = false,
+				[bottomRight] = false,
 			}
 		);
 
@@ -516,7 +546,9 @@ internal sealed class BitMaskTest
 			bottomLeftEnabled,
 			new Dictionary<PointI, bool> {
 				[topLeft] = false,
+				[topRight] = false,
 				[bottomLeft] = false,
+				[bottomRight] = false,
 			}
 		);
 
@@ -525,6 +557,8 @@ internal sealed class BitMaskTest
 			bottomRightEnabled,
 			new Dictionary<PointI, bool> {
 				[topLeft] = false,
+				[topRight] = false,
+				[bottomLeft] = false,
 				[bottomRight] = false,
 			}
 		);
@@ -534,6 +568,9 @@ internal sealed class BitMaskTest
 			topLeftEnabled,
 			new Dictionary<PointI, bool> {
 				[topLeft] = true,
+				[topRight] = false,
+				[bottomLeft] = false,
+				[bottomRight] = false,
 			}
 		);
 	}
@@ -572,6 +609,8 @@ internal sealed class BitMaskTest
 			new Dictionary<PointI, bool> {
 				[topLeft] = false,
 				[topRight] = false,
+				[bottomLeft] = false,
+				[bottomRight] = false,
 			}
 		);
 
@@ -582,6 +621,8 @@ internal sealed class BitMaskTest
 			new Dictionary<PointI, bool> {
 				[topLeft] = true,
 				[topRight] = false,
+				[bottomLeft] = false,
+				[bottomRight] = false,
 			}
 		);
 
@@ -591,7 +632,9 @@ internal sealed class BitMaskTest
 			shift_up,
 			new Dictionary<PointI, bool> {
 				[topLeft] = true,
+				[topRight] = false,
 				[bottomLeft] = false,
+				[bottomRight] = false,
 			}
 		);
 
@@ -601,6 +644,8 @@ internal sealed class BitMaskTest
 			shift_right_down,
 			new Dictionary<PointI, bool> {
 				[topLeft] = false,
+				[topRight] = false,
+				[bottomLeft] = false,
 				[bottomRight] = true,
 			}
 		);

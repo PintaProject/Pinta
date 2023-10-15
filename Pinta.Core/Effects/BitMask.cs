@@ -58,7 +58,6 @@ public sealed class BitMask : ICloneable
 	public void Invert (int x, int y)
 	{
 		var index = GetIndex (x, y);
-
 		array[index] = !array[index];
 	}
 
