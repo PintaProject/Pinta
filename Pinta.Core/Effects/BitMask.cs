@@ -173,26 +173,26 @@ public sealed class BitMask : ICloneable
 				this[x, y] = this[x, y] || other[x - offset.X, y - offset.Y];
 	}
 
-	//public void Xor (BitMask other)
-	//{
-	//	if (Width == 0 || Height == 0) return;
-	//	if (Width == other.Width && Height == other.Height) {
-	//		array.Xor (other.array);
-	//	} else {
-	//		Xor (other, PointI.Zero);
-	//	}
-	//}
+	public void Xor (BitMask other)
+	{
+		if (Width == 0 || Height == 0) return;
+		if (Width == other.Width && Height == other.Height) {
+			array.Xor (other.array);
+		} else {
+			Xor (other, PointI.Zero);
+		}
+	}
 
-	//public void Xor (BitMask other, PointI offset)
-	//{
-	//	RectangleI overlap = GetOverlap (other, offset);
-	//	if (overlap.IsEmpty) return;
-	//	int right = overlap.Right;
-	//	int bottom = overlap.Bottom;
-	//	for (int x = overlap.Left; x <= right; x++)
-	//		for (int y = overlap.Top; y <= bottom; y++)
-	//			this[x, y] = this[x, y] ^ other[x - offset.X, y - offset.Y];
-	//}
+	public void Xor (BitMask other, PointI offset)
+	{
+		RectangleI overlap = GetOverlap (other, offset);
+		if (overlap.IsEmpty) return;
+		int right = overlap.Right;
+		int bottom = overlap.Bottom;
+		for (int x = overlap.Left; x <= right; x++)
+			for (int y = overlap.Top; y <= bottom; y++)
+				this[x, y] = this[x, y] ^ other[x - offset.X, y - offset.Y];
+	}
 
 	private RectangleI GetOverlap (BitMask other, PointI offset)
 	{
