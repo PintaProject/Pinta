@@ -530,6 +530,12 @@ internal sealed class BitMaskTest
 		BitMask bottomRightEnabled = new (2, 2);
 		bottomRightEnabled[bottomRight] = true;
 
+		BitMask biggerAllEnabled = new (3, 3);
+		biggerAllEnabled.Clear (true);
+
+		BitMask smallerEnabled = new (1, 1);
+		smallerEnabled.Clear (true);
+
 		yield return new (
 			topLeftEnabled,
 			topRightEnabled,
@@ -573,6 +579,28 @@ internal sealed class BitMaskTest
 				[bottomRight] = false,
 			}
 		);
+
+		yield return new (
+			bottomLeftEnabled,
+			biggerAllEnabled,
+			new Dictionary<PointI, bool> {
+				[topLeft] = false,
+				[topRight] = false,
+				[bottomLeft] = true,
+				[bottomRight] = false,
+			}
+		);
+
+		//yield return new (
+		//	bottomLeftEnabled,
+		//	smallerEnabled,
+		//	new Dictionary<PointI, bool> {
+		//		[topLeft] = false,
+		//		[topRight] = false,
+		//		[bottomLeft] = false,
+		//		[bottomRight] = false,
+		//	}
+		//);
 	}
 
 	static readonly IReadOnlyList<TestCaseData> and_offset_cases = CreateAndOffsetCases ().ToArray ();
