@@ -167,7 +167,7 @@ internal sealed class BitMaskTest
 			Assert.AreEqual (clone[kvp.Key], kvp.Value);
 	}
 
-	[TestCaseSource (nameof(horizontal_flip_cases))]
+	[TestCaseSource (nameof (horizontal_flip_cases))]
 	public void HorizontalFlip (BitMask mask, IReadOnlyDictionary<PointI, bool> checksAfter)
 	{
 		var clone = mask.Clone ();
