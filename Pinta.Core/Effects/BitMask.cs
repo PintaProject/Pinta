@@ -193,6 +193,9 @@ public sealed class BitMask : ICloneable
 				this[x, y] = this[x, y] ^ other[x - offset.X, y - offset.Y];
 	}
 
+	/// <summary>
+	/// Creates new bitmask from selected area. It does NOT create a view
+	/// </summary>
 	public BitMask NewSubmask (RectangleI bounds)
 	{
 		if (bounds.X < 0 || bounds.Y < 0 || bounds.Right >= Width || bounds.Bottom >= Height)
