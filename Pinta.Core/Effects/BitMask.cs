@@ -193,7 +193,7 @@ public sealed class BitMask : ICloneable
 				this[x, y] = this[x, y] ^ other[x - offset.X, y - offset.Y];
 	}
 
-	public BitMask CreateSubmask (RectangleI bounds)
+	public BitMask NewSubmask (RectangleI bounds)
 	{
 		if (bounds.X < 0 || bounds.Y < 0 || bounds.Right >= Width || bounds.Bottom >= Height)
 			throw new ArgumentOutOfRangeException (nameof (bounds), "Chosen area out of bounds");
