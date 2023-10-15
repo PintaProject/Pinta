@@ -158,6 +158,52 @@ internal sealed class BitMaskTest
 		}
 	}
 
+	[TestCaseSource (nameof (vertical_flip_cases))]
+	public void VerticalFlip (BitMask mask, IReadOnlyDictionary<PointI, bool> checksAfter)
+	{
+		var clone = mask.Clone ();
+		clone.FlipVertical ();
+		foreach (var kvp in checksAfter)
+			Assert.AreEqual (clone[kvp.Key], kvp.Value);
+	}
+
+	[TestCaseSource (nameof(horizontal_flip_cases))]
+	public void HorizontalFlip (BitMask mask, IReadOnlyDictionary<PointI, bool> checksAfter)
+	{
+		var clone = mask.Clone ();
+		clone.FlipHorizontal ();
+		foreach (var kvp in checksAfter)
+			Assert.AreEqual (clone[kvp.Key], kvp.Value);
+	}
+
+	static readonly IReadOnlyList<TestCaseData> vertical_flip_cases = CreateVerticalFlipCases ().ToArray ();
+	static IEnumerable<TestCaseData> CreateVerticalFlipCases ()
+	{
+		BitMask topLeftEnabled = new (2, 2);
+		topLeftEnabled[0, 0] = true;
+		yield return new TestCaseData (
+			topLeftEnabled,
+			new Dictionary<PointI, bool> {
+				[new (0, 0)] = false,
+				[new (0, 1)] = true,
+			}
+		);
+	}
+
+	static readonly IReadOnlyList<TestCaseData> horizontal_flip_cases = CreateHorizontalFlipCases ().ToArray ();
+	static IEnumerable<TestCaseData> CreateHorizontalFlipCases ()
+	{
+		BitMask topLeftEnabled = new (2, 2);
+		topLeftEnabled[0, 0] = true;
+		yield return new TestCaseData (
+			topLeftEnabled,
+			new Dictionary<PointI, bool> {
+				[new (0, 0)] = false,
+				[new (1, 0)] = true,
+			}
+		);
+	}
+
 	static readonly IReadOnlyList<TestCaseData> scanline_invert_test_cases = CreateScanlineInvertTestCases ().ToArray ();
 	static IEnumerable<TestCaseData> CreateScanlineInvertTestCases ()
 	{

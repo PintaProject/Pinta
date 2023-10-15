@@ -7,7 +7,7 @@ namespace Pinta.Core;
 /// Represents a two-dimensional matrix of bits used to store a
 /// true/false value for each pixel in an image.
 /// </summary>
-public sealed class BitMask
+public sealed class BitMask : ICloneable
 {
 	private readonly BitArray array;
 
@@ -23,6 +23,17 @@ public sealed class BitMask
 
 		array = new BitArray (width * height);
 	}
+
+	private BitMask (BitMask source)
+	{
+		Width = source.Width;
+		Height = source.Height;
+		array = (BitArray) source.array.Clone ();
+	}
+
+	object ICloneable.Clone () => Clone ();
+
+	public BitMask Clone () => new (this);
 
 	public bool this[PointI pt] {
 		get => this[pt.X, pt.Y];
@@ -60,6 +71,12 @@ public sealed class BitMask
 		}
 	}
 
+	public void InvertAll ()
+	{
+		for (int i = 0; i < array.Length; i++)
+			array[i] = !array[i];
+	}
+
 	public void Set (int x, int y, bool newValue) => array[GetIndex (x, y)] = newValue;
 
 	public void Set (RectangleI rect, bool newValue)
@@ -77,4 +94,46 @@ public sealed class BitMask
 			throw new ArgumentOutOfRangeException (nameof (y));
 		return (y * Width) + x;
 	}
+
+	public void FlipHorizontal ()
+	{
+		int flippableWidth = Width / 2;
+		for (int h = 0; h < Height; h++) {
+			for (int w = 0; w < flippableWidth; w++) {
+				int rightIndex = Width - 1 - w;
+				bool originalLeft = this[w, h];
+				bool originalRight = this[rightIndex, h];
+				this[w, h] = originalRight;
+				this[rightIndex, h] = originalLeft;
+			}
+		}
+	}
+
+	public void FlipVertical ()
+	{
+		int flippableHeight = Height / 2;
+		for (int h = 0; h < flippableHeight; h++) {
+			for (int w = 0; w < Width; w++) {
+				int bottomIndex = Height - 1 - h;
+				bool originalTop = this[w, h];
+				bool originalBottom = this[w, bottomIndex];
+				this[w, h] = originalBottom;
+				this[w, bottomIndex] = originalTop;
+			}
+		}
+	}
+
+	public override bool Equals (object? obj)
+	{
+		if (obj is not BitMask other) return false;
+		if (Width != other.Width) return false;
+		if (Height != other.Height) return false;
+		for (int i = 0; i < array.Length; i++) {
+			if (array[i] != other.array[i])
+				return false;
+		}
+		return true;
+	}
+
+	public override int GetHashCode () => Width.GetHashCode () ^ Height.GetHashCode ();
 }
