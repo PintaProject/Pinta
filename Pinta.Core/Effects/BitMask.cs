@@ -135,5 +135,42 @@ public sealed class BitMask : ICloneable
 		return true;
 	}
 
+	public void And (BitMask other)
+	{
+		if (Width == 0 || Height == 0) return;
+		if (Width == other.Width && Height == other.Height) {
+			array.And (other.array);
+		} else {
+			And (other, PointI.Zero);
+		}
+	}
+
+	public void And (BitMask other, PointI offset)
+	{
+		RectangleI overlap = GetOverlap (other, offset);
+		if (overlap.IsEmpty) return;
+		int right = overlap.Right;
+		int bottom = overlap.Bottom;
+		for (int x = overlap.Left; x <= right; x++)
+			for (int y = overlap.Top; y <= bottom; y++)
+				this[x, y] = this[x, y] && other[x - offset.X, y - offset.Y];
+	}
+
+	private RectangleI GetOverlap (BitMask other, PointI offset)
+	{
+		if (Width == 0 || Height == 0) return RectangleI.Zero;
+		RectangleI thisRect = new (
+			point: PointI.Zero,
+			width: Width,
+			height: Height
+		);
+		RectangleI otherRect = new (
+			point: offset,
+			width: other.Width,
+			height: other.Height
+		);
+		return thisRect.Intersect (otherRect);
+	}
+
 	public override int GetHashCode () => Width.GetHashCode () ^ Height.GetHashCode ();
 }
