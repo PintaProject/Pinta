@@ -35,7 +35,6 @@ using Debug = System.Diagnostics.Debug;
 
 namespace Pinta.Core;
 
-
 public sealed class LivePreviewManager
 {
 	// NRT - These are set in Start(). This should be rewritten to be provably non-null.
@@ -315,35 +314,41 @@ public sealed class LivePreviewManager
 		// Transform bounds (Image -> Canvas -> Window)
 
 		// Calculate canvas bounds.
-		double x1 = bounds.Left * scale;
-		double y1 = bounds.Top * scale;
-		double x2 = (bounds.Right + 1) * scale;
-		double y2 = (bounds.Bottom + 1) * scale;
+		PointD bounds1 = new (
+			X: bounds.Left * scale,
+			Y: bounds.Top * scale
+		);
+		PointD bounds2 = new (
+			X: (bounds.Right + 1) * scale,
+			Y: (bounds.Bottom + 1) * scale
+		);
 
 		// TODO Figure out why when scale > 1 that I need add on an
 		// extra pixel of padding.
 		// I must being doing something wrong here.
 		if (scale > 1.0) {
 			//x1 = (bounds.Left-1) * scale;
-			y1 = (bounds.Top - 1) * scale;
+			bounds1 = bounds1 with { Y = (bounds.Top - 1) * scale };
 			//x2 = (bounds.Right+1) * scale;
 			//y2 = (bounds.Bottom+1) * scale;
 		}
 
 		// Calculate window bounds.
-		x1 += offset.X;
-		y1 += offset.Y;
-		x2 += offset.X;
-		y2 += offset.Y;
+		bounds1 += offset;
+		bounds2 += offset;
 
 		// Convert to integer, carefully not to miss partially covered
 		// pixels by rounding incorrectly.
-		int x = (int) Math.Floor (x1);
-		int y = (int) Math.Floor (y1);
-		int width = (int) Math.Ceiling (x2) - x;
-		int height = (int) Math.Ceiling (y2) - y;
+		int x = (int) Math.Floor (bounds1.X);
+		int y = (int) Math.Floor (bounds1.Y);
+		RectangleI areaToInvalidate = new (
+			X: x,
+			Y: y,
+			Width: (int) Math.Ceiling (bounds2.X) - x,
+			Height: (int) Math.Ceiling (bounds2.Y) - y
+		);
 
 		// Tell GTK to expose the drawing area.
-		PintaCore.Workspace.ActiveWorkspace.InvalidateWindowRect (new RectangleI (x, y, width, height));
+		PintaCore.Workspace.ActiveWorkspace.InvalidateWindowRect (areaToInvalidate);
 	}
 }
