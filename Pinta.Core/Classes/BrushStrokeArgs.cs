@@ -12,7 +12,8 @@ public sealed class BrushStrokeArgs
 		Color strokeColor,
 		PointI currentPosition,
 		PointI lastPosition
-	) {
+	)
+	{
 		StrokeColor = strokeColor;
 		CurrentPosition = currentPosition;
 		LastPosition = lastPosition;
