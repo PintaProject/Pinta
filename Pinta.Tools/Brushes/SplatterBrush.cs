@@ -39,15 +39,15 @@ public sealed class SplatterBrush : BasePaintBrush
 
 	protected override RectangleI OnMouseMove (
 		Context g,
-		StrokeContext strokeContext,
 		ImageSurface surface,
-		PointI current,
-		PointI last)
+		BrushStrokeArgs strokeArgs)
 	{
 		int line_width = (int) g.LineWidth;
 
 		// we want a minimum size of 2 for the splatter (except for when the brush width is 1), since a splatter of size 1 is very small
 		int size = (line_width == 1) ? 1 : Random.Next (2, line_width);
+
+		PointI current = strokeArgs.CurrentPosition;
 
 		RectangleD rect = new (
 			x: current.X - Random.Next (-15, 15),

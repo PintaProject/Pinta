@@ -24,6 +24,7 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 // THE SOFTWARE.
 
+using System;
 using System.Linq;
 using Cairo;
 using Gtk;
@@ -97,21 +98,20 @@ public sealed class PaintBrushTool : BaseBrushTool
 		}
 
 		// TODO: also multiply color by pressure
-		StrokeContext strokeContext = new (
-			primaryColor: new (
-				Palette.PrimaryColor.R,
-				Palette.PrimaryColor.G,
-				Palette.PrimaryColor.B,
-				Palette.PrimaryColor.A * active_brush.StrokeAlphaMultiplier
-			),
-			secondaryColor: new (
+		Color strokeColor = mouse_button switch {
+			MouseButton.Right => new (
 				Palette.SecondaryColor.R,
 				Palette.SecondaryColor.G,
 				Palette.SecondaryColor.B,
 				Palette.SecondaryColor.A * active_brush.StrokeAlphaMultiplier
 			),
-			mouseButton: mouse_button
-		);
+			MouseButton.Left or _ => new (
+				Palette.PrimaryColor.R,
+				Palette.PrimaryColor.G,
+				Palette.PrimaryColor.B,
+				Palette.PrimaryColor.A * active_brush.StrokeAlphaMultiplier
+			)
+		};
 
 		if (last_point.Equals (point_empty))
 			last_point = e.Point;
@@ -127,9 +127,11 @@ public sealed class PaintBrushTool : BaseBrushTool
 		g.LineWidth = brush_width;
 		g.LineJoin = LineJoin.Round;
 		g.LineCap = BrushWidth == 1 ? LineCap.Butt : LineCap.Round;
-		g.SetSourceColor (strokeContext.StrokeColor);
+		g.SetSourceColor (strokeColor);
 
-		var invalidate_rect = active_brush.DoMouseMove (g, strokeContext, surf, e.Point, last_point);
+		BrushStrokeArgs strokeArgs = new (strokeColor, e.Point, last_point);
+
+		var invalidate_rect = active_brush.DoMouseMove (g, surf, strokeArgs);
 
 		// If we draw partially offscreen, Cairo gives us a bogus
 		// dirty rectangle, so redraw everything.

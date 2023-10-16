@@ -38,17 +38,15 @@ public sealed class PlainBrush : BasePaintBrush
 
 	protected override RectangleI OnMouseMove (
 		Context g,
-		StrokeContext strokeContext,
 		ImageSurface surface,
-		PointI current,
-		PointI last)
+		BrushStrokeArgs strokeArgs)
 	{
 		// Cairo does not support a single-pixel-long single-pixel-wide line
-		bool isSinglePixelLine = IsSinglePixelLine (g, current, last);
+		bool isSinglePixelLine = IsSinglePixelLine (g, strokeArgs);
 		if (isSinglePixelLine)
-			DrawSinglePixelLine (g, current);
+			DrawSinglePixelLine (g, strokeArgs);
 		else
-			DrawNonSinglePixelLine (g, current, last);
+			DrawNonSinglePixelLine (g, strokeArgs);
 
 		RectangleI dirty = g.StrokeExtents ().ToInt ();
 
@@ -59,26 +57,26 @@ public sealed class PlainBrush : BasePaintBrush
 		return inflated;
 	}
 
-	private static bool IsSinglePixelLine (Context g, PointI current, PointI last)
+	private static bool IsSinglePixelLine (Context g, BrushStrokeArgs strokeArgs)
 	{
 		return
-			(current.X == last.X) &&
-			(current.Y == last.Y) &&
+			(strokeArgs.CurrentPosition.X == strokeArgs.LastPosition.X) &&
+			(strokeArgs.CurrentPosition.Y == strokeArgs.LastPosition.Y) &&
 			(g.LineWidth == 1) &&
-			PintaCore.Workspace.ActiveWorkspace.PointInCanvas ((PointD) current)
+			PintaCore.Workspace.ActiveWorkspace.PointInCanvas ((PointD) strokeArgs.CurrentPosition)
 		;
 	}
 
-	private static void DrawSinglePixelLine (Context g, PointI current)
+	private static void DrawSinglePixelLine (Context g, BrushStrokeArgs strokeArgs)
 	{
-		g.Rectangle (current.X, current.Y, 1.0, 1.0);
+		g.Rectangle (strokeArgs.CurrentPosition.X, strokeArgs.CurrentPosition.Y, 1.0, 1.0);
 		g.Fill ();
 	}
 
-	private static void DrawNonSinglePixelLine (Context g, PointI current, PointI last)
+	private static void DrawNonSinglePixelLine (Context g, BrushStrokeArgs strokeArgs)
 	{
-		g.MoveTo (last.X + 0.5, last.Y + 0.5);
-		g.LineTo (current.X + 0.5, current.Y + 0.5);
+		g.MoveTo (strokeArgs.LastPosition.X + 0.5, strokeArgs.LastPosition.Y + 0.5);
+		g.LineTo (strokeArgs.CurrentPosition.X + 0.5, strokeArgs.CurrentPosition.Y + 0.5);
 		g.StrokePreserve ();
 	}
 }
