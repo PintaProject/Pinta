@@ -86,6 +86,11 @@ public sealed class BitMask
 		return (y * Width) + x;
 	}
 
+	/// <summary>
+	/// Mirrors the bits in the BitMask along the X axis,
+	/// such that the bits that used to be on the left side
+	/// are now on the right side and vice versa.
+	/// </summary>
 	public void FlipHorizontal ()
 	{
 		int flippableWidth = Width / 2;
@@ -100,6 +105,11 @@ public sealed class BitMask
 		}
 	}
 
+	/// <summary>
+	/// Mirrors the bits in the BitMask along the Y axis,
+	/// such that the bits that used to be on the top side
+	/// are now on the bottom side and vice versa.
+	/// </summary>
 	public void FlipVertical ()
 	{
 		int flippableHeight = Height / 2;
@@ -126,6 +136,9 @@ public sealed class BitMask
 		return true;
 	}
 
+	/// <summary>
+	/// Inverts all bits in the bitmask
+	/// </summary>
 	public void Not () => array.Not ();
 
 	/// <summary>
@@ -194,11 +207,20 @@ public sealed class BitMask
 				this[x, y] = this[x, y] ^ other[x, y];
 	}
 
+	/// <param name="bounds"></param>
+	/// <returns>
+	/// A new bitmask with the width and height specified in
+	/// <paramref name="bounds"/>, and the bits set to the values
+	/// in the area demarcated by it
+	/// </returns>
+	/// <exception cref="ArgumentOutOfRangeException"></exception>
 	public BitMask CloneArea (RectangleI bounds)
 	{
 		if (bounds.X < 0 || bounds.Y < 0 || bounds.Right >= Width || bounds.Bottom >= Height)
 			throw new ArgumentOutOfRangeException (nameof (bounds), "Chosen area out of bounds");
+
 		BitMask submask = new (bounds.Width, bounds.Height);
+
 		int right = bounds.Right;
 		int bottom = bounds.Bottom;
 		for (int y = bounds.Top; y <= bottom; y++) {
@@ -206,22 +228,26 @@ public sealed class BitMask
 				submask[x - bounds.Left, y - bounds.Top] = this[x, y];
 			}
 		}
+
 		return submask;
 	}
 
 	private RectangleI GetOverlap (BitMask other, PointI offset)
 	{
 		if (Width == 0 || Height == 0) return RectangleI.Zero;
+
 		RectangleI thisRect = new (
 			point: PointI.Zero,
 			width: Width,
 			height: Height
 		);
+
 		RectangleI otherRect = new (
 			point: offset,
 			width: other.Width,
 			height: other.Height
 		);
+
 		return thisRect.Intersect (otherRect);
 	}
 
