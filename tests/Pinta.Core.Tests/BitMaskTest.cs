@@ -186,15 +186,6 @@ internal sealed class BitMaskTest
 			Assert.AreEqual (leftClone[kvp.Key], kvp.Value);
 	}
 
-	[TestCaseSource (nameof (and_offset_cases))]
-	public void And_Offset (BitMask left, BitMask right, PointI offset, IReadOnlyDictionary<PointI, bool> checksAfter)
-	{
-		var leftClone = left.Clone ();
-		leftClone.And (right, offset);
-		foreach (var kvp in checksAfter)
-			Assert.AreEqual (leftClone[kvp.Key], kvp.Value);
-	}
-
 	[TestCaseSource (nameof (or_cases))]
 	public void Or (BitMask left, BitMask right, IReadOnlyDictionary<PointI, bool> checksAfter)
 	{
@@ -204,29 +195,11 @@ internal sealed class BitMaskTest
 			Assert.AreEqual (leftClone[kvp.Key], kvp.Value);
 	}
 
-	[TestCaseSource (nameof (or_offset_cases))]
-	public void Or_Offset (BitMask left, BitMask right, PointI offset, IReadOnlyDictionary<PointI, bool> checksAfter)
-	{
-		var leftClone = left.Clone ();
-		leftClone.Or (right, offset);
-		foreach (var kvp in checksAfter)
-			Assert.AreEqual (leftClone[kvp.Key], kvp.Value);
-	}
-
 	[TestCaseSource (nameof (xor_cases))]
 	public void Xor (BitMask left, BitMask right, IReadOnlyDictionary<PointI, bool> checksAfter)
 	{
 		var leftClone = left.Clone ();
 		leftClone.Xor (right);
-		foreach (var kvp in checksAfter)
-			Assert.AreEqual (leftClone[kvp.Key], kvp.Value);
-	}
-
-	[TestCaseSource (nameof (xor_offset_cases))]
-	public void Xor_Offset (BitMask left, BitMask right, PointI offset, IReadOnlyDictionary<PointI, bool> checksAfter)
-	{
-		var leftClone = left.Clone ();
-		leftClone.Xor (right, offset);
 		foreach (var kvp in checksAfter)
 			Assert.AreEqual (leftClone[kvp.Key], kvp.Value);
 	}
@@ -286,82 +259,6 @@ internal sealed class BitMaskTest
 		yield return new (
 			topLeftEnabled,
 			topLeftEnabled,
-			new Dictionary<PointI, bool> {
-				[topLeft] = false,
-				[topRight] = false,
-				[bottomLeft] = false,
-				[bottomRight] = false,
-			}
-		);
-	}
-
-	static readonly IReadOnlyList<TestCaseData> xor_offset_cases = CreateXorOffsetCases ().ToArray ();
-	static IEnumerable<TestCaseData> CreateXorOffsetCases ()
-	{
-		PointI shift_left = new (-1, 0);
-		PointI shift_up = new (0, -1);
-		//PointI shift_left_up = new (-1, -1);
-		PointI shift_right_down = new (1, 1);
-		//PointI shift_right = new (1, 0);
-		//PointI shift_down = new (0, 1);
-		PointI no_shift = new (0, 0);
-
-		PointI topLeft = new (0, 0);
-		BitMask topLeftEnabled = new (2, 2);
-		topLeftEnabled[topLeft] = true;
-
-		PointI topRight = new (1, 0);
-		BitMask topRightEnabled = new (2, 2);
-		topRightEnabled[topRight] = true;
-
-		PointI bottomLeft = new (0, 1);
-		BitMask bottomLeftEnabled = new (2, 2);
-		bottomLeftEnabled[bottomLeft] = true;
-
-		PointI bottomRight = new (1, 1);
-		BitMask bottomRightEnabled = new (2, 2);
-		bottomRightEnabled[bottomRight] = true;
-
-		yield return new (
-			topLeftEnabled,
-			topRightEnabled,
-			no_shift,
-			new Dictionary<PointI, bool> {
-				[topLeft] = true,
-				[topRight] = true,
-				[bottomLeft] = false,
-				[bottomRight] = false,
-			}
-		);
-
-		yield return new (
-			topLeftEnabled,
-			topRightEnabled,
-			shift_left,
-			new Dictionary<PointI, bool> {
-				[topLeft] = false,
-				[topRight] = false,
-				[bottomLeft] = false,
-				[bottomRight] = false,
-			}
-		);
-
-		yield return new (
-			topLeftEnabled,
-			bottomLeftEnabled,
-			shift_up,
-			new Dictionary<PointI, bool> {
-				[topLeft] = false,
-				[topRight] = false,
-				[bottomLeft] = false,
-				[bottomRight] = false,
-			}
-		);
-
-		yield return new (
-			bottomRightEnabled,
-			topLeftEnabled,
-			shift_right_down,
 			new Dictionary<PointI, bool> {
 				[topLeft] = false,
 				[topRight] = false,
@@ -431,82 +328,6 @@ internal sealed class BitMaskTest
 				[topRight] = false,
 				[bottomLeft] = false,
 				[bottomRight] = false,
-			}
-		);
-	}
-
-	static readonly IReadOnlyList<TestCaseData> or_offset_cases = CreateOrOffsetCases ().ToArray ();
-	static IEnumerable<TestCaseData> CreateOrOffsetCases ()
-	{
-		PointI shift_left = new (-1, 0);
-		PointI shift_up = new (0, -1);
-		//PointI shift_left_up = new (-1, -1);
-		PointI shift_right_down = new (1, 1);
-		//PointI shift_right = new (1, 0);
-		//PointI shift_down = new (0, 1);
-		PointI no_shift = new (0, 0);
-
-		PointI topLeft = new (0, 0);
-		BitMask topLeftEnabled = new (2, 2);
-		topLeftEnabled[topLeft] = true;
-
-		PointI topRight = new (1, 0);
-		BitMask topRightEnabled = new (2, 2);
-		topRightEnabled[topRight] = true;
-
-		PointI bottomLeft = new (0, 1);
-		BitMask bottomLeftEnabled = new (2, 2);
-		bottomLeftEnabled[bottomLeft] = true;
-
-		PointI bottomRight = new (1, 1);
-		BitMask bottomRightEnabled = new (2, 2);
-		bottomRightEnabled[bottomRight] = true;
-
-		yield return new (
-			topLeftEnabled,
-			topRightEnabled,
-			no_shift,
-			new Dictionary<PointI, bool> {
-				[topLeft] = true,
-				[topRight] = true,
-				[bottomLeft] = false,
-				[bottomRight] = false,
-			}
-		);
-
-		yield return new (
-			topLeftEnabled,
-			topRightEnabled,
-			shift_left,
-			new Dictionary<PointI, bool> {
-				[topLeft] = true,
-				[topRight] = false,
-				[bottomLeft] = false,
-				[bottomRight] = false,
-			}
-		);
-
-		yield return new (
-			topLeftEnabled,
-			bottomLeftEnabled,
-			shift_up,
-			new Dictionary<PointI, bool> {
-				[topLeft] = true,
-				[topRight] = false,
-				[bottomLeft] = false,
-				[bottomRight] = false,
-			}
-		);
-
-		yield return new (
-			bottomRightEnabled,
-			topLeftEnabled,
-			shift_right_down,
-			new Dictionary<PointI, bool> {
-				[topLeft] = false,
-				[topRight] = false,
-				[bottomLeft] = false,
-				[bottomRight] = true,
 			}
 		);
 	}
@@ -599,82 +420,6 @@ internal sealed class BitMaskTest
 				[topRight] = false,
 				[bottomLeft] = true,
 				[bottomRight] = false,
-			}
-		);
-	}
-
-	static readonly IReadOnlyList<TestCaseData> and_offset_cases = CreateAndOffsetCases ().ToArray ();
-	static IEnumerable<TestCaseData> CreateAndOffsetCases ()
-	{
-		PointI shift_left = new (-1, 0);
-		PointI shift_up = new (0, -1);
-		//PointI shift_left_up = new (-1, -1);
-		PointI shift_right_down = new (1, 1);
-		//PointI shift_right = new (1, 0);
-		//PointI shift_down = new (0, 1);
-		PointI no_shift = new (0, 0);
-
-		PointI topLeft = new (0, 0);
-		BitMask topLeftEnabled = new (2, 2);
-		topLeftEnabled[topLeft] = true;
-
-		PointI topRight = new (1, 0);
-		BitMask topRightEnabled = new (2, 2);
-		topRightEnabled[topRight] = true;
-
-		PointI bottomLeft = new (0, 1);
-		BitMask bottomLeftEnabled = new (2, 2);
-		bottomLeftEnabled[bottomLeft] = true;
-
-		PointI bottomRight = new (1, 1);
-		BitMask bottomRightEnabled = new (2, 2);
-		bottomRightEnabled[bottomRight] = true;
-
-		yield return new (
-			topLeftEnabled,
-			topRightEnabled,
-			no_shift,
-			new Dictionary<PointI, bool> {
-				[topLeft] = false,
-				[topRight] = false,
-				[bottomLeft] = false,
-				[bottomRight] = false,
-			}
-		);
-
-		yield return new (
-			topLeftEnabled,
-			topRightEnabled,
-			shift_left,
-			new Dictionary<PointI, bool> {
-				[topLeft] = true,
-				[topRight] = false,
-				[bottomLeft] = false,
-				[bottomRight] = false,
-			}
-		);
-
-		yield return new (
-			topLeftEnabled,
-			bottomLeftEnabled,
-			shift_up,
-			new Dictionary<PointI, bool> {
-				[topLeft] = true,
-				[topRight] = false,
-				[bottomLeft] = false,
-				[bottomRight] = false,
-			}
-		);
-
-		yield return new (
-			bottomRightEnabled,
-			topLeftEnabled,
-			shift_right_down,
-			new Dictionary<PointI, bool> {
-				[topLeft] = false,
-				[topRight] = false,
-				[bottomLeft] = false,
-				[bottomRight] = true,
 			}
 		);
 	}

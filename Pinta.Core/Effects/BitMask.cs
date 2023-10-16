@@ -128,67 +128,70 @@ public sealed class BitMask
 
 	public void Not () => array.Not ();
 
+	/// <summary>
+	/// Performs bit-by-bit AND in the area where
+	/// this and <paramref name="other"/> overlap
+	/// </summary>
 	public void And (BitMask other)
 	{
 		if (Width == 0 || Height == 0) return;
+
 		if (Width == other.Width && Height == other.Height) {
 			array.And (other.array);
-		} else {
-			And (other, PointI.Zero);
+			return;
 		}
-	}
 
-	public void And (BitMask other, PointI offset)
-	{
-		RectangleI overlap = GetOverlap (other, offset);
+		RectangleI overlap = GetOverlap (other, PointI.Zero);
 		if (overlap.IsEmpty) return;
 		int right = overlap.Right;
 		int bottom = overlap.Bottom;
 		for (int x = overlap.Left; x <= right; x++)
 			for (int y = overlap.Top; y <= bottom; y++)
-				this[x, y] = this[x, y] && other[x - offset.X, y - offset.Y];
+				this[x, y] = this[x, y] && other[x, y];
 	}
 
+	/// <summary>
+	/// Performs bit-by-bit OR in the area where
+	/// this and <paramref name="other"/> overlap
+	/// </summary>
 	public void Or (BitMask other)
 	{
 		if (Width == 0 || Height == 0) return;
+
 		if (Width == other.Width && Height == other.Height) {
 			array.Or (other.array);
-		} else {
-			Or (other, PointI.Zero);
+			return;
 		}
-	}
 
-	public void Or (BitMask other, PointI offset)
-	{
-		RectangleI overlap = GetOverlap (other, offset);
+		RectangleI overlap = GetOverlap (other, PointI.Zero);
 		if (overlap.IsEmpty) return;
 		int right = overlap.Right;
 		int bottom = overlap.Bottom;
 		for (int x = overlap.Left; x <= right; x++)
 			for (int y = overlap.Top; y <= bottom; y++)
-				this[x, y] = this[x, y] || other[x - offset.X, y - offset.Y];
+				this[x, y] = this[x, y] || other[x, y];
 	}
 
+	/// <summary>
+	/// Performs bit-by-bit XOR in the area where
+	/// this and <paramref name="other"/> overlap
+	/// </summary>
 	public void Xor (BitMask other)
 	{
 		if (Width == 0 || Height == 0) return;
+
 		if (Width == other.Width && Height == other.Height) {
 			array.Xor (other.array);
-		} else {
-			Xor (other, PointI.Zero);
+			return;
 		}
-	}
 
-	public void Xor (BitMask other, PointI offset)
-	{
-		RectangleI overlap = GetOverlap (other, offset);
+		RectangleI overlap = GetOverlap (other, PointI.Zero);
 		if (overlap.IsEmpty) return;
 		int right = overlap.Right;
 		int bottom = overlap.Bottom;
 		for (int x = overlap.Left; x <= right; x++)
 			for (int y = overlap.Top; y <= bottom; y++)
-				this[x, y] = this[x, y] ^ other[x - offset.X, y - offset.Y];
+				this[x, y] = this[x, y] ^ other[x, y];
 	}
 
 	public BitMask CloneArea (RectangleI bounds)
