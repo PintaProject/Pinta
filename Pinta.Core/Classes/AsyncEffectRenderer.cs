@@ -68,8 +68,7 @@ internal abstract class AsyncEffectRenderer
 	readonly object updated_lock;
 	bool is_updated;
 
-	PointI updated_1;
-	PointI updated_2;
+	RectangleI updated_area;
 
 	internal AsyncEffectRenderer (Settings settings)
 	{
@@ -263,20 +262,18 @@ internal abstract class AsyncEffectRenderer
 		// Update bounds to be shown on next expose.
 		lock (updated_lock) {
 			if (is_updated) {
-				updated_1 = new (
-					X: Math.Min (bounds.X, updated_1.X),
-					Y: Math.Min (bounds.Y, updated_1.Y)
-				);
-				updated_2 = new (
-					X: Math.Max (bounds.X + bounds.Width, updated_2.X),
-					Y: Math.Max (bounds.Y + bounds.Height, updated_2.Y)
+				updated_area = RectangleI.FromLTRB (
+					left: Math.Min (bounds.X, updated_area.X),
+					top: Math.Min (bounds.Y, updated_area.Y),
+					right: Math.Max (bounds.X + bounds.Width - 1, updated_area.Right),
+					bottom: Math.Max (bounds.Y + bounds.Height - 1, updated_area.Bottom)
 				);
 			} else {
 				is_updated = true;
-				updated_1 = bounds.Location;
-				updated_2 = new (
-					X: bounds.X + bounds.Width,
-					Y: bounds.Y + bounds.Height
+				updated_area = new (
+					point: bounds.Location,
+					width: bounds.Width,
+					height: bounds.Height
 				);
 			}
 		}
@@ -322,12 +319,7 @@ internal abstract class AsyncEffectRenderer
 
 			is_updated = false;
 
-			bounds = new RectangleI (
-				X: updated_1.X,
-				Y: updated_1.Y,
-				Width: updated_2.X - updated_1.X,
-				Height: updated_2.Y - updated_1.Y
-			);
+			bounds = updated_area;
 		}
 
 		if (IsRendering && !cancel_render_flag)
