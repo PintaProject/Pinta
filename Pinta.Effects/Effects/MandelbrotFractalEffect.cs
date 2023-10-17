@@ -190,7 +190,7 @@ public sealed class MandelbrotFractalEffect : BaseEffect
 		return scheme switch {
 			PredefinedColorSchemes.CottonCandy => new ImmutableColorGradient (
 				ColorBgra.White,
-				ColorBgra.FromBgr (42, 235, 214),
+				ColorBgra.FromBgr (242, 235, 214),
 				Outer,
 				Core,
 				new Dictionary<double, ColorBgra> {
