@@ -154,7 +154,7 @@ public sealed class SimpleEffectDialog : Gtk.Dialog
 
 			caption ??= MakeCaption (mi.Name);
 
-			if (mType == typeof (int) && (caption == "Seed"))
+			if (mType == typeof (RandomSeed))
 				yield return CreateSeed (localizer.GetString (caption), effectData, mi, attrs);
 			else if (mType == typeof (int))
 				yield return CreateSlider (localizer.GetString (caption), effectData, mi, attrs);
@@ -396,7 +396,21 @@ public sealed class SimpleEffectDialog : Gtk.Dialog
 	private ReseedButtonWidget CreateSeed (string caption, object o, MemberInfo member, object[] attributes)
 	{
 		var widget = new ReseedButtonWidget ();
-		widget.Clicked += (_, _) => SetValue (member, o, random.Next ());
+
+		int min_value = 0;
+		int max_value = int.MaxValue - 1;
+		foreach (var attr in attributes) {
+			switch (attr) {
+				case MinimumValueAttribute min:
+					min_value = min.Value;
+					break;
+				case MaximumValueAttribute max:
+					max_value = max.Value;
+					break;
+			}
+		}
+
+		widget.Clicked += (_, _) => SetValue (member, o, new RandomSeed (random.Next (min_value, max_value)));
 		return widget;
 	}
 
