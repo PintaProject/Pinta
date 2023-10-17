@@ -8,6 +8,8 @@
 /////////////////////////////////////////////////////////////////////////////////
 
 using System;
+using System.Collections.Generic;
+using System.Collections.Immutable;
 using Cairo;
 using Pinta.Core;
 using Pinta.Gui.Widgets;
@@ -75,7 +77,8 @@ public sealed class MandelbrotFractalEffect : BaseEffect
 		double angleTheta,
 		int factor,
 		double xOffset,
-		double yOffset);
+		double yOffset,
+		ImmutableColorGradient gradient);
 	private MandelbrotSettings CreateSettings (ImageSurface dst)
 	{
 		int h = dst.Height;
@@ -99,7 +102,9 @@ public sealed class MandelbrotFractalEffect : BaseEffect
 			factor: Data.Factor,
 
 			xOffset: x_offset,
-			yOffset: y_offset
+			yOffset: y_offset,
+
+			gradient: Data.ColorGradient
 		);
 	}
 
@@ -144,10 +149,12 @@ public sealed class MandelbrotFractalEffect : BaseEffect
 
 			double c = 64 + settings.factor * m;
 
-			r += Utility.ClampToByte (c - 768);
-			g += Utility.ClampToByte (c - 512);
-			b += Utility.ClampToByte (c - 256);
-			a += Utility.ClampToByte (c - 0);
+			ColorBgra colorAddend = settings.gradient.GetColor (c);
+
+			r += colorAddend.R;
+			g += colorAddend.G;
+			b += colorAddend.B;
+			a += colorAddend.A;
 		}
 		return ColorBgra.FromBgra (Utility.ClampToByte (b / settings.count), Utility.ClampToByte (g / settings.count), Utility.ClampToByte (r / settings.count), Utility.ClampToByte (a / settings.count));
 	}
@@ -168,8 +175,20 @@ public sealed class MandelbrotFractalEffect : BaseEffect
 		[Caption ("Angle")]
 		public DegreesAngle Angle { get; set; } = new (0);
 
+		[Caption ("Colors")]
+		public ImmutableColorGradient ColorGradient { get; set; } = new ImmutableColorGradient (
+			ColorBgra.Transparent,
+			ColorBgra.White,
+			0,
+			1023,
+			new Dictionary<double, ColorBgra> {
+				[256] = ColorBgra.Black,
+				[512] = ColorBgra.Blue,
+				[768] = ColorBgra.Cyan,
+			}
+		);
+
 		[Caption ("Invert Colors")]
 		public bool InvertColors { get; set; } = false;
-
 	}
 }
