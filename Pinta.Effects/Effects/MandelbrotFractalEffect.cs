@@ -185,14 +185,14 @@ public sealed class MandelbrotFractalEffect : BaseEffect
 
 	private static ImmutableColorGradient CreateColorGradient (PredefinedColorSchemes scheme)
 	{
-		const double Core = 1023;
 		const double Outer = 0;
+		const double Core = 1023;
 		return scheme switch {
 			PredefinedColorSchemes.CottonCandy => new ImmutableColorGradient (
 				ColorBgra.White,
 				ColorBgra.FromBgr (230, 216, 173),
-				Core,
 				Outer,
+				Core,
 				new Dictionary<double, ColorBgra> {
 					[256] = ColorBgra.FromBgr (180, 105, 255),
 					[768] = ColorBgra.FromBgr (219, 112, 219),
@@ -201,8 +201,8 @@ public sealed class MandelbrotFractalEffect : BaseEffect
 			PredefinedColorSchemes.Electric => new ImmutableColorGradient (
 				ColorBgra.Transparent,
 				ColorBgra.White,
-				Core,
 				Outer,
+				Core,
 				new Dictionary<double, ColorBgra> {
 					[256] = ColorBgra.Black,
 					[512] = ColorBgra.Blue,
@@ -212,8 +212,8 @@ public sealed class MandelbrotFractalEffect : BaseEffect
 			PredefinedColorSchemes.LaBellaItalia => new ImmutableColorGradient (
 				ColorBgra.Transparent,
 				ColorBgra.FromBgr (55, 43, 206),
-				Core,
 				Outer,
+				Core,
 				new Dictionary<double, ColorBgra> {
 					[256] = ColorBgra.FromBgr (70, 146, 0),
 					[768] = ColorBgra.White,
@@ -222,8 +222,8 @@ public sealed class MandelbrotFractalEffect : BaseEffect
 			PredefinedColorSchemes.LimeLemon => new ImmutableColorGradient (
 				ColorBgra.Transparent,
 				ColorBgra.White,
-				Core,
 				Outer,
+				Core,
 				new Dictionary<double, ColorBgra> {
 					[256] = ColorBgra.FromBgr (0, 128, 0),
 					[512] = ColorBgra.FromBgr (0, 255, 0),
@@ -233,8 +233,8 @@ public sealed class MandelbrotFractalEffect : BaseEffect
 			PredefinedColorSchemes.PinaColada => new ImmutableColorGradient (
 				ColorBgra.FromBgr (0, 128, 128),
 				ColorBgra.White,
-				Core,
 				Outer,
+				Core,
 				new Dictionary<double, ColorBgra> {
 					[256] = ColorBgra.Yellow,
 					[768] = ColorBgra.FromBgr (196, 245, 253),
@@ -243,8 +243,8 @@ public sealed class MandelbrotFractalEffect : BaseEffect
 			PredefinedColorSchemes.SakuraSigh => new ImmutableColorGradient (
 				ColorBgra.Transparent,
 				ColorBgra.FromBgr (240, 255, 255),
-				Core,
 				Outer,
+				Core,
 				new Dictionary<double, ColorBgra> {
 					[256] = ColorBgra.FromBgr (235, 206, 135),
 					[768] = ColorBgra.FromBgr (193, 182, 255),
@@ -271,7 +271,7 @@ public sealed class MandelbrotFractalEffect : BaseEffect
 		public DegreesAngle Angle { get; set; } = new (0);
 
 		[Caption ("Colors")]
-		internal PredefinedColorSchemes Colors { get; set; } = PredefinedColorSchemes.Electric;
+		public PredefinedColorSchemes Colors { get; set; } = PredefinedColorSchemes.Electric;
 
 		[Caption ("Invert Colors")]
 		public bool InvertColors { get; set; } = false;
