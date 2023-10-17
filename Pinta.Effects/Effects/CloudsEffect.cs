@@ -219,8 +219,8 @@ public sealed class CloudsEffect : BaseEffect
 		[StaticList ("BlendOps")]
 		public string BlendMode { get; set; } = default_blend_op;
 
-		[Caption ("Seed"), MinimumValue (0), MaximumValue (255)]
-		public int Seed { get; set; } = 0;
+		[Caption ("Seed")]
+		public RandomSeed Seed { get; set; } = new (0);
 
 	}
 }
