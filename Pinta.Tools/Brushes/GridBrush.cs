@@ -39,26 +39,24 @@ public sealed class GridBrush : BasePaintBrush
 
 	protected override RectangleI OnMouseMove (
 		Context g,
-		Color strokeColor,
 		ImageSurface surface,
-		PointI current,
-		PointI last)
+		BrushStrokeArgs strokeArgs)
 	{
 		PointD c = new (
-			X: Math.Round (current.X / 100.0) * 100.0,
-			Y: Math.Round (current.Y / 100.0) * 100.0
+			X: Math.Round (strokeArgs.CurrentPosition.X / 100.0) * 100.0,
+			Y: Math.Round (strokeArgs.CurrentPosition.Y / 100.0) * 100.0
 		);
 
 		PointD d = new (
-			X: (c.X - current.X) * 10.0,
-			Y: (c.Y - current.Y) * 10.0
+			X: (c.X - strokeArgs.CurrentPosition.X) * 10.0,
+			Y: (c.Y - strokeArgs.CurrentPosition.Y) * 10.0
 		);
 
 		for (int i = 0; i < 50; i++) {
 			g.MoveTo (c.X, c.Y);
 			g.QuadraticCurveTo (
-				current.X + Random.NextDouble () * d.X,
-				current.Y + Random.NextDouble () * d.Y,
+				strokeArgs.CurrentPosition.X + Random.NextDouble () * d.X,
+				strokeArgs.CurrentPosition.Y + Random.NextDouble () * d.Y,
 				c.X,
 				c.Y);
 			g.Stroke ();
