@@ -211,13 +211,12 @@ public sealed class MandelbrotFractalEffect : BaseEffect
 				}
 			),
 			PredefinedColorSchemes.LaBellaItalia => new ImmutableColorGradient (
-				ColorBgra.Transparent,
+				ColorBgra.FromBgr (70, 146, 0),
 				ColorBgra.FromBgr (55, 43, 206),
 				Outer,
 				Core,
 				new Dictionary<double, ColorBgra> {
-					[256] = ColorBgra.FromBgr (70, 146, 0),
-					[768] = ColorBgra.White,
+					[256] = ColorBgra.White,
 				}
 			),
 			PredefinedColorSchemes.LimeLemon => new ImmutableColorGradient (
