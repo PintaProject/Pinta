@@ -178,7 +178,7 @@ public sealed class MandelbrotFractalEffect : BaseEffect
 		public DegreesAngle Angle { get; set; } = new (0);
 
 		[Caption ("Colors")]
-		public ImmutableColorGradient ColorGradient { get; set; } = new ImmutableColorGradient (
+		internal ImmutableColorGradient ColorGradient { get; set; } = new ImmutableColorGradient (
 			ColorBgra.Transparent,
 			ColorBgra.White,
 			0,

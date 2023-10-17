@@ -2,10 +2,11 @@ using System;
 using System.Collections.Generic;
 using System.Collections.Immutable;
 using System.Linq;
+using Pinta.Core;
 
-namespace Pinta.Core;
+namespace Pinta.Effects;
 
-public sealed class ImmutableColorGradient
+internal sealed class ImmutableColorGradient
 {
 	public ColorBgra StartColor { get; }
 	public ColorBgra EndColor { get; }
