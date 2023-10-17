@@ -158,7 +158,7 @@ public sealed class SimpleEffectDialog : Gtk.Dialog
 				yield return CreateSeed (localizer.GetString (caption), effectData, mi, attrs);
 			else if (mType == typeof (int))
 				yield return CreateSlider (localizer.GetString (caption), effectData, mi, attrs);
-			else if (mType == typeof (double) && (caption == "Angle" || caption == "Rotation"))
+			else if (mType == typeof (DegreesAngle))
 				yield return CreateAnglePicker (localizer.GetString (caption), effectData, mi, attrs);
 			else if (mType == typeof (double))
 				yield return CreateDoubleSlider (localizer.GetString (caption), effectData, mi, attrs);
@@ -371,7 +371,7 @@ public sealed class SimpleEffectDialog : Gtk.Dialog
 	{
 		var widget = new AnglePickerWidget { Label = caption };
 
-		if (GetValue (member, o) is double d)
+		if (GetValue (member, o) is DegreesAngle d)
 			widget.DefaultValue = d;
 
 		widget.ValueChanged += (_, _) => {

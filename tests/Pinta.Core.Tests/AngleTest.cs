@@ -1,6 +1,5 @@
 using System;
 using NUnit.Framework;
-using Pinta.Core.Classes;
 
 namespace Pinta.Core.Tests;
 

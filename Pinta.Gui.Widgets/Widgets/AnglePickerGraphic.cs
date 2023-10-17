@@ -16,7 +16,7 @@ namespace Pinta.Gui.Widgets;
 public sealed class AnglePickerGraphic : Gtk.DrawingArea
 {
 	private PointD drag_start;
-	private double angle_value;
+	private DegreesAngle angle_value;
 
 	public AnglePickerGraphic ()
 	{
@@ -43,25 +43,13 @@ public sealed class AnglePickerGraphic : Gtk.DrawingArea
 		ValueChanged += (_, _) => QueueDraw ();
 	}
 
-	public int Value {
-		get => (int) angle_value;
-		set {
-			var v = value % 360;
-			if (angle_value != v) {
-				angle_value = v;
-				OnValueChanged ();
-			}
-		}
-	}
-
-	public double ValueDouble {
+	public DegreesAngle Value {
 		get => angle_value;
 		set {
-			//double v = Math.IEEERemainder (value, 360.0);
-			if (angle_value != value) {
-				angle_value = value;
-				OnValueChanged ();
-			}
+			if (angle_value == value)
+				return;
+			angle_value = value;
+			OnValueChanged ();
 		}
 	}
 
@@ -74,10 +62,10 @@ public sealed class AnglePickerGraphic : Gtk.DrawingArea
 
 	private void ProcessMouseEvent (PointD pt, bool constrainAngle)
 	{
-		ValueDouble = CalculateNewAngle (pt, constrainAngle);
+		Value = CalculateNewAngle (pt, constrainAngle);
 	}
 
-	private double CalculateNewAngle (PointD pt, bool constrainAngle)
+	private DegreesAngle CalculateNewAngle (PointD pt, bool constrainAngle)
 	{
 		var rect = GetDrawBounds ();
 		var diameter = Math.Min (rect.Width, rect.Height);
@@ -111,7 +99,7 @@ public sealed class AnglePickerGraphic : Gtk.DrawingArea
 			newAngle = bestMultiple * constraintAngle;
 		}
 
-		return newAngle;
+		return new (newAngle);
 	}
 
 	private readonly record struct AngleGraphicSettings (
@@ -130,7 +118,7 @@ public sealed class AnglePickerGraphic : Gtk.DrawingArea
 
 		var center = new PointD (rect.X + radius, rect.Y + radius);
 
-		var theta = (angle_value * 2.0 * Math.PI) / 360.0;
+		var theta = (angle_value.Degrees * 2.0 * Math.PI) / 360.0;
 
 		var ellipseRect = new RectangleD (0, 0, diameter, diameter);
 
