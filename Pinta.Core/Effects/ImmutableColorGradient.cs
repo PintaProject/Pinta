@@ -21,8 +21,8 @@ public sealed class ImmutableColorGradient
 	{
 		if (minValue >= maxValue) throw new ArgumentException ($"{nameof (minValue)} has to be lower than {nameof (maxValue)}");
 		var sortedStops = gradientStops.OrderBy (kvp => kvp.Key).ToArray ();
-		if (sortedStops[0].Key <= minValue) throw new ArgumentException ($"Lowest key in {nameof (gradientStops)} has to be greater than {nameof (minValue)}");
-		if (sortedStops[^1].Key >= maxValue) throw new ArgumentException ($"Greatest key in {nameof (gradientStops)} has to be lower than {nameof (maxValue)}");
+		if (sortedStops.Length > 0 && sortedStops[0].Key <= minValue) throw new ArgumentException ($"Lowest key in {nameof (gradientStops)} has to be greater than {nameof (minValue)}");
+		if (sortedStops.Length > 0 && sortedStops[^1].Key >= maxValue) throw new ArgumentException ($"Greatest key in {nameof (gradientStops)} has to be lower than {nameof (maxValue)}");
 
 		_startColor = startColor;
 		_endColor = endColor;
