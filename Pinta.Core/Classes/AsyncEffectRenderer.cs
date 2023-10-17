@@ -262,19 +262,10 @@ internal abstract class AsyncEffectRenderer
 		// Update bounds to be shown on next expose.
 		lock (updated_lock) {
 			if (is_updated) {
-				updated_area = RectangleI.FromLTRB (
-					left: Math.Min (bounds.X, updated_area.X),
-					top: Math.Min (bounds.Y, updated_area.Y),
-					right: Math.Max (bounds.X + bounds.Width - 1, updated_area.Right),
-					bottom: Math.Max (bounds.Y + bounds.Height - 1, updated_area.Bottom)
-				);
+				updated_area = RectangleI.Union (bounds, updated_area);
 			} else {
 				is_updated = true;
-				updated_area = new (
-					point: bounds.Location,
-					width: bounds.Width,
-					height: bounds.Height
-				);
+				updated_area = bounds;
 			}
 		}
 
