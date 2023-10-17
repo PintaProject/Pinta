@@ -164,7 +164,7 @@ public sealed class MandelbrotFractalEffect : BaseEffect
 
 	public enum PredefinedColorSchemes
 	{
-		[Caption ("CottonCandy")]
+		[Caption ("Cotton Candy")]
 		CottonCandy,
 
 		[Caption ("Electric")]
@@ -190,12 +190,13 @@ public sealed class MandelbrotFractalEffect : BaseEffect
 		return scheme switch {
 			PredefinedColorSchemes.CottonCandy => new ImmutableColorGradient (
 				ColorBgra.White,
-				ColorBgra.FromBgr (230, 216, 173),
+				ColorBgra.FromBgr (42, 235, 214),
 				Outer,
 				Core,
 				new Dictionary<double, ColorBgra> {
 					[256] = ColorBgra.FromBgr (180, 105, 255),
-					[768] = ColorBgra.FromBgr (219, 112, 219),
+					[512] = ColorBgra.FromBgr (219, 112, 219),
+					[768] = ColorBgra.FromBgr (230, 216, 173),
 				}
 			),
 			PredefinedColorSchemes.Electric => new ImmutableColorGradient (
@@ -232,12 +233,11 @@ public sealed class MandelbrotFractalEffect : BaseEffect
 			),
 			PredefinedColorSchemes.PinaColada => new ImmutableColorGradient (
 				ColorBgra.FromBgr (0, 128, 128),
-				ColorBgra.White,
+				ColorBgra.FromBgr (196, 245, 253),
 				Outer,
 				Core,
 				new Dictionary<double, ColorBgra> {
 					[256] = ColorBgra.Yellow,
-					[768] = ColorBgra.FromBgr (196, 245, 253),
 				}
 			),
 			PredefinedColorSchemes.SakuraSigh => new ImmutableColorGradient (
