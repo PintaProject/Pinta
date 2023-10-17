@@ -60,17 +60,17 @@ public abstract class BasePaintBrush
 	/// </summary>
 	public virtual double StrokeAlphaMultiplier => 1;
 
-	public virtual void DoMouseUp ()
+	public void DoMouseUp ()
 	{
 		OnMouseUp ();
 	}
 
-	public virtual void DoMouseDown ()
+	public void DoMouseDown ()
 	{
 		OnMouseDown ();
 	}
 
-	public virtual RectangleI DoMouseMove (
+	public RectangleI DoMouseMove (
 		Context g,
 		ImageSurface surface,
 		BrushStrokeArgs strokeArgs)
