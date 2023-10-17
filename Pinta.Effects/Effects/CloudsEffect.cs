@@ -171,7 +171,7 @@ public sealed class CloudsEffect : BaseEffect
 
 		var temp = CairoExtensions.CreateImageSurface (Format.Argb32, roi.Width, roi.Height);
 
-		RenderClouds (temp, roi, Data.Scale, (byte) (Data.Seed ^ instance_seed), Data.Power / 100.0,
+		RenderClouds (temp, roi, Data.Scale, (byte) (Data.Seed.Value ^ instance_seed), Data.Power / 100.0,
 				PintaCore.Palette.PrimaryColor.ToColorBgra (), PintaCore.Palette.SecondaryColor.ToColorBgra ());
 
 		temp.MarkDirty ();
