@@ -47,7 +47,8 @@ public static class GdkPixbufExtensions
 	public static byte[] SaveToBuffer (this Pixbuf pixbuf, string type)
 	{
 		SaveToBufferv (pixbuf.Handle, out IntPtr buffer, out uint buffer_size, type, IntPtr.Zero, IntPtr.Zero, out var error);
-		GLib.Error.ThrowOnError (error);
+		if (!error.IsInvalid)
+			throw new GLib.GException (error);
 
 		var result = new byte[buffer_size];
 		Marshal.Copy (buffer, result, 0, (int) buffer_size);
@@ -86,13 +87,12 @@ public static class GdkPixbufExtensions
 	// TODO-GTK4 (bindings) - record methods are not generated (https://github.com/gircore/gir.core/issues/743)
 	public static string[] GetMimeTypes (this PixbufFormat format)
 	{
-		IntPtr resultNative = GetMimeTypes (format.Handle);
-		// FIXME - this does not free the result!
-		return GLib.Internal.StringHelper.ToStringArrayUtf8 (resultNative);
+		var result = GetMimeTypes (format.Handle);
+		return result.ConvertToStringArray () ?? Array.Empty<string> ();
 	}
 
 	[DllImport (PixbufLibraryName, EntryPoint = "gdk_pixbuf_format_get_mime_types")]
-	private static extern IntPtr GetMimeTypes (GdkPixbuf.Internal.PixbufFormatHandle format);
+	private static extern GLib.Internal.Utf8StringArrayNullTerminatedOwnedHandle GetMimeTypes (GdkPixbuf.Internal.PixbufFormatHandle format);
 
 	[DllImport (PixbufLibraryName, EntryPoint = "gdk_pixbuf_get_formats")]
 	private static extern GLib.Internal.SListUnownedHandle GetFormatsNative ();

@@ -89,7 +89,7 @@ public static class GtkExtensions
 	}
 
 	// TODO-GTK4 (bindings) - add pre-defined VariantType's to gir.core (https://github.com/gircore/gir.core/issues/843)
-	public static readonly GLib.VariantType IntVariantType = new ("i");
+	public static readonly GLib.VariantType IntVariantType = GLib.VariantType.New ("i");
 
 	/// <summary>
 	/// In GTK4, toolbars are just a Box with a different CSS style class.
@@ -289,7 +289,7 @@ public static class GtkExtensions
 	public static string RunBlocking (this Adw.MessageDialog dialog)
 	{
 		string response = "";
-		GLib.MainLoop loop = new ();
+		var loop = GLib.MainLoop.New (null, false);
 
 		if (!dialog.Modal)
 			dialog.Modal = true;
@@ -314,7 +314,7 @@ public static class GtkExtensions
 	public static ResponseType RunBlocking (this Gtk.NativeDialog dialog)
 	{
 		var response = ResponseType.None;
-		GLib.MainLoop loop = new ();
+		var loop = GLib.MainLoop.New (null, false);
 
 		if (!dialog.Modal)
 			dialog.Modal = true;
@@ -339,7 +339,7 @@ public static class GtkExtensions
 	public static ResponseType RunBlocking (this Gtk.Dialog dialog)
 	{
 		var response = ResponseType.None;
-		GLib.MainLoop loop = new ();
+		var loop = GLib.MainLoop.New (null, false);
 
 		if (!dialog.Modal)
 			dialog.Modal = true;

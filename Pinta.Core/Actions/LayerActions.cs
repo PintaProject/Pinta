@@ -208,7 +208,7 @@ public sealed class LayerActions
 
 				using var fs = file.Read (null);
 				try {
-					var bg = GdkPixbuf.Pixbuf.NewFromStream (fs, cancellable: null);
+					var bg = GdkPixbuf.Pixbuf.NewFromStream (fs, cancellable: null)!; // NRT: only nullable when an error is thrown
 					var context = new Cairo.Context (layer.Surface);
 					context.DrawPixbuf (bg, 0, 0);
 				} finally {
