@@ -118,15 +118,18 @@ public sealed class LivePreviewManager
 
 		Debug.WriteLine (DateTime.Now.ToString ("HH:mm:ss:ffff") + "Start Live preview.");
 
+		var source = layer.Surface;
+		var dest = live_preview_surface;
+
 		renderer = new Renderer (this, settings);
-		renderer.Start (effect, layer.Surface, live_preview_surface, render_bounds);
+		renderer.Start (effect, source, dest, render_bounds);
 
 		if (effect.IsConfigurable) {
 			EventHandler<BaseEffect.ConfigDialogResponseEventArgs>? handler = null;
 			handler = (_, args) => {
 				if (!args.Accepted) {
 					PintaCore.Chrome.MainWindowBusy = true;
-					Cancel ();
+					Cancel (source, dest);
 				} else {
 					PintaCore.Chrome.MainWindowBusy = true;
 					Apply ();
@@ -148,13 +151,15 @@ public sealed class LivePreviewManager
 
 	// Method asks render task to complete, and then returns immediately. The cancel
 	// is not actually complete until the LivePreviewRenderCompleted event is fired.
-	void Cancel ()
+	void Cancel (
+		Cairo.ImageSurface sourceSurface,
+		Cairo.ImageSurface destSurface)
 	{
 		Debug.WriteLine (DateTime.Now.ToString ("HH:mm:ss:ffff") + " LivePreviewManager.Cancel()");
 
 		cancel_live_preview_flag = true;
 
-		renderer?.Cancel (render_bounds);
+		renderer?.Cancel (sourceSurface, destSurface, render_bounds);
 
 		// Show a busy cursor, and make the main window insensitive,
 		// until the cancel has completed.
@@ -197,7 +202,7 @@ public sealed class LivePreviewManager
 
 	void HandleProgressDialogCancel (object? o, EventArgs? e)
 	{
-		Cancel ();
+		Cancel (layer.Surface, live_preview_surface);
 	}
 
 	// Called from asynchronously from Renderer.OnCompletion ()

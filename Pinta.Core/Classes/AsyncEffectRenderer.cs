@@ -51,8 +51,6 @@ internal abstract class AsyncEffectRenderer
 	}
 
 	BaseEffect? effect;
-	Cairo.ImageSurface? source_surface;
-	Cairo.ImageSurface? dest_surface;
 
 	bool is_rendering;
 	bool cancel_render_flag;
@@ -84,8 +82,6 @@ internal abstract class AsyncEffectRenderer
 			settings.UpdateMillis = 100;
 
 		effect = null;
-		source_surface = null;
-		dest_surface = null;
 		this.settings = settings;
 
 		is_rendering = false;
@@ -122,9 +118,6 @@ internal abstract class AsyncEffectRenderer
 		// So a copy is made for the render.
 		this.effect = effect.Clone ();
 
-		this.source_surface = source;
-		this.dest_surface = dest;
-
 		// If a render is already in progress, then cancel it,
 		// and start a new render.
 		if (IsRendering) {
@@ -133,17 +126,20 @@ internal abstract class AsyncEffectRenderer
 			return;
 		}
 
-		StartRender (renderBounds);
+		StartRender (source, dest, renderBounds);
 	}
 
-	internal void Cancel (RectangleI renderBounds)
+	internal void Cancel (
+		Cairo.ImageSurface sourceSurface,
+		Cairo.ImageSurface destSurface,
+		RectangleI renderBounds)
 	{
 		Debug.WriteLine ("AsyncEffectRenderer.Cancel ()");
 		cancel_render_flag = true;
 		restart_render_flag = false;
 
 		if (!IsRendering)
-			HandleRenderCompletion (renderBounds);
+			HandleRenderCompletion (sourceSurface, destSurface, renderBounds);
 	}
 
 	protected abstract void OnUpdate (double progress, RectangleI updatedBounds);
@@ -158,7 +154,10 @@ internal abstract class AsyncEffectRenderer
 		timer_tick_id = 0;
 	}
 
-	void StartRender (RectangleI renderBounds)
+	void StartRender (
+		Cairo.ImageSurface sourceSurface,
+		Cairo.ImageSurface destSurface,
+		RectangleI renderBounds)
 	{
 		is_rendering = true;
 		cancel_render_flag = false;
@@ -181,13 +180,13 @@ internal abstract class AsyncEffectRenderer
 		int threadCount = settings.ThreadCount;
 		var slaves = new Thread[threadCount - 1];
 		for (int threadId = 1; threadId < threadCount; threadId++)
-			slaves[threadId - 1] = StartSlaveThread (renderBounds, renderId, threadId);
+			slaves[threadId - 1] = StartSlaveThread (sourceSurface, destSurface, renderBounds, renderId, threadId);
 
 		// Start the master render thread.
 		var master = new Thread (() => {
 
 			// Do part of the rendering on the master thread.
-			Render (renderBounds, renderId, 0);
+			Render (sourceSurface, destSurface, renderBounds, renderId, 0);
 
 			// Wait for slave threads to complete.
 			foreach (var slave in slaves)
@@ -195,7 +194,7 @@ internal abstract class AsyncEffectRenderer
 
 			// Change back to the UI thread to notify of completion.
 			GLib.Functions.TimeoutAdd (0, 0, () => {
-				HandleRenderCompletion (renderBounds);
+				HandleRenderCompletion (sourceSurface, destSurface, renderBounds);
 				return false; // don't call the timer again
 			});
 		}) {
@@ -207,10 +206,15 @@ internal abstract class AsyncEffectRenderer
 		timer_tick_id = GLib.Functions.TimeoutAdd (0, (uint) settings.UpdateMillis, () => HandleTimerTick ());
 	}
 
-	Thread StartSlaveThread (RectangleI renderBounds, int renderId, int threadId)
+	Thread StartSlaveThread (
+		Cairo.ImageSurface sourceSurface,
+		Cairo.ImageSurface destSurface,
+		RectangleI renderBounds,
+		int renderId,
+		int threadId)
 	{
 		var slave = new Thread (() => {
-			Render (renderBounds, renderId, threadId);
+			Render (sourceSurface, destSurface, renderBounds, renderId, threadId);
 		}) {
 			Priority = settings.ThreadPriority
 		};
@@ -220,19 +224,30 @@ internal abstract class AsyncEffectRenderer
 	}
 
 	// Runs on a background thread.
-	void Render (RectangleI renderBounds, int renderId, int threadId)
+	void Render (
+		Cairo.ImageSurface sourceSurface,
+		Cairo.ImageSurface destSurface,
+		RectangleI renderBounds,
+		int renderId,
+		int threadId)
 	{
 		// Fetch the next tile index and render it.
 		for (; ; ) {
 			int tileIndex = Interlocked.Increment (ref current_tile);
 			if (tileIndex >= total_tiles || cancel_render_flag)
 				return;
-			RenderTile (renderBounds, renderId, threadId, tileIndex);
+			RenderTile (sourceSurface, destSurface, renderBounds, renderId, threadId, tileIndex);
 		}
 	}
 
 	// Runs on a background thread.
-	void RenderTile (RectangleI renderBounds, int renderId, int threadId, int tileIndex)
+	void RenderTile (
+		Cairo.ImageSurface sourceSurface,
+		Cairo.ImageSurface destSurface,
+		RectangleI renderBounds,
+		int renderId,
+		int threadId,
+		int tileIndex)
 	{
 		Exception? exception = null;
 		var bounds = new RectangleI ();
@@ -243,9 +258,9 @@ internal abstract class AsyncEffectRenderer
 
 			// NRT - These are set in Start () before getting here
 			if (!cancel_render_flag) {
-				dest_surface!.Flush ();
-				effect!.Render (source_surface!, dest_surface, stackalloc[] { bounds });
-				dest_surface.MarkDirty (bounds);
+				destSurface.Flush ();
+				effect!.Render (sourceSurface!, destSurface, stackalloc[] { bounds });
+				destSurface.MarkDirty (bounds);
 			}
 
 		} catch (Exception ex) {
@@ -317,7 +332,10 @@ internal abstract class AsyncEffectRenderer
 		return true;
 	}
 
-	void HandleRenderCompletion (RectangleI renderBounds)
+	void HandleRenderCompletion (
+		Cairo.ImageSurface sourceSurface,
+		Cairo.ImageSurface destSurface,
+		RectangleI renderBounds)
 	{
 		var exceptions = (render_exceptions.Count == 0)
 				? Array.Empty<Exception> ()
@@ -333,7 +351,7 @@ internal abstract class AsyncEffectRenderer
 		OnCompletion (cancel_render_flag, exceptions);
 
 		if (restart_render_flag)
-			StartRender (renderBounds);
+			StartRender (sourceSurface, destSurface, renderBounds);
 		else
 			is_rendering = false;
 	}
