@@ -7,6 +7,7 @@ public abstract class ColorMapping
 {
 	private protected ColorMapping () { }
 	public abstract ColorBgra GetColor (double position);
+	public abstract bool IsMapped (double position);
 
 	private static ColorBgra DefaultStartColor () => ColorBgra.Black;
 	private static ColorBgra DefaultEndColor () => ColorBgra.White;

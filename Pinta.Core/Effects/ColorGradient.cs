@@ -89,5 +89,5 @@ public sealed class ColorGradient : ColorMapping
 		return left - 1;
 	}
 
-	public bool IsMapped (double position) => position >= MinimumPosition && position <= MaximumPosition;
+	public sealed override bool IsMapped (double position) => position >= MinimumPosition && position <= MaximumPosition;
 }
