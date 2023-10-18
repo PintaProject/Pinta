@@ -185,30 +185,36 @@ internal abstract class AsyncEffectRenderer
 		// Start slave render threads.
 		int threadCount = settings.ThreadCount;
 		var slaves = new Thread[threadCount - 1];
-		for (int threadId = 1; threadId < threadCount; threadId++)
-			slaves[threadId - 1] = StartSlaveThread (sourceSurface, destSurface, renderBounds, totalTiles, renderId, threadId);
+		for (int threadId = 1; threadId < threadCount; threadId++) {
+			var renderInfos = Enumerable.Range (0, totalTiles).Select (tileIndex => new TileRenderInfo (tileIndex, GetTileBounds (renderBounds, tileIndex)));
+			slaves[threadId - 1] = StartSlaveThread (sourceSurface, destSurface, renderInfos, renderId, threadId);
+		}
 
-		var renderInfos = Enumerable.Range (0, totalTiles).Select (tileIndex => new TileRenderInfo (tileIndex, GetTileBounds (renderBounds, tileIndex)));
+		{
+			var renderInfos = Enumerable.Range (0, totalTiles).Select (tileIndex => new TileRenderInfo (tileIndex, GetTileBounds (renderBounds, tileIndex)));
 
-		// Start the master render thread.
-		var master = new Thread (() => {
+			// Start the master render thread.
+			var master = new Thread (() => {
 
-			// Do part of the rendering on the master thread.
-			Render (sourceSurface, destSurface, renderInfos, renderId, 0);
+				// Do part of the rendering on the master thread.
+				Render (sourceSurface, destSurface, renderInfos, renderId, 0);
 
-			// Wait for slave threads to complete.
-			foreach (var slave in slaves)
-				slave.Join ();
+				// Wait for slave threads to complete.
+				foreach (var slave in slaves)
+					slave.Join ();
 
-			// Change back to the UI thread to notify of completion.
-			GLib.Functions.TimeoutAdd (0, 0, () => {
-				HandleRenderCompletion (sourceSurface, destSurface, renderBounds);
-				return false; // don't call the timer again
-			});
-		}) {
-			Priority = settings.ThreadPriority
-		};
-		master.Start ();
+				// Change back to the UI thread to notify of completion.
+				GLib.Functions.TimeoutAdd (0, 0, () => {
+					HandleRenderCompletion (sourceSurface, destSurface, renderBounds);
+					return false; // don't call the timer again
+				});
+			}) {
+				Priority = settings.ThreadPriority
+			};
+			master.Start ();
+		}
+
+
 
 		// Start timer used to periodically fire update events on the UI thread.
 		timer_tick_id = GLib.Functions.TimeoutAdd (0, (uint) settings.UpdateMillis, () => HandleTimerTick ());
@@ -217,13 +223,10 @@ internal abstract class AsyncEffectRenderer
 	Thread StartSlaveThread (
 		Cairo.ImageSurface sourceSurface,
 		Cairo.ImageSurface destSurface,
-		RectangleI renderBounds,
-		int totalTiles,
+		IEnumerable<TileRenderInfo> renderInfos,
 		int renderId,
 		int threadId)
 	{
-		var renderInfos = Enumerable.Range (0, totalTiles).Select (tileIndex => new TileRenderInfo (tileIndex, GetTileBounds (renderBounds, tileIndex)));
-
 		var slave = new Thread (() => Render (sourceSurface, destSurface, renderInfos, renderId, threadId)) {
 			Priority = settings.ThreadPriority
 		};
