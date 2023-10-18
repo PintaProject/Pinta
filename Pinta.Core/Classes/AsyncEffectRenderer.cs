@@ -53,7 +53,6 @@ internal abstract class AsyncEffectRenderer
 	BaseEffect? effect;
 	Cairo.ImageSurface? source_surface;
 	Cairo.ImageSurface? dest_surface;
-	RectangleI render_bounds;
 
 	bool is_rendering;
 	bool cancel_render_flag;
@@ -110,8 +109,7 @@ internal abstract class AsyncEffectRenderer
 				return 1;
 		}
 	}
-	
-	// As a remark, many things that depend on state change here can be passed as a parameter
+
 	internal void Start (
 		BaseEffect effect,
 		Cairo.ImageSurface source,
@@ -126,7 +124,6 @@ internal abstract class AsyncEffectRenderer
 
 		this.source_surface = source;
 		this.dest_surface = dest;
-		this.render_bounds = renderBounds;
 
 		// If a render is already in progress, then cancel it,
 		// and start a new render.
@@ -136,17 +133,17 @@ internal abstract class AsyncEffectRenderer
 			return;
 		}
 
-		StartRender ();
+		StartRender (renderBounds);
 	}
 
-	internal void Cancel ()
+	internal void Cancel (RectangleI renderBounds)
 	{
 		Debug.WriteLine ("AsyncEffectRenderer.Cancel ()");
 		cancel_render_flag = true;
 		restart_render_flag = false;
 
 		if (!IsRendering)
-			HandleRenderCompletion ();
+			HandleRenderCompletion (renderBounds);
 	}
 
 	protected abstract void OnUpdate (double progress, RectangleI updatedBounds);
@@ -161,7 +158,7 @@ internal abstract class AsyncEffectRenderer
 		timer_tick_id = 0;
 	}
 
-	void StartRender ()
+	void StartRender (RectangleI renderBounds)
 	{
 		is_rendering = true;
 		cancel_render_flag = false;
@@ -173,7 +170,7 @@ internal abstract class AsyncEffectRenderer
 
 		current_tile = -1;
 
-		total_tiles = CalculateTotalTiles ();
+		total_tiles = CalculateTotalTiles (renderBounds);
 
 		Debug.WriteLine ("AsyncEffectRenderer.Start () Render " + render_id + " starting.");
 
@@ -184,13 +181,13 @@ internal abstract class AsyncEffectRenderer
 		int threadCount = settings.ThreadCount;
 		var slaves = new Thread[threadCount - 1];
 		for (int threadId = 1; threadId < threadCount; threadId++)
-			slaves[threadId - 1] = StartSlaveThread (renderId, threadId);
+			slaves[threadId - 1] = StartSlaveThread (renderBounds, renderId, threadId);
 
 		// Start the master render thread.
 		var master = new Thread (() => {
 
 			// Do part of the rendering on the master thread.
-			Render (renderId, 0);
+			Render (renderBounds, renderId, 0);
 
 			// Wait for slave threads to complete.
 			foreach (var slave in slaves)
@@ -198,7 +195,7 @@ internal abstract class AsyncEffectRenderer
 
 			// Change back to the UI thread to notify of completion.
 			GLib.Functions.TimeoutAdd (0, 0, () => {
-				HandleRenderCompletion ();
+				HandleRenderCompletion (renderBounds);
 				return false; // don't call the timer again
 			});
 		}) {
@@ -210,10 +207,10 @@ internal abstract class AsyncEffectRenderer
 		timer_tick_id = GLib.Functions.TimeoutAdd (0, (uint) settings.UpdateMillis, () => HandleTimerTick ());
 	}
 
-	Thread StartSlaveThread (int renderId, int threadId)
+	Thread StartSlaveThread (RectangleI renderBounds, int renderId, int threadId)
 	{
 		var slave = new Thread (() => {
-			Render (renderId, threadId);
+			Render (renderBounds, renderId, threadId);
 		}) {
 			Priority = settings.ThreadPriority
 		};
@@ -223,26 +220,26 @@ internal abstract class AsyncEffectRenderer
 	}
 
 	// Runs on a background thread.
-	void Render (int renderId, int threadId)
+	void Render (RectangleI renderBounds, int renderId, int threadId)
 	{
 		// Fetch the next tile index and render it.
 		for (; ; ) {
 			int tileIndex = Interlocked.Increment (ref current_tile);
 			if (tileIndex >= total_tiles || cancel_render_flag)
 				return;
-			RenderTile (renderId, threadId, tileIndex);
+			RenderTile (renderBounds, renderId, threadId, tileIndex);
 		}
 	}
 
 	// Runs on a background thread.
-	void RenderTile (int renderId, int threadId, int tileIndex)
+	void RenderTile (RectangleI renderBounds, int renderId, int threadId, int tileIndex)
 	{
 		Exception? exception = null;
 		var bounds = new RectangleI ();
 
 		try {
 
-			bounds = GetTileBounds (tileIndex);
+			bounds = GetTileBounds (renderBounds, tileIndex);
 
 			// NRT - These are set in Start () before getting here
 			if (!cancel_render_flag) {
@@ -278,23 +275,23 @@ internal abstract class AsyncEffectRenderer
 	}
 
 	// Runs on a background thread.
-	RectangleI GetTileBounds (int tileIndex)
+	RectangleI GetTileBounds (RectangleI renderBounds, int tileIndex)
 	{
-		int horizTileCount = (int) Math.Ceiling ((float) render_bounds.Width
+		int horizTileCount = (int) Math.Ceiling ((float) renderBounds.Width
 						       / (float) settings.TileWidth);
 
-		int x = ((tileIndex % horizTileCount) * settings.TileWidth) + render_bounds.X;
-		int y = ((tileIndex / horizTileCount) * settings.TileHeight) + render_bounds.Y;
-		int w = Math.Min (settings.TileWidth, render_bounds.Right + 1 - x);
-		int h = Math.Min (settings.TileHeight, render_bounds.Bottom + 1 - y);
+		int x = ((tileIndex % horizTileCount) * settings.TileWidth) + renderBounds.X;
+		int y = ((tileIndex / horizTileCount) * settings.TileHeight) + renderBounds.Y;
+		int w = Math.Min (settings.TileWidth, renderBounds.Right + 1 - x);
+		int h = Math.Min (settings.TileHeight, renderBounds.Bottom + 1 - y);
 
 		return new RectangleI (x, y, w, h);
 	}
 
-	int CalculateTotalTiles ()
+	int CalculateTotalTiles (RectangleI renderBounds)
 	{
-		return (int) (Math.Ceiling ((float) render_bounds.Width / (float) settings.TileWidth)
-			* Math.Ceiling ((float) render_bounds.Height / (float) settings.TileHeight));
+		return (int) (Math.Ceiling ((float) renderBounds.Width / (float) settings.TileWidth)
+			* Math.Ceiling ((float) renderBounds.Height / (float) settings.TileHeight));
 	}
 
 	// Called on the UI thread.
@@ -320,7 +317,7 @@ internal abstract class AsyncEffectRenderer
 		return true;
 	}
 
-	void HandleRenderCompletion ()
+	void HandleRenderCompletion (RectangleI renderBounds)
 	{
 		var exceptions = (render_exceptions.Count == 0)
 				? Array.Empty<Exception> ()
@@ -336,7 +333,7 @@ internal abstract class AsyncEffectRenderer
 		OnCompletion (cancel_render_flag, exceptions);
 
 		if (restart_render_flag)
-			StartRender ();
+			StartRender (renderBounds);
 		else
 			is_rendering = false;
 	}

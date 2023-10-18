@@ -154,7 +154,7 @@ public sealed class LivePreviewManager
 
 		cancel_live_preview_flag = true;
 
-		renderer?.Cancel ();
+		renderer?.Cancel (render_bounds);
 
 		// Show a busy cursor, and make the main window insensitive,
 		// until the cancel has completed.
@@ -195,7 +195,7 @@ public sealed class LivePreviewManager
 		}
 	}
 
-	void HandleProgressDialogCancel (object? o, EventArgs e)
+	void HandleProgressDialogCancel (object? o, EventArgs? e)
 	{
 		Cancel ();
 	}
