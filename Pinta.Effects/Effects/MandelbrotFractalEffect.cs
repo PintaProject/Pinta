@@ -162,7 +162,7 @@ public sealed class MandelbrotFractalEffect : BaseEffect
 	}
 	#endregion
 
-	public enum PredefinedColorSchemes
+	internal enum PredefinedColorSchemes
 	{
 		[Caption ("Cotton Candy")]
 		CottonCandy,
@@ -267,7 +267,7 @@ public sealed class MandelbrotFractalEffect : BaseEffect
 		public int Zoom { get; set; } = 10;
 
 		[Caption ("Angle")]
-		public DegreesAngle Angle { get; set; } = new (0);
+		internal DegreesAngle Angle { get; set; } = new (0);
 
 		[Caption ("Colors")]
 		public PredefinedColorSchemes Colors { get; set; } = PredefinedColorSchemes.Electric;
