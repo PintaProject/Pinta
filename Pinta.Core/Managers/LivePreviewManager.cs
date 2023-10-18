@@ -40,9 +40,11 @@ public sealed class LivePreviewManager
 	internal LivePreviewManager () { }
 
 	// NRT - These are set in Start(). This should be rewritten to be provably non-null.
-	public bool IsEnabled { get; private set; } = false; // Referring to live preview
+	public bool IsEnabled => enable_locker.LockActive; // Referring to live preview
 	public Cairo.ImageSurface LivePreviewSurface { get; private set; } = null!;
 	public RectangleI RenderBounds { get; private set; }
+
+	private readonly LockProvider enable_locker = new LockProvider ();
 
 	public event EventHandler<LivePreviewStartedEventArgs>? Started;
 	public event EventHandler<LivePreviewRenderUpdatedEventArgs>? RenderUpdated;
@@ -66,7 +68,7 @@ public sealed class LivePreviewManager
 
 	public void Start (BaseEffect effect)
 	{
-		if (IsEnabled)
+		if (enable_locker.LockActive)
 			throw new InvalidOperationException ("LivePreviewManager.Start() called while live preview is already enabled.");
 
 		// Create live preview surface.
@@ -75,7 +77,7 @@ public sealed class LivePreviewManager
 
 		var doc = PintaCore.Workspace.ActiveDocument;
 
-		IsEnabled = true;
+		using IDisposable enableLock = enable_locker.ProvideLock ();
 
 		bool apply_live_preview_flag = false;
 		bool cancel_live_preview_flag = false;
@@ -197,7 +199,7 @@ public sealed class LivePreviewManager
 		{
 			Debug.WriteLine (DateTime.Now.ToString ("HH:mm:ss:ffff") + " LivePreviewManager.CleanUp()");
 
-			IsEnabled = false;
+			enableLock.Dispose ();
 
 			if (effect.EffectData != null)
 				effect.EffectData.PropertyChanged -= EffectData_PropertyChanged;
@@ -225,7 +227,8 @@ public sealed class LivePreviewManager
 			Debug.WriteLine ("LivePreviewManager.HandleCancel()");
 
 			FireLivePreviewEndedEvent (RenderStatus.Canceled, null);
-			IsEnabled = false;
+
+			enableLock.Dispose ();
 
 			LivePreviewSurface = null!;
 
@@ -250,7 +253,7 @@ public sealed class LivePreviewManager
 
 			FireLivePreviewEndedEvent (RenderStatus.Completed, null);
 
-			IsEnabled = false;
+			enableLock.Dispose ();
 
 			PintaCore.Workspace.Invalidate (); //TODO keep track of dirty bounds.
 			CleanUp ();
@@ -319,7 +322,7 @@ public sealed class LivePreviewManager
 		}
 	}
 
-	void LivePreview_RenderUpdated (LivePreviewRenderUpdatedEventArgs args)
+	private static void LivePreview_RenderUpdated (LivePreviewRenderUpdatedEventArgs args)
 	{
 		double scale = PintaCore.Workspace.Scale;
 		var offset = PintaCore.Workspace.Offset;
