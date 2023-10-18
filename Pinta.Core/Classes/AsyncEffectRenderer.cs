@@ -184,11 +184,11 @@ internal abstract class AsyncEffectRenderer
 		// Start slave render threads.
 		int threadCount = settings.ThreadCount;
 		var slaves = new Thread[threadCount - 1];
+
+		var renderInfos = Enumerable.Range (0, totalTiles).Select (tileIndex => new TileRenderInfo (tileIndex, GetTileBounds (renderBounds, tileIndex)));
+		ThreadStart commonThreadStart = () => Render (sourceSurface, destSurface, renderInfos, renderId);
+
 		foreach (int threadId in Enumerable.Range (0, threadCount).Reverse ()) {
-
-			var renderInfos = Enumerable.Range (0, totalTiles).Select (tileIndex => new TileRenderInfo (tileIndex, GetTileBounds (renderBounds, tileIndex)));
-
-			ThreadStart commonThreadStart = () => Render (sourceSurface, destSurface, renderInfos, renderId);
 
 			if (threadId == 0) { // Is master
 				ThreadStart masterStart = commonThreadStart + (() => {
