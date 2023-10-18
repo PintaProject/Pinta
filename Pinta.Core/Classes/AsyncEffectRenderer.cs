@@ -136,8 +136,11 @@ internal abstract class AsyncEffectRenderer
 		cancel_render_flag = true;
 		restart_render_flag = false;
 
-		if (!IsRendering)
-			HandleRenderCompletion (sourceSurface, destSurface, renderBounds);
+		if (!IsRendering) {
+			int totalTiles = CalculateTotalTiles (renderBounds);
+			var renderInfos = Enumerable.Range (0, totalTiles).Select (tileIndex => new TileRenderInfo (tileIndex, GetTileBounds (renderBounds, tileIndex))).ToArray ();
+			HandleRenderCompletion (sourceSurface, destSurface, renderBounds, renderInfos);
+		}
 	}
 
 	protected abstract void OnUpdate (double progress, RectangleI updatedBounds);
@@ -198,7 +201,7 @@ internal abstract class AsyncEffectRenderer
 
 			// Change back to the UI thread to notify of completion.
 			GLib.Functions.TimeoutAdd (0, 0, () => {
-				HandleRenderCompletion (sourceSurface, destSurface, renderBounds);
+				HandleRenderCompletion (sourceSurface, destSurface, renderBounds, renderInfos);
 				return false; // don't call the timer again
 			});
 
@@ -208,7 +211,7 @@ internal abstract class AsyncEffectRenderer
 
 			// Change back to the UI thread to notify of completion.
 			GLib.Functions.TimeoutAdd (0, 0, () => {
-				HandleRenderCompletion (sourceSurface, destSurface, renderBounds);
+				HandleRenderCompletion (sourceSurface, destSurface, renderBounds, renderInfos);
 				return false; // don't call the timer again
 			});
 		});
@@ -329,7 +332,8 @@ internal abstract class AsyncEffectRenderer
 	void HandleRenderCompletion (
 		Cairo.ImageSurface sourceSurface,
 		Cairo.ImageSurface destSurface,
-		RectangleI renderBounds)
+		RectangleI renderBounds,
+		IReadOnlyList<TileRenderInfo> renderInfos)
 	{
 		var exceptions = (render_exceptions.Count == 0)
 				? Array.Empty<Exception> ()
@@ -344,11 +348,9 @@ internal abstract class AsyncEffectRenderer
 
 		OnCompletion (cancel_render_flag, exceptions);
 
-		if (restart_render_flag) {
-			int totalTiles = CalculateTotalTiles (renderBounds);
-			var renderInfos = Enumerable.Range (0, totalTiles).Select (tileIndex => new TileRenderInfo (tileIndex, GetTileBounds (renderBounds, tileIndex))).ToArray ();
+		if (restart_render_flag)
 			StartRender (sourceSurface, destSurface, renderBounds, renderInfos);
-		} else
+		else
 			is_rendering = false;
 	}
 }
