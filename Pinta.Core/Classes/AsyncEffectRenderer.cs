@@ -41,6 +41,7 @@ namespace Pinta.Core;
 internal abstract class AsyncEffectRenderer
 {
 	Settings settings;
+	BaseEffect? effect_clone;
 
 	internal struct Settings
 	{
@@ -99,12 +100,16 @@ internal abstract class AsyncEffectRenderer
 	private Func<double> report_progress = () => 0;
 
 	internal void Start (
-		BaseEffect effectClone,
+		BaseEffect effect,
 		Cairo.ImageSurface source,
 		Cairo.ImageSurface dest,
 		RectangleI renderBounds)
 	{
 		Debug.WriteLine ("AsyncEffectRenderer.Start ()");
+
+		// It is important the effect's properties don't change during rendering.
+		// So a copy is made for the render.
+		this.effect_clone = effect.Clone ();
 
 		// If a render is already in progress, then cancel it,
 		// and start a new render.
@@ -116,11 +121,10 @@ internal abstract class AsyncEffectRenderer
 
 		int totalTiles = CalculateTotalTiles (renderBounds);
 		var renderInfos = Enumerable.Range (0, totalTiles).Select (tileIndex => new TileRenderInfo (tileIndex, GetTileBounds (renderBounds, tileIndex))).ToArray ();
-		StartRender (effectClone, source, dest, renderBounds, renderInfos);
+		StartRender (source, dest, renderBounds, renderInfos);
 	}
 
 	internal void Cancel (
-		BaseEffect effectClone,
 		Cairo.ImageSurface sourceSurface,
 		Cairo.ImageSurface destSurface,
 		RectangleI renderBounds)
@@ -132,7 +136,7 @@ internal abstract class AsyncEffectRenderer
 		if (!IsRendering) {
 			int totalTiles = CalculateTotalTiles (renderBounds);
 			var renderInfos = Enumerable.Range (0, totalTiles).Select (tileIndex => new TileRenderInfo (tileIndex, GetTileBounds (renderBounds, tileIndex))).ToArray ();
-			HandleRenderCompletion (effectClone, sourceSurface, destSurface, renderBounds, renderInfos);
+			HandleRenderCompletion (sourceSurface, destSurface, renderBounds, renderInfos);
 		}
 	}
 
@@ -149,7 +153,6 @@ internal abstract class AsyncEffectRenderer
 	}
 
 	void StartRender (
-		BaseEffect effectClone,
 		Cairo.ImageSurface sourceSurface,
 		Cairo.ImageSurface destSurface,
 		RectangleI renderBounds,
@@ -182,7 +185,7 @@ internal abstract class AsyncEffectRenderer
 
 		// Start slave render threads.
 		int threadCount = settings.ThreadCount;
-		ThreadStart commonThreadStart = () => Render (effectClone, sourceSurface, destSurface, renderInfos, renderId);
+		ThreadStart commonThreadStart = () => Render (sourceSurface, destSurface, renderInfos, renderId);
 		var slaves = Enumerable.Range (0, threadCount - 1).Select (_ => StartThread (commonThreadStart));
 
 		ThreadStart masterStart = commonThreadStart + (() => {
@@ -195,7 +198,7 @@ internal abstract class AsyncEffectRenderer
 
 			// Change back to the UI thread to notify of completion.
 			GLib.Functions.TimeoutAdd (0, 0, () => {
-				HandleRenderCompletion (effectClone, sourceSurface, destSurface, renderBounds, renderInfos);
+				HandleRenderCompletion (sourceSurface, destSurface, renderBounds, renderInfos);
 				return false; // don't call the timer again
 			});
 
@@ -205,7 +208,7 @@ internal abstract class AsyncEffectRenderer
 
 			// Change back to the UI thread to notify of completion.
 			GLib.Functions.TimeoutAdd (0, 0, () => {
-				HandleRenderCompletion (effectClone, sourceSurface, destSurface, renderBounds, renderInfos);
+				HandleRenderCompletion (sourceSurface, destSurface, renderBounds, renderInfos);
 				return false; // don't call the timer again
 			});
 		});
@@ -226,7 +229,6 @@ internal abstract class AsyncEffectRenderer
 
 	// Runs on a background thread.
 	void Render (
-		BaseEffect effectClone,
 		Cairo.ImageSurface sourceSurface,
 		Cairo.ImageSurface destSurface,
 		IEnumerable<TileRenderInfo> renderInfos,
@@ -234,13 +236,12 @@ internal abstract class AsyncEffectRenderer
 	{
 		foreach (var info in renderInfos) {
 			report_current_tile = () => info.TileIndex;
-			RenderTile (effectClone, sourceSurface, destSurface, info.TileBounds, renderId);
+			RenderTile (sourceSurface, destSurface, info.TileBounds, renderId);
 		}
 	}
 
 	// Runs on a background thread.
 	void RenderTile (
-		BaseEffect effectClone,
 		Cairo.ImageSurface sourceSurface,
 		Cairo.ImageSurface destSurface,
 		RectangleI tileBounds,
@@ -252,13 +253,13 @@ internal abstract class AsyncEffectRenderer
 			// NRT - These are set in Start () before getting here
 			if (!cancel_render_flag) {
 				destSurface.Flush ();
-				effectClone.Render (sourceSurface, destSurface, stackalloc[] { tileBounds });
+				effect_clone!.Render (sourceSurface, destSurface, stackalloc[] { tileBounds });
 				destSurface.MarkDirty (tileBounds);
 			}
 
 		} catch (Exception ex) {
 			exception = ex;
-			Debug.WriteLine ("AsyncEffectRenderer Error while rendering effect: " + effectClone.Name + " exception: " + ex.Message + "\n" + ex.StackTrace);
+			Debug.WriteLine ("AsyncEffectRenderer Error while rendering effect: " + effect_clone!.Name + " exception: " + ex.Message + "\n" + ex.StackTrace);
 		}
 
 		// Ignore completions of tiles after a cancel or from a previous render.
@@ -326,7 +327,6 @@ internal abstract class AsyncEffectRenderer
 	}
 
 	void HandleRenderCompletion (
-		BaseEffect effectClone,
 		Cairo.ImageSurface sourceSurface,
 		Cairo.ImageSurface destSurface,
 		RectangleI renderBounds,
@@ -346,7 +346,7 @@ internal abstract class AsyncEffectRenderer
 		OnCompletion (cancel_render_flag, exceptions);
 
 		if (restart_render_flag)
-			StartRender (effectClone, sourceSurface, destSurface, renderBounds, renderInfos);
+			StartRender (sourceSurface, destSurface, renderBounds, renderInfos);
 		else
 			is_rendering = false;
 	}

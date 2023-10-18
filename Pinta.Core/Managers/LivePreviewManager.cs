@@ -116,14 +116,10 @@ public sealed class LivePreviewManager
 		var source = layer.Surface;
 		var dest = live_preview_surface;
 
-		// It is important the effect's properties don't change during rendering.
-		// So a copy is made for the render.
-		BaseEffect effectClone = effect.Clone ();
-
 		renderer = new Renderer (settings, OnUpdate, OnCompletion);
-		renderer.Start (effectClone, source, dest, render_bounds);
+		renderer.Start (effect, source, dest, render_bounds);
 
-		if (effectClone.IsConfigurable) {
+		if (effect.IsConfigurable) {
 			EventHandler<BaseEffect.ConfigDialogResponseEventArgs>? handler = null;
 			handler = (_, args) => {
 				if (!args.Accepted) {
@@ -135,12 +131,12 @@ public sealed class LivePreviewManager
 				}
 
 				// Unsubscribe once we're done.
-				effectClone.ConfigDialogResponse -= handler;
+				effect.ConfigDialogResponse -= handler;
 			};
 
-			effectClone.ConfigDialogResponse += handler;
+			effect.ConfigDialogResponse += handler;
 
-			effectClone.LaunchConfiguration ();
+			effect.LaunchConfiguration ();
 
 		} else {
 			PintaCore.Chrome.MainWindowBusy = true;
@@ -158,7 +154,7 @@ public sealed class LivePreviewManager
 
 			cancel_live_preview_flag = true;
 
-			renderer?.Cancel (effectClone, sourceSurface, destSurface, render_bounds);
+			renderer?.Cancel (sourceSurface, destSurface, render_bounds);
 
 			// Show a busy cursor, and make the main window insensitive,
 			// until the cancel has completed.
