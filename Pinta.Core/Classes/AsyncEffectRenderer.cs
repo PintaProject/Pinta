@@ -57,7 +57,7 @@ internal abstract class AsyncEffectRenderer
 	bool restart_render_flag;
 	int render_id;
 	int current_tile;
-	int total_tiles;
+
 	readonly List<Exception> render_exceptions;
 
 	uint timer_tick_id;
@@ -95,16 +95,9 @@ internal abstract class AsyncEffectRenderer
 
 	internal bool IsRendering => is_rendering;
 
-	internal double Progress {
-		get {
-			if (total_tiles == 0 || current_tile < 0)
-				return 0;
-			else if (current_tile < total_tiles)
-				return (double) current_tile / (double) total_tiles;
-			else
-				return 1;
-		}
-	}
+	internal double Progress => report_progress ();
+
+	private Func<double> report_progress = () => 0;
 
 	internal void Start (
 		BaseEffect effect,
@@ -170,7 +163,15 @@ internal abstract class AsyncEffectRenderer
 		current_tile = -1;
 
 		int totalTiles = CalculateTotalTiles (renderBounds);
-		total_tiles = totalTiles;
+
+		report_progress = () => {
+			if (totalTiles == 0 || current_tile < 0)
+				return 0;
+			else if (current_tile < totalTiles)
+				return (double) current_tile / (double) totalTiles;
+			else
+				return 1;
+		};
 
 		Debug.WriteLine ("AsyncEffectRenderer.Start () Render " + render_id + " starting.");
 
