@@ -60,24 +60,22 @@ public abstract class BasePaintBrush
 	/// </summary>
 	public virtual double StrokeAlphaMultiplier => 1;
 
-	public virtual void DoMouseUp ()
+	public void DoMouseUp ()
 	{
 		OnMouseUp ();
 	}
 
-	public virtual void DoMouseDown ()
+	public void DoMouseDown ()
 	{
 		OnMouseDown ();
 	}
 
-	public virtual RectangleI DoMouseMove (
+	public RectangleI DoMouseMove (
 		Context g,
-		Color strokeColor,
 		ImageSurface surface,
-		PointI current,
-		PointI last)
+		BrushStrokeArgs strokeArgs)
 	{
-		return OnMouseMove (g, strokeColor, surface, current, last);
+		return OnMouseMove (g, surface, strokeArgs);
 	}
 
 	/// <summary>
@@ -108,8 +106,6 @@ public abstract class BasePaintBrush
 	/// <returns>A rectangle containing the area of the canvas that should be redrawn.</returns>
 	protected abstract RectangleI OnMouseMove (
 		Context g,
-		Color strokeColor,
 		ImageSurface surface,
-		PointI current,
-		PointI last);
+		BrushStrokeArgs strokeArgs);
 }

@@ -36,11 +36,12 @@ public sealed class SquaresBrush : BasePaintBrush
 
 	protected override RectangleI OnMouseMove (
 		Context g,
-		Color strokeColor,
 		ImageSurface surface,
-		PointI current,
-		PointI last)
+		BrushStrokeArgs strokeArgs)
 	{
+		PointI current = strokeArgs.CurrentPosition;
+		PointI last = strokeArgs.LastPosition;
+
 		PointI mouseDelta = current - last;
 		PointD rotated = new ( // 90 degrees
 			X: -mouseDelta.Y,

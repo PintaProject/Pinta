@@ -67,10 +67,8 @@ internal abstract class AsyncEffectRenderer
 
 	readonly object updated_lock;
 	bool is_updated;
-	int updated_x1;
-	int updated_y1;
-	int updated_x2;
-	int updated_y2;
+
+	RectangleI updated_area;
 
 	internal AsyncEffectRenderer (Settings settings)
 	{
@@ -264,16 +262,10 @@ internal abstract class AsyncEffectRenderer
 		// Update bounds to be shown on next expose.
 		lock (updated_lock) {
 			if (is_updated) {
-				updated_x1 = Math.Min (bounds.X, updated_x1);
-				updated_y1 = Math.Min (bounds.Y, updated_y1);
-				updated_x2 = Math.Max (bounds.X + bounds.Width, updated_x2);
-				updated_y2 = Math.Max (bounds.Y + bounds.Height, updated_y2);
+				updated_area = RectangleI.Union (bounds, updated_area);
 			} else {
 				is_updated = true;
-				updated_x1 = bounds.X;
-				updated_y1 = bounds.Y;
-				updated_x2 = bounds.X + bounds.Width;
-				updated_y2 = bounds.Y + bounds.Height;
+				updated_area = bounds;
 			}
 		}
 
@@ -318,10 +310,7 @@ internal abstract class AsyncEffectRenderer
 
 			is_updated = false;
 
-			bounds = new RectangleI (updated_x1,
-						    updated_y1,
-							updated_x2 - updated_x1,
-							updated_y2 - updated_y1);
+			bounds = updated_area;
 		}
 
 		if (IsRendering && !cancel_render_flag)

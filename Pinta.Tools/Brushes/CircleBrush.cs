@@ -39,15 +39,13 @@ public sealed class CircleBrush : BasePaintBrush
 
 	protected override RectangleI OnMouseMove (
 		Context g,
-		Color strokeColor,
 		ImageSurface surface,
-		PointI current,
-		PointI last)
+		BrushStrokeArgs strokeArgs)
 	{
-		PointI mouseDelta = current - last;
+		PointI mouseDelta = strokeArgs.CurrentPosition - strokeArgs.LastPosition;
 		PointD center = new (
-			X: Math.Floor (current.X / 100.0) * 100 + 50,
-			Y: Math.Floor (current.Y / 100.0) * 100 + 50
+			X: Math.Floor (strokeArgs.CurrentPosition.X / 100.0) * 100 + 50,
+			Y: Math.Floor (strokeArgs.CurrentPosition.Y / 100.0) * 100 + 50
 		);
 		double d = mouseDelta.Magnitude () * 2.0;
 		int steps = Random.Next (1, 10);
