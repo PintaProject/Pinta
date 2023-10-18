@@ -40,9 +40,6 @@ public sealed class LivePreviewManager
 	// NRT - These are set in Start(). This should be rewritten to be provably non-null.
 	bool live_preview_enabled;
 
-	bool apply_live_preview_flag;
-	bool cancel_live_preview_flag;
-
 	Cairo.ImageSurface live_preview_surface = null!;
 	RectangleI render_bounds;
 
@@ -73,8 +70,9 @@ public sealed class LivePreviewManager
 		var doc = PintaCore.Workspace.ActiveDocument;
 
 		live_preview_enabled = true;
-		apply_live_preview_flag = false;
-		cancel_live_preview_flag = false;
+
+		bool apply_live_preview_flag = false;
+		bool cancel_live_preview_flag = false;
 
 		AsyncEffectRenderer renderer = null!;
 
@@ -122,7 +120,7 @@ public sealed class LivePreviewManager
 		// So a copy is made for the render.
 		BaseEffect effectClone = effect.Clone ();
 
-		renderer = new Renderer (this, settings, HandleCancel, HandleApply);
+		renderer = new Renderer (settings, OnUpdate, OnCompletion);
 		renderer.Start (effectClone, source, dest, render_bounds);
 
 		if (effectClone.IsConfigurable) {
@@ -259,60 +257,67 @@ public sealed class LivePreviewManager
 		void EffectData_PropertyChanged (object? sender, PropertyChangedEventArgs e)
 		{
 			//TODO calculate bounds.
-			renderer.Start (effect, layer.Surface, live_preview_surface, render_bounds);
+			renderer!.Start (effect, layer.Surface, live_preview_surface, render_bounds);
+		}
+
+		void OnUpdate (double progress, RectangleI updatedBounds)
+		{
+			Debug.WriteLine (DateTime.Now.ToString ("HH:mm:ss:ffff") + " LivePreviewManager.OnUpdate() progress: " + progress);
+			PintaCore.Chrome.ProgressDialog.Progress = progress;
+			FireLivePreviewRenderUpdatedEvent (progress, updatedBounds);
+		}
+
+		void OnCompletion (bool cancelled, Exception[] exceptions)
+		{
+			Debug.WriteLine (DateTime.Now.ToString ("HH:mm:ss:ffff") + " LivePreviewManager.OnCompletion() cancelled: " + cancelled);
+
+			if (!live_preview_enabled)
+				return;
+
+			if (cancel_live_preview_flag)
+				HandleCancel ();
+			else if (apply_live_preview_flag)
+				HandleApply ();
+		}
+
+		void FireLivePreviewEndedEvent (RenderStatus status, Exception? ex)
+		{
+			Ended?.Invoke (this, new LivePreviewEndedEventArgs (status, ex));
+		}
+
+		void FireLivePreviewRenderUpdatedEvent (double progress, RectangleI bounds)
+		{
+			RenderUpdated?.Invoke (this, new LivePreviewRenderUpdatedEventArgs (progress, bounds));
 		}
 	}
 
 	private sealed class Renderer : AsyncEffectRenderer
 	{
-		readonly LivePreviewManager manager;
-		private readonly Action handle_cancel;
-		private readonly Action handle_apply;
+		private readonly Action<double, RectangleI> on_update;
+		private readonly Action<bool, Exception[]> on_completion;
 
 		internal Renderer (
-			LivePreviewManager manager,
-			AsyncEffectRenderer.Settings settings,
-			Action handleCancel,
-			Action handleApply)
-			: base (settings)
+			Settings settings,
+			Action<double, RectangleI> onUpdate,
+			Action<bool, Exception[]> onCompletion
+		) : base (settings)
 		{
-			this.manager = manager;
-			handle_cancel = handleCancel;
-			handle_apply = handleApply;
+			on_update = onUpdate;
+			on_completion = onCompletion;
 		}
 
 		protected override void OnUpdate (double progress, RectangleI updatedBounds)
 		{
-			Debug.WriteLine (DateTime.Now.ToString ("HH:mm:ss:ffff") + " LivePreviewManager.OnUpdate() progress: " + progress);
-			PintaCore.Chrome.ProgressDialog.Progress = progress;
-			manager.FireLivePreviewRenderUpdatedEvent (progress, updatedBounds);
+			on_update (progress, updatedBounds);
 		}
 
-		protected override void OnCompletion (bool cancelled, Exception[] exceptions)
+		protected override void OnCompletion (bool canceled, Exception[] exceptions)
 		{
-			Debug.WriteLine (DateTime.Now.ToString ("HH:mm:ss:ffff") + " LivePreviewManager.OnCompletion() cancelled: " + cancelled);
-
-			if (!manager.live_preview_enabled)
-				return;
-
-			if (manager.cancel_live_preview_flag)
-				handle_cancel ();
-			else if (manager.apply_live_preview_flag)
-				handle_apply ();
+			on_completion (canceled, exceptions);
 		}
 	}
 
-	void FireLivePreviewEndedEvent (RenderStatus status, Exception? ex)
-	{
-		Ended?.Invoke (this, new LivePreviewEndedEventArgs (status, ex));
-	}
-
-	void FireLivePreviewRenderUpdatedEvent (double progress, RectangleI bounds)
-	{
-		RenderUpdated?.Invoke (this, new LivePreviewRenderUpdatedEventArgs (progress, bounds));
-	}
-
-	private void LivePreview_RenderUpdated (object? o, LivePreviewRenderUpdatedEventArgs args)
+	void LivePreview_RenderUpdated (object? o, LivePreviewRenderUpdatedEventArgs args)
 	{
 		double scale = PintaCore.Workspace.Scale;
 		var offset = PintaCore.Workspace.Offset;
