@@ -88,7 +88,7 @@ public sealed class ForwardErrorDiffusionDitheringEffect : BaseEffect
 	{
 		double minDistance = double.MaxValue;
 		ColorBgra closestColor = ColorBgra.FromBgra (0, 0, 0, 1);
-		var palette = GetPredefinedPalette (Data.Palette);
+		var palette = GetPredefinedPalette (Data.ArbitraryPalette);
 		foreach (var paletteColor in palette) {
 			double distance = CalculateDistance (original, paletteColor);
 			if (distance >= minDistance)
@@ -181,6 +181,12 @@ public sealed class ForwardErrorDiffusionDitheringEffect : BaseEffect
 		FakeFloydSteinberg,
 	}
 
+	public enum PaletteMode
+	{
+		Optimized,
+		Arbitrary,
+	}
+
 	private static ErrorDiffusionMatrix GetPredefinedDiffusionMatrix (PredefinedDiffusionMatrices choice)
 	{
 		return choice switch {
@@ -202,8 +208,14 @@ public sealed class ForwardErrorDiffusionDitheringEffect : BaseEffect
 		[Caption ("Diffusion Matrix")]
 		public PredefinedDiffusionMatrices DiffusionMatrix { get; set; } = PredefinedDiffusionMatrices.FloydSteinberg;
 
+		[Caption ("Palette Mode")]
+		public PaletteMode PaletteMode { get; set; } = PaletteMode.Arbitrary; // TODO: Use
+
+		[Caption ("Colors for Optimized Palette")]
+		public int ColorsForOptimizedPalette { get; set; } = 256;
+
 		[Caption ("Palette")]
-		public PredefinedPalettes Palette { get; set; } = PredefinedPalettes.OldWindows16;
+		public PredefinedPalettes ArbitraryPalette { get; set; } = PredefinedPalettes.OldWindows16; // TODO: Better data structure
 	}
 
 	public static class DefaultMatrices
