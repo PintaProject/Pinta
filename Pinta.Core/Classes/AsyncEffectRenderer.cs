@@ -186,7 +186,7 @@ internal abstract class AsyncEffectRenderer
 		// Start slave render threads.
 		int threadCount = settings.ThreadCount;
 		ThreadStart commonThreadStart = () => Render (sourceSurface, destSurface, renderInfos, renderId);
-		var slaves = Enumerable.Range (0, threadCount).Select (_ => StartThread (commonThreadStart));
+		var slaves = Enumerable.Range (0, threadCount - 1).Select (_ => StartThread (commonThreadStart));
 
 		ThreadStart masterStart = commonThreadStart + (() => {
 
