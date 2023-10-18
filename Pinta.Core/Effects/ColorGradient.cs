@@ -5,16 +5,16 @@ using System.Linq;
 
 namespace Pinta.Core;
 
-public sealed class ImmutableColorGradient : IRangeColorMapping
+public sealed class ColorGradient : IRangeColorMapping
 {
 	public ColorBgra StartColor { get; }
 	public ColorBgra EndColor { get; }
 	public double MinimumPosition { get; }
 	public double MaximumPosition { get; }
 
-	public ImmutableArray<GradientStop> SortedStops { get; }
+	internal ImmutableArray<GradientStop> SortedStops { get; }
 
-	public ImmutableColorGradient (
+	internal ColorGradient (
 		ColorBgra startColor,
 		ColorBgra endColor,
 		double minPosition,
@@ -68,7 +68,7 @@ public sealed class ImmutableColorGradient : IRangeColorMapping
 
 	/// <returns>Index of number immediately lower than target. If not found, it returns -1</returns>
 	/// <param name="arr">Array assumed to be sorted by key</param>
-	public static int BinarySearchLowerOrEqual (ImmutableArray<GradientStop> arr, double target)
+	private static int BinarySearchLowerOrEqual (ImmutableArray<GradientStop> arr, double target)
 	{
 		// TODO: Make this method more generic?
 		if (arr.Length == 0) return -1;

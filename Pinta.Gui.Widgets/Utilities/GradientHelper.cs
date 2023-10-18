@@ -30,19 +30,19 @@ public enum PredefinedGradients
 
 public static class GradientHelper
 {
-	public static ImmutableColorGradient CreateColorGradient (PredefinedGradients scheme)
+	public static ColorGradient CreateColorGradient (PredefinedGradients scheme)
 	{
 		const double Outer = 0;
 		const double Core = 1023;
 		return scheme switch {
-			PredefinedGradients.BlackAndWhite => new ImmutableColorGradient (
+			PredefinedGradients.BlackAndWhite => ColorMapping.Gradient (
 				ColorBgra.White,
 				ColorBgra.Black,
 				Outer,
 				Core,
 				Enumerable.Empty<KeyValuePair<double, ColorBgra>> ()
 			),
-			PredefinedGradients.CottonCandy => new ImmutableColorGradient (
+			PredefinedGradients.CottonCandy => ColorMapping.Gradient (
 				ColorBgra.White,
 				ColorBgra.FromBgr (242, 235, 214),
 				Outer,
@@ -53,7 +53,7 @@ public static class GradientHelper
 					[768] = ColorBgra.FromBgr (230, 216, 173),
 				}
 			),
-			PredefinedGradients.Electric => new ImmutableColorGradient (
+			PredefinedGradients.Electric => ColorMapping.Gradient (
 				ColorBgra.Transparent,
 				ColorBgra.White,
 				Outer,
@@ -64,7 +64,7 @@ public static class GradientHelper
 					[768] = ColorBgra.Cyan,
 				}
 			),
-			PredefinedGradients.LaBellaItalia => new ImmutableColorGradient (
+			PredefinedGradients.LaBellaItalia => ColorMapping.Gradient (
 				ColorBgra.FromBgr (70, 146, 0),
 				ColorBgra.FromBgr (55, 43, 206),
 				Outer,
@@ -73,7 +73,7 @@ public static class GradientHelper
 					[256] = ColorBgra.White,
 				}
 			),
-			PredefinedGradients.LimeLemon => new ImmutableColorGradient (
+			PredefinedGradients.LimeLemon => ColorMapping.Gradient (
 				ColorBgra.Transparent,
 				ColorBgra.White,
 				Outer,
@@ -84,7 +84,7 @@ public static class GradientHelper
 					[768] = ColorBgra.FromBgr (0, 255, 255),
 				}
 			),
-			PredefinedGradients.PinaColada => new ImmutableColorGradient (
+			PredefinedGradients.PinaColada => ColorMapping.Gradient (
 				ColorBgra.FromBgr (0, 128, 128),
 				ColorBgra.FromBgr (196, 245, 253),
 				Outer,
@@ -93,7 +93,7 @@ public static class GradientHelper
 					[256] = ColorBgra.Yellow,
 				}
 			),
-			PredefinedGradients.SakuraSigh => new ImmutableColorGradient (
+			PredefinedGradients.SakuraSigh => ColorMapping.Gradient (
 				ColorBgra.Transparent,
 				ColorBgra.FromBgr (240, 255, 255),
 				Outer,
