@@ -199,9 +199,6 @@ public sealed class SimpleEffectDialog : Gtk.Dialog
 		}
 		var widget = new ComboBoxWidget (labels) { Label = caption };
 
-		if (GetValue (member, effectData) is object obj)
-			widget.Active = ((IList) predefinedGradientNames).IndexOf (obj.ToString ());
-
 		widget.Changed += (_, _) => SetValue (
 			member,
 			effectData,
