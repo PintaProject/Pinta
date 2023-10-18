@@ -37,17 +37,12 @@ namespace Pinta.Core;
 
 public sealed class LivePreviewManager
 {
-	// NRT - These are set in Start(). This should be rewritten to be provably non-null.
-	bool live_preview_enabled = false;
-
-	Cairo.ImageSurface live_preview_surface = null!;
-	RectangleI render_bounds;
-
 	internal LivePreviewManager () { }
 
-	public bool IsEnabled => live_preview_enabled;
-	public Cairo.ImageSurface LivePreviewSurface => live_preview_surface;
-	public RectangleI RenderBounds => render_bounds;
+	// NRT - These are set in Start(). This should be rewritten to be provably non-null.
+	public bool IsEnabled { get; private set; } = false; // Referring to live preview
+	public Cairo.ImageSurface LivePreviewSurface { get; private set; } = null!;
+	public RectangleI RenderBounds { get; private set; }
 
 	public event EventHandler<LivePreviewStartedEventArgs>? Started;
 	public event EventHandler<LivePreviewRenderUpdatedEventArgs>? RenderUpdated;
@@ -71,7 +66,7 @@ public sealed class LivePreviewManager
 
 	public void Start (BaseEffect effect)
 	{
-		if (live_preview_enabled)
+		if (IsEnabled)
 			throw new InvalidOperationException ("LivePreviewManager.Start() called while live preview is already enabled.");
 
 		// Create live preview surface.
@@ -80,7 +75,7 @@ public sealed class LivePreviewManager
 
 		var doc = PintaCore.Workspace.ActiveDocument;
 
-		live_preview_enabled = true;
+		IsEnabled = true;
 
 		bool apply_live_preview_flag = false;
 		bool cancel_live_preview_flag = false;
@@ -90,7 +85,7 @@ public sealed class LivePreviewManager
 		Layer layer = doc.Layers.CurrentUserLayer;
 
 		//TODO Use the current tool layer instead.
-		live_preview_surface = CairoExtensions.CreateImageSurface (
+		LivePreviewSurface = CairoExtensions.CreateImageSurface (
 			Cairo.Format.Argb32,
 			PintaCore.Workspace.ImageSize.Width,
 			PintaCore.Workspace.ImageSize.Height
@@ -100,14 +95,14 @@ public sealed class LivePreviewManager
 		PintaCore.Tools.Commit ();
 		var selection = doc.Selection;
 		Cairo.Path? selection_path = (selection.Visible) ? selection.SelectionPath : null;
-		render_bounds = (selection_path != null) ? selection_path.GetBounds () : live_preview_surface.GetBounds ();
-		render_bounds = PintaCore.Workspace.ClampToImageSize (render_bounds);
+		RenderBounds = (selection_path != null) ? selection_path.GetBounds () : LivePreviewSurface.GetBounds ();
+		RenderBounds = PintaCore.Workspace.ClampToImageSize (RenderBounds);
 
 		SimpleHistoryItem history_item = new SimpleHistoryItem (effect.Icon, effect.Name);
 		history_item.TakeSnapshotOfLayer (doc.Layers.CurrentUserLayerIndex);
 
 		// Paint the pre-effect layer surface into into the working surface.
-		var ctx = new Cairo.Context (live_preview_surface);
+		var ctx = new Cairo.Context (LivePreviewSurface);
 		layer.Draw (ctx, layer.Surface, 1);
 
 		if (effect.EffectData != null)
@@ -117,7 +112,7 @@ public sealed class LivePreviewManager
 
 		var settings = new AsyncEffectRenderer.Settings () {
 			ThreadCount = PintaCore.System.RenderThreads,
-			TileWidth = render_bounds.Width,
+			TileWidth = RenderBounds.Width,
 			TileHeight = 1,
 			ThreadPriority = ThreadPriority.BelowNormal
 		};
@@ -125,10 +120,10 @@ public sealed class LivePreviewManager
 		Debug.WriteLine (DateTime.Now.ToString ("HH:mm:ss:ffff") + "Start Live preview.");
 
 		var source = layer.Surface;
-		var dest = live_preview_surface;
+		var dest = LivePreviewSurface;
 
 		renderer = new Renderer (settings, OnUpdate, OnCompletion);
-		renderer.Start (effect, source, dest, render_bounds);
+		renderer.Start (effect, source, dest, RenderBounds);
 
 		if (effect.IsConfigurable) {
 			EventHandler<BaseEffect.ConfigDialogResponseEventArgs>? handler = null;
@@ -165,7 +160,7 @@ public sealed class LivePreviewManager
 
 			cancel_live_preview_flag = true;
 
-			renderer?.Cancel (sourceSurface, destSurface, render_bounds);
+			renderer?.Cancel (sourceSurface, destSurface, RenderBounds);
 
 			// Show a busy cursor, and make the main window insensitive,
 			// until the cancel has completed.
@@ -177,7 +172,7 @@ public sealed class LivePreviewManager
 
 		void HandleProgressDialogCancel (object? o, EventArgs? e)
 		{
-			Cancel (layer.Surface, live_preview_surface);
+			Cancel (layer.Surface, LivePreviewSurface);
 		}
 
 		void Apply ()
@@ -202,12 +197,12 @@ public sealed class LivePreviewManager
 		{
 			Debug.WriteLine (DateTime.Now.ToString ("HH:mm:ss:ffff") + " LivePreviewManager.CleanUp()");
 
-			live_preview_enabled = false;
+			IsEnabled = false;
 
 			if (effect.EffectData != null)
 				effect.EffectData.PropertyChanged -= EffectData_PropertyChanged;
 
-			live_preview_surface = null!;
+			LivePreviewSurface = null!;
 
 			if (renderer != null) {
 				renderer.Dispose ();
@@ -230,9 +225,9 @@ public sealed class LivePreviewManager
 			Debug.WriteLine ("LivePreviewManager.HandleCancel()");
 
 			FireLivePreviewEndedEvent (RenderStatus.Canceled, null);
-			live_preview_enabled = false;
+			IsEnabled = false;
 
-			live_preview_surface = null!;
+			LivePreviewSurface = null!;
 
 			PintaCore.Workspace.Invalidate ();
 			CleanUp ();
@@ -247,7 +242,7 @@ public sealed class LivePreviewManager
 			ctx.Save ();
 			PintaCore.Workspace.ActiveDocument.Selection.Clip (ctx);
 
-			layer.DrawWithOperator (ctx, live_preview_surface, Cairo.Operator.Source);
+			layer.DrawWithOperator (ctx, LivePreviewSurface, Cairo.Operator.Source);
 			ctx.Restore ();
 
 			PintaCore.Workspace.ActiveDocument.History.PushNewItem (history_item);
@@ -255,7 +250,7 @@ public sealed class LivePreviewManager
 
 			FireLivePreviewEndedEvent (RenderStatus.Completed, null);
 
-			live_preview_enabled = false;
+			IsEnabled = false;
 
 			PintaCore.Workspace.Invalidate (); //TODO keep track of dirty bounds.
 			CleanUp ();
@@ -264,7 +259,7 @@ public sealed class LivePreviewManager
 		void EffectData_PropertyChanged (object? sender, PropertyChangedEventArgs e)
 		{
 			//TODO calculate bounds.
-			renderer!.Start (effect, layer.Surface, live_preview_surface, render_bounds);
+			renderer!.Start (effect, layer.Surface, LivePreviewSurface, RenderBounds);
 		}
 
 		void OnUpdate (double progress, RectangleI updatedBounds)
@@ -278,7 +273,7 @@ public sealed class LivePreviewManager
 		{
 			Debug.WriteLine (DateTime.Now.ToString ("HH:mm:ss:ffff") + " LivePreviewManager.OnCompletion() cancelled: " + cancelled);
 
-			if (!live_preview_enabled)
+			if (!IsEnabled)
 				return;
 
 			if (cancel_live_preview_flag)
