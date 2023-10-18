@@ -3,7 +3,7 @@ using Pinta.Core;
 
 namespace Pinta.Gui.Widgets;
 
-internal enum PredefinedGradients
+public enum PredefinedGradients
 {
 	[Caption ("Black and White")]
 	BlackAndWhite,
@@ -27,7 +27,7 @@ internal enum PredefinedGradients
 	SakuraSigh,
 }
 
-internal static class GradientHelper
+public static class GradientHelper
 {
 	public static ColorGradient CreateColorGradient (PredefinedGradients scheme)
 	{
