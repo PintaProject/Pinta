@@ -30,6 +30,7 @@
 
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Threading;
 using Debug = System.Diagnostics.Debug;
 
@@ -56,7 +57,8 @@ internal abstract class AsyncEffectRenderer
 	bool cancel_render_flag;
 	bool restart_render_flag;
 	int render_id;
-	int current_tile;
+
+	Func<int> report_current_tile = () => 0;
 
 	readonly List<Exception> render_exceptions;
 
@@ -160,15 +162,16 @@ internal abstract class AsyncEffectRenderer
 		render_id++;
 		render_exceptions.Clear ();
 
-		current_tile = -1;
+		report_current_tile = () => -1;
 
 		int totalTiles = CalculateTotalTiles (renderBounds);
 
 		report_progress = () => {
-			if (totalTiles == 0 || current_tile < 0)
+			var currentTile = report_current_tile ();
+			if (totalTiles == 0 || currentTile < 0)
 				return 0;
-			else if (current_tile < totalTiles)
-				return (double) current_tile / (double) totalTiles;
+			else if (currentTile < totalTiles)
+				return (double) currentTile / (double) totalTiles;
 			else
 				return 1;
 		};
@@ -235,9 +238,12 @@ internal abstract class AsyncEffectRenderer
 		int renderId,
 		int threadId)
 	{
+		int currentTile = -1;
+		report_current_tile = () => currentTile;
+
 		// Fetch the next tile index and render it.
 		for (; ; ) {
-			int tileIndex = Interlocked.Increment (ref current_tile);
+			int tileIndex = Interlocked.Increment (ref currentTile);
 			if (tileIndex >= totalTiles || cancel_render_flag)
 				return;
 			var tileBounds = GetTileBounds (renderBounds, tileIndex);
