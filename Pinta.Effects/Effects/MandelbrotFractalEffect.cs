@@ -8,8 +8,6 @@
 /////////////////////////////////////////////////////////////////////////////////
 
 using System;
-using System.Collections.Generic;
-using System.Collections.Immutable;
 using Cairo;
 using Pinta.Core;
 using Pinta.Gui.Widgets;
@@ -104,7 +102,7 @@ public sealed class MandelbrotFractalEffect : BaseEffect
 			xOffset: x_offset,
 			yOffset: y_offset,
 
-			gradient: CreateColorGradient (Data.Colors)
+			gradient: Data.Colors
 		);
 	}
 
@@ -178,7 +176,7 @@ public sealed class MandelbrotFractalEffect : BaseEffect
 		public DegreesAngle Angle { get; set; } = new (0);
 
 		[Caption ("Colors")]
-		internal ImmutableColorGradient Colors { get; set; } = GradientHelper.CreateColorGradient(PredefinedGradients.Electric);
+		internal ImmutableColorGradient Colors { get; set; } = GradientHelper.CreateColorGradient (PredefinedGradients.Electric);
 
 		[Caption ("Invert Colors")]
 		public bool InvertColors { get; set; } = false;

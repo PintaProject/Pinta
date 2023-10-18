@@ -31,6 +31,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.ComponentModel;
+using System.Diagnostics.CodeAnalysis;
 using System.Linq;
 using System.Reflection;
 using System.Text;
@@ -170,6 +171,8 @@ public sealed class SimpleEffectDialog : Gtk.Dialog
 				yield return CreatePointPicker (localizer.GetString (caption), effectData, mi, attrs);
 			else if (mType == typeof (PointD))
 				yield return CreateOffsetPicker (localizer.GetString (caption), effectData, mi, attrs);
+			else if (mType == typeof (ImmutableColorGradient))
+				yield return CreateGradientPicker (localizer.GetString (caption), effectData, mi, attrs);
 			else if (mType.IsEnum)
 				yield return CreateEnumComboBox (localizer.GetString (caption), effectData, mi, attrs);
 
@@ -178,10 +181,41 @@ public sealed class SimpleEffectDialog : Gtk.Dialog
 		}
 	}
 
+	private Widget CreateGradientPicker (string caption, object effectData, MemberInfo member, object[] attributes)
+	{
+		var gradientsEnumType = typeof (PredefinedGradients);
+		var predefinedGradientNames = Enum.GetNames (gradientsEnumType);
+		var labelsToMemberNames = new Dictionary<string, string> (predefinedGradientNames.Length);
+		var labels = new List<string> ();
+		foreach (var gradientName in predefinedGradientNames) {
+			var members = gradientsEnumType.GetMember (gradientName);
+			var attrs = members[0].GetCustomAttributes (typeof (CaptionAttribute), false);
+			string label;
+			if (attrs.Length > 0)
+				label = Translations.GetString (((CaptionAttribute) attrs[0]).Caption);
+			else
+				label = Translations.GetString (gradientName);
+			labelsToMemberNames[label] = gradientName;
+			labels.Add (label);
+		}
+		var widget = new ComboBoxWidget (labels);
+
+		if (GetValue (member, effectData) is object obj)
+			widget.Active = ((IList) predefinedGradientNames).IndexOf (obj.ToString ());
+
+		widget.Changed += (_, _) => SetValue (
+			member,
+			effectData,
+			GradientHelper.CreateColorGradient ((PredefinedGradients) Enum.Parse (gradientsEnumType, labelsToMemberNames[widget.ActiveText]))
+		);
+
+		return widget;
+	}
+
 	#endregion
 
 	#region Control Builders
-	private ComboBoxWidget CreateEnumComboBox (string caption, object o, MemberInfo member, object[] attributes)
+	private ComboBoxWidget CreateEnumComboBox (string caption, object effectData, MemberInfo member, object[] attributes)
 	{
 		var myType = GetTypeForMember (member)!; // NRT - We're looping through members we got from reflection
 
@@ -207,20 +241,20 @@ public sealed class SimpleEffectDialog : Gtk.Dialog
 
 		var widget = new ComboBoxWidget (labels) { Label = caption };
 
-		if (GetValue (member, o) is object obj)
+		if (GetValue (member, effectData) is object obj)
 			widget.Active = ((IList) member_names).IndexOf (obj.ToString ());
 
-		widget.Changed += (_, _) => SetValue (member, o, Enum.Parse (myType, label_to_member[widget.ActiveText]));
+		widget.Changed += (_, _) => SetValue (member, effectData, Enum.Parse (myType, label_to_member[widget.ActiveText]));
 
 		return widget;
 	}
 
-	private ComboBoxWidget CreateComboBox (string caption, object o, MemberInfo member, object[] attributes)
+	private ComboBoxWidget CreateComboBox (string caption, object effectData, MemberInfo member, object[] attributes)
 	{
 		Dictionary<string, object>? dict = null;
 
 		foreach (var attr in attributes) {
-			if (attr is StaticListAttribute attribute && GetValue (attribute.DictionaryName, o) is Dictionary<string, object> d)
+			if (attr is StaticListAttribute attribute && GetValue (attribute.DictionaryName, effectData) is Dictionary<string, object> d)
 				dict = d;
 		}
 
@@ -233,15 +267,15 @@ public sealed class SimpleEffectDialog : Gtk.Dialog
 			Label = caption
 		};
 
-		if (GetValue (member, o) is string s)
+		if (GetValue (member, effectData) is string s)
 			widget.Active = entries.IndexOf (s);
 
-		widget.Changed += (_, _) => SetValue (member, o, widget.ActiveText);
+		widget.Changed += (_, _) => SetValue (member, effectData, widget.ActiveText);
 
 		return widget;
 	}
 
-	private HScaleSpinButtonWidget CreateDoubleSlider (string caption, object o, MemberInfo member, object[] attributes)
+	private HScaleSpinButtonWidget CreateDoubleSlider (string caption, object effectData, MemberInfo member, object[] attributes)
 	{
 		var min_value = -100;
 		var max_value = 100;
@@ -273,12 +307,12 @@ public sealed class SimpleEffectDialog : Gtk.Dialog
 			DigitsValue = digits_value
 		};
 
-		if (GetValue (member, o) is double d)
+		if (GetValue (member, effectData) is double d)
 			widget.DefaultValue = d;
 
 		widget.ValueChanged += (_, _) => {
 			DelayedUpdate (() => {
-				SetValue (member, o, widget.Value);
+				SetValue (member, effectData, widget.Value);
 				return false;
 			});
 		};
@@ -286,7 +320,7 @@ public sealed class SimpleEffectDialog : Gtk.Dialog
 		return widget;
 	}
 
-	private HScaleSpinButtonWidget CreateSlider (string caption, object o, MemberInfo member, object[] attributes)
+	private HScaleSpinButtonWidget CreateSlider (string caption, object effectData, MemberInfo member, object[] attributes)
 	{
 		var min_value = -100;
 		var max_value = 100;
@@ -318,12 +352,12 @@ public sealed class SimpleEffectDialog : Gtk.Dialog
 			DigitsValue = digits_value
 		};
 
-		if (GetValue (member, o) is int i)
+		if (GetValue (member, effectData) is int i)
 			widget.DefaultValue = i;
 
 		widget.ValueChanged += (_, _) => {
 			DelayedUpdate (() => {
-				SetValue (member, o, widget.ValueAsInt);
+				SetValue (member, effectData, widget.ValueAsInt);
 				return false;
 			});
 		};
@@ -331,52 +365,52 @@ public sealed class SimpleEffectDialog : Gtk.Dialog
 		return widget;
 	}
 
-	private Gtk.CheckButton CreateCheckBox (string caption, object o, MemberInfo member, object[] attributes)
+	private Gtk.CheckButton CreateCheckBox (string caption, object effectData, MemberInfo member, object[] attributes)
 	{
 		var widget = new Gtk.CheckButton { Label = caption };
 
-		if (GetValue (member, o) is bool b)
+		if (GetValue (member, effectData) is bool b)
 			widget.Active = b;
 
-		widget.OnToggled += (_, _) => SetValue (member, o, widget.Active);
+		widget.OnToggled += (_, _) => SetValue (member, effectData, widget.Active);
 
 		return widget;
 	}
 
-	private PointPickerWidget CreateOffsetPicker (string caption, object o, MemberInfo member, object[] attributes)
+	private PointPickerWidget CreateOffsetPicker (string caption, object effectData, MemberInfo member, object[] attributes)
 	{
 		var widget = new PointPickerWidget { Label = caption };
 
-		if (GetValue (member, o) is PointD p)
+		if (GetValue (member, effectData) is PointD p)
 			widget.DefaultOffset = p;
 
-		widget.PointPicked += (_, _) => SetValue (member, o, widget.Offset);
+		widget.PointPicked += (_, _) => SetValue (member, effectData, widget.Offset);
 
 		return widget;
 	}
 
-	private PointPickerWidget CreatePointPicker (string caption, object o, MemberInfo member, object[] attributes)
+	private PointPickerWidget CreatePointPicker (string caption, object effectData, MemberInfo member, object[] attributes)
 	{
 		var widget = new PointPickerWidget { Label = caption };
 
-		if (GetValue (member, o) is PointI p)
+		if (GetValue (member, effectData) is PointI p)
 			widget.DefaultPoint = p;
 
-		widget.PointPicked += (_, _) => SetValue (member, o, widget.Point);
+		widget.PointPicked += (_, _) => SetValue (member, effectData, widget.Point);
 
 		return widget;
 	}
 
-	private AnglePickerWidget CreateAnglePicker (string caption, object o, MemberInfo member, object[] attributes)
+	private AnglePickerWidget CreateAnglePicker (string caption, object effectData, MemberInfo member, object[] attributes)
 	{
 		var widget = new AnglePickerWidget { Label = caption };
 
-		if (GetValue (member, o) is DegreesAngle d)
+		if (GetValue (member, effectData) is DegreesAngle d)
 			widget.DefaultValue = d;
 
 		widget.ValueChanged += (_, _) => {
 			DelayedUpdate (() => {
-				SetValue (member, o, widget.Value);
+				SetValue (member, effectData, widget.Value);
 				return false;
 			});
 		};
@@ -393,7 +427,7 @@ public sealed class SimpleEffectDialog : Gtk.Dialog
 		return label;
 	}
 
-	private ReseedButtonWidget CreateSeed (string caption, object o, MemberInfo member, object[] attributes)
+	private ReseedButtonWidget CreateSeed (string caption, object effectData, MemberInfo member, object[] attributes)
 	{
 		var widget = new ReseedButtonWidget ();
 
@@ -410,7 +444,7 @@ public sealed class SimpleEffectDialog : Gtk.Dialog
 			}
 		}
 
-		widget.Clicked += (_, _) => SetValue (member, o, new RandomSeed (random.Next (min_value, max_value)));
+		widget.Clicked += (_, _) => SetValue (member, effectData, new RandomSeed (random.Next (min_value, max_value)));
 		return widget;
 	}
 
