@@ -184,7 +184,7 @@ internal abstract class AsyncEffectRenderer
 		// Start slave render threads.
 		int threadCount = settings.ThreadCount;
 		var slaves = new Thread[threadCount - 1];
-		for (int threadId = 0; threadId < threadCount; threadId++) {
+		for (int threadId = threadCount - 1; threadId >= 0; threadId++) {
 
 			var renderInfos = Enumerable.Range (0, totalTiles).Select (tileIndex => new TileRenderInfo (tileIndex, GetTileBounds (renderBounds, tileIndex)));
 
