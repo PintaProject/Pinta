@@ -40,7 +40,6 @@ public sealed class LivePreviewManager
 	// NRT - These are set in Start(). This should be rewritten to be provably non-null.
 	bool live_preview_enabled;
 	Layer layer = null!;
-	BaseEffect effect = null!;
 	Cairo.Path? selection_path;
 
 	bool apply_live_preview_flag;
@@ -49,8 +48,6 @@ public sealed class LivePreviewManager
 	Cairo.ImageSurface live_preview_surface = null!;
 	RectangleI render_bounds;
 	SimpleHistoryItem history_item = null!;
-
-	AsyncEffectRenderer renderer = null!;
 
 	internal LivePreviewManager ()
 	{
@@ -83,7 +80,6 @@ public sealed class LivePreviewManager
 		cancel_live_preview_flag = false;
 
 		layer = doc.Layers.CurrentUserLayer;
-		this.effect = effect;
 
 		//TODO Use the current tool layer instead.
 		live_preview_surface = CairoExtensions.CreateImageSurface (Cairo.Format.Argb32,
@@ -104,6 +100,8 @@ public sealed class LivePreviewManager
 		var ctx = new Cairo.Context (live_preview_surface);
 		layer.Draw (ctx, layer.Surface, 1);
 
+		AsyncEffectRenderer renderer = null!;
+
 		if (effect.EffectData != null)
 			effect.EffectData.PropertyChanged += EffectData_PropertyChanged;
 
@@ -121,10 +119,14 @@ public sealed class LivePreviewManager
 		var source = layer.Surface;
 		var dest = live_preview_surface;
 
-		renderer = new Renderer (this, settings);
-		renderer.Start (effect, source, dest, render_bounds);
+		// It is important the effect's properties don't change during rendering.
+		// So a copy is made for the render.
+		BaseEffect effectClone = effect.Clone ();
 
-		if (effect.IsConfigurable) {
+		renderer = new Renderer (this, settings, HandleCancel, HandleApply);
+		renderer.Start (effectClone, source, dest, render_bounds);
+
+		if (effectClone.IsConfigurable) {
 			EventHandler<BaseEffect.ConfigDialogResponseEventArgs>? handler = null;
 			handler = (_, args) => {
 				if (!args.Accepted) {
@@ -136,142 +138,146 @@ public sealed class LivePreviewManager
 				}
 
 				// Unsubscribe once we're done.
-				effect.ConfigDialogResponse -= handler;
+				effectClone.ConfigDialogResponse -= handler;
 			};
 
-			effect.ConfigDialogResponse += handler;
+			effectClone.ConfigDialogResponse += handler;
 
-			effect.LaunchConfiguration ();
+			effectClone.LaunchConfiguration ();
 
 		} else {
 			PintaCore.Chrome.MainWindowBusy = true;
 			Apply ();
 		}
-	}
 
-	// Method asks render task to complete, and then returns immediately. The cancel
-	// is not actually complete until the LivePreviewRenderCompleted event is fired.
-	void Cancel (
-		Cairo.ImageSurface sourceSurface,
-		Cairo.ImageSurface destSurface)
-	{
-		Debug.WriteLine (DateTime.Now.ToString ("HH:mm:ss:ffff") + " LivePreviewManager.Cancel()");
 
-		cancel_live_preview_flag = true;
+		// Method asks render task to complete, and then returns immediately. The cancel
+		// is not actually complete until the LivePreviewRenderCompleted event is fired.
+		void Cancel (
+			Cairo.ImageSurface sourceSurface,
+			Cairo.ImageSurface destSurface)
+		{
+			Debug.WriteLine (DateTime.Now.ToString ("HH:mm:ss:ffff") + " LivePreviewManager.Cancel()");
 
-		renderer?.Cancel (sourceSurface, destSurface, render_bounds);
+			cancel_live_preview_flag = true;
 
-		// Show a busy cursor, and make the main window insensitive,
-		// until the cancel has completed.
-		PintaCore.Chrome.MainWindowBusy = true;
+			renderer?.Cancel (effectClone, sourceSurface, destSurface, render_bounds);
 
-		if (renderer == null || !renderer.IsRendering)
-			HandleCancel ();
-	}
+			// Show a busy cursor, and make the main window insensitive,
+			// until the cancel has completed.
+			PintaCore.Chrome.MainWindowBusy = true;
 
-	// Called from asynchronously from Renderer.OnCompletion ()
-	void HandleCancel ()
-	{
-		Debug.WriteLine ("LivePreviewManager.HandleCancel()");
-
-		FireLivePreviewEndedEvent (RenderStatus.Canceled, null);
-		live_preview_enabled = false;
-
-		live_preview_surface = null!;
-
-		PintaCore.Workspace.Invalidate ();
-		CleanUp ();
-	}
-
-	void Apply ()
-	{
-		Debug.WriteLine (DateTime.Now.ToString ("HH:mm:ss:ffff") + "LivePreviewManager.Apply()");
-		apply_live_preview_flag = true;
-
-		if (!renderer.IsRendering) {
-			HandleApply ();
-		} else {
-			var dialog = PintaCore.Chrome.ProgressDialog;
-			dialog.Title = Translations.GetString ("Rendering Effect");
-			dialog.Text = effect.Name;
-			dialog.Progress = renderer.Progress;
-			dialog.Canceled += HandleProgressDialogCancel;
-			dialog.Show ();
+			if (renderer == null || !renderer.IsRendering)
+				HandleCancel ();
 		}
-	}
 
-	void HandleProgressDialogCancel (object? o, EventArgs? e)
-	{
-		Cancel (layer.Surface, live_preview_surface);
-	}
+		void HandleProgressDialogCancel (object? o, EventArgs? e)
+		{
+			Cancel (layer.Surface, live_preview_surface);
+		}
 
-	// Called from asynchronously from Renderer.OnCompletion ()
-	void HandleApply ()
-	{
-		Debug.WriteLine ("LivePreviewManager.HandleApply()");
+		void Apply ()
+		{
+			Debug.WriteLine (DateTime.Now.ToString ("HH:mm:ss:ffff") + "LivePreviewManager.Apply()");
+			apply_live_preview_flag = true;
 
-		var ctx = new Cairo.Context (layer.Surface);
-		ctx.Save ();
-		PintaCore.Workspace.ActiveDocument.Selection.Clip (ctx);
+			if (!renderer.IsRendering) {
+				HandleApply ();
+			} else {
+				var dialog = PintaCore.Chrome.ProgressDialog;
+				dialog.Title = Translations.GetString ("Rendering Effect");
+				dialog.Text = effect.Name;
+				dialog.Progress = renderer.Progress;
+				dialog.Canceled += HandleProgressDialogCancel;
+				dialog.Show ();
+			}
+		}
 
-		layer.DrawWithOperator (ctx, live_preview_surface, Cairo.Operator.Source);
-		ctx.Restore ();
+		// Clean up resources when live preview is disabled.
+		void CleanUp ()
+		{
+			Debug.WriteLine (DateTime.Now.ToString ("HH:mm:ss:ffff") + " LivePreviewManager.CleanUp()");
 
-		PintaCore.Workspace.ActiveDocument.History.PushNewItem (history_item);
-		history_item = null!;
+			live_preview_enabled = false;
 
-		FireLivePreviewEndedEvent (RenderStatus.Completed, null);
-
-		live_preview_enabled = false;
-
-		PintaCore.Workspace.Invalidate (); //TODO keep track of dirty bounds.
-		CleanUp ();
-	}
-
-	// Clean up resources when live preview is disabled.
-	void CleanUp ()
-	{
-		Debug.WriteLine (DateTime.Now.ToString ("HH:mm:ss:ffff") + " LivePreviewManager.CleanUp()");
-
-		live_preview_enabled = false;
-
-		if (effect != null) {
 			if (effect.EffectData != null)
 				effect.EffectData.PropertyChanged -= EffectData_PropertyChanged;
-			effect = null!;
+
+			live_preview_surface = null!;
+
+			if (renderer != null) {
+				renderer.Dispose ();
+				renderer = null!;
+			}
+
+			history_item = null!;
+
+			// Hide progress dialog and clean up events.
+			var dialog = PintaCore.Chrome.ProgressDialog;
+			dialog.Hide ();
+			dialog.Canceled -= HandleProgressDialogCancel;
+
+			PintaCore.Chrome.MainWindowBusy = false;
 		}
 
-		live_preview_surface = null!;
+		// Called from asynchronously from Renderer.OnCompletion ()
+		void HandleCancel ()
+		{
+			Debug.WriteLine ("LivePreviewManager.HandleCancel()");
 
-		if (renderer != null) {
-			renderer.Dispose ();
-			renderer = null!;
+			FireLivePreviewEndedEvent (RenderStatus.Canceled, null);
+			live_preview_enabled = false;
+
+			live_preview_surface = null!;
+
+			PintaCore.Workspace.Invalidate ();
+			CleanUp ();
 		}
 
-		history_item = null!;
 
-		// Hide progress dialog and clean up events.
-		var dialog = PintaCore.Chrome.ProgressDialog;
-		dialog.Hide ();
-		dialog.Canceled -= HandleProgressDialogCancel;
 
-		PintaCore.Chrome.MainWindowBusy = false;
-	}
+		// Called from asynchronously from Renderer.OnCompletion ()
+		void HandleApply ()
+		{
+			Debug.WriteLine ("LivePreviewManager.HandleApply()");
 
-	void EffectData_PropertyChanged (object? sender, PropertyChangedEventArgs e)
-	{
-		//TODO calculate bounds.
-		renderer.Start (effect, layer.Surface, live_preview_surface, render_bounds);
+			var ctx = new Cairo.Context (layer.Surface);
+			ctx.Save ();
+			PintaCore.Workspace.ActiveDocument.Selection.Clip (ctx);
+
+			layer.DrawWithOperator (ctx, live_preview_surface, Cairo.Operator.Source);
+			ctx.Restore ();
+
+			PintaCore.Workspace.ActiveDocument.History.PushNewItem (history_item);
+			history_item = null!;
+
+			FireLivePreviewEndedEvent (RenderStatus.Completed, null);
+
+			live_preview_enabled = false;
+
+			PintaCore.Workspace.Invalidate (); //TODO keep track of dirty bounds.
+			CleanUp ();
+		}
+
+		void EffectData_PropertyChanged (object? sender, PropertyChangedEventArgs e)
+		{
+			//TODO calculate bounds.
+			renderer!.Start (effect, layer.Surface, live_preview_surface, render_bounds);
+		}
 	}
 
 	private sealed class Renderer : AsyncEffectRenderer
 	{
 		readonly LivePreviewManager manager;
+		private readonly Action handle_cancel;
+		private readonly Action handle_apply;
 
-		internal Renderer (LivePreviewManager manager, AsyncEffectRenderer.Settings settings)
+		internal Renderer (LivePreviewManager manager, AsyncEffectRenderer.Settings settings, Action handleCancel, Action handleApply)
 			: base (settings)
 		{
 			this.manager = manager;
+			handle_cancel = handleCancel;
+			handle_apply = handleApply;
 		}
 
 		protected override void OnUpdate (double progress, RectangleI updatedBounds)
@@ -289,9 +295,9 @@ public sealed class LivePreviewManager
 				return;
 
 			if (manager.cancel_live_preview_flag)
-				manager.HandleCancel ();
+				handle_cancel ();
 			else if (manager.apply_live_preview_flag)
-				manager.HandleApply ();
+				handle_apply ();
 		}
 	}
 
