@@ -238,14 +238,8 @@ internal abstract class AsyncEffectRenderer
 		int renderId,
 		int threadId)
 	{
-		int currentTile = -1;
-		report_current_tile = () => currentTile;
-
-		// Fetch the next tile index and render it.
-		for (; ; ) {
-			int tileIndex = Interlocked.Increment (ref currentTile);
-			if (tileIndex >= totalTiles || cancel_render_flag)
-				return;
+		foreach (int tileIndex in Enumerable.Range (0, totalTiles)) {
+			report_current_tile = () => tileIndex;
 			var tileBounds = GetTileBounds (renderBounds, tileIndex);
 			RenderTile (sourceSurface, destSurface, tileBounds, renderId, threadId);
 		}
