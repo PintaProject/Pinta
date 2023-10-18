@@ -76,7 +76,7 @@ public sealed class MandelbrotFractalEffect : BaseEffect
 		int factor,
 		double xOffset,
 		double yOffset,
-		ColorGradient gradient);
+		ColorGradient colorMapping);
 	private MandelbrotSettings CreateSettings (ImageSurface dst)
 	{
 		int h = dst.Height;
@@ -102,7 +102,7 @@ public sealed class MandelbrotFractalEffect : BaseEffect
 			xOffset: x_offset,
 			yOffset: y_offset,
 
-			gradient: Data.Colors
+			gradient: Data.ColorMapping
 		);
 	}
 
@@ -147,9 +147,9 @@ public sealed class MandelbrotFractalEffect : BaseEffect
 
 			double c = 64 + settings.factor * m;
 
-			double clamped_c = Math.Clamp (c, settings.gradient.MinimumPosition, settings.gradient.MaximumPosition);
+			double clamped_c = Math.Clamp (c, settings.colorMapping.MinimumPosition, settings.colorMapping.MaximumPosition);
 
-			ColorBgra colorAddend = settings.gradient.GetColor (clamped_c);
+			ColorBgra colorAddend = settings.colorMapping.GetColor (clamped_c);
 
 			r += colorAddend.R;
 			g += colorAddend.G;
@@ -176,7 +176,7 @@ public sealed class MandelbrotFractalEffect : BaseEffect
 		public DegreesAngle Angle { get; set; } = new (0);
 
 		[Caption ("Colors")]
-		public ColorGradient Colors { get; set; } = GradientHelper.CreateColorGradient (PredefinedGradients.Electric);
+		public ColorGradient ColorMapping { get; set; } = GradientHelper.CreateColorGradient (PredefinedGradients.Electric);
 
 		[Caption ("Invert Colors")]
 		public bool InvertColors { get; set; } = false;

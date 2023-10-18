@@ -78,7 +78,8 @@ public sealed class JuliaFractalEffect : BaseEffect
 		int count,
 		double invCount,
 		double angleTheta,
-		int factor);
+		int factor,
+		ColorGradient colorMapping);
 	private JuliaSettings CreateSettings (ImageSurface dst)
 	{
 		var w = dst.Width;
@@ -94,7 +95,8 @@ public sealed class JuliaFractalEffect : BaseEffect
 			count: count,
 			invCount: 1.0 / (double) count,
 			angleTheta: (Data.Angle.Degrees * Math.PI * 2) / 360.0,
-			factor: Data.Factor
+			factor: Data.Factor,
+			colorMapping: Data.ColorMapping
 		);
 	}
 
@@ -126,10 +128,14 @@ public sealed class JuliaFractalEffect : BaseEffect
 
 			double c = settings.factor * j;
 
-			b += Utility.ClampToByte (c - 768);
-			g += Utility.ClampToByte (c - 512);
-			r += Utility.ClampToByte (c - 256);
-			a += Utility.ClampToByte (c - 0);
+			double clamped_c = Math.Clamp (c, settings.colorMapping.MinimumPosition, settings.colorMapping.MaximumPosition);
+
+			ColorBgra colorAddend = settings.colorMapping.GetColor (clamped_c);
+
+			b += colorAddend.B;
+			g += colorAddend.G;
+			r += colorAddend.R;
+			a += colorAddend.A;
 		}
 
 		return ColorBgra.FromBgra (Utility.ClampToByte (b / settings.count), Utility.ClampToByte (g / settings.count), Utility.ClampToByte (r / settings.count), Utility.ClampToByte (a / settings.count));
@@ -146,6 +152,9 @@ public sealed class JuliaFractalEffect : BaseEffect
 
 		[Caption ("Zoom"), MinimumValue (0), MaximumValue (50)]
 		public int Zoom { get; set; } = 1;
+
+		[Caption ("Colors")]
+		public ColorGradient ColorMapping { get; set; } = GradientHelper.CreateColorGradient (PredefinedGradients.Bonfire);
 
 		[Caption ("Angle")]
 		public DegreesAngle Angle { get; set; } = new (0);

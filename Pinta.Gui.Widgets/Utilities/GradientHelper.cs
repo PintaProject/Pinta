@@ -8,6 +8,9 @@ public enum PredefinedGradients
 	[Caption ("Black and White")]
 	BlackAndWhite,
 
+	[Caption ("Bonfire")]
+	Bonfire,
+
 	[Caption ("Cotton Candy")]
 	CottonCandy,
 
@@ -39,6 +42,17 @@ public static class GradientHelper
 				ColorBgra.Black,
 				Outer,
 				Core
+			),
+			PredefinedGradients.Bonfire => ColorMapping.Gradient (
+				ColorBgra.Transparent,
+				ColorBgra.White,
+				Outer,
+				Core,
+				new Dictionary<double, ColorBgra> {
+					[256] = ColorBgra.Green,
+					[512] = ColorBgra.Red,
+					[768] = ColorBgra.Yellow,
+				}
 			),
 			PredefinedGradients.CottonCandy => ColorMapping.Gradient (
 				ColorBgra.White,
