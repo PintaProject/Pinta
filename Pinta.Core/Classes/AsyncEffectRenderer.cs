@@ -240,7 +240,8 @@ internal abstract class AsyncEffectRenderer
 			int tileIndex = Interlocked.Increment (ref current_tile);
 			if (tileIndex >= totalTiles || cancel_render_flag)
 				return;
-			RenderTile (sourceSurface, destSurface, renderBounds, renderId, threadId, tileIndex);
+			var tileBounds = GetTileBounds (renderBounds, tileIndex);
+			RenderTile (sourceSurface, destSurface, tileBounds, renderId, threadId);
 		}
 	}
 
@@ -248,23 +249,18 @@ internal abstract class AsyncEffectRenderer
 	void RenderTile (
 		Cairo.ImageSurface sourceSurface,
 		Cairo.ImageSurface destSurface,
-		RectangleI renderBounds,
+		RectangleI tileBounds,
 		int renderId,
-		int threadId,
-		int tileIndex)
+		int threadId)
 	{
 		Exception? exception = null;
-		var bounds = new RectangleI ();
 
 		try {
-
-			bounds = GetTileBounds (renderBounds, tileIndex);
-
 			// NRT - These are set in Start () before getting here
 			if (!cancel_render_flag) {
 				destSurface.Flush ();
-				effect!.Render (sourceSurface!, destSurface, stackalloc[] { bounds });
-				destSurface.MarkDirty (bounds);
+				effect!.Render (sourceSurface, destSurface, stackalloc[] { tileBounds });
+				destSurface.MarkDirty (tileBounds);
 			}
 
 		} catch (Exception ex) {
@@ -279,10 +275,10 @@ internal abstract class AsyncEffectRenderer
 		// Update bounds to be shown on next expose.
 		lock (updated_lock) {
 			if (is_updated) {
-				updated_area = RectangleI.Union (bounds, updated_area);
+				updated_area = RectangleI.Union (tileBounds, updated_area);
 			} else {
 				is_updated = true;
-				updated_area = bounds;
+				updated_area = tileBounds;
 			}
 		}
 
