@@ -192,7 +192,8 @@ internal abstract class AsyncEffectRenderer
 		var master = new Thread (() => {
 
 			// Do part of the rendering on the master thread.
-			Render (sourceSurface, destSurface, renderBounds, totalTiles, renderId, 0);
+			var renderInfos = Enumerable.Range (0, totalTiles).Select (tileIndex => new TileRenderInfo (tileIndex, GetTileBounds (renderBounds, tileIndex)));
+			Render (sourceSurface, destSurface, renderInfos, renderId, 0);
 
 			// Wait for slave threads to complete.
 			foreach (var slave in slaves)
@@ -221,7 +222,8 @@ internal abstract class AsyncEffectRenderer
 		int threadId)
 	{
 		var slave = new Thread (() => {
-			Render (sourceSurface, destSurface, renderBounds, totalTiles, renderId, threadId);
+			var renderInfos = Enumerable.Range (0, totalTiles).Select (tileIndex => new TileRenderInfo (tileIndex, GetTileBounds (renderBounds, tileIndex)));
+			Render (sourceSurface, destSurface, renderInfos, renderId, threadId);
 		}) {
 			Priority = settings.ThreadPriority
 		};
@@ -236,12 +238,10 @@ internal abstract class AsyncEffectRenderer
 	void Render (
 		Cairo.ImageSurface sourceSurface,
 		Cairo.ImageSurface destSurface,
-		RectangleI renderBounds,
-		int totalTiles,
+		IEnumerable<TileRenderInfo> renderInfos,
 		int renderId,
 		int threadId)
 	{
-		var renderInfos = Enumerable.Range (0, totalTiles).Select (tileIndex => new TileRenderInfo (tileIndex, GetTileBounds (renderBounds, tileIndex)));
 		foreach (var info in renderInfos) {
 			report_current_tile = () => info.TileIndex;
 			RenderTile (sourceSurface, destSurface, info.TileBounds, renderId, threadId);
