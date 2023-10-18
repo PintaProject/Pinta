@@ -49,7 +49,7 @@ public static class GradientHelper
 				Outer,
 				Core,
 				new Dictionary<double, ColorBgra> {
-					[256] = ColorBgra.Green,
+					[256] = ColorBgra.Black,
 					[512] = ColorBgra.Red,
 					[768] = ColorBgra.Yellow,
 				}
