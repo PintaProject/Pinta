@@ -197,7 +197,7 @@ public sealed class SimpleEffectDialog : Gtk.Dialog
 			labelsToMemberNames[label] = gradientName;
 			labels.Add (label);
 		}
-		var widget = new ComboBoxWidget (labels);
+		var widget = new ComboBoxWidget (labels) { Label = caption };
 
 		if (GetValue (member, effectData) is object obj)
 			widget.Active = ((IList) predefinedGradientNames).IndexOf (obj.ToString ());
