@@ -110,7 +110,8 @@ internal abstract class AsyncEffectRenderer
 				return 1;
 		}
 	}
-
+	
+	// As a remark, many things that depend on state change here can be passed as a parameter
 	internal void Start (
 		BaseEffect effect,
 		Cairo.ImageSurface source,
