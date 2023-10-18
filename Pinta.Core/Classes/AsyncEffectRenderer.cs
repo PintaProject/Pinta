@@ -187,7 +187,8 @@ internal abstract class AsyncEffectRenderer
 		var slaves = new Thread[threadCount - 1];
 		for (int threadId = 1; threadId < threadCount; threadId++) {
 			var renderInfos = Enumerable.Range (0, totalTiles).Select (tileIndex => new TileRenderInfo (tileIndex, GetTileBounds (renderBounds, tileIndex)));
-			slaves[threadId - 1] = StartSlaveThread (sourceSurface, destSurface, renderInfos, renderId, threadId);
+			ThreadStart threadStart = () => Render (sourceSurface, destSurface, renderInfos, renderId, threadId);
+			slaves[threadId - 1] = StartSlaveThread (threadStart);
 		}
 
 		{
@@ -220,18 +221,10 @@ internal abstract class AsyncEffectRenderer
 		timer_tick_id = GLib.Functions.TimeoutAdd (0, (uint) settings.UpdateMillis, () => HandleTimerTick ());
 	}
 
-	Thread StartSlaveThread (
-		Cairo.ImageSurface sourceSurface,
-		Cairo.ImageSurface destSurface,
-		IEnumerable<TileRenderInfo> renderInfos,
-		int renderId,
-		int threadId)
+	Thread StartSlaveThread (ThreadStart threadStart)
 	{
-		var slave = new Thread (() => Render (sourceSurface, destSurface, renderInfos, renderId, threadId)) {
-			Priority = settings.ThreadPriority
-		};
+		var slave = new Thread (threadStart) { Priority = settings.ThreadPriority };
 		slave.Start ();
-
 		return slave;
 	}
 
