@@ -176,7 +176,17 @@ public sealed class MandelbrotFractalEffect : BaseEffect
 		public DegreesAngle Angle { get; set; } = new (0);
 
 		[Caption ("Colors")]
-		public IRangeColorMapping Colors { get; set; } = GradientHelper.CreateColorGradient (PredefinedGradients.Electric);
+		public IRangeColorMapping Colors { get; set; } = ColorMapping.Range (
+			minimum: 0,
+			maximum: 1023,
+			mappingFunction: pos =>
+				ColorBgra.FromBgra (
+					b: Utility.ClampToByte (pos - 256),
+					g: Utility.ClampToByte (pos - 512),
+					r: Utility.ClampToByte (pos - 768),
+					a: Utility.ClampToByte (pos - 0)
+				)
+		);
 
 		[Caption ("Invert Colors")]
 		public bool InvertColors { get; set; } = false;

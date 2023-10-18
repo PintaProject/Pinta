@@ -35,10 +35,9 @@ public sealed class ColorGradient : IRangeColorMapping
 
 	public ColorBgra GetColor (double position)
 	{
-		if (position < MinimumPosition) throw new ArgumentOutOfRangeException (nameof (position));
-		if (position > MaximumPosition) throw new ArgumentOutOfRangeException (nameof (position));
 		if (position == MinimumPosition) return StartColor;
 		if (position == MaximumPosition) return EndColor;
+		if (!IsMapped (position)) throw new ArgumentOutOfRangeException (nameof (position));
 		if (SortedStops.Length == 0) return HandleNoStops (position);
 		return HandleWithStops (position);
 	}
@@ -89,4 +88,6 @@ public sealed class ColorGradient : IRangeColorMapping
 		// so 'left - 1' will be the index of the number immediately lower than target
 		return left - 1;
 	}
+
+	public bool IsMapped (double position) => position >= MinimumPosition && position <= MaximumPosition;
 }

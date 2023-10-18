@@ -1,5 +1,4 @@
 using System.Collections.Generic;
-using System.Linq;
 using Pinta.Core;
 
 namespace Pinta.Gui.Widgets;
@@ -39,8 +38,7 @@ public static class GradientHelper
 				ColorBgra.White,
 				ColorBgra.Black,
 				Outer,
-				Core,
-				Enumerable.Empty<KeyValuePair<double, ColorBgra>> ()
+				Core
 			),
 			PredefinedGradients.CottonCandy => ColorMapping.Gradient (
 				ColorBgra.White,
