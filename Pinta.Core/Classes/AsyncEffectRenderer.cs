@@ -184,30 +184,40 @@ internal abstract class AsyncEffectRenderer
 		// Start slave render threads.
 		int threadCount = settings.ThreadCount;
 		var slaves = new Thread[threadCount - 1];
-		for (int threadId = 1; threadId < threadCount; threadId++) {
-			var slaveRenderInfos = Enumerable.Range (0, totalTiles).Select (tileIndex => new TileRenderInfo (tileIndex, GetTileBounds (renderBounds, tileIndex)));
-			ThreadStart slaveStart = () => Render (sourceSurface, destSurface, slaveRenderInfos, renderId);
-			slaves[threadId - 1] = StartThread (slaveStart);
-		}
+		for (int threadId = 0; threadId < threadCount; threadId++) {
 
-		{
-			var masterRenderInfos = Enumerable.Range (0, totalTiles).Select (tileIndex => new TileRenderInfo (tileIndex, GetTileBounds (renderBounds, tileIndex)));
-			ThreadStart masterStart = () => {
+			var renderInfos = Enumerable.Range (0, totalTiles).Select (tileIndex => new TileRenderInfo (tileIndex, GetTileBounds (renderBounds, tileIndex)));
 
-				// Do part of the rendering on the master thread.
-				Render (sourceSurface, destSurface, masterRenderInfos, renderId);
+			ThreadStart commonThreadStart = () => Render (sourceSurface, destSurface, renderInfos, renderId);
 
-				// Wait for slave threads to complete.
-				foreach (var slave in slaves)
-					slave.Join ();
+			if (threadId == 0) { // Is master
+				ThreadStart masterStart = commonThreadStart + (() => {
+					// Part of the rendering is being done on the master thread, and we should add code to coordinate the slave threads
 
-				// Change back to the UI thread to notify of completion.
-				GLib.Functions.TimeoutAdd (0, 0, () => {
-					HandleRenderCompletion (sourceSurface, destSurface, renderBounds);
-					return false; // don't call the timer again
+					// Wait for slave threads to complete.
+					foreach (var slave in slaves)
+						slave.Join ();
+
+					// Change back to the UI thread to notify of completion.
+					GLib.Functions.TimeoutAdd (0, 0, () => {
+						HandleRenderCompletion (sourceSurface, destSurface, renderBounds);
+						return false; // don't call the timer again
+					});
+
+					// Wait for slave threads to complete.
+					foreach (var slave in slaves)
+						slave.Join ();
+
+					// Change back to the UI thread to notify of completion.
+					GLib.Functions.TimeoutAdd (0, 0, () => {
+						HandleRenderCompletion (sourceSurface, destSurface, renderBounds);
+						return false; // don't call the timer again
+					});
 				});
-			};
-			StartThread (masterStart); // Start the master render thread.
+				StartThread (masterStart);
+			} else { // Is slave
+				slaves[threadId - 1] = StartThread (commonThreadStart);
+			}
 		}
 
 		// Start timer used to periodically fire update events on the UI thread.
