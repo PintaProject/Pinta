@@ -170,7 +170,7 @@ public sealed class SimpleEffectDialog : Gtk.Dialog
 				yield return CreatePointPicker (localizer.GetString (caption), effectData, mi, attrs);
 			else if (mType == typeof (PointD))
 				yield return CreateOffsetPicker (localizer.GetString (caption), effectData, mi, attrs);
-			else if (mType == typeof (ImmutableColorGradient))
+			else if (mType == typeof (IColorMapping) || mType == typeof (IRangeColorMapping))
 				yield return CreateGradientPicker (localizer.GetString (caption), effectData, mi, attrs);
 			else if (mType.IsEnum)
 				yield return CreateEnumComboBox (localizer.GetString (caption), effectData, mi, attrs);

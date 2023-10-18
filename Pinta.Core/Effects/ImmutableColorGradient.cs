@@ -5,12 +5,12 @@ using System.Linq;
 
 namespace Pinta.Core;
 
-public sealed class ImmutableColorGradient
+public sealed class ImmutableColorGradient : IRangeColorMapping
 {
 	public ColorBgra StartColor { get; }
 	public ColorBgra EndColor { get; }
-	public double MinPosition { get; }
-	public double MaxPosition { get; }
+	public double MinimumPosition { get; }
+	public double MaximumPosition { get; }
 
 	public ImmutableArray<GradientStop> SortedStops { get; }
 
@@ -28,25 +28,25 @@ public sealed class ImmutableColorGradient
 
 		StartColor = startColor;
 		EndColor = endColor;
-		MinPosition = minPosition;
-		MaxPosition = maxPosition;
+		MinimumPosition = minPosition;
+		MaximumPosition = maxPosition;
 		SortedStops = sortedStops;
 	}
 
 	public ColorBgra GetColor (double position)
 	{
-		if (position < MinPosition) throw new ArgumentOutOfRangeException (nameof (position));
-		if (position > MaxPosition) throw new ArgumentOutOfRangeException (nameof (position));
-		if (position == MinPosition) return StartColor;
-		if (position == MaxPosition) return EndColor;
+		if (position < MinimumPosition) throw new ArgumentOutOfRangeException (nameof (position));
+		if (position > MaximumPosition) throw new ArgumentOutOfRangeException (nameof (position));
+		if (position == MinimumPosition) return StartColor;
+		if (position == MaximumPosition) return EndColor;
 		if (SortedStops.Length == 0) return HandleNoStops (position);
 		return HandleWithStops (position);
 	}
 
 	private ColorBgra HandleNoStops (double position)
 	{
-		double valueSpan = MaxPosition - MinPosition;
-		double positionOffset = position - MinPosition;
+		double valueSpan = MaximumPosition - MinimumPosition;
+		double positionOffset = position - MinimumPosition;
 		double fraction = positionOffset / valueSpan;
 		return ColorBgra.Lerp (StartColor, EndColor, fraction);
 	}
@@ -54,10 +54,10 @@ public sealed class ImmutableColorGradient
 	private ColorBgra HandleWithStops (double position)
 	{
 		int immediateLowerIndex = BinarySearchLowerOrEqual (SortedStops, position);
-		var immediatelyLower = immediateLowerIndex < 0 ? new GradientStop (MinPosition, StartColor) : SortedStops[immediateLowerIndex];
+		var immediatelyLower = immediateLowerIndex < 0 ? new GradientStop (MinimumPosition, StartColor) : SortedStops[immediateLowerIndex];
 		if (immediatelyLower.Position == position) return immediatelyLower.Color;
 		int immediatelyHigherIndex = immediateLowerIndex + 1;
-		var immediatelyHigher = (immediatelyHigherIndex < SortedStops.Length) ? SortedStops[immediatelyHigherIndex] : new GradientStop (MaxPosition, EndColor);
+		var immediatelyHigher = (immediatelyHigherIndex < SortedStops.Length) ? SortedStops[immediatelyHigherIndex] : new GradientStop (MaximumPosition, EndColor);
 		double valueSpan = immediatelyHigher.Position - immediatelyLower.Position;
 		double positionOffset = position - immediatelyLower.Position;
 		double fraction = positionOffset / valueSpan;
