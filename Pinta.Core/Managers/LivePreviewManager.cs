@@ -39,15 +39,12 @@ public sealed class LivePreviewManager
 {
 	// NRT - These are set in Start(). This should be rewritten to be provably non-null.
 	bool live_preview_enabled;
-	Layer layer = null!;
-	Cairo.Path? selection_path;
 
 	bool apply_live_preview_flag;
 	bool cancel_live_preview_flag;
 
 	Cairo.ImageSurface live_preview_surface = null!;
 	RectangleI render_bounds;
-	SimpleHistoryItem history_item = null!;
 
 	internal LivePreviewManager ()
 	{
@@ -79,28 +76,30 @@ public sealed class LivePreviewManager
 		apply_live_preview_flag = false;
 		cancel_live_preview_flag = false;
 
-		layer = doc.Layers.CurrentUserLayer;
+		AsyncEffectRenderer renderer = null!;
+
+		Layer layer = doc.Layers.CurrentUserLayer;
 
 		//TODO Use the current tool layer instead.
-		live_preview_surface = CairoExtensions.CreateImageSurface (Cairo.Format.Argb32,
-										  PintaCore.Workspace.ImageSize.Width,
-										  PintaCore.Workspace.ImageSize.Height);
+		live_preview_surface = CairoExtensions.CreateImageSurface (
+			Cairo.Format.Argb32,
+			PintaCore.Workspace.ImageSize.Width,
+			PintaCore.Workspace.ImageSize.Height
+		);
 
 		// Handle selection path.
 		PintaCore.Tools.Commit ();
 		var selection = doc.Selection;
-		selection_path = (selection.Visible) ? selection.SelectionPath : null;
+		Cairo.Path? selection_path = (selection.Visible) ? selection.SelectionPath : null;
 		render_bounds = (selection_path != null) ? selection_path.GetBounds () : live_preview_surface.GetBounds ();
 		render_bounds = PintaCore.Workspace.ClampToImageSize (render_bounds);
 
-		history_item = new SimpleHistoryItem (effect.Icon, effect.Name);
+		SimpleHistoryItem history_item = new SimpleHistoryItem (effect.Icon, effect.Name);
 		history_item.TakeSnapshotOfLayer (doc.Layers.CurrentUserLayerIndex);
 
 		// Paint the pre-effect layer surface into into the working surface.
 		var ctx = new Cairo.Context (live_preview_surface);
 		layer.Draw (ctx, layer.Surface, 1);
-
-		AsyncEffectRenderer renderer = null!;
 
 		if (effect.EffectData != null)
 			effect.EffectData.PropertyChanged += EffectData_PropertyChanged;
@@ -234,8 +233,6 @@ public sealed class LivePreviewManager
 			CleanUp ();
 		}
 
-
-
 		// Called from asynchronously from Renderer.OnCompletion ()
 		void HandleApply ()
 		{
@@ -262,7 +259,7 @@ public sealed class LivePreviewManager
 		void EffectData_PropertyChanged (object? sender, PropertyChangedEventArgs e)
 		{
 			//TODO calculate bounds.
-			renderer!.Start (effect, layer.Surface, live_preview_surface, render_bounds);
+			renderer.Start (effect, layer.Surface, live_preview_surface, render_bounds);
 		}
 	}
 
@@ -272,7 +269,11 @@ public sealed class LivePreviewManager
 		private readonly Action handle_cancel;
 		private readonly Action handle_apply;
 
-		internal Renderer (LivePreviewManager manager, AsyncEffectRenderer.Settings settings, Action handleCancel, Action handleApply)
+		internal Renderer (
+			LivePreviewManager manager,
+			AsyncEffectRenderer.Settings settings,
+			Action handleCancel,
+			Action handleApply)
 			: base (settings)
 		{
 			this.manager = manager;
@@ -303,15 +304,11 @@ public sealed class LivePreviewManager
 
 	void FireLivePreviewEndedEvent (RenderStatus status, Exception? ex)
 	{
-		if (Ended != null) {
-			var args = new LivePreviewEndedEventArgs (status, ex);
-			Ended (this, args);
-		}
+		Ended?.Invoke (this, new LivePreviewEndedEventArgs (status, ex));
 	}
 
 	void FireLivePreviewRenderUpdatedEvent (double progress, RectangleI bounds)
 	{
-
 		RenderUpdated?.Invoke (this, new LivePreviewRenderUpdatedEventArgs (progress, bounds));
 	}
 
