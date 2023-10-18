@@ -169,7 +169,8 @@ internal abstract class AsyncEffectRenderer
 
 		current_tile = -1;
 
-		total_tiles = CalculateTotalTiles (renderBounds);
+		int totalTiles = CalculateTotalTiles (renderBounds);
+		total_tiles = totalTiles;
 
 		Debug.WriteLine ("AsyncEffectRenderer.Start () Render " + render_id + " starting.");
 
@@ -180,13 +181,13 @@ internal abstract class AsyncEffectRenderer
 		int threadCount = settings.ThreadCount;
 		var slaves = new Thread[threadCount - 1];
 		for (int threadId = 1; threadId < threadCount; threadId++)
-			slaves[threadId - 1] = StartSlaveThread (sourceSurface, destSurface, renderBounds, renderId, threadId);
+			slaves[threadId - 1] = StartSlaveThread (sourceSurface, destSurface, renderBounds, totalTiles, renderId, threadId);
 
 		// Start the master render thread.
 		var master = new Thread (() => {
 
 			// Do part of the rendering on the master thread.
-			Render (sourceSurface, destSurface, renderBounds, renderId, 0);
+			Render (sourceSurface, destSurface, renderBounds, totalTiles, renderId, 0);
 
 			// Wait for slave threads to complete.
 			foreach (var slave in slaves)
@@ -210,11 +211,12 @@ internal abstract class AsyncEffectRenderer
 		Cairo.ImageSurface sourceSurface,
 		Cairo.ImageSurface destSurface,
 		RectangleI renderBounds,
+		int totalTiles,
 		int renderId,
 		int threadId)
 	{
 		var slave = new Thread (() => {
-			Render (sourceSurface, destSurface, renderBounds, renderId, threadId);
+			Render (sourceSurface, destSurface, renderBounds, totalTiles, renderId, threadId);
 		}) {
 			Priority = settings.ThreadPriority
 		};
@@ -228,13 +230,14 @@ internal abstract class AsyncEffectRenderer
 		Cairo.ImageSurface sourceSurface,
 		Cairo.ImageSurface destSurface,
 		RectangleI renderBounds,
+		int totalTiles,
 		int renderId,
 		int threadId)
 	{
 		// Fetch the next tile index and render it.
 		for (; ; ) {
 			int tileIndex = Interlocked.Increment (ref current_tile);
-			if (tileIndex >= total_tiles || cancel_render_flag)
+			if (tileIndex >= totalTiles || cancel_render_flag)
 				return;
 			RenderTile (sourceSurface, destSurface, renderBounds, renderId, threadId, tileIndex);
 		}
