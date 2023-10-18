@@ -38,17 +38,12 @@ namespace Pinta.Core;
 public sealed class LivePreviewManager
 {
 	// NRT - These are set in Start(). This should be rewritten to be provably non-null.
-	bool live_preview_enabled;
+	bool live_preview_enabled = false;
 
 	Cairo.ImageSurface live_preview_surface = null!;
 	RectangleI render_bounds;
 
-	internal LivePreviewManager ()
-	{
-		live_preview_enabled = false;
-
-		RenderUpdated += LivePreview_RenderUpdated;
-	}
+	internal LivePreviewManager () { }
 
 	public bool IsEnabled => live_preview_enabled;
 	public Cairo.ImageSurface LivePreviewSurface => live_preview_surface;
@@ -57,6 +52,22 @@ public sealed class LivePreviewManager
 	public event EventHandler<LivePreviewStartedEventArgs>? Started;
 	public event EventHandler<LivePreviewRenderUpdatedEventArgs>? RenderUpdated;
 	public event EventHandler<LivePreviewEndedEventArgs>? Ended;
+
+	private void OnStarted (LivePreviewStartedEventArgs args)
+	{
+		Started?.Invoke (this, args);
+	}
+
+	private void OnRenderUpdated (LivePreviewRenderUpdatedEventArgs args)
+	{
+		LivePreview_RenderUpdated (args);
+		RenderUpdated?.Invoke (this, args);
+	}
+
+	private void OnEnded (LivePreviewEndedEventArgs args)
+	{
+		Ended?.Invoke (this, args);
+	}
 
 	public void Start (BaseEffect effect)
 	{
@@ -102,7 +113,7 @@ public sealed class LivePreviewManager
 		if (effect.EffectData != null)
 			effect.EffectData.PropertyChanged += EffectData_PropertyChanged;
 
-		Started?.Invoke (this, new LivePreviewStartedEventArgs ());
+		OnStarted (new LivePreviewStartedEventArgs ());
 
 		var settings = new AsyncEffectRenderer.Settings () {
 			ThreadCount = PintaCore.System.RenderThreads,
@@ -278,12 +289,12 @@ public sealed class LivePreviewManager
 
 		void FireLivePreviewEndedEvent (RenderStatus status, Exception? ex)
 		{
-			Ended?.Invoke (this, new LivePreviewEndedEventArgs (status, ex));
+			OnEnded (new LivePreviewEndedEventArgs (status, ex));
 		}
 
 		void FireLivePreviewRenderUpdatedEvent (double progress, RectangleI bounds)
 		{
-			RenderUpdated?.Invoke (this, new LivePreviewRenderUpdatedEventArgs (progress, bounds));
+			OnRenderUpdated (new LivePreviewRenderUpdatedEventArgs (progress, bounds));
 		}
 	}
 
@@ -313,7 +324,7 @@ public sealed class LivePreviewManager
 		}
 	}
 
-	void LivePreview_RenderUpdated (object? o, LivePreviewRenderUpdatedEventArgs args)
+	void LivePreview_RenderUpdated (LivePreviewRenderUpdatedEventArgs args)
 	{
 		double scale = PintaCore.Workspace.Scale;
 		var offset = PintaCore.Workspace.Offset;
