@@ -122,7 +122,9 @@ internal abstract class AsyncEffectRenderer
 			return;
 		}
 
-		StartRender (source, dest, renderBounds);
+		int totalTiles = CalculateTotalTiles (renderBounds);
+		var renderInfos = Enumerable.Range (0, totalTiles).Select (tileIndex => new TileRenderInfo (tileIndex, GetTileBounds (renderBounds, tileIndex))).ToArray ();
+		StartRender (source, dest, renderBounds, renderInfos);
 	}
 
 	internal void Cancel (
@@ -153,7 +155,8 @@ internal abstract class AsyncEffectRenderer
 	void StartRender (
 		Cairo.ImageSurface sourceSurface,
 		Cairo.ImageSurface destSurface,
-		RectangleI renderBounds)
+		RectangleI renderBounds,
+		IReadOnlyList<TileRenderInfo> renderInfos)
 	{
 		is_rendering = true;
 		cancel_render_flag = false;
@@ -165,14 +168,12 @@ internal abstract class AsyncEffectRenderer
 
 		report_current_tile = () => -1;
 
-		int totalTiles = CalculateTotalTiles (renderBounds);
-
 		report_progress = () => {
 			var currentTile = report_current_tile ();
-			if (totalTiles == 0 || currentTile < 0)
+			if (renderInfos.Count == 0 || currentTile < 0)
 				return 0;
-			else if (currentTile < totalTiles)
-				return (double) currentTile / (double) totalTiles;
+			else if (currentTile < renderInfos.Count)
+				return (double) currentTile / (double) renderInfos.Count;
 			else
 				return 1;
 		};
@@ -186,7 +187,6 @@ internal abstract class AsyncEffectRenderer
 		int threadCount = settings.ThreadCount;
 		var slaves = new Thread[threadCount - 1];
 
-		var renderInfos = Enumerable.Range (0, totalTiles).Select (tileIndex => new TileRenderInfo (tileIndex, GetTileBounds (renderBounds, tileIndex))).ToArray ();
 		ThreadStart commonThreadStart = () => Render (sourceSurface, destSurface, renderInfos, renderId);
 
 		foreach (int threadId in Enumerable.Range (0, threadCount).Reverse ()) {
@@ -351,9 +351,11 @@ internal abstract class AsyncEffectRenderer
 
 		OnCompletion (cancel_render_flag, exceptions);
 
-		if (restart_render_flag)
-			StartRender (sourceSurface, destSurface, renderBounds);
-		else
+		if (restart_render_flag) {
+			int totalTiles = CalculateTotalTiles (renderBounds);
+			var renderInfos = Enumerable.Range (0, totalTiles).Select (tileIndex => new TileRenderInfo (tileIndex, GetTileBounds (renderBounds, tileIndex))).ToArray ();
+			StartRender (sourceSurface, destSurface, renderBounds, renderInfos);
+		} else
 			is_rendering = false;
 	}
 }
