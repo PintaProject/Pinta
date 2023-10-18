@@ -12,7 +12,7 @@ public sealed class ColorGradient : ColorMapping
 	public double MinimumPosition { get; }
 	public double MaximumPosition { get; }
 
-	internal ImmutableArray<GradientStop> SortedStops { get; }
+	private readonly ImmutableArray<GradientStop> sorted_stops; // Before making it public, make sure it's a nice structure
 
 	internal ColorGradient (
 		ColorBgra startColor,
@@ -30,7 +30,7 @@ public sealed class ColorGradient : ColorMapping
 		EndColor = endColor;
 		MinimumPosition = minPosition;
 		MaximumPosition = maxPosition;
-		SortedStops = sortedStops;
+		sorted_stops = sortedStops;
 	}
 
 	public sealed override ColorBgra GetColor (double position)
@@ -38,7 +38,7 @@ public sealed class ColorGradient : ColorMapping
 		if (position == MinimumPosition) return StartColor;
 		if (position == MaximumPosition) return EndColor;
 		if (!IsMapped (position)) throw new ArgumentOutOfRangeException (nameof (position));
-		if (SortedStops.Length == 0) return HandleNoStops (position);
+		if (sorted_stops.Length == 0) return HandleNoStops (position);
 		return HandleWithStops (position);
 	}
 
@@ -52,11 +52,11 @@ public sealed class ColorGradient : ColorMapping
 
 	private ColorBgra HandleWithStops (double position)
 	{
-		int immediateLowerIndex = BinarySearchLowerOrEqual (SortedStops, position);
-		var immediatelyLower = immediateLowerIndex < 0 ? new GradientStop (MinimumPosition, StartColor) : SortedStops[immediateLowerIndex];
+		int immediateLowerIndex = BinarySearchLowerOrEqual (sorted_stops, position);
+		var immediatelyLower = immediateLowerIndex < 0 ? new GradientStop (MinimumPosition, StartColor) : sorted_stops[immediateLowerIndex];
 		if (immediatelyLower.Position == position) return immediatelyLower.Color;
 		int immediatelyHigherIndex = immediateLowerIndex + 1;
-		var immediatelyHigher = (immediatelyHigherIndex < SortedStops.Length) ? SortedStops[immediatelyHigherIndex] : new GradientStop (MaximumPosition, EndColor);
+		var immediatelyHigher = (immediatelyHigherIndex < sorted_stops.Length) ? sorted_stops[immediatelyHigherIndex] : new GradientStop (MaximumPosition, EndColor);
 		double valueSpan = immediatelyHigher.Position - immediatelyLower.Position;
 		double positionOffset = position - immediatelyLower.Position;
 		double fraction = positionOffset / valueSpan;
