@@ -267,10 +267,10 @@ public sealed class MandelbrotFractalEffect : BaseEffect
 		public int Zoom { get; set; } = 10;
 
 		[Caption ("Angle")]
-		internal DegreesAngle Angle { get; set; } = new (0);
+		public DegreesAngle Angle { get; set; } = new (0);
 
 		[Caption ("Colors")]
-		public PredefinedColorSchemes Colors { get; set; } = PredefinedColorSchemes.Electric;
+		internal PredefinedColorSchemes Colors { get; set; } = PredefinedColorSchemes.Electric;
 
 		[Caption ("Invert Colors")]
 		public bool InvertColors { get; set; } = false;
