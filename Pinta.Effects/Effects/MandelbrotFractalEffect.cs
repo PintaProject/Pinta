@@ -102,7 +102,7 @@ public sealed class MandelbrotFractalEffect : BaseEffect
 			xOffset: x_offset,
 			yOffset: y_offset,
 
-			gradient: Data.ColorMapping
+			colorMapping: Data.ColorMapping
 		);
 	}
 
