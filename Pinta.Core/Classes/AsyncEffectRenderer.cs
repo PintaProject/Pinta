@@ -188,11 +188,12 @@ internal abstract class AsyncEffectRenderer
 		for (int threadId = 1; threadId < threadCount; threadId++)
 			slaves[threadId - 1] = StartSlaveThread (sourceSurface, destSurface, renderBounds, totalTiles, renderId, threadId);
 
+		var renderInfos = Enumerable.Range (0, totalTiles).Select (tileIndex => new TileRenderInfo (tileIndex, GetTileBounds (renderBounds, tileIndex)));
+
 		// Start the master render thread.
 		var master = new Thread (() => {
 
 			// Do part of the rendering on the master thread.
-			var renderInfos = Enumerable.Range (0, totalTiles).Select (tileIndex => new TileRenderInfo (tileIndex, GetTileBounds (renderBounds, tileIndex)));
 			Render (sourceSurface, destSurface, renderInfos, renderId, 0);
 
 			// Wait for slave threads to complete.
@@ -221,10 +222,9 @@ internal abstract class AsyncEffectRenderer
 		int renderId,
 		int threadId)
 	{
-		var slave = new Thread (() => {
-			var renderInfos = Enumerable.Range (0, totalTiles).Select (tileIndex => new TileRenderInfo (tileIndex, GetTileBounds (renderBounds, tileIndex)));
-			Render (sourceSurface, destSurface, renderInfos, renderId, threadId);
-		}) {
+		var renderInfos = Enumerable.Range (0, totalTiles).Select (tileIndex => new TileRenderInfo (tileIndex, GetTileBounds (renderBounds, tileIndex)));
+
+		var slave = new Thread (() => Render (sourceSurface, destSurface, renderInfos, renderId, threadId)) {
 			Priority = settings.ThreadPriority
 		};
 		slave.Start ();
