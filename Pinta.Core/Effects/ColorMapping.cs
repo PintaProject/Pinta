@@ -1,11 +1,13 @@
-using System;
 using System.Collections.Generic;
 using System.Linq;
 
 namespace Pinta.Core;
 
-public static class ColorMapping
+public abstract class ColorMapping
 {
+	private protected ColorMapping () { }
+	public abstract ColorBgra GetColor (double position);
+
 	private static ColorBgra DefaultStartColor () => ColorBgra.Black;
 	private static ColorBgra DefaultEndColor () => ColorBgra.White;
 	private static double DefaultMinimumValue () => 0;
@@ -54,26 +56,5 @@ public static class ColorMapping
 			maximum,
 			stops
 		);
-	}
-
-	public static IRangeColorMapping Range (double minimum, double maximum, Func<double, ColorBgra> mappingFunction)
-	{
-		return new SimpleRangeMapping (minimum, maximum, mappingFunction);
-	}
-
-	private sealed class SimpleRangeMapping : IRangeColorMapping
-	{
-		private readonly Func<double, ColorBgra> mapping_function;
-		internal SimpleRangeMapping (double minimum, double maximum, Func<double, ColorBgra> mappingFunction)
-		{
-			if (minimum >= maximum) throw new ArgumentException ($"{nameof (minimum)} has to be lower than {nameof (maximum)}");
-			MinimumPosition = minimum;
-			MaximumPosition = maximum;
-			mapping_function = mappingFunction;
-		}
-		public double MinimumPosition { get; }
-		public double MaximumPosition { get; }
-		public ColorBgra GetColor (double position) => mapping_function (position);
-		public bool IsMapped (double position) => position >= MinimumPosition && position <= MaximumPosition;
 	}
 }

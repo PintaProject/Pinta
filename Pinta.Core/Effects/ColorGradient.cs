@@ -5,7 +5,7 @@ using System.Linq;
 
 namespace Pinta.Core;
 
-public sealed class ColorGradient : IRangeColorMapping
+public sealed class ColorGradient : ColorMapping
 {
 	public ColorBgra StartColor { get; }
 	public ColorBgra EndColor { get; }
@@ -33,7 +33,7 @@ public sealed class ColorGradient : IRangeColorMapping
 		SortedStops = sortedStops;
 	}
 
-	public ColorBgra GetColor (double position)
+	public sealed override ColorBgra GetColor (double position)
 	{
 		if (position == MinimumPosition) return StartColor;
 		if (position == MaximumPosition) return EndColor;
