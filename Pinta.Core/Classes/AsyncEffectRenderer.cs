@@ -32,6 +32,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading;
+using Pango.Internal;
 using Debug = System.Diagnostics.Debug;
 
 namespace Pinta.Core;
@@ -229,6 +230,8 @@ internal abstract class AsyncEffectRenderer
 		return slave;
 	}
 
+	private readonly record struct TileRenderInfo (int TileIndex, RectangleI TileBounds);
+
 	// Runs on a background thread.
 	void Render (
 		Cairo.ImageSurface sourceSurface,
@@ -238,10 +241,10 @@ internal abstract class AsyncEffectRenderer
 		int renderId,
 		int threadId)
 	{
-		foreach (int tileIndex in Enumerable.Range (0, totalTiles)) {
-			report_current_tile = () => tileIndex;
-			var tileBounds = GetTileBounds (renderBounds, tileIndex);
-			RenderTile (sourceSurface, destSurface, tileBounds, renderId, threadId);
+		var renderInfos = Enumerable.Range (0, totalTiles).Select (tileIndex => new TileRenderInfo (tileIndex, GetTileBounds (renderBounds, tileIndex)));
+		foreach (var info in renderInfos) {
+			report_current_tile = () => info.TileIndex;
+			RenderTile (sourceSurface, destSurface, info.TileBounds, renderId, threadId);
 		}
 	}
 
