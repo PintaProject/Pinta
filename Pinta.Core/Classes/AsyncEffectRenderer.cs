@@ -32,7 +32,6 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading;
-using Pango.Internal;
 using Debug = System.Diagnostics.Debug;
 
 namespace Pinta.Core;
@@ -186,19 +185,17 @@ internal abstract class AsyncEffectRenderer
 		int threadCount = settings.ThreadCount;
 		var slaves = new Thread[threadCount - 1];
 		for (int threadId = 1; threadId < threadCount; threadId++) {
-			var renderInfos = Enumerable.Range (0, totalTiles).Select (tileIndex => new TileRenderInfo (tileIndex, GetTileBounds (renderBounds, tileIndex)));
-			ThreadStart threadStart = () => Render (sourceSurface, destSurface, renderInfos, renderId, threadId);
-			slaves[threadId - 1] = StartSlaveThread (threadStart);
+			var slaveRenderInfos = Enumerable.Range (0, totalTiles).Select (tileIndex => new TileRenderInfo (tileIndex, GetTileBounds (renderBounds, tileIndex)));
+			ThreadStart slaveStart = () => Render (sourceSurface, destSurface, slaveRenderInfos, renderId, threadId);
+			slaves[threadId - 1] = StartThread (slaveStart);
 		}
 
 		{
-			var renderInfos = Enumerable.Range (0, totalTiles).Select (tileIndex => new TileRenderInfo (tileIndex, GetTileBounds (renderBounds, tileIndex)));
-
-			// Start the master render thread.
-			var master = new Thread (() => {
+			var masterRenderInfos = Enumerable.Range (0, totalTiles).Select (tileIndex => new TileRenderInfo (tileIndex, GetTileBounds (renderBounds, tileIndex)));
+			ThreadStart masterStart = () => {
 
 				// Do part of the rendering on the master thread.
-				Render (sourceSurface, destSurface, renderInfos, renderId, 0);
+				Render (sourceSurface, destSurface, masterRenderInfos, renderId, 0);
 
 				// Wait for slave threads to complete.
 				foreach (var slave in slaves)
@@ -209,23 +206,19 @@ internal abstract class AsyncEffectRenderer
 					HandleRenderCompletion (sourceSurface, destSurface, renderBounds);
 					return false; // don't call the timer again
 				});
-			}) {
-				Priority = settings.ThreadPriority
 			};
-			master.Start ();
+			StartThread (masterStart); // Start the master render thread.
 		}
-
-
 
 		// Start timer used to periodically fire update events on the UI thread.
 		timer_tick_id = GLib.Functions.TimeoutAdd (0, (uint) settings.UpdateMillis, () => HandleTimerTick ());
 	}
 
-	Thread StartSlaveThread (ThreadStart threadStart)
+	Thread StartThread (ThreadStart threadStart)
 	{
-		var slave = new Thread (threadStart) { Priority = settings.ThreadPriority };
-		slave.Start ();
-		return slave;
+		var newThread = new Thread (threadStart) { Priority = settings.ThreadPriority };
+		newThread.Start ();
+		return newThread;
 	}
 
 	private readonly record struct TileRenderInfo (int TileIndex, RectangleI TileBounds);
