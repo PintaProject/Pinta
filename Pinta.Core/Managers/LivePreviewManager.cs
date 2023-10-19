@@ -71,10 +71,6 @@ public sealed class LivePreviewManager
 		if (IsEnabled)
 			throw new InvalidOperationException ("LivePreviewManager.Start() called while live preview is already enabled.");
 
-		// Create live preview surface.
-		// Start rendering.
-		// Listen for changes to effectConfiguration object, and restart render if needed.
-
 		var doc = PintaCore.Workspace.ActiveDocument;
 
 		IsEnabled = true;
@@ -86,6 +82,7 @@ public sealed class LivePreviewManager
 
 		Layer layer = doc.Layers.CurrentUserLayer;
 
+		// Create live preview surface.
 		//TODO Use the current tool layer instead.
 		LivePreviewSurface = CairoExtensions.CreateImageSurface (
 			Cairo.Format.Argb32,
@@ -109,6 +106,7 @@ public sealed class LivePreviewManager
 
 		AsyncEffectRenderer.Settings settings = default;
 
+		// Listen for changes to effectConfiguration object, and restart render if needed.
 		if (effect.EffectData != null)
 			effect.EffectData.PropertyChanged += EffectData_PropertyChanged;
 
@@ -130,6 +128,8 @@ public sealed class LivePreviewManager
 			int totalTiles = CalculateTotalTiles ();
 			var renderInfos = Enumerable.Range (0, totalTiles).Select (tileIndex => new TileRenderInfo (tileIndex, GetTileBounds (tileIndex))).ToArray ();
 			renderer = new Renderer (settings, OnUpdate, OnCompletion);
+
+			// Start rendering.
 			renderer.Start (effect, source, dest, RenderBounds, renderInfos);
 		}
 
