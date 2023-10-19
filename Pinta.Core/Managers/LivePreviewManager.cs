@@ -68,9 +68,9 @@ public sealed class LivePreviewManager
 		Ended?.Invoke (this, args);
 	}
 
-	private sealed record RenderSettings (
+	private sealed record LivePreviewRenderSettings (
 		Document activeDocument,
-		Layer layer,
+		Layer currentUserLayer,
 		ImageSurface livePreviewSurface,
 		RectangleI renderBounds,
 		ImageSurface source,
@@ -78,7 +78,7 @@ public sealed class LivePreviewManager
 		Settings settings,
 		Context ctx,
 		IReadOnlyList<TileRenderInfo> renderInfos);
-	private static RenderSettings CreateSettings ()
+	private static LivePreviewRenderSettings CreateSettings (BaseEffect effect)
 	{
 		var activeDocument = PintaCore.Workspace.ActiveDocument;
 		Layer layer = activeDocument.Layers.CurrentUserLayer;
@@ -108,15 +108,22 @@ public sealed class LivePreviewManager
 
 		//TODO calculate bounds.
 		int totalTiles = CalculateTotalTiles (renderBounds, settings);
-		var renderInfos = (
+		var renderInfos = effect.IsTileable ?
+		(
 			Enumerable.Range (0, totalTiles)
 			.Select (tileIndex => new TileRenderInfo (tileIndex, GetTileBounds (settings, renderBounds, tileIndex)))
 			.ToArray ()
+		)
+		:
+		(
+			new[] {
+				new TileRenderInfo (0, renderBounds),
+			}
 		);
 
 		return new (
 			activeDocument: activeDocument,
-			layer: layer,
+			currentUserLayer: layer,
 			livePreviewSurface: livePreviewSurface,
 			renderBounds: renderBounds,
 			source: source,
@@ -156,12 +163,12 @@ public sealed class LivePreviewManager
 
 		PintaCore.Tools.Commit ();
 
-		RenderSettings settings = CreateSettings ();
+		LivePreviewRenderSettings settings = CreateSettings (effect);
 
 		bool apply_live_preview_flag = false;
 		bool cancel_live_preview_flag = false;
 
-		settings.layer.Draw (settings.ctx, settings.layer.Surface, 1);
+		settings.currentUserLayer.Draw (settings.ctx, settings.currentUserLayer.Surface, 1);
 
 		SimpleHistoryItem history_item = new SimpleHistoryItem (effect.Icon, effect.Name);
 		history_item.TakeSnapshotOfLayer (settings.activeDocument.Layers.CurrentUserLayerIndex);
@@ -270,11 +277,11 @@ public sealed class LivePreviewManager
 		{
 			Debug.WriteLine ("LivePreviewManager.HandleApply()");
 
-			var ctx = new Cairo.Context (settings.layer.Surface);
+			var ctx = new Cairo.Context (settings.currentUserLayer.Surface);
 			ctx.Save ();
 			PintaCore.Workspace.ActiveDocument.Selection.Clip (ctx);
 
-			settings.layer.DrawWithOperator (ctx, LivePreviewSurface, Cairo.Operator.Source);
+			settings.currentUserLayer.DrawWithOperator (ctx, LivePreviewSurface, Cairo.Operator.Source);
 			ctx.Restore ();
 
 			PintaCore.Workspace.ActiveDocument.History.PushNewItem (history_item);
@@ -290,7 +297,7 @@ public sealed class LivePreviewManager
 
 		void EffectData_PropertyChanged (object? sender, PropertyChangedEventArgs e)
 		{
-			renderer!.Start (effect, settings.layer.Surface, LivePreviewSurface, settings.renderInfos);
+			renderer!.Start (effect, settings.currentUserLayer.Surface, LivePreviewSurface, settings.renderInfos);
 		}
 
 		void OnUpdate (double progress, RectangleI updatedBounds)
