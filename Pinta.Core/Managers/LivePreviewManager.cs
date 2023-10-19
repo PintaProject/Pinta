@@ -80,40 +80,41 @@ public sealed class LivePreviewManager
 
 		// Create live preview surface.
 		//TODO Use the current tool layer instead.
-		LivePreviewSurface = CairoExtensions.CreateImageSurface (
+		var livePreviewSurface = CairoExtensions.CreateImageSurface (
 			Cairo.Format.Argb32,
 			PintaCore.Workspace.ImageSize.Width,
 			PintaCore.Workspace.ImageSize.Height
 		);
 
-		// Handle selection path.
-		var selection = doc.Selection;
-		Cairo.Path? selection_path = (selection.Visible) ? selection.SelectionPath : null;
-		var renderBounds = (selection_path != null) ? selection_path.GetBounds () : LivePreviewSurface.GetBounds ();
-		renderBounds = PintaCore.Workspace.ClampToImageSize (renderBounds);
-		RenderBounds = renderBounds;
+		var renderBounds = GetRenderBounds (doc, livePreviewSurface);
 
 		var source = layer.Surface;
-		var dest = LivePreviewSurface;
+		var dest = livePreviewSurface;
 
-		AsyncEffectRenderer.Settings settings = new AsyncEffectRenderer.Settings () {
+		var settings = new AsyncEffectRenderer.Settings () {
 			ThreadCount = PintaCore.System.RenderThreads,
 			TileWidth = renderBounds.Width,
 			TileHeight = 1,
 			ThreadPriority = ThreadPriority.BelowNormal
 		};
 
+
+
 		// Paint the pre-effect layer surface into into the working surface.
-		var ctx = new Cairo.Context (LivePreviewSurface);
-		layer.Draw (ctx, layer.Surface, 1);
+		var ctx = new Cairo.Context (livePreviewSurface);
 
 		bool apply_live_preview_flag = false;
 		bool cancel_live_preview_flag = false;
+
+		layer.Draw (ctx, layer.Surface, 1);
 
 		SimpleHistoryItem history_item = new SimpleHistoryItem (effect.Icon, effect.Name);
 		history_item.TakeSnapshotOfLayer (doc.Layers.CurrentUserLayerIndex);
 
 		AsyncEffectRenderer renderer = null!;
+
+		LivePreviewSurface = livePreviewSurface;
+		RenderBounds = renderBounds;
 
 		// Listen for changes to effectConfiguration object, and restart render if needed.
 		if (effect.EffectData != null)
@@ -332,6 +333,16 @@ public sealed class LivePreviewManager
 			effect.ConfigDialogResponse += handler;
 			effect.LaunchConfiguration ();
 		}
+	}
+
+	private static RectangleI GetRenderBounds (Document doc, Cairo.ImageSurface livePreviewSurface)
+	{
+		// Handle selection path.
+		var selection = doc.Selection;
+		Cairo.Path? selection_path = (selection.Visible) ? selection.SelectionPath : null;
+		var renderBounds = (selection_path != null) ? selection_path.GetBounds () : livePreviewSurface.GetBounds ();
+		renderBounds = PintaCore.Workspace.ClampToImageSize (renderBounds);
+		return renderBounds;
 	}
 
 	private sealed class Renderer : AsyncEffectRenderer
