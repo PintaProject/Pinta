@@ -12,6 +12,33 @@ namespace Pinta.Core;
 
 public static class Utility
 {
+	public static IDisposable CreateDisposable (Action action)
+	{
+		return new DelegateDisposable (action);
+	}
+
+	private sealed class DelegateDisposable : IDisposable
+	{
+		private bool disposed;
+
+		private readonly object @lock = new ();
+		private readonly Action action;
+
+		internal DelegateDisposable (Action action)
+		{
+			this.action = action;
+			this.disposed = false;
+		}
+		public void Dispose ()
+		{
+			lock (@lock) {
+				if (disposed) return;
+				disposed = true;
+				action ();
+			}
+		}
+	}
+
 	internal static bool IsNumber (float x)
 	{
 		return x >= float.MinValue && x <= float.MaxValue;
