@@ -300,13 +300,6 @@ public sealed class LivePreviewManager
 			renderer!.Start (effect, settings.currentUserLayer.Surface, LivePreviewSurface, settings.renderInfos);
 		}
 
-		void OnUpdate (double progress, RectangleI updatedBounds)
-		{
-			Debug.WriteLine (DateTime.Now.ToString ("HH:mm:ss:ffff") + " LivePreviewManager.OnUpdate() progress: " + progress);
-			PintaCore.Chrome.ProgressDialog.Progress = progress;
-			FireLivePreviewRenderUpdatedEvent (progress, updatedBounds);
-		}
-
 		void OnCompletion (bool cancelled, Exception[] exceptions)
 		{
 			Debug.WriteLine (DateTime.Now.ToString ("HH:mm:ss:ffff") + " LivePreviewManager.OnCompletion() cancelled: " + cancelled);
@@ -323,11 +316,6 @@ public sealed class LivePreviewManager
 		void FireLivePreviewEndedEvent (RenderStatus status, Exception? ex)
 		{
 			OnEnded (new LivePreviewEndedEventArgs (status, ex));
-		}
-
-		void FireLivePreviewRenderUpdatedEvent (double progress, RectangleI bounds)
-		{
-			OnRenderUpdated (new LivePreviewRenderUpdatedEventArgs (progress, bounds));
 		}
 
 		void LaunchConfig ()
@@ -364,6 +352,18 @@ public sealed class LivePreviewManager
 			effect.ConfigDialogResponse += handler;
 			effect.LaunchConfiguration ();
 		}
+	}
+
+	void OnUpdate (double progress, RectangleI updatedBounds)
+	{
+		Debug.WriteLine (DateTime.Now.ToString ("HH:mm:ss:ffff") + " LivePreviewManager.OnUpdate() progress: " + progress);
+		PintaCore.Chrome.ProgressDialog.Progress = progress;
+		FireLivePreviewRenderUpdatedEvent (progress, updatedBounds);
+	}
+
+	void FireLivePreviewRenderUpdatedEvent (double progress, RectangleI bounds)
+	{
+		OnRenderUpdated (new LivePreviewRenderUpdatedEventArgs (progress, bounds));
 	}
 
 	private static RectangleI GetRenderBounds (Document doc, Cairo.ImageSurface livePreviewSurface)
