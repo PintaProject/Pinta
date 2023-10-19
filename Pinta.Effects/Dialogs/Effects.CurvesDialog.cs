@@ -195,10 +195,10 @@ public sealed class CurvesDialog : Gtk.Dialog
 		ControlPoints = new SortedList<int, int>[channels];
 
 		for (int i = 0; i < channels; i++) {
-			SortedList<int, int> list = new SortedList<int, int> ();
-
-			list.Add (0, 0);
-			list.Add (size - 1, size - 1);
+			SortedList<int, int> list = new SortedList<int, int> {
+				{ 0, 0 },
+				{ size - 1, size - 1 }
+			};
 			ControlPoints[i] = list;
 		}
 
