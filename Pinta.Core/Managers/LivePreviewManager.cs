@@ -78,7 +78,7 @@ public sealed class LivePreviewManager
 		Settings settings,
 		Context ctx,
 		IReadOnlyList<TileRenderInfo> renderInfos);
-	private RenderSettings CreateSettings ()
+	private static RenderSettings CreateSettings ()
 	{
 		var activeDocument = PintaCore.Workspace.ActiveDocument;
 		Layer layer = activeDocument.Layers.CurrentUserLayer;
@@ -194,7 +194,7 @@ public sealed class LivePreviewManager
 
 			cancel_live_preview_flag = true;
 
-			renderer?.Cancel (settings.source, settings.dest, settings.renderInfos);
+			renderer.Cancel (settings.source, settings.dest, settings.renderInfos);
 
 			// Show a busy cursor, and make the main window insensitive,
 			// until the cancel has completed.
@@ -238,10 +238,8 @@ public sealed class LivePreviewManager
 
 			LivePreviewSurface = null!;
 
-			if (renderer != null) {
-				renderer.Dispose ();
-				renderer = null!;
-			}
+			renderer?.Dispose ();
+			renderer = null!;
 
 			history_item = null!;
 
@@ -397,7 +395,7 @@ public sealed class LivePreviewManager
 		}
 	}
 
-	void LivePreview_RenderUpdated (LivePreviewRenderUpdatedEventArgs args)
+	static void LivePreview_RenderUpdated (LivePreviewRenderUpdatedEventArgs args)
 	{
 		double scale = PintaCore.Workspace.Scale;
 		var offset = PintaCore.Workspace.Offset;
