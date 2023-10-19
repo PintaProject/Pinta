@@ -130,7 +130,7 @@ public sealed class LivePreviewManager
 			renderer = new Renderer (settings, OnUpdate, OnCompletion);
 
 			// Start rendering.
-			renderer.Start (effect, source, dest, RenderBounds, renderInfos);
+			renderer.Start (effect, source, dest, renderInfos);
 		}
 
 
@@ -167,7 +167,7 @@ public sealed class LivePreviewManager
 			int totalTiles = CalculateTotalTiles ();
 			var renderInfos = Enumerable.Range (0, totalTiles).Select (tileIndex => new AsyncEffectRenderer.TileRenderInfo (tileIndex, GetTileBounds (tileIndex))).ToArray ();
 
-			renderer?.Cancel (source!, dest!, RenderBounds, renderInfos);
+			renderer?.Cancel (source!, dest!, renderInfos);
 
 			// Show a busy cursor, and make the main window insensitive,
 			// until the cancel has completed.
@@ -268,7 +268,7 @@ public sealed class LivePreviewManager
 			//TODO calculate bounds.
 			int totalTiles = CalculateTotalTiles ();
 			var renderInfos = Enumerable.Range (0, totalTiles).Select (tileIndex => new TileRenderInfo (tileIndex, GetTileBounds (tileIndex))).ToArray ();
-			renderer!.Start (effect, layer.Surface, LivePreviewSurface, RenderBounds, renderInfos);
+			renderer!.Start (effect, layer.Surface, LivePreviewSurface, renderInfos);
 		}
 
 		void OnUpdate (double progress, RectangleI updatedBounds)

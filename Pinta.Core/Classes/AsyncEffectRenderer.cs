@@ -103,7 +103,6 @@ internal abstract class AsyncEffectRenderer
 		BaseEffect effect,
 		Cairo.ImageSurface source,
 		Cairo.ImageSurface dest,
-		RectangleI renderBounds,
 		IReadOnlyList<TileRenderInfo> renderInfos)
 	{
 		Debug.WriteLine ("AsyncEffectRenderer.Start ()");
@@ -120,13 +119,12 @@ internal abstract class AsyncEffectRenderer
 			return;
 		}
 
-		StartRender (source, dest, renderBounds, renderInfos);
+		StartRender (source, dest, renderInfos);
 	}
 
 	internal void Cancel (
 		Cairo.ImageSurface sourceSurface,
 		Cairo.ImageSurface destSurface,
-		RectangleI renderBounds,
 		IReadOnlyList<TileRenderInfo> renderInfos)
 	{
 		Debug.WriteLine ("AsyncEffectRenderer.Cancel ()");
@@ -134,7 +132,7 @@ internal abstract class AsyncEffectRenderer
 		restart_render_flag = false;
 
 		if (!IsRendering) {
-			HandleRenderCompletion (sourceSurface, destSurface, renderBounds, renderInfos);
+			HandleRenderCompletion (sourceSurface, destSurface, renderInfos);
 		}
 	}
 
@@ -153,7 +151,6 @@ internal abstract class AsyncEffectRenderer
 	void StartRender (
 		Cairo.ImageSurface sourceSurface,
 		Cairo.ImageSurface destSurface,
-		RectangleI renderBounds,
 		IReadOnlyList<TileRenderInfo> renderInfos)
 	{
 		is_rendering = true;
@@ -196,7 +193,7 @@ internal abstract class AsyncEffectRenderer
 
 			// Change back to the UI thread to notify of completion.
 			GLib.Functions.TimeoutAdd (0, 0, () => {
-				HandleRenderCompletion (sourceSurface, destSurface, renderBounds, renderInfos);
+				HandleRenderCompletion (sourceSurface, destSurface, renderInfos);
 				return false; // don't call the timer again
 			});
 
@@ -206,7 +203,7 @@ internal abstract class AsyncEffectRenderer
 
 			// Change back to the UI thread to notify of completion.
 			GLib.Functions.TimeoutAdd (0, 0, () => {
-				HandleRenderCompletion (sourceSurface, destSurface, renderBounds, renderInfos);
+				HandleRenderCompletion (sourceSurface, destSurface, renderInfos);
 				return false; // don't call the timer again
 			});
 		});
@@ -307,7 +304,6 @@ internal abstract class AsyncEffectRenderer
 	void HandleRenderCompletion (
 		Cairo.ImageSurface sourceSurface,
 		Cairo.ImageSurface destSurface,
-		RectangleI renderBounds,
 		IReadOnlyList<TileRenderInfo> renderInfos)
 	{
 		var exceptions = (render_exceptions.Count == 0)
@@ -324,7 +320,7 @@ internal abstract class AsyncEffectRenderer
 		OnCompletion (cancel_render_flag, exceptions);
 
 		if (restart_render_flag)
-			StartRender (sourceSurface, destSurface, renderBounds, renderInfos);
+			StartRender (sourceSurface, destSurface, renderInfos);
 		else
 			is_rendering = false;
 	}
