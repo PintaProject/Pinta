@@ -30,7 +30,6 @@
 
 using System;
 using System.ComponentModel;
-using System.Linq;
 using System.Threading;
 using Debug = System.Diagnostics.Debug;
 
@@ -70,90 +69,63 @@ public sealed class LivePreviewManager
 		if (IsEnabled)
 			throw new InvalidOperationException ("LivePreviewManager.Start() called while live preview is already enabled.");
 
-		IsEnabled = true;
+		// Create live preview surface.
+		// Start rendering.
+		// Listen for changes to effectConfiguration object, and restart render if needed.
 
 		var doc = PintaCore.Workspace.ActiveDocument;
+
+		IsEnabled = true;
 
 		bool apply_live_preview_flag = false;
 		bool cancel_live_preview_flag = false;
 
-		Layer layer = doc.Layers.CurrentUserLayer;
-
 		AsyncEffectRenderer renderer = null!;
 
-		// Create live preview surface.
+		Layer layer = doc.Layers.CurrentUserLayer;
+
 		//TODO Use the current tool layer instead.
-		Cairo.ImageSurface livePreviewSurface = CairoExtensions.CreateImageSurface (
+		LivePreviewSurface = CairoExtensions.CreateImageSurface (
 			Cairo.Format.Argb32,
 			PintaCore.Workspace.ImageSize.Width,
 			PintaCore.Workspace.ImageSize.Height
 		);
 
-		LivePreviewSurface = livePreviewSurface;
-
 		// Handle selection path.
 		PintaCore.Tools.Commit ();
 		var selection = doc.Selection;
 		Cairo.Path? selection_path = (selection.Visible) ? selection.SelectionPath : null;
-
-		var renderBounds = (selection_path != null) ? selection_path.GetBounds () : livePreviewSurface.GetBounds ();
-		renderBounds = PintaCore.Workspace.ClampToImageSize (renderBounds);
-
-		var settings = new AsyncEffectRenderer.Settings {
-			ThreadCount = PintaCore.System.RenderThreads,
-			TileWidth = renderBounds.Width,
-			TileHeight = 1,
-			ThreadPriority = ThreadPriority.BelowNormal
-		};
-
-		RenderBounds = renderBounds;
-
-		int totalTiles = CalculateTotalTiles ();
-		var renderInfos = Enumerable.Range (0, totalTiles).Select (tileIndex => new AsyncEffectRenderer.TileRenderInfo (tileIndex, GetTileBounds (tileIndex))).ToArray ();
+		RenderBounds = (selection_path != null) ? selection_path.GetBounds () : LivePreviewSurface.GetBounds ();
+		RenderBounds = PintaCore.Workspace.ClampToImageSize (RenderBounds);
 
 		SimpleHistoryItem history_item = new SimpleHistoryItem (effect.Icon, effect.Name);
 		history_item.TakeSnapshotOfLayer (doc.Layers.CurrentUserLayerIndex);
 
 		// Paint the pre-effect layer surface into into the working surface.
-		var ctx = new Cairo.Context (livePreviewSurface);
+		var ctx = new Cairo.Context (LivePreviewSurface);
 		layer.Draw (ctx, layer.Surface, 1);
 
+		if (effect.EffectData != null)
+			effect.EffectData.PropertyChanged += EffectData_PropertyChanged;
+
 		OnStarted (new LivePreviewStartedEventArgs ());
+
+		var settings = new AsyncEffectRenderer.Settings () {
+			ThreadCount = PintaCore.System.RenderThreads,
+			TileWidth = RenderBounds.Width,
+			TileHeight = 1,
+			ThreadPriority = ThreadPriority.BelowNormal
+		};
 
 		Debug.WriteLine (DateTime.Now.ToString ("HH:mm:ss:ffff") + "Start Live preview.");
 
 		var source = layer.Surface;
-		var dest = livePreviewSurface;
+		var dest = LivePreviewSurface;
 
-		// Listen for changes to effectConfiguration object, and restart render if needed.
-		if (effect.EffectData != null)
-			effect.EffectData.PropertyChanged += EffectData_PropertyChanged;
-
-		// Start rendering.
 		renderer = new Renderer (settings, OnUpdate, OnCompletion);
-		renderer.Start (effect, source, dest, renderBounds, renderInfos);
+		renderer.Start (effect, source, dest, RenderBounds);
 
 		LaunchConfig ();
-
-		int CalculateTotalTiles ()
-		{
-			return (int) (Math.Ceiling ((float) renderBounds.Width / (float) settings.TileWidth)
-				* Math.Ceiling ((float) renderBounds.Height / (float) settings.TileHeight));
-		}
-
-		// Runs on a background thread.
-		RectangleI GetTileBounds (int tileIndex)
-		{
-			int horizTileCount = (int) Math.Ceiling ((float) renderBounds.Width
-							       / (float) settings.TileWidth);
-
-			int x = ((tileIndex % horizTileCount) * settings.TileWidth) + renderBounds.X;
-			int y = ((tileIndex / horizTileCount) * settings.TileHeight) + renderBounds.Y;
-			int w = Math.Min (settings.TileWidth, renderBounds.Right + 1 - x);
-			int h = Math.Min (settings.TileHeight, renderBounds.Bottom + 1 - y);
-
-			return new RectangleI (x, y, w, h);
-		}
 
 		// Method asks render task to complete, and then returns immediately. The cancel
 		// is not actually complete until the LivePreviewRenderCompleted event is fired.
@@ -165,7 +137,7 @@ public sealed class LivePreviewManager
 
 			cancel_live_preview_flag = true;
 
-			renderer?.Cancel (sourceSurface, destSurface, renderBounds, renderInfos!);
+			renderer?.Cancel (sourceSurface, destSurface, RenderBounds);
 
 			// Show a busy cursor, and make the main window insensitive,
 			// until the cancel has completed.
@@ -177,7 +149,7 @@ public sealed class LivePreviewManager
 
 		void HandleProgressDialogCancel (object? o, EventArgs? e)
 		{
-			Cancel (layer.Surface, livePreviewSurface);
+			Cancel (layer.Surface, LivePreviewSurface);
 		}
 
 		void Apply ()
@@ -247,7 +219,7 @@ public sealed class LivePreviewManager
 			ctx.Save ();
 			PintaCore.Workspace.ActiveDocument.Selection.Clip (ctx);
 
-			layer.DrawWithOperator (ctx, livePreviewSurface, Cairo.Operator.Source);
+			layer.DrawWithOperator (ctx, LivePreviewSurface, Cairo.Operator.Source);
 			ctx.Restore ();
 
 			PintaCore.Workspace.ActiveDocument.History.PushNewItem (history_item);
@@ -264,7 +236,7 @@ public sealed class LivePreviewManager
 		void EffectData_PropertyChanged (object? sender, PropertyChangedEventArgs e)
 		{
 			//TODO calculate bounds.
-			renderer!.Start (effect, layer.Surface, livePreviewSurface, renderBounds, renderInfos!);
+			renderer!.Start (effect, layer.Surface, LivePreviewSurface, RenderBounds);
 		}
 
 		void OnUpdate (double progress, RectangleI updatedBounds)
