@@ -125,30 +125,7 @@ public sealed class LivePreviewManager
 		renderer = new Renderer (settings, OnUpdate, OnCompletion);
 		renderer.Start (effect, source, dest, RenderBounds);
 
-		if (effect.IsConfigurable) {
-			EventHandler<BaseEffect.ConfigDialogResponseEventArgs>? handler = null;
-			handler = (_, args) => {
-				if (!args.Accepted) {
-					PintaCore.Chrome.MainWindowBusy = true;
-					Cancel (source, dest);
-				} else {
-					PintaCore.Chrome.MainWindowBusy = true;
-					Apply ();
-				}
-
-				// Unsubscribe once we're done.
-				effect.ConfigDialogResponse -= handler;
-			};
-
-			effect.ConfigDialogResponse += handler;
-
-			effect.LaunchConfiguration ();
-
-		} else {
-			PintaCore.Chrome.MainWindowBusy = true;
-			Apply ();
-		}
-
+		LaunchConfig ();
 
 		// Method asks render task to complete, and then returns immediately. The cancel
 		// is not actually complete until the LivePreviewRenderCompleted event is fired.
@@ -290,6 +267,32 @@ public sealed class LivePreviewManager
 		void FireLivePreviewRenderUpdatedEvent (double progress, RectangleI bounds)
 		{
 			OnRenderUpdated (new LivePreviewRenderUpdatedEventArgs (progress, bounds));
+		}
+
+		void LaunchConfig ()
+		{
+			if (!effect.IsConfigurable) {
+				PintaCore.Chrome.MainWindowBusy = true;
+				Apply ();
+				return;
+			}
+
+			EventHandler<BaseEffect.ConfigDialogResponseEventArgs>? handler = null;
+			handler = (_, args) => {
+				if (!args.Accepted) {
+					PintaCore.Chrome.MainWindowBusy = true;
+					Cancel (source, dest);
+				} else {
+					PintaCore.Chrome.MainWindowBusy = true;
+					Apply ();
+				}
+
+				// Unsubscribe once we're done.
+				effect.ConfigDialogResponse -= handler;
+			};
+
+			effect.ConfigDialogResponse += handler;
+			effect.LaunchConfiguration ();
 		}
 	}
 
