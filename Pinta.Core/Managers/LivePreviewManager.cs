@@ -30,7 +30,9 @@
 
 using System;
 using System.ComponentModel;
+using System.Linq;
 using System.Threading;
+using static Pinta.Core.AsyncEffectRenderer;
 using Debug = System.Diagnostics.Debug;
 
 namespace Pinta.Core;
@@ -105,12 +107,14 @@ public sealed class LivePreviewManager
 		var ctx = new Cairo.Context (LivePreviewSurface);
 		layer.Draw (ctx, layer.Surface, 1);
 
+		AsyncEffectRenderer.Settings settings = default;
+
 		if (effect.EffectData != null)
 			effect.EffectData.PropertyChanged += EffectData_PropertyChanged;
 
 		OnStarted (new LivePreviewStartedEventArgs ());
 
-		var settings = new AsyncEffectRenderer.Settings () {
+		settings = new AsyncEffectRenderer.Settings () {
 			ThreadCount = PintaCore.System.RenderThreads,
 			TileWidth = RenderBounds.Width,
 			TileHeight = 1,
@@ -122,10 +126,35 @@ public sealed class LivePreviewManager
 		var source = layer.Surface;
 		var dest = LivePreviewSurface;
 
-		renderer = new Renderer (settings, OnUpdate, OnCompletion);
-		renderer.Start (effect, source, dest, RenderBounds);
+		{
+			int totalTiles = CalculateTotalTiles ();
+			var renderInfos = Enumerable.Range (0, totalTiles).Select (tileIndex => new TileRenderInfo (tileIndex, GetTileBounds (tileIndex))).ToArray ();
+			renderer = new Renderer (settings, OnUpdate, OnCompletion);
+			renderer.Start (effect, source, dest, RenderBounds, renderInfos);
+		}
+
 
 		LaunchConfig ();
+
+		int CalculateTotalTiles ()
+		{
+			return (int) (Math.Ceiling ((float) RenderBounds.Width / (float) settings.TileWidth)
+				* Math.Ceiling ((float) RenderBounds.Height / (float) settings.TileHeight));
+		}
+
+		// Runs on a background thread.
+		RectangleI GetTileBounds (int tileIndex)
+		{
+			int horizTileCount = (int) Math.Ceiling ((float) RenderBounds.Width
+							       / (float) settings.TileWidth);
+
+			int x = ((tileIndex % horizTileCount) * settings.TileWidth) + RenderBounds.X;
+			int y = ((tileIndex / horizTileCount) * settings.TileHeight) + RenderBounds.Y;
+			int w = Math.Min (settings.TileWidth, RenderBounds.Right + 1 - x);
+			int h = Math.Min (settings.TileHeight, RenderBounds.Bottom + 1 - y);
+
+			return new RectangleI (x, y, w, h);
+		}
 
 		// Method asks render task to complete, and then returns immediately. The cancel
 		// is not actually complete until the LivePreviewRenderCompleted event is fired.
@@ -137,7 +166,10 @@ public sealed class LivePreviewManager
 
 			cancel_live_preview_flag = true;
 
-			renderer?.Cancel (sourceSurface, destSurface, RenderBounds);
+			int totalTiles = CalculateTotalTiles ();
+			var renderInfos = Enumerable.Range (0, totalTiles).Select (tileIndex => new AsyncEffectRenderer.TileRenderInfo (tileIndex, GetTileBounds (tileIndex))).ToArray ();
+
+			renderer?.Cancel (sourceSurface, destSurface, RenderBounds, renderInfos);
 
 			// Show a busy cursor, and make the main window insensitive,
 			// until the cancel has completed.
@@ -236,7 +268,9 @@ public sealed class LivePreviewManager
 		void EffectData_PropertyChanged (object? sender, PropertyChangedEventArgs e)
 		{
 			//TODO calculate bounds.
-			renderer!.Start (effect, layer.Surface, LivePreviewSurface, RenderBounds);
+			int totalTiles = CalculateTotalTiles ();
+			var renderInfos = Enumerable.Range (0, totalTiles).Select (tileIndex => new TileRenderInfo (tileIndex, GetTileBounds (tileIndex))).ToArray ();
+			renderer!.Start (effect, layer.Surface, LivePreviewSurface, RenderBounds, renderInfos);
 		}
 
 		void OnUpdate (double progress, RectangleI updatedBounds)

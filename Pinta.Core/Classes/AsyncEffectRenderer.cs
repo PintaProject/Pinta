@@ -103,7 +103,8 @@ internal abstract class AsyncEffectRenderer
 		BaseEffect effect,
 		Cairo.ImageSurface source,
 		Cairo.ImageSurface dest,
-		RectangleI renderBounds)
+		RectangleI renderBounds,
+		IReadOnlyList<TileRenderInfo> renderInfos)
 	{
 		Debug.WriteLine ("AsyncEffectRenderer.Start ()");
 
@@ -119,23 +120,20 @@ internal abstract class AsyncEffectRenderer
 			return;
 		}
 
-		int totalTiles = CalculateTotalTiles (renderBounds);
-		var renderInfos = Enumerable.Range (0, totalTiles).Select (tileIndex => new TileRenderInfo (tileIndex, GetTileBounds (renderBounds, tileIndex))).ToArray ();
 		StartRender (source, dest, renderBounds, renderInfos);
 	}
 
 	internal void Cancel (
 		Cairo.ImageSurface sourceSurface,
 		Cairo.ImageSurface destSurface,
-		RectangleI renderBounds)
+		RectangleI renderBounds,
+		IReadOnlyList<TileRenderInfo> renderInfos)
 	{
 		Debug.WriteLine ("AsyncEffectRenderer.Cancel ()");
 		cancel_render_flag = true;
 		restart_render_flag = false;
 
 		if (!IsRendering) {
-			int totalTiles = CalculateTotalTiles (renderBounds);
-			var renderInfos = Enumerable.Range (0, totalTiles).Select (tileIndex => new TileRenderInfo (tileIndex, GetTileBounds (renderBounds, tileIndex))).ToArray ();
 			HandleRenderCompletion (sourceSurface, destSurface, renderBounds, renderInfos);
 		}
 	}
@@ -225,7 +223,7 @@ internal abstract class AsyncEffectRenderer
 		return newThread;
 	}
 
-	private readonly record struct TileRenderInfo (int TileIndex, RectangleI TileBounds);
+	internal readonly record struct TileRenderInfo (int TileIndex, RectangleI TileBounds);
 
 	// Runs on a background thread.
 	void Render (
@@ -281,26 +279,6 @@ internal abstract class AsyncEffectRenderer
 				render_exceptions.Add (exception);
 			}
 		}
-	}
-
-	// Runs on a background thread.
-	RectangleI GetTileBounds (RectangleI renderBounds, int tileIndex)
-	{
-		int horizTileCount = (int) Math.Ceiling ((float) renderBounds.Width
-						       / (float) settings.TileWidth);
-
-		int x = ((tileIndex % horizTileCount) * settings.TileWidth) + renderBounds.X;
-		int y = ((tileIndex / horizTileCount) * settings.TileHeight) + renderBounds.Y;
-		int w = Math.Min (settings.TileWidth, renderBounds.Right + 1 - x);
-		int h = Math.Min (settings.TileHeight, renderBounds.Bottom + 1 - y);
-
-		return new RectangleI (x, y, w, h);
-	}
-
-	int CalculateTotalTiles (RectangleI renderBounds)
-	{
-		return (int) (Math.Ceiling ((float) renderBounds.Width / (float) settings.TileWidth)
-			* Math.Ceiling ((float) renderBounds.Height / (float) settings.TileHeight));
 	}
 
 	// Called on the UI thread.
