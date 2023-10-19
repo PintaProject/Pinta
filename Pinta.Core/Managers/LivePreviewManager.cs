@@ -78,7 +78,7 @@ public sealed class LivePreviewManager
 		Settings settings,
 		Context ctx,
 		IReadOnlyList<TileRenderInfo> renderInfos);
-	private RenderSettings CreateSettings (BaseEffect effect)
+	private RenderSettings CreateSettings ()
 	{
 		var activeDocument = PintaCore.Workspace.ActiveDocument;
 		Layer layer = activeDocument.Layers.CurrentUserLayer;
@@ -156,7 +156,7 @@ public sealed class LivePreviewManager
 
 		PintaCore.Tools.Commit ();
 
-		RenderSettings settings = CreateSettings (effect);
+		RenderSettings settings = CreateSettings ();
 
 		bool apply_live_preview_flag = false;
 		bool cancel_live_preview_flag = false;
@@ -167,22 +167,22 @@ public sealed class LivePreviewManager
 		history_item.TakeSnapshotOfLayer (settings.activeDocument.Layers.CurrentUserLayerIndex);
 
 		AsyncEffectRenderer renderer = null!;
+		renderer = new Renderer (settings.settings, OnUpdate, OnCompletion);
+
+
+		LivePreviewSurface = settings.livePreviewSurface;
+		RenderBounds = settings.renderBounds;
 
 		// Listen for changes to effectConfiguration object, and restart render if needed.
 		if (effect.EffectData != null)
 			effect.EffectData.PropertyChanged += EffectData_PropertyChanged;
 
-		LivePreviewSurface = settings.livePreviewSurface;
-		RenderBounds = settings.renderBounds;
+		Debug.WriteLine (DateTime.Now.ToString ("HH:mm:ss:ffff") + "Start Live preview.");
 
-		{
-			renderer = new Renderer (settings.settings, OnUpdate, OnCompletion);
+		OnStarted (new LivePreviewStartedEventArgs ());
 
-			// Start rendering.
-			Debug.WriteLine (DateTime.Now.ToString ("HH:mm:ss:ffff") + "Start Live preview.");
-			OnStarted (new LivePreviewStartedEventArgs ());
-			renderer.Start (effect, settings.source, settings.dest, settings.renderInfos);
-		}
+		// Start rendering.
+		renderer.Start (effect, settings.source, settings.dest, settings.renderInfos);
 
 		LaunchConfig ();
 
