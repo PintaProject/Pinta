@@ -89,15 +89,16 @@ public sealed class LivePreviewManager
 		// Handle selection path.
 		var selection = doc.Selection;
 		Cairo.Path? selection_path = (selection.Visible) ? selection.SelectionPath : null;
-		RenderBounds = (selection_path != null) ? selection_path.GetBounds () : LivePreviewSurface.GetBounds ();
-		RenderBounds = PintaCore.Workspace.ClampToImageSize (RenderBounds);
+		var renderBounds = (selection_path != null) ? selection_path.GetBounds () : LivePreviewSurface.GetBounds ();
+		renderBounds = PintaCore.Workspace.ClampToImageSize (renderBounds);
+		RenderBounds = renderBounds;
 
 		var source = layer.Surface;
 		var dest = LivePreviewSurface;
 
 		AsyncEffectRenderer.Settings settings = new AsyncEffectRenderer.Settings () {
 			ThreadCount = PintaCore.System.RenderThreads,
-			TileWidth = RenderBounds.Width,
+			TileWidth = renderBounds.Width,
 			TileHeight = 1,
 			ThreadPriority = ThreadPriority.BelowNormal
 		};
@@ -134,20 +135,20 @@ public sealed class LivePreviewManager
 
 		int CalculateTotalTiles ()
 		{
-			return (int) (Math.Ceiling ((float) RenderBounds.Width / (float) settings.TileWidth)
-				* Math.Ceiling ((float) RenderBounds.Height / (float) settings.TileHeight));
+			return (int) (Math.Ceiling ((float) renderBounds.Width / (float) settings.TileWidth)
+				* Math.Ceiling ((float) renderBounds.Height / (float) settings.TileHeight));
 		}
 
 		// Runs on a background thread.
 		RectangleI GetTileBounds (int tileIndex)
 		{
-			int horizTileCount = (int) Math.Ceiling ((float) RenderBounds.Width
+			int horizTileCount = (int) Math.Ceiling ((float) renderBounds.Width
 							       / (float) settings.TileWidth);
 
-			int x = ((tileIndex % horizTileCount) * settings.TileWidth) + RenderBounds.X;
-			int y = ((tileIndex / horizTileCount) * settings.TileHeight) + RenderBounds.Y;
-			int w = Math.Min (settings.TileWidth, RenderBounds.Right + 1 - x);
-			int h = Math.Min (settings.TileHeight, RenderBounds.Bottom + 1 - y);
+			int x = ((tileIndex % horizTileCount) * settings.TileWidth) + renderBounds.X;
+			int y = ((tileIndex / horizTileCount) * settings.TileHeight) + renderBounds.Y;
+			int w = Math.Min (settings.TileWidth, renderBounds.Right + 1 - x);
+			int h = Math.Min (settings.TileHeight, renderBounds.Bottom + 1 - y);
 
 			return new RectangleI (x, y, w, h);
 		}
