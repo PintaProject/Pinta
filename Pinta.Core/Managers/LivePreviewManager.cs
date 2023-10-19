@@ -158,9 +158,7 @@ public sealed class LivePreviewManager
 
 		// Method asks render task to complete, and then returns immediately. The cancel
 		// is not actually complete until the LivePreviewRenderCompleted event is fired.
-		void Cancel (
-			Cairo.ImageSurface sourceSurface,
-			Cairo.ImageSurface destSurface)
+		void Cancel ()
 		{
 			Debug.WriteLine (DateTime.Now.ToString ("HH:mm:ss:ffff") + " LivePreviewManager.Cancel()");
 
@@ -169,7 +167,7 @@ public sealed class LivePreviewManager
 			int totalTiles = CalculateTotalTiles ();
 			var renderInfos = Enumerable.Range (0, totalTiles).Select (tileIndex => new AsyncEffectRenderer.TileRenderInfo (tileIndex, GetTileBounds (tileIndex))).ToArray ();
 
-			renderer?.Cancel (sourceSurface, destSurface, RenderBounds, renderInfos);
+			renderer?.Cancel (source!, dest!, RenderBounds, renderInfos);
 
 			// Show a busy cursor, and make the main window insensitive,
 			// until the cancel has completed.
@@ -181,7 +179,7 @@ public sealed class LivePreviewManager
 
 		void HandleProgressDialogCancel (object? o, EventArgs? e)
 		{
-			Cancel (layer.Surface, LivePreviewSurface);
+			Cancel ();
 		}
 
 		void Apply ()
@@ -315,7 +313,7 @@ public sealed class LivePreviewManager
 			handler = (_, args) => {
 				if (!args.Accepted) {
 					PintaCore.Chrome.MainWindowBusy = true;
-					Cancel (source, dest);
+					Cancel ();
 				} else {
 					PintaCore.Chrome.MainWindowBusy = true;
 					Apply ();
