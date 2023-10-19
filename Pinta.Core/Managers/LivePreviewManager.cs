@@ -168,10 +168,10 @@ public sealed class LivePreviewManager
 		bool apply_live_preview_flag = false;
 		bool cancel_live_preview_flag = false;
 
-		settings.currentUserLayer.Draw (settings.ctx, settings.currentUserLayer.Surface, 1);
-
 		SimpleHistoryItem history_item = new SimpleHistoryItem (effect.Icon, effect.Name);
 		history_item.TakeSnapshotOfLayer (settings.activeDocument.Layers.CurrentUserLayerIndex);
+
+		settings.currentUserLayer.Draw (settings.ctx, settings.currentUserLayer.Surface, 1);
 
 		AsyncEffectRenderer renderer = null!;
 		renderer = new Renderer (settings.settings, OnUpdate, OnCompletion);
