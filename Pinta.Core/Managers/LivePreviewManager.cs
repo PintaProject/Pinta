@@ -78,12 +78,6 @@ public sealed class LivePreviewManager
 		var doc = PintaCore.Workspace.ActiveDocument;
 		Layer layer = doc.Layers.CurrentUserLayer;
 
-		// Handle selection path.
-		var selection = doc.Selection;
-		Cairo.Path? selection_path = (selection.Visible) ? selection.SelectionPath : null;
-		RenderBounds = (selection_path != null) ? selection_path.GetBounds () : LivePreviewSurface.GetBounds ();
-		RenderBounds = PintaCore.Workspace.ClampToImageSize (RenderBounds);
-
 		// Create live preview surface.
 		//TODO Use the current tool layer instead.
 		LivePreviewSurface = CairoExtensions.CreateImageSurface (
@@ -91,6 +85,12 @@ public sealed class LivePreviewManager
 			PintaCore.Workspace.ImageSize.Width,
 			PintaCore.Workspace.ImageSize.Height
 		);
+
+		// Handle selection path.
+		var selection = doc.Selection;
+		Cairo.Path? selection_path = (selection.Visible) ? selection.SelectionPath : null;
+		RenderBounds = (selection_path != null) ? selection_path.GetBounds () : LivePreviewSurface.GetBounds ();
+		RenderBounds = PintaCore.Workspace.ClampToImageSize (RenderBounds);
 
 		var source = layer.Surface;
 		var dest = LivePreviewSurface;
