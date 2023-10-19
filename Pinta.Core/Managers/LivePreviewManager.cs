@@ -71,16 +71,18 @@ public sealed class LivePreviewManager
 		if (IsEnabled)
 			throw new InvalidOperationException ("LivePreviewManager.Start() called while live preview is already enabled.");
 
-		var doc = PintaCore.Workspace.ActiveDocument;
-
 		IsEnabled = true;
 
-		bool apply_live_preview_flag = false;
-		bool cancel_live_preview_flag = false;
+		PintaCore.Tools.Commit ();
 
-		AsyncEffectRenderer renderer = null!;
-
+		var doc = PintaCore.Workspace.ActiveDocument;
 		Layer layer = doc.Layers.CurrentUserLayer;
+
+		// Handle selection path.
+		var selection = doc.Selection;
+		Cairo.Path? selection_path = (selection.Visible) ? selection.SelectionPath : null;
+		RenderBounds = (selection_path != null) ? selection_path.GetBounds () : LivePreviewSurface.GetBounds ();
+		RenderBounds = PintaCore.Workspace.ClampToImageSize (RenderBounds);
 
 		// Create live preview surface.
 		//TODO Use the current tool layer instead.
@@ -90,39 +92,31 @@ public sealed class LivePreviewManager
 			PintaCore.Workspace.ImageSize.Height
 		);
 
-		// Handle selection path.
-		PintaCore.Tools.Commit ();
-		var selection = doc.Selection;
-		Cairo.Path? selection_path = (selection.Visible) ? selection.SelectionPath : null;
-		RenderBounds = (selection_path != null) ? selection_path.GetBounds () : LivePreviewSurface.GetBounds ();
-		RenderBounds = PintaCore.Workspace.ClampToImageSize (RenderBounds);
+		var source = layer.Surface;
+		var dest = LivePreviewSurface;
 
-		SimpleHistoryItem history_item = new SimpleHistoryItem (effect.Icon, effect.Name);
-		history_item.TakeSnapshotOfLayer (doc.Layers.CurrentUserLayerIndex);
-
-		// Paint the pre-effect layer surface into into the working surface.
-		var ctx = new Cairo.Context (LivePreviewSurface);
-		layer.Draw (ctx, layer.Surface, 1);
-
-		AsyncEffectRenderer.Settings settings = default;
-
-		// Listen for changes to effectConfiguration object, and restart render if needed.
-		if (effect.EffectData != null)
-			effect.EffectData.PropertyChanged += EffectData_PropertyChanged;
-
-		OnStarted (new LivePreviewStartedEventArgs ());
-
-		settings = new AsyncEffectRenderer.Settings () {
+		AsyncEffectRenderer.Settings settings = new AsyncEffectRenderer.Settings () {
 			ThreadCount = PintaCore.System.RenderThreads,
 			TileWidth = RenderBounds.Width,
 			TileHeight = 1,
 			ThreadPriority = ThreadPriority.BelowNormal
 		};
 
-		Debug.WriteLine (DateTime.Now.ToString ("HH:mm:ss:ffff") + "Start Live preview.");
+		// Paint the pre-effect layer surface into into the working surface.
+		var ctx = new Cairo.Context (LivePreviewSurface);
+		layer.Draw (ctx, layer.Surface, 1);
 
-		var source = layer.Surface;
-		var dest = LivePreviewSurface;
+		bool apply_live_preview_flag = false;
+		bool cancel_live_preview_flag = false;
+
+		SimpleHistoryItem history_item = new SimpleHistoryItem (effect.Icon, effect.Name);
+		history_item.TakeSnapshotOfLayer (doc.Layers.CurrentUserLayerIndex);
+
+		AsyncEffectRenderer renderer = null!;
+
+		// Listen for changes to effectConfiguration object, and restart render if needed.
+		if (effect.EffectData != null)
+			effect.EffectData.PropertyChanged += EffectData_PropertyChanged;
 
 		{
 			int totalTiles = CalculateTotalTiles ();
@@ -130,6 +124,8 @@ public sealed class LivePreviewManager
 			renderer = new Renderer (settings, OnUpdate, OnCompletion);
 
 			// Start rendering.
+			Debug.WriteLine (DateTime.Now.ToString ("HH:mm:ss:ffff") + "Start Live preview.");
+			OnStarted (new LivePreviewStartedEventArgs ());
 			renderer.Start (effect, source, dest, renderInfos);
 		}
 
@@ -303,12 +299,21 @@ public sealed class LivePreviewManager
 
 		void LaunchConfig ()
 		{
-			if (!effect.IsConfigurable) {
-				PintaCore.Chrome.MainWindowBusy = true;
-				Apply ();
-				return;
-			}
+			if (effect.IsConfigurable)
+				HandleConfigurable ();
+			else
+				HandleNotConfigurable ();
+		}
 
+		void HandleNotConfigurable ()
+		{
+			PintaCore.Chrome.MainWindowBusy = true;
+			Apply ();
+			return;
+		}
+
+		void HandleConfigurable ()
+		{
 			EventHandler<BaseEffect.ConfigDialogResponseEventArgs>? handler = null;
 			handler = (_, args) => {
 				if (!args.Accepted) {
