@@ -26,9 +26,20 @@ public abstract class ColorMapping
 		);
 	}
 
+	public static ColorGradient Gradient (double startPosition, double endPosition)
+	{
+		return new (
+			DefaultStartColor (),
+			DefaultEndColor (),
+			startPosition,
+			endPosition,
+			EmptyStops ()
+		);
+	}
+
 	public static ColorGradient Gradient (ColorBgra start, ColorBgra end)
 	{
-		return new ColorGradient (
+		return new (
 			start,
 			end,
 			DefaultMinimumValue (),
@@ -39,7 +50,7 @@ public abstract class ColorMapping
 
 	public static ColorGradient Gradient (ColorBgra start, ColorBgra end, double minimum, double maximum)
 	{
-		return new ColorGradient (
+		return new (
 			start,
 			end,
 			minimum,
@@ -50,7 +61,7 @@ public abstract class ColorMapping
 
 	public static ColorGradient Gradient (ColorBgra start, ColorBgra end, double minimum, double maximum, IEnumerable<KeyValuePair<double, ColorBgra>> stops)
 	{
-		return new ColorGradient (
+		return new (
 			start,
 			end,
 			minimum,
