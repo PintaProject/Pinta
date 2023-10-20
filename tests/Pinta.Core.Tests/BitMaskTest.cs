@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Linq.Expressions;
 using NUnit.Framework;
 
 namespace Pinta.Core.Tests;
@@ -158,6 +159,299 @@ internal sealed class BitMaskTest
 		}
 	}
 
+	[TestCaseSource (nameof (vertical_flip_cases))]
+	public void VerticalFlip (BitMask mask, IReadOnlyDictionary<PointI, bool> checksAfter)
+	{
+		var clone = mask.Clone ();
+		clone.FlipVertical ();
+		foreach (var kvp in checksAfter)
+			Assert.AreEqual (clone[kvp.Key], kvp.Value);
+	}
+
+	[TestCaseSource (nameof (horizontal_flip_cases))]
+	public void HorizontalFlip (BitMask mask, IReadOnlyDictionary<PointI, bool> checksAfter)
+	{
+		var clone = mask.Clone ();
+		clone.FlipHorizontal ();
+		foreach (var kvp in checksAfter)
+			Assert.AreEqual (clone[kvp.Key], kvp.Value);
+	}
+
+	[TestCaseSource (nameof (and_cases))]
+	public void And (BitMask left, BitMask right, IReadOnlyDictionary<PointI, bool> checksAfter)
+	{
+		var leftClone = left.Clone ();
+		leftClone.And (right);
+		foreach (var kvp in checksAfter)
+			Assert.AreEqual (leftClone[kvp.Key], kvp.Value);
+	}
+
+	[TestCaseSource (nameof (or_cases))]
+	public void Or (BitMask left, BitMask right, IReadOnlyDictionary<PointI, bool> checksAfter)
+	{
+		var leftClone = left.Clone ();
+		leftClone.Or (right);
+		foreach (var kvp in checksAfter)
+			Assert.AreEqual (leftClone[kvp.Key], kvp.Value);
+	}
+
+	[TestCaseSource (nameof (xor_cases))]
+	public void Xor (BitMask left, BitMask right, IReadOnlyDictionary<PointI, bool> checksAfter)
+	{
+		var leftClone = left.Clone ();
+		leftClone.Xor (right);
+		foreach (var kvp in checksAfter)
+			Assert.AreEqual (leftClone[kvp.Key], kvp.Value);
+	}
+
+	static readonly IReadOnlyList<TestCaseData> xor_cases = CreateXorCases ().ToArray ();
+	static IEnumerable<TestCaseData> CreateXorCases ()
+	{
+		PointI topLeft = new (0, 0);
+		BitMask topLeftEnabled = new (2, 2);
+		topLeftEnabled[topLeft] = true;
+
+		PointI topRight = new (1, 0);
+		BitMask topRightEnabled = new (2, 2);
+		topRightEnabled[topRight] = true;
+
+		PointI bottomLeft = new (0, 1);
+		BitMask bottomLeftEnabled = new (2, 2);
+		bottomLeftEnabled[bottomLeft] = true;
+
+		PointI bottomRight = new (1, 1);
+		BitMask bottomRightEnabled = new (2, 2);
+		bottomRightEnabled[bottomRight] = true;
+
+		yield return new (
+			topLeftEnabled,
+			topRightEnabled,
+			new Dictionary<PointI, bool> {
+				[topLeft] = true,
+				[topRight] = true,
+				[bottomLeft] = false,
+				[bottomRight] = false,
+			}
+		);
+
+		yield return new (
+			topLeftEnabled,
+			bottomLeftEnabled,
+			new Dictionary<PointI, bool> {
+				[topLeft] = true,
+				[topRight] = false,
+				[bottomLeft] = true,
+				[bottomRight] = false,
+			}
+		);
+
+		yield return new (
+			topLeftEnabled,
+			bottomRightEnabled,
+			new Dictionary<PointI, bool> {
+				[topLeft] = true,
+				[topRight] = false,
+				[bottomLeft] = false,
+				[bottomRight] = true,
+			}
+		);
+
+		yield return new (
+			topLeftEnabled,
+			topLeftEnabled,
+			new Dictionary<PointI, bool> {
+				[topLeft] = false,
+				[topRight] = false,
+				[bottomLeft] = false,
+				[bottomRight] = false,
+			}
+		);
+	}
+
+	static readonly IReadOnlyList<TestCaseData> or_cases = CreateOrCases ().ToArray ();
+	static IEnumerable<TestCaseData> CreateOrCases ()
+	{
+		PointI topLeft = new (0, 0);
+		BitMask topLeftEnabled = new (2, 2);
+		topLeftEnabled[topLeft] = true;
+
+		PointI topRight = new (1, 0);
+		BitMask topRightEnabled = new (2, 2);
+		topRightEnabled[topRight] = true;
+
+		PointI bottomLeft = new (0, 1);
+		BitMask bottomLeftEnabled = new (2, 2);
+		bottomLeftEnabled[bottomLeft] = true;
+
+		PointI bottomRight = new (1, 1);
+		BitMask bottomRightEnabled = new (2, 2);
+		bottomRightEnabled[bottomRight] = true;
+
+		yield return new (
+			topLeftEnabled,
+			topRightEnabled,
+			new Dictionary<PointI, bool> {
+				[topLeft] = true,
+				[topRight] = true,
+				[bottomLeft] = false,
+				[bottomRight] = false,
+			}
+		);
+
+		yield return new (
+			topLeftEnabled,
+			bottomLeftEnabled,
+			new Dictionary<PointI, bool> {
+				[topLeft] = true,
+				[topRight] = false,
+				[bottomLeft] = true,
+				[bottomRight] = false,
+			}
+		);
+
+		yield return new (
+			topLeftEnabled,
+			bottomRightEnabled,
+			new Dictionary<PointI, bool> {
+				[topLeft] = true,
+				[topRight] = false,
+				[bottomLeft] = false,
+				[bottomRight] = true,
+			}
+		);
+
+		yield return new (
+			topLeftEnabled,
+			topLeftEnabled,
+			new Dictionary<PointI, bool> {
+				[topLeft] = true,
+				[topRight] = false,
+				[bottomLeft] = false,
+				[bottomRight] = false,
+			}
+		);
+	}
+
+	static readonly IReadOnlyList<TestCaseData> and_cases = CreateAndCases ().ToArray ();
+	static IEnumerable<TestCaseData> CreateAndCases ()
+	{
+		PointI topLeft = new (0, 0);
+		BitMask topLeftEnabled = new (2, 2);
+		topLeftEnabled[topLeft] = true;
+
+		PointI topRight = new (1, 0);
+		BitMask topRightEnabled = new (2, 2);
+		topRightEnabled[topRight] = true;
+
+		PointI bottomLeft = new (0, 1);
+		BitMask bottomLeftEnabled = new (2, 2);
+		bottomLeftEnabled[bottomLeft] = true;
+
+		PointI bottomRight = new (1, 1);
+		BitMask bottomRightEnabled = new (2, 2);
+		bottomRightEnabled[bottomRight] = true;
+
+		BitMask biggerAllEnabled = new (3, 3);
+		biggerAllEnabled.Clear (true);
+
+		BitMask smallerEnabled = new (1, 1);
+		smallerEnabled.Clear (true);
+
+		yield return new (
+			topLeftEnabled,
+			topRightEnabled,
+			new Dictionary<PointI, bool> {
+				[topLeft] = false,
+				[topRight] = false,
+				[bottomLeft] = false,
+				[bottomRight] = false,
+			}
+		);
+
+		yield return new (
+			topLeftEnabled,
+			bottomLeftEnabled,
+			new Dictionary<PointI, bool> {
+				[topLeft] = false,
+				[topRight] = false,
+				[bottomLeft] = false,
+				[bottomRight] = false,
+			}
+		);
+
+		yield return new (
+			topLeftEnabled,
+			bottomRightEnabled,
+			new Dictionary<PointI, bool> {
+				[topLeft] = false,
+				[topRight] = false,
+				[bottomLeft] = false,
+				[bottomRight] = false,
+			}
+		);
+
+		yield return new (
+			topLeftEnabled,
+			topLeftEnabled,
+			new Dictionary<PointI, bool> {
+				[topLeft] = true,
+				[topRight] = false,
+				[bottomLeft] = false,
+				[bottomRight] = false,
+			}
+		);
+
+		yield return new (
+			bottomLeftEnabled,
+			biggerAllEnabled,
+			new Dictionary<PointI, bool> {
+				[topLeft] = false,
+				[topRight] = false,
+				[bottomLeft] = true,
+				[bottomRight] = false,
+			}
+		);
+
+		yield return new (
+			bottomLeftEnabled,
+			smallerEnabled,
+			new Dictionary<PointI, bool> {
+				[topLeft] = false,
+				[topRight] = false,
+				[bottomLeft] = true,
+				[bottomRight] = false,
+			}
+		);
+	}
+
+	static readonly IReadOnlyList<TestCaseData> vertical_flip_cases = CreateVerticalFlipCases ().ToArray ();
+	static IEnumerable<TestCaseData> CreateVerticalFlipCases ()
+	{
+		BitMask topLeftEnabled = new (2, 2);
+		topLeftEnabled[0, 0] = true;
+		yield return new (
+			topLeftEnabled,
+			new Dictionary<PointI, bool> {
+				[new (0, 0)] = false,
+				[new (0, 1)] = true,
+			}
+		);
+	}
+
+	static readonly IReadOnlyList<TestCaseData> horizontal_flip_cases = CreateHorizontalFlipCases ().ToArray ();
+	static IEnumerable<TestCaseData> CreateHorizontalFlipCases ()
+	{
+		BitMask topLeftEnabled = new (2, 2);
+		topLeftEnabled[0, 0] = true;
+		yield return new (
+			topLeftEnabled,
+			new Dictionary<PointI, bool> {
+				[new (0, 0)] = false,
+				[new (1, 0)] = true,
+			}
+		);
+	}
+
 	static readonly IReadOnlyList<TestCaseData> scanline_invert_test_cases = CreateScanlineInvertTestCases ().ToArray ();
 	static IEnumerable<TestCaseData> CreateScanlineInvertTestCases ()
 	{
@@ -175,17 +469,17 @@ internal sealed class BitMaskTest
 			[new (4, 0)] = false,
 			[new (0, 1)] = false,
 		};
-		yield return new TestCaseData (WIDTH, HEIGHT, singleTopLeftSequence, singleTopLeftChangedChecks);
-		yield return new TestCaseData (WIDTH, HEIGHT, singleTopLeftSequence, singleTopLeftOutOfRangeChecks);
+		yield return new (WIDTH, HEIGHT, singleTopLeftSequence, singleTopLeftChangedChecks);
+		yield return new (WIDTH, HEIGHT, singleTopLeftSequence, singleTopLeftOutOfRangeChecks);
 
 		var doubleTopLeftSequence = Enumerable.Repeat (topLeftLine, 2);
 		var doubleTopLeftChecks = singleTopLeftChangedChecks.ToDictionary (kvp => kvp.Key, kvp => !kvp.Value);
-		yield return new TestCaseData (WIDTH, HEIGHT, doubleTopLeftSequence, doubleTopLeftChecks);
-		yield return new TestCaseData (WIDTH, HEIGHT, doubleTopLeftSequence, singleTopLeftOutOfRangeChecks);
+		yield return new (WIDTH, HEIGHT, doubleTopLeftSequence, doubleTopLeftChecks);
+		yield return new (WIDTH, HEIGHT, doubleTopLeftSequence, singleTopLeftOutOfRangeChecks);
 
 		var singlePixelSequence = new[] { new Scanline (DEFAULT_WIDTH_INDEX, DEFAULT_HEIGHT_INDEX, 1) };
 		var singlePixelChecks = new Dictionary<PointI, bool> { [new (DEFAULT_WIDTH_INDEX, DEFAULT_HEIGHT_INDEX)] = true };
-		yield return new TestCaseData (DEFAULT_WIDTH, DEFAULT_HEIGHT, singlePixelSequence, singlePixelChecks);
+		yield return new (DEFAULT_WIDTH, DEFAULT_HEIGHT, singlePixelSequence, singlePixelChecks);
 	}
 
 	static readonly IReadOnlyList<TestCaseData> rectangle_set_test_cases = CreateRectangleSetTestCases ().ToArray ();
@@ -204,7 +498,7 @@ internal sealed class BitMaskTest
 			[new (1, 1)] = true,
 			[new (2, 2)] = false,
 		};
-		yield return new TestCaseData (WIDTH, HEIGHT, topLeftAreaSequence, topLeftChecks);
+		yield return new (WIDTH, HEIGHT, topLeftAreaSequence, topLeftChecks);
 
 		RectangleI bottomRightArea = new (2, 2, 2, 2);
 		var bottomRightAreaSequence = new[] { KeyValuePair.Create (bottomRightArea, true) };
@@ -216,7 +510,7 @@ internal sealed class BitMaskTest
 			[new (1, 1)] = false,
 			[new (2, 2)] = true,
 		};
-		yield return new TestCaseData (WIDTH, HEIGHT, bottomRightAreaSequence, bottomRightChecks);
+		yield return new (WIDTH, HEIGHT, bottomRightAreaSequence, bottomRightChecks);
 	}
 
 	static readonly IReadOnlyList<TestCaseData> out_of_bounds_access_cases = new TestCaseData[]

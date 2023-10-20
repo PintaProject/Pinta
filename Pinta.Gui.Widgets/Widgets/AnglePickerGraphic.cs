@@ -13,10 +13,10 @@ using Pinta.Core;
 
 namespace Pinta.Gui.Widgets;
 
-public class AnglePickerGraphic : Gtk.DrawingArea
+public sealed class AnglePickerGraphic : Gtk.DrawingArea
 {
 	private PointD drag_start;
-	private double angle_value;
+	private DegreesAngle angle_value;
 
 	public AnglePickerGraphic ()
 	{
@@ -43,25 +43,13 @@ public class AnglePickerGraphic : Gtk.DrawingArea
 		ValueChanged += (_, _) => QueueDraw ();
 	}
 
-	public int Value {
-		get => (int) angle_value;
-		set {
-			var v = value % 360;
-			if (angle_value != v) {
-				angle_value = v;
-				OnValueChanged ();
-			}
-		}
-	}
-
-	public double ValueDouble {
+	public DegreesAngle Value {
 		get => angle_value;
 		set {
-			//double v = Math.IEEERemainder (value, 360.0);
-			if (angle_value != value) {
-				angle_value = value;
-				OnValueChanged ();
-			}
+			if (angle_value == value)
+				return;
+			angle_value = value;
+			OnValueChanged ();
 		}
 	}
 
@@ -73,6 +61,11 @@ public class AnglePickerGraphic : Gtk.DrawingArea
 	}
 
 	private void ProcessMouseEvent (PointD pt, bool constrainAngle)
+	{
+		Value = CalculateNewAngle (pt, constrainAngle);
+	}
+
+	private DegreesAngle CalculateNewAngle (PointD pt, bool constrainAngle)
 	{
 		var rect = GetDrawBounds ();
 		var diameter = Math.Min (rect.Width, rect.Height);
@@ -106,10 +99,16 @@ public class AnglePickerGraphic : Gtk.DrawingArea
 			newAngle = bestMultiple * constraintAngle;
 		}
 
-		ValueDouble = newAngle;
+		return new (newAngle);
 	}
 
-	private void Draw (Context g)
+	private readonly record struct AngleGraphicSettings (
+		RectangleD ellipseOutlineRect,
+		Color color,
+		RectangleD gripEllipseRect,
+		PointD center,
+		PointD endPoint);
+	private AngleGraphicSettings CreateSettings ()
 	{
 		GetStyleContext ().GetColor (out var color);
 
@@ -119,27 +118,37 @@ public class AnglePickerGraphic : Gtk.DrawingArea
 
 		var center = new PointD (rect.X + radius, rect.Y + radius);
 
-		var theta = (angle_value * 2.0 * Math.PI) / 360.0;
+		var theta = (angle_value.Degrees * 2.0 * Math.PI) / 360.0;
 
 		var ellipseRect = new RectangleD (0, 0, diameter, diameter);
-		var ellipseOutlineRect = ellipseRect;
-
-		g.DrawEllipse (ellipseOutlineRect, color, 1);
 
 		var endPointRadius = radius - 2;
 
 		var endPoint = new PointD (
-		    (float) (center.X + (endPointRadius * Math.Cos (theta))),
-		    (float) (center.Y - (endPointRadius * Math.Sin (theta))));
+			X: (float) (center.X + (endPointRadius * Math.Cos (theta))),
+			Y: (float) (center.Y - (endPointRadius * Math.Sin (theta)))
+		);
 
-		var gripSize = 2.5f;
-		var gripEllipseRect = new RectangleD (center.X - gripSize, center.Y - gripSize, gripSize * 2, gripSize * 2);
+		const float gripSize = 2.5f;
 
-		g.FillEllipse (gripEllipseRect, color);
-		g.DrawLine (center, endPoint, color, 1);
+		return new (
+			ellipseOutlineRect: ellipseRect,
+			color: color,
+			gripEllipseRect: new RectangleD (center.X - gripSize, center.Y - gripSize, gripSize * 2, gripSize * 2),
+			center: center,
+			endPoint: endPoint
+		);
+	}
+
+	private void Draw (Context g)
+	{
+		AngleGraphicSettings settings = CreateSettings ();
+		g.DrawEllipse (settings.ellipseOutlineRect, settings.color, 1);
+		g.FillEllipse (settings.gripEllipseRect, settings.color);
+		g.DrawLine (settings.center, settings.endPoint, settings.color, 1);
 	}
 
 	public event EventHandler? ValueChanged;
 
-	protected virtual void OnValueChanged () => ValueChanged?.Invoke (this, EventArgs.Empty);
+	private void OnValueChanged () => ValueChanged?.Invoke (this, EventArgs.Empty);
 }

@@ -113,7 +113,7 @@ internal sealed class MainClass
 		};
 
 		// Run with a SynchronizationContext to integrate async methods with GLib.MainLoop.
-		app.RunWithSynchronizationContext ();
+		app.RunWithSynchronizationContext (null);
 	}
 
 	private static void OpenFilesFromCommandLine (IEnumerable<string> files)

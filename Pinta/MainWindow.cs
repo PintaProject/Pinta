@@ -88,7 +88,7 @@ public sealed class MainWindow
 		PintaCore.Actions.App.BeforeQuit += delegate { SaveUserSettings (); };
 
 		// We support drag and drop for URIs, which are converted into a Gdk.FileList.
-		drop_target = Gtk.DropTarget.New (GdkExtensions.GetFileListGType (), Gdk.DragAction.Copy);
+		drop_target = Gtk.DropTarget.New (Gdk.FileList.GetGType (), Gdk.DragAction.Copy);
 		drop_target.OnDrop += HandleDrop;
 		window_shell.Window.AddController (drop_target);
 
@@ -495,10 +495,10 @@ public sealed class MainWindow
 
 	private bool HandleDrop (DropTarget sender, DropTarget.DropSignalArgs args)
 	{
-		if (args.Value.GetBoxed (GdkExtensions.GetFileListGType ()) is not Gdk.FileList file_list)
+		if (args.Value.GetBoxed (Gdk.FileList.GetGType ()) is not Gdk.FileList file_list)
 			return false;
 
-		foreach (Gio.File file in file_list.GetFiles ()) {
+		foreach (Gio.File file in file_list.GetFilesHelper ()) {
 			PintaCore.Workspace.OpenFile (file);
 
 			if (file.GetUriScheme () is string scheme &&

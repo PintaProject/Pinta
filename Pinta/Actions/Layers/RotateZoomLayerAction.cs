@@ -88,7 +88,7 @@ public sealed class RotateZoomLayerAction : IActionHandler
 		var center_y = image_size.Height / 2.0;
 
 		xform.Translate ((1 + data.Pan.X) * center_x, (1 + data.Pan.Y) * center_y);
-		xform.Rotate ((-data.Angle / 180d) * Math.PI);
+		xform.Rotate ((-data.Angle.Degrees / 180d) * Math.PI);
 		xform.Scale (data.Zoom, data.Zoom);
 		xform.Translate (-center_x, -center_y);
 
@@ -110,18 +110,18 @@ public sealed class RotateZoomLayerAction : IActionHandler
 		    Translations.GetString ("Rotate / Zoom Layer"), old_surf, doc.Layers.CurrentUserLayerIndex));
 	}
 
-	private class RotateZoomData : EffectData
+	private sealed class RotateZoomData : EffectData
 	{
 		[Caption ("Angle")]
-		public double Angle = 0;
+		public DegreesAngle Angle { get; set; } = new (0);
 
 		[Caption ("Pan")]
-		public PointD Pan = new (0, 0);
+		public PointD Pan { get; set; } = new (0, 0);
 
 		[Caption ("Zoom"), MinimumValue (0), MaximumValue (16)]
-		public double Zoom = 1.0;
+		public double Zoom { get; set; } = 1.0;
 
-		public override bool IsDefault => Angle == 0 && Pan.X == 0.0 && Pan.Y == 0.0 && Zoom == 1.0;
+		public override bool IsDefault => Angle.Degrees == 0 && Pan.X == 0.0 && Pan.Y == 0.0 && Zoom == 1.0;
 	}
 }
 

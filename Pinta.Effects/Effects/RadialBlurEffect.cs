@@ -52,7 +52,7 @@ public sealed class RadialBlurEffect : BaseEffect
 
 	public override void Render (ImageSurface src, ImageSurface dst, ReadOnlySpan<RectangleI> rois)
 	{
-		if (Data.Angle == 0) {
+		if (Data.Angle.Degrees == 0) {
 			// Copy src to dest
 			return;
 		}
@@ -65,7 +65,7 @@ public sealed class RadialBlurEffect : BaseEffect
 
 		int n = (Data.Quality * Data.Quality) * (30 + Data.Quality * Data.Quality);
 
-		int fr = (int) (Data.Angle * Math.PI * 65536.0 / 181.0);
+		int fr = (int) (Data.Angle.Degrees * Math.PI * 65536.0 / 181.0);
 
 		var dst_data = dst.GetPixelData ();
 		var src_data = src.GetReadOnlyPixelData ();
@@ -144,7 +144,7 @@ public sealed class RadialBlurEffect : BaseEffect
 	public sealed class RadialBlurData : EffectData
 	{
 		[Caption ("Angle")]
-		public Double Angle { get; set; } = 2;
+		public DegreesAngle Angle { get; set; } = new (2);
 
 		[Caption ("Offset")]
 		public PointD Offset { get; set; } = new (0, 0);
@@ -154,6 +154,6 @@ public sealed class RadialBlurEffect : BaseEffect
 		public int Quality { get; set; } = 2;
 
 		[Skip]
-		public override bool IsDefault => Angle == 0;
+		public override bool IsDefault => Angle.Degrees == 0;
 	}
 }

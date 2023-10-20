@@ -36,17 +36,17 @@ public sealed class DocumentSelection
 {
 	private Path? selection_path;
 
-	public List<List<IntPoint>> SelectionPolygons = new ();
+	public List<List<IntPoint>> SelectionPolygons { get; set; } = new ();
 	public Clipper SelectionClipper { get; } = new ();
 
-	public PointD Origin;
-	public PointD End;
+	public PointD Origin { get; set; }
+	public PointD End { get; set; }
 
-	private bool _visible = true;
+	private bool visible = true;
 	public bool Visible {
-		get => _visible;
+		get => visible;
 		set {
-			_visible = value;
+			visible = value;
 
 			// Notify any listeners.
 			SelectionModified?.Invoke (this, EventArgs.Empty);
@@ -122,7 +122,7 @@ public sealed class DocumentSelection
 			SelectionPolygons = SelectionPolygons.ToList (),
 			Origin = new PointD (Origin.X, Origin.Y),
 			End = new PointD (End.X, End.Y),
-			_visible = this._visible
+			visible = this.visible
 		};
 	}
 
@@ -201,7 +201,7 @@ public sealed class DocumentSelection
 			SelectionPolygons = newPolygons,
 			Origin = origin,
 			End = end,
-			_visible = this._visible
+			visible = this.visible
 		};
 	}
 
@@ -231,15 +231,15 @@ public sealed class DocumentSelection
 		double tInterval = 1d / (r.Width + r.Height);
 
 		//Create a new Polygon to store the upcoming ellipse.
-		List<IntPoint> newPolygon = new List<IntPoint> ();
+		List<IntPoint> newPolygon = new List<IntPoint> {
+			//These values were also calculated in the CreateEllipsePath method. This is where
+			//the ellipse's 4 curves (and all of the Points on each curve) are determined.
+			//Note: each curve is consecutive to the previous one, but they *do not* overlap,
+			//other than the first/last Point (which is how it is supposed to work).
 
-		//These values were also calculated in the CreateEllipsePath method. This is where
-		//the ellipse's 4 curves (and all of the Points on each curve) are determined.
-		//Note: each curve is consecutive to the previous one, but they *do not* overlap,
-		//other than the first/last Point (which is how it is supposed to work).
-
-		//The starting Point.
-		newPolygon.Add (new IntPoint ((long) (cx + rx), (long) cy));
+			//The starting Point.
+			new IntPoint ((long) (cx + rx), (long) cy)
+		};
 
 		//Curve 1.
 		newPolygon.AddRange (CalculateCurvePoints (tInterval,
@@ -392,12 +392,12 @@ public sealed class DocumentSelection
 		// the first corner again. It is important to note that the order of the
 		// corners being added (clockwise) and the first/last Point being the same
 		// should be kept this way; otherwise, problems could result.
-		List<IntPoint> newPolygon = new List<IntPoint> () {
-			new IntPoint(corner1X, corner1Y),
-			new IntPoint(corner2X, corner1Y),
-			new IntPoint(corner2X, corner2Y),
-			new IntPoint(corner1X, corner2Y),
-			new IntPoint(corner1X, corner1Y)
+		List<IntPoint> newPolygon = new () {
+			new (corner1X, corner1Y),
+			new (corner2X, corner1Y),
+			new (corner2X, corner2Y),
+			new (corner1X, corner2Y),
+			new (corner1X, corner1Y)
 		};
 
 		return newPolygon;

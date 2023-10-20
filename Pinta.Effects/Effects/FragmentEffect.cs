@@ -62,7 +62,7 @@ public sealed class FragmentEffect : BaseEffect
 
 	public override void Render (ImageSurface src, ImageSurface dst, ReadOnlySpan<RectangleI> rois)
 	{
-		var pointOffsets = RecalcPointOffsets (Data.Fragments, Data.Rotation, Data.Distance);
+		var pointOffsets = RecalcPointOffsets (Data.Fragments, Data.Rotation.Degrees, Data.Distance);
 
 		int poLength = pointOffsets.Length;
 		Span<Core.PointI> pointOffsetsPtr = stackalloc Core.PointI[poLength];
@@ -111,6 +111,6 @@ public sealed class FragmentEffect : BaseEffect
 		public int Distance { get; set; } = 8;
 
 		[Caption ("Rotation")]
-		public double Rotation { get; set; } = 0;
+		public DegreesAngle Rotation { get; set; } = new (0);
 	}
 }

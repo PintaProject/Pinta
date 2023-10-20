@@ -1,21 +1,21 @@
-// 
+//
 // OraFormat.cs
-//  
+//
 // Author:
 //       Maia Kozheva <sikon@ubuntu.com>
-// 
+//
 // Copyright (c) 2010 Maia Kozheva <sikon@ubuntu.com>
-// 
+//
 // Permission is hereby granted, free of charge, to any person obtaining a copy
 // of this software and associated documentation files (the "Software"), to deal
 // in the Software without restriction, including without limitation the rights
 // to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
 // copies of the Software, and to permit persons to whom the Software is
 // furnished to do so, subject to the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be included in
 // all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
 // IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
 // FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
@@ -102,7 +102,7 @@ public sealed class OraFormat : IImageImporter, IImageExporter
 				layer.Opacity = double.Parse (GetAttribute (layerElement, "opacity", "1"), GetFormat ());
 				layer.BlendMode = StandardToBlendMode (GetAttribute (layerElement, "composite-op", "svg:src-over"));
 
-				var pb = GdkPixbuf.Pixbuf.NewFromFile (tmp_file);
+				var pb = GdkPixbuf.Pixbuf.NewFromFile (tmp_file)!; // NRT: only nullable when an error is thrown
 				var g = new Context (layer.Surface);
 				g.DrawPixbuf (pb, x, y);
 
@@ -221,41 +221,24 @@ public sealed class OraFormat : IImageImporter, IImageExporter
 
 	private static string BlendModeToStandard (BlendMode mode)
 	{
-		switch (mode) {
-			case BlendMode.Normal:
-			default:
-				return "svg:src-over";
-			case BlendMode.Multiply:
-				return "svg:multiply";
-			case BlendMode.ColorBurn:
-				return "svg:color-burn";
-			case BlendMode.ColorDodge:
-				return "svg:color-dodge";
-			case BlendMode.Overlay:
-				return "svg:overlay";
-			case BlendMode.Difference:
-				return "svg:difference";
-			case BlendMode.Lighten:
-				return "svg:lighten";
-			case BlendMode.Darken:
-				return "svg:darken";
-			case BlendMode.Screen:
-				return "svg:screen";
-			case BlendMode.Xor:
-				return "svg:xor";
-			case BlendMode.HardLight:
-				return "svg:hard-light";
-			case BlendMode.SoftLight:
-				return "svg:soft-light";
-			case BlendMode.Color:
-				return "svg:color";
-			case BlendMode.Luminosity:
-				return "svg:luminosity";
-			case BlendMode.Hue:
-				return "svg:hue";
-			case BlendMode.Saturation:
-				return "svg:saturation";
-		}
+		return mode switch {
+			BlendMode.Multiply => "svg:multiply",
+			BlendMode.ColorBurn => "svg:color-burn",
+			BlendMode.ColorDodge => "svg:color-dodge",
+			BlendMode.Overlay => "svg:overlay",
+			BlendMode.Difference => "svg:difference",
+			BlendMode.Lighten => "svg:lighten",
+			BlendMode.Darken => "svg:darken",
+			BlendMode.Screen => "svg:screen",
+			BlendMode.Xor => "svg:xor",
+			BlendMode.HardLight => "svg:hard-light",
+			BlendMode.SoftLight => "svg:soft-light",
+			BlendMode.Color => "svg:color",
+			BlendMode.Luminosity => "svg:luminosity",
+			BlendMode.Hue => "svg:hue",
+			BlendMode.Saturation => "svg:saturation",
+			_ => "svg:src-over",
+		};
 	}
 
 	private static BlendMode StandardToBlendMode (string mode)

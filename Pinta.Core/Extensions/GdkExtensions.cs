@@ -183,7 +183,8 @@ public static class GdkExtensions
 
 		Gdk.Internal.Clipboard.ReadTextAsync (clipboard.Handle, IntPtr.Zero, new Gio.Internal.AsyncReadyCallbackAsyncHandler ((_, args, _) => {
 			string? result = Gdk.Internal.Clipboard.ReadTextFinish (clipboard.Handle, args.Handle, out var error).ConvertToString ();
-			GLib.Error.ThrowOnError (error);
+			if (!error.IsInvalid)
+				throw new GLib.GException (error);
 
 			tcs.SetResult (result);
 		}).NativeCallback, IntPtr.Zero);
@@ -201,11 +202,8 @@ public static class GdkExtensions
 
 			Texture? texture = texture = GObject.Internal.ObjectWrapper.WrapNullableHandle<Texture> (result, ownedRef: true);
 
-			try {
-				GLib.Error.ThrowOnError (error);
-			} catch (Exception) {
+			if (!error.IsInvalid)
 				texture = null;
-			}
 
 			tcs.SetResult (texture);
 		}).NativeCallback, IntPtr.Zero);
@@ -243,25 +241,29 @@ public static class GdkExtensions
 		return surf;
 	}
 
-	// TODO-GTK4 (bindings) - structs are not generated (https://github.com/gircore/gir.core/issues/622)
-	public static nuint GetFileListGType () => Gdk.Internal.FileList.GetGType ();
-
-	// TODO-GTK4 (bindings) - structs are not generated (https://github.com/gircore/gir.core/issues/622)
-	public static Gio.File[] GetFiles (this Gdk.FileList file_list)
+	// TODO-GTK4 (bindings) - struct methods are not generated (https://github.com/gircore/gir.core/issues/622)
+	public static Gio.File[] GetFilesHelper (this Gdk.FileList file_list)
 	{
-		// FIXME: this is needed to avoid errors because SListOwnedHandle doesn't have a free function.
-		var slist_owned_handle = Gdk.Internal.FileList.GetFiles (file_list.Handle);
-		var slist_handle = new GLib.Internal.SListUnownedHandle (slist_owned_handle.DangerousGetHandle ());
-		slist_owned_handle.SetHandleAsInvalid ();
+		var slist = file_list.GetFiles ();
 
-		uint n = GLib.Internal.SList.Length (slist_handle);
+		uint n = GLib.Internal.SList.Length (slist.Handle);
 		var result = new Gio.File[n];
 		for (uint i = 0; i < n; ++i) {
-			result[i] = new Gio.FileHelper (GLib.Internal.SList.NthData (slist_handle, i), ownedRef: false);
+			result[i] = new Gio.FileHelper (GLib.Internal.SList.NthData (slist.Handle, i), ownedRef: false);
 		}
 
-		GLib.Internal.SList.Free (slist_handle);
-
 		return result;
+	}
+
+	/// <summary>
+	/// Wrapper for Gdk.Cursor.NewFromName which handles errors instead of returning null.
+	/// </summary>
+	public static Gdk.Cursor CursorFromName (string name)
+	{
+		var cursor = Gdk.Cursor.NewFromName (name, null);
+		if (cursor is null)
+			throw new ArgumentException ("Cursor does not exist", nameof (name));
+
+		return cursor;
 	}
 }

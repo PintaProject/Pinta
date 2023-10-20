@@ -50,16 +50,19 @@ internal static class Utilities
 			allAddins = allAddins.Union (AddinManager.Registry.GetAddins ());
 
 		foreach (var dep in addin.Description.MainModule.Dependencies) {
-			if (dep is AddinDependency adep) {
-				if (!allAddins.Any (a => Addin.GetIdName (a.Id) == Addin.GetIdName (adep.FullAddinId) && a.SupportsVersion (adep.Version))) {
-					Addin? found = allAddins.FirstOrDefault (a => Addin.GetIdName (a.Id) == Addin.GetIdName (adep.FullAddinId));
-					yield return new MissingDepInfo (
-						Addin: Addin.GetIdName (adep.FullAddinId),
-						Required: adep.Version,
-						Found: found?.Version ?? string.Empty
-					);
-				}
-			}
+
+			if (dep is not AddinDependency adep)
+				continue;
+
+			if (allAddins.Any (a => Addin.GetIdName (a.Id) == Addin.GetIdName (adep.FullAddinId) && a.SupportsVersion (adep.Version)))
+				continue;
+
+			Addin? found = allAddins.FirstOrDefault (a => Addin.GetIdName (a.Id) == Addin.GetIdName (adep.FullAddinId));
+			yield return new MissingDepInfo (
+				Addin: Addin.GetIdName (adep.FullAddinId),
+				Required: adep.Version,
+				Found: found?.Version ?? string.Empty
+			);
 		}
 	}
 
@@ -69,16 +72,12 @@ internal static class Utilities
 	public static bool IsCompatibleWithAddinRoots (AddinRepositoryEntry a)
 	{
 		var roots = AddinManager.Registry.GetAddinRoots ();
-
 		foreach (var dep in a.Addin.Dependencies) {
 			if (dep is not AddinDependency adep)
 				continue;
-
-			if (roots.Any (root => Addin.GetIdName (root.Id) == Addin.GetIdName (adep.FullAddinId) && !root.SupportsVersion (adep.Version))) {
+			if (roots.Any (root => Addin.GetIdName (root.Id) == Addin.GetIdName (adep.FullAddinId) && !root.SupportsVersion (adep.Version)))
 				return false;
-			}
 		}
-
 		return true;
 	}
 }

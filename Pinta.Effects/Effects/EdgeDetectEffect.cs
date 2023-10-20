@@ -52,7 +52,7 @@ public sealed class EdgeDetectEffect : ColorDifferenceEffect
 		}
 
 		// adjust and convert angle to radians
-		double r = (double) Data.Angle * 2.0 * Math.PI / 360.0;
+		double r = (double) Data.Angle.Degrees * 2.0 * Math.PI / 360.0;
 
 		// angle delta for each weight
 		double dr = Math.PI / 4.0;
@@ -78,5 +78,5 @@ public sealed class EdgeDetectEffect : ColorDifferenceEffect
 public sealed class EdgeDetectData : EffectData
 {
 	[Caption ("Angle")]
-	public double Angle { get; set; } = 45;
+	public DegreesAngle Angle { get; set; } = new (45);
 }

@@ -111,7 +111,7 @@ public static class ResourceLoader
 				var buffer = new byte[stream.Length];
 				stream.Read (buffer, 0, buffer.Length);
 
-				var bytes = GLib.Bytes.From (buffer);
+				var bytes = GLib.Bytes.New (buffer);
 				image = Gdk.Texture.NewFromBytes (bytes);
 			}
 		} catch (Exception ex) {

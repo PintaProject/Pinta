@@ -92,7 +92,7 @@ public sealed class Ruler : DrawingArea
 		SetDrawFunc ((area, context, width, height) => Draw (context, new Size (width, height)));
 
 		// Determine the size request, based on the font size.
-		int font_size = GetFontSize (GetPangoContext ().GetFontDescription (), ScaleFactor);
+		int font_size = GetFontSize (GetPangoContext ().GetFontDescription ()!, ScaleFactor);
 		int size = 2 + font_size * 2;
 
 		int width = 0;
@@ -210,7 +210,7 @@ public sealed class Ruler : DrawingArea
 		double max_size = scaled_upper - scaled_lower;
 
 		// There must be enough space between the large ticks for the text labels.
-		Pango.FontDescription font = GetPangoContext ().GetFontDescription ();
+		Pango.FontDescription font = GetPangoContext ().GetFontDescription ()!;
 		int font_size = GetFontSize (font, ScaleFactor);
 		int max_digits = ((int) -Math.Abs (max_size)).ToString ().Length;
 		int min_separation = max_digits * font_size * 2;
