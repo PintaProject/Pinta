@@ -69,6 +69,53 @@ internal sealed class GradientTests
 		);
 	}
 
+	[TestCaseSource (nameof (interpolated_color_checks))]
+	public void Gradient_Interpolated_Colors_Are_Correct (ColorGradient gradient, IReadOnlyDictionary<double, ColorBgra> checks)
+	{
+		foreach (var check in checks) {
+			var interpolated = gradient.GetColor (check.Key);
+			var expected = check.Value;
+			Assert.AreEqual (expected, interpolated);
+		}
+	}
+
+	// Not adding tolerances nor checking for mappings that could be rounded up to the next byte,
+	// because currently the ColorBgra.Lerp function always rounds down, never up
+	private static readonly IReadOnlyList<TestCaseData> interpolated_color_checks = CreateInterpolatedColorChecks ().ToArray ();
+	private static IEnumerable<TestCaseData> CreateInterpolatedColorChecks ()
+	{
+		ColorGradient blackToWhite255 = ColorGradient.Gradient (
+			ColorBgra.Black,
+			ColorBgra.White,
+			byte.MinValue,
+			byte.MaxValue
+		);
+
+		yield return new (
+			blackToWhite255,
+			new Dictionary<double, ColorBgra> {
+				[32] = ColorBgra.FromBgr (32, 32, 32),
+				[128] = ColorBgra.FromBgr (128, 128, 128),
+			}
+		);
+
+		ColorGradient blackToWhite1 = ColorGradient.Gradient (
+			ColorBgra.Black,
+			ColorBgra.White,
+			0,
+			1
+		);
+
+		yield return new (
+			blackToWhite1,
+			new Dictionary<double, ColorBgra> {
+				[0.08] = ColorBgra.FromBgr (20, 20, 20),
+				[0.20] = ColorBgra.FromBgr (51, 51, 51),
+				[0.91] = ColorBgra.FromBgr (232, 232, 232),
+			}
+		);
+	}
+
 	private static readonly IReadOnlyList<TestCaseData> cases_stops_out_of_bounds = CreateCasesForStopsOutOfBounds ().ToArray ();
 
 	private static IEnumerable<TestCaseData> CreateCasesForStopsOutOfBounds ()
