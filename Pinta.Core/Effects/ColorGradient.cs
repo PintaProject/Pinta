@@ -24,7 +24,8 @@ public sealed class ColorGradient : ColorMapping
 		var sortedStops = gradientStops.Select (kvp => new GradientStop (kvp.Key, kvp.Value)).OrderBy (stop => stop.Position).ToArray ();
 		if (sortedStops.Length > 0 && sortedStops[0].Position <= minPosition) throw new ArgumentException ($"Lowest key in {nameof (gradientStops)} has to be greater than {nameof (minPosition)}");
 		if (sortedStops.Length > 0 && sortedStops[^1].Position >= maxPosition) throw new ArgumentException ($"Greatest key in {nameof (gradientStops)} has to be lower than {nameof (maxPosition)}");
-		if (sortedStops.GroupBy (s => s.Position).Count () < sortedStops.Length) throw new ArgumentException ("Cannot have more than one stop in the same position");
+		var distinctPositions = sortedStops.GroupBy (s => s.Position).Count ();
+		if (distinctPositions != sortedStops.Length) throw new ArgumentException ("Cannot have more than one stop in the same position");
 
 		StartColor = startColor;
 		EndColor = endColor;

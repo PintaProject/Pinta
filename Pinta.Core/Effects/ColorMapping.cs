@@ -26,17 +26,6 @@ public abstract class ColorMapping
 		);
 	}
 
-	public static ColorGradient Gradient (double startPosition, double endPosition)
-	{
-		return new (
-			DefaultStartColor (),
-			DefaultEndColor (),
-			startPosition,
-			endPosition,
-			EmptyStops ()
-		);
-	}
-
 	public static ColorGradient Gradient (ColorBgra start, ColorBgra end)
 	{
 		return new (
