@@ -100,7 +100,7 @@ public abstract class Histogram
 		var ret = ImmutableArray.CreateBuilder<float> (Channels);
 		ret.Count = Channels;
 		for (int channel = 0; channel < Channels; ++channel) {
-			long[] channelHistogram = histogram[channel];
+			ReadOnlySpan<long> channelHistogram = histogram[channel];
 			long avg = 0;
 			long sum = 0;
 
@@ -123,7 +123,7 @@ public abstract class Histogram
 		var ret = ImmutableArray.CreateBuilder<int> (Channels);
 		ret.Count = Channels;
 		for (int channel = 0; channel < Channels; ++channel) {
-			long[] channelHistogram = histogram[channel];
+			ReadOnlySpan<long> channelHistogram = histogram[channel];
 			long integral = 0;
 			long sum = 0;
 			for (int j = 0; j < channelHistogram.Length; j++) {

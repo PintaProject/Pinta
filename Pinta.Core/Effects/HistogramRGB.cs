@@ -76,8 +76,8 @@ public sealed class HistogramRgb : Histogram
 		Span<float> slopes = stackalloc float[3];
 
 		for (int c = 0; c < 3; c++) {
-			long[] channelHistogramOutput = histogram[c];
-			long[] channelHistogramInput = inputHistogram.histogram[c];
+			Span<long> channelHistogramOutput = histogram[c];
+			Span<long> channelHistogramInput = inputHistogram.histogram[c];
 
 			for (int v = 0; v <= 255; v++) {
 				ColorBgra after = ColorBgra.FromBgr ((byte) v, (byte) v, (byte) v);

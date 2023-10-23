@@ -355,7 +355,7 @@ public sealed class TextEngine
 		if (HasSelection ())
 			DeleteSelection ();
 
-		string[] ins_lines = txt.Split (Environment.NewLine.ToCharArray (), StringSplitOptions.RemoveEmptyEntries);
+		IReadOnlyList<string> ins_lines = txt.Split (Environment.NewLine.ToCharArray (), StringSplitOptions.RemoveEmptyEntries);
 		string endline = lines[current_pos.Line][current_pos.Offset..];
 		lines[current_pos.Line] = lines[current_pos.Line][..current_pos.Offset];
 		bool first = true;

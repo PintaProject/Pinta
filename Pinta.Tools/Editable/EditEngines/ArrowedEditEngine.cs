@@ -24,6 +24,7 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 // THE SOFTWARE.
 
+using System;
 using System.Collections.Generic;
 using Cairo;
 using Gtk;
@@ -227,7 +228,7 @@ public abstract class ArrowedEditEngine : BaseEditEngine
 		if (engine is LineCurveSeriesEngine lCSEngine && engine.ControlPoints.Count > 0) {
 
 			// Draw the arrows for the currently active shape.
-			GeneratedPoint[] genPoints = engine.GeneratedPoints;
+			ReadOnlySpan<GeneratedPoint> genPoints = engine.GeneratedPoints;
 
 			if (lCSEngine.Arrow1.Show && genPoints.Length > 1) {
 				var rect = lCSEngine.Arrow1.Draw (
