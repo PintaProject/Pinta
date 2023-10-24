@@ -54,7 +54,7 @@ public sealed class GimpPalette : IPaletteLoader, IPaletteSaver
 			if (line.IndexOf ('#') == 0)
 				continue;
 
-			string[] split = line.Split ((char[]?) null, StringSplitOptions.RemoveEmptyEntries);
+			IReadOnlyList<string> split = line.Split ((char[]?) null, StringSplitOptions.RemoveEmptyEntries);
 			double r = int.Parse (split[0]) / 255f;
 			double g = int.Parse (split[1]) / 255f;
 			double b = int.Parse (split[2]) / 255f;
