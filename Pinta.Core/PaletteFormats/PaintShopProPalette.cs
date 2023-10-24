@@ -53,7 +53,7 @@ public sealed class PaintShopProPalette : IPaletteLoader, IPaletteSaver
 			if (line is null)
 				break;
 
-			string[] split = line.Split (' ');
+			IReadOnlyList<string> split = line.Split (' ');
 			double r = int.Parse (split[0]) / 255f;
 			double g = int.Parse (split[1]) / 255f;
 			double b = int.Parse (split[2]) / 255f;
