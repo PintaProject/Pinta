@@ -138,7 +138,7 @@ internal sealed class InstallDialog : Adw.Window
 		DisplayInstallInfo ();
 	}
 
-	public bool InitForInstall (string[] files_to_install)
+	public bool InitForInstall (IEnumerable<string> files_to_install)
 	{
 		try {
 			foreach (string file in files_to_install)

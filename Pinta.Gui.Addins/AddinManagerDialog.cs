@@ -116,7 +116,7 @@ public sealed class AddinManagerDialog : Adw.Window
 	{
 		gallery_list.Clear ();
 
-		AddinRepositoryEntry[] reps = service.Repositories.GetAvailableAddins (RepositorySearchFlags.None);
+		IReadOnlyList<AddinRepositoryEntry> reps = service.Repositories.GetAvailableAddins (RepositorySearchFlags.None);
 		reps = FilterToLatestCompatibleVersion (reps);
 
 		foreach (var arep in reps) {
@@ -144,7 +144,7 @@ public sealed class AddinManagerDialog : Adw.Window
 	{
 		updates_list.Clear ();
 
-		AddinRepositoryEntry[] reps = service.Repositories.GetAvailableAddins (RepositorySearchFlags.None);
+		IReadOnlyList<AddinRepositoryEntry> reps = service.Repositories.GetAvailableAddins (RepositorySearchFlags.None);
 		reps = FilterToLatestCompatibleVersion (reps);
 
 		foreach (var arep in reps) {
@@ -166,7 +166,7 @@ public sealed class AddinManagerDialog : Adw.Window
 
 	// Similar to RepositoryRegistry.FilterOldVersions(), but also filters out newer versions that require an
 	// updated version of the application.
-	private static AddinRepositoryEntry[] FilterToLatestCompatibleVersion (AddinRepositoryEntry[] addins)
+	private static AddinRepositoryEntry[] FilterToLatestCompatibleVersion (IReadOnlyList<AddinRepositoryEntry> addins)
 	{
 		Dictionary<string, string> latest_versions = new ();
 		foreach (var a in addins) {
@@ -213,7 +213,7 @@ public sealed class AddinManagerDialog : Adw.Window
 			if (e.ResponseId != (int) Gtk.ResponseType.Accept)
 				return;
 
-			string[] files = dialog.GetFileList ()
+			IReadOnlyList<string> files = dialog.GetFileList ()
 				.Select (f => f.GetPath () ?? string.Empty)
 				.Where (f => !string.IsNullOrEmpty (f))
 				.ToArray ();
