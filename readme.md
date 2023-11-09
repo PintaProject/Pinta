@@ -69,7 +69,7 @@ Alternatively, Pinta can be built by opening `Pinta.sln` in [Visual Studio for M
 
 - You can get technical help on the [Pinta Google Group](https://groups.google.com/group/pinta-project)
 - You can report bugs/issues on [Launchpad bug tracker](https://bugs.launchpad.net/pinta/+filebug)
-- You can make suggestions at [Communiroo](https://communiroo.com/pintaproject/pinta/suggestions)
+- You can make suggestions on [Github](https://github.com/PintaProject/Pinta/discussions/categories/ideas)
 - You can help translate Pinta to your native language on [Launchpad translations](https://translations.launchpad.net/pinta)
 - You can fork the project on [Github](https://github.com/PintaProject/Pinta)
 - You can get help in #pinta on irc.gnome.org.
