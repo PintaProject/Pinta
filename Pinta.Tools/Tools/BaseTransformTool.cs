@@ -58,8 +58,17 @@ public abstract class BaseTransformTool : BaseTool
 	{
 		base.OnActivated (document);
 
+		PintaCore.Workspace.ActiveDocumentChanged += HandleActiveDocumentChanged;
+
 		if (document is not null)
 			HandleSourceRectangleChanged (document);
+	}
+
+	protected override void OnDeactivated (Document? document, BaseTool? newTool)
+	{
+		base.OnDeactivated (document, newTool);
+
+		PintaCore.Workspace.ActiveDocumentChanged -= HandleActiveDocumentChanged;
 	}
 
 	protected override void OnMouseDown (Document document, ToolMouseEventArgs e)
@@ -227,11 +236,19 @@ public abstract class BaseTransformTool : BaseTool
 		HandleSourceRectangleChanged (document);
 	}
 
+	/// <summary>
+	/// Update the handles whenever we switch to a new document.
+	/// </summary>
+	private void HandleActiveDocumentChanged (object? sender, EventArgs event_args)
+	{
+		if (!PintaCore.Workspace.HasOpenDocuments)
+			return;
+
+		HandleSourceRectangleChanged (PintaCore.Workspace.ActiveDocument);
+	}
+
 	private void HandleSourceRectangleChanged (Document document)
 	{
-		// TODO - this needs more testing to ensure the
-		// rectangle handle is correctly updated whenever the
-		// source rectangle (e.g. selection) changes.
 		var dirty = rect_handle.InvalidateRect;
 		rect_handle.Rectangle = GetSourceRectangle (document);
 		dirty = dirty.Union (rect_handle.InvalidateRect);

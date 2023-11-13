@@ -102,7 +102,11 @@ public sealed class WorkspaceManager : IWorkspaceService
 	public ReadOnlyCollection<Document> OpenDocuments { get; }
 	public bool HasOpenDocuments => open_documents.Count > 0;
 
-	public Document CreateAndActivateDocument (Gio.File? file, string? file_type, Size size)
+	/// <summary>
+	/// Creates a new document. Call ActivateNewDocument() when the document has been set up
+	/// and is ready to add to the workspace.
+	/// </summary>
+	public Document CreateDocument (Gio.File? file, string? file_type, Size size)
 	{
 		Document doc = new Document (size);
 
@@ -115,12 +119,18 @@ public sealed class WorkspaceManager : IWorkspaceService
 		} else
 			doc.DisplayName = Translations.GetString ("Unsaved Image {0}", new_file_name++);
 
+		return doc;
+	}
+
+	/// <summary>
+	/// Adds a new document to the workspace and activates it.
+	/// </summary>
+	public void ActivateNewDocument (Document doc)
+	{
 		open_documents.Add (doc);
 		OnDocumentCreated (new DocumentEventArgs (doc));
 
 		SetActiveDocument (doc);
-
-		return doc;
 	}
 
 	public void CloseActiveDocument ()
@@ -169,7 +179,7 @@ public sealed class WorkspaceManager : IWorkspaceService
 
 	public Document NewDocument (Size imageSize, Color backgroundColor)
 	{
-		Document doc = CreateAndActivateDocument (null, null, imageSize);
+		Document doc = CreateDocument (null, null, imageSize);
 		doc.Workspace.ViewSize = imageSize;
 
 		// Start with an empty white layer
@@ -184,6 +194,7 @@ public sealed class WorkspaceManager : IWorkspaceService
 		doc.Workspace.History.PushNewItem (new BaseHistoryItem (Resources.StandardIcons.DocumentNew, Translations.GetString ("New Image")));
 		doc.Workspace.History.SetClean ();
 
+		ActivateNewDocument (doc);
 		return doc;
 	}
 

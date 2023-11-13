@@ -59,7 +59,7 @@ public sealed class OraFormat : IImageImporter, IImageExporter
 
 		Size imagesize = new Size (width, height);
 
-		Document doc = PintaCore.Workspace.CreateAndActivateDocument (file, "ora", imagesize);
+		Document doc = PintaCore.Workspace.CreateDocument (file, "ora", imagesize);
 
 		XmlElement stackElement = (XmlElement) stackXml.GetElementsByTagName ("stack")[0]!;
 		XmlNodeList layerElements = stackElement.GetElementsByTagName ("layer");
@@ -123,6 +123,8 @@ public sealed class OraFormat : IImageImporter, IImageExporter
 				PintaCore.Chrome.ShowMessageDialog (PintaCore.Chrome.MainWindow, Translations.GetString ("Error"), details);
 			}
 		}
+
+		PintaCore.Workspace.ActivateNewDocument (doc);
 	}
 	#endregion
 
