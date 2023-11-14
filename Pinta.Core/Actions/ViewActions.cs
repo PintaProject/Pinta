@@ -1,21 +1,21 @@
-// 
+//
 // ViewActions.cs
-//  
+//
 // Author:
 //       Jonathan Pobst <monkey@jpobst.com>
-// 
+//
 // Copyright (c) 2010 Jonathan Pobst
-// 
+//
 // Permission is hereby granted, free of charge, to any person obtaining a copy
 // of this software and associated documentation files (the "Software"), to deal
 // in the Software without restriction, including without limitation the rights
 // to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
 // copies of the Software, and to permit persons to whom the Software is
 // furnished to do so, subject to the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be included in
 // all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
 // IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
 // FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
@@ -74,7 +74,7 @@ public sealed class ViewActions
 		StatusBar = new ToggleCommand ("Statusbar", Translations.GetString ("Status Bar"), null, null);
 		ToolBox = new ToggleCommand ("ToolBox", Translations.GetString ("Tool Box"), null, null);
 		Rulers = new ToggleCommand ("Rulers", Translations.GetString ("Rulers"), null, Resources.Icons.ViewRulers);
-		RulerMetric = Gio.SimpleAction.NewStateful ("rulermetric", GtkExtensions.IntVariantType, GLib.Variant.Create (0));
+		RulerMetric = Gio.SimpleAction.NewStateful ("rulermetric", GtkExtensions.IntVariantType, GLib.Variant.NewInt32 (0));
 		Fullscreen = new Command ("Fullscreen", Translations.GetString ("Fullscreen"), null, Resources.StandardIcons.DocumentNew);
 
 		ZoomCollection = default_zoom_levels;
@@ -283,7 +283,7 @@ public sealed class ViewActions
 	{
 		string text = PintaCore.Actions.View.ZoomComboBox.ComboBox.GetActiveText ()!;
 
-		// stay in "Zoom to Window" mode if this function was called without the zoom level being changed by the user (e.g. if the 
+		// stay in "Zoom to Window" mode if this function was called without the zoom level being changed by the user (e.g. if the
 		// image was rotated or cropped) and "Zoom to Window" mode is active
 		if (text == Translations.GetString ("Window") || (ZoomToWindowActivated && old_zoom_text == text)) {
 			PintaCore.Actions.View.ZoomToWindow.Activate ();

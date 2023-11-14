@@ -370,12 +370,6 @@ public static class GtkExtensions
 		return tcs.Task;
 	}
 
-	// TODO-GTK4 (bindings) - record methods are not generated (https://github.com/gircore/gir.core/issues/743)
-	public static bool Iteration (this GLib.MainContext context, bool may_block)
-	{
-		return GLib.Internal.MainContext.Iteration (context.Handle, may_block);
-	}
-
 	/// <summary>
 	/// Provides convenient access to the Gdk.Key of the key being pressed.
 	/// </summary>

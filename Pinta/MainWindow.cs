@@ -197,7 +197,10 @@ public sealed class MainWindow
 
 	private static MetricType GetCurrentRulerMetric ()
 	{
-		return (MetricType) PintaCore.Actions.View.RulerMetric.GetState ().GetInt ();
+		GLib.Variant state = PintaCore.Actions.View.RulerMetric.GetState () ??
+			throw new InvalidOperationException ("action should not be stateless");
+
+		return (MetricType) state.GetInt32 ();
 	}
 
 	private bool HandleGlobalKeyPress (Gtk.EventControllerKey controller, Gtk.EventControllerKey.KeyPressedSignalArgs args)
@@ -454,7 +457,7 @@ public sealed class MainWindow
 		PintaCore.RecentFiles.LastDialogDirectory = Gio.FileHelper.NewForUri (dialog_uri);
 
 		var ruler_metric = (MetricType) PintaCore.Settings.GetSetting ("ruler-metric", (int) MetricType.Pixels);
-		PintaCore.Actions.View.RulerMetric.Activate (GLib.Variant.Create ((int) ruler_metric));
+		PintaCore.Actions.View.RulerMetric.Activate (GLib.Variant.NewInt32 ((int) ruler_metric));
 	}
 
 	private void SaveUserSettings ()
