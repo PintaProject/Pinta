@@ -11,6 +11,7 @@ Thanks to the following contributors who worked on this release:
 ### Changed
 
 ### Fixed
+- Fixed potential errors reported on Windows when saving files (#584, [#2033014](https://bugs.launchpad.net/pinta/+bug/2033014))
 
 ## [2.1.1](https://github.com/PintaProject/Pinta/releases/tag/2.1.1) - 2023/02/26
 
@@ -133,7 +134,7 @@ Thanks to the following contributors who worked on this release:
   - The Open Recent menu item was deprecated in GTK3 and has been removed, but similar functionality is available in the file dialog's Recent section.
   - Support for add-ins has been removed, but may return in a future release ([#1918039](https://bugs.launchpad.net/pinta/+bug/1918039)).
   - The Windows and macOS installers now bundle all necessary dependencies. Separately installing GTK and .NET / Mono is no longer required.
-  
+
 - Added a status bar widget containing the position / selection information, zoom, and the color palette (#154)
 - Changed the tool palette to be a single column (#155)
 - Added recently used colors to the color palette widget (#154)
@@ -243,7 +244,7 @@ Thanks to the following contributors who worked on this release:
 - Added support for JASC PaintShop Pro palette files (#126).
 - The transform tools can now rotate in fixed increments by holding Shift (#134).
 - The Move Selected tool can now scale by holding Ctrl (#138).
-- Dragging and dropping a URL (e.g. image from a web browser) to download and open the image is now supported (#80, [#644123](https://bugs.launchpad.net/pinta/+bug/644123)). 
+- Dragging and dropping a URL (e.g. image from a web browser) to download and open the image is now supported (#80, [#644123](https://bugs.launchpad.net/pinta/+bug/644123)).
 - Performance improvements when interacting with selections, particularly for large images ([#1428740](https://bugs.launchpad.net/pinta/+bug/1428740)).
 - The Rectangle Select tool now shows different arrow cursors at each corner of the selection ([#1188143](https://bugs.launchpad.net/pinta/+bug/1188143)).
 - Added an AppData file for integration with some Linux app stores (#121).
