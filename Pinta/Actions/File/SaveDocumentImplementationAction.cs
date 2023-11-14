@@ -120,7 +120,13 @@ internal sealed class SaveDocumentImplmentationAction : IActionHandler
 			// Always follow the extension rather than the file type drop down
 			// ie: if the user chooses to save a "jpeg" as "foo.png", we are going
 			// to assume they just didn't update the dropdown and really want png
-			var format = PintaCore.ImageFormats.GetFormatByFile (display_name) ?? filetypes[fcd.Filter];
+			FormatDescriptor? format = PintaCore.ImageFormats.GetFormatByFile (display_name);
+			if (format is null) {
+				if (fcd.Filter is not null)
+					format = filetypes[fcd.Filter];
+				else // Somehow, no file filter was selected...
+					format = PintaCore.ImageFormats.GetDefaultSaveFormat ();
+			}
 
 			var directory = file.GetParent ();
 			if (directory is not null)
