@@ -1502,6 +1502,37 @@ namespace Pinta.Core
 			return result;
 		}
 
+		// TODO-GTK4 (bindings) - this is a workaround for not having access to the float fields of Cairo.Matrix
+		public static void GetComponents (this Matrix m, out double xx, out double yx, out double xy, out double yy, out double x0, out double y0)
+		{
+			double dx = 1;
+			double dy = 0;
+			m.TransformDistance (ref dx, ref dy);
+			xx = dx;
+			yx = dy;
+
+			dx = 0;
+			dy = 1;
+			m.TransformDistance (ref dx, ref dy);
+			xy = dx;
+			yy = dy;
+
+			x0 = 0;
+			y0 = 0;
+			m.TransformPoint (ref x0, ref y0);
+		}
+
+		/// <summary>
+		/// Decompose a matrix into its scale, rotation, and translation components (ignoring shears).
+		/// </summary>
+		public static void Decompose (this Matrix m, out double sx, out double sy, out double r, out double tx, out double ty)
+		{
+			m.GetComponents (out double xx, out double yx, out double xy, out double yy, out tx, out ty);
+			sx = Math.Sqrt (xx * xx + yx * yx);
+			sy = Math.Sqrt (xy * xy + yy * yy);
+			r = Math.Atan2 (yx, xx); ;
+		}
+
 		public static void TransformPoint (this Matrix m, ref Core.PointD p)
 		{
 			var newX = p.X;
