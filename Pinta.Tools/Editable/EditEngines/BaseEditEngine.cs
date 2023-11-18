@@ -706,7 +706,7 @@ public abstract class BaseEditEngine
 
 		Document doc = PintaCore.Workspace.ActiveDocument;
 
-		shape_origin = new PointD (Math.Clamp (unclamped_point.X, 0, doc.ImageSize.Width - 1), Math.Clamp (unclamped_point.Y, 0, doc.ImageSize.Height - 1));
+		shape_origin = doc.ClampToImageSize (unclamped_point);
 		current_point = shape_origin;
 
 		bool shiftKey = e.IsShiftPressed;
@@ -871,8 +871,7 @@ public abstract class BaseEditEngine
 			//Redraw the active shape to show a (temporary) highlighted control point (over any shape) when applicable.
 			DrawActiveShape (false, false, true, shiftKey, false, e.IsControlPressed);
 		} else {
-			current_point = new PointD (Math.Clamp (current_point.X, 0, doc.ImageSize.Width - 1), Math.Clamp (current_point.Y, 0, doc.ImageSize.Height - 1));
-
+			current_point = document.ClampToImageSize (current_point);
 
 			if (shiftKey) {
 				CalculateModifiedCurrentPoint ();
