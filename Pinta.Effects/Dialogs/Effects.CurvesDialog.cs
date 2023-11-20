@@ -26,11 +26,8 @@
 
 using System;
 using System.Collections.Generic;
-using System.Collections.ObjectModel;
-using System.Linq;
 using Cairo;
 using Gtk;
-using HarfBuzz;
 using Pinta.Core;
 
 namespace Pinta.Effects;
