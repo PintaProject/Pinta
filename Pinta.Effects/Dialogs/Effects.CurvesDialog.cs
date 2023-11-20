@@ -26,8 +26,11 @@
 
 using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
+using System.Linq;
 using Cairo;
 using Gtk;
+using HarfBuzz;
 using Pinta.Core;
 
 namespace Pinta.Effects;
@@ -57,12 +60,13 @@ public sealed class CurvesDialog : Gtk.Dialog
 
 	private int channels;
 	//last added control point x;
-	private int last_cpx;
+	private int? last_cpx;
 	private PointI last_mouse_pos = new (0, 0);
+	// Keys of existing control points which cannot be overwritten by a new control point.
+	private HashSet<int> orig_cps = new ();
 
 	//control points for luminosity transfer mode
 	private SortedList<int, int>[] luminosity_cps = null!; // NRT - Set via code flow
-							       //control points for rg transfer mode
 	private SortedList<int, int>[] rgb_cps = null!;
 
 	public SortedList<int, int>[] ControlPoints {
@@ -262,18 +266,50 @@ public sealed class CurvesDialog : Gtk.Dialog
 			return;
 
 		if (controller.GetCurrentEventState () == Gdk.ModifierType.Button1Mask) {
-			// first and last control point cannot be removed
-			if (last_cpx != 0 && last_cpx != size - 1) {
-				foreach (var controlPoints in GetActiveControlPoints ()) {
-					if (controlPoints.ContainsKey (last_cpx))
-						controlPoints.Remove (last_cpx);
+			if (last_cpx is not null) {
+				// The first and last control points cannot be removed, so also forbid dragging them away.
+				if (last_cpx == 0)
+					x = 0;
+				else if (last_cpx == size - 1)
+					x = size - 1;
+				else {
+					// Remove the old version of the control point being edited.
+					foreach (var controlPoints in GetActiveControlPoints ()) {
+						if (controlPoints.ContainsKey (last_cpx.Value))
+							controlPoints.Remove (last_cpx.Value);
+					}
 				}
 			}
 
-			AddControlPoint (x, y);
+			// Don't allow overwriting any of the original control points while dragging.
+			if (!orig_cps.Contains (x))
+				AddControlPoint (x, y);
+			else
+				last_cpx = null;
 		}
 
 		InvalidateDrawing ();
+	}
+
+	/// <summary>
+	/// If the provided coordinates are close to an existing control point, snap to the control point's coordinates.
+	/// </summary>
+	private static bool SnapToControlPointProximity (IEnumerable<SortedList<int, int>> activeControlPoints, ref int x, ref int y)
+	{
+		foreach (var controlPoints in activeControlPoints) {
+			for (int i = 0; i < controlPoints.Count; i++) {
+				int cpx = controlPoints.Keys[i];
+				int cpy = size - 1 - (int) controlPoints.Values[i];
+
+				if (CheckControlPointProximity (cpx, cpy, x, y)) {
+					x = cpx;
+					y = cpy;
+					return true;
+				}
+			}
+		}
+
+		return false;
 	}
 
 	private void HandleDrawingButtonPressEvent (GestureClick controller, GestureClick.PressedSignalArgs args)
@@ -282,6 +318,15 @@ public sealed class CurvesDialog : Gtk.Dialog
 		int y = (int) args.Y;
 
 		if (controller.GetCurrentMouseButton () == MouseButton.Left) {
+
+			orig_cps.Clear ();
+			foreach (var controlPoints in GetActiveControlPoints ()) {
+				orig_cps.UnionWith (controlPoints.Keys);
+			}
+
+			if (SnapToControlPointProximity (GetActiveControlPoints (), ref x, ref y))
+				orig_cps.Remove (x); // Allow dragging the snapped control point.
+
 			AddControlPoint (x, y);
 		}
 

@@ -25,6 +25,8 @@ Thanks to the following contributors who worked on this release:
 - Fixed errors when saving a file that was opened with a missing or incorrect extension ([#2013050](https://bugs.launchpad.net/pinta/+bug/2013050))
 - Fixed a bug where certain layer opacity settings could be incorrectly rounded ([#2020596](https://bugs.launchpad.net/pinta/+bug/2020596))
 - Fixed bugs in the shape tools and the Lasso Select tool which prevented the last row and column of the image from being used (#467)
+- Fixed issues where the Curves dialog could not easily edit existing control points ([#1973602](https://bugs.launchpad.net/pinta/+bug/1973602))
+- Fixed a bug where dragging a control point in the Curves dialog could unexpectedly erase other control points ([#1973602](https://bugs.launchpad.net/pinta/+bug/1973602))
 
 ## [2.1.1](https://github.com/PintaProject/Pinta/releases/tag/2.1.1) - 2023/02/26
 
