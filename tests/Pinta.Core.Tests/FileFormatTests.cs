@@ -14,7 +14,7 @@ internal sealed class FileFormatTests
 	{
 		var path1 = Utilities.GetAssetPath (file1);
 		var path2 = Utilities.GetAssetPath (file2);
-		Assert.IsFalse (Utilities.AreFilesEqual (path1, path2));
+		Assert.That (Utilities.AreFilesEqual (path1, path2), Is.False);
 	}
 
 	[TestCaseSource (nameof (netpbm_pixmap_text_cases))]
@@ -40,7 +40,7 @@ internal sealed class FileFormatTests
 				break;
 			}
 		}
-		Assert.IsTrue (matched);
+		Assert.That (matched, Is.True);
 	}
 
 	static readonly IReadOnlyList<TestCaseData> netpbm_pixmap_text_cases = new TestCaseData[] {
