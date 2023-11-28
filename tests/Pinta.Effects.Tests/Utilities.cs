@@ -33,7 +33,7 @@ internal static class Utilities
 
 	public static void CompareImages (ImageSurface result, ImageSurface expected, int tolerance = 1)
 	{
-		Assert.AreEqual (result.GetSize (), expected.GetSize ());
+		Assert.That (expected.GetSize (), Is.EqualTo (result.GetSize ()));
 
 		var result_pixels = result.GetReadOnlyPixelData ();
 		var expected_pixels = expected.GetReadOnlyPixelData ();
@@ -49,7 +49,7 @@ internal static class Utilities
 			}
 		}
 
-		Assert.AreEqual (0, diffs);
+		Assert.That (diffs, Is.EqualTo (0));
 	}
 
 	public static void TestEffect (BaseEffect effect, string result_image_name, string? save_image_name = null)

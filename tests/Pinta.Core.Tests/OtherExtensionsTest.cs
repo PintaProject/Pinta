@@ -13,7 +13,7 @@ internal sealed class OtherExtensionsTest
 		var source = Enumerable.Range (0, 10);
 		var materialized1 = source.ToReadOnlyCollection ();
 		var materialized2 = materialized1.ToReadOnlyCollection ();
-		Assert.AreSame (materialized1, materialized2);
+		Assert.That (materialized2, Is.SameAs (materialized1));
 	}
 
 	[TestCaseSource (nameof (create_polygon_set_arguments_for_empty))]
@@ -21,7 +21,7 @@ internal sealed class OtherExtensionsTest
 	{
 		var bitmask = new BitMask (0, 0);
 		var polygonSet = bitmask.CreatePolygonSet (bounds, translateX, translateY);
-		Assert.Zero (polygonSet.Count);
+		Assert.That (polygonSet.Count, Is.Zero);
 	}
 
 	private static readonly IReadOnlyList<TestCaseData> create_polygon_set_arguments_for_empty = new TestCaseData[] {
