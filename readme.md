@@ -29,10 +29,10 @@ Used under [Creative Commons Attribution 3.0 License](http://creativecommons.org
 ## Building on Windows
 
 Pinta can be built by opening `Pinta.sln` in [Visual Studio](https://visualstudio.microsoft.com/).
-Ensure that .NET 7 is installed via the Visual Studio installer.
+Ensure that .NET 8 is installed via the Visual Studio installer.
 
 For building on the command line:
-- [Install the .NET 7 SDK](https://dotnet.microsoft.com/).
+- [Install the .NET 8 SDK](https://dotnet.microsoft.com/).
 - Build:
   - `dotnet build`
 - Run:
@@ -40,7 +40,7 @@ For building on the command line:
 
 ## Building on macOS
 
-- Install .NET 7 and GTK4
+- Install .NET 8 and GTK4
   - `brew install dotnet-sdk libadwaita adwaita-icon-theme gettext webp-pixbuf-loader`
 - Build:
   - `dotnet build`
@@ -51,7 +51,7 @@ Alternatively, Pinta can be built by opening `Pinta.sln` in [Visual Studio for M
 
 ## Building on Linux
 
-- Install [.NET 7](https://dotnet.microsoft.com/) following the instructions for your Linux distribution.
+- Install [.NET 8](https://dotnet.microsoft.com/) following the instructions for your Linux distribution.
 - Install other dependencies (instructions are for Ubuntu 22.10, but should be similar for other distros):
   - `sudo apt install autotools-dev autoconf-archive gettext intltool libadwaita-1-dev
   - Minimum library versions: `gtk` >= 4.8 and `libadwaita` >= 1.2
