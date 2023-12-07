@@ -210,7 +210,7 @@ public sealed class AddNoiseEffect : BaseEffect
 		[Caption ("Coverage"), MinimumValue (0), DigitsValue (2), MaximumValue (100)]
 		public double Coverage { get; set; } = 100.0;
 
-		[Caption ("Seed")]
+		[Caption ("Random Noise")]
 		public RandomSeed Seed { get; set; } = new (0);
 	}
 }

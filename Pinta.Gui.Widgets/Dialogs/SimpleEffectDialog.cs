@@ -395,7 +395,7 @@ public sealed class SimpleEffectDialog : Gtk.Dialog
 
 	private ReseedButtonWidget CreateSeed (string caption, object o, MemberInfo member, object[] attributes)
 	{
-		var widget = new ReseedButtonWidget ();
+		var widget = new ReseedButtonWidget () { Label = caption };
 
 		int min_value = 0;
 		int max_value = int.MaxValue - 1;
