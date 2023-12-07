@@ -9,6 +9,8 @@
 
 using System;
 using System.Collections.Immutable;
+using System.Numerics;
+using System.Runtime.CompilerServices;
 using Cairo;
 using Pinta.Core;
 using Pinta.Gui.Widgets;
@@ -17,10 +19,6 @@ namespace Pinta.Effects;
 
 public sealed class AddNoiseEffect : BaseEffect
 {
-	private int intensity;
-	private int color_saturation;
-	private double coverage;
-
 	public sealed override bool IsTileable => true;
 
 	public override string Icon => Pinta.Resources.Icons.EffectsNoiseAddNoise;
@@ -49,8 +47,6 @@ public sealed class AddNoiseEffect : BaseEffect
 	}
 
 	#region Algorithm Code Ported From PDN
-	[ThreadStatic]
-	private static Random thread_rand = new ();
 	private const int TableSize = 16384;
 	private static readonly ImmutableArray<int> lookup;
 
@@ -105,19 +101,53 @@ public sealed class AddNoiseEffect : BaseEffect
 		return result.ToImmutable ();
 	}
 
+	private static int CreateSeedForRegion (int global_seed, int rect_left, int rect_top)
+	{
+		// Note that HashCode.Combine() can't be used because it is random per-process and would
+		// produce inconsistent results for unit tests.
+		// This is the same implementation from HashCode.cs, but without the randomization.
+		const uint Prime2 = 2246822519U;
+		const uint Prime3 = 3266489917U;
+		const uint Prime4 = 668265263U;
+
+		[MethodImpl (MethodImplOptions.AggressiveInlining)]
+		static uint MixFinal (uint hash)
+		{
+			hash ^= hash >> 15;
+			hash *= Prime2;
+			hash ^= hash >> 13;
+			hash *= Prime3;
+			hash ^= hash >> 16;
+			return hash;
+		}
+
+		[MethodImpl (MethodImplOptions.AggressiveInlining)]
+		static uint QueueRound (uint hash, uint queuedValue)
+		{
+			return BitOperations.RotateLeft (hash + queuedValue * Prime3, 17) * Prime4;
+		}
+
+		uint hash = 374761393U;
+		hash += 12;
+
+		hash = QueueRound (hash, (uint) global_seed);
+		hash = QueueRound (hash, (uint) rect_left);
+		hash = QueueRound (hash, (uint) rect_top);
+
+		hash = MixFinal (hash);
+		return (int) hash;
+	}
+
 	public override void Render (ImageSurface src, ImageSurface dst, ReadOnlySpan<RectangleI> rois)
 	{
-		this.intensity = Data.Intensity;
-		this.color_saturation = Data.ColorSaturation;
-		this.coverage = 0.01 * Data.Coverage;
+		int intensity = Data.Intensity;
+		int color_saturation = Data.ColorSaturation;
+		double coverage = 0.01 * Data.Coverage;
+		int global_seed = Data.Seed.Value;
 
-		int dev = this.intensity * this.intensity / 4;
-		int sat = this.color_saturation * 4096 / 100;
+		int dev = intensity * intensity / 4;
+		int sat = color_saturation * 4096 / 100;
 
-		thread_rand ??= new Random (unchecked(System.Threading.Thread.CurrentThread.GetHashCode () ^
-			    unchecked((int) DateTime.Now.Ticks)));
-
-		Random localRand = thread_rand;
 		ReadOnlySpan<int> localLookup = lookup.AsSpan ();
 
 		ReadOnlySpan<ColorBgra> src_data = src.GetReadOnlyPixelData ();
@@ -125,14 +155,18 @@ public sealed class AddNoiseEffect : BaseEffect
 		int width = src.Width;
 
 		foreach (var rect in rois) {
-			int right = rect.Right;
+			// Reseed the random number generator for each rectangle being rendered.
+			// This should produce consistent results regardless of the number of threads
+			// being used to render the effect, but will change if the effect is tiled differently.
+			var rand = new Random (CreateSeedForRegion (global_seed, rect.Left, rect.Top));
 
+			int right = rect.Right;
 			for (int y = rect.Top; y <= rect.Bottom; ++y) {
 				var dst_row = dst_data.Slice (y * width, width);
 				var src_row = src_data.Slice (y * width, width);
 
 				for (int x = rect.Left; x <= right; ++x) {
-					if (localRand.NextDouble () > this.coverage) {
+					if (rand.NextDouble () > coverage) {
 						dst_row[x] = src_row[x];
 					} else {
 						int r;
@@ -140,9 +174,9 @@ public sealed class AddNoiseEffect : BaseEffect
 						int b;
 						int i;
 
-						r = localLookup[localRand.Next (TableSize)];
-						g = localLookup[localRand.Next (TableSize)];
-						b = localLookup[localRand.Next (TableSize)];
+						r = localLookup[rand.Next (TableSize)];
+						g = localLookup[rand.Next (TableSize)];
+						b = localLookup[rand.Next (TableSize)];
 
 						i = (4899 * r + 9618 * g + 1867 * b) >> 14;
 
@@ -175,5 +209,8 @@ public sealed class AddNoiseEffect : BaseEffect
 
 		[Caption ("Coverage"), MinimumValue (0), DigitsValue (2), MaximumValue (100)]
 		public double Coverage { get; set; } = 100.0;
+
+		[Caption ("Seed")]
+		public RandomSeed Seed { get; set; } = new (0);
 	}
 }
