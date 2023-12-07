@@ -102,10 +102,12 @@ internal sealed class EffectsTest
 	}
 
 	[Test]
-	[Ignore ("Produces non-deterministic results because the random seed is not fixed")]
 	public void FrostedGlass ()
 	{
-		// TODO
+		var effect = new FrostedGlassEffect ();
+		effect.Data.Amount = 7;
+		effect.Data.Seed = new (42);
+		Utilities.TestEffect (effect, "frostedglass1.png");
 	}
 
 	[Test]

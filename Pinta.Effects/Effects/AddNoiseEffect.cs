@@ -9,8 +9,6 @@
 
 using System;
 using System.Collections.Immutable;
-using System.Numerics;
-using System.Runtime.CompilerServices;
 using Cairo;
 using Pinta.Core;
 using Pinta.Gui.Widgets;
@@ -101,49 +99,11 @@ public sealed class AddNoiseEffect : BaseEffect
 		return result.ToImmutable ();
 	}
 
-	private static int CreateSeedForRegion (int global_seed, int rect_left, int rect_top)
-	{
-		// Note that HashCode.Combine() can't be used because it is random per-process and would
-		// produce inconsistent results for unit tests.
-		// This is the same implementation from HashCode.cs, but without the randomization.
-		const uint Prime2 = 2246822519U;
-		const uint Prime3 = 3266489917U;
-		const uint Prime4 = 668265263U;
-
-		[MethodImpl (MethodImplOptions.AggressiveInlining)]
-		static uint MixFinal (uint hash)
-		{
-			hash ^= hash >> 15;
-			hash *= Prime2;
-			hash ^= hash >> 13;
-			hash *= Prime3;
-			hash ^= hash >> 16;
-			return hash;
-		}
-
-		[MethodImpl (MethodImplOptions.AggressiveInlining)]
-		static uint QueueRound (uint hash, uint queuedValue)
-		{
-			return BitOperations.RotateLeft (hash + queuedValue * Prime3, 17) * Prime4;
-		}
-
-		uint hash = 374761393U;
-		hash += 12;
-
-		hash = QueueRound (hash, (uint) global_seed);
-		hash = QueueRound (hash, (uint) rect_left);
-		hash = QueueRound (hash, (uint) rect_top);
-
-		hash = MixFinal (hash);
-		return (int) hash;
-	}
-
 	public override void Render (ImageSurface src, ImageSurface dst, ReadOnlySpan<RectangleI> rois)
 	{
 		int intensity = Data.Intensity;
 		int color_saturation = Data.ColorSaturation;
 		double coverage = 0.01 * Data.Coverage;
-		int global_seed = Data.Seed.Value;
 
 		int dev = intensity * intensity / 4;
 		int sat = color_saturation * 4096 / 100;
@@ -158,7 +118,7 @@ public sealed class AddNoiseEffect : BaseEffect
 			// Reseed the random number generator for each rectangle being rendered.
 			// This should produce consistent results regardless of the number of threads
 			// being used to render the effect, but will change if the effect is tiled differently.
-			var rand = new Random (CreateSeedForRegion (global_seed, rect.Left, rect.Top));
+			var rand = new Random (Data.Seed.GetValueForRegion (rect));
 
 			int right = rect.Right;
 			for (int y = rect.Top; y <= rect.Bottom; ++y) {

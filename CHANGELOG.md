@@ -21,7 +21,7 @@ Thanks to the following contributors who worked on this release:
 
 ### Changed
 - When building Pinta using the Makefile, 'dotnet publish' is now run during the build step rather than the install step.
-- Added a "Reseed" button for the Add Noise Effect, which generates a new noise pattern. The noise pattern will otherwise remain the same while other parameters are adjusted.
+- Added a "Reseed" button for the random noise used by several effects ("Add Noise" and "Frosted Glass").  Previously, the noise pattern changed every time the effect was computed (including when other parameters were changed).
 
 ### Fixed
 - Fixed an issue where the Pan tool's cursor could show up as a missing icon ([#2013047](https://bugs.launchpad.net/pinta/+bug/2013047))
