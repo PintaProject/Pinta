@@ -1,4 +1,6 @@
 using System;
+using System.Numerics;
+using System.Runtime.CompilerServices;
 
 namespace Pinta.Core;
 
@@ -27,4 +29,45 @@ public readonly struct RandomSeed
 	public override readonly int GetHashCode () => Value.GetHashCode ();
 	public static bool operator == (RandomSeed left, RandomSeed right) => left.Equals (right);
 	public static bool operator != (RandomSeed left, RandomSeed right) => !left.Equals (right);
+
+	/// <summary>
+	/// Produces a new random seed based on <see cref="Value"/>  and the specified region.
+	/// This can be useful for tiled effects.
+	/// </summary>
+	public int GetValueForRegion (in RectangleI region)
+	{
+		// Note that HashCode.Combine() can't be used because it is random per-process and would
+		// produce inconsistent results for unit tests.
+		// This is the same implementation from HashCode.cs, but without the randomization.
+		const uint Prime2 = 2246822519U;
+		const uint Prime3 = 3266489917U;
+		const uint Prime4 = 668265263U;
+
+		[MethodImpl (MethodImplOptions.AggressiveInlining)]
+		static uint MixFinal (uint hash)
+		{
+			hash ^= hash >> 15;
+			hash *= Prime2;
+			hash ^= hash >> 13;
+			hash *= Prime3;
+			hash ^= hash >> 16;
+			return hash;
+		}
+
+		[MethodImpl (MethodImplOptions.AggressiveInlining)]
+		static uint QueueRound (uint hash, uint queuedValue)
+		{
+			return BitOperations.RotateLeft (hash + queuedValue * Prime3, 17) * Prime4;
+		}
+
+		uint hash = 374761393U;
+		hash += 12;
+
+		hash = QueueRound (hash, (uint) Value);
+		hash = QueueRound (hash, (uint) region.Left);
+		hash = QueueRound (hash, (uint) region.Top);
+
+		hash = MixFinal (hash);
+		return (int) hash;
+	}
 }

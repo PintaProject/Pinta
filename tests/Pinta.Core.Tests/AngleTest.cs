@@ -15,7 +15,7 @@ internal sealed class AngleTest
 	public void RadiansAngle_Creation (double constructorArgument, double expectedPropertyValue)
 	{
 		RadiansAngle angle = new (constructorArgument);
-		Assert.AreEqual (angle.Radians, expectedPropertyValue);
+		Assert.That (expectedPropertyValue, Is.EqualTo (angle.Radians));
 	}
 
 	[TestCase (1d, 1d)]
@@ -27,7 +27,7 @@ internal sealed class AngleTest
 	public void DegreesAngle_Creation (double constructorArgument, double expectedPropertyValue)
 	{
 		DegreesAngle angle = new (constructorArgument);
-		Assert.AreEqual (angle.Degrees, expectedPropertyValue);
+		Assert.That (expectedPropertyValue, Is.EqualTo (angle.Degrees));
 	}
 
 	[TestCase (0.5d, 0.5d)]
@@ -38,7 +38,7 @@ internal sealed class AngleTest
 	public void RevolutionsAngle_Creation (double constructorArgument, double expectedPropertyValue)
 	{
 		RevolutionsAngle angle = new (constructorArgument);
-		Assert.AreEqual (angle.Revolutions, expectedPropertyValue);
+		Assert.That (expectedPropertyValue, Is.EqualTo (angle.Revolutions));
 	}
 
 	[TestCase (1d, 1d, 2d)]
@@ -52,7 +52,7 @@ internal sealed class AngleTest
 		RadiansAngle left = new (leftArgument);
 		RadiansAngle right = new (rightArgument);
 		var result = left + right;
-		Assert.AreEqual (result.Radians, expectedResult);
+		Assert.That (expectedResult, Is.EqualTo (result.Radians));
 	}
 
 	[TestCase (1d, 1d, 2d)]
@@ -66,7 +66,7 @@ internal sealed class AngleTest
 		DegreesAngle left = new (leftArgument);
 		DegreesAngle right = new (rightArgument);
 		var result = left + right;
-		Assert.AreEqual (result.Degrees, expectedResult);
+		Assert.That (expectedResult, Is.EqualTo (result.Degrees));
 	}
 
 	[TestCase (0.125d, 0.125d, 0.25d)]
@@ -80,7 +80,7 @@ internal sealed class AngleTest
 		RevolutionsAngle left = new (leftArgument);
 		RevolutionsAngle right = new (rightArgument);
 		var result = left + right;
-		Assert.AreEqual (result.Revolutions, expectedResult);
+		Assert.That (expectedResult, Is.EqualTo (result.Revolutions));
 	}
 
 	[TestCase (Math.PI * 0.5, Math.PI, Math.PI * 1.5)]
@@ -92,7 +92,7 @@ internal sealed class AngleTest
 		RadiansAngle left = new (leftArgument);
 		RadiansAngle right = new (rightArgument);
 		var result = left - right;
-		Assert.AreEqual (result.Radians, expectedResult);
+		Assert.That (expectedResult, Is.EqualTo (result.Radians));
 	}
 
 	[TestCase (90d, 180d, 270d)]
@@ -104,7 +104,7 @@ internal sealed class AngleTest
 		DegreesAngle left = new (leftArgument);
 		DegreesAngle right = new (rightArgument);
 		var result = left - right;
-		Assert.AreEqual (result.Degrees, expectedResult);
+		Assert.That (expectedResult, Is.EqualTo (result.Degrees));
 	}
 
 	[TestCase (0.25d, 0.5d, 0.75d)]
@@ -116,7 +116,7 @@ internal sealed class AngleTest
 		RevolutionsAngle left = new (leftArgument);
 		RevolutionsAngle right = new (rightArgument);
 		var result = left - right;
-		Assert.AreEqual (result.Revolutions, expectedResult);
+		Assert.That (expectedResult, Is.EqualTo (result.Revolutions));
 	}
 
 	[TestCase (0d, 0d)]
@@ -128,7 +128,7 @@ internal sealed class AngleTest
 	{
 		RadiansAngle radiansAngle = new (radians);
 		DegreesAngle degreesAngle = radiansAngle.ToDegrees ();
-		Assert.AreEqual (degreesAngle.Degrees, expectedDegrees);
+		Assert.That (expectedDegrees, Is.EqualTo (degreesAngle.Degrees));
 	}
 
 	[TestCase (0d, 0d)]
@@ -140,7 +140,7 @@ internal sealed class AngleTest
 	{
 		RadiansAngle radiansAngle = new (radians);
 		RevolutionsAngle revolutionsAngle = radiansAngle.ToRevolutions ();
-		Assert.AreEqual (revolutionsAngle.Revolutions, expectedRevolutions);
+		Assert.That (expectedRevolutions, Is.EqualTo (revolutionsAngle.Revolutions));
 	}
 
 	[TestCase (0d, 0d)]
@@ -152,7 +152,7 @@ internal sealed class AngleTest
 	{
 		DegreesAngle degreesAngle = new (degrees);
 		RadiansAngle radiansAngle = degreesAngle.ToRadians ();
-		Assert.AreEqual (radiansAngle.Radians, expectedRadians);
+		Assert.That (expectedRadians, Is.EqualTo (radiansAngle.Radians));
 	}
 
 	[TestCase (0d, 0d)]
@@ -164,7 +164,7 @@ internal sealed class AngleTest
 	{
 		DegreesAngle degreesAngle = new (degrees);
 		RevolutionsAngle revolutionsAngle = degreesAngle.ToRevolutions ();
-		Assert.AreEqual (revolutionsAngle.Revolutions, expectedRevolutions);
+		Assert.That (expectedRevolutions, Is.EqualTo (revolutionsAngle.Revolutions));
 	}
 
 	[TestCase (0d, 0d)]
@@ -176,7 +176,7 @@ internal sealed class AngleTest
 	{
 		RevolutionsAngle revolutionsAngle = new (revolutions);
 		RadiansAngle radiansAngle = revolutionsAngle.ToRadians ();
-		Assert.AreEqual (radiansAngle.Radians, expectedRadians);
+		Assert.That (expectedRadians, Is.EqualTo (radiansAngle.Radians));
 	}
 
 	[TestCase (0d, 0d)]
@@ -188,6 +188,6 @@ internal sealed class AngleTest
 	{
 		RevolutionsAngle revolutionsAngle = new (revolutions);
 		DegreesAngle degreesAngle = revolutionsAngle.ToDegrees ();
-		Assert.AreEqual (degreesAngle.Degrees, expectedDegrees);
+		Assert.That (expectedDegrees, Is.EqualTo (degreesAngle.Degrees));
 	}
 }

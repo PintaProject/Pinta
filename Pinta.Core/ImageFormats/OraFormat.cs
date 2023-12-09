@@ -27,9 +27,9 @@
 using System;
 using System.Collections.Generic;
 using System.IO;
+using System.IO.Compression;
 using System.Xml;
 using Cairo;
-using ICSharpCode.SharpZipLib.Zip;
 
 namespace Pinta.Core;
 
@@ -42,9 +42,14 @@ public sealed class OraFormat : IImageImporter, IImageExporter
 	public void Import (Gio.File file, Gtk.Window parent)
 	{
 		using var stream = new GioStream (file.Read (cancellable: null));
-		ZipFile zipfile = new ZipFile (stream);
+		using var zipfile = new ZipArchive (stream);
 		XmlDocument stackXml = new XmlDocument ();
-		stackXml.Load (zipfile.GetInputStream (zipfile.GetEntry ("stack.xml")));
+
+		ZipArchiveEntry? stackXmlEntry = zipfile.GetEntry ("stack.xml");
+		if (stackXmlEntry is null)
+			throw new XmlException ("No 'stack.xml' found in OpenRaster file");
+
+		stackXml.Load (stackXmlEntry.Open ());
 
 		// NRT - This makes a lot of assumptions that the file will be perfectly
 		// valid that we need to guard against.
@@ -74,8 +79,11 @@ public sealed class OraFormat : IImageImporter, IImageExporter
 			try {
 				// Write the file to a temporary file first
 				// Fixes a bug when running on .Net
-				ZipEntry zf = zipfile.GetEntry (layerElement.GetAttribute ("src"));
-				Stream s = zipfile.GetInputStream (zf);
+				ZipArchiveEntry? zf = zipfile.GetEntry (layerElement.GetAttribute ("src"));
+				if (zf is null)
+					throw new XmlException ("Missing layer in OpenRaster file");
+
+				using Stream s = zf.Open ();
 				string tmp_file = System.IO.Path.GetTempFileName ();
 
 				using (Stream stream_out = File.Open (tmp_file, FileMode.OpenOrCreate)) {
@@ -115,8 +123,6 @@ public sealed class OraFormat : IImageImporter, IImageExporter
 				PintaCore.Chrome.ShowMessageDialog (PintaCore.Chrome.MainWindow, Translations.GetString ("Error"), details);
 			}
 		}
-
-		zipfile.Close ();
 	}
 	#endregion
 
@@ -181,42 +187,49 @@ public sealed class OraFormat : IImageImporter, IImageExporter
 	{
 		using var file_stream = new GioStream (file.Replace ());
 
-		using var stream = new ZipOutputStream (file_stream) {
-			UseZip64 = UseZip64.Off // For backwards compatibility with older versions.
-		};
-		ZipEntry mimetype = new ZipEntry ("mimetype") {
-			CompressionMethod = CompressionMethod.Stored
-		};
-		stream.PutNextEntry (mimetype);
+		using var archive = new ZipArchive (file_stream, ZipArchiveMode.Create);
 
-		var mimeBytes = System.Text.Encoding.ASCII.GetBytes ("image/openraster");
-		stream.Write (mimeBytes, 0, mimeBytes.Length);
+		{
+			var mimeBytes = System.Text.Encoding.ASCII.GetBytes ("image/openraster");
+			ZipArchiveEntry entry = archive.CreateEntry ("mimetype", CompressionLevel.NoCompression);
+			using var s = entry.Open ();
+			s.Write (mimeBytes, 0, mimeBytes.Length);
+		}
 
 		for (int i = 0; i < document.Layers.UserLayers.Count; i++) {
 			var pb = document.Layers.UserLayers[i].Surface.ToPixbuf ();
 			byte[] buf = pb.SaveToBuffer ("png");
 
-			stream.PutNextEntry (new ZipEntry ("data/layer" + i.ToString () + ".png"));
-			stream.Write (buf, 0, buf.Length);
+			ZipArchiveEntry entry = archive.CreateEntry ($"data/layer{i}.png");
+			using var s = entry.Open ();
+			s.Write (buf, 0, buf.Length);
 		}
 
-		stream.PutNextEntry (new ZipEntry ("stack.xml"));
-		var userLayerBytes = GetLayerXmlData (document.Layers.UserLayers);
-		stream.Write (userLayerBytes, 0, userLayerBytes.Length);
-
-		var flattenedPb = document.GetFlattenedImage ().ToPixbuf ();
+		{
+			var userLayerBytes = GetLayerXmlData (document.Layers.UserLayers);
+			ZipArchiveEntry entry = archive.CreateEntry ("stack.xml");
+			using var s = entry.Open ();
+			s.Write (userLayerBytes, 0, userLayerBytes.Length);
+		}
 
 		// Add merged image.
-		stream.PutNextEntry (new ZipEntry ("mergedimage.png"));
-		var mergedImageBytes = flattenedPb.SaveToBuffer ("png");
-		stream.Write (mergedImageBytes, 0, mergedImageBytes.Length);
+		var flattenedPb = document.GetFlattenedImage ().ToPixbuf ();
+		{
+			var mergedImageBytes = flattenedPb.SaveToBuffer ("png");
+			ZipArchiveEntry entry = archive.CreateEntry ("mergedimage.png");
+			using var s = entry.Open ();
+			s.Write (mergedImageBytes, 0, mergedImageBytes.Length);
+		}
 
 		// Add thumbnail.
-		Size newSize = GetThumbDimensions (flattenedPb.Width, flattenedPb.Height);
-		var thumb = flattenedPb.ScaleSimple (newSize.Width, newSize.Height, GdkPixbuf.InterpType.Bilinear)!;
-		stream.PutNextEntry (new ZipEntry ("Thumbnails/thumbnail.png"));
-		var thumbnailBytes = thumb.SaveToBuffer ("png");
-		stream.Write (thumbnailBytes, 0, thumbnailBytes.Length);
+		{
+			Size newSize = GetThumbDimensions (flattenedPb.Width, flattenedPb.Height);
+			var thumb = flattenedPb.ScaleSimple (newSize.Width, newSize.Height, GdkPixbuf.InterpType.Bilinear)!;
+			var thumbnailBytes = thumb.SaveToBuffer ("png");
+			ZipArchiveEntry entry = archive.CreateEntry ("Thumbnails/thumbnail.png");
+			using var s = entry.Open ();
+			s.Write (thumbnailBytes, 0, thumbnailBytes.Length);
+		}
 	}
 
 	private static string BlendModeToStandard (BlendMode mode)

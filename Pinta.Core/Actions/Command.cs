@@ -1,21 +1,21 @@
-// 
+//
 // Command.cs
-//  
+//
 // Author:
 //       Cameron White <cameronwhite91@gmail.com>
-// 
+//
 // Copyright (c) 2010 Cameron White
-// 
+//
 // Permission is hereby granted, free of charge, to any person obtaining a copy
 // of this software and associated documentation files (the "Software"), to deal
 // in the Software without restriction, including without limitation the rights
 // to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
 // copies of the Software, and to permit persons to whom the Software is
 // furnished to do so, subject to the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be included in
 // all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
 // IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
 // FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
@@ -24,6 +24,7 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 // THE SOFTWARE.
 
+using System;
 using Gio;
 using GObject;
 
@@ -75,21 +76,21 @@ public class Command
 public sealed class ToggleCommand : Command
 {
 	public ToggleCommand (string name, string label, string? tooltip, string? stock_id)
-	    : base (name, label, tooltip, stock_id, CreateBoolVariant (false))
+	    : base (name, label, tooltip, stock_id, GLib.Variant.NewBoolean (false))
 	{
 		Activated += (o, args) => {
-			var active = !GetBoolValue (Action.GetState ());
+			bool active = !State.GetBoolean ();
 			Toggled?.Invoke (active);
-			Action.ChangeState (CreateBoolVariant (active));
+			Action.ChangeState (GLib.Variant.NewBoolean (active));
 		};
 	}
 
 	public bool Value {
-		get => GetBoolValue (Action.GetState ());
+		get => State.GetBoolean ();
 		set {
 			if (value != Value) {
 				Toggled?.Invoke (value);
-				Action.ChangeState (CreateBoolVariant (value));
+				Action.ChangeState (GLib.Variant.NewBoolean (value));
 			}
 		}
 	}
@@ -97,7 +98,5 @@ public sealed class ToggleCommand : Command
 	public delegate void ToggledHandler (bool value);
 	public ToggledHandler? Toggled;
 
-	// TODO-GTK4 (bindings) - missing GLib.Variant bindings (https://github.com/gircore/gir.core/issues/843)
-	private static GLib.Variant CreateBoolVariant (bool v) => new (GLib.Internal.Variant.NewBoolean (v));
-	private static bool GetBoolValue (GLib.Variant val) => GLib.Internal.Variant.GetBoolean (val.Handle);
+	private GLib.Variant State => Action.GetState () ?? throw new InvalidOperationException ("Action should not be stateless!");
 }

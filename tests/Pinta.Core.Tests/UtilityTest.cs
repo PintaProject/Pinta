@@ -13,7 +13,7 @@ internal sealed class UtilityTest
 		for (float i = MIN; i <= MAX; i++) {
 			byte clamped = Utility.ClampToByte (i);
 			float convertedBack = clamped;
-			Assert.AreEqual (i, convertedBack);
+			Assert.That (convertedBack, Is.EqualTo (i));
 		}
 	}
 
@@ -23,7 +23,7 @@ internal sealed class UtilityTest
 	public void ClampToByte_Single_LessThanMinBecomesMin (float n)
 	{
 		byte clamped = Utility.ClampToByte (n);
-		Assert.AreEqual (clamped, byte.MinValue);
+		Assert.That (clamped, Is.EqualTo (byte.MinValue));
 	}
 
 	[TestCase (256f)]
@@ -32,7 +32,7 @@ internal sealed class UtilityTest
 	public void ClampToByte_Single_MoreThanMaxBecomesMax (float n)
 	{
 		byte clamped = Utility.ClampToByte (n);
-		Assert.AreEqual (clamped, byte.MaxValue);
+		Assert.That (clamped, Is.EqualTo (byte.MaxValue));
 	}
 
 	[Test]
@@ -43,7 +43,7 @@ internal sealed class UtilityTest
 		for (double i = MIN; i <= MAX; i++) {
 			byte clamped = Utility.ClampToByte (i);
 			double convertedBack = clamped;
-			Assert.AreEqual (i, convertedBack);
+			Assert.That (convertedBack, Is.EqualTo (i));
 		}
 	}
 
@@ -53,7 +53,7 @@ internal sealed class UtilityTest
 	public void ClampToByte_Double_LessThanMinBecomesMin (double n)
 	{
 		byte clamped = Utility.ClampToByte (n);
-		Assert.AreEqual (clamped, byte.MinValue);
+		Assert.That (clamped, Is.EqualTo (byte.MinValue));
 	}
 
 	[TestCase (256d)]
@@ -62,7 +62,7 @@ internal sealed class UtilityTest
 	public void ClampToByte_Double_MoreThanMaxBecomesMax (double n)
 	{
 		byte clamped = Utility.ClampToByte (n);
-		Assert.AreEqual (clamped, byte.MaxValue);
+		Assert.That (clamped, Is.EqualTo (byte.MaxValue));
 	}
 
 	[Test]
@@ -73,7 +73,7 @@ internal sealed class UtilityTest
 		for (int i = MIN; i <= MAX; i++) {
 			byte clamped = Utility.ClampToByte (i);
 			double convertedBack = clamped;
-			Assert.AreEqual (i, convertedBack);
+			Assert.That (convertedBack, Is.EqualTo (i));
 		}
 	}
 
@@ -82,7 +82,7 @@ internal sealed class UtilityTest
 	public void ClampToByte_Int32_LessThanMinBecomesMin (int n)
 	{
 		byte clamped = Utility.ClampToByte (n);
-		Assert.AreEqual (clamped, byte.MinValue);
+		Assert.That (clamped, Is.EqualTo (byte.MinValue));
 	}
 
 	[TestCase (256)]
@@ -90,6 +90,6 @@ internal sealed class UtilityTest
 	public void ClampToByte_Int32_MoreThanMaxBecomesMax (int n)
 	{
 		byte clamped = Utility.ClampToByte (n);
-		Assert.AreEqual (clamped, byte.MaxValue);
+		Assert.That (clamped, Is.EqualTo (byte.MaxValue));
 	}
 }

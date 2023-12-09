@@ -32,7 +32,7 @@ internal sealed class DashPatternTest
 	public void CreateDashPattern (Cairo.LineCap line_cap, string pattern, double[] expected_dashes, double expected_offset)
 	{
 		CairoExtensions.CreateDashPattern (pattern, 3.0, line_cap, out var dashes, out var offset);
-		Assert.AreEqual (expected_dashes, dashes);
-		Assert.AreEqual (expected_offset, offset);
+		Assert.That (dashes, Is.EqualTo (expected_dashes));
+		Assert.That (offset, Is.EqualTo (expected_offset));
 	}
 }

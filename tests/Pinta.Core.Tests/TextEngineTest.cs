@@ -30,10 +30,9 @@ internal sealed class TextEngineTest
 		engine.SetCursorPosition (new TextPosition (1, 1), true);
 		engine.PerformEnter ();
 
-		Assert.AreEqual (3, engine.LineCount);
-		Assert.AreEqual (LinesToString (new string[] { "foo", "b", "ar" }),
-				 engine.ToString ());
-		Assert.AreEqual (new TextPosition (2, 0), engine.CurrentPosition);
+		Assert.That (engine.LineCount, Is.EqualTo (3));
+		Assert.That (engine.ToString (), Is.EqualTo (LinesToString (new string[] { "foo", "b", "ar" })));
+		Assert.That (engine.CurrentPosition, Is.EqualTo (new TextPosition (2, 0)));
 	}
 
 	[Test]
@@ -45,9 +44,8 @@ internal sealed class TextEngineTest
 		engine.PerformDown (true);
 		engine.PerformDelete ();
 
-		Assert.AreEqual (1, engine.LineCount);
-		Assert.AreEqual (LinesToString (new string[] { "line 3" }),
-				 engine.ToString ());
+		Assert.That (engine.LineCount, Is.EqualTo (1));
+		Assert.That (engine.ToString (), Is.EqualTo (LinesToString (new string[] { "line 3" })));
 	}
 
 	[Test]
@@ -58,10 +56,9 @@ internal sealed class TextEngineTest
 		engine.PerformDown (true);
 		engine.PerformDelete ();
 
-		Assert.AreEqual (1, engine.LineCount);
-		Assert.AreEqual (LinesToString (new string[] { "это еще один тест" }),
-				 engine.ToString ());
-		Assert.AreEqual (new TextPosition (0, 2), engine.CurrentPosition);
+		Assert.That (engine.LineCount, Is.EqualTo (1));
+		Assert.That (engine.ToString (), Is.EqualTo (LinesToString (new string[] { "это еще один тест" })));
+		Assert.That (engine.CurrentPosition, Is.EqualTo (new TextPosition (0, 2)));
 	}
 
 	[Test]
@@ -71,9 +68,9 @@ internal sealed class TextEngineTest
 		engine.SetCursorPosition (new TextPosition (1, 0), true);
 		engine.PerformBackspace ();
 
-		Assert.AreEqual (1, engine.LineCount);
-		Assert.AreEqual ("foobar", engine.ToString ());
-		Assert.AreEqual (new TextPosition (0, 3), engine.CurrentPosition);
+		Assert.That (engine.LineCount, Is.EqualTo (1));
+		Assert.That (engine.ToString (), Is.EqualTo ("foobar"));
+		Assert.That (engine.CurrentPosition, Is.EqualTo (new TextPosition (0, 3)));
 	}
 
 	[Test]
@@ -85,22 +82,22 @@ internal sealed class TextEngineTest
 		engine.SetCursorPosition (new TextPosition (0, 6), true);
 		engine.PerformBackspace ();
 
-		Assert.AreEqual ("a\u0304\u0308b", engine.Lines[0]);
-		Assert.AreEqual (new TextPosition (0, 4), engine.CurrentPosition);
+		Assert.That (engine.Lines[0], Is.EqualTo ("a\u0304\u0308b"));
+		Assert.That (engine.CurrentPosition, Is.EqualTo (new TextPosition (0, 4)));
 
 		// First character of a line.
 		engine.SetCursorPosition (new TextPosition (1, 2), true);
 		engine.PerformBackspace ();
 
-		Assert.AreEqual ("ba\u0304\u0308", engine.Lines[1]);
-		Assert.AreEqual (new TextPosition (1, 0), engine.CurrentPosition);
+		Assert.That (engine.Lines[1], Is.EqualTo ("ba\u0304\u0308"));
+		Assert.That (engine.CurrentPosition, Is.EqualTo (new TextPosition (1, 0)));
 
 		// Middle of a line.
 		engine.SetCursorPosition (new TextPosition (2, 3), true);
 		engine.PerformBackspace ();
 
-		Assert.AreEqual ("ba\u0304\u0308", engine.Lines[2]);
-		Assert.AreEqual (new TextPosition (2, 1), engine.CurrentPosition);
+		Assert.That (engine.Lines[2], Is.EqualTo ("ba\u0304\u0308"));
+		Assert.That (engine.CurrentPosition, Is.EqualTo (new TextPosition (2, 1)));
 	}
 
 	[Test]
@@ -110,17 +107,17 @@ internal sealed class TextEngineTest
 		engine.SetCursorPosition (new TextPosition (0, 3), true);
 		engine.PerformDelete ();
 
-		Assert.AreEqual (1, engine.LineCount);
-		Assert.AreEqual ("foobar", engine.ToString ());
-		Assert.AreEqual (new TextPosition (0, 3), engine.CurrentPosition);
+		Assert.That (engine.LineCount, Is.EqualTo (1));
+		Assert.That (engine.ToString (), Is.EqualTo ("foobar"));
+		Assert.That (engine.CurrentPosition, Is.EqualTo (new TextPosition (0, 3)));
 
 		// Nothing happens when deleting at the end of the last line.
 		engine.SetCursorPosition (new TextPosition (0, 6), true);
 		engine.PerformDelete ();
 
-		Assert.AreEqual (1, engine.LineCount);
-		Assert.AreEqual ("foobar", engine.ToString ());
-		Assert.AreEqual (new TextPosition (0, 6), engine.CurrentPosition);
+		Assert.That (engine.LineCount, Is.EqualTo (1));
+		Assert.That (engine.ToString (), Is.EqualTo ("foobar"));
+		Assert.That (engine.CurrentPosition, Is.EqualTo (new TextPosition (0, 6)));
 	}
 
 	[Test]
@@ -132,22 +129,22 @@ internal sealed class TextEngineTest
 		engine.SetCursorPosition (new TextPosition (0, 0), true);
 		engine.PerformDelete ();
 
-		Assert.AreEqual ("bc\u0327", engine.Lines[0]);
-		Assert.AreEqual (new TextPosition (0, 0), engine.CurrentPosition);
+		Assert.That (engine.Lines[0], Is.EqualTo ("bc\u0327"));
+		Assert.That (engine.CurrentPosition, Is.EqualTo (new TextPosition (0, 0)));
 
 		// Middle of a line.
 		engine.SetCursorPosition (new TextPosition (2, 1), true);
 		engine.PerformDelete ();
 
-		Assert.AreEqual ("ba\u0304\u0308", engine.Lines[2]);
-		Assert.AreEqual (new TextPosition (2, 1), engine.CurrentPosition);
+		Assert.That (engine.Lines[2], Is.EqualTo ("ba\u0304\u0308"));
+		Assert.That (engine.CurrentPosition, Is.EqualTo (new TextPosition (2, 1)));
 
 		// End of a line.
 		engine.SetCursorPosition (new TextPosition (1, 3), true);
 		engine.PerformDelete ();
 
-		Assert.AreEqual ("c\u0327b", engine.Lines[1]);
-		Assert.AreEqual (new TextPosition (1, 3), engine.CurrentPosition);
+		Assert.That (engine.Lines[1], Is.EqualTo ("c\u0327b"));
+		Assert.That (engine.CurrentPosition, Is.EqualTo (new TextPosition (1, 3)));
 	}
 
 	[Test]
@@ -157,27 +154,27 @@ internal sealed class TextEngineTest
 
 		engine.SetCursorPosition (new TextPosition (0, 3), true);
 		engine.PerformRight (false, false);
-		Assert.AreEqual (new TextPosition (0, 4), engine.CurrentPosition);
+		Assert.That (engine.CurrentPosition, Is.EqualTo (new TextPosition (0, 4)));
 		engine.PerformRight (false, false);
-		Assert.AreEqual (new TextPosition (0, 6), engine.CurrentPosition);
+		Assert.That (engine.CurrentPosition, Is.EqualTo (new TextPosition (0, 6)));
 		engine.PerformRight (false, false);
 		engine.PerformRight (false, false);
-		Assert.AreEqual (new TextPosition (1, 2), engine.CurrentPosition);
+		Assert.That (engine.CurrentPosition, Is.EqualTo (new TextPosition (1, 2)));
 
 		engine.PerformLeft (false, false);
-		Assert.AreEqual (new TextPosition (1, 0), engine.CurrentPosition);
+		Assert.That (engine.CurrentPosition, Is.EqualTo (new TextPosition (1, 0)));
 		engine.PerformLeft (false, false);
-		Assert.AreEqual (new TextPosition (0, 6), engine.CurrentPosition);
+		Assert.That (engine.CurrentPosition, Is.EqualTo (new TextPosition (0, 6)));
 
 		// Should stay at the beginning / end when attempting to advance further.
 		engine.SetCursorPosition (new TextPosition (0, 0), true);
 		engine.PerformLeft (false, false);
-		Assert.AreEqual (new TextPosition (0, 0), engine.CurrentPosition);
+		Assert.That (engine.CurrentPosition, Is.EqualTo (new TextPosition (0, 0)));
 
 		var endPosition = new TextPosition (testSnippet.Count - 1, testSnippet.Last ().Length);
 		engine.SetCursorPosition (endPosition, true);
 		engine.PerformRight (false, false);
-		Assert.AreEqual (endPosition, engine.CurrentPosition);
+		Assert.That (engine.CurrentPosition, Is.EqualTo (endPosition));
 	}
 
 	[Test]
@@ -187,19 +184,19 @@ internal sealed class TextEngineTest
 
 		engine.SetCursorPosition (new TextPosition (0, 0), true);
 		engine.PerformRight (true, false);
-		Assert.AreEqual (new TextPosition (0, 8), engine.CurrentPosition);
+		Assert.That (engine.CurrentPosition, Is.EqualTo (new TextPosition (0, 8)));
 		engine.SetCursorPosition (new TextPosition (0, 7), true);
 		engine.PerformRight (true, false);
-		Assert.AreEqual (new TextPosition (0, 8), engine.CurrentPosition);
+		Assert.That (engine.CurrentPosition, Is.EqualTo (new TextPosition (0, 8)));
 		engine.PerformRight (true, false);
 		engine.PerformRight (true, false);
-		Assert.AreEqual (new TextPosition (0, 22), engine.CurrentPosition);
+		Assert.That (engine.CurrentPosition, Is.EqualTo (new TextPosition (0, 22)));
 
 		engine.PerformLeft (true, false);
 		engine.PerformLeft (true, false);
-		Assert.AreEqual (new TextPosition (0, 8), engine.CurrentPosition);
+		Assert.That (engine.CurrentPosition, Is.EqualTo (new TextPosition (0, 8)));
 		engine.PerformLeft (true, false);
-		Assert.AreEqual (new TextPosition (0, 0), engine.CurrentPosition);
+		Assert.That (engine.CurrentPosition, Is.EqualTo (new TextPosition (0, 0)));
 	}
 
 	[Test]
@@ -209,9 +206,9 @@ internal sealed class TextEngineTest
 
 		engine.SetCursorPosition (new TextPosition (1, 2), true);
 		engine.PerformUp (false);
-		Assert.AreEqual (new TextPosition (0, 3), engine.CurrentPosition);
+		Assert.That (engine.CurrentPosition, Is.EqualTo (new TextPosition (0, 3)));
 
 		engine.PerformDown (false);
-		Assert.AreEqual (new TextPosition (1, 2), engine.CurrentPosition);
+		Assert.That (engine.CurrentPosition, Is.EqualTo (new TextPosition (1, 2)));
 	}
 }

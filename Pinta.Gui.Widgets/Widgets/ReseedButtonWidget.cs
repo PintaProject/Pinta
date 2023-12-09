@@ -32,6 +32,7 @@ namespace Pinta.Gui.Widgets;
 
 public sealed class ReseedButtonWidget : Box
 {
+	private readonly Label label;
 	private readonly Button button;
 
 	public event EventHandler? Clicked;
@@ -41,7 +42,7 @@ public sealed class ReseedButtonWidget : Box
 		const int spacing = 6;
 
 		// Section label + line
-		var label = Label.New (Pinta.Core.Translations.GetString ("Random Noise"));
+		label = new ();
 		label.AddCssClass (AdwaitaStyles.Title4);
 		label.Hexpand = false;
 		label.Halign = Align.Start;
@@ -63,6 +64,11 @@ public sealed class ReseedButtonWidget : Box
 		Append (button);
 
 		button.OnClicked += (_, _) => Clicked?.Invoke (this, EventArgs.Empty);
+	}
+
+	public string Label {
+		get => label.GetText ();
+		set => label.SetText (value);
 	}
 }
 

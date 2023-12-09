@@ -84,8 +84,7 @@ public class LassoSelectTool : BaseTool
 		if (!is_drawing)
 			return;
 
-		var x = Math.Clamp (e.PointDouble.X, 0, document.ImageSize.Width - 1);
-		var y = Math.Clamp (e.PointDouble.Y, 0, document.ImageSize.Height - 1);
+		var p = document.ClampToImageSize (e.PointDouble);
 
 		document.Selection.Visible = true;
 
@@ -98,11 +97,11 @@ public class LassoSelectTool : BaseTool
 		if (path != null) {
 			g.AppendPath (path);
 		} else {
-			g.MoveTo (x, y);
+			g.MoveTo (p.X, p.Y);
 		}
 
-		g.LineTo (x, y);
-		lasso_polygon.Add (new IntPoint ((long) x, (long) y));
+		g.LineTo (p.X, p.Y);
+		lasso_polygon.Add (new IntPoint ((long) p.X, (long) p.Y));
 
 		path = g.CopyPath ();
 
