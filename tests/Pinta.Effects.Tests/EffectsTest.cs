@@ -8,10 +8,25 @@ namespace Pinta.Effects.Tests;
 internal sealed class EffectsTest
 {
 	[Test]
-	[Ignore ("Produces non-deterministic results because the random seed is not fixed")]
-	public void AddNoise ()
+	public void AddNoise1 ()
 	{
-		// TODO
+		var effect = new AddNoiseEffect ();
+		effect.Data.Intensity = 70;
+		effect.Data.ColorSaturation = 150;
+		effect.Data.Coverage = 98;
+		effect.Data.Seed = new (42);
+		Utilities.TestEffect (effect, "addnoise1.png");
+	}
+
+	[Test]
+	public void AddNoise2 ()
+	{
+		var effect = new AddNoiseEffect ();
+		effect.Data.Intensity = 100;
+		effect.Data.ColorSaturation = 400;
+		effect.Data.Coverage = 100;
+		effect.Data.Seed = new (42);
+		Utilities.TestEffect (effect, "addnoise2.png");
 	}
 
 	[Test]
@@ -87,10 +102,12 @@ internal sealed class EffectsTest
 	}
 
 	[Test]
-	[Ignore ("Produces non-deterministic results because the random seed is not fixed")]
 	public void FrostedGlass ()
 	{
-		// TODO
+		var effect = new FrostedGlassEffect ();
+		effect.Data.Amount = 7;
+		effect.Data.Seed = new (42);
+		Utilities.TestEffect (effect, "frostedglass1.png");
 	}
 
 	[Test]

@@ -22,9 +22,9 @@ AX_COMPARE_VERSION([$DOTNET_VERSION], [ge], [$DOTNET_MINIMUM_VERSION],
 )
 
 # Select target framework based on the dotnet version.
-DOTNET_TARGET_FRAMEWORK=net6.0
-AX_COMPARE_VERSION([$DOTNET_VERSION], [ge], [7.0],
-                   [DOTNET_TARGET_FRAMEWORK=net7.0], [])
+DOTNET_TARGET_FRAMEWORK=net7.0
+AX_COMPARE_VERSION([$DOTNET_VERSION], [ge], [8.0],
+                   [DOTNET_TARGET_FRAMEWORK=net8.0], [])
 AC_MSG_NOTICE([Using target framework $DOTNET_TARGET_FRAMEWORK])
 
 DOTNET_CMD="env TargetFramework=$DOTNET_TARGET_FRAMEWORK $DOTNET"

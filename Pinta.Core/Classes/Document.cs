@@ -145,6 +145,11 @@ public sealed class Document
 		return new RectangleI (x, y, width, height);
 	}
 
+	public PointD ClampToImageSize (PointD p)
+	{
+		return new (Math.Clamp (p.X, 0, ImageSize.Width), Math.Clamp (p.Y, 0, ImageSize.Height));
+	}
+
 	/// <summary>
 	/// Sets File to null while keeping the DisplayName the same.
 	/// This will force the user to choose a new filename when saving (i.e. "Save As").

@@ -71,7 +71,7 @@ internal sealed class BitMaskTest
 	{
 		var mask = new BitMask (maskWidth, maskHeight);
 		var bit = mask[bitToTestX, bitToTestY];
-		Assert.IsFalse (bit);
+		Assert.That (bit, Is.False);
 	}
 
 	[TestCase (DEFAULT_WIDTH, DEFAULT_HEIGHT, DEFAULT_WIDTH_INDEX, DEFAULT_HEIGHT_INDEX)]
@@ -80,7 +80,7 @@ internal sealed class BitMaskTest
 		var mask = new BitMask (maskWidth, maskHeight);
 		mask.Invert (bitToInvertX, bitToInvertY);
 		var bit = mask[bitToInvertX, bitToInvertY];
-		Assert.IsTrue (bit);
+		Assert.That (bit, Is.True);
 	}
 
 	[TestCase (DEFAULT_WIDTH, DEFAULT_HEIGHT, DEFAULT_WIDTH_INDEX, DEFAULT_HEIGHT_INDEX, new[] { true, false, true, false })]
@@ -90,8 +90,8 @@ internal sealed class BitMaskTest
 		var coordinates = new PointI (bitToSetX, bitToSetY);
 		foreach (var value in valuesToSetAndTest) {
 			mask.Set (bitToSetX, bitToSetY, value);
-			Assert.AreEqual (value, mask[bitToSetX, bitToSetY]);
-			Assert.AreEqual (value, mask[coordinates]);
+			Assert.That (mask[bitToSetX, bitToSetY], Is.EqualTo (value));
+			Assert.That (mask[coordinates], Is.EqualTo (value));
 		}
 	}
 
@@ -141,8 +141,8 @@ internal sealed class BitMaskTest
 			bitmask.Set (kvp.Key, kvp.Value);
 		}
 		foreach (var kvp in checks) {
-			Assert.AreEqual (bitmask[kvp.Key], kvp.Value);
-			Assert.AreEqual (bitmask[kvp.Key.X, kvp.Key.Y], kvp.Value);
+			Assert.That (kvp.Value, Is.EqualTo (bitmask[kvp.Key]));
+			Assert.That (kvp.Value, Is.EqualTo (bitmask[kvp.Key.X, kvp.Key.Y]));
 		}
 	}
 
@@ -154,8 +154,8 @@ internal sealed class BitMaskTest
 			bitmask.Invert (scanline);
 		}
 		foreach (var kvp in checks) {
-			Assert.AreEqual (bitmask[kvp.Key], kvp.Value);
-			Assert.AreEqual (bitmask[kvp.Key.X, kvp.Key.Y], kvp.Value);
+			Assert.That (kvp.Value, Is.EqualTo (bitmask[kvp.Key]));
+			Assert.That (kvp.Value, Is.EqualTo (bitmask[kvp.Key.X, kvp.Key.Y]));
 		}
 	}
 
@@ -165,7 +165,7 @@ internal sealed class BitMaskTest
 		var clone = mask.Clone ();
 		clone.FlipVertical ();
 		foreach (var kvp in checksAfter)
-			Assert.AreEqual (clone[kvp.Key], kvp.Value);
+			Assert.That (kvp.Value, Is.EqualTo (clone[kvp.Key]));
 	}
 
 	[TestCaseSource (nameof (horizontal_flip_cases))]
@@ -174,7 +174,7 @@ internal sealed class BitMaskTest
 		var clone = mask.Clone ();
 		clone.FlipHorizontal ();
 		foreach (var kvp in checksAfter)
-			Assert.AreEqual (clone[kvp.Key], kvp.Value);
+			Assert.That (kvp.Value, Is.EqualTo (clone[kvp.Key]));
 	}
 
 	[TestCaseSource (nameof (and_cases))]
@@ -183,7 +183,7 @@ internal sealed class BitMaskTest
 		var leftClone = left.Clone ();
 		leftClone.And (right);
 		foreach (var kvp in checksAfter)
-			Assert.AreEqual (leftClone[kvp.Key], kvp.Value);
+			Assert.That (kvp.Value, Is.EqualTo (leftClone[kvp.Key]));
 	}
 
 	[TestCaseSource (nameof (or_cases))]
@@ -192,7 +192,7 @@ internal sealed class BitMaskTest
 		var leftClone = left.Clone ();
 		leftClone.Or (right);
 		foreach (var kvp in checksAfter)
-			Assert.AreEqual (leftClone[kvp.Key], kvp.Value);
+			Assert.That (kvp.Value, Is.EqualTo (leftClone[kvp.Key]));
 	}
 
 	[TestCaseSource (nameof (xor_cases))]
@@ -201,7 +201,7 @@ internal sealed class BitMaskTest
 		var leftClone = left.Clone ();
 		leftClone.Xor (right);
 		foreach (var kvp in checksAfter)
-			Assert.AreEqual (leftClone[kvp.Key], kvp.Value);
+			Assert.That (kvp.Value, Is.EqualTo (leftClone[kvp.Key]));
 	}
 
 	static readonly IReadOnlyList<TestCaseData> xor_cases = CreateXorCases ().ToArray ();

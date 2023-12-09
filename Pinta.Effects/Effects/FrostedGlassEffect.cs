@@ -28,8 +28,6 @@ public sealed class FrostedGlassEffect : BaseEffect
 
 	public FrostedGlassData Data => (FrostedGlassData) EffectData!;
 
-	private readonly Random random = new ();
-
 	public FrostedGlassEffect ()
 	{
 		EffectData = new FrostedGlassData ();
@@ -63,6 +61,8 @@ public sealed class FrostedGlassEffect : BaseEffect
 		Span<ColorBgra> dst_data = dst.GetPixelData ();
 
 		foreach (var rect in rois) {
+			var random = new Random (Data.Seed.GetValueForRegion (rect));
+
 			for (int y = rect.Top; y <= rect.Bottom; ++y) {
 
 				var dst_row = dst_data.Slice (y * settings.src_width, settings.src_width);
@@ -76,12 +76,12 @@ public sealed class FrostedGlassEffect : BaseEffect
 					bottom = settings.src_height;
 
 				for (int x = rect.Left; x <= rect.Right; ++x)
-					dst_row[x] = GetFinalPixelColor (settings, src_data, top, bottom, x);
+					dst_row[x] = GetFinalPixelColor (settings, random, src_data, top, bottom, x);
 			}
 		}
 	}
 
-	private ColorBgra GetFinalPixelColor (FrostedGlassSettings settings, ReadOnlySpan<ColorBgra> src_data, int top, int bottom, int x)
+	private static ColorBgra GetFinalPixelColor (FrostedGlassSettings settings, Random random, ReadOnlySpan<ColorBgra> src_data, int top, int bottom, int x)
 	{
 		int intensityChoicesIndex = 0;
 
@@ -133,11 +133,7 @@ public sealed class FrostedGlassEffect : BaseEffect
 			}
 		}
 
-		int randNum;
-		lock (random) {
-			randNum = random.Next (intensityChoicesIndex);
-		}
-
+		int randNum = random.Next (intensityChoicesIndex);
 		byte chosenIntensity = intensityChoices[randNum];
 
 		return ColorBgra.FromBgra (
@@ -153,5 +149,8 @@ public sealed class FrostedGlassEffect : BaseEffect
 	{
 		[Caption ("Amount"), MinimumValue (1), MaximumValue (10)]
 		public int Amount { get; set; } = 1;
+
+		[Caption ("Random Noise")]
+		public RandomSeed Seed { get; set; } = new (0);
 	}
 }

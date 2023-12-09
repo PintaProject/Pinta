@@ -24,9 +24,9 @@ internal sealed class ScanlineTest
 			y: y,
 			length: length
 		);
-		Assert.AreEqual (scanline.X, x);
-		Assert.AreEqual (scanline.Y, y);
-		Assert.AreEqual (scanline.Length, length);
+		Assert.That (x, Is.EqualTo (scanline.X));
+		Assert.That (y, Is.EqualTo (scanline.Y));
+		Assert.That (length, Is.EqualTo (scanline.Length));
 	}
 
 	[TestCaseSource (nameof (sample_initializations))]
@@ -35,7 +35,7 @@ internal sealed class ScanlineTest
 		var scanline1 = new Scanline (x, y, length);
 		var scanline2 = new Scanline (x, y, length);
 		bool comparison = scanline1 == scanline2;
-		Assert.IsTrue (comparison);
+		Assert.That (comparison, Is.True);
 	}
 
 	[TestCaseSource (nameof (unequal_values))]
@@ -44,7 +44,7 @@ internal sealed class ScanlineTest
 		var scanline1 = new Scanline (x1, y1, length1);
 		var scanline2 = new Scanline (x2, y2, length2);
 		bool comparison = scanline1 == scanline2;
-		Assert.IsFalse (comparison);
+		Assert.That (comparison, Is.False);
 	}
 
 	[TestCaseSource (nameof (sample_initializations))]
@@ -53,7 +53,7 @@ internal sealed class ScanlineTest
 		var scanline1 = new Scanline (x, y, length);
 		var scanline2 = new Scanline (x, y, length);
 		bool comparison = scanline1 != scanline2;
-		Assert.IsFalse (comparison);
+		Assert.That (comparison, Is.False);
 	}
 
 	[TestCaseSource (nameof (unequal_values))]
@@ -62,7 +62,7 @@ internal sealed class ScanlineTest
 		var scanline1 = new Scanline (x1, y1, length1);
 		var scanline2 = new Scanline (x2, y2, length2);
 		bool comparison = scanline1 != scanline2;
-		Assert.IsTrue (comparison);
+		Assert.That (comparison, Is.True);
 	}
 
 	[TestCaseSource (nameof (sample_initializations))]
@@ -71,14 +71,14 @@ internal sealed class ScanlineTest
 		var scanline1 = new Scanline (x, y, length);
 		var scanline2 = new Scanline (x, y, length);
 		bool comparison = scanline1.Equals (scanline2);
-		Assert.IsTrue (comparison);
+		Assert.That (comparison, Is.True);
 	}
 
 	[TestCaseSource (nameof (unequal_types_scanline))]
 	public void EqualsMethod_FalseWithUnequalTypes (Scanline scanline, object? other)
 	{
 		bool comparison = scanline.Equals (other);
-		Assert.IsFalse (comparison);
+		Assert.That (comparison, Is.False);
 	}
 
 	[TestCaseSource (nameof (unequal_values))]
@@ -87,7 +87,7 @@ internal sealed class ScanlineTest
 		var scanline1 = new Scanline (x1, y1, length1);
 		var scanline2 = new Scanline (x2, y2, length2);
 		bool comparison = scanline1.Equals (scanline2);
-		Assert.IsFalse (comparison);
+		Assert.That (comparison, Is.False);
 	}
 
 	[TestCaseSource (nameof (overflowing_hash_code_cases))]

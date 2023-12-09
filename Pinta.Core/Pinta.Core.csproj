@@ -1,10 +1,9 @@
-﻿<Project Sdk="Microsoft.NET.Sdk">
+<Project Sdk="Microsoft.NET.Sdk">
   <PropertyGroup>
     <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
   </PropertyGroup>
   <ItemGroup>
     <PackageReference Include="NGettext" />
-    <PackageReference Include="SharpZipLib" />
     <PackageReference Include="ParagonClipper" />
     <PackageReference Include="GirCore.Adw-1" />
     <PackageReference Include="GirCore.PangoCairo-1.0" />

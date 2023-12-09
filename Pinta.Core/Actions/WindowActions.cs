@@ -1,21 +1,21 @@
-// 
+//
 // WindowActions.cs
-//  
+//
 // Author:
 //       Jonathan Pobst <monkey@jpobst.com>
-// 
+//
 // Copyright (c) 2010 Jonathan Pobst
-// 
+//
 // Permission is hereby granted, free of charge, to any person obtaining a copy
 // of this software and associated documentation files (the "Software"), to deal
 // in the Software without restriction, including without limitation the rights
 // to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
 // copies of the Software, and to permit persons to whom the Software is
 // furnished to do so, subject to the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be included in
 // all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
 // IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
 // FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
@@ -40,10 +40,10 @@ public sealed class WindowActions
 		SaveAll = new Command ("SaveAll", Translations.GetString ("Save All"), null, Resources.StandardIcons.DocumentSave);
 		CloseAll = new Command ("CloseAll", Translations.GetString ("Close All"), null, Resources.StandardIcons.WindowClose);
 
-		active_doc_action = Gio.SimpleAction.NewStateful (doc_action_id, GtkExtensions.IntVariantType, GLib.Variant.Create (-1));
+		active_doc_action = Gio.SimpleAction.NewStateful (doc_action_id, GtkExtensions.IntVariantType, GLib.Variant.NewInt32 (-1));
 
 		active_doc_action.OnActivate += (o, e) => {
-			var idx = e.Parameter!.GetInt ();
+			var idx = e.Parameter!.GetInt32 ();
 			if (idx < PintaCore.Workspace.OpenDocuments.Count) {
 				PintaCore.Workspace.SetActiveDocumentInternal (PintaCore.Workspace.OpenDocuments[idx]);
 				active_doc_action.ChangeState (e.Parameter);
@@ -72,7 +72,7 @@ public sealed class WindowActions
 	public void SetActiveDocument (Document doc)
 	{
 		var idx = PintaCore.Workspace.OpenDocuments.IndexOf (doc);
-		active_doc_action.Activate (GLib.Variant.Create (idx));
+		active_doc_action.Activate (GLib.Variant.NewInt32 (idx));
 	}
 
 	public void AddDocument (Document doc)
