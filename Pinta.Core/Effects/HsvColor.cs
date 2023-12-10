@@ -79,21 +79,16 @@ public readonly struct HsvColor
 
 	public readonly RgbColor ToRgb ()
 	{
-		// HsvColor contains values scaled as in the color wheel:
-
-		double h;
-		double s;
-		double v;
+		// HsvColor contains values scaled as in the color wheel.
+		// Scale Hue to be between 0 and 360. Saturation
+		// and value scale to be between 0 and 1.
+		double h = (double) Hue % 360;
+		double s = (double) Saturation / 100;
+		double v = (double) Value / 100;
 
 		double r = 0;
 		double g = 0;
 		double b = 0;
-
-		// Scale Hue to be between 0 and 360. Saturation
-		// and value scale to be between 0 and 1.
-		h = (double) Hue % 360;
-		s = (double) Saturation / 100;
-		v = (double) Value / 100;
 
 		if (s == 0) {
 			// If s is 0, all colors are the same.
@@ -102,29 +97,21 @@ public readonly struct HsvColor
 			g = v;
 			b = v;
 		} else {
-			double p;
-			double q;
-			double t;
-
-			double fractionalSector;
-			int sectorNumber;
-			double sectorPos;
-
 			// The color wheel consists of 6 sectors.
 			// Figure out which sector you're in.
-			sectorPos = h / 60;
-			sectorNumber = (int) (Math.Floor (sectorPos));
+			double sectorPos = h / 60;
+			int sectorNumber = (int) (Math.Floor (sectorPos));
 
 			// get the fractional part of the sector.
 			// That is, how many degrees into the sector
 			// are you?
-			fractionalSector = sectorPos - sectorNumber;
+			double fractionalSector = sectorPos - sectorNumber;
 
 			// Calculate values for the three axes
 			// of the color. 
-			p = v * (1 - s);
-			q = v * (1 - (s * fractionalSector));
-			t = v * (1 - (s * (1 - fractionalSector)));
+			double p = v * (1 - s);
+			double q = v * (1 - (s * fractionalSector));
+			double t = v * (1 - (s * (1 - fractionalSector)));
 
 			// Assign the fractional colors to r, g, and b
 			// based on the sector the angle is in.

@@ -60,22 +60,18 @@ public readonly struct RgbColor
 		// HsvColor.Hue will be a value between 0 and 360, and 
 		// HsvColor.Saturation and value are between 0 and 1.
 
-		double min;
-		double max;
-		double delta;
-
 		double r = (double) Red / 255;
 		double g = (double) Green / 255;
 		double b = (double) Blue / 255;
 
+		double min = Math.Min (Math.Min (r, g), b);
+		double max = Math.Max (Math.Max (r, g), b);
+
+		double delta = max - min;
+
 		double h;
 		double s;
 		double v;
-
-		min = Math.Min (Math.Min (r, g), b);
-		max = Math.Max (Math.Max (r, g), b);
-		v = max;
-		delta = max - min;
 
 		if (max == 0 || delta == 0) {
 			// R, G, and B must be 0, or all the same.
@@ -83,6 +79,7 @@ public readonly struct RgbColor
 			// Using H = 0 is as good as any...
 			s = 0;
 			h = 0;
+			v = max;
 		} else {
 			s = delta / max;
 			if (r == max) {
@@ -95,7 +92,7 @@ public readonly struct RgbColor
 				// Between Magenta and Cyan
 				h = 4 + (r - g) / delta;
 			}
-
+			v = max;
 		}
 		// Scale h to be between 0 and 360. 
 		// This may require adding 360, if the value
