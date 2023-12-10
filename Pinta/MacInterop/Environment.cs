@@ -28,10 +28,10 @@ using Pinta.Core;
 
 namespace Pinta.MacInterop;
 
-public sealed class Environment
+public sealed partial class Environment
 {
 	[DllImport ("/usr/lib/system/libsystem_c.dylib")]
-	static extern int setenv (string name, string value);
+	private static extern int setenv (string name, string value);
 
 	/// <summary>
 	/// Initialize any environment variables for macOS (e.g. for GTK).

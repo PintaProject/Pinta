@@ -30,7 +30,7 @@ using GdkPixbuf;
 
 namespace Pinta.Core;
 
-public static class GdkPixbufExtensions
+public static partial class GdkPixbufExtensions
 {
 	private const string PixbufLibraryName = "GdkPixbuf";
 
