@@ -325,7 +325,7 @@ public sealed class Document
 		Workspace.Scale = scale;
 	}
 
-	public void ResizeImage (int width, int height)
+	public void ResizeImage (int width, int height, ResamplingMode resamplingMode)
 	{
 		double scale;
 
@@ -342,7 +342,7 @@ public sealed class Document
 		ImageSize = new Size (width, height);
 
 		foreach (var layer in Layers.UserLayers)
-			layer.Resize (width, height);
+			layer.Resize (width, height, resamplingMode);
 
 		hist.FinishSnapshotOfImage ();
 

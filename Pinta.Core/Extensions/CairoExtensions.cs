@@ -780,14 +780,14 @@ namespace Pinta.Core
 
 			// we assume that edgeTable[0].miny == yscan
 			while (activeHigh < edgeCount - 1 &&
-			       edgeTable[activeHigh + 1].miny == yscan1) {
+				   edgeTable[activeHigh + 1].miny == yscan1) {
 				++activeHigh;
 			}
 
 			while (yscan1 <= ymax) {
 				// Find new edges where yscan == miny
 				while (activeHigh < edgeCount - 1 &&
-				       edgeTable[activeHigh + 1].miny == yscan1) {
+					   edgeTable[activeHigh + 1].miny == yscan1) {
 					++activeHigh;
 				}
 
@@ -803,7 +803,7 @@ namespace Pinta.Core
 
 				// Remove edges where yscan == maxy
 				while (activeLow < edgeCount - 1 &&
-				       edgeTable[activeLow].maxy <= yscan1) {
+					   edgeTable[activeLow].maxy <= yscan1) {
 					++activeLow;
 				}
 
@@ -1065,6 +1065,12 @@ namespace Pinta.Core
 			}
 		}
 
+		public static void SetSourceSurface (this Context g, Surface surface, double x, double y, ResamplingMode resamplingMode)
+		{
+			var src_pattern = new SurfacePattern (surface) { Filter = resamplingMode.ToCairoFilter () };
+			g.SetSource (src_pattern);
+		}
+
 		public static RectangleI GetRectangleFromPoints (PointI a, PointI b, int inflate)
 		{
 			var x1 = Math.Min (a.X, b.X);
@@ -1178,16 +1184,16 @@ namespace Pinta.Core
 				int localRight = pt.X;
 
 				while (localLeft >= 0 &&
-				       !stencil.Get (localLeft, pt.Y) &&
-				       ColorBgra.ColorsWithinTolerance (cmp, row[localLeft], tolerance)) {
+					   !stencil.Get (localLeft, pt.Y) &&
+					   ColorBgra.ColorsWithinTolerance (cmp, row[localLeft], tolerance)) {
 					stencil.Set (localLeft, pt.Y, true);
 					--localLeft;
 				}
 
 				int surfaceWidth = surface.Width;
 				while (localRight < surfaceWidth &&
-				       !stencil.Get (localRight, pt.Y) &&
-				       ColorBgra.ColorsWithinTolerance (cmp, row[localRight], tolerance)) {
+					   !stencil.Get (localRight, pt.Y) &&
+					   ColorBgra.ColorsWithinTolerance (cmp, row[localRight], tolerance)) {
 					stencil.Set (localRight, pt.Y, true);
 					++localRight;
 				}
@@ -1203,7 +1209,7 @@ namespace Pinta.Core
 
 					for (int sx = localLeft; sx <= localRight; ++sx) {
 						if (!stencil.Get (sx, row) &&
-						    ColorBgra.ColorsWithinTolerance (cmp, other_row[sx], tolerance)) {
+							ColorBgra.ColorsWithinTolerance (cmp, other_row[sx], tolerance)) {
 							++sright;
 						} else {
 							if (sright - sleft > 0) {
@@ -1253,7 +1259,7 @@ namespace Pinta.Core
 
 		// Ported from PDN
 		public static void FillStencilByColor (ImageSurface surface, BitMask stencil, ColorBgra cmp, int tolerance,
-							      out RectangleD boundingBox, Cairo.Region limitRegion, bool limitToSelection)
+								  out RectangleD boundingBox, Cairo.Region limitRegion, bool limitToSelection)
 		{
 			int surf_width = surface.Width;
 
