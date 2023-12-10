@@ -259,9 +259,9 @@ public sealed class WorkspaceManager : IWorkspaceService
 		return fileOpened;
 	}
 
-	public void ResizeImage (int width, int height)
+	public void ResizeImage (int width, int height, ResamplingMode resamplingMode)
 	{
-		ActiveDocument.ResizeImage (width, height);
+		ActiveDocument.ResizeImage (width, height, resamplingMode);
 	}
 
 	public void ResizeCanvas (int width, int height, Anchor anchor, CompoundHistoryItem? compoundAction)

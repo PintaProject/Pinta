@@ -168,13 +168,13 @@ public class Layer : ObservableObject
 		return new Size ((int) (w * cos + h * sin), (int) (w * sin + h * cos));
 	}
 
-	public virtual void Resize (int width, int height)
+	public virtual void Resize (int width, int height, ResamplingMode resamplingMode)
 	{
 		ImageSurface dest = CairoExtensions.CreateImageSurface (Format.Argb32, width, height);
 
 		var g = new Context (dest);
 		g.Scale ((double) width / (double) Surface.Width, (double) height / (double) Surface.Height);
-		g.SetSourceSurface (Surface, 0, 0);
+		g.SetSourceSurface (Surface, 0, 0, resamplingMode);
 		g.Paint ();
 
 		Surface = dest;
