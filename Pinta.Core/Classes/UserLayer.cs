@@ -102,13 +102,13 @@ public sealed class UserLayer : Layer
 		}
 	}
 
-	public override void Resize (int width, int height)
+	public override void Resize (int width, int height, ResamplingMode resamplingMode)
 	{
-		base.Resize (width, height);
+		base.Resize (width, height, resamplingMode);
 
 		foreach (ReEditableLayer rel in ReEditableLayers) {
 			if (rel.IsLayerSetup) {
-				rel.Layer.Resize (width, height);
+				rel.Layer.Resize (width, height, resamplingMode);
 			}
 		}
 	}

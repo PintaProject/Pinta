@@ -38,6 +38,7 @@ public sealed class ResizeImageDialog : Dialog
 	private readonly SpinButton width_spinner;
 	private readonly SpinButton height_spinner;
 	private readonly CheckButton aspect_checkbox;
+	private readonly ComboBoxText resampling_combobox;
 
 	private bool value_changing;
 
@@ -63,6 +64,12 @@ public sealed class ResizeImageDialog : Dialog
 		height_spinner = SpinButton.NewWithRange (1, int.MaxValue, 1);
 
 		aspect_checkbox = CheckButton.NewWithLabel (Translations.GetString ("Maintain aspect ratio"));
+
+		resampling_combobox = new () { Hexpand = true, Halign = Align.Fill };
+		foreach (ResamplingMode mode in Enum.GetValues (typeof (ResamplingMode)))
+			resampling_combobox.AppendText (mode.GetLabel ());
+
+		resampling_combobox.Active = 0;
 
 		const int spacing = 6;
 		var main_vbox = new Box { Spacing = spacing };
@@ -90,9 +97,12 @@ public sealed class ResizeImageDialog : Dialog
 		grid.Attach (height_spinner, 1, 1, 1, 1);
 		grid.Attach (Label.New (Translations.GetString ("pixels")), 2, 1, 1, 1);
 
-		main_vbox.Append (grid);
+		grid.Attach (aspect_checkbox, 0, 2, 3, 1);
 
-		main_vbox.Append (aspect_checkbox);
+		grid.Attach (Label.New (Translations.GetString ("Resampling:")), 0, 3, 1, 1);
+		grid.Attach (resampling_combobox, 1, 3, 2, 1);
+
+		main_vbox.Append (grid);
 
 		var content_area = this.GetContentAreaBox ();
 		content_area.SetAllMargins (12);
@@ -123,7 +133,8 @@ public sealed class ResizeImageDialog : Dialog
 	#region Public Methods
 	public void SaveChanges ()
 	{
-		PintaCore.Workspace.ResizeImage (width_spinner.GetValueAsInt (), height_spinner.GetValueAsInt ());
+		var resamplingMode = (ResamplingMode) resampling_combobox.Active;
+		PintaCore.Workspace.ResizeImage (width_spinner.GetValueAsInt (), height_spinner.GetValueAsInt (), resamplingMode);
 	}
 	#endregion
 
