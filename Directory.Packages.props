@@ -16,7 +16,7 @@
     <PackageVersion Include="Tmds.DBus" Version="0.15.0" />
 
     <!-- Dependencies used for unit tests -->
-    <PackageVersion Include="BenchmarkDotNet" Version="0.13.10" />
+    <PackageVersion Include="BenchmarkDotNet" Version="0.13.11" />
     <PackageVersion Include="NUnit" Version="4.0.0" />
     <PackageVersion Include="Microsoft.NET.Test.Sdk" Version="17.8.0" />
     <PackageVersion Include="NUnit3TestAdapter" Version="4.5.0" />
