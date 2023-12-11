@@ -121,10 +121,8 @@ public sealed class GioStream : System.IO.Stream
 	{
 		if (offset + count - 1 > buffer.Length)
 			throw new ArgumentException ($"({nameof (offset)} + {nameof (count)} - {1}) is greater than the length of buffer");
-		if (offset < 0)
-			throw new ArgumentOutOfRangeException (nameof (offset));
-		if (count < 0)
-			throw new ArgumentOutOfRangeException (nameof (count));
+		ArgumentOutOfRangeException.ThrowIfNegative (offset);
+		ArgumentOutOfRangeException.ThrowIfNegative (count);
 		if (!CanRead)
 			throw new NotSupportedException ("The stream does not support reading");
 		if (is_disposed)
@@ -144,10 +142,8 @@ public sealed class GioStream : System.IO.Stream
 	{
 		if (offset + count > buffer.Length)
 			throw new ArgumentException ($"({nameof (offset)} + {nameof (count)}) is greater than the length of buffer");
-		if (offset < 0)
-			throw new ArgumentOutOfRangeException (nameof (offset));
-		if (count < 0)
-			throw new ArgumentOutOfRangeException (nameof (count));
+		ArgumentOutOfRangeException.ThrowIfNegative (offset);
+		ArgumentOutOfRangeException.ThrowIfNegative (count);
 		if (!CanWrite)
 			throw new NotSupportedException ("The stream does not support writing");
 		if (is_disposed)

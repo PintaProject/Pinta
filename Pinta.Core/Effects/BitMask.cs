@@ -13,10 +13,8 @@ public sealed class BitMask
 
 	public BitMask (int width, int height)
 	{
-		if (width < 0)
-			throw new ArgumentOutOfRangeException (nameof (width));
-		if (height < 0)
-			throw new ArgumentOutOfRangeException (nameof (height));
+		ArgumentOutOfRangeException.ThrowIfNegative (width);
+		ArgumentOutOfRangeException.ThrowIfNegative (height);
 
 		Width = width;
 		Height = height;
@@ -79,10 +77,8 @@ public sealed class BitMask
 
 	private int GetIndex (int x, int y)
 	{
-		if (x < 0)
-			throw new ArgumentOutOfRangeException (nameof (x));
-		if (y < 0)
-			throw new ArgumentOutOfRangeException (nameof (y));
+		ArgumentOutOfRangeException.ThrowIfNegative (x);
+		ArgumentOutOfRangeException.ThrowIfNegative (y);
 		return (y * Width) + x;
 	}
 

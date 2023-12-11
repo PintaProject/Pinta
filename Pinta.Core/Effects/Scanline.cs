@@ -51,8 +51,7 @@ public readonly struct Scanline
 
 	public Scanline (int x, int y, int length)
 	{
-		if (length < 0)
-			throw new ArgumentOutOfRangeException (nameof (length));
+		ArgumentOutOfRangeException.ThrowIfNegative (length);
 
 		this.x = x;
 		this.y = y;
