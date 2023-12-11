@@ -57,7 +57,7 @@ public static class AdwaitaStyles
 	public const string Warning = "warning";
 };
 
-public static class GtkExtensions
+public static partial class GtkExtensions
 {
 	private const string GtkLibraryName = "Gtk";
 
@@ -236,8 +236,9 @@ public static class GtkExtensions
 	}
 
 	// TODO-GTK4 (bindings, unsubmitted) - need support for 'out' enum parameters.
-	[DllImport (GtkLibraryName, EntryPoint = "gtk_accelerator_parse")]
-	private static extern bool AcceleratorParse ([MarshalAs (UnmanagedType.LPUTF8Str)] string accelerator, out uint accelerator_key, out Gdk.ModifierType accelerator_mods);
+	[LibraryImport (GtkLibraryName, EntryPoint = "gtk_accelerator_parse")]
+	[return: MarshalAs (UnmanagedType.Bool)]
+	private static partial bool AcceleratorParse ([MarshalAs (UnmanagedType.LPUTF8Str)] string accelerator, out uint accelerator_key, out Gdk.ModifierType accelerator_mods);
 
 	/// <summary>
 	/// Set all four margins of the widget to the same value.
@@ -418,8 +419,8 @@ public static class GtkExtensions
 		color = new Cairo.Color (gdk_color.Red, gdk_color.Green, gdk_color.Blue, gdk_color.Alpha);
 	}
 
-	[DllImport (GtkLibraryName, EntryPoint = "gtk_style_context_get_color")]
-	private static extern void StyleContextGetColor (IntPtr handle, out GdkRGBA color);
+	[LibraryImport (GtkLibraryName, EntryPoint = "gtk_style_context_get_color")]
+	private static partial void StyleContextGetColor (IntPtr handle, out GdkRGBA color);
 
 	// TODO-GTK4 (bindings) - structs are not generated (https://github.com/gircore/gir.core/issues/622)
 	public static void SetColor (this Gtk.ColorChooserDialog dialog, Cairo.Color color)
@@ -432,8 +433,8 @@ public static class GtkExtensions
 		});
 	}
 
-	[DllImport (GtkLibraryName, EntryPoint = "gtk_color_chooser_set_rgba")]
-	private static extern void ColorChooserSetRgba (IntPtr handle, GdkRGBA color);
+	[LibraryImport (GtkLibraryName, EntryPoint = "gtk_color_chooser_set_rgba")]
+	private static partial void ColorChooserSetRgba (IntPtr handle, GdkRGBA color);
 
 	// TODO-GTK4 (bindings) - structs are not generated (https://github.com/gircore/gir.core/issues/622)
 	public static void GetColor (this Gtk.ColorChooserDialog dialog, out Cairo.Color color)
@@ -442,8 +443,8 @@ public static class GtkExtensions
 		color = new Cairo.Color (gdk_color.Red, gdk_color.Green, gdk_color.Blue, gdk_color.Alpha);
 	}
 
-	[DllImport (GtkLibraryName, EntryPoint = "gtk_color_chooser_get_rgba")]
-	private static extern void ColorChooserGetRgba (IntPtr handle, out GdkRGBA color);
+	[LibraryImport (GtkLibraryName, EntryPoint = "gtk_color_chooser_get_rgba")]
+	private static partial void ColorChooserGetRgba (IntPtr handle, out GdkRGBA color);
 
 	private static readonly Signal<Entry> EntryChangedSignal = new (
 	    unmanagedName: "changed",
