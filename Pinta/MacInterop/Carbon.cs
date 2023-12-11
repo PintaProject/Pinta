@@ -144,7 +144,7 @@ internal static partial class Carbon
 					       CarbonEventAttributes flags, out IntPtr eventHandle);
 
 	[LibraryImport (CarbonLib)]
-	static partial void ReleaseEvent (IntPtr eventHandle);
+	private static partial void ReleaseEvent (IntPtr eventHandle);
 
 	static EventStatus SendApplicationEvent (CarbonEventClass classID, uint kind, CarbonEventAttributes flags)
 	{
