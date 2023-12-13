@@ -29,46 +29,46 @@ using System.Runtime.InteropServices;
 
 namespace Pinta.MacInterop;
 
-internal static class AppleEvent
+internal static partial class AppleEvent
 {
 	const string AELib = Carbon.CarbonLib;
 
 	//FIXME: is "int" correct for size?
-	[DllImport (AELib)]
-	static extern AEDescStatus AECreateDesc (OSType typeCode, IntPtr dataPtr, int dataSize, out AEDesc desc);
+	[LibraryImport (AELib)]
+	private static partial AEDescStatus AECreateDesc (OSType typeCode, IntPtr dataPtr, int dataSize, out AEDesc desc);
 
 	[DllImport (AELib)]
-	static extern AEDescStatus AECreateDesc (OSType typeCode, byte[] data, int dataSize, out AEDesc desc);
+	private static extern AEDescStatus AECreateDesc (OSType typeCode, byte[] data, int dataSize, out AEDesc desc);
 
-	[DllImport (AELib)]
-	static extern AEDescStatus AEGetNthPtr (ref AEDesc descList, int index, OSType desiredType, uint keyword,
+	[LibraryImport (AELib)]
+	private static partial AEDescStatus AEGetNthPtr (ref AEDesc descList, int index, OSType desiredType, uint keyword,
 						out CarbonEventParameterType actualType, IntPtr buffer, int bufferSize, out int actualSize);
 
-	[DllImport (AELib)]
-	static extern AEDescStatus AEGetNthPtr (ref AEDesc descList, int index, OSType desiredType, uint keyword,
+	[LibraryImport (AELib)]
+	private static partial AEDescStatus AEGetNthPtr (ref AEDesc descList, int index, OSType desiredType, uint keyword,
 						uint zero, IntPtr buffer, int bufferSize, int zero2);
 
-	[DllImport (AELib)]
-	static extern AEDescStatus AECountItems (ref AEDesc descList, out int count); //return an OSErr
+	[LibraryImport (AELib)]
+	private static partial AEDescStatus AECountItems (ref AEDesc descList, out int count); //return an OSErr
 
-	[DllImport (AELib)]
-	static extern AEDescStatus AEGetNthPtr (ref AEDesc descList, int index, OSType desiredType, uint keyword,
+	[LibraryImport (AELib)]
+	private static partial AEDescStatus AEGetNthPtr (ref AEDesc descList, int index, OSType desiredType, uint keyword,
 						uint zero, out IntPtr outPtr, int bufferSize, int zero2);
 
-	[DllImport (AELib)]
-	public static extern AEDescStatus AEDisposeDesc (ref AEDesc desc);
+	[LibraryImport (AELib)]
+	public static partial AEDescStatus AEDisposeDesc (ref AEDesc desc);
 
-	[DllImport (AELib)]
-	public static extern AEDescStatus AESizeOfNthItem (ref AEDesc descList, int index, ref OSType type, out int size);
+	[LibraryImport (AELib)]
+	public static partial AEDescStatus AESizeOfNthItem (ref AEDesc descList, int index, ref OSType type, out int size);
 
-	[DllImport (AELib)]
-	static extern AEDescStatus AEGetDescData (ref AEDesc desc, IntPtr ptr, int maximumSize);
+	[LibraryImport (AELib)]
+	private static partial AEDescStatus AEGetDescData (ref AEDesc desc, IntPtr ptr, int maximumSize);
 
-	[DllImport (AELib)]
-	static extern int AEGetDescDataSize (ref AEDesc desc);
+	[LibraryImport (AELib)]
+	private static partial int AEGetDescDataSize (ref AEDesc desc);
 
-	[DllImport (AELib)]
-	static extern AEDescStatus AECoerceDesc (ref AEDesc theAEDesc, DescType toType, ref AEDesc result);
+	[LibraryImport (AELib)]
+	private static partial AEDescStatus AECoerceDesc (ref AEDesc theAEDesc, DescType toType, ref AEDesc result);
 
 	public static void AECreateDesc (OSType typeCode, byte[] data, out AEDesc result)
 	{

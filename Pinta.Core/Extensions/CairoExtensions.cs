@@ -67,7 +67,7 @@ namespace Cairo
 
 namespace Pinta.Core
 {
-	public static class CairoExtensions
+	public static partial class CairoExtensions
 	{
 		private const string CairoLibraryName = "cairo-graphics";
 
@@ -1112,17 +1112,18 @@ namespace Pinta.Core
 		[DllImport (CairoLibraryName, EntryPoint = "cairo_region_create_rectangle")]
 		private static extern Cairo.Internal.RegionOwnedHandle RegionCreateRectangle (ref CairoRectangleInt rect);
 
-		[DllImport (CairoLibraryName, EntryPoint = "cairo_region_contains_point")]
-		private static extern bool RegionContainsPoint (Cairo.Internal.RegionHandle handle, int x, int y);
+		[LibraryImport (CairoLibraryName, EntryPoint = "cairo_region_contains_point")]
+		[return: MarshalAs (UnmanagedType.Bool)]
+		private static partial bool RegionContainsPoint (Cairo.Internal.RegionHandle handle, int x, int y);
 
-		[DllImport (CairoLibraryName, EntryPoint = "cairo_region_xor")]
-		private static extern Status RegionXor (Cairo.Internal.RegionHandle handle, Cairo.Internal.RegionHandle other);
+		[LibraryImport (CairoLibraryName, EntryPoint = "cairo_region_xor")]
+		private static partial Status RegionXor (Cairo.Internal.RegionHandle handle, Cairo.Internal.RegionHandle other);
 
-		[DllImport (CairoLibraryName, EntryPoint = "cairo_region_num_rectangles")]
-		private static extern int RegionNumRectangles (Cairo.Internal.RegionHandle handle);
+		[LibraryImport (CairoLibraryName, EntryPoint = "cairo_region_num_rectangles")]
+		private static partial int RegionNumRectangles (Cairo.Internal.RegionHandle handle);
 
-		[DllImport (CairoLibraryName, EntryPoint = "cairo_region_get_rectangle")]
-		private static extern int RegionGetRectangle (Cairo.Internal.RegionHandle handle, int i, out CairoRectangleInt rect);
+		[LibraryImport (CairoLibraryName, EntryPoint = "cairo_region_get_rectangle")]
+		private static partial int RegionGetRectangle (Cairo.Internal.RegionHandle handle, int i, out CairoRectangleInt rect);
 
 		public static Region CreateRegion (in RectangleI rect)
 		{

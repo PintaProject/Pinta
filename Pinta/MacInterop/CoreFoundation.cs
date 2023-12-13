@@ -30,13 +30,13 @@ using System.Runtime.InteropServices;
 
 namespace Pinta.MacInterop;
 
-internal static class CoreFoundation
+internal static partial class CoreFoundation
 {
 	const string CFLib = "/System/Library/Frameworks/CoreFoundation.framework/Versions/A/CoreFoundation";
 	const string LSLib = "/System/Library/Frameworks/ApplicationServices.framework/Versions/A/ApplicationServices";
 
 	[DllImport (CFLib)]
-	static extern IntPtr CFStringCreateWithCString (IntPtr alloc, string str, int encoding);
+	private static extern IntPtr CFStringCreateWithCString (IntPtr alloc, string str, int encoding);
 
 	public static IntPtr CreateString (string s)
 	{
@@ -44,8 +44,8 @@ internal static class CoreFoundation
 		return CFStringCreateWithCString (IntPtr.Zero, s, 0x08000100);
 	}
 
-	[DllImport (CFLib, EntryPoint = "CFRelease")]
-	public static extern void Release (IntPtr cfRef);
+	[LibraryImport (CFLib, EntryPoint = "CFRelease")]
+	public static partial void Release (IntPtr cfRef);
 
 	struct CFRange
 	{
@@ -57,14 +57,14 @@ internal static class CoreFoundation
 		}
 	}
 
-	[DllImport (CFLib, CharSet = CharSet.Unicode)]
-	extern static int CFStringGetLength (IntPtr handle);
+	[LibraryImport (CFLib)]
+	private static partial int CFStringGetLength (IntPtr handle);
 
-	[DllImport (CFLib, CharSet = CharSet.Unicode)]
-	extern static IntPtr CFStringGetCharactersPtr (IntPtr handle);
+	[LibraryImport (CFLib)]
+	private static partial IntPtr CFStringGetCharactersPtr (IntPtr handle);
 
-	[DllImport (CFLib, CharSet = CharSet.Unicode)]
-	extern static IntPtr CFStringGetCharacters (IntPtr handle, CFRange range, IntPtr buffer);
+	[LibraryImport (CFLib)]
+	private static partial IntPtr CFStringGetCharacters (IntPtr handle, CFRange range, IntPtr buffer);
 
 	public static string? FetchString (IntPtr handle)
 	{
@@ -112,11 +112,11 @@ internal static class CoreFoundation
 		}
 	}
 
-	[DllImport (CFLib)]
-	extern static IntPtr CFURLCreateFromFSRef (IntPtr allocator, ref FSRef fsref);
+	[LibraryImport (CFLib)]
+	private static partial IntPtr CFURLCreateFromFSRef (IntPtr allocator, ref FSRef fsref);
 
-	[DllImport (CFLib)]
-	extern static IntPtr CFURLCopyFileSystemPath (IntPtr urlRef, CFUrlPathStyle pathStyle);
+	[LibraryImport (CFLib)]
+	private static partial IntPtr CFURLCopyFileSystemPath (IntPtr urlRef, CFUrlPathStyle pathStyle);
 
 	enum CFUrlPathStyle
 	{
@@ -125,22 +125,22 @@ internal static class CoreFoundation
 		Windows = 2
 	};
 
-	[DllImport (CFLib)]
-	extern static IntPtr CFURLCreateWithFileSystemPath (IntPtr allocator, IntPtr filePathString,
-		CFUrlPathStyle pathStyle, bool isDirectory);
+	[LibraryImport (CFLib)]
+	private static partial IntPtr CFURLCreateWithFileSystemPath (IntPtr allocator, IntPtr filePathString,
+		CFUrlPathStyle pathStyle, [MarshalAs (UnmanagedType.Bool)] bool isDirectory);
 
-	[DllImport (LSLib)]
-	extern static IntPtr LSCopyApplicationURLsForURL (IntPtr urlRef, LSRolesMask roleMask); //CFArrayRef
+	[LibraryImport (LSLib)]
+	private static partial IntPtr LSCopyApplicationURLsForURL (IntPtr urlRef, LSRolesMask roleMask); //CFArrayRef
 
-	[DllImport (LSLib)]
-	extern static int LSGetApplicationForURL (IntPtr url, LSRolesMask roleMask, IntPtr fsRefZero,
+	[LibraryImport (LSLib)]
+	private static partial int LSGetApplicationForURL (IntPtr url, LSRolesMask roleMask, IntPtr fsRefZero,
 		ref IntPtr appUrl);
 
-	[DllImport (CFLib)]
-	extern static int CFArrayGetCount (IntPtr theArray);
+	[LibraryImport (CFLib)]
+	private static partial int CFArrayGetCount (IntPtr theArray);
 
-	[DllImport (CFLib)]
-	extern static IntPtr CFArrayGetValueAtIndex (IntPtr theArray, int idx);
+	[LibraryImport (CFLib)]
+	private static partial IntPtr CFArrayGetValueAtIndex (IntPtr theArray, int idx);
 
 	[Flags]
 	public enum LSRolesMask : uint
