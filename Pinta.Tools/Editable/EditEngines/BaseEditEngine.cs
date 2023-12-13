@@ -333,7 +333,7 @@ public abstract class BaseEditEngine
 				ShapeEngine? selEngine = SelectedShapeEngine;
 
 				//Verify that the tool needs to be switched.
-				if (GetCorrespondingTool (newShapeType) == this.owner)
+				if (GetCorrespondingTool (newShapeType) == owner)
 					return;
 
 				if (selEngine == null) {

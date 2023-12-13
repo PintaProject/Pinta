@@ -69,7 +69,7 @@ public sealed class InvertHistoryItem : BaseHistoryItem
 	public InvertHistoryItem (InvertType type, int layerIndex)
 	{
 		this.type = type;
-		this.layer_index = layerIndex;
+		layer_index = layerIndex;
 
 		switch (type) {
 			case InvertType.FlipLayerHorizontal:

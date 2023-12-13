@@ -122,7 +122,7 @@ public sealed class DocumentSelection
 			SelectionPolygons = SelectionPolygons.ToList (),
 			Origin = new PointD (Origin.X, Origin.Y),
 			End = new PointD (End.X, End.Y),
-			visible = this.visible
+			visible = visible
 		};
 	}
 
@@ -201,7 +201,7 @@ public sealed class DocumentSelection
 			SelectionPolygons = newPolygons,
 			Origin = origin,
 			End = end,
-			visible = this.visible
+			visible = visible
 		};
 	}
 

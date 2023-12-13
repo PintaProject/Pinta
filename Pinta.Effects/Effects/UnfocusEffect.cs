@@ -43,10 +43,10 @@ public sealed class UnfocusEffect : LocalHistogramEffect
 	#region Algorithm Code Ported From PDN
 	public override void Render (ImageSurface src, ImageSurface dest, ReadOnlySpan<RectangleI> rois)
 	{
-		this.radius = Data.Radius;
+		radius = Data.Radius;
 
 		foreach (var rect in rois)
-			RenderRectWithAlpha (this.radius, src, dest, rect);
+			RenderRectWithAlpha (radius, src, dest, rect);
 	}
 
 	public override ColorBgra ApplyWithAlpha (in ColorBgra src, int area, int sum, Span<int> hb, Span<int> hg, Span<int> hr)

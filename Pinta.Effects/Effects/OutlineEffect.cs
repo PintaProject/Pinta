@@ -44,8 +44,8 @@ public sealed class OutlineEffect : LocalHistogramEffect
 	#region Algorithm Code Ported From PDN
 	public override ColorBgra Apply (in ColorBgra src, int area, Span<int> hb, Span<int> hg, Span<int> hr, Span<int> ha)
 	{
-		int minCount1 = area * (100 - this.intensity) / 200;
-		int minCount2 = area * (100 + this.intensity) / 200;
+		int minCount1 = area * (100 - intensity) / 200;
+		int minCount2 = area * (100 + intensity) / 200;
 
 		int bCount = 0;
 		int b1 = 0;
@@ -121,11 +121,11 @@ public sealed class OutlineEffect : LocalHistogramEffect
 
 	public override void Render (ImageSurface src, ImageSurface dest, ReadOnlySpan<RectangleI> rois)
 	{
-		this.thickness = Data.Thickness;
-		this.intensity = Data.Intensity;
+		thickness = Data.Thickness;
+		intensity = Data.Intensity;
 
 		foreach (var rect in rois)
-			RenderRect (this.thickness, src, dest, rect);
+			RenderRect (thickness, src, dest, rect);
 	}
 
 	#endregion
