@@ -52,10 +52,10 @@ namespace Cairo
 
 		public Color (double r, double g, double b, double a)
 		{
-			this.R = r;
-			this.G = g;
-			this.B = b;
-			this.A = a;
+			R = r;
+			G = g;
+			B = b;
+			A = a;
 		}
 
 		public double R;

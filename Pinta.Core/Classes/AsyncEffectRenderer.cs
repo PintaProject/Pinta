@@ -123,9 +123,9 @@ internal abstract class AsyncEffectRenderer
 		// So a copy is made for the render.
 		this.effect = effect.Clone ();
 
-		this.source_surface = source;
-		this.dest_surface = dest;
-		this.render_bounds = renderBounds;
+		source_surface = source;
+		dest_surface = dest;
+		render_bounds = renderBounds;
 
 		// If a render is already in progress, then cancel it,
 		// and start a new render.

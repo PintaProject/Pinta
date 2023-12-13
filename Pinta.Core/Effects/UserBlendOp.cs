@@ -28,6 +28,6 @@ public abstract class UserBlendOp : BinaryPixelOp
 
 	public override string ToString ()
 	{
-		return Utility.GetStaticName (this.GetType ());
+		return Utility.GetStaticName (GetType ());
 	}
 }

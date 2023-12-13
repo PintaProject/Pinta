@@ -74,11 +74,11 @@ public sealed class ReduceNoiseEffect : LocalHistogramEffect
 
 	public override void Render (ImageSurface src, ImageSurface dest, ReadOnlySpan<RectangleI> rois)
 	{
-		this.radius = Data.Radius;
-		this.strength = -0.2 * Data.Strength;
+		radius = Data.Radius;
+		strength = -0.2 * Data.Strength;
 
 		foreach (var rect in rois)
-			RenderRect (this.radius, src, dest, rect);
+			RenderRect (radius, src, dest, rect);
 	}
 	#endregion
 

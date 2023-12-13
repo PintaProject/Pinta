@@ -59,14 +59,14 @@ public struct ColorBgra
 
 	public readonly string ToHexString ()
 	{
-		int rgbNumber = (this.R << 16) | (this.G << 8) | this.B;
+		int rgbNumber = (R << 16) | (G << 8) | B;
 		string colorString = Convert.ToString (rgbNumber, 16);
 
 		while (colorString.Length < 6) {
 			colorString = "0" + colorString;
 		}
 
-		string alphaString = System.Convert.ToString (this.A, 16);
+		string alphaString = System.Convert.ToString (A, 16);
 
 		while (alphaString.Length < 2) {
 			alphaString = "0" + alphaString;
@@ -126,7 +126,7 @@ public struct ColorBgra
 	/// <returns></returns>
 	public readonly byte GetMaxColorChannelValue ()
 	{
-		return Math.Max (this.B, Math.Max (this.G, this.R));
+		return Math.Max (B, Math.Max (G, R));
 	}
 
 	/// <summary>
@@ -135,7 +135,7 @@ public struct ColorBgra
 	/// <returns></returns>
 	public readonly byte GetAverageColorChannelValue ()
 	{
-		return (byte) ((this.B + this.G + this.R) / 3);
+		return (byte) ((B + G + R) / 3);
 	}
 
 	/// <summary>
@@ -160,7 +160,7 @@ public struct ColorBgra
 	public override readonly bool Equals (object? obj)
 	{
 
-		if (obj != null && obj is ColorBgra && ((ColorBgra) obj).Bgra == this.Bgra) {
+		if (obj != null && obj is ColorBgra && ((ColorBgra) obj).Bgra == Bgra) {
 			return true;
 		} else {
 			return false;
@@ -592,7 +592,7 @@ public struct ColorBgra
 	/// <returns>A ColorBgra value in straight alpha form</returns>
 	public readonly ColorBgra ToStraightAlpha ()
 	{
-		if (this.A > 0)
+		if (A > 0)
 			return ColorBgra.FromBgra ((byte) (B * 255 / A), (byte) (G * 255 / A), (byte) (R * 255 / A), A);
 		else
 			return ColorBgra.Zero;

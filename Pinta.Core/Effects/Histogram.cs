@@ -20,11 +20,11 @@ public abstract class Histogram
 {
 	protected long[][] histogram;
 	public long[][] HistogramValues {
-		get => this.histogram;
+		get => histogram;
 
 		set {
-			if (value.Length == this.histogram.Length && value[0].Length == this.histogram[0].Length) {
-				this.histogram = value;
+			if (value.Length == histogram.Length && value[0].Length == histogram[0].Length) {
+				histogram = value;
 				OnHistogramUpdated ();
 			} else {
 				throw new ArgumentException ("value muse be an array of arrays of matching size", nameof (value));
@@ -32,21 +32,21 @@ public abstract class Histogram
 		}
 	}
 
-	public int Channels => this.histogram.Length;
+	public int Channels => histogram.Length;
 
-	public int Entries => this.histogram[0].Length;
+	public int Entries => histogram[0].Length;
 
 	protected internal Histogram (int channels, int entries, ImmutableArray<ColorBgra> visualColors)
 	{
 		if (visualColors.IsDefault)
 			throw new ArgumentException ("Not initialized", nameof (visualColors));
 
-		this.visual_colors = visualColors;
+		visual_colors = visualColors;
 
-		this.histogram = new long[channels][];
+		histogram = new long[channels][];
 
 		for (int channel = 0; channel < channels; ++channel) {
-			this.histogram[channel] = new long[entries];
+			histogram[channel] = new long[entries];
 		}
 	}
 

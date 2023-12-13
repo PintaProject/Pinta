@@ -87,7 +87,7 @@ public abstract class BaseEffect
 	public virtual void LaunchConfiguration ()
 	{
 		if (IsConfigurable)
-			throw new NotImplementedException ($"{this.GetType ()} is marked as configurable, but has not implemented LaunchConfiguration");
+			throw new NotImplementedException ($"{GetType ()} is marked as configurable, but has not implemented LaunchConfiguration");
 	}
 
 	/// <summary>
@@ -181,7 +181,7 @@ public abstract class BaseEffect
 	/// <returns>An identical copy of this effect.</returns>
 	public virtual BaseEffect Clone ()
 	{
-		var effect = (BaseEffect) this.MemberwiseClone ();
+		var effect = (BaseEffect) MemberwiseClone ();
 
 		if (effect.EffectData != null)
 			effect.EffectData = EffectData?.Clone ();
@@ -210,7 +210,7 @@ public abstract class EffectData : ObservableObject
 	/// <returns>An identical copy of this EffectData.</returns>
 	public virtual EffectData Clone ()
 	{
-		return (EffectData) this.MemberwiseClone ();
+		return (EffectData) MemberwiseClone ();
 	}
 
 	/// <summary>

@@ -72,7 +72,7 @@ public sealed class InkSketchEffect : BaseEffect
 		glow_effect.Data.Brightness = -(Data.Coloring - 50) * 2;
 		glow_effect.Data.Contrast = -(Data.Coloring - 50) * 2;
 
-		this.glow_effect.Render (src, dest, rois);
+		glow_effect.Render (src, dest, rois);
 
 		var src_data = src.GetReadOnlyPixelData ();
 		int width = src.Width;
@@ -132,7 +132,7 @@ public sealed class InkSketchEffect : BaseEffect
 					    Utility.ClampToByte (r));
 
 					// Desaturate 
-					topLayer = this.desaturate_op.Apply (topLayer);
+					topLayer = desaturate_op.Apply (topLayer);
 
 					// Adjust Brightness and Contrast 
 					if (topLayer.R > (Data.InkOutline * 255 / 100)) {
@@ -143,7 +143,7 @@ public sealed class InkSketchEffect : BaseEffect
 
 					// Change Blend Mode to Darken
 					ref ColorBgra dst_pixel = ref dst_row[x];
-					dst_pixel = this.darken_op.Apply (topLayer, dst_pixel);
+					dst_pixel = darken_op.Apply (topLayer, dst_pixel);
 				}
 			}
 		}

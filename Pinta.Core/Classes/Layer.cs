@@ -48,7 +48,7 @@ public class Layer : ObservableObject
 		this.hidden = hidden;
 		this.opacity = opacity;
 		this.name = name;
-		this.blend_mode = BlendMode.Normal;
+		blend_mode = BlendMode.Normal;
 
 		Transform = CairoExtensions.CreateIdentityMatrix ();
 	}
