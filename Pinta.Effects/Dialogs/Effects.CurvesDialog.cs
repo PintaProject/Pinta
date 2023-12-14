@@ -371,9 +371,9 @@ public sealed class CurvesDialog : Gtk.Dialog
 			g.LineTo (size, y);
 			g.Stroke ();
 
-			this.label_point.SetText ($"({x}, {y})");
+			label_point.SetText ($"({x}, {y})");
 		} else
-			this.label_point.SetText (string.Empty);
+			label_point.SetText (string.Empty);
 	}
 
 	private static void DrawGrid (Context g)

@@ -44,16 +44,16 @@ public sealed class MedianEffect : LocalHistogramEffect
 	#region Algorithm Code Ported From PDN
 	public override void Render (ImageSurface src, ImageSurface dest, ReadOnlySpan<RectangleI> rois)
 	{
-		this.radius = Data.Radius;
-		this.percentile = Data.Percentile;
+		radius = Data.Radius;
+		percentile = Data.Percentile;
 
 		foreach (Core.RectangleI rect in rois)
-			RenderRect (this.radius, src, dest, rect);
+			RenderRect (radius, src, dest, rect);
 	}
 
 	public override ColorBgra Apply (in ColorBgra src, int area, Span<int> hb, Span<int> hg, Span<int> hr, Span<int> ha)
 	{
-		ColorBgra c = GetPercentile (this.percentile, area, hb, hg, hr, ha);
+		ColorBgra c = GetPercentile (percentile, area, hb, hg, hr, ha);
 		return c;
 	}
 	#endregion

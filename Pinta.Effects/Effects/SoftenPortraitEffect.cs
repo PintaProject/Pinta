@@ -80,8 +80,8 @@ public sealed class SoftenPortraitEffect : BaseEffect
 		float redAdjust = 1.0f + (warmth / 100.0f);
 		float blueAdjust = 1.0f - (warmth / 100.0f);
 
-		this.blur_effect.Render (src, dest, rois);
-		this.bac_adjustment.Render (src, dest, rois);
+		blur_effect.Render (src, dest, rois);
+		bac_adjustment.Render (src, dest, rois);
 
 		ReadOnlySpan<ColorBgra> src_data = src.GetReadOnlyPixelData ();
 		Span<ColorBgra> dst_data = dest.GetPixelData ();
@@ -93,12 +93,12 @@ public sealed class SoftenPortraitEffect : BaseEffect
 				var dst_row = dst_data.Slice (y * width, width);
 
 				for (int x = roi.Left; x <= roi.Right; ++x) {
-					ColorBgra srcGrey = this.desaturate_op.Apply (src_row[x]);
+					ColorBgra srcGrey = desaturate_op.Apply (src_row[x]);
 
 					srcGrey.R = Utility.ClampToByte ((int) ((float) srcGrey.R * redAdjust));
 					srcGrey.B = Utility.ClampToByte ((int) ((float) srcGrey.B * blueAdjust));
 
-					dst_row[x] = this.overlay_op.Apply (srcGrey, dst_row[x]);
+					dst_row[x] = overlay_op.Apply (srcGrey, dst_row[x]);
 				}
 			}
 		}

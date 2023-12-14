@@ -81,10 +81,10 @@ public sealed class FormatDescriptor
 		if (importer == null && exporter == null)
 			throw new ArgumentException ("Format descriptor is initialized incorrectly", $"{nameof (importer)}, {nameof (exporter)}");
 
-		this.Extensions = extensions.ToReadOnlyCollection (); // Create a read-only copy
-		this.Mimes = mimes.ToReadOnlyCollection (); // Create a read-only copy
-		this.Importer = importer;
-		this.Exporter = exporter;
+		Extensions = extensions.ToReadOnlyCollection (); // Create a read-only copy
+		Mimes = mimes.ToReadOnlyCollection (); // Create a read-only copy
+		Importer = importer;
+		Exporter = exporter;
 
 		FileFilter ff = FileFilter.New ();
 		StringBuilder formatNames = new StringBuilder ();
@@ -109,7 +109,7 @@ public sealed class FormatDescriptor
 		}
 
 		ff.Name = string.Format (Translations.GetString ("{0} image ({1})"), displayPrefix, formatNames);
-		this.Filter = ff;
+		Filter = ff;
 	}
 
 	[MemberNotNullWhen (returnValue: false, member: nameof (Exporter))]

@@ -61,8 +61,8 @@ public abstract class WarpEffect : BaseEffect
 	{
 		WarpSettings settings = CreateSettings ();
 
-		this.DefaultRadius = Math.Min (settings.selection.Width, settings.selection.Height) * 0.5;
-		this.DefaultRadius2 = DefaultRadius * DefaultRadius;
+		DefaultRadius = Math.Min (settings.selection.Width, settings.selection.Height) * 0.5;
+		DefaultRadius2 = DefaultRadius * DefaultRadius;
 
 		Span<PointD> aaPoints = stackalloc PointD[settings.aaSampleCount];
 		Utility.GetRgssOffsets (aaPoints, settings.aaSampleCount, Data.Quality);

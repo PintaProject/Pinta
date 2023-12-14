@@ -38,8 +38,8 @@ internal sealed class DocumentViewContent : IDockNotebookItem
 
 	public DocumentViewContent (Document document, CanvasWindow canvasWindow)
 	{
-		this.Document = document;
-		this.canvas_window = canvasWindow;
+		Document = document;
+		canvas_window = canvasWindow;
 
 		document.IsDirtyChanged += (o, e) => LabelChanged?.Invoke (this, EventArgs.Empty);
 		document.Renamed += (o, e) => { LabelChanged?.Invoke (this, EventArgs.Empty); };

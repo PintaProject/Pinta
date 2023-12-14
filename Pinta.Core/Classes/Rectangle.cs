@@ -37,10 +37,10 @@ public readonly record struct RectangleD
 
 	public RectangleD (double x, double y, double width, double height)
 	{
-		this.X = x;
-		this.Y = y;
-		this.Width = width;
-		this.Height = height;
+		X = x;
+		Y = y;
+		Width = width;
+		Height = height;
 	}
 
 	public RectangleD (in PointD point, double width, double height)
@@ -60,10 +60,10 @@ public readonly record struct RectangleD
 
 	public readonly bool ContainsPoint (double x, double y)
 	{
-		if (x < this.X || x >= this.X + this.Width)
+		if (x < X || x >= X + Width)
 			return false;
 
-		if (y < this.Y || y >= this.Y + this.Height)
+		if (y < Y || y >= Y + Height)
 			return false;
 
 		return true;
@@ -85,10 +85,10 @@ public readonly record struct RectangleD
 
 	public readonly RectangleD Clamp ()
 	{
-		double x = this.X;
-		double y = this.Y;
-		double w = this.Width;
-		double h = this.Height;
+		double x = X;
+		double y = Y;
+		double w = Width;
+		double h = Height;
 
 		if (x < 0) {
 			w -= x;

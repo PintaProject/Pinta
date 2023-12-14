@@ -499,14 +499,14 @@ public sealed class NewImageDialog : Dialog
 		{
 			this.size = size;
 
-			this.QueueDraw ();
+			QueueDraw ();
 		}
 
 		public void Update (Cairo.Color color)
 		{
 			this.color = color;
 
-			this.QueueDraw ();
+			QueueDraw ();
 		}
 
 		public void Update (Size size, Cairo.Color color)
@@ -514,7 +514,7 @@ public sealed class NewImageDialog : Dialog
 			this.size = size;
 			this.color = color;
 
-			this.QueueDraw ();
+			QueueDraw ();
 		}
 
 		private void Draw (Context cr, int widget_width, int widget_height)
