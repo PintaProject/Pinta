@@ -158,7 +158,7 @@ public abstract class LocalHistogramEffect : BaseEffect
 				ReadOnlySpan<ColorBgra> psamples = src_data[((y + v) * width + rect.Left + left)..];
 
 				for (int u = left, i = 0; u <= right; ++u, ++i) {
-					ref readonly ColorBgra psamp = ref psamples[i];
+					ColorBgra psamp = psamples[i];
 					if ((u * u + v * v) <= cutoff) {
 						++area;
 						++hb[psamp.B];
@@ -196,7 +196,7 @@ public abstract class LocalHistogramEffect : BaseEffect
 
 				while (v >= top) {
 					int u = leadingEdgeX[-v];
-					ref readonly ColorBgra p = ref src_data[(y * width + x) + (v * stride) - u];
+					ColorBgra p = src_data[(y * width + x) + (v * stride) - u];
 
 					--hb[p.B];
 					--hg[p.G];
@@ -221,7 +221,7 @@ public abstract class LocalHistogramEffect : BaseEffect
 
 				while (v >= top) {
 					int u = leadingEdgeX[-v];
-					ref readonly ColorBgra p = ref src_data[(y * width + x) + (v * stride) + u + 1];
+					ColorBgra p = src_data[(y * width + x) + (v * stride) + u + 1];
 					++hb[p.B];
 					++hg[p.G];
 					++hr[p.R];
@@ -246,7 +246,7 @@ public abstract class LocalHistogramEffect : BaseEffect
 
 				while (v <= bottom) {
 					int u = leadingEdgeX[v];
-					ref readonly ColorBgra p = ref src_data[(y * width + x) + (v * stride) - u];
+					ColorBgra p = src_data[(y * width + x) + (v * stride) - u];
 					--hb[p.B];
 					--hg[p.G];
 					--hr[p.R];
@@ -271,7 +271,7 @@ public abstract class LocalHistogramEffect : BaseEffect
 
 				while (v <= bottom) {
 					int u = leadingEdgeX[v];
-					ref readonly ColorBgra p = ref src_data[(y * width + x) + (v * stride) + u + 1];
+					ColorBgra p = src_data[(y * width + x) + (v * stride) + u + 1];
 					++hb[p.B];
 					++hg[p.G];
 					++hr[p.R];
@@ -340,7 +340,7 @@ public abstract class LocalHistogramEffect : BaseEffect
 				ReadOnlySpan<ColorBgra> psamples = src_data[((y + v) * width + rect.Left + left)..];
 
 				for (int u = left, i = 0; u <= right; ++u, ++i) {
-					ref readonly ColorBgra psamp = ref psamples[i];
+					ColorBgra psamp = psamples[i];
 					if ((u * u + v * v) <= cutoff) {
 						++area;
 						byte w = psamp.A;
@@ -379,7 +379,7 @@ public abstract class LocalHistogramEffect : BaseEffect
 
 				while (v >= top) {
 					int u = leadingEdgeX[-v];
-					ref readonly ColorBgra p = ref src_data[(y * width + x) + (v * stride) - u];
+					ColorBgra p = src_data[(y * width + x) + (v * stride) - u];
 					byte w = p.A;
 
 					hb[p.B] -= w;
@@ -405,7 +405,7 @@ public abstract class LocalHistogramEffect : BaseEffect
 
 				while (v >= top) {
 					int u = leadingEdgeX[-v];
-					ref readonly ColorBgra p = ref src_data[(y * width + x) + (v * stride) + u + 1];
+					ColorBgra p = src_data[(y * width + x) + (v * stride) + u + 1];
 					byte w = p.A;
 
 					hb[p.B] += w;
@@ -432,7 +432,7 @@ public abstract class LocalHistogramEffect : BaseEffect
 
 				while (v <= bottom) {
 					int u = leadingEdgeX[v];
-					ref readonly ColorBgra p = ref src_data[(y * width + x) + (v * stride) - u];
+					ColorBgra p = src_data[(y * width + x) + (v * stride) - u];
 					byte w = p.A;
 
 					hb[p.B] -= w;
@@ -459,7 +459,7 @@ public abstract class LocalHistogramEffect : BaseEffect
 
 				while (v <= bottom) {
 					int u = leadingEdgeX[v];
-					ref readonly ColorBgra p = ref src_data[(y * width + x) + (v * stride) + u + 1];
+					ColorBgra p = src_data[(y * width + x) + (v * stride) + u + 1];
 					byte w = p.A;
 
 					hb[p.B] += w;

@@ -113,7 +113,7 @@ public sealed class OilPaintingEffect : BaseEffect
 		for (int j = top; j < bottom; ++j) {
 			var src_row = src_data.Slice (j * settings.width, settings.width);
 			for (int i = left; i < right; ++i) {
-				ref readonly ColorBgra src_pixel = ref src_row[i];
+				ColorBgra src_pixel = src_row[i];
 				byte intensity = Utility.FastScaleByteByByte (src_pixel.GetIntensityByte (), settings.maxIntensity);
 
 				++intensityCount[intensity];

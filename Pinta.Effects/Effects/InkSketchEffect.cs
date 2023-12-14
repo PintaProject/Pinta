@@ -118,7 +118,7 @@ public sealed class InkSketchEffect : BaseEffect
 							int i1 = u - x + radius;
 							int w = conv[j][i1];
 
-							ref readonly ColorBgra src_pixel = ref src_row[u];
+							ColorBgra src_pixel = src_row[u];
 
 							r += src_pixel.R * w;
 							g += src_pixel.G * w;
