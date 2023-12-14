@@ -27,43 +27,43 @@ public abstract class GradientRenderer
 	private readonly ColorBgra[] lerp_colors;
 
 	public ColorBgra StartColor {
-		get => this.start_color;
+		get => start_color;
 		set {
-			if (this.start_color != value) {
-				this.start_color = value;
-				this.lerp_cache_is_valid = false;
+			if (start_color != value) {
+				start_color = value;
+				lerp_cache_is_valid = false;
 			}
 		}
 	}
 
 	public ColorBgra EndColor {
-		get => this.end_color;
+		get => end_color;
 		set {
-			if (this.end_color != value) {
-				this.end_color = value;
-				this.lerp_cache_is_valid = false;
+			if (end_color != value) {
+				end_color = value;
+				lerp_cache_is_valid = false;
 			}
 		}
 	}
 
 	public PointD StartPoint {
-		get => this.start_point;
-		set => this.start_point = value;
+		get => start_point;
+		set => start_point = value;
 	}
 
 	public PointD EndPoint {
-		get => this.end_point;
-		set => this.end_point = value;
+		get => end_point;
+		set => end_point = value;
 	}
 
 	public bool AlphaBlending {
-		get => this.alpha_blending;
-		set => this.alpha_blending = value;
+		get => alpha_blending;
+		set => alpha_blending = value;
 	}
 
 	public bool AlphaOnly {
-		get => this.alpha_only;
-		set => this.alpha_only = value;
+		get => alpha_only;
+		set => alpha_only = value;
 	}
 
 	private readonly record struct AlphaBounds (byte StartAlpha, byte EndAlpha);
@@ -75,25 +75,25 @@ public abstract class GradientRenderer
 
 		AlphaBounds bounds;
 
-		if (this.alpha_only) {
+		if (alpha_only) {
 			bounds = ComputeAlphaOnlyValuesFromColors (
-				this.start_color,
-				this.end_color
+				start_color,
+				end_color
 			);
 		} else {
 			bounds = new (
-				StartAlpha: this.start_color.A,
-				EndAlpha: this.end_color.A
+				StartAlpha: start_color.A,
+				EndAlpha: end_color.A
 			);
 		}
 
 		for (int i = 0; i < 256; ++i) {
 			byte a = (byte) i;
-			this.lerp_colors[a] = ColorBgra.Blend (this.start_color, this.end_color, a);
-			this.lerp_alphas[a] = (byte) (bounds.StartAlpha + ((bounds.EndAlpha - bounds.StartAlpha) * a) / 255);
+			lerp_colors[a] = ColorBgra.Blend (start_color, end_color, a);
+			lerp_alphas[a] = (byte) (bounds.StartAlpha + ((bounds.EndAlpha - bounds.StartAlpha) * a) / 255);
 		}
 
-		this.lerp_cache_is_valid = true;
+		lerp_cache_is_valid = true;
 	}
 
 	public abstract byte ComputeByteLerp (int x, int y);
@@ -114,12 +114,12 @@ public abstract class GradientRenderer
 	{
 		AlphaBounds bounds;
 
-		if (this.alpha_only) {
-			bounds = ComputeAlphaOnlyValuesFromColors (this.start_color, this.end_color);
+		if (alpha_only) {
+			bounds = ComputeAlphaOnlyValuesFromColors (start_color, end_color);
 		} else {
 			bounds = new (
-				StartAlpha: this.start_color.A,
-				EndAlpha: this.end_color.A
+				StartAlpha: start_color.A,
+				EndAlpha: end_color.A
 			);
 		}
 
@@ -132,7 +132,7 @@ public abstract class GradientRenderer
 
 			RectangleI rect = rois[ri];
 
-			if (this.start_point.X != this.end_point.X || this.start_point.Y != this.end_point.Y) {
+			if (start_point.X != end_point.X || start_point.Y != end_point.Y) {
 				var mainrect = rect;
 				Parallel.ForEach (
 					Enumerable.Range (rect.Top, rect.Height),
@@ -158,18 +158,18 @@ public abstract class GradientRenderer
 	private ColorBgra GetFinalSolidColor (AlphaBounds bounds, ColorBgra pixel)
 	{
 		ColorBgra result;
-		if (this.alpha_only && this.alpha_blending) {
+		if (alpha_only && alpha_blending) {
 			byte resultAlpha = (byte) Utility.FastDivideShortByByte ((ushort) (pixel.A * bounds.EndAlpha), 255);
 			result = pixel;
 			result.A = resultAlpha;
-		} else if (this.alpha_only && !this.alpha_blending) {
+		} else if (alpha_only && !alpha_blending) {
 			result = pixel;
 			result.A = bounds.EndAlpha;
-		} else if (!this.alpha_only && this.alpha_blending) {
-			result = this.normal_blend_op.Apply (pixel, this.end_color);
+		} else if (!alpha_only && alpha_blending) {
+			result = normal_blend_op.Apply (pixel, end_color);
 			//if (!this.alphaOnly && !this.alphaBlending)
 		} else {
-			result = this.end_color;
+			result = end_color;
 		}
 		return result;
 	}
@@ -223,9 +223,9 @@ public abstract class GradientRenderer
 
 	protected internal GradientRenderer (bool alphaOnly, BinaryPixelOp normalBlendOp)
 	{
-		this.normal_blend_op = normalBlendOp;
-		this.alpha_only = alphaOnly;
-		this.lerp_alphas = new byte[256];
-		this.lerp_colors = new ColorBgra[256];
+		normal_blend_op = normalBlendOp;
+		alpha_only = alphaOnly;
+		lerp_alphas = new byte[256];
+		lerp_colors = new ColorBgra[256];
 	}
 }

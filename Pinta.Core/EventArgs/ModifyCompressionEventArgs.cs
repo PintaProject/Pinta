@@ -36,8 +36,8 @@ public sealed class ModifyCompressionEventArgs : EventArgs
 
 	public ModifyCompressionEventArgs (int quality, Gtk.Window parent)
 	{
-		this.Quality = quality;
-		this.Cancel = false;
-		this.ParentWindow = parent;
+		Quality = quality;
+		Cancel = false;
+		ParentWindow = parent;
 	}
 }

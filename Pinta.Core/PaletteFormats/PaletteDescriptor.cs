@@ -43,9 +43,9 @@ public sealed class PaletteDescriptor
 
 	public PaletteDescriptor (string displayPrefix, IEnumerable<string> extensions, IPaletteLoader loader, IPaletteSaver saver)
 	{
-		this.Extensions = extensions.ToReadOnlyCollection ();
-		this.Loader = loader;
-		this.Saver = saver;
+		Extensions = extensions.ToReadOnlyCollection ();
+		Loader = loader;
+		Saver = saver;
 
 		var ff = FileFilter.New ();
 		StringBuilder formatNames = new StringBuilder ();
@@ -61,7 +61,7 @@ public sealed class PaletteDescriptor
 
 		// Translators: {0} is the palette format (e.g. "GIMP") and {1} is a list of file extensions.
 		ff.Name = Translations.GetString ("{0} palette ({1})", displayPrefix, formatNames);
-		this.Filter = ff;
+		Filter = ff;
 	}
 
 	public bool IsReadOnly ()

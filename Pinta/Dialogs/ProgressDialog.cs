@@ -83,7 +83,7 @@ public sealed class ProgressDialog : Dialog, IProgressDialog
 	void IProgressDialog.Show ()
 	{
 		timeout_id = GLib.Functions.TimeoutAdd (0, 500, () => {
-			this.Show ();
+			Show ();
 			timeout_id = 0;
 			return false;
 		});
@@ -93,6 +93,6 @@ public sealed class ProgressDialog : Dialog, IProgressDialog
 	{
 		if (timeout_id != 0)
 			GLib.Source.Remove (timeout_id);
-		this.Hide ();
+		Hide ();
 	}
 }

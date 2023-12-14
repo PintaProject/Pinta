@@ -22,15 +22,15 @@ public static class GradientRenderers
 			double mag = vec.Magnitude ();
 
 			if (EndPoint.X == StartPoint.X) {
-				this.dtdx = 0;
+				dtdx = 0;
 			} else {
-				this.dtdx = vec.X / (mag * mag);
+				dtdx = vec.X / (mag * mag);
 			}
 
 			if (EndPoint.Y == StartPoint.Y) {
-				this.dtdy = 0;
+				dtdy = 0;
 			} else {
-				this.dtdy = vec.Y / (mag * mag);
+				dtdy = vec.Y / (mag * mag);
 			}
 
 			base.BeforeRender ();

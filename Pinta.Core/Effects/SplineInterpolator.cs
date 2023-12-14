@@ -15,17 +15,17 @@ public sealed class SplineInterpolator
 	private readonly SortedList<double, double> points = new ();
 	private ImmutableArray<double> y2;
 
-	public int Count => this.points.Count;
+	public int Count => points.Count;
 
 	public void Add (double x, double y)
 	{
 		points[x] = y;
-		this.y2 = default;
+		y2 = default;
 	}
 
 	public void Clear ()
 	{
-		this.points.Clear ();
+		points.Clear ();
 	}
 
 	// Interpolate() and PreCompute() are adapted from:
@@ -37,8 +37,8 @@ public sealed class SplineInterpolator
 		if (y2.IsDefault)
 			y2 = PreCompute ();
 
-		IList<double> xa = this.points.Keys;
-		IList<double> ya = this.points.Values;
+		IList<double> xa = points.Keys;
+		IList<double> ya = points.Values;
 
 		int n = ya.Count;
 		int klo = 0;     // We will find the right place in the table by means of

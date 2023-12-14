@@ -403,8 +403,8 @@ struct CarbonEventTypeSpec
 
 	public CarbonEventTypeSpec (CarbonEventClass eventClass, UInt32 eventKind)
 	{
-		this.EventClass = eventClass;
-		this.EventKind = eventKind;
+		EventClass = eventClass;
+		EventKind = eventKind;
 	}
 
 	public CarbonEventTypeSpec (CarbonEventMenu kind) : this (CarbonEventClass.Menu, (uint) kind)
@@ -489,8 +489,8 @@ struct CarbonHICommand //technically HICommandExtended, but they're compatible
 	{
 		windowRef = controlRef = IntPtr.Zero;
 		this.commandID = commandID;
-		this.menuItem = item;
-		this.attributes = CarbonHICommandAttributes.FromMenu;
+		menuItem = item;
+		attributes = CarbonHICommandAttributes.FromMenu;
 	}
 
 	public readonly CarbonHICommandAttributes Attributes => attributes;

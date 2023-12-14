@@ -67,7 +67,7 @@ public static class UnaryPixelOps
 
 		public Constant (ColorBgra setColor)
 		{
-			this.set_color = setColor;
+			set_color = setColor;
 		}
 	}
 
@@ -94,7 +94,7 @@ public static class UnaryPixelOps
 
 		public BlendConstant (ColorBgra blendColor)
 		{
-			this.blend_color = blendColor;
+			blend_color = blendColor;
 		}
 	}
 
@@ -132,7 +132,7 @@ public static class UnaryPixelOps
 		public SetChannel (int channel, byte setValue)
 		{
 			this.channel = channel;
-			this.set_value = setValue;
+			set_value = setValue;
 		}
 	}
 
@@ -697,8 +697,8 @@ public static class UnaryPixelOps
 
 		public HueSaturationLightness (int hueDelta, int satDelta, int lightness)
 		{
-			this.hue_delta = hueDelta;
-			this.sat_factor = (satDelta * 1024) / 100;
+			hue_delta = hueDelta;
+			sat_factor = (satDelta * 1024) / 100;
 
 			if (lightness == 0) {
 				blend_op = new UnaryPixelOps.Identity ();
@@ -753,9 +753,9 @@ public static class UnaryPixelOps
 
 		public PosterizePixel (int red, int green, int blue)
 		{
-			this.red_levels = CalcLevels (red);
-			this.green_levels = CalcLevels (green);
-			this.blue_levels = CalcLevels (blue);
+			red_levels = CalcLevels (red);
+			green_levels = CalcLevels (green);
+			blue_levels = CalcLevels (blue);
 		}
 
 		private static ImmutableArray<byte> CalcLevels (int levelCount)
