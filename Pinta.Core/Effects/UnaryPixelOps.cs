@@ -382,7 +382,7 @@ public static class UnaryPixelOps
 		{
 			for (int i = 0; i < src.Length; ++i) {
 				ref ColorBgra d = ref dst[i];
-				ref readonly ColorBgra s = ref src[i];
+				ColorBgra s = src[i];
 				d = ColorBgra.FromBgra (
 					b: CurveB[s.B],
 					g: CurveG[s.G],
@@ -795,7 +795,7 @@ public static class UnaryPixelOps
 		{
 			for (int i = 0; i < src.Length; ++i) {
 				ref ColorBgra d = ref dst[i];
-				ref readonly ColorBgra s = ref src[i];
+				ColorBgra s = src[i];
 				d.B = blue_levels[s.B];
 				d.G = green_levels[s.G];
 				d.R = red_levels[s.R];

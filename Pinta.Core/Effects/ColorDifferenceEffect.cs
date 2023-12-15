@@ -62,11 +62,11 @@ public abstract class ColorDifferenceEffect : BaseEffect
 					for (int fy = fyStart; fy < fyEnd; ++fy) {
 						for (int fx = fxStart; fx < fxEnd; ++fx) {
 							double weight = weights[fy][fx];
-							ref readonly ColorBgra c = ref src_data[(y - 1 + fy) * src_width + (x - 1 + fx)];
+							ColorBgra c = src_data[(y - 1 + fy) * src_width + (x - 1 + fx)];
 
-							rSum += weight * (double) c.R;
-							gSum += weight * (double) c.G;
-							bSum += weight * (double) c.B;
+							rSum += weight * c.R;
+							gSum += weight * c.G;
+							bSum += weight * c.B;
 						}
 					}
 
