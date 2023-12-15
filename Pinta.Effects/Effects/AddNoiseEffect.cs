@@ -145,7 +145,7 @@ public sealed class AddNoiseEffect : BaseEffect
 						g = i + (((g - i) * sat) >> 12);
 						b = i + (((b - i) * sat) >> 12);
 
-						ref readonly ColorBgra src_pixel = ref src_row[x];
+						ColorBgra src_pixel = src_row[x];
 						ref ColorBgra dst_pixel = ref dst_row[x];
 
 						dst_pixel.R = Utility.ClampToByte (src_pixel.R + ((r * dev + 32768) >> 16));

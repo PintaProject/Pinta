@@ -77,7 +77,7 @@ public sealed class ZoomBlurEffect : BaseEffect
 					int sa = 0;
 					int sc = 0;
 
-					ref readonly ColorBgra src_pixel = ref src_row[x];
+					ColorBgra src_pixel = src_row[x];
 					sr += src_pixel.R * src_pixel.A;
 					sg += src_pixel.G * src_pixel.A;
 					sb += src_pixel.B * src_pixel.A;

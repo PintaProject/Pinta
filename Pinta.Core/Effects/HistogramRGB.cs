@@ -56,7 +56,7 @@ public sealed class HistogramRgb : Histogram
 		for (int y = rect.Y; y <= rect.Bottom; ++y) {
 			var row = data[(y * width)..];
 			for (int x = rect.X; x <= rect_right; ++x) {
-				ref readonly ColorBgra c = ref row[x];
+				ColorBgra c = row[x];
 				++histogramB[c.B];
 				++histogramG[c.G];
 				++histogramR[c.R];
