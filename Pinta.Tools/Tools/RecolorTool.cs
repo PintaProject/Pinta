@@ -133,7 +133,7 @@ public class RecolorTool : BaseBrushTool
 				if (stencil[i, j])
 					continue;
 
-				ref readonly ColorBgra surf_color = ref surf_data[j * surf_width + i];
+				ColorBgra surf_color = surf_data[j * surf_width + i];
 				if (ColorBgra.ColorsWithinTolerance (new_color, surf_color, myTolerance))
 					tmp_data[j * tmp_width + i] = AdjustColorDifference (new_color, old_color, surf_color);
 

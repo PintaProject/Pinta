@@ -77,7 +77,7 @@ public sealed class RadialBlurEffect : BaseEffect
 
 				for (int x = rect.Left; x <= rect.Right; ++x) {
 					ref ColorBgra dst_pixel = ref dst_row[x];
-					ref readonly ColorBgra src_pixel = ref src_row[x];
+					ColorBgra src_pixel = src_row[x];
 
 					int fx = (x << 16) - fcx;
 					int fy = (y << 16) - fcy;
@@ -103,7 +103,7 @@ public sealed class RadialBlurEffect : BaseEffect
 						int v1 = oy1 + fcy + 32768 >> 16;
 
 						if (u1 > 0 && v1 > 0 && u1 < w && v1 < h) {
-							ref readonly ColorBgra sample = ref src_data[v1 * src_w + u1];
+							ColorBgra sample = src_data[v1 * src_w + u1];
 
 							sr += sample.R * sample.A;
 							sg += sample.G * sample.A;
@@ -116,7 +116,7 @@ public sealed class RadialBlurEffect : BaseEffect
 						int v2 = oy2 + fcy + 32768 >> 16;
 
 						if (u2 > 0 && v2 > 0 && u2 < w && v2 < h) {
-							ref readonly ColorBgra sample = ref src_data[v2 * src_w + u2];
+							ColorBgra sample = src_data[v2 * src_w + u2];
 
 							sr += sample.R * sample.A;
 							sg += sample.G * sample.A;
