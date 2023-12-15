@@ -1354,12 +1354,19 @@ public abstract class BaseEditEngine
 				// Constrain to a square / circle.
 				var origin = selEngine.ControlPoints[(SelectedPointIndex + 2) % 4].Position;
 
-				var dx = current_point.X - origin.X;
-				var dy = current_point.Y - origin.Y;
-				var length = Math.Max (Math.Abs (dx), Math.Abs (dy));
-				dx = length * Math.Sign (dx);
-				dy = length * Math.Sign (dy);
-				current_point = new PointD (origin.X + dx, origin.Y + dy);
+				PointD d = new (
+					X: current_point.X - origin.X,
+					Y: current_point.Y - origin.Y
+				);
+
+				var length = Math.Max (Math.Abs (d.X), Math.Abs (d.Y));
+
+				d = new PointD (
+					X: length * Math.Sign (d.X),
+					Y: length * Math.Sign (d.Y)
+				);
+
+				current_point = new PointD (origin.X + d.X, origin.Y + d.Y);
 			} else {
 				// Calculate the modified position of currentPoint such that the angle between the adjacent point
 				// (if any) and currentPoint is snapped to the closest angle out of a certain number of angles.
