@@ -57,6 +57,13 @@ internal sealed class PasteIntoNewLayerAction : IActionHandler
 		// Paste into the active document.
 		// The 'true' argument indicates that paste should be
 		// performed into a new layer.
-		PasteAction.Paste (doc, true, (int) canvasPos.X, (int) canvasPos.Y);
+		PasteAction.Paste (
+			doc: doc,
+			toNewLayer: true,
+			pastePosition: new PointI (
+				X: (int) canvasPos.X,
+				Y: (int) canvasPos.Y
+			)
+		);
 	}
 }
