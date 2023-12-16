@@ -486,7 +486,7 @@ public sealed class NewImageDialog : Dialog
 		private Size size;
 		private Cairo.Color color;
 
-		private readonly int max_size = 250;
+		private const int MAX_SIZE = 250;
 
 		public PreviewArea ()
 		{
@@ -522,12 +522,12 @@ public sealed class NewImageDialog : Dialog
 			Size preview_size;
 
 			// Figure out the dimensions of the preview to draw
-			if (size.Width <= max_size && size.Height <= max_size)
+			if (size.Width <= MAX_SIZE && size.Height <= MAX_SIZE)
 				preview_size = size;
 			else if (size.Width > size.Height)
-				preview_size = new Size (max_size, (int) (max_size / ((float) size.Width / (float) size.Height)));
+				preview_size = new Size (MAX_SIZE, (int) (MAX_SIZE / ((float) size.Width / (float) size.Height)));
 			else
-				preview_size = new Size ((int) (max_size / ((float) size.Height / (float) size.Width)), max_size);
+				preview_size = new Size ((int) (MAX_SIZE / ((float) size.Height / (float) size.Width)), MAX_SIZE);
 
 			var r = new RectangleD ((widget_width - preview_size.Width) / 2, (widget_height - preview_size.Height) / 2, preview_size.Width, preview_size.Height);
 

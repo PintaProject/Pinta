@@ -239,7 +239,7 @@ namespace Pinta.Core
 			double ry = r.Height / 2;
 			double cx = r.X + rx;
 			double cy = r.Y + ry;
-			double c1 = 0.552285;
+			const double c1 = 0.552285;
 
 			g.Save ();
 
@@ -269,7 +269,7 @@ namespace Pinta.Core
 			double ry = r.Height / 2;
 			double cx = r.X + rx;
 			double cy = r.Y + ry;
-			double c1 = 0.552285;
+			const double c1 = 0.552285;
 
 			g.Save ();
 
@@ -298,7 +298,7 @@ namespace Pinta.Core
 			double ry = r.Height / 2;
 			double cx = r.X + rx;
 			double cy = r.Y + ry;
-			double c1 = 0.552285;
+			const double c1 = 0.552285;
 
 			g.Save ();
 
