@@ -60,10 +60,7 @@ internal sealed class PasteIntoNewLayerAction : IActionHandler
 		PasteAction.Paste (
 			doc: doc,
 			toNewLayer: true,
-			pastePosition: new PointI (
-				X: (int) canvasPos.X,
-				Y: (int) canvasPos.Y
-			)
+			pastePosition: canvasPos.ToInt ()
 		);
 	}
 }

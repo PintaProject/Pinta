@@ -61,10 +61,7 @@ internal sealed class PasteAction : IActionHandler
 		Paste (
 			doc: doc,
 			toNewLayer: false,
-			pastePosition: new PointI (
-				X: (int) canvasPos.X,
-				Y: (int) canvasPos.Y
-			)
+			pastePosition: canvasPos.ToInt ()
 		);
 	}
 
@@ -124,8 +121,8 @@ internal sealed class PasteAction : IActionHandler
 		// If the pasted image would fall off bottom- or right-
 		// side of image, adjust paste position
 		pastePosition = new PointI (
-			X: Math.Max (0, Math.Min (pastePosition.X, canvas_size.Width - cb_image.Width)),
-			Y: Math.Max (0, Math.Min (pastePosition.Y, canvas_size.Height - cb_image.Height))
+		    X: Math.Clamp (pastePosition.X, 0, canvas_size.Width - cb_image.Width),
+		    Y: Math.Clamp (pastePosition.Y, 0, canvas_size.Height - cb_image.Height)
 		);
 
 		// If requested, create a new layer, make it the current
