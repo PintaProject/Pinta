@@ -160,14 +160,14 @@ public sealed class StatusBarColorPaletteWidget : Gtk.DrawingArea
 
 	private void DrawSwapIcon (Context g, Color color)
 	{
-		double arrow_size = 4;
+		const double arrow_size = 4;
 
 		g.Save ();
 		g.LineWidth = 1.5;
 		g.SetSourceColor (color);
 
-		double radius = 11;
-		double offset = 1;
+		const double radius = 11;
+		const double offset = 1;
 		double x = swap_rect.Left + radius;
 		double y = swap_rect.Bottom - offset;
 		g.MoveTo (x, y);

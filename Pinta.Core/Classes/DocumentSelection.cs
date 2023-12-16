@@ -231,7 +231,7 @@ public sealed class DocumentSelection
 		double tInterval = 1d / (r.Width + r.Height);
 
 		//Create a new Polygon to store the upcoming ellipse.
-		List<IntPoint> newPolygon = new List<IntPoint> {
+		List<IntPoint> newPolygon = new List<IntPoint> ((int) (4d / tInterval)) {
 			//These values were also calculated in the CreateEllipsePath method. This is where
 			//the ellipse's 4 curves (and all of the Points on each curve) are determined.
 			//Note: each curve is consecutive to the previous one, but they *do not* overlap,
@@ -286,22 +286,9 @@ public sealed class DocumentSelection
 	/// <param name="y2">Control point 2 Y.</param>
 	/// <param name="x3">Ending point X (included in the returned Point(s)).</param>
 	/// <param name="y3">Ending point Y (included in the returned Point(s)).</param>
-	/// <returns></returns>
-	private static List<IntPoint> CalculateCurvePoints (double tInterval, double x0, double y0, double x1, double y1, double x2, double y2, double x3, double y3)
+	/// <returns>Iterator for points of partial polygon</returns>
+	private static IEnumerable<IntPoint> CalculateCurvePoints (double tInterval, double x0, double y0, double x1, double y1, double x2, double y2, double x3, double y3)
 	{
-		//Create a new partial Polygon to store the calculated Points.
-		List<IntPoint> calculatedPoints = new List<IntPoint> ((int) (1d / tInterval));
-
-		double oneMinusT;
-		double oneMinusTSquared;
-		double oneMinusTCubed;
-
-		double tSquared;
-		double tCubed;
-
-		double oneMinusTSquaredTimesTTimesThree;
-		double oneMinusTTimesTSquaredTimesThree;
-
 		//t will go from tInterval to 1d at the interval of tInterval. t starts
 		//at tInterval instead of 0d because the first Point in the curve is
 		//skipped. This is needed because multiple curves will be placed
@@ -319,23 +306,21 @@ public sealed class DocumentSelection
 
 			//Note: the code below is an optimized version of the commented explanation above.
 
-			oneMinusT = 1d - t;
-			oneMinusTSquared = oneMinusT * oneMinusT;
-			oneMinusTCubed = oneMinusTSquared * oneMinusT;
+			double oneMinusT = 1d - t;
+			double oneMinusTSquared = oneMinusT * oneMinusT;
+			double oneMinusTCubed = oneMinusTSquared * oneMinusT;
 
-			tSquared = t * t;
-			tCubed = tSquared * t;
+			double tSquared = t * t;
+			double tCubed = tSquared * t;
 
-			oneMinusTSquaredTimesTTimesThree = oneMinusTSquared * t * 3d;
-			oneMinusTTimesTSquaredTimesThree = oneMinusT * tSquared * 3d;
+			double oneMinusTSquaredTimesTTimesThree = oneMinusTSquared * t * 3d;
+			double oneMinusTTimesTSquaredTimesThree = oneMinusT * tSquared * 3d;
 
-			calculatedPoints.Add (new IntPoint (
-				(long) (oneMinusTCubed * x0 + oneMinusTSquaredTimesTTimesThree * x1 + oneMinusTTimesTSquaredTimesThree * x2 + tCubed * x3),
-				(long) (oneMinusTCubed * y0 + oneMinusTSquaredTimesTTimesThree * y1 + oneMinusTTimesTSquaredTimesThree * y2 + tCubed * y3)));
+			yield return new IntPoint (
+				x: (long) (oneMinusTCubed * x0 + oneMinusTSquaredTimesTTimesThree * x1 + oneMinusTTimesTSquaredTimesThree * x2 + tCubed * x3),
+				y: (long) (oneMinusTCubed * y0 + oneMinusTSquaredTimesTTimesThree * y1 + oneMinusTTimesTSquaredTimesThree * y2 + tCubed * y3)
+			);
 		}
-
-		//Return the partial Polygon containing the calculated Points in the curve.
-		return calculatedPoints;
 	}
 
 	/// <summary>
