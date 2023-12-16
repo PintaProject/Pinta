@@ -16,8 +16,6 @@ namespace Pinta.Effects;
 
 public sealed class GlowEffect : BaseEffect
 {
-	private readonly GaussianBlurEffect blur_effect;
-	private readonly BrightnessContrastEffect contrast_effect;
 	private readonly UserBlendOps.ScreenBlendOp screen_blend_op;
 
 	public override string Icon => Pinta.Resources.Icons.EffectsPhotoGlow;
@@ -36,8 +34,6 @@ public sealed class GlowEffect : BaseEffect
 	{
 		EffectData = new GlowData ();
 
-		blur_effect = new GaussianBlurEffect ();
-		contrast_effect = new BrightnessContrastEffect ();
 		screen_blend_op = new UserBlendOps.ScreenBlendOp ();
 	}
 
@@ -49,12 +45,14 @@ public sealed class GlowEffect : BaseEffect
 	#region Algorithm Code Ported From PDN
 	public override void Render (ImageSurface src, ImageSurface dest, ReadOnlySpan<RectangleI> rois)
 	{
-		blur_effect.Data.Radius = Data.Radius;
-		blur_effect.Render (src, dest, rois);
+		GaussianBlurEffect blurEffect = new ();
+		blurEffect.Data.Radius = Data.Radius;
+		blurEffect.Render (src, dest, rois);
 
-		contrast_effect.Data.Brightness = Data.Brightness;
-		contrast_effect.Data.Contrast = Data.Contrast;
-		contrast_effect.Render (dest, dest, rois);
+		BrightnessContrastEffect contrastEffect = new ();
+		contrastEffect.Data.Brightness = Data.Brightness;
+		contrastEffect.Data.Contrast = Data.Contrast;
+		contrastEffect.Render (dest, dest, rois);
 
 		var dst_data = dest.GetPixelData ();
 		var src_data = src.GetReadOnlyPixelData ();
@@ -75,8 +73,10 @@ public sealed class GlowEffect : BaseEffect
 	{
 		[Caption ("Radius"), MinimumValue (1), MaximumValue (20)]
 		public int Radius { get; set; } = 6;
+
 		[Caption ("Brightness"), MinimumValue (-100), MaximumValue (100)]
 		public int Brightness { get; set; } = 10;
+
 		[Caption ("Contrast"), MinimumValue (-100), MaximumValue (100)]
 		public int Contrast { get; set; } = 10;
 	}
