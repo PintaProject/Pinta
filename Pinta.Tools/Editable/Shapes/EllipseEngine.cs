@@ -199,20 +199,25 @@ public class EllipseEngine : ShapeEngine
 		//that will be calculated and stored into the Polygon collection.
 		double tInterval = .02d;
 
-		double rx = width / 2d; //1/2 of the bounding Rectangle Width.
-		double ry = height / 2d; //1/2 of the bounding Rectangle Height.
-		double cx = topLeft.X + rx; //The middle of the bounding Rectangle, horizontally speaking.
-		double cy = topLeft.Y + ry; //The middle of the bounding Rectangle, vertically speaking.
-		double c1 = 0.5522847498307933984022516322796d; //tan(pi / 8d) * 4d / 3d ~= 0.5522847498307933984022516322796d
+		double r_x = width / 2d; //1/2 of the bounding Rectangle Width.
+		double r_y = height / 2d; //1/2 of the bounding Rectangle Height.
+
+		//The middle of the bounding Rectangle...
+		PointD c = new (
+			X: topLeft.X + r_x, // ...Horizontally speaking
+			Y: topLeft.Y + r_y // ...Vertically speaking
+		);
+
+		const double c_1 = 0.5522847498307933984022516322796d; //tan(pi / 8d) * 4d / 3d ~= 0.5522847498307933984022516322796d
 
 		foreach (
 			var p in
 			calculateCurvePoints (
 				tInterval,
-				cx + rx, cy,
-				cx + rx, cy - c1 * ry,
-				cx + c1 * rx, cy - ry,
-				cx, cy - ry,
+				c.X + r_x, c.Y,
+				c.X + r_x, c.Y - c_1 * r_y,
+				c.X + c_1 * r_x, c.Y - r_y,
+				c.X, c.Y - r_y,
 				3
 			)
 		) yield return p;
@@ -221,10 +226,10 @@ public class EllipseEngine : ShapeEngine
 			var p in
 			calculateCurvePoints (
 				tInterval,
-				cx, cy - ry,
-				cx - c1 * rx, cy - ry,
-				cx - rx, cy - c1 * ry,
-				cx - rx, cy,
+				c.X, c.Y - r_y,
+				c.X - c_1 * r_x, c.Y - r_y,
+				c.X - r_x, c.Y - c_1 * r_y,
+				c.X - r_x, c.Y,
 				0
 			)
 		) yield return p;
@@ -233,10 +238,10 @@ public class EllipseEngine : ShapeEngine
 			var p in
 			calculateCurvePoints (
 				tInterval,
-				cx - rx, cy,
-				cx - rx, cy + c1 * ry,
-				cx - c1 * rx, cy + ry,
-				cx, cy + ry,
+				c.X - r_x, c.Y,
+				c.X - r_x, c.Y + c_1 * r_y,
+				c.X - c_1 * r_x, c.Y + r_y,
+				c.X, c.Y + r_y,
 				1
 			)
 		) yield return p;
@@ -245,16 +250,16 @@ public class EllipseEngine : ShapeEngine
 			var p in
 			calculateCurvePoints (
 				tInterval,
-				cx, cy + ry,
-				cx + c1 * rx, cy + ry,
-				cx + rx, cy + c1 * ry,
-				cx + rx, cy,
+				c.X, c.Y + r_y,
+				c.X + c_1 * r_x, c.Y + r_y,
+				c.X + r_x, c.Y + c_1 * r_y,
+				c.X + r_x, c.Y,
 				2
 			)
 		) yield return p;
 
 		// Close the curve.
-		yield return new GeneratedPoint (new PointD (cx + rx, cy), 3);
+		yield return new GeneratedPoint (new PointD (c.X + r_x, c.Y), 3);
 	}
 
 	/// <summary>

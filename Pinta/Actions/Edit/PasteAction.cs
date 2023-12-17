@@ -58,7 +58,11 @@ internal sealed class PasteAction : IActionHandler
 		// Paste into the active document.
 		// The 'false' argument indicates that paste should be
 		// performed into the current (not a new) layer.
-		Paste (doc, false, (int) canvasPos.X, (int) canvasPos.Y);
+		Paste (
+			doc: doc,
+			toNewLayer: false,
+			pastePosition: canvasPos.ToInt ()
+		);
 	}
 
 	/// <summary>
@@ -72,7 +76,7 @@ internal sealed class PasteAction : IActionHandler
 	/// <param name="y">Optional. Location within image to paste to.
 	/// Position will be adjusted if pasted image would hang
 	/// over right or bottom edges of canvas.</param>
-	public static async void Paste (Document doc, bool toNewLayer, int x = 0, int y = 0)
+	public static async void Paste (Document doc, bool toNewLayer, PointI pastePosition = new ())
 	{
 		// Create a compound history item for recording several
 		// operations so that they can all be undone/redone together.
@@ -116,8 +120,10 @@ internal sealed class PasteAction : IActionHandler
 
 		// If the pasted image would fall off bottom- or right-
 		// side of image, adjust paste position
-		x = Math.Max (0, Math.Min (x, canvas_size.Width - cb_image.Width));
-		y = Math.Max (0, Math.Min (y, canvas_size.Height - cb_image.Height));
+		pastePosition = new PointI (
+		    X: Math.Clamp (pastePosition.X, 0, canvas_size.Width - cb_image.Width),
+		    Y: Math.Clamp (pastePosition.Y, 0, canvas_size.Height - cb_image.Height)
+		);
 
 		// If requested, create a new layer, make it the current
 		// layer and record it's creation in the history
@@ -137,13 +143,13 @@ internal sealed class PasteAction : IActionHandler
 		g.Paint ();
 
 		doc.Layers.SelectionLayer.Transform.InitIdentity ();
-		doc.Layers.SelectionLayer.Transform.Translate (x, y);
+		doc.Layers.SelectionLayer.Transform.Translate (pastePosition.X, pastePosition.Y);
 
 		PintaCore.Tools.SetCurrentTool ("MoveSelectedTool");
 
 		var old_selection = doc.Selection.Clone ();
 
-		doc.Selection.CreateRectangleSelection (new RectangleD (x, y, cb_image.Width, cb_image.Height));
+		doc.Selection.CreateRectangleSelection (new RectangleD ((PointD) pastePosition, cb_image.Width, cb_image.Height));
 		doc.Selection.Visible = true;
 
 		doc.Workspace.Invalidate ();
