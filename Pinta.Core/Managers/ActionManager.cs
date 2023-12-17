@@ -93,6 +93,10 @@ public sealed class ActionManager
 		header.PackStart (Edit.Cut.CreateToolBarItem ());
 		header.PackStart (Edit.Copy.CreateToolBarItem ());
 		header.PackStart (Edit.Paste.CreateToolBarItem ());
+
+		header.PackStart (GtkExtensions.CreateToolBarSeparator ());
+		header.PackStart (Image.CropToSelection.CreateToolBarItem ());
+		header.PackStart (Edit.Deselect.CreateToolBarItem ());
 	}
 
 	public void CreateStatusBar (Box statusbar)

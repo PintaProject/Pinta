@@ -291,26 +291,8 @@ public sealed class MainWindow
 
 	private void CreateMainMenu (WindowShell shell)
 	{
+		bool using_header_bar = window_shell.HeaderBar is not null;
 		var menu_bar = Gio.Menu.New ();
-
-		if (window_shell.HeaderBar is null) {
-			app.Menubar = menu_bar;
-
-			if (PintaCore.System.OperatingSystem == OS.Mac) {
-				// Only use the application menu on macOS. On other platforms, these
-				// menu items appear under File, Help, etc.
-				// The first menu seems to be treated as the application menu.
-				var app_menu = Gio.Menu.New ();
-				PintaCore.Actions.App.RegisterActions (app, app_menu);
-				menu_bar.AppendSubmenu ("_Application", app_menu);
-			}
-		} else {
-			var header_bar = window_shell.HeaderBar;
-			header_bar.PackEnd (new Gtk.MenuButton () {
-				MenuModel = menu_bar,
-				IconName = Resources.StandardIcons.OpenMenu
-			});
-		}
 
 		var file_menu = Gio.Menu.New ();
 		PintaCore.Actions.File.RegisterActions (app, file_menu);
@@ -326,17 +308,20 @@ public sealed class MainWindow
 
 		var image_menu = Gio.Menu.New ();
 		PintaCore.Actions.Image.RegisterActions (app, image_menu);
-		menu_bar.AppendSubmenu (Translations.GetString ("_Image"), image_menu);
+		if (!using_header_bar)
+			menu_bar.AppendSubmenu (Translations.GetString ("_Image"), image_menu);
 
 		var layers_menu = Gio.Menu.New ();
 		PintaCore.Actions.Layers.RegisterActions (app, layers_menu);
 		menu_bar.AppendSubmenu (Translations.GetString ("_Layers"), layers_menu);
 
 		var adj_menu = Gio.Menu.New ();
-		menu_bar.AppendSubmenu (Translations.GetString ("_Adjustments"), adj_menu);
+		if (!using_header_bar)
+			menu_bar.AppendSubmenu (Translations.GetString ("_Adjustments"), adj_menu);
 
 		var effects_menu = Gio.Menu.New ();
-		menu_bar.AppendSubmenu (Translations.GetString ("Effe_cts"), effects_menu);
+		if (!using_header_bar)
+			menu_bar.AppendSubmenu (Translations.GetString ("Effe_cts"), effects_menu);
 
 		var addins_menu = Gio.Menu.New ();
 		PintaCore.Actions.Addins.RegisterActions (app, addins_menu);
@@ -355,6 +340,44 @@ public sealed class MainWindow
 
 		show_pad = Gio.Menu.New ();
 		pad_section.AppendSubmenu (Translations.GetString ("Tool Windows"), show_pad);
+
+		if (window_shell.HeaderBar is null) {
+			app.Menubar = menu_bar;
+
+			if (PintaCore.System.OperatingSystem == OS.Mac) {
+				// Only use the application menu on macOS. On other platforms, these
+				// menu items appear under File, Help, etc.
+				// The first menu seems to be treated as the application menu.
+				var app_menu = Gio.Menu.New ();
+				PintaCore.Actions.App.RegisterActions (app, app_menu);
+				menu_bar.AppendSubmenu ("_Application", app_menu);
+			}
+		} else {
+			var header_bar = window_shell.HeaderBar;
+			header_bar.PackEnd (new Gtk.MenuButton () {
+				MenuModel = menu_bar,
+				IconName = Resources.StandardIcons.OpenMenu,
+				TooltipText = Translations.GetString ("Main Menu")
+			});
+
+			header_bar.PackEnd (new Gtk.MenuButton () {
+				MenuModel = effects_menu,
+				IconName = Resources.Icons.EffectsDefault,
+				TooltipText = Translations.GetString ("Effects")
+			});
+
+			header_bar.PackEnd (new Gtk.MenuButton () {
+				MenuModel = adj_menu,
+				IconName = Resources.Icons.AdjustmentsBrightnessContrast,
+				TooltipText = Translations.GetString ("Adjustments")
+			});
+
+			header_bar.PackEnd (new Gtk.MenuButton () {
+				MenuModel = image_menu,
+				IconName = Resources.StandardIcons.ImageGeneric,
+				TooltipText = Translations.GetString ("Image")
+			});
+		}
 
 		PintaCore.Chrome.InitializeMainMenu (adj_menu, effects_menu);
 	}
