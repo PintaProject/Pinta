@@ -217,7 +217,7 @@ public sealed class MainWindow
 			var canvas_window = ((PintaCanvas) PintaCore.Workspace.ActiveWorkspace.Canvas).CanvasWindow;
 
 			if ((canvas_window.Canvas.HasFocus || canvas_window.IsMouseOnCanvas) &&
-			     canvas_window.Canvas.DoKeyPressEvent (controller, args)) {
+				 canvas_window.Canvas.DoKeyPressEvent (controller, args)) {
 				return true;
 			}
 		}
@@ -458,6 +458,9 @@ public sealed class MainWindow
 
 		var ruler_metric = (MetricType) PintaCore.Settings.GetSetting ("ruler-metric", (int) MetricType.Pixels);
 		PintaCore.Actions.View.RulerMetric.Activate (GLib.Variant.NewInt32 ((int) ruler_metric));
+
+		int color_scheme = PintaCore.Settings.GetSetting ("color-scheme", 0);
+		PintaCore.Actions.View.ColorScheme.Activate (GLib.Variant.NewInt32 (color_scheme));
 	}
 
 	private void SaveUserSettings ()
@@ -471,6 +474,7 @@ public sealed class MainWindow
 		}
 
 		PintaCore.Settings.PutSetting ("ruler-metric", (int) GetCurrentRulerMetric ());
+		PintaCore.Settings.PutSetting ("color-scheme", PintaCore.Actions.View.ColorScheme.GetState ()!.GetInt32 ());
 		PintaCore.Settings.PutSetting ("window-maximized", window_shell.Window.IsMaximized ());
 		PintaCore.Settings.PutSetting ("ruler-shown", PintaCore.Actions.View.Rulers.Value);
 		PintaCore.Settings.PutSetting ("image-tabs-shown", PintaCore.Actions.View.ImageTabs.Value);

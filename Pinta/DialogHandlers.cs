@@ -72,6 +72,7 @@ public sealed class ActionHandlers
 			new ImageTabsToggledAction (),
 			new StatusBarToggledAction (),
 			new ToolBoxToggledAction (),
+			new ColorSchemeChangedAction (),
 
 			// Window
 			new CloseAllDocumentsAction (),
