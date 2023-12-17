@@ -58,6 +58,7 @@ public static class StandardIcons
 	public const string HelpAbout = "help-about-symbolic";
 	public const string HelpBrowser = "help-browser-symbolic";
 
+	public const string ImageGeneric = "image-x-generic-symbolic";
 	public const string ImageMissing = "image-missing-symbolic";
 
 	public const string OpenMenu = "open-menu-symbolic";
@@ -90,7 +91,7 @@ public static class Icons
 
 	public const string AdjustmentsAutoLevel = "adjustments-autolevel";
 	public const string AdjustmentsBlackAndWhite = "adjustments-blackandwhite";
-	public const string AdjustmentsBrightnessContrast = "adjustments-brightnesscontrast";
+	public const string AdjustmentsBrightnessContrast = "adjustments-brightnesscontrast-symbolic";
 	public const string AdjustmentsCurves = "adjustments-curves";
 	public const string AdjustmentsHueSaturation = "adjustments-huesaturation";
 	public const string AdjustmentsInvertColors = "adjustments-invertcolors";
@@ -123,7 +124,7 @@ public static class Icons
 	public const string EffectsBlursRadialBlur = "effects-blurs-radialblur";
 	public const string EffectsBlursUnfocus = "effects-blurs-unfocus";
 	public const string EffectsBlursZoomBlur = "effects-blurs-zoomblur";
-	public const string EffectsDefault = "effects-default";
+	public const string EffectsDefault = "effects-default-symbolic";
 	public const string EffectsDistortBulge = "effects-distort-bulge";
 	public const string EffectsDistortFrostedGlass = "effects-distort-frostedglass";
 	public const string EffectsDistortPixelate = "effects-distort-pixelate";
