@@ -210,7 +210,7 @@ public sealed class LayerActions
 				try {
 					var bg = GdkPixbuf.Pixbuf.NewFromStream (fs, cancellable: null)!; // NRT: only nullable when an error is thrown
 					var context = new Cairo.Context (layer.Surface);
-					context.DrawPixbuf (bg, 0, 0);
+					context.DrawPixbuf (bg, PointD.Zero);
 				} finally {
 					fs.Close (null);
 				}

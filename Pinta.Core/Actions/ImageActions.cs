@@ -207,7 +207,7 @@ public sealed class ImageActions
 	private static bool IsConstantRow (ImageSurface surf, Cairo.Color color, int y)
 	{
 		for (int x = 0; x < surf.Width; ++x) {
-			if (!color.Equals (surf.GetColorBgra (x, y).ToCairoColor ()))
+			if (!color.Equals (surf.GetColorBgra (new (x, y)).ToCairoColor ()))
 				return false;
 		}
 
@@ -220,7 +220,7 @@ public sealed class ImageActions
 	private static bool IsConstantColumn (ImageSurface surf, Cairo.Color color, RectangleI rect, int x)
 	{
 		for (int y = rect.Top; y < rect.Bottom; ++y) {
-			if (!color.Equals (surf.GetColorBgra (x, y).ToCairoColor ()))
+			if (!color.Equals (surf.GetColorBgra (new (x, y)).ToCairoColor ()))
 				return false;
 		}
 
@@ -235,7 +235,7 @@ public sealed class ImageActions
 
 		var image = doc.GetFlattenedImage ();
 		RectangleI rect = image.GetBounds ();
-		Cairo.Color border_color = image.GetColorBgra (0, 0).ToCairoColor ();
+		Cairo.Color border_color = image.GetColorBgra (PointI.Zero).ToCairoColor ();
 
 		// Top down.
 		for (int y = 0; y < image.Height; ++y) {

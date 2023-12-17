@@ -88,7 +88,7 @@ public static class OtherExtensions
 		return false;
 	}
 
-	public static IReadOnlyList<IReadOnlyList<PointI>> CreatePolygonSet (this BitMask stencil, RectangleD bounds, int translateX, int translateY)
+	public static IReadOnlyList<IReadOnlyList<PointI>> CreatePolygonSet (this BitMask stencil, RectangleD bounds, PointI translateOffset)
 	{
 		if (stencil.IsEmpty)
 			return Array.Empty<PointI[]> ();
@@ -179,7 +179,7 @@ public static class OtherExtensions
 			foreach (var scan in scans)
 				stencil.Invert (scan);
 
-			CairoExtensions.TranslatePointsInPlace (points, translateX, translateY);
+			CairoExtensions.TranslatePointsInPlace (points, translateOffset);
 			polygons.Add (points);
 		}
 

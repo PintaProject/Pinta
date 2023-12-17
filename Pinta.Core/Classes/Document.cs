@@ -55,7 +55,7 @@ public sealed class Document
 		}
 	}
 
-	public DocumentSelection PreviousSelection = new ();
+	public DocumentSelection PreviousSelection { get; set; } = new ();
 
 	public Document (Core.Size size)
 	{
@@ -99,7 +99,7 @@ public sealed class Document
 		get => file;
 		set {
 			file = value;
-			DisplayName = file?.GetDisplayName () ?? String.Empty;
+			DisplayName = file?.GetDisplayName () ?? string.Empty;
 		}
 	}
 
@@ -241,12 +241,12 @@ public sealed class Document
 	/// <summary>
 	/// Gets the final pixel color for the given point, taking layers, opacity, and blend modes into account.
 	/// </summary>
-	public ColorBgra GetComputedPixel (int x, int y)
+	public ColorBgra GetComputedPixel (PointI position)
 	{
 		var dst = CairoExtensions.CreateImageSurface (Format.Argb32, 1, 1);
 		var g = new Context (dst);
 		foreach (var layer in Layers.GetLayersToPaint ()) {
-			var color = layer.Surface.GetColorBgra (x, y).ToStraightAlpha ().ToCairoColor ();
+			var color = layer.Surface.GetColorBgra (position).ToStraightAlpha ().ToCairoColor ();
 
 			g.SetBlendMode (layer.BlendMode);
 			g.SetSourceColor (color);
@@ -255,7 +255,7 @@ public sealed class Document
 			g.PaintWithAlpha (layer.Opacity);
 		}
 
-		return dst.GetColorBgra (0, 0);
+		return dst.GetColorBgra (PointI.Zero);
 	}
 
 	public ImageSurface GetFlattenedImage (bool clip_to_selection = false) => Layers.GetFlattenedImage (clip_to_selection);
@@ -290,11 +290,11 @@ public sealed class Document
 	/// Optionally, the history item for resizing the canvas can be added to
 	/// a CompoundHistoryItem if it is part of a larger action (e.g. pasting an image).
 	/// </param>
-	public void ResizeCanvas (int width, int height, Anchor anchor, CompoundHistoryItem? compoundAction)
+	public void ResizeCanvas (Size newSize, Anchor anchor, CompoundHistoryItem? compoundAction)
 	{
 		double scale;
 
-		if (ImageSize.Width == width && ImageSize.Height == height)
+		if (ImageSize.Width == newSize.Width && ImageSize.Height == newSize.Height)
 			return;
 
 		PintaCore.Tools.Commit ();
@@ -307,10 +307,10 @@ public sealed class Document
 
 		scale = Workspace.Scale;
 
-		ImageSize = new Size (width, height);
+		ImageSize = newSize;
 
 		foreach (var layer in Layers.UserLayers)
-			layer.ResizeCanvas (width, height, anchor);
+			layer.ResizeCanvas (newSize, anchor);
 
 		hist.FinishSnapshotOfImage ();
 
@@ -325,11 +325,11 @@ public sealed class Document
 		Workspace.Scale = scale;
 	}
 
-	public void ResizeImage (int width, int height, ResamplingMode resamplingMode)
+	public void ResizeImage (Size newSize, ResamplingMode resamplingMode)
 	{
 		double scale;
 
-		if (ImageSize.Width == width && ImageSize.Height == height)
+		if (ImageSize.Width == newSize.Width && ImageSize.Height == newSize.Height)
 			return;
 
 		PintaCore.Tools.Commit ();
@@ -339,10 +339,10 @@ public sealed class Document
 
 		scale = Workspace.Scale;
 
-		ImageSize = new Size (width, height);
+		ImageSize = newSize;
 
 		foreach (var layer in Layers.UserLayers)
-			layer.Resize (width, height, resamplingMode);
+			layer.Resize (newSize, resamplingMode);
 
 		hist.FinishSnapshotOfImage ();
 

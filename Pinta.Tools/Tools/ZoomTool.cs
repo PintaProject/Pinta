@@ -101,9 +101,12 @@ public sealed class ZoomTool : BaseTool
 
 	private void OnMouseMove_MiddlePressed (Document document, ToolMouseEventArgs e)
 	{
-		var deltaX = (int) ((shape_origin.X - e.PointDouble.X) * document.Workspace.Scale);
-		var deltaY = (int) ((shape_origin.Y - e.PointDouble.Y) * document.Workspace.Scale);
-		document.Workspace.ScrollCanvas (deltaX, deltaY);
+		PointI delta = new (
+			X: (int) ((shape_origin.X - e.PointDouble.X) * document.Workspace.Scale),
+			Y: (int) ((shape_origin.Y - e.PointDouble.Y) * document.Workspace.Scale)
+		);
+
+		document.Workspace.ScrollCanvas (delta);
 	}
 
 	private void OnMouseMove_LeftPressed (Document document, ToolMouseEventArgs e)

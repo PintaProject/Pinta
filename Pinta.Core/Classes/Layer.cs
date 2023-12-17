@@ -57,10 +57,10 @@ public class Layer : ObservableObject
 	public bool Tiled { get; internal set; }
 	public Matrix Transform { get; set; }
 
-	public static readonly string OpacityProperty = "Opacity";
-	public static readonly string HiddenProperty = "Hidden";
-	public static readonly string NameProperty = "Name";
-	public static readonly string BlendModeProperty = "BlendMode";
+	public static string OpacityProperty { get; } = nameof (Opacity);
+	public static string HiddenProperty { get; } = nameof (Hidden);
+	public static string NameProperty { get; } = nameof (Name);
+	public static string BlendModeProperty { get; } = nameof (BlendMode);
 
 	public double Opacity {
 		get => opacity;
@@ -136,12 +136,15 @@ public class Layer : ObservableObject
 
 		if (transform)
 			ctx.Transform (Transform);
+
 		ctx.Operator = op;
 		ctx.SetSourceSurface (surface, 0, 0);
+
 		if (opacity >= 1.0)
 			ctx.Paint ();
 		else
 			ctx.PaintWithAlpha (opacity);
+
 		ctx.Restore ();
 	}
 
@@ -150,8 +153,10 @@ public class Layer : ObservableObject
 		var dest = CairoExtensions.CreateImageSurface (Format.Argb32, new_size.Width, new_size.Height);
 
 		var g = new Context (dest);
+
 		g.Transform (xform);
 		g.SetSourceSurface (Surface, 0, 0);
+
 		g.Paint ();
 
 		Surface = dest;
@@ -160,33 +165,40 @@ public class Layer : ObservableObject
 	public static Size RotateDimensions (Size originalSize, double angle)
 	{
 		double radians = (angle / 180d) * Math.PI;
+
 		double cos = Math.Abs (Math.Cos (radians));
 		double sin = Math.Abs (Math.Sin (radians));
+
 		int w = originalSize.Width;
 		int h = originalSize.Height;
 
 		return new Size ((int) (w * cos + h * sin), (int) (w * sin + h * cos));
 	}
 
-	public virtual void Resize (int width, int height, ResamplingMode resamplingMode)
+	public virtual void Resize (Size newSize, ResamplingMode resamplingMode)
 	{
-		ImageSurface dest = CairoExtensions.CreateImageSurface (Format.Argb32, width, height);
+		ImageSurface dest = CairoExtensions.CreateImageSurface (Format.Argb32, newSize.Width, newSize.Height);
 
 		var g = new Context (dest);
-		g.Scale ((double) width / (double) Surface.Width, (double) height / (double) Surface.Height);
+
+		g.Scale ((double) newSize.Width / (double) Surface.Width, (double) newSize.Height / (double) Surface.Height);
 		g.SetSourceSurface (Surface, 0, 0, resamplingMode);
+
 		g.Paint ();
 
 		Surface = dest;
 	}
 
-	public virtual void ResizeCanvas (int width, int height, Anchor anchor)
+	public virtual void ResizeCanvas (Size newSize, Anchor anchor)
 	{
-		ImageSurface dest = CairoExtensions.CreateImageSurface (Format.Argb32, width, height);
+		ImageSurface dest = CairoExtensions.CreateImageSurface (Format.Argb32, newSize.Width, newSize.Height);
 
-		int delta_x = Surface.Width - width;
-		int delta_y = Surface.Height - height;
-		var anchorPoint = GetAnchorPoint (delta_x, delta_y, anchor);
+		PointI delta = new (
+			X: Surface.Width - newSize.Width,
+			Y: Surface.Height - newSize.Height
+		);
+
+		var anchorPoint = GetAnchorPoint (delta, anchor);
 
 		var g = new Context (dest);
 
@@ -196,18 +208,18 @@ public class Layer : ObservableObject
 		Surface = dest;
 	}
 
-	private static PointD GetAnchorPoint (int delta_x, int delta_y, Anchor anchor)
+	private static PointD GetAnchorPoint (PointI delta, Anchor anchor)
 	{
 		return anchor switch {
 			Anchor.NW => new (0, 0),
-			Anchor.N => new (-delta_x / 2, 0),
-			Anchor.NE => new (-delta_x, 0),
-			Anchor.E => new (-delta_x, -delta_y / 2),
-			Anchor.SE => new (-delta_x, -delta_y),
-			Anchor.S => new (-delta_x / 2, -delta_y),
-			Anchor.SW => new (0, -delta_y),
-			Anchor.W => new (0, -delta_y / 2),
-			Anchor.Center => new (-delta_x / 2, -delta_y / 2),
+			Anchor.N => new (-delta.X / 2, 0),
+			Anchor.NE => new (-delta.X, 0),
+			Anchor.E => new (-delta.X, -delta.Y / 2),
+			Anchor.SE => new (-delta.X, -delta.Y),
+			Anchor.S => new (-delta.X / 2, -delta.Y),
+			Anchor.SW => new (0, -delta.Y),
+			Anchor.W => new (0, -delta.Y / 2),
+			Anchor.Center => new (-delta.X / 2, -delta.Y / 2),
 			_ => throw new InvalidEnumArgumentException (nameof (anchor), (int) anchor, typeof (Anchor)),
 		};
 	}

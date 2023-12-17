@@ -31,7 +31,7 @@ namespace Pinta.Core;
 
 public readonly record struct PointI (int X, int Y)
 {
-	public static readonly PointI Zero;
+	public static PointI Zero { get; } = new (0, 0);
 	public override readonly string ToString () => $"{X}, {Y}";
 	public readonly double Magnitude ()
 	{
@@ -55,6 +55,8 @@ public readonly record struct PointI (int X, int Y)
 
 public readonly record struct PointD (double X, double Y)
 {
+	public static PointD Zero { get; } = new (0, 0);
+
 	public override readonly string ToString () => $"{X}, {Y}";
 
 	public readonly PointI ToInt () => new ((int) X, (int) Y);

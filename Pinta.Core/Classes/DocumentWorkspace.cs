@@ -152,8 +152,8 @@ public sealed class DocumentWorkspace
 		var canvasTopLeft = new PointD (canvasRect.Left, canvasRect.Top);
 		var canvasBtmRight = new PointD (canvasRect.Right + 1, canvasRect.Bottom + 1);
 
-		var winTopLeft = CanvasPointToView (canvasTopLeft.X, canvasTopLeft.Y);
-		var winBtmRight = CanvasPointToView (canvasBtmRight.X, canvasBtmRight.Y);
+		var winTopLeft = CanvasPointToView (canvasTopLeft);
+		var winBtmRight = CanvasPointToView (canvasBtmRight);
 
 		RectangleI winRect = CairoExtensions.PointsToRectangle (winTopLeft, winBtmRight).ToInt ();
 
@@ -188,24 +188,25 @@ public sealed class DocumentWorkspace
 		return true;
 	}
 
-	public void RecenterView (double x, double y)
+	public void RecenterView (PointD point)
 	{
 		Gtk.Viewport view = (Gtk.Viewport) Canvas.Parent!;
 
 		var h_adjust = view.GetHadjustment ()!;
-		h_adjust.Value = Math.Clamp (x * Scale - h_adjust.PageSize / 2, h_adjust.Lower, h_adjust.Upper);
+		h_adjust.Value = Math.Clamp (point.X * Scale - h_adjust.PageSize / 2, h_adjust.Lower, h_adjust.Upper);
 		var v_adjust = view.GetVadjustment ()!;
-		v_adjust.Value = Math.Clamp (y * Scale - v_adjust.PageSize / 2, v_adjust.Lower, v_adjust.Upper);
+		v_adjust.Value = Math.Clamp (point.Y * Scale - v_adjust.PageSize / 2, v_adjust.Lower, v_adjust.Upper);
 	}
 
-	public void ScrollCanvas (int dx, int dy)
+	public void ScrollCanvas (PointI delta)
 	{
 		Gtk.Viewport view = (Gtk.Viewport) Canvas.Parent!;
 
 		var h_adjust = view.GetHadjustment ()!;
-		h_adjust.Value = Math.Clamp (dx + h_adjust.Value, h_adjust.Lower, h_adjust.Upper - h_adjust.PageSize);
+		h_adjust.Value = Math.Clamp (delta.X + h_adjust.Value, h_adjust.Lower, h_adjust.Upper - h_adjust.PageSize);
+
 		var v_adjust = view.GetVadjustment ()!;
-		v_adjust.Value = Math.Clamp (dy + v_adjust.Value, v_adjust.Lower, v_adjust.Upper - v_adjust.PageSize);
+		v_adjust.Value = Math.Clamp (delta.Y + v_adjust.Value, v_adjust.Lower, v_adjust.Upper - v_adjust.PageSize);
 	}
 
 	/// <summary>
@@ -217,38 +218,22 @@ public sealed class DocumentWorkspace
 	/// <param name='y'>
 	/// The Y coordinate of the view point
 	/// </param>
-	public PointD ViewPointToCanvas (double x, double y)
+	public PointD ViewPointToCanvas (PointD viewPoint)
 	{
 		var sf = new ScaleFactor (document.ImageSize.Width, ViewSize.Width);
-		var pt = sf.ScalePoint (new PointD (x - Offset.X, y - Offset.Y));
+		var pt = sf.ScalePoint (new PointD (viewPoint.X - Offset.X, viewPoint.Y - Offset.Y));
 		return new PointD (pt.X, pt.Y);
 	}
 
 	/// <summary>
-	/// Converts a point from image view coordinates to canvas coordinates
-	/// </summary>
-	public PointD ViewPointToCanvas (in PointD point) => ViewPointToCanvas (point.X, point.Y);
-
-	/// <summary>
 	/// Converts a point from canvas coordinates to view coordinates
 	/// </summary>
-	/// <param name='x'>
-	/// The X coordinate of the canvas point
-	/// </param>
-	/// <param name='y'>
-	/// The Y coordinate of the canvas point
-	/// </param>
-	public PointD CanvasPointToView (double x, double y)
+	public PointD CanvasPointToView (PointD canvasPoint)
 	{
 		var sf = new ScaleFactor (document.ImageSize.Width, ViewSize.Width);
-		var pt = sf.UnscalePoint (new PointD (x, y));
+		var pt = sf.UnscalePoint (canvasPoint);
 		return new PointD (pt.X + Offset.X, pt.Y + Offset.Y);
 	}
-
-	/// <summary>
-	/// Converts a point from canvas coordinates to view coordinates
-	/// </summary>
-	public PointD CanvasPointToView (in PointD point) => CanvasPointToView (point.X, point.Y);
 
 	public void ZoomIn ()
 	{
@@ -296,7 +281,13 @@ public sealed class DocumentWorkspace
 
 		PintaCore.Actions.View.ZoomComboBox.ComboBox.GetEntry ().SetText (ViewActions.ToPercent (ratio));
 		GLib.MainContext.Default ().Iteration (false); //Force update of scrollbar upper before recenter
-		RecenterView (rect.X + rect.Width / 2, rect.Y + rect.Height / 2);
+
+		PointD newPoint = new (
+			X: rect.X + rect.Width / 2,
+			Y: rect.Y + rect.Height / 2
+		);
+
+		RecenterView (newPoint);
 	}
 	#endregion
 

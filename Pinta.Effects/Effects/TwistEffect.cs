@@ -73,17 +73,25 @@ public sealed class TwistEffect : BaseEffect
 		int r = 0;
 		int a = 0;
 		int antialiasSamples = settings.AntialiasPoints.Count;
+
 		for (int p = 0; p < antialiasSamples; ++p) {
+
 			float u = i + (float) settings.AntialiasPoints[p].X;
 			float v = j + (float) settings.AntialiasPoints[p].Y;
+
 			double rad = Math.Sqrt (u * u + v * v);
 			double theta = Math.Atan2 (v, u);
 			double t = 1 - rad / settings.Maxrad;
 			t = (t < 0) ? 0 : (t * t * t);
 			theta += ((t * settings.Twist) / 100);
-			var sampleX = (int) (settings.HalfWidth + (float) (rad * Math.Cos (theta)));
-			var sampleY = (int) (settings.HalfHeight + (float) (rad * Math.Sin (theta)));
-			ref readonly ColorBgra sample = ref src.GetColorBgra (src_data, src.Width, sampleX, sampleY);
+
+			PointI samplePosition = new (
+				X: (int) (settings.HalfWidth + (float) (rad * Math.Cos (theta))),
+				Y: (int) (settings.HalfHeight + (float) (rad * Math.Sin (theta)))
+			);
+
+			ref readonly ColorBgra sample = ref src.GetColorBgra (src_data, src.Width, samplePosition);
+
 			b += sample.B;
 			g += sample.G;
 			r += sample.R;
