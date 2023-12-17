@@ -44,11 +44,9 @@ using Cairo;
 // TODO-GTK4 (bindings, unsubmitted) - should this be added to gir.core?
 namespace Cairo
 {
-	public struct Color
+	public readonly struct Color
 	{
-		public Color (double r, double g, double b) : this (r, g, b, 1.0)
-		{
-		}
+		public Color (double r, double g, double b) : this (r, g, b, 1.0) { }
 
 		public Color (double r, double g, double b, double a)
 		{
@@ -58,10 +56,10 @@ namespace Cairo
 			A = a;
 		}
 
-		public double R;
-		public double G;
-		public double B;
-		public double A;
+		public double R { get; init; }
+		public double G { get; init; }
+		public double B { get; init; }
+		public double A { get; init; }
 	}
 }
 
