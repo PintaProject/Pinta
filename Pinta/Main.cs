@@ -76,9 +76,6 @@ internal sealed class MainClass
 	{
 		GLib.UnhandledException.SetHandler (OnUnhandledException);
 
-		// For testing a dark variant of the theme.
-		//Gtk.Settings.Default.SetProperty("gtk-application-prefer-dark-theme", new GLib.Value(true));
-
 		Gsk.Module.Initialize ();
 		Pango.Module.Initialize ();
 		PangoCairo.Module.Initialize ();
