@@ -179,8 +179,11 @@ public sealed class ViewActions
 		color_scheme_section.AppendSubmenu (Translations.GetString ("Color Scheme"), color_scheme_menu);
 
 		app.AddAction (ColorScheme);
+		// Translators: This refers to using the system's default color scheme.
 		color_scheme_menu.Append (Translations.GetString ("Default"), $"app.{ColorScheme.Name}(0)");
+		// Translators: This refers to using a light variant of the color scheme.
 		color_scheme_menu.Append (Translations.GetString ("Light"), $"app.{ColorScheme.Name}(1)");
+		// Translators: This refers to using a dark variant of the color scheme.
 		color_scheme_menu.Append (Translations.GetString ("Dark"), $"app.{ColorScheme.Name}(2)");
 	}
 
