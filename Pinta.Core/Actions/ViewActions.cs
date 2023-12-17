@@ -45,6 +45,7 @@ public sealed class ViewActions
 	public ToggleCommand ToolBox { get; }
 	public ToggleCommand Rulers { get; }
 	public Gio.SimpleAction RulerMetric { get; }
+	public Gio.SimpleAction ColorScheme { get; }
 	public Command Fullscreen { get; }
 
 	public ToolBarComboBox ZoomComboBox { get; }
@@ -75,6 +76,7 @@ public sealed class ViewActions
 		ToolBox = new ToggleCommand ("ToolBox", Translations.GetString ("Tool Box"), null, null);
 		Rulers = new ToggleCommand ("Rulers", Translations.GetString ("Rulers"), null, Resources.Icons.ViewRulers);
 		RulerMetric = Gio.SimpleAction.NewStateful ("rulermetric", GtkExtensions.IntVariantType, GLib.Variant.NewInt32 (0));
+		ColorScheme = Gio.SimpleAction.NewStateful ("colorscheme", GtkExtensions.IntVariantType, GLib.Variant.NewInt32 (0));
 		Fullscreen = new Command ("Fullscreen", Translations.GetString ("Fullscreen"), null, Resources.StandardIcons.DocumentNew);
 
 		ZoomCollection = default_zoom_levels;
@@ -169,6 +171,17 @@ public sealed class ViewActions
 
 		app.AddAction (ImageTabs);
 		show_hide_menu.AppendItem (ImageTabs.CreateMenuItem ());
+
+		var color_scheme_section = Gio.Menu.New ();
+		menu.AppendSection (null, color_scheme_section);
+
+		var color_scheme_menu = Gio.Menu.New ();
+		color_scheme_section.AppendSubmenu (Translations.GetString ("Color Scheme"), color_scheme_menu);
+
+		app.AddAction (ColorScheme);
+		color_scheme_menu.Append (Translations.GetString ("Default"), $"app.{ColorScheme.Name}(0)");
+		color_scheme_menu.Append (Translations.GetString ("Light"), $"app.{ColorScheme.Name}(1)");
+		color_scheme_menu.Append (Translations.GetString ("Dark"), $"app.{ColorScheme.Name}(2)");
 	}
 
 	public void CreateStatusBar (Box statusbar)

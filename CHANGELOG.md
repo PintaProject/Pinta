@@ -12,6 +12,7 @@ Thanks to the following contributors who worked on this release:
 ### Added
 - Ported to GTK4 and libadwaita
   - Due to API changes in GTK4, the File -> New Screenshot option now invokes platform-specific tools (the XDG screenshot portal on Linux, and the screenshot tool on maCOS). This is currently unsupported on Windows
+  - Added a preference (in the `View` menu) for switching between a dark or light color scheme.
 - Upgraded to .NET 8
   - Building against .NET 7 is still supported. When building from the tarball, .NET 7 will be used if .NET 8 is unavailable.
 - Restored support for add-ins, which had been disabled in Pinta 2.0 due to technical limitations
