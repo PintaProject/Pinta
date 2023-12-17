@@ -44,22 +44,9 @@ using Cairo;
 // TODO-GTK4 (bindings, unsubmitted) - should this be added to gir.core?
 namespace Cairo
 {
-	public readonly struct Color
+	public readonly record struct Color (double R, double G, double B, double A)
 	{
 		public Color (double r, double g, double b) : this (r, g, b, 1.0) { }
-
-		public Color (double r, double g, double b, double a)
-		{
-			R = r;
-			G = g;
-			B = b;
-			A = a;
-		}
-
-		public double R { get; init; }
-		public double G { get; init; }
-		public double B { get; init; }
-		public double A { get; init; }
 	}
 }
 
@@ -415,12 +402,12 @@ namespace Pinta.Core
 
 		public static Cairo.Color ToCairoColor (this ColorBgra color)
 		{
-			Cairo.Color c = new Cairo.Color {
-				R = color.R / 255d,
-				G = color.G / 255d,
-				B = color.B / 255d,
-				A = color.A / 255d
-			};
+			Cairo.Color c = new Cairo.Color (
+				R: color.R / 255d,
+				G: color.G / 255d,
+				B: color.B / 255d,
+				A: color.A / 255d
+			);
 
 			return c;
 		}
