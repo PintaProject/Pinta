@@ -66,17 +66,13 @@ internal sealed class MainClass
 		root_command.AddArgument (files_arg);
 
 		root_command.SetHandler ((threads, files) => {
-			if (threads > 0)
-				Pinta.Core.PintaCore.System.RenderThreads = threads;
-
-			OpenMainWindow (files);
-
+			OpenMainWindow (threads, files);
 		}, threads_option, files_arg);
 
 		return root_command.Invoke (args);
 	}
 
-	private static void OpenMainWindow (IEnumerable<string> files)
+	private static void OpenMainWindow (int threads, IEnumerable<string> files)
 	{
 		GLib.UnhandledException.SetHandler (OnUnhandledException);
 
@@ -96,6 +92,9 @@ internal sealed class MainClass
 		if (SystemManager.GetOperatingSystem () == OS.Mac) {
 			RegisterForAppleEvents ();
 		}
+
+		if (threads > 0)
+			PintaCore.System.RenderThreads = threads;
 
 		app.OnActivate += (_, _) => {
 			main_window.Activate ();
