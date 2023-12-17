@@ -54,8 +54,6 @@ public sealed class FileActions
 
 		New.ShortLabel = Translations.GetString ("New");
 		Open.ShortLabel = Translations.GetString ("Open");
-		Open.IsImportant = true;
-		Save.IsImportant = true;
 	}
 
 	#region Initialization
