@@ -7,7 +7,7 @@ namespace Pinta.Core;
 
 public sealed class ToolBarDropDownButton : Gtk.MenuButton
 {
-	private const string action_prefix = "tool";
+	private const string ACTION_PREFIX = "tool";
 
 	private readonly bool show_label;
 	private readonly Gio.Menu dropdown;
@@ -29,7 +29,7 @@ public sealed class ToolBarDropDownButton : Gtk.MenuButton
 		MenuModel = dropdown;
 
 		action_group = Gio.SimpleActionGroup.New ();
-		InsertActionGroup (action_prefix, action_group);
+		InsertActionGroup (ACTION_PREFIX, action_group);
 	}
 
 	public ToolBarItem AddItem (string text, string imageId)
@@ -41,7 +41,7 @@ public sealed class ToolBarDropDownButton : Gtk.MenuButton
 	{
 		ToolBarItem item = new ToolBarItem (text, imageId, tag);
 		action_group.AddAction (item.Action);
-		dropdown.AppendItem (Gio.MenuItem.New (text, $"{action_prefix}.{item.Action.Name}"));
+		dropdown.AppendItem (Gio.MenuItem.New (text, $"{ACTION_PREFIX}.{item.Action.Name}"));
 
 		items.Add (item);
 		item.Action.OnActivate += delegate { SetSelectedItem (item); };
@@ -101,23 +101,23 @@ public sealed class ToolBarDropDownButton : Gtk.MenuButton
 
 public sealed class ToolBarItem
 {
-	public ToolBarItem (string text, string imageId)
+	public ToolBarItem (string text, string imageId) : this (text, imageId, null) { }
+
+	public ToolBarItem (string text, string imageId, object? tag)
 	{
+		var actionName = AdjustName (text);
+
 		Text = text;
 		ImageId = imageId;
-
-		var action_name = string.Concat (Text.Where (c => !char.IsWhiteSpace (c)));
-		Action = Gio.SimpleAction.New (action_name, null);
-	}
-
-	public ToolBarItem (string text, string imageId, object? tag) : this (text, imageId)
-	{
+		Action = Gio.SimpleAction.New (actionName, null);
 		Tag = tag;
 	}
 
-	public string ImageId { get; set; }
-	public object? Tag { get; set; }
-	public string Text { get; set; }
+	private static string AdjustName (string baseName) => string.Concat (baseName.Where (c => !char.IsWhiteSpace (c)));
+
+	public string ImageId { get; }
+	public object? Tag { get; }
+	public string Text { get; }
 	public Gio.SimpleAction Action { get; }
 
 	public T GetTagOrDefault<T> (T defaultValue)
