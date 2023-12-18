@@ -91,7 +91,7 @@ public readonly record struct PointD (double X, double Y)
 
 public readonly record struct Size (int Width, int Height)
 {
-	public static readonly Size Empty;
+	public static Size Empty { get; } = new (0, 0);
 
 	public override readonly string ToString () => $"{Width}, {Height}";
 
