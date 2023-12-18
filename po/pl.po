@@ -8,17 +8,17 @@ msgstr ""
 "Project-Id-Version: pinta\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2023-12-17 14:36-0500\n"
-"PO-Revision-Date: 2023-07-29 19:34+0000\n"
-"Last-Translator: Marek Adamski <Unknown>\n"
-"Language-Team: Polish <pl@li.org>\n"
+"PO-Revision-Date: 2023-12-18 11:08+0000\n"
+"Last-Translator: Matthaiks <kitynska@gmail.com>\n"
+"Language-Team: Polish <https://hosted.weblate.org/projects/pinta/pinta/pl/>\n"
+"Language: pl\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=3; plural=n==1 ? 0 : n%10>=2 && n%10<=4 && (n%100<10 "
 "|| n%100>=20) ? 1 : 2;\n"
+"X-Generator: Weblate 5.3\n"
 "X-Launchpad-Export-Date: 2023-12-18 03:00+0000\n"
-"X-Generator: Launchpad (build e1eeab5b20e19239bd7d5f36676f7a52988db88b)\n"
-"Language: pl\n"
 
 #: ../Pinta.Gui.Addins/InstallDialog.cs:216
 msgid " (in user directory)"
@@ -174,7 +174,7 @@ msgstr "Dopasuj"
 
 #: ../Pinta.Core/Enumerations/ResamplingMode.cs:22
 msgid "Bilinear"
-msgstr ""
+msgstr "Dwuliniowy"
 
 #: ../Pinta.Effects/Adjustments/BlackAndWhiteEffect.cs:24
 msgid "Black and White"
@@ -419,7 +419,7 @@ msgstr "Nasycenie kolorów"
 
 #: ../Pinta.Core/Actions/ViewActions.cs:179
 msgid "Color Scheme"
-msgstr ""
+msgstr "Schemat kolorów"
 
 #: ../Pinta.Effects/Effects/InkSketchEffect.cs:158
 msgid "Coloring"
@@ -496,7 +496,7 @@ msgstr "Wytnij"
 #. Translators: This refers to using a dark variant of the color scheme.
 #: ../Pinta.Core/Actions/ViewActions.cs:187
 msgid "Dark"
-msgstr ""
+msgstr "Ciemny"
 
 #: ../Pinta.Core/Effects/UserBlendOps.cs:38
 msgid "Darken"
@@ -509,7 +509,7 @@ msgstr "Kreskowanie"
 #. Translators: This refers to using the system's default color scheme.
 #: ../Pinta.Core/Actions/ViewActions.cs:183
 msgid "Default"
-msgstr ""
+msgstr "Domyślny"
 
 #: ../Pinta.Core/Actions/LayerActions.cs:49
 #: ../Pinta.Core/Actions/LayerActions.cs:312
@@ -656,7 +656,7 @@ msgstr "Zgłoś błąd"
 
 #: ../Pinta/Main.cs:61
 msgid "Files to open"
-msgstr ""
+msgstr "Pliki do otwarcia"
 
 #: ../Pinta.Tools/Tools/TextTool.cs:249
 msgid "Fill Background"
@@ -798,8 +798,8 @@ msgstr "Ukryj warstwę"
 #: ../Pinta.Effects/Effects/RedEyeRemoveEffect.cs:55
 msgid "Hint: For best results, first use selection tools to select each eye."
 msgstr ""
-"Wskazówka: najlepsze efekty uzyskasz zaznaczając uprzednio narzędziami każde "
-"z oczu."
+"Wskazówka: najlepsze efekty uzyskasz, zaznaczając uprzednio narzędziami "
+"każde z oczu."
 
 #: ../Pinta/Pads/HistoryPad.cs:40 ../Pinta/Pads/HistoryPad.cs:49
 msgid "History"
@@ -1156,7 +1156,7 @@ msgstr "Licencja"
 #. Translators: This refers to using a light variant of the color scheme.
 #: ../Pinta.Core/Actions/ViewActions.cs:185
 msgid "Light"
-msgstr ""
+msgstr "Jasny"
 
 #: ../Pinta.Core/Effects/UserBlendOps.cs:37
 msgid "Lighten"
@@ -1261,7 +1261,7 @@ msgstr "Nazwa:"
 
 #: ../Pinta.Core/Enumerations/ResamplingMode.cs:23
 msgid "Nearest Neighbor"
-msgstr ""
+msgstr "Najbliższy sąsiad"
 
 #: ../Pinta.Core/Actions/FileActions.cs:55
 msgid "New"
@@ -1314,7 +1314,7 @@ msgstr "Normalny i kontur"
 
 #: ../Pinta/Main.cs:55
 msgid "Number of threads to use for rendering"
-msgstr ""
+msgstr "Liczba wątków używanych do renderowania"
 
 #: ../Pinta.Effects/Effects/BulgeEffect.cs:92
 #: ../Pinta.Effects/Effects/RadialBlurEffect.cs:149
@@ -1677,7 +1677,7 @@ msgstr "Zgłoś błąd..."
 
 #: ../Pinta/Dialogs/ResizeImageDialog.cs:102
 msgid "Resampling:"
-msgstr ""
+msgstr "Przepróbkowanie:"
 
 #: ../Pinta.Gui.Widgets/Widgets/ReseedButtonWidget.cs:55
 msgid "Reseed"
@@ -1704,7 +1704,7 @@ msgstr "Zmień rozmiar płótna…"
 #: ../Pinta/Dialogs/ResizeImageDialog.cs:47
 #: ../Pinta.Core/HistoryItems/ResizeHistoryItem.cs:38
 msgid "Resize Image"
-msgstr "Zmiana rozmiaru obrazu"
+msgstr "Zmień rozmiar obrazu"
 
 #: ../Pinta.Core/Actions/ImageActions.cs:49
 msgid "Resize Image..."
