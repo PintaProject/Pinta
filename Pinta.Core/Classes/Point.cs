@@ -40,12 +40,6 @@ public readonly record struct PointI (int X, int Y)
 		return Math.Sqrt (x * x + y * y);
 	}
 
-	public PointI NegatedX ()
-		=> new (-X, Y);
-
-	public PointI NegatedY ()
-		=> new (X, -Y);
-
 	public PointI Rotated90 () // Counterclockwise
 		=> new (-Y, X);
 
