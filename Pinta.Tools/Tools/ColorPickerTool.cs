@@ -153,17 +153,15 @@ public sealed class ColorPickerTool : BaseTool
 
 	private ImmutableArray<ColorBgra> GetPixelsFromPoint (Document document, PointI point)
 	{
-		var x = point.X;
-		var y = point.Y;
 		var size = SampleSize;
 		var half = size / 2;
 
 		// Short circuit for single pixel
 		if (size == 1)
-			return ImmutableArray.Create (GetPixel (document, x, y));
+			return ImmutableArray.Create (GetPixel (document, point));
 
 		// Find the pixels we need (clamp to the size of the image)
-		var rect = new RectangleI (x - half, y - half, size, size);
+		var rect = new RectangleI (point.X - half, point.Y - half, size, size);
 		var intersected = rect.Intersect (new RectangleI (PointI.Zero, document.ImageSize));
 
 		var totalRectanglePixels = intersected.Size.Width * intersected.Size.Height;
@@ -172,17 +170,17 @@ public sealed class ColorPickerTool : BaseTool
 
 		for (var i = intersected.Left; i <= intersected.Right; i++)
 			for (var j = intersected.Top; j <= intersected.Bottom; j++)
-				pixels.Add (GetPixel (document, i, j));
+				pixels.Add (GetPixel (document, new (i, j)));
 
 		return pixels.MoveToImmutable ();
 	}
 
-	private ColorBgra GetPixel (Document document, int x, int y)
+	private ColorBgra GetPixel (Document document, PointI position)
 	{
 		if (SampleLayerOnly)
-			return document.Layers.CurrentUserLayer.Surface.GetColorBgra (x, y);
+			return document.Layers.CurrentUserLayer.Surface.GetColorBgra (position);
 		else
-			return document.GetComputedPixel (x, y);
+			return document.GetComputedPixel (position);
 	}
 
 	private ToolBarDropDownButton? tool_select;

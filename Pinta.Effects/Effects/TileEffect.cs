@@ -149,7 +149,9 @@ public sealed class TileEffect : BaseEffect
 				ySample = (ySample + settings.height) % settings.height;
 			}
 
-			ref readonly ColorBgra sample = ref src.GetColorBgra (src_data, settings.src_width, xSample, ySample);
+			PointI samplePosition = new (xSample, ySample);
+
+			ref readonly ColorBgra sample = ref src.GetColorBgra (src_data, settings.src_width, samplePosition);
 
 			b += sample.B;
 			g += sample.G;

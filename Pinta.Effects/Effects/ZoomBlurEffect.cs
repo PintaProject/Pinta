@@ -92,7 +92,7 @@ public sealed class ZoomBlurEffect : BaseEffect
 						int v = (int) (fy + fcy + 32768 >> 16);
 
 						if (src_bounds.Contains (u, v)) {
-							ref readonly ColorBgra src_pixel_2 = ref src.GetColorBgra (src_data, src_width, u, v);
+							ref readonly ColorBgra src_pixel_2 = ref src.GetColorBgra (src_data, src_width, new (u, v));
 
 							sr += src_pixel_2.R * src_pixel_2.A;
 							sg += src_pixel_2.G * src_pixel_2.A;

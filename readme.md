@@ -1,5 +1,6 @@
 # Pinta - [Simple Gtk# Paint Program](http://pinta-project.com/)
 
+[![Translation status](https://hosted.weblate.org/widget/pinta/pinta/287x66-grey.png)](https://hosted.weblate.org/engage/pinta/)
 [![Build Status](https://github.com/PintaProject/Pinta/workflows/Build/badge.svg)](https://github.com/PintaProject/Pinta/actions)
 
 Copyright (C) 2010 Jonathan Pobst <monkey AT jpobst DOT com>
@@ -70,7 +71,7 @@ Alternatively, Pinta can be built by opening `Pinta.sln` in [Visual Studio for M
 - You can get technical help on the [Pinta Google Group](https://groups.google.com/group/pinta-project)
 - You can report bugs/issues on [Launchpad bug tracker](https://bugs.launchpad.net/pinta/+filebug)
 - You can make suggestions on [Github](https://github.com/PintaProject/Pinta/discussions/categories/ideas)
-- You can help translate Pinta to your native language on [Launchpad translations](https://translations.launchpad.net/pinta)
+- You can help [translate Pinta to your native language](https://hosted.weblate.org/engage/pinta/)
 - You can fork the project on [Github](https://github.com/PintaProject/Pinta)
 - You can get help in #pinta on irc.gnome.org.
 - For details on patching, take a look at `patch-guidelines.md` in the repo.

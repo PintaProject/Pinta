@@ -31,7 +31,7 @@ namespace Pinta.Core;
 
 public readonly record struct PointI (int X, int Y)
 {
-	public static readonly PointI Zero;
+	public static PointI Zero { get; } = new (0, 0);
 	public override readonly string ToString () => $"{X}, {Y}";
 	public readonly double Magnitude ()
 	{
@@ -55,6 +55,8 @@ public readonly record struct PointI (int X, int Y)
 
 public readonly record struct PointD (double X, double Y)
 {
+	public static PointD Zero { get; } = new (0, 0);
+
 	public override readonly string ToString () => $"{X}, {Y}";
 
 	public readonly PointI ToInt () => new ((int) X, (int) Y);
@@ -67,6 +69,8 @@ public readonly record struct PointD (double X, double Y)
 	/// Returns a new point, rounded to the nearest integer coordinates.
 	/// </summary>
 	public readonly PointD Rounded () => new (Math.Round (X), Math.Round (Y));
+
+	public readonly PointD Scaled (double factor) => new (X * factor, Y * factor);
 
 	public static PointD operator + (in PointD a, in PointD b) => new (a.X + b.X, a.Y + b.Y);
 
@@ -87,7 +91,7 @@ public readonly record struct PointD (double X, double Y)
 
 public readonly record struct Size (int Width, int Height)
 {
-	public static readonly Size Empty;
+	public static Size Empty { get; } = new (0, 0);
 
 	public override readonly string ToString () => $"{Width}, {Height}";
 

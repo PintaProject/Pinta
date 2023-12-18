@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: pinta\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-04-18 22:48-0400\n"
+"POT-Creation-Date: 2023-12-17 14:36-0500\n"
 "PO-Revision-Date: 2022-02-04 16:45+0000\n"
 "Last-Translator: Heimen Stoffels <Unknown>\n"
 "Language-Team: Dutch <nl@li.org>\n"
@@ -15,126 +15,126 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Launchpad-Export-Date: 2023-09-13 22:40+0000\n"
-"X-Generator: Launchpad (build 32eed776db4e1fe74faaa77122cde19862d565ac)\n"
+"X-Launchpad-Export-Date: 2023-12-18 03:00+0000\n"
+"X-Generator: Launchpad (build e1eeab5b20e19239bd7d5f36676f7a52988db88b)\n"
 "Language: nl\n"
 
-#: ../Pinta.Gui.Addins/InstallDialog.cs:217
+#: ../Pinta.Gui.Addins/InstallDialog.cs:216
 msgid " (in user directory)"
 msgstr " (in gebruikersmap)"
 
-#: ../Pinta.Core/Classes/SelectionModeHandler.cs:61
+#: ../Pinta.Core/Classes/SelectionModeHandler.cs:58
 msgid " Selection Mode: "
 msgstr " Selectiemodus: "
 
-#: ../Pinta.Core/Managers/EffectsManager.cs:60
-#: ../Pinta.Core/Managers/EffectsManager.cs:90
+#: ../Pinta.Core/Managers/EffectsManager.cs:58
+#: ../Pinta.Core/Managers/EffectsManager.cs:88
 msgid "..."
 msgstr "…"
 
-#: ../Pinta.Tools/Tools/ColorPickerTool.cs:223
+#: ../Pinta.Tools/Tools/ColorPickerTool.cs:224
 msgid "3 x 3 Region"
 msgstr "3 x 3-gebied"
 
-#: ../Pinta.Tools/Tools/ColorPickerTool.cs:224
+#: ../Pinta.Tools/Tools/ColorPickerTool.cs:225
 msgid "5 x 5 Region"
 msgstr "5 x 5-gebied"
 
-#: ../Pinta.Tools/Tools/ColorPickerTool.cs:225
+#: ../Pinta.Tools/Tools/ColorPickerTool.cs:226
 msgid "7 x 7 Region"
 msgstr "7 x 7-gebied"
 
-#: ../Pinta.Tools/Tools/ColorPickerTool.cs:226
+#: ../Pinta.Tools/Tools/ColorPickerTool.cs:227
 msgid "9 x 9 Region"
 msgstr "9 x 9-gebied"
 
-#: ../Pinta/MainWindow.cs:340
+#: ../Pinta/MainWindow.cs:343
 msgid "A_dd-ins"
 msgstr "Uitbrei_dingen"
 
-#: ../Pinta.Core/Actions/AppActions.cs:44
+#: ../Pinta.Core/Actions/AppActions.cs:40
 msgid "About"
 msgstr "Over"
 
-#: ../Pinta/Actions/Help/AboutDialogAction.cs:53
+#: ../Pinta/Actions/Help/AboutDialogAction.cs:51
 msgid "About Pinta"
 msgstr "Over Pinta"
 
-#: ../Pinta/Actions/Edit/PasteAction.cs:127
-#: ../Pinta.Core/Actions/LayerActions.cs:50
-#: ../Pinta.Core/Actions/LayerActions.cs:331
+#: ../Pinta/Actions/Edit/PasteAction.cs:133
+#: ../Pinta.Core/Actions/LayerActions.cs:48
+#: ../Pinta.Core/Actions/LayerActions.cs:329
 msgid "Add New Layer"
 msgstr "Laag toevoegen"
 
-#: ../Pinta.Effects/Effects/AddNoiseEffect.cs:27
+#: ../Pinta.Effects/Effects/AddNoiseEffect.cs:24
 msgid "Add Noise"
 msgstr "Ruis toevoegen"
 
-#: ../Pinta.Core/Actions/AddinActions.cs:39
+#: ../Pinta.Core/Actions/AddinActions.cs:38
 msgid "Add-in Manager..."
 msgstr ""
 
-#: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:772
+#: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:810
 msgid "Added"
 msgstr "Toegevoegd"
 
-#: ../Pinta.Tools/Tools/ColorPickerTool.cs:194
+#: ../Pinta.Tools/Tools/ColorPickerTool.cs:195
 msgid "After select"
 msgstr "Na selecteren"
 
 #: ../Pinta/Actions/File/OpenDocumentAction.cs:81
-#: ../Pinta.Core/Actions/EditActions.cs:367
-#: ../Pinta.Gui.Addins/AddinManagerDialog.cs:210
+#: ../Pinta.Core/Actions/EditActions.cs:366
+#: ../Pinta.Gui.Addins/AddinManagerDialog.cs:209
 msgid "All files"
 msgstr "Alle bestanden"
 
-#: ../Pinta.Effects/Effects/BulgeEffect.cs:95
-#: ../Pinta.Effects/Effects/FrostedGlassEffect.cs:159
-#: ../Pinta.Effects/Effects/SharpenEffect.cs:60
-#: ../Pinta.Effects/Effects/TwistEffect.cs:126
-#: ../Pinta.Effects/Effects/ZoomBlurEffect.cs:128
+#: ../Pinta.Effects/Effects/BulgeEffect.cs:89
+#: ../Pinta.Effects/Effects/FrostedGlassEffect.cs:150
+#: ../Pinta.Effects/Effects/SharpenEffect.cs:56
+#: ../Pinta.Effects/Effects/TwistEffect.cs:131
+#: ../Pinta.Effects/Effects/ZoomBlurEffect.cs:124
 msgid "Amount"
 msgstr "Hoeveelheid"
 
-#: ../Pinta/Dialogs/ResizeCanvasDialog.cs:357
+#: ../Pinta/Dialogs/ResizeCanvasDialog.cs:111
 msgid "Anchor:"
 msgstr "Vastzetten:"
 
-#: ../Pinta/Actions/Layers/RotateZoomLayerAction.cs:116
-#: ../Pinta.Effects/Effects/EdgeDetectEffect.cs:86
-#: ../Pinta.Effects/Effects/EmbossEffect.cs:142
-#: ../Pinta.Effects/Effects/JuliaFractalEffect.cs:135
-#: ../Pinta.Effects/Effects/MandelbrotFractalEffect.cs:148
-#: ../Pinta.Effects/Effects/MotionBlurEffect.cs:108
-#: ../Pinta.Effects/Effects/RadialBlurEffect.cs:157
-#: ../Pinta.Effects/Effects/ReliefEffect.cs:88
-#: ../Pinta.Tools/Editable/EditEngines/ArrowedEditEngine.cs:297
+#: ../Pinta/Actions/Layers/RotateZoomLayerAction.cs:115
+#: ../Pinta.Effects/Effects/EdgeDetectEffect.cs:80
+#: ../Pinta.Effects/Effects/EmbossEffect.cs:135
+#: ../Pinta.Effects/Effects/JuliaFractalEffect.cs:150
+#: ../Pinta.Effects/Effects/MandelbrotFractalEffect.cs:168
+#: ../Pinta.Effects/Effects/MotionBlurEffect.cs:101
+#: ../Pinta.Effects/Effects/RadialBlurEffect.cs:146
+#: ../Pinta.Effects/Effects/ReliefEffect.cs:82
+#: ../Pinta.Tools/Editable/EditEngines/ArrowedEditEngine.cs:298
 msgid "Angle"
 msgstr "Hoek"
 
-#: ../Pinta.Effects/Effects/TwistEffect.cs:128
+#: ../Pinta.Effects/Effects/TwistEffect.cs:134
 msgid "Antialias"
 msgstr "Anti-kartelvorming"
 
-#: ../Pinta.Core/Classes/BaseTool.cs:352
+#: ../Pinta.Core/Classes/BaseTool.cs:351
 msgid "Antialiasing Off"
 msgstr "Anti-kartelvorming uitschakelen"
 
-#: ../Pinta.Core/Classes/BaseTool.cs:351
+#: ../Pinta.Core/Classes/BaseTool.cs:350
 msgid "Antialiasing On"
 msgstr "Anti-kartelvorming inschakelen"
 
-#: ../Pinta.Tools/Editable/EditEngines/ArrowedEditEngine.cs:245
+#: ../Pinta.Tools/Editable/EditEngines/ArrowedEditEngine.cs:256
 msgid "Arrow"
 msgstr "Pijl"
 
-#: ../Pinta.Effects/Effects/InkSketchEffect.cs:38
-#: ../Pinta.Effects/Effects/OilPaintingEffect.cs:30
-#: ../Pinta.Effects/Effects/PencilSketchEffect.cs:37
+#: ../Pinta.Effects/Effects/InkSketchEffect.cs:35
+#: ../Pinta.Effects/Effects/OilPaintingEffect.cs:27
+#: ../Pinta.Effects/Effects/PencilSketchEffect.cs:33
 msgid "Artistic"
 msgstr "Artistiek"
 
-#: ../Pinta.Effects/Dialogs/Effects.LevelsDialog.cs:530
+#: ../Pinta.Effects/Dialogs/Effects.LevelsDialog.cs:90
 msgid "Auto"
 msgstr "Automatisch"
 
@@ -142,58 +142,62 @@ msgstr "Automatisch"
 msgid "Auto Crop"
 msgstr "Automatisch bijsnijden"
 
-#: ../Pinta.Effects/Adjustments/AutoLevelEffect.cs:25
+#: ../Pinta.Effects/Adjustments/AutoLevelEffect.cs:24
 msgid "Auto Level"
 msgstr "Automatische niveaus bepalen"
 
-#: ../Pinta.Gui.Addins/AddinInfoView.cs:141
+#: ../Pinta.Gui.Addins/AddinInfoView.cs:139
 #, csharp-format
 msgid "Available in repository: {0}"
 msgstr ""
 
-#: ../Pinta.Core/Managers/WorkspaceManager.cs:177
+#: ../Pinta.Core/Managers/WorkspaceManager.cs:176
 msgid "Background"
 msgstr "Achtergrond"
 
-#: ../Pinta/Dialogs/NewImageDialog.cs:305
+#: ../Pinta/Dialogs/NewImageDialog.cs:211
 msgid "Background Color"
 msgstr "Achtergrondkleur"
 
-#: ../Pinta/Dialogs/NewImageDialog.cs:291
+#: ../Pinta/Dialogs/NewImageDialog.cs:197
 msgid "Background:"
 msgstr "Achtergrond:"
 
-#: ../Pinta/Actions/Help/AboutDialogAction.cs:83
+#: ../Pinta/Actions/Help/AboutDialogAction.cs:81
 msgid "Based on the work of Paint.NET:"
 msgstr "Gebaseerd op Paint.NET:"
 
-#: ../Pinta.Core/Actions/ViewActions.cs:67
+#: ../Pinta.Core/Actions/ViewActions.cs:69
 msgid "Best Fit"
 msgstr "Inpassen"
 
-#: ../Pinta.Effects/Adjustments/BlackAndWhiteEffect.cs:25
+#: ../Pinta.Core/Enumerations/ResamplingMode.cs:22
+msgid "Bilinear"
+msgstr ""
+
+#: ../Pinta.Effects/Adjustments/BlackAndWhiteEffect.cs:24
 msgid "Black and White"
 msgstr "Zwart-wit"
 
-#: ../Pinta/Dialogs/LayerPropertiesDialog.cs:207
+#: ../Pinta/Dialogs/LayerPropertiesDialog.cs:88
 msgid "Blend Mode"
 msgstr "Mengmodus"
 
-#: ../Pinta.Effects/Dialogs/Effects.LevelsDialog.cs:527
-#: ../Pinta.Effects/Dialogs/Effects.PosterizeDialog.cs:125
+#: ../Pinta.Effects/Dialogs/Effects.LevelsDialog.cs:87
+#: ../Pinta.Effects/Dialogs/Effects.PosterizeDialog.cs:77
 msgid "Blue"
 msgstr "Blauw"
 
-#: ../Pinta.Effects/Dialogs/Effects.CurvesDialog.cs:466
+#: ../Pinta.Effects/Dialogs/Effects.CurvesDialog.cs:128
 msgid "Blue "
 msgstr "Blauw "
 
-#: ../Pinta.Effects/Effects/FragmentEffect.cs:30
-#: ../Pinta.Effects/Effects/GaussianBlurEffect.cs:31
-#: ../Pinta.Effects/Effects/MotionBlurEffect.cs:30
-#: ../Pinta.Effects/Effects/RadialBlurEffect.cs:31
-#: ../Pinta.Effects/Effects/UnfocusEffect.cs:32
-#: ../Pinta.Effects/Effects/ZoomBlurEffect.cs:30
+#: ../Pinta.Effects/Effects/FragmentEffect.cs:28
+#: ../Pinta.Effects/Effects/GaussianBlurEffect.cs:28
+#: ../Pinta.Effects/Effects/MotionBlurEffect.cs:27
+#: ../Pinta.Effects/Effects/RadialBlurEffect.cs:27
+#: ../Pinta.Effects/Effects/UnfocusEffect.cs:29
+#: ../Pinta.Effects/Effects/ZoomBlurEffect.cs:27
 msgid "Blurs"
 msgstr "Vervagen"
 
@@ -201,53 +205,53 @@ msgstr "Vervagen"
 msgid "Bold"
 msgstr "Vetgedrukt"
 
-#: ../Pinta.Effects/Adjustments/BrightnessContrastEffect.cs:149
-#: ../Pinta.Effects/Effects/GlowEffect.cs:83
+#: ../Pinta.Effects/Adjustments/BrightnessContrastEffect.cs:142
+#: ../Pinta.Effects/Effects/GlowEffect.cs:77
 msgid "Brightness"
 msgstr "Helderheid"
 
-#: ../Pinta.Effects/Adjustments/BrightnessContrastEffect.cs:29
+#: ../Pinta.Effects/Adjustments/BrightnessContrastEffect.cs:28
 msgid "Brightness / Contrast"
 msgstr "Helderheid/Contrast"
 
-#: ../Pinta.Effects/Effects/OilPaintingEffect.cs:147
+#: ../Pinta.Effects/Effects/OilPaintingEffect.cs:152
 msgid "Brush Size"
 msgstr "Penseelgrootte"
 
-#: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:265
-#: ../Pinta.Tools/Tools/BaseBrushTool.cs:101
+#: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:264
+#: ../Pinta.Tools/Tools/BaseBrushTool.cs:100
 msgid "Brush width"
 msgstr "Penseeldikte"
 
-#: ../Pinta.Effects/Effects/BulgeEffect.cs:22
+#: ../Pinta.Effects/Effects/BulgeEffect.cs:23
 msgid "Bulge"
 msgstr "Bolvorm"
 
-#: ../Pinta/Dialogs/ResizeCanvasDialog.cs:315
-#: ../Pinta/Dialogs/ResizeImageDialog.cs:151
+#: ../Pinta/Dialogs/ResizeCanvasDialog.cs:69
+#: ../Pinta/Dialogs/ResizeImageDialog.cs:59
 msgid "By absolute size:"
 msgstr "Tot absolute grootte:"
 
-#: ../Pinta/Dialogs/ResizeCanvasDialog.cs:314
-#: ../Pinta/Dialogs/ResizeImageDialog.cs:150
+#: ../Pinta/Dialogs/ResizeCanvasDialog.cs:68
+#: ../Pinta/Dialogs/ResizeImageDialog.cs:58
 msgid "By percentage:"
 msgstr "Met percentage:"
 
-#: ../Pinta/Actions/File/OpenDocumentAction.cs:55
+#: ../Pinta/Actions/File/OpenDocumentAction.cs:54
 #: ../Pinta/Actions/File/SaveDocumentImplementationAction.cs:74
-#: ../Pinta.Core/Actions/EditActions.cs:352
+#: ../Pinta.Core/Actions/EditActions.cs:351
 #: ../Pinta.Core/Actions/EditActions.cs:392
-#: ../Pinta.Core/Actions/LayerActions.cs:169
-#: ../Pinta.Gui.Addins/AddinManagerDialog.cs:199
-#: ../Pinta.Gui.Addins/InstallDialog.cs:119
+#: ../Pinta.Core/Actions/LayerActions.cs:167
+#: ../Pinta.Gui.Addins/AddinManagerDialog.cs:198
+#: ../Pinta.Gui.Addins/InstallDialog.cs:120
 msgid "Cancel"
 msgstr "Annuleren"
 
-#: ../Pinta/Pads/CanvasPad.cs:43
+#: ../Pinta/Pads/CanvasPad.cs:41
 msgid "Canvas"
 msgstr "Canvas"
 
-#: ../Pinta.Effects/Effects/PixelateEffect.cs:121
+#: ../Pinta.Effects/Effects/PixelateEffect.cs:115
 msgid "Cell Size"
 msgstr "Celgrootte"
 
@@ -255,23 +259,23 @@ msgstr "Celgrootte"
 msgid "Center Align"
 msgstr "Centreren"
 
-#: ../Pinta.Effects/Effects/WarpEffect.cs:195
+#: ../Pinta.Effects/Effects/WarpEffect.cs:189
 msgid "Center Offset"
 msgstr "Centrumbepaling"
 
-#: ../Pinta.Effects/Effects/MotionBlurEffect.cs:114
+#: ../Pinta.Effects/Effects/MotionBlurEffect.cs:107
 msgid "Centered"
 msgstr "Gecentreerd"
 
-#: ../Pinta.Core/Actions/ViewActions.cs:144
+#: ../Pinta.Core/Actions/ViewActions.cs:149
 msgid "Centimeters"
 msgstr "Centimeter"
 
-#: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:338
+#: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:348
 msgid "Changed Shape Type"
 msgstr "Het vormtype is veranderd"
 
-#: ../Pinta.Effects/Dialogs/Effects.LevelsDialog.cs:472
+#: ../Pinta.Effects/Dialogs/Effects.LevelsDialog.cs:555
 msgid "Choose Color"
 msgstr "Kleur kiezen"
 
@@ -287,21 +291,21 @@ msgstr "Primaire kleur kiezen"
 msgid "Choose Secondary Color"
 msgstr "Secundaire kleur kiezen"
 
-#: ../Pinta.Tools/Brushes/CircleBrush.cs:37
+#: ../Pinta.Tools/Brushes/CircleBrush.cs:36
 msgid "Circles"
 msgstr "Cirkels"
 
-#: ../Pinta.Effects/Effects/WarpEffect.cs:19
+#: ../Pinta.Effects/Effects/WarpEffect.cs:20
 msgid "Clamp"
 msgstr "Klem"
 
-#: ../Pinta.Tools/Tools/RectangleSelectTool.cs:42
+#: ../Pinta.Tools/Tools/RectangleSelectTool.cs:38
 msgid ""
 "Click and drag to draw a rectangular selection.\n"
 "Hold Shift to constrain to a square."
 msgstr ""
 
-#: ../Pinta.Tools/Tools/EllipseSelectTool.cs:41
+#: ../Pinta.Tools/Tools/EllipseSelectTool.cs:37
 msgid ""
 "Click and drag to draw an elliptical selection.\n"
 "Hold Shift to constrain to a circle."
@@ -317,7 +321,7 @@ msgstr ""
 msgid "Click and drag to draw the outline for a selection area."
 msgstr "Klik en sleep om een selectie te maken."
 
-#: ../Pinta.Tools/Tools/PanTool.cs:44
+#: ../Pinta.Tools/Tools/PanTool.cs:40
 msgid "Click and drag to navigate image."
 msgstr "Klik en sleep om de afbeelding te verschuiven."
 
@@ -329,7 +333,7 @@ msgstr "Klik om de primaire en secondaire kleur opnieuw in te stellen."
 msgid "Click to select primary color."
 msgstr "Klik om de primaire kleur te kiezen."
 
-#: ../Pinta.Tools/Tools/MagicWandTool.cs:50
+#: ../Pinta.Tools/Tools/MagicWandTool.cs:49
 msgid "Click to select region of similar color."
 msgstr "Klik om een regio met gelijkwaardige kleur te selecteren."
 
@@ -341,212 +345,222 @@ msgstr "Klik om de secundaire kleur te kiezen."
 msgid "Click to switch between primary and secondary color."
 msgstr "Klik om te wisselen tussen primair en secundair."
 
-#: ../Pinta/Dialogs/NewImageDialog.cs:164
-#: ../Pinta/Dialogs/NewImageDialog.cs:204
-#: ../Pinta/Dialogs/NewImageDialog.cs:378
-#: ../Pinta/Dialogs/NewImageDialog.cs:467
+#: ../Pinta/Dialogs/NewImageDialog.cs:108
+#: ../Pinta/Dialogs/NewImageDialog.cs:341
+#: ../Pinta/Dialogs/NewImageDialog.cs:363
+#: ../Pinta/Dialogs/NewImageDialog.cs:452
 msgid "Clipboard"
 msgstr "Klembord"
 
-#: ../Pinta.Tools/Tools/CloneStampTool.cs:44
+#: ../Pinta.Tools/Tools/CloneStampTool.cs:43
 msgid "Clone Stamp"
 msgstr "Kloonstempel"
 
-#: ../Pinta.Core/Actions/FileActions.cs:54
-#: ../Pinta.Gui.Addins/InstallDialog.cs:272
+#: ../Pinta.Core/Actions/FileActions.cs:50
+#: ../Pinta.Gui.Addins/InstallDialog.cs:271
 msgid "Close"
 msgstr "Sluiten"
 
-#: ../Pinta.Core/Actions/WindowActions.cs:46
+#: ../Pinta.Core/Actions/WindowActions.cs:41
 msgid "Close All"
 msgstr "Alles sluiten"
 
-#: ../Pinta.Tools/Editable/EditEngines/RectangleEditEngine.cs:40
+#: ../Pinta.Tools/Editable/EditEngines/RectangleEditEngine.cs:34
 msgid "Closed Curve Shape"
 msgstr "Vorm van gesloten curve"
 
-#: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:322
+#: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:325
 msgid "Closed Line/Curve Series"
 msgstr "Gesloten lijn- en curveserie"
 
-#: ../Pinta.Effects/Effects/CloudsEffect.cs:27
+#: ../Pinta.Effects/Effects/CloudsEffect.cs:29
 msgid "Clouds"
 msgstr "Wolken"
 
-#: ../Pinta.Effects/Effects/OilPaintingEffect.cs:150
+#: ../Pinta.Effects/Effects/OilPaintingEffect.cs:155
 msgid "Coarseness"
 msgstr "Grofheid"
 
-#: ../Pinta.Core/Effects/UserBlendOps.cs:45
+#: ../Pinta.Core/Effects/UserBlendOps.cs:43
 msgid "Color"
 msgstr "Kleur"
 
-#: ../Pinta.Core/Effects/UserBlendOps.cs:35
+#: ../Pinta.Core/Effects/UserBlendOps.cs:33
 msgid "Color Burn"
 msgstr "Kleurinbranding"
 
-#: ../Pinta.Core/Effects/UserBlendOps.cs:36
+#: ../Pinta.Core/Effects/UserBlendOps.cs:34
 msgid "Color Dodge"
 msgstr "Kleur ontwijken"
 
-#: ../Pinta.Tools/Tools/GradientTool.cs:201
+#: ../Pinta.Tools/Tools/GradientTool.cs:203
 msgid "Color Mode"
 msgstr "Kleurmodus"
 
-#: ../Pinta.Tools/Tools/ColorPickerTool.cs:52
+#: ../Pinta.Tools/Tools/ColorPickerTool.cs:51
 msgid "Color Picker"
 msgstr "Pipet"
 
-#: ../Pinta.Effects/Effects/PencilSketchEffect.cs:95
+#: ../Pinta.Effects/Effects/PencilSketchEffect.cs:90
 msgid "Color Range"
 msgstr "Kleurbereik"
 
-#: ../Pinta.Effects/Effects/AddNoiseEffect.cs:177
+#: ../Pinta.Effects/Effects/AddNoiseEffect.cs:167
 msgid "Color Saturation"
 msgstr "Kleurverzadiging"
 
-#: ../Pinta.Effects/Effects/InkSketchEffect.cs:162
+#: ../Pinta.Core/Actions/ViewActions.cs:179
+msgid "Color Scheme"
+msgstr ""
+
+#: ../Pinta.Effects/Effects/InkSketchEffect.cs:158
 msgid "Coloring"
 msgstr "Inkleuren"
 
-#: ../Pinta.Tools/Tools/GradientTool.cs:186
+#: ../Pinta.Tools/Tools/GradientTool.cs:188
 msgid "Conical Gradient"
 msgstr "Conisch verloop"
 
-#: ../Pinta.Core/Actions/HelpActions.cs:44
+#: ../Pinta.Core/Actions/HelpActions.cs:40
 msgid "Contents"
 msgstr "Inhoud"
 
-#: ../Pinta.Tools/Tools/FloodTool.cs:135
+#: ../Pinta.Tools/Tools/FloodTool.cs:134
 msgid "Contiguous"
 msgstr "Aangrenzend"
 
-#: ../Pinta.Effects/Adjustments/BrightnessContrastEffect.cs:160
-#: ../Pinta.Effects/Effects/GlowEffect.cs:85
+#: ../Pinta.Effects/Adjustments/BrightnessContrastEffect.cs:153
+#: ../Pinta.Effects/Effects/GlowEffect.cs:80
 msgid "Contrast"
 msgstr "Contrast"
 
-#: ../Pinta.Core/Actions/EditActions.cs:62
+#: ../Pinta.Core/Actions/EditActions.cs:61
 msgid "Copy"
 msgstr "Kopiëren"
 
-#: ../Pinta.Core/Actions/EditActions.cs:63
+#: ../Pinta.Core/Actions/EditActions.cs:62
 msgid "Copy Merged"
 msgstr "Samengevoegd kopiëren"
 
-#: ../Pinta/Actions/Help/AboutDialogAction.cs:71
+#: ../Pinta/Actions/Help/AboutDialogAction.cs:68
 msgid "Copyright"
 msgstr "Copyright"
 
 #. Translators: {0} is the name of a layer, and {1} is the path to a .ora file.
-#: ../Pinta.Core/ImageFormats/OraFormat.cs:114
+#: ../Pinta.Core/ImageFormats/OraFormat.cs:122
 #, csharp-format
 msgid "Could not import layer \"{0}\" from {1}"
 msgstr ""
 
-#: ../Pinta.Core/Classes/Palette.cs:196
-#: ../Pinta.Core/Managers/WorkspaceManager.cs:384
-#: ../Pinta.Core/Managers/WorkspaceManager.cs:391
+#: ../Pinta.Core/Classes/Palette.cs:192
+#: ../Pinta.Core/Managers/WorkspaceManager.cs:378
+#: ../Pinta.Core/Managers/WorkspaceManager.cs:385
 #, csharp-format
 msgid "Could not open file: {0}"
 msgstr "‘{0}’ kan niet worden geopend"
 
-#: ../Pinta.Effects/Effects/AddNoiseEffect.cs:180
+#: ../Pinta.Effects/Effects/AddNoiseEffect.cs:170
 msgid "Coverage"
 msgstr "Bereik"
 
 #: ../Pinta.Core/Actions/ImageActions.cs:47
-#: ../Pinta.Core/Actions/ImageActions.cs:285
+#: ../Pinta.Core/Actions/ImageActions.cs:284
 msgid "Crop to Selection"
 msgstr "Bijsnijden tot selectie"
 
-#: ../Pinta.Effects/Adjustments/CurvesEffect.cs:27
-#: ../Pinta.Effects/Dialogs/Effects.CurvesDialog.cs:93
+#: ../Pinta.Effects/Adjustments/CurvesEffect.cs:26
+#: ../Pinta.Effects/Dialogs/Effects.CurvesDialog.cs:87
 msgid "Curves"
 msgstr "Curven"
 
-#: ../Pinta/Dialogs/NewImageDialog.cs:164
-#: ../Pinta/Dialogs/NewImageDialog.cs:206
-#: ../Pinta/Dialogs/NewImageDialog.cs:380
-#: ../Pinta/Dialogs/NewImageDialog.cs:467
+#: ../Pinta/Dialogs/NewImageDialog.cs:110
+#: ../Pinta/Dialogs/NewImageDialog.cs:341
+#: ../Pinta/Dialogs/NewImageDialog.cs:365
+#: ../Pinta/Dialogs/NewImageDialog.cs:452
 msgid "Custom"
 msgstr "Aangepast"
 
-#: ../Pinta.Core/Actions/EditActions.cs:61
-#: ../Pinta.Core/Actions/EditActions.cs:244
+#: ../Pinta.Core/Actions/EditActions.cs:60
+#: ../Pinta.Core/Actions/EditActions.cs:243
 msgid "Cut"
 msgstr "Knippen"
 
-#: ../Pinta.Core/Effects/UserBlendOps.cs:40
+#. Translators: This refers to using a dark variant of the color scheme.
+#: ../Pinta.Core/Actions/ViewActions.cs:187
+msgid "Dark"
+msgstr ""
+
+#: ../Pinta.Core/Effects/UserBlendOps.cs:38
 msgid "Darken"
 msgstr "Donkerder maken"
 
-#: ../Pinta.Tools/Dashes/DashPatternBox.cs:67
+#: ../Pinta.Tools/Dashes/DashPatternBox.cs:59
 msgid "Dash"
 msgstr "Streep"
 
-#: ../Pinta.Core/Actions/LayerActions.cs:51
-#: ../Pinta.Core/Actions/LayerActions.cs:314
+#. Translators: This refers to using the system's default color scheme.
+#: ../Pinta.Core/Actions/ViewActions.cs:183
+msgid "Default"
+msgstr ""
+
+#: ../Pinta.Core/Actions/LayerActions.cs:49
+#: ../Pinta.Core/Actions/LayerActions.cs:312
 msgid "Delete Layer"
 msgstr "Laag verwijderen"
 
-#: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:480
+#: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:653
 msgid "Deleted"
 msgstr "Verwijderd"
 
-#: ../Pinta.Core/Actions/EditActions.cs:255
+#: ../Pinta.Core/Actions/EditActions.cs:254
 msgid "Deselect"
 msgstr "Deselecteren"
 
-#: ../Pinta.Core/Actions/EditActions.cs:71
+#: ../Pinta.Core/Actions/EditActions.cs:70
 msgid "Deselect All"
 msgstr "Alles deselecteren"
 
-#: ../Pinta/Dialogs/ErrorDialog.cs:63
+#: ../Pinta/Dialogs/ErrorDialog.cs:61
 msgid "Details"
 msgstr "Details"
 
-#: ../Pinta.Core/Effects/UserBlendOps.cs:38
+#: ../Pinta.Core/Effects/UserBlendOps.cs:36
 msgid "Difference"
 msgstr "Verschil"
 
-#: ../Pinta/Main.cs:63
-msgid "Display the application version."
-msgstr "Toon de programmaversie."
-
-#: ../Pinta.Effects/Effects/FragmentEffect.cs:111
-#: ../Pinta.Effects/Effects/MotionBlurEffect.cs:111
+#: ../Pinta.Effects/Effects/FragmentEffect.cs:110
+#: ../Pinta.Effects/Effects/MotionBlurEffect.cs:104
 msgid "Distance"
 msgstr "Afstand"
 
-#: ../Pinta.Effects/Effects/BulgeEffect.cs:30
-#: ../Pinta.Effects/Effects/FrostedGlassEffect.cs:30
-#: ../Pinta.Effects/Effects/PixelateEffect.cs:34
-#: ../Pinta.Effects/Effects/PolarInversionEffect.cs:34
-#: ../Pinta.Effects/Effects/TileEffect.cs:30
-#: ../Pinta.Effects/Effects/TwistEffect.cs:30
+#: ../Pinta.Effects/Effects/BulgeEffect.cs:27
+#: ../Pinta.Effects/Effects/FrostedGlassEffect.cs:27
+#: ../Pinta.Effects/Effects/PixelateEffect.cs:29
+#: ../Pinta.Effects/Effects/PolarInversionEffect.cs:27
+#: ../Pinta.Effects/Effects/TileEffect.cs:27
+#: ../Pinta.Effects/Effects/TwistEffect.cs:28
 msgid "Distort"
 msgstr "Vervormen"
 
-#: ../Pinta.Tools/Tools/ColorPickerTool.cs:203
+#: ../Pinta.Tools/Tools/ColorPickerTool.cs:204
 msgid "Do not switch tool"
 msgstr "Gereedschap behouden"
 
-#: ../Pinta/Actions/Edit/PasteAction.cs:172
+#: ../Pinta/Actions/Edit/PasteAction.cs:178
 msgid "Don't change canvas size"
 msgstr "Canvasformaat niet aanpassen"
 
-#: ../Pinta.Gui.Addins/AddinInfoView.cs:136
+#: ../Pinta.Gui.Addins/AddinInfoView.cs:134
 #, csharp-format
 msgid "Download size: {0}"
 msgstr ""
 
-#: ../Pinta.Core/Actions/LayerActions.cs:52
-#: ../Pinta.Core/Actions/LayerActions.cs:305
+#: ../Pinta.Core/Actions/LayerActions.cs:50
+#: ../Pinta.Core/Actions/LayerActions.cs:303
 msgid "Duplicate Layer"
 msgstr "Laag klonen"
 
-#: ../xdg/pinta.desktop.in.h:2 ../Pinta/Actions/Help/AboutDialogAction.cs:59
+#: ../xdg/pinta.desktop.in.h:2 ../Pinta/Actions/Help/AboutDialogAction.cs:57
 msgid "Easily create and edit images"
 msgstr "Maak en bewerk afbeeldingen op eenvoudige wijze"
 
@@ -554,114 +568,118 @@ msgstr "Maak en bewerk afbeeldingen op eenvoudige wijze"
 msgid "Edge Behavior"
 msgstr "Randgedrag"
 
-#: ../Pinta.Effects/Effects/EdgeDetectEffect.cs:25
+#: ../Pinta.Effects/Effects/EdgeDetectEffect.cs:23
 msgid "Edge Detect"
 msgstr "Randen detecteren"
 
-#: ../Pinta/MainWindow.cs:336
+#: ../Pinta/MainWindow.cs:339
 msgid "Effe_cts"
 msgstr "Effe_cten"
 
-#: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:323
-#: ../Pinta.Tools/Editable/EditEngines/EllipseEditEngine.cs:38
-#: ../Pinta.Tools/Tools/EllipseTool.cs:39
+#: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:326
+#: ../Pinta.Tools/Editable/EditEngines/EllipseEditEngine.cs:34
+#: ../Pinta.Tools/Tools/EllipseTool.cs:38
 msgid "Ellipse"
 msgstr "Ellips"
 
-#: ../Pinta.Tools/Tools/EllipseSelectTool.cs:39
+#: ../Pinta.Tools/Tools/EllipseSelectTool.cs:35
 msgid "Ellipse Select"
 msgstr "Ellipsselectie"
 
-#: ../Pinta.Effects/Effects/EmbossEffect.cs:22
+#: ../Pinta.Effects/Effects/EmbossEffect.cs:23
 msgid "Emboss"
 msgstr "Reliëf"
 
-#: ../Pinta.Core/Actions/EditActions.cs:67
-#: ../Pinta.Core/Actions/EditActions.cs:246
+#: ../Pinta.Core/Actions/EditActions.cs:66
+#: ../Pinta.Core/Actions/EditActions.cs:245
 msgid "Erase Selection"
 msgstr "Selectie wissen"
 
-#: ../Pinta.Tools/Tools/EraserTool.cs:55
+#: ../Pinta.Tools/Tools/EraserTool.cs:54
 msgid "Eraser"
 msgstr "Gum"
 
-#: ../Pinta.Core/ImageFormats/OraFormat.cs:115
+#: ../Pinta.Core/ImageFormats/OraFormat.cs:123
 msgid "Error"
 msgstr "Foutmelding"
 
-#: ../Pinta.Core/Classes/SelectionModeHandler.cs:50
+#: ../Pinta.Core/Classes/SelectionModeHandler.cs:48
 msgid "Exclude (-) (Right Click)"
 msgstr "Uitsluiten (-) (rechtsklikken)"
 
-#: ../Pinta/Actions/Edit/PasteAction.cs:173
+#: ../Pinta/Actions/Edit/PasteAction.cs:179
 msgid "Expand canvas"
 msgstr "Canvas vergroten"
 
-#: ../Pinta.Gui.Addins/AddinManagerDialog.cs:205
+#: ../Pinta.Gui.Addins/AddinManagerDialog.cs:204
 msgid "Extension packages"
 msgstr ""
 
-#: ../Pinta.Effects/Effects/JuliaFractalEffect.cs:126
-#: ../Pinta.Effects/Effects/MandelbrotFractalEffect.cs:138
+#: ../Pinta.Effects/Effects/JuliaFractalEffect.cs:141
+#: ../Pinta.Effects/Effects/MandelbrotFractalEffect.cs:158
 msgid "Factor"
 msgstr "Factor"
 
-#: ../Pinta/Actions/File/NewScreenshotAction.cs:99
+#: ../Pinta/Actions/File/NewScreenshotAction.cs:103
 msgid "Failed to access XDG Desktop Portals"
 msgstr ""
 
-#: ../Pinta.Gui.Addins/InstallDialog.cs:151
+#: ../Pinta.Gui.Addins/InstallDialog.cs:152
 msgid "Failed to load extension package"
 msgstr ""
 
-#: ../Pinta.Core/Managers/WorkspaceManager.cs:407
+#: ../Pinta.Core/Managers/WorkspaceManager.cs:401
 msgid "Failed to open image"
 msgstr "De afbeelding kan niet worden geopend"
 
-#: ../Pinta/Actions/File/SaveDocumentImplementationAction.cs:180
+#: ../Pinta/Actions/File/SaveDocumentImplementationAction.cs:189
 msgid "Failed to save image"
 msgstr "De afbeelding kan niet worden opgeslagen"
 
-#: ../Pinta/Actions/File/NewScreenshotAction.cs:98
-#: ../Pinta/Actions/File/NewScreenshotAction.cs:118
-#: ../Pinta/Actions/File/NewScreenshotAction.cs:125
+#: ../Pinta/Actions/File/NewScreenshotAction.cs:102
+#: ../Pinta/Actions/File/NewScreenshotAction.cs:122
+#: ../Pinta/Actions/File/NewScreenshotAction.cs:129
 msgid "Failed to take screenshot"
 msgstr "Er kan geen schermfoto worden gemaakt"
 
-#: ../Pinta.Core/Actions/HelpActions.cs:46
+#: ../Pinta.Core/Actions/HelpActions.cs:42
 msgid "File a Bug"
 msgstr "Bug melden"
 
-#: ../Pinta.Tools/Tools/TextTool.cs:248
+#: ../Pinta/Main.cs:61
+msgid "Files to open"
+msgstr ""
+
+#: ../Pinta.Tools/Tools/TextTool.cs:249
 msgid "Fill Background"
 msgstr "Achtergrond opvullen"
 
-#: ../Pinta.Core/Actions/EditActions.cs:68
-#: ../Pinta.Core/Actions/EditActions.cs:207
+#: ../Pinta.Core/Actions/EditActions.cs:67
+#: ../Pinta.Core/Actions/EditActions.cs:206
 msgid "Fill Selection"
 msgstr "Selectie opvullen"
 
-#: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:299
-#: ../Pinta.Tools/Tools/FreeformShapeTool.cs:224
+#: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:301
+#: ../Pinta.Tools/Tools/FreeformShapeTool.cs:223
 msgid "Fill Shape"
 msgstr "Opvulvorm"
 
 #: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:291
-#: ../Pinta.Tools/Tools/FreeformShapeTool.cs:217
+#: ../Pinta.Tools/Tools/FreeformShapeTool.cs:216
 msgid "Fill Style"
 msgstr "Opvulstijl"
 
-#: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:300
-#: ../Pinta.Tools/Tools/FreeformShapeTool.cs:225
+#: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:302
+#: ../Pinta.Tools/Tools/FreeformShapeTool.cs:224
 msgid "Fill and Outline Shape"
 msgstr "Opvullen en omlijnen"
 
-#: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:1036
-#: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:1298
+#: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:1073
+#: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:1331
 msgid "Finalized"
 msgstr "Afgewerkt"
 
-#: ../Pinta.Core/HistoryItems/FinishPixelsHistoryItem.cs:42
+#: ../Pinta.Core/HistoryItems/FinishPixelsHistoryItem.cs:41
 msgid "Finish Pixels"
 msgstr "Pixels beëindigen"
 
@@ -671,97 +689,97 @@ msgid "Flatten"
 msgstr "Plat maken"
 
 #: ../Pinta.Core/Actions/ImageActions.cs:51
-#: ../Pinta.Core/Actions/LayerActions.cs:55
+#: ../Pinta.Core/Actions/LayerActions.cs:53
 msgid "Flip Horizontal"
 msgstr "Horizontaal spiegelen"
 
-#: ../Pinta.Core/HistoryItems/InvertHistoryItem.cs:53
+#: ../Pinta.Core/HistoryItems/InvertHistoryItem.cs:51
 msgid "Flip Image Horizontal"
 msgstr "Afbeelding horizontaal spiegelen"
 
-#: ../Pinta.Core/HistoryItems/InvertHistoryItem.cs:57
+#: ../Pinta.Core/HistoryItems/InvertHistoryItem.cs:55
 msgid "Flip Image Vertical"
 msgstr "Afbeelding verticaal spiegelen"
 
-#: ../Pinta.Core/HistoryItems/InvertHistoryItem.cs:78
+#: ../Pinta.Core/HistoryItems/InvertHistoryItem.cs:76
 msgid "Flip Layer Horizontal"
 msgstr "Laag horizontaal spiegelen"
 
-#: ../Pinta.Core/HistoryItems/InvertHistoryItem.cs:82
+#: ../Pinta.Core/HistoryItems/InvertHistoryItem.cs:80
 msgid "Flip Layer Vertical"
 msgstr "Laag verticaal spiegelen"
 
 #: ../Pinta.Core/Actions/ImageActions.cs:52
-#: ../Pinta.Core/Actions/LayerActions.cs:56
+#: ../Pinta.Core/Actions/LayerActions.cs:54
 msgid "Flip Vertical"
 msgstr "Verticaal spiegelen"
 
-#: ../Pinta.Tools/Tools/FloodTool.cs:125
+#: ../Pinta.Tools/Tools/FloodTool.cs:124
 msgid "Flood Mode"
 msgstr "Vulmodus"
 
-#: ../Pinta.Tools/Tools/TextTool.cs:140
+#: ../Pinta.Tools/Tools/TextTool.cs:135
 msgid "Font"
 msgstr "Lettertype"
 
-#: ../Pinta.Effects/Effects/FragmentEffect.cs:22
+#: ../Pinta.Effects/Effects/FragmentEffect.cs:24
 msgid "Fragment"
 msgstr "Fragmenteren"
 
-#: ../Pinta.Effects/Effects/FragmentEffect.cs:108
+#: ../Pinta.Effects/Effects/FragmentEffect.cs:107
 msgid "Fragments"
 msgstr "Fragmenten"
 
-#: ../Pinta.Tools/Tools/FreeformShapeTool.cs:53
+#: ../Pinta.Tools/Tools/FreeformShapeTool.cs:52
 msgid "Freeform Shape"
 msgstr "Vrije vorm"
 
-#: ../Pinta.Effects/Effects/FrostedGlassEffect.cs:22
+#: ../Pinta.Effects/Effects/FrostedGlassEffect.cs:23
 msgid "Frosted Glass"
 msgstr "Matglas"
 
-#: ../Pinta.Core/Actions/ViewActions.cs:77
+#: ../Pinta.Core/Actions/ViewActions.cs:80
 msgid "Fullscreen"
 msgstr "Beeldvullend"
 
-#: ../Pinta.Gui.Addins/AddinManagerDialog.cs:65
+#: ../Pinta.Gui.Addins/AddinManagerDialog.cs:64
 msgid "Gallery"
 msgstr "Galerij"
 
-#: ../Pinta.Effects/Effects/GaussianBlurEffect.cs:23
+#: ../Pinta.Effects/Effects/GaussianBlurEffect.cs:24
 msgid "Gaussian Blur"
 msgstr "Gaussiaans vervagen"
 
-#: ../Pinta.Tools/Tools/FloodTool.cs:136
+#: ../Pinta.Tools/Tools/FloodTool.cs:135
 msgid "Global"
 msgstr "Globaal"
 
-#: ../Pinta.Effects/Effects/GlowEffect.cs:27
+#: ../Pinta.Effects/Effects/GlowEffect.cs:25
 msgid "Glow"
 msgstr "Gloeiing"
 
 #: ../Pinta.Tools/Tools/GradientTool.cs:49
-#: ../Pinta.Tools/Tools/GradientTool.cs:176
+#: ../Pinta.Tools/Tools/GradientTool.cs:178
 msgid "Gradient"
 msgstr "Kleurverloop"
 
-#: ../Pinta.Effects/Dialogs/Effects.CurvesDialog.cs:465
-#: ../Pinta.Effects/Dialogs/Effects.LevelsDialog.cs:525
-#: ../Pinta.Effects/Dialogs/Effects.PosterizeDialog.cs:120
+#: ../Pinta.Effects/Dialogs/Effects.CurvesDialog.cs:127
+#: ../Pinta.Effects/Dialogs/Effects.LevelsDialog.cs:85
+#: ../Pinta.Effects/Dialogs/Effects.PosterizeDialog.cs:71
 msgid "Green"
 msgstr "Groen"
 
-#: ../Pinta.Tools/Brushes/GridBrush.cs:37
+#: ../Pinta.Tools/Brushes/GridBrush.cs:36
 msgid "Grid"
 msgstr "Rooster"
 
-#: ../Pinta.Core/Effects/UserBlendOps.cs:43
+#: ../Pinta.Core/Effects/UserBlendOps.cs:41
 msgid "Hard Light"
 msgstr "Hard licht"
 
-#: ../Pinta/Dialogs/NewImageDialog.cs:235
-#: ../Pinta/Dialogs/ResizeCanvasDialog.cs:344
-#: ../Pinta/Dialogs/ResizeImageDialog.cs:180
+#: ../Pinta/Dialogs/NewImageDialog.cs:140
+#: ../Pinta/Dialogs/ResizeCanvasDialog.cs:98
+#: ../Pinta/Dialogs/ResizeImageDialog.cs:94
 msgid "Height:"
 msgstr "Hoogte:"
 
@@ -769,7 +787,7 @@ msgstr "Hoogte:"
 msgid "Hide Layer"
 msgstr "Laag verbergen"
 
-#: ../Pinta.Effects/Effects/RedEyeRemoveEffect.cs:64
+#: ../Pinta.Effects/Effects/RedEyeRemoveEffect.cs:55
 msgid "Hint: For best results, first use selection tools to select each eye."
 msgstr "Tip: gebruik eerst selectiegereedschap om elk oog te selecteren."
 
@@ -777,24 +795,24 @@ msgstr "Tip: gebruik eerst selectiegereedschap om elk oog te selecteren."
 msgid "History"
 msgstr "Geschiedenis"
 
-#: ../Pinta.Core/Effects/UserBlendOps.cs:47
-#: ../Pinta.Effects/Adjustments/HueSaturationEffect.cs:67
+#: ../Pinta.Core/Effects/UserBlendOps.cs:45
+#: ../Pinta.Effects/Adjustments/HueSaturationEffect.cs:62
 msgid "Hue"
 msgstr "Tint"
 
-#: ../Pinta.Effects/Adjustments/HueSaturationEffect.cs:26
+#: ../Pinta.Effects/Adjustments/HueSaturationEffect.cs:23
 msgid "Hue / Saturation"
 msgstr "Tint/Verzadiging"
 
-#: ../Pinta/Actions/File/SaveDocumentImplementationAction.cs:175
+#: ../Pinta/Actions/File/SaveDocumentImplementationAction.cs:184
 msgid "ICO files can not be larger than 255 x 255 pixels."
 msgstr "ICO-bestanden mogen niet groter zijn dan 255 x 255 pixels."
 
-#: ../Pinta/Actions/File/CloseDocumentAction.cs:60
+#: ../Pinta/Actions/File/CloseDocumentAction.cs:59
 msgid "If you don't save, all changes will be permanently lost."
 msgstr "Als u het bestand niet opslaat, gaan alle aanpassingen verlopen."
 
-#: ../Pinta.Tools/Tools/ColorPickerTool.cs:241
+#: ../Pinta.Tools/Tools/ColorPickerTool.cs:242
 msgid "Image"
 msgstr "Afbeelding"
 
@@ -802,95 +820,95 @@ msgstr "Afbeelding"
 msgid "Image Editor"
 msgstr "Afbeeldingsbewerker"
 
-#: ../Pinta.Core/Actions/ViewActions.cs:71
+#: ../Pinta.Core/Actions/ViewActions.cs:73
 msgid "Image Tabs"
 msgstr "Afbeeldingstabbladen"
 
-#: ../Pinta/Actions/Edit/PasteAction.cs:157
+#: ../Pinta/Actions/Edit/PasteAction.cs:163
 msgid "Image cannot be pasted"
 msgstr "De afbeelding kan niet worden geplakt"
 
-#: ../Pinta/Actions/File/OpenDocumentAction.cs:61
-#: ../Pinta.Core/Actions/LayerActions.cs:195
+#: ../Pinta/Actions/File/OpenDocumentAction.cs:60
+#: ../Pinta.Core/Actions/LayerActions.cs:193
 msgid "Image files"
 msgstr "Afbeeldingsbestanden"
 
-#: ../Pinta/Actions/Edit/PasteAction.cs:164
+#: ../Pinta/Actions/Edit/PasteAction.cs:170
 msgid "Image larger than canvas"
 msgstr "De afbeelding is groter dan het canvas"
 
-#: ../Pinta/Actions/File/SaveDocumentImplementationAction.cs:174
+#: ../Pinta/Actions/File/SaveDocumentImplementationAction.cs:183
 msgid "Image too large"
 msgstr "De afbeelding is te groot"
 
-#: ../Pinta.Core/Actions/LayerActions.cs:222
+#: ../Pinta.Core/Actions/LayerActions.cs:220
 msgid "Import From File"
 msgstr "Importeren uit bestand"
 
-#: ../Pinta.Core/Actions/LayerActions.cs:54
+#: ../Pinta.Core/Actions/LayerActions.cs:52
 msgid "Import from File..."
 msgstr "Importeren uit bestand…"
 
-#: ../Pinta.Core/Actions/ViewActions.cs:143
+#: ../Pinta.Core/Actions/ViewActions.cs:148
 msgid "Inches"
 msgstr "Inches"
 
-#: ../Pinta.Effects/Effects/InkSketchEffect.cs:159
+#: ../Pinta.Effects/Effects/InkSketchEffect.cs:155
 msgid "Ink Outline"
 msgstr "Inktomlijning"
 
-#: ../Pinta.Effects/Effects/InkSketchEffect.cs:30
+#: ../Pinta.Effects/Effects/InkSketchEffect.cs:31
 msgid "Ink Sketch"
 msgstr "Inkttekening"
 
-#: ../Pinta.Effects/Dialogs/Effects.LevelsDialog.cs:593
+#: ../Pinta.Effects/Dialogs/Effects.LevelsDialog.cs:153
 msgid "Input"
 msgstr "Invoer"
 
-#: ../Pinta.Effects/Dialogs/Effects.LevelsDialog.cs:577
+#: ../Pinta.Effects/Dialogs/Effects.LevelsDialog.cs:137
 msgid "Input Histogram"
 msgstr "Invoerhistogram"
 
-#: ../Pinta.Gui.Addins/InstallDialog.cs:122
-#: ../Pinta.Gui.Addins/InstallDialog.cs:196
+#: ../Pinta.Gui.Addins/InstallDialog.cs:123
+#: ../Pinta.Gui.Addins/InstallDialog.cs:197
 msgid "Install"
 msgstr "Installeren"
 
-#: ../Pinta.Gui.Addins/AddinManagerDialog.cs:195
+#: ../Pinta.Gui.Addins/AddinManagerDialog.cs:194
 msgid "Install Extension Package"
 msgstr ""
 
-#: ../Pinta.Gui.Addins/AddinManagerDialog.cs:41
+#: ../Pinta.Gui.Addins/AddinManagerDialog.cs:40
 msgid "Install from file..."
 msgstr "Installeren uit bestand…"
 
-#: ../Pinta.Gui.Addins/AddinInfoView.cs:83
+#: ../Pinta.Gui.Addins/AddinInfoView.cs:81
 msgid "Install..."
 msgstr "Installeren…"
 
-#: ../Pinta.Gui.Addins/AddinManagerDialog.cs:61
+#: ../Pinta.Gui.Addins/AddinManagerDialog.cs:60
 msgid "Installed"
 msgstr "Geïnstalleerd"
 
-#: ../Pinta.Effects/Effects/AddNoiseEffect.cs:174
-#: ../Pinta.Effects/Effects/OutlineEffect.cs:142
-#: ../Pinta.Effects/Effects/TileEffect.cs:143
+#: ../Pinta.Effects/Effects/AddNoiseEffect.cs:164
+#: ../Pinta.Effects/Effects/OutlineEffect.cs:138
+#: ../Pinta.Effects/Effects/TileEffect.cs:178
 msgid "Intensity"
 msgstr "Intensiteit"
 
 #. Translators: {0} is 'Alt', or a platform-specific key such as 'Option' on macOS.
-#: ../Pinta.Core/Classes/SelectionModeHandler.cs:54
+#: ../Pinta.Core/Classes/SelectionModeHandler.cs:52
 #, csharp-format
 msgid "Intersect ({0} + Left Click)"
 msgstr "Uitsnijden ({0} + linkermuisknop)"
 
-#: ../Pinta.Effects/Adjustments/InvertColorsEffect.cs:25
-#: ../Pinta.Effects/Effects/MandelbrotFractalEffect.cs:151
+#: ../Pinta.Effects/Adjustments/InvertColorsEffect.cs:24
+#: ../Pinta.Effects/Effects/MandelbrotFractalEffect.cs:171
 msgid "Invert Colors"
 msgstr "Kleuren omkeren"
 
-#: ../Pinta.Core/Actions/EditActions.cs:69
-#: ../Pinta.Core/Actions/EditActions.cs:446
+#: ../Pinta.Core/Actions/EditActions.cs:68
+#: ../Pinta.Core/Actions/EditActions.cs:447
 msgid "Invert Selection"
 msgstr "Selectie omkeren"
 
@@ -898,15 +916,15 @@ msgstr "Selectie omkeren"
 msgid "Italic"
 msgstr "Cursief"
 
-#: ../Pinta/Dialogs/JpegCompressionDialog.cs:39
+#: ../Pinta/Dialogs/JpegCompressionDialog.cs:38
 msgid "JPEG Quality"
 msgstr "JPEG-kwaliteit"
 
-#: ../Pinta.Effects/Effects/JuliaFractalEffect.cs:22
+#: ../Pinta.Effects/Effects/JuliaFractalEffect.cs:23
 msgid "Julia Fractal"
 msgstr "Julia-fractaal"
 
-#: ../Pinta/Dialogs/NewImageDialog.cs:270
+#: ../Pinta/Dialogs/NewImageDialog.cs:176
 msgid "Landscape"
 msgstr "Horizontaal"
 
@@ -914,7 +932,7 @@ msgstr "Horizontaal"
 msgid "Lasso Select"
 msgstr "Lassoselectie"
 
-#: ../Pinta.Tools/Tools/ColorPickerTool.cs:240
+#: ../Pinta.Tools/Tools/ColorPickerTool.cs:241
 msgid "Layer"
 msgstr "Laag"
 
@@ -927,11 +945,11 @@ msgid "Layer Opacity"
 msgstr "Laagdekking"
 
 #: ../Pinta/Actions/Layers/LayerPropertiesAction.cs:113
-#: ../Pinta/Dialogs/LayerPropertiesDialog.cs:53
+#: ../Pinta/Dialogs/LayerPropertiesDialog.cs:51
 msgid "Layer Properties"
 msgstr "Laageigenschappen"
 
-#: ../Pinta.Core/Actions/LayerActions.cs:60
+#: ../Pinta.Core/Actions/LayerActions.cs:58
 msgid "Layer Properties..."
 msgstr "Laageigenschappen…"
 
@@ -953,7 +971,7 @@ msgstr "Lagen"
 msgid "Left Align"
 msgstr "Links uitlijnen"
 
-#: ../Pinta.Tools/Tools/MoveSelectedTool.cs:47
+#: ../Pinta.Tools/Tools/MoveSelectedTool.cs:46
 #, csharp-format
 msgid ""
 "Left click and drag the selection to move selected content.\n"
@@ -963,7 +981,7 @@ msgid ""
 "Use arrow keys to move selected content by a single pixel."
 msgstr ""
 
-#: ../Pinta.Tools/Tools/MoveSelectionTool.cs:46
+#: ../Pinta.Tools/Tools/MoveSelectionTool.cs:45
 #, csharp-format
 msgid ""
 "Left click and drag the selection to move selection outline.\n"
@@ -974,7 +992,7 @@ msgid ""
 msgstr ""
 
 #. Translators: {0} is 'Ctrl', or a platform-specific key such as 'Command' on macOS.
-#: ../Pinta.Tools/Tools/ShapeTool.cs:50
+#: ../Pinta.Tools/Tools/ShapeTool.cs:48
 #, csharp-format
 msgid ""
 "Left click to draw a shape with the primary color.\n"
@@ -993,27 +1011,27 @@ msgid ""
 "Press Enter to finalize the shape."
 msgstr ""
 
-#: ../Pinta.Tools/Tools/PencilTool.cs:51
+#: ../Pinta.Tools/Tools/PencilTool.cs:50
 msgid ""
 "Left click to draw freeform one-pixel wide lines with the primary color.\n"
 "Right click to use the secondary color."
 msgstr ""
 
-#: ../Pinta.Tools/Tools/FreeformShapeTool.cs:55
-#: ../Pinta.Tools/Tools/PaintBrushTool.cs:59
+#: ../Pinta.Tools/Tools/FreeformShapeTool.cs:54
+#: ../Pinta.Tools/Tools/PaintBrushTool.cs:58
 msgid ""
 "Left click to draw with primary color, right click to draw with secondary "
 "color."
 msgstr "Linkermuisknop: primaire kleur - Rechtermuisknop: secundaire kleur."
 
-#: ../Pinta.Tools/Tools/EraserTool.cs:57
+#: ../Pinta.Tools/Tools/EraserTool.cs:56
 msgid ""
 "Left click to erase to transparent, right click to erase to secondary color. "
 msgstr ""
 "Linkermuisknop: verwijderen en doorzichtig maken - Rechtermuisknop: "
 "verwijderen en secundaire kleur gebruiken. "
 
-#: ../Pinta.Tools/Tools/PaintBucketTool.cs:46
+#: ../Pinta.Tools/Tools/PaintBucketTool.cs:45
 msgid ""
 "Left click to fill a region with the primary color, right click to fill with "
 "the secondary color."
@@ -1021,7 +1039,7 @@ msgstr ""
 "Linkermuisknop: vullen met primaire kleur - Rechtermuisknop: vullen met "
 "secundaire kleur."
 
-#: ../Pinta.Tools/Tools/TextTool.cs:92
+#: ../Pinta.Tools/Tools/TextTool.cs:88
 msgid ""
 "Left click to place cursor, then type desired text. Text color is primary "
 "color."
@@ -1029,13 +1047,13 @@ msgstr ""
 "Klik om de cursor te plaatsen en tekst te typen. De tekstkleur is de "
 "primaire kleur."
 
-#: ../Pinta.Tools/Tools/RecolorTool.cs:60
+#: ../Pinta.Tools/Tools/RecolorTool.cs:59
 msgid ""
 "Left click to replace the secondary color with the primary color.\n"
 "Right click to reverse."
 msgstr ""
 
-#: ../Pinta.Tools/Tools/ColorPickerTool.cs:54
+#: ../Pinta.Tools/Tools/ColorPickerTool.cs:53
 msgid ""
 "Left click to set primary color.\n"
 "Right click to set secondary color."
@@ -1055,140 +1073,149 @@ msgstr ""
 "Linkermuisknop: kies de primaire kleur - Rechtermuisknop: kies de secundaire "
 "kleur - Middelste muisknop/muiswiel: kies een kleur van het palet."
 
-#: ../Pinta.Tools/Tools/ZoomTool.cs:59
+#: ../Pinta.Tools/Tools/ZoomTool.cs:58
 msgid ""
 "Left click to zoom in.\n"
 "Right click to zoom out.\n"
 "Click and drag to zoom in selection."
 msgstr ""
 
-#: ../Pinta.Tools/Editable/EditEngines/ArrowedEditEngine.cs:323
+#: ../Pinta.Tools/Editable/EditEngines/ArrowedEditEngine.cs:318
 msgid "Length"
 msgstr "Lengte"
 
-#: ../Pinta.Effects/Adjustments/LevelsEffect.cs:23
+#: ../Pinta.Effects/Adjustments/LevelsEffect.cs:22
 msgid "Levels"
 msgstr "Niveaus"
 
-#: ../Pinta.Effects/Dialogs/Effects.LevelsDialog.cs:74
+#: ../Pinta.Effects/Dialogs/Effects.LevelsDialog.cs:73
 msgid "Levels Adjustment"
 msgstr "Niveaus aanpassen"
 
-#: ../Pinta/Actions/Help/AboutDialogAction.cs:79
+#: ../Pinta/Actions/Help/AboutDialogAction.cs:77
 msgid "License"
 msgstr "Licentie"
 
-#: ../Pinta.Core/Effects/UserBlendOps.cs:39
+#. Translators: This refers to using a light variant of the color scheme.
+#: ../Pinta.Core/Actions/ViewActions.cs:185
+msgid "Light"
+msgstr ""
+
+#: ../Pinta.Core/Effects/UserBlendOps.cs:37
 msgid "Lighten"
 msgstr "Lichter maken"
 
-#: ../Pinta.Effects/Effects/SoftenPortraitEffect.cs:119
+#: ../Pinta.Effects/Effects/SoftenPortraitEffect.cs:113
 msgid "Lighting"
 msgstr "Belichting"
 
-#: ../Pinta.Effects/Adjustments/HueSaturationEffect.cs:73
+#: ../Pinta.Effects/Adjustments/HueSaturationEffect.cs:68
 msgid "Lightness"
 msgstr "Helderheid"
 
-#: ../Pinta.Tools/Tools/LineCurveTool.cs:39
+#: ../Pinta.Tools/Tools/LineCurveTool.cs:38
 msgid "Line/Curve"
 msgstr "Lijn/Curve"
 
-#: ../Pinta.Tools/Tools/GradientTool.cs:184
+#: ../Pinta.Tools/Tools/GradientTool.cs:186
 msgid "Linear Diamond Gradient"
 msgstr "Lineair diamantverloop"
 
-#: ../Pinta.Tools/Tools/GradientTool.cs:182
+#: ../Pinta.Tools/Tools/GradientTool.cs:184
 msgid "Linear Gradient"
 msgstr "Lineair verloop"
 
-#: ../Pinta.Tools/Tools/GradientTool.cs:183
+#: ../Pinta.Tools/Tools/GradientTool.cs:185
 msgid "Linear Reflected Gradient"
 msgstr "Lineair gereflecteerd verloop"
 
-#: ../Pinta.Effects/Dialogs/Effects.PosterizeDialog.cs:129
+#: ../Pinta.Effects/Dialogs/Effects.PosterizeDialog.cs:82
 msgid "Linked"
 msgstr "Gekoppeld"
 
-#: ../Pinta.Core/Effects/UserBlendOps.cs:46
-#: ../Pinta.Effects/Dialogs/Effects.CurvesDialog.cs:444
+#: ../Pinta.Core/Effects/UserBlendOps.cs:44
+#: ../Pinta.Effects/Dialogs/Effects.CurvesDialog.cs:106
 msgid "Luminosity"
 msgstr "Helderheid"
 
-#: ../Pinta.Tools/Tools/MagicWandTool.cs:48
+#: ../Pinta.Tools/Tools/MagicWandTool.cs:47
 msgid "Magic Wand Select"
 msgstr "Toverstafselectie"
 
-#: ../Pinta/Dialogs/ResizeCanvasDialog.cs:322
-#: ../Pinta/Dialogs/ResizeImageDialog.cs:158
+#: ../Pinta/Dialogs/ResizeCanvasDialog.cs:76
+#: ../Pinta/Dialogs/ResizeImageDialog.cs:66
 msgid "Maintain aspect ratio"
 msgstr "Verhouding onthouden"
 
-#: ../Pinta.Effects/Effects/MandelbrotFractalEffect.cs:22
+#: ../Pinta.Effects/Effects/MandelbrotFractalEffect.cs:23
 msgid "Mandelbrot Fractal"
 msgstr "Mandelbrot-fractaal"
 
-#: ../Pinta.Effects/Effects/MedianEffect.cs:25
+#: ../Pinta.Effects/Effects/MedianEffect.cs:26
 msgid "Median"
 msgstr "Mediaan"
 
-#: ../Pinta.Core/Actions/LayerActions.cs:53
-#: ../Pinta.Core/Actions/LayerActions.cs:283
+#: ../Pinta.Core/Actions/LayerActions.cs:51
+#: ../Pinta.Core/Actions/LayerActions.cs:281
 msgid "Merge Layer Down"
 msgstr "Laag naar beneden samenvoegen"
 
-#: ../Pinta.Tools/Tools/GradientTool.cs:195
+#: ../Pinta.Tools/Tools/GradientTool.cs:197
 msgid "Mode"
 msgstr "Modus"
 
-#: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:850
+#: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:887
 msgid "Modified"
 msgstr "Bewerkt"
 
-#: ../Pinta.Gui.Addins/AddinInfoView.cs:79
+#: ../Pinta.Gui.Addins/AddinInfoView.cs:77
 msgid "More Information..."
 msgstr ""
 
-#: ../Pinta.Effects/Effects/MotionBlurEffect.cs:22
+#: ../Pinta.Effects/Effects/MotionBlurEffect.cs:23
 msgid "Motion Blur"
 msgstr "Bewegingsvervaging"
 
-#: ../Pinta.Core/Actions/LayerActions.cs:59
-#: ../Pinta.Core/Actions/LayerActions.cs:269
+#: ../Pinta.Core/Actions/LayerActions.cs:57
+#: ../Pinta.Core/Actions/LayerActions.cs:267
 msgid "Move Layer Down"
 msgstr "Laag omlaag verplaatsen"
 
-#: ../Pinta.Core/Actions/LayerActions.cs:58
-#: ../Pinta.Core/Actions/LayerActions.cs:258
+#: ../Pinta.Core/Actions/LayerActions.cs:56
+#: ../Pinta.Core/Actions/LayerActions.cs:256
 msgid "Move Layer Up"
 msgstr "Laag omhoog verplaatsen"
 
-#: ../Pinta.Tools/Tools/MoveSelectedTool.cs:43
+#: ../Pinta.Tools/Tools/MoveSelectedTool.cs:42
 msgid "Move Selected Pixels"
 msgstr "Geselecteerde pixels verplaatsen"
 
-#: ../Pinta.Tools/Tools/MoveSelectionTool.cs:42
+#: ../Pinta.Tools/Tools/MoveSelectionTool.cs:41
 msgid "Move Selection"
 msgstr "Selectie verplaatsen"
 
-#: ../Pinta.Core/Effects/UserBlendOps.cs:34
+#: ../Pinta.Core/Effects/UserBlendOps.cs:32
 msgid "Multiply"
 msgstr "Vermenigvuldigen"
 
-#: ../Pinta/Dialogs/LayerPropertiesDialog.cs:192
+#: ../Pinta/Dialogs/LayerPropertiesDialog.cs:72
 msgid "Name:"
 msgstr "Naam:"
 
-#: ../Pinta.Core/Actions/FileActions.cs:59
+#: ../Pinta.Core/Enumerations/ResamplingMode.cs:23
+msgid "Nearest Neighbor"
+msgstr ""
+
+#: ../Pinta.Core/Actions/FileActions.cs:55
 msgid "New"
 msgstr "Nieuw"
 
-#: ../Pinta/Dialogs/NewImageDialog.cs:68
-#: ../Pinta.Core/Managers/WorkspaceManager.cs:185
+#: ../Pinta/Dialogs/NewImageDialog.cs:67
+#: ../Pinta.Core/Managers/WorkspaceManager.cs:184
 msgid "New Image"
 msgstr "Nieuwe afbeelding"
 
-#: ../Pinta.Core/Actions/FileActions.cs:51
+#: ../Pinta.Core/Actions/FileActions.cs:47
 msgid "New Screenshot..."
 msgstr "Nieuwe schermfoto…"
 
@@ -1196,7 +1223,7 @@ msgstr "Nieuwe schermfoto…"
 msgid "New palette size:"
 msgstr "Nieuw paletgrootte:"
 
-#: ../Pinta.Core/Actions/FileActions.cs:50
+#: ../Pinta.Core/Actions/FileActions.cs:46
 msgid "New..."
 msgstr "Nieuw…"
 
@@ -1204,101 +1231,97 @@ msgstr "Nieuw…"
 msgid "No Items Found"
 msgstr ""
 
-#: ../Pinta.Effects/Effects/AddNoiseEffect.cs:35
-#: ../Pinta.Effects/Effects/MedianEffect.cs:33
-#: ../Pinta.Effects/Effects/ReduceNoiseEffect.cs:33
+#: ../Pinta.Effects/Effects/AddNoiseEffect.cs:28
+#: ../Pinta.Effects/Effects/MedianEffect.cs:30
+#: ../Pinta.Effects/Effects/ReduceNoiseEffect.cs:30
 msgid "Noise"
 msgstr "Ruis"
 
-#: ../Pinta.Core/Effects/UserBlendOps.cs:33
-#: ../Pinta.Tools/Brushes/PlainBrush.cs:37
-#: ../Pinta.Tools/Tools/EraserTool.cs:262 ../Pinta.Tools/Tools/TextTool.cs:245
+#: ../Pinta.Core/Effects/UserBlendOps.cs:31
+#: ../Pinta.Tools/Brushes/PlainBrush.cs:35
+#: ../Pinta.Tools/Tools/EraserTool.cs:260 ../Pinta.Tools/Tools/TextTool.cs:246
 msgid "Normal"
 msgstr "Standaard"
 
-#: ../Pinta.Core/Classes/BaseTool.cs:336
+#: ../Pinta.Core/Classes/BaseTool.cs:335
 msgid "Normal Blending"
 msgstr "Standaardmenging"
 
-#: ../Pinta.Core/Actions/ViewActions.cs:69
+#: ../Pinta.Core/Actions/ViewActions.cs:71
 msgid "Normal Size"
 msgstr "Standaardgrootte"
 
-#: ../Pinta.Tools/Tools/TextTool.cs:246
+#: ../Pinta.Tools/Tools/TextTool.cs:247
 msgid "Normal and Outline"
 msgstr "Standaard en omlijnen"
 
-#: ../Pinta.Effects/Effects/BulgeEffect.cs:98
-#: ../Pinta.Effects/Effects/RadialBlurEffect.cs:160
-#: ../Pinta.Effects/Effects/ZoomBlurEffect.cs:131
+#: ../Pinta/Main.cs:55
+msgid "Number of threads to use for rendering"
+msgstr ""
+
+#: ../Pinta.Effects/Effects/BulgeEffect.cs:92
+#: ../Pinta.Effects/Effects/RadialBlurEffect.cs:149
+#: ../Pinta.Effects/Effects/ZoomBlurEffect.cs:127
 msgid "Offset"
 msgstr "Verschuiven"
 
-#: ../Pinta.Effects/Effects/OilPaintingEffect.cs:22
+#: ../Pinta.Effects/Effects/OilPaintingEffect.cs:23
 msgid "Oil Painting"
 msgstr "Olieverfschilderij"
 
-#: ../Pinta/Dialogs/LayerPropertiesDialog.cs:220
+#: ../Pinta/Dialogs/LayerPropertiesDialog.cs:101
 msgid "Opacity:"
 msgstr "Dekking:"
 
-#: ../Pinta/Actions/File/OpenDocumentAction.cs:54
-#: ../Pinta.Core/Actions/EditActions.cs:351
-#: ../Pinta.Core/Actions/FileActions.cs:60
-#: ../Pinta.Core/Actions/LayerActions.cs:168
-#: ../Pinta.Gui.Addins/AddinManagerDialog.cs:198
+#: ../Pinta/Actions/File/OpenDocumentAction.cs:53
+#: ../Pinta.Core/Actions/EditActions.cs:350
+#: ../Pinta.Core/Actions/FileActions.cs:56
+#: ../Pinta.Core/Actions/LayerActions.cs:166
+#: ../Pinta.Gui.Addins/AddinManagerDialog.cs:197
 msgid "Open"
 msgstr "Openen"
 
-#: ../Pinta.Tools/Editable/EditEngines/LineCurveEditEngine.cs:40
+#: ../Pinta.Tools/Editable/EditEngines/LineCurveEditEngine.cs:34
 msgid "Open Curve Shape"
 msgstr "Open curvevorm"
 
-#: ../Pinta.Core/Managers/WorkspaceManager.cs:251
+#: ../Pinta.Core/Managers/WorkspaceManager.cs:249
 msgid "Open Image"
 msgstr "Afbeelding openen"
 
-#: ../Pinta/Actions/File/OpenDocumentAction.cs:51
-#: ../Pinta.Core/Actions/LayerActions.cs:165
+#: ../Pinta/Actions/File/OpenDocumentAction.cs:50
+#: ../Pinta.Core/Actions/LayerActions.cs:163
 msgid "Open Image File"
 msgstr "Afbeeldingsbestand openen"
 
-#: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:321
+#: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:324
 msgid "Open Line/Curve Series"
 msgstr "Open lijn/curveserie"
 
-#: ../Pinta.Core/Actions/EditActions.cs:348
+#: ../Pinta.Core/Actions/EditActions.cs:347
 msgid "Open Palette File"
 msgstr "Paletbestand openen"
 
-#: ../Pinta.Core/Actions/EditActions.cs:73
-#: ../Pinta.Core/Actions/FileActions.cs:52
+#: ../Pinta.Core/Actions/EditActions.cs:72
+#: ../Pinta.Core/Actions/FileActions.cs:48
 msgid "Open..."
 msgstr "Openen…"
 
-#: ../Pinta/Options.cs:492
-msgid "OptionName"
-msgstr "Optienaam"
-
-#: ../Pinta/Main.cs:134
-msgid "Options: "
-msgstr "Opties: "
-
-#: ../Pinta/Dialogs/NewImageDialog.cs:254
+#: ../Pinta/Dialogs/NewImageDialog.cs:160
 msgid "Orientation:"
 msgstr "Oriëntatie:"
 
-#: ../Pinta.Effects/Effects/WarpEffect.cs:31
+#: ../Pinta.Effects/Effects/WarpEffect.cs:38
 msgid "Original"
 msgstr "Origineel"
 
-#: ../Pinta.Effects/Effects/OutlineEffect.cs:25
-#: ../Pinta.Tools/Tools/TextTool.cs:247
+#: ../Pinta.Effects/Effects/OutlineEffect.cs:26
+#: ../Pinta.Tools/Tools/TextTool.cs:248
 msgid "Outline"
 msgstr "Omlijnen"
 
-#: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:298
-#: ../Pinta.Tools/Tools/FreeformShapeTool.cs:223
+#: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:300
+#: ../Pinta.Tools/Tools/FreeformShapeTool.cs:222
 msgid "Outline Shape"
 msgstr "Contourvorm"
 
@@ -1306,59 +1329,59 @@ msgstr "Contourvorm"
 msgid "Outline width"
 msgstr "Contourdikte"
 
-#: ../Pinta.Effects/Dialogs/Effects.LevelsDialog.cs:609
+#: ../Pinta.Effects/Dialogs/Effects.LevelsDialog.cs:169
 msgid "Output"
 msgstr "Uitvoer"
 
-#: ../Pinta.Effects/Dialogs/Effects.LevelsDialog.cs:611
+#: ../Pinta.Effects/Dialogs/Effects.LevelsDialog.cs:171
 msgid "Output Histogram"
 msgstr "Uitvoerhistogram"
 
-#: ../Pinta.Core/Effects/UserBlendOps.cs:37
+#: ../Pinta.Core/Effects/UserBlendOps.cs:35
 msgid "Overlay"
 msgstr "Bovenop"
 
-#: ../Pinta.Core/Classes/BaseTool.cs:337
+#: ../Pinta.Core/Classes/BaseTool.cs:336
 msgid "Overwrite"
 msgstr "Overschrijven"
 
-#: ../Pinta.Tools/Tools/PaintBucketTool.cs:44
+#: ../Pinta.Tools/Tools/PaintBucketTool.cs:43
 msgid "Paint Bucket"
 msgstr "Opvullen"
 
-#: ../Pinta.Tools/Tools/PaintBrushTool.cs:57
+#: ../Pinta.Tools/Tools/PaintBrushTool.cs:56
 msgid "Paintbrush"
 msgstr "Penseel"
 
-#: ../Pinta.Core/Actions/EditActions.cs:137
+#: ../Pinta.Core/Actions/EditActions.cs:136
 msgid "Palette"
 msgstr "Palet"
 
-#: ../Pinta.Core/Actions/EditActions.cs:355
+#: ../Pinta.Core/Actions/EditActions.cs:354
 msgid "Palette files"
 msgstr "Paletbestanden"
 
-#: ../Pinta/Actions/Layers/RotateZoomLayerAction.cs:119
-#: ../Pinta.Tools/Tools/PanTool.cs:42
+#: ../Pinta/Actions/Layers/RotateZoomLayerAction.cs:118
+#: ../Pinta.Tools/Tools/PanTool.cs:38
 msgid "Pan"
 msgstr "Verschuiven"
 
-#: ../Pinta/Actions/Edit/PasteAction.cs:79
-#: ../Pinta.Core/Actions/EditActions.cs:64
-#: ../Pinta.Core/HistoryItems/PasteHistoryItem.cs:42
+#: ../Pinta/Actions/Edit/PasteAction.cs:83
+#: ../Pinta.Core/Actions/EditActions.cs:63
+#: ../Pinta.Core/HistoryItems/PasteHistoryItem.cs:38
 msgid "Paste"
 msgstr "Plakken"
 
-#: ../Pinta.Core/Actions/EditActions.cs:66
+#: ../Pinta.Core/Actions/EditActions.cs:65
 msgid "Paste Into New Image"
 msgstr "Plakken als nieuwe afbeelding"
 
-#: ../Pinta/Actions/Edit/PasteAction.cs:79
-#: ../Pinta.Core/Actions/EditActions.cs:65
+#: ../Pinta/Actions/Edit/PasteAction.cs:83
+#: ../Pinta.Core/Actions/EditActions.cs:64
 msgid "Paste Into New Layer"
 msgstr "Plakken op nieuwe laag"
 
-#: ../Pinta.Tools/Tools/PencilTool.cs:48
+#: ../Pinta.Tools/Tools/PencilTool.cs:47
 msgid "Pencil"
 msgstr "Potlood"
 
@@ -1366,23 +1389,23 @@ msgstr "Potlood"
 msgid "Pencil Sketch"
 msgstr "Potloodtekening"
 
-#: ../Pinta.Effects/Effects/PencilSketchEffect.cs:92
+#: ../Pinta.Effects/Effects/PencilSketchEffect.cs:87
 msgid "Pencil Tip Size"
 msgstr "Potloodpuntgrootte"
 
-#: ../Pinta.Effects/Effects/MedianEffect.cs:70
+#: ../Pinta.Effects/Effects/MedianEffect.cs:66
 msgid "Percentile"
 msgstr "Percentiel"
 
-#: ../Pinta.Effects/Effects/GlowEffect.cs:35
-#: ../Pinta.Effects/Effects/RedEyeRemoveEffect.cs:32
-#: ../Pinta.Effects/Effects/SharpenEffect.cs:30
-#: ../Pinta.Effects/Effects/SoftenPortraitEffect.cs:63
+#: ../Pinta.Effects/Effects/GlowEffect.cs:29
+#: ../Pinta.Effects/Effects/RedEyeRemoveEffect.cs:27
+#: ../Pinta.Effects/Effects/SharpenEffect.cs:27
+#: ../Pinta.Effects/Effects/SoftenPortraitEffect.cs:58
 msgid "Photo"
 msgstr "Foto"
 
-#: ../xdg/pinta.desktop.in.h:1 ../Pinta/Actions/Help/AboutDialogAction.cs:55
-#: ../Pinta/MainWindow.cs:62
+#: ../xdg/pinta.desktop.in.h:1 ../Pinta/Actions/Help/AboutDialogAction.cs:53
+#: ../Pinta/Main.cs:64 ../Pinta/MainWindow.cs:58
 msgid "Pinta"
 msgstr "Pinta"
 
@@ -1398,11 +1421,11 @@ msgstr "Pinta-gemeenschapsuitbreidingen (platform-specifiek)"
 msgid "Pinta Image Editor"
 msgstr "Pinta-afbeeldingsbewerker"
 
-#: ../Pinta.Core/Actions/HelpActions.cs:45
+#: ../Pinta.Core/Actions/HelpActions.cs:41
 msgid "Pinta Website"
 msgstr "Pinta-website"
 
-#: ../Pinta/Actions/File/SaveDocumentImplementationAction.cs:162
+#: ../Pinta/Actions/File/SaveDocumentImplementationAction.cs:171
 msgid "Pinta does not support saving images in this file format."
 msgstr ""
 "Pinta heeft geen ondersteuning voor het opslaan in dit bestandsformaat."
@@ -1422,45 +1445,45 @@ msgstr ""
 "afbeeldingseffecten en de mogelijkheid om te werken met een onbeperkt aantal "
 "lagen."
 
-#: ../Pinta.Core/Managers/WorkspaceManager.cs:392
+#: ../Pinta.Core/Managers/WorkspaceManager.cs:386
 msgid "Pinta supports the following file formats:"
 msgstr "Pinta ondersteunt de volgende bestandsformaten:"
 
-#: ../Pinta.Core/Classes/Palette.cs:197
+#: ../Pinta.Core/Classes/Palette.cs:193
 msgid "Pinta supports the following palette formats:"
 msgstr "Pinta ondersteunt de volgende paletformaten:"
 
-#: ../Pinta.Core/Actions/ViewActions.cs:72
+#: ../Pinta.Core/Actions/ViewActions.cs:74
 msgid "Pixel Grid"
 msgstr "Pixelrooster"
 
-#: ../Pinta.Effects/Effects/PixelateEffect.cs:22
+#: ../Pinta.Effects/Effects/PixelateEffect.cs:23
 msgid "Pixelate"
 msgstr "Pixelvorming"
 
-#: ../Pinta.Core/Actions/ViewActions.cs:142
+#: ../Pinta.Core/Actions/ViewActions.cs:147
 msgid "Pixels"
 msgstr "Pixels"
 
-#: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:521
-#: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:742
+#: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:592
+#: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:780
 msgid "Point Added"
 msgstr "Punt toegevoegd"
 
-#: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:466
+#: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:639
 msgid "Point Deleted"
 msgstr "Punt verwijderd"
 
-#: ../Pinta.Effects/Effects/PolarInversionEffect.cs:22
+#: ../Pinta.Effects/Effects/PolarInversionEffect.cs:21
 msgid "Polar Inversion"
 msgstr "Polaire inversie"
 
-#: ../Pinta/Dialogs/NewImageDialog.cs:258
+#: ../Pinta/Dialogs/NewImageDialog.cs:164
 msgid "Portrait"
 msgstr "Verticaal"
 
-#: ../Pinta.Effects/Adjustments/PosterizeEffect.cs:25
-#: ../Pinta.Effects/Dialogs/Effects.PosterizeDialog.cs:58
+#: ../Pinta.Effects/Adjustments/PosterizeEffect.cs:24
+#: ../Pinta.Effects/Dialogs/Effects.PosterizeDialog.cs:51
 msgid "Posterize"
 msgstr "Postereffect"
 
@@ -1468,38 +1491,38 @@ msgstr "Postereffect"
 msgid "Power"
 msgstr "Kracht"
 
-#: ../Pinta/Dialogs/NewImageDialog.cs:197
+#: ../Pinta/Dialogs/NewImageDialog.cs:101
 msgid "Preset:"
 msgstr "Voorinstelling:"
 
-#: ../Pinta/Dialogs/NewImageDialog.cs:350
+#: ../Pinta/Dialogs/NewImageDialog.cs:257
 msgid "Preview"
 msgstr "Voorvertoning"
 
-#: ../Pinta.Effects/Effects/WarpEffect.cs:25
+#: ../Pinta.Effects/Effects/WarpEffect.cs:29
 msgid "Primary"
 msgstr "Primair"
 
-#: ../Pinta.Core/Actions/FileActions.cs:57
+#: ../Pinta.Core/Actions/FileActions.cs:53
 msgid "Print"
 msgstr "Afdrukken"
 
-#: ../Pinta.Effects/Effects/JuliaFractalEffect.cs:129
-#: ../Pinta.Effects/Effects/MandelbrotFractalEffect.cs:141
-#: ../Pinta.Effects/Effects/RadialBlurEffect.cs:163
-#: ../Pinta.Effects/Effects/WarpEffect.cs:192
+#: ../Pinta.Effects/Effects/JuliaFractalEffect.cs:144
+#: ../Pinta.Effects/Effects/MandelbrotFractalEffect.cs:161
+#: ../Pinta.Effects/Effects/RadialBlurEffect.cs:152
+#: ../Pinta.Effects/Effects/WarpEffect.cs:186
 msgid "Quality"
 msgstr "Kwaliteit"
 
-#: ../Pinta/Dialogs/JpegCompressionDialog.cs:49
+#: ../Pinta/Dialogs/JpegCompressionDialog.cs:48
 msgid "Quality: "
 msgstr "Kwaliteit: "
 
-#: ../Pinta.Core/Actions/AppActions.cs:45
+#: ../Pinta.Core/Actions/AppActions.cs:41
 msgid "Quit"
 msgstr "Afsluiten"
 
-#: ../Pinta.Effects/Dialogs/Effects.CurvesDialog.cs:443
+#: ../Pinta.Effects/Dialogs/Effects.CurvesDialog.cs:105
 msgid "RGB"
 msgstr "RGB"
 
@@ -1507,69 +1530,71 @@ msgstr "RGB"
 msgid "Radial Blur"
 msgstr "Radiale vervaging"
 
-#: ../Pinta.Tools/Tools/GradientTool.cs:185
+#: ../Pinta.Tools/Tools/GradientTool.cs:187
 msgid "Radial Gradient"
 msgstr "Radiaal verloop"
 
-#: ../Pinta.Effects/Effects/GaussianBlurEffect.cs:242
-#: ../Pinta.Effects/Effects/GlowEffect.cs:81
-#: ../Pinta.Effects/Effects/MedianEffect.cs:67
-#: ../Pinta.Effects/Effects/ReduceNoiseEffect.cs:91
-#: ../Pinta.Effects/Effects/UnfocusEffect.cs:95
-#: ../Pinta.Tools/Editable/EditEngines/RoundedLineEditEngine.cs:99
+#: ../Pinta.Effects/Effects/GaussianBlurEffect.cs:245
+#: ../Pinta.Effects/Effects/GlowEffect.cs:74
+#: ../Pinta.Effects/Effects/MedianEffect.cs:63
+#: ../Pinta.Effects/Effects/ReduceNoiseEffect.cs:87
+#: ../Pinta.Effects/Effects/UnfocusEffect.cs:91
+#: ../Pinta.Tools/Editable/EditEngines/RoundedLineEditEngine.cs:88
 msgid "Radius"
 msgstr "Straal"
 
-#: ../Pinta.Gui.Widgets/Widgets/ReseedButtonWidget.cs:53
+#: ../Pinta.Effects/Effects/AddNoiseEffect.cs:173
+#: ../Pinta.Effects/Effects/CloudsEffect.cs:222
+#: ../Pinta.Effects/Effects/FrostedGlassEffect.cs:153
 msgid "Random Noise"
 msgstr "Willekeurige ruis"
 
-#: ../Pinta.Tools/Tools/RecolorTool.cs:57
+#: ../Pinta.Tools/Tools/RecolorTool.cs:56
 msgid "Recolor"
 msgstr "Verkleuren"
 
-#: ../Pinta.Tools/Tools/RectangleTool.cs:39
+#: ../Pinta.Tools/Tools/RectangleTool.cs:38
 msgid "Rectangle"
 msgstr "Rechthoek"
 
-#: ../Pinta.Tools/Tools/RectangleSelectTool.cs:39
+#: ../Pinta.Tools/Tools/RectangleSelectTool.cs:35
 msgid "Rectangle Select"
 msgstr "Rechthoekselectie"
 
-#: ../Pinta.Effects/Dialogs/Effects.LevelsDialog.cs:523
-#: ../Pinta.Effects/Dialogs/Effects.PosterizeDialog.cs:115
+#: ../Pinta.Effects/Dialogs/Effects.LevelsDialog.cs:83
+#: ../Pinta.Effects/Dialogs/Effects.PosterizeDialog.cs:65
 msgid "Red"
 msgstr "Rood"
 
-#: ../Pinta.Effects/Dialogs/Effects.CurvesDialog.cs:464
+#: ../Pinta.Effects/Dialogs/Effects.CurvesDialog.cs:126
 msgid "Red  "
 msgstr "Rood  "
 
-#: ../Pinta.Effects/Effects/RedEyeRemoveEffect.cs:24
+#: ../Pinta.Effects/Effects/RedEyeRemoveEffect.cs:23
 msgid "Red Eye Removal"
 msgstr "Rode ogen verwijderen"
 
-#: ../Pinta.Core/Actions/EditActions.cs:60
+#: ../Pinta.Core/Actions/EditActions.cs:59
 msgid "Redo"
 msgstr "Opnieuw"
 
-#: ../Pinta.Effects/Effects/ReduceNoiseEffect.cs:25
+#: ../Pinta.Effects/Effects/ReduceNoiseEffect.cs:26
 msgid "Reduce Noise"
 msgstr "Ruis verminderen"
 
-#: ../Pinta.Effects/Effects/WarpEffect.cs:23
+#: ../Pinta.Effects/Effects/WarpEffect.cs:26
 msgid "Reflect"
 msgstr "Reflecteren"
 
-#: ../Pinta.Gui.Addins/AddinManagerDialog.cs:46
+#: ../Pinta.Gui.Addins/AddinManagerDialog.cs:45
 msgid "Refresh"
 msgstr "Herladen"
 
-#: ../Pinta/Actions/Help/AboutDialogAction.cs:80
+#: ../Pinta/Actions/Help/AboutDialogAction.cs:78
 msgid "Released under the MIT X11 License."
 msgstr "Uitgebracht onder de MIT X11-licentie."
 
-#: ../Pinta.Effects/Effects/ReliefEffect.cs:43
+#: ../Pinta.Effects/Effects/ReliefEffect.cs:38
 msgid "Relief"
 msgstr "Reliëf"
 
@@ -1577,39 +1602,43 @@ msgstr "Reliëf"
 msgid "Rename Layer"
 msgstr "Laagnaam wijzigen"
 
-#: ../Pinta.Effects/Effects/CloudsEffect.cs:35
-#: ../Pinta.Effects/Effects/JuliaFractalEffect.cs:30
-#: ../Pinta.Effects/Effects/MandelbrotFractalEffect.cs:30
+#: ../Pinta.Effects/Effects/CloudsEffect.cs:33
+#: ../Pinta.Effects/Effects/JuliaFractalEffect.cs:27
+#: ../Pinta.Effects/Effects/MandelbrotFractalEffect.cs:27
 msgid "Render"
 msgstr "Renderen"
 
-#: ../Pinta.Core/Managers/LivePreviewManager.cs:232
+#: ../Pinta.Core/Managers/LivePreviewManager.cs:190
 msgid "Rendering Effect"
 msgstr "Rendereffect"
 
-#: ../Pinta.Core/Classes/SelectionModeHandler.cs:47
+#: ../Pinta.Core/Classes/SelectionModeHandler.cs:45
 msgid "Replace"
 msgstr "Vervangen"
 
-#: ../Pinta/Dialogs/ErrorDialog.cs:69
+#: ../Pinta/Dialogs/ErrorDialog.cs:67
 msgid "Report Bug..."
 msgstr ""
 
-#: ../Pinta.Gui.Widgets/Widgets/ReseedButtonWidget.cs:63
+#: ../Pinta/Dialogs/ResizeImageDialog.cs:102
+msgid "Resampling:"
+msgstr ""
+
+#: ../Pinta.Gui.Widgets/Widgets/ReseedButtonWidget.cs:55
 msgid "Reseed"
 msgstr "Opnieuw genereren"
 
-#: ../Pinta.Effects/Dialogs/Effects.CurvesDialog.cs:474
-#: ../Pinta.Effects/Dialogs/Effects.LevelsDialog.cs:531
+#: ../Pinta.Effects/Dialogs/Effects.CurvesDialog.cs:136
+#: ../Pinta.Effects/Dialogs/Effects.LevelsDialog.cs:91
 msgid "Reset"
 msgstr "Herstellen"
 
-#: ../Pinta.Core/Actions/EditActions.cs:75
+#: ../Pinta.Core/Actions/EditActions.cs:74
 msgid "Reset to Default"
 msgstr "Standaardwaarden herstellen"
 
-#: ../Pinta/Dialogs/ResizeCanvasDialog.cs:58
-#: ../Pinta.Core/Classes/Document.cs:305
+#: ../Pinta/Dialogs/ResizeCanvasDialog.cs:57
+#: ../Pinta.Core/Classes/Document.cs:304
 msgid "Resize Canvas"
 msgstr "Canvasgrootte aanpassen"
 
@@ -1618,7 +1647,7 @@ msgid "Resize Canvas..."
 msgstr "Canvasgrootte aanpassen…"
 
 #: ../Pinta/Dialogs/ResizeImageDialog.cs:47
-#: ../Pinta.Core/HistoryItems/ResizeHistoryItem.cs:42
+#: ../Pinta.Core/HistoryItems/ResizeHistoryItem.cs:38
 msgid "Resize Image"
 msgstr "Afbeeldingsgrootte aanpassen"
 
@@ -1634,80 +1663,80 @@ msgstr "Paletgrootte aanpassen"
 msgid "Right Align"
 msgstr "Rechts uitlijnen"
 
-#: ../Pinta/Actions/Layers/RotateZoomLayerAction.cs:54
-#: ../Pinta/Actions/Layers/RotateZoomLayerAction.cs:111
+#: ../Pinta/Actions/Layers/RotateZoomLayerAction.cs:53
+#: ../Pinta/Actions/Layers/RotateZoomLayerAction.cs:110
 msgid "Rotate / Zoom Layer"
 msgstr "Laag draaien/zoomen"
 
-#: ../Pinta.Core/Actions/LayerActions.cs:57
+#: ../Pinta.Core/Actions/LayerActions.cs:55
 msgid "Rotate / Zoom Layer..."
 msgstr "Laag draaien/zoomen…"
 
 #: ../Pinta.Core/Actions/ImageActions.cs:55
-#: ../Pinta.Core/HistoryItems/InvertHistoryItem.cs:49
+#: ../Pinta.Core/HistoryItems/InvertHistoryItem.cs:47
 msgid "Rotate 180°"
 msgstr "180° draaien"
 
 #: ../Pinta.Core/Actions/ImageActions.cs:53
-#: ../Pinta.Core/HistoryItems/InvertHistoryItem.cs:61
+#: ../Pinta.Core/HistoryItems/InvertHistoryItem.cs:59
 msgid "Rotate 90° Clockwise"
 msgstr "90° rechtsom draaien"
 
 #: ../Pinta.Core/Actions/ImageActions.cs:54
-#: ../Pinta.Core/HistoryItems/InvertHistoryItem.cs:65
+#: ../Pinta.Core/HistoryItems/InvertHistoryItem.cs:63
 msgid "Rotate 90° Counter-Clockwise"
 msgstr "90° linksom draaien"
 
-#: ../Pinta.Effects/Effects/FragmentEffect.cs:114
-#: ../Pinta.Effects/Effects/TileEffect.cs:139
+#: ../Pinta.Effects/Effects/FragmentEffect.cs:113
+#: ../Pinta.Effects/Effects/TileEffect.cs:172
 msgid "Rotation"
 msgstr "Draaien"
 
-#: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:324
+#: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:327
 msgid "Rounded Line Series"
 msgstr "Ronde lijnserie"
 
-#: ../Pinta.Tools/Editable/EditEngines/RoundedLineEditEngine.cs:40
+#: ../Pinta.Tools/Editable/EditEngines/RoundedLineEditEngine.cs:34
 msgid "Rounded Line Shape"
 msgstr "Afgeronde lijnvorm"
 
-#: ../Pinta.Tools/Tools/RoundedRectangleTool.cs:39
+#: ../Pinta.Tools/Tools/RoundedRectangleTool.cs:38
 msgid "Rounded Rectangle"
 msgstr "Afgeronde rechthoek"
 
-#: ../Pinta.Core/Actions/ViewActions.cs:139
+#: ../Pinta.Core/Actions/ViewActions.cs:144
 msgid "Ruler Units"
 msgstr "Liniaaleenheden"
 
-#: ../Pinta.Core/Actions/ViewActions.cs:75
+#: ../Pinta.Core/Actions/ViewActions.cs:77
 msgid "Rulers"
 msgstr "Linialen"
 
-#: ../Pinta.Tools/Tools/ColorPickerTool.cs:195
+#: ../Pinta.Tools/Tools/ColorPickerTool.cs:196
 msgid "Sampling"
 msgstr "Steekproeven"
 
-#: ../Pinta.Core/Effects/UserBlendOps.cs:48
-#: ../Pinta.Effects/Adjustments/HueSaturationEffect.cs:70
+#: ../Pinta.Core/Effects/UserBlendOps.cs:46
+#: ../Pinta.Effects/Adjustments/HueSaturationEffect.cs:65
 msgid "Saturation"
 msgstr "Verzadiging"
 
-#: ../Pinta.Effects/Effects/RedEyeRemoveEffect.cs:63
+#: ../Pinta.Effects/Effects/RedEyeRemoveEffect.cs:54
 msgid "Saturation Percentage"
 msgstr "Verzadigingspercentrage"
 
 #: ../Pinta/Actions/File/SaveDocumentImplementationAction.cs:73
 #: ../Pinta.Core/Actions/EditActions.cs:391
-#: ../Pinta.Core/Actions/FileActions.cs:55
+#: ../Pinta.Core/Actions/FileActions.cs:51
 msgid "Save"
 msgstr "Opslaan"
 
-#: ../Pinta.Core/Actions/WindowActions.cs:45
+#: ../Pinta.Core/Actions/WindowActions.cs:40
 msgid "Save All"
 msgstr "Alles opslaan"
 
-#: ../Pinta.Core/Actions/EditActions.cs:74
-#: ../Pinta.Core/Actions/FileActions.cs:56
+#: ../Pinta.Core/Actions/EditActions.cs:73
+#: ../Pinta.Core/Actions/FileActions.cs:52
 msgid "Save As..."
 msgstr "Opslaan als…"
 
@@ -1719,7 +1748,7 @@ msgstr "Afbeelding opslaan"
 msgid "Save Palette File"
 msgstr "Paletbestand opslaan"
 
-#: ../Pinta/Actions/File/CloseDocumentAction.cs:58
+#: ../Pinta/Actions/File/CloseDocumentAction.cs:57
 #, csharp-format
 msgid "Save changes to image \"{0}\" before closing?"
 msgstr "Wilt u de aanpassingen aan ‘{0}’ opslaan alvorens af te sluiten?"
@@ -1728,40 +1757,36 @@ msgstr "Wilt u de aanpassingen aan ‘{0}’ opslaan alvorens af te sluiten?"
 msgid "Scale"
 msgstr "Schaal"
 
-#: ../Pinta.Core/Effects/UserBlendOps.cs:41
+#: ../Pinta.Core/Effects/UserBlendOps.cs:39
 msgid "Screen"
 msgstr "Scherm"
 
-#: ../Pinta.Effects/Effects/WarpEffect.cs:27
+#: ../Pinta.Effects/Effects/WarpEffect.cs:32
 msgid "Secondary"
 msgstr "Secundair"
 
-#: ../Pinta.Effects/Effects/CloudsEffect.cs:222
-msgid "Seed"
-msgstr "Genereren"
-
-#: ../Pinta.Core/Actions/EditActions.cs:70
-#: ../Pinta.Core/Actions/EditActions.cs:216
+#: ../Pinta.Core/Actions/EditActions.cs:69
+#: ../Pinta.Core/Actions/EditActions.cs:215
 msgid "Select All"
 msgstr "Alles selecteren"
 
-#: ../Pinta.Effects/Adjustments/SepiaEffect.cs:26
+#: ../Pinta.Effects/Adjustments/SepiaEffect.cs:25
 msgid "Sepia"
 msgstr "Sepia"
 
-#: ../Pinta.Core/Actions/EditActions.cs:76
+#: ../Pinta.Core/Actions/EditActions.cs:75
 msgid "Set Number of Colors"
 msgstr "Aantal kleuren instellen"
 
-#: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:314
+#: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:315
 msgid "Shape Type"
 msgstr "Soort vorm"
 
-#: ../Pinta.Effects/Effects/SharpenEffect.cs:22
+#: ../Pinta.Effects/Effects/SharpenEffect.cs:23
 msgid "Sharpen"
 msgstr "Verscherpen"
 
-#: ../Pinta.Core/Extensions/ToolBoxButton.cs:50
+#: ../Pinta.Core/Extensions/ToolBoxButton.cs:49
 #: ../Pinta.Gui.Widgets/Widgets/StatusBarColorPaletteWidget.cs:261
 msgid "Shortcut key"
 msgstr "Sneltoets"
@@ -1770,158 +1795,154 @@ msgstr "Sneltoets"
 msgid "Show Layer"
 msgstr "Laag tonen"
 
-#: ../Pinta/Main.cs:62
-msgid "Show this message and exit."
-msgstr "Toon dit bericht en sluit af."
-
-#: ../Pinta.Core/Actions/ViewActions.cs:150
+#: ../Pinta.Core/Actions/ViewActions.cs:155
 msgid "Show/Hide"
 msgstr "Tonen/Verbergen"
 
-#: ../Pinta.Tools/Tools/ColorPickerTool.cs:222
+#: ../Pinta.Tools/Tools/ColorPickerTool.cs:223
 msgid "Single Pixel"
 msgstr "Enkele pixel"
 
-#: ../Pinta.Tools/Editable/EditEngines/ArrowedEditEngine.cs:271
+#: ../Pinta.Tools/Editable/EditEngines/ArrowedEditEngine.cs:278
 msgid "Size"
 msgstr "Grootte"
 
-#: ../Pinta.Tools/Tools/EraserTool.cs:262
+#: ../Pinta.Tools/Tools/EraserTool.cs:260
 msgid "Smooth"
 msgstr "Vloeiend"
 
-#: ../Pinta.Core/Effects/UserBlendOps.cs:44
+#: ../Pinta.Core/Effects/UserBlendOps.cs:42
 msgid "Soft Light"
 msgstr "Zacht licht"
 
-#: ../Pinta.Effects/Effects/SoftenPortraitEffect.cs:55
+#: ../Pinta.Effects/Effects/SoftenPortraitEffect.cs:54
 msgid "Soften Portrait"
 msgstr "Portret verzachten"
 
-#: ../Pinta.Effects/Effects/SoftenPortraitEffect.cs:116
+#: ../Pinta.Effects/Effects/SoftenPortraitEffect.cs:110
 msgid "Softness"
 msgstr "Zachtheid"
 
-#: ../Pinta.Tools/Brushes/SplatterBrush.cs:37
+#: ../Pinta.Tools/Brushes/SplatterBrush.cs:36
 msgid "Splatter"
 msgstr "Spetteren"
 
-#: ../Pinta.Tools/Brushes/SquaresBrush.cs:39
+#: ../Pinta.Tools/Brushes/SquaresBrush.cs:35
 msgid "Squares"
 msgstr "Vierkanten"
 
-#: ../Pinta.Core/Actions/ViewActions.cs:73
+#: ../Pinta.Core/Actions/ViewActions.cs:75
 msgid "Status Bar"
 msgstr "Statusbalk"
 
-#: ../Pinta.Effects/Effects/ReduceNoiseEffect.cs:94
+#: ../Pinta.Effects/Effects/ReduceNoiseEffect.cs:90
 msgid "Strength"
 msgstr "Sterkte"
 
-#: ../Pinta.Effects/Effects/EdgeDetectEffect.cs:33
-#: ../Pinta.Effects/Effects/EmbossEffect.cs:30
-#: ../Pinta.Effects/Effects/OutlineEffect.cs:33
-#: ../Pinta.Effects/Effects/ReliefEffect.cs:32
+#: ../Pinta.Effects/Effects/EdgeDetectEffect.cs:27
+#: ../Pinta.Effects/Effects/EmbossEffect.cs:27
+#: ../Pinta.Effects/Effects/OutlineEffect.cs:30
+#: ../Pinta.Effects/Effects/ReliefEffect.cs:29
 msgid "Stylize"
 msgstr "Stileren"
 
-#: ../Pinta.Tools/Tools/ColorPickerTool.cs:205
+#: ../Pinta.Tools/Tools/ColorPickerTool.cs:206
 msgid "Switch to Pencil tool"
 msgstr "Potlood gebruiken"
 
-#: ../Pinta.Tools/Tools/ColorPickerTool.cs:204
+#: ../Pinta.Tools/Tools/ColorPickerTool.cs:205
 msgid "Switch to previous tool"
 msgstr "Vorig gereedschap gebruiken"
 
-#: ../Pinta.Tools/Tools/TextTool.cs:85
+#: ../Pinta.Tools/Tools/TextTool.cs:82
 msgid "Text"
 msgstr "Tekst"
 
-#: ../Pinta.Tools/Tools/TextTool.cs:86
+#: ../Pinta.Tools/Tools/TextTool.cs:83
 msgid "Text - Finalize"
 msgstr "Tekst - Afwerken"
 
-#: ../Pinta.Tools/Tools/TextTool.cs:238
+#: ../Pinta.Tools/Tools/TextTool.cs:237
 msgid "Text Style"
 msgstr "Tekststijl"
 
-#: ../Pinta/Actions/Edit/PasteAction.cs:158
+#: ../Pinta/Actions/Edit/PasteAction.cs:164
 msgid "The clipboard does not contain an image."
 msgstr "Het klembord bevat geen afbeelding."
 
-#: ../Pinta.Gui.Addins/InstallDialog.cs:152
+#: ../Pinta.Gui.Addins/InstallDialog.cs:153
 msgid "The file may be an invalid or corrupt extension package"
 msgstr ""
 
-#: ../Pinta.Gui.Addins/InstallDialog.cs:91
+#: ../Pinta.Gui.Addins/InstallDialog.cs:92
 msgid "The following dependencies could not be resolved:"
 msgstr "De volgende afhankelijkheden kunnen niet worden opgelost:"
 
-#: ../Pinta.Gui.Addins/InstallDialog.cs:82
+#: ../Pinta.Gui.Addins/InstallDialog.cs:83
 msgid "The following packages need to be uninstalled:"
 msgstr "De volgende pakketten dienen te worden verwijderd:"
 
-#: ../Pinta.Gui.Addins/InstallDialog.cs:74
+#: ../Pinta.Gui.Addins/InstallDialog.cs:75
 msgid "The following packages will be installed:"
 msgstr "De volgende pakketten worden geïnstalleerd:"
 
-#: ../Pinta.Gui.Addins/InstallDialog.cs:178
+#: ../Pinta.Gui.Addins/InstallDialog.cs:179
 msgid "The following packages will be uninstalled:"
 msgstr "De volgende pakketten worden verwijderd:"
 
-#: ../Pinta/Actions/Edit/PasteAction.cs:165
+#: ../Pinta/Actions/Edit/PasteAction.cs:171
 msgid ""
 "The image being pasted is larger than the canvas size. What would you like "
 "to do?"
 msgstr "De te plakken afbeelding past niet op het canvas. Wat wilt u doen?"
 
-#: ../Pinta.Gui.Addins/InstallDialog.cs:294
+#: ../Pinta.Gui.Addins/InstallDialog.cs:293
 msgid "The installation failed!"
 msgstr "De installatie is mislukt!"
 
-#: ../Pinta.Gui.Addins/InstallDialog.cs:295
+#: ../Pinta.Gui.Addins/InstallDialog.cs:294
 msgid "The installation has completed with warnings."
 msgstr "De installatie is voltooid, maar met waarschuwingen."
 
-#: ../Pinta.Gui.Addins/InstallDialog.cs:56
+#: ../Pinta.Gui.Addins/InstallDialog.cs:57
 msgid ""
 "The selected extension packages can't be installed because there are "
 "dependency conflicts."
 msgstr ""
 
-#: ../Pinta.Gui.Addins/InstallDialog.cs:304
+#: ../Pinta.Gui.Addins/InstallDialog.cs:303
 msgid "The uninstallation failed!"
 msgstr "Het verwijderen is mislukt!"
 
-#: ../Pinta.Gui.Addins/InstallDialog.cs:305
+#: ../Pinta.Gui.Addins/InstallDialog.cs:304
 msgid "The uninstallation has completed with warnings."
 msgstr "Het verwijderen is voltooid, maar met waarschuwingen."
 
-#: ../Pinta.Gui.Addins/InstallDialog.cs:189
+#: ../Pinta.Gui.Addins/InstallDialog.cs:190
 msgid ""
 "There are other extension packages that depend on the previous ones which "
 "will also be uninstalled:"
 msgstr ""
 
-#: ../Pinta.Effects/Effects/OutlineEffect.cs:139
+#: ../Pinta.Effects/Effects/OutlineEffect.cs:135
 msgid "Thickness"
 msgstr "Dikte"
 
-#: ../Pinta.Effects/Effects/TileEffect.cs:22
+#: ../Pinta.Effects/Effects/TileEffect.cs:23
 msgid "Tile Reflection"
 msgstr "Tegelreflectie"
 
-#: ../Pinta.Effects/Effects/TileEffect.cs:141
+#: ../Pinta.Effects/Effects/TileEffect.cs:175
 msgid "Tile Size"
 msgstr "Tegelgrootte"
 
-#: ../Pinta.Effects/Dialogs/Effects.CurvesDialog.cs:481
+#: ../Pinta.Effects/Dialogs/Effects.CurvesDialog.cs:143
 msgid "Tip: Right-click to remove control points."
 msgstr "Tip: klik met de rechtermuisknop om controlepunten te verwijderen."
 
-#: ../Pinta.Effects/Effects/RedEyeRemoveEffect.cs:59
-#: ../Pinta.Tools/Tools/FloodTool.cs:126
-#: ../Pinta.Tools/Tools/RecolorTool.cs:201
+#: ../Pinta.Effects/Effects/RedEyeRemoveEffect.cs:50
+#: ../Pinta.Tools/Tools/FloodTool.cs:125
+#: ../Pinta.Tools/Tools/RecolorTool.cs:200
 msgid "Tolerance"
 msgstr "Tolerantie"
 
@@ -1929,41 +1950,41 @@ msgstr "Tolerantie"
 msgid "Tool"
 msgstr "Gereedschap"
 
-#: ../Pinta.Core/Actions/ViewActions.cs:74
+#: ../Pinta.Core/Actions/ViewActions.cs:76
 msgid "Tool Box"
 msgstr "Gereedschapskist"
 
-#: ../Pinta/MainWindow.cs:354
+#: ../Pinta/MainWindow.cs:357
 msgid "Tool Windows"
 msgstr "Gereedschapsvensters"
 
-#: ../Pinta.Core/Actions/ViewActions.cs:70
+#: ../Pinta.Core/Actions/ViewActions.cs:72
 msgid "Toolbar"
 msgstr "Werkbalk"
 
-#: ../Pinta.Effects/Dialogs/Effects.CurvesDialog.cs:440
+#: ../Pinta.Effects/Dialogs/Effects.CurvesDialog.cs:102
 msgid "Transfer Map"
 msgstr "Overdrachtskaart"
 
-#: ../Pinta.Core/Actions/HelpActions.cs:47
+#: ../Pinta.Core/Actions/HelpActions.cs:43
 msgid "Translate This Application"
 msgstr "Programma vertalen"
 
-#: ../Pinta.Tools/Tools/GradientTool.cs:202
+#: ../Pinta.Tools/Tools/GradientTool.cs:204
 msgid "Transparency Mode"
 msgstr "Doorzichtigheidsmodus"
 
-#: ../Pinta/Dialogs/NewImageDialog.cs:315
-#: ../Pinta.Effects/Effects/WarpEffect.cs:29
+#: ../Pinta/Dialogs/NewImageDialog.cs:221
+#: ../Pinta.Effects/Effects/WarpEffect.cs:35
 msgid "Transparent"
 msgstr "Doorzichtig"
 
-#: ../Pinta.Effects/Effects/TwistEffect.cs:22
+#: ../Pinta.Effects/Effects/TwistEffect.cs:24
 msgid "Twist"
 msgstr "Spiraal"
 
-#: ../Pinta.Tools/Tools/EraserTool.cs:258
-#: ../Pinta.Tools/Tools/PaintBrushTool.cs:161
+#: ../Pinta.Tools/Tools/EraserTool.cs:256
+#: ../Pinta.Tools/Tools/PaintBrushTool.cs:165
 msgid "Type"
 msgstr "Soort"
 
@@ -1971,55 +1992,51 @@ msgstr "Soort"
 msgid "Underline"
 msgstr "Onderstrepen"
 
-#: ../Pinta.Core/Actions/EditActions.cs:59
+#: ../Pinta.Core/Actions/EditActions.cs:58
 msgid "Undo"
 msgstr "Ongedaan maken"
 
-#: ../Pinta.Effects/Effects/UnfocusEffect.cs:24
+#: ../Pinta.Effects/Effects/UnfocusEffect.cs:25
 msgid "Unfocus"
 msgstr "Ontfocussen"
 
-#: ../Pinta.Gui.Addins/InstallDialog.cs:168
 #: ../Pinta.Gui.Addins/InstallDialog.cs:169
+#: ../Pinta.Gui.Addins/InstallDialog.cs:170
 msgid "Uninstall"
 msgstr "Verwijderen"
 
-#: ../Pinta.Gui.Addins/AddinInfoView.cs:93
+#: ../Pinta.Gui.Addins/AddinInfoView.cs:91
 msgid "Uninstall..."
 msgstr ""
 
 #. Translators: {0} is 'Ctrl', or a platform-specific key such as 'Command' on macOS.
-#: ../Pinta.Core/Classes/SelectionModeHandler.cs:49
+#: ../Pinta.Core/Classes/SelectionModeHandler.cs:47
 #, csharp-format
 msgid "Union (+) ({0} + Left Click)"
 msgstr "Samenvoegen (+) ({0} + linkermuisknop)"
 
-#: ../Pinta.Core/Managers/WorkspaceManager.cs:117
+#: ../Pinta.Core/Managers/WorkspaceManager.cs:116
 #, csharp-format
 msgid "Unsaved Image {0}"
 msgstr "Niet-opgeslagen bestand: ‘{0}’"
 
-#: ../Pinta.Core/Managers/WorkspaceManager.cs:246
+#: ../Pinta.Core/Managers/WorkspaceManager.cs:244
 msgid "Unsupported file format"
 msgstr "Niet-ondersteund bestandstype"
 
-#: ../Pinta.Core/Classes/Palette.cs:184
+#: ../Pinta.Core/Classes/Palette.cs:180
 msgid "Unsupported palette format"
 msgstr ""
 
-#: ../Pinta.Gui.Addins/AddinInfoView.cs:88
+#: ../Pinta.Gui.Addins/AddinInfoView.cs:86
 msgid "Update..."
 msgstr ""
 
-#: ../Pinta.Gui.Addins/AddinManagerDialog.cs:63
+#: ../Pinta.Gui.Addins/AddinManagerDialog.cs:62
 msgid "Updates"
 msgstr "Updates"
 
-#: ../Pinta/Main.cs:132
-msgid "Usage: pinta [files]"
-msgstr "Gebruik: pinta [bestanden]"
-
-#: ../Pinta.Effects/Effects/RadialBlurEffect.cs:164
+#: ../Pinta.Effects/Effects/RadialBlurEffect.cs:153
 msgid ""
 "Use low quality for previews, small images, and small angles.  Use high "
 "quality for final quality, large images, and large angles."
@@ -2027,62 +2044,62 @@ msgstr ""
 "Gebruik lage kwaliteit bij voorvertoningen en kleine afbeeldingen.  Gebruik "
 "hoge kwaliteit voor uiteindelijke versies en grote afbeeldingen."
 
-#: ../Pinta/Actions/Help/AboutDialogAction.cs:87
+#: ../Pinta/Actions/Help/AboutDialogAction.cs:85
 msgid "Using some icons from:"
 msgstr "Met pictogrammen van:"
 
-#: ../Pinta.Gui.Addins/AddinInfoView.cs:130
+#: ../Pinta.Gui.Addins/AddinInfoView.cs:128
 #, csharp-format
 msgid "Version: {0}"
 msgstr ""
 
-#: ../Pinta/Dialogs/LayerPropertiesDialog.cs:202
+#: ../Pinta/Dialogs/LayerPropertiesDialog.cs:83
 msgid "Visible"
 msgstr "Zichtbaar"
 
-#: ../Pinta.Effects/Effects/SoftenPortraitEffect.cs:122
+#: ../Pinta.Effects/Effects/SoftenPortraitEffect.cs:116
 msgid "Warmth"
 msgstr "Warmte"
 
-#: ../Pinta/Dialogs/NewImageDialog.cs:296
+#: ../Pinta/Dialogs/NewImageDialog.cs:202
 msgid "White"
 msgstr "Wit"
 
-#: ../Pinta/Dialogs/NewImageDialog.cs:216
-#: ../Pinta/Dialogs/ResizeCanvasDialog.cs:338
-#: ../Pinta/Dialogs/ResizeImageDialog.cs:174
+#: ../Pinta/Dialogs/NewImageDialog.cs:120
+#: ../Pinta/Dialogs/ResizeCanvasDialog.cs:92
+#: ../Pinta/Dialogs/ResizeImageDialog.cs:88
 msgid "Width:"
 msgstr "Breedte:"
 
-#: ../Pinta.Core/Actions/ViewActions.cs:103
-#: ../Pinta.Core/Actions/ViewActions.cs:286
-#: ../Pinta.Core/Classes/DocumentWorkspace.cs:325
-#: ../Pinta.Core/Classes/DocumentWorkspace.cs:333
+#: ../Pinta.Core/Actions/ViewActions.cs:116
+#: ../Pinta.Core/Actions/ViewActions.cs:304
+#: ../Pinta.Core/Classes/DocumentWorkspace.cs:357
+#: ../Pinta.Core/Classes/DocumentWorkspace.cs:366
 msgid "Window"
 msgstr "Venster"
 
-#: ../Pinta.Effects/Effects/WarpEffect.cs:21
+#: ../Pinta.Effects/Effects/WarpEffect.cs:23
 msgid "Wrap"
 msgstr "Regelafbreking"
 
-#: ../Pinta.Core/Effects/UserBlendOps.cs:42
+#: ../Pinta.Core/Effects/UserBlendOps.cs:40
 msgid "Xor"
 msgstr "Xor"
 
 #. Translators: {0} is 'Ctrl', or a platform-specific key such as 'Command' on macOS.
-#: ../Pinta.Core/Classes/SelectionModeHandler.cs:52
+#: ../Pinta.Core/Classes/SelectionModeHandler.cs:50
 #, csharp-format
 msgid "Xor ({0} + Right Click)"
 msgstr "Xor ({0} + rechtermuisknop)"
 
 #. Translators: {0} is the name of a file that the user does not have permission to open.
-#: ../Pinta.Core/Managers/WorkspaceManager.cs:409
+#: ../Pinta.Core/Managers/WorkspaceManager.cs:403
 #, csharp-format
 msgid "You do not have access to '{0}'."
 msgstr "U heeft geen toegang tot ‘{0}’."
 
 #. Translators: {0} is the name of a file that the user does not have write permission for.
-#: ../Pinta/Actions/File/SaveDocumentImplementationAction.cs:182
+#: ../Pinta/Actions/File/SaveDocumentImplementationAction.cs:191
 #, csharp-format
 msgid ""
 "You do not have access to modify '{0}'. The file or folder may be read-only."
@@ -2090,80 +2107,80 @@ msgstr ""
 "U bent niet bevoegd om ‘{0}’ te bewerken - het bestand/de map is mogelijk "
 "alleen-lezen."
 
-#: ../Pinta/Actions/Layers/RotateZoomLayerAction.cs:122
-#: ../Pinta.Effects/Effects/JuliaFractalEffect.cs:132
-#: ../Pinta.Effects/Effects/MandelbrotFractalEffect.cs:145
-#: ../Pinta.Tools/Tools/ZoomTool.cs:56
+#: ../Pinta/Actions/Layers/RotateZoomLayerAction.cs:121
+#: ../Pinta.Effects/Effects/JuliaFractalEffect.cs:147
+#: ../Pinta.Effects/Effects/MandelbrotFractalEffect.cs:165
+#: ../Pinta.Tools/Tools/ZoomTool.cs:55
 msgid "Zoom"
 msgstr "Zoomen"
 
-#: ../Pinta.Effects/Effects/ZoomBlurEffect.cs:22
+#: ../Pinta.Effects/Effects/ZoomBlurEffect.cs:23
 msgid "Zoom Blur"
 msgstr "Zoomvervaging"
 
-#: ../Pinta.Core/Actions/ViewActions.cs:65
+#: ../Pinta.Core/Actions/ViewActions.cs:67
 msgid "Zoom In"
 msgstr "Inzoomen"
 
-#: ../Pinta.Core/Actions/ViewActions.cs:66
+#: ../Pinta.Core/Actions/ViewActions.cs:68
 msgid "Zoom Out"
 msgstr "Uitzoomen"
 
-#: ../Pinta.Core/Actions/ViewActions.cs:68
+#: ../Pinta.Core/Actions/ViewActions.cs:70
 msgid "Zoom to Selection"
 msgstr "Zoomen tot selectie"
 
-#: ../Pinta/MainWindow.cs:333
+#: ../Pinta/MainWindow.cs:336
 msgid "_Adjustments"
 msgstr "_Aanpassingen"
 
-#: ../Pinta/Actions/Edit/PasteAction.cs:171
-#: ../Pinta/Actions/File/CloseDocumentAction.cs:67
+#: ../Pinta/Actions/Edit/PasteAction.cs:177
+#: ../Pinta/Actions/File/CloseDocumentAction.cs:66
 msgid "_Cancel"
 msgstr ""
 
-#: ../Pinta/Actions/File/CloseDocumentAction.cs:68
+#: ../Pinta/Actions/File/CloseDocumentAction.cs:67
 msgid "_Discard"
 msgstr ""
 
-#: ../Pinta/MainWindow.cs:318
+#: ../Pinta/MainWindow.cs:321
 msgid "_Edit"
 msgstr "B_ewerken"
 
-#: ../Pinta/MainWindow.cs:314
+#: ../Pinta/MainWindow.cs:317
 msgid "_File"
 msgstr "_Bestand"
 
-#: ../Pinta/MainWindow.cs:348
+#: ../Pinta/MainWindow.cs:351
 msgid "_Help"
 msgstr "_Hulp"
 
-#: ../Pinta/MainWindow.cs:326
+#: ../Pinta/MainWindow.cs:329
 msgid "_Image"
 msgstr "Afbeeld_ing"
 
-#: ../Pinta/MainWindow.cs:330
+#: ../Pinta/MainWindow.cs:333
 msgid "_Layers"
 msgstr "_Lagen"
 
-#: ../Pinta/Dialogs/ErrorDialog.cs:43 ../Pinta/Dialogs/ErrorDialog.cs:71
-#: ../Pinta.Gui.Addins/InstallDialog.cs:155
+#: ../Pinta/Dialogs/ErrorDialog.cs:41 ../Pinta/Dialogs/ErrorDialog.cs:69
+#: ../Pinta.Gui.Addins/InstallDialog.cs:156
 msgid "_OK"
 msgstr ""
 
-#: ../Pinta/Actions/File/CloseDocumentAction.cs:69
+#: ../Pinta/Actions/File/CloseDocumentAction.cs:68
 msgid "_Save"
 msgstr ""
 
-#: ../Pinta/MainWindow.cs:322
+#: ../Pinta/MainWindow.cs:325
 msgid "_View"
 msgstr "Beel_d"
 
-#: ../Pinta/MainWindow.cs:344
+#: ../Pinta/MainWindow.cs:347
 msgid "_Window"
 msgstr "_Venster"
 
-#: ../Pinta/Actions/Help/AboutDialogAction.cs:72
+#: ../Pinta/Actions/Help/AboutDialogAction.cs:69
 msgid "by Pinta contributors"
 msgstr "door Pinta-bijdragers"
 
@@ -2171,20 +2188,16 @@ msgstr "door Pinta-bijdragers"
 msgid "draw;drawing;paint;painting;graphics;raster;2d;"
 msgstr "tekenen;tekening;schilderen;schilderij;grafiek;rooster;raster;2d;"
 
-#: ../Pinta/Main.cs:64
-msgid "number of threads to use for rendering"
-msgstr "Aantal te gebruiken processen bij het renderen"
-
-#: ../Pinta/Dialogs/NewImageDialog.cs:224
-#: ../Pinta/Dialogs/NewImageDialog.cs:243
-#: ../Pinta/Dialogs/ResizeCanvasDialog.cs:342
-#: ../Pinta/Dialogs/ResizeCanvasDialog.cs:348
-#: ../Pinta/Dialogs/ResizeImageDialog.cs:178
-#: ../Pinta/Dialogs/ResizeImageDialog.cs:184
+#: ../Pinta/Dialogs/NewImageDialog.cs:129
+#: ../Pinta/Dialogs/NewImageDialog.cs:149
+#: ../Pinta/Dialogs/ResizeCanvasDialog.cs:96
+#: ../Pinta/Dialogs/ResizeCanvasDialog.cs:102
+#: ../Pinta/Dialogs/ResizeImageDialog.cs:92
+#: ../Pinta/Dialogs/ResizeImageDialog.cs:98
 msgid "pixels"
 msgstr "pixels"
 
-#: ../Pinta/Actions/Help/AboutDialogAction.cs:63
+#: ../Pinta/Actions/Help/AboutDialogAction.cs:61
 msgid "translator-credits"
 msgstr ""
 "Launchpad-bijdragen:\n"
@@ -2219,7 +2232,7 @@ msgstr ""
 "  olavl https://launchpad.net/~olavl"
 
 #. Translators: {0} is 'Ctrl', or a platform-specific key such as 'Command' on macOS.
-#: ../Pinta.Tools/Tools/CloneStampTool.cs:47
+#: ../Pinta.Tools/Tools/CloneStampTool.cs:46
 #, csharp-format
 msgid "{0} + left click to set origin, left click to paint."
 msgstr ""
@@ -2233,20 +2246,20 @@ msgstr ""
 msgid "{0} copy"
 msgstr "{0} (kopie)"
 
-#: ../Pinta.Core/ImageFormats/FormatDescriptor.cs:110
+#: ../Pinta.Core/ImageFormats/FormatDescriptor.cs:111
 #, csharp-format
 msgid "{0} image ({1})"
 msgstr "{0}-afbeelding ({1})"
 
 #. Translators: {0} is the palette format (e.g. "GIMP") and {1} is a list of file extensions.
-#: ../Pinta.Core/PaletteFormats/PaletteDescriptor.cs:62
+#: ../Pinta.Core/PaletteFormats/PaletteDescriptor.cs:63
 #, csharp-format
 msgid "{0} palette ({1})"
 msgstr "{0}-palet ({1})"
 
 #. Translators: This specifies the format of the zoom percentage choices
 #. in the toolbar.
-#: ../Pinta.Core/Actions/ViewActions.cs:267
+#: ../Pinta.Core/Actions/ViewActions.cs:285
 #, csharp-format
 msgid "{0}%"
 msgstr "{0}%"
@@ -2269,6 +2282,9 @@ msgstr "{0}%"
 #~ msgid "Version Info"
 #~ msgstr "Versie Info"
 
+#~ msgid "Seed"
+#~ msgstr "Genereren"
+
 #~ msgid "Add-in Manager"
 #~ msgstr "Uitbreidingen beheren"
 
@@ -2290,6 +2306,9 @@ msgstr "{0}%"
 #~ msgstr ""
 #~ "Meerdere selecties:\n"
 #~ "\n"
+
+#~ msgid "Options: "
+#~ msgstr "Opties: "
 
 #~ msgid "Powered by Mono:"
 #~ msgstr "Gerealiseerd door Mono:"
@@ -2468,6 +2487,9 @@ msgstr "{0}%"
 #~ msgid "Disable"
 #~ msgstr "Uitschakelen"
 
+#~ msgid "Display the application version."
+#~ msgstr "Toon de programmaversie."
+
 #~ msgid "Download failed"
 #~ msgstr "Het downloaden is mislukt"
 
@@ -2517,6 +2539,9 @@ msgstr "{0}%"
 #~ msgid "No selection"
 #~ msgstr "Er is geen selectie gemaakt"
 
+#~ msgid "OptionName"
+#~ msgstr "Optienaam"
+
 #~ msgid "Path:"
 #~ msgstr "Bestandslocatie:"
 
@@ -2541,6 +2566,9 @@ msgstr "{0}%"
 
 #~ msgid "Select the location of the repository you want to register:"
 #~ msgstr "Kies de locatie van de toe te voegen pakketbron:"
+
+#~ msgid "Show this message and exit."
+#~ msgstr "Toon dit bericht en sluit af."
 
 #~ msgid "Some of the required add-ins were not found"
 #~ msgstr "Enkele vereiste uitbreidingen zijn niet aangetroffen"
@@ -2596,6 +2624,12 @@ msgstr "{0}%"
 
 #~ msgid "Updating repository"
 #~ msgstr "Bezig met bijwerken van pakketbron…"
+
+#~ msgid "Usage: pinta [files]"
+#~ msgstr "Gebruik: pinta [bestanden]"
+
+#~ msgid "number of threads to use for rendering"
+#~ msgstr "Aantal te gebruiken processen bij het renderen"
 
 #, csharp-format
 #~ msgid "{0} update available"
