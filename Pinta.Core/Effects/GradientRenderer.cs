@@ -145,8 +145,8 @@ public abstract class GradientRenderer
 			for (int y = rect.Top; y <= rect.Bottom; ++y) {
 				var row = src_data.Slice (y * src_width, src_width);
 				for (int x = rect.Left; x <= rect.Right; ++x) {
-					ref ColorBgra pixel = ref row[x];
-					pixel = GetFinalSolidColor (bounds, pixel);
+					ColorBgra originalPixel = row[x];
+					row[x] = GetFinalSolidColor (bounds, originalPixel);
 				}
 			}
 		}
@@ -184,31 +184,30 @@ public abstract class GradientRenderer
 			for (var x = rect.Left; x <= right; ++x) {
 				var lerpByte = ComputeByteLerp (x, y);
 				var lerpAlpha = lerp_alphas[lerpByte];
-				ref ColorBgra pixel = ref row[x];
-				pixel = ColorBgra.FromBgra (
-					b: Utility.FastScaleByteByByte (pixel.B, lerpAlpha),
-					g: Utility.FastScaleByteByByte (pixel.G, lerpAlpha),
-					r: Utility.FastScaleByteByByte (pixel.R, lerpAlpha),
-					a: Utility.FastScaleByteByByte (pixel.A, lerpAlpha)
+				ColorBgra originalPixel = row[x];
+				row[x] = ColorBgra.FromBgra (
+					b: Utility.FastScaleByteByByte (originalPixel.B, lerpAlpha),
+					g: Utility.FastScaleByteByByte (originalPixel.G, lerpAlpha),
+					r: Utility.FastScaleByteByByte (originalPixel.R, lerpAlpha),
+					a: Utility.FastScaleByteByByte (originalPixel.A, lerpAlpha)
 				);
 			}
 		} else if (alpha_only && !alpha_blending) {
 			for (var x = rect.Left; x <= right; ++x) {
 				var lerpByte = ComputeByteLerp (x, y);
 				var lerpAlpha = lerp_alphas[lerpByte];
-				ref ColorBgra pixel = ref row[x];
-
-				var color = pixel.ToStraightAlpha ();
+				ColorBgra original = row[x];
+				var color = original.ToStraightAlpha ();
 				color.A = lerpAlpha;
-				pixel = color.ToPremultipliedAlpha ();
+				row[x] = color.ToPremultipliedAlpha ();
 			}
 		} else if (!alpha_only && (alpha_blending && (startAlpha != 255 || endAlpha != 255))) {
 			// If we're doing all color channels, and we're doing alpha blending, and if alpha blending is necessary
 			for (var x = rect.Left; x <= right; ++x) {
 				var lerpByte = ComputeByteLerp (x, y);
 				var lerpColor = lerp_colors[lerpByte];
-				ref ColorBgra pixel = ref row[x];
-				pixel = normal_blend_op.Apply (pixel, lerpColor);
+				ColorBgra originalPixel = row[x];
+				row[x] = normal_blend_op.Apply (originalPixel, lerpColor);
 			}
 			//if (!this.alphaOnly && !this.alphaBlending) // or sC.A == 255 && eC.A == 255
 		} else {
