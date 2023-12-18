@@ -657,13 +657,13 @@ namespace Pinta.Core
 				if (sx < 0)
 					sx = (srcWidth - 1) + ((sx + 1) % srcWidth);
 				else if (sx > (srcWidth - 1))
-					sx = sx % srcWidth;
+					sx %= srcWidth;
 
 				int sy = iv;
 				if (sy < 0)
 					sy = (srcHeight - 1) + ((sy + 1) % srcHeight);
 				else if (sy > (srcHeight - 1))
-					sy = sy % srcHeight;
+					sy %= srcHeight;
 
 				int sleft = sx;
 				int sright;
@@ -727,9 +727,7 @@ namespace Pinta.Core
 				int dy;
 
 				if (top.Y > bottom.Y) {
-					PointI temp = top;
-					top = bottom;
-					bottom = temp;
+					(bottom, top) = (top, bottom);
 				}
 
 				dy = bottom.Y - top.Y;
@@ -750,9 +748,7 @@ namespace Pinta.Core
 						min = j;
 
 				if (min != i) {
-					Edge temp = edgeTable[min];
-					edgeTable[min] = edgeTable[i];
-					edgeTable[i] = temp;
+					(edgeTable[i], edgeTable[min]) = (edgeTable[min], edgeTable[i]);
 				}
 			}
 
@@ -824,9 +820,7 @@ namespace Pinta.Core
 							min = j;
 
 					if (min != i) {
-						int temp = active[min];
-						active[min] = active[i];
-						active[i] = temp;
+						(active[i], active[min]) = (active[min], active[i]);
 					}
 				}
 

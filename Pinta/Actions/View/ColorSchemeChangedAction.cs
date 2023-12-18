@@ -24,7 +24,7 @@ internal sealed class ColorSchemeChangedAction : IActionHandler
 		Adw.ColorScheme scheme = args.Parameter!.GetInt32 () switch {
 			1 => Adw.ColorScheme.ForceLight,
 			2 => Adw.ColorScheme.ForceDark,
-			_ => Adw.ColorScheme.PreferDark, // Use dark unless the system prefers light
+			_ => Adw.ColorScheme.Default
 		};
 
 		Adw.StyleManager.GetDefault ().SetColorScheme (scheme);
