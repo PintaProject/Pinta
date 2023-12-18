@@ -101,7 +101,11 @@ public sealed class ZoomTool : BaseTool
 
 	private void OnMouseMove_MiddlePressed (Document document, ToolMouseEventArgs e)
 	{
-		PointI delta = (shape_origin - e.PointDouble).Scaled (document.Workspace.Scale).ToInt ();
+		PointI delta =
+			(shape_origin - e.PointDouble)
+			.Scaled (document.Workspace.Scale)
+			.ToInt ();
+
 		document.Workspace.ScrollCanvas (delta);
 	}
 
