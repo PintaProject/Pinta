@@ -480,18 +480,18 @@ namespace Pinta.Core
 		// the passed in argument, but it's nice to have the same calling
 		// convention as the uncached version.  If you can use this one
 		// over the other, it is much faster in tight loops (like effects).
-		public static ref readonly ColorBgra GetColorBgra (this ImageSurface surf, ReadOnlySpan<ColorBgra> data, int width, int x, int y)
+		public static ref readonly ColorBgra GetColorBgra (this ImageSurface surf, ReadOnlySpan<ColorBgra> data, int width, PointI position)
 		{
-			return ref data[width * y + x];
+			return ref data[width * position.Y + position.X];
 		}
 
 		/// <summary>
 		/// Prefer using the variant which takes the surface data and width, for improved performance
 		/// if there are repeated calls in a loop.
 		/// </summary>
-		public static ref readonly ColorBgra GetColorBgra (this ImageSurface surf, int x, int y)
+		public static ref readonly ColorBgra GetColorBgra (this ImageSurface surf, PointI position)
 		{
-			return ref surf.GetColorBgra (surf.GetReadOnlyPixelData (), surf.Width, x, y);
+			return ref surf.GetColorBgra (surf.GetReadOnlyPixelData (), surf.Width, position);
 		}
 
 		public static RectangleI GetBounds (this ImageSurface surf)
@@ -550,10 +550,10 @@ namespace Pinta.Core
 					else
 						sbottom = stop + 1;
 
-					ref readonly ColorBgra cul = ref src.GetColorBgra (src_data, srcWidth, sleft, stop);
-					ref readonly ColorBgra cur = ref src.GetColorBgra (src_data, srcWidth, sright, stop);
-					ref readonly ColorBgra cll = ref src.GetColorBgra (src_data, srcWidth, sleft, sbottom);
-					ref readonly ColorBgra clr = ref src.GetColorBgra (src_data, srcWidth, sright, sbottom);
+					ref readonly ColorBgra cul = ref src.GetColorBgra (src_data, srcWidth, new (sleft, stop));
+					ref readonly ColorBgra cur = ref src.GetColorBgra (src_data, srcWidth, new (sright, stop));
+					ref readonly ColorBgra cll = ref src.GetColorBgra (src_data, srcWidth, new (sleft, sbottom));
+					ref readonly ColorBgra clr = ref src.GetColorBgra (src_data, srcWidth, new (sright, sbottom));
 
 					return ColorBgra.BlendColors4W16IP (cul, wul, cur, wur, cll, wll, clr, wlr);
 				}
@@ -617,10 +617,10 @@ namespace Pinta.Core
 				else
 					sbottom = stop + 1;
 
-				ref readonly ColorBgra cul = ref src.GetColorBgra (src_data, srcWidth, sleft, stop);
-				ref readonly ColorBgra cur = ref src.GetColorBgra (src_data, srcWidth, sright, stop);
-				ref readonly ColorBgra cll = ref src.GetColorBgra (src_data, srcWidth, sleft, sbottom);
-				ref readonly ColorBgra clr = ref src.GetColorBgra (src_data, srcWidth, sright, sbottom);
+				ref readonly ColorBgra cul = ref src.GetColorBgra (src_data, srcWidth, new (sleft, stop));
+				ref readonly ColorBgra cur = ref src.GetColorBgra (src_data, srcWidth, new (sright, stop));
+				ref readonly ColorBgra cll = ref src.GetColorBgra (src_data, srcWidth, new (sleft, sbottom));
+				ref readonly ColorBgra clr = ref src.GetColorBgra (src_data, srcWidth, new (sright, sbottom));
 
 				return ColorBgra.BlendColors4W16IP (cul, wul, cur, wur, cll, wll, clr, wlr);
 			}
@@ -681,20 +681,19 @@ namespace Pinta.Core
 				else
 					sbottom = stop + 1;
 
-				ref readonly ColorBgra cul = ref src.GetColorBgra (src_data, srcWidth, sleft, stop);
-				ref readonly ColorBgra cur = ref src.GetColorBgra (src_data, srcWidth, sright, stop);
-				ref readonly ColorBgra cll = ref src.GetColorBgra (src_data, srcWidth, sleft, sbottom);
-				ref readonly ColorBgra clr = ref src.GetColorBgra (src_data, srcWidth, sright, sbottom);
+				ref readonly ColorBgra cul = ref src.GetColorBgra (src_data, srcWidth, new (sleft, stop));
+				ref readonly ColorBgra cur = ref src.GetColorBgra (src_data, srcWidth, new (sright, stop));
+				ref readonly ColorBgra cll = ref src.GetColorBgra (src_data, srcWidth, new (sleft, sbottom));
+				ref readonly ColorBgra clr = ref src.GetColorBgra (src_data, srcWidth, new (sright, sbottom));
 
 				return ColorBgra.BlendColors4W16IP (cul, wul, cur, wur, cll, wll, clr, wlr);
 			}
 		}
 
-		public static void TranslatePointsInPlace (this Span<PointI> points, int dx, int dy)
+		public static void TranslatePointsInPlace (this Span<PointI> points, PointI delta)
 		{
 			for (int i = 0; i < points.Length; ++i) {
-				var original = points[i];
-				points[i] = new (original.X + dx, original.Y + dy);
+				points[i] += delta;
 			}
 		}
 
@@ -1134,7 +1133,7 @@ namespace Pinta.Core
 		{
 			ReadOnlySpan<ColorBgra> surf_data = surface.GetReadOnlyPixelData ();
 			int surf_width = surface.Width;
-			ColorBgra cmp = surface.GetColorBgra (surf_data, surf_width, start.X, start.Y);
+			ColorBgra cmp = surface.GetColorBgra (surf_data, surf_width, start);
 			int top = int.MaxValue;
 			int bottom = int.MinValue;
 			int left = int.MaxValue;

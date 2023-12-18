@@ -60,9 +60,12 @@ internal static class Utilities
 	{
 		dataStream1.Seek (0, GLib.SeekType.Set, null);
 		dataStream2.Seek (0, GLib.SeekType.Set, null);
+
 		const int BUFFER_SIZE = 4096;
+
 		Span<byte> buffer1 = stackalloc byte[BUFFER_SIZE];
 		Span<byte> buffer2 = stackalloc byte[BUFFER_SIZE];
+
 		while (true) {
 
 			long bytesRead1 = dataStream1.Read (buffer1, null);
@@ -101,7 +104,7 @@ internal static class Utilities
 			var bg = GdkPixbuf.Pixbuf.NewFromStream (fs, cancellable: null)!; // NRT: only nullable when error is thrown.
 			var surf = CairoExtensions.CreateImageSurface (Format.Argb32, bg.Width, bg.Height);
 			var context = new Cairo.Context (surf);
-			context.DrawPixbuf (bg, 0, 0);
+			context.DrawPixbuf (bg, PointD.Zero);
 			return surf;
 		} finally {
 			fs.Close (null);

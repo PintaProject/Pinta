@@ -96,14 +96,14 @@ public abstract class FloodTool : BaseTool
 		if (IsContinguousMode)
 			CairoExtensions.FillStencilFromPoint (surface, stencilBuffer, pos, tol, out boundingBox, currentRegion, LimitToSelection);
 		else
-			CairoExtensions.FillStencilByColor (surface, stencilBuffer, surface.GetColorBgra (pos.X, pos.Y), tol, out boundingBox, currentRegion, LimitToSelection);
+			CairoExtensions.FillStencilByColor (surface, stencilBuffer, surface.GetColorBgra (pos), tol, out boundingBox, currentRegion, LimitToSelection);
 
 		OnFillRegionComputed (document, stencilBuffer);
 
 		// If a derived tool is only going to use the stencil,
 		// don't waste time building the polygon set
 		if (CalculatePolygonSet) {
-			var polygonSet = stencilBuffer.CreatePolygonSet (boundingBox, 0, 0);
+			var polygonSet = stencilBuffer.CreatePolygonSet (boundingBox, PointI.Zero);
 			OnFillRegionComputed (document, polygonSet);
 		}
 	}

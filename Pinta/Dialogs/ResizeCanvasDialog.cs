@@ -181,7 +181,12 @@ public sealed class ResizeCanvasDialog : Dialog
 	#region Public Methods
 	public void SaveChanges ()
 	{
-		PintaCore.Workspace.ResizeCanvas (width_spinner.GetValueAsInt (), height_spinner.GetValueAsInt (), anchor, null);
+		Size newSize = new (
+			Width: width_spinner.GetValueAsInt (),
+			Height: height_spinner.GetValueAsInt ()
+		);
+
+		PintaCore.Workspace.ResizeCanvas (newSize, anchor, null);
 	}
 	#endregion
 

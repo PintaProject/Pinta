@@ -51,9 +51,13 @@ internal sealed class PasteAction : IActionHandler
 
 		// Get the scroll position in canvas coordinates
 		var view = (Viewport) doc.Workspace.Canvas.Parent!;
-		var canvasPos = doc.Workspace.ViewPointToCanvas (
-			view.Hadjustment!.Value,
-			view.Vadjustment!.Value);
+
+		PointD viewPoint = new (
+			X: view.Hadjustment!.Value,
+			Y: view.Vadjustment!.Value
+		);
+
+		var canvasPos = doc.Workspace.ViewPointToCanvas (viewPoint);
 
 		// Paste into the active document.
 		// The 'false' argument indicates that paste should be
@@ -107,13 +111,19 @@ internal sealed class PasteAction : IActionHandler
 
 		// If the image being pasted is larger than the canvas size, allow the user to optionally resize the canvas
 		if (cb_image.Width > canvas_size.Width || cb_image.Height > canvas_size.Height) {
+
 			var response = await ShowExpandCanvasDialog ();
 
 			if (response == ResponseType.Accept) {
-				var new_width = Math.Max (canvas_size.Width, cb_image.Width);
-				var new_height = Math.Max (canvas_size.Height, cb_image.Height);
-				PintaCore.Workspace.ResizeCanvas (new_width, new_height, Pinta.Core.Anchor.Center, paste_action);
+
+				Size newSize = new (
+					Width: Math.Max (canvas_size.Width, cb_image.Width),
+					Height: Math.Max (canvas_size.Height, cb_image.Height)
+				);
+
+				PintaCore.Workspace.ResizeCanvas (newSize, Pinta.Core.Anchor.Center, paste_action);
 				PintaCore.Actions.View.UpdateCanvasScale ();
+
 			} else if (response != ResponseType.Reject) // cancelled
 				return;
 		}

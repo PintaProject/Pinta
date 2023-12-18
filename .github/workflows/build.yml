@@ -61,7 +61,7 @@ jobs:
     - name: Build Installer
       run: make releasezip
     - name: Upload Installer
-      uses: actions/upload-artifact@v3
+      uses: actions/upload-artifact@v4
       with:
         name: Pinta-linux-dotnet-${{matrix.dotnet_version}}.zip
         path: pinta-2.2.zip
@@ -100,7 +100,7 @@ jobs:
 
     - name: Upload Installer
       if: github.event_name != 'pull_request'
-      uses: actions/upload-artifact@v3
+      uses: actions/upload-artifact@v4
       with:
         name: "Pinta.dmg"
         path: installer/macos/Pinta.dmg
@@ -139,7 +139,7 @@ jobs:
         iscc installer/windows/installer.iss
 
     - name: Upload Installer
-      uses: actions/upload-artifact@v3
+      uses: actions/upload-artifact@v4
       if: ${{ false }} # Disable until the installer supports GTK4
       with:
         name: "Pinta.exe"

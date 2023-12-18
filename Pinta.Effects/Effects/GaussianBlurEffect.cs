@@ -113,7 +113,9 @@ public sealed class GaussianBlurEffect : BaseEffect
 						if (srcY < 0 || srcY >= src_height)
 							continue;
 
-						ColorBgra c = src.GetColorBgra (src_data, src_width, srcX, srcY).ToStraightAlpha ();
+						PointI pixelPosition = new (srcX, srcY);
+
+						ColorBgra c = src.GetColorBgra (src_data, src_width, pixelPosition).ToStraightAlpha ();
 						int wp = w[wy];
 
 						waSums[wx] += wp;
@@ -197,7 +199,7 @@ public sealed class GaussianBlurEffect : BaseEffect
 							if (srcY < 0 || srcY >= src_height)
 								continue;
 
-							ColorBgra c = src.GetColorBgra (src_data, src_width, srcX, srcY).ToStraightAlpha ();
+							ColorBgra c = src.GetColorBgra (src_data, src_width, new (srcX, srcY)).ToStraightAlpha ();
 							int wp = w[wy];
 
 							waSums[wx] += wp;
