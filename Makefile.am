@@ -65,7 +65,7 @@ list:
 updatepotfiles:
 	echo xdg/pinta.desktop.in > po/POTFILES.in
 	echo xdg/pinta.appdata.xml.in >> po/POTFILES.in
-	find -s \
+	find \
 		Pinta \
 		Pinta.Core \
 		Pinta.Docking \
@@ -74,7 +74,7 @@ updatepotfiles:
 		Pinta.Gui.Widgets \
 		Pinta.Resources \
 		Pinta.Tools \
-		-name \*.cs -not -path '*/obj/*' >> po/POTFILES.in
+		-name \*.cs -not -path '*/obj/*' | sort >> po/POTFILES.in
 
 #target: updatepot - update the messages.pot file
 updatepot:

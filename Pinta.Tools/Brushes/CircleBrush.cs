@@ -43,13 +43,16 @@ public sealed class CircleBrush : BasePaintBrush
 		BrushStrokeArgs strokeArgs)
 	{
 		PointI mouseDelta = strokeArgs.CurrentPosition - strokeArgs.LastPosition;
+
 		PointD center = new (
 			X: Math.Floor (strokeArgs.CurrentPosition.X / 100.0) * 100 + 50,
 			Y: Math.Floor (strokeArgs.CurrentPosition.Y / 100.0) * 100 + 50
 		);
+
 		double d = mouseDelta.Magnitude () * 2.0;
 		int steps = Random.Next (1, 10);
 		double step_delta = d / steps;
+
 		for (int i = 0; i < steps; i++) {
 			var radius = (steps - i) * step_delta;
 			g.Arc (center.X, center.Y, radius, 0, Math.PI * 2);

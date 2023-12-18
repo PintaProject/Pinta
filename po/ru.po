@@ -8,16 +8,18 @@ msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
 "POT-Creation-Date: 2023-12-17 14:36-0500\n"
-"PO-Revision-Date: 2023-11-30 10:42+0000\n"
-"Last-Translator: Sergej <Unknown>\n"
-"Language-Team: Russian <ru@li.org>\n"
+"PO-Revision-Date: 2023-12-18 11:08+0000\n"
+"Last-Translator: Сергей <asvmail.as@gmail.com>\n"
+"Language-Team: Russian <https://hosted.weblate.org/projects/pinta/pinta/ru/>"
+"\n"
+"Language: ru\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=3; plural=n%10==1 && n%100!=11 ? 0 : n%10>=2 && "
 "n%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2;\n"
+"X-Generator: Weblate 5.3\n"
 "X-Launchpad-Export-Date: 2023-12-18 03:00+0000\n"
-"X-Generator: Launchpad (build e1eeab5b20e19239bd7d5f36676f7a52988db88b)\n"
 
 #: ../Pinta.Gui.Addins/InstallDialog.cs:216
 msgid " (in user directory)"
@@ -245,7 +247,7 @@ msgstr "В процентах:"
 #: ../Pinta.Gui.Addins/AddinManagerDialog.cs:198
 #: ../Pinta.Gui.Addins/InstallDialog.cs:120
 msgid "Cancel"
-msgstr "Отмена"
+msgstr "Отменить"
 
 #: ../Pinta/Pads/CanvasPad.cs:41
 msgid "Canvas"
@@ -285,11 +287,11 @@ msgstr "Выберите цвет цалитры"
 
 #: ../Pinta.Gui.Widgets/Widgets/StatusBarColorPaletteWidget.cs:78
 msgid "Choose Primary Color"
-msgstr "Выберите цвет переднего плана"
+msgstr "Выберите основной цвет"
 
 #: ../Pinta.Gui.Widgets/Widgets/StatusBarColorPaletteWidget.cs:81
 msgid "Choose Secondary Color"
-msgstr "Выберите фоновый цвет"
+msgstr "Выберите дополнительный цвет"
 
 #: ../Pinta.Tools/Brushes/CircleBrush.cs:36
 msgid "Circles"
@@ -338,7 +340,7 @@ msgstr "Нажмите левую кнопку мыши и тяните для �
 
 #: ../Pinta.Gui.Widgets/Widgets/StatusBarColorPaletteWidget.cs:265
 msgid "Click to reset primary and secondary color."
-msgstr "Нажмите для сброса первичного и вторичного цветов."
+msgstr "Щёлкните для сброса основного и дополнительного цветов."
 
 #: ../Pinta.Gui.Widgets/Widgets/StatusBarColorPaletteWidget.cs:254
 msgid "Click to select primary color."
@@ -346,7 +348,7 @@ msgstr "Щёлкните, чтобы выбрать основной цвет."
 
 #: ../Pinta.Tools/Tools/MagicWandTool.cs:49
 msgid "Click to select region of similar color."
-msgstr "Щёлкните, чтобы выделить регион с похожим цветом."
+msgstr "Щёлкните, чтобы выделить область с похожим цветом."
 
 #: ../Pinta.Gui.Widgets/Widgets/StatusBarColorPaletteWidget.cs:257
 msgid "Click to select secondary color."
@@ -423,7 +425,7 @@ msgstr "Насыщенность цвета"
 
 #: ../Pinta.Core/Actions/ViewActions.cs:179
 msgid "Color Scheme"
-msgstr ""
+msgstr "Цветовая схема"
 
 #: ../Pinta.Effects/Effects/InkSketchEffect.cs:158
 msgid "Coloring"
@@ -462,7 +464,7 @@ msgstr "Авторское право"
 #: ../Pinta.Core/ImageFormats/OraFormat.cs:122
 #, csharp-format
 msgid "Could not import layer \"{0}\" from {1}"
-msgstr "Не удалось импортировать слой «{0}» из {1}."
+msgstr "Не удалось импортировать слой «{0}» из {1}"
 
 #: ../Pinta.Core/Classes/Palette.cs:192
 #: ../Pinta.Core/Managers/WorkspaceManager.cs:378
@@ -500,7 +502,7 @@ msgstr "Вырезать"
 #. Translators: This refers to using a dark variant of the color scheme.
 #: ../Pinta.Core/Actions/ViewActions.cs:187
 msgid "Dark"
-msgstr ""
+msgstr "Тёмная"
 
 #: ../Pinta.Core/Effects/UserBlendOps.cs:38
 msgid "Darken"
@@ -513,7 +515,7 @@ msgstr "Штрихи"
 #. Translators: This refers to using the system's default color scheme.
 #: ../Pinta.Core/Actions/ViewActions.cs:183
 msgid "Default"
-msgstr ""
+msgstr "По умолчанию"
 
 #: ../Pinta.Core/Actions/LayerActions.cs:49
 #: ../Pinta.Core/Actions/LayerActions.cs:312
@@ -660,7 +662,7 @@ msgstr "Сообщить о неполадке"
 
 #: ../Pinta/Main.cs:61
 msgid "Files to open"
-msgstr ""
+msgstr "Файлы для открытия"
 
 #: ../Pinta.Tools/Tools/TextTool.cs:249
 msgid "Fill Background"
@@ -1064,9 +1066,9 @@ msgid ""
 "Left click to draw freeform one-pixel wide lines with the primary color.\n"
 "Right click to use the secondary color."
 msgstr ""
-"Щёлкните левой кнопкой мыши, чтобы нарисовать основным цветом линии "
-"произвольной формы шириной в один пиксель.\n"
-"Щёлкните правой кнопкой мыши, чтобы использовать вторичный цвет."
+"Нажмите левую кнопку мыши, чтобы рисовать основным цветом линии произвольной "
+"формы шириной в один пиксель.\n"
+"Нажмите правую кнопку мыши для использования дополнительного цвета."
 
 #: ../Pinta.Tools/Tools/FreeformShapeTool.cs:54
 #: ../Pinta.Tools/Tools/PaintBrushTool.cs:58
@@ -1074,38 +1076,39 @@ msgid ""
 "Left click to draw with primary color, right click to draw with secondary "
 "color."
 msgstr ""
-"Нажмите левую кнопку, чтобы рисовать первичным цветом, правую - вторичным."
+"Нажмите левую кнопку мыши, чтобы рисовать основным цветом, правую - "
+"дополнительным."
 
 #: ../Pinta.Tools/Tools/EraserTool.cs:56
 msgid ""
 "Left click to erase to transparent, right click to erase to secondary color. "
 msgstr ""
-"Левая кнопка мыши стирает до прозрачного фона, правая кнопка стирает цветом "
-"фона. "
+"Нажатие левой кнопки мыши стирает до прозрачного фона, правой кнопки - "
+"закрашивает дополнительным цветом. "
 
 #: ../Pinta.Tools/Tools/PaintBucketTool.cs:45
 msgid ""
 "Left click to fill a region with the primary color, right click to fill with "
 "the secondary color."
 msgstr ""
-"Щёлкните левой кнопкой, чтобы залить регион первичным цветом, правой - "
-"вторичным."
+"Щёлкните левой кнопкой мыши, чтобы залить область основным цветом, правой - "
+"дополнительным."
 
 #: ../Pinta.Tools/Tools/TextTool.cs:88
 msgid ""
 "Left click to place cursor, then type desired text. Text color is primary "
 "color."
 msgstr ""
-"Щёлкните левой кнопкой, чтобы поместить курсор, затем наберите нужный текст. "
-"Текст рисуется первичным цветом."
+"Щёлкните левой кнопкой мыши, чтобы поместить курсор, затем наберите нужный "
+"текст. Текст раскрашивается основным цветом."
 
 #: ../Pinta.Tools/Tools/RecolorTool.cs:59
 msgid ""
 "Left click to replace the secondary color with the primary color.\n"
 "Right click to reverse."
 msgstr ""
-"Щёлкните левой кнопкой мыши, чтобы поменять местами вторичный и основной "
-"цвет.\n"
+"Щёлкните левой кнопкой мыши, чтобы поменять местами дополнительный и "
+"основной цвет.\n"
 "Щёлкните правой кнопкой мыши, чтобы вернуть обратно."
 
 #: ../Pinta.Tools/Tools/ColorPickerTool.cs:53
@@ -1114,22 +1117,22 @@ msgid ""
 "Right click to set secondary color."
 msgstr ""
 "Щёлкните левой кнопкой мыши, чтобы установить основной цвет.\n"
-"Щёлкните правой кнопкой мыши, чтобы установить вторичный цвет."
+"Щёлкните правой кнопкой мыши, чтобы установить дополнительный цвет."
 
 #: ../Pinta.Gui.Widgets/Widgets/StatusBarColorPaletteWidget.cs:251
 msgid "Left click to set primary color. Right click to set secondary color."
 msgstr ""
-"Щёлкните левой кнопкой для задания первичного цвета. Щёлкните правой кнопкой "
-"для задания вторичного цвета."
+"Щёлкните левой кнопкой мыши для задания основного цвета. Щёлкните правой "
+"кнопкой для задания дополнительного цвета."
 
 #: ../Pinta.Gui.Widgets/Widgets/StatusBarColorPaletteWidget.cs:247
 msgid ""
 "Left click to set primary color. Right click to set secondary color. Middle "
 "click to choose palette color."
 msgstr ""
-"Щелчок левой кнопкой мыши для установки основного цвета. Щелчок правой "
-"кнопкой мыши для установки вторичного цвета. Щелчок средней кнопки мыши для "
-"выбора цветовой палитры."
+"Щёлкните левой кнопкой мыши для установки основного цвета. Щёлкните правой "
+"кнопкой мыши для установки дополнительного цвета. Щелчок средней кнопкой "
+"мыши для вызова цветовой палитры."
 
 #: ../Pinta.Tools/Tools/ZoomTool.cs:58
 msgid ""
@@ -1160,7 +1163,7 @@ msgstr "Лицензия"
 #. Translators: This refers to using a light variant of the color scheme.
 #: ../Pinta.Core/Actions/ViewActions.cs:185
 msgid "Light"
-msgstr ""
+msgstr "Светлая"
 
 #: ../Pinta.Core/Effects/UserBlendOps.cs:37
 msgid "Lighten"
@@ -1318,7 +1321,7 @@ msgstr "Обычный и контур"
 
 #: ../Pinta/Main.cs:55
 msgid "Number of threads to use for rendering"
-msgstr ""
+msgstr "Количество потоков, используемых для отрисовки"
 
 #: ../Pinta.Effects/Effects/BulgeEffect.cs:92
 #: ../Pinta.Effects/Effects/RadialBlurEffect.cs:149
@@ -1682,7 +1685,7 @@ msgstr "Сообщить об ошибке..."
 
 #: ../Pinta/Dialogs/ResizeImageDialog.cs:102
 msgid "Resampling:"
-msgstr ""
+msgstr "Передискретизация:"
 
 #: ../Pinta.Gui.Widgets/Widgets/ReseedButtonWidget.cs:55
 msgid "Reseed"
@@ -1793,7 +1796,7 @@ msgstr "Сохранить"
 
 #: ../Pinta.Core/Actions/WindowActions.cs:40
 msgid "Save All"
-msgstr "Сохранить как"
+msgstr "Сохранить все"
 
 #: ../Pinta.Core/Actions/EditActions.cs:73
 #: ../Pinta.Core/Actions/FileActions.cs:52
@@ -2080,7 +2083,7 @@ msgstr "Удалить..."
 #: ../Pinta.Core/Classes/SelectionModeHandler.cs:47
 #, csharp-format
 msgid "Union (+) ({0} + Left Click)"
-msgstr "Соединить  (+) ({0} + Левая кнопка мыши)"
+msgstr "Соединить (+) ({0} + Левая кнопка мыши)"
 
 #: ../Pinta.Core/Managers/WorkspaceManager.cs:116
 #, csharp-format
