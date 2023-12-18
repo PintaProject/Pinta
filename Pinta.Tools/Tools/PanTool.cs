@@ -60,10 +60,7 @@ public sealed class PanTool : BaseTool
 		if (!active)
 			return;
 
-		PointI delta = new (
-			X: (int) (last_point.X - e.RootPoint.X),
-			Y: (int) (last_point.Y - e.RootPoint.Y)
-		);
+		PointI delta = (last_point - e.RootPoint).ToInt ();
 
 		document.Workspace.ScrollCanvas (delta);
 

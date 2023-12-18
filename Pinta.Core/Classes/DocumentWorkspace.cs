@@ -221,7 +221,7 @@ public sealed class DocumentWorkspace
 	public PointD ViewPointToCanvas (PointD viewPoint)
 	{
 		var sf = new ScaleFactor (document.ImageSize.Width, ViewSize.Width);
-		var pt = sf.ScalePoint (new PointD (viewPoint.X - Offset.X, viewPoint.Y - Offset.Y));
+		var pt = sf.ScalePoint (viewPoint - Offset);
 		return new PointD (pt.X, pt.Y);
 	}
 

@@ -292,9 +292,7 @@ public sealed class Document
 	/// </param>
 	public void ResizeCanvas (Size newSize, Anchor anchor, CompoundHistoryItem? compoundAction)
 	{
-		double scale;
-
-		if (ImageSize.Width == newSize.Width && ImageSize.Height == newSize.Height)
+		if (ImageSize == newSize)
 			return;
 
 		PintaCore.Tools.Commit ();
@@ -305,7 +303,7 @@ public sealed class Document
 		};
 		hist.StartSnapshotOfImage ();
 
-		scale = Workspace.Scale;
+		double scale = Workspace.Scale;
 
 		ImageSize = newSize;
 
@@ -327,9 +325,7 @@ public sealed class Document
 
 	public void ResizeImage (Size newSize, ResamplingMode resamplingMode)
 	{
-		double scale;
-
-		if (ImageSize.Width == newSize.Width && ImageSize.Height == newSize.Height)
+		if (ImageSize == newSize)
 			return;
 
 		PintaCore.Tools.Commit ();
@@ -337,7 +333,7 @@ public sealed class Document
 		ResizeHistoryItem hist = new ResizeHistoryItem (ImageSize);
 		hist.StartSnapshotOfImage ();
 
-		scale = Workspace.Scale;
+		double scale = Workspace.Scale;
 
 		ImageSize = newSize;
 

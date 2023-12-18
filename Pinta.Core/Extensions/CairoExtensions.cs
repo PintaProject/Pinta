@@ -693,8 +693,7 @@ namespace Pinta.Core
 		public static void TranslatePointsInPlace (this Span<PointI> points, PointI delta)
 		{
 			for (int i = 0; i < points.Length; ++i) {
-				var original = points[i];
-				points[i] = new (original.X + delta.X, original.Y + delta.Y);
+				points[i] += delta;
 			}
 		}
 
