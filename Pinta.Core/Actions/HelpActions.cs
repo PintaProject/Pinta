@@ -89,7 +89,7 @@ public sealed class HelpActions
 
 	private void Translate_Activated (object sender, EventArgs e)
 	{
-		OpenUrl ("https://translations.launchpad.net/pinta");
+		OpenUrl ("https://hosted.weblate.org/engage/pinta/");
 	}
 
 	private void Website_Activated (object sender, EventArgs e)
