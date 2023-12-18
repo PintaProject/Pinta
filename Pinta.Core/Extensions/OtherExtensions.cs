@@ -163,7 +163,7 @@ public static class OtherExtensions
 				last = curr;
 				curr = next;
 
-				if (next.X == start.X && next.Y == start.Y)
+				if (next == start)
 					break;
 			}
 
