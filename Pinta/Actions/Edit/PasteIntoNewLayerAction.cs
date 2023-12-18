@@ -50,9 +50,12 @@ internal sealed class PasteIntoNewLayerAction : IActionHandler
 		// Get the scroll position in canvas coordinates
 		var view = (Viewport) doc.Workspace.Canvas.Parent!;
 
-		var canvasPos = doc.Workspace.ViewPointToCanvas (
-			view.Hadjustment!.Value,
-			view.Vadjustment!.Value);
+		PointD viewPoint = new (
+			X: view.Hadjustment!.Value,
+			Y: view.Vadjustment!.Value
+		);
+
+		var canvasPos = doc.Workspace.ViewPointToCanvas (viewPoint);
 
 		// Paste into the active document.
 		// The 'true' argument indicates that paste should be

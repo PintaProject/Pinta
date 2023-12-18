@@ -108,8 +108,11 @@ public abstract class LocalHistogramEffect : BaseEffect
 	    ImageSurface dst,
 	    Core.RectangleI rect)
 	{
-		int width = src.Width;
-		int height = src.Height;
+		Size sourceSize = new (
+			Width: src.Width,
+			Height: src.Height
+		);
+
 		int stride = src.Stride / ColorBgra.SizeOf;
 
 		Span<int> leadingEdgeX = stackalloc int[rad + 1];
@@ -126,6 +129,7 @@ public abstract class LocalHistogramEffect : BaseEffect
 		}
 
 		const int hLength = 256;
+
 		Span<int> hb = stackalloc int[hLength];
 		Span<int> hg = stackalloc int[hLength];
 		Span<int> hr = stackalloc int[hLength];
@@ -146,16 +150,16 @@ public abstract class LocalHistogramEffect : BaseEffect
 			int top = -Math.Min (rad, y);
 
 			// assert: v + y <= height - 1
-			int bottom = Math.Min (rad, height - 1 - y);
+			int bottom = Math.Min (rad, sourceSize.Height - 1 - y);
 
 			// assert: u + x >= 0
 			int left = -Math.Min (rad, rect.Left);
 
 			// assert: u + x <= width - 1
-			int right = Math.Min (rad, width - 1 - rect.Left);
+			int right = Math.Min (rad, sourceSize.Width - 1 - rect.Left);
 
 			for (int v = top; v <= bottom; ++v) {
-				ReadOnlySpan<ColorBgra> psamples = src_data[((y + v) * width + rect.Left + left)..];
+				ReadOnlySpan<ColorBgra> psamples = src_data[((y + v) * sourceSize.Width + rect.Left + left)..];
 
 				for (int u = left, i = 0; u <= right; ++u, ++i) {
 					ColorBgra psamp = psamples[i];
@@ -169,8 +173,8 @@ public abstract class LocalHistogramEffect : BaseEffect
 				}
 			}
 
-			ReadOnlySpan<ColorBgra> ps = src_data.Slice (y * width, width);
-			Span<ColorBgra> pd = dst_data.Slice (y * width, width);
+			ReadOnlySpan<ColorBgra> ps = src_data.Slice (y * sourceSize.Width, sourceSize.Width);
+			Span<ColorBgra> pd = dst_data.Slice (y * sourceSize.Width, sourceSize.Width);
 
 			for (int x = rect.Left; x <= rect.Right; x++) {
 				pd[x] = Apply (ps[x], area, hb, hg, hr, ha);
@@ -179,7 +183,7 @@ public abstract class LocalHistogramEffect : BaseEffect
 				left = -Math.Min (rad, x);
 
 				// assert: u + x <= width - 1
-				right = Math.Min (rad + 1, width - 1 - x);
+				right = Math.Min (rad + 1, sourceSize.Width - 1 - x);
 
 				// Subtract trailing edge top half
 				int v = -1;
@@ -196,7 +200,7 @@ public abstract class LocalHistogramEffect : BaseEffect
 
 				while (v >= top) {
 					int u = leadingEdgeX[-v];
-					ColorBgra p = src_data[(y * width + x) + (v * stride) - u];
+					ColorBgra p = src_data[(y * sourceSize.Width + x) + (v * stride) - u];
 
 					--hb[p.B];
 					--hg[p.G];
@@ -221,7 +225,7 @@ public abstract class LocalHistogramEffect : BaseEffect
 
 				while (v >= top) {
 					int u = leadingEdgeX[-v];
-					ColorBgra p = src_data[(y * width + x) + (v * stride) + u + 1];
+					ColorBgra p = src_data[(y * sourceSize.Width + x) + (v * stride) + u + 1];
 					++hb[p.B];
 					++hg[p.G];
 					++hr[p.R];
@@ -246,7 +250,7 @@ public abstract class LocalHistogramEffect : BaseEffect
 
 				while (v <= bottom) {
 					int u = leadingEdgeX[v];
-					ColorBgra p = src_data[(y * width + x) + (v * stride) - u];
+					ColorBgra p = src_data[(y * sourceSize.Width + x) + (v * stride) - u];
 					--hb[p.B];
 					--hg[p.G];
 					--hr[p.R];
@@ -271,7 +275,7 @@ public abstract class LocalHistogramEffect : BaseEffect
 
 				while (v <= bottom) {
 					int u = leadingEdgeX[v];
-					ColorBgra p = src_data[(y * width + x) + (v * stride) + u + 1];
+					ColorBgra p = src_data[(y * sourceSize.Width + x) + (v * stride) + u + 1];
 					++hb[p.B];
 					++hg[p.G];
 					++hr[p.R];
@@ -291,8 +295,11 @@ public abstract class LocalHistogramEffect : BaseEffect
 	    ImageSurface dst,
 	    Core.RectangleI rect)
 	{
-		int width = src.Width;
-		int height = src.Height;
+		Size sourceSize = new (
+			Width: src.Width,
+			Height: src.Height
+		);
+
 		int stride = src.Stride / ColorBgra.SizeOf;
 
 		Span<int> leadingEdgeX = stackalloc int[rad + 1];
@@ -309,6 +316,7 @@ public abstract class LocalHistogramEffect : BaseEffect
 		}
 
 		const int hLength = 256;
+
 		Span<int> hb = stackalloc int[hLength];
 		Span<int> hg = stackalloc int[hLength];
 		Span<int> hr = stackalloc int[hLength];
@@ -328,16 +336,16 @@ public abstract class LocalHistogramEffect : BaseEffect
 			int top = -Math.Min (rad, y);
 
 			// assert: v + y <= height - 1
-			int bottom = Math.Min (rad, height - 1 - y);
+			int bottom = Math.Min (rad, sourceSize.Height - 1 - y);
 
 			// assert: u + x >= 0
 			int left = -Math.Min (rad, rect.Left);
 
 			// assert: u + x <= width - 1
-			int right = Math.Min (rad, width - 1 - rect.Left);
+			int right = Math.Min (rad, sourceSize.Width - 1 - rect.Left);
 
 			for (int v = top; v <= bottom; ++v) {
-				ReadOnlySpan<ColorBgra> psamples = src_data[((y + v) * width + rect.Left + left)..];
+				ReadOnlySpan<ColorBgra> psamples = src_data[((y + v) * sourceSize.Width + rect.Left + left)..];
 
 				for (int u = left, i = 0; u <= right; ++u, ++i) {
 					ColorBgra psamp = psamples[i];
@@ -352,8 +360,8 @@ public abstract class LocalHistogramEffect : BaseEffect
 				}
 			}
 
-			ReadOnlySpan<ColorBgra> ps = src_data.Slice (y * width, width);
-			Span<ColorBgra> pd = dst_data.Slice (y * width, width);
+			ReadOnlySpan<ColorBgra> ps = src_data.Slice (y * sourceSize.Width, sourceSize.Width);
+			Span<ColorBgra> pd = dst_data.Slice (y * sourceSize.Width, sourceSize.Width);
 
 			for (int x = rect.Left; x <= rect.Right; x++) {
 				pd[x] = ApplyWithAlpha (ps[x], area, sum, hb, hg, hr);
@@ -362,7 +370,7 @@ public abstract class LocalHistogramEffect : BaseEffect
 				left = -Math.Min (rad, x);
 
 				// assert: u + x <= width - 1
-				right = Math.Min (rad + 1, width - 1 - x);
+				right = Math.Min (rad + 1, sourceSize.Width - 1 - x);
 
 				// Subtract trailing edge top half
 				int v = -1;
@@ -379,7 +387,7 @@ public abstract class LocalHistogramEffect : BaseEffect
 
 				while (v >= top) {
 					int u = leadingEdgeX[-v];
-					ColorBgra p = src_data[(y * width + x) + (v * stride) - u];
+					ColorBgra p = src_data[(y * sourceSize.Width + x) + (v * stride) - u];
 					byte w = p.A;
 
 					hb[p.B] -= w;
@@ -405,7 +413,7 @@ public abstract class LocalHistogramEffect : BaseEffect
 
 				while (v >= top) {
 					int u = leadingEdgeX[-v];
-					ColorBgra p = src_data[(y * width + x) + (v * stride) + u + 1];
+					ColorBgra p = src_data[(y * sourceSize.Width + x) + (v * stride) + u + 1];
 					byte w = p.A;
 
 					hb[p.B] += w;
@@ -432,7 +440,7 @@ public abstract class LocalHistogramEffect : BaseEffect
 
 				while (v <= bottom) {
 					int u = leadingEdgeX[v];
-					ColorBgra p = src_data[(y * width + x) + (v * stride) - u];
+					ColorBgra p = src_data[(y * sourceSize.Width + x) + (v * stride) - u];
 					byte w = p.A;
 
 					hb[p.B] -= w;
@@ -459,7 +467,7 @@ public abstract class LocalHistogramEffect : BaseEffect
 
 				while (v <= bottom) {
 					int u = leadingEdgeX[v];
-					ColorBgra p = src_data[(y * width + x) + (v * stride) + u + 1];
+					ColorBgra p = src_data[(y * sourceSize.Width + x) + (v * stride) + u + 1];
 					byte w = p.A;
 
 					hb[p.B] += w;

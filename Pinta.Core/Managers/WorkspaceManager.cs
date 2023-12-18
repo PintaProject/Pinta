@@ -259,14 +259,14 @@ public sealed class WorkspaceManager : IWorkspaceService
 		return fileOpened;
 	}
 
-	public void ResizeImage (int width, int height, ResamplingMode resamplingMode)
+	public void ResizeImage (Size newSize, ResamplingMode resamplingMode)
 	{
-		ActiveDocument.ResizeImage (width, height, resamplingMode);
+		ActiveDocument.ResizeImage (newSize, resamplingMode);
 	}
 
-	public void ResizeCanvas (int width, int height, Anchor anchor, CompoundHistoryItem? compoundAction)
+	public void ResizeCanvas (Size newSize, Anchor anchor, CompoundHistoryItem? compoundAction)
 	{
-		ActiveDocument.ResizeCanvas (width, height, anchor, compoundAction);
+		ActiveDocument.ResizeCanvas (newSize, anchor, compoundAction);
 	}
 
 	/// <summary>
@@ -277,7 +277,7 @@ public sealed class WorkspaceManager : IWorkspaceService
 	/// </param>
 	public PointD ViewPointToCanvas (PointD view_pos)
 	{
-		return ActiveWorkspace.ViewPointToCanvas (view_pos.X, view_pos.Y);
+		return ActiveWorkspace.ViewPointToCanvas (view_pos);
 	}
 
 	/// <summary>
@@ -288,7 +288,7 @@ public sealed class WorkspaceManager : IWorkspaceService
 	/// </param>
 	public PointD CanvasPointToView (PointD canvas_pos)
 	{
-		return ActiveWorkspace.CanvasPointToView (canvas_pos.X, canvas_pos.Y);
+		return ActiveWorkspace.CanvasPointToView (canvas_pos);
 	}
 
 	public RectangleI ClampToImageSize (RectangleI r)

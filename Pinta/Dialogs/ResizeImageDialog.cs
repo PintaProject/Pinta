@@ -134,7 +134,13 @@ public sealed class ResizeImageDialog : Dialog
 	public void SaveChanges ()
 	{
 		var resamplingMode = (ResamplingMode) resampling_combobox.Active;
-		PintaCore.Workspace.ResizeImage (width_spinner.GetValueAsInt (), height_spinner.GetValueAsInt (), resamplingMode);
+
+		Size newSize = new (
+			Width: width_spinner.GetValueAsInt (),
+			Height: height_spinner.GetValueAsInt ()
+		);
+
+		PintaCore.Workspace.ResizeImage (newSize, resamplingMode);
 	}
 	#endregion
 

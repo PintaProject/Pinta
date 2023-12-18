@@ -91,24 +91,24 @@ public sealed class UserLayer : Layer
 		}
 	}
 
-	public override void ResizeCanvas (int width, int height, Anchor anchor)
+	public override void ResizeCanvas (Size newSize, Anchor anchor)
 	{
-		base.ResizeCanvas (width, height, anchor);
+		base.ResizeCanvas (newSize, anchor);
 
 		foreach (ReEditableLayer rel in ReEditableLayers) {
 			if (rel.IsLayerSetup) {
-				rel.Layer.ResizeCanvas (width, height, anchor);
+				rel.Layer.ResizeCanvas (newSize, anchor);
 			}
 		}
 	}
 
-	public override void Resize (int width, int height, ResamplingMode resamplingMode)
+	public override void Resize (Size newSize, ResamplingMode resamplingMode)
 	{
-		base.Resize (width, height, resamplingMode);
+		base.Resize (newSize, resamplingMode);
 
 		foreach (ReEditableLayer rel in ReEditableLayers) {
 			if (rel.IsLayerSetup) {
-				rel.Layer.Resize (width, height, resamplingMode);
+				rel.Layer.Resize (newSize, resamplingMode);
 			}
 		}
 	}

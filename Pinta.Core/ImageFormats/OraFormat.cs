@@ -71,9 +71,14 @@ public sealed class OraFormat : IImageImporter, IImageExporter
 		doc.Workspace.ViewSize = imagesize;
 
 		for (int i = 0; i < layerElements.Count; i++) {
+
 			XmlElement layerElement = (XmlElement) layerElements[i]!;
-			int x = int.Parse (GetAttribute (layerElement, "x", "0"));
-			int y = int.Parse (GetAttribute (layerElement, "y", "0"));
+
+			PointI position = new (
+				X: int.Parse (GetAttribute (layerElement, "x", "0")),
+				Y: int.Parse (GetAttribute (layerElement, "y", "0"))
+			);
+
 			string name = GetAttribute (layerElement, "name", $"Layer {i}");
 
 			try {
@@ -112,7 +117,7 @@ public sealed class OraFormat : IImageImporter, IImageExporter
 
 				var pb = GdkPixbuf.Pixbuf.NewFromFile (tmp_file)!; // NRT: only nullable when an error is thrown
 				var g = new Context (layer.Surface);
-				g.DrawPixbuf (pb, x, y);
+				g.DrawPixbuf (pb, (PointD) position);
 
 				try {
 					File.Delete (tmp_file);

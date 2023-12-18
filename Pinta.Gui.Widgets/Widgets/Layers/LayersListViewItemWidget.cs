@@ -157,25 +157,27 @@ public sealed class LayersListViewItemWidget : Box
 			draw_height = (int) (thumbnail_surface.Height * width / thumbnail_surface.Width);
 		}
 
-		var offset_x = (int) ((width - draw_width) / 2f);
-		var offset_y = (int) ((height - draw_height) / 2f);
+		PointI offset = new (
+			X: (int) ((width - draw_width) / 2f),
+			Y: (int) ((height - draw_height) / 2f)
+		);
 
 		g.Save ();
-		g.Rectangle (offset_x, offset_y, draw_width, draw_height);
+		g.Rectangle (offset.X, offset.Y, draw_width, draw_height);
 		g.Clip ();
 
 		g.SetSource (transparent_pattern);
 		g.Paint ();
 
 		g.Scale (scale, scale);
-		g.SetSourceSurface (thumbnail_surface, (int) (offset_x / scale), (int) (offset_y / scale));
+		g.SetSourceSurface (thumbnail_surface, (int) (offset.X / scale), (int) (offset.Y / scale));
 		g.Paint ();
 
 		g.Restore ();
 
 		// TODO: scale this box correctly to match layer aspect ratio
 		g.SetSourceColor (new Cairo.Color (0.5, 0.5, 0.5));
-		g.Rectangle (offset_x + 0.5, offset_y + 0.5, draw_width, draw_height);
+		g.Rectangle (offset.X + 0.5, offset.Y + 0.5, draw_width, draw_height);
 		g.LineWidth = 1;
 		g.Stroke ();
 	}
