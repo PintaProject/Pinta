@@ -142,8 +142,8 @@ public sealed class InkSketchEffect : BaseEffect
 					}
 
 					// Change Blend Mode to Darken
-					ref ColorBgra dst_pixel = ref dst_row[x];
-					dst_pixel = darken_op.Apply (topLayer, dst_pixel);
+					ColorBgra originalPixel = dst_row[x];
+					dst_row[x] = darken_op.Apply (topLayer, originalPixel);
 				}
 			}
 		}

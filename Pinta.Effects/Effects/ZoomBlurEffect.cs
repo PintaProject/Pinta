@@ -102,16 +102,15 @@ public sealed class ZoomBlurEffect : BaseEffect
 						}
 					}
 
-					ref ColorBgra dst_pixel = ref dst_row[x];
-
 					if (sa != 0) {
-						dst_pixel = ColorBgra.FromBgra (
-						    Utility.ClampToByte (sb / sa),
-						    Utility.ClampToByte (sg / sa),
-						    Utility.ClampToByte (sr / sa),
-						    Utility.ClampToByte (sa / sc));
+						dst_row[x] = ColorBgra.FromBgra (
+							b: Utility.ClampToByte (sb / sa),
+							g: Utility.ClampToByte (sg / sa),
+							r: Utility.ClampToByte (sr / sa),
+							a: Utility.ClampToByte (sa / sc)
+						);
 					} else {
-						dst_pixel.Bgra = 0;
+						dst_row[x].Bgra = 0;
 					}
 				}
 			}
