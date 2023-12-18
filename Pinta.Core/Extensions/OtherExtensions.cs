@@ -130,38 +130,32 @@ public static class OtherExtensions
 			// trace island outline
 			while (true) {
 
+				PointI currLastDelta = curr - last;
+
 				PointI left = new (
-					X: ((curr.X - last.X) + (curr.Y - last.Y) + 2) / 2 + curr.X - 1,
-					Y: ((curr.Y - last.Y) - (curr.X - last.X) + 2) / 2 + curr.Y - 1
+					X: (currLastDelta.X + currLastDelta.Y + 2) / 2 + curr.X - 1,
+					Y: (currLastDelta.Y - currLastDelta.X + 2) / 2 + curr.Y - 1
 				);
 
 				PointI right = new (
-					X: ((curr.X - last.X) - (curr.Y - last.Y) + 2) / 2 + curr.X - 1,
-					Y: ((curr.Y - last.Y) + (curr.X - last.X) + 2) / 2 + curr.Y - 1
+					X: (currLastDelta.X - currLastDelta.Y + 2) / 2 + curr.X - 1,
+					Y: (currLastDelta.Y + currLastDelta.X + 2) / 2 + curr.Y - 1
 				);
 
 				if (bounds.ContainsPoint ((PointD) left) && stencil[left]) {
 					// go left
-					next = new (
-						X: next.X + (curr.Y - last.Y),
-						Y: next.Y - (curr.X - last.X)
-					);
+					next -= currLastDelta.Rotated90 ();
 				} else if (bounds.ContainsPoint ((PointD) right) && stencil[right]) {
 					// go straight
-					next = new (
-						X: next.X + (curr.X - last.X),
-						Y: next.Y + (curr.Y - last.Y)
-					);
+					next += currLastDelta;
 				} else {
 					// turn right
-					next = new (
-						X: next.X - (curr.Y - last.Y),
-						Y: next.Y + (curr.X - last.X)
-					);
+					next += currLastDelta.Rotated90 ();
 				}
 
-				if (Math.Sign (next.X - curr.X) != Math.Sign (curr.X - last.X) ||
-				    Math.Sign (next.Y - curr.Y) != Math.Sign (curr.Y - last.Y)) {
+				if (
+					Math.Sign (next.X - curr.X) != Math.Sign (currLastDelta.X) ||
+					Math.Sign (next.Y - curr.Y) != Math.Sign (currLastDelta.Y)) {
 					pts.Add (curr);
 					++count;
 				}
