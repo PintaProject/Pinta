@@ -390,14 +390,12 @@ namespace Pinta.Core
 
 		public static ColorBgra ToColorBgra (this Cairo.Color color)
 		{
-			ColorBgra c = new ColorBgra {
-				R = (byte) (color.R * 255),
-				G = (byte) (color.G * 255),
-				B = (byte) (color.B * 255),
-				A = (byte) (color.A * 255)
-			};
-
-			return c;
+			return ColorBgra.FromBgra (
+				b: (byte) (color.B * 255),
+				g: (byte) (color.G * 255),
+				r: (byte) (color.R * 255),
+				a: (byte) (color.A * 255)
+			);
 		}
 
 		public static Cairo.Color ToCairoColor (this ColorBgra color)
