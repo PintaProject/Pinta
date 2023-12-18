@@ -48,8 +48,8 @@ public sealed class BulgeEffect : BaseEffect
 		float maxrad = Math.Min (hw, hh);
 		float amt = bulge / 100f;
 
-		hh = hh + (float) Data.Offset.Y * hh;
-		hw = hw + (float) Data.Offset.X * hw;
+		hh += (float) Data.Offset.Y * hh;
+		hw += (float) Data.Offset.X * hw;
 
 		int src_width = src.Width;
 		int src_height = src.Height;

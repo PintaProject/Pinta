@@ -314,7 +314,7 @@ public sealed class ViewActions
 			return;
 
 		percent = Math.Min (percent, 3600);
-		percent = percent / 100.0;
+		percent /= 100.0;
 
 		PintaCore.Workspace.Scale = percent;
 	}
