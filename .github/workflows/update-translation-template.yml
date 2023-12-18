@@ -1,0 +1,45 @@
+# Runs 'make updatepot'
+name: Update translation template
+
+on:
+  workflow_dispatch:
+  schedule:
+    # Run every week.
+    - cron: '0 0 * * 0'
+
+jobs:
+  update:
+    runs-on: ubuntu-22.04
+
+    env:
+      # Skip pkg-config version checks. Ubuntu 22.04 doesn't have a recent
+      # enough version of the libraries for some symbols needed at runtime,
+      # but this doesn't matter for building.
+      ADW_1_CFLAGS: undefined
+      ADW_1_LIBS: undefined
+      GTK_CFLAGS: undefined
+      GTK_LIBS: undefined
+
+    steps:
+      - uses: actions/checkout@v4
+      - name: Setup .NET
+        uses: actions/setup-dotnet@v4
+        with:
+          dotnet-version: 8.0.x
+      - name: Install Apt Dependencies
+        run: |
+          sudo apt update
+          sudo apt install autotools-dev autoconf-archive gettext intltool libadwaita-1-dev
+      - name: Update translation template
+        run: |
+          ./autogen.sh
+          make updatepotfiles
+          make updatepot
+      - name: Create pull request
+        uses: peter-evans/create-pull-request@v4
+        with:
+          branch: fix/update-translation-template
+          commit-message: Automatic update of translation template
+          title: Update translation template
+          body: Automatic update of translation template
+          delete-branch: true
