@@ -322,14 +322,12 @@ public struct ColorBgra
 	/// </remarks>
 	public static ColorBgra Lerp (ColorBgra from, ColorBgra to, double frac)
 	{
-		ColorBgra ret = new ColorBgra {
-			B = Utility.ClampToByte (Lerp (from.B, to.B, frac)),
-			G = Utility.ClampToByte (Lerp (from.G, to.G, frac)),
-			R = Utility.ClampToByte (Lerp (from.R, to.R, frac)),
-			A = Utility.ClampToByte (Lerp (from.A, to.A, frac))
-		};
-
-		return ret;
+		return FromBgra (
+			b: Utility.ClampToByte (Lerp (from.B, to.B, frac)),
+			g: Utility.ClampToByte (Lerp (from.G, to.G, frac)),
+			r: Utility.ClampToByte (Lerp (from.R, to.R, frac)),
+			a: Utility.ClampToByte (Lerp (from.A, to.A, frac))
+		);
 	}
 
 	/// <summary>

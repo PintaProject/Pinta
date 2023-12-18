@@ -218,7 +218,7 @@ public sealed class EraserTool : BaseBrushTool
 					dy = -dy;
 
 				for (var ix = dest_rect.Left; ix < dest_rect.Right; ix++) {
-					ref ColorBgra col = ref srcRow[ix - dest_rect.Left];
+
 					var dx = ((ix - x) * LUT_Resolution) / rad;
 
 					if (dx < 0)
@@ -227,19 +227,21 @@ public sealed class EraserTool : BaseBrushTool
 					var force = lut_factor[dy, dx];
 
 					// Note: premultiplied alpha is used!
+					int idx = ix - dest_rect.Left;
+					ColorBgra original = srcRow[idx];
 					if (mouse_button == MouseButton.Right) {
-						col = ColorBgra.FromBgra (
-							b: (byte) ((col.B * force + bk_col_b * (255 - force)) / 255),
-							g: (byte) ((col.G * force + bk_col_g * (255 - force)) / 255),
-							r: (byte) ((col.R * force + bk_col_r * (255 - force)) / 255),
-							a: (byte) ((col.A * force + bk_col_a * (255 - force)) / 255)
+						srcRow[idx] = ColorBgra.FromBgra (
+							b: (byte) ((original.B * force + bk_col_b * (255 - force)) / 255),
+							g: (byte) ((original.G * force + bk_col_g * (255 - force)) / 255),
+							r: (byte) ((original.R * force + bk_col_r * (255 - force)) / 255),
+							a: (byte) ((original.A * force + bk_col_a * (255 - force)) / 255)
 						);
 					} else {
-						col = ColorBgra.FromBgra (
-							b: (byte) (col.B * force / 255),
-							g: (byte) (col.G * force / 255),
-							r: (byte) (col.R * force / 255),
-							a: (byte) (col.A * force / 255)
+						srcRow[idx] = ColorBgra.FromBgra (
+							b: (byte) (original.B * force / 255),
+							g: (byte) (original.G * force / 255),
+							r: (byte) (original.R * force / 255),
+							a: (byte) (original.A * force / 255)
 						);
 					}
 				}

@@ -76,7 +76,7 @@ public sealed class RadialBlurEffect : BaseEffect
 				var src_row = src_data.Slice (y * src_w, src_w);
 
 				for (int x = rect.Left; x <= rect.Right; ++x) {
-					ref ColorBgra dst_pixel = ref dst_row[x];
+
 					ColorBgra src_pixel = src_row[x];
 
 					int fx = (x << 16) - fcx;
@@ -127,13 +127,13 @@ public sealed class RadialBlurEffect : BaseEffect
 					}
 
 					if (sa > 0) {
-						dst_pixel = ColorBgra.FromBgra (
+						dst_row[x] = ColorBgra.FromBgra (
 						    Utility.ClampToByte (sb / sa),
 						    Utility.ClampToByte (sg / sa),
 						    Utility.ClampToByte (sr / sa),
 						    Utility.ClampToByte (sa / sc));
 					} else {
-						dst_pixel.Bgra = 0;
+						dst_row[x].Bgra = 0;
 					}
 				}
 			}

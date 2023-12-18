@@ -311,21 +311,22 @@ public static class UnaryPixelOps
 		public override void Apply (Span<ColorBgra> dst, ReadOnlySpan<ColorBgra> src)
 		{
 			for (int i = 0; i < src.Length; ++i) {
-				ref ColorBgra result = ref dst[i];
 				byte val = src[i].GetIntensityByte ();
 				dst[i] = ColorBgra.FromBgra (val, val, val, src[i].A);
-				result.R = result.G = result.B = val;
-				result.A = src[i].A;
 			}
 		}
 
 		public override void Apply (Span<ColorBgra> dst)
 		{
 			for (int i = 0; i < dst.Length; ++i) {
-				ref ColorBgra result = ref dst[i];
-				byte val = result.GetIntensityByte ();
-				result.R = result.G = result.B = val;
-
+				ColorBgra original = dst[i];
+				byte val = original.GetIntensityByte ();
+				dst[i] = ColorBgra.FromBgra (
+					b: val,
+					g: val,
+					r: val,
+					a: original.A
+				);
 			}
 		}
 	}
@@ -381,9 +382,8 @@ public static class UnaryPixelOps
 		public override void Apply (Span<ColorBgra> dst, ReadOnlySpan<ColorBgra> src)
 		{
 			for (int i = 0; i < src.Length; ++i) {
-				ref ColorBgra d = ref dst[i];
 				ColorBgra s = src[i];
-				d = ColorBgra.FromBgra (
+				dst[i] = ColorBgra.FromBgra (
 					b: CurveB[s.B],
 					g: CurveG[s.G],
 					r: CurveR[s.R],
@@ -395,11 +395,13 @@ public static class UnaryPixelOps
 		public override void Apply (Span<ColorBgra> dst)
 		{
 			for (int i = 0; i < dst.Length; ++i) {
-				ref ColorBgra d = ref dst[i];
-				d.B = CurveB[d.B];
-				d.G = CurveG[d.G];
-				d.R = CurveR[d.R];
-
+				ColorBgra original = dst[i];
+				dst[i] = ColorBgra.FromBgra (
+					b: CurveB[original.B],
+					g: CurveG[original.G],
+					r: CurveR[original.R],
+					a: original.A
+				);
 			}
 		}
 
@@ -794,23 +796,27 @@ public static class UnaryPixelOps
 		public override void Apply (Span<ColorBgra> dst, ReadOnlySpan<ColorBgra> src)
 		{
 			for (int i = 0; i < src.Length; ++i) {
-				ref ColorBgra d = ref dst[i];
-				ColorBgra s = src[i];
-				d.B = blue_levels[s.B];
-				d.G = green_levels[s.G];
-				d.R = red_levels[s.R];
-				d.A = s.A;
+				ColorBgra source = src[i];
+				dst[i] = ColorBgra.FromBgra (
+					b: blue_levels[source.B],
+					g: green_levels[source.G],
+					r: red_levels[source.R],
+					a: source.A
+				);
+
 			}
 		}
 
 		public override void Apply (Span<ColorBgra> dst)
 		{
 			for (int i = 0; i < dst.Length; ++i) {
-				ref ColorBgra d = ref dst[i];
-				d.B = blue_levels[d.B];
-				d.G = green_levels[d.G];
-				d.R = red_levels[d.R];
-
+				ColorBgra original = dst[i];
+				dst[i] = ColorBgra.FromBgra (
+					b: blue_levels[original.B],
+					g: green_levels[original.G],
+					r: red_levels[original.R],
+					a: original.A
+				);
 			}
 		}
 	}

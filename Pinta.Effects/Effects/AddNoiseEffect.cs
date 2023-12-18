@@ -146,12 +146,13 @@ public sealed class AddNoiseEffect : BaseEffect
 						b = i + (((b - i) * sat) >> 12);
 
 						ColorBgra src_pixel = src_row[x];
-						ref ColorBgra dst_pixel = ref dst_row[x];
 
-						dst_pixel.R = Utility.ClampToByte (src_pixel.R + ((r * dev + 32768) >> 16));
-						dst_pixel.G = Utility.ClampToByte (src_pixel.G + ((g * dev + 32768) >> 16));
-						dst_pixel.B = Utility.ClampToByte (src_pixel.B + ((b * dev + 32768) >> 16));
-						dst_pixel.A = src_pixel.A;
+						dst_row[x] = ColorBgra.FromBgra (
+							b: Utility.ClampToByte (src_pixel.B + ((b * dev + 32768) >> 16)),
+							g: Utility.ClampToByte (src_pixel.G + ((g * dev + 32768) >> 16)),
+							r: Utility.ClampToByte (src_pixel.R + ((r * dev + 32768) >> 16)),
+							a: src_pixel.A
+						);
 					}
 				}
 			}

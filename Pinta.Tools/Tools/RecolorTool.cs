@@ -172,16 +172,12 @@ public class RecolorTool : BaseBrushTool
 	#region Private PDN Methods
 	private static ColorBgra AdjustColorDifference (ColorBgra oldColor, ColorBgra newColor, ColorBgra basisColor)
 	{
-		ColorBgra returnColor;
-
-		// eliminate testing for the "equal to" case
-		returnColor = basisColor;
-
-		returnColor.B = AdjustColorByte (oldColor.B, newColor.B, basisColor.B);
-		returnColor.G = AdjustColorByte (oldColor.G, newColor.G, basisColor.G);
-		returnColor.R = AdjustColorByte (oldColor.R, newColor.R, basisColor.R);
-
-		return returnColor;
+		return ColorBgra.FromBgra (
+			b: AdjustColorByte (oldColor.B, newColor.B, basisColor.B),
+			g: AdjustColorByte (oldColor.G, newColor.G, basisColor.G),
+			r: AdjustColorByte (oldColor.R, newColor.R, basisColor.R),
+			a: basisColor.A
+		);
 	}
 
 	private static byte AdjustColorByte (byte oldByte, byte newByte, byte basisByte)
