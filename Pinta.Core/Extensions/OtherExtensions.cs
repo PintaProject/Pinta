@@ -144,13 +144,13 @@ public static class OtherExtensions
 
 				if (bounds.ContainsPoint ((PointD) left) && stencil[left]) {
 					// go left
-					next -= currLastDelta.Rotated90 ();
+					next -= currLastDelta.Rotated90CCW ();
 				} else if (bounds.ContainsPoint ((PointD) right) && stencil[right]) {
 					// go straight
 					next += currLastDelta;
 				} else {
 					// turn right
-					next += currLastDelta.Rotated90 ();
+					next += currLastDelta.Rotated90CCW ();
 				}
 
 				if (

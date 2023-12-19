@@ -40,7 +40,7 @@ public readonly record struct PointI (int X, int Y)
 		return Math.Sqrt (x * x + y * y);
 	}
 
-	public PointI Rotated90 () // Counterclockwise
+	public PointI Rotated90CCW () // Counterclockwise
 		=> new (-Y, X);
 
 	public static PointI operator + (PointI left, PointI right)

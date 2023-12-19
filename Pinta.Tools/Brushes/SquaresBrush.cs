@@ -43,7 +43,7 @@ public sealed class SquaresBrush : BasePaintBrush
 		PointI last = strokeArgs.LastPosition;
 
 		PointI mouseDelta = current - last;
-		PointD rotated = (PointD) mouseDelta.Rotated90 ();
+		PointD rotated = (PointD) mouseDelta.Rotated90CCW ();
 
 		g.MoveTo (last.X - rotated.X, last.Y - rotated.Y);
 		g.LineTo (last.X + rotated.X, last.Y + rotated.Y);
