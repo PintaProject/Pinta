@@ -135,8 +135,8 @@ jobs:
       run: |
         choco install innosetup -y -v
         dotnet publish Pinta.sln -p:BuildTranslations=true -p:MinGWFolder=${MINGW_PREFIX} -c Release -r win-x64 --self-contained true -p:PublishDir=../release/bin
-        mv release/bin/icons release/share/icons
-        mv release/bin/locale release/share/locale
+        cp -r release/bin/icons release/bin/locale release/share/
+        rm -rf release/bin/icons release/bin/locale
         iscc installer/windows/installer.iss
 
     - name: Upload Installer
