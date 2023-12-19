@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
 "POT-Creation-Date: 2023-12-17 14:36-0500\n"
-"PO-Revision-Date: 2023-12-18 11:08+0000\n"
+"PO-Revision-Date: 2023-12-20 15:51+0000\n"
 "Last-Translator: Сергей <asvmail.as@gmail.com>\n"
 "Language-Team: Russian <https://hosted.weblate.org/projects/pinta/pinta/ru/>"
 "\n"
@@ -175,7 +175,7 @@ msgstr "Уместить в окне"
 
 #: ../Pinta.Core/Enumerations/ResamplingMode.cs:22
 msgid "Bilinear"
-msgstr ""
+msgstr "Билинейная"
 
 #: ../Pinta.Effects/Adjustments/BlackAndWhiteEffect.cs:24
 msgid "Black and White"
@@ -183,7 +183,7 @@ msgstr "Чёрно-белое"
 
 #: ../Pinta/Dialogs/LayerPropertiesDialog.cs:88
 msgid "Blend Mode"
-msgstr "Режим смешения"
+msgstr "Режим наложения"
 
 #: ../Pinta.Effects/Dialogs/Effects.LevelsDialog.cs:87
 #: ../Pinta.Effects/Dialogs/Effects.PosterizeDialog.cs:77
@@ -283,7 +283,7 @@ msgstr "Выберите цвет"
 
 #: ../Pinta.Gui.Widgets/Widgets/StatusBarColorPaletteWidget.cs:108
 msgid "Choose Palette Color"
-msgstr "Выберите цвет цалитры"
+msgstr "Выберите цвет палитры"
 
 #: ../Pinta.Gui.Widgets/Widgets/StatusBarColorPaletteWidget.cs:78
 msgid "Choose Primary Color"
@@ -397,7 +397,7 @@ msgstr "Грубость"
 
 #: ../Pinta.Core/Effects/UserBlendOps.cs:43
 msgid "Color"
-msgstr "Управление цветом"
+msgstr "Цветность"
 
 #: ../Pinta.Core/Effects/UserBlendOps.cs:33
 msgid "Color Burn"
@@ -441,7 +441,7 @@ msgstr "Содержание"
 
 #: ../Pinta.Tools/Tools/FloodTool.cs:134
 msgid "Contiguous"
-msgstr "Смежная область"
+msgstr "Смежные области"
 
 #: ../Pinta.Effects/Adjustments/BrightnessContrastEffect.cs:153
 #: ../Pinta.Effects/Effects/GlowEffect.cs:80
@@ -480,7 +480,7 @@ msgstr "Покрытие"
 #: ../Pinta.Core/Actions/ImageActions.cs:47
 #: ../Pinta.Core/Actions/ImageActions.cs:284
 msgid "Crop to Selection"
-msgstr "Откадрировать в выделение"
+msgstr "Откадрировать по выделенному"
 
 #: ../Pinta.Effects/Adjustments/CurvesEffect.cs:26
 #: ../Pinta.Effects/Dialogs/Effects.CurvesDialog.cs:87
@@ -510,7 +510,7 @@ msgstr "Простое затемнение"
 
 #: ../Pinta.Tools/Dashes/DashPatternBox.cs:59
 msgid "Dash"
-msgstr "Штрихи"
+msgstr "Штриховка"
 
 #. Translators: This refers to using the system's default color scheme.
 #: ../Pinta.Core/Actions/ViewActions.cs:183
@@ -730,7 +730,7 @@ msgstr "Отразить по вертикали"
 
 #: ../Pinta.Tools/Tools/FloodTool.cs:124
 msgid "Flood Mode"
-msgstr "Избыточный режим"
+msgstr "Режим заливки"
 
 #: ../Pinta.Tools/Tools/TextTool.cs:135
 msgid "Font"
@@ -754,7 +754,7 @@ msgstr "Матовое стекло"
 
 #: ../Pinta.Core/Actions/ViewActions.cs:80
 msgid "Fullscreen"
-msgstr "Полный экран"
+msgstr "Во весь экран"
 
 #: ../Pinta.Gui.Addins/AddinManagerDialog.cs:64
 msgid "Gallery"
@@ -770,7 +770,7 @@ msgstr "Глобальная"
 
 #: ../Pinta.Effects/Effects/GlowEffect.cs:25
 msgid "Glow"
-msgstr "Сияние"
+msgstr "Свечение"
 
 #: ../Pinta.Tools/Tools/GradientTool.cs:49
 #: ../Pinta.Tools/Tools/GradientTool.cs:178
@@ -1195,7 +1195,7 @@ msgstr "Линейный отражённый градиент"
 
 #: ../Pinta.Effects/Dialogs/Effects.PosterizeDialog.cs:82
 msgid "Linked"
-msgstr "Связь"
+msgstr "Синхронизировать"
 
 #: ../Pinta.Core/Effects/UserBlendOps.cs:44
 #: ../Pinta.Effects/Dialogs/Effects.CurvesDialog.cs:106
@@ -1260,15 +1260,15 @@ msgstr "Переместить выделение"
 
 #: ../Pinta.Core/Effects/UserBlendOps.cs:32
 msgid "Multiply"
-msgstr "Множитель"
+msgstr "Умножение"
 
 #: ../Pinta/Dialogs/LayerPropertiesDialog.cs:72
 msgid "Name:"
-msgstr "Имя:"
+msgstr "Название:"
 
 #: ../Pinta.Core/Enumerations/ResamplingMode.cs:23
 msgid "Nearest Neighbor"
-msgstr ""
+msgstr "Ближайший сосед"
 
 #: ../Pinta.Core/Actions/FileActions.cs:55
 msgid "New"
@@ -1309,7 +1309,7 @@ msgstr "Обычный"
 
 #: ../Pinta.Core/Classes/BaseTool.cs:335
 msgid "Normal Blending"
-msgstr "Обычное смешивание"
+msgstr "Обычное наложение"
 
 #: ../Pinta.Core/Actions/ViewActions.cs:71
 msgid "Normal Size"
@@ -1403,7 +1403,7 @@ msgstr "Гистограмма выхода"
 
 #: ../Pinta.Core/Effects/UserBlendOps.cs:35
 msgid "Overlay"
-msgstr "Оверлей"
+msgstr "Перекрытие"
 
 #: ../Pinta.Core/Classes/BaseTool.cs:336
 msgid "Overwrite"
@@ -1411,7 +1411,7 @@ msgstr "Переписать"
 
 #: ../Pinta.Tools/Tools/PaintBucketTool.cs:43
 msgid "Paint Bucket"
-msgstr "Плоская заливка"
+msgstr "Заливка"
 
 #: ../Pinta.Tools/Tools/PaintBrushTool.cs:56
 msgid "Paintbrush"
@@ -1822,7 +1822,7 @@ msgstr "Масштаб"
 
 #: ../Pinta.Core/Effects/UserBlendOps.cs:39
 msgid "Screen"
-msgstr "Освещение"
+msgstr "Экран"
 
 #: ../Pinta.Effects/Effects/WarpEffect.cs:32
 msgid "Secondary"
@@ -2030,7 +2030,7 @@ msgstr "Инструментальные окна"
 
 #: ../Pinta.Core/Actions/ViewActions.cs:72
 msgid "Toolbar"
-msgstr "Стандартная панель"
+msgstr "Панель инструментов"
 
 #: ../Pinta.Effects/Dialogs/Effects.CurvesDialog.cs:102
 msgid "Transfer Map"
@@ -2187,7 +2187,7 @@ msgstr "Масштабирование"
 
 #: ../Pinta.Effects/Effects/ZoomBlurEffect.cs:23
 msgid "Zoom Blur"
-msgstr "Увеличительное размытие"
+msgstr "Размытие с увеличением"
 
 #: ../Pinta.Core/Actions/ViewActions.cs:67
 msgid "Zoom In"
