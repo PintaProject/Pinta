@@ -137,6 +137,7 @@ jobs:
         dotnet publish Pinta.sln -p:BuildTranslations=true -p:MinGWFolder=${MINGW_PREFIX} -c Release -r win-x64 --self-contained true -p:PublishDir=../release/bin
         cp -r release/bin/icons release/bin/locale release/share/
         rm -rf release/bin/icons release/bin/locale
+        cp installer/macos/hicolor.index.theme release/share/icons/hicolor/index.theme
         iscc installer/windows/installer.iss
 
     - name: Upload Installer
