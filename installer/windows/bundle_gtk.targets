@@ -1,6 +1,7 @@
 <Project xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <!-- Install GTK library dependencies on Windows, from the MSYS installation. -->
   <PropertyGroup>
+    <!-- Note this can be overridden by an environment variable with the same name. -->
     <MinGWFolder>C:\msys64\mingw64</MinGWFolder>
     <MinGWBinFolder>$(MinGWFolder)\bin</MinGWBinFolder>
   </PropertyGroup>
