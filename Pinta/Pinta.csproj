@@ -3,7 +3,7 @@
     <OutputType>WinExe</OutputType>
     <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
     <ApplicationIcon>Pinta.ico</ApplicationIcon>
-    <OutputPath>..\bin</OutputPath>
+    <OutputPath>..\build\bin</OutputPath>
     <AppendTargetFrameworkToOutputPath>false</AppendTargetFrameworkToOutputPath>
 
     <!-- Disabled by default as it requires gettext to be installed. -->
