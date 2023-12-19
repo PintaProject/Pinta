@@ -77,9 +77,11 @@ public sealed class SystemManager
 		string app_dir = SystemManager.GetExecutableDirectory ();
 
 		// If Pinta is located at $prefix/lib/pinta, we want to use $prefix/share.
-		if (GetOperatingSystem () == OS.X11) {
+		// Or, on Windows, Pinta should be at $prefix/bin/Pinta.exe
+		if (GetOperatingSystem () == OS.X11 || GetOperatingSystem () == OS.Windows) {
 			var lib_dir = Directory.GetParent (app_dir);
-			if (lib_dir?.Name == "lib") {
+			string expected_parent_name = (GetOperatingSystem () == OS.Windows) ? "bin" : "lib";
+			if (lib_dir?.Name == expected_parent_name) {
 				var prefix = lib_dir.Parent;
 				if (prefix is not null)
 					return Path.Combine (prefix.FullName, "share");
