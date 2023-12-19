@@ -83,7 +83,7 @@
     <GtkFile Include="$(MinGWFolder)\lib\gdk-pixbuf-2.0\**" LinkBase="..\lib\gdk-pixbuf-2.0" />
     <GtkFile Include="$(MinGWFolder)\share\glib-2.0\schemas\**" LinkBase="..\share\glib-2.0\schemas" />
     <GtkFile Include="$(MinGWFolder)\share\locale\**" LinkBase="..\share\locale" />
-    <GtkFile Include="$(MinGWFolder)\share\icons\**" LinkBase="..\share\icons" />
+    <GtkFile Include="$(MinGWFolder)\share\icons\Adwaita\**" LinkBase="..\share\icons\Adwaita" />
   </ItemGroup>
 
   <ItemGroup>
