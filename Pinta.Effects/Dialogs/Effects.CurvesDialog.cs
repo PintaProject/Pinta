@@ -126,9 +126,9 @@ public sealed class CurvesDialog : Gtk.Dialog
 		check_red = new CheckButton () { Label = Translations.GetString ("Red  "), Active = true };
 		check_green = new CheckButton () { Label = Translations.GetString ("Green"), Active = true };
 		check_blue = new CheckButton () { Label = Translations.GetString ("Blue "), Active = true };
-		hbox2.Prepend (check_red);
-		hbox2.Prepend (check_green);
 		hbox2.Prepend (check_blue);
+		hbox2.Prepend (check_green);
+		hbox2.Prepend (check_red);
 
 		button_reset = new Button () {
 			WidthRequest = 81,
