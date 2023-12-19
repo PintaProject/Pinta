@@ -126,21 +126,15 @@ jobs:
         update: true
         install: mingw-w64-x86_64-libadwaita
     - name: Build
-      env:
-        MinGWFolder: ${{env.MINGW_PREFIX}}
-      run: dotnet build Pinta.sln -c Release
+      run: dotnet build Pinta.sln -c Release -p:MinGWFolder=${MINGW_PREFIX} 
     - name: Test
-      env:
-        MinGWFolder: ${{env.MINGW_PREFIX}}
-      run: dotnet test Pinta.sln -c Release
+      run: dotnet test Pinta.sln -c Release -p:MinGWFolder=${MINGW_PREFIX} 
 
     # Note that msgfmt is already available from the Git for Windows installation!
     - name: Build Installer
-      env:
-        MinGWFolder: ${{env.MINGW_PREFIX}}
       run: |
         choco install innosetup -y -v
-        dotnet publish Pinta.sln -p:BuildTranslations=true -c Release -r win-x64 --self-contained true -o release/bin
+        dotnet publish Pinta.sln -p:BuildTranslations=true -p:MinGWFolder=${MINGW_PREFIX} -c Release -r win-x64 --self-contained true -o release/bin
         mv release/bin/icons release/share/icons
         iscc installer/windows/installer.iss
 
