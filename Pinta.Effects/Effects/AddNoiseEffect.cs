@@ -100,15 +100,28 @@ public sealed class AddNoiseEffect : BaseEffect
 		return result.MoveToImmutable ();
 	}
 
+	private sealed record AddNoiseSettings (
+		RandomSeed seed,
+		double coverage,
+		int dev,
+		int sat);
+
+	private AddNoiseSettings CreateSettings ()
+	{
+		var data = Data;
+		int intensity = data.Intensity;
+		int color_saturation = data.ColorSaturation;
+		return new (
+			seed: data.Seed,
+			coverage: 0.01 * data.Coverage,
+			dev: intensity * intensity / 4,
+			sat: color_saturation * 4096 / 100
+		);
+	}
+
 	public override void Render (ImageSurface src, ImageSurface dst, ReadOnlySpan<RectangleI> rois)
 	{
-		RandomSeed seed = Data.Seed;
-		int intensity = Data.Intensity;
-		int color_saturation = Data.ColorSaturation;
-		double coverage = 0.01 * Data.Coverage;
-
-		int dev = intensity * intensity / 4;
-		int sat = color_saturation * 4096 / 100;
+		AddNoiseSettings settings = CreateSettings ();
 
 		ReadOnlySpan<int> localLookup = lookup.AsSpan ();
 
@@ -122,7 +135,7 @@ public sealed class AddNoiseEffect : BaseEffect
 			// Reseed the random number generator for each rectangle being rendered.
 			// This should produce consistent results regardless of the number of threads
 			// being used to render the effect, but will change if the effect is tiled differently.
-			var rand = new Random (seed.GetValueForRegion (rect));
+			var rand = new Random (settings.seed.GetValueForRegion (rect));
 
 			int right = rect.Right;
 
@@ -133,7 +146,7 @@ public sealed class AddNoiseEffect : BaseEffect
 
 				for (int x = rect.Left; x <= right; ++x) {
 
-					if (rand.NextDouble () > coverage) {
+					if (rand.NextDouble () > settings.coverage) {
 						dst_row[x] = src_row[x];
 						continue;
 					}
@@ -144,16 +157,16 @@ public sealed class AddNoiseEffect : BaseEffect
 
 					int i = (4899 * _r + 9618 * _g + 1867 * _b) >> 14;
 
-					int r = i + (((_r - i) * sat) >> 12);
-					int g = i + (((_g - i) * sat) >> 12);
-					int b = i + (((_b - i) * sat) >> 12);
+					int r = i + (((_r - i) * settings.sat) >> 12);
+					int g = i + (((_g - i) * settings.sat) >> 12);
+					int b = i + (((_b - i) * settings.sat) >> 12);
 
 					ColorBgra src_pixel = src_row[x];
 
 					dst_row[x] = ColorBgra.FromBgra (
-						b: Utility.ClampToByte (src_pixel.B + ((b * dev + 32768) >> 16)),
-						g: Utility.ClampToByte (src_pixel.G + ((g * dev + 32768) >> 16)),
-						r: Utility.ClampToByte (src_pixel.R + ((r * dev + 32768) >> 16)),
+						b: Utility.ClampToByte (src_pixel.B + ((b * settings.dev + 32768) >> 16)),
+						g: Utility.ClampToByte (src_pixel.G + ((g * settings.dev + 32768) >> 16)),
+						r: Utility.ClampToByte (src_pixel.R + ((r * settings.dev + 32768) >> 16)),
 						a: src_pixel.A
 					);
 				}
