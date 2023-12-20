@@ -43,13 +43,17 @@ public sealed class FrostedGlassEffect : BaseEffect
 	private sealed record FrostedGlassSettings (
 		int amount,
 		int src_width,
-		int src_height);
+		int src_height,
+		RandomSeed seed);
+
 	private FrostedGlassSettings CreateSettings (ImageSurface src)
 	{
+		var data = Data;
 		return new (
-			amount: Data.Amount,
+			amount: data.Amount,
 			src_width: src.Width,
-			src_height: src.Height
+			src_height: src.Height,
+			seed: data.Seed
 		);
 	}
 
@@ -61,7 +65,8 @@ public sealed class FrostedGlassEffect : BaseEffect
 		Span<ColorBgra> dst_data = dst.GetPixelData ();
 
 		foreach (var rect in rois) {
-			var random = new Random (Data.Seed.GetValueForRegion (rect));
+
+			var random = new Random (settings.seed.GetValueForRegion (rect));
 
 			for (int y = rect.Top; y <= rect.Bottom; ++y) {
 
