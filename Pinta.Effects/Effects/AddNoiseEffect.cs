@@ -60,24 +60,24 @@ public sealed class AddNoiseEffect : BaseEffect
 		double scale = 50;
 
 		while (r - l > 0.0000001) {
+
 			double s = 0;
 			scale = (l + r) * 0.5;
 
 			for (int i = 0; i < TableSize; ++i) {
+
 				s += NormalCurve (16.0 * ((double) i - TableSize / 2) / TableSize, scale);
 
-				if (s > 1000000) {
+				if (s > 1000000)
 					break;
-				}
 			}
 
-			if (s > TableSize) {
+			if (s > TableSize)
 				r = scale;
-			} else if (s < TableSize) {
+			else if (s < TableSize)
 				l = scale;
-			} else {
+			else
 				break;
-			}
 		}
 
 		var result = ImmutableArray.CreateBuilder<int> (TableSize);
@@ -87,6 +87,7 @@ public sealed class AddNoiseEffect : BaseEffect
 		int roundedSum = 0, lastRoundedSum;
 
 		for (int i = 0; i < TableSize; ++i) {
+
 			sum += NormalCurve (16.0 * ((double) i - TableSize / 2) / TableSize, scale);
 			lastRoundedSum = roundedSum;
 			roundedSum = (int) sum;
@@ -96,11 +97,12 @@ public sealed class AddNoiseEffect : BaseEffect
 			}
 		}
 
-		return result.ToImmutable ();
+		return result.MoveToImmutable ();
 	}
 
 	public override void Render (ImageSurface src, ImageSurface dst, ReadOnlySpan<RectangleI> rois)
 	{
+		RandomSeed seed = Data.Seed;
 		int intensity = Data.Intensity;
 		int color_saturation = Data.ColorSaturation;
 		double coverage = 0.01 * Data.Coverage;
@@ -112,48 +114,48 @@ public sealed class AddNoiseEffect : BaseEffect
 
 		ReadOnlySpan<ColorBgra> src_data = src.GetReadOnlyPixelData ();
 		Span<ColorBgra> dst_data = dst.GetPixelData ();
+
 		int width = src.Width;
 
 		foreach (var rect in rois) {
+
 			// Reseed the random number generator for each rectangle being rendered.
 			// This should produce consistent results regardless of the number of threads
 			// being used to render the effect, but will change if the effect is tiled differently.
-			var rand = new Random (Data.Seed.GetValueForRegion (rect));
+			var rand = new Random (seed.GetValueForRegion (rect));
 
 			int right = rect.Right;
+
 			for (int y = rect.Top; y <= rect.Bottom; ++y) {
+
 				var dst_row = dst_data.Slice (y * width, width);
 				var src_row = src_data.Slice (y * width, width);
 
 				for (int x = rect.Left; x <= right; ++x) {
+
 					if (rand.NextDouble () > coverage) {
 						dst_row[x] = src_row[x];
-					} else {
-						int r;
-						int g;
-						int b;
-						int i;
-
-						r = localLookup[rand.Next (TableSize)];
-						g = localLookup[rand.Next (TableSize)];
-						b = localLookup[rand.Next (TableSize)];
-
-						i = (4899 * r + 9618 * g + 1867 * b) >> 14;
-
-
-						r = i + (((r - i) * sat) >> 12);
-						g = i + (((g - i) * sat) >> 12);
-						b = i + (((b - i) * sat) >> 12);
-
-						ColorBgra src_pixel = src_row[x];
-
-						dst_row[x] = ColorBgra.FromBgra (
-							b: Utility.ClampToByte (src_pixel.B + ((b * dev + 32768) >> 16)),
-							g: Utility.ClampToByte (src_pixel.G + ((g * dev + 32768) >> 16)),
-							r: Utility.ClampToByte (src_pixel.R + ((r * dev + 32768) >> 16)),
-							a: src_pixel.A
-						);
+						continue;
 					}
+
+					int _r = localLookup[rand.Next (TableSize)];
+					int _g = localLookup[rand.Next (TableSize)];
+					int _b = localLookup[rand.Next (TableSize)];
+
+					int i = (4899 * _r + 9618 * _g + 1867 * _b) >> 14;
+
+					int r = i + (((_r - i) * sat) >> 12);
+					int g = i + (((_g - i) * sat) >> 12);
+					int b = i + (((_b - i) * sat) >> 12);
+
+					ColorBgra src_pixel = src_row[x];
+
+					dst_row[x] = ColorBgra.FromBgra (
+						b: Utility.ClampToByte (src_pixel.B + ((b * dev + 32768) >> 16)),
+						g: Utility.ClampToByte (src_pixel.G + ((g * dev + 32768) >> 16)),
+						r: Utility.ClampToByte (src_pixel.R + ((r * dev + 32768) >> 16)),
+						a: src_pixel.A
+					);
 				}
 			}
 		}
