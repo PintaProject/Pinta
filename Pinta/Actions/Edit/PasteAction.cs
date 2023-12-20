@@ -131,8 +131,8 @@ internal sealed class PasteAction : IActionHandler
 		// If the pasted image would fall off bottom- or right-
 		// side of image, adjust paste position
 		pastePosition = new PointI (
-		    X: Math.Clamp (pastePosition.X, 0, canvas_size.Width - cb_image.Width),
-		    Y: Math.Clamp (pastePosition.Y, 0, canvas_size.Height - cb_image.Height)
+			X: Math.Clamp (pastePosition.X, 0, Math.Max (0, canvas_size.Width - cb_image.Width)),
+			Y: Math.Clamp (pastePosition.Y, 0, Math.Max (0, canvas_size.Height - cb_image.Height))
 		);
 
 		// If requested, create a new layer, make it the current
