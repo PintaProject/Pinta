@@ -68,7 +68,7 @@ jobs:
         if-no-files-found: error
 
   build-macos:
-    runs-on: macos-11
+    runs-on: macos-12
 
     steps:
     - uses: actions/checkout@v4
@@ -126,21 +126,22 @@ jobs:
         update: true
         install: mingw-w64-x86_64-libadwaita
     - name: Build
-      run: dotnet build Pinta.sln -c Release
+      run: dotnet build Pinta.sln -c Release -p:MinGWFolder=${MINGW_PREFIX} 
     - name: Test
-      run: dotnet test Pinta.sln -c Release
+      run: dotnet test Pinta.sln -c Release -p:MinGWFolder=${MINGW_PREFIX} 
 
     # Note that msgfmt is already available from the Git for Windows installation!
     - name: Build Installer
-      if: ${{ false }} # Disable until the installer supports GTK4
       run: |
         choco install innosetup -y -v
-        dotnet publish Pinta.sln -p:BuildTranslations=true -c Release -r win-x64 --self-contained true
+        dotnet publish Pinta.sln -p:BuildTranslations=true -p:MinGWFolder=${MINGW_PREFIX} -c Release -r win-x64 --self-contained true -p:PublishDir=../release/bin
+        cp -r release/bin/icons release/bin/locale release/share/
+        rm -rf release/bin/icons release/bin/locale
+        cp installer/macos/hicolor.index.theme release/share/icons/hicolor/index.theme
         iscc installer/windows/installer.iss
 
     - name: Upload Installer
       uses: actions/upload-artifact@v4
-      if: ${{ false }} # Disable until the installer supports GTK4
       with:
         name: "Pinta.exe"
         path: installer/windows/Pinta.exe
