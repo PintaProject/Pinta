@@ -71,8 +71,10 @@ internal sealed class OpenDocumentAction : IActionHandler
 			// Files can often also be identified by their MIME types.
 			// Windows does not understand MIME types natively.
 			// Adding a MIME filter on Windows would break the native file picker and force a GTK file picker instead.
-			foreach (var mime in format.Mimes)
-				ff.AddMimeType (mime);
+			if (SystemManager.GetOperatingSystem () != OS.Windows) {
+				foreach (var mime in format.Mimes)
+					ff.AddMimeType (mime);
+			}
 		}
 
 		fcd.AddFilter (ff);

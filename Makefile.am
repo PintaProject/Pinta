@@ -1,7 +1,8 @@
 SUBDIRS = xdg
 DIST_SUBDIRS = xdg
 
-BINDIR = $(srcdir)/bin
+BUILDDIR = $(srcdir)/build
+BINDIR = $(BUILDDIR)/bin
 
 PINTA_BUILD_OPTS = --configuration Release -p:BuildTranslations=true
 
@@ -31,17 +32,17 @@ all: publish
 
 # target: run - Launch the uninstalled copy
 run: build
-	$(DOTNET_CMD) bin/Pinta.dll
+	$(DOTNET_CMD) build/bin/Pinta.dll
 
 # target: help - Display callable targets.
 help:
 	egrep "^# target:" Makefile | sed 's/^# target:/make/'
 
-bin/Pinta.dll: Pinta.sln
+build/bin/Pinta.dll: Pinta.sln
 	cd $(srcdir) && $(DOTNET_CMD) build Pinta.sln $(PINTA_BUILD_OPTS)
 
 # target: build - Build Pinta.
-build: bin/Pinta.dll
+build: build/bin/Pinta.dll
 
 publish/Pinta.dll: Pinta.sln
 	cd $(srcdir) && $(DOTNET_CMD) publish Pinta.sln $(PINTA_BUILD_OPTS) --self-contained false -p:PublishDir=$(abs_srcdir)/publish
@@ -90,7 +91,7 @@ maintainer-clean-local:
 
 # target: cleanbin - Removes built files.
 cleanbin:
-	rm -rvf $(BINDIR)/*
+	rm -rvf $(BUILDDIR)/*
 
 # target: cleanobj - Removes temporary build files.
 cleanobj:

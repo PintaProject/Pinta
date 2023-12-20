@@ -3,7 +3,7 @@
     <OutputType>WinExe</OutputType>
     <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
     <ApplicationIcon>Pinta.ico</ApplicationIcon>
-    <OutputPath>..\bin</OutputPath>
+    <OutputPath>..\build\bin</OutputPath>
     <AppendTargetFrameworkToOutputPath>false</AppendTargetFrameworkToOutputPath>
 
     <!-- Disabled by default as it requires gettext to be installed. -->
@@ -44,4 +44,7 @@
   <Target Name="PublishTranslations" AfterTargets="Publish" Condition="'$(BuildTranslations)' == 'true'">
     <Copy SourceFiles="$(OutputPath)/locale/%(Translation.Filename)/LC_MESSAGES/pinta.mo" DestinationFiles="$(PublishDir)/locale/%(Translation.Filename)/LC_MESSAGES/pinta.mo" />
   </Target>
+
+  <!-- For Windows, copy GTK library dependencies to the build folder. -->
+  <Import Condition="$([MSBuild]::IsOSPlatform('Windows'))" Project="../installer/windows/bundle_gtk.targets" />
 </Project>
