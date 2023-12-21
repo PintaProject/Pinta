@@ -2,6 +2,8 @@
 #define ProductVersion "2.2"
 
 [Setup]
+; Adds option to skip creating start menu entries
+AllowNoIcons=yes
 AppId=C0BCDEDA-62E7-4A43-8435-58323E096912
 AppName={#ProductName}
 AppPublisher=Pinta Community
