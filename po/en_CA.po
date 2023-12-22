@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: pinta\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2023-12-22 02:09-0500\n"
-"PO-Revision-Date: 2023-12-20 15:51+0000\n"
+"PO-Revision-Date: 2023-12-22 20:42+0000\n"
 "Last-Translator: Cameron White <cameronwhite91@gmail.com>\n"
 "Language-Team: English (Canada) <https://hosted.weblate.org/projects/pinta/"
 "pinta/en_CA/>\n"
@@ -17,7 +17,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Generator: Weblate 5.3\n"
+"X-Generator: Weblate 5.4-dev\n"
 "X-Launchpad-Export-Date: 2023-12-18 03:00+0000\n"
 
 #: ../Pinta.Gui.Addins/InstallDialog.cs:216
@@ -81,7 +81,7 @@ msgstr "Added"
 
 #: ../Pinta/MainWindow.cs:372
 msgid "Adjustments"
-msgstr ""
+msgstr "Adjustments"
 
 #: ../Pinta.Tools/Tools/ColorPickerTool.cs:193
 msgid "After select"
@@ -585,7 +585,7 @@ msgstr "Effe_cts"
 
 #: ../Pinta/MainWindow.cs:366
 msgid "Effects"
-msgstr ""
+msgstr "Effects"
 
 #: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:326
 #: ../Pinta.Tools/Editable/EditEngines/EllipseEditEngine.cs:34
@@ -621,7 +621,7 @@ msgstr "Exclude (-) (Right Click)"
 #. Translators: This refers to expanding the canvas size when pasting a larger image.
 #: ../Pinta/Actions/Edit/PasteAction.cs:191
 msgid "Expand"
-msgstr ""
+msgstr "Expand"
 
 #: ../Pinta.Gui.Addins/AddinManagerDialog.cs:204
 msgid "Extension packages"
@@ -1189,7 +1189,7 @@ msgstr "Magic Wand Select"
 
 #: ../Pinta/MainWindow.cs:360
 msgid "Main Menu"
-msgstr ""
+msgstr "Main Menu"
 
 #: ../Pinta/Dialogs/ResizeCanvasDialog.cs:76
 #: ../Pinta/Dialogs/ResizeImageDialog.cs:66
@@ -1541,7 +1541,7 @@ msgstr "Power"
 #. Translators: This refers to preserving the current canvas size when pasting a larger image.
 #: ../Pinta/Actions/Edit/PasteAction.cs:189
 msgid "Preserve"
-msgstr ""
+msgstr "Preserve"
 
 #: ../Pinta/Dialogs/NewImageDialog.cs:101
 msgid "Preset:"
@@ -1947,6 +1947,8 @@ msgid ""
 "The image being pasted is larger than the canvas. What would you like to do "
 "to the canvas size?"
 msgstr ""
+"The image being pasted is larger than the canvas. What would you like to do "
+"to the canvas size?"
 
 #: ../Pinta.Gui.Addins/InstallDialog.cs:293
 msgid "The installation failed!"
