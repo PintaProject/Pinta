@@ -178,15 +178,17 @@ internal sealed class PasteAction : IActionHandler
 	public static async Task<ResponseType> ShowExpandCanvasDialog ()
 	{
 		var primary = Translations.GetString ("Image larger than canvas");
-		var secondary = Translations.GetString ("The image being pasted is larger than the canvas size. What would you like to do?");
+		var secondary = Translations.GetString ("The image being pasted is larger than the canvas. What would you like to do to the canvas size?");
 		var dialog = Adw.MessageDialog.New (PintaCore.Chrome.MainWindow, primary, secondary);
 
 		const string cancel_response = "cancel";
 		const string reject_response = "reject";
 		const string expand_response = "expand";
 		dialog.AddResponse (cancel_response, Translations.GetString ("_Cancel"));
-		dialog.AddResponse (reject_response, Translations.GetString ("Don't change canvas size"));
-		dialog.AddResponse (expand_response, Translations.GetString ("Expand canvas"));
+		// Translators: This refers to preserving the current canvas size when pasting a larger image.
+		dialog.AddResponse (reject_response, Translations.GetString ("Preserve"));
+		// Translators: This refers to expanding the canvas size when pasting a larger image.
+		dialog.AddResponse (expand_response, Translations.GetString ("Expand"));
 
 		dialog.SetResponseAppearance (expand_response, Adw.ResponseAppearance.Suggested);
 		dialog.CloseResponse = cancel_response;
