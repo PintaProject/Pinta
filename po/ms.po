@@ -6,11 +6,12 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: pinta\n"
-"Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
-"POT-Creation-Date: 2023-12-17 14:36-0500\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2023-12-22 02:09-0500\n"
 "PO-Revision-Date: 2021-12-31 16:38+0000\n"
 "Last-Translator: abuyop <Unknown>\n"
 "Language-Team: Malay <ms@li.org>\n"
+"Language: ms\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -31,23 +32,23 @@ msgstr " Mod Pemilihan: "
 msgid "..."
 msgstr "..."
 
-#: ../Pinta.Tools/Tools/ColorPickerTool.cs:224
+#: ../Pinta.Tools/Tools/ColorPickerTool.cs:222
 msgid "3 x 3 Region"
 msgstr "Kawasan 3 x 3"
 
-#: ../Pinta.Tools/Tools/ColorPickerTool.cs:225
+#: ../Pinta.Tools/Tools/ColorPickerTool.cs:223
 msgid "5 x 5 Region"
 msgstr "Kawasan 5 x 5"
 
-#: ../Pinta.Tools/Tools/ColorPickerTool.cs:226
+#: ../Pinta.Tools/Tools/ColorPickerTool.cs:224
 msgid "7 x 7 Region"
 msgstr "Kawasan 7 x 7"
 
-#: ../Pinta.Tools/Tools/ColorPickerTool.cs:227
+#: ../Pinta.Tools/Tools/ColorPickerTool.cs:225
 msgid "9 x 9 Region"
 msgstr "Kawasan 9 x 9"
 
-#: ../Pinta/MainWindow.cs:343
+#: ../Pinta/MainWindow.cs:328
 msgid "A_dd-ins"
 msgstr "Tam_bahan"
 
@@ -59,9 +60,9 @@ msgstr "Perihal"
 msgid "About Pinta"
 msgstr "Perihal Pinta"
 
-#: ../Pinta/Actions/Edit/PasteAction.cs:133
 #: ../Pinta.Core/Actions/LayerActions.cs:48
 #: ../Pinta.Core/Actions/LayerActions.cs:329
+#: ../Pinta/Actions/Edit/PasteAction.cs:143
 msgid "Add New Layer"
 msgstr "Tambah Lapisan Baharu"
 
@@ -77,21 +78,25 @@ msgstr ""
 msgid "Added"
 msgstr "Ditambah"
 
-#: ../Pinta.Tools/Tools/ColorPickerTool.cs:195
+#: ../Pinta/MainWindow.cs:372
+msgid "Adjustments"
+msgstr ""
+
+#: ../Pinta.Tools/Tools/ColorPickerTool.cs:193
 msgid "After select"
 msgstr "Selepas pilih"
 
-#: ../Pinta/Actions/File/OpenDocumentAction.cs:81
 #: ../Pinta.Core/Actions/EditActions.cs:366
 #: ../Pinta.Gui.Addins/AddinManagerDialog.cs:209
+#: ../Pinta/Actions/File/OpenDocumentAction.cs:83
 msgid "All files"
 msgstr "Semua fail"
 
 #: ../Pinta.Effects/Effects/BulgeEffect.cs:89
-#: ../Pinta.Effects/Effects/FrostedGlassEffect.cs:150
+#: ../Pinta.Effects/Effects/FrostedGlassEffect.cs:155
 #: ../Pinta.Effects/Effects/SharpenEffect.cs:56
-#: ../Pinta.Effects/Effects/TwistEffect.cs:131
-#: ../Pinta.Effects/Effects/ZoomBlurEffect.cs:124
+#: ../Pinta.Effects/Effects/TwistEffect.cs:139
+#: ../Pinta.Effects/Effects/ZoomBlurEffect.cs:123
 msgid "Amount"
 msgstr "Amaun"
 
@@ -99,19 +104,19 @@ msgstr "Amaun"
 msgid "Anchor:"
 msgstr "Penambat:"
 
-#: ../Pinta/Actions/Layers/RotateZoomLayerAction.cs:115
 #: ../Pinta.Effects/Effects/EdgeDetectEffect.cs:80
-#: ../Pinta.Effects/Effects/EmbossEffect.cs:135
+#: ../Pinta.Effects/Effects/EmbossEffect.cs:144
 #: ../Pinta.Effects/Effects/JuliaFractalEffect.cs:150
 #: ../Pinta.Effects/Effects/MandelbrotFractalEffect.cs:168
 #: ../Pinta.Effects/Effects/MotionBlurEffect.cs:101
 #: ../Pinta.Effects/Effects/RadialBlurEffect.cs:146
 #: ../Pinta.Effects/Effects/ReliefEffect.cs:82
 #: ../Pinta.Tools/Editable/EditEngines/ArrowedEditEngine.cs:298
+#: ../Pinta/Actions/Layers/RotateZoomLayerAction.cs:115
 msgid "Angle"
 msgstr "Sudut"
 
-#: ../Pinta.Effects/Effects/TwistEffect.cs:134
+#: ../Pinta.Effects/Effects/TwistEffect.cs:142
 msgid "Antialias"
 msgstr "Antialias"
 
@@ -236,13 +241,13 @@ msgstr "Mengikut saiz mutlak:"
 msgid "By percentage:"
 msgstr "Mengikut peratus:"
 
-#: ../Pinta/Actions/File/OpenDocumentAction.cs:54
-#: ../Pinta/Actions/File/SaveDocumentImplementationAction.cs:74
 #: ../Pinta.Core/Actions/EditActions.cs:351
 #: ../Pinta.Core/Actions/EditActions.cs:392
 #: ../Pinta.Core/Actions/LayerActions.cs:167
 #: ../Pinta.Gui.Addins/AddinManagerDialog.cs:198
 #: ../Pinta.Gui.Addins/InstallDialog.cs:120
+#: ../Pinta/Actions/File/OpenDocumentAction.cs:54
+#: ../Pinta/Actions/File/SaveDocumentImplementationAction.cs:74
 msgid "Cancel"
 msgstr "Batal"
 
@@ -404,7 +409,7 @@ msgstr "Pemilih Warna"
 msgid "Color Range"
 msgstr "Julat Warna"
 
-#: ../Pinta.Effects/Effects/AddNoiseEffect.cs:167
+#: ../Pinta.Effects/Effects/AddNoiseEffect.cs:183
 msgid "Color Saturation"
 msgstr "Ketepuan Warna"
 
@@ -446,7 +451,7 @@ msgid "Copyright"
 msgstr "Hak Cipta"
 
 #. Translators: {0} is the name of a layer, and {1} is the path to a .ora file.
-#: ../Pinta.Core/ImageFormats/OraFormat.cs:122
+#: ../Pinta.Core/ImageFormats/OraFormat.cs:127
 #, csharp-format
 msgid "Could not import layer \"{0}\" from {1}"
 msgstr ""
@@ -458,7 +463,7 @@ msgstr ""
 msgid "Could not open file: {0}"
 msgstr "Tidak dapat buka fail: {0}"
 
-#: ../Pinta.Effects/Effects/AddNoiseEffect.cs:170
+#: ../Pinta.Effects/Effects/AddNoiseEffect.cs:186
 msgid "Coverage"
 msgstr "Liputan"
 
@@ -541,13 +546,9 @@ msgstr "Jarak"
 msgid "Distort"
 msgstr "Herot"
 
-#: ../Pinta.Tools/Tools/ColorPickerTool.cs:204
+#: ../Pinta.Tools/Tools/ColorPickerTool.cs:202
 msgid "Do not switch tool"
 msgstr "Jangan tukar alat"
-
-#: ../Pinta/Actions/Edit/PasteAction.cs:178
-msgid "Don't change canvas size"
-msgstr "Jangan ubah saiz kanvas"
 
 #: ../Pinta.Gui.Addins/AddinInfoView.cs:134
 #, csharp-format
@@ -571,9 +572,13 @@ msgstr "Kelakuan Pinggir"
 msgid "Edge Detect"
 msgstr "Kesan Pinggir"
 
-#: ../Pinta/MainWindow.cs:339
+#: ../Pinta/MainWindow.cs:324
 msgid "Effe_cts"
 msgstr "Kes_an"
+
+#: ../Pinta/MainWindow.cs:366
+msgid "Effects"
+msgstr ""
 
 #: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:326
 #: ../Pinta.Tools/Editable/EditEngines/EllipseEditEngine.cs:34
@@ -598,7 +603,7 @@ msgstr "Padam Pemilihan"
 msgid "Eraser"
 msgstr "Pemadam"
 
-#: ../Pinta.Core/ImageFormats/OraFormat.cs:123
+#: ../Pinta.Core/ImageFormats/OraFormat.cs:128
 msgid "Error"
 msgstr "Ralat"
 
@@ -606,9 +611,10 @@ msgstr "Ralat"
 msgid "Exclude (-) (Right Click)"
 msgstr "Asingkan (-) (Klik Kanan)"
 
-#: ../Pinta/Actions/Edit/PasteAction.cs:179
-msgid "Expand canvas"
-msgstr "Kembangkan kanvas"
+#. Translators: This refers to expanding the canvas size when pasting a larger image.
+#: ../Pinta/Actions/Edit/PasteAction.cs:191
+msgid "Expand"
+msgstr ""
 
 #: ../Pinta.Gui.Addins/AddinManagerDialog.cs:204
 msgid "Extension packages"
@@ -813,7 +819,7 @@ msgstr "Fail ICO tidak boleh besar dari 255  x 255 piksel."
 msgid "If you don't save, all changes will be permanently lost."
 msgstr "Jika anda tidak simpan, semua perubahan akan kekal hilang."
 
-#: ../Pinta.Tools/Tools/ColorPickerTool.cs:242
+#: ../Pinta.Tools/Tools/ColorPickerTool.cs:240 ../Pinta/MainWindow.cs:378
 msgid "Image"
 msgstr "Imej"
 
@@ -825,16 +831,16 @@ msgstr "Penyunting Imej"
 msgid "Image Tabs"
 msgstr "Tab Imej"
 
-#: ../Pinta/Actions/Edit/PasteAction.cs:163
+#: ../Pinta/Actions/Edit/PasteAction.cs:173
 msgid "Image cannot be pasted"
 msgstr "Imej tidak boleh ditampal"
 
-#: ../Pinta/Actions/File/OpenDocumentAction.cs:60
 #: ../Pinta.Core/Actions/LayerActions.cs:193
+#: ../Pinta/Actions/File/OpenDocumentAction.cs:60
 msgid "Image files"
 msgstr "Fail imej"
 
-#: ../Pinta/Actions/Edit/PasteAction.cs:170
+#: ../Pinta/Actions/Edit/PasteAction.cs:180
 msgid "Image larger than canvas"
 msgstr "Imej lebih besar berbanding kanvas"
 
@@ -891,9 +897,9 @@ msgstr "Pasang..."
 msgid "Installed"
 msgstr "Dipasang"
 
-#: ../Pinta.Effects/Effects/AddNoiseEffect.cs:164
+#: ../Pinta.Effects/Effects/AddNoiseEffect.cs:180
 #: ../Pinta.Effects/Effects/OutlineEffect.cs:138
-#: ../Pinta.Effects/Effects/TileEffect.cs:178
+#: ../Pinta.Effects/Effects/TileEffect.cs:180
 msgid "Intensity"
 msgstr "Keamatan"
 
@@ -933,7 +939,7 @@ msgstr "Lanskap"
 msgid "Lasso Select"
 msgstr "Pilih Lasso"
 
-#: ../Pinta.Tools/Tools/ColorPickerTool.cs:241
+#: ../Pinta.Tools/Tools/ColorPickerTool.cs:239
 msgid "Layer"
 msgstr "Lapisan"
 
@@ -1143,6 +1149,10 @@ msgstr "Kekilauan"
 msgid "Magic Wand Select"
 msgstr "Pilih Tongkat Ajaib"
 
+#: ../Pinta/MainWindow.cs:360
+msgid "Main Menu"
+msgstr ""
+
 #: ../Pinta/Dialogs/ResizeCanvasDialog.cs:76
 #: ../Pinta/Dialogs/ResizeImageDialog.cs:66
 msgid "Maintain aspect ratio"
@@ -1211,8 +1221,8 @@ msgstr ""
 msgid "New"
 msgstr "Baharu"
 
-#: ../Pinta/Dialogs/NewImageDialog.cs:67
 #: ../Pinta.Core/Managers/WorkspaceManager.cs:184
+#: ../Pinta/Dialogs/NewImageDialog.cs:67
 msgid "New Image"
 msgstr "Imej Baharu"
 
@@ -1240,7 +1250,7 @@ msgstr "Hingar"
 
 #: ../Pinta.Core/Effects/UserBlendOps.cs:31
 #: ../Pinta.Tools/Brushes/PlainBrush.cs:35
-#: ../Pinta.Tools/Tools/EraserTool.cs:260 ../Pinta.Tools/Tools/TextTool.cs:246
+#: ../Pinta.Tools/Tools/EraserTool.cs:262 ../Pinta.Tools/Tools/TextTool.cs:246
 msgid "Normal"
 msgstr "Biasa"
 
@@ -1262,7 +1272,7 @@ msgstr ""
 
 #: ../Pinta.Effects/Effects/BulgeEffect.cs:92
 #: ../Pinta.Effects/Effects/RadialBlurEffect.cs:149
-#: ../Pinta.Effects/Effects/ZoomBlurEffect.cs:127
+#: ../Pinta.Effects/Effects/ZoomBlurEffect.cs:126
 msgid "Offset"
 msgstr "Ofset"
 
@@ -1274,11 +1284,11 @@ msgstr "Lukisan Minyak"
 msgid "Opacity:"
 msgstr "Kelegapan:"
 
-#: ../Pinta/Actions/File/OpenDocumentAction.cs:53
 #: ../Pinta.Core/Actions/EditActions.cs:350
 #: ../Pinta.Core/Actions/FileActions.cs:56
 #: ../Pinta.Core/Actions/LayerActions.cs:166
 #: ../Pinta.Gui.Addins/AddinManagerDialog.cs:197
+#: ../Pinta/Actions/File/OpenDocumentAction.cs:53
 msgid "Open"
 msgstr "Buka"
 
@@ -1290,8 +1300,8 @@ msgstr "Bentuk Lengkung Terbuka"
 msgid "Open Image"
 msgstr "Buka Imej"
 
-#: ../Pinta/Actions/File/OpenDocumentAction.cs:50
 #: ../Pinta.Core/Actions/LayerActions.cs:163
+#: ../Pinta/Actions/File/OpenDocumentAction.cs:50
 msgid "Open Image File"
 msgstr "Buka Fail Imej"
 
@@ -1362,14 +1372,14 @@ msgstr "Palet"
 msgid "Palette files"
 msgstr "Fail palet"
 
-#: ../Pinta/Actions/Layers/RotateZoomLayerAction.cs:118
 #: ../Pinta.Tools/Tools/PanTool.cs:38
+#: ../Pinta/Actions/Layers/RotateZoomLayerAction.cs:118
 msgid "Pan"
 msgstr "Lata"
 
-#: ../Pinta/Actions/Edit/PasteAction.cs:83
 #: ../Pinta.Core/Actions/EditActions.cs:63
 #: ../Pinta.Core/HistoryItems/PasteHistoryItem.cs:38
+#: ../Pinta/Actions/Edit/PasteAction.cs:87
 msgid "Paste"
 msgstr "Tampal"
 
@@ -1377,8 +1387,8 @@ msgstr "Tampal"
 msgid "Paste Into New Image"
 msgstr "Tampal ke Imej Baharu"
 
-#: ../Pinta/Actions/Edit/PasteAction.cs:83
 #: ../Pinta.Core/Actions/EditActions.cs:64
+#: ../Pinta/Actions/Edit/PasteAction.cs:87
 msgid "Paste Into New Layer"
 msgstr "Tampal dalam Lapisan Baharu"
 
@@ -1491,6 +1501,11 @@ msgstr "Posterkan"
 msgid "Power"
 msgstr "Kuasa"
 
+#. Translators: This refers to preserving the current canvas size when pasting a larger image.
+#: ../Pinta/Actions/Edit/PasteAction.cs:189
+msgid "Preserve"
+msgstr ""
+
 #: ../Pinta/Dialogs/NewImageDialog.cs:101
 msgid "Preset:"
 msgstr "Praset:"
@@ -1534,7 +1549,7 @@ msgstr "Kabur Berjejari"
 msgid "Radial Gradient"
 msgstr "Gradien Jejari"
 
-#: ../Pinta.Effects/Effects/GaussianBlurEffect.cs:245
+#: ../Pinta.Effects/Effects/GaussianBlurEffect.cs:247
 #: ../Pinta.Effects/Effects/GlowEffect.cs:74
 #: ../Pinta.Effects/Effects/MedianEffect.cs:63
 #: ../Pinta.Effects/Effects/ReduceNoiseEffect.cs:87
@@ -1543,9 +1558,9 @@ msgstr "Gradien Jejari"
 msgid "Radius"
 msgstr "Jejari"
 
-#: ../Pinta.Effects/Effects/AddNoiseEffect.cs:173
+#: ../Pinta.Effects/Effects/AddNoiseEffect.cs:189
 #: ../Pinta.Effects/Effects/CloudsEffect.cs:222
-#: ../Pinta.Effects/Effects/FrostedGlassEffect.cs:153
+#: ../Pinta.Effects/Effects/FrostedGlassEffect.cs:158
 msgid "Random Noise"
 msgstr "Hingar Rawak"
 
@@ -1637,8 +1652,8 @@ msgstr "Tetap semula"
 msgid "Reset to Default"
 msgstr "Tetap Semula ke Lalai"
 
+#: ../Pinta.Core/Classes/Document.cs:302
 #: ../Pinta/Dialogs/ResizeCanvasDialog.cs:57
-#: ../Pinta.Core/Classes/Document.cs:304
 msgid "Resize Canvas"
 msgstr "Saiz Semula Kanvas"
 
@@ -1646,8 +1661,8 @@ msgstr "Saiz Semula Kanvas"
 msgid "Resize Canvas..."
 msgstr "Saiz Semula Kanvas..."
 
-#: ../Pinta/Dialogs/ResizeImageDialog.cs:47
 #: ../Pinta.Core/HistoryItems/ResizeHistoryItem.cs:38
+#: ../Pinta/Dialogs/ResizeImageDialog.cs:47
 msgid "Resize Image"
 msgstr "Saiz Semula Imej"
 
@@ -1688,7 +1703,7 @@ msgid "Rotate 90° Counter-Clockwise"
 msgstr "Putar 90° Lawan Jam"
 
 #: ../Pinta.Effects/Effects/FragmentEffect.cs:113
-#: ../Pinta.Effects/Effects/TileEffect.cs:172
+#: ../Pinta.Effects/Effects/TileEffect.cs:174
 msgid "Rotation"
 msgstr "Putaran"
 
@@ -1712,7 +1727,7 @@ msgstr "Unit Pembaris"
 msgid "Rulers"
 msgstr "Pembaris"
 
-#: ../Pinta.Tools/Tools/ColorPickerTool.cs:196
+#: ../Pinta.Tools/Tools/ColorPickerTool.cs:194
 msgid "Sampling"
 msgstr "Persampelan"
 
@@ -1725,9 +1740,9 @@ msgstr "Ketepuan"
 msgid "Saturation Percentage"
 msgstr "Peratus Ketepuan"
 
-#: ../Pinta/Actions/File/SaveDocumentImplementationAction.cs:73
 #: ../Pinta.Core/Actions/EditActions.cs:391
 #: ../Pinta.Core/Actions/FileActions.cs:51
+#: ../Pinta/Actions/File/SaveDocumentImplementationAction.cs:73
 msgid "Save"
 msgstr "Simpan"
 
@@ -1799,7 +1814,7 @@ msgstr "Tunjuk Lapisan"
 msgid "Show/Hide"
 msgstr ""
 
-#: ../Pinta.Tools/Tools/ColorPickerTool.cs:223
+#: ../Pinta.Tools/Tools/ColorPickerTool.cs:221
 msgid "Single Pixel"
 msgstr "Piksel Tunggal"
 
@@ -1807,7 +1822,7 @@ msgstr "Piksel Tunggal"
 msgid "Size"
 msgstr "Saiz"
 
-#: ../Pinta.Tools/Tools/EraserTool.cs:260
+#: ../Pinta.Tools/Tools/EraserTool.cs:262
 msgid "Smooth"
 msgstr "Licin"
 
@@ -1846,11 +1861,11 @@ msgstr "Kekuatan"
 msgid "Stylize"
 msgstr "Gayakan"
 
-#: ../Pinta.Tools/Tools/ColorPickerTool.cs:206
+#: ../Pinta.Tools/Tools/ColorPickerTool.cs:204
 msgid "Switch to Pencil tool"
 msgstr "Tukar ke alat Pensel"
 
-#: ../Pinta.Tools/Tools/ColorPickerTool.cs:205
+#: ../Pinta.Tools/Tools/ColorPickerTool.cs:203
 msgid "Switch to previous tool"
 msgstr "Tukar kepada alat terdahulu"
 
@@ -1866,7 +1881,7 @@ msgstr "Teks - Muktamadkan"
 msgid "Text Style"
 msgstr "Gaya Teks"
 
-#: ../Pinta/Actions/Edit/PasteAction.cs:164
+#: ../Pinta/Actions/Edit/PasteAction.cs:174
 msgid "The clipboard does not contain an image."
 msgstr "Papan keratan tidak mengandungi satu imej."
 
@@ -1890,12 +1905,11 @@ msgstr "Pakej-pakej berikut akan dipasang:"
 msgid "The following packages will be uninstalled:"
 msgstr "Pakej-pakej berikut akan dibuang:"
 
-#: ../Pinta/Actions/Edit/PasteAction.cs:171
+#: ../Pinta/Actions/Edit/PasteAction.cs:181
 msgid ""
-"The image being pasted is larger than the canvas size. What would you like "
-"to do?"
+"The image being pasted is larger than the canvas. What would you like to do "
+"to the canvas size?"
 msgstr ""
-"Imej ditampal lebih besar berbanding saiz kanvas. Apa yang anda mahu lakukan?"
 
 #: ../Pinta.Gui.Addins/InstallDialog.cs:293
 msgid "The installation failed!"
@@ -1933,7 +1947,7 @@ msgstr "Ketebalan"
 msgid "Tile Reflection"
 msgstr "Pantulan Jubin"
 
-#: ../Pinta.Effects/Effects/TileEffect.cs:175
+#: ../Pinta.Effects/Effects/TileEffect.cs:177
 msgid "Tile Size"
 msgstr "Saiz Jubin"
 
@@ -1943,7 +1957,7 @@ msgstr "Petua: Klik kanan untuk buang titik-titik kawalan."
 
 #: ../Pinta.Effects/Effects/RedEyeRemoveEffect.cs:50
 #: ../Pinta.Tools/Tools/FloodTool.cs:125
-#: ../Pinta.Tools/Tools/RecolorTool.cs:200
+#: ../Pinta.Tools/Tools/RecolorTool.cs:196
 msgid "Tolerance"
 msgstr "Had terima"
 
@@ -1955,7 +1969,7 @@ msgstr "Alat"
 msgid "Tool Box"
 msgstr "Kotak Alat"
 
-#: ../Pinta/MainWindow.cs:357
+#: ../Pinta/MainWindow.cs:342
 msgid "Tool Windows"
 msgstr "Tetingkap Alat"
 
@@ -1975,8 +1989,8 @@ msgstr "Terjemah Aplikasi Ini"
 msgid "Transparency Mode"
 msgstr ""
 
-#: ../Pinta/Dialogs/NewImageDialog.cs:221
 #: ../Pinta.Effects/Effects/WarpEffect.cs:35
+#: ../Pinta/Dialogs/NewImageDialog.cs:221
 msgid "Transparent"
 msgstr "Lutsinar"
 
@@ -1984,7 +1998,7 @@ msgstr "Lutsinar"
 msgid "Twist"
 msgstr "Pulas"
 
-#: ../Pinta.Tools/Tools/EraserTool.cs:256
+#: ../Pinta.Tools/Tools/EraserTool.cs:258
 #: ../Pinta.Tools/Tools/PaintBrushTool.cs:165
 msgid "Type"
 msgstr "Jenis"
@@ -2074,8 +2088,8 @@ msgstr "Lebar:"
 
 #: ../Pinta.Core/Actions/ViewActions.cs:116
 #: ../Pinta.Core/Actions/ViewActions.cs:304
+#: ../Pinta.Core/Classes/DocumentWorkspace.cs:348
 #: ../Pinta.Core/Classes/DocumentWorkspace.cs:357
-#: ../Pinta.Core/Classes/DocumentWorkspace.cs:366
 msgid "Window"
 msgstr "Tetingkap"
 
@@ -2108,10 +2122,10 @@ msgstr ""
 "Anda tiada capaian untuk mengubah suai '{0}'. Fail atau folder ini bersifat "
 "baca-sahaja."
 
-#: ../Pinta/Actions/Layers/RotateZoomLayerAction.cs:121
 #: ../Pinta.Effects/Effects/JuliaFractalEffect.cs:147
 #: ../Pinta.Effects/Effects/MandelbrotFractalEffect.cs:165
 #: ../Pinta.Tools/Tools/ZoomTool.cs:55
+#: ../Pinta/Actions/Layers/RotateZoomLayerAction.cs:121
 msgid "Zoom"
 msgstr "Zum"
 
@@ -2131,11 +2145,11 @@ msgstr "Zum Keluar"
 msgid "Zoom to Selection"
 msgstr "Zum ke Pemilihan"
 
-#: ../Pinta/MainWindow.cs:336
+#: ../Pinta/MainWindow.cs:320
 msgid "_Adjustments"
 msgstr "_Pelarasan"
 
-#: ../Pinta/Actions/Edit/PasteAction.cs:177
+#: ../Pinta/Actions/Edit/PasteAction.cs:187
 #: ../Pinta/Actions/File/CloseDocumentAction.cs:66
 msgid "_Cancel"
 msgstr ""
@@ -2144,28 +2158,28 @@ msgstr ""
 msgid "_Discard"
 msgstr ""
 
-#: ../Pinta/MainWindow.cs:321
+#: ../Pinta/MainWindow.cs:303
 msgid "_Edit"
 msgstr "_Sunting"
 
-#: ../Pinta/MainWindow.cs:317
+#: ../Pinta/MainWindow.cs:299
 msgid "_File"
 msgstr "_Fail"
 
-#: ../Pinta/MainWindow.cs:351
+#: ../Pinta/MainWindow.cs:336
 msgid "_Help"
 msgstr "_Bantuan"
 
-#: ../Pinta/MainWindow.cs:329
+#: ../Pinta/MainWindow.cs:312
 msgid "_Image"
 msgstr "_Imej"
 
-#: ../Pinta/MainWindow.cs:333
+#: ../Pinta/MainWindow.cs:316
 msgid "_Layers"
 msgstr "_Lapisan"
 
-#: ../Pinta/Dialogs/ErrorDialog.cs:41 ../Pinta/Dialogs/ErrorDialog.cs:69
-#: ../Pinta.Gui.Addins/InstallDialog.cs:156
+#: ../Pinta.Gui.Addins/InstallDialog.cs:156 ../Pinta/Dialogs/ErrorDialog.cs:41
+#: ../Pinta/Dialogs/ErrorDialog.cs:69
 msgid "_OK"
 msgstr ""
 
@@ -2173,11 +2187,11 @@ msgstr ""
 msgid "_Save"
 msgstr ""
 
-#: ../Pinta/MainWindow.cs:325
+#: ../Pinta/MainWindow.cs:307
 msgid "_View"
 msgstr "L_ihat"
 
-#: ../Pinta/MainWindow.cs:347
+#: ../Pinta/MainWindow.cs:332
 msgid "_Window"
 msgstr "_Tetingkap"
 
@@ -2238,6 +2252,19 @@ msgstr "Palet {0} ({1})"
 msgid "{0}%"
 msgstr "{0}%"
 
+#~ msgid "Don't change canvas size"
+#~ msgstr "Jangan ubah saiz kanvas"
+
+#~ msgid "Expand canvas"
+#~ msgstr "Kembangkan kanvas"
+
+#~ msgid ""
+#~ "The image being pasted is larger than the canvas size. What would you "
+#~ "like to do?"
+#~ msgstr ""
+#~ "Imej ditampal lebih besar berbanding saiz kanvas. Apa yang anda mahu "
+#~ "lakukan?"
+
 #~ msgid "Translated by:"
 #~ msgstr "Diterjemah oleh:"
 
@@ -2257,8 +2284,8 @@ msgstr "{0}%"
 #~ "Left click to zoom in. Right click to zoom out. Click and drag to zoom in "
 #~ "selection."
 #~ msgstr ""
-#~ "Klik kiri untuk zum masuk. Klik kanan untuk zum keluar. Klik dan seret untuk "
-#~ "zum dalam pemilihan."
+#~ "Klik kiri untuk zum masuk. Klik kanan untuk zum keluar. Klik dan seret "
+#~ "untuk zum dalam pemilihan."
 
 #~ msgid "OptionName"
 #~ msgstr "Nama Pilihan"
@@ -2395,8 +2422,8 @@ msgstr "{0}%"
 #~ "Left click to draw freeform one-pixel wide lines with the primary color. "
 #~ "Right click to use the secondary color."
 #~ msgstr ""
-#~ "Klik kiri untuk lukis garis lebar satu piksel dengan warna utama. Klik kanan "
-#~ "untuk guna warna sekunder."
+#~ "Klik kiri untuk lukis garis lebar satu piksel dengan warna utama. Klik "
+#~ "kanan untuk guna warna sekunder."
 
 #~ msgid ""
 #~ "Left click to replace the secondary color with the primary color. Right "
@@ -2430,12 +2457,12 @@ msgstr "{0}%"
 #~ "Press Ctrl + left/right arrows to select control points by order.\n"
 #~ "Press Delete to delete the selected control point.\n"
 #~ "Press Space to add a new control point at the mouse position.\n"
-#~ "Hold Ctrl while pressing Space to create the control point at the exact same "
-#~ "position.\n"
+#~ "Hold Ctrl while pressing Space to create the control point at the exact "
+#~ "same position.\n"
 #~ "Hold Ctrl while left clicking on a control point to create a new shape at "
 #~ "the exact same position.\n"
-#~ "Hold Ctrl while clicking outside of the image bounds to create a new shape "
-#~ "starting at the edge.\n"
+#~ "Hold Ctrl while clicking outside of the image bounds to create a new "
+#~ "shape starting at the edge.\n"
 #~ "Press Enter to finalize the shape."
 #~ msgstr ""
 #~ "Klik kiri untuk melukis bentuk dengan warna utama.\n"
@@ -2449,12 +2476,12 @@ msgstr "{0}%"
 #~ "Tekan Delete untuk memadam titik kawalan terpilih.\n"
 #~ "Tekan Space untuk menambah titik kawalan baharu pada kedudukan penuding "
 #~ "tetikus.\n"
-#~ "Tahan Ctrl semasa menekan Space untuk mencipta titik kawalan pada kedudukan "
-#~ "yang sama.\n"
+#~ "Tahan Ctrl semasa menekan Space untuk mencipta titik kawalan pada "
+#~ "kedudukan yang sama.\n"
 #~ "Tahan Ctrl semasa mengklik kiri pada titik kawalan untuk mencipta bentuk "
 #~ "baharu pada kedudukan yang sama.\n"
-#~ "Tahan Ctrl semasa mengklik diluar sempadan imej untuk mencipta bentuk baharu "
-#~ "yang bermula dipinggirnya.\n"
+#~ "Tahan Ctrl semasa mengklik diluar sempadan imej untuk mencipta bentuk "
+#~ "baharu yang bermula dipinggirnya.\n"
 #~ "Tekan Enter untuk memuktamadkan bentuk yang dikehendaki."
 
 #~ msgid "Intersect (Alt + Left Click)"
@@ -2478,8 +2505,8 @@ msgstr "{0}%"
 #~ msgstr "Ctrl+klik kiri untuk tetapkan asalan, klik kiri untuk cat."
 
 #~ msgid ""
-#~ "Click and drag to draw an elliptical selection. Hold Shift to constrain to a "
-#~ "circle."
+#~ "Click and drag to draw an elliptical selection. Hold Shift to constrain "
+#~ "to a circle."
 #~ msgstr ""
 #~ "Klik dan seret untuk lukis pemilihan eliptik. Tahan Shift untuk dikekang "
 #~ "menjadi satu bulatan."
@@ -2488,12 +2515,12 @@ msgstr "{0}%"
 #~ "Click and drag to draw gradient from primary to secondary color.  Right "
 #~ "click to reverse."
 #~ msgstr ""
-#~ "Klik dan seret untuk lukis gradien dari warna utama ke warna sekunder. Klik "
-#~ "kanan untuk disongsangkan."
+#~ "Klik dan seret untuk lukis gradien dari warna utama ke warna sekunder. "
+#~ "Klik kanan untuk disongsangkan."
 
 #~ msgid ""
-#~ "Click and drag to draw a rectangular selection. Hold Shift to constrain to a "
-#~ "square."
+#~ "Click and drag to draw a rectangular selection. Hold Shift to constrain "
+#~ "to a square."
 #~ msgstr ""
 #~ "Klik dan seret untuk lukis pemilihan segi empat tepat. Tahan Shift untuk "
 #~ "kekang menjadi segiempat sama."
@@ -2506,7 +2533,8 @@ msgstr "{0}%"
 
 #, csharp-format
 #~ msgid ""
-#~ "The file already exists in \"{1}\". Replacing it will overwrite its contents."
+#~ "The file already exists in \"{1}\". Replacing it will overwrite its "
+#~ "contents."
 #~ msgstr ""
 #~ "Fail sudah wujud dalam \"{1}\". Sekiranya diganti semua kandungannya akan "
 #~ "ditulis-ganti."
@@ -2544,8 +2572,8 @@ msgstr "{0}%"
 #~ msgstr[1] "{0} kemas kini tersedia"
 
 #~ msgid ""
-#~ "There are other add-ins that depend on the previous ones which will also be "
-#~ "uninstalled:"
+#~ "There are other add-ins that depend on the previous ones which will also "
+#~ "be uninstalled:"
 #~ msgstr ""
 #~ "Terdapat beberapa tambahan lain yang bergantung pada yang terdahulu juga "
 #~ "akan dibuang:"
@@ -2590,21 +2618,22 @@ msgstr "{0}%"
 #~ "selection outline by a single pixel."
 #~ msgstr ""
 #~ "Klik kiri dan seret pemilihan untuk mengalih garis bentuk terpilih. Tahan "
-#~ "Ctrl untuk diskalakan berbanding alih. Klik kanan dan seret pemilihan untuk "
-#~ "memutar garis bentuk pemilihan. Tahan Shift untuk memutar mengikut langkah. "
-#~ "Guna kekunci anak panah untuk mengalih garis bentuk pemilihan sebanyak satu "
-#~ "piksel."
+#~ "Ctrl untuk diskalakan berbanding alih. Klik kanan dan seret pemilihan "
+#~ "untuk memutar garis bentuk pemilihan. Tahan Shift untuk memutar mengikut "
+#~ "langkah. Guna kekunci anak panah untuk mengalih garis bentuk pemilihan "
+#~ "sebanyak satu piksel."
 
 #~ msgid ""
 #~ "Left click and drag the selection to move selected content. Hold Ctrl to "
-#~ "scale instead of move. Right click and drag the selection to rotate selected "
-#~ "content. Hold Shift to rotate in steps. Use arrow keys to move selected "
-#~ "content by a single pixel."
+#~ "scale instead of move. Right click and drag the selection to rotate "
+#~ "selected content. Hold Shift to rotate in steps. Use arrow keys to move "
+#~ "selected content by a single pixel."
 #~ msgstr ""
-#~ "Klik kiri dan seret pemilihan untuk mengalih kandungan terpilih. Tahan Ctrl "
-#~ "untuk diskalakan berbanding alih. Klik kanan dan seret pemilihan untuk "
-#~ "memutar kandungan terpilih. Tahan Shift untuk memutar mengikut langkah. Guna "
-#~ "kekunci anak panah untuk mengalih kandungan sebanyak satu piksel."
+#~ "Klik kiri dan seret pemilihan untuk mengalih kandungan terpilih. Tahan "
+#~ "Ctrl untuk diskalakan berbanding alih. Klik kanan dan seret pemilihan "
+#~ "untuk memutar kandungan terpilih. Tahan Shift untuk memutar mengikut "
+#~ "langkah. Guna kekunci anak panah untuk mengalih kandungan sebanyak satu "
+#~ "piksel."
 
 #~ msgid "copy"
 #~ msgstr "salin"

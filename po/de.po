@@ -7,17 +7,17 @@ msgid ""
 msgstr ""
 "Project-Id-Version: pinta\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-12-17 14:36-0500\n"
+"POT-Creation-Date: 2023-12-22 02:09-0500\n"
 "PO-Revision-Date: 2023-09-06 19:22+0000\n"
 "Last-Translator: Hans Peter <Unknown>\n"
 "Language-Team: German <de@li.org>\n"
+"Language: de\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
 "X-Launchpad-Export-Date: 2023-12-18 03:00+0000\n"
 "X-Generator: Launchpad (build e1eeab5b20e19239bd7d5f36676f7a52988db88b)\n"
-"Language: de\n"
 
 #: ../Pinta.Gui.Addins/InstallDialog.cs:216
 msgid " (in user directory)"
@@ -32,23 +32,23 @@ msgstr " Auswahlmodus: "
 msgid "..."
 msgstr "..."
 
-#: ../Pinta.Tools/Tools/ColorPickerTool.cs:224
+#: ../Pinta.Tools/Tools/ColorPickerTool.cs:222
 msgid "3 x 3 Region"
 msgstr "3 × 3-Bereich"
 
-#: ../Pinta.Tools/Tools/ColorPickerTool.cs:225
+#: ../Pinta.Tools/Tools/ColorPickerTool.cs:223
 msgid "5 x 5 Region"
 msgstr "5 × 5-Bereich"
 
-#: ../Pinta.Tools/Tools/ColorPickerTool.cs:226
+#: ../Pinta.Tools/Tools/ColorPickerTool.cs:224
 msgid "7 x 7 Region"
 msgstr "7 × 7-Bereich"
 
-#: ../Pinta.Tools/Tools/ColorPickerTool.cs:227
+#: ../Pinta.Tools/Tools/ColorPickerTool.cs:225
 msgid "9 x 9 Region"
 msgstr "9 × 9-Bereich"
 
-#: ../Pinta/MainWindow.cs:343
+#: ../Pinta/MainWindow.cs:328
 msgid "A_dd-ins"
 msgstr "Erweiterungen"
 
@@ -60,9 +60,9 @@ msgstr "Über"
 msgid "About Pinta"
 msgstr "Über Pinta"
 
-#: ../Pinta/Actions/Edit/PasteAction.cs:133
 #: ../Pinta.Core/Actions/LayerActions.cs:48
 #: ../Pinta.Core/Actions/LayerActions.cs:329
+#: ../Pinta/Actions/Edit/PasteAction.cs:143
 msgid "Add New Layer"
 msgstr "Neue Ebene hinzufügen"
 
@@ -78,21 +78,25 @@ msgstr "Add-In-Manager..."
 msgid "Added"
 msgstr "Hinzugefügt"
 
-#: ../Pinta.Tools/Tools/ColorPickerTool.cs:195
+#: ../Pinta/MainWindow.cs:372
+msgid "Adjustments"
+msgstr ""
+
+#: ../Pinta.Tools/Tools/ColorPickerTool.cs:193
 msgid "After select"
 msgstr "Nach Auswahl"
 
-#: ../Pinta/Actions/File/OpenDocumentAction.cs:81
 #: ../Pinta.Core/Actions/EditActions.cs:366
 #: ../Pinta.Gui.Addins/AddinManagerDialog.cs:209
+#: ../Pinta/Actions/File/OpenDocumentAction.cs:83
 msgid "All files"
 msgstr "Alle Dateien"
 
 #: ../Pinta.Effects/Effects/BulgeEffect.cs:89
-#: ../Pinta.Effects/Effects/FrostedGlassEffect.cs:150
+#: ../Pinta.Effects/Effects/FrostedGlassEffect.cs:155
 #: ../Pinta.Effects/Effects/SharpenEffect.cs:56
-#: ../Pinta.Effects/Effects/TwistEffect.cs:131
-#: ../Pinta.Effects/Effects/ZoomBlurEffect.cs:124
+#: ../Pinta.Effects/Effects/TwistEffect.cs:139
+#: ../Pinta.Effects/Effects/ZoomBlurEffect.cs:123
 msgid "Amount"
 msgstr "Menge"
 
@@ -100,19 +104,19 @@ msgstr "Menge"
 msgid "Anchor:"
 msgstr "Ankerpunkt:"
 
-#: ../Pinta/Actions/Layers/RotateZoomLayerAction.cs:115
 #: ../Pinta.Effects/Effects/EdgeDetectEffect.cs:80
-#: ../Pinta.Effects/Effects/EmbossEffect.cs:135
+#: ../Pinta.Effects/Effects/EmbossEffect.cs:144
 #: ../Pinta.Effects/Effects/JuliaFractalEffect.cs:150
 #: ../Pinta.Effects/Effects/MandelbrotFractalEffect.cs:168
 #: ../Pinta.Effects/Effects/MotionBlurEffect.cs:101
 #: ../Pinta.Effects/Effects/RadialBlurEffect.cs:146
 #: ../Pinta.Effects/Effects/ReliefEffect.cs:82
 #: ../Pinta.Tools/Editable/EditEngines/ArrowedEditEngine.cs:298
+#: ../Pinta/Actions/Layers/RotateZoomLayerAction.cs:115
 msgid "Angle"
 msgstr "Winkel"
 
-#: ../Pinta.Effects/Effects/TwistEffect.cs:134
+#: ../Pinta.Effects/Effects/TwistEffect.cs:142
 msgid "Antialias"
 msgstr "Kantenglättung"
 
@@ -237,13 +241,13 @@ msgstr "Absolute Werte:"
 msgid "By percentage:"
 msgstr "Prozentual"
 
-#: ../Pinta/Actions/File/OpenDocumentAction.cs:54
-#: ../Pinta/Actions/File/SaveDocumentImplementationAction.cs:74
 #: ../Pinta.Core/Actions/EditActions.cs:351
 #: ../Pinta.Core/Actions/EditActions.cs:392
 #: ../Pinta.Core/Actions/LayerActions.cs:167
 #: ../Pinta.Gui.Addins/AddinManagerDialog.cs:198
 #: ../Pinta.Gui.Addins/InstallDialog.cs:120
+#: ../Pinta/Actions/File/OpenDocumentAction.cs:54
+#: ../Pinta/Actions/File/SaveDocumentImplementationAction.cs:74
 msgid "Cancel"
 msgstr "Abbrechen"
 
@@ -413,7 +417,7 @@ msgstr "Farbpipette"
 msgid "Color Range"
 msgstr "Farbbereich"
 
-#: ../Pinta.Effects/Effects/AddNoiseEffect.cs:167
+#: ../Pinta.Effects/Effects/AddNoiseEffect.cs:183
 msgid "Color Saturation"
 msgstr "Farbsättigung"
 
@@ -455,7 +459,7 @@ msgid "Copyright"
 msgstr "Copyright"
 
 #. Translators: {0} is the name of a layer, and {1} is the path to a .ora file.
-#: ../Pinta.Core/ImageFormats/OraFormat.cs:122
+#: ../Pinta.Core/ImageFormats/OraFormat.cs:127
 #, csharp-format
 msgid "Could not import layer \"{0}\" from {1}"
 msgstr "Konnte die Ebene \"{0}\" nicht aus {1} importieren."
@@ -467,7 +471,7 @@ msgstr "Konnte die Ebene \"{0}\" nicht aus {1} importieren."
 msgid "Could not open file: {0}"
 msgstr "Datei konnte nicht geöffnet werden: {0}"
 
-#: ../Pinta.Effects/Effects/AddNoiseEffect.cs:170
+#: ../Pinta.Effects/Effects/AddNoiseEffect.cs:186
 msgid "Coverage"
 msgstr "Deckkraft"
 
@@ -550,13 +554,9 @@ msgstr "Abstand"
 msgid "Distort"
 msgstr "Verzerren"
 
-#: ../Pinta.Tools/Tools/ColorPickerTool.cs:204
+#: ../Pinta.Tools/Tools/ColorPickerTool.cs:202
 msgid "Do not switch tool"
 msgstr "Werkzeug nicht wechseln"
-
-#: ../Pinta/Actions/Edit/PasteAction.cs:178
-msgid "Don't change canvas size"
-msgstr "Größe der Zeichenfläche nicht ändern"
 
 #: ../Pinta.Gui.Addins/AddinInfoView.cs:134
 #, csharp-format
@@ -580,9 +580,13 @@ msgstr "Kantenverhalten"
 msgid "Edge Detect"
 msgstr "Kanten erkennen"
 
-#: ../Pinta/MainWindow.cs:339
+#: ../Pinta/MainWindow.cs:324
 msgid "Effe_cts"
 msgstr "Effe_kte"
+
+#: ../Pinta/MainWindow.cs:366
+msgid "Effects"
+msgstr ""
 
 #: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:326
 #: ../Pinta.Tools/Editable/EditEngines/EllipseEditEngine.cs:34
@@ -607,7 +611,7 @@ msgstr "Auswahl entfernen"
 msgid "Eraser"
 msgstr "Radiergummi"
 
-#: ../Pinta.Core/ImageFormats/OraFormat.cs:123
+#: ../Pinta.Core/ImageFormats/OraFormat.cs:128
 msgid "Error"
 msgstr "Fehler"
 
@@ -615,9 +619,10 @@ msgstr "Fehler"
 msgid "Exclude (-) (Right Click)"
 msgstr "Ausschluss (-) (Rechtsklick)"
 
-#: ../Pinta/Actions/Edit/PasteAction.cs:179
-msgid "Expand canvas"
-msgstr "Zeichenfläche erweitern"
+#. Translators: This refers to expanding the canvas size when pasting a larger image.
+#: ../Pinta/Actions/Edit/PasteAction.cs:191
+msgid "Expand"
+msgstr ""
 
 #: ../Pinta.Gui.Addins/AddinManagerDialog.cs:204
 msgid "Extension packages"
@@ -822,7 +827,7 @@ msgstr "ICO-Dateien können nicht größer als 255 × 255 Pixel sein."
 msgid "If you don't save, all changes will be permanently lost."
 msgstr "Wenn Sie nicht speichern, gehen alle Änderungen dauerhaft verloren."
 
-#: ../Pinta.Tools/Tools/ColorPickerTool.cs:242
+#: ../Pinta.Tools/Tools/ColorPickerTool.cs:240 ../Pinta/MainWindow.cs:378
 msgid "Image"
 msgstr "Bild"
 
@@ -834,16 +839,16 @@ msgstr "Bildbearbeitung"
 msgid "Image Tabs"
 msgstr "Bildreiter"
 
-#: ../Pinta/Actions/Edit/PasteAction.cs:163
+#: ../Pinta/Actions/Edit/PasteAction.cs:173
 msgid "Image cannot be pasted"
 msgstr "Bild kann nicht eingefügt werden"
 
-#: ../Pinta/Actions/File/OpenDocumentAction.cs:60
 #: ../Pinta.Core/Actions/LayerActions.cs:193
+#: ../Pinta/Actions/File/OpenDocumentAction.cs:60
 msgid "Image files"
 msgstr "Bilddateien"
 
-#: ../Pinta/Actions/Edit/PasteAction.cs:170
+#: ../Pinta/Actions/Edit/PasteAction.cs:180
 msgid "Image larger than canvas"
 msgstr "Bild größer als die Zeichenfläche"
 
@@ -900,9 +905,9 @@ msgstr "Installieren …"
 msgid "Installed"
 msgstr "Installiert"
 
-#: ../Pinta.Effects/Effects/AddNoiseEffect.cs:164
+#: ../Pinta.Effects/Effects/AddNoiseEffect.cs:180
 #: ../Pinta.Effects/Effects/OutlineEffect.cs:138
-#: ../Pinta.Effects/Effects/TileEffect.cs:178
+#: ../Pinta.Effects/Effects/TileEffect.cs:180
 msgid "Intensity"
 msgstr "Intensität"
 
@@ -942,7 +947,7 @@ msgstr "Querformat"
 msgid "Lasso Select"
 msgstr "Freie Auswahl"
 
-#: ../Pinta.Tools/Tools/ColorPickerTool.cs:241
+#: ../Pinta.Tools/Tools/ColorPickerTool.cs:239
 msgid "Layer"
 msgstr "Ebene"
 
@@ -1203,6 +1208,10 @@ msgstr "Leuchtkraft"
 msgid "Magic Wand Select"
 msgstr "Zauberstab"
 
+#: ../Pinta/MainWindow.cs:360
+msgid "Main Menu"
+msgstr ""
+
 #: ../Pinta/Dialogs/ResizeCanvasDialog.cs:76
 #: ../Pinta/Dialogs/ResizeImageDialog.cs:66
 msgid "Maintain aspect ratio"
@@ -1271,8 +1280,8 @@ msgstr ""
 msgid "New"
 msgstr "Neu"
 
-#: ../Pinta/Dialogs/NewImageDialog.cs:67
 #: ../Pinta.Core/Managers/WorkspaceManager.cs:184
+#: ../Pinta/Dialogs/NewImageDialog.cs:67
 msgid "New Image"
 msgstr "Neues Bild"
 
@@ -1300,7 +1309,7 @@ msgstr "Rauschen"
 
 #: ../Pinta.Core/Effects/UserBlendOps.cs:31
 #: ../Pinta.Tools/Brushes/PlainBrush.cs:35
-#: ../Pinta.Tools/Tools/EraserTool.cs:260 ../Pinta.Tools/Tools/TextTool.cs:246
+#: ../Pinta.Tools/Tools/EraserTool.cs:262 ../Pinta.Tools/Tools/TextTool.cs:246
 msgid "Normal"
 msgstr "Normal"
 
@@ -1322,7 +1331,7 @@ msgstr ""
 
 #: ../Pinta.Effects/Effects/BulgeEffect.cs:92
 #: ../Pinta.Effects/Effects/RadialBlurEffect.cs:149
-#: ../Pinta.Effects/Effects/ZoomBlurEffect.cs:127
+#: ../Pinta.Effects/Effects/ZoomBlurEffect.cs:126
 msgid "Offset"
 msgstr "Versatz"
 
@@ -1334,11 +1343,11 @@ msgstr "Ölgemälde"
 msgid "Opacity:"
 msgstr "Deckkraft:"
 
-#: ../Pinta/Actions/File/OpenDocumentAction.cs:53
 #: ../Pinta.Core/Actions/EditActions.cs:350
 #: ../Pinta.Core/Actions/FileActions.cs:56
 #: ../Pinta.Core/Actions/LayerActions.cs:166
 #: ../Pinta.Gui.Addins/AddinManagerDialog.cs:197
+#: ../Pinta/Actions/File/OpenDocumentAction.cs:53
 msgid "Open"
 msgstr "Öffnen"
 
@@ -1350,8 +1359,8 @@ msgstr "Offene Kurvenform"
 msgid "Open Image"
 msgstr "Bild öffnen"
 
-#: ../Pinta/Actions/File/OpenDocumentAction.cs:50
 #: ../Pinta.Core/Actions/LayerActions.cs:163
+#: ../Pinta/Actions/File/OpenDocumentAction.cs:50
 msgid "Open Image File"
 msgstr "Bilddatei öffnen"
 
@@ -1422,14 +1431,14 @@ msgstr "Palette"
 msgid "Palette files"
 msgstr "Paletten-Dateien"
 
-#: ../Pinta/Actions/Layers/RotateZoomLayerAction.cs:118
 #: ../Pinta.Tools/Tools/PanTool.cs:38
+#: ../Pinta/Actions/Layers/RotateZoomLayerAction.cs:118
 msgid "Pan"
 msgstr "Ausschnitt verschieben"
 
-#: ../Pinta/Actions/Edit/PasteAction.cs:83
 #: ../Pinta.Core/Actions/EditActions.cs:63
 #: ../Pinta.Core/HistoryItems/PasteHistoryItem.cs:38
+#: ../Pinta/Actions/Edit/PasteAction.cs:87
 msgid "Paste"
 msgstr "Einfügen"
 
@@ -1437,8 +1446,8 @@ msgstr "Einfügen"
 msgid "Paste Into New Image"
 msgstr "In neues Bild einfügen"
 
-#: ../Pinta/Actions/Edit/PasteAction.cs:83
 #: ../Pinta.Core/Actions/EditActions.cs:64
+#: ../Pinta/Actions/Edit/PasteAction.cs:87
 msgid "Paste Into New Layer"
 msgstr "In neue Ebene einfügen"
 
@@ -1552,6 +1561,11 @@ msgstr "Tonwerttrennung"
 msgid "Power"
 msgstr "Stärke"
 
+#. Translators: This refers to preserving the current canvas size when pasting a larger image.
+#: ../Pinta/Actions/Edit/PasteAction.cs:189
+msgid "Preserve"
+msgstr ""
+
 #: ../Pinta/Dialogs/NewImageDialog.cs:101
 msgid "Preset:"
 msgstr "Voreinstellung:"
@@ -1595,7 +1609,7 @@ msgstr "Radiale Unschärfe"
 msgid "Radial Gradient"
 msgstr "Radialer Verlauf"
 
-#: ../Pinta.Effects/Effects/GaussianBlurEffect.cs:245
+#: ../Pinta.Effects/Effects/GaussianBlurEffect.cs:247
 #: ../Pinta.Effects/Effects/GlowEffect.cs:74
 #: ../Pinta.Effects/Effects/MedianEffect.cs:63
 #: ../Pinta.Effects/Effects/ReduceNoiseEffect.cs:87
@@ -1604,9 +1618,9 @@ msgstr "Radialer Verlauf"
 msgid "Radius"
 msgstr "Radius"
 
-#: ../Pinta.Effects/Effects/AddNoiseEffect.cs:173
+#: ../Pinta.Effects/Effects/AddNoiseEffect.cs:189
 #: ../Pinta.Effects/Effects/CloudsEffect.cs:222
-#: ../Pinta.Effects/Effects/FrostedGlassEffect.cs:153
+#: ../Pinta.Effects/Effects/FrostedGlassEffect.cs:158
 msgid "Random Noise"
 msgstr "Zufälliges Rauschen"
 
@@ -1698,8 +1712,8 @@ msgstr "Zurücksetzen"
 msgid "Reset to Default"
 msgstr "Vorgaben wiederherstellen"
 
+#: ../Pinta.Core/Classes/Document.cs:302
 #: ../Pinta/Dialogs/ResizeCanvasDialog.cs:57
-#: ../Pinta.Core/Classes/Document.cs:304
 msgid "Resize Canvas"
 msgstr "Größe der Zeichenfläche ändern"
 
@@ -1707,8 +1721,8 @@ msgstr "Größe der Zeichenfläche ändern"
 msgid "Resize Canvas..."
 msgstr "Größe der Zeichenfläche ändern …"
 
-#: ../Pinta/Dialogs/ResizeImageDialog.cs:47
 #: ../Pinta.Core/HistoryItems/ResizeHistoryItem.cs:38
+#: ../Pinta/Dialogs/ResizeImageDialog.cs:47
 msgid "Resize Image"
 msgstr "Bildgröße ändern"
 
@@ -1749,7 +1763,7 @@ msgid "Rotate 90° Counter-Clockwise"
 msgstr "Um 90° gegen den Uhrzeigersinn drehen"
 
 #: ../Pinta.Effects/Effects/FragmentEffect.cs:113
-#: ../Pinta.Effects/Effects/TileEffect.cs:172
+#: ../Pinta.Effects/Effects/TileEffect.cs:174
 msgid "Rotation"
 msgstr "Rotation"
 
@@ -1773,7 +1787,7 @@ msgstr "Maßeinheiten"
 msgid "Rulers"
 msgstr "Lineale"
 
-#: ../Pinta.Tools/Tools/ColorPickerTool.cs:196
+#: ../Pinta.Tools/Tools/ColorPickerTool.cs:194
 msgid "Sampling"
 msgstr "Abtastgröße"
 
@@ -1786,9 +1800,9 @@ msgstr "Sättigung"
 msgid "Saturation Percentage"
 msgstr "Sättigungsprozentwert"
 
-#: ../Pinta/Actions/File/SaveDocumentImplementationAction.cs:73
 #: ../Pinta.Core/Actions/EditActions.cs:391
 #: ../Pinta.Core/Actions/FileActions.cs:51
+#: ../Pinta/Actions/File/SaveDocumentImplementationAction.cs:73
 msgid "Save"
 msgstr "Speichern"
 
@@ -1860,7 +1874,7 @@ msgstr "Ebene anzeigen"
 msgid "Show/Hide"
 msgstr "Anzeigen/ausblenden"
 
-#: ../Pinta.Tools/Tools/ColorPickerTool.cs:223
+#: ../Pinta.Tools/Tools/ColorPickerTool.cs:221
 msgid "Single Pixel"
 msgstr "Einzelnes Pixel"
 
@@ -1868,7 +1882,7 @@ msgstr "Einzelnes Pixel"
 msgid "Size"
 msgstr "Größe"
 
-#: ../Pinta.Tools/Tools/EraserTool.cs:260
+#: ../Pinta.Tools/Tools/EraserTool.cs:262
 msgid "Smooth"
 msgstr "Weich"
 
@@ -1907,11 +1921,11 @@ msgstr "Stärke"
 msgid "Stylize"
 msgstr "Stilisieren"
 
-#: ../Pinta.Tools/Tools/ColorPickerTool.cs:206
+#: ../Pinta.Tools/Tools/ColorPickerTool.cs:204
 msgid "Switch to Pencil tool"
 msgstr "Zum Stift wechseln"
 
-#: ../Pinta.Tools/Tools/ColorPickerTool.cs:205
+#: ../Pinta.Tools/Tools/ColorPickerTool.cs:203
 msgid "Switch to previous tool"
 msgstr "Zum vorherigen Werkzeug wechseln"
 
@@ -1927,7 +1941,7 @@ msgstr "Text - Finalisieren"
 msgid "Text Style"
 msgstr "Textstil"
 
-#: ../Pinta/Actions/Edit/PasteAction.cs:164
+#: ../Pinta/Actions/Edit/PasteAction.cs:174
 msgid "The clipboard does not contain an image."
 msgstr "Die Zwischenablage enthält kein Bild."
 
@@ -1953,13 +1967,11 @@ msgstr "Die folgenden Pakete werden installiert:"
 msgid "The following packages will be uninstalled:"
 msgstr "Die folgenden Pakete werden entfernt:"
 
-#: ../Pinta/Actions/Edit/PasteAction.cs:171
+#: ../Pinta/Actions/Edit/PasteAction.cs:181
 msgid ""
-"The image being pasted is larger than the canvas size. What would you like "
-"to do?"
+"The image being pasted is larger than the canvas. What would you like to do "
+"to the canvas size?"
 msgstr ""
-"Das eingefügte Bild ist größer als die Zeichenfläche. Wie möchten Sie "
-"vorgehen?"
 
 #: ../Pinta.Gui.Addins/InstallDialog.cs:293
 msgid "The installation failed!"
@@ -2001,7 +2013,7 @@ msgstr "Dicke"
 msgid "Tile Reflection"
 msgstr "Kachelspiegelung"
 
-#: ../Pinta.Effects/Effects/TileEffect.cs:175
+#: ../Pinta.Effects/Effects/TileEffect.cs:177
 msgid "Tile Size"
 msgstr "Kachelgröße"
 
@@ -2011,7 +2023,7 @@ msgstr "Tipp: Rechtsklick zum Entfernen von Steuerpunkten."
 
 #: ../Pinta.Effects/Effects/RedEyeRemoveEffect.cs:50
 #: ../Pinta.Tools/Tools/FloodTool.cs:125
-#: ../Pinta.Tools/Tools/RecolorTool.cs:200
+#: ../Pinta.Tools/Tools/RecolorTool.cs:196
 msgid "Tolerance"
 msgstr "Fehlergrenze"
 
@@ -2023,7 +2035,7 @@ msgstr "Werkzeug"
 msgid "Tool Box"
 msgstr "Werkzeugkasten"
 
-#: ../Pinta/MainWindow.cs:357
+#: ../Pinta/MainWindow.cs:342
 msgid "Tool Windows"
 msgstr "Werkzeugfenster"
 
@@ -2043,8 +2055,8 @@ msgstr "Diese Anwendung übersetzen"
 msgid "Transparency Mode"
 msgstr "Transparentmodus"
 
-#: ../Pinta/Dialogs/NewImageDialog.cs:221
 #: ../Pinta.Effects/Effects/WarpEffect.cs:35
+#: ../Pinta/Dialogs/NewImageDialog.cs:221
 msgid "Transparent"
 msgstr "Durchsichtig"
 
@@ -2052,7 +2064,7 @@ msgstr "Durchsichtig"
 msgid "Twist"
 msgstr "Verdrehen"
 
-#: ../Pinta.Tools/Tools/EraserTool.cs:256
+#: ../Pinta.Tools/Tools/EraserTool.cs:258
 #: ../Pinta.Tools/Tools/PaintBrushTool.cs:165
 msgid "Type"
 msgstr "Typ"
@@ -2143,8 +2155,8 @@ msgstr "Breite:"
 
 #: ../Pinta.Core/Actions/ViewActions.cs:116
 #: ../Pinta.Core/Actions/ViewActions.cs:304
+#: ../Pinta.Core/Classes/DocumentWorkspace.cs:348
 #: ../Pinta.Core/Classes/DocumentWorkspace.cs:357
-#: ../Pinta.Core/Classes/DocumentWorkspace.cs:366
 msgid "Window"
 msgstr "Fenster"
 
@@ -2177,10 +2189,10 @@ msgstr ""
 "Sie haben keine Berechtigung um \"{0}\" zu bearbeiten. Die Datei oder der "
 "Ordner könnten schreibgeschützt sein."
 
-#: ../Pinta/Actions/Layers/RotateZoomLayerAction.cs:121
 #: ../Pinta.Effects/Effects/JuliaFractalEffect.cs:147
 #: ../Pinta.Effects/Effects/MandelbrotFractalEffect.cs:165
 #: ../Pinta.Tools/Tools/ZoomTool.cs:55
+#: ../Pinta/Actions/Layers/RotateZoomLayerAction.cs:121
 msgid "Zoom"
 msgstr "Lupe"
 
@@ -2200,11 +2212,11 @@ msgstr "Verkleinern"
 msgid "Zoom to Selection"
 msgstr "Größe an Auswahl anpassen"
 
-#: ../Pinta/MainWindow.cs:336
+#: ../Pinta/MainWindow.cs:320
 msgid "_Adjustments"
 msgstr "A_npassungen"
 
-#: ../Pinta/Actions/Edit/PasteAction.cs:177
+#: ../Pinta/Actions/Edit/PasteAction.cs:187
 #: ../Pinta/Actions/File/CloseDocumentAction.cs:66
 msgid "_Cancel"
 msgstr "_Abbrechen"
@@ -2213,28 +2225,28 @@ msgstr "_Abbrechen"
 msgid "_Discard"
 msgstr "_Verwerfen"
 
-#: ../Pinta/MainWindow.cs:321
+#: ../Pinta/MainWindow.cs:303
 msgid "_Edit"
 msgstr "Bearbeite_n"
 
-#: ../Pinta/MainWindow.cs:317
+#: ../Pinta/MainWindow.cs:299
 msgid "_File"
 msgstr "_Datei"
 
-#: ../Pinta/MainWindow.cs:351
+#: ../Pinta/MainWindow.cs:336
 msgid "_Help"
 msgstr "_Hilfe"
 
-#: ../Pinta/MainWindow.cs:329
+#: ../Pinta/MainWindow.cs:312
 msgid "_Image"
 msgstr "_Bild"
 
-#: ../Pinta/MainWindow.cs:333
+#: ../Pinta/MainWindow.cs:316
 msgid "_Layers"
 msgstr "_Ebenen"
 
-#: ../Pinta/Dialogs/ErrorDialog.cs:41 ../Pinta/Dialogs/ErrorDialog.cs:69
-#: ../Pinta.Gui.Addins/InstallDialog.cs:156
+#: ../Pinta.Gui.Addins/InstallDialog.cs:156 ../Pinta/Dialogs/ErrorDialog.cs:41
+#: ../Pinta/Dialogs/ErrorDialog.cs:69
 msgid "_OK"
 msgstr "_Bestätigen"
 
@@ -2242,11 +2254,11 @@ msgstr "_Bestätigen"
 msgid "_Save"
 msgstr "_Speichern"
 
-#: ../Pinta/MainWindow.cs:325
+#: ../Pinta/MainWindow.cs:307
 msgid "_View"
 msgstr "_Ansicht"
 
-#: ../Pinta/MainWindow.cs:347
+#: ../Pinta/MainWindow.cs:332
 msgid "_Window"
 msgstr "_Fenster"
 
@@ -2334,6 +2346,19 @@ msgstr "{0} Palette ({1})"
 msgid "{0}%"
 msgstr "{0} %"
 
+#~ msgid "Don't change canvas size"
+#~ msgstr "Größe der Zeichenfläche nicht ändern"
+
+#~ msgid "Expand canvas"
+#~ msgstr "Zeichenfläche erweitern"
+
+#~ msgid ""
+#~ "The image being pasted is larger than the canvas size. What would you "
+#~ "like to do?"
+#~ msgstr ""
+#~ "Das eingefügte Bild ist größer als die Zeichenfläche. Wie möchten Sie "
+#~ "vorgehen?"
+
 #~ msgid "Translated by:"
 #~ msgstr "Übersetzt von:"
 
@@ -2366,7 +2391,8 @@ msgstr "{0} %"
 
 #~ msgid "Ctrl-left click to set origin, left click to paint."
 #~ msgstr ""
-#~ "Strg + Linksklick, um einen Ausgangspunkt festzulegen, Linksklick zum Malen."
+#~ "Strg + Linksklick, um einen Ausgangspunkt festzulegen, Linksklick zum "
+#~ "Malen."
 
 #~ msgid ""
 #~ "Click and drag to draw gradient from primary to secondary color.  Right "
@@ -2377,7 +2403,8 @@ msgstr "{0} %"
 
 #, csharp-format
 #~ msgid ""
-#~ "The file already exists in \"{1}\". Replacing it will overwrite its contents."
+#~ "The file already exists in \"{1}\". Replacing it will overwrite its "
+#~ "contents."
 #~ msgstr ""
 #~ "Die Datei existiert bereits in »{1}«. Eine Ersetzung wird ihren Inhalt "
 #~ "überschreiben."
@@ -2448,7 +2475,8 @@ msgstr "{0} %"
 
 #~ msgid "Additional extensions are required to perform this operation."
 #~ msgstr ""
-#~ "Zusätzliche Erweiterungen sind erforderlich, um diese Operation auszuführen."
+#~ "Zusätzliche Erweiterungen sind erforderlich, um diese Operation "
+#~ "auszuführen."
 
 #~ msgid "No updates found"
 #~ msgstr "Es wurden keine Aktualisierungen gefunden"
@@ -2474,15 +2502,16 @@ msgstr "{0} %"
 
 #~ msgid "This add-in can't be loaded due to missing dependencies"
 #~ msgstr ""
-#~ "Diese Erweiterung kann mangels fehlender Abhängigkeiten nicht geladen werden"
+#~ "Diese Erweiterung kann mangels fehlender Abhängigkeiten nicht geladen "
+#~ "werden"
 
 #~ msgid "Some of the required add-ins were not found"
 #~ msgstr "Einige der benötigten Erweiterungen wurden nicht gefunden"
 
 #~ msgid "The following depedencies required by this add-in are not available:"
 #~ msgstr ""
-#~ "Die folgenden, durch diese Erweiterung benötigten Abhängigkeiten, sind nicht "
-#~ "verfügbar:"
+#~ "Die folgenden, durch diese Erweiterung benötigten Abhängigkeiten, sind "
+#~ "nicht verfügbar:"
 
 #~ msgid "Add-in packages"
 #~ msgstr "Erweiterungspakete"
@@ -2503,15 +2532,15 @@ msgstr "{0} %"
 #~ "The selected add-ins can't be installed because there are dependency "
 #~ "conflicts."
 #~ msgstr ""
-#~ "Wegen Abhängigkeitskonflikten konnten die ausgewählten Erweiterungen nicht "
-#~ "installiert werden."
+#~ "Wegen Abhängigkeitskonflikten konnten die ausgewählten Erweiterungen "
+#~ "nicht installiert werden."
 
 #~ msgid ""
-#~ "There are other add-ins that depend on the previous ones which will also be "
-#~ "uninstalled:"
+#~ "There are other add-ins that depend on the previous ones which will also "
+#~ "be uninstalled:"
 #~ msgstr ""
-#~ "Auf Grund nicht erfüllbarer gemeinsamer Abhängigkeiten werden die folgenden "
-#~ "Erweiterungen ebenso deinstalliert:"
+#~ "Auf Grund nicht erfüllbarer gemeinsamer Abhängigkeiten werden die "
+#~ "folgenden Erweiterungen ebenso deinstalliert:"
 
 #~ msgid "Installing Add-ins"
 #~ msgstr "Die Erweiterungen werden installiert"
@@ -2546,8 +2575,8 @@ msgstr "{0} %"
 #~ "Left click to zoom in. Right click to zoom out. Click and drag to zoom in "
 #~ "selection."
 #~ msgstr ""
-#~ "Linksklick zum Vergrößern. Rechtsklick zum Verkleinern. Klicken und Ziehen "
-#~ "vergrößert auf den ausgewählten Bereich."
+#~ "Linksklick zum Vergrößern. Rechtsklick zum Verkleinern. Klicken und "
+#~ "Ziehen vergrößert auf den ausgewählten Bereich."
 
 #~ msgid "Union (+) (Ctrl + Left Click)"
 #~ msgstr "Verschmelzung (+) (Strg + Linksklick)"
@@ -2561,18 +2590,18 @@ msgstr "{0} %"
 #~ "zeichnen."
 
 #~ msgid ""
-#~ "Click and drag to draw a rectangular selection. Hold Shift to constrain to a "
-#~ "square."
+#~ "Click and drag to draw a rectangular selection. Hold Shift to constrain "
+#~ "to a square."
 #~ msgstr ""
-#~ "Klicken und ziehen, um einen rechteckigen Bereich auszuwählen. Umschalttaste "
-#~ "gedrückt halten, wählt ein Quadrat aus."
+#~ "Klicken und ziehen, um einen rechteckigen Bereich auszuwählen. "
+#~ "Umschalttaste gedrückt halten, wählt ein Quadrat aus."
 
 #~ msgid ""
-#~ "Click and drag to draw an elliptical selection. Hold Shift to constrain to a "
-#~ "circle."
+#~ "Click and drag to draw an elliptical selection. Hold Shift to constrain "
+#~ "to a circle."
 #~ msgstr ""
-#~ "Klicken und ziehen, um einen elliptischen Bereich auszuwählen. Umschalttaste "
-#~ "gedrückt halten, wählt einen Kreis aus."
+#~ "Klicken und ziehen, um einen elliptischen Bereich auszuwählen. "
+#~ "Umschalttaste gedrückt halten, wählt einen Kreis aus."
 
 #~ msgid "Manage Repositories..."
 #~ msgstr "Paketquellen verwalten …"
@@ -2636,26 +2665,26 @@ msgstr "{0} %"
 #~ "Press Ctrl + left/right arrows to select control points by order.\n"
 #~ "Press Delete to delete the selected control point.\n"
 #~ "Press Space to add a new control point at the mouse position.\n"
-#~ "Hold Ctrl while pressing Space to create the control point at the exact same "
-#~ "position.\n"
+#~ "Hold Ctrl while pressing Space to create the control point at the exact "
+#~ "same position.\n"
 #~ "Hold Ctrl while left clicking on a control point to create a new shape at "
 #~ "the exact same position.\n"
-#~ "Hold Ctrl while clicking outside of the image bounds to create a new shape "
-#~ "starting at the edge.\n"
+#~ "Hold Ctrl while clicking outside of the image bounds to create a new "
+#~ "shape starting at the edge.\n"
 #~ "Press Enter to finalize the shape."
 #~ msgstr ""
 #~ "Linksklick, um eine Form in der Vordergrundfarbe zu zeichnen.\n"
 #~ "Linksklick auf eine Form, um einen Steuerpunkt hinzuzufügen.\n"
 #~ "Linksklick auf einen Steuerpunkt, um ihn mit der Maus zu bewegen. \n"
-#~ "Rechtsklick auf einen Steuerpunkt und die Maus bewegen, um die Spannung zu "
-#~ "ändern.\n"
+#~ "Rechtsklick auf einen Steuerpunkt und die Maus bewegen, um die Spannung "
+#~ "zu ändern.\n"
 #~ "Umschalttaste gedrückt halten, um die Winkel einzurasten.\n"
 #~ "Pfeiltasten benutzen, um den ausgewählten Steuerpunkt zu verschieben.\n"
-#~ "Strg + linke/rechte Pfeiltaste benutzen, um den nächsten Steuerpunkt in der "
-#~ "Reihe auszuwählen.\n"
+#~ "Strg + linke/rechte Pfeiltaste benutzen, um den nächsten Steuerpunkt in "
+#~ "der Reihe auszuwählen.\n"
 #~ "Entf drücken, um den ausgewählten Steuerpunkt zu löschen.\n"
-#~ "Leertaste drücken, um einen neuen Steuerpunkt an der aktuellen Mausposition "
-#~ "hinzuzufügen.\n"
+#~ "Leertaste drücken, um einen neuen Steuerpunkt an der aktuellen "
+#~ "Mausposition hinzuzufügen.\n"
 #~ "Strg halten und Leertaste drücken, um einen Steuerpunkt an der selben "
 #~ "Position zu erstellen.\n"
 #~ "Strg gedrückt halten und Linksklick, um eine neue Form an der selben "

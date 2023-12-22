@@ -6,18 +6,18 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: pinta\n"
-"Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
-"POT-Creation-Date: 2023-12-17 14:36-0500\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2023-12-22 02:09-0500\n"
 "PO-Revision-Date: 2017-02-16 01:51+0000\n"
 "Last-Translator: Yacine Bouklif <yacinebouklif@gmail.com>\n"
 "Language-Team: Kabyle <kab@li.org>\n"
+"Language: kab\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
 "X-Launchpad-Export-Date: 2023-12-18 03:00+0000\n"
 "X-Generator: Launchpad (build e1eeab5b20e19239bd7d5f36676f7a52988db88b)\n"
-"Language: kab\n"
 
 #: ../Pinta.Gui.Addins/InstallDialog.cs:216
 msgid " (in user directory)"
@@ -32,23 +32,23 @@ msgstr " Askar n tefrayt : "
 msgid "..."
 msgstr "..."
 
-#: ../Pinta.Tools/Tools/ColorPickerTool.cs:224
+#: ../Pinta.Tools/Tools/ColorPickerTool.cs:222
 msgid "3 x 3 Region"
 msgstr "Tamnaḍt 3 x 3"
 
-#: ../Pinta.Tools/Tools/ColorPickerTool.cs:225
+#: ../Pinta.Tools/Tools/ColorPickerTool.cs:223
 msgid "5 x 5 Region"
 msgstr "Tamnaḍt 5 x 5"
 
-#: ../Pinta.Tools/Tools/ColorPickerTool.cs:226
+#: ../Pinta.Tools/Tools/ColorPickerTool.cs:224
 msgid "7 x 7 Region"
 msgstr "Tamnaḍt 7 x 7"
 
-#: ../Pinta.Tools/Tools/ColorPickerTool.cs:227
+#: ../Pinta.Tools/Tools/ColorPickerTool.cs:225
 msgid "9 x 9 Region"
 msgstr "Tamnaḍt 9 x 9"
 
-#: ../Pinta/MainWindow.cs:343
+#: ../Pinta/MainWindow.cs:328
 msgid "A_dd-ins"
 msgstr "Isiɣzaf"
 
@@ -60,9 +60,9 @@ msgstr "Awal ɣef"
 msgid "About Pinta"
 msgstr "Awal ɣef Pinta"
 
-#: ../Pinta/Actions/Edit/PasteAction.cs:133
 #: ../Pinta.Core/Actions/LayerActions.cs:48
 #: ../Pinta.Core/Actions/LayerActions.cs:329
+#: ../Pinta/Actions/Edit/PasteAction.cs:143
 msgid "Add New Layer"
 msgstr "Rnu akalku amaynut"
 
@@ -78,21 +78,25 @@ msgstr ""
 msgid "Added"
 msgstr "Yettwarenna"
 
-#: ../Pinta.Tools/Tools/ColorPickerTool.cs:195
+#: ../Pinta/MainWindow.cs:372
+msgid "Adjustments"
+msgstr ""
+
+#: ../Pinta.Tools/Tools/ColorPickerTool.cs:193
 msgid "After select"
 msgstr "Mbaɛd tafrayt"
 
-#: ../Pinta/Actions/File/OpenDocumentAction.cs:81
 #: ../Pinta.Core/Actions/EditActions.cs:366
 #: ../Pinta.Gui.Addins/AddinManagerDialog.cs:209
+#: ../Pinta/Actions/File/OpenDocumentAction.cs:83
 msgid "All files"
 msgstr "Akkw ifuyla"
 
 #: ../Pinta.Effects/Effects/BulgeEffect.cs:89
-#: ../Pinta.Effects/Effects/FrostedGlassEffect.cs:150
+#: ../Pinta.Effects/Effects/FrostedGlassEffect.cs:155
 #: ../Pinta.Effects/Effects/SharpenEffect.cs:56
-#: ../Pinta.Effects/Effects/TwistEffect.cs:131
-#: ../Pinta.Effects/Effects/ZoomBlurEffect.cs:124
+#: ../Pinta.Effects/Effects/TwistEffect.cs:139
+#: ../Pinta.Effects/Effects/ZoomBlurEffect.cs:123
 msgid "Amount"
 msgstr "Azal"
 
@@ -100,19 +104,19 @@ msgstr "Azal"
 msgid "Anchor:"
 msgstr "Tamdeyt:"
 
-#: ../Pinta/Actions/Layers/RotateZoomLayerAction.cs:115
 #: ../Pinta.Effects/Effects/EdgeDetectEffect.cs:80
-#: ../Pinta.Effects/Effects/EmbossEffect.cs:135
+#: ../Pinta.Effects/Effects/EmbossEffect.cs:144
 #: ../Pinta.Effects/Effects/JuliaFractalEffect.cs:150
 #: ../Pinta.Effects/Effects/MandelbrotFractalEffect.cs:168
 #: ../Pinta.Effects/Effects/MotionBlurEffect.cs:101
 #: ../Pinta.Effects/Effects/RadialBlurEffect.cs:146
 #: ../Pinta.Effects/Effects/ReliefEffect.cs:82
 #: ../Pinta.Tools/Editable/EditEngines/ArrowedEditEngine.cs:298
+#: ../Pinta/Actions/Layers/RotateZoomLayerAction.cs:115
 msgid "Angle"
 msgstr "Tiɣmert"
 
-#: ../Pinta.Effects/Effects/TwistEffect.cs:134
+#: ../Pinta.Effects/Effects/TwistEffect.cs:142
 msgid "Antialias"
 msgstr "Amzay"
 
@@ -237,13 +241,13 @@ msgstr "S tiddi tamagdezt :"
 msgid "By percentage:"
 msgstr "S ufmiḍi :"
 
-#: ../Pinta/Actions/File/OpenDocumentAction.cs:54
-#: ../Pinta/Actions/File/SaveDocumentImplementationAction.cs:74
 #: ../Pinta.Core/Actions/EditActions.cs:351
 #: ../Pinta.Core/Actions/EditActions.cs:392
 #: ../Pinta.Core/Actions/LayerActions.cs:167
 #: ../Pinta.Gui.Addins/AddinManagerDialog.cs:198
 #: ../Pinta.Gui.Addins/InstallDialog.cs:120
+#: ../Pinta/Actions/File/OpenDocumentAction.cs:54
+#: ../Pinta/Actions/File/SaveDocumentImplementationAction.cs:74
 msgid "Cancel"
 msgstr ""
 
@@ -405,7 +409,7 @@ msgstr "Aleqqaḍ n yini"
 msgid "Color Range"
 msgstr "Tagrumma n yiniten"
 
-#: ../Pinta.Effects/Effects/AddNoiseEffect.cs:167
+#: ../Pinta.Effects/Effects/AddNoiseEffect.cs:183
 msgid "Color Saturation"
 msgstr "Tawant n yiniten"
 
@@ -447,7 +451,7 @@ msgid "Copyright"
 msgstr "Izerfan n umeskar"
 
 #. Translators: {0} is the name of a layer, and {1} is the path to a .ora file.
-#: ../Pinta.Core/ImageFormats/OraFormat.cs:122
+#: ../Pinta.Core/ImageFormats/OraFormat.cs:127
 #, csharp-format
 msgid "Could not import layer \"{0}\" from {1}"
 msgstr ""
@@ -459,7 +463,7 @@ msgstr ""
 msgid "Could not open file: {0}"
 msgstr "Ulamek tulya n ufaylu : {0}"
 
-#: ../Pinta.Effects/Effects/AddNoiseEffect.cs:170
+#: ../Pinta.Effects/Effects/AddNoiseEffect.cs:186
 msgid "Coverage"
 msgstr "Taduli"
 
@@ -542,13 +546,9 @@ msgstr "Ameccaq"
 msgid "Distort"
 msgstr "Azlag"
 
-#: ../Pinta.Tools/Tools/ColorPickerTool.cs:204
+#: ../Pinta.Tools/Tools/ColorPickerTool.cs:202
 msgid "Do not switch tool"
 msgstr "Ur tbeddil ara afecku"
-
-#: ../Pinta/Actions/Edit/PasteAction.cs:178
-msgid "Don't change canvas size"
-msgstr "Ur ttbeddil ara tiddi n temnaḍt n wunuɣ"
 
 #: ../Pinta.Gui.Addins/AddinInfoView.cs:134
 #, csharp-format
@@ -572,9 +572,13 @@ msgstr "Comportement du bord"
 msgid "Edge Detect"
 msgstr "Tifin n yiran"
 
-#: ../Pinta/MainWindow.cs:339
+#: ../Pinta/MainWindow.cs:324
 msgid "Effe_cts"
 msgstr "Isemda"
+
+#: ../Pinta/MainWindow.cs:366
+msgid "Effects"
+msgstr ""
 
 #: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:326
 #: ../Pinta.Tools/Editable/EditEngines/EllipseEditEngine.cs:34
@@ -599,7 +603,7 @@ msgstr "Kkes tafrayt"
 msgid "Eraser"
 msgstr "Taseffaḍt"
 
-#: ../Pinta.Core/ImageFormats/OraFormat.cs:123
+#: ../Pinta.Core/ImageFormats/OraFormat.cs:128
 msgid "Error"
 msgstr "Anezri"
 
@@ -607,9 +611,10 @@ msgstr "Anezri"
 msgid "Exclude (-) (Right Click)"
 msgstr "Exclusion (-) (Clic droit)"
 
-#: ../Pinta/Actions/Edit/PasteAction.cs:179
-msgid "Expand canvas"
-msgstr "Sihriw tamnaḍt n wunuɣ"
+#. Translators: This refers to expanding the canvas size when pasting a larger image.
+#: ../Pinta/Actions/Edit/PasteAction.cs:191
+msgid "Expand"
+msgstr ""
 
 #: ../Pinta.Gui.Addins/AddinManagerDialog.cs:204
 msgid "Extension packages"
@@ -814,7 +819,7 @@ msgstr "Ifuyla ICO ur zmiren ara ad ɛeddin 255 x 255 n ipiksilen."
 msgid "If you don't save, all changes will be permanently lost."
 msgstr "Ma yella ur teskelseḍ ara, ibeddilen akk ad ṛuḥen."
 
-#: ../Pinta.Tools/Tools/ColorPickerTool.cs:242
+#: ../Pinta.Tools/Tools/ColorPickerTool.cs:240 ../Pinta/MainWindow.cs:378
 msgid "Image"
 msgstr "Tugna"
 
@@ -826,16 +831,16 @@ msgstr "Amaẓrag n tugna"
 msgid "Image Tabs"
 msgstr "Iccaren n tugna"
 
-#: ../Pinta/Actions/Edit/PasteAction.cs:163
+#: ../Pinta/Actions/Edit/PasteAction.cs:173
 msgid "Image cannot be pasted"
 msgstr "Tugna ulamek ara tettwasenteḍ"
 
-#: ../Pinta/Actions/File/OpenDocumentAction.cs:60
 #: ../Pinta.Core/Actions/LayerActions.cs:193
+#: ../Pinta/Actions/File/OpenDocumentAction.cs:60
 msgid "Image files"
 msgstr "Afaylu n tugna"
 
-#: ../Pinta/Actions/Edit/PasteAction.cs:170
+#: ../Pinta/Actions/Edit/PasteAction.cs:180
 msgid "Image larger than canvas"
 msgstr "Tugna tugar taɣzut n wunuɣ"
 
@@ -892,9 +897,9 @@ msgstr "Sbedd..."
 msgid "Installed"
 msgstr "Yettusbedd"
 
-#: ../Pinta.Effects/Effects/AddNoiseEffect.cs:164
+#: ../Pinta.Effects/Effects/AddNoiseEffect.cs:180
 #: ../Pinta.Effects/Effects/OutlineEffect.cs:138
-#: ../Pinta.Effects/Effects/TileEffect.cs:178
+#: ../Pinta.Effects/Effects/TileEffect.cs:180
 msgid "Intensity"
 msgstr "Teqseḥ"
 
@@ -934,7 +939,7 @@ msgstr "Paysage"
 msgid "Lasso Select"
 msgstr "Sélection lasso"
 
-#: ../Pinta.Tools/Tools/ColorPickerTool.cs:241
+#: ../Pinta.Tools/Tools/ColorPickerTool.cs:239
 msgid "Layer"
 msgstr "Akalku"
 
@@ -1144,6 +1149,10 @@ msgstr "Tifawit"
 msgid "Magic Wand Select"
 msgstr "Tafrayt s tɛekkazt tasḥart"
 
+#: ../Pinta/MainWindow.cs:360
+msgid "Main Menu"
+msgstr ""
+
 #: ../Pinta/Dialogs/ResizeCanvasDialog.cs:76
 #: ../Pinta/Dialogs/ResizeImageDialog.cs:66
 msgid "Maintain aspect ratio"
@@ -1212,8 +1221,8 @@ msgstr ""
 msgid "New"
 msgstr "Amaynut"
 
-#: ../Pinta/Dialogs/NewImageDialog.cs:67
 #: ../Pinta.Core/Managers/WorkspaceManager.cs:184
+#: ../Pinta/Dialogs/NewImageDialog.cs:67
 msgid "New Image"
 msgstr "Tugna tamaynutt"
 
@@ -1241,7 +1250,7 @@ msgstr "Asxerxec"
 
 #: ../Pinta.Core/Effects/UserBlendOps.cs:31
 #: ../Pinta.Tools/Brushes/PlainBrush.cs:35
-#: ../Pinta.Tools/Tools/EraserTool.cs:260 ../Pinta.Tools/Tools/TextTool.cs:246
+#: ../Pinta.Tools/Tools/EraserTool.cs:262 ../Pinta.Tools/Tools/TextTool.cs:246
 msgid "Normal"
 msgstr "Amagnu"
 
@@ -1263,7 +1272,7 @@ msgstr ""
 
 #: ../Pinta.Effects/Effects/BulgeEffect.cs:92
 #: ../Pinta.Effects/Effects/RadialBlurEffect.cs:149
-#: ../Pinta.Effects/Effects/ZoomBlurEffect.cs:127
+#: ../Pinta.Effects/Effects/ZoomBlurEffect.cs:126
 msgid "Offset"
 msgstr "Asekḥer"
 
@@ -1275,11 +1284,11 @@ msgstr "Taklut s zzit"
 msgid "Opacity:"
 msgstr "Opacité :"
 
-#: ../Pinta/Actions/File/OpenDocumentAction.cs:53
 #: ../Pinta.Core/Actions/EditActions.cs:350
 #: ../Pinta.Core/Actions/FileActions.cs:56
 #: ../Pinta.Core/Actions/LayerActions.cs:166
 #: ../Pinta.Gui.Addins/AddinManagerDialog.cs:197
+#: ../Pinta/Actions/File/OpenDocumentAction.cs:53
 msgid "Open"
 msgstr "Ldi"
 
@@ -1291,8 +1300,8 @@ msgstr "Talɣa n uzlig yeldin"
 msgid "Open Image"
 msgstr "Ldi tugna"
 
-#: ../Pinta/Actions/File/OpenDocumentAction.cs:50
 #: ../Pinta.Core/Actions/LayerActions.cs:163
+#: ../Pinta/Actions/File/OpenDocumentAction.cs:50
 msgid "Open Image File"
 msgstr "Ldi afaylu n tugna"
 
@@ -1363,14 +1372,14 @@ msgstr "Tapaliḍt"
 msgid "Palette files"
 msgstr ""
 
-#: ../Pinta/Actions/Layers/RotateZoomLayerAction.cs:118
 #: ../Pinta.Tools/Tools/PanTool.cs:38
+#: ../Pinta/Actions/Layers/RotateZoomLayerAction.cs:118
 msgid "Pan"
 msgstr "Amwwiwel"
 
-#: ../Pinta/Actions/Edit/PasteAction.cs:83
 #: ../Pinta.Core/Actions/EditActions.cs:63
 #: ../Pinta.Core/HistoryItems/PasteHistoryItem.cs:38
+#: ../Pinta/Actions/Edit/PasteAction.cs:87
 msgid "Paste"
 msgstr "Senṭeḍ"
 
@@ -1378,8 +1387,8 @@ msgstr "Senṭeḍ"
 msgid "Paste Into New Image"
 msgstr "Senteḍ di tugna tamaynutt"
 
-#: ../Pinta/Actions/Edit/PasteAction.cs:83
 #: ../Pinta.Core/Actions/EditActions.cs:64
+#: ../Pinta/Actions/Edit/PasteAction.cs:87
 msgid "Paste Into New Layer"
 msgstr "Senteḍ deg ukalku amaynut"
 
@@ -1486,6 +1495,11 @@ msgstr "Postériser"
 msgid "Power"
 msgstr "Tazmert"
 
+#. Translators: This refers to preserving the current canvas size when pasting a larger image.
+#: ../Pinta/Actions/Edit/PasteAction.cs:189
+msgid "Preserve"
+msgstr ""
+
 #: ../Pinta/Dialogs/NewImageDialog.cs:101
 msgid "Preset:"
 msgstr "Préconfiguration :"
@@ -1529,7 +1543,7 @@ msgstr "Flou radial"
 msgid "Radial Gradient"
 msgstr "Dégradé radial"
 
-#: ../Pinta.Effects/Effects/GaussianBlurEffect.cs:245
+#: ../Pinta.Effects/Effects/GaussianBlurEffect.cs:247
 #: ../Pinta.Effects/Effects/GlowEffect.cs:74
 #: ../Pinta.Effects/Effects/MedianEffect.cs:63
 #: ../Pinta.Effects/Effects/ReduceNoiseEffect.cs:87
@@ -1538,9 +1552,9 @@ msgstr "Dégradé radial"
 msgid "Radius"
 msgstr "Aqar"
 
-#: ../Pinta.Effects/Effects/AddNoiseEffect.cs:173
+#: ../Pinta.Effects/Effects/AddNoiseEffect.cs:189
 #: ../Pinta.Effects/Effects/CloudsEffect.cs:222
-#: ../Pinta.Effects/Effects/FrostedGlassEffect.cs:153
+#: ../Pinta.Effects/Effects/FrostedGlassEffect.cs:158
 msgid "Random Noise"
 msgstr "Asxerxec agacuran"
 
@@ -1632,8 +1646,8 @@ msgstr "Ales awennez"
 msgid "Reset to Default"
 msgstr "Ales awennez ɣer lexṣas"
 
+#: ../Pinta.Core/Classes/Document.cs:302
 #: ../Pinta/Dialogs/ResizeCanvasDialog.cs:57
-#: ../Pinta.Core/Classes/Document.cs:304
 msgid "Resize Canvas"
 msgstr "Beddel tiddi n temnaḍt n wunuɣ"
 
@@ -1641,8 +1655,8 @@ msgstr "Beddel tiddi n temnaḍt n wunuɣ"
 msgid "Resize Canvas..."
 msgstr "Beddel tiddi n temnaḍt n wunuɣ..."
 
-#: ../Pinta/Dialogs/ResizeImageDialog.cs:47
 #: ../Pinta.Core/HistoryItems/ResizeHistoryItem.cs:38
+#: ../Pinta/Dialogs/ResizeImageDialog.cs:47
 msgid "Resize Image"
 msgstr "Beddel tiddi n tugna"
 
@@ -1683,7 +1697,7 @@ msgid "Rotate 90° Counter-Clockwise"
 msgstr "Tuzzya mgal asrag 90°"
 
 #: ../Pinta.Effects/Effects/FragmentEffect.cs:113
-#: ../Pinta.Effects/Effects/TileEffect.cs:172
+#: ../Pinta.Effects/Effects/TileEffect.cs:174
 msgid "Rotation"
 msgstr "Tuzzya"
 
@@ -1707,7 +1721,7 @@ msgstr "Tiggtin n teɣda"
 msgid "Rulers"
 msgstr "Taɣdiwin"
 
-#: ../Pinta.Tools/Tools/ColorPickerTool.cs:196
+#: ../Pinta.Tools/Tools/ColorPickerTool.cs:194
 msgid "Sampling"
 msgstr "Alemmec"
 
@@ -1720,9 +1734,9 @@ msgstr "Tawant"
 msgid "Saturation Percentage"
 msgstr "Pourcentage de saturation"
 
-#: ../Pinta/Actions/File/SaveDocumentImplementationAction.cs:73
 #: ../Pinta.Core/Actions/EditActions.cs:391
 #: ../Pinta.Core/Actions/FileActions.cs:51
+#: ../Pinta/Actions/File/SaveDocumentImplementationAction.cs:73
 msgid "Save"
 msgstr "Sekles"
 
@@ -1794,7 +1808,7 @@ msgstr "Beqqeḍ akalku"
 msgid "Show/Hide"
 msgstr ""
 
-#: ../Pinta.Tools/Tools/ColorPickerTool.cs:223
+#: ../Pinta.Tools/Tools/ColorPickerTool.cs:221
 msgid "Single Pixel"
 msgstr "Apixil asuf"
 
@@ -1802,7 +1816,7 @@ msgstr "Apixil asuf"
 msgid "Size"
 msgstr "Tiddi"
 
-#: ../Pinta.Tools/Tools/EraserTool.cs:260
+#: ../Pinta.Tools/Tools/EraserTool.cs:262
 msgid "Smooth"
 msgstr "Alewwaɣ"
 
@@ -1841,11 +1855,11 @@ msgstr "Force"
 msgid "Stylize"
 msgstr "Seɣneb"
 
-#: ../Pinta.Tools/Tools/ColorPickerTool.cs:206
+#: ../Pinta.Tools/Tools/ColorPickerTool.cs:204
 msgid "Switch to Pencil tool"
 msgstr "Beddel ɣer ufecku akeryun"
 
-#: ../Pinta.Tools/Tools/ColorPickerTool.cs:205
+#: ../Pinta.Tools/Tools/ColorPickerTool.cs:203
 msgid "Switch to previous tool"
 msgstr "Uɣal ɣer ufecku uzwir"
 
@@ -1861,7 +1875,7 @@ msgstr "Aḍris - Fakk"
 msgid "Text Style"
 msgstr "Aɣanib n uḍris"
 
-#: ../Pinta/Actions/Edit/PasteAction.cs:164
+#: ../Pinta/Actions/Edit/PasteAction.cs:174
 msgid "The clipboard does not contain an image."
 msgstr "Le presse-papier ne contient pas d'image"
 
@@ -1885,11 +1899,11 @@ msgstr "Ikemusen-agi ad ttwasbedden :"
 msgid "The following packages will be uninstalled:"
 msgstr "Ikemusen-agi ad ttwakksen :"
 
-#: ../Pinta/Actions/Edit/PasteAction.cs:171
+#: ../Pinta/Actions/Edit/PasteAction.cs:181
 msgid ""
-"The image being pasted is larger than the canvas size. What would you like "
-"to do?"
-msgstr "Tugna tettwasenteḍ yerna tugar taɣzut n wunuɣ. Acu tebɣiḍ ad tgeḍ ?"
+"The image being pasted is larger than the canvas. What would you like to do "
+"to the canvas size?"
+msgstr ""
 
 #: ../Pinta.Gui.Addins/InstallDialog.cs:293
 msgid "The installation failed!"
@@ -1927,7 +1941,7 @@ msgstr "Tuzert"
 msgid "Tile Reflection"
 msgstr "Réflexion mosaïque"
 
-#: ../Pinta.Effects/Effects/TileEffect.cs:175
+#: ../Pinta.Effects/Effects/TileEffect.cs:177
 msgid "Tile Size"
 msgstr "Tiddi n temkuẓin"
 
@@ -1937,7 +1951,7 @@ msgstr "Tixidest : tussda tayfust iwakken ad tekkseḍ tinqiḍin n usenqed."
 
 #: ../Pinta.Effects/Effects/RedEyeRemoveEffect.cs:50
 #: ../Pinta.Tools/Tools/FloodTool.cs:125
-#: ../Pinta.Tools/Tools/RecolorTool.cs:200
+#: ../Pinta.Tools/Tools/RecolorTool.cs:196
 msgid "Tolerance"
 msgstr "Tolérance"
 
@@ -1949,7 +1963,7 @@ msgstr "Afecku"
 msgid "Tool Box"
 msgstr ""
 
-#: ../Pinta/MainWindow.cs:357
+#: ../Pinta/MainWindow.cs:342
 msgid "Tool Windows"
 msgstr "Tanaka n ifecka"
 
@@ -1969,8 +1983,8 @@ msgstr "Suqqel asnas-agi"
 msgid "Transparency Mode"
 msgstr ""
 
-#: ../Pinta/Dialogs/NewImageDialog.cs:221
 #: ../Pinta.Effects/Effects/WarpEffect.cs:35
+#: ../Pinta/Dialogs/NewImageDialog.cs:221
 msgid "Transparent"
 msgstr "Amseɣseɣ"
 
@@ -1978,7 +1992,7 @@ msgstr "Amseɣseɣ"
 msgid "Twist"
 msgstr "Zleg"
 
-#: ../Pinta.Tools/Tools/EraserTool.cs:256
+#: ../Pinta.Tools/Tools/EraserTool.cs:258
 #: ../Pinta.Tools/Tools/PaintBrushTool.cs:165
 msgid "Type"
 msgstr "Anaw"
@@ -2069,8 +2083,8 @@ msgstr "Tehri :"
 
 #: ../Pinta.Core/Actions/ViewActions.cs:116
 #: ../Pinta.Core/Actions/ViewActions.cs:304
+#: ../Pinta.Core/Classes/DocumentWorkspace.cs:348
 #: ../Pinta.Core/Classes/DocumentWorkspace.cs:357
-#: ../Pinta.Core/Classes/DocumentWorkspace.cs:366
 msgid "Window"
 msgstr "Tazewwut"
 
@@ -2101,10 +2115,10 @@ msgid ""
 "You do not have access to modify '{0}'. The file or folder may be read-only."
 msgstr ""
 
-#: ../Pinta/Actions/Layers/RotateZoomLayerAction.cs:121
 #: ../Pinta.Effects/Effects/JuliaFractalEffect.cs:147
 #: ../Pinta.Effects/Effects/MandelbrotFractalEffect.cs:165
 #: ../Pinta.Tools/Tools/ZoomTool.cs:55
+#: ../Pinta/Actions/Layers/RotateZoomLayerAction.cs:121
 msgid "Zoom"
 msgstr "Zoom"
 
@@ -2124,11 +2138,11 @@ msgstr "Ssemẓi"
 msgid "Zoom to Selection"
 msgstr "Ssezg tiddi ɣer tefrayt"
 
-#: ../Pinta/MainWindow.cs:336
+#: ../Pinta/MainWindow.cs:320
 msgid "_Adjustments"
 msgstr "Iswatiyen"
 
-#: ../Pinta/Actions/Edit/PasteAction.cs:177
+#: ../Pinta/Actions/Edit/PasteAction.cs:187
 #: ../Pinta/Actions/File/CloseDocumentAction.cs:66
 msgid "_Cancel"
 msgstr ""
@@ -2137,28 +2151,28 @@ msgstr ""
 msgid "_Discard"
 msgstr ""
 
-#: ../Pinta/MainWindow.cs:321
+#: ../Pinta/MainWindow.cs:303
 msgid "_Edit"
 msgstr "Taẓrigt"
 
-#: ../Pinta/MainWindow.cs:317
+#: ../Pinta/MainWindow.cs:299
 msgid "_File"
 msgstr "Afaylu"
 
-#: ../Pinta/MainWindow.cs:351
+#: ../Pinta/MainWindow.cs:336
 msgid "_Help"
 msgstr "Tallalt"
 
-#: ../Pinta/MainWindow.cs:329
+#: ../Pinta/MainWindow.cs:312
 msgid "_Image"
 msgstr "Tugna"
 
-#: ../Pinta/MainWindow.cs:333
+#: ../Pinta/MainWindow.cs:316
 msgid "_Layers"
 msgstr "Ikalkuten"
 
-#: ../Pinta/Dialogs/ErrorDialog.cs:41 ../Pinta/Dialogs/ErrorDialog.cs:69
-#: ../Pinta.Gui.Addins/InstallDialog.cs:156
+#: ../Pinta.Gui.Addins/InstallDialog.cs:156 ../Pinta/Dialogs/ErrorDialog.cs:41
+#: ../Pinta/Dialogs/ErrorDialog.cs:69
 msgid "_OK"
 msgstr ""
 
@@ -2166,11 +2180,11 @@ msgstr ""
 msgid "_Save"
 msgstr ""
 
-#: ../Pinta/MainWindow.cs:325
+#: ../Pinta/MainWindow.cs:307
 msgid "_View"
 msgstr "Abeqqeḍ"
 
-#: ../Pinta/MainWindow.cs:347
+#: ../Pinta/MainWindow.cs:332
 msgid "_Window"
 msgstr "Asfaylu"
 
@@ -2229,6 +2243,17 @@ msgstr ""
 msgid "{0}%"
 msgstr "{0} %"
 
+#~ msgid "Don't change canvas size"
+#~ msgstr "Ur ttbeddil ara tiddi n temnaḍt n wunuɣ"
+
+#~ msgid "Expand canvas"
+#~ msgstr "Sihriw tamnaḍt n wunuɣ"
+
+#~ msgid ""
+#~ "The image being pasted is larger than the canvas size. What would you "
+#~ "like to do?"
+#~ msgstr "Tugna tettwasenteḍ yerna tugar taɣzut n wunuɣ. Acu tebɣiḍ ad tgeḍ ?"
+
 #~ msgid "Add-in Manager"
 #~ msgstr "Asefrak n isiɣzifen"
 
@@ -2264,11 +2289,11 @@ msgstr "{0} %"
 #~ "Cliquez sur Ctrl-gauche pour définir l'origine, clic gauche pour peindre."
 
 #~ msgid ""
-#~ "Click and drag to draw an elliptical selection. Hold Shift to constrain to a "
-#~ "circle."
+#~ "Click and drag to draw an elliptical selection. Hold Shift to constrain "
+#~ "to a circle."
 #~ msgstr ""
-#~ "Ssed u selḥu iwakken ad tsunɣeḍ tafrayt taglayt. Ssed tanast Maj iwakken ad "
-#~ "d-tsuffɣeḍ tawinest."
+#~ "Ssed u selḥu iwakken ad tsunɣeḍ tafrayt taglayt. Ssed tanast Maj iwakken "
+#~ "ad d-tsuffɣeḍ tawinest."
 
 #~ msgid ""
 #~ "Left click to draw a shape with the primary color.\n"
@@ -2280,12 +2305,12 @@ msgstr "{0} %"
 #~ "Press Ctrl + left/right arrows to select control points by order.\n"
 #~ "Press Delete to delete the selected control point.\n"
 #~ "Press Space to add a new control point at the mouse position.\n"
-#~ "Hold Ctrl while pressing Space to create the control point at the exact same "
-#~ "position.\n"
+#~ "Hold Ctrl while pressing Space to create the control point at the exact "
+#~ "same position.\n"
 #~ "Hold Ctrl while left clicking on a control point to create a new shape at "
 #~ "the exact same position.\n"
-#~ "Hold Ctrl while clicking outside of the image bounds to create a new shape "
-#~ "starting at the edge.\n"
+#~ "Hold Ctrl while clicking outside of the image bounds to create a new "
+#~ "shape starting at the edge.\n"
 #~ "Press Enter to finalize the shape."
 #~ msgstr ""
 #~ "Clic gauche pour dessiner avec une couleur primaire.\n"
@@ -2298,27 +2323,27 @@ msgstr "{0} %"
 #~ "Suppr (Delete) pour supprimer le point de contrôle sélectionné.\n"
 #~ "Barre espace pour créer un point de contrôle au positionnement de la "
 #~ "souris.\n"
-#~ "Barre espace en maintenant de la touche Ctrl pour créer un point de contrôle "
-#~ "à l'exact même position.\n"
+#~ "Barre espace en maintenant de la touche Ctrl pour créer un point de "
+#~ "contrôle à l'exact même position.\n"
 #~ "Clic gauche en maintenant de la touche Ctrl sur un point de contrôle pour "
 #~ "créer une nouvelle forme à l'exact même position.\n"
-#~ "Maintien de la touche Ctrl en cliquant en dehors des limites de l'image pour "
-#~ "créer une nouvelle forme à partir du bord.\n"
+#~ "Maintien de la touche Ctrl en cliquant en dehors des limites de l'image "
+#~ "pour créer une nouvelle forme à partir du bord.\n"
 #~ "Touche Entrée pour finir la forme."
 
 #~ msgid ""
 #~ "Click and drag to draw gradient from primary to secondary color.  Right "
 #~ "click to reverse."
 #~ msgstr ""
-#~ "Cliquer et glisser pour dessiner un dégradé de la couleur primaire vers la "
-#~ "couleur secondaire. Clic droit pour l'inverser."
+#~ "Cliquer et glisser pour dessiner un dégradé de la couleur primaire vers "
+#~ "la couleur secondaire. Clic droit pour l'inverser."
 
 #~ msgid ""
 #~ "Left click to draw freeform one-pixel wide lines with the primary color. "
 #~ "Right click to use the secondary color."
 #~ msgstr ""
-#~ "Tanast tazelmaḍt iwakken ad tsuneɣeḍ s ufus ilelli izirigen s tehri yiwen n "
-#~ "upixal s yini agejdan. Tanast tayefust iwakken ad tesqedceḍ ini ayefus."
+#~ "Tanast tazelmaḍt iwakken ad tsuneɣeḍ s ufus ilelli izirigen s tehri yiwen "
+#~ "n upixal s yini agejdan. Tanast tayefust iwakken ad tesqedceḍ ini ayefus."
 
 #~ msgid ""
 #~ "Left click to replace the secondary color with the primary color. Right "
@@ -2328,8 +2353,8 @@ msgstr "{0} %"
 #~ "tayefust iwakken ad tettiḍ."
 
 #~ msgid ""
-#~ "Click and drag to draw a rectangular selection. Hold Shift to constrain to a "
-#~ "square."
+#~ "Click and drag to draw a rectangular selection. Hold Shift to constrain "
+#~ "to a square."
 #~ msgstr ""
 #~ "Ssed u zzuɣer iwakken ad tgeḍ tafrayt s usrem. Ssed tanast Maj iwakken ad "
 #~ "tgeḍ tafrayt tamkuẓt."
@@ -2350,8 +2375,10 @@ msgstr "{0} %"
 
 #, csharp-format
 #~ msgid ""
-#~ "The file already exists in \"{1}\". Replacing it will overwrite its contents."
-#~ msgstr "Afaylu yella yakan di « {1} ». Asemselsi-ines ad isefsex agbur-ines."
+#~ "The file already exists in \"{1}\". Replacing it will overwrite its "
+#~ "contents."
+#~ msgstr ""
+#~ "Afaylu yella yakan di « {1} ». Asemselsi-ines ad isefsex agbur-ines."
 
 #~ msgid "Contributors to this release:"
 #~ msgstr "Fkan-d afus di lqem-agi :"
@@ -2471,8 +2498,8 @@ msgstr "{0} %"
 #~ msgstr "Wiyaḍ"
 
 #~ msgid ""
-#~ "There are other add-ins that depend on the previous ones which will also be "
-#~ "uninstalled:"
+#~ "There are other add-ins that depend on the previous ones which will also "
+#~ "be uninstalled:"
 #~ msgstr "Llan isiɣzaf urzen ɣer isiɣzaf uzwiren, ad ttwakksen daɣen :"
 
 #~ msgid ""
