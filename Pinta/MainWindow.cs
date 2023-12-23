@@ -294,7 +294,7 @@ public sealed class MainWindow
 		bool using_header_bar = window_shell.HeaderBar is not null;
 		var menu_bar = Gio.Menu.New ();
 
-		if (!using_header_bar){
+		if (!using_header_bar) {
 			app.Menubar = menu_bar;
 
 			if (PintaCore.System.OperatingSystem == OS.Mac) {
