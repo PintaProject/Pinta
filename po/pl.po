@@ -49,7 +49,7 @@ msgstr "Obszar 7×7"
 msgid "9 x 9 Region"
 msgstr "Obszar 9×9"
 
-#: ../Pinta/MainWindow.cs:349
+#: ../Pinta/MainWindow.cs:349 ../Pinta/MainWindow.cs:328
 msgid "A_dd-ins"
 msgstr "_Dodatki"
 
@@ -79,7 +79,7 @@ msgstr "Menedżer dodatków..."
 msgid "Added"
 msgstr "Dodano"
 
-#: ../Pinta/MainWindow.cs:382
+#: ../Pinta/MainWindow.cs:382 ../Pinta/MainWindow.cs:372
 msgid "Adjustments"
 msgstr "Regulacje"
 
@@ -580,11 +580,11 @@ msgstr "Zachowanie przy krawędzi"
 msgid "Edge Detect"
 msgstr "Wykrywanie krawędzi"
 
-#: ../Pinta/MainWindow.cs:345
+#: ../Pinta/MainWindow.cs:345 ../Pinta/MainWindow.cs:324
 msgid "Effe_cts"
 msgstr "E_fekty"
 
-#: ../Pinta/MainWindow.cs:376
+#: ../Pinta/MainWindow.cs:376 ../Pinta/MainWindow.cs:366
 msgid "Effects"
 msgstr "Efekty"
 
@@ -760,6 +760,7 @@ msgid "Fullscreen"
 msgstr "Pełny ekran"
 
 #: ../Pinta.Gui.Addins/AddinManagerDialog.cs:60
+#: ../Pinta.Gui.Addins/AddinManagerDialog.cs:64
 msgid "Gallery"
 msgstr "Galeria"
 
@@ -833,6 +834,7 @@ msgstr ""
 "Jeśli nie zapiszesz obrazu, wszystkie wprowadzone zmiany zostaną utracone."
 
 #: ../Pinta.Tools/Tools/ColorPickerTool.cs:240 ../Pinta/MainWindow.cs:388
+#: ../Pinta/MainWindow.cs:378
 msgid "Image"
 msgstr "Obraz"
 
@@ -907,6 +909,7 @@ msgid "Install..."
 msgstr "Zainstaluj…"
 
 #: ../Pinta.Gui.Addins/AddinManagerDialog.cs:62
+#: ../Pinta.Gui.Addins/AddinManagerDialog.cs:60
 msgid "Installed"
 msgstr "Zainstalowano"
 
@@ -1208,7 +1211,7 @@ msgstr "Jaskrawość"
 msgid "Magic Wand Select"
 msgstr "Magiczna różdżka"
 
-#: ../Pinta/MainWindow.cs:370
+#: ../Pinta/MainWindow.cs:370 ../Pinta/MainWindow.cs:360
 msgid "Main Menu"
 msgstr "Menu główne"
 
@@ -2038,7 +2041,7 @@ msgstr "Narzędzie"
 msgid "Tool Box"
 msgstr "Przybornik"
 
-#: ../Pinta/MainWindow.cs:363
+#: ../Pinta/MainWindow.cs:363 ../Pinta/MainWindow.cs:342
 msgid "Tool Windows"
 msgstr "Okna narzędziowe"
 
@@ -2117,6 +2120,7 @@ msgid "Update..."
 msgstr "Aktualizuj..."
 
 #: ../Pinta.Gui.Addins/AddinManagerDialog.cs:64
+#: ../Pinta.Gui.Addins/AddinManagerDialog.cs:62
 msgid "Updates"
 msgstr "Aktualizacje"
 
@@ -2215,7 +2219,7 @@ msgstr "Pomniejsz"
 msgid "Zoom to Selection"
 msgstr "Powiększ do zaznaczenia"
 
-#: ../Pinta/MainWindow.cs:341
+#: ../Pinta/MainWindow.cs:341 ../Pinta/MainWindow.cs:320
 msgid "_Adjustments"
 msgstr "_Korekcja"
 
@@ -2228,23 +2232,23 @@ msgstr "_Anuluj"
 msgid "_Discard"
 msgstr "O_drzuć"
 
-#: ../Pinta/MainWindow.cs:324
+#: ../Pinta/MainWindow.cs:324 ../Pinta/MainWindow.cs:303
 msgid "_Edit"
 msgstr "_Edycja"
 
-#: ../Pinta/MainWindow.cs:320
+#: ../Pinta/MainWindow.cs:320 ../Pinta/MainWindow.cs:299
 msgid "_File"
 msgstr "_Plik"
 
-#: ../Pinta/MainWindow.cs:357
+#: ../Pinta/MainWindow.cs:357 ../Pinta/MainWindow.cs:336
 msgid "_Help"
 msgstr "Po_moc"
 
-#: ../Pinta/MainWindow.cs:333
+#: ../Pinta/MainWindow.cs:333 ../Pinta/MainWindow.cs:312
 msgid "_Image"
 msgstr "_Obraz"
 
-#: ../Pinta/MainWindow.cs:337
+#: ../Pinta/MainWindow.cs:337 ../Pinta/MainWindow.cs:316
 msgid "_Layers"
 msgstr "Wa_rstwy"
 
@@ -2257,11 +2261,11 @@ msgstr "_OK"
 msgid "_Save"
 msgstr "_Zapisz"
 
-#: ../Pinta/MainWindow.cs:328
+#: ../Pinta/MainWindow.cs:328 ../Pinta/MainWindow.cs:307
 msgid "_View"
 msgstr "_Widok"
 
-#: ../Pinta/MainWindow.cs:353
+#: ../Pinta/MainWindow.cs:353 ../Pinta/MainWindow.cs:332
 msgid "_Window"
 msgstr "_Okno"
 
