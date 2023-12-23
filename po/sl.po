@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: pinta\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2023-12-22 02:09-0500\n"
-"PO-Revision-Date: 2023-12-20 15:51+0000\n"
+"PO-Revision-Date: 2023-12-23 21:04+0000\n"
 "Last-Translator: grof <grofaty@hotmail.com>\n"
 "Language-Team: Slovenian <https://hosted.weblate.org/projects/pinta/pinta/sl/"
 ">\n"
@@ -18,7 +18,7 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=4; plural=(n%100==1 ? 1 : n%100==2 ? 2 : n%100==3 || "
 "n%100==4 ? 3 : 0);\n"
-"X-Generator: Weblate 5.3\n"
+"X-Generator: Weblate 5.4-dev\n"
 "X-Launchpad-Export-Date: 2023-12-18 03:00+0000\n"
 
 #: ../Pinta.Gui.Addins/InstallDialog.cs:216
@@ -82,7 +82,7 @@ msgstr "Dodano"
 
 #: ../Pinta/MainWindow.cs:372
 msgid "Adjustments"
-msgstr ""
+msgstr "Prilagoditve"
 
 #: ../Pinta.Tools/Tools/ColorPickerTool.cs:193
 msgid "After select"
@@ -586,7 +586,7 @@ msgstr "Učin_ki"
 
 #: ../Pinta/MainWindow.cs:366
 msgid "Effects"
-msgstr ""
+msgstr "Učinki"
 
 #: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:326
 #: ../Pinta.Tools/Editable/EditEngines/EllipseEditEngine.cs:34
@@ -622,7 +622,7 @@ msgstr "Izločitev (-) (desni klik)"
 #. Translators: This refers to expanding the canvas size when pasting a larger image.
 #: ../Pinta/Actions/Edit/PasteAction.cs:191
 msgid "Expand"
-msgstr ""
+msgstr "Razširi"
 
 #: ../Pinta.Gui.Addins/AddinManagerDialog.cs:204
 msgid "Extension packages"
@@ -1193,7 +1193,7 @@ msgstr "Izbor čarobne palice"
 
 #: ../Pinta/MainWindow.cs:360
 msgid "Main Menu"
-msgstr ""
+msgstr "Osnovni meni"
 
 #: ../Pinta/Dialogs/ResizeCanvasDialog.cs:76
 #: ../Pinta/Dialogs/ResizeImageDialog.cs:66
@@ -1545,7 +1545,7 @@ msgstr "Moč"
 #. Translators: This refers to preserving the current canvas size when pasting a larger image.
 #: ../Pinta/Actions/Edit/PasteAction.cs:189
 msgid "Preserve"
-msgstr ""
+msgstr "Ohrani"
 
 #: ../Pinta/Dialogs/NewImageDialog.cs:101
 msgid "Preset:"
@@ -1652,7 +1652,7 @@ msgstr "Izdano z dovoljenjem MIT X11."
 
 #: ../Pinta.Effects/Effects/ReliefEffect.cs:38
 msgid "Relief"
-msgstr "Pridvíg"
+msgstr "Pridvig"
 
 #: ../Pinta/Actions/Layers/LayerPropertiesAction.cs:103
 msgid "Rename Layer"
@@ -1951,6 +1951,8 @@ msgid ""
 "The image being pasted is larger than the canvas. What would you like to do "
 "to the canvas size?"
 msgstr ""
+"Prilepljena slika je večja od velikosti platna. Kaj želite storiti z "
+"velikostjo platna?"
 
 #: ../Pinta.Gui.Addins/InstallDialog.cs:293
 msgid "The installation failed!"
