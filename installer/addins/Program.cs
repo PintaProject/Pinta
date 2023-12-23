@@ -13,7 +13,7 @@ static void LocalizeManifest (FileInfo manifestFile, FileInfo[] resourceFiles)
     manifestDoc.Load (manifestFile.FullName);
 
     // The properties to translate.
-    string[] headerProperties = ["Name", "Description"];
+    string[] headerProperties = new[] { "Name", "Description" };
     var headerPropertyNodes = headerProperties.Select (propertyName =>
         manifestDoc.SelectSingleNode ($"/Addin/Header/{propertyName}") ??
         throw new InvalidDataException ($"Add-in manifest does not specify header property '{propertyName}'"));
