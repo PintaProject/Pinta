@@ -6,11 +6,12 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: pinta\n"
-"Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
-"POT-Creation-Date: 2023-12-17 14:36-0500\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2023-12-22 02:09-0500\n"
 "PO-Revision-Date: 2022-02-04 18:28+0000\n"
 "Last-Translator: Adolfo Jayme Barrientos <fitoschido@gmail.com>\n"
 "Language-Team: Catalan <ca@li.org>\n"
+"Language: ca\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -31,23 +32,23 @@ msgstr " Mode de selecció: "
 msgid "..."
 msgstr "…"
 
-#: ../Pinta.Tools/Tools/ColorPickerTool.cs:224
+#: ../Pinta.Tools/Tools/ColorPickerTool.cs:222
 msgid "3 x 3 Region"
 msgstr "Regió de 3 × 3"
 
-#: ../Pinta.Tools/Tools/ColorPickerTool.cs:225
+#: ../Pinta.Tools/Tools/ColorPickerTool.cs:223
 msgid "5 x 5 Region"
 msgstr "Regió de 5 × 5"
 
-#: ../Pinta.Tools/Tools/ColorPickerTool.cs:226
+#: ../Pinta.Tools/Tools/ColorPickerTool.cs:224
 msgid "7 x 7 Region"
 msgstr "Regió de 7 × 7"
 
-#: ../Pinta.Tools/Tools/ColorPickerTool.cs:227
+#: ../Pinta.Tools/Tools/ColorPickerTool.cs:225
 msgid "9 x 9 Region"
 msgstr "Regió de 9 × 9"
 
-#: ../Pinta/MainWindow.cs:343
+#: ../Pinta/MainWindow.cs:328
 msgid "A_dd-ins"
 msgstr "_Complements"
 
@@ -59,9 +60,9 @@ msgstr "Quant a"
 msgid "About Pinta"
 msgstr "Quant al Pinta"
 
-#: ../Pinta/Actions/Edit/PasteAction.cs:133
 #: ../Pinta.Core/Actions/LayerActions.cs:48
 #: ../Pinta.Core/Actions/LayerActions.cs:329
+#: ../Pinta/Actions/Edit/PasteAction.cs:143
 msgid "Add New Layer"
 msgstr "Afegeix una capa nova"
 
@@ -77,21 +78,25 @@ msgstr ""
 msgid "Added"
 msgstr "Afegit"
 
-#: ../Pinta.Tools/Tools/ColorPickerTool.cs:195
+#: ../Pinta/MainWindow.cs:372
+msgid "Adjustments"
+msgstr ""
+
+#: ../Pinta.Tools/Tools/ColorPickerTool.cs:193
 msgid "After select"
 msgstr "Després de seleccionar"
 
-#: ../Pinta/Actions/File/OpenDocumentAction.cs:81
 #: ../Pinta.Core/Actions/EditActions.cs:366
 #: ../Pinta.Gui.Addins/AddinManagerDialog.cs:209
+#: ../Pinta/Actions/File/OpenDocumentAction.cs:83
 msgid "All files"
 msgstr "Tots els fitxers"
 
 #: ../Pinta.Effects/Effects/BulgeEffect.cs:89
-#: ../Pinta.Effects/Effects/FrostedGlassEffect.cs:150
+#: ../Pinta.Effects/Effects/FrostedGlassEffect.cs:155
 #: ../Pinta.Effects/Effects/SharpenEffect.cs:56
-#: ../Pinta.Effects/Effects/TwistEffect.cs:131
-#: ../Pinta.Effects/Effects/ZoomBlurEffect.cs:124
+#: ../Pinta.Effects/Effects/TwistEffect.cs:139
+#: ../Pinta.Effects/Effects/ZoomBlurEffect.cs:123
 msgid "Amount"
 msgstr "Quantitat"
 
@@ -99,19 +104,19 @@ msgstr "Quantitat"
 msgid "Anchor:"
 msgstr "Àncora:"
 
-#: ../Pinta/Actions/Layers/RotateZoomLayerAction.cs:115
 #: ../Pinta.Effects/Effects/EdgeDetectEffect.cs:80
-#: ../Pinta.Effects/Effects/EmbossEffect.cs:135
+#: ../Pinta.Effects/Effects/EmbossEffect.cs:144
 #: ../Pinta.Effects/Effects/JuliaFractalEffect.cs:150
 #: ../Pinta.Effects/Effects/MandelbrotFractalEffect.cs:168
 #: ../Pinta.Effects/Effects/MotionBlurEffect.cs:101
 #: ../Pinta.Effects/Effects/RadialBlurEffect.cs:146
 #: ../Pinta.Effects/Effects/ReliefEffect.cs:82
 #: ../Pinta.Tools/Editable/EditEngines/ArrowedEditEngine.cs:298
+#: ../Pinta/Actions/Layers/RotateZoomLayerAction.cs:115
 msgid "Angle"
 msgstr "Angle"
 
-#: ../Pinta.Effects/Effects/TwistEffect.cs:134
+#: ../Pinta.Effects/Effects/TwistEffect.cs:142
 msgid "Antialias"
 msgstr "Antialiàsing"
 
@@ -236,13 +241,13 @@ msgstr "Per mida absoluta:"
 msgid "By percentage:"
 msgstr "Per percentage:"
 
-#: ../Pinta/Actions/File/OpenDocumentAction.cs:54
-#: ../Pinta/Actions/File/SaveDocumentImplementationAction.cs:74
 #: ../Pinta.Core/Actions/EditActions.cs:351
 #: ../Pinta.Core/Actions/EditActions.cs:392
 #: ../Pinta.Core/Actions/LayerActions.cs:167
 #: ../Pinta.Gui.Addins/AddinManagerDialog.cs:198
 #: ../Pinta.Gui.Addins/InstallDialog.cs:120
+#: ../Pinta/Actions/File/OpenDocumentAction.cs:54
+#: ../Pinta/Actions/File/SaveDocumentImplementationAction.cs:74
 msgid "Cancel"
 msgstr "Cancel·la"
 
@@ -318,8 +323,7 @@ msgstr ""
 
 #: ../Pinta.Tools/Tools/LassoSelectTool.cs:55
 msgid "Click and drag to draw the outline for a selection area."
-msgstr ""
-"Feu clic i arrossegueu per dibuixar el contorn d’una àrea de selecció."
+msgstr "Feu clic i arrossegueu per dibuixar el contorn d’una àrea de selecció."
 
 #: ../Pinta.Tools/Tools/PanTool.cs:40
 msgid "Click and drag to navigate image."
@@ -405,7 +409,7 @@ msgstr "Capturador de color"
 msgid "Color Range"
 msgstr "Interval de color"
 
-#: ../Pinta.Effects/Effects/AddNoiseEffect.cs:167
+#: ../Pinta.Effects/Effects/AddNoiseEffect.cs:183
 msgid "Color Saturation"
 msgstr "Saturació del color"
 
@@ -447,7 +451,7 @@ msgid "Copyright"
 msgstr "Copyright"
 
 #. Translators: {0} is the name of a layer, and {1} is the path to a .ora file.
-#: ../Pinta.Core/ImageFormats/OraFormat.cs:122
+#: ../Pinta.Core/ImageFormats/OraFormat.cs:127
 #, csharp-format
 msgid "Could not import layer \"{0}\" from {1}"
 msgstr ""
@@ -459,7 +463,7 @@ msgstr ""
 msgid "Could not open file: {0}"
 msgstr "No s'ha pogut obrir el fitxer: {0}"
 
-#: ../Pinta.Effects/Effects/AddNoiseEffect.cs:170
+#: ../Pinta.Effects/Effects/AddNoiseEffect.cs:186
 msgid "Coverage"
 msgstr "Cobertura"
 
@@ -542,13 +546,9 @@ msgstr "Distància"
 msgid "Distort"
 msgstr "Distorsiona"
 
-#: ../Pinta.Tools/Tools/ColorPickerTool.cs:204
+#: ../Pinta.Tools/Tools/ColorPickerTool.cs:202
 msgid "Do not switch tool"
 msgstr "No canviïs d'eina"
-
-#: ../Pinta/Actions/Edit/PasteAction.cs:178
-msgid "Don't change canvas size"
-msgstr "No canviïs la mida del llenç"
 
 #: ../Pinta.Gui.Addins/AddinInfoView.cs:134
 #, csharp-format
@@ -572,9 +572,13 @@ msgstr "Comportament de les vores"
 msgid "Edge Detect"
 msgstr "Detecció de vores"
 
-#: ../Pinta/MainWindow.cs:339
+#: ../Pinta/MainWindow.cs:324
 msgid "Effe_cts"
 msgstr "Efec_tes"
+
+#: ../Pinta/MainWindow.cs:366
+msgid "Effects"
+msgstr ""
 
 #: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:326
 #: ../Pinta.Tools/Editable/EditEngines/EllipseEditEngine.cs:34
@@ -599,7 +603,7 @@ msgstr "Esborra la selecció"
 msgid "Eraser"
 msgstr "Goma d'esborrar"
 
-#: ../Pinta.Core/ImageFormats/OraFormat.cs:123
+#: ../Pinta.Core/ImageFormats/OraFormat.cs:128
 msgid "Error"
 msgstr "Hi ha hagut un error"
 
@@ -607,9 +611,10 @@ msgstr "Hi ha hagut un error"
 msgid "Exclude (-) (Right Click)"
 msgstr "Exclou (-) (Clic dret)"
 
-#: ../Pinta/Actions/Edit/PasteAction.cs:179
-msgid "Expand canvas"
-msgstr "Expandeix el llenç"
+#. Translators: This refers to expanding the canvas size when pasting a larger image.
+#: ../Pinta/Actions/Edit/PasteAction.cs:191
+msgid "Expand"
+msgstr ""
 
 #: ../Pinta.Gui.Addins/AddinManagerDialog.cs:204
 msgid "Extension packages"
@@ -814,7 +819,7 @@ msgstr "Els fitxers ICO no poden excedir 255 × 255 píxels."
 msgid "If you don't save, all changes will be permanently lost."
 msgstr "Si no deseu, es perdran definitivament tots els canvis."
 
-#: ../Pinta.Tools/Tools/ColorPickerTool.cs:242
+#: ../Pinta.Tools/Tools/ColorPickerTool.cs:240 ../Pinta/MainWindow.cs:378
 msgid "Image"
 msgstr "Imatge"
 
@@ -826,16 +831,16 @@ msgstr "Editor d’imatges"
 msgid "Image Tabs"
 msgstr "Pestanyes d’imatges"
 
-#: ../Pinta/Actions/Edit/PasteAction.cs:163
+#: ../Pinta/Actions/Edit/PasteAction.cs:173
 msgid "Image cannot be pasted"
 msgstr "No s’ha pogut enganxar la imatge"
 
-#: ../Pinta/Actions/File/OpenDocumentAction.cs:60
 #: ../Pinta.Core/Actions/LayerActions.cs:193
+#: ../Pinta/Actions/File/OpenDocumentAction.cs:60
 msgid "Image files"
 msgstr "Fitxers d'imatge"
 
-#: ../Pinta/Actions/Edit/PasteAction.cs:170
+#: ../Pinta/Actions/Edit/PasteAction.cs:180
 msgid "Image larger than canvas"
 msgstr "La imatge és més gran que el llenç"
 
@@ -892,9 +897,9 @@ msgstr "Instal·la…"
 msgid "Installed"
 msgstr "Instal·lades"
 
-#: ../Pinta.Effects/Effects/AddNoiseEffect.cs:164
+#: ../Pinta.Effects/Effects/AddNoiseEffect.cs:180
 #: ../Pinta.Effects/Effects/OutlineEffect.cs:138
-#: ../Pinta.Effects/Effects/TileEffect.cs:178
+#: ../Pinta.Effects/Effects/TileEffect.cs:180
 msgid "Intensity"
 msgstr "Intensitat"
 
@@ -934,7 +939,7 @@ msgstr "Horitzontal"
 msgid "Lasso Select"
 msgstr "Selecció de llaç"
 
-#: ../Pinta.Tools/Tools/ColorPickerTool.cs:241
+#: ../Pinta.Tools/Tools/ColorPickerTool.cs:239
 msgid "Layer"
 msgstr "Capa"
 
@@ -1147,6 +1152,10 @@ msgstr "Lluminositat"
 msgid "Magic Wand Select"
 msgstr "Vareta màgica"
 
+#: ../Pinta/MainWindow.cs:360
+msgid "Main Menu"
+msgstr ""
+
 #: ../Pinta/Dialogs/ResizeCanvasDialog.cs:76
 #: ../Pinta/Dialogs/ResizeImageDialog.cs:66
 msgid "Maintain aspect ratio"
@@ -1215,8 +1224,8 @@ msgstr ""
 msgid "New"
 msgstr "Nou"
 
-#: ../Pinta/Dialogs/NewImageDialog.cs:67
 #: ../Pinta.Core/Managers/WorkspaceManager.cs:184
+#: ../Pinta/Dialogs/NewImageDialog.cs:67
 msgid "New Image"
 msgstr "Imatge nova"
 
@@ -1244,7 +1253,7 @@ msgstr "Soroll"
 
 #: ../Pinta.Core/Effects/UserBlendOps.cs:31
 #: ../Pinta.Tools/Brushes/PlainBrush.cs:35
-#: ../Pinta.Tools/Tools/EraserTool.cs:260 ../Pinta.Tools/Tools/TextTool.cs:246
+#: ../Pinta.Tools/Tools/EraserTool.cs:262 ../Pinta.Tools/Tools/TextTool.cs:246
 msgid "Normal"
 msgstr "Normal"
 
@@ -1266,7 +1275,7 @@ msgstr ""
 
 #: ../Pinta.Effects/Effects/BulgeEffect.cs:92
 #: ../Pinta.Effects/Effects/RadialBlurEffect.cs:149
-#: ../Pinta.Effects/Effects/ZoomBlurEffect.cs:127
+#: ../Pinta.Effects/Effects/ZoomBlurEffect.cs:126
 msgid "Offset"
 msgstr "Desplaçament"
 
@@ -1278,11 +1287,11 @@ msgstr "Pintura a l'oli"
 msgid "Opacity:"
 msgstr "Opacitat:"
 
-#: ../Pinta/Actions/File/OpenDocumentAction.cs:53
 #: ../Pinta.Core/Actions/EditActions.cs:350
 #: ../Pinta.Core/Actions/FileActions.cs:56
 #: ../Pinta.Core/Actions/LayerActions.cs:166
 #: ../Pinta.Gui.Addins/AddinManagerDialog.cs:197
+#: ../Pinta/Actions/File/OpenDocumentAction.cs:53
 msgid "Open"
 msgstr "Obre"
 
@@ -1294,8 +1303,8 @@ msgstr "Forma de corba oberta"
 msgid "Open Image"
 msgstr "Obre una imatge"
 
-#: ../Pinta/Actions/File/OpenDocumentAction.cs:50
 #: ../Pinta.Core/Actions/LayerActions.cs:163
+#: ../Pinta/Actions/File/OpenDocumentAction.cs:50
 msgid "Open Image File"
 msgstr "Obre un fitxer d’imatge"
 
@@ -1366,14 +1375,14 @@ msgstr "Paleta"
 msgid "Palette files"
 msgstr "Fitxers de paleta"
 
-#: ../Pinta/Actions/Layers/RotateZoomLayerAction.cs:118
 #: ../Pinta.Tools/Tools/PanTool.cs:38
+#: ../Pinta/Actions/Layers/RotateZoomLayerAction.cs:118
 msgid "Pan"
 msgstr "Desplaça"
 
-#: ../Pinta/Actions/Edit/PasteAction.cs:83
 #: ../Pinta.Core/Actions/EditActions.cs:63
 #: ../Pinta.Core/HistoryItems/PasteHistoryItem.cs:38
+#: ../Pinta/Actions/Edit/PasteAction.cs:87
 msgid "Paste"
 msgstr "Enganxa"
 
@@ -1381,8 +1390,8 @@ msgstr "Enganxa"
 msgid "Paste Into New Image"
 msgstr "Enganxa en una imatge nova"
 
-#: ../Pinta/Actions/Edit/PasteAction.cs:83
 #: ../Pinta.Core/Actions/EditActions.cs:64
+#: ../Pinta/Actions/Edit/PasteAction.cs:87
 msgid "Paste Into New Layer"
 msgstr "Enganxa en una capa nova"
 
@@ -1494,6 +1503,11 @@ msgstr "Redueix el nombre de colors"
 msgid "Power"
 msgstr "Força"
 
+#. Translators: This refers to preserving the current canvas size when pasting a larger image.
+#: ../Pinta/Actions/Edit/PasteAction.cs:189
+msgid "Preserve"
+msgstr ""
+
 #: ../Pinta/Dialogs/NewImageDialog.cs:101
 msgid "Preset:"
 msgstr "Valors predefinits:"
@@ -1537,7 +1551,7 @@ msgstr "Desenfocament radial"
 msgid "Radial Gradient"
 msgstr "Degradat radial"
 
-#: ../Pinta.Effects/Effects/GaussianBlurEffect.cs:245
+#: ../Pinta.Effects/Effects/GaussianBlurEffect.cs:247
 #: ../Pinta.Effects/Effects/GlowEffect.cs:74
 #: ../Pinta.Effects/Effects/MedianEffect.cs:63
 #: ../Pinta.Effects/Effects/ReduceNoiseEffect.cs:87
@@ -1546,9 +1560,9 @@ msgstr "Degradat radial"
 msgid "Radius"
 msgstr "Radi"
 
-#: ../Pinta.Effects/Effects/AddNoiseEffect.cs:173
+#: ../Pinta.Effects/Effects/AddNoiseEffect.cs:189
 #: ../Pinta.Effects/Effects/CloudsEffect.cs:222
-#: ../Pinta.Effects/Effects/FrostedGlassEffect.cs:153
+#: ../Pinta.Effects/Effects/FrostedGlassEffect.cs:158
 msgid "Random Noise"
 msgstr "Soroll aleatori"
 
@@ -1640,8 +1654,8 @@ msgstr "Restableix"
 msgid "Reset to Default"
 msgstr "Restaura els valors per defecte"
 
+#: ../Pinta.Core/Classes/Document.cs:302
 #: ../Pinta/Dialogs/ResizeCanvasDialog.cs:57
-#: ../Pinta.Core/Classes/Document.cs:304
 msgid "Resize Canvas"
 msgstr "Redimensiona el llenç"
 
@@ -1649,8 +1663,8 @@ msgstr "Redimensiona el llenç"
 msgid "Resize Canvas..."
 msgstr "Redimensiona el llenç..."
 
-#: ../Pinta/Dialogs/ResizeImageDialog.cs:47
 #: ../Pinta.Core/HistoryItems/ResizeHistoryItem.cs:38
+#: ../Pinta/Dialogs/ResizeImageDialog.cs:47
 msgid "Resize Image"
 msgstr "Redimensiona la imatge"
 
@@ -1691,7 +1705,7 @@ msgid "Rotate 90° Counter-Clockwise"
 msgstr "Gira a l'esquerra 90º"
 
 #: ../Pinta.Effects/Effects/FragmentEffect.cs:113
-#: ../Pinta.Effects/Effects/TileEffect.cs:172
+#: ../Pinta.Effects/Effects/TileEffect.cs:174
 msgid "Rotation"
 msgstr "Rotació"
 
@@ -1715,7 +1729,7 @@ msgstr "Unitats del regle"
 msgid "Rulers"
 msgstr "Regles"
 
-#: ../Pinta.Tools/Tools/ColorPickerTool.cs:196
+#: ../Pinta.Tools/Tools/ColorPickerTool.cs:194
 msgid "Sampling"
 msgstr "Mostreig"
 
@@ -1728,9 +1742,9 @@ msgstr "Saturació"
 msgid "Saturation Percentage"
 msgstr "Percentatge de saturació"
 
-#: ../Pinta/Actions/File/SaveDocumentImplementationAction.cs:73
 #: ../Pinta.Core/Actions/EditActions.cs:391
 #: ../Pinta.Core/Actions/FileActions.cs:51
+#: ../Pinta/Actions/File/SaveDocumentImplementationAction.cs:73
 msgid "Save"
 msgstr "Desa"
 
@@ -1802,7 +1816,7 @@ msgstr "Mostra la capa"
 msgid "Show/Hide"
 msgstr "Mostra/amaga"
 
-#: ../Pinta.Tools/Tools/ColorPickerTool.cs:223
+#: ../Pinta.Tools/Tools/ColorPickerTool.cs:221
 msgid "Single Pixel"
 msgstr "Un únic píxel"
 
@@ -1810,7 +1824,7 @@ msgstr "Un únic píxel"
 msgid "Size"
 msgstr "Mida"
 
-#: ../Pinta.Tools/Tools/EraserTool.cs:260
+#: ../Pinta.Tools/Tools/EraserTool.cs:262
 msgid "Smooth"
 msgstr "Suavitza"
 
@@ -1849,11 +1863,11 @@ msgstr "Força"
 msgid "Stylize"
 msgstr "Estilitza"
 
-#: ../Pinta.Tools/Tools/ColorPickerTool.cs:206
+#: ../Pinta.Tools/Tools/ColorPickerTool.cs:204
 msgid "Switch to Pencil tool"
 msgstr "Canvia a l’eina Llapis"
 
-#: ../Pinta.Tools/Tools/ColorPickerTool.cs:205
+#: ../Pinta.Tools/Tools/ColorPickerTool.cs:203
 msgid "Switch to previous tool"
 msgstr "Canvia a l’eina anterior"
 
@@ -1869,7 +1883,7 @@ msgstr "Text - Finalitza"
 msgid "Text Style"
 msgstr "Estil del text"
 
-#: ../Pinta/Actions/Edit/PasteAction.cs:164
+#: ../Pinta/Actions/Edit/PasteAction.cs:174
 msgid "The clipboard does not contain an image."
 msgstr "El porta-retalls no conté cap imatge."
 
@@ -1893,13 +1907,11 @@ msgstr "S'instal·laran els paquets següents:"
 msgid "The following packages will be uninstalled:"
 msgstr "Es desintal·laran els paquets següents:"
 
-#: ../Pinta/Actions/Edit/PasteAction.cs:171
+#: ../Pinta/Actions/Edit/PasteAction.cs:181
 msgid ""
-"The image being pasted is larger than the canvas size. What would you like "
-"to do?"
+"The image being pasted is larger than the canvas. What would you like to do "
+"to the canvas size?"
 msgstr ""
-"La imatge que voleu enganxar és més gran que la mida del llenç. Què voleu "
-"fer?"
 
 #: ../Pinta.Gui.Addins/InstallDialog.cs:293
 msgid "The installation failed!"
@@ -1937,7 +1949,7 @@ msgstr "Gruix"
 msgid "Tile Reflection"
 msgstr "Mosaic"
 
-#: ../Pinta.Effects/Effects/TileEffect.cs:175
+#: ../Pinta.Effects/Effects/TileEffect.cs:177
 msgid "Tile Size"
 msgstr "Mida del mosaic"
 
@@ -1947,7 +1959,7 @@ msgstr "Consell: Feu clic amb el botó dret per eliminar punts de control."
 
 #: ../Pinta.Effects/Effects/RedEyeRemoveEffect.cs:50
 #: ../Pinta.Tools/Tools/FloodTool.cs:125
-#: ../Pinta.Tools/Tools/RecolorTool.cs:200
+#: ../Pinta.Tools/Tools/RecolorTool.cs:196
 msgid "Tolerance"
 msgstr "Tolerància"
 
@@ -1959,7 +1971,7 @@ msgstr "Eina"
 msgid "Tool Box"
 msgstr "Caixa d'eines"
 
-#: ../Pinta/MainWindow.cs:357
+#: ../Pinta/MainWindow.cs:342
 msgid "Tool Windows"
 msgstr "Finestres d'eines"
 
@@ -1979,8 +1991,8 @@ msgstr "Traduïu aquesta aplicació"
 msgid "Transparency Mode"
 msgstr "Mode de transparència"
 
-#: ../Pinta/Dialogs/NewImageDialog.cs:221
 #: ../Pinta.Effects/Effects/WarpEffect.cs:35
+#: ../Pinta/Dialogs/NewImageDialog.cs:221
 msgid "Transparent"
 msgstr "Transparent"
 
@@ -1988,7 +2000,7 @@ msgstr "Transparent"
 msgid "Twist"
 msgstr "Espiral"
 
-#: ../Pinta.Tools/Tools/EraserTool.cs:256
+#: ../Pinta.Tools/Tools/EraserTool.cs:258
 #: ../Pinta.Tools/Tools/PaintBrushTool.cs:165
 msgid "Type"
 msgstr "Tipus"
@@ -2078,8 +2090,8 @@ msgstr "Amplada:"
 
 #: ../Pinta.Core/Actions/ViewActions.cs:116
 #: ../Pinta.Core/Actions/ViewActions.cs:304
+#: ../Pinta.Core/Classes/DocumentWorkspace.cs:348
 #: ../Pinta.Core/Classes/DocumentWorkspace.cs:357
-#: ../Pinta.Core/Classes/DocumentWorkspace.cs:366
 msgid "Window"
 msgstr "Finestra"
 
@@ -2112,10 +2124,10 @@ msgstr ""
 "No té accés a modificar '{0}'. El fitxer o la carpeta possiblement siga de "
 "només lectura."
 
-#: ../Pinta/Actions/Layers/RotateZoomLayerAction.cs:121
 #: ../Pinta.Effects/Effects/JuliaFractalEffect.cs:147
 #: ../Pinta.Effects/Effects/MandelbrotFractalEffect.cs:165
 #: ../Pinta.Tools/Tools/ZoomTool.cs:55
+#: ../Pinta/Actions/Layers/RotateZoomLayerAction.cs:121
 msgid "Zoom"
 msgstr "Zoom"
 
@@ -2135,11 +2147,11 @@ msgstr "Redueix"
 msgid "Zoom to Selection"
 msgstr "Ajusta a l'amplada de la selecció"
 
-#: ../Pinta/MainWindow.cs:336
+#: ../Pinta/MainWindow.cs:320
 msgid "_Adjustments"
 msgstr "_Ajustaments"
 
-#: ../Pinta/Actions/Edit/PasteAction.cs:177
+#: ../Pinta/Actions/Edit/PasteAction.cs:187
 #: ../Pinta/Actions/File/CloseDocumentAction.cs:66
 msgid "_Cancel"
 msgstr ""
@@ -2148,28 +2160,28 @@ msgstr ""
 msgid "_Discard"
 msgstr ""
 
-#: ../Pinta/MainWindow.cs:321
+#: ../Pinta/MainWindow.cs:303
 msgid "_Edit"
 msgstr "_Edita"
 
-#: ../Pinta/MainWindow.cs:317
+#: ../Pinta/MainWindow.cs:299
 msgid "_File"
 msgstr "_Fitxer"
 
-#: ../Pinta/MainWindow.cs:351
+#: ../Pinta/MainWindow.cs:336
 msgid "_Help"
 msgstr "A_juda"
 
-#: ../Pinta/MainWindow.cs:329
+#: ../Pinta/MainWindow.cs:312
 msgid "_Image"
 msgstr "_Imatge"
 
-#: ../Pinta/MainWindow.cs:333
+#: ../Pinta/MainWindow.cs:316
 msgid "_Layers"
 msgstr "_Capes"
 
-#: ../Pinta/Dialogs/ErrorDialog.cs:41 ../Pinta/Dialogs/ErrorDialog.cs:69
-#: ../Pinta.Gui.Addins/InstallDialog.cs:156
+#: ../Pinta.Gui.Addins/InstallDialog.cs:156 ../Pinta/Dialogs/ErrorDialog.cs:41
+#: ../Pinta/Dialogs/ErrorDialog.cs:69
 msgid "_OK"
 msgstr ""
 
@@ -2177,11 +2189,11 @@ msgstr ""
 msgid "_Save"
 msgstr ""
 
-#: ../Pinta/MainWindow.cs:325
+#: ../Pinta/MainWindow.cs:307
 msgid "_View"
 msgstr "_Mostra"
 
-#: ../Pinta/MainWindow.cs:347
+#: ../Pinta/MainWindow.cs:332
 msgid "_Window"
 msgstr "Fi_nestra"
 
@@ -2248,6 +2260,19 @@ msgstr "{0} paleta ({1})"
 #, csharp-format
 msgid "{0}%"
 msgstr "{0} %"
+
+#~ msgid "Don't change canvas size"
+#~ msgstr "No canviïs la mida del llenç"
+
+#~ msgid "Expand canvas"
+#~ msgstr "Expandeix el llenç"
+
+#~ msgid ""
+#~ "The image being pasted is larger than the canvas size. What would you "
+#~ "like to do?"
+#~ msgstr ""
+#~ "La imatge que voleu enganxar és més gran que la mida del llenç. Què voleu "
+#~ "fer?"
 
 #~ msgid "Translated by:"
 #~ msgstr "Traduït per:"
@@ -2416,12 +2441,12 @@ msgstr "{0} %"
 #~ "The selected add-ins can't be installed because there are dependency "
 #~ "conflicts."
 #~ msgstr ""
-#~ "Els complements seleccionats no es poden instal·lar perquè hi ha conflictes "
-#~ "de dependències."
+#~ "Els complements seleccionats no es poden instal·lar perquè hi ha "
+#~ "conflictes de dependències."
 
 #~ msgid ""
-#~ "There are other add-ins that depend on the previous ones which will also be "
-#~ "uninstalled:"
+#~ "There are other add-ins that depend on the previous ones which will also "
+#~ "be uninstalled:"
 #~ msgstr ""
 #~ "Hi ha altres complements que depenen dels anteriors que també es "
 #~ "desinstal·laran:"
@@ -2448,15 +2473,16 @@ msgstr "{0} %"
 #~ "Left click to draw freeform one-pixel wide lines with the primary color. "
 #~ "Right click to use the secondary color."
 #~ msgstr ""
-#~ "Feu clic esquerre per dibuixar línies de forma lliure d'un píxel d'amplada "
-#~ "amb el color primari. Feu clic dret per fer servir el color secundari."
+#~ "Feu clic esquerre per dibuixar línies de forma lliure d'un píxel "
+#~ "d'amplada amb el color primari. Feu clic dret per fer servir el color "
+#~ "secundari."
 
 #~ msgid ""
 #~ "Left click to zoom in. Right click to zoom out. Click and drag to zoom in "
 #~ "selection."
 #~ msgstr ""
-#~ "Feu clic esquerre per ampliar la vista. Feu clic dret per reduir la vista. "
-#~ "Feu clic i arrossegueu per ampliar la selecció."
+#~ "Feu clic esquerre per ampliar la vista. Feu clic dret per reduir la "
+#~ "vista. Feu clic i arrossegueu per ampliar la selecció."
 
 #~ msgid ""
 #~ "Click and drag to draw gradient from primary to secondary color.  Right "
@@ -2485,7 +2511,8 @@ msgstr "{0} %"
 
 #, csharp-format
 #~ msgid ""
-#~ "The file already exists in \"{1}\". Replacing it will overwrite its contents."
+#~ "The file already exists in \"{1}\". Replacing it will overwrite its "
+#~ "contents."
 #~ msgstr ""
 #~ "El fitxer ja existeix a \"{1}\". Si el substituïu sobreescriureu el seu "
 #~ "contingut."
@@ -2506,15 +2533,15 @@ msgstr "{0} %"
 #~ msgstr "Ruta:"
 
 #~ msgid ""
-#~ "Click and drag to draw an elliptical selection. Hold Shift to constrain to a "
-#~ "circle."
+#~ "Click and drag to draw an elliptical selection. Hold Shift to constrain "
+#~ "to a circle."
 #~ msgstr ""
 #~ "Feu clic i arrossegueu per dibuixar una selecció el·líptica. Manteniu "
 #~ "premuda Maj per restringir a un cercle."
 
 #~ msgid ""
-#~ "Click and drag to draw a rectangular selection. Hold Shift to constrain to a "
-#~ "square."
+#~ "Click and drag to draw a rectangular selection. Hold Shift to constrain "
+#~ "to a square."
 #~ msgstr ""
 #~ "Feu clic i arrossegueu per dibuixar una selecció rectangular. Manteniu "
 #~ "premuda Maj per restringir a un quadrat."
@@ -2538,8 +2565,8 @@ msgstr "{0} %"
 #~ "Left click to replace the secondary color with the primary color. Right "
 #~ "click to reverse."
 #~ msgstr ""
-#~ "Feu clic per reemplaçar el color secundari amb el primari. Feu clic amb el "
-#~ "botó dret per fer-ho a l’inrevès."
+#~ "Feu clic per reemplaçar el color secundari amb el primari. Feu clic amb "
+#~ "el botó dret per fer-ho a l’inrevès."
 
 #~ msgid "Report Bug...."
 #~ msgstr "Informeu d’un error…"
@@ -2554,34 +2581,36 @@ msgstr "{0} %"
 #~ "Press Ctrl + left/right arrows to select control points by order.\n"
 #~ "Press Delete to delete the selected control point.\n"
 #~ "Press Space to add a new control point at the mouse position.\n"
-#~ "Hold Ctrl while pressing Space to create the control point at the exact same "
-#~ "position.\n"
+#~ "Hold Ctrl while pressing Space to create the control point at the exact "
+#~ "same position.\n"
 #~ "Hold Ctrl while left clicking on a control point to create a new shape at "
 #~ "the exact same position.\n"
-#~ "Hold Ctrl while clicking outside of the image bounds to create a new shape "
-#~ "starting at the edge.\n"
+#~ "Hold Ctrl while clicking outside of the image bounds to create a new "
+#~ "shape starting at the edge.\n"
 #~ "Press Enter to finalize the shape."
 #~ msgstr ""
-#~ "Feu clic amb el botó esquerre per dibuixar una forma amb el color primari.\n"
+#~ "Feu clic amb el botó esquerre per dibuixar una forma amb el color "
+#~ "primari.\n"
 #~ "Feu clic amb el botó esquerre sobre una forma per afegir un punt de "
 #~ "control.\n"
-#~ "Feu clic amb el botó esquerre sobre un punt de control i arrossegueu-lo per "
-#~ "moure'l.\n"
+#~ "Feu clic amb el botó esquerre sobre un punt de control i arrossegueu-lo "
+#~ "per moure'l.\n"
 #~ "Feu clic dret sobre un punt de control i arrossegueu-lo per canviar-ne la "
 #~ "tensió.\n"
 #~ "Mantingueu premuda la tecla Maj per girar.\n"
-#~ "Utilitzeu les tecles del cursor per moure el punt de control seleccionat.\n"
-#~ "Premeu Ctrl + fletxa esquerra/dreta per seleccionar els punts de control per "
-#~ "ordre.\n"
+#~ "Utilitzeu les tecles del cursor per moure el punt de control "
+#~ "seleccionat.\n"
+#~ "Premeu Ctrl + fletxa esquerra/dreta per seleccionar els punts de control "
+#~ "per ordre.\n"
 #~ "Premeu Supr per suprimir el punt de control seleccionat.\n"
 #~ "Premeu la barra espaiadora per afegir un punt de control nou a la posició "
 #~ "del punter.\n"
-#~ "Mantingueu premuda la tecla Ctrl mentre premeu la barra espaiadora per crear "
-#~ "un punt de control en aquesta posició exacta.\n"
-#~ "Mantingueu premuda la tecla Ctrl mentre feu clic amb el botó esquerre en un "
-#~ "punt de control per crear una forma nova en aquesta posició exacta.\n"
-#~ "Mantingueu premuda la tecla Ctrl mentre feu clic a l'exterior dels límits de "
-#~ "la imatge per crear una forma nova a partir de la vora.\n"
+#~ "Mantingueu premuda la tecla Ctrl mentre premeu la barra espaiadora per "
+#~ "crear un punt de control en aquesta posició exacta.\n"
+#~ "Mantingueu premuda la tecla Ctrl mentre feu clic amb el botó esquerre en "
+#~ "un punt de control per crear una forma nova en aquesta posició exacta.\n"
+#~ "Mantingueu premuda la tecla Ctrl mentre feu clic a l'exterior dels límits "
+#~ "de la imatge per crear una forma nova a partir de la vora.\n"
 #~ "Premeu Intro per finalitzar la forma."
 
 #~ msgid "Download failed"
@@ -2609,21 +2638,22 @@ msgstr "{0} %"
 #~ msgstr ""
 #~ "Feu clic esquerre i arrossegueu la selecció per moure el contorn de la "
 #~ "selecció. Manteniu premuda la tecla Ctrl per escalar en comptes de moure. "
-#~ "Feu clic dret i arrossegueu la selecció per girar el contorn de la selecció. "
-#~ "Manteniu premuda la tecla Majús per girar per passos. Utilitza les tecles de "
-#~ "cursor per moure el contorn de la selecció un sol píxel."
+#~ "Feu clic dret i arrossegueu la selecció per girar el contorn de la "
+#~ "selecció. Manteniu premuda la tecla Majús per girar per passos. Utilitza "
+#~ "les tecles de cursor per moure el contorn de la selecció un sol píxel."
 
 #~ msgid ""
 #~ "Left click and drag the selection to move selected content. Hold Ctrl to "
-#~ "scale instead of move. Right click and drag the selection to rotate selected "
-#~ "content. Hold Shift to rotate in steps. Use arrow keys to move selected "
-#~ "content by a single pixel."
+#~ "scale instead of move. Right click and drag the selection to rotate "
+#~ "selected content. Hold Shift to rotate in steps. Use arrow keys to move "
+#~ "selected content by a single pixel."
 #~ msgstr ""
 #~ "Feu clic esquerre i arrossegueu la selecció per moure el contingut "
-#~ "seleccionat. Manteniu premuda la tecla Ctrl per escalar en comptes de moure. "
-#~ "Feu clic dret i arrossegueu la selecció per girar el contingut seleccionat. "
-#~ "Manteniu premuda la tecla Majús per girar per passos. Utilitza les tecles de "
-#~ "cursor per moure el contingut seleccionat un sol píxel."
+#~ "seleccionat. Manteniu premuda la tecla Ctrl per escalar en comptes de "
+#~ "moure. Feu clic dret i arrossegueu la selecció per girar el contingut "
+#~ "seleccionat. Manteniu premuda la tecla Majús per girar per passos. "
+#~ "Utilitza les tecles de cursor per moure el contingut seleccionat un sol "
+#~ "píxel."
 
 #~ msgid "Open Recent"
 #~ msgstr "Obre recent"

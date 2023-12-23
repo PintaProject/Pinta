@@ -6,11 +6,12 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: pinta\n"
-"Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
-"POT-Creation-Date: 2023-12-17 14:36-0500\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2023-12-22 02:09-0500\n"
 "PO-Revision-Date: 2014-05-25 05:29+0000\n"
 "Last-Translator: Harald H. <haarektrans@gmail.com>\n"
 "Language-Team: Norwegian Bokmal <nb@li.org>\n"
+"Language: nb\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -31,23 +32,23 @@ msgstr ""
 msgid "..."
 msgstr "…"
 
-#: ../Pinta.Tools/Tools/ColorPickerTool.cs:224
+#: ../Pinta.Tools/Tools/ColorPickerTool.cs:222
 msgid "3 x 3 Region"
 msgstr ""
 
-#: ../Pinta.Tools/Tools/ColorPickerTool.cs:225
+#: ../Pinta.Tools/Tools/ColorPickerTool.cs:223
 msgid "5 x 5 Region"
 msgstr ""
 
-#: ../Pinta.Tools/Tools/ColorPickerTool.cs:226
+#: ../Pinta.Tools/Tools/ColorPickerTool.cs:224
 msgid "7 x 7 Region"
 msgstr ""
 
-#: ../Pinta.Tools/Tools/ColorPickerTool.cs:227
+#: ../Pinta.Tools/Tools/ColorPickerTool.cs:225
 msgid "9 x 9 Region"
 msgstr ""
 
-#: ../Pinta/MainWindow.cs:343
+#: ../Pinta/MainWindow.cs:328
 msgid "A_dd-ins"
 msgstr ""
 
@@ -59,9 +60,9 @@ msgstr "Om"
 msgid "About Pinta"
 msgstr "Om Pinta"
 
-#: ../Pinta/Actions/Edit/PasteAction.cs:133
 #: ../Pinta.Core/Actions/LayerActions.cs:48
 #: ../Pinta.Core/Actions/LayerActions.cs:329
+#: ../Pinta/Actions/Edit/PasteAction.cs:143
 msgid "Add New Layer"
 msgstr "Legg til et nytt lag"
 
@@ -77,21 +78,25 @@ msgstr ""
 msgid "Added"
 msgstr ""
 
-#: ../Pinta.Tools/Tools/ColorPickerTool.cs:195
+#: ../Pinta/MainWindow.cs:372
+msgid "Adjustments"
+msgstr ""
+
+#: ../Pinta.Tools/Tools/ColorPickerTool.cs:193
 msgid "After select"
 msgstr "Etter utvalg"
 
-#: ../Pinta/Actions/File/OpenDocumentAction.cs:81
 #: ../Pinta.Core/Actions/EditActions.cs:366
 #: ../Pinta.Gui.Addins/AddinManagerDialog.cs:209
+#: ../Pinta/Actions/File/OpenDocumentAction.cs:83
 msgid "All files"
 msgstr "Alle filer"
 
 #: ../Pinta.Effects/Effects/BulgeEffect.cs:89
-#: ../Pinta.Effects/Effects/FrostedGlassEffect.cs:150
+#: ../Pinta.Effects/Effects/FrostedGlassEffect.cs:155
 #: ../Pinta.Effects/Effects/SharpenEffect.cs:56
-#: ../Pinta.Effects/Effects/TwistEffect.cs:131
-#: ../Pinta.Effects/Effects/ZoomBlurEffect.cs:124
+#: ../Pinta.Effects/Effects/TwistEffect.cs:139
+#: ../Pinta.Effects/Effects/ZoomBlurEffect.cs:123
 msgid "Amount"
 msgstr "Mengde"
 
@@ -99,19 +104,19 @@ msgstr "Mengde"
 msgid "Anchor:"
 msgstr "Anker:"
 
-#: ../Pinta/Actions/Layers/RotateZoomLayerAction.cs:115
 #: ../Pinta.Effects/Effects/EdgeDetectEffect.cs:80
-#: ../Pinta.Effects/Effects/EmbossEffect.cs:135
+#: ../Pinta.Effects/Effects/EmbossEffect.cs:144
 #: ../Pinta.Effects/Effects/JuliaFractalEffect.cs:150
 #: ../Pinta.Effects/Effects/MandelbrotFractalEffect.cs:168
 #: ../Pinta.Effects/Effects/MotionBlurEffect.cs:101
 #: ../Pinta.Effects/Effects/RadialBlurEffect.cs:146
 #: ../Pinta.Effects/Effects/ReliefEffect.cs:82
 #: ../Pinta.Tools/Editable/EditEngines/ArrowedEditEngine.cs:298
+#: ../Pinta/Actions/Layers/RotateZoomLayerAction.cs:115
 msgid "Angle"
 msgstr "Vinkel"
 
-#: ../Pinta.Effects/Effects/TwistEffect.cs:134
+#: ../Pinta.Effects/Effects/TwistEffect.cs:142
 msgid "Antialias"
 msgstr "Kantutjevning"
 
@@ -236,13 +241,13 @@ msgstr "Etter absolutt størrelse:"
 msgid "By percentage:"
 msgstr "Prosentvis:"
 
-#: ../Pinta/Actions/File/OpenDocumentAction.cs:54
-#: ../Pinta/Actions/File/SaveDocumentImplementationAction.cs:74
 #: ../Pinta.Core/Actions/EditActions.cs:351
 #: ../Pinta.Core/Actions/EditActions.cs:392
 #: ../Pinta.Core/Actions/LayerActions.cs:167
 #: ../Pinta.Gui.Addins/AddinManagerDialog.cs:198
 #: ../Pinta.Gui.Addins/InstallDialog.cs:120
+#: ../Pinta/Actions/File/OpenDocumentAction.cs:54
+#: ../Pinta/Actions/File/SaveDocumentImplementationAction.cs:74
 msgid "Cancel"
 msgstr ""
 
@@ -404,7 +409,7 @@ msgstr "Fargeplukker"
 msgid "Color Range"
 msgstr "Fargeområde"
 
-#: ../Pinta.Effects/Effects/AddNoiseEffect.cs:167
+#: ../Pinta.Effects/Effects/AddNoiseEffect.cs:183
 msgid "Color Saturation"
 msgstr "Fargemetning"
 
@@ -446,7 +451,7 @@ msgid "Copyright"
 msgstr "Opphavsrett"
 
 #. Translators: {0} is the name of a layer, and {1} is the path to a .ora file.
-#: ../Pinta.Core/ImageFormats/OraFormat.cs:122
+#: ../Pinta.Core/ImageFormats/OraFormat.cs:127
 #, csharp-format
 msgid "Could not import layer \"{0}\" from {1}"
 msgstr ""
@@ -458,7 +463,7 @@ msgstr ""
 msgid "Could not open file: {0}"
 msgstr "Kunne ikke åpne fil: {0}"
 
-#: ../Pinta.Effects/Effects/AddNoiseEffect.cs:170
+#: ../Pinta.Effects/Effects/AddNoiseEffect.cs:186
 msgid "Coverage"
 msgstr "Omfang"
 
@@ -541,13 +546,9 @@ msgstr "Avstand"
 msgid "Distort"
 msgstr "Forvreng"
 
-#: ../Pinta.Tools/Tools/ColorPickerTool.cs:204
+#: ../Pinta.Tools/Tools/ColorPickerTool.cs:202
 msgid "Do not switch tool"
 msgstr "Ikke bytt verktøy"
-
-#: ../Pinta/Actions/Edit/PasteAction.cs:178
-msgid "Don't change canvas size"
-msgstr "La være å endre lerretets størrelse"
 
 #: ../Pinta.Gui.Addins/AddinInfoView.cs:134
 #, csharp-format
@@ -571,9 +572,13 @@ msgstr "Kanthåndtering"
 msgid "Edge Detect"
 msgstr "Oppdag kanter"
 
-#: ../Pinta/MainWindow.cs:339
+#: ../Pinta/MainWindow.cs:324
 msgid "Effe_cts"
 msgstr "_Effekter"
+
+#: ../Pinta/MainWindow.cs:366
+msgid "Effects"
+msgstr ""
 
 #: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:326
 #: ../Pinta.Tools/Editable/EditEngines/EllipseEditEngine.cs:34
@@ -598,7 +603,7 @@ msgstr "Slett utvalg"
 msgid "Eraser"
 msgstr "Viskelær"
 
-#: ../Pinta.Core/ImageFormats/OraFormat.cs:123
+#: ../Pinta.Core/ImageFormats/OraFormat.cs:128
 msgid "Error"
 msgstr "Feil"
 
@@ -606,9 +611,10 @@ msgstr "Feil"
 msgid "Exclude (-) (Right Click)"
 msgstr "Ekskluder (-) (Høyreklikk)"
 
-#: ../Pinta/Actions/Edit/PasteAction.cs:179
-msgid "Expand canvas"
-msgstr "Utvid lerretet"
+#. Translators: This refers to expanding the canvas size when pasting a larger image.
+#: ../Pinta/Actions/Edit/PasteAction.cs:191
+msgid "Expand"
+msgstr ""
 
 #: ../Pinta.Gui.Addins/AddinManagerDialog.cs:204
 msgid "Extension packages"
@@ -813,7 +819,7 @@ msgstr "ICO-filer kan ikke være større enn 255 x 255 piksler."
 msgid "If you don't save, all changes will be permanently lost."
 msgstr "Hvis du ikke lagrer vil alle endringer gå tapt."
 
-#: ../Pinta.Tools/Tools/ColorPickerTool.cs:242
+#: ../Pinta.Tools/Tools/ColorPickerTool.cs:240 ../Pinta/MainWindow.cs:378
 msgid "Image"
 msgstr "Bilde"
 
@@ -825,16 +831,16 @@ msgstr ""
 msgid "Image Tabs"
 msgstr ""
 
-#: ../Pinta/Actions/Edit/PasteAction.cs:163
+#: ../Pinta/Actions/Edit/PasteAction.cs:173
 msgid "Image cannot be pasted"
 msgstr "Bildet kan ikke limes inn"
 
-#: ../Pinta/Actions/File/OpenDocumentAction.cs:60
 #: ../Pinta.Core/Actions/LayerActions.cs:193
+#: ../Pinta/Actions/File/OpenDocumentAction.cs:60
 msgid "Image files"
 msgstr "Bildefiler"
 
-#: ../Pinta/Actions/Edit/PasteAction.cs:170
+#: ../Pinta/Actions/Edit/PasteAction.cs:180
 msgid "Image larger than canvas"
 msgstr "Bildet er større enn lerretet"
 
@@ -891,9 +897,9 @@ msgstr "Installer …"
 msgid "Installed"
 msgstr "Installert"
 
-#: ../Pinta.Effects/Effects/AddNoiseEffect.cs:164
+#: ../Pinta.Effects/Effects/AddNoiseEffect.cs:180
 #: ../Pinta.Effects/Effects/OutlineEffect.cs:138
-#: ../Pinta.Effects/Effects/TileEffect.cs:178
+#: ../Pinta.Effects/Effects/TileEffect.cs:180
 msgid "Intensity"
 msgstr "Intensitet"
 
@@ -933,7 +939,7 @@ msgstr ""
 msgid "Lasso Select"
 msgstr "Lasso-utvalg"
 
-#: ../Pinta.Tools/Tools/ColorPickerTool.cs:241
+#: ../Pinta.Tools/Tools/ColorPickerTool.cs:239
 msgid "Layer"
 msgstr "Lag"
 
@@ -1144,6 +1150,10 @@ msgstr "Lysstyrke"
 msgid "Magic Wand Select"
 msgstr "Magisk utvalgsstav"
 
+#: ../Pinta/MainWindow.cs:360
+msgid "Main Menu"
+msgstr ""
+
 #: ../Pinta/Dialogs/ResizeCanvasDialog.cs:76
 #: ../Pinta/Dialogs/ResizeImageDialog.cs:66
 msgid "Maintain aspect ratio"
@@ -1212,8 +1222,8 @@ msgstr ""
 msgid "New"
 msgstr "Ny"
 
-#: ../Pinta/Dialogs/NewImageDialog.cs:67
 #: ../Pinta.Core/Managers/WorkspaceManager.cs:184
+#: ../Pinta/Dialogs/NewImageDialog.cs:67
 msgid "New Image"
 msgstr "Nytt bilde"
 
@@ -1241,7 +1251,7 @@ msgstr "Støy"
 
 #: ../Pinta.Core/Effects/UserBlendOps.cs:31
 #: ../Pinta.Tools/Brushes/PlainBrush.cs:35
-#: ../Pinta.Tools/Tools/EraserTool.cs:260 ../Pinta.Tools/Tools/TextTool.cs:246
+#: ../Pinta.Tools/Tools/EraserTool.cs:262 ../Pinta.Tools/Tools/TextTool.cs:246
 msgid "Normal"
 msgstr "Normal"
 
@@ -1263,7 +1273,7 @@ msgstr ""
 
 #: ../Pinta.Effects/Effects/BulgeEffect.cs:92
 #: ../Pinta.Effects/Effects/RadialBlurEffect.cs:149
-#: ../Pinta.Effects/Effects/ZoomBlurEffect.cs:127
+#: ../Pinta.Effects/Effects/ZoomBlurEffect.cs:126
 msgid "Offset"
 msgstr "Forskyving"
 
@@ -1275,11 +1285,11 @@ msgstr "Oljemaleri"
 msgid "Opacity:"
 msgstr "Tetthet:"
 
-#: ../Pinta/Actions/File/OpenDocumentAction.cs:53
 #: ../Pinta.Core/Actions/EditActions.cs:350
 #: ../Pinta.Core/Actions/FileActions.cs:56
 #: ../Pinta.Core/Actions/LayerActions.cs:166
 #: ../Pinta.Gui.Addins/AddinManagerDialog.cs:197
+#: ../Pinta/Actions/File/OpenDocumentAction.cs:53
 msgid "Open"
 msgstr "Åpne"
 
@@ -1291,8 +1301,8 @@ msgstr ""
 msgid "Open Image"
 msgstr "Åpne bilde"
 
-#: ../Pinta/Actions/File/OpenDocumentAction.cs:50
 #: ../Pinta.Core/Actions/LayerActions.cs:163
+#: ../Pinta/Actions/File/OpenDocumentAction.cs:50
 msgid "Open Image File"
 msgstr "Åpne bildefil"
 
@@ -1363,14 +1373,14 @@ msgstr "Palett"
 msgid "Palette files"
 msgstr ""
 
-#: ../Pinta/Actions/Layers/RotateZoomLayerAction.cs:118
 #: ../Pinta.Tools/Tools/PanTool.cs:38
+#: ../Pinta/Actions/Layers/RotateZoomLayerAction.cs:118
 msgid "Pan"
 msgstr "Panorér"
 
-#: ../Pinta/Actions/Edit/PasteAction.cs:83
 #: ../Pinta.Core/Actions/EditActions.cs:63
 #: ../Pinta.Core/HistoryItems/PasteHistoryItem.cs:38
+#: ../Pinta/Actions/Edit/PasteAction.cs:87
 msgid "Paste"
 msgstr "Lim inn"
 
@@ -1378,8 +1388,8 @@ msgstr "Lim inn"
 msgid "Paste Into New Image"
 msgstr "Lim inn i et nytt bilde"
 
-#: ../Pinta/Actions/Edit/PasteAction.cs:83
 #: ../Pinta.Core/Actions/EditActions.cs:64
+#: ../Pinta/Actions/Edit/PasteAction.cs:87
 msgid "Paste Into New Layer"
 msgstr "Lim inn i nytt lag"
 
@@ -1486,6 +1496,11 @@ msgstr "Plakateffekt"
 msgid "Power"
 msgstr "Styrke"
 
+#. Translators: This refers to preserving the current canvas size when pasting a larger image.
+#: ../Pinta/Actions/Edit/PasteAction.cs:189
+msgid "Preserve"
+msgstr ""
+
 #: ../Pinta/Dialogs/NewImageDialog.cs:101
 msgid "Preset:"
 msgstr ""
@@ -1529,7 +1544,7 @@ msgstr "Radial blur"
 msgid "Radial Gradient"
 msgstr "Radial gradient"
 
-#: ../Pinta.Effects/Effects/GaussianBlurEffect.cs:245
+#: ../Pinta.Effects/Effects/GaussianBlurEffect.cs:247
 #: ../Pinta.Effects/Effects/GlowEffect.cs:74
 #: ../Pinta.Effects/Effects/MedianEffect.cs:63
 #: ../Pinta.Effects/Effects/ReduceNoiseEffect.cs:87
@@ -1538,9 +1553,9 @@ msgstr "Radial gradient"
 msgid "Radius"
 msgstr "Radius"
 
-#: ../Pinta.Effects/Effects/AddNoiseEffect.cs:173
+#: ../Pinta.Effects/Effects/AddNoiseEffect.cs:189
 #: ../Pinta.Effects/Effects/CloudsEffect.cs:222
-#: ../Pinta.Effects/Effects/FrostedGlassEffect.cs:153
+#: ../Pinta.Effects/Effects/FrostedGlassEffect.cs:158
 msgid "Random Noise"
 msgstr "Tilfeldig støy"
 
@@ -1632,8 +1647,8 @@ msgstr "Nullstill"
 msgid "Reset to Default"
 msgstr "Sett tilbake til standard"
 
+#: ../Pinta.Core/Classes/Document.cs:302
 #: ../Pinta/Dialogs/ResizeCanvasDialog.cs:57
-#: ../Pinta.Core/Classes/Document.cs:304
 msgid "Resize Canvas"
 msgstr "Endre lerretstørrelse"
 
@@ -1641,8 +1656,8 @@ msgstr "Endre lerretstørrelse"
 msgid "Resize Canvas..."
 msgstr "Endre lerretstørrelse..."
 
-#: ../Pinta/Dialogs/ResizeImageDialog.cs:47
 #: ../Pinta.Core/HistoryItems/ResizeHistoryItem.cs:38
+#: ../Pinta/Dialogs/ResizeImageDialog.cs:47
 msgid "Resize Image"
 msgstr "Endre størrelse på bilde"
 
@@ -1683,7 +1698,7 @@ msgid "Rotate 90° Counter-Clockwise"
 msgstr "Roter 90° mot klokken"
 
 #: ../Pinta.Effects/Effects/FragmentEffect.cs:113
-#: ../Pinta.Effects/Effects/TileEffect.cs:172
+#: ../Pinta.Effects/Effects/TileEffect.cs:174
 msgid "Rotation"
 msgstr "Rotasjon"
 
@@ -1707,7 +1722,7 @@ msgstr "Linjalenheter"
 msgid "Rulers"
 msgstr "Linjaler"
 
-#: ../Pinta.Tools/Tools/ColorPickerTool.cs:196
+#: ../Pinta.Tools/Tools/ColorPickerTool.cs:194
 msgid "Sampling"
 msgstr ""
 
@@ -1720,9 +1735,9 @@ msgstr ""
 msgid "Saturation Percentage"
 msgstr ""
 
-#: ../Pinta/Actions/File/SaveDocumentImplementationAction.cs:73
 #: ../Pinta.Core/Actions/EditActions.cs:391
 #: ../Pinta.Core/Actions/FileActions.cs:51
+#: ../Pinta/Actions/File/SaveDocumentImplementationAction.cs:73
 msgid "Save"
 msgstr "Lagre"
 
@@ -1794,7 +1809,7 @@ msgstr "Vis lag"
 msgid "Show/Hide"
 msgstr ""
 
-#: ../Pinta.Tools/Tools/ColorPickerTool.cs:223
+#: ../Pinta.Tools/Tools/ColorPickerTool.cs:221
 msgid "Single Pixel"
 msgstr ""
 
@@ -1802,7 +1817,7 @@ msgstr ""
 msgid "Size"
 msgstr ""
 
-#: ../Pinta.Tools/Tools/EraserTool.cs:260
+#: ../Pinta.Tools/Tools/EraserTool.cs:262
 msgid "Smooth"
 msgstr ""
 
@@ -1841,11 +1856,11 @@ msgstr "Styrke"
 msgid "Stylize"
 msgstr "Stilisér"
 
-#: ../Pinta.Tools/Tools/ColorPickerTool.cs:206
+#: ../Pinta.Tools/Tools/ColorPickerTool.cs:204
 msgid "Switch to Pencil tool"
 msgstr "Bytt til blyant-verktøyet"
 
-#: ../Pinta.Tools/Tools/ColorPickerTool.cs:205
+#: ../Pinta.Tools/Tools/ColorPickerTool.cs:203
 msgid "Switch to previous tool"
 msgstr "Bytt til det forrige verktøyet"
 
@@ -1861,7 +1876,7 @@ msgstr "Tekstfullføring"
 msgid "Text Style"
 msgstr "Tekststil"
 
-#: ../Pinta/Actions/Edit/PasteAction.cs:164
+#: ../Pinta/Actions/Edit/PasteAction.cs:174
 msgid "The clipboard does not contain an image."
 msgstr "Utklippstavlen inneholder ikke et bilde."
 
@@ -1885,11 +1900,11 @@ msgstr "Følgene pakker vil bli installert:"
 msgid "The following packages will be uninstalled:"
 msgstr "Følgende pakker vil bli avinstallert:"
 
-#: ../Pinta/Actions/Edit/PasteAction.cs:171
+#: ../Pinta/Actions/Edit/PasteAction.cs:181
 msgid ""
-"The image being pasted is larger than the canvas size. What would you like "
-"to do?"
-msgstr "Bildet du limer inn er større enn lerretet. Hva vil du gjøre?"
+"The image being pasted is larger than the canvas. What would you like to do "
+"to the canvas size?"
+msgstr ""
 
 #: ../Pinta.Gui.Addins/InstallDialog.cs:293
 msgid "The installation failed!"
@@ -1927,7 +1942,7 @@ msgstr "Tykkelse"
 msgid "Tile Reflection"
 msgstr "Flisrefleksjon"
 
-#: ../Pinta.Effects/Effects/TileEffect.cs:175
+#: ../Pinta.Effects/Effects/TileEffect.cs:177
 msgid "Tile Size"
 msgstr "Flisstørrelse"
 
@@ -1937,7 +1952,7 @@ msgstr "Tips: Høyreklikk for å fjerne kontrollpunkter"
 
 #: ../Pinta.Effects/Effects/RedEyeRemoveEffect.cs:50
 #: ../Pinta.Tools/Tools/FloodTool.cs:125
-#: ../Pinta.Tools/Tools/RecolorTool.cs:200
+#: ../Pinta.Tools/Tools/RecolorTool.cs:196
 msgid "Tolerance"
 msgstr "Toleranse"
 
@@ -1949,7 +1964,7 @@ msgstr "Verktøy"
 msgid "Tool Box"
 msgstr ""
 
-#: ../Pinta/MainWindow.cs:357
+#: ../Pinta/MainWindow.cs:342
 msgid "Tool Windows"
 msgstr "Verktøyvinduer"
 
@@ -1969,8 +1984,8 @@ msgstr "Oversett dette programmet"
 msgid "Transparency Mode"
 msgstr ""
 
-#: ../Pinta/Dialogs/NewImageDialog.cs:221
 #: ../Pinta.Effects/Effects/WarpEffect.cs:35
+#: ../Pinta/Dialogs/NewImageDialog.cs:221
 msgid "Transparent"
 msgstr ""
 
@@ -1978,7 +1993,7 @@ msgstr ""
 msgid "Twist"
 msgstr "Vridd"
 
-#: ../Pinta.Tools/Tools/EraserTool.cs:256
+#: ../Pinta.Tools/Tools/EraserTool.cs:258
 #: ../Pinta.Tools/Tools/PaintBrushTool.cs:165
 msgid "Type"
 msgstr "Type"
@@ -2068,8 +2083,8 @@ msgstr "Bredde:"
 
 #: ../Pinta.Core/Actions/ViewActions.cs:116
 #: ../Pinta.Core/Actions/ViewActions.cs:304
+#: ../Pinta.Core/Classes/DocumentWorkspace.cs:348
 #: ../Pinta.Core/Classes/DocumentWorkspace.cs:357
-#: ../Pinta.Core/Classes/DocumentWorkspace.cs:366
 msgid "Window"
 msgstr "Vindu"
 
@@ -2100,10 +2115,10 @@ msgid ""
 "You do not have access to modify '{0}'. The file or folder may be read-only."
 msgstr ""
 
-#: ../Pinta/Actions/Layers/RotateZoomLayerAction.cs:121
 #: ../Pinta.Effects/Effects/JuliaFractalEffect.cs:147
 #: ../Pinta.Effects/Effects/MandelbrotFractalEffect.cs:165
 #: ../Pinta.Tools/Tools/ZoomTool.cs:55
+#: ../Pinta/Actions/Layers/RotateZoomLayerAction.cs:121
 msgid "Zoom"
 msgstr "Forstørr/forminsk"
 
@@ -2123,11 +2138,11 @@ msgstr "Forminsk"
 msgid "Zoom to Selection"
 msgstr "Forstørr til utvalget"
 
-#: ../Pinta/MainWindow.cs:336
+#: ../Pinta/MainWindow.cs:320
 msgid "_Adjustments"
 msgstr "Justeringer"
 
-#: ../Pinta/Actions/Edit/PasteAction.cs:177
+#: ../Pinta/Actions/Edit/PasteAction.cs:187
 #: ../Pinta/Actions/File/CloseDocumentAction.cs:66
 msgid "_Cancel"
 msgstr ""
@@ -2136,28 +2151,28 @@ msgstr ""
 msgid "_Discard"
 msgstr ""
 
-#: ../Pinta/MainWindow.cs:321
+#: ../Pinta/MainWindow.cs:303
 msgid "_Edit"
 msgstr "R_ediger"
 
-#: ../Pinta/MainWindow.cs:317
+#: ../Pinta/MainWindow.cs:299
 msgid "_File"
 msgstr "_Fil"
 
-#: ../Pinta/MainWindow.cs:351
+#: ../Pinta/MainWindow.cs:336
 msgid "_Help"
 msgstr "_Hjelp"
 
-#: ../Pinta/MainWindow.cs:329
+#: ../Pinta/MainWindow.cs:312
 msgid "_Image"
 msgstr "_Bilde"
 
-#: ../Pinta/MainWindow.cs:333
+#: ../Pinta/MainWindow.cs:316
 msgid "_Layers"
 msgstr "_Lag"
 
-#: ../Pinta/Dialogs/ErrorDialog.cs:41 ../Pinta/Dialogs/ErrorDialog.cs:69
-#: ../Pinta.Gui.Addins/InstallDialog.cs:156
+#: ../Pinta.Gui.Addins/InstallDialog.cs:156 ../Pinta/Dialogs/ErrorDialog.cs:41
+#: ../Pinta/Dialogs/ErrorDialog.cs:69
 msgid "_OK"
 msgstr ""
 
@@ -2165,11 +2180,11 @@ msgstr ""
 msgid "_Save"
 msgstr ""
 
-#: ../Pinta/MainWindow.cs:325
+#: ../Pinta/MainWindow.cs:307
 msgid "_View"
 msgstr "_Vis"
 
-#: ../Pinta/MainWindow.cs:347
+#: ../Pinta/MainWindow.cs:332
 msgid "_Window"
 msgstr "_Vindu"
 
@@ -2233,6 +2248,17 @@ msgstr ""
 msgid "{0}%"
 msgstr ""
 
+#~ msgid "Don't change canvas size"
+#~ msgstr "La være å endre lerretets størrelse"
+
+#~ msgid "Expand canvas"
+#~ msgstr "Utvid lerretet"
+
+#~ msgid ""
+#~ "The image being pasted is larger than the canvas size. What would you "
+#~ "like to do?"
+#~ msgstr "Bildet du limer inn er større enn lerretet. Hva vil du gjøre?"
+
 #~ msgid "Translated by:"
 #~ msgstr "Oversatt av:"
 
@@ -2274,7 +2300,8 @@ msgstr ""
 
 #, csharp-format
 #~ msgid ""
-#~ "The file already exists in \"{1}\". Replacing it will overwrite its contents."
+#~ "The file already exists in \"{1}\". Replacing it will overwrite its "
+#~ "contents."
 #~ msgstr ""
 #~ "Filen eksisterer allerede i \"{1}\". Hvis den erstattes vil innholdet bli "
 #~ "overskrevet."
@@ -2287,25 +2314,25 @@ msgstr ""
 #~ "Left click to zoom in. Right click to zoom out. Click and drag to zoom in "
 #~ "selection."
 #~ msgstr ""
-#~ "Venstreklikk for å forstørre. Venstreklikk for å forminske. Klikk og dra for "
-#~ "å forstørre til valgt område."
+#~ "Venstreklikk for å forstørre. Venstreklikk for å forminske. Klikk og dra "
+#~ "for å forstørre til valgt område."
 
 #~ msgid "OptionName"
 #~ msgstr "AlternativsNavn"
 
 #~ msgid ""
-#~ "Click and drag to draw an elliptical selection. Hold Shift to constrain to a "
-#~ "circle."
+#~ "Click and drag to draw an elliptical selection. Hold Shift to constrain "
+#~ "to a circle."
 #~ msgstr ""
-#~ "Klikk og dra for å tegne et elliptisk utvalg. Hold Shift å begrense til en "
-#~ "sirkel."
+#~ "Klikk og dra for å tegne et elliptisk utvalg. Hold Shift å begrense til "
+#~ "en sirkel."
 
 #~ msgid ""
-#~ "Click and drag to draw a rectangular selection. Hold Shift to constrain to a "
-#~ "square."
+#~ "Click and drag to draw a rectangular selection. Hold Shift to constrain "
+#~ "to a square."
 #~ msgstr ""
-#~ "Klikk og dra for å tegne et rektangulært utvalg. Hold Shift å begrense til "
-#~ "en firkant."
+#~ "Klikk og dra for å tegne et rektangulært utvalg. Hold Shift å begrense "
+#~ "til en firkant."
 
 #~ msgid "No tool selected."
 #~ msgstr "Ingen verktøy er valgt."
@@ -2387,8 +2414,8 @@ msgstr ""
 #~ "avhengighetskonflikter."
 
 #~ msgid ""
-#~ "There are other add-ins that depend on the previous ones which will also be "
-#~ "uninstalled:"
+#~ "There are other add-ins that depend on the previous ones which will also "
+#~ "be uninstalled:"
 #~ msgstr ""
 #~ "Det er andre tillegg som er avhengige av de forrige som også vil bli "
 #~ "avinstallert:"

@@ -6,11 +6,12 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: pinta\n"
-"Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
-"POT-Creation-Date: 2023-12-17 14:36-0500\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2023-12-22 02:09-0500\n"
 "PO-Revision-Date: 2021-07-12 04:06+0000\n"
 "Last-Translator: 楊育晉 <Unknown>\n"
 "Language-Team: Chinese (Traditional) <zh_TW@li.org>\n"
+"Language: \n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -31,23 +32,23 @@ msgstr " 選取模式： "
 msgid "..."
 msgstr "..."
 
-#: ../Pinta.Tools/Tools/ColorPickerTool.cs:224
+#: ../Pinta.Tools/Tools/ColorPickerTool.cs:222
 msgid "3 x 3 Region"
 msgstr "3×3 區域"
 
-#: ../Pinta.Tools/Tools/ColorPickerTool.cs:225
+#: ../Pinta.Tools/Tools/ColorPickerTool.cs:223
 msgid "5 x 5 Region"
 msgstr "5×5 區域"
 
-#: ../Pinta.Tools/Tools/ColorPickerTool.cs:226
+#: ../Pinta.Tools/Tools/ColorPickerTool.cs:224
 msgid "7 x 7 Region"
 msgstr "7×7 區域"
 
-#: ../Pinta.Tools/Tools/ColorPickerTool.cs:227
+#: ../Pinta.Tools/Tools/ColorPickerTool.cs:225
 msgid "9 x 9 Region"
 msgstr "9×9 區域"
 
-#: ../Pinta/MainWindow.cs:343
+#: ../Pinta/MainWindow.cs:328
 msgid "A_dd-ins"
 msgstr "增益集(_D)"
 
@@ -59,9 +60,9 @@ msgstr "關於"
 msgid "About Pinta"
 msgstr "關於 Pinta"
 
-#: ../Pinta/Actions/Edit/PasteAction.cs:133
 #: ../Pinta.Core/Actions/LayerActions.cs:48
 #: ../Pinta.Core/Actions/LayerActions.cs:329
+#: ../Pinta/Actions/Edit/PasteAction.cs:143
 msgid "Add New Layer"
 msgstr "新增圖層"
 
@@ -77,21 +78,25 @@ msgstr ""
 msgid "Added"
 msgstr "已新增"
 
-#: ../Pinta.Tools/Tools/ColorPickerTool.cs:195
+#: ../Pinta/MainWindow.cs:372
+msgid "Adjustments"
+msgstr ""
+
+#: ../Pinta.Tools/Tools/ColorPickerTool.cs:193
 msgid "After select"
 msgstr "選色之後"
 
-#: ../Pinta/Actions/File/OpenDocumentAction.cs:81
 #: ../Pinta.Core/Actions/EditActions.cs:366
 #: ../Pinta.Gui.Addins/AddinManagerDialog.cs:209
+#: ../Pinta/Actions/File/OpenDocumentAction.cs:83
 msgid "All files"
 msgstr "所有檔案"
 
 #: ../Pinta.Effects/Effects/BulgeEffect.cs:89
-#: ../Pinta.Effects/Effects/FrostedGlassEffect.cs:150
+#: ../Pinta.Effects/Effects/FrostedGlassEffect.cs:155
 #: ../Pinta.Effects/Effects/SharpenEffect.cs:56
-#: ../Pinta.Effects/Effects/TwistEffect.cs:131
-#: ../Pinta.Effects/Effects/ZoomBlurEffect.cs:124
+#: ../Pinta.Effects/Effects/TwistEffect.cs:139
+#: ../Pinta.Effects/Effects/ZoomBlurEffect.cs:123
 msgid "Amount"
 msgstr "總量"
 
@@ -99,19 +104,19 @@ msgstr "總量"
 msgid "Anchor:"
 msgstr "定位點："
 
-#: ../Pinta/Actions/Layers/RotateZoomLayerAction.cs:115
 #: ../Pinta.Effects/Effects/EdgeDetectEffect.cs:80
-#: ../Pinta.Effects/Effects/EmbossEffect.cs:135
+#: ../Pinta.Effects/Effects/EmbossEffect.cs:144
 #: ../Pinta.Effects/Effects/JuliaFractalEffect.cs:150
 #: ../Pinta.Effects/Effects/MandelbrotFractalEffect.cs:168
 #: ../Pinta.Effects/Effects/MotionBlurEffect.cs:101
 #: ../Pinta.Effects/Effects/RadialBlurEffect.cs:146
 #: ../Pinta.Effects/Effects/ReliefEffect.cs:82
 #: ../Pinta.Tools/Editable/EditEngines/ArrowedEditEngine.cs:298
+#: ../Pinta/Actions/Layers/RotateZoomLayerAction.cs:115
 msgid "Angle"
 msgstr "角度"
 
-#: ../Pinta.Effects/Effects/TwistEffect.cs:134
+#: ../Pinta.Effects/Effects/TwistEffect.cs:142
 msgid "Antialias"
 msgstr "反鋸齒"
 
@@ -236,13 +241,13 @@ msgstr "按絕對大小："
 msgid "By percentage:"
 msgstr "按百分比："
 
-#: ../Pinta/Actions/File/OpenDocumentAction.cs:54
-#: ../Pinta/Actions/File/SaveDocumentImplementationAction.cs:74
 #: ../Pinta.Core/Actions/EditActions.cs:351
 #: ../Pinta.Core/Actions/EditActions.cs:392
 #: ../Pinta.Core/Actions/LayerActions.cs:167
 #: ../Pinta.Gui.Addins/AddinManagerDialog.cs:198
 #: ../Pinta.Gui.Addins/InstallDialog.cs:120
+#: ../Pinta/Actions/File/OpenDocumentAction.cs:54
+#: ../Pinta/Actions/File/SaveDocumentImplementationAction.cs:74
 msgid "Cancel"
 msgstr ""
 
@@ -404,7 +409,7 @@ msgstr "顏色拾取器"
 msgid "Color Range"
 msgstr "顏色範圍"
 
-#: ../Pinta.Effects/Effects/AddNoiseEffect.cs:167
+#: ../Pinta.Effects/Effects/AddNoiseEffect.cs:183
 msgid "Color Saturation"
 msgstr "顏色飽和度"
 
@@ -446,7 +451,7 @@ msgid "Copyright"
 msgstr "版權"
 
 #. Translators: {0} is the name of a layer, and {1} is the path to a .ora file.
-#: ../Pinta.Core/ImageFormats/OraFormat.cs:122
+#: ../Pinta.Core/ImageFormats/OraFormat.cs:127
 #, csharp-format
 msgid "Could not import layer \"{0}\" from {1}"
 msgstr ""
@@ -458,7 +463,7 @@ msgstr ""
 msgid "Could not open file: {0}"
 msgstr "不能開啟檔案：{0}"
 
-#: ../Pinta.Effects/Effects/AddNoiseEffect.cs:170
+#: ../Pinta.Effects/Effects/AddNoiseEffect.cs:186
 msgid "Coverage"
 msgstr "覆蓋率"
 
@@ -541,13 +546,9 @@ msgstr "距離"
 msgid "Distort"
 msgstr "扭曲"
 
-#: ../Pinta.Tools/Tools/ColorPickerTool.cs:204
+#: ../Pinta.Tools/Tools/ColorPickerTool.cs:202
 msgid "Do not switch tool"
 msgstr "不要切換工具"
-
-#: ../Pinta/Actions/Edit/PasteAction.cs:178
-msgid "Don't change canvas size"
-msgstr "不要更改畫布大小"
 
 #: ../Pinta.Gui.Addins/AddinInfoView.cs:134
 #, csharp-format
@@ -571,9 +572,13 @@ msgstr "邊緣行為"
 msgid "Edge Detect"
 msgstr "邊緣偵測"
 
-#: ../Pinta/MainWindow.cs:339
+#: ../Pinta/MainWindow.cs:324
 msgid "Effe_cts"
 msgstr "特效(_C)"
+
+#: ../Pinta/MainWindow.cs:366
+msgid "Effects"
+msgstr ""
 
 #: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:326
 #: ../Pinta.Tools/Editable/EditEngines/EllipseEditEngine.cs:34
@@ -598,7 +603,7 @@ msgstr "清除選取區域"
 msgid "Eraser"
 msgstr "橡皮擦"
 
-#: ../Pinta.Core/ImageFormats/OraFormat.cs:123
+#: ../Pinta.Core/ImageFormats/OraFormat.cs:128
 msgid "Error"
 msgstr "錯誤"
 
@@ -606,9 +611,10 @@ msgstr "錯誤"
 msgid "Exclude (-) (Right Click)"
 msgstr "排除 (-) (按一下滑鼠右鍵)"
 
-#: ../Pinta/Actions/Edit/PasteAction.cs:179
-msgid "Expand canvas"
-msgstr "擴大畫布"
+#. Translators: This refers to expanding the canvas size when pasting a larger image.
+#: ../Pinta/Actions/Edit/PasteAction.cs:191
+msgid "Expand"
+msgstr ""
 
 #: ../Pinta.Gui.Addins/AddinManagerDialog.cs:204
 msgid "Extension packages"
@@ -811,7 +817,7 @@ msgstr "圖示檔不能大於 255 × 255 像素。"
 msgid "If you don't save, all changes will be permanently lost."
 msgstr "如果不儲存，所有變更會永久失去。"
 
-#: ../Pinta.Tools/Tools/ColorPickerTool.cs:242
+#: ../Pinta.Tools/Tools/ColorPickerTool.cs:240 ../Pinta/MainWindow.cs:378
 msgid "Image"
 msgstr "圖片"
 
@@ -823,16 +829,16 @@ msgstr "圖像編輯器"
 msgid "Image Tabs"
 msgstr "圖片分頁"
 
-#: ../Pinta/Actions/Edit/PasteAction.cs:163
+#: ../Pinta/Actions/Edit/PasteAction.cs:173
 msgid "Image cannot be pasted"
 msgstr "無法貼上圖片"
 
-#: ../Pinta/Actions/File/OpenDocumentAction.cs:60
 #: ../Pinta.Core/Actions/LayerActions.cs:193
+#: ../Pinta/Actions/File/OpenDocumentAction.cs:60
 msgid "Image files"
 msgstr "圖片檔案"
 
-#: ../Pinta/Actions/Edit/PasteAction.cs:170
+#: ../Pinta/Actions/Edit/PasteAction.cs:180
 msgid "Image larger than canvas"
 msgstr "圖片大於畫布"
 
@@ -889,9 +895,9 @@ msgstr "安裝..."
 msgid "Installed"
 msgstr "已安裝"
 
-#: ../Pinta.Effects/Effects/AddNoiseEffect.cs:164
+#: ../Pinta.Effects/Effects/AddNoiseEffect.cs:180
 #: ../Pinta.Effects/Effects/OutlineEffect.cs:138
-#: ../Pinta.Effects/Effects/TileEffect.cs:178
+#: ../Pinta.Effects/Effects/TileEffect.cs:180
 msgid "Intensity"
 msgstr "強度"
 
@@ -931,7 +937,7 @@ msgstr "橫向"
 msgid "Lasso Select"
 msgstr "自由選取工具"
 
-#: ../Pinta.Tools/Tools/ColorPickerTool.cs:241
+#: ../Pinta.Tools/Tools/ColorPickerTool.cs:239
 msgid "Layer"
 msgstr "圖層"
 
@@ -1021,7 +1027,8 @@ msgstr ""
 msgid ""
 "Left click to draw with primary color, right click to draw with secondary "
 "color."
-msgstr "畫圖時，按滑鼠左鍵畫出來的顏色是主要顏色，按滑鼠右鍵畫出來的顏色是次要顏色。"
+msgstr ""
+"畫圖時，按滑鼠左鍵畫出來的顏色是主要顏色，按滑鼠右鍵畫出來的顏色是次要顏色。"
 
 #: ../Pinta.Tools/Tools/EraserTool.cs:56
 msgid ""
@@ -1060,7 +1067,9 @@ msgstr "按滑鼠左鍵設置主要顏色，按滑鼠右鍵設置次要顏色。
 msgid ""
 "Left click to set primary color. Right click to set secondary color. Middle "
 "click to choose palette color."
-msgstr "按一下滑鼠左鍵設定主要顏色。按一下滑鼠右鍵設定次要顏色。按一下中間鍵選擇調色盤的顏色。"
+msgstr ""
+"按一下滑鼠左鍵設定主要顏色。按一下滑鼠右鍵設定次要顏色。按一下中間鍵選擇調色"
+"盤的顏色。"
 
 #: ../Pinta.Tools/Tools/ZoomTool.cs:58
 msgid ""
@@ -1131,6 +1140,10 @@ msgstr "明度"
 msgid "Magic Wand Select"
 msgstr "魔術棒選取工具"
 
+#: ../Pinta/MainWindow.cs:360
+msgid "Main Menu"
+msgstr ""
+
 #: ../Pinta/Dialogs/ResizeCanvasDialog.cs:76
 #: ../Pinta/Dialogs/ResizeImageDialog.cs:66
 msgid "Maintain aspect ratio"
@@ -1199,8 +1212,8 @@ msgstr ""
 msgid "New"
 msgstr "新增"
 
-#: ../Pinta/Dialogs/NewImageDialog.cs:67
 #: ../Pinta.Core/Managers/WorkspaceManager.cs:184
+#: ../Pinta/Dialogs/NewImageDialog.cs:67
 msgid "New Image"
 msgstr "新增圖片"
 
@@ -1228,7 +1241,7 @@ msgstr "雜訊"
 
 #: ../Pinta.Core/Effects/UserBlendOps.cs:31
 #: ../Pinta.Tools/Brushes/PlainBrush.cs:35
-#: ../Pinta.Tools/Tools/EraserTool.cs:260 ../Pinta.Tools/Tools/TextTool.cs:246
+#: ../Pinta.Tools/Tools/EraserTool.cs:262 ../Pinta.Tools/Tools/TextTool.cs:246
 msgid "Normal"
 msgstr "一般"
 
@@ -1250,7 +1263,7 @@ msgstr ""
 
 #: ../Pinta.Effects/Effects/BulgeEffect.cs:92
 #: ../Pinta.Effects/Effects/RadialBlurEffect.cs:149
-#: ../Pinta.Effects/Effects/ZoomBlurEffect.cs:127
+#: ../Pinta.Effects/Effects/ZoomBlurEffect.cs:126
 msgid "Offset"
 msgstr "偏移"
 
@@ -1262,11 +1275,11 @@ msgstr "油畫"
 msgid "Opacity:"
 msgstr "不透明度："
 
-#: ../Pinta/Actions/File/OpenDocumentAction.cs:53
 #: ../Pinta.Core/Actions/EditActions.cs:350
 #: ../Pinta.Core/Actions/FileActions.cs:56
 #: ../Pinta.Core/Actions/LayerActions.cs:166
 #: ../Pinta.Gui.Addins/AddinManagerDialog.cs:197
+#: ../Pinta/Actions/File/OpenDocumentAction.cs:53
 msgid "Open"
 msgstr "開啟"
 
@@ -1278,8 +1291,8 @@ msgstr ""
 msgid "Open Image"
 msgstr "開啟圖片"
 
-#: ../Pinta/Actions/File/OpenDocumentAction.cs:50
 #: ../Pinta.Core/Actions/LayerActions.cs:163
+#: ../Pinta/Actions/File/OpenDocumentAction.cs:50
 msgid "Open Image File"
 msgstr "開啟圖片檔"
 
@@ -1350,14 +1363,14 @@ msgstr "調色盤"
 msgid "Palette files"
 msgstr "調色盤檔案"
 
-#: ../Pinta/Actions/Layers/RotateZoomLayerAction.cs:118
 #: ../Pinta.Tools/Tools/PanTool.cs:38
+#: ../Pinta/Actions/Layers/RotateZoomLayerAction.cs:118
 msgid "Pan"
 msgstr "平移"
 
-#: ../Pinta/Actions/Edit/PasteAction.cs:83
 #: ../Pinta.Core/Actions/EditActions.cs:63
 #: ../Pinta.Core/HistoryItems/PasteHistoryItem.cs:38
+#: ../Pinta/Actions/Edit/PasteAction.cs:87
 msgid "Paste"
 msgstr "貼上"
 
@@ -1365,8 +1378,8 @@ msgstr "貼上"
 msgid "Paste Into New Image"
 msgstr "貼到新圖片"
 
-#: ../Pinta/Actions/Edit/PasteAction.cs:83
 #: ../Pinta.Core/Actions/EditActions.cs:64
+#: ../Pinta/Actions/Edit/PasteAction.cs:87
 msgid "Paste Into New Layer"
 msgstr "貼到新圖層"
 
@@ -1473,6 +1486,11 @@ msgstr "色調分離"
 msgid "Power"
 msgstr "強度"
 
+#. Translators: This refers to preserving the current canvas size when pasting a larger image.
+#: ../Pinta/Actions/Edit/PasteAction.cs:189
+msgid "Preserve"
+msgstr ""
+
 #: ../Pinta/Dialogs/NewImageDialog.cs:101
 msgid "Preset:"
 msgstr "預先設置："
@@ -1516,7 +1534,7 @@ msgstr "放射狀模糊"
 msgid "Radial Gradient"
 msgstr "放射漸變填充"
 
-#: ../Pinta.Effects/Effects/GaussianBlurEffect.cs:245
+#: ../Pinta.Effects/Effects/GaussianBlurEffect.cs:247
 #: ../Pinta.Effects/Effects/GlowEffect.cs:74
 #: ../Pinta.Effects/Effects/MedianEffect.cs:63
 #: ../Pinta.Effects/Effects/ReduceNoiseEffect.cs:87
@@ -1525,9 +1543,9 @@ msgstr "放射漸變填充"
 msgid "Radius"
 msgstr "半徑"
 
-#: ../Pinta.Effects/Effects/AddNoiseEffect.cs:173
+#: ../Pinta.Effects/Effects/AddNoiseEffect.cs:189
 #: ../Pinta.Effects/Effects/CloudsEffect.cs:222
-#: ../Pinta.Effects/Effects/FrostedGlassEffect.cs:153
+#: ../Pinta.Effects/Effects/FrostedGlassEffect.cs:158
 msgid "Random Noise"
 msgstr "不規則雜訊"
 
@@ -1619,8 +1637,8 @@ msgstr "重設"
 msgid "Reset to Default"
 msgstr "重置為預設"
 
+#: ../Pinta.Core/Classes/Document.cs:302
 #: ../Pinta/Dialogs/ResizeCanvasDialog.cs:57
-#: ../Pinta.Core/Classes/Document.cs:304
 msgid "Resize Canvas"
 msgstr "調整畫布尺寸"
 
@@ -1628,8 +1646,8 @@ msgstr "調整畫布尺寸"
 msgid "Resize Canvas..."
 msgstr "調整畫布大小..."
 
-#: ../Pinta/Dialogs/ResizeImageDialog.cs:47
 #: ../Pinta.Core/HistoryItems/ResizeHistoryItem.cs:38
+#: ../Pinta/Dialogs/ResizeImageDialog.cs:47
 msgid "Resize Image"
 msgstr "縮放圖片"
 
@@ -1670,7 +1688,7 @@ msgid "Rotate 90° Counter-Clockwise"
 msgstr "逆時針旋轉 90°"
 
 #: ../Pinta.Effects/Effects/FragmentEffect.cs:113
-#: ../Pinta.Effects/Effects/TileEffect.cs:172
+#: ../Pinta.Effects/Effects/TileEffect.cs:174
 msgid "Rotation"
 msgstr "旋轉"
 
@@ -1694,7 +1712,7 @@ msgstr "尺規單位"
 msgid "Rulers"
 msgstr "尺規"
 
-#: ../Pinta.Tools/Tools/ColorPickerTool.cs:196
+#: ../Pinta.Tools/Tools/ColorPickerTool.cs:194
 msgid "Sampling"
 msgstr "取樣"
 
@@ -1707,9 +1725,9 @@ msgstr "飽和度"
 msgid "Saturation Percentage"
 msgstr "飽和度百分比"
 
-#: ../Pinta/Actions/File/SaveDocumentImplementationAction.cs:73
 #: ../Pinta.Core/Actions/EditActions.cs:391
 #: ../Pinta.Core/Actions/FileActions.cs:51
+#: ../Pinta/Actions/File/SaveDocumentImplementationAction.cs:73
 msgid "Save"
 msgstr "儲存"
 
@@ -1781,7 +1799,7 @@ msgstr "顯示圖層"
 msgid "Show/Hide"
 msgstr ""
 
-#: ../Pinta.Tools/Tools/ColorPickerTool.cs:223
+#: ../Pinta.Tools/Tools/ColorPickerTool.cs:221
 msgid "Single Pixel"
 msgstr "單個像素"
 
@@ -1789,7 +1807,7 @@ msgstr "單個像素"
 msgid "Size"
 msgstr "大小"
 
-#: ../Pinta.Tools/Tools/EraserTool.cs:260
+#: ../Pinta.Tools/Tools/EraserTool.cs:262
 msgid "Smooth"
 msgstr "平滑"
 
@@ -1828,11 +1846,11 @@ msgstr "強度"
 msgid "Stylize"
 msgstr "風格化"
 
-#: ../Pinta.Tools/Tools/ColorPickerTool.cs:206
+#: ../Pinta.Tools/Tools/ColorPickerTool.cs:204
 msgid "Switch to Pencil tool"
 msgstr "切換到鉛筆工具"
 
-#: ../Pinta.Tools/Tools/ColorPickerTool.cs:205
+#: ../Pinta.Tools/Tools/ColorPickerTool.cs:203
 msgid "Switch to previous tool"
 msgstr "切換到上一個工具"
 
@@ -1848,7 +1866,7 @@ msgstr ""
 msgid "Text Style"
 msgstr "文字樣式"
 
-#: ../Pinta/Actions/Edit/PasteAction.cs:164
+#: ../Pinta/Actions/Edit/PasteAction.cs:174
 msgid "The clipboard does not contain an image."
 msgstr "剪貼簿不包含圖片。"
 
@@ -1872,11 +1890,11 @@ msgstr "會安裝以下套件："
 msgid "The following packages will be uninstalled:"
 msgstr "會解除安裝以下套件："
 
-#: ../Pinta/Actions/Edit/PasteAction.cs:171
+#: ../Pinta/Actions/Edit/PasteAction.cs:181
 msgid ""
-"The image being pasted is larger than the canvas size. What would you like "
-"to do?"
-msgstr "要貼上的圖片大於畫布。要怎樣處理？"
+"The image being pasted is larger than the canvas. What would you like to do "
+"to the canvas size?"
+msgstr ""
 
 #: ../Pinta.Gui.Addins/InstallDialog.cs:293
 msgid "The installation failed!"
@@ -1914,7 +1932,7 @@ msgstr "厚度"
 msgid "Tile Reflection"
 msgstr "瓷磚效果"
 
-#: ../Pinta.Effects/Effects/TileEffect.cs:175
+#: ../Pinta.Effects/Effects/TileEffect.cs:177
 msgid "Tile Size"
 msgstr "瓷磚大小"
 
@@ -1924,7 +1942,7 @@ msgstr "提示：按右鍵以刪除控制點。"
 
 #: ../Pinta.Effects/Effects/RedEyeRemoveEffect.cs:50
 #: ../Pinta.Tools/Tools/FloodTool.cs:125
-#: ../Pinta.Tools/Tools/RecolorTool.cs:200
+#: ../Pinta.Tools/Tools/RecolorTool.cs:196
 msgid "Tolerance"
 msgstr "容許偏差量"
 
@@ -1936,7 +1954,7 @@ msgstr "工具"
 msgid "Tool Box"
 msgstr ""
 
-#: ../Pinta/MainWindow.cs:357
+#: ../Pinta/MainWindow.cs:342
 msgid "Tool Windows"
 msgstr "工具視窗"
 
@@ -1956,8 +1974,8 @@ msgstr "翻譯本軟體"
 msgid "Transparency Mode"
 msgstr ""
 
-#: ../Pinta/Dialogs/NewImageDialog.cs:221
 #: ../Pinta.Effects/Effects/WarpEffect.cs:35
+#: ../Pinta/Dialogs/NewImageDialog.cs:221
 msgid "Transparent"
 msgstr "透明"
 
@@ -1965,7 +1983,7 @@ msgstr "透明"
 msgid "Twist"
 msgstr "扭曲"
 
-#: ../Pinta.Tools/Tools/EraserTool.cs:256
+#: ../Pinta.Tools/Tools/EraserTool.cs:258
 #: ../Pinta.Tools/Tools/PaintBrushTool.cs:165
 msgid "Type"
 msgstr "類型"
@@ -2022,7 +2040,9 @@ msgstr "更新"
 msgid ""
 "Use low quality for previews, small images, and small angles.  Use high "
 "quality for final quality, large images, and large angles."
-msgstr "預覽圖像和編輯小圖像、小角度時，使用低品質。最終輸出圖像、和編輯大圖片和大角度時，則使用高品質。"
+msgstr ""
+"預覽圖像和編輯小圖像、小角度時，使用低品質。最終輸出圖像、和編輯大圖片和大角"
+"度時，則使用高品質。"
 
 #: ../Pinta/Actions/Help/AboutDialogAction.cs:85
 msgid "Using some icons from:"
@@ -2053,8 +2073,8 @@ msgstr "寬度："
 
 #: ../Pinta.Core/Actions/ViewActions.cs:116
 #: ../Pinta.Core/Actions/ViewActions.cs:304
+#: ../Pinta.Core/Classes/DocumentWorkspace.cs:348
 #: ../Pinta.Core/Classes/DocumentWorkspace.cs:357
-#: ../Pinta.Core/Classes/DocumentWorkspace.cs:366
 msgid "Window"
 msgstr "視窗"
 
@@ -2085,10 +2105,10 @@ msgid ""
 "You do not have access to modify '{0}'. The file or folder may be read-only."
 msgstr ""
 
-#: ../Pinta/Actions/Layers/RotateZoomLayerAction.cs:121
 #: ../Pinta.Effects/Effects/JuliaFractalEffect.cs:147
 #: ../Pinta.Effects/Effects/MandelbrotFractalEffect.cs:165
 #: ../Pinta.Tools/Tools/ZoomTool.cs:55
+#: ../Pinta/Actions/Layers/RotateZoomLayerAction.cs:121
 msgid "Zoom"
 msgstr "縮放"
 
@@ -2108,11 +2128,11 @@ msgstr "縮小"
 msgid "Zoom to Selection"
 msgstr "放大成自選區域"
 
-#: ../Pinta/MainWindow.cs:336
+#: ../Pinta/MainWindow.cs:320
 msgid "_Adjustments"
 msgstr "調整(_A)"
 
-#: ../Pinta/Actions/Edit/PasteAction.cs:177
+#: ../Pinta/Actions/Edit/PasteAction.cs:187
 #: ../Pinta/Actions/File/CloseDocumentAction.cs:66
 msgid "_Cancel"
 msgstr ""
@@ -2121,28 +2141,28 @@ msgstr ""
 msgid "_Discard"
 msgstr ""
 
-#: ../Pinta/MainWindow.cs:321
+#: ../Pinta/MainWindow.cs:303
 msgid "_Edit"
 msgstr "編輯(_E)"
 
-#: ../Pinta/MainWindow.cs:317
+#: ../Pinta/MainWindow.cs:299
 msgid "_File"
 msgstr "檔案(_F)"
 
-#: ../Pinta/MainWindow.cs:351
+#: ../Pinta/MainWindow.cs:336
 msgid "_Help"
 msgstr "說明(_H)"
 
-#: ../Pinta/MainWindow.cs:329
+#: ../Pinta/MainWindow.cs:312
 msgid "_Image"
 msgstr "圖片(_I)"
 
-#: ../Pinta/MainWindow.cs:333
+#: ../Pinta/MainWindow.cs:316
 msgid "_Layers"
 msgstr "圖層(_L)"
 
-#: ../Pinta/Dialogs/ErrorDialog.cs:41 ../Pinta/Dialogs/ErrorDialog.cs:69
-#: ../Pinta.Gui.Addins/InstallDialog.cs:156
+#: ../Pinta.Gui.Addins/InstallDialog.cs:156 ../Pinta/Dialogs/ErrorDialog.cs:41
+#: ../Pinta/Dialogs/ErrorDialog.cs:69
 msgid "_OK"
 msgstr ""
 
@@ -2150,11 +2170,11 @@ msgstr ""
 msgid "_Save"
 msgstr ""
 
-#: ../Pinta/MainWindow.cs:325
+#: ../Pinta/MainWindow.cs:307
 msgid "_View"
 msgstr "檢視(_V)"
 
-#: ../Pinta/MainWindow.cs:347
+#: ../Pinta/MainWindow.cs:332
 msgid "_Window"
 msgstr "視窗(_W)"
 
@@ -2219,6 +2239,17 @@ msgstr "{0} 調色盤 ({1})"
 msgid "{0}%"
 msgstr "{0}%"
 
+#~ msgid "Don't change canvas size"
+#~ msgstr "不要更改畫布大小"
+
+#~ msgid "Expand canvas"
+#~ msgstr "擴大畫布"
+
+#~ msgid ""
+#~ "The image being pasted is larger than the canvas size. What would you "
+#~ "like to do?"
+#~ msgstr "要貼上的圖片大於畫布。要怎樣處理？"
+
 #~ msgid "Version"
 #~ msgstr "版本"
 
@@ -2231,7 +2262,9 @@ msgstr "{0}%"
 #~ msgid ""
 #~ "Left click to zoom in. Right click to zoom out. Click and drag to zoom in "
 #~ "selection."
-#~ msgstr "按滑鼠左鍵以放大，按滑鼠右鍵以縮小。另外，可以用滑鼠左鍵選取一個區域來放大。"
+#~ msgstr ""
+#~ "按滑鼠左鍵以放大，按滑鼠右鍵以縮小。另外，可以用滑鼠左鍵選取一個區域來放"
+#~ "大。"
 
 #~ msgid "number of threads to use for rendering"
 #~ msgstr "用於渲染的線程數"
@@ -2241,7 +2274,8 @@ msgstr "{0}%"
 
 #, csharp-format
 #~ msgid ""
-#~ "The file already exists in \"{1}\". Replacing it will overwrite its contents."
+#~ "The file already exists in \"{1}\". Replacing it will overwrite its "
+#~ "contents."
 #~ msgstr "檔案已經存在於 \"{1}\"。取代它會覆蓋其內容。"
 
 #~ msgid "OptionName"
@@ -2392,12 +2426,15 @@ msgstr "{0}%"
 #~ msgid ""
 #~ "Click and drag to draw gradient from primary to secondary color.  Right "
 #~ "click to reverse."
-#~ msgstr "按住滑鼠左鍵並拖動畫出從主要顏色到次要顏色的漸層顏色，按住滑鼠右鍵則相反。"
+#~ msgstr ""
+#~ "按住滑鼠左鍵並拖動畫出從主要顏色到次要顏色的漸層顏色，按住滑鼠右鍵則相反。"
 
 #~ msgid ""
 #~ "Left click to draw freeform one-pixel wide lines with the primary color. "
 #~ "Right click to use the secondary color."
-#~ msgstr "按滑鼠左鍵用主要顏色畫出自由變形且一像素寬的線條。按滑鼠右鍵將使用次要顏色。"
+#~ msgstr ""
+#~ "按滑鼠左鍵用主要顏色畫出自由變形且一像素寬的線條。按滑鼠右鍵將使用次要顏"
+#~ "色。"
 
 #~ msgid "The following add-ins will be installed:"
 #~ msgstr "會安裝以下附加元件："
@@ -2418,8 +2455,8 @@ msgstr "{0}%"
 #~ msgstr "瑕疵報告...."
 
 #~ msgid ""
-#~ "Click and drag to draw an elliptical selection. Hold Shift to constrain to a "
-#~ "circle."
+#~ "Click and drag to draw an elliptical selection. Hold Shift to constrain "
+#~ "to a circle."
 #~ msgstr "點擊並拖曳以繪製橢圓形選取區域。同時按住 Shift 能繪製圓形。"
 
 #~ msgid ""
@@ -2428,8 +2465,8 @@ msgstr "{0}%"
 #~ msgstr "以滑鼠左鍵點擊，可以主要顏色取代次要顏色。點擊滑鼠右鍵相反。"
 
 #~ msgid ""
-#~ "Click and drag to draw a rectangular selection. Hold Shift to constrain to a "
-#~ "square."
+#~ "Click and drag to draw a rectangular selection. Hold Shift to constrain "
+#~ "to a square."
 #~ msgstr "點擊並拖曳以繪製矩形選取區域。同時按住 Shift 能繪製正方形。"
 
 #, csharp-format
@@ -2440,8 +2477,8 @@ msgstr "{0}%"
 #~ msgstr "確定取消安裝？"
 
 #~ msgid ""
-#~ "There are other add-ins that depend on the previous ones which will also be "
-#~ "uninstalled:"
+#~ "There are other add-ins that depend on the previous ones which will also "
+#~ "be uninstalled:"
 #~ msgstr "依存於先前附加元件的其他元件，會同時解除安裝："
 
 #~ msgid "More information"
@@ -2506,4 +2543,6 @@ msgstr "{0}%"
 #~ msgstr "找不到某些必需的附加元件"
 
 #~ msgid "Ctrl-left click to set origin, left click to paint."
-#~ msgstr "按著 Ctrl 鍵，然後用滑鼠左鍵點選要複製像素的中心點！然後放開鍵盤，按滑鼠左鍵當筆刷塗抹。"
+#~ msgstr ""
+#~ "按著 Ctrl 鍵，然後用滑鼠左鍵點選要複製像素的中心點！然後放開鍵盤，按滑鼠左"
+#~ "鍵當筆刷塗抹。"
