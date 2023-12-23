@@ -259,9 +259,17 @@ public sealed class MainWindow
 	private void OnExtensionChanged (object s, ExtensionNodeEventArgs args)
 	{
 		IExtension extension = (IExtension) args.ExtensionObject;
-		if (args.Change == ExtensionChange.Add)
-			extension.Initialize ();
-		else
+		if (args.Change == ExtensionChange.Add) {
+			try {
+				extension.Initialize ();
+			} catch (Exception e) {
+				// Translators: {0} is the name of an add-in.
+				var body = Translations.GetString ("The '{0}' add-in may not be compatible with this version of Pinta", args.ExtensionNode.Addin.Id);
+				PintaCore.Chrome.ShowErrorDialog (PintaCore.Chrome.MainWindow,
+						Translations.GetString ("Failed to initialize add-in"),
+						body, e.ToString ());
+			}
+		} else
 			extension.Uninitialize ();
 	}
 
