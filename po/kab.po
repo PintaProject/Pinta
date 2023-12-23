@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: pinta\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-12-22 02:09-0500\n"
+"POT-Creation-Date: 2023-12-23 16:03-0500\n"
 "PO-Revision-Date: 2017-02-16 01:51+0000\n"
 "Last-Translator: Yacine Bouklif <yacinebouklif@gmail.com>\n"
 "Language-Team: Kabyle <kab@li.org>\n"
@@ -48,7 +48,7 @@ msgstr "Tamnaḍt 7 x 7"
 msgid "9 x 9 Region"
 msgstr "Tamnaḍt 9 x 9"
 
-#: ../Pinta/MainWindow.cs:328
+#: ../Pinta/MainWindow.cs:349
 msgid "A_dd-ins"
 msgstr "Isiɣzaf"
 
@@ -78,7 +78,7 @@ msgstr ""
 msgid "Added"
 msgstr "Yettwarenna"
 
-#: ../Pinta/MainWindow.cs:372
+#: ../Pinta/MainWindow.cs:382
 msgid "Adjustments"
 msgstr ""
 
@@ -572,11 +572,11 @@ msgstr "Comportement du bord"
 msgid "Edge Detect"
 msgstr "Tifin n yiran"
 
-#: ../Pinta/MainWindow.cs:324
+#: ../Pinta/MainWindow.cs:345
 msgid "Effe_cts"
 msgstr "Isemda"
 
-#: ../Pinta/MainWindow.cs:366
+#: ../Pinta/MainWindow.cs:376
 msgid "Effects"
 msgstr ""
 
@@ -627,6 +627,10 @@ msgstr "Amgi"
 
 #: ../Pinta/Actions/File/NewScreenshotAction.cs:103
 msgid "Failed to access XDG Desktop Portals"
+msgstr ""
+
+#: ../Pinta/MainWindow.cs:269
+msgid "Failed to initialize add-in"
 msgstr ""
 
 #: ../Pinta.Gui.Addins/InstallDialog.cs:152
@@ -747,7 +751,7 @@ msgstr "Verre dépoli"
 msgid "Fullscreen"
 msgstr "Agdil ačuran"
 
-#: ../Pinta.Gui.Addins/AddinManagerDialog.cs:64
+#: ../Pinta.Gui.Addins/AddinManagerDialog.cs:60
 msgid "Gallery"
 msgstr "Tagnarit"
 
@@ -819,7 +823,7 @@ msgstr "Ifuyla ICO ur zmiren ara ad ɛeddin 255 x 255 n ipiksilen."
 msgid "If you don't save, all changes will be permanently lost."
 msgstr "Ma yella ur teskelseḍ ara, ibeddilen akk ad ṛuḥen."
 
-#: ../Pinta.Tools/Tools/ColorPickerTool.cs:240 ../Pinta/MainWindow.cs:378
+#: ../Pinta.Tools/Tools/ColorPickerTool.cs:240 ../Pinta/MainWindow.cs:388
 msgid "Image"
 msgstr "Tugna"
 
@@ -893,7 +897,7 @@ msgstr "Sbedd seg ufaylu..."
 msgid "Install..."
 msgstr "Sbedd..."
 
-#: ../Pinta.Gui.Addins/AddinManagerDialog.cs:60
+#: ../Pinta.Gui.Addins/AddinManagerDialog.cs:62
 msgid "Installed"
 msgstr "Yettusbedd"
 
@@ -1149,7 +1153,7 @@ msgstr "Tifawit"
 msgid "Magic Wand Select"
 msgstr "Tafrayt s tɛekkazt tasḥart"
 
-#: ../Pinta/MainWindow.cs:360
+#: ../Pinta/MainWindow.cs:370
 msgid "Main Menu"
 msgstr ""
 
@@ -1875,6 +1879,12 @@ msgstr "Aḍris - Fakk"
 msgid "Text Style"
 msgstr "Aɣanib n uḍris"
 
+#. Translators: {0} is the name of an add-in.
+#: ../Pinta/MainWindow.cs:267
+#, csharp-format
+msgid "The '{0}' add-in may not be compatible with this version of Pinta"
+msgstr ""
+
 #: ../Pinta/Actions/Edit/PasteAction.cs:174
 msgid "The clipboard does not contain an image."
 msgstr "Le presse-papier ne contient pas d'image"
@@ -1963,7 +1973,7 @@ msgstr "Afecku"
 msgid "Tool Box"
 msgstr ""
 
-#: ../Pinta/MainWindow.cs:342
+#: ../Pinta/MainWindow.cs:363
 msgid "Tool Windows"
 msgstr "Tanaka n ifecka"
 
@@ -2041,7 +2051,7 @@ msgstr ""
 msgid "Update..."
 msgstr ""
 
-#: ../Pinta.Gui.Addins/AddinManagerDialog.cs:62
+#: ../Pinta.Gui.Addins/AddinManagerDialog.cs:64
 msgid "Updates"
 msgstr "Amucceḍ"
 
@@ -2138,7 +2148,7 @@ msgstr "Ssemẓi"
 msgid "Zoom to Selection"
 msgstr "Ssezg tiddi ɣer tefrayt"
 
-#: ../Pinta/MainWindow.cs:320
+#: ../Pinta/MainWindow.cs:341
 msgid "_Adjustments"
 msgstr "Iswatiyen"
 
@@ -2151,23 +2161,23 @@ msgstr ""
 msgid "_Discard"
 msgstr ""
 
-#: ../Pinta/MainWindow.cs:303
+#: ../Pinta/MainWindow.cs:324
 msgid "_Edit"
 msgstr "Taẓrigt"
 
-#: ../Pinta/MainWindow.cs:299
+#: ../Pinta/MainWindow.cs:320
 msgid "_File"
 msgstr "Afaylu"
 
-#: ../Pinta/MainWindow.cs:336
+#: ../Pinta/MainWindow.cs:357
 msgid "_Help"
 msgstr "Tallalt"
 
-#: ../Pinta/MainWindow.cs:312
+#: ../Pinta/MainWindow.cs:333
 msgid "_Image"
 msgstr "Tugna"
 
-#: ../Pinta/MainWindow.cs:316
+#: ../Pinta/MainWindow.cs:337
 msgid "_Layers"
 msgstr "Ikalkuten"
 
@@ -2180,11 +2190,11 @@ msgstr ""
 msgid "_Save"
 msgstr ""
 
-#: ../Pinta/MainWindow.cs:307
+#: ../Pinta/MainWindow.cs:328
 msgid "_View"
 msgstr "Abeqqeḍ"
 
-#: ../Pinta/MainWindow.cs:332
+#: ../Pinta/MainWindow.cs:353
 msgid "_Window"
 msgstr "Asfaylu"
 
