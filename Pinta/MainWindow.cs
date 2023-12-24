@@ -259,9 +259,17 @@ public sealed class MainWindow
 	private void OnExtensionChanged (object s, ExtensionNodeEventArgs args)
 	{
 		IExtension extension = (IExtension) args.ExtensionObject;
-		if (args.Change == ExtensionChange.Add)
-			extension.Initialize ();
-		else
+		if (args.Change == ExtensionChange.Add) {
+			try {
+				extension.Initialize ();
+			} catch (Exception e) {
+				// Translators: {0} is the name of an add-in.
+				var body = Translations.GetString ("The '{0}' add-in may not be compatible with this version of Pinta", args.ExtensionNode.Addin.Id);
+				PintaCore.Chrome.ShowErrorDialog (PintaCore.Chrome.MainWindow,
+						Translations.GetString ("Failed to initialize add-in"),
+						body, e.ToString ());
+			}
+		} else
 			extension.Uninitialize ();
 	}
 
@@ -293,6 +301,19 @@ public sealed class MainWindow
 	{
 		bool using_header_bar = window_shell.HeaderBar is not null;
 		var menu_bar = Gio.Menu.New ();
+
+		if (!using_header_bar) {
+			app.Menubar = menu_bar;
+
+			if (PintaCore.System.OperatingSystem == OS.Mac) {
+				// Only use the application menu on macOS. On other platforms, these
+				// menu items appear under File, Help, etc.
+				// The first menu seems to be treated as the application menu.
+				var app_menu = Gio.Menu.New ();
+				PintaCore.Actions.App.RegisterActions (app, app_menu);
+				menu_bar.AppendSubmenu ("_Application", app_menu);
+			}
+		}
 
 		var file_menu = Gio.Menu.New ();
 		PintaCore.Actions.File.RegisterActions (app, file_menu);
@@ -341,18 +362,7 @@ public sealed class MainWindow
 		show_pad = Gio.Menu.New ();
 		pad_section.AppendSubmenu (Translations.GetString ("Tool Windows"), show_pad);
 
-		if (window_shell.HeaderBar is null) {
-			app.Menubar = menu_bar;
-
-			if (PintaCore.System.OperatingSystem == OS.Mac) {
-				// Only use the application menu on macOS. On other platforms, these
-				// menu items appear under File, Help, etc.
-				// The first menu seems to be treated as the application menu.
-				var app_menu = Gio.Menu.New ();
-				PintaCore.Actions.App.RegisterActions (app, app_menu);
-				menu_bar.AppendSubmenu ("_Application", app_menu);
-			}
-		} else {
+		if (window_shell.HeaderBar is not null) {
 			var header_bar = window_shell.HeaderBar;
 			header_bar.PackEnd (new Gtk.MenuButton () {
 				MenuModel = menu_bar,

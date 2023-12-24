@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: pinta\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-12-22 02:09-0500\n"
+"POT-Creation-Date: 2023-12-23 16:03-0500\n"
 "PO-Revision-Date: 2023-09-06 19:22+0000\n"
 "Last-Translator: Hans Peter <Unknown>\n"
 "Language-Team: German <de@li.org>\n"
@@ -48,7 +48,7 @@ msgstr "7 × 7-Bereich"
 msgid "9 x 9 Region"
 msgstr "9 × 9-Bereich"
 
-#: ../Pinta/MainWindow.cs:328
+#: ../Pinta/MainWindow.cs:349
 msgid "A_dd-ins"
 msgstr "Erweiterungen"
 
@@ -78,7 +78,7 @@ msgstr "Add-In-Manager..."
 msgid "Added"
 msgstr "Hinzugefügt"
 
-#: ../Pinta/MainWindow.cs:372
+#: ../Pinta/MainWindow.cs:382
 msgid "Adjustments"
 msgstr ""
 
@@ -580,11 +580,11 @@ msgstr "Kantenverhalten"
 msgid "Edge Detect"
 msgstr "Kanten erkennen"
 
-#: ../Pinta/MainWindow.cs:324
+#: ../Pinta/MainWindow.cs:345
 msgid "Effe_cts"
 msgstr "Effe_kte"
 
-#: ../Pinta/MainWindow.cs:366
+#: ../Pinta/MainWindow.cs:376
 msgid "Effects"
 msgstr ""
 
@@ -636,6 +636,10 @@ msgstr "Faktor"
 #: ../Pinta/Actions/File/NewScreenshotAction.cs:103
 msgid "Failed to access XDG Desktop Portals"
 msgstr "Zugriff auf XDG Desktop Portale fehlgeschlagen"
+
+#: ../Pinta/MainWindow.cs:269
+msgid "Failed to initialize add-in"
+msgstr ""
 
 #: ../Pinta.Gui.Addins/InstallDialog.cs:152
 msgid "Failed to load extension package"
@@ -755,7 +759,7 @@ msgstr "Gefrorenes Glas"
 msgid "Fullscreen"
 msgstr "Vollbild"
 
-#: ../Pinta.Gui.Addins/AddinManagerDialog.cs:64
+#: ../Pinta.Gui.Addins/AddinManagerDialog.cs:60
 msgid "Gallery"
 msgstr "Galerie"
 
@@ -827,7 +831,7 @@ msgstr "ICO-Dateien können nicht größer als 255 × 255 Pixel sein."
 msgid "If you don't save, all changes will be permanently lost."
 msgstr "Wenn Sie nicht speichern, gehen alle Änderungen dauerhaft verloren."
 
-#: ../Pinta.Tools/Tools/ColorPickerTool.cs:240 ../Pinta/MainWindow.cs:378
+#: ../Pinta.Tools/Tools/ColorPickerTool.cs:240 ../Pinta/MainWindow.cs:388
 msgid "Image"
 msgstr "Bild"
 
@@ -901,7 +905,7 @@ msgstr "Aus Datei installieren …"
 msgid "Install..."
 msgstr "Installieren …"
 
-#: ../Pinta.Gui.Addins/AddinManagerDialog.cs:60
+#: ../Pinta.Gui.Addins/AddinManagerDialog.cs:62
 msgid "Installed"
 msgstr "Installiert"
 
@@ -1208,7 +1212,7 @@ msgstr "Leuchtkraft"
 msgid "Magic Wand Select"
 msgstr "Zauberstab"
 
-#: ../Pinta/MainWindow.cs:360
+#: ../Pinta/MainWindow.cs:370
 msgid "Main Menu"
 msgstr ""
 
@@ -1941,6 +1945,12 @@ msgstr "Text - Finalisieren"
 msgid "Text Style"
 msgstr "Textstil"
 
+#. Translators: {0} is the name of an add-in.
+#: ../Pinta/MainWindow.cs:267
+#, csharp-format
+msgid "The '{0}' add-in may not be compatible with this version of Pinta"
+msgstr ""
+
 #: ../Pinta/Actions/Edit/PasteAction.cs:174
 msgid "The clipboard does not contain an image."
 msgstr "Die Zwischenablage enthält kein Bild."
@@ -2035,7 +2045,7 @@ msgstr "Werkzeug"
 msgid "Tool Box"
 msgstr "Werkzeugkasten"
 
-#: ../Pinta/MainWindow.cs:342
+#: ../Pinta/MainWindow.cs:363
 msgid "Tool Windows"
 msgstr "Werkzeugfenster"
 
@@ -2113,7 +2123,7 @@ msgstr "Nicht unterstütztes Palettenformat"
 msgid "Update..."
 msgstr "Aktualisere..."
 
-#: ../Pinta.Gui.Addins/AddinManagerDialog.cs:62
+#: ../Pinta.Gui.Addins/AddinManagerDialog.cs:64
 msgid "Updates"
 msgstr "Aktualisierungen"
 
@@ -2212,7 +2222,7 @@ msgstr "Verkleinern"
 msgid "Zoom to Selection"
 msgstr "Größe an Auswahl anpassen"
 
-#: ../Pinta/MainWindow.cs:320
+#: ../Pinta/MainWindow.cs:341
 msgid "_Adjustments"
 msgstr "A_npassungen"
 
@@ -2225,23 +2235,23 @@ msgstr "_Abbrechen"
 msgid "_Discard"
 msgstr "_Verwerfen"
 
-#: ../Pinta/MainWindow.cs:303
+#: ../Pinta/MainWindow.cs:324
 msgid "_Edit"
 msgstr "Bearbeite_n"
 
-#: ../Pinta/MainWindow.cs:299
+#: ../Pinta/MainWindow.cs:320
 msgid "_File"
 msgstr "_Datei"
 
-#: ../Pinta/MainWindow.cs:336
+#: ../Pinta/MainWindow.cs:357
 msgid "_Help"
 msgstr "_Hilfe"
 
-#: ../Pinta/MainWindow.cs:312
+#: ../Pinta/MainWindow.cs:333
 msgid "_Image"
 msgstr "_Bild"
 
-#: ../Pinta/MainWindow.cs:316
+#: ../Pinta/MainWindow.cs:337
 msgid "_Layers"
 msgstr "_Ebenen"
 
@@ -2254,11 +2264,11 @@ msgstr "_Bestätigen"
 msgid "_Save"
 msgstr "_Speichern"
 
-#: ../Pinta/MainWindow.cs:307
+#: ../Pinta/MainWindow.cs:328
 msgid "_View"
 msgstr "_Ansicht"
 
-#: ../Pinta/MainWindow.cs:332
+#: ../Pinta/MainWindow.cs:353
 msgid "_Window"
 msgstr "_Fenster"
 

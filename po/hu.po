@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: pinta\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-12-22 02:09-0500\n"
+"POT-Creation-Date: 2023-12-23 16:03-0500\n"
 "PO-Revision-Date: 2020-04-27 09:04+0000\n"
 "Last-Translator: El Koulali András <Unknown>\n"
 "Language-Team: Hungarian <hu@li.org>\n"
@@ -48,7 +48,7 @@ msgstr "7x7-es terület"
 msgid "9 x 9 Region"
 msgstr "9x9-es terület"
 
-#: ../Pinta/MainWindow.cs:328
+#: ../Pinta/MainWindow.cs:349
 msgid "A_dd-ins"
 msgstr ""
 
@@ -78,7 +78,7 @@ msgstr ""
 msgid "Added"
 msgstr ""
 
-#: ../Pinta/MainWindow.cs:372
+#: ../Pinta/MainWindow.cs:382
 msgid "Adjustments"
 msgstr ""
 
@@ -573,11 +573,11 @@ msgstr "Szélek viselkedése"
 msgid "Edge Detect"
 msgstr "Élek észlelése"
 
-#: ../Pinta/MainWindow.cs:324
+#: ../Pinta/MainWindow.cs:345
 msgid "Effe_cts"
 msgstr "_Effektusok"
 
-#: ../Pinta/MainWindow.cs:366
+#: ../Pinta/MainWindow.cs:376
 msgid "Effects"
 msgstr ""
 
@@ -628,6 +628,10 @@ msgstr "Tényező"
 
 #: ../Pinta/Actions/File/NewScreenshotAction.cs:103
 msgid "Failed to access XDG Desktop Portals"
+msgstr ""
+
+#: ../Pinta/MainWindow.cs:269
+msgid "Failed to initialize add-in"
 msgstr ""
 
 #: ../Pinta.Gui.Addins/InstallDialog.cs:152
@@ -748,7 +752,7 @@ msgstr "Fagyos üveg"
 msgid "Fullscreen"
 msgstr "Teljes képernyő"
 
-#: ../Pinta.Gui.Addins/AddinManagerDialog.cs:64
+#: ../Pinta.Gui.Addins/AddinManagerDialog.cs:60
 msgid "Gallery"
 msgstr "Galéria"
 
@@ -818,7 +822,7 @@ msgstr "Az ICO fájlok nem lehetnek nagyobbak 255x255 képpontnál."
 msgid "If you don't save, all changes will be permanently lost."
 msgstr "Ha nem menti, akkor minden változtatás véglegesen elvész."
 
-#: ../Pinta.Tools/Tools/ColorPickerTool.cs:240 ../Pinta/MainWindow.cs:378
+#: ../Pinta.Tools/Tools/ColorPickerTool.cs:240 ../Pinta/MainWindow.cs:388
 msgid "Image"
 msgstr "Kép"
 
@@ -892,7 +896,7 @@ msgstr "Telepítés fájlból…"
 msgid "Install..."
 msgstr "Telepítés…"
 
-#: ../Pinta.Gui.Addins/AddinManagerDialog.cs:60
+#: ../Pinta.Gui.Addins/AddinManagerDialog.cs:62
 msgid "Installed"
 msgstr "Telepítve"
 
@@ -1148,7 +1152,7 @@ msgstr "Fényesség"
 msgid "Magic Wand Select"
 msgstr "Kijelölés varázspálcával"
 
-#: ../Pinta/MainWindow.cs:360
+#: ../Pinta/MainWindow.cs:370
 msgid "Main Menu"
 msgstr ""
 
@@ -1874,6 +1878,12 @@ msgstr ""
 msgid "Text Style"
 msgstr "Szöveg stílus"
 
+#. Translators: {0} is the name of an add-in.
+#: ../Pinta/MainWindow.cs:267
+#, csharp-format
+msgid "The '{0}' add-in may not be compatible with this version of Pinta"
+msgstr ""
+
 #: ../Pinta/Actions/Edit/PasteAction.cs:174
 msgid "The clipboard does not contain an image."
 msgstr "A vágólap nem tartalmaz képet."
@@ -1962,7 +1972,7 @@ msgstr "Eszköz"
 msgid "Tool Box"
 msgstr ""
 
-#: ../Pinta/MainWindow.cs:342
+#: ../Pinta/MainWindow.cs:363
 msgid "Tool Windows"
 msgstr "Eszközablakok"
 
@@ -2040,7 +2050,7 @@ msgstr ""
 msgid "Update..."
 msgstr ""
 
-#: ../Pinta.Gui.Addins/AddinManagerDialog.cs:62
+#: ../Pinta.Gui.Addins/AddinManagerDialog.cs:64
 msgid "Updates"
 msgstr "Frissítések"
 
@@ -2136,7 +2146,7 @@ msgstr "Kicsinyítés"
 msgid "Zoom to Selection"
 msgstr "Nagyítás a kijelölésre"
 
-#: ../Pinta/MainWindow.cs:320
+#: ../Pinta/MainWindow.cs:341
 msgid "_Adjustments"
 msgstr "_Korrekciók"
 
@@ -2149,23 +2159,23 @@ msgstr ""
 msgid "_Discard"
 msgstr ""
 
-#: ../Pinta/MainWindow.cs:303
+#: ../Pinta/MainWindow.cs:324
 msgid "_Edit"
 msgstr "_Szerkesztés"
 
-#: ../Pinta/MainWindow.cs:299
+#: ../Pinta/MainWindow.cs:320
 msgid "_File"
 msgstr "_Fájl"
 
-#: ../Pinta/MainWindow.cs:336
+#: ../Pinta/MainWindow.cs:357
 msgid "_Help"
 msgstr "_Súgó"
 
-#: ../Pinta/MainWindow.cs:312
+#: ../Pinta/MainWindow.cs:333
 msgid "_Image"
 msgstr "_Kép"
 
-#: ../Pinta/MainWindow.cs:316
+#: ../Pinta/MainWindow.cs:337
 msgid "_Layers"
 msgstr "_Rétegek"
 
@@ -2178,11 +2188,11 @@ msgstr ""
 msgid "_Save"
 msgstr ""
 
-#: ../Pinta/MainWindow.cs:307
+#: ../Pinta/MainWindow.cs:328
 msgid "_View"
 msgstr "_Nézet"
 
-#: ../Pinta/MainWindow.cs:332
+#: ../Pinta/MainWindow.cs:353
 msgid "_Window"
 msgstr "_Ablak"
 

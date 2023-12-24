@@ -97,12 +97,8 @@ public abstract class BasePaintBrush
 	/// the brush should perform its drawing.
 	/// </summary>
 	/// <param name="g">The current Cairo drawing context.</param>
-	/// <param name="strokeColor">The current stroke color.</param>
 	/// <param name="surface">Image surface to draw on.</param>
-	/// <param name="x">The current x coordinate of the mouse.</param>
-	/// <param name="y">The current y coordinate of the mouse.</param>
-	/// <param name="lastX">The previous x coordinate of the mouse.</param>
-	/// <param name="lastY">The previous y coordinate of the mouse.</param>
+	/// <param name="strokeArgs">Information about the current stroke and mouse movement.</param>
 	/// <returns>A rectangle containing the area of the canvas that should be redrawn.</returns>
 	protected abstract RectangleI OnMouseMove (
 		Context g,

@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: pinta\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-12-22 02:09-0500\n"
+"POT-Creation-Date: 2023-12-23 16:03-0500\n"
 "PO-Revision-Date: 2023-02-23 05:42+0000\n"
 "Last-Translator: Wu Tang <Unknown>\n"
 "Language-Team: Chinese (Simplified) <zh_CN@li.org>\n"
@@ -48,7 +48,7 @@ msgstr "7 x 7 区域"
 msgid "9 x 9 Region"
 msgstr "9 x 9 区域"
 
-#: ../Pinta/MainWindow.cs:328
+#: ../Pinta/MainWindow.cs:349
 msgid "A_dd-ins"
 msgstr "组件A_dd-ins"
 
@@ -78,7 +78,7 @@ msgstr ""
 msgid "Added"
 msgstr "已添加"
 
-#: ../Pinta/MainWindow.cs:372
+#: ../Pinta/MainWindow.cs:382
 msgid "Adjustments"
 msgstr ""
 
@@ -572,11 +572,11 @@ msgstr "边缘行为"
 msgid "Edge Detect"
 msgstr "边缘探测"
 
-#: ../Pinta/MainWindow.cs:324
+#: ../Pinta/MainWindow.cs:345
 msgid "Effe_cts"
 msgstr "效果(_C)"
 
-#: ../Pinta/MainWindow.cs:366
+#: ../Pinta/MainWindow.cs:376
 msgid "Effects"
 msgstr ""
 
@@ -628,6 +628,10 @@ msgstr "系数"
 #: ../Pinta/Actions/File/NewScreenshotAction.cs:103
 msgid "Failed to access XDG Desktop Portals"
 msgstr "访问XDG桌面门户失败"
+
+#: ../Pinta/MainWindow.cs:269
+msgid "Failed to initialize add-in"
+msgstr ""
 
 #: ../Pinta.Gui.Addins/InstallDialog.cs:152
 msgid "Failed to load extension package"
@@ -747,7 +751,7 @@ msgstr "磨砂玻璃"
 msgid "Fullscreen"
 msgstr "全屏"
 
-#: ../Pinta.Gui.Addins/AddinManagerDialog.cs:64
+#: ../Pinta.Gui.Addins/AddinManagerDialog.cs:60
 msgid "Gallery"
 msgstr "插件库"
 
@@ -817,7 +821,7 @@ msgstr "ICO文件不能大于255 x 255像素。"
 msgid "If you don't save, all changes will be permanently lost."
 msgstr "如果您不保存，所有修改 将会永久丢失。"
 
-#: ../Pinta.Tools/Tools/ColorPickerTool.cs:240 ../Pinta/MainWindow.cs:378
+#: ../Pinta.Tools/Tools/ColorPickerTool.cs:240 ../Pinta/MainWindow.cs:388
 msgid "Image"
 msgstr "图像"
 
@@ -891,7 +895,7 @@ msgstr "从文件安装..."
 msgid "Install..."
 msgstr "安装..."
 
-#: ../Pinta.Gui.Addins/AddinManagerDialog.cs:60
+#: ../Pinta.Gui.Addins/AddinManagerDialog.cs:62
 msgid "Installed"
 msgstr "已安装"
 
@@ -1149,7 +1153,7 @@ msgstr "发光度"
 msgid "Magic Wand Select"
 msgstr "魔术棒选择"
 
-#: ../Pinta/MainWindow.cs:360
+#: ../Pinta/MainWindow.cs:370
 msgid "Main Menu"
 msgstr ""
 
@@ -1878,6 +1882,12 @@ msgstr "文本 - 确认"
 msgid "Text Style"
 msgstr "文本样式"
 
+#. Translators: {0} is the name of an add-in.
+#: ../Pinta/MainWindow.cs:267
+#, csharp-format
+msgid "The '{0}' add-in may not be compatible with this version of Pinta"
+msgstr ""
+
 #: ../Pinta/Actions/Edit/PasteAction.cs:174
 msgid "The clipboard does not contain an image."
 msgstr "剪切板中没有图像"
@@ -1966,7 +1976,7 @@ msgstr "工具"
 msgid "Tool Box"
 msgstr "工具箱"
 
-#: ../Pinta/MainWindow.cs:342
+#: ../Pinta/MainWindow.cs:363
 msgid "Tool Windows"
 msgstr "工具窗口"
 
@@ -2044,7 +2054,7 @@ msgstr ""
 msgid "Update..."
 msgstr ""
 
-#: ../Pinta.Gui.Addins/AddinManagerDialog.cs:62
+#: ../Pinta.Gui.Addins/AddinManagerDialog.cs:64
 msgid "Updates"
 msgstr "更新"
 
@@ -2140,7 +2150,7 @@ msgstr "缩小"
 msgid "Zoom to Selection"
 msgstr "缩放至选择部分"
 
-#: ../Pinta/MainWindow.cs:320
+#: ../Pinta/MainWindow.cs:341
 msgid "_Adjustments"
 msgstr "调整"
 
@@ -2153,23 +2163,23 @@ msgstr ""
 msgid "_Discard"
 msgstr ""
 
-#: ../Pinta/MainWindow.cs:303
+#: ../Pinta/MainWindow.cs:324
 msgid "_Edit"
 msgstr "编辑"
 
-#: ../Pinta/MainWindow.cs:299
+#: ../Pinta/MainWindow.cs:320
 msgid "_File"
 msgstr "文件"
 
-#: ../Pinta/MainWindow.cs:336
+#: ../Pinta/MainWindow.cs:357
 msgid "_Help"
 msgstr "帮助"
 
-#: ../Pinta/MainWindow.cs:312
+#: ../Pinta/MainWindow.cs:333
 msgid "_Image"
 msgstr "图像"
 
-#: ../Pinta/MainWindow.cs:316
+#: ../Pinta/MainWindow.cs:337
 msgid "_Layers"
 msgstr "图层"
 
@@ -2182,11 +2192,11 @@ msgstr ""
 msgid "_Save"
 msgstr ""
 
-#: ../Pinta/MainWindow.cs:307
+#: ../Pinta/MainWindow.cs:328
 msgid "_View"
 msgstr "视图"
 
-#: ../Pinta/MainWindow.cs:332
+#: ../Pinta/MainWindow.cs:353
 msgid "_Window"
 msgstr "窗口"
 

@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: pinta\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-12-22 02:09-0500\n"
+"POT-Creation-Date: 2023-12-23 16:03-0500\n"
 "PO-Revision-Date: 2016-08-19 19:11+0000\n"
 "Last-Translator: Alan <Unknown>\n"
 "Language-Team: Breton <br@li.org>\n"
@@ -48,7 +48,7 @@ msgstr "Maez 7 x 7"
 msgid "9 x 9 Region"
 msgstr "Maez 9 x 9"
 
-#: ../Pinta/MainWindow.cs:328
+#: ../Pinta/MainWindow.cs:349
 msgid "A_dd-ins"
 msgstr "Ouzhpena_dennoù"
 
@@ -78,7 +78,7 @@ msgstr ""
 msgid "Added"
 msgstr "Ouzhpennet"
 
-#: ../Pinta/MainWindow.cs:372
+#: ../Pinta/MainWindow.cs:382
 msgid "Adjustments"
 msgstr ""
 
@@ -572,11 +572,11 @@ msgstr "Emzalc'h ar riblenn"
 msgid "Edge Detect"
 msgstr "Dinoiñ ar riblennoù"
 
-#: ../Pinta/MainWindow.cs:324
+#: ../Pinta/MainWindow.cs:345
 msgid "Effe_cts"
 msgstr "Efe_doù"
 
-#: ../Pinta/MainWindow.cs:366
+#: ../Pinta/MainWindow.cs:376
 msgid "Effects"
 msgstr ""
 
@@ -627,6 +627,10 @@ msgstr "Parenn"
 
 #: ../Pinta/Actions/File/NewScreenshotAction.cs:103
 msgid "Failed to access XDG Desktop Portals"
+msgstr ""
+
+#: ../Pinta/MainWindow.cs:269
+msgid "Failed to initialize add-in"
 msgstr ""
 
 #: ../Pinta.Gui.Addins/InstallDialog.cs:152
@@ -747,7 +751,7 @@ msgstr "Gwerenn dilufr"
 msgid "Fullscreen"
 msgstr "Skrammad a-bezh"
 
-#: ../Pinta.Gui.Addins/AddinManagerDialog.cs:64
+#: ../Pinta.Gui.Addins/AddinManagerDialog.cs:60
 msgid "Gallery"
 msgstr "Garidell"
 
@@ -819,7 +823,7 @@ msgstr "Ar restroù mod ICO n'hallont ket bezañ brasoc'h eget 255 x 255 piksel.
 msgid "If you don't save, all changes will be permanently lost."
 msgstr "Ma ne enrollot ket e vo kollet an holl gemmoù da vat."
 
-#: ../Pinta.Tools/Tools/ColorPickerTool.cs:240 ../Pinta/MainWindow.cs:378
+#: ../Pinta.Tools/Tools/ColorPickerTool.cs:240 ../Pinta/MainWindow.cs:388
 msgid "Image"
 msgstr "Skeudenn"
 
@@ -893,7 +897,7 @@ msgstr "Staliañ adalek ur restr"
 msgid "Install..."
 msgstr "Staliañ ..."
 
-#: ../Pinta.Gui.Addins/AddinManagerDialog.cs:60
+#: ../Pinta.Gui.Addins/AddinManagerDialog.cs:62
 msgid "Installed"
 msgstr "Staliet"
 
@@ -1151,7 +1155,7 @@ msgstr "Lintr"
 msgid "Magic Wand Select"
 msgstr "Diuzad dre ar walenn hudus"
 
-#: ../Pinta/MainWindow.cs:360
+#: ../Pinta/MainWindow.cs:370
 msgid "Main Menu"
 msgstr ""
 
@@ -1877,6 +1881,12 @@ msgstr "Skrid - Peurechuiñ"
 msgid "Text Style"
 msgstr "Stil an destenn"
 
+#. Translators: {0} is the name of an add-in.
+#: ../Pinta/MainWindow.cs:267
+#, csharp-format
+msgid "The '{0}' add-in may not be compatible with this version of Pinta"
+msgstr ""
+
 #: ../Pinta/Actions/Edit/PasteAction.cs:174
 msgid "The clipboard does not contain an image."
 msgstr "N'eus skeudenn ebet e-barzh ar golver."
@@ -1965,7 +1975,7 @@ msgstr "Benveg"
 msgid "Tool Box"
 msgstr ""
 
-#: ../Pinta/MainWindow.cs:342
+#: ../Pinta/MainWindow.cs:363
 msgid "Tool Windows"
 msgstr "Prenestr an ostilhoù"
 
@@ -2043,7 +2053,7 @@ msgstr ""
 msgid "Update..."
 msgstr ""
 
-#: ../Pinta.Gui.Addins/AddinManagerDialog.cs:62
+#: ../Pinta.Gui.Addins/AddinManagerDialog.cs:64
 msgid "Updates"
 msgstr "Hizivadennoù"
 
@@ -2140,7 +2150,7 @@ msgstr "Zoum bihanaat"
 msgid "Zoom to Selection"
 msgstr "Zoumañ da framm an diuzad"
 
-#: ../Pinta/MainWindow.cs:320
+#: ../Pinta/MainWindow.cs:341
 msgid "_Adjustments"
 msgstr "_Kengeidadurioù"
 
@@ -2153,23 +2163,23 @@ msgstr ""
 msgid "_Discard"
 msgstr ""
 
-#: ../Pinta/MainWindow.cs:303
+#: ../Pinta/MainWindow.cs:324
 msgid "_Edit"
 msgstr "_Embann"
 
-#: ../Pinta/MainWindow.cs:299
+#: ../Pinta/MainWindow.cs:320
 msgid "_File"
 msgstr "_Restr"
 
-#: ../Pinta/MainWindow.cs:336
+#: ../Pinta/MainWindow.cs:357
 msgid "_Help"
 msgstr "_Skoazell"
 
-#: ../Pinta/MainWindow.cs:312
+#: ../Pinta/MainWindow.cs:333
 msgid "_Image"
 msgstr "_Skeudenn"
 
-#: ../Pinta/MainWindow.cs:316
+#: ../Pinta/MainWindow.cs:337
 msgid "_Layers"
 msgstr "_Treuzfollenn"
 
@@ -2182,11 +2192,11 @@ msgstr ""
 msgid "_Save"
 msgstr ""
 
-#: ../Pinta/MainWindow.cs:307
+#: ../Pinta/MainWindow.cs:328
 msgid "_View"
 msgstr "_Gwelout"
 
-#: ../Pinta/MainWindow.cs:332
+#: ../Pinta/MainWindow.cs:353
 msgid "_Window"
 msgstr "_Prenestr"
 

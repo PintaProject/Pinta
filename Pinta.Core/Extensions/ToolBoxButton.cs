@@ -45,10 +45,13 @@ public sealed class ToolBoxButton : ToggleButton
 		AddCssClass (AdwaitaStyles.Flat);
 
 		Show ();
+
+		string shortcutText = "";
 		if (tool.ShortcutKey != 0) {
-			var shortcut_label = Translations.GetString ("Shortcut key");
-			TooltipText = $"{tool.Name}\n{shortcut_label}: {tool.ShortcutKey.ToString ().ToUpperInvariant ()}\n\n{tool.StatusBarText}";
-		} else
-			TooltipText = tool.Name;
+			var shortcutLabel = Translations.GetString ("Shortcut key");
+			shortcutText = $"{shortcutLabel}: {tool.ShortcutKey.ToString ().ToUpperInvariant ()}\n";
+		}
+
+		TooltipText = $"{tool.Name}\n{shortcutText}\n{tool.StatusBarText}";
 	}
 }
