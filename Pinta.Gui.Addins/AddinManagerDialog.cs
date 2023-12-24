@@ -56,12 +56,12 @@ public sealed class AddinManagerDialog : Adw.Window
 		content.Append (toast_overlay);
 		Content = content;
 
+		gallery_list = new AddinListView ();
+		view_stack.AddTitledWithIcon (gallery_list, null, Translations.GetString ("Gallery"), StandardIcons.SystemSoftwareInstall);
 		installed_list = new AddinListView ();
 		view_stack.AddTitledWithIcon (installed_list, null, Translations.GetString ("Installed"), StandardIcons.ApplicationAddon);
 		updates_list = new AddinListView ();
 		view_stack.AddTitledWithIcon (updates_list, "updates", Translations.GetString ("Updates"), StandardIcons.SoftwareUpdateAvailable);
-		gallery_list = new AddinListView ();
-		view_stack.AddTitledWithIcon (gallery_list, null, Translations.GetString ("Gallery"), StandardIcons.SystemSoftwareInstall);
 
 		installed_list.OnAddinChanged += (_, _) => LoadAll ();
 		updates_list.OnAddinChanged += (_, _) => LoadAll ();
