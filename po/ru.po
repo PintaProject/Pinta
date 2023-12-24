@@ -8,10 +8,10 @@ msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2023-12-23 16:03-0500\n"
-"PO-Revision-Date: 2023-12-24 03:16+0000\n"
+"PO-Revision-Date: 2023-12-26 04:12+0000\n"
 "Last-Translator: Сергей <asvmail.as@gmail.com>\n"
-"Language-Team: Russian <https://hosted.weblate.org/projects/pinta/pinta/ru/"
-">\n"
+"Language-Team: Russian <https://hosted.weblate.org/projects/pinta/pinta/ru/>"
+"\n"
 "Language: ru\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -483,7 +483,7 @@ msgstr "Покрытие"
 #: ../Pinta.Core/Actions/ImageActions.cs:47
 #: ../Pinta.Core/Actions/ImageActions.cs:284
 msgid "Crop to Selection"
-msgstr "Откадрировать по выделенному"
+msgstr "Кадрировать по выделенному"
 
 #: ../Pinta.Effects/Adjustments/CurvesEffect.cs:26
 #: ../Pinta.Effects/Dialogs/Effects.CurvesDialog.cs:87
@@ -840,7 +840,7 @@ msgstr "Если вы не сохраните изменения, они буд�
 #: ../Pinta.Tools/Tools/ColorPickerTool.cs:240 ../Pinta/MainWindow.cs:388
 #: ../Pinta/MainWindow.cs:378
 msgid "Image"
-msgstr "изображение"
+msgstr "Изображение"
 
 #: ../xdg/pinta.desktop.in.h:3
 msgid "Image Editor"
