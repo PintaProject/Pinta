@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: pinta\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-12-22 02:09-0500\n"
+"POT-Creation-Date: 2023-12-23 16:03-0500\n"
 "PO-Revision-Date: 2023-04-08 15:22+0000\n"
 "Last-Translator: Rizal Muttaqin <Unknown>\n"
 "Language-Team: Indonesian <permataharahap@gmail.com>\n"
@@ -50,7 +50,7 @@ msgstr "Region 7 x 7"
 msgid "9 x 9 Region"
 msgstr "Region 9 x 9"
 
-#: ../Pinta/MainWindow.cs:328
+#: ../Pinta/MainWindow.cs:349
 msgid "A_dd-ins"
 msgstr "A_dd-in"
 
@@ -80,7 +80,7 @@ msgstr ""
 msgid "Added"
 msgstr "Ditambah"
 
-#: ../Pinta/MainWindow.cs:372
+#: ../Pinta/MainWindow.cs:382
 msgid "Adjustments"
 msgstr ""
 
@@ -580,11 +580,11 @@ msgstr "Sifat Tepian"
 msgid "Edge Detect"
 msgstr "Deteksi Tepian"
 
-#: ../Pinta/MainWindow.cs:324
+#: ../Pinta/MainWindow.cs:345
 msgid "Effe_cts"
 msgstr "Efe_k"
 
-#: ../Pinta/MainWindow.cs:366
+#: ../Pinta/MainWindow.cs:376
 msgid "Effects"
 msgstr ""
 
@@ -636,6 +636,10 @@ msgstr "Faktor"
 #: ../Pinta/Actions/File/NewScreenshotAction.cs:103
 msgid "Failed to access XDG Desktop Portals"
 msgstr "Gagal mengakses Portal Desktop XDG"
+
+#: ../Pinta/MainWindow.cs:269
+msgid "Failed to initialize add-in"
+msgstr ""
 
 #: ../Pinta.Gui.Addins/InstallDialog.cs:152
 msgid "Failed to load extension package"
@@ -755,7 +759,7 @@ msgstr "Kaca Buram"
 msgid "Fullscreen"
 msgstr "Layar Penuh"
 
-#: ../Pinta.Gui.Addins/AddinManagerDialog.cs:64
+#: ../Pinta.Gui.Addins/AddinManagerDialog.cs:60
 msgid "Gallery"
 msgstr "Galeri"
 
@@ -827,7 +831,7 @@ msgstr "Berkas ICO tidak boleh lebih besar dari 255 x 255 piksel."
 msgid "If you don't save, all changes will be permanently lost."
 msgstr "Bila Anda tidak simpan, semua perubahan akan hilang."
 
-#: ../Pinta.Tools/Tools/ColorPickerTool.cs:240 ../Pinta/MainWindow.cs:378
+#: ../Pinta.Tools/Tools/ColorPickerTool.cs:240 ../Pinta/MainWindow.cs:388
 msgid "Image"
 msgstr "Gambar"
 
@@ -901,7 +905,7 @@ msgstr "Instal dari berkas..."
 msgid "Install..."
 msgstr "Instal..."
 
-#: ../Pinta.Gui.Addins/AddinManagerDialog.cs:60
+#: ../Pinta.Gui.Addins/AddinManagerDialog.cs:62
 msgid "Installed"
 msgstr "Terpasang"
 
@@ -1194,7 +1198,7 @@ msgstr "Kecemerlangan"
 msgid "Magic Wand Select"
 msgstr "Pemilih Tongkat Ajaib"
 
-#: ../Pinta/MainWindow.cs:360
+#: ../Pinta/MainWindow.cs:370
 msgid "Main Menu"
 msgstr ""
 
@@ -1927,6 +1931,12 @@ msgstr "Teks - Selesaikan"
 msgid "Text Style"
 msgstr "Corak Teks"
 
+#. Translators: {0} is the name of an add-in.
+#: ../Pinta/MainWindow.cs:267
+#, csharp-format
+msgid "The '{0}' add-in may not be compatible with this version of Pinta"
+msgstr ""
+
 #: ../Pinta/Actions/Edit/PasteAction.cs:174
 msgid "The clipboard does not contain an image."
 msgstr "Papan klip tidak berisi gambar."
@@ -2015,7 +2025,7 @@ msgstr "Alat"
 msgid "Tool Box"
 msgstr "Kotak Alat"
 
-#: ../Pinta/MainWindow.cs:342
+#: ../Pinta/MainWindow.cs:363
 msgid "Tool Windows"
 msgstr "Jendela Alat"
 
@@ -2093,7 +2103,7 @@ msgstr "Format palet tidak didukung"
 msgid "Update..."
 msgstr ""
 
-#: ../Pinta.Gui.Addins/AddinManagerDialog.cs:62
+#: ../Pinta.Gui.Addins/AddinManagerDialog.cs:64
 msgid "Updates"
 msgstr "Pembaruan"
 
@@ -2191,7 +2201,7 @@ msgstr "Perkecil"
 msgid "Zoom to Selection"
 msgstr "Zum ke Pilihan"
 
-#: ../Pinta/MainWindow.cs:320
+#: ../Pinta/MainWindow.cs:341
 msgid "_Adjustments"
 msgstr "_Penyesuaian"
 
@@ -2204,23 +2214,23 @@ msgstr "_Batal"
 msgid "_Discard"
 msgstr "_Abaikan"
 
-#: ../Pinta/MainWindow.cs:303
+#: ../Pinta/MainWindow.cs:324
 msgid "_Edit"
 msgstr "_Sunting"
 
-#: ../Pinta/MainWindow.cs:299
+#: ../Pinta/MainWindow.cs:320
 msgid "_File"
 msgstr "Be_rkas"
 
-#: ../Pinta/MainWindow.cs:336
+#: ../Pinta/MainWindow.cs:357
 msgid "_Help"
 msgstr "_Bantuan"
 
-#: ../Pinta/MainWindow.cs:312
+#: ../Pinta/MainWindow.cs:333
 msgid "_Image"
 msgstr "_Citra"
 
-#: ../Pinta/MainWindow.cs:316
+#: ../Pinta/MainWindow.cs:337
 msgid "_Layers"
 msgstr "_Lapisan"
 
@@ -2233,11 +2243,11 @@ msgstr "_OK"
 msgid "_Save"
 msgstr "_Simpan"
 
-#: ../Pinta/MainWindow.cs:307
+#: ../Pinta/MainWindow.cs:328
 msgid "_View"
 msgstr "_Tampilan"
 
-#: ../Pinta/MainWindow.cs:332
+#: ../Pinta/MainWindow.cs:353
 msgid "_Window"
 msgstr "_Jendela"
 

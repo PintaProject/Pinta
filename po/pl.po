@@ -7,17 +7,17 @@ msgid ""
 msgstr ""
 "Project-Id-Version: pinta\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-12-22 02:09-0500\n"
-"PO-Revision-Date: 2023-12-18 11:08+0000\n"
+"POT-Creation-Date: 2023-12-23 16:03-0500\n"
+"PO-Revision-Date: 2023-12-23 21:04+0000\n"
 "Last-Translator: Matthaiks <kitynska@gmail.com>\n"
 "Language-Team: Polish <https://hosted.weblate.org/projects/pinta/pinta/pl/>\n"
 "Language: pl\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Plural-Forms: nplurals=3; plural=n==1 ? 0 : n%10>=2 && n%10<=4 && (n%100<10 "
-"|| n%100>=20) ? 1 : 2;\n"
-"X-Generator: Weblate 5.3\n"
+"Plural-Forms: nplurals=3; plural=(n==1 ? 0 : n%10>=2 && n%10<=4 && (n%100<10 "
+"|| n%100>=20) ? 1 : 2);\n"
+"X-Generator: Weblate 5.4-dev\n"
 "X-Launchpad-Export-Date: 2023-12-18 03:00+0000\n"
 
 #: ../Pinta.Gui.Addins/InstallDialog.cs:216
@@ -49,7 +49,7 @@ msgstr "Obszar 7×7"
 msgid "9 x 9 Region"
 msgstr "Obszar 9×9"
 
-#: ../Pinta/MainWindow.cs:328
+#: ../Pinta/MainWindow.cs:349
 msgid "A_dd-ins"
 msgstr "_Dodatki"
 
@@ -79,9 +79,9 @@ msgstr "Menedżer dodatków..."
 msgid "Added"
 msgstr "Dodano"
 
-#: ../Pinta/MainWindow.cs:372
+#: ../Pinta/MainWindow.cs:382
 msgid "Adjustments"
-msgstr ""
+msgstr "Regulacje"
 
 #: ../Pinta.Tools/Tools/ColorPickerTool.cs:193
 msgid "After select"
@@ -580,13 +580,13 @@ msgstr "Zachowanie przy krawędzi"
 msgid "Edge Detect"
 msgstr "Wykrywanie krawędzi"
 
-#: ../Pinta/MainWindow.cs:324
+#: ../Pinta/MainWindow.cs:345
 msgid "Effe_cts"
 msgstr "E_fekty"
 
-#: ../Pinta/MainWindow.cs:366
+#: ../Pinta/MainWindow.cs:376
 msgid "Effects"
-msgstr ""
+msgstr "Efekty"
 
 #: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:326
 #: ../Pinta.Tools/Editable/EditEngines/EllipseEditEngine.cs:34
@@ -622,7 +622,7 @@ msgstr "Różnica (prawy przycisk myszy)"
 #. Translators: This refers to expanding the canvas size when pasting a larger image.
 #: ../Pinta/Actions/Edit/PasteAction.cs:191
 msgid "Expand"
-msgstr ""
+msgstr "Rozszerz"
 
 #: ../Pinta.Gui.Addins/AddinManagerDialog.cs:204
 msgid "Extension packages"
@@ -636,6 +636,10 @@ msgstr "Współczynnik"
 #: ../Pinta/Actions/File/NewScreenshotAction.cs:103
 msgid "Failed to access XDG Desktop Portals"
 msgstr "Nie udało się uzyskać dostępu do portali komputerowe XDG"
+
+#: ../Pinta/MainWindow.cs:269
+msgid "Failed to initialize add-in"
+msgstr ""
 
 #: ../Pinta.Gui.Addins/InstallDialog.cs:152
 msgid "Failed to load extension package"
@@ -755,7 +759,7 @@ msgstr "Zamarznięte szkło"
 msgid "Fullscreen"
 msgstr "Pełny ekran"
 
-#: ../Pinta.Gui.Addins/AddinManagerDialog.cs:64
+#: ../Pinta.Gui.Addins/AddinManagerDialog.cs:60
 msgid "Gallery"
 msgstr "Galeria"
 
@@ -828,7 +832,7 @@ msgid "If you don't save, all changes will be permanently lost."
 msgstr ""
 "Jeśli nie zapiszesz obrazu, wszystkie wprowadzone zmiany zostaną utracone."
 
-#: ../Pinta.Tools/Tools/ColorPickerTool.cs:240 ../Pinta/MainWindow.cs:378
+#: ../Pinta.Tools/Tools/ColorPickerTool.cs:240 ../Pinta/MainWindow.cs:388
 msgid "Image"
 msgstr "Obraz"
 
@@ -902,7 +906,7 @@ msgstr "Instaluj z pliku…"
 msgid "Install..."
 msgstr "Zainstaluj…"
 
-#: ../Pinta.Gui.Addins/AddinManagerDialog.cs:60
+#: ../Pinta.Gui.Addins/AddinManagerDialog.cs:62
 msgid "Installed"
 msgstr "Zainstalowano"
 
@@ -1204,9 +1208,9 @@ msgstr "Jaskrawość"
 msgid "Magic Wand Select"
 msgstr "Magiczna różdżka"
 
-#: ../Pinta/MainWindow.cs:360
+#: ../Pinta/MainWindow.cs:370
 msgid "Main Menu"
-msgstr ""
+msgstr "Menu główne"
 
 #: ../Pinta/Dialogs/ResizeCanvasDialog.cs:76
 #: ../Pinta/Dialogs/ResizeImageDialog.cs:66
@@ -1558,7 +1562,7 @@ msgstr "Moc"
 #. Translators: This refers to preserving the current canvas size when pasting a larger image.
 #: ../Pinta/Actions/Edit/PasteAction.cs:189
 msgid "Preserve"
-msgstr ""
+msgstr "Zachowaj"
 
 #: ../Pinta/Dialogs/NewImageDialog.cs:101
 msgid "Preset:"
@@ -1935,6 +1939,12 @@ msgstr "Ukończ tekst"
 msgid "Text Style"
 msgstr "Styl tekstu"
 
+#. Translators: {0} is the name of an add-in.
+#: ../Pinta/MainWindow.cs:267
+#, csharp-format
+msgid "The '{0}' add-in may not be compatible with this version of Pinta"
+msgstr ""
+
 #: ../Pinta/Actions/Edit/PasteAction.cs:174
 msgid "The clipboard does not contain an image."
 msgstr "Schowek nie zawiera żadnego obrazu."
@@ -1964,6 +1974,7 @@ msgid ""
 "The image being pasted is larger than the canvas. What would you like to do "
 "to the canvas size?"
 msgstr ""
+"Wklejany obraz jest większy niż płótno. Co chcesz zrobić z rozmiarem płótna?"
 
 #: ../Pinta.Gui.Addins/InstallDialog.cs:293
 msgid "The installation failed!"
@@ -2027,7 +2038,7 @@ msgstr "Narzędzie"
 msgid "Tool Box"
 msgstr "Przybornik"
 
-#: ../Pinta/MainWindow.cs:342
+#: ../Pinta/MainWindow.cs:363
 msgid "Tool Windows"
 msgstr "Okna narzędziowe"
 
@@ -2105,7 +2116,7 @@ msgstr "Nieobsługiwany format palety"
 msgid "Update..."
 msgstr "Aktualizuj..."
 
-#: ../Pinta.Gui.Addins/AddinManagerDialog.cs:62
+#: ../Pinta.Gui.Addins/AddinManagerDialog.cs:64
 msgid "Updates"
 msgstr "Aktualizacje"
 
@@ -2204,7 +2215,7 @@ msgstr "Pomniejsz"
 msgid "Zoom to Selection"
 msgstr "Powiększ do zaznaczenia"
 
-#: ../Pinta/MainWindow.cs:320
+#: ../Pinta/MainWindow.cs:341
 msgid "_Adjustments"
 msgstr "_Korekcja"
 
@@ -2217,23 +2228,23 @@ msgstr "_Anuluj"
 msgid "_Discard"
 msgstr "O_drzuć"
 
-#: ../Pinta/MainWindow.cs:303
+#: ../Pinta/MainWindow.cs:324
 msgid "_Edit"
 msgstr "_Edycja"
 
-#: ../Pinta/MainWindow.cs:299
+#: ../Pinta/MainWindow.cs:320
 msgid "_File"
 msgstr "_Plik"
 
-#: ../Pinta/MainWindow.cs:336
+#: ../Pinta/MainWindow.cs:357
 msgid "_Help"
 msgstr "Po_moc"
 
-#: ../Pinta/MainWindow.cs:312
+#: ../Pinta/MainWindow.cs:333
 msgid "_Image"
 msgstr "_Obraz"
 
-#: ../Pinta/MainWindow.cs:316
+#: ../Pinta/MainWindow.cs:337
 msgid "_Layers"
 msgstr "Wa_rstwy"
 
@@ -2246,11 +2257,11 @@ msgstr "_OK"
 msgid "_Save"
 msgstr "_Zapisz"
 
-#: ../Pinta/MainWindow.cs:307
+#: ../Pinta/MainWindow.cs:328
 msgid "_View"
 msgstr "_Widok"
 
-#: ../Pinta/MainWindow.cs:332
+#: ../Pinta/MainWindow.cs:353
 msgid "_Window"
 msgstr "_Okno"
 

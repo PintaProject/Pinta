@@ -7,18 +7,18 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-12-22 02:09-0500\n"
-"PO-Revision-Date: 2023-12-20 15:51+0000\n"
+"POT-Creation-Date: 2023-12-23 16:03-0500\n"
+"PO-Revision-Date: 2023-12-24 03:16+0000\n"
 "Last-Translator: Сергей <asvmail.as@gmail.com>\n"
-"Language-Team: Russian <https://hosted.weblate.org/projects/pinta/pinta/ru/"
-">\n"
+"Language-Team: Russian <https://hosted.weblate.org/projects/pinta/pinta/ru/>"
+"\n"
 "Language: ru\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Plural-Forms: nplurals=3; plural=n%10==1 && n%100!=11 ? 0 : n%10>=2 && "
-"n%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2;\n"
-"X-Generator: Weblate 5.3\n"
+"Plural-Forms: nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && "
+"n%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2);\n"
+"X-Generator: Weblate 5.4-dev\n"
 "X-Launchpad-Export-Date: 2023-12-18 03:00+0000\n"
 
 #: ../Pinta.Gui.Addins/InstallDialog.cs:216
@@ -50,7 +50,7 @@ msgstr "Область 7 на 7"
 msgid "9 x 9 Region"
 msgstr "Область 9 на 9"
 
-#: ../Pinta/MainWindow.cs:328
+#: ../Pinta/MainWindow.cs:349
 msgid "A_dd-ins"
 msgstr "_Дополнения"
 
@@ -80,9 +80,9 @@ msgstr "Менеджер дополнений..."
 msgid "Added"
 msgstr "Добавлено"
 
-#: ../Pinta/MainWindow.cs:372
+#: ../Pinta/MainWindow.cs:382
 msgid "Adjustments"
-msgstr ""
+msgstr "Коррекция"
 
 #: ../Pinta.Tools/Tools/ColorPickerTool.cs:193
 msgid "After select"
@@ -585,13 +585,13 @@ msgstr "Поведение на границе"
 msgid "Edge Detect"
 msgstr "Определение краёв"
 
-#: ../Pinta/MainWindow.cs:324
+#: ../Pinta/MainWindow.cs:345
 msgid "Effe_cts"
 msgstr "_Эффекты"
 
-#: ../Pinta/MainWindow.cs:366
+#: ../Pinta/MainWindow.cs:376
 msgid "Effects"
-msgstr ""
+msgstr "Эффекты"
 
 #: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:326
 #: ../Pinta.Tools/Editable/EditEngines/EllipseEditEngine.cs:34
@@ -627,7 +627,7 @@ msgstr "Отсоединить (-) (Правая кнопка мыши)"
 #. Translators: This refers to expanding the canvas size when pasting a larger image.
 #: ../Pinta/Actions/Edit/PasteAction.cs:191
 msgid "Expand"
-msgstr ""
+msgstr "Расширить"
 
 #: ../Pinta.Gui.Addins/AddinManagerDialog.cs:204
 msgid "Extension packages"
@@ -641,6 +641,10 @@ msgstr "Фактор"
 #: ../Pinta/Actions/File/NewScreenshotAction.cs:103
 msgid "Failed to access XDG Desktop Portals"
 msgstr "Не удалось получить доступ к XDG Desktop Portals"
+
+#: ../Pinta/MainWindow.cs:269
+msgid "Failed to initialize add-in"
+msgstr "Не удалось инициализировать дополнение"
 
 #: ../Pinta.Gui.Addins/InstallDialog.cs:152
 msgid "Failed to load extension package"
@@ -760,7 +764,7 @@ msgstr "Матовое стекло"
 msgid "Fullscreen"
 msgstr "Во весь экран"
 
-#: ../Pinta.Gui.Addins/AddinManagerDialog.cs:64
+#: ../Pinta.Gui.Addins/AddinManagerDialog.cs:60
 msgid "Gallery"
 msgstr "Галерея"
 
@@ -832,7 +836,7 @@ msgstr "Изображение в файле ICO не может быть бол
 msgid "If you don't save, all changes will be permanently lost."
 msgstr "Если вы не сохраните изменения, они будут потеряны безвозвратно."
 
-#: ../Pinta.Tools/Tools/ColorPickerTool.cs:240 ../Pinta/MainWindow.cs:378
+#: ../Pinta.Tools/Tools/ColorPickerTool.cs:240 ../Pinta/MainWindow.cs:388
 msgid "Image"
 msgstr "изображение"
 
@@ -906,7 +910,7 @@ msgstr "Установить из файла..."
 msgid "Install..."
 msgstr "Установка..."
 
-#: ../Pinta.Gui.Addins/AddinManagerDialog.cs:60
+#: ../Pinta.Gui.Addins/AddinManagerDialog.cs:62
 msgid "Installed"
 msgstr "Установлено"
 
@@ -1210,9 +1214,9 @@ msgstr "Светлота"
 msgid "Magic Wand Select"
 msgstr "Волшебная палочка"
 
-#: ../Pinta/MainWindow.cs:360
+#: ../Pinta/MainWindow.cs:370
 msgid "Main Menu"
-msgstr ""
+msgstr "Главное меню"
 
 #: ../Pinta/Dialogs/ResizeCanvasDialog.cs:76
 #: ../Pinta/Dialogs/ResizeImageDialog.cs:66
@@ -1565,7 +1569,7 @@ msgstr "Мощность"
 #. Translators: This refers to preserving the current canvas size when pasting a larger image.
 #: ../Pinta/Actions/Edit/PasteAction.cs:189
 msgid "Preserve"
-msgstr ""
+msgstr "Оставить"
 
 #: ../Pinta/Dialogs/NewImageDialog.cs:101
 msgid "Preset:"
@@ -1942,6 +1946,12 @@ msgstr "Текст - Завершить"
 msgid "Text Style"
 msgstr "Стиль текста"
 
+#. Translators: {0} is the name of an add-in.
+#: ../Pinta/MainWindow.cs:267
+#, csharp-format
+msgid "The '{0}' add-in may not be compatible with this version of Pinta"
+msgstr "Дополнение «{0}» может быть несовместимо с данной версией Pinta"
+
 #: ../Pinta/Actions/Edit/PasteAction.cs:174
 msgid "The clipboard does not contain an image."
 msgstr "Буфер обмена не содержит изображение."
@@ -1971,6 +1981,8 @@ msgid ""
 "The image being pasted is larger than the canvas. What would you like to do "
 "to the canvas size?"
 msgstr ""
+"Вставляемое изображение превышает размеры холста. Что бы вы хотели сделать с "
+"габаритами холста?"
 
 #: ../Pinta.Gui.Addins/InstallDialog.cs:293
 msgid "The installation failed!"
@@ -2034,7 +2046,7 @@ msgstr "Инструмент"
 msgid "Tool Box"
 msgstr "Инструменты"
 
-#: ../Pinta/MainWindow.cs:342
+#: ../Pinta/MainWindow.cs:363
 msgid "Tool Windows"
 msgstr "Инструментальные окна"
 
@@ -2112,7 +2124,7 @@ msgstr "Неподдерживаемый формат палитры"
 msgid "Update..."
 msgstr "Обновить..."
 
-#: ../Pinta.Gui.Addins/AddinManagerDialog.cs:62
+#: ../Pinta.Gui.Addins/AddinManagerDialog.cs:64
 msgid "Updates"
 msgstr "Обновления"
 
@@ -2211,7 +2223,7 @@ msgstr "Мельче"
 msgid "Zoom to Selection"
 msgstr "По размеру выделения"
 
-#: ../Pinta/MainWindow.cs:320
+#: ../Pinta/MainWindow.cs:341
 msgid "_Adjustments"
 msgstr "_Цвета"
 
@@ -2224,23 +2236,23 @@ msgstr "_Отменить"
 msgid "_Discard"
 msgstr "_Не сохранять"
 
-#: ../Pinta/MainWindow.cs:303
+#: ../Pinta/MainWindow.cs:324
 msgid "_Edit"
 msgstr "_Правка"
 
-#: ../Pinta/MainWindow.cs:299
+#: ../Pinta/MainWindow.cs:320
 msgid "_File"
 msgstr "_Файл"
 
-#: ../Pinta/MainWindow.cs:336
+#: ../Pinta/MainWindow.cs:357
 msgid "_Help"
 msgstr "_Справка"
 
-#: ../Pinta/MainWindow.cs:312
+#: ../Pinta/MainWindow.cs:333
 msgid "_Image"
 msgstr "_Изображение"
 
-#: ../Pinta/MainWindow.cs:316
+#: ../Pinta/MainWindow.cs:337
 msgid "_Layers"
 msgstr "С_лои"
 
@@ -2253,11 +2265,11 @@ msgstr "_ОК"
 msgid "_Save"
 msgstr "_Сохранить"
 
-#: ../Pinta/MainWindow.cs:307
+#: ../Pinta/MainWindow.cs:328
 msgid "_View"
 msgstr "_Вид"
 
-#: ../Pinta/MainWindow.cs:332
+#: ../Pinta/MainWindow.cs:353
 msgid "_Window"
 msgstr "_Окно"
 

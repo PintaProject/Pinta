@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: pinta\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-12-22 02:09-0500\n"
+"POT-Creation-Date: 2023-12-23 16:03-0500\n"
 "PO-Revision-Date: 2021-12-31 16:38+0000\n"
 "Last-Translator: abuyop <Unknown>\n"
 "Language-Team: Malay <ms@li.org>\n"
@@ -48,7 +48,7 @@ msgstr "Kawasan 7 x 7"
 msgid "9 x 9 Region"
 msgstr "Kawasan 9 x 9"
 
-#: ../Pinta/MainWindow.cs:328
+#: ../Pinta/MainWindow.cs:349
 msgid "A_dd-ins"
 msgstr "Tam_bahan"
 
@@ -78,7 +78,7 @@ msgstr ""
 msgid "Added"
 msgstr "Ditambah"
 
-#: ../Pinta/MainWindow.cs:372
+#: ../Pinta/MainWindow.cs:382
 msgid "Adjustments"
 msgstr ""
 
@@ -572,11 +572,11 @@ msgstr "Kelakuan Pinggir"
 msgid "Edge Detect"
 msgstr "Kesan Pinggir"
 
-#: ../Pinta/MainWindow.cs:324
+#: ../Pinta/MainWindow.cs:345
 msgid "Effe_cts"
 msgstr "Kes_an"
 
-#: ../Pinta/MainWindow.cs:366
+#: ../Pinta/MainWindow.cs:376
 msgid "Effects"
 msgstr ""
 
@@ -627,6 +627,10 @@ msgstr "Faktor"
 
 #: ../Pinta/Actions/File/NewScreenshotAction.cs:103
 msgid "Failed to access XDG Desktop Portals"
+msgstr ""
+
+#: ../Pinta/MainWindow.cs:269
+msgid "Failed to initialize add-in"
 msgstr ""
 
 #: ../Pinta.Gui.Addins/InstallDialog.cs:152
@@ -747,7 +751,7 @@ msgstr "Kaca Berkabut"
 msgid "Fullscreen"
 msgstr "Skrin Penuh"
 
-#: ../Pinta.Gui.Addins/AddinManagerDialog.cs:64
+#: ../Pinta.Gui.Addins/AddinManagerDialog.cs:60
 msgid "Gallery"
 msgstr "Galeri"
 
@@ -819,7 +823,7 @@ msgstr "Fail ICO tidak boleh besar dari 255  x 255 piksel."
 msgid "If you don't save, all changes will be permanently lost."
 msgstr "Jika anda tidak simpan, semua perubahan akan kekal hilang."
 
-#: ../Pinta.Tools/Tools/ColorPickerTool.cs:240 ../Pinta/MainWindow.cs:378
+#: ../Pinta.Tools/Tools/ColorPickerTool.cs:240 ../Pinta/MainWindow.cs:388
 msgid "Image"
 msgstr "Imej"
 
@@ -893,7 +897,7 @@ msgstr "Pasang melalui fail..."
 msgid "Install..."
 msgstr "Pasang..."
 
-#: ../Pinta.Gui.Addins/AddinManagerDialog.cs:60
+#: ../Pinta.Gui.Addins/AddinManagerDialog.cs:62
 msgid "Installed"
 msgstr "Dipasang"
 
@@ -1149,7 +1153,7 @@ msgstr "Kekilauan"
 msgid "Magic Wand Select"
 msgstr "Pilih Tongkat Ajaib"
 
-#: ../Pinta/MainWindow.cs:360
+#: ../Pinta/MainWindow.cs:370
 msgid "Main Menu"
 msgstr ""
 
@@ -1881,6 +1885,12 @@ msgstr "Teks - Muktamadkan"
 msgid "Text Style"
 msgstr "Gaya Teks"
 
+#. Translators: {0} is the name of an add-in.
+#: ../Pinta/MainWindow.cs:267
+#, csharp-format
+msgid "The '{0}' add-in may not be compatible with this version of Pinta"
+msgstr ""
+
 #: ../Pinta/Actions/Edit/PasteAction.cs:174
 msgid "The clipboard does not contain an image."
 msgstr "Papan keratan tidak mengandungi satu imej."
@@ -1969,7 +1979,7 @@ msgstr "Alat"
 msgid "Tool Box"
 msgstr "Kotak Alat"
 
-#: ../Pinta/MainWindow.cs:342
+#: ../Pinta/MainWindow.cs:363
 msgid "Tool Windows"
 msgstr "Tetingkap Alat"
 
@@ -2047,7 +2057,7 @@ msgstr ""
 msgid "Update..."
 msgstr ""
 
-#: ../Pinta.Gui.Addins/AddinManagerDialog.cs:62
+#: ../Pinta.Gui.Addins/AddinManagerDialog.cs:64
 msgid "Updates"
 msgstr "Kemas Kini"
 
@@ -2145,7 +2155,7 @@ msgstr "Zum Keluar"
 msgid "Zoom to Selection"
 msgstr "Zum ke Pemilihan"
 
-#: ../Pinta/MainWindow.cs:320
+#: ../Pinta/MainWindow.cs:341
 msgid "_Adjustments"
 msgstr "_Pelarasan"
 
@@ -2158,23 +2168,23 @@ msgstr ""
 msgid "_Discard"
 msgstr ""
 
-#: ../Pinta/MainWindow.cs:303
+#: ../Pinta/MainWindow.cs:324
 msgid "_Edit"
 msgstr "_Sunting"
 
-#: ../Pinta/MainWindow.cs:299
+#: ../Pinta/MainWindow.cs:320
 msgid "_File"
 msgstr "_Fail"
 
-#: ../Pinta/MainWindow.cs:336
+#: ../Pinta/MainWindow.cs:357
 msgid "_Help"
 msgstr "_Bantuan"
 
-#: ../Pinta/MainWindow.cs:312
+#: ../Pinta/MainWindow.cs:333
 msgid "_Image"
 msgstr "_Imej"
 
-#: ../Pinta/MainWindow.cs:316
+#: ../Pinta/MainWindow.cs:337
 msgid "_Layers"
 msgstr "_Lapisan"
 
@@ -2187,11 +2197,11 @@ msgstr ""
 msgid "_Save"
 msgstr ""
 
-#: ../Pinta/MainWindow.cs:307
+#: ../Pinta/MainWindow.cs:328
 msgid "_View"
 msgstr "L_ihat"
 
-#: ../Pinta/MainWindow.cs:332
+#: ../Pinta/MainWindow.cs:353
 msgid "_Window"
 msgstr "_Tetingkap"
 

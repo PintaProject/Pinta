@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: pinta\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-12-22 02:09-0500\n"
-"PO-Revision-Date: 2023-12-20 15:51+0000\n"
+"POT-Creation-Date: 2023-12-23 16:03-0500\n"
+"PO-Revision-Date: 2023-12-23 21:04+0000\n"
 "Last-Translator: grof <grofaty@hotmail.com>\n"
 "Language-Team: Slovenian <https://hosted.weblate.org/projects/pinta/pinta/sl/"
 ">\n"
@@ -18,7 +18,7 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=4; plural=(n%100==1 ? 1 : n%100==2 ? 2 : n%100==3 || "
 "n%100==4 ? 3 : 0);\n"
-"X-Generator: Weblate 5.3\n"
+"X-Generator: Weblate 5.4-dev\n"
 "X-Launchpad-Export-Date: 2023-12-18 03:00+0000\n"
 
 #: ../Pinta.Gui.Addins/InstallDialog.cs:216
@@ -50,7 +50,7 @@ msgstr "7 x 7 območje"
 msgid "9 x 9 Region"
 msgstr "9 x 9 območje"
 
-#: ../Pinta/MainWindow.cs:328
+#: ../Pinta/MainWindow.cs:349
 msgid "A_dd-ins"
 msgstr "_Vstavki"
 
@@ -80,9 +80,9 @@ msgstr "Upravljalec razširitev..."
 msgid "Added"
 msgstr "Dodano"
 
-#: ../Pinta/MainWindow.cs:372
+#: ../Pinta/MainWindow.cs:382
 msgid "Adjustments"
-msgstr ""
+msgstr "Prilagoditve"
 
 #: ../Pinta.Tools/Tools/ColorPickerTool.cs:193
 msgid "After select"
@@ -580,13 +580,13 @@ msgstr "Vedenje robov"
 msgid "Edge Detect"
 msgstr "Zaznaj rob"
 
-#: ../Pinta/MainWindow.cs:324
+#: ../Pinta/MainWindow.cs:345
 msgid "Effe_cts"
 msgstr "Učin_ki"
 
-#: ../Pinta/MainWindow.cs:366
+#: ../Pinta/MainWindow.cs:376
 msgid "Effects"
-msgstr ""
+msgstr "Učinki"
 
 #: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:326
 #: ../Pinta.Tools/Editable/EditEngines/EllipseEditEngine.cs:34
@@ -622,7 +622,7 @@ msgstr "Izločitev (-) (desni klik)"
 #. Translators: This refers to expanding the canvas size when pasting a larger image.
 #: ../Pinta/Actions/Edit/PasteAction.cs:191
 msgid "Expand"
-msgstr ""
+msgstr "Razširi"
 
 #: ../Pinta.Gui.Addins/AddinManagerDialog.cs:204
 msgid "Extension packages"
@@ -636,6 +636,10 @@ msgstr "Množitelj"
 #: ../Pinta/Actions/File/NewScreenshotAction.cs:103
 msgid "Failed to access XDG Desktop Portals"
 msgstr "Spodletel je dostop do portala za namizne računalnike XDG"
+
+#: ../Pinta/MainWindow.cs:269
+msgid "Failed to initialize add-in"
+msgstr ""
 
 #: ../Pinta.Gui.Addins/InstallDialog.cs:152
 msgid "Failed to load extension package"
@@ -755,7 +759,7 @@ msgstr "Zamrznjeno steklo"
 msgid "Fullscreen"
 msgstr "Celozaslonsko"
 
-#: ../Pinta.Gui.Addins/AddinManagerDialog.cs:64
+#: ../Pinta.Gui.Addins/AddinManagerDialog.cs:60
 msgid "Gallery"
 msgstr "Galerija"
 
@@ -826,7 +830,7 @@ msgstr "Datoteke ICO ne morejo biti večje od 255 x 255 točk."
 msgid "If you don't save, all changes will be permanently lost."
 msgstr "V primeru, da datoteke ne shranite, bodo vse spremembe izgubljene."
 
-#: ../Pinta.Tools/Tools/ColorPickerTool.cs:240 ../Pinta/MainWindow.cs:378
+#: ../Pinta.Tools/Tools/ColorPickerTool.cs:240 ../Pinta/MainWindow.cs:388
 msgid "Image"
 msgstr "Slika"
 
@@ -900,7 +904,7 @@ msgstr "Namesti iz datoteke ..."
 msgid "Install..."
 msgstr "Namesti ..."
 
-#: ../Pinta.Gui.Addins/AddinManagerDialog.cs:60
+#: ../Pinta.Gui.Addins/AddinManagerDialog.cs:62
 msgid "Installed"
 msgstr "Nameščeno"
 
@@ -1191,9 +1195,9 @@ msgstr "Svetlost"
 msgid "Magic Wand Select"
 msgstr "Izbor čarobne palice"
 
-#: ../Pinta/MainWindow.cs:360
+#: ../Pinta/MainWindow.cs:370
 msgid "Main Menu"
-msgstr ""
+msgstr "Osnovni meni"
 
 #: ../Pinta/Dialogs/ResizeCanvasDialog.cs:76
 #: ../Pinta/Dialogs/ResizeImageDialog.cs:66
@@ -1545,7 +1549,7 @@ msgstr "Moč"
 #. Translators: This refers to preserving the current canvas size when pasting a larger image.
 #: ../Pinta/Actions/Edit/PasteAction.cs:189
 msgid "Preserve"
-msgstr ""
+msgstr "Ohrani"
 
 #: ../Pinta/Dialogs/NewImageDialog.cs:101
 msgid "Preset:"
@@ -1652,7 +1656,7 @@ msgstr "Izdano z dovoljenjem MIT X11."
 
 #: ../Pinta.Effects/Effects/ReliefEffect.cs:38
 msgid "Relief"
-msgstr "Pridvíg"
+msgstr "Pridvig"
 
 #: ../Pinta/Actions/Layers/LayerPropertiesAction.cs:103
 msgid "Rename Layer"
@@ -1922,6 +1926,12 @@ msgstr "Besedilo - Zaključi"
 msgid "Text Style"
 msgstr "Slog besedila"
 
+#. Translators: {0} is the name of an add-in.
+#: ../Pinta/MainWindow.cs:267
+#, csharp-format
+msgid "The '{0}' add-in may not be compatible with this version of Pinta"
+msgstr ""
+
 #: ../Pinta/Actions/Edit/PasteAction.cs:174
 msgid "The clipboard does not contain an image."
 msgstr "Odložišče ne vsebuje slike."
@@ -1951,6 +1961,8 @@ msgid ""
 "The image being pasted is larger than the canvas. What would you like to do "
 "to the canvas size?"
 msgstr ""
+"Prilepljena slika je večja od velikosti platna. Kaj želite storiti z "
+"velikostjo platna?"
 
 #: ../Pinta.Gui.Addins/InstallDialog.cs:293
 msgid "The installation failed!"
@@ -2014,7 +2026,7 @@ msgstr "Orodje"
 msgid "Tool Box"
 msgstr "Orodja"
 
-#: ../Pinta/MainWindow.cs:342
+#: ../Pinta/MainWindow.cs:363
 msgid "Tool Windows"
 msgstr "Okna orodij"
 
@@ -2092,7 +2104,7 @@ msgstr "Nepodprt zapis palete"
 msgid "Update..."
 msgstr "Posodobi ..."
 
-#: ../Pinta.Gui.Addins/AddinManagerDialog.cs:62
+#: ../Pinta.Gui.Addins/AddinManagerDialog.cs:64
 msgid "Updates"
 msgstr "Posodobitve"
 
@@ -2190,7 +2202,7 @@ msgstr "Oddalji"
 msgid "Zoom to Selection"
 msgstr "Približaj izbrano"
 
-#: ../Pinta/MainWindow.cs:320
+#: ../Pinta/MainWindow.cs:341
 msgid "_Adjustments"
 msgstr "_Prilagoditve"
 
@@ -2203,23 +2215,23 @@ msgstr "_Prekliči"
 msgid "_Discard"
 msgstr "_Zavrzi"
 
-#: ../Pinta/MainWindow.cs:303
+#: ../Pinta/MainWindow.cs:324
 msgid "_Edit"
 msgstr "Ur_ejanje"
 
-#: ../Pinta/MainWindow.cs:299
+#: ../Pinta/MainWindow.cs:320
 msgid "_File"
 msgstr "_Datoteka"
 
-#: ../Pinta/MainWindow.cs:336
+#: ../Pinta/MainWindow.cs:357
 msgid "_Help"
 msgstr "Pomo_č"
 
-#: ../Pinta/MainWindow.cs:312
+#: ../Pinta/MainWindow.cs:333
 msgid "_Image"
 msgstr "Sl_ika"
 
-#: ../Pinta/MainWindow.cs:316
+#: ../Pinta/MainWindow.cs:337
 msgid "_Layers"
 msgstr "P_lasti"
 
@@ -2232,11 +2244,11 @@ msgstr "_V redu"
 msgid "_Save"
 msgstr "_Shrani"
 
-#: ../Pinta/MainWindow.cs:307
+#: ../Pinta/MainWindow.cs:328
 msgid "_View"
 msgstr "Po_gled"
 
-#: ../Pinta/MainWindow.cs:332
+#: ../Pinta/MainWindow.cs:353
 msgid "_Window"
 msgstr "_Okno"
 

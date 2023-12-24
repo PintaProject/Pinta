@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: pinta\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-12-22 02:09-0500\n"
+"POT-Creation-Date: 2023-12-23 16:03-0500\n"
 "PO-Revision-Date: 2022-06-12 12:30+0000\n"
 "Last-Translator: UTUMI Hirosi <utuhiro78@yahoo.co.jp>\n"
 "Language-Team: Japanese <ja@li.org>\n"
@@ -48,7 +48,7 @@ msgstr "7 x 7 範囲"
 msgid "9 x 9 Region"
 msgstr "9 x 9 範囲"
 
-#: ../Pinta/MainWindow.cs:328
+#: ../Pinta/MainWindow.cs:349
 msgid "A_dd-ins"
 msgstr "アドイン(_d)"
 
@@ -78,7 +78,7 @@ msgstr ""
 msgid "Added"
 msgstr "追加しました"
 
-#: ../Pinta/MainWindow.cs:372
+#: ../Pinta/MainWindow.cs:382
 msgid "Adjustments"
 msgstr ""
 
@@ -572,11 +572,11 @@ msgstr "境界処理"
 msgid "Edge Detect"
 msgstr "エッジの強調"
 
-#: ../Pinta/MainWindow.cs:324
+#: ../Pinta/MainWindow.cs:345
 msgid "Effe_cts"
 msgstr "効果(_C)"
 
-#: ../Pinta/MainWindow.cs:366
+#: ../Pinta/MainWindow.cs:376
 msgid "Effects"
 msgstr ""
 
@@ -627,6 +627,10 @@ msgstr "係数"
 
 #: ../Pinta/Actions/File/NewScreenshotAction.cs:103
 msgid "Failed to access XDG Desktop Portals"
+msgstr ""
+
+#: ../Pinta/MainWindow.cs:269
+msgid "Failed to initialize add-in"
 msgstr ""
 
 #: ../Pinta.Gui.Addins/InstallDialog.cs:152
@@ -747,7 +751,7 @@ msgstr "すりガラス"
 msgid "Fullscreen"
 msgstr "全画面表示"
 
-#: ../Pinta.Gui.Addins/AddinManagerDialog.cs:64
+#: ../Pinta.Gui.Addins/AddinManagerDialog.cs:60
 msgid "Gallery"
 msgstr "ギャラリー"
 
@@ -817,7 +821,7 @@ msgstr "ICOファイルは255 x 255ピクセルまでです"
 msgid "If you don't save, all changes will be permanently lost."
 msgstr "保存しない場合、すべての変更が失われます。"
 
-#: ../Pinta.Tools/Tools/ColorPickerTool.cs:240 ../Pinta/MainWindow.cs:378
+#: ../Pinta.Tools/Tools/ColorPickerTool.cs:240 ../Pinta/MainWindow.cs:388
 msgid "Image"
 msgstr "画像"
 
@@ -891,7 +895,7 @@ msgstr "ファイルからインストール..."
 msgid "Install..."
 msgstr "インストール..."
 
-#: ../Pinta.Gui.Addins/AddinManagerDialog.cs:60
+#: ../Pinta.Gui.Addins/AddinManagerDialog.cs:62
 msgid "Installed"
 msgstr "インストール済"
 
@@ -1141,7 +1145,7 @@ msgstr "明度"
 msgid "Magic Wand Select"
 msgstr "自動選択"
 
-#: ../Pinta/MainWindow.cs:360
+#: ../Pinta/MainWindow.cs:370
 msgid "Main Menu"
 msgstr ""
 
@@ -1871,6 +1875,12 @@ msgstr "テキスト - 決定"
 msgid "Text Style"
 msgstr "スタイル"
 
+#. Translators: {0} is the name of an add-in.
+#: ../Pinta/MainWindow.cs:267
+#, csharp-format
+msgid "The '{0}' add-in may not be compatible with this version of Pinta"
+msgstr ""
+
 #: ../Pinta/Actions/Edit/PasteAction.cs:174
 msgid "The clipboard does not contain an image."
 msgstr "クリップボードに画像がありません"
@@ -1959,7 +1969,7 @@ msgstr "ツール"
 msgid "Tool Box"
 msgstr "ツールボックス"
 
-#: ../Pinta/MainWindow.cs:342
+#: ../Pinta/MainWindow.cs:363
 msgid "Tool Windows"
 msgstr "ツールウィンドウ"
 
@@ -2037,7 +2047,7 @@ msgstr ""
 msgid "Update..."
 msgstr ""
 
-#: ../Pinta.Gui.Addins/AddinManagerDialog.cs:62
+#: ../Pinta.Gui.Addins/AddinManagerDialog.cs:64
 msgid "Updates"
 msgstr "アップデート"
 
@@ -2135,7 +2145,7 @@ msgstr "縮小"
 msgid "Zoom to Selection"
 msgstr "選択範囲に合わせる"
 
-#: ../Pinta/MainWindow.cs:320
+#: ../Pinta/MainWindow.cs:341
 msgid "_Adjustments"
 msgstr "調整(_A)"
 
@@ -2148,23 +2158,23 @@ msgstr ""
 msgid "_Discard"
 msgstr ""
 
-#: ../Pinta/MainWindow.cs:303
+#: ../Pinta/MainWindow.cs:324
 msgid "_Edit"
 msgstr "編集(_E)"
 
-#: ../Pinta/MainWindow.cs:299
+#: ../Pinta/MainWindow.cs:320
 msgid "_File"
 msgstr "ファイル(_F)"
 
-#: ../Pinta/MainWindow.cs:336
+#: ../Pinta/MainWindow.cs:357
 msgid "_Help"
 msgstr "ヘルプ(_H)"
 
-#: ../Pinta/MainWindow.cs:312
+#: ../Pinta/MainWindow.cs:333
 msgid "_Image"
 msgstr "画像(_I)"
 
-#: ../Pinta/MainWindow.cs:316
+#: ../Pinta/MainWindow.cs:337
 msgid "_Layers"
 msgstr "レイヤ(_L)"
 
@@ -2177,11 +2187,11 @@ msgstr ""
 msgid "_Save"
 msgstr ""
 
-#: ../Pinta/MainWindow.cs:307
+#: ../Pinta/MainWindow.cs:328
 msgid "_View"
 msgstr "表示(_V)"
 
-#: ../Pinta/MainWindow.cs:332
+#: ../Pinta/MainWindow.cs:353
 msgid "_Window"
 msgstr "ウィンドウ(_W)"
 

@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: pinta\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-12-22 02:09-0500\n"
+"POT-Creation-Date: 2023-12-23 16:03-0500\n"
 "PO-Revision-Date: 2022-01-14 12:11+0000\n"
 "Last-Translator: Åke Engelbrektson <Unknown>\n"
 "Language-Team: \n"
@@ -48,7 +48,7 @@ msgstr "7 x 7-område"
 msgid "9 x 9 Region"
 msgstr "9 x 9-område"
 
-#: ../Pinta/MainWindow.cs:328
+#: ../Pinta/MainWindow.cs:349
 msgid "A_dd-ins"
 msgstr "T_illägg"
 
@@ -78,7 +78,7 @@ msgstr ""
 msgid "Added"
 msgstr "Tillagd"
 
-#: ../Pinta/MainWindow.cs:372
+#: ../Pinta/MainWindow.cs:382
 msgid "Adjustments"
 msgstr ""
 
@@ -572,11 +572,11 @@ msgstr "Kantbeteende"
 msgid "Edge Detect"
 msgstr "Kantidentifiering"
 
-#: ../Pinta/MainWindow.cs:324
+#: ../Pinta/MainWindow.cs:345
 msgid "Effe_cts"
 msgstr "_Effekter"
 
-#: ../Pinta/MainWindow.cs:366
+#: ../Pinta/MainWindow.cs:376
 msgid "Effects"
 msgstr ""
 
@@ -627,6 +627,10 @@ msgstr "Faktor"
 
 #: ../Pinta/Actions/File/NewScreenshotAction.cs:103
 msgid "Failed to access XDG Desktop Portals"
+msgstr ""
+
+#: ../Pinta/MainWindow.cs:269
+msgid "Failed to initialize add-in"
 msgstr ""
 
 #: ../Pinta.Gui.Addins/InstallDialog.cs:152
@@ -747,7 +751,7 @@ msgstr "Frostat glas"
 msgid "Fullscreen"
 msgstr "Helskärm"
 
-#: ../Pinta.Gui.Addins/AddinManagerDialog.cs:64
+#: ../Pinta.Gui.Addins/AddinManagerDialog.cs:60
 msgid "Gallery"
 msgstr "Galleri"
 
@@ -819,7 +823,7 @@ msgstr "ICO-filer kan inte vara större än 255 x 255 pixlar."
 msgid "If you don't save, all changes will be permanently lost."
 msgstr "Om du inte sparar kommer alla ändringar att gå förlorade."
 
-#: ../Pinta.Tools/Tools/ColorPickerTool.cs:240 ../Pinta/MainWindow.cs:378
+#: ../Pinta.Tools/Tools/ColorPickerTool.cs:240 ../Pinta/MainWindow.cs:388
 msgid "Image"
 msgstr "Bild"
 
@@ -893,7 +897,7 @@ msgstr "Installera från fil..."
 msgid "Install..."
 msgstr "Installera..."
 
-#: ../Pinta.Gui.Addins/AddinManagerDialog.cs:60
+#: ../Pinta.Gui.Addins/AddinManagerDialog.cs:62
 msgid "Installed"
 msgstr "Installerade"
 
@@ -1151,7 +1155,7 @@ msgstr "Luminositet"
 msgid "Magic Wand Select"
 msgstr "Trollspömarkering"
 
-#: ../Pinta/MainWindow.cs:360
+#: ../Pinta/MainWindow.cs:370
 msgid "Main Menu"
 msgstr ""
 
@@ -1882,6 +1886,12 @@ msgstr "Text - Slutför"
 msgid "Text Style"
 msgstr "Textstil"
 
+#. Translators: {0} is the name of an add-in.
+#: ../Pinta/MainWindow.cs:267
+#, csharp-format
+msgid "The '{0}' add-in may not be compatible with this version of Pinta"
+msgstr ""
+
 #: ../Pinta/Actions/Edit/PasteAction.cs:174
 msgid "The clipboard does not contain an image."
 msgstr "Urklipp innehåller ingen bild."
@@ -1970,7 +1980,7 @@ msgstr "Verktyg"
 msgid "Tool Box"
 msgstr "Verktyg"
 
-#: ../Pinta/MainWindow.cs:342
+#: ../Pinta/MainWindow.cs:363
 msgid "Tool Windows"
 msgstr "Verktygsfönster"
 
@@ -2048,7 +2058,7 @@ msgstr ""
 msgid "Update..."
 msgstr ""
 
-#: ../Pinta.Gui.Addins/AddinManagerDialog.cs:62
+#: ../Pinta.Gui.Addins/AddinManagerDialog.cs:64
 msgid "Updates"
 msgstr "Uppdateringar"
 
@@ -2146,7 +2156,7 @@ msgstr "Zooma ut"
 msgid "Zoom to Selection"
 msgstr "Zooma till markering"
 
-#: ../Pinta/MainWindow.cs:320
+#: ../Pinta/MainWindow.cs:341
 msgid "_Adjustments"
 msgstr "_Justeringar"
 
@@ -2159,23 +2169,23 @@ msgstr ""
 msgid "_Discard"
 msgstr ""
 
-#: ../Pinta/MainWindow.cs:303
+#: ../Pinta/MainWindow.cs:324
 msgid "_Edit"
 msgstr "R_edigera"
 
-#: ../Pinta/MainWindow.cs:299
+#: ../Pinta/MainWindow.cs:320
 msgid "_File"
 msgstr "_Arkiv"
 
-#: ../Pinta/MainWindow.cs:336
+#: ../Pinta/MainWindow.cs:357
 msgid "_Help"
 msgstr "_Hjälp"
 
-#: ../Pinta/MainWindow.cs:312
+#: ../Pinta/MainWindow.cs:333
 msgid "_Image"
 msgstr "B_ild"
 
-#: ../Pinta/MainWindow.cs:316
+#: ../Pinta/MainWindow.cs:337
 msgid "_Layers"
 msgstr "_Lager"
 
@@ -2188,11 +2198,11 @@ msgstr ""
 msgid "_Save"
 msgstr ""
 
-#: ../Pinta/MainWindow.cs:307
+#: ../Pinta/MainWindow.cs:328
 msgid "_View"
 msgstr "_Visa"
 
-#: ../Pinta/MainWindow.cs:332
+#: ../Pinta/MainWindow.cs:353
 msgid "_Window"
 msgstr "_Fönster"
 
