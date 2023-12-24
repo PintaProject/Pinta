@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: pinta\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2023-12-23 16:03-0500\n"
-"PO-Revision-Date: 2023-12-23 21:04+0000\n"
+"PO-Revision-Date: 2023-12-26 04:12+0000\n"
 "Last-Translator: grof <grofaty@hotmail.com>\n"
 "Language-Team: Slovenian <https://hosted.weblate.org/projects/pinta/pinta/sl/"
 ">\n"
@@ -74,7 +74,7 @@ msgstr "Dodaj šum"
 
 #: ../Pinta.Core/Actions/AddinActions.cs:38
 msgid "Add-in Manager..."
-msgstr "Upravljalec razširitev..."
+msgstr "Upravljalec vstavkov..."
 
 #: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:810
 msgid "Added"
@@ -639,7 +639,7 @@ msgstr "Spodletel je dostop do portala za namizne računalnike XDG"
 
 #: ../Pinta/MainWindow.cs:269
 msgid "Failed to initialize add-in"
-msgstr ""
+msgstr "Nalaganje vtičnika je spodletelo"
 
 #: ../Pinta.Gui.Addins/InstallDialog.cs:152
 msgid "Failed to load extension package"
@@ -1933,7 +1933,7 @@ msgstr "Slog besedila"
 #: ../Pinta/MainWindow.cs:267
 #, csharp-format
 msgid "The '{0}' add-in may not be compatible with this version of Pinta"
-msgstr ""
+msgstr "Vtičnik '{0}' morda ni združljiv s trenutno različico Pinte"
 
 #: ../Pinta/Actions/Edit/PasteAction.cs:174
 msgid "The clipboard does not contain an image."
