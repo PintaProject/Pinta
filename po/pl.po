@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: pinta\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2023-12-23 16:03-0500\n"
-"PO-Revision-Date: 2023-12-23 21:04+0000\n"
+"PO-Revision-Date: 2023-12-26 04:12+0000\n"
 "Last-Translator: Matthaiks <kitynska@gmail.com>\n"
 "Language-Team: Polish <https://hosted.weblate.org/projects/pinta/pinta/pl/>\n"
 "Language: pl\n"
@@ -639,7 +639,7 @@ msgstr "Nie udało się uzyskać dostępu do portali komputerowe XDG"
 
 #: ../Pinta/MainWindow.cs:269
 msgid "Failed to initialize add-in"
-msgstr ""
+msgstr "Nie udało się zainicjować dodatku"
 
 #: ../Pinta.Gui.Addins/InstallDialog.cs:152
 msgid "Failed to load extension package"
@@ -1946,7 +1946,7 @@ msgstr "Styl tekstu"
 #: ../Pinta/MainWindow.cs:267
 #, csharp-format
 msgid "The '{0}' add-in may not be compatible with this version of Pinta"
-msgstr ""
+msgstr "Dodatek '{0}' może nie być kompatybilny z tą wersją Pinty"
 
 #: ../Pinta/Actions/Edit/PasteAction.cs:174
 msgid "The clipboard does not contain an image."
