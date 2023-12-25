@@ -26,6 +26,7 @@ Thanks to the following contributors who worked on this release:
 - Added a "Reseed" button for the random noise used by several effects ("Add Noise" and "Frosted Glass").  Previously, the noise pattern changed every time the effect was computed (including when other parameters were changed).
 
 ### Fixed
+- Fixed issues where the system language settings on macOS did not properly take effect in Pinta ([#1976178](https://bugs.launchpad.net/pinta/+bug/1976178))
 - Fixed an issue where the Pan tool's cursor could show up as a missing icon ([#2013047](https://bugs.launchpad.net/pinta/+bug/2013047))
 - Fixed errors when saving a file that was opened with a missing or incorrect extension ([#2013050](https://bugs.launchpad.net/pinta/+bug/2013050))
 - Fixed a bug where certain layer opacity settings could be incorrectly rounded ([#2020596](https://bugs.launchpad.net/pinta/+bug/2020596))
