@@ -13,6 +13,7 @@ Thanks to the following contributors who worked on this release:
 
 ### Fixed
 - Fixed AppStream validation errors in `xdg/pinta.appdata.xml`.
+- Fixed issues where the system language settings on macOS did not properly take effect in Pinta ([#1976178](https://bugs.launchpad.net/pinta/+bug/1976178))
 
 ## [2.1.1](https://github.com/PintaProject/Pinta/releases/tag/2.1.1) - 2023/02/26
 
