@@ -31,16 +31,30 @@ namespace Pinta;
 
 public sealed class WindowShell
 {
-	private readonly ApplicationWindow app_window;
+	private readonly Gtk.ApplicationWindow app_window;
 	private readonly Adw.HeaderBar? header_bar;
 	private readonly Box shell_layout;
-	private readonly Box menu_layout;
 	private Box? workspace_layout;
 	private Box? main_toolbar;
 
 	public WindowShell (Application app, string name, string title, int width, int height, bool maximize)
 	{
-		app_window = Gtk.ApplicationWindow.New (app);
+		var app_layout = Adw.ToolbarView.New ();
+
+		// On macOS the global menubar is used, but otherwise use a header bar.
+		// We also use a regular Gtk window on macOS to have a traditional titlebar with the standard close / minimize buttons.
+		bool use_header_bar = PintaCore.System.OperatingSystem != OS.Mac;
+		if (use_header_bar) {
+			var adwWindow = Adw.ApplicationWindow.New (app);
+			adwWindow.SetContent (app_layout);
+			app_window = adwWindow;
+
+			header_bar = Adw.HeaderBar.New ();
+			app_layout.AddTopBar (header_bar);
+		} else {
+			app_window = Gtk.ApplicationWindow.New (app);
+			app_window.SetChild (app_layout);
+		}
 
 		app_window.Name = name;
 		app_window.Title = title;
@@ -51,22 +65,13 @@ public sealed class WindowShell
 		if (maximize)
 			app_window.Maximize ();
 
-		// On macOS the global menubar is used, but otherwise use a header bar.
-		if (PintaCore.System.OperatingSystem != OS.Mac) {
-			header_bar = Adw.HeaderBar.New ();
-			app_window.SetTitlebar (header_bar);
-		}
-
 		shell_layout = Box.New (Orientation.Vertical, 0);
-		menu_layout = Box.New (Orientation.Vertical, 0);
+		app_layout.SetContent (shell_layout);
 
-		shell_layout.Prepend (menu_layout);
-
-		app_window.SetChild (shell_layout);
 		app_window.Present ();
 	}
 
-	public ApplicationWindow Window => app_window;
+	public Gtk.ApplicationWindow Window => app_window;
 	public Adw.HeaderBar? HeaderBar => header_bar;
 
 	public Box CreateToolBar (string name)
@@ -74,7 +79,7 @@ public sealed class WindowShell
 		main_toolbar = GtkExtensions.CreateToolBar ();
 		main_toolbar.Name = name;
 
-		menu_layout.Append (main_toolbar);
+		shell_layout.Append (main_toolbar);
 		main_toolbar.Show ();
 
 		return main_toolbar;
