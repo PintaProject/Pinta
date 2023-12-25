@@ -8,16 +8,16 @@ msgstr ""
 "Project-Id-Version: pinta\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2023-12-23 16:03-0500\n"
-"PO-Revision-Date: 2023-11-27 15:51+0000\n"
-"Last-Translator: Philippe AUCOIN <philippe.aucoin@orange.fr>\n"
-"Language-Team: LANGUAGE <LL@li.org>\n"
-"Language: fr_FR\n"
+"PO-Revision-Date: 2023-12-26 04:12+0000\n"
+"Last-Translator: philippe dalet <philippe.dalet@gmail.com>\n"
+"Language-Team: French <https://hosted.weblate.org/projects/pinta/pinta/fr/>\n"
+"Language: fr\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n > 1;\n"
+"X-Generator: Weblate 5.4-dev\n"
 "X-Launchpad-Export-Date: 2023-12-18 03:00+0000\n"
-"X-Generator: Launchpad (build e1eeab5b20e19239bd7d5f36676f7a52988db88b)\n"
 "X-Poedit-SourceCharset: utf-8\n"
 
 #: ../Pinta.Gui.Addins/InstallDialog.cs:216
@@ -73,7 +73,7 @@ msgstr "Ajouter du bruit"
 
 #: ../Pinta.Core/Actions/AddinActions.cs:38
 msgid "Add-in Manager..."
-msgstr ""
+msgstr "Gestionnaire d'ajouts..."
 
 #: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:810
 msgid "Added"
@@ -81,7 +81,7 @@ msgstr "Ajouté"
 
 #: ../Pinta/MainWindow.cs:382
 msgid "Adjustments"
-msgstr ""
+msgstr "Ajustements"
 
 #: ../Pinta.Tools/Tools/ColorPickerTool.cs:193
 msgid "After select"
@@ -103,7 +103,7 @@ msgstr "Valeur"
 
 #: ../Pinta/Dialogs/ResizeCanvasDialog.cs:111
 msgid "Anchor:"
-msgstr "Ancre :"
+msgstr "Ancre :"
 
 #: ../Pinta.Effects/Effects/EdgeDetectEffect.cs:80
 #: ../Pinta.Effects/Effects/EmbossEffect.cs:144
@@ -154,7 +154,7 @@ msgstr "Niveau automatique"
 #: ../Pinta.Gui.Addins/AddinInfoView.cs:139
 #, csharp-format
 msgid "Available in repository: {0}"
-msgstr ""
+msgstr "Disponible dans le répertoire :{0}"
 
 #: ../Pinta.Core/Managers/WorkspaceManager.cs:176
 msgid "Background"
