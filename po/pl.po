@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: pinta\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-12-23 16:03-0500\n"
-"PO-Revision-Date: 2023-12-23 21:04+0000\n"
+"POT-Creation-Date: 2023-12-25 23:00-0500\n"
+"PO-Revision-Date: 2023-12-26 04:12+0000\n"
 "Last-Translator: Matthaiks <kitynska@gmail.com>\n"
 "Language-Team: Polish <https://hosted.weblate.org/projects/pinta/pinta/pl/>\n"
 "Language: pl\n"
@@ -49,7 +49,7 @@ msgstr "Obszar 7×7"
 msgid "9 x 9 Region"
 msgstr "Obszar 9×9"
 
-#: ../Pinta/MainWindow.cs:349 ../Pinta/MainWindow.cs:328
+#: ../Pinta/MainWindow.cs:349
 msgid "A_dd-ins"
 msgstr "_Dodatki"
 
@@ -79,7 +79,7 @@ msgstr "Menedżer dodatków..."
 msgid "Added"
 msgstr "Dodano"
 
-#: ../Pinta/MainWindow.cs:382 ../Pinta/MainWindow.cs:372
+#: ../Pinta/MainWindow.cs:382
 msgid "Adjustments"
 msgstr "Regulacje"
 
@@ -580,11 +580,11 @@ msgstr "Zachowanie przy krawędzi"
 msgid "Edge Detect"
 msgstr "Wykrywanie krawędzi"
 
-#: ../Pinta/MainWindow.cs:345 ../Pinta/MainWindow.cs:324
+#: ../Pinta/MainWindow.cs:345
 msgid "Effe_cts"
 msgstr "E_fekty"
 
-#: ../Pinta/MainWindow.cs:376 ../Pinta/MainWindow.cs:366
+#: ../Pinta/MainWindow.cs:376
 msgid "Effects"
 msgstr "Efekty"
 
@@ -639,7 +639,7 @@ msgstr "Nie udało się uzyskać dostępu do portali komputerowe XDG"
 
 #: ../Pinta/MainWindow.cs:269
 msgid "Failed to initialize add-in"
-msgstr ""
+msgstr "Nie udało się zainicjować dodatku"
 
 #: ../Pinta.Gui.Addins/InstallDialog.cs:152
 msgid "Failed to load extension package"
@@ -760,7 +760,6 @@ msgid "Fullscreen"
 msgstr "Pełny ekran"
 
 #: ../Pinta.Gui.Addins/AddinManagerDialog.cs:60
-#: ../Pinta.Gui.Addins/AddinManagerDialog.cs:64
 msgid "Gallery"
 msgstr "Galeria"
 
@@ -834,7 +833,6 @@ msgstr ""
 "Jeśli nie zapiszesz obrazu, wszystkie wprowadzone zmiany zostaną utracone."
 
 #: ../Pinta.Tools/Tools/ColorPickerTool.cs:240 ../Pinta/MainWindow.cs:388
-#: ../Pinta/MainWindow.cs:378
 msgid "Image"
 msgstr "Obraz"
 
@@ -909,7 +907,6 @@ msgid "Install..."
 msgstr "Zainstaluj…"
 
 #: ../Pinta.Gui.Addins/AddinManagerDialog.cs:62
-#: ../Pinta.Gui.Addins/AddinManagerDialog.cs:60
 msgid "Installed"
 msgstr "Zainstalowano"
 
@@ -1211,7 +1208,7 @@ msgstr "Jaskrawość"
 msgid "Magic Wand Select"
 msgstr "Magiczna różdżka"
 
-#: ../Pinta/MainWindow.cs:370 ../Pinta/MainWindow.cs:360
+#: ../Pinta/MainWindow.cs:370
 msgid "Main Menu"
 msgstr "Menu główne"
 
@@ -1862,7 +1859,7 @@ msgstr "Typ kształtu"
 msgid "Sharpen"
 msgstr "Wyostrzanie"
 
-#: ../Pinta.Core/Extensions/ToolBoxButton.cs:49
+#: ../Pinta.Core/Extensions/ToolBoxButton.cs:51
 #: ../Pinta.Gui.Widgets/Widgets/StatusBarColorPaletteWidget.cs:261
 msgid "Shortcut key"
 msgstr "Klawisz skrótu"
@@ -1946,7 +1943,7 @@ msgstr "Styl tekstu"
 #: ../Pinta/MainWindow.cs:267
 #, csharp-format
 msgid "The '{0}' add-in may not be compatible with this version of Pinta"
-msgstr ""
+msgstr "Dodatek '{0}' może nie być kompatybilny z tą wersją Pinty"
 
 #: ../Pinta/Actions/Edit/PasteAction.cs:174
 msgid "The clipboard does not contain an image."
@@ -2041,7 +2038,7 @@ msgstr "Narzędzie"
 msgid "Tool Box"
 msgstr "Przybornik"
 
-#: ../Pinta/MainWindow.cs:363 ../Pinta/MainWindow.cs:342
+#: ../Pinta/MainWindow.cs:363
 msgid "Tool Windows"
 msgstr "Okna narzędziowe"
 
@@ -2120,7 +2117,6 @@ msgid "Update..."
 msgstr "Aktualizuj..."
 
 #: ../Pinta.Gui.Addins/AddinManagerDialog.cs:64
-#: ../Pinta.Gui.Addins/AddinManagerDialog.cs:62
 msgid "Updates"
 msgstr "Aktualizacje"
 
@@ -2219,10 +2215,12 @@ msgstr "Pomniejsz"
 msgid "Zoom to Selection"
 msgstr "Powiększ do zaznaczenia"
 
-#: ../Pinta/MainWindow.cs:341 ../Pinta/MainWindow.cs:320
+#: ../Pinta/MainWindow.cs:341
 msgid "_Adjustments"
 msgstr "_Korekcja"
 
+#: ../Pinta.Core/Extensions/GtkExtensions.cs:199
+#: ../Pinta.Core/Extensions/GtkExtensions.cs:201
 #: ../Pinta/Actions/Edit/PasteAction.cs:187
 #: ../Pinta/Actions/File/CloseDocumentAction.cs:66
 msgid "_Cancel"
@@ -2232,26 +2230,28 @@ msgstr "_Anuluj"
 msgid "_Discard"
 msgstr "O_drzuć"
 
-#: ../Pinta/MainWindow.cs:324 ../Pinta/MainWindow.cs:303
+#: ../Pinta/MainWindow.cs:324
 msgid "_Edit"
 msgstr "_Edycja"
 
-#: ../Pinta/MainWindow.cs:320 ../Pinta/MainWindow.cs:299
+#: ../Pinta/MainWindow.cs:320
 msgid "_File"
 msgstr "_Plik"
 
-#: ../Pinta/MainWindow.cs:357 ../Pinta/MainWindow.cs:336
+#: ../Pinta/MainWindow.cs:357
 msgid "_Help"
 msgstr "Po_moc"
 
-#: ../Pinta/MainWindow.cs:333 ../Pinta/MainWindow.cs:312
+#: ../Pinta/MainWindow.cs:333
 msgid "_Image"
 msgstr "_Obraz"
 
-#: ../Pinta/MainWindow.cs:337 ../Pinta/MainWindow.cs:316
+#: ../Pinta/MainWindow.cs:337
 msgid "_Layers"
 msgstr "Wa_rstwy"
 
+#: ../Pinta.Core/Extensions/GtkExtensions.cs:198
+#: ../Pinta.Core/Extensions/GtkExtensions.cs:202
 #: ../Pinta.Gui.Addins/InstallDialog.cs:156 ../Pinta/Dialogs/ErrorDialog.cs:41
 #: ../Pinta/Dialogs/ErrorDialog.cs:69
 msgid "_OK"
@@ -2261,11 +2261,11 @@ msgstr "_OK"
 msgid "_Save"
 msgstr "_Zapisz"
 
-#: ../Pinta/MainWindow.cs:328 ../Pinta/MainWindow.cs:307
+#: ../Pinta/MainWindow.cs:328
 msgid "_View"
 msgstr "_Widok"
 
-#: ../Pinta/MainWindow.cs:353 ../Pinta/MainWindow.cs:332
+#: ../Pinta/MainWindow.cs:353
 msgid "_Window"
 msgstr "_Okno"
 

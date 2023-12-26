@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: pinta\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-12-23 16:03-0500\n"
+"POT-Creation-Date: 2023-12-25 23:00-0500\n"
 "PO-Revision-Date: 2022-12-06 14:02+0000\n"
 "Last-Translator: mlohdrac <Unknown>\n"
 "Language-Team: Danish <da@li.org>\n"
@@ -1805,7 +1805,7 @@ msgstr "Figurtype"
 msgid "Sharpen"
 msgstr "Gør skarpere"
 
-#: ../Pinta.Core/Extensions/ToolBoxButton.cs:49
+#: ../Pinta.Core/Extensions/ToolBoxButton.cs:51
 #: ../Pinta.Gui.Widgets/Widgets/StatusBarColorPaletteWidget.cs:261
 msgid "Shortcut key"
 msgstr "Genvejstast"
@@ -2159,6 +2159,8 @@ msgstr "Zoom til markering"
 msgid "_Adjustments"
 msgstr "_Justeringer"
 
+#: ../Pinta.Core/Extensions/GtkExtensions.cs:199
+#: ../Pinta.Core/Extensions/GtkExtensions.cs:201
 #: ../Pinta/Actions/Edit/PasteAction.cs:187
 #: ../Pinta/Actions/File/CloseDocumentAction.cs:66
 msgid "_Cancel"
@@ -2188,6 +2190,8 @@ msgstr "_Billede"
 msgid "_Layers"
 msgstr "_Lag"
 
+#: ../Pinta.Core/Extensions/GtkExtensions.cs:198
+#: ../Pinta.Core/Extensions/GtkExtensions.cs:202
 #: ../Pinta.Gui.Addins/InstallDialog.cs:156 ../Pinta/Dialogs/ErrorDialog.cs:41
 #: ../Pinta/Dialogs/ErrorDialog.cs:69
 msgid "_OK"

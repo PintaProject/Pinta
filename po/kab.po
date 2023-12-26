@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: pinta\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-12-23 16:03-0500\n"
+"POT-Creation-Date: 2023-12-25 23:00-0500\n"
 "PO-Revision-Date: 2017-02-16 01:51+0000\n"
 "Last-Translator: Yacine Bouklif <yacinebouklif@gmail.com>\n"
 "Language-Team: Kabyle <kab@li.org>\n"
@@ -1799,7 +1799,7 @@ msgstr "Annaw n talɣa"
 msgid "Sharpen"
 msgstr "Augmenter la netteté"
 
-#: ../Pinta.Core/Extensions/ToolBoxButton.cs:49
+#: ../Pinta.Core/Extensions/ToolBoxButton.cs:51
 #: ../Pinta.Gui.Widgets/Widgets/StatusBarColorPaletteWidget.cs:261
 msgid "Shortcut key"
 msgstr "Inegzumen n unasiw"
@@ -2152,6 +2152,8 @@ msgstr "Ssezg tiddi ɣer tefrayt"
 msgid "_Adjustments"
 msgstr "Iswatiyen"
 
+#: ../Pinta.Core/Extensions/GtkExtensions.cs:199
+#: ../Pinta.Core/Extensions/GtkExtensions.cs:201
 #: ../Pinta/Actions/Edit/PasteAction.cs:187
 #: ../Pinta/Actions/File/CloseDocumentAction.cs:66
 msgid "_Cancel"
@@ -2181,6 +2183,8 @@ msgstr "Tugna"
 msgid "_Layers"
 msgstr "Ikalkuten"
 
+#: ../Pinta.Core/Extensions/GtkExtensions.cs:198
+#: ../Pinta.Core/Extensions/GtkExtensions.cs:202
 #: ../Pinta.Gui.Addins/InstallDialog.cs:156 ../Pinta/Dialogs/ErrorDialog.cs:41
 #: ../Pinta/Dialogs/ErrorDialog.cs:69
 msgid "_OK"

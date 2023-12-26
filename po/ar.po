@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: pinta\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-12-23 16:03-0500\n"
+"POT-Creation-Date: 2023-12-25 23:00-0500\n"
 "PO-Revision-Date: 2016-06-06 03:47+0000\n"
 "Last-Translator: Rockworld <sumoisrock@gmail.com>\n"
 "Language-Team: Arabic <ar@li.org>\n"
@@ -1798,7 +1798,7 @@ msgstr ""
 msgid "Sharpen"
 msgstr "اصقل"
 
-#: ../Pinta.Core/Extensions/ToolBoxButton.cs:49
+#: ../Pinta.Core/Extensions/ToolBoxButton.cs:51
 #: ../Pinta.Gui.Widgets/Widgets/StatusBarColorPaletteWidget.cs:261
 msgid "Shortcut key"
 msgstr "مفتاح الاختصار"
@@ -2150,6 +2150,8 @@ msgstr "عدّل الحجم ليناسب التحديد"
 msgid "_Adjustments"
 msgstr "ت_عديلات"
 
+#: ../Pinta.Core/Extensions/GtkExtensions.cs:199
+#: ../Pinta.Core/Extensions/GtkExtensions.cs:201
 #: ../Pinta/Actions/Edit/PasteAction.cs:187
 #: ../Pinta/Actions/File/CloseDocumentAction.cs:66
 msgid "_Cancel"
@@ -2179,6 +2181,8 @@ msgstr "الصورة"
 msgid "_Layers"
 msgstr "ال_طبقات"
 
+#: ../Pinta.Core/Extensions/GtkExtensions.cs:198
+#: ../Pinta.Core/Extensions/GtkExtensions.cs:202
 #: ../Pinta.Gui.Addins/InstallDialog.cs:156 ../Pinta/Dialogs/ErrorDialog.cs:41
 #: ../Pinta/Dialogs/ErrorDialog.cs:69
 msgid "_OK"
