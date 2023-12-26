@@ -7,11 +7,11 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-12-23 16:03-0500\n"
+"POT-Creation-Date: 2023-12-25 23:00-0500\n"
 "PO-Revision-Date: 2023-12-26 04:12+0000\n"
 "Last-Translator: Сергей <asvmail.as@gmail.com>\n"
-"Language-Team: Russian <https://hosted.weblate.org/projects/pinta/pinta/ru/>"
-"\n"
+"Language-Team: Russian <https://hosted.weblate.org/projects/pinta/pinta/ru/"
+">\n"
 "Language: ru\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -50,7 +50,7 @@ msgstr "Область 7 на 7"
 msgid "9 x 9 Region"
 msgstr "Область 9 на 9"
 
-#: ../Pinta/MainWindow.cs:349 ../Pinta/MainWindow.cs:328
+#: ../Pinta/MainWindow.cs:349
 msgid "A_dd-ins"
 msgstr "_Дополнения"
 
@@ -80,7 +80,7 @@ msgstr "Менеджер дополнений..."
 msgid "Added"
 msgstr "Добавлено"
 
-#: ../Pinta/MainWindow.cs:382 ../Pinta/MainWindow.cs:372
+#: ../Pinta/MainWindow.cs:382
 msgid "Adjustments"
 msgstr "Коррекция"
 
@@ -585,11 +585,11 @@ msgstr "Поведение на границе"
 msgid "Edge Detect"
 msgstr "Определение краёв"
 
-#: ../Pinta/MainWindow.cs:345 ../Pinta/MainWindow.cs:324
+#: ../Pinta/MainWindow.cs:345
 msgid "Effe_cts"
 msgstr "_Эффекты"
 
-#: ../Pinta/MainWindow.cs:376 ../Pinta/MainWindow.cs:366
+#: ../Pinta/MainWindow.cs:376
 msgid "Effects"
 msgstr "Эффекты"
 
@@ -765,7 +765,6 @@ msgid "Fullscreen"
 msgstr "Во весь экран"
 
 #: ../Pinta.Gui.Addins/AddinManagerDialog.cs:60
-#: ../Pinta.Gui.Addins/AddinManagerDialog.cs:64
 msgid "Gallery"
 msgstr "Галерея"
 
@@ -838,7 +837,6 @@ msgid "If you don't save, all changes will be permanently lost."
 msgstr "Если вы не сохраните изменения, они будут потеряны безвозвратно."
 
 #: ../Pinta.Tools/Tools/ColorPickerTool.cs:240 ../Pinta/MainWindow.cs:388
-#: ../Pinta/MainWindow.cs:378
 msgid "Image"
 msgstr "Изображение"
 
@@ -913,7 +911,6 @@ msgid "Install..."
 msgstr "Установка..."
 
 #: ../Pinta.Gui.Addins/AddinManagerDialog.cs:62
-#: ../Pinta.Gui.Addins/AddinManagerDialog.cs:60
 msgid "Installed"
 msgstr "Установлено"
 
@@ -1217,7 +1214,7 @@ msgstr "Светлота"
 msgid "Magic Wand Select"
 msgstr "Волшебная палочка"
 
-#: ../Pinta/MainWindow.cs:370 ../Pinta/MainWindow.cs:360
+#: ../Pinta/MainWindow.cs:370
 msgid "Main Menu"
 msgstr "Главное меню"
 
@@ -1869,7 +1866,7 @@ msgstr "Форма"
 msgid "Sharpen"
 msgstr "Добавить резкость"
 
-#: ../Pinta.Core/Extensions/ToolBoxButton.cs:49
+#: ../Pinta.Core/Extensions/ToolBoxButton.cs:51
 #: ../Pinta.Gui.Widgets/Widgets/StatusBarColorPaletteWidget.cs:261
 msgid "Shortcut key"
 msgstr "Горячая клавиша"
@@ -2049,7 +2046,7 @@ msgstr "Инструмент"
 msgid "Tool Box"
 msgstr "Инструменты"
 
-#: ../Pinta/MainWindow.cs:363 ../Pinta/MainWindow.cs:342
+#: ../Pinta/MainWindow.cs:363
 msgid "Tool Windows"
 msgstr "Инструментальные окна"
 
@@ -2128,7 +2125,6 @@ msgid "Update..."
 msgstr "Обновить..."
 
 #: ../Pinta.Gui.Addins/AddinManagerDialog.cs:64
-#: ../Pinta.Gui.Addins/AddinManagerDialog.cs:62
 msgid "Updates"
 msgstr "Обновления"
 
@@ -2227,10 +2223,12 @@ msgstr "Мельче"
 msgid "Zoom to Selection"
 msgstr "По размеру выделения"
 
-#: ../Pinta/MainWindow.cs:341 ../Pinta/MainWindow.cs:320
+#: ../Pinta/MainWindow.cs:341
 msgid "_Adjustments"
 msgstr "_Цвета"
 
+#: ../Pinta.Core/Extensions/GtkExtensions.cs:199
+#: ../Pinta.Core/Extensions/GtkExtensions.cs:201
 #: ../Pinta/Actions/Edit/PasteAction.cs:187
 #: ../Pinta/Actions/File/CloseDocumentAction.cs:66
 msgid "_Cancel"
@@ -2240,26 +2238,28 @@ msgstr "_Отменить"
 msgid "_Discard"
 msgstr "_Не сохранять"
 
-#: ../Pinta/MainWindow.cs:324 ../Pinta/MainWindow.cs:303
+#: ../Pinta/MainWindow.cs:324
 msgid "_Edit"
 msgstr "_Правка"
 
-#: ../Pinta/MainWindow.cs:320 ../Pinta/MainWindow.cs:299
+#: ../Pinta/MainWindow.cs:320
 msgid "_File"
 msgstr "_Файл"
 
-#: ../Pinta/MainWindow.cs:357 ../Pinta/MainWindow.cs:336
+#: ../Pinta/MainWindow.cs:357
 msgid "_Help"
 msgstr "_Справка"
 
-#: ../Pinta/MainWindow.cs:333 ../Pinta/MainWindow.cs:312
+#: ../Pinta/MainWindow.cs:333
 msgid "_Image"
 msgstr "_Изображение"
 
-#: ../Pinta/MainWindow.cs:337 ../Pinta/MainWindow.cs:316
+#: ../Pinta/MainWindow.cs:337
 msgid "_Layers"
 msgstr "С_лои"
 
+#: ../Pinta.Core/Extensions/GtkExtensions.cs:198
+#: ../Pinta.Core/Extensions/GtkExtensions.cs:202
 #: ../Pinta.Gui.Addins/InstallDialog.cs:156 ../Pinta/Dialogs/ErrorDialog.cs:41
 #: ../Pinta/Dialogs/ErrorDialog.cs:69
 msgid "_OK"
@@ -2269,11 +2269,11 @@ msgstr "_ОК"
 msgid "_Save"
 msgstr "_Сохранить"
 
-#: ../Pinta/MainWindow.cs:328 ../Pinta/MainWindow.cs:307
+#: ../Pinta/MainWindow.cs:328
 msgid "_View"
 msgstr "_Вид"
 
-#: ../Pinta/MainWindow.cs:353 ../Pinta/MainWindow.cs:332
+#: ../Pinta/MainWindow.cs:353
 msgid "_Window"
 msgstr "_Окно"
 
