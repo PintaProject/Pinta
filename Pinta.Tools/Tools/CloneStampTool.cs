@@ -81,6 +81,7 @@ public sealed class CloneStampTool : BaseBrushTool
 			undo_surface = document.Layers.CurrentUserLayer.Surface.Clone ();
 		} else {
 			origin = e.Point;
+			offset = null;
 		}
 	}
 
@@ -126,7 +127,7 @@ public sealed class CloneStampTool : BaseBrushTool
 
 		base.OnMouseUp (document, e);
 
-		offset = null;
+		// Note: the offset persists until the clone source is reselected.
 		last_point = null;
 
 		document.Layers.ToolLayer.Clear ();

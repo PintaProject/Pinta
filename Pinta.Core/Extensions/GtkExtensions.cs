@@ -193,14 +193,13 @@ public static partial class GtkExtensions
 	/// </summary>
 	public static void AddCancelOkButtons (this Dialog dialog)
 	{
-		// TODO-GTK4 - can these use the translations from GTK?
 		Widget ok_button;
 		if (PintaCore.System.OperatingSystem == OS.Windows) {
-			ok_button = dialog.AddButton ("_OK", (int) ResponseType.Ok);
-			dialog.AddButton ("_Cancel", (int) ResponseType.Cancel);
+			ok_button = dialog.AddButton (Translations.GetString ("_OK"), (int) ResponseType.Ok);
+			dialog.AddButton (Translations.GetString ("_Cancel"), (int) ResponseType.Cancel);
 		} else {
-			dialog.AddButton ("_Cancel", (int) ResponseType.Cancel);
-			ok_button = dialog.AddButton ("_OK", (int) ResponseType.Ok);
+			dialog.AddButton (Translations.GetString ("_Cancel"), (int) ResponseType.Cancel);
+			ok_button = dialog.AddButton (Translations.GetString ("_OK"), (int) ResponseType.Ok);
 		}
 
 		ok_button.AddCssClass (AdwaitaStyles.SuggestedAction);
@@ -447,8 +446,8 @@ public static partial class GtkExtensions
 	private static partial void ColorChooserGetRgba (IntPtr handle, out GdkRGBA color);
 
 	private static readonly Signal<Entry> EntryChangedSignal = new (
-	    unmanagedName: "changed",
-	    managedName: string.Empty
+		unmanagedName: "changed",
+		managedName: string.Empty
 	);
 
 	// TODO-GTK4 (bindings) - the Gtk.Editable::changed signal is not generated (https://github.com/gircore/gir.core/issues/831)
@@ -465,8 +464,8 @@ public static partial class GtkExtensions
 	}
 
 	private static readonly Signal<SingleSelection, SelectionChangedSignalArgs> SelectionChangedSignal = new (
-	    unmanagedName: "selection-changed",
-	    managedName: string.Empty
+		unmanagedName: "selection-changed",
+		managedName: string.Empty
 	);
 
 	// TODO-GTK4 (bindings) - the Gtk.SelectionModel::selection-changed signal is not generated (https://github.com/gircore/gir.core/issues/831)

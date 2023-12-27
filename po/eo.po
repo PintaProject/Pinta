@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: pinta\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-12-23 16:03-0500\n"
+"POT-Creation-Date: 2023-12-25 23:00-0500\n"
 "PO-Revision-Date: 2017-10-03 18:34+0000\n"
 "Last-Translator: Arie Schwartz <Unknown>\n"
 "Language-Team: Esperanto <eo@li.org>\n"
@@ -1798,7 +1798,7 @@ msgstr ""
 msgid "Sharpen"
 msgstr "Netita"
 
-#: ../Pinta.Core/Extensions/ToolBoxButton.cs:49
+#: ../Pinta.Core/Extensions/ToolBoxButton.cs:51
 #: ../Pinta.Gui.Widgets/Widgets/StatusBarColorPaletteWidget.cs:261
 msgid "Shortcut key"
 msgstr "Fulmoklavo"
@@ -2151,6 +2151,8 @@ msgstr "Zomi al zono"
 msgid "_Adjustments"
 msgstr "Ĝustigo"
 
+#: ../Pinta.Core/Extensions/GtkExtensions.cs:199
+#: ../Pinta.Core/Extensions/GtkExtensions.cs:201
 #: ../Pinta/Actions/Edit/PasteAction.cs:187
 #: ../Pinta/Actions/File/CloseDocumentAction.cs:66
 msgid "_Cancel"
@@ -2180,6 +2182,8 @@ msgstr "B_ildo"
 msgid "_Layers"
 msgstr "Tavo_loj"
 
+#: ../Pinta.Core/Extensions/GtkExtensions.cs:198
+#: ../Pinta.Core/Extensions/GtkExtensions.cs:202
 #: ../Pinta.Gui.Addins/InstallDialog.cs:156 ../Pinta/Dialogs/ErrorDialog.cs:41
 #: ../Pinta/Dialogs/ErrorDialog.cs:69
 msgid "_OK"
