@@ -34,6 +34,7 @@ Thanks to the following contributors who worked on this release:
 - Fixed issues where the Curves dialog could not easily edit existing control points ([#1973602](https://bugs.launchpad.net/pinta/+bug/1973602))
 - Fixed a bug where dragging a control point in the Curves dialog could unexpectedly erase other control points ([#1973602](https://bugs.launchpad.net/pinta/+bug/1973602))
 - Improved error handling when loading incompatible add-ins ([#2047274](https://bugs.launchpad.net/pinta/+bug/2047274))
+- The Clone Stamp tool no longer resets the destination offset after each stroke ([#2031257](https://bugs.launchpad.net/pinta/+bug/2031257))
 
 ## [2.1.1](https://github.com/PintaProject/Pinta/releases/tag/2.1.1) - 2023/02/26
 
