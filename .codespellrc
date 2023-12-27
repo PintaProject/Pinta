@@ -1,5 +1,5 @@
 [codespell]
-skip = .git,*.pdf,*.svg,po,configure.ac,*.sln,*.rtf
+skip = .git,*.pdf,*.svg,po,configure.ac,*.sln,*.rtf,Info.plist
 # gir - name of project
 # aCount,wll,rightt - variables
 ignore-words-list = gir,acount,wll,rightt
