@@ -23,7 +23,8 @@ public sealed class TextTool : BaseTool
 	private PointD start_mouse_xy;
 	private PointI start_click_point;
 	private bool tracking;
-	private readonly Gdk.Cursor cursor_hand;
+	private readonly Gdk.Cursor cursor_move = GdkExtensions.CursorFromName (Pinta.Resources.StandardCursors.Move);
+	private readonly Gdk.Cursor cursor_invalid = GdkExtensions.CursorFromName (Pinta.Resources.StandardCursors.NotAllowed);
 
 	private PointI click_point;
 	private bool is_editing;
@@ -87,14 +88,11 @@ public sealed class TextTool : BaseTool
 
 	public override string StatusBarText => Translations.GetString ("Left click to place cursor, then type desired text. Text color is primary color.");
 
-	public override Gdk.Cursor DefaultCursor => Gdk.Cursor.NewFromTexture (Resources.GetIcon ("Cursor.Text.png"), 16, 16, null);
-	public Gdk.Cursor InvalidEditCursor => Gdk.Cursor.NewFromTexture (Resources.GetIcon (Pinta.Resources.Icons.EditSelectionErase), 0, 0, null);
+	public override Gdk.Cursor DefaultCursor => GdkExtensions.CursorFromName (Pinta.Resources.StandardCursors.Text);
 
 	#region Constructor
 	public TextTool (IServiceManager services) : base (services)
 	{
-		cursor_hand = Gdk.Cursor.NewFromTexture (Resources.GetIcon ("Cursor.Pan.png"), 8, 8, null);
-
 		im_context = Gtk.IMMulticontext.New ();
 		im_context.OnCommit += OnIMCommit;
 
@@ -556,7 +554,7 @@ public sealed class TextTool : BaseTool
 		start_click_point = click_point;
 
 		//Change the cursor to indicate that the text is being dragged.
-		SetCursor (cursor_hand);
+		SetCursor (cursor_move);
 	}
 
 	protected override void OnMouseMove (Document document, ToolMouseEventArgs e)
@@ -624,7 +622,7 @@ public sealed class TextTool : BaseTool
 			}
 		} else {
 			if (previous_mouse_cursor_normal) {
-				SetCursor (InvalidEditCursor);
+				SetCursor (cursor_invalid);
 
 				previous_mouse_cursor_normal = showNormalCursor;
 
