@@ -350,11 +350,11 @@ public sealed class TextEngine
 	{
 		string? txt;
 		try {
-			txt = await clipboard.ReadTextAsync (); 
+			txt = await clipboard.ReadTextAsync ();
 		} catch (GLib.GException) {
 			// The clipboard probably contained an image.
 			return false;
-		} 
+		}
 
 		if (string.IsNullOrEmpty (txt))
 			return false;
