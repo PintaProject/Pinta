@@ -95,6 +95,8 @@ public sealed class TextTool : BaseTool
 	{
 		im_context = Gtk.IMMulticontext.New ();
 		im_context.OnCommit += OnIMCommit;
+		// We don't currently have support for displaying the pre-edited string in the text box.
+		im_context.SetUsePreedit (false);
 
 		layout = new Pinta.Core.TextLayout ();
 	}
