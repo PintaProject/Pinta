@@ -109,10 +109,17 @@ public sealed class LivePreviewManager
 
 		Started?.Invoke (this, new LivePreviewStartedEventArgs ());
 
+		// If the effect isn't tileable, there is a single tile for the entire render bounds.
+		// Otherwise, render each row in parallel.
+		int tileWidth = render_bounds.Width;
+		int tileHeight = 1;
+		if (!effect.IsTileable)
+			tileHeight = render_bounds.Height;
+
 		var settings = new AsyncEffectRenderer.Settings () {
 			ThreadCount = PintaCore.System.RenderThreads,
-			TileWidth = render_bounds.Width,
-			TileHeight = 1,
+			TileWidth = tileWidth,
+			TileHeight = tileHeight,
 			ThreadPriority = ThreadPriority.BelowNormal
 		};
 
