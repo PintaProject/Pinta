@@ -5,9 +5,6 @@
     </Content>
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Resources\Cursor.PanTool.png">
-      <LogicalName>Cursor.Pan.png</LogicalName>
-    </EmbeddedResource>
     <EmbeddedResource Include="Resources\Cursor.Paintbrush.png">
       <LogicalName>Cursor.Paintbrush.png</LogicalName>
     </EmbeddedResource>
@@ -19,9 +16,6 @@
     </EmbeddedResource>
 	<EmbeddedResource Include="Resources\Cursor.Gradient.png">
       <LogicalName>Cursor.Gradient.png</LogicalName>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Resources\Cursor.Text.png">
-      <LogicalName>Cursor.Text.png</LogicalName>
     </EmbeddedResource>
     <EmbeddedResource Include="Resources\Cursor.Pencil.png">
       <LogicalName>Cursor.Pencil.png</LogicalName>
