@@ -348,8 +348,15 @@ public sealed class TextEngine
 	/// </summary>
 	public async Task<bool> PerformPaste (Gdk.Clipboard clipboard)
 	{
-		string? txt = await clipboard.ReadTextAsync ();
-		if (String.IsNullOrEmpty (txt))
+		string? txt;
+		try {
+			txt = await clipboard.ReadTextAsync ();
+		} catch (GLib.GException) {
+			// The clipboard probably contained an image.
+			return false;
+		}
+
+		if (string.IsNullOrEmpty (txt))
 			return false;
 
 		if (HasSelection ())

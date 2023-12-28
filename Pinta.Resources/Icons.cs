@@ -245,6 +245,8 @@ public static class StandardCursors
 	public const string Default = "default";
 	public const string Grab = "grab";
 	public const string Grabbing = "grabbing";
+	public const string Move = "move";
+	public const string NotAllowed = "not-allowed";
 	public const string Progress = "progress";
 
 	public const string ResizeN = "n-resize";
@@ -256,6 +258,7 @@ public static class StandardCursors
 	public const string ResizeSE = "se-resize";
 	public const string ResizeSW = "sw-resize";
 
+	public const string Text = "text";
 	public const string ZoomIn = "zoom-in";
 	public const string ZoomOut = "zoom-out";
 }
