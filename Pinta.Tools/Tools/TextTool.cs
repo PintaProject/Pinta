@@ -663,9 +663,7 @@ public sealed class TextTool : BaseTool
 				// When pre-editing is active, the input method must consume all keystrokes.
 				// (e.g. Enter might be used to finish pre-editing)
 				keyHandled = TryHandleChar (e.Event);
-			}
-
-			if (!keyHandled) {
+			} else {
 				switch (e.Key) {
 					case Gdk.Key.BackSpace:
 						CurrentTextEngine.PerformBackspace ();
