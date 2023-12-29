@@ -510,4 +510,17 @@ public static partial class GtkExtensions
 		dest_pos = new PointD (x, y);
 		return result;
 	}
+
+	// Manual binding for GetPreeditString
+	// TODO-GTK4 (bindings) - missing from gir.core: "opaque record parameter 'attrs' with direction != in not yet supported"
+	[DllImport (GtkLibraryName, EntryPoint = "gtk_im_context_get_preedit_string")]
+	private static extern void IMContextGetPreeditString (IntPtr handle, out GLib.Internal.NonNullableUtf8StringOwnedHandle str, out Pango.Internal.AttrListOwnedHandle attrs, out int cursor_pos);
+
+	public static void GetPreeditString (this IMContext context, out string str, out Pango.AttrList attrs, out int cursor_pos)
+	{
+		IMContextGetPreeditString (context.Handle, out var str_handle, out var attrs_handle, out cursor_pos);
+		str = str_handle.ConvertToString ();
+		str_handle.Dispose ();
+		attrs = new Pango.AttrList (attrs_handle);
+	}
 }

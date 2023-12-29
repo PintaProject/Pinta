@@ -34,6 +34,8 @@ public sealed class TextTool : BaseTool
 	private Cairo.ImageSurface? text_undo_surface;
 	private Cairo.ImageSurface? user_undo_surface;
 	private TextEngine? undo_engine;
+	// The last pre-editing string, if pre-editing is active.
+	private string? preedit_string;
 	// The selection from when editing started. This ensures that text doesn't suddenly disappear/appear
 	// if the selection changes before the text is finalized.
 	private DocumentSelection? selection;
@@ -95,8 +97,9 @@ public sealed class TextTool : BaseTool
 	{
 		im_context = Gtk.IMMulticontext.New ();
 		im_context.OnCommit += OnIMCommit;
-		// We don't currently have support for displaying the pre-edited string in the text box.
-		im_context.SetUsePreedit (false);
+		im_context.OnPreeditStart += OnPreeditStart;
+		im_context.OnPreeditChanged += OnPreeditChanged;
+		im_context.OnPreeditEnd += OnPreeditEnd;
 
 		layout = new Pinta.Core.TextLayout ();
 	}
@@ -656,91 +659,99 @@ public sealed class TextTool : BaseTool
 		bool keyHandled = true;
 
 		if (is_editing) {
-			switch (e.Key) {
-				case Gdk.Key.BackSpace:
-					CurrentTextEngine.PerformBackspace ();
-					break;
+			if (preedit_string is not null && e.Event is not null) {
+				// When pre-editing is active, the input method must consume all keystrokes.
+				// (e.g. Enter might be used to finish pre-editing)
+				keyHandled = TryHandleChar (e.Event);
+			}
 
-				case Gdk.Key.Delete:
-					CurrentTextEngine.PerformDelete ();
-					break;
+			if (!keyHandled) {
+				switch (e.Key) {
+					case Gdk.Key.BackSpace:
+						CurrentTextEngine.PerformBackspace ();
+						break;
 
-				case Gdk.Key.KP_Enter:
-				case Gdk.Key.Return:
-					CurrentTextEngine.PerformEnter ();
-					break;
+					case Gdk.Key.Delete:
+						CurrentTextEngine.PerformDelete ();
+						break;
 
-				case Gdk.Key.Left:
-					CurrentTextEngine.PerformLeft (e.IsControlPressed, e.IsShiftPressed);
-					break;
+					case Gdk.Key.KP_Enter:
+					case Gdk.Key.Return:
+						CurrentTextEngine.PerformEnter ();
+						break;
 
-				case Gdk.Key.Right:
-					CurrentTextEngine.PerformRight (e.IsControlPressed, e.IsShiftPressed);
-					break;
+					case Gdk.Key.Left:
+						CurrentTextEngine.PerformLeft (e.IsControlPressed, e.IsShiftPressed);
+						break;
 
-				case Gdk.Key.Up:
-					CurrentTextEngine.PerformUp (e.IsShiftPressed);
-					break;
+					case Gdk.Key.Right:
+						CurrentTextEngine.PerformRight (e.IsControlPressed, e.IsShiftPressed);
+						break;
 
-				case Gdk.Key.Down:
-					CurrentTextEngine.PerformDown (e.IsShiftPressed);
-					break;
+					case Gdk.Key.Up:
+						CurrentTextEngine.PerformUp (e.IsShiftPressed);
+						break;
 
-				case Gdk.Key.Home:
-					CurrentTextEngine.PerformHome (e.IsControlPressed, e.IsShiftPressed);
-					break;
+					case Gdk.Key.Down:
+						CurrentTextEngine.PerformDown (e.IsShiftPressed);
+						break;
 
-				case Gdk.Key.End:
-					CurrentTextEngine.PerformEnd (e.IsControlPressed, e.IsShiftPressed);
-					break;
+					case Gdk.Key.Home:
+						CurrentTextEngine.PerformHome (e.IsControlPressed, e.IsShiftPressed);
+						break;
 
-				case Gdk.Key.Next:
-				case Gdk.Key.Prior:
-					break;
+					case Gdk.Key.End:
+						CurrentTextEngine.PerformEnd (e.IsControlPressed, e.IsShiftPressed);
+						break;
 
-				case Gdk.Key.Escape:
-					StopEditing (false);
-					return true;
-				case Gdk.Key.Insert:
-					if (e.IsShiftPressed) {
-						CurrentTextEngine.PerformPaste (GdkExtensions.GetDefaultClipboard ()).Wait ();
-					} else if (e.IsControlPressed) {
-						CurrentTextEngine.PerformCopy (GdkExtensions.GetDefaultClipboard ());
-					}
-					break;
-				default:
-					if (e.IsControlPressed) {
-						if (e.Key == Gdk.Key.z) {
-							//Ctrl + Z for undo while editing.
-							OnHandleUndo (document);
+					case Gdk.Key.Next:
+					case Gdk.Key.Prior:
+						break;
 
-							if (PintaCore.Workspace.ActiveDocument.History.CanUndo)
-								PintaCore.Workspace.ActiveDocument.History.Undo ();
-
-							return true;
-						} else if (e.Key == Gdk.Key.i) {
-							italic_btn.Toggle ();
-							UpdateFont ();
-						} else if (e.Key == Gdk.Key.b) {
-							bold_btn.Toggle ();
-							UpdateFont ();
-						} else if (e.Key == Gdk.Key.u) {
-							underscore_btn.Toggle ();
-							UpdateFont ();
-						} else if (e.Key == Gdk.Key.a) {
-							// Select all of the text.
-							CurrentTextEngine.PerformHome (false, false);
-							CurrentTextEngine.PerformEnd (true, true);
-						} else {
-							//Ignore command shortcut.
-							return false;
+					case Gdk.Key.Escape:
+						StopEditing (false);
+						return true;
+					case Gdk.Key.Insert:
+						if (e.IsShiftPressed) {
+							CurrentTextEngine.PerformPaste (GdkExtensions.GetDefaultClipboard ()).Wait ();
+						} else if (e.IsControlPressed) {
+							CurrentTextEngine.PerformCopy (GdkExtensions.GetDefaultClipboard ());
 						}
-					} else {
-						if (e.Event is not null)
-							keyHandled = TryHandleChar (e.Event);
-					}
+						break;
+					default:
+						if (e.IsControlPressed) {
+							if (e.Key == Gdk.Key.z) {
+								//Ctrl + Z for undo while editing.
+								OnHandleUndo (document);
 
-					break;
+								if (PintaCore.Workspace.ActiveDocument.History.CanUndo)
+									PintaCore.Workspace.ActiveDocument.History.Undo ();
+
+								return true;
+							} else if (e.Key == Gdk.Key.i) {
+								italic_btn.Toggle ();
+								UpdateFont ();
+							} else if (e.Key == Gdk.Key.b) {
+								bold_btn.Toggle ();
+								UpdateFont ();
+							} else if (e.Key == Gdk.Key.u) {
+								underscore_btn.Toggle ();
+								UpdateFont ();
+							} else if (e.Key == Gdk.Key.a) {
+								// Select all of the text.
+								CurrentTextEngine.PerformHome (false, false);
+								CurrentTextEngine.PerformEnd (true, true);
+							} else {
+								//Ignore command shortcut.
+								return false;
+							}
+						} else {
+							if (e.Event is not null)
+								keyHandled = TryHandleChar (e.Event);
+						}
+
+						break;
+				}
 			}
 			if (keyHandled) {
 				im_context.FocusOut ();
@@ -778,24 +789,36 @@ public sealed class TextTool : BaseTool
 	private void OnIMCommit (object o, Gtk.IMContext.CommitSignalArgs args)
 	{
 		try {
-			var str = new StringBuilder ();
-
-			for (int i = 0; i < args.Str.Length; i++) {
-				char utf32Char;
-				if (char.IsHighSurrogate (args.Str, i)) {
-					utf32Char = (char) char.ConvertToUtf32 (args.Str, i);
-					i++;
-				} else {
-					utf32Char = args.Str[i];
-				}
-
-				str.Append (utf32Char);
-			}
-
-			CurrentTextEngine.InsertText (str.ToString ());
+			CurrentTextEngine.InsertText (args.Str);
 		} finally {
 			im_context.Reset ();
 		}
+	}
+
+	private void OnPreeditStart (object o, EventArgs args)
+	{
+		// Initialize to empty string (null means pre-editing is inactive).
+		preedit_string = "";
+	}
+
+	private void OnPreeditEnd (object o, EventArgs args)
+	{
+		// Reset to indicate that pre-editing is done.
+		preedit_string = null;
+	}
+
+	private void OnPreeditChanged (object o, EventArgs args)
+	{
+		// Remove the previous preedit string.
+		for (int i = 0; i < preedit_string?.Length; ++i)
+			CurrentTextEngine.PerformBackspace ();
+
+		// Insert the preedit string.
+		// TODO - use the Pango.AttrList argument to better visualize the pre-edited text vs the regular text.
+		im_context.GetPreeditString (out string updated_str, out _, out _);
+
+		preedit_string = updated_str;
+		CurrentTextEngine.InsertText (preedit_string);
 	}
 	#endregion
 
