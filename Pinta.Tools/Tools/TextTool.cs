@@ -787,38 +787,44 @@ public sealed class TextTool : BaseTool
 	private void OnIMCommit (object o, Gtk.IMContext.CommitSignalArgs args)
 	{
 		try {
+			// Reset the pre-edit string. Depending on the platform there might still be
+			// a preedit-changed signal (setting it to the empty string) after the commit, rather than before.
+			UpdatePreeditString (string.Empty);
+
 			CurrentTextEngine.InsertText (args.Str);
 		} finally {
 			im_context.Reset ();
-			// Reset to indicate that pre-editing is done. Depending on the platform there might still be
-			// a preedit-changed signal (setting it to the empty string) after the commit, rather than before.
-			preedit_string = null;
 		}
 	}
 
 	private void OnPreeditStart (object o, EventArgs args)
 	{
 		// Initialize to empty string (null means pre-editing is inactive).
-		preedit_string = "";
+		preedit_string = string.Empty;
 	}
 
 	private void OnPreeditEnd (object o, EventArgs args)
 	{
-		// Reset to indicate that pre-editing is done.
+		// Reset to indicate that pre-editing is done. There should have previously been
+		// a preedit-changed signal to erase the last preedited string.
 		preedit_string = null;
 	}
 
 	private void OnPreeditChanged (object o, EventArgs args)
 	{
+		// TODO - use the Pango.AttrList argument to better visualize the pre-edited text vs the regular text.
+		im_context.GetPreeditString (out string updated_str, out _, out _);
+		UpdatePreeditString (updated_str);
+	}
+
+	private void UpdatePreeditString (string updated)
+	{
 		// Remove the previous preedit string.
 		for (int i = 0; i < preedit_string?.Length; ++i)
 			CurrentTextEngine.PerformBackspace ();
 
-		// Insert the preedit string.
-		// TODO - use the Pango.AttrList argument to better visualize the pre-edited text vs the regular text.
-		im_context.GetPreeditString (out string updated_str, out _, out _);
-
-		preedit_string = updated_str;
+		// Insert the new string.
+		preedit_string = updated;
 		CurrentTextEngine.InsertText (preedit_string);
 	}
 	#endregion
