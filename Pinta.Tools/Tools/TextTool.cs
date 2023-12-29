@@ -655,15 +655,18 @@ public sealed class TextTool : BaseTool
 		ctrl_key = e.Key.IsControlKey ();
 		UpdateMouseCursor (document);
 
-		// Assume that we are going to handle the key
-		bool keyHandled = true;
-
+		bool keyHandled = false;
 		if (is_editing) {
 			if (preedit_string is not null && e.Event is not null) {
-				// When pre-editing is active, the input method must consume all keystrokes.
+				// When pre-editing is active, the input method should consume all keystrokes first.
 				// (e.g. Enter might be used to finish pre-editing)
 				keyHandled = TryHandleChar (e.Event);
-			} else {
+			}
+
+			if (!keyHandled) {
+				// Assume that we are going to handle the key
+				keyHandled = true;
+
 				switch (e.Key) {
 					case Gdk.Key.BackSpace:
 						CurrentTextEngine.PerformBackspace ();
@@ -756,9 +759,6 @@ public sealed class TextTool : BaseTool
 				RedrawText (true, true);
 				im_context.FocusIn ();
 			}
-		} else {
-			// If we're not editing, allow the key press to be handled elsewhere (e.g. for selecting another tool).
-			keyHandled = false;
 		}
 
 		return keyHandled;
