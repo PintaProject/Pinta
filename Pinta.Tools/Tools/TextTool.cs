@@ -826,6 +826,8 @@ public sealed class TextTool : BaseTool
 		// Insert the new string.
 		preedit_string = updated;
 		CurrentTextEngine.InsertText (preedit_string);
+
+		RedrawText (true, true);
 	}
 	#endregion
 
