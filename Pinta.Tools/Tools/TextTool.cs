@@ -776,21 +776,7 @@ public sealed class TextTool : BaseTool
 	private void OnIMCommit (object o, Gtk.IMContext.CommitSignalArgs args)
 	{
 		try {
-			var str = new StringBuilder ();
-
-			for (int i = 0; i < args.Str.Length; i++) {
-				char utf32Char;
-				if (char.IsHighSurrogate (args.Str, i)) {
-					utf32Char = (char) char.ConvertToUtf32 (args.Str, i);
-					i++;
-				} else {
-					utf32Char = args.Str[i];
-				}
-
-				str.Append (utf32Char);
-			}
-
-			CurrentTextEngine.InsertText (str.ToString ());
+			CurrentTextEngine.InsertText (args.Str);
 		} finally {
 			im_context.Reset ();
 		}
