@@ -816,7 +816,7 @@ public sealed class TextTool : BaseTool
 		// Insert the preedit string.
 		// TODO - use the Pango.AttrList argument to better visualize the pre-edited text vs the regular text.
 		im_context.GetPreeditString (out string updated_str, out _, out _);
-		
+
 		preedit_string = updated_str;
 		CurrentTextEngine.InsertText (preedit_string);
 	}
