@@ -8,6 +8,7 @@
 /////////////////////////////////////////////////////////////////////////////////
 
 using System;
+using System.Collections.Immutable;
 using Cairo;
 using Pinta.Core;
 using Pinta.Gui.Widgets;
@@ -16,9 +17,9 @@ namespace Pinta.Effects;
 
 public sealed class InkSketchEffect : BaseEffect
 {
-	private static readonly int[][] conv;
-	private const int size = 5;
-	private const int radius = (size - 1) / 2;
+	private static readonly ImmutableArray<ImmutableArray<int>> conv;
+	private const int Size = 5;
+	private const int Radius = (Size - 1) / 2;
 
 	private readonly GlowEffect glow_effect;
 	private readonly UnaryPixelOps.Desaturate desaturate_op;
@@ -47,16 +48,13 @@ public sealed class InkSketchEffect : BaseEffect
 
 	static InkSketchEffect ()
 	{
-		conv = new int[5][];
-
-		for (int i = 0; i < conv.Length; ++i)
-			conv[i] = new int[5];
-
-		conv[0] = new int[] { -1, -1, -1, -1, -1 };
-		conv[1] = new int[] { -1, -1, -1, -1, -1 };
-		conv[2] = new int[] { -1, -1, 30, -1, -1 };
-		conv[3] = new int[] { -1, -1, -1, -1, -1 };
-		conv[4] = new int[] { -1, -1, -5, -1, -1 };
+		conv = ImmutableArray.Create (
+			ImmutableArray.Create (-1, -1, -1, -1, -1),
+			ImmutableArray.Create (-1, -1, -1, -1, -1),
+			ImmutableArray.Create (-1, -1, 30, -1, -1),
+			ImmutableArray.Create (-1, -1, -1, -1, -1),
+			ImmutableArray.Create (-1, -1, -5, -1, -1)
+		);
 	}
 
 	public override void LaunchConfiguration ()
@@ -81,65 +79,20 @@ public sealed class InkSketchEffect : BaseEffect
 		// Create black outlines by finding the edges of objects 
 		foreach (Core.RectangleI roi in rois) {
 			for (int y = roi.Top; y <= roi.Bottom; ++y) {
-				int top = y - radius;
-				int bottom = y + radius + 1;
 
-				if (top < 0) {
-					top = 0;
-				}
-
-				if (bottom > dest.Height) {
-					bottom = dest.Height;
-				}
+				int top = Math.Max (y - Radius, 0);
+				int bottom = Math.Min (y + Radius + 1, dest.Height);
 
 				var dst_row = dst_data.Slice (y * width, width);
 
 				for (int x = roi.Left; x <= roi.Right; ++x) {
-					int left = x - radius;
-					int right = x + radius + 1;
 
-					if (left < 0) {
-						left = 0;
-					}
+					int left = Math.Max (x - Radius, 0);
+					int right = Math.Min (x + Radius + 1, dest.Width);
 
-					if (right > dest.Width) {
-						right = dest.Width;
-					}
-
-					int r = 0;
-					int g = 0;
-					int b = 0;
-
-					for (int v = top; v < bottom; v++) {
-						var src_row = src_data.Slice (v * width, width);
-						int j = v - y + radius;
-
-						for (int u = left; u < right; u++) {
-							int i1 = u - x + radius;
-							int w = conv[j][i1];
-
-							ColorBgra src_pixel = src_row[u];
-
-							r += src_pixel.R * w;
-							g += src_pixel.G * w;
-							b += src_pixel.B * w;
-						}
-					}
-
-					ColorBgra topLayer = ColorBgra.FromBgr (
-					    Utility.ClampToByte (b),
-					    Utility.ClampToByte (g),
-					    Utility.ClampToByte (r));
-
-					// Desaturate 
-					topLayer = desaturate_op.Apply (topLayer);
-
-					// Adjust Brightness and Contrast 
-					if (topLayer.R > (Data.InkOutline * 255 / 100)) {
-						topLayer = ColorBgra.FromBgra (255, 255, 255, topLayer.A);
-					} else {
-						topLayer = ColorBgra.FromBgra (0, 0, 0, topLayer.A);
-					}
+					RectangleI adjustedBounds = RectangleI.FromLTRB (left, top, right, bottom);
+					RgbColor baseRGB = CreateBaseRGB (src_data, width, x, y, adjustedBounds);
+					ColorBgra topLayer = CreateTopLayer (baseRGB);
 
 					// Change Blend Mode to Darken
 					ColorBgra originalPixel = dst_row[x];
@@ -147,6 +100,53 @@ public sealed class InkSketchEffect : BaseEffect
 				}
 			}
 		}
+	}
+
+	private static RgbColor CreateBaseRGB (ReadOnlySpan<ColorBgra> src_data, int width, int x, int y, RectangleI adjustedBounds)
+	{
+		int r = 0;
+		int g = 0;
+		int b = 0;
+
+		for (int v = adjustedBounds.Top; v < adjustedBounds.Bottom; v++) {
+
+			var src_row = src_data.Slice (v * width, width);
+			int j = v - y + Radius;
+
+			for (int u = adjustedBounds.Left; u < adjustedBounds.Right; u++) {
+				int i1 = u - x + Radius;
+				int w = conv[j][i1];
+
+				ColorBgra src_pixel = src_row[u];
+
+				r += src_pixel.R * w;
+				g += src_pixel.G * w;
+				b += src_pixel.B * w;
+			}
+		}
+
+		return new (r, g, b);
+	}
+
+	private ColorBgra CreateTopLayer (RgbColor baseRGB)
+	{
+		ColorBgra topLayer = ColorBgra.FromBgr (
+			b: Utility.ClampToByte (baseRGB.Blue),
+			g: Utility.ClampToByte (baseRGB.Green),
+			r: Utility.ClampToByte (baseRGB.Red)
+		);
+
+		// Desaturate 
+		topLayer = desaturate_op.Apply (topLayer);
+
+		// Adjust Brightness and Contrast 
+		if (topLayer.R > (Data.InkOutline * 255 / 100)) {
+			topLayer = ColorBgra.FromBgra (255, 255, 255, topLayer.A);
+		} else {
+			topLayer = ColorBgra.FromBgra (0, 0, 0, topLayer.A);
+		}
+
+		return topLayer;
 	}
 	#endregion
 
