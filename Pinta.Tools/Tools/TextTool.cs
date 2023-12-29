@@ -790,6 +790,9 @@ public sealed class TextTool : BaseTool
 			CurrentTextEngine.InsertText (args.Str);
 		} finally {
 			im_context.Reset ();
+			// Reset to indicate that pre-editing is done. Depending on the platform there might still be
+			// a preedit-changed signal (setting it to the empty string) after the commit, rather than before.
+			preedit_string = null;
 		}
 	}
 
