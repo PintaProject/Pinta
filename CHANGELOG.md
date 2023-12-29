@@ -36,6 +36,7 @@ Thanks to the following contributors who worked on this release:
 - Improved error handling when loading incompatible add-ins ([#2047274](https://bugs.launchpad.net/pinta/+bug/2047274))
 - The Clone Stamp tool no longer resets the destination offset after each stroke ([#2031257](https://bugs.launchpad.net/pinta/+bug/2031257))
 - Fixed potential errors when pasting in the text tool if the clipboard didn't contain text ([#2047495](https://bugs.launchpad.net/pinta/+bug/2047495))
+- The text tool now supports pre-editing to display the intermediate characters entered by an input method ([#2047445](https://bugs.launchpad.net/pinta/+bug/2047445))
 
 ## [2.1.1](https://github.com/PintaProject/Pinta/releases/tag/2.1.1) - 2023/02/26
 
