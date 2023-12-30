@@ -412,17 +412,10 @@ public sealed class DocumentSelection
 		// Calculate the minimum rectangular bounds that surround the current selection.
 		foreach (var li in SelectionPolygons) {
 			foreach (var ip in li) {
-				if (minX > ip.X)
-					minX = ip.X;
-
-				if (minY > ip.Y)
-					minY = ip.Y;
-
-				if (maxX < ip.X)
-					maxX = ip.X;
-
-				if (maxY < ip.Y)
-					maxY = ip.Y;
+				minX = Math.Min (minX, ip.X);
+				minY = Math.Min (minY, ip.Y);
+				maxX = Math.Max (maxX, ip.X);
+				maxY = Math.Max (maxY, ip.Y);
 			}
 		}
 

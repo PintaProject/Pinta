@@ -70,29 +70,11 @@ public abstract class ColorDifferenceEffect : BaseEffect
 						}
 					}
 
-					int iRsum = (int) rSum;
-					int iGsum = (int) gSum;
-					int iBsum = (int) bSum;
+					byte iRsum = Utility.ClampToByte (rSum);
+					byte iGsum = Utility.ClampToByte (gSum);
+					byte iBsum = Utility.ClampToByte (bSum);
 
-					if (iRsum > 255)
-						iRsum = 255;
-
-					if (iGsum > 255)
-						iGsum = 255;
-
-					if (iBsum > 255)
-						iBsum = 255;
-
-					if (iRsum < 0)
-						iRsum = 0;
-
-					if (iGsum < 0)
-						iGsum = 0;
-
-					if (iBsum < 0)
-						iBsum = 0;
-
-					dst_row[x] = ColorBgra.FromBgra ((byte) iBsum, (byte) iGsum, (byte) iRsum, 255);
+					dst_row[x] = ColorBgra.FromBgra (iBsum, iGsum, iRsum, 255);
 				}
 			}
 		}

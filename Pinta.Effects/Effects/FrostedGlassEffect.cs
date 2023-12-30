@@ -71,14 +71,9 @@ public sealed class FrostedGlassEffect : BaseEffect
 			for (int y = rect.Top; y <= rect.Bottom; ++y) {
 
 				var dst_row = dst_data.Slice (y * settings.src_width, settings.src_width);
-				int top = y - settings.amount;
-				int bottom = y + settings.amount + 1;
 
-				if (top < 0)
-					top = 0;
-
-				if (bottom > settings.src_height)
-					bottom = settings.src_height;
+				int top = Math.Max (y - settings.amount, 0);
+				int bottom = Math.Min (y + settings.amount + 1, settings.src_height);
 
 				for (int x = rect.Left; x <= rect.Right; ++x)
 					dst_row[x] = GetFinalPixelColor (settings, random, src_data, top, bottom, x);
