@@ -8,8 +8,6 @@ namespace Pinta.Core.Tests;
 internal sealed class FileFormatTests
 {
 	[TestCase ("sixcolorsinput.gif", "sixcolorsoutput_lf.ppm")]
-	[TestCase ("sixcolorsinput.gif", "sixcolorsoutput_crlf.ppm")]
-	//[TestCase ("sixcolorsoutput_lf.ppm", "sixcolorsoutput_crlf.ppm")] // TODO: Test reads them as equal, but they're not
 	public void Files_NotEqual (string file1, string file2)
 	{
 		var path1 = Utilities.GetAssetPath (file1);
@@ -46,7 +44,7 @@ internal sealed class FileFormatTests
 	static readonly IReadOnlyList<TestCaseData> netpbm_pixmap_text_cases = new TestCaseData[] {
 		new (
 			"sixcolorsinput.gif",
-			new [] { "sixcolorsoutput_lf.ppm", "sixcolorsoutput_crlf.ppm" }
+			new [] { "sixcolorsoutput_lf.ppm" }
 		),
 	};
 }

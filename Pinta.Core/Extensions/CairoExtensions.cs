@@ -518,17 +518,17 @@ namespace Pinta.Core
 			if (u >= 0 && v >= 0 && u < srcWidth && v < srcHeight) {
 				unchecked {
 					int iu = (int) Math.Floor (u);
-					uint sxfrac = (uint) (256 * (u - (float) iu));
+					uint sxfrac = (uint) (256 * (u - iu));
 					uint sxfracinv = 256 - sxfrac;
 
 					int iv = (int) Math.Floor (v);
-					uint syfrac = (uint) (256 * (v - (float) iv));
+					uint syfrac = (uint) (256 * (v - iv));
 					uint syfracinv = 256 - syfrac;
 
-					uint wul = (uint) (sxfracinv * syfracinv);
-					uint wur = (uint) (sxfrac * syfracinv);
-					uint wll = (uint) (sxfracinv * syfrac);
-					uint wlr = (uint) (sxfrac * syfrac);
+					uint wul = sxfracinv * syfracinv;
+					uint wur = sxfrac * syfracinv;
+					uint wll = sxfracinv * syfrac;
+					uint wlr = sxfrac * syfrac;
 
 					int sx = iu;
 					int sy = iv;
@@ -548,10 +548,10 @@ namespace Pinta.Core
 					else
 						sbottom = stop + 1;
 
-					ref readonly ColorBgra cul = ref src.GetColorBgra (src_data, srcWidth, new (sleft, stop));
-					ref readonly ColorBgra cur = ref src.GetColorBgra (src_data, srcWidth, new (sright, stop));
-					ref readonly ColorBgra cll = ref src.GetColorBgra (src_data, srcWidth, new (sleft, sbottom));
-					ref readonly ColorBgra clr = ref src.GetColorBgra (src_data, srcWidth, new (sright, sbottom));
+					ColorBgra cul = src.GetColorBgra (src_data, srcWidth, new (sleft, stop));
+					ColorBgra cur = src.GetColorBgra (src_data, srcWidth, new (sright, stop));
+					ColorBgra cll = src.GetColorBgra (src_data, srcWidth, new (sleft, sbottom));
+					ColorBgra clr = src.GetColorBgra (src_data, srcWidth, new (sright, sbottom));
 
 					return ColorBgra.BlendColors4W16IP (cul, wul, cur, wur, cll, wll, clr, wlr);
 				}
@@ -570,32 +570,22 @@ namespace Pinta.Core
 			if (!Utility.IsNumber (x) || !Utility.IsNumber (y))
 				return ColorBgra.Transparent;
 
-			float u = x;
-			float v = y;
-
-			if (u < 0)
-				u = 0;
-			else if (u > srcWidth - 1)
-				u = srcWidth - 1;
-
-			if (v < 0)
-				v = 0;
-			else if (v > srcHeight - 1)
-				v = srcHeight - 1;
+			float u = Math.Clamp (x, 0, srcWidth - 1);
+			float v = Math.Clamp (y, 0, srcHeight - 1);
 
 			unchecked {
 				int iu = (int) Math.Floor (u);
-				uint sxfrac = (uint) (256 * (u - (float) iu));
+				uint sxfrac = (uint) (256 * (u - iu));
 				uint sxfracinv = 256 - sxfrac;
 
 				int iv = (int) Math.Floor (v);
-				uint syfrac = (uint) (256 * (v - (float) iv));
+				uint syfrac = (uint) (256 * (v - iv));
 				uint syfracinv = 256 - syfrac;
 
-				uint wul = (uint) (sxfracinv * syfracinv);
-				uint wur = (uint) (sxfrac * syfracinv);
-				uint wll = (uint) (sxfracinv * syfrac);
-				uint wlr = (uint) (sxfrac * syfrac);
+				uint wul = sxfracinv * syfracinv;
+				uint wur = sxfrac * syfracinv;
+				uint wll = sxfracinv * syfrac;
+				uint wlr = sxfrac * syfrac;
 
 				int sx = iu;
 				int sy = iv;
@@ -615,10 +605,10 @@ namespace Pinta.Core
 				else
 					sbottom = stop + 1;
 
-				ref readonly ColorBgra cul = ref src.GetColorBgra (src_data, srcWidth, new (sleft, stop));
-				ref readonly ColorBgra cur = ref src.GetColorBgra (src_data, srcWidth, new (sright, stop));
-				ref readonly ColorBgra cll = ref src.GetColorBgra (src_data, srcWidth, new (sleft, sbottom));
-				ref readonly ColorBgra clr = ref src.GetColorBgra (src_data, srcWidth, new (sright, sbottom));
+				ColorBgra cul = src.GetColorBgra (src_data, srcWidth, new (sleft, stop));
+				ColorBgra cur = src.GetColorBgra (src_data, srcWidth, new (sright, stop));
+				ColorBgra cll = src.GetColorBgra (src_data, srcWidth, new (sleft, sbottom));
+				ColorBgra clr = src.GetColorBgra (src_data, srcWidth, new (sright, sbottom));
 
 				return ColorBgra.BlendColors4W16IP (cul, wul, cur, wur, cll, wll, clr, wlr);
 			}
@@ -639,27 +629,27 @@ namespace Pinta.Core
 
 			unchecked {
 				int iu = (int) Math.Floor (u);
-				uint sxfrac = (uint) (256 * (u - (float) iu));
+				uint sxfrac = (uint) (256 * (u - iu));
 				uint sxfracinv = 256 - sxfrac;
 
 				int iv = (int) Math.Floor (v);
-				uint syfrac = (uint) (256 * (v - (float) iv));
+				uint syfrac = (uint) (256 * (v - iv));
 				uint syfracinv = 256 - syfrac;
 
-				uint wul = (uint) (sxfracinv * syfracinv);
-				uint wur = (uint) (sxfrac * syfracinv);
-				uint wll = (uint) (sxfracinv * syfrac);
-				uint wlr = (uint) (sxfrac * syfrac);
+				uint wul = sxfracinv * syfracinv;
+				uint wur = sxfrac * syfracinv;
+				uint wll = sxfracinv * syfrac;
+				uint wlr = sxfrac * syfrac;
 
 				int sx = iu;
 				if (sx < 0)
-					sx = (srcWidth - 1) + ((sx + 1) % srcWidth);
+					sx = srcWidth - 1 + ((sx + 1) % srcWidth);
 				else if (sx > (srcWidth - 1))
 					sx %= srcWidth;
 
 				int sy = iv;
 				if (sy < 0)
-					sy = (srcHeight - 1) + ((sy + 1) % srcHeight);
+					sy = srcHeight - 1 + ((sy + 1) % srcHeight);
 				else if (sy > (srcHeight - 1))
 					sy %= srcHeight;
 
@@ -731,7 +721,7 @@ namespace Pinta.Core
 				dy = bottom.Y - top.Y;
 
 				if (dy != 0) {
-					edgeTable[edgeCount] = new Edge (top.Y, bottom.Y, top.X << 8, (((bottom.X - top.X) << 8) / dy));
+					edgeTable[edgeCount] = new Edge (top.Y, bottom.Y, top.X << 8, ((bottom.X - top.X) << 8) / dy);
 					ymax = Math.Max (ymax, bottom.Y);
 					++edgeCount;
 				}
