@@ -48,7 +48,7 @@ public sealed class EmbossEffect : BaseEffect
 	private EmbossSettings CreateSettings (ImageSurface src)
 	{
 		return new (
-			weights: ComputeWeights (),
+			weights: ComputeWeights (Data.Angle.Degrees),
 			srcWidth: src.Width,
 			srcHeight: src.Height
 		);
@@ -116,10 +116,10 @@ public sealed class EmbossEffect : BaseEffect
 	}
 
 
-	private double[,] ComputeWeights ()
+	private static double[,] ComputeWeights (double degrees)
 	{
 		// adjust and convert angle to radians
-		double r = (double) Data.Angle.Degrees * 2.0 * Math.PI / 360.0;
+		double r = degrees * 2.0 * Math.PI / 360.0;
 
 		// angle delta for each weight
 		double dr = Math.PI / 4.0;
