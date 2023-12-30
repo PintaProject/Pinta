@@ -10,7 +10,9 @@ public sealed class NetpbmPortablePixmap : IImageExporter
 {
 	public void Export (ImageSurface flattenedImage, Stream outputStream)
 	{
-		using StreamWriter writer = new (outputStream, Encoding.ASCII);
+		using StreamWriter writer = new (outputStream, Encoding.ASCII) {
+			NewLine = "\n" // Always use LF endings to generate the same output on every platform and simplify unit tests
+		};
 		Size imageSize = flattenedImage.GetSize ();
 		ReadOnlySpan<ColorBgra> pixelData = flattenedImage.GetReadOnlyPixelData ();
 		writer.WriteLine ("P3"); // Magic number for text-based portable pixmap format

@@ -8,6 +8,7 @@ root = true
 [*]
 charset = utf-8
 trim_trailing_whitespace = true
+end_of_line = lf
 
 # MSBuild
 [*.{csproj,proj,projitems,shproj,fsproj,targets,props}]
