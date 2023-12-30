@@ -87,9 +87,9 @@ public sealed class EmbossEffect : BaseEffect
 								Y: y - 1 + fy
 							);
 
-							ref readonly ColorBgra c = ref src.GetColorBgra (src_data, srcWidth, pixelPosition);
+							ColorBgra c = src.GetColorBgra (src_data, srcWidth, pixelPosition);
 
-							double intensity = (double) c.GetIntensityByte ();
+							double intensity = c.GetIntensityByte ();
 
 							sum += weight * intensity;
 						}
