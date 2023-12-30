@@ -389,26 +389,20 @@ namespace Pinta.Core
 		}
 
 		public static ColorBgra ToColorBgra (this Cairo.Color color)
-		{
-			return ColorBgra.FromBgra (
+			=> ColorBgra.FromBgra (
 				b: (byte) (color.B * 255),
 				g: (byte) (color.G * 255),
 				r: (byte) (color.R * 255),
 				a: (byte) (color.A * 255)
 			);
-		}
 
 		public static Cairo.Color ToCairoColor (this ColorBgra color)
-		{
-			Cairo.Color c = new Cairo.Color (
+			=> new (
 				R: color.R / 255d,
 				G: color.G / 255d,
 				B: color.B / 255d,
 				A: color.A / 255d
 			);
-
-			return c;
-		}
 
 		public static ImageSurface Clone (this ImageSurface surf)
 		{
@@ -439,9 +433,7 @@ namespace Pinta.Core
 
 		public static void Clear (this ImageSurface surface)
 		{
-			var g = new Context (surface) {
-				Operator = Operator.Clear
-			};
+			var g = new Context (surface) { Operator = Operator.Clear };
 			g.Paint ();
 		}
 
@@ -533,20 +525,10 @@ namespace Pinta.Core
 					int sx = iu;
 					int sy = iv;
 					int sleft = sx;
-					int sright;
-
-					if (sleft == (srcWidth - 1))
-						sright = sleft;
-					else
-						sright = sleft + 1;
+					int sright = (sleft == (srcWidth - 1)) ? sleft : sleft + 1;
 
 					int stop = sy;
-					int sbottom;
-
-					if (stop == (srcHeight - 1))
-						sbottom = stop;
-					else
-						sbottom = stop + 1;
+					int sbottom = (stop == (srcHeight - 1)) ? stop : stop + 1;
 
 					ColorBgra cul = src.GetColorBgra (src_data, srcWidth, new (sleft, stop));
 					ColorBgra cur = src.GetColorBgra (src_data, srcWidth, new (sright, stop));
@@ -590,20 +572,10 @@ namespace Pinta.Core
 				int sx = iu;
 				int sy = iv;
 				int sleft = sx;
-				int sright;
-
-				if (sleft == (srcWidth - 1))
-					sright = sleft;
-				else
-					sright = sleft + 1;
+				int sright = (sleft == (srcWidth - 1)) ? sleft : sleft + 1;
 
 				int stop = sy;
-				int sbottom;
-
-				if (stop == (srcHeight - 1))
-					sbottom = stop;
-				else
-					sbottom = stop + 1;
+				int sbottom = (stop == (srcHeight - 1)) ? stop : stop + 1;
 
 				ColorBgra cul = src.GetColorBgra (src_data, srcWidth, new (sleft, stop));
 				ColorBgra cur = src.GetColorBgra (src_data, srcWidth, new (sright, stop));
@@ -687,10 +659,10 @@ namespace Pinta.Core
 
 		private struct Edge
 		{
-			public int miny;   // int
-			public int maxy;   // int
-			public int x;      // fixed point: 24.8
-			public int dxdy;   // fixed point: 24.8
+			public int miny { get; }   // int
+			public int maxy { get; }   // int
+			public int x { get; set; } // fixed point: 24.8
+			public int dxdy { get; }   // fixed point: 24.8
 
 			public Edge (int miny, int maxy, int x, int dxdy)
 			{
@@ -793,10 +765,12 @@ namespace Pinta.Core
 			while (yscan2 <= ymax) {
 				// Move any edges from the ET to the AET where yscan == miny
 				for (int i = 0; i < edgeCount; ++i) {
-					if (edgeTable[i].miny == yscan2) {
-						active[activeCount] = i;
-						++activeCount;
-					}
+
+					if (edgeTable[i].miny != yscan2)
+						continue;
+
+					active[activeCount] = i;
+					++activeCount;
 				}
 
 				// Sort the AET on x
@@ -853,6 +827,7 @@ namespace Pinta.Core
 			PointI p;
 
 			for (int i = 0; i < polygonSet.Count; i++) {
+
 				if (polygonSet[i].Count == 0)
 					continue;
 
@@ -1043,11 +1018,7 @@ namespace Pinta.Core
 			var y1 = Math.Min (a.Y, b.Y);
 			var x2 = Math.Max (a.X, b.X);
 			var y2 = Math.Max (a.Y, b.Y);
-
-			var rect = new RectangleI (x1, y1, x2 - x1, y2 - y1);
-			rect = rect.Inflated (inflate, inflate);
-
-			return rect;
+			return new RectangleI (x1, y1, x2 - x1, y2 - y1).Inflated (inflate, inflate);
 		}
 
 		/// <summary>
@@ -1059,8 +1030,7 @@ namespace Pinta.Core
 			double y2 = Math.Max (p1.Y, p2.Y);
 			double x1 = Math.Min (p1.X, p2.X);
 			double x2 = Math.Max (p1.X, p2.X);
-
-			return new RectangleD (x1, y1, x2 - x1, y2 - y1);
+			return new (x1, y1, x2 - x1, y2 - y1);
 		}
 
 		// TODO-GTK4 (bindings) - remove once gir.core has improved bindings for Cairo.Region (https://github.com/gircore/gir.core/pull/621)
@@ -1110,8 +1080,14 @@ namespace Pinta.Core
 			=> RegionNumRectangles (region.Handle);
 
 		// Ported from PDN.
-		public static void FillStencilFromPoint (ImageSurface surface, BitMask stencil, PointI start, int tolerance,
-								out RectangleD boundingBox, Cairo.Region limitRegion, bool limitToSelection)
+		public static void FillStencilFromPoint (
+			ImageSurface surface,
+			BitMask stencil,
+			PointI start,
+			int tolerance,
+			out RectangleD boundingBox,
+			Cairo.Region limitRegion,
+			bool limitToSelection)
 		{
 			ReadOnlySpan<ColorBgra> surf_data = surface.GetReadOnlyPixelData ();
 			int surf_width = surface.Width;
@@ -1193,29 +1169,23 @@ namespace Pinta.Core
 					}
 				}
 
-				if (pt.Y > 0) {
+				if (pt.Y > 0)
 					checkRow (surf_data, pt.Y - 1);
-				}
 
-				if (pt.Y < surface.Height - 1) {
+				if (pt.Y < surface.Height - 1)
 					checkRow (surf_data, pt.Y + 1);
-				}
 
-				if (localLeft < left) {
+				if (localLeft < left)
 					left = localLeft;
-				}
 
-				if (localRight > right) {
+				if (localRight > right)
 					right = localRight;
-				}
 
-				if (pt.Y < top) {
+				if (pt.Y < top)
 					top = pt.Y;
-				}
 
-				if (pt.Y > bottom) {
+				if (pt.Y > bottom)
 					bottom = pt.Y;
-				}
 			}
 
 			foreach (var rect in scans)
@@ -1225,8 +1195,14 @@ namespace Pinta.Core
 		}
 
 		// Ported from PDN
-		public static void FillStencilByColor (ImageSurface surface, BitMask stencil, ColorBgra cmp, int tolerance,
-								  out RectangleD boundingBox, Cairo.Region limitRegion, bool limitToSelection)
+		public static void FillStencilByColor (
+			ImageSurface surface,
+			BitMask stencil,
+			ColorBgra cmp,
+			int tolerance,
+			out RectangleD boundingBox,
+			Cairo.Region limitRegion,
+			bool limitToSelection)
 		{
 			int surf_width = surface.Width;
 
@@ -1254,33 +1230,34 @@ namespace Pinta.Core
 				stencil.Set (rect, true);
 
 			Parallel.For (0, surface.Height, y => {
+
 				bool foundPixelInRow = false;
+
 				ReadOnlySpan<ColorBgra> row = surface.GetReadOnlyPixelData ().Slice (y * surf_width, surf_width);
 
 				for (int x = 0; x < surf_width; ++x) {
-					if (ColorBgra.ColorsWithinTolerance (cmp, row[x], tolerance)) {
-						stencil.Set (x, y, true);
 
-						if (x < left) {
-							left = x;
-						}
+					if (!ColorBgra.ColorsWithinTolerance (cmp, row[x], tolerance))
+						continue;
 
-						if (x > right) {
-							right = x;
-						}
+					stencil.Set (x, y, true);
 
-						foundPixelInRow = true;
-					}
+					if (x < left)
+						left = x;
+
+					if (x > right)
+						right = x;
+
+					foundPixelInRow = true;
 				}
 
 				if (foundPixelInRow) {
-					if (y < top) {
-						top = y;
-					}
 
-					if (y >= bottom) {
+					if (y < top)
+						top = y;
+
+					if (y >= bottom)
 						bottom = y;
-					}
 				}
 			});
 
@@ -1296,9 +1273,9 @@ namespace Pinta.Core
 		public static ImageSurface CreateImageSurface (Cairo.Format format, int width, int height)
 		{
 			ImageSurface surf = new Cairo.ImageSurface (format, width, height);
-			if (surf == null || surf.Status == Cairo.Status.NoMemory) {
+
+			if (surf == null || surf.Status == Cairo.Status.NoMemory)
 				throw new OutOfMemoryException ("Unable to allocate memory for image");
-			}
 
 			return surf;
 		}
@@ -1337,7 +1314,7 @@ namespace Pinta.Core
 			HslHue = 25,
 			HslSaturation = 26,
 			HslColor = 27,
-			HslLuminosity = 28
+			HslLuminosity = 28,
 		}
 
 		/// <summary>
