@@ -641,10 +641,10 @@ namespace Pinta.Core
 				else
 					sbottom = stop + 1;
 
-				ref readonly ColorBgra cul = ref src.GetColorBgra (src_data, srcWidth, new (sleft, stop));
-				ref readonly ColorBgra cur = ref src.GetColorBgra (src_data, srcWidth, new (sright, stop));
-				ref readonly ColorBgra cll = ref src.GetColorBgra (src_data, srcWidth, new (sleft, sbottom));
-				ref readonly ColorBgra clr = ref src.GetColorBgra (src_data, srcWidth, new (sright, sbottom));
+				ColorBgra cul = src.GetColorBgra (src_data, srcWidth, new (sleft, stop));
+				ColorBgra cur = src.GetColorBgra (src_data, srcWidth, new (sright, stop));
+				ColorBgra cll = src.GetColorBgra (src_data, srcWidth, new (sleft, sbottom));
+				ColorBgra clr = src.GetColorBgra (src_data, srcWidth, new (sright, sbottom));
 
 				return ColorBgra.BlendColors4W16IP (cul, wul, cur, wur, cll, wll, clr, wlr);
 			}
