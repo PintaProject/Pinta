@@ -1,1 +1,4 @@
 * text=auto
+
+# Files required to have LF endings on checkout.
+*_lf.ppm text eol=lf
