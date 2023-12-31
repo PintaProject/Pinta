@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-12-25 23:00-0500\n"
+"POT-Creation-Date: 2023-12-31 01:12+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -91,7 +91,7 @@ msgid "All files"
 msgstr ""
 
 #: ../Pinta.Effects/Effects/BulgeEffect.cs:89
-#: ../Pinta.Effects/Effects/FrostedGlassEffect.cs:155
+#: ../Pinta.Effects/Effects/FrostedGlassEffect.cs:150
 #: ../Pinta.Effects/Effects/SharpenEffect.cs:56
 #: ../Pinta.Effects/Effects/TwistEffect.cs:139
 #: ../Pinta.Effects/Effects/ZoomBlurEffect.cs:123
@@ -130,7 +130,7 @@ msgstr ""
 msgid "Arrow"
 msgstr ""
 
-#: ../Pinta.Effects/Effects/InkSketchEffect.cs:35
+#: ../Pinta.Effects/Effects/InkSketchEffect.cs:36
 #: ../Pinta.Effects/Effects/OilPaintingEffect.cs:27
 #: ../Pinta.Effects/Effects/PencilSketchEffect.cs:33
 msgid "Artistic"
@@ -203,7 +203,7 @@ msgstr ""
 msgid "Blurs"
 msgstr ""
 
-#: ../Pinta.Tools/Tools/TextTool.cs:159
+#: ../Pinta.Tools/Tools/TextTool.cs:162
 msgid "Bold"
 msgstr ""
 
@@ -257,7 +257,7 @@ msgstr ""
 msgid "Cell Size"
 msgstr ""
 
-#: ../Pinta.Tools/Tools/TextTool.cs:211
+#: ../Pinta.Tools/Tools/TextTool.cs:214
 msgid "Center Align"
 msgstr ""
 
@@ -323,7 +323,7 @@ msgstr ""
 msgid "Click and drag to draw the outline for a selection area."
 msgstr ""
 
-#: ../Pinta.Tools/Tools/PanTool.cs:40
+#: ../Pinta.Tools/Tools/PanTool.cs:41
 msgid "Click and drag to navigate image."
 msgstr ""
 
@@ -657,7 +657,7 @@ msgstr ""
 msgid "Files to open"
 msgstr ""
 
-#: ../Pinta.Tools/Tools/TextTool.cs:249
+#: ../Pinta.Tools/Tools/TextTool.cs:252
 msgid "Fill Background"
 msgstr ""
 
@@ -725,7 +725,7 @@ msgstr ""
 msgid "Flood Mode"
 msgstr ""
 
-#: ../Pinta.Tools/Tools/TextTool.cs:135
+#: ../Pinta.Tools/Tools/TextTool.cs:138
 msgid "Font"
 msgstr ""
 
@@ -864,7 +864,7 @@ msgstr ""
 msgid "Ink Outline"
 msgstr ""
 
-#: ../Pinta.Effects/Effects/InkSketchEffect.cs:31
+#: ../Pinta.Effects/Effects/InkSketchEffect.cs:32
 msgid "Ink Sketch"
 msgstr ""
 
@@ -919,7 +919,7 @@ msgstr ""
 msgid "Invert Selection"
 msgstr ""
 
-#: ../Pinta.Tools/Tools/TextTool.cs:171
+#: ../Pinta.Tools/Tools/TextTool.cs:174
 msgid "Italic"
 msgstr ""
 
@@ -974,7 +974,7 @@ msgstr ""
 msgid "Layers"
 msgstr ""
 
-#: ../Pinta.Tools/Tools/TextTool.cs:199
+#: ../Pinta.Tools/Tools/TextTool.cs:202
 msgid "Left Align"
 msgstr ""
 
@@ -1042,7 +1042,7 @@ msgid ""
 "the secondary color."
 msgstr ""
 
-#: ../Pinta.Tools/Tools/TextTool.cs:88
+#: ../Pinta.Tools/Tools/TextTool.cs:91
 msgid ""
 "Left click to place cursor, then type desired text. Text color is primary "
 "color."
@@ -1240,7 +1240,7 @@ msgstr ""
 
 #: ../Pinta.Core/Effects/UserBlendOps.cs:31
 #: ../Pinta.Tools/Brushes/PlainBrush.cs:35
-#: ../Pinta.Tools/Tools/EraserTool.cs:262 ../Pinta.Tools/Tools/TextTool.cs:246
+#: ../Pinta.Tools/Tools/EraserTool.cs:262 ../Pinta.Tools/Tools/TextTool.cs:249
 msgid "Normal"
 msgstr ""
 
@@ -1252,7 +1252,7 @@ msgstr ""
 msgid "Normal Size"
 msgstr ""
 
-#: ../Pinta.Tools/Tools/TextTool.cs:247
+#: ../Pinta.Tools/Tools/TextTool.cs:250
 msgid "Normal and Outline"
 msgstr ""
 
@@ -1317,7 +1317,7 @@ msgid "Original"
 msgstr ""
 
 #: ../Pinta.Effects/Effects/OutlineEffect.cs:26
-#: ../Pinta.Tools/Tools/TextTool.cs:248
+#: ../Pinta.Tools/Tools/TextTool.cs:251
 msgid "Outline"
 msgstr ""
 
@@ -1326,7 +1326,7 @@ msgstr ""
 msgid "Outline Shape"
 msgstr ""
 
-#: ../Pinta.Tools/Tools/TextTool.cs:262
+#: ../Pinta.Tools/Tools/TextTool.cs:265
 msgid "Outline width"
 msgstr ""
 
@@ -1362,7 +1362,7 @@ msgstr ""
 msgid "Palette files"
 msgstr ""
 
-#: ../Pinta.Tools/Tools/PanTool.cs:38
+#: ../Pinta.Tools/Tools/PanTool.cs:39
 #: ../Pinta/Actions/Layers/RotateZoomLayerAction.cs:118
 msgid "Pan"
 msgstr ""
@@ -1544,7 +1544,7 @@ msgstr ""
 
 #: ../Pinta.Effects/Effects/AddNoiseEffect.cs:189
 #: ../Pinta.Effects/Effects/CloudsEffect.cs:222
-#: ../Pinta.Effects/Effects/FrostedGlassEffect.cs:158
+#: ../Pinta.Effects/Effects/FrostedGlassEffect.cs:153
 msgid "Random Noise"
 msgstr ""
 
@@ -1607,7 +1607,7 @@ msgstr ""
 msgid "Render"
 msgstr ""
 
-#: ../Pinta.Core/Managers/LivePreviewManager.cs:190
+#: ../Pinta.Core/Managers/LivePreviewManager.cs:197
 msgid "Rendering Effect"
 msgstr ""
 
@@ -1658,7 +1658,7 @@ msgstr ""
 msgid "Resize Palette"
 msgstr ""
 
-#: ../Pinta.Tools/Tools/TextTool.cs:223
+#: ../Pinta.Tools/Tools/TextTool.cs:226
 msgid "Right Align"
 msgstr ""
 
@@ -1853,15 +1853,15 @@ msgstr ""
 msgid "Switch to previous tool"
 msgstr ""
 
-#: ../Pinta.Tools/Tools/TextTool.cs:82
+#: ../Pinta.Tools/Tools/TextTool.cs:85
 msgid "Text"
 msgstr ""
 
-#: ../Pinta.Tools/Tools/TextTool.cs:83
+#: ../Pinta.Tools/Tools/TextTool.cs:86
 msgid "Text - Finalize"
 msgstr ""
 
-#: ../Pinta.Tools/Tools/TextTool.cs:237
+#: ../Pinta.Tools/Tools/TextTool.cs:240
 msgid "Text Style"
 msgstr ""
 
@@ -1993,7 +1993,7 @@ msgstr ""
 msgid "Type"
 msgstr ""
 
-#: ../Pinta.Tools/Tools/TextTool.cs:183
+#: ../Pinta.Tools/Tools/TextTool.cs:186
 msgid "Underline"
 msgstr ""
 
