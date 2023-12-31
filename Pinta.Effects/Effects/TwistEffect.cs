@@ -90,7 +90,7 @@ public sealed class TwistEffect : BaseEffect
 				Y: (int) (settings.HalfHeight + (float) (rad * Math.Sin (theta)))
 			);
 
-			ref readonly ColorBgra sample = ref src.GetColorBgra (src_data, src.Width, samplePosition);
+			ColorBgra sample = src.GetColorBgra (src_data, src.Width, samplePosition);
 
 			b += sample.B;
 			g += sample.G;
