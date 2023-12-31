@@ -39,12 +39,24 @@ public sealed class EmbossEffect : BaseEffect
 	}
 
 	#region Algorithm Code Ported From PDN
+
+	private sealed record EmbossSettings (
+		double[,] weights,
+		int srcWidth,
+		int srcHeight);
+
+	private EmbossSettings CreateSettings (ImageSurface src)
+	{
+		return new (
+			weights: ComputeWeights (Data.Angle.Degrees),
+			srcWidth: src.Width,
+			srcHeight: src.Height
+		);
+	}
+
 	public override void Render (ImageSurface src, ImageSurface dst, ReadOnlySpan<RectangleI> rois)
 	{
-		double[,] weights = ComputeWeights ();
-
-		var srcWidth = src.Width;
-		var srcHeight = src.Height;
+		EmbossSettings settings = CreateSettings (src);
 
 		ReadOnlySpan<ColorBgra> src_data = src.GetReadOnlyPixelData ();
 		Span<ColorBgra> dst_data = dst.GetPixelData ();
@@ -58,11 +70,11 @@ public sealed class EmbossEffect : BaseEffect
 				if (y == 0)
 					fyStart = 1;
 
-				if (y == srcHeight - 1)
+				if (y == settings.srcHeight - 1)
 					fyEnd = 2;
 
 				// loop through each point in the line 
-				var dst_row = dst_data.Slice (y * srcWidth, srcWidth);
+				var dst_row = dst_data.Slice (y * settings.srcWidth, settings.srcWidth);
 
 				for (int x = rect.Left; x <= rect.Right; ++x) {
 					int fxStart = 0;
@@ -71,7 +83,7 @@ public sealed class EmbossEffect : BaseEffect
 					if (x == 0)
 						fxStart = 1;
 
-					if (x == srcWidth - 1)
+					if (x == settings.srcWidth - 1)
 						fxEnd = 2;
 
 					// loop through each weight
@@ -80,41 +92,34 @@ public sealed class EmbossEffect : BaseEffect
 					for (int fy = fyStart; fy < fyEnd; ++fy) {
 						for (int fx = fxStart; fx < fxEnd; ++fx) {
 
-							double weight = weights[fy, fx];
+							double weight = settings.weights[fy, fx];
 
 							PointI pixelPosition = new (
 								X: x - 1 + fx,
 								Y: y - 1 + fy
 							);
 
-							ref readonly ColorBgra c = ref src.GetColorBgra (src_data, srcWidth, pixelPosition);
+							ColorBgra c = src.GetColorBgra (src_data, settings.srcWidth, pixelPosition);
 
-							double intensity = (double) c.GetIntensityByte ();
+							double intensity = c.GetIntensityByte ();
 
 							sum += weight * intensity;
 						}
 					}
 
-					int iSum = (int) sum;
-					iSum += 128;
+					byte iSum = Utility.ClampToByte (((int) sum) + 128);
 
-					if (iSum > 255)
-						iSum = 255;
-
-					if (iSum < 0)
-						iSum = 0;
-
-					dst_row[x] = ColorBgra.FromBgra ((byte) iSum, (byte) iSum, (byte) iSum, 255);
+					dst_row[x] = ColorBgra.FromBgra (iSum, iSum, iSum, 255);
 				}
 			}
 		}
 	}
 
 
-	public double[,] ComputeWeights ()
+	private static double[,] ComputeWeights (double degrees)
 	{
 		// adjust and convert angle to radians
-		double r = (double) Data.Angle.Degrees * 2.0 * Math.PI / 360.0;
+		double r = degrees * 2.0 * Math.PI / 360.0;
 
 		// angle delta for each weight
 		double dr = Math.PI / 4.0;
