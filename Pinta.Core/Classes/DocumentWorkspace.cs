@@ -36,7 +36,7 @@ public sealed class DocumentWorkspace
 	{
 		ZoomIn,
 		ZoomOut,
-		ZoomManually
+		ZoomManually,
 	}
 
 	internal DocumentWorkspace (Document document)
@@ -73,10 +73,11 @@ public sealed class DocumentWorkspace
 	public Size ViewSize {
 		get => view_size;
 		set {
-			if (view_size.Width != value.Width || view_size.Height != value.Height) {
-				view_size = value;
-				OnViewSizeChanged ();
-			}
+			if (view_size == value)
+				return;
+
+			view_size = value;
+			OnViewSizeChanged ();
 		}
 	}
 
@@ -108,29 +109,37 @@ public sealed class DocumentWorkspace
 	/// Scale factor for the zoomed image.
 	/// </summary>
 	public double Scale {
-		get => (double) ViewSize.Width / (double) document.ImageSize.Width;
+		get => ViewSize.Width / (double) document.ImageSize.Width;
 		set {
-			if (value != (double) ViewSize.Width / (double) document.ImageSize.Width || value != (double) ViewSize.Height / (double) document.ImageSize.Height) {
-				if (document.ImageSize.Width == 0) {
-					document.ImageSize = new Size (1, document.ImageSize.Height);
-				}
+			if (value == ViewSize.Width / (double) document.ImageSize.Width && value == ViewSize.Height / (double) document.ImageSize.Height)
+				return;
 
-				if (document.ImageSize.Height == 0) {
-					document.ImageSize = new Size (document.ImageSize.Width, 1);
-				}
+			document.ImageSize = CoercedToPositive (document.ImageSize);
+			ViewSize = GetNewViewSize (document.ImageSize, value);
 
-				int new_x = Math.Max ((int) (document.ImageSize.Width * value), 1);
-				int new_y = Math.Max ((int) (((long) new_x * document.ImageSize.Height) / document.ImageSize.Width), 1);
+			Invalidate ();
 
-				ViewSize = new Size (new_x, new_y);
-				Invalidate ();
-
-				if (PintaCore.Tools.CurrentTool?.CursorChangesOnZoom == true) {
-					//The current tool's cursor changes when the zoom changes.
-					PintaCore.Tools.CurrentTool.SetCursor (PintaCore.Tools.CurrentTool.DefaultCursor);
-				}
+			if (PintaCore.Tools.CurrentTool?.CursorChangesOnZoom == true) {
+				//The current tool's cursor changes when the zoom changes.
+				PintaCore.Tools.CurrentTool.SetCursor (PintaCore.Tools.CurrentTool.DefaultCursor);
 			}
 		}
+	}
+
+	/// <summary>
+	/// Ensures that the size has a width and a height of at least 1
+	/// </summary>
+	private static Size CoercedToPositive (Size baseSize)
+		=> new (
+			Width: Math.Max (baseSize.Width, 1),
+			Height: Math.Max (baseSize.Height, 1)
+		);
+
+	private static Size GetNewViewSize (Size imageSize, double scale)
+	{
+		int new_x = Math.Max ((int) (imageSize.Width * scale), 1);
+		int new_y = Math.Max ((int) ((long) new_x * imageSize.Height / imageSize.Width), 1);
+		return new (new_x, new_y);
 	}
 
 	#endregion
@@ -174,7 +183,7 @@ public sealed class DocumentWorkspace
 	/// </summary>
 	public bool IsPartiallyOffscreen (RectangleI rect)
 	{
-		return (rect.IsEmpty || rect.Left < 0 || rect.Top < 0);
+		return rect.IsEmpty || rect.Left < 0 || rect.Top < 0;
 	}
 
 	public bool PointInCanvas (PointD point)
