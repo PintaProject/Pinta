@@ -91,7 +91,7 @@ public sealed class InkSketchEffect : BaseEffect
 					int right = Math.Min (x + Radius + 1, dest.Width);
 
 					RectangleI adjustedBounds = RectangleI.FromLTRB (left, top, right, bottom);
-					RgbColor baseRGB = CreateBaseRGB (src_data, width, x, y, adjustedBounds);
+					ColorBgra baseRGB = CreateBaseRGB (src_data, width, x, y, adjustedBounds);
 					ColorBgra topLayer = CreateTopLayer (baseRGB);
 
 					// Change Blend Mode to Darken
@@ -102,7 +102,7 @@ public sealed class InkSketchEffect : BaseEffect
 		}
 	}
 
-	private static RgbColor CreateBaseRGB (ReadOnlySpan<ColorBgra> src_data, int width, int x, int y, RectangleI adjustedBounds)
+	private static ColorBgra CreateBaseRGB (ReadOnlySpan<ColorBgra> src_data, int width, int x, int y, RectangleI adjustedBounds)
 	{
 		int r = 0;
 		int g = 0;
@@ -125,19 +125,17 @@ public sealed class InkSketchEffect : BaseEffect
 			}
 		}
 
-		return new (r, g, b);
+		return ColorBgra.FromBgr (
+			b: Utility.ClampToByte (b),
+			g: Utility.ClampToByte (g),
+			r: Utility.ClampToByte (r)
+		);
 	}
 
-	private ColorBgra CreateTopLayer (RgbColor baseRGB)
+	private ColorBgra CreateTopLayer (ColorBgra baseRGB)
 	{
-		ColorBgra topLayer = ColorBgra.FromBgr (
-			b: Utility.ClampToByte (baseRGB.Blue),
-			g: Utility.ClampToByte (baseRGB.Green),
-			r: Utility.ClampToByte (baseRGB.Red)
-		);
-
 		// Desaturate 
-		topLayer = desaturate_op.Apply (topLayer);
+		ColorBgra topLayer = desaturate_op.Apply (baseRGB);
 
 		// Adjust Brightness and Contrast 
 		if (topLayer.R > (Data.InkOutline * 255 / 100)) {
