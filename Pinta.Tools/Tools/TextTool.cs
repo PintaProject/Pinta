@@ -789,9 +789,10 @@ public sealed class TextTool : BaseTool
 		try {
 			// Reset the pre-edit string. Depending on the platform there might still be
 			// a preedit-changed signal (setting it to the empty string) after the commit, rather than before.
-			UpdatePreeditString (string.Empty);
+			UpdatePreeditString (string.Empty, redraw: false);
 
 			CurrentTextEngine.InsertText (args.Str);
+			RedrawText (true, true);
 		} finally {
 			im_context.Reset ();
 		}
@@ -814,10 +815,10 @@ public sealed class TextTool : BaseTool
 	{
 		// TODO - use the Pango.AttrList argument to better visualize the pre-edited text vs the regular text.
 		im_context.GetPreeditString (out string updated_str, out _, out _);
-		UpdatePreeditString (updated_str);
+		UpdatePreeditString (updated_str, redraw: true);
 	}
 
-	private void UpdatePreeditString (string updated)
+	private void UpdatePreeditString (string updated, bool redraw)
 	{
 		// Remove the previous preedit string.
 		for (int i = 0; i < preedit_string?.Length; ++i)
