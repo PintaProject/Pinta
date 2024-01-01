@@ -4,7 +4,7 @@
 // Author:
 //       Lehonti Ramos
 //
-// Copyright (c) 2024 Jonathan Pobst
+// Copyright (c) 2024 Lehonti Ramos
 //
 // Permission is hereby granted, free of charge, to any person obtaining a copy
 // of this software and associated documentation files (the "Software"), to deal
