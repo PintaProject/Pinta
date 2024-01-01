@@ -50,39 +50,57 @@ public sealed class RadialBlurEffect : BaseEffect
 		fy = cy + ((cx >> 8) * fr >> 8) - ((cy >> 14) * (fr * fr >> 11) >> 8);
 	}
 
-	public override void Render (ImageSurface src, ImageSurface dst, ReadOnlySpan<RectangleI> rois)
-	{
-		if (Data.Angle.Degrees == 0) {
-			// Copy src to dest
-			return;
-		}
+	private sealed record RadialBlurSettings (
+		int w,
+		int h,
+		int src_w,
+		int fcx,
+		int fcy,
+		int n,
+		int fr);
 
+	private RadialBlurSettings CreateSettings (ImageSurface src, ImageSurface dst)
+	{
+		var offset = Data.Offset;
 		int w = dst.Width;
 		int h = dst.Height;
-		int src_w = src.Width;
-		int fcx = (w << 15) + (int) (Data.Offset.X * (w << 15));
-		int fcy = (h << 15) + (int) (Data.Offset.Y * (h << 15));
+		int quality = Data.Quality;
+		return new (
+			w: w,
+			h: h,
+			src_w: src.Width,
+			fcx: (w << 15) + (int) (offset.X * (w << 15)),
+			fcy: (h << 15) + (int) (offset.Y * (h << 15)),
+			n: quality * quality * (30 + quality * quality),
+			fr: (int) (Data.Angle.Degrees * Math.PI * 65536.0 / 181.0)
+		);
+	}
 
-		int n = (Data.Quality * Data.Quality) * (30 + Data.Quality * Data.Quality);
+	public override void Render (ImageSurface src, ImageSurface dst, ReadOnlySpan<RectangleI> rois)
+	{
+		if (Data.Angle.Degrees == 0) // Copy src to dest
+			return;
 
-		int fr = (int) (Data.Angle.Degrees * Math.PI * 65536.0 / 181.0);
+		RadialBlurSettings settings = CreateSettings (src, dst);
 
 		var dst_data = dst.GetPixelData ();
 		var src_data = src.GetReadOnlyPixelData ();
 
 		foreach (Core.RectangleI rect in rois) {
+
 			for (int y = rect.Top; y <= rect.Bottom; ++y) {
-				var dst_row = dst_data.Slice (y * w, w);
-				var src_row = src_data.Slice (y * src_w, src_w);
+
+				var dst_row = dst_data.Slice (y * settings.w, settings.w);
+				var src_row = src_data.Slice (y * settings.src_w, settings.src_w);
 
 				for (int x = rect.Left; x <= rect.Right; ++x) {
 
 					ColorBgra src_pixel = src_row[x];
 
-					int fx = (x << 16) - fcx;
-					int fy = (y << 16) - fcy;
+					int fx = (x << 16) - settings.fcx;
+					int fy = (y << 16) - settings.fcy;
 
-					int fsr = fr / n;
+					int fsr = settings.fr / settings.n;
 
 					int sr = src_pixel.R * src_pixel.A;
 					int sg = src_pixel.G * src_pixel.A;
@@ -95,15 +113,15 @@ public sealed class RadialBlurEffect : BaseEffect
 					int oy1 = fy;
 					int oy2 = fy;
 
-					for (int i = 0; i < n; ++i) {
+					for (int i = 0; i < settings.n; ++i) {
 						Rotate (ref ox1, ref oy1, fsr);
 						Rotate (ref ox2, ref oy2, -fsr);
 
-						int u1 = ox1 + fcx + 32768 >> 16;
-						int v1 = oy1 + fcy + 32768 >> 16;
+						int u1 = ox1 + settings.fcx + 32768 >> 16;
+						int v1 = oy1 + settings.fcy + 32768 >> 16;
 
-						if (u1 > 0 && v1 > 0 && u1 < w && v1 < h) {
-							ColorBgra sample = src_data[v1 * src_w + u1];
+						if (u1 > 0 && v1 > 0 && u1 < settings.w && v1 < settings.h) {
+							ColorBgra sample = src_data[v1 * settings.src_w + u1];
 
 							sr += sample.R * sample.A;
 							sg += sample.G * sample.A;
@@ -112,11 +130,11 @@ public sealed class RadialBlurEffect : BaseEffect
 							++sc;
 						}
 
-						int u2 = ox2 + fcx + 32768 >> 16;
-						int v2 = oy2 + fcy + 32768 >> 16;
+						int u2 = ox2 + settings.fcx + 32768 >> 16;
+						int v2 = oy2 + settings.fcy + 32768 >> 16;
 
-						if (u2 > 0 && v2 > 0 && u2 < w && v2 < h) {
-							ColorBgra sample = src_data[v2 * src_w + u2];
+						if (u2 > 0 && v2 > 0 && u2 < settings.w && v2 < settings.h) {
+							ColorBgra sample = src_data[v2 * settings.src_w + u2];
 
 							sr += sample.R * sample.A;
 							sg += sample.G * sample.A;
@@ -126,19 +144,31 @@ public sealed class RadialBlurEffect : BaseEffect
 						}
 					}
 
-					if (sa > 0) {
-						dst_row[x] = ColorBgra.FromBgra (
-						    Utility.ClampToByte (sb / sa),
-						    Utility.ClampToByte (sg / sa),
-						    Utility.ClampToByte (sr / sa),
-						    Utility.ClampToByte (sa / sc));
-					} else {
-						dst_row[x].Bgra = 0;
+					dst_row[x] = GetFinalPixelColor (sr, sg, sb, sa, sc);
+
+					static ColorBgra GetFinalPixelColor (
+						int sr,
+						int sg,
+						int sb,
+						int sa,
+						int sc)
+					{
+						if (sa > 0) {
+							return ColorBgra.FromBgra (
+								b: Utility.ClampToByte (sb / sa),
+								g: Utility.ClampToByte (sg / sa),
+								r: Utility.ClampToByte (sr / sa),
+								a: Utility.ClampToByte (sa / sc)
+							);
+						} else {
+							return ColorBgra.FromUInt32 (0);
+						}
 					}
 				}
 			}
 		}
 	}
+
 	#endregion
 
 	public sealed class RadialBlurData : EffectData

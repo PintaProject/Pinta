@@ -57,14 +57,8 @@ public sealed class OilPaintingEffect : BaseEffect
 
 				var dst_row = dst_data.Slice (y * settings.width, settings.width);
 
-				int top = y - Data.BrushSize;
-				int bottom = y + Data.BrushSize + 1;
-
-				if (top < 0)
-					top = 0;
-
-				if (bottom > settings.height)
-					bottom = settings.height;
+				int top = Math.Max (y - settings.brushSize, 0);
+				int bottom = Math.Min (y + settings.brushSize + 1, settings.height);
 
 				for (int x = rectLeft; x <= rectRight; ++x)
 					dst_row[x] = GetFinalColor (settings, src_data, top, bottom, x);
@@ -99,14 +93,8 @@ public sealed class OilPaintingEffect : BaseEffect
 		Span<uint> avgBlue = stackalloc uint[settings.arrayLens];
 		Span<uint> avgAlpha = stackalloc uint[settings.arrayLens];
 
-		int left = x - settings.brushSize;
-		int right = x + settings.brushSize + 1;
-
-		if (left < 0)
-			left = 0;
-
-		if (right > settings.width)
-			right = settings.width;
+		int left = Math.Max (x - settings.brushSize, 0);
+		int right = Math.Min (x + settings.brushSize + 1, settings.width);
 
 		int numInt = 0;
 
@@ -130,10 +118,12 @@ public sealed class OilPaintingEffect : BaseEffect
 		int maxInstance = 0;
 
 		for (int i = 0; i <= settings.maxIntensity; ++i) {
-			if (intensityCount[i] > maxInstance) {
-				chosenIntensity = (byte) i;
-				maxInstance = intensityCount[i];
-			}
+
+			if (intensityCount[i] <= maxInstance)
+				continue;
+
+			chosenIntensity = (byte) i;
+			maxInstance = intensityCount[i];
 		}
 
 		// TODO: correct handling of alpha values?

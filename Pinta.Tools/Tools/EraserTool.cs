@@ -47,9 +47,7 @@ public sealed class EraserTool : BaseBrushTool
 
 	private const string ERASER_TYPE_SETTING = "eraser-erase-type";
 
-	public EraserTool (IServiceManager services) : base (services)
-	{
-	}
+	public EraserTool (IServiceManager services) : base (services) { }
 
 	public override string Name => Translations.GetString ("Eraser");
 	public override string Icon => Pinta.Resources.Icons.ToolEraser;
@@ -60,9 +58,15 @@ public sealed class EraserTool : BaseBrushTool
 
 	public override Gdk.Cursor DefaultCursor {
 		get {
-			var icon = GdkExtensions.CreateIconWithShape ("Cursor.Eraser.png",
-							CursorShape.Ellipse, BrushWidth, 8, 22,
-							out var iconOffsetX, out var iconOffsetY);
+			var icon = GdkExtensions.CreateIconWithShape (
+				"Cursor.Eraser.png",
+				CursorShape.Ellipse,
+				BrushWidth,
+				8,
+				22,
+				out var iconOffsetX,
+				out var iconOffsetY);
+
 			return Gdk.Cursor.NewFromTexture (icon, iconOffsetX, iconOffsetY, null);
 		}
 	}
@@ -94,10 +98,14 @@ public sealed class EraserTool : BaseBrushTool
 		var g = document.CreateClippedContext ();
 		var last_pointd = new PointD (last_point.X, last_point.Y);
 
-		if (eraser_type == EraserType.Normal)
-			EraseNormal (g, last_pointd, new_pointd);
-		else if (eraser_type == EraserType.Smooth)
-			EraseSmooth (document.Layers.CurrentUserLayer.Surface, g, last_pointd, new_pointd);
+		switch (eraser_type) {
+			case EraserType.Normal:
+				EraseNormal (g, last_pointd, new_pointd);
+				break;
+			case EraserType.Smooth:
+				EraseSmooth (document.Layers.CurrentUserLayer.Surface, g, last_pointd, new_pointd);
+				break;
+		}
 
 		var dirty = CairoExtensions.GetRectangleFromPoints (last_point, new_point, BrushWidth + 2);
 
@@ -137,9 +145,8 @@ public sealed class EraserTool : BaseBrushTool
 	{
 		var tmp_surface = CairoExtensions.CreateImageSurface (Format.Argb32, dest_rect.Width, dest_rect.Height);
 
-		var g = new Context (tmp_surface) {
-			Operator = Operator.Source
-		};
+		var g = new Context (tmp_surface) { Operator = Operator.Source };
+
 		g.SetSourceSurface (surf, -dest_rect.Left, -dest_rect.Top);
 		g.Rectangle (new RectangleD (0, 0, dest_rect.Width, dest_rect.Height));
 		g.Fill ();
@@ -211,18 +218,13 @@ public sealed class EraserTool : BaseBrushTool
 			var tmp_data = tmp_surface.GetPixelData ();
 
 			for (var iy = dest_rect.Top; iy < dest_rect.Bottom; iy++) {
-				var srcRow = tmp_data[(tmp_surface.Width * (iy - dest_rect.Top))..];
-				var dy = ((iy - y) * LUT_Resolution) / rad;
 
-				if (dy < 0)
-					dy = -dy;
+				var srcRow = tmp_data[(tmp_surface.Width * (iy - dest_rect.Top))..];
+				var dy = Math.Abs ((iy - y) * LUT_Resolution / rad);
 
 				for (var ix = dest_rect.Left; ix < dest_rect.Right; ix++) {
 
-					var dx = ((ix - x) * LUT_Resolution) / rad;
-
-					if (dx < 0)
-						dx = -dx;
+					var dx = Math.Abs ((ix - x) * LUT_Resolution / rad);
 
 					var force = lut_factor[dy, dx];
 
