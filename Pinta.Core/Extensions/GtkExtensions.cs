@@ -433,7 +433,7 @@ public static partial class GtkExtensions
 	}
 
 	[LibraryImport (GtkLibraryName, EntryPoint = "gtk_color_chooser_set_rgba")]
-	private static partial void ColorChooserSetRgba (IntPtr handle, GdkRGBA color);
+	private static partial void ColorChooserSetRgba (IntPtr handle, in GdkRGBA color);
 
 	// TODO-GTK4 (bindings) - structs are not generated (https://github.com/gircore/gir.core/issues/622)
 	public static void GetColor (this Gtk.ColorChooserDialog dialog, out Cairo.Color color)
