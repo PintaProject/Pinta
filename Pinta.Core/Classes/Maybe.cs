@@ -2,9 +2,9 @@
 // Maybe.cs
 //
 // Author:
-//       Lehonti Ramos
+//       Lehonti M. Ramos O.
 //
-// Copyright (c) 2024 Lehonti Ramos
+// Copyright (c) 2024 Lehonti M. Ramos O.
 //
 // Permission is hereby granted, free of charge, to any person obtaining a copy
 // of this software and associated documentation files (the "Software"), to deal
