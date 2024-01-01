@@ -1115,12 +1115,12 @@ public sealed class TextTool : BaseTool
 		if (!is_editing)
 			return false;
 
-		if (await CurrentTextEngine.PerformPaste (cb))
+		if (await CurrentTextEngine.PerformPaste (cb)) {
 			RedrawText (true, true);
+			return true;
+		}
 
-		// Always consume the paste event when editing, otherwise this will pull the user out
-		// of editing to attempt to paste an image.
-		return true;
+		return false;
 	}
 
 	protected override bool OnHandleCopy (Document document, Clipboard cb)
