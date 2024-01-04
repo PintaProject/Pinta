@@ -39,15 +39,15 @@ public sealed class RadialBlurEffect : BaseEffect
 	}
 
 	#region Algorithm Code Ported From PDN
-	private static void Rotate (ref int fx, ref int fy, int fr)
-	{
-		int cx = fx;
-		int cy = fy;
 
+	private static PointI Rotated (PointI f, int fr)
+	{
 		//sin(x) ~~ x
 		//cos(x)~~ 1 - x^2/2
-		fx = cx - ((cy >> 8) * fr >> 8) - ((cx >> 14) * (fr * fr >> 11) >> 8);
-		fy = cy + ((cx >> 8) * fr >> 8) - ((cy >> 14) * (fr * fr >> 11) >> 8);
+		return new (
+			X: f.X - ((f.Y >> 8) * fr >> 8) - ((f.X >> 14) * (fr * fr >> 11) >> 8),
+			Y: f.Y + ((f.X >> 8) * fr >> 8) - ((f.Y >> 14) * (fr * fr >> 11) >> 8)
+		);
 	}
 
 	private sealed record RadialBlurSettings (
@@ -86,7 +86,7 @@ public sealed class RadialBlurEffect : BaseEffect
 		var dst_data = dst.GetPixelData ();
 		var src_data = src.GetReadOnlyPixelData ();
 
-		foreach (Core.RectangleI rect in rois) {
+		foreach (RectangleI rect in rois) {
 
 			for (int y = rect.Top; y <= rect.Bottom; ++y) {
 
@@ -94,78 +94,73 @@ public sealed class RadialBlurEffect : BaseEffect
 				var src_row = src_data.Slice (y * settings.src_w, settings.src_w);
 
 				for (int x = rect.Left; x <= rect.Right; ++x) {
-
-					ColorBgra src_pixel = src_row[x];
-
-					int fx = (x << 16) - settings.fcx;
-					int fy = (y << 16) - settings.fcy;
-
-					int fsr = settings.fr / settings.n;
-
-					int sr = src_pixel.R * src_pixel.A;
-					int sg = src_pixel.G * src_pixel.A;
-					int sb = src_pixel.B * src_pixel.A;
-					int sa = src_pixel.A;
-					int sc = 1;
-
-					int ox1 = fx;
-					int ox2 = fx;
-					int oy1 = fy;
-					int oy2 = fy;
-
-					for (int i = 0; i < settings.n; ++i) {
-						Rotate (ref ox1, ref oy1, fsr);
-						Rotate (ref ox2, ref oy2, -fsr);
-
-						int u1 = ox1 + settings.fcx + 32768 >> 16;
-						int v1 = oy1 + settings.fcy + 32768 >> 16;
-
-						if (u1 > 0 && v1 > 0 && u1 < settings.w && v1 < settings.h) {
-							ColorBgra sample = src_data[v1 * settings.src_w + u1];
-
-							sr += sample.R * sample.A;
-							sg += sample.G * sample.A;
-							sb += sample.B * sample.A;
-							sa += sample.A;
-							++sc;
-						}
-
-						int u2 = ox2 + settings.fcx + 32768 >> 16;
-						int v2 = oy2 + settings.fcy + 32768 >> 16;
-
-						if (u2 > 0 && v2 > 0 && u2 < settings.w && v2 < settings.h) {
-							ColorBgra sample = src_data[v2 * settings.src_w + u2];
-
-							sr += sample.R * sample.A;
-							sg += sample.G * sample.A;
-							sb += sample.B * sample.A;
-							sa += sample.A;
-							++sc;
-						}
-					}
-
-					dst_row[x] = GetFinalPixelColor (sr, sg, sb, sa, sc);
-
-					static ColorBgra GetFinalPixelColor (
-						int sr,
-						int sg,
-						int sb,
-						int sa,
-						int sc)
-					{
-						if (sa > 0) {
-							return ColorBgra.FromBgra (
-								b: Utility.ClampToByte (sb / sa),
-								g: Utility.ClampToByte (sg / sa),
-								r: Utility.ClampToByte (sr / sa),
-								a: Utility.ClampToByte (sa / sc)
-							);
-						} else {
-							return ColorBgra.FromUInt32 (0);
-						}
-					}
+					dst_row[x] = GetFinalPixelColor (settings, src_data, src_row, x, y);
 				}
 			}
+		}
+	}
+
+	private static ColorBgra GetFinalPixelColor (RadialBlurSettings settings, ReadOnlySpan<ColorBgra> src_data, ReadOnlySpan<ColorBgra> src_row, int x, int y)
+	{
+		ColorBgra src_pixel = src_row[x];
+
+		PointI f = new (
+			X: (x << 16) - settings.fcx,
+			Y: (y << 16) - settings.fcy
+		);
+
+		int fsr = settings.fr / settings.n;
+
+		int sr = src_pixel.R * src_pixel.A;
+		int sg = src_pixel.G * src_pixel.A;
+		int sb = src_pixel.B * src_pixel.A;
+		int sa = src_pixel.A;
+		int sc = 1;
+
+		PointI o1 = new (X: f.X, Y: f.Y);
+		PointI o2 = new (X: f.X, Y: f.Y);
+
+		for (int i = 0; i < settings.n; ++i) {
+
+			o1 = Rotated (o1, fsr);
+			o2 = Rotated (o2, -fsr);
+
+			int u1 = o1.X + settings.fcx + 32768 >> 16;
+			int v1 = o1.Y + settings.fcy + 32768 >> 16;
+
+			if (u1 > 0 && v1 > 0 && u1 < settings.w && v1 < settings.h) {
+				ColorBgra sample = src_data[v1 * settings.src_w + u1];
+
+				sr += sample.R * sample.A;
+				sg += sample.G * sample.A;
+				sb += sample.B * sample.A;
+				sa += sample.A;
+				++sc;
+			}
+
+			int u2 = o2.X + settings.fcx + 32768 >> 16;
+			int v2 = o2.Y + settings.fcy + 32768 >> 16;
+
+			if (u2 > 0 && v2 > 0 && u2 < settings.w && v2 < settings.h) {
+				ColorBgra sample = src_data[v2 * settings.src_w + u2];
+
+				sr += sample.R * sample.A;
+				sg += sample.G * sample.A;
+				sb += sample.B * sample.A;
+				sa += sample.A;
+				++sc;
+			}
+		}
+
+		if (sa > 0) {
+			return ColorBgra.FromBgra (
+				b: Utility.ClampToByte (sb / sa),
+				g: Utility.ClampToByte (sg / sa),
+				r: Utility.ClampToByte (sr / sa),
+				a: Utility.ClampToByte (sa / sc)
+			);
+		} else {
+			return ColorBgra.FromUInt32 (0);
 		}
 	}
 
