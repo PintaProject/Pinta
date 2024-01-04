@@ -39,7 +39,15 @@ public sealed class BulgeEffect : BaseEffect
 	}
 
 	#region Algorithm Code Ported From PDN
-	public override void Render (ImageSurface src, ImageSurface dst, ReadOnlySpan<RectangleI> rois)
+
+	private sealed record BulgeSettings (
+		float hw,
+		float hh,
+		float maxrad,
+		float amt,
+		int src_width,
+		int src_height);
+	private BulgeSettings CreateSettings (ImageSurface src, ImageSurface dst)
 	{
 		float bulge = Data.Amount;
 
@@ -53,28 +61,43 @@ public sealed class BulgeEffect : BaseEffect
 
 		int src_width = src.Width;
 		int src_height = src.Height;
+
+		return new BulgeSettings (
+			hw: hw,
+			hh: hh,
+			maxrad: maxrad,
+			amt: amt,
+			src_width: src_width,
+			src_height: src_height
+		);
+	}
+
+	public override void Render (ImageSurface src, ImageSurface dst, ReadOnlySpan<RectangleI> rois)
+	{
+		BulgeSettings settings = CreateSettings (src, dst);
+
 		ReadOnlySpan<ColorBgra> src_data = src.GetReadOnlyPixelData ();
 		Span<ColorBgra> dst_data = dst.GetPixelData ();
 
-		foreach (Core.RectangleI rect in rois) {
+		foreach (RectangleI rect in rois) {
 
 			for (int y = rect.Top; y <= rect.Bottom; y++) {
-				var src_row = src_data.Slice (y * src_width, src_width);
-				var dst_row = dst_data.Slice (y * src_width, src_width);
-				float v = y - hh;
+				var src_row = src_data.Slice (y * settings.src_width, settings.src_width);
+				var dst_row = dst_data.Slice (y * settings.src_width, settings.src_width);
+				float v = y - settings.hh;
 
 				for (int x = rect.Left; x <= rect.Right; x++) {
-					float u = x - hw;
+					float u = x - settings.hw;
 					float r = (float) Math.Sqrt (u * u + v * v);
-					float rscale1 = (1f - (r / maxrad));
+					float rscale1 = (1f - (r / settings.maxrad));
 
 					if (rscale1 > 0) {
-						float rscale2 = 1 - amt * rscale1 * rscale1;
+						float rscale2 = 1 - settings.amt * rscale1 * rscale1;
 
 						float xp = u * rscale2;
 						float yp = v * rscale2;
 
-						dst_row[x] = src.GetBilinearSampleClamped (src_data, src_width, src_height, xp + hw, yp + hh);
+						dst_row[x] = src.GetBilinearSampleClamped (src_data, settings.src_width, settings.src_height, xp + settings.hw, yp + settings.hh);
 					} else {
 						dst_row[x] = src_row[x];
 					}
@@ -90,7 +113,7 @@ public sealed class BulgeEffect : BaseEffect
 		public int Amount { get; set; } = 45;
 
 		[Caption ("Offset")]
-		public Core.PointD Offset { get; set; } = new (0.0, 0.0);
+		public PointD Offset { get; set; } = new (0.0, 0.0);
 
 		[Skip]
 		public override bool IsDefault => Amount == 0;
