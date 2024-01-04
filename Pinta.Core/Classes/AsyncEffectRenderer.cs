@@ -105,7 +105,7 @@ internal abstract class AsyncEffectRenderer
 			if (total_tiles == 0 || current_tile < 0)
 				return 0;
 			else if (current_tile < total_tiles)
-				return (double) current_tile / (double) total_tiles;
+				return current_tile / (double) total_tiles;
 			else
 				return 1;
 		}
@@ -279,7 +279,7 @@ internal abstract class AsyncEffectRenderer
 	// Runs on a background thread.
 	RectangleI GetTileBounds (int tileIndex)
 	{
-		int horizTileCount = (int) Math.Ceiling ((float) render_bounds.Width
+		int horizTileCount = (int) Math.Ceiling (render_bounds.Width
 						       / (float) settings.TileWidth);
 
 		int x = ((tileIndex % horizTileCount) * settings.TileWidth) + render_bounds.X;
@@ -292,8 +292,8 @@ internal abstract class AsyncEffectRenderer
 
 	int CalculateTotalTiles ()
 	{
-		return (int) (Math.Ceiling ((float) render_bounds.Width / (float) settings.TileWidth)
-			* Math.Ceiling ((float) render_bounds.Height / (float) settings.TileHeight));
+		return (int) (Math.Ceiling (render_bounds.Width / (float) settings.TileWidth)
+			* Math.Ceiling (render_bounds.Height / (float) settings.TileHeight));
 	}
 
 	// Called on the UI thread.

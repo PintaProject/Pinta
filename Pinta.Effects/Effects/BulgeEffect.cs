@@ -41,7 +41,7 @@ public sealed class BulgeEffect : BaseEffect
 	#region Algorithm Code Ported From PDN
 	public override void Render (ImageSurface src, ImageSurface dst, ReadOnlySpan<RectangleI> rois)
 	{
-		float bulge = (float) Data.Amount;
+		float bulge = Data.Amount;
 
 		float hw = dst.Width / 2f;
 		float hh = dst.Height / 2f;

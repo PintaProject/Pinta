@@ -237,7 +237,7 @@ public static class UnaryPixelOps
 			if ((difference > tolerance) && (saturation > 100)) {
 				double i = 255.0 * color.GetIntensity ();
 				byte ib = (byte) (i * set_saturation); // adjust the red color for user inputted saturation
-				return ColorBgra.FromBgra ((byte) color.B, (byte) color.G, ib, color.A);
+				return ColorBgra.FromBgra (color.B, color.G, ib, color.A);
 			} else {
 				return color;
 			}
@@ -294,7 +294,7 @@ public static class UnaryPixelOps
 	{
 		public override ColorBgra Apply (in ColorBgra color)
 		{
-			byte average = (byte) (((int) color.R + (int) color.G + (int) color.B) / 3);
+			byte average = (byte) ((color.R + color.G + color.B) / 3);
 			return ColorBgra.FromBgra (average, average, average, color.A);
 		}
 	}
@@ -583,7 +583,7 @@ public static class UnaryPixelOps
 
 			for (int i = 0; i < 3; i++) {
 				if (lo[i] < md[i] && md[i] < hi[i]) {
-					gamma[i] = (float) Math.Clamp (Math.Log (0.5, (float) (md[i] - lo[i]) / (float) (hi[i] - lo[i])), 0.1, 10.0);
+					gamma[i] = (float) Math.Clamp (Math.Log (0.5, (md[i] - lo[i]) / (float) (hi[i] - lo[i])), 0.1, 10.0);
 				} else {
 					gamma[i] = 1.0f;
 				}
@@ -670,7 +670,7 @@ public static class UnaryPixelOps
 				beforeOut[i] = color_in_low[i] + (color_in_high[i] - color_in_low[i]) *
 				    (float) Math.Pow ((float) (after[i] - color_out_low[i]) / (color_out_high[i] - color_out_low[i]), 1 / gamma[i]);
 
-				slopesOut[i] = (float) (color_in_high[i] - color_in_low[i]) / ((color_out_high[i] - color_out_low[i]) * gamma[i]) *
+				slopesOut[i] = (color_in_high[i] - color_in_low[i]) / ((color_out_high[i] - color_out_low[i]) * gamma[i]) *
 				    (float) Math.Pow ((float) (after[i] - color_out_low[i]) / (color_out_high[i] - color_out_low[i]), 1 / gamma[i] - 1);
 
 				if (float.IsInfinity (slopesOut[i]) || float.IsNaN (slopesOut[i]))

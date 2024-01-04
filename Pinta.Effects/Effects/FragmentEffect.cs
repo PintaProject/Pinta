@@ -43,7 +43,7 @@ public sealed class FragmentEffect : BaseEffect
 
 	private static ImmutableArray<Core.PointI> RecalcPointOffsets (int fragments, double rotationAngle, int distance)
 	{
-		double pointStep = 2 * Math.PI / (double) fragments;
+		double pointStep = 2 * Math.PI / fragments;
 		double rotationRadians = ((rotationAngle - 90.0) * Math.PI) / 180.0;
 
 		var pointOffsets = ImmutableArray.CreateBuilder<Core.PointI> (fragments);

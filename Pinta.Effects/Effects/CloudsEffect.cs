@@ -139,8 +139,8 @@ public sealed class CloudsEffect : BaseEffect
 				int div = scale;
 
 				for (int i = 0; i < 12 && mult > 0.03 && div > 0; ++i) {
-					double dxr = 65536 + (double) dx / (double) div;
-					double dyr = 65536 + (double) dy / (double) div;
+					double dxr = 65536 + dx / (double) div;
+					double dyr = 65536 + dy / (double) div;
 
 					int dxd = (int) dxr;
 					int dyd = (int) dyr;

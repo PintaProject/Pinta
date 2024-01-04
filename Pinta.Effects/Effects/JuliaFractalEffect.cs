@@ -90,9 +90,9 @@ public sealed class JuliaFractalEffect : BaseEffect
 			invH: 1.0 / h,
 			invZoom: 1.0 / Data.Zoom,
 			invQuality: 1.0 / Data.Quality,
-			aspect: (double) h / (double) w,
+			aspect: h / (double) w,
 			count: count,
-			invCount: 1.0 / (double) count,
+			invCount: 1.0 / count,
 			angleTheta: (Data.Angle.Degrees * Math.PI * 2) / 360.0,
 			factor: Data.Factor
 		);
