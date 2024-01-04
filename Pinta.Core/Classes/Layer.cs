@@ -181,7 +181,7 @@ public class Layer : ObservableObject
 
 		var g = new Context (dest);
 
-		g.Scale ((double) newSize.Width / (double) Surface.Width, (double) newSize.Height / (double) Surface.Height);
+		g.Scale (newSize.Width / (double) Surface.Width, newSize.Height / (double) Surface.Height);
 		g.SetSourceSurface (Surface, 0, 0, resamplingMode);
 
 		g.Paint ();

@@ -133,36 +133,43 @@ public sealed class CloudsEffect : BaseEffect
 			int dy = 2 * y - h;
 
 			for (int x = rect.Left; x <= rect.Right; ++x) {
-				int dx = 2 * x - w;
-				double val = 0;
-				double mult = 1;
-				int div = scale;
-
-				for (int i = 0; i < 12 && mult > 0.03 && div > 0; ++i) {
-					double dxr = 65536 + (double) dx / (double) div;
-					double dyr = 65536 + (double) dy / (double) div;
-
-					int dxd = (int) dxr;
-					int dyd = (int) dyr;
-
-					dxr -= dxd;
-					dyr -= dyd;
-
-					double noise = Noise (
-					    unchecked((byte) dxd),
-					    unchecked((byte) dyd),
-					    dxr, //(double)dxr / div,
-					    dyr, //(double)dyr / div,
-					    (byte) (seed ^ i));
-
-					val += noise * mult;
-					div /= 2;
-					mult *= power;
-				}
-
-				row[x - rect.Left] = ColorBgra.Lerp (colorFrom, colorTo, (val + 1) / 2);
+				row[x - rect.Left] = GetFinalPixelColor (scale, seed, power, colorFrom, colorTo, w, dy, x); ;
 			}
 		}
+	}
+
+	private static ColorBgra GetFinalPixelColor (int scale, byte seed, double power, ColorBgra colorFrom, ColorBgra colorTo, int w, int dy, int x)
+	{
+		int dx = 2 * x - w;
+		double val = 0;
+		double mult = 1;
+		int div = scale;
+
+		for (int i = 0; i < 12 && mult > 0.03 && div > 0; ++i) {
+
+			double dxr = 65536 + dx / (double) div;
+			double dyr = 65536 + dy / (double) div;
+
+			int dxd = (int) dxr;
+			int dyd = (int) dyr;
+
+			dxr -= dxd;
+			dyr -= dyd;
+
+			double noise = Noise (
+				unchecked((byte) dxd),
+				unchecked((byte) dyd),
+				dxr, //(double)dxr / div,
+				dyr, //(double)dyr / div,
+				(byte) (seed ^ i)
+			);
+
+			val += noise * mult;
+			div /= 2;
+			mult *= power;
+		}
+
+		return ColorBgra.Lerp (colorFrom, colorTo, (val + 1) / 2);
 	}
 
 	protected override void Render (ImageSurface src, ImageSurface dst, Core.RectangleI roi)

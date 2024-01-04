@@ -175,7 +175,7 @@ public sealed class SurfaceDiff
 			}
 		}
 
-		var savings = 100 - (float) num_changed / (float) (orig_width * orig_height) * 100;
+		var savings = 100 - num_changed / (float) (orig_width * orig_height) * 100;
 #if DEBUG_DIFF
 		Console.WriteLine ("Compressed bitmask: {0}/{1} = {2}%", num_changed, orig_height * orig_width, 100 - savings);
 #endif

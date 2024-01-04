@@ -486,7 +486,7 @@ public sealed class CurvesDialog : Gtk.Dialog
 
 			for (int i = 0; i < line.Length; i++) {
 				PointD linePoint = new (
-					X: (float) i,
+					X: i,
 					Y: (float) (Math.Clamp (Size - 1 - interpolator.Interpolate (i), 0, Size - 1))
 				);
 				line[i] = linePoint;

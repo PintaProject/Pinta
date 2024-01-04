@@ -72,8 +72,8 @@ public sealed class PointPickerGraphic : Gtk.DrawingArea
 		var doc = PintaCore.Workspace.ActiveDocument;
 
 		var bounds = GetDrawBounds ();
-		var scalex = (double) bounds.Width / (double) PintaCore.Workspace.ImageSize.Width;
-		var scaley = (double) bounds.Height / (double) PintaCore.Workspace.ImageSize.Height;
+		var scalex = bounds.Width / (double) PintaCore.Workspace.ImageSize.Width;
+		var scaley = bounds.Height / (double) PintaCore.Workspace.ImageSize.Height;
 
 		thumbnail = CairoExtensions.CreateImageSurface (Format.Argb32, bounds.Width, bounds.Height);
 

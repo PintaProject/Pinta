@@ -137,7 +137,7 @@ public sealed class DocumentSelection
 		foreach (var pA in pintaPolygonSet) {
 			List<IntPoint> newPolygon = new (pA.Count);
 			foreach (PointI p in pA) {
-				newPolygon.Add (new IntPoint ((long) p.X, (long) p.Y));
+				newPolygon.Add (new IntPoint (p.X, p.Y));
 			}
 			newPolygons.Add (newPolygon);
 		}

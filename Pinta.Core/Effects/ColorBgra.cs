@@ -108,7 +108,7 @@ public struct ColorBgra
 	/// <returns>A value in the range 0 to 1 inclusive.</returns>
 	public readonly double GetIntensity ()
 	{
-		return ((0.114 * (double) B) + (0.587 * (double) G) + (0.299 * (double) R)) / 255.0;
+		return ((0.114 * B) + (0.587 * G) + (0.299 * R)) / 255.0;
 	}
 
 	/// <summary>
@@ -226,7 +226,7 @@ public struct ColorBgra
 	/// </summary>
 	public static UInt32 BgraToUInt32 (byte b, byte g, byte r, byte a)
 	{
-		return (uint) b + ((uint) g << 8) + ((uint) r << 16) + ((uint) a << 24);
+		return b + ((uint) g << 8) + ((uint) r << 16) + ((uint) a << 24);
 	}
 
 	/// <summary>
@@ -261,8 +261,8 @@ public struct ColorBgra
 	/// </summary>
 	public static ColorBgra Blend (ColorBgra ca, ColorBgra cb, byte cbAlpha)
 	{
-		uint caA = (uint) Utility.FastScaleByteByByte ((byte) (255 - cbAlpha), ca.A);
-		uint cbA = (uint) Utility.FastScaleByteByByte (cbAlpha, cb.A);
+		uint caA = Utility.FastScaleByteByByte ((byte) (255 - cbAlpha), ca.A);
+		uint cbA = Utility.FastScaleByteByByte (cbAlpha, cb.A);
 		uint cbAT = caA + cbA;
 
 		uint r;
@@ -423,7 +423,7 @@ public struct ColorBgra
 			r /= asum;
 		}
 
-		return ColorBgra.FromUInt32 ((uint) b + ((uint) g << 8) + ((uint) r << 16) + ((uint) a << 24));
+		return ColorBgra.FromUInt32 ((uint) b + ((uint) g << 8) + ((uint) r << 16) + (a << 24));
 	}
 
 	/// <summary>
@@ -452,7 +452,7 @@ public struct ColorBgra
 
 		for (int i = 0; i < w.Length; ++i) {
 			wsum += w[i];
-			asum += (double) c[i].A * w[i];
+			asum += c[i].A * w[i];
 		}
 
 		double a = asum / wsum;
@@ -497,7 +497,7 @@ public struct ColorBgra
 
 		ulong a_sum = 0;
 		for (var i = 0; i < count; ++i)
-			a_sum += (ulong) colors[i].A;
+			a_sum += colors[i].A;
 
 		byte b = 0;
 		byte g = 0;
@@ -510,9 +510,9 @@ public struct ColorBgra
 			ulong r_sum = 0;
 
 			for (var i = 0; i < count; ++i) {
-				b_sum += (ulong) (colors[i].B);
-				g_sum += (ulong) (colors[i].G);
-				r_sum += (ulong) (colors[i].R);
+				b_sum += colors[i].B;
+				g_sum += colors[i].G;
+				r_sum += colors[i].R;
 			}
 
 			b = (byte) (b_sum / (ulong) count);
