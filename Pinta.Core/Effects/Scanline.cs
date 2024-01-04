@@ -11,51 +11,23 @@ namespace Pinta.Core;
 
 public readonly struct Scanline
 {
-	private readonly int x;
-	private readonly int y;
-	private readonly int length;
+	public int X { get; }
+	public int Y { get; }
+	public int Length { get; }
 
-	public readonly int X => x;
-
-	public readonly int Y => y;
-
-	public readonly int Length => length;
-
-	public override readonly int GetHashCode ()
-	{
-		unchecked {
-			return length.GetHashCode () + x.GetHashCode () + y.GetHashCode ();
-		}
-	}
-
-	public override readonly bool Equals (object? obj)
-	{
-		if (obj is not Scanline rhs) return false;
-		return x == rhs.x && y == rhs.y && length == rhs.length;
-	}
-
-	public static bool operator == (Scanline lhs, Scanline rhs)
-	{
-		return lhs.x == rhs.x && lhs.y == rhs.y && lhs.length == rhs.length;
-	}
-
-	public static bool operator != (Scanline lhs, Scanline rhs)
-	{
-		return !(lhs == rhs);
-	}
-
-	public override readonly string ToString ()
-	{
-		return $"({x},{y}):[{length}]";
-	}
+	public override readonly int GetHashCode () { unchecked { return Length.GetHashCode () + X.GetHashCode () + Y.GetHashCode (); } }
+	public override readonly bool Equals (object? obj) => obj is Scanline rhs && X == rhs.X && Y == rhs.Y && Length == rhs.Length;
+	public static bool operator == (Scanline lhs, Scanline rhs) => lhs.X == rhs.X && lhs.Y == rhs.Y && lhs.Length == rhs.Length;
+	public static bool operator != (Scanline lhs, Scanline rhs) => !(lhs == rhs);
+	public override readonly string ToString () => $"({X},{Y}):[{Length}]";
 
 	public Scanline (int x, int y, int length)
 	{
 		if (length < 0)
 			throw new ArgumentOutOfRangeException (nameof (length));
 
-		this.x = x;
-		this.y = y;
-		this.length = length;
+		X = x;
+		Y = y;
+		Length = length;
 	}
 }

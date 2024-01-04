@@ -66,7 +66,7 @@ public struct ColorBgra
 			colorString = "0" + colorString;
 		}
 
-		string alphaString = System.Convert.ToString (A, 16);
+		string alphaString = Convert.ToString (A, 16);
 
 		while (alphaString.Length < 2) {
 			alphaString = "0" + alphaString;
@@ -106,37 +106,25 @@ public struct ColorBgra
 	/// Gets the luminance intensity of the pixel based on the values of the red, green, and blue components. Alpha is ignored.
 	/// </summary>
 	/// <returns>A value in the range 0 to 1 inclusive.</returns>
-	public readonly double GetIntensity ()
-	{
-		return ((0.114 * B) + (0.587 * G) + (0.299 * R)) / 255.0;
-	}
+	public readonly double GetIntensity () => ((0.114 * B) + (0.587 * G) + (0.299 * R)) / 255.0;
 
 	/// <summary>
 	/// Gets the luminance intensity of the pixel based on the values of the red, green, and blue components. Alpha is ignored.
 	/// </summary>
 	/// <returns>A value in the range 0 to 255 inclusive.</returns>
-	public readonly byte GetIntensityByte ()
-	{
-		return (byte) ((7471 * B + 38470 * G + 19595 * R) >> 16);
-	}
+	public readonly byte GetIntensityByte () => (byte) ((7471 * B + 38470 * G + 19595 * R) >> 16);
 
 	/// <summary>
 	/// Returns the maximum value out of the B, G, and R values. Alpha is ignored.
 	/// </summary>
 	/// <returns></returns>
-	public readonly byte GetMaxColorChannelValue ()
-	{
-		return Math.Max (B, Math.Max (G, R));
-	}
+	public readonly byte GetMaxColorChannelValue () => Math.Max (B, Math.Max (G, R));
 
 	/// <summary>
 	/// Returns the average of the B, G, and R values. Alpha is ignored.
 	/// </summary>
 	/// <returns></returns>
-	public readonly byte GetAverageColorChannelValue ()
-	{
-		return (byte) ((B + G + R) / 3);
-	}
+	public readonly byte GetAverageColorChannelValue () => (byte) ((B + G + R) / 3);
 
 	/// <summary>
 	/// Compares two ColorBgra instance to determine if they are equal.
@@ -157,102 +145,65 @@ public struct ColorBgra
 	/// <summary>
 	/// Compares two ColorBgra instance to determine if they are equal.
 	/// </summary>
-	public override readonly bool Equals (object? obj)
-	{
-
-		if (obj != null && obj is ColorBgra && ((ColorBgra) obj).Bgra == Bgra) {
-			return true;
-		} else {
-			return false;
-		}
-	}
+	public override readonly bool Equals (object? obj) => obj is ColorBgra bgra && bgra.Bgra == Bgra;
 
 	/// <summary>
 	/// Returns a hash code for this color value.
 	/// </summary>
 	/// <returns></returns>
-	public override readonly int GetHashCode ()
-	{
-		unchecked {
-			return (int) Bgra;
-		}
-	}
+	public override readonly int GetHashCode () { unchecked { return (int) Bgra; } }
 
 	/// <summary>
 	/// Returns a new ColorBgra with the same color values but with a new alpha component value.
 	/// </summary>
-	public readonly ColorBgra NewAlpha (byte newA)
-	{
-		return ColorBgra.FromBgra (B, G, R, newA);
-	}
+	public readonly ColorBgra NewAlpha (byte newA) => FromBgra (B, G, R, newA);
 
 	/// <summary>
 	/// Creates a new ColorBgra instance with the given color and alpha values.
 	/// </summary>
-	public static ColorBgra FromBgra (byte b, byte g, byte r, byte a)
-	{
-		ColorBgra color = new ColorBgra {
-			Bgra = BgraToUInt32 (b, g, r, a)
-		};
-		return color;
-	}
+	public static ColorBgra FromBgra (byte b, byte g, byte r, byte a) => new () { Bgra = BgraToUInt32 (b, g, r, a) };
 
 	/// <summary>
 	/// Creates a new ColorBgra instance with the given color and alpha values.
 	/// </summary>
-	public static ColorBgra FromBgraClamped (int b, int g, int r, int a)
-	{
-		return FromBgra (
-		    Utility.ClampToByte (b),
-		    Utility.ClampToByte (g),
-		    Utility.ClampToByte (r),
-		    Utility.ClampToByte (a));
-	}
+	public static ColorBgra FromBgraClamped (int b, int g, int r, int a) => FromBgra (
+			Utility.ClampToByte (b),
+			Utility.ClampToByte (g),
+			Utility.ClampToByte (r),
+			Utility.ClampToByte (a)
+		);
 
 	/// <summary>
 	/// Creates a new ColorBgra instance with the given color and alpha values.
 	/// </summary>
-	public static ColorBgra FromBgraClamped (float b, float g, float r, float a)
-	{
-		return FromBgra (
-		    Utility.ClampToByte (b),
-		    Utility.ClampToByte (g),
-		    Utility.ClampToByte (r),
-		    Utility.ClampToByte (a));
-	}
+	public static ColorBgra FromBgraClamped (float b, float g, float r, float a) => FromBgra (
+			Utility.ClampToByte (b),
+			Utility.ClampToByte (g),
+			Utility.ClampToByte (r),
+			Utility.ClampToByte (a)
+		);
 
 	/// <summary>
 	/// Packs color and alpha values into a 32-bit integer.
 	/// </summary>
-	public static UInt32 BgraToUInt32 (byte b, byte g, byte r, byte a)
-	{
-		return b + ((uint) g << 8) + ((uint) r << 16) + ((uint) a << 24);
-	}
+	public static uint BgraToUInt32 (byte b, byte g, byte r, byte a) => b + ((uint) g << 8) + ((uint) r << 16) + ((uint) a << 24);
 
 	/// <summary>
 	/// Packs color and alpha values into a 32-bit integer.
 	/// </summary>
-	public static UInt32 BgraToUInt32 (int b, int g, int r, int a)
-	{
-		return (uint) b + ((uint) g << 8) + ((uint) r << 16) + ((uint) a << 24);
-	}
+	public static uint BgraToUInt32 (int b, int g, int r, int a) => (uint) b + ((uint) g << 8) + ((uint) r << 16) + ((uint) a << 24);
 
 	/// <summary>
 	/// Creates a new ColorBgra instance with the given color values, and 255 for alpha.
 	/// </summary>
-	public static ColorBgra FromBgr (byte b, byte g, byte r)
-	{
-		return FromBgra (b, g, r, 255);
-	}
+	public static ColorBgra FromBgr (byte b, byte g, byte r) => FromBgra (b, g, r, 255);
 
 	/// <summary>
 	/// Constructs a new ColorBgra instance with the given 32-bit value.
 	/// </summary>
-	public static ColorBgra FromUInt32 (UInt32 bgra)
+	public static ColorBgra FromUInt32 (uint bgra)
 	{
-		ColorBgra color = new ColorBgra {
-			Bgra = bgra
-		};
+		ColorBgra color = new ColorBgra { Bgra = bgra };
 		return color;
 	}
 
@@ -279,7 +230,7 @@ public struct ColorBgra
 			b = ((ca.B * caA) + (cb.B * cbA)) / cbAT;
 		}
 
-		return ColorBgra.FromBgra ((byte) b, (byte) g, (byte) r, (byte) cbAT);
+		return FromBgra ((byte) b, (byte) g, (byte) r, (byte) cbAT);
 	}
 
 	/// <summary>
@@ -292,24 +243,15 @@ public struct ColorBgra
 	/// This method does a simple lerp on each color value and on the alpha channel. It does
 	/// not properly take into account the alpha channel's effect on color blending.
 	/// </remarks>
-	public static ColorBgra Lerp (ColorBgra from, ColorBgra to, float frac)
-	{
-		return ColorBgra.FromBgra (
+	public static ColorBgra Lerp (ColorBgra from, ColorBgra to, float frac) => FromBgra (
 			b: Utility.ClampToByte (Lerp (from.B, to.B, frac)),
 			g: Utility.ClampToByte (Lerp (from.G, to.G, frac)),
 			r: Utility.ClampToByte (Lerp (from.R, to.R, frac)),
 			a: Utility.ClampToByte (Lerp (from.A, to.A, frac))
 		);
-	}
-	public static float Lerp (float from, float to, float frac)
-	{
-		return (from + frac * (to - from));
-	}
+	public static float Lerp (float from, float to, float frac) => from + frac * (to - from);
 
-	public static double Lerp (double from, double to, double frac)
-	{
-		return (from + frac * (to - from));
-	}
+	public static double Lerp (double from, double to, double frac) => from + frac * (to - from);
 	/// <summary>
 	/// Linearly interpolates between two color values.
 	/// </summary>
@@ -320,15 +262,12 @@ public struct ColorBgra
 	/// This method does a simple lerp on each color value and on the alpha channel. It does
 	/// not properly take into account the alpha channel's effect on color blending.
 	/// </remarks>
-	public static ColorBgra Lerp (ColorBgra from, ColorBgra to, double frac)
-	{
-		return FromBgra (
+	public static ColorBgra Lerp (ColorBgra from, ColorBgra to, double frac) => FromBgra (
 			b: Utility.ClampToByte (Lerp (from.B, to.B, frac)),
 			g: Utility.ClampToByte (Lerp (from.G, to.G, frac)),
 			r: Utility.ClampToByte (Lerp (from.R, to.R, frac)),
 			a: Utility.ClampToByte (Lerp (from.A, to.A, frac))
 		);
-	}
 
 	/// <summary>
 	/// Blends four colors together based on the given weight values.
@@ -363,7 +302,7 @@ public struct ColorBgra
 			r = (uint) ((((long) c1.A * c1.R * w1) + ((long) c2.A * c2.R * w2) + ((long) c3.A * c3.R * w3) + ((long) c4.A * c4.R * w4)) / af);
 		}
 
-		return ColorBgra.FromBgra ((byte) b, (byte) g, (byte) r, (byte) a);
+		return FromBgra ((byte) b, (byte) g, (byte) r, (byte) a);
 	}
 
 	/// <summary>
@@ -386,7 +325,7 @@ public struct ColorBgra
 		}
 
 		if (c.Length == 0) {
-			return ColorBgra.FromUInt32 (0);
+			return FromUInt32 (0);
 		}
 
 		long wsum = 0;
@@ -423,7 +362,7 @@ public struct ColorBgra
 			r /= asum;
 		}
 
-		return ColorBgra.FromUInt32 ((uint) b + ((uint) g << 8) + ((uint) r << 16) + (a << 24));
+		return FromUInt32 ((uint) b + ((uint) g << 8) + ((uint) r << 16) + (a << 24));
 	}
 
 	/// <summary>
@@ -444,7 +383,7 @@ public struct ColorBgra
 		}
 
 		if (c.Length == 0) {
-			return ColorBgra.FromUInt32 (0);
+			return FromUInt32 (0);
 		}
 
 		double wsum = 0;
@@ -482,7 +421,7 @@ public struct ColorBgra
 			r /= aMultWsum;
 		}
 
-		return ColorBgra.FromBgra ((byte) b, (byte) g, (byte) r, (byte) a);
+		return FromBgra ((byte) b, (byte) g, (byte) r, (byte) a);
 	}
 
 	/// <summary>
@@ -493,7 +432,7 @@ public struct ColorBgra
 	{
 		int count = colors.Length;
 		if (count == 0)
-			return ColorBgra.Transparent;
+			return Transparent;
 
 		ulong a_sum = 0;
 		for (var i = 0; i < count; ++i)
@@ -520,29 +459,20 @@ public struct ColorBgra
 			r = (byte) (r_sum / (ulong) count);
 		}
 
-		return ColorBgra.FromBgra (b, g, r, a);
+		return FromBgra (b, g, r, a);
 	}
 
-	public override readonly string ToString ()
-	{
-		return "B: " + B + ", G: " + G + ", R: " + R + ", A: " + A;
-	}
+	public override readonly string ToString () => $"B: {B}, G: {G}, R: {R}, A: {A}";
 
 	/// <summary>
 	/// Casts a ColorBgra to a UInt32.
 	/// </summary>
-	public static explicit operator UInt32 (ColorBgra color)
-	{
-		return color.Bgra;
-	}
+	public static explicit operator uint (ColorBgra color) => color.Bgra;
 
 	/// <summary>
 	/// Casts a UInt32 to a ColorBgra.
 	/// </summary>
-	public static explicit operator ColorBgra (UInt32 uint32)
-	{
-		return ColorBgra.FromUInt32 (uint32);
-	}
+	public static explicit operator ColorBgra (uint uint32) => FromUInt32 (uint32);
 
 	/// <summary>
 	/// Brings the color channels from straight alpha in premultiplied alpha form.
@@ -553,29 +483,23 @@ public struct ColorBgra
 	/// http://cairographics.org/manual/cairo-Image-Surfaces.html#cairo-format-t
 	/// </summary>
 	/// <returns>A ColorBgra value in premultiplied alpha form</returns>
-	public readonly ColorBgra ToPremultipliedAlpha ()
-	{
-		return ColorBgra.FromBgra ((byte) (B * A / 255), (byte) (G * A / 255), (byte) (R * A / 255), A);
-	}
+	public readonly ColorBgra ToPremultipliedAlpha () => FromBgra ((byte) (B * A / 255), (byte) (G * A / 255), (byte) (R * A / 255), A);
 
 	public static bool ColorsWithinTolerance (ColorBgra a, ColorBgra b, int tolerance)
 	{
-		var sum = 0;
-		int diff;
+		int diffR = a.R - b.R;
+		int diffG = a.G - b.G;
+		int diffB = a.B - b.B;
+		int diffA = a.A - b.A;
 
-		diff = a.R - b.R;
-		sum += (1 + diff * diff) * a.A / 256;
+		int summandR = (1 + diffR * diffR) * a.A / 256;
+		int summandG = (1 + diffG * diffG) * a.A / 256;
+		int summandB = (1 + diffB * diffB) * a.A / 256;
+		int summandA = diffA * diffA;
 
-		diff = a.G - b.G;
-		sum += (1 + diff * diff) * a.A / 256;
+		int sum = summandR + summandG + summandB + summandA;
 
-		diff = a.B - b.B;
-		sum += (1 + diff * diff) * a.A / 256;
-
-		diff = a.A - b.A;
-		sum += diff * diff;
-
-		return (sum <= tolerance * tolerance * 4);
+		return sum <= tolerance * tolerance * 4;
 	}
 
 	/// <summary>
@@ -591,9 +515,9 @@ public struct ColorBgra
 	public readonly ColorBgra ToStraightAlpha ()
 	{
 		if (A > 0)
-			return ColorBgra.FromBgra ((byte) (B * 255 / A), (byte) (G * 255 / A), (byte) (R * 255 / A), A);
+			return FromBgra ((byte) (B * 255 / A), (byte) (G * 255 / A), (byte) (R * 255 / A), A);
 		else
-			return ColorBgra.Zero;
+			return Zero;
 	}
 
 	//// Colors: copied from System.Drawing.Color's list (don't worry I didn't type it in
@@ -602,12 +526,12 @@ public struct ColorBgra
 	public static ColorBgra Transparent => Zero; // Note pre-multiplied alpha is used.
 	public static ColorBgra Zero => (ColorBgra) 0;
 
-	public static ColorBgra Black => ColorBgra.FromBgra (0, 0, 0, 255);
-	public static ColorBgra Blue => ColorBgra.FromBgra (255, 0, 0, 255);
-	public static ColorBgra Cyan => ColorBgra.FromBgra (255, 255, 0, 255);
-	public static ColorBgra Green => ColorBgra.FromBgra (0, 128, 0, 255);
-	public static ColorBgra Magenta => ColorBgra.FromBgra (255, 0, 255, 255);
-	public static ColorBgra Red => ColorBgra.FromBgra (0, 0, 255, 255);
-	public static ColorBgra White => ColorBgra.FromBgra (255, 255, 255, 255);
-	public static ColorBgra Yellow => ColorBgra.FromBgra (0, 255, 255, 255);
+	public static ColorBgra Black => FromBgra (0, 0, 0, 255);
+	public static ColorBgra Blue => FromBgra (255, 0, 0, 255);
+	public static ColorBgra Cyan => FromBgra (255, 255, 0, 255);
+	public static ColorBgra Green => FromBgra (0, 128, 0, 255);
+	public static ColorBgra Magenta => FromBgra (255, 0, 255, 255);
+	public static ColorBgra Red => FromBgra (0, 0, 255, 255);
+	public static ColorBgra White => FromBgra (255, 255, 255, 255);
+	public static ColorBgra Yellow => FromBgra (0, 255, 255, 255);
 }
