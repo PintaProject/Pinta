@@ -436,7 +436,7 @@ public sealed class MainWindow
 		var toolbox_scroll = new ScrolledWindow () {
 			Child = toolbox,
 			HscrollbarPolicy = PolicyType.Never,
-			VscrollbarPolicy = PolicyType.Automatic,
+			VscrollbarPolicy = PolicyType.Never,
 			HasFrame = false,
 			OverlayScrolling = true,
 			WindowPlacement = CornerType.BottomRight
