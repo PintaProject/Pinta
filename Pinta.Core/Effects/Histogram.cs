@@ -110,7 +110,7 @@ public abstract class Histogram
 			}
 
 			if (sum != 0) {
-				ret[channel] = (float) avg / (float) sum;
+				ret[channel] = avg / (float) sum;
 			} else {
 				ret[channel] = 0;
 			}

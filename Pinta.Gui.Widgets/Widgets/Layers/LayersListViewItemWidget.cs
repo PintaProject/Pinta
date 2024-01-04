@@ -149,12 +149,12 @@ public sealed class LayersListViewItemWidget : Box
 		var draw_height = height;
 
 		// The image is more constrained by height than width
-		if ((double) width / (double) thumbnail_surface.Width >= (double) height / (double) thumbnail_surface.Height) {
-			scale = (double) height / (double) (thumbnail_surface.Height);
-			draw_width = (int) (thumbnail_surface.Width * height / thumbnail_surface.Height);
+		if (width / (double) thumbnail_surface.Width >= height / (double) thumbnail_surface.Height) {
+			scale = height / (double) (thumbnail_surface.Height);
+			draw_width = thumbnail_surface.Width * height / thumbnail_surface.Height;
 		} else {
-			scale = (double) width / (double) (thumbnail_surface.Width);
-			draw_height = (int) (thumbnail_surface.Height * width / thumbnail_surface.Width);
+			scale = width / (double) (thumbnail_surface.Width);
+			draw_height = thumbnail_surface.Height * width / thumbnail_surface.Width;
 		}
 
 		PointI offset = new (

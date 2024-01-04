@@ -612,7 +612,7 @@ public abstract class BaseEditEngine
 		}
 
 		//Place the new point on the outside-most end, order-wise.
-		if ((double) SelectedPointIndex < (double) selEngine.ControlPoints.Count / 2d) {
+		if (SelectedPointIndex < selEngine.ControlPoints.Count / 2d) {
 			selEngine.ControlPoints.Insert (SelectedPointIndex,
 			    new ControlPoint (new PointD (newPointPos.X, newPointPos.Y), DefaultMidPointTension));
 		} else {

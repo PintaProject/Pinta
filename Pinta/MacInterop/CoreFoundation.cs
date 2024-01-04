@@ -52,8 +52,8 @@ internal static partial class CoreFoundation
 		public IntPtr Location, Length;
 		public CFRange (int l, int len)
 		{
-			Location = (IntPtr) l;
-			Length = (IntPtr) len;
+			Location = l;
+			Length = len;
 		}
 	}
 

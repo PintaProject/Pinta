@@ -91,10 +91,10 @@ public sealed class MandelbrotFractalEffect : BaseEffect
 			invH: 1.0 / h,
 			invZoom: 1.0 / zoom,
 
-			invQuality: 1.0 / (double) Data.Quality,
+			invQuality: 1.0 / Data.Quality,
 
 			count: count,
-			invCount: 1.0 / (double) count,
+			invCount: 1.0 / count,
 			angleTheta: (Data.Angle.Degrees * 2 * Math.PI) / 360,
 
 			factor: Data.Factor,

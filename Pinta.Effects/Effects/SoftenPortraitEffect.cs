@@ -95,8 +95,8 @@ public sealed class SoftenPortraitEffect : BaseEffect
 				for (int x = roi.Left; x <= roi.Right; ++x) {
 					ColorBgra srcGrey = desaturate_op.Apply (src_row[x]);
 
-					srcGrey.R = Utility.ClampToByte ((int) ((float) srcGrey.R * redAdjust));
-					srcGrey.B = Utility.ClampToByte ((int) ((float) srcGrey.B * blueAdjust));
+					srcGrey.R = Utility.ClampToByte ((int) (srcGrey.R * redAdjust));
+					srcGrey.B = Utility.ClampToByte ((int) (srcGrey.B * blueAdjust));
 
 					dst_row[x] = overlay_op.Apply (srcGrey, dst_row[x]);
 				}

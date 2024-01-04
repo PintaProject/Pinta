@@ -525,9 +525,9 @@ public sealed class NewImageDialog : Dialog
 			if (size.Width <= MAX_SIZE && size.Height <= MAX_SIZE)
 				preview_size = size;
 			else if (size.Width > size.Height)
-				preview_size = new Size (MAX_SIZE, (int) (MAX_SIZE / ((float) size.Width / (float) size.Height)));
+				preview_size = new Size (MAX_SIZE, (int) (MAX_SIZE / (size.Width / (float) size.Height)));
 			else
-				preview_size = new Size ((int) (MAX_SIZE / ((float) size.Height / (float) size.Width)), MAX_SIZE);
+				preview_size = new Size ((int) (MAX_SIZE / (size.Height / (float) size.Width)), MAX_SIZE);
 
 			var r = new RectangleD ((widget_width - preview_size.Width) / 2, (widget_height - preview_size.Height) / 2, preview_size.Width, preview_size.Height);
 

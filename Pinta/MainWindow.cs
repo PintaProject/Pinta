@@ -574,10 +574,10 @@ public sealed class MainWindow
 			double ratio;
 
 			// The image is more constrained by width than height
-			if ((double) image_x / (double) window_x >= (double) image_y / (double) window_y) {
-				ratio = (double) (window_x - 20) / (double) image_x;
+			if (image_x / (double) window_x >= image_y / (double) window_y) {
+				ratio = (window_x - 20) / (double) image_x;
 			} else {
-				ratio = (double) (window_y - 20) / (double) image_y;
+				ratio = (window_y - 20) / (double) image_y;
 			}
 
 			PintaCore.Workspace.Scale = ratio;

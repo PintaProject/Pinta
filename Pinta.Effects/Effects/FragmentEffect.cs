@@ -41,20 +41,21 @@ public sealed class FragmentEffect : BaseEffect
 
 	#region Algorithm Code Ported From PDN
 
-	private static ImmutableArray<Core.PointI> RecalcPointOffsets (int fragments, double rotationAngle, int distance)
+	private static ImmutableArray<PointI> RecalcPointOffsets (int fragments, double rotationAngle, int distance)
 	{
-		double pointStep = 2 * Math.PI / (double) fragments;
+		double pointStep = 2 * Math.PI / fragments;
 		double rotationRadians = ((rotationAngle - 90.0) * Math.PI) / 180.0;
 
-		var pointOffsets = ImmutableArray.CreateBuilder<Core.PointI> (fragments);
+		var pointOffsets = ImmutableArray.CreateBuilder<PointI> (fragments);
 		pointOffsets.Count = fragments;
 
 		for (int i = 0; i < fragments; i++) {
 			double currentRadians = rotationRadians + (pointStep * i);
 
-			pointOffsets[i] = new Core.PointI (
-			    (int) Math.Round (distance * -Math.Sin (currentRadians), MidpointRounding.AwayFromZero),
-			    (int) Math.Round (distance * -Math.Cos (currentRadians), MidpointRounding.AwayFromZero));
+			pointOffsets[i] = new PointI (
+				X: (int) Math.Round (distance * -Math.Sin (currentRadians), MidpointRounding.AwayFromZero),
+				Y: (int) Math.Round (distance * -Math.Cos (currentRadians), MidpointRounding.AwayFromZero)
+			);
 		}
 
 		return pointOffsets.MoveToImmutable ();
@@ -65,7 +66,7 @@ public sealed class FragmentEffect : BaseEffect
 		var pointOffsets = RecalcPointOffsets (Data.Fragments, Data.Rotation.Degrees, Data.Distance);
 
 		int poLength = pointOffsets.Length;
-		Span<Core.PointI> pointOffsetsPtr = stackalloc Core.PointI[poLength];
+		Span<PointI> pointOffsetsPtr = stackalloc PointI[poLength];
 
 		for (int i = 0; i < poLength; ++i)
 			pointOffsetsPtr[i] = pointOffsets[i];
@@ -78,21 +79,24 @@ public sealed class FragmentEffect : BaseEffect
 		ReadOnlySpan<ColorBgra> src_data = src.GetReadOnlyPixelData ();
 		Span<ColorBgra> dst_data = dst.GetPixelData ();
 
-		foreach (Core.RectangleI rect in rois) {
+		foreach (RectangleI rect in rois) {
 			for (int y = rect.Top; y <= rect.Bottom; y++) {
 				var dst_row = dst_data.Slice (y * src_width, src_width);
 
 				for (int x = rect.Left; x <= rect.Right; x++) {
+
 					int sampleCount = 0;
 
 					for (int i = 0; i < poLength; ++i) {
+
 						int u = x - pointOffsetsPtr[i].X;
 						int v = y - pointOffsetsPtr[i].Y;
 
-						if (u >= 0 && u < src_width && v >= 0 && v < src_height) {
-							samples[sampleCount] = src.GetColorBgra (src_data, src_width, new (u, v));
-							++sampleCount;
-						}
+						if (u < 0 || u >= src_width || v < 0 || v >= src_height)
+							continue;
+
+						samples[sampleCount] = src.GetColorBgra (src_data, src_width, new (u, v));
+						++sampleCount;
 					}
 
 					dst_row[x] = ColorBgra.Blend (samples[..sampleCount]);

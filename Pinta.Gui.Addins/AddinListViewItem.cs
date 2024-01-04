@@ -63,7 +63,7 @@ internal sealed class AddinListViewItem : GObject.Object
 	public string? DownloadSize {
 		get {
 			if (int.TryParse (info.Properties.GetPropertyValue ("DownloadSize"), out int size)) {
-				float fs = ((float) size) / 1048576f;
+				float fs = size / 1048576f;
 				return fs.ToString ("0.00 MB");
 			} else {
 				return null;
