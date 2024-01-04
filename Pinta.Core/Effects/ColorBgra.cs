@@ -186,12 +186,12 @@ public struct ColorBgra
 	/// <summary>
 	/// Packs color and alpha values into a 32-bit integer.
 	/// </summary>
-	public static UInt32 BgraToUInt32 (byte b, byte g, byte r, byte a) => b + ((uint) g << 8) + ((uint) r << 16) + ((uint) a << 24);
+	public static uint BgraToUInt32 (byte b, byte g, byte r, byte a) => b + ((uint) g << 8) + ((uint) r << 16) + ((uint) a << 24);
 
 	/// <summary>
 	/// Packs color and alpha values into a 32-bit integer.
 	/// </summary>
-	public static UInt32 BgraToUInt32 (int b, int g, int r, int a) => (uint) b + ((uint) g << 8) + ((uint) r << 16) + ((uint) a << 24);
+	public static uint BgraToUInt32 (int b, int g, int r, int a) => (uint) b + ((uint) g << 8) + ((uint) r << 16) + ((uint) a << 24);
 
 	/// <summary>
 	/// Creates a new ColorBgra instance with the given color values, and 255 for alpha.
@@ -201,7 +201,7 @@ public struct ColorBgra
 	/// <summary>
 	/// Constructs a new ColorBgra instance with the given 32-bit value.
 	/// </summary>
-	public static ColorBgra FromUInt32 (UInt32 bgra)
+	public static ColorBgra FromUInt32 (uint bgra)
 	{
 		ColorBgra color = new ColorBgra { Bgra = bgra };
 		return color;
@@ -467,12 +467,12 @@ public struct ColorBgra
 	/// <summary>
 	/// Casts a ColorBgra to a UInt32.
 	/// </summary>
-	public static explicit operator UInt32 (ColorBgra color) => color.Bgra;
+	public static explicit operator uint (ColorBgra color) => color.Bgra;
 
 	/// <summary>
 	/// Casts a UInt32 to a ColorBgra.
 	/// </summary>
-	public static explicit operator ColorBgra (UInt32 uint32) => FromUInt32 (uint32);
+	public static explicit operator ColorBgra (uint uint32) => FromUInt32 (uint32);
 
 	/// <summary>
 	/// Brings the color channels from straight alpha in premultiplied alpha form.
