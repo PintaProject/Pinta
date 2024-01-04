@@ -89,7 +89,7 @@ public sealed class LineCurveSeriesEngine : ShapeEngine
 		List<PointD> bezierTangents = new List<PointD> ();
 
 		int pointCount = ControlPoints.Count - 1;
-		double pointCountDouble = (double) pointCount;
+		double pointCountDouble = pointCount;
 		double tensionForPoint;
 
 		//Calculate the first tangent.
@@ -105,7 +105,7 @@ public sealed class LineCurveSeriesEngine : ShapeEngine
 
 		//Calculate all of the middle tangents.
 		for (int i = 1; i < pointCount; ++i) {
-			tensionForPoint = ControlPoints[i].Tension * (double) i / pointCountDouble;
+			tensionForPoint = ControlPoints[i].Tension * i / pointCountDouble;
 
 			bezierTangents.Add (new PointD (
 				tensionForPoint *

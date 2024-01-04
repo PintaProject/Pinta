@@ -105,7 +105,7 @@ public static class GdkExtensions
 			zoom = Math.Min (30d, PintaCore.Workspace.ActiveDocument.Workspace.Scale);
 		}
 
-		shapeWidth = (int) Math.Min (800d, ((double) shapeWidth) * zoom);
+		shapeWidth = (int) Math.Min (800d, shapeWidth * zoom);
 		int halfOfShapeWidth = shapeWidth / 2;
 
 		// Calculate bounding boxes around the both image and shape

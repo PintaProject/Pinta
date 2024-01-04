@@ -109,8 +109,8 @@ public sealed class HistogramWidget : Gtk.DrawingArea
 
 		for (var i = 0; i < entries; i += entries - 1) {
 			points[i] = new PointD (
-			    Utility.Lerp (l, r, (float) hist[i] / (float) max),
-			    Utility.Lerp (t, b, (float) i / (float) entries));
+			    Utility.Lerp (l, r, hist[i] / (float) max),
+			    Utility.Lerp (t, b, i / (float) entries));
 
 			CheckPoint (rect, ref points[i]);
 		}
@@ -121,8 +121,8 @@ public sealed class HistogramWidget : Gtk.DrawingArea
 			sum3 += hist[i + 1];
 
 			points[i] = new PointD (
-			    Utility.Lerp (l, r, (float) (sum3) / (float) (max * 3.1f)),
-			    Utility.Lerp (t, b, (float) i / (float) entries));
+			    Utility.Lerp (l, r, sum3 / (float) (max * 3.1f)),
+			    Utility.Lerp (t, b, i / (float) entries));
 
 			CheckPoint (rect, ref points[i]);
 			sum3 -= hist[i - 1];

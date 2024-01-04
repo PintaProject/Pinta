@@ -1346,12 +1346,12 @@ namespace Pinta.Core
 				int count = 0;
 				for (int i = 0; i < dash_pattern.Length; ++i, ++count) {
 					if (i > 0 && is_dash[i] != is_dash[i - 1]) {
-						dashes.Add ((double) count);
+						dashes.Add (count);
 						count = 0;
 					}
 				}
 
-				dashes.Add ((double) count);
+				dashes.Add (count);
 			}
 
 			// The cairo pattern must have an even number of dash and space sequences to loop,

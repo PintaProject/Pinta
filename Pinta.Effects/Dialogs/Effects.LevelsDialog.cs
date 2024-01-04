@@ -347,7 +347,7 @@ public partial class LevelsDialog : Gtk.Dialog
 
 			for (int c = 0; c < 3; c++) {
 				if (mask[c]) {
-					after[c] = (byte) Utility.ClampToByte (after[c] * factor);
+					after[c] = Utility.ClampToByte (after[c] * factor);
 				}
 			}
 		} while (average != val && oldaverage != average);
@@ -358,7 +358,7 @@ public partial class LevelsDialog : Gtk.Dialog
 
 			for (int c = 0; c < 3; c++) {
 				if (mask[c]) {
-					after[c] = (byte) Utility.ClampToByte (after[c] + diff);
+					after[c] = Utility.ClampToByte (after[c] + diff);
 				}
 			}
 		}
@@ -498,7 +498,7 @@ public partial class LevelsDialog : Gtk.Dialog
 
 			case 1:
 				med = gradient_output.GetValue (1);
-				spin_out_gamma.Value = Math.Clamp (1 / Math.Log (0.5, (float) (med - lo) / (float) (hi - lo)), 0.1, 10.0);
+				spin_out_gamma.Value = Math.Clamp (1 / Math.Log (0.5, (med - lo) / (float) (hi - lo)), 0.1, 10.0);
 				break;
 
 			case 2:
@@ -556,7 +556,7 @@ public partial class LevelsDialog : Gtk.Dialog
 		ccd.UseAlpha = true;
 		ccd.SetColor (panel.CairoColor);
 
-		var response = (Gtk.ResponseType) ccd.RunBlocking ();
+		var response = ccd.RunBlocking ();
 		if (response == Gtk.ResponseType.Ok) {
 			ccd.GetColor (out var cairo_color);
 			ColorBgra col = cairo_color.ToColorBgra ();
