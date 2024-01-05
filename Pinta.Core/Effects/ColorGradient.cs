@@ -94,17 +94,18 @@ public sealed class ColorGradient
 	{
 		// TODO: Make this method more generic?
 		if (arr.Count == 0) return -1;
+
 		int left = 0;
 		int right = arr.Count - 1;
+
 		while (left <= right) {
 			int mid = left + (right - left) / 2;
-			if (arr[mid].Position == target) {
+			if (arr[mid].Position == target)
 				return mid;
-			} else if (arr[mid].Position < target) {
+			else if (arr[mid].Position < target)
 				left = mid + 1;
-			} else {
+			else
 				right = mid - 1;
-			}
 		}
 
 		// If target is not found, 'left' will be the index of the number just greater than target
@@ -119,46 +120,38 @@ public sealed class ColorGradient
 	private static IEnumerable<KeyValuePair<double, ColorBgra>> EmptyStops () => Enumerable.Empty<KeyValuePair<double, ColorBgra>> ();
 
 	public static ColorGradient Create ()
-	{
-		return new ColorGradient (
+		=> new (
 			DefaultStartColor (),
 			DefaultEndColor (),
 			DefaultMinimumValue (),
 			DefaultMaximumValue (),
 			EmptyStops ()
 		);
-	}
 
 	public static ColorGradient Create (ColorBgra start, ColorBgra end)
-	{
-		return new (
+		=> new (
 			start,
 			end,
 			DefaultMinimumValue (),
 			DefaultMaximumValue (),
 			EmptyStops ()
 		);
-	}
 
 	public static ColorGradient Create (ColorBgra start, ColorBgra end, double minimum, double maximum)
-	{
-		return new (
+		=> new (
 			start,
 			end,
 			minimum,
 			maximum,
 			EmptyStops ()
 		);
-	}
 
 	public static ColorGradient Create (ColorBgra start, ColorBgra end, double minimum, double maximum, IEnumerable<KeyValuePair<double, ColorBgra>> stops)
-	{
-		return new (
+		=> new (
 			start,
 			end,
 			minimum,
 			maximum,
 			stops
 		);
-	}
 }
