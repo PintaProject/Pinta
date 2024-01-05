@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Net.Sockets;
 
 namespace Pinta.Core;
 
@@ -55,6 +56,32 @@ public sealed class ColorGradient
 	private static void CheckBoundsConsistency (double minPosition, double maxPosition)
 	{
 		if (minPosition >= maxPosition) throw new ArgumentException ($"{nameof (minPosition)} has to be lower than {nameof (maxPosition)}");
+	}
+
+	public ColorGradient Resize (double minPosition, double maxPosition)
+	{
+		CheckBoundsConsistency (minPosition, maxPosition);
+
+		double newSpan = maxPosition - minPosition;
+		double currentSpan = MaximumPosition - MinimumPosition;
+		double newProportion = newSpan / currentSpan;
+		double newMinRelativeOffset = minPosition - MinimumPosition;
+
+		KeyValuePair<double, ColorBgra> ToNewStop (GradientStop stop)
+		{
+			double stopToMinOffset = stop.Position - MinimumPosition;
+			double adjustedOffset = stopToMinOffset * newProportion;
+			double newPosition = minPosition + adjustedOffset;
+			return KeyValuePair.Create (newPosition, stop.Color);
+		}
+
+		return new (
+			StartColor,
+			EndColor,
+			minPosition,
+			maxPosition,
+			sorted_stops.Select (ToNewStop)
+		);
 	}
 
 	public ColorBgra GetColor (double position)
