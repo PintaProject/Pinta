@@ -36,8 +36,8 @@ public sealed class ColorGradient
 
 	public ColorBgra GetColor (double position)
 	{
-		if (position == MinimumPosition) return StartColor;
-		if (position == MaximumPosition) return EndColor;
+		if (position <= MinimumPosition) return StartColor;
+		if (position >= MaximumPosition) return EndColor;
 		if (sorted_stops.Count == 0) return HandleNoStops (position);
 		return HandleWithStops (position);
 	}
