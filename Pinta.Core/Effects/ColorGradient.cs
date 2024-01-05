@@ -11,7 +11,7 @@ public sealed class ColorGradient
 	public double MinimumPosition { get; }
 	public double MaximumPosition { get; }
 
-	private readonly IReadOnlyList<GradientStop> sorted_stops; // TODO: Before making it public think of nice structures
+	private readonly IReadOnlyList<GradientStop> sorted_stops;
 
 	internal ColorGradient (
 		ColorBgra startColor,
@@ -20,18 +20,41 @@ public sealed class ColorGradient
 		double maxPosition,
 		IEnumerable<KeyValuePair<double, ColorBgra>> gradientStops)
 	{
-		if (minPosition >= maxPosition) throw new ArgumentException ($"{nameof (minPosition)} has to be lower than {nameof (maxPosition)}");
-		var sortedStops = gradientStops.Select (kvp => new GradientStop (kvp.Key, kvp.Value)).OrderBy (stop => stop.Position).ToArray ();
-		if (sortedStops.Length > 0 && sortedStops[0].Position <= minPosition) throw new ArgumentException ($"Lowest key in {nameof (gradientStops)} has to be greater than {nameof (minPosition)}");
-		if (sortedStops.Length > 0 && sortedStops[^1].Position >= maxPosition) throw new ArgumentException ($"Greatest key in {nameof (gradientStops)} has to be lower than {nameof (maxPosition)}");
-		var distinctPositions = sortedStops.GroupBy (s => s.Position).Count ();
-		if (distinctPositions != sortedStops.Length) throw new ArgumentException ("Cannot have more than one stop in the same position");
+		CheckBoundsConsistency (minPosition, maxPosition);
+
+		var sortedStops = GetSortedStops (gradientStops);
+		CheckStopsBounds (sortedStops, minPosition, maxPosition);
+		CheckUniqueness (sortedStops);
 
 		StartColor = startColor;
 		EndColor = endColor;
 		MinimumPosition = minPosition;
 		MaximumPosition = maxPosition;
 		sorted_stops = sortedStops;
+	}
+
+	private static IReadOnlyList<GradientStop> GetSortedStops (IEnumerable<KeyValuePair<double, ColorBgra>> gradientStops)
+		=>
+			gradientStops
+			.Select (kvp => new GradientStop (kvp.Key, kvp.Value))
+			.OrderBy (stop => stop.Position)
+			.ToArray ();
+
+	private static void CheckStopsBounds (IReadOnlyList<GradientStop> sortedStops, double minPosition, double maxPosition)
+	{
+		if (sortedStops.Count > 0 && sortedStops[0].Position <= minPosition) throw new ArgumentException ($"Lowest key in gradient stops has to be greater than {nameof (minPosition)}");
+		if (sortedStops.Count > 0 && sortedStops[^1].Position >= maxPosition) throw new ArgumentException ($"Greatest key in gradient stops has to be lower than {nameof (maxPosition)}");
+	}
+
+	private static void CheckUniqueness (IReadOnlyList<GradientStop> sortedStops)
+	{
+		var distinctPositions = sortedStops.GroupBy (s => s.Position).Count ();
+		if (distinctPositions != sortedStops.Count) throw new ArgumentException ("Cannot have more than one stop in the same position");
+	}
+
+	private static void CheckBoundsConsistency (double minPosition, double maxPosition)
+	{
+		if (minPosition >= maxPosition) throw new ArgumentException ($"{nameof (minPosition)} has to be lower than {nameof (maxPosition)}");
 	}
 
 	public ColorBgra GetColor (double position)
