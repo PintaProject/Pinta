@@ -8,16 +8,17 @@ msgstr ""
 "Project-Id-Version: pinta\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2023-12-25 23:00-0500\n"
-"PO-Revision-Date: 2022-05-28 15:44+0000\n"
-"Last-Translator: Dolomites <Unknown>\n"
-"Language-Team: Italian <it@li.org>\n"
+"PO-Revision-Date: 2024-01-06 18:06+0000\n"
+"Last-Translator: zWolfrost <zwolfrost@gmail.com>\n"
+"Language-Team: Italian <https://hosted.weblate.org/projects/pinta/pinta/it/>"
+"\n"
 "Language: it\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
+"X-Generator: Weblate 5.4-dev\n"
 "X-Launchpad-Export-Date: 2023-12-18 03:00+0000\n"
-"X-Generator: Launchpad (build e1eeab5b20e19239bd7d5f36676f7a52988db88b)\n"
 
 #: ../Pinta.Gui.Addins/InstallDialog.cs:216
 msgid " (in user directory)"
@@ -25,7 +26,7 @@ msgstr " (nella cartella utente)"
 
 #: ../Pinta.Core/Classes/SelectionModeHandler.cs:58
 msgid " Selection Mode: "
-msgstr " Modo di Selezione: "
+msgstr " Modalità di Selezione: "
 
 #: ../Pinta.Core/Managers/EffectsManager.cs:58
 #: ../Pinta.Core/Managers/EffectsManager.cs:88
@@ -34,19 +35,19 @@ msgstr "..."
 
 #: ../Pinta.Tools/Tools/ColorPickerTool.cs:222
 msgid "3 x 3 Region"
-msgstr "Regione di 3 × 3"
+msgstr "Regione 3 x 3"
 
 #: ../Pinta.Tools/Tools/ColorPickerTool.cs:223
 msgid "5 x 5 Region"
-msgstr "Regione di 5 × 5"
+msgstr "Regione 5 x 5"
 
 #: ../Pinta.Tools/Tools/ColorPickerTool.cs:224
 msgid "7 x 7 Region"
-msgstr "Regione di 7 × 7"
+msgstr "Regione 7 x 7"
 
 #: ../Pinta.Tools/Tools/ColorPickerTool.cs:225
 msgid "9 x 9 Region"
-msgstr "Regione di 9 × 9"
+msgstr "Regione di 9 x 9"
 
 #: ../Pinta/MainWindow.cs:349
 msgid "A_dd-ins"
@@ -54,7 +55,7 @@ msgstr "Componenti aggiuntivi"
 
 #: ../Pinta.Core/Actions/AppActions.cs:40
 msgid "About"
-msgstr "Informazioni su Pinta"
+msgstr "Informazioni"
 
 #: ../Pinta/Actions/Help/AboutDialogAction.cs:51
 msgid "About Pinta"
@@ -72,7 +73,7 @@ msgstr "Aggiungi disturbo"
 
 #: ../Pinta.Core/Actions/AddinActions.cs:38
 msgid "Add-in Manager..."
-msgstr ""
+msgstr "Add-in Manager..."
 
 #: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:810
 msgid "Added"
@@ -80,7 +81,7 @@ msgstr "Aggiunto"
 
 #: ../Pinta/MainWindow.cs:382
 msgid "Adjustments"
-msgstr ""
+msgstr "Regolazioni"
 
 #: ../Pinta.Tools/Tools/ColorPickerTool.cs:193
 msgid "After select"
@@ -153,7 +154,7 @@ msgstr "Livelli automatici"
 #: ../Pinta.Gui.Addins/AddinInfoView.cs:139
 #, csharp-format
 msgid "Available in repository: {0}"
-msgstr ""
+msgstr "Disponibile nella repository: {0}"
 
 #: ../Pinta.Core/Managers/WorkspaceManager.cs:176
 msgid "Background"
@@ -169,7 +170,7 @@ msgstr "Sfondo:"
 
 #: ../Pinta/Actions/Help/AboutDialogAction.cs:81
 msgid "Based on the work of Paint.NET:"
-msgstr "Basato sul lavoro di Paint.NET"
+msgstr "Basato sul lavoro di Paint.NET:"
 
 #: ../Pinta.Core/Actions/ViewActions.cs:69
 msgid "Best Fit"
@@ -177,7 +178,7 @@ msgstr "Adatta alla pagina"
 
 #: ../Pinta.Core/Enumerations/ResamplingMode.cs:22
 msgid "Bilinear"
-msgstr ""
+msgstr "Bilineare"
 
 #: ../Pinta.Effects/Adjustments/BlackAndWhiteEffect.cs:24
 msgid "Black and White"
@@ -308,22 +309,29 @@ msgid ""
 "Click and drag to draw a rectangular selection.\n"
 "Hold Shift to constrain to a square."
 msgstr ""
+"Clicca e trascina per disegnare una selezione rettangolare.\n"
+"Mantieni Shift per vincolarla ad un quadrato."
 
 #: ../Pinta.Tools/Tools/EllipseSelectTool.cs:37
 msgid ""
 "Click and drag to draw an elliptical selection.\n"
 "Hold Shift to constrain to a circle."
 msgstr ""
+"Clicca e trascina per disegnare una selezione ellittica.\n"
+"Mantieni Shift per vincolarla ad un cerchio."
 
 #: ../Pinta.Tools/Tools/GradientTool.cs:51
 msgid ""
 "Click and drag to draw gradient from primary to secondary color.\n"
 "Right click to reverse."
 msgstr ""
+"Clicca e trascina per disegnare un gradiente dal colore primario a "
+"secondario.\n"
+"Click destro per invertire."
 
 #: ../Pinta.Tools/Tools/LassoSelectTool.cs:55
 msgid "Click and drag to draw the outline for a selection area."
-msgstr "Clicca e trascina per disegnare il contorno dell'area da selezionare"
+msgstr "Clicca e trascina per disegnare il contorno dell'area da selezionare."
 
 #: ../Pinta.Tools/Tools/PanTool.cs:40
 msgid "Click and drag to navigate image."
@@ -331,11 +339,11 @@ msgstr "Clicca e trascina per muoverti nell'immagine."
 
 #: ../Pinta.Gui.Widgets/Widgets/StatusBarColorPaletteWidget.cs:265
 msgid "Click to reset primary and secondary color."
-msgstr "Clicca per selezionare i colori primario e secondario"
+msgstr "Clicca per selezionare i colori primario e secondario."
 
 #: ../Pinta.Gui.Widgets/Widgets/StatusBarColorPaletteWidget.cs:254
 msgid "Click to select primary color."
-msgstr "Clicca per selezionare il colore primario"
+msgstr "Clicca per selezionare il colore primario."
 
 #: ../Pinta.Tools/Tools/MagicWandTool.cs:49
 msgid "Click to select region of similar color."
@@ -343,7 +351,7 @@ msgstr "Fare click in una regione di colore simile."
 
 #: ../Pinta.Gui.Widgets/Widgets/StatusBarColorPaletteWidget.cs:257
 msgid "Click to select secondary color."
-msgstr "Clicca per selezionare il colore secondario"
+msgstr "Clicca per selezionare il colore secondario."
 
 #: ../Pinta.Gui.Widgets/Widgets/StatusBarColorPaletteWidget.cs:260
 msgid "Click to switch between primary and secondary color."
@@ -415,7 +423,7 @@ msgstr "Saturazione colore"
 
 #: ../Pinta.Core/Actions/ViewActions.cs:179
 msgid "Color Scheme"
-msgstr ""
+msgstr "Schema di Colori"
 
 #: ../Pinta.Effects/Effects/InkSketchEffect.cs:158
 msgid "Coloring"
@@ -454,7 +462,7 @@ msgstr "Copyright"
 #: ../Pinta.Core/ImageFormats/OraFormat.cs:127
 #, csharp-format
 msgid "Could not import layer \"{0}\" from {1}"
-msgstr ""
+msgstr "Non è stato possibile importare il layer \"{0}\" da {1}"
 
 #: ../Pinta.Core/Classes/Palette.cs:192
 #: ../Pinta.Core/Managers/WorkspaceManager.cs:378
@@ -492,7 +500,7 @@ msgstr "Taglia"
 #. Translators: This refers to using a dark variant of the color scheme.
 #: ../Pinta.Core/Actions/ViewActions.cs:187
 msgid "Dark"
-msgstr ""
+msgstr "Scuro"
 
 #: ../Pinta.Core/Effects/UserBlendOps.cs:38
 msgid "Darken"
@@ -505,7 +513,7 @@ msgstr "trattino"
 #. Translators: This refers to using the system's default color scheme.
 #: ../Pinta.Core/Actions/ViewActions.cs:183
 msgid "Default"
-msgstr ""
+msgstr "Predefinito"
 
 #: ../Pinta.Core/Actions/LayerActions.cs:49
 #: ../Pinta.Core/Actions/LayerActions.cs:312
@@ -553,7 +561,7 @@ msgstr "Non cambiare strumento"
 #: ../Pinta.Gui.Addins/AddinInfoView.cs:134
 #, csharp-format
 msgid "Download size: {0}"
-msgstr ""
+msgstr "Dimensione del download: {0}"
 
 #: ../Pinta.Core/Actions/LayerActions.cs:50
 #: ../Pinta.Core/Actions/LayerActions.cs:303
@@ -578,7 +586,7 @@ msgstr "_Effetti"
 
 #: ../Pinta/MainWindow.cs:376
 msgid "Effects"
-msgstr ""
+msgstr "Effetti"
 
 #: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:326
 #: ../Pinta.Tools/Editable/EditEngines/EllipseEditEngine.cs:34
@@ -614,11 +622,11 @@ msgstr "Escludi (-) (Tasto Destro)"
 #. Translators: This refers to expanding the canvas size when pasting a larger image.
 #: ../Pinta/Actions/Edit/PasteAction.cs:191
 msgid "Expand"
-msgstr ""
+msgstr "Espandi"
 
 #: ../Pinta.Gui.Addins/AddinManagerDialog.cs:204
 msgid "Extension packages"
-msgstr ""
+msgstr "Pacchetti di estensioni"
 
 #: ../Pinta.Effects/Effects/JuliaFractalEffect.cs:141
 #: ../Pinta.Effects/Effects/MandelbrotFractalEffect.cs:158
@@ -627,15 +635,15 @@ msgstr "Fattore"
 
 #: ../Pinta/Actions/File/NewScreenshotAction.cs:103
 msgid "Failed to access XDG Desktop Portals"
-msgstr ""
+msgstr "Impossibile accedere ai Portali Desktop XDG"
 
 #: ../Pinta/MainWindow.cs:269
 msgid "Failed to initialize add-in"
-msgstr ""
+msgstr "Impossibile inizializzare add-in"
 
 #: ../Pinta.Gui.Addins/InstallDialog.cs:152
 msgid "Failed to load extension package"
-msgstr ""
+msgstr "Impossibile caricare pacchetto di estensione"
 
 #: ../Pinta.Core/Managers/WorkspaceManager.cs:401
 msgid "Failed to open image"
@@ -657,7 +665,7 @@ msgstr "Segnala un bug"
 
 #: ../Pinta/Main.cs:61
 msgid "Files to open"
-msgstr ""
+msgstr "File da aprire"
 
 #: ../Pinta.Tools/Tools/TextTool.cs:249
 msgid "Fill Background"
@@ -866,7 +874,7 @@ msgstr "Pollici"
 
 #: ../Pinta.Effects/Effects/InkSketchEffect.cs:155
 msgid "Ink Outline"
-msgstr "Bordo ad inchiostro."
+msgstr "Bordo ad inchiostro"
 
 #: ../Pinta.Effects/Effects/InkSketchEffect.cs:31
 msgid "Ink Sketch"
@@ -887,7 +895,7 @@ msgstr "Installa"
 
 #: ../Pinta.Gui.Addins/AddinManagerDialog.cs:194
 msgid "Install Extension Package"
-msgstr ""
+msgstr "Installa Pacchetto di Estensione"
 
 #: ../Pinta.Gui.Addins/AddinManagerDialog.cs:40
 msgid "Install from file..."
@@ -972,7 +980,7 @@ msgstr "Livello Mostrato"
 #: ../Pinta.Core/Classes/DocumentLayers.cs:128
 #, csharp-format
 msgid "Layer {0}"
-msgstr "Layer {0}"
+msgstr "Livello {0}"
 
 #: ../Pinta/Pads/LayersPad.cs:40 ../Pinta/Pads/LayersPad.cs:53
 msgid "Layers"
@@ -991,6 +999,13 @@ msgid ""
 "Hold Shift to rotate in steps.\n"
 "Use arrow keys to move selected content by a single pixel."
 msgstr ""
+"Click sinistro e trascina la selezione per spostare il contenuto selezionato."
+"\n"
+"Tieni premuto {0} per ridimensionare invece di muovere.\n"
+"Click destro e trascina la selezione per ruotare il contenuto selezionato.\n"
+"Tieni premuto Shift per ruotare gradualmente.\n"
+"Utilizza i tasti freccia per spostare il contenuto selezionato di un singolo "
+"pixel."
 
 #: ../Pinta.Tools/Tools/MoveSelectionTool.cs:45
 #, csharp-format
@@ -1001,6 +1016,12 @@ msgid ""
 "Hold Shift to rotate in steps.\n"
 "Use arrow keys to move selection outline by a single pixel."
 msgstr ""
+"Click sinistro e trascina la selezione per spostare il bordo selezionato.\n"
+"Tieni premuto {0} per ridimensionare invece di muovere.\n"
+"Click destro e trascina la selezione per ruotare il bordo selezionato.\n"
+"Tieni premuto Shift per ruotare gradualmente.\n"
+"Utilizza i tasti freccia per spostare il bordo selezionato di un singolo "
+"pixel."
 
 #. Translators: {0} is 'Ctrl', or a platform-specific key such as 'Command' on macOS.
 #: ../Pinta.Tools/Tools/ShapeTool.cs:48
@@ -1021,12 +1042,32 @@ msgid ""
 "exact same position.\n"
 "Press Enter to finalize the shape."
 msgstr ""
+"Click sinistro per disegnare una forma con il colore primario.\n"
+"Click sinistro su una forma per aggiungere un punto di controllo.\n"
+"Click sinistro su un punto di controllo e trascina per spostarlo.\n"
+"Click destro su un punto di controllo e trascina per modificarne la tensione."
+"\n"
+"Tieni premuto Shift per eseguire lo snap agli angoli.\n"
+"Utilizza i tasti freccia per spostare il punto di controllo selezionato.\n"
+"Premi {0} + freccia sinistra/destra per selezionare i punti di controllo in "
+"ordine.\n"
+"Premi Delete per eliminare il punto di controllo selezionato.\n"
+"Premi Spazio per aggiungere un nuovo punto di controllo nella posizione del "
+"mouse.\n"
+"Tieni premuto {0} mentre premi la barra spaziatrice per creare il punto di "
+"controllo nella stessa identica posizione.\n"
+"Tieni premuto {0} mentre fai click sinistro su un punto di controllo per "
+"creare una nuova forma nella stessa identica posizione.\n"
+"Premi Invio per finalizzare la forma."
 
 #: ../Pinta.Tools/Tools/PencilTool.cs:50
 msgid ""
 "Left click to draw freeform one-pixel wide lines with the primary color.\n"
 "Right click to use the secondary color."
 msgstr ""
+"Click sinistro per disegnare linee larghe un pixel a mano libera con il "
+"colore primario.\n"
+"Click destro per utilizzare il colore secondario."
 
 #: ../Pinta.Tools/Tools/FreeformShapeTool.cs:54
 #: ../Pinta.Tools/Tools/PaintBrushTool.cs:58
@@ -1065,12 +1106,16 @@ msgid ""
 "Left click to replace the secondary color with the primary color.\n"
 "Right click to reverse."
 msgstr ""
+"Click sinistro per sostituire il colore secondario con il colore primario.\n"
+"Click destro per invertire."
 
 #: ../Pinta.Tools/Tools/ColorPickerTool.cs:53
 msgid ""
 "Left click to set primary color.\n"
 "Right click to set secondary color."
 msgstr ""
+"Click sinistro per impostare il colore primario.\n"
+"Click destro per impostare il colore secondario."
 
 #: ../Pinta.Gui.Widgets/Widgets/StatusBarColorPaletteWidget.cs:251
 msgid "Left click to set primary color. Right click to set secondary color."
@@ -1083,8 +1128,8 @@ msgid ""
 "Left click to set primary color. Right click to set secondary color. Middle "
 "click to choose palette color."
 msgstr ""
-"Click sinistro per settare il colore primario. Click destro per settare il "
-"colore secondario. Click centrale per scegliere la paletta dei colori"
+"Click sinistro per impostare il colore primario. Click destro per impostare "
+"il colore secondario. Click centrale per scegliere la paletta dei colori."
 
 #: ../Pinta.Tools/Tools/ZoomTool.cs:58
 msgid ""
@@ -1092,6 +1137,9 @@ msgid ""
 "Right click to zoom out.\n"
 "Click and drag to zoom in selection."
 msgstr ""
+"Click sinistro per ingrandire.\n"
+"Click destro per rimpicciolire.\n"
+"Click e trascina per ingrandire la selezione."
 
 #: ../Pinta.Tools/Editable/EditEngines/ArrowedEditEngine.cs:318
 msgid "Length"
@@ -1112,7 +1160,7 @@ msgstr "Licenza"
 #. Translators: This refers to using a light variant of the color scheme.
 #: ../Pinta.Core/Actions/ViewActions.cs:185
 msgid "Light"
-msgstr ""
+msgstr "Chiaro"
 
 #: ../Pinta.Core/Effects/UserBlendOps.cs:37
 msgid "Lighten"
@@ -1157,7 +1205,7 @@ msgstr "Selezione bacchetta magica"
 
 #: ../Pinta/MainWindow.cs:370
 msgid "Main Menu"
-msgstr ""
+msgstr "Menù Principale"
 
 #: ../Pinta/Dialogs/ResizeCanvasDialog.cs:76
 #: ../Pinta/Dialogs/ResizeImageDialog.cs:66
@@ -1187,7 +1235,7 @@ msgstr "Modificato"
 
 #: ../Pinta.Gui.Addins/AddinInfoView.cs:77
 msgid "More Information..."
-msgstr ""
+msgstr "Più Informazioni..."
 
 #: ../Pinta.Effects/Effects/MotionBlurEffect.cs:23
 msgid "Motion Blur"
@@ -1221,7 +1269,7 @@ msgstr "Nome:"
 
 #: ../Pinta.Core/Enumerations/ResamplingMode.cs:23
 msgid "Nearest Neighbor"
-msgstr ""
+msgstr "Vicino più prossimo"
 
 #: ../Pinta.Core/Actions/FileActions.cs:55
 msgid "New"
@@ -1234,7 +1282,7 @@ msgstr "Nuova immagine"
 
 #: ../Pinta.Core/Actions/FileActions.cs:47
 msgid "New Screenshot..."
-msgstr "Cattura Schermata"
+msgstr "Cattura Schermata..."
 
 #: ../Pinta/Actions/Edit/ResizePaletteAction.cs:50
 msgid "New palette size:"
@@ -1246,7 +1294,7 @@ msgstr "Nuovo..."
 
 #: ../Pinta.Gui.Addins/AddinListView.cs:58
 msgid "No Items Found"
-msgstr ""
+msgstr "Nessuno Strumento Trovato"
 
 #: ../Pinta.Effects/Effects/AddNoiseEffect.cs:28
 #: ../Pinta.Effects/Effects/MedianEffect.cs:30
@@ -1274,7 +1322,7 @@ msgstr "Normale e contornato"
 
 #: ../Pinta/Main.cs:55
 msgid "Number of threads to use for rendering"
-msgstr ""
+msgstr "Il numero di thread da usare per il rendering"
 
 #: ../Pinta.Effects/Effects/BulgeEffect.cs:92
 #: ../Pinta.Effects/Effects/RadialBlurEffect.cs:149
@@ -1381,7 +1429,7 @@ msgstr "Tavolozze"
 #: ../Pinta.Tools/Tools/PanTool.cs:38
 #: ../Pinta/Actions/Layers/RotateZoomLayerAction.cs:118
 msgid "Pan"
-msgstr "Pan"
+msgstr "Muovi"
 
 #: ../Pinta.Core/Actions/EditActions.cs:63
 #: ../Pinta.Core/HistoryItems/PasteHistoryItem.cs:38
@@ -1412,7 +1460,7 @@ msgstr "Dimensioni della punta della matita"
 
 #: ../Pinta.Effects/Effects/MedianEffect.cs:66
 msgid "Percentile"
-msgstr "Percentile"
+msgstr "Percentuale"
 
 #: ../Pinta.Effects/Effects/GlowEffect.cs:29
 #: ../Pinta.Effects/Effects/RedEyeRemoveEffect.cs:27
@@ -1428,12 +1476,12 @@ msgstr "Pinta"
 
 #: ../Pinta/AddinSetupService.cs:52
 msgid "Pinta Community Addins - Cross-Platform"
-msgstr "Componenti aggiuntivi della  Pinta Community  - Cross-Platform"
+msgstr "Componenti aggiuntivi della Community Pinta - Cross-Platform"
 
 #: ../Pinta/AddinSetupService.cs:48
 msgid "Pinta Community Addins - Platform-Specific"
 msgstr ""
-"Componenti aggiuntivi della  Pinta Community  -  specifici per la piattaforma"
+"Componenti aggiuntivi della Community Pinta - Specifici alla piattaforma"
 
 #: ../xdg/pinta.desktop.in.h:4
 msgid "Pinta Image Editor"
@@ -1456,11 +1504,11 @@ msgid ""
 "help organize your creativity."
 msgstr ""
 "Pinta è un editor di immagini, un'applicazione di disegno e pittura con "
-"un'interfaccia semplice ma potente. Pinta ha una grande gamma di strumenti "
-"per disegno, compresi:  a mano libera, rettangoli, cerchi e linee. Ha anche "
-"più di 35 effetti da applicare alle immagini e offre anche la possibilità di "
-"creare un numero illimitato di livelli per aiutarti ad organizzare la tua "
-"creatività."
+"un'interfaccia semplice ma allo stesso tempo potente. Pinta ha una grande "
+"gamma di strumenti per disegno, tra cui: mano libera, rettangoli, cerchi e "
+"linee. Ha anche più di 35 effetti da applicare alle immagini e offre anche "
+"la possibilità di creare un numero illimitato di livelli per aiutarti ad "
+"organizzare la tua creatività."
 
 #: ../Pinta.Core/Managers/WorkspaceManager.cs:386
 msgid "Pinta supports the following file formats:"
@@ -1511,7 +1559,7 @@ msgstr "Potenza"
 #. Translators: This refers to preserving the current canvas size when pasting a larger image.
 #: ../Pinta/Actions/Edit/PasteAction.cs:189
 msgid "Preserve"
-msgstr ""
+msgstr "Preserva"
 
 #: ../Pinta/Dialogs/NewImageDialog.cs:101
 msgid "Preset:"
@@ -1614,7 +1662,7 @@ msgstr "Aggiorna"
 
 #: ../Pinta/Actions/Help/AboutDialogAction.cs:78
 msgid "Released under the MIT X11 License."
-msgstr "Rilasciato sotto la licenza MIT X11"
+msgstr "Rilasciato sotto la licenza MIT X11."
 
 #: ../Pinta.Effects/Effects/ReliefEffect.cs:38
 msgid "Relief"
@@ -1640,11 +1688,11 @@ msgstr "Sostituisci"
 
 #: ../Pinta/Dialogs/ErrorDialog.cs:67
 msgid "Report Bug..."
-msgstr ""
+msgstr "Segnala Bug..."
 
 #: ../Pinta/Dialogs/ResizeImageDialog.cs:102
 msgid "Resampling:"
-msgstr ""
+msgstr "Ricampionamento:"
 
 #: ../Pinta.Gui.Widgets/Widgets/ReseedButtonWidget.cs:55
 msgid "Reseed"
@@ -1831,7 +1879,7 @@ msgstr "Dimensioni"
 
 #: ../Pinta.Tools/Tools/EraserTool.cs:262
 msgid "Smooth"
-msgstr "Smooth"
+msgstr "Scorrevole"
 
 #: ../Pinta.Core/Effects/UserBlendOps.cs:42
 msgid "Soft Light"
@@ -1893,6 +1941,8 @@ msgstr "Stile di testo"
 #, csharp-format
 msgid "The '{0}' add-in may not be compatible with this version of Pinta"
 msgstr ""
+"Il componente aggiuntivo '{0}' potrebbe non essere compatibile con questa "
+"versione di Pinta"
 
 #: ../Pinta/Actions/Edit/PasteAction.cs:174
 msgid "The clipboard does not contain an image."
@@ -1901,6 +1951,7 @@ msgstr "Gli appunti non contengono un'immagine."
 #: ../Pinta.Gui.Addins/InstallDialog.cs:153
 msgid "The file may be an invalid or corrupt extension package"
 msgstr ""
+"Il file potrebbe essere un pacchetto di estensione non valido o danneggiato"
 
 #: ../Pinta.Gui.Addins/InstallDialog.cs:92
 msgid "The following dependencies could not be resolved:"
@@ -1923,6 +1974,8 @@ msgid ""
 "The image being pasted is larger than the canvas. What would you like to do "
 "to the canvas size?"
 msgstr ""
+"L'immagine da incollare è più grande del canvas. Cosa vorresti fare con le "
+"dimensioni del canvas?"
 
 #: ../Pinta.Gui.Addins/InstallDialog.cs:293
 msgid "The installation failed!"
@@ -1937,6 +1990,8 @@ msgid ""
 "The selected extension packages can't be installed because there are "
 "dependency conflicts."
 msgstr ""
+"I pacchetti di estensioni selezionati non possono essere installati perché "
+"sono presenti conflitti di dipendenze."
 
 #: ../Pinta.Gui.Addins/InstallDialog.cs:303
 msgid "The uninstallation failed!"
@@ -1951,6 +2006,8 @@ msgid ""
 "There are other extension packages that depend on the previous ones which "
 "will also be uninstalled:"
 msgstr ""
+"Esistono altri pacchetti di estensioni che dipendono da quelli precedenti "
+"che verranno anch'essi disinstallati:"
 
 #: ../Pinta.Effects/Effects/OutlineEffect.cs:135
 msgid "Thickness"
@@ -2037,7 +2094,7 @@ msgstr "Disinstalla"
 
 #: ../Pinta.Gui.Addins/AddinInfoView.cs:91
 msgid "Uninstall..."
-msgstr ""
+msgstr "Disinstalla..."
 
 #. Translators: {0} is 'Ctrl', or a platform-specific key such as 'Command' on macOS.
 #: ../Pinta.Core/Classes/SelectionModeHandler.cs:47
@@ -2056,11 +2113,11 @@ msgstr "Formato del file non supportato"
 
 #: ../Pinta.Core/Classes/Palette.cs:180
 msgid "Unsupported palette format"
-msgstr ""
+msgstr "Formato di palette non supportato"
 
 #: ../Pinta.Gui.Addins/AddinInfoView.cs:86
 msgid "Update..."
-msgstr ""
+msgstr "Aggiorna..."
 
 #: ../Pinta.Gui.Addins/AddinManagerDialog.cs:64
 msgid "Updates"
@@ -2082,7 +2139,7 @@ msgstr "Utilizzando delle icone da:"
 #: ../Pinta.Gui.Addins/AddinInfoView.cs:128
 #, csharp-format
 msgid "Version: {0}"
-msgstr ""
+msgstr "Versione: {0}"
 
 #: ../Pinta/Dialogs/LayerPropertiesDialog.cs:83
 msgid "Visible"
@@ -2170,11 +2227,11 @@ msgstr "_Regolazioni"
 #: ../Pinta/Actions/Edit/PasteAction.cs:187
 #: ../Pinta/Actions/File/CloseDocumentAction.cs:66
 msgid "_Cancel"
-msgstr ""
+msgstr "_Cancella"
 
 #: ../Pinta/Actions/File/CloseDocumentAction.cs:67
 msgid "_Discard"
-msgstr ""
+msgstr "_Scarta"
 
 #: ../Pinta/MainWindow.cs:324
 msgid "_Edit"
@@ -2201,11 +2258,11 @@ msgstr "_Livelli"
 #: ../Pinta.Gui.Addins/InstallDialog.cs:156 ../Pinta/Dialogs/ErrorDialog.cs:41
 #: ../Pinta/Dialogs/ErrorDialog.cs:69
 msgid "_OK"
-msgstr ""
+msgstr "_OK"
 
 #: ../Pinta/Actions/File/CloseDocumentAction.cs:68
 msgid "_Save"
-msgstr ""
+msgstr "_Salva"
 
 #: ../Pinta/MainWindow.cs:328
 msgid "_View"
@@ -2221,7 +2278,7 @@ msgstr "dai collaboratori di Pinta"
 
 #: ../xdg/pinta.desktop.in.h:5
 msgid "draw;drawing;paint;painting;graphics;raster;2d;"
-msgstr "disegna;disegno;dipingi;dipinto;grafica;raster;2d"
+msgstr "disegna;disegno;dipingi;dipinto;grafica;raster;2d;"
 
 #: ../Pinta/Dialogs/NewImageDialog.cs:129
 #: ../Pinta/Dialogs/NewImageDialog.cs:149
@@ -2266,7 +2323,8 @@ msgstr ""
 "  sgargel https://launchpad.net/~sgargel\n"
 "  simone.sandri https://launchpad.net/~lexluxsox\n"
 "  tommaso scappini https://launchpad.net/~tommasoscappini\n"
-"  vito75 https://launchpad.net/~mangionevito75"
+"  vito75 https://launchpad.net/~mangionevito75\n"
+"  zWolfrost https://launchpad.net/~zwolfrost"
 
 #. Translators: {0} is 'Ctrl', or a platform-specific key such as 'Command' on macOS.
 #: ../Pinta.Tools/Tools/CloneStampTool.cs:46
