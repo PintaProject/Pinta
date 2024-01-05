@@ -22,7 +22,7 @@ internal sealed class GradientTests
 	[TestCase (1, 0)]
 	public void Factory_Rejects_Inconsistent_Bounds (double minPosition, double maxPosition)
 	{
-		Assert.Throws<ArgumentException> (() => ColorMapping.Gradient (RandomColor (), RandomColor (), minPosition, maxPosition));
+		Assert.Throws<ArgumentException> (() => ColorGradient.Create (RandomColor (), RandomColor (), minPosition, maxPosition));
 	}
 
 	[TestCase (0, 1)]
@@ -31,14 +31,14 @@ internal sealed class GradientTests
 	[TestCase (1, 2)]
 	public void Factory_Accepts_Consistent_Bounds (double minPosition, double maxPosition)
 	{
-		Assert.DoesNotThrow (() => ColorMapping.Gradient (RandomColor (), RandomColor (), minPosition, maxPosition));
+		Assert.DoesNotThrow (() => ColorGradient.Create (RandomColor (), RandomColor (), minPosition, maxPosition));
 	}
 
 	[TestCaseSource (nameof (cases_stops_at_same_position))]
 	public void Factory_Rejects_Stops_At_Same_Position (double minPosition, double maxPosition, IEnumerable<KeyValuePair<double, ColorBgra>> stops)
 	{
 		Assert.Throws<ArgumentException> (
-			() => ColorMapping.Gradient (
+			() => ColorGradient.Create (
 				RandomColor (),
 				RandomColor (),
 				minPosition,
@@ -52,7 +52,7 @@ internal sealed class GradientTests
 	public void Factory_Accepts_Stops_At_Different_Positions (double minPosition, double maxPosition, IEnumerable<KeyValuePair<double, ColorBgra>> stops)
 	{
 		Assert.DoesNotThrow (
-			() => ColorMapping.Gradient (
+			() => ColorGradient.Create (
 				RandomColor (),
 				RandomColor (),
 				minPosition,
@@ -66,7 +66,7 @@ internal sealed class GradientTests
 	public void Factory_Rejects_Stops_Out_Of_Bounds (double minPosition, double maxPosition, IEnumerable<KeyValuePair<double, ColorBgra>> stops)
 	{
 		Assert.Throws<ArgumentException> (
-			() => ColorMapping.Gradient (
+			() => ColorGradient.Create (
 				RandomColor (),
 				RandomColor (),
 				minPosition,
@@ -83,7 +83,7 @@ internal sealed class GradientTests
 	{
 		ColorBgra randomStart = RandomColor ();
 		ColorBgra randomEnd = RandomColor ();
-		ColorGradient gradient = ColorMapping.Gradient (randomStart, randomEnd, minPosition, maxPosition, checks);
+		ColorGradient gradient = ColorGradient.Create (randomStart, randomEnd, minPosition, maxPosition, checks);
 		foreach (var check in checks) {
 			var returned = gradient.GetColor (check.Key);
 			Assert.That (check.Value == returned);
@@ -118,7 +118,7 @@ internal sealed class GradientTests
 	private static readonly IReadOnlyList<TestCaseData> interpolated_color_checks = CreateInterpolatedColorChecks ().ToArray ();
 	private static IEnumerable<TestCaseData> CreateInterpolatedColorChecks ()
 	{
-		ColorGradient blackToWhite255 = ColorGradient.Gradient (
+		ColorGradient blackToWhite255 = ColorGradient.Create (
 			ColorBgra.Black,
 			ColorBgra.White,
 			byte.MinValue,
@@ -133,7 +133,7 @@ internal sealed class GradientTests
 			}
 		);
 
-		ColorGradient blackToWhite1 = ColorGradient.Gradient (
+		ColorGradient blackToWhite1 = ColorGradient.Create (
 			ColorBgra.Black,
 			ColorBgra.White,
 			0,

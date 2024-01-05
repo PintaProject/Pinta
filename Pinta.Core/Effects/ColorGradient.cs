@@ -4,7 +4,7 @@ using System.Linq;
 
 namespace Pinta.Core;
 
-public sealed class ColorGradient : ColorMapping
+public sealed class ColorGradient
 {
 	public ColorBgra StartColor { get; }
 	public ColorBgra EndColor { get; }
@@ -34,11 +34,10 @@ public sealed class ColorGradient : ColorMapping
 		sorted_stops = sortedStops;
 	}
 
-	public sealed override ColorBgra GetColor (double position)
+	public ColorBgra GetColor (double position)
 	{
 		if (position == MinimumPosition) return StartColor;
 		if (position == MaximumPosition) return EndColor;
-		if (!IsMapped (position)) throw new ArgumentOutOfRangeException (nameof (position));
 		if (sorted_stops.Count == 0) return HandleNoStops (position);
 		return HandleWithStops (position);
 	}
@@ -90,5 +89,53 @@ public sealed class ColorGradient : ColorMapping
 		return left - 1;
 	}
 
-	public sealed override bool IsMapped (double position) => position >= MinimumPosition && position <= MaximumPosition;
+	private static ColorBgra DefaultStartColor () => ColorBgra.Black;
+	private static ColorBgra DefaultEndColor () => ColorBgra.White;
+	private static double DefaultMinimumValue () => 0;
+	private static double DefaultMaximumValue () => 255;
+	private static IEnumerable<KeyValuePair<double, ColorBgra>> EmptyStops () => Enumerable.Empty<KeyValuePair<double, ColorBgra>> ();
+
+	public static ColorGradient Create ()
+	{
+		return new ColorGradient (
+			DefaultStartColor (),
+			DefaultEndColor (),
+			DefaultMinimumValue (),
+			DefaultMaximumValue (),
+			EmptyStops ()
+		);
+	}
+
+	public static ColorGradient Create (ColorBgra start, ColorBgra end)
+	{
+		return new (
+			start,
+			end,
+			DefaultMinimumValue (),
+			DefaultMaximumValue (),
+			EmptyStops ()
+		);
+	}
+
+	public static ColorGradient Create (ColorBgra start, ColorBgra end, double minimum, double maximum)
+	{
+		return new (
+			start,
+			end,
+			minimum,
+			maximum,
+			EmptyStops ()
+		);
+	}
+
+	public static ColorGradient Create (ColorBgra start, ColorBgra end, double minimum, double maximum, IEnumerable<KeyValuePair<double, ColorBgra>> stops)
+	{
+		return new (
+			start,
+			end,
+			minimum,
+			maximum,
+			stops
+		);
+	}
 }
