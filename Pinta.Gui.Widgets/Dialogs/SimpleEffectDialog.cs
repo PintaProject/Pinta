@@ -109,9 +109,6 @@ public sealed class SimpleEffectDialog : Gtk.Dialog
 		}
 	}
 
-
-
-
 	#region EffectData Parser
 
 	private readonly record struct MemberSettings (
@@ -151,12 +148,10 @@ public sealed class SimpleEffectDialog : Gtk.Dialog
 			}
 		}
 
-		caption ??= MakeCaption (mi.Name);
-
 		return new (
 			mi: mi,
 			mType: mType,
-			caption: caption,
+			caption: caption ?? MakeCaption (mi.Name),
 			hint: hint,
 			skip: skip,
 			combo: combo,
@@ -177,28 +172,39 @@ public sealed class SimpleEffectDialog : Gtk.Dialog
 
 	private IEnumerable<Gtk.Widget> GetMemberWidgets (MemberSettings settings, EffectData effectData, IAddinLocalizer localizer)
 	{
-		if (settings.mType == typeof (RandomSeed))
-			yield return CreateSeed (localizer.GetString (settings.caption), effectData, settings.mi, settings.attrs);
-		else if (settings.mType == typeof (int))
-			yield return CreateSlider (localizer.GetString (settings.caption), effectData, settings.mi, settings.attrs);
-		else if (settings.mType == typeof (DegreesAngle))
-			yield return CreateAnglePicker (localizer.GetString (settings.caption), effectData, settings.mi, settings.attrs);
-		else if (settings.mType == typeof (double))
-			yield return CreateDoubleSlider (localizer.GetString (settings.caption), effectData, settings.mi, settings.attrs);
-		else if (settings.combo && settings.mType == typeof (string))
-			yield return CreateComboBox (localizer.GetString (settings.caption), effectData, settings.mi, settings.attrs);
-		else if (settings.mType == typeof (bool))
-			yield return CreateCheckBox (localizer.GetString (settings.caption), effectData, settings.mi, settings.attrs);
-		else if (settings.mType == typeof (PointI))
-			yield return CreatePointPicker (localizer.GetString (settings.caption), effectData, settings.mi, settings.attrs);
-		else if (settings.mType == typeof (PointD))
-			yield return CreateOffsetPicker (localizer.GetString (settings.caption), effectData, settings.mi, settings.attrs);
-		else if (settings.mType.IsEnum)
-			yield return CreateEnumComboBox (localizer.GetString (settings.caption), effectData, settings.mi, settings.attrs);
+		var widgetFactory = GetWidgetFactory (settings);
+		if (widgetFactory is not null)
+			yield return widgetFactory (localizer.GetString (settings.caption), effectData, settings.mi, settings.attrs);
 
 		if (settings.hint != null)
 			yield return CreateHintLabel (localizer.GetString (settings.hint));
 	}
+
+	private WidgetFactory? GetWidgetFactory (MemberSettings settings)
+	{
+		if (settings.mType == typeof (RandomSeed))
+			return CreateSeed;
+		else if (settings.mType == typeof (int))
+			return CreateSlider;
+		else if (settings.mType == typeof (DegreesAngle))
+			return CreateAnglePicker;
+		else if (settings.mType == typeof (double))
+			return CreateDoubleSlider;
+		else if (settings.combo && settings.mType == typeof (string))
+			return CreateComboBox;
+		else if (settings.mType == typeof (bool))
+			return CreateCheckBox;
+		else if (settings.mType == typeof (PointI))
+			return CreatePointPicker;
+		else if (settings.mType == typeof (PointD))
+			return CreateOffsetPicker;
+		else if (settings.mType.IsEnum)
+			return CreateEnumComboBox;
+		else
+			return null;
+	}
+
+	private delegate Gtk.Widget WidgetFactory (string caption, EffectData effectData, MemberInfo member, object[] attributes);
 
 	#endregion
 
@@ -332,7 +338,7 @@ public sealed class SimpleEffectDialog : Gtk.Dialog
 			MinimumValue = min_value,
 			MaximumValue = max_value,
 			IncrementValue = inc_value,
-			DigitsValue = digits_value
+			DigitsValue = digits_value,
 		};
 
 		if (GetValue (member, effectData) is int i)
