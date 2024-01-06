@@ -3,8 +3,9 @@ using System.Collections.Generic;
 using System.Linq;
 using NUnit.Framework;
 using NUnit.Framework.Internal;
+using Pinta.Core;
 
-namespace Pinta.Core.Tests;
+namespace Pinta.Effects.Tests;
 
 [TestFixture]
 internal sealed class GradientTests
