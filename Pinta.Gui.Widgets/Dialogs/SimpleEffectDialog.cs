@@ -434,15 +434,13 @@ public sealed class SimpleEffectDialog : Gtk.Dialog
 	#endregion
 
 	#region Static Reflection Methods
+
 	private static object? GetValue (MemberInfo mi, object o)
-	{
-		if (mi is FieldInfo fi)
-			return fi.GetValue (o);
-
-		var pi = mi as PropertyInfo;
-
-		return pi?.GetGetMethod ()?.Invoke (o, Array.Empty<object> ());
-	}
+		=> mi switch {
+			FieldInfo fi => fi.GetValue (o),
+			PropertyInfo pi => pi.GetGetMethod ()?.Invoke (o, Array.Empty<object> ()),
+			_ => null,
+		};
 
 	private void SetValue (MemberInfo mi, object o, object val)
 	{
