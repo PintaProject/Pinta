@@ -194,7 +194,8 @@ public sealed class ToolManager : IEnumerable<BaseTool>, IToolService
 		PintaCore.Chrome.ToolToolBar.Append (ToolImage);
 		PintaCore.Chrome.ToolToolBar.Append (ToolSeparator);
 
-		tool.DoBuildToolBar (PintaCore.Chrome.ToolToolBar);
+		PintaCore.Chrome.ToolToolBar.Append (ToolWidgetsScroll);
+		tool.DoBuildToolBar (ToolWidgetsBox);
 
 		PintaCore.Workspace.Invalidate ();
 		PintaCore.Chrome.SetStatusBarText ($" {tool.Name}: {tool.StatusBarText}");
@@ -242,12 +243,10 @@ public sealed class ToolManager : IEnumerable<BaseTool>, IToolService
 		return shortcut_tools[next_index];
 	}
 
-	private static void DeactivateTool (BaseTool tool, BaseTool? newTool)
+	private void DeactivateTool (BaseTool tool, BaseTool? newTool)
 	{
-		var toolbar = PintaCore.Chrome.ToolToolBar;
-
-		while (toolbar.GetFirstChild () is Widget child)
-			toolbar.Remove (child);
+		ToolWidgetsBox.RemoveAll ();
+		PintaCore.Chrome.ToolToolBar.RemoveAll ();
 
 		tool.DoDeactivated (PintaCore.Workspace.ActiveDocumentOrDefault, newTool);
 		tool.ToolItem.Active = false;
@@ -350,8 +349,22 @@ public sealed class ToolManager : IEnumerable<BaseTool>, IToolService
 	private Label? tool_label;
 	private Image? tool_image;
 	private Separator? tool_sep;
+	private Box? tool_widgets_box;
+	private ScrolledWindow? tool_widgets_scroll;
 
 	private Label ToolLabel => tool_label ??= Label.New (string.Format (" {0}:  ", Translations.GetString ("Tool")));
 	private Image ToolImage => tool_image ??= new Image ();
 	private Separator ToolSeparator => tool_sep ??= GtkExtensions.CreateToolBarSeparator ();
+	private Box ToolWidgetsBox => tool_widgets_box ??= Gtk.Box.New (Orientation.Horizontal, 0);
+	// Scroll the toolbar contents if they are very long (e.g. the line/curve tool).
+	private ScrolledWindow ToolWidgetsScroll => tool_widgets_scroll ??= new ScrolledWindow () {
+		Child = ToolWidgetsBox,
+		HscrollbarPolicy = PolicyType.Automatic,
+		VscrollbarPolicy = PolicyType.Never,
+		HasFrame = false,
+		OverlayScrolling = true,
+		WindowPlacement = CornerType.BottomRight,
+		Hexpand = true,
+		Halign = Align.Fill
+	};
 }

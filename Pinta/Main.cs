@@ -60,19 +60,24 @@ internal sealed class MainClass
 			name: "files",
 			description: Translations.GetString ("Files to open"));
 
+		var debug_option = new Option<bool> (
+			name: "--debug",
+			description: Translations.GetString ("Enable additional logging or behavior changes for debugging"));
+
 		// Note the implicit '--version' argument uses the InformationalVersion from the assembly.
 		var root_command = new RootCommand (Translations.GetString ("Pinta"));
 		root_command.AddOption (threads_option);
 		root_command.AddArgument (files_arg);
+		root_command.AddOption (debug_option);
 
-		root_command.SetHandler ((threads, files) => {
-			OpenMainWindow (threads, files);
-		}, threads_option, files_arg);
+		root_command.SetHandler ((threads, files, debug) => {
+			OpenMainWindow (threads, files, debug);
+		}, threads_option, files_arg, debug_option);
 
 		return root_command.Invoke (args);
 	}
 
-	private static void OpenMainWindow (int threads, IEnumerable<string> files)
+	private static void OpenMainWindow (int threads, IEnumerable<string> files, bool debug)
 	{
 		GLib.UnhandledException.SetHandler (OnUnhandledException);
 
@@ -99,13 +104,13 @@ internal sealed class MainClass
 
 			// For debugging, run the garbage collector much more frequently.
 			// This can be useful to detect certain memory management issues in the GTK bindings.
-#if false
-			GLib.Functions.TimeoutAddFull (0, 100, (_) => {
-				GC.Collect ();
-				GC.WaitForPendingFinalizers ();
-				return true;
-			});
-#endif
+			if (debug) {
+				GLib.Functions.TimeoutAdd (0, 100, () => {
+					GC.Collect ();
+					GC.WaitForPendingFinalizers ();
+					return true;
+				});
+			}
 		};
 
 		// Run with a SynchronizationContext to integrate async methods with GLib.MainLoop.

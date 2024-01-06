@@ -45,7 +45,7 @@ public sealed class ChromeManager
 	private MessageDialogHandler message_dialog_handler = null!;
 	private SimpleEffectDialogHandler simple_effect_dialog_handler = null!;
 
-	public Box MainToolBar { get; private set; } = null!;
+	public Box? MainToolBar { get; private set; }
 	public Box ToolToolBar { get; private set; } = null!;
 	public Box ToolBox { get; private set; } = null!;
 	public Box StatusBar { get; private set; } = null!;

@@ -102,6 +102,15 @@ public static partial class GtkExtensions
 		return toolbar;
 	}
 
+	/// <summary>
+	/// Remove all child widgets from a box.
+	/// </summary>
+	public static void RemoveAll (this Gtk.Box box)
+	{
+		while (box.GetFirstChild () is Widget child)
+			box.Remove (child);
+	}
+
 	public static Gtk.Button CreateToolBarItem (this Command action, bool force_icon_only = false)
 	{
 		var label = action.ShortLabel ?? action.Label;

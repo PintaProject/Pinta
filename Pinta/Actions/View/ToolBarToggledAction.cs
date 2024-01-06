@@ -44,6 +44,7 @@ internal sealed class ToolBarToggledAction : IActionHandler
 
 	private void Activated (bool value)
 	{
-		PintaCore.Chrome.MainToolBar.Visible = value;
+		if (PintaCore.Chrome.MainToolBar is not null)
+			PintaCore.Chrome.MainToolBar.Visible = value;
 	}
 }
