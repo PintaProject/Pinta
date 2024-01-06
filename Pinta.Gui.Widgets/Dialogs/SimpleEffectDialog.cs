@@ -215,12 +215,12 @@ public sealed class SimpleEffectDialog : Gtk.Dialog
 		return widget;
 	}
 
-	private ComboBoxWidget CreateComboBox (string caption, object effectData, MemberInfo member, object[] attributes)
+	private ComboBoxWidget CreateComboBox (string caption, object o, MemberInfo member, object[] attributes)
 	{
 		Dictionary<string, object>? dict = null;
 
 		foreach (var attr in attributes) {
-			if (attr is StaticListAttribute attribute && GetValue (attribute.DictionaryName, effectData) is Dictionary<string, object> d)
+			if (attr is StaticListAttribute attribute && GetValue (attribute.DictionaryName, o) is Dictionary<string, object> d)
 				dict = d;
 		}
 
@@ -233,15 +233,15 @@ public sealed class SimpleEffectDialog : Gtk.Dialog
 			Label = caption
 		};
 
-		if (GetValue (member, effectData) is string s)
+		if (GetValue (member, o) is string s)
 			widget.Active = entries.IndexOf (s);
 
-		widget.Changed += (_, _) => SetValue (member, effectData, widget.ActiveText);
+		widget.Changed += (_, _) => SetValue (member, o, widget.ActiveText);
 
 		return widget;
 	}
 
-	private HScaleSpinButtonWidget CreateDoubleSlider (string caption, object effectData, MemberInfo member, object[] attributes)
+	private HScaleSpinButtonWidget CreateDoubleSlider (string caption, object o, MemberInfo member, object[] attributes)
 	{
 		var min_value = -100;
 		var max_value = 100;
@@ -273,12 +273,12 @@ public sealed class SimpleEffectDialog : Gtk.Dialog
 			DigitsValue = digits_value
 		};
 
-		if (GetValue (member, effectData) is double d)
+		if (GetValue (member, o) is double d)
 			widget.DefaultValue = d;
 
 		widget.ValueChanged += (_, _) => {
 			DelayedUpdate (() => {
-				SetValue (member, effectData, widget.Value);
+				SetValue (member, o, widget.Value);
 				return false;
 			});
 		};
@@ -286,7 +286,7 @@ public sealed class SimpleEffectDialog : Gtk.Dialog
 		return widget;
 	}
 
-	private HScaleSpinButtonWidget CreateSlider (string caption, object effectData, MemberInfo member, object[] attributes)
+	private HScaleSpinButtonWidget CreateSlider (string caption, object o, MemberInfo member, object[] attributes)
 	{
 		var min_value = -100;
 		var max_value = 100;
@@ -318,12 +318,12 @@ public sealed class SimpleEffectDialog : Gtk.Dialog
 			DigitsValue = digits_value
 		};
 
-		if (GetValue (member, effectData) is int i)
+		if (GetValue (member, o) is int i)
 			widget.DefaultValue = i;
 
 		widget.ValueChanged += (_, _) => {
 			DelayedUpdate (() => {
-				SetValue (member, effectData, widget.ValueAsInt);
+				SetValue (member, o, widget.ValueAsInt);
 				return false;
 			});
 		};
@@ -331,52 +331,52 @@ public sealed class SimpleEffectDialog : Gtk.Dialog
 		return widget;
 	}
 
-	private Gtk.CheckButton CreateCheckBox (string caption, object effectData, MemberInfo member, object[] attributes)
+	private Gtk.CheckButton CreateCheckBox (string caption, object o, MemberInfo member, object[] attributes)
 	{
 		var widget = new Gtk.CheckButton { Label = caption };
 
-		if (GetValue (member, effectData) is bool b)
+		if (GetValue (member, o) is bool b)
 			widget.Active = b;
 
-		widget.OnToggled += (_, _) => SetValue (member, effectData, widget.Active);
+		widget.OnToggled += (_, _) => SetValue (member, o, widget.Active);
 
 		return widget;
 	}
 
-	private PointPickerWidget CreateOffsetPicker (string caption, object effectData, MemberInfo member, object[] attributes)
+	private PointPickerWidget CreateOffsetPicker (string caption, object o, MemberInfo member, object[] attributes)
 	{
 		var widget = new PointPickerWidget { Label = caption };
 
-		if (GetValue (member, effectData) is PointD p)
+		if (GetValue (member, o) is PointD p)
 			widget.DefaultOffset = p;
 
-		widget.PointPicked += (_, _) => SetValue (member, effectData, widget.Offset);
+		widget.PointPicked += (_, _) => SetValue (member, o, widget.Offset);
 
 		return widget;
 	}
 
-	private PointPickerWidget CreatePointPicker (string caption, object effectData, MemberInfo member, object[] attributes)
+	private PointPickerWidget CreatePointPicker (string caption, object o, MemberInfo member, object[] attributes)
 	{
 		var widget = new PointPickerWidget { Label = caption };
 
-		if (GetValue (member, effectData) is PointI p)
+		if (GetValue (member, o) is PointI p)
 			widget.DefaultPoint = p;
 
-		widget.PointPicked += (_, _) => SetValue (member, effectData, widget.Point);
+		widget.PointPicked += (_, _) => SetValue (member, o, widget.Point);
 
 		return widget;
 	}
 
-	private AnglePickerWidget CreateAnglePicker (string caption, object effectData, MemberInfo member, object[] attributes)
+	private AnglePickerWidget CreateAnglePicker (string caption, object o, MemberInfo member, object[] attributes)
 	{
 		var widget = new AnglePickerWidget { Label = caption };
 
-		if (GetValue (member, effectData) is DegreesAngle d)
+		if (GetValue (member, o) is DegreesAngle d)
 			widget.DefaultValue = d;
 
 		widget.ValueChanged += (_, _) => {
 			DelayedUpdate (() => {
-				SetValue (member, effectData, widget.Value);
+				SetValue (member, o, widget.Value);
 				return false;
 			});
 		};
@@ -393,7 +393,7 @@ public sealed class SimpleEffectDialog : Gtk.Dialog
 		return label;
 	}
 
-	private ReseedButtonWidget CreateSeed (string caption, object effectData, MemberInfo member, object[] attributes)
+	private ReseedButtonWidget CreateSeed (string caption, object o, MemberInfo member, object[] attributes)
 	{
 		var widget = new ReseedButtonWidget () { Label = caption };
 
@@ -410,7 +410,7 @@ public sealed class SimpleEffectDialog : Gtk.Dialog
 			}
 		}
 
-		widget.Clicked += (_, _) => SetValue (member, effectData, new RandomSeed (random.Next (min_value, max_value)));
+		widget.Clicked += (_, _) => SetValue (member, o, new RandomSeed (random.Next (min_value, max_value)));
 		return widget;
 	}
 
