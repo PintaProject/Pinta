@@ -181,7 +181,7 @@ public sealed class SimpleEffectDialog : Gtk.Dialog
 	#endregion
 
 	#region Control Builders
-	private ComboBoxWidget CreateEnumComboBox (string caption, object effectData, MemberInfo member, object[] attributes)
+	private ComboBoxWidget CreateEnumComboBox (string caption, object o, MemberInfo member, object[] attributes)
 	{
 		var myType = GetTypeForMember (member)!; // NRT - We're looping through members we got from reflection
 
@@ -207,10 +207,10 @@ public sealed class SimpleEffectDialog : Gtk.Dialog
 
 		var widget = new ComboBoxWidget (labels) { Label = caption };
 
-		if (GetValue (member, effectData) is object obj)
+		if (GetValue (member, o) is object obj)
 			widget.Active = ((IList) member_names).IndexOf (obj.ToString ());
 
-		widget.Changed += (_, _) => SetValue (member, effectData, Enum.Parse (myType, label_to_member[widget.ActiveText]));
+		widget.Changed += (_, _) => SetValue (member, o, Enum.Parse (myType, label_to_member[widget.ActiveText]));
 
 		return widget;
 	}
