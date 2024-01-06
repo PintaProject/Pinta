@@ -79,8 +79,8 @@ public sealed class GimpPalette : IPaletteLoader, IPaletteSaver
 		writer.WriteLine ("Name: Pinta Created {0}", DateTime.Now.ToString (DateTimeFormatInfo.InvariantInfo.RFC1123Pattern));
 		writer.WriteLine ("#");
 
-		foreach (var color in colors)
-			writer.WriteLine (RepresentColor (color, "Untitled"));
+		for (var i = 0; i < colors.Count; i++)
+			writer.WriteLine (RepresentColor (colors[i], $"Untitled_{i}"));
 
 		writer.Close ();
 	}
