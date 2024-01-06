@@ -13,34 +13,32 @@ namespace Pinta.Core;
 public static class Utility
 {
 	internal static bool IsNumber (float x)
-	{
-		return x >= float.MinValue && x <= float.MaxValue;
-	}
+		=> x >= float.MinValue && x <= float.MaxValue;
 
-	public static byte ClampToByte (double x) => (byte) Math.Clamp (x, byte.MinValue, byte.MaxValue);
+	public static byte ClampToByte (double x)
+		=> (byte) Math.Clamp (x, byte.MinValue, byte.MaxValue);
 
-	public static byte ClampToByte (float x) => (byte) Math.Clamp (x, byte.MinValue, byte.MaxValue);
+	public static byte ClampToByte (float x)
+		=> (byte) Math.Clamp (x, byte.MinValue, byte.MaxValue);
 
-	public static byte ClampToByte (int x) => (byte) Math.Clamp (x, byte.MinValue, byte.MaxValue);
+	public static byte ClampToByte (int x)
+		=> (byte) Math.Clamp (x, byte.MinValue, byte.MaxValue);
 
 	public static float Lerp (float from, float to, float frac)
-	{
-		return (from + frac * (to - from));
-	}
+		=> from + frac * (to - from);
 
 	public static double Lerp (double from, double to, double frac)
-	{
-		return (from + frac * (to - from));
-	}
+		=> from + frac * (to - from);
 
 	public static PointD Lerp (PointD from, PointD to, float frac)
-	{
-		return new PointD (Lerp (from.X, to.X, frac), Lerp (from.Y, to.Y, frac));
-	}
+		=> new (
+			X: Lerp (from.X, to.X, frac),
+			Y: Lerp (from.Y, to.Y, frac)
+		);
 
-	public static void Swap (ref int a, ref int b)
+	public static void Swap<T> (ref T a, ref T b) where T : struct
 	{
-		int t;
+		T t;
 
 		t = a;
 		a = b;
@@ -433,7 +431,7 @@ public static class Utility
 		double fullTurn = 2 * Math.PI;
 		double stepAngle = fullTurn / steps;
 		double normalizedAngle = angle % fullTurn;
-		int sector = Convert.ToInt32 (Math.Truncate ((normalizedAngle % fullTurn) / stepAngle));
+		int sector = Convert.ToInt32 (Math.Truncate (normalizedAngle % fullTurn / stepAngle));
 
 		var leftStepAngle = sector * stepAngle;
 		var rightStepAngle = (sector + 1) * stepAngle;
