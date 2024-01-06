@@ -1,10 +1,11 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using Pinta.Core;
 
-namespace Pinta.Core;
+namespace Pinta.Effects;
 
-public sealed class ColorGradient
+internal sealed class ColorGradient
 {
 	public ColorBgra StartColor { get; }
 	public ColorBgra EndColor { get; }
