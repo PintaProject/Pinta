@@ -33,7 +33,6 @@ using System.Collections.Immutable;
 using System.ComponentModel;
 using System.Linq;
 using System.Reflection;
-using System.Text;
 using Mono.Addins.Localization;
 using Pinta.Core;
 
