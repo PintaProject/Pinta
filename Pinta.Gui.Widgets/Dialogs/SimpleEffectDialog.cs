@@ -30,6 +30,7 @@
 using System;
 using System.Collections.Generic;
 using System.Collections.Immutable;
+using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Linq;
 using System.Reflection;
@@ -109,66 +110,95 @@ public sealed class SimpleEffectDialog : Gtk.Dialog
 		}
 	}
 
+
+
+
 	#region EffectData Parser
-	private IEnumerable<Gtk.Widget> GenerateDialogWidgets (EffectData effectData, IAddinLocalizer localizer)
+
+	private readonly record struct MemberSettings (
+		MemberInfo mi,
+		Type mType,
+		string caption,
+		string? hint,
+		bool skip,
+		bool combo,
+		object[] attrs);
+
+	private static MemberSettings CreateMemberSettings (MemberInfo mi)
 	{
-		var members = effectData.GetType ().GetMembers ().Where (m => m is FieldInfo || m is PropertyInfo);
+		Type mType = GetTypeForMember (mi);
 
-		foreach (var mi in members) {
+		string? caption = null;
+		string? hint = null;
+		bool skip = false;
+		bool combo = false;
 
-			var mType = GetTypeForMember (mi);
+		object[] attrs = mi.GetCustomAttributes (false);
 
-			string? caption = null;
-			string? hint = null;
-			var skip = false;
-			var combo = false;
-
-			var attrs = mi.GetCustomAttributes (false);
-
-			foreach (var attr in attrs) {
-				switch (attr) {
-					case SkipAttribute:
-						skip = true;
-						break;
-					case CaptionAttribute captionAttr:
-						caption = captionAttr.Caption;
-						break;
-					case HintAttribute hintAttr:
-						hint = hintAttr.Hint;
-						break;
-					case StaticListAttribute:
-						combo = true;
-						break;
-				}
+		foreach (var attr in attrs) {
+			switch (attr) {
+				case SkipAttribute:
+					skip = true;
+					break;
+				case CaptionAttribute captionAttr:
+					caption = captionAttr.Caption;
+					break;
+				case HintAttribute hintAttr:
+					hint = hintAttr.Hint;
+					break;
+				case StaticListAttribute:
+					combo = true;
+					break;
 			}
-
-			if (skip || string.Compare (mi.Name, nameof (EffectData.IsDefault), true) == 0)
-				continue;
-
-			caption ??= MakeCaption (mi.Name);
-
-			if (mType == typeof (RandomSeed))
-				yield return CreateSeed (localizer.GetString (caption), effectData, mi, attrs);
-			else if (mType == typeof (int))
-				yield return CreateSlider (localizer.GetString (caption), effectData, mi, attrs);
-			else if (mType == typeof (DegreesAngle))
-				yield return CreateAnglePicker (localizer.GetString (caption), effectData, mi, attrs);
-			else if (mType == typeof (double))
-				yield return CreateDoubleSlider (localizer.GetString (caption), effectData, mi, attrs);
-			else if (combo && mType == typeof (string))
-				yield return CreateComboBox (localizer.GetString (caption), effectData, mi, attrs);
-			else if (mType == typeof (bool))
-				yield return CreateCheckBox (localizer.GetString (caption), effectData, mi, attrs);
-			else if (mType == typeof (PointI))
-				yield return CreatePointPicker (localizer.GetString (caption), effectData, mi, attrs);
-			else if (mType == typeof (PointD))
-				yield return CreateOffsetPicker (localizer.GetString (caption), effectData, mi, attrs);
-			else if (mType.IsEnum)
-				yield return CreateEnumComboBox (localizer.GetString (caption), effectData, mi, attrs);
-
-			if (hint != null)
-				yield return CreateHintLabel (localizer.GetString (hint));
 		}
+
+		caption ??= MakeCaption (mi.Name);
+
+		return new (
+			mi: mi,
+			mType: mType,
+			caption: caption,
+			hint: hint,
+			skip: skip,
+			combo: combo,
+			attrs: attrs
+		);
+	}
+
+	private IEnumerable<Gtk.Widget> GenerateDialogWidgets (EffectData effectData, IAddinLocalizer localizer)
+		=>
+			effectData
+			.GetType ()
+			.GetMembers ()
+			.Where (m => m is FieldInfo || m is PropertyInfo)
+			.Select (CreateMemberSettings)
+			.Where (settings => !settings.skip && string.Compare (settings.mi.Name, nameof (EffectData.IsDefault), true) != 0)
+			.Select (settings => GetMemberWidgets (settings, effectData, localizer))
+			.SelectMany (widgets => widgets);
+
+	private IEnumerable<Gtk.Widget> GetMemberWidgets (MemberSettings settings, EffectData effectData, IAddinLocalizer localizer)
+	{
+		if (settings.mType == typeof (RandomSeed))
+			yield return CreateSeed (localizer.GetString (settings.caption), effectData, settings.mi, settings.attrs);
+		else if (settings.mType == typeof (int))
+			yield return CreateSlider (localizer.GetString (settings.caption), effectData, settings.mi, settings.attrs);
+		else if (settings.mType == typeof (DegreesAngle))
+			yield return CreateAnglePicker (localizer.GetString (settings.caption), effectData, settings.mi, settings.attrs);
+		else if (settings.mType == typeof (double))
+			yield return CreateDoubleSlider (localizer.GetString (settings.caption), effectData, settings.mi, settings.attrs);
+		else if (settings.combo && settings.mType == typeof (string))
+			yield return CreateComboBox (localizer.GetString (settings.caption), effectData, settings.mi, settings.attrs);
+		else if (settings.mType == typeof (bool))
+			yield return CreateCheckBox (localizer.GetString (settings.caption), effectData, settings.mi, settings.attrs);
+		else if (settings.mType == typeof (PointI))
+			yield return CreatePointPicker (localizer.GetString (settings.caption), effectData, settings.mi, settings.attrs);
+		else if (settings.mType == typeof (PointD))
+			yield return CreateOffsetPicker (localizer.GetString (settings.caption), effectData, settings.mi, settings.attrs);
+		else if (settings.mType.IsEnum)
+			yield return CreateEnumComboBox (localizer.GetString (settings.caption), effectData, settings.mi, settings.attrs);
+
+		if (settings.hint != null)
+			yield return CreateHintLabel (localizer.GetString (settings.hint));
 	}
 
 	#endregion
