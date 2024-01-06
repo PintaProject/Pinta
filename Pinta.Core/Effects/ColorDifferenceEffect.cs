@@ -6,6 +6,7 @@
 /////////////////////////////////////////////////////////////////////////////////
 
 using System;
+using System.Collections.Generic;
 using Cairo;
 
 namespace Pinta.Core;
@@ -21,7 +22,11 @@ namespace Pinta.Core;
 /// </summary>
 public abstract class ColorDifferenceEffect : BaseEffect
 {
-	public void RenderColorDifferenceEffect (double[][] weights, ImageSurface src, ImageSurface dest, ReadOnlySpan<RectangleI> rois)
+	public void RenderColorDifferenceEffect (
+		IReadOnlyList<IReadOnlyList<double>> weights,
+		ImageSurface src,
+		ImageSurface dest,
+		ReadOnlySpan<RectangleI> rois)
 	{
 		RectangleI src_rect = src.GetBounds ();
 
@@ -31,52 +36,54 @@ public abstract class ColorDifferenceEffect : BaseEffect
 		int src_width = src.Width;
 
 		foreach (RectangleI rect in rois) {
+
 			// loop through each line of target rectangle
 			for (int y = rect.Y; y < rect.Y + rect.Height; ++y) {
-				int fyStart = 0;
-				int fyEnd = 3;
 
-				if (y == src_rect.Y)
-					fyStart = 1;
-				if (y == src_rect.Y + src_rect.Height - 1)
-					fyEnd = 2;
+				int fyStart = (y == src_rect.Y) ? 1 : 0;
+				int fyEnd = (y == src_rect.Y + src_rect.Height - 1) ? 2 : 3;
 
 				// loop through each point in the line
 				var dst_row = dst_data[(y * src_width)..];
 
 				for (int x = rect.X; x < rect.X + rect.Width; ++x) {
-					int fxStart = 0;
-					int fxEnd = 3;
 
-					if (x == src_rect.X)
-						fxStart = 1;
+					int fxStart = (x == src_rect.X) ? 1 : 0;
+					int fxEnd = (x == src_rect.X + src_rect.Width - 1) ? 2 : 3;
 
-					if (x == src_rect.X + src_rect.Width - 1)
-						fxEnd = 2;
-
-					// loop through each weight
-					double rSum = 0.0;
-					double gSum = 0.0;
-					double bSum = 0.0;
-
-					for (int fy = fyStart; fy < fyEnd; ++fy) {
-						for (int fx = fxStart; fx < fxEnd; ++fx) {
-							double weight = weights[fy][fx];
-							ColorBgra c = src_data[(y - 1 + fy) * src_width + (x - 1 + fx)];
-
-							rSum += weight * c.R;
-							gSum += weight * c.G;
-							bSum += weight * c.B;
-						}
-					}
-
-					byte iRsum = Utility.ClampToByte (rSum);
-					byte iGsum = Utility.ClampToByte (gSum);
-					byte iBsum = Utility.ClampToByte (bSum);
-
-					dst_row[x] = ColorBgra.FromBgra (iBsum, iGsum, iRsum, 255);
+					dst_row[x] = GetFinalPixelColor (weights, src_data, src_width, fxStart, fxEnd, fyStart, fyEnd, x, y);
 				}
 			}
 		}
+	}
+
+	private static ColorBgra GetFinalPixelColor (
+		IReadOnlyList<IReadOnlyList<double>> weights,
+		ReadOnlySpan<ColorBgra> src_data,
+		int src_width,
+		int fxStart,
+		int fxEnd,
+		int fyStart,
+		int fyEnd,
+		int x,
+		int y)
+	{
+		// loop through each weight
+		double rSum = 0.0;
+		double gSum = 0.0;
+		double bSum = 0.0;
+		for (int fy = fyStart; fy < fyEnd; ++fy) {
+			for (int fx = fxStart; fx < fxEnd; ++fx) {
+				double weight = weights[fy][fx];
+				ColorBgra c = src_data[(y - 1 + fy) * src_width + (x - 1 + fx)];
+				rSum += weight * c.R;
+				gSum += weight * c.G;
+				bSum += weight * c.B;
+			}
+		}
+		byte iRsum = Utility.ClampToByte (rSum);
+		byte iGsum = Utility.ClampToByte (gSum);
+		byte iBsum = Utility.ClampToByte (bSum);
+		return ColorBgra.FromBgra (iBsum, iGsum, iRsum, 255);
 	}
 }
