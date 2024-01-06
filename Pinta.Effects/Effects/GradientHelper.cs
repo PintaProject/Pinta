@@ -1,7 +1,8 @@
 using System.Collections.Generic;
 using Pinta.Core;
+using Pinta.Gui.Widgets;
 
-namespace Pinta.Gui.Widgets;
+namespace Pinta.Effects;
 
 public enum PredefinedGradients
 {
@@ -30,7 +31,7 @@ public enum PredefinedGradients
 	SakuraSigh,
 }
 
-public static class GradientHelper
+internal static class GradientHelper
 {
 	public static ColorGradient CreateColorGradient (PredefinedGradients scheme)
 	{
