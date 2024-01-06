@@ -38,36 +38,44 @@ public sealed class ForwardErrorDiffusionDitheringEffect : BaseEffect
 					var currentIndex = y * src.Width + x;
 					var originalPixel = dst_data[currentIndex];
 					var closestColor = FindClosestPaletteColor (originalPixel);
-					dst_data[currentIndex] = closestColor;
 					int errorRed = originalPixel.R - closestColor.R;
 					int errorGreen = originalPixel.G - closestColor.G;
 					int errorBlue = originalPixel.B - closestColor.B;
-					DistributeError (dst_data, x, y, errorRed, errorGreen, errorBlue, src.Width, src.Height);
+					dst_data[currentIndex] = closestColor;
+					DistributeError (dst_data, new (x, y), errorRed, errorGreen, errorBlue, src.Width, src.Height);
 				}
 			}
 		}
 	}
 
-	private void DistributeError (Span<ColorBgra> original, int x, int y, int errorRed, int errorGreen, int errorBlue, int sourceWidth, int sourceHeight)
+	private void DistributeError (Span<ColorBgra> original, PointI location, int errorRed, int errorGreen, int errorBlue, int sourceWidth, int sourceHeight)
 	{
 		var diffusionMatrix = GetPredefinedDiffusionMatrix (Data.DiffusionMatrix);
+
 		for (int r = 0; r < diffusionMatrix.Rows; r++) {
+
 			for (int c = 0; c < diffusionMatrix.Columns; c++) {
+
 				var weight = diffusionMatrix[r, c];
-				if (diffusionMatrix[r, c] <= 0)
+
+				if (weight <= 0)
 					continue;
-				var this_y = y + r;
-				var this_x = x + c - diffusionMatrix.ColumnsToLeft;
-				if (this_x < 0)
+
+				PointI thisItem = new (
+					X: location.X + c - diffusionMatrix.ColumnsToLeft,
+					Y: location.Y + r
+				);
+
+				if (thisItem.X < 0 || thisItem.X >= sourceWidth)
 					continue;
-				if (this_y < 0)
+
+				if (thisItem.Y < 0 || thisItem.Y >= sourceHeight)
 					continue;
-				if (this_x >= sourceWidth)
-					continue;
-				if (this_y >= sourceHeight)
-					continue;
-				int idx = (this_y * sourceWidth) + this_x;
+
+				int idx = (thisItem.Y * sourceWidth) + thisItem.X;
+
 				double factor = ((double) weight) / diffusionMatrix.TotalWeight;
+
 				original[idx] = AddError (original[idx], factor, errorRed, errorGreen, errorBlue);
 			}
 		}
@@ -88,7 +96,7 @@ public sealed class ForwardErrorDiffusionDitheringEffect : BaseEffect
 	{
 		double minDistance = double.MaxValue;
 		ColorBgra closestColor = ColorBgra.FromBgra (0, 0, 0, 1);
-		var palette = GetPredefinedPalette (Data.ArbitraryPalette);
+		var palette = GetPredefinedPalette (Data.PaletteChoice);
 		foreach (var paletteColor in palette) {
 			double distance = CalculateDistance (original, paletteColor);
 			if (distance >= minDistance)
@@ -181,12 +189,6 @@ public sealed class ForwardErrorDiffusionDitheringEffect : BaseEffect
 		FakeFloydSteinberg,
 	}
 
-	public enum PaletteMode
-	{
-		Optimized,
-		Arbitrary,
-	}
-
 	private static ErrorDiffusionMatrix GetPredefinedDiffusionMatrix (PredefinedDiffusionMatrices choice)
 	{
 		return choice switch {
@@ -208,14 +210,11 @@ public sealed class ForwardErrorDiffusionDitheringEffect : BaseEffect
 		[Caption ("Diffusion Matrix")]
 		public PredefinedDiffusionMatrices DiffusionMatrix { get; set; } = PredefinedDiffusionMatrices.FloydSteinberg;
 
-		[Caption ("Palette Mode")]
-		public PaletteMode PaletteMode { get; set; } = PaletteMode.Arbitrary; // TODO: Use
-
 		[Caption ("Colors for Optimized Palette")]
 		public int ColorsForOptimizedPalette { get; set; } = 256;
 
 		[Caption ("Palette")]
-		public PredefinedPalettes ArbitraryPalette { get; set; } = PredefinedPalettes.OldWindows16; // TODO: Better data structure
+		public PredefinedPalettes PaletteChoice { get; set; } = PredefinedPalettes.OldWindows16;
 	}
 
 	public static class DefaultMatrices
