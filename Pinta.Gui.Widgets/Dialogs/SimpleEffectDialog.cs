@@ -170,42 +170,12 @@ public sealed class SimpleEffectDialog : Gtk.Dialog
 				yield return CreatePointPicker (localizer.GetString (caption), effectData, mi, attrs);
 			else if (mType == typeof (PointD))
 				yield return CreateOffsetPicker (localizer.GetString (caption), effectData, mi, attrs);
-			else if (mType == typeof (ColorGradient))
-				yield return CreateGradientPicker (localizer.GetString (caption), effectData, mi, attrs);
 			else if (mType.IsEnum)
 				yield return CreateEnumComboBox (localizer.GetString (caption), effectData, mi, attrs);
 
 			if (hint != null)
 				yield return CreateHintLabel (localizer.GetString (hint));
 		}
-	}
-
-	private Widget CreateGradientPicker (string caption, object effectData, MemberInfo member, object[] attributes)
-	{
-		var gradientsEnumType = typeof (PredefinedGradients);
-		var predefinedGradientNames = Enum.GetNames (gradientsEnumType);
-		var labelsToMemberNames = new Dictionary<string, string> (predefinedGradientNames.Length);
-		var labels = new List<string> ();
-		foreach (var gradientName in predefinedGradientNames) {
-			var members = gradientsEnumType.GetMember (gradientName);
-			var attrs = members[0].GetCustomAttributes (typeof (CaptionAttribute), false);
-			string label;
-			if (attrs.Length > 0)
-				label = Translations.GetString (((CaptionAttribute) attrs[0]).Caption);
-			else
-				label = Translations.GetString (gradientName);
-			labelsToMemberNames[label] = gradientName;
-			labels.Add (label);
-		}
-		var widget = new ComboBoxWidget (labels) { Label = caption };
-
-		widget.Changed += (_, _) => SetValue (
-			member,
-			effectData,
-			GradientHelper.CreateColorGradient ((PredefinedGradients) Enum.Parse (gradientsEnumType, labelsToMemberNames[widget.ActiveText]))
-		);
-
-		return widget;
 	}
 
 	#endregion

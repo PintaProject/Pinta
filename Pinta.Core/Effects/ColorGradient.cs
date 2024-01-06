@@ -1,7 +1,6 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Net.Sockets;
 
 namespace Pinta.Core;
 
@@ -58,7 +57,7 @@ public sealed class ColorGradient
 		if (minPosition >= maxPosition) throw new ArgumentException ($"{nameof (minPosition)} has to be lower than {nameof (maxPosition)}");
 	}
 
-	public ColorGradient Resize (double minPosition, double maxPosition)
+	public ColorGradient Resized (double minPosition, double maxPosition)
 	{
 		CheckBoundsConsistency (minPosition, maxPosition);
 

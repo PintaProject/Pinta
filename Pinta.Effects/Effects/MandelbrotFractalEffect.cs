@@ -76,7 +76,7 @@ public sealed class MandelbrotFractalEffect : BaseEffect
 		int factor,
 		double xOffset,
 		double yOffset,
-		ColorGradient colorMapping);
+		ColorGradient colorGradient);
 	private MandelbrotSettings CreateSettings (ImageSurface dst)
 	{
 		int h = dst.Height;
@@ -102,7 +102,7 @@ public sealed class MandelbrotFractalEffect : BaseEffect
 			xOffset: x_offset,
 			yOffset: y_offset,
 
-			colorMapping: Data.ColorMapping
+			colorGradient: GradientHelper.CreateColorGradient (Data.ColorScheme).Resized (0, 1023)
 		);
 	}
 
@@ -147,16 +147,22 @@ public sealed class MandelbrotFractalEffect : BaseEffect
 
 			double c = 64 + settings.factor * m;
 
-			double clamped_c = Math.Clamp (c, settings.colorMapping.MinimumPosition, settings.colorMapping.MaximumPosition);
+			double clamped_c = Math.Clamp (c, settings.colorGradient.MinimumPosition, settings.colorGradient.MaximumPosition);
 
-			ColorBgra colorAddend = settings.colorMapping.GetColor (clamped_c);
+			ColorBgra colorAddend = settings.colorGradient.GetColor (clamped_c);
 
 			r += colorAddend.R;
 			g += colorAddend.G;
 			b += colorAddend.B;
 			a += colorAddend.A;
 		}
-		return ColorBgra.FromBgra (Utility.ClampToByte (b / settings.count), Utility.ClampToByte (g / settings.count), Utility.ClampToByte (r / settings.count), Utility.ClampToByte (a / settings.count));
+
+		return ColorBgra.FromBgra (
+			b: Utility.ClampToByte (b / settings.count),
+			g: Utility.ClampToByte (g / settings.count),
+			r: Utility.ClampToByte (r / settings.count),
+			a: Utility.ClampToByte (a / settings.count)
+		);
 	}
 	#endregion
 
@@ -175,8 +181,8 @@ public sealed class MandelbrotFractalEffect : BaseEffect
 		[Caption ("Angle")]
 		public DegreesAngle Angle { get; set; } = new (0);
 
-		[Caption ("Colors")]
-		public ColorGradient ColorMapping { get; set; } = GradientHelper.CreateColorGradient (PredefinedGradients.Electric);
+		[Caption ("Color Scheme")]
+		public PredefinedGradients ColorScheme { get; set; } = PredefinedGradients.Electric;
 
 		[Caption ("Invert Colors")]
 		public bool InvertColors { get; set; } = false;

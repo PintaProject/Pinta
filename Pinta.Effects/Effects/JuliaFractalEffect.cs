@@ -79,7 +79,7 @@ public sealed class JuliaFractalEffect : BaseEffect
 		double invCount,
 		double angleTheta,
 		int factor,
-		ColorGradient colorMapping);
+		ColorGradient colorGradient);
 	private JuliaSettings CreateSettings (ImageSurface dst)
 	{
 		var w = dst.Width;
@@ -96,7 +96,7 @@ public sealed class JuliaFractalEffect : BaseEffect
 			invCount: 1.0 / count,
 			angleTheta: (Data.Angle.Degrees * Math.PI * 2) / 360.0,
 			factor: Data.Factor,
-			colorMapping: Data.ColorMapping
+			colorGradient: GradientHelper.CreateColorGradient (Data.ColorScheme).Resized (0, 1023)
 		);
 	}
 
@@ -128,9 +128,9 @@ public sealed class JuliaFractalEffect : BaseEffect
 
 			double c = settings.factor * j;
 
-			double clamped_c = Math.Clamp (c, settings.colorMapping.MinimumPosition, settings.colorMapping.MaximumPosition);
+			double clamped_c = Math.Clamp (c, settings.colorGradient.MinimumPosition, settings.colorGradient.MaximumPosition);
 
-			ColorBgra colorAddend = settings.colorMapping.GetColor (clamped_c);
+			ColorBgra colorAddend = settings.colorGradient.GetColor (clamped_c);
 
 			b += colorAddend.B;
 			g += colorAddend.G;
@@ -138,7 +138,12 @@ public sealed class JuliaFractalEffect : BaseEffect
 			a += colorAddend.A;
 		}
 
-		return ColorBgra.FromBgra (Utility.ClampToByte (b / settings.count), Utility.ClampToByte (g / settings.count), Utility.ClampToByte (r / settings.count), Utility.ClampToByte (a / settings.count));
+		return ColorBgra.FromBgra (
+			b: Utility.ClampToByte (b / settings.count),
+			g: Utility.ClampToByte (g / settings.count),
+			r: Utility.ClampToByte (r / settings.count),
+			a: Utility.ClampToByte (a / settings.count)
+		);
 	}
 	#endregion
 
@@ -153,8 +158,8 @@ public sealed class JuliaFractalEffect : BaseEffect
 		[Caption ("Zoom"), MinimumValue (0), MaximumValue (50)]
 		public int Zoom { get; set; } = 1;
 
-		[Caption ("Colors")]
-		public ColorGradient ColorMapping { get; set; } = GradientHelper.CreateColorGradient (PredefinedGradients.Bonfire);
+		[Caption ("Color Scheme")]
+		public PredefinedGradients ColorScheme { get; set; } = PredefinedGradients.Bonfire;
 
 		[Caption ("Angle")]
 		public DegreesAngle Angle { get; set; } = new (0);
