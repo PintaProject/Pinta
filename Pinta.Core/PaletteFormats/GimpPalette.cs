@@ -51,17 +51,23 @@ public sealed class GimpPalette : IPaletteLoader, IPaletteSaver
 
 		// then read the palette
 		do {
-			if (line.IndexOf ('#') == 0)
+			if (line.StartsWith ('#'))
 				continue;
 
-			IReadOnlyList<string> split = line.Split ((char[]?) null, StringSplitOptions.RemoveEmptyEntries);
-			double r = int.Parse (split[0]) / 255f;
-			double g = int.Parse (split[1]) / 255f;
-			double b = int.Parse (split[2]) / 255f;
-			colors.Add (new Color (r, g, b));
+			var finalColor = ReadColor (line);
+			colors.Add (finalColor);
 		} while ((line = reader.ReadLine ()) != null);
 
 		return colors;
+	}
+
+	private static Color ReadColor (string line)
+	{
+		string[] split = line.Split ((char[]?) null, StringSplitOptions.RemoveEmptyEntries);
+		double r = int.Parse (split[0]) / 255f;
+		double g = int.Parse (split[1]) / 255f;
+		double b = int.Parse (split[2]) / 255f;
+		return new Color (r, g, b);
 	}
 
 	public void Save (IReadOnlyList<Color> colors, Gio.File file)
@@ -73,11 +79,19 @@ public sealed class GimpPalette : IPaletteLoader, IPaletteSaver
 		writer.WriteLine ("Name: Pinta Created {0}", DateTime.Now.ToString (DateTimeFormatInfo.InvariantInfo.RFC1123Pattern));
 		writer.WriteLine ("#");
 
-		foreach (Color color in colors) {
-			writer.WriteLine ("{0,3} {1,3} {2,3} Untitled", (int) (color.R * 255), (int) (color.G * 255), (int) (color.B * 255));
-		}
+		for (var i = 0; i < colors.Count; i++)
+			writer.WriteLine (RepresentColor (colors[i], $"Untitled_{i}"));
 
 		writer.Close ();
 	}
+
+	private static string RepresentColor (Color color, string colorName)
+		=> string.Format (
+			"{0,3} {1,3} {2,3} {3}",
+			(int) (color.R * 255),
+			(int) (color.G * 255),
+			(int) (color.B * 255),
+			colorName
+		);
 }
 
