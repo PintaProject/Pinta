@@ -394,20 +394,18 @@ public sealed class MainWindow
 
 	private void CreateMainToolBar (WindowShell shell)
 	{
-		var main_toolbar = window_shell.CreateToolBar ("main_toolbar");
-
 		if (window_shell.HeaderBar is not null)
 			PintaCore.Actions.CreateHeaderToolBar (window_shell.HeaderBar!);
-		else
+		else {
+			var main_toolbar = window_shell.CreateToolBar ("main_toolbar");
 			PintaCore.Actions.CreateToolBar (main_toolbar);
-
-		PintaCore.Chrome.InitializeMainToolBar (main_toolbar);
+		}
 	}
 
 	private void CreateToolToolBar (WindowShell shell)
 	{
 		var tool_toolbar = window_shell.CreateToolBar ("tool_toolbar");
-		tool_toolbar.HeightRequest = 42;
+		tool_toolbar.HeightRequest = 48;
 
 		PintaCore.Chrome.InitializeToolToolBar (tool_toolbar);
 	}

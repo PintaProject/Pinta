@@ -160,8 +160,10 @@ public sealed class ViewActions
 		app.AddAction (Rulers);
 		show_hide_menu.AppendItem (Rulers.CreateMenuItem ());
 
-		app.AddAction (ToolBar);
-		show_hide_menu.AppendItem (ToolBar.CreateMenuItem ());
+		if (PintaCore.Chrome.MainToolBar is not null) {
+			app.AddAction (ToolBar);
+			show_hide_menu.AppendItem (ToolBar.CreateMenuItem ());
+		}
 
 		app.AddAction (StatusBar);
 		show_hide_menu.AppendItem (StatusBar.CreateMenuItem ());
