@@ -5,11 +5,30 @@ using Pinta.Core;
 
 namespace Pinta.Effects;
 
+/// <summary>
+/// Helps obtain intermediate colors at a certain position,
+/// based on the start and end colors, and any additional color stops
+/// </summary>
 internal sealed class ColorGradient
 {
+	/// <summary>
+	/// Color at the initial position in the gradient
+	/// </summary>
 	public ColorBgra StartColor { get; }
+
+	/// <summary>
+	/// Color at the end position in the gradient
+	/// </summary>
 	public ColorBgra EndColor { get; }
+
+	/// <summary>
+	/// Represents initial position in the gradient
+	/// </summary>
 	public double MinimumPosition { get; }
+
+	/// <summary>
+	/// Represents end position in the gradient
+	/// </summary>
 	public double MaximumPosition { get; }
 
 	private readonly IReadOnlyList<GradientStop> sorted_stops;
@@ -84,6 +103,14 @@ internal sealed class ColorGradient
 		);
 	}
 
+	/// <returns>
+	/// Intermediate color, according to start and end colors,
+	/// and gradient stops.
+	/// No overflow occurs as such;
+	/// if the target position is lower than the start position,
+	/// the start color will be returned, and if it's higher than
+	/// the end position, the end color will be returned.
+	/// </returns>
 	public ColorBgra GetColor (double position)
 	{
 		if (position <= MinimumPosition) return StartColor;
@@ -140,29 +167,7 @@ internal sealed class ColorGradient
 		return left - 1;
 	}
 
-	private static ColorBgra DefaultStartColor () => ColorBgra.Black;
-	private static ColorBgra DefaultEndColor () => ColorBgra.White;
-	private static double DefaultMinimumValue () => 0;
-	private static double DefaultMaximumValue () => 255;
 	private static IEnumerable<KeyValuePair<double, ColorBgra>> EmptyStops () => Enumerable.Empty<KeyValuePair<double, ColorBgra>> ();
-
-	public static ColorGradient Create ()
-		=> new (
-			DefaultStartColor (),
-			DefaultEndColor (),
-			DefaultMinimumValue (),
-			DefaultMaximumValue (),
-			EmptyStops ()
-		);
-
-	public static ColorGradient Create (ColorBgra start, ColorBgra end)
-		=> new (
-			start,
-			end,
-			DefaultMinimumValue (),
-			DefaultMaximumValue (),
-			EmptyStops ()
-		);
 
 	public static ColorGradient Create (ColorBgra start, ColorBgra end, double minimum, double maximum)
 		=> new (
