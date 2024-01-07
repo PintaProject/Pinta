@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: pinta\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-12-25 23:00-0500\n"
+"POT-Creation-Date: 2024-01-07 01:14+0000\n"
 "PO-Revision-Date: 2023-12-11 19:34+0000\n"
 "Last-Translator: Parsa <Unknown>\n"
 "Language-Team: Persian <fa@li.org>\n"
@@ -92,11 +92,11 @@ msgstr "پس از انتخاب"
 msgid "All files"
 msgstr "همه فایل‌ها"
 
-#: ../Pinta.Effects/Effects/BulgeEffect.cs:89
-#: ../Pinta.Effects/Effects/FrostedGlassEffect.cs:155
+#: ../Pinta.Effects/Effects/BulgeEffect.cs:112
+#: ../Pinta.Effects/Effects/FrostedGlassEffect.cs:150
 #: ../Pinta.Effects/Effects/SharpenEffect.cs:56
 #: ../Pinta.Effects/Effects/TwistEffect.cs:139
-#: ../Pinta.Effects/Effects/ZoomBlurEffect.cs:123
+#: ../Pinta.Effects/Effects/ZoomBlurEffect.cs:144
 msgid "Amount"
 msgstr "مقدار"
 
@@ -105,11 +105,11 @@ msgid "Anchor:"
 msgstr "لنگر:"
 
 #: ../Pinta.Effects/Effects/EdgeDetectEffect.cs:80
-#: ../Pinta.Effects/Effects/EmbossEffect.cs:144
+#: ../Pinta.Effects/Effects/EmbossEffect.cs:149
 #: ../Pinta.Effects/Effects/JuliaFractalEffect.cs:150
 #: ../Pinta.Effects/Effects/MandelbrotFractalEffect.cs:168
 #: ../Pinta.Effects/Effects/MotionBlurEffect.cs:101
-#: ../Pinta.Effects/Effects/RadialBlurEffect.cs:146
+#: ../Pinta.Effects/Effects/RadialBlurEffect.cs:171
 #: ../Pinta.Effects/Effects/ReliefEffect.cs:82
 #: ../Pinta.Tools/Editable/EditEngines/ArrowedEditEngine.cs:298
 #: ../Pinta/Actions/Layers/RotateZoomLayerAction.cs:115
@@ -132,7 +132,7 @@ msgstr "هموارسازی فعال"
 msgid "Arrow"
 msgstr "فلش"
 
-#: ../Pinta.Effects/Effects/InkSketchEffect.cs:35
+#: ../Pinta.Effects/Effects/InkSketchEffect.cs:36
 #: ../Pinta.Effects/Effects/OilPaintingEffect.cs:27
 #: ../Pinta.Effects/Effects/PencilSketchEffect.cs:33
 msgid "Artistic"
@@ -205,7 +205,7 @@ msgstr "آبی "
 msgid "Blurs"
 msgstr "تار کردن"
 
-#: ../Pinta.Tools/Tools/TextTool.cs:159
+#: ../Pinta.Tools/Tools/TextTool.cs:162
 msgid "Bold"
 msgstr "پر رنگ"
 
@@ -218,7 +218,7 @@ msgstr "روشنایی"
 msgid "Brightness / Contrast"
 msgstr "روشنایی / تضاد"
 
-#: ../Pinta.Effects/Effects/OilPaintingEffect.cs:152
+#: ../Pinta.Effects/Effects/OilPaintingEffect.cs:142
 msgid "Brush Size"
 msgstr "اندازه‌ی قلم"
 
@@ -259,7 +259,7 @@ msgstr "بوم"
 msgid "Cell Size"
 msgstr "اندازۀ سلول"
 
-#: ../Pinta.Tools/Tools/TextTool.cs:211
+#: ../Pinta.Tools/Tools/TextTool.cs:214
 msgid "Center Align"
 msgstr "تنظیم در وسط"
 
@@ -325,7 +325,7 @@ msgstr ""
 msgid "Click and drag to draw the outline for a selection area."
 msgstr "برای انتخاب یک محدوده کلیک کرده، بکشید و سپس رها کنید."
 
-#: ../Pinta.Tools/Tools/PanTool.cs:40
+#: ../Pinta.Tools/Tools/PanTool.cs:41
 msgid "Click and drag to navigate image."
 msgstr "برای پیمایش بوم کلیک کرده و بکشید."
 
@@ -381,7 +381,7 @@ msgstr "دنباله‌های خط / منحنی بسته"
 msgid "Clouds"
 msgstr "طرح ابری"
 
-#: ../Pinta.Effects/Effects/OilPaintingEffect.cs:155
+#: ../Pinta.Effects/Effects/OilPaintingEffect.cs:145
 msgid "Coarseness"
 msgstr "زبری"
 
@@ -413,11 +413,11 @@ msgstr "گسترۀ رنگ"
 msgid "Color Saturation"
 msgstr "اشباع رنگ"
 
-#: ../Pinta.Core/Actions/ViewActions.cs:179
+#: ../Pinta.Core/Actions/ViewActions.cs:181
 msgid "Color Scheme"
 msgstr ""
 
-#: ../Pinta.Effects/Effects/InkSketchEffect.cs:158
+#: ../Pinta.Effects/Effects/InkSketchEffect.cs:156
 msgid "Coloring"
 msgstr "رنگینگی"
 
@@ -490,7 +490,7 @@ msgid "Cut"
 msgstr "بریدن"
 
 #. Translators: This refers to using a dark variant of the color scheme.
-#: ../Pinta.Core/Actions/ViewActions.cs:187
+#: ../Pinta.Core/Actions/ViewActions.cs:189
 msgid "Dark"
 msgstr ""
 
@@ -503,7 +503,7 @@ msgid "Dash"
 msgstr "خط چین"
 
 #. Translators: This refers to using the system's default color scheme.
-#: ../Pinta.Core/Actions/ViewActions.cs:183
+#: ../Pinta.Core/Actions/ViewActions.cs:185
 msgid "Default"
 msgstr ""
 
@@ -532,7 +532,7 @@ msgstr "جزئیات‌"
 msgid "Difference"
 msgstr "تفاضل"
 
-#: ../Pinta.Effects/Effects/FragmentEffect.cs:110
+#: ../Pinta.Effects/Effects/FragmentEffect.cs:114
 #: ../Pinta.Effects/Effects/MotionBlurEffect.cs:104
 msgid "Distance"
 msgstr "فاصله"
@@ -594,12 +594,16 @@ msgstr "انتخاب بیضوی"
 msgid "Emboss"
 msgstr "برجسته‌کاری"
 
+#: ../Pinta/Main.cs:65
+msgid "Enable additional logging or behavior changes for debugging"
+msgstr ""
+
 #: ../Pinta.Core/Actions/EditActions.cs:66
 #: ../Pinta.Core/Actions/EditActions.cs:245
 msgid "Erase Selection"
 msgstr "پاک کردن انتخاب"
 
-#: ../Pinta.Tools/Tools/EraserTool.cs:54
+#: ../Pinta.Tools/Tools/EraserTool.cs:52
 msgid "Eraser"
 msgstr "پاک‌کن"
 
@@ -659,7 +663,7 @@ msgstr "پرونده‌ی اشکالات"
 msgid "Files to open"
 msgstr ""
 
-#: ../Pinta.Tools/Tools/TextTool.cs:249
+#: ../Pinta.Tools/Tools/TextTool.cs:252
 msgid "Fill Background"
 msgstr "پرکردن پس‌زمینه"
 
@@ -727,7 +731,7 @@ msgstr "قرینه‌سازی عمودی"
 msgid "Flood Mode"
 msgstr "حالت پرکردن"
 
-#: ../Pinta.Tools/Tools/TextTool.cs:135
+#: ../Pinta.Tools/Tools/TextTool.cs:138
 msgid "Font"
 msgstr "نوع قلم متن"
 
@@ -735,7 +739,7 @@ msgstr "نوع قلم متن"
 msgid "Fragment"
 msgstr "خرد کردن"
 
-#: ../Pinta.Effects/Effects/FragmentEffect.cs:107
+#: ../Pinta.Effects/Effects/FragmentEffect.cs:111
 msgid "Fragments"
 msgstr "تکه‌ها"
 
@@ -863,11 +867,11 @@ msgstr "وارد کردن از فایل..."
 msgid "Inches"
 msgstr "اینچ"
 
-#: ../Pinta.Effects/Effects/InkSketchEffect.cs:155
+#: ../Pinta.Effects/Effects/InkSketchEffect.cs:153
 msgid "Ink Outline"
 msgstr "جوهر بیرونی"
 
-#: ../Pinta.Effects/Effects/InkSketchEffect.cs:31
+#: ../Pinta.Effects/Effects/InkSketchEffect.cs:32
 msgid "Ink Sketch"
 msgstr "طرح جوهری"
 
@@ -922,7 +926,7 @@ msgstr "وارونه کردن رنگها"
 msgid "Invert Selection"
 msgstr "گزینش معکوس"
 
-#: ../Pinta.Tools/Tools/TextTool.cs:171
+#: ../Pinta.Tools/Tools/TextTool.cs:174
 msgid "Italic"
 msgstr "کج"
 
@@ -977,7 +981,7 @@ msgstr ""
 msgid "Layers"
 msgstr "لایه‌ها"
 
-#: ../Pinta.Tools/Tools/TextTool.cs:199
+#: ../Pinta.Tools/Tools/TextTool.cs:202
 msgid "Left Align"
 msgstr "هم‌ترازی چپ"
 
@@ -1034,7 +1038,7 @@ msgid ""
 "color."
 msgstr "کلیک چپ برای کشیدن با رنگ اولیه، کلیک راست برای کشیدن با رنگ ثانویه."
 
-#: ../Pinta.Tools/Tools/EraserTool.cs:56
+#: ../Pinta.Tools/Tools/EraserTool.cs:54
 msgid ""
 "Left click to erase to transparent, right click to erase to secondary color. "
 msgstr ""
@@ -1048,7 +1052,7 @@ msgstr ""
 "برای رنگ‌آمیزی نواحی با رنگ اولیه کلیک چپ، برای رنگ‌آمیزی با رنگ ثانویه کلیک "
 "راست."
 
-#: ../Pinta.Tools/Tools/TextTool.cs:88
+#: ../Pinta.Tools/Tools/TextTool.cs:91
 msgid ""
 "Left click to place cursor, then type desired text. Text color is primary "
 "color."
@@ -1105,7 +1109,7 @@ msgid "License"
 msgstr "مجوز"
 
 #. Translators: This refers to using a light variant of the color scheme.
-#: ../Pinta.Core/Actions/ViewActions.cs:185
+#: ../Pinta.Core/Actions/ViewActions.cs:187
 msgid "Light"
 msgstr ""
 
@@ -1251,7 +1255,7 @@ msgstr "پارازیت"
 
 #: ../Pinta.Core/Effects/UserBlendOps.cs:31
 #: ../Pinta.Tools/Brushes/PlainBrush.cs:35
-#: ../Pinta.Tools/Tools/EraserTool.cs:262 ../Pinta.Tools/Tools/TextTool.cs:246
+#: ../Pinta.Tools/Tools/EraserTool.cs:264 ../Pinta.Tools/Tools/TextTool.cs:249
 msgid "Normal"
 msgstr "عادی"
 
@@ -1263,7 +1267,7 @@ msgstr "ترکیب کردن عادی"
 msgid "Normal Size"
 msgstr "اندازه‌ی عادی"
 
-#: ../Pinta.Tools/Tools/TextTool.cs:247
+#: ../Pinta.Tools/Tools/TextTool.cs:250
 msgid "Normal and Outline"
 msgstr "معمولی و دورگیری شده"
 
@@ -1271,9 +1275,9 @@ msgstr "معمولی و دورگیری شده"
 msgid "Number of threads to use for rendering"
 msgstr ""
 
-#: ../Pinta.Effects/Effects/BulgeEffect.cs:92
-#: ../Pinta.Effects/Effects/RadialBlurEffect.cs:149
-#: ../Pinta.Effects/Effects/ZoomBlurEffect.cs:126
+#: ../Pinta.Effects/Effects/BulgeEffect.cs:115
+#: ../Pinta.Effects/Effects/RadialBlurEffect.cs:174
+#: ../Pinta.Effects/Effects/ZoomBlurEffect.cs:147
 msgid "Offset"
 msgstr "آفست"
 
@@ -1328,7 +1332,7 @@ msgid "Original"
 msgstr "اصلی"
 
 #: ../Pinta.Effects/Effects/OutlineEffect.cs:26
-#: ../Pinta.Tools/Tools/TextTool.cs:248
+#: ../Pinta.Tools/Tools/TextTool.cs:251
 msgid "Outline"
 msgstr "طرح ریزی"
 
@@ -1337,7 +1341,7 @@ msgstr "طرح ریزی"
 msgid "Outline Shape"
 msgstr "لبه‌گیری شکل"
 
-#: ../Pinta.Tools/Tools/TextTool.cs:262
+#: ../Pinta.Tools/Tools/TextTool.cs:265
 msgid "Outline width"
 msgstr "پهنای دورگیری"
 
@@ -1373,7 +1377,7 @@ msgstr "جعبه‌رنگ"
 msgid "Palette files"
 msgstr ""
 
-#: ../Pinta.Tools/Tools/PanTool.cs:38
+#: ../Pinta.Tools/Tools/PanTool.cs:39
 #: ../Pinta/Actions/Layers/RotateZoomLayerAction.cs:118
 msgid "Pan"
 msgstr "پیمایش بوم"
@@ -1417,7 +1421,7 @@ msgid "Photo"
 msgstr "نگاره"
 
 #: ../xdg/pinta.desktop.in.h:1 ../Pinta/Actions/Help/AboutDialogAction.cs:53
-#: ../Pinta/Main.cs:64 ../Pinta/MainWindow.cs:58
+#: ../Pinta/Main.cs:68 ../Pinta/MainWindow.cs:58
 msgid "Pinta"
 msgstr "پینتا"
 
@@ -1492,7 +1496,7 @@ msgstr "پرتره‌ای"
 msgid "Posterize"
 msgstr "پوسترسازی"
 
-#: ../Pinta.Effects/Effects/CloudsEffect.cs:200
+#: ../Pinta.Effects/Effects/CloudsEffect.cs:207
 msgid "Power"
 msgstr "انرژی"
 
@@ -1519,7 +1523,7 @@ msgstr "چاپ"
 
 #: ../Pinta.Effects/Effects/JuliaFractalEffect.cs:144
 #: ../Pinta.Effects/Effects/MandelbrotFractalEffect.cs:161
-#: ../Pinta.Effects/Effects/RadialBlurEffect.cs:152
+#: ../Pinta.Effects/Effects/RadialBlurEffect.cs:177
 #: ../Pinta.Effects/Effects/WarpEffect.cs:186
 msgid "Quality"
 msgstr "کیفیت"
@@ -1554,8 +1558,8 @@ msgid "Radius"
 msgstr "شعاع"
 
 #: ../Pinta.Effects/Effects/AddNoiseEffect.cs:189
-#: ../Pinta.Effects/Effects/CloudsEffect.cs:222
-#: ../Pinta.Effects/Effects/FrostedGlassEffect.cs:158
+#: ../Pinta.Effects/Effects/CloudsEffect.cs:229
+#: ../Pinta.Effects/Effects/FrostedGlassEffect.cs:153
 msgid "Random Noise"
 msgstr "ایجاد پارازیت تصادفی"
 
@@ -1618,7 +1622,7 @@ msgstr "تغییر نام لایه"
 msgid "Render"
 msgstr "پرداخت"
 
-#: ../Pinta.Core/Managers/LivePreviewManager.cs:190
+#: ../Pinta.Core/Managers/LivePreviewManager.cs:197
 msgid "Rendering Effect"
 msgstr "پرداخت کردن جلوه"
 
@@ -1669,7 +1673,7 @@ msgstr "تغییر اندازه‌ی تصویر..."
 msgid "Resize Palette"
 msgstr "تغییر اندازه‌ی جعبه‌رنگ"
 
-#: ../Pinta.Tools/Tools/TextTool.cs:223
+#: ../Pinta.Tools/Tools/TextTool.cs:226
 msgid "Right Align"
 msgstr "هم‌ترازی راست"
 
@@ -1697,7 +1701,7 @@ msgstr "چرخش 90 درجه در جهت ساعت"
 msgid "Rotate 90° Counter-Clockwise"
 msgstr "چرخش 90 درجه در جهت عکس ساعت"
 
-#: ../Pinta.Effects/Effects/FragmentEffect.cs:113
+#: ../Pinta.Effects/Effects/FragmentEffect.cs:117
 #: ../Pinta.Effects/Effects/TileEffect.cs:174
 msgid "Rotation"
 msgstr "دوران"
@@ -1763,7 +1767,7 @@ msgstr "ذخیره‌ی پرونده‌ی جعبه‌رنگ"
 msgid "Save changes to image \"{0}\" before closing?"
 msgstr ""
 
-#: ../Pinta.Effects/Effects/CloudsEffect.cs:197
+#: ../Pinta.Effects/Effects/CloudsEffect.cs:204
 msgid "Scale"
 msgstr "مقیاس"
 
@@ -1817,7 +1821,7 @@ msgstr "تک نقطه"
 msgid "Size"
 msgstr "اندازه‌"
 
-#: ../Pinta.Tools/Tools/EraserTool.cs:262
+#: ../Pinta.Tools/Tools/EraserTool.cs:264
 msgid "Smooth"
 msgstr "صاف"
 
@@ -1864,15 +1868,15 @@ msgstr "تعویض با ابزار مداد"
 msgid "Switch to previous tool"
 msgstr "تعویض با ابزار قبلی"
 
-#: ../Pinta.Tools/Tools/TextTool.cs:82
+#: ../Pinta.Tools/Tools/TextTool.cs:85
 msgid "Text"
 msgstr "متن‌"
 
-#: ../Pinta.Tools/Tools/TextTool.cs:83
+#: ../Pinta.Tools/Tools/TextTool.cs:86
 msgid "Text - Finalize"
 msgstr "متن - تمام‌شده"
 
-#: ../Pinta.Tools/Tools/TextTool.cs:237
+#: ../Pinta.Tools/Tools/TextTool.cs:240
 msgid "Text Style"
 msgstr "اسلوب متن"
 
@@ -1962,7 +1966,7 @@ msgstr "نکته: برای حذف نقاط کنترلی راست-کلیک کنی
 msgid "Tolerance"
 msgstr "درجه‌ی اعتنا"
 
-#: ../Pinta.Core/Managers/ToolManager.cs:354
+#: ../Pinta.Core/Managers/ToolManager.cs:355
 msgid "Tool"
 msgstr "ابزار"
 
@@ -1999,12 +2003,12 @@ msgstr "شفاف"
 msgid "Twist"
 msgstr "پیچانیدن"
 
-#: ../Pinta.Tools/Tools/EraserTool.cs:258
+#: ../Pinta.Tools/Tools/EraserTool.cs:260
 #: ../Pinta.Tools/Tools/PaintBrushTool.cs:165
 msgid "Type"
 msgstr "نوع"
 
-#: ../Pinta.Tools/Tools/TextTool.cs:183
+#: ../Pinta.Tools/Tools/TextTool.cs:186
 msgid "Underline"
 msgstr "زیرخط دار"
 
@@ -2052,7 +2056,7 @@ msgstr ""
 msgid "Updates"
 msgstr "به‌روزرسانی‌ها"
 
-#: ../Pinta.Effects/Effects/RadialBlurEffect.cs:153
+#: ../Pinta.Effects/Effects/RadialBlurEffect.cs:178
 msgid ""
 "Use low quality for previews, small images, and small angles.  Use high "
 "quality for final quality, large images, and large angles."
@@ -2088,9 +2092,9 @@ msgid "Width:"
 msgstr "عرض:"
 
 #: ../Pinta.Core/Actions/ViewActions.cs:116
-#: ../Pinta.Core/Actions/ViewActions.cs:304
-#: ../Pinta.Core/Classes/DocumentWorkspace.cs:348
+#: ../Pinta.Core/Actions/ViewActions.cs:306
 #: ../Pinta.Core/Classes/DocumentWorkspace.cs:357
+#: ../Pinta.Core/Classes/DocumentWorkspace.cs:366
 msgid "Window"
 msgstr "پنجره"
 
@@ -2148,8 +2152,8 @@ msgstr "بزرگنمایی ناحیه‌ی منتخب"
 msgid "_Adjustments"
 msgstr "تنظ_یمات"
 
-#: ../Pinta.Core/Extensions/GtkExtensions.cs:199
-#: ../Pinta.Core/Extensions/GtkExtensions.cs:201
+#: ../Pinta.Core/Extensions/GtkExtensions.cs:208
+#: ../Pinta.Core/Extensions/GtkExtensions.cs:210
 #: ../Pinta/Actions/Edit/PasteAction.cs:187
 #: ../Pinta/Actions/File/CloseDocumentAction.cs:66
 msgid "_Cancel"
@@ -2179,8 +2183,8 @@ msgstr "_تصویر"
 msgid "_Layers"
 msgstr "_لایه‌ها"
 
-#: ../Pinta.Core/Extensions/GtkExtensions.cs:198
-#: ../Pinta.Core/Extensions/GtkExtensions.cs:202
+#: ../Pinta.Core/Extensions/GtkExtensions.cs:207
+#: ../Pinta.Core/Extensions/GtkExtensions.cs:211
 #: ../Pinta.Gui.Addins/InstallDialog.cs:156 ../Pinta/Dialogs/ErrorDialog.cs:41
 #: ../Pinta/Dialogs/ErrorDialog.cs:69
 msgid "_OK"
@@ -2248,7 +2252,7 @@ msgstr ""
 
 #. Translators: This specifies the format of the zoom percentage choices
 #. in the toolbar.
-#: ../Pinta.Core/Actions/ViewActions.cs:285
+#: ../Pinta.Core/Actions/ViewActions.cs:287
 #, csharp-format
 msgid "{0}%"
 msgstr "{0}%"
