@@ -6,29 +6,37 @@ namespace Pinta.Effects;
 
 public enum PredefinedGradients
 {
+	// Translators: Gradient with the colors of the flag of Italy: red, white, and green
+	[Caption ("Beautiful Italy")]
+	BeautifulItaly,
+
+	// Translators: Simple gradient that goes from black to white
 	[Caption ("Black and White")]
 	BlackAndWhite,
 
+	// Translators: Gradient that starts out white, like the core of a raging fire, and then goes through yellow, red, and black (like visible black smoke), and finally transparent, blending with the background
 	[Caption ("Bonfire")]
 	Bonfire,
 
+	// Translators: Gradient that starts out off-white, like cherry blossoms against sunlight, then goes through pink, then light blue (like the sky) and finally transparent, blending with the background
+	[Caption ("Cherry Blossom")]
+	CherryBlossom,
+
+	// Translators: Gradient with the colors of blue and pink cotton candy
 	[Caption ("Cotton Candy")]
 	CottonCandy,
 
+	// Translators: Gradient that starts out white, like the the inner part of a spark, and goes through progressively dark shades of blue until it reaches black, and finally transparent, blending with the background
 	[Caption ("Electric")]
 	Electric,
 
-	[Caption ("La Bella Italia")]
-	LaBellaItalia,
-
+	// Translators: Gradient with a citrusy vibe that starts out white, goes through light yellow, several shades of green, and then transparent, blending with the background
 	[Caption ("Lime Lemon")]
 	LimeLemon,
 
+	// Translators: Gradient with different shades of brownish yellow
 	[Caption ("Piña Colada")]
 	PinaColada,
-
-	[Caption ("Sakura Sigh")]
-	SakuraSigh,
 }
 
 internal static class GradientHelper
@@ -79,7 +87,7 @@ internal static class GradientHelper
 					[Utility.Lerp (DefaultMinimumValue, DefaultMaximumValue, 0.75)] = ColorBgra.Cyan,
 				}),
 
-			PredefinedGradients.LaBellaItalia => ColorGradient.Create (
+			PredefinedGradients.BeautifulItaly => ColorGradient.Create (
 				ColorBgra.FromBgr (70, 146, 0),
 				ColorBgra.FromBgr (55, 43, 206),
 				DefaultMinimumValue,
@@ -108,7 +116,7 @@ internal static class GradientHelper
 					[Utility.Lerp (DefaultMinimumValue, DefaultMaximumValue, 0.25)] = ColorBgra.Yellow,
 				}),
 
-			PredefinedGradients.SakuraSigh => ColorGradient.Create (
+			PredefinedGradients.CherryBlossom => ColorGradient.Create (
 				ColorBgra.Transparent,
 				ColorBgra.FromBgr (240, 255, 255),
 				DefaultMinimumValue,
