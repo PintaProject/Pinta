@@ -193,6 +193,7 @@ Pinta.Effects/Effects/TwistEffect.cs
 Pinta.Effects/Effects/UnfocusEffect.cs
 Pinta.Effects/Effects/WarpEffect.cs
 Pinta.Effects/Effects/ZoomBlurEffect.cs
+Pinta.Effects/FriendAssemblies.cs
 Pinta.Effects/Utilities/EffectHelper.cs
 Pinta.Gui.Addins/AddinInfoView.cs
 Pinta.Gui.Addins/AddinListView.cs
