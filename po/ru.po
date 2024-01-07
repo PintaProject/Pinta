@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-12-25 23:00-0500\n"
+"POT-Creation-Date: 2024-01-07 01:14+0000\n"
 "PO-Revision-Date: 2023-12-26 04:12+0000\n"
 "Last-Translator: Сергей <asvmail.as@gmail.com>\n"
 "Language-Team: Russian <https://hosted.weblate.org/projects/pinta/pinta/ru/"
@@ -94,11 +94,11 @@ msgstr "После выбора"
 msgid "All files"
 msgstr "Все файлы"
 
-#: ../Pinta.Effects/Effects/BulgeEffect.cs:89
-#: ../Pinta.Effects/Effects/FrostedGlassEffect.cs:155
+#: ../Pinta.Effects/Effects/BulgeEffect.cs:112
+#: ../Pinta.Effects/Effects/FrostedGlassEffect.cs:150
 #: ../Pinta.Effects/Effects/SharpenEffect.cs:56
 #: ../Pinta.Effects/Effects/TwistEffect.cs:139
-#: ../Pinta.Effects/Effects/ZoomBlurEffect.cs:123
+#: ../Pinta.Effects/Effects/ZoomBlurEffect.cs:144
 msgid "Amount"
 msgstr "Количество"
 
@@ -107,11 +107,11 @@ msgid "Anchor:"
 msgstr "Якорь:"
 
 #: ../Pinta.Effects/Effects/EdgeDetectEffect.cs:80
-#: ../Pinta.Effects/Effects/EmbossEffect.cs:144
+#: ../Pinta.Effects/Effects/EmbossEffect.cs:149
 #: ../Pinta.Effects/Effects/JuliaFractalEffect.cs:150
 #: ../Pinta.Effects/Effects/MandelbrotFractalEffect.cs:168
 #: ../Pinta.Effects/Effects/MotionBlurEffect.cs:101
-#: ../Pinta.Effects/Effects/RadialBlurEffect.cs:146
+#: ../Pinta.Effects/Effects/RadialBlurEffect.cs:171
 #: ../Pinta.Effects/Effects/ReliefEffect.cs:82
 #: ../Pinta.Tools/Editable/EditEngines/ArrowedEditEngine.cs:298
 #: ../Pinta/Actions/Layers/RotateZoomLayerAction.cs:115
@@ -134,7 +134,7 @@ msgstr "Включить сглаживание"
 msgid "Arrow"
 msgstr "Стрелка"
 
-#: ../Pinta.Effects/Effects/InkSketchEffect.cs:35
+#: ../Pinta.Effects/Effects/InkSketchEffect.cs:36
 #: ../Pinta.Effects/Effects/OilPaintingEffect.cs:27
 #: ../Pinta.Effects/Effects/PencilSketchEffect.cs:33
 msgid "Artistic"
@@ -207,7 +207,7 @@ msgstr "Синий "
 msgid "Blurs"
 msgstr "Размытие"
 
-#: ../Pinta.Tools/Tools/TextTool.cs:159
+#: ../Pinta.Tools/Tools/TextTool.cs:162
 msgid "Bold"
 msgstr "Жирный"
 
@@ -220,7 +220,7 @@ msgstr "Яркость"
 msgid "Brightness / Contrast"
 msgstr "Яркость / Контраст"
 
-#: ../Pinta.Effects/Effects/OilPaintingEffect.cs:152
+#: ../Pinta.Effects/Effects/OilPaintingEffect.cs:142
 msgid "Brush Size"
 msgstr "Размер кисти"
 
@@ -261,7 +261,7 @@ msgstr "Холст"
 msgid "Cell Size"
 msgstr "Размер ячейки"
 
-#: ../Pinta.Tools/Tools/TextTool.cs:211
+#: ../Pinta.Tools/Tools/TextTool.cs:214
 msgid "Center Align"
 msgstr "По центру"
 
@@ -338,7 +338,7 @@ msgstr ""
 "Нажмите левую кнопку мыши и тяните, чтобы нарисовать контур области "
 "выделения."
 
-#: ../Pinta.Tools/Tools/PanTool.cs:40
+#: ../Pinta.Tools/Tools/PanTool.cs:41
 msgid "Click and drag to navigate image."
 msgstr "Нажмите левую кнопку мыши и тяните для навигации по изображению."
 
@@ -394,7 +394,7 @@ msgstr "Закрыть линию/Закончить серию кривых"
 msgid "Clouds"
 msgstr "Облака"
 
-#: ../Pinta.Effects/Effects/OilPaintingEffect.cs:155
+#: ../Pinta.Effects/Effects/OilPaintingEffect.cs:145
 msgid "Coarseness"
 msgstr "Грубость"
 
@@ -426,11 +426,11 @@ msgstr "Цветовой диапазон"
 msgid "Color Saturation"
 msgstr "Насыщенность цвета"
 
-#: ../Pinta.Core/Actions/ViewActions.cs:179
+#: ../Pinta.Core/Actions/ViewActions.cs:181
 msgid "Color Scheme"
 msgstr "Цветовая схема"
 
-#: ../Pinta.Effects/Effects/InkSketchEffect.cs:158
+#: ../Pinta.Effects/Effects/InkSketchEffect.cs:156
 msgid "Coloring"
 msgstr "Окрашивание"
 
@@ -503,7 +503,7 @@ msgid "Cut"
 msgstr "Вырезать"
 
 #. Translators: This refers to using a dark variant of the color scheme.
-#: ../Pinta.Core/Actions/ViewActions.cs:187
+#: ../Pinta.Core/Actions/ViewActions.cs:189
 msgid "Dark"
 msgstr "Тёмная"
 
@@ -516,7 +516,7 @@ msgid "Dash"
 msgstr "Штриховка"
 
 #. Translators: This refers to using the system's default color scheme.
-#: ../Pinta.Core/Actions/ViewActions.cs:183
+#: ../Pinta.Core/Actions/ViewActions.cs:185
 msgid "Default"
 msgstr "По умолчанию"
 
@@ -545,7 +545,7 @@ msgstr "Подробности"
 msgid "Difference"
 msgstr "Различие"
 
-#: ../Pinta.Effects/Effects/FragmentEffect.cs:110
+#: ../Pinta.Effects/Effects/FragmentEffect.cs:114
 #: ../Pinta.Effects/Effects/MotionBlurEffect.cs:104
 msgid "Distance"
 msgstr "Расстояние"
@@ -607,12 +607,16 @@ msgstr "Эллиптическое выделение"
 msgid "Emboss"
 msgstr "Барельеф"
 
+#: ../Pinta/Main.cs:65
+msgid "Enable additional logging or behavior changes for debugging"
+msgstr ""
+
 #: ../Pinta.Core/Actions/EditActions.cs:66
 #: ../Pinta.Core/Actions/EditActions.cs:245
 msgid "Erase Selection"
 msgstr "Удалить выделение"
 
-#: ../Pinta.Tools/Tools/EraserTool.cs:54
+#: ../Pinta.Tools/Tools/EraserTool.cs:52
 msgid "Eraser"
 msgstr "Ластик"
 
@@ -672,7 +676,7 @@ msgstr "Сообщить о неполадке"
 msgid "Files to open"
 msgstr "Файлы для открытия"
 
-#: ../Pinta.Tools/Tools/TextTool.cs:249
+#: ../Pinta.Tools/Tools/TextTool.cs:252
 msgid "Fill Background"
 msgstr "Заливка фона"
 
@@ -740,7 +744,7 @@ msgstr "Отразить по вертикали"
 msgid "Flood Mode"
 msgstr "Режим заливки"
 
-#: ../Pinta.Tools/Tools/TextTool.cs:135
+#: ../Pinta.Tools/Tools/TextTool.cs:138
 msgid "Font"
 msgstr "Шрифт"
 
@@ -748,7 +752,7 @@ msgstr "Шрифт"
 msgid "Fragment"
 msgstr "Фрагмент"
 
-#: ../Pinta.Effects/Effects/FragmentEffect.cs:107
+#: ../Pinta.Effects/Effects/FragmentEffect.cs:111
 msgid "Fragments"
 msgstr "Фрагменты"
 
@@ -877,11 +881,11 @@ msgstr "Импорт из файла..."
 msgid "Inches"
 msgstr "Дюймы"
 
-#: ../Pinta.Effects/Effects/InkSketchEffect.cs:155
+#: ../Pinta.Effects/Effects/InkSketchEffect.cs:153
 msgid "Ink Outline"
 msgstr "Чернильный контур"
 
-#: ../Pinta.Effects/Effects/InkSketchEffect.cs:31
+#: ../Pinta.Effects/Effects/InkSketchEffect.cs:32
 msgid "Ink Sketch"
 msgstr "Набросок чернилами"
 
@@ -936,7 +940,7 @@ msgstr "Обратить цвета"
 msgid "Invert Selection"
 msgstr "Обратить выделение"
 
-#: ../Pinta.Tools/Tools/TextTool.cs:171
+#: ../Pinta.Tools/Tools/TextTool.cs:174
 msgid "Italic"
 msgstr "Курсивный"
 
@@ -991,7 +995,7 @@ msgstr "Слой {0}"
 msgid "Layers"
 msgstr "Слои"
 
-#: ../Pinta.Tools/Tools/TextTool.cs:199
+#: ../Pinta.Tools/Tools/TextTool.cs:202
 msgid "Left Align"
 msgstr "По левому краю"
 
@@ -1087,7 +1091,7 @@ msgstr ""
 "Нажмите левую кнопку мыши, чтобы рисовать основным цветом, правую - "
 "дополнительным."
 
-#: ../Pinta.Tools/Tools/EraserTool.cs:56
+#: ../Pinta.Tools/Tools/EraserTool.cs:54
 msgid ""
 "Left click to erase to transparent, right click to erase to secondary color. "
 msgstr ""
@@ -1102,7 +1106,7 @@ msgstr ""
 "Щёлкните левой кнопкой мыши, чтобы залить область основным цветом, правой - "
 "дополнительным."
 
-#: ../Pinta.Tools/Tools/TextTool.cs:88
+#: ../Pinta.Tools/Tools/TextTool.cs:91
 msgid ""
 "Left click to place cursor, then type desired text. Text color is primary "
 "color."
@@ -1169,7 +1173,7 @@ msgid "License"
 msgstr "Лицензия"
 
 #. Translators: This refers to using a light variant of the color scheme.
-#: ../Pinta.Core/Actions/ViewActions.cs:185
+#: ../Pinta.Core/Actions/ViewActions.cs:187
 msgid "Light"
 msgstr "Светлая"
 
@@ -1315,7 +1319,7 @@ msgstr "Шум"
 
 #: ../Pinta.Core/Effects/UserBlendOps.cs:31
 #: ../Pinta.Tools/Brushes/PlainBrush.cs:35
-#: ../Pinta.Tools/Tools/EraserTool.cs:262 ../Pinta.Tools/Tools/TextTool.cs:246
+#: ../Pinta.Tools/Tools/EraserTool.cs:264 ../Pinta.Tools/Tools/TextTool.cs:249
 msgid "Normal"
 msgstr "Обычный"
 
@@ -1327,7 +1331,7 @@ msgstr "Обычное наложение"
 msgid "Normal Size"
 msgstr "Исходный размер"
 
-#: ../Pinta.Tools/Tools/TextTool.cs:247
+#: ../Pinta.Tools/Tools/TextTool.cs:250
 msgid "Normal and Outline"
 msgstr "Обычный и контур"
 
@@ -1335,9 +1339,9 @@ msgstr "Обычный и контур"
 msgid "Number of threads to use for rendering"
 msgstr "Количество потоков, используемых для отрисовки"
 
-#: ../Pinta.Effects/Effects/BulgeEffect.cs:92
-#: ../Pinta.Effects/Effects/RadialBlurEffect.cs:149
-#: ../Pinta.Effects/Effects/ZoomBlurEffect.cs:126
+#: ../Pinta.Effects/Effects/BulgeEffect.cs:115
+#: ../Pinta.Effects/Effects/RadialBlurEffect.cs:174
+#: ../Pinta.Effects/Effects/ZoomBlurEffect.cs:147
 msgid "Offset"
 msgstr "Смещение"
 
@@ -1392,7 +1396,7 @@ msgid "Original"
 msgstr "Исходный"
 
 #: ../Pinta.Effects/Effects/OutlineEffect.cs:26
-#: ../Pinta.Tools/Tools/TextTool.cs:248
+#: ../Pinta.Tools/Tools/TextTool.cs:251
 msgid "Outline"
 msgstr "Контур"
 
@@ -1401,7 +1405,7 @@ msgstr "Контур"
 msgid "Outline Shape"
 msgstr "Обвести фигуру"
 
-#: ../Pinta.Tools/Tools/TextTool.cs:262
+#: ../Pinta.Tools/Tools/TextTool.cs:265
 msgid "Outline width"
 msgstr "Ширина контура"
 
@@ -1437,7 +1441,7 @@ msgstr "Палитра"
 msgid "Palette files"
 msgstr "Файлы палитры"
 
-#: ../Pinta.Tools/Tools/PanTool.cs:38
+#: ../Pinta.Tools/Tools/PanTool.cs:39
 #: ../Pinta/Actions/Layers/RotateZoomLayerAction.cs:118
 msgid "Pan"
 msgstr "Перемещение"
@@ -1481,7 +1485,7 @@ msgid "Photo"
 msgstr "Снимок"
 
 #: ../xdg/pinta.desktop.in.h:1 ../Pinta/Actions/Help/AboutDialogAction.cs:53
-#: ../Pinta/Main.cs:64 ../Pinta/MainWindow.cs:58
+#: ../Pinta/Main.cs:68 ../Pinta/MainWindow.cs:58
 msgid "Pinta"
 msgstr "Pinta"
 
@@ -1562,7 +1566,7 @@ msgstr "Книжная"
 msgid "Posterize"
 msgstr "Постеризовать"
 
-#: ../Pinta.Effects/Effects/CloudsEffect.cs:200
+#: ../Pinta.Effects/Effects/CloudsEffect.cs:207
 msgid "Power"
 msgstr "Мощность"
 
@@ -1589,7 +1593,7 @@ msgstr "Печать"
 
 #: ../Pinta.Effects/Effects/JuliaFractalEffect.cs:144
 #: ../Pinta.Effects/Effects/MandelbrotFractalEffect.cs:161
-#: ../Pinta.Effects/Effects/RadialBlurEffect.cs:152
+#: ../Pinta.Effects/Effects/RadialBlurEffect.cs:177
 #: ../Pinta.Effects/Effects/WarpEffect.cs:186
 msgid "Quality"
 msgstr "Качество"
@@ -1624,8 +1628,8 @@ msgid "Radius"
 msgstr "Радиус"
 
 #: ../Pinta.Effects/Effects/AddNoiseEffect.cs:189
-#: ../Pinta.Effects/Effects/CloudsEffect.cs:222
-#: ../Pinta.Effects/Effects/FrostedGlassEffect.cs:158
+#: ../Pinta.Effects/Effects/CloudsEffect.cs:229
+#: ../Pinta.Effects/Effects/FrostedGlassEffect.cs:153
 msgid "Random Noise"
 msgstr "Случайный шум"
 
@@ -1688,7 +1692,7 @@ msgstr "Переименовать слой"
 msgid "Render"
 msgstr "Рисование"
 
-#: ../Pinta.Core/Managers/LivePreviewManager.cs:190
+#: ../Pinta.Core/Managers/LivePreviewManager.cs:197
 msgid "Rendering Effect"
 msgstr "Эффект отрисовки"
 
@@ -1739,7 +1743,7 @@ msgstr "Изменить размер изображения..."
 msgid "Resize Palette"
 msgstr "Изменить размер палитры"
 
-#: ../Pinta.Tools/Tools/TextTool.cs:223
+#: ../Pinta.Tools/Tools/TextTool.cs:226
 msgid "Right Align"
 msgstr "По правому краю"
 
@@ -1767,7 +1771,7 @@ msgstr "Повернуть на 90° по часовой стрелке"
 msgid "Rotate 90° Counter-Clockwise"
 msgstr "Повернуть на 90° против часовой стрелки"
 
-#: ../Pinta.Effects/Effects/FragmentEffect.cs:113
+#: ../Pinta.Effects/Effects/FragmentEffect.cs:117
 #: ../Pinta.Effects/Effects/TileEffect.cs:174
 msgid "Rotation"
 msgstr "Поворот"
@@ -1833,7 +1837,7 @@ msgstr "Сохранить файл палитры"
 msgid "Save changes to image \"{0}\" before closing?"
 msgstr "Сохранить изменения в изображении «{0}» перед закрытием?"
 
-#: ../Pinta.Effects/Effects/CloudsEffect.cs:197
+#: ../Pinta.Effects/Effects/CloudsEffect.cs:204
 msgid "Scale"
 msgstr "Масштаб"
 
@@ -1887,7 +1891,7 @@ msgstr "Один пиксель"
 msgid "Size"
 msgstr "Размер"
 
-#: ../Pinta.Tools/Tools/EraserTool.cs:262
+#: ../Pinta.Tools/Tools/EraserTool.cs:264
 msgid "Smooth"
 msgstr "Сглаженный"
 
@@ -1934,15 +1938,15 @@ msgstr "Переключиться на инструмент \"Карандаш\
 msgid "Switch to previous tool"
 msgstr "Переключиться на предыдущий инструмент"
 
-#: ../Pinta.Tools/Tools/TextTool.cs:82
+#: ../Pinta.Tools/Tools/TextTool.cs:85
 msgid "Text"
 msgstr "Текст"
 
-#: ../Pinta.Tools/Tools/TextTool.cs:83
+#: ../Pinta.Tools/Tools/TextTool.cs:86
 msgid "Text - Finalize"
 msgstr "Текст - Завершить"
 
-#: ../Pinta.Tools/Tools/TextTool.cs:237
+#: ../Pinta.Tools/Tools/TextTool.cs:240
 msgid "Text Style"
 msgstr "Стиль текста"
 
@@ -2038,7 +2042,7 @@ msgstr "Подсказка: Нажмите правую кнопку мыши, �
 msgid "Tolerance"
 msgstr "Чувствительность"
 
-#: ../Pinta.Core/Managers/ToolManager.cs:354
+#: ../Pinta.Core/Managers/ToolManager.cs:355
 msgid "Tool"
 msgstr "Инструмент"
 
@@ -2075,12 +2079,12 @@ msgstr "Прозрачный"
 msgid "Twist"
 msgstr "Завихрение"
 
-#: ../Pinta.Tools/Tools/EraserTool.cs:258
+#: ../Pinta.Tools/Tools/EraserTool.cs:260
 #: ../Pinta.Tools/Tools/PaintBrushTool.cs:165
 msgid "Type"
 msgstr "Тип"
 
-#: ../Pinta.Tools/Tools/TextTool.cs:183
+#: ../Pinta.Tools/Tools/TextTool.cs:186
 msgid "Underline"
 msgstr "Подчёркнутый"
 
@@ -2128,7 +2132,7 @@ msgstr "Обновить..."
 msgid "Updates"
 msgstr "Обновления"
 
-#: ../Pinta.Effects/Effects/RadialBlurEffect.cs:153
+#: ../Pinta.Effects/Effects/RadialBlurEffect.cs:178
 msgid ""
 "Use low quality for previews, small images, and small angles.  Use high "
 "quality for final quality, large images, and large angles."
@@ -2165,9 +2169,9 @@ msgid "Width:"
 msgstr "Ширина:"
 
 #: ../Pinta.Core/Actions/ViewActions.cs:116
-#: ../Pinta.Core/Actions/ViewActions.cs:304
-#: ../Pinta.Core/Classes/DocumentWorkspace.cs:348
+#: ../Pinta.Core/Actions/ViewActions.cs:306
 #: ../Pinta.Core/Classes/DocumentWorkspace.cs:357
+#: ../Pinta.Core/Classes/DocumentWorkspace.cs:366
 msgid "Window"
 msgstr "Окно"
 
@@ -2227,8 +2231,8 @@ msgstr "По размеру выделения"
 msgid "_Adjustments"
 msgstr "_Цвета"
 
-#: ../Pinta.Core/Extensions/GtkExtensions.cs:199
-#: ../Pinta.Core/Extensions/GtkExtensions.cs:201
+#: ../Pinta.Core/Extensions/GtkExtensions.cs:208
+#: ../Pinta.Core/Extensions/GtkExtensions.cs:210
 #: ../Pinta/Actions/Edit/PasteAction.cs:187
 #: ../Pinta/Actions/File/CloseDocumentAction.cs:66
 msgid "_Cancel"
@@ -2258,8 +2262,8 @@ msgstr "_Изображение"
 msgid "_Layers"
 msgstr "С_лои"
 
-#: ../Pinta.Core/Extensions/GtkExtensions.cs:198
-#: ../Pinta.Core/Extensions/GtkExtensions.cs:202
+#: ../Pinta.Core/Extensions/GtkExtensions.cs:207
+#: ../Pinta.Core/Extensions/GtkExtensions.cs:211
 #: ../Pinta.Gui.Addins/InstallDialog.cs:156 ../Pinta/Dialogs/ErrorDialog.cs:41
 #: ../Pinta/Dialogs/ErrorDialog.cs:69
 msgid "_OK"
@@ -2360,7 +2364,7 @@ msgstr "{0} палитра ({1})"
 
 #. Translators: This specifies the format of the zoom percentage choices
 #. in the toolbar.
-#: ../Pinta.Core/Actions/ViewActions.cs:285
+#: ../Pinta.Core/Actions/ViewActions.cs:287
 #, csharp-format
 msgid "{0}%"
 msgstr "{0}%"
