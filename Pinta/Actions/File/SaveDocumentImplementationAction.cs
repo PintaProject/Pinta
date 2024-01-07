@@ -178,23 +178,19 @@ internal sealed class SaveDocumentImplmentationAction : IActionHandler
 
 		try {
 			format.Exporter.Export (document, file, parent);
-		} catch (GLib.GException e) { // Errors from GDK
-			if (e.Message == "Image too large to be saved as ICO") {
-				string primary = Translations.GetString ("Image too large");
-				string secondary = Translations.GetString ("ICO files can not be larger than 255 x 255 pixels.");
+		} catch (GLib.GException e) when (e.Message == "Image too large to be saved as ICO") {
+			string primary = Translations.GetString ("Image too large");
+			string secondary = Translations.GetString ("ICO files can not be larger than 255 x 255 pixels.");
 
-				PintaCore.Chrome.ShowMessageDialog (parent, primary, secondary);
-				return false;
-			} else if (e.Message.Contains ("Permission denied") && e.Message.Contains ("Failed to open")) {
-				string primary = Translations.GetString ("Failed to save image");
-				// Translators: {0} is the name of a file that the user does not have write permission for.
-				string secondary = Translations.GetString ("You do not have access to modify '{0}'. The file or folder may be read-only.", file);
+			PintaCore.Chrome.ShowMessageDialog (parent, primary, secondary);
+			return false;
+		} catch (GLib.GException e) when (e.Message.Contains ("Permission denied") && e.Message.Contains ("Failed to open")) {
+			string primary = Translations.GetString ("Failed to save image");
+			// Translators: {0} is the name of a file that the user does not have write permission for.
+			string secondary = Translations.GetString ("You do not have access to modify '{0}'. The file or folder may be read-only.", file);
 
-				PintaCore.Chrome.ShowMessageDialog (parent, primary, secondary);
-				return false;
-			} else {
-				throw; // Only catch exceptions we know the reason for
-			}
+			PintaCore.Chrome.ShowMessageDialog (parent, primary, secondary);
+			return false;
 		} catch (OperationCanceledException) {
 			return false;
 		}
