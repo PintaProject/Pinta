@@ -39,6 +39,7 @@ public sealed class JuliaFractalEffect : BaseEffect
 	}
 
 	#region Algorithm Code Ported From PDN
+
 	private static readonly double log2_10000 = Math.Log (10000);
 
 	private static double Julia (double x, double y, double r, double i)
@@ -57,7 +58,7 @@ public sealed class JuliaFractalEffect : BaseEffect
 	{
 		JuliaSettings settings = CreateSettings (dst);
 		Span<ColorBgra> dst_data = dst.GetPixelData ();
-		foreach (Core.RectangleI rect in rois) {
+		foreach (RectangleI rect in rois) {
 			for (int y = rect.Top; y <= rect.Bottom; y++) {
 				var dst_row = dst_data.Slice (y * settings.w, settings.w);
 				for (int x = rect.Left; x <= rect.Right; x++) {

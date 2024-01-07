@@ -76,6 +76,7 @@ public sealed class MandelbrotFractalEffect : BaseEffect
 		int factor,
 		double xOffset,
 		double yOffset,
+		bool invertColors,
 		ColorGradient colorGradient);
 	private MandelbrotSettings CreateSettings (ImageSurface dst)
 	{
@@ -102,6 +103,8 @@ public sealed class MandelbrotFractalEffect : BaseEffect
 			xOffset: x_offset,
 			yOffset: y_offset,
 
+			invertColors: Data.InvertColors,
+
 			colorGradient: GradientHelper.CreateColorGradient (Data.ColorScheme).Resized (0, 1023)
 		);
 	}
@@ -111,17 +114,16 @@ public sealed class MandelbrotFractalEffect : BaseEffect
 		MandelbrotSettings settings = CreateSettings (dst);
 
 		Span<ColorBgra> dst_data = dst.GetPixelData ();
-		foreach (Core.RectangleI rect in rois) {
+		foreach (RectangleI rect in rois) {
 			for (int y = rect.Top; y <= rect.Bottom; y++) {
 				var dst_row = dst_data.Slice (y * settings.w, settings.w);
 				for (int x = rect.Left; x <= rect.Right; x++) {
-					PointI target = new (x, y);
-					dst_row[x] = GetPixelColor (settings, target);
+					dst_row[x] = GetPixelColor (settings, new (x, y));
 				}
 			}
 		}
 
-		if (Data.InvertColors)
+		if (settings.invertColors)
 			invert_effect.Render (dst, dst, rois);
 	}
 
