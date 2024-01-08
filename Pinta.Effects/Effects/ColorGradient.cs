@@ -119,9 +119,7 @@ internal sealed class ColorGradient
 
 	private ColorBgra HandleNoStops (double position)
 	{
-		double valueSpan = MaximumPosition - MinimumPosition;
-		double positionOffset = position - MinimumPosition;
-		double fraction = positionOffset / valueSpan;
+		double fraction = Utility.InvLerp (MinimumPosition, MaximumPosition, position);
 		return ColorBgra.Lerp (StartColor, EndColor, fraction);
 	}
 
@@ -132,9 +130,7 @@ internal sealed class ColorGradient
 		if (immediatelyLower.Key == position) return immediatelyLower.Value;
 		int immediatelyHigherIndex = immediateLowerIndex + 1;
 		var immediatelyHigher = (immediatelyHigherIndex < sorted_stops.Count) ? sorted_stops[immediatelyHigherIndex] : KeyValuePair.Create (MaximumPosition, EndColor);
-		double valueSpan = immediatelyHigher.Key - immediatelyLower.Key;
-		double positionOffset = position - immediatelyLower.Key;
-		double fraction = positionOffset / valueSpan;
+		double fraction = Utility.InvLerp (immediatelyLower.Key, immediatelyHigher.Key, position);
 		return ColorBgra.Lerp (immediatelyLower.Value, immediatelyHigher.Value, fraction);
 	}
 
