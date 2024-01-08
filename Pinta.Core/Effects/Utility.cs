@@ -34,10 +34,7 @@ public static class Utility
 	/// <exception cref="ArgumentException">
 	/// Difference between upper and lower bounds is zero
 	/// </exception>
-	public static double InvLerp (
-		double from,
-		double to,
-		double value)
+	public static double InvLerp (double from, double to, double value)
 	{
 		double valueSpan = to - from;
 		if (valueSpan == 0)
