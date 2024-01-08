@@ -31,6 +31,9 @@ public static class Utility
 	public static double Lerp (double from, double to, double frac)
 		=> from + frac * (to - from);
 
+	/// <exception cref="ArgumentException">
+	/// Difference between upper and lower bounds is zero
+	/// </exception>
 	public static double InvLerp (
 		double from,
 		double to,
