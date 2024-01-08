@@ -31,7 +31,7 @@ internal sealed class ColorGradient
 	/// </summary>
 	public double MaximumPosition { get; }
 
-	private readonly IReadOnlyList<GradientStop> sorted_stops;
+	private readonly IReadOnlyList<KeyValuePair<double, ColorBgra>> sorted_stops;
 
 	internal ColorGradient (
 		ColorBgra startColor,
@@ -42,7 +42,7 @@ internal sealed class ColorGradient
 	{
 		CheckBoundsConsistency (minPosition, maxPosition);
 
-		var sortedStops = GetSortedStops (gradientStops);
+		var sortedStops = gradientStops.OrderBy (stop => stop.Key).ToArray ();
 		CheckStopsBounds (sortedStops, minPosition, maxPosition);
 		CheckUniqueness (sortedStops);
 
@@ -53,22 +53,15 @@ internal sealed class ColorGradient
 		sorted_stops = sortedStops;
 	}
 
-	private static IReadOnlyList<GradientStop> GetSortedStops (IEnumerable<KeyValuePair<double, ColorBgra>> gradientStops)
-		=>
-			gradientStops
-			.Select (kvp => new GradientStop (kvp.Key, kvp.Value))
-			.OrderBy (stop => stop.Position)
-			.ToArray ();
-
-	private static void CheckStopsBounds (IReadOnlyList<GradientStop> sortedStops, double minPosition, double maxPosition)
+	private static void CheckStopsBounds (IReadOnlyList<KeyValuePair<double, ColorBgra>> sortedStops, double minPosition, double maxPosition)
 	{
-		if (sortedStops.Count > 0 && sortedStops[0].Position <= minPosition) throw new ArgumentException ($"Lowest key in gradient stops has to be greater than {nameof (minPosition)}");
-		if (sortedStops.Count > 0 && sortedStops[^1].Position >= maxPosition) throw new ArgumentException ($"Greatest key in gradient stops has to be lower than {nameof (maxPosition)}");
+		if (sortedStops.Count > 0 && sortedStops[0].Key <= minPosition) throw new ArgumentException ($"Lowest key in gradient stops has to be greater than {nameof (minPosition)}");
+		if (sortedStops.Count > 0 && sortedStops[^1].Key >= maxPosition) throw new ArgumentException ($"Greatest key in gradient stops has to be lower than {nameof (maxPosition)}");
 	}
 
-	private static void CheckUniqueness (IReadOnlyList<GradientStop> sortedStops)
+	private static void CheckUniqueness (IReadOnlyList<KeyValuePair<double, ColorBgra>> sortedStops)
 	{
-		var distinctPositions = sortedStops.GroupBy (s => s.Position).Count ();
+		var distinctPositions = sortedStops.GroupBy (s => s.Key).Count ();
 		if (distinctPositions != sortedStops.Count) throw new ArgumentException ("Cannot have more than one stop in the same position");
 	}
 
@@ -77,6 +70,11 @@ internal sealed class ColorGradient
 		if (minPosition >= maxPosition) throw new ArgumentException ($"{nameof (minPosition)} has to be lower than {nameof (maxPosition)}");
 	}
 
+	/// <summary>
+	/// Creates new gradient object with the lower and upper bounds
+	/// (along with all of its stops) adjusted, proportionally,
+	/// to the provided lower and upper bounds.
+	/// </summary>
 	public ColorGradient Resized (double minPosition, double maxPosition)
 	{
 		CheckBoundsConsistency (minPosition, maxPosition);
@@ -86,12 +84,12 @@ internal sealed class ColorGradient
 		double newProportion = newSpan / currentSpan;
 		double newMinRelativeOffset = minPosition - MinimumPosition;
 
-		KeyValuePair<double, ColorBgra> ToNewStop (GradientStop stop)
+		KeyValuePair<double, ColorBgra> ToNewStop (KeyValuePair<double, ColorBgra> stop)
 		{
-			double stopToMinOffset = stop.Position - MinimumPosition;
+			double stopToMinOffset = stop.Key - MinimumPosition;
 			double adjustedOffset = stopToMinOffset * newProportion;
 			double newPosition = minPosition + adjustedOffset;
-			return KeyValuePair.Create (newPosition, stop.Color);
+			return KeyValuePair.Create (newPosition, stop.Value);
 		}
 
 		return new (
@@ -130,21 +128,19 @@ internal sealed class ColorGradient
 	private ColorBgra HandleWithStops (double position)
 	{
 		int immediateLowerIndex = BinarySearchLowerOrEqual (sorted_stops, position);
-		var immediatelyLower = immediateLowerIndex < 0 ? new GradientStop (MinimumPosition, StartColor) : sorted_stops[immediateLowerIndex];
-		if (immediatelyLower.Position == position) return immediatelyLower.Color;
+		var immediatelyLower = immediateLowerIndex < 0 ? KeyValuePair.Create (MinimumPosition, StartColor) : sorted_stops[immediateLowerIndex];
+		if (immediatelyLower.Key == position) return immediatelyLower.Value;
 		int immediatelyHigherIndex = immediateLowerIndex + 1;
-		var immediatelyHigher = (immediatelyHigherIndex < sorted_stops.Count) ? sorted_stops[immediatelyHigherIndex] : new GradientStop (MaximumPosition, EndColor);
-		double valueSpan = immediatelyHigher.Position - immediatelyLower.Position;
-		double positionOffset = position - immediatelyLower.Position;
+		var immediatelyHigher = (immediatelyHigherIndex < sorted_stops.Count) ? sorted_stops[immediatelyHigherIndex] : KeyValuePair.Create (MaximumPosition, EndColor);
+		double valueSpan = immediatelyHigher.Key - immediatelyLower.Key;
+		double positionOffset = position - immediatelyLower.Key;
 		double fraction = positionOffset / valueSpan;
-		return ColorBgra.Lerp (immediatelyLower.Color, immediatelyHigher.Color, fraction);
+		return ColorBgra.Lerp (immediatelyLower.Value, immediatelyHigher.Value, fraction);
 	}
-
-	private readonly record struct GradientStop (double Position, ColorBgra Color);
 
 	/// <returns>Index of number immediately lower than target. If not found, it returns -1</returns>
 	/// <param name="arr">Array assumed to be sorted by key</param>
-	private static int BinarySearchLowerOrEqual (IReadOnlyList<GradientStop> arr, double target)
+	private static int BinarySearchLowerOrEqual (IReadOnlyList<KeyValuePair<double, ColorBgra>> arr, double target)
 	{
 		// TODO: Make this method more generic?
 		if (arr.Count == 0) return -1;
@@ -154,9 +150,9 @@ internal sealed class ColorGradient
 
 		while (left <= right) {
 			int mid = left + (right - left) / 2;
-			if (arr[mid].Position == target)
+			if (arr[mid].Key == target)
 				return mid;
-			else if (arr[mid].Position < target)
+			else if (arr[mid].Key < target)
 				left = mid + 1;
 			else
 				right = mid - 1;
@@ -169,6 +165,10 @@ internal sealed class ColorGradient
 
 	private static IEnumerable<KeyValuePair<double, ColorBgra>> EmptyStops () => Enumerable.Empty<KeyValuePair<double, ColorBgra>> ();
 
+	/// <summary>
+	/// Creates gradient mapping based on start and end color,
+	/// and the provided lower and upper bounds
+	/// </summary>
 	public static ColorGradient Create (ColorBgra start, ColorBgra end, double minimum, double maximum)
 		=> new (
 			start,
@@ -178,6 +178,10 @@ internal sealed class ColorGradient
 			EmptyStops ()
 		);
 
+	/// <summary>
+	/// Creates gradient mapping based on start and end color,
+	/// and the provided lower and upper bounds, and color stops
+	/// </summary>
 	public static ColorGradient Create (ColorBgra start, ColorBgra end, double minimum, double maximum, IEnumerable<KeyValuePair<double, ColorBgra>> stops)
 		=> new (
 			start,
