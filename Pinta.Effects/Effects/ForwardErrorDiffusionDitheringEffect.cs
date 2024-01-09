@@ -35,6 +35,8 @@ public sealed class ForwardErrorDiffusionDitheringEffect : BaseEffect
 
 		ErrorDiffusionMatrix diffusionMatrix = GetPredefinedDiffusionMatrix (Data.DiffusionMatrix);
 
+		ImmutableArray<ColorBgra> palette = GetPredefinedPalette (Data.PaletteChoice);
+
 		int sourceWidth = src.Width;
 		int sourceHeight = src.Height;
 
@@ -51,7 +53,7 @@ public sealed class ForwardErrorDiffusionDitheringEffect : BaseEffect
 
 				var originalPixel = dst_data[currentIndex];
 
-				var closestColor = FindClosestPaletteColor (originalPixel);
+				var closestColor = FindClosestPaletteColor (palette, originalPixel);
 
 				int errorRed = originalPixel.R - closestColor.R;
 				int errorGreen = originalPixel.G - closestColor.G;
@@ -102,11 +104,10 @@ public sealed class ForwardErrorDiffusionDitheringEffect : BaseEffect
 		);
 	}
 
-	private ColorBgra FindClosestPaletteColor (ColorBgra original)
+	private static ColorBgra FindClosestPaletteColor (ImmutableArray<ColorBgra> palette, ColorBgra original)
 	{
 		double minDistance = double.MaxValue;
 		ColorBgra closestColor = ColorBgra.FromBgra (0, 0, 0, 1);
-		var palette = GetPredefinedPalette (Data.PaletteChoice);
 		foreach (var paletteColor in palette) {
 			double distance = CalculateDistance (original, paletteColor);
 			if (distance >= minDistance)
@@ -333,7 +334,7 @@ public sealed class ForwardErrorDiffusionDitheringEffect : BaseEffect
 
 		private static IEnumerable<ColorBgra> EnumerateOldMsPaintColors ()
 		{
-			// https://wiki.vg-resource.com/
+			// https://wiki.vg-resource.com/Paint
 			yield return ColorBgra.FromBgr (0, 0, 0); // Black
 			yield return ColorBgra.FromBgr (255, 255, 255); // White
 			yield return ColorBgra.FromBgr (128, 128, 128); // Dark gray
