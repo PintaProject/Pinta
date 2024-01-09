@@ -105,10 +105,13 @@ public sealed class ForwardErrorDiffusionDitheringEffect : BaseEffect
 
 	private static ColorBgra FindClosestPaletteColor (ImmutableArray<ColorBgra> palette, ColorBgra original)
 	{
+		if (palette.IsDefault) throw new ArgumentException ("Palette not initialized", nameof (palette));
+		if (palette.Length == 0) throw new ArgumentException ("Palette cannot be empty", nameof (palette));
+		if (palette.Length == 1) return palette[0];
 		double minDistance = double.MaxValue;
 		ColorBgra closestColor = ColorBgra.FromBgra (0, 0, 0, 1);
 		foreach (var paletteColor in palette) {
-			double distance = CalculateDistance (original, paletteColor);
+			double distance = CalculateSquaredDistance (original, paletteColor);
 			if (distance >= minDistance) continue;
 			minDistance = distance;
 			closestColor = paletteColor;
@@ -116,12 +119,12 @@ public sealed class ForwardErrorDiffusionDitheringEffect : BaseEffect
 		return closestColor;
 	}
 
-	private static double CalculateDistance (ColorBgra color1, ColorBgra color2)
+	private static double CalculateSquaredDistance (ColorBgra color1, ColorBgra color2)
 	{
-		int deltaR = color1.R - color2.R;
-		int deltaG = color1.G - color2.G;
-		int deltaB = color1.B - color2.B;
-		return Math.Sqrt (deltaR * deltaR + deltaG * deltaG + deltaB * deltaB); // Euclidean distance
+		double deltaR = color1.R - color2.R;
+		double deltaG = color1.G - color2.G;
+		double deltaB = color1.B - color2.B;
+		return deltaR * deltaR + deltaG * deltaG + deltaB * deltaB;
 	}
 
 	public sealed class ErrorDiffusionMatrix
