@@ -29,21 +29,19 @@ public sealed class ForwardErrorDiffusionDitheringEffect : BaseEffect
 		EffectHelper.LaunchSimpleEffectDialog (this);
 	}
 
-	public override void Render (ImageSurface src, ImageSurface dest, ReadOnlySpan<RectangleI> rois)
+	protected override void Render (ImageSurface src, ImageSurface dest, RectangleI roi)
 	{
 		var dst_data = dest.GetPixelData ();
-		foreach (var rect in rois) {
-			for (int y = rect.Top; y <= rect.Bottom; y++) {
-				for (int x = rect.Left; x <= rect.Right; x++) {
-					var currentIndex = y * src.Width + x;
-					var originalPixel = dst_data[currentIndex];
-					var closestColor = FindClosestPaletteColor (originalPixel);
-					int errorRed = originalPixel.R - closestColor.R;
-					int errorGreen = originalPixel.G - closestColor.G;
-					int errorBlue = originalPixel.B - closestColor.B;
-					dst_data[currentIndex] = closestColor;
-					DistributeError (dst_data, new (x, y), errorRed, errorGreen, errorBlue, src.Width, src.Height);
-				}
+		for (int y = roi.Top; y <= roi.Bottom; y++) {
+			for (int x = roi.Left; x <= roi.Right; x++) {
+				var currentIndex = y * src.Width + x;
+				var originalPixel = dst_data[currentIndex];
+				var closestColor = FindClosestPaletteColor (originalPixel);
+				int errorRed = originalPixel.R - closestColor.R;
+				int errorGreen = originalPixel.G - closestColor.G;
+				int errorBlue = originalPixel.B - closestColor.B;
+				dst_data[currentIndex] = closestColor;
+				DistributeError (dst_data, new (x, y), errorRed, errorGreen, errorBlue, src.Width, src.Height);
 			}
 		}
 	}
