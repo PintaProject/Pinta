@@ -53,7 +53,6 @@ public sealed class Palette
 
 	public Color this[int index] {
 		get => colors[index];
-
 		set {
 			colors[index] = value;
 			OnPaletteChanged ();
@@ -94,91 +93,96 @@ public sealed class Palette
 
 	private static IEnumerable<Color> EnumerateDefaultColors ()
 	{
-		yield return new Color (255 / 255f, 255 / 255f, 255 / 255f);
-		yield return new Color (0 / 255f, 0 / 255f, 0 / 255f);
+		yield return new (255 / 255f, 255 / 255f, 255 / 255f);
+		yield return new (0 / 255f, 0 / 255f, 0 / 255f);
 
-		yield return new Color (160 / 255f, 160 / 255f, 160 / 255f);
-		yield return new Color (128 / 255f, 128 / 255f, 128 / 255f);
+		yield return new (160 / 255f, 160 / 255f, 160 / 255f);
+		yield return new (128 / 255f, 128 / 255f, 128 / 255f);
 
-		yield return new Color (64 / 255f, 64 / 255f, 64 / 255f);
-		yield return new Color (48 / 255f, 48 / 255f, 48 / 255f);
+		yield return new (64 / 255f, 64 / 255f, 64 / 255f);
+		yield return new (48 / 255f, 48 / 255f, 48 / 255f);
 
-		yield return new Color (255 / 255f, 0 / 255f, 0 / 255f);
-		yield return new Color (255 / 255f, 127 / 255f, 127 / 255f);
+		yield return new (255 / 255f, 0 / 255f, 0 / 255f);
+		yield return new (255 / 255f, 127 / 255f, 127 / 255f);
 
-		yield return new Color (255 / 255f, 106 / 255f, 0 / 255f);
-		yield return new Color (255 / 255f, 178 / 255f, 127 / 255f);
+		yield return new (255 / 255f, 106 / 255f, 0 / 255f);
+		yield return new (255 / 255f, 178 / 255f, 127 / 255f);
 
-		yield return new Color (255 / 255f, 216 / 255f, 0 / 255f);
-		yield return new Color (255 / 255f, 233 / 255f, 127 / 255f);
+		yield return new (255 / 255f, 216 / 255f, 0 / 255f);
+		yield return new (255 / 255f, 233 / 255f, 127 / 255f);
 
-		yield return new Color (182 / 255f, 255 / 255f, 0 / 255f);
-		yield return new Color (218 / 255f, 255 / 255f, 127 / 255f);
+		yield return new (182 / 255f, 255 / 255f, 0 / 255f);
+		yield return new (218 / 255f, 255 / 255f, 127 / 255f);
 
-		yield return new Color (76 / 255f, 255 / 255f, 0 / 255f);
-		yield return new Color (165 / 255f, 255 / 255f, 127 / 255f);
+		yield return new (76 / 255f, 255 / 255f, 0 / 255f);
+		yield return new (165 / 255f, 255 / 255f, 127 / 255f);
 
-		yield return new Color (0 / 255f, 255 / 255f, 33 / 255f);
-		yield return new Color (127 / 255f, 255 / 255f, 142 / 255f);
+		yield return new (0 / 255f, 255 / 255f, 33 / 255f);
+		yield return new (127 / 255f, 255 / 255f, 142 / 255f);
 
-		yield return new Color (0 / 255f, 255 / 255f, 144 / 255f);
-		yield return new Color (127 / 255f, 255 / 255f, 197 / 255f);
+		yield return new (0 / 255f, 255 / 255f, 144 / 255f);
+		yield return new (127 / 255f, 255 / 255f, 197 / 255f);
 
-		yield return new Color (0 / 255f, 255 / 255f, 255 / 255f);
-		yield return new Color (127 / 255f, 255 / 255f, 255 / 255f);
+		yield return new (0 / 255f, 255 / 255f, 255 / 255f);
+		yield return new (127 / 255f, 255 / 255f, 255 / 255f);
 
-		yield return new Color (0 / 255f, 148 / 255f, 255 / 255f);
-		yield return new Color (127 / 255f, 201 / 255f, 255 / 255f);
+		yield return new (0 / 255f, 148 / 255f, 255 / 255f);
+		yield return new (127 / 255f, 201 / 255f, 255 / 255f);
 
-		yield return new Color (0 / 255f, 38 / 255f, 255 / 255f);
-		yield return new Color (127 / 255f, 146 / 255f, 255 / 255f);
+		yield return new (0 / 255f, 38 / 255f, 255 / 255f);
+		yield return new (127 / 255f, 146 / 255f, 255 / 255f);
 
-		yield return new Color (72 / 255f, 0 / 255f, 255 / 255f);
-		yield return new Color (161 / 255f, 127 / 255f, 255 / 255f);
+		yield return new (72 / 255f, 0 / 255f, 255 / 255f);
+		yield return new (161 / 255f, 127 / 255f, 255 / 255f);
 
-		yield return new Color (178 / 255f, 0 / 255f, 255 / 255f);
-		yield return new Color (214 / 255f, 127 / 255f, 255 / 255f);
+		yield return new (178 / 255f, 0 / 255f, 255 / 255f);
+		yield return new (214 / 255f, 127 / 255f, 255 / 255f);
 
-		yield return new Color (255 / 255f, 0 / 255f, 220 / 255f);
-		yield return new Color (255 / 255f, 127 / 255f, 237 / 255f);
+		yield return new (255 / 255f, 0 / 255f, 220 / 255f);
+		yield return new (255 / 255f, 127 / 255f, 237 / 255f);
 
-		yield return new Color (255 / 255f, 0 / 255f, 110 / 255f);
-		yield return new Color (255 / 255f, 127 / 255f, 182 / 255f);
+		yield return new (255 / 255f, 0 / 255f, 110 / 255f);
+		yield return new (255 / 255f, 127 / 255f, 182 / 255f);
 	}
 
 	public void Load (Gio.File file)
 	{
-		List<Color>? loaded_colors = null;
-		var errors = new StringBuilder ();
+		(var loadedColors, var errors) = LoadColors (file);
 
-		var loader = PintaCore.PaletteFormats.GetFormatByFilename (file.GetDisplayName ())?.Loader;
-		if (loader != null) {
-			loaded_colors = loader.Load (file);
-		} else {
-			// Not a recognized extension, so attempt all formats
-			foreach (var format in PintaCore.PaletteFormats.Formats.Where (f => !f.IsWriteOnly ())) {
-				try {
-					loaded_colors = format.Loader.Load (file);
-					if (loaded_colors != null) {
-						break;
-					}
-				} catch (Exception e) {
-					// Record errors in case none of the formats work.
-					errors.AppendLine ($"Failed to load palette as {format.Filter.Name}:");
-					errors.Append (e.ToString ());
-					errors.AppendLine ();
-				}
-			}
-		}
-
-		if (loaded_colors is not null) {
-			colors = loaded_colors;
+		if (loadedColors is not null) {
+			colors = loadedColors;
 			colors.TrimExcess ();
 			OnPaletteChanged ();
 		} else {
 			var parent = PintaCore.Chrome.MainWindow;
 			ShowUnsupportedFormatDialog (parent, file.GetParseName (), Translations.GetString ("Unsupported palette format"), errors.ToString ());
 		}
+	}
+
+	static (List<Color>? loadedColors, StringBuilder errors) LoadColors (Gio.File file)
+	{
+		var loader = PintaCore.PaletteFormats.GetFormatByFilename (file.GetDisplayName ())?.Loader;
+
+		if (loader != null)
+			return (loader.Load (file), new StringBuilder ());
+
+		StringBuilder errors = new ();
+
+		// Not a recognized extension, so attempt all formats
+		foreach (var format in PintaCore.PaletteFormats.Formats.Where (f => !f.IsWriteOnly ())) {
+			try {
+				var loaded_colors = format.Loader.Load (file);
+				if (loaded_colors != null)
+					return (loaded_colors, errors);
+			} catch (Exception e) {
+				// Record errors in case none of the formats work.
+				errors.AppendLine ($"Failed to load palette as {format.Filter.Name}:");
+				errors.Append (e.ToString ());
+				errors.AppendLine ();
+			}
+		}
+
+		return (null, errors);
 	}
 
 	public void Save (Gio.File file, IPaletteSaver saver)
@@ -192,12 +196,14 @@ public sealed class Palette
 		details.AppendLine (Translations.GetString ("Could not open file: {0}", filename));
 		details.AppendLine (Translations.GetString ("Pinta supports the following palette formats:"));
 
-		var extensions = from format in PintaCore.PaletteFormats.Formats
-				 where format.Loader != null
-				 from extension in format.Extensions
-				 where char.IsLower (extension.FirstOrDefault ())
-				 orderby extension
-				 select extension;
+		var extensions =
+			from format in PintaCore.PaletteFormats.Formats
+			where format.Loader != null
+			from extension in format.Extensions
+			where char.IsLower (extension.FirstOrDefault ())
+			orderby extension
+			select extension;
+
 		details.AppendJoin (", ", extensions);
 		details.AppendLine ();
 		details.AppendLine (errors);
