@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Collections.Immutable;
 using System.ComponentModel;
 using System.Linq;
+using Adw;
 using Cairo;
 using Pinta.Core;
 using Pinta.Gui.Widgets;
@@ -29,61 +30,63 @@ public sealed class ForwardErrorDiffusionDitheringEffect : BaseEffect
 		EffectHelper.LaunchSimpleEffectDialog (this);
 	}
 
+	private sealed record DitheringSettings (
+		ErrorDiffusionMatrix diffusionMatrix,
+		ImmutableArray<ColorBgra> palette,
+		int sourceWidth,
+		int sourceHeight);
+
+	private DitheringSettings CreateSettings (ImageSurface src)
+		=> new (
+			diffusionMatrix: GetPredefinedDiffusionMatrix (Data.DiffusionMatrix),
+			palette: GetPredefinedPalette (Data.PaletteChoice),
+			sourceWidth: src.Width,
+			sourceHeight: src.Height
+		);
+
 	protected override void Render (ImageSurface src, ImageSurface dest, RectangleI roi)
 	{
+		DitheringSettings settings = CreateSettings (src);
+
 		Span<ColorBgra> dst_data = dest.GetPixelData ();
 
-		ErrorDiffusionMatrix diffusionMatrix = GetPredefinedDiffusionMatrix (Data.DiffusionMatrix);
+		for (int y = roi.Top; y <= roi.Bottom; y++) {
 
-		ImmutableArray<ColorBgra> palette = GetPredefinedPalette (Data.PaletteChoice);
+			for (int x = roi.Left; x <= roi.Right; x++) {
 
-		int sourceWidth = src.Width;
-		int sourceHeight = src.Height;
+				int currentIndex = y * settings.sourceWidth + x;
+				ColorBgra originalPixel = dst_data[currentIndex];
+				ColorBgra closestColor = FindClosestPaletteColor (settings.palette, originalPixel);
 
-		int top = roi.Top;
-		int bottom = roi.Bottom;
-		int left = roi.Left;
-		int right = roi.Right;
-
-		for (int y = top; y <= bottom; y++) {
-
-			for (int x = left; x <= right; x++) {
-
-				var currentIndex = y * sourceWidth + x;
-
-				var originalPixel = dst_data[currentIndex];
-
-				var closestColor = FindClosestPaletteColor (palette, originalPixel);
+				dst_data[currentIndex] = closestColor;
 
 				int errorRed = originalPixel.R - closestColor.R;
 				int errorGreen = originalPixel.G - closestColor.G;
 				int errorBlue = originalPixel.B - closestColor.B;
 
-				dst_data[currentIndex] = closestColor;
+				for (int r = 0; r < settings.diffusionMatrix.Rows; r++) {
 
-				for (int r = 0; r < diffusionMatrix.Rows; r++) {
+					for (int c = 0; c < settings.diffusionMatrix.Columns; c++) {
 
-					for (int c = 0; c < diffusionMatrix.Columns; c++) {
-
-						var weight = diffusionMatrix[r, c];
+						var weight = settings.diffusionMatrix[r, c];
 
 						if (weight <= 0)
 							continue;
 
 						PointI thisItem = new (
-							X: x + c - diffusionMatrix.ColumnsToLeft,
+							X: x + c - settings.diffusionMatrix.ColumnsToLeft,
 							Y: y + r
 						);
 
-						if (thisItem.X < 0 || thisItem.X >= sourceWidth)
+						if (thisItem.X < 0 || thisItem.X >= settings.sourceWidth)
 							continue;
 
-						if (thisItem.Y < 0 || thisItem.Y >= sourceHeight)
+						if (thisItem.Y < 0 || thisItem.Y >= settings.sourceHeight)
 							continue;
 
-						int idx = (thisItem.Y * sourceWidth) + thisItem.X;
+						int idx = (thisItem.Y * settings.sourceWidth) + thisItem.X;
 
-						double factor = ((double) weight) / diffusionMatrix.TotalWeight;
+						double factor = ((double) weight) / settings.diffusionMatrix.TotalWeight;
 
 						dst_data[idx] = AddError (dst_data[idx], factor, errorRed, errorGreen, errorBlue);
 					}
