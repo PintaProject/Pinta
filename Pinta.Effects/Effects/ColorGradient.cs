@@ -134,7 +134,6 @@ internal sealed class ColorGradient
 		int immediatelyHigherIndex = BinarySearchHigherOrEqual (sorted_positions, position);
 		var immediatelyHigher = immediatelyHigherIndex < 0 ? KeyValuePair.Create (MaximumPosition, EndColor) : KeyValuePair.Create (sorted_positions[immediatelyHigherIndex], sorted_colors[immediatelyHigherIndex]);
 		if (immediatelyHigher.Key == position) return immediatelyHigher.Value;
-
 		int immediatelyLowerIndex = immediatelyHigherIndex - 1;
 		var immediatelyLower = immediatelyLowerIndex >= 0 ? KeyValuePair.Create (sorted_positions[immediatelyLowerIndex], sorted_colors[immediatelyLowerIndex]) : KeyValuePair.Create (MinimumPosition, StartColor);
 		double fraction = Utility.InvLerp (immediatelyLower.Key, immediatelyHigher.Key, position);
@@ -151,7 +150,8 @@ internal sealed class ColorGradient
 		return foundComplement; // Found larger
 	}
 
-	private static IEnumerable<KeyValuePair<double, ColorBgra>> EmptyStops () => Enumerable.Empty<KeyValuePair<double, ColorBgra>> ();
+	private static IEnumerable<KeyValuePair<double, ColorBgra>> EmptyStops ()
+		=> Enumerable.Empty<KeyValuePair<double, ColorBgra>> ();
 
 	/// <summary>
 	/// Creates gradient mapping based on start and end color,
