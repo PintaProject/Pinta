@@ -126,38 +126,26 @@ internal sealed class ColorGradient
 
 	private ColorBgra HandleWithStops (double position)
 	{
-		int immediateLowerIndex = BinarySearchLowerOrEqual (sorted_stops, position);
-		var immediatelyLower = immediateLowerIndex < 0 ? KeyValuePair.Create (MinimumPosition, StartColor) : sorted_stops[immediateLowerIndex];
-		if (immediatelyLower.Key == position) return immediatelyLower.Value;
-		int immediatelyHigherIndex = immediateLowerIndex + 1;
-		var immediatelyHigher = (immediatelyHigherIndex < sorted_stops.Length) ? sorted_stops[immediatelyHigherIndex] : KeyValuePair.Create (MaximumPosition, EndColor);
+		int immediatelyHigherIndex = BinarySearchHigherOrEqual (sorted_stops, position);
+		var immediatelyHigher = immediatelyHigherIndex < 0 ? KeyValuePair.Create (MaximumPosition, EndColor) : sorted_stops[immediatelyHigherIndex];
+		if (immediatelyHigher.Key == position) return immediatelyHigher.Value;
+		int immediatelyLowerIndex = immediatelyHigherIndex - 1;
+		var immediatelyLower = immediatelyLowerIndex >= 0 ? sorted_stops[immediatelyLowerIndex] : KeyValuePair.Create (MinimumPosition, StartColor);
 		double fraction = Utility.InvLerp (immediatelyLower.Key, immediatelyHigher.Key, position);
 		return ColorBgra.Lerp (immediatelyLower.Value, immediatelyHigher.Value, fraction);
 	}
 
-	/// <returns>Index of number immediately lower than target. If not found, it returns -1</returns>
-	/// <param name="arr">Array assumed to be sorted by key</param>
-	private static int BinarySearchLowerOrEqual (ImmutableArray<KeyValuePair<double, ColorBgra>> arr, double target)
+	private static readonly IComparer<KeyValuePair<double, ColorBgra>> stop_position_comparer
+		= Comparer<KeyValuePair<double, ColorBgra>>.Create ((a, b) => a.Key.CompareTo (b.Key));
+	private static int BinarySearchHigherOrEqual (ImmutableArray<KeyValuePair<double, ColorBgra>> sortedStops, double target)
 	{
-		// TODO: Make this method more generic?
-		if (arr.Length == 0) return -1;
-
-		int left = 0;
-		int right = arr.Length - 1;
-
-		while (left <= right) {
-			int mid = left + (right - left) / 2;
-			if (arr[mid].Key == target)
-				return mid;
-			else if (arr[mid].Key < target)
-				left = mid + 1;
-			else
-				right = mid - 1;
-		}
-
-		// If target is not found, 'left' will be the index of the number just greater than target
-		// so 'left - 1' will be the index of the number immediately lower than target
-		return left - 1;
+		// https://learn.microsoft.com/en-us/dotnet/api/system.collections.immutable.immutablearray.binarysearch
+		var adapted = KeyValuePair.Create (target, ColorBgra.Black);
+		int found = sortedStops.BinarySearch (adapted, stop_position_comparer);
+		if (found > 0) return found; // Exact match
+		int foundComplement = ~found;
+		if (foundComplement == sortedStops.Length) return -1; // Not found
+		return foundComplement; // Found larger
 	}
 
 	private static IEnumerable<KeyValuePair<double, ColorBgra>> EmptyStops () => Enumerable.Empty<KeyValuePair<double, ColorBgra>> ();
