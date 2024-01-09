@@ -90,29 +90,12 @@ public static class Utility
 		if (rects.Length == 0)
 			return RectangleI.Zero;
 
-		int left = rects[startIndex].Left;
-		int top = rects[startIndex].Top;
-		int right = rects[startIndex].Right;
-		int bottom = rects[startIndex].Bottom;
+		RectangleI unionsAggregate = rects[startIndex];
 
-		for (int i = startIndex + 1; i < startIndex + length; ++i) {
+		for (int i = startIndex + 1; i < startIndex + length; ++i)
+			unionsAggregate = unionsAggregate.Union (rects[i]);
 
-			RectangleI rect = rects[i];
-
-			if (rect.Left < left)
-				left = rect.Left;
-
-			if (rect.Top < top)
-				top = rect.Top;
-
-			if (rect.Right > right)
-				right = rect.Right;
-
-			if (rect.Bottom > bottom)
-				bottom = rect.Bottom;
-		}
-
-		return RectangleI.FromLTRB (left, top, right, bottom);
+		return unionsAggregate;
 	}
 
 	public static int ColorDifferenceSquared (ColorBgra a, ColorBgra b)
