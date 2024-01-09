@@ -50,12 +50,15 @@ public static class Utility
 	/// <exception cref="ArgumentException">
 	/// Difference between upper and lower bounds is zero
 	/// </exception>
-	public static double InvLerp (double from, double to, double value)
+	public static TNumber InvLerp<TNumber> (
+		TNumber from,
+		TNumber to,
+		TNumber value) where TNumber : INumber<TNumber>
 	{
-		double valueSpan = to - from;
-		if (valueSpan == 0)
+		TNumber valueSpan = to - from;
+		if (valueSpan == TNumber.Zero)
 			throw new ArgumentException ("Difference between upper and lower bounds cannot be zero", $"{nameof (from)}, {nameof (to)}");
-		double offset = value - from;
+		TNumber offset = value - from;
 		return offset / valueSpan;
 	}
 
