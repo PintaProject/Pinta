@@ -135,7 +135,7 @@ internal sealed class ColorGradient
 		var immediatelyHigher = immediatelyHigherIndex < 0 ? KeyValuePair.Create (MaximumPosition, EndColor) : KeyValuePair.Create (sorted_positions[immediatelyHigherIndex], sorted_colors[immediatelyHigherIndex]);
 		if (immediatelyHigher.Key == position) return immediatelyHigher.Value;
 		int immediatelyLowerIndex = immediatelyHigherIndex - 1;
-		var immediatelyLower = immediatelyLowerIndex >= 0 ? KeyValuePair.Create (sorted_positions[immediatelyLowerIndex], sorted_colors[immediatelyLowerIndex]) : KeyValuePair.Create (MinimumPosition, StartColor);
+		var immediatelyLower = immediatelyLowerIndex < 0 ? KeyValuePair.Create (MinimumPosition, StartColor) : KeyValuePair.Create (sorted_positions[immediatelyLowerIndex], sorted_colors[immediatelyLowerIndex]);
 		double fraction = Utility.InvLerp (immediatelyLower.Key, immediatelyHigher.Key, position);
 		return ColorBgra.Lerp (immediatelyLower.Value, immediatelyHigher.Value, fraction);
 	}
