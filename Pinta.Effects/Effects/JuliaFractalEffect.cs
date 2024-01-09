@@ -45,13 +45,13 @@ public sealed class JuliaFractalEffect : BaseEffect
 	private static double Julia (double x, double y, double r, double i)
 	{
 		double c = 0;
-		while (c < 256 && ((x * x) + (y * y) < 10000)) {
+		while (c < 256 && Utility.MagnitudeSquared (x, y) < 10000) {
 			double t = x;
 			x = (x * x) - (y * y) + r;
 			y = (2 * t * y) + i;
 			++c;
 		}
-		return c - (2 - 2 * log2_10000 / Math.Log ((x * x) + (y * y)));
+		return c - (2 - 2 * log2_10000 / Math.Log (Utility.MagnitudeSquared (x, y)));
 	}
 
 	public override void Render (ImageSurface src, ImageSurface dst, ReadOnlySpan<RectangleI> rois)

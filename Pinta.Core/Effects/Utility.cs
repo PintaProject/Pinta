@@ -6,7 +6,6 @@
 /////////////////////////////////////////////////////////////////////////////////
 
 using System;
-using System.Numerics;
 using System.Reflection;
 
 namespace Pinta.Core;
@@ -30,6 +29,21 @@ public static class Utility
 
 	public static double Lerp (double from, double to, double frac)
 		=> from + frac * (to - from);
+
+	public static double MagnitudeSquared (double x, double y)
+		=> x * x + y * y;
+
+	public static double Magnitude (double x, double y)
+		=> Math.Sqrt (x * x + y * y);
+
+	public static double Magnitude (this PointD point)
+		=> Magnitude (point.X, point.Y);
+
+	public static double Magnitude (this PointI point)
+		=> Magnitude (point.X, point.Y);
+
+	public static double Distance (this PointD origin, in PointD dest)
+		=> Magnitude (origin - dest);
 
 	/// <exception cref="ArgumentException">
 	/// Difference between upper and lower bounds is zero

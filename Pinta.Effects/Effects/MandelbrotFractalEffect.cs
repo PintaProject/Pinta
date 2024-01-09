@@ -55,13 +55,13 @@ public sealed class MandelbrotFractalEffect : BaseEffect
 		int c = 0;
 		double x = 0;
 		double y = 0;
-		while ((c * factor) < 1024 && ((x * x) + (y * y)) < Max) {
+		while ((c * factor) < 1024 && Utility.MagnitudeSquared (x, y) < Max) {
 			double t = x;
 			x = (x * x) - (y * y) + r;
 			y = (2 * t * y) + i;
 			++c;
 		}
-		return c - Math.Log ((y * y) + (x * x)) * inv_log_max;
+		return c - Math.Log (Utility.MagnitudeSquared (x, y)) * inv_log_max;
 	}
 
 	private sealed record MandelbrotSettings (
