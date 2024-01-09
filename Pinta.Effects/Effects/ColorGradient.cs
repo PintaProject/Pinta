@@ -154,9 +154,10 @@ internal sealed class ColorGradient
 
 		var immediatelyLower = KeyValuePair.Create (sorted_positions[immediatelyLowerIndex], sorted_colors[immediatelyLowerIndex]);
 
-		double fraction = Utility.InvLerp (immediatelyLower.Key, immediatelyHigher.Key, position);
-
-		return ColorBgra.Lerp (immediatelyLower.Value, immediatelyHigher.Value, fraction);
+		return ColorBgra.Lerp (
+			immediatelyLower.Value,
+			immediatelyHigher.Value,
+			Utility.InvLerp (immediatelyLower.Key, immediatelyHigher.Key, position));
 	}
 
 	private static int BinarySearchHigherOrEqual (ImmutableArray<double> sortedPositions, double target)
