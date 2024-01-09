@@ -10,20 +10,14 @@ namespace Pinta.Effects.Tests;
 [TestFixture]
 internal sealed class GradientTests
 {
-	private static ColorBgra RandomColor ()
-	{
-		Random random = new ();
-		Span<byte> colorBytes = stackalloc byte[4];
-		random.NextBytes (colorBytes);
-		uint unsignedInteger = BitConverter.ToUInt32 (colorBytes);
-		return ColorBgra.FromUInt32 (unsignedInteger);
-	}
+	private static readonly ColorBgra default_start_color = ColorBgra.Black;
+	private static readonly ColorBgra default_end_color = ColorBgra.White;
 
 	[TestCase (0, 0)]
 	[TestCase (1, 0)]
 	public void Factory_Rejects_Inconsistent_Bounds (double minPosition, double maxPosition)
 	{
-		Assert.Throws<ArgumentException> (() => ColorGradient.Create (RandomColor (), RandomColor (), minPosition, maxPosition));
+		Assert.Throws<ArgumentException> (() => ColorGradient.Create (default_start_color, default_end_color, minPosition, maxPosition));
 	}
 
 	[TestCase (0, 1)]
@@ -32,7 +26,7 @@ internal sealed class GradientTests
 	[TestCase (1, 2)]
 	public void Factory_Accepts_Consistent_Bounds (double minPosition, double maxPosition)
 	{
-		Assert.DoesNotThrow (() => ColorGradient.Create (RandomColor (), RandomColor (), minPosition, maxPosition));
+		Assert.DoesNotThrow (() => ColorGradient.Create (default_start_color, default_end_color, minPosition, maxPosition));
 	}
 
 	[TestCaseSource (nameof (cases_stops_at_same_position))]
@@ -40,8 +34,8 @@ internal sealed class GradientTests
 	{
 		Assert.Throws<ArgumentException> (
 			() => ColorGradient.Create (
-				RandomColor (),
-				RandomColor (),
+				default_start_color,
+				default_end_color,
 				minPosition,
 				maxPosition,
 				stops
@@ -54,8 +48,8 @@ internal sealed class GradientTests
 	{
 		Assert.DoesNotThrow (
 			() => ColorGradient.Create (
-				RandomColor (),
-				RandomColor (),
+				default_start_color,
+				default_end_color,
 				minPosition,
 				maxPosition,
 				stops
@@ -68,8 +62,8 @@ internal sealed class GradientTests
 	{
 		Assert.Throws<ArgumentException> (
 			() => ColorGradient.Create (
-				RandomColor (),
-				RandomColor (),
+				default_start_color,
+				default_end_color,
 				minPosition,
 				maxPosition,
 				stops
@@ -82,9 +76,7 @@ internal sealed class GradientTests
 	[TestCaseSource (nameof (stops_color_checks))]
 	public void Gradient_Stop_Colors_Are_Same (double minPosition, double maxPosition, IReadOnlyDictionary<double, ColorBgra> checks)
 	{
-		ColorBgra randomStart = RandomColor ();
-		ColorBgra randomEnd = RandomColor ();
-		ColorGradient gradient = ColorGradient.Create (randomStart, randomEnd, minPosition, maxPosition, checks);
+		ColorGradient gradient = ColorGradient.Create (default_start_color, default_end_color, minPosition, maxPosition, checks);
 		foreach (var check in checks) {
 			var returned = gradient.GetColor (check.Key);
 			Assert.That (check.Value, Is.EqualTo (returned));
