@@ -39,6 +39,7 @@ public sealed class JuliaFractalEffect : BaseEffect
 	}
 
 	#region Algorithm Code Ported From PDN
+
 	private static readonly double log2_10000 = Math.Log (10000);
 
 	private static double Julia (double x, double y, double r, double i)
@@ -57,7 +58,7 @@ public sealed class JuliaFractalEffect : BaseEffect
 	{
 		JuliaSettings settings = CreateSettings (dst);
 		Span<ColorBgra> dst_data = dst.GetPixelData ();
-		foreach (Core.RectangleI rect in rois) {
+		foreach (RectangleI rect in rois) {
 			for (int y = rect.Top; y <= rect.Bottom; y++) {
 				var dst_row = dst_data.Slice (y * settings.w, settings.w);
 				for (int x = rect.Left; x <= rect.Right; x++) {
@@ -78,7 +79,8 @@ public sealed class JuliaFractalEffect : BaseEffect
 		int count,
 		double invCount,
 		double angleTheta,
-		int factor);
+		int factor,
+		ColorGradient colorGradient);
 	private JuliaSettings CreateSettings (ImageSurface dst)
 	{
 		var w = dst.Width;
@@ -94,7 +96,8 @@ public sealed class JuliaFractalEffect : BaseEffect
 			count: count,
 			invCount: 1.0 / count,
 			angleTheta: (Data.Angle.Degrees * Math.PI * 2) / 360.0,
-			factor: Data.Factor
+			factor: Data.Factor,
+			colorGradient: GradientHelper.CreateColorGradient (Data.ColorScheme).Resized (0, 1023)
 		);
 	}
 
@@ -126,13 +129,22 @@ public sealed class JuliaFractalEffect : BaseEffect
 
 			double c = settings.factor * j;
 
-			b += Utility.ClampToByte (c - 768);
-			g += Utility.ClampToByte (c - 512);
-			r += Utility.ClampToByte (c - 256);
-			a += Utility.ClampToByte (c - 0);
+			double clamped_c = Math.Clamp (c, settings.colorGradient.StartPosition, settings.colorGradient.EndPosition);
+
+			ColorBgra colorAddend = settings.colorGradient.GetColor (clamped_c);
+
+			b += colorAddend.B;
+			g += colorAddend.G;
+			r += colorAddend.R;
+			a += colorAddend.A;
 		}
 
-		return ColorBgra.FromBgra (Utility.ClampToByte (b / settings.count), Utility.ClampToByte (g / settings.count), Utility.ClampToByte (r / settings.count), Utility.ClampToByte (a / settings.count));
+		return ColorBgra.FromBgra (
+			b: Utility.ClampToByte (b / settings.count),
+			g: Utility.ClampToByte (g / settings.count),
+			r: Utility.ClampToByte (r / settings.count),
+			a: Utility.ClampToByte (a / settings.count)
+		);
 	}
 	#endregion
 
@@ -146,6 +158,9 @@ public sealed class JuliaFractalEffect : BaseEffect
 
 		[Caption ("Zoom"), MinimumValue (0), MaximumValue (50)]
 		public int Zoom { get; set; } = 1;
+
+		[Caption ("Color Scheme")]
+		public PredefinedGradients ColorScheme { get; set; } = PredefinedGradients.Bonfire;
 
 		[Caption ("Angle")]
 		public DegreesAngle Angle { get; set; } = new (0);
