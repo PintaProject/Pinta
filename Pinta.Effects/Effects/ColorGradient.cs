@@ -142,6 +142,7 @@ internal sealed class ColorGradient
 	private static int BinarySearchHigherOrEqual (ImmutableArray<double> sortedPositions, double target)
 	{
 		// https://learn.microsoft.com/en-us/dotnet/api/system.collections.immutable.immutablearray.binarysearch
+		if (sortedPositions.Length == 0) return -1;
 		int found = sortedPositions.BinarySearch (target);
 		if (found > 0) return found; // Exact match
 		int foundComplement = ~found;
