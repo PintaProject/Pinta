@@ -72,12 +72,14 @@ public sealed class RoundedLineEngine : ShapeEngine
 
 
 		//Calculate the last ControlPoint's segment end points.
-		calculateSegmentEndPoints (ControlPoints.Count - 1, out var nextIndex, out var lineEndPoint, out var cornerEndPoint);
+		calculateSegmentEndPoints (ControlPoints.Count - 1, out _, out _, out var cornerEndPoint);
 
 		//Start the first line at the last rounded corner's end point.
 		PointD lineStartPoint = cornerEndPoint;
 
 		for (int currentIndex = 0; currentIndex < ControlPoints.Count; ++currentIndex) {
+			int nextIndex;
+			PointD lineEndPoint;
 			calculateSegmentEndPoints (currentIndex, out nextIndex, out lineEndPoint, out cornerEndPoint);
 
 			//Add the line.
