@@ -11,7 +11,7 @@ namespace Pinta.Effects;
 
 public sealed class ForwardErrorDiffusionDitheringEffect : BaseEffect
 {
-	public override string Name => Translations.GetString ("Dithering");
+	public override string Name => Translations.GetString ("Color");
 	public override bool IsConfigurable => true;
 	// TODO: Icon
 	public override string EffectMenuCategory => Translations.GetString ("Test"); // TODO:
@@ -96,15 +96,12 @@ public sealed class ForwardErrorDiffusionDitheringEffect : BaseEffect
 	}
 
 	private static ColorBgra AddError (ColorBgra color, double factor, int errorRed, int errorGreen, int errorBlue)
-	{
-		// This function will add the error to the color based on the provided factor
-		return ColorBgra.FromBgra (
+		=> ColorBgra.FromBgra (
 			b: Utility.ClampToByte (color.B + (int) (factor * errorBlue)),
 			g: Utility.ClampToByte (color.G + (int) (factor * errorGreen)),
 			r: Utility.ClampToByte (color.R + (int) (factor * errorRed)),
 			a: 255
 		);
-	}
 
 	private static ColorBgra FindClosestPaletteColor (ImmutableArray<ColorBgra> palette, ColorBgra original)
 	{
@@ -219,9 +216,6 @@ public sealed class ForwardErrorDiffusionDitheringEffect : BaseEffect
 	{
 		[Caption ("Diffusion Matrix")]
 		public PredefinedDiffusionMatrices DiffusionMatrix { get; set; } = PredefinedDiffusionMatrices.FloydSteinberg;
-
-		[Caption ("Colors for Optimized Palette")]
-		public int ColorsForOptimizedPalette { get; set; } = 256;
 
 		[Caption ("Palette")]
 		public PredefinedPalettes PaletteChoice { get; set; } = PredefinedPalettes.OldWindows16;
