@@ -83,8 +83,8 @@ internal sealed class CoreEffectsExtension : IExtension
 		PintaCore.Effects.RegisterEffect (new UnfocusEffect ());
 		PintaCore.Effects.RegisterEffect (new ZoomBlurEffect ());
 
-		// Effects under development
 #if DEBUG
+		// Effects under development
 		PintaCore.Effects.RegisterEffect (new ForwardErrorDiffusionDitheringEffect ());
 #endif
 	}
@@ -133,8 +133,8 @@ internal sealed class CoreEffectsExtension : IExtension
 		PintaCore.Effects.UnregisterInstanceOfEffect (typeof (UnfocusEffect));
 		PintaCore.Effects.UnregisterInstanceOfEffect (typeof (ZoomBlurEffect));
 
-		// Effects under development
 #if DEBUG
+		// Effects under development
 		PintaCore.Effects.UnregisterInstanceOfEffect (typeof (ForwardErrorDiffusionDitheringEffect));
 #endif
 	}
