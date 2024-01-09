@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using System.Collections.Immutable;
 using System.ComponentModel;
 using System.Linq;
-using Adw;
 using Cairo;
 using Pinta.Core;
 using Pinta.Gui.Widgets;
@@ -113,8 +112,7 @@ public sealed class ForwardErrorDiffusionDitheringEffect : BaseEffect
 		ColorBgra closestColor = ColorBgra.FromBgra (0, 0, 0, 1);
 		foreach (var paletteColor in palette) {
 			double distance = CalculateDistance (original, paletteColor);
-			if (distance >= minDistance)
-				continue;
+			if (distance >= minDistance) continue;
 			minDistance = distance;
 			closestColor = paletteColor;
 		}
@@ -126,9 +124,7 @@ public sealed class ForwardErrorDiffusionDitheringEffect : BaseEffect
 		int deltaR = color1.R - color2.R;
 		int deltaG = color1.G - color2.G;
 		int deltaB = color1.B - color2.B;
-
-		// Euclidean distance
-		return Math.Sqrt (deltaR * deltaR + deltaG * deltaG + deltaB * deltaB);
+		return Math.Sqrt (deltaR * deltaR + deltaG * deltaG + deltaB * deltaB); // Euclidean distance
 	}
 
 	public sealed class ErrorDiffusionMatrix
