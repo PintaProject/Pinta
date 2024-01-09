@@ -164,7 +164,7 @@ internal sealed class ColorGradient
 	{
 		if (sortedPositions.Length == 0) return -1;
 		int found = sortedPositions.BinarySearch (target);
-		if (found > 0) return found; // Exact match
+		if (found >= 0) return found; // Exact match
 		int foundComplement = ~found;
 		if (foundComplement == sortedPositions.Length) return -1; // Not found
 		return foundComplement; // Found larger
