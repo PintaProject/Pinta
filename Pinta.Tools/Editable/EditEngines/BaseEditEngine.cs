@@ -358,20 +358,22 @@ public abstract class BaseEditEngine
 
 		Gtk.ComboBoxText? dpbBox = dash_pattern_box.SetupToolbar (tb);
 
-		if (dpbBox != null) {
-			dpbBox.GetEntry ().SetText (settings.GetSetting (DASH_PATTERN_SETTING (toolPrefix), "-"));
+		if (dpbBox == null)
+			return;
 
+		dpbBox.GetEntry ().SetText (settings.GetSetting (DASH_PATTERN_SETTING (toolPrefix), "-"));
 
-			dpbBox.OnChanged += (o, e) => {
-				ShapeEngine? selEngine = SelectedShapeEngine;
+		dpbBox.OnChanged += (o, e) => {
 
-				if (selEngine != null) {
-					selEngine.DashPattern = dpbBox.GetActiveText ()!;
-					StorePreviousSettings ();
-					DrawActiveShape (false, false, true, false, false);
-				}
-			};
-		}
+			ShapeEngine? selEngine = SelectedShapeEngine;
+
+			if (selEngine == null)
+				return;
+
+			selEngine.DashPattern = dpbBox.GetActiveText ()!;
+			StorePreviousSettings ();
+			DrawActiveShape (false, false, true, false, false);
+		};
 	}
 
 	public virtual void HandleActivated ()
@@ -476,10 +478,10 @@ public abstract class BaseEditEngine
 					// Redraw since the Ctrl key affects the hover cursor, etc
 					DrawActiveShape (false, false, true, e.IsShiftPressed, false, true);
 					return true;
+				} else {
+					return false;
 				}
-				break;
 		}
-		return false;
 	}
 
 	private void HandleRight (ToolKeyEventArgs e)
@@ -669,15 +671,21 @@ public abstract class BaseEditEngine
 	{
 		Gdk.Key keyReleased = e.Key;
 
-		if (keyReleased == Gdk.Key.Delete || keyReleased == Gdk.Key.Return || keyReleased == Gdk.Key.KP_Enter
-		    || keyReleased == Gdk.Key.space || keyReleased == Gdk.Key.Up || keyReleased == Gdk.Key.Down
-		    || keyReleased == Gdk.Key.Left || keyReleased == Gdk.Key.Right || keyReleased.IsControlKey ()) {
-			if (keyReleased.IsControlKey ()) {
-				DrawActiveShape (false, false, true, e.IsShiftPressed, false, false);
-			}
-			return true;
-		} else {
-			return false;
+		if (keyReleased.IsControlKey ())
+			DrawActiveShape (false, false, true, e.IsShiftPressed, false, false);
+
+		switch (keyReleased) {
+			case Gdk.Key.Delete:
+			case Gdk.Key.Return:
+			case Gdk.Key.KP_Enter:
+			case Gdk.Key.space:
+			case Gdk.Key.Up:
+			case Gdk.Key.Down:
+			case Gdk.Key.Left:
+			case Gdk.Key.Right:
+				return true;
+			default:
+				return false;
 		}
 	}
 
@@ -686,9 +694,8 @@ public abstract class BaseEditEngine
 		var unclamped_point = e.PointDouble;
 
 		//If we are already drawing, ignore any additional mouse down events.
-		if (is_drawing) {
+		if (is_drawing)
 			return;
-		}
 
 		//Redraw the previously (and possibly currently) active shape without any control points in case another shape is made active.
 		DrawActiveShape (false, false, false, false, false);
@@ -700,19 +707,17 @@ public abstract class BaseEditEngine
 
 		bool shiftKey = e.IsShiftPressed;
 
-		if (shiftKey) {
+		if (shiftKey)
 			CalculateModifiedCurrentPoint ();
-		}
 
 		is_drawing = true;
 
 
 		//Right clicking changes tension.
-		if (e.MouseButton == MouseButton.Left) {
+		if (e.MouseButton == MouseButton.Left)
 			changing_tension = false;
-		} else {
+		else
 			changing_tension = true;
-		}
 
 
 		bool ctrlKey = e.IsControlPressed;
@@ -990,26 +995,25 @@ public abstract class BaseEditEngine
 		if (activeEngine == null) {
 			//No shape will be drawn; however, the hover point still needs to be drawn if drawHoverSelection is true.
 			UpdateHoverHandle (drawHoverSelection, ctrl_key);
-		} else {
-			//Clear any temporary drawing, because something new will be drawn.
-			activeEngine.DrawingLayer.Layer.Clear ();
-
-			RectangleD dirty;
-
-			//Determine if the drawing should be for finalizing the shape onto the image or drawing it temporarily.
-			if (finalize) {
-				dirty = DrawFinalized (activeEngine, true, shiftKey);
-			} else {
-				dirty = DrawUnfinalized (activeEngine, drawHoverSelection, shiftKey, ctrl_key);
-			}
-
-			//Determine if the organized (spatially hashed) points should be generated. This is for mouse interaction detection after drawing.
-			if (calculateOrganizedPoints) {
-				OrganizePoints (activeEngine);
-			}
-
-			InvalidateAfterDraw (dirty);
+			return;
 		}
+
+		//Clear any temporary drawing, because something new will be drawn.
+		activeEngine.DrawingLayer.Layer.Clear ();
+
+		RectangleD dirty;
+
+		//Determine if the drawing should be for finalizing the shape onto the image or drawing it temporarily.
+		if (finalize)
+			dirty = DrawFinalized (activeEngine, true, shiftKey);
+		else
+			dirty = DrawUnfinalized (activeEngine, drawHoverSelection, shiftKey, ctrl_key);
+
+		//Determine if the organized (spatially hashed) points should be generated. This is for mouse interaction detection after drawing.
+		if (calculateOrganizedPoints)
+			OrganizePoints (activeEngine);
+
+		InvalidateAfterDraw (dirty);
 	}
 
 	/// <summary>
@@ -1018,12 +1022,13 @@ public abstract class BaseEditEngine
 	private void BeforeDraw ()
 	{
 		//Check to see if a new shape is selected.
-		if (prev_selected_shape_index != SelectedShapeIndex) {
-			//A new shape is selected, so clear the previous dirty Rectangle.
-			last_dirty = null;
+		if (prev_selected_shape_index == SelectedShapeIndex)
+			return;
 
-			prev_selected_shape_index = SelectedShapeIndex;
-		}
+		//A new shape is selected, so clear the previous dirty Rectangle.
+		last_dirty = null;
+
+		prev_selected_shape_index = SelectedShapeIndex;
 	}
 
 	/// <summary>
@@ -1040,23 +1045,28 @@ public abstract class BaseEditEngine
 
 		ImageSurface? undoSurface = null;
 
-		if (createHistoryItem) {
-			//We only need to create a history item if there was a previous shape.
-			if (engine.ControlPoints.Count > 0) {
-				undoSurface = doc.Layers.CurrentUserLayer.Surface.Clone ();
-			}
-		}
+		if (createHistoryItem && engine.ControlPoints.Count > 0) //We only need to create a history item if there was a previous shape.
+			undoSurface = doc.Layers.CurrentUserLayer.Surface.Clone ();
 
 		//Draw the finalized shape.
 		RectangleD dirty = DrawShape (engine, doc.Layers.CurrentUserLayer, false, false, false);
 
-		if (createHistoryItem) {
-			//Make sure that the undo surface isn't null.
-			if (undoSurface != null) {
-				//Create a new ShapesHistoryItem so that the finalization of the shape can be undone.
-				doc.History.PushNewItem (new ShapesHistoryItem (this, owner.Icon, ShapeName + " " + Translations.GetString ("Finalized"),
-					undoSurface, doc.Layers.CurrentUserLayer, SelectedPointIndex, SelectedShapeIndex, false));
-			}
+		if (createHistoryItem && undoSurface != null) {
+
+			//Create a new ShapesHistoryItem so that the finalization of the shape can be undone.
+
+			doc.History.PushNewItem (
+				new ShapesHistoryItem (
+					this,
+					owner.Icon,
+					ShapeName + " " + Translations.GetString ("Finalized"),
+					undoSurface,
+					doc.Layers.CurrentUserLayer,
+					SelectedPointIndex,
+					SelectedShapeIndex,
+					false
+				)
+			);
 		}
 
 		return dirty;
@@ -1171,16 +1181,18 @@ public abstract class BaseEditEngine
 			UpdateHoverHandle (draw_selection, ctrl_key);
 
 			foreach (ControlPoint point in shape.ControlPoints) {
-				//Skip drawing the control point if it is being hovered over.
-				if (draw_selection && hover_handle.Active && hover_handle.CanvasPosition.Distance (point.Position) < 1d) {
-					continue;
-				}
 
-				shape.ControlPointHandles.Add (new MoveHandle () {
-					Active = true,
-					CanvasPosition = point.Position,
-					Selected = (point == SelectedPoint) && draw_selection
-				});
+				//Skip drawing the control point if it is being hovered over.
+				if (draw_selection && hover_handle.Active && hover_handle.CanvasPosition.Distance (point.Position) < 1d)
+					continue;
+
+				shape.ControlPointHandles.Add (
+					new MoveHandle {
+						Active = true,
+						CanvasPosition = point.Position,
+						Selected = (point == SelectedPoint) && draw_selection
+					}
+				);
 			}
 
 			dirty = dirty.Union (MoveHandle.UnionInvalidateRects (shape.ControlPointHandles));
@@ -1285,22 +1297,23 @@ public abstract class BaseEditEngine
 			//Get a reference to each shape's corresponding tool.
 			ShapeTool? correspondingTool = GetCorrespondingTool (SEngines[SelectedShapeIndex].ShapeType);
 
-			if (correspondingTool != null) {
-				//Finalize the now active shape using its corresponding tool's EditEngine.
+			if (correspondingTool == null)
+				continue;
 
-				BaseEditEngine correspondingEngine = correspondingTool.EditEngine;
+			//Finalize the now active shape using its corresponding tool's EditEngine.
 
-				correspondingEngine.SelectedShapeIndex = SelectedShapeIndex;
+			BaseEditEngine correspondingEngine = correspondingTool.EditEngine;
 
-				correspondingEngine.BeforeDraw ();
+			correspondingEngine.SelectedShapeIndex = SelectedShapeIndex;
 
-				//Clear any temporary drawing, because something new will be drawn.
-				SEngines[SelectedShapeIndex].DrawingLayer.Layer.Clear ();
+			correspondingEngine.BeforeDraw ();
 
-				//Draw the current shape with the corresponding tool's EditEngine.
-				dirty = dirty.UnionRectangles ((RectangleD?) correspondingEngine.DrawFinalized (
-					SEngines[SelectedShapeIndex], false, false));
-			}
+			//Clear any temporary drawing, because something new will be drawn.
+			SEngines[SelectedShapeIndex].DrawingLayer.Layer.Clear ();
+
+			//Draw the current shape with the corresponding tool's EditEngine.
+			dirty = dirty.UnionRectangles ((RectangleD?) correspondingEngine.DrawFinalized (
+				SEngines[SelectedShapeIndex], false, false));
 		}
 
 		//Make sure that the undo surface isn't null.
@@ -1327,47 +1340,48 @@ public abstract class BaseEditEngine
 		ShapeEngine? selEngine = SelectedShapeEngine;
 
 		//Don't bother calculating a modified point if there is no selected shape.
-		if (selEngine != null) {
-			if (ShapeType != ShapeTypes.OpenLineCurveSeries && selEngine.ControlPoints.Count == 4) {
+		if (selEngine == null)
+			return;
 
-				// Constrain to a square / circle.
+		if (ShapeType != ShapeTypes.OpenLineCurveSeries && selEngine.ControlPoints.Count == 4) {
 
-				var origin = selEngine.ControlPoints[(SelectedPointIndex + 2) % 4].Position;
+			// Constrain to a square / circle.
 
-				PointD d = current_point - origin;
+			var origin = selEngine.ControlPoints[(SelectedPointIndex + 2) % 4].Position;
 
-				var length = Math.Max (Math.Abs (d.X), Math.Abs (d.Y));
+			PointD d = current_point - origin;
 
-				d = new PointD (
-					X: length * Math.Sign (d.X),
-					Y: length * Math.Sign (d.Y)
-				);
+			var length = Math.Max (Math.Abs (d.X), Math.Abs (d.Y));
 
-				current_point = origin + d;
+			d = new PointD (
+				X: length * Math.Sign (d.X),
+				Y: length * Math.Sign (d.Y)
+			);
 
+			current_point = origin + d;
+
+		} else {
+			// Calculate the modified position of currentPoint such that the angle between the adjacent point
+			// (if any) and currentPoint is snapped to the closest angle out of a certain number of angles.
+			ControlPoint adjacentPoint;
+
+			if (SelectedPointIndex > 0) {
+				//Previous point.
+				adjacentPoint = selEngine.ControlPoints[SelectedPointIndex - 1];
+			} else if (selEngine.ControlPoints.Count > 1) {
+				//Previous point (looping around to the end) if there is more than 1 point.
+				adjacentPoint = selEngine.ControlPoints[^1];
 			} else {
-				// Calculate the modified position of currentPoint such that the angle between the adjacent point
-				// (if any) and currentPoint is snapped to the closest angle out of a certain number of angles.
-				ControlPoint adjacentPoint;
-
-				if (SelectedPointIndex > 0) {
-					//Previous point.
-					adjacentPoint = selEngine.ControlPoints[SelectedPointIndex - 1];
-				} else if (selEngine.ControlPoints.Count > 1) {
-					//Previous point (looping around to the end) if there is more than 1 point.
-					adjacentPoint = selEngine.ControlPoints[^1];
-				} else {
-					//Don't bother calculating a modified point because there is no reference point to align it with (there is only 1 point).
-					return;
-				}
-
-				PointD dir = new PointD (current_point.X - adjacentPoint.Position.X, current_point.Y - adjacentPoint.Position.Y);
-				double theta = Math.Atan2 (dir.Y, dir.X);
-				double len = Math.Sqrt (dir.X * dir.X + dir.Y * dir.Y);
-
-				theta = Math.Round (12 * theta / Math.PI) * Math.PI / 12;
-				current_point = new PointD ((adjacentPoint.Position.X + len * Math.Cos (theta)), (adjacentPoint.Position.Y + len * Math.Sin (theta)));
+				//Don't bother calculating a modified point because there is no reference point to align it with (there is only 1 point).
+				return;
 			}
+
+			PointD dir = new PointD (current_point.X - adjacentPoint.Position.X, current_point.Y - adjacentPoint.Position.Y);
+			double theta = Math.Atan2 (dir.Y, dir.X);
+			double len = Math.Sqrt (dir.X * dir.X + dir.Y * dir.Y);
+
+			theta = Math.Round (12 * theta / Math.PI) * Math.PI / 12;
+			current_point = new PointD ((adjacentPoint.Position.X + len * Math.Cos (theta)), (adjacentPoint.Position.Y + len * Math.Sin (theta)));
 		}
 	}
 
@@ -1398,9 +1412,8 @@ public abstract class BaseEditEngine
 	public static ShapeTool? ActivateCorrespondingTool (int shapeIndex, bool permanentSwitch)
 	{
 		//First make sure that there is a validly selectable tool.
-		if (shapeIndex > -1 && SEngines.Count > shapeIndex) {
+		if (shapeIndex > -1 && SEngines.Count > shapeIndex)
 			return ActivateCorrespondingTool (SEngines[shapeIndex].ShapeType, permanentSwitch);
-		}
 
 		//Let the caller know that the active tool has not been switched.
 		return null;
@@ -1419,55 +1432,55 @@ public abstract class BaseEditEngine
 		ShapeTool? correspondingTool = GetCorrespondingTool (shapeType);
 
 		//Verify that the corresponding tool is valid and that it doesn't match the currently active tool.
-		if (correspondingTool != null && PintaCore.Tools.CurrentTool != correspondingTool) {
-			ShapeTool? oldTool = PintaCore.Tools.CurrentTool as ShapeTool;
-
-			int oldToolSPI = -1;
-			int oldToolSSI = -1;
-			//SetCurrentTool sets oldTool's SelectedPointIndex and SelectedShapeIndex to -1 so their value has to be saved before this happens.
-			if (oldTool != null && oldTool.IsEditableShapeTool && permanentSwitch) {
-				oldToolSPI = oldTool.EditEngine.SelectedPointIndex;
-				oldToolSSI = oldTool.EditEngine.SelectedShapeIndex;
-			}
-
-			//The active tool needs to be switched to the corresponding tool.
-			PintaCore.Tools.SetCurrentTool (correspondingTool);
-			var newTool = (ShapeTool?) PintaCore.Tools.CurrentTool;
-
-			// This shouldn't be possible, but we need a null check.
-			if (newTool is null)
-				return null;
-
-			//What happens next depends on whether the old tool was an editable ShapeTool.
-			if (oldTool != null && oldTool.IsEditableShapeTool) {
-				if (permanentSwitch) {
-					//Set the new tool's active shape and point to the old shape and point.
-					newTool.EditEngine.SelectedPointIndex = oldToolSPI;
-					newTool.EditEngine.SelectedShapeIndex = oldToolSSI;
-
-					//Make sure neither tool thinks it is drawing anything.
-					newTool.EditEngine.is_drawing = false;
-					oldTool.EditEngine.is_drawing = false;
-				}
-
-				ShapeEngine? activeEngine = newTool.EditEngine.ActiveShapeEngine;
-
-				if (activeEngine != null) {
-					newTool.EditEngine.UpdateToolbarSettings (activeEngine);
-				}
-			} else {
-				if (permanentSwitch) {
-					//Make sure that the new tool doesn't think it is drawing anything.
-					newTool.EditEngine.is_drawing = false;
-				}
-			}
-
-			//Let the caller know that the active tool has been switched.
-			return oldTool;
+		if (correspondingTool == null || PintaCore.Tools.CurrentTool == correspondingTool) {
+			//Let the caller know that the active tool has not been switched.
+			return null;
 		}
 
-		//Let the caller know that the active tool has not been switched.
-		return null;
+		ShapeTool? oldTool = PintaCore.Tools.CurrentTool as ShapeTool;
+
+		int oldToolSPI = -1;
+		int oldToolSSI = -1;
+		//SetCurrentTool sets oldTool's SelectedPointIndex and SelectedShapeIndex to -1 so their value has to be saved before this happens.
+		if (oldTool != null && oldTool.IsEditableShapeTool && permanentSwitch) {
+			oldToolSPI = oldTool.EditEngine.SelectedPointIndex;
+			oldToolSSI = oldTool.EditEngine.SelectedShapeIndex;
+		}
+
+		//The active tool needs to be switched to the corresponding tool.
+		PintaCore.Tools.SetCurrentTool (correspondingTool);
+		var newTool = (ShapeTool?) PintaCore.Tools.CurrentTool;
+
+		// This shouldn't be possible, but we need a null check.
+		if (newTool is null)
+			return null;
+
+		//What happens next depends on whether the old tool was an editable ShapeTool.
+		if (oldTool != null && oldTool.IsEditableShapeTool) {
+			if (permanentSwitch) {
+				//Set the new tool's active shape and point to the old shape and point.
+				newTool.EditEngine.SelectedPointIndex = oldToolSPI;
+				newTool.EditEngine.SelectedShapeIndex = oldToolSSI;
+
+				//Make sure neither tool thinks it is drawing anything.
+				newTool.EditEngine.is_drawing = false;
+				oldTool.EditEngine.is_drawing = false;
+			}
+
+			ShapeEngine? activeEngine = newTool.EditEngine.ActiveShapeEngine;
+
+			if (activeEngine != null) {
+				newTool.EditEngine.UpdateToolbarSettings (activeEngine);
+			}
+		} else {
+			if (permanentSwitch) {
+				//Make sure that the new tool doesn't think it is drawing anything.
+				newTool.EditEngine.is_drawing = false;
+			}
+		}
+
+		//Let the caller know that the active tool has been switched.
+		return oldTool;
 	}
 
 	/// <summary>
@@ -1520,9 +1533,8 @@ public abstract class BaseEditEngine
 	/// </summary>
 	protected virtual void StorePreviousSettings ()
 	{
-		if (dash_pattern_box.ComboBox != null) {
+		if (dash_pattern_box.ComboBox != null)
 			prev_dash_pattern = dash_pattern_box.ComboBox.ComboBox.GetEntry ().GetText ();
-		}
 
 		prev_antialiasing = owner.UseAntialiasing;
 		prev_brush_width = BrushWidth;
@@ -1601,74 +1613,74 @@ public abstract class BaseEditEngine
 	{
 		ShapeEngine? selEngine = SelectedShapeEngine;
 
-		if (selEngine != null && selEngine.Closed && controlPoints.Count == 4) {
-			//Figure out the indices of the surrounding points. The lowest point index should be 0 and the highest 3.
+		if (selEngine == null || !selEngine.Closed || controlPoints.Count != 4)
+			return;
 
-			int previousPointIndex = SelectedPointIndex - 1;
-			int nextPointIndex = SelectedPointIndex + 1;
-			int oppositePointIndex = SelectedPointIndex + 2;
+		//Figure out the indices of the surrounding points. The lowest point index should be 0 and the highest 3.
 
-			if (previousPointIndex < 0) {
-				previousPointIndex = controlPoints.Count - 1;
-			}
+		int previousPointIndex = SelectedPointIndex - 1;
+		int nextPointIndex = SelectedPointIndex + 1;
+		int oppositePointIndex = SelectedPointIndex + 2;
 
-			if (nextPointIndex >= controlPoints.Count) {
-				nextPointIndex = 0;
-				oppositePointIndex = 1;
-			} else if (oppositePointIndex >= controlPoints.Count) {
-				oppositePointIndex = 0;
-			}
+		if (previousPointIndex < 0)
+			previousPointIndex = controlPoints.Count - 1;
 
-
-			ControlPoint previousPoint = controlPoints.ElementAt (previousPointIndex);
-			ControlPoint oppositePoint = controlPoints.ElementAt (oppositePointIndex);
-			ControlPoint nextPoint = controlPoints.ElementAt (nextPointIndex);
+		if (nextPointIndex >= controlPoints.Count) {
+			nextPointIndex = 0;
+			oppositePointIndex = 1;
+		} else if (oppositePointIndex >= controlPoints.Count) {
+			oppositePointIndex = 0;
+		}
 
 
-			//Now that we know the indexed order of the points, we can align everything properly.
-			if (SelectedPointIndex == 2 || SelectedPointIndex == 0) {
-				//Control point visual order (counter-clockwise order always goes selectedPoint, previousPoint, oppositePoint, nextPoint,
-				//where moving point == selectedPoint):
-				//
-				//static (opposite) point		horizontally aligned point
-				//vertically aligned point		moving point
-				//OR
-				//moving point					vertically aligned point
-				//horizontally aligned point	static (opposite) point
+		ControlPoint previousPoint = controlPoints.ElementAt (previousPointIndex);
+		ControlPoint oppositePoint = controlPoints.ElementAt (oppositePointIndex);
+		ControlPoint nextPoint = controlPoints.ElementAt (nextPointIndex);
 
 
-				//Update the previous control point's position.
-				previousPoint.Position = new PointD (previousPoint.Position.X, current_point.Y);
-
-				//Update the next control point's position.
-				nextPoint.Position = new PointD (current_point.X, nextPoint.Position.Y);
-
-
-				//Even though it's supposed to be static, just in case the points get out of order
-				//(they do sometimes), update the opposite control point's position.
-				oppositePoint.Position = new PointD (previousPoint.Position.X, nextPoint.Position.Y);
-			} else {
-				//Control point visual order (counter-clockwise order always goes selectedPoint, previousPoint, oppositePoint, nextPoint,
-				//where moving point == selectedPoint):
-				//
-				//horizontally aligned point	static (opposite) point
-				//moving point					vertically aligned point
-				//OR
-				//vertically aligned point		moving point
-				//static (opposite) point		horizontally aligned point
+		//Now that we know the indexed order of the points, we can align everything properly.
+		if (SelectedPointIndex == 2 || SelectedPointIndex == 0) {
+			//Control point visual order (counter-clockwise order always goes selectedPoint, previousPoint, oppositePoint, nextPoint,
+			//where moving point == selectedPoint):
+			//
+			//static (opposite) point		horizontally aligned point
+			//vertically aligned point		moving point
+			//OR
+			//moving point					vertically aligned point
+			//horizontally aligned point	static (opposite) point
 
 
-				//Update the previous control point's position.
-				previousPoint.Position = new PointD (current_point.X, previousPoint.Position.Y);
+			//Update the previous control point's position.
+			previousPoint.Position = new PointD (previousPoint.Position.X, current_point.Y);
 
-				//Update the next control point's position.
-				nextPoint.Position = new PointD (nextPoint.Position.X, current_point.Y);
+			//Update the next control point's position.
+			nextPoint.Position = new PointD (current_point.X, nextPoint.Position.Y);
 
 
-				//Even though it's supposed to be static, just in case the points get out of order
-				//(they do sometimes), update the opposite control point's position.
-				oppositePoint.Position = new PointD (nextPoint.Position.X, previousPoint.Position.Y);
-			}
+			//Even though it's supposed to be static, just in case the points get out of order
+			//(they do sometimes), update the opposite control point's position.
+			oppositePoint.Position = new PointD (previousPoint.Position.X, nextPoint.Position.Y);
+		} else {
+			//Control point visual order (counter-clockwise order always goes selectedPoint, previousPoint, oppositePoint, nextPoint,
+			//where moving point == selectedPoint):
+			//
+			//horizontally aligned point	static (opposite) point
+			//moving point					vertically aligned point
+			//OR
+			//vertically aligned point		moving point
+			//static (opposite) point		horizontally aligned point
+
+
+			//Update the previous control point's position.
+			previousPoint.Position = new PointD (current_point.X, previousPoint.Position.Y);
+
+			//Update the next control point's position.
+			nextPoint.Position = new PointD (nextPoint.Position.X, current_point.Y);
+
+
+			//Even though it's supposed to be static, just in case the points get out of order
+			//(they do sometimes), update the opposite control point's position.
+			oppositePoint.Position = new PointD (nextPoint.Position.X, previousPoint.Position.Y);
 		}
 	}
 }
