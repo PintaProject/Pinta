@@ -1092,8 +1092,6 @@ public abstract class BaseEditEngine
 	/// <param name="engine"></param>
 	private static void OrganizePoints (ShapeEngine engine)
 	{
-		_ = PintaCore.Workspace.ActiveDocument;
-
 		//Organize the generated points for quick mouse interaction detection.
 
 		//First, clear the previously organized points, if any.
@@ -1110,9 +1108,8 @@ public abstract class BaseEditEngine
 		Document doc = PintaCore.Workspace.ActiveDocument;
 
 		// Increase the size of the dirty rect to account for antialiasing.
-		if (owner.UseAntialiasing) {
+		if (owner.UseAntialiasing)
 			dirty = dirty.Inflated (1, 1);
-		}
 
 		//Combine, clamp, and invalidate the dirty Rectangle.
 		if (((RectangleD?) dirty).UnionRectangles (last_dirty) is RectangleD r)
@@ -1258,8 +1255,6 @@ public abstract class BaseEditEngine
 	/// </summary>
 	public void DrawAllShapes ()
 	{
-		_ = PintaCore.Workspace.ActiveDocument;
-
 		//Store the SelectedShapeIndex value for later restoration.
 		int previousToolSI = SelectedShapeIndex;
 
