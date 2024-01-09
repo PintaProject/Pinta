@@ -32,7 +32,8 @@ internal sealed class ColorGradient
 	/// </summary>
 	public double MaximumPosition { get; }
 
-	private readonly ImmutableArray<KeyValuePair<double, ColorBgra>> sorted_stops;
+	private readonly ImmutableArray<double> sorted_positions;
+	private readonly ImmutableArray<ColorBgra> sorted_colors;
 
 	internal ColorGradient (
 		ColorBgra startColor,
@@ -43,27 +44,30 @@ internal sealed class ColorGradient
 	{
 		CheckBoundsConsistency (minPosition, maxPosition);
 
-		var sortedStops = gradientStops.OrderBy (stop => stop.Key).ToImmutableArray ();
-		CheckStopsBounds (sortedStops, minPosition, maxPosition);
-		CheckUniqueness (sortedStops);
+		var sortedStops = gradientStops.OrderBy (stop => stop.Key).ToArray ();
+		var sortedPositions = sortedStops.Select (stop => stop.Key).ToImmutableArray ();
+		var sortedColors = sortedStops.Select (stop => stop.Value).ToImmutableArray ();
+		CheckStopsBounds (sortedPositions, minPosition, maxPosition);
+		CheckUniqueness (sortedPositions);
 
 		StartColor = startColor;
 		EndColor = endColor;
 		MinimumPosition = minPosition;
 		MaximumPosition = maxPosition;
-		sorted_stops = sortedStops;
+		sorted_positions = sortedPositions;
+		sorted_colors = sortedColors;
 	}
 
-	private static void CheckStopsBounds (ImmutableArray<KeyValuePair<double, ColorBgra>> sortedStops, double minPosition, double maxPosition)
+	private static void CheckStopsBounds (ImmutableArray<double> sortedPositions, double minPosition, double maxPosition)
 	{
-		if (sortedStops.Length > 0 && sortedStops[0].Key <= minPosition) throw new ArgumentException ($"Lowest key in gradient stops has to be greater than {nameof (minPosition)}");
-		if (sortedStops.Length > 0 && sortedStops[^1].Key >= maxPosition) throw new ArgumentException ($"Greatest key in gradient stops has to be lower than {nameof (maxPosition)}");
+		if (sortedPositions.Length > 0 && sortedPositions[0] <= minPosition) throw new ArgumentException ($"Lowest key in gradient stops has to be greater than {nameof (minPosition)}");
+		if (sortedPositions.Length > 0 && sortedPositions[^1] >= maxPosition) throw new ArgumentException ($"Greatest key in gradient stops has to be lower than {nameof (maxPosition)}");
 	}
 
-	private static void CheckUniqueness (ImmutableArray<KeyValuePair<double, ColorBgra>> sortedStops)
+	private static void CheckUniqueness (ImmutableArray<double> sortedPositions)
 	{
-		var distinctPositions = sortedStops.GroupBy (s => s.Key).Count ();
-		if (distinctPositions != sortedStops.Length) throw new ArgumentException ("Cannot have more than one stop in the same position");
+		var distinctPositions = sortedPositions.GroupBy (s => s).Count ();
+		if (distinctPositions != sortedPositions.Length) throw new ArgumentException ("Cannot have more than one stop in the same position");
 	}
 
 	private static void CheckBoundsConsistency (double minPosition, double maxPosition)
@@ -98,7 +102,7 @@ internal sealed class ColorGradient
 			EndColor,
 			minPosition,
 			maxPosition,
-			sorted_stops.Select (ToNewStop)
+			sorted_positions.Zip (sorted_colors, KeyValuePair.Create).Select (ToNewStop)
 		);
 	}
 
@@ -114,7 +118,7 @@ internal sealed class ColorGradient
 	{
 		if (position <= MinimumPosition) return StartColor;
 		if (position >= MaximumPosition) return EndColor;
-		if (sorted_stops.Length == 0) return HandleNoStops (position);
+		if (sorted_positions.Length == 0) return HandleNoStops (position);
 		return HandleWithStops (position);
 	}
 
@@ -126,25 +130,22 @@ internal sealed class ColorGradient
 
 	private ColorBgra HandleWithStops (double position)
 	{
-		int immediatelyHigherIndex = BinarySearchHigherOrEqual (sorted_stops, position);
-		var immediatelyHigher = immediatelyHigherIndex < 0 ? KeyValuePair.Create (MaximumPosition, EndColor) : sorted_stops[immediatelyHigherIndex];
+		int immediatelyHigherIndex = BinarySearchHigherOrEqual (sorted_positions, position);
+		var immediatelyHigher = immediatelyHigherIndex < 0 ? KeyValuePair.Create (MaximumPosition, EndColor) : KeyValuePair.Create (sorted_positions[immediatelyHigherIndex], sorted_colors[immediatelyHigherIndex]);
 		if (immediatelyHigher.Key == position) return immediatelyHigher.Value;
 		int immediatelyLowerIndex = immediatelyHigherIndex - 1;
-		var immediatelyLower = immediatelyLowerIndex >= 0 ? sorted_stops[immediatelyLowerIndex] : KeyValuePair.Create (MinimumPosition, StartColor);
+		var immediatelyLower = immediatelyLowerIndex < 0 ? KeyValuePair.Create (MinimumPosition, StartColor) : KeyValuePair.Create (sorted_positions[immediatelyLowerIndex], sorted_colors[immediatelyLowerIndex]);
 		double fraction = Utility.InvLerp (immediatelyLower.Key, immediatelyHigher.Key, position);
 		return ColorBgra.Lerp (immediatelyLower.Value, immediatelyHigher.Value, fraction);
 	}
 
-	private static readonly IComparer<KeyValuePair<double, ColorBgra>> stop_position_comparer
-		= Comparer<KeyValuePair<double, ColorBgra>>.Create ((a, b) => a.Key.CompareTo (b.Key));
-	private static int BinarySearchHigherOrEqual (ImmutableArray<KeyValuePair<double, ColorBgra>> sortedStops, double target)
+	private static int BinarySearchHigherOrEqual (ImmutableArray<double> sortedPositions, double target)
 	{
 		// https://learn.microsoft.com/en-us/dotnet/api/system.collections.immutable.immutablearray.binarysearch
-		var adapted = KeyValuePair.Create (target, ColorBgra.Black);
-		int found = sortedStops.BinarySearch (adapted, stop_position_comparer);
+		int found = sortedPositions.BinarySearch (target);
 		if (found > 0) return found; // Exact match
 		int foundComplement = ~found;
-		if (foundComplement == sortedStops.Length) return -1; // Not found
+		if (foundComplement == sortedPositions.Length) return -1; // Not found
 		return foundComplement; // Found larger
 	}
 
