@@ -11,10 +11,10 @@ namespace Pinta.Effects;
 
 public sealed class ForwardErrorDiffusionDitheringEffect : BaseEffect
 {
-	public override string Name => Translations.GetString ("Color");
+	public override string Name => Translations.GetString ("Dithering");
 	public override bool IsConfigurable => true;
 	// TODO: Icon
-	public override string EffectMenuCategory => Translations.GetString ("Test"); // TODO:
+	public override string EffectMenuCategory => Translations.GetString ("Color");
 	public ForwardErrorDiffusionDitheringData Data => (ForwardErrorDiffusionDitheringData) EffectData!; // NRT - Set in constructor
 
 	public override bool IsTileable => false;
