@@ -129,7 +129,7 @@ public sealed class JuliaFractalEffect : BaseEffect
 
 			double c = settings.factor * j;
 
-			double clamped_c = Math.Clamp (c, settings.colorGradient.MinimumPosition, settings.colorGradient.MaximumPosition);
+			double clamped_c = Math.Clamp (c, settings.colorGradient.StartPosition, settings.colorGradient.EndPosition);
 
 			ColorBgra colorAddend = settings.colorGradient.GetColor (clamped_c);
 

@@ -149,7 +149,7 @@ public sealed class MandelbrotFractalEffect : BaseEffect
 
 			double c = 64 + settings.factor * m;
 
-			double clamped_c = Math.Clamp (c, settings.colorGradient.MinimumPosition, settings.colorGradient.MaximumPosition);
+			double clamped_c = Math.Clamp (c, settings.colorGradient.StartPosition, settings.colorGradient.EndPosition);
 
 			ColorBgra colorAddend = settings.colorGradient.GetColor (clamped_c);
 

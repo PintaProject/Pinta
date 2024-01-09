@@ -25,12 +25,12 @@ internal sealed class ColorGradient
 	/// <summary>
 	/// Represents initial position in the gradient
 	/// </summary>
-	public double MinimumPosition { get; }
+	public double StartPosition { get; }
 
 	/// <summary>
 	/// Represents end position in the gradient
 	/// </summary>
-	public double MaximumPosition { get; }
+	public double EndPosition { get; }
 
 	private readonly ImmutableArray<double> sorted_positions;
 	private readonly ImmutableArray<ColorBgra> sorted_colors;
@@ -52,8 +52,8 @@ internal sealed class ColorGradient
 
 		StartColor = startColor;
 		EndColor = endColor;
-		MinimumPosition = minPosition;
-		MaximumPosition = maxPosition;
+		StartPosition = minPosition;
+		EndPosition = maxPosition;
 		sorted_positions = sortedPositions;
 		sorted_colors = sortedColors;
 	}
@@ -86,13 +86,13 @@ internal sealed class ColorGradient
 		CheckBoundsConsistency (minPosition, maxPosition);
 
 		double newSpan = maxPosition - minPosition;
-		double currentSpan = MaximumPosition - MinimumPosition;
+		double currentSpan = EndPosition - StartPosition;
 		double newProportion = newSpan / currentSpan;
-		double newMinRelativeOffset = minPosition - MinimumPosition;
+		double newMinRelativeOffset = minPosition - StartPosition;
 
 		KeyValuePair<double, ColorBgra> ToNewStop (KeyValuePair<double, ColorBgra> stop)
 		{
-			double stopToMinOffset = stop.Key - MinimumPosition;
+			double stopToMinOffset = stop.Key - StartPosition;
 			double adjustedOffset = stopToMinOffset * newProportion;
 			double newPosition = minPosition + adjustedOffset;
 			return KeyValuePair.Create (newPosition, stop.Value);
@@ -117,15 +117,15 @@ internal sealed class ColorGradient
 	/// </returns>
 	public ColorBgra GetColor (double position)
 	{
-		if (position <= MinimumPosition) return StartColor;
-		if (position >= MaximumPosition) return EndColor;
+		if (position <= StartPosition) return StartColor;
+		if (position >= EndPosition) return EndColor;
 		if (sorted_positions.Length == 0) return HandleNoStops (position);
 		return HandleWithStops (position);
 	}
 
 	private ColorBgra HandleNoStops (double position)
 	{
-		double fraction = Utility.InvLerp (MinimumPosition, MaximumPosition, position);
+		double fraction = Utility.InvLerp (StartPosition, EndPosition, position);
 		return ColorBgra.Lerp (StartColor, EndColor, fraction);
 	}
 
@@ -137,22 +137,20 @@ internal sealed class ColorGradient
 			return ColorBgra.Lerp (
 				sorted_colors[^1],
 				EndColor,
-				Utility.InvLerp (sorted_positions[^1], MaximumPosition, position));
+				Utility.InvLerp (sorted_positions[^1], EndPosition, position));
 
 		var immediatelyHigher = KeyValuePair.Create (sorted_positions[immediatelyHigherIndex], sorted_colors[immediatelyHigherIndex]);
 
-		bool singleItem = sorted_positions.Length == 1;
-
-		if (singleItem && immediatelyHigher.Key == position)
-			return sorted_colors[0];
-
-		if (singleItem)
-			return ColorBgra.Lerp (
-				StartColor,
-				sorted_colors[0],
-				Utility.InvLerp (MinimumPosition, sorted_positions[0], position));
+		if (immediatelyHigher.Key == position)
+			return immediatelyHigher.Value;
 
 		int immediatelyLowerIndex = immediatelyHigherIndex - 1;
+
+		if (immediatelyLowerIndex < 0)
+			return ColorBgra.Lerp (
+				StartColor,
+				immediatelyHigher.Value,
+				Utility.InvLerp (StartPosition, immediatelyHigher.Key, position));
 
 		var immediatelyLower = KeyValuePair.Create (sorted_positions[immediatelyLowerIndex], sorted_colors[immediatelyLowerIndex]);
 
