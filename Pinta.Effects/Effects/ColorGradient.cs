@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.Collections.Immutable;
 using System.Linq;
 using Pinta.Core;
 
@@ -31,7 +32,7 @@ internal sealed class ColorGradient
 	/// </summary>
 	public double MaximumPosition { get; }
 
-	private readonly IReadOnlyList<KeyValuePair<double, ColorBgra>> sorted_stops;
+	private readonly ImmutableArray<KeyValuePair<double, ColorBgra>> sorted_stops;
 
 	internal ColorGradient (
 		ColorBgra startColor,
@@ -42,7 +43,7 @@ internal sealed class ColorGradient
 	{
 		CheckBoundsConsistency (minPosition, maxPosition);
 
-		var sortedStops = gradientStops.OrderBy (stop => stop.Key).ToArray ();
+		var sortedStops = gradientStops.OrderBy (stop => stop.Key).ToImmutableArray ();
 		CheckStopsBounds (sortedStops, minPosition, maxPosition);
 		CheckUniqueness (sortedStops);
 
@@ -53,16 +54,16 @@ internal sealed class ColorGradient
 		sorted_stops = sortedStops;
 	}
 
-	private static void CheckStopsBounds (IReadOnlyList<KeyValuePair<double, ColorBgra>> sortedStops, double minPosition, double maxPosition)
+	private static void CheckStopsBounds (ImmutableArray<KeyValuePair<double, ColorBgra>> sortedStops, double minPosition, double maxPosition)
 	{
-		if (sortedStops.Count > 0 && sortedStops[0].Key <= minPosition) throw new ArgumentException ($"Lowest key in gradient stops has to be greater than {nameof (minPosition)}");
-		if (sortedStops.Count > 0 && sortedStops[^1].Key >= maxPosition) throw new ArgumentException ($"Greatest key in gradient stops has to be lower than {nameof (maxPosition)}");
+		if (sortedStops.Length > 0 && sortedStops[0].Key <= minPosition) throw new ArgumentException ($"Lowest key in gradient stops has to be greater than {nameof (minPosition)}");
+		if (sortedStops.Length > 0 && sortedStops[^1].Key >= maxPosition) throw new ArgumentException ($"Greatest key in gradient stops has to be lower than {nameof (maxPosition)}");
 	}
 
-	private static void CheckUniqueness (IReadOnlyList<KeyValuePair<double, ColorBgra>> sortedStops)
+	private static void CheckUniqueness (ImmutableArray<KeyValuePair<double, ColorBgra>> sortedStops)
 	{
 		var distinctPositions = sortedStops.GroupBy (s => s.Key).Count ();
-		if (distinctPositions != sortedStops.Count) throw new ArgumentException ("Cannot have more than one stop in the same position");
+		if (distinctPositions != sortedStops.Length) throw new ArgumentException ("Cannot have more than one stop in the same position");
 	}
 
 	private static void CheckBoundsConsistency (double minPosition, double maxPosition)
@@ -113,7 +114,7 @@ internal sealed class ColorGradient
 	{
 		if (position <= MinimumPosition) return StartColor;
 		if (position >= MaximumPosition) return EndColor;
-		if (sorted_stops.Count == 0) return HandleNoStops (position);
+		if (sorted_stops.Length == 0) return HandleNoStops (position);
 		return HandleWithStops (position);
 	}
 
@@ -129,20 +130,20 @@ internal sealed class ColorGradient
 		var immediatelyLower = immediateLowerIndex < 0 ? KeyValuePair.Create (MinimumPosition, StartColor) : sorted_stops[immediateLowerIndex];
 		if (immediatelyLower.Key == position) return immediatelyLower.Value;
 		int immediatelyHigherIndex = immediateLowerIndex + 1;
-		var immediatelyHigher = (immediatelyHigherIndex < sorted_stops.Count) ? sorted_stops[immediatelyHigherIndex] : KeyValuePair.Create (MaximumPosition, EndColor);
+		var immediatelyHigher = (immediatelyHigherIndex < sorted_stops.Length) ? sorted_stops[immediatelyHigherIndex] : KeyValuePair.Create (MaximumPosition, EndColor);
 		double fraction = Utility.InvLerp (immediatelyLower.Key, immediatelyHigher.Key, position);
 		return ColorBgra.Lerp (immediatelyLower.Value, immediatelyHigher.Value, fraction);
 	}
 
 	/// <returns>Index of number immediately lower than target. If not found, it returns -1</returns>
 	/// <param name="arr">Array assumed to be sorted by key</param>
-	private static int BinarySearchLowerOrEqual (IReadOnlyList<KeyValuePair<double, ColorBgra>> arr, double target)
+	private static int BinarySearchLowerOrEqual (ImmutableArray<KeyValuePair<double, ColorBgra>> arr, double target)
 	{
 		// TODO: Make this method more generic?
-		if (arr.Count == 0) return -1;
+		if (arr.Length == 0) return -1;
 
 		int left = 0;
-		int right = arr.Count - 1;
+		int right = arr.Length - 1;
 
 		while (left <= right) {
 			int mid = left + (right - left) / 2;
