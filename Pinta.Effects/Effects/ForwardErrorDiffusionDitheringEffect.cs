@@ -32,15 +32,20 @@ public sealed class ForwardErrorDiffusionDitheringEffect : BaseEffect
 	protected override void Render (ImageSurface src, ImageSurface dest, RectangleI roi)
 	{
 		var dst_data = dest.GetPixelData ();
+
 		for (int y = roi.Top; y <= roi.Bottom; y++) {
+
 			for (int x = roi.Left; x <= roi.Right; x++) {
 
 				var currentIndex = y * src.Width + x;
+
 				var originalPixel = dst_data[currentIndex];
 				var closestColor = FindClosestPaletteColor (originalPixel);
+
 				int errorRed = originalPixel.R - closestColor.R;
 				int errorGreen = originalPixel.G - closestColor.G;
 				int errorBlue = originalPixel.B - closestColor.B;
+
 				dst_data[currentIndex] = closestColor;
 
 				var diffusionMatrix = GetPredefinedDiffusionMatrix (Data.DiffusionMatrix);
