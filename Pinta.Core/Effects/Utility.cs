@@ -6,6 +6,7 @@
 /////////////////////////////////////////////////////////////////////////////////
 
 using System;
+using System.Numerics;
 using System.Reflection;
 
 namespace Pinta.Core;
@@ -29,6 +30,18 @@ public static class Utility
 
 	public static double Lerp (double from, double to, double frac)
 		=> from + frac * (to - from);
+
+	/// <exception cref="ArgumentException">
+	/// Difference between upper and lower bounds is zero
+	/// </exception>
+	public static double InvLerp (double from, double to, double value)
+	{
+		double valueSpan = to - from;
+		if (valueSpan == 0)
+			throw new ArgumentException ("Difference between upper and lower bounds cannot be zero", $"{nameof (from)}, {nameof (to)}");
+		double offset = value - from;
+		return offset / valueSpan;
+	}
 
 	public static PointD Lerp (PointD from, PointD to, float frac)
 		=> new (

@@ -75,7 +75,9 @@ public sealed class MandelbrotFractalEffect : BaseEffect
 		double angleTheta,
 		int factor,
 		double xOffset,
-		double yOffset);
+		double yOffset,
+		bool invertColors,
+		ColorGradient colorGradient);
 	private MandelbrotSettings CreateSettings (ImageSurface dst)
 	{
 		int h = dst.Height;
@@ -99,7 +101,11 @@ public sealed class MandelbrotFractalEffect : BaseEffect
 			factor: Data.Factor,
 
 			xOffset: x_offset,
-			yOffset: y_offset
+			yOffset: y_offset,
+
+			invertColors: Data.InvertColors,
+
+			colorGradient: GradientHelper.CreateColorGradient (Data.ColorScheme).Resized (0, 1023)
 		);
 	}
 
@@ -108,17 +114,16 @@ public sealed class MandelbrotFractalEffect : BaseEffect
 		MandelbrotSettings settings = CreateSettings (dst);
 
 		Span<ColorBgra> dst_data = dst.GetPixelData ();
-		foreach (Core.RectangleI rect in rois) {
+		foreach (RectangleI rect in rois) {
 			for (int y = rect.Top; y <= rect.Bottom; y++) {
 				var dst_row = dst_data.Slice (y * settings.w, settings.w);
 				for (int x = rect.Left; x <= rect.Right; x++) {
-					PointI target = new (x, y);
-					dst_row[x] = GetPixelColor (settings, target);
+					dst_row[x] = GetPixelColor (settings, new (x, y));
 				}
 			}
 		}
 
-		if (Data.InvertColors)
+		if (settings.invertColors)
 			invert_effect.Render (dst, dst, rois);
 	}
 
@@ -144,12 +149,22 @@ public sealed class MandelbrotFractalEffect : BaseEffect
 
 			double c = 64 + settings.factor * m;
 
-			r += Utility.ClampToByte (c - 768);
-			g += Utility.ClampToByte (c - 512);
-			b += Utility.ClampToByte (c - 256);
-			a += Utility.ClampToByte (c - 0);
+			double clamped_c = Math.Clamp (c, settings.colorGradient.StartPosition, settings.colorGradient.EndPosition);
+
+			ColorBgra colorAddend = settings.colorGradient.GetColor (clamped_c);
+
+			r += colorAddend.R;
+			g += colorAddend.G;
+			b += colorAddend.B;
+			a += colorAddend.A;
 		}
-		return ColorBgra.FromBgra (Utility.ClampToByte (b / settings.count), Utility.ClampToByte (g / settings.count), Utility.ClampToByte (r / settings.count), Utility.ClampToByte (a / settings.count));
+
+		return ColorBgra.FromBgra (
+			b: Utility.ClampToByte (b / settings.count),
+			g: Utility.ClampToByte (g / settings.count),
+			r: Utility.ClampToByte (r / settings.count),
+			a: Utility.ClampToByte (a / settings.count)
+		);
 	}
 	#endregion
 
@@ -168,8 +183,10 @@ public sealed class MandelbrotFractalEffect : BaseEffect
 		[Caption ("Angle")]
 		public DegreesAngle Angle { get; set; } = new (0);
 
+		[Caption ("Color Scheme")]
+		public PredefinedGradients ColorScheme { get; set; } = PredefinedGradients.Electric;
+
 		[Caption ("Invert Colors")]
 		public bool InvertColors { get; set; } = false;
-
 	}
 }
