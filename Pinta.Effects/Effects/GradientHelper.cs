@@ -60,9 +60,9 @@ internal static class GradientHelper
 				DefaultMinimumValue,
 				DefaultMaximumValue,
 				new Dictionary<double, ColorBgra> {
-					[Utility.Lerp (DefaultMinimumValue, DefaultMaximumValue, 0.25)] = ColorBgra.Black,
-					[Utility.Lerp (DefaultMinimumValue, DefaultMaximumValue, 0.50)] = ColorBgra.Red,
-					[Utility.Lerp (DefaultMinimumValue, DefaultMaximumValue, 0.75)] = ColorBgra.Yellow,
+					[Utility.Lerp (DefaultMinimumValue, DefaultMaximumValue, 0.2502443792766373)] = ColorBgra.Black,
+					[Utility.Lerp (DefaultMinimumValue, DefaultMaximumValue, 0.5004887585532747)] = ColorBgra.Red,
+					[Utility.Lerp (DefaultMinimumValue, DefaultMaximumValue, 0.750733137829912)] = ColorBgra.Yellow,
 				}),
 
 			PredefinedGradients.CottonCandy => ColorGradient.Create (
@@ -82,9 +82,9 @@ internal static class GradientHelper
 				DefaultMinimumValue,
 				DefaultMaximumValue,
 				new Dictionary<double, ColorBgra> {
-					[Utility.Lerp (DefaultMinimumValue, DefaultMaximumValue, 0.25)] = ColorBgra.Black,
-					[Utility.Lerp (DefaultMinimumValue, DefaultMaximumValue, 0.50)] = ColorBgra.Blue,
-					[Utility.Lerp (DefaultMinimumValue, DefaultMaximumValue, 0.75)] = ColorBgra.Cyan,
+					[Utility.Lerp (DefaultMinimumValue, DefaultMaximumValue, 0.2502443792766373)] = ColorBgra.Black,
+					[Utility.Lerp (DefaultMinimumValue, DefaultMaximumValue, 0.5004887585532747)] = ColorBgra.Blue,
+					[Utility.Lerp (DefaultMinimumValue, DefaultMaximumValue, 0.750733137829912)] = ColorBgra.Cyan,
 				}),
 
 			PredefinedGradients.BeautifulItaly => ColorGradient.Create (
