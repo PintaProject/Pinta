@@ -58,6 +58,7 @@ internal sealed class CoreEffectsExtension : IExtension
 		PintaCore.Effects.RegisterEffect (new CloudsEffect ());
 		PintaCore.Effects.RegisterEffect (new EdgeDetectEffect ());
 		PintaCore.Effects.RegisterEffect (new EmbossEffect ());
+		PintaCore.Effects.RegisterEffect (new ForwardErrorDiffusionDitheringEffect ());
 		PintaCore.Effects.RegisterEffect (new FragmentEffect ());
 		PintaCore.Effects.RegisterEffect (new FrostedGlassEffect ());
 		PintaCore.Effects.RegisterEffect (new GaussianBlurEffect ());
@@ -82,11 +83,6 @@ internal sealed class CoreEffectsExtension : IExtension
 		PintaCore.Effects.RegisterEffect (new TwistEffect ());
 		PintaCore.Effects.RegisterEffect (new UnfocusEffect ());
 		PintaCore.Effects.RegisterEffect (new ZoomBlurEffect ());
-
-#if DEBUG
-		// Effects under development
-		PintaCore.Effects.RegisterEffect (new ForwardErrorDiffusionDitheringEffect ());
-#endif
 	}
 
 	public void Uninitialize ()
@@ -108,6 +104,7 @@ internal sealed class CoreEffectsExtension : IExtension
 		PintaCore.Effects.UnregisterInstanceOfEffect (typeof (CloudsEffect));
 		PintaCore.Effects.UnregisterInstanceOfEffect (typeof (EdgeDetectEffect));
 		PintaCore.Effects.UnregisterInstanceOfEffect (typeof (EmbossEffect));
+		PintaCore.Effects.UnregisterInstanceOfEffect (typeof (ForwardErrorDiffusionDitheringEffect));
 		PintaCore.Effects.UnregisterInstanceOfEffect (typeof (FragmentEffect));
 		PintaCore.Effects.UnregisterInstanceOfEffect (typeof (FrostedGlassEffect));
 		PintaCore.Effects.UnregisterInstanceOfEffect (typeof (GaussianBlurEffect));
@@ -132,11 +129,6 @@ internal sealed class CoreEffectsExtension : IExtension
 		PintaCore.Effects.UnregisterInstanceOfEffect (typeof (TwistEffect));
 		PintaCore.Effects.UnregisterInstanceOfEffect (typeof (UnfocusEffect));
 		PintaCore.Effects.UnregisterInstanceOfEffect (typeof (ZoomBlurEffect));
-
-#if DEBUG
-		// Effects under development
-		PintaCore.Effects.UnregisterInstanceOfEffect (typeof (ForwardErrorDiffusionDitheringEffect));
-#endif
 	}
 	#endregion
 }
