@@ -45,7 +45,7 @@ public abstract class BaseEditEngine
 		RoundedLineSeries,
 	}
 
-	public static Dictionary<ShapeTypes, ShapeTool> CorrespondingTools = new ();
+	public static Dictionary<ShapeTypes, ShapeTool> CorrespondingTools { get; } = new ();
 
 	protected abstract string ShapeName { get; }
 
@@ -135,11 +135,10 @@ public abstract class BaseEditEngine
 		get {
 			ShapeEngine? selEngine = SelectedShapeEngine;
 
-			if (selEngine != null && selEngine.ControlPoints.Count > SelectedPointIndex) {
+			if (selEngine != null && selEngine.ControlPoints.Count > SelectedPointIndex)
 				return selEngine.ControlPoints[SelectedPointIndex];
-			} else {
+			else
 				return null;
-			}
 		}
 	}
 
@@ -148,26 +147,17 @@ public abstract class BaseEditEngine
 	/// </summary>
 	public ShapeEngine? ActiveShapeEngine {
 		get {
-			if (SelectedShapeIndex > -1 && SEngines.Count > SelectedShapeIndex) {
+			if (SelectedShapeIndex > -1 && SEngines.Count > SelectedShapeIndex)
 				return SEngines[SelectedShapeIndex];
-			} else {
+			else
 				return null;
-			}
 		}
 	}
 
 	/// <summary>
 	/// The selected shape's ShapeEngine. This requires that a point in the shape be selected and should be used in most cases. This can be null.
 	/// </summary>
-	public ShapeEngine? SelectedShapeEngine {
-		get {
-			if (SelectedPointIndex > -1) {
-				return ActiveShapeEngine;
-			} else {
-				return null;
-			}
-		}
-	}
+	public ShapeEngine? SelectedShapeEngine => (SelectedPointIndex > -1) ? ActiveShapeEngine : null;
 
 	/// <summary>
 	/// Display the handles for all active shape engines' control points, along with the hover position
@@ -268,16 +258,19 @@ public abstract class BaseEditEngine
 		tb.Append (brush_width_label);
 
 		if (brush_width == null) {
+
 			brush_width = GtkExtensions.CreateToolBarSpinButton (1, 1e5, 1, settings.GetSetting (BRUSH_WIDTH_SETTING (toolPrefix), BaseTool.DEFAULT_BRUSH_WIDTH));
 
 			brush_width.OnValueChanged += (o, e) => {
+
 				ShapeEngine? selEngine = SelectedShapeEngine;
 
-				if (selEngine != null) {
-					selEngine.BrushWidth = BrushWidth;
-					StorePreviousSettings ();
-					DrawActiveShape (false, false, true, false, false);
-				}
+				if (selEngine == null)
+					return;
+
+				selEngine.BrushWidth = BrushWidth;
+				StorePreviousSettings ();
+				DrawActiveShape (false, false, true, false, false);
 			};
 		}
 
@@ -423,14 +416,10 @@ public abstract class BaseEditEngine
 	}
 
 	public virtual bool HandleBeforeUndo ()
-	{
-		return false;
-	}
+		=> false;
 
 	public virtual bool HandleBeforeRedo ()
-	{
-		return false;
-	}
+		=> false;
 
 	public virtual void HandleAfterUndo ()
 	{
