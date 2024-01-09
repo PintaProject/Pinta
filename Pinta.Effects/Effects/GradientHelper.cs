@@ -48,6 +48,15 @@ internal static class GradientHelper
 	{
 		return scheme switch {
 
+			PredefinedGradients.BeautifulItaly => ColorGradient.Create (
+				ColorBgra.FromBgr (70, 146, 0),
+				ColorBgra.FromBgr (55, 43, 206),
+				DefaultMinimumValue,
+				DefaultMaximumValue,
+				new Dictionary<double, ColorBgra> {
+					[Utility.Lerp (DefaultMinimumValue, DefaultMaximumValue, 0.25)] = ColorBgra.White,
+				}),
+
 			PredefinedGradients.BlackAndWhite => ColorGradient.Create (
 				ColorBgra.White,
 				ColorBgra.Black,
@@ -63,6 +72,16 @@ internal static class GradientHelper
 					[Utility.Lerp (DefaultMinimumValue, DefaultMaximumValue, 0.25)] = ColorBgra.Black,
 					[Utility.Lerp (DefaultMinimumValue, DefaultMaximumValue, 0.50)] = ColorBgra.Red,
 					[Utility.Lerp (DefaultMinimumValue, DefaultMaximumValue, 0.75)] = ColorBgra.Yellow,
+				}),
+
+			PredefinedGradients.CherryBlossom => ColorGradient.Create (
+				ColorBgra.Transparent,
+				ColorBgra.FromBgr (240, 255, 255),
+				DefaultMinimumValue,
+				DefaultMaximumValue,
+				new Dictionary<double, ColorBgra> {
+					[Utility.Lerp (DefaultMinimumValue, DefaultMaximumValue, 0.25)] = ColorBgra.FromBgr (235, 206, 135),
+					[Utility.Lerp (DefaultMinimumValue, DefaultMaximumValue, 0.75)] = ColorBgra.FromBgr (193, 182, 255),
 				}),
 
 			PredefinedGradients.CottonCandy => ColorGradient.Create (
@@ -87,15 +106,6 @@ internal static class GradientHelper
 					[Utility.Lerp (DefaultMinimumValue, DefaultMaximumValue, 0.75)] = ColorBgra.Cyan,
 				}),
 
-			PredefinedGradients.BeautifulItaly => ColorGradient.Create (
-				ColorBgra.FromBgr (70, 146, 0),
-				ColorBgra.FromBgr (55, 43, 206),
-				DefaultMinimumValue,
-				DefaultMaximumValue,
-				new Dictionary<double, ColorBgra> {
-					[Utility.Lerp (DefaultMinimumValue, DefaultMaximumValue, 0.25)] = ColorBgra.White,
-				}),
-
 			PredefinedGradients.LimeLemon => ColorGradient.Create (
 				ColorBgra.Transparent,
 				ColorBgra.White,
@@ -114,16 +124,6 @@ internal static class GradientHelper
 				DefaultMaximumValue,
 				new Dictionary<double, ColorBgra> {
 					[Utility.Lerp (DefaultMinimumValue, DefaultMaximumValue, 0.25)] = ColorBgra.Yellow,
-				}),
-
-			PredefinedGradients.CherryBlossom => ColorGradient.Create (
-				ColorBgra.Transparent,
-				ColorBgra.FromBgr (240, 255, 255),
-				DefaultMinimumValue,
-				DefaultMaximumValue,
-				new Dictionary<double, ColorBgra> {
-					[Utility.Lerp (DefaultMinimumValue, DefaultMaximumValue, 0.25)] = ColorBgra.FromBgr (235, 206, 135),
-					[Utility.Lerp (DefaultMinimumValue, DefaultMaximumValue, 0.75)] = ColorBgra.FromBgr (193, 182, 255),
 				}),
 
 			_ => CreateColorGradient (PredefinedGradients.Electric),

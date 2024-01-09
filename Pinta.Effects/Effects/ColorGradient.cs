@@ -60,8 +60,9 @@ internal sealed class ColorGradient
 
 	private static void CheckStopsBounds (ImmutableArray<double> sortedPositions, double minPosition, double maxPosition)
 	{
-		if (sortedPositions.Length > 0 && sortedPositions[0] <= minPosition) throw new ArgumentException ($"Lowest key in gradient stops has to be greater than {nameof (minPosition)}");
-		if (sortedPositions.Length > 0 && sortedPositions[^1] >= maxPosition) throw new ArgumentException ($"Greatest key in gradient stops has to be lower than {nameof (maxPosition)}");
+		if (sortedPositions.Length == 0) return;
+		if (sortedPositions[0] <= minPosition) throw new ArgumentException ($"Lowest key in gradient stops has to be greater than {nameof (minPosition)}");
+		if (sortedPositions[^1] >= maxPosition) throw new ArgumentException ($"Greatest key in gradient stops has to be lower than {nameof (maxPosition)}");
 	}
 
 	private static void CheckUniqueness (ImmutableArray<double> sortedPositions)
@@ -141,7 +142,6 @@ internal sealed class ColorGradient
 
 	private static int BinarySearchHigherOrEqual (ImmutableArray<double> sortedPositions, double target)
 	{
-		// https://learn.microsoft.com/en-us/dotnet/api/system.collections.immutable.immutablearray.binarysearch
 		if (sortedPositions.Length == 0) return -1;
 		int found = sortedPositions.BinarySearch (target);
 		if (found > 0) return found; // Exact match
