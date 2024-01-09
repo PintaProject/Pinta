@@ -102,6 +102,15 @@ internal sealed class GradientTests
 				[50] = ColorBgra.Cyan,
 			}
 		);
+
+		yield return new (
+			0,
+			100,
+			new Dictionary<double, ColorBgra> {
+				[50] = ColorBgra.Cyan,
+				[3] = ColorBgra.Red,
+			}
+		);
 	}
 
 	[TestCaseSource (nameof (interpolated_color_checks))]
