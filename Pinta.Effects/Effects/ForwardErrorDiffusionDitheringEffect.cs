@@ -34,6 +34,7 @@ public sealed class ForwardErrorDiffusionDitheringEffect : BaseEffect
 		var dst_data = dest.GetPixelData ();
 		for (int y = roi.Top; y <= roi.Bottom; y++) {
 			for (int x = roi.Left; x <= roi.Right; x++) {
+
 				var currentIndex = y * src.Width + x;
 				var originalPixel = dst_data[currentIndex];
 				var closestColor = FindClosestPaletteColor (originalPixel);
@@ -41,40 +42,37 @@ public sealed class ForwardErrorDiffusionDitheringEffect : BaseEffect
 				int errorGreen = originalPixel.G - closestColor.G;
 				int errorBlue = originalPixel.B - closestColor.B;
 				dst_data[currentIndex] = closestColor;
-				DistributeError (dst_data, new (x, y), errorRed, errorGreen, errorBlue, src.Width, src.Height);
-			}
-		}
-	}
 
-	private void DistributeError (Span<ColorBgra> original, PointI location, int errorRed, int errorGreen, int errorBlue, int sourceWidth, int sourceHeight)
-	{
-		var diffusionMatrix = GetPredefinedDiffusionMatrix (Data.DiffusionMatrix);
+				var diffusionMatrix = GetPredefinedDiffusionMatrix (Data.DiffusionMatrix);
 
-		for (int r = 0; r < diffusionMatrix.Rows; r++) {
+				for (int r = 0; r < diffusionMatrix.Rows; r++) {
 
-			for (int c = 0; c < diffusionMatrix.Columns; c++) {
+					for (int c = 0; c < diffusionMatrix.Columns; c++) {
 
-				var weight = diffusionMatrix[r, c];
+						var weight = diffusionMatrix[r, c];
 
-				if (weight <= 0)
-					continue;
+						if (weight <= 0)
+							continue;
 
-				PointI thisItem = new (
-					X: location.X + c - diffusionMatrix.ColumnsToLeft,
-					Y: location.Y + r
-				);
+						PointI thisItem = new (
+							X: x + c - diffusionMatrix.ColumnsToLeft,
+							Y: y + r
+						);
 
-				if (thisItem.X < 0 || thisItem.X >= sourceWidth)
-					continue;
+						if (thisItem.X < 0 || thisItem.X >= src.Width)
+							continue;
 
-				if (thisItem.Y < 0 || thisItem.Y >= sourceHeight)
-					continue;
+						if (thisItem.Y < 0 || thisItem.Y >= src.Height)
+							continue;
 
-				int idx = (thisItem.Y * sourceWidth) + thisItem.X;
+						int idx = (thisItem.Y * src.Width) + thisItem.X;
 
-				double factor = ((double) weight) / diffusionMatrix.TotalWeight;
+						double factor = ((double) weight) / diffusionMatrix.TotalWeight;
 
-				original[idx] = AddError (original[idx], factor, errorRed, errorGreen, errorBlue);
+						dst_data[idx] = AddError (dst_data[idx], factor, errorRed, errorGreen, errorBlue);
+					}
+				}
+
 			}
 		}
 	}
