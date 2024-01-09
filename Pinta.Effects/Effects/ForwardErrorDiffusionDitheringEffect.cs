@@ -31,15 +31,26 @@ public sealed class ForwardErrorDiffusionDitheringEffect : BaseEffect
 
 	protected override void Render (ImageSurface src, ImageSurface dest, RectangleI roi)
 	{
-		var dst_data = dest.GetPixelData ();
+		Span<ColorBgra> dst_data = dest.GetPixelData ();
 
-		for (int y = roi.Top; y <= roi.Bottom; y++) {
+		ErrorDiffusionMatrix diffusionMatrix = GetPredefinedDiffusionMatrix (Data.DiffusionMatrix);
 
-			for (int x = roi.Left; x <= roi.Right; x++) {
+		int sourceWidth = src.Width;
+		int sourceHeight = src.Height;
 
-				var currentIndex = y * src.Width + x;
+		int top = roi.Top;
+		int bottom = roi.Bottom;
+		int left = roi.Left;
+		int right = roi.Right;
+
+		for (int y = top; y <= bottom; y++) {
+
+			for (int x = left; x <= right; x++) {
+
+				var currentIndex = y * sourceWidth + x;
 
 				var originalPixel = dst_data[currentIndex];
+
 				var closestColor = FindClosestPaletteColor (originalPixel);
 
 				int errorRed = originalPixel.R - closestColor.R;
@@ -47,8 +58,6 @@ public sealed class ForwardErrorDiffusionDitheringEffect : BaseEffect
 				int errorBlue = originalPixel.B - closestColor.B;
 
 				dst_data[currentIndex] = closestColor;
-
-				var diffusionMatrix = GetPredefinedDiffusionMatrix (Data.DiffusionMatrix);
 
 				for (int r = 0; r < diffusionMatrix.Rows; r++) {
 
@@ -64,13 +73,13 @@ public sealed class ForwardErrorDiffusionDitheringEffect : BaseEffect
 							Y: y + r
 						);
 
-						if (thisItem.X < 0 || thisItem.X >= src.Width)
+						if (thisItem.X < 0 || thisItem.X >= sourceWidth)
 							continue;
 
-						if (thisItem.Y < 0 || thisItem.Y >= src.Height)
+						if (thisItem.Y < 0 || thisItem.Y >= sourceHeight)
 							continue;
 
-						int idx = (thisItem.Y * src.Width) + thisItem.X;
+						int idx = (thisItem.Y * sourceWidth) + thisItem.X;
 
 						double factor = ((double) weight) / diffusionMatrix.TotalWeight;
 
