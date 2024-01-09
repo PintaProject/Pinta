@@ -6,6 +6,7 @@
 /////////////////////////////////////////////////////////////////////////////////
 
 using System;
+using System.Numerics;
 using System.Reflection;
 
 namespace Pinta.Core;
@@ -24,10 +25,11 @@ public static class Utility
 	public static byte ClampToByte (int x)
 		=> (byte) Math.Clamp (x, byte.MinValue, byte.MaxValue);
 
-	public static float Lerp (float from, float to, float frac)
-		=> from + frac * (to - from);
-
-	public static double Lerp (double from, double to, double frac)
+	public static TNumber Lerp<TNumber> (
+		TNumber from,
+		TNumber to,
+		TNumber frac
+	) where TNumber : INumber<TNumber>
 		=> from + frac * (to - from);
 
 	public static double MagnitudeSquared (double x, double y)
