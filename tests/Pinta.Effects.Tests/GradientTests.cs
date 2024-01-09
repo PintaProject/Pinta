@@ -87,7 +87,7 @@ internal sealed class GradientTests
 		ColorGradient gradient = ColorGradient.Create (randomStart, randomEnd, minPosition, maxPosition, checks);
 		foreach (var check in checks) {
 			var returned = gradient.GetColor (check.Key);
-			Assert.That (check.Value == returned);
+			Assert.That (check.Value, Is.EqualTo (returned));
 		}
 	}
 
@@ -110,7 +110,7 @@ internal sealed class GradientTests
 		foreach (var check in checks) {
 			var interpolated = gradient.GetColor (check.Key);
 			var expected = check.Value;
-			Assert.That (expected == interpolated);
+			Assert.That (expected, Is.EqualTo (interpolated));
 		}
 	}
 
