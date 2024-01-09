@@ -132,11 +132,32 @@ internal sealed class ColorGradient
 	private ColorBgra HandleWithStops (double position)
 	{
 		int immediatelyHigherIndex = BinarySearchHigherOrEqual (sorted_positions, position);
-		var immediatelyHigher = immediatelyHigherIndex < 0 ? KeyValuePair.Create (MaximumPosition, EndColor) : KeyValuePair.Create (sorted_positions[immediatelyHigherIndex], sorted_colors[immediatelyHigherIndex]);
-		if (immediatelyHigher.Key == position) return immediatelyHigher.Value;
+
+		if (immediatelyHigherIndex < 0)
+			return ColorBgra.Lerp (
+				sorted_colors[^1],
+				EndColor,
+				Utility.InvLerp (sorted_positions[^1], MaximumPosition, position));
+
+		var immediatelyHigher = KeyValuePair.Create (sorted_positions[immediatelyHigherIndex], sorted_colors[immediatelyHigherIndex]);
+
+		bool singleItem = sorted_positions.Length == 1;
+
+		if (singleItem && immediatelyHigher.Key == position)
+			return sorted_colors[0];
+
+		if (singleItem)
+			return ColorBgra.Lerp (
+				StartColor,
+				sorted_colors[0],
+				Utility.InvLerp (MinimumPosition, sorted_positions[0], position));
+
 		int immediatelyLowerIndex = immediatelyHigherIndex - 1;
-		var immediatelyLower = immediatelyLowerIndex < 0 ? KeyValuePair.Create (MinimumPosition, StartColor) : KeyValuePair.Create (sorted_positions[immediatelyLowerIndex], sorted_colors[immediatelyLowerIndex]);
+
+		var immediatelyLower = KeyValuePair.Create (sorted_positions[immediatelyLowerIndex], sorted_colors[immediatelyLowerIndex]);
+
 		double fraction = Utility.InvLerp (immediatelyLower.Key, immediatelyHigher.Key, position);
+
 		return ColorBgra.Lerp (immediatelyLower.Value, immediatelyHigher.Value, fraction);
 	}
 
