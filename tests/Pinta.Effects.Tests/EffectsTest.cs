@@ -64,6 +64,24 @@ internal sealed class EffectsTest
 	}
 
 	[Test]
+	public void Dithering2 ()
+	{
+		var effect = new ForwardErrorDiffusionDitheringEffect ();
+		effect.Data.PaletteChoice = ForwardErrorDiffusionDitheringEffect.PredefinedPalettes.BlackWhite;
+		effect.Data.DiffusionMatrix = ForwardErrorDiffusionDitheringEffect.PredefinedDiffusionMatrices.FloydSteinberg;
+		Utilities.TestEffect (effect, "dithering2.png");
+	}
+
+	[Test]
+	public void Dithering3 ()
+	{
+		var effect = new ForwardErrorDiffusionDitheringEffect ();
+		effect.Data.PaletteChoice = ForwardErrorDiffusionDitheringEffect.PredefinedPalettes.OldWindows16;
+		effect.Data.DiffusionMatrix = ForwardErrorDiffusionDitheringEffect.PredefinedDiffusionMatrices.Stucki;
+		Utilities.TestEffect (effect, "dithering3.png");
+	}
+
+	[Test]
 	public void EdgeDetect1 ()
 	{
 		var effect = new EdgeDetectEffect ();
