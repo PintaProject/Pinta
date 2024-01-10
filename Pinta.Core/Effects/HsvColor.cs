@@ -16,9 +16,9 @@ namespace Pinta.Core;
 /// </summary>
 public readonly struct HsvColor
 {
-	public readonly int Hue { get; } // 0-360
-	public readonly int Saturation { get; } // 0-100
-	public readonly int Value { get; } // 0-100
+	public readonly int Hue { get; init; } // 0-360
+	public readonly int Saturation { get; init; } // 0-100
+	public readonly int Value { get; init; } // 0-100
 
 	public static bool operator == (HsvColor lhs, HsvColor rhs)
 	{

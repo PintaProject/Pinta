@@ -131,6 +131,38 @@ internal sealed class ColorGradient
 	}
 
 	/// <returns>
+	/// Gradient with the hues of all colors (including the start
+	/// and end colors, and color stops) rotated on the color wheel
+	/// </returns>
+	public ColorGradient HueRotated (DegreesAngle angle)
+	{
+		var rotatedColors = sorted_colors.Select (c => HueRotate (c, angle));
+		var newStops = sorted_positions.Zip (rotatedColors, KeyValuePair.Create);
+		return new (
+			startColor: HueRotate (StartColor, angle),
+			endColor: HueRotate (EndColor, angle),
+			startPosition: StartPosition,
+			endPosition: EndPosition,
+			gradientStops: newStops
+		);
+	}
+
+	private static ColorBgra HueRotate (ColorBgra original, DegreesAngle angle)
+	{
+		if (angle.Degrees == 0) return original;
+		RgbColor originalRgb = new (original.R, original.G, original.B);
+		HsvColor originalHsv = originalRgb.ToHsv ();
+		HsvColor rotatedHsv = originalHsv with { Hue = (int) new DegreesAngle (originalHsv.Hue + angle.Degrees).Degrees };
+		RgbColor rotatedRgb = rotatedHsv.ToRgb ();
+		return ColorBgra.FromBgra (
+			b: Utility.ClampToByte (rotatedRgb.Blue),
+			g: Utility.ClampToByte (rotatedRgb.Green),
+			r: Utility.ClampToByte (rotatedRgb.Red),
+			a: original.A
+		);
+	}
+
+	/// <returns>
 	/// Intermediate color, according to start and end colors,
 	/// and gradient stops.
 	/// No overflow occurs as such;
