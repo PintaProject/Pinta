@@ -1,0 +1,110 @@
+using Pinta.Core;
+using System.Collections.Generic;
+using System;
+using System.Collections.Immutable;
+using System.ComponentModel;
+
+namespace Pinta.Effects;
+
+public enum PredefinedPalettes
+{
+	OldWindows16,
+	WebSafe,
+	BlackWhite,
+	OldMsPaint,
+}
+
+internal static class PaletteHelper
+{
+	public static ImmutableArray<ColorBgra> GetPredefined (PredefinedPalettes choice)
+	{
+		return choice switch {
+			PredefinedPalettes.OldWindows16 => Predefined.OldWindows16,
+			PredefinedPalettes.WebSafe => Predefined.WebSafe,
+			PredefinedPalettes.BlackWhite => Predefined.BlackWhite,
+			PredefinedPalettes.OldMsPaint => Predefined.OldMsPaint,
+			_ => throw new InvalidEnumArgumentException (nameof (choice), (int) choice, typeof (PredefinedPalettes)),
+		};
+	}
+
+	public static class Predefined
+	{
+		public static ImmutableArray<ColorBgra> OldWindows16 => old_windows_16.Value;
+		public static ImmutableArray<ColorBgra> WebSafe => web_safe.Value;
+		public static ImmutableArray<ColorBgra> BlackWhite { get; }
+		public static ImmutableArray<ColorBgra> OldMsPaint => old_ms_paint.Value;
+
+		private static readonly Lazy<ImmutableArray<ColorBgra>> web_safe;
+		private static readonly Lazy<ImmutableArray<ColorBgra>> old_windows_16;
+		private static readonly Lazy<ImmutableArray<ColorBgra>> old_ms_paint;
+
+		static Predefined ()
+		{
+			web_safe = new (() => EnumerateWebSafeColorCube ().ToImmutableArray ());
+			old_windows_16 = new (() => EnumerateOldWindowsColors ().ToImmutableArray ());
+			BlackWhite = ImmutableArray.CreateRange (new[] { ColorBgra.FromBgr (0, 0, 0), ColorBgra.FromBgr (255, 255, 255) });
+			old_ms_paint = new (() => EnumerateOldMsPaintColors ().ToImmutableArray ());
+		}
+
+		private static IEnumerable<ColorBgra> EnumerateOldWindowsColors ()
+		{
+			yield return ColorBgra.FromBgr (0, 0, 0); // Black
+			yield return ColorBgra.FromBgr (0, 0, 128); // Blue
+			yield return ColorBgra.FromBgr (0, 128, 0); // Green
+			yield return ColorBgra.FromBgr (0, 128, 128); // Cyan
+			yield return ColorBgra.FromBgr (128, 0, 0); // Red
+			yield return ColorBgra.FromBgr (128, 0, 128); // Magenta
+			yield return ColorBgra.FromBgr (128, 64, 0); // Brown
+			yield return ColorBgra.FromBgr (192, 192, 192); // Light Gray
+			yield return ColorBgra.FromBgr (128, 128, 128); // Dark Gray
+			yield return ColorBgra.FromBgr (0, 0, 255); // Light Blue
+			yield return ColorBgra.FromBgr (0, 255, 0); // Light Green
+			yield return ColorBgra.FromBgr (0, 255, 255); // Light Cyan
+			yield return ColorBgra.FromBgr (255, 0, 0); // Light Red
+			yield return ColorBgra.FromBgr (255, 0, 255); // Light Magenta
+			yield return ColorBgra.FromBgr (255, 255, 0); // Yellow
+			yield return ColorBgra.FromBgr (255, 255, 255); // White
+		}
+
+		private static IEnumerable<ColorBgra> EnumerateOldMsPaintColors ()
+		{
+			// https://wiki.vg-resource.com/Paint
+			yield return ColorBgra.FromBgr (0, 0, 0); // Black
+			yield return ColorBgra.FromBgr (255, 255, 255); // White
+			yield return ColorBgra.FromBgr (128, 128, 128); // Dark gray
+			yield return ColorBgra.FromBgr (192, 192, 192); // Light gray
+			yield return ColorBgra.FromBgr (0, 0, 255); // Red
+			yield return ColorBgra.FromBgr (0, 0, 128); // Maroon
+			yield return ColorBgra.FromBgr (0, 255, 255); // Yellow
+			yield return ColorBgra.FromBgr (0, 128, 128); // Olive
+			yield return ColorBgra.FromBgr (0, 255, 0); // Lime green
+			yield return ColorBgra.FromBgr (0, 128, 0); // Green
+			yield return ColorBgra.FromBgr (255, 255, 0); // Cyan
+			yield return ColorBgra.FromBgr (128, 128, 0); // Teal
+			yield return ColorBgra.FromBgr (255, 0, 0); // Blue
+			yield return ColorBgra.FromBgr (128, 0, 0); // Navy blue
+			yield return ColorBgra.FromBgr (255, 0, 255); // Light Magenta
+			yield return ColorBgra.FromBgr (128, 0, 128); // Magenta
+			yield return ColorBgra.FromBgr (128, 255, 255); // Light yellow
+			yield return ColorBgra.FromBgr (64, 128, 128); // Highball (mossy olive)
+			yield return ColorBgra.FromBgr (128, 255, 0); // Spring green
+			yield return ColorBgra.FromBgr (64, 64, 0); // Cyprus (dark teal)
+			yield return ColorBgra.FromBgr (255, 255, 128); // Electric blue
+			yield return ColorBgra.FromBgr (255, 128, 0); // Dodger blue
+			yield return ColorBgra.FromBgr (255, 128, 128); // Light slate blue
+			yield return ColorBgra.FromBgr (128, 64, 0); // Dark cerulean
+			yield return ColorBgra.FromBgr (128, 0, 255); // Deep pink
+			yield return ColorBgra.FromBgr (255, 0, 128); // Electric indigo
+			yield return ColorBgra.FromBgr (64, 128, 255); // Coral
+			yield return ColorBgra.FromBgr (0, 64, 128); // Saddle brown
+		}
+
+		private static IEnumerable<ColorBgra> EnumerateWebSafeColorCube ()
+		{
+			for (short r = 0; r <= 255; r += 51)
+				for (short g = 0; g <= 255; g += 51)
+					for (short b = 0; b <= 255; b += 51)
+						yield return ColorBgra.FromBgr ((byte) b, (byte) g, (byte) r);
+		}
+	}
+}

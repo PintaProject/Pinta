@@ -57,27 +57,27 @@ internal sealed class EffectsTest
 	[Test]
 	public void Dithering1 ()
 	{
-		var effect = new ForwardErrorDiffusionDitheringEffect ();
-		effect.Data.PaletteChoice = ForwardErrorDiffusionDitheringEffect.PredefinedPalettes.OldWindows16;
-		effect.Data.DiffusionMatrix = ForwardErrorDiffusionDitheringEffect.PredefinedDiffusionMatrices.FloydSteinberg;
+		var effect = new DitheringEffect ();
+		effect.Data.PaletteChoice = DitheringEffect.PredefinedPalettes.OldWindows16;
+		effect.Data.DiffusionMatrix = PredefinedDiffusionMatrices.FloydSteinberg;
 		Utilities.TestEffect (effect, "dithering1.png");
 	}
 
 	[Test]
 	public void Dithering2 ()
 	{
-		var effect = new ForwardErrorDiffusionDitheringEffect ();
-		effect.Data.PaletteChoice = ForwardErrorDiffusionDitheringEffect.PredefinedPalettes.BlackWhite;
-		effect.Data.DiffusionMatrix = ForwardErrorDiffusionDitheringEffect.PredefinedDiffusionMatrices.FloydSteinberg;
+		var effect = new DitheringEffect ();
+		effect.Data.PaletteChoice = DitheringEffect.PredefinedPalettes.BlackWhite;
+		effect.Data.DiffusionMatrix = PredefinedDiffusionMatrices.FloydSteinberg;
 		Utilities.TestEffect (effect, "dithering2.png");
 	}
 
 	[Test]
 	public void Dithering3 ()
 	{
-		var effect = new ForwardErrorDiffusionDitheringEffect ();
-		effect.Data.PaletteChoice = ForwardErrorDiffusionDitheringEffect.PredefinedPalettes.OldWindows16;
-		effect.Data.DiffusionMatrix = ForwardErrorDiffusionDitheringEffect.PredefinedDiffusionMatrices.Stucki;
+		var effect = new DitheringEffect ();
+		effect.Data.PaletteChoice = DitheringEffect.PredefinedPalettes.OldWindows16;
+		effect.Data.DiffusionMatrix = PredefinedDiffusionMatrices.Stucki;
 		Utilities.TestEffect (effect, "dithering3.png");
 	}
 
