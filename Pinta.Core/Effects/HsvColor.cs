@@ -16,49 +16,32 @@ namespace Pinta.Core;
 /// </summary>
 public readonly struct HsvColor
 {
-	public readonly int Hue { get; init; } // 0-360
-	public readonly int Saturation { get; init; } // 0-100
-	public readonly int Value { get; init; } // 0-100
+	public readonly int Hue { get; } // 0-360
+	public readonly int Saturation { get; } // 0-100
+	public readonly int Value { get; } // 0-100
 
 	public static bool operator == (HsvColor lhs, HsvColor rhs)
-	{
-		if ((lhs.Hue == rhs.Hue) &&
-		    (lhs.Saturation == rhs.Saturation) &&
-		    (lhs.Value == rhs.Value)) {
-			return true;
-		} else {
-			return false;
-		}
-	}
+		=> lhs.Hue == rhs.Hue && lhs.Saturation == rhs.Saturation && lhs.Value == rhs.Value;
 
 	public static bool operator != (HsvColor lhs, HsvColor rhs)
-	{
-		return !(lhs == rhs);
-	}
+		=> !(lhs == rhs);
 
 	public override readonly bool Equals (object? obj)
-	{
-		return obj is HsvColor hsv && this == hsv;
-	}
+		=> obj is HsvColor hsv && this == hsv;
 
 	public override readonly int GetHashCode ()
-	{
-		return (Hue + (Saturation << 8) + (Value << 16)).GetHashCode (); ;
-	}
+		=> (Hue + (Saturation << 8) + (Value << 16)).GetHashCode ();
 
 	public HsvColor (int hue, int saturation, int value)
 	{
-		if (hue < 0 || hue > 360) {
+		if (hue < 0 || hue > 360)
 			throw new ArgumentOutOfRangeException (nameof (hue), "must be in the range [0, 360]");
-		}
 
-		if (saturation < 0 || saturation > 100) {
+		if (saturation < 0 || saturation > 100)
 			throw new ArgumentOutOfRangeException (nameof (saturation), "must be in the range [0, 100]");
-		}
 
-		if (value < 0 || value > 100) {
+		if (value < 0 || value > 100)
 			throw new ArgumentOutOfRangeException (nameof (value), "must be in the range [0, 100]");
-		}
 
 		Hue = hue;
 		Saturation = saturation;
@@ -159,7 +142,5 @@ public readonly struct HsvColor
 	}
 
 	public override readonly string ToString ()
-	{
-		return $"({Hue}, {Saturation}, {Value})";
-	}
+		=> $"({Hue}, {Saturation}, {Value})";
 }

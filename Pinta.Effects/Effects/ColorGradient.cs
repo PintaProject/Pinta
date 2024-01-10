@@ -152,7 +152,11 @@ internal sealed class ColorGradient
 		if (angle.Degrees == 0) return original;
 		RgbColor originalRgb = new (original.R, original.G, original.B);
 		HsvColor originalHsv = originalRgb.ToHsv ();
-		HsvColor rotatedHsv = originalHsv with { Hue = (int) new DegreesAngle (originalHsv.Hue + angle.Degrees).Degrees };
+		HsvColor rotatedHsv = new HsvColor (
+			hue: (int) new DegreesAngle (originalHsv.Hue + angle.Degrees).Degrees,
+			saturation: originalHsv.Saturation,
+			value: originalHsv.Value
+		);
 		RgbColor rotatedRgb = rotatedHsv.ToRgb ();
 		return ColorBgra.FromBgra (
 			b: Utility.ClampToByte (rotatedRgb.Blue),
