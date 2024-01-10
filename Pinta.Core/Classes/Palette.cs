@@ -155,16 +155,16 @@ public sealed class Palette
 			OnPaletteChanged ();
 		} else {
 			var parent = PintaCore.Chrome.MainWindow;
-			ShowUnsupportedFormatDialog (parent, file.GetParseName (), Translations.GetString ("Unsupported palette format"), errors.ToString ());
+			ShowUnsupportedFormatDialog (parent, file.GetParseName (), Translations.GetString ("Unsupported palette format"), errors);
 		}
 	}
 
-	static (List<Color>? loadedColors, StringBuilder errors) LoadColors (Gio.File file)
+	static (List<Color>? loadedColors, string errors) LoadColors (Gio.File file)
 	{
 		var loader = PintaCore.PaletteFormats.GetFormatByFilename (file.GetDisplayName ())?.Loader;
 
 		if (loader != null)
-			return (loader.Load (file), new StringBuilder ());
+			return (loader.Load (file), string.Empty);
 
 		StringBuilder errors = new ();
 
@@ -173,7 +173,7 @@ public sealed class Palette
 			try {
 				var loaded_colors = format.Loader.Load (file);
 				if (loaded_colors != null)
-					return (loaded_colors, errors);
+					return (loaded_colors, errors.ToString ());
 			} catch (Exception e) {
 				// Record errors in case none of the formats work.
 				errors.AppendLine ($"Failed to load palette as {format.Filter.Name}:");
@@ -182,7 +182,7 @@ public sealed class Palette
 			}
 		}
 
-		return (null, errors);
+		return (null, errors.ToString ());
 	}
 
 	public void Save (Gio.File file, IPaletteSaver saver)
