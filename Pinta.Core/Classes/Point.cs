@@ -33,12 +33,6 @@ public readonly record struct PointI (int X, int Y)
 {
 	public static PointI Zero { get; } = new (0, 0);
 	public override readonly string ToString () => $"{X}, {Y}";
-	public readonly double Magnitude ()
-	{
-		double x = X;
-		double y = Y;
-		return Math.Sqrt (x * x + y * y);
-	}
 
 	public PointI Rotated90CCW () // Counterclockwise
 		=> new (-Y, X);
@@ -63,10 +57,6 @@ public readonly record struct PointD (double X, double Y)
 	public override readonly string ToString () => $"{X}, {Y}";
 
 	public readonly PointI ToInt () => new ((int) X, (int) Y);
-
-	public readonly double Distance (in PointD e) => new PointD (X - e.X, Y - e.Y).Magnitude ();
-
-	public readonly double Magnitude () => Math.Sqrt (X * X + Y * Y);
 
 	/// <summary>
 	/// Returns a new point, rounded to the nearest integer coordinates.
