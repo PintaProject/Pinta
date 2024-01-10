@@ -125,10 +125,11 @@ public sealed class CloudsEffect : BaseEffect
 	{
 		int w = surface.Width;
 		int h = surface.Height;
-		var data = surface.GetPixelData ();
 		int bottom = rect.Bottom;
 
-		for (int y = rect.Top; y <= rect.Bottom; ++y) {
+		var data = surface.GetPixelData ();
+
+		for (int y = rect.Top; y <= bottom; ++y) {
 			var row = data.Slice ((y - rect.Top) * w, w);
 			int dy = 2 * y - h;
 

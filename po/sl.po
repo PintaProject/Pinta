@@ -8,8 +8,8 @@ msgstr ""
 "Project-Id-Version: pinta\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2024-01-07 01:14+0000\n"
-"PO-Revision-Date: 2023-12-28 17:07+0000\n"
-"Last-Translator: Cameron White <cameronwhite91@gmail.com>\n"
+"PO-Revision-Date: 2024-01-09 15:06+0000\n"
+"Last-Translator: grof <grofaty@hotmail.com>\n"
 "Language-Team: Slovenian <https://hosted.weblate.org/projects/pinta/pinta/sl/"
 ">\n"
 "Language: sl\n"
@@ -605,6 +605,7 @@ msgstr "Izboči"
 #: ../Pinta/Main.cs:65
 msgid "Enable additional logging or behavior changes for debugging"
 msgstr ""
+"Omogoči dodatno beleženje ali spremembe v obnašanju za potrebe razhroščevanja"
 
 #: ../Pinta.Core/Actions/EditActions.cs:66
 #: ../Pinta.Core/Actions/EditActions.cs:245
