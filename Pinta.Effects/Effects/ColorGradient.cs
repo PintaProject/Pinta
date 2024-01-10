@@ -110,8 +110,8 @@ internal sealed class ColorGradient
 	/// <returns>
 	/// New gradient where the start color is now the end color,
 	/// and vice versa. Also, the color stops are in reversed positions
-	/// (in the new gradient, the first color is at the same distance
-	/// from the end color as it was from the start color in the original)
+	/// (in the new gradient, the colors are at the same distance
+	/// from the end color as they were from the start color in the original)
 	/// </returns>
 	public ColorGradient Reversed ()
 	{
