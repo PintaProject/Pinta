@@ -25,21 +25,40 @@ public static class Utility
 	public static byte ClampToByte (int x)
 		=> (byte) Math.Clamp (x, byte.MinValue, byte.MaxValue);
 
-	public static float Lerp (float from, float to, float frac)
+	public static TNumber Lerp<TNumber> (
+		TNumber from,
+		TNumber to,
+		TNumber frac
+	) where TNumber : INumber<TNumber>
 		=> from + frac * (to - from);
 
-	public static double Lerp (double from, double to, double frac)
-		=> from + frac * (to - from);
+	public static double MagnitudeSquared (double x, double y)
+		=> x * x + y * y;
+
+	public static double Magnitude (double x, double y)
+		=> Math.Sqrt (x * x + y * y);
+
+	public static double Magnitude (this PointD point)
+		=> Magnitude (point.X, point.Y);
+
+	public static double Magnitude (this PointI point)
+		=> Magnitude (point.X, point.Y);
+
+	public static double Distance (this PointD origin, in PointD dest)
+		=> Magnitude (origin - dest);
 
 	/// <exception cref="ArgumentException">
 	/// Difference between upper and lower bounds is zero
 	/// </exception>
-	public static double InvLerp (double from, double to, double value)
+	public static TNumber InvLerp<TNumber> (
+		TNumber from,
+		TNumber to,
+		TNumber value) where TNumber : INumber<TNumber>
 	{
-		double valueSpan = to - from;
-		if (valueSpan == 0)
+		TNumber valueSpan = to - from;
+		if (valueSpan == TNumber.Zero)
 			throw new ArgumentException ("Difference between upper and lower bounds cannot be zero", $"{nameof (from)}, {nameof (to)}");
-		double offset = value - from;
+		TNumber offset = value - from;
 		return offset / valueSpan;
 	}
 
@@ -71,29 +90,12 @@ public static class Utility
 		if (rects.Length == 0)
 			return RectangleI.Zero;
 
-		int left = rects[startIndex].Left;
-		int top = rects[startIndex].Top;
-		int right = rects[startIndex].Right;
-		int bottom = rects[startIndex].Bottom;
+		RectangleI unionsAggregate = rects[startIndex];
 
-		for (int i = startIndex + 1; i < startIndex + length; ++i) {
+		for (int i = startIndex + 1; i < startIndex + length; ++i)
+			unionsAggregate = unionsAggregate.Union (rects[i]);
 
-			RectangleI rect = rects[i];
-
-			if (rect.Left < left)
-				left = rect.Left;
-
-			if (rect.Top < top)
-				top = rect.Top;
-
-			if (rect.Right > right)
-				right = rect.Right;
-
-			if (rect.Bottom > bottom)
-				bottom = rect.Bottom;
-		}
-
-		return RectangleI.FromLTRB (left, top, right, bottom);
+		return unionsAggregate;
 	}
 
 	public static int ColorDifferenceSquared (ColorBgra a, ColorBgra b)

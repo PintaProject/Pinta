@@ -38,7 +38,7 @@ public sealed class PolarInversionEffect : WarpEffect
 		double y = transData.Y;
 
 		// NOTE: when x and y are zero, this will divide by zero and return NaN
-		double invertDistance = Utility.Lerp (1.0, DefaultRadius2 / ((x * x) + (y * y)), Data.Amount);
+		double invertDistance = Utility.Lerp (1.0, DefaultRadius2 / Utility.MagnitudeSquared (x, y), Data.Amount);
 
 		return new (
 			X: x * invertDistance,

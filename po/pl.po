@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: pinta\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2024-01-07 01:14+0000\n"
-"PO-Revision-Date: 2023-12-26 04:12+0000\n"
+"PO-Revision-Date: 2024-01-09 15:06+0000\n"
 "Last-Translator: Matthaiks <kitynska@gmail.com>\n"
 "Language-Team: Polish <https://hosted.weblate.org/projects/pinta/pinta/pl/>\n"
 "Language: pl\n"
@@ -605,6 +605,7 @@ msgstr "Wytłaczanie"
 #: ../Pinta/Main.cs:65
 msgid "Enable additional logging or behavior changes for debugging"
 msgstr ""
+"Włącz dodatkowe rejestrowanie lub zmiany zachowania na potrzeby debugowania"
 
 #: ../Pinta.Core/Actions/EditActions.cs:66
 #: ../Pinta.Core/Actions/EditActions.cs:245
