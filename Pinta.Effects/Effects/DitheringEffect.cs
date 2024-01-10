@@ -44,7 +44,15 @@ public sealed class DitheringEffect : BaseEffect
 	{
 		DitheringSettings settings = CreateSettings (src);
 
+		ReadOnlySpan<ColorBgra> src_data = src.GetReadOnlyPixelData ();
 		Span<ColorBgra> dst_data = dest.GetPixelData ();
+
+		for (int y = roi.Top; y <= roi.Bottom; y++) {
+			for (int x = roi.Left; x <= roi.Right; x++) {
+				int currentIndex = y * settings.sourceWidth + x;
+				dst_data[currentIndex] = src_data[currentIndex];
+			}
+		}
 
 		for (int y = roi.Top; y <= roi.Bottom; y++) {
 
