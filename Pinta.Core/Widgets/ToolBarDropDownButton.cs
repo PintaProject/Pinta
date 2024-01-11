@@ -53,12 +53,10 @@ public sealed class ToolBarDropDownButton : Gtk.MenuButton
 	}
 
 	public ToolBarItem SelectedItem {
-		get {
-			if (selected_item is null)
-				throw new InvalidOperationException ("Attempted to get SelectedItem from a drop down with no items.");
-
-			return selected_item;
-		}
+		get =>
+			selected_item is not null
+			? selected_item
+			: throw new InvalidOperationException ("Attempted to get SelectedItem from a drop down with no items.");
 		set {
 			if (selected_item != value)
 				SetSelectedItem (value);
@@ -113,7 +111,8 @@ public sealed class ToolBarItem
 		Tag = tag;
 	}
 
-	private static string AdjustName (string baseName) => string.Concat (baseName.Where (c => !char.IsWhiteSpace (c)));
+	private static string AdjustName (string baseName)
+		=> string.Concat (baseName.Where (c => !char.IsWhiteSpace (c)));
 
 	public string ImageId { get; }
 	public object? Tag { get; }
@@ -121,10 +120,5 @@ public sealed class ToolBarItem
 	public Gio.SimpleAction Action { get; }
 
 	public T GetTagOrDefault<T> (T defaultValue)
-	{
-		if (Tag is T value)
-			return value;
-
-		return defaultValue;
-	}
+		=> Tag is T value ? value : defaultValue;
 }

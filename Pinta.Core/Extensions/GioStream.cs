@@ -28,26 +28,23 @@
  *
  */
 using System;
+using System.Diagnostics;
 
 namespace Pinta.Core;
 
 public sealed class GioStream : System.IO.Stream
 {
-	readonly object stream;
+	readonly GObject.Object stream;
 	readonly bool can_read;
 	readonly bool can_seek;
 	readonly bool can_write;
 	bool is_disposed;
 
 	public GioStream (Uri uri, System.IO.FileMode mode)
-	{
-		throw new NotImplementedException ();
-	}
+		=> throw new NotImplementedException ();
 
 	public GioStream (string filename, System.IO.FileMode mode)
-	{
-		throw new NotImplementedException ();
-	}
+		=> throw new NotImplementedException ();
 
 	public GioStream (Gio.InputStream stream)
 	{
@@ -81,22 +78,16 @@ public sealed class GioStream : System.IO.Stream
 		get {
 			if (!CanSeek)
 				throw new NotSupportedException ("This stream doesn't support seeking");
+
 			if (is_disposed)
 				throw new ObjectDisposedException ("The stream is closed");
 
-			if (stream is Gio.FileInputStream istream) {
-				Gio.FileInfo info = istream.QueryInfo ("standard::size", null);
-				return info.GetSize ();
-			}
-			if (stream is Gio.FileOutputStream ostream) {
-				Gio.FileInfo info = ostream.QueryInfo ("standard::size", null);
-				return info.GetSize ();
-			}
-			if (stream is Gio.FileIOStream iostream) {
-				Gio.FileInfo info = iostream.QueryInfo ("standard::size", null);
-				return info.GetSize ();
-			}
-			throw new NotImplementedException ($"not implemented for {stream.GetType ()} streams");
+			return stream switch {
+				Gio.FileInputStream istream => istream.QueryInfo ("standard::size", null).GetSize (),
+				Gio.FileOutputStream ostream => ostream.QueryInfo ("standard::size", null).GetSize (),
+				Gio.FileIOStream iostream => iostream.QueryInfo ("standard::size", null).GetSize (),
+				_ => throw new NotImplementedException ($"not implemented for {stream.GetType ()} streams"),
+			};
 		}
 	}
 
@@ -129,13 +120,15 @@ public sealed class GioStream : System.IO.Stream
 			throw new NotSupportedException ("The stream does not support reading");
 		if (is_disposed)
 			throw new ObjectDisposedException ("The stream is closed");
-		Gio.InputStream? input_stream = null;
-		if (stream is Gio.InputStream istream)
-			input_stream = istream;
-		else if (stream is Gio.IOStream iostream)
-			input_stream = iostream.InputStream;
+
+		Gio.InputStream? input_stream = stream switch {
+			Gio.InputStream istream => istream,
+			Gio.IOStream iostream => iostream.InputStream,
+			_ => null,
+		};
+
 		if (input_stream == null)
-			throw new System.Exception ("this shouldn't happen");
+			throw new UnreachableException ();
 
 		return (int) input_stream.Read (new Span<byte> (buffer, offset, count), null);
 	}
@@ -152,13 +145,15 @@ public sealed class GioStream : System.IO.Stream
 			throw new NotSupportedException ("The stream does not support writing");
 		if (is_disposed)
 			throw new ObjectDisposedException ("The stream is closed");
-		Gio.OutputStream? output_stream = null;
-		if (stream is Gio.OutputStream ostream)
-			output_stream = ostream;
-		else if (stream is Gio.IOStream iostream)
-			output_stream = iostream.OutputStream;
+
+		Gio.OutputStream? output_stream = stream switch {
+			Gio.OutputStream ostream => ostream,
+			Gio.IOStream iostream => iostream.OutputStream,
+			_ => null,
+		};
+
 		if (output_stream == null)
-			throw new System.Exception ("this shouldn't happen");
+			throw new UnreachableException ();
 
 		output_stream.Write (new Span<byte> (buffer, offset, count), null);
 	}
@@ -170,11 +165,13 @@ public sealed class GioStream : System.IO.Stream
 		if (is_disposed)
 			throw new ObjectDisposedException ("The stream is closed");
 		var seekable = (Gio.Seekable) stream;
+
 		var seek_type = origin switch {
 			System.IO.SeekOrigin.Current => GLib.SeekType.Cur,
 			System.IO.SeekOrigin.End => GLib.SeekType.End,
 			_ => GLib.SeekType.Set,
 		};
+
 		seekable.Seek (offset, seek_type, null);
 		return Position;
 	}
@@ -197,12 +194,18 @@ public sealed class GioStream : System.IO.Stream
 
 	public override void Close ()
 	{
-		if (stream is Gio.InputStream istream)
-			istream.Close (null);
-		if (stream is Gio.OutputStream ostream)
-			ostream.Close (null);
-		if (stream is Gio.IOStream iostream)
-			iostream.Close (null);
+		switch (stream) {
+			case Gio.InputStream istream:
+				istream.Close (null);
+				break;
+			case Gio.OutputStream ostream:
+				ostream.Close (null);
+				break;
+			case Gio.IOStream iostream:
+				iostream.Close (null);
+				break;
+		}
+
 		is_disposed = true;
 	}
 }

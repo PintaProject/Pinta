@@ -45,19 +45,17 @@ public sealed class OraFormat : IImageImporter, IImageExporter
 		using var zipfile = new ZipArchive (stream);
 		XmlDocument stackXml = new XmlDocument ();
 
-		ZipArchiveEntry? stackXmlEntry = zipfile.GetEntry ("stack.xml");
-		if (stackXmlEntry is null)
-			throw new XmlException ("No 'stack.xml' found in OpenRaster file");
-
+		ZipArchiveEntry stackXmlEntry = zipfile.GetEntry ("stack.xml") ?? throw new XmlException ("No 'stack.xml' found in OpenRaster file");
 		stackXml.Load (stackXmlEntry.Open ());
 
 		// NRT - This makes a lot of assumptions that the file will be perfectly
 		// valid that we need to guard against.
 		XmlElement imageElement = stackXml.DocumentElement!;
-		int width = int.Parse (imageElement.GetAttribute ("w"));
-		int height = int.Parse (imageElement.GetAttribute ("h"));
 
-		Size imagesize = new Size (width, height);
+		Size imagesize = new Size (
+			Width: int.Parse (imageElement.GetAttribute ("w")),
+			Height: int.Parse (imageElement.GetAttribute ("h"))
+		);
 
 		Document doc = PintaCore.Workspace.CreateAndActivateDocument (file, "ora", imagesize);
 
@@ -84,10 +82,7 @@ public sealed class OraFormat : IImageImporter, IImageExporter
 			try {
 				// Write the file to a temporary file first
 				// Fixes a bug when running on .Net
-				ZipArchiveEntry? zf = zipfile.GetEntry (layerElement.GetAttribute ("src"));
-				if (zf is null)
-					throw new XmlException ("Missing layer in OpenRaster file");
-
+				ZipArchiveEntry? zf = zipfile.GetEntry (layerElement.GetAttribute ("src")) ?? throw new XmlException ("Missing layer in OpenRaster file");
 				using Stream s = zf.Open ();
 				string tmp_file = System.IO.Path.GetTempFileName ();
 
@@ -132,9 +127,7 @@ public sealed class OraFormat : IImageImporter, IImageExporter
 	#endregion
 
 	private static IFormatProvider GetFormat ()
-	{
-		return System.Globalization.CultureInfo.CreateSpecificCulture ("en");
-	}
+		=> System.Globalization.CultureInfo.CreateSpecificCulture ("en");
 
 	private static string GetAttribute (XmlElement element, string attribute, string defValue)
 	{
@@ -145,18 +138,17 @@ public sealed class OraFormat : IImageImporter, IImageExporter
 	private static Size GetThumbDimensions (int width, int height)
 	{
 		if (width <= ThumbMaxSize && height <= ThumbMaxSize)
-			return new Size (width, height);
-
-		if (width > height)
-			return new Size (ThumbMaxSize, (int) ((double) height / width * ThumbMaxSize));
+			return new (width, height);
+		else if (width > height)
+			return new (ThumbMaxSize, (int) ((double) height / width * ThumbMaxSize));
 		else
-			return new Size ((int) ((double) width / height * ThumbMaxSize), ThumbMaxSize);
+			return new ((int) ((double) width / height * ThumbMaxSize), ThumbMaxSize);
 	}
 
 	private static byte[] GetLayerXmlData (IReadOnlyList<UserLayer> layers)
 	{
-		MemoryStream ms = new MemoryStream ();
-		XmlTextWriter writer = new XmlTextWriter (ms, System.Text.Encoding.UTF8) {
+		using MemoryStream ms = new MemoryStream ();
+		using XmlTextWriter writer = new XmlTextWriter (ms, System.Text.Encoding.UTF8) {
 			Formatting = Formatting.Indented
 		};
 
@@ -238,8 +230,7 @@ public sealed class OraFormat : IImageImporter, IImageExporter
 	}
 
 	private static string BlendModeToStandard (BlendMode mode)
-	{
-		return mode switch {
+		=> mode switch {
 			BlendMode.Multiply => "svg:multiply",
 			BlendMode.ColorBurn => "svg:color-burn",
 			BlendMode.ColorDodge => "svg:color-dodge",
@@ -257,7 +248,6 @@ public sealed class OraFormat : IImageImporter, IImageExporter
 			BlendMode.Saturation => "svg:saturation",
 			_ => "svg:src-over",
 		};
-	}
 
 	private static BlendMode StandardToBlendMode (string mode)
 	{

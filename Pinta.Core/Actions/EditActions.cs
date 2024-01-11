@@ -239,10 +239,12 @@ public sealed class EditActions
 
 		doc.Workspace.Invalidate ();
 
-		if (sender is string && (sender as string) == "Cut")
-			doc.History.PushNewItem (new SimpleHistoryItem (Resources.StandardIcons.EditCut, Translations.GetString ("Cut"), old, doc.Layers.CurrentUserLayerIndex));
-		else
-			doc.History.PushNewItem (new SimpleHistoryItem (Resources.Icons.EditSelectionErase, Translations.GetString ("Erase Selection"), old, doc.Layers.CurrentUserLayerIndex));
+		doc.History.PushNewItem (
+			sender switch {
+				string and "Cut" => new SimpleHistoryItem (Resources.StandardIcons.EditCut, Translations.GetString ("Cut"), old, doc.Layers.CurrentUserLayerIndex),
+				_ => new SimpleHistoryItem (Resources.Icons.EditSelectionErase, Translations.GetString ("Erase Selection"), old, doc.Layers.CurrentUserLayerIndex),
+			}
+		);
 	}
 
 	private void HandlePintaCoreActionsEditDeselectActivated (object sender, EventArgs e)
@@ -420,10 +422,7 @@ public sealed class EditActions
 				file = file.GetParent ()!.GetChild (basename);
 			}
 
-			var format = PintaCore.PaletteFormats.GetFormatByFilename (basename);
-			if (format is null)
-				throw new FormatException ();
-
+			var format = PintaCore.PaletteFormats.GetFormatByFilename (basename) ?? throw new FormatException ();
 			PintaCore.Palette.CurrentPalette.Save (file, format.Saver);
 			last_palette_dir = file.GetParent ();
 		};

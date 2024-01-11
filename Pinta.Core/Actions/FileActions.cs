@@ -97,30 +97,25 @@ public sealed class FileActions
 #endif
 	}
 
-	public void RegisterHandlers ()
-	{
-	}
+	public void RegisterHandlers () { }
+
 	#endregion
 
 	#region Event Invokers
 	internal bool RaiseSaveDocument (Document document, bool saveAs)
 	{
-		DocumentCancelEventArgs e = new DocumentCancelEventArgs (document, saveAs);
-
 		if (SaveDocument == null)
 			throw new InvalidOperationException ("GUI is not handling PintaCore.Workspace.SaveDocument");
-		else
-			SaveDocument (this, e);
 
+		DocumentCancelEventArgs e = new DocumentCancelEventArgs (document, saveAs);
+		SaveDocument (this, e);
 		return !e.Cancel;
 	}
 
 	internal int RaiseModifyCompression (int defaultCompression, Gtk.Window parent)
 	{
 		ModifyCompressionEventArgs e = new ModifyCompressionEventArgs (defaultCompression, parent);
-
 		ModifyCompression?.Invoke (this, e);
-
 		return e.Cancel ? -1 : e.Quality;
 	}
 	#endregion

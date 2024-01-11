@@ -66,13 +66,16 @@ public sealed class PencilTool : BaseTool
 
 		Color tool_color;
 
-		if (e.MouseButton == MouseButton.Left) {
-			tool_color = palette.PrimaryColor;
-		} else if (e.MouseButton == MouseButton.Right) {
-			tool_color = palette.SecondaryColor;
-		} else {
-			last_point = point_empty;
-			return;
+		switch (e.MouseButton) {
+			case MouseButton.Left:
+				tool_color = palette.PrimaryColor;
+				break;
+			case MouseButton.Right:
+				tool_color = palette.SecondaryColor;
+				break;
+			default:
+				last_point = point_empty;
+				return;
 		}
 
 		Draw (document, e, tool_color, true);
@@ -82,13 +85,16 @@ public sealed class PencilTool : BaseTool
 	{
 		Color tool_color;
 
-		if (mouse_button == MouseButton.Left) {
-			tool_color = palette.PrimaryColor;
-		} else if (mouse_button == MouseButton.Right) {
-			tool_color = palette.SecondaryColor;
-		} else {
-			last_point = point_empty;
-			return;
+		switch (mouse_button) {
+			case MouseButton.Left:
+				tool_color = palette.PrimaryColor;
+				break;
+			case MouseButton.Right:
+				tool_color = palette.SecondaryColor;
+				break;
+			default:
+				last_point = point_empty;
+				return;
 		}
 
 		Draw (document, e, tool_color, false);
@@ -96,9 +102,8 @@ public sealed class PencilTool : BaseTool
 
 	protected override void OnMouseUp (Document document, ToolMouseEventArgs e)
 	{
-		if (undo_surface != null && surface_modified) {
+		if (undo_surface != null && surface_modified)
 			document.History.PushNewItem (new SimpleHistoryItem (Icon, Name, undo_surface, document.Layers.CurrentUserLayerIndex));
-		}
 
 		surface_modified = false;
 		undo_surface = null;

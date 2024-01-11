@@ -47,14 +47,11 @@ public sealed class DocumentHistory
 	public bool CanRedo => Pointer < history.Count - 1;
 	public bool CanUndo => Pointer > 0;
 
-	public BaseHistoryItem? Current {
-		get {
-			if (Pointer > -1 && Pointer < history.Count)
-				return history[Pointer];
-			else
-				return null;
-		}
-	}
+	public BaseHistoryItem? Current =>
+		Pointer switch {
+			> -1 when Pointer < history.Count => history[Pointer],
+			_ => null
+		};
 
 	public int Pointer { get; private set; } = -1;
 
@@ -89,18 +86,17 @@ public sealed class DocumentHistory
 
 	public void Undo ()
 	{
-		if (Pointer < 0) {
+		if (Pointer < 0)
 			throw new InvalidOperationException ("Undo stack is empty");
-		} else {
-			var item = history[Pointer];
-			item.Undo ();
-			item.State = HistoryItemState.Redo;
 
-			if (item.CausesDirty)
-				document.IsDirty = true;
+		var item = history[Pointer];
+		item.Undo ();
+		item.State = HistoryItemState.Redo;
 
-			Pointer--;
-		}
+		if (item.CausesDirty)
+			document.IsDirty = true;
+
+		Pointer--;
 
 		if (Pointer == clean_pointer)
 			document.IsDirty = false;
