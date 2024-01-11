@@ -1,8 +1,8 @@
-using Pinta.Core;
-using System.Collections.Generic;
 using System;
+using System.Collections.Generic;
 using System.Collections.Immutable;
 using System.ComponentModel;
+using Pinta.Core;
 
 namespace Pinta.Effects;
 
