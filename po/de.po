@@ -8,16 +8,16 @@ msgstr ""
 "Project-Id-Version: pinta\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2024-01-07 01:14+0000\n"
-"PO-Revision-Date: 2023-09-06 19:22+0000\n"
-"Last-Translator: Hans Peter <Unknown>\n"
-"Language-Team: German <de@li.org>\n"
+"PO-Revision-Date: 2024-01-14 12:30+0000\n"
+"Last-Translator: Ettore Atalan <atalanttore@googlemail.com>\n"
+"Language-Team: German <https://hosted.weblate.org/projects/pinta/pinta/de/>\n"
 "Language: de\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
+"X-Generator: Weblate 5.4-dev\n"
 "X-Launchpad-Export-Date: 2023-12-18 03:00+0000\n"
-"X-Generator: Launchpad (build e1eeab5b20e19239bd7d5f36676f7a52988db88b)\n"
 
 #: ../Pinta.Gui.Addins/InstallDialog.cs:216
 msgid " (in user directory)"
@@ -80,7 +80,7 @@ msgstr "Hinzugefügt"
 
 #: ../Pinta/MainWindow.cs:382
 msgid "Adjustments"
-msgstr ""
+msgstr "Anpassungen"
 
 #: ../Pinta.Tools/Tools/ColorPickerTool.cs:193
 msgid "After select"
@@ -177,7 +177,7 @@ msgstr "Einpassen"
 
 #: ../Pinta.Core/Enumerations/ResamplingMode.cs:22
 msgid "Bilinear"
-msgstr ""
+msgstr "Bilinear"
 
 #: ../Pinta.Effects/Adjustments/BlackAndWhiteEffect.cs:24
 msgid "Black and White"
@@ -423,7 +423,7 @@ msgstr "Farbsättigung"
 
 #: ../Pinta.Core/Actions/ViewActions.cs:181
 msgid "Color Scheme"
-msgstr ""
+msgstr "Farbschema"
 
 #: ../Pinta.Effects/Effects/InkSketchEffect.cs:156
 msgid "Coloring"
@@ -500,7 +500,7 @@ msgstr "Ausschneiden"
 #. Translators: This refers to using a dark variant of the color scheme.
 #: ../Pinta.Core/Actions/ViewActions.cs:189
 msgid "Dark"
-msgstr ""
+msgstr "Dunkel"
 
 #: ../Pinta.Core/Effects/UserBlendOps.cs:38
 msgid "Darken"
@@ -513,7 +513,7 @@ msgstr "Strich"
 #. Translators: This refers to using the system's default color scheme.
 #: ../Pinta.Core/Actions/ViewActions.cs:185
 msgid "Default"
-msgstr ""
+msgstr "Standard"
 
 #: ../Pinta.Core/Actions/LayerActions.cs:49
 #: ../Pinta.Core/Actions/LayerActions.cs:312
@@ -586,7 +586,7 @@ msgstr "Effe_kte"
 
 #: ../Pinta/MainWindow.cs:376
 msgid "Effects"
-msgstr ""
+msgstr "Effekte"
 
 #: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:326
 #: ../Pinta.Tools/Editable/EditEngines/EllipseEditEngine.cs:34
@@ -1173,7 +1173,7 @@ msgstr "Lizenz"
 #. Translators: This refers to using a light variant of the color scheme.
 #: ../Pinta.Core/Actions/ViewActions.cs:187
 msgid "Light"
-msgstr ""
+msgstr "Hell"
 
 #: ../Pinta.Core/Effects/UserBlendOps.cs:37
 msgid "Lighten"
@@ -1218,7 +1218,7 @@ msgstr "Zauberstab"
 
 #: ../Pinta/MainWindow.cs:370
 msgid "Main Menu"
-msgstr ""
+msgstr "Hauptmenü"
 
 #: ../Pinta/Dialogs/ResizeCanvasDialog.cs:76
 #: ../Pinta/Dialogs/ResizeImageDialog.cs:66
@@ -1282,7 +1282,7 @@ msgstr "Name:"
 
 #: ../Pinta.Core/Enumerations/ResamplingMode.cs:23
 msgid "Nearest Neighbor"
-msgstr ""
+msgstr "Nächster Nachbar"
 
 #: ../Pinta.Core/Actions/FileActions.cs:55
 msgid "New"
@@ -1572,7 +1572,7 @@ msgstr "Stärke"
 #. Translators: This refers to preserving the current canvas size when pasting a larger image.
 #: ../Pinta/Actions/Edit/PasteAction.cs:189
 msgid "Preserve"
-msgstr ""
+msgstr "Beibehalten"
 
 #: ../Pinta/Dialogs/NewImageDialog.cs:101
 msgid "Preset:"
