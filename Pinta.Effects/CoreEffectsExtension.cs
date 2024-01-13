@@ -55,7 +55,7 @@ internal sealed class CoreEffectsExtension : IExtension
 		// Add the effects
 		PintaCore.Effects.RegisterEffect (new AddNoiseEffect ());
 		PintaCore.Effects.RegisterEffect (new BulgeEffect ());
-		PintaCore.Effects.RegisterEffect (new CloudsEffect ());
+		PintaCore.Effects.RegisterEffect (new CloudsEffect (PintaCore.Services));
 		PintaCore.Effects.RegisterEffect (new EdgeDetectEffect ());
 		PintaCore.Effects.RegisterEffect (new EmbossEffect ());
 		PintaCore.Effects.RegisterEffect (new FragmentEffect ());
@@ -63,8 +63,8 @@ internal sealed class CoreEffectsExtension : IExtension
 		PintaCore.Effects.RegisterEffect (new GaussianBlurEffect ());
 		PintaCore.Effects.RegisterEffect (new GlowEffect ());
 		PintaCore.Effects.RegisterEffect (new InkSketchEffect ());
-		PintaCore.Effects.RegisterEffect (new JuliaFractalEffect ());
-		PintaCore.Effects.RegisterEffect (new MandelbrotFractalEffect ());
+		PintaCore.Effects.RegisterEffect (new JuliaFractalEffect (PintaCore.Services));
+		PintaCore.Effects.RegisterEffect (new MandelbrotFractalEffect (PintaCore.Services));
 		PintaCore.Effects.RegisterEffect (new MedianEffect ());
 		PintaCore.Effects.RegisterEffect (new MotionBlurEffect ());
 		PintaCore.Effects.RegisterEffect (new OilPaintingEffect ());

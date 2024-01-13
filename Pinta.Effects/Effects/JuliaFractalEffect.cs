@@ -28,8 +28,11 @@ public sealed class JuliaFractalEffect : BaseEffect
 
 	public JuliaFractalData Data => (JuliaFractalData) EffectData!;  // NRT - Set in constructor
 
-	public JuliaFractalEffect ()
+	private readonly IPaletteService palette;
+
+	public JuliaFractalEffect (IServiceManager services)
 	{
+		palette = services.GetService<IPaletteService> ();
 		EffectData = new JuliaFractalData ();
 	}
 
@@ -90,7 +93,7 @@ public sealed class JuliaFractalEffect : BaseEffect
 		var baseGradient =
 			GradientHelper
 			.CreateBaseGradientForEffect (
-				() => PintaCore.Palette,
+				palette,
 				Data.ColorSchemeSource,
 				Data.ColorScheme,
 				Data.ColorSchemeSeed)

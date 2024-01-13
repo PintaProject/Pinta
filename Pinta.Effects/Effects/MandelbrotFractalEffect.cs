@@ -28,8 +28,11 @@ public sealed class MandelbrotFractalEffect : BaseEffect
 
 	public MandelbrotFractalData Data => (MandelbrotFractalData) EffectData!;  // NRT - Set in constructor
 
-	public MandelbrotFractalEffect ()
+	private readonly IPaletteService palette;
+
+	public MandelbrotFractalEffect (IServiceManager services)
 	{
+		palette = services.GetService<IPaletteService> ();
 		EffectData = new MandelbrotFractalData ();
 	}
 
@@ -87,7 +90,7 @@ public sealed class MandelbrotFractalEffect : BaseEffect
 		var baseGradient =
 			GradientHelper
 			.CreateBaseGradientForEffect (
-				() => PintaCore.Palette,
+				palette,
 				Data.ColorSchemeSource,
 				Data.ColorScheme,
 				Data.ColorSchemeSeed)

@@ -34,8 +34,11 @@ public sealed class CloudsEffect : BaseEffect
 
 	public CloudsData Data => (CloudsData) EffectData!;  // NRT - Set in constructor
 
-	public CloudsEffect ()
+	public IPaletteService palette { get; }
+
+	public CloudsEffect (IServiceManager services)
 	{
+		palette = services.GetService<IPaletteService> ();
 		EffectData = new CloudsData ();
 	}
 
@@ -175,7 +178,7 @@ public sealed class CloudsEffect : BaseEffect
 		var baseGradient =
 			GradientHelper
 			.CreateBaseGradientForEffect (
-				() => PintaCore.Palette,
+				palette,
 				Data.ColorSchemeSource,
 				Data.ColorScheme,
 				Data.ColorSchemeSeed)
