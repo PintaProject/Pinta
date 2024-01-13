@@ -13,6 +13,7 @@ public enum PredefinedPalettes
 	OldWindows16,
 	OldWindows20,
 	Rgb3Bit,
+	Rgb666,
 	WebSafe,
 }
 
@@ -26,6 +27,7 @@ internal static class PaletteHelper
 			PredefinedPalettes.OldWindows16 => Predefined.OldWindows16,
 			PredefinedPalettes.OldWindows20 => Predefined.OldWindows20,
 			PredefinedPalettes.Rgb3Bit => Predefined.Rgb3Bit,
+			PredefinedPalettes.Rgb666 => Predefined.Rgb666,
 			PredefinedPalettes.WebSafe => Predefined.WebSafe,
 			_ => throw new InvalidEnumArgumentException (nameof (choice), (int) choice, typeof (PredefinedPalettes)),
 		};
@@ -38,12 +40,14 @@ internal static class PaletteHelper
 		public static ImmutableArray<ColorBgra> OldWindows16 => old_windows_16.Value;
 		public static ImmutableArray<ColorBgra> OldWindows20 => old_windows_20.Value;
 		public static ImmutableArray<ColorBgra> Rgb3Bit => rgb_3_bit.Value;
+		public static ImmutableArray<ColorBgra> Rgb666 => rgb_666.Value;
 		public static ImmutableArray<ColorBgra> WebSafe => web_safe.Value;
 
 		private static readonly Lazy<ImmutableArray<ColorBgra>> old_windows_16;
 		private static readonly Lazy<ImmutableArray<ColorBgra>> old_windows_20;
 		private static readonly Lazy<ImmutableArray<ColorBgra>> old_ms_paint;
 		private static readonly Lazy<ImmutableArray<ColorBgra>> rgb_3_bit;
+		private static readonly Lazy<ImmutableArray<ColorBgra>> rgb_666;
 		private static readonly Lazy<ImmutableArray<ColorBgra>> web_safe;
 
 		static Predefined ()
@@ -53,19 +57,34 @@ internal static class PaletteHelper
 			old_windows_16 = new (() => EnumerateOldWindows16Colors ().ToImmutableArray ());
 			old_windows_20 = new (() => EnumerateOldWindows20Colors ().ToImmutableArray ());
 			rgb_3_bit = new (() => EnumerateRgb3Bit ().ToImmutableArray ());
+			rgb_666 = new (() => EnumerateRgb666 ().ToImmutableArray ());
 			web_safe = new (() => EnumerateWebSafeColorCube ().ToImmutableArray ());
+		}
+
+		private static IEnumerable<ColorBgra> EnumerateRgb666 ()
+		{
+			// https://en.wikipedia.org/wiki/List_of_software_palettes#6_level_RGB
+			const byte factor = 51;
+			for (byte r = 0; r < 6; r++)
+				for (byte g = 0; g < 6; g++)
+					for (byte b = 0; b < 6; b++)
+						yield return ColorBgra.FromBgr (
+							b: (byte) (b * factor),
+							g: (byte) (g * factor),
+							r: (byte) (r * factor));
 		}
 
 		private static IEnumerable<ColorBgra> EnumerateRgb3Bit ()
 		{
+			// https://en.wikipedia.org/wiki/List_of_monochrome_and_RGB_color_formats#3-bit_RGB
 			for (byte i = 0; i < 8; i++) {
 				bool r = (i & 1) != 0;
 				bool g = (i & 2) != 0;
 				bool b = (i & 4) != 0;
 				yield return ColorBgra.FromBgr (
-					b: (byte) (b ? 255 : 0),
-					g: (byte) (g ? 255 : 0),
-					r: (byte) (r ? 255 : 0));
+					b: b ? byte.MaxValue : byte.MinValue,
+					g: g ? byte.MaxValue : byte.MinValue,
+					r: r ? byte.MaxValue : byte.MinValue);
 			}
 		}
 
