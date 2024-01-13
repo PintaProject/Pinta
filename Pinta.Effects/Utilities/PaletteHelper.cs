@@ -8,11 +8,11 @@ namespace Pinta.Effects;
 
 public enum PredefinedPalettes
 {
+	BlackWhite,
+	OldMsPaint,
 	OldWindows16,
 	OldWindows20,
 	WebSafe,
-	BlackWhite,
-	OldMsPaint,
 }
 
 internal static class PaletteHelper
@@ -20,35 +20,35 @@ internal static class PaletteHelper
 	public static ImmutableArray<ColorBgra> GetPredefined (PredefinedPalettes choice)
 	{
 		return choice switch {
+			PredefinedPalettes.BlackWhite => Predefined.BlackWhite,
+			PredefinedPalettes.OldMsPaint => Predefined.OldMsPaint,
 			PredefinedPalettes.OldWindows16 => Predefined.OldWindows16,
 			PredefinedPalettes.OldWindows20 => Predefined.OldWindows20,
 			PredefinedPalettes.WebSafe => Predefined.WebSafe,
-			PredefinedPalettes.BlackWhite => Predefined.BlackWhite,
-			PredefinedPalettes.OldMsPaint => Predefined.OldMsPaint,
 			_ => throw new InvalidEnumArgumentException (nameof (choice), (int) choice, typeof (PredefinedPalettes)),
 		};
 	}
 
 	public static class Predefined
 	{
+		public static ImmutableArray<ColorBgra> BlackWhite { get; }
+		public static ImmutableArray<ColorBgra> OldMsPaint => old_ms_paint.Value;
 		public static ImmutableArray<ColorBgra> OldWindows16 => old_windows_16.Value;
 		public static ImmutableArray<ColorBgra> OldWindows20 => old_windows_20.Value;
 		public static ImmutableArray<ColorBgra> WebSafe => web_safe.Value;
-		public static ImmutableArray<ColorBgra> BlackWhite { get; }
-		public static ImmutableArray<ColorBgra> OldMsPaint => old_ms_paint.Value;
 
-		private static readonly Lazy<ImmutableArray<ColorBgra>> web_safe;
 		private static readonly Lazy<ImmutableArray<ColorBgra>> old_windows_16;
 		private static readonly Lazy<ImmutableArray<ColorBgra>> old_windows_20;
 		private static readonly Lazy<ImmutableArray<ColorBgra>> old_ms_paint;
+		private static readonly Lazy<ImmutableArray<ColorBgra>> web_safe;
 
 		static Predefined ()
 		{
-			web_safe = new (() => EnumerateWebSafeColorCube ().ToImmutableArray ());
-			old_windows_16 = new (() => EnumerateOldWindows16Colors ().ToImmutableArray ());
-			old_windows_20 = new (() => EnumerateOldWindows20Colors ().ToImmutableArray ());
 			BlackWhite = ImmutableArray.CreateRange (new[] { ColorBgra.FromBgr (0, 0, 0), ColorBgra.FromBgr (255, 255, 255) });
 			old_ms_paint = new (() => EnumerateOldMsPaintColors ().ToImmutableArray ());
+			old_windows_16 = new (() => EnumerateOldWindows16Colors ().ToImmutableArray ());
+			old_windows_20 = new (() => EnumerateOldWindows20Colors ().ToImmutableArray ());
+			web_safe = new (() => EnumerateWebSafeColorCube ().ToImmutableArray ());
 		}
 
 		private static IEnumerable<ColorBgra> EnumerateOldWindows16Colors ()
