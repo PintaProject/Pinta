@@ -29,7 +29,7 @@ public static class Utility
 		TNumber from,
 		TNumber to,
 		TNumber frac
-	) where TNumber : INumber<TNumber>
+	) where TNumber : IFloatingPoint<TNumber>
 		=> from + frac * (to - from);
 
 	public static double MagnitudeSquared (double x, double y)
@@ -53,7 +53,7 @@ public static class Utility
 	public static TNumber InvLerp<TNumber> (
 		TNumber from,
 		TNumber to,
-		TNumber value) where TNumber : INumber<TNumber>
+		TNumber value) where TNumber : IFloatingPoint<TNumber>
 	{
 		TNumber valueSpan = to - from;
 		if (valueSpan == TNumber.Zero)
