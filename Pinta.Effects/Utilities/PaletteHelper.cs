@@ -69,10 +69,11 @@ internal static class PaletteHelper
 		private static IEnumerable<ColorBgra> EnumerateRgb666 ()
 		{
 			// https://en.wikipedia.org/wiki/List_of_software_palettes#6_level_RGB
+			const byte levels = 6;
 			const byte factor = 51;
-			for (byte r = 0; r < 6; r++)
-				for (byte g = 0; g < 6; g++)
-					for (byte b = 0; b < 6; b++)
+			for (byte r = 0; r < levels; r++)
+				for (byte g = 0; g < levels; g++)
+					for (byte b = 0; b < levels; b++)
 						yield return ColorBgra.FromBgr (
 							b: (byte) (b * factor),
 							g: (byte) (g * factor),
@@ -82,10 +83,11 @@ internal static class PaletteHelper
 		private static IEnumerable<ColorBgra> EnumerateRgb6Bit ()
 		{
 			// https://en.wikipedia.org/wiki/List_of_monochrome_and_RGB_color_formats#6-bit_RGB
+			const byte levels = 4;
 			const byte factor = 85;
-			for (byte r = 0; r < 4; r++)
-				for (byte g = 0; g < 4; g++)
-					for (byte b = 0; b < 4; b++)
+			for (byte r = 0; r < levels; r++)
+				for (byte g = 0; g < levels; g++)
+					for (byte b = 0; b < levels; b++)
 						yield return ColorBgra.FromBgr (
 							b: (byte) (b * factor),
 							g: (byte) (g * factor),
