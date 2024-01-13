@@ -18,20 +18,11 @@ public static class GradientRenderers
 
 		public override void BeforeRender ()
 		{
-			PointD vec = new PointD (EndPoint.X - StartPoint.X, EndPoint.Y - StartPoint.Y);
+			PointD vec = new (EndPoint.X - StartPoint.X, EndPoint.Y - StartPoint.Y);
 			double mag = vec.Magnitude ();
 
-			if (EndPoint.X == StartPoint.X) {
-				dtdx = 0;
-			} else {
-				dtdx = vec.X / (mag * mag);
-			}
-
-			if (EndPoint.Y == StartPoint.Y) {
-				dtdy = 0;
-			} else {
-				dtdy = vec.Y / (mag * mag);
-			}
+			dtdx = EndPoint.X == StartPoint.X ? 0 : vec.X / (mag * mag);
+			dtdy = EndPoint.Y == StartPoint.Y ? 0 : vec.Y / (mag * mag);
 
 			base.BeforeRender ();
 		}
@@ -52,9 +43,7 @@ public static class GradientRenderers
 		}
 
 		protected virtual byte BoundLerp (double t)
-		{
-			return (byte) (Math.Clamp (t, 0, 1) * 255f);
-		}
+			=> (byte) (Math.Clamp (t, 0, 1) * 255f);
 
 		public override void BeforeRender ()
 		{
@@ -83,9 +72,7 @@ public static class GradientRenderers
 		}
 
 		protected override byte BoundLerp (double t)
-		{
-			return (byte) (Math.Clamp (Math.Abs (t), 0, 1) * 255f);
-		}
+			=> (byte) (Math.Clamp (Math.Abs (t), 0, 1) * 255f);
 	}
 
 	public sealed class LinearClamped : LinearStraight
@@ -133,10 +120,10 @@ public static class GradientRenderers
 			start_x = (int) StartPoint.X;
 			start_y = (int) StartPoint.Y;
 
-			if (distanceScale == 0)
-				inv_distance_scale = 0;
-			else
-				inv_distance_scale = 1f / distanceScale;
+			inv_distance_scale = distanceScale switch {
+				0 => 0,
+				_ => 1f / distanceScale,
+			};
 
 			base.BeforeRender ();
 		}
@@ -191,12 +178,13 @@ public static class GradientRenderers
 
 		public double BoundLerp (double t)
 		{
-			if (t > 1)
-				t -= 2;
-			else if (t < -1)
-				t += 2;
+			double effective = t switch {
+				> 1 => t - 2,
+				< -1 => t + 2,
+				_ => t,
+			};
 
-			return Math.Clamp (Math.Abs (t), 0, 1);
+			return Math.Clamp (Math.Abs (effective), 0, 1);
 		}
 	}
 }

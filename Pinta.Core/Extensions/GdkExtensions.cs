@@ -33,9 +33,7 @@ namespace Pinta.Core;
 public static class GdkExtensions
 {
 	public static bool IsShiftPressed (this ModifierType m)
-	{
-		return m.HasFlag (ModifierType.ShiftMask);
-	}
+		=> m.HasFlag (ModifierType.ShiftMask);
 
 	/// <summary>
 	/// Returns whether a Ctrl modifier is pressed (or the Cmd key on macOS).
@@ -51,19 +49,13 @@ public static class GdkExtensions
 	}
 
 	public static bool IsAltPressed (this ModifierType m)
-	{
-		return m.HasFlag (ModifierType.AltMask);
-	}
+		=> m.HasFlag (ModifierType.AltMask);
 
 	public static bool IsLeftMousePressed (this ModifierType m)
-	{
-		return m.HasFlag (ModifierType.Button1Mask);
-	}
+		=> m.HasFlag (ModifierType.Button1Mask);
 
 	public static bool IsRightMousePressed (this ModifierType m)
-	{
-		return m.HasFlag (ModifierType.Button3Mask);
-	}
+		=> m.HasFlag (ModifierType.Button3Mask);
 
 	/// <summary>
 	/// Returns whether this key is a Ctrl key (or the Cmd key on macOS).
@@ -94,9 +86,14 @@ public static class GdkExtensions
 	/// <param name="shapeX">The X position in the returned Pixbuf that will be the center of the shape.</param>
 	/// <param name="shapeY">The Y position in the returned Pixbuf that will be the center of the shape.</param>
 	/// <returns>The new cursor icon with an shape that represents the tool's thickness.</returns>
-	public static Gdk.Texture CreateIconWithShape (string imgName, CursorShape shape, int shapeWidth,
-						  int imgToShapeX, int imgToShapeY,
-						  out int shapeX, out int shapeY)
+	public static Gdk.Texture CreateIconWithShape (
+		string imgName,
+		CursorShape shape,
+		int shapeWidth,
+		int imgToShapeX,
+		int imgToShapeY,
+		out int shapeX,
+		out int shapeY)
 	{
 		Gdk.Texture img = PintaCore.Resources.GetIcon (imgName);
 
@@ -138,10 +135,11 @@ public static class GdkExtensions
 		// Don't show shape if shapeWidth less than 3,
 		if (shapeWidth > 3) {
 			int diam = Math.Max (1, shapeWidth - 2);
-			var shapeRect = new RectangleD (shapeX - halfOfShapeWidth,
-									 shapeY - halfOfShapeWidth,
-									 diam,
-									 diam);
+			var shapeRect = new RectangleD (
+				shapeX - halfOfShapeWidth,
+				shapeY - halfOfShapeWidth,
+				diam,
+				diam);
 
 			Cairo.Color outerColor = new Cairo.Color (255, 255, 255, 0.75);
 			Cairo.Color innerColor = new Cairo.Color (0, 0, 0);
@@ -220,12 +218,13 @@ public static class GdkExtensions
 	/// <summary>
 	/// Helper function to return the clipboard for the default display.
 	/// </summary>
-	public static Gdk.Clipboard GetDefaultClipboard () => Gdk.Display.GetDefault ()!.GetClipboard ();
+	public static Gdk.Clipboard GetDefaultClipboard ()
+		=> Gdk.Display.GetDefault ()!.GetClipboard ();
 
 	/// <summary>
 	/// Convert a texture to a Cairo surface.
 	/// </summary>
-	public unsafe static Cairo.ImageSurface ToSurface (this Gdk.Texture texture)
+	public static unsafe Cairo.ImageSurface ToSurface (this Gdk.Texture texture)
 	{
 		var surf = CairoExtensions.CreateImageSurface (Cairo.Format.Argb32, texture.Width, texture.Height);
 		Span<byte> surf_data = surf.GetData ();
@@ -259,11 +258,5 @@ public static class GdkExtensions
 	/// Wrapper for Gdk.Cursor.NewFromName which handles errors instead of returning null.
 	/// </summary>
 	public static Gdk.Cursor CursorFromName (string name)
-	{
-		var cursor = Gdk.Cursor.NewFromName (name, null);
-		if (cursor is null)
-			throw new ArgumentException ("Cursor does not exist", nameof (name));
-
-		return cursor;
-	}
+		=> Gdk.Cursor.NewFromName (name, null) ?? throw new ArgumentException ("Cursor does not exist", nameof (name));
 }
