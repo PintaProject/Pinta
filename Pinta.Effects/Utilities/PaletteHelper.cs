@@ -67,7 +67,7 @@ internal static class PaletteHelper
 			// https://en.wikipedia.org/wiki/List_of_software_palettes#6_level_RGB
 			const byte levels = 6;
 			const byte factor = 51;
-			return ColorCube (Enumerable.Range (0, levels).Select (i => Utility.ClampToByte (i * factor)));
+			return RgbColorCube (Enumerable.Range (0, levels).Select (i => Utility.ClampToByte (i * factor)));
 		}
 
 		private static IEnumerable<ColorBgra> EnumerateRgb6Bit ()
@@ -75,13 +75,13 @@ internal static class PaletteHelper
 			// https://en.wikipedia.org/wiki/List_of_monochrome_and_RGB_color_formats#6-bit_RGB
 			const byte levels = 4;
 			const byte factor = 85;
-			return ColorCube (Enumerable.Range (0, levels).Select (i => Utility.ClampToByte (i * factor)));
+			return RgbColorCube (Enumerable.Range (0, levels).Select (i => Utility.ClampToByte (i * factor)));
 		}
 
 		private static IEnumerable<ColorBgra> EnumerateRgb3Bit ()
 		{
 			// https://en.wikipedia.org/wiki/List_of_monochrome_and_RGB_color_formats#3-bit_RGB
-			return ColorCube (ImmutableArray.Create (byte.MinValue, byte.MaxValue));
+			return RgbColorCube (ImmutableArray.Create (byte.MinValue, byte.MaxValue));
 		}
 
 		private static IEnumerable<ColorBgra> EnumerateOldWindows16Colors ()
@@ -154,7 +154,7 @@ internal static class PaletteHelper
 			yield return ColorBgra.FromBgr (255, 255, 128); // Electric blue
 		}
 
-		private static IEnumerable<ColorBgra> ColorCube (IEnumerable<byte> valueSequence)
+		private static IEnumerable<ColorBgra> RgbColorCube (IEnumerable<byte> valueSequence)
 		{
 			ImmutableArray<byte> values = valueSequence.ToImmutableArray ();
 			for (int r = 0; r < values.Length; r++)
