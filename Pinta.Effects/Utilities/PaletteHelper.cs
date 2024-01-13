@@ -15,7 +15,6 @@ public enum PredefinedPalettes
 	Rgb3Bit,
 	Rgb666,
 	Rgb6Bit,
-	WebSafe,
 }
 
 internal static class PaletteHelper
@@ -30,7 +29,6 @@ internal static class PaletteHelper
 			PredefinedPalettes.Rgb3Bit => Predefined.Rgb3Bit,
 			PredefinedPalettes.Rgb666 => Predefined.Rgb666,
 			PredefinedPalettes.Rgb6Bit => Predefined.Rgb6Bit,
-			PredefinedPalettes.WebSafe => Predefined.WebSafe,
 			_ => throw new InvalidEnumArgumentException (nameof (choice), (int) choice, typeof (PredefinedPalettes)),
 		};
 	}
@@ -44,7 +42,6 @@ internal static class PaletteHelper
 		public static ImmutableArray<ColorBgra> Rgb3Bit => rgb_3_bit.Value;
 		public static ImmutableArray<ColorBgra> Rgb666 => rgb_666.Value;
 		public static ImmutableArray<ColorBgra> Rgb6Bit => rgb_6_bit.Value;
-		public static ImmutableArray<ColorBgra> WebSafe => web_safe.Value;
 
 		private static readonly Lazy<ImmutableArray<ColorBgra>> old_windows_16;
 		private static readonly Lazy<ImmutableArray<ColorBgra>> old_windows_20;
@@ -52,7 +49,6 @@ internal static class PaletteHelper
 		private static readonly Lazy<ImmutableArray<ColorBgra>> rgb_3_bit;
 		private static readonly Lazy<ImmutableArray<ColorBgra>> rgb_666;
 		private static readonly Lazy<ImmutableArray<ColorBgra>> rgb_6_bit;
-		private static readonly Lazy<ImmutableArray<ColorBgra>> web_safe;
 
 		static Predefined ()
 		{
@@ -63,7 +59,6 @@ internal static class PaletteHelper
 			rgb_3_bit = new (() => EnumerateRgb3Bit ().ToImmutableArray ());
 			rgb_666 = new (() => EnumerateRgb666 ().ToImmutableArray ());
 			rgb_6_bit = new (() => EnumerateRgb6Bit ().ToImmutableArray ());
-			web_safe = new (() => EnumerateWebSafeColorCube ().ToImmutableArray ());
 		}
 
 		private static IEnumerable<ColorBgra> EnumerateRgb666 ()
@@ -173,15 +168,5 @@ internal static class PaletteHelper
 			yield return ColorBgra.FromBgr (64, 128, 255); // Coral
 			yield return ColorBgra.FromBgr (0, 64, 128); // Saddle brown
 		}
-
-		private static IEnumerable<ColorBgra> EnumerateWebSafeColorCube ()
-		{
-			for (short r = 0; r <= 255; r += 51)
-				for (short g = 0; g <= 255; g += 51)
-					for (short b = 0; b <= 255; b += 51)
-						yield return ColorBgra.FromBgr ((byte) b, (byte) g, (byte) r);
-		}
-
-
 	}
 }
