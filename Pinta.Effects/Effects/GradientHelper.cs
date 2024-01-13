@@ -109,7 +109,7 @@ internal static class GradientHelper
 		Span<byte> colorBytes = stackalloc byte[4];
 		random.NextBytes (colorBytes);
 		uint unsignedInteger = BitConverter.ToUInt32 (colorBytes);
-		return ColorBgra.FromUInt32 (unsignedInteger);
+		return ColorBgra.FromUInt32 (unsignedInteger) with { A = 255 };
 	}
 
 	public static ColorGradient CreateColorGradient (PredefinedGradients scheme)
