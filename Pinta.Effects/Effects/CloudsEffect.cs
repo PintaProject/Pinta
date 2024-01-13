@@ -172,12 +172,10 @@ public sealed class CloudsEffect : BaseEffect
 
 		var temp = CairoExtensions.CreateImageSurface (Format.Argb32, roi.Width, roi.Height);
 
-		ColorGradient baseGradient = ColorGradient.Create (
-			PintaCore.Palette.PrimaryColor.ToColorBgra (),
-			PintaCore.Palette.SecondaryColor.ToColorBgra (),
-			0,
-			1
-		);
+		var baseGradient =
+			GradientHelper
+			.CreateBaseGradientForEffect (Data.ColorSchemeSource, Data.ColorScheme, Data.ColorSchemeSeed)
+			.Resized (0, 1);
 
 		RenderClouds (
 			temp,
@@ -185,7 +183,7 @@ public sealed class CloudsEffect : BaseEffect
 			Data.Scale,
 			(byte) (Data.Seed.Value ^ instance_seed),
 			Data.Power / 100.0,
-			baseGradient
+			Data.ReverseColorScheme ? baseGradient.Reversed () : baseGradient
 		);
 
 		temp.MarkDirty ();
@@ -236,5 +234,16 @@ public sealed class CloudsEffect : BaseEffect
 		[Caption ("Random Noise")]
 		public RandomSeed Seed { get; set; } = new (0);
 
+		[Caption ("Color Scheme Source")]
+		public ColorSchemeSource ColorSchemeSource { get; set; } = ColorSchemeSource.SelectedColors;
+
+		[Caption ("Color Scheme")]
+		public PredefinedGradients ColorScheme { get; set; } = PredefinedGradients.BeautifulItaly;
+
+		[Caption ("Random Color Scheme Seed")]
+		public RandomSeed ColorSchemeSeed { get; set; } = new (0);
+
+		[Caption ("Reverse Color Scheme")]
+		public bool ReverseColorScheme { get; set; } = false;
 	}
 }
