@@ -75,8 +75,8 @@ internal static class GradientHelper
 					DefaultEndPosition);
 			case ColorSchemeSource.Random:
 				Random random = new (colorSchemeSeed.Value);
-				ColorBgra startColor = RandomColor (random);
-				ColorBgra endColor = RandomColor (random);
+				ColorBgra startColor = random.RandomColor ();
+				ColorBgra endColor = random.RandomColor ();
 				int stopsCount = random.Next (0, 5);
 				if (stopsCount == 0) {
 					return ColorGradient.Create (
@@ -98,7 +98,7 @@ internal static class GradientHelper
 									return
 										KeyValuePair.Create (
 											Utility.Lerp (DefaultStartPosition, DefaultEndPosition, fraction),
-											RandomColor (random));
+											random.RandomColor ());
 								}
 							)
 					);
@@ -106,18 +106,6 @@ internal static class GradientHelper
 			default:
 				throw new ArgumentOutOfRangeException (nameof (colorSchemeSource));
 		}
-	}
-
-	public static ColorBgra RandomColor (Random random, bool includeAlpha = false)
-	{
-		Span<byte> colorBytes = stackalloc byte[4];
-		random.NextBytes (colorBytes);
-		uint unsignedInteger = BitConverter.ToUInt32 (colorBytes);
-		ColorBgra baseColor = ColorBgra.FromUInt32 (unsignedInteger);
-		if (includeAlpha)
-			return baseColor;
-		else
-			return baseColor with { A = 255 };
 	}
 
 	public static ColorGradient CreateColorGradient (PredefinedGradients scheme)

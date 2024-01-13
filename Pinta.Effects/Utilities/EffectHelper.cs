@@ -24,6 +24,7 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 // THE SOFTWARE.
 
+using System;
 using Mono.Addins.Localization;
 using Pinta.Core;
 
@@ -37,6 +38,18 @@ internal static class EffectHelper
 	internal static void LaunchSimpleEffectDialog (BaseEffect effect)
 	{
 		PintaCore.Chrome.LaunchSimpleEffectDialog (effect, new PintaLocalizer ());
+	}
+
+	public static ColorBgra RandomColor (this Random random, bool includeAlpha = false)
+	{
+		Span<byte> colorBytes = stackalloc byte[4];
+		random.NextBytes (colorBytes);
+		uint unsignedInteger = BitConverter.ToUInt32 (colorBytes);
+		ColorBgra baseColor = ColorBgra.FromUInt32 (unsignedInteger);
+		if (includeAlpha)
+			return baseColor;
+		else
+			return baseColor with { A = 255 };
 	}
 }
 
