@@ -159,6 +159,7 @@ internal sealed class EffectsTest
 	}
 
 	[Test]
+	[Ignore ("Depends on global palette")]
 	public void JuliaFractal1 ()
 	{
 		var effect = new JuliaFractalEffect ();
@@ -166,6 +167,7 @@ internal sealed class EffectsTest
 	}
 
 	[Test]
+	[Ignore ("Depends on global palette")]
 	public void JuliaFractal2 ()
 	{
 		var effect = new JuliaFractalEffect ();
@@ -177,7 +179,7 @@ internal sealed class EffectsTest
 	}
 
 	[Test]
-	[Ignore ("Produces different results on some platforms for unknown reasons")]
+	[Ignore ("Produces different results on some platforms for unknown reasons, and depends on global palette")]
 	public void MandelbrotFractal1 ()
 	{
 		var effect = new MandelbrotFractalEffect ();
@@ -185,6 +187,7 @@ internal sealed class EffectsTest
 	}
 
 	[Test]
+	[Ignore ("Depends on global palette")]
 	public void MandelbrotFractal2 ()
 	{
 		var effect = new MandelbrotFractalEffect ();
