@@ -50,10 +50,10 @@ public sealed class PaintBucketTool : FloodTool
 
 	protected override void OnMouseDown (Document document, ToolMouseEventArgs e)
 	{
-		if (e.MouseButton == MouseButton.Left)
-			fill_color = palette.PrimaryColor;
-		else
-			fill_color = palette.SecondaryColor;
+		fill_color = e.MouseButton switch {
+			MouseButton.Left => palette.PrimaryColor,
+			_ => palette.SecondaryColor,
+		};
 
 		base.OnMouseDown (document, e);
 	}

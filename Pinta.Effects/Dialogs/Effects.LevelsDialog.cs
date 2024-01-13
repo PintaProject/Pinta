@@ -214,9 +214,7 @@ public partial class LevelsDialog : Gtk.Dialog
 	}
 
 	private void UpdateLivePreview ()
-	{
-		EffectData.FirePropertyChanged (nameof (Levels));
-	}
+		=> EffectData.FirePropertyChanged (nameof (Levels));
 
 	private void UpdateInputHistogram ()
 	{
@@ -229,9 +227,7 @@ public partial class LevelsDialog : Gtk.Dialog
 	}
 
 	private void UpdateOutputHistogram ()
-	{
-		histogram_output.Histogram.SetFromLeveledHistogram (histogram_input.Histogram, Levels);
-	}
+		=> histogram_output.Histogram.SetFromLeveledHistogram (histogram_input.Histogram, Levels);
 
 	private void Reset ()
 	{
@@ -245,9 +241,7 @@ public partial class LevelsDialog : Gtk.Dialog
 	}
 
 	private void HandleButtonResetClicked (object? sender, EventArgs e)
-	{
-		Reset ();
-	}
+		=> Reset ();
 
 	private void UpdateFromLevelsOp ()
 	{
@@ -276,38 +270,27 @@ public partial class LevelsDialog : Gtk.Dialog
 	}
 
 	private void HandleSpinInLowValueChanged (object? sender, EventArgs e)
-	{
-		gradient_input.SetValue (0, spin_in_low.GetValueAsInt ());
-	}
+		=> gradient_input.SetValue (0, spin_in_low.GetValueAsInt ());
 
 	private void HandleSpinInHighValueChanged (object? sender, EventArgs e)
-	{
-		gradient_input.SetValue (1, spin_in_high.GetValueAsInt ());
-	}
+		=> gradient_input.SetValue (1, spin_in_high.GetValueAsInt ());
 
 	private void HandleSpinOutLowValueChanged (object? sender, EventArgs e)
-	{
-		gradient_output.SetValue (0, spin_out_low.GetValueAsInt ());
-	}
+		=> gradient_output.SetValue (0, spin_out_low.GetValueAsInt ());
 
 	private int FromGammaValue ()
 	{
 		int lo = gradient_output.GetValue (0);
 		int hi = gradient_output.GetValue (2);
 		int med = (int) (lo + (hi - lo) * Math.Pow (0.5, spin_out_gamma.Value));
-
 		return med;
 	}
 
 	private void HandleSpinOutGammaValueChanged (object? sender, EventArgs e)
-	{
-		gradient_output.SetValue (1, FromGammaValue ());
-	}
+		=> gradient_output.SetValue (1, FromGammaValue ());
 
 	private void HandleSpinOutHighValueChanged (object? sender, EventArgs e)
-	{
-		gradient_output.SetValue (2, spin_out_high.GetValueAsInt ());
-	}
+		=> gradient_output.SetValue (2, spin_out_high.GetValueAsInt ());
 
 	private int MaskAvg (ColorBgra before)
 	{
@@ -320,11 +303,10 @@ public partial class LevelsDialog : Gtk.Dialog
 			}
 		}
 
-		if (count > 0) {
+		if (count > 0)
 			return total / count;
-		} else {
+		else
 			return 0;
-		}
 	}
 
 	private ColorBgra UpdateByMask (ColorBgra before, byte val)
@@ -345,22 +327,19 @@ public partial class LevelsDialog : Gtk.Dialog
 
 			float factor = (float) val / average;
 
-			for (int c = 0; c < 3; c++) {
-				if (mask[c]) {
+			for (int c = 0; c < 3; c++)
+				if (mask[c])
 					after[c] = Utility.ClampToByte (after[c] * factor);
-				}
-			}
+
 		} while (average != val && oldaverage != average);
 
 		while (average != val) {
 			average = MaskAvg (after);
 			int diff = val - average;
 
-			for (int c = 0; c < 3; c++) {
-				if (mask[c]) {
+			for (int c = 0; c < 3; c++)
+				if (mask[c])
 					after[c] = Utility.ClampToByte (after[c] + diff);
-				}
-			}
 		}
 
 		after.A = 255;
@@ -379,12 +358,10 @@ public partial class LevelsDialog : Gtk.Dialog
 			}
 		}
 
-		if (count > 0) {
+		if (count > 0)
 			return total / count;
-		} else {
+		else
 			return 1;
-		}
-
 	}
 
 	private void UpdateGammaByMask (float val)
@@ -399,27 +376,26 @@ public partial class LevelsDialog : Gtk.Dialog
 
 			float factor = val / average;
 
-			for (int c = 0; c < 3; c++) {
-				if (mask[c]) {
+			for (int c = 0; c < 3; c++)
+				if (mask[c])
 					Levels.SetGamma (c, factor * Levels.GetGamma (c));
-				}
-			}
+
 		} while (Math.Abs (val - average) > 0.001);
 	}
 
 	private Color GetOutMidColor ()
-	{
-		return Levels.Apply (histogram_input.Histogram.GetMeanColor ()).ToCairoColor ();
-	}
+		=> Levels.Apply (histogram_input.Histogram.GetMeanColor ()).ToCairoColor ();
 
 	//hack to avoid recurrent invocation of UpdateLevels
 	private bool disable_updating;
+
 	//when user moves triangles inside gradient widget,
 	//we don't want to redraw histogram each time Levels values change.
 	//maximum number of skipped updates
-	private const int max_skip = 5;
+	private const int Max_skip = 5;
+
 	//skipped updates counter
-	private int skip_counter = max_skip;
+	private int skip_counter = Max_skip;
 	private bool button_down = false;
 
 	private void UpdateLevels ()
@@ -429,7 +405,7 @@ public partial class LevelsDialog : Gtk.Dialog
 
 		disable_updating = true;
 
-		if (skip_counter == max_skip || !button_down) {
+		if (skip_counter == Max_skip || !button_down) {
 
 			Levels.ColorOutHigh = UpdateByMask (Levels.ColorOutHigh, (byte) spin_out_high.Value);
 			Levels.ColorOutLow = UpdateByMask (Levels.ColorOutLow, (byte) spin_out_low.Value);

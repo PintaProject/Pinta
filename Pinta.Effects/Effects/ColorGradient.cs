@@ -38,31 +38,31 @@ internal sealed class ColorGradient
 	internal ColorGradient (
 		ColorBgra startColor,
 		ColorBgra endColor,
-		double minPosition,
-		double maxPosition,
+		double startPosition,
+		double endPosition,
 		IEnumerable<KeyValuePair<double, ColorBgra>> gradientStops)
 	{
-		CheckBoundsConsistency (minPosition, maxPosition);
+		CheckBoundsConsistency (startPosition, endPosition);
 
 		var sortedStops = gradientStops.OrderBy (stop => stop.Key).ToArray ();
 		var sortedPositions = sortedStops.Select (stop => stop.Key).ToImmutableArray ();
 		var sortedColors = sortedStops.Select (stop => stop.Value).ToImmutableArray ();
-		CheckStopsBounds (sortedPositions, minPosition, maxPosition);
+		CheckStopsBounds (sortedPositions, startPosition, endPosition);
 		CheckUniqueness (sortedPositions);
 
 		StartColor = startColor;
 		EndColor = endColor;
-		StartPosition = minPosition;
-		EndPosition = maxPosition;
+		StartPosition = startPosition;
+		EndPosition = endPosition;
 		sorted_positions = sortedPositions;
 		sorted_colors = sortedColors;
 	}
 
-	private static void CheckStopsBounds (ImmutableArray<double> sortedPositions, double minPosition, double maxPosition)
+	private static void CheckStopsBounds (ImmutableArray<double> sortedPositions, double startPosition, double endPosition)
 	{
 		if (sortedPositions.Length == 0) return;
-		if (sortedPositions[0] <= minPosition) throw new ArgumentException ($"Lowest key in gradient stops has to be greater than {nameof (minPosition)}");
-		if (sortedPositions[^1] >= maxPosition) throw new ArgumentException ($"Greatest key in gradient stops has to be lower than {nameof (maxPosition)}");
+		if (sortedPositions[0] <= startPosition) throw new ArgumentException ($"Lowest key in gradient stops has to be greater than {nameof (startPosition)}");
+		if (sortedPositions[^1] >= endPosition) throw new ArgumentException ($"Greatest key in gradient stops has to be lower than {nameof (endPosition)}");
 	}
 
 	private static void CheckUniqueness (ImmutableArray<double> sortedPositions)
@@ -71,9 +71,9 @@ internal sealed class ColorGradient
 		if (distinctPositions != sortedPositions.Length) throw new ArgumentException ("Cannot have more than one stop in the same position");
 	}
 
-	private static void CheckBoundsConsistency (double minPosition, double maxPosition)
+	private static void CheckBoundsConsistency (double startPosition, double endPosition)
 	{
-		if (minPosition >= maxPosition) throw new ArgumentException ($"{nameof (minPosition)} has to be lower than {nameof (maxPosition)}");
+		if (startPosition >= endPosition) throw new ArgumentException ($"{nameof (startPosition)} has to be lower than {nameof (endPosition)}");
 	}
 
 	/// <summary>
@@ -81,29 +81,52 @@ internal sealed class ColorGradient
 	/// (along with all of its stops) adjusted, proportionally,
 	/// to the provided lower and upper bounds.
 	/// </summary>
-	public ColorGradient Resized (double minPosition, double maxPosition)
+	public ColorGradient Resized (double startPosition, double endPosition)
 	{
-		CheckBoundsConsistency (minPosition, maxPosition);
+		CheckBoundsConsistency (startPosition, endPosition);
 
-		double newSpan = maxPosition - minPosition;
+		double newSpan = endPosition - startPosition;
 		double currentSpan = EndPosition - StartPosition;
 		double newProportion = newSpan / currentSpan;
-		double newMinRelativeOffset = minPosition - StartPosition;
+		double newMinRelativeOffset = startPosition - StartPosition;
 
 		KeyValuePair<double, ColorBgra> ToNewStop (KeyValuePair<double, ColorBgra> stop)
 		{
 			double stopToMinOffset = stop.Key - StartPosition;
 			double adjustedOffset = stopToMinOffset * newProportion;
-			double newPosition = minPosition + adjustedOffset;
+			double newPosition = startPosition + adjustedOffset;
 			return KeyValuePair.Create (newPosition, stop.Value);
 		}
 
 		return new (
 			StartColor,
 			EndColor,
-			minPosition,
-			maxPosition,
+			startPosition,
+			endPosition,
 			sorted_positions.Zip (sorted_colors, KeyValuePair.Create).Select (ToNewStop)
+		);
+	}
+
+	/// <returns>
+	/// New gradient where the start color is now the end color,
+	/// and vice versa. Also, the color stops are in reversed positions
+	/// (in the new gradient, the colors are at the same distance
+	/// from the end color as they were from the start color in the original)
+	/// </returns>
+	public ColorGradient Reversed ()
+	{
+		var reversedPosition = sorted_positions.Select (p => EndPosition - p);
+
+		var reversedStops =
+			reversedPosition
+			.Zip (sorted_colors, KeyValuePair.Create);
+
+		return new ColorGradient (
+			startColor: EndColor,
+			endColor: StartColor,
+			startPosition: StartPosition,
+			endPosition: EndPosition,
+			gradientStops: reversedStops
 		);
 	}
 
@@ -177,12 +200,12 @@ internal sealed class ColorGradient
 	/// Creates gradient mapping based on start and end color,
 	/// and the provided lower and upper bounds
 	/// </summary>
-	public static ColorGradient Create (ColorBgra start, ColorBgra end, double minimum, double maximum)
+	public static ColorGradient Create (ColorBgra startColor, ColorBgra endColor, double startPosition, double endPosition)
 		=> new (
-			start,
-			end,
-			minimum,
-			maximum,
+			startColor,
+			endColor,
+			startPosition,
+			endPosition,
 			EmptyStops ()
 		);
 
@@ -190,12 +213,12 @@ internal sealed class ColorGradient
 	/// Creates gradient mapping based on start and end color,
 	/// and the provided lower and upper bounds, and color stops
 	/// </summary>
-	public static ColorGradient Create (ColorBgra start, ColorBgra end, double minimum, double maximum, IEnumerable<KeyValuePair<double, ColorBgra>> stops)
+	public static ColorGradient Create (ColorBgra startColor, ColorBgra endColor, double startPosition, double endPosition, IEnumerable<KeyValuePair<double, ColorBgra>> stops)
 		=> new (
-			start,
-			end,
-			minimum,
-			maximum,
+			startColor,
+			endColor,
+			startPosition,
+			endPosition,
 			stops
 		);
 }

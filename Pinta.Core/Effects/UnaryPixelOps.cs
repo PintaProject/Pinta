@@ -24,9 +24,7 @@ public static class UnaryPixelOps
 	public sealed class Identity : UnaryPixelOp
 	{
 		public override ColorBgra Apply (in ColorBgra color)
-		{
-			return color;
-		}
+			=> color;
 
 		public override void Apply (Span<ColorBgra> dst, ReadOnlySpan<ColorBgra> src)
 		{
@@ -34,10 +32,7 @@ public static class UnaryPixelOps
 				dst[i] = src[i];
 		}
 
-		public override void Apply (Span<ColorBgra> dst)
-		{
-			return;
-		}
+		public override void Apply (Span<ColorBgra> dst) { }
 	}
 
 	/// <summary>
@@ -49,9 +44,7 @@ public static class UnaryPixelOps
 		private ColorBgra set_color;
 
 		public override ColorBgra Apply (in ColorBgra color)
-		{
-			return set_color;
-		}
+			=> set_color;
 
 		public override void Apply (Span<ColorBgra> dst, ReadOnlySpan<ColorBgra> src)
 		{
@@ -146,12 +139,10 @@ public static class UnaryPixelOps
 	[Serializable]
 	public sealed class SetAlphaChannel : UnaryPixelOp
 	{
-		private readonly UInt32 add_value;
+		private readonly uint add_value;
 
 		public override ColorBgra Apply (in ColorBgra color)
-		{
-			return ColorBgra.FromUInt32 ((color.Bgra & 0x00ffffff) + add_value);
-		}
+			=> ColorBgra.FromUInt32 ((color.Bgra & 0x00ffffff) + add_value);
 
 		public override void Apply (Span<ColorBgra> dst, ReadOnlySpan<ColorBgra> src)
 		{
@@ -178,9 +169,7 @@ public static class UnaryPixelOps
 	public sealed class SetAlphaChannelTo255 : UnaryPixelOp
 	{
 		public override ColorBgra Apply (in ColorBgra color)
-		{
-			return ColorBgra.FromUInt32 (color.Bgra | 0xff000000);
-		}
+			=> ColorBgra.FromUInt32 (color.Bgra | 0xff000000);
 
 		public override void Apply (Span<ColorBgra> dst, ReadOnlySpan<ColorBgra> src)
 		{
@@ -206,7 +195,11 @@ public static class UnaryPixelOps
 			//Note: Cairo images use premultiplied alpha values
 			//The formula for changing B would be: (255 - B * 255 / A) * A / 255
 			//This can be simplified to: A - B
-			return ColorBgra.FromBgra ((byte) (color.A - color.B), (byte) (color.A - color.G), (byte) (color.A - color.R), color.A);
+			return ColorBgra.FromBgra (
+				b: (byte) (color.A - color.B),
+				g: (byte) (color.A - color.G),
+				r: (byte) (color.A - color.R),
+				a: color.A);
 		}
 	}
 
@@ -234,40 +227,30 @@ public static class UnaryPixelOps
 			int difference = color.R - Math.Max (color.B, color.G);
 
 			// If it is within tolerance, and the saturation is high
-			if ((difference > tolerance) && (saturation > 100)) {
-				double i = 255.0 * color.GetIntensity ();
-				byte ib = (byte) (i * set_saturation); // adjust the red color for user inputted saturation
-				return ColorBgra.FromBgra (color.B, color.G, ib, color.A);
-			} else {
+			if (difference <= tolerance || saturation <= 100)
 				return color;
-			}
+
+			double i = 255.0 * color.GetIntensity ();
+			byte ib = (byte) (i * set_saturation); // adjust the red color for user inputted saturation
+
+			return ColorBgra.FromBgra (color.B, color.G, ib, color.A);
 		}
 
 		//Saturation formula from RgbColor.cs, public HsvColor ToHsv()
 		private static int GetSaturation (in ColorBgra color)
 		{
-			double min;
-			double max;
-			double delta;
-
 			double r = (double) color.R / 255;
 			double g = (double) color.G / 255;
 			double b = (double) color.B / 255;
 
-			double s;
+			double min = Math.Min (Math.Min (r, g), b);
+			double max = Math.Max (Math.Max (r, g), b);
+			double delta = max - min;
 
-			min = Math.Min (Math.Min (r, g), b);
-			max = Math.Max (Math.Max (r, g), b);
-			delta = max - min;
-
-			if (max == 0 || delta == 0) {
-				// R, G, and B must be 0, or all the same.
-				// In this case, S is 0, and H is undefined.
-				// Using H = 0 is as good as any...
-				s = 0;
-			} else {
-				s = delta / max;
-			}
+			double s =
+				(max == 0 || delta == 0)
+				? 0 // R, G, and B must be 0, or all the same. In this case, S is 0, and H is undefined. Using H = 0 is as good as any...
+				: delta / max;
 
 			return (int) (s * 255);
 		}
@@ -280,9 +263,7 @@ public static class UnaryPixelOps
 	public sealed class InvertWithAlpha : UnaryPixelOp
 	{
 		public override ColorBgra Apply (in ColorBgra color)
-		{
-			return ColorBgra.FromBgra ((byte) (255 - color.B), (byte) (255 - color.G), (byte) (255 - color.R), (byte) (255 - color.A));
-		}
+			=> ColorBgra.FromBgra ((byte) (255 - color.B), (byte) (255 - color.G), (byte) (255 - color.R), (byte) (255 - color.A));
 	}
 
 	/// <summary>
@@ -325,8 +306,7 @@ public static class UnaryPixelOps
 					b: val,
 					g: val,
 					r: val,
-					a: original.A
-				);
+					a: original.A);
 			}
 		}
 	}
@@ -350,10 +330,10 @@ public static class UnaryPixelOps
 			int diff = Curve[lumi] - lumi;
 
 			return ColorBgra.FromBgraClamped (
-			    color.B + diff,
-			    color.G + diff,
-			    color.R + diff,
-			    color.A);
+				b: color.B + diff,
+				g: color.G + diff,
+				r: color.R + diff,
+				a: color.A);
 		}
 	}
 
@@ -406,9 +386,11 @@ public static class UnaryPixelOps
 		}
 
 		public override ColorBgra Apply (in ColorBgra color)
-		{
-			return ColorBgra.FromBgra (CurveB[color.B], CurveG[color.G], CurveR[color.R], color.A);
-		}
+			=> ColorBgra.FromBgra (
+				b: CurveB[color.B],
+				g: CurveG[color.G],
+				r: CurveR[color.R],
+				a: color.A);
 
 		//            public override void Apply(Surface dst, Point dstOffset, Surface src, Point srcOffset, int scanLength)
 		//            {
@@ -424,29 +406,23 @@ public static class UnaryPixelOps
 			get => color_in_low;
 
 			set {
-				if (value.R == 255) {
+				if (value.R == 255)
 					value.R = 254;
-				}
 
-				if (value.G == 255) {
+				if (value.G == 255)
 					value.G = 254;
-				}
 
-				if (value.B == 255) {
+				if (value.B == 255)
 					value.B = 254;
-				}
 
-				if (color_in_high.R < value.R + 1) {
+				if (color_in_high.R < value.R + 1)
 					color_in_high.R = (byte) (value.R + 1);
-				}
 
-				if (color_in_high.G < value.G + 1) {
+				if (color_in_high.G < value.G + 1)
 					color_in_high.G = (byte) (value.R + 1);
-				}
 
-				if (color_in_high.B < value.B + 1) {
+				if (color_in_high.B < value.B + 1)
 					color_in_high.B = (byte) (value.R + 1);
-				}
 
 				color_in_low = value;
 				UpdateLookupTable ();
@@ -458,29 +434,23 @@ public static class UnaryPixelOps
 			get => color_in_high;
 
 			set {
-				if (value.R == 0) {
+				if (value.R == 0)
 					value.R = 1;
-				}
 
-				if (value.G == 0) {
+				if (value.G == 0)
 					value.G = 1;
-				}
 
-				if (value.B == 0) {
+				if (value.B == 0)
 					value.B = 1;
-				}
 
-				if (color_in_low.R > value.R - 1) {
+				if (color_in_low.R > value.R - 1)
 					color_in_low.R = (byte) (value.R - 1);
-				}
 
-				if (color_in_low.G > value.G - 1) {
+				if (color_in_low.G > value.G - 1)
 					color_in_low.G = (byte) (value.R - 1);
-				}
 
-				if (color_in_low.B > value.B - 1) {
+				if (color_in_low.B > value.B - 1)
 					color_in_low.B = (byte) (value.R - 1);
-				}
 
 				color_in_high = value;
 				UpdateLookupTable ();
@@ -492,29 +462,23 @@ public static class UnaryPixelOps
 			get => color_out_low;
 
 			set {
-				if (value.R == 255) {
+				if (value.R == 255)
 					value.R = 254;
-				}
 
-				if (value.G == 255) {
+				if (value.G == 255)
 					value.G = 254;
-				}
 
-				if (value.B == 255) {
+				if (value.B == 255)
 					value.B = 254;
-				}
 
-				if (color_out_high.R < value.R + 1) {
+				if (color_out_high.R < value.R + 1)
 					color_out_high.R = (byte) (value.R + 1);
-				}
 
-				if (color_out_high.G < value.G + 1) {
+				if (color_out_high.G < value.G + 1)
 					color_out_high.G = (byte) (value.G + 1);
-				}
 
-				if (color_out_high.B < value.B + 1) {
+				if (color_out_high.B < value.B + 1)
 					color_out_high.B = (byte) (value.B + 1);
-				}
 
 				color_out_low = value;
 				UpdateLookupTable ();
@@ -526,29 +490,23 @@ public static class UnaryPixelOps
 			get => color_out_high;
 
 			set {
-				if (value.R == 0) {
+				if (value.R == 0)
 					value.R = 1;
-				}
 
-				if (value.G == 0) {
+				if (value.G == 0)
 					value.G = 1;
-				}
 
-				if (value.B == 0) {
+				if (value.B == 0)
 					value.B = 1;
-				}
 
-				if (color_out_low.R > value.R - 1) {
+				if (color_out_low.R > value.R - 1)
 					color_out_low.R = (byte) (value.R - 1);
-				}
 
-				if (color_out_low.G > value.G - 1) {
+				if (color_out_low.G > value.G - 1)
 					color_out_low.G = (byte) (value.G - 1);
-				}
 
-				if (color_out_low.B > value.B - 1) {
+				if (color_out_low.B > value.B - 1)
 					color_out_low.B = (byte) (value.B - 1);
-				}
 
 				color_out_high = value;
 				UpdateLookupTable ();
@@ -558,18 +516,16 @@ public static class UnaryPixelOps
 		private readonly float[] gamma = new float[3];
 		public float GetGamma (int index)
 		{
-			if (index < 0 || index >= 3) {
+			if (index < 0 || index >= 3)
 				throw new ArgumentOutOfRangeException (nameof (index), index, "Index must be between 0 and 2");
-			}
 
 			return gamma[index];
 		}
 
 		public void SetGamma (int index, float val)
 		{
-			if (index < 0 || index >= 3) {
+			if (index < 0 || index >= 3)
 				throw new ArgumentOutOfRangeException (nameof (index), index, "Index must be between 0 and 2");
-			}
 
 			gamma[index] = Math.Clamp (val, 0.1f, 10.0f);
 			UpdateLookupTable ();
@@ -580,15 +536,12 @@ public static class UnaryPixelOps
 		public static Level AutoFromLoMdHi (ColorBgra lo, ColorBgra md, ColorBgra hi)
 		{
 			float[] gamma = new float[3];
-
 			for (int i = 0; i < 3; i++) {
-				if (lo[i] < md[i] && md[i] < hi[i]) {
+				if (lo[i] < md[i] && md[i] < hi[i])
 					gamma[i] = (float) Math.Clamp (Math.Log (0.5, (md[i] - lo[i]) / (float) (hi[i] - lo[i])), 0.1, 10.0);
-				} else {
+				else
 					gamma[i] = 1.0f;
-				}
 			}
-
 			return new Level (lo, hi, gamma, ColorBgra.Black, ColorBgra.White);
 		}
 
@@ -611,14 +564,13 @@ public static class UnaryPixelOps
 			}
 		}
 
-		public Level ()
-		    : this (ColorBgra.Black,
-			   ColorBgra.White,
-			   new float[] { 1, 1, 1 },
-			   ColorBgra.Black,
-			   ColorBgra.White)
-		{
-		}
+		public Level () : this (
+			ColorBgra.Black,
+			ColorBgra.White,
+			new float[] { 1, 1, 1 },
+			ColorBgra.Black,
+			ColorBgra.White)
+		{ }
 
 		public Level (ColorBgra in_lo, ColorBgra in_hi, float[] gamma, ColorBgra out_lo, ColorBgra out_hi)
 		{
@@ -648,9 +600,9 @@ public static class UnaryPixelOps
 					ret[i] = color_out_high[i];
 				} else {
 					ret[i] = (byte) Math.Clamp (
-					    color_out_low[i] + (color_out_high[i] - color_out_low[i]) * Math.Pow (v / (color_in_high[i] - color_in_low[i]), gamma[i]),
-					    0.0f,
-					    255.0f);
+						color_out_low[i] + (color_out_high[i] - color_out_low[i]) * Math.Pow (v / (color_in_high[i] - color_in_low[i]), gamma[i]),
+						0.0f,
+						255.0f);
 				}
 			}
 
@@ -701,15 +653,11 @@ public static class UnaryPixelOps
 		{
 			hue_delta = hueDelta;
 			sat_factor = (satDelta * 1024) / 100;
-
-			if (lightness == 0) {
-				blend_op = new UnaryPixelOps.Identity ();
-			} else if (lightness > 0) {
-				blend_op = new UnaryPixelOps.BlendConstant (ColorBgra.FromBgra (255, 255, 255, (byte) ((lightness * 255) / 100)));
-			} else // if (lightness < 0)
-			  {
-				blend_op = new UnaryPixelOps.BlendConstant (ColorBgra.FromBgra (0, 0, 0, (byte) ((-lightness * 255) / 100)));
-			}
+			blend_op = lightness switch {
+				0 => new Identity (),
+				> 0 => new BlendConstant (ColorBgra.FromBgra (255, 255, 255, (byte) (lightness * 255 / 100))),
+				_ => new BlendConstant (ColorBgra.FromBgra (0, 0, 0, (byte) (-lightness * 255 / 100))),
+			};
 		}
 
 		public override ColorBgra Apply (in ColorBgra src_color)
@@ -726,13 +674,9 @@ public static class UnaryPixelOps
 
 			newHue += hue_delta;
 
-			while (newHue < 0) {
-				newHue += 360;
-			}
+			while (newHue < 0) { newHue += 360; }
 
-			while (newHue > 360) {
-				newHue -= 360;
-			}
+			while (newHue > 360) { newHue -= 360; }
 
 			hsvColor = new HsvColor (newHue, hsvColor.Saturation, hsvColor.Value);
 
@@ -764,9 +708,8 @@ public static class UnaryPixelOps
 		{
 			Span<byte> t1 = stackalloc byte[levelCount];
 
-			for (int i = 1; i < levelCount; i++) {
+			for (int i = 1; i < levelCount; i++)
 				t1[i] = (byte) ((255 * i) / (levelCount - 1));
-			}
 
 			var levels = ImmutableArray.CreateBuilder<byte> (256);
 			levels.Count = 256;
@@ -789,9 +732,11 @@ public static class UnaryPixelOps
 		}
 
 		public override ColorBgra Apply (in ColorBgra color)
-		{
-			return ColorBgra.FromBgra (blue_levels[color.B], green_levels[color.G], red_levels[color.R], color.A);
-		}
+			=> ColorBgra.FromBgra (
+				b: blue_levels[color.B],
+				g: green_levels[color.G],
+				r: red_levels[color.R],
+				a: color.A);
 
 		public override void Apply (Span<ColorBgra> dst, ReadOnlySpan<ColorBgra> src)
 		{
@@ -801,9 +746,7 @@ public static class UnaryPixelOps
 					b: blue_levels[source.B],
 					g: green_levels[source.G],
 					r: red_levels[source.R],
-					a: source.A
-				);
-
+					a: source.A);
 			}
 		}
 
@@ -815,8 +758,7 @@ public static class UnaryPixelOps
 					b: blue_levels[original.B],
 					g: green_levels[original.G],
 					r: red_levels[original.R],
-					a: original.A
-				);
+					a: original.A);
 			}
 		}
 	}
