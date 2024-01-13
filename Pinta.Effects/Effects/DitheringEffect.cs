@@ -82,6 +82,12 @@ public sealed class DitheringEffect : BaseEffect
 							Y: y + r
 						);
 
+						if (thisItem.X < roi.Left || thisItem.X >= roi.Right)
+							continue;
+
+						if (thisItem.Y < roi.Top || thisItem.Y >= roi.Bottom)
+							continue;
+
 						if (thisItem.X < 0 || thisItem.X >= settings.sourceWidth)
 							continue;
 
