@@ -80,5 +80,6 @@ internal static class Utilities
 		CompareImages (result, expected);
 	}
 
-	public static IServiceManager GetMockServices () => mock_services;
+	public static IServiceManager GetMockServices ()
+		=> mock_services;
 }
