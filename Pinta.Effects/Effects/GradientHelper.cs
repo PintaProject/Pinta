@@ -1,8 +1,22 @@
+using System;
 using System.Collections.Generic;
+using System.Linq;
 using Pinta.Core;
 using Pinta.Gui.Widgets;
 
 namespace Pinta.Effects;
+
+public enum ColorSchemeSource
+{
+	[Caption ("Predefined Gradient")]
+	PredefinedGradient,
+
+	[Caption ("Selected Colors")]
+	SelectedColors,
+
+	[Caption ("Random")]
+	Random,
+}
 
 public enum PredefinedGradients
 {
@@ -41,8 +55,62 @@ public enum PredefinedGradients
 
 internal static class GradientHelper
 {
-	private const double DefaultMinimumValue = 0;
-	private const double DefaultMaximumValue = 1;
+	private const double DefaultStartPosition = 0;
+	private const double DefaultEndPosition = 1;
+
+	public static ColorGradient CreateBaseGradientForEffect (
+		ColorSchemeSource colorSchemeSource,
+		PredefinedGradients colorScheme,
+		RandomSeed colorSchemeSeed)
+	{
+		switch (colorSchemeSource) {
+			case ColorSchemeSource.PredefinedGradient:
+				return CreateColorGradient (colorScheme);
+			case ColorSchemeSource.SelectedColors:
+				return ColorGradient.Create (
+					PintaCore.Palette.PrimaryColor.ToColorBgra (),
+					PintaCore.Palette.SecondaryColor.ToColorBgra (),
+					DefaultStartPosition,
+					DefaultEndPosition);
+			case ColorSchemeSource.Random:
+				Random random = new (colorSchemeSeed.Value);
+				ColorBgra startColor = RandomColor (random);
+				ColorBgra endColor = RandomColor (random);
+				int stopsCount = random.Next (0, 5);
+				if (stopsCount == 0) {
+					return ColorGradient.Create (
+						startColor,
+						endColor,
+						DefaultStartPosition,
+						DefaultEndPosition);
+				} else {
+					return ColorGradient.Create (
+						startColor,
+						endColor,
+						DefaultStartPosition,
+						DefaultEndPosition,
+						Enumerable
+						.Range (0, stopsCount)
+						.Select (
+							n => KeyValuePair.Create (
+								Utility.Lerp (DefaultStartPosition, DefaultEndPosition, (n + 1) / (stopsCount + 1)),
+								RandomColor (random)
+							)
+						)
+					);
+				}
+			default:
+				throw new ArgumentOutOfRangeException (nameof (colorSchemeSource));
+		}
+	}
+
+	private static ColorBgra RandomColor (Random random)
+	{
+		Span<byte> colorBytes = stackalloc byte[4];
+		random.NextBytes (colorBytes);
+		uint unsignedInteger = BitConverter.ToUInt32 (colorBytes);
+		return ColorBgra.FromUInt32 (unsignedInteger);
+	}
 
 	public static ColorGradient CreateColorGradient (PredefinedGradients scheme)
 	{
@@ -51,79 +119,79 @@ internal static class GradientHelper
 			PredefinedGradients.BeautifulItaly => ColorGradient.Create (
 				ColorBgra.FromBgr (70, 146, 0),
 				ColorBgra.FromBgr (55, 43, 206),
-				DefaultMinimumValue,
-				DefaultMaximumValue,
+				DefaultStartPosition,
+				DefaultEndPosition,
 				new Dictionary<double, ColorBgra> {
-					[Utility.Lerp (DefaultMinimumValue, DefaultMaximumValue, 0.25)] = ColorBgra.White,
+					[Utility.Lerp (DefaultStartPosition, DefaultEndPosition, 0.25)] = ColorBgra.White,
 				}),
 
 			PredefinedGradients.BlackAndWhite => ColorGradient.Create (
 				ColorBgra.White,
 				ColorBgra.Black,
-				DefaultMinimumValue,
-				DefaultMaximumValue),
+				DefaultStartPosition,
+				DefaultEndPosition),
 
 			PredefinedGradients.Bonfire => ColorGradient.Create (
 				ColorBgra.Transparent,
 				ColorBgra.White,
-				DefaultMinimumValue,
-				DefaultMaximumValue,
+				DefaultStartPosition,
+				DefaultEndPosition,
 				new Dictionary<double, ColorBgra> {
-					[Utility.Lerp (DefaultMinimumValue, DefaultMaximumValue, 0.25)] = ColorBgra.Black,
-					[Utility.Lerp (DefaultMinimumValue, DefaultMaximumValue, 0.50)] = ColorBgra.Red,
-					[Utility.Lerp (DefaultMinimumValue, DefaultMaximumValue, 0.75)] = ColorBgra.Yellow,
+					[Utility.Lerp (DefaultStartPosition, DefaultEndPosition, 0.25)] = ColorBgra.Black,
+					[Utility.Lerp (DefaultStartPosition, DefaultEndPosition, 0.50)] = ColorBgra.Red,
+					[Utility.Lerp (DefaultStartPosition, DefaultEndPosition, 0.75)] = ColorBgra.Yellow,
 				}),
 
 			PredefinedGradients.CherryBlossom => ColorGradient.Create (
 				ColorBgra.Transparent,
 				ColorBgra.FromBgr (240, 255, 255),
-				DefaultMinimumValue,
-				DefaultMaximumValue,
+				DefaultStartPosition,
+				DefaultEndPosition,
 				new Dictionary<double, ColorBgra> {
-					[Utility.Lerp (DefaultMinimumValue, DefaultMaximumValue, 0.25)] = ColorBgra.FromBgr (235, 206, 135),
-					[Utility.Lerp (DefaultMinimumValue, DefaultMaximumValue, 0.75)] = ColorBgra.FromBgr (193, 182, 255),
+					[Utility.Lerp (DefaultStartPosition, DefaultEndPosition, 0.25)] = ColorBgra.FromBgr (235, 206, 135),
+					[Utility.Lerp (DefaultStartPosition, DefaultEndPosition, 0.75)] = ColorBgra.FromBgr (193, 182, 255),
 				}),
 
 			PredefinedGradients.CottonCandy => ColorGradient.Create (
 				ColorBgra.White,
 				ColorBgra.FromBgr (242, 235, 214),
-				DefaultMinimumValue,
-				DefaultMaximumValue,
+				DefaultStartPosition,
+				DefaultEndPosition,
 				new Dictionary<double, ColorBgra> {
-					[Utility.Lerp (DefaultMinimumValue, DefaultMaximumValue, 0.25)] = ColorBgra.FromBgr (180, 105, 255),
-					[Utility.Lerp (DefaultMinimumValue, DefaultMaximumValue, 0.50)] = ColorBgra.FromBgr (219, 112, 219),
-					[Utility.Lerp (DefaultMinimumValue, DefaultMaximumValue, 0.75)] = ColorBgra.FromBgr (230, 216, 173),
+					[Utility.Lerp (DefaultStartPosition, DefaultEndPosition, 0.25)] = ColorBgra.FromBgr (180, 105, 255),
+					[Utility.Lerp (DefaultStartPosition, DefaultEndPosition, 0.50)] = ColorBgra.FromBgr (219, 112, 219),
+					[Utility.Lerp (DefaultStartPosition, DefaultEndPosition, 0.75)] = ColorBgra.FromBgr (230, 216, 173),
 				}),
 
 			PredefinedGradients.Electric => ColorGradient.Create (
 				ColorBgra.Transparent,
 				ColorBgra.White,
-				DefaultMinimumValue,
-				DefaultMaximumValue,
+				DefaultStartPosition,
+				DefaultEndPosition,
 				new Dictionary<double, ColorBgra> {
-					[Utility.Lerp (DefaultMinimumValue, DefaultMaximumValue, 0.25)] = ColorBgra.Black,
-					[Utility.Lerp (DefaultMinimumValue, DefaultMaximumValue, 0.50)] = ColorBgra.Blue,
-					[Utility.Lerp (DefaultMinimumValue, DefaultMaximumValue, 0.75)] = ColorBgra.Cyan,
+					[Utility.Lerp (DefaultStartPosition, DefaultEndPosition, 0.25)] = ColorBgra.Black,
+					[Utility.Lerp (DefaultStartPosition, DefaultEndPosition, 0.50)] = ColorBgra.Blue,
+					[Utility.Lerp (DefaultStartPosition, DefaultEndPosition, 0.75)] = ColorBgra.Cyan,
 				}),
 
 			PredefinedGradients.LimeLemon => ColorGradient.Create (
 				ColorBgra.Transparent,
 				ColorBgra.White,
-				DefaultMinimumValue,
-				DefaultMaximumValue,
+				DefaultStartPosition,
+				DefaultEndPosition,
 				new Dictionary<double, ColorBgra> {
-					[Utility.Lerp (DefaultMinimumValue, DefaultMaximumValue, 0.25)] = ColorBgra.FromBgr (0, 128, 0),
-					[Utility.Lerp (DefaultMinimumValue, DefaultMaximumValue, 0.50)] = ColorBgra.FromBgr (0, 255, 0),
-					[Utility.Lerp (DefaultMinimumValue, DefaultMaximumValue, 0.75)] = ColorBgra.FromBgr (0, 255, 255),
+					[Utility.Lerp (DefaultStartPosition, DefaultEndPosition, 0.25)] = ColorBgra.FromBgr (0, 128, 0),
+					[Utility.Lerp (DefaultStartPosition, DefaultEndPosition, 0.50)] = ColorBgra.FromBgr (0, 255, 0),
+					[Utility.Lerp (DefaultStartPosition, DefaultEndPosition, 0.75)] = ColorBgra.FromBgr (0, 255, 255),
 				}),
 
 			PredefinedGradients.PinaColada => ColorGradient.Create (
 				ColorBgra.FromBgr (0, 128, 128),
 				ColorBgra.FromBgr (196, 245, 253),
-				DefaultMinimumValue,
-				DefaultMaximumValue,
+				DefaultStartPosition,
+				DefaultEndPosition,
 				new Dictionary<double, ColorBgra> {
-					[Utility.Lerp (DefaultMinimumValue, DefaultMaximumValue, 0.25)] = ColorBgra.Yellow,
+					[Utility.Lerp (DefaultStartPosition, DefaultEndPosition, 0.25)] = ColorBgra.Yellow,
 				}),
 
 			_ => CreateColorGradient (PredefinedGradients.Electric),

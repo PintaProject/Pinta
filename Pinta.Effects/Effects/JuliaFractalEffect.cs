@@ -87,7 +87,10 @@ public sealed class JuliaFractalEffect : BaseEffect
 		var h = dst.Height;
 		var count = Data.Quality * Data.Quality + 1;
 
-		var baseGradient = GradientHelper.CreateColorGradient (Data.ColorScheme).Resized (0, 1023);
+		var baseGradient =
+			GradientHelper
+			.CreateBaseGradientForEffect (Data.ColorSchemeSource, Data.ColorScheme, Data.ColorSchemeSeed)
+			.Resized (0, 1023);
 
 		return new (
 			w: w,
@@ -162,8 +165,14 @@ public sealed class JuliaFractalEffect : BaseEffect
 		[Caption ("Zoom"), MinimumValue (0), MaximumValue (50)]
 		public int Zoom { get; set; } = 1;
 
+		[Caption ("Color Scheme Source")]
+		public ColorSchemeSource ColorSchemeSource { get; set; } = ColorSchemeSource.PredefinedGradient;
+
 		[Caption ("Color Scheme")]
 		public PredefinedGradients ColorScheme { get; set; } = PredefinedGradients.Bonfire;
+
+		[Caption ("Random Color Scheme Seed")]
+		public RandomSeed ColorSchemeSeed { get; set; } = new (0);
 
 		[Caption ("Reverse Color Scheme")]
 		public bool ReverseColorScheme { get; set; } = false;

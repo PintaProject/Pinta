@@ -84,7 +84,10 @@ public sealed class MandelbrotFractalEffect : BaseEffect
 		double zoom = 1 + zoom_factor * Data.Zoom;
 		int count = Data.Quality * Data.Quality + 1;
 
-		var baseGradient = GradientHelper.CreateColorGradient (Data.ColorScheme).Resized (0, 1023);
+		var baseGradient =
+			GradientHelper
+			.CreateBaseGradientForEffect (Data.ColorSchemeSource, Data.ColorScheme, Data.ColorSchemeSeed)
+			.Resized (0, 1023);
 
 		return new (
 
@@ -185,8 +188,14 @@ public sealed class MandelbrotFractalEffect : BaseEffect
 		[Caption ("Angle")]
 		public DegreesAngle Angle { get; set; } = new (0);
 
+		[Caption ("Color Scheme Source")]
+		public ColorSchemeSource ColorSchemeSource { get; set; } = ColorSchemeSource.PredefinedGradient;
+
 		[Caption ("Color Scheme")]
 		public PredefinedGradients ColorScheme { get; set; } = PredefinedGradients.Electric;
+
+		[Caption ("Random Color Scheme Seed")]
+		public RandomSeed ColorSchemeSeed { get; set; } = new (0);
 
 		[Caption ("Reverse Color Scheme")]
 		public bool ReverseColorScheme { get; set; } = false;
