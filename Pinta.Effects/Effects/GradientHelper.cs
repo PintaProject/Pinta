@@ -75,8 +75,8 @@ internal static class GradientHelper
 					DefaultEndPosition);
 			case ColorSchemeSource.Random:
 				Random random = new (colorSchemeSeed.Value);
-				ColorBgra startColor = random.RandomColor ();
-				ColorBgra endColor = random.RandomColor ();
+				ColorBgra startColor = random.RandomColorBgra ();
+				ColorBgra endColor = random.RandomColorBgra ();
 				int stopsCount = random.Next (0, 5);
 				if (stopsCount == 0) {
 					return ColorGradient.Create (
@@ -98,7 +98,7 @@ internal static class GradientHelper
 									return
 										KeyValuePair.Create (
 											Utility.Lerp (DefaultStartPosition, DefaultEndPosition, fraction),
-											random.RandomColor ());
+											random.RandomColorBgra ());
 								}
 							)
 					);
