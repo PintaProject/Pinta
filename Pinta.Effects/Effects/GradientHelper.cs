@@ -59,6 +59,7 @@ internal static class GradientHelper
 	private const double DefaultEndPosition = 1;
 
 	public static ColorGradient CreateBaseGradientForEffect (
+		IPaletteService palette,
 		ColorSchemeSource colorSchemeSource,
 		PredefinedGradients colorScheme,
 		RandomSeed colorSchemeSeed)
@@ -68,8 +69,8 @@ internal static class GradientHelper
 				return CreateColorGradient (colorScheme);
 			case ColorSchemeSource.SelectedColors:
 				return ColorGradient.Create (
-					PintaCore.Palette.PrimaryColor.ToColorBgra (),
-					PintaCore.Palette.SecondaryColor.ToColorBgra (),
+					palette.PrimaryColor.ToColorBgra (),
+					palette.SecondaryColor.ToColorBgra (),
 					DefaultStartPosition,
 					DefaultEndPosition);
 			case ColorSchemeSource.Random:

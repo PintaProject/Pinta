@@ -86,7 +86,7 @@ public sealed class MandelbrotFractalEffect : BaseEffect
 
 		var baseGradient =
 			GradientHelper
-			.CreateBaseGradientForEffect (Data.ColorSchemeSource, Data.ColorScheme, Data.ColorSchemeSeed)
+			.CreateBaseGradientForEffect (PintaCore.Palette, Data.ColorSchemeSource, Data.ColorScheme, Data.ColorSchemeSeed)
 			.Resized (0, 1023);
 
 		return new (
