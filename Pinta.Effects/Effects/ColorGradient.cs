@@ -83,6 +83,8 @@ internal sealed class ColorGradient
 	/// </summary>
 	public ColorGradient Resized (double startPosition, double endPosition)
 	{
+		if (StartPosition == startPosition && EndPosition == endPosition) return this;
+
 		CheckBoundsConsistency (startPosition, endPosition);
 
 		double newSpan = endPosition - startPosition;
