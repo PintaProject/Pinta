@@ -8,16 +8,17 @@ msgstr ""
 "Project-Id-Version: pinta\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2024-01-07 01:14+0000\n"
-"PO-Revision-Date: 2014-05-26 01:23+0000\n"
-"Last-Translator: Giorgi Abuladze <g.abuladze@live.com>\n"
-"Language-Team: Georgian <ka@li.org>\n"
+"PO-Revision-Date: 2024-01-14 12:30+0000\n"
+"Last-Translator: Temuri Doghonadze <temuri.doghonadze@gmail.com>\n"
+"Language-Team: Georgian <https://hosted.weblate.org/projects/pinta/pinta/ka/>"
+"\n"
 "Language: ka\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=1; plural=0;\n"
+"X-Generator: Weblate 5.4-dev\n"
 "X-Launchpad-Export-Date: 2023-12-18 03:00+0000\n"
-"X-Generator: Launchpad (build e1eeab5b20e19239bd7d5f36676f7a52988db88b)\n"
 
 #: ../Pinta.Gui.Addins/InstallDialog.cs:216
 msgid " (in user directory)"
@@ -2211,8 +2212,7 @@ msgstr ""
 #: ../Pinta/Actions/Help/AboutDialogAction.cs:61
 msgid "translator-credits"
 msgstr ""
-"Launchpad Contributions:\n"
-"  Giorgi Abuladze https://launchpad.net/~g-abuladze"
+"Launchpad Contributions Giorgi Abuladze https://launchpad.net/~g-abuladze"
 
 #. Translators: {0} is 'Ctrl', or a platform-specific key such as 'Command' on macOS.
 #: ../Pinta.Tools/Tools/CloneStampTool.cs:46
