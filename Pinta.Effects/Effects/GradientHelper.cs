@@ -90,15 +90,16 @@ internal static class GradientHelper
 						DefaultStartPosition,
 						DefaultEndPosition,
 						Enumerable
-						.Range (0, stopsCount)
-						.Select (
-							n => {
-								double fraction = Utility.InvLerp (0, stopsCount + 1, n + 1);
-								return KeyValuePair.Create (
-									Utility.Lerp (DefaultStartPosition, DefaultEndPosition, fraction),
-									RandomColor (random));
-							}
-						)
+							.Range (0, stopsCount)
+							.Select (
+								n => {
+									double fraction = Utility.InvLerp<double> (0, stopsCount + 1, n + 1);
+									return
+										KeyValuePair.Create (
+											Utility.Lerp (DefaultStartPosition, DefaultEndPosition, fraction),
+											RandomColor (random));
+								}
+							)
 					);
 				}
 			default:
