@@ -108,12 +108,16 @@ internal static class GradientHelper
 		}
 	}
 
-	private static ColorBgra RandomColor (Random random)
+	public static ColorBgra RandomColor (Random random, bool includeAlpha = false)
 	{
 		Span<byte> colorBytes = stackalloc byte[4];
 		random.NextBytes (colorBytes);
 		uint unsignedInteger = BitConverter.ToUInt32 (colorBytes);
-		return ColorBgra.FromUInt32 (unsignedInteger) with { A = 255 };
+		ColorBgra baseColor = ColorBgra.FromUInt32 (unsignedInteger);
+		if (includeAlpha)
+			return baseColor;
+		else
+			return baseColor with { A = 255 };
 	}
 
 	public static ColorGradient CreateColorGradient (PredefinedGradients scheme)
