@@ -9,6 +9,7 @@ namespace Pinta.Effects;
 public enum PredefinedPalettes
 {
 	OldWindows16,
+	OldWindows20,
 	WebSafe,
 	BlackWhite,
 	OldMsPaint,
@@ -20,6 +21,7 @@ internal static class PaletteHelper
 	{
 		return choice switch {
 			PredefinedPalettes.OldWindows16 => Predefined.OldWindows16,
+			PredefinedPalettes.OldWindows20 => Predefined.OldWindows20,
 			PredefinedPalettes.WebSafe => Predefined.WebSafe,
 			PredefinedPalettes.BlackWhite => Predefined.BlackWhite,
 			PredefinedPalettes.OldMsPaint => Predefined.OldMsPaint,
@@ -30,24 +32,28 @@ internal static class PaletteHelper
 	public static class Predefined
 	{
 		public static ImmutableArray<ColorBgra> OldWindows16 => old_windows_16.Value;
+		public static ImmutableArray<ColorBgra> OldWindows20 => old_windows_20.Value;
 		public static ImmutableArray<ColorBgra> WebSafe => web_safe.Value;
 		public static ImmutableArray<ColorBgra> BlackWhite { get; }
 		public static ImmutableArray<ColorBgra> OldMsPaint => old_ms_paint.Value;
 
 		private static readonly Lazy<ImmutableArray<ColorBgra>> web_safe;
 		private static readonly Lazy<ImmutableArray<ColorBgra>> old_windows_16;
+		private static readonly Lazy<ImmutableArray<ColorBgra>> old_windows_20;
 		private static readonly Lazy<ImmutableArray<ColorBgra>> old_ms_paint;
 
 		static Predefined ()
 		{
 			web_safe = new (() => EnumerateWebSafeColorCube ().ToImmutableArray ());
-			old_windows_16 = new (() => EnumerateOldWindowsColors ().ToImmutableArray ());
+			old_windows_16 = new (() => EnumerateOldWindows16Colors ().ToImmutableArray ());
+			old_windows_20 = new (() => EnumerateOldWindows20Colors ().ToImmutableArray ());
 			BlackWhite = ImmutableArray.CreateRange (new[] { ColorBgra.FromBgr (0, 0, 0), ColorBgra.FromBgr (255, 255, 255) });
 			old_ms_paint = new (() => EnumerateOldMsPaintColors ().ToImmutableArray ());
 		}
 
-		private static IEnumerable<ColorBgra> EnumerateOldWindowsColors ()
+		private static IEnumerable<ColorBgra> EnumerateOldWindows16Colors ()
 		{
+			// https://en.wikipedia.org/wiki/List_of_software_palettes#Microsoft_Windows_and_IBM_OS/2_default_16-color_palette
 			yield return ColorBgra.FromBgr (0, 0, 0); // Black
 			yield return ColorBgra.FromBgr (0, 0, 128); // Blue
 			yield return ColorBgra.FromBgr (0, 128, 0); // Green
@@ -64,6 +70,18 @@ internal static class PaletteHelper
 			yield return ColorBgra.FromBgr (255, 0, 255); // Light Magenta
 			yield return ColorBgra.FromBgr (255, 255, 0); // Yellow
 			yield return ColorBgra.FromBgr (255, 255, 255); // White
+		}
+
+		private static IEnumerable<ColorBgra> EnumerateOldWindows20Colors ()
+		{
+			// https://en.wikipedia.org/wiki/List_of_software_palettes#Microsoft_Windows_default_20-color_palette
+			foreach (var color in EnumerateOldWindows16Colors ())
+				yield return color;
+
+			yield return ColorBgra.FromBgr (240, 251, 255); // Cream
+			yield return ColorBgra.FromBgr (192, 220, 192); // Money Green
+			yield return ColorBgra.FromBgr (240, 202, 166); // Sky Blue
+			yield return ColorBgra.FromBgr (164, 160, 160); // Medium Grey
 		}
 
 		private static IEnumerable<ColorBgra> EnumerateOldMsPaintColors ()
