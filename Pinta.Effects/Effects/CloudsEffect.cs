@@ -116,7 +116,7 @@ public sealed class CloudsEffect : BaseEffect
 		return Utility.Lerp (edge1, edge2, v);
 	}
 
-	private static void RenderClouds (ImageSurface surface, Core.RectangleI rect, int scale, byte seed, double power, ColorBgra colorFrom, ColorBgra colorTo)
+	private static void RenderClouds (ImageSurface surface, Core.RectangleI rect, int scale, byte seed, double power, ColorGradient gradient)
 	{
 		int w = surface.Width;
 		int h = surface.Height;
@@ -128,11 +128,11 @@ public sealed class CloudsEffect : BaseEffect
 			var row = data.Slice ((y - rect.Top) * w, w);
 			int dy = 2 * y - h;
 			for (int x = rect.Left; x <= rect.Right; ++x)
-				row[x - rect.Left] = GetFinalPixelColor (scale, seed, power, colorFrom, colorTo, w, dy, x); ;
+				row[x - rect.Left] = GetFinalPixelColor (scale, seed, power, gradient, w, dy, x); ;
 		}
 	}
 
-	private static ColorBgra GetFinalPixelColor (int scale, byte seed, double power, ColorBgra colorFrom, ColorBgra colorTo, int w, int dy, int x)
+	private static ColorBgra GetFinalPixelColor (int scale, byte seed, double power, ColorGradient gradient, int w, int dy, int x)
 	{
 		int dx = 2 * x - w;
 		double val = 0;
@@ -163,7 +163,7 @@ public sealed class CloudsEffect : BaseEffect
 			mult *= power;
 		}
 
-		return ColorBgra.Lerp (colorFrom, colorTo, (val + 1) / 2);
+		return gradient.GetColor ((val + 1) / 2);
 	}
 
 	protected override void Render (ImageSurface src, ImageSurface dst, Core.RectangleI roi)
@@ -172,8 +172,21 @@ public sealed class CloudsEffect : BaseEffect
 
 		var temp = CairoExtensions.CreateImageSurface (Format.Argb32, roi.Width, roi.Height);
 
-		RenderClouds (temp, roi, Data.Scale, (byte) (Data.Seed.Value ^ instance_seed), Data.Power / 100.0,
-				PintaCore.Palette.PrimaryColor.ToColorBgra (), PintaCore.Palette.SecondaryColor.ToColorBgra ());
+		ColorGradient baseGradient = ColorGradient.Create (
+			PintaCore.Palette.PrimaryColor.ToColorBgra (),
+			PintaCore.Palette.SecondaryColor.ToColorBgra (),
+			0,
+			1
+		);
+
+		RenderClouds (
+			temp,
+			roi,
+			Data.Scale,
+			(byte) (Data.Seed.Value ^ instance_seed),
+			Data.Power / 100.0,
+			baseGradient
+		);
 
 		temp.MarkDirty ();
 
