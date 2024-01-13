@@ -174,7 +174,11 @@ public sealed class CloudsEffect : BaseEffect
 
 		var baseGradient =
 			GradientHelper
-			.CreateBaseGradientForEffect (PintaCore.Palette, Data.ColorSchemeSource, Data.ColorScheme, Data.ColorSchemeSeed)
+			.CreateBaseGradientForEffect (
+				() => PintaCore.Palette,
+				Data.ColorSchemeSource,
+				Data.ColorScheme,
+				Data.ColorSchemeSeed)
 			.Resized (0, 1);
 
 		RenderClouds (
