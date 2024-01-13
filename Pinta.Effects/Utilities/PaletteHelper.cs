@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Collections.Immutable;
 using System.ComponentModel;
+using System.Linq;
 using Pinta.Core;
 
 namespace Pinta.Effects;
@@ -66,13 +67,7 @@ internal static class PaletteHelper
 			// https://en.wikipedia.org/wiki/List_of_software_palettes#6_level_RGB
 			const byte levels = 6;
 			const byte factor = 51;
-			for (byte r = 0; r < levels; r++)
-				for (byte g = 0; g < levels; g++)
-					for (byte b = 0; b < levels; b++)
-						yield return ColorBgra.FromBgr (
-							b: (byte) (b * factor),
-							g: (byte) (g * factor),
-							r: (byte) (r * factor));
+			return ColorCube (Enumerable.Range (0, levels).Select (i => Utility.ClampToByte (i * factor)));
 		}
 
 		private static IEnumerable<ColorBgra> EnumerateRgb6Bit ()
@@ -80,27 +75,13 @@ internal static class PaletteHelper
 			// https://en.wikipedia.org/wiki/List_of_monochrome_and_RGB_color_formats#6-bit_RGB
 			const byte levels = 4;
 			const byte factor = 85;
-			for (byte r = 0; r < levels; r++)
-				for (byte g = 0; g < levels; g++)
-					for (byte b = 0; b < levels; b++)
-						yield return ColorBgra.FromBgr (
-							b: (byte) (b * factor),
-							g: (byte) (g * factor),
-							r: (byte) (r * factor));
+			return ColorCube (Enumerable.Range (0, levels).Select (i => Utility.ClampToByte (i * factor)));
 		}
 
 		private static IEnumerable<ColorBgra> EnumerateRgb3Bit ()
 		{
 			// https://en.wikipedia.org/wiki/List_of_monochrome_and_RGB_color_formats#3-bit_RGB
-			for (byte i = 0; i < 8; i++) {
-				bool r = (i & 1) != 0;
-				bool g = (i & 2) != 0;
-				bool b = (i & 4) != 0;
-				yield return ColorBgra.FromBgr (
-					b: b ? byte.MaxValue : byte.MinValue,
-					g: g ? byte.MaxValue : byte.MinValue,
-					r: r ? byte.MaxValue : byte.MinValue);
-			}
+			return ColorCube (new[] { byte.MinValue, byte.MaxValue });
 		}
 
 		private static IEnumerable<ColorBgra> EnumerateOldWindows16Colors ()
@@ -167,6 +148,18 @@ internal static class PaletteHelper
 			yield return ColorBgra.FromBgr (255, 0, 128); // Electric indigo
 			yield return ColorBgra.FromBgr (64, 128, 255); // Coral
 			yield return ColorBgra.FromBgr (0, 64, 128); // Saddle brown
+		}
+
+		private static IEnumerable<ColorBgra> ColorCube (IEnumerable<byte> valueSequence)
+		{
+			ImmutableArray<byte> values = valueSequence.ToImmutableArray ();
+			for (int r = 0; r < values.Length; r++)
+				for (int g = 0; g < values.Length; g++)
+					for (int b = 0; b < values.Length; b++)
+						yield return ColorBgra.FromBgr (
+							b: values[b],
+							g: values[g],
+							r: values[r]);
 		}
 	}
 }
