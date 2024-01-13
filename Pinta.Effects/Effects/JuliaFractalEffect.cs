@@ -86,6 +86,9 @@ public sealed class JuliaFractalEffect : BaseEffect
 		var w = dst.Width;
 		var h = dst.Height;
 		var count = Data.Quality * Data.Quality + 1;
+
+		var baseGradient = GradientHelper.CreateColorGradient (Data.ColorScheme).Resized (0, 1023);
+
 		return new (
 			w: w,
 			h: h,
@@ -97,7 +100,7 @@ public sealed class JuliaFractalEffect : BaseEffect
 			invCount: 1.0 / count,
 			angleTheta: (Data.Angle.Degrees * Math.PI * 2) / 360.0,
 			factor: Data.Factor,
-			colorGradient: GradientHelper.CreateColorGradient (Data.ColorScheme).Resized (0, 1023)
+			colorGradient: Data.ReverseColorScheme ? baseGradient.Reversed () : baseGradient
 		);
 	}
 
@@ -161,6 +164,9 @@ public sealed class JuliaFractalEffect : BaseEffect
 
 		[Caption ("Color Scheme")]
 		public PredefinedGradients ColorScheme { get; set; } = PredefinedGradients.Bonfire;
+
+		[Caption ("Reverse Color Scheme")]
+		public bool ReverseColorScheme { get; set; } = false;
 
 		[Caption ("Angle")]
 		public DegreesAngle Angle { get; set; } = new (0);

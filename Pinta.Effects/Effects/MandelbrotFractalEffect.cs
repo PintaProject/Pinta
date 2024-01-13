@@ -84,6 +84,8 @@ public sealed class MandelbrotFractalEffect : BaseEffect
 		double zoom = 1 + zoom_factor * Data.Zoom;
 		int count = Data.Quality * Data.Quality + 1;
 
+		var baseGradient = GradientHelper.CreateColorGradient (Data.ColorScheme).Resized (0, 1023);
+
 		return new (
 
 			w: dst.Width,
@@ -105,7 +107,7 @@ public sealed class MandelbrotFractalEffect : BaseEffect
 
 			invertColors: Data.InvertColors,
 
-			colorGradient: GradientHelper.CreateColorGradient (Data.ColorScheme).Resized (0, 1023)
+			colorGradient: Data.ReverseColorScheme ? baseGradient.Reversed () : baseGradient
 		);
 	}
 
@@ -185,6 +187,9 @@ public sealed class MandelbrotFractalEffect : BaseEffect
 
 		[Caption ("Color Scheme")]
 		public PredefinedGradients ColorScheme { get; set; } = PredefinedGradients.Electric;
+
+		[Caption ("Reverse Color Scheme")]
+		public bool ReverseColorScheme { get; set; } = false;
 
 		[Caption ("Invert Colors")]
 		public bool InvertColors { get; set; } = false;
