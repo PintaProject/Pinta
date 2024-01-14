@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: pinta\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-01-07 01:14+0000\n"
+"POT-Creation-Date: 2024-01-14 01:15+0000\n"
 "PO-Revision-Date: 2022-03-29 07:57+0000\n"
 "Last-Translator: Pavol Polonec <pavolpolonec@gmail.com>\n"
 "Language-Team: Slovak <sk@li.org>\n"
@@ -74,7 +74,7 @@ msgstr "Pridať šum"
 msgid "Add-in Manager..."
 msgstr ""
 
-#: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:810
+#: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:799
 msgid "Added"
 msgstr "Pridané"
 
@@ -86,7 +86,7 @@ msgstr ""
 msgid "After select"
 msgstr "Po vybraní"
 
-#: ../Pinta.Core/Actions/EditActions.cs:366
+#: ../Pinta.Core/Actions/EditActions.cs:368
 #: ../Pinta.Gui.Addins/AddinManagerDialog.cs:209
 #: ../Pinta/Actions/File/OpenDocumentAction.cs:83
 msgid "All files"
@@ -106,8 +106,8 @@ msgstr "Kotva:"
 
 #: ../Pinta.Effects/Effects/EdgeDetectEffect.cs:80
 #: ../Pinta.Effects/Effects/EmbossEffect.cs:149
-#: ../Pinta.Effects/Effects/JuliaFractalEffect.cs:150
-#: ../Pinta.Effects/Effects/MandelbrotFractalEffect.cs:168
+#: ../Pinta.Effects/Effects/JuliaFractalEffect.cs:171
+#: ../Pinta.Effects/Effects/MandelbrotFractalEffect.cs:185
 #: ../Pinta.Effects/Effects/MotionBlurEffect.cs:101
 #: ../Pinta.Effects/Effects/RadialBlurEffect.cs:171
 #: ../Pinta.Effects/Effects/ReliefEffect.cs:82
@@ -171,6 +171,11 @@ msgstr "Pozadie:"
 msgid "Based on the work of Paint.NET:"
 msgstr "Založené na diele Paint.NET:"
 
+#. Translators: Gradient with the colors of the flag of Italy: red, white, and green
+#: ../Pinta.Effects/Effects/GradientHelper.cs:10
+msgid "Beautiful Italy"
+msgstr ""
+
 #: ../Pinta.Core/Actions/ViewActions.cs:69
 msgid "Best Fit"
 msgstr "Prispôsobiť"
@@ -179,7 +184,9 @@ msgstr "Prispôsobiť"
 msgid "Bilinear"
 msgstr ""
 
+#. Translators: Simple gradient that goes from black to white
 #: ../Pinta.Effects/Adjustments/BlackAndWhiteEffect.cs:24
+#: ../Pinta.Effects/Effects/GradientHelper.cs:14
 msgid "Black and White"
 msgstr "Čiernobiele"
 
@@ -209,6 +216,11 @@ msgstr "Rozostrenia"
 msgid "Bold"
 msgstr "Hrubé"
 
+#. Translators: Gradient that starts out white, like the core of a raging fire, and then goes through yellow, red, and black (like visible black smoke), and finally transparent, blending with the background
+#: ../Pinta.Effects/Effects/GradientHelper.cs:18
+msgid "Bonfire"
+msgstr ""
+
 #: ../Pinta.Effects/Adjustments/BrightnessContrastEffect.cs:142
 #: ../Pinta.Effects/Effects/GlowEffect.cs:77
 msgid "Brightness"
@@ -222,7 +234,7 @@ msgstr "Jas / kontrast"
 msgid "Brush Size"
 msgstr "Veľkosť štetca"
 
-#: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:264
+#: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:254
 #: ../Pinta.Tools/Tools/BaseBrushTool.cs:100
 msgid "Brush width"
 msgstr "Šírka štetca"
@@ -241,8 +253,8 @@ msgstr "Podľa abs. veľkosti"
 msgid "By percentage:"
 msgstr "Percentuálne:"
 
-#: ../Pinta.Core/Actions/EditActions.cs:351
-#: ../Pinta.Core/Actions/EditActions.cs:392
+#: ../Pinta.Core/Actions/EditActions.cs:353
+#: ../Pinta.Core/Actions/EditActions.cs:394
 #: ../Pinta.Core/Actions/LayerActions.cs:167
 #: ../Pinta.Gui.Addins/AddinManagerDialog.cs:198
 #: ../Pinta.Gui.Addins/InstallDialog.cs:120
@@ -275,11 +287,16 @@ msgstr "V strede"
 msgid "Centimeters"
 msgstr "Centimetre"
 
-#: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:348
+#: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:341
 msgid "Changed Shape Type"
 msgstr "Zmeniť typ tvaru"
 
-#: ../Pinta.Effects/Dialogs/Effects.LevelsDialog.cs:555
+#. Translators: Gradient that starts out off-white, like cherry blossoms against sunlight, then goes through pink, then light blue (like the sky) and finally transparent, blending with the background
+#: ../Pinta.Effects/Effects/GradientHelper.cs:22
+msgid "Cherry Blossom"
+msgstr ""
+
+#: ../Pinta.Effects/Dialogs/Effects.LevelsDialog.cs:531
 msgid "Choose Color"
 msgstr "Vybrať farbu"
 
@@ -329,11 +346,11 @@ msgstr "Kliknutím a ťahaním obtiahnete vybranú oblasť."
 msgid "Click and drag to navigate image."
 msgstr "Kliknutím a ťahaním sa pohybujete v obrázku"
 
-#: ../Pinta.Gui.Widgets/Widgets/StatusBarColorPaletteWidget.cs:265
+#: ../Pinta.Gui.Widgets/Widgets/StatusBarColorPaletteWidget.cs:264
 msgid "Click to reset primary and secondary color."
 msgstr "Kliknite na zmenu primárnej a sekundárnej farby"
 
-#: ../Pinta.Gui.Widgets/Widgets/StatusBarColorPaletteWidget.cs:254
+#: ../Pinta.Gui.Widgets/Widgets/StatusBarColorPaletteWidget.cs:253
 msgid "Click to select primary color."
 msgstr "Kliknutím vyberiete primárnu farbu"
 
@@ -341,11 +358,11 @@ msgstr "Kliknutím vyberiete primárnu farbu"
 msgid "Click to select region of similar color."
 msgstr "Kliknutím vyberiete oblasť s podobnou farbou."
 
-#: ../Pinta.Gui.Widgets/Widgets/StatusBarColorPaletteWidget.cs:257
+#: ../Pinta.Gui.Widgets/Widgets/StatusBarColorPaletteWidget.cs:256
 msgid "Click to select secondary color."
 msgstr "Kliknutím vyberiete sekundárnu farbu"
 
-#: ../Pinta.Gui.Widgets/Widgets/StatusBarColorPaletteWidget.cs:260
+#: ../Pinta.Gui.Widgets/Widgets/StatusBarColorPaletteWidget.cs:259
 msgid "Click to switch between primary and secondary color."
 msgstr "Kliknite na výmenu hlavnej a vedľajšej farby."
 
@@ -373,7 +390,7 @@ msgstr "Zatvoriť všetko"
 msgid "Closed Curve Shape"
 msgstr "Uzavretá krivka"
 
-#: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:325
+#: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:318
 msgid "Closed Line/Curve Series"
 msgstr "Uzavreté čiary/krivky"
 
@@ -414,6 +431,8 @@ msgid "Color Saturation"
 msgstr "Sýtosť farby"
 
 #: ../Pinta.Core/Actions/ViewActions.cs:181
+#: ../Pinta.Effects/Effects/JuliaFractalEffect.cs:165
+#: ../Pinta.Effects/Effects/MandelbrotFractalEffect.cs:188
 msgid "Color Scheme"
 msgstr ""
 
@@ -450,13 +469,18 @@ msgstr "Kopírovať zlúčené"
 msgid "Copyright"
 msgstr "Autorské práva"
 
+#. Translators: Gradient with the colors of blue and pink cotton candy
+#: ../Pinta.Effects/Effects/GradientHelper.cs:26
+msgid "Cotton Candy"
+msgstr ""
+
 #. Translators: {0} is the name of a layer, and {1} is the path to a .ora file.
-#: ../Pinta.Core/ImageFormats/OraFormat.cs:127
+#: ../Pinta.Core/ImageFormats/OraFormat.cs:122
 #, csharp-format
 msgid "Could not import layer \"{0}\" from {1}"
 msgstr ""
 
-#: ../Pinta.Core/Classes/Palette.cs:192
+#: ../Pinta.Core/Classes/Palette.cs:196
 #: ../Pinta.Core/Managers/WorkspaceManager.cs:378
 #: ../Pinta.Core/Managers/WorkspaceManager.cs:385
 #, csharp-format
@@ -485,7 +509,7 @@ msgid "Custom"
 msgstr "Vlastné"
 
 #: ../Pinta.Core/Actions/EditActions.cs:60
-#: ../Pinta.Core/Actions/EditActions.cs:243
+#: ../Pinta.Core/Actions/EditActions.cs:244
 msgid "Cut"
 msgstr "Vystrihnúť"
 
@@ -512,11 +536,11 @@ msgstr ""
 msgid "Delete Layer"
 msgstr "Odstrániť vrstvu"
 
-#: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:653
+#: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:644
 msgid "Deleted"
 msgstr "Odstránené"
 
-#: ../Pinta.Core/Actions/EditActions.cs:254
+#: ../Pinta.Core/Actions/EditActions.cs:256
 msgid "Deselect"
 msgstr "Zrušiť výber"
 
@@ -580,7 +604,12 @@ msgstr "_Efekty"
 msgid "Effects"
 msgstr ""
 
-#: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:326
+#. Translators: Gradient that starts out white, like the the inner part of a spark, and goes through progressively dark shades of blue until it reaches black, and finally transparent, blending with the background
+#: ../Pinta.Effects/Effects/GradientHelper.cs:30
+msgid "Electric"
+msgstr ""
+
+#: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:319
 #: ../Pinta.Tools/Editable/EditEngines/EllipseEditEngine.cs:34
 #: ../Pinta.Tools/Tools/EllipseTool.cs:38
 msgid "Ellipse"
@@ -607,7 +636,7 @@ msgstr "Vymazať výber"
 msgid "Eraser"
 msgstr "Guma"
 
-#: ../Pinta.Core/ImageFormats/OraFormat.cs:128
+#: ../Pinta.Core/ImageFormats/OraFormat.cs:123
 msgid "Error"
 msgstr "Chyba"
 
@@ -624,8 +653,8 @@ msgstr ""
 msgid "Extension packages"
 msgstr ""
 
-#: ../Pinta.Effects/Effects/JuliaFractalEffect.cs:141
-#: ../Pinta.Effects/Effects/MandelbrotFractalEffect.cs:158
+#: ../Pinta.Effects/Effects/JuliaFractalEffect.cs:156
+#: ../Pinta.Effects/Effects/MandelbrotFractalEffect.cs:175
 msgid "Factor"
 msgstr "Faktor"
 
@@ -645,7 +674,7 @@ msgstr ""
 msgid "Failed to open image"
 msgstr "Obrázok nie je možné otvoriť"
 
-#: ../Pinta/Actions/File/SaveDocumentImplementationAction.cs:189
+#: ../Pinta/Actions/File/SaveDocumentImplementationAction.cs:188
 msgid "Failed to save image"
 msgstr "Nepodarilo sa uložiť obrázok"
 
@@ -672,23 +701,23 @@ msgstr "Vyplniť pozadie"
 msgid "Fill Selection"
 msgstr "Vyplniť výber"
 
-#: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:301
+#: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:294
 #: ../Pinta.Tools/Tools/FreeformShapeTool.cs:223
 msgid "Fill Shape"
 msgstr "Vyplnený útvar"
 
-#: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:291
+#: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:284
 #: ../Pinta.Tools/Tools/FreeformShapeTool.cs:216
 msgid "Fill Style"
 msgstr "Štýl výplne"
 
-#: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:302
+#: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:295
 #: ../Pinta.Tools/Tools/FreeformShapeTool.cs:224
 msgid "Fill and Outline Shape"
 msgstr "Útvar s výplňou a obrysom"
 
-#: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:1073
-#: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:1331
+#: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:1062
+#: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:1322
 msgid "Finalized"
 msgstr "Dokončený"
 
@@ -819,7 +848,7 @@ msgstr "Farebný odtieň"
 msgid "Hue / Saturation"
 msgstr "Odtieň / sýtosť"
 
-#: ../Pinta/Actions/File/SaveDocumentImplementationAction.cs:184
+#: ../Pinta/Actions/File/SaveDocumentImplementationAction.cs:183
 msgid "ICO files can not be larger than 255 x 255 pixels."
 msgstr "ICO súbory nesmú byť väčšie ako 255 x 255 pixelov."
 
@@ -852,7 +881,7 @@ msgstr "Súbory obrázkov"
 msgid "Image larger than canvas"
 msgstr "Obrázok väčší ako plátno"
 
-#: ../Pinta/Actions/File/SaveDocumentImplementationAction.cs:183
+#: ../Pinta/Actions/File/SaveDocumentImplementationAction.cs:182
 msgid "Image too large"
 msgstr "Obrázok je príliš veľký"
 
@@ -918,12 +947,12 @@ msgid "Intersect ({0} + Left Click)"
 msgstr "Prienik ({0} + Ľavé tlačidlo myši)"
 
 #: ../Pinta.Effects/Adjustments/InvertColorsEffect.cs:24
-#: ../Pinta.Effects/Effects/MandelbrotFractalEffect.cs:171
+#: ../Pinta.Effects/Effects/MandelbrotFractalEffect.cs:194
 msgid "Invert Colors"
 msgstr "Invertovať farby"
 
 #: ../Pinta.Core/Actions/EditActions.cs:68
-#: ../Pinta.Core/Actions/EditActions.cs:447
+#: ../Pinta.Core/Actions/EditActions.cs:446
 msgid "Invert Selection"
 msgstr "Obráťiť výber"
 
@@ -1074,13 +1103,13 @@ msgid ""
 "Right click to set secondary color."
 msgstr ""
 
-#: ../Pinta.Gui.Widgets/Widgets/StatusBarColorPaletteWidget.cs:251
+#: ../Pinta.Gui.Widgets/Widgets/StatusBarColorPaletteWidget.cs:250
 msgid "Left click to set primary color. Right click to set secondary color."
 msgstr ""
 "Kliknutím ľavým tlačidlom vyberiete primárnu farbu. Kliknutím pravým "
 "tlačidlom vyberiete sekundárnu farbu."
 
-#: ../Pinta.Gui.Widgets/Widgets/StatusBarColorPaletteWidget.cs:247
+#: ../Pinta.Gui.Widgets/Widgets/StatusBarColorPaletteWidget.cs:246
 msgid ""
 "Left click to set primary color. Right click to set secondary color. Middle "
 "click to choose palette color."
@@ -1127,6 +1156,11 @@ msgstr "Osvetlenie"
 #: ../Pinta.Effects/Adjustments/HueSaturationEffect.cs:68
 msgid "Lightness"
 msgstr "Svetlosť"
+
+#. Translators: Gradient with a citrusy vibe that starts out white, goes through light yellow, several shades of green, and then transparent, blending with the background
+#: ../Pinta.Effects/Effects/GradientHelper.cs:34
+msgid "Lime Lemon"
+msgstr ""
 
 #: ../Pinta.Tools/Tools/LineCurveTool.cs:38
 msgid "Line/Curve"
@@ -1183,7 +1217,7 @@ msgstr "Zlúčiť vrstvy"
 msgid "Mode"
 msgstr "Režim"
 
-#: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:887
+#: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:876
 msgid "Modified"
 msgstr "Upravené"
 
@@ -1258,7 +1292,7 @@ msgstr "Šum"
 
 #: ../Pinta.Core/Effects/UserBlendOps.cs:31
 #: ../Pinta.Tools/Brushes/PlainBrush.cs:35
-#: ../Pinta.Tools/Tools/EraserTool.cs:264 ../Pinta.Tools/Tools/TextTool.cs:249
+#: ../Pinta.Tools/Tools/EraserTool.cs:263 ../Pinta.Tools/Tools/TextTool.cs:249
 msgid "Normal"
 msgstr "Normálny"
 
@@ -1292,7 +1326,7 @@ msgstr "Olejomaľba"
 msgid "Opacity:"
 msgstr "Priehľadnosť:"
 
-#: ../Pinta.Core/Actions/EditActions.cs:350
+#: ../Pinta.Core/Actions/EditActions.cs:352
 #: ../Pinta.Core/Actions/FileActions.cs:56
 #: ../Pinta.Core/Actions/LayerActions.cs:166
 #: ../Pinta.Gui.Addins/AddinManagerDialog.cs:197
@@ -1313,11 +1347,11 @@ msgstr "Otvoriť obrázok"
 msgid "Open Image File"
 msgstr "Otvoriť súbor obrázka"
 
-#: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:324
+#: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:317
 msgid "Open Line/Curve Series"
 msgstr "Otvorené čiary/krivky"
 
-#: ../Pinta.Core/Actions/EditActions.cs:347
+#: ../Pinta.Core/Actions/EditActions.cs:349
 msgid "Open Palette File"
 msgstr "Otvoriť súbor s paletou"
 
@@ -1339,7 +1373,7 @@ msgstr "Pôvodný"
 msgid "Outline"
 msgstr "Zvýrazniť obrysy"
 
-#: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:300
+#: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:293
 #: ../Pinta.Tools/Tools/FreeformShapeTool.cs:222
 msgid "Outline Shape"
 msgstr "Obrys útvaru"
@@ -1376,7 +1410,7 @@ msgstr "Štetec"
 msgid "Palette"
 msgstr "Paleta"
 
-#: ../Pinta.Core/Actions/EditActions.cs:354
+#: ../Pinta.Core/Actions/EditActions.cs:356
 msgid "Palette files"
 msgstr "Súbory paliet"
 
@@ -1466,7 +1500,7 @@ msgstr ""
 msgid "Pinta supports the following file formats:"
 msgstr "Pinta podporuje nasledovné formáty súborov:"
 
-#: ../Pinta.Core/Classes/Palette.cs:193
+#: ../Pinta.Core/Classes/Palette.cs:197
 msgid "Pinta supports the following palette formats:"
 msgstr "Pinta podporuje tieto formáty paliet:"
 
@@ -1482,12 +1516,17 @@ msgstr "Pixelizovať"
 msgid "Pixels"
 msgstr "Pixle"
 
-#: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:592
-#: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:780
+#. Translators: Gradient with different shades of brownish yellow
+#: ../Pinta.Effects/Effects/GradientHelper.cs:38
+msgid "Piña Colada"
+msgstr ""
+
+#: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:583
+#: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:769
 msgid "Point Added"
 msgstr "Bod pridaný"
 
-#: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:639
+#: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:630
 msgid "Point Deleted"
 msgstr "Bod odstránený"
 
@@ -1504,7 +1543,7 @@ msgstr "Na výšku"
 msgid "Posterize"
 msgstr "Posterizovať"
 
-#: ../Pinta.Effects/Effects/CloudsEffect.cs:207
+#: ../Pinta.Effects/Effects/CloudsEffect.cs:208
 msgid "Power"
 msgstr "Sila"
 
@@ -1529,8 +1568,8 @@ msgstr "Hlavný"
 msgid "Print"
 msgstr "Tlačiť"
 
-#: ../Pinta.Effects/Effects/JuliaFractalEffect.cs:144
-#: ../Pinta.Effects/Effects/MandelbrotFractalEffect.cs:161
+#: ../Pinta.Effects/Effects/JuliaFractalEffect.cs:159
+#: ../Pinta.Effects/Effects/MandelbrotFractalEffect.cs:178
 #: ../Pinta.Effects/Effects/RadialBlurEffect.cs:177
 #: ../Pinta.Effects/Effects/WarpEffect.cs:186
 msgid "Quality"
@@ -1566,7 +1605,7 @@ msgid "Radius"
 msgstr "Polomer"
 
 #: ../Pinta.Effects/Effects/AddNoiseEffect.cs:189
-#: ../Pinta.Effects/Effects/CloudsEffect.cs:229
+#: ../Pinta.Effects/Effects/CloudsEffect.cs:230
 #: ../Pinta.Effects/Effects/FrostedGlassEffect.cs:153
 msgid "Random Noise"
 msgstr "Náhodný šum"
@@ -1681,6 +1720,11 @@ msgstr "Zmeniť veľkosť obrázka..."
 msgid "Resize Palette"
 msgstr "Zmeniť veľkosť palety"
 
+#: ../Pinta.Effects/Effects/JuliaFractalEffect.cs:168
+#: ../Pinta.Effects/Effects/MandelbrotFractalEffect.cs:191
+msgid "Reverse Color Scheme"
+msgstr ""
+
 #: ../Pinta.Tools/Tools/TextTool.cs:226
 msgid "Right Align"
 msgstr "Zarovnať doprava"
@@ -1714,7 +1758,7 @@ msgstr "Otočiť o 90° proti smeru hodinových ručičiek"
 msgid "Rotation"
 msgstr "Otočenie"
 
-#: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:327
+#: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:320
 msgid "Rounded Line Series"
 msgstr "Zaoblené čiary"
 
@@ -1747,7 +1791,7 @@ msgstr "Sýtosť"
 msgid "Saturation Percentage"
 msgstr "Úroveň svetlosti"
 
-#: ../Pinta.Core/Actions/EditActions.cs:391
+#: ../Pinta.Core/Actions/EditActions.cs:393
 #: ../Pinta.Core/Actions/FileActions.cs:51
 #: ../Pinta/Actions/File/SaveDocumentImplementationAction.cs:73
 msgid "Save"
@@ -1766,7 +1810,7 @@ msgstr "Uložiť ako..."
 msgid "Save Image File"
 msgstr "Uložiť súbor obrázka"
 
-#: ../Pinta.Core/Actions/EditActions.cs:388
+#: ../Pinta.Core/Actions/EditActions.cs:390
 msgid "Save Palette File"
 msgstr "Uložiť súbor palety"
 
@@ -1775,7 +1819,7 @@ msgstr "Uložiť súbor palety"
 msgid "Save changes to image \"{0}\" before closing?"
 msgstr "Uložiť zmeny do obrázka \"{0}\" pred zavretím?"
 
-#: ../Pinta.Effects/Effects/CloudsEffect.cs:204
+#: ../Pinta.Effects/Effects/CloudsEffect.cs:205
 msgid "Scale"
 msgstr "Mierka"
 
@@ -1800,7 +1844,7 @@ msgstr "Sépia"
 msgid "Set Number of Colors"
 msgstr "Nastaviť počet farieb"
 
-#: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:315
+#: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:308
 msgid "Shape Type"
 msgstr "Typ tvaru"
 
@@ -1809,7 +1853,7 @@ msgid "Sharpen"
 msgstr "Doostriť"
 
 #: ../Pinta.Core/Extensions/ToolBoxButton.cs:51
-#: ../Pinta.Gui.Widgets/Widgets/StatusBarColorPaletteWidget.cs:261
+#: ../Pinta.Gui.Widgets/Widgets/StatusBarColorPaletteWidget.cs:260
 msgid "Shortcut key"
 msgstr "Klávesová skratka"
 
@@ -1829,7 +1873,7 @@ msgstr "Jednotlivý pixel"
 msgid "Size"
 msgstr "Veľkosť"
 
-#: ../Pinta.Tools/Tools/EraserTool.cs:264
+#: ../Pinta.Tools/Tools/EraserTool.cs:263
 msgid "Smooth"
 msgstr "Jemný"
 
@@ -2011,7 +2055,7 @@ msgstr "Priehľadný"
 msgid "Twist"
 msgstr "Skrútiť"
 
-#: ../Pinta.Tools/Tools/EraserTool.cs:260
+#: ../Pinta.Tools/Tools/EraserTool.cs:259
 #: ../Pinta.Tools/Tools/PaintBrushTool.cs:165
 msgid "Type"
 msgstr "Typ"
@@ -2052,7 +2096,7 @@ msgstr "Neuložený obrázok {0}"
 msgid "Unsupported file format"
 msgstr "Nepodporovaný formát súboru"
 
-#: ../Pinta.Core/Classes/Palette.cs:180
+#: ../Pinta.Core/Classes/Palette.cs:158
 msgid "Unsupported palette format"
 msgstr ""
 
@@ -2128,7 +2172,7 @@ msgid "You do not have access to '{0}'."
 msgstr "Nemáte právo na prístup k súboru '{0}'."
 
 #. Translators: {0} is the name of a file that the user does not have write permission for.
-#: ../Pinta/Actions/File/SaveDocumentImplementationAction.cs:191
+#: ../Pinta/Actions/File/SaveDocumentImplementationAction.cs:190
 #, csharp-format
 msgid ""
 "You do not have access to modify '{0}'. The file or folder may be read-only."
@@ -2136,8 +2180,8 @@ msgstr ""
 "Nemáte prístupové práva na zmenu '{0}'. Súbor alebo priečinok môže byť iba "
 "na čítanie."
 
-#: ../Pinta.Effects/Effects/JuliaFractalEffect.cs:147
-#: ../Pinta.Effects/Effects/MandelbrotFractalEffect.cs:165
+#: ../Pinta.Effects/Effects/JuliaFractalEffect.cs:162
+#: ../Pinta.Effects/Effects/MandelbrotFractalEffect.cs:182
 #: ../Pinta.Tools/Tools/ZoomTool.cs:55
 #: ../Pinta/Actions/Layers/RotateZoomLayerAction.cs:121
 msgid "Zoom"
