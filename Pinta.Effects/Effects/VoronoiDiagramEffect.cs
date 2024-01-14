@@ -38,12 +38,26 @@ public sealed class VoronoiDiagramEffect : BaseEffect
 		int w = dst.Width;
 		int h = dst.Height;
 
+		ColorSorting colorSorting = Data.ColorSorting;
+
 		ImmutableArray<PointI> points =
-			CreatePoints (roi, Data.PointCount, Data.PointLocationsSeed)
-			.OrderBy (p => p.X)
+			SortPoints (
+				CreatePoints (
+					roi,
+					Data.PointCount,
+					Data.PointLocationsSeed),
+				colorSorting
+			)
 			.ToImmutableArray ();
 
-		ImmutableArray<ColorBgra> colors = CreateColors (points.Length, Data.ColorsSeed).ToImmutableArray ();
+		ImmutableArray<ColorBgra> colors =
+			SortColors (
+				CreateColors (
+					points.Length,
+					Data.ColorsSeed),
+				colorSorting
+			)
+			.ToImmutableArray ();
 
 		Func<PointI, PointI, double> distanceCalculator = GetDistanceCalculator (Data.DistanceCalculationMethod);
 
@@ -64,6 +78,62 @@ public sealed class VoronoiDiagramEffect : BaseEffect
 				}
 				dst_row[x] = colors[closestIndex];
 			}
+		}
+	}
+
+	private static IEnumerable<ColorBgra> SortColors (IEnumerable<ColorBgra> baseColors, ColorSorting colorSorting)
+	{
+		switch (colorSorting) {
+			case ColorSorting.Random:
+				return baseColors;
+			case ColorSorting.HorizontalBGR:
+			case ColorSorting.VerticalBGR:
+				return baseColors.OrderBy (p => p.B).ThenBy (p => p.G).ThenBy (p => p.R);
+			case ColorSorting.HorizontalBRG:
+			case ColorSorting.VerticalBRG:
+				return baseColors.OrderBy (p => p.B).ThenBy (p => p.R).ThenBy (p => p.G);
+			case ColorSorting.HorizontalGBR:
+			case ColorSorting.VerticalGBR:
+				return baseColors.OrderBy (p => p.G).ThenBy (p => p.B).ThenBy (p => p.R);
+			case ColorSorting.HorizontalGRB:
+			case ColorSorting.VerticalGRB:
+				return baseColors.OrderBy (p => p.G).ThenBy (p => p.R).ThenBy (p => p.B);
+			case ColorSorting.HorizontalRBG:
+			case ColorSorting.VerticalRBG:
+				return baseColors.OrderBy (p => p.R).ThenBy (p => p.B).ThenBy (p => p.G);
+			case ColorSorting.HorizontalRGB:
+			case ColorSorting.VerticalRGB:
+				return baseColors.OrderBy (p => p.R).ThenBy (p => p.G).ThenBy (p => p.B);
+			default:
+				throw new InvalidEnumArgumentException (nameof (baseColors), (int) colorSorting, typeof (ColorSorting));
+		}
+	}
+
+	private static IEnumerable<PointI> SortPoints (IEnumerable<PointI> basePoints, ColorSorting colorSorting)
+	{
+		switch (colorSorting) {
+
+			case ColorSorting.Random:
+				return basePoints;
+
+			case ColorSorting.HorizontalBGR:
+			case ColorSorting.HorizontalBRG:
+			case ColorSorting.HorizontalGBR:
+			case ColorSorting.HorizontalGRB:
+			case ColorSorting.HorizontalRBG:
+			case ColorSorting.HorizontalRGB:
+				return basePoints.OrderBy (p => p.X);
+
+			case ColorSorting.VerticalBGR:
+			case ColorSorting.VerticalBRG:
+			case ColorSorting.VerticalGBR:
+			case ColorSorting.VerticalGRB:
+			case ColorSorting.VerticalRBG:
+			case ColorSorting.VerticalRGB:
+				return basePoints.OrderBy (p => p.Y);
+
+			default:
+				throw new InvalidEnumArgumentException (nameof (colorSorting), (int) colorSorting, typeof (ColorSorting));
 		}
 	}
 
@@ -115,15 +185,16 @@ public sealed class VoronoiDiagramEffect : BaseEffect
 		return result.ToImmutable ();
 	}
 
-	private static ImmutableHashSet<ColorBgra> CreateColors (int colorCount, RandomSeed colorsSeed)
+	private static IEnumerable<ColorBgra> CreateColors (int colorCount, RandomSeed colorsSeed)
 	{
 		Random randomColorizer = new (colorsSeed.Value);
-		var result = ImmutableHashSet.CreateBuilder<ColorBgra> (); // Ensures points' uniqueness
-
-		while (result.Count < colorCount)
-			result.Add (randomColorizer.RandomColorBgra ());
-
-		return result.ToImmutable ();
+		HashSet<ColorBgra> uniquenessTracker = new ();
+		while (uniquenessTracker.Count < colorCount) {
+			ColorBgra candidateColor = randomColorizer.RandomColorBgra ();
+			if (uniquenessTracker.Contains (candidateColor)) continue;
+			uniquenessTracker.Add (candidateColor);
+			yield return candidateColor;
+		}
 	}
 
 	public sealed class VoronoiDiagramData : EffectData
@@ -133,6 +204,9 @@ public sealed class VoronoiDiagramEffect : BaseEffect
 
 		[Caption ("Point Count"), MinimumValue (1), MaximumValue (1024)]
 		public int PointCount { get; set; } = 100;
+
+		[Caption ("Color Sorting")]
+		public ColorSorting ColorSorting { get; set; } = ColorSorting.Random;
 
 		[Caption ("Colors Seed")]
 		public RandomSeed ColorsSeed { get; set; } = new (0);
@@ -146,5 +220,24 @@ public sealed class VoronoiDiagramEffect : BaseEffect
 		Euclidean,
 		Manhattan,
 		Chebyshev,
+	}
+
+	public enum ColorSorting
+	{
+		Random,
+
+		HorizontalBGR,
+		HorizontalBRG,
+		HorizontalGBR,
+		HorizontalGRB,
+		HorizontalRBG,
+		HorizontalRGB,
+
+		VerticalBGR,
+		VerticalBRG,
+		VerticalGBR,
+		VerticalGRB,
+		VerticalRBG,
+		VerticalRGB,
 	}
 }
