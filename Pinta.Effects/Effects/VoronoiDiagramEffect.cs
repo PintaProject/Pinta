@@ -50,14 +50,10 @@ public sealed class VoronoiDiagramEffect : BaseEffect
 			)
 			.ToImmutableArray ();
 
-		ImmutableArray<ColorBgra> colors =
-			SortColors (
-				CreateColors (
-					points.Length,
-					Data.ColorsSeed),
-				colorSorting
-			)
-			.ToImmutableArray ();
+		IEnumerable<ColorBgra> baseColors = CreateColors (points.Length, Data.ColorsSeed);
+		IEnumerable<ColorBgra> positionSortedColors = SortColors (baseColors, colorSorting);
+		IEnumerable<ColorBgra> reversedSortingColors = Data.ReverseColorSorting ? positionSortedColors.Reverse () : positionSortedColors;
+		ImmutableArray<ColorBgra> colors = reversedSortingColors.ToImmutableArray ();
 
 		Func<PointI, PointI, double> distanceCalculator = GetDistanceCalculator (Data.DistanceCalculationMethod);
 
@@ -208,6 +204,10 @@ public sealed class VoronoiDiagramEffect : BaseEffect
 		[Caption ("Color Sorting")]
 		public ColorSorting ColorSorting { get; set; } = ColorSorting.Random;
 
+		// Translators: In this context, "reverse" is a verb, and the user can choose whether or not they want to reverse the color sorting
+		[Caption ("Reverse Color Sorting")]
+		public bool ReverseColorSorting { get; set; } = false;
+
 		[Caption ("Colors Seed")]
 		public RandomSeed ColorsSeed { get; set; } = new (0);
 
@@ -224,20 +224,59 @@ public sealed class VoronoiDiagramEffect : BaseEffect
 
 	public enum ColorSorting
 	{
-		[Caption ("Random")] Random,
+		// Translators: 
+		[Caption ("Random Color Sorting")] Random,
 
-		[Caption ("Horizontal (B, G, R)")] HorizontalBGR,
-		[Caption ("Horizontal (B, R, G)")] HorizontalBRG,
-		[Caption ("Horizontal (G, B, R)")] HorizontalGBR,
-		[Caption ("Horizontal (G, R, B)")] HorizontalGRB,
-		[Caption ("Horizontal (R, B, G)")] HorizontalRBG,
-		[Caption ("Horizontal (R, G, B)")] HorizontalRGB,
 
-		[Caption ("Vertical (B, G, R)")] VerticalBGR,
-		[Caption ("Vertical (B, R, G)")] VerticalBRG,
-		[Caption ("Vertical (G, B, R)")] VerticalGBR,
-		[Caption ("Vertical (G, R, B)")] VerticalGRB,
-		[Caption ("Vertical (R, B, G)")] VerticalRBG,
-		[Caption ("Vertical (R, G, B)")] VerticalRGB,
+
+		// Translators: Horizontal color sorting with B, then G as the leading terms
+		[Caption ("Horizontal (B, G, R)")]
+		HorizontalBGR,
+
+		// Translators: Horizontal color sorting with B, then R as the leading terms
+		[Caption ("Horizontal (B, R, G)")]
+		HorizontalBRG,
+
+		// Translators: Horizontal color sorting with G, then B as the leading terms
+		[Caption ("Horizontal (G, B, R)")]
+		HorizontalGBR,
+
+		// Translators: Horizontal color sorting with G, then R as the leading terms
+		[Caption ("Horizontal (G, R, B)")]
+		HorizontalGRB,
+
+		// Translators: Horizontal color sorting with R, then B as the leading terms
+		[Caption ("Horizontal (R, B, G)")]
+		HorizontalRBG,
+
+		// Translators: Horizontal color sorting with R, then G as the leading terms
+		[Caption ("Horizontal (R, G, B)")]
+		HorizontalRGB,
+
+
+
+		// Translators: Vertical color sorting with B, then G as the leading terms
+		[Caption ("Vertical (B, G, R)")]
+		VerticalBGR,
+
+		// Translators: Vertical color sorting with B, then R as the leading terms
+		[Caption ("Vertical (B, R, G)")]
+		VerticalBRG,
+
+		// Translators: Vertical color sorting with G, then B as the leading terms
+		[Caption ("Vertical (G, B, R)")]
+		VerticalGBR,
+
+		// Translators: Vertical color sorting with G, then R as the leading terms
+		[Caption ("Vertical (G, R, B)")]
+		VerticalGRB,
+
+		// Translators: Vertical color sorting with R, then B as the leading terms
+		[Caption ("Vertical (R, B, G)")]
+		VerticalRBG,
+
+		// Translators: Vertical color sorting with R, then G as the leading terms
+		[Caption ("Vertical (R, G, B)")]
+		VerticalRGB,
 	}
 }
