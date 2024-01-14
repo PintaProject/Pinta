@@ -33,11 +33,15 @@ public sealed class VoronoiDiagramEffect : BaseEffect
 		EffectHelper.LaunchSimpleEffectDialog (this);
 	}
 
-	protected override void Render (ImageSurface src, ImageSurface dst, RectangleI roi)
-	{
-		int w = dst.Width;
-		int h = dst.Height;
+	private sealed record VoronoiSettings (
+		int w,
+		int h,
+		ImmutableArray<PointI> points,
+		ImmutableArray<ColorBgra> colors,
+		Func<PointI, PointI, double> distanceCalculator);
 
+	private VoronoiSettings CreateSettings (ImageSurface dst, RectangleI roi)
+	{
 		ColorSorting colorSorting = Data.ColorSorting;
 
 		IEnumerable<PointI> basePoints = CreatePoints (roi, Data.PointCount, Data.PointLocationsSeed);
@@ -46,26 +50,36 @@ public sealed class VoronoiDiagramEffect : BaseEffect
 		IEnumerable<ColorBgra> baseColors = CreateColors (points.Length, Data.ColorsSeed);
 		IEnumerable<ColorBgra> positionSortedColors = SortColors (baseColors, colorSorting);
 		IEnumerable<ColorBgra> reversedSortingColors = Data.ReverseColorSorting ? positionSortedColors.Reverse () : positionSortedColors;
-		ImmutableArray<ColorBgra> colors = reversedSortingColors.ToImmutableArray ();
 
-		Func<PointI, PointI, double> distanceCalculator = GetDistanceCalculator (Data.DistanceCalculationMethod);
+		return new (
+			w: dst.Width,
+			h: dst.Height,
+			points: points,
+			colors: reversedSortingColors.ToImmutableArray (),
+			distanceCalculator: GetDistanceCalculator (Data.DistanceCalculationMethod)
+		);
+	}
+
+	protected override void Render (ImageSurface src, ImageSurface dst, RectangleI roi)
+	{
+		VoronoiSettings settings = CreateSettings (dst, roi);
 
 		Span<ColorBgra> dst_data = dst.GetPixelData ();
 
 		for (int y = roi.Top; y <= roi.Bottom; y++) {
-			var dst_row = dst_data.Slice (y * w, w);
+			var dst_row = dst_data.Slice (y * settings.w, settings.w);
 			for (int x = roi.Left; x <= roi.Right; x++) {
 				PointI pixelLocation = new (x, y);
 				double shortestDistance = double.MaxValue;
 				int closestIndex = 0;
-				for (var i = 0; i < points.Length; i++) {
-					var point = points[i];
-					double distance = distanceCalculator (point, pixelLocation);
+				for (var i = 0; i < settings.points.Length; i++) {
+					var point = settings.points[i];
+					double distance = settings.distanceCalculator (point, pixelLocation);
 					if (distance > shortestDistance) continue;
 					shortestDistance = distance;
 					closestIndex = i;
 				}
-				dst_row[x] = colors[closestIndex];
+				dst_row[x] = settings.colors[closestIndex];
 			}
 		}
 	}
