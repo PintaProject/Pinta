@@ -66,33 +66,11 @@ public static partial class GdkPixbufExtensions
 		var result = new PixbufFormat[n];
 		for (uint i = 0; i < n; ++i) {
 			var format = new GdkPixbuf.Internal.PixbufFormatUnownedHandle (GLib.Internal.SList.NthData (slist_handle, i));
-			result[i] = new PixbufFormat (format);
+			result[i] = new PixbufFormat (GdkPixbuf.Internal.PixbufFormat.Copy (format));
 		}
 
 		return result;
 	}
-
-	// TODO-GTK4 (bindings) - record methods are not generated (https://github.com/gircore/gir.core/issues/743)
-	public static string GetName (this PixbufFormat format)
-	{
-		return GdkPixbuf.Internal.PixbufFormat.GetName (format.Handle).ConvertToString ();
-	}
-
-	// TODO-GTK4 (bindings) - record methods are not generated (https://github.com/gircore/gir.core/issues/743)
-	public static bool IsWritable (this PixbufFormat format)
-	{
-		return GdkPixbuf.Internal.PixbufFormat.IsWritable (format.Handle);
-	}
-
-	// TODO-GTK4 (bindings) - record methods are not generated (https://github.com/gircore/gir.core/issues/743)
-	public static string[] GetMimeTypes (this PixbufFormat format)
-	{
-		var result = GetMimeTypes (format.Handle);
-		return result.ConvertToStringArray () ?? Array.Empty<string> ();
-	}
-
-	[DllImport (PixbufLibraryName, EntryPoint = "gdk_pixbuf_format_get_mime_types")]
-	private static extern GLib.Internal.Utf8StringArrayNullTerminatedOwnedHandle GetMimeTypes (GdkPixbuf.Internal.PixbufFormatHandle format);
 
 	[DllImport (PixbufLibraryName, EntryPoint = "gdk_pixbuf_get_formats")]
 	private static extern GLib.Internal.SListUnownedHandle GetFormatsNative ();
