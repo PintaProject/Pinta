@@ -224,20 +224,20 @@ public sealed class VoronoiDiagramEffect : BaseEffect
 
 	public enum ColorSorting
 	{
-		Random,
+		[Caption ("Random")] Random,
 
-		HorizontalBGR,
-		HorizontalBRG,
-		HorizontalGBR,
-		HorizontalGRB,
-		HorizontalRBG,
-		HorizontalRGB,
+		[Caption ("Horizontal (B, G, R)")] HorizontalBGR,
+		[Caption ("Horizontal (B, R, G)")] HorizontalBRG,
+		[Caption ("Horizontal (G, B, R)")] HorizontalGBR,
+		[Caption ("Horizontal (G, R, B)")] HorizontalGRB,
+		[Caption ("Horizontal (R, B, G)")] HorizontalRBG,
+		[Caption ("Horizontal (R, G, B)")] HorizontalRGB,
 
-		VerticalBGR,
-		VerticalBRG,
-		VerticalGBR,
-		VerticalGRB,
-		VerticalRBG,
-		VerticalRGB,
+		[Caption ("Vertical (B, G, R)")] VerticalBGR,
+		[Caption ("Vertical (B, R, G)")] VerticalBRG,
+		[Caption ("Vertical (G, B, R)")] VerticalGBR,
+		[Caption ("Vertical (G, R, B)")] VerticalGRB,
+		[Caption ("Vertical (R, B, G)")] VerticalRBG,
+		[Caption ("Vertical (R, G, B)")] VerticalRGB,
 	}
 }
