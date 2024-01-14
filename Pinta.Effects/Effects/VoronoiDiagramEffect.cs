@@ -224,7 +224,6 @@ public sealed class VoronoiDiagramEffect : BaseEffect
 
 	public enum ColorSorting
 	{
-		// Translators: 
 		[Caption ("Random Color Sorting")] Random,
 
 
