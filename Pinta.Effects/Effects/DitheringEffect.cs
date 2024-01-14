@@ -34,7 +34,7 @@ public sealed class DitheringEffect : BaseEffect
 
 	private DitheringSettings CreateSettings (ImageSurface src)
 		=> new (
-			diffusionMatrix: ErrorDiffusionMatrix.GetPredefined (Data.DitheringMethod),
+			diffusionMatrix: ErrorDiffusionMatrix.GetPredefined (Data.ErrorDiffusionMethod),
 			palette: PaletteHelper.GetPredefined (Data.PaletteChoice),
 			sourceWidth: src.Width,
 			sourceHeight: src.Height
@@ -134,8 +134,8 @@ public sealed class DitheringEffect : BaseEffect
 
 	public sealed class DitheringData : EffectData
 	{
-		[Caption ("Dithering Method")]
-		public PredefinedDiffusionMatrices DitheringMethod { get; set; } = PredefinedDiffusionMatrices.FloydSteinberg;
+		[Caption ("Error Diffusion Method")]
+		public PredefinedDiffusionMatrices ErrorDiffusionMethod { get; set; } = PredefinedDiffusionMatrices.FloydSteinberg;
 
 		[Caption ("Palette")]
 		public PredefinedPalettes PaletteChoice { get; set; } = PredefinedPalettes.OldWindows16;
