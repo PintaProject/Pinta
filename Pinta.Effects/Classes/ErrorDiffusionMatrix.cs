@@ -8,28 +8,41 @@ namespace Pinta.Effects;
 
 public enum PredefinedDiffusionMatrices
 {
+	// Translators: Image dithering matrix named after Frankie Sierra
+	[Caption ("Sierra")]
 	Sierra,
 
+	// Translators: Image dithering matrix named after Frankie Sierra
 	[Caption ("Two-Row Sierra")]
 	TwoRowSierra,
 
+	// Translators: Image dithering matrix named after Frankie Sierra
 	[Caption ("Sierra Lite")]
 	SierraLite,
 
+	// Translators: Image dithering matrix named after Daniel Burkes
+	[Caption ("Burkes")]
 	Burkes,
 
+	// Translators: Image dithering matrix named after Bill Atkinson
+	[Caption ("Atkinson")]
 	Atkinson,
 
+	// Translators: Image dithering matrix named after Peter Stucki
+	[Caption ("Stucki")]
 	Stucki,
 
+	// Translators: Image dithering matrix named after J. F. Jarvis, C. N. Judice, and W. H. Ninke
 	[Caption ("Jarvis-Judice-Ninke")]
 	JarvisJudiceNinke,
 
+	// Translators: Image dithering matrix named after Robert W. Floyd and Louis Steinberg
 	[Caption ("Floyd-Steinberg")]
 	FloydSteinberg,
 
+	// Translators: Image dithering matrix named after Robert W. Floyd and Louis Steinberg. Some software may use it and call it Floyd-Steinberg, but it's not the actual Floyd-Steinberg matrix
 	[Caption ("Floyd-Steinberg Lite")]
-	FakeFloydSteinberg,
+	FalseFloydSteinberg,
 }
 
 /// <summary>
@@ -51,7 +64,7 @@ internal sealed class ErrorDiffusionMatrix
 			PredefinedDiffusionMatrices.Stucki => Predefined.Stucki,
 			PredefinedDiffusionMatrices.JarvisJudiceNinke => Predefined.JarvisJudiceNinke,
 			PredefinedDiffusionMatrices.FloydSteinberg => Predefined.FloydSteinberg,
-			PredefinedDiffusionMatrices.FakeFloydSteinberg => Predefined.FakeFloydSteinberg,
+			PredefinedDiffusionMatrices.FalseFloydSteinberg => Predefined.FakeFloydSteinberg,
 			_ => throw new InvalidEnumArgumentException (nameof (choice), (int) choice, typeof (PredefinedDiffusionMatrices)),
 		};
 	}
