@@ -59,7 +59,7 @@ internal sealed class EffectsTest
 	{
 		var effect = new DitheringEffect ();
 		effect.Data.PaletteChoice = PredefinedPalettes.OldWindows16;
-		effect.Data.DiffusionMatrix = PredefinedDiffusionMatrices.FloydSteinberg;
+		effect.Data.DitheringMethod = PredefinedDiffusionMatrices.FloydSteinberg;
 		Utilities.TestEffect (effect, "dithering1.png");
 	}
 
@@ -68,7 +68,7 @@ internal sealed class EffectsTest
 	{
 		var effect = new DitheringEffect ();
 		effect.Data.PaletteChoice = PredefinedPalettes.BlackWhite;
-		effect.Data.DiffusionMatrix = PredefinedDiffusionMatrices.FloydSteinberg;
+		effect.Data.DitheringMethod = PredefinedDiffusionMatrices.FloydSteinberg;
 		Utilities.TestEffect (effect, "dithering2.png");
 	}
 
@@ -77,7 +77,7 @@ internal sealed class EffectsTest
 	{
 		var effect = new DitheringEffect ();
 		effect.Data.PaletteChoice = PredefinedPalettes.OldWindows16;
-		effect.Data.DiffusionMatrix = PredefinedDiffusionMatrices.Stucki;
+		effect.Data.DitheringMethod = PredefinedDiffusionMatrices.Stucki;
 		Utilities.TestEffect (effect, "dithering3.png");
 	}
 

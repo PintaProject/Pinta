@@ -2,22 +2,42 @@ using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Linq;
+using Pinta.Gui.Widgets;
 
 namespace Pinta.Effects;
 
 public enum PredefinedDiffusionMatrices
 {
 	Sierra,
+
+	[Caption ("Two-Row Sierra")]
 	TwoRowSierra,
+
+	[Caption ("Sierra Lite")]
 	SierraLite,
+
 	Burkes,
+
 	Atkinson,
+
 	Stucki,
+
+	[Caption ("Jarvis-Judice-Ninke")]
 	JarvisJudiceNinke,
+
+	[Caption ("Floyd-Steinberg")]
 	FloydSteinberg,
+
+	[Caption ("Floyd-Steinberg Lite")]
 	FakeFloydSteinberg,
 }
 
+/// <summary>
+/// Represents the matrix that is used by the dithering algorithm
+/// in order to propagate the error (defined as the difference
+/// between a pixel's color and the color in a certain palette that is
+/// closest to it) forward.
+/// </summary>
 internal sealed class ErrorDiffusionMatrix
 {
 	public static ErrorDiffusionMatrix GetPredefined (PredefinedDiffusionMatrices choice)
