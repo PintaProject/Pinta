@@ -40,15 +40,8 @@ public sealed class VoronoiDiagramEffect : BaseEffect
 
 		ColorSorting colorSorting = Data.ColorSorting;
 
-		ImmutableArray<PointI> points =
-			SortPoints (
-				CreatePoints (
-					roi,
-					Data.PointCount,
-					Data.PointLocationsSeed),
-				colorSorting
-			)
-			.ToImmutableArray ();
+		IEnumerable<PointI> basePoints = CreatePoints (roi, Data.PointCount, Data.PointLocationsSeed);
+		ImmutableArray<PointI> points = SortPoints (basePoints, colorSorting).ToImmutableArray ();
 
 		IEnumerable<ColorBgra> baseColors = CreateColors (points.Length, Data.ColorsSeed);
 		IEnumerable<ColorBgra> positionSortedColors = SortColors (baseColors, colorSorting);
