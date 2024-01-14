@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: pinta\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-01-07 01:14+0000\n"
+"POT-Creation-Date: 2024-01-14 01:15+0000\n"
 "PO-Revision-Date: 2023-12-22 20:42+0000\n"
 "Last-Translator: Cameron White <cameronwhite91@gmail.com>\n"
 "Language-Team: English (Canada) <https://hosted.weblate.org/projects/pinta/"
@@ -75,7 +75,7 @@ msgstr "Add Noise"
 msgid "Add-in Manager..."
 msgstr "Add-in Manager..."
 
-#: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:810
+#: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:799
 msgid "Added"
 msgstr "Added"
 
@@ -87,7 +87,7 @@ msgstr "Adjustments"
 msgid "After select"
 msgstr "After select"
 
-#: ../Pinta.Core/Actions/EditActions.cs:366
+#: ../Pinta.Core/Actions/EditActions.cs:368
 #: ../Pinta.Gui.Addins/AddinManagerDialog.cs:209
 #: ../Pinta/Actions/File/OpenDocumentAction.cs:83
 msgid "All files"
@@ -107,8 +107,8 @@ msgstr "Anchor:"
 
 #: ../Pinta.Effects/Effects/EdgeDetectEffect.cs:80
 #: ../Pinta.Effects/Effects/EmbossEffect.cs:149
-#: ../Pinta.Effects/Effects/JuliaFractalEffect.cs:150
-#: ../Pinta.Effects/Effects/MandelbrotFractalEffect.cs:168
+#: ../Pinta.Effects/Effects/JuliaFractalEffect.cs:171
+#: ../Pinta.Effects/Effects/MandelbrotFractalEffect.cs:185
 #: ../Pinta.Effects/Effects/MotionBlurEffect.cs:101
 #: ../Pinta.Effects/Effects/RadialBlurEffect.cs:171
 #: ../Pinta.Effects/Effects/ReliefEffect.cs:82
@@ -172,6 +172,11 @@ msgstr "Background:"
 msgid "Based on the work of Paint.NET:"
 msgstr "Based on the work of Paint.NET:"
 
+#. Translators: Gradient with the colors of the flag of Italy: red, white, and green
+#: ../Pinta.Effects/Effects/GradientHelper.cs:10
+msgid "Beautiful Italy"
+msgstr ""
+
 #: ../Pinta.Core/Actions/ViewActions.cs:69
 msgid "Best Fit"
 msgstr "Best Fit"
@@ -180,7 +185,9 @@ msgstr "Best Fit"
 msgid "Bilinear"
 msgstr "Bilinear"
 
+#. Translators: Simple gradient that goes from black to white
 #: ../Pinta.Effects/Adjustments/BlackAndWhiteEffect.cs:24
+#: ../Pinta.Effects/Effects/GradientHelper.cs:14
 msgid "Black and White"
 msgstr "Black and White"
 
@@ -210,6 +217,11 @@ msgstr "Blurs"
 msgid "Bold"
 msgstr "Bold"
 
+#. Translators: Gradient that starts out white, like the core of a raging fire, and then goes through yellow, red, and black (like visible black smoke), and finally transparent, blending with the background
+#: ../Pinta.Effects/Effects/GradientHelper.cs:18
+msgid "Bonfire"
+msgstr ""
+
 #: ../Pinta.Effects/Adjustments/BrightnessContrastEffect.cs:142
 #: ../Pinta.Effects/Effects/GlowEffect.cs:77
 msgid "Brightness"
@@ -223,7 +235,7 @@ msgstr "Brightness / Contrast"
 msgid "Brush Size"
 msgstr "Brush Size"
 
-#: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:264
+#: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:254
 #: ../Pinta.Tools/Tools/BaseBrushTool.cs:100
 msgid "Brush width"
 msgstr "Brush width"
@@ -242,8 +254,8 @@ msgstr "By absolute size:"
 msgid "By percentage:"
 msgstr "By percentage:"
 
-#: ../Pinta.Core/Actions/EditActions.cs:351
-#: ../Pinta.Core/Actions/EditActions.cs:392
+#: ../Pinta.Core/Actions/EditActions.cs:353
+#: ../Pinta.Core/Actions/EditActions.cs:394
 #: ../Pinta.Core/Actions/LayerActions.cs:167
 #: ../Pinta.Gui.Addins/AddinManagerDialog.cs:198
 #: ../Pinta.Gui.Addins/InstallDialog.cs:120
@@ -276,11 +288,16 @@ msgstr "Centred"
 msgid "Centimeters"
 msgstr "Centimeters"
 
-#: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:348
+#: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:341
 msgid "Changed Shape Type"
 msgstr "Changed Shape Type"
 
-#: ../Pinta.Effects/Dialogs/Effects.LevelsDialog.cs:555
+#. Translators: Gradient that starts out off-white, like cherry blossoms against sunlight, then goes through pink, then light blue (like the sky) and finally transparent, blending with the background
+#: ../Pinta.Effects/Effects/GradientHelper.cs:22
+msgid "Cherry Blossom"
+msgstr ""
+
+#: ../Pinta.Effects/Dialogs/Effects.LevelsDialog.cs:531
 msgid "Choose Color"
 msgstr "Choose Colour"
 
@@ -336,11 +353,11 @@ msgstr "Click and drag to draw the outline for a selection area."
 msgid "Click and drag to navigate image."
 msgstr "Click and drag to navigate image."
 
-#: ../Pinta.Gui.Widgets/Widgets/StatusBarColorPaletteWidget.cs:265
+#: ../Pinta.Gui.Widgets/Widgets/StatusBarColorPaletteWidget.cs:264
 msgid "Click to reset primary and secondary color."
 msgstr "Click to reset primary and secondary colour."
 
-#: ../Pinta.Gui.Widgets/Widgets/StatusBarColorPaletteWidget.cs:254
+#: ../Pinta.Gui.Widgets/Widgets/StatusBarColorPaletteWidget.cs:253
 msgid "Click to select primary color."
 msgstr "Click to select primary colour."
 
@@ -348,11 +365,11 @@ msgstr "Click to select primary colour."
 msgid "Click to select region of similar color."
 msgstr "Click to select region of similar colour."
 
-#: ../Pinta.Gui.Widgets/Widgets/StatusBarColorPaletteWidget.cs:257
+#: ../Pinta.Gui.Widgets/Widgets/StatusBarColorPaletteWidget.cs:256
 msgid "Click to select secondary color."
 msgstr "Click to select secondary colour."
 
-#: ../Pinta.Gui.Widgets/Widgets/StatusBarColorPaletteWidget.cs:260
+#: ../Pinta.Gui.Widgets/Widgets/StatusBarColorPaletteWidget.cs:259
 msgid "Click to switch between primary and secondary color."
 msgstr "Click to switch between primary and secondary colour."
 
@@ -380,7 +397,7 @@ msgstr "Close All"
 msgid "Closed Curve Shape"
 msgstr "Closed Curve Shape"
 
-#: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:325
+#: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:318
 msgid "Closed Line/Curve Series"
 msgstr "Closed Line/Curve Series"
 
@@ -421,6 +438,8 @@ msgid "Color Saturation"
 msgstr "Colour Saturation"
 
 #: ../Pinta.Core/Actions/ViewActions.cs:181
+#: ../Pinta.Effects/Effects/JuliaFractalEffect.cs:165
+#: ../Pinta.Effects/Effects/MandelbrotFractalEffect.cs:188
 msgid "Color Scheme"
 msgstr "Colour Scheme"
 
@@ -457,13 +476,18 @@ msgstr "Copy Merged"
 msgid "Copyright"
 msgstr "Copyright"
 
+#. Translators: Gradient with the colors of blue and pink cotton candy
+#: ../Pinta.Effects/Effects/GradientHelper.cs:26
+msgid "Cotton Candy"
+msgstr ""
+
 #. Translators: {0} is the name of a layer, and {1} is the path to a .ora file.
-#: ../Pinta.Core/ImageFormats/OraFormat.cs:127
+#: ../Pinta.Core/ImageFormats/OraFormat.cs:122
 #, csharp-format
 msgid "Could not import layer \"{0}\" from {1}"
 msgstr "Could not import layer \"{0}\" from {1}"
 
-#: ../Pinta.Core/Classes/Palette.cs:192
+#: ../Pinta.Core/Classes/Palette.cs:196
 #: ../Pinta.Core/Managers/WorkspaceManager.cs:378
 #: ../Pinta.Core/Managers/WorkspaceManager.cs:385
 #, csharp-format
@@ -492,7 +516,7 @@ msgid "Custom"
 msgstr "Custom"
 
 #: ../Pinta.Core/Actions/EditActions.cs:60
-#: ../Pinta.Core/Actions/EditActions.cs:243
+#: ../Pinta.Core/Actions/EditActions.cs:244
 msgid "Cut"
 msgstr "Cut"
 
@@ -519,11 +543,11 @@ msgstr "Default"
 msgid "Delete Layer"
 msgstr "Delete Layer"
 
-#: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:653
+#: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:644
 msgid "Deleted"
 msgstr "Deleted"
 
-#: ../Pinta.Core/Actions/EditActions.cs:254
+#: ../Pinta.Core/Actions/EditActions.cs:256
 msgid "Deselect"
 msgstr "Deselect"
 
@@ -587,7 +611,12 @@ msgstr "Effe_cts"
 msgid "Effects"
 msgstr "Effects"
 
-#: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:326
+#. Translators: Gradient that starts out white, like the the inner part of a spark, and goes through progressively dark shades of blue until it reaches black, and finally transparent, blending with the background
+#: ../Pinta.Effects/Effects/GradientHelper.cs:30
+msgid "Electric"
+msgstr ""
+
+#: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:319
 #: ../Pinta.Tools/Editable/EditEngines/EllipseEditEngine.cs:34
 #: ../Pinta.Tools/Tools/EllipseTool.cs:38
 msgid "Ellipse"
@@ -614,7 +643,7 @@ msgstr "Erase Selection"
 msgid "Eraser"
 msgstr "Eraser"
 
-#: ../Pinta.Core/ImageFormats/OraFormat.cs:128
+#: ../Pinta.Core/ImageFormats/OraFormat.cs:123
 msgid "Error"
 msgstr "Error"
 
@@ -631,8 +660,8 @@ msgstr "Expand"
 msgid "Extension packages"
 msgstr "Extension packages"
 
-#: ../Pinta.Effects/Effects/JuliaFractalEffect.cs:141
-#: ../Pinta.Effects/Effects/MandelbrotFractalEffect.cs:158
+#: ../Pinta.Effects/Effects/JuliaFractalEffect.cs:156
+#: ../Pinta.Effects/Effects/MandelbrotFractalEffect.cs:175
 msgid "Factor"
 msgstr "Factor"
 
@@ -652,7 +681,7 @@ msgstr "Failed to load extension package"
 msgid "Failed to open image"
 msgstr "Failed to open image"
 
-#: ../Pinta/Actions/File/SaveDocumentImplementationAction.cs:189
+#: ../Pinta/Actions/File/SaveDocumentImplementationAction.cs:188
 msgid "Failed to save image"
 msgstr "Failed to save image"
 
@@ -679,23 +708,23 @@ msgstr "Fill Background"
 msgid "Fill Selection"
 msgstr "Fill Selection"
 
-#: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:301
+#: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:294
 #: ../Pinta.Tools/Tools/FreeformShapeTool.cs:223
 msgid "Fill Shape"
 msgstr "Fill Shape"
 
-#: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:291
+#: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:284
 #: ../Pinta.Tools/Tools/FreeformShapeTool.cs:216
 msgid "Fill Style"
 msgstr "Fill Style"
 
-#: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:302
+#: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:295
 #: ../Pinta.Tools/Tools/FreeformShapeTool.cs:224
 msgid "Fill and Outline Shape"
 msgstr "Fill and Outline Shape"
 
-#: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:1073
-#: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:1331
+#: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:1062
+#: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:1322
 msgid "Finalized"
 msgstr "Finalized"
 
@@ -824,7 +853,7 @@ msgstr "Hue"
 msgid "Hue / Saturation"
 msgstr "Hue / Saturation"
 
-#: ../Pinta/Actions/File/SaveDocumentImplementationAction.cs:184
+#: ../Pinta/Actions/File/SaveDocumentImplementationAction.cs:183
 msgid "ICO files can not be larger than 255 x 255 pixels."
 msgstr "ICO files can not be larger than 255 x 255 pixels."
 
@@ -857,7 +886,7 @@ msgstr "Image files"
 msgid "Image larger than canvas"
 msgstr "Image larger than canvas"
 
-#: ../Pinta/Actions/File/SaveDocumentImplementationAction.cs:183
+#: ../Pinta/Actions/File/SaveDocumentImplementationAction.cs:182
 msgid "Image too large"
 msgstr "Image too large"
 
@@ -923,12 +952,12 @@ msgid "Intersect ({0} + Left Click)"
 msgstr "Intersect ({0} + Left Click)"
 
 #: ../Pinta.Effects/Adjustments/InvertColorsEffect.cs:24
-#: ../Pinta.Effects/Effects/MandelbrotFractalEffect.cs:171
+#: ../Pinta.Effects/Effects/MandelbrotFractalEffect.cs:194
 msgid "Invert Colors"
 msgstr "Invert Colours"
 
 #: ../Pinta.Core/Actions/EditActions.cs:68
-#: ../Pinta.Core/Actions/EditActions.cs:447
+#: ../Pinta.Core/Actions/EditActions.cs:446
 msgid "Invert Selection"
 msgstr "Invert Selection"
 
@@ -1111,11 +1140,11 @@ msgstr ""
 "Left click to set primary colour.\n"
 "Right click to set secondary colour."
 
-#: ../Pinta.Gui.Widgets/Widgets/StatusBarColorPaletteWidget.cs:251
+#: ../Pinta.Gui.Widgets/Widgets/StatusBarColorPaletteWidget.cs:250
 msgid "Left click to set primary color. Right click to set secondary color."
 msgstr "Left click to set primary colour. Right click to set secondary colour."
 
-#: ../Pinta.Gui.Widgets/Widgets/StatusBarColorPaletteWidget.cs:247
+#: ../Pinta.Gui.Widgets/Widgets/StatusBarColorPaletteWidget.cs:246
 msgid ""
 "Left click to set primary color. Right click to set secondary color. Middle "
 "click to choose palette color."
@@ -1165,6 +1194,11 @@ msgstr "Lighting"
 #: ../Pinta.Effects/Adjustments/HueSaturationEffect.cs:68
 msgid "Lightness"
 msgstr "Lightness"
+
+#. Translators: Gradient with a citrusy vibe that starts out white, goes through light yellow, several shades of green, and then transparent, blending with the background
+#: ../Pinta.Effects/Effects/GradientHelper.cs:34
+msgid "Lime Lemon"
+msgstr ""
 
 #: ../Pinta.Tools/Tools/LineCurveTool.cs:38
 msgid "Line/Curve"
@@ -1221,7 +1255,7 @@ msgstr "Merge Layer Down"
 msgid "Mode"
 msgstr "Mode"
 
-#: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:887
+#: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:876
 msgid "Modified"
 msgstr "Modified"
 
@@ -1296,7 +1330,7 @@ msgstr "Noise"
 
 #: ../Pinta.Core/Effects/UserBlendOps.cs:31
 #: ../Pinta.Tools/Brushes/PlainBrush.cs:35
-#: ../Pinta.Tools/Tools/EraserTool.cs:264 ../Pinta.Tools/Tools/TextTool.cs:249
+#: ../Pinta.Tools/Tools/EraserTool.cs:263 ../Pinta.Tools/Tools/TextTool.cs:249
 msgid "Normal"
 msgstr "Normal"
 
@@ -1330,7 +1364,7 @@ msgstr "Oil Painting"
 msgid "Opacity:"
 msgstr "Opacity:"
 
-#: ../Pinta.Core/Actions/EditActions.cs:350
+#: ../Pinta.Core/Actions/EditActions.cs:352
 #: ../Pinta.Core/Actions/FileActions.cs:56
 #: ../Pinta.Core/Actions/LayerActions.cs:166
 #: ../Pinta.Gui.Addins/AddinManagerDialog.cs:197
@@ -1351,11 +1385,11 @@ msgstr "Open Image"
 msgid "Open Image File"
 msgstr "Open Image File"
 
-#: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:324
+#: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:317
 msgid "Open Line/Curve Series"
 msgstr "Open Line/Curve Series"
 
-#: ../Pinta.Core/Actions/EditActions.cs:347
+#: ../Pinta.Core/Actions/EditActions.cs:349
 msgid "Open Palette File"
 msgstr "Open Palette File"
 
@@ -1377,7 +1411,7 @@ msgstr "Original"
 msgid "Outline"
 msgstr "Outline"
 
-#: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:300
+#: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:293
 #: ../Pinta.Tools/Tools/FreeformShapeTool.cs:222
 msgid "Outline Shape"
 msgstr "Outline Shape"
@@ -1414,7 +1448,7 @@ msgstr "Paintbrush"
 msgid "Palette"
 msgstr "Palette"
 
-#: ../Pinta.Core/Actions/EditActions.cs:354
+#: ../Pinta.Core/Actions/EditActions.cs:356
 msgid "Palette files"
 msgstr "Palette files"
 
@@ -1504,7 +1538,7 @@ msgstr ""
 msgid "Pinta supports the following file formats:"
 msgstr "Pinta supports the following file formats:"
 
-#: ../Pinta.Core/Classes/Palette.cs:193
+#: ../Pinta.Core/Classes/Palette.cs:197
 msgid "Pinta supports the following palette formats:"
 msgstr "Pinta supports the following palette formats:"
 
@@ -1520,12 +1554,17 @@ msgstr "Pixelate"
 msgid "Pixels"
 msgstr "Pixels"
 
-#: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:592
-#: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:780
+#. Translators: Gradient with different shades of brownish yellow
+#: ../Pinta.Effects/Effects/GradientHelper.cs:38
+msgid "Piña Colada"
+msgstr ""
+
+#: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:583
+#: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:769
 msgid "Point Added"
 msgstr "Point Added"
 
-#: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:639
+#: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:630
 msgid "Point Deleted"
 msgstr "Point Deleted"
 
@@ -1542,7 +1581,7 @@ msgstr "Portrait"
 msgid "Posterize"
 msgstr "Posterize"
 
-#: ../Pinta.Effects/Effects/CloudsEffect.cs:207
+#: ../Pinta.Effects/Effects/CloudsEffect.cs:208
 msgid "Power"
 msgstr "Power"
 
@@ -1567,8 +1606,8 @@ msgstr "Primary"
 msgid "Print"
 msgstr "Print"
 
-#: ../Pinta.Effects/Effects/JuliaFractalEffect.cs:144
-#: ../Pinta.Effects/Effects/MandelbrotFractalEffect.cs:161
+#: ../Pinta.Effects/Effects/JuliaFractalEffect.cs:159
+#: ../Pinta.Effects/Effects/MandelbrotFractalEffect.cs:178
 #: ../Pinta.Effects/Effects/RadialBlurEffect.cs:177
 #: ../Pinta.Effects/Effects/WarpEffect.cs:186
 msgid "Quality"
@@ -1604,7 +1643,7 @@ msgid "Radius"
 msgstr "Radius"
 
 #: ../Pinta.Effects/Effects/AddNoiseEffect.cs:189
-#: ../Pinta.Effects/Effects/CloudsEffect.cs:229
+#: ../Pinta.Effects/Effects/CloudsEffect.cs:230
 #: ../Pinta.Effects/Effects/FrostedGlassEffect.cs:153
 msgid "Random Noise"
 msgstr "Random Noise"
@@ -1719,6 +1758,11 @@ msgstr "Resize Image..."
 msgid "Resize Palette"
 msgstr "Resize Palette"
 
+#: ../Pinta.Effects/Effects/JuliaFractalEffect.cs:168
+#: ../Pinta.Effects/Effects/MandelbrotFractalEffect.cs:191
+msgid "Reverse Color Scheme"
+msgstr ""
+
 #: ../Pinta.Tools/Tools/TextTool.cs:226
 msgid "Right Align"
 msgstr "Right Align"
@@ -1752,7 +1796,7 @@ msgstr "Rotate 90° Counter-Clockwise"
 msgid "Rotation"
 msgstr "Rotation"
 
-#: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:327
+#: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:320
 msgid "Rounded Line Series"
 msgstr "Rounded Line Series"
 
@@ -1785,7 +1829,7 @@ msgstr "Saturation"
 msgid "Saturation Percentage"
 msgstr "Saturation Percentage"
 
-#: ../Pinta.Core/Actions/EditActions.cs:391
+#: ../Pinta.Core/Actions/EditActions.cs:393
 #: ../Pinta.Core/Actions/FileActions.cs:51
 #: ../Pinta/Actions/File/SaveDocumentImplementationAction.cs:73
 msgid "Save"
@@ -1804,7 +1848,7 @@ msgstr "Save As..."
 msgid "Save Image File"
 msgstr "Save Image File"
 
-#: ../Pinta.Core/Actions/EditActions.cs:388
+#: ../Pinta.Core/Actions/EditActions.cs:390
 msgid "Save Palette File"
 msgstr "Save Palette File"
 
@@ -1813,7 +1857,7 @@ msgstr "Save Palette File"
 msgid "Save changes to image \"{0}\" before closing?"
 msgstr "Save changes to image \"{0}\" before closing?"
 
-#: ../Pinta.Effects/Effects/CloudsEffect.cs:204
+#: ../Pinta.Effects/Effects/CloudsEffect.cs:205
 msgid "Scale"
 msgstr "Scale"
 
@@ -1838,7 +1882,7 @@ msgstr "Sepia"
 msgid "Set Number of Colors"
 msgstr "Set Number of Colours"
 
-#: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:315
+#: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:308
 msgid "Shape Type"
 msgstr "Shape Type"
 
@@ -1847,7 +1891,7 @@ msgid "Sharpen"
 msgstr "Sharpen"
 
 #: ../Pinta.Core/Extensions/ToolBoxButton.cs:51
-#: ../Pinta.Gui.Widgets/Widgets/StatusBarColorPaletteWidget.cs:261
+#: ../Pinta.Gui.Widgets/Widgets/StatusBarColorPaletteWidget.cs:260
 msgid "Shortcut key"
 msgstr "Shortcut key"
 
@@ -1867,7 +1911,7 @@ msgstr "Single Pixel"
 msgid "Size"
 msgstr "Window Size"
 
-#: ../Pinta.Tools/Tools/EraserTool.cs:264
+#: ../Pinta.Tools/Tools/EraserTool.cs:263
 msgid "Smooth"
 msgstr "Smooth"
 
@@ -2055,7 +2099,7 @@ msgstr "Transparent"
 msgid "Twist"
 msgstr "Twist"
 
-#: ../Pinta.Tools/Tools/EraserTool.cs:260
+#: ../Pinta.Tools/Tools/EraserTool.cs:259
 #: ../Pinta.Tools/Tools/PaintBrushTool.cs:165
 msgid "Type"
 msgstr "Type"
@@ -2096,7 +2140,7 @@ msgstr "Unsaved Image {0}"
 msgid "Unsupported file format"
 msgstr "Unsupported file format"
 
-#: ../Pinta.Core/Classes/Palette.cs:180
+#: ../Pinta.Core/Classes/Palette.cs:158
 msgid "Unsupported palette format"
 msgstr "Unsupported palette format"
 
@@ -2171,15 +2215,15 @@ msgid "You do not have access to '{0}'."
 msgstr "You do not have access to '{0}'."
 
 #. Translators: {0} is the name of a file that the user does not have write permission for.
-#: ../Pinta/Actions/File/SaveDocumentImplementationAction.cs:191
+#: ../Pinta/Actions/File/SaveDocumentImplementationAction.cs:190
 #, csharp-format
 msgid ""
 "You do not have access to modify '{0}'. The file or folder may be read-only."
 msgstr ""
 "You do not have access to modify '{0}'. The file or folder may be read-only."
 
-#: ../Pinta.Effects/Effects/JuliaFractalEffect.cs:147
-#: ../Pinta.Effects/Effects/MandelbrotFractalEffect.cs:165
+#: ../Pinta.Effects/Effects/JuliaFractalEffect.cs:162
+#: ../Pinta.Effects/Effects/MandelbrotFractalEffect.cs:182
 #: ../Pinta.Tools/Tools/ZoomTool.cs:55
 #: ../Pinta/Actions/Layers/RotateZoomLayerAction.cs:121
 msgid "Zoom"

@@ -7,11 +7,11 @@ msgid ""
 msgstr ""
 "Project-Id-Version: pinta\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-01-07 01:14+0000\n"
+"POT-Creation-Date: 2024-01-14 01:15+0000\n"
 "PO-Revision-Date: 2024-01-09 15:06+0000\n"
 "Last-Translator: Oğuz Ersen <oguz@ersen.moe>\n"
-"Language-Team: Turkish <https://hosted.weblate.org/projects/pinta/pinta/tr/>"
-"\n"
+"Language-Team: Turkish <https://hosted.weblate.org/projects/pinta/pinta/tr/"
+">\n"
 "Language: tr\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -75,7 +75,7 @@ msgstr "Parazit Ekle"
 msgid "Add-in Manager..."
 msgstr "Eklenti Yöneticisi..."
 
-#: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:810
+#: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:799
 msgid "Added"
 msgstr "Eklendi"
 
@@ -87,7 +87,7 @@ msgstr "Ayarlamalar"
 msgid "After select"
 msgstr "Seçimden sonra"
 
-#: ../Pinta.Core/Actions/EditActions.cs:366
+#: ../Pinta.Core/Actions/EditActions.cs:368
 #: ../Pinta.Gui.Addins/AddinManagerDialog.cs:209
 #: ../Pinta/Actions/File/OpenDocumentAction.cs:83
 msgid "All files"
@@ -107,8 +107,8 @@ msgstr "Çapa:"
 
 #: ../Pinta.Effects/Effects/EdgeDetectEffect.cs:80
 #: ../Pinta.Effects/Effects/EmbossEffect.cs:149
-#: ../Pinta.Effects/Effects/JuliaFractalEffect.cs:150
-#: ../Pinta.Effects/Effects/MandelbrotFractalEffect.cs:168
+#: ../Pinta.Effects/Effects/JuliaFractalEffect.cs:171
+#: ../Pinta.Effects/Effects/MandelbrotFractalEffect.cs:185
 #: ../Pinta.Effects/Effects/MotionBlurEffect.cs:101
 #: ../Pinta.Effects/Effects/RadialBlurEffect.cs:171
 #: ../Pinta.Effects/Effects/ReliefEffect.cs:82
@@ -172,6 +172,11 @@ msgstr "Arkaplan:"
 msgid "Based on the work of Paint.NET:"
 msgstr "Paint.NET üzerine inşa edilmiştir:"
 
+#. Translators: Gradient with the colors of the flag of Italy: red, white, and green
+#: ../Pinta.Effects/Effects/GradientHelper.cs:10
+msgid "Beautiful Italy"
+msgstr ""
+
 #: ../Pinta.Core/Actions/ViewActions.cs:69
 msgid "Best Fit"
 msgstr "En Uygun Görünüm"
@@ -180,7 +185,9 @@ msgstr "En Uygun Görünüm"
 msgid "Bilinear"
 msgstr "Çift Doğrusal"
 
+#. Translators: Simple gradient that goes from black to white
 #: ../Pinta.Effects/Adjustments/BlackAndWhiteEffect.cs:24
+#: ../Pinta.Effects/Effects/GradientHelper.cs:14
 msgid "Black and White"
 msgstr "Siyah Beyaz"
 
@@ -210,6 +217,11 @@ msgstr "Bulanıklıklar"
 msgid "Bold"
 msgstr "Kalın"
 
+#. Translators: Gradient that starts out white, like the core of a raging fire, and then goes through yellow, red, and black (like visible black smoke), and finally transparent, blending with the background
+#: ../Pinta.Effects/Effects/GradientHelper.cs:18
+msgid "Bonfire"
+msgstr ""
+
 #: ../Pinta.Effects/Adjustments/BrightnessContrastEffect.cs:142
 #: ../Pinta.Effects/Effects/GlowEffect.cs:77
 msgid "Brightness"
@@ -223,7 +235,7 @@ msgstr "Parlaklık / Kontrast"
 msgid "Brush Size"
 msgstr "Fırça Boyutu"
 
-#: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:264
+#: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:254
 #: ../Pinta.Tools/Tools/BaseBrushTool.cs:100
 msgid "Brush width"
 msgstr "Fırça boyutu"
@@ -242,8 +254,8 @@ msgstr "Mutlak boyut:"
 msgid "By percentage:"
 msgstr "Yüzde :"
 
-#: ../Pinta.Core/Actions/EditActions.cs:351
-#: ../Pinta.Core/Actions/EditActions.cs:392
+#: ../Pinta.Core/Actions/EditActions.cs:353
+#: ../Pinta.Core/Actions/EditActions.cs:394
 #: ../Pinta.Core/Actions/LayerActions.cs:167
 #: ../Pinta.Gui.Addins/AddinManagerDialog.cs:198
 #: ../Pinta.Gui.Addins/InstallDialog.cs:120
@@ -276,11 +288,16 @@ msgstr "Ortalanmış"
 msgid "Centimeters"
 msgstr "Santimetre"
 
-#: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:348
+#: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:341
 msgid "Changed Shape Type"
 msgstr "Şekil Türü Değişti"
 
-#: ../Pinta.Effects/Dialogs/Effects.LevelsDialog.cs:555
+#. Translators: Gradient that starts out off-white, like cherry blossoms against sunlight, then goes through pink, then light blue (like the sky) and finally transparent, blending with the background
+#: ../Pinta.Effects/Effects/GradientHelper.cs:22
+msgid "Cherry Blossom"
+msgstr ""
+
+#: ../Pinta.Effects/Dialogs/Effects.LevelsDialog.cs:531
 msgid "Choose Color"
 msgstr "Renk Seçin"
 
@@ -337,11 +354,11 @@ msgstr "Bir seçim alanının anahattını çizmek için tıklayıp sürükleyin
 msgid "Click and drag to navigate image."
 msgstr "Görüntüyü hareket ettirmek için tıklayın ve sürükleyin."
 
-#: ../Pinta.Gui.Widgets/Widgets/StatusBarColorPaletteWidget.cs:265
+#: ../Pinta.Gui.Widgets/Widgets/StatusBarColorPaletteWidget.cs:264
 msgid "Click to reset primary and secondary color."
 msgstr "Birincil ve ikincil rengi sıfırlamak için tıklayın."
 
-#: ../Pinta.Gui.Widgets/Widgets/StatusBarColorPaletteWidget.cs:254
+#: ../Pinta.Gui.Widgets/Widgets/StatusBarColorPaletteWidget.cs:253
 msgid "Click to select primary color."
 msgstr "Birincil renk seçmek için tıklayın."
 
@@ -349,11 +366,11 @@ msgstr "Birincil renk seçmek için tıklayın."
 msgid "Click to select region of similar color."
 msgstr "Benzer renkli bir bölge seçmek için tıklayın."
 
-#: ../Pinta.Gui.Widgets/Widgets/StatusBarColorPaletteWidget.cs:257
+#: ../Pinta.Gui.Widgets/Widgets/StatusBarColorPaletteWidget.cs:256
 msgid "Click to select secondary color."
 msgstr "İkincil renk seçmek için tıklayın."
 
-#: ../Pinta.Gui.Widgets/Widgets/StatusBarColorPaletteWidget.cs:260
+#: ../Pinta.Gui.Widgets/Widgets/StatusBarColorPaletteWidget.cs:259
 msgid "Click to switch between primary and secondary color."
 msgstr "Birincil ve ikincil renk arasında geçiş yapmak için tıklayın."
 
@@ -381,7 +398,7 @@ msgstr "Tümünü Kapat"
 msgid "Closed Curve Shape"
 msgstr "Kapalı Eğri Şekli"
 
-#: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:325
+#: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:318
 msgid "Closed Line/Curve Series"
 msgstr "Kapalı Çizgi/Eğri Serileri"
 
@@ -422,6 +439,8 @@ msgid "Color Saturation"
 msgstr "Renk Doygunluğu"
 
 #: ../Pinta.Core/Actions/ViewActions.cs:181
+#: ../Pinta.Effects/Effects/JuliaFractalEffect.cs:165
+#: ../Pinta.Effects/Effects/MandelbrotFractalEffect.cs:188
 msgid "Color Scheme"
 msgstr "Renk Düzeni"
 
@@ -458,13 +477,18 @@ msgstr "Kopya Birleşti"
 msgid "Copyright"
 msgstr "Telif Hakkı"
 
+#. Translators: Gradient with the colors of blue and pink cotton candy
+#: ../Pinta.Effects/Effects/GradientHelper.cs:26
+msgid "Cotton Candy"
+msgstr ""
+
 #. Translators: {0} is the name of a layer, and {1} is the path to a .ora file.
-#: ../Pinta.Core/ImageFormats/OraFormat.cs:127
+#: ../Pinta.Core/ImageFormats/OraFormat.cs:122
 #, csharp-format
 msgid "Could not import layer \"{0}\" from {1}"
 msgstr "{1}'den \"{0}\" katmanı aktarılamadı"
 
-#: ../Pinta.Core/Classes/Palette.cs:192
+#: ../Pinta.Core/Classes/Palette.cs:196
 #: ../Pinta.Core/Managers/WorkspaceManager.cs:378
 #: ../Pinta.Core/Managers/WorkspaceManager.cs:385
 #, csharp-format
@@ -493,7 +517,7 @@ msgid "Custom"
 msgstr "Özel"
 
 #: ../Pinta.Core/Actions/EditActions.cs:60
-#: ../Pinta.Core/Actions/EditActions.cs:243
+#: ../Pinta.Core/Actions/EditActions.cs:244
 msgid "Cut"
 msgstr "Kes"
 
@@ -520,11 +544,11 @@ msgstr "Öntanımlı"
 msgid "Delete Layer"
 msgstr "Katmanı Sil"
 
-#: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:653
+#: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:644
 msgid "Deleted"
 msgstr "Silindi"
 
-#: ../Pinta.Core/Actions/EditActions.cs:254
+#: ../Pinta.Core/Actions/EditActions.cs:256
 msgid "Deselect"
 msgstr "Seçimi Kaldır"
 
@@ -588,7 +612,12 @@ msgstr "_Efektler"
 msgid "Effects"
 msgstr "Efektler"
 
-#: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:326
+#. Translators: Gradient that starts out white, like the the inner part of a spark, and goes through progressively dark shades of blue until it reaches black, and finally transparent, blending with the background
+#: ../Pinta.Effects/Effects/GradientHelper.cs:30
+msgid "Electric"
+msgstr ""
+
+#: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:319
 #: ../Pinta.Tools/Editable/EditEngines/EllipseEditEngine.cs:34
 #: ../Pinta.Tools/Tools/EllipseTool.cs:38
 msgid "Ellipse"
@@ -616,7 +645,7 @@ msgstr "Seçimi Sil"
 msgid "Eraser"
 msgstr "Silgi"
 
-#: ../Pinta.Core/ImageFormats/OraFormat.cs:128
+#: ../Pinta.Core/ImageFormats/OraFormat.cs:123
 msgid "Error"
 msgstr "Hata"
 
@@ -633,8 +662,8 @@ msgstr "Genişlet"
 msgid "Extension packages"
 msgstr "Uzantı paketleri"
 
-#: ../Pinta.Effects/Effects/JuliaFractalEffect.cs:141
-#: ../Pinta.Effects/Effects/MandelbrotFractalEffect.cs:158
+#: ../Pinta.Effects/Effects/JuliaFractalEffect.cs:156
+#: ../Pinta.Effects/Effects/MandelbrotFractalEffect.cs:175
 msgid "Factor"
 msgstr "Etken"
 
@@ -654,7 +683,7 @@ msgstr "Uzantı paketi yüklenemedi"
 msgid "Failed to open image"
 msgstr "Görüntü açılamadı"
 
-#: ../Pinta/Actions/File/SaveDocumentImplementationAction.cs:189
+#: ../Pinta/Actions/File/SaveDocumentImplementationAction.cs:188
 msgid "Failed to save image"
 msgstr "Görüntü kaydedilemedi"
 
@@ -681,23 +710,23 @@ msgstr "Arkaplanı Doldur"
 msgid "Fill Selection"
 msgstr "Seçimi Doldur"
 
-#: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:301
+#: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:294
 #: ../Pinta.Tools/Tools/FreeformShapeTool.cs:223
 msgid "Fill Shape"
 msgstr "Şekli Doldur"
 
-#: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:291
+#: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:284
 #: ../Pinta.Tools/Tools/FreeformShapeTool.cs:216
 msgid "Fill Style"
 msgstr "Stili Doldur"
 
-#: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:302
+#: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:295
 #: ../Pinta.Tools/Tools/FreeformShapeTool.cs:224
 msgid "Fill and Outline Shape"
 msgstr "Dolgu ve Anahat Şekli"
 
-#: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:1073
-#: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:1331
+#: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:1062
+#: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:1322
 msgid "Finalized"
 msgstr "Sonlandırıldı"
 
@@ -828,7 +857,7 @@ msgstr "Ton"
 msgid "Hue / Saturation"
 msgstr "Ton / Doygunluk"
 
-#: ../Pinta/Actions/File/SaveDocumentImplementationAction.cs:184
+#: ../Pinta/Actions/File/SaveDocumentImplementationAction.cs:183
 msgid "ICO files can not be larger than 255 x 255 pixels."
 msgstr "ICO dosyası 255 x 255 pikselden büyük olamaz."
 
@@ -861,7 +890,7 @@ msgstr "Görüntü dosyaları"
 msgid "Image larger than canvas"
 msgstr "Görüntü tuvalden büyük"
 
-#: ../Pinta/Actions/File/SaveDocumentImplementationAction.cs:183
+#: ../Pinta/Actions/File/SaveDocumentImplementationAction.cs:182
 msgid "Image too large"
 msgstr "Görüntü çok büyük"
 
@@ -927,12 +956,12 @@ msgid "Intersect ({0} + Left Click)"
 msgstr "Kesişim ({0} + Sol Tıklama)"
 
 #: ../Pinta.Effects/Adjustments/InvertColorsEffect.cs:24
-#: ../Pinta.Effects/Effects/MandelbrotFractalEffect.cs:171
+#: ../Pinta.Effects/Effects/MandelbrotFractalEffect.cs:194
 msgid "Invert Colors"
 msgstr "Renkleri Ters Çevir"
 
 #: ../Pinta.Core/Actions/EditActions.cs:68
-#: ../Pinta.Core/Actions/EditActions.cs:447
+#: ../Pinta.Core/Actions/EditActions.cs:446
 msgid "Invert Selection"
 msgstr "Seçimi Tersine Çevir"
 
@@ -1116,13 +1145,13 @@ msgstr ""
 "Birincil rengi ayarlamak için Sol tıkı kullanın.\n"
 "İkincil rengi ayarlamak için Sağ tıkı kullanın."
 
-#: ../Pinta.Gui.Widgets/Widgets/StatusBarColorPaletteWidget.cs:251
+#: ../Pinta.Gui.Widgets/Widgets/StatusBarColorPaletteWidget.cs:250
 msgid "Left click to set primary color. Right click to set secondary color."
 msgstr ""
 "Temel rengi belirmek için farenizin sol tuşa basın. İkincil rengi belirlemek "
 "için ise farenizin sağ tuşuna basın."
 
-#: ../Pinta.Gui.Widgets/Widgets/StatusBarColorPaletteWidget.cs:247
+#: ../Pinta.Gui.Widgets/Widgets/StatusBarColorPaletteWidget.cs:246
 msgid ""
 "Left click to set primary color. Right click to set secondary color. Middle "
 "click to choose palette color."
@@ -1172,6 +1201,11 @@ msgstr "Aydınlatma"
 #: ../Pinta.Effects/Adjustments/HueSaturationEffect.cs:68
 msgid "Lightness"
 msgstr "Aydınlık"
+
+#. Translators: Gradient with a citrusy vibe that starts out white, goes through light yellow, several shades of green, and then transparent, blending with the background
+#: ../Pinta.Effects/Effects/GradientHelper.cs:34
+msgid "Lime Lemon"
+msgstr ""
 
 #: ../Pinta.Tools/Tools/LineCurveTool.cs:38
 msgid "Line/Curve"
@@ -1228,7 +1262,7 @@ msgstr "Katmanı Birleştir"
 msgid "Mode"
 msgstr "Mod"
 
-#: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:887
+#: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:876
 msgid "Modified"
 msgstr "Değiştirildi"
 
@@ -1303,7 +1337,7 @@ msgstr "Parazit"
 
 #: ../Pinta.Core/Effects/UserBlendOps.cs:31
 #: ../Pinta.Tools/Brushes/PlainBrush.cs:35
-#: ../Pinta.Tools/Tools/EraserTool.cs:264 ../Pinta.Tools/Tools/TextTool.cs:249
+#: ../Pinta.Tools/Tools/EraserTool.cs:263 ../Pinta.Tools/Tools/TextTool.cs:249
 msgid "Normal"
 msgstr "Normal"
 
@@ -1337,7 +1371,7 @@ msgstr "Yağlı Boya"
 msgid "Opacity:"
 msgstr "Saydamlık:"
 
-#: ../Pinta.Core/Actions/EditActions.cs:350
+#: ../Pinta.Core/Actions/EditActions.cs:352
 #: ../Pinta.Core/Actions/FileActions.cs:56
 #: ../Pinta.Core/Actions/LayerActions.cs:166
 #: ../Pinta.Gui.Addins/AddinManagerDialog.cs:197
@@ -1358,11 +1392,11 @@ msgstr "Görüntüyü Aç"
 msgid "Open Image File"
 msgstr "Bir Görüntü Dosyası Aç"
 
-#: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:324
+#: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:317
 msgid "Open Line/Curve Series"
 msgstr "Açık Çizgi/Eğri Serileri"
 
-#: ../Pinta.Core/Actions/EditActions.cs:347
+#: ../Pinta.Core/Actions/EditActions.cs:349
 msgid "Open Palette File"
 msgstr "Palet Dosyası Aç"
 
@@ -1384,7 +1418,7 @@ msgstr "Özgün"
 msgid "Outline"
 msgstr "Anahat"
 
-#: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:300
+#: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:293
 #: ../Pinta.Tools/Tools/FreeformShapeTool.cs:222
 msgid "Outline Shape"
 msgstr "Anahat Şekli"
@@ -1421,7 +1455,7 @@ msgstr "Boya fırçası"
 msgid "Palette"
 msgstr "Palet"
 
-#: ../Pinta.Core/Actions/EditActions.cs:354
+#: ../Pinta.Core/Actions/EditActions.cs:356
 msgid "Palette files"
 msgstr "Palet dosyaları"
 
@@ -1512,7 +1546,7 @@ msgstr ""
 msgid "Pinta supports the following file formats:"
 msgstr "Pinta aşağıdaki dosya biçimlerini destekler:"
 
-#: ../Pinta.Core/Classes/Palette.cs:193
+#: ../Pinta.Core/Classes/Palette.cs:197
 msgid "Pinta supports the following palette formats:"
 msgstr "Pinta aşağıdaki palet biçimlerini destekler:"
 
@@ -1528,12 +1562,17 @@ msgstr "Pikselleştir"
 msgid "Pixels"
 msgstr "Piksel"
 
-#: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:592
-#: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:780
+#. Translators: Gradient with different shades of brownish yellow
+#: ../Pinta.Effects/Effects/GradientHelper.cs:38
+msgid "Piña Colada"
+msgstr ""
+
+#: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:583
+#: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:769
 msgid "Point Added"
 msgstr "Nokta Eklendi"
 
-#: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:639
+#: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:630
 msgid "Point Deleted"
 msgstr "Nokta Silindi"
 
@@ -1550,7 +1589,7 @@ msgstr "Dikey"
 msgid "Posterize"
 msgstr "Posterleştir"
 
-#: ../Pinta.Effects/Effects/CloudsEffect.cs:207
+#: ../Pinta.Effects/Effects/CloudsEffect.cs:208
 msgid "Power"
 msgstr "Güç"
 
@@ -1575,8 +1614,8 @@ msgstr "Birincil"
 msgid "Print"
 msgstr "Yazdır"
 
-#: ../Pinta.Effects/Effects/JuliaFractalEffect.cs:144
-#: ../Pinta.Effects/Effects/MandelbrotFractalEffect.cs:161
+#: ../Pinta.Effects/Effects/JuliaFractalEffect.cs:159
+#: ../Pinta.Effects/Effects/MandelbrotFractalEffect.cs:178
 #: ../Pinta.Effects/Effects/RadialBlurEffect.cs:177
 #: ../Pinta.Effects/Effects/WarpEffect.cs:186
 msgid "Quality"
@@ -1612,7 +1651,7 @@ msgid "Radius"
 msgstr "Yarıçap"
 
 #: ../Pinta.Effects/Effects/AddNoiseEffect.cs:189
-#: ../Pinta.Effects/Effects/CloudsEffect.cs:229
+#: ../Pinta.Effects/Effects/CloudsEffect.cs:230
 #: ../Pinta.Effects/Effects/FrostedGlassEffect.cs:153
 msgid "Random Noise"
 msgstr "Rastgele Parazit"
@@ -1727,6 +1766,11 @@ msgstr "Görüntüyü Yeniden Boyutlandır..."
 msgid "Resize Palette"
 msgstr "Paleti Yeniden Boyutlandır"
 
+#: ../Pinta.Effects/Effects/JuliaFractalEffect.cs:168
+#: ../Pinta.Effects/Effects/MandelbrotFractalEffect.cs:191
+msgid "Reverse Color Scheme"
+msgstr ""
+
 #: ../Pinta.Tools/Tools/TextTool.cs:226
 msgid "Right Align"
 msgstr "Sağa Hizalı"
@@ -1760,7 +1804,7 @@ msgstr "Saat Yönünün Tersinde 90° Çevir"
 msgid "Rotation"
 msgstr "Döndürme"
 
-#: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:327
+#: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:320
 msgid "Rounded Line Series"
 msgstr "Yuvarlanmış Çizgi Serileri"
 
@@ -1793,7 +1837,7 @@ msgstr "Doygunluk"
 msgid "Saturation Percentage"
 msgstr "Doygunluk Yüzdesi"
 
-#: ../Pinta.Core/Actions/EditActions.cs:391
+#: ../Pinta.Core/Actions/EditActions.cs:393
 #: ../Pinta.Core/Actions/FileActions.cs:51
 #: ../Pinta/Actions/File/SaveDocumentImplementationAction.cs:73
 msgid "Save"
@@ -1812,7 +1856,7 @@ msgstr "Farklı Kaydet..."
 msgid "Save Image File"
 msgstr "Görüntü Dosyasını Kaydet"
 
-#: ../Pinta.Core/Actions/EditActions.cs:388
+#: ../Pinta.Core/Actions/EditActions.cs:390
 msgid "Save Palette File"
 msgstr "Palet Dosyasını Kaydet"
 
@@ -1823,7 +1867,7 @@ msgstr ""
 "\"{0}\" görüntüsündeki değişiklikleri kapatmadan önce kaydetmek ister "
 "misiniz?"
 
-#: ../Pinta.Effects/Effects/CloudsEffect.cs:204
+#: ../Pinta.Effects/Effects/CloudsEffect.cs:205
 msgid "Scale"
 msgstr "Ölçek"
 
@@ -1848,7 +1892,7 @@ msgstr "Sepya"
 msgid "Set Number of Colors"
 msgstr "Renk Numaraları"
 
-#: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:315
+#: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:308
 msgid "Shape Type"
 msgstr "Şekil Türü"
 
@@ -1857,7 +1901,7 @@ msgid "Sharpen"
 msgstr "Keskinleştir"
 
 #: ../Pinta.Core/Extensions/ToolBoxButton.cs:51
-#: ../Pinta.Gui.Widgets/Widgets/StatusBarColorPaletteWidget.cs:261
+#: ../Pinta.Gui.Widgets/Widgets/StatusBarColorPaletteWidget.cs:260
 msgid "Shortcut key"
 msgstr "Kısayol tuşu"
 
@@ -1877,7 +1921,7 @@ msgstr "Tek Piksel"
 msgid "Size"
 msgstr "Boyut"
 
-#: ../Pinta.Tools/Tools/EraserTool.cs:264
+#: ../Pinta.Tools/Tools/EraserTool.cs:263
 msgid "Smooth"
 msgstr "Pürüzsüz"
 
@@ -2064,7 +2108,7 @@ msgstr "Şeffaf"
 msgid "Twist"
 msgstr "Bükme"
 
-#: ../Pinta.Tools/Tools/EraserTool.cs:260
+#: ../Pinta.Tools/Tools/EraserTool.cs:259
 #: ../Pinta.Tools/Tools/PaintBrushTool.cs:165
 msgid "Type"
 msgstr "Tür"
@@ -2105,7 +2149,7 @@ msgstr "Kaydedilmemiş Görüntü {0}"
 msgid "Unsupported file format"
 msgstr "Desteklenmeyen dosya biçimi"
 
-#: ../Pinta.Core/Classes/Palette.cs:180
+#: ../Pinta.Core/Classes/Palette.cs:158
 msgid "Unsupported palette format"
 msgstr "Desteklenmeyen paket formatı"
 
@@ -2180,7 +2224,7 @@ msgid "You do not have access to '{0}'."
 msgstr "'{0}' öğesine erişiminiz yok."
 
 #. Translators: {0} is the name of a file that the user does not have write permission for.
-#: ../Pinta/Actions/File/SaveDocumentImplementationAction.cs:191
+#: ../Pinta/Actions/File/SaveDocumentImplementationAction.cs:190
 #, csharp-format
 msgid ""
 "You do not have access to modify '{0}'. The file or folder may be read-only."
@@ -2188,8 +2232,8 @@ msgstr ""
 "'{0}' öğesini değiştirmek için erişiminiz yok. Dosya veya klasör salt okunur "
 "olabilir."
 
-#: ../Pinta.Effects/Effects/JuliaFractalEffect.cs:147
-#: ../Pinta.Effects/Effects/MandelbrotFractalEffect.cs:165
+#: ../Pinta.Effects/Effects/JuliaFractalEffect.cs:162
+#: ../Pinta.Effects/Effects/MandelbrotFractalEffect.cs:182
 #: ../Pinta.Tools/Tools/ZoomTool.cs:55
 #: ../Pinta/Actions/Layers/RotateZoomLayerAction.cs:121
 msgid "Zoom"
