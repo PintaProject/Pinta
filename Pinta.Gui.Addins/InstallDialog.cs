@@ -46,15 +46,12 @@ internal sealed class InstallDialog : Adw.Window
 		HeightRequest = 250;
 
 		var content = Gtk.Box.New (Gtk.Orientation.Vertical, 12);
-		content.Append (new Adw.HeaderBar () {
-			TitleWidget = window_title
-		});
+		content.Append (new Adw.HeaderBar { TitleWidget = window_title });
 
 		var labels = Gtk.Box.New (Gtk.Orientation.Vertical, 12);
 		labels.SetAllMargins (6);
 
-		error_heading_label = Gtk.Label.New (
-			Translations.GetString ("The selected extension packages can't be installed because there are dependency conflicts."));
+		error_heading_label = Gtk.Label.New (Translations.GetString ("The selected extension packages can't be installed because there are dependency conflicts."));
 		error_heading_label.AddCssClass (AdwaitaStyles.Title4);
 		labels.Append (error_heading_label);
 
@@ -146,25 +143,27 @@ internal sealed class InstallDialog : Adw.Window
 
 			DisplayInstallInfo ();
 
-		} catch (Exception) {
+			return true;
+
+		} catch {
 			var dialog = Adw.MessageDialog.New (
 				TransientFor,
 				Translations.GetString ("Failed to load extension package"),
 				Translations.GetString ("The file may be an invalid or corrupt extension package"));
 
 			const string ok_response = "ok";
+
 			dialog.AddResponse (ok_response, Translations.GetString ("_OK"));
 			dialog.DefaultResponse = ok_response;
 			dialog.CloseResponse = ok_response;
 
 			dialog.Present ();
+
 			return false;
 		}
-
-		return true;
 	}
 
-	public void InitForUninstall (Addin[] addins_to_uninstall)
+	public void InitForUninstall (IReadOnlyList<Addin> addins_to_uninstall)
 	{
 		window_title.Title = Translations.GetString ("Uninstall");
 		install_button.Label = Translations.GetString ("Uninstall");
@@ -180,16 +179,16 @@ internal sealed class InstallDialog : Adw.Window
 		uninstall_label.SetLabel (string.Join (Environment.NewLine, addins_to_uninstall.Select (a => a.Name)));
 
 		var dependents = new HashSet<Addin> ();
-		foreach (string id in addins_to_remove) {
+		foreach (string id in addins_to_remove)
 			dependents.UnionWith (service.GetDependentAddins (id, true));
-		}
 
 		dependencies_heading_label.Visible = dependencies_label.Visible = dependents.Any ();
-		if (dependents.Any ()) {
-			dependencies_heading_label.SetLabel (Translations.GetString (
-				"There are other extension packages that depend on the previous ones which will also be uninstalled:"));
-			dependencies_label.SetLabel (string.Join (Environment.NewLine, dependents.Select (a => a.Name)));
-		}
+
+		if (dependents.Count == 0)
+			return;
+
+		dependencies_heading_label.SetLabel (Translations.GetString ("There are other extension packages that depend on the previous ones which will also be uninstalled:"));
+		dependencies_label.SetLabel (string.Join (Environment.NewLine, dependents.Select (a => a.Name)));
 	}
 
 	private void DisplayInstallInfo ()
@@ -209,13 +208,17 @@ internal sealed class InstallDialog : Adw.Window
 		if (warning_label.Visible)
 			warning_label.SetLabel (string.Join (Environment.NewLine, error_reporter.Warnings));
 
-		var sb = new StringBuilder ();
+		StringBuilder sb = new ();
 		foreach (Package p in packages_to_install) {
+
 			sb.Append (p.Name);
+
 			if (!p.SharedInstall)
 				sb.Append (Translations.GetString (" (in user directory)"));
+
 			sb.AppendLine ();
 		}
+
 		install_label.SetLabel (sb.ToString ());
 
 		uninstall_label.Visible = to_uninstall.Count > 0;
@@ -239,10 +242,12 @@ internal sealed class InstallDialog : Adw.Window
 		}
 
 		dependencies_heading_label.Visible = dependencies_label.Visible = unresolved.Count > 0;
+
 		if (dependencies_label.Visible) {
+
 			sb.Clear ();
 
-			foreach (Dependency p in unresolved)
+			foreach (Dependency p in unresolved.Cast<Dependency> ())
 				sb.AppendLine (p.Name);
 
 			dependencies_label.SetLabel (sb.ToString ());
@@ -275,37 +280,34 @@ internal sealed class InstallDialog : Adw.Window
 		dependencies_heading_label.Visible = dependencies_label.Visible = false;
 
 		error_heading_label.Visible = error_label.Visible = error_reporter.Errors.Any ();
-		if (error_label.Visible)
-			error_label.SetLabel (string.Join (Environment.NewLine, error_reporter.Errors));
-		else {
-			warning_heading_label.Visible = warning_label.Visible = error_reporter.Warnings.Any ();
-			if (warning_label.Visible)
-				warning_label.SetLabel (string.Join (Environment.NewLine, error_reporter.Warnings));
-			else
-				Close (); // Success with no warnings!
 
-			OnSuccess?.Invoke (this, EventArgs.Empty);
+		if (error_label.Visible) {
+			error_label.SetLabel (string.Join (Environment.NewLine, error_reporter.Errors));
+			return;
 		}
+
+		warning_heading_label.Visible = warning_label.Visible = error_reporter.Warnings.Any ();
+
+		if (warning_label.Visible)
+			warning_label.SetLabel (string.Join (Environment.NewLine, error_reporter.Warnings));
+		else
+			Close (); // Success with no warnings!
+
+		OnSuccess?.Invoke (this, EventArgs.Empty);
 	}
 
-	private Task Install ()
+	private Task<bool> Install ()
 	{
 		error_heading_label.SetLabel (Translations.GetString ("The installation failed!"));
 		warning_heading_label.SetLabel (Translations.GetString ("The installation has completed with warnings."));
-
-		return Task.Run (() => {
-			service.Install (progress_bar, packages_to_install);
-		});
+		return Task.Run (() => service.Install (progress_bar, packages_to_install));
 	}
 
 	private Task Uninstall ()
 	{
 		error_heading_label.SetLabel (Translations.GetString ("The uninstallation failed!"));
 		warning_heading_label.SetLabel (Translations.GetString ("The uninstallation has completed with warnings."));
-
-		return Task.Run (() => {
-			service.Uninstall (progress_bar, addins_to_remove);
-		});
+		return Task.Run (() => service.Uninstall (progress_bar, addins_to_remove));
 	}
 }
 
