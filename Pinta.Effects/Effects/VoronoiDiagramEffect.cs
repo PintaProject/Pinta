@@ -59,6 +59,7 @@ public sealed class VoronoiDiagramEffect : BaseEffect
 					var point = points[i];
 					double distance = distanceCalculator (point, pixelLocation);
 					if (distance > shortestDistance) continue;
+					shortestDistance = distance;
 					closestIndex = i;
 				}
 				dst_row[x] = colors[closestIndex];
