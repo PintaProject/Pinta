@@ -44,24 +44,6 @@ public static partial class PangoExtensions
 		);
 	}
 
-	public static FontDescription CreateFontDescription ()
-		=> new (Pango.Internal.FontDescription.New ());
-
-	public static FontDescription Copy (this FontDescription desc)
-		=> new (Pango.Internal.FontDescription.Copy (desc.Handle));
-
-	public static int GetSize (this FontDescription desc)
-		=> Pango.Internal.FontDescription.GetSize (desc.Handle);
-
-	public static bool GetSizeIsAbsolute (this FontDescription desc)
-		=> Pango.Internal.FontDescription.GetSizeIsAbsolute (desc.Handle);
-
-	public static void SetWeight (this FontDescription desc, Weight weight)
-		=> Pango.Internal.FontDescription.SetWeight (desc.Handle, weight);
-
-	public static void SetStyle (this FontDescription desc, Style style)
-		=> Pango.Internal.FontDescription.SetStyle (desc.Handle, style);
-
 	public static void GetCursorPos (this Layout layout, int index, out RectangleI strong_pos, out RectangleI weak_pos)
 	{
 		InternalGetCursorPos (layout.Handle, index, out var strong_pos_pango, out var weak_pos_pango);

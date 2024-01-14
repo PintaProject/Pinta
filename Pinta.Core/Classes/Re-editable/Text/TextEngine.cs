@@ -25,7 +25,7 @@ public sealed class TextEngine
 	private TextPosition current_pos;
 	private TextPosition selection_start;
 
-	public Pango.FontDescription Font { get; private set; } = PangoExtensions.CreateFontDescription ();
+	public Pango.FontDescription Font { get; private set; } = Pango.FontDescription.New ();
 	public TextAlignment Alignment { get; private set; }
 	public bool Underline { get; private set; }
 

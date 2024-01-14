@@ -175,22 +175,6 @@ public static class GdkExtensions
 	}
 
 	// TODO-GTK4 (bindings, unsubmitted) - need gir.core async bindings for Gdk.Clipboard
-	public static Task<string?> ReadTextAsync (this Gdk.Clipboard clipboard)
-	{
-		var tcs = new TaskCompletionSource<string?> ();
-
-		Gdk.Internal.Clipboard.ReadTextAsync (clipboard.Handle, IntPtr.Zero, new Gio.Internal.AsyncReadyCallbackAsyncHandler ((_, args, _) => {
-			string? result = Gdk.Internal.Clipboard.ReadTextFinish (clipboard.Handle, args.Handle, out var error).ConvertToString ();
-			if (!error.IsInvalid)
-				throw new GLib.GException (error);
-
-			tcs.SetResult (result);
-		}).NativeCallback, IntPtr.Zero);
-
-		return tcs.Task;
-	}
-
-	// TODO-GTK4 (bindings, unsubmitted) - need gir.core async bindings for Gdk.Clipboard
 	public static Task<Texture?> ReadTextureAsync (this Gdk.Clipboard clipboard)
 	{
 		var tcs = new TaskCompletionSource<Texture?> ();
