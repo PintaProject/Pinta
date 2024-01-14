@@ -124,7 +124,7 @@ public sealed class VoronoiDiagramEffect : BaseEffect
 		[Caption ("Distance Calculation Method")]
 		public DistanceCalculationMethod DistanceCalculationMethod { get; set; } = DistanceCalculationMethod.Euclidean;
 
-		[Caption ("Point Count"), MinimumValue (1), MaximumValue (65_535)]
+		[Caption ("Point Count"), MinimumValue (1), MaximumValue (1024)]
 		public int PointCount { get; set; } = 100;
 
 		[Caption ("Colors Seed")]
