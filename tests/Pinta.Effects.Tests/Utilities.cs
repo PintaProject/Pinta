@@ -14,6 +14,13 @@ internal static class Utilities
 		Gdk.Module.Initialize ();
 	}
 
+	public static IServiceManager CreateMockServices ()
+	{
+		ServiceManager manager = new ();
+		manager.AddService<IPaletteService> (new MockPalette ());
+		return manager;
+	}
+
 	public static ImageSurface LoadImage (string image_name)
 	{
 		var assembly_path = System.IO.Path.GetDirectoryName (typeof (Utilities).Assembly.Location);

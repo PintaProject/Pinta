@@ -88,6 +88,18 @@ public static class OtherExtensions
 		return false;
 	}
 
+	public static ColorBgra RandomColorBgra (this Random random, bool includeAlpha = false)
+	{
+		Span<byte> colorBytes = stackalloc byte[4];
+		random.NextBytes (colorBytes);
+		uint unsignedInteger = BitConverter.ToUInt32 (colorBytes);
+		ColorBgra baseColor = ColorBgra.FromUInt32 (unsignedInteger);
+		if (includeAlpha)
+			return baseColor;
+		else
+			return baseColor with { A = 255 };
+	}
+
 	public static IReadOnlyList<IReadOnlyList<PointI>> CreatePolygonSet (this BitMask stencil, RectangleD bounds, PointI translateOffset)
 	{
 		if (stencil.IsEmpty)
