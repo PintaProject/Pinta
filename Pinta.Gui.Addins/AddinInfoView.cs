@@ -39,31 +39,23 @@ internal sealed class AddinInfoView : Adw.Bin
 		content_box.SetAllMargins (10);
 		view_stack.Add (content_box);
 
-		title_label = new Gtk.Label () {
-			Halign = Gtk.Align.Start
-		};
+		title_label = new Gtk.Label { Halign = Gtk.Align.Start };
 		title_label.AddCssClass (AdwaitaStyles.Title4);
 		content_box.Append (title_label);
 
-		version_label = new Gtk.Label () {
-			Halign = Gtk.Align.Start
-		};
+		version_label = new Gtk.Label { Halign = Gtk.Align.Start };
 		version_label.AddCssClass (AdwaitaStyles.Heading);
 		content_box.Append (version_label);
 
-		size_label = new Gtk.Label () {
-			Halign = Gtk.Align.Start
-		};
+		size_label = new Gtk.Label { Halign = Gtk.Align.Start };
 		size_label.AddCssClass (AdwaitaStyles.Heading);
 		content_box.Append (size_label);
 
-		repo_label = new Gtk.Label () {
-			Halign = Gtk.Align.Start
-		};
+		repo_label = new Gtk.Label { Halign = Gtk.Align.Start };
 		repo_label.AddCssClass (AdwaitaStyles.Heading);
 		content_box.Append (repo_label);
 
-		desc_label = new Gtk.Label () {
+		desc_label = new Gtk.Label {
 			Halign = Gtk.Align.Start,
 			Hexpand = true,
 			Valign = Gtk.Align.Start,
@@ -107,10 +99,8 @@ internal sealed class AddinInfoView : Adw.Bin
 		content_box.Append (hbox);
 
 		enable_switch.OnNotify += (o, e) => {
-			if (e.Pspec.GetName () != "active")
-				return;
-
-			HandleEnableSwitched ();
+			if (e.Pspec.GetName () == "active")
+				HandleEnableSwitched ();
 		};
 
 		view_stack.SetVisibleChild (empty_page);
@@ -119,36 +109,47 @@ internal sealed class AddinInfoView : Adw.Bin
 
 	public void Update (AddinListViewItem? item)
 	{
-		if (item is null) {
-			view_stack.SetVisibleChild (empty_page);
-		} else {
-			view_stack.SetVisibleChild (content_box);
-
-			title_label.SetLabel (item.Name);
-			version_label.SetLabel (Translations.GetString ("Version: {0}", item.Version));
-			desc_label.SetLabel (item.Description);
-
-			string? download_size = item.DownloadSize;
-			size_label.Visible = download_size != null;
-			if (download_size is not null)
-				size_label.SetLabel (Translations.GetString ("Download size: {0}", download_size));
-
-			string? repo_name = item.RepositoryName;
-			repo_label.Visible = repo_name != null;
-			if (repo_name is not null)
-				repo_label.SetLabel (Translations.GetString ("Available in repository: {0}", repo_name));
-
-			info_button.Visible = !string.IsNullOrEmpty (item.Url);
-			install_button.Visible = !item.Installed;
-			update_button.Visible = item.Addin is not null && Addin.CompareVersions (item.Addin.Version, item.Version) > 0;
-			uninstall_button.Visible = item.CanUninstall;
-
-			enable_switch.Visible = item.Installed && item.CanDisable;
-			if (item.CanDisable)
-				enable_switch.Active = item.Enabled;
-		}
+		if (item is null)
+			ViewEmptyItem ();
+		else
+			ViewExistingItem (item);
 
 		current_item = item;
+	}
+
+	private void ViewEmptyItem ()
+	{
+		view_stack.SetVisibleChild (empty_page);
+	}
+
+	private void ViewExistingItem (AddinListViewItem item)
+	{
+		view_stack.SetVisibleChild (content_box);
+
+		title_label.SetLabel (item.Name);
+		version_label.SetLabel (Translations.GetString ("Version: {0}", item.Version));
+		desc_label.SetLabel (item.Description);
+
+		string? download_size = item.DownloadSize;
+		size_label.Visible = download_size != null;
+
+		if (download_size is not null)
+			size_label.SetLabel (Translations.GetString ("Download size: {0}", download_size));
+
+		string? repo_name = item.RepositoryName;
+		repo_label.Visible = repo_name != null;
+
+		if (repo_name is not null)
+			repo_label.SetLabel (Translations.GetString ("Available in repository: {0}", repo_name));
+
+		info_button.Visible = !string.IsNullOrEmpty (item.Url);
+		install_button.Visible = !item.Installed;
+		update_button.Visible = item.Addin is not null && Addin.CompareVersions (item.Addin.Version, item.Version) > 0;
+		uninstall_button.Visible = item.CanUninstall;
+
+		enable_switch.Visible = item.Installed && item.CanDisable;
+		if (item.CanDisable)
+			enable_switch.Active = item.Enabled;
 	}
 
 	private void HandleEnableSwitched ()
