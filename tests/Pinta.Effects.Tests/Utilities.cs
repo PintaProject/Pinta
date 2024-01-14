@@ -6,19 +6,15 @@ namespace Pinta.Effects.Tests;
 
 internal static class Utilities
 {
-	private static readonly IServiceManager mock_services;
-
 	static Utilities ()
 	{
 		Gio.Module.Initialize ();
 		GdkPixbuf.Module.Initialize ();
 		Cairo.Module.Initialize ();
 		Gdk.Module.Initialize ();
-
-		mock_services = CreateMockServices ();
 	}
 
-	private static IServiceManager CreateMockServices ()
+	public static IServiceManager CreateMockServices ()
 	{
 		ServiceManager manager = new ();
 		manager.AddService<IPaletteService> (new MockPalette ());
@@ -79,7 +75,4 @@ internal static class Utilities
 
 		CompareImages (result, expected);
 	}
-
-	public static IServiceManager GetMockServices ()
-		=> mock_services;
 }

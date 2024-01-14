@@ -6,7 +6,7 @@ namespace Pinta.Effects.Tests;
 internal sealed class MockPalette : IPaletteService
 {
 	public Color PrimaryColor { get; set; } = new (0, 0, 0); // Black
-	public Color SecondaryColor { get; set; } = new (255, 255, 255); // White
+	public Color SecondaryColor { get; set; } = new (1, 1, 1); // White
 
 	public void SetColor (bool setPrimary, Color color, bool addToRecent = true)
 	{

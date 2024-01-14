@@ -34,7 +34,7 @@ public sealed class CloudsEffect : BaseEffect
 
 	public CloudsData Data => (CloudsData) EffectData!;  // NRT - Set in constructor
 
-	public IPaletteService palette { get; }
+	private readonly IPaletteService palette;
 
 	public CloudsEffect (IServiceManager services)
 	{
@@ -245,7 +245,7 @@ public sealed class CloudsEffect : BaseEffect
 		public ColorSchemeSource ColorSchemeSource { get; set; } = ColorSchemeSource.SelectedColors;
 
 		[Caption ("Color Scheme")]
-		public PredefinedGradients ColorScheme { get; set; } = PredefinedGradients.BeautifulItaly;
+		public PresetGradients ColorScheme { get; set; } = PresetGradients.BeautifulItaly;
 
 		[Caption ("Random Color Scheme Seed")]
 		public RandomSeed ColorSchemeSeed { get; set; } = new (0);

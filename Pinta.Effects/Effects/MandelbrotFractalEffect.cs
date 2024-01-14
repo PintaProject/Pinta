@@ -196,10 +196,10 @@ public sealed class MandelbrotFractalEffect : BaseEffect
 		public DegreesAngle Angle { get; set; } = new (0);
 
 		[Caption ("Color Scheme Source")]
-		public ColorSchemeSource ColorSchemeSource { get; set; } = ColorSchemeSource.PredefinedGradient;
+		public ColorSchemeSource ColorSchemeSource { get; set; } = ColorSchemeSource.PresetGradient;
 
 		[Caption ("Color Scheme")]
-		public PredefinedGradients ColorScheme { get; set; } = PredefinedGradients.Electric;
+		public PresetGradients ColorScheme { get; set; } = PresetGradients.Electric;
 
 		[Caption ("Random Color Scheme Seed")]
 		public RandomSeed ColorSchemeSeed { get; set; } = new (0);

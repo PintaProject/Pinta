@@ -8,8 +8,8 @@ namespace Pinta.Effects;
 
 public enum ColorSchemeSource
 {
-	[Caption ("Predefined Gradient")]
-	PredefinedGradient,
+	[Caption ("Preset Gradient")]
+	PresetGradient,
 
 	[Caption ("Selected Colors")]
 	SelectedColors,
@@ -18,7 +18,7 @@ public enum ColorSchemeSource
 	Random,
 }
 
-public enum PredefinedGradients
+public enum PresetGradients
 {
 	// Translators: Gradient with the colors of the flag of Italy: red, white, and green
 	[Caption ("Beautiful Italy")]
@@ -61,11 +61,11 @@ internal static class GradientHelper
 	public static ColorGradient CreateBaseGradientForEffect (
 		IPaletteService palette,
 		ColorSchemeSource colorSchemeSource,
-		PredefinedGradients colorScheme,
+		PresetGradients colorScheme,
 		RandomSeed colorSchemeSeed)
 	{
 		switch (colorSchemeSource) {
-			case ColorSchemeSource.PredefinedGradient:
+			case ColorSchemeSource.PresetGradient:
 				return CreateColorGradient (colorScheme);
 			case ColorSchemeSource.SelectedColors:
 				return ColorGradient.Create (
@@ -108,11 +108,11 @@ internal static class GradientHelper
 		}
 	}
 
-	public static ColorGradient CreateColorGradient (PredefinedGradients scheme)
+	public static ColorGradient CreateColorGradient (PresetGradients scheme)
 	{
 		return scheme switch {
 
-			PredefinedGradients.BeautifulItaly => ColorGradient.Create (
+			PresetGradients.BeautifulItaly => ColorGradient.Create (
 				ColorBgra.FromBgr (70, 146, 0),
 				ColorBgra.FromBgr (55, 43, 206),
 				DefaultStartPosition,
@@ -121,13 +121,13 @@ internal static class GradientHelper
 					[Utility.Lerp (DefaultStartPosition, DefaultEndPosition, 0.25)] = ColorBgra.White,
 				}),
 
-			PredefinedGradients.BlackAndWhite => ColorGradient.Create (
+			PresetGradients.BlackAndWhite => ColorGradient.Create (
 				ColorBgra.White,
 				ColorBgra.Black,
 				DefaultStartPosition,
 				DefaultEndPosition),
 
-			PredefinedGradients.Bonfire => ColorGradient.Create (
+			PresetGradients.Bonfire => ColorGradient.Create (
 				ColorBgra.Transparent,
 				ColorBgra.White,
 				DefaultStartPosition,
@@ -138,7 +138,7 @@ internal static class GradientHelper
 					[Utility.Lerp (DefaultStartPosition, DefaultEndPosition, 0.75)] = ColorBgra.Yellow,
 				}),
 
-			PredefinedGradients.CherryBlossom => ColorGradient.Create (
+			PresetGradients.CherryBlossom => ColorGradient.Create (
 				ColorBgra.Transparent,
 				ColorBgra.FromBgr (240, 255, 255),
 				DefaultStartPosition,
@@ -148,7 +148,7 @@ internal static class GradientHelper
 					[Utility.Lerp (DefaultStartPosition, DefaultEndPosition, 0.75)] = ColorBgra.FromBgr (193, 182, 255),
 				}),
 
-			PredefinedGradients.CottonCandy => ColorGradient.Create (
+			PresetGradients.CottonCandy => ColorGradient.Create (
 				ColorBgra.White,
 				ColorBgra.FromBgr (242, 235, 214),
 				DefaultStartPosition,
@@ -159,7 +159,7 @@ internal static class GradientHelper
 					[Utility.Lerp (DefaultStartPosition, DefaultEndPosition, 0.75)] = ColorBgra.FromBgr (230, 216, 173),
 				}),
 
-			PredefinedGradients.Electric => ColorGradient.Create (
+			PresetGradients.Electric => ColorGradient.Create (
 				ColorBgra.Transparent,
 				ColorBgra.White,
 				DefaultStartPosition,
@@ -170,7 +170,7 @@ internal static class GradientHelper
 					[Utility.Lerp (DefaultStartPosition, DefaultEndPosition, 0.75)] = ColorBgra.Cyan,
 				}),
 
-			PredefinedGradients.LimeLemon => ColorGradient.Create (
+			PresetGradients.LimeLemon => ColorGradient.Create (
 				ColorBgra.Transparent,
 				ColorBgra.White,
 				DefaultStartPosition,
@@ -181,7 +181,7 @@ internal static class GradientHelper
 					[Utility.Lerp (DefaultStartPosition, DefaultEndPosition, 0.75)] = ColorBgra.FromBgr (0, 255, 255),
 				}),
 
-			PredefinedGradients.PinaColada => ColorGradient.Create (
+			PresetGradients.PinaColada => ColorGradient.Create (
 				ColorBgra.FromBgr (0, 128, 128),
 				ColorBgra.FromBgr (196, 245, 253),
 				DefaultStartPosition,
@@ -190,7 +190,7 @@ internal static class GradientHelper
 					[Utility.Lerp (DefaultStartPosition, DefaultEndPosition, 0.25)] = ColorBgra.Yellow,
 				}),
 
-			_ => CreateColorGradient (PredefinedGradients.Electric),
+			_ => CreateColorGradient (PresetGradients.Electric),
 		};
 	}
 }
