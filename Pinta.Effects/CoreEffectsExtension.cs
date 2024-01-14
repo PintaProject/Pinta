@@ -83,6 +83,7 @@ internal sealed class CoreEffectsExtension : IExtension
 		PintaCore.Effects.RegisterEffect (new TileEffect ());
 		PintaCore.Effects.RegisterEffect (new TwistEffect ());
 		PintaCore.Effects.RegisterEffect (new UnfocusEffect ());
+		PintaCore.Effects.RegisterEffect (new VoronoiDiagramEffect ());
 		PintaCore.Effects.RegisterEffect (new ZoomBlurEffect ());
 	}
 
@@ -128,6 +129,7 @@ internal sealed class CoreEffectsExtension : IExtension
 		PintaCore.Effects.UnregisterInstanceOfEffect (typeof (TileEffect));
 		PintaCore.Effects.UnregisterInstanceOfEffect (typeof (TwistEffect));
 		PintaCore.Effects.UnregisterInstanceOfEffect (typeof (UnfocusEffect));
+		PintaCore.Effects.UnregisterInstanceOfEffect (typeof (VoronoiDiagramEffect));
 		PintaCore.Effects.UnregisterInstanceOfEffect (typeof (ZoomBlurEffect));
 	}
 	#endregion
