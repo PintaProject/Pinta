@@ -165,12 +165,14 @@ Pinta.Effects/Dialogs/Effects.PosterizeDialog.cs
 Pinta.Effects/Effects/AddNoiseEffect.cs
 Pinta.Effects/Effects/BulgeEffect.cs
 Pinta.Effects/Effects/CloudsEffect.cs
+Pinta.Effects/Effects/ColorGradient.cs
 Pinta.Effects/Effects/EdgeDetectEffect.cs
 Pinta.Effects/Effects/EmbossEffect.cs
 Pinta.Effects/Effects/FragmentEffect.cs
 Pinta.Effects/Effects/FrostedGlassEffect.cs
 Pinta.Effects/Effects/GaussianBlurEffect.cs
 Pinta.Effects/Effects/GlowEffect.cs
+Pinta.Effects/Effects/GradientHelper.cs
 Pinta.Effects/Effects/InkSketchEffect.cs
 Pinta.Effects/Effects/JuliaFractalEffect.cs
 Pinta.Effects/Effects/LocalHistogramEffect.cs
