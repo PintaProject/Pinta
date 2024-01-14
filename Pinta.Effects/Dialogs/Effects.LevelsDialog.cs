@@ -44,7 +44,29 @@ namespace Pinta.Effects;
 
 public partial class LevelsDialog : Gtk.Dialog
 {
-	private readonly bool[] mask;
+	private record struct ChannelsMask (bool R, bool G, bool B)
+	{
+		public bool this[int index] {
+
+			set {
+				switch (index) {
+					case 0: R = value; break;
+					case 1: G = value; break;
+					case 2: B = value; break;
+					default: throw new ArgumentOutOfRangeException (nameof (index));
+				}
+			}
+
+			readonly get => index switch {
+				0 => R,
+				1 => G,
+				2 => B,
+				_ => throw new ArgumentOutOfRangeException (nameof (index))
+			};
+		}
+	}
+
+	private ChannelsMask mask = new (R: true, G: true, B: true);
 
 	private readonly CheckButton check_red;
 	private readonly CheckButton check_green;
@@ -174,7 +196,6 @@ public partial class LevelsDialog : Gtk.Dialog
 		content_area.Append (hboxLayout);
 
 		EffectData = effectData;
-		mask = new bool[] { true, true, true };
 
 		UpdateInputHistogram ();
 		Reset ();
@@ -311,7 +332,7 @@ public partial class LevelsDialog : Gtk.Dialog
 
 	private ColorBgra UpdateByMask (ColorBgra before, byte val)
 	{
-		if (!(mask[0] || mask[1] || mask[2]))
+		if (!(mask.R || mask.G || mask.B))
 			return before;
 
 		ColorBgra after = before;
@@ -366,7 +387,7 @@ public partial class LevelsDialog : Gtk.Dialog
 
 	private void UpdateGammaByMask (float val)
 	{
-		if (!(mask[0] || mask[1] || mask[2]))
+		if (!(mask.R || mask.G || mask.B))
 			return;
 
 		float average;
@@ -490,9 +511,9 @@ public partial class LevelsDialog : Gtk.Dialog
 	{
 		ColorBgra max = ColorBgra.Black;
 
-		max.Bgra |= mask[0] ? (uint) 0xFF0000 : 0;
-		max.Bgra |= mask[1] ? (uint) 0xFF00 : 0;
-		max.Bgra |= mask[2] ? (uint) 0xFF : 0;
+		max.Bgra |= mask.R ? (uint) 0xFF0000 : 0;
+		max.Bgra |= mask.G ? (uint) 0xFF00 : 0;
+		max.Bgra |= mask.B ? (uint) 0xFF : 0;
 
 		Color maxcolor = max.ToCairoColor ();
 		gradient_input.MaxColor = maxcolor;
@@ -506,19 +527,19 @@ public partial class LevelsDialog : Gtk.Dialog
 
 	private void HandleCheckRedToggled (object? sender, EventArgs e)
 	{
-		mask[0] = check_red.Active;
+		mask.R = check_red.Active;
 		MaskChanged ();
 	}
 
 	private void HandleCheckGreenToggled (object? sender, EventArgs e)
 	{
-		mask[1] = check_green.Active;
+		mask.G = check_green.Active;
 		MaskChanged ();
 	}
 
 	private void HandleCheckBlueToggled (object? sender, EventArgs e)
 	{
-		mask[2] = check_blue.Active;
+		mask.B = check_blue.Active;
 		MaskChanged ();
 	}
 
