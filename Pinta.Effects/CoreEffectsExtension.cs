@@ -60,6 +60,7 @@ internal sealed class CoreEffectsExtension : IExtension
 		PintaCore.Effects.RegisterEffect (new CloudsEffect (services));
 		PintaCore.Effects.RegisterEffect (new EdgeDetectEffect ());
 		PintaCore.Effects.RegisterEffect (new EmbossEffect ());
+		PintaCore.Effects.RegisterEffect (new DitheringEffect ());
 		PintaCore.Effects.RegisterEffect (new FragmentEffect ());
 		PintaCore.Effects.RegisterEffect (new FrostedGlassEffect ());
 		PintaCore.Effects.RegisterEffect (new GaussianBlurEffect ());
@@ -105,6 +106,7 @@ internal sealed class CoreEffectsExtension : IExtension
 		PintaCore.Effects.UnregisterInstanceOfEffect (typeof (CloudsEffect));
 		PintaCore.Effects.UnregisterInstanceOfEffect (typeof (EdgeDetectEffect));
 		PintaCore.Effects.UnregisterInstanceOfEffect (typeof (EmbossEffect));
+		PintaCore.Effects.UnregisterInstanceOfEffect (typeof (DitheringEffect));
 		PintaCore.Effects.UnregisterInstanceOfEffect (typeof (FragmentEffect));
 		PintaCore.Effects.UnregisterInstanceOfEffect (typeof (FrostedGlassEffect));
 		PintaCore.Effects.UnregisterInstanceOfEffect (typeof (GaussianBlurEffect));
