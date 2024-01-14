@@ -88,18 +88,28 @@ public sealed class VoronoiDiagramEffect : BaseEffect
 	}
 
 	private static IEnumerable<ColorBgra> SortColors (IEnumerable<ColorBgra> baseColors, ColorSorting colorSorting)
+
 		=> colorSorting switch {
 
 			ColorSorting.Random => baseColors,
 
-			ColorSorting.HorizontalBGR or ColorSorting.VerticalBGR => baseColors.OrderBy (p => p.B).ThenBy (p => p.G).ThenBy (p => p.R),
-			ColorSorting.HorizontalBRG or ColorSorting.VerticalBRG => baseColors.OrderBy (p => p.B).ThenBy (p => p.R).ThenBy (p => p.G),
+			ColorSorting.HorizontalBGR
+			or ColorSorting.VerticalBGR => baseColors.OrderBy (p => p.B).ThenBy (p => p.G).ThenBy (p => p.R),
 
-			ColorSorting.HorizontalGBR or ColorSorting.VerticalGBR => baseColors.OrderBy (p => p.G).ThenBy (p => p.B).ThenBy (p => p.R),
-			ColorSorting.HorizontalGRB or ColorSorting.VerticalGRB => baseColors.OrderBy (p => p.G).ThenBy (p => p.R).ThenBy (p => p.B),
+			ColorSorting.HorizontalBRG
+			or ColorSorting.VerticalBRG => baseColors.OrderBy (p => p.B).ThenBy (p => p.R).ThenBy (p => p.G),
 
-			ColorSorting.HorizontalRBG or ColorSorting.VerticalRBG => baseColors.OrderBy (p => p.R).ThenBy (p => p.B).ThenBy (p => p.G),
-			ColorSorting.HorizontalRGB or ColorSorting.VerticalRGB => baseColors.OrderBy (p => p.R).ThenBy (p => p.G).ThenBy (p => p.B),
+			ColorSorting.HorizontalGBR
+			or ColorSorting.VerticalGBR => baseColors.OrderBy (p => p.G).ThenBy (p => p.B).ThenBy (p => p.R),
+
+			ColorSorting.HorizontalGRB
+			or ColorSorting.VerticalGRB => baseColors.OrderBy (p => p.G).ThenBy (p => p.R).ThenBy (p => p.B),
+
+			ColorSorting.HorizontalRBG
+			or ColorSorting.VerticalRBG => baseColors.OrderBy (p => p.R).ThenBy (p => p.B).ThenBy (p => p.G),
+
+			ColorSorting.HorizontalRGB
+			or ColorSorting.VerticalRGB => baseColors.OrderBy (p => p.R).ThenBy (p => p.G).ThenBy (p => p.B),
 
 			_ => throw new InvalidEnumArgumentException (
 				nameof (baseColors),
@@ -108,8 +118,8 @@ public sealed class VoronoiDiagramEffect : BaseEffect
 		};
 
 	private static IEnumerable<PointI> SortPoints (IEnumerable<PointI> basePoints, ColorSorting colorSorting)
-	{
-		return colorSorting switch {
+
+		=> colorSorting switch {
 
 			ColorSorting.Random => basePoints,
 
@@ -118,21 +128,20 @@ public sealed class VoronoiDiagramEffect : BaseEffect
 			or ColorSorting.HorizontalGBR
 			or ColorSorting.HorizontalGRB
 			or ColorSorting.HorizontalRBG
-			or ColorSorting.HorizontalRGB => basePoints.OrderBy (p => p.X),
+			or ColorSorting.HorizontalRGB => basePoints.OrderBy (p => p.X).ThenBy (p => p.Y),
 
 			ColorSorting.VerticalBGR
 			or ColorSorting.VerticalBRG
 			or ColorSorting.VerticalGBR
 			or ColorSorting.VerticalGRB
 			or ColorSorting.VerticalRBG
-			or ColorSorting.VerticalRGB => basePoints.OrderBy (p => p.Y),
+			or ColorSorting.VerticalRGB => basePoints.OrderBy (p => p.Y).ThenBy (p => p.X),
 
 			_ => throw new InvalidEnumArgumentException (
 				nameof (colorSorting),
 				(int) colorSorting,
 				typeof (ColorSorting)),
 		};
-	}
 
 	private static Func<PointI, PointI, double> GetDistanceCalculator (DistanceCalculationMethod distanceCalculationMethod)
 	{
