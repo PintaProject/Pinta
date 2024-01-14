@@ -29,9 +29,7 @@ public sealed class VoronoiDiagramEffect : BaseEffect
 	}
 
 	public override void LaunchConfiguration ()
-	{
-		EffectHelper.LaunchSimpleEffectDialog (this);
-	}
+		=> EffectHelper.LaunchSimpleEffectDialog (this);
 
 	private sealed record VoronoiSettings (
 		int w,
@@ -90,59 +88,50 @@ public sealed class VoronoiDiagramEffect : BaseEffect
 	}
 
 	private static IEnumerable<ColorBgra> SortColors (IEnumerable<ColorBgra> baseColors, ColorSorting colorSorting)
-	{
-		switch (colorSorting) {
-			case ColorSorting.Random:
-				return baseColors;
-			case ColorSorting.HorizontalBGR:
-			case ColorSorting.VerticalBGR:
-				return baseColors.OrderBy (p => p.B).ThenBy (p => p.G).ThenBy (p => p.R);
-			case ColorSorting.HorizontalBRG:
-			case ColorSorting.VerticalBRG:
-				return baseColors.OrderBy (p => p.B).ThenBy (p => p.R).ThenBy (p => p.G);
-			case ColorSorting.HorizontalGBR:
-			case ColorSorting.VerticalGBR:
-				return baseColors.OrderBy (p => p.G).ThenBy (p => p.B).ThenBy (p => p.R);
-			case ColorSorting.HorizontalGRB:
-			case ColorSorting.VerticalGRB:
-				return baseColors.OrderBy (p => p.G).ThenBy (p => p.R).ThenBy (p => p.B);
-			case ColorSorting.HorizontalRBG:
-			case ColorSorting.VerticalRBG:
-				return baseColors.OrderBy (p => p.R).ThenBy (p => p.B).ThenBy (p => p.G);
-			case ColorSorting.HorizontalRGB:
-			case ColorSorting.VerticalRGB:
-				return baseColors.OrderBy (p => p.R).ThenBy (p => p.G).ThenBy (p => p.B);
-			default:
-				throw new InvalidEnumArgumentException (nameof (baseColors), (int) colorSorting, typeof (ColorSorting));
-		}
-	}
+		=> colorSorting switch {
+
+			ColorSorting.Random => baseColors,
+
+			ColorSorting.HorizontalBGR or ColorSorting.VerticalBGR => baseColors.OrderBy (p => p.B).ThenBy (p => p.G).ThenBy (p => p.R),
+			ColorSorting.HorizontalBRG or ColorSorting.VerticalBRG => baseColors.OrderBy (p => p.B).ThenBy (p => p.R).ThenBy (p => p.G),
+
+			ColorSorting.HorizontalGBR or ColorSorting.VerticalGBR => baseColors.OrderBy (p => p.G).ThenBy (p => p.B).ThenBy (p => p.R),
+			ColorSorting.HorizontalGRB or ColorSorting.VerticalGRB => baseColors.OrderBy (p => p.G).ThenBy (p => p.R).ThenBy (p => p.B),
+
+			ColorSorting.HorizontalRBG or ColorSorting.VerticalRBG => baseColors.OrderBy (p => p.R).ThenBy (p => p.B).ThenBy (p => p.G),
+			ColorSorting.HorizontalRGB or ColorSorting.VerticalRGB => baseColors.OrderBy (p => p.R).ThenBy (p => p.G).ThenBy (p => p.B),
+
+			_ => throw new InvalidEnumArgumentException (
+				nameof (baseColors),
+				(int) colorSorting,
+				typeof (ColorSorting)),
+		};
 
 	private static IEnumerable<PointI> SortPoints (IEnumerable<PointI> basePoints, ColorSorting colorSorting)
 	{
-		switch (colorSorting) {
+		return colorSorting switch {
 
-			case ColorSorting.Random:
-				return basePoints;
+			ColorSorting.Random => basePoints,
 
-			case ColorSorting.HorizontalBGR:
-			case ColorSorting.HorizontalBRG:
-			case ColorSorting.HorizontalGBR:
-			case ColorSorting.HorizontalGRB:
-			case ColorSorting.HorizontalRBG:
-			case ColorSorting.HorizontalRGB:
-				return basePoints.OrderBy (p => p.X);
+			ColorSorting.HorizontalBGR
+			or ColorSorting.HorizontalBRG
+			or ColorSorting.HorizontalGBR
+			or ColorSorting.HorizontalGRB
+			or ColorSorting.HorizontalRBG
+			or ColorSorting.HorizontalRGB => basePoints.OrderBy (p => p.X),
 
-			case ColorSorting.VerticalBGR:
-			case ColorSorting.VerticalBRG:
-			case ColorSorting.VerticalGBR:
-			case ColorSorting.VerticalGRB:
-			case ColorSorting.VerticalRBG:
-			case ColorSorting.VerticalRGB:
-				return basePoints.OrderBy (p => p.Y);
+			ColorSorting.VerticalBGR
+			or ColorSorting.VerticalBRG
+			or ColorSorting.VerticalGBR
+			or ColorSorting.VerticalGRB
+			or ColorSorting.VerticalRBG
+			or ColorSorting.VerticalRGB => basePoints.OrderBy (p => p.Y),
 
-			default:
-				throw new InvalidEnumArgumentException (nameof (colorSorting), (int) colorSorting, typeof (ColorSorting));
-		}
+			_ => throw new InvalidEnumArgumentException (
+				nameof (colorSorting),
+				(int) colorSorting,
+				typeof (ColorSorting)),
+		};
 	}
 
 	private static Func<PointI, PointI, double> GetDistanceCalculator (DistanceCalculationMethod distanceCalculationMethod)
@@ -151,7 +140,10 @@ public sealed class VoronoiDiagramEffect : BaseEffect
 			DistanceCalculationMethod.Euclidean => Euclidean,
 			DistanceCalculationMethod.Manhattan => Manhattan,
 			DistanceCalculationMethod.Chebyshev => Chebyshev,
-			_ => throw new InvalidEnumArgumentException (nameof (distanceCalculationMethod), (int) distanceCalculationMethod, typeof (DistanceCalculationMethod)),
+			_ => throw new InvalidEnumArgumentException (
+				nameof (distanceCalculationMethod),
+				(int) distanceCalculationMethod,
+				typeof (DistanceCalculationMethod)),
 		};
 
 		static double Euclidean (PointI targetPoint, PointI pixelLocation)
@@ -243,55 +235,41 @@ public sealed class VoronoiDiagramEffect : BaseEffect
 		[Caption ("Random Color Sorting")] Random,
 
 
-
 		// Translators: Horizontal color sorting with B, then G as the leading terms
-		[Caption ("Horizontal (B, G, R)")]
-		HorizontalBGR,
+		[Caption ("Horizontal (B, G, R)")] HorizontalBGR,
 
 		// Translators: Horizontal color sorting with B, then R as the leading terms
-		[Caption ("Horizontal (B, R, G)")]
-		HorizontalBRG,
+		[Caption ("Horizontal (B, R, G)")] HorizontalBRG,
 
 		// Translators: Horizontal color sorting with G, then B as the leading terms
-		[Caption ("Horizontal (G, B, R)")]
-		HorizontalGBR,
+		[Caption ("Horizontal (G, B, R)")] HorizontalGBR,
 
 		// Translators: Horizontal color sorting with G, then R as the leading terms
-		[Caption ("Horizontal (G, R, B)")]
-		HorizontalGRB,
+		[Caption ("Horizontal (G, R, B)")] HorizontalGRB,
 
 		// Translators: Horizontal color sorting with R, then B as the leading terms
-		[Caption ("Horizontal (R, B, G)")]
-		HorizontalRBG,
+		[Caption ("Horizontal (R, B, G)")] HorizontalRBG,
 
 		// Translators: Horizontal color sorting with R, then G as the leading terms
-		[Caption ("Horizontal (R, G, B)")]
-		HorizontalRGB,
-
+		[Caption ("Horizontal (R, G, B)")] HorizontalRGB,
 
 
 		// Translators: Vertical color sorting with B, then G as the leading terms
-		[Caption ("Vertical (B, G, R)")]
-		VerticalBGR,
+		[Caption ("Vertical (B, G, R)")] VerticalBGR,
 
 		// Translators: Vertical color sorting with B, then R as the leading terms
-		[Caption ("Vertical (B, R, G)")]
-		VerticalBRG,
+		[Caption ("Vertical (B, R, G)")] VerticalBRG,
 
 		// Translators: Vertical color sorting with G, then B as the leading terms
-		[Caption ("Vertical (G, B, R)")]
-		VerticalGBR,
+		[Caption ("Vertical (G, B, R)")] VerticalGBR,
 
 		// Translators: Vertical color sorting with G, then R as the leading terms
-		[Caption ("Vertical (G, R, B)")]
-		VerticalGRB,
+		[Caption ("Vertical (G, R, B)")] VerticalGRB,
 
 		// Translators: Vertical color sorting with R, then B as the leading terms
-		[Caption ("Vertical (R, B, G)")]
-		VerticalRBG,
+		[Caption ("Vertical (R, B, G)")] VerticalRBG,
 
 		// Translators: Vertical color sorting with R, then G as the leading terms
-		[Caption ("Vertical (R, G, B)")]
-		VerticalRGB,
+		[Caption ("Vertical (R, G, B)")] VerticalRGB,
 	}
 }
