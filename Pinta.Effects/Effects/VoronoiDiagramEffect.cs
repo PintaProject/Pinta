@@ -88,12 +88,12 @@ public sealed class VoronoiDiagramEffect : BaseEffect
 		}
 	}
 
-	private static HashSet<PointI> CreatePoints (RectangleI roi, int pointCount, RandomSeed pointLocationsSeed)
+	private static ImmutableHashSet<PointI> CreatePoints (RectangleI roi, int pointCount, RandomSeed pointLocationsSeed)
 	{
 		int effectivePointCount = Math.Min (pointCount, roi.Width * roi.Height);
 
 		Random randomPositioner = new (pointLocationsSeed.Value);
-		HashSet<PointI> result = new (); // Ensures points' uniqueness
+		var result = ImmutableHashSet.CreateBuilder<PointI> (); // Ensures points' uniqueness
 
 		while (result.Count < effectivePointCount) {
 
@@ -105,18 +105,18 @@ public sealed class VoronoiDiagramEffect : BaseEffect
 			result.Add (point);
 		}
 
-		return result;
+		return result.ToImmutable ();
 	}
 
-	private static HashSet<ColorBgra> CreateColors (int colorCount, RandomSeed colorsSeed)
+	private static ImmutableHashSet<ColorBgra> CreateColors (int colorCount, RandomSeed colorsSeed)
 	{
 		Random randomColorizer = new (colorsSeed.Value);
-		HashSet<ColorBgra> result = new (); // Ensures points' uniqueness
+		var result = ImmutableHashSet.CreateBuilder<ColorBgra> (); // Ensures points' uniqueness
 
 		while (result.Count < colorCount)
 			result.Add (randomColorizer.RandomColorBgra ());
 
-		return result;
+		return result.ToImmutable ();
 	}
 
 	public sealed class VoronoiDiagramData : EffectData
