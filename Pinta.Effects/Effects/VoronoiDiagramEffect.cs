@@ -36,6 +36,7 @@ public sealed class VoronoiDiagramEffect : BaseEffect
 	private sealed record VoronoiSettings (
 		int w,
 		int h,
+		bool showPoints,
 		ImmutableArray<PointI> points,
 		ImmutableArray<ColorBgra> colors,
 		Func<PointI, PointI, double> distanceCalculator);
@@ -54,6 +55,7 @@ public sealed class VoronoiDiagramEffect : BaseEffect
 		return new (
 			w: dst.Width,
 			h: dst.Height,
+			showPoints: Data.ShowPoints,
 			points: points,
 			colors: reversedSortingColors.ToImmutableArray (),
 			distanceCalculator: GetDistanceCalculator (Data.DistanceCalculationMethod)
@@ -79,7 +81,10 @@ public sealed class VoronoiDiagramEffect : BaseEffect
 					shortestDistance = distance;
 					closestIndex = i;
 				}
-				dst_row[x] = settings.colors[closestIndex];
+				dst_row[x] =
+					settings.showPoints && shortestDistance == 0
+					? ColorBgra.Black
+					: settings.colors[closestIndex];
 			}
 		}
 	}
@@ -207,6 +212,10 @@ public sealed class VoronoiDiagramEffect : BaseEffect
 
 		[Caption ("Point Count"), MinimumValue (1), MaximumValue (1024)]
 		public int PointCount { get; set; } = 100;
+
+		// Translators: The user can choose whether or not to render the points used in the calculation of a Voronoi diagram
+		[Caption ("Show Points")]
+		public bool ShowPoints { get; set; } = false;
 
 		[Caption ("Color Sorting")]
 		public ColorSorting ColorSorting { get; set; } = ColorSorting.Random;
