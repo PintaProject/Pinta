@@ -48,10 +48,10 @@ internal sealed class EffectsTest
 	}
 
 	[Test]
-	[Ignore ("Produces non-deterministic results because the random seed is not fixed, and depends on the global palette")]
-	public void Clouds ()
+	[Ignore ("Produces non-deterministic results because the random seed is not fixed")]
+	public void Clouds1 ()
 	{
-		// TODO
+		// TODO:
 	}
 
 	[Test]
@@ -161,14 +161,14 @@ internal sealed class EffectsTest
 	[Test]
 	public void JuliaFractal1 ()
 	{
-		var effect = new JuliaFractalEffect ();
+		var effect = new JuliaFractalEffect (Utilities.CreateMockServices ());
 		Utilities.TestEffect (effect, "juliafractal1.png");
 	}
 
 	[Test]
 	public void JuliaFractal2 ()
 	{
-		var effect = new JuliaFractalEffect ();
+		var effect = new JuliaFractalEffect (Utilities.CreateMockServices ());
 		effect.Data.Factor = 6;
 		effect.Data.Quality = 4;
 		effect.Data.Zoom = 25;
@@ -180,14 +180,14 @@ internal sealed class EffectsTest
 	[Ignore ("Produces different results on some platforms for unknown reasons")]
 	public void MandelbrotFractal1 ()
 	{
-		var effect = new MandelbrotFractalEffect ();
+		var effect = new MandelbrotFractalEffect (Utilities.CreateMockServices ());
 		Utilities.TestEffect (effect, "mandelbrotfractal1.png");
 	}
 
 	[Test]
 	public void MandelbrotFractal2 ()
 	{
-		var effect = new MandelbrotFractalEffect ();
+		var effect = new MandelbrotFractalEffect (Utilities.CreateMockServices ());
 		effect.Data.Factor = 6;
 		effect.Data.Quality = 4;
 		effect.Data.Zoom = 25;

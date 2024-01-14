@@ -37,7 +37,7 @@ public class EffectsBenchmarks
 	//[Benchmark] // Requires initialized PintaCore
 	public void CloudsEffect ()
 	{
-		var effect = new CloudsEffect ();
+		var effect = new CloudsEffect (Utilities.CreateMockServices ());
 		effect.Render (surface, dest_surface, bounds);
 	}
 
@@ -93,14 +93,14 @@ public class EffectsBenchmarks
 	[Benchmark]
 	public void JuliaFractalEffect ()
 	{
-		var effect = new JuliaFractalEffect ();
+		var effect = new JuliaFractalEffect (Utilities.CreateMockServices ());
 		effect.Render (surface, dest_surface, bounds);
 	}
 
 	[Benchmark] // Very slow
 	public void MandelbrotFractalEffect ()
 	{
-		var effect = new MandelbrotFractalEffect ();
+		var effect = new MandelbrotFractalEffect (Utilities.CreateMockServices ());
 		effect.Render (surface, dest_surface, bounds);
 	}
 
