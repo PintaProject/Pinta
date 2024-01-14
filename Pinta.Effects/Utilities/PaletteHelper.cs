@@ -61,46 +61,11 @@ internal static class PaletteHelper
 			old_ms_paint = new (() => EnumerateOldMsPaintColors ().ToImmutableArray ());
 			old_windows_16 = new (() => EnumerateOldWindows16Colors ().ToImmutableArray ());
 			old_windows_20 = new (() => EnumerateOldWindows20Colors ().ToImmutableArray ());
-			rgb_3_bit = new (() => EnumerateRgb3Bit ().ToImmutableArray ());
-			rgb_666 = new (() => EnumerateRgb666 ().ToImmutableArray ());
-			rgb_6_bit = new (() => EnumerateRgb6Bit ().ToImmutableArray ());
-			rgb_12_bit = new (() => EnumerateRgb12Bit ().ToImmutableArray ());
+			rgb_3_bit = new (() => RgbColorCube (levels: 2, factor: 255).ToImmutableArray ()); // https://en.wikipedia.org/wiki/List_of_monochrome_and_RGB_color_formats#3-bit_RGB
+			rgb_666 = new (() => RgbColorCube (levels: 6, factor: 51).ToImmutableArray ()); // https://en.wikipedia.org/wiki/List_of_software_palettes#6_level_RGB
+			rgb_6_bit = new (() => RgbColorCube (levels: 4, factor: 85).ToImmutableArray ()); // https://en.wikipedia.org/wiki/List_of_monochrome_and_RGB_color_formats#6-bit_RGB
+			rgb_12_bit = new (() => RgbColorCube (levels: 16, factor: 17).ToImmutableArray ()); // https://en.wikipedia.org/wiki/List_of_monochrome_and_RGB_color_formats#12-bit_RGB
 		}
-
-		private static IEnumerable<ColorBgra> EnumerateRgb666 ()
-		{
-			// https://en.wikipedia.org/wiki/List_of_software_palettes#6_level_RGB
-			const byte levels = 6;
-			const byte factor = 51;
-			return RgbColorCube (GenerateCubeSequence (levels, factor));
-		}
-
-		private static IEnumerable<ColorBgra> EnumerateRgb12Bit ()
-		{
-			// https://en.wikipedia.org/wiki/List_of_monochrome_and_RGB_color_formats#12-bit_RGB
-			const byte levels = 16;
-			const byte factor = 17;
-			return RgbColorCube (GenerateCubeSequence (levels, factor));
-		}
-
-		private static IEnumerable<ColorBgra> EnumerateRgb6Bit ()
-		{
-			// https://en.wikipedia.org/wiki/List_of_monochrome_and_RGB_color_formats#6-bit_RGB
-			const byte levels = 4;
-			const byte factor = 85;
-			return RgbColorCube (GenerateCubeSequence (levels, factor));
-		}
-
-		private static IEnumerable<ColorBgra> EnumerateRgb3Bit ()
-		{
-			// https://en.wikipedia.org/wiki/List_of_monochrome_and_RGB_color_formats#3-bit_RGB
-			const byte levels = 2;
-			const byte factor = 255;
-			return RgbColorCube (GenerateCubeSequence (levels, factor));
-		}
-
-		private static IEnumerable<byte> GenerateCubeSequence (byte levels, byte factor)
-			=> Enumerable.Range (0, levels).Select (i => Utility.ClampToByte (i * factor));
 
 		private static IEnumerable<ColorBgra> EnumerateOldWindows16Colors ()
 		{
@@ -185,5 +150,8 @@ internal static class PaletteHelper
 
 		private static IEnumerable<ColorBgra> RgbColorCube (IEnumerable<byte> valueSequence)
 			=> RgbColorCube (valueSequence.ToImmutableArray ());
+
+		private static IEnumerable<ColorBgra> RgbColorCube (byte levels, byte factor)
+			=> RgbColorCube (Enumerable.Range (0, levels).Select (i => Utility.ClampToByte (i * factor)));
 	}
 }
