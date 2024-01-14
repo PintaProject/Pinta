@@ -467,8 +467,8 @@ public static partial class GtkExtensions
 
 	public sealed class SelectionChangedSignalArgs : SignalArgs
 	{
-		public uint Position => Args[1].Extract<uint> ();
-		public uint NItems => Args[2].Extract<uint> ();
+		public uint Position => Args[1].GetUint ();
+		public uint NItems => Args[2].GetUint ();
 
 	}
 
