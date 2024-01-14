@@ -72,6 +72,7 @@ public sealed class VoronoiDiagramEffect : BaseEffect
 		return distanceCalculationMethod switch {
 			DistanceCalculationMethod.Euclidean => Euclidean,
 			DistanceCalculationMethod.Manhattan => Manhattan,
+			DistanceCalculationMethod.Chebyshev => Chebyshev,
 			_ => throw new InvalidEnumArgumentException (nameof (distanceCalculationMethod), (int) distanceCalculationMethod, typeof (DistanceCalculationMethod)),
 		};
 
@@ -85,6 +86,12 @@ public sealed class VoronoiDiagramEffect : BaseEffect
 		{
 			PointI difference = pixelLocation - targetPoint;
 			return Math.Abs (difference.X) + Math.Abs (difference.Y);
+		}
+
+		static double Chebyshev (PointI targetPoint, PointI pixelLocation)
+		{
+			PointI difference = pixelLocation - targetPoint;
+			return Math.Max (Math.Abs (difference.X), Math.Abs (difference.Y));
 		}
 	}
 
@@ -138,5 +145,6 @@ public sealed class VoronoiDiagramEffect : BaseEffect
 	{
 		Euclidean,
 		Manhattan,
+		Chebyshev,
 	}
 }
