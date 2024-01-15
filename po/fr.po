@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: pinta\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2024-01-14 01:15+0000\n"
-"PO-Revision-Date: 2023-12-26 04:12+0000\n"
+"PO-Revision-Date: 2024-01-16 07:06+0000\n"
 "Last-Translator: philippe dalet <philippe.dalet@gmail.com>\n"
 "Language-Team: French <https://hosted.weblate.org/projects/pinta/pinta/fr/>\n"
 "Language: fr\n"
@@ -175,7 +175,7 @@ msgstr "Basé sur le travail de Paint.NET :"
 #. Translators: Gradient with the colors of the flag of Italy: red, white, and green
 #: ../Pinta.Effects/Effects/GradientHelper.cs:10
 msgid "Beautiful Italy"
-msgstr ""
+msgstr "Belle Italie"
 
 #: ../Pinta.Core/Actions/ViewActions.cs:69
 msgid "Best Fit"
@@ -183,7 +183,7 @@ msgstr "Meilleur ajustement"
 
 #: ../Pinta.Core/Enumerations/ResamplingMode.cs:22
 msgid "Bilinear"
-msgstr ""
+msgstr "Bilinéaire"
 
 #. Translators: Simple gradient that goes from black to white
 #: ../Pinta.Effects/Adjustments/BlackAndWhiteEffect.cs:24
@@ -220,7 +220,7 @@ msgstr "Gras"
 #. Translators: Gradient that starts out white, like the core of a raging fire, and then goes through yellow, red, and black (like visible black smoke), and finally transparent, blending with the background
 #: ../Pinta.Effects/Effects/GradientHelper.cs:18
 msgid "Bonfire"
-msgstr ""
+msgstr "Feu"
 
 #: ../Pinta.Effects/Adjustments/BrightnessContrastEffect.cs:142
 #: ../Pinta.Effects/Effects/GlowEffect.cs:77
@@ -295,7 +295,7 @@ msgstr "Type de forme changé"
 #. Translators: Gradient that starts out off-white, like cherry blossoms against sunlight, then goes through pink, then light blue (like the sky) and finally transparent, blending with the background
 #: ../Pinta.Effects/Effects/GradientHelper.cs:22
 msgid "Cherry Blossom"
-msgstr ""
+msgstr "Fleur de cerisier"
 
 #: ../Pinta.Effects/Dialogs/Effects.LevelsDialog.cs:531
 msgid "Choose Color"
@@ -326,18 +326,25 @@ msgid ""
 "Click and drag to draw a rectangular selection.\n"
 "Hold Shift to constrain to a square."
 msgstr ""
+"Cliquez et faites glisser pour dessiner une sélection rectangulaire.\n"
+"Maintenez Maj pour contraindre à un carré."
 
 #: ../Pinta.Tools/Tools/EllipseSelectTool.cs:37
 msgid ""
 "Click and drag to draw an elliptical selection.\n"
 "Hold Shift to constrain to a circle."
 msgstr ""
+"Cliquez et faites glisser pour dessiner une sélection elliptique.\n"
+"Maintenez Maj pour contraindre à un cercle."
 
 #: ../Pinta.Tools/Tools/GradientTool.cs:51
 msgid ""
 "Click and drag to draw gradient from primary to secondary color.\n"
 "Right click to reverse."
 msgstr ""
+"Cliquez et faites glisser pour dessiner un dégradé de la couleur primaire à "
+"la couleur secondaire.\n"
+"Faites un clic droit pour inverser."
 
 #: ../Pinta.Tools/Tools/LassoSelectTool.cs:55
 msgid "Click and drag to draw the outline for a selection area."
@@ -435,7 +442,7 @@ msgstr "Saturation des couleurs"
 #: ../Pinta.Effects/Effects/JuliaFractalEffect.cs:165
 #: ../Pinta.Effects/Effects/MandelbrotFractalEffect.cs:188
 msgid "Color Scheme"
-msgstr ""
+msgstr "Schéma de couleur"
 
 #: ../Pinta.Effects/Effects/InkSketchEffect.cs:156
 msgid "Coloring"
@@ -473,7 +480,7 @@ msgstr "Droits d’auteur"
 #. Translators: Gradient with the colors of blue and pink cotton candy
 #: ../Pinta.Effects/Effects/GradientHelper.cs:26
 msgid "Cotton Candy"
-msgstr ""
+msgstr "Barbe à papa"
 
 #. Translators: {0} is the name of a layer, and {1} is the path to a .ora file.
 #: ../Pinta.Core/ImageFormats/OraFormat.cs:122
@@ -517,7 +524,7 @@ msgstr "Couper"
 #. Translators: This refers to using a dark variant of the color scheme.
 #: ../Pinta.Core/Actions/ViewActions.cs:189
 msgid "Dark"
-msgstr ""
+msgstr "Sombre"
 
 #: ../Pinta.Core/Effects/UserBlendOps.cs:38
 msgid "Darken"
@@ -530,7 +537,7 @@ msgstr "Tableau de bord"
 #. Translators: This refers to using the system's default color scheme.
 #: ../Pinta.Core/Actions/ViewActions.cs:185
 msgid "Default"
-msgstr ""
+msgstr "Défaut"
 
 #: ../Pinta.Core/Actions/LayerActions.cs:49
 #: ../Pinta.Core/Actions/LayerActions.cs:312
@@ -578,7 +585,7 @@ msgstr "Ne pas changer d'outil"
 #: ../Pinta.Gui.Addins/AddinInfoView.cs:134
 #, csharp-format
 msgid "Download size: {0}"
-msgstr ""
+msgstr "Taille du téléchargement: {0}"
 
 #: ../Pinta.Core/Actions/LayerActions.cs:50
 #: ../Pinta.Core/Actions/LayerActions.cs:303
@@ -603,12 +610,12 @@ msgstr "Effet_s"
 
 #: ../Pinta/MainWindow.cs:376
 msgid "Effects"
-msgstr ""
+msgstr "Effets"
 
 #. Translators: Gradient that starts out white, like the the inner part of a spark, and goes through progressively dark shades of blue until it reaches black, and finally transparent, blending with the background
 #: ../Pinta.Effects/Effects/GradientHelper.cs:30
 msgid "Electric"
-msgstr ""
+msgstr "Electrique"
 
 #: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:319
 #: ../Pinta.Tools/Editable/EditEngines/EllipseEditEngine.cs:34
@@ -627,6 +634,8 @@ msgstr "Gaufrer"
 #: ../Pinta/Main.cs:65
 msgid "Enable additional logging or behavior changes for debugging"
 msgstr ""
+"Active la journalisation supplémentaire ou les modifications de comportement "
+"pour le débogage"
 
 #: ../Pinta.Core/Actions/EditActions.cs:66
 #: ../Pinta.Core/Actions/EditActions.cs:245
@@ -648,11 +657,11 @@ msgstr "Exclusion (-) (Clic droit)"
 #. Translators: This refers to expanding the canvas size when pasting a larger image.
 #: ../Pinta/Actions/Edit/PasteAction.cs:191
 msgid "Expand"
-msgstr ""
+msgstr "Développe"
 
 #: ../Pinta.Gui.Addins/AddinManagerDialog.cs:204
 msgid "Extension packages"
-msgstr ""
+msgstr "Paquets d'extension"
 
 #: ../Pinta.Effects/Effects/JuliaFractalEffect.cs:156
 #: ../Pinta.Effects/Effects/MandelbrotFractalEffect.cs:175
@@ -661,15 +670,15 @@ msgstr "Facteur"
 
 #: ../Pinta/Actions/File/NewScreenshotAction.cs:103
 msgid "Failed to access XDG Desktop Portals"
-msgstr ""
+msgstr "Échec de l'accès aux portails de bureau XDG"
 
 #: ../Pinta/MainWindow.cs:269
 msgid "Failed to initialize add-in"
-msgstr ""
+msgstr "Échec de l'initialisation du complément"
 
 #: ../Pinta.Gui.Addins/InstallDialog.cs:152
 msgid "Failed to load extension package"
-msgstr ""
+msgstr "Échec du chargement du paquet d'extension"
 
 #: ../Pinta.Core/Managers/WorkspaceManager.cs:401
 msgid "Failed to open image"
@@ -691,7 +700,7 @@ msgstr "Signaler un bogue"
 
 #: ../Pinta/Main.cs:61
 msgid "Files to open"
-msgstr ""
+msgstr "Fichiers à ouvrir"
 
 #: ../Pinta.Tools/Tools/TextTool.cs:252
 msgid "Fill Background"
@@ -921,7 +930,7 @@ msgstr "Installation"
 
 #: ../Pinta.Gui.Addins/AddinManagerDialog.cs:194
 msgid "Install Extension Package"
-msgstr ""
+msgstr "Installe le paquet d'extension"
 
 #: ../Pinta.Gui.Addins/AddinManagerDialog.cs:40
 msgid "Install from file..."
@@ -1061,6 +1070,9 @@ msgid ""
 "Left click to draw freeform one-pixel wide lines with the primary color.\n"
 "Right click to use the secondary color."
 msgstr ""
+"Cliquez avec le bouton gauche pour tracer des lignes larges d'un pixel de "
+"forme libre avec la couleur primaire.\n"
+"Faites un clic droit pour utiliser la couleur secondaire."
 
 #: ../Pinta.Tools/Tools/FreeformShapeTool.cs:54
 #: ../Pinta.Tools/Tools/PaintBrushTool.cs:58
@@ -1099,12 +1111,16 @@ msgid ""
 "Left click to replace the secondary color with the primary color.\n"
 "Right click to reverse."
 msgstr ""
+"Clic gauche pour remplacer la couleur secondaire par la couleur primaire.\n"
+"Faites un clic droit pour inverser."
 
 #: ../Pinta.Tools/Tools/ColorPickerTool.cs:53
 msgid ""
 "Left click to set primary color.\n"
 "Right click to set secondary color."
 msgstr ""
+"Cliquez avec le bouton gauche pour définir la couleur primaire.\n"
+"Faites un clic droit pour définir la couleur secondaire."
 
 #: ../Pinta.Gui.Widgets/Widgets/StatusBarColorPaletteWidget.cs:250
 msgid "Left click to set primary color. Right click to set secondary color."
@@ -1126,6 +1142,9 @@ msgid ""
 "Right click to zoom out.\n"
 "Click and drag to zoom in selection."
 msgstr ""
+"Clic gauche pour zoomer.\n"
+"Faites un clic droit pour effectuer un zoom arrière.\n"
+"Cliquez et faites glisser pour zoomer sur la sélection."
 
 #: ../Pinta.Tools/Editable/EditEngines/ArrowedEditEngine.cs:318
 msgid "Length"
@@ -1146,7 +1165,7 @@ msgstr "Licence"
 #. Translators: This refers to using a light variant of the color scheme.
 #: ../Pinta.Core/Actions/ViewActions.cs:187
 msgid "Light"
-msgstr ""
+msgstr "Clair"
 
 #: ../Pinta.Core/Effects/UserBlendOps.cs:37
 msgid "Lighten"
@@ -1163,7 +1182,7 @@ msgstr "Clarté"
 #. Translators: Gradient with a citrusy vibe that starts out white, goes through light yellow, several shades of green, and then transparent, blending with the background
 #: ../Pinta.Effects/Effects/GradientHelper.cs:34
 msgid "Lime Lemon"
-msgstr ""
+msgstr "Citron Vert"
 
 #: ../Pinta.Tools/Tools/LineCurveTool.cs:38
 msgid "Line/Curve"
@@ -1196,7 +1215,7 @@ msgstr "Sélection baguette magique"
 
 #: ../Pinta/MainWindow.cs:370
 msgid "Main Menu"
-msgstr ""
+msgstr "Menu principal"
 
 #: ../Pinta/Dialogs/ResizeCanvasDialog.cs:76
 #: ../Pinta/Dialogs/ResizeImageDialog.cs:66
@@ -1226,7 +1245,7 @@ msgstr "Modifié"
 
 #: ../Pinta.Gui.Addins/AddinInfoView.cs:77
 msgid "More Information..."
-msgstr ""
+msgstr "Plus d'information…"
 
 #: ../Pinta.Effects/Effects/MotionBlurEffect.cs:23
 msgid "Motion Blur"
@@ -2218,11 +2237,11 @@ msgstr "_Réglages"
 #: ../Pinta/Actions/Edit/PasteAction.cs:187
 #: ../Pinta/Actions/File/CloseDocumentAction.cs:66
 msgid "_Cancel"
-msgstr ""
+msgstr "_Annule"
 
 #: ../Pinta/Actions/File/CloseDocumentAction.cs:67
 msgid "_Discard"
-msgstr ""
+msgstr "_Jete"
 
 #: ../Pinta/MainWindow.cs:324
 msgid "_Edit"
@@ -2249,11 +2268,11 @@ msgstr "_Calques"
 #: ../Pinta.Gui.Addins/InstallDialog.cs:156 ../Pinta/Dialogs/ErrorDialog.cs:41
 #: ../Pinta/Dialogs/ErrorDialog.cs:69
 msgid "_OK"
-msgstr ""
+msgstr "_OK"
 
 #: ../Pinta/Actions/File/CloseDocumentAction.cs:68
 msgid "_Save"
-msgstr ""
+msgstr "_Sauve"
 
 #: ../Pinta/MainWindow.cs:328
 msgid "_View"
