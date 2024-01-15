@@ -8,10 +8,10 @@ msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2024-01-14 01:15+0000\n"
-"PO-Revision-Date: 2024-01-09 15:06+0000\n"
+"PO-Revision-Date: 2024-01-15 02:23+0000\n"
 "Last-Translator: Сергей <asvmail.as@gmail.com>\n"
-"Language-Team: Russian <https://hosted.weblate.org/projects/pinta/pinta/ru/"
-">\n"
+"Language-Team: Russian <https://hosted.weblate.org/projects/pinta/pinta/ru/>"
+"\n"
 "Language: ru\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -176,7 +176,7 @@ msgstr "Основано на Paint.NET:"
 #. Translators: Gradient with the colors of the flag of Italy: red, white, and green
 #: ../Pinta.Effects/Effects/GradientHelper.cs:10
 msgid "Beautiful Italy"
-msgstr ""
+msgstr "Прекрасная Италия"
 
 #: ../Pinta.Core/Actions/ViewActions.cs:69
 msgid "Best Fit"
@@ -221,7 +221,7 @@ msgstr "Жирный"
 #. Translators: Gradient that starts out white, like the core of a raging fire, and then goes through yellow, red, and black (like visible black smoke), and finally transparent, blending with the background
 #: ../Pinta.Effects/Effects/GradientHelper.cs:18
 msgid "Bonfire"
-msgstr ""
+msgstr "Костёр"
 
 #: ../Pinta.Effects/Adjustments/BrightnessContrastEffect.cs:142
 #: ../Pinta.Effects/Effects/GlowEffect.cs:77
@@ -296,7 +296,7 @@ msgstr "Изменённая форма"
 #. Translators: Gradient that starts out off-white, like cherry blossoms against sunlight, then goes through pink, then light blue (like the sky) and finally transparent, blending with the background
 #: ../Pinta.Effects/Effects/GradientHelper.cs:22
 msgid "Cherry Blossom"
-msgstr ""
+msgstr "Цветущая вишня"
 
 #: ../Pinta.Effects/Dialogs/Effects.LevelsDialog.cs:531
 msgid "Choose Color"
@@ -347,7 +347,7 @@ msgid ""
 msgstr ""
 "Нажмите левую кнопку мыши и тяните, чтобы нарисовать градиент от основного "
 "цвета к дополнительному.\n"
-"Используйте правую кнопку мыши для инверсии."
+"Используйте правую кнопку мыши для обратного порядка."
 
 #: ../Pinta.Tools/Tools/LassoSelectTool.cs:55
 msgid "Click and drag to draw the outline for a selection area."
@@ -485,7 +485,7 @@ msgstr "Авторское право"
 #. Translators: Gradient with the colors of blue and pink cotton candy
 #: ../Pinta.Effects/Effects/GradientHelper.cs:26
 msgid "Cotton Candy"
-msgstr ""
+msgstr "Сахарная вата"
 
 #. Translators: {0} is the name of a layer, and {1} is the path to a .ora file.
 #: ../Pinta.Core/ImageFormats/OraFormat.cs:122
@@ -620,7 +620,7 @@ msgstr "Эффекты"
 #. Translators: Gradient that starts out white, like the the inner part of a spark, and goes through progressively dark shades of blue until it reaches black, and finally transparent, blending with the background
 #: ../Pinta.Effects/Effects/GradientHelper.cs:30
 msgid "Electric"
-msgstr ""
+msgstr "Электрический"
 
 #: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:319
 #: ../Pinta.Tools/Editable/EditEngines/EllipseEditEngine.cs:34
@@ -1223,7 +1223,7 @@ msgstr "Яркость"
 #. Translators: Gradient with a citrusy vibe that starts out white, goes through light yellow, several shades of green, and then transparent, blending with the background
 #: ../Pinta.Effects/Effects/GradientHelper.cs:34
 msgid "Lime Lemon"
-msgstr ""
+msgstr "Лайм-лимон"
 
 #: ../Pinta.Tools/Tools/LineCurveTool.cs:38
 msgid "Line/Curve"
@@ -1583,7 +1583,7 @@ msgstr "Пиксели"
 #. Translators: Gradient with different shades of brownish yellow
 #: ../Pinta.Effects/Effects/GradientHelper.cs:38
 msgid "Piña Colada"
-msgstr ""
+msgstr "Пина Колада"
 
 #: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:583
 #: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:769
@@ -1787,7 +1787,7 @@ msgstr "Изменить размер палитры"
 #: ../Pinta.Effects/Effects/JuliaFractalEffect.cs:168
 #: ../Pinta.Effects/Effects/MandelbrotFractalEffect.cs:191
 msgid "Reverse Color Scheme"
-msgstr ""
+msgstr "Обратная цветовая схема"
 
 #: ../Pinta.Tools/Tools/TextTool.cs:226
 msgid "Right Align"
