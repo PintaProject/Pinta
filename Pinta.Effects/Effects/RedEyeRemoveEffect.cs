@@ -28,7 +28,7 @@ public sealed class RedEyeRemoveEffect : BaseEffect
 
 	public RedEyeRemoveData Data => (RedEyeRemoveData) EffectData!;  // NRT - Set in constructor
 
-	public RedEyeRemoveEffect ()
+	public RedEyeRemoveEffect (IServiceManager _)
 	{
 		EffectData = new RedEyeRemoveData ();
 	}

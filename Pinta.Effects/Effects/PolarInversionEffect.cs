@@ -26,7 +26,7 @@ public sealed class PolarInversionEffect : WarpEffect
 
 	public override string EffectMenuCategory => Translations.GetString ("Distort");
 
-	public PolarInversionEffect ()
+	public PolarInversionEffect (IServiceManager _)
 	{
 		EffectData = new PolarInversionData ();
 	}

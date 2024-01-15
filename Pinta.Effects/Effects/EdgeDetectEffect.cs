@@ -28,7 +28,7 @@ public sealed class EdgeDetectEffect : ColorDifferenceEffect
 
 	public EdgeDetectData Data => (EdgeDetectData) EffectData!;  // NRT - Set in constructor
 
-	public EdgeDetectEffect ()
+	public EdgeDetectEffect (IServiceManager _)
 	{
 		EffectData = new EdgeDetectData ();
 	}

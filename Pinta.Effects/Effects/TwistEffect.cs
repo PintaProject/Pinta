@@ -8,7 +8,7 @@
 /////////////////////////////////////////////////////////////////////////////////
 
 using System;
-using System.Collections.Generic;
+using System.Collections.Immutable;
 using Cairo;
 using Pinta.Core;
 using Pinta.Gui.Widgets;
@@ -29,7 +29,7 @@ public sealed class TwistEffect : BaseEffect
 
 	public TwistData Data => (TwistData) EffectData!;  // NRT - Set in constructor
 
-	public TwistEffect ()
+	public TwistEffect (IServiceManager _)
 	{
 		EffectData = new TwistData ();
 	}
@@ -55,16 +55,21 @@ public sealed class TwistEffect : BaseEffect
 				var dst_row = dst_data.Slice (rowOffset, src.Width);
 				for (int x = rect.Left; x <= rect.Right; x++) {
 					float i = x - settings.HalfWidth;
-					if (i * i + j * j > (settings.Maxrad + 1) * (settings.Maxrad + 1))
-						dst_row[x] = src_row[x];
-					else
-						dst_row[x] = GetFinalPixelColor (src, settings, src_data, j, i);
+					dst_row[x] =
+						(i * i + j * j > (settings.Maxrad + 1) * (settings.Maxrad + 1))
+						? src_row[x]
+						: GetFinalPixelColor (src, settings, src_data, j, i);
 				}
 			}
 		}
 	}
 
-	private sealed record RenderSettings (float HalfWidth, float HalfHeight, float Maxrad, float Twist, IReadOnlyList<PointD> AntialiasPoints);
+	private sealed record RenderSettings (
+		float HalfWidth,
+		float HalfHeight,
+		float Maxrad,
+		float Twist,
+		ImmutableArray<PointD> AntialiasPoints);
 
 	private static ColorBgra GetFinalPixelColor (ImageSurface src, RenderSettings settings, ReadOnlySpan<ColorBgra> src_data, float j, float i)
 	{
@@ -72,7 +77,7 @@ public sealed class TwistEffect : BaseEffect
 		int g = 0;
 		int r = 0;
 		int a = 0;
-		int antialiasSamples = settings.AntialiasPoints.Count;
+		int antialiasSamples = settings.AntialiasPoints.Length;
 
 		for (int p = 0; p < antialiasSamples; ++p) {
 
@@ -83,7 +88,7 @@ public sealed class TwistEffect : BaseEffect
 			double theta = Math.Atan2 (v, u);
 			double t = 1 - rad / settings.Maxrad;
 			t = (t < 0) ? 0 : (t * t * t);
-			theta += ((t * settings.Twist) / 100);
+			theta += t * settings.Twist / 100;
 
 			PointI samplePosition = new (
 				X: (int) (settings.HalfWidth + (float) (rad * Math.Cos (theta))),
@@ -119,17 +124,18 @@ public sealed class TwistEffect : BaseEffect
 		);
 	}
 
-	private static PointD[] InitializeAntialiasPoints (int aaLevel)
+	private static ImmutableArray<PointD> InitializeAntialiasPoints (int aaLevel)
 	{
 		int aaSamples = aaLevel * aaLevel + 1;
-		PointD[] aaPoints = new PointD[aaSamples];
+		var aaPoints = ImmutableArray.CreateBuilder<PointD> (aaSamples);
+		aaPoints.Count = aaSamples;
 		for (int i = 0; i < aaSamples; ++i) {
-			var prePtX = ((i * aaLevel) / (float) aaSamples);
+			var prePtX = i * aaLevel / (float) aaSamples;
 			var ptX = prePtX - ((int) prePtX);
 			var ptY = i / (float) aaSamples;
 			aaPoints[i] = new (ptX, ptY);
 		}
-		return aaPoints;
+		return aaPoints.MoveToImmutable ();
 	}
 
 	#endregion

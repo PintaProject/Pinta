@@ -23,28 +23,28 @@ public class AdjustmentsBenchmarks
 	[Benchmark]
 	public void AutoLevelEffect ()
 	{
-		var effect = new AutoLevelEffect ();
+		var effect = new AutoLevelEffect (Utilities.CreateMockServices ());
 		effect.Render (surface, dest_surface, bounds);
 	}
 
 	[Benchmark]
 	public void BlackAndWhiteEffect ()
 	{
-		var effect = new BlackAndWhiteEffect ();
+		var effect = new BlackAndWhiteEffect (Utilities.CreateMockServices ());
 		effect.Render (surface, dest_surface, bounds);
 	}
 
 	[Benchmark]
 	public void BrightnessContrastEffect ()
 	{
-		var effect = new BrightnessContrastEffect ();
+		var effect = new BrightnessContrastEffect (Utilities.CreateMockServices ());
 		effect.Render (surface, dest_surface, bounds);
 	}
 
 	[Benchmark]
 	public void CurvesEffect ()
 	{
-		var effect = new CurvesEffect ();
+		var effect = new CurvesEffect (Utilities.CreateMockServices ());
 
 		var points = new SortedList<int, int> {
 			{ 0, 0 },
@@ -62,35 +62,35 @@ public class AdjustmentsBenchmarks
 	[Benchmark]
 	public void HueSaturationEffect ()
 	{
-		var effect = new HueSaturationEffect ();
+		var effect = new HueSaturationEffect (Utilities.CreateMockServices ());
 		effect.Render (surface, dest_surface, bounds);
 	}
 
 	[Benchmark]
 	public void InvertColorsEffect ()
 	{
-		var effect = new InvertColorsEffect ();
+		var effect = new InvertColorsEffect (Utilities.CreateMockServices ());
 		effect.Render (surface, dest_surface, bounds);
 	}
 
 	[Benchmark]
 	public void LevelsEffect ()
 	{
-		var effect = new LevelsEffect ();
+		var effect = new LevelsEffect (Utilities.CreateMockServices ());
 		effect.Render (surface, dest_surface, bounds);
 	}
 
 	[Benchmark]
 	public void PosterizeEffect ()
 	{
-		var effect = new PosterizeEffect ();
+		var effect = new PosterizeEffect (Utilities.CreateMockServices ());
 		effect.Render (surface, dest_surface, bounds);
 	}
 
 	[Benchmark]
 	public void SepiaEffect ()
 	{
-		var effect = new SepiaEffect ();
+		var effect = new SepiaEffect (Utilities.CreateMockServices ());
 		effect.Render (surface, dest_surface, bounds);
 	}
 }

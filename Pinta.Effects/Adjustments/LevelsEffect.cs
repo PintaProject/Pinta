@@ -29,23 +29,25 @@ public sealed class LevelsEffect : BaseEffect
 
 	public LevelsData Data => (LevelsData) EffectData!;  // NRT - Set in constructor
 
-	public LevelsEffect ()
+	public LevelsEffect (IServiceManager _)
 	{
 		EffectData = new LevelsData ();
 	}
 
 	public override void LaunchConfiguration ()
 	{
-		var dialog = new LevelsDialog (Data) {
+		LevelsDialog dialog = new (Data) {
 			Title = Name,
 			IconName = Icon,
 		};
 
 		dialog.OnResponse += (_, args) => {
-			if (args.ResponseId != (int) Gtk.ResponseType.None) {
-				OnConfigDialogResponse (args.ResponseId == (int) Gtk.ResponseType.Ok);
-				dialog.Destroy ();
-			}
+
+			if (args.ResponseId == (int) Gtk.ResponseType.None)
+				return;
+
+			OnConfigDialogResponse (args.ResponseId == (int) Gtk.ResponseType.Ok);
+			dialog.Destroy ();
 		};
 
 		dialog.Present ();
@@ -66,8 +68,6 @@ public sealed class LevelsData : EffectData
 		Levels = new UnaryPixelOps.Level ();
 	}
 
-	public override EffectData Clone ()
-	{
-		return new LevelsData { Levels = (UnaryPixelOps.Level) Levels.Clone () };
-	}
+	public override LevelsData Clone ()
+		=> new () { Levels = (UnaryPixelOps.Level) Levels.Clone () };
 }

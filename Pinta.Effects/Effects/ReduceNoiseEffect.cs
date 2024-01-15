@@ -31,7 +31,7 @@ public sealed class ReduceNoiseEffect : LocalHistogramEffect
 
 	public ReduceNoiseData Data => (ReduceNoiseData) EffectData!;  // NRT - Set in constructor
 
-	public ReduceNoiseEffect ()
+	public ReduceNoiseEffect (IServiceManager _)
 	{
 		EffectData = new ReduceNoiseData ();
 	}

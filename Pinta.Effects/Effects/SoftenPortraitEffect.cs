@@ -59,12 +59,12 @@ public sealed class SoftenPortraitEffect : BaseEffect
 
 	public SoftenPortraitData Data => (SoftenPortraitData) EffectData!;  // NRT - Set in constructor
 
-	public SoftenPortraitEffect ()
+	public SoftenPortraitEffect (IServiceManager services)
 	{
 		EffectData = new SoftenPortraitData ();
 
-		blur_effect = new GaussianBlurEffect ();
-		bac_adjustment = new BrightnessContrastEffect ();
+		blur_effect = new GaussianBlurEffect (services);
+		bac_adjustment = new BrightnessContrastEffect (services);
 		desaturate_op = new UnaryPixelOps.Desaturate ();
 		overlay_op = new UserBlendOps.OverlayBlendOp ();
 	}

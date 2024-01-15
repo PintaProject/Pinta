@@ -17,6 +17,7 @@ namespace Pinta.Effects;
 public sealed class GlowEffect : BaseEffect
 {
 	private readonly UserBlendOps.ScreenBlendOp screen_blend_op;
+	private readonly IServiceManager services;
 
 	public override string Icon => Pinta.Resources.Icons.EffectsPhotoGlow;
 
@@ -30,11 +31,11 @@ public sealed class GlowEffect : BaseEffect
 
 	public GlowData Data => (GlowData) EffectData!;  // NRT - Set in constructor
 
-	public GlowEffect ()
+	public GlowEffect (IServiceManager services)
 	{
 		EffectData = new GlowData ();
-
 		screen_blend_op = new UserBlendOps.ScreenBlendOp ();
+		this.services = services;
 	}
 
 	public override void LaunchConfiguration ()
@@ -45,11 +46,11 @@ public sealed class GlowEffect : BaseEffect
 	#region Algorithm Code Ported From PDN
 	public override void Render (ImageSurface src, ImageSurface dest, ReadOnlySpan<RectangleI> rois)
 	{
-		GaussianBlurEffect blurEffect = new ();
+		GaussianBlurEffect blurEffect = new (services);
 		blurEffect.Data.Radius = Data.Radius;
 		blurEffect.Render (src, dest, rois);
 
-		BrightnessContrastEffect contrastEffect = new ();
+		BrightnessContrastEffect contrastEffect = new (services);
 		contrastEffect.Data.Brightness = Data.Brightness;
 		contrastEffect.Data.Contrast = Data.Contrast;
 		contrastEffect.Render (dest, dest, rois);
@@ -59,7 +60,7 @@ public sealed class GlowEffect : BaseEffect
 		int src_width = src.Width;
 		int dst_width = dest.Width;
 
-		foreach (Core.RectangleI roi in rois) {
+		foreach (RectangleI roi in rois) {
 			for (int y = roi.Top; y <= roi.Bottom; ++y) {
 				var dst_row = dst_data.Slice (y * dst_width + roi.Left, roi.Width);
 				var src_row = src_data.Slice (y * src_width + roi.Left, roi.Width);

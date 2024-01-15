@@ -28,7 +28,7 @@ public sealed class BulgeEffect : BaseEffect
 
 	public BulgeData Data => (BulgeData) EffectData!;
 
-	public BulgeEffect ()
+	public BulgeEffect (IServiceManager _)
 	{
 		EffectData = new BulgeData ();
 	}

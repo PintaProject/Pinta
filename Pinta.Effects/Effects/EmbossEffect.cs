@@ -28,7 +28,7 @@ public sealed class EmbossEffect : BaseEffect
 
 	public EmbossData Data => (EmbossData) EffectData!;
 
-	public EmbossEffect ()
+	public EmbossEffect (IServiceManager _)
 	{
 		EffectData = new EmbossData ();
 	}
@@ -46,13 +46,11 @@ public sealed class EmbossEffect : BaseEffect
 		int srcHeight);
 
 	private EmbossSettings CreateSettings (ImageSurface src)
-	{
-		return new (
+		=> new (
 			weights: ComputeWeights (Data.Angle.Degrees),
 			srcWidth: src.Width,
 			srcHeight: src.Height
 		);
-	}
 
 	public override void Render (ImageSurface src, ImageSurface dst, ReadOnlySpan<RectangleI> rois)
 	{

@@ -28,7 +28,7 @@ public sealed class PixelateEffect : BaseEffect
 
 	public override string EffectMenuCategory => Translations.GetString ("Distort");
 
-	public PixelateEffect ()
+	public PixelateEffect (IServiceManager _)
 	{
 		EffectData = new PixelateData ();
 	}
@@ -39,9 +39,9 @@ public sealed class PixelateEffect : BaseEffect
 	}
 
 	#region Algorithm Code Ported From PDN
-	private static ColorBgra ComputeCellColor (int x, int y, ReadOnlySpan<ColorBgra> src_data, int cellSize, Core.RectangleI srcBounds)
+	private static ColorBgra ComputeCellColor (int x, int y, ReadOnlySpan<ColorBgra> src_data, int cellSize, RectangleI srcBounds)
 	{
-		Core.RectangleI cell = GetCellBox (x, y, cellSize);
+		RectangleI cell = GetCellBox (x, y, cellSize);
 		cell = cell.Intersect (srcBounds);
 
 		int left = cell.Left;
@@ -59,13 +59,12 @@ public sealed class PixelateEffect : BaseEffect
 		return c.ToPremultipliedAlpha ();
 	}
 
-	private static Core.RectangleI GetCellBox (int x, int y, int cellSize)
+	private static RectangleI GetCellBox (int x, int y, int cellSize)
 	{
 		int widthBoxNum = x % cellSize;
 		int heightBoxNum = y % cellSize;
-		var leftUpper = new Core.PointI (x - widthBoxNum, y - heightBoxNum);
-
-		return new Core.RectangleI (leftUpper, new Core.Size (cellSize, cellSize));
+		PointI leftUpper = new (x - widthBoxNum, y - heightBoxNum);
+		return new (leftUpper, new Size (cellSize, cellSize));
 	}
 
 
@@ -73,8 +72,8 @@ public sealed class PixelateEffect : BaseEffect
 	{
 		var cellSize = Data.CellSize;
 
-		Core.RectangleI src_bounds = src.GetBounds ();
-		Core.RectangleI dest_bounds = dest.GetBounds ();
+		RectangleI src_bounds = src.GetBounds ();
+		RectangleI dest_bounds = dest.GetBounds ();
 
 		var src_data = src.GetReadOnlyPixelData ();
 		var dst_data = dest.GetPixelData ();
@@ -94,9 +93,8 @@ public sealed class PixelateEffect : BaseEffect
 					for (int y2 = y; y2 <= yEnd; ++y2) {
 						var dst_row = dst_data.Slice (y2 * dest_bounds.Width, dest_bounds.Width);
 
-						for (int x2 = x; x2 <= xEnd; ++x2) {
+						for (int x2 = x; x2 <= xEnd; ++x2)
 							dst_row[x2].Bgra = color.Bgra;
-						}
 					}
 
 					x = xEnd;

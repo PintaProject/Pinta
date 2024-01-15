@@ -29,14 +29,14 @@ public sealed class PosterizeEffect : BaseEffect
 
 	public PosterizeData Data => (PosterizeData) EffectData!;  // NRT - Set in constructor
 
-	public PosterizeEffect ()
+	public PosterizeEffect (IServiceManager _)
 	{
 		EffectData = new PosterizeData ();
 	}
 
 	public override void LaunchConfiguration ()
 	{
-		var dialog = new PosterizeDialog () {
+		PosterizeDialog dialog = new () {
 			Title = Name,
 			IconName = Icon,
 			EffectData = Data

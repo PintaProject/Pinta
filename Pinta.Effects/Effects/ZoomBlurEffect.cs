@@ -28,7 +28,7 @@ public sealed class ZoomBlurEffect : BaseEffect
 
 	public ZoomBlurData Data => (ZoomBlurData) EffectData!;  // NRT - Set in constructor
 
-	public ZoomBlurEffect ()
+	public ZoomBlurEffect (IServiceManager _)
 	{
 		EffectData = new ZoomBlurData ();
 	}
@@ -80,9 +80,9 @@ public sealed class ZoomBlurEffect : BaseEffect
 			for (int y = rect.Top; y <= rect.Bottom; ++y) {
 				var src_row = src_data.Slice (y * settings.src_width, settings.src_width);
 				var dst_row = dst_data.Slice (y * settings.dst_width, settings.dst_width);
-				for (int x = rect.Left; x <= rect.Right; ++x) {
+
+				for (int x = rect.Left; x <= rect.Right; ++x)
 					dst_row[x] = GetFinalPixelColor (src, settings, src_data, src_bounds, y, src_row, x);
-				}
 			}
 		}
 	}
@@ -126,16 +126,14 @@ public sealed class ZoomBlurEffect : BaseEffect
 			}
 		}
 
-		if (sa != 0) {
-			return ColorBgra.FromBgra (
+		return
+			(sa != 0)
+			? ColorBgra.FromBgra (
 				b: Utility.ClampToByte (sb / sa),
 				g: Utility.ClampToByte (sg / sa),
 				r: Utility.ClampToByte (sr / sa),
-				a: Utility.ClampToByte (sa / sc)
-			);
-		} else {
-			return ColorBgra.FromUInt32 (0);
-		}
+				a: Utility.ClampToByte (sa / sc))
+			: ColorBgra.FromUInt32 (0);
 	}
 	#endregion
 

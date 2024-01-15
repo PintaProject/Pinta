@@ -29,7 +29,7 @@ public sealed class FragmentEffect : BaseEffect
 
 	public FragmentData Data => (FragmentData) EffectData!;  // NRT - Set in constructor
 
-	public FragmentEffect ()
+	public FragmentEffect (IServiceManager _)
 	{
 		EffectData = new FragmentData ();
 	}

@@ -31,7 +31,7 @@ public sealed class OutlineEffect : LocalHistogramEffect
 
 	public OutlineData Data => (OutlineData) EffectData!;  // NRT - Set in constructor
 
-	public OutlineEffect ()
+	public OutlineEffect (IServiceManager _)
 	{
 		EffectData = new OutlineData ();
 	}
@@ -113,10 +113,10 @@ public sealed class OutlineEffect : LocalHistogramEffect
 		}
 
 		return ColorBgra.FromBgra (
-		    (byte) (255 - (b2 - b1)),
-		    (byte) (255 - (g2 - g1)),
-		    (byte) (255 - (r2 - r1)),
-		    (byte) (a2));
+			b: (byte) (255 - (b2 - b1)),
+			g: (byte) (255 - (g2 - g1)),
+			r: (byte) (255 - (r2 - r1)),
+			a: (byte) a2);
 	}
 
 	public override void Render (ImageSurface src, ImageSurface dest, ReadOnlySpan<RectangleI> rois)

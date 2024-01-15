@@ -28,7 +28,7 @@ public sealed class FrostedGlassEffect : BaseEffect
 
 	public FrostedGlassData Data => (FrostedGlassData) EffectData!;
 
-	public FrostedGlassEffect ()
+	public FrostedGlassEffect (IServiceManager _)
 	{
 		EffectData = new FrostedGlassData ();
 	}
@@ -66,7 +66,7 @@ public sealed class FrostedGlassEffect : BaseEffect
 
 		foreach (var rect in rois) {
 
-			var random = new Random (settings.seed.GetValueForRegion (rect));
+			Random random = new (settings.seed.GetValueForRegion (rect));
 
 			for (int y = rect.Top; y <= rect.Bottom; ++y) {
 
@@ -102,13 +102,11 @@ public sealed class FrostedGlassEffect : BaseEffect
 		int left = x - settings.amount;
 		int right = x + settings.amount + 1;
 
-		if (left < 0) {
+		if (left < 0)
 			left = 0;
-		}
 
-		if (right > settings.src_width) {
+		if (right > settings.src_width)
 			right = settings.src_width;
-		}
 
 		for (int j = top; j < bottom; ++j) {
 

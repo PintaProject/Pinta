@@ -31,7 +31,7 @@ public sealed class MedianEffect : LocalHistogramEffect
 
 	public MedianData Data => (MedianData) EffectData!;  // NRT - Set in constructor
 
-	public MedianEffect ()
+	public MedianEffect (IServiceManager _)
 	{
 		EffectData = new MedianData ();
 	}
@@ -47,15 +47,13 @@ public sealed class MedianEffect : LocalHistogramEffect
 		radius = Data.Radius;
 		percentile = Data.Percentile;
 
-		foreach (Core.RectangleI rect in rois)
+		foreach (RectangleI rect in rois)
 			RenderRect (radius, src, dest, rect);
 	}
 
 	public override ColorBgra Apply (in ColorBgra src, int area, Span<int> hb, Span<int> hg, Span<int> hr, Span<int> ha)
-	{
-		ColorBgra c = GetPercentile (percentile, area, hb, hg, hr, ha);
-		return c;
-	}
+		=> GetPercentile (percentile, area, hb, hg, hr, ha);
+
 	#endregion
 
 	public sealed class MedianData : EffectData

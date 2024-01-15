@@ -31,14 +31,14 @@ public sealed class CurvesEffect : BaseEffect
 
 	public CurvesData Data => (CurvesData) EffectData!;  // NRT - Set in constructor
 
-	public CurvesEffect ()
+	public CurvesEffect (IServiceManager _)
 	{
 		EffectData = new CurvesData ();
 	}
 
 	public override void LaunchConfiguration ()
 	{
-		var dialog = new CurvesDialog (Data) {
+		CurvesDialog dialog = new (Data) {
 			Title = Name,
 			IconName = Icon,
 		};
@@ -115,7 +115,7 @@ public sealed class CurvesData : EffectData
 
 	public ColorTransferMode Mode { get; set; }
 
-	public override EffectData Clone ()
+	public override CurvesData Clone ()
 	{
 		//			Not sure if we have to copy contents of ControlPoints
 		//			var controlPoints = new SortedList<int, int> [ControlPoints.Length];
@@ -123,7 +123,7 @@ public sealed class CurvesData : EffectData
 		//			for (int i = 0; i < ControlPoints.Length; i++)
 		//				controlPoints[i] = new SortedList<int, int> (ControlPoints[i]);
 
-		return new CurvesData () {
+		return new () {
 			Mode = Mode,
 			ControlPoints = ControlPoints
 		};

@@ -29,7 +29,7 @@ public sealed class GaussianBlurEffect : BaseEffect
 
 	public GaussianBlurData Data => (GaussianBlurData) EffectData!;  // NRT - Set in constructor
 
-	public GaussianBlurEffect ()
+	public GaussianBlurEffect (IServiceManager _)
 	{
 		EffectData = new GaussianBlurData ();
 	}
@@ -58,10 +58,8 @@ public sealed class GaussianBlurEffect : BaseEffect
 
 	public override void Render (ImageSurface src, ImageSurface dest, ReadOnlySpan<RectangleI> rois)
 	{
-		if (Data.Radius == 0) {
-			// Copy src to dest
-			return;
-		}
+		if (Data.Radius == 0)
+			return; // Copy src to dest
 
 		int r = Data.Radius;
 		ImmutableArray<int> w = CreateGaussianBlurRow (r);

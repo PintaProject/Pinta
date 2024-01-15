@@ -28,7 +28,7 @@ public sealed class SharpenEffect : LocalHistogramEffect
 
 	public SharpenData Data => (SharpenData) EffectData!;  // NRT - Set in constructor
 
-	public SharpenEffect ()
+	public SharpenEffect (IServiceManager _)
 	{
 		EffectData = new SharpenData ();
 	}

@@ -30,7 +30,7 @@ public sealed class UnfocusEffect : LocalHistogramEffect
 
 	public UnfocusData Data => (UnfocusData) EffectData!;  // NRT - Set in constructor
 
-	public UnfocusEffect ()
+	public UnfocusEffect (IServiceManager _)
 	{
 		EffectData = new UnfocusData ();
 	}
@@ -67,7 +67,8 @@ public sealed class UnfocusEffect : LocalHistogramEffect
 			int div = area * 255;
 
 			return ColorBgra.FromBgraClamped (b / div, g / div, r / div, alpha);
-		} else {        //use a long if an int will overflow.
+		} else {
+			//use a long if an int will overflow.
 			long b = 0;
 			long g = 0;
 			long r = 0;

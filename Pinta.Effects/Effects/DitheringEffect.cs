@@ -16,7 +16,7 @@ public sealed class DitheringEffect : BaseEffect
 
 	public override bool IsTileable => false;
 
-	public DitheringEffect ()
+	public DitheringEffect (IServiceManager _)
 	{
 		EffectData = new DitheringData ();
 	}

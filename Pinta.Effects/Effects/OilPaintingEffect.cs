@@ -28,7 +28,7 @@ public sealed class OilPaintingEffect : BaseEffect
 
 	public OilPaintingData Data => (OilPaintingData) EffectData!;  // NRT - Set in constructor
 
-	public OilPaintingEffect ()
+	public OilPaintingEffect (IServiceManager _)
 	{
 		EffectData = new OilPaintingData ();
 	}

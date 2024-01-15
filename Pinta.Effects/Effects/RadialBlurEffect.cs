@@ -28,7 +28,7 @@ public sealed class RadialBlurEffect : BaseEffect
 
 	public RadialBlurData Data => (RadialBlurData) EffectData!;  // NRT - Set in constructor
 
-	public RadialBlurEffect ()
+	public RadialBlurEffect (IServiceManager _)
 	{
 		EffectData = new RadialBlurData ();
 	}
@@ -93,9 +93,8 @@ public sealed class RadialBlurEffect : BaseEffect
 				var dst_row = dst_data.Slice (y * settings.w, settings.w);
 				var src_row = src_data.Slice (y * settings.src_w, settings.src_w);
 
-				for (int x = rect.Left; x <= rect.Right; ++x) {
+				for (int x = rect.Left; x <= rect.Right; ++x)
 					dst_row[x] = GetFinalPixelColor (settings, src_data, src_row, x, y);
-				}
 			}
 		}
 	}
@@ -117,8 +116,8 @@ public sealed class RadialBlurEffect : BaseEffect
 		int sa = src_pixel.A;
 		int sc = 1;
 
-		PointI o1 = new (X: f.X, Y: f.Y);
-		PointI o2 = new (X: f.X, Y: f.Y);
+		PointI o1 = f;
+		PointI o2 = f;
 
 		for (int i = 0; i < settings.n; ++i) {
 
@@ -152,16 +151,14 @@ public sealed class RadialBlurEffect : BaseEffect
 			}
 		}
 
-		if (sa > 0) {
-			return ColorBgra.FromBgra (
+		return
+			(sa > 0)
+			? ColorBgra.FromBgra (
 				b: Utility.ClampToByte (sb / sa),
 				g: Utility.ClampToByte (sg / sa),
 				r: Utility.ClampToByte (sr / sa),
-				a: Utility.ClampToByte (sa / sc)
-			);
-		} else {
-			return ColorBgra.FromUInt32 (0);
-		}
+				a: Utility.ClampToByte (sa / sc))
+			: ColorBgra.FromUInt32 (0);
 	}
 
 	#endregion
