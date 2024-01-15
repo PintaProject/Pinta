@@ -42,14 +42,13 @@ public sealed class MandelbrotFractalEffect : BaseEffect
 	}
 
 	#region Algorithm Code Ported From PDN
-	private const double Max = 100000;
-	private static readonly double inv_log_max = 1.0 / Math.Log (Max);
-	private static readonly double zoom_factor = 20.0;
-	private const double XOffsetBasis = -0.7;
-	private readonly double x_offset = XOffsetBasis;
 
-	private const double YOffsetBasis = -0.29;
-	private readonly double y_offset = YOffsetBasis;
+	private const double Max = 100000;
+
+	private static readonly double inv_log_max = 1.0 / Math.Log (Max);
+	private const double Zoom_factor = 20.0;
+
+	private static readonly PointD offset_basis = new (X: -0.7, Y: -0.29);
 
 	private readonly InvertColorsEffect invert_effect = new ();
 
@@ -75,16 +74,14 @@ public sealed class MandelbrotFractalEffect : BaseEffect
 		double invQuality,
 		int count,
 		double invCount,
-		double angleTheta,
+		RadiansAngle angleTheta,
 		int factor,
-		double xOffset,
-		double yOffset,
 		bool invertColors,
 		ColorGradient colorGradient);
 	private MandelbrotSettings CreateSettings (ImageSurface dst)
 	{
 		int h = dst.Height;
-		double zoom = 1 + zoom_factor * Data.Zoom;
+		double zoom = 1 + Zoom_factor * Data.Zoom;
 		int count = Data.Quality * Data.Quality + 1;
 
 		var baseGradient =
@@ -108,12 +105,9 @@ public sealed class MandelbrotFractalEffect : BaseEffect
 
 			count: count,
 			invCount: 1.0 / count,
-			angleTheta: (Data.Angle.Degrees * 2 * Math.PI) / 360,
+			angleTheta: Data.Angle.ToRadians (),
 
 			factor: Data.Factor,
-
-			xOffset: x_offset,
-			yOffset: y_offset,
 
 			invertColors: Data.InvertColors,
 
@@ -146,18 +140,22 @@ public sealed class MandelbrotFractalEffect : BaseEffect
 		int b = 0;
 		int a = 0;
 		for (double i = 0; i < settings.count; i++) {
+
 			double u = (2.0 * target.X - settings.w + (i * settings.invCount)) * settings.invH;
-			double v = (2.0 * target.Y - settings.h + ((i * settings.invQuality) % 1)) * settings.invH;
+			double v = (2.0 * target.Y - settings.h + (i * settings.invQuality % 1)) * settings.invH;
 
 			double radius = Math.Sqrt ((u * u) + (v * v));
 			double radiusP = radius;
 			double theta = Math.Atan2 (v, u);
-			double thetaP = theta + settings.angleTheta;
+			double thetaP = theta + settings.angleTheta.Radians;
 
 			double uP = radiusP * Math.Cos (thetaP);
 			double vP = radiusP * Math.Sin (thetaP);
 
-			double m = Mandelbrot ((uP * settings.invZoom) + settings.xOffset, (vP * settings.invZoom) + settings.yOffset, settings.factor);
+			double m = Mandelbrot (
+				r: (uP * settings.invZoom) + offset_basis.X,
+				i: (vP * settings.invZoom) + offset_basis.Y,
+				factor: settings.factor);
 
 			double c = 64 + settings.factor * m;
 
