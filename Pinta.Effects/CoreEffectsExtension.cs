@@ -84,7 +84,7 @@ internal sealed class CoreEffectsExtension : IExtension
 		PintaCore.Effects.RegisterEffect (new TileEffect ());
 		PintaCore.Effects.RegisterEffect (new TwistEffect ());
 		PintaCore.Effects.RegisterEffect (new UnfocusEffect ());
-		PintaCore.Effects.RegisterEffect (new VoronoiDiagramEffect ());
+		PintaCore.Effects.RegisterEffect (new VoronoiDiagramEffect (services));
 		PintaCore.Effects.RegisterEffect (new ZoomBlurEffect ());
 	}
 

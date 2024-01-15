@@ -457,14 +457,14 @@ internal sealed class EffectsTest
 	[Test]
 	public void Voronoi1 ()
 	{
-		var effect = new VoronoiDiagramEffect ();
+		var effect = new VoronoiDiagramEffect (Utilities.CreateMockServices ());
 		Utilities.TestEffect (effect, "voronoi1.png");
 	}
 
 	[Test]
 	public void Voronoi2 ()
 	{
-		var effect = new VoronoiDiagramEffect ();
+		var effect = new VoronoiDiagramEffect (Utilities.CreateMockServices ());
 		effect.Data.NumberOfCells = 200;
 		Utilities.TestEffect (effect, "voronoi2.png");
 	}
@@ -472,7 +472,7 @@ internal sealed class EffectsTest
 	[Test]
 	public void Voronoi3 ()
 	{
-		var effect = new VoronoiDiagramEffect ();
+		var effect = new VoronoiDiagramEffect (Utilities.CreateMockServices ());
 		effect.Data.DistanceMetric = VoronoiDiagramEffect.DistanceMetric.Manhattan;
 		Utilities.TestEffect (effect, "voronoi3.png");
 	}
@@ -480,7 +480,7 @@ internal sealed class EffectsTest
 	[Test]
 	public void Voronoi4 ()
 	{
-		var effect = new VoronoiDiagramEffect ();
+		var effect = new VoronoiDiagramEffect (Utilities.CreateMockServices ());
 		effect.Data.ColorSorting = VoronoiDiagramEffect.ColorSorting.HorizontalBGR;
 		Utilities.TestEffect (effect, "voronoi4.png");
 	}

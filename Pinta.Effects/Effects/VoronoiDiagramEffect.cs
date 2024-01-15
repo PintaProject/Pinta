@@ -23,7 +23,7 @@ public sealed class VoronoiDiagramEffect : BaseEffect
 
 	public VoronoiDiagramData Data => (VoronoiDiagramData) EffectData!; // NRT - Set in constructor
 
-	public VoronoiDiagramEffect ()
+	public VoronoiDiagramEffect (IServiceManager _)
 	{
 		EffectData = new VoronoiDiagramData ();
 	}
