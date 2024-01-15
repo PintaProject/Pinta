@@ -43,10 +43,10 @@ public sealed class VoronoiDiagramEffect : BaseEffect
 	{
 		ColorSorting colorSorting = Data.ColorSorting;
 
-		IEnumerable<PointI> basePoints = CreatePoints (roi, Data.PointCount, Data.PointLocationsSeed);
+		IEnumerable<PointI> basePoints = CreatePoints (roi, Data.NumberOfCells, Data.RandomLocations);
 		ImmutableArray<PointI> points = SortPoints (basePoints, colorSorting).ToImmutableArray ();
 
-		IEnumerable<ColorBgra> baseColors = CreateColors (points.Length, Data.ColorsSeed);
+		IEnumerable<ColorBgra> baseColors = CreateColors (points.Length, Data.RandomColors);
 		IEnumerable<ColorBgra> positionSortedColors = SortColors (baseColors, colorSorting);
 		IEnumerable<ColorBgra> reversedSortingColors = Data.ReverseColorSorting ? positionSortedColors.Reverse () : positionSortedColors;
 
@@ -56,7 +56,7 @@ public sealed class VoronoiDiagramEffect : BaseEffect
 			showPoints: Data.ShowPoints,
 			points: points,
 			colors: reversedSortingColors.ToImmutableArray (),
-			distanceCalculator: GetDistanceCalculator (Data.DistanceCalculationMethod)
+			distanceCalculator: GetDistanceCalculator (Data.DistanceMetric)
 		);
 	}
 
@@ -73,6 +73,9 @@ public sealed class VoronoiDiagramEffect : BaseEffect
 				double shortestDistance = double.MaxValue;
 				int closestIndex = 0;
 				for (var i = 0; i < settings.points.Length; i++) {
+					// TODO: Acceleration structure that limits the search
+					//       to a relevant subset of points, for better performance.
+					//       Some ideas to consider: quadtree, spatial hashing
 					var point = settings.points[i];
 					double distance = settings.distanceCalculator (point, pixelLocation);
 					if (distance > shortestDistance) continue;
@@ -143,16 +146,16 @@ public sealed class VoronoiDiagramEffect : BaseEffect
 				typeof (ColorSorting)),
 		};
 
-	private static Func<PointI, PointI, double> GetDistanceCalculator (DistanceCalculationMethod distanceCalculationMethod)
+	private static Func<PointI, PointI, double> GetDistanceCalculator (DistanceMetric distanceCalculationMethod)
 	{
 		return distanceCalculationMethod switch {
-			DistanceCalculationMethod.Euclidean => Euclidean,
-			DistanceCalculationMethod.Manhattan => Manhattan,
-			DistanceCalculationMethod.Chebyshev => Chebyshev,
+			DistanceMetric.Euclidean => Euclidean,
+			DistanceMetric.Manhattan => Manhattan,
+			DistanceMetric.Chebyshev => Chebyshev,
 			_ => throw new InvalidEnumArgumentException (
 				nameof (distanceCalculationMethod),
 				(int) distanceCalculationMethod,
-				typeof (DistanceCalculationMethod)),
+				typeof (DistanceMetric)),
 		};
 
 		static double Euclidean (PointI targetPoint, PointI pixelLocation)
@@ -208,11 +211,11 @@ public sealed class VoronoiDiagramEffect : BaseEffect
 
 	public sealed class VoronoiDiagramData : EffectData
 	{
-		[Caption ("Distance Calculation Method")]
-		public DistanceCalculationMethod DistanceCalculationMethod { get; set; } = DistanceCalculationMethod.Euclidean;
+		[Caption ("Distance Metric")]
+		public DistanceMetric DistanceMetric { get; set; } = DistanceMetric.Euclidean;
 
-		[Caption ("Point Count"), MinimumValue (1), MaximumValue (1024)]
-		public int PointCount { get; set; } = 100;
+		[Caption ("Number of Cells"), MinimumValue (1), MaximumValue (1024)]
+		public int NumberOfCells { get; set; } = 100;
 
 		// Translators: The user can choose whether or not to render the points used in the calculation of a Voronoi diagram
 		[Caption ("Show Points")]
@@ -225,14 +228,14 @@ public sealed class VoronoiDiagramEffect : BaseEffect
 		[Caption ("Reverse Color Sorting")]
 		public bool ReverseColorSorting { get; set; } = false;
 
-		[Caption ("Colors Seed")]
-		public RandomSeed ColorsSeed { get; set; } = new (0);
+		[Caption ("Random Colors")]
+		public RandomSeed RandomColors { get; set; } = new (0);
 
-		[Caption ("Point Locations Seed")]
-		public RandomSeed PointLocationsSeed { get; set; } = new (0);
+		[Caption ("Random Locations")]
+		public RandomSeed RandomLocations { get; set; } = new (0);
 	}
 
-	public enum DistanceCalculationMethod
+	public enum DistanceMetric
 	{
 		Euclidean,
 		Manhattan,
