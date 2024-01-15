@@ -458,7 +458,6 @@ internal sealed class EffectsTest
 	public void Voronoi1 ()
 	{
 		var effect = new VoronoiDiagramEffect ();
-		effect.Data.NumberOfCells = 100;
 		Utilities.TestEffect (effect, "voronoi1.png");
 	}
 
