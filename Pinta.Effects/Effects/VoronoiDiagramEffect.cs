@@ -1,8 +1,10 @@
 using System;
+using System.Collections.Concurrent;
 using System.Collections.Generic;
 using System.Collections.Immutable;
 using System.ComponentModel;
 using System.Linq;
+using System.Threading.Tasks;
 using Cairo;
 using Pinta.Core;
 using Pinta.Gui.Widgets;
@@ -61,12 +63,21 @@ public sealed class VoronoiDiagramEffect : BaseEffect
 	protected override void Render (ImageSurface src, ImageSurface dst, RectangleI roi)
 	{
 		VoronoiSettings settings = CreateSettings (dst, roi);
-
+		var changedPixels = CreateColors (roi, settings);
 		Span<ColorBgra> dst_data = dst.GetPixelData ();
+		foreach (var kvp in changedPixels)
+			dst_data[kvp.Key] = kvp.Value;
+	}
 
-		foreach (var pixel in roi.GeneratePixelOffsets (settings.size)) {
+	private static IReadOnlyDictionary<int, ColorBgra> CreateColors (RectangleI roi, VoronoiSettings settings)
+	{
+		ConcurrentDictionary<int, ColorBgra> changedPixels = new ();
+
+		void AssignParallel (Utility.PixelOffset pixel)
+		{
 			double shortestDistance = double.MaxValue;
 			int closestIndex = 0;
+
 			for (var i = 0; i < settings.points.Length; i++) {
 				// TODO: Acceleration structure that limits the search
 				//       to a relevant subset of points, for better performance.
@@ -77,11 +88,18 @@ public sealed class VoronoiDiagramEffect : BaseEffect
 				shortestDistance = distance;
 				closestIndex = i;
 			}
-			dst_data[pixel.memoryOffset] =
-					settings.showPoints && shortestDistance == 0
-					? ColorBgra.Black
-					: settings.colors[closestIndex];
+
+			ColorBgra finalColor =
+				settings.showPoints && shortestDistance == 0
+				? ColorBgra.Black
+				: settings.colors[closestIndex];
+
+			changedPixels[pixel.memoryOffset] = finalColor;
 		}
+
+		Parallel.ForEach (roi.GeneratePixelOffsets (settings.size), AssignParallel);
+
+		return changedPixels;
 	}
 
 	private static IEnumerable<ColorBgra> SortColors (IEnumerable<ColorBgra> baseColors, ColorSorting colorSorting)
