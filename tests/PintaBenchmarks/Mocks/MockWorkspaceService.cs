@@ -24,6 +24,9 @@ internal sealed class MockWorkspaceService : IWorkspaceService
 	public PointD Offset => throw new NotImplementedException ();
 
 	public event EventHandler? ActiveDocumentChanged;
+	public event EventHandler<DocumentEventArgs>? DocumentCreated;
+	public event EventHandler<DocumentEventArgs>? DocumentOpened;
+	public event EventHandler<DocumentEventArgs>? DocumentClosed;
 	public event EventHandler? SelectionChanged;
 
 	public PointD CanvasPointToView (PointD canvas_pos)

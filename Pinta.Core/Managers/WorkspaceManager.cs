@@ -39,9 +39,12 @@ public interface IWorkspaceService
 	Document ActiveDocument { get; }
 	DocumentWorkspace ActiveWorkspace { get; }
 	event EventHandler? ActiveDocumentChanged;
+	event EventHandler<DocumentEventArgs>? DocumentCreated;
+	event EventHandler<DocumentEventArgs>? DocumentOpened;
+	event EventHandler<DocumentEventArgs>? DocumentClosed;
+	event EventHandler? SelectionChanged;
 	RectangleI ClampToImageSize (RectangleI r);
 	bool HasOpenDocuments { get; }
-	event EventHandler? SelectionChanged;
 	SelectionModeHandler SelectionHandler { get; }
 	void Invalidate ();
 	Document? ActiveDocumentOrDefault { get; }
