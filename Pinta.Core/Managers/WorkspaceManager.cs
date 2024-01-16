@@ -66,6 +66,8 @@ public interface IWorkspaceService
 	bool OpenFile (Gio.File file, Window? parent = null);
 	void ResizeImage (Size newSize, ResamplingMode resamplingMode);
 	bool ImageFitsInWindow { get; }
+	Document NewDocumentFromImage (ImageSurface image);
+	void CloseActiveDocument ();
 }
 
 public sealed class WorkspaceManager : IWorkspaceService

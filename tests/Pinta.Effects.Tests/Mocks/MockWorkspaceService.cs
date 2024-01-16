@@ -45,6 +45,11 @@ internal sealed class MockWorkspaceService : IWorkspaceService
 		throw new NotImplementedException ();
 	}
 
+	public void CloseActiveDocument ()
+	{
+		throw new NotImplementedException ();
+	}
+
 	public Document CreateAndActivateDocument (File? file, string? file_type, Size size)
 	{
 		throw new NotImplementedException ();
@@ -66,6 +71,11 @@ internal sealed class MockWorkspaceService : IWorkspaceService
 	}
 
 	public Document NewDocument (Size imageSize, Color backgroundColor)
+	{
+		throw new NotImplementedException ();
+	}
+
+	public Document NewDocumentFromImage (ImageSurface image)
 	{
 		throw new NotImplementedException ();
 	}
