@@ -61,6 +61,11 @@ public interface IWorkspaceService
 	PointD ViewPointToCanvas (PointD view_pos);
 	PointD CanvasPointToView (PointD canvas_pos);
 	void InvalidateWindowRect (RectangleI windowRect);
+	void ResizeCanvas (Size newSize, Anchor anchor, CompoundHistoryItem? compoundAction);
+	Document NewDocument (Size imageSize, Color backgroundColor);
+	bool OpenFile (Gio.File file, Window? parent = null);
+	void ResizeImage (Size newSize, ResamplingMode resamplingMode);
+	bool ImageFitsInWindow { get; }
 }
 
 public sealed class WorkspaceManager : IWorkspaceService

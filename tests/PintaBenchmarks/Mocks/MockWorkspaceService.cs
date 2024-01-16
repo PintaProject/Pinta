@@ -1,4 +1,6 @@
 using System.Collections.ObjectModel;
+using Cairo;
+using Gtk;
 using Pinta.Core;
 
 namespace PintaBenchmarks;
@@ -22,6 +24,8 @@ internal sealed class MockWorkspaceService : IWorkspaceService
 	public double Scale { get => throw new NotImplementedException (); set => throw new NotImplementedException (); }
 
 	public PointD Offset => throw new NotImplementedException ();
+
+	public bool ImageFitsInWindow => throw new NotImplementedException ();
 
 	public event EventHandler? ActiveDocumentChanged;
 	public event EventHandler<DocumentEventArgs>? DocumentCreated;
@@ -59,7 +63,27 @@ internal sealed class MockWorkspaceService : IWorkspaceService
 		throw new NotImplementedException ();
 	}
 
+	public Document NewDocument (Size imageSize, Color backgroundColor)
+	{
+		throw new NotImplementedException ();
+	}
+
+	public bool OpenFile (Gio.File file, Window? parent = null)
+	{
+		throw new NotImplementedException ();
+	}
+
 	public void ResetTitle ()
+	{
+		throw new NotImplementedException ();
+	}
+
+	public void ResizeCanvas (Size newSize, Anchor anchor, CompoundHistoryItem? compoundAction)
+	{
+		throw new NotImplementedException ();
+	}
+
+	public void ResizeImage (Size newSize, ResamplingMode resamplingMode)
 	{
 		throw new NotImplementedException ();
 	}
