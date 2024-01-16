@@ -32,6 +32,7 @@ public sealed class MandelbrotFractalEffect : BaseEffect
 
 	public MandelbrotFractalEffect (IServiceManager services)
 	{
+		invert_effect = new (services);
 		palette = services.GetService<IPaletteService> ();
 		EffectData = new MandelbrotFractalData ();
 	}
@@ -51,7 +52,7 @@ public sealed class MandelbrotFractalEffect : BaseEffect
 	private const double YOffsetBasis = -0.29;
 	private readonly double y_offset = YOffsetBasis;
 
-	private readonly InvertColorsEffect invert_effect = new ();
+	private readonly InvertColorsEffect invert_effect;
 
 	private static double Mandelbrot (double r, double i, int factor)
 	{
