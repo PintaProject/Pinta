@@ -34,11 +34,11 @@ public sealed class AddNoiseEffect : BaseEffect
 		lookup = CreateLookup ();
 	}
 
-	private readonly IChromeManager chrome;
+	private readonly IChromeService chrome;
 
 	public AddNoiseEffect (IServiceManager services)
 	{
-		chrome = services.GetService<IChromeManager> ();
+		chrome = services.GetService<IChromeService> ();
 		EffectData = new NoiseData ();
 	}
 

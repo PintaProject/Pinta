@@ -15,11 +15,11 @@ namespace Pinta.Effects;
 
 public sealed class ReliefEffect : ColorDifferenceEffect
 {
-	private readonly IChromeManager chrome;
+	private readonly IChromeService chrome;
 
 	public ReliefEffect (IServiceManager services)
 	{
-		chrome = services.GetService<IChromeManager> ();
+		chrome = services.GetService<IChromeService> ();
 
 		EffectData = new ReliefData ();
 	}

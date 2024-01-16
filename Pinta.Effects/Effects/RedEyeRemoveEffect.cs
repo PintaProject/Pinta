@@ -28,11 +28,11 @@ public sealed class RedEyeRemoveEffect : BaseEffect
 
 	public RedEyeRemoveData Data => (RedEyeRemoveData) EffectData!;  // NRT - Set in constructor
 
-	private readonly IChromeManager chrome;
+	private readonly IChromeService chrome;
 
 	public RedEyeRemoveEffect (IServiceManager services)
 	{
-		chrome = services.GetService<IChromeManager> ();
+		chrome = services.GetService<IChromeService> ();
 
 		EffectData = new RedEyeRemoveData ();
 	}

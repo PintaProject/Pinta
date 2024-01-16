@@ -28,11 +28,11 @@ public sealed class BulgeEffect : BaseEffect
 
 	public BulgeData Data => (BulgeData) EffectData!;
 
-	private readonly IChromeManager chrome;
+	private readonly IChromeService chrome;
 
 	public BulgeEffect (IServiceManager services)
 	{
-		chrome = services.GetService<IChromeManager> ();
+		chrome = services.GetService<IChromeService> ();
 		EffectData = new BulgeData ();
 	}
 

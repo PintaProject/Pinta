@@ -29,11 +29,11 @@ public sealed class GaussianBlurEffect : BaseEffect
 
 	public GaussianBlurData Data => (GaussianBlurData) EffectData!;  // NRT - Set in constructor
 
-	private readonly IChromeManager chrome;
+	private readonly IChromeService chrome;
 
 	public GaussianBlurEffect (IServiceManager services)
 	{
-		chrome = services.GetService<IChromeManager> ();
+		chrome = services.GetService<IChromeService> ();
 		EffectData = new GaussianBlurData ();
 	}
 

@@ -34,11 +34,11 @@ public sealed class PencilSketchEffect : BaseEffect
 
 	public PencilSketchData Data => (PencilSketchData) EffectData!;  // NRT - Set in constructor
 
-	private readonly IChromeManager chrome;
+	private readonly IChromeService chrome;
 
 	public PencilSketchEffect (IServiceManager services)
 	{
-		chrome = services.GetService<IChromeManager> ();
+		chrome = services.GetService<IChromeService> ();
 
 		EffectData = new PencilSketchData ();
 

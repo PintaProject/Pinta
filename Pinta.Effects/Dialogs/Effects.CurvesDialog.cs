@@ -82,7 +82,7 @@ public sealed class CurvesDialog : Gtk.Dialog
 
 	public CurvesData EffectData { get; }
 
-	public CurvesDialog (IChromeManager chrome, CurvesData effectData)
+	public CurvesDialog (IChromeService chrome, CurvesData effectData)
 	{
 		Title = Translations.GetString ("Curves");
 		TransientFor = chrome.MainWindow;

@@ -59,11 +59,11 @@ public sealed class SoftenPortraitEffect : BaseEffect
 
 	public SoftenPortraitData Data => (SoftenPortraitData) EffectData!;  // NRT - Set in constructor
 
-	private readonly IChromeManager chrome;
+	private readonly IChromeService chrome;
 
 	public SoftenPortraitEffect (IServiceManager services)
 	{
-		chrome = services.GetService<IChromeManager> ();
+		chrome = services.GetService<IChromeService> ();
 
 		EffectData = new SoftenPortraitData ();
 

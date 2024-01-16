@@ -29,11 +29,11 @@ public sealed class TwistEffect : BaseEffect
 
 	public TwistData Data => (TwistData) EffectData!;  // NRT - Set in constructor
 
-	private readonly IChromeManager chrome;
+	private readonly IChromeService chrome;
 
 	public TwistEffect (IServiceManager services)
 	{
-		chrome = services.GetService<IChromeManager> ();
+		chrome = services.GetService<IChromeService> ();
 
 		EffectData = new TwistData ();
 	}

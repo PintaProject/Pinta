@@ -30,11 +30,11 @@ public sealed class JuliaFractalEffect : BaseEffect
 
 	private readonly IPaletteService palette;
 
-	private readonly IChromeManager chrome;
+	private readonly IChromeService chrome;
 
 	public JuliaFractalEffect (IServiceManager services)
 	{
-		chrome = services.GetService<IChromeManager> ();
+		chrome = services.GetService<IChromeService> ();
 		palette = services.GetService<IPaletteService> ();
 		EffectData = new JuliaFractalData ();
 	}

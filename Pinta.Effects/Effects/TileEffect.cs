@@ -28,11 +28,11 @@ public sealed class TileEffect : BaseEffect
 
 	public TileData Data => (TileData) EffectData!;
 
-	private readonly IChromeManager chrome;
+	private readonly IChromeService chrome;
 
 	public TileEffect (IServiceManager services)
 	{
-		chrome = services.GetService<IChromeManager> ();
+		chrome = services.GetService<IChromeService> ();
 
 		EffectData = new TileData ();
 	}

@@ -31,11 +31,11 @@ public sealed class GlowEffect : BaseEffect
 
 	public GlowData Data => (GlowData) EffectData!;  // NRT - Set in constructor
 
-	private readonly IChromeManager chrome;
+	private readonly IChromeService chrome;
 
 	public GlowEffect (IServiceManager services)
 	{
-		chrome = services.GetService<IChromeManager> ();
+		chrome = services.GetService<IChromeService> ();
 		EffectData = new GlowData ();
 		screen_blend_op = new UserBlendOps.ScreenBlendOp ();
 		this.services = services;

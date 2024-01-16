@@ -28,11 +28,11 @@ public sealed class EmbossEffect : BaseEffect
 
 	public EmbossData Data => (EmbossData) EffectData!;
 
-	private readonly IChromeManager chrome;
+	private readonly IChromeService chrome;
 
 	public EmbossEffect (IServiceManager services)
 	{
-		chrome = services.GetService<IChromeManager> ();
+		chrome = services.GetService<IChromeService> ();
 		EffectData = new EmbossData ();
 	}
 

@@ -87,12 +87,12 @@ public partial class LevelsDialog : Gtk.Dialog
 	private readonly ColorPanelWidget colorpanel_out_low;
 	private readonly HistogramWidget histogram_input;
 	private readonly HistogramWidget histogram_output;
-	private readonly IChromeManager chrome;
+	private readonly IChromeService chrome;
 	private readonly IWorkspaceService workspace;
 
 	public LevelsData EffectData { get; }
 
-	public LevelsDialog (IChromeManager chrome, IWorkspaceService workspace, LevelsData effectData)
+	public LevelsDialog (IChromeService chrome, IWorkspaceService workspace, LevelsData effectData)
 	{
 		this.chrome = chrome;
 		this.workspace = workspace;

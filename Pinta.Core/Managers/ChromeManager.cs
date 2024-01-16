@@ -30,61 +30,13 @@ using Mono.Addins.Localization;
 
 namespace Pinta.Core;
 
-public interface IChromeManager
+public interface IChromeService
 {
-	PointI LastCanvasCursorPoint { get; set; }
-
-	Box? MainToolBar { get; }
-	Box ToolToolBar { get; }
-	Box ToolBox { get; }
-	Box StatusBar { get; }
-
-	IProgressDialog ProgressDialog { get; }
-	Gio.Menu AdjustmentsMenu { get; }
-	Gio.Menu EffectsMenu { get; }
-	Application Application { get; }
 	Window MainWindow { get; }
-	Widget ImageTabsNotebook { get; }
-
-	bool MainWindowBusy { get; set; }
-
-	void InitializeApplication (Gtk.Application application);
-
-	void InitializeWindowShell (Window shell);
-
-	void InitializeToolToolBar (Box toolToolBar);
-
-	void InitializeMainToolBar (Box mainToolBar);
-
-	void InitializeStatusBar (Box statusbar);
-
-	void InitializeToolBox (Box toolbox);
-
-	void InitializeImageTabsNotebook (Widget notebook);
-
-	void InitializeMainMenu (Gio.Menu adj_menu, Gio.Menu effects_menu);
-
-	void InitializeProgessDialog (IProgressDialog progressDialog);
-
-	void InitializeErrorDialogHandler (ErrorDialogHandler handler);
-
-	void InitializeMessageDialog (MessageDialogHandler handler);
-
-	void InitializeSimpleEffectDialog (SimpleEffectDialogHandler handler);
-
-	void ShowErrorDialog (Window parent, string message, string body, string details);
-
-	void ShowMessageDialog (Window parent, string message, string body);
-
-	void SetStatusBarText (string text);
-
 	void LaunchSimpleEffectDialog (BaseEffect effect, IAddinLocalizer localizer);
-
-	event EventHandler? LastCanvasCursorPointChanged;
-	event EventHandler<TextChangedEventArgs>? StatusBarTextChanged;
 }
 
-public sealed class ChromeManager : IChromeManager
+public sealed class ChromeManager : IChromeService
 {
 	private PointI last_canvas_cursor_point;
 	private bool main_window_busy;

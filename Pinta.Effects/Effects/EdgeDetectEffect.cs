@@ -28,11 +28,11 @@ public sealed class EdgeDetectEffect : ColorDifferenceEffect
 
 	public EdgeDetectData Data => (EdgeDetectData) EffectData!;  // NRT - Set in constructor
 
-	private readonly IChromeManager chrome;
+	private readonly IChromeService chrome;
 
 	public EdgeDetectEffect (IServiceManager services)
 	{
-		chrome = services.GetService<IChromeManager> ();
+		chrome = services.GetService<IChromeService> ();
 		EffectData = new EdgeDetectData ();
 	}
 

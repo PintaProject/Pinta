@@ -28,11 +28,11 @@ public sealed class RadialBlurEffect : BaseEffect
 
 	public RadialBlurData Data => (RadialBlurData) EffectData!;  // NRT - Set in constructor
 
-	private readonly IChromeManager chrome;
+	private readonly IChromeService chrome;
 
 	public RadialBlurEffect (IServiceManager services)
 	{
-		chrome = services.GetService<IChromeManager> ();
+		chrome = services.GetService<IChromeService> ();
 
 		EffectData = new RadialBlurData ();
 	}

@@ -29,11 +29,11 @@ public sealed class FragmentEffect : BaseEffect
 
 	public FragmentData Data => (FragmentData) EffectData!;  // NRT - Set in constructor
 
-	private readonly IChromeManager chrome;
+	private readonly IChromeService chrome;
 
 	public FragmentEffect (IServiceManager services)
 	{
-		chrome = services.GetService<IChromeManager> ();
+		chrome = services.GetService<IChromeService> ();
 		EffectData = new FragmentData ();
 	}
 

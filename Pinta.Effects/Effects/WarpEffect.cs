@@ -58,7 +58,7 @@ public abstract class WarpEffect : BaseEffect
 
 	protected abstract LivePreviewManager LivePreview { get; }
 	protected abstract IPaletteService Palette { get; }
-	protected abstract IChromeManager Chrome { get; }
+	protected abstract IChromeService Chrome { get; }
 
 
 	#region Algorithm Code Ported From PDN

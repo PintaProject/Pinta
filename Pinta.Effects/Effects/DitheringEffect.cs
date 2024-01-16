@@ -16,11 +16,11 @@ public sealed class DitheringEffect : BaseEffect
 
 	public override bool IsTileable => false;
 
-	private readonly IChromeManager chrome;
+	private readonly IChromeService chrome;
 
 	public DitheringEffect (IServiceManager services)
 	{
-		chrome = services.GetService<IChromeManager> ();
+		chrome = services.GetService<IChromeService> ();
 		EffectData = new DitheringData ();
 	}
 

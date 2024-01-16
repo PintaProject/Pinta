@@ -34,7 +34,7 @@ internal static class EffectHelper
 	/// <summary>
 	/// Launch an effect dialog using Pinta's translation template.
 	/// </summary>
-	internal static void LaunchSimpleEffectDialog (this IChromeManager chrome, BaseEffect effect)
+	internal static void LaunchSimpleEffectDialog (this IChromeService chrome, BaseEffect effect)
 		=> chrome.LaunchSimpleEffectDialog (effect, new PintaLocalizer ());
 }
 

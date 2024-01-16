@@ -31,11 +31,11 @@ public sealed class MedianEffect : LocalHistogramEffect
 
 	public MedianData Data => (MedianData) EffectData!;  // NRT - Set in constructor
 
-	private readonly IChromeManager chrome;
+	private readonly IChromeService chrome;
 
 	public MedianEffect (IServiceManager services)
 	{
-		chrome = services.GetService<IChromeManager> ();
+		chrome = services.GetService<IChromeService> ();
 		EffectData = new MedianData ();
 	}
 

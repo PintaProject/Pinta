@@ -28,11 +28,11 @@ public sealed class FrostedGlassEffect : BaseEffect
 
 	public FrostedGlassData Data => (FrostedGlassData) EffectData!;
 
-	private readonly IChromeManager chrome;
+	private readonly IChromeService chrome;
 
 	public FrostedGlassEffect (IServiceManager services)
 	{
-		chrome = services.GetService<IChromeManager> ();
+		chrome = services.GetService<IChromeService> ();
 		EffectData = new FrostedGlassData ();
 	}
 

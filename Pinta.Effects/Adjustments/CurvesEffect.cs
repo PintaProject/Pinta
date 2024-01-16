@@ -31,11 +31,11 @@ public sealed class CurvesEffect : BaseEffect
 
 	public CurvesData Data => (CurvesData) EffectData!;  // NRT - Set in constructor
 
-	private readonly IChromeManager chrome;
+	private readonly IChromeService chrome;
 
 	public CurvesEffect (IServiceManager services)
 	{
-		chrome = services.GetService<IChromeManager> ();
+		chrome = services.GetService<IChromeService> ();
 
 		EffectData = new CurvesData ();
 	}

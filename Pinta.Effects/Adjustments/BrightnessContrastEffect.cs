@@ -33,11 +33,11 @@ public sealed class BrightnessContrastEffect : BaseEffect
 
 	public BrightnessContrastData Data => (BrightnessContrastData) EffectData!;  // NRT - Set in constructor
 
-	private readonly IChromeManager chrome;
+	private readonly IChromeService chrome;
 
 	public BrightnessContrastEffect (IServiceManager services)
 	{
-		chrome = services.GetService<IChromeManager> ();
+		chrome = services.GetService<IChromeService> ();
 		EffectData = new BrightnessContrastData ();
 		EffectData.PropertyChanged += HandleEffectDataPropertyChanged;
 	}

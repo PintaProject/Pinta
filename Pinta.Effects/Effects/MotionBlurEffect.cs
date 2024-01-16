@@ -28,11 +28,11 @@ public sealed class MotionBlurEffect : BaseEffect
 
 	public MotionBlurData Data => (MotionBlurData) EffectData!;  // NRT - Set in constructor
 
-	private readonly IChromeManager chrome;
+	private readonly IChromeService chrome;
 
 	public MotionBlurEffect (IServiceManager services)
 	{
-		chrome = services.GetService<IChromeManager> ();
+		chrome = services.GetService<IChromeService> ();
 		EffectData = new MotionBlurData ();
 	}
 

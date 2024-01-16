@@ -31,11 +31,11 @@ public sealed class OutlineEffect : LocalHistogramEffect
 
 	public OutlineData Data => (OutlineData) EffectData!;  // NRT - Set in constructor
 
-	private readonly IChromeManager chrome;
+	private readonly IChromeService chrome;
 
 	public OutlineEffect (IServiceManager services)
 	{
-		chrome = services.GetService<IChromeManager> ();
+		chrome = services.GetService<IChromeService> ();
 		EffectData = new OutlineData ();
 	}
 

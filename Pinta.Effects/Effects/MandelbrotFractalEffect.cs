@@ -30,11 +30,11 @@ public sealed class MandelbrotFractalEffect : BaseEffect
 
 	private readonly IPaletteService palette;
 
-	private readonly IChromeManager chrome;
+	private readonly IChromeService chrome;
 
 	public MandelbrotFractalEffect (IServiceManager services)
 	{
-		chrome = services.GetService<IChromeManager> ();
+		chrome = services.GetService<IChromeService> ();
 		invert_effect = new (services);
 		palette = services.GetService<IPaletteService> ();
 		EffectData = new MandelbrotFractalData ();

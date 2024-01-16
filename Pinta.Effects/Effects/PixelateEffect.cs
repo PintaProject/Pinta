@@ -28,11 +28,11 @@ public sealed class PixelateEffect : BaseEffect
 
 	public override string EffectMenuCategory => Translations.GetString ("Distort");
 
-	private readonly IChromeManager chrome;
+	private readonly IChromeService chrome;
 
 	public PixelateEffect (IServiceManager services)
 	{
-		chrome = services.GetService<IChromeManager> ();
+		chrome = services.GetService<IChromeService> ();
 
 		EffectData = new PixelateData ();
 	}

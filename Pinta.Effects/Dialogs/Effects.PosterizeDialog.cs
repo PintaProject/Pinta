@@ -46,7 +46,7 @@ public sealed class PosterizeDialog : Gtk.Dialog
 
 	public PosterizeData? EffectData { get; set; }
 
-	public PosterizeDialog (IChromeManager chrome)
+	public PosterizeDialog (IChromeService chrome)
 	{
 		Title = Translations.GetString ("Posterize");
 		TransientFor = chrome.MainWindow;

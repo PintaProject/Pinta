@@ -28,11 +28,11 @@ public sealed class SharpenEffect : LocalHistogramEffect
 
 	public SharpenData Data => (SharpenData) EffectData!;  // NRT - Set in constructor
 
-	private readonly IChromeManager chrome;
+	private readonly IChromeService chrome;
 
 	public SharpenEffect (IServiceManager services)
 	{
-		chrome = services.GetService<IChromeManager> ();
+		chrome = services.GetService<IChromeService> ();
 
 		EffectData = new SharpenData ();
 	}

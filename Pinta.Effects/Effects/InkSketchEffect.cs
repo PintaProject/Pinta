@@ -37,11 +37,11 @@ public sealed class InkSketchEffect : BaseEffect
 
 	public InkSketchData Data => (InkSketchData) EffectData!;  // NRT - Set in constructor
 
-	private readonly IChromeManager chrome;
+	private readonly IChromeService chrome;
 
 	public InkSketchEffect (IServiceManager services)
 	{
-		chrome = services.GetService<IChromeManager> ();
+		chrome = services.GetService<IChromeService> ();
 		EffectData = new InkSketchData ();
 
 		glow_effect = new GlowEffect (services);

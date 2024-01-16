@@ -28,11 +28,11 @@ public sealed class OilPaintingEffect : BaseEffect
 
 	public OilPaintingData Data => (OilPaintingData) EffectData!;  // NRT - Set in constructor
 
-	private readonly IChromeManager chrome;
+	private readonly IChromeService chrome;
 
 	public OilPaintingEffect (IServiceManager services)
 	{
-		chrome = services.GetService<IChromeManager> ();
+		chrome = services.GetService<IChromeService> ();
 		EffectData = new OilPaintingData ();
 	}
 
