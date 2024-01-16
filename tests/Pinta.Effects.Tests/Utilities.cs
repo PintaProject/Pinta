@@ -19,6 +19,7 @@ internal static class Utilities
 		ServiceManager manager = new ();
 		manager.AddService<IPaletteService> (new MockPalette ());
 		manager.AddService<IChromeManager> (new MockChromeManager ());
+		manager.AddService<IWorkspaceService> (new MockWorkspaceService ());
 		return manager;
 	}
 

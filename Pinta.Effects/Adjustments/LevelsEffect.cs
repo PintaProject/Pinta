@@ -30,17 +30,19 @@ public sealed class LevelsEffect : BaseEffect
 	public LevelsData Data => (LevelsData) EffectData!;  // NRT - Set in constructor
 
 	private readonly IChromeManager chrome;
+	private readonly IWorkspaceService workspace;
 
 	public LevelsEffect (IServiceManager services)
 	{
 		chrome = services.GetService<IChromeManager> ();
+		workspace = services.GetService<IWorkspaceService> ();
 
 		EffectData = new LevelsData ();
 	}
 
 	public override void LaunchConfiguration ()
 	{
-		LevelsDialog dialog = new (chrome, Data) {
+		LevelsDialog dialog = new (chrome, workspace, Data) {
 			Title = Name,
 			IconName = Icon,
 		};

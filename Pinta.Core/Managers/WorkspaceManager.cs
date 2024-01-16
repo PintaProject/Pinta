@@ -43,6 +43,19 @@ public interface IWorkspaceService
 	bool HasOpenDocuments { get; }
 	event EventHandler? SelectionChanged;
 	SelectionModeHandler SelectionHandler { get; }
+	void Invalidate ();
+	Document? ActiveDocumentOrDefault { get; }
+	void ResetTitle ();
+	ReadOnlyCollection<Document> OpenDocuments { get; }
+	Size ImageSize { get; set; }
+	Size CanvasSize { get; set; }
+	double Scale { get; set; }
+	PointD Offset { get; }
+	Document CreateAndActivateDocument (Gio.File? file, string? file_type, Size size);
+	void SetActiveDocumentInternal (Document document);
+	void Invalidate (RectangleI rect);
+	void SetActiveDocument (Document document);
+	PointD ViewPointToCanvas (PointD view_pos);
 }
 
 public sealed class WorkspaceManager : IWorkspaceService
@@ -298,7 +311,7 @@ public sealed class WorkspaceManager : IWorkspaceService
 
 	public bool ImageFitsInWindow => ActiveWorkspace.ImageFitsInWindow;
 
-	internal void ResetTitle ()
+	public void ResetTitle ()
 	{
 		if (HasOpenDocuments)
 			PintaCore.Chrome.MainWindow.Title = $"{ActiveDocument.DisplayName}{(ActiveDocument.IsDirty ? "*" : "")} - Pinta";
@@ -327,7 +340,7 @@ public sealed class WorkspaceManager : IWorkspaceService
 		PintaCore.Actions.Window.SetActiveDocument (document);
 	}
 
-	internal void SetActiveDocumentInternal (Document document)
+	public void SetActiveDocumentInternal (Document document)
 	{
 		// Work around a case where we closed a document but haven't updated
 		// the active_document_index yet and it points to the closed document

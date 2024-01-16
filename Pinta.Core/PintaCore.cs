@@ -43,7 +43,7 @@ public static class PintaCore
 	public static SettingsManager Settings { get; }
 	public static SystemManager System { get; }
 	public static ToolManager Tools { get; }
-	public static WorkspaceManager Workspace { get; }
+	public static IWorkspaceService Workspace { get; }
 
 	public const string ApplicationVersion = "2.2";
 
@@ -72,7 +72,7 @@ public static class PintaCore
 		Services.AddService<IResourceService> (Resources);
 		Services.AddService<ISettingsService> (Settings);
 		Services.AddService (Actions);
-		Services.AddService<IWorkspaceService> (Workspace);
+		Services.AddService (Workspace);
 		Services.AddService (Layers);
 		Services.AddService<IPaintBrushService> (PaintBrushes);
 		Services.AddService<IToolService> (Tools);

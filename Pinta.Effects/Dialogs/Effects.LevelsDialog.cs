@@ -88,12 +88,14 @@ public partial class LevelsDialog : Gtk.Dialog
 	private readonly HistogramWidget histogram_input;
 	private readonly HistogramWidget histogram_output;
 	private readonly IChromeManager chrome;
+	private readonly IWorkspaceService workspace;
 
 	public LevelsData EffectData { get; }
 
-	public LevelsDialog (IChromeManager chrome, LevelsData effectData)
+	public LevelsDialog (IChromeManager chrome, IWorkspaceService workspace, LevelsData effectData)
 	{
 		this.chrome = chrome;
+		this.workspace = workspace;
 
 		Title = Translations.GetString ("Levels Adjustment");
 		TransientFor = chrome.MainWindow;
@@ -242,7 +244,7 @@ public partial class LevelsDialog : Gtk.Dialog
 
 	private void UpdateInputHistogram ()
 	{
-		var doc = PintaCore.Workspace.ActiveDocument;
+		var doc = workspace.ActiveDocument;
 
 		ImageSurface surface = doc.Layers.CurrentUserLayer.Surface;
 		RectangleI rect = doc.Selection.SelectionPath.GetBounds ();
