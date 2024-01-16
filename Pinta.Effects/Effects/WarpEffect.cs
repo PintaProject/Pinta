@@ -56,7 +56,6 @@ public abstract class WarpEffect : BaseEffect
 	protected double DefaultRadius { get; private set; } = 0;
 	protected double DefaultRadius2 { get; private set; } = 0;
 
-	protected abstract LivePreviewManager LivePreview { get; }
 	protected abstract IPaletteService Palette { get; }
 	protected abstract IChromeService Chrome { get; }
 
@@ -98,7 +97,7 @@ public abstract class WarpEffect : BaseEffect
 		WarpEdgeBehavior edgeBehavior);
 	private WarpSettings CreateSettings ()
 	{
-		var selection = LivePreview.RenderBounds;
+		var selection = PintaCore.LivePreview.RenderBounds;
 		return new (
 			selection: selection,
 			x_center_offset: selection.Left + (selection.Width * (1.0 + Data.CenterOffset.X) * 0.5),
@@ -160,9 +159,7 @@ public abstract class WarpEffect : BaseEffect
 	protected readonly record struct TransformData (double X, double Y);
 
 	private static bool IsOnSurface (ImageSurface src, float u, float v)
-	{
-		return (u >= 0 && u <= (src.Width - 1) && v >= 0 && v <= (src.Height - 1));
-	}
+		=> (u >= 0 && u <= (src.Width - 1) && v >= 0 && v <= (src.Height - 1));
 
 	private static float ReflectCoord (float value, int max)
 	{
@@ -178,9 +175,8 @@ public abstract class WarpEffect : BaseEffect
 			reflection = !reflection;
 		}
 
-		if (reflection) {
+		if (reflection)
 			value = max - value;
-		}
 
 		return value;
 	}
