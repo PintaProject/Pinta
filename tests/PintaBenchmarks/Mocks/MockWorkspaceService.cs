@@ -26,6 +26,11 @@ internal sealed class MockWorkspaceService : IWorkspaceService
 	public event EventHandler? ActiveDocumentChanged;
 	public event EventHandler? SelectionChanged;
 
+	public PointD CanvasPointToView (PointD canvas_pos)
+	{
+		throw new NotImplementedException ();
+	}
+
 	public RectangleI ClampToImageSize (RectangleI r)
 	{
 		throw new NotImplementedException ();
@@ -42,6 +47,11 @@ internal sealed class MockWorkspaceService : IWorkspaceService
 	}
 
 	public void Invalidate (RectangleI rect)
+	{
+		throw new NotImplementedException ();
+	}
+
+	public void InvalidateWindowRect (RectangleI windowRect)
 	{
 		throw new NotImplementedException ();
 	}

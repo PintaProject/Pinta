@@ -56,6 +56,8 @@ public interface IWorkspaceService
 	void Invalidate (RectangleI rect);
 	void SetActiveDocument (Document document);
 	PointD ViewPointToCanvas (PointD view_pos);
+	PointD CanvasPointToView (PointD canvas_pos);
+	void InvalidateWindowRect (RectangleI windowRect);
 }
 
 public sealed class WorkspaceManager : IWorkspaceService
