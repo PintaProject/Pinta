@@ -56,6 +56,10 @@ public abstract class WarpEffect : BaseEffect
 	protected double DefaultRadius { get; private set; } = 0;
 	protected double DefaultRadius2 { get; private set; } = 0;
 
+	protected abstract LivePreviewManager LivePreview { get; }
+	protected abstract IPaletteService Palette { get; }
+
+
 	#region Algorithm Code Ported From PDN
 	public override void Render (ImageSurface src, ImageSurface dst, ReadOnlySpan<RectangleI> rois)
 	{
@@ -93,13 +97,13 @@ public abstract class WarpEffect : BaseEffect
 		WarpEdgeBehavior edgeBehavior);
 	private WarpSettings CreateSettings ()
 	{
-		var selection = PintaCore.LivePreview.RenderBounds;
+		var selection = LivePreview.RenderBounds;
 		return new (
 			selection: selection,
 			x_center_offset: selection.Left + (selection.Width * (1.0 + Data.CenterOffset.X) * 0.5),
 			y_center_offset: selection.Top + (selection.Height * (1.0 + Data.CenterOffset.Y) * 0.5),
-			colPrimary: PintaCore.Palette.PrimaryColor.ToColorBgra (),
-			colSecondary: PintaCore.Palette.SecondaryColor.ToColorBgra (),
+			colPrimary: Palette.PrimaryColor.ToColorBgra (),
+			colSecondary: Palette.SecondaryColor.ToColorBgra (),
 			colTransparent: ColorBgra.Transparent,
 			aaSampleCount: Data.Quality * Data.Quality,
 			edgeBehavior: Data.EdgeBehavior

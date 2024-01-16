@@ -26,8 +26,13 @@ public sealed class PolarInversionEffect : WarpEffect
 
 	public override string EffectMenuCategory => Translations.GetString ("Distort");
 
-	public PolarInversionEffect (IServiceManager _)
+	protected override LivePreviewManager LivePreview { get; }
+	protected override IPaletteService Palette { get; }
+
+	public PolarInversionEffect (IServiceManager services)
 	{
+		LivePreview = services.GetService<LivePreviewManager> ();
+		Palette = services.GetService<IPaletteService> ();
 		EffectData = new PolarInversionData ();
 	}
 
