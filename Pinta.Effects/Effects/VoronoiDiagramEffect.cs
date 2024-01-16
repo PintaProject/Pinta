@@ -63,11 +63,17 @@ public sealed class VoronoiDiagramEffect : BaseEffect
 	protected override void Render (ImageSurface src, ImageSurface dst, RectangleI roi)
 	{
 		VoronoiSettings settings = CreateSettings (dst, roi);
+		var changedPixels = CreateColors (roi, settings);
 		Span<ColorBgra> dst_data = dst.GetPixelData ();
-		foreach (var kvp in roi.GeneratePixelOffsets (settings.size).Select (CreateColor).AsParallel ())
+		foreach (var kvp in changedPixels)
 			dst_data[kvp.Key] = kvp.Value;
+	}
 
-		KeyValuePair<int, ColorBgra> CreateColor (Utility.PixelOffset pixel)
+	private static IReadOnlyDictionary<int, ColorBgra> CreateColors (RectangleI roi, VoronoiSettings settings)
+	{
+		ConcurrentDictionary<int, ColorBgra> changedPixels = new ();
+
+		void AssignParallel (Utility.PixelOffset pixel)
 		{
 			double shortestDistance = double.MaxValue;
 			int closestIndex = 0;
@@ -88,8 +94,12 @@ public sealed class VoronoiDiagramEffect : BaseEffect
 				? ColorBgra.Black
 				: settings.colors[closestIndex];
 
-			return KeyValuePair.Create (pixel.memoryOffset, finalColor);
+			changedPixels[pixel.memoryOffset] = finalColor;
 		}
+
+		Parallel.ForEach (roi.GeneratePixelOffsets (settings.size), AssignParallel);
+
+		return changedPixels;
 	}
 
 	private static IEnumerable<ColorBgra> SortColors (IEnumerable<ColorBgra> baseColors, ColorSorting colorSorting)
