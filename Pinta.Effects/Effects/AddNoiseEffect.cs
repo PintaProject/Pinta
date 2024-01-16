@@ -34,14 +34,17 @@ public sealed class AddNoiseEffect : BaseEffect
 		lookup = CreateLookup ();
 	}
 
-	public AddNoiseEffect (IServiceManager _)
+	private readonly IChromeManager chrome;
+
+	public AddNoiseEffect (IServiceManager services)
 	{
+		chrome = services.GetService<IChromeManager> ();
 		EffectData = new NoiseData ();
 	}
 
 	public override void LaunchConfiguration ()
 	{
-		EffectHelper.LaunchSimpleEffectDialog (this);
+		chrome.LaunchSimpleEffectDialog (this);
 	}
 
 	#region Algorithm Code Ported From PDN

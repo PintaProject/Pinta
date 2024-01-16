@@ -29,7 +29,7 @@ namespace Pinta.Core;
 public static class PintaCore
 {
 	public static ActionManager Actions { get; }
-	public static ChromeManager Chrome { get; }
+	public static IChromeManager Chrome { get; }
 	public static EffectsManager Effects { get; }
 	public static ImageConverterManager ImageFormats { get; }
 	public static IServiceManager Services { get; }

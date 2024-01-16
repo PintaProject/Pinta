@@ -59,8 +59,12 @@ public sealed class SoftenPortraitEffect : BaseEffect
 
 	public SoftenPortraitData Data => (SoftenPortraitData) EffectData!;  // NRT - Set in constructor
 
+	private readonly IChromeManager chrome;
+
 	public SoftenPortraitEffect (IServiceManager services)
 	{
+		chrome = services.GetService<IChromeManager> ();
+
 		EffectData = new SoftenPortraitData ();
 
 		blur_effect = new GaussianBlurEffect (services);
@@ -71,7 +75,7 @@ public sealed class SoftenPortraitEffect : BaseEffect
 
 	public override void LaunchConfiguration ()
 	{
-		EffectHelper.LaunchSimpleEffectDialog (this);
+		chrome.LaunchSimpleEffectDialog (this);
 	}
 
 	public override void Render (ImageSurface src, ImageSurface dest, ReadOnlySpan<RectangleI> rois)

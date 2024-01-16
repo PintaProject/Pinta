@@ -28,14 +28,18 @@ public sealed class SharpenEffect : LocalHistogramEffect
 
 	public SharpenData Data => (SharpenData) EffectData!;  // NRT - Set in constructor
 
-	public SharpenEffect (IServiceManager _)
+	private readonly IChromeManager chrome;
+
+	public SharpenEffect (IServiceManager services)
 	{
+		chrome = services.GetService<IChromeManager> ();
+
 		EffectData = new SharpenData ();
 	}
 
 	public override void LaunchConfiguration ()
 	{
-		EffectHelper.LaunchSimpleEffectDialog (this);
+		chrome.LaunchSimpleEffectDialog (this);
 	}
 
 	public override void Render (ImageSurface src, ImageSurface dest, ReadOnlySpan<RectangleI> rois)

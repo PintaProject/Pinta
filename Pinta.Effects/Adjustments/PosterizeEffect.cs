@@ -29,14 +29,18 @@ public sealed class PosterizeEffect : BaseEffect
 
 	public PosterizeData Data => (PosterizeData) EffectData!;  // NRT - Set in constructor
 
-	public PosterizeEffect (IServiceManager _)
+	private readonly IChromeManager chrome;
+
+	public PosterizeEffect (IServiceManager services)
 	{
+		chrome = services.GetService<IChromeManager> ();
+
 		EffectData = new PosterizeData ();
 	}
 
 	public override void LaunchConfiguration ()
 	{
-		PosterizeDialog dialog = new () {
+		PosterizeDialog dialog = new (chrome) {
 			Title = Name,
 			IconName = Icon,
 			EffectData = Data

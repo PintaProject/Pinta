@@ -28,14 +28,17 @@ public sealed class ZoomBlurEffect : BaseEffect
 
 	public ZoomBlurData Data => (ZoomBlurData) EffectData!;  // NRT - Set in constructor
 
-	public ZoomBlurEffect (IServiceManager _)
+	private readonly IChromeManager chrome;
+
+	public ZoomBlurEffect (IServiceManager services)
 	{
+		chrome = services.GetService<IChromeManager> ();
 		EffectData = new ZoomBlurData ();
 	}
 
 	public override void LaunchConfiguration ()
 	{
-		EffectHelper.LaunchSimpleEffectDialog (this);
+		chrome.LaunchSimpleEffectDialog (this);
 	}
 
 	#region Algorithm Code Ported From PDN

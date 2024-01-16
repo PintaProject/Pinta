@@ -31,14 +31,17 @@ public sealed class MedianEffect : LocalHistogramEffect
 
 	public MedianData Data => (MedianData) EffectData!;  // NRT - Set in constructor
 
-	public MedianEffect (IServiceManager _)
+	private readonly IChromeManager chrome;
+
+	public MedianEffect (IServiceManager services)
 	{
+		chrome = services.GetService<IChromeManager> ();
 		EffectData = new MedianData ();
 	}
 
 	public override void LaunchConfiguration ()
 	{
-		EffectHelper.LaunchSimpleEffectDialog (this);
+		chrome.LaunchSimpleEffectDialog (this);
 	}
 
 	#region Algorithm Code Ported From PDN

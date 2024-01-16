@@ -28,14 +28,17 @@ public sealed class OilPaintingEffect : BaseEffect
 
 	public OilPaintingData Data => (OilPaintingData) EffectData!;  // NRT - Set in constructor
 
-	public OilPaintingEffect (IServiceManager _)
+	private readonly IChromeManager chrome;
+
+	public OilPaintingEffect (IServiceManager services)
 	{
+		chrome = services.GetService<IChromeManager> ();
 		EffectData = new OilPaintingData ();
 	}
 
 	public override void LaunchConfiguration ()
 	{
-		EffectHelper.LaunchSimpleEffectDialog (this);
+		chrome.LaunchSimpleEffectDialog (this);
 	}
 
 	#region Algorithm Code Ported From PDN

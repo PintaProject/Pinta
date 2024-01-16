@@ -15,8 +15,12 @@ namespace Pinta.Effects;
 
 public sealed class ReliefEffect : ColorDifferenceEffect
 {
-	public ReliefEffect (IServiceManager _)
+	private readonly IChromeManager chrome;
+
+	public ReliefEffect (IServiceManager services)
 	{
+		chrome = services.GetService<IChromeManager> ();
+
 		EffectData = new ReliefData ();
 	}
 
@@ -30,7 +34,7 @@ public sealed class ReliefEffect : ColorDifferenceEffect
 
 	public override void LaunchConfiguration ()
 	{
-		EffectHelper.LaunchSimpleEffectDialog (this);
+		chrome.LaunchSimpleEffectDialog (this);
 	}
 
 	public override string Icon => Pinta.Resources.Icons.EffectsStylizeRelief;

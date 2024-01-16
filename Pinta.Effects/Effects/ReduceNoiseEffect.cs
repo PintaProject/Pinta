@@ -31,14 +31,18 @@ public sealed class ReduceNoiseEffect : LocalHistogramEffect
 
 	public ReduceNoiseData Data => (ReduceNoiseData) EffectData!;  // NRT - Set in constructor
 
-	public ReduceNoiseEffect (IServiceManager _)
+	private readonly IChromeManager chrome;
+
+	public ReduceNoiseEffect (IServiceManager services)
 	{
+		chrome = services.GetService<IChromeManager> ();
+
 		EffectData = new ReduceNoiseData ();
 	}
 
 	public override void LaunchConfiguration ()
 	{
-		EffectHelper.LaunchSimpleEffectDialog (this);
+		chrome.LaunchSimpleEffectDialog (this);
 	}
 
 	#region Algorithm Code Ported From PDN

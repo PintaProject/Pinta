@@ -31,14 +31,18 @@ public sealed class CurvesEffect : BaseEffect
 
 	public CurvesData Data => (CurvesData) EffectData!;  // NRT - Set in constructor
 
-	public CurvesEffect (IServiceManager _)
+	private readonly IChromeManager chrome;
+
+	public CurvesEffect (IServiceManager services)
 	{
+		chrome = services.GetService<IChromeManager> ();
+
 		EffectData = new CurvesData ();
 	}
 
 	public override void LaunchConfiguration ()
 	{
-		CurvesDialog dialog = new (Data) {
+		CurvesDialog dialog = new (chrome, Data) {
 			Title = Name,
 			IconName = Icon,
 		};

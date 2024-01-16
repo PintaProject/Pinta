@@ -28,14 +28,18 @@ public sealed class PixelateEffect : BaseEffect
 
 	public override string EffectMenuCategory => Translations.GetString ("Distort");
 
-	public PixelateEffect (IServiceManager _)
+	private readonly IChromeManager chrome;
+
+	public PixelateEffect (IServiceManager services)
 	{
+		chrome = services.GetService<IChromeManager> ();
+
 		EffectData = new PixelateData ();
 	}
 
 	public override void LaunchConfiguration ()
 	{
-		EffectHelper.LaunchSimpleEffectDialog (this);
+		chrome.LaunchSimpleEffectDialog (this);
 	}
 
 	#region Algorithm Code Ported From PDN

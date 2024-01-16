@@ -31,14 +31,17 @@ public sealed class OutlineEffect : LocalHistogramEffect
 
 	public OutlineData Data => (OutlineData) EffectData!;  // NRT - Set in constructor
 
-	public OutlineEffect (IServiceManager _)
+	private readonly IChromeManager chrome;
+
+	public OutlineEffect (IServiceManager services)
 	{
+		chrome = services.GetService<IChromeManager> ();
 		EffectData = new OutlineData ();
 	}
 
 	public override void LaunchConfiguration ()
 	{
-		EffectHelper.LaunchSimpleEffectDialog (this);
+		chrome.LaunchSimpleEffectDialog (this);
 	}
 
 	#region Algorithm Code Ported From PDN

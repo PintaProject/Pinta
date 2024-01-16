@@ -50,7 +50,7 @@ public abstract class WarpEffect : BaseEffect
 
 	public override void LaunchConfiguration ()
 	{
-		EffectHelper.LaunchSimpleEffectDialog (this);
+		Chrome.LaunchSimpleEffectDialog (this);
 	}
 
 	protected double DefaultRadius { get; private set; } = 0;
@@ -58,6 +58,7 @@ public abstract class WarpEffect : BaseEffect
 
 	protected abstract LivePreviewManager LivePreview { get; }
 	protected abstract IPaletteService Palette { get; }
+	protected abstract IChromeManager Chrome { get; }
 
 
 	#region Algorithm Code Ported From PDN

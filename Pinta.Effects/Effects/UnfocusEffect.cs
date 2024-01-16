@@ -30,14 +30,18 @@ public sealed class UnfocusEffect : LocalHistogramEffect
 
 	public UnfocusData Data => (UnfocusData) EffectData!;  // NRT - Set in constructor
 
-	public UnfocusEffect (IServiceManager _)
+	private readonly IChromeManager chrome;
+
+	public UnfocusEffect (IServiceManager services)
 	{
+		chrome = services.GetService<IChromeManager> ();
+
 		EffectData = new UnfocusData ();
 	}
 
 	public override void LaunchConfiguration ()
 	{
-		EffectHelper.LaunchSimpleEffectDialog (this);
+		chrome.LaunchSimpleEffectDialog (this);
 	}
 
 	#region Algorithm Code Ported From PDN

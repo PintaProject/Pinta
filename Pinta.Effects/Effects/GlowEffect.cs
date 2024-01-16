@@ -31,8 +31,11 @@ public sealed class GlowEffect : BaseEffect
 
 	public GlowData Data => (GlowData) EffectData!;  // NRT - Set in constructor
 
+	private readonly IChromeManager chrome;
+
 	public GlowEffect (IServiceManager services)
 	{
+		chrome = services.GetService<IChromeManager> ();
 		EffectData = new GlowData ();
 		screen_blend_op = new UserBlendOps.ScreenBlendOp ();
 		this.services = services;
@@ -40,7 +43,7 @@ public sealed class GlowEffect : BaseEffect
 
 	public override void LaunchConfiguration ()
 	{
-		EffectHelper.LaunchSimpleEffectDialog (this);
+		chrome.LaunchSimpleEffectDialog (this);
 	}
 
 	#region Algorithm Code Ported From PDN

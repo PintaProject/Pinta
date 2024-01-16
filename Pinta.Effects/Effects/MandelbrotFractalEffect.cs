@@ -30,8 +30,11 @@ public sealed class MandelbrotFractalEffect : BaseEffect
 
 	private readonly IPaletteService palette;
 
+	private readonly IChromeManager chrome;
+
 	public MandelbrotFractalEffect (IServiceManager services)
 	{
+		chrome = services.GetService<IChromeManager> ();
 		invert_effect = new (services);
 		palette = services.GetService<IPaletteService> ();
 		EffectData = new MandelbrotFractalData ();
@@ -39,7 +42,7 @@ public sealed class MandelbrotFractalEffect : BaseEffect
 
 	public override void LaunchConfiguration ()
 	{
-		EffectHelper.LaunchSimpleEffectDialog (this);
+		chrome.LaunchSimpleEffectDialog (this);
 	}
 
 	#region Algorithm Code Ported From PDN

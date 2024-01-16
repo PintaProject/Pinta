@@ -29,14 +29,18 @@ public sealed class TwistEffect : BaseEffect
 
 	public TwistData Data => (TwistData) EffectData!;  // NRT - Set in constructor
 
-	public TwistEffect (IServiceManager _)
+	private readonly IChromeManager chrome;
+
+	public TwistEffect (IServiceManager services)
 	{
+		chrome = services.GetService<IChromeManager> ();
+
 		EffectData = new TwistData ();
 	}
 
 	public override void LaunchConfiguration ()
 	{
-		EffectHelper.LaunchSimpleEffectDialog (this);
+		chrome.LaunchSimpleEffectDialog (this);
 	}
 
 	#region Algorithm Code Ported From PDN

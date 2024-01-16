@@ -82,10 +82,10 @@ public sealed class CurvesDialog : Gtk.Dialog
 
 	public CurvesData EffectData { get; }
 
-	public CurvesDialog (CurvesData effectData)
+	public CurvesDialog (IChromeManager chrome, CurvesData effectData)
 	{
 		Title = Translations.GetString ("Curves");
-		TransientFor = PintaCore.Chrome.MainWindow;
+		TransientFor = chrome.MainWindow;
 		Modal = true;
 		this.AddCancelOkButtons ();
 		this.SetDefaultResponse (ResponseType.Ok);

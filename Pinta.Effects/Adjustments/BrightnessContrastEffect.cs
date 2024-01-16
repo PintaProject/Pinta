@@ -33,8 +33,11 @@ public sealed class BrightnessContrastEffect : BaseEffect
 
 	public BrightnessContrastData Data => (BrightnessContrastData) EffectData!;  // NRT - Set in constructor
 
-	public BrightnessContrastEffect (IServiceManager _)
+	private readonly IChromeManager chrome;
+
+	public BrightnessContrastEffect (IServiceManager services)
 	{
+		chrome = services.GetService<IChromeManager> ();
 		EffectData = new BrightnessContrastData ();
 		EffectData.PropertyChanged += HandleEffectDataPropertyChanged;
 	}
@@ -49,7 +52,7 @@ public sealed class BrightnessContrastEffect : BaseEffect
 
 	public override void LaunchConfiguration ()
 	{
-		EffectHelper.LaunchSimpleEffectDialog (this);
+		chrome.LaunchSimpleEffectDialog (this);
 	}
 
 	public override void Render (ImageSurface src, ImageSurface dest, ReadOnlySpan<RectangleI> rois)

@@ -28,11 +28,13 @@ public sealed class PolarInversionEffect : WarpEffect
 
 	protected override LivePreviewManager LivePreview { get; }
 	protected override IPaletteService Palette { get; }
+	protected override IChromeManager Chrome { get; }
 
 	public PolarInversionEffect (IServiceManager services)
 	{
 		LivePreview = services.GetService<LivePreviewManager> ();
 		Palette = services.GetService<IPaletteService> ();
+		Chrome = services.GetService<IChromeManager> ();
 		EffectData = new PolarInversionData ();
 	}
 

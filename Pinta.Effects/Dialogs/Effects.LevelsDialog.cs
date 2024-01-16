@@ -90,7 +90,7 @@ public partial class LevelsDialog : Gtk.Dialog
 
 	public LevelsData EffectData { get; }
 
-	public LevelsDialog (LevelsData effectData)
+	public LevelsDialog (IChromeManager chrome, LevelsData effectData)
 	{
 		Title = Translations.GetString ("Levels Adjustment");
 		TransientFor = PintaCore.Chrome.MainWindow;

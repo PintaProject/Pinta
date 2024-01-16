@@ -28,14 +28,17 @@ public sealed class FrostedGlassEffect : BaseEffect
 
 	public FrostedGlassData Data => (FrostedGlassData) EffectData!;
 
-	public FrostedGlassEffect (IServiceManager _)
+	private readonly IChromeManager chrome;
+
+	public FrostedGlassEffect (IServiceManager services)
 	{
+		chrome = services.GetService<IChromeManager> ();
 		EffectData = new FrostedGlassData ();
 	}
 
 	public override void LaunchConfiguration ()
 	{
-		EffectHelper.LaunchSimpleEffectDialog (this);
+		chrome.LaunchSimpleEffectDialog (this);
 	}
 
 	#region Algorithm Code Ported From PDN

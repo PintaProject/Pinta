@@ -34,8 +34,12 @@ public sealed class PencilSketchEffect : BaseEffect
 
 	public PencilSketchData Data => (PencilSketchData) EffectData!;  // NRT - Set in constructor
 
+	private readonly IChromeManager chrome;
+
 	public PencilSketchEffect (IServiceManager services)
 	{
+		chrome = services.GetService<IChromeManager> ();
+
 		EffectData = new PencilSketchData ();
 
 		blur_effect = new GaussianBlurEffect (services);
@@ -47,7 +51,7 @@ public sealed class PencilSketchEffect : BaseEffect
 
 	public override void LaunchConfiguration ()
 	{
-		EffectHelper.LaunchSimpleEffectDialog (this);
+		chrome.LaunchSimpleEffectDialog (this);
 	}
 
 	#region Algorithm Code Ported From PDN

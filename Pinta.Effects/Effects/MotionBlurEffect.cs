@@ -28,14 +28,17 @@ public sealed class MotionBlurEffect : BaseEffect
 
 	public MotionBlurData Data => (MotionBlurData) EffectData!;  // NRT - Set in constructor
 
-	public MotionBlurEffect (IServiceManager _)
+	private readonly IChromeManager chrome;
+
+	public MotionBlurEffect (IServiceManager services)
 	{
+		chrome = services.GetService<IChromeManager> ();
 		EffectData = new MotionBlurData ();
 	}
 
 	public override void LaunchConfiguration ()
 	{
-		EffectHelper.LaunchSimpleEffectDialog (this);
+		chrome.LaunchSimpleEffectDialog (this);
 	}
 
 	#region Algorithm Code Ported From PDN

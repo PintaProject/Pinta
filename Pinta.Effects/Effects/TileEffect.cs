@@ -28,14 +28,18 @@ public sealed class TileEffect : BaseEffect
 
 	public TileData Data => (TileData) EffectData!;
 
-	public TileEffect (IServiceManager _)
+	private readonly IChromeManager chrome;
+
+	public TileEffect (IServiceManager services)
 	{
+		chrome = services.GetService<IChromeManager> ();
+
 		EffectData = new TileData ();
 	}
 
 	public override void LaunchConfiguration ()
 	{
-		EffectHelper.LaunchSimpleEffectDialog (this);
+		chrome.LaunchSimpleEffectDialog (this);
 	}
 
 	#region Algorithm Code Ported From PDN
