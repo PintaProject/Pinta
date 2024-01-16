@@ -87,13 +87,16 @@ public partial class LevelsDialog : Gtk.Dialog
 	private readonly ColorPanelWidget colorpanel_out_low;
 	private readonly HistogramWidget histogram_input;
 	private readonly HistogramWidget histogram_output;
+	private readonly IChromeManager chrome;
 
 	public LevelsData EffectData { get; }
 
 	public LevelsDialog (IChromeManager chrome, LevelsData effectData)
 	{
+		this.chrome = chrome;
+
 		Title = Translations.GetString ("Levels Adjustment");
-		TransientFor = PintaCore.Chrome.MainWindow;
+		TransientFor = chrome.MainWindow;
 		Modal = true;
 
 		const int spacing = 6;
@@ -549,7 +552,7 @@ public partial class LevelsDialog : Gtk.Dialog
 			return;
 
 		ColorPanelWidget panel = (ColorPanelWidget) controller.GetWidget ();
-		var ccd = Gtk.ColorChooserDialog.New (Translations.GetString ("Choose Color"), PintaCore.Chrome.MainWindow);
+		var ccd = Gtk.ColorChooserDialog.New (Translations.GetString ("Choose Color"), chrome.MainWindow);
 		ccd.UseAlpha = true;
 		ccd.SetColor (panel.CairoColor);
 
