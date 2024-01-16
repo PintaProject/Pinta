@@ -298,7 +298,7 @@ public sealed class WorkspaceManager : IWorkspaceService
 
 	public bool ImageFitsInWindow => ActiveWorkspace.ImageFitsInWindow;
 
-	public void ResetTitle ()
+	internal void ResetTitle ()
 	{
 		if (HasOpenDocuments)
 			PintaCore.Chrome.MainWindow.Title = $"{ActiveDocument.DisplayName}{(ActiveDocument.IsDirty ? "*" : "")} - Pinta";
@@ -327,7 +327,7 @@ public sealed class WorkspaceManager : IWorkspaceService
 		PintaCore.Actions.Window.SetActiveDocument (document);
 	}
 
-	public void SetActiveDocumentInternal (Document document)
+	internal void SetActiveDocumentInternal (Document document)
 	{
 		// Work around a case where we closed a document but haven't updated
 		// the active_document_index yet and it points to the closed document
