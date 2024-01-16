@@ -32,8 +32,7 @@ public sealed class VoronoiDiagramEffect : BaseEffect
 		=> EffectHelper.LaunchSimpleEffectDialog (this);
 
 	private sealed record VoronoiSettings (
-		int w,
-		int h,
+		Size size,
 		bool showPoints,
 		ImmutableArray<PointI> points,
 		ImmutableArray<ColorBgra> colors,
@@ -51,8 +50,7 @@ public sealed class VoronoiDiagramEffect : BaseEffect
 		IEnumerable<ColorBgra> reversedSortingColors = Data.ReverseColorSorting ? positionSortedColors.Reverse () : positionSortedColors;
 
 		return new (
-			w: dst.Width,
-			h: dst.Height,
+			size: dst.GetSize (),
 			showPoints: Data.ShowPoints,
 			points: points,
 			colors: reversedSortingColors.ToImmutableArray (),
@@ -66,27 +64,23 @@ public sealed class VoronoiDiagramEffect : BaseEffect
 
 		Span<ColorBgra> dst_data = dst.GetPixelData ();
 
-		for (int y = roi.Top; y <= roi.Bottom; y++) {
-			var dst_row = dst_data.Slice (y * settings.w, settings.w);
-			for (int x = roi.Left; x <= roi.Right; x++) {
-				PointI pixelLocation = new (x, y);
-				double shortestDistance = double.MaxValue;
-				int closestIndex = 0;
-				for (var i = 0; i < settings.points.Length; i++) {
-					// TODO: Acceleration structure that limits the search
-					//       to a relevant subset of points, for better performance.
-					//       Some ideas to consider: quadtree, spatial hashing
-					var point = settings.points[i];
-					double distance = settings.distanceCalculator (point, pixelLocation);
-					if (distance > shortestDistance) continue;
-					shortestDistance = distance;
-					closestIndex = i;
-				}
-				dst_row[x] =
+		foreach (var pixel in roi.GeneratePixelOffsets (settings.size)) {
+			double shortestDistance = double.MaxValue;
+			int closestIndex = 0;
+			for (var i = 0; i < settings.points.Length; i++) {
+				// TODO: Acceleration structure that limits the search
+				//       to a relevant subset of points, for better performance.
+				//       Some ideas to consider: quadtree, spatial hashing
+				var point = settings.points[i];
+				double distance = settings.distanceCalculator (point, pixel.coordinates);
+				if (distance > shortestDistance) continue;
+				shortestDistance = distance;
+				closestIndex = i;
+			}
+			dst_data[pixel.memoryOffset] =
 					settings.showPoints && shortestDistance == 0
 					? ColorBgra.Black
 					: settings.colors[closestIndex];
-			}
 		}
 	}
 
