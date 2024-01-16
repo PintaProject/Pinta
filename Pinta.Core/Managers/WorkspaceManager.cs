@@ -39,35 +39,10 @@ public interface IWorkspaceService
 	Document ActiveDocument { get; }
 	DocumentWorkspace ActiveWorkspace { get; }
 	event EventHandler? ActiveDocumentChanged;
-	event EventHandler<DocumentEventArgs>? DocumentCreated;
-	event EventHandler<DocumentEventArgs>? DocumentOpened;
-	event EventHandler<DocumentEventArgs>? DocumentClosed;
-	event EventHandler? SelectionChanged;
 	RectangleI ClampToImageSize (RectangleI r);
 	bool HasOpenDocuments { get; }
+	event EventHandler? SelectionChanged;
 	SelectionModeHandler SelectionHandler { get; }
-	void Invalidate ();
-	Document? ActiveDocumentOrDefault { get; }
-	void ResetTitle ();
-	ReadOnlyCollection<Document> OpenDocuments { get; }
-	Size ImageSize { get; set; }
-	Size CanvasSize { get; set; }
-	double Scale { get; set; }
-	PointD Offset { get; }
-	Document CreateAndActivateDocument (Gio.File? file, string? file_type, Size size);
-	void SetActiveDocumentInternal (Document document);
-	void Invalidate (RectangleI rect);
-	void SetActiveDocument (Document document);
-	PointD ViewPointToCanvas (PointD view_pos);
-	PointD CanvasPointToView (PointD canvas_pos);
-	void InvalidateWindowRect (RectangleI windowRect);
-	void ResizeCanvas (Size newSize, Anchor anchor, CompoundHistoryItem? compoundAction);
-	Document NewDocument (Size imageSize, Color backgroundColor);
-	bool OpenFile (Gio.File file, Window? parent = null);
-	void ResizeImage (Size newSize, ResamplingMode resamplingMode);
-	bool ImageFitsInWindow { get; }
-	Document NewDocumentFromImage (ImageSurface image);
-	void CloseActiveDocument ();
 }
 
 public sealed class WorkspaceManager : IWorkspaceService
