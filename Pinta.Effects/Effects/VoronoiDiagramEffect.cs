@@ -1,10 +1,8 @@
 using System;
-using System.Collections.Concurrent;
 using System.Collections.Generic;
 using System.Collections.Immutable;
 using System.ComponentModel;
 using System.Linq;
-using System.Threading.Tasks;
 using Cairo;
 using Pinta.Core;
 using Pinta.Gui.Widgets;
@@ -44,7 +42,7 @@ public sealed class VoronoiDiagramEffect : BaseEffect
 	{
 		ColorSorting colorSorting = Data.ColorSorting;
 
-		IEnumerable<PointI> basePoints = CreatePoints (roi, Data.NumberOfCells, Data.RandomLocations);
+		IEnumerable<PointI> basePoints = CreatePoints (roi, Data.NumberOfCells, Data.RandomPointLocations);
 		ImmutableArray<PointI> points = SortPoints (basePoints, colorSorting).ToImmutableArray ();
 
 		IEnumerable<ColorBgra> baseColors = CreateColors (points.Length, Data.RandomColors);
@@ -233,8 +231,8 @@ public sealed class VoronoiDiagramEffect : BaseEffect
 		[Caption ("Random Colors")]
 		public RandomSeed RandomColors { get; set; } = new (0);
 
-		[Caption ("Random Locations")]
-		public RandomSeed RandomLocations { get; set; } = new (0);
+		[Caption ("Random Point Locations")]
+		public RandomSeed RandomPointLocations { get; set; } = new (0);
 	}
 
 	public enum DistanceMetric
