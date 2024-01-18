@@ -59,15 +59,20 @@ public sealed class MandelbrotFractalEffect : BaseEffect
 	private static double Mandelbrot (double r, double i, int factor)
 	{
 		int c = 0;
-		double x = 0;
-		double y = 0;
-		while ((c * factor) < 1024 && Utility.MagnitudeSquared (x, y) < Max) {
-			double t = x;
-			x = (x * x) - (y * y) + r;
-			y = (2 * t * y) + i;
+		PointD p = new (0, 0);
+		while ((c * factor) < 1024 && Utility.MagnitudeSquared (p) < Max) {
+			p = NextLocation (p, r, i);
 			++c;
 		}
-		return c - Math.Log (Utility.MagnitudeSquared (x, y)) * inv_log_max;
+		return c - Math.Log (Utility.MagnitudeSquared (p)) * inv_log_max;
+	}
+
+	private static PointD NextLocation (PointD p, double r, double i)
+	{
+		double t = p.X;
+		double x = p.X * p.X - p.Y * p.Y + r;
+		double y = 2 * t * p.Y + i;
+		return new (x, y);
 	}
 
 	private sealed record MandelbrotSettings (
@@ -127,9 +132,8 @@ public sealed class MandelbrotFractalEffect : BaseEffect
 		foreach (RectangleI rect in rois) {
 			for (int y = rect.Top; y <= rect.Bottom; y++) {
 				var dst_row = dst_data.Slice (y * settings.w, settings.w);
-				for (int x = rect.Left; x <= rect.Right; x++) {
+				for (int x = rect.Left; x <= rect.Right; x++)
 					dst_row[x] = GetPixelColor (settings, new (x, y));
-				}
 			}
 		}
 

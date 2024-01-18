@@ -35,6 +35,9 @@ public static class Utility
 	public static double MagnitudeSquared (double x, double y)
 		=> x * x + y * y;
 
+	public static double MagnitudeSquared (PointD p)
+		=> MagnitudeSquared (p.X, p.Y);
+
 	public static double Magnitude (double x, double y)
 		=> Math.Sqrt (x * x + y * y);
 
