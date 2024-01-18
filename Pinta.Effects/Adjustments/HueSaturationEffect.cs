@@ -26,28 +26,27 @@ public sealed class HueSaturationEffect : BaseEffect
 
 	public override string AdjustmentMenuKey => "U";
 
-	public HueSaturationEffect ()
+	private readonly IChromeService chrome;
+
+	public HueSaturationEffect (IServiceManager services)
 	{
+		chrome = services.GetService<IChromeService> ();
 		EffectData = new HueSaturationData ();
 	}
 
 	public override void LaunchConfiguration ()
 	{
-		EffectHelper.LaunchSimpleEffectDialog (this);
+		chrome.LaunchSimpleEffectDialog (this);
 	}
 
 	private UnaryPixelOp CreateOptimalOp ()
-	{
-		if (Data.IsDefault) {
-			return new UnaryPixelOps.Identity ();
-		} else {
-			return new UnaryPixelOps.HueSaturationLightness (
+		=>
+			Data.IsDefault
+			? new UnaryPixelOps.Identity ()
+			: new UnaryPixelOps.HueSaturationLightness (
 				hueDelta: Data.Hue,
 				satDelta: Data.Saturation,
-				lightness: Data.Lightness
-			);
-		}
-	}
+				lightness: Data.Lightness);
 
 	public override void Render (ImageSurface src, ImageSurface dest, ReadOnlySpan<RectangleI> rois)
 	{

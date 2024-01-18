@@ -34,19 +34,15 @@ internal static class EffectHelper
 	/// <summary>
 	/// Launch an effect dialog using Pinta's translation template.
 	/// </summary>
-	internal static void LaunchSimpleEffectDialog (BaseEffect effect)
-	{
-		PintaCore.Chrome.LaunchSimpleEffectDialog (effect, new PintaLocalizer ());
-	}
+	internal static void LaunchSimpleEffectDialog (this IChromeService chrome, BaseEffect effect)
+		=> chrome.LaunchSimpleEffectDialog (effect, new PintaLocalizer ());
 }
 
 /// <summary>
 /// Wrapper around Pinta's translation template.
 /// </summary>
-internal class PintaLocalizer : IAddinLocalizer
+internal sealed class PintaLocalizer : IAddinLocalizer
 {
 	public string GetString (string msgid)
-	{
-		return Pinta.Core.Translations.GetString (msgid);
-	}
+		=> Translations.GetString (msgid);
 };

@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2024-01-14 01:15+0000\n"
-"PO-Revision-Date: 2024-01-15 02:23+0000\n"
+"PO-Revision-Date: 2024-01-16 07:06+0000\n"
 "Last-Translator: Сергей <asvmail.as@gmail.com>\n"
 "Language-Team: Russian <https://hosted.weblate.org/projects/pinta/pinta/ru/>"
 "\n"
@@ -832,7 +832,7 @@ msgstr "Сетка"
 
 #: ../Pinta.Core/Effects/UserBlendOps.cs:41
 msgid "Hard Light"
-msgstr "Направленный свет"
+msgstr "Жёсткий свет"
 
 #: ../Pinta/Dialogs/NewImageDialog.cs:140
 #: ../Pinta/Dialogs/ResizeCanvasDialog.cs:98
@@ -1361,7 +1361,7 @@ msgstr "Обычный"
 
 #: ../Pinta.Core/Classes/BaseTool.cs:335
 msgid "Normal Blending"
-msgstr "Обычное наложение"
+msgstr "Нормальное наложение"
 
 #: ../Pinta.Core/Actions/ViewActions.cs:71
 msgid "Normal Size"
@@ -1459,7 +1459,7 @@ msgstr "Перекрытие"
 
 #: ../Pinta.Core/Classes/BaseTool.cs:336
 msgid "Overwrite"
-msgstr "Переписать"
+msgstr "Перезаписать"
 
 #: ../Pinta.Tools/Tools/PaintBucketTool.cs:43
 msgid "Paint Bucket"
@@ -1943,7 +1943,7 @@ msgstr "Сглаженный"
 
 #: ../Pinta.Core/Effects/UserBlendOps.cs:42
 msgid "Soft Light"
-msgstr "Рассеянный свет"
+msgstr "Мягкий свет"
 
 #: ../Pinta.Effects/Effects/SoftenPortraitEffect.cs:54
 msgid "Soften Portrait"

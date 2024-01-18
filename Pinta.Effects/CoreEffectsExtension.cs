@@ -44,48 +44,48 @@ internal sealed class CoreEffectsExtension : IExtension
 		IServiceManager services = PintaCore.Services;
 
 		// Add the adjustments
-		PintaCore.Effects.RegisterAdjustment (new AutoLevelEffect ());
-		PintaCore.Effects.RegisterAdjustment (new BlackAndWhiteEffect ());
-		PintaCore.Effects.RegisterAdjustment (new BrightnessContrastEffect ());
-		PintaCore.Effects.RegisterAdjustment (new CurvesEffect ());
-		PintaCore.Effects.RegisterAdjustment (new HueSaturationEffect ());
-		PintaCore.Effects.RegisterAdjustment (new InvertColorsEffect ());
-		PintaCore.Effects.RegisterAdjustment (new LevelsEffect ());
-		PintaCore.Effects.RegisterAdjustment (new PosterizeEffect ());
-		PintaCore.Effects.RegisterAdjustment (new SepiaEffect ());
+		PintaCore.Effects.RegisterAdjustment (new AutoLevelEffect (services));
+		PintaCore.Effects.RegisterAdjustment (new BlackAndWhiteEffect (services));
+		PintaCore.Effects.RegisterAdjustment (new BrightnessContrastEffect (services));
+		PintaCore.Effects.RegisterAdjustment (new CurvesEffect (services));
+		PintaCore.Effects.RegisterAdjustment (new HueSaturationEffect (services));
+		PintaCore.Effects.RegisterAdjustment (new InvertColorsEffect (services));
+		PintaCore.Effects.RegisterAdjustment (new LevelsEffect (services));
+		PintaCore.Effects.RegisterAdjustment (new PosterizeEffect (services));
+		PintaCore.Effects.RegisterAdjustment (new SepiaEffect (services));
 
 		// Add the effects
-		PintaCore.Effects.RegisterEffect (new AddNoiseEffect ());
-		PintaCore.Effects.RegisterEffect (new BulgeEffect ());
+		PintaCore.Effects.RegisterEffect (new AddNoiseEffect (services));
+		PintaCore.Effects.RegisterEffect (new BulgeEffect (services));
 		PintaCore.Effects.RegisterEffect (new CloudsEffect (services));
-		PintaCore.Effects.RegisterEffect (new EdgeDetectEffect ());
-		PintaCore.Effects.RegisterEffect (new EmbossEffect ());
-		PintaCore.Effects.RegisterEffect (new DitheringEffect ());
-		PintaCore.Effects.RegisterEffect (new FragmentEffect ());
-		PintaCore.Effects.RegisterEffect (new FrostedGlassEffect ());
-		PintaCore.Effects.RegisterEffect (new GaussianBlurEffect ());
-		PintaCore.Effects.RegisterEffect (new GlowEffect ());
-		PintaCore.Effects.RegisterEffect (new InkSketchEffect ());
+		PintaCore.Effects.RegisterEffect (new EdgeDetectEffect (services));
+		PintaCore.Effects.RegisterEffect (new EmbossEffect (services));
+		PintaCore.Effects.RegisterEffect (new DitheringEffect (services));
+		PintaCore.Effects.RegisterEffect (new FragmentEffect (services));
+		PintaCore.Effects.RegisterEffect (new FrostedGlassEffect (services));
+		PintaCore.Effects.RegisterEffect (new GaussianBlurEffect (services));
+		PintaCore.Effects.RegisterEffect (new GlowEffect (services));
+		PintaCore.Effects.RegisterEffect (new InkSketchEffect (services));
 		PintaCore.Effects.RegisterEffect (new JuliaFractalEffect (services));
 		PintaCore.Effects.RegisterEffect (new MandelbrotFractalEffect (services));
-		PintaCore.Effects.RegisterEffect (new MedianEffect ());
-		PintaCore.Effects.RegisterEffect (new MotionBlurEffect ());
-		PintaCore.Effects.RegisterEffect (new OilPaintingEffect ());
-		PintaCore.Effects.RegisterEffect (new OutlineEffect ());
-		PintaCore.Effects.RegisterEffect (new PencilSketchEffect ());
-		PintaCore.Effects.RegisterEffect (new PixelateEffect ());
-		PintaCore.Effects.RegisterEffect (new PolarInversionEffect ());
-		PintaCore.Effects.RegisterEffect (new RadialBlurEffect ());
-		PintaCore.Effects.RegisterEffect (new RedEyeRemoveEffect ());
-		PintaCore.Effects.RegisterEffect (new ReduceNoiseEffect ());
-		PintaCore.Effects.RegisterEffect (new ReliefEffect ());
-		PintaCore.Effects.RegisterEffect (new SharpenEffect ());
-		PintaCore.Effects.RegisterEffect (new SoftenPortraitEffect ());
-		PintaCore.Effects.RegisterEffect (new TileEffect ());
-		PintaCore.Effects.RegisterEffect (new TwistEffect ());
-		PintaCore.Effects.RegisterEffect (new UnfocusEffect ());
+		PintaCore.Effects.RegisterEffect (new MedianEffect (services));
+		PintaCore.Effects.RegisterEffect (new MotionBlurEffect (services));
+		PintaCore.Effects.RegisterEffect (new OilPaintingEffect (services));
+		PintaCore.Effects.RegisterEffect (new OutlineEffect (services));
+		PintaCore.Effects.RegisterEffect (new PencilSketchEffect (services));
+		PintaCore.Effects.RegisterEffect (new PixelateEffect (services));
+		PintaCore.Effects.RegisterEffect (new PolarInversionEffect (services));
+		PintaCore.Effects.RegisterEffect (new RadialBlurEffect (services));
+		PintaCore.Effects.RegisterEffect (new RedEyeRemoveEffect (services));
+		PintaCore.Effects.RegisterEffect (new ReduceNoiseEffect (services));
+		PintaCore.Effects.RegisterEffect (new ReliefEffect (services));
+		PintaCore.Effects.RegisterEffect (new SharpenEffect (services));
+		PintaCore.Effects.RegisterEffect (new SoftenPortraitEffect (services));
+		PintaCore.Effects.RegisterEffect (new TileEffect (services));
+		PintaCore.Effects.RegisterEffect (new TwistEffect (services));
+		PintaCore.Effects.RegisterEffect (new UnfocusEffect (services));
 		PintaCore.Effects.RegisterEffect (new VoronoiDiagramEffect (services));
-		PintaCore.Effects.RegisterEffect (new ZoomBlurEffect ());
+		PintaCore.Effects.RegisterEffect (new ZoomBlurEffect (services));
 	}
 
 	public void Uninitialize ()

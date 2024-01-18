@@ -15,8 +15,12 @@ namespace Pinta.Effects;
 
 public sealed class ReliefEffect : ColorDifferenceEffect
 {
-	public ReliefEffect ()
+	private readonly IChromeService chrome;
+
+	public ReliefEffect (IServiceManager services)
 	{
+		chrome = services.GetService<IChromeService> ();
+
 		EffectData = new ReliefData ();
 	}
 
@@ -30,7 +34,7 @@ public sealed class ReliefEffect : ColorDifferenceEffect
 
 	public override void LaunchConfiguration ()
 	{
-		EffectHelper.LaunchSimpleEffectDialog (this);
+		chrome.LaunchSimpleEffectDialog (this);
 	}
 
 	public override string Icon => Pinta.Resources.Icons.EffectsStylizeRelief;
@@ -55,9 +59,8 @@ public sealed class ReliefEffect : ColorDifferenceEffect
 		// for r = 0 this builds an Relief filter pointing straight left
 		double[][] weights = new double[3][];
 
-		for (uint idx = 0; idx < 3; ++idx) {
+		for (uint idx = 0; idx < 3; ++idx)
 			weights[idx] = new double[3];
-		}
 
 		weights[0][0] = Math.Cos (r + dr);
 		weights[0][1] = Math.Cos (r + 2.0 * dr);

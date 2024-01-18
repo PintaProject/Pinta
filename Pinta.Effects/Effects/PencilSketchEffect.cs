@@ -34,20 +34,24 @@ public sealed class PencilSketchEffect : BaseEffect
 
 	public PencilSketchData Data => (PencilSketchData) EffectData!;  // NRT - Set in constructor
 
-	public PencilSketchEffect ()
+	private readonly IChromeService chrome;
+
+	public PencilSketchEffect (IServiceManager services)
 	{
+		chrome = services.GetService<IChromeService> ();
+
 		EffectData = new PencilSketchData ();
 
-		blur_effect = new GaussianBlurEffect ();
+		blur_effect = new GaussianBlurEffect (services);
 		desaturate_op = new UnaryPixelOps.Desaturate ();
-		invert_effect = new InvertColorsEffect ();
-		bac_adjustment = new BrightnessContrastEffect ();
+		invert_effect = new InvertColorsEffect (services);
+		bac_adjustment = new BrightnessContrastEffect (services);
 		color_dodge_op = new UserBlendOps.ColorDodgeBlendOp ();
 	}
 
 	public override void LaunchConfiguration ()
 	{
-		EffectHelper.LaunchSimpleEffectDialog (this);
+		chrome.LaunchSimpleEffectDialog (this);
 	}
 
 	#region Algorithm Code Ported From PDN
@@ -68,7 +72,7 @@ public sealed class PencilSketchEffect : BaseEffect
 		var src_data = src.GetReadOnlyPixelData ();
 		int src_width = src.Width;
 
-		foreach (Core.RectangleI roi in rois) {
+		foreach (RectangleI roi in rois) {
 			for (int y = roi.Top; y <= roi.Bottom; ++y) {
 				var src_row = src_data.Slice (y * src_width, src_width);
 				var dst_row = dst_data.Slice (y * dst_width, dst_width);

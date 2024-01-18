@@ -36,14 +36,17 @@ public sealed class CloudsEffect : BaseEffect
 
 	private readonly IPaletteService palette;
 
+	private readonly IChromeService chrome;
+
 	public CloudsEffect (IServiceManager services)
 	{
+		chrome = services.GetService<IChromeService> ();
 		palette = services.GetService<IPaletteService> ();
 		EffectData = new CloudsData ();
 	}
 
 	public override void LaunchConfiguration ()
-		=> EffectHelper.LaunchSimpleEffectDialog (this);
+		=> chrome.LaunchSimpleEffectDialog (this);
 
 	#region Algorithm Code Ported From PDN
 

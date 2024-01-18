@@ -59,19 +59,23 @@ public sealed class SoftenPortraitEffect : BaseEffect
 
 	public SoftenPortraitData Data => (SoftenPortraitData) EffectData!;  // NRT - Set in constructor
 
-	public SoftenPortraitEffect ()
+	private readonly IChromeService chrome;
+
+	public SoftenPortraitEffect (IServiceManager services)
 	{
+		chrome = services.GetService<IChromeService> ();
+
 		EffectData = new SoftenPortraitData ();
 
-		blur_effect = new GaussianBlurEffect ();
-		bac_adjustment = new BrightnessContrastEffect ();
+		blur_effect = new GaussianBlurEffect (services);
+		bac_adjustment = new BrightnessContrastEffect (services);
 		desaturate_op = new UnaryPixelOps.Desaturate ();
 		overlay_op = new UserBlendOps.OverlayBlendOp ();
 	}
 
 	public override void LaunchConfiguration ()
 	{
-		EffectHelper.LaunchSimpleEffectDialog (this);
+		chrome.LaunchSimpleEffectDialog (this);
 	}
 
 	public override void Render (ImageSurface src, ImageSurface dest, ReadOnlySpan<RectangleI> rois)

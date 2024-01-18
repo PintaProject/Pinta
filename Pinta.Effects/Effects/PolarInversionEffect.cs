@@ -26,8 +26,13 @@ public sealed class PolarInversionEffect : WarpEffect
 
 	public override string EffectMenuCategory => Translations.GetString ("Distort");
 
-	public PolarInversionEffect ()
+	protected override IPaletteService Palette { get; }
+	protected override IChromeService Chrome { get; }
+
+	public PolarInversionEffect (IServiceManager services)
 	{
+		Palette = services.GetService<IPaletteService> ();
+		Chrome = services.GetService<IChromeService> ();
 		EffectData = new PolarInversionData ();
 	}
 
