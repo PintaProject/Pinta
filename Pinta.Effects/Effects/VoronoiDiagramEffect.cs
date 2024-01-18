@@ -23,13 +23,16 @@ public sealed class VoronoiDiagramEffect : BaseEffect
 
 	public VoronoiDiagramData Data => (VoronoiDiagramData) EffectData!; // NRT - Set in constructor
 
-	public VoronoiDiagramEffect (IServiceManager _)
+	private readonly IChromeService chrome;
+
+	public VoronoiDiagramEffect (IServiceManager services)
 	{
+		chrome = services.GetService<IChromeService> ();
 		EffectData = new VoronoiDiagramData ();
 	}
 
 	public override void LaunchConfiguration ()
-		=> EffectHelper.LaunchSimpleEffectDialog (this);
+		=> chrome.LaunchSimpleEffectDialog (this);
 
 	private sealed record VoronoiSettings (
 		Size size,
