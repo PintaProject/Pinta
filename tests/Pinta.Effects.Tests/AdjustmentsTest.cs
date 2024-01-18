@@ -11,28 +11,28 @@ internal sealed class AdjustmentsTest
 	[Test]
 	public void AutoLevel ()
 	{
-		var effect = new AutoLevelEffect ();
+		AutoLevelEffect effect = new (Utilities.CreateMockServices ());
 		Utilities.TestEffect (effect, "autolevel1.png");
 	}
 
 	[Test]
 	public void BlackAndWhite ()
 	{
-		var effect = new BlackAndWhiteEffect ();
+		BlackAndWhiteEffect effect = new (Utilities.CreateMockServices ());
 		Utilities.TestEffect (effect, "blackandwhite1.png");
 	}
 
 	[Test]
 	public void BrightnessContrastDefault ()
 	{
-		var effect = new BrightnessContrastEffect ();
+		BrightnessContrastEffect effect = new (Utilities.CreateMockServices ());
 		Utilities.TestEffect (effect, "brightnesscontrast1.png");
 	}
 
 	[Test]
 	public void BrightnessContrast ()
 	{
-		var effect = new BrightnessContrastEffect ();
+		BrightnessContrastEffect effect = new (Utilities.CreateMockServices ());
 		effect.Data.Brightness = 80;
 		effect.Data.Contrast = 20;
 		Utilities.TestEffect (effect, "brightnesscontrast2.png");
@@ -41,8 +41,8 @@ internal sealed class AdjustmentsTest
 	[Test]
 	public void Curves ()
 	{
-		var effect = new CurvesEffect ();
-		var points = new SortedList<int, int> {
+		CurvesEffect effect = new (Utilities.CreateMockServices ());
+		SortedList<int, int> points = new () {
 			{ 0, 0 },
 			{ 75, 110 },
 			{ 225, 175 },
@@ -58,14 +58,14 @@ internal sealed class AdjustmentsTest
 	[Test]
 	public void HueSaturationDefault ()
 	{
-		var effect = new HueSaturationEffect ();
+		HueSaturationEffect effect = new (Utilities.CreateMockServices ());
 		Utilities.TestEffect (effect, "huesaturation1.png");
 	}
 
 	[Test]
 	public void HueSaturation ()
 	{
-		var effect = new HueSaturationEffect ();
+		HueSaturationEffect effect = new (Utilities.CreateMockServices ());
 		effect.Data.Hue = 12;
 		effect.Data.Saturation = 50;
 		effect.Data.Lightness = 50;
@@ -75,14 +75,14 @@ internal sealed class AdjustmentsTest
 	[Test]
 	public void InvertColors ()
 	{
-		var effect = new InvertColorsEffect ();
+		InvertColorsEffect effect = new (Utilities.CreateMockServices ());
 		Utilities.TestEffect (effect, "invertcolors1.png");
 	}
 
 	[Test]
 	public void Level ()
 	{
-		var effect = new LevelsEffect ();
+		LevelsEffect effect = new (Utilities.CreateMockServices ());
 		effect.Data.Levels = new UnaryPixelOps.Level (
 			ColorBgra.Black, ColorBgra.White,
 			new float[] { 0.7f, 0.8f, 0.9f },
@@ -94,7 +94,7 @@ internal sealed class AdjustmentsTest
 	[Test]
 	public void Posterize ()
 	{
-		var effect = new PosterizeEffect ();
+		PosterizeEffect effect = new (Utilities.CreateMockServices ());
 		effect.Data.Red = 6;
 		effect.Data.Green = 5;
 		effect.Data.Blue = 4;
@@ -104,7 +104,7 @@ internal sealed class AdjustmentsTest
 	[Test]
 	public void Sepia ()
 	{
-		var effect = new SepiaEffect ();
+		SepiaEffect effect = new (Utilities.CreateMockServices ());
 		Utilities.TestEffect (effect, "sepia1.png");
 	}
 }

@@ -30,7 +30,13 @@ using Mono.Addins.Localization;
 
 namespace Pinta.Core;
 
-public sealed class ChromeManager
+public interface IChromeService
+{
+	Window MainWindow { get; }
+	void LaunchSimpleEffectDialog (BaseEffect effect, IAddinLocalizer localizer);
+}
+
+public sealed class ChromeManager : IChromeService
 {
 	private PointI last_canvas_cursor_point;
 	private bool main_window_busy;

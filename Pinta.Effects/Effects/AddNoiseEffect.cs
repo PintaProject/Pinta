@@ -34,14 +34,17 @@ public sealed class AddNoiseEffect : BaseEffect
 		lookup = CreateLookup ();
 	}
 
-	public AddNoiseEffect ()
+	private readonly IChromeService chrome;
+
+	public AddNoiseEffect (IServiceManager services)
 	{
+		chrome = services.GetService<IChromeService> ();
 		EffectData = new NoiseData ();
 	}
 
 	public override void LaunchConfiguration ()
 	{
-		EffectHelper.LaunchSimpleEffectDialog (this);
+		chrome.LaunchSimpleEffectDialog (this);
 	}
 
 	#region Algorithm Code Ported From PDN
@@ -92,9 +95,8 @@ public sealed class AddNoiseEffect : BaseEffect
 			lastRoundedSum = roundedSum;
 			roundedSum = (int) sum;
 
-			for (int j = lastRoundedSum; j < roundedSum; ++j) {
+			for (int j = lastRoundedSum; j < roundedSum; ++j)
 				result[j] = (i - TableSize / 2) * 65536 / TableSize;
-			}
 		}
 
 		return result.MoveToImmutable ();
@@ -135,7 +137,7 @@ public sealed class AddNoiseEffect : BaseEffect
 			// Reseed the random number generator for each rectangle being rendered.
 			// This should produce consistent results regardless of the number of threads
 			// being used to render the effect, but will change if the effect is tiled differently.
-			var rand = new Random (settings.seed.GetValueForRegion (rect));
+			Random rand = new (settings.seed.GetValueForRegion (rect));
 
 			int right = rect.Right;
 

@@ -46,8 +46,6 @@ public sealed class SimpleEffectDialog : Gtk.Dialog
 	private delegate bool TimeoutHandler ();
 	TimeoutHandler? timeout_func;
 
-	private readonly Random random = new ();
-
 	/// Since this dialog is used by add-ins, the IAddinLocalizer allows for translations to be
 	/// fetched from the appropriate place.
 	/// </param>
@@ -85,7 +83,10 @@ public sealed class SimpleEffectDialog : Gtk.Dialog
 		ArgumentNullException.ThrowIfNull (effect.EffectData);
 
 		var dialog = new SimpleEffectDialog (
-			effect.Name, effect.Icon, effect.EffectData, localizer);
+			effect.Name,
+			effect.Icon,
+			effect.EffectData,
+			localizer);
 
 		// Hookup event handling for live preview.
 		dialog.EffectDataChanged += (o, e) => effect.EffectData?.FirePropertyChanged (e.PropertyName);
@@ -103,10 +104,9 @@ public sealed class SimpleEffectDialog : Gtk.Dialog
 	private void HandleClose ()
 	{
 		// If there is a timeout that hasn't been invoked yet, run it before closing the dialog.
-		if (event_delay_timeout_id != 0) {
-			GLib.Source.Remove (event_delay_timeout_id);
-			timeout_func?.Invoke ();
-		}
+		if (event_delay_timeout_id == 0) return;
+		GLib.Source.Remove (event_delay_timeout_id);
+		timeout_func?.Invoke ();
 	}
 
 	#region EffectData Parser
@@ -122,15 +122,15 @@ public sealed class SimpleEffectDialog : Gtk.Dialog
 
 	private static MemberSettings CreateMemberSettings (MemberInfo mi)
 	{
-		Type mType = GetTypeForMember (mi);
+		ImmutableArray<Attribute> attrs =
+			mi
+			.GetCustomAttributes<Attribute> (false)
+			.ToImmutableArray ();
 
 		string? caption = null;
 		string? hint = null;
 		bool skip = false;
 		bool combo = false;
-
-		ImmutableArray<Attribute> attrs = mi.GetCustomAttributes (false).OfType<Attribute> ().ToImmutableArray ();
-
 		foreach (var attr in attrs) {
 			switch (attr) {
 				case SkipAttribute:
@@ -150,17 +150,15 @@ public sealed class SimpleEffectDialog : Gtk.Dialog
 
 		return new (
 			mi: mi,
-			mType: mType,
+			mType: GetTypeForMember (mi),
 			caption: caption ?? MakeCaption (mi.Name),
 			hint: hint,
 			skip: skip,
 			combo: combo,
-			attrs: attrs
-		);
+			attrs: attrs);
 	}
 
-	private IEnumerable<Gtk.Widget> GenerateDialogWidgets (EffectData effectData, IAddinLocalizer localizer)
-		=>
+	private IEnumerable<Gtk.Widget> GenerateDialogWidgets (EffectData effectData, IAddinLocalizer localizer) =>
 			effectData
 			.GetType ()
 			.GetMembers ()
@@ -173,6 +171,7 @@ public sealed class SimpleEffectDialog : Gtk.Dialog
 	private IEnumerable<Gtk.Widget> GetMemberWidgets (MemberSettings settings, EffectData effectData, IAddinLocalizer localizer)
 	{
 		var widgetFactory = GetWidgetFactory (settings);
+
 		if (widgetFactory is not null)
 			yield return widgetFactory (localizer.GetString (settings.caption), effectData, settings);
 
@@ -214,26 +213,23 @@ public sealed class SimpleEffectDialog : Gtk.Dialog
 		var myType = GetTypeForMember (settings.mi)!; // NRT - We're looping through members we got from reflection
 
 		var member_names = Enum.GetNames (myType);
-		var labels = new List<string> ();
-		var label_to_member = new Dictionary<string, string> ();
 
-		foreach (var member_name in member_names) {
-			var members = myType.GetMember (member_name);
+		var mapping_items =
+			from member_name in member_names
+			let members = myType.GetMember (member_name)
+			let attrs = members[0].GetCustomAttributes<CaptionAttribute> (false).Take (1).ToArray ()
+			let label = attrs.Length > 0 ? attrs[0].Caption : member_name
+			let translatedLabel = Translations.GetString (label)
+			select KeyValuePair.Create (translatedLabel, member_name);
 
-			// Look for a Caption attribute that provides a (translated) description.
-			string label;
-			var attrs = members[0].GetCustomAttributes (typeof (CaptionAttribute), false);
-
-			if (attrs.Length > 0)
-				label = Core.Translations.GetString (((CaptionAttribute) attrs[0]).Caption);
-			else
-				label = Core.Translations.GetString (member_name);
-
-			label_to_member[label] = member_name;
-			labels.Add (label);
+		Dictionary<string, string> label_to_member = new (mapping_items);
+		List<string> labels = new ();
+		foreach (var kvp in mapping_items) {
+			label_to_member[kvp.Key] = kvp.Value;
+			labels.Add (kvp.Key);
 		}
 
-		var widget = new ComboBoxWidget (labels) { Label = caption };
+		ComboBoxWidget widget = new (labels) { Label = caption };
 
 		if (GetValue (settings.mi, effectData) is object obj)
 			widget.Active = Array.IndexOf (member_names, obj.ToString ());
@@ -247,10 +243,9 @@ public sealed class SimpleEffectDialog : Gtk.Dialog
 	{
 		Dictionary<string, object>? dict = null;
 
-		foreach (var attr in settings.attrs) {
+		foreach (var attr in settings.attrs)
 			if (attr is StaticListAttribute attribute && GetValue (attribute.DictionaryName, effectData) is Dictionary<string, object> d)
 				dict = d;
-		}
 
 		var entries = dict == null ? ImmutableArray<string>.Empty : dict.Keys.ToImmutableArray ();
 
@@ -266,10 +261,10 @@ public sealed class SimpleEffectDialog : Gtk.Dialog
 
 	private HScaleSpinButtonWidget CreateDoubleSlider (string caption, EffectData effectData, MemberSettings settings)
 	{
-		var min_value = -100;
-		var max_value = 100;
-		var inc_value = 0.01;
-		var digits_value = 2;
+		int min_value = -100;
+		int max_value = 100;
+		double increment_value = 0.01;
+		int digits_value = 2;
 
 		foreach (var attr in settings.attrs) {
 			switch (attr) {
@@ -280,7 +275,7 @@ public sealed class SimpleEffectDialog : Gtk.Dialog
 					max_value = max.Value;
 					break;
 				case IncrementValueAttribute inc:
-					inc_value = inc.Value;
+					increment_value = inc.Value;
 					break;
 				case DigitsValueAttribute digits:
 					digits_value = digits.Value;
@@ -292,7 +287,7 @@ public sealed class SimpleEffectDialog : Gtk.Dialog
 			Label = caption,
 			MinimumValue = min_value,
 			MaximumValue = max_value,
-			IncrementValue = inc_value,
+			IncrementValue = increment_value,
 			DigitsValue = digits_value,
 		};
 
@@ -311,10 +306,10 @@ public sealed class SimpleEffectDialog : Gtk.Dialog
 
 	private HScaleSpinButtonWidget CreateSlider (string caption, EffectData effectData, MemberSettings settings)
 	{
-		var min_value = -100;
-		var max_value = 100;
-		var inc_value = 1.0;
-		var digits_value = 0;
+		int min_value = -100;
+		int max_value = 100;
+		double inc_value = 1.0;
+		int digits_value = 0;
 
 		foreach (var attr in settings.attrs) {
 			switch (attr) {
@@ -412,13 +407,13 @@ public sealed class SimpleEffectDialog : Gtk.Dialog
 		var label = Gtk.Label.New (hint);
 		label.Wrap = true;
 		label.Halign = Gtk.Align.Start;
-
 		return label;
 	}
 
 	private ReseedButtonWidget CreateSeed (string caption, EffectData effectData, MemberSettings settings)
 	{
-		var widget = new ReseedButtonWidget () { Label = caption };
+		ReseedButtonWidget widget = new () { Label = caption };
+		Random random = new ();
 
 		int min_value = 0;
 		int max_value = int.MaxValue - 1;
@@ -458,7 +453,7 @@ public sealed class SimpleEffectDialog : Gtk.Dialog
 				fieldName = fi.Name;
 				break;
 			case PropertyInfo pi:
-				pi.GetSetMethod ()?.Invoke (o, new object[] { val });
+				pi.GetSetMethod ()?.Invoke (o, new[] { val });
 				fieldName = pi.Name;
 				break;
 			default:
@@ -546,7 +541,5 @@ public sealed class SimpleEffectDialog : Gtk.Dialog
 public sealed class PintaLocalizer : IAddinLocalizer
 {
 	public string GetString (string msgid)
-	{
-		return Pinta.Core.Translations.GetString (msgid);
-	}
+		=> Translations.GetString (msgid);
 };

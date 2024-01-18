@@ -33,8 +33,11 @@ public sealed class BrightnessContrastEffect : BaseEffect
 
 	public BrightnessContrastData Data => (BrightnessContrastData) EffectData!;  // NRT - Set in constructor
 
-	public BrightnessContrastEffect ()
+	private readonly IChromeService chrome;
+
+	public BrightnessContrastEffect (IServiceManager services)
 	{
+		chrome = services.GetService<IChromeService> ();
 		EffectData = new BrightnessContrastData ();
 		EffectData.PropertyChanged += HandleEffectDataPropertyChanged;
 	}
@@ -49,7 +52,7 @@ public sealed class BrightnessContrastEffect : BaseEffect
 
 	public override void LaunchConfiguration ()
 	{
-		EffectHelper.LaunchSimpleEffectDialog (this);
+		chrome.LaunchSimpleEffectDialog (this);
 	}
 
 	public override void Render (ImageSurface src, ImageSurface dest, ReadOnlySpan<RectangleI> rois)
@@ -61,7 +64,7 @@ public sealed class BrightnessContrastEffect : BaseEffect
 		var dst_data = dest.GetPixelData ();
 		int width = src.Width;
 
-		foreach (Core.RectangleI rect in rois) {
+		foreach (RectangleI rect in rois) {
 			for (int y = rect.Top; y <= rect.Bottom; y++) {
 				var src_row = src_data.Slice (y * width + rect.Left, rect.Width);
 				var dst_row = dst_data.Slice (y * width + rect.Left, rect.Width);

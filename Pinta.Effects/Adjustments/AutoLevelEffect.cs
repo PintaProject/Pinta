@@ -25,10 +25,12 @@ public sealed class AutoLevelEffect : BaseEffect
 
 	public override string AdjustmentMenuKey => "L";
 
+	public AutoLevelEffect (IServiceManager _) { }
+
 	public override void Render (ImageSurface src, ImageSurface dest, ReadOnlySpan<RectangleI> rois)
 	{
-		if (op == null) {
-			HistogramRgb histogram = new HistogramRgb ();
+		if (op is null) {
+			HistogramRgb histogram = new ();
 			histogram.UpdateHistogram (src, new RectangleI (0, 0, src.Width, src.Height));
 
 			op = histogram.MakeLevelsAuto ();

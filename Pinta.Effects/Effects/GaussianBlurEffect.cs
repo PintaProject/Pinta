@@ -29,14 +29,17 @@ public sealed class GaussianBlurEffect : BaseEffect
 
 	public GaussianBlurData Data => (GaussianBlurData) EffectData!;  // NRT - Set in constructor
 
-	public GaussianBlurEffect ()
+	private readonly IChromeService chrome;
+
+	public GaussianBlurEffect (IServiceManager services)
 	{
+		chrome = services.GetService<IChromeService> ();
 		EffectData = new GaussianBlurData ();
 	}
 
 	public override void LaunchConfiguration ()
 	{
-		EffectHelper.LaunchSimpleEffectDialog (this);
+		chrome.LaunchSimpleEffectDialog (this);
 	}
 
 	#region Algorithm Code Ported From PDN
@@ -58,10 +61,8 @@ public sealed class GaussianBlurEffect : BaseEffect
 
 	public override void Render (ImageSurface src, ImageSurface dest, ReadOnlySpan<RectangleI> rois)
 	{
-		if (Data.Radius == 0) {
-			// Copy src to dest
-			return;
-		}
+		if (Data.Radius == 0)
+			return; // Copy src to dest
 
 		int r = Data.Radius;
 		ImmutableArray<int> w = CreateGaussianBlurRow (r);
