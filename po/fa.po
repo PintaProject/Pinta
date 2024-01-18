@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: pinta\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-01-14 01:15+0000\n"
+"POT-Creation-Date: 2024-01-18 03:35+0000\n"
 "PO-Revision-Date: 2023-12-11 19:34+0000\n"
 "Last-Translator: Parsa <Unknown>\n"
 "Language-Team: Persian <fa@li.org>\n"
@@ -19,7 +19,7 @@ msgstr ""
 "X-Launchpad-Export-Date: 2023-12-18 03:00+0000\n"
 "X-Generator: Launchpad (build e1eeab5b20e19239bd7d5f36676f7a52988db88b)\n"
 
-#: ../Pinta.Gui.Addins/InstallDialog.cs:216
+#: ../Pinta.Gui.Addins/InstallDialog.cs:217
 msgid " (in user directory)"
 msgstr " (در فولدر کاربر)"
 
@@ -92,11 +92,11 @@ msgstr "پس از انتخاب"
 msgid "All files"
 msgstr "همه فایل‌ها"
 
-#: ../Pinta.Effects/Effects/BulgeEffect.cs:112
-#: ../Pinta.Effects/Effects/FrostedGlassEffect.cs:150
-#: ../Pinta.Effects/Effects/SharpenEffect.cs:56
-#: ../Pinta.Effects/Effects/TwistEffect.cs:139
-#: ../Pinta.Effects/Effects/ZoomBlurEffect.cs:144
+#: ../Pinta.Effects/Effects/BulgeEffect.cs:115
+#: ../Pinta.Effects/Effects/FrostedGlassEffect.cs:151
+#: ../Pinta.Effects/Effects/SharpenEffect.cs:60
+#: ../Pinta.Effects/Effects/TwistEffect.cs:149
+#: ../Pinta.Effects/Effects/ZoomBlurEffect.cs:145
 msgid "Amount"
 msgstr "مقدار"
 
@@ -104,19 +104,19 @@ msgstr "مقدار"
 msgid "Anchor:"
 msgstr "لنگر:"
 
-#: ../Pinta.Effects/Effects/EdgeDetectEffect.cs:80
-#: ../Pinta.Effects/Effects/EmbossEffect.cs:149
-#: ../Pinta.Effects/Effects/JuliaFractalEffect.cs:171
-#: ../Pinta.Effects/Effects/MandelbrotFractalEffect.cs:185
-#: ../Pinta.Effects/Effects/MotionBlurEffect.cs:101
-#: ../Pinta.Effects/Effects/RadialBlurEffect.cs:171
-#: ../Pinta.Effects/Effects/ReliefEffect.cs:82
+#: ../Pinta.Effects/Effects/EdgeDetectEffect.cs:83
+#: ../Pinta.Effects/Effects/EmbossEffect.cs:150
+#: ../Pinta.Effects/Effects/JuliaFractalEffect.cs:190
+#: ../Pinta.Effects/Effects/MandelbrotFractalEffect.cs:199
+#: ../Pinta.Effects/Effects/MotionBlurEffect.cs:104
+#: ../Pinta.Effects/Effects/RadialBlurEffect.cs:172
+#: ../Pinta.Effects/Effects/ReliefEffect.cs:85
 #: ../Pinta.Tools/Editable/EditEngines/ArrowedEditEngine.cs:298
 #: ../Pinta/Actions/Layers/RotateZoomLayerAction.cs:115
 msgid "Angle"
 msgstr "زاویه"
 
-#: ../Pinta.Effects/Effects/TwistEffect.cs:142
+#: ../Pinta.Effects/Effects/TwistEffect.cs:152
 msgid "Antialias"
 msgstr "حذف لبه‌های ناصاف"
 
@@ -138,7 +138,12 @@ msgstr "فلش"
 msgid "Artistic"
 msgstr "طرح هنری"
 
-#: ../Pinta.Effects/Dialogs/Effects.LevelsDialog.cs:90
+#. Translators: Image dithering matrix named after Bill Atkinson
+#: ../Pinta.Effects/Classes/ErrorDiffusionMatrix.cs:28
+msgid "Atkinson"
+msgstr ""
+
+#: ../Pinta.Effects/Dialogs/Effects.LevelsDialog.cs:117
 msgid "Auto"
 msgstr "خود‌کار"
 
@@ -150,7 +155,7 @@ msgstr "برش‌زدن خودکار"
 msgid "Auto Level"
 msgstr "تسطیح خودکار"
 
-#: ../Pinta.Gui.Addins/AddinInfoView.cs:139
+#: ../Pinta.Gui.Addins/AddinInfoView.cs:143
 #, csharp-format
 msgid "Available in repository: {0}"
 msgstr ""
@@ -172,7 +177,7 @@ msgid "Based on the work of Paint.NET:"
 msgstr "مبتنی بر اثر Paint.NET:"
 
 #. Translators: Gradient with the colors of the flag of Italy: red, white, and green
-#: ../Pinta.Effects/Effects/GradientHelper.cs:10
+#: ../Pinta.Effects/Effects/GradientHelper.cs:24
 msgid "Beautiful Italy"
 msgstr ""
 
@@ -186,7 +191,7 @@ msgstr ""
 
 #. Translators: Simple gradient that goes from black to white
 #: ../Pinta.Effects/Adjustments/BlackAndWhiteEffect.cs:24
-#: ../Pinta.Effects/Effects/GradientHelper.cs:14
+#: ../Pinta.Effects/Effects/GradientHelper.cs:28
 msgid "Black and White"
 msgstr "سیاه و سفید"
 
@@ -194,7 +199,7 @@ msgstr "سیاه و سفید"
 msgid "Blend Mode"
 msgstr "حالت ترکیب"
 
-#: ../Pinta.Effects/Dialogs/Effects.LevelsDialog.cs:87
+#: ../Pinta.Effects/Dialogs/Effects.LevelsDialog.cs:114
 #: ../Pinta.Effects/Dialogs/Effects.PosterizeDialog.cs:77
 msgid "Blue"
 msgstr "آبی"
@@ -217,12 +222,12 @@ msgid "Bold"
 msgstr "پر رنگ"
 
 #. Translators: Gradient that starts out white, like the core of a raging fire, and then goes through yellow, red, and black (like visible black smoke), and finally transparent, blending with the background
-#: ../Pinta.Effects/Effects/GradientHelper.cs:18
+#: ../Pinta.Effects/Effects/GradientHelper.cs:32
 msgid "Bonfire"
 msgstr ""
 
-#: ../Pinta.Effects/Adjustments/BrightnessContrastEffect.cs:142
-#: ../Pinta.Effects/Effects/GlowEffect.cs:77
+#: ../Pinta.Effects/Adjustments/BrightnessContrastEffect.cs:145
+#: ../Pinta.Effects/Effects/GlowEffect.cs:81
 msgid "Brightness"
 msgstr "روشنایی"
 
@@ -230,7 +235,7 @@ msgstr "روشنایی"
 msgid "Brightness / Contrast"
 msgstr "روشنایی / تضاد"
 
-#: ../Pinta.Effects/Effects/OilPaintingEffect.cs:142
+#: ../Pinta.Effects/Effects/OilPaintingEffect.cs:145
 msgid "Brush Size"
 msgstr "اندازه‌ی قلم"
 
@@ -242,6 +247,11 @@ msgstr "پهنای قلم"
 #: ../Pinta.Effects/Effects/BulgeEffect.cs:23
 msgid "Bulge"
 msgstr "متورم"
+
+#. Translators: Image dithering matrix named after Daniel Burkes
+#: ../Pinta.Effects/Classes/ErrorDiffusionMatrix.cs:24
+msgid "Burkes"
+msgstr ""
 
 #: ../Pinta/Dialogs/ResizeCanvasDialog.cs:69
 #: ../Pinta/Dialogs/ResizeImageDialog.cs:59
@@ -257,7 +267,7 @@ msgstr "با درصد:"
 #: ../Pinta.Core/Actions/EditActions.cs:394
 #: ../Pinta.Core/Actions/LayerActions.cs:167
 #: ../Pinta.Gui.Addins/AddinManagerDialog.cs:198
-#: ../Pinta.Gui.Addins/InstallDialog.cs:120
+#: ../Pinta.Gui.Addins/InstallDialog.cs:117
 #: ../Pinta/Actions/File/OpenDocumentAction.cs:54
 #: ../Pinta/Actions/File/SaveDocumentImplementationAction.cs:74
 msgid "Cancel"
@@ -267,7 +277,7 @@ msgstr ""
 msgid "Canvas"
 msgstr "بوم"
 
-#: ../Pinta.Effects/Effects/PixelateEffect.cs:115
+#: ../Pinta.Effects/Effects/PixelateEffect.cs:117
 msgid "Cell Size"
 msgstr "اندازۀ سلول"
 
@@ -275,11 +285,11 @@ msgstr "اندازۀ سلول"
 msgid "Center Align"
 msgstr "تنظیم در وسط"
 
-#: ../Pinta.Effects/Effects/WarpEffect.cs:189
+#: ../Pinta.Effects/Effects/WarpEffect.cs:190
 msgid "Center Offset"
 msgstr "نقطه‌ی مرکزی"
 
-#: ../Pinta.Effects/Effects/MotionBlurEffect.cs:107
+#: ../Pinta.Effects/Effects/MotionBlurEffect.cs:110
 msgid "Centered"
 msgstr "وسط‌چین"
 
@@ -292,11 +302,11 @@ msgid "Changed Shape Type"
 msgstr "تغییر نوع شکل"
 
 #. Translators: Gradient that starts out off-white, like cherry blossoms against sunlight, then goes through pink, then light blue (like the sky) and finally transparent, blending with the background
-#: ../Pinta.Effects/Effects/GradientHelper.cs:22
+#: ../Pinta.Effects/Effects/GradientHelper.cs:36
 msgid "Cherry Blossom"
 msgstr ""
 
-#: ../Pinta.Effects/Dialogs/Effects.LevelsDialog.cs:531
+#: ../Pinta.Effects/Dialogs/Effects.LevelsDialog.cs:557
 msgid "Choose Color"
 msgstr ""
 
@@ -378,7 +388,7 @@ msgid "Clone Stamp"
 msgstr "مهر تکثیر"
 
 #: ../Pinta.Core/Actions/FileActions.cs:50
-#: ../Pinta.Gui.Addins/InstallDialog.cs:271
+#: ../Pinta.Gui.Addins/InstallDialog.cs:276
 msgid "Close"
 msgstr "بستن"
 
@@ -398,11 +408,12 @@ msgstr "دنباله‌های خط / منحنی بسته"
 msgid "Clouds"
 msgstr "طرح ابری"
 
-#: ../Pinta.Effects/Effects/OilPaintingEffect.cs:145
+#: ../Pinta.Effects/Effects/OilPaintingEffect.cs:148
 msgid "Coarseness"
 msgstr "زبری"
 
 #: ../Pinta.Core/Effects/UserBlendOps.cs:43
+#: ../Pinta.Effects/Effects/DitheringEffect.cs:14
 msgid "Color"
 msgstr "رنگی"
 
@@ -422,18 +433,25 @@ msgstr ""
 msgid "Color Picker"
 msgstr "رنگ بردار"
 
-#: ../Pinta.Effects/Effects/PencilSketchEffect.cs:90
+#: ../Pinta.Effects/Effects/PencilSketchEffect.cs:94
 msgid "Color Range"
 msgstr "گسترۀ رنگ"
 
-#: ../Pinta.Effects/Effects/AddNoiseEffect.cs:183
+#: ../Pinta.Effects/Effects/AddNoiseEffect.cs:185
 msgid "Color Saturation"
 msgstr "اشباع رنگ"
 
 #: ../Pinta.Core/Actions/ViewActions.cs:181
-#: ../Pinta.Effects/Effects/JuliaFractalEffect.cs:165
-#: ../Pinta.Effects/Effects/MandelbrotFractalEffect.cs:188
+#: ../Pinta.Effects/Effects/CloudsEffect.cs:250
+#: ../Pinta.Effects/Effects/JuliaFractalEffect.cs:181
+#: ../Pinta.Effects/Effects/MandelbrotFractalEffect.cs:205
 msgid "Color Scheme"
+msgstr ""
+
+#: ../Pinta.Effects/Effects/CloudsEffect.cs:247
+#: ../Pinta.Effects/Effects/JuliaFractalEffect.cs:178
+#: ../Pinta.Effects/Effects/MandelbrotFractalEffect.cs:202
+msgid "Color Scheme Source"
 msgstr ""
 
 #: ../Pinta.Effects/Effects/InkSketchEffect.cs:156
@@ -452,8 +470,8 @@ msgstr "فهرست"
 msgid "Contiguous"
 msgstr "پیوسته"
 
-#: ../Pinta.Effects/Adjustments/BrightnessContrastEffect.cs:153
-#: ../Pinta.Effects/Effects/GlowEffect.cs:80
+#: ../Pinta.Effects/Adjustments/BrightnessContrastEffect.cs:156
+#: ../Pinta.Effects/Effects/GlowEffect.cs:84
 msgid "Contrast"
 msgstr "تضاد"
 
@@ -470,7 +488,7 @@ msgid "Copyright"
 msgstr "حق نشر"
 
 #. Translators: Gradient with the colors of blue and pink cotton candy
-#: ../Pinta.Effects/Effects/GradientHelper.cs:26
+#: ../Pinta.Effects/Effects/GradientHelper.cs:40
 msgid "Cotton Candy"
 msgstr ""
 
@@ -487,7 +505,7 @@ msgstr ""
 msgid "Could not open file: {0}"
 msgstr "فایل نمی‌تواند باز شود: {0}"
 
-#: ../Pinta.Effects/Effects/AddNoiseEffect.cs:186
+#: ../Pinta.Effects/Effects/AddNoiseEffect.cs:188
 msgid "Coverage"
 msgstr "پوشش"
 
@@ -556,8 +574,8 @@ msgstr "جزئیات‌"
 msgid "Difference"
 msgstr "تفاضل"
 
-#: ../Pinta.Effects/Effects/FragmentEffect.cs:114
-#: ../Pinta.Effects/Effects/MotionBlurEffect.cs:104
+#: ../Pinta.Effects/Effects/FragmentEffect.cs:117
+#: ../Pinta.Effects/Effects/MotionBlurEffect.cs:107
 msgid "Distance"
 msgstr "فاصله"
 
@@ -570,11 +588,15 @@ msgstr "فاصله"
 msgid "Distort"
 msgstr "اعوجاج"
 
+#: ../Pinta.Effects/Effects/DitheringEffect.cs:11
+msgid "Dithering"
+msgstr ""
+
 #: ../Pinta.Tools/Tools/ColorPickerTool.cs:202
 msgid "Do not switch tool"
 msgstr "ابزار را عوض نکنید"
 
-#: ../Pinta.Gui.Addins/AddinInfoView.cs:134
+#: ../Pinta.Gui.Addins/AddinInfoView.cs:137
 #, csharp-format
 msgid "Download size: {0}"
 msgstr ""
@@ -605,7 +627,7 @@ msgid "Effects"
 msgstr ""
 
 #. Translators: Gradient that starts out white, like the the inner part of a spark, and goes through progressively dark shades of blue until it reaches black, and finally transparent, blending with the background
-#: ../Pinta.Effects/Effects/GradientHelper.cs:30
+#: ../Pinta.Effects/Effects/GradientHelper.cs:44
 msgid "Electric"
 msgstr ""
 
@@ -640,6 +662,10 @@ msgstr "پاک‌کن"
 msgid "Error"
 msgstr "بروز خطا"
 
+#: ../Pinta.Effects/Effects/DitheringEffect.cs:140
+msgid "Error Diffusion Method"
+msgstr ""
+
 #: ../Pinta.Core/Classes/SelectionModeHandler.cs:48
 msgid "Exclude (-) (Right Click)"
 msgstr "تفریق"
@@ -653,8 +679,8 @@ msgstr ""
 msgid "Extension packages"
 msgstr ""
 
-#: ../Pinta.Effects/Effects/JuliaFractalEffect.cs:156
-#: ../Pinta.Effects/Effects/MandelbrotFractalEffect.cs:175
+#: ../Pinta.Effects/Effects/JuliaFractalEffect.cs:169
+#: ../Pinta.Effects/Effects/MandelbrotFractalEffect.cs:189
 msgid "Factor"
 msgstr "عامل"
 
@@ -666,7 +692,7 @@ msgstr ""
 msgid "Failed to initialize add-in"
 msgstr ""
 
-#: ../Pinta.Gui.Addins/InstallDialog.cs:152
+#: ../Pinta.Gui.Addins/InstallDialog.cs:151
 msgid "Failed to load extension package"
 msgstr ""
 
@@ -760,6 +786,16 @@ msgstr "قرینه‌سازی عمودی"
 msgid "Flood Mode"
 msgstr "حالت پرکردن"
 
+#. Translators: Image dithering matrix named after Robert W. Floyd and Louis Steinberg
+#: ../Pinta.Effects/Classes/ErrorDiffusionMatrix.cs:40
+msgid "Floyd-Steinberg"
+msgstr ""
+
+#. Translators: Image dithering matrix named after Robert W. Floyd and Louis Steinberg. Some software may use it and call it Floyd-Steinberg, but it's not the actual Floyd-Steinberg matrix
+#: ../Pinta.Effects/Classes/ErrorDiffusionMatrix.cs:44
+msgid "Floyd-Steinberg Lite"
+msgstr ""
+
 #: ../Pinta.Tools/Tools/TextTool.cs:138
 msgid "Font"
 msgstr "نوع قلم متن"
@@ -768,7 +804,7 @@ msgstr "نوع قلم متن"
 msgid "Fragment"
 msgstr "خرد کردن"
 
-#: ../Pinta.Effects/Effects/FragmentEffect.cs:111
+#: ../Pinta.Effects/Effects/FragmentEffect.cs:114
 msgid "Fragments"
 msgstr "تکه‌ها"
 
@@ -796,7 +832,7 @@ msgstr "تار کردن گاوسی"
 msgid "Global"
 msgstr "فراگیر"
 
-#: ../Pinta.Effects/Effects/GlowEffect.cs:25
+#: ../Pinta.Effects/Effects/GlowEffect.cs:26
 msgid "Glow"
 msgstr "درخشش"
 
@@ -806,7 +842,7 @@ msgid "Gradient"
 msgstr "طیف"
 
 #: ../Pinta.Effects/Dialogs/Effects.CurvesDialog.cs:127
-#: ../Pinta.Effects/Dialogs/Effects.LevelsDialog.cs:85
+#: ../Pinta.Effects/Dialogs/Effects.LevelsDialog.cs:112
 #: ../Pinta.Effects/Dialogs/Effects.PosterizeDialog.cs:71
 msgid "Green"
 msgstr "سبز"
@@ -829,7 +865,7 @@ msgstr "ارتفاع:"
 msgid "Hide Layer"
 msgstr "مخفی شدن لایه"
 
-#: ../Pinta.Effects/Effects/RedEyeRemoveEffect.cs:55
+#: ../Pinta.Effects/Effects/RedEyeRemoveEffect.cs:59
 msgid "Hint: For best results, first use selection tools to select each eye."
 msgstr ""
 "نکته: برای بهترین نتایج، ابتدا از ابزار انتخاب برای هر چشم استفاده شود."
@@ -839,7 +875,7 @@ msgid "History"
 msgstr "تاریخچه"
 
 #: ../Pinta.Core/Effects/UserBlendOps.cs:45
-#: ../Pinta.Effects/Adjustments/HueSaturationEffect.cs:62
+#: ../Pinta.Effects/Adjustments/HueSaturationEffect.cs:61
 msgid "Hue"
 msgstr "تن رنگ"
 
@@ -904,16 +940,16 @@ msgstr "جوهر بیرونی"
 msgid "Ink Sketch"
 msgstr "طرح جوهری"
 
-#: ../Pinta.Effects/Dialogs/Effects.LevelsDialog.cs:153
+#: ../Pinta.Effects/Dialogs/Effects.LevelsDialog.cs:180
 msgid "Input"
 msgstr "ورودی"
 
-#: ../Pinta.Effects/Dialogs/Effects.LevelsDialog.cs:137
+#: ../Pinta.Effects/Dialogs/Effects.LevelsDialog.cs:164
 msgid "Input Histogram"
 msgstr "هیستوگرام ورودی"
 
-#: ../Pinta.Gui.Addins/InstallDialog.cs:123
-#: ../Pinta.Gui.Addins/InstallDialog.cs:197
+#: ../Pinta.Gui.Addins/InstallDialog.cs:120
+#: ../Pinta.Gui.Addins/InstallDialog.cs:196
 msgid "Install"
 msgstr "نصب کردن"
 
@@ -925,7 +961,7 @@ msgstr ""
 msgid "Install from file..."
 msgstr "نصب از طریق فایل..."
 
-#: ../Pinta.Gui.Addins/AddinInfoView.cs:81
+#: ../Pinta.Gui.Addins/AddinInfoView.cs:73
 msgid "Install..."
 msgstr "نصب..."
 
@@ -933,9 +969,9 @@ msgstr "نصب..."
 msgid "Installed"
 msgstr "نصب‌شده"
 
-#: ../Pinta.Effects/Effects/AddNoiseEffect.cs:180
-#: ../Pinta.Effects/Effects/OutlineEffect.cs:138
-#: ../Pinta.Effects/Effects/TileEffect.cs:180
+#: ../Pinta.Effects/Effects/AddNoiseEffect.cs:182
+#: ../Pinta.Effects/Effects/OutlineEffect.cs:141
+#: ../Pinta.Effects/Effects/TileEffect.cs:186
 msgid "Intensity"
 msgstr "شدت"
 
@@ -946,7 +982,7 @@ msgid "Intersect ({0} + Left Click)"
 msgstr ""
 
 #: ../Pinta.Effects/Adjustments/InvertColorsEffect.cs:24
-#: ../Pinta.Effects/Effects/MandelbrotFractalEffect.cs:194
+#: ../Pinta.Effects/Effects/MandelbrotFractalEffect.cs:214
 msgid "Invert Colors"
 msgstr "وارونه کردن رنگها"
 
@@ -962,6 +998,11 @@ msgstr "کج"
 #: ../Pinta/Dialogs/JpegCompressionDialog.cs:38
 msgid "JPEG Quality"
 msgstr "کیفیت JPEG"
+
+#. Translators: Image dithering matrix named after J. F. Jarvis, C. N. Judice, and W. H. Ninke
+#: ../Pinta.Effects/Classes/ErrorDiffusionMatrix.cs:36
+msgid "Jarvis-Judice-Ninke"
+msgstr ""
 
 #: ../Pinta.Effects/Effects/JuliaFractalEffect.cs:23
 msgid "Julia Fractal"
@@ -1129,7 +1170,7 @@ msgstr "طول"
 msgid "Levels"
 msgstr "سطوح"
 
-#: ../Pinta.Effects/Dialogs/Effects.LevelsDialog.cs:73
+#: ../Pinta.Effects/Dialogs/Effects.LevelsDialog.cs:100
 msgid "Levels Adjustment"
 msgstr "تنظیم سطوح"
 
@@ -1146,16 +1187,16 @@ msgstr ""
 msgid "Lighten"
 msgstr "روشن"
 
-#: ../Pinta.Effects/Effects/SoftenPortraitEffect.cs:113
+#: ../Pinta.Effects/Effects/SoftenPortraitEffect.cs:117
 msgid "Lighting"
 msgstr "روشنایی"
 
-#: ../Pinta.Effects/Adjustments/HueSaturationEffect.cs:68
+#: ../Pinta.Effects/Adjustments/HueSaturationEffect.cs:67
 msgid "Lightness"
 msgstr "روشنی"
 
 #. Translators: Gradient with a citrusy vibe that starts out white, goes through light yellow, several shades of green, and then transparent, blending with the background
-#: ../Pinta.Effects/Effects/GradientHelper.cs:34
+#: ../Pinta.Effects/Effects/GradientHelper.cs:48
 msgid "Lime Lemon"
 msgstr ""
 
@@ -1218,7 +1259,7 @@ msgstr ""
 msgid "Modified"
 msgstr "تغییریافته"
 
-#: ../Pinta.Gui.Addins/AddinInfoView.cs:77
+#: ../Pinta.Gui.Addins/AddinInfoView.cs:69
 msgid "More Information..."
 msgstr ""
 
@@ -1309,9 +1350,9 @@ msgstr "معمولی و دورگیری شده"
 msgid "Number of threads to use for rendering"
 msgstr ""
 
-#: ../Pinta.Effects/Effects/BulgeEffect.cs:115
-#: ../Pinta.Effects/Effects/RadialBlurEffect.cs:174
-#: ../Pinta.Effects/Effects/ZoomBlurEffect.cs:147
+#: ../Pinta.Effects/Effects/BulgeEffect.cs:118
+#: ../Pinta.Effects/Effects/RadialBlurEffect.cs:175
+#: ../Pinta.Effects/Effects/ZoomBlurEffect.cs:148
 msgid "Offset"
 msgstr "آفست"
 
@@ -1379,11 +1420,11 @@ msgstr "لبه‌گیری شکل"
 msgid "Outline width"
 msgstr "پهنای دورگیری"
 
-#: ../Pinta.Effects/Dialogs/Effects.LevelsDialog.cs:169
+#: ../Pinta.Effects/Dialogs/Effects.LevelsDialog.cs:196
 msgid "Output"
 msgstr "خروجی"
 
-#: ../Pinta.Effects/Dialogs/Effects.LevelsDialog.cs:171
+#: ../Pinta.Effects/Dialogs/Effects.LevelsDialog.cs:198
 msgid "Output Histogram"
 msgstr "هیستوگرام خروجی"
 
@@ -1404,6 +1445,7 @@ msgid "Paintbrush"
 msgstr "قلم‌مو"
 
 #: ../Pinta.Core/Actions/EditActions.cs:136
+#: ../Pinta.Effects/Effects/DitheringEffect.cs:143
 msgid "Palette"
 msgstr "جعبه‌رنگ"
 
@@ -1439,15 +1481,15 @@ msgstr "مداد"
 msgid "Pencil Sketch"
 msgstr "طرح مدادی"
 
-#: ../Pinta.Effects/Effects/PencilSketchEffect.cs:87
+#: ../Pinta.Effects/Effects/PencilSketchEffect.cs:91
 msgid "Pencil Tip Size"
 msgstr "اندازه‌ی نوک مداد"
 
-#: ../Pinta.Effects/Effects/MedianEffect.cs:66
+#: ../Pinta.Effects/Effects/MedianEffect.cs:67
 msgid "Percentile"
 msgstr "درصدی"
 
-#: ../Pinta.Effects/Effects/GlowEffect.cs:29
+#: ../Pinta.Effects/Effects/GlowEffect.cs:30
 #: ../Pinta.Effects/Effects/RedEyeRemoveEffect.cs:27
 #: ../Pinta.Effects/Effects/SharpenEffect.cs:27
 #: ../Pinta.Effects/Effects/SoftenPortraitEffect.cs:58
@@ -1509,7 +1551,7 @@ msgid "Pixels"
 msgstr "پیکسل"
 
 #. Translators: Gradient with different shades of brownish yellow
-#: ../Pinta.Effects/Effects/GradientHelper.cs:38
+#: ../Pinta.Effects/Effects/GradientHelper.cs:52
 msgid "Piña Colada"
 msgstr ""
 
@@ -1535,13 +1577,17 @@ msgstr "پرتره‌ای"
 msgid "Posterize"
 msgstr "پوسترسازی"
 
-#: ../Pinta.Effects/Effects/CloudsEffect.cs:208
+#: ../Pinta.Effects/Effects/CloudsEffect.cs:222
 msgid "Power"
 msgstr "انرژی"
 
 #. Translators: This refers to preserving the current canvas size when pasting a larger image.
 #: ../Pinta/Actions/Edit/PasteAction.cs:189
 msgid "Preserve"
+msgstr ""
+
+#: ../Pinta.Effects/Effects/GradientHelper.cs:11
+msgid "Preset Gradient"
 msgstr ""
 
 #: ../Pinta/Dialogs/NewImageDialog.cs:101
@@ -1560,10 +1606,10 @@ msgstr "اولیه"
 msgid "Print"
 msgstr "چاپ"
 
-#: ../Pinta.Effects/Effects/JuliaFractalEffect.cs:159
-#: ../Pinta.Effects/Effects/MandelbrotFractalEffect.cs:178
-#: ../Pinta.Effects/Effects/RadialBlurEffect.cs:177
-#: ../Pinta.Effects/Effects/WarpEffect.cs:186
+#: ../Pinta.Effects/Effects/JuliaFractalEffect.cs:172
+#: ../Pinta.Effects/Effects/MandelbrotFractalEffect.cs:192
+#: ../Pinta.Effects/Effects/RadialBlurEffect.cs:178
+#: ../Pinta.Effects/Effects/WarpEffect.cs:187
 msgid "Quality"
 msgstr "کیفیت"
 
@@ -1587,18 +1633,28 @@ msgstr "تار شدگی دایروی"
 msgid "Radial Gradient"
 msgstr "طیف دایروی"
 
-#: ../Pinta.Effects/Effects/GaussianBlurEffect.cs:247
-#: ../Pinta.Effects/Effects/GlowEffect.cs:74
-#: ../Pinta.Effects/Effects/MedianEffect.cs:63
-#: ../Pinta.Effects/Effects/ReduceNoiseEffect.cs:87
-#: ../Pinta.Effects/Effects/UnfocusEffect.cs:91
+#: ../Pinta.Effects/Effects/GaussianBlurEffect.cs:248
+#: ../Pinta.Effects/Effects/GlowEffect.cs:78
+#: ../Pinta.Effects/Effects/MedianEffect.cs:64
+#: ../Pinta.Effects/Effects/ReduceNoiseEffect.cs:91
+#: ../Pinta.Effects/Effects/UnfocusEffect.cs:96
 #: ../Pinta.Tools/Editable/EditEngines/RoundedLineEditEngine.cs:88
 msgid "Radius"
 msgstr "شعاع"
 
-#: ../Pinta.Effects/Effects/AddNoiseEffect.cs:189
-#: ../Pinta.Effects/Effects/CloudsEffect.cs:230
-#: ../Pinta.Effects/Effects/FrostedGlassEffect.cs:153
+#: ../Pinta.Effects/Effects/GradientHelper.cs:17
+msgid "Random"
+msgstr ""
+
+#: ../Pinta.Effects/Effects/CloudsEffect.cs:253
+#: ../Pinta.Effects/Effects/JuliaFractalEffect.cs:184
+#: ../Pinta.Effects/Effects/MandelbrotFractalEffect.cs:208
+msgid "Random Color Scheme Seed"
+msgstr ""
+
+#: ../Pinta.Effects/Effects/AddNoiseEffect.cs:191
+#: ../Pinta.Effects/Effects/CloudsEffect.cs:244
+#: ../Pinta.Effects/Effects/FrostedGlassEffect.cs:154
 msgid "Random Noise"
 msgstr "ایجاد پارازیت تصادفی"
 
@@ -1614,7 +1670,7 @@ msgstr "مستطیل"
 msgid "Rectangle Select"
 msgstr "انتخاب مربع مستطیل"
 
-#: ../Pinta.Effects/Dialogs/Effects.LevelsDialog.cs:83
+#: ../Pinta.Effects/Dialogs/Effects.LevelsDialog.cs:110
 #: ../Pinta.Effects/Dialogs/Effects.PosterizeDialog.cs:65
 msgid "Red"
 msgstr "قرمز"
@@ -1647,7 +1703,7 @@ msgstr "تازه کردن"
 msgid "Released under the MIT X11 License."
 msgstr "منتشر شده تحت مجوز MIT X11."
 
-#: ../Pinta.Effects/Effects/ReliefEffect.cs:38
+#: ../Pinta.Effects/Effects/ReliefEffect.cs:42
 msgid "Relief"
 msgstr "نقش برجسته"
 
@@ -1682,7 +1738,7 @@ msgid "Reseed"
 msgstr "بذر دهی مجدد"
 
 #: ../Pinta.Effects/Dialogs/Effects.CurvesDialog.cs:136
-#: ../Pinta.Effects/Dialogs/Effects.LevelsDialog.cs:91
+#: ../Pinta.Effects/Dialogs/Effects.LevelsDialog.cs:118
 msgid "Reset"
 msgstr "تنظیم‌مجدد"
 
@@ -1712,8 +1768,9 @@ msgstr "تغییر اندازه‌ی تصویر..."
 msgid "Resize Palette"
 msgstr "تغییر اندازه‌ی جعبه‌رنگ"
 
-#: ../Pinta.Effects/Effects/JuliaFractalEffect.cs:168
-#: ../Pinta.Effects/Effects/MandelbrotFractalEffect.cs:191
+#: ../Pinta.Effects/Effects/CloudsEffect.cs:256
+#: ../Pinta.Effects/Effects/JuliaFractalEffect.cs:187
+#: ../Pinta.Effects/Effects/MandelbrotFractalEffect.cs:211
 msgid "Reverse Color Scheme"
 msgstr ""
 
@@ -1745,8 +1802,8 @@ msgstr "چرخش 90 درجه در جهت ساعت"
 msgid "Rotate 90° Counter-Clockwise"
 msgstr "چرخش 90 درجه در جهت عکس ساعت"
 
-#: ../Pinta.Effects/Effects/FragmentEffect.cs:117
-#: ../Pinta.Effects/Effects/TileEffect.cs:174
+#: ../Pinta.Effects/Effects/FragmentEffect.cs:120
+#: ../Pinta.Effects/Effects/TileEffect.cs:180
 msgid "Rotation"
 msgstr "دوران"
 
@@ -1775,11 +1832,11 @@ msgid "Sampling"
 msgstr "نمونه‌برداری"
 
 #: ../Pinta.Core/Effects/UserBlendOps.cs:46
-#: ../Pinta.Effects/Adjustments/HueSaturationEffect.cs:65
+#: ../Pinta.Effects/Adjustments/HueSaturationEffect.cs:64
 msgid "Saturation"
 msgstr "اشباع رنگ"
 
-#: ../Pinta.Effects/Effects/RedEyeRemoveEffect.cs:54
+#: ../Pinta.Effects/Effects/RedEyeRemoveEffect.cs:58
 msgid "Saturation Percentage"
 msgstr "درصد اشباع رنگ"
 
@@ -1811,7 +1868,7 @@ msgstr "ذخیره‌ی پرونده‌ی جعبه‌رنگ"
 msgid "Save changes to image \"{0}\" before closing?"
 msgstr ""
 
-#: ../Pinta.Effects/Effects/CloudsEffect.cs:205
+#: ../Pinta.Effects/Effects/CloudsEffect.cs:219
 msgid "Scale"
 msgstr "مقیاس"
 
@@ -1827,6 +1884,10 @@ msgstr "ثانویه"
 #: ../Pinta.Core/Actions/EditActions.cs:215
 msgid "Select All"
 msgstr "انتخاب همه"
+
+#: ../Pinta.Effects/Effects/GradientHelper.cs:14
+msgid "Selected Colors"
+msgstr ""
 
 #: ../Pinta.Effects/Adjustments/SepiaEffect.cs:25
 msgid "Sepia"
@@ -1857,6 +1918,16 @@ msgstr "نمایان شدن لایه"
 msgid "Show/Hide"
 msgstr ""
 
+#. Translators: Image dithering matrix named after Frankie Sierra
+#: ../Pinta.Effects/Classes/ErrorDiffusionMatrix.cs:12
+msgid "Sierra"
+msgstr ""
+
+#. Translators: Image dithering matrix named after Frankie Sierra
+#: ../Pinta.Effects/Classes/ErrorDiffusionMatrix.cs:20
+msgid "Sierra Lite"
+msgstr ""
+
 #: ../Pinta.Tools/Tools/ColorPickerTool.cs:221
 msgid "Single Pixel"
 msgstr "تک نقطه"
@@ -1877,7 +1948,7 @@ msgstr "روشنایی نرم"
 msgid "Soften Portrait"
 msgstr "شفاف کردن عکس"
 
-#: ../Pinta.Effects/Effects/SoftenPortraitEffect.cs:110
+#: ../Pinta.Effects/Effects/SoftenPortraitEffect.cs:114
 msgid "Softness"
 msgstr "لطافت"
 
@@ -1893,14 +1964,19 @@ msgstr "مربعی"
 msgid "Status Bar"
 msgstr ""
 
-#: ../Pinta.Effects/Effects/ReduceNoiseEffect.cs:90
+#: ../Pinta.Effects/Effects/ReduceNoiseEffect.cs:94
 msgid "Strength"
 msgstr "قدرت"
+
+#. Translators: Image dithering matrix named after Peter Stucki
+#: ../Pinta.Effects/Classes/ErrorDiffusionMatrix.cs:32
+msgid "Stucki"
+msgstr ""
 
 #: ../Pinta.Effects/Effects/EdgeDetectEffect.cs:27
 #: ../Pinta.Effects/Effects/EmbossEffect.cs:27
 #: ../Pinta.Effects/Effects/OutlineEffect.cs:30
-#: ../Pinta.Effects/Effects/ReliefEffect.cs:29
+#: ../Pinta.Effects/Effects/ReliefEffect.cs:33
 msgid "Stylize"
 msgstr "قلم‌زنی"
 
@@ -1934,23 +2010,23 @@ msgstr ""
 msgid "The clipboard does not contain an image."
 msgstr "تصویری در حافظه‌ی سیستم نیست."
 
-#: ../Pinta.Gui.Addins/InstallDialog.cs:153
+#: ../Pinta.Gui.Addins/InstallDialog.cs:152
 msgid "The file may be an invalid or corrupt extension package"
 msgstr ""
 
-#: ../Pinta.Gui.Addins/InstallDialog.cs:92
+#: ../Pinta.Gui.Addins/InstallDialog.cs:89
 msgid "The following dependencies could not be resolved:"
 msgstr "این وابستگی‌ها قابل حل نیستند:"
 
-#: ../Pinta.Gui.Addins/InstallDialog.cs:83
+#: ../Pinta.Gui.Addins/InstallDialog.cs:80
 msgid "The following packages need to be uninstalled:"
 msgstr "این بسته‌ها نیاز به حذف دارند:"
 
-#: ../Pinta.Gui.Addins/InstallDialog.cs:75
+#: ../Pinta.Gui.Addins/InstallDialog.cs:72
 msgid "The following packages will be installed:"
 msgstr "این بسته ها نصب خواهند شد:"
 
-#: ../Pinta.Gui.Addins/InstallDialog.cs:179
+#: ../Pinta.Gui.Addins/InstallDialog.cs:178
 msgid "The following packages will be uninstalled:"
 msgstr "این بسته‌ها حذف خواهند شد:"
 
@@ -1960,25 +2036,25 @@ msgid ""
 "to the canvas size?"
 msgstr ""
 
-#: ../Pinta.Gui.Addins/InstallDialog.cs:293
+#: ../Pinta.Gui.Addins/InstallDialog.cs:301
 msgid "The installation failed!"
 msgstr "عملیات نصب موفقیت‌آمیز نبود!"
 
-#: ../Pinta.Gui.Addins/InstallDialog.cs:294
+#: ../Pinta.Gui.Addins/InstallDialog.cs:302
 msgid "The installation has completed with warnings."
 msgstr "عملیات نصب با هشدارهایی کامل شد."
 
-#: ../Pinta.Gui.Addins/InstallDialog.cs:57
+#: ../Pinta.Gui.Addins/InstallDialog.cs:54
 msgid ""
 "The selected extension packages can't be installed because there are "
 "dependency conflicts."
 msgstr ""
 
-#: ../Pinta.Gui.Addins/InstallDialog.cs:303
+#: ../Pinta.Gui.Addins/InstallDialog.cs:308
 msgid "The uninstallation failed!"
 msgstr "عملیات حذف موفقیت‌آمیز نبود!"
 
-#: ../Pinta.Gui.Addins/InstallDialog.cs:304
+#: ../Pinta.Gui.Addins/InstallDialog.cs:309
 msgid "The uninstallation has completed with warnings."
 msgstr "عملیات حذف با هشدارهایی کامل شد."
 
@@ -1988,7 +2064,7 @@ msgid ""
 "will also be uninstalled:"
 msgstr ""
 
-#: ../Pinta.Effects/Effects/OutlineEffect.cs:135
+#: ../Pinta.Effects/Effects/OutlineEffect.cs:138
 msgid "Thickness"
 msgstr "ضخامت"
 
@@ -1996,7 +2072,7 @@ msgstr "ضخامت"
 msgid "Tile Reflection"
 msgstr "انعکاس مشبک"
 
-#: ../Pinta.Effects/Effects/TileEffect.cs:177
+#: ../Pinta.Effects/Effects/TileEffect.cs:183
 msgid "Tile Size"
 msgstr "اندازۀ کاشی"
 
@@ -2004,7 +2080,7 @@ msgstr "اندازۀ کاشی"
 msgid "Tip: Right-click to remove control points."
 msgstr "نکته: برای حذف نقاط کنترلی راست-کلیک کنید."
 
-#: ../Pinta.Effects/Effects/RedEyeRemoveEffect.cs:50
+#: ../Pinta.Effects/Effects/RedEyeRemoveEffect.cs:54
 #: ../Pinta.Tools/Tools/FloodTool.cs:125
 #: ../Pinta.Tools/Tools/RecolorTool.cs:196
 msgid "Tolerance"
@@ -2047,6 +2123,11 @@ msgstr "شفاف"
 msgid "Twist"
 msgstr "پیچانیدن"
 
+#. Translators: Image dithering matrix named after Frankie Sierra
+#: ../Pinta.Effects/Classes/ErrorDiffusionMatrix.cs:16
+msgid "Two-Row Sierra"
+msgstr ""
+
 #: ../Pinta.Tools/Tools/EraserTool.cs:259
 #: ../Pinta.Tools/Tools/PaintBrushTool.cs:165
 msgid "Type"
@@ -2064,12 +2145,12 @@ msgstr "بازگردانی"
 msgid "Unfocus"
 msgstr "کاهش تمرکز"
 
+#: ../Pinta.Gui.Addins/InstallDialog.cs:168
 #: ../Pinta.Gui.Addins/InstallDialog.cs:169
-#: ../Pinta.Gui.Addins/InstallDialog.cs:170
 msgid "Uninstall"
 msgstr "حذف"
 
-#: ../Pinta.Gui.Addins/AddinInfoView.cs:91
+#: ../Pinta.Gui.Addins/AddinInfoView.cs:83
 msgid "Uninstall..."
 msgstr ""
 
@@ -2092,7 +2173,7 @@ msgstr "قالب تصویری پشتیبانی نشده"
 msgid "Unsupported palette format"
 msgstr ""
 
-#: ../Pinta.Gui.Addins/AddinInfoView.cs:86
+#: ../Pinta.Gui.Addins/AddinInfoView.cs:78
 msgid "Update..."
 msgstr ""
 
@@ -2100,7 +2181,7 @@ msgstr ""
 msgid "Updates"
 msgstr "به‌روزرسانی‌ها"
 
-#: ../Pinta.Effects/Effects/RadialBlurEffect.cs:178
+#: ../Pinta.Effects/Effects/RadialBlurEffect.cs:179
 msgid ""
 "Use low quality for previews, small images, and small angles.  Use high "
 "quality for final quality, large images, and large angles."
@@ -2112,7 +2193,7 @@ msgstr ""
 msgid "Using some icons from:"
 msgstr "آیکون‌های استفاده شده از:"
 
-#: ../Pinta.Gui.Addins/AddinInfoView.cs:128
+#: ../Pinta.Gui.Addins/AddinInfoView.cs:130
 #, csharp-format
 msgid "Version: {0}"
 msgstr ""
@@ -2121,7 +2202,7 @@ msgstr ""
 msgid "Visible"
 msgstr "قابل روئیت"
 
-#: ../Pinta.Effects/Effects/SoftenPortraitEffect.cs:116
+#: ../Pinta.Effects/Effects/SoftenPortraitEffect.cs:120
 msgid "Warmth"
 msgstr "حرارت"
 
@@ -2169,8 +2250,8 @@ msgid ""
 "You do not have access to modify '{0}'. The file or folder may be read-only."
 msgstr ""
 
-#: ../Pinta.Effects/Effects/JuliaFractalEffect.cs:162
-#: ../Pinta.Effects/Effects/MandelbrotFractalEffect.cs:182
+#: ../Pinta.Effects/Effects/JuliaFractalEffect.cs:175
+#: ../Pinta.Effects/Effects/MandelbrotFractalEffect.cs:196
 #: ../Pinta.Tools/Tools/ZoomTool.cs:55
 #: ../Pinta/Actions/Layers/RotateZoomLayerAction.cs:121
 msgid "Zoom"

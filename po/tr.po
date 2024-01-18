@@ -7,11 +7,11 @@ msgid ""
 msgstr ""
 "Project-Id-Version: pinta\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-01-14 01:15+0000\n"
+"POT-Creation-Date: 2024-01-18 03:35+0000\n"
 "PO-Revision-Date: 2024-01-16 07:06+0000\n"
 "Last-Translator: Oğuz Ersen <oguz@ersen.moe>\n"
-"Language-Team: Turkish <https://hosted.weblate.org/projects/pinta/pinta/tr/>"
-"\n"
+"Language-Team: Turkish <https://hosted.weblate.org/projects/pinta/pinta/tr/"
+">\n"
 "Language: tr\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -20,7 +20,7 @@ msgstr ""
 "X-Generator: Weblate 5.4-dev\n"
 "X-Launchpad-Export-Date: 2023-12-18 03:00+0000\n"
 
-#: ../Pinta.Gui.Addins/InstallDialog.cs:216
+#: ../Pinta.Gui.Addins/InstallDialog.cs:217
 msgid " (in user directory)"
 msgstr " (kullanıcı dizini içinde)"
 
@@ -93,11 +93,11 @@ msgstr "Seçimden sonra"
 msgid "All files"
 msgstr "Tüm dosyalar"
 
-#: ../Pinta.Effects/Effects/BulgeEffect.cs:112
-#: ../Pinta.Effects/Effects/FrostedGlassEffect.cs:150
-#: ../Pinta.Effects/Effects/SharpenEffect.cs:56
-#: ../Pinta.Effects/Effects/TwistEffect.cs:139
-#: ../Pinta.Effects/Effects/ZoomBlurEffect.cs:144
+#: ../Pinta.Effects/Effects/BulgeEffect.cs:115
+#: ../Pinta.Effects/Effects/FrostedGlassEffect.cs:151
+#: ../Pinta.Effects/Effects/SharpenEffect.cs:60
+#: ../Pinta.Effects/Effects/TwistEffect.cs:149
+#: ../Pinta.Effects/Effects/ZoomBlurEffect.cs:145
 msgid "Amount"
 msgstr "Miktar"
 
@@ -105,19 +105,19 @@ msgstr "Miktar"
 msgid "Anchor:"
 msgstr "Çapa:"
 
-#: ../Pinta.Effects/Effects/EdgeDetectEffect.cs:80
-#: ../Pinta.Effects/Effects/EmbossEffect.cs:149
-#: ../Pinta.Effects/Effects/JuliaFractalEffect.cs:171
-#: ../Pinta.Effects/Effects/MandelbrotFractalEffect.cs:185
-#: ../Pinta.Effects/Effects/MotionBlurEffect.cs:101
-#: ../Pinta.Effects/Effects/RadialBlurEffect.cs:171
-#: ../Pinta.Effects/Effects/ReliefEffect.cs:82
+#: ../Pinta.Effects/Effects/EdgeDetectEffect.cs:83
+#: ../Pinta.Effects/Effects/EmbossEffect.cs:150
+#: ../Pinta.Effects/Effects/JuliaFractalEffect.cs:190
+#: ../Pinta.Effects/Effects/MandelbrotFractalEffect.cs:199
+#: ../Pinta.Effects/Effects/MotionBlurEffect.cs:104
+#: ../Pinta.Effects/Effects/RadialBlurEffect.cs:172
+#: ../Pinta.Effects/Effects/ReliefEffect.cs:85
 #: ../Pinta.Tools/Editable/EditEngines/ArrowedEditEngine.cs:298
 #: ../Pinta/Actions/Layers/RotateZoomLayerAction.cs:115
 msgid "Angle"
 msgstr "Açı"
 
-#: ../Pinta.Effects/Effects/TwistEffect.cs:142
+#: ../Pinta.Effects/Effects/TwistEffect.cs:152
 msgid "Antialias"
 msgstr "Örtüşme Önle"
 
@@ -139,7 +139,12 @@ msgstr "Ok"
 msgid "Artistic"
 msgstr "Sanatsal"
 
-#: ../Pinta.Effects/Dialogs/Effects.LevelsDialog.cs:90
+#. Translators: Image dithering matrix named after Bill Atkinson
+#: ../Pinta.Effects/Classes/ErrorDiffusionMatrix.cs:28
+msgid "Atkinson"
+msgstr ""
+
+#: ../Pinta.Effects/Dialogs/Effects.LevelsDialog.cs:117
 msgid "Auto"
 msgstr "Otomatik"
 
@@ -151,7 +156,7 @@ msgstr "Otomatik Kırp"
 msgid "Auto Level"
 msgstr "Otomatik Seviye"
 
-#: ../Pinta.Gui.Addins/AddinInfoView.cs:139
+#: ../Pinta.Gui.Addins/AddinInfoView.cs:143
 #, csharp-format
 msgid "Available in repository: {0}"
 msgstr "Şu depoda mevcut: {0}"
@@ -173,7 +178,7 @@ msgid "Based on the work of Paint.NET:"
 msgstr "Paint.NET üzerine inşa edilmiştir:"
 
 #. Translators: Gradient with the colors of the flag of Italy: red, white, and green
-#: ../Pinta.Effects/Effects/GradientHelper.cs:10
+#: ../Pinta.Effects/Effects/GradientHelper.cs:24
 msgid "Beautiful Italy"
 msgstr "Güzel İtalya"
 
@@ -187,7 +192,7 @@ msgstr "Çift Doğrusal"
 
 #. Translators: Simple gradient that goes from black to white
 #: ../Pinta.Effects/Adjustments/BlackAndWhiteEffect.cs:24
-#: ../Pinta.Effects/Effects/GradientHelper.cs:14
+#: ../Pinta.Effects/Effects/GradientHelper.cs:28
 msgid "Black and White"
 msgstr "Siyah Beyaz"
 
@@ -195,7 +200,7 @@ msgstr "Siyah Beyaz"
 msgid "Blend Mode"
 msgstr "Karıştırma Kipi"
 
-#: ../Pinta.Effects/Dialogs/Effects.LevelsDialog.cs:87
+#: ../Pinta.Effects/Dialogs/Effects.LevelsDialog.cs:114
 #: ../Pinta.Effects/Dialogs/Effects.PosterizeDialog.cs:77
 msgid "Blue"
 msgstr "Mavi"
@@ -218,12 +223,12 @@ msgid "Bold"
 msgstr "Kalın"
 
 #. Translators: Gradient that starts out white, like the core of a raging fire, and then goes through yellow, red, and black (like visible black smoke), and finally transparent, blending with the background
-#: ../Pinta.Effects/Effects/GradientHelper.cs:18
+#: ../Pinta.Effects/Effects/GradientHelper.cs:32
 msgid "Bonfire"
 msgstr "Şenlik Ateşi"
 
-#: ../Pinta.Effects/Adjustments/BrightnessContrastEffect.cs:142
-#: ../Pinta.Effects/Effects/GlowEffect.cs:77
+#: ../Pinta.Effects/Adjustments/BrightnessContrastEffect.cs:145
+#: ../Pinta.Effects/Effects/GlowEffect.cs:81
 msgid "Brightness"
 msgstr "Parlaklık"
 
@@ -231,7 +236,7 @@ msgstr "Parlaklık"
 msgid "Brightness / Contrast"
 msgstr "Parlaklık / Kontrast"
 
-#: ../Pinta.Effects/Effects/OilPaintingEffect.cs:142
+#: ../Pinta.Effects/Effects/OilPaintingEffect.cs:145
 msgid "Brush Size"
 msgstr "Fırça Boyutu"
 
@@ -243,6 +248,11 @@ msgstr "Fırça boyutu"
 #: ../Pinta.Effects/Effects/BulgeEffect.cs:23
 msgid "Bulge"
 msgstr "Şişirme"
+
+#. Translators: Image dithering matrix named after Daniel Burkes
+#: ../Pinta.Effects/Classes/ErrorDiffusionMatrix.cs:24
+msgid "Burkes"
+msgstr ""
 
 #: ../Pinta/Dialogs/ResizeCanvasDialog.cs:69
 #: ../Pinta/Dialogs/ResizeImageDialog.cs:59
@@ -258,7 +268,7 @@ msgstr "Yüzde :"
 #: ../Pinta.Core/Actions/EditActions.cs:394
 #: ../Pinta.Core/Actions/LayerActions.cs:167
 #: ../Pinta.Gui.Addins/AddinManagerDialog.cs:198
-#: ../Pinta.Gui.Addins/InstallDialog.cs:120
+#: ../Pinta.Gui.Addins/InstallDialog.cs:117
 #: ../Pinta/Actions/File/OpenDocumentAction.cs:54
 #: ../Pinta/Actions/File/SaveDocumentImplementationAction.cs:74
 msgid "Cancel"
@@ -268,7 +278,7 @@ msgstr "İptal"
 msgid "Canvas"
 msgstr "Tuval"
 
-#: ../Pinta.Effects/Effects/PixelateEffect.cs:115
+#: ../Pinta.Effects/Effects/PixelateEffect.cs:117
 msgid "Cell Size"
 msgstr "Hücre Boyutu"
 
@@ -276,11 +286,11 @@ msgstr "Hücre Boyutu"
 msgid "Center Align"
 msgstr "Ortala"
 
-#: ../Pinta.Effects/Effects/WarpEffect.cs:189
+#: ../Pinta.Effects/Effects/WarpEffect.cs:190
 msgid "Center Offset"
 msgstr "Orta Baskı"
 
-#: ../Pinta.Effects/Effects/MotionBlurEffect.cs:107
+#: ../Pinta.Effects/Effects/MotionBlurEffect.cs:110
 msgid "Centered"
 msgstr "Ortalanmış"
 
@@ -293,11 +303,11 @@ msgid "Changed Shape Type"
 msgstr "Şekil Türü Değişti"
 
 #. Translators: Gradient that starts out off-white, like cherry blossoms against sunlight, then goes through pink, then light blue (like the sky) and finally transparent, blending with the background
-#: ../Pinta.Effects/Effects/GradientHelper.cs:22
+#: ../Pinta.Effects/Effects/GradientHelper.cs:36
 msgid "Cherry Blossom"
 msgstr "Kiraz Çiçeği"
 
-#: ../Pinta.Effects/Dialogs/Effects.LevelsDialog.cs:531
+#: ../Pinta.Effects/Dialogs/Effects.LevelsDialog.cs:557
 msgid "Choose Color"
 msgstr "Renk Seçin"
 
@@ -386,7 +396,7 @@ msgid "Clone Stamp"
 msgstr "Klonlama Aracı"
 
 #: ../Pinta.Core/Actions/FileActions.cs:50
-#: ../Pinta.Gui.Addins/InstallDialog.cs:271
+#: ../Pinta.Gui.Addins/InstallDialog.cs:276
 msgid "Close"
 msgstr "Kapat"
 
@@ -406,11 +416,12 @@ msgstr "Kapalı Çizgi/Eğri Serileri"
 msgid "Clouds"
 msgstr "Bulutlar"
 
-#: ../Pinta.Effects/Effects/OilPaintingEffect.cs:145
+#: ../Pinta.Effects/Effects/OilPaintingEffect.cs:148
 msgid "Coarseness"
 msgstr "Kabalık"
 
 #: ../Pinta.Core/Effects/UserBlendOps.cs:43
+#: ../Pinta.Effects/Effects/DitheringEffect.cs:14
 msgid "Color"
 msgstr "Renk"
 
@@ -430,19 +441,26 @@ msgstr "Renk Modu"
 msgid "Color Picker"
 msgstr "Renk Seçici"
 
-#: ../Pinta.Effects/Effects/PencilSketchEffect.cs:90
+#: ../Pinta.Effects/Effects/PencilSketchEffect.cs:94
 msgid "Color Range"
 msgstr "Renk Dizisi"
 
-#: ../Pinta.Effects/Effects/AddNoiseEffect.cs:183
+#: ../Pinta.Effects/Effects/AddNoiseEffect.cs:185
 msgid "Color Saturation"
 msgstr "Renk Doygunluğu"
 
 #: ../Pinta.Core/Actions/ViewActions.cs:181
-#: ../Pinta.Effects/Effects/JuliaFractalEffect.cs:165
-#: ../Pinta.Effects/Effects/MandelbrotFractalEffect.cs:188
+#: ../Pinta.Effects/Effects/CloudsEffect.cs:250
+#: ../Pinta.Effects/Effects/JuliaFractalEffect.cs:181
+#: ../Pinta.Effects/Effects/MandelbrotFractalEffect.cs:205
 msgid "Color Scheme"
 msgstr "Renk Düzeni"
+
+#: ../Pinta.Effects/Effects/CloudsEffect.cs:247
+#: ../Pinta.Effects/Effects/JuliaFractalEffect.cs:178
+#: ../Pinta.Effects/Effects/MandelbrotFractalEffect.cs:202
+msgid "Color Scheme Source"
+msgstr ""
 
 #: ../Pinta.Effects/Effects/InkSketchEffect.cs:156
 msgid "Coloring"
@@ -460,8 +478,8 @@ msgstr "İçerik"
 msgid "Contiguous"
 msgstr "Sürekli"
 
-#: ../Pinta.Effects/Adjustments/BrightnessContrastEffect.cs:153
-#: ../Pinta.Effects/Effects/GlowEffect.cs:80
+#: ../Pinta.Effects/Adjustments/BrightnessContrastEffect.cs:156
+#: ../Pinta.Effects/Effects/GlowEffect.cs:84
 msgid "Contrast"
 msgstr "Kontrast"
 
@@ -478,7 +496,7 @@ msgid "Copyright"
 msgstr "Telif Hakkı"
 
 #. Translators: Gradient with the colors of blue and pink cotton candy
-#: ../Pinta.Effects/Effects/GradientHelper.cs:26
+#: ../Pinta.Effects/Effects/GradientHelper.cs:40
 msgid "Cotton Candy"
 msgstr "Pamuk Şekeri"
 
@@ -495,7 +513,7 @@ msgstr "{1}'den \"{0}\" katmanı aktarılamadı"
 msgid "Could not open file: {0}"
 msgstr "Dosya açılamadı: {0}"
 
-#: ../Pinta.Effects/Effects/AddNoiseEffect.cs:186
+#: ../Pinta.Effects/Effects/AddNoiseEffect.cs:188
 msgid "Coverage"
 msgstr "Kapsam"
 
@@ -564,8 +582,8 @@ msgstr "Ayrıntılar"
 msgid "Difference"
 msgstr "Fark"
 
-#: ../Pinta.Effects/Effects/FragmentEffect.cs:114
-#: ../Pinta.Effects/Effects/MotionBlurEffect.cs:104
+#: ../Pinta.Effects/Effects/FragmentEffect.cs:117
+#: ../Pinta.Effects/Effects/MotionBlurEffect.cs:107
 msgid "Distance"
 msgstr "Uzaklık"
 
@@ -578,11 +596,15 @@ msgstr "Uzaklık"
 msgid "Distort"
 msgstr "Boz"
 
+#: ../Pinta.Effects/Effects/DitheringEffect.cs:11
+msgid "Dithering"
+msgstr ""
+
 #: ../Pinta.Tools/Tools/ColorPickerTool.cs:202
 msgid "Do not switch tool"
 msgstr "Aracı değiştirme"
 
-#: ../Pinta.Gui.Addins/AddinInfoView.cs:134
+#: ../Pinta.Gui.Addins/AddinInfoView.cs:137
 #, csharp-format
 msgid "Download size: {0}"
 msgstr "İndirme boyutu: {0}"
@@ -613,7 +635,7 @@ msgid "Effects"
 msgstr "Efektler"
 
 #. Translators: Gradient that starts out white, like the the inner part of a spark, and goes through progressively dark shades of blue until it reaches black, and finally transparent, blending with the background
-#: ../Pinta.Effects/Effects/GradientHelper.cs:30
+#: ../Pinta.Effects/Effects/GradientHelper.cs:44
 msgid "Electric"
 msgstr "Elektrik"
 
@@ -649,6 +671,10 @@ msgstr "Silgi"
 msgid "Error"
 msgstr "Hata"
 
+#: ../Pinta.Effects/Effects/DitheringEffect.cs:140
+msgid "Error Diffusion Method"
+msgstr ""
+
 #: ../Pinta.Core/Classes/SelectionModeHandler.cs:48
 msgid "Exclude (-) (Right Click)"
 msgstr "Hariç Tutma (-) (Sağ Tıklama)"
@@ -662,8 +688,8 @@ msgstr "Genişlet"
 msgid "Extension packages"
 msgstr "Uzantı paketleri"
 
-#: ../Pinta.Effects/Effects/JuliaFractalEffect.cs:156
-#: ../Pinta.Effects/Effects/MandelbrotFractalEffect.cs:175
+#: ../Pinta.Effects/Effects/JuliaFractalEffect.cs:169
+#: ../Pinta.Effects/Effects/MandelbrotFractalEffect.cs:189
 msgid "Factor"
 msgstr "Etken"
 
@@ -675,7 +701,7 @@ msgstr "XDG Masaüstü Portalı'na erişilemedi"
 msgid "Failed to initialize add-in"
 msgstr "Eklenti başlatılamadı"
 
-#: ../Pinta.Gui.Addins/InstallDialog.cs:152
+#: ../Pinta.Gui.Addins/InstallDialog.cs:151
 msgid "Failed to load extension package"
 msgstr "Uzantı paketi yüklenemedi"
 
@@ -769,6 +795,16 @@ msgstr "Dikey Çevir"
 msgid "Flood Mode"
 msgstr "Taşırma Modu"
 
+#. Translators: Image dithering matrix named after Robert W. Floyd and Louis Steinberg
+#: ../Pinta.Effects/Classes/ErrorDiffusionMatrix.cs:40
+msgid "Floyd-Steinberg"
+msgstr ""
+
+#. Translators: Image dithering matrix named after Robert W. Floyd and Louis Steinberg. Some software may use it and call it Floyd-Steinberg, but it's not the actual Floyd-Steinberg matrix
+#: ../Pinta.Effects/Classes/ErrorDiffusionMatrix.cs:44
+msgid "Floyd-Steinberg Lite"
+msgstr ""
+
 #: ../Pinta.Tools/Tools/TextTool.cs:138
 msgid "Font"
 msgstr "Yazıtipi"
@@ -777,7 +813,7 @@ msgstr "Yazıtipi"
 msgid "Fragment"
 msgstr "Fragman"
 
-#: ../Pinta.Effects/Effects/FragmentEffect.cs:111
+#: ../Pinta.Effects/Effects/FragmentEffect.cs:114
 msgid "Fragments"
 msgstr "Fragmanlar"
 
@@ -805,7 +841,7 @@ msgstr "Gauss Bulanıklığı"
 msgid "Global"
 msgstr "Genel"
 
-#: ../Pinta.Effects/Effects/GlowEffect.cs:25
+#: ../Pinta.Effects/Effects/GlowEffect.cs:26
 msgid "Glow"
 msgstr "Parlama"
 
@@ -815,7 +851,7 @@ msgid "Gradient"
 msgstr "Renk Geçişi"
 
 #: ../Pinta.Effects/Dialogs/Effects.CurvesDialog.cs:127
-#: ../Pinta.Effects/Dialogs/Effects.LevelsDialog.cs:85
+#: ../Pinta.Effects/Dialogs/Effects.LevelsDialog.cs:112
 #: ../Pinta.Effects/Dialogs/Effects.PosterizeDialog.cs:71
 msgid "Green"
 msgstr "Yeşil"
@@ -838,7 +874,7 @@ msgstr "Yükseklik:"
 msgid "Hide Layer"
 msgstr "Katmanı Gizle"
 
-#: ../Pinta.Effects/Effects/RedEyeRemoveEffect.cs:55
+#: ../Pinta.Effects/Effects/RedEyeRemoveEffect.cs:59
 msgid "Hint: For best results, first use selection tools to select each eye."
 msgstr ""
 "Öneri: En iyi sonucu almak için ilk önce seçim araçlarını kullanarak iki "
@@ -849,7 +885,7 @@ msgid "History"
 msgstr "Geçmiş"
 
 #: ../Pinta.Core/Effects/UserBlendOps.cs:45
-#: ../Pinta.Effects/Adjustments/HueSaturationEffect.cs:62
+#: ../Pinta.Effects/Adjustments/HueSaturationEffect.cs:61
 msgid "Hue"
 msgstr "Ton"
 
@@ -914,16 +950,16 @@ msgstr "Mürekkep taslak"
 msgid "Ink Sketch"
 msgstr "Mürekkep Efekti"
 
-#: ../Pinta.Effects/Dialogs/Effects.LevelsDialog.cs:153
+#: ../Pinta.Effects/Dialogs/Effects.LevelsDialog.cs:180
 msgid "Input"
 msgstr "Girdi"
 
-#: ../Pinta.Effects/Dialogs/Effects.LevelsDialog.cs:137
+#: ../Pinta.Effects/Dialogs/Effects.LevelsDialog.cs:164
 msgid "Input Histogram"
 msgstr "Giriş Histogram"
 
-#: ../Pinta.Gui.Addins/InstallDialog.cs:123
-#: ../Pinta.Gui.Addins/InstallDialog.cs:197
+#: ../Pinta.Gui.Addins/InstallDialog.cs:120
+#: ../Pinta.Gui.Addins/InstallDialog.cs:196
 msgid "Install"
 msgstr "Yükle"
 
@@ -935,7 +971,7 @@ msgstr "Uzantı Paketini Kur"
 msgid "Install from file..."
 msgstr "Dosyadan yükle..."
 
-#: ../Pinta.Gui.Addins/AddinInfoView.cs:81
+#: ../Pinta.Gui.Addins/AddinInfoView.cs:73
 msgid "Install..."
 msgstr "Kur..."
 
@@ -943,9 +979,9 @@ msgstr "Kur..."
 msgid "Installed"
 msgstr "Kurulu"
 
-#: ../Pinta.Effects/Effects/AddNoiseEffect.cs:180
-#: ../Pinta.Effects/Effects/OutlineEffect.cs:138
-#: ../Pinta.Effects/Effects/TileEffect.cs:180
+#: ../Pinta.Effects/Effects/AddNoiseEffect.cs:182
+#: ../Pinta.Effects/Effects/OutlineEffect.cs:141
+#: ../Pinta.Effects/Effects/TileEffect.cs:186
 msgid "Intensity"
 msgstr "Yoğunluk"
 
@@ -956,7 +992,7 @@ msgid "Intersect ({0} + Left Click)"
 msgstr "Kesişim ({0} + Sol Tıklama)"
 
 #: ../Pinta.Effects/Adjustments/InvertColorsEffect.cs:24
-#: ../Pinta.Effects/Effects/MandelbrotFractalEffect.cs:194
+#: ../Pinta.Effects/Effects/MandelbrotFractalEffect.cs:214
 msgid "Invert Colors"
 msgstr "Renkleri Ters Çevir"
 
@@ -972,6 +1008,11 @@ msgstr "İtalik"
 #: ../Pinta/Dialogs/JpegCompressionDialog.cs:38
 msgid "JPEG Quality"
 msgstr "JPEG Kalitesi"
+
+#. Translators: Image dithering matrix named after J. F. Jarvis, C. N. Judice, and W. H. Ninke
+#: ../Pinta.Effects/Classes/ErrorDiffusionMatrix.cs:36
+msgid "Jarvis-Judice-Ninke"
+msgstr ""
 
 #: ../Pinta.Effects/Effects/JuliaFractalEffect.cs:23
 msgid "Julia Fractal"
@@ -1177,7 +1218,7 @@ msgstr "Uzunluk"
 msgid "Levels"
 msgstr "Seviyeler"
 
-#: ../Pinta.Effects/Dialogs/Effects.LevelsDialog.cs:73
+#: ../Pinta.Effects/Dialogs/Effects.LevelsDialog.cs:100
 msgid "Levels Adjustment"
 msgstr "Seviye Ayarları"
 
@@ -1194,16 +1235,16 @@ msgstr "Açık"
 msgid "Lighten"
 msgstr "Rengi Aç"
 
-#: ../Pinta.Effects/Effects/SoftenPortraitEffect.cs:113
+#: ../Pinta.Effects/Effects/SoftenPortraitEffect.cs:117
 msgid "Lighting"
 msgstr "Aydınlatma"
 
-#: ../Pinta.Effects/Adjustments/HueSaturationEffect.cs:68
+#: ../Pinta.Effects/Adjustments/HueSaturationEffect.cs:67
 msgid "Lightness"
 msgstr "Aydınlık"
 
 #. Translators: Gradient with a citrusy vibe that starts out white, goes through light yellow, several shades of green, and then transparent, blending with the background
-#: ../Pinta.Effects/Effects/GradientHelper.cs:34
+#: ../Pinta.Effects/Effects/GradientHelper.cs:48
 msgid "Lime Lemon"
 msgstr "Misket Limonu"
 
@@ -1266,7 +1307,7 @@ msgstr "Mod"
 msgid "Modified"
 msgstr "Değiştirildi"
 
-#: ../Pinta.Gui.Addins/AddinInfoView.cs:77
+#: ../Pinta.Gui.Addins/AddinInfoView.cs:69
 msgid "More Information..."
 msgstr "Daha Fazla Bilgi..."
 
@@ -1357,9 +1398,9 @@ msgstr "Normal Anahat"
 msgid "Number of threads to use for rendering"
 msgstr "Görselleştirme için kullanılacak iş parçacığı sayısı"
 
-#: ../Pinta.Effects/Effects/BulgeEffect.cs:115
-#: ../Pinta.Effects/Effects/RadialBlurEffect.cs:174
-#: ../Pinta.Effects/Effects/ZoomBlurEffect.cs:147
+#: ../Pinta.Effects/Effects/BulgeEffect.cs:118
+#: ../Pinta.Effects/Effects/RadialBlurEffect.cs:175
+#: ../Pinta.Effects/Effects/ZoomBlurEffect.cs:148
 msgid "Offset"
 msgstr "Yerleşim"
 
@@ -1427,11 +1468,11 @@ msgstr "Anahat Şekli"
 msgid "Outline width"
 msgstr "Anahat genişliği"
 
-#: ../Pinta.Effects/Dialogs/Effects.LevelsDialog.cs:169
+#: ../Pinta.Effects/Dialogs/Effects.LevelsDialog.cs:196
 msgid "Output"
 msgstr "Çıktı"
 
-#: ../Pinta.Effects/Dialogs/Effects.LevelsDialog.cs:171
+#: ../Pinta.Effects/Dialogs/Effects.LevelsDialog.cs:198
 msgid "Output Histogram"
 msgstr "Çkış Histogram"
 
@@ -1452,6 +1493,7 @@ msgid "Paintbrush"
 msgstr "Boya fırçası"
 
 #: ../Pinta.Core/Actions/EditActions.cs:136
+#: ../Pinta.Effects/Effects/DitheringEffect.cs:143
 msgid "Palette"
 msgstr "Palet"
 
@@ -1487,15 +1529,15 @@ msgstr "Kalem"
 msgid "Pencil Sketch"
 msgstr "Kalemle Eskiz"
 
-#: ../Pinta.Effects/Effects/PencilSketchEffect.cs:87
+#: ../Pinta.Effects/Effects/PencilSketchEffect.cs:91
 msgid "Pencil Tip Size"
 msgstr "Kalem Ucu Büyüklüğü"
 
-#: ../Pinta.Effects/Effects/MedianEffect.cs:66
+#: ../Pinta.Effects/Effects/MedianEffect.cs:67
 msgid "Percentile"
 msgstr "Yüzdelik Değer"
 
-#: ../Pinta.Effects/Effects/GlowEffect.cs:29
+#: ../Pinta.Effects/Effects/GlowEffect.cs:30
 #: ../Pinta.Effects/Effects/RedEyeRemoveEffect.cs:27
 #: ../Pinta.Effects/Effects/SharpenEffect.cs:27
 #: ../Pinta.Effects/Effects/SoftenPortraitEffect.cs:58
@@ -1563,7 +1605,7 @@ msgid "Pixels"
 msgstr "Piksel"
 
 #. Translators: Gradient with different shades of brownish yellow
-#: ../Pinta.Effects/Effects/GradientHelper.cs:38
+#: ../Pinta.Effects/Effects/GradientHelper.cs:52
 msgid "Piña Colada"
 msgstr "Piña Colada"
 
@@ -1589,7 +1631,7 @@ msgstr "Dikey"
 msgid "Posterize"
 msgstr "Posterleştir"
 
-#: ../Pinta.Effects/Effects/CloudsEffect.cs:208
+#: ../Pinta.Effects/Effects/CloudsEffect.cs:222
 msgid "Power"
 msgstr "Güç"
 
@@ -1597,6 +1639,10 @@ msgstr "Güç"
 #: ../Pinta/Actions/Edit/PasteAction.cs:189
 msgid "Preserve"
 msgstr "Koru"
+
+#: ../Pinta.Effects/Effects/GradientHelper.cs:11
+msgid "Preset Gradient"
+msgstr ""
 
 #: ../Pinta/Dialogs/NewImageDialog.cs:101
 msgid "Preset:"
@@ -1614,10 +1660,10 @@ msgstr "Birincil"
 msgid "Print"
 msgstr "Yazdır"
 
-#: ../Pinta.Effects/Effects/JuliaFractalEffect.cs:159
-#: ../Pinta.Effects/Effects/MandelbrotFractalEffect.cs:178
-#: ../Pinta.Effects/Effects/RadialBlurEffect.cs:177
-#: ../Pinta.Effects/Effects/WarpEffect.cs:186
+#: ../Pinta.Effects/Effects/JuliaFractalEffect.cs:172
+#: ../Pinta.Effects/Effects/MandelbrotFractalEffect.cs:192
+#: ../Pinta.Effects/Effects/RadialBlurEffect.cs:178
+#: ../Pinta.Effects/Effects/WarpEffect.cs:187
 msgid "Quality"
 msgstr "Kalite"
 
@@ -1641,18 +1687,28 @@ msgstr "Dairesel Bulanıklaştırma"
 msgid "Radial Gradient"
 msgstr "Işınsal Renk Geçişi"
 
-#: ../Pinta.Effects/Effects/GaussianBlurEffect.cs:247
-#: ../Pinta.Effects/Effects/GlowEffect.cs:74
-#: ../Pinta.Effects/Effects/MedianEffect.cs:63
-#: ../Pinta.Effects/Effects/ReduceNoiseEffect.cs:87
-#: ../Pinta.Effects/Effects/UnfocusEffect.cs:91
+#: ../Pinta.Effects/Effects/GaussianBlurEffect.cs:248
+#: ../Pinta.Effects/Effects/GlowEffect.cs:78
+#: ../Pinta.Effects/Effects/MedianEffect.cs:64
+#: ../Pinta.Effects/Effects/ReduceNoiseEffect.cs:91
+#: ../Pinta.Effects/Effects/UnfocusEffect.cs:96
 #: ../Pinta.Tools/Editable/EditEngines/RoundedLineEditEngine.cs:88
 msgid "Radius"
 msgstr "Yarıçap"
 
-#: ../Pinta.Effects/Effects/AddNoiseEffect.cs:189
-#: ../Pinta.Effects/Effects/CloudsEffect.cs:230
-#: ../Pinta.Effects/Effects/FrostedGlassEffect.cs:153
+#: ../Pinta.Effects/Effects/GradientHelper.cs:17
+msgid "Random"
+msgstr ""
+
+#: ../Pinta.Effects/Effects/CloudsEffect.cs:253
+#: ../Pinta.Effects/Effects/JuliaFractalEffect.cs:184
+#: ../Pinta.Effects/Effects/MandelbrotFractalEffect.cs:208
+msgid "Random Color Scheme Seed"
+msgstr ""
+
+#: ../Pinta.Effects/Effects/AddNoiseEffect.cs:191
+#: ../Pinta.Effects/Effects/CloudsEffect.cs:244
+#: ../Pinta.Effects/Effects/FrostedGlassEffect.cs:154
 msgid "Random Noise"
 msgstr "Rastgele Parazit"
 
@@ -1668,7 +1724,7 @@ msgstr "Dikdörtgen"
 msgid "Rectangle Select"
 msgstr "Dikdörtgen Seçim"
 
-#: ../Pinta.Effects/Dialogs/Effects.LevelsDialog.cs:83
+#: ../Pinta.Effects/Dialogs/Effects.LevelsDialog.cs:110
 #: ../Pinta.Effects/Dialogs/Effects.PosterizeDialog.cs:65
 msgid "Red"
 msgstr "Kırmızı"
@@ -1701,7 +1757,7 @@ msgstr "Yenile"
 msgid "Released under the MIT X11 License."
 msgstr "MIT X11 Lisansı altında dağıtılmaktadır."
 
-#: ../Pinta.Effects/Effects/ReliefEffect.cs:38
+#: ../Pinta.Effects/Effects/ReliefEffect.cs:42
 msgid "Relief"
 msgstr "Kabartma"
 
@@ -1736,7 +1792,7 @@ msgid "Reseed"
 msgstr "Yeniden Tohumla"
 
 #: ../Pinta.Effects/Dialogs/Effects.CurvesDialog.cs:136
-#: ../Pinta.Effects/Dialogs/Effects.LevelsDialog.cs:91
+#: ../Pinta.Effects/Dialogs/Effects.LevelsDialog.cs:118
 msgid "Reset"
 msgstr "Sıfırla"
 
@@ -1766,8 +1822,9 @@ msgstr "Görüntüyü Yeniden Boyutlandır..."
 msgid "Resize Palette"
 msgstr "Paleti Yeniden Boyutlandır"
 
-#: ../Pinta.Effects/Effects/JuliaFractalEffect.cs:168
-#: ../Pinta.Effects/Effects/MandelbrotFractalEffect.cs:191
+#: ../Pinta.Effects/Effects/CloudsEffect.cs:256
+#: ../Pinta.Effects/Effects/JuliaFractalEffect.cs:187
+#: ../Pinta.Effects/Effects/MandelbrotFractalEffect.cs:211
 msgid "Reverse Color Scheme"
 msgstr "Renk Düzenini Tersine Çevir"
 
@@ -1799,8 +1856,8 @@ msgstr "Saat Yönünde 90° Çevir"
 msgid "Rotate 90° Counter-Clockwise"
 msgstr "Saat Yönünün Tersinde 90° Çevir"
 
-#: ../Pinta.Effects/Effects/FragmentEffect.cs:117
-#: ../Pinta.Effects/Effects/TileEffect.cs:174
+#: ../Pinta.Effects/Effects/FragmentEffect.cs:120
+#: ../Pinta.Effects/Effects/TileEffect.cs:180
 msgid "Rotation"
 msgstr "Döndürme"
 
@@ -1829,11 +1886,11 @@ msgid "Sampling"
 msgstr "Örnekliyor"
 
 #: ../Pinta.Core/Effects/UserBlendOps.cs:46
-#: ../Pinta.Effects/Adjustments/HueSaturationEffect.cs:65
+#: ../Pinta.Effects/Adjustments/HueSaturationEffect.cs:64
 msgid "Saturation"
 msgstr "Doygunluk"
 
-#: ../Pinta.Effects/Effects/RedEyeRemoveEffect.cs:54
+#: ../Pinta.Effects/Effects/RedEyeRemoveEffect.cs:58
 msgid "Saturation Percentage"
 msgstr "Doygunluk Yüzdesi"
 
@@ -1867,7 +1924,7 @@ msgstr ""
 "\"{0}\" görüntüsündeki değişiklikleri kapatmadan önce kaydetmek ister "
 "misiniz?"
 
-#: ../Pinta.Effects/Effects/CloudsEffect.cs:205
+#: ../Pinta.Effects/Effects/CloudsEffect.cs:219
 msgid "Scale"
 msgstr "Ölçek"
 
@@ -1883,6 +1940,10 @@ msgstr "İkincil"
 #: ../Pinta.Core/Actions/EditActions.cs:215
 msgid "Select All"
 msgstr "Tümünü Seç"
+
+#: ../Pinta.Effects/Effects/GradientHelper.cs:14
+msgid "Selected Colors"
+msgstr ""
 
 #: ../Pinta.Effects/Adjustments/SepiaEffect.cs:25
 msgid "Sepia"
@@ -1913,6 +1974,16 @@ msgstr "Katmanı Göster"
 msgid "Show/Hide"
 msgstr "Göster/Gizle"
 
+#. Translators: Image dithering matrix named after Frankie Sierra
+#: ../Pinta.Effects/Classes/ErrorDiffusionMatrix.cs:12
+msgid "Sierra"
+msgstr ""
+
+#. Translators: Image dithering matrix named after Frankie Sierra
+#: ../Pinta.Effects/Classes/ErrorDiffusionMatrix.cs:20
+msgid "Sierra Lite"
+msgstr ""
+
 #: ../Pinta.Tools/Tools/ColorPickerTool.cs:221
 msgid "Single Pixel"
 msgstr "Tek Piksel"
@@ -1933,7 +2004,7 @@ msgstr "Yumuşak Işık"
 msgid "Soften Portrait"
 msgstr "Portreyi Yumuşat"
 
-#: ../Pinta.Effects/Effects/SoftenPortraitEffect.cs:110
+#: ../Pinta.Effects/Effects/SoftenPortraitEffect.cs:114
 msgid "Softness"
 msgstr "Yumuşaklık"
 
@@ -1949,14 +2020,19 @@ msgstr "Kareler"
 msgid "Status Bar"
 msgstr "Durum Çubuğu"
 
-#: ../Pinta.Effects/Effects/ReduceNoiseEffect.cs:90
+#: ../Pinta.Effects/Effects/ReduceNoiseEffect.cs:94
 msgid "Strength"
 msgstr "Güçlülük"
+
+#. Translators: Image dithering matrix named after Peter Stucki
+#: ../Pinta.Effects/Classes/ErrorDiffusionMatrix.cs:32
+msgid "Stucki"
+msgstr ""
 
 #: ../Pinta.Effects/Effects/EdgeDetectEffect.cs:27
 #: ../Pinta.Effects/Effects/EmbossEffect.cs:27
 #: ../Pinta.Effects/Effects/OutlineEffect.cs:30
-#: ../Pinta.Effects/Effects/ReliefEffect.cs:29
+#: ../Pinta.Effects/Effects/ReliefEffect.cs:33
 msgid "Stylize"
 msgstr "Stilize et"
 
@@ -1990,23 +2066,23 @@ msgstr "'{0}' eklentisi Pinta'nın bu sürümü ile uyumlu olmayabilir"
 msgid "The clipboard does not contain an image."
 msgstr "Panoda bir görüntü bulunmuyor."
 
-#: ../Pinta.Gui.Addins/InstallDialog.cs:153
+#: ../Pinta.Gui.Addins/InstallDialog.cs:152
 msgid "The file may be an invalid or corrupt extension package"
 msgstr "Dosya bozuk veya hatalı bir uzantı paketi olabilir"
 
-#: ../Pinta.Gui.Addins/InstallDialog.cs:92
+#: ../Pinta.Gui.Addins/InstallDialog.cs:89
 msgid "The following dependencies could not be resolved:"
 msgstr "Bu bağımlılıklar çözümlenemedi:"
 
-#: ../Pinta.Gui.Addins/InstallDialog.cs:83
+#: ../Pinta.Gui.Addins/InstallDialog.cs:80
 msgid "The following packages need to be uninstalled:"
 msgstr "Bu paketlerin kaldırılmasına gerek duyuluyor:"
 
-#: ../Pinta.Gui.Addins/InstallDialog.cs:75
+#: ../Pinta.Gui.Addins/InstallDialog.cs:72
 msgid "The following packages will be installed:"
 msgstr "Aşağıdaki paketler kurulacak:"
 
-#: ../Pinta.Gui.Addins/InstallDialog.cs:179
+#: ../Pinta.Gui.Addins/InstallDialog.cs:178
 msgid "The following packages will be uninstalled:"
 msgstr "İzleyen paketler kaldırılmış olacak:"
 
@@ -2018,26 +2094,26 @@ msgstr ""
 "Yapıştırılan görüntü tuvalden daha büyük. Tuval boyutuna ne yapmak "
 "istersiniz?"
 
-#: ../Pinta.Gui.Addins/InstallDialog.cs:293
+#: ../Pinta.Gui.Addins/InstallDialog.cs:301
 msgid "The installation failed!"
 msgstr "Yükleme başarısız oldu!"
 
-#: ../Pinta.Gui.Addins/InstallDialog.cs:294
+#: ../Pinta.Gui.Addins/InstallDialog.cs:302
 msgid "The installation has completed with warnings."
 msgstr "Yükleme uyarılarla tamamlandı."
 
-#: ../Pinta.Gui.Addins/InstallDialog.cs:57
+#: ../Pinta.Gui.Addins/InstallDialog.cs:54
 msgid ""
 "The selected extension packages can't be installed because there are "
 "dependency conflicts."
 msgstr ""
 "Bağımlılık çakışmaları olduğu için seçilen uzantı paketleri kurulamıyor."
 
-#: ../Pinta.Gui.Addins/InstallDialog.cs:303
+#: ../Pinta.Gui.Addins/InstallDialog.cs:308
 msgid "The uninstallation failed!"
 msgstr "Kaldırma başarısız oldu!"
 
-#: ../Pinta.Gui.Addins/InstallDialog.cs:304
+#: ../Pinta.Gui.Addins/InstallDialog.cs:309
 msgid "The uninstallation has completed with warnings."
 msgstr "Kaldırma uyarılarla tamamlandı."
 
@@ -2049,7 +2125,7 @@ msgstr ""
 "Kaldırılacak önceki uzantı paketlerine bağımlı olan başka uzantı paketleri "
 "var:"
 
-#: ../Pinta.Effects/Effects/OutlineEffect.cs:135
+#: ../Pinta.Effects/Effects/OutlineEffect.cs:138
 msgid "Thickness"
 msgstr "Kalınlık"
 
@@ -2057,7 +2133,7 @@ msgstr "Kalınlık"
 msgid "Tile Reflection"
 msgstr "Karo Yansıması"
 
-#: ../Pinta.Effects/Effects/TileEffect.cs:177
+#: ../Pinta.Effects/Effects/TileEffect.cs:183
 msgid "Tile Size"
 msgstr "Döşeme Boyutu"
 
@@ -2065,7 +2141,7 @@ msgstr "Döşeme Boyutu"
 msgid "Tip: Right-click to remove control points."
 msgstr "Öneri : Denetim noktalarını kaldırmak için sağ tıklayın."
 
-#: ../Pinta.Effects/Effects/RedEyeRemoveEffect.cs:50
+#: ../Pinta.Effects/Effects/RedEyeRemoveEffect.cs:54
 #: ../Pinta.Tools/Tools/FloodTool.cs:125
 #: ../Pinta.Tools/Tools/RecolorTool.cs:196
 msgid "Tolerance"
@@ -2108,6 +2184,11 @@ msgstr "Şeffaf"
 msgid "Twist"
 msgstr "Bükme"
 
+#. Translators: Image dithering matrix named after Frankie Sierra
+#: ../Pinta.Effects/Classes/ErrorDiffusionMatrix.cs:16
+msgid "Two-Row Sierra"
+msgstr ""
+
 #: ../Pinta.Tools/Tools/EraserTool.cs:259
 #: ../Pinta.Tools/Tools/PaintBrushTool.cs:165
 msgid "Type"
@@ -2125,12 +2206,12 @@ msgstr "Geri Al"
 msgid "Unfocus"
 msgstr "Odağı Kaldır"
 
+#: ../Pinta.Gui.Addins/InstallDialog.cs:168
 #: ../Pinta.Gui.Addins/InstallDialog.cs:169
-#: ../Pinta.Gui.Addins/InstallDialog.cs:170
 msgid "Uninstall"
 msgstr "Kaldır"
 
-#: ../Pinta.Gui.Addins/AddinInfoView.cs:91
+#: ../Pinta.Gui.Addins/AddinInfoView.cs:83
 msgid "Uninstall..."
 msgstr "Yüklemesini kaldır..."
 
@@ -2153,7 +2234,7 @@ msgstr "Desteklenmeyen dosya biçimi"
 msgid "Unsupported palette format"
 msgstr "Desteklenmeyen paket formatı"
 
-#: ../Pinta.Gui.Addins/AddinInfoView.cs:86
+#: ../Pinta.Gui.Addins/AddinInfoView.cs:78
 msgid "Update..."
 msgstr "Güncelle..."
 
@@ -2161,7 +2242,7 @@ msgstr "Güncelle..."
 msgid "Updates"
 msgstr "Güncelleştirmeler"
 
-#: ../Pinta.Effects/Effects/RadialBlurEffect.cs:178
+#: ../Pinta.Effects/Effects/RadialBlurEffect.cs:179
 msgid ""
 "Use low quality for previews, small images, and small angles.  Use high "
 "quality for final quality, large images, and large angles."
@@ -2173,7 +2254,7 @@ msgstr ""
 msgid "Using some icons from:"
 msgstr "Bazı simgeler şuradan alınmıştır:"
 
-#: ../Pinta.Gui.Addins/AddinInfoView.cs:128
+#: ../Pinta.Gui.Addins/AddinInfoView.cs:130
 #, csharp-format
 msgid "Version: {0}"
 msgstr "Versiyon: {0}"
@@ -2182,7 +2263,7 @@ msgstr "Versiyon: {0}"
 msgid "Visible"
 msgstr "Görünür"
 
-#: ../Pinta.Effects/Effects/SoftenPortraitEffect.cs:116
+#: ../Pinta.Effects/Effects/SoftenPortraitEffect.cs:120
 msgid "Warmth"
 msgstr "Sıcaklık"
 
@@ -2232,8 +2313,8 @@ msgstr ""
 "'{0}' öğesini değiştirmek için erişiminiz yok. Dosya veya klasör salt okunur "
 "olabilir."
 
-#: ../Pinta.Effects/Effects/JuliaFractalEffect.cs:162
-#: ../Pinta.Effects/Effects/MandelbrotFractalEffect.cs:182
+#: ../Pinta.Effects/Effects/JuliaFractalEffect.cs:175
+#: ../Pinta.Effects/Effects/MandelbrotFractalEffect.cs:196
 #: ../Pinta.Tools/Tools/ZoomTool.cs:55
 #: ../Pinta/Actions/Layers/RotateZoomLayerAction.cs:121
 msgid "Zoom"

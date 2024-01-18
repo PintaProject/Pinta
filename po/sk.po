@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: pinta\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-01-14 01:15+0000\n"
+"POT-Creation-Date: 2024-01-18 03:35+0000\n"
 "PO-Revision-Date: 2022-03-29 07:57+0000\n"
 "Last-Translator: Pavol Polonec <pavolpolonec@gmail.com>\n"
 "Language-Team: Slovak <sk@li.org>\n"
@@ -19,7 +19,7 @@ msgstr ""
 "X-Launchpad-Export-Date: 2023-12-18 03:00+0000\n"
 "X-Generator: Launchpad (build e1eeab5b20e19239bd7d5f36676f7a52988db88b)\n"
 
-#: ../Pinta.Gui.Addins/InstallDialog.cs:216
+#: ../Pinta.Gui.Addins/InstallDialog.cs:217
 msgid " (in user directory)"
 msgstr " (v priečinku používateľa)"
 
@@ -92,11 +92,11 @@ msgstr "Po vybraní"
 msgid "All files"
 msgstr "Všetky súbory"
 
-#: ../Pinta.Effects/Effects/BulgeEffect.cs:112
-#: ../Pinta.Effects/Effects/FrostedGlassEffect.cs:150
-#: ../Pinta.Effects/Effects/SharpenEffect.cs:56
-#: ../Pinta.Effects/Effects/TwistEffect.cs:139
-#: ../Pinta.Effects/Effects/ZoomBlurEffect.cs:144
+#: ../Pinta.Effects/Effects/BulgeEffect.cs:115
+#: ../Pinta.Effects/Effects/FrostedGlassEffect.cs:151
+#: ../Pinta.Effects/Effects/SharpenEffect.cs:60
+#: ../Pinta.Effects/Effects/TwistEffect.cs:149
+#: ../Pinta.Effects/Effects/ZoomBlurEffect.cs:145
 msgid "Amount"
 msgstr "Stupeň"
 
@@ -104,19 +104,19 @@ msgstr "Stupeň"
 msgid "Anchor:"
 msgstr "Kotva:"
 
-#: ../Pinta.Effects/Effects/EdgeDetectEffect.cs:80
-#: ../Pinta.Effects/Effects/EmbossEffect.cs:149
-#: ../Pinta.Effects/Effects/JuliaFractalEffect.cs:171
-#: ../Pinta.Effects/Effects/MandelbrotFractalEffect.cs:185
-#: ../Pinta.Effects/Effects/MotionBlurEffect.cs:101
-#: ../Pinta.Effects/Effects/RadialBlurEffect.cs:171
-#: ../Pinta.Effects/Effects/ReliefEffect.cs:82
+#: ../Pinta.Effects/Effects/EdgeDetectEffect.cs:83
+#: ../Pinta.Effects/Effects/EmbossEffect.cs:150
+#: ../Pinta.Effects/Effects/JuliaFractalEffect.cs:190
+#: ../Pinta.Effects/Effects/MandelbrotFractalEffect.cs:199
+#: ../Pinta.Effects/Effects/MotionBlurEffect.cs:104
+#: ../Pinta.Effects/Effects/RadialBlurEffect.cs:172
+#: ../Pinta.Effects/Effects/ReliefEffect.cs:85
 #: ../Pinta.Tools/Editable/EditEngines/ArrowedEditEngine.cs:298
 #: ../Pinta/Actions/Layers/RotateZoomLayerAction.cs:115
 msgid "Angle"
 msgstr "Uhol"
 
-#: ../Pinta.Effects/Effects/TwistEffect.cs:142
+#: ../Pinta.Effects/Effects/TwistEffect.cs:152
 msgid "Antialias"
 msgstr "Vyhladiť"
 
@@ -138,7 +138,12 @@ msgstr "Šípka"
 msgid "Artistic"
 msgstr "Umelecké"
 
-#: ../Pinta.Effects/Dialogs/Effects.LevelsDialog.cs:90
+#. Translators: Image dithering matrix named after Bill Atkinson
+#: ../Pinta.Effects/Classes/ErrorDiffusionMatrix.cs:28
+msgid "Atkinson"
+msgstr ""
+
+#: ../Pinta.Effects/Dialogs/Effects.LevelsDialog.cs:117
 msgid "Auto"
 msgstr "Automaticky"
 
@@ -150,7 +155,7 @@ msgstr "Automatické orezanie"
 msgid "Auto Level"
 msgstr "Auto úrovne"
 
-#: ../Pinta.Gui.Addins/AddinInfoView.cs:139
+#: ../Pinta.Gui.Addins/AddinInfoView.cs:143
 #, csharp-format
 msgid "Available in repository: {0}"
 msgstr ""
@@ -172,7 +177,7 @@ msgid "Based on the work of Paint.NET:"
 msgstr "Založené na diele Paint.NET:"
 
 #. Translators: Gradient with the colors of the flag of Italy: red, white, and green
-#: ../Pinta.Effects/Effects/GradientHelper.cs:10
+#: ../Pinta.Effects/Effects/GradientHelper.cs:24
 msgid "Beautiful Italy"
 msgstr ""
 
@@ -186,7 +191,7 @@ msgstr ""
 
 #. Translators: Simple gradient that goes from black to white
 #: ../Pinta.Effects/Adjustments/BlackAndWhiteEffect.cs:24
-#: ../Pinta.Effects/Effects/GradientHelper.cs:14
+#: ../Pinta.Effects/Effects/GradientHelper.cs:28
 msgid "Black and White"
 msgstr "Čiernobiele"
 
@@ -194,7 +199,7 @@ msgstr "Čiernobiele"
 msgid "Blend Mode"
 msgstr "Režim miešania"
 
-#: ../Pinta.Effects/Dialogs/Effects.LevelsDialog.cs:87
+#: ../Pinta.Effects/Dialogs/Effects.LevelsDialog.cs:114
 #: ../Pinta.Effects/Dialogs/Effects.PosterizeDialog.cs:77
 msgid "Blue"
 msgstr "Modrá"
@@ -217,12 +222,12 @@ msgid "Bold"
 msgstr "Hrubé"
 
 #. Translators: Gradient that starts out white, like the core of a raging fire, and then goes through yellow, red, and black (like visible black smoke), and finally transparent, blending with the background
-#: ../Pinta.Effects/Effects/GradientHelper.cs:18
+#: ../Pinta.Effects/Effects/GradientHelper.cs:32
 msgid "Bonfire"
 msgstr ""
 
-#: ../Pinta.Effects/Adjustments/BrightnessContrastEffect.cs:142
-#: ../Pinta.Effects/Effects/GlowEffect.cs:77
+#: ../Pinta.Effects/Adjustments/BrightnessContrastEffect.cs:145
+#: ../Pinta.Effects/Effects/GlowEffect.cs:81
 msgid "Brightness"
 msgstr "Jas"
 
@@ -230,7 +235,7 @@ msgstr "Jas"
 msgid "Brightness / Contrast"
 msgstr "Jas / kontrast"
 
-#: ../Pinta.Effects/Effects/OilPaintingEffect.cs:142
+#: ../Pinta.Effects/Effects/OilPaintingEffect.cs:145
 msgid "Brush Size"
 msgstr "Veľkosť štetca"
 
@@ -242,6 +247,11 @@ msgstr "Šírka štetca"
 #: ../Pinta.Effects/Effects/BulgeEffect.cs:23
 msgid "Bulge"
 msgstr "Vyduť"
+
+#. Translators: Image dithering matrix named after Daniel Burkes
+#: ../Pinta.Effects/Classes/ErrorDiffusionMatrix.cs:24
+msgid "Burkes"
+msgstr ""
 
 #: ../Pinta/Dialogs/ResizeCanvasDialog.cs:69
 #: ../Pinta/Dialogs/ResizeImageDialog.cs:59
@@ -257,7 +267,7 @@ msgstr "Percentuálne:"
 #: ../Pinta.Core/Actions/EditActions.cs:394
 #: ../Pinta.Core/Actions/LayerActions.cs:167
 #: ../Pinta.Gui.Addins/AddinManagerDialog.cs:198
-#: ../Pinta.Gui.Addins/InstallDialog.cs:120
+#: ../Pinta.Gui.Addins/InstallDialog.cs:117
 #: ../Pinta/Actions/File/OpenDocumentAction.cs:54
 #: ../Pinta/Actions/File/SaveDocumentImplementationAction.cs:74
 msgid "Cancel"
@@ -267,7 +277,7 @@ msgstr "Zrušiť"
 msgid "Canvas"
 msgstr "Plátno"
 
-#: ../Pinta.Effects/Effects/PixelateEffect.cs:115
+#: ../Pinta.Effects/Effects/PixelateEffect.cs:117
 msgid "Cell Size"
 msgstr "Veľkosť bunky"
 
@@ -275,11 +285,11 @@ msgstr "Veľkosť bunky"
 msgid "Center Align"
 msgstr "Zarovnať na stred"
 
-#: ../Pinta.Effects/Effects/WarpEffect.cs:189
+#: ../Pinta.Effects/Effects/WarpEffect.cs:190
 msgid "Center Offset"
 msgstr "Posunutie stredu"
 
-#: ../Pinta.Effects/Effects/MotionBlurEffect.cs:107
+#: ../Pinta.Effects/Effects/MotionBlurEffect.cs:110
 msgid "Centered"
 msgstr "V strede"
 
@@ -292,11 +302,11 @@ msgid "Changed Shape Type"
 msgstr "Zmeniť typ tvaru"
 
 #. Translators: Gradient that starts out off-white, like cherry blossoms against sunlight, then goes through pink, then light blue (like the sky) and finally transparent, blending with the background
-#: ../Pinta.Effects/Effects/GradientHelper.cs:22
+#: ../Pinta.Effects/Effects/GradientHelper.cs:36
 msgid "Cherry Blossom"
 msgstr ""
 
-#: ../Pinta.Effects/Dialogs/Effects.LevelsDialog.cs:531
+#: ../Pinta.Effects/Dialogs/Effects.LevelsDialog.cs:557
 msgid "Choose Color"
 msgstr "Vybrať farbu"
 
@@ -378,7 +388,7 @@ msgid "Clone Stamp"
 msgstr "Klonovacia pečiatka"
 
 #: ../Pinta.Core/Actions/FileActions.cs:50
-#: ../Pinta.Gui.Addins/InstallDialog.cs:271
+#: ../Pinta.Gui.Addins/InstallDialog.cs:276
 msgid "Close"
 msgstr "Zavrieť"
 
@@ -398,11 +408,12 @@ msgstr "Uzavreté čiary/krivky"
 msgid "Clouds"
 msgstr "Oblaky"
 
-#: ../Pinta.Effects/Effects/OilPaintingEffect.cs:145
+#: ../Pinta.Effects/Effects/OilPaintingEffect.cs:148
 msgid "Coarseness"
 msgstr "Hrubosť"
 
 #: ../Pinta.Core/Effects/UserBlendOps.cs:43
+#: ../Pinta.Effects/Effects/DitheringEffect.cs:14
 msgid "Color"
 msgstr "Farba"
 
@@ -422,18 +433,25 @@ msgstr "Farebný režim"
 msgid "Color Picker"
 msgstr "Výber farby"
 
-#: ../Pinta.Effects/Effects/PencilSketchEffect.cs:90
+#: ../Pinta.Effects/Effects/PencilSketchEffect.cs:94
 msgid "Color Range"
 msgstr "Rozsah farieb"
 
-#: ../Pinta.Effects/Effects/AddNoiseEffect.cs:183
+#: ../Pinta.Effects/Effects/AddNoiseEffect.cs:185
 msgid "Color Saturation"
 msgstr "Sýtosť farby"
 
 #: ../Pinta.Core/Actions/ViewActions.cs:181
-#: ../Pinta.Effects/Effects/JuliaFractalEffect.cs:165
-#: ../Pinta.Effects/Effects/MandelbrotFractalEffect.cs:188
+#: ../Pinta.Effects/Effects/CloudsEffect.cs:250
+#: ../Pinta.Effects/Effects/JuliaFractalEffect.cs:181
+#: ../Pinta.Effects/Effects/MandelbrotFractalEffect.cs:205
 msgid "Color Scheme"
+msgstr ""
+
+#: ../Pinta.Effects/Effects/CloudsEffect.cs:247
+#: ../Pinta.Effects/Effects/JuliaFractalEffect.cs:178
+#: ../Pinta.Effects/Effects/MandelbrotFractalEffect.cs:202
+msgid "Color Scheme Source"
 msgstr ""
 
 #: ../Pinta.Effects/Effects/InkSketchEffect.cs:156
@@ -452,8 +470,8 @@ msgstr "Obsah"
 msgid "Contiguous"
 msgstr "Spojité"
 
-#: ../Pinta.Effects/Adjustments/BrightnessContrastEffect.cs:153
-#: ../Pinta.Effects/Effects/GlowEffect.cs:80
+#: ../Pinta.Effects/Adjustments/BrightnessContrastEffect.cs:156
+#: ../Pinta.Effects/Effects/GlowEffect.cs:84
 msgid "Contrast"
 msgstr "Kontrast"
 
@@ -470,7 +488,7 @@ msgid "Copyright"
 msgstr "Autorské práva"
 
 #. Translators: Gradient with the colors of blue and pink cotton candy
-#: ../Pinta.Effects/Effects/GradientHelper.cs:26
+#: ../Pinta.Effects/Effects/GradientHelper.cs:40
 msgid "Cotton Candy"
 msgstr ""
 
@@ -487,7 +505,7 @@ msgstr ""
 msgid "Could not open file: {0}"
 msgstr "Nedá sa otvoriť súbor: {0}"
 
-#: ../Pinta.Effects/Effects/AddNoiseEffect.cs:186
+#: ../Pinta.Effects/Effects/AddNoiseEffect.cs:188
 msgid "Coverage"
 msgstr "Pokrytie"
 
@@ -556,8 +574,8 @@ msgstr "Podrobnosti"
 msgid "Difference"
 msgstr "Rozdiel"
 
-#: ../Pinta.Effects/Effects/FragmentEffect.cs:114
-#: ../Pinta.Effects/Effects/MotionBlurEffect.cs:104
+#: ../Pinta.Effects/Effects/FragmentEffect.cs:117
+#: ../Pinta.Effects/Effects/MotionBlurEffect.cs:107
 msgid "Distance"
 msgstr "Vzdialenosť"
 
@@ -570,11 +588,15 @@ msgstr "Vzdialenosť"
 msgid "Distort"
 msgstr "Deformovať"
 
+#: ../Pinta.Effects/Effects/DitheringEffect.cs:11
+msgid "Dithering"
+msgstr ""
+
 #: ../Pinta.Tools/Tools/ColorPickerTool.cs:202
 msgid "Do not switch tool"
 msgstr "Neprepínať nástroj"
 
-#: ../Pinta.Gui.Addins/AddinInfoView.cs:134
+#: ../Pinta.Gui.Addins/AddinInfoView.cs:137
 #, csharp-format
 msgid "Download size: {0}"
 msgstr ""
@@ -605,7 +627,7 @@ msgid "Effects"
 msgstr ""
 
 #. Translators: Gradient that starts out white, like the the inner part of a spark, and goes through progressively dark shades of blue until it reaches black, and finally transparent, blending with the background
-#: ../Pinta.Effects/Effects/GradientHelper.cs:30
+#: ../Pinta.Effects/Effects/GradientHelper.cs:44
 msgid "Electric"
 msgstr ""
 
@@ -640,6 +662,10 @@ msgstr "Guma"
 msgid "Error"
 msgstr "Chyba"
 
+#: ../Pinta.Effects/Effects/DitheringEffect.cs:140
+msgid "Error Diffusion Method"
+msgstr ""
+
 #: ../Pinta.Core/Classes/SelectionModeHandler.cs:48
 msgid "Exclude (-) (Right Click)"
 msgstr "Rozdiel (-) (kliknutie pravým)"
@@ -653,8 +679,8 @@ msgstr ""
 msgid "Extension packages"
 msgstr ""
 
-#: ../Pinta.Effects/Effects/JuliaFractalEffect.cs:156
-#: ../Pinta.Effects/Effects/MandelbrotFractalEffect.cs:175
+#: ../Pinta.Effects/Effects/JuliaFractalEffect.cs:169
+#: ../Pinta.Effects/Effects/MandelbrotFractalEffect.cs:189
 msgid "Factor"
 msgstr "Faktor"
 
@@ -666,7 +692,7 @@ msgstr ""
 msgid "Failed to initialize add-in"
 msgstr ""
 
-#: ../Pinta.Gui.Addins/InstallDialog.cs:152
+#: ../Pinta.Gui.Addins/InstallDialog.cs:151
 msgid "Failed to load extension package"
 msgstr ""
 
@@ -760,6 +786,16 @@ msgstr "Prevrátiť zvislo"
 msgid "Flood Mode"
 msgstr "Záplavový režim"
 
+#. Translators: Image dithering matrix named after Robert W. Floyd and Louis Steinberg
+#: ../Pinta.Effects/Classes/ErrorDiffusionMatrix.cs:40
+msgid "Floyd-Steinberg"
+msgstr ""
+
+#. Translators: Image dithering matrix named after Robert W. Floyd and Louis Steinberg. Some software may use it and call it Floyd-Steinberg, but it's not the actual Floyd-Steinberg matrix
+#: ../Pinta.Effects/Classes/ErrorDiffusionMatrix.cs:44
+msgid "Floyd-Steinberg Lite"
+msgstr ""
+
 #: ../Pinta.Tools/Tools/TextTool.cs:138
 msgid "Font"
 msgstr "Písmo"
@@ -768,7 +804,7 @@ msgstr "Písmo"
 msgid "Fragment"
 msgstr "Fragmentovať"
 
-#: ../Pinta.Effects/Effects/FragmentEffect.cs:111
+#: ../Pinta.Effects/Effects/FragmentEffect.cs:114
 msgid "Fragments"
 msgstr "Fragmenty"
 
@@ -796,7 +832,7 @@ msgstr "Gausovské rozostrenie"
 msgid "Global"
 msgstr "Všeobecné"
 
-#: ../Pinta.Effects/Effects/GlowEffect.cs:25
+#: ../Pinta.Effects/Effects/GlowEffect.cs:26
 msgid "Glow"
 msgstr "Žiara"
 
@@ -806,7 +842,7 @@ msgid "Gradient"
 msgstr "Farebný prechod"
 
 #: ../Pinta.Effects/Dialogs/Effects.CurvesDialog.cs:127
-#: ../Pinta.Effects/Dialogs/Effects.LevelsDialog.cs:85
+#: ../Pinta.Effects/Dialogs/Effects.LevelsDialog.cs:112
 #: ../Pinta.Effects/Dialogs/Effects.PosterizeDialog.cs:71
 msgid "Green"
 msgstr "Zelená"
@@ -829,7 +865,7 @@ msgstr "Výška:"
 msgid "Hide Layer"
 msgstr "Skryť vrstvu"
 
-#: ../Pinta.Effects/Effects/RedEyeRemoveEffect.cs:55
+#: ../Pinta.Effects/Effects/RedEyeRemoveEffect.cs:59
 msgid "Hint: For best results, first use selection tools to select each eye."
 msgstr ""
 "Rada: Najlepšie výsledky dosiahnete, keď najprv použijete výberové nástroje "
@@ -840,7 +876,7 @@ msgid "History"
 msgstr "História"
 
 #: ../Pinta.Core/Effects/UserBlendOps.cs:45
-#: ../Pinta.Effects/Adjustments/HueSaturationEffect.cs:62
+#: ../Pinta.Effects/Adjustments/HueSaturationEffect.cs:61
 msgid "Hue"
 msgstr "Farebný odtieň"
 
@@ -905,16 +941,16 @@ msgstr "Obtiahnutie atramentom"
 msgid "Ink Sketch"
 msgstr "Atramentový náčrt"
 
-#: ../Pinta.Effects/Dialogs/Effects.LevelsDialog.cs:153
+#: ../Pinta.Effects/Dialogs/Effects.LevelsDialog.cs:180
 msgid "Input"
 msgstr "Vstup"
 
-#: ../Pinta.Effects/Dialogs/Effects.LevelsDialog.cs:137
+#: ../Pinta.Effects/Dialogs/Effects.LevelsDialog.cs:164
 msgid "Input Histogram"
 msgstr "Histogram vstupu"
 
-#: ../Pinta.Gui.Addins/InstallDialog.cs:123
-#: ../Pinta.Gui.Addins/InstallDialog.cs:197
+#: ../Pinta.Gui.Addins/InstallDialog.cs:120
+#: ../Pinta.Gui.Addins/InstallDialog.cs:196
 msgid "Install"
 msgstr "Inštalovať"
 
@@ -926,7 +962,7 @@ msgstr ""
 msgid "Install from file..."
 msgstr "Inštalovať zo súboru..."
 
-#: ../Pinta.Gui.Addins/AddinInfoView.cs:81
+#: ../Pinta.Gui.Addins/AddinInfoView.cs:73
 msgid "Install..."
 msgstr "Inštalovať..."
 
@@ -934,9 +970,9 @@ msgstr "Inštalovať..."
 msgid "Installed"
 msgstr "Nainštalované"
 
-#: ../Pinta.Effects/Effects/AddNoiseEffect.cs:180
-#: ../Pinta.Effects/Effects/OutlineEffect.cs:138
-#: ../Pinta.Effects/Effects/TileEffect.cs:180
+#: ../Pinta.Effects/Effects/AddNoiseEffect.cs:182
+#: ../Pinta.Effects/Effects/OutlineEffect.cs:141
+#: ../Pinta.Effects/Effects/TileEffect.cs:186
 msgid "Intensity"
 msgstr "Intenzita"
 
@@ -947,7 +983,7 @@ msgid "Intersect ({0} + Left Click)"
 msgstr "Prienik ({0} + Ľavé tlačidlo myši)"
 
 #: ../Pinta.Effects/Adjustments/InvertColorsEffect.cs:24
-#: ../Pinta.Effects/Effects/MandelbrotFractalEffect.cs:194
+#: ../Pinta.Effects/Effects/MandelbrotFractalEffect.cs:214
 msgid "Invert Colors"
 msgstr "Invertovať farby"
 
@@ -963,6 +999,11 @@ msgstr "Kurzíva"
 #: ../Pinta/Dialogs/JpegCompressionDialog.cs:38
 msgid "JPEG Quality"
 msgstr "Kvalita JPEG"
+
+#. Translators: Image dithering matrix named after J. F. Jarvis, C. N. Judice, and W. H. Ninke
+#: ../Pinta.Effects/Classes/ErrorDiffusionMatrix.cs:36
+msgid "Jarvis-Judice-Ninke"
+msgstr ""
 
 #: ../Pinta.Effects/Effects/JuliaFractalEffect.cs:23
 msgid "Julia Fractal"
@@ -1132,7 +1173,7 @@ msgstr "Dĺžka"
 msgid "Levels"
 msgstr "Úrovne"
 
-#: ../Pinta.Effects/Dialogs/Effects.LevelsDialog.cs:73
+#: ../Pinta.Effects/Dialogs/Effects.LevelsDialog.cs:100
 msgid "Levels Adjustment"
 msgstr "Doladenie úrovní"
 
@@ -1149,16 +1190,16 @@ msgstr ""
 msgid "Lighten"
 msgstr "Zosvetlenie"
 
-#: ../Pinta.Effects/Effects/SoftenPortraitEffect.cs:113
+#: ../Pinta.Effects/Effects/SoftenPortraitEffect.cs:117
 msgid "Lighting"
 msgstr "Osvetlenie"
 
-#: ../Pinta.Effects/Adjustments/HueSaturationEffect.cs:68
+#: ../Pinta.Effects/Adjustments/HueSaturationEffect.cs:67
 msgid "Lightness"
 msgstr "Svetlosť"
 
 #. Translators: Gradient with a citrusy vibe that starts out white, goes through light yellow, several shades of green, and then transparent, blending with the background
-#: ../Pinta.Effects/Effects/GradientHelper.cs:34
+#: ../Pinta.Effects/Effects/GradientHelper.cs:48
 msgid "Lime Lemon"
 msgstr ""
 
@@ -1221,7 +1262,7 @@ msgstr "Režim"
 msgid "Modified"
 msgstr "Upravené"
 
-#: ../Pinta.Gui.Addins/AddinInfoView.cs:77
+#: ../Pinta.Gui.Addins/AddinInfoView.cs:69
 msgid "More Information..."
 msgstr ""
 
@@ -1312,9 +1353,9 @@ msgstr "Normálny a obrys"
 msgid "Number of threads to use for rendering"
 msgstr ""
 
-#: ../Pinta.Effects/Effects/BulgeEffect.cs:115
-#: ../Pinta.Effects/Effects/RadialBlurEffect.cs:174
-#: ../Pinta.Effects/Effects/ZoomBlurEffect.cs:147
+#: ../Pinta.Effects/Effects/BulgeEffect.cs:118
+#: ../Pinta.Effects/Effects/RadialBlurEffect.cs:175
+#: ../Pinta.Effects/Effects/ZoomBlurEffect.cs:148
 msgid "Offset"
 msgstr "Posun"
 
@@ -1382,11 +1423,11 @@ msgstr "Obrys útvaru"
 msgid "Outline width"
 msgstr "Šírka obrysu"
 
-#: ../Pinta.Effects/Dialogs/Effects.LevelsDialog.cs:169
+#: ../Pinta.Effects/Dialogs/Effects.LevelsDialog.cs:196
 msgid "Output"
 msgstr "Výstup"
 
-#: ../Pinta.Effects/Dialogs/Effects.LevelsDialog.cs:171
+#: ../Pinta.Effects/Dialogs/Effects.LevelsDialog.cs:198
 msgid "Output Histogram"
 msgstr "Histogram výstupu"
 
@@ -1407,6 +1448,7 @@ msgid "Paintbrush"
 msgstr "Štetec"
 
 #: ../Pinta.Core/Actions/EditActions.cs:136
+#: ../Pinta.Effects/Effects/DitheringEffect.cs:143
 msgid "Palette"
 msgstr "Paleta"
 
@@ -1442,15 +1484,15 @@ msgstr "Ceruzka"
 msgid "Pencil Sketch"
 msgstr "Skica ceruzkou"
 
-#: ../Pinta.Effects/Effects/PencilSketchEffect.cs:87
+#: ../Pinta.Effects/Effects/PencilSketchEffect.cs:91
 msgid "Pencil Tip Size"
 msgstr "Veľkosť hrotu ceruzky"
 
-#: ../Pinta.Effects/Effects/MedianEffect.cs:66
+#: ../Pinta.Effects/Effects/MedianEffect.cs:67
 msgid "Percentile"
 msgstr "Percentil"
 
-#: ../Pinta.Effects/Effects/GlowEffect.cs:29
+#: ../Pinta.Effects/Effects/GlowEffect.cs:30
 #: ../Pinta.Effects/Effects/RedEyeRemoveEffect.cs:27
 #: ../Pinta.Effects/Effects/SharpenEffect.cs:27
 #: ../Pinta.Effects/Effects/SoftenPortraitEffect.cs:58
@@ -1517,7 +1559,7 @@ msgid "Pixels"
 msgstr "Pixle"
 
 #. Translators: Gradient with different shades of brownish yellow
-#: ../Pinta.Effects/Effects/GradientHelper.cs:38
+#: ../Pinta.Effects/Effects/GradientHelper.cs:52
 msgid "Piña Colada"
 msgstr ""
 
@@ -1543,13 +1585,17 @@ msgstr "Na výšku"
 msgid "Posterize"
 msgstr "Posterizovať"
 
-#: ../Pinta.Effects/Effects/CloudsEffect.cs:208
+#: ../Pinta.Effects/Effects/CloudsEffect.cs:222
 msgid "Power"
 msgstr "Sila"
 
 #. Translators: This refers to preserving the current canvas size when pasting a larger image.
 #: ../Pinta/Actions/Edit/PasteAction.cs:189
 msgid "Preserve"
+msgstr ""
+
+#: ../Pinta.Effects/Effects/GradientHelper.cs:11
+msgid "Preset Gradient"
 msgstr ""
 
 #: ../Pinta/Dialogs/NewImageDialog.cs:101
@@ -1568,10 +1614,10 @@ msgstr "Hlavný"
 msgid "Print"
 msgstr "Tlačiť"
 
-#: ../Pinta.Effects/Effects/JuliaFractalEffect.cs:159
-#: ../Pinta.Effects/Effects/MandelbrotFractalEffect.cs:178
-#: ../Pinta.Effects/Effects/RadialBlurEffect.cs:177
-#: ../Pinta.Effects/Effects/WarpEffect.cs:186
+#: ../Pinta.Effects/Effects/JuliaFractalEffect.cs:172
+#: ../Pinta.Effects/Effects/MandelbrotFractalEffect.cs:192
+#: ../Pinta.Effects/Effects/RadialBlurEffect.cs:178
+#: ../Pinta.Effects/Effects/WarpEffect.cs:187
 msgid "Quality"
 msgstr "Kvalita"
 
@@ -1595,18 +1641,28 @@ msgstr "Radiálne rozostrenie"
 msgid "Radial Gradient"
 msgstr "Radiálny prechod"
 
-#: ../Pinta.Effects/Effects/GaussianBlurEffect.cs:247
-#: ../Pinta.Effects/Effects/GlowEffect.cs:74
-#: ../Pinta.Effects/Effects/MedianEffect.cs:63
-#: ../Pinta.Effects/Effects/ReduceNoiseEffect.cs:87
-#: ../Pinta.Effects/Effects/UnfocusEffect.cs:91
+#: ../Pinta.Effects/Effects/GaussianBlurEffect.cs:248
+#: ../Pinta.Effects/Effects/GlowEffect.cs:78
+#: ../Pinta.Effects/Effects/MedianEffect.cs:64
+#: ../Pinta.Effects/Effects/ReduceNoiseEffect.cs:91
+#: ../Pinta.Effects/Effects/UnfocusEffect.cs:96
 #: ../Pinta.Tools/Editable/EditEngines/RoundedLineEditEngine.cs:88
 msgid "Radius"
 msgstr "Polomer"
 
-#: ../Pinta.Effects/Effects/AddNoiseEffect.cs:189
-#: ../Pinta.Effects/Effects/CloudsEffect.cs:230
-#: ../Pinta.Effects/Effects/FrostedGlassEffect.cs:153
+#: ../Pinta.Effects/Effects/GradientHelper.cs:17
+msgid "Random"
+msgstr ""
+
+#: ../Pinta.Effects/Effects/CloudsEffect.cs:253
+#: ../Pinta.Effects/Effects/JuliaFractalEffect.cs:184
+#: ../Pinta.Effects/Effects/MandelbrotFractalEffect.cs:208
+msgid "Random Color Scheme Seed"
+msgstr ""
+
+#: ../Pinta.Effects/Effects/AddNoiseEffect.cs:191
+#: ../Pinta.Effects/Effects/CloudsEffect.cs:244
+#: ../Pinta.Effects/Effects/FrostedGlassEffect.cs:154
 msgid "Random Noise"
 msgstr "Náhodný šum"
 
@@ -1622,7 +1678,7 @@ msgstr "Obdĺžnik"
 msgid "Rectangle Select"
 msgstr "Obdĺžnikový výber"
 
-#: ../Pinta.Effects/Dialogs/Effects.LevelsDialog.cs:83
+#: ../Pinta.Effects/Dialogs/Effects.LevelsDialog.cs:110
 #: ../Pinta.Effects/Dialogs/Effects.PosterizeDialog.cs:65
 msgid "Red"
 msgstr "Červená"
@@ -1655,7 +1711,7 @@ msgstr "Obnoviť"
 msgid "Released under the MIT X11 License."
 msgstr "Vydané pod licenciou MIT X11"
 
-#: ../Pinta.Effects/Effects/ReliefEffect.cs:38
+#: ../Pinta.Effects/Effects/ReliefEffect.cs:42
 msgid "Relief"
 msgstr "Reliéf"
 
@@ -1690,7 +1746,7 @@ msgid "Reseed"
 msgstr "Nový počiatok"
 
 #: ../Pinta.Effects/Dialogs/Effects.CurvesDialog.cs:136
-#: ../Pinta.Effects/Dialogs/Effects.LevelsDialog.cs:91
+#: ../Pinta.Effects/Dialogs/Effects.LevelsDialog.cs:118
 msgid "Reset"
 msgstr "Pôvodné"
 
@@ -1720,8 +1776,9 @@ msgstr "Zmeniť veľkosť obrázka..."
 msgid "Resize Palette"
 msgstr "Zmeniť veľkosť palety"
 
-#: ../Pinta.Effects/Effects/JuliaFractalEffect.cs:168
-#: ../Pinta.Effects/Effects/MandelbrotFractalEffect.cs:191
+#: ../Pinta.Effects/Effects/CloudsEffect.cs:256
+#: ../Pinta.Effects/Effects/JuliaFractalEffect.cs:187
+#: ../Pinta.Effects/Effects/MandelbrotFractalEffect.cs:211
 msgid "Reverse Color Scheme"
 msgstr ""
 
@@ -1753,8 +1810,8 @@ msgstr "Otočiť o 90° v smere hodinových ručičiek"
 msgid "Rotate 90° Counter-Clockwise"
 msgstr "Otočiť o 90° proti smeru hodinových ručičiek"
 
-#: ../Pinta.Effects/Effects/FragmentEffect.cs:117
-#: ../Pinta.Effects/Effects/TileEffect.cs:174
+#: ../Pinta.Effects/Effects/FragmentEffect.cs:120
+#: ../Pinta.Effects/Effects/TileEffect.cs:180
 msgid "Rotation"
 msgstr "Otočenie"
 
@@ -1783,11 +1840,11 @@ msgid "Sampling"
 msgstr "Vzorkovanie"
 
 #: ../Pinta.Core/Effects/UserBlendOps.cs:46
-#: ../Pinta.Effects/Adjustments/HueSaturationEffect.cs:65
+#: ../Pinta.Effects/Adjustments/HueSaturationEffect.cs:64
 msgid "Saturation"
 msgstr "Sýtosť"
 
-#: ../Pinta.Effects/Effects/RedEyeRemoveEffect.cs:54
+#: ../Pinta.Effects/Effects/RedEyeRemoveEffect.cs:58
 msgid "Saturation Percentage"
 msgstr "Úroveň svetlosti"
 
@@ -1819,7 +1876,7 @@ msgstr "Uložiť súbor palety"
 msgid "Save changes to image \"{0}\" before closing?"
 msgstr "Uložiť zmeny do obrázka \"{0}\" pred zavretím?"
 
-#: ../Pinta.Effects/Effects/CloudsEffect.cs:205
+#: ../Pinta.Effects/Effects/CloudsEffect.cs:219
 msgid "Scale"
 msgstr "Mierka"
 
@@ -1835,6 +1892,10 @@ msgstr "Vedľajší"
 #: ../Pinta.Core/Actions/EditActions.cs:215
 msgid "Select All"
 msgstr "Vybrať všetko"
+
+#: ../Pinta.Effects/Effects/GradientHelper.cs:14
+msgid "Selected Colors"
+msgstr ""
 
 #: ../Pinta.Effects/Adjustments/SepiaEffect.cs:25
 msgid "Sepia"
@@ -1865,6 +1926,16 @@ msgstr "Zobraziť vrstvu"
 msgid "Show/Hide"
 msgstr "Zobraziť/Skryť"
 
+#. Translators: Image dithering matrix named after Frankie Sierra
+#: ../Pinta.Effects/Classes/ErrorDiffusionMatrix.cs:12
+msgid "Sierra"
+msgstr ""
+
+#. Translators: Image dithering matrix named after Frankie Sierra
+#: ../Pinta.Effects/Classes/ErrorDiffusionMatrix.cs:20
+msgid "Sierra Lite"
+msgstr ""
+
 #: ../Pinta.Tools/Tools/ColorPickerTool.cs:221
 msgid "Single Pixel"
 msgstr "Jednotlivý pixel"
@@ -1885,7 +1956,7 @@ msgstr "Mäkké svetlo"
 msgid "Soften Portrait"
 msgstr "Zjemniť portrét"
 
-#: ../Pinta.Effects/Effects/SoftenPortraitEffect.cs:110
+#: ../Pinta.Effects/Effects/SoftenPortraitEffect.cs:114
 msgid "Softness"
 msgstr "Mäkkosť"
 
@@ -1901,14 +1972,19 @@ msgstr "Štvorce"
 msgid "Status Bar"
 msgstr "Stavový riadok"
 
-#: ../Pinta.Effects/Effects/ReduceNoiseEffect.cs:90
+#: ../Pinta.Effects/Effects/ReduceNoiseEffect.cs:94
 msgid "Strength"
 msgstr "Sila"
+
+#. Translators: Image dithering matrix named after Peter Stucki
+#: ../Pinta.Effects/Classes/ErrorDiffusionMatrix.cs:32
+msgid "Stucki"
+msgstr ""
 
 #: ../Pinta.Effects/Effects/EdgeDetectEffect.cs:27
 #: ../Pinta.Effects/Effects/EmbossEffect.cs:27
 #: ../Pinta.Effects/Effects/OutlineEffect.cs:30
-#: ../Pinta.Effects/Effects/ReliefEffect.cs:29
+#: ../Pinta.Effects/Effects/ReliefEffect.cs:33
 msgid "Stylize"
 msgstr "Štylizovanie"
 
@@ -1942,23 +2018,23 @@ msgstr ""
 msgid "The clipboard does not contain an image."
 msgstr "Schránka neobsahuje obrázok."
 
-#: ../Pinta.Gui.Addins/InstallDialog.cs:153
+#: ../Pinta.Gui.Addins/InstallDialog.cs:152
 msgid "The file may be an invalid or corrupt extension package"
 msgstr ""
 
-#: ../Pinta.Gui.Addins/InstallDialog.cs:92
+#: ../Pinta.Gui.Addins/InstallDialog.cs:89
 msgid "The following dependencies could not be resolved:"
 msgstr "Nasledujúce závislosti nebolo možné vyriešiť:"
 
-#: ../Pinta.Gui.Addins/InstallDialog.cs:83
+#: ../Pinta.Gui.Addins/InstallDialog.cs:80
 msgid "The following packages need to be uninstalled:"
 msgstr "Nasledujúce balíčky je potrebné odinštalovať:"
 
-#: ../Pinta.Gui.Addins/InstallDialog.cs:75
+#: ../Pinta.Gui.Addins/InstallDialog.cs:72
 msgid "The following packages will be installed:"
 msgstr "Nasledujúce balíčky budú nainštalované:"
 
-#: ../Pinta.Gui.Addins/InstallDialog.cs:179
+#: ../Pinta.Gui.Addins/InstallDialog.cs:178
 msgid "The following packages will be uninstalled:"
 msgstr "Nasledujúce balíčky budú odinštalované:"
 
@@ -1968,25 +2044,25 @@ msgid ""
 "to the canvas size?"
 msgstr ""
 
-#: ../Pinta.Gui.Addins/InstallDialog.cs:293
+#: ../Pinta.Gui.Addins/InstallDialog.cs:301
 msgid "The installation failed!"
 msgstr "Inštalácia zlyhala!"
 
-#: ../Pinta.Gui.Addins/InstallDialog.cs:294
+#: ../Pinta.Gui.Addins/InstallDialog.cs:302
 msgid "The installation has completed with warnings."
 msgstr "Inštalácia bola dokončená s varovaniami."
 
-#: ../Pinta.Gui.Addins/InstallDialog.cs:57
+#: ../Pinta.Gui.Addins/InstallDialog.cs:54
 msgid ""
 "The selected extension packages can't be installed because there are "
 "dependency conflicts."
 msgstr ""
 
-#: ../Pinta.Gui.Addins/InstallDialog.cs:303
+#: ../Pinta.Gui.Addins/InstallDialog.cs:308
 msgid "The uninstallation failed!"
 msgstr "Odinštalácia zlyhala!"
 
-#: ../Pinta.Gui.Addins/InstallDialog.cs:304
+#: ../Pinta.Gui.Addins/InstallDialog.cs:309
 msgid "The uninstallation has completed with warnings."
 msgstr "Odinštalácia bola dokončená s varovaniami."
 
@@ -1996,7 +2072,7 @@ msgid ""
 "will also be uninstalled:"
 msgstr ""
 
-#: ../Pinta.Effects/Effects/OutlineEffect.cs:135
+#: ../Pinta.Effects/Effects/OutlineEffect.cs:138
 msgid "Thickness"
 msgstr "Hrúbka"
 
@@ -2004,7 +2080,7 @@ msgstr "Hrúbka"
 msgid "Tile Reflection"
 msgstr "Dlaždicový odraz"
 
-#: ../Pinta.Effects/Effects/TileEffect.cs:177
+#: ../Pinta.Effects/Effects/TileEffect.cs:183
 msgid "Tile Size"
 msgstr "Veľkosť dlaždice"
 
@@ -2012,7 +2088,7 @@ msgstr "Veľkosť dlaždice"
 msgid "Tip: Right-click to remove control points."
 msgstr "Tip: Kliknutím pravým tlačidlom odstránite kontrolné body."
 
-#: ../Pinta.Effects/Effects/RedEyeRemoveEffect.cs:50
+#: ../Pinta.Effects/Effects/RedEyeRemoveEffect.cs:54
 #: ../Pinta.Tools/Tools/FloodTool.cs:125
 #: ../Pinta.Tools/Tools/RecolorTool.cs:196
 msgid "Tolerance"
@@ -2055,6 +2131,11 @@ msgstr "Priehľadný"
 msgid "Twist"
 msgstr "Skrútiť"
 
+#. Translators: Image dithering matrix named after Frankie Sierra
+#: ../Pinta.Effects/Classes/ErrorDiffusionMatrix.cs:16
+msgid "Two-Row Sierra"
+msgstr ""
+
 #: ../Pinta.Tools/Tools/EraserTool.cs:259
 #: ../Pinta.Tools/Tools/PaintBrushTool.cs:165
 msgid "Type"
@@ -2072,12 +2153,12 @@ msgstr "Späť"
 msgid "Unfocus"
 msgstr "Rozostrenie"
 
+#: ../Pinta.Gui.Addins/InstallDialog.cs:168
 #: ../Pinta.Gui.Addins/InstallDialog.cs:169
-#: ../Pinta.Gui.Addins/InstallDialog.cs:170
 msgid "Uninstall"
 msgstr "Odinštalovať"
 
-#: ../Pinta.Gui.Addins/AddinInfoView.cs:91
+#: ../Pinta.Gui.Addins/AddinInfoView.cs:83
 msgid "Uninstall..."
 msgstr ""
 
@@ -2100,7 +2181,7 @@ msgstr "Nepodporovaný formát súboru"
 msgid "Unsupported palette format"
 msgstr ""
 
-#: ../Pinta.Gui.Addins/AddinInfoView.cs:86
+#: ../Pinta.Gui.Addins/AddinInfoView.cs:78
 msgid "Update..."
 msgstr ""
 
@@ -2108,7 +2189,7 @@ msgstr ""
 msgid "Updates"
 msgstr "Aktualizácie"
 
-#: ../Pinta.Effects/Effects/RadialBlurEffect.cs:178
+#: ../Pinta.Effects/Effects/RadialBlurEffect.cs:179
 msgid ""
 "Use low quality for previews, small images, and small angles.  Use high "
 "quality for final quality, large images, and large angles."
@@ -2121,7 +2202,7 @@ msgstr ""
 msgid "Using some icons from:"
 msgstr "Použité niektoré ikony z:"
 
-#: ../Pinta.Gui.Addins/AddinInfoView.cs:128
+#: ../Pinta.Gui.Addins/AddinInfoView.cs:130
 #, csharp-format
 msgid "Version: {0}"
 msgstr ""
@@ -2130,7 +2211,7 @@ msgstr ""
 msgid "Visible"
 msgstr "Viditeľnosť"
 
-#: ../Pinta.Effects/Effects/SoftenPortraitEffect.cs:116
+#: ../Pinta.Effects/Effects/SoftenPortraitEffect.cs:120
 msgid "Warmth"
 msgstr "Teplo"
 
@@ -2180,8 +2261,8 @@ msgstr ""
 "Nemáte prístupové práva na zmenu '{0}'. Súbor alebo priečinok môže byť iba "
 "na čítanie."
 
-#: ../Pinta.Effects/Effects/JuliaFractalEffect.cs:162
-#: ../Pinta.Effects/Effects/MandelbrotFractalEffect.cs:182
+#: ../Pinta.Effects/Effects/JuliaFractalEffect.cs:175
+#: ../Pinta.Effects/Effects/MandelbrotFractalEffect.cs:196
 #: ../Pinta.Tools/Tools/ZoomTool.cs:55
 #: ../Pinta/Actions/Layers/RotateZoomLayerAction.cs:121
 msgid "Zoom"
