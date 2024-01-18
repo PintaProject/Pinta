@@ -8,10 +8,10 @@ msgstr ""
 "Project-Id-Version: pinta\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2024-01-18 03:35+0000\n"
-"PO-Revision-Date: 2024-01-16 07:06+0000\n"
+"PO-Revision-Date: 2024-01-19 00:09+0000\n"
 "Last-Translator: Oğuz Ersen <oguz@ersen.moe>\n"
-"Language-Team: Turkish <https://hosted.weblate.org/projects/pinta/pinta/tr/"
-">\n"
+"Language-Team: Turkish <https://hosted.weblate.org/projects/pinta/pinta/tr/>"
+"\n"
 "Language: tr\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -142,7 +142,7 @@ msgstr "Sanatsal"
 #. Translators: Image dithering matrix named after Bill Atkinson
 #: ../Pinta.Effects/Classes/ErrorDiffusionMatrix.cs:28
 msgid "Atkinson"
-msgstr ""
+msgstr "Atkinson"
 
 #: ../Pinta.Effects/Dialogs/Effects.LevelsDialog.cs:117
 msgid "Auto"
@@ -252,7 +252,7 @@ msgstr "Şişirme"
 #. Translators: Image dithering matrix named after Daniel Burkes
 #: ../Pinta.Effects/Classes/ErrorDiffusionMatrix.cs:24
 msgid "Burkes"
-msgstr ""
+msgstr "Burkes"
 
 #: ../Pinta/Dialogs/ResizeCanvasDialog.cs:69
 #: ../Pinta/Dialogs/ResizeImageDialog.cs:59
@@ -460,7 +460,7 @@ msgstr "Renk Düzeni"
 #: ../Pinta.Effects/Effects/JuliaFractalEffect.cs:178
 #: ../Pinta.Effects/Effects/MandelbrotFractalEffect.cs:202
 msgid "Color Scheme Source"
-msgstr ""
+msgstr "Renk Düzeni Kaynağı"
 
 #: ../Pinta.Effects/Effects/InkSketchEffect.cs:156
 msgid "Coloring"
@@ -598,7 +598,7 @@ msgstr "Boz"
 
 #: ../Pinta.Effects/Effects/DitheringEffect.cs:11
 msgid "Dithering"
-msgstr ""
+msgstr "Titreme"
 
 #: ../Pinta.Tools/Tools/ColorPickerTool.cs:202
 msgid "Do not switch tool"
@@ -673,7 +673,7 @@ msgstr "Hata"
 
 #: ../Pinta.Effects/Effects/DitheringEffect.cs:140
 msgid "Error Diffusion Method"
-msgstr ""
+msgstr "Hata Yayılım Yöntemi"
 
 #: ../Pinta.Core/Classes/SelectionModeHandler.cs:48
 msgid "Exclude (-) (Right Click)"
@@ -798,12 +798,12 @@ msgstr "Taşırma Modu"
 #. Translators: Image dithering matrix named after Robert W. Floyd and Louis Steinberg
 #: ../Pinta.Effects/Classes/ErrorDiffusionMatrix.cs:40
 msgid "Floyd-Steinberg"
-msgstr ""
+msgstr "Floyd-Steinberg"
 
 #. Translators: Image dithering matrix named after Robert W. Floyd and Louis Steinberg. Some software may use it and call it Floyd-Steinberg, but it's not the actual Floyd-Steinberg matrix
 #: ../Pinta.Effects/Classes/ErrorDiffusionMatrix.cs:44
 msgid "Floyd-Steinberg Lite"
-msgstr ""
+msgstr "Floyd-Steinberg Lite"
 
 #: ../Pinta.Tools/Tools/TextTool.cs:138
 msgid "Font"
@@ -1012,7 +1012,7 @@ msgstr "JPEG Kalitesi"
 #. Translators: Image dithering matrix named after J. F. Jarvis, C. N. Judice, and W. H. Ninke
 #: ../Pinta.Effects/Classes/ErrorDiffusionMatrix.cs:36
 msgid "Jarvis-Judice-Ninke"
-msgstr ""
+msgstr "Jarvis-Judice-Ninke"
 
 #: ../Pinta.Effects/Effects/JuliaFractalEffect.cs:23
 msgid "Julia Fractal"
@@ -1642,7 +1642,7 @@ msgstr "Koru"
 
 #: ../Pinta.Effects/Effects/GradientHelper.cs:11
 msgid "Preset Gradient"
-msgstr ""
+msgstr "Öndeğer Renk Geçişi"
 
 #: ../Pinta/Dialogs/NewImageDialog.cs:101
 msgid "Preset:"
@@ -1698,13 +1698,13 @@ msgstr "Yarıçap"
 
 #: ../Pinta.Effects/Effects/GradientHelper.cs:17
 msgid "Random"
-msgstr ""
+msgstr "Rastgele"
 
 #: ../Pinta.Effects/Effects/CloudsEffect.cs:253
 #: ../Pinta.Effects/Effects/JuliaFractalEffect.cs:184
 #: ../Pinta.Effects/Effects/MandelbrotFractalEffect.cs:208
 msgid "Random Color Scheme Seed"
-msgstr ""
+msgstr "Rastgele Renk Düzeni Tohumu"
 
 #: ../Pinta.Effects/Effects/AddNoiseEffect.cs:191
 #: ../Pinta.Effects/Effects/CloudsEffect.cs:244
@@ -1943,7 +1943,7 @@ msgstr "Tümünü Seç"
 
 #: ../Pinta.Effects/Effects/GradientHelper.cs:14
 msgid "Selected Colors"
-msgstr ""
+msgstr "Seçilen Renkler"
 
 #: ../Pinta.Effects/Adjustments/SepiaEffect.cs:25
 msgid "Sepia"
@@ -1977,12 +1977,12 @@ msgstr "Göster/Gizle"
 #. Translators: Image dithering matrix named after Frankie Sierra
 #: ../Pinta.Effects/Classes/ErrorDiffusionMatrix.cs:12
 msgid "Sierra"
-msgstr ""
+msgstr "Sierra"
 
 #. Translators: Image dithering matrix named after Frankie Sierra
 #: ../Pinta.Effects/Classes/ErrorDiffusionMatrix.cs:20
 msgid "Sierra Lite"
-msgstr ""
+msgstr "Sierra Lite"
 
 #: ../Pinta.Tools/Tools/ColorPickerTool.cs:221
 msgid "Single Pixel"
@@ -2027,7 +2027,7 @@ msgstr "Güçlülük"
 #. Translators: Image dithering matrix named after Peter Stucki
 #: ../Pinta.Effects/Classes/ErrorDiffusionMatrix.cs:32
 msgid "Stucki"
-msgstr ""
+msgstr "Stucki"
 
 #: ../Pinta.Effects/Effects/EdgeDetectEffect.cs:27
 #: ../Pinta.Effects/Effects/EmbossEffect.cs:27
@@ -2187,7 +2187,7 @@ msgstr "Bükme"
 #. Translators: Image dithering matrix named after Frankie Sierra
 #: ../Pinta.Effects/Classes/ErrorDiffusionMatrix.cs:16
 msgid "Two-Row Sierra"
-msgstr ""
+msgstr "İki Sıralı Sierra"
 
 #: ../Pinta.Tools/Tools/EraserTool.cs:259
 #: ../Pinta.Tools/Tools/PaintBrushTool.cs:165
