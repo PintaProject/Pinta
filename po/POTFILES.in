@@ -58,7 +58,21 @@ Pinta.Core/Effects/SplineInterpolator.cs
 Pinta.Core/Effects/UnaryPixelOp.cs
 Pinta.Core/Effects/UnaryPixelOps.cs
 Pinta.Core/Effects/UserBlendOp.cs
-Pinta.Core/Effects/UserBlendOps.Generated.cs
+Pinta.Core/Effects/UserBlendOps.Additive.cs
+Pinta.Core/Effects/UserBlendOps.ColorBurn.cs
+Pinta.Core/Effects/UserBlendOps.ColorDodge.cs
+Pinta.Core/Effects/UserBlendOps.Darken.cs
+Pinta.Core/Effects/UserBlendOps.Difference.cs
+Pinta.Core/Effects/UserBlendOps.Glow.cs
+Pinta.Core/Effects/UserBlendOps.Lighten.cs
+Pinta.Core/Effects/UserBlendOps.MasTable.cs
+Pinta.Core/Effects/UserBlendOps.Multiply.cs
+Pinta.Core/Effects/UserBlendOps.Negation.cs
+Pinta.Core/Effects/UserBlendOps.Normal.cs
+Pinta.Core/Effects/UserBlendOps.Overlay.cs
+Pinta.Core/Effects/UserBlendOps.Reflect.cs
+Pinta.Core/Effects/UserBlendOps.Screen.cs
+Pinta.Core/Effects/UserBlendOps.Xor.cs
 Pinta.Core/Effects/UserBlendOps.cs
 Pinta.Core/Effects/Utility.cs
 Pinta.Core/Enumerations/Anchor.cs
@@ -158,6 +172,7 @@ Pinta.Effects/Adjustments/InvertColorsEffect.cs
 Pinta.Effects/Adjustments/LevelsEffect.cs
 Pinta.Effects/Adjustments/PosterizeEffect.cs
 Pinta.Effects/Adjustments/SepiaEffect.cs
+Pinta.Effects/Classes/ErrorDiffusionMatrix.cs
 Pinta.Effects/CoreEffectsExtension.cs
 Pinta.Effects/Dialogs/Effects.CurvesDialog.cs
 Pinta.Effects/Dialogs/Effects.LevelsDialog.cs
@@ -166,6 +181,7 @@ Pinta.Effects/Effects/AddNoiseEffect.cs
 Pinta.Effects/Effects/BulgeEffect.cs
 Pinta.Effects/Effects/CloudsEffect.cs
 Pinta.Effects/Effects/ColorGradient.cs
+Pinta.Effects/Effects/DitheringEffect.cs
 Pinta.Effects/Effects/EdgeDetectEffect.cs
 Pinta.Effects/Effects/EmbossEffect.cs
 Pinta.Effects/Effects/FragmentEffect.cs
@@ -197,6 +213,7 @@ Pinta.Effects/Effects/WarpEffect.cs
 Pinta.Effects/Effects/ZoomBlurEffect.cs
 Pinta.Effects/FriendAssemblies.cs
 Pinta.Effects/Utilities/EffectHelper.cs
+Pinta.Effects/Utilities/PaletteHelper.cs
 Pinta.Gui.Addins/AddinInfoView.cs
 Pinta.Gui.Addins/AddinListView.cs
 Pinta.Gui.Addins/AddinListViewItem.cs
