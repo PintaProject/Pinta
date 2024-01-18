@@ -26,13 +26,13 @@ public sealed class SepiaEffect : BaseEffect
 
 	public override string AdjustmentMenuKey => "E";
 
-	public SepiaEffect ()
+	public SepiaEffect (IServiceManager _)
 	{
 		desat = new UnaryPixelOps.Desaturate ();
 		level = new UnaryPixelOps.Level (
 			ColorBgra.Black,
 			ColorBgra.White,
-			new float[] { 1.2f, 1.0f, 0.8f },
+			new[] { 1.2f, 1.0f, 0.8f },
 			ColorBgra.Black,
 			ColorBgra.White);
 	}

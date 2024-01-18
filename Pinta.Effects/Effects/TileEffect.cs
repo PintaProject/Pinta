@@ -28,14 +28,18 @@ public sealed class TileEffect : BaseEffect
 
 	public TileData Data => (TileData) EffectData!;
 
-	public TileEffect ()
+	private readonly IChromeService chrome;
+
+	public TileEffect (IServiceManager services)
 	{
+		chrome = services.GetService<IChromeService> ();
+
 		EffectData = new TileData ();
 	}
 
 	public override void LaunchConfiguration ()
 	{
-		EffectHelper.LaunchSimpleEffectDialog (this);
+		chrome.LaunchSimpleEffectDialog (this);
 	}
 
 	#region Algorithm Code Ported From PDN
@@ -86,7 +90,10 @@ public sealed class TileEffect : BaseEffect
 			x -= (int) x;
 
 			// RGSS + rotation to maximize AA quality
-			destination[i] = new PointD ((double) (settings.cos * x + settings.sin * y), (double) (settings.cos * y - settings.sin * x));
+			destination[i] = new PointD (
+				X: (double) (settings.cos * x + settings.sin * y),
+				Y: (double) (settings.cos * y - settings.sin * x)
+			);
 		}
 	}
 
@@ -102,11 +109,12 @@ public sealed class TileEffect : BaseEffect
 
 		foreach (var rect in rois) {
 			for (int y = rect.Top; y <= rect.Bottom; y++) {
+
 				float j = y - settings.hh;
 				var dst_row = dst_data.Slice (y * settings.width, settings.width);
-				for (int x = rect.Left; x <= rect.Right; x++) {
+
+				for (int x = rect.Left; x <= rect.Right; x++)
 					dst_row[x] = GetFinalPixelColor (src, settings, aaPoints, src_data, j, x);
-				}
 			}
 		}
 	}
@@ -139,15 +147,13 @@ public sealed class TileEffect : BaseEffect
 
 			xSample = (xSample + settings.width) % settings.width;
 			// This makes it a little faster
-			if (xSample < 0) {
+			if (xSample < 0)
 				xSample = (xSample + settings.width) % settings.width;
-			}
 
 			ySample = (ySample + settings.height) % settings.height;
 			// This makes it a little faster
-			if (ySample < 0) {
+			if (ySample < 0)
 				ySample = (ySample + settings.height) % settings.height;
-			}
 
 			PointI samplePosition = new (xSample, ySample);
 

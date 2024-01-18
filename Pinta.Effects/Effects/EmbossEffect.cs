@@ -28,14 +28,17 @@ public sealed class EmbossEffect : BaseEffect
 
 	public EmbossData Data => (EmbossData) EffectData!;
 
-	public EmbossEffect ()
+	private readonly IChromeService chrome;
+
+	public EmbossEffect (IServiceManager services)
 	{
+		chrome = services.GetService<IChromeService> ();
 		EffectData = new EmbossData ();
 	}
 
 	public override void LaunchConfiguration ()
 	{
-		EffectHelper.LaunchSimpleEffectDialog (this);
+		chrome.LaunchSimpleEffectDialog (this);
 	}
 
 	#region Algorithm Code Ported From PDN
@@ -46,13 +49,11 @@ public sealed class EmbossEffect : BaseEffect
 		int srcHeight);
 
 	private EmbossSettings CreateSettings (ImageSurface src)
-	{
-		return new (
+		=> new (
 			weights: ComputeWeights (Data.Angle.Degrees),
 			srcWidth: src.Width,
 			srcHeight: src.Height
 		);
-	}
 
 	public override void Render (ImageSurface src, ImageSurface dst, ReadOnlySpan<RectangleI> rois)
 	{

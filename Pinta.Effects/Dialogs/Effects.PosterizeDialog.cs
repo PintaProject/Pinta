@@ -46,10 +46,10 @@ public sealed class PosterizeDialog : Gtk.Dialog
 
 	public PosterizeData? EffectData { get; set; }
 
-	public PosterizeDialog ()
+	public PosterizeDialog (IChromeService chrome)
 	{
 		Title = Translations.GetString ("Posterize");
-		TransientFor = PintaCore.Chrome.MainWindow;
+		TransientFor = chrome.MainWindow;
 		Modal = true;
 		this.AddCancelOkButtons ();
 		this.SetDefaultResponse (ResponseType.Ok);

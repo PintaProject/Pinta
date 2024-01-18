@@ -28,23 +28,26 @@ public sealed class MotionBlurEffect : BaseEffect
 
 	public MotionBlurData Data => (MotionBlurData) EffectData!;  // NRT - Set in constructor
 
-	public MotionBlurEffect ()
+	private readonly IChromeService chrome;
+
+	public MotionBlurEffect (IServiceManager services)
 	{
+		chrome = services.GetService<IChromeService> ();
 		EffectData = new MotionBlurData ();
 	}
 
 	public override void LaunchConfiguration ()
 	{
-		EffectHelper.LaunchSimpleEffectDialog (this);
+		chrome.LaunchSimpleEffectDialog (this);
 	}
 
 	#region Algorithm Code Ported From PDN
 	public override void Render (ImageSurface src, ImageSurface dst, ReadOnlySpan<RectangleI> rois)
 	{
-		PointD start = new PointD (0, 0);
+		PointD start = new (0, 0);
 		double theta = ((double) (Data.Angle.Degrees + 180) * 2 * Math.PI) / 360.0;
 		double alpha = Data.Distance;
-		PointD end = new PointD ((float) alpha * Math.Cos (theta), (float) (-alpha * Math.Sin (theta)));
+		PointD end = new ((float) alpha * Math.Cos (theta), (float) (-alpha * Math.Sin (theta)));
 
 		if (Data.Centered) {
 			start = new (-end.X / 2.0f, -end.Y / 2.0f);

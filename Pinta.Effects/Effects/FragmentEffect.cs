@@ -29,14 +29,17 @@ public sealed class FragmentEffect : BaseEffect
 
 	public FragmentData Data => (FragmentData) EffectData!;  // NRT - Set in constructor
 
-	public FragmentEffect ()
+	private readonly IChromeService chrome;
+
+	public FragmentEffect (IServiceManager services)
 	{
+		chrome = services.GetService<IChromeService> ();
 		EffectData = new FragmentData ();
 	}
 
 	public override void LaunchConfiguration ()
 	{
-		EffectHelper.LaunchSimpleEffectDialog (this);
+		chrome.LaunchSimpleEffectDialog (this);
 	}
 
 	#region Algorithm Code Ported From PDN

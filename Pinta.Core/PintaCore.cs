@@ -83,7 +83,7 @@ public static class PintaCore
 
 		Services.AddService (LivePreview);
 		Services.AddService<IPaletteService> (Palette);
-		Services.AddService (Chrome);
+		Services.AddService<IChromeService> (Chrome);
 		Services.AddService (Effects);
 	}
 

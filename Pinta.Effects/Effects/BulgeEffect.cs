@@ -28,14 +28,17 @@ public sealed class BulgeEffect : BaseEffect
 
 	public BulgeData Data => (BulgeData) EffectData!;
 
-	public BulgeEffect ()
+	private readonly IChromeService chrome;
+
+	public BulgeEffect (IServiceManager services)
 	{
+		chrome = services.GetService<IChromeService> ();
 		EffectData = new BulgeData ();
 	}
 
 	public override void LaunchConfiguration ()
 	{
-		EffectHelper.LaunchSimpleEffectDialog (this);
+		chrome.LaunchSimpleEffectDialog (this);
 	}
 
 	#region Algorithm Code Ported From PDN

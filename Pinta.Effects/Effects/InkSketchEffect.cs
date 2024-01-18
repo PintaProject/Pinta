@@ -37,11 +37,14 @@ public sealed class InkSketchEffect : BaseEffect
 
 	public InkSketchData Data => (InkSketchData) EffectData!;  // NRT - Set in constructor
 
-	public InkSketchEffect ()
+	private readonly IChromeService chrome;
+
+	public InkSketchEffect (IServiceManager services)
 	{
+		chrome = services.GetService<IChromeService> ();
 		EffectData = new InkSketchData ();
 
-		glow_effect = new GlowEffect ();
+		glow_effect = new GlowEffect (services);
 		desaturate_op = new UnaryPixelOps.Desaturate ();
 		darken_op = new UserBlendOps.DarkenBlendOp ();
 	}
@@ -59,7 +62,7 @@ public sealed class InkSketchEffect : BaseEffect
 
 	public override void LaunchConfiguration ()
 	{
-		EffectHelper.LaunchSimpleEffectDialog (this);
+		chrome.LaunchSimpleEffectDialog (this);
 	}
 
 	#region Algorithm Code Ported From PDN
@@ -77,7 +80,7 @@ public sealed class InkSketchEffect : BaseEffect
 		var dst_data = dest.GetPixelData ();
 
 		// Create black outlines by finding the edges of objects 
-		foreach (Core.RectangleI roi in rois) {
+		foreach (RectangleI roi in rois) {
 			for (int y = roi.Top; y <= roi.Bottom; ++y) {
 
 				int top = Math.Max (y - Radius, 0);
@@ -137,14 +140,11 @@ public sealed class InkSketchEffect : BaseEffect
 		// Desaturate 
 		ColorBgra topLayer = desaturate_op.Apply (baseRGB);
 
-		// Adjust Brightness and Contrast 
-		if (topLayer.R > (Data.InkOutline * 255 / 100)) {
-			topLayer = ColorBgra.FromBgra (255, 255, 255, topLayer.A);
-		} else {
-			topLayer = ColorBgra.FromBgra (0, 0, 0, topLayer.A);
-		}
-
-		return topLayer;
+		// Adjust Brightness and Contrast
+		return
+			(topLayer.R > (Data.InkOutline * 255 / 100))
+			? ColorBgra.FromBgra (255, 255, 255, topLayer.A)
+			: ColorBgra.FromBgra (0, 0, 0, topLayer.A);
 	}
 	#endregion
 

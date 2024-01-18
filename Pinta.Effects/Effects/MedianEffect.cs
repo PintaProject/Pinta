@@ -31,14 +31,17 @@ public sealed class MedianEffect : LocalHistogramEffect
 
 	public MedianData Data => (MedianData) EffectData!;  // NRT - Set in constructor
 
-	public MedianEffect ()
+	private readonly IChromeService chrome;
+
+	public MedianEffect (IServiceManager services)
 	{
+		chrome = services.GetService<IChromeService> ();
 		EffectData = new MedianData ();
 	}
 
 	public override void LaunchConfiguration ()
 	{
-		EffectHelper.LaunchSimpleEffectDialog (this);
+		chrome.LaunchSimpleEffectDialog (this);
 	}
 
 	#region Algorithm Code Ported From PDN
@@ -47,15 +50,13 @@ public sealed class MedianEffect : LocalHistogramEffect
 		radius = Data.Radius;
 		percentile = Data.Percentile;
 
-		foreach (Core.RectangleI rect in rois)
+		foreach (RectangleI rect in rois)
 			RenderRect (radius, src, dest, rect);
 	}
 
 	public override ColorBgra Apply (in ColorBgra src, int area, Span<int> hb, Span<int> hg, Span<int> hr, Span<int> ha)
-	{
-		ColorBgra c = GetPercentile (percentile, area, hb, hg, hr, ha);
-		return c;
-	}
+		=> GetPercentile (percentile, area, hb, hg, hr, ha);
+
 	#endregion
 
 	public sealed class MedianData : EffectData
