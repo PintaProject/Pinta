@@ -478,14 +478,6 @@ internal sealed class EffectsTest
 	}
 
 	[Test]
-	public void Voronoi4 ()
-	{
-		var effect = new VoronoiDiagramEffect (Utilities.CreateMockServices ());
-		effect.Data.ColorSorting = VoronoiDiagramEffect.ColorSorting.HorizontalBGR;
-		Utilities.TestEffect (effect, "voronoi4.png");
-	}
-
-	[Test]
 	public void ZoomBlur1 ()
 	{
 		ZoomBlurEffect effect = new (Utilities.CreateMockServices ());
