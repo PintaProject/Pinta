@@ -99,23 +99,9 @@ public sealed class VoronoiDiagramEffect : BaseEffect
 
 			ColorSorting.Random => baseColors,
 
-			ColorSorting.HorizontalBGR
-			or ColorSorting.VerticalBGR => baseColors.OrderBy (p => p.B).ThenBy (p => p.G).ThenBy (p => p.R),
-
-			ColorSorting.HorizontalBRG
-			or ColorSorting.VerticalBRG => baseColors.OrderBy (p => p.B).ThenBy (p => p.R).ThenBy (p => p.G),
-
-			ColorSorting.HorizontalGBR
-			or ColorSorting.VerticalGBR => baseColors.OrderBy (p => p.G).ThenBy (p => p.B).ThenBy (p => p.R),
-
-			ColorSorting.HorizontalGRB
-			or ColorSorting.VerticalGRB => baseColors.OrderBy (p => p.G).ThenBy (p => p.R).ThenBy (p => p.B),
-
-			ColorSorting.HorizontalRBG
-			or ColorSorting.VerticalRBG => baseColors.OrderBy (p => p.R).ThenBy (p => p.B).ThenBy (p => p.G),
-
-			ColorSorting.HorizontalRGB
-			or ColorSorting.VerticalRGB => baseColors.OrderBy (p => p.R).ThenBy (p => p.G).ThenBy (p => p.B),
+			ColorSorting.HorizontalB or ColorSorting.VerticalB => baseColors.OrderBy (p => p.B),
+			ColorSorting.HorizontalG or ColorSorting.VerticalG => baseColors.OrderBy (p => p.G),
+			ColorSorting.HorizontalR or ColorSorting.VerticalR => baseColors.OrderBy (p => p.R),
 
 			_ => throw new InvalidEnumArgumentException (
 				nameof (baseColors),
@@ -129,19 +115,13 @@ public sealed class VoronoiDiagramEffect : BaseEffect
 
 			ColorSorting.Random => basePoints,
 
-			ColorSorting.HorizontalBGR
-			or ColorSorting.HorizontalBRG
-			or ColorSorting.HorizontalGBR
-			or ColorSorting.HorizontalGRB
-			or ColorSorting.HorizontalRBG
-			or ColorSorting.HorizontalRGB => basePoints.OrderBy (p => p.X).ThenBy (p => p.Y),
+			ColorSorting.HorizontalB
+			or ColorSorting.HorizontalG
+			or ColorSorting.HorizontalR => basePoints.OrderBy (p => p.X).ThenBy (p => p.Y),
 
-			ColorSorting.VerticalBGR
-			or ColorSorting.VerticalBRG
-			or ColorSorting.VerticalGBR
-			or ColorSorting.VerticalGRB
-			or ColorSorting.VerticalRBG
-			or ColorSorting.VerticalRGB => basePoints.OrderBy (p => p.Y).ThenBy (p => p.X),
+			ColorSorting.VerticalB
+			or ColorSorting.VerticalG
+			or ColorSorting.VerticalR => basePoints.OrderBy (p => p.Y).ThenBy (p => p.X),
 
 			_ => throw new InvalidEnumArgumentException (
 				nameof (colorSorting),
@@ -249,42 +229,23 @@ public sealed class VoronoiDiagramEffect : BaseEffect
 	{
 		[Caption ("Random Color Sorting")] Random,
 
+		// Translators: Horizontal color sorting with B as the leading term
+		[Caption ("Horizontal (B)")] HorizontalB,
 
-		// Translators: Horizontal color sorting with B, then G as the leading terms
-		[Caption ("Horizontal (B, G, R)")] HorizontalBGR,
+		// Translators: Horizontal color sorting with G as the leading term
+		[Caption ("Horizontal (G)")] HorizontalG,
 
-		// Translators: Horizontal color sorting with B, then R as the leading terms
-		[Caption ("Horizontal (B, R, G)")] HorizontalBRG,
-
-		// Translators: Horizontal color sorting with G, then B as the leading terms
-		[Caption ("Horizontal (G, B, R)")] HorizontalGBR,
-
-		// Translators: Horizontal color sorting with G, then R as the leading terms
-		[Caption ("Horizontal (G, R, B)")] HorizontalGRB,
-
-		// Translators: Horizontal color sorting with R, then B as the leading terms
-		[Caption ("Horizontal (R, B, G)")] HorizontalRBG,
-
-		// Translators: Horizontal color sorting with R, then G as the leading terms
-		[Caption ("Horizontal (R, G, B)")] HorizontalRGB,
+		// Translators: Horizontal color sorting with R as the leading term
+		[Caption ("Horizontal (R)")] HorizontalR,
 
 
-		// Translators: Vertical color sorting with B, then G as the leading terms
-		[Caption ("Vertical (B, G, R)")] VerticalBGR,
+		// Translators: Vertical color sorting with B as the leading term
+		[Caption ("Vertical (B)")] VerticalB,
 
-		// Translators: Vertical color sorting with B, then R as the leading terms
-		[Caption ("Vertical (B, R, G)")] VerticalBRG,
+		// Translators: Vertical color sorting with G as the leading term
+		[Caption ("Vertical (G)")] VerticalG,
 
-		// Translators: Vertical color sorting with G, then B as the leading terms
-		[Caption ("Vertical (G, B, R)")] VerticalGBR,
-
-		// Translators: Vertical color sorting with G, then R as the leading terms
-		[Caption ("Vertical (G, R, B)")] VerticalGRB,
-
-		// Translators: Vertical color sorting with R, then B as the leading terms
-		[Caption ("Vertical (R, B, G)")] VerticalRBG,
-
-		// Translators: Vertical color sorting with R, then G as the leading terms
-		[Caption ("Vertical (R, G, B)")] VerticalRGB,
+		// Translators: Vertical color sorting with R as the leading term
+		[Caption ("Vertical (R)")] VerticalR,
 	}
 }
