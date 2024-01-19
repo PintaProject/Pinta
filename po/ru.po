@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2024-01-18 03:35+0000\n"
-"PO-Revision-Date: 2024-01-19 00:09+0000\n"
+"PO-Revision-Date: 2024-01-20 11:01+0000\n"
 "Last-Translator: Сергей <asvmail.as@gmail.com>\n"
 "Language-Team: Russian <https://hosted.weblate.org/projects/pinta/pinta/ru/>"
 "\n"
@@ -2356,7 +2356,7 @@ msgstr "По размеру выделения"
 
 #: ../Pinta/MainWindow.cs:341
 msgid "_Adjustments"
-msgstr "_Цвета"
+msgstr "_Коррекция"
 
 #: ../Pinta.Core/Extensions/GtkExtensions.cs:208
 #: ../Pinta.Core/Extensions/GtkExtensions.cs:210
