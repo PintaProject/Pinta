@@ -8,6 +8,7 @@
 /////////////////////////////////////////////////////////////////////////////////
 
 using System;
+using System.Collections.Immutable;
 using Cairo;
 using Pinta.Core;
 using Pinta.Gui.Widgets;
@@ -42,10 +43,16 @@ public sealed class MotionBlurEffect : BaseEffect
 	}
 
 	#region Algorithm Code Ported From PDN
-	public override void Render (ImageSurface src, ImageSurface dst, ReadOnlySpan<RectangleI> rois)
+
+	private sealed record MotionBlurSettings (
+		int w,
+		int h,
+		ImmutableArray<PointD> points);
+
+	private MotionBlurSettings CreateSettings (ImageSurface src)
 	{
 		PointD start = new (0, 0);
-		double theta = ((double) (Data.Angle.Degrees + 180) * 2 * Math.PI) / 360.0;
+		double theta = (double) (Data.Angle.Degrees + 180) * 2 * Math.PI / 360.0;
 		double alpha = Data.Distance;
 		PointD end = new ((float) alpha * Math.Cos (theta), (float) (-alpha * Math.Sin (theta)));
 
@@ -54,41 +61,46 @@ public sealed class MotionBlurEffect : BaseEffect
 			end = new (end.X / 2.0f, end.Y / 2.0f);
 		}
 
-		Span<PointD> points = stackalloc PointD[(1 + Data.Distance) * 3 / 2];
-
-		if (points.Length == 1) {
+		int numberOfPoints = (1 + Data.Distance) * 3 / 2;
+		var points = ImmutableArray.CreateBuilder<PointD> (numberOfPoints);
+		points.Count = numberOfPoints;
+		if (numberOfPoints == 1) {
 			points[0] = new PointD (0, 0);
 		} else {
-			for (int i = 0; i < points.Length; ++i) {
-				float frac = i / (float) (points.Length - 1);
+			for (int i = 0; i < numberOfPoints; ++i) {
+				float frac = i / (float) (numberOfPoints - 1);
 				points[i] = Utility.Lerp (start, end, frac);
 			}
 		}
 
-		Span<ColorBgra> samples = stackalloc ColorBgra[points.Length];
+		return new (
+			w: src.Width,
+			h: src.Height,
+			points: points.MoveToImmutable ()
+		);
+	}
+
+	public override void Render (ImageSurface src, ImageSurface dst, ReadOnlySpan<RectangleI> rois)
+	{
+		MotionBlurSettings settings = CreateSettings (src);
+
+		Span<ColorBgra> samples = stackalloc ColorBgra[settings.points.Length];
 
 		ReadOnlySpan<ColorBgra> src_data = src.GetReadOnlyPixelData ();
 		Span<ColorBgra> dst_data = dst.GetPixelData ();
-		int src_width = src.Width;
-		int src_height = src.Height;
 
 		foreach (var rect in rois) {
-
 			for (int y = rect.Top; y <= rect.Bottom; ++y) {
-				var dst_row = dst_data.Slice (y * src_width, src_width);
-
+				var dst_row = dst_data.Slice (y * settings.w, settings.w);
 				for (int x = rect.Left; x <= rect.Right; ++x) {
 					int sampleCount = 0;
-
-					for (int j = 0; j < points.Length; ++j) {
-						PointD pt = new PointD (points[j].X + x, points[j].Y + y);
-
-						if (pt.X >= 0 && pt.Y >= 0 && pt.X <= (src_width - 1) && pt.Y <= (src_height - 1)) {
-							samples[sampleCount] = src.GetBilinearSample (src_data, src_width, src_height, (float) pt.X, (float) pt.Y);
+					for (int j = 0; j < settings.points.Length; ++j) {
+						PointD pt = new PointD (settings.points[j].X + x, settings.points[j].Y + y);
+						if (pt.X >= 0 && pt.Y >= 0 && pt.X <= (settings.w - 1) && pt.Y <= (settings.h - 1)) {
+							samples[sampleCount] = src.GetBilinearSample (src_data, settings.w, settings.h, (float) pt.X, (float) pt.Y);
 							++sampleCount;
 						}
 					}
-
 					dst_row[x] = ColorBgra.Blend (samples[..sampleCount]);
 				}
 			}
