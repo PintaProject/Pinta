@@ -227,25 +227,25 @@ public sealed class VoronoiDiagramEffect : BaseEffect
 
 	public enum ColorSorting
 	{
-		[Caption ("Random Color Sorting")] Random,
+		[Caption ("Random")] Random,
 
-		// Translators: Horizontal color sorting with B as the leading term
-		[Caption ("Horizontal (B)")] HorizontalB,
+		// Translators: Horizontal color sorting with blue (B) as the leading term
+		[Caption ("Horizontal blue (B)")] HorizontalB,
 
-		// Translators: Horizontal color sorting with G as the leading term
-		[Caption ("Horizontal (G)")] HorizontalG,
+		// Translators: Horizontal color sorting with green (G) as the leading term
+		[Caption ("Horizontal green (G)")] HorizontalG,
 
-		// Translators: Horizontal color sorting with R as the leading term
-		[Caption ("Horizontal (R)")] HorizontalR,
+		// Translators: Horizontal color sorting with red (R) as the leading term
+		[Caption ("Horizontal red (R)")] HorizontalR,
 
 
-		// Translators: Vertical color sorting with B as the leading term
-		[Caption ("Vertical (B)")] VerticalB,
+		// Translators: Vertical color sorting with blue (B) as the leading term
+		[Caption ("Vertical blue (B)")] VerticalB,
 
-		// Translators: Vertical color sorting with G as the leading term
-		[Caption ("Vertical (G)")] VerticalG,
+		// Translators: Vertical color sorting with green (G) as the leading term
+		[Caption ("Vertical green (G)")] VerticalG,
 
-		// Translators: Vertical color sorting with R as the leading term
-		[Caption ("Vertical (R)")] VerticalR,
+		// Translators: Vertical color sorting with red (R) as the leading term
+		[Caption ("Vertical red (R)")] VerticalR,
 	}
 }
