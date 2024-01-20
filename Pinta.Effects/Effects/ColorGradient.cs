@@ -157,29 +157,21 @@ internal sealed class ColorGradient
 	private ColorBgra HandleWithStops (double position)
 	{
 		int matchIndex = sorted_positions.BinarySearch (position);
-
 		if (matchIndex >= 0) return sorted_colors[matchIndex]; // Exact match
-
 		int matchComplement = ~matchIndex;
-
 		if (matchComplement == sorted_positions.Length) // Not found. Using end color
 			return ColorBgra.Lerp (
 				sorted_colors[^1],
 				EndColor,
 				Utility.InvLerp (sorted_positions[^1], EndPosition, position));
-
 		var immediatelyHigher = KeyValuePair.Create (sorted_positions[matchComplement], sorted_colors[matchComplement]);
-
 		int immediatelyLowerIndex = matchComplement - 1;
-
 		if (immediatelyLowerIndex < 0) // No stops before
 			return ColorBgra.Lerp (
 				StartColor,
 				immediatelyHigher.Value,
 				Utility.InvLerp (StartPosition, immediatelyHigher.Key, position));
-
 		var immediatelyLower = KeyValuePair.Create (sorted_positions[immediatelyLowerIndex], sorted_colors[immediatelyLowerIndex]);
-
 		return ColorBgra.Lerp ( // Stops exist both before and after
 			immediatelyLower.Value,
 			immediatelyHigher.Value,
