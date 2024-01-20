@@ -19,13 +19,13 @@ Thanks to the following contributors who worked on this release:
   - Ported the add-in manager dialog to GTK4
   - The add-in manager dialog now filters out old versions incompatible with the current version of Pinta, or new addins requiring future version of Pinta ([#1580205](https://bugs.launchpad.net/pinta/+bug/1580205))
 - Added a new "Dithering" effect (#457)
-- Added support for exporting to portable pixmap (`.ppm`) files (#549)
+- Added support for exporting to portable pixmap (`.ppm`) files (#549). Importing is not supported yet.
 - Added a nearest-neighbor resampling mode when resizing images (#596)
-- Added support for customizable gradients in the fractal effects (#578)
+- Added support for customizable gradients in the fractal and clouds effects (#578, #678, #683)
 
 ### Changed
 - When building Pinta using the Makefile, 'dotnet publish' is now run during the build step rather than the install step.
-- Added a "Reseed" button for the random noise used by several effects ("Add Noise" and "Frosted Glass").  Previously, the noise pattern changed every time the effect was computed (including when other parameters were changed).
+- Added a "Reseed" button for the random noise used by several effects (such as "Add Noise" and "Frosted Glass").  Previously, the noise pattern changed every time the effect was computed (including when other parameters were changed).
 
 ### Fixed
 - Fixed issues where the system language settings on macOS did not properly take effect in Pinta ([#1976178](https://bugs.launchpad.net/pinta/+bug/1976178))
