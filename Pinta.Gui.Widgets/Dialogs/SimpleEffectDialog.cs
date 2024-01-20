@@ -407,6 +407,7 @@ public sealed class SimpleEffectDialog : Gtk.Dialog
 		var label = Gtk.Label.New (hint);
 		label.Wrap = true;
 		label.Halign = Gtk.Align.Start;
+		label.MaxWidthChars = 40;
 		return label;
 	}
 
