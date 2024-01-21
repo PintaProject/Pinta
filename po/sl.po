@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: pinta\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2024-01-18 03:35+0000\n"
-"PO-Revision-Date: 2024-01-19 00:09+0000\n"
+"PO-Revision-Date: 2024-01-21 03:50+0000\n"
 "Last-Translator: grof <grofaty@hotmail.com>\n"
 "Language-Team: Slovenian <https://hosted.weblate.org/projects/pinta/pinta/sl/"
 ">\n"
@@ -1678,7 +1678,7 @@ msgstr "RGB"
 
 #: ../Pinta.Effects/Effects/RadialBlurEffect.cs:23
 msgid "Radial Blur"
-msgstr "Radialno mehčanje"
+msgstr "Radialna zabrisanost"
 
 #: ../Pinta.Tools/Tools/GradientTool.cs:187
 msgid "Radial Gradient"
@@ -2243,8 +2243,8 @@ msgid ""
 "Use low quality for previews, small images, and small angles.  Use high "
 "quality for final quality, large images, and large angles."
 msgstr ""
-"Uporabi nizko kakovost za predogled, majhne slike, in majhne kote. Uporabi "
-"visoko kakovost za končno kakovost, velike slike, in velike kote."
+"Uporabi nizko kakovost za predogled, majhne slike in majhne kote. Uporabi "
+"visoko kakovost za končno kakovost, velike slike in velike kote."
 
 #: ../Pinta/Actions/Help/AboutDialogAction.cs:85
 msgid "Using some icons from:"
@@ -2318,7 +2318,7 @@ msgstr "Približanje"
 
 #: ../Pinta.Effects/Effects/ZoomBlurEffect.cs:23
 msgid "Zoom Blur"
-msgstr "Povečava mehčanja"
+msgstr "Povečava zabrisanosti"
 
 #: ../Pinta.Core/Actions/ViewActions.cs:67
 msgid "Zoom In"
