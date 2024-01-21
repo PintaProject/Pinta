@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using NUnit.Framework;
@@ -7,8 +8,6 @@ namespace Pinta.Core.Tests;
 [TestFixture]
 internal sealed class RectangleTests
 {
-	// TODO: Let constructor reject incorrect values
-
 	[TestCase (0, 0, 1, 1)]
 	[TestCase (1, 2, 3, 4)]
 	public void ConsistentConstructor (int x, int y, int width, int height)
@@ -35,16 +34,44 @@ internal sealed class RectangleTests
 
 	[TestCaseSource (nameof (union_cases))]
 	public void CorrectUnion (RectangleI a, RectangleI b, RectangleI expected)
-	{
-		RectangleI union = a.Union (b);
-		Assert.That (union, Is.EqualTo (expected));
-	}
+		=> Assert.That (a.Union (b), Is.EqualTo (expected));
 
 	[TestCaseSource (nameof (intersect_cases))]
 	public void CorrectIntersection (RectangleI a, RectangleI b, RectangleI expected)
+		=> Assert.That (a.Intersect (b), Is.EqualTo (expected));
+
+	[TestCaseSource (nameof (inflated_rejection_cases))]
+	public void InflatedRejectsNegative (RectangleI baseRectangle, int widthInflation, int heightInflation)
+		=> Assert.Throws<ArgumentOutOfRangeException> (() => baseRectangle.Inflated (widthInflation, heightInflation));
+
+	[TestCaseSource (nameof (inflation_cases))]
+	public void CorrectInflation (RectangleI a, int widthInflation, int heightInflation, RectangleI expected)
+		=> Assert.That (a.Inflated (widthInflation, heightInflation), Is.EqualTo (expected));
+
+	private static readonly IReadOnlyList<TestCaseData> inflation_cases = CreateInflationCases ().ToArray ();
+	private static IEnumerable<TestCaseData> CreateInflationCases ()
 	{
-		RectangleI intersection = a.Intersect (b);
-		Assert.That (intersection, Is.EqualTo (expected));
+		yield return new (
+			new RectangleI (1, 1, 1, 1),
+			1,
+			1,
+			new RectangleI (0, 0, 3, 3));
+
+		yield return new (
+			new RectangleI (2, 1, 2, 1),
+			2,
+			1,
+			new RectangleI (0, 0, 6, 3));
+	}
+
+	private static readonly IReadOnlyList<TestCaseData> inflated_rejection_cases = CreateInflatedRejectionCases ().ToArray ();
+	private static IEnumerable<TestCaseData> CreateInflatedRejectionCases ()
+	{
+		RectangleI baseRectangle = RectangleI.FromLTRB (0, 0, 1, 1);
+		yield return new (baseRectangle, -1, 0);
+		yield return new (baseRectangle, 0, -1);
+		yield return new (baseRectangle, -1, -1);
+		yield return new (baseRectangle, int.MinValue, int.MinValue);
 	}
 
 	private static readonly IReadOnlyList<TestCaseData> union_cases = CreateUnionCases ().ToArray ();
