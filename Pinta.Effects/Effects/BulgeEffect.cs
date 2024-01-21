@@ -47,31 +47,24 @@ public sealed class BulgeEffect : BaseEffect
 		float hw,
 		float hh,
 		float maxrad,
-		float amt,
+		float amount,
 		int src_width,
 		int src_height);
 	private BulgeSettings CreateSettings (ImageSurface src, ImageSurface dst)
 	{
-		float bulge = Data.Amount;
-
 		float hw = dst.Width / 2f;
 		float hh = dst.Height / 2f;
-		float maxrad = Math.Min (hw, hh);
-		float amt = bulge / 100f;
 
 		hh += (float) Data.Offset.Y * hh;
 		hw += (float) Data.Offset.X * hw;
 
-		int src_width = src.Width;
-		int src_height = src.Height;
-
 		return new BulgeSettings (
 			hw: hw,
 			hh: hh,
-			maxrad: maxrad,
-			amt: amt,
-			src_width: src_width,
-			src_height: src_height
+			maxrad: Math.Min (hw, hh),
+			amount: Data.Amount / 100f,
+			src_width: src.Width,
+			src_height: src.Height
 		);
 	}
 
@@ -88,11 +81,11 @@ public sealed class BulgeEffect : BaseEffect
 
 				float v = pixel.coordinates.Y - settings.hh;
 				float u = pixel.coordinates.X - settings.hw;
-				float r = (float) Math.Sqrt (u * u + v * v);
+				float r = (float) Utility.Magnitude (u, v);
 				float rscale1 = (1f - (r / settings.maxrad));
 
 				if (rscale1 > 0) {
-					float rscale2 = 1 - settings.amt * rscale1 * rscale1;
+					float rscale2 = 1 - settings.amount * rscale1 * rscale1;
 
 					float xp = u * rscale2;
 					float yp = v * rscale2;
