@@ -50,21 +50,10 @@ public sealed class OilPaintingEffect : BaseEffect
 		Span<ColorBgra> dst_data = dest.GetPixelData ();
 
 		foreach (var rect in rois) {
-
-			int rectTop = rect.Top;
-			int rectBottom = rect.Bottom;
-			int rectLeft = rect.Left;
-			int rectRight = rect.Right;
-
-			for (int y = rectTop; y <= rectBottom; ++y) {
-
-				var dst_row = dst_data.Slice (y * settings.width, settings.width);
-
-				int top = Math.Max (y - settings.brushSize, 0);
-				int bottom = Math.Min (y + settings.brushSize + 1, settings.height);
-
-				for (int x = rectLeft; x <= rectRight; ++x)
-					dst_row[x] = GetFinalColor (settings, src_data, top, bottom, x);
+			foreach (var pixel in Utility.GeneratePixelOffsets (rect, new (settings.width, settings.height))) {
+				int top = Math.Max (pixel.coordinates.Y - settings.brushSize, 0);
+				int bottom = Math.Min (pixel.coordinates.Y + settings.brushSize + 1, settings.height);
+				dst_data[pixel.memoryOffset] = GetFinalColor (settings, src_data, top, bottom, x);
 			}
 		}
 	}
