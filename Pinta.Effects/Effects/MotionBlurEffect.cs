@@ -38,15 +38,12 @@ public sealed class MotionBlurEffect : BaseEffect
 	}
 
 	public override void LaunchConfiguration ()
-	{
-		chrome.LaunchSimpleEffectDialog (this);
-	}
+		=> chrome.LaunchSimpleEffectDialog (this);
 
 	#region Algorithm Code Ported From PDN
 
 	private sealed record MotionBlurSettings (
-		int w,
-		int h,
+		Size canvasSize,
 		ImmutableArray<PointD> points);
 
 	private MotionBlurSettings CreateSettings (ImageSurface src)
@@ -74,10 +71,8 @@ public sealed class MotionBlurEffect : BaseEffect
 		}
 
 		return new (
-			w: src.Width,
-			h: src.Height,
-			points: points.MoveToImmutable ()
-		);
+			canvasSize: src.GetSize (),
+			points: points.MoveToImmutable ());
 	}
 
 	public override void Render (ImageSurface src, ImageSurface dst, ReadOnlySpan<RectangleI> rois)
@@ -90,19 +85,16 @@ public sealed class MotionBlurEffect : BaseEffect
 		Span<ColorBgra> dst_data = dst.GetPixelData ();
 
 		foreach (var rect in rois) {
-			for (int y = rect.Top; y <= rect.Bottom; ++y) {
-				var dst_row = dst_data.Slice (y * settings.w, settings.w);
-				for (int x = rect.Left; x <= rect.Right; ++x) {
-					int sampleCount = 0;
-					for (int j = 0; j < settings.points.Length; ++j) {
-						PointD pt = new PointD (settings.points[j].X + x, settings.points[j].Y + y);
-						if (pt.X >= 0 && pt.Y >= 0 && pt.X <= (settings.w - 1) && pt.Y <= (settings.h - 1)) {
-							samples[sampleCount] = src.GetBilinearSample (src_data, settings.w, settings.h, (float) pt.X, (float) pt.Y);
-							++sampleCount;
-						}
-					}
-					dst_row[x] = ColorBgra.Blend (samples[..sampleCount]);
+			foreach (var pixel in Utility.GeneratePixelOffsets (rect, settings.canvasSize)) {
+				int sampleCount = 0;
+				for (int j = 0; j < settings.points.Length; ++j) {
+					PointD pt = new (settings.points[j].X + pixel.coordinates.X, settings.points[j].Y + pixel.coordinates.Y);
+					if (pt.X < 0 || pt.Y < 0 || pt.X > (settings.canvasSize.Width - 1) || pt.Y > (settings.canvasSize.Height - 1))
+						continue;
+					samples[sampleCount] = src.GetBilinearSample (src_data, settings.canvasSize.Width, settings.canvasSize.Height, (float) pt.X, (float) pt.Y);
+					++sampleCount;
 				}
+				dst_data[pixel.memoryOffset] = ColorBgra.Blend (samples[..sampleCount]);
 			}
 		}
 	}
