@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2024-01-18 03:35+0000\n"
-"PO-Revision-Date: 2024-01-20 11:01+0000\n"
+"PO-Revision-Date: 2024-01-21 03:50+0000\n"
 "Last-Translator: Сергей <asvmail.as@gmail.com>\n"
 "Language-Team: Russian <https://hosted.weblate.org/projects/pinta/pinta/ru/>"
 "\n"
@@ -679,7 +679,7 @@ msgstr "Ошибка"
 
 #: ../Pinta.Effects/Effects/DitheringEffect.cs:140
 msgid "Error Diffusion Method"
-msgstr "Метод распространения ошибок"
+msgstr "Метод «Распространения ошибки»"
 
 #: ../Pinta.Core/Classes/SelectionModeHandler.cs:48
 msgid "Exclude (-) (Right Click)"
