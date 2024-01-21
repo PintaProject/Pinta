@@ -45,7 +45,7 @@ public abstract class ColorDifferenceEffect : BaseEffect
 				int fxStart = (pixel.coordinates.X == src_rect.X) ? 1 : 0;
 				int fxEnd = (pixel.coordinates.X == src_rect.X + src_rect.Width - 1) ? 2 : 3;
 
-				dst_data[pixel.memoryOffset] = GetFinalPixelColor (weights, src_data, src_width, fxStart, fxEnd, fyStart, fyEnd, x, y);
+				dst_data[pixel.memoryOffset] = GetFinalPixelColor (weights, src_data, src_width, fxStart, fxEnd, fyStart, fyEnd, pixel.coordinates.X, pixel.coordinates.Y);
 			}
 		}
 	}

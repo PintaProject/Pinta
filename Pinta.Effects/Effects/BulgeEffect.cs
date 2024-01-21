@@ -84,27 +84,22 @@ public sealed class BulgeEffect : BaseEffect
 
 		foreach (RectangleI rect in rois) {
 
-			for (int y = rect.Top; y <= rect.Bottom; y++) {
-				var src_row = src_data.Slice (y * settings.src_width, settings.src_width);
-				var dst_row = dst_data.Slice (y * settings.src_width, settings.src_width);
+			foreach (var pixel in Utility.GeneratePixelOffsets (rect, new Size (settings.src_width, settings.src_height))) {
 
+				float v = pixel.coordinates.Y - settings.hh;
+				float u = pixel.coordinates.X - settings.hw;
+				float r = (float) Math.Sqrt (u * u + v * v);
+				float rscale1 = (1f - (r / settings.maxrad));
 
-				for (int x = rect.Left; x <= rect.Right; x++) {
-					float v = y - settings.hh;
-					float u = x - settings.hw;
-					float r = (float) Math.Sqrt (u * u + v * v);
-					float rscale1 = (1f - (r / settings.maxrad));
+				if (rscale1 > 0) {
+					float rscale2 = 1 - settings.amt * rscale1 * rscale1;
 
-					if (rscale1 > 0) {
-						float rscale2 = 1 - settings.amt * rscale1 * rscale1;
+					float xp = u * rscale2;
+					float yp = v * rscale2;
 
-						float xp = u * rscale2;
-						float yp = v * rscale2;
-
-						dst_row[x] = src.GetBilinearSampleClamped (src_data, settings.src_width, settings.src_height, xp + settings.hw, yp + settings.hh);
-					} else {
-						dst_row[x] = src_row[x];
-					}
+					dst_data[pixel.memoryOffset] = src.GetBilinearSampleClamped (src_data, settings.src_width, settings.src_height, xp + settings.hw, yp + settings.hh);
+				} else {
+					dst_data[pixel.memoryOffset] = src_data[pixel.memoryOffset];
 				}
 			}
 		}
