@@ -40,24 +40,28 @@ public sealed class JuliaFractalEffect : BaseEffect
 	}
 
 	public override void LaunchConfiguration ()
-	{
-		chrome.LaunchSimpleEffectDialog (this);
-	}
+		=> chrome.LaunchSimpleEffectDialog (this);
 
 	#region Algorithm Code Ported From PDN
 
 	private static readonly double log2_10000 = Math.Log (10000);
 
-	private static double Julia (double x, double y, double r, double i)
+	private static double Julia (PointD jLoc, double r, double i)
 	{
 		double c = 0;
-		while (c < 256 && Utility.MagnitudeSquared (x, y) < 10000) {
-			double t = x;
-			x = (x * x) - (y * y) + r;
-			y = (2 * t * y) + i;
+		while (c < 256 && Utility.MagnitudeSquared (jLoc) < 10000) {
+			jLoc = GetNextLocation (jLoc, r, i);
 			++c;
 		}
-		return c - (2 - 2 * log2_10000 / Math.Log (Utility.MagnitudeSquared (x, y)));
+		return c - (2 - 2 * log2_10000 / Math.Log (Utility.MagnitudeSquared (jLoc)));
+	}
+
+	private static PointD GetNextLocation (PointD jLoc, double r, double i)
+	{
+		double t = jLoc.X;
+		double x = (jLoc.X * jLoc.X) - (jLoc.Y * jLoc.Y) + r;
+		double y = (2 * t * jLoc.Y) + i;
+		return new (x, y);
 	}
 
 	public override void Render (ImageSurface src, ImageSurface dst, ReadOnlySpan<RectangleI> rois)
@@ -129,10 +133,12 @@ public sealed class JuliaFractalEffect : BaseEffect
 			double uP = radiusP * Math.Cos (thetaP);
 			double vP = radiusP * Math.Sin (thetaP);
 
-			double jX = (uP - vP * settings.aspect) * settings.invZoom;
-			double jY = (vP + uP * settings.aspect) * settings.invZoom;
+			PointD jLoc = new (
+				X: (uP - vP * settings.aspect) * settings.invZoom,
+				Y: (vP + uP * settings.aspect) * settings.invZoom
+			);
 
-			double j = Julia (jX, jY, Jr, Ji);
+			double j = Julia (jLoc, Jr, Ji);
 
 			double c = settings.factor * j;
 
