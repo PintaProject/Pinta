@@ -25,9 +25,7 @@ public sealed class DitheringEffect : BaseEffect
 	}
 
 	public override void LaunchConfiguration ()
-	{
-		chrome.LaunchSimpleEffectDialog (this);
-	}
+		=> chrome.LaunchSimpleEffectDialog (this);
 
 	private sealed record DitheringSettings (
 		ErrorDiffusionMatrix diffusionMatrix,
@@ -57,48 +55,43 @@ public sealed class DitheringEffect : BaseEffect
 			}
 		}
 
-		for (int y = roi.Top; y <= roi.Bottom; y++) {
+		foreach (var pixel in Utility.GeneratePixelOffsets (roi, dest.GetSize ())) {
 
-			for (int x = roi.Left; x <= roi.Right; x++) {
+			ColorBgra originalPixel = dst_data[pixel.memoryOffset];
+			ColorBgra closestColor = FindClosestPaletteColor (settings.palette, originalPixel);
 
-				int currentIndex = y * settings.sourceWidth + x;
-				ColorBgra originalPixel = dst_data[currentIndex];
-				ColorBgra closestColor = FindClosestPaletteColor (settings.palette, originalPixel);
+			dst_data[pixel.memoryOffset] = closestColor;
 
-				dst_data[currentIndex] = closestColor;
+			int errorRed = originalPixel.R - closestColor.R;
+			int errorGreen = originalPixel.G - closestColor.G;
+			int errorBlue = originalPixel.B - closestColor.B;
 
-				int errorRed = originalPixel.R - closestColor.R;
-				int errorGreen = originalPixel.G - closestColor.G;
-				int errorBlue = originalPixel.B - closestColor.B;
+			for (int r = 0; r < settings.diffusionMatrix.Rows; r++) {
 
-				for (int r = 0; r < settings.diffusionMatrix.Rows; r++) {
+				for (int c = 0; c < settings.diffusionMatrix.Columns; c++) {
 
-					for (int c = 0; c < settings.diffusionMatrix.Columns; c++) {
+					var weight = settings.diffusionMatrix[r, c];
 
-						var weight = settings.diffusionMatrix[r, c];
+					if (weight <= 0)
+						continue;
 
-						if (weight <= 0)
-							continue;
+					PointI thisItem = new (
+						X: pixel.coordinates.X + c - settings.diffusionMatrix.ColumnsToLeft,
+						Y: pixel.coordinates.Y + r
+					);
 
-						PointI thisItem = new (
-							X: x + c - settings.diffusionMatrix.ColumnsToLeft,
-							Y: y + r
-						);
+					if (thisItem.X < roi.Left || thisItem.X >= roi.Right)
+						continue;
 
-						if (thisItem.X < roi.Left || thisItem.X >= roi.Right)
-							continue;
+					if (thisItem.Y < roi.Top || thisItem.Y >= roi.Bottom)
+						continue;
 
-						if (thisItem.Y < roi.Top || thisItem.Y >= roi.Bottom)
-							continue;
+					int idx = (thisItem.Y * settings.sourceWidth) + thisItem.X;
 
-						int idx = (thisItem.Y * settings.sourceWidth) + thisItem.X;
+					double factor = ((double) weight) / settings.diffusionMatrix.TotalWeight;
 
-						double factor = ((double) weight) / settings.diffusionMatrix.TotalWeight;
-
-						dst_data[idx] = AddError (dst_data[idx], factor, errorRed, errorGreen, errorBlue);
-					}
+					dst_data[idx] = AddError (dst_data[idx], factor, errorRed, errorGreen, errorBlue);
 				}
-
 			}
 		}
 	}
