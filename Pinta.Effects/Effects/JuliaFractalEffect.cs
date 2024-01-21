@@ -64,20 +64,13 @@ public sealed class JuliaFractalEffect : BaseEffect
 	{
 		JuliaSettings settings = CreateSettings (dst);
 		Span<ColorBgra> dst_data = dst.GetPixelData ();
-		foreach (RectangleI rect in rois) {
-			for (int y = rect.Top; y <= rect.Bottom; y++) {
-				var dst_row = dst_data.Slice (y * settings.w, settings.w);
-				for (int x = rect.Left; x <= rect.Right; x++) {
-					PointI target = new (x, y);
-					dst_row[x] = GetPixelColor (settings, target);
-				}
-			}
-		}
+		foreach (RectangleI rect in rois)
+			foreach (var pixel in Utility.GeneratePixelOffsets (rect, settings.canvasSize))
+				dst_data[pixel.memoryOffset] = GetPixelColor (settings, pixel.coordinates);
 	}
 
 	private sealed record JuliaSettings (
-		int w,
-		int h,
+		Size canvasSize,
 		double invH,
 		double invZoom,
 		double invQuality,
@@ -89,8 +82,7 @@ public sealed class JuliaFractalEffect : BaseEffect
 		ColorGradient colorGradient);
 	private JuliaSettings CreateSettings (ImageSurface dst)
 	{
-		var w = dst.Width;
-		var h = dst.Height;
+		Size canvasSize = dst.GetSize ();
 		var count = Data.Quality * Data.Quality + 1;
 
 		var baseGradient =
@@ -103,12 +95,11 @@ public sealed class JuliaFractalEffect : BaseEffect
 			.Resized (0, 1023);
 
 		return new (
-			w: w,
-			h: h,
-			invH: 1.0 / h,
+			canvasSize: canvasSize,
+			invH: 1.0 / canvasSize.Height,
 			invZoom: 1.0 / Data.Zoom,
 			invQuality: 1.0 / Data.Quality,
-			aspect: h / (double) w,
+			aspect: canvasSize.Height / (double) canvasSize.Width,
 			count: count,
 			invCount: 1.0 / count,
 			angleTheta: (Data.Angle.Degrees * Math.PI * 2) / 360.0,
@@ -127,8 +118,8 @@ public sealed class JuliaFractalEffect : BaseEffect
 		int a = 0;
 
 		for (double i = 0; i < settings.count; i++) {
-			double u = (2.0 * target.X - settings.w + (i * settings.invCount)) * settings.invH;
-			double v = (2.0 * target.Y - settings.h + ((i * settings.invQuality) % 1)) * settings.invH;
+			double u = (2.0 * target.X - settings.canvasSize.Width + (i * settings.invCount)) * settings.invH;
+			double v = (2.0 * target.Y - settings.canvasSize.Height + ((i * settings.invQuality) % 1)) * settings.invH;
 
 			double radius = Math.Sqrt ((u * u) + (v * v));
 			double radiusP = radius;
