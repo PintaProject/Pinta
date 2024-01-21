@@ -87,9 +87,10 @@ public sealed class BulgeEffect : BaseEffect
 			for (int y = rect.Top; y <= rect.Bottom; y++) {
 				var src_row = src_data.Slice (y * settings.src_width, settings.src_width);
 				var dst_row = dst_data.Slice (y * settings.src_width, settings.src_width);
-				float v = y - settings.hh;
+
 
 				for (int x = rect.Left; x <= rect.Right; x++) {
+					float v = y - settings.hh;
 					float u = x - settings.hw;
 					float r = (float) Math.Sqrt (u * u + v * v);
 					float rscale1 = (1f - (r / settings.maxrad));

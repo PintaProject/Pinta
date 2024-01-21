@@ -37,22 +37,15 @@ public abstract class ColorDifferenceEffect : BaseEffect
 
 		foreach (RectangleI rect in rois) {
 
-			// loop through each line of target rectangle
-			for (int y = rect.Y; y < rect.Y + rect.Height; ++y) {
+			foreach (var pixel in Utility.GeneratePixelOffsets (rect, src.GetSize ())) {
 
-				int fyStart = (y == src_rect.Y) ? 1 : 0;
-				int fyEnd = (y == src_rect.Y + src_rect.Height - 1) ? 2 : 3;
+				int fyStart = (pixel.coordinates.Y == src_rect.Y) ? 1 : 0;
+				int fyEnd = (pixel.coordinates.Y == src_rect.Y + src_rect.Height - 1) ? 2 : 3;
 
-				// loop through each point in the line
-				var dst_row = dst_data[(y * src_width)..];
+				int fxStart = (pixel.coordinates.X == src_rect.X) ? 1 : 0;
+				int fxEnd = (pixel.coordinates.X == src_rect.X + src_rect.Width - 1) ? 2 : 3;
 
-				for (int x = rect.X; x < rect.X + rect.Width; ++x) {
-
-					int fxStart = (x == src_rect.X) ? 1 : 0;
-					int fxEnd = (x == src_rect.X + src_rect.Width - 1) ? 2 : 3;
-
-					dst_row[x] = GetFinalPixelColor (weights, src_data, src_width, fxStart, fxEnd, fyStart, fyEnd, x, y);
-				}
+				dst_data[pixel.memoryOffset] = GetFinalPixelColor (weights, src_data, src_width, fxStart, fxEnd, fyStart, fyEnd, x, y);
 			}
 		}
 	}
