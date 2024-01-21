@@ -321,7 +321,7 @@ internal sealed class EffectsTest
 
 	[Test]
 	[Ignore ("Depends on PintaCore being initialized")]
-	public void PolarInversion ()
+	public void PolarInversion1 ()
 	{
 		// TODO
 	}
@@ -452,6 +452,45 @@ internal sealed class EffectsTest
 		UnfocusEffect effect = new (Utilities.CreateMockServices ());
 		effect.Data.Radius = 50;
 		Utilities.TestEffect (effect, "unfocus2.png");
+	}
+
+	[Test]
+	public void Voronoi1 ()
+	{
+		var effect = new VoronoiDiagramEffect (Utilities.CreateMockServices ());
+		Utilities.TestEffect (effect, "voronoi1.png");
+	}
+
+	[Test]
+	public void Voronoi2 ()
+	{
+		var effect = new VoronoiDiagramEffect (Utilities.CreateMockServices ());
+		effect.Data.NumberOfCells = 200;
+		Utilities.TestEffect (effect, "voronoi2.png");
+	}
+
+	[Test]
+	public void Voronoi3 ()
+	{
+		var effect = new VoronoiDiagramEffect (Utilities.CreateMockServices ());
+		effect.Data.DistanceMetric = VoronoiDiagramEffect.DistanceMetric.Manhattan;
+		Utilities.TestEffect (effect, "voronoi3.png");
+	}
+
+	[Test]
+	public void Voronoi4 ()
+	{
+		var effect = new VoronoiDiagramEffect (Utilities.CreateMockServices ());
+		effect.Data.ColorSorting = VoronoiDiagramEffect.ColorSorting.HorizontalB;
+		Utilities.TestEffect (effect, "voronoi4.png");
+	}
+
+	[Test]
+	public void Voronoi5 ()
+	{
+		var effect = new VoronoiDiagramEffect (Utilities.CreateMockServices ());
+		effect.Data.ColorSorting = VoronoiDiagramEffect.ColorSorting.VerticalB;
+		Utilities.TestEffect (effect, "voronoi5.png");
 	}
 
 	[Test]
