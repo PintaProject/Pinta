@@ -76,8 +76,7 @@ public sealed class MandelbrotFractalEffect : BaseEffect
 	}
 
 	private sealed record MandelbrotSettings (
-		int w,
-		int h,
+		Size canvasSize,
 		double invH,
 		double invZoom,
 		double invQuality,
@@ -89,7 +88,7 @@ public sealed class MandelbrotFractalEffect : BaseEffect
 		ColorGradient colorGradient);
 	private MandelbrotSettings CreateSettings (ImageSurface dst)
 	{
-		int h = dst.Height;
+		Size canvasSize = new (dst.Width, dst.Height);
 		double zoom = 1 + Zoom_factor * Data.Zoom;
 		int count = Data.Quality * Data.Quality + 1;
 
@@ -104,10 +103,9 @@ public sealed class MandelbrotFractalEffect : BaseEffect
 
 		return new (
 
-			w: dst.Width,
-			h: h,
+			canvasSize: canvasSize,
 
-			invH: 1.0 / h,
+			invH: 1.0 / canvasSize.Height,
 			invZoom: 1.0 / zoom,
 
 			invQuality: 1.0 / Data.Quality,
@@ -127,15 +125,10 @@ public sealed class MandelbrotFractalEffect : BaseEffect
 	public override void Render (ImageSurface src, ImageSurface dst, ReadOnlySpan<RectangleI> rois)
 	{
 		MandelbrotSettings settings = CreateSettings (dst);
-
 		Span<ColorBgra> dst_data = dst.GetPixelData ();
-		foreach (RectangleI rect in rois) {
-			for (int y = rect.Top; y <= rect.Bottom; y++) {
-				var dst_row = dst_data.Slice (y * settings.w, settings.w);
-				for (int x = rect.Left; x <= rect.Right; x++)
-					dst_row[x] = GetPixelColor (settings, new (x, y));
-			}
-		}
+		foreach (RectangleI rect in rois)
+			foreach (var pixel in Utility.GeneratePixelOffsets (rect, settings.canvasSize))
+				dst_data[pixel.memoryOffset] = GetPixelColor (settings, pixel.coordinates);
 
 		if (settings.invertColors)
 			invert_effect.Render (dst, dst, rois);
@@ -149,10 +142,10 @@ public sealed class MandelbrotFractalEffect : BaseEffect
 		int a = 0;
 		for (double i = 0; i < settings.count; i++) {
 
-			double u = (2.0 * target.X - settings.w + (i * settings.invCount)) * settings.invH;
-			double v = (2.0 * target.Y - settings.h + (i * settings.invQuality % 1)) * settings.invH;
+			double u = (2.0 * target.X - settings.canvasSize.Width + (i * settings.invCount)) * settings.invH;
+			double v = (2.0 * target.Y - settings.canvasSize.Height + (i * settings.invQuality % 1)) * settings.invH;
 
-			double radius = Math.Sqrt ((u * u) + (v * v));
+			double radius = Utility.Magnitude (u, v);
 			double radiusP = radius;
 			double theta = Math.Atan2 (v, u);
 			double thetaP = theta + settings.angleTheta.Radians;
