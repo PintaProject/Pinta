@@ -156,43 +156,26 @@ internal sealed class ColorGradient
 
 	private ColorBgra HandleWithStops (double position)
 	{
-		int immediatelyHigherIndex = BinarySearchHigherOrEqual (sorted_positions, position);
-
-		if (immediatelyHigherIndex < 0)
+		int matchIndex = sorted_positions.BinarySearch (position);
+		if (matchIndex >= 0) return sorted_colors[matchIndex]; // Exact match
+		int matchComplement = ~matchIndex;
+		if (matchComplement == sorted_positions.Length) // Not found. Using end color
 			return ColorBgra.Lerp (
 				sorted_colors[^1],
 				EndColor,
 				Utility.InvLerp (sorted_positions[^1], EndPosition, position));
-
-		var immediatelyHigher = KeyValuePair.Create (sorted_positions[immediatelyHigherIndex], sorted_colors[immediatelyHigherIndex]);
-
-		if (immediatelyHigher.Key == position)
-			return immediatelyHigher.Value;
-
-		int immediatelyLowerIndex = immediatelyHigherIndex - 1;
-
-		if (immediatelyLowerIndex < 0)
+		var immediatelyHigher = KeyValuePair.Create (sorted_positions[matchComplement], sorted_colors[matchComplement]);
+		int immediatelyLowerIndex = matchComplement - 1;
+		if (immediatelyLowerIndex < 0) // No stops before
 			return ColorBgra.Lerp (
 				StartColor,
 				immediatelyHigher.Value,
 				Utility.InvLerp (StartPosition, immediatelyHigher.Key, position));
-
 		var immediatelyLower = KeyValuePair.Create (sorted_positions[immediatelyLowerIndex], sorted_colors[immediatelyLowerIndex]);
-
-		return ColorBgra.Lerp (
+		return ColorBgra.Lerp ( // Stops exist both before and after
 			immediatelyLower.Value,
 			immediatelyHigher.Value,
 			Utility.InvLerp (immediatelyLower.Key, immediatelyHigher.Key, position));
-	}
-
-	private static int BinarySearchHigherOrEqual (ImmutableArray<double> sortedPositions, double target)
-	{
-		if (sortedPositions.Length == 0) return -1;
-		int found = sortedPositions.BinarySearch (target);
-		if (found >= 0) return found; // Exact match
-		int foundComplement = ~found;
-		if (foundComplement == sortedPositions.Length) return -1; // Not found
-		return foundComplement; // Found larger
 	}
 
 	private static IEnumerable<KeyValuePair<double, ColorBgra>> EmptyStops ()
