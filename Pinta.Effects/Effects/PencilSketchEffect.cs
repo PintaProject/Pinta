@@ -68,19 +68,14 @@ public sealed class PencilSketchEffect : BaseEffect
 		desaturate_op.Apply (dest, dest, rois);
 
 		var dst_data = dest.GetPixelData ();
-		int dst_width = dest.Width;
 		var src_data = src.GetReadOnlyPixelData ();
-		int src_width = src.Width;
+
+		Size canvasSize = src.GetSize ();
 
 		foreach (RectangleI roi in rois) {
-			for (int y = roi.Top; y <= roi.Bottom; ++y) {
-				var src_row = src_data.Slice (y * src_width, src_width);
-				var dst_row = dst_data.Slice (y * dst_width, dst_width);
-
-				for (int x = roi.Left; x <= roi.Right; ++x) {
-					ColorBgra srcGrey = desaturate_op.Apply (src_row[x]);
-					dst_row[x] = color_dodge_op.Apply (srcGrey, dst_row[x]);
-				}
+			foreach (var pixel in Utility.GeneratePixelOffsets (roi, canvasSize)) {
+				ColorBgra srcGrey = desaturate_op.Apply (src_data[pixel.memoryOffset]);
+				dst_data[pixel.memoryOffset] = color_dodge_op.Apply (srcGrey, dst_data[pixel.memoryOffset]);
 			}
 		}
 	}
