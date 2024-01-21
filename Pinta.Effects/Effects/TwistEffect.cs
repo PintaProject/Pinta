@@ -39,9 +39,7 @@ public sealed class TwistEffect : BaseEffect
 	}
 
 	public override void LaunchConfiguration ()
-	{
-		chrome.LaunchSimpleEffectDialog (this);
-	}
+		=> chrome.LaunchSimpleEffectDialog (this);
 
 	#region Algorithm Code Ported From PDN
 	public override void Render (ImageSurface src, ImageSurface dst, ReadOnlySpan<RectangleI> rois)
@@ -52,28 +50,16 @@ public sealed class TwistEffect : BaseEffect
 		Span<ColorBgra> dst_data = dst.GetPixelData ();
 
 		foreach (var rect in rois) {
-			for (int y = rect.Top; y <= rect.Bottom; y++) {
-				float j = y - settings.HalfHeight;
-				var rowOffset = y * src.Width;
-				var src_row = src_data.Slice (rowOffset, src.Width);
-				var dst_row = dst_data.Slice (rowOffset, src.Width);
-				for (int x = rect.Left; x <= rect.Right; x++) {
-					float i = x - settings.HalfWidth;
-					dst_row[x] =
-						(i * i + j * j > (settings.Maxrad + 1) * (settings.Maxrad + 1))
-						? src_row[x]
-						: GetFinalPixelColor (src, settings, src_data, j, i);
-				}
+			foreach (var pixel in Utility.GeneratePixelOffsets (rect, src.GetSize ())) {
+				float j = pixel.coordinates.Y - settings.HalfHeight;
+				float i = pixel.coordinates.X - settings.HalfWidth;
+				dst_data[pixel.memoryOffset] =
+					(i * i + j * j > (settings.Maxrad + 1) * (settings.Maxrad + 1))
+					? src_data[pixel.memoryOffset]
+					: GetFinalPixelColor (src, settings, src_data, j, i);
 			}
 		}
 	}
-
-	private sealed record RenderSettings (
-		float HalfWidth,
-		float HalfHeight,
-		float Maxrad,
-		float Twist,
-		ImmutableArray<PointD> AntialiasPoints);
 
 	private static ColorBgra GetFinalPixelColor (ImageSurface src, RenderSettings settings, ReadOnlySpan<ColorBgra> src_data, float j, float i)
 	{
@@ -112,6 +98,13 @@ public sealed class TwistEffect : BaseEffect
 			(byte) (r / antialiasSamples),
 			(byte) (a / antialiasSamples));
 	}
+
+	private sealed record RenderSettings (
+		float HalfWidth,
+		float HalfHeight,
+		float Maxrad,
+		float Twist,
+		ImmutableArray<PointD> AntialiasPoints);
 
 	private RenderSettings CreateSettings (ImageSurface dst)
 	{
