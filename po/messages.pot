@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-01-18 03:35+0000\n"
+"POT-Creation-Date: 2024-01-21 01:15+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -105,7 +105,7 @@ msgstr ""
 #: ../Pinta.Effects/Effects/EdgeDetectEffect.cs:83
 #: ../Pinta.Effects/Effects/EmbossEffect.cs:150
 #: ../Pinta.Effects/Effects/JuliaFractalEffect.cs:190
-#: ../Pinta.Effects/Effects/MandelbrotFractalEffect.cs:199
+#: ../Pinta.Effects/Effects/MandelbrotFractalEffect.cs:201
 #: ../Pinta.Effects/Effects/MotionBlurEffect.cs:104
 #: ../Pinta.Effects/Effects/RadialBlurEffect.cs:172
 #: ../Pinta.Effects/Effects/ReliefEffect.cs:85
@@ -442,13 +442,13 @@ msgstr ""
 #: ../Pinta.Core/Actions/ViewActions.cs:181
 #: ../Pinta.Effects/Effects/CloudsEffect.cs:250
 #: ../Pinta.Effects/Effects/JuliaFractalEffect.cs:181
-#: ../Pinta.Effects/Effects/MandelbrotFractalEffect.cs:205
+#: ../Pinta.Effects/Effects/MandelbrotFractalEffect.cs:207
 msgid "Color Scheme"
 msgstr ""
 
 #: ../Pinta.Effects/Effects/CloudsEffect.cs:247
 #: ../Pinta.Effects/Effects/JuliaFractalEffect.cs:178
-#: ../Pinta.Effects/Effects/MandelbrotFractalEffect.cs:202
+#: ../Pinta.Effects/Effects/MandelbrotFractalEffect.cs:204
 msgid "Color Scheme Source"
 msgstr ""
 
@@ -678,7 +678,7 @@ msgid "Extension packages"
 msgstr ""
 
 #: ../Pinta.Effects/Effects/JuliaFractalEffect.cs:169
-#: ../Pinta.Effects/Effects/MandelbrotFractalEffect.cs:189
+#: ../Pinta.Effects/Effects/MandelbrotFractalEffect.cs:191
 msgid "Factor"
 msgstr ""
 
@@ -979,7 +979,7 @@ msgid "Intersect ({0} + Left Click)"
 msgstr ""
 
 #: ../Pinta.Effects/Adjustments/InvertColorsEffect.cs:24
-#: ../Pinta.Effects/Effects/MandelbrotFractalEffect.cs:214
+#: ../Pinta.Effects/Effects/MandelbrotFractalEffect.cs:216
 msgid "Invert Colors"
 msgstr ""
 
@@ -1596,7 +1596,7 @@ msgid "Print"
 msgstr ""
 
 #: ../Pinta.Effects/Effects/JuliaFractalEffect.cs:172
-#: ../Pinta.Effects/Effects/MandelbrotFractalEffect.cs:192
+#: ../Pinta.Effects/Effects/MandelbrotFractalEffect.cs:194
 #: ../Pinta.Effects/Effects/RadialBlurEffect.cs:178
 #: ../Pinta.Effects/Effects/WarpEffect.cs:187
 msgid "Quality"
@@ -1637,7 +1637,7 @@ msgstr ""
 
 #: ../Pinta.Effects/Effects/CloudsEffect.cs:253
 #: ../Pinta.Effects/Effects/JuliaFractalEffect.cs:184
-#: ../Pinta.Effects/Effects/MandelbrotFractalEffect.cs:208
+#: ../Pinta.Effects/Effects/MandelbrotFractalEffect.cs:210
 msgid "Random Color Scheme Seed"
 msgstr ""
 
@@ -1759,7 +1759,7 @@ msgstr ""
 
 #: ../Pinta.Effects/Effects/CloudsEffect.cs:256
 #: ../Pinta.Effects/Effects/JuliaFractalEffect.cs:187
-#: ../Pinta.Effects/Effects/MandelbrotFractalEffect.cs:211
+#: ../Pinta.Effects/Effects/MandelbrotFractalEffect.cs:213
 msgid "Reverse Color Scheme"
 msgstr ""
 
@@ -2238,7 +2238,7 @@ msgid ""
 msgstr ""
 
 #: ../Pinta.Effects/Effects/JuliaFractalEffect.cs:175
-#: ../Pinta.Effects/Effects/MandelbrotFractalEffect.cs:196
+#: ../Pinta.Effects/Effects/MandelbrotFractalEffect.cs:198
 #: ../Pinta.Tools/Tools/ZoomTool.cs:55
 #: ../Pinta/Actions/Layers/RotateZoomLayerAction.cs:121
 msgid "Zoom"
