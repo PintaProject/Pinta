@@ -32,6 +32,10 @@ internal sealed class RectangleTests
 		Assert.That (built.Bottom, Is.EqualTo (b));
 	}
 
+	[TestCaseSource (nameof (not_equal_cases))]
+	public void CorrectNotEqual (RectangleI a, RectangleI b)
+		=> Assert.That (a, Is.Not.EqualTo (b));
+
 	[TestCaseSource (nameof (union_cases))]
 	public void CorrectUnion (RectangleI a, RectangleI b, RectangleI expected)
 		=> Assert.That (a.Union (b), Is.EqualTo (expected));
@@ -100,5 +104,17 @@ internal sealed class RectangleTests
 			RectangleI.FromLTRB (0, 0, 1, 1),
 			RectangleI.FromLTRB (2, 2, 3, 3),
 			RectangleI.Zero);
+	}
+
+	private static readonly IReadOnlyList<TestCaseData> not_equal_cases = CreateNotEqualCases ().ToArray ();
+	private static IEnumerable<TestCaseData> CreateNotEqualCases ()
+	{
+		yield return new (
+			RectangleI.FromLTRB (0, 0, 0, 0),
+			RectangleI.FromLTRB (0, 0, 1, 1));
+
+		yield return new (
+			RectangleI.FromLTRB (1, 1, 1, 1),
+			RectangleI.FromLTRB (0, 0, 1, 1));
 	}
 }
