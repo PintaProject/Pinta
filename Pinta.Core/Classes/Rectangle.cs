@@ -172,8 +172,6 @@ public readonly record struct RectangleI (int X, int Y, int Width, int Height)
 
 	public readonly RectangleI Inflated (int width, int height)
 	{
-		if (width < 0) throw new ArgumentOutOfRangeException (nameof (width));
-		if (height < 0) throw new ArgumentOutOfRangeException (nameof (height));
 		var newX = X - width;
 		var newY = Y - height;
 		var newWidth = Width + (width * 2);
