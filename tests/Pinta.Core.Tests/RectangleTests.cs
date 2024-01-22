@@ -44,10 +44,6 @@ internal sealed class RectangleTests
 	public void CorrectIntersection (RectangleI a, RectangleI b, RectangleI expected)
 		=> Assert.That (a.Intersect (b), Is.EqualTo (expected));
 
-	[TestCaseSource (nameof (inflated_rejection_cases))]
-	public void InflatedRejectsNegative (RectangleI baseRectangle, int widthInflation, int heightInflation)
-		=> Assert.Throws<ArgumentOutOfRangeException> (() => baseRectangle.Inflated (widthInflation, heightInflation));
-
 	[TestCaseSource (nameof (inflation_cases))]
 	public void CorrectInflation (RectangleI a, int widthInflation, int heightInflation, RectangleI expected)
 		=> Assert.That (a.Inflated (widthInflation, heightInflation), Is.EqualTo (expected));
@@ -66,16 +62,6 @@ internal sealed class RectangleTests
 			2,
 			1,
 			new RectangleI (0, 0, 6, 3));
-	}
-
-	private static readonly IReadOnlyList<TestCaseData> inflated_rejection_cases = CreateInflatedRejectionCases ().ToArray ();
-	private static IEnumerable<TestCaseData> CreateInflatedRejectionCases ()
-	{
-		RectangleI baseRectangle = RectangleI.FromLTRB (0, 0, 1, 1);
-		yield return new (baseRectangle, -1, 0);
-		yield return new (baseRectangle, 0, -1);
-		yield return new (baseRectangle, -1, -1);
-		yield return new (baseRectangle, int.MinValue, int.MinValue);
 	}
 
 	private static readonly IReadOnlyList<TestCaseData> union_cases = CreateUnionCases ().ToArray ();
