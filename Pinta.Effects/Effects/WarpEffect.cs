@@ -49,9 +49,7 @@ public abstract class WarpEffect : BaseEffect
 	}
 
 	public override void LaunchConfiguration ()
-	{
-		Chrome.LaunchSimpleEffectDialog (this);
-	}
+		=> Chrome.LaunchSimpleEffectDialog (this);
 
 	protected double DefaultRadius { get; private set; } = 0;
 	protected double DefaultRadius2 { get; private set; } = 0;
@@ -75,13 +73,9 @@ public abstract class WarpEffect : BaseEffect
 		ReadOnlySpan<ColorBgra> src_data = src.GetReadOnlyPixelData ();
 
 		foreach (RectangleI rect in rois) {
-			for (int y = rect.Top; y <= rect.Bottom; y++) {
-				var dst_row = dst_data.Slice (y * dst.Width, dst.Width);
-				double relativeY = y - settings.y_center_offset;
-				for (int x = rect.Left; x <= rect.Right; x++) {
-					PointI target = new (x, y);
-					dst_row[x] = GetPixelColor (settings, src, src_data, aaPoints, relativeY, target);
-				}
+			foreach (var pixel in Utility.GeneratePixelOffsets (rect, src.GetSize ())) {
+				double relativeY = pixel.coordinates.Y - settings.y_center_offset;
+				dst_data[pixel.memoryOffset] = GetPixelColor (settings, src, src_data, aaPoints, relativeY, pixel.coordinates);
 			}
 		}
 	}

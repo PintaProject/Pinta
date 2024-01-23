@@ -40,44 +40,41 @@ public sealed class JuliaFractalEffect : BaseEffect
 	}
 
 	public override void LaunchConfiguration ()
-	{
-		chrome.LaunchSimpleEffectDialog (this);
-	}
+		=> chrome.LaunchSimpleEffectDialog (this);
 
 	#region Algorithm Code Ported From PDN
 
 	private static readonly double log2_10000 = Math.Log (10000);
 
-	private static double Julia (double x, double y, double r, double i)
+	private static double Julia (PointD jLoc, double r, double i)
 	{
 		double c = 0;
-		while (c < 256 && Utility.MagnitudeSquared (x, y) < 10000) {
-			double t = x;
-			x = (x * x) - (y * y) + r;
-			y = (2 * t * y) + i;
+		while (c < 256 && Utility.MagnitudeSquared (jLoc) < 10000) {
+			jLoc = GetNextLocation (jLoc, r, i);
 			++c;
 		}
-		return c - (2 - 2 * log2_10000 / Math.Log (Utility.MagnitudeSquared (x, y)));
+		return c - (2 - 2 * log2_10000 / Math.Log (Utility.MagnitudeSquared (jLoc)));
+	}
+
+	private static PointD GetNextLocation (PointD jLoc, double r, double i)
+	{
+		double t = jLoc.X;
+		double x = (jLoc.X * jLoc.X) - (jLoc.Y * jLoc.Y) + r;
+		double y = (2 * t * jLoc.Y) + i;
+		return new (x, y);
 	}
 
 	public override void Render (ImageSurface src, ImageSurface dst, ReadOnlySpan<RectangleI> rois)
 	{
 		JuliaSettings settings = CreateSettings (dst);
 		Span<ColorBgra> dst_data = dst.GetPixelData ();
-		foreach (RectangleI rect in rois) {
-			for (int y = rect.Top; y <= rect.Bottom; y++) {
-				var dst_row = dst_data.Slice (y * settings.w, settings.w);
-				for (int x = rect.Left; x <= rect.Right; x++) {
-					PointI target = new (x, y);
-					dst_row[x] = GetPixelColor (settings, target);
-				}
-			}
-		}
+		foreach (RectangleI rect in rois)
+			foreach (var pixel in Utility.GeneratePixelOffsets (rect, settings.canvasSize))
+				dst_data[pixel.memoryOffset] = GetPixelColor (settings, pixel.coordinates);
 	}
 
 	private sealed record JuliaSettings (
-		int w,
-		int h,
+		Size canvasSize,
 		double invH,
 		double invZoom,
 		double invQuality,
@@ -89,8 +86,7 @@ public sealed class JuliaFractalEffect : BaseEffect
 		ColorGradient colorGradient);
 	private JuliaSettings CreateSettings (ImageSurface dst)
 	{
-		var w = dst.Width;
-		var h = dst.Height;
+		Size canvasSize = dst.GetSize ();
 		var count = Data.Quality * Data.Quality + 1;
 
 		var baseGradient =
@@ -103,12 +99,11 @@ public sealed class JuliaFractalEffect : BaseEffect
 			.Resized (0, 1023);
 
 		return new (
-			w: w,
-			h: h,
-			invH: 1.0 / h,
+			canvasSize: canvasSize,
+			invH: 1.0 / canvasSize.Height,
 			invZoom: 1.0 / Data.Zoom,
 			invQuality: 1.0 / Data.Quality,
-			aspect: h / (double) w,
+			aspect: canvasSize.Height / (double) canvasSize.Width,
 			count: count,
 			invCount: 1.0 / count,
 			angleTheta: (Data.Angle.Degrees * Math.PI * 2) / 360.0,
@@ -127,8 +122,8 @@ public sealed class JuliaFractalEffect : BaseEffect
 		int a = 0;
 
 		for (double i = 0; i < settings.count; i++) {
-			double u = (2.0 * target.X - settings.w + (i * settings.invCount)) * settings.invH;
-			double v = (2.0 * target.Y - settings.h + ((i * settings.invQuality) % 1)) * settings.invH;
+			double u = (2.0 * target.X - settings.canvasSize.Width + (i * settings.invCount)) * settings.invH;
+			double v = (2.0 * target.Y - settings.canvasSize.Height + ((i * settings.invQuality) % 1)) * settings.invH;
 
 			double radius = Math.Sqrt ((u * u) + (v * v));
 			double radiusP = radius;
@@ -138,10 +133,12 @@ public sealed class JuliaFractalEffect : BaseEffect
 			double uP = radiusP * Math.Cos (thetaP);
 			double vP = radiusP * Math.Sin (thetaP);
 
-			double jX = (uP - vP * settings.aspect) * settings.invZoom;
-			double jY = (vP + uP * settings.aspect) * settings.invZoom;
+			PointD jLoc = new (
+				X: (uP - vP * settings.aspect) * settings.invZoom,
+				Y: (vP + uP * settings.aspect) * settings.invZoom
+			);
 
-			double j = Julia (jX, jY, Jr, Ji);
+			double j = Julia (jLoc, Jr, Ji);
 
 			double c = settings.factor * j;
 

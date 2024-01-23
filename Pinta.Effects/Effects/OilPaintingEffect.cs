@@ -50,28 +50,16 @@ public sealed class OilPaintingEffect : BaseEffect
 		Span<ColorBgra> dst_data = dest.GetPixelData ();
 
 		foreach (var rect in rois) {
-
-			int rectTop = rect.Top;
-			int rectBottom = rect.Bottom;
-			int rectLeft = rect.Left;
-			int rectRight = rect.Right;
-
-			for (int y = rectTop; y <= rectBottom; ++y) {
-
-				var dst_row = dst_data.Slice (y * settings.width, settings.width);
-
-				int top = Math.Max (y - settings.brushSize, 0);
-				int bottom = Math.Min (y + settings.brushSize + 1, settings.height);
-
-				for (int x = rectLeft; x <= rectRight; ++x)
-					dst_row[x] = GetFinalColor (settings, src_data, top, bottom, x);
+			foreach (var pixel in Utility.GeneratePixelOffsets (rect, settings.canvasSize)) {
+				int top = Math.Max (pixel.coordinates.Y - settings.brushSize, 0);
+				int bottom = Math.Min (pixel.coordinates.Y + settings.brushSize + 1, settings.canvasSize.Height);
+				dst_data[pixel.memoryOffset] = GetFinalColor (settings, src_data, top, bottom, pixel.coordinates.X);
 			}
 		}
 	}
 
 	private sealed record OilPaintingSettings (
-		int width,
-		int height,
+		Size canvasSize,
 		int brushSize,
 		int arrayLens,
 		byte maxIntensity);
@@ -79,8 +67,7 @@ public sealed class OilPaintingEffect : BaseEffect
 	{
 		int coarseness = Data.Coarseness;
 		return new (
-			width: src.Width,
-			height: src.Height,
+			canvasSize: src.GetSize (),
 			brushSize: Data.BrushSize,
 			arrayLens: 1 + coarseness,
 			maxIntensity: (byte) coarseness
@@ -97,12 +84,12 @@ public sealed class OilPaintingEffect : BaseEffect
 		Span<uint> avgAlpha = stackalloc uint[settings.arrayLens];
 
 		int left = Math.Max (x - settings.brushSize, 0);
-		int right = Math.Min (x + settings.brushSize + 1, settings.width);
+		int right = Math.Min (x + settings.brushSize + 1, settings.canvasSize.Width);
 
 		int numInt = 0;
 
 		for (int j = top; j < bottom; ++j) {
-			var src_row = src_data.Slice (j * settings.width, settings.width);
+			var src_row = src_data.Slice (j * settings.canvasSize.Width, settings.canvasSize.Width);
 			for (int i = left; i < right; ++i) {
 				ColorBgra src_pixel = src_row[i];
 				byte intensity = Utility.FastScaleByteByByte (src_pixel.GetIntensityByte (), settings.maxIntensity);

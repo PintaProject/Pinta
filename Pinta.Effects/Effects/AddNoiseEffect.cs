@@ -43,18 +43,14 @@ public sealed class AddNoiseEffect : BaseEffect
 	}
 
 	public override void LaunchConfiguration ()
-	{
-		chrome.LaunchSimpleEffectDialog (this);
-	}
+		=> chrome.LaunchSimpleEffectDialog (this);
 
 	#region Algorithm Code Ported From PDN
 	private const int TableSize = 16384;
 	private static readonly ImmutableArray<int> lookup;
 
 	private static double NormalCurve (double x, double scale)
-	{
-		return scale * Math.Exp (-x * x / 2);
-	}
+		=> scale * Math.Exp (-x * x / 2);
 
 	private static ImmutableArray<int> CreateLookup ()
 	{
@@ -103,17 +99,19 @@ public sealed class AddNoiseEffect : BaseEffect
 	}
 
 	private sealed record AddNoiseSettings (
+		Size size,
 		RandomSeed seed,
 		double coverage,
 		int dev,
 		int sat);
 
-	private AddNoiseSettings CreateSettings ()
+	private AddNoiseSettings CreateSettings (ImageSurface src)
 	{
 		var data = Data;
 		int intensity = data.Intensity;
 		int color_saturation = data.ColorSaturation;
 		return new (
+			size: src.GetSize (),
 			seed: data.Seed,
 			coverage: 0.01 * data.Coverage,
 			dev: intensity * intensity / 4,
@@ -123,14 +121,10 @@ public sealed class AddNoiseEffect : BaseEffect
 
 	public override void Render (ImageSurface src, ImageSurface dst, ReadOnlySpan<RectangleI> rois)
 	{
-		AddNoiseSettings settings = CreateSettings ();
-
-		ReadOnlySpan<int> localLookup = lookup.AsSpan ();
+		AddNoiseSettings settings = CreateSettings (src);
 
 		ReadOnlySpan<ColorBgra> src_data = src.GetReadOnlyPixelData ();
 		Span<ColorBgra> dst_data = dst.GetPixelData ();
-
-		int width = src.Width;
 
 		foreach (var rect in rois) {
 
@@ -138,40 +132,31 @@ public sealed class AddNoiseEffect : BaseEffect
 			// This should produce consistent results regardless of the number of threads
 			// being used to render the effect, but will change if the effect is tiled differently.
 			Random rand = new (settings.seed.GetValueForRegion (rect));
+			foreach (var pixel in Utility.GeneratePixelOffsets (rect, settings.size)) {
 
-			int right = rect.Right;
-
-			for (int y = rect.Top; y <= rect.Bottom; ++y) {
-
-				var dst_row = dst_data.Slice (y * width, width);
-				var src_row = src_data.Slice (y * width, width);
-
-				for (int x = rect.Left; x <= right; ++x) {
-
-					if (rand.NextDouble () > settings.coverage) {
-						dst_row[x] = src_row[x];
-						continue;
-					}
-
-					int _r = localLookup[rand.Next (TableSize)];
-					int _g = localLookup[rand.Next (TableSize)];
-					int _b = localLookup[rand.Next (TableSize)];
-
-					int i = (4899 * _r + 9618 * _g + 1867 * _b) >> 14;
-
-					int r = i + (((_r - i) * settings.sat) >> 12);
-					int g = i + (((_g - i) * settings.sat) >> 12);
-					int b = i + (((_b - i) * settings.sat) >> 12);
-
-					ColorBgra src_pixel = src_row[x];
-
-					dst_row[x] = ColorBgra.FromBgra (
-						b: Utility.ClampToByte (src_pixel.B + ((b * settings.dev + 32768) >> 16)),
-						g: Utility.ClampToByte (src_pixel.G + ((g * settings.dev + 32768) >> 16)),
-						r: Utility.ClampToByte (src_pixel.R + ((r * settings.dev + 32768) >> 16)),
-						a: src_pixel.A
-					);
+				if (rand.NextDouble () > settings.coverage) {
+					dst_data[pixel.memoryOffset] = src_data[pixel.memoryOffset];
+					continue;
 				}
+
+				int _r = lookup[rand.Next (TableSize)];
+				int _g = lookup[rand.Next (TableSize)];
+				int _b = lookup[rand.Next (TableSize)];
+
+				int i = (4899 * _r + 9618 * _g + 1867 * _b) >> 14;
+
+				int r = i + (((_r - i) * settings.sat) >> 12);
+				int g = i + (((_g - i) * settings.sat) >> 12);
+				int b = i + (((_b - i) * settings.sat) >> 12);
+
+				ColorBgra src_pixel = src_data[pixel.memoryOffset];
+
+				dst_data[pixel.memoryOffset] = ColorBgra.FromBgra (
+					b: Utility.ClampToByte (src_pixel.B + ((b * settings.dev + 32768) >> 16)),
+					g: Utility.ClampToByte (src_pixel.G + ((g * settings.dev + 32768) >> 16)),
+					r: Utility.ClampToByte (src_pixel.R + ((r * settings.dev + 32768) >> 16)),
+					a: src_pixel.A
+				);
 			}
 		}
 	}

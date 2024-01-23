@@ -38,9 +38,7 @@ public sealed class TileEffect : BaseEffect
 	}
 
 	public override void LaunchConfiguration ()
-	{
-		chrome.LaunchSimpleEffectDialog (this);
-	}
+		=> chrome.LaunchSimpleEffectDialog (this);
 
 	#region Algorithm Code Ported From PDN
 
@@ -108,13 +106,9 @@ public sealed class TileEffect : BaseEffect
 		Span<ColorBgra> dst_data = dst.GetPixelData ();
 
 		foreach (var rect in rois) {
-			for (int y = rect.Top; y <= rect.Bottom; y++) {
-
-				float j = y - settings.hh;
-				var dst_row = dst_data.Slice (y * settings.width, settings.width);
-
-				for (int x = rect.Left; x <= rect.Right; x++)
-					dst_row[x] = GetFinalPixelColor (src, settings, aaPoints, src_data, j, x);
+			foreach (var pixel in Utility.GeneratePixelOffsets (rect, src.GetSize ())) {
+				float j = pixel.coordinates.Y - settings.hh;
+				dst_data[pixel.memoryOffset] = GetFinalPixelColor (src, settings, aaPoints, src_data, j, pixel.coordinates.X);
 			}
 		}
 	}

@@ -74,36 +74,36 @@ public sealed class SoftenPortraitEffect : BaseEffect
 	}
 
 	public override void LaunchConfiguration ()
+		=> chrome.LaunchSimpleEffectDialog (this);
+
+	private sealed record SoftenPortraitSettings (
+		float redAdjust,
+		float blueAdjust);
+
+	private SoftenPortraitSettings CreateSettings ()
 	{
-		chrome.LaunchSimpleEffectDialog (this);
+		int warmth = Data.Warmth;
+		return new (
+			redAdjust: 1.0f + (warmth / 100.0f),
+			blueAdjust: 1.0f - (warmth / 100.0f));
 	}
 
 	public override void Render (ImageSurface src, ImageSurface dest, ReadOnlySpan<RectangleI> rois)
 	{
-		int warmth = Data.Warmth;
-		float redAdjust = 1.0f + (warmth / 100.0f);
-		float blueAdjust = 1.0f - (warmth / 100.0f);
+		SoftenPortraitSettings settings = CreateSettings ();
 
 		blur_effect.Render (src, dest, rois);
 		bac_adjustment.Render (src, dest, rois);
 
 		ReadOnlySpan<ColorBgra> src_data = src.GetReadOnlyPixelData ();
 		Span<ColorBgra> dst_data = dest.GetPixelData ();
-		int width = dest.Width;
 
 		foreach (var roi in rois) {
-			for (int y = roi.Top; y <= roi.Bottom; ++y) {
-				var src_row = src_data.Slice (y * width, width);
-				var dst_row = dst_data.Slice (y * width, width);
-
-				for (int x = roi.Left; x <= roi.Right; ++x) {
-					ColorBgra srcGrey = desaturate_op.Apply (src_row[x]);
-
-					srcGrey.R = Utility.ClampToByte ((int) (srcGrey.R * redAdjust));
-					srcGrey.B = Utility.ClampToByte ((int) (srcGrey.B * blueAdjust));
-
-					dst_row[x] = overlay_op.Apply (srcGrey, dst_row[x]);
-				}
+			foreach (var pixel in Utility.GeneratePixelOffsets (roi, src.GetSize ())) {
+				ColorBgra srcGrey = desaturate_op.Apply (src_data[pixel.memoryOffset]);
+				srcGrey.R = Utility.ClampToByte ((int) (srcGrey.R * settings.redAdjust));
+				srcGrey.B = Utility.ClampToByte ((int) (srcGrey.B * settings.blueAdjust));
+				dst_data[pixel.memoryOffset] = overlay_op.Apply (srcGrey, dst_data[pixel.memoryOffset]);
 			}
 		}
 	}

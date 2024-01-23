@@ -51,8 +51,6 @@ public static class Utility
 	public static double Distance (this PointD origin, in PointD dest)
 		=> Magnitude (origin - dest);
 
-	public readonly record struct PixelOffset (PointI coordinates, int memoryOffset);
-
 	/// <returns>
 	/// Offsets of pixels, if we consider all pixels in a canvas of
 	/// size <paramref name="canvasSize"/> to be sequential in memory

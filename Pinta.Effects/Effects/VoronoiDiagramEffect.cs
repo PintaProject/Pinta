@@ -68,7 +68,7 @@ public sealed class VoronoiDiagramEffect : BaseEffect
 		foreach (var kvp in roi.GeneratePixelOffsets (settings.size).AsParallel ().Select (CreateColor))
 			dst_data[kvp.Key] = kvp.Value;
 
-		KeyValuePair<int, ColorBgra> CreateColor (Utility.PixelOffset pixel)
+		KeyValuePair<int, ColorBgra> CreateColor (PixelOffset pixel)
 		{
 			double shortestDistance = double.MaxValue;
 			int closestIndex = 0;

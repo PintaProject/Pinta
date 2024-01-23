@@ -37,22 +37,25 @@ public abstract class ColorDifferenceEffect : BaseEffect
 
 		foreach (RectangleI rect in rois) {
 
-			// loop through each line of target rectangle
-			for (int y = rect.Y; y < rect.Y + rect.Height; ++y) {
+			foreach (var pixel in Utility.GeneratePixelOffsets (rect, src.GetSize ())) {
 
-				int fyStart = (y == src_rect.Y) ? 1 : 0;
-				int fyEnd = (y == src_rect.Y + src_rect.Height - 1) ? 2 : 3;
+				PointI fStart = new (
+					X: (pixel.coordinates.X == src_rect.X) ? 1 : 0,
+					Y: (pixel.coordinates.Y == src_rect.Y) ? 1 : 0
+				);
 
-				// loop through each point in the line
-				var dst_row = dst_data[(y * src_width)..];
+				PointI fEnd = new (
+					X: (pixel.coordinates.X == src_rect.X + src_rect.Width - 1) ? 2 : 3,
+					Y: (pixel.coordinates.Y == src_rect.Y + src_rect.Height - 1) ? 2 : 3
+				);
 
-				for (int x = rect.X; x < rect.X + rect.Width; ++x) {
-
-					int fxStart = (x == src_rect.X) ? 1 : 0;
-					int fxEnd = (x == src_rect.X + src_rect.Width - 1) ? 2 : 3;
-
-					dst_row[x] = GetFinalPixelColor (weights, src_data, src_width, fxStart, fxEnd, fyStart, fyEnd, x, y);
-				}
+				dst_data[pixel.memoryOffset] = GetFinalPixelColor (
+					weights,
+					src_data,
+					src_width,
+					fStart,
+					fEnd,
+					pixel.coordinates);
 			}
 		}
 	}
@@ -61,21 +64,18 @@ public abstract class ColorDifferenceEffect : BaseEffect
 		IReadOnlyList<IReadOnlyList<double>> weights,
 		ReadOnlySpan<ColorBgra> src_data,
 		int src_width,
-		int fxStart,
-		int fxEnd,
-		int fyStart,
-		int fyEnd,
-		int x,
-		int y)
+		PointI fStart,
+		PointI fEnd,
+		PointI coordinates)
 	{
 		// loop through each weight
 		double rSum = 0.0;
 		double gSum = 0.0;
 		double bSum = 0.0;
-		for (int fy = fyStart; fy < fyEnd; ++fy) {
-			for (int fx = fxStart; fx < fxEnd; ++fx) {
+		for (int fy = fStart.Y; fy < fEnd.Y; ++fy) {
+			for (int fx = fStart.X; fx < fEnd.X; ++fx) {
 				double weight = weights[fy][fx];
-				ColorBgra c = src_data[(y - 1 + fy) * src_width + (x - 1 + fx)];
+				ColorBgra c = src_data[(coordinates.Y - 1 + fy) * src_width + (coordinates.X - 1 + fx)];
 				rSum += weight * c.R;
 				gSum += weight * c.G;
 				bSum += weight * c.B;
