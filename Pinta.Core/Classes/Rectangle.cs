@@ -133,16 +133,17 @@ public readonly record struct RectangleI (int X, int Y, int Width, int Height)
 	public readonly PointI Location => new (X, Y);
 	public readonly Size Size => new (Width, Height);
 
-	public override readonly string ToString () => $"x:{X} y:{Y} w:{Width} h:{Height}";
+	public override readonly string ToString ()
+		=> $"x:{X} y:{Y} w:{Width} h:{Height}";
 
 	public readonly bool Contains (int x, int y)
-	{
-		return x >= Left && x <= Right && y >= Top && y <= Bottom;
-	}
+		=> x >= Left && x <= Right && y >= Top && y <= Bottom;
 
-	public readonly bool Contains (in PointI pt) => Contains (pt.X, pt.Y);
+	public readonly bool Contains (in PointI pt)
+		=> Contains (pt.X, pt.Y);
 
-	public readonly RectangleI Intersect (RectangleI r) => Intersect (this, r);
+	public readonly RectangleI Intersect (RectangleI r)
+		=> Intersect (this, r);
 
 	public static RectangleI Intersect (in RectangleI a, in RectangleI b)
 	{
@@ -157,7 +158,8 @@ public readonly record struct RectangleI (int X, int Y, int Width, int Height)
 		return FromLTRB (left, top, right, bottom);
 	}
 
-	public readonly RectangleI Union (RectangleI r) => Union (this, r);
+	public readonly RectangleI Union (RectangleI r)
+		=> Union (this, r);
 
 	public static RectangleI Union (in RectangleI a, in RectangleI b)
 	{
