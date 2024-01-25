@@ -52,7 +52,7 @@ public static partial class GdkPixbufExtensions
 
 		var result = new byte[buffer_size];
 		Marshal.Copy (buffer, result, 0, (int) buffer_size);
-		Marshal.FreeHGlobal (buffer);
+		GLib.Functions.Free (buffer);
 		return result;
 	}
 
