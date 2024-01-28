@@ -28,6 +28,7 @@ Pinta.Core/Classes/Layer.cs
 Pinta.Core/Classes/LayerProperties.cs
 Pinta.Core/Classes/ObservableObject.cs
 Pinta.Core/Classes/Palette.cs
+Pinta.Core/Classes/PixelOffset.cs
 Pinta.Core/Classes/Point.cs
 Pinta.Core/Classes/Re-editable/ReEditableLayer.cs
 Pinta.Core/Classes/Re-editable/Text/TextEngine.cs
@@ -209,6 +210,7 @@ Pinta.Effects/Effects/SoftenPortraitEffect.cs
 Pinta.Effects/Effects/TileEffect.cs
 Pinta.Effects/Effects/TwistEffect.cs
 Pinta.Effects/Effects/UnfocusEffect.cs
+Pinta.Effects/Effects/VoronoiDiagramEffect.cs
 Pinta.Effects/Effects/WarpEffect.cs
 Pinta.Effects/Effects/ZoomBlurEffect.cs
 Pinta.Effects/FriendAssemblies.cs
