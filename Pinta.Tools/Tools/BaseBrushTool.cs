@@ -24,6 +24,7 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 // THE SOFTWARE.
 
+using System;
 using Cairo;
 using Gtk;
 using Pinta.Core;
@@ -41,7 +42,7 @@ public abstract class BaseBrushTool : BaseTool
 
 	private string BRUSH_WIDTH_SETTING => $"{GetType ().Name.ToLowerInvariant ()}-brush-width";
 
-	protected BaseBrushTool (IServiceManager services) : base (services)
+	protected BaseBrushTool (IServiceProvider services) : base (services)
 	{
 		Palette = services.GetService<IPaletteService> ();
 	}

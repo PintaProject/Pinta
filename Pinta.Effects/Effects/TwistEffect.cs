@@ -31,7 +31,7 @@ public sealed class TwistEffect : BaseEffect
 
 	private readonly IChromeService chrome;
 
-	public TwistEffect (IServiceManager services)
+	public TwistEffect (IServiceProvider services)
 	{
 		chrome = services.GetService<IChromeService> ();
 

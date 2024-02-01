@@ -25,7 +25,7 @@ public sealed class AutoLevelEffect : BaseEffect
 
 	public override string AdjustmentMenuKey => "L";
 
-	public AutoLevelEffect (IServiceManager _) { }
+	public AutoLevelEffect (IServiceProvider _) { }
 
 	public override void Render (ImageSurface src, ImageSurface dest, ReadOnlySpan<RectangleI> rois)
 	{

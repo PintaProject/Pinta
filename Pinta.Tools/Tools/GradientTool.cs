@@ -41,7 +41,7 @@ public sealed class GradientTool : BaseTool
 	private const string GRADIENT_TYPE_SETTING = "gradient-type";
 	private const string GRADIENT_COLOR_MODE_SETTING = "gradient-color-mode";
 
-	public GradientTool (IServiceManager services) : base (services)
+	public GradientTool (IServiceProvider services) : base (services)
 	{
 		palette = services.GetService<IPaletteService> ();
 	}

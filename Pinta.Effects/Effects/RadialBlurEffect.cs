@@ -30,7 +30,7 @@ public sealed class RadialBlurEffect : BaseEffect
 
 	private readonly IChromeService chrome;
 
-	public RadialBlurEffect (IServiceManager services)
+	public RadialBlurEffect (IServiceProvider services)
 	{
 		chrome = services.GetService<IChromeService> ();
 
@@ -38,9 +38,7 @@ public sealed class RadialBlurEffect : BaseEffect
 	}
 
 	public override void LaunchConfiguration ()
-	{
-		chrome.LaunchSimpleEffectDialog (this);
-	}
+		=> chrome.LaunchSimpleEffectDialog (this);
 
 	#region Algorithm Code Ported From PDN
 

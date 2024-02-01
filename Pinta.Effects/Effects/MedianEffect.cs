@@ -33,16 +33,14 @@ public sealed class MedianEffect : LocalHistogramEffect
 
 	private readonly IChromeService chrome;
 
-	public MedianEffect (IServiceManager services)
+	public MedianEffect (IServiceProvider services)
 	{
 		chrome = services.GetService<IChromeService> ();
 		EffectData = new MedianData ();
 	}
 
 	public override void LaunchConfiguration ()
-	{
-		chrome.LaunchSimpleEffectDialog (this);
-	}
+		=> chrome.LaunchSimpleEffectDialog (this);
 
 	#region Algorithm Code Ported From PDN
 	public override void Render (ImageSurface src, ImageSurface dest, ReadOnlySpan<RectangleI> rois)

@@ -32,7 +32,7 @@ public sealed class LevelsEffect : BaseEffect
 	private readonly IChromeService chrome;
 	private readonly IWorkspaceService workspace;
 
-	public LevelsEffect (IServiceManager services)
+	public LevelsEffect (IServiceProvider services)
 	{
 		chrome = services.GetService<IChromeService> ();
 		workspace = services.GetService<IWorkspaceService> ();
@@ -60,9 +60,7 @@ public sealed class LevelsEffect : BaseEffect
 	}
 
 	public override void Render (ImageSurface src, ImageSurface dest, ReadOnlySpan<RectangleI> rois)
-	{
-		Data.Levels.Apply (dest, src, rois);
-	}
+		=> Data.Levels.Apply (dest, src, rois);
 }
 
 public sealed class LevelsData : EffectData

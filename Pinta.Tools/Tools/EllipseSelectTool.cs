@@ -24,13 +24,14 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 // THE SOFTWARE.
 
+using System;
 using Pinta.Core;
 
 namespace Pinta.Tools;
 
 public sealed class EllipseSelectTool : SelectTool
 {
-	public EllipseSelectTool (IServiceManager services) : base (services) { }
+	public EllipseSelectTool (IServiceProvider services) : base (services) { }
 
 	public override string Name => Translations.GetString ("Ellipse Select");
 	public override string Icon => Pinta.Resources.Icons.ToolSelectEllipse;

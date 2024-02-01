@@ -24,6 +24,7 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 // THE SOFTWARE.
 
+using System;
 using System.Collections.Generic;
 using Pinta.Core;
 
@@ -33,7 +34,7 @@ public abstract class ShapeTool : BaseTool
 {
 	public BaseEditEngine EditEngine { get; }
 
-	public ShapeTool (IServiceManager services) : base (services)
+	public ShapeTool (IServiceProvider services) : base (services)
 	{
 		EditEngine = CreateEditEngine ();
 	}

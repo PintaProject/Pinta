@@ -24,6 +24,7 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 // THE SOFTWARE.
 
+using System;
 using Cairo;
 using Pinta.Core;
 
@@ -39,7 +40,7 @@ public sealed class PencilTool : BaseTool
 	private bool surface_modified;
 	private MouseButton mouse_button;
 
-	public PencilTool (IServiceManager services) : base (services)
+	public PencilTool (IServiceProvider services) : base (services)
 	{
 		palette = services.GetService<IPaletteService> ();
 	}

@@ -30,16 +30,14 @@ public sealed class EdgeDetectEffect : ColorDifferenceEffect
 
 	private readonly IChromeService chrome;
 
-	public EdgeDetectEffect (IServiceManager services)
+	public EdgeDetectEffect (IServiceProvider services)
 	{
 		chrome = services.GetService<IChromeService> ();
 		EffectData = new EdgeDetectData ();
 	}
 
 	public override void LaunchConfiguration ()
-	{
-		chrome.LaunchSimpleEffectDialog (this);
-	}
+		=> chrome.LaunchSimpleEffectDialog (this);
 
 	public override void Render (ImageSurface src, ImageSurface dest, ReadOnlySpan<RectangleI> rois)
 	{

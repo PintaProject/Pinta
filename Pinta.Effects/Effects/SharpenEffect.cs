@@ -30,7 +30,7 @@ public sealed class SharpenEffect : LocalHistogramEffect
 
 	private readonly IChromeService chrome;
 
-	public SharpenEffect (IServiceManager services)
+	public SharpenEffect (IServiceProvider services)
 	{
 		chrome = services.GetService<IChromeService> ();
 
@@ -38,9 +38,7 @@ public sealed class SharpenEffect : LocalHistogramEffect
 	}
 
 	public override void LaunchConfiguration ()
-	{
-		chrome.LaunchSimpleEffectDialog (this);
-	}
+		=> chrome.LaunchSimpleEffectDialog (this);
 
 	public override void Render (ImageSurface src, ImageSurface dest, ReadOnlySpan<RectangleI> rois)
 	{

@@ -45,7 +45,7 @@ public class LassoSelectTool : BaseTool
 	private Path? path;
 	private readonly List<IntPoint> lasso_polygon = new ();
 
-	public LassoSelectTool (IServiceManager services) : base (services)
+	public LassoSelectTool (IServiceProvider services) : base (services)
 	{
 		workspace = services.GetService<IWorkspaceService> ();
 	}

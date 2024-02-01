@@ -30,7 +30,7 @@ public sealed class PixelateEffect : BaseEffect
 
 	private readonly IChromeService chrome;
 
-	public PixelateEffect (IServiceManager services)
+	public PixelateEffect (IServiceProvider services)
 	{
 		chrome = services.GetService<IChromeService> ();
 
@@ -38,9 +38,7 @@ public sealed class PixelateEffect : BaseEffect
 	}
 
 	public override void LaunchConfiguration ()
-	{
-		chrome.LaunchSimpleEffectDialog (this);
-	}
+		=> chrome.LaunchSimpleEffectDialog (this);
 
 	#region Algorithm Code Ported From PDN
 	private static ColorBgra ComputeCellColor (int x, int y, ReadOnlySpan<ColorBgra> src_data, int cellSize, RectangleI srcBounds)

@@ -29,11 +29,28 @@ using System.Collections.Generic;
 
 namespace Pinta.Core;
 
-public interface IServiceManager
+public static class ServiceProviderExtensions
+{
+	public static T GetService<T> (this IServiceProvider services) where T : class
+	{
+		object? implementation = services.GetService (typeof (T));
+		if (implementation is not null)
+			return (T) implementation;
+		throw new ApplicationException ($"Could not resolve service type {typeof (T)}");
+	}
+
+	public static T? GetOptionalService<T> (this IServiceProvider services) where T : class
+	{
+		object? implementation = services.GetService (typeof (T));
+		if (implementation is not null)
+			return (T) implementation;
+		return null;
+	}
+}
+
+public interface IServiceManager : IServiceProvider
 {
 	T AddService<T> (T implementation) where T : class;
-	T GetService<T> () where T : class;
-	T? GetOptionalService<T> () where T : class;
 }
 
 public sealed class ServiceManager : IServiceManager
@@ -43,23 +60,14 @@ public sealed class ServiceManager : IServiceManager
 	public T AddService<T> (T implementation) where T : class
 	{
 		services.Add (typeof (T), implementation);
-
 		return implementation;
 	}
 
-	public T GetService<T> () where T : class
+	public object? GetService (Type serviceType)
 	{
-		if (services.TryGetValue (typeof (T), out var implementation))
-			return (T) implementation;
-
-		throw new ApplicationException ($"Could not resolve service type {typeof (T)}");
-	}
-
-	public T? GetOptionalService<T> () where T : class
-	{
-		if (services.TryGetValue (typeof (T), out var implementation))
-			return (T) implementation;
-
-		return null;
+		if (services.TryGetValue (serviceType, out var implementation))
+			return implementation;
+		else
+			return null;
 	}
 }

@@ -31,16 +31,14 @@ public sealed class GaussianBlurEffect : BaseEffect
 
 	private readonly IChromeService chrome;
 
-	public GaussianBlurEffect (IServiceManager services)
+	public GaussianBlurEffect (IServiceProvider services)
 	{
 		chrome = services.GetService<IChromeService> ();
 		EffectData = new GaussianBlurData ();
 	}
 
 	public override void LaunchConfiguration ()
-	{
-		chrome.LaunchSimpleEffectDialog (this);
-	}
+		=> chrome.LaunchSimpleEffectDialog (this);
 
 	#region Algorithm Code Ported From PDN
 

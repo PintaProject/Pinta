@@ -24,6 +24,7 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 // THE SOFTWARE.
 
+using System;
 using Pinta.Core;
 
 namespace Pinta.Tools;
@@ -34,7 +35,7 @@ public sealed class PanTool : BaseTool
 	private PointD last_point;
 	private readonly Gdk.Cursor grabbing_cursor = GdkExtensions.CursorFromName (Pinta.Resources.StandardCursors.Grabbing);
 
-	public PanTool (IServiceManager services) : base (services) { }
+	public PanTool (IServiceProvider services) : base (services) { }
 
 	public override string Name => Translations.GetString ("Pan");
 	public override string Icon => Pinta.Resources.Icons.ToolPan;

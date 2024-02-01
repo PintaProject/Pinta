@@ -24,6 +24,7 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 // THE SOFTWARE.
 
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
@@ -47,7 +48,7 @@ public abstract class BaseTool
 
 	protected static PointI point_empty = new (-500, -500);
 
-	protected BaseTool (IServiceManager services)
+	protected BaseTool (IServiceProvider services)
 	{
 		Resources = services.GetService<IResourceService> ();
 		Settings = services.GetService<ISettingsService> ();
@@ -211,9 +212,7 @@ public abstract class BaseTool
 	/// components to handle it.
 	/// </summary>
 	protected virtual bool OnHandleCopy (Document document, Clipboard cb)
-	{
-		return false;
-	}
+		=> false;
 
 	/// <summary>
 	/// Called to give the tool an opportunity to consume a Cut clipboard operation.
@@ -221,9 +220,7 @@ public abstract class BaseTool
 	/// components to handle it.
 	/// </summary>
 	protected virtual bool OnHandleCut (Document document, Clipboard cb)
-	{
-		return false;
-	}
+		=> false;
 
 	/// <summary>
 	/// Called to give the tool an opportunity to consume a Paste clipboard operation.
@@ -231,9 +228,7 @@ public abstract class BaseTool
 	/// components to handle it.
 	/// </summary>
 	protected virtual Task<bool> OnHandlePaste (Document document, Clipboard cb)
-	{
-		return Task.FromResult (false);
-	}
+		=> Task.FromResult (false);
 
 	/// <summary>
 	/// Called to give the tool an opportunity to consume a Redo operation.
@@ -241,9 +236,7 @@ public abstract class BaseTool
 	/// components to handle it.
 	/// </summary>
 	protected virtual bool OnHandleRedo (Document document)
-	{
-		return false;
-	}
+		=> false;
 
 	/// <summary>
 	/// Called to give the tool an opportunity to consume an Undo operation.
@@ -251,27 +244,21 @@ public abstract class BaseTool
 	/// components to handle it.
 	/// </summary>
 	protected virtual bool OnHandleUndo (Document document)
-	{
-		return false;
-	}
+		=> false;
 
 	/// <summary>
 	/// Called when a key is pressed. Return 'true' if the key is handled, or
 	/// 'false' to allow other components to handle it.
 	/// </summary>
 	protected virtual bool OnKeyDown (Document document, ToolKeyEventArgs e)
-	{
-		return false;
-	}
+		=> false;
 
 	/// <summary>
 	/// Called when a key is released. Return 'true' if the key is handled, or
 	/// 'false' to allow other components to handle it.
 	/// </summary>
 	protected virtual bool OnKeyUp (Document document, ToolKeyEventArgs e)
-	{
-		return false;
-	}
+		=> false;
 
 	/// <summary>
 	/// Called when a mouse button is pressed.

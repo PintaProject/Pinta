@@ -25,7 +25,7 @@ public sealed class InvertColorsEffect : BaseEffect
 
 	public override string AdjustmentMenuKey => "I";
 
-	public InvertColorsEffect (IServiceManager _) { }
+	public InvertColorsEffect (IServiceProvider _) { }
 
 	public override void Render (ImageSurface src, ImageSurface dest, ReadOnlySpan<RectangleI> rois)
 		=> op.Apply (dest, src, rois);

@@ -35,7 +35,7 @@ public sealed class BrightnessContrastEffect : BaseEffect
 
 	private readonly IChromeService chrome;
 
-	public BrightnessContrastEffect (IServiceManager services)
+	public BrightnessContrastEffect (IServiceProvider services)
 	{
 		chrome = services.GetService<IChromeService> ();
 		EffectData = new BrightnessContrastData ();
@@ -51,9 +51,7 @@ public sealed class BrightnessContrastEffect : BaseEffect
 	}
 
 	public override void LaunchConfiguration ()
-	{
-		chrome.LaunchSimpleEffectDialog (this);
-	}
+		=> chrome.LaunchSimpleEffectDialog (this);
 
 	public override void Render (ImageSurface src, ImageSurface dest, ReadOnlySpan<RectangleI> rois)
 	{

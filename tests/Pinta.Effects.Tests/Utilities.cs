@@ -1,3 +1,4 @@
+using System;
 using Cairo;
 using NUnit.Framework;
 using Pinta.Core;
@@ -14,7 +15,7 @@ internal static class Utilities
 		Gdk.Module.Initialize ();
 	}
 
-	public static IServiceManager CreateMockServices ()
+	public static IServiceProvider CreateMockServices ()
 	{
 		ServiceManager manager = new ();
 		manager.AddService<IPaletteService> (new MockPalette ());

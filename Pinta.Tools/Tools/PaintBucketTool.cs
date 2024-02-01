@@ -24,6 +24,7 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 // THE SOFTWARE.
 
+using System;
 using System.Threading.Tasks;
 using Cairo;
 using Pinta.Core;
@@ -35,7 +36,7 @@ public sealed class PaintBucketTool : FloodTool
 	private readonly IPaletteService palette;
 	private Color fill_color;
 
-	public PaintBucketTool (IServiceManager services) : base (services)
+	public PaintBucketTool (IServiceProvider services) : base (services)
 	{
 		palette = services.GetService<IPaletteService> ();
 	}

@@ -24,6 +24,7 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 // THE SOFTWARE.
 
+using System;
 using System.Collections.Immutable;
 using Cairo;
 using Gtk;
@@ -42,7 +43,7 @@ public sealed class ColorPickerTool : BaseTool
 	private const string SAMPLE_SIZE_SETTING = "color-picker-sample-size";
 	private const string SAMPLE_TYPE_SETTING = "color-picker-sample-type";
 
-	public ColorPickerTool (IServiceManager services) : base (services)
+	public ColorPickerTool (IServiceProvider services) : base (services)
 	{
 		palette = services.GetService<IPaletteService> ();
 		tools = services.GetService<IToolService> ();

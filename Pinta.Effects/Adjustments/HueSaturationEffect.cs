@@ -28,16 +28,14 @@ public sealed class HueSaturationEffect : BaseEffect
 
 	private readonly IChromeService chrome;
 
-	public HueSaturationEffect (IServiceManager services)
+	public HueSaturationEffect (IServiceProvider services)
 	{
 		chrome = services.GetService<IChromeService> ();
 		EffectData = new HueSaturationData ();
 	}
 
 	public override void LaunchConfiguration ()
-	{
-		chrome.LaunchSimpleEffectDialog (this);
-	}
+		=> chrome.LaunchSimpleEffectDialog (this);
 
 	private UnaryPixelOp CreateOptimalOp ()
 		=>
@@ -54,7 +52,8 @@ public sealed class HueSaturationEffect : BaseEffect
 		op.Apply (dest, src, rois);
 	}
 
-	public HueSaturationData Data => (HueSaturationData) EffectData!;  // NRT - Set in constructor
+	public HueSaturationData Data
+		=> (HueSaturationData) EffectData!;  // NRT - Set in constructor
 
 	public sealed class HueSaturationData : EffectData
 	{

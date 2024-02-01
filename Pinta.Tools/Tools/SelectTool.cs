@@ -54,7 +54,7 @@ public abstract class SelectTool : BaseTool
 	protected override bool ShowAntialiasingButton => false;
 	public override IEnumerable<MoveHandle> Handles => handles;
 
-	public SelectTool (IServiceManager services) : base (services)
+	public SelectTool (IServiceProvider services) : base (services)
 	{
 		tools = services.GetService<IToolService> ();
 		workspace = services.GetService<IWorkspaceService> ();

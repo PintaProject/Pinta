@@ -33,7 +33,7 @@ public sealed class CurvesEffect : BaseEffect
 
 	private readonly IChromeService chrome;
 
-	public CurvesEffect (IServiceManager services)
+	public CurvesEffect (IServiceProvider services)
 	{
 		chrome = services.GetService<IChromeService> ();
 

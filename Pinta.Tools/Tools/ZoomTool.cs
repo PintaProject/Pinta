@@ -24,6 +24,7 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 // THE SOFTWARE.
 
+using System;
 using Cairo;
 using Pinta.Core;
 
@@ -42,7 +43,7 @@ public sealed class ZoomTool : BaseTool
 	private RectangleD last_dirty;
 	private static readonly int tolerance = 10;
 
-	public ZoomTool (IServiceManager services) : base (services)
+	public ZoomTool (IServiceProvider services) : base (services)
 	{
 		mouse_down = MouseButton.None;
 
