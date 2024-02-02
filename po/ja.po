@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: pinta\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-01-18 03:35+0000\n"
+"POT-Creation-Date: 2024-01-28 01:09+0000\n"
 "PO-Revision-Date: 2022-06-12 12:30+0000\n"
 "Last-Translator: UTUMI Hirosi <utuhiro78@yahoo.co.jp>\n"
 "Language-Team: Japanese <ja@li.org>\n"
@@ -92,10 +92,10 @@ msgstr "色取得後の動作"
 msgid "All files"
 msgstr "すべてのファイル"
 
-#: ../Pinta.Effects/Effects/BulgeEffect.cs:115
+#: ../Pinta.Effects/Effects/BulgeEffect.cs:111
 #: ../Pinta.Effects/Effects/FrostedGlassEffect.cs:151
 #: ../Pinta.Effects/Effects/SharpenEffect.cs:60
-#: ../Pinta.Effects/Effects/TwistEffect.cs:149
+#: ../Pinta.Effects/Effects/TwistEffect.cs:142
 #: ../Pinta.Effects/Effects/ZoomBlurEffect.cs:145
 msgid "Amount"
 msgstr "量"
@@ -106,9 +106,9 @@ msgstr "アンカー:"
 
 #: ../Pinta.Effects/Effects/EdgeDetectEffect.cs:83
 #: ../Pinta.Effects/Effects/EmbossEffect.cs:150
-#: ../Pinta.Effects/Effects/JuliaFractalEffect.cs:190
-#: ../Pinta.Effects/Effects/MandelbrotFractalEffect.cs:199
-#: ../Pinta.Effects/Effects/MotionBlurEffect.cs:104
+#: ../Pinta.Effects/Effects/JuliaFractalEffect.cs:187
+#: ../Pinta.Effects/Effects/MandelbrotFractalEffect.cs:194
+#: ../Pinta.Effects/Effects/MotionBlurEffect.cs:108
 #: ../Pinta.Effects/Effects/RadialBlurEffect.cs:172
 #: ../Pinta.Effects/Effects/ReliefEffect.cs:85
 #: ../Pinta.Tools/Editable/EditEngines/ArrowedEditEngine.cs:298
@@ -116,7 +116,7 @@ msgstr "アンカー:"
 msgid "Angle"
 msgstr "角度"
 
-#: ../Pinta.Effects/Effects/TwistEffect.cs:152
+#: ../Pinta.Effects/Effects/TwistEffect.cs:145
 msgid "Antialias"
 msgstr "アンチエイリアス"
 
@@ -210,7 +210,7 @@ msgstr "青 "
 
 #: ../Pinta.Effects/Effects/FragmentEffect.cs:28
 #: ../Pinta.Effects/Effects/GaussianBlurEffect.cs:28
-#: ../Pinta.Effects/Effects/MotionBlurEffect.cs:27
+#: ../Pinta.Effects/Effects/MotionBlurEffect.cs:28
 #: ../Pinta.Effects/Effects/RadialBlurEffect.cs:27
 #: ../Pinta.Effects/Effects/UnfocusEffect.cs:29
 #: ../Pinta.Effects/Effects/ZoomBlurEffect.cs:27
@@ -235,7 +235,7 @@ msgstr "輝度"
 msgid "Brightness / Contrast"
 msgstr "輝度/コントラスト"
 
-#: ../Pinta.Effects/Effects/OilPaintingEffect.cs:145
+#: ../Pinta.Effects/Effects/OilPaintingEffect.cs:132
 msgid "Brush Size"
 msgstr "ブラシのサイズ"
 
@@ -285,11 +285,11 @@ msgstr "セルのサイズ"
 msgid "Center Align"
 msgstr "中央揃え"
 
-#: ../Pinta.Effects/Effects/WarpEffect.cs:190
+#: ../Pinta.Effects/Effects/WarpEffect.cs:184
 msgid "Center Offset"
 msgstr "中央オフセット"
 
-#: ../Pinta.Effects/Effects/MotionBlurEffect.cs:110
+#: ../Pinta.Effects/Effects/MotionBlurEffect.cs:114
 msgid "Centered"
 msgstr "中央揃え"
 
@@ -408,7 +408,7 @@ msgstr "閉じた 直線/曲線"
 msgid "Clouds"
 msgstr "雲"
 
-#: ../Pinta.Effects/Effects/OilPaintingEffect.cs:148
+#: ../Pinta.Effects/Effects/OilPaintingEffect.cs:135
 msgid "Coarseness"
 msgstr "粗さ"
 
@@ -433,25 +433,29 @@ msgstr "カラーモード"
 msgid "Color Picker"
 msgstr "色の取得"
 
-#: ../Pinta.Effects/Effects/PencilSketchEffect.cs:94
+#: ../Pinta.Effects/Effects/PencilSketchEffect.cs:89
 msgid "Color Range"
 msgstr "色の範囲"
 
-#: ../Pinta.Effects/Effects/AddNoiseEffect.cs:185
+#: ../Pinta.Effects/Effects/AddNoiseEffect.cs:170
 msgid "Color Saturation"
 msgstr "彩度"
 
 #: ../Pinta.Core/Actions/ViewActions.cs:181
 #: ../Pinta.Effects/Effects/CloudsEffect.cs:250
-#: ../Pinta.Effects/Effects/JuliaFractalEffect.cs:181
-#: ../Pinta.Effects/Effects/MandelbrotFractalEffect.cs:205
+#: ../Pinta.Effects/Effects/JuliaFractalEffect.cs:178
+#: ../Pinta.Effects/Effects/MandelbrotFractalEffect.cs:200
 msgid "Color Scheme"
 msgstr ""
 
 #: ../Pinta.Effects/Effects/CloudsEffect.cs:247
-#: ../Pinta.Effects/Effects/JuliaFractalEffect.cs:178
-#: ../Pinta.Effects/Effects/MandelbrotFractalEffect.cs:202
+#: ../Pinta.Effects/Effects/JuliaFractalEffect.cs:175
+#: ../Pinta.Effects/Effects/MandelbrotFractalEffect.cs:197
 msgid "Color Scheme Source"
+msgstr ""
+
+#: ../Pinta.Effects/Effects/VoronoiDiagramEffect.cs:207
+msgid "Color Sorting"
 msgstr ""
 
 #: ../Pinta.Effects/Effects/InkSketchEffect.cs:156
@@ -505,7 +509,7 @@ msgstr ""
 msgid "Could not open file: {0}"
 msgstr "ファイルを開けません: {0}"
 
-#: ../Pinta.Effects/Effects/AddNoiseEffect.cs:188
+#: ../Pinta.Effects/Effects/AddNoiseEffect.cs:173
 msgid "Coverage"
 msgstr "範囲"
 
@@ -575,9 +579,13 @@ msgid "Difference"
 msgstr "差の絶対値"
 
 #: ../Pinta.Effects/Effects/FragmentEffect.cs:117
-#: ../Pinta.Effects/Effects/MotionBlurEffect.cs:107
+#: ../Pinta.Effects/Effects/MotionBlurEffect.cs:111
 msgid "Distance"
 msgstr "距離"
+
+#: ../Pinta.Effects/Effects/VoronoiDiagramEffect.cs:197
+msgid "Distance Metric"
+msgstr ""
 
 #: ../Pinta.Effects/Effects/BulgeEffect.cs:27
 #: ../Pinta.Effects/Effects/FrostedGlassEffect.cs:27
@@ -662,7 +670,7 @@ msgstr "消しゴム"
 msgid "Error"
 msgstr "エラー"
 
-#: ../Pinta.Effects/Effects/DitheringEffect.cs:140
+#: ../Pinta.Effects/Effects/DitheringEffect.cs:133
 msgid "Error Diffusion Method"
 msgstr ""
 
@@ -679,8 +687,8 @@ msgstr ""
 msgid "Extension packages"
 msgstr ""
 
-#: ../Pinta.Effects/Effects/JuliaFractalEffect.cs:169
-#: ../Pinta.Effects/Effects/MandelbrotFractalEffect.cs:189
+#: ../Pinta.Effects/Effects/JuliaFractalEffect.cs:166
+#: ../Pinta.Effects/Effects/MandelbrotFractalEffect.cs:184
 msgid "Factor"
 msgstr "係数"
 
@@ -873,6 +881,21 @@ msgstr "ヒント: まず目の部分を選択ツールで選択するとうま�
 msgid "History"
 msgstr "履歴"
 
+#. Translators: Horizontal color sorting with blue (B) as the leading term
+#: ../Pinta.Effects/Effects/VoronoiDiagramEffect.cs:233
+msgid "Horizontal blue (B)"
+msgstr ""
+
+#. Translators: Horizontal color sorting with green (G) as the leading term
+#: ../Pinta.Effects/Effects/VoronoiDiagramEffect.cs:236
+msgid "Horizontal green (G)"
+msgstr ""
+
+#. Translators: Horizontal color sorting with red (R) as the leading term
+#: ../Pinta.Effects/Effects/VoronoiDiagramEffect.cs:239
+msgid "Horizontal red (R)"
+msgstr ""
+
 #: ../Pinta.Core/Effects/UserBlendOps.cs:45
 #: ../Pinta.Effects/Adjustments/HueSaturationEffect.cs:61
 msgid "Hue"
@@ -968,9 +991,9 @@ msgstr "インストール..."
 msgid "Installed"
 msgstr "インストール済"
 
-#: ../Pinta.Effects/Effects/AddNoiseEffect.cs:182
+#: ../Pinta.Effects/Effects/AddNoiseEffect.cs:167
 #: ../Pinta.Effects/Effects/OutlineEffect.cs:141
-#: ../Pinta.Effects/Effects/TileEffect.cs:186
+#: ../Pinta.Effects/Effects/TileEffect.cs:180
 msgid "Intensity"
 msgstr "輝度"
 
@@ -981,7 +1004,7 @@ msgid "Intersect ({0} + Left Click)"
 msgstr "Intersect ({0} + 左クリック)"
 
 #: ../Pinta.Effects/Adjustments/InvertColorsEffect.cs:24
-#: ../Pinta.Effects/Effects/MandelbrotFractalEffect.cs:214
+#: ../Pinta.Effects/Effects/MandelbrotFractalEffect.cs:209
 msgid "Invert Colors"
 msgstr "色を反転"
 
@@ -1258,7 +1281,7 @@ msgstr "修正"
 msgid "More Information..."
 msgstr ""
 
-#: ../Pinta.Effects/Effects/MotionBlurEffect.cs:23
+#: ../Pinta.Effects/Effects/MotionBlurEffect.cs:24
 msgid "Motion Blur"
 msgstr "モーションぼかし"
 
@@ -1341,11 +1364,15 @@ msgstr "標準のサイズ"
 msgid "Normal and Outline"
 msgstr "アウトライン付き"
 
+#: ../Pinta.Effects/Effects/VoronoiDiagramEffect.cs:200
+msgid "Number of Cells"
+msgstr ""
+
 #: ../Pinta/Main.cs:55
 msgid "Number of threads to use for rendering"
 msgstr ""
 
-#: ../Pinta.Effects/Effects/BulgeEffect.cs:118
+#: ../Pinta.Effects/Effects/BulgeEffect.cs:114
 #: ../Pinta.Effects/Effects/RadialBlurEffect.cs:175
 #: ../Pinta.Effects/Effects/ZoomBlurEffect.cs:148
 msgid "Offset"
@@ -1440,7 +1467,7 @@ msgid "Paintbrush"
 msgstr "絵筆"
 
 #: ../Pinta.Core/Actions/EditActions.cs:136
-#: ../Pinta.Effects/Effects/DitheringEffect.cs:143
+#: ../Pinta.Effects/Effects/DitheringEffect.cs:136
 msgid "Palette"
 msgstr "パレット"
 
@@ -1476,7 +1503,7 @@ msgstr "鉛筆"
 msgid "Pencil Sketch"
 msgstr "鉛筆"
 
-#: ../Pinta.Effects/Effects/PencilSketchEffect.cs:91
+#: ../Pinta.Effects/Effects/PencilSketchEffect.cs:86
 msgid "Pencil Tip Size"
 msgstr "鉛筆の先端のサイズ"
 
@@ -1605,10 +1632,10 @@ msgstr "プライマリ"
 msgid "Print"
 msgstr "印刷"
 
-#: ../Pinta.Effects/Effects/JuliaFractalEffect.cs:172
-#: ../Pinta.Effects/Effects/MandelbrotFractalEffect.cs:192
+#: ../Pinta.Effects/Effects/JuliaFractalEffect.cs:169
+#: ../Pinta.Effects/Effects/MandelbrotFractalEffect.cs:187
 #: ../Pinta.Effects/Effects/RadialBlurEffect.cs:178
-#: ../Pinta.Effects/Effects/WarpEffect.cs:187
+#: ../Pinta.Effects/Effects/WarpEffect.cs:181
 msgid "Quality"
 msgstr "品質"
 
@@ -1642,20 +1669,29 @@ msgid "Radius"
 msgstr "半径"
 
 #: ../Pinta.Effects/Effects/GradientHelper.cs:17
+#: ../Pinta.Effects/Effects/VoronoiDiagramEffect.cs:230
 msgid "Random"
 msgstr ""
 
 #: ../Pinta.Effects/Effects/CloudsEffect.cs:253
-#: ../Pinta.Effects/Effects/JuliaFractalEffect.cs:184
-#: ../Pinta.Effects/Effects/MandelbrotFractalEffect.cs:208
+#: ../Pinta.Effects/Effects/JuliaFractalEffect.cs:181
+#: ../Pinta.Effects/Effects/MandelbrotFractalEffect.cs:203
 msgid "Random Color Scheme Seed"
 msgstr ""
 
-#: ../Pinta.Effects/Effects/AddNoiseEffect.cs:191
+#: ../Pinta.Effects/Effects/VoronoiDiagramEffect.cs:214
+msgid "Random Colors"
+msgstr ""
+
+#: ../Pinta.Effects/Effects/AddNoiseEffect.cs:176
 #: ../Pinta.Effects/Effects/CloudsEffect.cs:244
 #: ../Pinta.Effects/Effects/FrostedGlassEffect.cs:154
 msgid "Random Noise"
 msgstr "ランダムノイズ"
+
+#: ../Pinta.Effects/Effects/VoronoiDiagramEffect.cs:217
+msgid "Random Point Locations"
+msgstr ""
 
 #: ../Pinta.Tools/Tools/RecolorTool.cs:56
 msgid "Recolor"
@@ -1713,6 +1749,7 @@ msgstr "レイヤー名を変更"
 #: ../Pinta.Effects/Effects/CloudsEffect.cs:33
 #: ../Pinta.Effects/Effects/JuliaFractalEffect.cs:27
 #: ../Pinta.Effects/Effects/MandelbrotFractalEffect.cs:27
+#: ../Pinta.Effects/Effects/VoronoiDiagramEffect.cs:22
 msgid "Render"
 msgstr "レンダリング"
 
@@ -1768,9 +1805,14 @@ msgid "Resize Palette"
 msgstr "パレットサイズの変更"
 
 #: ../Pinta.Effects/Effects/CloudsEffect.cs:256
-#: ../Pinta.Effects/Effects/JuliaFractalEffect.cs:187
-#: ../Pinta.Effects/Effects/MandelbrotFractalEffect.cs:211
+#: ../Pinta.Effects/Effects/JuliaFractalEffect.cs:184
+#: ../Pinta.Effects/Effects/MandelbrotFractalEffect.cs:206
 msgid "Reverse Color Scheme"
+msgstr ""
+
+#. Translators: In this context, "reverse" is a verb, and the user can choose whether or not they want to reverse the color sorting
+#: ../Pinta.Effects/Effects/VoronoiDiagramEffect.cs:211
+msgid "Reverse Color Sorting"
 msgstr ""
 
 #: ../Pinta.Tools/Tools/TextTool.cs:226
@@ -1802,7 +1844,7 @@ msgid "Rotate 90° Counter-Clockwise"
 msgstr "90度回転 (反時計回り)"
 
 #: ../Pinta.Effects/Effects/FragmentEffect.cs:120
-#: ../Pinta.Effects/Effects/TileEffect.cs:180
+#: ../Pinta.Effects/Effects/TileEffect.cs:174
 msgid "Rotation"
 msgstr "回転"
 
@@ -1912,6 +1954,11 @@ msgstr "ショートカット"
 #: ../Pinta/Actions/Layers/LayerPropertiesAction.cs:108
 msgid "Show Layer"
 msgstr "レイヤーを表示"
+
+#. Translators: The user can choose whether or not to render the points used in the calculation of a Voronoi diagram
+#: ../Pinta.Effects/Effects/VoronoiDiagramEffect.cs:204
+msgid "Show Points"
+msgstr ""
 
 #: ../Pinta.Core/Actions/ViewActions.cs:155
 msgid "Show/Hide"
@@ -2071,7 +2118,7 @@ msgstr "太さ"
 msgid "Tile Reflection"
 msgstr "タイル反射"
 
-#: ../Pinta.Effects/Effects/TileEffect.cs:183
+#: ../Pinta.Effects/Effects/TileEffect.cs:177
 msgid "Tile Size"
 msgstr "タイルのサイズ"
 
@@ -2197,9 +2244,28 @@ msgstr "一部のアイコン:"
 msgid "Version: {0}"
 msgstr ""
 
+#. Translators: Vertical color sorting with blue (B) as the leading term
+#: ../Pinta.Effects/Effects/VoronoiDiagramEffect.cs:243
+msgid "Vertical blue (B)"
+msgstr ""
+
+#. Translators: Vertical color sorting with green (G) as the leading term
+#: ../Pinta.Effects/Effects/VoronoiDiagramEffect.cs:246
+msgid "Vertical green (G)"
+msgstr ""
+
+#. Translators: Vertical color sorting with red (R) as the leading term
+#: ../Pinta.Effects/Effects/VoronoiDiagramEffect.cs:249
+msgid "Vertical red (R)"
+msgstr ""
+
 #: ../Pinta/Dialogs/LayerPropertiesDialog.cs:83
 msgid "Visible"
 msgstr "表示"
+
+#: ../Pinta.Effects/Effects/VoronoiDiagramEffect.cs:18
+msgid "Voronoi Diagram"
+msgstr ""
 
 #: ../Pinta.Effects/Effects/SoftenPortraitEffect.cs:120
 msgid "Warmth"
@@ -2251,8 +2317,8 @@ msgstr ""
 "'{0}' を変更するためのアクセス権がありません。ファイルまたはフォルダが読み取"
 "り専用である可能性があります。"
 
-#: ../Pinta.Effects/Effects/JuliaFractalEffect.cs:175
-#: ../Pinta.Effects/Effects/MandelbrotFractalEffect.cs:196
+#: ../Pinta.Effects/Effects/JuliaFractalEffect.cs:172
+#: ../Pinta.Effects/Effects/MandelbrotFractalEffect.cs:191
 #: ../Pinta.Tools/Tools/ZoomTool.cs:55
 #: ../Pinta/Actions/Layers/RotateZoomLayerAction.cs:121
 msgid "Zoom"
