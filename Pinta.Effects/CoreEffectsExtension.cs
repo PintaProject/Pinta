@@ -24,6 +24,7 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 // THE SOFTWARE.
 
+using System;
 using Mono.Addins;
 using Pinta.Core;
 
@@ -41,7 +42,7 @@ internal sealed class CoreEffectsExtension : IExtension
 	#region IExtension Members
 	public void Initialize ()
 	{
-		IServiceManager services = PintaCore.Services;
+		IServiceProvider services = PintaCore.Services;
 
 		// Add the adjustments
 		PintaCore.Effects.RegisterAdjustment (new AutoLevelEffect (services));

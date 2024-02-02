@@ -38,7 +38,7 @@ public sealed class CloudsEffect : BaseEffect
 
 	private readonly IChromeService chrome;
 
-	public CloudsEffect (IServiceManager services)
+	public CloudsEffect (IServiceProvider services)
 	{
 		chrome = services.GetService<IChromeService> ();
 		palette = services.GetService<IPaletteService> ();

@@ -36,7 +36,7 @@ public sealed class PencilSketchEffect : BaseEffect
 
 	private readonly IChromeService chrome;
 
-	public PencilSketchEffect (IServiceManager services)
+	public PencilSketchEffect (IServiceProvider services)
 	{
 		chrome = services.GetService<IChromeService> ();
 
@@ -50,9 +50,7 @@ public sealed class PencilSketchEffect : BaseEffect
 	}
 
 	public override void LaunchConfiguration ()
-	{
-		chrome.LaunchSimpleEffectDialog (this);
-	}
+		=> chrome.LaunchSimpleEffectDialog (this);
 
 	#region Algorithm Code Ported From PDN
 	public override void Render (ImageSurface src, ImageSurface dest, ReadOnlySpan<RectangleI> rois)

@@ -24,13 +24,14 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 // THE SOFTWARE.
 
+using System;
 using Pinta.Core;
 
 namespace Pinta.Tools;
 
 public sealed class RectangleTool : ShapeTool
 {
-	public RectangleTool (IServiceManager services) : base (services)
+	public RectangleTool (IServiceProvider services) : base (services)
 	{
 		BaseEditEngine.CorrespondingTools[ShapeType] = this;
 	}
@@ -40,7 +41,9 @@ public sealed class RectangleTool : ShapeTool
 	public override Gdk.Cursor DefaultCursor => Gdk.Cursor.NewFromTexture (Resources.GetIcon ("Cursor.Rectangle.png"), 9, 18, null);
 	public override int Priority => 39;
 
-	public override BaseEditEngine.ShapeTypes ShapeType => BaseEditEngine.ShapeTypes.ClosedLineCurveSeries;
+	public override BaseEditEngine.ShapeTypes ShapeType
+		=> BaseEditEngine.ShapeTypes.ClosedLineCurveSeries;
 
-	protected override BaseEditEngine CreateEditEngine () => new RectangleEditEngine (this);
+	protected override BaseEditEngine CreateEditEngine ()
+		=> new RectangleEditEngine (this);
 }

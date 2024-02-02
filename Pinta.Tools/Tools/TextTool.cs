@@ -9,7 +9,6 @@
 /////////////////////////////////////////////////////////////////////////////////
 
 using System;
-using System.Text;
 using System.Threading.Tasks;
 using Gdk;
 using Gtk;
@@ -93,7 +92,7 @@ public sealed class TextTool : BaseTool
 	public override Gdk.Cursor DefaultCursor => GdkExtensions.CursorFromName (Pinta.Resources.StandardCursors.Text);
 
 	#region Constructor
-	public TextTool (IServiceManager services) : base (services)
+	public TextTool (IServiceProvider services) : base (services)
 	{
 		im_context = Gtk.IMMulticontext.New ();
 		im_context.OnCommit += OnIMCommit;

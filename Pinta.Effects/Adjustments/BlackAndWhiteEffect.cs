@@ -25,10 +25,8 @@ public sealed class BlackAndWhiteEffect : BaseEffect
 
 	public override string AdjustmentMenuKey => "G";
 
-	public BlackAndWhiteEffect (IServiceManager _) { }
+	public BlackAndWhiteEffect (IServiceProvider _) { }
 
 	public override void Render (ImageSurface src, ImageSurface dest, ReadOnlySpan<RectangleI> rois)
-	{
-		op.Apply (dest, src, rois);
-	}
+		=> op.Apply (dest, src, rois);
 }

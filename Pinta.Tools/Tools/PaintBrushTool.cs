@@ -42,7 +42,7 @@ public sealed class PaintBrushTool : BaseBrushTool
 
 	private const string BRUSH_SETTING = "paint-brush-brush";
 
-	public PaintBrushTool (IServiceManager services) : base (services)
+	public PaintBrushTool (IServiceProvider services) : base (services)
 	{
 		brushes = services.GetService<IPaintBrushService> ();
 

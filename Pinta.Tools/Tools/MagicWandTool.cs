@@ -24,6 +24,7 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 // THE SOFTWARE.
 
+using System;
 using System.Collections.Generic;
 using Gtk;
 using Pinta.Core;
@@ -36,10 +37,9 @@ public sealed class MagicWandTool : FloodTool
 
 	private CombineMode combine_mode;
 
-	public MagicWandTool (IServiceManager services) : base (services)
+	public MagicWandTool (IServiceProvider services) : base (services)
 	{
 		workspace = services.GetService<IWorkspaceService> ();
-
 		LimitToSelection = false;
 	}
 

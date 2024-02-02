@@ -24,6 +24,7 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 // THE SOFTWARE.
 
+using System;
 using Cairo;
 using Pinta.Core;
 
@@ -34,9 +35,7 @@ public sealed class MoveSelectionTool : BaseTransformTool
 	private SelectionHistoryItem? hist;
 	private DocumentSelection? original_selection;
 
-	public MoveSelectionTool (IServiceManager service) : base (service)
-	{
-	}
+	public MoveSelectionTool (IServiceProvider service) : base (service) { }
 
 	public override string Name => Translations.GetString ("Move Selection");
 	public override string Icon => Pinta.Resources.Icons.ToolMoveSelection;
@@ -53,9 +52,7 @@ public sealed class MoveSelectionTool : BaseTransformTool
 	public override int Priority => 7;
 
 	protected override RectangleD GetSourceRectangle (Document document)
-	{
-		return document.Selection.SelectionPath.GetBounds ().ToDouble ();
-	}
+		=> document.Selection.SelectionPath.GetBounds ().ToDouble ();
 
 	protected override void OnStartTransform (Document document)
 	{

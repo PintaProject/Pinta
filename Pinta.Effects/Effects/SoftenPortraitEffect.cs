@@ -61,7 +61,7 @@ public sealed class SoftenPortraitEffect : BaseEffect
 
 	private readonly IChromeService chrome;
 
-	public SoftenPortraitEffect (IServiceManager services)
+	public SoftenPortraitEffect (IServiceProvider services)
 	{
 		chrome = services.GetService<IChromeService> ();
 

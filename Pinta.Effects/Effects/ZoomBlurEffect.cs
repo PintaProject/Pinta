@@ -30,16 +30,14 @@ public sealed class ZoomBlurEffect : BaseEffect
 
 	private readonly IChromeService chrome;
 
-	public ZoomBlurEffect (IServiceManager services)
+	public ZoomBlurEffect (IServiceProvider services)
 	{
 		chrome = services.GetService<IChromeService> ();
 		EffectData = new ZoomBlurData ();
 	}
 
 	public override void LaunchConfiguration ()
-	{
-		chrome.LaunchSimpleEffectDialog (this);
-	}
+		=> chrome.LaunchSimpleEffectDialog (this);
 
 	#region Algorithm Code Ported From PDN
 

@@ -47,7 +47,7 @@ public sealed class EraserTool : BaseBrushTool
 
 	private const string ERASER_TYPE_SETTING = "eraser-erase-type";
 
-	public EraserTool (IServiceManager services) : base (services) { }
+	public EraserTool (IServiceProvider services) : base (services) { }
 
 	public override string Name => Translations.GetString ("Eraser");
 	public override string Icon => Pinta.Resources.Icons.ToolEraser;

@@ -24,13 +24,14 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 // THE SOFTWARE.
 
+using System;
 using Pinta.Core;
 
 namespace Pinta.Tools;
 
 public sealed class RoundedRectangleTool : ShapeTool
 {
-	public RoundedRectangleTool (IServiceManager services) : base (services)
+	public RoundedRectangleTool (IServiceProvider services) : base (services)
 	{
 		BaseEditEngine.CorrespondingTools[ShapeType] = this;
 	}

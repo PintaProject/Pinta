@@ -33,16 +33,14 @@ public sealed class OutlineEffect : LocalHistogramEffect
 
 	private readonly IChromeService chrome;
 
-	public OutlineEffect (IServiceManager services)
+	public OutlineEffect (IServiceProvider services)
 	{
 		chrome = services.GetService<IChromeService> ();
 		EffectData = new OutlineData ();
 	}
 
 	public override void LaunchConfiguration ()
-	{
-		chrome.LaunchSimpleEffectDialog (this);
-	}
+		=> chrome.LaunchSimpleEffectDialog (this);
 
 	#region Algorithm Code Ported From PDN
 	public override ColorBgra Apply (in ColorBgra src, int area, Span<int> hb, Span<int> hg, Span<int> hr, Span<int> ha)

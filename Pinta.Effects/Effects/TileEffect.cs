@@ -30,7 +30,7 @@ public sealed class TileEffect : BaseEffect
 
 	private readonly IChromeService chrome;
 
-	public TileEffect (IServiceManager services)
+	public TileEffect (IServiceProvider services)
 	{
 		chrome = services.GetService<IChromeService> ();
 

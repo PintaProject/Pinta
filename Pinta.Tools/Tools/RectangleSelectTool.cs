@@ -24,13 +24,14 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 // THE SOFTWARE.
 
+using System;
 using Pinta.Core;
 
 namespace Pinta.Tools;
 
 public sealed class RectangleSelectTool : SelectTool
 {
-	public RectangleSelectTool (IServiceManager services) : base (services) { }
+	public RectangleSelectTool (IServiceProvider services) : base (services) { }
 
 	public override string Name => Translations.GetString ("Rectangle Select");
 	public override string Icon => Pinta.Resources.Icons.ToolSelectRectangle;

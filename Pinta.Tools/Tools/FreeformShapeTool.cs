@@ -24,6 +24,7 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 // THE SOFTWARE.
 
+using System;
 using Cairo;
 using Gtk;
 using Pinta.Core;
@@ -45,9 +46,7 @@ public sealed class FreeformShapeTool : BaseBrushTool
 	private const string FILL_TYPE_SETTING = "freeform-shape-fill-type";
 	private const string DASH_PATTERN_SETTING = "freeform-shape-dash_pattern";
 
-	public FreeformShapeTool (IServiceManager services) : base (services)
-	{
-	}
+	public FreeformShapeTool (IServiceProvider services) : base (services) { }
 
 	public override string Name => Translations.GetString ("Freeform Shape");
 	public override string Icon => Pinta.Resources.Icons.ToolFreeformShape;

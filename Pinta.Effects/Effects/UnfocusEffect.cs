@@ -32,7 +32,7 @@ public sealed class UnfocusEffect : LocalHistogramEffect
 
 	private readonly IChromeService chrome;
 
-	public UnfocusEffect (IServiceManager services)
+	public UnfocusEffect (IServiceProvider services)
 	{
 		chrome = services.GetService<IChromeService> ();
 
@@ -40,9 +40,7 @@ public sealed class UnfocusEffect : LocalHistogramEffect
 	}
 
 	public override void LaunchConfiguration ()
-	{
-		chrome.LaunchSimpleEffectDialog (this);
-	}
+		=> chrome.LaunchSimpleEffectDialog (this);
 
 	#region Algorithm Code Ported From PDN
 	public override void Render (ImageSurface src, ImageSurface dest, ReadOnlySpan<RectangleI> rois)

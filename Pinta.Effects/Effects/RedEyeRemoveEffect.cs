@@ -30,7 +30,7 @@ public sealed class RedEyeRemoveEffect : BaseEffect
 
 	private readonly IChromeService chrome;
 
-	public RedEyeRemoveEffect (IServiceManager services)
+	public RedEyeRemoveEffect (IServiceProvider services)
 	{
 		chrome = services.GetService<IChromeService> ();
 
@@ -38,9 +38,7 @@ public sealed class RedEyeRemoveEffect : BaseEffect
 	}
 
 	public override void LaunchConfiguration ()
-	{
-		chrome.LaunchSimpleEffectDialog (this);
-	}
+		=> chrome.LaunchSimpleEffectDialog (this);
 
 	public override void Render (ImageSurface src, ImageSurface dest, ReadOnlySpan<RectangleI> rois)
 	{

@@ -31,7 +31,7 @@ public sealed class PosterizeEffect : BaseEffect
 
 	private readonly IChromeService chrome;
 
-	public PosterizeEffect (IServiceManager services)
+	public PosterizeEffect (IServiceProvider services)
 	{
 		chrome = services.GetService<IChromeService> ();
 

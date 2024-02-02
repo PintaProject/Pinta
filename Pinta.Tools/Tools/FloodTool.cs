@@ -34,6 +34,7 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 // THE SOFTWARE.
 
+using System;
 using System.Collections.Generic;
 using Gtk;
 using Pinta.Core;
@@ -48,9 +49,7 @@ public abstract class FloodTool : BaseTool
 	protected Label? tolerance_label;
 	protected Scale? tolerance_slider;
 
-	public FloodTool (IServiceManager services) : base (services)
-	{
-	}
+	public FloodTool (IServiceProvider services) : base (services) { }
 
 	protected bool IsContinguousMode => ModeDropDown.SelectedItem.GetTagOrDefault (true);
 	protected float Tolerance => (float) (ToleranceSlider.GetValue () / 100);

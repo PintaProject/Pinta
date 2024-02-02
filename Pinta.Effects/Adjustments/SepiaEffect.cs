@@ -26,7 +26,7 @@ public sealed class SepiaEffect : BaseEffect
 
 	public override string AdjustmentMenuKey => "E";
 
-	public SepiaEffect (IServiceManager _)
+	public SepiaEffect (IServiceProvider _)
 	{
 		desat = new UnaryPixelOps.Desaturate ();
 		level = new UnaryPixelOps.Level (

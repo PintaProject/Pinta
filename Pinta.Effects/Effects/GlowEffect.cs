@@ -17,7 +17,7 @@ namespace Pinta.Effects;
 public sealed class GlowEffect : BaseEffect
 {
 	private readonly UserBlendOps.ScreenBlendOp screen_blend_op;
-	private readonly IServiceManager services;
+	private readonly IServiceProvider services;
 
 	public override string Icon => Pinta.Resources.Icons.EffectsPhotoGlow;
 
@@ -33,7 +33,7 @@ public sealed class GlowEffect : BaseEffect
 
 	private readonly IChromeService chrome;
 
-	public GlowEffect (IServiceManager services)
+	public GlowEffect (IServiceProvider services)
 	{
 		chrome = services.GetService<IChromeService> ();
 		EffectData = new GlowData ();
@@ -42,9 +42,7 @@ public sealed class GlowEffect : BaseEffect
 	}
 
 	public override void LaunchConfiguration ()
-	{
-		chrome.LaunchSimpleEffectDialog (this);
-	}
+		=> chrome.LaunchSimpleEffectDialog (this);
 
 	#region Algorithm Code Ported From PDN
 	public override void Render (ImageSurface src, ImageSurface dest, ReadOnlySpan<RectangleI> rois)

@@ -24,13 +24,14 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 // THE SOFTWARE.
 
+using System;
 using Pinta.Core;
 
 namespace Pinta.Tools;
 
 public sealed class EllipseTool : ShapeTool
 {
-	public EllipseTool (IServiceManager services) : base (services)
+	public EllipseTool (IServiceProvider services) : base (services)
 	{
 		BaseEditEngine.CorrespondingTools[ShapeType] = this;
 	}

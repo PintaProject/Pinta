@@ -25,7 +25,7 @@ public sealed class VoronoiDiagramEffect : BaseEffect
 
 	private readonly IChromeService chrome;
 
-	public VoronoiDiagramEffect (IServiceManager services)
+	public VoronoiDiagramEffect (IServiceProvider services)
 	{
 		chrome = services.GetService<IChromeService> ();
 		EffectData = new VoronoiDiagramData ();

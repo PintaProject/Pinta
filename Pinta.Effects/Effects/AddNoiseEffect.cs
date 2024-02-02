@@ -36,7 +36,7 @@ public sealed class AddNoiseEffect : BaseEffect
 
 	private readonly IChromeService chrome;
 
-	public AddNoiseEffect (IServiceManager services)
+	public AddNoiseEffect (IServiceProvider services)
 	{
 		chrome = services.GetService<IChromeService> ();
 		EffectData = new NoiseData ();

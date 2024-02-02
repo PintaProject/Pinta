@@ -18,7 +18,7 @@ public sealed class DitheringEffect : BaseEffect
 
 	private readonly IChromeService chrome;
 
-	public DitheringEffect (IServiceManager services)
+	public DitheringEffect (IServiceProvider services)
 	{
 		chrome = services.GetService<IChromeService> ();
 		EffectData = new DitheringData ();

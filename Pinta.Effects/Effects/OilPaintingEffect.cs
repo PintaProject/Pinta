@@ -30,16 +30,14 @@ public sealed class OilPaintingEffect : BaseEffect
 
 	private readonly IChromeService chrome;
 
-	public OilPaintingEffect (IServiceManager services)
+	public OilPaintingEffect (IServiceProvider services)
 	{
 		chrome = services.GetService<IChromeService> ();
 		EffectData = new OilPaintingData ();
 	}
 
 	public override void LaunchConfiguration ()
-	{
-		chrome.LaunchSimpleEffectDialog (this);
-	}
+		=> chrome.LaunchSimpleEffectDialog (this);
 
 	#region Algorithm Code Ported From PDN
 	public override void Render (ImageSurface src, ImageSurface dest, ReadOnlySpan<RectangleI> rois)

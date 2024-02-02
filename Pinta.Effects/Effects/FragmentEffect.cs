@@ -31,16 +31,14 @@ public sealed class FragmentEffect : BaseEffect
 
 	private readonly IChromeService chrome;
 
-	public FragmentEffect (IServiceManager services)
+	public FragmentEffect (IServiceProvider services)
 	{
 		chrome = services.GetService<IChromeService> ();
 		EffectData = new FragmentData ();
 	}
 
 	public override void LaunchConfiguration ()
-	{
-		chrome.LaunchSimpleEffectDialog (this);
-	}
+		=> chrome.LaunchSimpleEffectDialog (this);
 
 	#region Algorithm Code Ported From PDN
 

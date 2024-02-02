@@ -24,6 +24,7 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 // THE SOFTWARE.
 
+using System;
 using Gdk;
 using Pinta.Core;
 
@@ -36,7 +37,7 @@ public sealed class CloneStampTool : BaseBrushTool
 	private PointI? offset = null;
 	private PointI? last_point = null;
 
-	public CloneStampTool (IServiceManager services) : base (services)
+	public CloneStampTool (IServiceProvider services) : base (services)
 	{
 	}
 

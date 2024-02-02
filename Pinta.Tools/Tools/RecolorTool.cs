@@ -33,6 +33,7 @@
 // See license-pdn.txt for full licensing and attribution details.             //
 /////////////////////////////////////////////////////////////////////////////////
 
+using System;
 using Cairo;
 using Gtk;
 using Pinta.Core;
@@ -48,7 +49,7 @@ public class RecolorTool : BaseBrushTool
 
 	private const string TOLERANCE_SETTING = "recolor-tolerance";
 
-	public RecolorTool (IServiceManager services) : base (services)
+	public RecolorTool (IServiceProvider services) : base (services)
 	{
 		workspace = services.GetService<IWorkspaceService> ();
 	}

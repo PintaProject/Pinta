@@ -33,7 +33,7 @@ public sealed class ReduceNoiseEffect : LocalHistogramEffect
 
 	private readonly IChromeService chrome;
 
-	public ReduceNoiseEffect (IServiceManager services)
+	public ReduceNoiseEffect (IServiceProvider services)
 	{
 		chrome = services.GetService<IChromeService> ();
 
@@ -41,9 +41,7 @@ public sealed class ReduceNoiseEffect : LocalHistogramEffect
 	}
 
 	public override void LaunchConfiguration ()
-	{
-		chrome.LaunchSimpleEffectDialog (this);
-	}
+		=> chrome.LaunchSimpleEffectDialog (this);
 
 	#region Algorithm Code Ported From PDN
 	public override ColorBgra Apply (in ColorBgra color, int area, Span<int> hb, Span<int> hg, Span<int> hr, Span<int> ha)

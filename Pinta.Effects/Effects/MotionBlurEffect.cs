@@ -31,7 +31,7 @@ public sealed class MotionBlurEffect : BaseEffect
 
 	private readonly IChromeService chrome;
 
-	public MotionBlurEffect (IServiceManager services)
+	public MotionBlurEffect (IServiceProvider services)
 	{
 		chrome = services.GetService<IChromeService> ();
 		EffectData = new MotionBlurData ();

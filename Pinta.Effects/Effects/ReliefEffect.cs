@@ -17,7 +17,7 @@ public sealed class ReliefEffect : ColorDifferenceEffect
 {
 	private readonly IChromeService chrome;
 
-	public ReliefEffect (IServiceManager services)
+	public ReliefEffect (IServiceProvider services)
 	{
 		chrome = services.GetService<IChromeService> ();
 
@@ -33,9 +33,7 @@ public sealed class ReliefEffect : ColorDifferenceEffect
 	public override string EffectMenuCategory => Translations.GetString ("Stylize");
 
 	public override void LaunchConfiguration ()
-	{
-		chrome.LaunchSimpleEffectDialog (this);
-	}
+		=> chrome.LaunchSimpleEffectDialog (this);
 
 	public override string Icon => Pinta.Resources.Icons.EffectsStylizeRelief;
 

@@ -7,6 +7,7 @@
 // Ported to Pinta by: Olivier Dufour <olivier.duff@gmail.com>                 //
 /////////////////////////////////////////////////////////////////////////////////
 
+using System;
 using Pinta.Core;
 using Pinta.Gui.Widgets;
 
@@ -29,7 +30,7 @@ public sealed class PolarInversionEffect : WarpEffect
 	protected override IPaletteService Palette { get; }
 	protected override IChromeService Chrome { get; }
 
-	public PolarInversionEffect (IServiceManager services)
+	public PolarInversionEffect (IServiceProvider services)
 	{
 		Palette = services.GetService<IPaletteService> ();
 		Chrome = services.GetService<IChromeService> ();
