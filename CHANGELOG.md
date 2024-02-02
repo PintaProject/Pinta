@@ -41,6 +41,7 @@ Thanks to the following contributors who worked on this release:
 - Fixed potential errors when pasting in the text tool if the clipboard didn't contain text ([#2047495](https://bugs.launchpad.net/pinta/+bug/2047495))
 - The text tool now supports pre-editing to display the intermediate characters entered by an input method ([#2047445](https://bugs.launchpad.net/pinta/+bug/2047445))
 - Fixed layout issues in the effect dialogs ([#2049937](https://bugs.launchpad.net/pinta/+bug/2049937))
+- Fixed a bug where the Flip Horizontal / Vertical items in the Image menu incorrectly activated the Layer menu's flip actions ([#2051430](https://bugs.launchpad.net/pinta/+bug/2051430))
 
 ## [2.1.1](https://github.com/PintaProject/Pinta/releases/tag/2.1.1) - 2023/02/26
 
