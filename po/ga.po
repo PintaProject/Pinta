@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: pinta\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-01-18 03:35+0000\n"
+"POT-Creation-Date: 2024-01-28 01:09+0000\n"
 "PO-Revision-Date: 2014-03-21 04:13+0000\n"
 "Last-Translator: Seanan <Unknown>\n"
 "Language-Team: Irish <ga@li.org>\n"
@@ -92,10 +92,10 @@ msgstr "Tar éis an roghnú"
 msgid "All files"
 msgstr "Gach comhad"
 
-#: ../Pinta.Effects/Effects/BulgeEffect.cs:115
+#: ../Pinta.Effects/Effects/BulgeEffect.cs:111
 #: ../Pinta.Effects/Effects/FrostedGlassEffect.cs:151
 #: ../Pinta.Effects/Effects/SharpenEffect.cs:60
-#: ../Pinta.Effects/Effects/TwistEffect.cs:149
+#: ../Pinta.Effects/Effects/TwistEffect.cs:142
 #: ../Pinta.Effects/Effects/ZoomBlurEffect.cs:145
 msgid "Amount"
 msgstr "Méid"
@@ -106,9 +106,9 @@ msgstr "Ancaire:"
 
 #: ../Pinta.Effects/Effects/EdgeDetectEffect.cs:83
 #: ../Pinta.Effects/Effects/EmbossEffect.cs:150
-#: ../Pinta.Effects/Effects/JuliaFractalEffect.cs:190
-#: ../Pinta.Effects/Effects/MandelbrotFractalEffect.cs:199
-#: ../Pinta.Effects/Effects/MotionBlurEffect.cs:104
+#: ../Pinta.Effects/Effects/JuliaFractalEffect.cs:187
+#: ../Pinta.Effects/Effects/MandelbrotFractalEffect.cs:194
+#: ../Pinta.Effects/Effects/MotionBlurEffect.cs:108
 #: ../Pinta.Effects/Effects/RadialBlurEffect.cs:172
 #: ../Pinta.Effects/Effects/ReliefEffect.cs:85
 #: ../Pinta.Tools/Editable/EditEngines/ArrowedEditEngine.cs:298
@@ -116,7 +116,7 @@ msgstr "Ancaire:"
 msgid "Angle"
 msgstr "Uillinn"
 
-#: ../Pinta.Effects/Effects/TwistEffect.cs:152
+#: ../Pinta.Effects/Effects/TwistEffect.cs:145
 msgid "Antialias"
 msgstr "Frith-ailias:"
 
@@ -210,7 +210,7 @@ msgstr "Gorm "
 
 #: ../Pinta.Effects/Effects/FragmentEffect.cs:28
 #: ../Pinta.Effects/Effects/GaussianBlurEffect.cs:28
-#: ../Pinta.Effects/Effects/MotionBlurEffect.cs:27
+#: ../Pinta.Effects/Effects/MotionBlurEffect.cs:28
 #: ../Pinta.Effects/Effects/RadialBlurEffect.cs:27
 #: ../Pinta.Effects/Effects/UnfocusEffect.cs:29
 #: ../Pinta.Effects/Effects/ZoomBlurEffect.cs:27
@@ -235,7 +235,7 @@ msgstr "Gile"
 msgid "Brightness / Contrast"
 msgstr "Gile / Codarsnacht"
 
-#: ../Pinta.Effects/Effects/OilPaintingEffect.cs:145
+#: ../Pinta.Effects/Effects/OilPaintingEffect.cs:132
 msgid "Brush Size"
 msgstr "Méid na Scuaibe"
 
@@ -285,11 +285,11 @@ msgstr "Méid na Cille"
 msgid "Center Align"
 msgstr "Ailínigh sa lár"
 
-#: ../Pinta.Effects/Effects/WarpEffect.cs:190
+#: ../Pinta.Effects/Effects/WarpEffect.cs:184
 msgid "Center Offset"
 msgstr ""
 
-#: ../Pinta.Effects/Effects/MotionBlurEffect.cs:110
+#: ../Pinta.Effects/Effects/MotionBlurEffect.cs:114
 msgid "Centered"
 msgstr "Láraithe"
 
@@ -408,7 +408,7 @@ msgstr ""
 msgid "Clouds"
 msgstr "Scamaill"
 
-#: ../Pinta.Effects/Effects/OilPaintingEffect.cs:148
+#: ../Pinta.Effects/Effects/OilPaintingEffect.cs:135
 msgid "Coarseness"
 msgstr ""
 
@@ -433,25 +433,29 @@ msgstr ""
 msgid "Color Picker"
 msgstr "Roghnóir Dathanna"
 
-#: ../Pinta.Effects/Effects/PencilSketchEffect.cs:94
+#: ../Pinta.Effects/Effects/PencilSketchEffect.cs:89
 msgid "Color Range"
 msgstr "Raon na nDathanna"
 
-#: ../Pinta.Effects/Effects/AddNoiseEffect.cs:185
+#: ../Pinta.Effects/Effects/AddNoiseEffect.cs:170
 msgid "Color Saturation"
 msgstr "Sáithiú na nDathanna"
 
 #: ../Pinta.Core/Actions/ViewActions.cs:181
 #: ../Pinta.Effects/Effects/CloudsEffect.cs:250
-#: ../Pinta.Effects/Effects/JuliaFractalEffect.cs:181
-#: ../Pinta.Effects/Effects/MandelbrotFractalEffect.cs:205
+#: ../Pinta.Effects/Effects/JuliaFractalEffect.cs:178
+#: ../Pinta.Effects/Effects/MandelbrotFractalEffect.cs:200
 msgid "Color Scheme"
 msgstr ""
 
 #: ../Pinta.Effects/Effects/CloudsEffect.cs:247
-#: ../Pinta.Effects/Effects/JuliaFractalEffect.cs:178
-#: ../Pinta.Effects/Effects/MandelbrotFractalEffect.cs:202
+#: ../Pinta.Effects/Effects/JuliaFractalEffect.cs:175
+#: ../Pinta.Effects/Effects/MandelbrotFractalEffect.cs:197
 msgid "Color Scheme Source"
+msgstr ""
+
+#: ../Pinta.Effects/Effects/VoronoiDiagramEffect.cs:207
+msgid "Color Sorting"
 msgstr ""
 
 #: ../Pinta.Effects/Effects/InkSketchEffect.cs:156
@@ -505,7 +509,7 @@ msgstr ""
 msgid "Could not open file: {0}"
 msgstr "Níorbh fhéidir an comhad a oscailt: {0}"
 
-#: ../Pinta.Effects/Effects/AddNoiseEffect.cs:188
+#: ../Pinta.Effects/Effects/AddNoiseEffect.cs:173
 msgid "Coverage"
 msgstr "Clúdú"
 
@@ -575,9 +579,13 @@ msgid "Difference"
 msgstr ""
 
 #: ../Pinta.Effects/Effects/FragmentEffect.cs:117
-#: ../Pinta.Effects/Effects/MotionBlurEffect.cs:107
+#: ../Pinta.Effects/Effects/MotionBlurEffect.cs:111
 msgid "Distance"
 msgstr "Fad"
+
+#: ../Pinta.Effects/Effects/VoronoiDiagramEffect.cs:197
+msgid "Distance Metric"
+msgstr ""
 
 #: ../Pinta.Effects/Effects/BulgeEffect.cs:27
 #: ../Pinta.Effects/Effects/FrostedGlassEffect.cs:27
@@ -662,7 +670,7 @@ msgstr "Scriosán"
 msgid "Error"
 msgstr "Botún"
 
-#: ../Pinta.Effects/Effects/DitheringEffect.cs:140
+#: ../Pinta.Effects/Effects/DitheringEffect.cs:133
 msgid "Error Diffusion Method"
 msgstr ""
 
@@ -679,8 +687,8 @@ msgstr ""
 msgid "Extension packages"
 msgstr ""
 
-#: ../Pinta.Effects/Effects/JuliaFractalEffect.cs:169
-#: ../Pinta.Effects/Effects/MandelbrotFractalEffect.cs:189
+#: ../Pinta.Effects/Effects/JuliaFractalEffect.cs:166
+#: ../Pinta.Effects/Effects/MandelbrotFractalEffect.cs:184
 msgid "Factor"
 msgstr "Fachtóir"
 
@@ -873,6 +881,21 @@ msgstr ""
 msgid "History"
 msgstr "Oireas"
 
+#. Translators: Horizontal color sorting with blue (B) as the leading term
+#: ../Pinta.Effects/Effects/VoronoiDiagramEffect.cs:233
+msgid "Horizontal blue (B)"
+msgstr ""
+
+#. Translators: Horizontal color sorting with green (G) as the leading term
+#: ../Pinta.Effects/Effects/VoronoiDiagramEffect.cs:236
+msgid "Horizontal green (G)"
+msgstr ""
+
+#. Translators: Horizontal color sorting with red (R) as the leading term
+#: ../Pinta.Effects/Effects/VoronoiDiagramEffect.cs:239
+msgid "Horizontal red (R)"
+msgstr ""
+
 #: ../Pinta.Core/Effects/UserBlendOps.cs:45
 #: ../Pinta.Effects/Adjustments/HueSaturationEffect.cs:61
 msgid "Hue"
@@ -968,9 +991,9 @@ msgstr ""
 msgid "Installed"
 msgstr ""
 
-#: ../Pinta.Effects/Effects/AddNoiseEffect.cs:182
+#: ../Pinta.Effects/Effects/AddNoiseEffect.cs:167
 #: ../Pinta.Effects/Effects/OutlineEffect.cs:141
-#: ../Pinta.Effects/Effects/TileEffect.cs:186
+#: ../Pinta.Effects/Effects/TileEffect.cs:180
 msgid "Intensity"
 msgstr "Déine"
 
@@ -981,7 +1004,7 @@ msgid "Intersect ({0} + Left Click)"
 msgstr ""
 
 #: ../Pinta.Effects/Adjustments/InvertColorsEffect.cs:24
-#: ../Pinta.Effects/Effects/MandelbrotFractalEffect.cs:214
+#: ../Pinta.Effects/Effects/MandelbrotFractalEffect.cs:209
 msgid "Invert Colors"
 msgstr "Aisiompaigh na Dathanna"
 
@@ -1254,7 +1277,7 @@ msgstr ""
 msgid "More Information..."
 msgstr ""
 
-#: ../Pinta.Effects/Effects/MotionBlurEffect.cs:23
+#: ../Pinta.Effects/Effects/MotionBlurEffect.cs:24
 msgid "Motion Blur"
 msgstr ""
 
@@ -1337,11 +1360,15 @@ msgstr ""
 msgid "Normal and Outline"
 msgstr ""
 
+#: ../Pinta.Effects/Effects/VoronoiDiagramEffect.cs:200
+msgid "Number of Cells"
+msgstr ""
+
 #: ../Pinta/Main.cs:55
 msgid "Number of threads to use for rendering"
 msgstr ""
 
-#: ../Pinta.Effects/Effects/BulgeEffect.cs:118
+#: ../Pinta.Effects/Effects/BulgeEffect.cs:114
 #: ../Pinta.Effects/Effects/RadialBlurEffect.cs:175
 #: ../Pinta.Effects/Effects/ZoomBlurEffect.cs:148
 msgid "Offset"
@@ -1436,7 +1463,7 @@ msgid "Paintbrush"
 msgstr "scuab phéinte"
 
 #: ../Pinta.Core/Actions/EditActions.cs:136
-#: ../Pinta.Effects/Effects/DitheringEffect.cs:143
+#: ../Pinta.Effects/Effects/DitheringEffect.cs:136
 msgid "Palette"
 msgstr "Pailéad"
 
@@ -1472,7 +1499,7 @@ msgstr "Peann Luaidhe"
 msgid "Pencil Sketch"
 msgstr "Léaráid Phinn Luaidhe"
 
-#: ../Pinta.Effects/Effects/PencilSketchEffect.cs:91
+#: ../Pinta.Effects/Effects/PencilSketchEffect.cs:86
 msgid "Pencil Tip Size"
 msgstr ""
 
@@ -1597,10 +1624,10 @@ msgstr ""
 msgid "Print"
 msgstr "Clóbhuail"
 
-#: ../Pinta.Effects/Effects/JuliaFractalEffect.cs:172
-#: ../Pinta.Effects/Effects/MandelbrotFractalEffect.cs:192
+#: ../Pinta.Effects/Effects/JuliaFractalEffect.cs:169
+#: ../Pinta.Effects/Effects/MandelbrotFractalEffect.cs:187
 #: ../Pinta.Effects/Effects/RadialBlurEffect.cs:178
-#: ../Pinta.Effects/Effects/WarpEffect.cs:187
+#: ../Pinta.Effects/Effects/WarpEffect.cs:181
 msgid "Quality"
 msgstr "Cáilíocht"
 
@@ -1634,20 +1661,29 @@ msgid "Radius"
 msgstr "Ga"
 
 #: ../Pinta.Effects/Effects/GradientHelper.cs:17
+#: ../Pinta.Effects/Effects/VoronoiDiagramEffect.cs:230
 msgid "Random"
 msgstr ""
 
 #: ../Pinta.Effects/Effects/CloudsEffect.cs:253
-#: ../Pinta.Effects/Effects/JuliaFractalEffect.cs:184
-#: ../Pinta.Effects/Effects/MandelbrotFractalEffect.cs:208
+#: ../Pinta.Effects/Effects/JuliaFractalEffect.cs:181
+#: ../Pinta.Effects/Effects/MandelbrotFractalEffect.cs:203
 msgid "Random Color Scheme Seed"
 msgstr ""
 
-#: ../Pinta.Effects/Effects/AddNoiseEffect.cs:191
+#: ../Pinta.Effects/Effects/VoronoiDiagramEffect.cs:214
+msgid "Random Colors"
+msgstr ""
+
+#: ../Pinta.Effects/Effects/AddNoiseEffect.cs:176
 #: ../Pinta.Effects/Effects/CloudsEffect.cs:244
 #: ../Pinta.Effects/Effects/FrostedGlassEffect.cs:154
 msgid "Random Noise"
 msgstr "Torann Fánach"
+
+#: ../Pinta.Effects/Effects/VoronoiDiagramEffect.cs:217
+msgid "Random Point Locations"
+msgstr ""
 
 #: ../Pinta.Tools/Tools/RecolorTool.cs:56
 msgid "Recolor"
@@ -1705,6 +1741,7 @@ msgstr "Athainmnigh Sraith"
 #: ../Pinta.Effects/Effects/CloudsEffect.cs:33
 #: ../Pinta.Effects/Effects/JuliaFractalEffect.cs:27
 #: ../Pinta.Effects/Effects/MandelbrotFractalEffect.cs:27
+#: ../Pinta.Effects/Effects/VoronoiDiagramEffect.cs:22
 msgid "Render"
 msgstr "Cruth"
 
@@ -1760,9 +1797,14 @@ msgid "Resize Palette"
 msgstr ""
 
 #: ../Pinta.Effects/Effects/CloudsEffect.cs:256
-#: ../Pinta.Effects/Effects/JuliaFractalEffect.cs:187
-#: ../Pinta.Effects/Effects/MandelbrotFractalEffect.cs:211
+#: ../Pinta.Effects/Effects/JuliaFractalEffect.cs:184
+#: ../Pinta.Effects/Effects/MandelbrotFractalEffect.cs:206
 msgid "Reverse Color Scheme"
+msgstr ""
+
+#. Translators: In this context, "reverse" is a verb, and the user can choose whether or not they want to reverse the color sorting
+#: ../Pinta.Effects/Effects/VoronoiDiagramEffect.cs:211
+msgid "Reverse Color Sorting"
 msgstr ""
 
 #: ../Pinta.Tools/Tools/TextTool.cs:226
@@ -1794,7 +1836,7 @@ msgid "Rotate 90° Counter-Clockwise"
 msgstr "Rothlaigh 90° Tuathalach"
 
 #: ../Pinta.Effects/Effects/FragmentEffect.cs:120
-#: ../Pinta.Effects/Effects/TileEffect.cs:180
+#: ../Pinta.Effects/Effects/TileEffect.cs:174
 msgid "Rotation"
 msgstr "Rothlú"
 
@@ -1904,6 +1946,11 @@ msgstr "Aicearra"
 #: ../Pinta/Actions/Layers/LayerPropertiesAction.cs:108
 msgid "Show Layer"
 msgstr "Taispeáin Sraith"
+
+#. Translators: The user can choose whether or not to render the points used in the calculation of a Voronoi diagram
+#: ../Pinta.Effects/Effects/VoronoiDiagramEffect.cs:204
+msgid "Show Points"
+msgstr ""
 
 #: ../Pinta.Core/Actions/ViewActions.cs:155
 msgid "Show/Hide"
@@ -2063,7 +2110,7 @@ msgstr "Tiús"
 msgid "Tile Reflection"
 msgstr ""
 
-#: ../Pinta.Effects/Effects/TileEffect.cs:183
+#: ../Pinta.Effects/Effects/TileEffect.cs:177
 msgid "Tile Size"
 msgstr ""
 
@@ -2187,9 +2234,28 @@ msgstr "Ag baineadh feidhm as deilbhíní as:"
 msgid "Version: {0}"
 msgstr ""
 
+#. Translators: Vertical color sorting with blue (B) as the leading term
+#: ../Pinta.Effects/Effects/VoronoiDiagramEffect.cs:243
+msgid "Vertical blue (B)"
+msgstr ""
+
+#. Translators: Vertical color sorting with green (G) as the leading term
+#: ../Pinta.Effects/Effects/VoronoiDiagramEffect.cs:246
+msgid "Vertical green (G)"
+msgstr ""
+
+#. Translators: Vertical color sorting with red (R) as the leading term
+#: ../Pinta.Effects/Effects/VoronoiDiagramEffect.cs:249
+msgid "Vertical red (R)"
+msgstr ""
+
 #: ../Pinta/Dialogs/LayerPropertiesDialog.cs:83
 msgid "Visible"
 msgstr "Infheicthe"
+
+#: ../Pinta.Effects/Effects/VoronoiDiagramEffect.cs:18
+msgid "Voronoi Diagram"
+msgstr ""
 
 #: ../Pinta.Effects/Effects/SoftenPortraitEffect.cs:120
 msgid "Warmth"
@@ -2239,8 +2305,8 @@ msgid ""
 "You do not have access to modify '{0}'. The file or folder may be read-only."
 msgstr ""
 
-#: ../Pinta.Effects/Effects/JuliaFractalEffect.cs:175
-#: ../Pinta.Effects/Effects/MandelbrotFractalEffect.cs:196
+#: ../Pinta.Effects/Effects/JuliaFractalEffect.cs:172
+#: ../Pinta.Effects/Effects/MandelbrotFractalEffect.cs:191
 #: ../Pinta.Tools/Tools/ZoomTool.cs:55
 #: ../Pinta/Actions/Layers/RotateZoomLayerAction.cs:121
 msgid "Zoom"

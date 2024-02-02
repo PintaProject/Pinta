@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: pinta\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-01-18 03:35+0000\n"
+"POT-Creation-Date: 2024-01-28 01:09+0000\n"
 "PO-Revision-Date: 2024-01-21 03:50+0000\n"
 "Last-Translator: grof <grofaty@hotmail.com>\n"
 "Language-Team: Slovenian <https://hosted.weblate.org/projects/pinta/pinta/sl/"
@@ -94,10 +94,10 @@ msgstr "Po izbiri"
 msgid "All files"
 msgstr "Vse datoteke"
 
-#: ../Pinta.Effects/Effects/BulgeEffect.cs:115
+#: ../Pinta.Effects/Effects/BulgeEffect.cs:111
 #: ../Pinta.Effects/Effects/FrostedGlassEffect.cs:151
 #: ../Pinta.Effects/Effects/SharpenEffect.cs:60
-#: ../Pinta.Effects/Effects/TwistEffect.cs:149
+#: ../Pinta.Effects/Effects/TwistEffect.cs:142
 #: ../Pinta.Effects/Effects/ZoomBlurEffect.cs:145
 msgid "Amount"
 msgstr "Količina"
@@ -108,9 +108,9 @@ msgstr "Sidro:"
 
 #: ../Pinta.Effects/Effects/EdgeDetectEffect.cs:83
 #: ../Pinta.Effects/Effects/EmbossEffect.cs:150
-#: ../Pinta.Effects/Effects/JuliaFractalEffect.cs:190
-#: ../Pinta.Effects/Effects/MandelbrotFractalEffect.cs:199
-#: ../Pinta.Effects/Effects/MotionBlurEffect.cs:104
+#: ../Pinta.Effects/Effects/JuliaFractalEffect.cs:187
+#: ../Pinta.Effects/Effects/MandelbrotFractalEffect.cs:194
+#: ../Pinta.Effects/Effects/MotionBlurEffect.cs:108
 #: ../Pinta.Effects/Effects/RadialBlurEffect.cs:172
 #: ../Pinta.Effects/Effects/ReliefEffect.cs:85
 #: ../Pinta.Tools/Editable/EditEngines/ArrowedEditEngine.cs:298
@@ -118,7 +118,7 @@ msgstr "Sidro:"
 msgid "Angle"
 msgstr "Kot"
 
-#: ../Pinta.Effects/Effects/TwistEffect.cs:152
+#: ../Pinta.Effects/Effects/TwistEffect.cs:145
 msgid "Antialias"
 msgstr "Glajenje robov"
 
@@ -212,7 +212,7 @@ msgstr "Modra "
 
 #: ../Pinta.Effects/Effects/FragmentEffect.cs:28
 #: ../Pinta.Effects/Effects/GaussianBlurEffect.cs:28
-#: ../Pinta.Effects/Effects/MotionBlurEffect.cs:27
+#: ../Pinta.Effects/Effects/MotionBlurEffect.cs:28
 #: ../Pinta.Effects/Effects/RadialBlurEffect.cs:27
 #: ../Pinta.Effects/Effects/UnfocusEffect.cs:29
 #: ../Pinta.Effects/Effects/ZoomBlurEffect.cs:27
@@ -237,7 +237,7 @@ msgstr "Svetlost"
 msgid "Brightness / Contrast"
 msgstr "Svetlost / Kontrast"
 
-#: ../Pinta.Effects/Effects/OilPaintingEffect.cs:145
+#: ../Pinta.Effects/Effects/OilPaintingEffect.cs:132
 msgid "Brush Size"
 msgstr "Velikost čopiča"
 
@@ -287,11 +287,11 @@ msgstr "Velikost celice"
 msgid "Center Align"
 msgstr "Središčna poravnava"
 
-#: ../Pinta.Effects/Effects/WarpEffect.cs:190
+#: ../Pinta.Effects/Effects/WarpEffect.cs:184
 msgid "Center Offset"
 msgstr "Osrediščen odmik"
 
-#: ../Pinta.Effects/Effects/MotionBlurEffect.cs:110
+#: ../Pinta.Effects/Effects/MotionBlurEffect.cs:114
 msgid "Centered"
 msgstr "Središčeno"
 
@@ -416,7 +416,7 @@ msgstr "Zaporedje zaprtihg črt/krivin"
 msgid "Clouds"
 msgstr "Oblaki"
 
-#: ../Pinta.Effects/Effects/OilPaintingEffect.cs:148
+#: ../Pinta.Effects/Effects/OilPaintingEffect.cs:135
 msgid "Coarseness"
 msgstr "Grobost"
 
@@ -441,26 +441,30 @@ msgstr "Barvni način"
 msgid "Color Picker"
 msgstr "Izbirnik barv"
 
-#: ../Pinta.Effects/Effects/PencilSketchEffect.cs:94
+#: ../Pinta.Effects/Effects/PencilSketchEffect.cs:89
 msgid "Color Range"
 msgstr "Razpon barv"
 
-#: ../Pinta.Effects/Effects/AddNoiseEffect.cs:185
+#: ../Pinta.Effects/Effects/AddNoiseEffect.cs:170
 msgid "Color Saturation"
 msgstr "Barvna nasičenost"
 
 #: ../Pinta.Core/Actions/ViewActions.cs:181
 #: ../Pinta.Effects/Effects/CloudsEffect.cs:250
-#: ../Pinta.Effects/Effects/JuliaFractalEffect.cs:181
-#: ../Pinta.Effects/Effects/MandelbrotFractalEffect.cs:205
+#: ../Pinta.Effects/Effects/JuliaFractalEffect.cs:178
+#: ../Pinta.Effects/Effects/MandelbrotFractalEffect.cs:200
 msgid "Color Scheme"
 msgstr "Barvna shema"
 
 #: ../Pinta.Effects/Effects/CloudsEffect.cs:247
-#: ../Pinta.Effects/Effects/JuliaFractalEffect.cs:178
-#: ../Pinta.Effects/Effects/MandelbrotFractalEffect.cs:202
+#: ../Pinta.Effects/Effects/JuliaFractalEffect.cs:175
+#: ../Pinta.Effects/Effects/MandelbrotFractalEffect.cs:197
 msgid "Color Scheme Source"
 msgstr "Izvor barvne sheme"
+
+#: ../Pinta.Effects/Effects/VoronoiDiagramEffect.cs:207
+msgid "Color Sorting"
+msgstr ""
 
 #: ../Pinta.Effects/Effects/InkSketchEffect.cs:156
 msgid "Coloring"
@@ -513,7 +517,7 @@ msgstr "Ne morem uvoziti sloj \"{0}\" iz datoteke {1}"
 msgid "Could not open file: {0}"
 msgstr "Ne morem odpreti datoteke: {0}"
 
-#: ../Pinta.Effects/Effects/AddNoiseEffect.cs:188
+#: ../Pinta.Effects/Effects/AddNoiseEffect.cs:173
 msgid "Coverage"
 msgstr "Pokritost"
 
@@ -583,9 +587,13 @@ msgid "Difference"
 msgstr "Razlika"
 
 #: ../Pinta.Effects/Effects/FragmentEffect.cs:117
-#: ../Pinta.Effects/Effects/MotionBlurEffect.cs:107
+#: ../Pinta.Effects/Effects/MotionBlurEffect.cs:111
 msgid "Distance"
 msgstr "Razdalja"
+
+#: ../Pinta.Effects/Effects/VoronoiDiagramEffect.cs:197
+msgid "Distance Metric"
+msgstr ""
 
 #: ../Pinta.Effects/Effects/BulgeEffect.cs:27
 #: ../Pinta.Effects/Effects/FrostedGlassEffect.cs:27
@@ -671,7 +679,7 @@ msgstr "Radirka"
 msgid "Error"
 msgstr "Napaka"
 
-#: ../Pinta.Effects/Effects/DitheringEffect.cs:140
+#: ../Pinta.Effects/Effects/DitheringEffect.cs:133
 msgid "Error Diffusion Method"
 msgstr "Napaka v metodi razpršenja"
 
@@ -688,8 +696,8 @@ msgstr "Razširi"
 msgid "Extension packages"
 msgstr "Razširitveni paketi"
 
-#: ../Pinta.Effects/Effects/JuliaFractalEffect.cs:169
-#: ../Pinta.Effects/Effects/MandelbrotFractalEffect.cs:189
+#: ../Pinta.Effects/Effects/JuliaFractalEffect.cs:166
+#: ../Pinta.Effects/Effects/MandelbrotFractalEffect.cs:184
 msgid "Factor"
 msgstr "Množitelj"
 
@@ -883,6 +891,21 @@ msgstr ""
 msgid "History"
 msgstr "Zgodovina"
 
+#. Translators: Horizontal color sorting with blue (B) as the leading term
+#: ../Pinta.Effects/Effects/VoronoiDiagramEffect.cs:233
+msgid "Horizontal blue (B)"
+msgstr ""
+
+#. Translators: Horizontal color sorting with green (G) as the leading term
+#: ../Pinta.Effects/Effects/VoronoiDiagramEffect.cs:236
+msgid "Horizontal green (G)"
+msgstr ""
+
+#. Translators: Horizontal color sorting with red (R) as the leading term
+#: ../Pinta.Effects/Effects/VoronoiDiagramEffect.cs:239
+msgid "Horizontal red (R)"
+msgstr ""
+
 #: ../Pinta.Core/Effects/UserBlendOps.cs:45
 #: ../Pinta.Effects/Adjustments/HueSaturationEffect.cs:61
 msgid "Hue"
@@ -978,9 +1001,9 @@ msgstr "Namesti ..."
 msgid "Installed"
 msgstr "Nameščeno"
 
-#: ../Pinta.Effects/Effects/AddNoiseEffect.cs:182
+#: ../Pinta.Effects/Effects/AddNoiseEffect.cs:167
 #: ../Pinta.Effects/Effects/OutlineEffect.cs:141
-#: ../Pinta.Effects/Effects/TileEffect.cs:186
+#: ../Pinta.Effects/Effects/TileEffect.cs:180
 msgid "Intensity"
 msgstr "Močnost"
 
@@ -991,7 +1014,7 @@ msgid "Intersect ({0} + Left Click)"
 msgstr "Presek ({0} + levi klik)"
 
 #: ../Pinta.Effects/Adjustments/InvertColorsEffect.cs:24
-#: ../Pinta.Effects/Effects/MandelbrotFractalEffect.cs:214
+#: ../Pinta.Effects/Effects/MandelbrotFractalEffect.cs:209
 msgid "Invert Colors"
 msgstr "Obrni barve"
 
@@ -1309,7 +1332,7 @@ msgstr "Spremenjeno"
 msgid "More Information..."
 msgstr "Podrobnejši podatki ..."
 
-#: ../Pinta.Effects/Effects/MotionBlurEffect.cs:23
+#: ../Pinta.Effects/Effects/MotionBlurEffect.cs:24
 msgid "Motion Blur"
 msgstr "Zabriši kot pri gibanju"
 
@@ -1392,11 +1415,15 @@ msgstr "Običajna velikost"
 msgid "Normal and Outline"
 msgstr "Običano in obroba"
 
+#: ../Pinta.Effects/Effects/VoronoiDiagramEffect.cs:200
+msgid "Number of Cells"
+msgstr ""
+
 #: ../Pinta/Main.cs:55
 msgid "Number of threads to use for rendering"
 msgstr "Število niti uporabljene za izvajanje"
 
-#: ../Pinta.Effects/Effects/BulgeEffect.cs:118
+#: ../Pinta.Effects/Effects/BulgeEffect.cs:114
 #: ../Pinta.Effects/Effects/RadialBlurEffect.cs:175
 #: ../Pinta.Effects/Effects/ZoomBlurEffect.cs:148
 msgid "Offset"
@@ -1491,7 +1518,7 @@ msgid "Paintbrush"
 msgstr "Slikarski čopič"
 
 #: ../Pinta.Core/Actions/EditActions.cs:136
-#: ../Pinta.Effects/Effects/DitheringEffect.cs:143
+#: ../Pinta.Effects/Effects/DitheringEffect.cs:136
 msgid "Palette"
 msgstr "Paleta"
 
@@ -1527,7 +1554,7 @@ msgstr "Svinčnik"
 msgid "Pencil Sketch"
 msgstr "Svinčnikova skica"
 
-#: ../Pinta.Effects/Effects/PencilSketchEffect.cs:91
+#: ../Pinta.Effects/Effects/PencilSketchEffect.cs:86
 msgid "Pencil Tip Size"
 msgstr "Velikost konice svinčnika"
 
@@ -1657,10 +1684,10 @@ msgstr "Osnovno"
 msgid "Print"
 msgstr "Natisni"
 
-#: ../Pinta.Effects/Effects/JuliaFractalEffect.cs:172
-#: ../Pinta.Effects/Effects/MandelbrotFractalEffect.cs:192
+#: ../Pinta.Effects/Effects/JuliaFractalEffect.cs:169
+#: ../Pinta.Effects/Effects/MandelbrotFractalEffect.cs:187
 #: ../Pinta.Effects/Effects/RadialBlurEffect.cs:178
-#: ../Pinta.Effects/Effects/WarpEffect.cs:187
+#: ../Pinta.Effects/Effects/WarpEffect.cs:181
 msgid "Quality"
 msgstr "Kakovost"
 
@@ -1694,20 +1721,29 @@ msgid "Radius"
 msgstr "Polmer"
 
 #: ../Pinta.Effects/Effects/GradientHelper.cs:17
+#: ../Pinta.Effects/Effects/VoronoiDiagramEffect.cs:230
 msgid "Random"
 msgstr "Naključno"
 
 #: ../Pinta.Effects/Effects/CloudsEffect.cs:253
-#: ../Pinta.Effects/Effects/JuliaFractalEffect.cs:184
-#: ../Pinta.Effects/Effects/MandelbrotFractalEffect.cs:208
+#: ../Pinta.Effects/Effects/JuliaFractalEffect.cs:181
+#: ../Pinta.Effects/Effects/MandelbrotFractalEffect.cs:203
 msgid "Random Color Scheme Seed"
 msgstr "Naključna nastavitev začetka barvne sheme"
 
-#: ../Pinta.Effects/Effects/AddNoiseEffect.cs:191
+#: ../Pinta.Effects/Effects/VoronoiDiagramEffect.cs:214
+msgid "Random Colors"
+msgstr ""
+
+#: ../Pinta.Effects/Effects/AddNoiseEffect.cs:176
 #: ../Pinta.Effects/Effects/CloudsEffect.cs:244
 #: ../Pinta.Effects/Effects/FrostedGlassEffect.cs:154
 msgid "Random Noise"
 msgstr "Naključni šum"
+
+#: ../Pinta.Effects/Effects/VoronoiDiagramEffect.cs:217
+msgid "Random Point Locations"
+msgstr ""
 
 #: ../Pinta.Tools/Tools/RecolorTool.cs:56
 msgid "Recolor"
@@ -1765,6 +1801,7 @@ msgstr "Preimenuj plast"
 #: ../Pinta.Effects/Effects/CloudsEffect.cs:33
 #: ../Pinta.Effects/Effects/JuliaFractalEffect.cs:27
 #: ../Pinta.Effects/Effects/MandelbrotFractalEffect.cs:27
+#: ../Pinta.Effects/Effects/VoronoiDiagramEffect.cs:22
 msgid "Render"
 msgstr "Izriši"
 
@@ -1820,10 +1857,15 @@ msgid "Resize Palette"
 msgstr "Prilagodi paleto"
 
 #: ../Pinta.Effects/Effects/CloudsEffect.cs:256
-#: ../Pinta.Effects/Effects/JuliaFractalEffect.cs:187
-#: ../Pinta.Effects/Effects/MandelbrotFractalEffect.cs:211
+#: ../Pinta.Effects/Effects/JuliaFractalEffect.cs:184
+#: ../Pinta.Effects/Effects/MandelbrotFractalEffect.cs:206
 msgid "Reverse Color Scheme"
 msgstr "Obrni barvno shemo"
+
+#. Translators: In this context, "reverse" is a verb, and the user can choose whether or not they want to reverse the color sorting
+#: ../Pinta.Effects/Effects/VoronoiDiagramEffect.cs:211
+msgid "Reverse Color Sorting"
+msgstr ""
 
 #: ../Pinta.Tools/Tools/TextTool.cs:226
 msgid "Right Align"
@@ -1854,7 +1896,7 @@ msgid "Rotate 90° Counter-Clockwise"
 msgstr "Zavrti 90° v nasportni smeri urnega kazalca"
 
 #: ../Pinta.Effects/Effects/FragmentEffect.cs:120
-#: ../Pinta.Effects/Effects/TileEffect.cs:180
+#: ../Pinta.Effects/Effects/TileEffect.cs:174
 msgid "Rotation"
 msgstr "Vrtenje"
 
@@ -1964,6 +2006,11 @@ msgstr "Tipka bližnjice"
 #: ../Pinta/Actions/Layers/LayerPropertiesAction.cs:108
 msgid "Show Layer"
 msgstr "Prikaži plast"
+
+#. Translators: The user can choose whether or not to render the points used in the calculation of a Voronoi diagram
+#: ../Pinta.Effects/Effects/VoronoiDiagramEffect.cs:204
+msgid "Show Points"
+msgstr ""
 
 #: ../Pinta.Core/Actions/ViewActions.cs:155
 msgid "Show/Hide"
@@ -2129,7 +2176,7 @@ msgstr "Debelina"
 msgid "Tile Reflection"
 msgstr "Razpostavi odsev"
 
-#: ../Pinta.Effects/Effects/TileEffect.cs:183
+#: ../Pinta.Effects/Effects/TileEffect.cs:177
 msgid "Tile Size"
 msgstr "Velikost ploščice"
 
@@ -2255,9 +2302,28 @@ msgstr "Nekatere ikone uporabljene od:"
 msgid "Version: {0}"
 msgstr "Različica: {0}"
 
+#. Translators: Vertical color sorting with blue (B) as the leading term
+#: ../Pinta.Effects/Effects/VoronoiDiagramEffect.cs:243
+msgid "Vertical blue (B)"
+msgstr ""
+
+#. Translators: Vertical color sorting with green (G) as the leading term
+#: ../Pinta.Effects/Effects/VoronoiDiagramEffect.cs:246
+msgid "Vertical green (G)"
+msgstr ""
+
+#. Translators: Vertical color sorting with red (R) as the leading term
+#: ../Pinta.Effects/Effects/VoronoiDiagramEffect.cs:249
+msgid "Vertical red (R)"
+msgstr ""
+
 #: ../Pinta/Dialogs/LayerPropertiesDialog.cs:83
 msgid "Visible"
 msgstr "Vidno"
+
+#: ../Pinta.Effects/Effects/VoronoiDiagramEffect.cs:18
+msgid "Voronoi Diagram"
+msgstr ""
 
 #: ../Pinta.Effects/Effects/SoftenPortraitEffect.cs:120
 msgid "Warmth"
@@ -2309,8 +2375,8 @@ msgstr ""
 "Nimate dovoljenja za shranjevanje datoteke '{0}'. Datoteka ali mapa sta "
 "morda zaščetena samo za branje."
 
-#: ../Pinta.Effects/Effects/JuliaFractalEffect.cs:175
-#: ../Pinta.Effects/Effects/MandelbrotFractalEffect.cs:196
+#: ../Pinta.Effects/Effects/JuliaFractalEffect.cs:172
+#: ../Pinta.Effects/Effects/MandelbrotFractalEffect.cs:191
 #: ../Pinta.Tools/Tools/ZoomTool.cs:55
 #: ../Pinta/Actions/Layers/RotateZoomLayerAction.cs:121
 msgid "Zoom"
