@@ -8,10 +8,10 @@ msgstr ""
 "Project-Id-Version: pinta\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2024-01-28 01:09+0000\n"
-"PO-Revision-Date: 2024-01-19 00:09+0000\n"
+"PO-Revision-Date: 2024-02-03 13:01+0000\n"
 "Last-Translator: Oğuz Ersen <oguz@ersen.moe>\n"
-"Language-Team: Turkish <https://hosted.weblate.org/projects/pinta/pinta/tr/"
-">\n"
+"Language-Team: Turkish <https://hosted.weblate.org/projects/pinta/pinta/tr/>"
+"\n"
 "Language: tr\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -464,7 +464,7 @@ msgstr "Renk Düzeni Kaynağı"
 
 #: ../Pinta.Effects/Effects/VoronoiDiagramEffect.cs:207
 msgid "Color Sorting"
-msgstr ""
+msgstr "Renk Sıralaması"
 
 #: ../Pinta.Effects/Effects/InkSketchEffect.cs:156
 msgid "Coloring"
@@ -593,7 +593,7 @@ msgstr "Uzaklık"
 
 #: ../Pinta.Effects/Effects/VoronoiDiagramEffect.cs:197
 msgid "Distance Metric"
-msgstr ""
+msgstr "Uzaklık Ölçümü"
 
 #: ../Pinta.Effects/Effects/BulgeEffect.cs:27
 #: ../Pinta.Effects/Effects/FrostedGlassEffect.cs:27
@@ -895,17 +895,17 @@ msgstr "Geçmiş"
 #. Translators: Horizontal color sorting with blue (B) as the leading term
 #: ../Pinta.Effects/Effects/VoronoiDiagramEffect.cs:233
 msgid "Horizontal blue (B)"
-msgstr ""
+msgstr "Yatay mavi (M)"
 
 #. Translators: Horizontal color sorting with green (G) as the leading term
 #: ../Pinta.Effects/Effects/VoronoiDiagramEffect.cs:236
 msgid "Horizontal green (G)"
-msgstr ""
+msgstr "Yatay yeşil (Y)"
 
 #. Translators: Horizontal color sorting with red (R) as the leading term
 #: ../Pinta.Effects/Effects/VoronoiDiagramEffect.cs:239
 msgid "Horizontal red (R)"
-msgstr ""
+msgstr "Yatay kırmızı (K)"
 
 #: ../Pinta.Core/Effects/UserBlendOps.cs:45
 #: ../Pinta.Effects/Adjustments/HueSaturationEffect.cs:61
@@ -1419,7 +1419,7 @@ msgstr "Normal Anahat"
 
 #: ../Pinta.Effects/Effects/VoronoiDiagramEffect.cs:200
 msgid "Number of Cells"
-msgstr ""
+msgstr "Hücre Sayısı"
 
 #: ../Pinta/Main.cs:55
 msgid "Number of threads to use for rendering"
@@ -1736,7 +1736,7 @@ msgstr "Rastgele Renk Düzeni Tohumu"
 
 #: ../Pinta.Effects/Effects/VoronoiDiagramEffect.cs:214
 msgid "Random Colors"
-msgstr ""
+msgstr "Rastgele Renkler"
 
 #: ../Pinta.Effects/Effects/AddNoiseEffect.cs:176
 #: ../Pinta.Effects/Effects/CloudsEffect.cs:244
@@ -1746,7 +1746,7 @@ msgstr "Rastgele Parazit"
 
 #: ../Pinta.Effects/Effects/VoronoiDiagramEffect.cs:217
 msgid "Random Point Locations"
-msgstr ""
+msgstr "Rastgele Nokta Konumları"
 
 #: ../Pinta.Tools/Tools/RecolorTool.cs:56
 msgid "Recolor"
@@ -1868,7 +1868,7 @@ msgstr "Renk Düzenini Tersine Çevir"
 #. Translators: In this context, "reverse" is a verb, and the user can choose whether or not they want to reverse the color sorting
 #: ../Pinta.Effects/Effects/VoronoiDiagramEffect.cs:211
 msgid "Reverse Color Sorting"
-msgstr ""
+msgstr "Renk Sıralamasını Tersine Çevir"
 
 #: ../Pinta.Tools/Tools/TextTool.cs:226
 msgid "Right Align"
@@ -2015,7 +2015,7 @@ msgstr "Katmanı Göster"
 #. Translators: The user can choose whether or not to render the points used in the calculation of a Voronoi diagram
 #: ../Pinta.Effects/Effects/VoronoiDiagramEffect.cs:204
 msgid "Show Points"
-msgstr ""
+msgstr "Noktaları Göster"
 
 #: ../Pinta.Core/Actions/ViewActions.cs:155
 msgid "Show/Hide"
@@ -2309,17 +2309,17 @@ msgstr "Versiyon: {0}"
 #. Translators: Vertical color sorting with blue (B) as the leading term
 #: ../Pinta.Effects/Effects/VoronoiDiagramEffect.cs:243
 msgid "Vertical blue (B)"
-msgstr ""
+msgstr "Dikey mavi (M)"
 
 #. Translators: Vertical color sorting with green (G) as the leading term
 #: ../Pinta.Effects/Effects/VoronoiDiagramEffect.cs:246
 msgid "Vertical green (G)"
-msgstr ""
+msgstr "Dikey yeşil (Y)"
 
 #. Translators: Vertical color sorting with red (R) as the leading term
 #: ../Pinta.Effects/Effects/VoronoiDiagramEffect.cs:249
 msgid "Vertical red (R)"
-msgstr ""
+msgstr "Dikey kırmızı (K)"
 
 #: ../Pinta/Dialogs/LayerPropertiesDialog.cs:83
 msgid "Visible"
@@ -2327,7 +2327,7 @@ msgstr "Görünür"
 
 #: ../Pinta.Effects/Effects/VoronoiDiagramEffect.cs:18
 msgid "Voronoi Diagram"
-msgstr ""
+msgstr "Voronoi Şeması"
 
 #: ../Pinta.Effects/Effects/SoftenPortraitEffect.cs:120
 msgid "Warmth"

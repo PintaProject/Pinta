@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: pinta\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2024-01-28 01:09+0000\n"
-"PO-Revision-Date: 2024-01-19 00:09+0000\n"
+"PO-Revision-Date: 2024-02-03 13:01+0000\n"
 "Last-Translator: Matthaiks <kitynska@gmail.com>\n"
 "Language-Team: Polish <https://hosted.weblate.org/projects/pinta/pinta/pl/>\n"
 "Language: pl\n"
@@ -464,7 +464,7 @@ msgstr "Źródło schematu kolorów"
 
 #: ../Pinta.Effects/Effects/VoronoiDiagramEffect.cs:207
 msgid "Color Sorting"
-msgstr ""
+msgstr "Sortowanie kolorów"
 
 #: ../Pinta.Effects/Effects/InkSketchEffect.cs:156
 msgid "Coloring"
@@ -593,7 +593,7 @@ msgstr "Odległość"
 
 #: ../Pinta.Effects/Effects/VoronoiDiagramEffect.cs:197
 msgid "Distance Metric"
-msgstr ""
+msgstr "Pomiar odległości"
 
 #: ../Pinta.Effects/Effects/BulgeEffect.cs:27
 #: ../Pinta.Effects/Effects/FrostedGlassEffect.cs:27
@@ -895,17 +895,17 @@ msgstr "Historia"
 #. Translators: Horizontal color sorting with blue (B) as the leading term
 #: ../Pinta.Effects/Effects/VoronoiDiagramEffect.cs:233
 msgid "Horizontal blue (B)"
-msgstr ""
+msgstr "Poziome niebieskim (B)"
 
 #. Translators: Horizontal color sorting with green (G) as the leading term
 #: ../Pinta.Effects/Effects/VoronoiDiagramEffect.cs:236
 msgid "Horizontal green (G)"
-msgstr ""
+msgstr "Poziome zielonym (G)"
 
 #. Translators: Horizontal color sorting with red (R) as the leading term
 #: ../Pinta.Effects/Effects/VoronoiDiagramEffect.cs:239
 msgid "Horizontal red (R)"
-msgstr ""
+msgstr "Poziome czerwonym (R)"
 
 #: ../Pinta.Core/Effects/UserBlendOps.cs:45
 #: ../Pinta.Effects/Adjustments/HueSaturationEffect.cs:61
@@ -1430,7 +1430,7 @@ msgstr "Normalny i kontur"
 
 #: ../Pinta.Effects/Effects/VoronoiDiagramEffect.cs:200
 msgid "Number of Cells"
-msgstr ""
+msgstr "Liczba komórek"
 
 #: ../Pinta/Main.cs:55
 msgid "Number of threads to use for rendering"
@@ -1746,7 +1746,7 @@ msgstr "Ziarno losowego schematu kolorów"
 
 #: ../Pinta.Effects/Effects/VoronoiDiagramEffect.cs:214
 msgid "Random Colors"
-msgstr ""
+msgstr "Kolory losowe"
 
 #: ../Pinta.Effects/Effects/AddNoiseEffect.cs:176
 #: ../Pinta.Effects/Effects/CloudsEffect.cs:244
@@ -1756,7 +1756,7 @@ msgstr "Szum losowy"
 
 #: ../Pinta.Effects/Effects/VoronoiDiagramEffect.cs:217
 msgid "Random Point Locations"
-msgstr ""
+msgstr "Losowe lokalizacje punktów"
 
 #: ../Pinta.Tools/Tools/RecolorTool.cs:56
 msgid "Recolor"
@@ -1878,7 +1878,7 @@ msgstr "Odwróć schemat kolorów"
 #. Translators: In this context, "reverse" is a verb, and the user can choose whether or not they want to reverse the color sorting
 #: ../Pinta.Effects/Effects/VoronoiDiagramEffect.cs:211
 msgid "Reverse Color Sorting"
-msgstr ""
+msgstr "Odwrotne sortowanie kolorów"
 
 #: ../Pinta.Tools/Tools/TextTool.cs:226
 msgid "Right Align"
@@ -2023,7 +2023,7 @@ msgstr "Pokaż warstwę"
 #. Translators: The user can choose whether or not to render the points used in the calculation of a Voronoi diagram
 #: ../Pinta.Effects/Effects/VoronoiDiagramEffect.cs:204
 msgid "Show Points"
-msgstr ""
+msgstr "Pokaż punkty"
 
 #: ../Pinta.Core/Actions/ViewActions.cs:155
 msgid "Show/Hide"
@@ -2318,17 +2318,17 @@ msgstr "Wersja: {0}"
 #. Translators: Vertical color sorting with blue (B) as the leading term
 #: ../Pinta.Effects/Effects/VoronoiDiagramEffect.cs:243
 msgid "Vertical blue (B)"
-msgstr ""
+msgstr "Pionowe niebieskim (B)"
 
 #. Translators: Vertical color sorting with green (G) as the leading term
 #: ../Pinta.Effects/Effects/VoronoiDiagramEffect.cs:246
 msgid "Vertical green (G)"
-msgstr ""
+msgstr "Pionowe zielonym (G)"
 
 #. Translators: Vertical color sorting with red (R) as the leading term
 #: ../Pinta.Effects/Effects/VoronoiDiagramEffect.cs:249
 msgid "Vertical red (R)"
-msgstr ""
+msgstr "Pionowe czerwonym (R)"
 
 #: ../Pinta/Dialogs/LayerPropertiesDialog.cs:83
 msgid "Visible"
@@ -2336,7 +2336,7 @@ msgstr "Widoczna"
 
 #: ../Pinta.Effects/Effects/VoronoiDiagramEffect.cs:18
 msgid "Voronoi Diagram"
-msgstr ""
+msgstr "Diagram Woronoja"
 
 #: ../Pinta.Effects/Effects/SoftenPortraitEffect.cs:120
 msgid "Warmth"
