@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: pinta\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2024-01-28 01:09+0000\n"
-"PO-Revision-Date: 2024-01-21 03:50+0000\n"
+"PO-Revision-Date: 2024-02-05 02:01+0000\n"
 "Last-Translator: grof <grofaty@hotmail.com>\n"
 "Language-Team: Slovenian <https://hosted.weblate.org/projects/pinta/pinta/sl/"
 ">\n"
@@ -464,7 +464,7 @@ msgstr "Izvor barvne sheme"
 
 #: ../Pinta.Effects/Effects/VoronoiDiagramEffect.cs:207
 msgid "Color Sorting"
-msgstr ""
+msgstr "Razvrščanje barv"
 
 #: ../Pinta.Effects/Effects/InkSketchEffect.cs:156
 msgid "Coloring"
@@ -593,7 +593,7 @@ msgstr "Razdalja"
 
 #: ../Pinta.Effects/Effects/VoronoiDiagramEffect.cs:197
 msgid "Distance Metric"
-msgstr ""
+msgstr "Meritev oddaljenosti"
 
 #: ../Pinta.Effects/Effects/BulgeEffect.cs:27
 #: ../Pinta.Effects/Effects/FrostedGlassEffect.cs:27
@@ -894,17 +894,17 @@ msgstr "Zgodovina"
 #. Translators: Horizontal color sorting with blue (B) as the leading term
 #: ../Pinta.Effects/Effects/VoronoiDiagramEffect.cs:233
 msgid "Horizontal blue (B)"
-msgstr ""
+msgstr "Nebesno morda"
 
 #. Translators: Horizontal color sorting with green (G) as the leading term
 #: ../Pinta.Effects/Effects/VoronoiDiagramEffect.cs:236
 msgid "Horizontal green (G)"
-msgstr ""
+msgstr "Nebesno zelena (G)"
 
 #. Translators: Horizontal color sorting with red (R) as the leading term
 #: ../Pinta.Effects/Effects/VoronoiDiagramEffect.cs:239
 msgid "Horizontal red (R)"
-msgstr ""
+msgstr "Nebesno rdeča (R)"
 
 #: ../Pinta.Core/Effects/UserBlendOps.cs:45
 #: ../Pinta.Effects/Adjustments/HueSaturationEffect.cs:61
@@ -1417,7 +1417,7 @@ msgstr "Običano in obroba"
 
 #: ../Pinta.Effects/Effects/VoronoiDiagramEffect.cs:200
 msgid "Number of Cells"
-msgstr ""
+msgstr "Število celic"
 
 #: ../Pinta/Main.cs:55
 msgid "Number of threads to use for rendering"
@@ -1733,7 +1733,7 @@ msgstr "Naključna nastavitev začetka barvne sheme"
 
 #: ../Pinta.Effects/Effects/VoronoiDiagramEffect.cs:214
 msgid "Random Colors"
-msgstr ""
+msgstr "Naključne barve"
 
 #: ../Pinta.Effects/Effects/AddNoiseEffect.cs:176
 #: ../Pinta.Effects/Effects/CloudsEffect.cs:244
@@ -1743,7 +1743,7 @@ msgstr "Naključni šum"
 
 #: ../Pinta.Effects/Effects/VoronoiDiagramEffect.cs:217
 msgid "Random Point Locations"
-msgstr ""
+msgstr "Naključne lokacije točk"
 
 #: ../Pinta.Tools/Tools/RecolorTool.cs:56
 msgid "Recolor"
@@ -1865,7 +1865,7 @@ msgstr "Obrni barvno shemo"
 #. Translators: In this context, "reverse" is a verb, and the user can choose whether or not they want to reverse the color sorting
 #: ../Pinta.Effects/Effects/VoronoiDiagramEffect.cs:211
 msgid "Reverse Color Sorting"
-msgstr ""
+msgstr "Nasprotno razvrščanje barv"
 
 #: ../Pinta.Tools/Tools/TextTool.cs:226
 msgid "Right Align"
@@ -2010,7 +2010,7 @@ msgstr "Prikaži plast"
 #. Translators: The user can choose whether or not to render the points used in the calculation of a Voronoi diagram
 #: ../Pinta.Effects/Effects/VoronoiDiagramEffect.cs:204
 msgid "Show Points"
-msgstr ""
+msgstr "Prikaže točke"
 
 #: ../Pinta.Core/Actions/ViewActions.cs:155
 msgid "Show/Hide"
@@ -2305,17 +2305,17 @@ msgstr "Različica: {0}"
 #. Translators: Vertical color sorting with blue (B) as the leading term
 #: ../Pinta.Effects/Effects/VoronoiDiagramEffect.cs:243
 msgid "Vertical blue (B)"
-msgstr ""
+msgstr "Navpično morda (B)"
 
 #. Translators: Vertical color sorting with green (G) as the leading term
 #: ../Pinta.Effects/Effects/VoronoiDiagramEffect.cs:246
 msgid "Vertical green (G)"
-msgstr ""
+msgstr "Navpično zelena (G)"
 
 #. Translators: Vertical color sorting with red (R) as the leading term
 #: ../Pinta.Effects/Effects/VoronoiDiagramEffect.cs:249
 msgid "Vertical red (R)"
-msgstr ""
+msgstr "Navpično rdeča (R)"
 
 #: ../Pinta/Dialogs/LayerPropertiesDialog.cs:83
 msgid "Visible"
@@ -2323,7 +2323,7 @@ msgstr "Vidno"
 
 #: ../Pinta.Effects/Effects/VoronoiDiagramEffect.cs:18
 msgid "Voronoi Diagram"
-msgstr ""
+msgstr "Voronoi diagram"
 
 #: ../Pinta.Effects/Effects/SoftenPortraitEffect.cs:120
 msgid "Warmth"
