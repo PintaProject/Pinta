@@ -115,7 +115,7 @@ jobs:
 
     steps:
     - uses: actions/checkout@v4
-    - uses: microsoft/setup-msbuild@v1.3.2
+    - uses: microsoft/setup-msbuild@v2.0.0
     - name: Setup .NET
       uses: actions/setup-dotnet@v4
       with:
