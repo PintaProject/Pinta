@@ -386,7 +386,7 @@ public sealed class DocumentSelection
 		// Expand or contract the selection by the specified amount.
 		List<List<IntPoint>> offsetPolygons = new ();
 
-		ClipperOffset clipperOffset = new ClipperOffset ();
+		ClipperOffset clipperOffset = new ();
 		clipperOffset.AddPaths (simplePolygons, JoinType.jtMiter, EndType.etClosedPolygon);
 		clipperOffset.Execute (ref offsetPolygons, delta);
 
