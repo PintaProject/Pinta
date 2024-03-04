@@ -377,14 +377,14 @@ public sealed class DocumentSelection
 	public void Offset (Surface surface, double delta)
 	{
 		// Remove any self-intersections from the selection polygons.
-		List<List<IntPoint>> simplePolygons = new List<List<IntPoint>> ();
+		List<List<IntPoint>> simplePolygons = new ();
 
 		SelectionClipper.AddPaths (SelectionPolygons, PolyType.ptSubject, true);
 		SelectionClipper.Execute (ClipType.ctUnion, simplePolygons, PolyFillType.pftNonZero, PolyFillType.pftNonZero);
 		SelectionClipper.Clear ();
 
 		// Expand or contract the selection by the specified amount.
-		List<List<IntPoint>> offsetPolygons = new List<List<IntPoint>> ();
+		List<List<IntPoint>> offsetPolygons = new ();
 
 		ClipperOffset clipperOffset = new ClipperOffset ();
 		clipperOffset.AddPaths (simplePolygons, JoinType.jtMiter, EndType.etClosedPolygon);
