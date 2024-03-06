@@ -374,7 +374,7 @@ public sealed class DocumentSelection
 	/// <param name='delta'>
 	/// The amount to expand the selection by. A positive value will expand the selection, and a negative value will contract the selection.
 	/// </param>
-	public void Offset (Surface surface, double delta)
+	public void Offset (double delta)
 	{
 		// Remove any self-intersections from the selection polygons.
 		List<List<IntPoint>> simplePolygons = new ();
