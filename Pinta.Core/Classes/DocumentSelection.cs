@@ -365,6 +365,35 @@ public sealed class DocumentSelection
 		MarkDirty ();
 	}
 
+	/// <summary>
+	/// Expands or contracts the selection by a specified amount.
+	/// </summary>
+	/// <param name="surface">
+	/// Surface for the selection path.
+	/// </param>
+	/// <param name='delta'>
+	/// The amount to expand the selection by. A positive value will expand the selection, and a negative value will contract the selection.
+	/// </param>
+	public void Offset (double delta)
+	{
+		// Remove any self-intersections from the selection polygons.
+		List<List<IntPoint>> simplePolygons = new ();
+
+		SelectionClipper.AddPaths (SelectionPolygons, PolyType.ptSubject, true);
+		SelectionClipper.Execute (ClipType.ctUnion, simplePolygons, PolyFillType.pftNonZero, PolyFillType.pftNonZero);
+		SelectionClipper.Clear ();
+
+		// Expand or contract the selection by the specified amount.
+		List<List<IntPoint>> offsetPolygons = new ();
+
+		ClipperOffset clipperOffset = new ();
+		clipperOffset.AddPaths (simplePolygons, JoinType.jtMiter, EndType.etClosedPolygon);
+		clipperOffset.Execute (ref offsetPolygons, delta);
+
+		SelectionPolygons = offsetPolygons;
+		MarkDirty ();
+	}
+
 	private static List<IntPoint> CreateRectanglePolygon (RectangleD r)
 	{
 		// The 4 corners of the Rectangle.
