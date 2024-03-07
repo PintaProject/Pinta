@@ -341,13 +341,10 @@ public sealed class DocumentSelection
 	/// <summary>
 	/// Inverts the selection.
 	/// </summary>
-	/// <param name="surface">
-	/// Surface for the selection path.
-	/// </param>
 	/// <param name='imageSize'>
 	/// The size of the document.
 	/// </param>
-	public void Invert (Surface surface, Core.Size imageSize)
+	public void Invert (Core.Size imageSize)
 	{
 		List<List<IntPoint>> resultingPolygons = new List<List<IntPoint>> ();
 
@@ -368,9 +365,6 @@ public sealed class DocumentSelection
 	/// <summary>
 	/// Expands or contracts the selection by a specified amount.
 	/// </summary>
-	/// <param name="surface">
-	/// Surface for the selection path.
-	/// </param>
 	/// <param name='delta'>
 	/// The amount to expand the selection by. A positive value will expand the selection, and a negative value will contract the selection.
 	/// </param>

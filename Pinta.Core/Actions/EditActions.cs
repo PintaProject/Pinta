@@ -446,7 +446,7 @@ public sealed class EditActions
 									     Translations.GetString ("Invert Selection"));
 		historyItem.TakeSnapshot ();
 
-		doc.Selection.Invert (doc.Layers.SelectionLayer.Surface, doc.ImageSize);
+		doc.Selection.Invert (doc.ImageSize);
 
 		doc.History.PushNewItem (historyItem);
 		doc.Workspace.Invalidate ();
