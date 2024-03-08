@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: pinta\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2024-01-28 01:09+0000\n"
-"PO-Revision-Date: 2024-01-14 12:30+0000\n"
+"PO-Revision-Date: 2024-03-09 22:01+0000\n"
 "Last-Translator: Ettore Atalan <atalanttore@googlemail.com>\n"
 "Language-Team: German <https://hosted.weblate.org/projects/pinta/pinta/de/>\n"
 "Language: de\n"
@@ -16,7 +16,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Generator: Weblate 5.4-dev\n"
+"X-Generator: Weblate 5.5-dev\n"
 "X-Launchpad-Export-Date: 2023-12-18 03:00+0000\n"
 
 #: ../Pinta.Gui.Addins/InstallDialog.cs:217
@@ -141,7 +141,7 @@ msgstr "Künstlerisch"
 #. Translators: Image dithering matrix named after Bill Atkinson
 #: ../Pinta.Effects/Classes/ErrorDiffusionMatrix.cs:28
 msgid "Atkinson"
-msgstr ""
+msgstr "Atkinson"
 
 #: ../Pinta.Effects/Dialogs/Effects.LevelsDialog.cs:117
 msgid "Auto"
@@ -179,7 +179,7 @@ msgstr "Basiert auf der Arbeit von Paint.NET:"
 #. Translators: Gradient with the colors of the flag of Italy: red, white, and green
 #: ../Pinta.Effects/Effects/GradientHelper.cs:24
 msgid "Beautiful Italy"
-msgstr ""
+msgstr "Schönes Italien"
 
 #: ../Pinta.Core/Actions/ViewActions.cs:69
 msgid "Best Fit"
@@ -224,7 +224,7 @@ msgstr "Fett"
 #. Translators: Gradient that starts out white, like the core of a raging fire, and then goes through yellow, red, and black (like visible black smoke), and finally transparent, blending with the background
 #: ../Pinta.Effects/Effects/GradientHelper.cs:32
 msgid "Bonfire"
-msgstr ""
+msgstr "Lagerfeuer"
 
 #: ../Pinta.Effects/Adjustments/BrightnessContrastEffect.cs:145
 #: ../Pinta.Effects/Effects/GlowEffect.cs:81
@@ -251,7 +251,7 @@ msgstr "Verbeulen"
 #. Translators: Image dithering matrix named after Daniel Burkes
 #: ../Pinta.Effects/Classes/ErrorDiffusionMatrix.cs:24
 msgid "Burkes"
-msgstr ""
+msgstr "Burkes"
 
 #: ../Pinta/Dialogs/ResizeCanvasDialog.cs:69
 #: ../Pinta/Dialogs/ResizeImageDialog.cs:59
@@ -304,7 +304,7 @@ msgstr "Formtyp ändern"
 #. Translators: Gradient that starts out off-white, like cherry blossoms against sunlight, then goes through pink, then light blue (like the sky) and finally transparent, blending with the background
 #: ../Pinta.Effects/Effects/GradientHelper.cs:36
 msgid "Cherry Blossom"
-msgstr ""
+msgstr "Kirschblüte"
 
 #: ../Pinta.Effects/Dialogs/Effects.LevelsDialog.cs:557
 msgid "Choose Color"
@@ -460,11 +460,11 @@ msgstr "Farbschema"
 #: ../Pinta.Effects/Effects/JuliaFractalEffect.cs:175
 #: ../Pinta.Effects/Effects/MandelbrotFractalEffect.cs:197
 msgid "Color Scheme Source"
-msgstr ""
+msgstr "Farbschemaquelle"
 
 #: ../Pinta.Effects/Effects/VoronoiDiagramEffect.cs:207
 msgid "Color Sorting"
-msgstr ""
+msgstr "Farbsortierung"
 
 #: ../Pinta.Effects/Effects/InkSketchEffect.cs:156
 msgid "Coloring"
@@ -502,7 +502,7 @@ msgstr "Copyright"
 #. Translators: Gradient with the colors of blue and pink cotton candy
 #: ../Pinta.Effects/Effects/GradientHelper.cs:40
 msgid "Cotton Candy"
-msgstr ""
+msgstr "Zuckerwatte"
 
 #. Translators: {0} is the name of a layer, and {1} is the path to a .ora file.
 #: ../Pinta.Core/ImageFormats/OraFormat.cs:122
@@ -593,7 +593,7 @@ msgstr "Abstand"
 
 #: ../Pinta.Effects/Effects/VoronoiDiagramEffect.cs:197
 msgid "Distance Metric"
-msgstr ""
+msgstr "Distanzmetrik"
 
 #: ../Pinta.Effects/Effects/BulgeEffect.cs:27
 #: ../Pinta.Effects/Effects/FrostedGlassEffect.cs:27
@@ -606,7 +606,7 @@ msgstr "Verzerren"
 
 #: ../Pinta.Effects/Effects/DitheringEffect.cs:11
 msgid "Dithering"
-msgstr ""
+msgstr "Fehlerdiffusion"
 
 #: ../Pinta.Tools/Tools/ColorPickerTool.cs:202
 msgid "Do not switch tool"
@@ -645,7 +645,7 @@ msgstr "Effekte"
 #. Translators: Gradient that starts out white, like the the inner part of a spark, and goes through progressively dark shades of blue until it reaches black, and finally transparent, blending with the background
 #: ../Pinta.Effects/Effects/GradientHelper.cs:44
 msgid "Electric"
-msgstr ""
+msgstr "Elektrisch"
 
 #: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:319
 #: ../Pinta.Tools/Editable/EditEngines/EllipseEditEngine.cs:34
@@ -664,6 +664,8 @@ msgstr "Prägen"
 #: ../Pinta/Main.cs:65
 msgid "Enable additional logging or behavior changes for debugging"
 msgstr ""
+"Zusätzliche Protokollierung oder Verhaltensänderungen zur Fehlersuche "
+"aktivieren"
 
 #: ../Pinta.Core/Actions/EditActions.cs:66
 #: ../Pinta.Core/Actions/EditActions.cs:245
@@ -680,7 +682,7 @@ msgstr "Fehler"
 
 #: ../Pinta.Effects/Effects/DitheringEffect.cs:133
 msgid "Error Diffusion Method"
-msgstr ""
+msgstr "Fehlerdiffusionsmethode"
 
 #: ../Pinta.Core/Classes/SelectionModeHandler.cs:48
 msgid "Exclude (-) (Right Click)"
@@ -689,7 +691,7 @@ msgstr "Ausschluss (-) (Rechtsklick)"
 #. Translators: This refers to expanding the canvas size when pasting a larger image.
 #: ../Pinta/Actions/Edit/PasteAction.cs:191
 msgid "Expand"
-msgstr ""
+msgstr "Erweitern"
 
 #: ../Pinta.Gui.Addins/AddinManagerDialog.cs:204
 msgid "Extension packages"
@@ -732,7 +734,7 @@ msgstr "Fehler melden"
 
 #: ../Pinta/Main.cs:61
 msgid "Files to open"
-msgstr ""
+msgstr "Zu öffnende Dateien"
 
 #: ../Pinta.Tools/Tools/TextTool.cs:252
 msgid "Fill Background"
@@ -805,12 +807,12 @@ msgstr "Füllmodus"
 #. Translators: Image dithering matrix named after Robert W. Floyd and Louis Steinberg
 #: ../Pinta.Effects/Classes/ErrorDiffusionMatrix.cs:40
 msgid "Floyd-Steinberg"
-msgstr ""
+msgstr "Floyd-Steinberg"
 
 #. Translators: Image dithering matrix named after Robert W. Floyd and Louis Steinberg. Some software may use it and call it Floyd-Steinberg, but it's not the actual Floyd-Steinberg matrix
 #: ../Pinta.Effects/Classes/ErrorDiffusionMatrix.cs:44
 msgid "Floyd-Steinberg Lite"
-msgstr ""
+msgstr "Floyd-Steinberg Leicht"
 
 #: ../Pinta.Tools/Tools/TextTool.cs:138
 msgid "Font"
@@ -894,17 +896,17 @@ msgstr "Verlauf"
 #. Translators: Horizontal color sorting with blue (B) as the leading term
 #: ../Pinta.Effects/Effects/VoronoiDiagramEffect.cs:233
 msgid "Horizontal blue (B)"
-msgstr ""
+msgstr "Horizontales Blau (B)"
 
 #. Translators: Horizontal color sorting with green (G) as the leading term
 #: ../Pinta.Effects/Effects/VoronoiDiagramEffect.cs:236
 msgid "Horizontal green (G)"
-msgstr ""
+msgstr "Horizontales Grün (G)"
 
 #. Translators: Horizontal color sorting with red (R) as the leading term
 #: ../Pinta.Effects/Effects/VoronoiDiagramEffect.cs:239
 msgid "Horizontal red (R)"
-msgstr ""
+msgstr "Horizontales Rot (R)"
 
 #: ../Pinta.Core/Effects/UserBlendOps.cs:45
 #: ../Pinta.Effects/Adjustments/HueSaturationEffect.cs:61
@@ -1034,7 +1036,7 @@ msgstr "JPEG-Qualität"
 #. Translators: Image dithering matrix named after J. F. Jarvis, C. N. Judice, and W. H. Ninke
 #: ../Pinta.Effects/Classes/ErrorDiffusionMatrix.cs:36
 msgid "Jarvis-Judice-Ninke"
-msgstr ""
+msgstr "Jarvis-Judice-Ninke"
 
 #: ../Pinta.Effects/Effects/JuliaFractalEffect.cs:23
 msgid "Julia Fractal"
@@ -1283,7 +1285,7 @@ msgstr "Helligkeit"
 #. Translators: Gradient with a citrusy vibe that starts out white, goes through light yellow, several shades of green, and then transparent, blending with the background
 #: ../Pinta.Effects/Effects/GradientHelper.cs:48
 msgid "Lime Lemon"
-msgstr ""
+msgstr "Limette-Zitrone"
 
 #: ../Pinta.Tools/Tools/LineCurveTool.cs:38
 msgid "Line/Curve"
@@ -1433,11 +1435,11 @@ msgstr "Normal und Kontur"
 
 #: ../Pinta.Effects/Effects/VoronoiDiagramEffect.cs:200
 msgid "Number of Cells"
-msgstr ""
+msgstr "Anzahl der Zellen"
 
 #: ../Pinta/Main.cs:55
 msgid "Number of threads to use for rendering"
-msgstr ""
+msgstr "Anzahl der für das Rendering zu verwendenden Threads"
 
 #: ../Pinta.Effects/Effects/BulgeEffect.cs:114
 #: ../Pinta.Effects/Effects/RadialBlurEffect.cs:175
@@ -1649,7 +1651,7 @@ msgstr "Pixel"
 #. Translators: Gradient with different shades of brownish yellow
 #: ../Pinta.Effects/Effects/GradientHelper.cs:52
 msgid "Piña Colada"
-msgstr ""
+msgstr "Piña Colada"
 
 #: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:583
 #: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:769
@@ -1741,7 +1743,7 @@ msgstr "Radius"
 #: ../Pinta.Effects/Effects/GradientHelper.cs:17
 #: ../Pinta.Effects/Effects/VoronoiDiagramEffect.cs:230
 msgid "Random"
-msgstr ""
+msgstr "Zufällig"
 
 #: ../Pinta.Effects/Effects/CloudsEffect.cs:253
 #: ../Pinta.Effects/Effects/JuliaFractalEffect.cs:181
@@ -1751,7 +1753,7 @@ msgstr ""
 
 #: ../Pinta.Effects/Effects/VoronoiDiagramEffect.cs:214
 msgid "Random Colors"
-msgstr ""
+msgstr "Zufällige Farben"
 
 #: ../Pinta.Effects/Effects/AddNoiseEffect.cs:176
 #: ../Pinta.Effects/Effects/CloudsEffect.cs:244
@@ -1878,12 +1880,12 @@ msgstr "Neue Palettengröße festlegen"
 #: ../Pinta.Effects/Effects/JuliaFractalEffect.cs:184
 #: ../Pinta.Effects/Effects/MandelbrotFractalEffect.cs:206
 msgid "Reverse Color Scheme"
-msgstr ""
+msgstr "Farbschema umkehren"
 
 #. Translators: In this context, "reverse" is a verb, and the user can choose whether or not they want to reverse the color sorting
 #: ../Pinta.Effects/Effects/VoronoiDiagramEffect.cs:211
 msgid "Reverse Color Sorting"
-msgstr ""
+msgstr "Farbsortierung umkehren"
 
 #: ../Pinta.Tools/Tools/TextTool.cs:226
 msgid "Right Align"
@@ -1998,7 +2000,7 @@ msgstr "Alles auswählen"
 
 #: ../Pinta.Effects/Effects/GradientHelper.cs:14
 msgid "Selected Colors"
-msgstr ""
+msgstr "Ausgewählte Farben"
 
 #: ../Pinta.Effects/Adjustments/SepiaEffect.cs:25
 msgid "Sepia"
@@ -2028,7 +2030,7 @@ msgstr "Ebene anzeigen"
 #. Translators: The user can choose whether or not to render the points used in the calculation of a Voronoi diagram
 #: ../Pinta.Effects/Effects/VoronoiDiagramEffect.cs:204
 msgid "Show Points"
-msgstr ""
+msgstr "Punkte anzeigen"
 
 #: ../Pinta.Core/Actions/ViewActions.cs:155
 msgid "Show/Hide"
@@ -2037,12 +2039,12 @@ msgstr "Anzeigen/ausblenden"
 #. Translators: Image dithering matrix named after Frankie Sierra
 #: ../Pinta.Effects/Classes/ErrorDiffusionMatrix.cs:12
 msgid "Sierra"
-msgstr ""
+msgstr "Sierra"
 
 #. Translators: Image dithering matrix named after Frankie Sierra
 #: ../Pinta.Effects/Classes/ErrorDiffusionMatrix.cs:20
 msgid "Sierra Lite"
-msgstr ""
+msgstr "Sierra Leicht"
 
 #: ../Pinta.Tools/Tools/ColorPickerTool.cs:221
 msgid "Single Pixel"
@@ -2087,7 +2089,7 @@ msgstr "Stärke"
 #. Translators: Image dithering matrix named after Peter Stucki
 #: ../Pinta.Effects/Classes/ErrorDiffusionMatrix.cs:32
 msgid "Stucki"
-msgstr ""
+msgstr "Stucki"
 
 #: ../Pinta.Effects/Effects/EdgeDetectEffect.cs:27
 #: ../Pinta.Effects/Effects/EmbossEffect.cs:27
@@ -2153,6 +2155,8 @@ msgid ""
 "The image being pasted is larger than the canvas. What would you like to do "
 "to the canvas size?"
 msgstr ""
+"Das eingefügte Bild ist größer als die Leinwand. Was möchten Sie mit der "
+"Leinwandgröße machen?"
 
 #: ../Pinta.Gui.Addins/InstallDialog.cs:301
 msgid "The installation failed!"
@@ -2248,7 +2252,7 @@ msgstr "Verdrehen"
 #. Translators: Image dithering matrix named after Frankie Sierra
 #: ../Pinta.Effects/Classes/ErrorDiffusionMatrix.cs:16
 msgid "Two-Row Sierra"
-msgstr ""
+msgstr "Zweireihiges Sierra"
 
 #: ../Pinta.Tools/Tools/EraserTool.cs:259
 #: ../Pinta.Tools/Tools/PaintBrushTool.cs:165
@@ -2324,17 +2328,17 @@ msgstr "Version: {0}"
 #. Translators: Vertical color sorting with blue (B) as the leading term
 #: ../Pinta.Effects/Effects/VoronoiDiagramEffect.cs:243
 msgid "Vertical blue (B)"
-msgstr ""
+msgstr "Vertikales Blau (B)"
 
 #. Translators: Vertical color sorting with green (G) as the leading term
 #: ../Pinta.Effects/Effects/VoronoiDiagramEffect.cs:246
 msgid "Vertical green (G)"
-msgstr ""
+msgstr "Vertikales Grün (G)"
 
 #. Translators: Vertical color sorting with red (R) as the leading term
 #: ../Pinta.Effects/Effects/VoronoiDiagramEffect.cs:249
 msgid "Vertical red (R)"
-msgstr ""
+msgstr "Vertikales Rot (R)"
 
 #: ../Pinta/Dialogs/LayerPropertiesDialog.cs:83
 msgid "Visible"
@@ -2342,7 +2346,7 @@ msgstr "Sichtbar"
 
 #: ../Pinta.Effects/Effects/VoronoiDiagramEffect.cs:18
 msgid "Voronoi Diagram"
-msgstr ""
+msgstr "Voronoi-Diagramm"
 
 #: ../Pinta.Effects/Effects/SoftenPortraitEffect.cs:120
 msgid "Warmth"
