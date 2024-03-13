@@ -113,6 +113,7 @@ public static class Icons
 	public const string EditSelectionErase = "edit-selection-erase";
 	public const string EditSelectionFill = "edit-selection-fill";
 	public const string EditSelectionInvert = "edit-selection-invert";
+	public const string EditSelectionOffset = "edit-selection-invert";
 	public const string EditSelectionNone = "ui-deselect-symbolic";
 
 	public const string EffectsArtisticInkSketch = "effects-artistic-inksketch";

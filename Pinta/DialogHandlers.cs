@@ -53,6 +53,7 @@ public sealed class ActionHandlers
 			new ExitProgramAction (),
 
 			// Edit
+			new OffsetSelectionAction (),
 			new PasteAction (),
 			new PasteIntoNewLayerAction (),
 			new PasteIntoNewImageAction (),
@@ -123,6 +124,7 @@ public sealed class ActionHandlers
 		PintaCore.Actions.Edit.EraseSelection.Sensitive = enable;
 		PintaCore.Actions.Edit.FillSelection.Sensitive = enable;
 		PintaCore.Actions.Edit.InvertSelection.Sensitive = enable;
+		PintaCore.Actions.Edit.OffsetSelection.Sensitive = enable;
 		PintaCore.Actions.Edit.SelectAll.Sensitive = enable;
 		PintaCore.Actions.Edit.Deselect.Sensitive = enable;
 

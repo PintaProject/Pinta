@@ -44,6 +44,7 @@ public sealed class EditActions
 	public Command EraseSelection { get; }
 	public Command FillSelection { get; }
 	public Command InvertSelection { get; }
+	public Command OffsetSelection { get; }
 	public Command SelectAll { get; }
 	public Command Deselect { get; }
 	public Command LoadPalette { get; }
@@ -66,6 +67,7 @@ public sealed class EditActions
 		EraseSelection = new Command ("eraseselection", Translations.GetString ("Erase Selection"), null, Resources.Icons.EditSelectionErase);
 		FillSelection = new Command ("fillselection", Translations.GetString ("Fill Selection"), null, Resources.Icons.EditSelectionFill);
 		InvertSelection = new Command ("invertselection", Translations.GetString ("Invert Selection"), null, Resources.Icons.EditSelectionFill);
+		OffsetSelection = new Command ("offsetselection", Translations.GetString ("Offset Selection"), null, Resources.Icons.EditSelectionOffset);
 		SelectAll = new Command ("selectall", Translations.GetString ("Select All"), null, Resources.StandardIcons.EditSelectAll);
 		Deselect = new Command ("deselect", Translations.GetString ("Deselect All"), null, Resources.Icons.EditSelectionNone);
 
@@ -129,6 +131,9 @@ public sealed class EditActions
 		app.AddAccelAction (InvertSelection, "<Primary>I");
 		edit_sel_section.AppendItem (InvertSelection.CreateMenuItem ());
 
+		app.AddAccelAction (OffsetSelection, "<Primary><Shift>O");
+		edit_sel_section.AppendItem (OffsetSelection.CreateMenuItem ());
+
 		var palette_section = Gio.Menu.New ();
 		menu.AppendSection (null, palette_section);
 
@@ -181,6 +186,7 @@ public sealed class EditActions
 			EraseSelection.Sensitive = visible;
 			FillSelection.Sensitive = visible;
 			InvertSelection.Sensitive = visible;
+			OffsetSelection.Sensitive = visible;
 		};
 	}
 
