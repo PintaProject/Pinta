@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: pinta\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2024-03-17 01:09+0000\n"
-"PO-Revision-Date: 2024-02-03 13:01+0000\n"
+"PO-Revision-Date: 2024-03-18 07:01+0000\n"
 "Last-Translator: Matthaiks <kitynska@gmail.com>\n"
 "Language-Team: Polish <https://hosted.weblate.org/projects/pinta/pinta/pl/>\n"
 "Language: pl\n"
@@ -17,7 +17,7 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=3; plural=(n==1 ? 0 : n%10>=2 && n%10<=4 && (n%100<10 "
 "|| n%100>=20) ? 1 : 2);\n"
-"X-Generator: Weblate 5.4-dev\n"
+"X-Generator: Weblate 5.5-dev\n"
 "X-Launchpad-Export-Date: 2023-12-18 03:00+0000\n"
 
 #: ../Pinta.Gui.Addins/InstallDialog.cs:217
@@ -1447,7 +1447,7 @@ msgstr "Przesunięcie"
 #: ../Pinta/Actions/Edit/OffsetSelectionAction.cs:57
 #: ../Pinta/Dialogs/OffsetSelectionDialog.cs:41
 msgid "Offset Selection"
-msgstr ""
+msgstr "Wybór przesunięcia"
 
 #: ../Pinta.Effects/Effects/OilPaintingEffect.cs:23
 msgid "Oil Painting"
