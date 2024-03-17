@@ -299,6 +299,7 @@ Pinta.Tools/Tools/ShapeTool.cs
 Pinta.Tools/Tools/TextTool.cs
 Pinta.Tools/Tools/ZoomTool.cs
 Pinta/Actions/Addins/AddinManagerAction.cs
+Pinta/Actions/Edit/OffsetSelectionAction.cs
 Pinta/Actions/Edit/PasteAction.cs
 Pinta/Actions/Edit/PasteIntoNewImageAction.cs
 Pinta/Actions/Edit/PasteIntoNewLayerAction.cs
@@ -334,6 +335,7 @@ Pinta/Dialogs/ErrorDialog.cs
 Pinta/Dialogs/JpegCompressionDialog.cs
 Pinta/Dialogs/LayerPropertiesDialog.cs
 Pinta/Dialogs/NewImageDialog.cs
+Pinta/Dialogs/OffsetSelectionDialog.cs
 Pinta/Dialogs/ProgressDialog.cs
 Pinta/Dialogs/ResizeCanvasDialog.cs
 Pinta/Dialogs/ResizeImageDialog.cs
