@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: pinta\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-01-28 01:09+0000\n"
+"POT-Creation-Date: 2024-03-17 01:09+0000\n"
 "PO-Revision-Date: 2021-11-03 19:55+0000\n"
 "Last-Translator: Yaron <sh.yaron@gmail.com>\n"
 "Language-Team: Hebrew <he@li.org>\n"
@@ -32,19 +32,19 @@ msgstr " מצב בחירה: "
 msgid "..."
 msgstr "..."
 
-#: ../Pinta.Tools/Tools/ColorPickerTool.cs:222
+#: ../Pinta.Tools/Tools/ColorPickerTool.cs:223
 msgid "3 x 3 Region"
 msgstr "אזור של 3 × 3"
 
-#: ../Pinta.Tools/Tools/ColorPickerTool.cs:223
+#: ../Pinta.Tools/Tools/ColorPickerTool.cs:224
 msgid "5 x 5 Region"
 msgstr "אזור של 5 × 5"
 
-#: ../Pinta.Tools/Tools/ColorPickerTool.cs:224
+#: ../Pinta.Tools/Tools/ColorPickerTool.cs:225
 msgid "7 x 7 Region"
 msgstr "אזור של 7 × 7"
 
-#: ../Pinta.Tools/Tools/ColorPickerTool.cs:225
+#: ../Pinta.Tools/Tools/ColorPickerTool.cs:226
 msgid "9 x 9 Region"
 msgstr "אזור של 9 × 9"
 
@@ -82,21 +82,21 @@ msgstr "נוספה"
 msgid "Adjustments"
 msgstr ""
 
-#: ../Pinta.Tools/Tools/ColorPickerTool.cs:193
+#: ../Pinta.Tools/Tools/ColorPickerTool.cs:194
 msgid "After select"
 msgstr "לאחר הבחירה"
 
-#: ../Pinta.Core/Actions/EditActions.cs:368
+#: ../Pinta.Core/Actions/EditActions.cs:374
 #: ../Pinta.Gui.Addins/AddinManagerDialog.cs:209
 #: ../Pinta/Actions/File/OpenDocumentAction.cs:83
 msgid "All files"
 msgstr "כל הקבצים"
 
-#: ../Pinta.Effects/Effects/BulgeEffect.cs:111
-#: ../Pinta.Effects/Effects/FrostedGlassEffect.cs:151
-#: ../Pinta.Effects/Effects/SharpenEffect.cs:60
+#: ../Pinta.Effects/Effects/BulgeEffect.cs:109
+#: ../Pinta.Effects/Effects/FrostedGlassEffect.cs:149
+#: ../Pinta.Effects/Effects/SharpenEffect.cs:58
 #: ../Pinta.Effects/Effects/TwistEffect.cs:142
-#: ../Pinta.Effects/Effects/ZoomBlurEffect.cs:145
+#: ../Pinta.Effects/Effects/ZoomBlurEffect.cs:143
 msgid "Amount"
 msgstr "כמות"
 
@@ -104,13 +104,13 @@ msgstr "כמות"
 msgid "Anchor:"
 msgstr "עוגן:"
 
-#: ../Pinta.Effects/Effects/EdgeDetectEffect.cs:83
-#: ../Pinta.Effects/Effects/EmbossEffect.cs:150
+#: ../Pinta.Effects/Effects/EdgeDetectEffect.cs:81
+#: ../Pinta.Effects/Effects/EmbossEffect.cs:148
 #: ../Pinta.Effects/Effects/JuliaFractalEffect.cs:187
-#: ../Pinta.Effects/Effects/MandelbrotFractalEffect.cs:194
+#: ../Pinta.Effects/Effects/MandelbrotFractalEffect.cs:192
 #: ../Pinta.Effects/Effects/MotionBlurEffect.cs:108
-#: ../Pinta.Effects/Effects/RadialBlurEffect.cs:172
-#: ../Pinta.Effects/Effects/ReliefEffect.cs:85
+#: ../Pinta.Effects/Effects/RadialBlurEffect.cs:170
+#: ../Pinta.Effects/Effects/ReliefEffect.cs:83
 #: ../Pinta.Tools/Editable/EditEngines/ArrowedEditEngine.cs:298
 #: ../Pinta/Actions/Layers/RotateZoomLayerAction.cs:115
 msgid "Angle"
@@ -120,11 +120,11 @@ msgstr "זווית"
 msgid "Antialias"
 msgstr "החלקת קצוות"
 
-#: ../Pinta.Core/Classes/BaseTool.cs:351
+#: ../Pinta.Core/Classes/BaseTool.cs:338
 msgid "Antialiasing Off"
 msgstr "החלקה כבויה"
 
-#: ../Pinta.Core/Classes/BaseTool.cs:350
+#: ../Pinta.Core/Classes/BaseTool.cs:337
 msgid "Antialiasing On"
 msgstr "החלקה פעילה"
 
@@ -217,7 +217,7 @@ msgstr "כחול "
 msgid "Blurs"
 msgstr "טשטושים"
 
-#: ../Pinta.Tools/Tools/TextTool.cs:162
+#: ../Pinta.Tools/Tools/TextTool.cs:161
 msgid "Bold"
 msgstr "מודגש"
 
@@ -226,8 +226,8 @@ msgstr "מודגש"
 msgid "Bonfire"
 msgstr ""
 
-#: ../Pinta.Effects/Adjustments/BrightnessContrastEffect.cs:145
-#: ../Pinta.Effects/Effects/GlowEffect.cs:81
+#: ../Pinta.Effects/Adjustments/BrightnessContrastEffect.cs:143
+#: ../Pinta.Effects/Effects/GlowEffect.cs:79
 msgid "Brightness"
 msgstr "בהירות"
 
@@ -235,12 +235,12 @@ msgstr "בהירות"
 msgid "Brightness / Contrast"
 msgstr "בהירות / ניגודיות"
 
-#: ../Pinta.Effects/Effects/OilPaintingEffect.cs:132
+#: ../Pinta.Effects/Effects/OilPaintingEffect.cs:130
 msgid "Brush Size"
 msgstr "גודל המברשת"
 
 #: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:254
-#: ../Pinta.Tools/Tools/BaseBrushTool.cs:100
+#: ../Pinta.Tools/Tools/BaseBrushTool.cs:101
 msgid "Brush width"
 msgstr "עובי המברשת"
 
@@ -263,8 +263,8 @@ msgstr "בגודל מוחלט:"
 msgid "By percentage:"
 msgstr "באחוזים:"
 
-#: ../Pinta.Core/Actions/EditActions.cs:353
-#: ../Pinta.Core/Actions/EditActions.cs:394
+#: ../Pinta.Core/Actions/EditActions.cs:359
+#: ../Pinta.Core/Actions/EditActions.cs:400
 #: ../Pinta.Core/Actions/LayerActions.cs:167
 #: ../Pinta.Gui.Addins/AddinManagerDialog.cs:198
 #: ../Pinta.Gui.Addins/InstallDialog.cs:117
@@ -277,11 +277,11 @@ msgstr ""
 msgid "Canvas"
 msgstr "משטח ציור"
 
-#: ../Pinta.Effects/Effects/PixelateEffect.cs:117
+#: ../Pinta.Effects/Effects/PixelateEffect.cs:115
 msgid "Cell Size"
 msgstr "גודל התא"
 
-#: ../Pinta.Tools/Tools/TextTool.cs:214
+#: ../Pinta.Tools/Tools/TextTool.cs:213
 msgid "Center Align"
 msgstr "יישור למרכז"
 
@@ -330,13 +330,13 @@ msgstr "עיגולים"
 msgid "Clamp"
 msgstr "לחיצה"
 
-#: ../Pinta.Tools/Tools/RectangleSelectTool.cs:38
+#: ../Pinta.Tools/Tools/RectangleSelectTool.cs:39
 msgid ""
 "Click and drag to draw a rectangular selection.\n"
 "Hold Shift to constrain to a square."
 msgstr ""
 
-#: ../Pinta.Tools/Tools/EllipseSelectTool.cs:37
+#: ../Pinta.Tools/Tools/EllipseSelectTool.cs:38
 msgid ""
 "Click and drag to draw an elliptical selection.\n"
 "Hold Shift to constrain to a circle."
@@ -352,7 +352,7 @@ msgstr ""
 msgid "Click and drag to draw the outline for a selection area."
 msgstr "יש ללחוץ ולגרור כדי לצייר קו מתאר לאזור הבחירה."
 
-#: ../Pinta.Tools/Tools/PanTool.cs:41
+#: ../Pinta.Tools/Tools/PanTool.cs:42
 msgid "Click and drag to navigate image."
 msgstr "יש ללחוץ ולגרור כדי לנווט ברחבי התמונה."
 
@@ -383,7 +383,7 @@ msgstr "לחיצה תחליף בין הצבע העיקרי למשני."
 msgid "Clipboard"
 msgstr "לוח גזירות"
 
-#: ../Pinta.Tools/Tools/CloneStampTool.cs:43
+#: ../Pinta.Tools/Tools/CloneStampTool.cs:44
 msgid "Clone Stamp"
 msgstr "חותמת העתקים"
 
@@ -408,7 +408,7 @@ msgstr "סדרת קווים/עקומות סגורה"
 msgid "Clouds"
 msgstr "עננים"
 
-#: ../Pinta.Effects/Effects/OilPaintingEffect.cs:135
+#: ../Pinta.Effects/Effects/OilPaintingEffect.cs:133
 msgid "Coarseness"
 msgstr "חוזק"
 
@@ -429,11 +429,11 @@ msgstr "התחמקות צבע"
 msgid "Color Mode"
 msgstr ""
 
-#: ../Pinta.Tools/Tools/ColorPickerTool.cs:51
+#: ../Pinta.Tools/Tools/ColorPickerTool.cs:52
 msgid "Color Picker"
 msgstr "‏מלקט הצבעים"
 
-#: ../Pinta.Effects/Effects/PencilSketchEffect.cs:89
+#: ../Pinta.Effects/Effects/PencilSketchEffect.cs:87
 msgid "Color Range"
 msgstr "טווח צבעים"
 
@@ -444,13 +444,13 @@ msgstr "רווית הצבע"
 #: ../Pinta.Core/Actions/ViewActions.cs:181
 #: ../Pinta.Effects/Effects/CloudsEffect.cs:250
 #: ../Pinta.Effects/Effects/JuliaFractalEffect.cs:178
-#: ../Pinta.Effects/Effects/MandelbrotFractalEffect.cs:200
+#: ../Pinta.Effects/Effects/MandelbrotFractalEffect.cs:198
 msgid "Color Scheme"
 msgstr ""
 
 #: ../Pinta.Effects/Effects/CloudsEffect.cs:247
 #: ../Pinta.Effects/Effects/JuliaFractalEffect.cs:175
-#: ../Pinta.Effects/Effects/MandelbrotFractalEffect.cs:197
+#: ../Pinta.Effects/Effects/MandelbrotFractalEffect.cs:195
 msgid "Color Scheme Source"
 msgstr ""
 
@@ -458,7 +458,7 @@ msgstr ""
 msgid "Color Sorting"
 msgstr ""
 
-#: ../Pinta.Effects/Effects/InkSketchEffect.cs:156
+#: ../Pinta.Effects/Effects/InkSketchEffect.cs:154
 msgid "Coloring"
 msgstr "צביעה"
 
@@ -470,20 +470,20 @@ msgstr "מדרג חרוטי"
 msgid "Contents"
 msgstr "תוכן עניינים"
 
-#: ../Pinta.Tools/Tools/FloodTool.cs:134
+#: ../Pinta.Tools/Tools/FloodTool.cs:133
 msgid "Contiguous"
 msgstr "המשכי"
 
-#: ../Pinta.Effects/Adjustments/BrightnessContrastEffect.cs:156
-#: ../Pinta.Effects/Effects/GlowEffect.cs:84
+#: ../Pinta.Effects/Adjustments/BrightnessContrastEffect.cs:154
+#: ../Pinta.Effects/Effects/GlowEffect.cs:82
 msgid "Contrast"
 msgstr "ניגודיות"
 
-#: ../Pinta.Core/Actions/EditActions.cs:61
+#: ../Pinta.Core/Actions/EditActions.cs:62
 msgid "Copy"
 msgstr "העתקה"
 
-#: ../Pinta.Core/Actions/EditActions.cs:62
+#: ../Pinta.Core/Actions/EditActions.cs:63
 msgid "Copy Merged"
 msgstr "העתקה עם מיזוג"
 
@@ -530,8 +530,8 @@ msgstr "עקומות"
 msgid "Custom"
 msgstr "מותאם אישית"
 
-#: ../Pinta.Core/Actions/EditActions.cs:60
-#: ../Pinta.Core/Actions/EditActions.cs:244
+#: ../Pinta.Core/Actions/EditActions.cs:61
+#: ../Pinta.Core/Actions/EditActions.cs:250
 msgid "Cut"
 msgstr "גזירה"
 
@@ -562,11 +562,11 @@ msgstr "מחיקת שכבה"
 msgid "Deleted"
 msgstr "נמחקה"
 
-#: ../Pinta.Core/Actions/EditActions.cs:256
+#: ../Pinta.Core/Actions/EditActions.cs:262
 msgid "Deselect"
 msgstr "ביטול בחירה"
 
-#: ../Pinta.Core/Actions/EditActions.cs:70
+#: ../Pinta.Core/Actions/EditActions.cs:72
 msgid "Deselect All"
 msgstr "ביטול בחירת הכול"
 
@@ -578,7 +578,7 @@ msgstr "פרטים"
 msgid "Difference"
 msgstr "הבדל"
 
-#: ../Pinta.Effects/Effects/FragmentEffect.cs:117
+#: ../Pinta.Effects/Effects/FragmentEffect.cs:115
 #: ../Pinta.Effects/Effects/MotionBlurEffect.cs:111
 msgid "Distance"
 msgstr "מרחק"
@@ -590,7 +590,7 @@ msgstr ""
 #: ../Pinta.Effects/Effects/BulgeEffect.cs:27
 #: ../Pinta.Effects/Effects/FrostedGlassEffect.cs:27
 #: ../Pinta.Effects/Effects/PixelateEffect.cs:29
-#: ../Pinta.Effects/Effects/PolarInversionEffect.cs:27
+#: ../Pinta.Effects/Effects/PolarInversionEffect.cs:28
 #: ../Pinta.Effects/Effects/TileEffect.cs:27
 #: ../Pinta.Effects/Effects/TwistEffect.cs:28
 msgid "Distort"
@@ -600,7 +600,7 @@ msgstr "עיוות"
 msgid "Dithering"
 msgstr ""
 
-#: ../Pinta.Tools/Tools/ColorPickerTool.cs:202
+#: ../Pinta.Tools/Tools/ColorPickerTool.cs:203
 msgid "Do not switch tool"
 msgstr "לא להחליף כלי"
 
@@ -641,11 +641,11 @@ msgstr ""
 
 #: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:319
 #: ../Pinta.Tools/Editable/EditEngines/EllipseEditEngine.cs:34
-#: ../Pinta.Tools/Tools/EllipseTool.cs:38
+#: ../Pinta.Tools/Tools/EllipseTool.cs:39
 msgid "Ellipse"
 msgstr "אליפסה"
 
-#: ../Pinta.Tools/Tools/EllipseSelectTool.cs:35
+#: ../Pinta.Tools/Tools/EllipseSelectTool.cs:36
 msgid "Ellipse Select"
 msgstr "בחירת אליפסה"
 
@@ -657,8 +657,8 @@ msgstr "תבליט"
 msgid "Enable additional logging or behavior changes for debugging"
 msgstr ""
 
-#: ../Pinta.Core/Actions/EditActions.cs:66
-#: ../Pinta.Core/Actions/EditActions.cs:245
+#: ../Pinta.Core/Actions/EditActions.cs:67
+#: ../Pinta.Core/Actions/EditActions.cs:251
 msgid "Erase Selection"
 msgstr "מחיקת הבחירה"
 
@@ -688,7 +688,7 @@ msgid "Extension packages"
 msgstr ""
 
 #: ../Pinta.Effects/Effects/JuliaFractalEffect.cs:166
-#: ../Pinta.Effects/Effects/MandelbrotFractalEffect.cs:184
+#: ../Pinta.Effects/Effects/MandelbrotFractalEffect.cs:182
 msgid "Factor"
 msgstr "מקדם"
 
@@ -726,27 +726,27 @@ msgstr "דיווח על תקלה"
 msgid "Files to open"
 msgstr ""
 
-#: ../Pinta.Tools/Tools/TextTool.cs:252
+#: ../Pinta.Tools/Tools/TextTool.cs:251
 msgid "Fill Background"
 msgstr "מילוי הרקע"
 
-#: ../Pinta.Core/Actions/EditActions.cs:67
-#: ../Pinta.Core/Actions/EditActions.cs:206
+#: ../Pinta.Core/Actions/EditActions.cs:68
+#: ../Pinta.Core/Actions/EditActions.cs:212
 msgid "Fill Selection"
 msgstr "מילוי הבחירה"
 
 #: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:294
-#: ../Pinta.Tools/Tools/FreeformShapeTool.cs:223
+#: ../Pinta.Tools/Tools/FreeformShapeTool.cs:222
 msgid "Fill Shape"
 msgstr "מילוי הצורה"
 
 #: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:284
-#: ../Pinta.Tools/Tools/FreeformShapeTool.cs:216
+#: ../Pinta.Tools/Tools/FreeformShapeTool.cs:215
 msgid "Fill Style"
 msgstr "סגנון המילוי"
 
 #: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:295
-#: ../Pinta.Tools/Tools/FreeformShapeTool.cs:224
+#: ../Pinta.Tools/Tools/FreeformShapeTool.cs:223
 msgid "Fill and Outline Shape"
 msgstr "מילוי וקו המתאר של הצורה"
 
@@ -790,7 +790,7 @@ msgstr "היפוך השכבה אנכית"
 msgid "Flip Vertical"
 msgstr "היפוך אנכי"
 
-#: ../Pinta.Tools/Tools/FloodTool.cs:124
+#: ../Pinta.Tools/Tools/FloodTool.cs:123
 msgid "Flood Mode"
 msgstr "מצב הצפה"
 
@@ -804,7 +804,7 @@ msgstr ""
 msgid "Floyd-Steinberg Lite"
 msgstr ""
 
-#: ../Pinta.Tools/Tools/TextTool.cs:138
+#: ../Pinta.Tools/Tools/TextTool.cs:137
 msgid "Font"
 msgstr "גופן"
 
@@ -812,11 +812,11 @@ msgstr "גופן"
 msgid "Fragment"
 msgstr "שבר"
 
-#: ../Pinta.Effects/Effects/FragmentEffect.cs:114
+#: ../Pinta.Effects/Effects/FragmentEffect.cs:112
 msgid "Fragments"
 msgstr "שברים"
 
-#: ../Pinta.Tools/Tools/FreeformShapeTool.cs:52
+#: ../Pinta.Tools/Tools/FreeformShapeTool.cs:51
 msgid "Freeform Shape"
 msgstr "צורה ביד חופשית"
 
@@ -836,7 +836,7 @@ msgstr "גלריה"
 msgid "Gaussian Blur"
 msgstr "טשטוש גאוסי"
 
-#: ../Pinta.Tools/Tools/FloodTool.cs:135
+#: ../Pinta.Tools/Tools/FloodTool.cs:134
 msgid "Global"
 msgstr "גלובלי"
 
@@ -873,7 +873,7 @@ msgstr "גובה:"
 msgid "Hide Layer"
 msgstr "הסתרת השכבה"
 
-#: ../Pinta.Effects/Effects/RedEyeRemoveEffect.cs:59
+#: ../Pinta.Effects/Effects/RedEyeRemoveEffect.cs:57
 msgid "Hint: For best results, first use selection tools to select each eye."
 msgstr ""
 "עצה: לקבלת התוצאות המיטביות כדאי תחילה לסמן כל אחת מהעיניים באמצעות כלי "
@@ -899,7 +899,7 @@ msgid "Horizontal red (R)"
 msgstr ""
 
 #: ../Pinta.Core/Effects/UserBlendOps.cs:45
-#: ../Pinta.Effects/Adjustments/HueSaturationEffect.cs:61
+#: ../Pinta.Effects/Adjustments/HueSaturationEffect.cs:60
 msgid "Hue"
 msgstr "גוון"
 
@@ -915,7 +915,7 @@ msgstr "קובצי ICO לא יכולים לחרוג מגודל של 255 × 255"
 msgid "If you don't save, all changes will be permanently lost."
 msgstr "אם השינויים לא ישמרו הם יאבדו לעד."
 
-#: ../Pinta.Tools/Tools/ColorPickerTool.cs:240 ../Pinta/MainWindow.cs:388
+#: ../Pinta.Tools/Tools/ColorPickerTool.cs:241 ../Pinta/MainWindow.cs:388
 msgid "Image"
 msgstr "תמונה"
 
@@ -956,7 +956,7 @@ msgstr "ייבוא מקובץ..."
 msgid "Inches"
 msgstr "אינצ׳ים"
 
-#: ../Pinta.Effects/Effects/InkSketchEffect.cs:153
+#: ../Pinta.Effects/Effects/InkSketchEffect.cs:151
 msgid "Ink Outline"
 msgstr "קווי המתאר בדיו"
 
@@ -994,7 +994,7 @@ msgid "Installed"
 msgstr "מותקנת"
 
 #: ../Pinta.Effects/Effects/AddNoiseEffect.cs:167
-#: ../Pinta.Effects/Effects/OutlineEffect.cs:141
+#: ../Pinta.Effects/Effects/OutlineEffect.cs:139
 #: ../Pinta.Effects/Effects/TileEffect.cs:180
 msgid "Intensity"
 msgstr "עצמה"
@@ -1006,16 +1006,16 @@ msgid "Intersect ({0} + Left Click)"
 msgstr ""
 
 #: ../Pinta.Effects/Adjustments/InvertColorsEffect.cs:24
-#: ../Pinta.Effects/Effects/MandelbrotFractalEffect.cs:209
+#: ../Pinta.Effects/Effects/MandelbrotFractalEffect.cs:207
 msgid "Invert Colors"
 msgstr "היפוך צבעים"
 
-#: ../Pinta.Core/Actions/EditActions.cs:68
-#: ../Pinta.Core/Actions/EditActions.cs:446
+#: ../Pinta.Core/Actions/EditActions.cs:69
+#: ../Pinta.Core/Actions/EditActions.cs:452
 msgid "Invert Selection"
 msgstr "היפוך הבחירה"
 
-#: ../Pinta.Tools/Tools/TextTool.cs:174
+#: ../Pinta.Tools/Tools/TextTool.cs:173
 msgid "Italic"
 msgstr "נטוי"
 
@@ -1040,7 +1040,7 @@ msgstr "תמונת נוף"
 msgid "Lasso Select"
 msgstr "בחירת פלצור"
 
-#: ../Pinta.Tools/Tools/ColorPickerTool.cs:239
+#: ../Pinta.Tools/Tools/ColorPickerTool.cs:240
 msgid "Layer"
 msgstr "שכבה"
 
@@ -1075,11 +1075,11 @@ msgstr ""
 msgid "Layers"
 msgstr "שכבות"
 
-#: ../Pinta.Tools/Tools/TextTool.cs:202
+#: ../Pinta.Tools/Tools/TextTool.cs:201
 msgid "Left Align"
 msgstr "יישור לשמאל"
 
-#: ../Pinta.Tools/Tools/MoveSelectedTool.cs:46
+#: ../Pinta.Tools/Tools/MoveSelectedTool.cs:45
 #, csharp-format
 msgid ""
 "Left click and drag the selection to move selected content.\n"
@@ -1089,7 +1089,7 @@ msgid ""
 "Use arrow keys to move selected content by a single pixel."
 msgstr ""
 
-#: ../Pinta.Tools/Tools/MoveSelectionTool.cs:45
+#: ../Pinta.Tools/Tools/MoveSelectionTool.cs:44
 #, csharp-format
 msgid ""
 "Left click and drag the selection to move selection outline.\n"
@@ -1100,7 +1100,7 @@ msgid ""
 msgstr ""
 
 #. Translators: {0} is 'Ctrl', or a platform-specific key such as 'Command' on macOS.
-#: ../Pinta.Tools/Tools/ShapeTool.cs:48
+#: ../Pinta.Tools/Tools/ShapeTool.cs:49
 #, csharp-format
 msgid ""
 "Left click to draw a shape with the primary color.\n"
@@ -1119,13 +1119,13 @@ msgid ""
 "Press Enter to finalize the shape."
 msgstr ""
 
-#: ../Pinta.Tools/Tools/PencilTool.cs:50
+#: ../Pinta.Tools/Tools/PencilTool.cs:51
 msgid ""
 "Left click to draw freeform one-pixel wide lines with the primary color.\n"
 "Right click to use the secondary color."
 msgstr ""
 
-#: ../Pinta.Tools/Tools/FreeformShapeTool.cs:54
+#: ../Pinta.Tools/Tools/FreeformShapeTool.cs:53
 #: ../Pinta.Tools/Tools/PaintBrushTool.cs:58
 msgid ""
 "Left click to draw with primary color, right click to draw with secondary "
@@ -1139,14 +1139,14 @@ msgstr ""
 "יש ללחוץ עם לחצן העבר השמאלי כדי למחוק לצבע שקוף, עם מקש ימני כדי למחוק לצבע "
 "המשני: "
 
-#: ../Pinta.Tools/Tools/PaintBucketTool.cs:45
+#: ../Pinta.Tools/Tools/PaintBucketTool.cs:46
 msgid ""
 "Left click to fill a region with the primary color, right click to fill with "
 "the secondary color."
 msgstr ""
 "לחיצה שמאלית כדי למלא אזור בצבע העיקרי, לחיצה ימנית כדי למלא בצבע המשני."
 
-#: ../Pinta.Tools/Tools/TextTool.cs:91
+#: ../Pinta.Tools/Tools/TextTool.cs:90
 msgid ""
 "Left click to place cursor, then type desired text. Text color is primary "
 "color."
@@ -1154,13 +1154,13 @@ msgstr ""
 "לחיצה שמאלית כדי להציב את הסמן, ואז להקליד את הטקסט הרצוי. צבע הטקסט הוא "
 "הצבע העיקרי."
 
-#: ../Pinta.Tools/Tools/RecolorTool.cs:59
+#: ../Pinta.Tools/Tools/RecolorTool.cs:60
 msgid ""
 "Left click to replace the secondary color with the primary color.\n"
 "Right click to reverse."
 msgstr ""
 
-#: ../Pinta.Tools/Tools/ColorPickerTool.cs:53
+#: ../Pinta.Tools/Tools/ColorPickerTool.cs:54
 msgid ""
 "Left click to set primary color.\n"
 "Right click to set secondary color."
@@ -1179,7 +1179,7 @@ msgstr ""
 "בלחיצה שמאלית ניתן לקבוע את הצבע העיקרי. בימנית להגדיר את הצבע המשני. אמצעית "
 "כדי לבחור בצבע מערכת הצבעים."
 
-#: ../Pinta.Tools/Tools/ZoomTool.cs:58
+#: ../Pinta.Tools/Tools/ZoomTool.cs:59
 msgid ""
 "Left click to zoom in.\n"
 "Right click to zoom out.\n"
@@ -1215,7 +1215,7 @@ msgstr "הבהרה"
 msgid "Lighting"
 msgstr "תאורה"
 
-#: ../Pinta.Effects/Adjustments/HueSaturationEffect.cs:67
+#: ../Pinta.Effects/Adjustments/HueSaturationEffect.cs:66
 msgid "Lightness"
 msgstr "בהירות"
 
@@ -1224,7 +1224,7 @@ msgstr "בהירות"
 msgid "Lime Lemon"
 msgstr ""
 
-#: ../Pinta.Tools/Tools/LineCurveTool.cs:38
+#: ../Pinta.Tools/Tools/LineCurveTool.cs:39
 msgid "Line/Curve"
 msgstr "קו/עקומה"
 
@@ -1301,11 +1301,11 @@ msgstr "הזזת השכבה מטה"
 msgid "Move Layer Up"
 msgstr "הזזת השכבה מעלה"
 
-#: ../Pinta.Tools/Tools/MoveSelectedTool.cs:42
+#: ../Pinta.Tools/Tools/MoveSelectedTool.cs:41
 msgid "Move Selected Pixels"
 msgstr "הזזת הפיקסלים הנבחרים"
 
-#: ../Pinta.Tools/Tools/MoveSelectionTool.cs:41
+#: ../Pinta.Tools/Tools/MoveSelectionTool.cs:40
 msgid "Move Selection"
 msgstr "הזזת האזור נבחר"
 
@@ -1354,11 +1354,11 @@ msgstr "רעש"
 
 #: ../Pinta.Core/Effects/UserBlendOps.cs:31
 #: ../Pinta.Tools/Brushes/PlainBrush.cs:35
-#: ../Pinta.Tools/Tools/EraserTool.cs:263 ../Pinta.Tools/Tools/TextTool.cs:249
+#: ../Pinta.Tools/Tools/EraserTool.cs:263 ../Pinta.Tools/Tools/TextTool.cs:248
 msgid "Normal"
 msgstr "רגיל"
 
-#: ../Pinta.Core/Classes/BaseTool.cs:335
+#: ../Pinta.Core/Classes/BaseTool.cs:322
 msgid "Normal Blending"
 msgstr "ערבול רגיל"
 
@@ -1366,7 +1366,7 @@ msgstr "ערבול רגיל"
 msgid "Normal Size"
 msgstr "גודל רגיל"
 
-#: ../Pinta.Tools/Tools/TextTool.cs:250
+#: ../Pinta.Tools/Tools/TextTool.cs:249
 msgid "Normal and Outline"
 msgstr "רגיל ומתאר"
 
@@ -1378,11 +1378,18 @@ msgstr ""
 msgid "Number of threads to use for rendering"
 msgstr ""
 
-#: ../Pinta.Effects/Effects/BulgeEffect.cs:114
-#: ../Pinta.Effects/Effects/RadialBlurEffect.cs:175
-#: ../Pinta.Effects/Effects/ZoomBlurEffect.cs:148
+#: ../Pinta.Effects/Effects/BulgeEffect.cs:112
+#: ../Pinta.Effects/Effects/RadialBlurEffect.cs:173
+#: ../Pinta.Effects/Effects/ZoomBlurEffect.cs:146
+#: ../Pinta/Dialogs/OffsetSelectionDialog.cs:55
 msgid "Offset"
 msgstr "היסט"
+
+#: ../Pinta.Core/Actions/EditActions.cs:70
+#: ../Pinta/Actions/Edit/OffsetSelectionAction.cs:57
+#: ../Pinta/Dialogs/OffsetSelectionDialog.cs:41
+msgid "Offset Selection"
+msgstr ""
 
 #: ../Pinta.Effects/Effects/OilPaintingEffect.cs:23
 msgid "Oil Painting"
@@ -1392,7 +1399,7 @@ msgstr "ציור שמן"
 msgid "Opacity:"
 msgstr "אטימות:"
 
-#: ../Pinta.Core/Actions/EditActions.cs:352
+#: ../Pinta.Core/Actions/EditActions.cs:358
 #: ../Pinta.Core/Actions/FileActions.cs:56
 #: ../Pinta.Core/Actions/LayerActions.cs:166
 #: ../Pinta.Gui.Addins/AddinManagerDialog.cs:197
@@ -1417,11 +1424,11 @@ msgstr "פתיחת קובץ תמונה"
 msgid "Open Line/Curve Series"
 msgstr "סדרת קווים/עקומות פתוחה"
 
-#: ../Pinta.Core/Actions/EditActions.cs:349
+#: ../Pinta.Core/Actions/EditActions.cs:355
 msgid "Open Palette File"
 msgstr "פתיחת קובץ ערכת צבעים"
 
-#: ../Pinta.Core/Actions/EditActions.cs:72
+#: ../Pinta.Core/Actions/EditActions.cs:74
 #: ../Pinta.Core/Actions/FileActions.cs:48
 msgid "Open..."
 msgstr "פתיחה..."
@@ -1435,16 +1442,16 @@ msgid "Original"
 msgstr "מקורי"
 
 #: ../Pinta.Effects/Effects/OutlineEffect.cs:26
-#: ../Pinta.Tools/Tools/TextTool.cs:251
+#: ../Pinta.Tools/Tools/TextTool.cs:250
 msgid "Outline"
 msgstr "קו מתאר"
 
 #: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:293
-#: ../Pinta.Tools/Tools/FreeformShapeTool.cs:222
+#: ../Pinta.Tools/Tools/FreeformShapeTool.cs:221
 msgid "Outline Shape"
 msgstr "קו המתאר של הצורה"
 
-#: ../Pinta.Tools/Tools/TextTool.cs:265
+#: ../Pinta.Tools/Tools/TextTool.cs:264
 msgid "Outline width"
 msgstr "עובי המתאר"
 
@@ -1460,11 +1467,11 @@ msgstr "היסטוגרמת הפלט"
 msgid "Overlay"
 msgstr "כיסוי"
 
-#: ../Pinta.Core/Classes/BaseTool.cs:336
+#: ../Pinta.Core/Classes/BaseTool.cs:323
 msgid "Overwrite"
 msgstr "דריסה"
 
-#: ../Pinta.Tools/Tools/PaintBucketTool.cs:43
+#: ../Pinta.Tools/Tools/PaintBucketTool.cs:44
 msgid "Paint Bucket"
 msgstr "דלי צבע"
 
@@ -1472,36 +1479,36 @@ msgstr "דלי צבע"
 msgid "Paintbrush"
 msgstr "מברשת"
 
-#: ../Pinta.Core/Actions/EditActions.cs:136
+#: ../Pinta.Core/Actions/EditActions.cs:141
 #: ../Pinta.Effects/Effects/DitheringEffect.cs:136
 msgid "Palette"
 msgstr "לוח צבעים"
 
-#: ../Pinta.Core/Actions/EditActions.cs:356
+#: ../Pinta.Core/Actions/EditActions.cs:362
 msgid "Palette files"
 msgstr "קובצי ערכות צבעים"
 
-#: ../Pinta.Tools/Tools/PanTool.cs:39
+#: ../Pinta.Tools/Tools/PanTool.cs:40
 #: ../Pinta/Actions/Layers/RotateZoomLayerAction.cs:118
 msgid "Pan"
 msgstr "ניווט"
 
-#: ../Pinta.Core/Actions/EditActions.cs:63
+#: ../Pinta.Core/Actions/EditActions.cs:64
 #: ../Pinta.Core/HistoryItems/PasteHistoryItem.cs:38
 #: ../Pinta/Actions/Edit/PasteAction.cs:87
 msgid "Paste"
 msgstr "הדבקה"
 
-#: ../Pinta.Core/Actions/EditActions.cs:65
+#: ../Pinta.Core/Actions/EditActions.cs:66
 msgid "Paste Into New Image"
 msgstr "הדבקה לתמונה חדשה"
 
-#: ../Pinta.Core/Actions/EditActions.cs:64
+#: ../Pinta.Core/Actions/EditActions.cs:65
 #: ../Pinta/Actions/Edit/PasteAction.cs:87
 msgid "Paste Into New Layer"
 msgstr "הדבקה לשכבה חדשה"
 
-#: ../Pinta.Tools/Tools/PencilTool.cs:47
+#: ../Pinta.Tools/Tools/PencilTool.cs:48
 msgid "Pencil"
 msgstr "עיפרון"
 
@@ -1509,11 +1516,11 @@ msgstr "עיפרון"
 msgid "Pencil Sketch"
 msgstr "סקיצה בעפרון"
 
-#: ../Pinta.Effects/Effects/PencilSketchEffect.cs:86
+#: ../Pinta.Effects/Effects/PencilSketchEffect.cs:84
 msgid "Pencil Tip Size"
 msgstr "גודל חוד העפרון"
 
-#: ../Pinta.Effects/Effects/MedianEffect.cs:67
+#: ../Pinta.Effects/Effects/MedianEffect.cs:65
 msgid "Percentile"
 msgstr "באחוזים"
 
@@ -1596,7 +1603,7 @@ msgstr "נוספה נקודה"
 msgid "Point Deleted"
 msgstr "נקודה נמחקה"
 
-#: ../Pinta.Effects/Effects/PolarInversionEffect.cs:21
+#: ../Pinta.Effects/Effects/PolarInversionEffect.cs:22
 msgid "Polar Inversion"
 msgstr "היפוך קוטבי"
 
@@ -1639,8 +1646,8 @@ msgid "Print"
 msgstr "הדפסה"
 
 #: ../Pinta.Effects/Effects/JuliaFractalEffect.cs:169
-#: ../Pinta.Effects/Effects/MandelbrotFractalEffect.cs:187
-#: ../Pinta.Effects/Effects/RadialBlurEffect.cs:178
+#: ../Pinta.Effects/Effects/MandelbrotFractalEffect.cs:185
+#: ../Pinta.Effects/Effects/RadialBlurEffect.cs:176
 #: ../Pinta.Effects/Effects/WarpEffect.cs:181
 msgid "Quality"
 msgstr "איכות"
@@ -1665,11 +1672,11 @@ msgstr "טשטוש מעגלי"
 msgid "Radial Gradient"
 msgstr "מדרג מעגלי"
 
-#: ../Pinta.Effects/Effects/GaussianBlurEffect.cs:248
-#: ../Pinta.Effects/Effects/GlowEffect.cs:78
-#: ../Pinta.Effects/Effects/MedianEffect.cs:64
-#: ../Pinta.Effects/Effects/ReduceNoiseEffect.cs:91
-#: ../Pinta.Effects/Effects/UnfocusEffect.cs:96
+#: ../Pinta.Effects/Effects/GaussianBlurEffect.cs:246
+#: ../Pinta.Effects/Effects/GlowEffect.cs:76
+#: ../Pinta.Effects/Effects/MedianEffect.cs:62
+#: ../Pinta.Effects/Effects/ReduceNoiseEffect.cs:89
+#: ../Pinta.Effects/Effects/UnfocusEffect.cs:94
 #: ../Pinta.Tools/Editable/EditEngines/RoundedLineEditEngine.cs:88
 msgid "Radius"
 msgstr "רדיוס"
@@ -1681,7 +1688,7 @@ msgstr ""
 
 #: ../Pinta.Effects/Effects/CloudsEffect.cs:253
 #: ../Pinta.Effects/Effects/JuliaFractalEffect.cs:181
-#: ../Pinta.Effects/Effects/MandelbrotFractalEffect.cs:203
+#: ../Pinta.Effects/Effects/MandelbrotFractalEffect.cs:201
 msgid "Random Color Scheme Seed"
 msgstr ""
 
@@ -1691,7 +1698,7 @@ msgstr ""
 
 #: ../Pinta.Effects/Effects/AddNoiseEffect.cs:176
 #: ../Pinta.Effects/Effects/CloudsEffect.cs:244
-#: ../Pinta.Effects/Effects/FrostedGlassEffect.cs:154
+#: ../Pinta.Effects/Effects/FrostedGlassEffect.cs:152
 msgid "Random Noise"
 msgstr "רעש אקראי"
 
@@ -1699,15 +1706,15 @@ msgstr "רעש אקראי"
 msgid "Random Point Locations"
 msgstr ""
 
-#: ../Pinta.Tools/Tools/RecolorTool.cs:56
+#: ../Pinta.Tools/Tools/RecolorTool.cs:57
 msgid "Recolor"
 msgstr "החלפת צבעים"
 
-#: ../Pinta.Tools/Tools/RectangleTool.cs:38
+#: ../Pinta.Tools/Tools/RectangleTool.cs:39
 msgid "Rectangle"
 msgstr "מלבן"
 
-#: ../Pinta.Tools/Tools/RectangleSelectTool.cs:35
+#: ../Pinta.Tools/Tools/RectangleSelectTool.cs:36
 msgid "Rectangle Select"
 msgstr "בחירה ריבועית"
 
@@ -1724,7 +1731,7 @@ msgstr "אדום  "
 msgid "Red Eye Removal"
 msgstr "הסרת עיניים אדומות"
 
-#: ../Pinta.Core/Actions/EditActions.cs:59
+#: ../Pinta.Core/Actions/EditActions.cs:60
 msgid "Redo"
 msgstr "ביצוע חוזר"
 
@@ -1744,7 +1751,7 @@ msgstr "רענון"
 msgid "Released under the MIT X11 License."
 msgstr "שוחרר תחת תנאי הרישיון MIT X11."
 
-#: ../Pinta.Effects/Effects/ReliefEffect.cs:42
+#: ../Pinta.Effects/Effects/ReliefEffect.cs:40
 msgid "Relief"
 msgstr "איזון גבהים"
 
@@ -1784,7 +1791,7 @@ msgstr "מיקום מחדש"
 msgid "Reset"
 msgstr "איפוס"
 
-#: ../Pinta.Core/Actions/EditActions.cs:74
+#: ../Pinta.Core/Actions/EditActions.cs:76
 msgid "Reset to Default"
 msgstr "שחזור לברירת המחדל"
 
@@ -1812,7 +1819,7 @@ msgstr "שינוי גודל ערכת הצבעים"
 
 #: ../Pinta.Effects/Effects/CloudsEffect.cs:256
 #: ../Pinta.Effects/Effects/JuliaFractalEffect.cs:184
-#: ../Pinta.Effects/Effects/MandelbrotFractalEffect.cs:206
+#: ../Pinta.Effects/Effects/MandelbrotFractalEffect.cs:204
 msgid "Reverse Color Scheme"
 msgstr ""
 
@@ -1821,7 +1828,7 @@ msgstr ""
 msgid "Reverse Color Sorting"
 msgstr ""
 
-#: ../Pinta.Tools/Tools/TextTool.cs:226
+#: ../Pinta.Tools/Tools/TextTool.cs:225
 msgid "Right Align"
 msgstr "יישור לימין"
 
@@ -1849,7 +1856,7 @@ msgstr "היפוך ב־90° עם כיוון השעון"
 msgid "Rotate 90° Counter-Clockwise"
 msgstr "היפוך ב־90° נגד כיוון השעון"
 
-#: ../Pinta.Effects/Effects/FragmentEffect.cs:120
+#: ../Pinta.Effects/Effects/FragmentEffect.cs:118
 #: ../Pinta.Effects/Effects/TileEffect.cs:174
 msgid "Rotation"
 msgstr "סיבוב"
@@ -1862,7 +1869,7 @@ msgstr "סדרת קווים מעוגלים"
 msgid "Rounded Line Shape"
 msgstr "צורת קו מעוגלת"
 
-#: ../Pinta.Tools/Tools/RoundedRectangleTool.cs:38
+#: ../Pinta.Tools/Tools/RoundedRectangleTool.cs:39
 msgid "Rounded Rectangle"
 msgstr "מלבן מעוגל"
 
@@ -1874,20 +1881,20 @@ msgstr "יחידות הסרגל"
 msgid "Rulers"
 msgstr "סרגלים"
 
-#: ../Pinta.Tools/Tools/ColorPickerTool.cs:194
+#: ../Pinta.Tools/Tools/ColorPickerTool.cs:195
 msgid "Sampling"
 msgstr "דגימה"
 
 #: ../Pinta.Core/Effects/UserBlendOps.cs:46
-#: ../Pinta.Effects/Adjustments/HueSaturationEffect.cs:64
+#: ../Pinta.Effects/Adjustments/HueSaturationEffect.cs:63
 msgid "Saturation"
 msgstr "רוויה"
 
-#: ../Pinta.Effects/Effects/RedEyeRemoveEffect.cs:58
+#: ../Pinta.Effects/Effects/RedEyeRemoveEffect.cs:56
 msgid "Saturation Percentage"
 msgstr "אחוזי רוויה"
 
-#: ../Pinta.Core/Actions/EditActions.cs:393
+#: ../Pinta.Core/Actions/EditActions.cs:399
 #: ../Pinta.Core/Actions/FileActions.cs:51
 #: ../Pinta/Actions/File/SaveDocumentImplementationAction.cs:73
 msgid "Save"
@@ -1897,7 +1904,7 @@ msgstr "שמירה"
 msgid "Save All"
 msgstr "לשמור הכול"
 
-#: ../Pinta.Core/Actions/EditActions.cs:73
+#: ../Pinta.Core/Actions/EditActions.cs:75
 #: ../Pinta.Core/Actions/FileActions.cs:52
 msgid "Save As..."
 msgstr "שמירה בשם..."
@@ -1906,7 +1913,7 @@ msgstr "שמירה בשם..."
 msgid "Save Image File"
 msgstr "שמירת קובץ תמונה"
 
-#: ../Pinta.Core/Actions/EditActions.cs:390
+#: ../Pinta.Core/Actions/EditActions.cs:396
 msgid "Save Palette File"
 msgstr "שמירת קובץ ערכת הצבעים"
 
@@ -1927,8 +1934,8 @@ msgstr "מסך"
 msgid "Secondary"
 msgstr "משני"
 
-#: ../Pinta.Core/Actions/EditActions.cs:69
-#: ../Pinta.Core/Actions/EditActions.cs:215
+#: ../Pinta.Core/Actions/EditActions.cs:71
+#: ../Pinta.Core/Actions/EditActions.cs:221
 msgid "Select All"
 msgstr "לבחור הכול"
 
@@ -1940,7 +1947,7 @@ msgstr ""
 msgid "Sepia"
 msgstr "ענתיקה"
 
-#: ../Pinta.Core/Actions/EditActions.cs:75
+#: ../Pinta.Core/Actions/EditActions.cs:77
 msgid "Set Number of Colors"
 msgstr "הגדרת מספר הצבעים"
 
@@ -1980,7 +1987,7 @@ msgstr ""
 msgid "Sierra Lite"
 msgstr ""
 
-#: ../Pinta.Tools/Tools/ColorPickerTool.cs:221
+#: ../Pinta.Tools/Tools/ColorPickerTool.cs:222
 msgid "Single Pixel"
 msgstr "פיקסל בודד"
 
@@ -2016,7 +2023,7 @@ msgstr "מרובעים"
 msgid "Status Bar"
 msgstr ""
 
-#: ../Pinta.Effects/Effects/ReduceNoiseEffect.cs:94
+#: ../Pinta.Effects/Effects/ReduceNoiseEffect.cs:92
 msgid "Strength"
 msgstr "עצמה"
 
@@ -2032,23 +2039,23 @@ msgstr ""
 msgid "Stylize"
 msgstr "מסוגננים"
 
-#: ../Pinta.Tools/Tools/ColorPickerTool.cs:204
+#: ../Pinta.Tools/Tools/ColorPickerTool.cs:205
 msgid "Switch to Pencil tool"
 msgstr "מעבר לכלי העיפרון"
 
-#: ../Pinta.Tools/Tools/ColorPickerTool.cs:203
+#: ../Pinta.Tools/Tools/ColorPickerTool.cs:204
 msgid "Switch to previous tool"
 msgstr "חזרה לכלי הקודם"
 
-#: ../Pinta.Tools/Tools/TextTool.cs:85
+#: ../Pinta.Tools/Tools/TextTool.cs:84
 msgid "Text"
 msgstr "טקסט"
 
-#: ../Pinta.Tools/Tools/TextTool.cs:86
+#: ../Pinta.Tools/Tools/TextTool.cs:85
 msgid "Text - Finalize"
 msgstr "טקסט - גימור"
 
-#: ../Pinta.Tools/Tools/TextTool.cs:240
+#: ../Pinta.Tools/Tools/TextTool.cs:239
 msgid "Text Style"
 msgstr "סגנון הטקסט"
 
@@ -2116,7 +2123,7 @@ msgid ""
 "will also be uninstalled:"
 msgstr ""
 
-#: ../Pinta.Effects/Effects/OutlineEffect.cs:138
+#: ../Pinta.Effects/Effects/OutlineEffect.cs:136
 msgid "Thickness"
 msgstr "עובי"
 
@@ -2132,9 +2139,9 @@ msgstr "גודל האריח"
 msgid "Tip: Right-click to remove control points."
 msgstr "עצה: לחצן ימני כדי להסיר נקודות בקרה."
 
-#: ../Pinta.Effects/Effects/RedEyeRemoveEffect.cs:54
-#: ../Pinta.Tools/Tools/FloodTool.cs:125
-#: ../Pinta.Tools/Tools/RecolorTool.cs:196
+#: ../Pinta.Effects/Effects/RedEyeRemoveEffect.cs:52
+#: ../Pinta.Tools/Tools/FloodTool.cs:124
+#: ../Pinta.Tools/Tools/RecolorTool.cs:197
 msgid "Tolerance"
 msgstr "טולרנטיות"
 
@@ -2185,11 +2192,11 @@ msgstr ""
 msgid "Type"
 msgstr "סוג"
 
-#: ../Pinta.Tools/Tools/TextTool.cs:186
+#: ../Pinta.Tools/Tools/TextTool.cs:185
 msgid "Underline"
 msgstr "קו תחתי"
 
-#: ../Pinta.Core/Actions/EditActions.cs:58
+#: ../Pinta.Core/Actions/EditActions.cs:59
 msgid "Undo"
 msgstr "ביטול פעולה"
 
@@ -2233,7 +2240,7 @@ msgstr ""
 msgid "Updates"
 msgstr "עדכונים"
 
-#: ../Pinta.Effects/Effects/RadialBlurEffect.cs:179
+#: ../Pinta.Effects/Effects/RadialBlurEffect.cs:177
 msgid ""
 "Use low quality for previews, small images, and small angles.  Use high "
 "quality for final quality, large images, and large angles."
@@ -2322,8 +2329,8 @@ msgid ""
 msgstr "אין לך גישה לשנות את ‚{0}’. אולי הקובץ או התיקייה הם לקריאה בלבד."
 
 #: ../Pinta.Effects/Effects/JuliaFractalEffect.cs:172
-#: ../Pinta.Effects/Effects/MandelbrotFractalEffect.cs:191
-#: ../Pinta.Tools/Tools/ZoomTool.cs:55
+#: ../Pinta.Effects/Effects/MandelbrotFractalEffect.cs:189
+#: ../Pinta.Tools/Tools/ZoomTool.cs:56
 #: ../Pinta/Actions/Layers/RotateZoomLayerAction.cs:121
 msgid "Zoom"
 msgstr "תקריב"
@@ -2428,7 +2435,7 @@ msgstr ""
 "  ינון-דוד-צדוק (Yinon-David-Zadok) https://launchpad.net/~yinon-david-zadok"
 
 #. Translators: {0} is 'Ctrl', or a platform-specific key such as 'Command' on macOS.
-#: ../Pinta.Tools/Tools/CloneStampTool.cs:46
+#: ../Pinta.Tools/Tools/CloneStampTool.cs:47
 #, csharp-format
 msgid "{0} + left click to set origin, left click to paint."
 msgstr ""

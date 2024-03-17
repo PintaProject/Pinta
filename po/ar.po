@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: pinta\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-01-28 01:09+0000\n"
+"POT-Creation-Date: 2024-03-17 01:09+0000\n"
 "PO-Revision-Date: 2016-06-06 03:47+0000\n"
 "Last-Translator: Rockworld <sumoisrock@gmail.com>\n"
 "Language-Team: Arabic <ar@li.org>\n"
@@ -33,19 +33,19 @@ msgstr " وضع التحديد: "
 msgid "..."
 msgstr "..."
 
-#: ../Pinta.Tools/Tools/ColorPickerTool.cs:222
+#: ../Pinta.Tools/Tools/ColorPickerTool.cs:223
 msgid "3 x 3 Region"
 msgstr "منطقة بمساحة 3 × 3"
 
-#: ../Pinta.Tools/Tools/ColorPickerTool.cs:223
+#: ../Pinta.Tools/Tools/ColorPickerTool.cs:224
 msgid "5 x 5 Region"
 msgstr "منطقة بمساحة 5 × 5"
 
-#: ../Pinta.Tools/Tools/ColorPickerTool.cs:224
+#: ../Pinta.Tools/Tools/ColorPickerTool.cs:225
 msgid "7 x 7 Region"
 msgstr "منطقة بمساحة 7 × 7"
 
-#: ../Pinta.Tools/Tools/ColorPickerTool.cs:225
+#: ../Pinta.Tools/Tools/ColorPickerTool.cs:226
 msgid "9 x 9 Region"
 msgstr "منطقة بمساحة 9 × 9"
 
@@ -83,21 +83,21 @@ msgstr "اُضيفت"
 msgid "Adjustments"
 msgstr ""
 
-#: ../Pinta.Tools/Tools/ColorPickerTool.cs:193
+#: ../Pinta.Tools/Tools/ColorPickerTool.cs:194
 msgid "After select"
 msgstr "بعد لقط اللون"
 
-#: ../Pinta.Core/Actions/EditActions.cs:368
+#: ../Pinta.Core/Actions/EditActions.cs:374
 #: ../Pinta.Gui.Addins/AddinManagerDialog.cs:209
 #: ../Pinta/Actions/File/OpenDocumentAction.cs:83
 msgid "All files"
 msgstr "كل الملفّات"
 
-#: ../Pinta.Effects/Effects/BulgeEffect.cs:111
-#: ../Pinta.Effects/Effects/FrostedGlassEffect.cs:151
-#: ../Pinta.Effects/Effects/SharpenEffect.cs:60
+#: ../Pinta.Effects/Effects/BulgeEffect.cs:109
+#: ../Pinta.Effects/Effects/FrostedGlassEffect.cs:149
+#: ../Pinta.Effects/Effects/SharpenEffect.cs:58
 #: ../Pinta.Effects/Effects/TwistEffect.cs:142
-#: ../Pinta.Effects/Effects/ZoomBlurEffect.cs:145
+#: ../Pinta.Effects/Effects/ZoomBlurEffect.cs:143
 msgid "Amount"
 msgstr "القيمة"
 
@@ -105,13 +105,13 @@ msgstr "القيمة"
 msgid "Anchor:"
 msgstr ""
 
-#: ../Pinta.Effects/Effects/EdgeDetectEffect.cs:83
-#: ../Pinta.Effects/Effects/EmbossEffect.cs:150
+#: ../Pinta.Effects/Effects/EdgeDetectEffect.cs:81
+#: ../Pinta.Effects/Effects/EmbossEffect.cs:148
 #: ../Pinta.Effects/Effects/JuliaFractalEffect.cs:187
-#: ../Pinta.Effects/Effects/MandelbrotFractalEffect.cs:194
+#: ../Pinta.Effects/Effects/MandelbrotFractalEffect.cs:192
 #: ../Pinta.Effects/Effects/MotionBlurEffect.cs:108
-#: ../Pinta.Effects/Effects/RadialBlurEffect.cs:172
-#: ../Pinta.Effects/Effects/ReliefEffect.cs:85
+#: ../Pinta.Effects/Effects/RadialBlurEffect.cs:170
+#: ../Pinta.Effects/Effects/ReliefEffect.cs:83
 #: ../Pinta.Tools/Editable/EditEngines/ArrowedEditEngine.cs:298
 #: ../Pinta/Actions/Layers/RotateZoomLayerAction.cs:115
 msgid "Angle"
@@ -121,11 +121,11 @@ msgstr "الزاويه"
 msgid "Antialias"
 msgstr "التنعيم"
 
-#: ../Pinta.Core/Classes/BaseTool.cs:351
+#: ../Pinta.Core/Classes/BaseTool.cs:338
 msgid "Antialiasing Off"
 msgstr "عطّل التنعيم"
 
-#: ../Pinta.Core/Classes/BaseTool.cs:350
+#: ../Pinta.Core/Classes/BaseTool.cs:337
 msgid "Antialiasing On"
 msgstr "فعّل التنعيم"
 
@@ -218,7 +218,7 @@ msgstr "أزرق "
 msgid "Blurs"
 msgstr "غشاوة"
 
-#: ../Pinta.Tools/Tools/TextTool.cs:162
+#: ../Pinta.Tools/Tools/TextTool.cs:161
 msgid "Bold"
 msgstr "غليظ"
 
@@ -227,8 +227,8 @@ msgstr "غليظ"
 msgid "Bonfire"
 msgstr ""
 
-#: ../Pinta.Effects/Adjustments/BrightnessContrastEffect.cs:145
-#: ../Pinta.Effects/Effects/GlowEffect.cs:81
+#: ../Pinta.Effects/Adjustments/BrightnessContrastEffect.cs:143
+#: ../Pinta.Effects/Effects/GlowEffect.cs:79
 msgid "Brightness"
 msgstr "السطوع"
 
@@ -236,12 +236,12 @@ msgstr "السطوع"
 msgid "Brightness / Contrast"
 msgstr "السطوع / التباين"
 
-#: ../Pinta.Effects/Effects/OilPaintingEffect.cs:132
+#: ../Pinta.Effects/Effects/OilPaintingEffect.cs:130
 msgid "Brush Size"
 msgstr "مقاس الفرشاة"
 
 #: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:254
-#: ../Pinta.Tools/Tools/BaseBrushTool.cs:100
+#: ../Pinta.Tools/Tools/BaseBrushTool.cs:101
 msgid "Brush width"
 msgstr "عرض الفرشاة"
 
@@ -264,8 +264,8 @@ msgstr "بالمقاس المُطلق:"
 msgid "By percentage:"
 msgstr "بالنسبة المئوية"
 
-#: ../Pinta.Core/Actions/EditActions.cs:353
-#: ../Pinta.Core/Actions/EditActions.cs:394
+#: ../Pinta.Core/Actions/EditActions.cs:359
+#: ../Pinta.Core/Actions/EditActions.cs:400
 #: ../Pinta.Core/Actions/LayerActions.cs:167
 #: ../Pinta.Gui.Addins/AddinManagerDialog.cs:198
 #: ../Pinta.Gui.Addins/InstallDialog.cs:117
@@ -278,11 +278,11 @@ msgstr ""
 msgid "Canvas"
 msgstr "رقعة"
 
-#: ../Pinta.Effects/Effects/PixelateEffect.cs:117
+#: ../Pinta.Effects/Effects/PixelateEffect.cs:115
 msgid "Cell Size"
 msgstr "مقاس الخلية"
 
-#: ../Pinta.Tools/Tools/TextTool.cs:214
+#: ../Pinta.Tools/Tools/TextTool.cs:213
 msgid "Center Align"
 msgstr "محاذاة للوسط"
 
@@ -331,13 +331,13 @@ msgstr "دوائر"
 msgid "Clamp"
 msgstr ""
 
-#: ../Pinta.Tools/Tools/RectangleSelectTool.cs:38
+#: ../Pinta.Tools/Tools/RectangleSelectTool.cs:39
 msgid ""
 "Click and drag to draw a rectangular selection.\n"
 "Hold Shift to constrain to a square."
 msgstr ""
 
-#: ../Pinta.Tools/Tools/EllipseSelectTool.cs:37
+#: ../Pinta.Tools/Tools/EllipseSelectTool.cs:38
 msgid ""
 "Click and drag to draw an elliptical selection.\n"
 "Hold Shift to constrain to a circle."
@@ -353,7 +353,7 @@ msgstr ""
 msgid "Click and drag to draw the outline for a selection area."
 msgstr "انقر واسحب لرسم تحديد حُر."
 
-#: ../Pinta.Tools/Tools/PanTool.cs:41
+#: ../Pinta.Tools/Tools/PanTool.cs:42
 msgid "Click and drag to navigate image."
 msgstr "انقر واسحب لتصفّح الصّورة"
 
@@ -384,7 +384,7 @@ msgstr ""
 msgid "Clipboard"
 msgstr "Clipboard"
 
-#: ../Pinta.Tools/Tools/CloneStampTool.cs:43
+#: ../Pinta.Tools/Tools/CloneStampTool.cs:44
 msgid "Clone Stamp"
 msgstr "المستنسخ"
 
@@ -409,7 +409,7 @@ msgstr ""
 msgid "Clouds"
 msgstr "غيوم"
 
-#: ../Pinta.Effects/Effects/OilPaintingEffect.cs:135
+#: ../Pinta.Effects/Effects/OilPaintingEffect.cs:133
 msgid "Coarseness"
 msgstr "الخشونة"
 
@@ -430,11 +430,11 @@ msgstr ""
 msgid "Color Mode"
 msgstr ""
 
-#: ../Pinta.Tools/Tools/ColorPickerTool.cs:51
+#: ../Pinta.Tools/Tools/ColorPickerTool.cs:52
 msgid "Color Picker"
 msgstr "لاقط الألوان"
 
-#: ../Pinta.Effects/Effects/PencilSketchEffect.cs:89
+#: ../Pinta.Effects/Effects/PencilSketchEffect.cs:87
 msgid "Color Range"
 msgstr "مدى اللون"
 
@@ -445,13 +445,13 @@ msgstr ""
 #: ../Pinta.Core/Actions/ViewActions.cs:181
 #: ../Pinta.Effects/Effects/CloudsEffect.cs:250
 #: ../Pinta.Effects/Effects/JuliaFractalEffect.cs:178
-#: ../Pinta.Effects/Effects/MandelbrotFractalEffect.cs:200
+#: ../Pinta.Effects/Effects/MandelbrotFractalEffect.cs:198
 msgid "Color Scheme"
 msgstr ""
 
 #: ../Pinta.Effects/Effects/CloudsEffect.cs:247
 #: ../Pinta.Effects/Effects/JuliaFractalEffect.cs:175
-#: ../Pinta.Effects/Effects/MandelbrotFractalEffect.cs:197
+#: ../Pinta.Effects/Effects/MandelbrotFractalEffect.cs:195
 msgid "Color Scheme Source"
 msgstr ""
 
@@ -459,7 +459,7 @@ msgstr ""
 msgid "Color Sorting"
 msgstr ""
 
-#: ../Pinta.Effects/Effects/InkSketchEffect.cs:156
+#: ../Pinta.Effects/Effects/InkSketchEffect.cs:154
 msgid "Coloring"
 msgstr "التلوين"
 
@@ -471,20 +471,20 @@ msgstr "تدرّج مخروطي"
 msgid "Contents"
 msgstr "المحتويات"
 
-#: ../Pinta.Tools/Tools/FloodTool.cs:134
+#: ../Pinta.Tools/Tools/FloodTool.cs:133
 msgid "Contiguous"
 msgstr "متّصل"
 
-#: ../Pinta.Effects/Adjustments/BrightnessContrastEffect.cs:156
-#: ../Pinta.Effects/Effects/GlowEffect.cs:84
+#: ../Pinta.Effects/Adjustments/BrightnessContrastEffect.cs:154
+#: ../Pinta.Effects/Effects/GlowEffect.cs:82
 msgid "Contrast"
 msgstr "التباين"
 
-#: ../Pinta.Core/Actions/EditActions.cs:61
+#: ../Pinta.Core/Actions/EditActions.cs:62
 msgid "Copy"
 msgstr "انسخ"
 
-#: ../Pinta.Core/Actions/EditActions.cs:62
+#: ../Pinta.Core/Actions/EditActions.cs:63
 msgid "Copy Merged"
 msgstr "انسخ ما دُمج"
 
@@ -531,8 +531,8 @@ msgstr "منحنيات"
 msgid "Custom"
 msgstr "مخصّص"
 
-#: ../Pinta.Core/Actions/EditActions.cs:60
-#: ../Pinta.Core/Actions/EditActions.cs:244
+#: ../Pinta.Core/Actions/EditActions.cs:61
+#: ../Pinta.Core/Actions/EditActions.cs:250
 msgid "Cut"
 msgstr "قُصّ"
 
@@ -563,11 +563,11 @@ msgstr "احذف الطّبقة"
 msgid "Deleted"
 msgstr "حُذِفَت"
 
-#: ../Pinta.Core/Actions/EditActions.cs:256
+#: ../Pinta.Core/Actions/EditActions.cs:262
 msgid "Deselect"
 msgstr "أزل التّحديد"
 
-#: ../Pinta.Core/Actions/EditActions.cs:70
+#: ../Pinta.Core/Actions/EditActions.cs:72
 msgid "Deselect All"
 msgstr "أزل التحديد عن الكل"
 
@@ -579,7 +579,7 @@ msgstr "التفاصيل"
 msgid "Difference"
 msgstr "طرح"
 
-#: ../Pinta.Effects/Effects/FragmentEffect.cs:117
+#: ../Pinta.Effects/Effects/FragmentEffect.cs:115
 #: ../Pinta.Effects/Effects/MotionBlurEffect.cs:111
 msgid "Distance"
 msgstr "المسافة"
@@ -591,7 +591,7 @@ msgstr ""
 #: ../Pinta.Effects/Effects/BulgeEffect.cs:27
 #: ../Pinta.Effects/Effects/FrostedGlassEffect.cs:27
 #: ../Pinta.Effects/Effects/PixelateEffect.cs:29
-#: ../Pinta.Effects/Effects/PolarInversionEffect.cs:27
+#: ../Pinta.Effects/Effects/PolarInversionEffect.cs:28
 #: ../Pinta.Effects/Effects/TileEffect.cs:27
 #: ../Pinta.Effects/Effects/TwistEffect.cs:28
 msgid "Distort"
@@ -601,7 +601,7 @@ msgstr "تشويه"
 msgid "Dithering"
 msgstr ""
 
-#: ../Pinta.Tools/Tools/ColorPickerTool.cs:202
+#: ../Pinta.Tools/Tools/ColorPickerTool.cs:203
 msgid "Do not switch tool"
 msgstr "لا تغيّر الأداة"
 
@@ -642,11 +642,11 @@ msgstr ""
 
 #: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:319
 #: ../Pinta.Tools/Editable/EditEngines/EllipseEditEngine.cs:34
-#: ../Pinta.Tools/Tools/EllipseTool.cs:38
+#: ../Pinta.Tools/Tools/EllipseTool.cs:39
 msgid "Ellipse"
 msgstr "إهليج"
 
-#: ../Pinta.Tools/Tools/EllipseSelectTool.cs:35
+#: ../Pinta.Tools/Tools/EllipseSelectTool.cs:36
 msgid "Ellipse Select"
 msgstr "تحديد بيضاوي"
 
@@ -658,8 +658,8 @@ msgstr "تجسيم"
 msgid "Enable additional logging or behavior changes for debugging"
 msgstr ""
 
-#: ../Pinta.Core/Actions/EditActions.cs:66
-#: ../Pinta.Core/Actions/EditActions.cs:245
+#: ../Pinta.Core/Actions/EditActions.cs:67
+#: ../Pinta.Core/Actions/EditActions.cs:251
 msgid "Erase Selection"
 msgstr "امحُ التّحديد"
 
@@ -689,7 +689,7 @@ msgid "Extension packages"
 msgstr ""
 
 #: ../Pinta.Effects/Effects/JuliaFractalEffect.cs:166
-#: ../Pinta.Effects/Effects/MandelbrotFractalEffect.cs:184
+#: ../Pinta.Effects/Effects/MandelbrotFractalEffect.cs:182
 msgid "Factor"
 msgstr "المعامل"
 
@@ -727,27 +727,27 @@ msgstr "أبلغ عن علّة"
 msgid "Files to open"
 msgstr ""
 
-#: ../Pinta.Tools/Tools/TextTool.cs:252
+#: ../Pinta.Tools/Tools/TextTool.cs:251
 msgid "Fill Background"
 msgstr "عبأ الخلفية"
 
-#: ../Pinta.Core/Actions/EditActions.cs:67
-#: ../Pinta.Core/Actions/EditActions.cs:206
+#: ../Pinta.Core/Actions/EditActions.cs:68
+#: ../Pinta.Core/Actions/EditActions.cs:212
 msgid "Fill Selection"
 msgstr "عبّأ المنطقة المُحددة"
 
 #: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:294
-#: ../Pinta.Tools/Tools/FreeformShapeTool.cs:223
+#: ../Pinta.Tools/Tools/FreeformShapeTool.cs:222
 msgid "Fill Shape"
 msgstr "شكل معبأ"
 
 #: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:284
-#: ../Pinta.Tools/Tools/FreeformShapeTool.cs:216
+#: ../Pinta.Tools/Tools/FreeformShapeTool.cs:215
 msgid "Fill Style"
 msgstr "نمط التعبئة"
 
 #: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:295
-#: ../Pinta.Tools/Tools/FreeformShapeTool.cs:224
+#: ../Pinta.Tools/Tools/FreeformShapeTool.cs:223
 msgid "Fill and Outline Shape"
 msgstr "شكل معبأ مع حدود خارجية"
 
@@ -791,7 +791,7 @@ msgstr "اقلب الطبقة رأسيًّا"
 msgid "Flip Vertical"
 msgstr "اقلب رأسيًّا"
 
-#: ../Pinta.Tools/Tools/FloodTool.cs:124
+#: ../Pinta.Tools/Tools/FloodTool.cs:123
 msgid "Flood Mode"
 msgstr "نمط التحديد"
 
@@ -805,7 +805,7 @@ msgstr ""
 msgid "Floyd-Steinberg Lite"
 msgstr ""
 
-#: ../Pinta.Tools/Tools/TextTool.cs:138
+#: ../Pinta.Tools/Tools/TextTool.cs:137
 msgid "Font"
 msgstr "الخطّ"
 
@@ -813,11 +813,11 @@ msgstr "الخطّ"
 msgid "Fragment"
 msgstr "تفتيت"
 
-#: ../Pinta.Effects/Effects/FragmentEffect.cs:114
+#: ../Pinta.Effects/Effects/FragmentEffect.cs:112
 msgid "Fragments"
 msgstr "الفُتات"
 
-#: ../Pinta.Tools/Tools/FreeformShapeTool.cs:52
+#: ../Pinta.Tools/Tools/FreeformShapeTool.cs:51
 msgid "Freeform Shape"
 msgstr "شكل حُر"
 
@@ -837,7 +837,7 @@ msgstr "معرض الصور"
 msgid "Gaussian Blur"
 msgstr "غشاوة غَوْسِيّة"
 
-#: ../Pinta.Tools/Tools/FloodTool.cs:135
+#: ../Pinta.Tools/Tools/FloodTool.cs:134
 msgid "Global"
 msgstr "شامل"
 
@@ -874,7 +874,7 @@ msgstr "الطول:"
 msgid "Hide Layer"
 msgstr "أخف الطبقة"
 
-#: ../Pinta.Effects/Effects/RedEyeRemoveEffect.cs:59
+#: ../Pinta.Effects/Effects/RedEyeRemoveEffect.cs:57
 msgid "Hint: For best results, first use selection tools to select each eye."
 msgstr ""
 "تلميح: للحصول على أفضل نتيجة، استخدم أولًا أدوات التحديد وحدد كل عين على حدة."
@@ -899,7 +899,7 @@ msgid "Horizontal red (R)"
 msgstr ""
 
 #: ../Pinta.Core/Effects/UserBlendOps.cs:45
-#: ../Pinta.Effects/Adjustments/HueSaturationEffect.cs:61
+#: ../Pinta.Effects/Adjustments/HueSaturationEffect.cs:60
 msgid "Hue"
 msgstr "Hue"
 
@@ -915,7 +915,7 @@ msgstr "ملفات ICO لا يمكن أن تكون أكبر من 255 × 255 بك
 msgid "If you don't save, all changes will be permanently lost."
 msgstr "إذا لم تحفظ، ستضيع جميع التغييرات نهائيًا."
 
-#: ../Pinta.Tools/Tools/ColorPickerTool.cs:240 ../Pinta/MainWindow.cs:388
+#: ../Pinta.Tools/Tools/ColorPickerTool.cs:241 ../Pinta/MainWindow.cs:388
 msgid "Image"
 msgstr "صورة"
 
@@ -956,7 +956,7 @@ msgstr "استورد من ملفّ..."
 msgid "Inches"
 msgstr "بوصات"
 
-#: ../Pinta.Effects/Effects/InkSketchEffect.cs:153
+#: ../Pinta.Effects/Effects/InkSketchEffect.cs:151
 msgid "Ink Outline"
 msgstr "حد الحبر"
 
@@ -994,7 +994,7 @@ msgid "Installed"
 msgstr "مُثبَّت"
 
 #: ../Pinta.Effects/Effects/AddNoiseEffect.cs:167
-#: ../Pinta.Effects/Effects/OutlineEffect.cs:141
+#: ../Pinta.Effects/Effects/OutlineEffect.cs:139
 #: ../Pinta.Effects/Effects/TileEffect.cs:180
 msgid "Intensity"
 msgstr "الكثافة"
@@ -1006,16 +1006,16 @@ msgid "Intersect ({0} + Left Click)"
 msgstr ""
 
 #: ../Pinta.Effects/Adjustments/InvertColorsEffect.cs:24
-#: ../Pinta.Effects/Effects/MandelbrotFractalEffect.cs:209
+#: ../Pinta.Effects/Effects/MandelbrotFractalEffect.cs:207
 msgid "Invert Colors"
 msgstr "اعكس الألوان"
 
-#: ../Pinta.Core/Actions/EditActions.cs:68
-#: ../Pinta.Core/Actions/EditActions.cs:446
+#: ../Pinta.Core/Actions/EditActions.cs:69
+#: ../Pinta.Core/Actions/EditActions.cs:452
 msgid "Invert Selection"
 msgstr "اعكس التّحديد"
 
-#: ../Pinta.Tools/Tools/TextTool.cs:174
+#: ../Pinta.Tools/Tools/TextTool.cs:173
 msgid "Italic"
 msgstr "مائل"
 
@@ -1040,7 +1040,7 @@ msgstr "منظر ارضي"
 msgid "Lasso Select"
 msgstr "تحديد حُر"
 
-#: ../Pinta.Tools/Tools/ColorPickerTool.cs:239
+#: ../Pinta.Tools/Tools/ColorPickerTool.cs:240
 msgid "Layer"
 msgstr "الطبقة"
 
@@ -1075,11 +1075,11 @@ msgstr ""
 msgid "Layers"
 msgstr "الطبقات"
 
-#: ../Pinta.Tools/Tools/TextTool.cs:202
+#: ../Pinta.Tools/Tools/TextTool.cs:201
 msgid "Left Align"
 msgstr "محاذاة لليسار"
 
-#: ../Pinta.Tools/Tools/MoveSelectedTool.cs:46
+#: ../Pinta.Tools/Tools/MoveSelectedTool.cs:45
 #, csharp-format
 msgid ""
 "Left click and drag the selection to move selected content.\n"
@@ -1089,7 +1089,7 @@ msgid ""
 "Use arrow keys to move selected content by a single pixel."
 msgstr ""
 
-#: ../Pinta.Tools/Tools/MoveSelectionTool.cs:45
+#: ../Pinta.Tools/Tools/MoveSelectionTool.cs:44
 #, csharp-format
 msgid ""
 "Left click and drag the selection to move selection outline.\n"
@@ -1100,7 +1100,7 @@ msgid ""
 msgstr ""
 
 #. Translators: {0} is 'Ctrl', or a platform-specific key such as 'Command' on macOS.
-#: ../Pinta.Tools/Tools/ShapeTool.cs:48
+#: ../Pinta.Tools/Tools/ShapeTool.cs:49
 #, csharp-format
 msgid ""
 "Left click to draw a shape with the primary color.\n"
@@ -1119,13 +1119,13 @@ msgid ""
 "Press Enter to finalize the shape."
 msgstr ""
 
-#: ../Pinta.Tools/Tools/PencilTool.cs:50
+#: ../Pinta.Tools/Tools/PencilTool.cs:51
 msgid ""
 "Left click to draw freeform one-pixel wide lines with the primary color.\n"
 "Right click to use the secondary color."
 msgstr ""
 
-#: ../Pinta.Tools/Tools/FreeformShapeTool.cs:54
+#: ../Pinta.Tools/Tools/FreeformShapeTool.cs:53
 #: ../Pinta.Tools/Tools/PaintBrushTool.cs:58
 msgid ""
 "Left click to draw with primary color, right click to draw with secondary "
@@ -1139,7 +1139,7 @@ msgid ""
 msgstr ""
 "استخدم الزر الأيسر للمحو إلى الشفافية، والزر الأيمن للمحو إلى اللون الثانوي. "
 
-#: ../Pinta.Tools/Tools/PaintBucketTool.cs:45
+#: ../Pinta.Tools/Tools/PaintBucketTool.cs:46
 msgid ""
 "Left click to fill a region with the primary color, right click to fill with "
 "the secondary color."
@@ -1147,7 +1147,7 @@ msgstr ""
 "استخدم الزر الأيسر لتعبئة منطقة باللون الأساسي، والزر الأيمن للتعبئة باللون "
 "الثانوي."
 
-#: ../Pinta.Tools/Tools/TextTool.cs:91
+#: ../Pinta.Tools/Tools/TextTool.cs:90
 msgid ""
 "Left click to place cursor, then type desired text. Text color is primary "
 "color."
@@ -1155,13 +1155,13 @@ msgstr ""
 "انقر بالزّر الأيسر للفأرة لتعيين موضع المؤشّر، ثمّ اكتب النّص. لون النّص يوافق "
 "اللّون الأساسيّ."
 
-#: ../Pinta.Tools/Tools/RecolorTool.cs:59
+#: ../Pinta.Tools/Tools/RecolorTool.cs:60
 msgid ""
 "Left click to replace the secondary color with the primary color.\n"
 "Right click to reverse."
 msgstr ""
 
-#: ../Pinta.Tools/Tools/ColorPickerTool.cs:53
+#: ../Pinta.Tools/Tools/ColorPickerTool.cs:54
 msgid ""
 "Left click to set primary color.\n"
 "Right click to set secondary color."
@@ -1180,7 +1180,7 @@ msgstr ""
 "انقر باليسار لاختيار اللون الأولي، أو باليمين لاختيار اللون الثانوي، أو بزر "
 "الفأرة الأوسط لاختيار لون من لوح الألوان."
 
-#: ../Pinta.Tools/Tools/ZoomTool.cs:58
+#: ../Pinta.Tools/Tools/ZoomTool.cs:59
 msgid ""
 "Left click to zoom in.\n"
 "Right click to zoom out.\n"
@@ -1216,7 +1216,7 @@ msgstr "تخفيف"
 msgid "Lighting"
 msgstr "الإضاءة"
 
-#: ../Pinta.Effects/Adjustments/HueSaturationEffect.cs:67
+#: ../Pinta.Effects/Adjustments/HueSaturationEffect.cs:66
 msgid "Lightness"
 msgstr "السطوع"
 
@@ -1225,7 +1225,7 @@ msgstr "السطوع"
 msgid "Lime Lemon"
 msgstr ""
 
-#: ../Pinta.Tools/Tools/LineCurveTool.cs:38
+#: ../Pinta.Tools/Tools/LineCurveTool.cs:39
 msgid "Line/Curve"
 msgstr ""
 
@@ -1302,11 +1302,11 @@ msgstr "تحريك الطبقة لأسفل"
 msgid "Move Layer Up"
 msgstr "تحريك الطبقة لأعلى"
 
-#: ../Pinta.Tools/Tools/MoveSelectedTool.cs:42
+#: ../Pinta.Tools/Tools/MoveSelectedTool.cs:41
 msgid "Move Selected Pixels"
 msgstr "تحريك البكسلات المُحددة"
 
-#: ../Pinta.Tools/Tools/MoveSelectionTool.cs:41
+#: ../Pinta.Tools/Tools/MoveSelectionTool.cs:40
 msgid "Move Selection"
 msgstr "تحريك التحديد"
 
@@ -1355,11 +1355,11 @@ msgstr "ضوضاء"
 
 #: ../Pinta.Core/Effects/UserBlendOps.cs:31
 #: ../Pinta.Tools/Brushes/PlainBrush.cs:35
-#: ../Pinta.Tools/Tools/EraserTool.cs:263 ../Pinta.Tools/Tools/TextTool.cs:249
+#: ../Pinta.Tools/Tools/EraserTool.cs:263 ../Pinta.Tools/Tools/TextTool.cs:248
 msgid "Normal"
 msgstr "طبيعي"
 
-#: ../Pinta.Core/Classes/BaseTool.cs:335
+#: ../Pinta.Core/Classes/BaseTool.cs:322
 msgid "Normal Blending"
 msgstr "خلط عاديّ"
 
@@ -1367,7 +1367,7 @@ msgstr "خلط عاديّ"
 msgid "Normal Size"
 msgstr "الحجم الطبيعي"
 
-#: ../Pinta.Tools/Tools/TextTool.cs:250
+#: ../Pinta.Tools/Tools/TextTool.cs:249
 msgid "Normal and Outline"
 msgstr "عادي مع حد خارجي"
 
@@ -1379,11 +1379,18 @@ msgstr ""
 msgid "Number of threads to use for rendering"
 msgstr ""
 
-#: ../Pinta.Effects/Effects/BulgeEffect.cs:114
-#: ../Pinta.Effects/Effects/RadialBlurEffect.cs:175
-#: ../Pinta.Effects/Effects/ZoomBlurEffect.cs:148
+#: ../Pinta.Effects/Effects/BulgeEffect.cs:112
+#: ../Pinta.Effects/Effects/RadialBlurEffect.cs:173
+#: ../Pinta.Effects/Effects/ZoomBlurEffect.cs:146
+#: ../Pinta/Dialogs/OffsetSelectionDialog.cs:55
 msgid "Offset"
 msgstr "الانزياح"
+
+#: ../Pinta.Core/Actions/EditActions.cs:70
+#: ../Pinta/Actions/Edit/OffsetSelectionAction.cs:57
+#: ../Pinta/Dialogs/OffsetSelectionDialog.cs:41
+msgid "Offset Selection"
+msgstr ""
 
 #: ../Pinta.Effects/Effects/OilPaintingEffect.cs:23
 msgid "Oil Painting"
@@ -1393,7 +1400,7 @@ msgstr "رسم زيتيّ"
 msgid "Opacity:"
 msgstr "الإعتام:"
 
-#: ../Pinta.Core/Actions/EditActions.cs:352
+#: ../Pinta.Core/Actions/EditActions.cs:358
 #: ../Pinta.Core/Actions/FileActions.cs:56
 #: ../Pinta.Core/Actions/LayerActions.cs:166
 #: ../Pinta.Gui.Addins/AddinManagerDialog.cs:197
@@ -1418,11 +1425,11 @@ msgstr "فتح ملفّ صورة"
 msgid "Open Line/Curve Series"
 msgstr ""
 
-#: ../Pinta.Core/Actions/EditActions.cs:349
+#: ../Pinta.Core/Actions/EditActions.cs:355
 msgid "Open Palette File"
 msgstr "افتح ملفّ لوحة ألوان"
 
-#: ../Pinta.Core/Actions/EditActions.cs:72
+#: ../Pinta.Core/Actions/EditActions.cs:74
 #: ../Pinta.Core/Actions/FileActions.cs:48
 msgid "Open..."
 msgstr "افتح..."
@@ -1436,16 +1443,16 @@ msgid "Original"
 msgstr "اصلي"
 
 #: ../Pinta.Effects/Effects/OutlineEffect.cs:26
-#: ../Pinta.Tools/Tools/TextTool.cs:251
+#: ../Pinta.Tools/Tools/TextTool.cs:250
 msgid "Outline"
 msgstr "حد خارجي"
 
 #: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:293
-#: ../Pinta.Tools/Tools/FreeformShapeTool.cs:222
+#: ../Pinta.Tools/Tools/FreeformShapeTool.cs:221
 msgid "Outline Shape"
 msgstr "شكل بحدود خارجية فقط"
 
-#: ../Pinta.Tools/Tools/TextTool.cs:265
+#: ../Pinta.Tools/Tools/TextTool.cs:264
 msgid "Outline width"
 msgstr "عرض الحد الخارجي"
 
@@ -1461,11 +1468,11 @@ msgstr "الرسم البياني للمُخرجَات"
 msgid "Overlay"
 msgstr "كسو"
 
-#: ../Pinta.Core/Classes/BaseTool.cs:336
+#: ../Pinta.Core/Classes/BaseTool.cs:323
 msgid "Overwrite"
 msgstr "الكتابة فوق"
 
-#: ../Pinta.Tools/Tools/PaintBucketTool.cs:43
+#: ../Pinta.Tools/Tools/PaintBucketTool.cs:44
 msgid "Paint Bucket"
 msgstr "دلو الطلاﺀ"
 
@@ -1473,36 +1480,36 @@ msgstr "دلو الطلاﺀ"
 msgid "Paintbrush"
 msgstr "فرشاة تلوين"
 
-#: ../Pinta.Core/Actions/EditActions.cs:136
+#: ../Pinta.Core/Actions/EditActions.cs:141
 #: ../Pinta.Effects/Effects/DitheringEffect.cs:136
 msgid "Palette"
 msgstr "لوحة الألوان"
 
-#: ../Pinta.Core/Actions/EditActions.cs:356
+#: ../Pinta.Core/Actions/EditActions.cs:362
 msgid "Palette files"
 msgstr ""
 
-#: ../Pinta.Tools/Tools/PanTool.cs:39
+#: ../Pinta.Tools/Tools/PanTool.cs:40
 #: ../Pinta/Actions/Layers/RotateZoomLayerAction.cs:118
 msgid "Pan"
 msgstr "انتقل"
 
-#: ../Pinta.Core/Actions/EditActions.cs:63
+#: ../Pinta.Core/Actions/EditActions.cs:64
 #: ../Pinta.Core/HistoryItems/PasteHistoryItem.cs:38
 #: ../Pinta/Actions/Edit/PasteAction.cs:87
 msgid "Paste"
 msgstr "الصق"
 
-#: ../Pinta.Core/Actions/EditActions.cs:65
+#: ../Pinta.Core/Actions/EditActions.cs:66
 msgid "Paste Into New Image"
 msgstr "الصق في صورة جديدة"
 
-#: ../Pinta.Core/Actions/EditActions.cs:64
+#: ../Pinta.Core/Actions/EditActions.cs:65
 #: ../Pinta/Actions/Edit/PasteAction.cs:87
 msgid "Paste Into New Layer"
 msgstr "الصق في طبقة جديدة"
 
-#: ../Pinta.Tools/Tools/PencilTool.cs:47
+#: ../Pinta.Tools/Tools/PencilTool.cs:48
 msgid "Pencil"
 msgstr "قلم رصاص"
 
@@ -1510,11 +1517,11 @@ msgstr "قلم رصاص"
 msgid "Pencil Sketch"
 msgstr "رسم بقلم رصاص"
 
-#: ../Pinta.Effects/Effects/PencilSketchEffect.cs:86
+#: ../Pinta.Effects/Effects/PencilSketchEffect.cs:84
 msgid "Pencil Tip Size"
 msgstr "حجم سن قلم الرصاص"
 
-#: ../Pinta.Effects/Effects/MedianEffect.cs:67
+#: ../Pinta.Effects/Effects/MedianEffect.cs:65
 msgid "Percentile"
 msgstr ""
 
@@ -1593,7 +1600,7 @@ msgstr ""
 msgid "Point Deleted"
 msgstr ""
 
-#: ../Pinta.Effects/Effects/PolarInversionEffect.cs:21
+#: ../Pinta.Effects/Effects/PolarInversionEffect.cs:22
 msgid "Polar Inversion"
 msgstr "انعكاس قطبي"
 
@@ -1636,8 +1643,8 @@ msgid "Print"
 msgstr "اطبع"
 
 #: ../Pinta.Effects/Effects/JuliaFractalEffect.cs:169
-#: ../Pinta.Effects/Effects/MandelbrotFractalEffect.cs:187
-#: ../Pinta.Effects/Effects/RadialBlurEffect.cs:178
+#: ../Pinta.Effects/Effects/MandelbrotFractalEffect.cs:185
+#: ../Pinta.Effects/Effects/RadialBlurEffect.cs:176
 #: ../Pinta.Effects/Effects/WarpEffect.cs:181
 msgid "Quality"
 msgstr "الجودة"
@@ -1662,11 +1669,11 @@ msgstr "غشاوة دورانية"
 msgid "Radial Gradient"
 msgstr "تدرّج قطري"
 
-#: ../Pinta.Effects/Effects/GaussianBlurEffect.cs:248
-#: ../Pinta.Effects/Effects/GlowEffect.cs:78
-#: ../Pinta.Effects/Effects/MedianEffect.cs:64
-#: ../Pinta.Effects/Effects/ReduceNoiseEffect.cs:91
-#: ../Pinta.Effects/Effects/UnfocusEffect.cs:96
+#: ../Pinta.Effects/Effects/GaussianBlurEffect.cs:246
+#: ../Pinta.Effects/Effects/GlowEffect.cs:76
+#: ../Pinta.Effects/Effects/MedianEffect.cs:62
+#: ../Pinta.Effects/Effects/ReduceNoiseEffect.cs:89
+#: ../Pinta.Effects/Effects/UnfocusEffect.cs:94
 #: ../Pinta.Tools/Editable/EditEngines/RoundedLineEditEngine.cs:88
 msgid "Radius"
 msgstr "نصف القطر"
@@ -1678,7 +1685,7 @@ msgstr ""
 
 #: ../Pinta.Effects/Effects/CloudsEffect.cs:253
 #: ../Pinta.Effects/Effects/JuliaFractalEffect.cs:181
-#: ../Pinta.Effects/Effects/MandelbrotFractalEffect.cs:203
+#: ../Pinta.Effects/Effects/MandelbrotFractalEffect.cs:201
 msgid "Random Color Scheme Seed"
 msgstr ""
 
@@ -1688,7 +1695,7 @@ msgstr ""
 
 #: ../Pinta.Effects/Effects/AddNoiseEffect.cs:176
 #: ../Pinta.Effects/Effects/CloudsEffect.cs:244
-#: ../Pinta.Effects/Effects/FrostedGlassEffect.cs:154
+#: ../Pinta.Effects/Effects/FrostedGlassEffect.cs:152
 msgid "Random Noise"
 msgstr "ضوضاء عشوائيّة"
 
@@ -1696,15 +1703,15 @@ msgstr "ضوضاء عشوائيّة"
 msgid "Random Point Locations"
 msgstr ""
 
-#: ../Pinta.Tools/Tools/RecolorTool.cs:56
+#: ../Pinta.Tools/Tools/RecolorTool.cs:57
 msgid "Recolor"
 msgstr "إعادة تلوين"
 
-#: ../Pinta.Tools/Tools/RectangleTool.cs:38
+#: ../Pinta.Tools/Tools/RectangleTool.cs:39
 msgid "Rectangle"
 msgstr "مستطيل"
 
-#: ../Pinta.Tools/Tools/RectangleSelectTool.cs:35
+#: ../Pinta.Tools/Tools/RectangleSelectTool.cs:36
 msgid "Rectangle Select"
 msgstr "تحديد مستطيل"
 
@@ -1721,7 +1728,7 @@ msgstr "أحمر  "
 msgid "Red Eye Removal"
 msgstr "إزالة احمرار العين"
 
-#: ../Pinta.Core/Actions/EditActions.cs:59
+#: ../Pinta.Core/Actions/EditActions.cs:60
 msgid "Redo"
 msgstr "كَرِّر"
 
@@ -1741,7 +1748,7 @@ msgstr "حدّث"
 msgid "Released under the MIT X11 License."
 msgstr ""
 
-#: ../Pinta.Effects/Effects/ReliefEffect.cs:42
+#: ../Pinta.Effects/Effects/ReliefEffect.cs:40
 msgid "Relief"
 msgstr "تضريس"
 
@@ -1781,7 +1788,7 @@ msgstr ""
 msgid "Reset"
 msgstr "أعد الضبط"
 
-#: ../Pinta.Core/Actions/EditActions.cs:74
+#: ../Pinta.Core/Actions/EditActions.cs:76
 msgid "Reset to Default"
 msgstr "أعد إلى الحالة المبدئيّة"
 
@@ -1809,7 +1816,7 @@ msgstr "تغيير مقاس لوحة الألوان"
 
 #: ../Pinta.Effects/Effects/CloudsEffect.cs:256
 #: ../Pinta.Effects/Effects/JuliaFractalEffect.cs:184
-#: ../Pinta.Effects/Effects/MandelbrotFractalEffect.cs:206
+#: ../Pinta.Effects/Effects/MandelbrotFractalEffect.cs:204
 msgid "Reverse Color Scheme"
 msgstr ""
 
@@ -1818,7 +1825,7 @@ msgstr ""
 msgid "Reverse Color Sorting"
 msgstr ""
 
-#: ../Pinta.Tools/Tools/TextTool.cs:226
+#: ../Pinta.Tools/Tools/TextTool.cs:225
 msgid "Right Align"
 msgstr "محاذاة لليمين"
 
@@ -1846,7 +1853,7 @@ msgstr "دوّر 90 درجة باتّجاه عقارب السّاعة"
 msgid "Rotate 90° Counter-Clockwise"
 msgstr "دوّر 90 درجة باتّجاه عكس عقارب السّاعة"
 
-#: ../Pinta.Effects/Effects/FragmentEffect.cs:120
+#: ../Pinta.Effects/Effects/FragmentEffect.cs:118
 #: ../Pinta.Effects/Effects/TileEffect.cs:174
 msgid "Rotation"
 msgstr "الدوران"
@@ -1859,7 +1866,7 @@ msgstr ""
 msgid "Rounded Line Shape"
 msgstr ""
 
-#: ../Pinta.Tools/Tools/RoundedRectangleTool.cs:38
+#: ../Pinta.Tools/Tools/RoundedRectangleTool.cs:39
 msgid "Rounded Rectangle"
 msgstr "مستطيل مستدير الزوايا"
 
@@ -1871,20 +1878,20 @@ msgstr "وحدات المسطرة"
 msgid "Rulers"
 msgstr "المساطر"
 
-#: ../Pinta.Tools/Tools/ColorPickerTool.cs:194
+#: ../Pinta.Tools/Tools/ColorPickerTool.cs:195
 msgid "Sampling"
 msgstr ""
 
 #: ../Pinta.Core/Effects/UserBlendOps.cs:46
-#: ../Pinta.Effects/Adjustments/HueSaturationEffect.cs:64
+#: ../Pinta.Effects/Adjustments/HueSaturationEffect.cs:63
 msgid "Saturation"
 msgstr "التشبّع"
 
-#: ../Pinta.Effects/Effects/RedEyeRemoveEffect.cs:58
+#: ../Pinta.Effects/Effects/RedEyeRemoveEffect.cs:56
 msgid "Saturation Percentage"
 msgstr ""
 
-#: ../Pinta.Core/Actions/EditActions.cs:393
+#: ../Pinta.Core/Actions/EditActions.cs:399
 #: ../Pinta.Core/Actions/FileActions.cs:51
 #: ../Pinta/Actions/File/SaveDocumentImplementationAction.cs:73
 msgid "Save"
@@ -1894,7 +1901,7 @@ msgstr "احفظ"
 msgid "Save All"
 msgstr "احفظ الكلّ"
 
-#: ../Pinta.Core/Actions/EditActions.cs:73
+#: ../Pinta.Core/Actions/EditActions.cs:75
 #: ../Pinta.Core/Actions/FileActions.cs:52
 msgid "Save As..."
 msgstr "احفظ كـ..."
@@ -1903,7 +1910,7 @@ msgstr "احفظ كـ..."
 msgid "Save Image File"
 msgstr "حفظ ملف صورة"
 
-#: ../Pinta.Core/Actions/EditActions.cs:390
+#: ../Pinta.Core/Actions/EditActions.cs:396
 msgid "Save Palette File"
 msgstr "احفظ ملفّ لوحة الألوان"
 
@@ -1924,8 +1931,8 @@ msgstr "شاشة"
 msgid "Secondary"
 msgstr "Secondary"
 
-#: ../Pinta.Core/Actions/EditActions.cs:69
-#: ../Pinta.Core/Actions/EditActions.cs:215
+#: ../Pinta.Core/Actions/EditActions.cs:71
+#: ../Pinta.Core/Actions/EditActions.cs:221
 msgid "Select All"
 msgstr "حدّد الكلّ"
 
@@ -1937,7 +1944,7 @@ msgstr ""
 msgid "Sepia"
 msgstr "تأثير اللّون البنّي الدّاكن"
 
-#: ../Pinta.Core/Actions/EditActions.cs:75
+#: ../Pinta.Core/Actions/EditActions.cs:77
 msgid "Set Number of Colors"
 msgstr "عيّن عدد الألوان"
 
@@ -1977,7 +1984,7 @@ msgstr ""
 msgid "Sierra Lite"
 msgstr ""
 
-#: ../Pinta.Tools/Tools/ColorPickerTool.cs:221
+#: ../Pinta.Tools/Tools/ColorPickerTool.cs:222
 msgid "Single Pixel"
 msgstr "بيكسل مفرد"
 
@@ -2013,7 +2020,7 @@ msgstr "مربعات"
 msgid "Status Bar"
 msgstr ""
 
-#: ../Pinta.Effects/Effects/ReduceNoiseEffect.cs:94
+#: ../Pinta.Effects/Effects/ReduceNoiseEffect.cs:92
 msgid "Strength"
 msgstr "الشدة"
 
@@ -2029,23 +2036,23 @@ msgstr ""
 msgid "Stylize"
 msgstr "كسوة"
 
-#: ../Pinta.Tools/Tools/ColorPickerTool.cs:204
+#: ../Pinta.Tools/Tools/ColorPickerTool.cs:205
 msgid "Switch to Pencil tool"
 msgstr "بدّل إلى القلم الرصاص"
 
-#: ../Pinta.Tools/Tools/ColorPickerTool.cs:203
+#: ../Pinta.Tools/Tools/ColorPickerTool.cs:204
 msgid "Switch to previous tool"
 msgstr "غيّر إلى الأداة السابقة"
 
-#: ../Pinta.Tools/Tools/TextTool.cs:85
+#: ../Pinta.Tools/Tools/TextTool.cs:84
 msgid "Text"
 msgstr "نصّ"
 
-#: ../Pinta.Tools/Tools/TextTool.cs:86
+#: ../Pinta.Tools/Tools/TextTool.cs:85
 msgid "Text - Finalize"
 msgstr ""
 
-#: ../Pinta.Tools/Tools/TextTool.cs:240
+#: ../Pinta.Tools/Tools/TextTool.cs:239
 msgid "Text Style"
 msgstr "نمط النص"
 
@@ -2113,7 +2120,7 @@ msgid ""
 "will also be uninstalled:"
 msgstr ""
 
-#: ../Pinta.Effects/Effects/OutlineEffect.cs:138
+#: ../Pinta.Effects/Effects/OutlineEffect.cs:136
 msgid "Thickness"
 msgstr "الثخانة"
 
@@ -2129,9 +2136,9 @@ msgstr "مقاس البلاطة"
 msgid "Tip: Right-click to remove control points."
 msgstr "تلميح: انقر بالزر الأيمن لحذف نقاط التحكم."
 
-#: ../Pinta.Effects/Effects/RedEyeRemoveEffect.cs:54
-#: ../Pinta.Tools/Tools/FloodTool.cs:125
-#: ../Pinta.Tools/Tools/RecolorTool.cs:196
+#: ../Pinta.Effects/Effects/RedEyeRemoveEffect.cs:52
+#: ../Pinta.Tools/Tools/FloodTool.cs:124
+#: ../Pinta.Tools/Tools/RecolorTool.cs:197
 msgid "Tolerance"
 msgstr "السماحية"
 
@@ -2182,11 +2189,11 @@ msgstr ""
 msgid "Type"
 msgstr "النوع"
 
-#: ../Pinta.Tools/Tools/TextTool.cs:186
+#: ../Pinta.Tools/Tools/TextTool.cs:185
 msgid "Underline"
 msgstr "خط سُفليّ"
 
-#: ../Pinta.Core/Actions/EditActions.cs:58
+#: ../Pinta.Core/Actions/EditActions.cs:59
 msgid "Undo"
 msgstr "تراجع"
 
@@ -2230,7 +2237,7 @@ msgstr ""
 msgid "Updates"
 msgstr "تحديثات"
 
-#: ../Pinta.Effects/Effects/RadialBlurEffect.cs:179
+#: ../Pinta.Effects/Effects/RadialBlurEffect.cs:177
 msgid ""
 "Use low quality for previews, small images, and small angles.  Use high "
 "quality for final quality, large images, and large angles."
@@ -2319,8 +2326,8 @@ msgid ""
 msgstr ""
 
 #: ../Pinta.Effects/Effects/JuliaFractalEffect.cs:172
-#: ../Pinta.Effects/Effects/MandelbrotFractalEffect.cs:191
-#: ../Pinta.Tools/Tools/ZoomTool.cs:55
+#: ../Pinta.Effects/Effects/MandelbrotFractalEffect.cs:189
+#: ../Pinta.Tools/Tools/ZoomTool.cs:56
 #: ../Pinta/Actions/Layers/RotateZoomLayerAction.cs:121
 msgid "Zoom"
 msgstr "تكبير/تصغير"
@@ -2428,7 +2435,7 @@ msgstr ""
 "  xDev https://launchpad.net/~mf393"
 
 #. Translators: {0} is 'Ctrl', or a platform-specific key such as 'Command' on macOS.
-#: ../Pinta.Tools/Tools/CloneStampTool.cs:46
+#: ../Pinta.Tools/Tools/CloneStampTool.cs:47
 #, csharp-format
 msgid "{0} + left click to set origin, left click to paint."
 msgstr ""

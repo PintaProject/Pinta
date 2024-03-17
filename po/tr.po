@@ -7,11 +7,11 @@ msgid ""
 msgstr ""
 "Project-Id-Version: pinta\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-01-28 01:09+0000\n"
+"POT-Creation-Date: 2024-03-17 01:09+0000\n"
 "PO-Revision-Date: 2024-02-03 13:01+0000\n"
 "Last-Translator: Oğuz Ersen <oguz@ersen.moe>\n"
-"Language-Team: Turkish <https://hosted.weblate.org/projects/pinta/pinta/tr/>"
-"\n"
+"Language-Team: Turkish <https://hosted.weblate.org/projects/pinta/pinta/tr/"
+">\n"
 "Language: tr\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -33,19 +33,19 @@ msgstr " Seçim Kipi: "
 msgid "..."
 msgstr "..."
 
-#: ../Pinta.Tools/Tools/ColorPickerTool.cs:222
+#: ../Pinta.Tools/Tools/ColorPickerTool.cs:223
 msgid "3 x 3 Region"
 msgstr "Bölge"
 
-#: ../Pinta.Tools/Tools/ColorPickerTool.cs:223
+#: ../Pinta.Tools/Tools/ColorPickerTool.cs:224
 msgid "5 x 5 Region"
 msgstr "5 x 5 Bölge"
 
-#: ../Pinta.Tools/Tools/ColorPickerTool.cs:224
+#: ../Pinta.Tools/Tools/ColorPickerTool.cs:225
 msgid "7 x 7 Region"
 msgstr "7 x7 Bölge"
 
-#: ../Pinta.Tools/Tools/ColorPickerTool.cs:225
+#: ../Pinta.Tools/Tools/ColorPickerTool.cs:226
 msgid "9 x 9 Region"
 msgstr "9 x9 Bölge"
 
@@ -83,21 +83,21 @@ msgstr "Eklendi"
 msgid "Adjustments"
 msgstr "Ayarlamalar"
 
-#: ../Pinta.Tools/Tools/ColorPickerTool.cs:193
+#: ../Pinta.Tools/Tools/ColorPickerTool.cs:194
 msgid "After select"
 msgstr "Seçimden sonra"
 
-#: ../Pinta.Core/Actions/EditActions.cs:368
+#: ../Pinta.Core/Actions/EditActions.cs:374
 #: ../Pinta.Gui.Addins/AddinManagerDialog.cs:209
 #: ../Pinta/Actions/File/OpenDocumentAction.cs:83
 msgid "All files"
 msgstr "Tüm dosyalar"
 
-#: ../Pinta.Effects/Effects/BulgeEffect.cs:111
-#: ../Pinta.Effects/Effects/FrostedGlassEffect.cs:151
-#: ../Pinta.Effects/Effects/SharpenEffect.cs:60
+#: ../Pinta.Effects/Effects/BulgeEffect.cs:109
+#: ../Pinta.Effects/Effects/FrostedGlassEffect.cs:149
+#: ../Pinta.Effects/Effects/SharpenEffect.cs:58
 #: ../Pinta.Effects/Effects/TwistEffect.cs:142
-#: ../Pinta.Effects/Effects/ZoomBlurEffect.cs:145
+#: ../Pinta.Effects/Effects/ZoomBlurEffect.cs:143
 msgid "Amount"
 msgstr "Miktar"
 
@@ -105,13 +105,13 @@ msgstr "Miktar"
 msgid "Anchor:"
 msgstr "Çapa:"
 
-#: ../Pinta.Effects/Effects/EdgeDetectEffect.cs:83
-#: ../Pinta.Effects/Effects/EmbossEffect.cs:150
+#: ../Pinta.Effects/Effects/EdgeDetectEffect.cs:81
+#: ../Pinta.Effects/Effects/EmbossEffect.cs:148
 #: ../Pinta.Effects/Effects/JuliaFractalEffect.cs:187
-#: ../Pinta.Effects/Effects/MandelbrotFractalEffect.cs:194
+#: ../Pinta.Effects/Effects/MandelbrotFractalEffect.cs:192
 #: ../Pinta.Effects/Effects/MotionBlurEffect.cs:108
-#: ../Pinta.Effects/Effects/RadialBlurEffect.cs:172
-#: ../Pinta.Effects/Effects/ReliefEffect.cs:85
+#: ../Pinta.Effects/Effects/RadialBlurEffect.cs:170
+#: ../Pinta.Effects/Effects/ReliefEffect.cs:83
 #: ../Pinta.Tools/Editable/EditEngines/ArrowedEditEngine.cs:298
 #: ../Pinta/Actions/Layers/RotateZoomLayerAction.cs:115
 msgid "Angle"
@@ -121,11 +121,11 @@ msgstr "Açı"
 msgid "Antialias"
 msgstr "Örtüşme Önle"
 
-#: ../Pinta.Core/Classes/BaseTool.cs:351
+#: ../Pinta.Core/Classes/BaseTool.cs:338
 msgid "Antialiasing Off"
 msgstr "Kenar Keskinleştirme Kapalı"
 
-#: ../Pinta.Core/Classes/BaseTool.cs:350
+#: ../Pinta.Core/Classes/BaseTool.cs:337
 msgid "Antialiasing On"
 msgstr "Kenar Keskinleştirme Açık"
 
@@ -218,7 +218,7 @@ msgstr "Mavi "
 msgid "Blurs"
 msgstr "Bulanıklıklar"
 
-#: ../Pinta.Tools/Tools/TextTool.cs:162
+#: ../Pinta.Tools/Tools/TextTool.cs:161
 msgid "Bold"
 msgstr "Kalın"
 
@@ -227,8 +227,8 @@ msgstr "Kalın"
 msgid "Bonfire"
 msgstr "Şenlik Ateşi"
 
-#: ../Pinta.Effects/Adjustments/BrightnessContrastEffect.cs:145
-#: ../Pinta.Effects/Effects/GlowEffect.cs:81
+#: ../Pinta.Effects/Adjustments/BrightnessContrastEffect.cs:143
+#: ../Pinta.Effects/Effects/GlowEffect.cs:79
 msgid "Brightness"
 msgstr "Parlaklık"
 
@@ -236,12 +236,12 @@ msgstr "Parlaklık"
 msgid "Brightness / Contrast"
 msgstr "Parlaklık / Kontrast"
 
-#: ../Pinta.Effects/Effects/OilPaintingEffect.cs:132
+#: ../Pinta.Effects/Effects/OilPaintingEffect.cs:130
 msgid "Brush Size"
 msgstr "Fırça Boyutu"
 
 #: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:254
-#: ../Pinta.Tools/Tools/BaseBrushTool.cs:100
+#: ../Pinta.Tools/Tools/BaseBrushTool.cs:101
 msgid "Brush width"
 msgstr "Fırça boyutu"
 
@@ -264,8 +264,8 @@ msgstr "Mutlak boyut:"
 msgid "By percentage:"
 msgstr "Yüzde :"
 
-#: ../Pinta.Core/Actions/EditActions.cs:353
-#: ../Pinta.Core/Actions/EditActions.cs:394
+#: ../Pinta.Core/Actions/EditActions.cs:359
+#: ../Pinta.Core/Actions/EditActions.cs:400
 #: ../Pinta.Core/Actions/LayerActions.cs:167
 #: ../Pinta.Gui.Addins/AddinManagerDialog.cs:198
 #: ../Pinta.Gui.Addins/InstallDialog.cs:117
@@ -278,11 +278,11 @@ msgstr "İptal"
 msgid "Canvas"
 msgstr "Tuval"
 
-#: ../Pinta.Effects/Effects/PixelateEffect.cs:117
+#: ../Pinta.Effects/Effects/PixelateEffect.cs:115
 msgid "Cell Size"
 msgstr "Hücre Boyutu"
 
-#: ../Pinta.Tools/Tools/TextTool.cs:214
+#: ../Pinta.Tools/Tools/TextTool.cs:213
 msgid "Center Align"
 msgstr "Ortala"
 
@@ -331,7 +331,7 @@ msgstr "Daireler"
 msgid "Clamp"
 msgstr "Kelepçe"
 
-#: ../Pinta.Tools/Tools/RectangleSelectTool.cs:38
+#: ../Pinta.Tools/Tools/RectangleSelectTool.cs:39
 msgid ""
 "Click and drag to draw a rectangular selection.\n"
 "Hold Shift to constrain to a square."
@@ -339,7 +339,7 @@ msgstr ""
 "Dikdörtgen bir alan çizmek için tıklayın ve sürükleyin.\n"
 "Kareye sınırlamak için Shift'i basılı tutun."
 
-#: ../Pinta.Tools/Tools/EllipseSelectTool.cs:37
+#: ../Pinta.Tools/Tools/EllipseSelectTool.cs:38
 msgid ""
 "Click and drag to draw an elliptical selection.\n"
 "Hold Shift to constrain to a circle."
@@ -360,7 +360,7 @@ msgstr ""
 msgid "Click and drag to draw the outline for a selection area."
 msgstr "Bir seçim alanının anahattını çizmek için tıklayıp sürükleyin."
 
-#: ../Pinta.Tools/Tools/PanTool.cs:41
+#: ../Pinta.Tools/Tools/PanTool.cs:42
 msgid "Click and drag to navigate image."
 msgstr "Görüntüyü hareket ettirmek için tıklayın ve sürükleyin."
 
@@ -391,7 +391,7 @@ msgstr "Birincil ve ikincil renk arasında geçiş yapmak için tıklayın."
 msgid "Clipboard"
 msgstr "Pano"
 
-#: ../Pinta.Tools/Tools/CloneStampTool.cs:43
+#: ../Pinta.Tools/Tools/CloneStampTool.cs:44
 msgid "Clone Stamp"
 msgstr "Klonlama Aracı"
 
@@ -416,7 +416,7 @@ msgstr "Kapalı Çizgi/Eğri Serileri"
 msgid "Clouds"
 msgstr "Bulutlar"
 
-#: ../Pinta.Effects/Effects/OilPaintingEffect.cs:135
+#: ../Pinta.Effects/Effects/OilPaintingEffect.cs:133
 msgid "Coarseness"
 msgstr "Kabalık"
 
@@ -437,11 +437,11 @@ msgstr "Renk Atlatma"
 msgid "Color Mode"
 msgstr "Renk Modu"
 
-#: ../Pinta.Tools/Tools/ColorPickerTool.cs:51
+#: ../Pinta.Tools/Tools/ColorPickerTool.cs:52
 msgid "Color Picker"
 msgstr "Renk Seçici"
 
-#: ../Pinta.Effects/Effects/PencilSketchEffect.cs:89
+#: ../Pinta.Effects/Effects/PencilSketchEffect.cs:87
 msgid "Color Range"
 msgstr "Renk Dizisi"
 
@@ -452,13 +452,13 @@ msgstr "Renk Doygunluğu"
 #: ../Pinta.Core/Actions/ViewActions.cs:181
 #: ../Pinta.Effects/Effects/CloudsEffect.cs:250
 #: ../Pinta.Effects/Effects/JuliaFractalEffect.cs:178
-#: ../Pinta.Effects/Effects/MandelbrotFractalEffect.cs:200
+#: ../Pinta.Effects/Effects/MandelbrotFractalEffect.cs:198
 msgid "Color Scheme"
 msgstr "Renk Düzeni"
 
 #: ../Pinta.Effects/Effects/CloudsEffect.cs:247
 #: ../Pinta.Effects/Effects/JuliaFractalEffect.cs:175
-#: ../Pinta.Effects/Effects/MandelbrotFractalEffect.cs:197
+#: ../Pinta.Effects/Effects/MandelbrotFractalEffect.cs:195
 msgid "Color Scheme Source"
 msgstr "Renk Düzeni Kaynağı"
 
@@ -466,7 +466,7 @@ msgstr "Renk Düzeni Kaynağı"
 msgid "Color Sorting"
 msgstr "Renk Sıralaması"
 
-#: ../Pinta.Effects/Effects/InkSketchEffect.cs:156
+#: ../Pinta.Effects/Effects/InkSketchEffect.cs:154
 msgid "Coloring"
 msgstr "Renklendirme"
 
@@ -478,20 +478,20 @@ msgstr "Konik Renk Geçişi"
 msgid "Contents"
 msgstr "İçerik"
 
-#: ../Pinta.Tools/Tools/FloodTool.cs:134
+#: ../Pinta.Tools/Tools/FloodTool.cs:133
 msgid "Contiguous"
 msgstr "Sürekli"
 
-#: ../Pinta.Effects/Adjustments/BrightnessContrastEffect.cs:156
-#: ../Pinta.Effects/Effects/GlowEffect.cs:84
+#: ../Pinta.Effects/Adjustments/BrightnessContrastEffect.cs:154
+#: ../Pinta.Effects/Effects/GlowEffect.cs:82
 msgid "Contrast"
 msgstr "Kontrast"
 
-#: ../Pinta.Core/Actions/EditActions.cs:61
+#: ../Pinta.Core/Actions/EditActions.cs:62
 msgid "Copy"
 msgstr "Kopyala"
 
-#: ../Pinta.Core/Actions/EditActions.cs:62
+#: ../Pinta.Core/Actions/EditActions.cs:63
 msgid "Copy Merged"
 msgstr "Kopya Birleşti"
 
@@ -538,8 +538,8 @@ msgstr "Eğriler"
 msgid "Custom"
 msgstr "Özel"
 
-#: ../Pinta.Core/Actions/EditActions.cs:60
-#: ../Pinta.Core/Actions/EditActions.cs:244
+#: ../Pinta.Core/Actions/EditActions.cs:61
+#: ../Pinta.Core/Actions/EditActions.cs:250
 msgid "Cut"
 msgstr "Kes"
 
@@ -570,11 +570,11 @@ msgstr "Katmanı Sil"
 msgid "Deleted"
 msgstr "Silindi"
 
-#: ../Pinta.Core/Actions/EditActions.cs:256
+#: ../Pinta.Core/Actions/EditActions.cs:262
 msgid "Deselect"
 msgstr "Seçimi Kaldır"
 
-#: ../Pinta.Core/Actions/EditActions.cs:70
+#: ../Pinta.Core/Actions/EditActions.cs:72
 msgid "Deselect All"
 msgstr "Tüm Seçimleri Kaldır"
 
@@ -586,7 +586,7 @@ msgstr "Ayrıntılar"
 msgid "Difference"
 msgstr "Fark"
 
-#: ../Pinta.Effects/Effects/FragmentEffect.cs:117
+#: ../Pinta.Effects/Effects/FragmentEffect.cs:115
 #: ../Pinta.Effects/Effects/MotionBlurEffect.cs:111
 msgid "Distance"
 msgstr "Uzaklık"
@@ -598,7 +598,7 @@ msgstr "Uzaklık Ölçümü"
 #: ../Pinta.Effects/Effects/BulgeEffect.cs:27
 #: ../Pinta.Effects/Effects/FrostedGlassEffect.cs:27
 #: ../Pinta.Effects/Effects/PixelateEffect.cs:29
-#: ../Pinta.Effects/Effects/PolarInversionEffect.cs:27
+#: ../Pinta.Effects/Effects/PolarInversionEffect.cs:28
 #: ../Pinta.Effects/Effects/TileEffect.cs:27
 #: ../Pinta.Effects/Effects/TwistEffect.cs:28
 msgid "Distort"
@@ -608,7 +608,7 @@ msgstr "Boz"
 msgid "Dithering"
 msgstr "Titreme"
 
-#: ../Pinta.Tools/Tools/ColorPickerTool.cs:202
+#: ../Pinta.Tools/Tools/ColorPickerTool.cs:203
 msgid "Do not switch tool"
 msgstr "Aracı değiştirme"
 
@@ -649,11 +649,11 @@ msgstr "Elektrik"
 
 #: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:319
 #: ../Pinta.Tools/Editable/EditEngines/EllipseEditEngine.cs:34
-#: ../Pinta.Tools/Tools/EllipseTool.cs:38
+#: ../Pinta.Tools/Tools/EllipseTool.cs:39
 msgid "Ellipse"
 msgstr "Elips"
 
-#: ../Pinta.Tools/Tools/EllipseSelectTool.cs:35
+#: ../Pinta.Tools/Tools/EllipseSelectTool.cs:36
 msgid "Ellipse Select"
 msgstr "Elips Seçim"
 
@@ -666,8 +666,8 @@ msgid "Enable additional logging or behavior changes for debugging"
 msgstr ""
 "Hata ayıklama için ek günlük kaydı veya davranış değişikliklerini etkinleştir"
 
-#: ../Pinta.Core/Actions/EditActions.cs:66
-#: ../Pinta.Core/Actions/EditActions.cs:245
+#: ../Pinta.Core/Actions/EditActions.cs:67
+#: ../Pinta.Core/Actions/EditActions.cs:251
 msgid "Erase Selection"
 msgstr "Seçimi Sil"
 
@@ -697,7 +697,7 @@ msgid "Extension packages"
 msgstr "Uzantı paketleri"
 
 #: ../Pinta.Effects/Effects/JuliaFractalEffect.cs:166
-#: ../Pinta.Effects/Effects/MandelbrotFractalEffect.cs:184
+#: ../Pinta.Effects/Effects/MandelbrotFractalEffect.cs:182
 msgid "Factor"
 msgstr "Etken"
 
@@ -735,27 +735,27 @@ msgstr "Hata Bildir"
 msgid "Files to open"
 msgstr "Açılacak dosyalar"
 
-#: ../Pinta.Tools/Tools/TextTool.cs:252
+#: ../Pinta.Tools/Tools/TextTool.cs:251
 msgid "Fill Background"
 msgstr "Arkaplanı Doldur"
 
-#: ../Pinta.Core/Actions/EditActions.cs:67
-#: ../Pinta.Core/Actions/EditActions.cs:206
+#: ../Pinta.Core/Actions/EditActions.cs:68
+#: ../Pinta.Core/Actions/EditActions.cs:212
 msgid "Fill Selection"
 msgstr "Seçimi Doldur"
 
 #: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:294
-#: ../Pinta.Tools/Tools/FreeformShapeTool.cs:223
+#: ../Pinta.Tools/Tools/FreeformShapeTool.cs:222
 msgid "Fill Shape"
 msgstr "Şekli Doldur"
 
 #: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:284
-#: ../Pinta.Tools/Tools/FreeformShapeTool.cs:216
+#: ../Pinta.Tools/Tools/FreeformShapeTool.cs:215
 msgid "Fill Style"
 msgstr "Stili Doldur"
 
 #: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:295
-#: ../Pinta.Tools/Tools/FreeformShapeTool.cs:224
+#: ../Pinta.Tools/Tools/FreeformShapeTool.cs:223
 msgid "Fill and Outline Shape"
 msgstr "Dolgu ve Anahat Şekli"
 
@@ -799,7 +799,7 @@ msgstr "Katmanı Dikey Döndür"
 msgid "Flip Vertical"
 msgstr "Dikey Çevir"
 
-#: ../Pinta.Tools/Tools/FloodTool.cs:124
+#: ../Pinta.Tools/Tools/FloodTool.cs:123
 msgid "Flood Mode"
 msgstr "Taşırma Modu"
 
@@ -813,7 +813,7 @@ msgstr "Floyd-Steinberg"
 msgid "Floyd-Steinberg Lite"
 msgstr "Floyd-Steinberg Lite"
 
-#: ../Pinta.Tools/Tools/TextTool.cs:138
+#: ../Pinta.Tools/Tools/TextTool.cs:137
 msgid "Font"
 msgstr "Yazıtipi"
 
@@ -821,11 +821,11 @@ msgstr "Yazıtipi"
 msgid "Fragment"
 msgstr "Fragman"
 
-#: ../Pinta.Effects/Effects/FragmentEffect.cs:114
+#: ../Pinta.Effects/Effects/FragmentEffect.cs:112
 msgid "Fragments"
 msgstr "Fragmanlar"
 
-#: ../Pinta.Tools/Tools/FreeformShapeTool.cs:52
+#: ../Pinta.Tools/Tools/FreeformShapeTool.cs:51
 msgid "Freeform Shape"
 msgstr "Serbest Biçimli Şekil"
 
@@ -845,7 +845,7 @@ msgstr "Galeri"
 msgid "Gaussian Blur"
 msgstr "Gauss Bulanıklığı"
 
-#: ../Pinta.Tools/Tools/FloodTool.cs:135
+#: ../Pinta.Tools/Tools/FloodTool.cs:134
 msgid "Global"
 msgstr "Genel"
 
@@ -882,7 +882,7 @@ msgstr "Yükseklik:"
 msgid "Hide Layer"
 msgstr "Katmanı Gizle"
 
-#: ../Pinta.Effects/Effects/RedEyeRemoveEffect.cs:59
+#: ../Pinta.Effects/Effects/RedEyeRemoveEffect.cs:57
 msgid "Hint: For best results, first use selection tools to select each eye."
 msgstr ""
 "Öneri: En iyi sonucu almak için ilk önce seçim araçlarını kullanarak iki "
@@ -908,7 +908,7 @@ msgid "Horizontal red (R)"
 msgstr "Yatay kırmızı (K)"
 
 #: ../Pinta.Core/Effects/UserBlendOps.cs:45
-#: ../Pinta.Effects/Adjustments/HueSaturationEffect.cs:61
+#: ../Pinta.Effects/Adjustments/HueSaturationEffect.cs:60
 msgid "Hue"
 msgstr "Ton"
 
@@ -924,7 +924,7 @@ msgstr "ICO dosyası 255 x 255 pikselden büyük olamaz."
 msgid "If you don't save, all changes will be permanently lost."
 msgstr "Kaydetmezseniz tüm değişiklikler kalıcı olarak kaybolacak."
 
-#: ../Pinta.Tools/Tools/ColorPickerTool.cs:240 ../Pinta/MainWindow.cs:388
+#: ../Pinta.Tools/Tools/ColorPickerTool.cs:241 ../Pinta/MainWindow.cs:388
 msgid "Image"
 msgstr "Görüntü"
 
@@ -965,7 +965,7 @@ msgstr "Dosyadan Aktar..."
 msgid "Inches"
 msgstr "İnç"
 
-#: ../Pinta.Effects/Effects/InkSketchEffect.cs:153
+#: ../Pinta.Effects/Effects/InkSketchEffect.cs:151
 msgid "Ink Outline"
 msgstr "Mürekkep taslak"
 
@@ -1003,7 +1003,7 @@ msgid "Installed"
 msgstr "Kurulu"
 
 #: ../Pinta.Effects/Effects/AddNoiseEffect.cs:167
-#: ../Pinta.Effects/Effects/OutlineEffect.cs:141
+#: ../Pinta.Effects/Effects/OutlineEffect.cs:139
 #: ../Pinta.Effects/Effects/TileEffect.cs:180
 msgid "Intensity"
 msgstr "Yoğunluk"
@@ -1015,16 +1015,16 @@ msgid "Intersect ({0} + Left Click)"
 msgstr "Kesişim ({0} + Sol Tıklama)"
 
 #: ../Pinta.Effects/Adjustments/InvertColorsEffect.cs:24
-#: ../Pinta.Effects/Effects/MandelbrotFractalEffect.cs:209
+#: ../Pinta.Effects/Effects/MandelbrotFractalEffect.cs:207
 msgid "Invert Colors"
 msgstr "Renkleri Ters Çevir"
 
-#: ../Pinta.Core/Actions/EditActions.cs:68
-#: ../Pinta.Core/Actions/EditActions.cs:446
+#: ../Pinta.Core/Actions/EditActions.cs:69
+#: ../Pinta.Core/Actions/EditActions.cs:452
 msgid "Invert Selection"
 msgstr "Seçimi Tersine Çevir"
 
-#: ../Pinta.Tools/Tools/TextTool.cs:174
+#: ../Pinta.Tools/Tools/TextTool.cs:173
 msgid "Italic"
 msgstr "İtalik"
 
@@ -1049,7 +1049,7 @@ msgstr "Yatay"
 msgid "Lasso Select"
 msgstr "Kement Seçim"
 
-#: ../Pinta.Tools/Tools/ColorPickerTool.cs:239
+#: ../Pinta.Tools/Tools/ColorPickerTool.cs:240
 msgid "Layer"
 msgstr "Katman"
 
@@ -1084,11 +1084,11 @@ msgstr "Katman {0}"
 msgid "Layers"
 msgstr "Katmanlar"
 
-#: ../Pinta.Tools/Tools/TextTool.cs:202
+#: ../Pinta.Tools/Tools/TextTool.cs:201
 msgid "Left Align"
 msgstr "Sola Hizalı"
 
-#: ../Pinta.Tools/Tools/MoveSelectedTool.cs:46
+#: ../Pinta.Tools/Tools/MoveSelectedTool.cs:45
 #, csharp-format
 msgid ""
 "Left click and drag the selection to move selected content.\n"
@@ -1103,7 +1103,7 @@ msgstr ""
 "Adım adım döndürmek için Shift'i basılı tutun.\n"
 "Seçili içeriği tek bir piksel taşımak için ok tuşlarını kullanın."
 
-#: ../Pinta.Tools/Tools/MoveSelectionTool.cs:45
+#: ../Pinta.Tools/Tools/MoveSelectionTool.cs:44
 #, csharp-format
 msgid ""
 "Left click and drag the selection to move selection outline.\n"
@@ -1119,7 +1119,7 @@ msgstr ""
 "Seçim anahattını tek bir piksel taşımak için ok tuşlarını kullanın."
 
 #. Translators: {0} is 'Ctrl', or a platform-specific key such as 'Command' on macOS.
-#: ../Pinta.Tools/Tools/ShapeTool.cs:48
+#: ../Pinta.Tools/Tools/ShapeTool.cs:49
 #, csharp-format
 msgid ""
 "Left click to draw a shape with the primary color.\n"
@@ -1153,7 +1153,7 @@ msgstr ""
 "tıklarken {0} tuşunu basılı tutun.\n"
 "Şekli sonlandırmak için Enter tuşuna basın."
 
-#: ../Pinta.Tools/Tools/PencilTool.cs:50
+#: ../Pinta.Tools/Tools/PencilTool.cs:51
 msgid ""
 "Left click to draw freeform one-pixel wide lines with the primary color.\n"
 "Right click to use the secondary color."
@@ -1162,7 +1162,7 @@ msgstr ""
 "kullanın.\n"
 "İkincil rengi kullanmak için Sağ tıkı kullanın."
 
-#: ../Pinta.Tools/Tools/FreeformShapeTool.cs:54
+#: ../Pinta.Tools/Tools/FreeformShapeTool.cs:53
 #: ../Pinta.Tools/Tools/PaintBrushTool.cs:58
 msgid ""
 "Left click to draw with primary color, right click to draw with secondary "
@@ -1177,7 +1177,7 @@ msgstr ""
 "Silindiğinde transparan olması için sol tıklayarak, ikincil rengin görünmesi "
 "için sağ tıklayarak silin. "
 
-#: ../Pinta.Tools/Tools/PaintBucketTool.cs:45
+#: ../Pinta.Tools/Tools/PaintBucketTool.cs:46
 msgid ""
 "Left click to fill a region with the primary color, right click to fill with "
 "the secondary color."
@@ -1185,7 +1185,7 @@ msgstr ""
 "Bölgeyi birincil renkle doldurmak için sol, ikincil renk ile doldurmak için "
 "sağ tıklayın."
 
-#: ../Pinta.Tools/Tools/TextTool.cs:91
+#: ../Pinta.Tools/Tools/TextTool.cs:90
 msgid ""
 "Left click to place cursor, then type desired text. Text color is primary "
 "color."
@@ -1193,7 +1193,7 @@ msgstr ""
 "İşaretçiyi yerleştirmek için tıklayın ve istenen metni yazın. Metin rengi "
 "birincil renktir."
 
-#: ../Pinta.Tools/Tools/RecolorTool.cs:59
+#: ../Pinta.Tools/Tools/RecolorTool.cs:60
 msgid ""
 "Left click to replace the secondary color with the primary color.\n"
 "Right click to reverse."
@@ -1201,7 +1201,7 @@ msgstr ""
 "İkincil rengi birincil renk ile değiştirmek için Sol tıkı kullanın.\n"
 "Sağ tık ile tersine çevirin."
 
-#: ../Pinta.Tools/Tools/ColorPickerTool.cs:53
+#: ../Pinta.Tools/Tools/ColorPickerTool.cs:54
 msgid ""
 "Left click to set primary color.\n"
 "Right click to set secondary color."
@@ -1223,7 +1223,7 @@ msgstr ""
 "Birincil rengi ayarlamak için sol tıklayın. İkincil rengi ayarlamak için sağ "
 "tıklayın. Palet rengini seçmek için orta tıklayın."
 
-#: ../Pinta.Tools/Tools/ZoomTool.cs:58
+#: ../Pinta.Tools/Tools/ZoomTool.cs:59
 msgid ""
 "Left click to zoom in.\n"
 "Right click to zoom out.\n"
@@ -1262,7 +1262,7 @@ msgstr "Rengi Aç"
 msgid "Lighting"
 msgstr "Aydınlatma"
 
-#: ../Pinta.Effects/Adjustments/HueSaturationEffect.cs:67
+#: ../Pinta.Effects/Adjustments/HueSaturationEffect.cs:66
 msgid "Lightness"
 msgstr "Aydınlık"
 
@@ -1271,7 +1271,7 @@ msgstr "Aydınlık"
 msgid "Lime Lemon"
 msgstr "Misket Limonu"
 
-#: ../Pinta.Tools/Tools/LineCurveTool.cs:38
+#: ../Pinta.Tools/Tools/LineCurveTool.cs:39
 msgid "Line/Curve"
 msgstr "Çizgi/Eğri"
 
@@ -1348,11 +1348,11 @@ msgstr "Katmanı Aşağı İndir"
 msgid "Move Layer Up"
 msgstr "Katmanı Yukarı Taşı"
 
-#: ../Pinta.Tools/Tools/MoveSelectedTool.cs:42
+#: ../Pinta.Tools/Tools/MoveSelectedTool.cs:41
 msgid "Move Selected Pixels"
 msgstr "Seçili Pikselleri Taşı"
 
-#: ../Pinta.Tools/Tools/MoveSelectionTool.cs:41
+#: ../Pinta.Tools/Tools/MoveSelectionTool.cs:40
 msgid "Move Selection"
 msgstr "Seçimi Taşı"
 
@@ -1401,11 +1401,11 @@ msgstr "Parazit"
 
 #: ../Pinta.Core/Effects/UserBlendOps.cs:31
 #: ../Pinta.Tools/Brushes/PlainBrush.cs:35
-#: ../Pinta.Tools/Tools/EraserTool.cs:263 ../Pinta.Tools/Tools/TextTool.cs:249
+#: ../Pinta.Tools/Tools/EraserTool.cs:263 ../Pinta.Tools/Tools/TextTool.cs:248
 msgid "Normal"
 msgstr "Normal"
 
-#: ../Pinta.Core/Classes/BaseTool.cs:335
+#: ../Pinta.Core/Classes/BaseTool.cs:322
 msgid "Normal Blending"
 msgstr "Normal Harmanlama"
 
@@ -1413,7 +1413,7 @@ msgstr "Normal Harmanlama"
 msgid "Normal Size"
 msgstr "Normal Boyut"
 
-#: ../Pinta.Tools/Tools/TextTool.cs:250
+#: ../Pinta.Tools/Tools/TextTool.cs:249
 msgid "Normal and Outline"
 msgstr "Normal Anahat"
 
@@ -1425,11 +1425,18 @@ msgstr "Hücre Sayısı"
 msgid "Number of threads to use for rendering"
 msgstr "Görselleştirme için kullanılacak iş parçacığı sayısı"
 
-#: ../Pinta.Effects/Effects/BulgeEffect.cs:114
-#: ../Pinta.Effects/Effects/RadialBlurEffect.cs:175
-#: ../Pinta.Effects/Effects/ZoomBlurEffect.cs:148
+#: ../Pinta.Effects/Effects/BulgeEffect.cs:112
+#: ../Pinta.Effects/Effects/RadialBlurEffect.cs:173
+#: ../Pinta.Effects/Effects/ZoomBlurEffect.cs:146
+#: ../Pinta/Dialogs/OffsetSelectionDialog.cs:55
 msgid "Offset"
 msgstr "Yerleşim"
+
+#: ../Pinta.Core/Actions/EditActions.cs:70
+#: ../Pinta/Actions/Edit/OffsetSelectionAction.cs:57
+#: ../Pinta/Dialogs/OffsetSelectionDialog.cs:41
+msgid "Offset Selection"
+msgstr ""
 
 #: ../Pinta.Effects/Effects/OilPaintingEffect.cs:23
 msgid "Oil Painting"
@@ -1439,7 +1446,7 @@ msgstr "Yağlı Boya"
 msgid "Opacity:"
 msgstr "Saydamlık:"
 
-#: ../Pinta.Core/Actions/EditActions.cs:352
+#: ../Pinta.Core/Actions/EditActions.cs:358
 #: ../Pinta.Core/Actions/FileActions.cs:56
 #: ../Pinta.Core/Actions/LayerActions.cs:166
 #: ../Pinta.Gui.Addins/AddinManagerDialog.cs:197
@@ -1464,11 +1471,11 @@ msgstr "Bir Görüntü Dosyası Aç"
 msgid "Open Line/Curve Series"
 msgstr "Açık Çizgi/Eğri Serileri"
 
-#: ../Pinta.Core/Actions/EditActions.cs:349
+#: ../Pinta.Core/Actions/EditActions.cs:355
 msgid "Open Palette File"
 msgstr "Palet Dosyası Aç"
 
-#: ../Pinta.Core/Actions/EditActions.cs:72
+#: ../Pinta.Core/Actions/EditActions.cs:74
 #: ../Pinta.Core/Actions/FileActions.cs:48
 msgid "Open..."
 msgstr "Aç..."
@@ -1482,16 +1489,16 @@ msgid "Original"
 msgstr "Özgün"
 
 #: ../Pinta.Effects/Effects/OutlineEffect.cs:26
-#: ../Pinta.Tools/Tools/TextTool.cs:251
+#: ../Pinta.Tools/Tools/TextTool.cs:250
 msgid "Outline"
 msgstr "Anahat"
 
 #: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:293
-#: ../Pinta.Tools/Tools/FreeformShapeTool.cs:222
+#: ../Pinta.Tools/Tools/FreeformShapeTool.cs:221
 msgid "Outline Shape"
 msgstr "Anahat Şekli"
 
-#: ../Pinta.Tools/Tools/TextTool.cs:265
+#: ../Pinta.Tools/Tools/TextTool.cs:264
 msgid "Outline width"
 msgstr "Anahat genişliği"
 
@@ -1507,11 +1514,11 @@ msgstr "Çkış Histogram"
 msgid "Overlay"
 msgstr "Kaplama"
 
-#: ../Pinta.Core/Classes/BaseTool.cs:336
+#: ../Pinta.Core/Classes/BaseTool.cs:323
 msgid "Overwrite"
 msgstr "Üzerine yaz"
 
-#: ../Pinta.Tools/Tools/PaintBucketTool.cs:43
+#: ../Pinta.Tools/Tools/PaintBucketTool.cs:44
 msgid "Paint Bucket"
 msgstr "Boya Kovası"
 
@@ -1519,36 +1526,36 @@ msgstr "Boya Kovası"
 msgid "Paintbrush"
 msgstr "Boya fırçası"
 
-#: ../Pinta.Core/Actions/EditActions.cs:136
+#: ../Pinta.Core/Actions/EditActions.cs:141
 #: ../Pinta.Effects/Effects/DitheringEffect.cs:136
 msgid "Palette"
 msgstr "Palet"
 
-#: ../Pinta.Core/Actions/EditActions.cs:356
+#: ../Pinta.Core/Actions/EditActions.cs:362
 msgid "Palette files"
 msgstr "Palet dosyaları"
 
-#: ../Pinta.Tools/Tools/PanTool.cs:39
+#: ../Pinta.Tools/Tools/PanTool.cs:40
 #: ../Pinta/Actions/Layers/RotateZoomLayerAction.cs:118
 msgid "Pan"
 msgstr "Kaydırma"
 
-#: ../Pinta.Core/Actions/EditActions.cs:63
+#: ../Pinta.Core/Actions/EditActions.cs:64
 #: ../Pinta.Core/HistoryItems/PasteHistoryItem.cs:38
 #: ../Pinta/Actions/Edit/PasteAction.cs:87
 msgid "Paste"
 msgstr "Yapıştır"
 
-#: ../Pinta.Core/Actions/EditActions.cs:65
+#: ../Pinta.Core/Actions/EditActions.cs:66
 msgid "Paste Into New Image"
 msgstr "Yeni Görüntü Dosyasına Yapıştır"
 
-#: ../Pinta.Core/Actions/EditActions.cs:64
+#: ../Pinta.Core/Actions/EditActions.cs:65
 #: ../Pinta/Actions/Edit/PasteAction.cs:87
 msgid "Paste Into New Layer"
 msgstr "Yeni Katmana Yapıştır"
 
-#: ../Pinta.Tools/Tools/PencilTool.cs:47
+#: ../Pinta.Tools/Tools/PencilTool.cs:48
 msgid "Pencil"
 msgstr "Kalem"
 
@@ -1556,11 +1563,11 @@ msgstr "Kalem"
 msgid "Pencil Sketch"
 msgstr "Kalemle Eskiz"
 
-#: ../Pinta.Effects/Effects/PencilSketchEffect.cs:86
+#: ../Pinta.Effects/Effects/PencilSketchEffect.cs:84
 msgid "Pencil Tip Size"
 msgstr "Kalem Ucu Büyüklüğü"
 
-#: ../Pinta.Effects/Effects/MedianEffect.cs:67
+#: ../Pinta.Effects/Effects/MedianEffect.cs:65
 msgid "Percentile"
 msgstr "Yüzdelik Değer"
 
@@ -1645,7 +1652,7 @@ msgstr "Nokta Eklendi"
 msgid "Point Deleted"
 msgstr "Nokta Silindi"
 
-#: ../Pinta.Effects/Effects/PolarInversionEffect.cs:21
+#: ../Pinta.Effects/Effects/PolarInversionEffect.cs:22
 msgid "Polar Inversion"
 msgstr "Ters Çevirme"
 
@@ -1688,8 +1695,8 @@ msgid "Print"
 msgstr "Yazdır"
 
 #: ../Pinta.Effects/Effects/JuliaFractalEffect.cs:169
-#: ../Pinta.Effects/Effects/MandelbrotFractalEffect.cs:187
-#: ../Pinta.Effects/Effects/RadialBlurEffect.cs:178
+#: ../Pinta.Effects/Effects/MandelbrotFractalEffect.cs:185
+#: ../Pinta.Effects/Effects/RadialBlurEffect.cs:176
 #: ../Pinta.Effects/Effects/WarpEffect.cs:181
 msgid "Quality"
 msgstr "Kalite"
@@ -1714,11 +1721,11 @@ msgstr "Dairesel Bulanıklaştırma"
 msgid "Radial Gradient"
 msgstr "Işınsal Renk Geçişi"
 
-#: ../Pinta.Effects/Effects/GaussianBlurEffect.cs:248
-#: ../Pinta.Effects/Effects/GlowEffect.cs:78
-#: ../Pinta.Effects/Effects/MedianEffect.cs:64
-#: ../Pinta.Effects/Effects/ReduceNoiseEffect.cs:91
-#: ../Pinta.Effects/Effects/UnfocusEffect.cs:96
+#: ../Pinta.Effects/Effects/GaussianBlurEffect.cs:246
+#: ../Pinta.Effects/Effects/GlowEffect.cs:76
+#: ../Pinta.Effects/Effects/MedianEffect.cs:62
+#: ../Pinta.Effects/Effects/ReduceNoiseEffect.cs:89
+#: ../Pinta.Effects/Effects/UnfocusEffect.cs:94
 #: ../Pinta.Tools/Editable/EditEngines/RoundedLineEditEngine.cs:88
 msgid "Radius"
 msgstr "Yarıçap"
@@ -1730,7 +1737,7 @@ msgstr "Rastgele"
 
 #: ../Pinta.Effects/Effects/CloudsEffect.cs:253
 #: ../Pinta.Effects/Effects/JuliaFractalEffect.cs:181
-#: ../Pinta.Effects/Effects/MandelbrotFractalEffect.cs:203
+#: ../Pinta.Effects/Effects/MandelbrotFractalEffect.cs:201
 msgid "Random Color Scheme Seed"
 msgstr "Rastgele Renk Düzeni Tohumu"
 
@@ -1740,7 +1747,7 @@ msgstr "Rastgele Renkler"
 
 #: ../Pinta.Effects/Effects/AddNoiseEffect.cs:176
 #: ../Pinta.Effects/Effects/CloudsEffect.cs:244
-#: ../Pinta.Effects/Effects/FrostedGlassEffect.cs:154
+#: ../Pinta.Effects/Effects/FrostedGlassEffect.cs:152
 msgid "Random Noise"
 msgstr "Rastgele Parazit"
 
@@ -1748,15 +1755,15 @@ msgstr "Rastgele Parazit"
 msgid "Random Point Locations"
 msgstr "Rastgele Nokta Konumları"
 
-#: ../Pinta.Tools/Tools/RecolorTool.cs:56
+#: ../Pinta.Tools/Tools/RecolorTool.cs:57
 msgid "Recolor"
 msgstr "Tekrar renklendir"
 
-#: ../Pinta.Tools/Tools/RectangleTool.cs:38
+#: ../Pinta.Tools/Tools/RectangleTool.cs:39
 msgid "Rectangle"
 msgstr "Dikdörtgen"
 
-#: ../Pinta.Tools/Tools/RectangleSelectTool.cs:35
+#: ../Pinta.Tools/Tools/RectangleSelectTool.cs:36
 msgid "Rectangle Select"
 msgstr "Dikdörtgen Seçim"
 
@@ -1773,7 +1780,7 @@ msgstr "Kırmızı  "
 msgid "Red Eye Removal"
 msgstr "Kırmızı Göz Kaldırma"
 
-#: ../Pinta.Core/Actions/EditActions.cs:59
+#: ../Pinta.Core/Actions/EditActions.cs:60
 msgid "Redo"
 msgstr "Yinele"
 
@@ -1793,7 +1800,7 @@ msgstr "Yenile"
 msgid "Released under the MIT X11 License."
 msgstr "MIT X11 Lisansı altında dağıtılmaktadır."
 
-#: ../Pinta.Effects/Effects/ReliefEffect.cs:42
+#: ../Pinta.Effects/Effects/ReliefEffect.cs:40
 msgid "Relief"
 msgstr "Kabartma"
 
@@ -1833,7 +1840,7 @@ msgstr "Yeniden Tohumla"
 msgid "Reset"
 msgstr "Sıfırla"
 
-#: ../Pinta.Core/Actions/EditActions.cs:74
+#: ../Pinta.Core/Actions/EditActions.cs:76
 msgid "Reset to Default"
 msgstr "Öntanımlı Değere Sıfırla"
 
@@ -1861,7 +1868,7 @@ msgstr "Paleti Yeniden Boyutlandır"
 
 #: ../Pinta.Effects/Effects/CloudsEffect.cs:256
 #: ../Pinta.Effects/Effects/JuliaFractalEffect.cs:184
-#: ../Pinta.Effects/Effects/MandelbrotFractalEffect.cs:206
+#: ../Pinta.Effects/Effects/MandelbrotFractalEffect.cs:204
 msgid "Reverse Color Scheme"
 msgstr "Renk Düzenini Tersine Çevir"
 
@@ -1870,7 +1877,7 @@ msgstr "Renk Düzenini Tersine Çevir"
 msgid "Reverse Color Sorting"
 msgstr "Renk Sıralamasını Tersine Çevir"
 
-#: ../Pinta.Tools/Tools/TextTool.cs:226
+#: ../Pinta.Tools/Tools/TextTool.cs:225
 msgid "Right Align"
 msgstr "Sağa Hizalı"
 
@@ -1898,7 +1905,7 @@ msgstr "Saat Yönünde 90° Çevir"
 msgid "Rotate 90° Counter-Clockwise"
 msgstr "Saat Yönünün Tersinde 90° Çevir"
 
-#: ../Pinta.Effects/Effects/FragmentEffect.cs:120
+#: ../Pinta.Effects/Effects/FragmentEffect.cs:118
 #: ../Pinta.Effects/Effects/TileEffect.cs:174
 msgid "Rotation"
 msgstr "Döndürme"
@@ -1911,7 +1918,7 @@ msgstr "Yuvarlanmış Çizgi Serileri"
 msgid "Rounded Line Shape"
 msgstr "Yuvarlatılmış Çizgi Şekli"
 
-#: ../Pinta.Tools/Tools/RoundedRectangleTool.cs:38
+#: ../Pinta.Tools/Tools/RoundedRectangleTool.cs:39
 msgid "Rounded Rectangle"
 msgstr "Dairesel Dikdörtgen"
 
@@ -1923,20 +1930,20 @@ msgstr "Cetvel Birimi"
 msgid "Rulers"
 msgstr "Cetvel"
 
-#: ../Pinta.Tools/Tools/ColorPickerTool.cs:194
+#: ../Pinta.Tools/Tools/ColorPickerTool.cs:195
 msgid "Sampling"
 msgstr "Örnekliyor"
 
 #: ../Pinta.Core/Effects/UserBlendOps.cs:46
-#: ../Pinta.Effects/Adjustments/HueSaturationEffect.cs:64
+#: ../Pinta.Effects/Adjustments/HueSaturationEffect.cs:63
 msgid "Saturation"
 msgstr "Doygunluk"
 
-#: ../Pinta.Effects/Effects/RedEyeRemoveEffect.cs:58
+#: ../Pinta.Effects/Effects/RedEyeRemoveEffect.cs:56
 msgid "Saturation Percentage"
 msgstr "Doygunluk Yüzdesi"
 
-#: ../Pinta.Core/Actions/EditActions.cs:393
+#: ../Pinta.Core/Actions/EditActions.cs:399
 #: ../Pinta.Core/Actions/FileActions.cs:51
 #: ../Pinta/Actions/File/SaveDocumentImplementationAction.cs:73
 msgid "Save"
@@ -1946,7 +1953,7 @@ msgstr "Kaydet"
 msgid "Save All"
 msgstr "Tümünü Kaydet"
 
-#: ../Pinta.Core/Actions/EditActions.cs:73
+#: ../Pinta.Core/Actions/EditActions.cs:75
 #: ../Pinta.Core/Actions/FileActions.cs:52
 msgid "Save As..."
 msgstr "Farklı Kaydet..."
@@ -1955,7 +1962,7 @@ msgstr "Farklı Kaydet..."
 msgid "Save Image File"
 msgstr "Görüntü Dosyasını Kaydet"
 
-#: ../Pinta.Core/Actions/EditActions.cs:390
+#: ../Pinta.Core/Actions/EditActions.cs:396
 msgid "Save Palette File"
 msgstr "Palet Dosyasını Kaydet"
 
@@ -1978,8 +1985,8 @@ msgstr "Ekran"
 msgid "Secondary"
 msgstr "İkincil"
 
-#: ../Pinta.Core/Actions/EditActions.cs:69
-#: ../Pinta.Core/Actions/EditActions.cs:215
+#: ../Pinta.Core/Actions/EditActions.cs:71
+#: ../Pinta.Core/Actions/EditActions.cs:221
 msgid "Select All"
 msgstr "Tümünü Seç"
 
@@ -1991,7 +1998,7 @@ msgstr "Seçilen Renkler"
 msgid "Sepia"
 msgstr "Sepya"
 
-#: ../Pinta.Core/Actions/EditActions.cs:75
+#: ../Pinta.Core/Actions/EditActions.cs:77
 msgid "Set Number of Colors"
 msgstr "Renk Numaraları"
 
@@ -2031,7 +2038,7 @@ msgstr "Sierra"
 msgid "Sierra Lite"
 msgstr "Sierra Lite"
 
-#: ../Pinta.Tools/Tools/ColorPickerTool.cs:221
+#: ../Pinta.Tools/Tools/ColorPickerTool.cs:222
 msgid "Single Pixel"
 msgstr "Tek Piksel"
 
@@ -2067,7 +2074,7 @@ msgstr "Kareler"
 msgid "Status Bar"
 msgstr "Durum Çubuğu"
 
-#: ../Pinta.Effects/Effects/ReduceNoiseEffect.cs:94
+#: ../Pinta.Effects/Effects/ReduceNoiseEffect.cs:92
 msgid "Strength"
 msgstr "Güçlülük"
 
@@ -2083,23 +2090,23 @@ msgstr "Stucki"
 msgid "Stylize"
 msgstr "Stilize et"
 
-#: ../Pinta.Tools/Tools/ColorPickerTool.cs:204
+#: ../Pinta.Tools/Tools/ColorPickerTool.cs:205
 msgid "Switch to Pencil tool"
 msgstr "Kalem aracına geçin"
 
-#: ../Pinta.Tools/Tools/ColorPickerTool.cs:203
+#: ../Pinta.Tools/Tools/ColorPickerTool.cs:204
 msgid "Switch to previous tool"
 msgstr "Önceki araca geç"
 
-#: ../Pinta.Tools/Tools/TextTool.cs:85
+#: ../Pinta.Tools/Tools/TextTool.cs:84
 msgid "Text"
 msgstr "Metin"
 
-#: ../Pinta.Tools/Tools/TextTool.cs:86
+#: ../Pinta.Tools/Tools/TextTool.cs:85
 msgid "Text - Finalize"
 msgstr "Metin - Sonlandır"
 
-#: ../Pinta.Tools/Tools/TextTool.cs:240
+#: ../Pinta.Tools/Tools/TextTool.cs:239
 msgid "Text Style"
 msgstr "Yazı Stili"
 
@@ -2172,7 +2179,7 @@ msgstr ""
 "Kaldırılacak önceki uzantı paketlerine bağımlı olan başka uzantı paketleri "
 "var:"
 
-#: ../Pinta.Effects/Effects/OutlineEffect.cs:138
+#: ../Pinta.Effects/Effects/OutlineEffect.cs:136
 msgid "Thickness"
 msgstr "Kalınlık"
 
@@ -2188,9 +2195,9 @@ msgstr "Döşeme Boyutu"
 msgid "Tip: Right-click to remove control points."
 msgstr "Öneri : Denetim noktalarını kaldırmak için sağ tıklayın."
 
-#: ../Pinta.Effects/Effects/RedEyeRemoveEffect.cs:54
-#: ../Pinta.Tools/Tools/FloodTool.cs:125
-#: ../Pinta.Tools/Tools/RecolorTool.cs:196
+#: ../Pinta.Effects/Effects/RedEyeRemoveEffect.cs:52
+#: ../Pinta.Tools/Tools/FloodTool.cs:124
+#: ../Pinta.Tools/Tools/RecolorTool.cs:197
 msgid "Tolerance"
 msgstr "Tolerans"
 
@@ -2241,11 +2248,11 @@ msgstr "İki Sıralı Sierra"
 msgid "Type"
 msgstr "Tür"
 
-#: ../Pinta.Tools/Tools/TextTool.cs:186
+#: ../Pinta.Tools/Tools/TextTool.cs:185
 msgid "Underline"
 msgstr "Altı çizili"
 
-#: ../Pinta.Core/Actions/EditActions.cs:58
+#: ../Pinta.Core/Actions/EditActions.cs:59
 msgid "Undo"
 msgstr "Geri Al"
 
@@ -2289,7 +2296,7 @@ msgstr "Güncelle..."
 msgid "Updates"
 msgstr "Güncelleştirmeler"
 
-#: ../Pinta.Effects/Effects/RadialBlurEffect.cs:179
+#: ../Pinta.Effects/Effects/RadialBlurEffect.cs:177
 msgid ""
 "Use low quality for previews, small images, and small angles.  Use high "
 "quality for final quality, large images, and large angles."
@@ -2380,8 +2387,8 @@ msgstr ""
 "olabilir."
 
 #: ../Pinta.Effects/Effects/JuliaFractalEffect.cs:172
-#: ../Pinta.Effects/Effects/MandelbrotFractalEffect.cs:191
-#: ../Pinta.Tools/Tools/ZoomTool.cs:55
+#: ../Pinta.Effects/Effects/MandelbrotFractalEffect.cs:189
+#: ../Pinta.Tools/Tools/ZoomTool.cs:56
 #: ../Pinta/Actions/Layers/RotateZoomLayerAction.cs:121
 msgid "Zoom"
 msgstr "Büyüt"
@@ -2491,7 +2498,7 @@ msgstr ""
 "Oğuz Ersen"
 
 #. Translators: {0} is 'Ctrl', or a platform-specific key such as 'Command' on macOS.
-#: ../Pinta.Tools/Tools/CloneStampTool.cs:46
+#: ../Pinta.Tools/Tools/CloneStampTool.cs:47
 #, csharp-format
 msgid "{0} + left click to set origin, left click to paint."
 msgstr "merkezini ayarlamak için {0} + sol tık , boyamak için sol tık."
