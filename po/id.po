@@ -8,16 +8,17 @@ msgstr ""
 "Project-Id-Version: pinta\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2024-03-17 01:09+0000\n"
-"PO-Revision-Date: 2023-04-08 15:22+0000\n"
-"Last-Translator: Rizal Muttaqin <Unknown>\n"
-"Language-Team: Indonesian <permataharahap@gmail.com>\n"
+"PO-Revision-Date: 2024-03-24 08:01+0000\n"
+"Last-Translator: Rizal Muttaqin <riz_17_oke@yahoo.co.id>\n"
+"Language-Team: Indonesian <https://hosted.weblate.org/projects/pinta/pinta/"
+"id/>\n"
 "Language: id\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=1; plural=0;\n"
+"X-Generator: Weblate 5.5-dev\n"
 "X-Launchpad-Export-Date: 2023-12-18 03:00+0000\n"
-"X-Generator: Launchpad (build e1eeab5b20e19239bd7d5f36676f7a52988db88b)\n"
 "X-Poedit-Country: INDONESIA\n"
 "X-Poedit-Language: Indonesian\n"
 
@@ -74,7 +75,7 @@ msgstr "Tambah derau"
 
 #: ../Pinta.Core/Actions/AddinActions.cs:38
 msgid "Add-in Manager..."
-msgstr ""
+msgstr "Pengelola Pengaya..."
 
 #: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:799
 msgid "Added"
@@ -82,7 +83,7 @@ msgstr "Ditambah"
 
 #: ../Pinta/MainWindow.cs:382
 msgid "Adjustments"
-msgstr ""
+msgstr "Penyesuaian"
 
 #: ../Pinta.Tools/Tools/ColorPickerTool.cs:194
 msgid "After select"
@@ -160,7 +161,7 @@ msgstr "Auto-Level"
 #: ../Pinta.Gui.Addins/AddinInfoView.cs:143
 #, csharp-format
 msgid "Available in repository: {0}"
-msgstr ""
+msgstr "Tersedia di lumbung: {0}"
 
 #: ../Pinta.Core/Managers/WorkspaceManager.cs:176
 msgid "Background"
