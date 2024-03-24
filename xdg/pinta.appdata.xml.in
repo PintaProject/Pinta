@@ -6,14 +6,14 @@
   <name>Pinta</name>
   <summary>Edit images and paint digitally</summary>
   <description>
-    <_p>
+    <p>
       Pinta is a image editing, drawing and painting application with a simple
       yet powerful interface.
       Pinta has a wide range of drawing tools, including: freehand, rectangles,
       circles and lines.
       It also has over 35 effects to apply to your images, and also has the
       ability to create unlimited layers to help organize your creativity.
-    </_p>
+    </p>
   </description>
   <launchable type="desktop-id">pinta.desktop</launchable>
   <kudos>
@@ -66,25 +66,14 @@
           <li>The File -&gt; New Screenshot command now uses the XDG screenshot portal if available. This fixes issues with taking screenshots under Wayland (#218, #1955841)</li>
           <li>Improved canvas rendering performance (#209, #210)</li>
           <li>Added support for loading files from virtual filesystems such as Google Drive mounts (#215, #1958763)</li>
-          <li>Improved support for <code>.ora</code> files<ul>
-              <li>Hidden layers are now round-tripped correctly for <code>.ora</code> files (#1377566)</li>
-              <li>When saving a <code>.ora</code> file, a flattened image (<code>mergedimage.png</code>) is now included in the archive. This is required by the spec to accommodate viewer software (#1377566)</li>
-            </ul>
-          </li>
-          <li>Image or palette files that have an unknown extension but have valid contents can now be loaded (#1679570)<ul>
-              <li>The file dialog also now uses MIME types on Linux and macOS, allowing valid image files with unknown extensions to be included in the image file filter (#216)</li>
-            </ul>
-          </li>
+          <li>Improved support for <code>.ora</code> files</li>
+          <li>Hidden layers are now round-tripped correctly for <code>.ora</code> files (#1377566)</li>
+          <li>When saving a <code>.ora</code> file, a flattened image (<code>mergedimage.png</code>) is now included in the archive. This is required by the spec to accommodate viewer software (#1377566)</li>
+          <li>Image or palette files that have an unknown extension but have valid contents can now be loaded (#1679570). The file dialog also now uses MIME types on Linux and macOS, allowing valid image files with unknown extensions to be included in the image file filter (#216)</li>
           <li>Updated the application icon (#220)</li>
-          <li>WebP support<ul>
-              <li>For Linux users, webp-pixbuf-loader is now a suggested dependency to enable WebP support in Pinta</li>
-              <li><code>webp-pixbuf-loader</code> is now included with the macOS package for WebP support</li>
-            </ul>
-          </li>
-          <li>Upgraded to .NET 7<ul>
-              <li>Building against .NET 6 (LTS) is still supported. When building from the tarball, .NET 6 will be used if .NET 7 is unavailable</li>
-            </ul>
-          </li>
+          <li>For Linux users, webp-pixbuf-loader is now a suggested dependency to enable WebP support in Pinta</li>
+          <li><code>webp-pixbuf-loader</code> is now included with the macOS package for WebP support</li>
+          <li>Upgraded to .NET 7. Building against .NET 6 (LTS) is still supported. When building from the tarball, .NET 6 will be used if .NET 7 is unavailable</li>
         </ul>
         <p>Changes</p>
         <ul>
