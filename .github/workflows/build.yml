@@ -94,6 +94,9 @@ jobs:
 
   build-windows:
     runs-on: windows-2022
+    defaults:
+      run:
+        shell: msys2 {0}
 
     steps:
     - uses: actions/checkout@v3
@@ -102,12 +105,18 @@ jobs:
       uses: actions/setup-dotnet@v3
       with:
         dotnet-version: ${{env.DOTNET_VERSION}}
+    - name: Install dependencies
+      uses: msys2/setup-msys2@v2
+      with:
+        path-type: inherit # Inherit the path so that dotnet can be found
+        update: true
+        install: mingw-w64-x86_64-gettext
+
     - name: Build
       run: dotnet build Pinta.sln -c Release
     - name: Test
       run: dotnet test Pinta.sln -c Release
 
-    # Note that msgfmt is already available from the Git for Windows installation!
     - name: Build Installer
       run: |
         choco install innosetup -y -v
