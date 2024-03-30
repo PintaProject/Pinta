@@ -92,7 +92,7 @@ public sealed class PaintBrushTool : BaseBrushTool
 		if (active_brush is null)
 			return;
 
-		if (mouse_button is not MouseButton.Left or MouseButton.Right) {
+		if (mouse_button is not (MouseButton.Left or MouseButton.Right)) {
 			last_point = point_empty;
 			return;
 		}
