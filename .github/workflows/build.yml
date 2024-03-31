@@ -43,7 +43,7 @@ jobs:
     - name: Install Apt Dependencies
       run: |
         sudo apt update
-        sudo apt install autotools-dev autoconf-archive gettext intltool libadwaita-1-dev
+        sudo apt install autotools-dev autoconf-archive gettext libadwaita-1-dev
     - name: Generate Tarball
       run: |
         ./autogen.sh
@@ -127,9 +127,9 @@ jobs:
         update: true
         install: mingw-w64-x86_64-libadwaita
     - name: Build
-      run: dotnet build Pinta.sln -c Release -p:MinGWFolder=${MINGW_PREFIX} 
+      run: dotnet build Pinta.sln -c Release -p:MinGWFolder=${MINGW_PREFIX}
     - name: Test
-      run: dotnet test Pinta.sln -c Release -p:MinGWFolder=${MINGW_PREFIX} 
+      run: dotnet test Pinta.sln -c Release -p:MinGWFolder=${MINGW_PREFIX}
 
     # Note that msgfmt is already available from the Git for Windows installation!
     - name: Build Installer

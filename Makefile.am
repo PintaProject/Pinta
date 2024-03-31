@@ -1,5 +1,5 @@
-SUBDIRS = xdg
-DIST_SUBDIRS = xdg
+SUBDIRS = po xdg
+DIST_SUBDIRS = $(SUBDIRS)
 
 BUILDDIR = $(srcdir)/build
 BINDIR = $(BUILDDIR)/bin
@@ -79,9 +79,7 @@ updatepotfiles:
 
 #target: updatepot - update the messages.pot file
 updatepot:
-	cd po && intltool-update -m && intltool-update -p --gettext-package=messages
-	cat po/messages.in >> po/messages.pot
-	cat po/messages.pot | msguniq -s -o po/messages.pot
+	cd po && $(MAKE) messages.pot-update
 
 # target: clean - Default clean command: cleanobj and cleanbin
 clean-local: cleanobj cleanbin
@@ -112,18 +110,10 @@ releasezip:
 	cd $(abs_srcdir)/release && zip -r ../$(RELEASE_FILE).zip * -x "*.pdb"
 
 EXTRA_DIST = Pinta Pinta.Core Pinta.Docking Pinta.Effects Pinta.Gui.Addins Pinta.Gui.Widgets Pinta.Resources Pinta.Tools po xdg tests license-mit.txt \
-           license-pdn.txt Pinta.sln pinta.pc.in readme.md intltool-extract.in \
-           intltool-merge.in intltool-update.in installer/linux/install.proj Directory.Build.props Directory.Packages.props
+           license-pdn.txt Pinta.sln pinta.pc.in readme.md \
+           installer/linux/install.proj Directory.Build.props Directory.Packages.props
 
-CLEANFILES = intltool-extract \
-	     intltool-update \
-	     intltool-merge \
-	     intltool-extract.in \
-	     intltool-update.in \
-	     intltool-merge.in
-
-DISTCLEANFILES = po/.intltool-merge-cache \
-		 po/Makefile \
+DISTCLEANFILES = po/Makefile \
 		 po/Makefile.in \
 		 po/Makefile
 

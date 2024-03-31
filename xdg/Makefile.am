@@ -1,12 +1,16 @@
 desktopdir 	 = $(datadir)/applications
 desktop_in_files = pinta.desktop.in
 desktop_DATA 	 = $(desktop_in_files:.desktop.in=.desktop)
-@INTLTOOL_DESKTOP_RULE@
+
+%.desktop: %.desktop.in
+	msgfmt --desktop -d $(top_srcdir)/po --template $< -o $@
 
 appdatadir = $(datadir)/metainfo
 appdata_in_files = pinta.appdata.xml.in
 appdata_DATA = $(appdata_in_files:.xml.in=.xml)
-@INTLTOOL_XML_RULE@
+
+%.appdata.xml: %.appdata.xml.in
+	msgfmt --xml -d $(top_srcdir)/po --template $< -o $@
 
 man_MANS = pinta.1
 

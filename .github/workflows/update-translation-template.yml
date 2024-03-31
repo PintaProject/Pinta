@@ -29,7 +29,7 @@ jobs:
       - name: Install Apt Dependencies
         run: |
           sudo apt update
-          sudo apt install autotools-dev autoconf-archive gettext intltool libadwaita-1-dev
+          sudo apt install autotools-dev autoconf-archive gettext libadwaita-1-dev
       - name: Update translation template
         run: |
           ./autogen.sh

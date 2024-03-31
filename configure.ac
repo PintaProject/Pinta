@@ -30,14 +30,12 @@ DOTNET_CMD="env TargetFramework=$DOTNET_TARGET_FRAMEWORK $DOTNET"
 
 AC_SUBST(DOTNET_CMD)
 
-AC_PROG_INTLTOOL([0.35.0], [no-xml])
 GETTEXT_PACKAGE=pinta
 AC_SUBST(GETTEXT_PACKAGE)
 AC_DEFINE_UNQUOTED(GETTEXT_PACKAGE, "$GETTEXT_PACKAGE")
 
-# Note: also need to update installer/macos/Info.plist when adding a language.
-ALL_LINGUAS="af ar ast az be bg bn br bs ca cs da de dv el en_AU en_CA en_GB eo es et eu fa fi fil fo fr ga gl he hi hr hu hy id ie it ja ka kab ko la lt lv ms my nb nl nn oc pl pt pt_BR ro ru si sk sl sq sr sv th tr uk vi zh_CN zh_HK zh_TW"
-AM_GLIB_GNU_GETTEXT
+AM_GNU_GETTEXT([external])
+AM_GNU_GETTEXT_REQUIRE_VERSION([0.19.7])
 
 pintalocaledir='${prefix}/${DATADIRNAME}/locale'
 AC_SUBST(pintalocaledir)
