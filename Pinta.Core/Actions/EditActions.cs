@@ -86,7 +86,7 @@ public sealed class EditActions
 		app.AddAccelAction (Undo, "<Primary>Z");
 		menu.AppendItem (Undo.CreateMenuItem ());
 
-		app.AddAccelAction (Redo, new[] { "<Primary><Shift>Z", "<Ctrl>Y" });
+		app.AddAccelAction (Redo, ["<Primary><Shift>Z", "<Ctrl>Y"]);
 		menu.AppendItem (Redo.CreateMenuItem ());
 
 		var paste_section = Gio.Menu.New ();
@@ -107,7 +107,8 @@ public sealed class EditActions
 		app.AddAccelAction (PasteIntoNewLayer, "<Primary><Shift>V");
 		paste_section.AppendItem (PasteIntoNewLayer.CreateMenuItem ());
 
-		app.AddAccelAction (PasteIntoNewImage, "<Primary><Alt>V");
+		// Note: <Ctrl><Alt>V shortcut doesn't seem to work on Windows & macOS (bug 2047921). 
+		app.AddAccelAction (PasteIntoNewImage, ["<Shift>V", "<Primary><Alt>V"]);
 		paste_section.AppendItem (PasteIntoNewImage.CreateMenuItem ());
 
 		var sel_section = Gio.Menu.New ();
@@ -116,7 +117,7 @@ public sealed class EditActions
 		app.AddAccelAction (SelectAll, "<Primary>A");
 		sel_section.AppendItem (SelectAll.CreateMenuItem ());
 
-		app.AddAccelAction (Deselect, new[] { "<Primary><Shift>A", "<Ctrl>D" });
+		app.AddAccelAction (Deselect, ["<Primary><Shift>A", "<Ctrl>D"]);
 		sel_section.AppendItem (Deselect.CreateMenuItem ());
 
 		var edit_sel_section = Gio.Menu.New ();
