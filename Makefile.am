@@ -79,7 +79,9 @@ updatepotfiles:
 
 #target: updatepot - update the messages.pot file
 updatepot:
-	cd po && $(MAKE) messages.pot-update
+	cd po && $(MAKE) pinta.pot-update
+	cat po/messages.in >> po/pinta.pot
+	cat po/pinta.pot | msguniq -s -o po/pinta.pot
 
 # target: clean - Default clean command: cleanobj and cleanbin
 clean-local: cleanobj cleanbin

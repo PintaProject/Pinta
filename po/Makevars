@@ -6,7 +6,7 @@
 
 # Usually the message domain is the same as the package name, but we use
 # 'messages' rather than 'pinta' ...
-DOMAIN = messages
+DOMAIN = pinta
 
 # These two variables depend on the location of this directory.
 subdir = po
