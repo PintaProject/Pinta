@@ -1,11 +1,11 @@
 <Project>
   <PropertyGroup>
     <!-- The target framework can be set with an environment variable of the same name -->
-    <TargetFramework Condition=" '$(TargetFramework)' == '' ">net7.0</TargetFramework>
+    <TargetFramework Condition=" '$(TargetFramework)' == '' ">net8.0</TargetFramework>
     <Nullable>enable</Nullable>
 
     <!-- Versioning and assembly info -->
-    <Version>2.1.1.0</Version>
+    <Version>2.1.2.0</Version>
     <Authors>PintaProject</Authors>
     <Company />
     <Product />
