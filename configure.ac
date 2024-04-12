@@ -1,5 +1,5 @@
 dnl Process this file with autoconf to produce a configure script.
-AC_INIT([pinta], [2.1.2])
+AC_INIT([pinta], [2.1.1])
 AM_INIT_AUTOMAKE([tar-ustar foreign])
 
 AC_PROG_INSTALL
@@ -14,7 +14,7 @@ if test "x$DOTNET" = "xno"; then
 fi
 
 # Check dotnet version
-DOTNET_MINIMUM_VERSION=8.0
+DOTNET_MINIMUM_VERSION=6.0
 DOTNET_VERSION=$($DOTNET --version)
 AX_COMPARE_VERSION([$DOTNET_VERSION], [ge], [$DOTNET_MINIMUM_VERSION],
     AC_MSG_NOTICE([Found dotnet $DOTNET_VERSION]),
@@ -22,7 +22,7 @@ AX_COMPARE_VERSION([$DOTNET_VERSION], [ge], [$DOTNET_MINIMUM_VERSION],
 )
 
 # Select target framework based on the dotnet version.
-DOTNET_TARGET_FRAMEWORK=net8.0
+DOTNET_TARGET_FRAMEWORK=net6.0
 AX_COMPARE_VERSION([$DOTNET_VERSION], [ge], [8.0],
                    [DOTNET_TARGET_FRAMEWORK=net8.0], [])
 AC_MSG_NOTICE([Using target framework $DOTNET_TARGET_FRAMEWORK])

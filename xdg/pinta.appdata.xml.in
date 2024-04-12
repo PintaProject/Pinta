@@ -38,8 +38,8 @@
     <binary>pinta</binary>
   </provides>
   <releases>
-    <release version="2.1.2" date="2024-04-05">
-      <url>https://github.com/PintaProject/Pinta/releases/tag/2.1.2</url>
+    <release version="2.1.1" date="2023-02-26">
+      <url>https://github.com/PintaProject/Pinta/releases/tag/2.1.1</url>
       <description>
         <p>Changes</p>
         <ul>
