@@ -100,6 +100,18 @@
                     <string>public.ora</string>
                 </array>
             </dict>
+            <dict>
+                <key>CFBundleTypeIconFile</key>
+                <string>pinta.icns</string>
+                <key>CFBundleTypeName</key>
+                <string>WEBP</string>
+                <key>CFBundleTypeRole</key>
+                <string>Editor</string>
+                <key>LSItemContentTypes</key>
+                <array>
+                    <string>org.webmproject.webp</string>
+                </array>
+            </dict>
         </array>
 	<key>CFBundleDevelopmentRegion</key>
 	<string>English</string>
