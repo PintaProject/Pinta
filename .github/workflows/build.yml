@@ -78,7 +78,7 @@ jobs:
       with:
         dotnet-version: ${{env.DOTNET_VERSION}}
     - name: Install Dependencies
-      run: brew install libadwaita adwaita-icon-theme gettext
+      run: brew install libadwaita adwaita-icon-theme gettext webp-pixbuf-loader
     - name: Build
       run: dotnet build Pinta.sln -c Release
     - name: Test
@@ -127,9 +127,9 @@ jobs:
         update: true
         install: mingw-w64-x86_64-libadwaita
     - name: Build
-      run: dotnet build Pinta.sln -c Release -p:MinGWFolder=${MINGW_PREFIX} 
+      run: dotnet build Pinta.sln -c Release -p:MinGWFolder=${MINGW_PREFIX}
     - name: Test
-      run: dotnet test Pinta.sln -c Release -p:MinGWFolder=${MINGW_PREFIX} 
+      run: dotnet test Pinta.sln -c Release -p:MinGWFolder=${MINGW_PREFIX}
 
     # Note that msgfmt is already available from the Git for Windows installation!
     - name: Build Installer
