@@ -14,17 +14,18 @@ PREFIX = "/usr/local"
 GTK_LIB = "/usr/local/lib/libadwaita-1.0.dylib"
 RSVG_LIB = "/usr/local/lib/librsvg-2.2.dylib"
 TIFF_LIB = "/usr/local/lib/libtiff.6.dylib"
-WEBP_LIB = "/usr/local/lib/libwebp.7.dylib"
 WEBP_DEMUX_LIB = "/usr/local/lib/libwebpdemux.2.dylib"
 WEBP_MUX_LIB = "/usr/local/lib/libwebpmux.3.dylib"
-WEBP_SHARPYUV_LIB = "/usr/local/lib/libsharpyuv.0.dylib"
-ROOT_LIBS = [GTK_LIB, RSVG_LIB, TIFF_LIB, WEBP_LIB, WEBP_DEMUX_LIB, WEBP_MUX_LIB, WEBP_SHARPYUV_LIB]
+ROOT_LIBS = [GTK_LIB, RSVG_LIB, TIFF_LIB, WEBP_DEMUX_LIB, WEBP_MUX_LIB]
 
 ADWAITA_THEME = "/usr/local/share/icons/Adwaita/index.theme"
 PIXBUF_LOADERS = "lib/gdk-pixbuf-2.0/2.10.0"
 GLIB_SCHEMAS = "share/glib-2.0/schemas"
 
-OTOOL_LIB_REGEX = re.compile("(/usr/local/.*\.dylib)") # Ignore system libraries.
+# Match against non-system libraries
+OTOOL_LIB_REGEX = re.compile(r"(/usr/local/.*\.dylib)")
+# Match against relative paths (webp and related libraries)
+OTOOL_REL_LIB_REGEX = re.compile(r"@rpath/(lib.*\.dylib)")
 
 
 def run_install_name_tool(lib, deps, lib_install_dir):
@@ -34,9 +35,13 @@ def run_install_name_tool(lib, deps, lib_install_dir):
     # Run install_name_tool to fix up the absolute paths to the library
     # dependencies.
     for dep_path in deps:
+        dep_path_basename = os.path.basename(dep_path)
         dep_lib_name = os.path.basename(os.path.realpath(dep_path))
         dep_lib = "@executable_path/../Resources/lib/" + dep_lib_name
-        cmd = ['install_name_tool', '-change', dep_path, dep_lib, lib]
+        cmd = ['install_name_tool',
+               '-change', dep_path, dep_lib,
+               '-change', f"@rpath/{dep_path_basename}", dep_lib, # For libraries like webp
+               lib]
         subprocess.check_output(cmd)
 
 
@@ -47,6 +52,11 @@ def collect_libs(src_lib, lib_deps):
     cmd = ['otool', '-L', src_lib]
     output = subprocess.check_output(cmd).decode('utf-8')
     referenced_paths = re.findall(OTOOL_LIB_REGEX, output)
+
+    folder = os.path.dirname(src_lib)
+    referenced_paths.extend([os.path.join(folder, lib)
+                            for lib in re.findall(OTOOL_REL_LIB_REGEX, output)])
+
     real_lib_paths = set([os.path.realpath(lib) for lib in referenced_paths])
 
     lib_deps[src_lib] = referenced_paths
