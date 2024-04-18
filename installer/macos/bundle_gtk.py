@@ -14,7 +14,8 @@ PREFIX = "/usr/local"
 GTK_LIB = "/usr/local/lib/libadwaita-1.0.dylib"
 RSVG_LIB = "/usr/local/lib/librsvg-2.2.dylib"
 TIFF_LIB = "/usr/local/lib/libtiff.6.dylib"
-ROOT_LIBS = [GTK_LIB, RSVG_LIB, TIFF_LIB]
+WEBP_LIB = "/usr/local/lib/libwebp.7.dylib"
+ROOT_LIBS = [GTK_LIB, RSVG_LIB, TIFF_LIB, WEBP_LIB]
 
 ADWAITA_THEME = "/usr/local/share/icons/Adwaita/index.theme"
 PIXBUF_LOADERS = "lib/gdk-pixbuf-2.0/2.10.0"
