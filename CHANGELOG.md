@@ -9,11 +9,12 @@ Thanks to the following contributors who worked on this release:
 ### Added
 
 ### Changed
-- Support building against .NET 8 (replacing .NET 7) in addition to .NET 6.
+- Support building against .NET 8 (replacing .NET 7) in addition to .NET 6
 
 ### Fixed
-- Fixed AppStream validation errors in `xdg/pinta.appdata.xml`.
+- Fixed AppStream validation errors in `xdg/pinta.appdata.xml`
 - Fixed issues where the system language settings on macOS did not properly take effect in Pinta ([#1976178](https://bugs.launchpad.net/pinta/+bug/1976178))
+- Fixed issues on macOS with loading webp images (#770)
 
 ## [2.1.1](https://github.com/PintaProject/Pinta/releases/tag/2.1.1) - 2023/02/26
 
