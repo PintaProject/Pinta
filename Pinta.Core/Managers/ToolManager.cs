@@ -129,7 +129,7 @@ public sealed class ToolManager : IEnumerable<BaseTool>, IToolService
 			// Can we set it back to the previous tool?
 			if (PreviousTool is not null && PreviousTool != CurrentTool)
 				SetCurrentTool (PreviousTool);
-			else if (tools.Any ())  // Any tool?
+			else if (tools.Count != 0)  // Any tool?
 				SetCurrentTool (tools.First ());
 			else {
 				// There are no tools left.
@@ -227,7 +227,7 @@ public sealed class ToolManager : IEnumerable<BaseTool>, IToolService
 		var shortcut_tools = tools.Where (t => t.ShortcutKey.ToUpper () == shortcut.ToUpper ()).ToList ();
 
 		// No tools with this shortcut, bail
-		if (!shortcut_tools.Any ())
+		if (shortcut_tools.Count == 0)
 			return null;
 
 		// Only one option, return it

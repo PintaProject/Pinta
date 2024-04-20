@@ -182,7 +182,7 @@ internal sealed class InstallDialog : Adw.Window
 		foreach (string id in addins_to_remove)
 			dependents.UnionWith (service.GetDependentAddins (id, true));
 
-		dependencies_heading_label.Visible = dependencies_label.Visible = dependents.Any ();
+		dependencies_heading_label.Visible = dependencies_label.Visible = dependents.Count != 0;
 
 		if (dependents.Count == 0)
 			return;
@@ -204,7 +204,7 @@ internal sealed class InstallDialog : Adw.Window
 			error_label.SetLabel (string.Join (Environment.NewLine, error_reporter.Errors));
 
 		warning_heading_label.Visible = false;
-		warning_label.Visible = error_reporter.Warnings.Any ();
+		warning_label.Visible = error_reporter.Warnings.Count != 0;
 		if (warning_label.Visible)
 			warning_label.SetLabel (string.Join (Environment.NewLine, error_reporter.Warnings));
 
@@ -264,7 +264,7 @@ internal sealed class InstallDialog : Adw.Window
 		error_reporter.Clear ();
 		progress_bar.ShowProgress ();
 
-		if (addins_to_remove.Any ())
+		if (addins_to_remove.Count != 0)
 			await Uninstall ();
 		else
 			await Install ();
@@ -279,14 +279,14 @@ internal sealed class InstallDialog : Adw.Window
 		uninstall_heading_label.Visible = uninstall_label.Visible = false;
 		dependencies_heading_label.Visible = dependencies_label.Visible = false;
 
-		error_heading_label.Visible = error_label.Visible = error_reporter.Errors.Any ();
+		error_heading_label.Visible = error_label.Visible = error_reporter.Errors.Count != 0;
 
 		if (error_label.Visible) {
 			error_label.SetLabel (string.Join (Environment.NewLine, error_reporter.Errors));
 			return;
 		}
 
-		warning_heading_label.Visible = warning_label.Visible = error_reporter.Warnings.Any ();
+		warning_heading_label.Visible = warning_label.Visible = error_reporter.Warnings.Count != 0;
 
 		if (warning_label.Visible)
 			warning_label.SetLabel (string.Join (Environment.NewLine, error_reporter.Warnings));
