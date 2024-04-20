@@ -38,6 +38,21 @@
     <binary>pinta</binary>
   </provides>
   <releases>
+    <release version="2.1.2" date="2024-04-20">
+      <url>https://github.com/PintaProject/Pinta/releases/tag/2.1.2</url>
+      <description>
+        <p>Changes</p>
+        <ul>
+          <li>Support building against .NET 8 (replacing .NET 7) in addition to .NET 6</li>
+        </ul>
+        <p>Bug Fixes</p>
+        <ul>
+            <li>Fixed AppStream validation errors in `xdg/pinta.appdata.xml`</li>
+            <li>Fixed issues where the system language settings on macOS did not properly take effect in Pinta (#1976178)</li>
+            <li>Fixed issues on macOS with loading webp images (#770)</li>
+        </ul>
+      </description>
+    </release>
     <release version="2.1.1" date="2023-02-26">
       <url>https://github.com/PintaProject/Pinta/releases/tag/2.1.1</url>
       <description>

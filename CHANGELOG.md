@@ -1,7 +1,18 @@
 # Change Log
 All notable changes to this project (beginning with version 1.7) will be documented in this file.
 
-## [Unreleased](https://github.com/PintaProject/Pinta/compare/2.1.1...HEAD)
+## [Unreleased](https://github.com/PintaProject/Pinta/compare/2.1.2...HEAD)
+
+Thanks to the following contributors who worked on this release:
+- @cameronwhite
+
+### Added
+
+### Changed
+
+### Fixed
+
+## [2.1.2](https://github.com/PintaProject/Pinta/releases/tag/2.1.2) - 2024/04/20
 
 Thanks to the following contributors who worked on this release:
 - @cameronwhite
