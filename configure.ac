@@ -13,6 +13,11 @@ if test "x$DOTNET" = "xno"; then
     AC_MSG_ERROR([No dotnet runtime found])
 fi
 
+# Provide a more useful error message if AX_COMPARE_VERSION is not found.
+m4_ifndef([AX_COMPARE_VERSION],
+          [AC_MSG_ERROR[AX_COMPARE_VERSION macro not found. You may need to install the 'autoconf-archive' package])]
+)
+
 # Check dotnet version
 DOTNET_MINIMUM_VERSION=7.0
 DOTNET_VERSION=$($DOTNET --version)
