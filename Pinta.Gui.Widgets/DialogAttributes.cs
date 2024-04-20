@@ -16,12 +16,12 @@ using System;
 namespace Pinta.Gui.Widgets;
 
 [AttributeUsage (AttributeTargets.Field | AttributeTargets.Property, Inherited = false)]
-public class SkipAttribute : Attribute
+public sealed class SkipAttribute : Attribute
 {
 }
 
 [AttributeUsage (AttributeTargets.Field | AttributeTargets.Property, Inherited = false)]
-public class CaptionAttribute : Attribute
+public sealed class CaptionAttribute : Attribute
 {
 	public CaptionAttribute (string caption) => Caption = caption;
 
@@ -29,7 +29,7 @@ public class CaptionAttribute : Attribute
 }
 
 [AttributeUsage (AttributeTargets.Field | AttributeTargets.Property, Inherited = false)]
-public class DigitsValueAttribute : Attribute
+public sealed class DigitsValueAttribute : Attribute
 {
 	public DigitsValueAttribute (int value) => Value = value;
 
@@ -37,7 +37,7 @@ public class DigitsValueAttribute : Attribute
 }
 
 [AttributeUsage (AttributeTargets.Field | AttributeTargets.Property, Inherited = false)]
-public class IncrementValueAttribute : Attribute
+public sealed class IncrementValueAttribute : Attribute
 {
 	public IncrementValueAttribute (double value) => Value = value;
 
@@ -45,7 +45,7 @@ public class IncrementValueAttribute : Attribute
 }
 
 [AttributeUsage (AttributeTargets.Field | AttributeTargets.Property, Inherited = false)]
-public class MinimumValueAttribute : Attribute
+public sealed class MinimumValueAttribute : Attribute
 {
 	public MinimumValueAttribute (int value) => Value = value;
 
@@ -53,7 +53,7 @@ public class MinimumValueAttribute : Attribute
 }
 
 [AttributeUsage (AttributeTargets.Field | AttributeTargets.Property, Inherited = false)]
-public class MaximumValueAttribute : Attribute
+public sealed class MaximumValueAttribute : Attribute
 {
 	public MaximumValueAttribute (int value) => Value = value;
 
@@ -61,7 +61,7 @@ public class MaximumValueAttribute : Attribute
 }
 
 [AttributeUsage (AttributeTargets.Field | AttributeTargets.Property, Inherited = false)]
-public class HintAttribute : Attribute
+public sealed class HintAttribute : Attribute
 {
 	public HintAttribute (string caption) => Hint = caption;
 
@@ -69,7 +69,7 @@ public class HintAttribute : Attribute
 }
 
 [AttributeUsage (AttributeTargets.Field | AttributeTargets.Property, Inherited = false)]
-public class StaticListAttribute : Attribute
+public sealed class StaticListAttribute : Attribute
 {
 	public StaticListAttribute (string dict) => DictionaryName = dict;
 
