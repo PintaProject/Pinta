@@ -127,34 +127,15 @@ public sealed class SimpleEffectDialog : Gtk.Dialog
 			.GetCustomAttributes<Attribute> (false)
 			.ToImmutableArray ();
 
-		string? caption = null;
-		string? hint = null;
-		bool skip = false;
-		bool combo = false;
-		foreach (var attr in attrs) {
-			switch (attr) {
-				case SkipAttribute:
-					skip = true;
-					break;
-				case CaptionAttribute captionAttr:
-					caption = captionAttr.Caption;
-					break;
-				case HintAttribute hintAttr:
-					hint = hintAttr.Hint;
-					break;
-				case StaticListAttribute:
-					combo = true;
-					break;
-			}
-		}
+		string? caption = attrs.OfType<CaptionAttribute> ().Select (h => h.Caption).FirstOrDefault ();
 
 		return new (
 			mi: mi,
 			mType: GetTypeForMember (mi),
 			caption: caption ?? MakeCaption (mi.Name),
-			hint: hint,
-			skip: skip,
-			combo: combo,
+			hint: attrs.OfType<HintAttribute> ().Select (h => h.Hint).FirstOrDefault (),
+			skip: attrs.OfType<SkipAttribute> ().Any (),
+			combo: attrs.OfType<StaticListAttribute> ().Any (),
 			attrs: attrs);
 	}
 
@@ -261,34 +242,12 @@ public sealed class SimpleEffectDialog : Gtk.Dialog
 
 	private HScaleSpinButtonWidget CreateDoubleSlider (string caption, EffectData effectData, MemberSettings settings)
 	{
-		int min_value = -100;
-		int max_value = 100;
-		double increment_value = 0.01;
-		int digits_value = 2;
-
-		foreach (var attr in settings.attrs) {
-			switch (attr) {
-				case MinimumValueAttribute min:
-					min_value = min.Value;
-					break;
-				case MaximumValueAttribute max:
-					max_value = max.Value;
-					break;
-				case IncrementValueAttribute inc:
-					increment_value = inc.Value;
-					break;
-				case DigitsValueAttribute digits:
-					digits_value = digits.Value;
-					break;
-			}
-		}
-
 		var widget = new HScaleSpinButtonWidget {
 			Label = caption,
-			MinimumValue = min_value,
-			MaximumValue = max_value,
-			IncrementValue = increment_value,
-			DigitsValue = digits_value,
+			MinimumValue = settings.attrs.OfType<MinimumValueAttribute> ().Select (m => m.Value).FirstOrDefault (-100),
+			MaximumValue = settings.attrs.OfType<MaximumValueAttribute> ().Select (m => m.Value).FirstOrDefault (100),
+			IncrementValue = settings.attrs.OfType<IncrementValueAttribute> ().Select (i => i.Value).FirstOrDefault (0.01),
+			DigitsValue = settings.attrs.OfType<DigitsValueAttribute> ().Select (d => d.Value).FirstOrDefault (2),
 		};
 
 		if (GetValue (settings.mi, effectData) is double d)
@@ -306,34 +265,12 @@ public sealed class SimpleEffectDialog : Gtk.Dialog
 
 	private HScaleSpinButtonWidget CreateSlider (string caption, EffectData effectData, MemberSettings settings)
 	{
-		int min_value = -100;
-		int max_value = 100;
-		double inc_value = 1.0;
-		int digits_value = 0;
-
-		foreach (var attr in settings.attrs) {
-			switch (attr) {
-				case MinimumValueAttribute min:
-					min_value = min.Value;
-					break;
-				case MaximumValueAttribute max:
-					max_value = max.Value;
-					break;
-				case IncrementValueAttribute inc:
-					inc_value = inc.Value;
-					break;
-				case DigitsValueAttribute digits:
-					digits_value = digits.Value;
-					break;
-			}
-		}
-
 		var widget = new HScaleSpinButtonWidget {
 			Label = caption,
-			MinimumValue = min_value,
-			MaximumValue = max_value,
-			IncrementValue = inc_value,
-			DigitsValue = digits_value,
+			MinimumValue = settings.attrs.OfType<MinimumValueAttribute> ().Select (m => m.Value).FirstOrDefault (-100),
+			MaximumValue = settings.attrs.OfType<MaximumValueAttribute> ().Select (m => m.Value).FirstOrDefault (100),
+			IncrementValue = settings.attrs.OfType<IncrementValueAttribute> ().Select (i => i.Value).FirstOrDefault (1.0),
+			DigitsValue = settings.attrs.OfType<DigitsValueAttribute> ().Select (d => d.Value).FirstOrDefault (0),
 		};
 
 		if (GetValue (settings.mi, effectData) is int i)
@@ -413,23 +350,21 @@ public sealed class SimpleEffectDialog : Gtk.Dialog
 
 	private ReseedButtonWidget CreateSeed (string caption, EffectData effectData, MemberSettings settings)
 	{
+		int min_value = settings.attrs.OfType<MinimumValueAttribute> ().Select (m => m.Value).FirstOrDefault (0);
+		int max_value = settings.attrs.OfType<MaximumValueAttribute> ().Select (m => m.Value).FirstOrDefault (int.MaxValue - 1);
+
 		ReseedButtonWidget widget = new () { Label = caption };
 		Random random = new ();
-
-		int min_value = 0;
-		int max_value = int.MaxValue - 1;
-		foreach (var attr in settings.attrs) {
-			switch (attr) {
-				case MinimumValueAttribute min:
-					min_value = min.Value;
-					break;
-				case MaximumValueAttribute max:
-					max_value = max.Value;
-					break;
-			}
-		}
-
-		widget.Clicked += (_, _) => SetValue (settings.mi, effectData, new RandomSeed (random.Next (min_value, max_value)));
+		widget.Clicked += (_, _) => SetValue (
+			settings.mi,
+			effectData,
+			new RandomSeed (
+				random.Next (
+					min_value,
+					max_value
+				)
+			)
+		);
 		return widget;
 	}
 
