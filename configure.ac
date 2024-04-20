@@ -15,7 +15,7 @@ fi
 
 # Provide a more useful error message if AX_COMPARE_VERSION is not found.
 m4_ifndef([AX_COMPARE_VERSION],
-          [AC_MSG_ERROR[AX_COMPARE_VERSION macro not found. You may need to install the 'autoconf-archive' package])]
+          [AC_MSG_ERROR([AX_COMPARE_VERSION macro not found. You may need to install the 'autoconf-archive' package])]
 )
 
 # Check dotnet version
