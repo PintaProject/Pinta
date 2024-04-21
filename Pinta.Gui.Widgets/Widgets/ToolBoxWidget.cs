@@ -4,7 +4,7 @@ using Pinta.Core;
 
 namespace Pinta.Gui.Widgets;
 
-public sealed class ToolBoxWidget : Box
+public sealed class ToolBoxWidget : FlowBox
 {
 	public ToolBoxWidget ()
 	{
@@ -15,21 +15,19 @@ public sealed class ToolBoxWidget : Box
 		PintaCore.Tools.ToolRemoved += HandleToolRemoved;
 
 		SetOrientation (Orientation.Vertical);
-		Spacing = 0;
+		ColumnSpacing = 0;
+		RowSpacing = 0;
+		Homogeneous = true;
+		MinChildrenPerLine = 6;
+		MaxChildrenPerLine = 1024; // If there is enough vertical space, only use one column
+		Vexpand = false;
+		Valign = Align.Start;
 	}
 
 	public void AddItem (ToolBoxButton item)
 	{
 		var index = PintaCore.Tools.ToList ().IndexOf (item.Tool);
-
-		Widget? prev_widget = null;
-		if (index > 0) {
-			prev_widget = GetFirstChild ();
-			for (int i = 1; i < index; ++i)
-				prev_widget = prev_widget!.GetNextSibling ();
-		}
-
-		InsertChildAfter (item.Tool.ToolItem, prev_widget);
+		Insert (item.Tool.ToolItem, index);
 	}
 
 	public void RemoveItem (ToolBoxButton item)

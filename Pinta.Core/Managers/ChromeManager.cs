@@ -53,7 +53,7 @@ public sealed class ChromeManager : IChromeService
 
 	public Box? MainToolBar { get; private set; }
 	public Box ToolToolBar { get; private set; } = null!;
-	public Box ToolBox { get; private set; } = null!;
+	public Widget ToolBox { get; private set; } = null!;
 	public Box StatusBar { get; private set; } = null!;
 
 	public IProgressDialog ProgressDialog => progress_dialog;
@@ -114,7 +114,7 @@ public sealed class ChromeManager : IChromeService
 		StatusBar = statusbar;
 	}
 
-	public void InitializeToolBox (Box toolbox)
+	public void InitializeToolBox (Widget toolbox)
 	{
 		ToolBox = toolbox;
 	}
