@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: pinta\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2024-03-17 01:09+0000\n"
-"PO-Revision-Date: 2024-03-18 07:01+0000\n"
+"PO-Revision-Date: 2024-04-22 13:07+0000\n"
 "Last-Translator: Matthaiks <kitynska@gmail.com>\n"
 "Language-Team: Polish <https://hosted.weblate.org/projects/pinta/pinta/pl/>\n"
 "Language: pl\n"
@@ -1608,7 +1608,7 @@ msgstr "Program graficzny Pinta"
 
 #: ../Pinta.Core/Actions/HelpActions.cs:41
 msgid "Pinta Website"
-msgstr "Serwis internowy Pinty"
+msgstr "Witryna internetowa Pinty"
 
 #: ../Pinta/Actions/File/SaveDocumentImplementationAction.cs:171
 msgid "Pinta does not support saving images in this file format."
