@@ -17,7 +17,7 @@ internal sealed class MemberReflector
 	{
 		ImmutableArray<Attribute> attributes =
 			memberInfo
-			.GetCustomAttributes<Attribute> (false)yy
+			.GetCustomAttributes<Attribute> (false)
 			.ToImmutableArray ();
 
 		OriginalMemberInfo = memberInfo;
