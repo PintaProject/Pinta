@@ -438,7 +438,7 @@ public sealed class SimpleEffectDialog : Gtk.Dialog
 			}
 		);
 	}
-	
+
 }
 
 /// <summary>
