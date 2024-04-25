@@ -116,8 +116,9 @@ public sealed class SimpleEffectDialog : Gtk.Dialog
 			.GetType ()
 			.GetMembers ()
 			.Where (m => m is FieldInfo || m is PropertyInfo)
+			.Where (m => string.Compare (m.Name, nameof (EffectData.IsDefault), true) != 0)
 			.Select (CreateSettings)
-			.Where (settings => !settings.skip && string.Compare (settings.reflector.OriginalMemberInfo.Name, nameof (EffectData.IsDefault), true) != 0)
+			.Where (settings => !settings.skip)
 			.Select (settings => GetMemberWidgets (settings, effectData, localizer))
 			.SelectMany (widgets => widgets);
 
