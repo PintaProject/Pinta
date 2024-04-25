@@ -2,10 +2,10 @@ using System;
 using System.Collections.Immutable;
 using System.Reflection;
 
-namespace Pinta.Gui.Widgets;
+using Setter = System.Action<object, object>;
+using Getter = System.Func<object, object?>;
 
-using Setter = Action<object, object>;
-using Getter = Func<object, object?>;
+namespace Pinta.Gui.Widgets;
 
 internal sealed class MemberReflector
 {
