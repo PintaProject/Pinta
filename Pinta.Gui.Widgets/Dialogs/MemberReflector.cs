@@ -1,9 +1,11 @@
 using System;
 using System.Collections.Immutable;
-using System.Linq;
 using System.Reflection;
 
 namespace Pinta.Gui.Widgets;
+
+using Setter = Action<object, object>;
+using Getter = Func<object, object?>;
 
 internal sealed class MemberReflector
 {
@@ -11,8 +13,8 @@ internal sealed class MemberReflector
 	public Type MemberType { get; }
 	public ImmutableArray<Attribute> Attributes { get; }
 
-	private readonly Func<object, object?> getter;
-	private readonly Action<object, object> setter;
+	private readonly Getter getter;
+	private readonly Setter setter;
 
 	public MemberReflector (MemberInfo memberInfo)
 	{
@@ -35,7 +37,7 @@ internal sealed class MemberReflector
 	public void SetValue (object o, object val)
 		=> setter (o, val);
 
-	private static Action<object, object> CreateSetter (MemberInfo memberInfo)
+	private static Setter CreateSetter (MemberInfo memberInfo)
 	{
 		switch (memberInfo) {
 			case FieldInfo f:
@@ -48,7 +50,7 @@ internal sealed class MemberReflector
 		}
 	}
 
-	private static Func<object, object?> CreateGetter (MemberInfo memberInfo)
+	private static Getter CreateGetter (MemberInfo memberInfo)
 	{
 		switch (memberInfo) {
 			case FieldInfo f:
