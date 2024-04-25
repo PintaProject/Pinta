@@ -21,12 +21,6 @@ internal sealed class MemberReflector
 			.GetCustomAttributes<Attribute> (false)
 			.ToImmutableArray ();
 
-		string? caption =
-			attributes
-			.OfType<CaptionAttribute> ()
-			.Select (h => h.Caption)
-			.FirstOrDefault ();
-
 		OriginalMemberInfo = memberInfo;
 		MemberType = GetTypeForMember (memberInfo);
 		Attributes = attributes;
