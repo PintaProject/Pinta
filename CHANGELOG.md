@@ -20,6 +20,7 @@ Thanks to the following contributors who worked on this release:
   - Ported the add-in manager dialog to GTK4
   - The add-in manager dialog now filters out old versions incompatible with the current version of Pinta, or new addins requiring future version of Pinta ([#1580205](https://bugs.launchpad.net/pinta/+bug/1580205))
 - Added a new "Dithering" effect (#457)
+- Added "Voronoi Diagram" effect (#692)
 - Added support for exporting to portable pixmap (`.ppm`) files (#549)
   - Importing is not supported yet.
 - Added a nearest-neighbor resampling mode when resizing images (#596)
