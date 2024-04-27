@@ -380,10 +380,10 @@ public sealed class SimpleEffectDialog : Gtk.Dialog
 		return label;
 	}
 
-	private void SetAndNotify (MemberReflector settings, object o, object val)
+	private void SetAndNotify (MemberReflector reflector, object o, object val)
 	{
-		settings.SetValue (o, val);
-		EffectDataChanged?.Invoke (this, new PropertyChangedEventArgs (settings.OriginalMemberInfo.Name));
+		reflector.SetValue (o, val);
+		EffectDataChanged?.Invoke (this, new PropertyChangedEventArgs (reflector.OriginalMemberInfo.Name));
 	}
 
 	private ReseedButtonWidget CreateSeed (string caption, EffectData effectData, MemberSettings settings)
