@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: pinta\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-03-17 01:09+0000\n"
+"POT-Creation-Date: 2024-04-28 01:12+0000\n"
 "PO-Revision-Date: 2022-02-04 18:28+0000\n"
 "Last-Translator: Adolfo Jayme Barrientos <fitoschido@gmail.com>\n"
 "Language-Team: Catalan <ca@li.org>\n"
@@ -86,7 +86,7 @@ msgstr ""
 msgid "After select"
 msgstr "Després de seleccionar"
 
-#: ../Pinta.Core/Actions/EditActions.cs:374
+#: ../Pinta.Core/Actions/EditActions.cs:375
 #: ../Pinta.Gui.Addins/AddinManagerDialog.cs:209
 #: ../Pinta/Actions/File/OpenDocumentAction.cs:83
 msgid "All files"
@@ -263,8 +263,8 @@ msgstr "Per mida absoluta:"
 msgid "By percentage:"
 msgstr "Per percentage:"
 
-#: ../Pinta.Core/Actions/EditActions.cs:359
-#: ../Pinta.Core/Actions/EditActions.cs:400
+#: ../Pinta.Core/Actions/EditActions.cs:360
+#: ../Pinta.Core/Actions/EditActions.cs:401
 #: ../Pinta.Core/Actions/LayerActions.cs:167
 #: ../Pinta.Gui.Addins/AddinManagerDialog.cs:198
 #: ../Pinta.Gui.Addins/InstallDialog.cs:117
@@ -531,7 +531,7 @@ msgid "Custom"
 msgstr "Personalitzat"
 
 #: ../Pinta.Core/Actions/EditActions.cs:61
-#: ../Pinta.Core/Actions/EditActions.cs:250
+#: ../Pinta.Core/Actions/EditActions.cs:251
 msgid "Cut"
 msgstr "Retalla"
 
@@ -562,7 +562,7 @@ msgstr "Elimina la capa"
 msgid "Deleted"
 msgstr "Suprimit"
 
-#: ../Pinta.Core/Actions/EditActions.cs:262
+#: ../Pinta.Core/Actions/EditActions.cs:263
 msgid "Deselect"
 msgstr "Desselecciona"
 
@@ -658,7 +658,7 @@ msgid "Enable additional logging or behavior changes for debugging"
 msgstr ""
 
 #: ../Pinta.Core/Actions/EditActions.cs:67
-#: ../Pinta.Core/Actions/EditActions.cs:251
+#: ../Pinta.Core/Actions/EditActions.cs:252
 msgid "Erase Selection"
 msgstr "Esborra la selecció"
 
@@ -731,7 +731,7 @@ msgid "Fill Background"
 msgstr "Omple el fons"
 
 #: ../Pinta.Core/Actions/EditActions.cs:68
-#: ../Pinta.Core/Actions/EditActions.cs:212
+#: ../Pinta.Core/Actions/EditActions.cs:213
 msgid "Fill Selection"
 msgstr "Omple la selecció"
 
@@ -1011,7 +1011,7 @@ msgid "Invert Colors"
 msgstr "Inverteix els colors"
 
 #: ../Pinta.Core/Actions/EditActions.cs:69
-#: ../Pinta.Core/Actions/EditActions.cs:452
+#: ../Pinta.Core/Actions/EditActions.cs:453
 msgid "Invert Selection"
 msgstr "Inverteix la selecció"
 
@@ -1404,7 +1404,7 @@ msgstr "Pintura a l'oli"
 msgid "Opacity:"
 msgstr "Opacitat:"
 
-#: ../Pinta.Core/Actions/EditActions.cs:358
+#: ../Pinta.Core/Actions/EditActions.cs:359
 #: ../Pinta.Core/Actions/FileActions.cs:56
 #: ../Pinta.Core/Actions/LayerActions.cs:166
 #: ../Pinta.Gui.Addins/AddinManagerDialog.cs:197
@@ -1429,7 +1429,7 @@ msgstr "Obre un fitxer d’imatge"
 msgid "Open Line/Curve Series"
 msgstr "Sèrie de línia/corba oberta"
 
-#: ../Pinta.Core/Actions/EditActions.cs:355
+#: ../Pinta.Core/Actions/EditActions.cs:356
 msgid "Open Palette File"
 msgstr "Obre el fitxer de paleta"
 
@@ -1484,12 +1484,12 @@ msgstr "Cubell de pintura"
 msgid "Paintbrush"
 msgstr "Pinzell"
 
-#: ../Pinta.Core/Actions/EditActions.cs:141
+#: ../Pinta.Core/Actions/EditActions.cs:142
 #: ../Pinta.Effects/Effects/DitheringEffect.cs:136
 msgid "Palette"
 msgstr "Paleta"
 
-#: ../Pinta.Core/Actions/EditActions.cs:362
+#: ../Pinta.Core/Actions/EditActions.cs:363
 msgid "Palette files"
 msgstr "Fitxers de paleta"
 
@@ -1900,7 +1900,7 @@ msgstr "Saturació"
 msgid "Saturation Percentage"
 msgstr "Percentatge de saturació"
 
-#: ../Pinta.Core/Actions/EditActions.cs:399
+#: ../Pinta.Core/Actions/EditActions.cs:400
 #: ../Pinta.Core/Actions/FileActions.cs:51
 #: ../Pinta/Actions/File/SaveDocumentImplementationAction.cs:73
 msgid "Save"
@@ -1919,7 +1919,7 @@ msgstr "Anomena i desa..."
 msgid "Save Image File"
 msgstr "Desa el fitxer d’imatge"
 
-#: ../Pinta.Core/Actions/EditActions.cs:396
+#: ../Pinta.Core/Actions/EditActions.cs:397
 msgid "Save Palette File"
 msgstr "Desa el fitxer de paleta"
 
@@ -1941,7 +1941,7 @@ msgid "Secondary"
 msgstr "Secundari"
 
 #: ../Pinta.Core/Actions/EditActions.cs:71
-#: ../Pinta.Core/Actions/EditActions.cs:221
+#: ../Pinta.Core/Actions/EditActions.cs:222
 msgid "Select All"
 msgstr "Selecciona-ho tot"
 

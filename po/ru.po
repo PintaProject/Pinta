@@ -7,11 +7,11 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-03-17 01:09+0000\n"
+"POT-Creation-Date: 2024-04-28 01:12+0000\n"
 "PO-Revision-Date: 2024-03-20 22:01+0000\n"
 "Last-Translator: Сергей <asvmail.as@gmail.com>\n"
-"Language-Team: Russian <https://hosted.weblate.org/projects/pinta/pinta/ru/>"
-"\n"
+"Language-Team: Russian <https://hosted.weblate.org/projects/pinta/pinta/ru/"
+">\n"
 "Language: ru\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -88,7 +88,7 @@ msgstr "Коррекция"
 msgid "After select"
 msgstr "После выбора"
 
-#: ../Pinta.Core/Actions/EditActions.cs:374
+#: ../Pinta.Core/Actions/EditActions.cs:375
 #: ../Pinta.Gui.Addins/AddinManagerDialog.cs:209
 #: ../Pinta/Actions/File/OpenDocumentAction.cs:83
 msgid "All files"
@@ -265,8 +265,8 @@ msgstr "Абсолютный размер:"
 msgid "By percentage:"
 msgstr "В процентах:"
 
-#: ../Pinta.Core/Actions/EditActions.cs:359
-#: ../Pinta.Core/Actions/EditActions.cs:400
+#: ../Pinta.Core/Actions/EditActions.cs:360
+#: ../Pinta.Core/Actions/EditActions.cs:401
 #: ../Pinta.Core/Actions/LayerActions.cs:167
 #: ../Pinta.Gui.Addins/AddinManagerDialog.cs:198
 #: ../Pinta.Gui.Addins/InstallDialog.cs:117
@@ -544,7 +544,7 @@ msgid "Custom"
 msgstr "Пользовательский"
 
 #: ../Pinta.Core/Actions/EditActions.cs:61
-#: ../Pinta.Core/Actions/EditActions.cs:250
+#: ../Pinta.Core/Actions/EditActions.cs:251
 msgid "Cut"
 msgstr "Вырезать"
 
@@ -575,7 +575,7 @@ msgstr "Удалить слой"
 msgid "Deleted"
 msgstr "Удалено"
 
-#: ../Pinta.Core/Actions/EditActions.cs:262
+#: ../Pinta.Core/Actions/EditActions.cs:263
 msgid "Deselect"
 msgstr "Сбросить выделение"
 
@@ -673,7 +673,7 @@ msgstr ""
 "для проведения отладки приложения"
 
 #: ../Pinta.Core/Actions/EditActions.cs:67
-#: ../Pinta.Core/Actions/EditActions.cs:251
+#: ../Pinta.Core/Actions/EditActions.cs:252
 msgid "Erase Selection"
 msgstr "Удалить выделение"
 
@@ -746,7 +746,7 @@ msgid "Fill Background"
 msgstr "Заливка фона"
 
 #: ../Pinta.Core/Actions/EditActions.cs:68
-#: ../Pinta.Core/Actions/EditActions.cs:212
+#: ../Pinta.Core/Actions/EditActions.cs:213
 msgid "Fill Selection"
 msgstr "Заполнить выделение"
 
@@ -1026,7 +1026,7 @@ msgid "Invert Colors"
 msgstr "Обратить цвета"
 
 #: ../Pinta.Core/Actions/EditActions.cs:69
-#: ../Pinta.Core/Actions/EditActions.cs:452
+#: ../Pinta.Core/Actions/EditActions.cs:453
 msgid "Invert Selection"
 msgstr "Обратить выделение"
 
@@ -1464,7 +1464,7 @@ msgstr "Масляные краски"
 msgid "Opacity:"
 msgstr "Непрозрачность:"
 
-#: ../Pinta.Core/Actions/EditActions.cs:358
+#: ../Pinta.Core/Actions/EditActions.cs:359
 #: ../Pinta.Core/Actions/FileActions.cs:56
 #: ../Pinta.Core/Actions/LayerActions.cs:166
 #: ../Pinta.Gui.Addins/AddinManagerDialog.cs:197
@@ -1489,7 +1489,7 @@ msgstr "Открыть файл изображения"
 msgid "Open Line/Curve Series"
 msgstr "Группа открытых геометрических фигур/кривых"
 
-#: ../Pinta.Core/Actions/EditActions.cs:355
+#: ../Pinta.Core/Actions/EditActions.cs:356
 msgid "Open Palette File"
 msgstr "Открыть файл палитры"
 
@@ -1544,12 +1544,12 @@ msgstr "Заливка"
 msgid "Paintbrush"
 msgstr "Кисть"
 
-#: ../Pinta.Core/Actions/EditActions.cs:141
+#: ../Pinta.Core/Actions/EditActions.cs:142
 #: ../Pinta.Effects/Effects/DitheringEffect.cs:136
 msgid "Palette"
 msgstr "Палитра"
 
-#: ../Pinta.Core/Actions/EditActions.cs:362
+#: ../Pinta.Core/Actions/EditActions.cs:363
 msgid "Palette files"
 msgstr "Файлы палитры"
 
@@ -1961,7 +1961,7 @@ msgstr "Насыщенность"
 msgid "Saturation Percentage"
 msgstr "Насыщенность в процентах"
 
-#: ../Pinta.Core/Actions/EditActions.cs:399
+#: ../Pinta.Core/Actions/EditActions.cs:400
 #: ../Pinta.Core/Actions/FileActions.cs:51
 #: ../Pinta/Actions/File/SaveDocumentImplementationAction.cs:73
 msgid "Save"
@@ -1980,7 +1980,7 @@ msgstr "Сохранить как..."
 msgid "Save Image File"
 msgstr "Сохранить файл изображения"
 
-#: ../Pinta.Core/Actions/EditActions.cs:396
+#: ../Pinta.Core/Actions/EditActions.cs:397
 msgid "Save Palette File"
 msgstr "Сохранить файл палитры"
 
@@ -2002,7 +2002,7 @@ msgid "Secondary"
 msgstr "Дополнительный"
 
 #: ../Pinta.Core/Actions/EditActions.cs:71
-#: ../Pinta.Core/Actions/EditActions.cs:221
+#: ../Pinta.Core/Actions/EditActions.cs:222
 msgid "Select All"
 msgstr "Выделить всё"
 

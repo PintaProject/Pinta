@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: pinta\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-03-17 01:09+0000\n"
+"POT-Creation-Date: 2024-04-28 01:12+0000\n"
 "PO-Revision-Date: 2016-06-06 03:47+0000\n"
 "Last-Translator: Tu Nguyen <minhtuvn@gmail.com>\n"
 "Language-Team: Vietnamese <vi@li.org>\n"
@@ -86,7 +86,7 @@ msgstr ""
 msgid "After select"
 msgstr "Sau khi lựa chọn"
 
-#: ../Pinta.Core/Actions/EditActions.cs:374
+#: ../Pinta.Core/Actions/EditActions.cs:375
 #: ../Pinta.Gui.Addins/AddinManagerDialog.cs:209
 #: ../Pinta/Actions/File/OpenDocumentAction.cs:83
 msgid "All files"
@@ -263,8 +263,8 @@ msgstr "Theo kích thước tuyệt đối:"
 msgid "By percentage:"
 msgstr "Theo phần trăm:"
 
-#: ../Pinta.Core/Actions/EditActions.cs:359
-#: ../Pinta.Core/Actions/EditActions.cs:400
+#: ../Pinta.Core/Actions/EditActions.cs:360
+#: ../Pinta.Core/Actions/EditActions.cs:401
 #: ../Pinta.Core/Actions/LayerActions.cs:167
 #: ../Pinta.Gui.Addins/AddinManagerDialog.cs:198
 #: ../Pinta.Gui.Addins/InstallDialog.cs:117
@@ -531,7 +531,7 @@ msgid "Custom"
 msgstr "Tùy chỉnh"
 
 #: ../Pinta.Core/Actions/EditActions.cs:61
-#: ../Pinta.Core/Actions/EditActions.cs:250
+#: ../Pinta.Core/Actions/EditActions.cs:251
 msgid "Cut"
 msgstr "Cắt"
 
@@ -562,7 +562,7 @@ msgstr "Xoá bỏ lớp"
 msgid "Deleted"
 msgstr "Bị xóa"
 
-#: ../Pinta.Core/Actions/EditActions.cs:262
+#: ../Pinta.Core/Actions/EditActions.cs:263
 msgid "Deselect"
 msgstr "Bỏ chọn"
 
@@ -658,7 +658,7 @@ msgid "Enable additional logging or behavior changes for debugging"
 msgstr ""
 
 #: ../Pinta.Core/Actions/EditActions.cs:67
-#: ../Pinta.Core/Actions/EditActions.cs:251
+#: ../Pinta.Core/Actions/EditActions.cs:252
 msgid "Erase Selection"
 msgstr "Xóa vùng chọn"
 
@@ -731,7 +731,7 @@ msgid "Fill Background"
 msgstr "Tô nền"
 
 #: ../Pinta.Core/Actions/EditActions.cs:68
-#: ../Pinta.Core/Actions/EditActions.cs:212
+#: ../Pinta.Core/Actions/EditActions.cs:213
 msgid "Fill Selection"
 msgstr "Đổ màu vùng chọn"
 
@@ -1011,7 +1011,7 @@ msgid "Invert Colors"
 msgstr "Đảo màu"
 
 #: ../Pinta.Core/Actions/EditActions.cs:69
-#: ../Pinta.Core/Actions/EditActions.cs:452
+#: ../Pinta.Core/Actions/EditActions.cs:453
 msgid "Invert Selection"
 msgstr "Đảo vùng chọn"
 
@@ -1398,7 +1398,7 @@ msgstr "Tranh sơn dầu"
 msgid "Opacity:"
 msgstr "Độ đục:"
 
-#: ../Pinta.Core/Actions/EditActions.cs:358
+#: ../Pinta.Core/Actions/EditActions.cs:359
 #: ../Pinta.Core/Actions/FileActions.cs:56
 #: ../Pinta.Core/Actions/LayerActions.cs:166
 #: ../Pinta.Gui.Addins/AddinManagerDialog.cs:197
@@ -1423,7 +1423,7 @@ msgstr "Mở tệp hình ảnh"
 msgid "Open Line/Curve Series"
 msgstr "Loạt Đường thẳng / Đường cong mở"
 
-#: ../Pinta.Core/Actions/EditActions.cs:355
+#: ../Pinta.Core/Actions/EditActions.cs:356
 msgid "Open Palette File"
 msgstr "Mở tệp bảng màu"
 
@@ -1478,12 +1478,12 @@ msgstr "Xô sơn"
 msgid "Paintbrush"
 msgstr "Bút vẽ"
 
-#: ../Pinta.Core/Actions/EditActions.cs:141
+#: ../Pinta.Core/Actions/EditActions.cs:142
 #: ../Pinta.Effects/Effects/DitheringEffect.cs:136
 msgid "Palette"
 msgstr "Bảng màu"
 
-#: ../Pinta.Core/Actions/EditActions.cs:362
+#: ../Pinta.Core/Actions/EditActions.cs:363
 msgid "Palette files"
 msgstr ""
 
@@ -1889,7 +1889,7 @@ msgstr "Độ bão hòa"
 msgid "Saturation Percentage"
 msgstr "Phần trăm độ bão hòa"
 
-#: ../Pinta.Core/Actions/EditActions.cs:399
+#: ../Pinta.Core/Actions/EditActions.cs:400
 #: ../Pinta.Core/Actions/FileActions.cs:51
 #: ../Pinta/Actions/File/SaveDocumentImplementationAction.cs:73
 msgid "Save"
@@ -1908,7 +1908,7 @@ msgstr "Lưu như là..."
 msgid "Save Image File"
 msgstr "Lưu tệp hình ảnh"
 
-#: ../Pinta.Core/Actions/EditActions.cs:396
+#: ../Pinta.Core/Actions/EditActions.cs:397
 msgid "Save Palette File"
 msgstr "Lưu tệp bảng màu"
 
@@ -1930,7 +1930,7 @@ msgid "Secondary"
 msgstr "Phụ"
 
 #: ../Pinta.Core/Actions/EditActions.cs:71
-#: ../Pinta.Core/Actions/EditActions.cs:221
+#: ../Pinta.Core/Actions/EditActions.cs:222
 msgid "Select All"
 msgstr "Chọn Tất cả"
 

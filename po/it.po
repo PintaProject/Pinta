@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: pinta\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-03-17 01:09+0000\n"
+"POT-Creation-Date: 2024-04-28 01:12+0000\n"
 "PO-Revision-Date: 2024-02-14 11:01+0000\n"
 "Last-Translator: ytkdg 0w8 <ytkdg0w8@duck.com>\n"
 "Language-Team: Italian <https://hosted.weblate.org/projects/pinta/pinta/it/"
@@ -87,7 +87,7 @@ msgstr "Regolazioni"
 msgid "After select"
 msgstr "Dopo la selezione"
 
-#: ../Pinta.Core/Actions/EditActions.cs:374
+#: ../Pinta.Core/Actions/EditActions.cs:375
 #: ../Pinta.Gui.Addins/AddinManagerDialog.cs:209
 #: ../Pinta/Actions/File/OpenDocumentAction.cs:83
 msgid "All files"
@@ -264,8 +264,8 @@ msgstr "In dimensioni assolute:"
 msgid "By percentage:"
 msgstr "In percentuale:"
 
-#: ../Pinta.Core/Actions/EditActions.cs:359
-#: ../Pinta.Core/Actions/EditActions.cs:400
+#: ../Pinta.Core/Actions/EditActions.cs:360
+#: ../Pinta.Core/Actions/EditActions.cs:401
 #: ../Pinta.Core/Actions/LayerActions.cs:167
 #: ../Pinta.Gui.Addins/AddinManagerDialog.cs:198
 #: ../Pinta.Gui.Addins/InstallDialog.cs:117
@@ -539,7 +539,7 @@ msgid "Custom"
 msgstr "Personalizzata"
 
 #: ../Pinta.Core/Actions/EditActions.cs:61
-#: ../Pinta.Core/Actions/EditActions.cs:250
+#: ../Pinta.Core/Actions/EditActions.cs:251
 msgid "Cut"
 msgstr "Taglia"
 
@@ -570,7 +570,7 @@ msgstr "Elimina livello"
 msgid "Deleted"
 msgstr "Cancellato"
 
-#: ../Pinta.Core/Actions/EditActions.cs:262
+#: ../Pinta.Core/Actions/EditActions.cs:263
 msgid "Deselect"
 msgstr "Deseleziona"
 
@@ -667,7 +667,7 @@ msgstr ""
 "Attiva registrazione aggiuntiva o modifiche al comportamento per il debug"
 
 #: ../Pinta.Core/Actions/EditActions.cs:67
-#: ../Pinta.Core/Actions/EditActions.cs:251
+#: ../Pinta.Core/Actions/EditActions.cs:252
 msgid "Erase Selection"
 msgstr "Elimina la selezione"
 
@@ -740,7 +740,7 @@ msgid "Fill Background"
 msgstr "Riempi Sfondo"
 
 #: ../Pinta.Core/Actions/EditActions.cs:68
-#: ../Pinta.Core/Actions/EditActions.cs:212
+#: ../Pinta.Core/Actions/EditActions.cs:213
 msgid "Fill Selection"
 msgstr "Riempi selezione"
 
@@ -1020,7 +1020,7 @@ msgid "Invert Colors"
 msgstr "Inverti i colori"
 
 #: ../Pinta.Core/Actions/EditActions.cs:69
-#: ../Pinta.Core/Actions/EditActions.cs:452
+#: ../Pinta.Core/Actions/EditActions.cs:453
 msgid "Invert Selection"
 msgstr "Inverti la selezione"
 
@@ -1452,7 +1452,7 @@ msgstr "Pittura ad olio"
 msgid "Opacity:"
 msgstr "Opacità:"
 
-#: ../Pinta.Core/Actions/EditActions.cs:358
+#: ../Pinta.Core/Actions/EditActions.cs:359
 #: ../Pinta.Core/Actions/FileActions.cs:56
 #: ../Pinta.Core/Actions/LayerActions.cs:166
 #: ../Pinta.Gui.Addins/AddinManagerDialog.cs:197
@@ -1477,7 +1477,7 @@ msgstr "Apri immagine"
 msgid "Open Line/Curve Series"
 msgstr "Linee aperte/Curve"
 
-#: ../Pinta.Core/Actions/EditActions.cs:355
+#: ../Pinta.Core/Actions/EditActions.cs:356
 msgid "Open Palette File"
 msgstr "Apri la Tavolozza"
 
@@ -1532,12 +1532,12 @@ msgstr "Secchiello"
 msgid "Paintbrush"
 msgstr "Pennello"
 
-#: ../Pinta.Core/Actions/EditActions.cs:141
+#: ../Pinta.Core/Actions/EditActions.cs:142
 #: ../Pinta.Effects/Effects/DitheringEffect.cs:136
 msgid "Palette"
 msgstr "Tavolozza"
 
-#: ../Pinta.Core/Actions/EditActions.cs:362
+#: ../Pinta.Core/Actions/EditActions.cs:363
 msgid "Palette files"
 msgstr "Tavolozze"
 
@@ -1950,7 +1950,7 @@ msgstr "Saturazione"
 msgid "Saturation Percentage"
 msgstr "Percentuale di saturazione"
 
-#: ../Pinta.Core/Actions/EditActions.cs:399
+#: ../Pinta.Core/Actions/EditActions.cs:400
 #: ../Pinta.Core/Actions/FileActions.cs:51
 #: ../Pinta/Actions/File/SaveDocumentImplementationAction.cs:73
 msgid "Save"
@@ -1969,7 +1969,7 @@ msgstr "Salva con nome..."
 msgid "Save Image File"
 msgstr "Salva immagine"
 
-#: ../Pinta.Core/Actions/EditActions.cs:396
+#: ../Pinta.Core/Actions/EditActions.cs:397
 msgid "Save Palette File"
 msgstr "Salva la Tavolozza"
 
@@ -1991,7 +1991,7 @@ msgid "Secondary"
 msgstr "Secondario"
 
 #: ../Pinta.Core/Actions/EditActions.cs:71
-#: ../Pinta.Core/Actions/EditActions.cs:221
+#: ../Pinta.Core/Actions/EditActions.cs:222
 msgid "Select All"
 msgstr "Seleziona Tutto"
 

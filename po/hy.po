@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: pinta\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-03-17 01:09+0000\n"
+"POT-Creation-Date: 2024-04-28 01:12+0000\n"
 "PO-Revision-Date: 2011-03-30 16:17+0000\n"
 "Last-Translator: Jonathan Pobst <Unknown>\n"
 "Language-Team: Armenian <hy@li.org>\n"
@@ -86,7 +86,7 @@ msgstr ""
 msgid "After select"
 msgstr ""
 
-#: ../Pinta.Core/Actions/EditActions.cs:374
+#: ../Pinta.Core/Actions/EditActions.cs:375
 #: ../Pinta.Gui.Addins/AddinManagerDialog.cs:209
 #: ../Pinta/Actions/File/OpenDocumentAction.cs:83
 msgid "All files"
@@ -263,8 +263,8 @@ msgstr ""
 msgid "By percentage:"
 msgstr ""
 
-#: ../Pinta.Core/Actions/EditActions.cs:359
-#: ../Pinta.Core/Actions/EditActions.cs:400
+#: ../Pinta.Core/Actions/EditActions.cs:360
+#: ../Pinta.Core/Actions/EditActions.cs:401
 #: ../Pinta.Core/Actions/LayerActions.cs:167
 #: ../Pinta.Gui.Addins/AddinManagerDialog.cs:198
 #: ../Pinta.Gui.Addins/InstallDialog.cs:117
@@ -531,7 +531,7 @@ msgid "Custom"
 msgstr ""
 
 #: ../Pinta.Core/Actions/EditActions.cs:61
-#: ../Pinta.Core/Actions/EditActions.cs:250
+#: ../Pinta.Core/Actions/EditActions.cs:251
 msgid "Cut"
 msgstr ""
 
@@ -562,7 +562,7 @@ msgstr ""
 msgid "Deleted"
 msgstr ""
 
-#: ../Pinta.Core/Actions/EditActions.cs:262
+#: ../Pinta.Core/Actions/EditActions.cs:263
 msgid "Deselect"
 msgstr ""
 
@@ -658,7 +658,7 @@ msgid "Enable additional logging or behavior changes for debugging"
 msgstr ""
 
 #: ../Pinta.Core/Actions/EditActions.cs:67
-#: ../Pinta.Core/Actions/EditActions.cs:251
+#: ../Pinta.Core/Actions/EditActions.cs:252
 msgid "Erase Selection"
 msgstr ""
 
@@ -731,7 +731,7 @@ msgid "Fill Background"
 msgstr ""
 
 #: ../Pinta.Core/Actions/EditActions.cs:68
-#: ../Pinta.Core/Actions/EditActions.cs:212
+#: ../Pinta.Core/Actions/EditActions.cs:213
 msgid "Fill Selection"
 msgstr ""
 
@@ -1009,7 +1009,7 @@ msgid "Invert Colors"
 msgstr ""
 
 #: ../Pinta.Core/Actions/EditActions.cs:69
-#: ../Pinta.Core/Actions/EditActions.cs:452
+#: ../Pinta.Core/Actions/EditActions.cs:453
 msgid "Invert Selection"
 msgstr ""
 
@@ -1389,7 +1389,7 @@ msgstr ""
 msgid "Opacity:"
 msgstr ""
 
-#: ../Pinta.Core/Actions/EditActions.cs:358
+#: ../Pinta.Core/Actions/EditActions.cs:359
 #: ../Pinta.Core/Actions/FileActions.cs:56
 #: ../Pinta.Core/Actions/LayerActions.cs:166
 #: ../Pinta.Gui.Addins/AddinManagerDialog.cs:197
@@ -1414,7 +1414,7 @@ msgstr ""
 msgid "Open Line/Curve Series"
 msgstr ""
 
-#: ../Pinta.Core/Actions/EditActions.cs:355
+#: ../Pinta.Core/Actions/EditActions.cs:356
 msgid "Open Palette File"
 msgstr ""
 
@@ -1469,12 +1469,12 @@ msgstr ""
 msgid "Paintbrush"
 msgstr ""
 
-#: ../Pinta.Core/Actions/EditActions.cs:141
+#: ../Pinta.Core/Actions/EditActions.cs:142
 #: ../Pinta.Effects/Effects/DitheringEffect.cs:136
 msgid "Palette"
 msgstr ""
 
-#: ../Pinta.Core/Actions/EditActions.cs:362
+#: ../Pinta.Core/Actions/EditActions.cs:363
 msgid "Palette files"
 msgstr ""
 
@@ -1880,7 +1880,7 @@ msgstr ""
 msgid "Saturation Percentage"
 msgstr ""
 
-#: ../Pinta.Core/Actions/EditActions.cs:399
+#: ../Pinta.Core/Actions/EditActions.cs:400
 #: ../Pinta.Core/Actions/FileActions.cs:51
 #: ../Pinta/Actions/File/SaveDocumentImplementationAction.cs:73
 msgid "Save"
@@ -1899,7 +1899,7 @@ msgstr ""
 msgid "Save Image File"
 msgstr ""
 
-#: ../Pinta.Core/Actions/EditActions.cs:396
+#: ../Pinta.Core/Actions/EditActions.cs:397
 msgid "Save Palette File"
 msgstr ""
 
@@ -1921,7 +1921,7 @@ msgid "Secondary"
 msgstr ""
 
 #: ../Pinta.Core/Actions/EditActions.cs:71
-#: ../Pinta.Core/Actions/EditActions.cs:221
+#: ../Pinta.Core/Actions/EditActions.cs:222
 msgid "Select All"
 msgstr ""
 
