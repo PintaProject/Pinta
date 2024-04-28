@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: pinta\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-03-17 01:09+0000\n"
+"POT-Creation-Date: 2024-04-28 01:12+0000\n"
 "PO-Revision-Date: 2021-11-10 15:30+0000\n"
 "Last-Translator: Vasilis Kosmidis <Unknown>\n"
 "Language-Team: Greek <el@li.org>\n"
@@ -86,7 +86,7 @@ msgstr ""
 msgid "After select"
 msgstr "Μετά την επιλογή"
 
-#: ../Pinta.Core/Actions/EditActions.cs:374
+#: ../Pinta.Core/Actions/EditActions.cs:375
 #: ../Pinta.Gui.Addins/AddinManagerDialog.cs:209
 #: ../Pinta/Actions/File/OpenDocumentAction.cs:83
 msgid "All files"
@@ -263,8 +263,8 @@ msgstr "Σε απόλυτο μέγεθος:"
 msgid "By percentage:"
 msgstr "Σε ποσοστό:"
 
-#: ../Pinta.Core/Actions/EditActions.cs:359
-#: ../Pinta.Core/Actions/EditActions.cs:400
+#: ../Pinta.Core/Actions/EditActions.cs:360
+#: ../Pinta.Core/Actions/EditActions.cs:401
 #: ../Pinta.Core/Actions/LayerActions.cs:167
 #: ../Pinta.Gui.Addins/AddinManagerDialog.cs:198
 #: ../Pinta.Gui.Addins/InstallDialog.cs:117
@@ -533,7 +533,7 @@ msgid "Custom"
 msgstr "Προσαρμοσμένο"
 
 #: ../Pinta.Core/Actions/EditActions.cs:61
-#: ../Pinta.Core/Actions/EditActions.cs:250
+#: ../Pinta.Core/Actions/EditActions.cs:251
 msgid "Cut"
 msgstr "Αποκοπή"
 
@@ -564,7 +564,7 @@ msgstr "Διαγραφή επιπέδου"
 msgid "Deleted"
 msgstr "Διαγράφηκε"
 
-#: ../Pinta.Core/Actions/EditActions.cs:262
+#: ../Pinta.Core/Actions/EditActions.cs:263
 msgid "Deselect"
 msgstr "Αποεπιλογή"
 
@@ -660,7 +660,7 @@ msgid "Enable additional logging or behavior changes for debugging"
 msgstr ""
 
 #: ../Pinta.Core/Actions/EditActions.cs:67
-#: ../Pinta.Core/Actions/EditActions.cs:251
+#: ../Pinta.Core/Actions/EditActions.cs:252
 msgid "Erase Selection"
 msgstr "Διαγραφή επιλογής"
 
@@ -733,7 +733,7 @@ msgid "Fill Background"
 msgstr "Γέμισμα του φόντου"
 
 #: ../Pinta.Core/Actions/EditActions.cs:68
-#: ../Pinta.Core/Actions/EditActions.cs:212
+#: ../Pinta.Core/Actions/EditActions.cs:213
 msgid "Fill Selection"
 msgstr "Γέμισμα επιλογής"
 
@@ -1014,7 +1014,7 @@ msgid "Invert Colors"
 msgstr "Αντιστροφή χρωμάτων"
 
 #: ../Pinta.Core/Actions/EditActions.cs:69
-#: ../Pinta.Core/Actions/EditActions.cs:452
+#: ../Pinta.Core/Actions/EditActions.cs:453
 msgid "Invert Selection"
 msgstr "Αντιστροφή επιλογής"
 
@@ -1406,7 +1406,7 @@ msgstr "Ζωγραφική λαδομπογιάς"
 msgid "Opacity:"
 msgstr "Αδιαφάνεια:"
 
-#: ../Pinta.Core/Actions/EditActions.cs:358
+#: ../Pinta.Core/Actions/EditActions.cs:359
 #: ../Pinta.Core/Actions/FileActions.cs:56
 #: ../Pinta.Core/Actions/LayerActions.cs:166
 #: ../Pinta.Gui.Addins/AddinManagerDialog.cs:197
@@ -1431,7 +1431,7 @@ msgstr "Άνοιγμα αρχείου εικόνας"
 msgid "Open Line/Curve Series"
 msgstr "Άνοιγμα σειράς Γραμμής/Καμπύλης"
 
-#: ../Pinta.Core/Actions/EditActions.cs:355
+#: ../Pinta.Core/Actions/EditActions.cs:356
 msgid "Open Palette File"
 msgstr "Άνοιγμα αρχείου παλέτας"
 
@@ -1486,12 +1486,12 @@ msgstr "Κουβάς χρώματος"
 msgid "Paintbrush"
 msgstr "Πινέλο"
 
-#: ../Pinta.Core/Actions/EditActions.cs:141
+#: ../Pinta.Core/Actions/EditActions.cs:142
 #: ../Pinta.Effects/Effects/DitheringEffect.cs:136
 msgid "Palette"
 msgstr "Παλέτα"
 
-#: ../Pinta.Core/Actions/EditActions.cs:362
+#: ../Pinta.Core/Actions/EditActions.cs:363
 msgid "Palette files"
 msgstr "Αρχεία παλέτας"
 
@@ -1904,7 +1904,7 @@ msgstr "Κορεσμός"
 msgid "Saturation Percentage"
 msgstr "Ποσοστό κορεσμού"
 
-#: ../Pinta.Core/Actions/EditActions.cs:399
+#: ../Pinta.Core/Actions/EditActions.cs:400
 #: ../Pinta.Core/Actions/FileActions.cs:51
 #: ../Pinta/Actions/File/SaveDocumentImplementationAction.cs:73
 msgid "Save"
@@ -1923,7 +1923,7 @@ msgstr "Αποθήκευση ως…"
 msgid "Save Image File"
 msgstr "Αποθήκευση αρχείου εικόνας"
 
-#: ../Pinta.Core/Actions/EditActions.cs:396
+#: ../Pinta.Core/Actions/EditActions.cs:397
 msgid "Save Palette File"
 msgstr "Αποθήκευση Αρχείου Παλέτας"
 
@@ -1945,7 +1945,7 @@ msgid "Secondary"
 msgstr "Δευτερεύον"
 
 #: ../Pinta.Core/Actions/EditActions.cs:71
-#: ../Pinta.Core/Actions/EditActions.cs:221
+#: ../Pinta.Core/Actions/EditActions.cs:222
 msgid "Select All"
 msgstr "Επιλογή όλων"
 
