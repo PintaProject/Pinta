@@ -45,8 +45,6 @@ public sealed class PintaCanvas : DrawingArea
 		CanvasWindow = window;
 		this.document = document;
 
-		Focusable = true;
-
 		cr = new CanvasRenderer (true, true);
 
 		// Keep the widget the same size as the canvas
@@ -77,8 +75,10 @@ public sealed class PintaCanvas : DrawingArea
 			// Note we don't call click_controller.SetState (Gtk.EventSequenceState.Claimed) here, so
 			// that the CanvasWindow can also receive motion events to update the root window mouse position.
 
-			// A mouse click on the canvas should grab focus from any toolbar widgets, etc
-			GrabFocus ();
+			// A mouse click on the canvas should grab focus away from any toolbar widgets, etc
+			// Using the root canvas widget works best - if the drawing area is given focus, the scroll
+			// widget jumps back to the origin.
+			CanvasWindow.GrabFocus ();
 
 			// The canvas gets the button press before the tab system, so
 			// if this click is on a canvas that isn't currently the ActiveDocument yet, 

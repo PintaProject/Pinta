@@ -59,9 +59,11 @@ public sealed class CanvasWindow : Grid
 		scroll_controller.OnScroll += HandleScrollEvent;
 		vp.AddController (scroll_controller);
 
+		// The mouse handler in PintaCanvas grabs focus away from toolbar widgets.
+		Focusable = true;
+
 		Canvas = new PintaCanvas (this, document) {
 			Name = "canvas",
-			CanFocus = true,
 		};
 
 		// Rulers
