@@ -37,6 +37,8 @@ public sealed class GridBrush : BasePaintBrush
 
 	public override double StrokeAlphaMultiplier => 0.05;
 
+	private readonly Random random = new ();
+
 	protected override RectangleI OnMouseMove (
 		Context g,
 		ImageSurface surface,
@@ -55,8 +57,8 @@ public sealed class GridBrush : BasePaintBrush
 		for (int i = 0; i < 50; i++) {
 			g.MoveTo (c.X, c.Y);
 			g.QuadraticCurveTo (
-				strokeArgs.CurrentPosition.X + Random.NextDouble () * d.X,
-				strokeArgs.CurrentPosition.Y + Random.NextDouble () * d.Y,
+				strokeArgs.CurrentPosition.X + random.NextDouble () * d.X,
+				strokeArgs.CurrentPosition.Y + random.NextDouble () * d.Y,
 				c.X,
 				c.Y);
 			g.Stroke ();

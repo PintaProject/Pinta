@@ -37,6 +37,8 @@ public sealed class CircleBrush : BasePaintBrush
 
 	public override double StrokeAlphaMultiplier => 0.05;
 
+	private readonly Random random = new ();
+
 	protected override RectangleI OnMouseMove (
 		Context g,
 		ImageSurface surface,
@@ -50,7 +52,7 @@ public sealed class CircleBrush : BasePaintBrush
 		);
 
 		double d = mouseDelta.Magnitude () * 2.0;
-		int steps = Random.Next (1, 10);
+		int steps = random.Next (1, 10);
 		double step_delta = d / steps;
 
 		for (int i = 0; i < steps; i++) {

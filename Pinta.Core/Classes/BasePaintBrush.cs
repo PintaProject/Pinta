@@ -35,8 +35,6 @@ namespace Pinta.Core;
 [Mono.Addins.TypeExtensionPoint]
 public abstract class BasePaintBrush
 {
-	private static readonly Random random = new ();
-
 	/// <summary>
 	/// The name of the brush.
 	/// </summary>
@@ -47,12 +45,6 @@ public abstract class BasePaintBrush
 	/// alphabetical ordering is used.
 	/// </summary>
 	public virtual int Priority => 0;
-
-	/// <summary>
-	/// Random number generator. This can be used to implement brushes with
-	/// random effects.
-	/// </summary>
-	public Random Random => random;
 
 	/// <summary>
 	/// Used to multiply the alpha value of the stroke color by a
