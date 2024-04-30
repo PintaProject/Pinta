@@ -43,10 +43,12 @@ public abstract class BaseTool
 	protected ISettingsService Settings { get; }
 
 	public const int DEFAULT_BRUSH_WIDTH = 2;
-	private string ANTIALIAS_SETTING => $"{GetType ().Name.ToLowerInvariant ()}-antialias";
-	private string ALPHABLEND_SETTING => $"{GetType ().Name.ToLowerInvariant ()}-alpha-blend";
 
-	protected static readonly PointI point_empty = new (-500, -500);
+	private string ANTIALIAS_SETTING
+		=> $"{GetType ().Name.ToLowerInvariant ()}-antialias";
+
+	private string ALPHABLEND_SETTING
+		=> $"{GetType ().Name.ToLowerInvariant ()}-alpha-blend";
 
 	protected BaseTool (IServiceProvider services)
 	{
@@ -82,12 +84,14 @@ public abstract class BaseTool
 	/// <summary>
 	/// Localized help text shown to the user on how to use the tool.
 	/// </summary>
-	public virtual string StatusBarText => string.Empty;
+	public virtual string StatusBarText
+		=> string.Empty;
 
 	/// <summary>
 	/// The default cursor used by the tool. Return 'null' for the default pointer.
 	/// </summary>
-	public virtual Cursor? DefaultCursor => null;
+	public virtual Cursor? DefaultCursor
+		=> null;
 
 	/// <summary>
 	/// The current cursor for this tool. Return 'null' for the default pointer.
@@ -98,37 +102,44 @@ public abstract class BaseTool
 	/// Specifies whether this application needs to update this tool's
 	/// cursor after a zoom operation.
 	/// </summary>
-	public virtual bool CursorChangesOnZoom => false;
+	public virtual bool CursorChangesOnZoom
+		=> false;
 
 	/// <summary>
 	/// Whether or not the tool is an editable ShapeTool.
 	/// </summary>
-	public virtual bool IsEditableShapeTool => false;
+	public virtual bool IsEditableShapeTool
+		=> false;
 
 	/// <summary>
 	/// A list of handles that should be drawn on the canvas window.
 	/// </summary>
-	public virtual IEnumerable<IToolHandle> Handles => Enumerable.Empty<IToolHandle> ();
+	public virtual IEnumerable<IToolHandle> Handles
+		=> Enumerable.Empty<IToolHandle> ();
 
 	/// <summary>
 	/// The shortcut key used to activate this tool in the toolbox. Return 0 for no shortcut key.
 	/// </summary>
-	public virtual Gdk.Key ShortcutKey => 0;
+	public virtual Gdk.Key ShortcutKey
+		=> 0;
 
 	/// <summary>
 	/// Affects the order of the tool in the toolbox. Lower numbers will appear first.
 	/// </summary>
-	public virtual int Priority => 75;
+	public virtual int Priority
+		=> 75;
 
 	/// <summary>
 	/// Specifies if the Antialiasing toolbar button should be shown for this tool.
 	/// </summary>
-	protected virtual bool ShowAntialiasingButton => false;
+	protected virtual bool ShowAntialiasingButton
+		=> false;
 
 	/// <summary>
 	/// Specifies if the Alpha Blending toolbar button should be shown for this tool.
 	/// </summary>
-	protected virtual bool ShowAlphaBlendingButton => false;
+	protected virtual bool ShowAlphaBlendingButton
+		=> false;
 
 	/// <summary>
 	/// Specifies if the tool should use anti-aliasing.
@@ -344,7 +355,9 @@ public abstract class BaseTool
 		}
 	}
 
-	private ToolBoxButton CreateToolButton () => new (this);
+	private ToolBoxButton CreateToolButton ()
+		=> new (this);
+
 	#endregion
 
 	#region Event Invokers
