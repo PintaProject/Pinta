@@ -37,6 +37,8 @@ public sealed class SplatterBrush : BasePaintBrush
 
 	public override double StrokeAlphaMultiplier => 0.5;
 
+	private readonly Random random = new ();
+
 	protected override RectangleI OnMouseMove (
 		Context g,
 		ImageSurface surface,
@@ -45,13 +47,13 @@ public sealed class SplatterBrush : BasePaintBrush
 		int line_width = (int) g.LineWidth;
 
 		// we want a minimum size of 2 for the splatter (except for when the brush width is 1), since a splatter of size 1 is very small
-		int size = (line_width == 1) ? 1 : Random.Next (2, line_width);
+		int size = (line_width == 1) ? 1 : random.Next (2, line_width);
 
 		PointI current = strokeArgs.CurrentPosition;
 
 		RectangleD rect = new (
-			x: current.X - Random.Next (-15, 15),
-			y: current.Y - Random.Next (-15, 15),
+			x: current.X - random.Next (-15, 15),
+			y: current.Y - random.Next (-15, 15),
 			width: size,
 			height: size
 		);
