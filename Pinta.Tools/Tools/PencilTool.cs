@@ -34,7 +34,7 @@ public sealed class PencilTool : BaseTool
 {
 	private readonly IPaletteService palette;
 
-	private PointI last_point = point_empty;
+	private PointI? last_point = null;
 
 	private ImageSurface? undo_surface;
 	private bool surface_modified;
@@ -75,7 +75,7 @@ public sealed class PencilTool : BaseTool
 				tool_color = palette.SecondaryColor;
 				break;
 			default:
-				last_point = point_empty;
+				last_point = null;
 				return;
 		}
 
@@ -94,7 +94,7 @@ public sealed class PencilTool : BaseTool
 				tool_color = palette.SecondaryColor;
 				break;
 			default:
-				last_point = point_empty;
+				last_point = null;
 				return;
 		}
 
@@ -116,7 +116,7 @@ public sealed class PencilTool : BaseTool
 		var x = e.Point.X;
 		var y = e.Point.Y;
 
-		if (last_point.Equals (point_empty)) {
+		if (!last_point.HasValue) {
 			last_point = e.Point;
 
 			if (!first_pixel)
@@ -147,12 +147,13 @@ public sealed class PencilTool : BaseTool
 		} else {
 			// Adding 0.5 forces cairo into the correct square:
 			// See https://bugs.launchpad.net/bugs/672232
-			g.MoveTo (last_point.X + 0.5, last_point.Y + 0.5);
+			PointI lastPoint = last_point.Value;
+			g.MoveTo (lastPoint.X + 0.5, lastPoint.Y + 0.5);
 			g.LineTo (x + 0.5, y + 0.5);
 			g.Stroke ();
 		}
 
-		var dirty = CairoExtensions.GetRectangleFromPoints (last_point, new PointI (x, y), 4);
+		var dirty = CairoExtensions.GetRectangleFromPoints (last_point.Value, new PointI (x, y), 4);
 
 		document.Workspace.Invalidate (document.ClampToImageSize (dirty));
 

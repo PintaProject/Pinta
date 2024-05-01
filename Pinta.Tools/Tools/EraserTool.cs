@@ -39,7 +39,7 @@ public sealed class EraserTool : BaseBrushTool
 		Smooth = 1,
 	}
 
-	private PointI last_point = point_empty;
+	private PointI? last_point = null;
 	private EraserType eraser_type = EraserType.Normal;
 
 	private const int LUT_Resolution = 256;
@@ -85,19 +85,18 @@ public sealed class EraserTool : BaseBrushTool
 		var new_pointd = e.PointDouble;
 
 		if (mouse_button == MouseButton.None) {
-			last_point = point_empty;
+			last_point = null;
 			return;
 		}
 
-		if (last_point.Equals (point_empty))
+		if (!last_point.HasValue)
 			last_point = new_point;
 
 		if (document.Workspace.PointInCanvas (new_pointd))
 			surface_modified = true;
 
 		var g = document.CreateClippedContext ();
-		var last_pointd = new PointD (last_point.X, last_point.Y);
-
+		var last_pointd = (PointD) last_point.Value;
 		switch (eraser_type) {
 			case EraserType.Normal:
 				EraseNormal (g, last_pointd, new_pointd);
@@ -107,7 +106,7 @@ public sealed class EraserTool : BaseBrushTool
 				break;
 		}
 
-		var dirty = CairoExtensions.GetRectangleFromPoints (last_point, new_point, BrushWidth + 2);
+		var dirty = CairoExtensions.GetRectangleFromPoints (last_point.Value, new_point, BrushWidth + 2);
 
 		if (document.Workspace.IsPartiallyOffscreen (dirty))
 			document.Workspace.Invalidate ();

@@ -38,7 +38,7 @@ public sealed class PaintBrushTool : BaseBrushTool
 
 	private BasePaintBrush? default_brush;
 	private BasePaintBrush? active_brush;
-	private PointI last_point;
+	private PointI? last_point = PointI.Zero;
 
 	private const string BRUSH_SETTING = "paint-brush-brush";
 
@@ -93,7 +93,7 @@ public sealed class PaintBrushTool : BaseBrushTool
 			return;
 
 		if (mouse_button is not (MouseButton.Left or MouseButton.Right)) {
-			last_point = point_empty;
+			last_point = null;
 			return;
 		}
 
@@ -113,7 +113,7 @@ public sealed class PaintBrushTool : BaseBrushTool
 			)
 		};
 
-		if (last_point.Equals (point_empty))
+		if (!last_point.HasValue)
 			last_point = e.Point;
 
 		if (document.Workspace.PointInCanvas (e.PointDouble))
@@ -129,7 +129,7 @@ public sealed class PaintBrushTool : BaseBrushTool
 		g.LineCap = BrushWidth == 1 ? LineCap.Butt : LineCap.Round;
 		g.SetSourceColor (strokeColor);
 
-		BrushStrokeArgs strokeArgs = new (strokeColor, e.Point, last_point);
+		BrushStrokeArgs strokeArgs = new (strokeColor, e.Point, last_point.Value);
 
 		var invalidate_rect = active_brush.DoMouseMove (g, surf, strokeArgs);
 

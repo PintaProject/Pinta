@@ -44,7 +44,7 @@ public class RecolorTool : BaseBrushTool
 {
 	private readonly IWorkspaceService workspace;
 
-	private PointI last_point = point_empty;
+	private PointI? last_point = null;
 	private BitMask? stencil;
 
 	private const string TOLERANCE_SETTING = "recolor-tolerance";
@@ -98,14 +98,14 @@ public class RecolorTool : BaseBrushTool
 			old_color = Palette.SecondaryColor.ToColorBgra ();
 			new_color = Palette.PrimaryColor.ToColorBgra ();
 		} else {
-			last_point = point_empty;
+			last_point = null;
 			return;
 		}
 
 		var x = e.Point.X;
 		var y = e.Point.Y;
 
-		if (last_point.Equals (point_empty))
+		if (!last_point.HasValue)
 			last_point = new PointI (x, y);
 
 		if (document.Workspace.PointInCanvas (e.PointDouble))
@@ -114,7 +114,7 @@ public class RecolorTool : BaseBrushTool
 		var surf = document.Layers.CurrentUserLayer.Surface;
 		var tmp_layer = document.Layers.ToolLayer.Surface;
 
-		var roi = CairoExtensions.GetRectangleFromPoints (last_point, new PointI (x, y), BrushWidth + 2);
+		var roi = CairoExtensions.GetRectangleFromPoints (last_point.Value, new PointI (x, y), BrushWidth + 2);
 
 		roi = workspace.ClampToImageSize (roi);
 		var myTolerance = (int) (Tolerance * 256);
@@ -146,7 +146,7 @@ public class RecolorTool : BaseBrushTool
 		var g = document.CreateClippedContext ();
 		g.Antialias = UseAntialiasing ? Antialias.Subpixel : Antialias.None;
 
-		g.MoveTo (last_point.X, last_point.Y);
+		g.MoveTo (last_point.Value.X, last_point.Value.Y);
 		g.LineTo (x, y);
 
 		g.LineWidth = BrushWidth;

@@ -33,7 +33,7 @@ namespace Pinta.Tools;
 
 public sealed class FreeformShapeTool : BaseBrushTool
 {
-	private PointI last_point = point_empty;
+	private PointI? last_point = null;
 
 	private Path? path;
 	private Color fill_color;
@@ -70,7 +70,7 @@ public sealed class FreeformShapeTool : BaseBrushTool
 		if (dash_pattern_box != null) {
 			dash_pattern_box.GetEntry ().SetText (Settings.GetSetting (DASH_PATTERN_SETTING, "-"));
 
-			dash_pattern_box.OnChanged += (o, e) => {
+			dash_pattern_box.OnChanged += (_, _) => {
 				dash_pattern = dash_pattern_box.GetActiveText ()!;
 			};
 		}
@@ -95,14 +95,14 @@ public sealed class FreeformShapeTool : BaseBrushTool
 			outline_color = Palette.SecondaryColor;
 			fill_color = Palette.PrimaryColor;
 		} else {
-			last_point = point_empty;
+			last_point = null;
 			return;
 		}
 
 		var x = e.Point.X;
 		var y = e.Point.Y;
 
-		if (last_point.Equals (point_empty)) {
+		if (!last_point.HasValue) {
 			last_point = e.Point;
 			return;
 		}
