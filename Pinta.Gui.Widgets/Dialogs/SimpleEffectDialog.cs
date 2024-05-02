@@ -253,7 +253,7 @@ public sealed class SimpleEffectDialog : Gtk.Dialog
 		Dictionary<string, object>? dict = null;
 
 		foreach (var attr in settings.reflector.Attributes)
-			if (attr is StaticListAttribute attribute && GetValue (attribute.DictionaryName, effectData) is Dictionary<string, object> d)
+			if (attr is StaticListAttribute attribute && ReflectionHelper.GetValue (effectData, attribute.DictionaryName) is Dictionary<string, object> d)
 				dict = d;
 
 		var entries = dict == null ? ImmutableArray<string>.Empty : dict.Keys.ToImmutableArray ();
@@ -405,21 +405,6 @@ public sealed class SimpleEffectDialog : Gtk.Dialog
 
 	#endregion
 
-	#region Static Reflection Methods
-
-	private static object? GetValue (string name, object o)
-	{
-		if (o.GetType ().GetField (name) is FieldInfo fi)
-			return fi.GetValue (o);
-
-		if (o.GetType ().GetProperty (name) is PropertyInfo pi)
-			return pi.GetGetMethod ()?.Invoke (o, Array.Empty<object> ());
-
-		return null;
-	}
-
-	#endregion
-
 	private void DelayedUpdate (TimeoutHandler handler)
 	{
 		if (event_delay_timeout_id != 0) {
@@ -441,12 +426,3 @@ public sealed class SimpleEffectDialog : Gtk.Dialog
 	}
 
 }
-
-/// <summary>
-/// Wrapper around Pinta's translation template.
-/// </summary>
-public sealed class PintaLocalizer : IAddinLocalizer
-{
-	public string GetString (string msgid)
-		=> Translations.GetString (msgid);
-};
