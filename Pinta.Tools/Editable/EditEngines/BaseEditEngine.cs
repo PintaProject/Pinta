@@ -954,7 +954,7 @@ public abstract class BaseEditEngine
 						Math.Clamp (selPoint.Tension, 0d, 1d);
 
 		DrawActiveShape (false, false, true, shiftKey, false, e.IsControlPressed);
-		
+
 
 		last_mouse_pos = current_point;
 	}
