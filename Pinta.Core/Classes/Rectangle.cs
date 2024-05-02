@@ -48,6 +48,8 @@ public readonly record struct RectangleD
 	{
 	}
 
+	public static readonly RectangleD Zero = new (0d, 0d, 0d, 0d);
+
 	public readonly RectangleI ToInt () => new ((int) Math.Floor (X), (int) Math.Floor (Y),
 						      (int) Math.Ceiling (Width), (int) Math.Ceiling (Height));
 
@@ -116,7 +118,7 @@ public readonly record struct RectangleI (int X, int Y, int Width, int Height)
 	{
 	}
 
-	public static readonly RectangleI Zero;
+	public static readonly RectangleI Zero = new (0, 0, 0, 0);
 
 	public static RectangleI FromLTRB (int left, int top, int right, int bottom)
 		=> new (left, top, right - left + 1, bottom - top + 1);

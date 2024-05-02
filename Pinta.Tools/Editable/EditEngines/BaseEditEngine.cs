@@ -427,9 +427,8 @@ public abstract class BaseEditEngine
 	{
 		ShapeEngine? activeEngine = ActiveShapeEngine;
 
-		if (activeEngine != null) {
+		if (activeEngine != null)
 			UpdateToolbarSettings (activeEngine);
-		}
 
 		//Draw the current state.
 		DrawActiveShape (true, false, true, false, false);
@@ -439,9 +438,8 @@ public abstract class BaseEditEngine
 	{
 		ShapeEngine? activeEngine = ActiveShapeEngine;
 
-		if (activeEngine != null) {
+		if (activeEngine != null)
 			UpdateToolbarSettings (activeEngine);
-		}
 
 		//Draw the current state.
 		DrawActiveShape (true, false, true, false, false);
@@ -852,107 +850,111 @@ public abstract class BaseEditEngine
 
 	public virtual void HandleMouseMove (Document document, ToolMouseEventArgs e)
 	{
-		Document doc = document;
 		current_point = e.PointDouble;
 		bool shiftKey = e.IsShiftPressed;
 
 		if (!is_drawing) {
 			//Redraw the active shape to show a (temporary) highlighted control point (over any shape) when applicable.
 			DrawActiveShape (false, false, true, shiftKey, false, e.IsControlPressed);
-		} else {
-			current_point = document.ClampToImageSize (current_point);
-
-			if (shiftKey) {
-				CalculateModifiedCurrentPoint ();
-			}
-
-			ControlPoint? selPoint = SelectedPoint;
-
-			//Make sure a control point is selected.
-			if (selPoint != null) {
-				if (clicked_without_modifying) {
-					//Create a new ShapesModifyHistoryItem so that the modification of the shape can be undone.
-					doc.History.PushNewItem (
-									new ShapesModifyHistoryItem (this, owner.Icon, ShapeName + " " + Translations.GetString ("Modified")));
-
-					clicked_without_modifying = false;
-				}
-
-				List<ControlPoint> controlPoints = SelectedShapeEngine!.ControlPoints; // NRT - Code assumes this is not-null
-
-				if (!changing_tension) {
-					//Moving a control point.
-
-					//Make sure the control point was moved.
-					if (current_point.X != selPoint.Position.X || current_point.Y != selPoint.Position.Y) {
-						MovePoint (controlPoints);
-					}
-				} else {
-					//Changing a control point's tension.
-
-					//Unclamp the mouse position when changing tension.
-					current_point = e.PointDouble;
-
-					//Calculate the new tension based off of the movement of the mouse that's
-					//perpendicular to the previous and following control points.
-
-					PointD curPoint = selPoint.Position;
-					PointD prevPoint, nextPoint;
-
-					//Calculate the previous control point.
-					if (SelectedPointIndex > 0) {
-						prevPoint = controlPoints[SelectedPointIndex - 1].Position;
-					} else {
-						//There is none.
-						prevPoint = curPoint;
-					}
-
-					//Calculate the following control point.
-					if (SelectedPointIndex < controlPoints.Count - 1) {
-						nextPoint = controlPoints[SelectedPointIndex + 1].Position;
-					} else {
-						//There is none.
-						nextPoint = curPoint;
-					}
-
-					//The x and y differences are used as factors for the x and y change in the mouse position.
-					double xDiff = prevPoint.X - nextPoint.X;
-					double yDiff = prevPoint.Y - nextPoint.Y;
-					double totalDiff = xDiff + yDiff;
-
-					//Calculate the midpoint in between the previous and following points.
-					PointD midPoint = new PointD ((prevPoint.X + nextPoint.X) / 2d, (prevPoint.Y + nextPoint.Y) / 2d);
-
-					//Calculate the x change in the mouse position.
-					double xChange;
-					if (curPoint.X <= midPoint.X) {
-						xChange = current_point.X - last_mouse_pos.X;
-					} else {
-						xChange = last_mouse_pos.X - current_point.X;
-					}
-
-					//Calculate the y change in the mouse position.
-					double yChange;
-					if (curPoint.Y <= midPoint.Y) {
-						yChange = current_point.Y - last_mouse_pos.Y;
-					} else {
-						yChange = last_mouse_pos.Y - current_point.Y;
-					}
-
-					//Update the control point's tension.
-
-					//Note: the difference factors are to be inverted for x and y change because this is perpendicular motion.
-					controlPoints[SelectedPointIndex].Tension +=
-					    Math.Round (Math.Clamp ((xChange * yDiff + yChange * xDiff) / totalDiff, -1d, 1d)) / 50d;
-
-					//Restrict the new tension to range from 0d to 1d.
-					controlPoints[SelectedPointIndex].Tension =
-									Math.Clamp (selPoint.Tension, 0d, 1d);
-				}
-
-				DrawActiveShape (false, false, true, shiftKey, false, e.IsControlPressed);
-			}
+			last_mouse_pos = current_point;
+			return;
 		}
+
+		Document doc = document;
+
+		current_point = document.ClampToImageSize (current_point);
+
+		if (shiftKey)
+			CalculateModifiedCurrentPoint ();
+
+		ControlPoint? selPoint = SelectedPoint;
+
+		//Make sure a control point is selected.
+		if (selPoint == null) {
+			last_mouse_pos = current_point;
+			return;
+		}
+
+		if (clicked_without_modifying) {
+			//Create a new ShapesModifyHistoryItem so that the modification of the shape can be undone.
+			doc.History.PushNewItem (
+							new ShapesModifyHistoryItem (this, owner.Icon, ShapeName + " " + Translations.GetString ("Modified")));
+
+			clicked_without_modifying = false;
+		}
+
+		List<ControlPoint> controlPoints = SelectedShapeEngine!.ControlPoints; // NRT - Code assumes this is not-null
+
+		if (!changing_tension) {
+			//Moving a control point.
+
+			//Make sure the control point was moved.
+			if (current_point.X != selPoint.Position.X || current_point.Y != selPoint.Position.Y)
+				MovePoint (controlPoints);
+
+			last_mouse_pos = current_point;
+			return;
+		}
+
+		//Changing a control point's tension.
+
+		//Unclamp the mouse position when changing tension.
+		current_point = e.PointDouble;
+
+		//Calculate the new tension based off of the movement of the mouse that's
+		//perpendicular to the previous and following control points.
+
+		PointD curPoint = selPoint.Position;
+		PointD prevPoint, nextPoint;
+
+		//Calculate the previous control point.
+		if (SelectedPointIndex > 0) {
+			prevPoint = controlPoints[SelectedPointIndex - 1].Position;
+		} else {
+			//There is none.
+			prevPoint = curPoint;
+		}
+
+		//Calculate the following control point.
+		if (SelectedPointIndex < controlPoints.Count - 1) {
+			nextPoint = controlPoints[SelectedPointIndex + 1].Position;
+		} else {
+			//There is none.
+			nextPoint = curPoint;
+		}
+
+		//The x and y differences are used as factors for the x and y change in the mouse position.
+		double xDiff = prevPoint.X - nextPoint.X;
+		double yDiff = prevPoint.Y - nextPoint.Y;
+		double totalDiff = xDiff + yDiff;
+
+		//Calculate the midpoint in between the previous and following points.
+		PointD midPoint = new PointD ((prevPoint.X + nextPoint.X) / 2d, (prevPoint.Y + nextPoint.Y) / 2d);
+
+		//Calculate the x change in the mouse position.
+		var xChange =
+			(curPoint.X <= midPoint.X)
+			? current_point.X - last_mouse_pos.X
+			: last_mouse_pos.X - current_point.X;
+
+		//Calculate the y change in the mouse position.
+		var yChange =
+			(curPoint.Y <= midPoint.Y)
+			? current_point.Y - last_mouse_pos.Y
+			: last_mouse_pos.Y - current_point.Y;
+
+		//Update the control point's tension.
+
+		//Note: the difference factors are to be inverted for x and y change because this is perpendicular motion.
+		controlPoints[SelectedPointIndex].Tension +=
+			Math.Round (Math.Clamp ((xChange * yDiff + yChange * xDiff) / totalDiff, -1d, 1d)) / 50d;
+
+		//Restrict the new tension to range from 0d to 1d.
+		controlPoints[SelectedPointIndex].Tension =
+						Math.Clamp (selPoint.Tension, 0d, 1d);
+
+		DrawActiveShape (false, false, true, shiftKey, false, e.IsControlPressed);
+		
 
 		last_mouse_pos = current_point;
 	}
@@ -1123,53 +1125,54 @@ public abstract class BaseEditEngine
 
 	protected RectangleD DrawShape (ShapeEngine engine, Layer l, bool drawCP, bool drawHoverSelection, bool ctrl_key)
 	{
+		ShapeEngine? activeEngine = ActiveShapeEngine;
+
+		if (activeEngine == null)
+			return RectangleD.Zero;
+
 		Document doc = PintaCore.Workspace.ActiveDocument;
+
+		var g = new Context (l.Surface);
+		g.AppendPath (doc.Selection.SelectionPath);
+		g.FillRule = FillRule.EvenOdd;
+		g.Clip ();
+
+		g.Antialias = activeEngine.AntiAliasing ? Antialias.Subpixel : Antialias.None;
+
+		g.SetDashFromString (activeEngine.DashPattern, activeEngine.BrushWidth, LineCap.Square);
+
+		g.LineWidth = activeEngine.BrushWidth;
 
 		RectangleD? dirty = null;
 
-		ShapeEngine? activeEngine = ActiveShapeEngine;
+		//Draw the shape.
+		if (activeEngine.ControlPoints.Count > 0) {
+			//Generate the points that make up the shape.
+			activeEngine.GeneratePoints (activeEngine.BrushWidth);
 
-		if (activeEngine != null) {
-			var g = new Context (l.Surface);
-			g.AppendPath (doc.Selection.SelectionPath);
-			g.FillRule = FillRule.EvenOdd;
-			g.Clip ();
+			var points = activeEngine.GetActualPoints ();
 
-			g.Antialias = activeEngine.AntiAliasing ? Antialias.Subpixel : Antialias.None;
+			//Expand the invalidation rectangle as necessary.
 
-			g.SetDashFromString (activeEngine.DashPattern, activeEngine.BrushWidth, LineCap.Square);
-
-			g.LineWidth = activeEngine.BrushWidth;
-
-			//Draw the shape.
-			if (activeEngine.ControlPoints.Count > 0) {
-				//Generate the points that make up the shape.
-				activeEngine.GeneratePoints (activeEngine.BrushWidth);
-
-				var points = activeEngine.GetActualPoints ();
-
-				//Expand the invalidation rectangle as necessary.
-
-				if (FillShape) {
-					Color fill_color = StrokeShape ? activeEngine.FillColor : activeEngine.OutlineColor;
-					dirty = dirty.UnionRectangles (g.FillPolygonal (points.AsSpan (), fill_color));
-				}
-
-				if (StrokeShape) {
-					dirty = dirty.UnionRectangles (g.DrawPolygonal (points.AsSpan (), activeEngine.OutlineColor));
-				}
+			if (FillShape) {
+				Color fill_color = StrokeShape ? activeEngine.FillColor : activeEngine.OutlineColor;
+				dirty = dirty.UnionRectangles (g.FillPolygonal (points.AsSpan (), fill_color));
 			}
 
-			g.SetDash (Array.Empty<double> (), 0.0);
-
-			//Draw anything extra (that not every shape has), like arrows.
-			DrawExtras (ref dirty, g, engine);
-
-			DrawControlPoints (g, activeEngine, drawCP, drawHoverSelection, ctrl_key);
+			if (StrokeShape) {
+				dirty = dirty.UnionRectangles (g.DrawPolygonal (points.AsSpan (), activeEngine.OutlineColor));
+			}
 		}
 
+		g.SetDash (Array.Empty<double> (), 0.0);
 
-		return dirty ?? new RectangleD (0d, 0d, 0d, 0d);
+		//Draw anything extra (that not every shape has), like arrows.
+		DrawExtras (ref dirty, g, engine);
+
+		DrawControlPoints (g, activeEngine, drawCP, drawHoverSelection, ctrl_key);
+
+
+		return dirty ?? RectangleD.Zero;
 	}
 
 	private void DrawControlPoints (Context g, ShapeEngine shape, bool draw_controls, bool draw_selection, bool ctrl_key)
@@ -1177,26 +1180,29 @@ public abstract class BaseEditEngine
 		RectangleI dirty = MoveHandle.UnionInvalidateRects (shape.ControlPointHandles);
 		shape.ControlPointHandles.Clear ();
 
-		if (draw_controls) {
-			UpdateHoverHandle (draw_selection, ctrl_key);
-
-			foreach (ControlPoint point in shape.ControlPoints) {
-
-				//Skip drawing the control point if it is being hovered over.
-				if (draw_selection && hover_handle.Active && hover_handle.CanvasPosition.Distance (point.Position) < 1d)
-					continue;
-
-				shape.ControlPointHandles.Add (
-					new MoveHandle {
-						Active = true,
-						CanvasPosition = point.Position,
-						Selected = (point == SelectedPoint) && draw_selection
-					}
-				);
-			}
-
-			dirty = dirty.Union (MoveHandle.UnionInvalidateRects (shape.ControlPointHandles));
+		if (!draw_controls) {
+			PintaCore.Workspace.InvalidateWindowRect (dirty);
+			return;
 		}
+
+		UpdateHoverHandle (draw_selection, ctrl_key);
+
+		foreach (ControlPoint point in shape.ControlPoints) {
+
+			//Skip drawing the control point if it is being hovered over.
+			if (draw_selection && hover_handle.Active && hover_handle.CanvasPosition.Distance (point.Position) < 1d)
+				continue;
+
+			shape.ControlPointHandles.Add (
+				new MoveHandle {
+					Active = true,
+					CanvasPosition = point.Position,
+					Selected = (point == SelectedPoint) && draw_selection
+				}
+			);
+		}
+
+		dirty = dirty.Union (MoveHandle.UnionInvalidateRects (shape.ControlPointHandles));
 
 		PintaCore.Workspace.InvalidateWindowRect (dirty);
 	}
