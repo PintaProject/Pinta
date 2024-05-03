@@ -156,16 +156,19 @@ public sealed class SettingsManager : ISettingsService
 		// Just in case the directory got deleted after the application started
 		Directory.CreateDirectory (settings_dir);
 
-		using var xw = new XmlTextWriter (settings_file, Encoding.UTF8);
+		using XmlTextWriter xw = new (settings_file, Encoding.UTF8);
 
 		xw.Formatting = Formatting.Indented;
 
 		using var elm_settings = xw.DisposableWriteStartElement ("settings");
 
 		foreach (var item in settings) {
+
 			using var elm_setting = xw.DisposableWriteStartElement ("setting");
+
 			xw.WriteAttributeString ("name", item.Key);
 			xw.WriteAttributeString ("type", item.Value.GetType ().ToString ());
+
 			xw.WriteValue (item.Value.ToString ());
 		}
 	}
