@@ -152,30 +152,32 @@ public sealed class OraFormat : IImageImporter, IImageExporter
 			Formatting = Formatting.Indented
 		};
 
-		writer.WriteStartElement ("image");
-		writer.WriteAttributeString ("w", layers[0].Surface.Width.ToString ());
-		writer.WriteAttributeString ("h", layers[0].Surface.Height.ToString ());
-		writer.WriteAttributeString ("version", "0.0.5"); // Current version of the spec.
+		{
+			using var elm_img = writer.DisposableWriteStartElement ("image");
 
-		writer.WriteStartElement ("stack");
+			writer.WriteAttributeString ("w", layers[0].Surface.Width.ToString ());
+			writer.WriteAttributeString ("h", layers[0].Surface.Height.ToString ());
+			writer.WriteAttributeString ("version", "0.0.5"); // Current version of the spec.
 
-		// ORA stores layers top to bottom
-		for (int i = layers.Count - 1; i >= 0; i--) {
-			var layer = layers[i];
-			writer.WriteStartElement ("layer");
-			writer.WriteAttributeString ("opacity", string.Format (GetFormat (), "{0:0.00}", layer.Opacity));
-			writer.WriteAttributeString ("name", layer.Name);
-			writer.WriteAttributeString ("composite-op", BlendModeToStandard (layer.BlendMode));
-			writer.WriteAttributeString ("src", "data/layer" + i.ToString () + ".png");
-			if (layer.Hidden) {
-				writer.WriteAttributeString ("visibility", "hidden");
+			using var elm_stk = writer.DisposableWriteStartElement ("stack");
+
+			// ORA stores layers top to bottom
+			for (int i = layers.Count - 1; i >= 0; i--) {
+
+				var layer = layers[i];
+
+				using var elm_lyr = writer.DisposableWriteStartElement ("layer");
+
+				writer.WriteAttributeString ("opacity", string.Format (GetFormat (), "{0:0.00}", layer.Opacity));
+				writer.WriteAttributeString ("name", layer.Name);
+				writer.WriteAttributeString ("composite-op", BlendModeToStandard (layer.BlendMode));
+				writer.WriteAttributeString ("src", "data/layer" + i.ToString () + ".png");
+
+				if (layer.Hidden)
+					writer.WriteAttributeString ("visibility", "hidden");
 			}
-			writer.WriteEndElement ();
 		}
-
-		writer.WriteEndElement (); // stack
-		writer.WriteEndElement (); // image
-
+		
 		writer.Close ();
 		return ms.ToArray ();
 	}

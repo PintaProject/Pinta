@@ -159,16 +159,14 @@ public sealed class SettingsManager : ISettingsService
 		using var xw = new XmlTextWriter (settings_file, Encoding.UTF8);
 
 		xw.Formatting = Formatting.Indented;
-		xw.WriteStartElement ("settings");
+
+		using var elm_settings = xw.DisposableWriteStartElement ("settings");
 
 		foreach (var item in settings) {
-			xw.WriteStartElement ("setting");
+			using var elm_setting = xw.DisposableWriteStartElement ("setting");
 			xw.WriteAttributeString ("name", item.Key);
 			xw.WriteAttributeString ("type", item.Value.GetType ().ToString ());
 			xw.WriteValue (item.Value.ToString ());
-			xw.WriteEndElement ();
 		}
-
-		xw.WriteEndElement ();
 	}
 }
