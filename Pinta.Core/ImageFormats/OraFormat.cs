@@ -152,34 +152,38 @@ public sealed class OraFormat : IImageImporter, IImageExporter
 			Formatting = Formatting.Indented
 		};
 
-		{
-			using var elm_img = writer.DisposableWriteStartElement ("image");
-
-			writer.WriteAttributeString ("w", layers[0].Surface.Width.ToString ());
-			writer.WriteAttributeString ("h", layers[0].Surface.Height.ToString ());
-			writer.WriteAttributeString ("version", "0.0.5"); // Current version of the spec.
-
-			using var elm_stk = writer.DisposableWriteStartElement ("stack");
-
-			// ORA stores layers top to bottom
-			for (int i = layers.Count - 1; i >= 0; i--) {
-
-				var layer = layers[i];
-
-				using var elm_lyr = writer.DisposableWriteStartElement ("layer");
-
-				writer.WriteAttributeString ("opacity", string.Format (GetFormat (), "{0:0.00}", layer.Opacity));
-				writer.WriteAttributeString ("name", layer.Name);
-				writer.WriteAttributeString ("composite-op", BlendModeToStandard (layer.BlendMode));
-				writer.WriteAttributeString ("src", "data/layer" + i.ToString () + ".png");
-
-				if (layer.Hidden)
-					writer.WriteAttributeString ("visibility", "hidden");
-			}
-		}
+		WriteLayersToXml (writer, layers);
 
 		writer.Close ();
 		return ms.ToArray ();
+	}
+
+
+	private static void WriteLayersToXml (XmlWriter writer, IReadOnlyList<Layer> layers)
+	{
+		using var elm_img = writer.DisposableWriteStartElement ("image");
+
+		writer.WriteAttributeString ("w", layers[0].Surface.Width.ToString ());
+		writer.WriteAttributeString ("h", layers[0].Surface.Height.ToString ());
+		writer.WriteAttributeString ("version", "0.0.5"); // Current version of the spec.
+
+		using var elm_stk = writer.DisposableWriteStartElement ("stack");
+
+		// ORA stores layers top to bottom
+		for (int i = layers.Count - 1; i >= 0; i--) {
+
+			var layer = layers[i];
+
+			using var elm_lyr = writer.DisposableWriteStartElement ("layer");
+
+			writer.WriteAttributeString ("opacity", string.Format (GetFormat (), "{0:0.00}", layer.Opacity));
+			writer.WriteAttributeString ("name", layer.Name);
+			writer.WriteAttributeString ("composite-op", BlendModeToStandard (layer.BlendMode));
+			writer.WriteAttributeString ("src", "data/layer" + i.ToString () + ".png");
+
+			if (layer.Hidden)
+				writer.WriteAttributeString ("visibility", "hidden");
+		}
 	}
 
 	public void Export (Document document, Gio.File file, Gtk.Window parent)
