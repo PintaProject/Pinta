@@ -16,20 +16,25 @@ namespace Pinta.Effects;
 
 public sealed class JuliaFractalEffect : BaseEffect
 {
-	public override string Icon => Pinta.Resources.Icons.EffectsRenderJuliaFractal;
+	public override string Icon
+		=> Pinta.Resources.Icons.EffectsRenderJuliaFractal;
 
-	public sealed override bool IsTileable => true;
+	public sealed override bool IsTileable
+		=> true;
 
-	public override string Name => Translations.GetString ("Julia Fractal");
+	public override string Name
+		=> Translations.GetString ("Julia Fractal");
 
-	public override bool IsConfigurable => true;
+	public override bool IsConfigurable
+		=> true;
 
-	public override string EffectMenuCategory => Translations.GetString ("Render");
+	public override string EffectMenuCategory
+		=> Translations.GetString ("Render");
 
-	public JuliaFractalData Data => (JuliaFractalData) EffectData!;  // NRT - Set in constructor
+	public JuliaFractalData Data
+		=> (JuliaFractalData) EffectData!;  // NRT - Set in constructor
 
 	private readonly IPaletteService palette;
-
 	private readonly IChromeService chrome;
 
 	public JuliaFractalEffect (IServiceProvider services)
@@ -114,6 +119,7 @@ public sealed class JuliaFractalEffect : BaseEffect
 
 	const double Jr = 0.3125;
 	const double Ji = 0.03;
+
 	private static ColorBgra GetPixelColor (JuliaSettings settings, PointI target)
 	{
 		int r = 0;
@@ -126,12 +132,11 @@ public sealed class JuliaFractalEffect : BaseEffect
 			double v = (2.0 * target.Y - settings.canvasSize.Height + ((i * settings.invQuality) % 1)) * settings.invH;
 
 			double radius = Math.Sqrt ((u * u) + (v * v));
-			double radiusP = radius;
 			double theta = Math.Atan2 (v, u);
 			double thetaP = theta + settings.angleTheta;
 
-			double uP = radiusP * Math.Cos (thetaP);
-			double vP = radiusP * Math.Sin (thetaP);
+			double uP = radius * Math.Cos (thetaP);
+			double vP = radius * Math.Sin (thetaP);
 
 			PointD jLoc = new (
 				X: (uP - vP * settings.aspect) * settings.invZoom,
