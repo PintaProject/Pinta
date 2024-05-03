@@ -175,7 +175,7 @@ public sealed class JuliaFractalEffect : BaseEffect
 		public int Quality { get; set; } = 2;
 
 		[Caption ("Zoom"), MinimumValue (0), MaximumValue (50)]
-		public int Zoom { get; set; } = 1;
+		public double Zoom { get; set; } = 1;
 
 		[Caption ("Color Scheme Source")]
 		public ColorSchemeSource ColorSchemeSource { get; set; } = ColorSchemeSource.PresetGradient;
