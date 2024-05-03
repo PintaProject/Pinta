@@ -41,8 +41,8 @@ public sealed class OraFormat : IImageImporter, IImageExporter
 
 	public void Import (Gio.File file, Gtk.Window parent)
 	{
-		using var stream = new GioStream (file.Read (cancellable: null));
-		using var zipfile = new ZipArchive (stream);
+		using GioStream stream = new (file.Read (cancellable: null));
+		using ZipArchive zipfile = new (stream);
 		XmlDocument stackXml = new XmlDocument ();
 
 		ZipArchiveEntry stackXmlEntry = zipfile.GetEntry ("stack.xml") ?? throw new XmlException ("No 'stack.xml' found in OpenRaster file");
@@ -52,7 +52,7 @@ public sealed class OraFormat : IImageImporter, IImageExporter
 		// valid that we need to guard against.
 		XmlElement imageElement = stackXml.DocumentElement!;
 
-		Size imagesize = new Size (
+		Size imagesize = new (
 			Width: int.Parse (imageElement.GetAttribute ("w")),
 			Height: int.Parse (imageElement.GetAttribute ("h"))
 		);
@@ -147,8 +147,8 @@ public sealed class OraFormat : IImageImporter, IImageExporter
 
 	private static byte[] GetLayerXmlData (IReadOnlyList<UserLayer> layers)
 	{
-		using MemoryStream ms = new MemoryStream ();
-		using XmlTextWriter writer = new XmlTextWriter (ms, System.Text.Encoding.UTF8) {
+		using MemoryStream ms = new ();
+		using XmlTextWriter writer = new (ms, System.Text.Encoding.UTF8) {
 			Formatting = Formatting.Indented
 		};
 
@@ -177,16 +177,16 @@ public sealed class OraFormat : IImageImporter, IImageExporter
 					writer.WriteAttributeString ("visibility", "hidden");
 			}
 		}
-		
+
 		writer.Close ();
 		return ms.ToArray ();
 	}
 
 	public void Export (Document document, Gio.File file, Gtk.Window parent)
 	{
-		using var file_stream = new GioStream (file.Replace ());
+		using GioStream file_stream = new (file.Replace ());
 
-		using var archive = new ZipArchive (file_stream, ZipArchiveMode.Create);
+		using ZipArchive archive = new (file_stream, ZipArchiveMode.Create);
 
 		{
 			var mimeBytes = System.Text.Encoding.ASCII.GetBytes ("image/openraster");
