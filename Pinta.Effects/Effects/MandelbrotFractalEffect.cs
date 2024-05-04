@@ -16,20 +16,25 @@ namespace Pinta.Effects;
 
 public sealed class MandelbrotFractalEffect : BaseEffect
 {
-	public override string Icon => Pinta.Resources.Icons.EffectsRenderMandelbrotFractal;
+	public override string Icon
+		=> Pinta.Resources.Icons.EffectsRenderMandelbrotFractal;
 
-	public sealed override bool IsTileable => true;
+	public sealed override bool IsTileable
+		=> true;
 
-	public override string Name => Translations.GetString ("Mandelbrot Fractal");
+	public override string Name
+		=> Translations.GetString ("Mandelbrot Fractal");
 
-	public override bool IsConfigurable => true;
+	public override bool IsConfigurable
+		=> true;
 
-	public override string EffectMenuCategory => Translations.GetString ("Render");
+	public override string EffectMenuCategory
+		=> Translations.GetString ("Render");
 
-	public MandelbrotFractalData Data => (MandelbrotFractalData) EffectData!;  // NRT - Set in constructor
+	public MandelbrotFractalData Data
+		=> (MandelbrotFractalData) EffectData!;  // NRT - Set in constructor
 
 	private readonly IPaletteService palette;
-
 	private readonly IChromeService chrome;
 
 	public MandelbrotFractalEffect (IServiceProvider services)
@@ -138,18 +143,18 @@ public sealed class MandelbrotFractalEffect : BaseEffect
 		int g = 0;
 		int b = 0;
 		int a = 0;
+
 		for (double i = 0; i < settings.count; i++) {
 
 			double u = (2.0 * target.X - settings.canvasSize.Width + (i * settings.invCount)) * settings.invH;
 			double v = (2.0 * target.Y - settings.canvasSize.Height + (i * settings.invQuality % 1)) * settings.invH;
 
 			double radius = Utility.Magnitude (u, v);
-			double radiusP = radius;
 			double theta = Math.Atan2 (v, u);
 			double thetaP = theta + settings.angleTheta.Radians;
 
-			double uP = radiusP * Math.Cos (thetaP);
-			double vP = radiusP * Math.Sin (thetaP);
+			double uP = radius * Math.Cos (thetaP);
+			double vP = radius * Math.Sin (thetaP);
 
 			double m = Mandelbrot (
 				r: (uP * settings.invZoom) + offset_basis.X,
@@ -185,9 +190,8 @@ public sealed class MandelbrotFractalEffect : BaseEffect
 		[Caption ("Quality"), MinimumValue (1), MaximumValue (5)]
 		public int Quality { get; set; } = 2;
 
-		//TODO double
 		[Caption ("Zoom"), MinimumValue (0), MaximumValue (100)]
-		public int Zoom { get; set; } = 10;
+		public double Zoom { get; set; } = 10;
 
 		[Caption ("Angle")]
 		public DegreesAngle Angle { get; set; } = new (0);
