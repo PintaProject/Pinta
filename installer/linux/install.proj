@@ -53,7 +53,7 @@
     <Delete Files="$(InstallDataRootDir)/metainfo/pinta.appdata.xml" />
     <Delete Files="$(InstallDataRootDir)/applications/pinta.desktop" />
     <Delete Files="$(InstallDataRootDir)/pixmaps/pinta.xpm" />
-    <Delete Files="$(InstallDataRootDir)/icons/%(Icon.RecursiveDir)/%(Icon.Filename).%(Icon.Extension)" />
+    <Delete Files="$(InstallDataRootDir)/icons/%(Icon.RecursiveDir)/%(Icon.Filename)%(Icon.Extension)" />
     <Delete Files="$(InstallLocaleDir)/%(Translation.RecursiveDir)/pinta.mo" />
   </Target>
 </Project>
