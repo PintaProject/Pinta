@@ -1,7 +1,7 @@
 # Change Log
 All notable changes to this project (beginning with version 1.7) will be documented in this file.
 
-## [Unreleased](https://github.com/PintaProject/Pinta/compare/2.1.1...HEAD)
+## [Unreleased](https://github.com/PintaProject/Pinta/compare/2.1.2...HEAD)
 
 Thanks to the following contributors who worked on this release:
 - @cameronwhite
@@ -9,6 +9,7 @@ Thanks to the following contributors who worked on this release:
 - @yarikoptic
 - @Lehonti
 - @zWolfrost
+- @ptixed
 
 ### Added
 - Ported to GTK4 and libadwaita
@@ -45,6 +46,22 @@ Thanks to the following contributors who worked on this release:
 - The text tool now supports pre-editing to display the intermediate characters entered by an input method ([#2047445](https://bugs.launchpad.net/pinta/+bug/2047445))
 - Fixed layout issues in the effect dialogs ([#2049937](https://bugs.launchpad.net/pinta/+bug/2049937))
 - Fixed a bug where the Flip Horizontal / Vertical items in the Image menu incorrectly activated the Layer menu's flip actions ([#2051430](https://bugs.launchpad.net/pinta/+bug/2051430))
+- Fixed a bug where the `uninstall` Makefile target did not remove icons (#792)
+
+## [2.1.2](https://github.com/PintaProject/Pinta/releases/tag/2.1.2) - 2024/04/20
+
+Thanks to the following contributors who worked on this release:
+- @cameronwhite
+
+### Added
+
+### Changed
+- Support building against .NET 8 (replacing .NET 7) in addition to .NET 6
+
+### Fixed
+- Fixed AppStream validation errors in `xdg/pinta.appdata.xml`
+- Fixed issues where the system language settings on macOS did not properly take effect in Pinta ([#1976178](https://bugs.launchpad.net/pinta/+bug/1976178))
+- Fixed issues on macOS with loading webp images (#770)
 
 ## [2.1.1](https://github.com/PintaProject/Pinta/releases/tag/2.1.1) - 2023/02/26
 
