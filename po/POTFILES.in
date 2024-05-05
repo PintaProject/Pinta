@@ -225,6 +225,8 @@ Pinta.Gui.Addins/StatusProgressBar.cs
 Pinta.Gui.Addins/Utilities.cs
 Pinta.Gui.Widgets/DialogAttributes.cs
 Pinta.Gui.Widgets/Dialogs/MemberReflector.cs
+Pinta.Gui.Widgets/Dialogs/PintaLocalizer.cs
+Pinta.Gui.Widgets/Dialogs/ReflectionHelper.cs
 Pinta.Gui.Widgets/Dialogs/SimpleEffectDialog.cs
 Pinta.Gui.Widgets/Widgets/AnglePickerGraphic.cs
 Pinta.Gui.Widgets/Widgets/AnglePickerWidget.cs
