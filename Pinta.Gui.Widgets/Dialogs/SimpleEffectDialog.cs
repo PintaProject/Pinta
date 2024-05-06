@@ -126,8 +126,7 @@ public sealed class SimpleEffectDialog : Gtk.Dialog
 		MemberReflector reflector,
 		string caption,
 		string? hint,
-		bool skip,
-		bool isComboBox);
+		bool skip);
 
 	private static MemberSettings CreateSettings (MemberInfo memberInfo)
 	{
@@ -143,8 +142,7 @@ public sealed class SimpleEffectDialog : Gtk.Dialog
 			reflector: reflector,
 			caption: caption ?? MakeCaption (memberInfo.Name),
 			hint: reflector.Attributes.OfType<HintAttribute> ().Select (h => h.Hint).FirstOrDefault (),
-			skip: reflector.Attributes.OfType<SkipAttribute> ().Any (),
-			isComboBox: reflector.Attributes.OfType<StaticListAttribute> ().Any ()
+			skip: reflector.Attributes.OfType<SkipAttribute> ().Any ()
 		);
 	}
 
@@ -200,7 +198,7 @@ public sealed class SimpleEffectDialog : Gtk.Dialog
 			return CreateAnglePicker;
 		else if (memberType == typeof (double))
 			return CreateDoubleSlider;
-		else if (settings.isComboBox && memberType == typeof (string))
+		else if (memberType == typeof (string) && settings.reflector.Attributes.OfType<StaticListAttribute> ().Any ())
 			return CreateComboBox;
 		else if (memberType == typeof (bool))
 			return CreateCheckBox;
