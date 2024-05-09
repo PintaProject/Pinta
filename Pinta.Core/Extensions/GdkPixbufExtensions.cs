@@ -60,12 +60,11 @@ public static partial class GdkPixbufExtensions
 	// TODO-GTK4 (bindings) - record methods are not generated (https://github.com/gircore/gir.core/issues/743)
 	public static PixbufFormat[] GetFormats ()
 	{
-		// FIXME - using an unowned handle here because SListOwnedHandle is not correctly implemented in gir.core
-		var slist_handle = GetFormatsNative ();
-		uint n = GLib.Internal.SList.Length (slist_handle);
+		var slist = new GLib.SList (GetFormatsNative ());
+		uint n = GLib.SList.Length (slist);
 		var result = new PixbufFormat[n];
 		for (uint i = 0; i < n; ++i) {
-			var format = new GdkPixbuf.Internal.PixbufFormatUnownedHandle (GLib.Internal.SList.NthData (slist_handle, i));
+			var format = new GdkPixbuf.Internal.PixbufFormatUnownedHandle (GLib.SList.NthData (slist, i));
 			result[i] = new PixbufFormat (GdkPixbuf.Internal.PixbufFormat.Copy (format));
 		}
 
@@ -73,7 +72,7 @@ public static partial class GdkPixbufExtensions
 	}
 
 	[DllImport (PixbufLibraryName, EntryPoint = "gdk_pixbuf_get_formats")]
-	private static extern GLib.Internal.SListUnownedHandle GetFormatsNative ();
+	private static extern GLib.Internal.SListOwnedHandle GetFormatsNative ();
 
 	[DllImport (PixbufLibraryName, EntryPoint = "gdk_pixbuf_save_to_bufferv")]
 	private static extern bool SaveToBufferv (IntPtr pixbuf, out IntPtr buffer, out uint buffer_size, [MarshalAs (UnmanagedType.LPUTF8Str)] string type, IntPtr option_keys, IntPtr option_values, out GLib.Internal.ErrorOwnedHandle error);

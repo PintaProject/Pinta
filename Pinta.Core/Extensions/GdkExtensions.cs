@@ -25,6 +25,7 @@
 // THE SOFTWARE.
 
 using System;
+using System.Runtime.InteropServices;
 using System.Threading.Tasks;
 using Gdk;
 
@@ -32,6 +33,16 @@ namespace Pinta.Core;
 
 public static class GdkExtensions
 {
+	private const string GdkLibraryName = "Gdk";
+
+	static GdkExtensions ()
+	{
+		NativeImportResolver.RegisterLibrary (GdkLibraryName,
+			windowsLibraryName: "libgtk-4-1.dll",
+			linuxLibraryName: "libgtk-4.so.1",
+			osxLibraryName: "libgtk-4.1.dylib"
+		);
+	}
 	public static bool IsShiftPressed (this ModifierType m)
 		=> m.HasFlag (ModifierType.ShiftMask);
 
@@ -224,15 +235,19 @@ public static class GdkExtensions
 		return surf;
 	}
 
-	// TODO-GTK4 (bindings) - struct methods are not generated (https://github.com/gircore/gir.core/issues/622)
+	[DllImport (GdkLibraryName, EntryPoint = "gdk_file_list_get_files")]
+	private static extern GLib.Internal.SListOwnedHandle FileListGetFiles (Gdk.Internal.FileListHandle fileList);
+
+	// Wrapper around Gdk.FileList.GetFiles() to return a Gio.File array rather than GLib.SList.
+	// TODO-GTK4 (bindings) - Gdk.FileList.GetFiles() is not generated
 	public static Gio.File[] GetFilesHelper (this Gdk.FileList file_list)
 	{
-		var slist = file_list.GetFiles ();
+		var slist = new GLib.SList (FileListGetFiles (file_list.Handle));
 
-		uint n = GLib.Internal.SList.Length (slist.Handle);
+		uint n = GLib.SList.Length (slist);
 		var result = new Gio.File[n];
 		for (uint i = 0; i < n; ++i) {
-			result[i] = new Gio.FileHelper (GLib.Internal.SList.NthData (slist.Handle, i), ownedRef: false);
+			result[i] = new Gio.FileHelper (GLib.SList.NthData (slist, i), ownedRef: false);
 		}
 
 		return result;
