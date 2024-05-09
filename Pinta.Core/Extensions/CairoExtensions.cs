@@ -1431,18 +1431,16 @@ namespace Pinta.Core
 			gradient.AddColorStopRgba (offset, color.R, color.G, color.B, color.A);
 		}
 
-		// TODO-GTK4 (bindings) - requires improvements to struct generation (https://github.com/gircore/gir.core/issues/622)
 		public static Matrix CreateIdentityMatrix ()
 		{
-			var matrix = new Matrix (Cairo.Internal.MatrixManagedHandle.Create ());
+			var matrix = new Matrix ();
 			matrix.InitIdentity ();
 			return matrix;
 		}
 
-		// TODO-GTK4 (bindings) - requires improvements to struct generation (https://github.com/gircore/gir.core/issues/622)
 		public static Matrix CreateMatrix (double xx, double xy, double yx, double yy, double x0, double y0)
 		{
-			var matrix = new Matrix (Cairo.Internal.MatrixManagedHandle.Create ());
+			var matrix = new Matrix ();
 			matrix.Init (xx, xy, yx, yy, x0, y0);
 			return matrix;
 		}
