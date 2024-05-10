@@ -892,6 +892,7 @@ public abstract class BaseEditEngine
 			if (current_point.X != selPoint.Position.X || current_point.Y != selPoint.Position.Y)
 				MovePoint (controlPoints);
 
+			DrawActiveShape (false, false, true, shiftKey, false, e.IsControlPressed);
 			last_mouse_pos = current_point;
 			return;
 		}
