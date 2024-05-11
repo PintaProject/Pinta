@@ -70,16 +70,15 @@ public static class ResourceLoader
 			var snapshot = Gtk.Snapshot.New ();
 			icon_paintable.Snapshot (snapshot, size, size);
 
+			// Render the icon to a texture.
 			var node = snapshot.ToNode ();
-			if (node != null && node.GetNodeType () == Gsk.RenderNodeType.ColorMatrixNode) {
-				node = new Gsk.RenderNode (Gsk.Internal.ColorMatrixNode.GetChild (node.Handle));
-			}
-
-			if (node == null || node.GetNodeType () != Gsk.RenderNodeType.TextureNode)
+			if (node == null)
 				return false;
 
-			// TODO-GTK4 (bindings, unsubmitted) - the node should be a Gsk.TextureNode instance.
-			image = GObject.Internal.ObjectWrapper.WrapHandle<Gdk.Texture> (Gsk.Internal.TextureNode.GetTexture (node.Handle), false);
+			var renderer = Gsk.CairoRenderer.New ();
+			renderer.Realize (null);
+			image = renderer.RenderTexture (node, null);
+			renderer.Unrealize ();
 		} catch (Exception ex) {
 			Console.Error.WriteLine (ex.Message);
 		}
