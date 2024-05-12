@@ -8,15 +8,15 @@ msgstr ""
 "Project-Id-Version: pinta\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2024-04-28 01:12+0000\n"
-"PO-Revision-Date: 2024-03-09 22:01+0000\n"
-"Last-Translator: Ettore Atalan <atalanttore@googlemail.com>\n"
+"PO-Revision-Date: 2024-05-13 23:00+0000\n"
+"Last-Translator: Fiotux <finn54052@gmail.com>\n"
 "Language-Team: German <https://hosted.weblate.org/projects/pinta/pinta/de/>\n"
 "Language: de\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Generator: Weblate 5.5-dev\n"
+"X-Generator: Weblate 5.5.5\n"
 "X-Launchpad-Export-Date: 2023-12-18 03:00+0000\n"
 
 #: ../Pinta.Gui.Addins/InstallDialog.cs:217
@@ -261,7 +261,7 @@ msgstr "Absolute Werte:"
 #: ../Pinta/Dialogs/ResizeCanvasDialog.cs:68
 #: ../Pinta/Dialogs/ResizeImageDialog.cs:58
 msgid "By percentage:"
-msgstr "Prozentual"
+msgstr "Prozentual:"
 
 #: ../Pinta.Core/Actions/EditActions.cs:360
 #: ../Pinta.Core/Actions/EditActions.cs:401
@@ -357,7 +357,7 @@ msgstr ""
 
 #: ../Pinta.Tools/Tools/LassoSelectTool.cs:55
 msgid "Click and drag to draw the outline for a selection area."
-msgstr "Klicken und ziehen, um einen Bereich auszuwählen"
+msgstr "Klicken und ziehen, um einen Bereich auszuwählen."
 
 #: ../Pinta.Tools/Tools/PanTool.cs:42
 msgid "Click and drag to navigate image."
@@ -374,7 +374,7 @@ msgstr "Anklicken, um die Vordergrundfarbe festzulegen."
 
 #: ../Pinta.Tools/Tools/MagicWandTool.cs:49
 msgid "Click to select region of similar color."
-msgstr "Nach Farbe auswählen"
+msgstr "Nach Farbe auswählen."
 
 #: ../Pinta.Gui.Widgets/Widgets/StatusBarColorPaletteWidget.cs:256
 msgid "Click to select secondary color."
@@ -508,7 +508,7 @@ msgstr "Zuckerwatte"
 #: ../Pinta.Core/ImageFormats/OraFormat.cs:122
 #, csharp-format
 msgid "Could not import layer \"{0}\" from {1}"
-msgstr "Konnte die Ebene \"{0}\" nicht aus {1} importieren."
+msgstr "Konnte die Ebene \"{0}\" nicht aus {1} importieren"
 
 #: ../Pinta.Core/Classes/Palette.cs:196
 #: ../Pinta.Core/Managers/WorkspaceManager.cs:378
@@ -708,7 +708,7 @@ msgstr "Zugriff auf XDG Desktop Portale fehlgeschlagen"
 
 #: ../Pinta/MainWindow.cs:269
 msgid "Failed to initialize add-in"
-msgstr ""
+msgstr "Add-in konnte nicht initialisiert werden"
 
 #: ../Pinta.Gui.Addins/InstallDialog.cs:151
 msgid "Failed to load extension package"
@@ -1452,7 +1452,7 @@ msgstr "Versatz"
 #: ../Pinta/Actions/Edit/OffsetSelectionAction.cs:57
 #: ../Pinta/Dialogs/OffsetSelectionDialog.cs:41
 msgid "Offset Selection"
-msgstr ""
+msgstr "Offset-Auswahl"
 
 #: ../Pinta.Effects/Effects/OilPaintingEffect.cs:23
 msgid "Oil Painting"
@@ -1693,7 +1693,7 @@ msgstr "Beibehalten"
 
 #: ../Pinta.Effects/Effects/GradientHelper.cs:11
 msgid "Preset Gradient"
-msgstr ""
+msgstr "Voreingestellter Farbverlauf"
 
 #: ../Pinta/Dialogs/NewImageDialog.cs:101
 msgid "Preset:"
@@ -1756,7 +1756,7 @@ msgstr "Zufällig"
 #: ../Pinta.Effects/Effects/JuliaFractalEffect.cs:181
 #: ../Pinta.Effects/Effects/MandelbrotFractalEffect.cs:201
 msgid "Random Color Scheme Seed"
-msgstr ""
+msgstr "Seed für zufälliges Farbschema"
 
 #: ../Pinta.Effects/Effects/VoronoiDiagramEffect.cs:214
 msgid "Random Colors"
@@ -1770,7 +1770,7 @@ msgstr "Zufälliges Rauschen"
 
 #: ../Pinta.Effects/Effects/VoronoiDiagramEffect.cs:217
 msgid "Random Point Locations"
-msgstr ""
+msgstr "Zufällige Punktpositionen"
 
 #: ../Pinta.Tools/Tools/RecolorTool.cs:57
 msgid "Recolor"
@@ -2130,6 +2130,8 @@ msgstr "Textstil"
 #, csharp-format
 msgid "The '{0}' add-in may not be compatible with this version of Pinta"
 msgstr ""
+"Das Add-in '{0}' ist möglicherweise nicht mit dieser Version von Pinta "
+"kompatibel"
 
 #: ../Pinta/Actions/Edit/PasteAction.cs:174
 msgid "The clipboard does not contain an image."
