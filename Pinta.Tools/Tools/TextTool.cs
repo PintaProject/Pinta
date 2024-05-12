@@ -753,11 +753,9 @@ public sealed class TextTool : BaseTool
 						break;
 				}
 			}
-			if (keyHandled) {
-				im_context.FocusOut ();
+
+			if (keyHandled)
 				RedrawText (true, true);
-				im_context.FocusIn ();
-			}
 		}
 
 		return keyHandled;
