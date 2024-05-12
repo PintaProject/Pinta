@@ -47,6 +47,7 @@ Thanks to the following contributors who worked on this release:
 - Fixed layout issues in the effect dialogs ([#2049937](https://bugs.launchpad.net/pinta/+bug/2049937))
 - Fixed a bug where the Flip Horizontal / Vertical items in the Image menu incorrectly activated the Layer menu's flip actions ([#2051430](https://bugs.launchpad.net/pinta/+bug/2051430))
 - Fixed a bug where the `uninstall` Makefile target did not remove icons (#792)
+- Fixed a potential crash on some platforms when entering characters in the text tool using an input method (#722)
 
 ## [2.1.2](https://github.com/PintaProject/Pinta/releases/tag/2.1.2) - 2024/04/20
 
