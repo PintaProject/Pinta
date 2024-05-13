@@ -38,6 +38,7 @@ public abstract class BaseTransformTool : BaseTool
 	private readonly Matrix transform = CairoExtensions.CreateIdentityMatrix ();
 	private RectangleD source_rect;
 	private PointD original_point;
+	private PointD rect_original_point;
 	private bool is_dragging = false;
 	private bool is_rotating = false;
 	private bool is_scaling = false;
@@ -77,6 +78,7 @@ public abstract class BaseTransformTool : BaseTool
 			return;
 
 		original_point = e.PointDouble;
+		rect_original_point = new (rect_handle.Rectangle.X, rect_handle.Rectangle.Y);
 
 		if (!document.Workspace.PointInCanvas (e.PointDouble))
 			return;
@@ -105,7 +107,6 @@ public abstract class BaseTransformTool : BaseTool
 		transform.InitIdentity ();
 
 		if (is_scaling) {
-			// TODO - the constrain option should preserve the original aspect ratio, rather than creating a square.
 			rect_handle.UpdateDrag (e.PointDouble, constrain);
 
 			// Scale the original rectangle to fit the target rectangle.
@@ -134,6 +135,8 @@ public abstract class BaseTransformTool : BaseTool
 			transform.Translate (center.X, center.Y);
 			transform.Rotate (-angle);
 			transform.Translate (-center.X, -center.Y);
+			//TODO: the handle should rotate with the selection rather than just resizing to fit the new bounds
+			rect_handle.Rectangle = document.Selection.SelectionPath.GetBounds ().ToDouble ();
 		} else {
 			// The cursor position can be a subpixel value. Round to an integer
 			// so that we only translate by entire pixels.
@@ -141,6 +144,7 @@ public abstract class BaseTransformTool : BaseTool
 			var dx = Math.Floor (e.PointDouble.X - original_point.X);
 			var dy = Math.Floor (e.PointDouble.Y - original_point.Y);
 			transform.Translate (dx, dy);
+			rect_handle.Rectangle = new RectangleD(rect_original_point.X + dx, rect_original_point.Y + dy, rect_handle.Rectangle.Width, rect_handle.Rectangle.Height);
 		}
 
 		OnUpdateTransform (document, transform);
