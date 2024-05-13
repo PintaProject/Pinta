@@ -128,7 +128,7 @@ jobs:
       with:
         path-type: inherit # Inherit the path so that dotnet can be found
         update: true
-        install: mingw-w64-x86_64-libadwaita
+        install: mingw-w64-x86_64-libadwaita mingw-w64-x86_64-webp-pixbuf-loader
     - name: Build
       run: dotnet build Pinta.sln -c Release -p:MinGWFolder=${MINGW_PREFIX}
     - name: Test

@@ -73,6 +73,11 @@
     <GtkFile Include="$(MinGWBinFolder)\librsvg-2-2.dll" />
     <GtkFile Include="$(MinGWBinFolder)\libxml2-2.dll" />
 
+    <!-- Additional dependencies for the webp pixbuf loader. -->
+    <GtkFile Include="$(MinGWBinFolder)\libwebp-7.dll" />
+    <GtkFile Include="$(MinGWBinFolder)\libwebpdemux-2.dll" />
+    <GtkFile Include="$(MinGWBinFolder)\libwebpmux-3.dll" />
+
     <GtkFile Include="$(MinGWBinFolder)\gdbus.exe" />
     <GtkFile Include="$(MinGWBinFolder)\gdk-pixbuf-query-loaders.exe" />
     <GtkFile Include="$(MinGWBinFolder)\gspawn-win64-helper.exe" />

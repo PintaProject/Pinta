@@ -31,7 +31,7 @@ Used under [Creative Commons Attribution 3.0 License](http://creativecommons.org
 
 First, install the required GTK-related dependencies:
 - Install MinGW64 via [MSYS2](https://www.msys2.org)
-- From the MinGW64 terminal, run `pacman -S mingw-w64-x86_64-libadwaita` to install `libadwaita`.
+- From the MinGW64 terminal, run `pacman -S mingw-w64-x86_64-libadwaita mingw-w64-x86_64-webp-pixbuf-loader`.
 
 Pinta can then be built by opening `Pinta.sln` in [Visual Studio](https://visualstudio.microsoft.com/).
 Ensure that .NET 8 is installed via the Visual Studio installer.
