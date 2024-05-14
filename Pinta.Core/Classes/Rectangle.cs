@@ -64,10 +64,7 @@ public readonly record struct RectangleD
 			double x2 = Math.Max (start.X, end.X);
 			return new RectangleD (x1, y1, x2 - x1, y2 - y1);
 		} else {
-			return new RectangleD (start.X,
-				start.Y,
-				Math.Max (0.0, end.X - start.X),
-				Math.Max (0.0, end.Y - start.Y));
+			return new RectangleD (start.X, start.Y, end.X - start.X, end.Y - start.Y);
 		}
 	}
 

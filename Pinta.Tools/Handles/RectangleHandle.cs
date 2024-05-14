@@ -18,6 +18,7 @@ public class RectangleHandle : IToolHandle
 	private readonly MoveHandle[] handles = new MoveHandle[8];
 	private MoveHandle? active_handle = null;
 	private PointD? drag_start_pos = null;
+	private double aspect_ratio = 1;
 
 	public RectangleHandle ()
 	{
@@ -32,6 +33,18 @@ public class RectangleHandle : IToolHandle
 
 		foreach (var handle in handles)
 			handle.Active = true;
+	}
+
+	private enum HandleIndex
+	{
+		TopLeft = 0,
+		BottomLeft = 1,
+		TopRight = 2,
+		BottomRight = 3,
+		MiddleLeft = 4,
+		TopMiddle = 5,
+		MiddleRight = 6,
+		BottomMiddle = 7
 	}
 
 	#region IToolHandle Implementation
@@ -83,6 +96,7 @@ public class RectangleHandle : IToolHandle
 		if (IsDragging)
 			return false;
 
+		aspect_ratio = Rectangle.Width / Rectangle.Height;
 		this.image_size = image_size;
 
 		PointD view_pos = PintaCore.Workspace.CanvasPointToView (canvas_pos);
@@ -100,7 +114,7 @@ public class RectangleHandle : IToolHandle
 	/// </summary>
 	/// <param name="constrain">Constrain the rectangle to be a square</param>
 	/// <returns>The region to redraw with InvalidateWindowRect()</returns>
-	public RectangleI UpdateDrag (PointD canvas_pos, bool constrain)
+	public RectangleI UpdateDrag (PointD canvas_pos, ConstrainType constrain = ConstrainType.None)
 	{
 		if (!IsDragging)
 			throw new InvalidOperationException ("Drag operation has not been started!");
@@ -181,74 +195,213 @@ public class RectangleHandle : IToolHandle
 			active_handle = handles[3];
 	}
 
-	private void MoveActiveHandle (double x, double y, bool constrain)
+	private void MoveActiveHandle (double x, double y, ConstrainType constrain = ConstrainType.None)
 	{
 		// TODO - the constrain option should use the aspect ratio present when first dragging rather than the current aspect ratio
 		// Update the rectangle's size depending on which handle was dragged.
-		double aspect_ratio = (end_pt.Y - start_pt.Y) / (end_pt.X - start_pt.X);
-		Console.WriteLine(Array.IndexOf (handles, active_handle));
-		switch (Array.IndexOf (handles, active_handle)) {
-			case 0: //top left
-				start_pt = new (x, y);
-				if (constrain) {
-					//end_pt keeps the same x and y
-					start_pt = start_pt with { X = end_pt.X - (end_pt.Y - start_pt.Y) / aspect_ratio };
+		Console.WriteLine((HandleIndex)Array.IndexOf (handles, active_handle));
+		Console.WriteLine(x + " " + y);
+		switch ((HandleIndex)Array.IndexOf (handles, active_handle)) {
+			case HandleIndex.TopLeft:
+				switch (constrain) {
+					case ConstrainType.None:
+						start_pt = new (x, y);
+						break;
+					case ConstrainType.Square:
+						/*if (end_pt.X - x > end_pt.Y - y)
+							start_pt = new (end_pt.X - end_pt.Y + start_pt.Y, y);
+						else
+							start_pt = new (x, end_pt.Y - end_pt.X + start_pt.X);*/
+						if (x - end_pt.X > 0 && y - end_pt.Y > 0) {
+							if (x - start_pt.X < y - start_pt.Y)
+								end_pt = new (start_pt.X + y - start_pt.Y, y);
+							else
+								end_pt = new (x, start_pt.Y + x - start_pt.X);
+						} else if (x - end_pt.X < 0 && y - end_pt.Y < 0) {
+							if (end_pt.X - x > end_pt.Y - y)
+								start_pt = new (end_pt.X - end_pt.Y + start_pt.Y, y);
+							else
+								start_pt = new (x, end_pt.Y - end_pt.X + start_pt.X);
+						} else if (x - end_pt.X < 0 && y - end_pt.Y > 0) {
+							if (start_pt.X - x < y - start_pt.Y)
+								end_pt = new (start_pt.X + start_pt.Y - y, y);
+							else
+								end_pt = new (x, start_pt.Y + start_pt.X - x);
+						} else if (x - end_pt.X > 0 && y - end_pt.Y < 0) {
+							if (x - start_pt.X < start_pt.Y - y)
+								end_pt = new (start_pt.X + start_pt.Y - y, y);
+							else
+								end_pt = new (x, start_pt.Y + start_pt.X - x);
+						}
+						break;
+					case ConstrainType.AspectRatio: // we use the aspect_ratio field in the calculation to resize the rectangle with the same aspect ratio
+						if (end_pt.X - x > aspect_ratio * (end_pt.Y - y))
+							start_pt = new (end_pt.X - aspect_ratio * (end_pt.Y - y), y);
+						else
+							start_pt = new (x, end_pt.Y - (end_pt.X - x) / aspect_ratio);
+						break;
 				}
 				break;
-			case 2: //top right
-				end_pt = end_pt with { X = x };
-				start_pt = start_pt with { Y = y };
-				if (constrain) {
-					//start_pt keeps the same x, end_pt keeps the same y
-					end_pt = end_pt with { X = start_pt.X + (end_pt.Y - start_pt.Y) / aspect_ratio };
-					start_pt = start_pt with { Y = end_pt.Y - aspect_ratio * (end_pt.X - start_pt.X) };
-				}
-				break;
-			case 1: //bottom left
+			case HandleIndex.BottomLeft:
 				start_pt = start_pt with { X = x };
 				end_pt = end_pt with { Y = y };
-				if (constrain) {
-					//start_pt keeps the same y, end_pt keeps the same x
-					start_pt = start_pt with { X = end_pt.X - (end_pt.Y - start_pt.Y) / aspect_ratio };
-					end_pt = end_pt with { Y = start_pt.Y + aspect_ratio * (end_pt.X - start_pt.X) };
+				switch (constrain) {
+					case ConstrainType.Square:
+						if (end_pt.X - start_pt.X > end_pt.Y - start_pt.Y)
+							start_pt = start_pt with { X = end_pt.X - end_pt.Y + start_pt.Y };
+						else
+							end_pt = end_pt with { Y = start_pt.Y + end_pt.X - start_pt.X };
+						break;
+					case ConstrainType.AspectRatio:
+						if (end_pt.X - start_pt.X > aspect_ratio * (end_pt.Y - start_pt.Y))
+							start_pt = start_pt with { X = end_pt.X - aspect_ratio * (end_pt.Y - start_pt.Y) };
+						else
+							end_pt = end_pt with { Y = start_pt.Y + (end_pt.X - start_pt.X) / aspect_ratio };
+						break;
 				}
 				break;
-			case 3: //bottom right
-				end_pt = new (x, y);
-				if (constrain) {
-					//start_pt keeps the same x and y
-					end_pt = end_pt with { X = start_pt.X + (end_pt.Y - start_pt.Y) / aspect_ratio };
-				}
-				break;
-			// TODO: middle handles should resize the rectangle equally on both perpendicular axes (this will probably be easier once the original aspect ratio is stored)
-			case 4: //middle left
-				start_pt = start_pt with { X = x };
-				if (constrain) {
-					//end_pt keeps the same x
-					end_pt = end_pt with { Y = start_pt.Y + aspect_ratio * (end_pt.X - start_pt.X) };
-				}
-				break;
-			case 6: //middle right
-				end_pt = end_pt with { X = x };
-				if (constrain) {
-					//start_pt keeps the same x
-					start_pt = start_pt with { Y = end_pt.Y - aspect_ratio * (end_pt.X - start_pt.X) };
-				}
-				break;
-			case 5: //top middle
+			case HandleIndex.TopRight:
 				start_pt = start_pt with { Y = y };
-				if (constrain) {
-					//end_pt keeps the same y
-					end_pt = end_pt with { X = start_pt.X + (end_pt.Y - start_pt.Y) / aspect_ratio };
+				end_pt = end_pt with { X = x };
+				switch (constrain) {
+					case ConstrainType.Square:
+						if (end_pt.X - start_pt.X > end_pt.Y - start_pt.Y)
+							end_pt = end_pt with { X = start_pt.X + end_pt.Y - start_pt.Y };
+						else
+							start_pt = start_pt with { Y = end_pt.Y - end_pt.X + start_pt.X };
+						break;
+					case ConstrainType.AspectRatio:
+						if (end_pt.X - start_pt.X > aspect_ratio * (end_pt.Y - start_pt.Y))
+							end_pt = end_pt with { X = start_pt.X + aspect_ratio * (end_pt.Y - start_pt.Y) };
+						else
+							start_pt = start_pt with { Y = end_pt.Y - (end_pt.X - start_pt.X) / aspect_ratio };
+						break;
 				}
 				break;
-			case 7: //bottom middle
+			case HandleIndex.BottomRight:
+				switch (constrain) {
+					case ConstrainType.None:
+						end_pt = new (x, y);
+						break;
+					case ConstrainType.Square:
+						if (x - start_pt.X > 0 && y - start_pt.Y > 0) {
+							if (x - start_pt.X > y - start_pt.Y)
+								end_pt = new (start_pt.X + y - start_pt.Y, y);
+							else
+								end_pt = new (x, start_pt.Y + x - start_pt.X);
+						} else if (x - start_pt.X < 0 && y - start_pt.Y < 0) {
+							if (x - start_pt.X < y - start_pt.Y)
+								end_pt = new (start_pt.X + y - start_pt.Y, y);
+							else
+								end_pt = new (x, start_pt.Y + x - start_pt.X);
+						} else if (x - start_pt.X < 0 && y - start_pt.Y > 0) {
+							if (x - start_pt.X < start_pt.Y - y)
+								end_pt = new (start_pt.X + start_pt.Y - y, y);
+							else
+								end_pt = new (x, start_pt.Y + start_pt.X - x);
+						} else if (x - start_pt.X > 0 && y - start_pt.Y < 0) {
+							if (start_pt.X - x < y - start_pt.Y)
+								end_pt = new (start_pt.X + start_pt.Y - y, y);
+							else
+								end_pt = new (x, start_pt.Y + start_pt.X - x);
+						}
+
+						break;
+					case ConstrainType.AspectRatio:
+						if (x - start_pt.X > 0 && y - start_pt.Y > 0) {
+							if (x - start_pt.X > aspect_ratio * (y - start_pt.Y))
+								end_pt = new(start_pt.X + (y - start_pt.Y) * aspect_ratio, y);
+							else
+								end_pt = new(x, start_pt.Y + (x - start_pt.X) / aspect_ratio);
+						} else if (x - start_pt.X < 0 && y - start_pt.Y < 0) {
+							if (x - start_pt.X < aspect_ratio * (y - start_pt.Y))
+								end_pt = new(start_pt.X + (y - start_pt.Y) * aspect_ratio, y);
+							else
+								end_pt = new(x, start_pt.Y + (x - start_pt.X) / aspect_ratio);
+						} else if (x - start_pt.X < 0 && y - start_pt.Y > 0) {
+							if (x - start_pt.X < aspect_ratio * (start_pt.Y - y))
+								end_pt = new(start_pt.X + (start_pt.Y - y) * aspect_ratio, y);
+							else
+								end_pt = new(x, start_pt.Y + (start_pt.X - x) / aspect_ratio);
+						} else if (x - start_pt.X > 0 && y - start_pt.Y < 0) {
+							if (start_pt.X - x < aspect_ratio * (y - start_pt.Y))
+								end_pt = new(start_pt.X + (y - start_pt.Y) * aspect_ratio, y);
+							else
+								end_pt = new(x, start_pt.Y + (start_pt.X - x) / aspect_ratio);
+						}
+
+						break;
+				}
+				break;
+			case HandleIndex.MiddleLeft:
+				start_pt = start_pt with { X = x };
+				switch (constrain) {
+					case ConstrainType.Square:
+						var d = end_pt.X - start_pt.X;
+						var startY = start_pt.Y;
+						start_pt = start_pt with { Y = (startY + end_pt.Y - d) / 2 };
+						end_pt = end_pt with { Y = (startY + end_pt.Y + d) / 2 };
+						break;
+					case ConstrainType.AspectRatio:
+						var d2 = end_pt.X - start_pt.X;
+						var startY2 = start_pt.Y;
+						start_pt = start_pt with { Y = (startY2 + end_pt.Y - d2 / aspect_ratio) / 2 };
+						end_pt = end_pt with { Y = (startY2 + end_pt.Y + d2 / aspect_ratio) / 2 };
+						break;
+				}
+				break;
+			case HandleIndex.TopMiddle:
+				start_pt = start_pt with { Y = y };
+				switch (constrain) {
+					case ConstrainType.Square:
+						var d = end_pt.Y - start_pt.Y;
+						var startX = start_pt.X;
+						start_pt = start_pt with { X = (startX + end_pt.X - d) / 2 };
+						end_pt = end_pt with { X = (startX + end_pt.X + d) / 2 };
+						break;
+					case ConstrainType.AspectRatio:
+						var d2 = end_pt.Y - start_pt.Y;
+						var startX2 = start_pt.X;
+						start_pt = start_pt with { X = (startX2 + end_pt.X - d2 * aspect_ratio) / 2 };
+						end_pt = end_pt with { X = (startX2 + end_pt.X + d2 * aspect_ratio) / 2 };
+						break;
+				}
+				break;
+			case HandleIndex.MiddleRight:
+				end_pt = end_pt with { X = x };
+				switch (constrain) {
+					case ConstrainType.Square:
+						var d = end_pt.X - start_pt.X;
+						var startY = start_pt.Y;
+						start_pt = start_pt with { Y = (startY + end_pt.Y - d) / 2 };
+						end_pt = end_pt with { Y = (startY + end_pt.Y + d) / 2 };
+						break;
+					case ConstrainType.AspectRatio:
+						var d2 = end_pt.X - start_pt.X;
+						var startY2 = start_pt.Y;
+						start_pt = start_pt with { Y = (startY2 + end_pt.Y - d2 / aspect_ratio) / 2 };
+						end_pt = end_pt with { Y = (startY2 + end_pt.Y + d2 / aspect_ratio) / 2 };
+						break;
+				}
+				break;
+			case HandleIndex.BottomMiddle:
 				end_pt = end_pt with { Y = y };
-				if (constrain) {
-					//start_pt keeps the same y
-					start_pt = start_pt with { X = end_pt.X - (end_pt.Y - start_pt.Y) / aspect_ratio };
+				switch (constrain) {
+					case ConstrainType.Square:
+						var d = end_pt.Y - start_pt.Y;
+						var startX = start_pt.X;
+						start_pt = start_pt with { X = (startX + end_pt.X - d) / 2 };
+						end_pt = end_pt with { X = (startX + end_pt.X + d) / 2 };
+						break;
+					case ConstrainType.AspectRatio:
+						var d2 = end_pt.Y - start_pt.Y;
+						var startX2 = start_pt.X;
+						start_pt = start_pt with { X = (startX2 + end_pt.X - d2 * aspect_ratio) / 2 };
+						end_pt = end_pt with { X = (startX2 + end_pt.X + d2 * aspect_ratio) / 2 };
+						break;
 				}
 				break;
+
 			default:
 				throw new ArgumentOutOfRangeException (nameof (active_handle));
 		}
@@ -256,3 +409,9 @@ public class RectangleHandle : IToolHandle
 	}
 }
 
+public enum ConstrainType
+{
+	None,
+	Square,
+	AspectRatio
+}

@@ -29,6 +29,7 @@ using System.Collections.Generic;
 using System.Linq;
 using Cairo;
 using Pinta.Core;
+using Pinta.Tools.Handles;
 
 namespace Pinta.Tools;
 
@@ -52,7 +53,7 @@ public abstract class BaseTransformTool : BaseTool
 	/// </summary>
 	public BaseTransformTool (IServiceManager services) : base (services)
 	{
-		rect_handle = new () { InvertIfNegative = false, Active = true };
+		rect_handle = new () { InvertIfNegative = true, Active = true };
 	}
 
 	protected override void OnActivated (Document? document)
@@ -107,7 +108,7 @@ public abstract class BaseTransformTool : BaseTool
 		transform.InitIdentity ();
 
 		if (is_scaling) {
-			rect_handle.UpdateDrag (e.PointDouble, constrain);
+			rect_handle.UpdateDrag (e.PointDouble, constrain ? ConstrainType.AspectRatio : ConstrainType.None);
 
 			// Scale the original rectangle to fit the target rectangle.
 			var target_rect = rect_handle.Rectangle;
