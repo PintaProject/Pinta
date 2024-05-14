@@ -46,7 +46,7 @@ public sealed class CanvasWindow : Grid
 	private GestureZoom gesture_zoom;
 
 	private const double ZoomThresholdScroll = 1.25;
-	private const double ZoomThresholdPinch = 0.2;
+	private const double ZoomThresholdPinch = 0.15;
 
 	public PintaCanvas Canvas { get; set; }
 	public bool HasBeenShown { get; set; }
@@ -62,8 +62,9 @@ public sealed class CanvasWindow : Grid
 
 		var vp = new Viewport ();
 
-		var scroll_controller = Gtk.EventControllerScroll.New (EventControllerScrollFlags.Vertical);
+		var scroll_controller = Gtk.EventControllerScroll.New (EventControllerScrollFlags.BothAxes);
 		scroll_controller.OnScroll += HandleScrollEvent;
+		scroll_controller.OnDecelerate += (_, _) => gesture_zoom.IsActive ();
 		vp.AddController (scroll_controller);
 
 		// The mouse handler in PintaCanvas grabs focus away from toolbar widgets.
@@ -121,8 +122,8 @@ public sealed class CanvasWindow : Grid
 		gesture_zoom = GestureZoom.New ();
 		gesture_zoom.SetPropagationPhase (PropagationPhase.Bubble);
 		gesture_zoom.OnScaleChanged += HandleGestureZoomScaleChanged;
-		gesture_zoom.OnEnd += (_, _) => last_scale_delta = 0;
-		gesture_zoom.OnCancel += (_, _) => last_scale_delta = 0;
+		gesture_zoom.OnEnd += (_, _) => cumulative_zoom_amount = last_scale_delta = 0;
+		gesture_zoom.OnCancel += (_, _) => cumulative_zoom_amount = last_scale_delta = 0;
 		AddController (gesture_zoom);
 	}
 
@@ -206,6 +207,8 @@ public sealed class CanvasWindow : Grid
 
 	private bool HandleScrollEvent (EventControllerScroll controller, EventControllerScroll.ScrollSignalArgs args)
 	{
+		if (gesture_zoom.IsActive ())
+			return true;
 		// Allow the user to zoom in/out with Ctrl-Mousewheel or Ctrl-two-finger-scroll
 		if (!controller.GetCurrentEventState ().IsControlPressed ())
 			return false;
