@@ -207,46 +207,44 @@ public sealed class CanvasWindow : Grid
 	private bool HandleScrollEvent (EventControllerScroll controller, EventControllerScroll.ScrollSignalArgs args)
 	{
 		// Allow the user to zoom in/out with Ctrl-Mousewheel or Ctrl-two-finger-scroll
-		if (controller.GetCurrentEventState ().IsControlPressed ()) {
-			// "clicky" scroll wheels generate 1 or -1
-			if (args.Dx == 1 || args.Dy == -1) {
-				document.Workspace.ZoomInAroundCanvasPoint (current_canvas_pos);
-				return true;
-			}
-			if (args.Dx == -1 || args.Dy == 1) {
-				document.Workspace.ZoomOutAroundCanvasPoint (current_canvas_pos);
-				return true;
-			}
+		if (!controller.GetCurrentEventState ().IsControlPressed ())
+			return false;
 
-			// analog scroll wheels and scrolling on a touchpad generates a range of values constantly as the user scrolls
-			// this might feel "backwards" on a touchpad to some people
-			if (args.Dx > 0 || args.Dy < 0) {
-				if (cumulative_zoom_amount > 0)
-					cumulative_zoom_amount = 0;
-
-				cumulative_zoom_amount += args.Dx;
-				cumulative_zoom_amount += args.Dy;
-				if (cumulative_zoom_amount <= -ZoomThresholdScroll) {
-					document.Workspace.ZoomInAroundCanvasPoint (current_canvas_pos);
-					cumulative_zoom_amount = 0;
-				}
-
-			} else {
-				if (cumulative_zoom_amount < 0)
-					cumulative_zoom_amount = 0;
-
-				cumulative_zoom_amount += args.Dx;
-				cumulative_zoom_amount += args.Dy;
-				if (cumulative_zoom_amount >= ZoomThresholdScroll) {
-					document.Workspace.ZoomOutAroundCanvasPoint (current_canvas_pos);
-					cumulative_zoom_amount = 0;
-				}
-
-			}
-
+		// "clicky" scroll wheels generate 1 or -1
+		if (args.Dy == -1) {
+			document.Workspace.ZoomInAroundCanvasPoint (current_canvas_pos);
+			return true;
+		}
+		if (args.Dy == 1) {
+			document.Workspace.ZoomOutAroundCanvasPoint (current_canvas_pos);
 			return true;
 		}
 
-		return false;
+		// analog scroll wheels and scrolling on a touchpad generates a range of values constantly as the user scrolls
+		// this might feel "backwards" on a touchpad to some people
+		if (args.Dy < 0) {
+			if (cumulative_zoom_amount > 0)
+				cumulative_zoom_amount = 0;
+
+			cumulative_zoom_amount += args.Dy;
+			if (cumulative_zoom_amount <= -ZoomThresholdScroll) {
+				document.Workspace.ZoomInAroundCanvasPoint (current_canvas_pos);
+				cumulative_zoom_amount = 0;
+			}
+
+		} else {
+			if (cumulative_zoom_amount < 0)
+				cumulative_zoom_amount = 0;
+
+			cumulative_zoom_amount += args.Dy;
+			if (cumulative_zoom_amount >= ZoomThresholdScroll) {
+				document.Workspace.ZoomOutAroundCanvasPoint (current_canvas_pos);
+				cumulative_zoom_amount = 0;
+			}
+
+		}
+
+		return true;
+
 	}
 }
