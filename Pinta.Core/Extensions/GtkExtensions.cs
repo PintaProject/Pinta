@@ -430,19 +430,15 @@ public static partial class GtkExtensions
 	[LibraryImport (GtkLibraryName, EntryPoint = "gtk_style_context_get_color")]
 	private static partial void StyleContextGetColor (IntPtr handle, out GdkRGBA color);
 
-	// TODO-GTK4 (bindings) - structs are not generated (https://github.com/gircore/gir.core/issues/622)
 	public static void SetColor (this Gtk.ColorChooserDialog dialog, Cairo.Color color)
 	{
-		ColorChooserSetRgba (dialog.Handle, new GdkRGBA () {
+		dialog.SetRgba (new Gdk.RGBA {
 			Red = (float) color.R,
 			Blue = (float) color.B,
 			Green = (float) color.G,
 			Alpha = (float) color.A
 		});
 	}
-
-	[LibraryImport (GtkLibraryName, EntryPoint = "gtk_color_chooser_set_rgba")]
-	private static partial void ColorChooserSetRgba (IntPtr handle, in GdkRGBA color);
 
 	// TODO-GTK4 (bindings) - structs are not generated (https://github.com/gircore/gir.core/issues/622)
 	public static void GetColor (this Gtk.ColorChooserDialog dialog, out Cairo.Color color)
