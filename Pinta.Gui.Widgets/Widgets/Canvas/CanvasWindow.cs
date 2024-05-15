@@ -60,11 +60,19 @@ public sealed class CanvasWindow : Grid
 
 		scrolled_window = new ScrolledWindow ();
 
+		gesture_zoom = GestureZoom.New ();
+		gesture_zoom.SetPropagationPhase (PropagationPhase.Bubble);
+		gesture_zoom.OnScaleChanged += HandleGestureZoomScaleChanged;
+		gesture_zoom.OnEnd += (_, _) => cumulative_zoom_amount = last_scale_delta = 0;
+		gesture_zoom.OnCancel += (_, _) => cumulative_zoom_amount = last_scale_delta = 0;
+
+		AddController (gesture_zoom);
+
 		var vp = new Viewport ();
 
-		var scroll_controller = Gtk.EventControllerScroll.New (EventControllerScrollFlags.BothAxes);
+		var scroll_controller = Gtk.EventControllerScroll.New (EventControllerScrollFlags.BothAxes); // Both axes must be captured so the zoom gesture can cancel them
 		scroll_controller.OnScroll += HandleScrollEvent;
-		scroll_controller.OnDecelerate += (_, _) => gesture_zoom.IsActive ();
+		scroll_controller.OnDecelerate += (_, _) => gesture_zoom.IsActive (); // Cancel scroll deceleration when zooming
 		vp.AddController (scroll_controller);
 
 		// The mouse handler in PintaCanvas grabs focus away from toolbar widgets.
@@ -118,13 +126,6 @@ public sealed class CanvasWindow : Grid
 		};
 
 		AddController (motion_controller);
-
-		gesture_zoom = GestureZoom.New ();
-		gesture_zoom.SetPropagationPhase (PropagationPhase.Bubble);
-		gesture_zoom.OnScaleChanged += HandleGestureZoomScaleChanged;
-		gesture_zoom.OnEnd += (_, _) => cumulative_zoom_amount = last_scale_delta = 0;
-		gesture_zoom.OnCancel += (_, _) => cumulative_zoom_amount = last_scale_delta = 0;
-		AddController (gesture_zoom);
 	}
 
 	private void HandleGestureZoomScaleChanged (object? sender, EventArgs e)
