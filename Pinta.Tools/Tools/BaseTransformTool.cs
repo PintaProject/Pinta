@@ -44,7 +44,7 @@ public abstract class BaseTransformTool : BaseTool
 	private bool is_rotating = false;
 	private bool is_scaling = false;
 	private bool using_mouse = false;
-	private readonly Handles.RectangleHandle rect_handle;
+	protected readonly Handles.RectangleHandle rect_handle;
 
 	public override IEnumerable<IToolHandle> Handles => Enumerable.Repeat (rect_handle, 1);
 
@@ -53,7 +53,7 @@ public abstract class BaseTransformTool : BaseTool
 	/// </summary>
 	public BaseTransformTool (IServiceManager services) : base (services)
 	{
-		rect_handle = new () { InvertIfNegative = true, Active = true };
+		rect_handle = new () { Active = true };
 	}
 
 	protected override void OnActivated (Document? document)
