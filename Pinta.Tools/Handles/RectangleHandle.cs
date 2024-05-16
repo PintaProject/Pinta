@@ -1,4 +1,5 @@
 using System;
+using System.Diagnostics;
 using System.Linq;
 using Cairo;
 using Pinta.Core;
@@ -17,6 +18,7 @@ public class RectangleHandle : IToolHandle
 	private readonly MoveHandle[] handles = new MoveHandle[8];
 	private MoveHandle? active_handle = null;
 	private PointD? drag_start_pos = null;
+	private double aspect_ratio = 1;
 
 	public RectangleHandle ()
 	{
@@ -31,6 +33,18 @@ public class RectangleHandle : IToolHandle
 
 		foreach (var handle in handles)
 			handle.Active = true;
+	}
+
+	private enum HandleIndex
+	{
+		TopLeft = 0,
+		BottomLeft = 1,
+		TopRight = 2,
+		BottomRight = 3,
+		MiddleLeft = 4,
+		TopMiddle = 5,
+		MiddleRight = 6,
+		BottomMiddle = 7
 	}
 
 	#region IToolHandle Implementation
@@ -82,6 +96,7 @@ public class RectangleHandle : IToolHandle
 		if (IsDragging)
 			return false;
 
+		aspect_ratio = Rectangle.Width / Rectangle.Height;
 		this.image_size = image_size;
 
 		PointD view_pos = PintaCore.Workspace.CanvasPointToView (canvas_pos);
@@ -99,7 +114,7 @@ public class RectangleHandle : IToolHandle
 	/// </summary>
 	/// <param name="constrain">Constrain the rectangle to be a square</param>
 	/// <returns>The region to redraw with InvalidateWindowRect()</returns>
-	public RectangleI UpdateDrag (PointD canvas_pos, bool constrain)
+	public RectangleI UpdateDrag (PointD canvas_pos, ConstrainType constrain = ConstrainType.None)
 	{
 		if (!IsDragging)
 			throw new InvalidOperationException ("Drag operation has not been started!");
@@ -147,6 +162,7 @@ public class RectangleHandle : IToolHandle
 		var rect = Rectangle;
 		start_pt = rect.Location ();
 		end_pt = rect.EndLocation ();
+		Console.WriteLine($"Start: {start_pt}, End: {end_pt}");
 	}
 
 	/// <summary>
@@ -180,83 +196,121 @@ public class RectangleHandle : IToolHandle
 			active_handle = handles[3];
 	}
 
-	private void MoveActiveHandle (double x, double y, bool constrain)
+	private void MoveActiveHandle (double x, double y, ConstrainType constrain = ConstrainType.None)
 	{
 		// Update the rectangle's size depending on which handle was dragged.
-		switch (Array.IndexOf (handles, active_handle)) {
-			case 0:
+		Console.WriteLine((HandleIndex)Array.IndexOf (handles, active_handle));
+		switch ((HandleIndex)Array.IndexOf (handles, active_handle)) {
+			case HandleIndex.TopLeft:
 				start_pt = new (x, y);
-				if (constrain) {
-					if (end_pt.X - start_pt.X <= end_pt.Y - start_pt.Y)
-						start_pt = start_pt with { X = end_pt.X - end_pt.Y + start_pt.Y };
-					else
-						start_pt = start_pt with { Y = end_pt.Y - end_pt.X + start_pt.X };
-				}
+				PositionPointsFromCornerHandle (end_pt.X, end_pt.Y, ref start_pt, ref start_pt, x, y, constrain);
 				break;
-			case 1:
-				start_pt = start_pt with { X = x };
-				end_pt = end_pt with { Y = y };
-				if (constrain) {
-					if (end_pt.X - start_pt.X <= end_pt.Y - start_pt.Y)
-						start_pt = start_pt with { X = end_pt.X - end_pt.Y + start_pt.Y };
-					else
-						end_pt = end_pt with { Y = start_pt.Y + end_pt.X - start_pt.X };
-				}
-				break;
-			case 2:
-				end_pt = end_pt with { X = x };
+			case HandleIndex.TopRight:
 				start_pt = start_pt with { Y = y };
-				if (constrain) {
-					if (end_pt.X - start_pt.X <= end_pt.Y - start_pt.Y)
-						end_pt = end_pt with { X = start_pt.X + end_pt.Y - start_pt.Y };
-					else
-						start_pt = start_pt with { Y = end_pt.Y - end_pt.X + start_pt.X };
-				}
+				end_pt = end_pt with { X = x };
+				PositionPointsFromCornerHandle (start_pt.X, end_pt.Y, ref end_pt, ref start_pt, x, y, constrain);
 				break;
-			case 3:
+			case HandleIndex.BottomRight:
 				end_pt = new (x, y);
-				if (constrain) {
-					if (end_pt.X - start_pt.X <= end_pt.Y - start_pt.Y)
-						end_pt = end_pt with { X = start_pt.X + end_pt.Y - start_pt.Y };
-					else
-						end_pt = end_pt with { Y = start_pt.Y + end_pt.X - start_pt.X };
-				}
+				PositionPointsFromCornerHandle (start_pt.X, start_pt.Y, ref end_pt, ref end_pt, x, y, constrain);
 				break;
-			case 4:
+			case HandleIndex.BottomLeft:
 				start_pt = start_pt with { X = x };
-				if (constrain) {
-					var d = end_pt.X - start_pt.X;
-					start_pt = start_pt with { Y = (start_pt.Y + end_pt.Y - d) / 2 };
-					end_pt = end_pt with { Y = (start_pt.Y + end_pt.Y + d) / 2 };
-				}
-				break;
-			case 5:
-				start_pt = start_pt with { Y = y };
-				if (constrain) {
-					var d = end_pt.Y - start_pt.Y;
-					start_pt = start_pt with { X = (start_pt.X + end_pt.X - d) / 2 };
-					end_pt = end_pt with { X = (start_pt.X + end_pt.X + d) / 2 };
-				}
-				break;
-			case 6:
-				end_pt = end_pt with { X = x };
-				if (constrain) {
-					var d = end_pt.X - start_pt.X;
-					start_pt = start_pt with { Y = (start_pt.Y + end_pt.Y - d) / 2 };
-					end_pt = end_pt with { Y = (start_pt.Y + end_pt.Y + d) / 2 };
-				}
-				break;
-			case 7:
 				end_pt = end_pt with { Y = y };
-				if (constrain) {
-					var d = end_pt.Y - start_pt.Y;
-					start_pt = start_pt with { X = (start_pt.X + end_pt.X - d) / 2 };
-					end_pt = end_pt with { X = (start_pt.X + end_pt.X + d) / 2 };
-				}
+				PositionPointsFromCornerHandle (end_pt.X, start_pt.Y, ref start_pt, ref end_pt, x, y, constrain);
+				break;
+			case HandleIndex.MiddleLeft:
+				start_pt = start_pt with { X = x };
+				PositionPointsFromLeftRightHandle (constrain);
+				break;
+			case HandleIndex.MiddleRight:
+				end_pt = end_pt with { X = x };
+				PositionPointsFromLeftRightHandle (constrain);
+				break;
+			case HandleIndex.TopMiddle:
+				start_pt = start_pt with { Y = y };
+				PositionPointsFromTopBottomHandle (constrain);
+				break;
+			case HandleIndex.BottomMiddle:
+				end_pt = end_pt with { Y = y };
+				PositionPointsFromTopBottomHandle (constrain);
 				break;
 			default:
 				throw new ArgumentOutOfRangeException (nameof (active_handle));
 		}
+
+	}
+
+	private void PositionPointsFromCornerHandle (double j, double k, ref PointD c, ref PointD d, double x, double y, ConstrainType constrain)
+	{
+		double aspectRatio;
+		if (constrain == ConstrainType.Square)
+			aspectRatio = 1;
+		else if (constrain == ConstrainType.AspectRatio)
+			aspectRatio = aspect_ratio;
+		else return;
+
+		if (x - j >= 0 && y - k >= 0) {
+			if (x - j > aspectRatio * (y - k))
+				c = c with { X = j + (y - k) * aspectRatio };
+			else
+				d = d with { Y = k + (x - j) / aspectRatio };
+		} else if (x - j <= 0 && y - k <= 0) {
+			if (x - j < aspectRatio * (y - k))
+				c = c with { X = j + (y - k) * aspectRatio };
+			else
+				d = d with { Y = k + (x - j) / aspectRatio };
+		} else if (x - j <= 0 && y - k >= 0) {
+			if (x - j < aspectRatio * (k - y))
+				c = c with { X = j + (k - y) * aspectRatio };
+			else
+				d = d with { Y = k + (j - x) / aspectRatio };
+		} else if (x - j >= 0 && y - k <= 0) {
+			if (j - x < aspectRatio * (y - k))
+				c = c with { X = j + (k - y) * aspectRatio };
+			else
+				d = d with { Y = k + (j - x) / aspectRatio };
+		}
+	}
+	private void PositionPointsFromLeftRightHandle (ConstrainType constrain)
+	{
+		double aspectRatio;
+		if (constrain == ConstrainType.Square)
+			aspectRatio = 1;
+		else if (constrain == ConstrainType.AspectRatio)
+			aspectRatio = aspect_ratio;
+		else return;
+
+		var d = end_pt.X - start_pt.X;
+		var startY = start_pt.Y;
+		var a = (startY + end_pt.Y - d / aspectRatio) / 2;
+		var b = (startY + end_pt.Y + d / aspectRatio) / 2;
+		Console.WriteLine($"A: {a}, B: {b}");
+		start_pt = start_pt with { Y = Math.Min(a, b) };
+		end_pt = end_pt with { Y = Math.Max(a, b) };
+	}
+
+	private void PositionPointsFromTopBottomHandle (ConstrainType constrain)
+	{
+		double aspectRatio;
+		if (constrain == ConstrainType.Square)
+			aspectRatio = 1;
+		else if (constrain == ConstrainType.AspectRatio)
+			aspectRatio = aspect_ratio;
+		else return;
+
+		var d = end_pt.Y - start_pt.Y;
+		var startX = start_pt.X;
+		var a = (startX + end_pt.X - d * aspectRatio) / 2;
+		var b = (startX + end_pt.X + d * aspectRatio) / 2;
+		start_pt = start_pt with { X = Math.Min(a, b) };
+		end_pt = end_pt with { X = Math.Max(a, b) };
 	}
 }
 
+public enum ConstrainType
+{
+	None,
+	Square,
+	AspectRatio
+}

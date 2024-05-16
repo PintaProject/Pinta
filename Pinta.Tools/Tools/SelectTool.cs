@@ -105,7 +105,7 @@ public abstract class SelectTool : BaseTool
 			return;
 		}
 
-		var dirty = handle.UpdateDrag (e.PointDouble, e.IsShiftPressed);
+		var dirty = handle.UpdateDrag (e.PointDouble, e.IsShiftPressed ? ConstrainType.Square : ConstrainType.None);
 		PintaCore.Workspace.InvalidateWindowRect (dirty);
 
 		dirty = ReDraw (document);
