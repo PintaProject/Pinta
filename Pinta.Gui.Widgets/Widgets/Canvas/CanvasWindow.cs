@@ -1,21 +1,21 @@
-// 
+//
 // CanvasWindow.cs
-//  
+//
 // Author:
 //       Jonathan Pobst <monkey@jpobst.com>
-// 
+//
 // Copyright (c) 2015 Jonathan Pobst
-// 
+//
 // Permission is hereby granted, free of charge, to any person obtaining a copy
 // of this software and associated documentation files (the "Software"), to deal
 // in the Software without restriction, including without limitation the rights
 // to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
 // copies of the Software, and to permit persons to whom the Software is
 // furnished to do so, subject to the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be included in
 // all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
 // IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
 // FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
@@ -25,6 +25,7 @@
 // THE SOFTWARE.
 
 using System;
+using System.Diagnostics;
 using Gtk;
 using Pinta.Core;
 using Pinta.Gui.Widgets;
@@ -40,6 +41,12 @@ public sealed class CanvasWindow : Grid
 	private readonly EventControllerMotion motion_controller;
 	private PointD current_window_pos = new ();
 	private PointD current_canvas_pos = new ();
+	private double cumulative_zoom_amount;
+	private double last_scale_delta;
+	private GestureZoom gesture_zoom;
+
+	private const double ZoomThresholdScroll = 1.25;
+	private const double ZoomThresholdPinch = 0.15;
 
 	public PintaCanvas Canvas { get; set; }
 	public bool HasBeenShown { get; set; }
@@ -53,10 +60,19 @@ public sealed class CanvasWindow : Grid
 
 		scrolled_window = new ScrolledWindow ();
 
+		gesture_zoom = GestureZoom.New ();
+		gesture_zoom.SetPropagationPhase (PropagationPhase.Bubble);
+		gesture_zoom.OnScaleChanged += HandleGestureZoomScaleChanged;
+		gesture_zoom.OnEnd += (_, _) => cumulative_zoom_amount = last_scale_delta = 0;
+		gesture_zoom.OnCancel += (_, _) => cumulative_zoom_amount = last_scale_delta = 0;
+
+		AddController (gesture_zoom);
+
 		var vp = new Viewport ();
 
-		var scroll_controller = Gtk.EventControllerScroll.New (EventControllerScrollFlags.Vertical);
+		var scroll_controller = Gtk.EventControllerScroll.New (EventControllerScrollFlags.BothAxes); // Both axes must be captured so the zoom gesture can cancel them
 		scroll_controller.OnScroll += HandleScrollEvent;
+		scroll_controller.OnDecelerate += (_, _) => gesture_zoom.IsActive (); // Cancel scroll deceleration when zooming
 		vp.AddController (scroll_controller);
 
 		// The mouse handler in PintaCanvas grabs focus away from toolbar widgets.
@@ -110,6 +126,32 @@ public sealed class CanvasWindow : Grid
 		};
 
 		AddController (motion_controller);
+	}
+
+	private void HandleGestureZoomScaleChanged (object? sender, EventArgs e)
+	{
+		// Allow the user to zoom in/out by pinching the trackpad
+		double pinchDelta = gesture_zoom.GetScaleDelta () - 1 - last_scale_delta;
+		if (pinchDelta < 0) {
+			if (cumulative_zoom_amount > 0)
+				cumulative_zoom_amount = 0; // Reset the counter if the user changes direction so that changing direction doesn't take extra movement
+
+			cumulative_zoom_amount += pinchDelta;
+			if (cumulative_zoom_amount <= -ZoomThresholdPinch) {
+				document.Workspace.ZoomOutAroundCanvasPoint (current_canvas_pos);
+				cumulative_zoom_amount = 0;
+			}
+		} else {
+			if (cumulative_zoom_amount < 0)
+				cumulative_zoom_amount = 0;
+
+			cumulative_zoom_amount += pinchDelta;
+			if (cumulative_zoom_amount >= ZoomThresholdPinch) {
+				document.Workspace.ZoomInAroundCanvasPoint (current_canvas_pos);
+				cumulative_zoom_amount = 0;
+			}
+		}
+		last_scale_delta = gesture_zoom.GetScaleDelta () - 1;
 	}
 
 	public PointD WindowMousePosition => current_window_pos;
@@ -166,16 +208,47 @@ public sealed class CanvasWindow : Grid
 
 	private bool HandleScrollEvent (EventControllerScroll controller, EventControllerScroll.ScrollSignalArgs args)
 	{
-		// Allow the user to zoom in/out with Ctrl-Mousewheel
-		if (controller.GetCurrentEventState ().IsControlPressed ()) {
-			if (args.Dx > 0 || args.Dy < 0)
-				document.Workspace.ZoomInAroundCanvasPoint (current_canvas_pos);
-			else if (args.Dx < 0 || args.Dy > 0)
-				document.Workspace.ZoomOutAroundCanvasPoint (current_canvas_pos);
+		if (gesture_zoom.IsActive ())
+			return true;
+		// Allow the user to zoom in/out with Ctrl-Mousewheel or Ctrl-two-finger-scroll
+		if (!controller.GetCurrentEventState ().IsControlPressed ())
+			return false;
 
+		// "clicky" scroll wheels generate 1 or -1
+		if (args.Dy == -1) {
+			document.Workspace.ZoomInAroundCanvasPoint (current_canvas_pos);
+			return true;
+		}
+		if (args.Dy == 1) {
+			document.Workspace.ZoomOutAroundCanvasPoint (current_canvas_pos);
 			return true;
 		}
 
-		return false;
+		// analog scroll wheels and scrolling on a touchpad generates a range of values constantly as the user scrolls
+		// this might feel "backwards" on a touchpad to some people
+		if (args.Dy < 0) {
+			if (cumulative_zoom_amount > 0)
+				cumulative_zoom_amount = 0;
+
+			cumulative_zoom_amount += args.Dy;
+			if (cumulative_zoom_amount <= -ZoomThresholdScroll) {
+				document.Workspace.ZoomInAroundCanvasPoint (current_canvas_pos);
+				cumulative_zoom_amount = 0;
+			}
+
+		} else {
+			if (cumulative_zoom_amount < 0)
+				cumulative_zoom_amount = 0;
+
+			cumulative_zoom_amount += args.Dy;
+			if (cumulative_zoom_amount >= ZoomThresholdScroll) {
+				document.Workspace.ZoomOutAroundCanvasPoint (current_canvas_pos);
+				cumulative_zoom_amount = 0;
+			}
+
+		}
+
+		return true;
+
 	}
 }
