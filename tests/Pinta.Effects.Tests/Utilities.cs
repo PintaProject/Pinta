@@ -68,7 +68,7 @@ internal static class Utilities
 		var result = CairoExtensions.CreateImageSurface (Format.Argb32, source.Width, source.Height);
 		var expected = LoadImage (result_image_name);
 
-		var preRender = effect.GetUntypedPreRender(source, result);
+		var preRender = effect.GetUntypedPreRender (source, result);
 
 		effect.Render (
 			preRender,
