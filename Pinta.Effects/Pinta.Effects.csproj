@@ -10,4 +10,3 @@
     <PackageReference Include="Mono.Addins" />
   </ItemGroup>
 </Project>
-
