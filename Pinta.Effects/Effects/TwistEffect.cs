@@ -15,19 +15,25 @@ using Pinta.Gui.Widgets;
 
 namespace Pinta.Effects;
 
-public sealed class TwistEffect : BaseEffect
+public sealed class TwistEffect : BaseEffect<TwistEffect.TwistSettings>
 {
-	public override string Icon => Pinta.Resources.Icons.EffectsDistortTwist;
+	public override string Icon
+		=> Pinta.Resources.Icons.EffectsDistortTwist;
 
-	public sealed override bool IsTileable => true;
+	public sealed override bool IsTileable
+		=> true;
 
-	public override string Name => Translations.GetString ("Twist");
+	public override string Name
+		=> Translations.GetString ("Twist");
 
-	public override bool IsConfigurable => true;
+	public override bool IsConfigurable
+		=> true;
 
-	public override string EffectMenuCategory => Translations.GetString ("Distort");
+	public override string EffectMenuCategory
+		=> Translations.GetString ("Distort");
 
-	public TwistData Data => (TwistData) EffectData!;  // NRT - Set in constructor
+	public TwistData Data
+		=> (TwistData) EffectData!;  // NRT - Set in constructor
 
 	private readonly IChromeService chrome;
 
@@ -42,10 +48,12 @@ public sealed class TwistEffect : BaseEffect
 		=> chrome.LaunchSimpleEffectDialog (this);
 
 	#region Algorithm Code Ported From PDN
-	public override void Render (ImageSurface src, ImageSurface dst, ReadOnlySpan<RectangleI> rois)
+	public override void Render (
+		TwistSettings settings,
+		ImageSurface src,
+		ImageSurface dst,
+		ReadOnlySpan<RectangleI> rois)
 	{
-		RenderSettings settings = CreateSettings (dst);
-
 		ReadOnlySpan<ColorBgra> src_data = src.GetReadOnlyPixelData ();
 		Span<ColorBgra> dst_data = dst.GetPixelData ();
 
@@ -61,7 +69,7 @@ public sealed class TwistEffect : BaseEffect
 		}
 	}
 
-	private static ColorBgra GetFinalPixelColor (ImageSurface src, RenderSettings settings, ReadOnlySpan<ColorBgra> src_data, float j, float i)
+	private static ColorBgra GetFinalPixelColor (ImageSurface src, TwistSettings settings, ReadOnlySpan<ColorBgra> src_data, float j, float i)
 	{
 		int b = 0;
 		int g = 0;
@@ -99,14 +107,14 @@ public sealed class TwistEffect : BaseEffect
 			(byte) (a / antialiasSamples));
 	}
 
-	private sealed record RenderSettings (
+	public sealed record TwistSettings (
 		float HalfWidth,
 		float HalfHeight,
 		float Maxrad,
 		float Twist,
 		ImmutableArray<PointD> AntialiasPoints);
 
-	private RenderSettings CreateSettings (ImageSurface dst)
+	public override TwistSettings GetPreRender (ImageSurface src, ImageSurface dst)
 	{
 		float preliminaryTwist = Data.Amount;
 

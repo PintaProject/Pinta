@@ -14,19 +14,25 @@ using Pinta.Gui.Widgets;
 
 namespace Pinta.Effects;
 
-public sealed class TileEffect : BaseEffect
+public sealed class TileEffect : BaseEffect<TileEffect.TileSettings>
 {
-	public override string Icon => Pinta.Resources.Icons.EffectsDistortTile;
+	public override string Icon
+		=> Pinta.Resources.Icons.EffectsDistortTile;
 
-	public sealed override bool IsTileable => true;
+	public sealed override bool IsTileable
+		=> true;
 
-	public override string Name => Translations.GetString ("Tile Reflection");
+	public override string Name
+		=> Translations.GetString ("Tile Reflection");
 
-	public override bool IsConfigurable => true;
+	public override bool IsConfigurable
+		=> true;
 
-	public override string EffectMenuCategory => Translations.GetString ("Distort");
+	public override string EffectMenuCategory
+		=> Translations.GetString ("Distort");
 
-	public TileData Data => (TileData) EffectData!;
+	public TileData Data
+		=> (TileData) EffectData!;
 
 	private readonly IChromeService chrome;
 
@@ -42,7 +48,7 @@ public sealed class TileEffect : BaseEffect
 
 	#region Algorithm Code Ported From PDN
 
-	private sealed record TileSettings (
+	public sealed record TileSettings (
 		int width,
 		int height,
 		float hw,
@@ -54,7 +60,8 @@ public sealed class TileEffect : BaseEffect
 		int aaLevel,
 		int aaSamples,
 		int src_width);
-	private TileSettings CreateSettings (ImageSurface src, ImageSurface dst)
+
+	public override TileSettings GetPreRender (ImageSurface src, ImageSurface dst)
 	{
 		int width = dst.Width;
 		int height = dst.Height;
@@ -95,10 +102,12 @@ public sealed class TileEffect : BaseEffect
 		}
 	}
 
-	public override void Render (ImageSurface src, ImageSurface dst, ReadOnlySpan<RectangleI> rois)
+	public override void Render (
+		TileSettings settings,
+		ImageSurface src,
+		ImageSurface dst,
+		ReadOnlySpan<RectangleI> rois)
 	{
-		TileSettings settings = CreateSettings (src, dst);
-
 		Span<PointD> aaPoints = stackalloc PointD[settings.aaSamples];
 		InitializeAntiAliasPoints (settings, aaPoints);
 
@@ -166,6 +175,7 @@ public sealed class TileEffect : BaseEffect
 			a: (byte) (a / settings.aaSamples)
 		);
 	}
+
 	#endregion
 
 

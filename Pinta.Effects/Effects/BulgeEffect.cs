@@ -14,19 +14,25 @@ using Pinta.Gui.Widgets;
 
 namespace Pinta.Effects;
 
-public sealed class BulgeEffect : BaseEffect
+public sealed class BulgeEffect : BaseEffect<BulgeEffect.BulgeSettings>
 {
-	public sealed override bool IsTileable => true;
+	public sealed override bool IsTileable
+		=> true;
 
-	public override string Icon => Pinta.Resources.Icons.EffectsDistortBulge;
+	public override string Icon
+		=> Pinta.Resources.Icons.EffectsDistortBulge;
 
-	public override string Name => Translations.GetString ("Bulge");
+	public override string Name
+		=> Translations.GetString ("Bulge");
 
-	public override bool IsConfigurable => true;
+	public override bool IsConfigurable
+		=> true;
 
-	public override string EffectMenuCategory => Translations.GetString ("Distort");
+	public override string EffectMenuCategory
+		=> Translations.GetString ("Distort");
 
-	public BulgeData Data => (BulgeData) EffectData!;
+	public BulgeData Data
+		=> (BulgeData) EffectData!;
 
 	private readonly IChromeService chrome;
 
@@ -41,14 +47,15 @@ public sealed class BulgeEffect : BaseEffect
 
 	#region Algorithm Code Ported From PDN
 
-	private sealed record BulgeSettings (
+	public sealed record BulgeSettings (
 		float hw,
 		float hh,
 		float maxrad,
 		float amt,
 		int src_width,
 		int src_height);
-	private BulgeSettings CreateSettings (ImageSurface src, ImageSurface dst)
+
+	public override BulgeSettings GetPreRender (ImageSurface src, ImageSurface dst)
 	{
 		float bulge = Data.Amount;
 
@@ -73,10 +80,12 @@ public sealed class BulgeEffect : BaseEffect
 		);
 	}
 
-	public override void Render (ImageSurface src, ImageSurface dst, ReadOnlySpan<RectangleI> rois)
+	public override void Render (
+		BulgeSettings settings,
+		ImageSurface src,
+		ImageSurface dst,
+		ReadOnlySpan<RectangleI> rois)
 	{
-		BulgeSettings settings = CreateSettings (src, dst);
-
 		ReadOnlySpan<ColorBgra> src_data = src.GetReadOnlyPixelData ();
 		Span<ColorBgra> dst_data = dst.GetPixelData ();
 
@@ -102,6 +111,7 @@ public sealed class BulgeEffect : BaseEffect
 			}
 		}
 	}
+
 	#endregion
 
 	public sealed class BulgeData : EffectData

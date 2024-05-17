@@ -14,7 +14,7 @@ using Pinta.Gui.Widgets;
 
 namespace Pinta.Effects;
 
-public sealed class MandelbrotFractalEffect : BaseEffect
+internal sealed class MandelbrotFractalEffect : BaseEffect<MandelbrotFractalEffect.MandelbrotSettings>
 {
 	public override string Icon
 		=> Pinta.Resources.Icons.EffectsRenderMandelbrotFractal;
@@ -78,7 +78,7 @@ public sealed class MandelbrotFractalEffect : BaseEffect
 		return new (x, y);
 	}
 
-	private sealed record MandelbrotSettings (
+	internal sealed record MandelbrotSettings (
 		Size canvasSize,
 		double invH,
 		double invZoom,
@@ -89,7 +89,8 @@ public sealed class MandelbrotFractalEffect : BaseEffect
 		int factor,
 		bool invertColors,
 		ColorGradient colorGradient);
-	private MandelbrotSettings CreateSettings (ImageSurface dst)
+
+	public override MandelbrotSettings GetPreRender (ImageSurface src, ImageSurface dst)
 	{
 		Size canvasSize = new (dst.Width, dst.Height);
 		double zoom = 1 + Zoom_factor * Data.Zoom;
@@ -125,16 +126,21 @@ public sealed class MandelbrotFractalEffect : BaseEffect
 		);
 	}
 
-	public override void Render (ImageSurface src, ImageSurface dst, ReadOnlySpan<RectangleI> rois)
+	public override void Render (
+		MandelbrotSettings settings,
+		ImageSurface src,
+		ImageSurface dst,
+		ReadOnlySpan<RectangleI> rois)
 	{
-		MandelbrotSettings settings = CreateSettings (dst);
 		Span<ColorBgra> dst_data = dst.GetPixelData ();
 		foreach (RectangleI rect in rois)
 			foreach (var pixel in Utility.GeneratePixelOffsets (rect, settings.canvasSize))
 				dst_data[pixel.memoryOffset] = GetPixelColor (settings, pixel.coordinates);
 
-		if (settings.invertColors)
-			invert_effect.Render (dst, dst, rois);
+		if (settings.invertColors) {
+			var invertPreRender = invert_effect.GetPreRender (src, dst);
+			invert_effect.Render (invertPreRender, dst, dst, rois);
+		}
 	}
 
 	private static ColorBgra GetPixelColor (MandelbrotSettings settings, PointI target)
@@ -177,9 +183,9 @@ public sealed class MandelbrotFractalEffect : BaseEffect
 			b: Utility.ClampToByte (b / settings.count),
 			g: Utility.ClampToByte (g / settings.count),
 			r: Utility.ClampToByte (r / settings.count),
-			a: Utility.ClampToByte (a / settings.count)
-		);
+			a: Utility.ClampToByte (a / settings.count));
 	}
+
 	#endregion
 
 	public sealed class MandelbrotFractalData : EffectData

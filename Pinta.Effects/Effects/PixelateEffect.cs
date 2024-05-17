@@ -14,7 +14,7 @@ using Pinta.Gui.Widgets;
 
 namespace Pinta.Effects;
 
-public sealed class PixelateEffect : BaseEffect
+public sealed class PixelateEffect : BaseEffect<DBNull>
 {
 	public override string Icon => Pinta.Resources.Icons.EffectsDistortPixelate;
 
@@ -69,8 +69,14 @@ public sealed class PixelateEffect : BaseEffect
 		return new (leftUpper, new Size (cellSize, cellSize));
 	}
 
+	public override DBNull GetPreRender (ImageSurface src, ImageSurface dst)
+		=> DBNull.Value;
 
-	public override void Render (ImageSurface src, ImageSurface dest, ReadOnlySpan<RectangleI> rois)
+	public override void Render (
+		DBNull preRender,
+		ImageSurface src,
+		ImageSurface dest,
+		ReadOnlySpan<RectangleI> rois)
 	{
 		var cellSize = Data.CellSize;
 
@@ -106,6 +112,7 @@ public sealed class PixelateEffect : BaseEffect
 			}
 		}
 	}
+
 	#endregion
 }
 

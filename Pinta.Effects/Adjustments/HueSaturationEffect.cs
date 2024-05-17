@@ -14,17 +14,22 @@ using Pinta.Gui.Widgets;
 
 namespace Pinta.Effects;
 
-public sealed class HueSaturationEffect : BaseEffect
+public sealed class HueSaturationEffect : BaseEffect<DBNull>
 {
-	public sealed override bool IsTileable => true;
+	public sealed override bool IsTileable
+		=> true;
 
-	public override string Icon => Pinta.Resources.Icons.AdjustmentsHueSaturation;
+	public override string Icon
+		=> Pinta.Resources.Icons.AdjustmentsHueSaturation;
 
-	public override string Name => Translations.GetString ("Hue / Saturation");
+	public override string Name
+		=> Translations.GetString ("Hue / Saturation");
 
-	public override bool IsConfigurable => true;
+	public override bool IsConfigurable
+		=> true;
 
-	public override string AdjustmentMenuKey => "U";
+	public override string AdjustmentMenuKey
+		=> "U";
 
 	private readonly IChromeService chrome;
 
@@ -46,7 +51,14 @@ public sealed class HueSaturationEffect : BaseEffect
 				satDelta: Data.Saturation,
 				lightness: Data.Lightness);
 
-	public override void Render (ImageSurface src, ImageSurface dest, ReadOnlySpan<RectangleI> rois)
+	public override DBNull GetPreRender (ImageSurface src, ImageSurface dst)
+		=> DBNull.Value;
+
+	public override void Render (
+		DBNull preRender,
+		ImageSurface src,
+		ImageSurface dest,
+		ReadOnlySpan<RectangleI> rois)
 	{
 		UnaryPixelOp op = CreateOptimalOp ();
 		op.Apply (dest, src, rois);

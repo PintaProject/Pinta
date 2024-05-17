@@ -15,7 +15,7 @@ using Pinta.Gui.Widgets;
 
 namespace Pinta.Effects;
 
-public sealed class InkSketchEffect : BaseEffect
+public sealed class InkSketchEffect : BaseEffect<DBNull>
 {
 	private static readonly ImmutableArray<ImmutableArray<int>> conv;
 	private const int Size = 5;
@@ -25,17 +25,23 @@ public sealed class InkSketchEffect : BaseEffect
 	private readonly UnaryPixelOps.Desaturate desaturate_op;
 	private readonly UserBlendOps.DarkenBlendOp darken_op;
 
-	public override string Icon => Pinta.Resources.Icons.EffectsArtisticInkSketch;
+	public override string Icon
+		=> Pinta.Resources.Icons.EffectsArtisticInkSketch;
 
-	public sealed override bool IsTileable => true;
+	public sealed override bool IsTileable
+		=> true;
 
-	public override string Name => Translations.GetString ("Ink Sketch");
+	public override string Name
+		=> Translations.GetString ("Ink Sketch");
 
-	public override bool IsConfigurable => true;
+	public override bool IsConfigurable
+		=> true;
 
-	public override string EffectMenuCategory => Translations.GetString ("Artistic");
+	public override string EffectMenuCategory
+		=> Translations.GetString ("Artistic");
 
-	public InkSketchData Data => (InkSketchData) EffectData!;  // NRT - Set in constructor
+	public InkSketchData Data
+		=> (InkSketchData) EffectData!;  // NRT - Set in constructor
 
 	private readonly IChromeService chrome;
 
@@ -63,15 +69,23 @@ public sealed class InkSketchEffect : BaseEffect
 	public override void LaunchConfiguration ()
 		=> chrome.LaunchSimpleEffectDialog (this);
 
+	public override DBNull GetPreRender (ImageSurface src, ImageSurface dst)
+		=> DBNull.Value;
+
 	#region Algorithm Code Ported From PDN
-	public override void Render (ImageSurface src, ImageSurface dest, ReadOnlySpan<RectangleI> rois)
+	public override void Render (
+		DBNull preRender,
+		ImageSurface src,
+		ImageSurface dest,
+		ReadOnlySpan<RectangleI> rois)
 	{
 		// Glow background 
 		glow_effect.Data.Radius = 6;
 		glow_effect.Data.Brightness = -(Data.Coloring - 50) * 2;
 		glow_effect.Data.Contrast = -(Data.Coloring - 50) * 2;
 
-		glow_effect.Render (src, dest, rois);
+		var glowPreRender = glow_effect.GetPreRender (src, dest);
+		glow_effect.Render (glowPreRender, src, dest, rois);
 
 		var src_data = src.GetReadOnlyPixelData ();
 		int width = src.Width;
@@ -144,6 +158,7 @@ public sealed class InkSketchEffect : BaseEffect
 			? ColorBgra.FromBgra (255, 255, 255, topLayer.A)
 			: ColorBgra.FromBgra (0, 0, 0, topLayer.A);
 	}
+
 	#endregion
 
 	public sealed class InkSketchData : EffectData

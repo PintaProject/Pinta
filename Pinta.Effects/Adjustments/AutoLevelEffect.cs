@@ -13,21 +13,32 @@ using Pinta.Core;
 
 namespace Pinta.Effects;
 
-public sealed class AutoLevelEffect : BaseEffect
+public sealed class AutoLevelEffect : BaseEffect<DBNull>
 {
 	UnaryPixelOps.Level? op;
 
-	public sealed override bool IsTileable => true;
+	public sealed override bool IsTileable
+		=> true;
 
-	public override string Icon => Pinta.Resources.Icons.AdjustmentsAutoLevel;
+	public override string Icon
+		=> Pinta.Resources.Icons.AdjustmentsAutoLevel;
 
-	public override string Name => Translations.GetString ("Auto Level");
+	public override string Name
+		=> Translations.GetString ("Auto Level");
 
-	public override string AdjustmentMenuKey => "L";
+	public override string AdjustmentMenuKey
+		=> "L";
 
 	public AutoLevelEffect (IServiceProvider _) { }
 
-	public override void Render (ImageSurface src, ImageSurface dest, ReadOnlySpan<RectangleI> rois)
+	public override DBNull GetPreRender (ImageSurface src, ImageSurface dst)
+		=> DBNull.Value;
+
+	public override void Render (
+		DBNull preRender,
+		ImageSurface src,
+		ImageSurface dest,
+		ReadOnlySpan<RectangleI> rois)
 	{
 		if (op is null) {
 			HistogramRgb histogram = new ();

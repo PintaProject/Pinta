@@ -40,7 +40,7 @@ using Pinta.Gui.Widgets;
 
 namespace Pinta.Effects;
 
-public sealed class SoftenPortraitEffect : BaseEffect
+public sealed class SoftenPortraitEffect : BaseEffect<SoftenPortraitEffect.SoftenPortraitSettings>
 {
 	private readonly GaussianBlurEffect blur_effect;
 	private readonly BrightnessContrastEffect bac_adjustment;
@@ -76,11 +76,11 @@ public sealed class SoftenPortraitEffect : BaseEffect
 	public override void LaunchConfiguration ()
 		=> chrome.LaunchSimpleEffectDialog (this);
 
-	private sealed record SoftenPortraitSettings (
+	public sealed record SoftenPortraitSettings (
 		float redAdjust,
 		float blueAdjust);
 
-	private SoftenPortraitSettings CreateSettings ()
+	public override SoftenPortraitSettings GetPreRender (ImageSurface src, ImageSurface dst)
 	{
 		int warmth = Data.Warmth;
 		return new (
@@ -88,12 +88,17 @@ public sealed class SoftenPortraitEffect : BaseEffect
 			blueAdjust: 1.0f - (warmth / 100.0f));
 	}
 
-	public override void Render (ImageSurface src, ImageSurface dest, ReadOnlySpan<RectangleI> rois)
+	public override void Render (
+		SoftenPortraitSettings settings,
+		ImageSurface src,
+		ImageSurface dest,
+		ReadOnlySpan<RectangleI> rois)
 	{
-		SoftenPortraitSettings settings = CreateSettings ();
+		var blurPreRender = blur_effect.GetPreRender (src, dest);
+		blur_effect.Render (blurPreRender, src, dest, rois);
 
-		blur_effect.Render (src, dest, rois);
-		bac_adjustment.Render (src, dest, rois);
+		var bacPreRender = bac_adjustment.GetPreRender (src, dest);
+		bac_adjustment.Render (bacPreRender, src, dest, rois);
 
 		ReadOnlySpan<ColorBgra> src_data = src.GetReadOnlyPixelData ();
 		Span<ColorBgra> dst_data = dest.GetPixelData ();

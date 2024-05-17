@@ -15,19 +15,25 @@ using Pinta.Gui.Widgets;
 
 namespace Pinta.Effects;
 
-public sealed class GaussianBlurEffect : BaseEffect
+public sealed class GaussianBlurEffect : BaseEffect<DBNull>
 {
-	public override string Icon => Pinta.Resources.Icons.EffectsBlursGaussianBlur;
+	public override string Icon
+		=> Pinta.Resources.Icons.EffectsBlursGaussianBlur;
 
-	public sealed override bool IsTileable => true;
+	public sealed override bool IsTileable
+		=> true;
 
-	public override string Name => Translations.GetString ("Gaussian Blur");
+	public override string Name
+		=> Translations.GetString ("Gaussian Blur");
 
-	public override bool IsConfigurable => true;
+	public override bool IsConfigurable
+		=> true;
 
-	public override string EffectMenuCategory => Translations.GetString ("Blurs");
+	public override string EffectMenuCategory
+		=> Translations.GetString ("Blurs");
 
-	public GaussianBlurData Data => (GaussianBlurData) EffectData!;  // NRT - Set in constructor
+	public GaussianBlurData Data
+		=> (GaussianBlurData) EffectData!;  // NRT - Set in constructor
 
 	private readonly IChromeService chrome;
 
@@ -57,7 +63,14 @@ public sealed class GaussianBlurEffect : BaseEffect
 		return weights.MoveToImmutable ();
 	}
 
-	public override void Render (ImageSurface src, ImageSurface dest, ReadOnlySpan<RectangleI> rois)
+	public override DBNull GetPreRender (ImageSurface src, ImageSurface dst)
+		=> DBNull.Value;
+
+	public override void Render (
+		DBNull preRender,
+		ImageSurface src,
+		ImageSurface dest,
+		ReadOnlySpan<RectangleI> rois)
 	{
 		if (Data.Radius == 0)
 			return; // Copy src to dest
@@ -239,6 +252,7 @@ public sealed class GaussianBlurEffect : BaseEffect
 			}
 		}
 	}
+
 	#endregion
 
 	public sealed class GaussianBlurData : EffectData

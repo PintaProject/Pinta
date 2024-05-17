@@ -15,19 +15,25 @@ using Pinta.Gui.Widgets;
 
 namespace Pinta.Effects;
 
-public sealed class MotionBlurEffect : BaseEffect
+public sealed class MotionBlurEffect : BaseEffect<MotionBlurEffect.MotionBlurSettings>
 {
-	public override string Icon => Pinta.Resources.Icons.EffectsBlursMotionBlur;
+	public override string Icon
+		=> Pinta.Resources.Icons.EffectsBlursMotionBlur;
 
-	public sealed override bool IsTileable => true;
+	public sealed override bool IsTileable
+		=> true;
 
-	public override string Name => Translations.GetString ("Motion Blur");
+	public override string Name
+		=> Translations.GetString ("Motion Blur");
 
-	public override bool IsConfigurable => true;
+	public override bool IsConfigurable
+		=> true;
 
-	public override string EffectMenuCategory => Translations.GetString ("Blurs");
+	public override string EffectMenuCategory
+		=> Translations.GetString ("Blurs");
 
-	public MotionBlurData Data => (MotionBlurData) EffectData!;  // NRT - Set in constructor
+	public MotionBlurData Data
+		=> (MotionBlurData) EffectData!;  // NRT - Set in constructor
 
 	private readonly IChromeService chrome;
 
@@ -42,11 +48,11 @@ public sealed class MotionBlurEffect : BaseEffect
 
 	#region Algorithm Code Ported From PDN
 
-	private sealed record MotionBlurSettings (
+	public sealed record MotionBlurSettings (
 		Size canvasSize,
 		ImmutableArray<PointD> points);
 
-	private MotionBlurSettings CreateSettings (ImageSurface src)
+	public override MotionBlurSettings GetPreRender (ImageSurface src, ImageSurface dst)
 	{
 		PointD start = new (0, 0);
 		double theta = (double) (Data.Angle.Degrees + 180) * 2 * Math.PI / 360.0;
@@ -75,10 +81,12 @@ public sealed class MotionBlurEffect : BaseEffect
 			points: points.MoveToImmutable ());
 	}
 
-	public override void Render (ImageSurface src, ImageSurface dst, ReadOnlySpan<RectangleI> rois)
+	public override void Render (
+		MotionBlurSettings settings,
+		ImageSurface src,
+		ImageSurface dst,
+		ReadOnlySpan<RectangleI> rois)
 	{
-		MotionBlurSettings settings = CreateSettings (src);
-
 		Span<ColorBgra> samples = stackalloc ColorBgra[settings.points.Length];
 
 		ReadOnlySpan<ColorBgra> src_data = src.GetReadOnlyPixelData ();
@@ -98,6 +106,7 @@ public sealed class MotionBlurEffect : BaseEffect
 			}
 		}
 	}
+
 	#endregion
 
 	public sealed class MotionBlurData : EffectData

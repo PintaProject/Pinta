@@ -68,7 +68,13 @@ internal static class Utilities
 		var result = CairoExtensions.CreateImageSurface (Format.Argb32, source.Width, source.Height);
 		var expected = LoadImage (result_image_name);
 
-		effect.Render (source, result, stackalloc[] { source.GetBounds () });
+		var preRender = effect.GetUntypedPreRender(source, result);
+
+		effect.Render (
+			preRender,
+			source,
+			result,
+			stackalloc[] { source.GetBounds () });
 
 		// For debugging, optionally save out the result to a file.
 		if (save_image_name != null) {

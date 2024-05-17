@@ -15,21 +15,27 @@ using Pinta.Core;
 
 namespace Pinta.Effects;
 
-public sealed class CurvesEffect : BaseEffect
+public sealed class CurvesEffect : BaseEffect<DBNull>
 {
 	UnaryPixelOp? op = null;
 
-	public sealed override bool IsTileable => true;
+	public sealed override bool IsTileable
+		=> true;
 
-	public override string Icon => Pinta.Resources.Icons.AdjustmentsCurves;
+	public override string Icon
+		=> Pinta.Resources.Icons.AdjustmentsCurves;
 
-	public override string Name => Translations.GetString ("Curves");
+	public override string Name
+		=> Translations.GetString ("Curves");
 
-	public override bool IsConfigurable => true;
+	public override bool IsConfigurable
+		=> true;
 
-	public override string AdjustmentMenuKey => "M";
+	public override string AdjustmentMenuKey
+		=> "M";
 
-	public CurvesData Data => (CurvesData) EffectData!;  // NRT - Set in constructor
+	public CurvesData Data
+		=> (CurvesData) EffectData!;  // NRT - Set in constructor
 
 	private readonly IChromeService chrome;
 
@@ -55,7 +61,14 @@ public sealed class CurvesEffect : BaseEffect
 		dialog.Present ();
 	}
 
-	public override void Render (ImageSurface src, ImageSurface dest, ReadOnlySpan<RectangleI> rois)
+	public override DBNull GetPreRender (ImageSurface src, ImageSurface dst)
+		=> DBNull.Value;
+
+	public override void Render (
+		DBNull preRender,
+		ImageSurface src,
+		ImageSurface dest,
+		ReadOnlySpan<RectangleI> rois)
 	{
 		if (Data.ControlPoints == null)
 			return;

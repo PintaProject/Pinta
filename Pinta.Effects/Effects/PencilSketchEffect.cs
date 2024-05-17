@@ -14,7 +14,7 @@ using Pinta.Gui.Widgets;
 
 namespace Pinta.Effects;
 
-public sealed class PencilSketchEffect : BaseEffect
+public sealed class PencilSketchEffect : BaseEffect<DBNull>
 {
 	private readonly GaussianBlurEffect blur_effect;
 	private readonly UnaryPixelOps.Desaturate desaturate_op;
@@ -53,16 +53,27 @@ public sealed class PencilSketchEffect : BaseEffect
 		=> chrome.LaunchSimpleEffectDialog (this);
 
 	#region Algorithm Code Ported From PDN
-	public override void Render (ImageSurface src, ImageSurface dest, ReadOnlySpan<RectangleI> rois)
+
+	public override DBNull GetPreRender (ImageSurface src, ImageSurface dst)
+		=> DBNull.Value;
+
+	public override void Render (
+		DBNull preRender,
+		ImageSurface src,
+		ImageSurface dest,
+		ReadOnlySpan<RectangleI> rois)
 	{
 		bac_adjustment.Data.Brightness = -Data.ColorRange;
 		bac_adjustment.Data.Contrast = -Data.ColorRange;
-		bac_adjustment.Render (src, dest, rois);
+		var bacPreRender = bac_adjustment.GetPreRender (src, dest);
+		bac_adjustment.Render (bacPreRender, src, dest, rois);
 
 		blur_effect.Data.Radius = Data.PencilTipSize;
-		blur_effect.Render (src, dest, rois);
+		var blurPreRender = blur_effect.GetPreRender (src, dest);
+		blur_effect.Render (blurPreRender, src, dest, rois);
 
-		invert_effect.Render (dest, dest, rois);
+		var invertPreRender = invert_effect.GetPreRender (dest, dest);
+		invert_effect.Render (invertPreRender, dest, dest, rois);
 		desaturate_op.Apply (dest, dest, rois);
 
 		var dst_data = dest.GetPixelData ();
@@ -77,6 +88,7 @@ public sealed class PencilSketchEffect : BaseEffect
 			}
 		}
 	}
+
 	#endregion
 
 	public sealed class PencilSketchData : EffectData

@@ -6,15 +6,24 @@ using Pinta.Gui.Widgets;
 
 namespace Pinta.Effects;
 
-public sealed class DitheringEffect : BaseEffect
+internal sealed class DitheringEffect : BaseEffect<DitheringEffect.DitheringSettings>
 {
-	public override string Name => Translations.GetString ("Dithering");
-	public override bool IsConfigurable => true;
-	// TODO: Icon
-	public override string EffectMenuCategory => Translations.GetString ("Color");
-	public DitheringData Data => (DitheringData) EffectData!; // NRT - Set in constructor
+	public override string Name
+		=> Translations.GetString ("Dithering");
 
-	public override bool IsTileable => false;
+	public override bool IsConfigurable
+		=> true;
+
+	// TODO: Icon
+
+	public override string EffectMenuCategory
+		=> Translations.GetString ("Color");
+
+	public DitheringData Data
+		=> (DitheringData) EffectData!; // NRT - Set in constructor
+
+	public override bool IsTileable
+		=> false;
 
 	private readonly IChromeService chrome;
 
@@ -27,13 +36,14 @@ public sealed class DitheringEffect : BaseEffect
 	public override void LaunchConfiguration ()
 		=> chrome.LaunchSimpleEffectDialog (this);
 
-	private sealed record DitheringSettings (
+	internal sealed record DitheringSettings (
 		ErrorDiffusionMatrix diffusionMatrix,
 		ImmutableArray<ColorBgra> palette,
 		int sourceWidth,
 		int sourceHeight);
 
-	private DitheringSettings CreateSettings (ImageSurface src)
+
+	public override DitheringSettings GetPreRender (ImageSurface src, ImageSurface dst)
 		=> new (
 			diffusionMatrix: ErrorDiffusionMatrix.GetPredefined (Data.ErrorDiffusionMethod),
 			palette: PaletteHelper.GetPredefined (Data.PaletteChoice),
@@ -41,10 +51,12 @@ public sealed class DitheringEffect : BaseEffect
 			sourceHeight: src.Height
 		);
 
-	protected override void Render (ImageSurface src, ImageSurface dest, RectangleI roi)
+	protected override void Render (
+		DitheringSettings settings,
+		ImageSurface src,
+		ImageSurface dest,
+		RectangleI roi)
 	{
-		DitheringSettings settings = CreateSettings (src);
-
 		ReadOnlySpan<ColorBgra> src_data = src.GetReadOnlyPixelData ();
 		Span<ColorBgra> dst_data = dest.GetPixelData ();
 

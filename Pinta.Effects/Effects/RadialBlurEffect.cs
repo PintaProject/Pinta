@@ -14,7 +14,7 @@ using Pinta.Gui.Widgets;
 
 namespace Pinta.Effects;
 
-public sealed class RadialBlurEffect : BaseEffect
+public sealed class RadialBlurEffect : BaseEffect<RadialBlurEffect.RadialBlurSettings>
 {
 	public override string Icon => Pinta.Resources.Icons.EffectsBlursRadialBlur;
 
@@ -52,7 +52,7 @@ public sealed class RadialBlurEffect : BaseEffect
 		);
 	}
 
-	private sealed record RadialBlurSettings (
+	public sealed record RadialBlurSettings (
 		int w,
 		int h,
 		int src_w,
@@ -61,7 +61,7 @@ public sealed class RadialBlurEffect : BaseEffect
 		int n,
 		int fr);
 
-	private RadialBlurSettings CreateSettings (ImageSurface src, ImageSurface dst)
+	public override RadialBlurSettings GetPreRender (ImageSurface src, ImageSurface dst)
 	{
 		var offset = Data.Offset;
 		int w = dst.Width;
@@ -78,12 +78,14 @@ public sealed class RadialBlurEffect : BaseEffect
 		);
 	}
 
-	public override void Render (ImageSurface src, ImageSurface dst, ReadOnlySpan<RectangleI> rois)
+	public override void Render (
+		RadialBlurSettings settings,
+		ImageSurface src,
+		ImageSurface dst,
+		ReadOnlySpan<RectangleI> rois)
 	{
 		if (Data.Angle.Degrees == 0) // Copy src to dest
 			return;
-
-		RadialBlurSettings settings = CreateSettings (src, dst);
 
 		var dst_data = dst.GetPixelData ();
 		var src_data = src.GetReadOnlyPixelData ();

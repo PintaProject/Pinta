@@ -13,28 +13,33 @@ using Pinta.Core;
 
 namespace Pinta.Effects;
 
-public sealed class PosterizeEffect : BaseEffect
+public sealed class PosterizeEffect : BaseEffect<DBNull>
 {
 	UnaryPixelOps.PosterizePixel? op = null;
 
-	public sealed override bool IsTileable => true;
+	public sealed override bool IsTileable
+		=> true;
 
-	public override string Icon => Pinta.Resources.Icons.AdjustmentsPosterize;
+	public override string Icon
+		=> Pinta.Resources.Icons.AdjustmentsPosterize;
 
-	public override string Name => Translations.GetString ("Posterize");
+	public override string Name
+		=> Translations.GetString ("Posterize");
 
-	public override bool IsConfigurable => true;
+	public override bool IsConfigurable
+		=> true;
 
-	public override string AdjustmentMenuKey => "P";
+	public override string AdjustmentMenuKey
+		=> "P";
 
-	public PosterizeData Data => (PosterizeData) EffectData!;  // NRT - Set in constructor
+	public PosterizeData Data
+		=> (PosterizeData) EffectData!;  // NRT - Set in constructor
 
 	private readonly IChromeService chrome;
 
 	public PosterizeEffect (IServiceProvider services)
 	{
 		chrome = services.GetService<IChromeService> ();
-
 		EffectData = new PosterizeData ();
 	}
 
@@ -54,7 +59,14 @@ public sealed class PosterizeEffect : BaseEffect
 		dialog.Present ();
 	}
 
-	public override void Render (ImageSurface src, ImageSurface dest, ReadOnlySpan<RectangleI> rois)
+	public override DBNull GetPreRender (ImageSurface src, ImageSurface dst)
+		=> DBNull.Value;
+
+	public override void Render (
+		DBNull preRender,
+		ImageSurface src,
+		ImageSurface dest,
+		ReadOnlySpan<RectangleI> rois)
 	{
 		op ??= new UnaryPixelOps.PosterizePixel (Data.Red, Data.Green, Data.Blue);
 

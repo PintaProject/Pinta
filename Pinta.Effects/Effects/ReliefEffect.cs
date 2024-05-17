@@ -24,23 +24,33 @@ public sealed class ReliefEffect : ColorDifferenceEffect
 		EffectData = new ReliefData ();
 	}
 
-	public ReliefData Data => (ReliefData) EffectData!;
+	public ReliefData Data
+		=> (ReliefData) EffectData!;
 
-	public override bool IsConfigurable => true;
+	public override bool IsConfigurable
+		=> true;
 
-	public sealed override bool IsTileable => true;
+	public sealed override bool IsTileable
+		=> true;
 
-	public override string EffectMenuCategory => Translations.GetString ("Stylize");
+	public override string EffectMenuCategory
+		=> Translations.GetString ("Stylize");
 
 	public override void LaunchConfiguration ()
 		=> chrome.LaunchSimpleEffectDialog (this);
 
-	public override string Icon => Pinta.Resources.Icons.EffectsStylizeRelief;
+	public override string Icon
+		=> Pinta.Resources.Icons.EffectsStylizeRelief;
 
-	public override string Name => Translations.GetString ("Relief");
+	public override string Name
+		=> Translations.GetString ("Relief");
 
 	#region Algorithm Code Ported From PDN
-	public override void Render (Cairo.ImageSurface src, Cairo.ImageSurface dst, ReadOnlySpan<RectangleI> rois)
+	public override void Render (
+		DBNull preRender,
+		Cairo.ImageSurface src,
+		Cairo.ImageSurface dst,
+		ReadOnlySpan<RectangleI> rois)
 	{
 		var weights = ComputeWeights ();
 		base.RenderColorDifferenceEffect (weights, src, dst, rois);

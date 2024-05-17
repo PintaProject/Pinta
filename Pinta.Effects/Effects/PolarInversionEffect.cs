@@ -15,17 +15,23 @@ namespace Pinta.Effects;
 
 public sealed class PolarInversionEffect : WarpEffect
 {
-	public override string Icon => Pinta.Resources.Icons.EffectsDistortPolarInversion;
+	public override string Icon
+		=> Pinta.Resources.Icons.EffectsDistortPolarInversion;
 
-	public sealed override bool IsTileable => true;
+	public sealed override bool IsTileable
+		=> true;
 
-	public override string Name => Translations.GetString ("Polar Inversion");
+	public override string Name
+		=> Translations.GetString ("Polar Inversion");
 
-	public override bool IsConfigurable => true;
+	public override bool IsConfigurable
+		=> true;
 
-	public new PolarInversionData Data => (PolarInversionData) EffectData!;
+	public new PolarInversionData Data
+		=> (PolarInversionData) EffectData!;
 
-	public override string EffectMenuCategory => Translations.GetString ("Distort");
+	public override string EffectMenuCategory
+		=> Translations.GetString ("Distort");
 
 	protected override IPaletteService Palette { get; }
 	protected override IChromeService Chrome { get; }
@@ -48,8 +54,7 @@ public sealed class PolarInversionEffect : WarpEffect
 
 		return new (
 			X: x * invertDistance,
-			Y: y * invertDistance
-		);
+			Y: y * invertDistance);
 	}
 	#endregion
 

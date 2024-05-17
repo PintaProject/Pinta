@@ -18,17 +18,23 @@ public sealed class UnfocusEffect : LocalHistogramEffect
 {
 	private int radius;
 
-	public override string Icon => Pinta.Resources.Icons.EffectsBlursUnfocus;
+	public override string Icon
+		=> Pinta.Resources.Icons.EffectsBlursUnfocus;
 
-	public sealed override bool IsTileable => true;
+	public sealed override bool IsTileable
+		=> true;
 
-	public override string Name => Translations.GetString ("Unfocus");
+	public override string Name
+		=> Translations.GetString ("Unfocus");
 
-	public override bool IsConfigurable => true;
+	public override bool IsConfigurable
+		=> true;
 
-	public override string EffectMenuCategory => Translations.GetString ("Blurs");
+	public override string EffectMenuCategory
+		=> Translations.GetString ("Blurs");
 
-	public UnfocusData Data => (UnfocusData) EffectData!;  // NRT - Set in constructor
+	public UnfocusData Data
+		=> (UnfocusData) EffectData!;  // NRT - Set in constructor
 
 	private readonly IChromeService chrome;
 
@@ -43,10 +49,13 @@ public sealed class UnfocusEffect : LocalHistogramEffect
 		=> chrome.LaunchSimpleEffectDialog (this);
 
 	#region Algorithm Code Ported From PDN
-	public override void Render (ImageSurface src, ImageSurface dest, ReadOnlySpan<RectangleI> rois)
+	public override void Render (
+		DBNull preRender,
+		ImageSurface src,
+		ImageSurface dest,
+		ReadOnlySpan<RectangleI> rois)
 	{
 		radius = Data.Radius;
-
 		foreach (var rect in rois)
 			RenderRectWithAlpha (radius, src, dest, rect);
 	}

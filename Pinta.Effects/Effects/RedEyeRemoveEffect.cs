@@ -14,7 +14,7 @@ using Pinta.Gui.Widgets;
 
 namespace Pinta.Effects;
 
-public sealed class RedEyeRemoveEffect : BaseEffect
+public sealed class RedEyeRemoveEffect : BaseEffect<DBNull>
 {
 	public override string Icon => Pinta.Resources.Icons.EffectsPhotoRedEyeRemove;
 
@@ -40,7 +40,14 @@ public sealed class RedEyeRemoveEffect : BaseEffect
 	public override void LaunchConfiguration ()
 		=> chrome.LaunchSimpleEffectDialog (this);
 
-	public override void Render (ImageSurface src, ImageSurface dest, ReadOnlySpan<RectangleI> rois)
+	public override DBNull GetPreRender (ImageSurface src, ImageSurface dst)
+		=> DBNull.Value;
+
+	public override void Render (
+		DBNull preRender,
+		ImageSurface src,
+		ImageSurface dest,
+		ReadOnlySpan<RectangleI> rois)
 	{
 		var op = new UnaryPixelOps.RedEyeRemove (Data.Tolerance, Data.Saturation);
 		op.Apply (dest, src, rois);

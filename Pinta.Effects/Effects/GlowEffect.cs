@@ -14,22 +14,28 @@ using Pinta.Gui.Widgets;
 
 namespace Pinta.Effects;
 
-public sealed class GlowEffect : BaseEffect
+public sealed class GlowEffect : BaseEffect<DBNull>
 {
 	private readonly UserBlendOps.ScreenBlendOp screen_blend_op;
 	private readonly IServiceProvider services;
 
-	public override string Icon => Pinta.Resources.Icons.EffectsPhotoGlow;
+	public override string Icon
+		=> Pinta.Resources.Icons.EffectsPhotoGlow;
 
-	public sealed override bool IsTileable => true;
+	public sealed override bool IsTileable
+		=> true;
 
-	public override string Name => Translations.GetString ("Glow");
+	public override string Name
+		=> Translations.GetString ("Glow");
 
-	public override bool IsConfigurable => true;
+	public override bool IsConfigurable
+		=> true;
 
-	public override string EffectMenuCategory => Translations.GetString ("Photo");
+	public override string EffectMenuCategory
+		=> Translations.GetString ("Photo");
 
-	public GlowData Data => (GlowData) EffectData!;  // NRT - Set in constructor
+	public GlowData Data
+		=> (GlowData) EffectData!;  // NRT - Set in constructor
 
 	private readonly IChromeService chrome;
 
@@ -44,17 +50,26 @@ public sealed class GlowEffect : BaseEffect
 	public override void LaunchConfiguration ()
 		=> chrome.LaunchSimpleEffectDialog (this);
 
+	public override DBNull GetPreRender (ImageSurface src, ImageSurface dst)
+		=> DBNull.Value;
+
 	#region Algorithm Code Ported From PDN
-	public override void Render (ImageSurface src, ImageSurface dest, ReadOnlySpan<RectangleI> rois)
+	public override void Render (
+		DBNull preRender,
+		ImageSurface src,
+		ImageSurface dest,
+		ReadOnlySpan<RectangleI> rois)
 	{
 		GaussianBlurEffect blurEffect = new (services);
 		blurEffect.Data.Radius = Data.Radius;
-		blurEffect.Render (src, dest, rois);
+		var blurPreRender = blurEffect.GetPreRender (src, dest);
+		blurEffect.Render (blurPreRender, src, dest, rois);
 
 		BrightnessContrastEffect contrastEffect = new (services);
 		contrastEffect.Data.Brightness = Data.Brightness;
 		contrastEffect.Data.Contrast = Data.Contrast;
-		contrastEffect.Render (dest, dest, rois);
+		var contrastPreRender = contrastEffect.GetPreRender (dest, dest);
+		contrastEffect.Render (contrastPreRender, dest, dest, rois);
 
 		var dst_data = dest.GetPixelData ();
 		var src_data = src.GetReadOnlyPixelData ();
@@ -69,6 +84,7 @@ public sealed class GlowEffect : BaseEffect
 			}
 		}
 	}
+
 	#endregion
 
 	public sealed class GlowData : EffectData

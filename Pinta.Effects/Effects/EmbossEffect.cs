@@ -14,19 +14,25 @@ using Pinta.Gui.Widgets;
 
 namespace Pinta.Effects;
 
-public sealed class EmbossEffect : BaseEffect
+public sealed class EmbossEffect : BaseEffect<EmbossEffect.EmbossSettings>
 {
-	public override string Icon => Pinta.Resources.Icons.EffectsStylizeEmboss;
+	public override string Icon
+		=> Pinta.Resources.Icons.EffectsStylizeEmboss;
 
-	public sealed override bool IsTileable => true;
+	public sealed override bool IsTileable
+		=> true;
 
-	public override string Name => Translations.GetString ("Emboss");
+	public override string Name
+		=> Translations.GetString ("Emboss");
 
-	public override bool IsConfigurable => true;
+	public override bool IsConfigurable
+		=> true;
 
-	public override string EffectMenuCategory => Translations.GetString ("Stylize");
+	public override string EffectMenuCategory
+		=> Translations.GetString ("Stylize");
 
-	public EmbossData Data => (EmbossData) EffectData!;
+	public EmbossData Data
+		=> (EmbossData) EffectData!;
 
 	private readonly IChromeService chrome;
 
@@ -41,22 +47,24 @@ public sealed class EmbossEffect : BaseEffect
 
 	#region Algorithm Code Ported From PDN
 
-	private sealed record EmbossSettings (
+	public sealed record EmbossSettings (
 		double[,] weights,
 		int srcWidth,
 		int srcHeight);
 
-	private EmbossSettings CreateSettings (ImageSurface src)
+	public override EmbossSettings GetPreRender (ImageSurface src, ImageSurface dst)
 		=> new (
 			weights: ComputeWeights (Data.Angle.Degrees),
 			srcWidth: src.Width,
 			srcHeight: src.Height
 		);
 
-	public override void Render (ImageSurface src, ImageSurface dst, ReadOnlySpan<RectangleI> rois)
+	public override void Render (
+		EmbossSettings settings,
+		ImageSurface src,
+		ImageSurface dst,
+		ReadOnlySpan<RectangleI> rois)
 	{
-		EmbossSettings settings = CreateSettings (src);
-
 		ReadOnlySpan<ColorBgra> src_data = src.GetReadOnlyPixelData ();
 		Span<ColorBgra> dst_data = dst.GetPixelData ();
 
@@ -140,6 +148,7 @@ public sealed class EmbossEffect : BaseEffect
 
 		return weights;
 	}
+
 	#endregion
 
 

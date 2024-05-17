@@ -13,18 +13,22 @@ using Pinta.Core;
 
 namespace Pinta.Effects;
 
-public sealed class SepiaEffect : BaseEffect
+public sealed class SepiaEffect : BaseEffect<DBNull>
 {
 	readonly UnaryPixelOp desat = new UnaryPixelOps.Desaturate ();
 	readonly UnaryPixelOp level = new UnaryPixelOps.Desaturate ();
 
-	public sealed override bool IsTileable => true;
+	public sealed override bool IsTileable
+		=> true;
 
-	public override string Icon => Pinta.Resources.Icons.AdjustmentsSepia;
+	public override string Icon
+		=> Pinta.Resources.Icons.AdjustmentsSepia;
 
-	public override string Name => Translations.GetString ("Sepia");
+	public override string Name
+		=> Translations.GetString ("Sepia");
 
-	public override string AdjustmentMenuKey => "E";
+	public override string AdjustmentMenuKey
+		=> "E";
 
 	public SepiaEffect (IServiceProvider _)
 	{
@@ -37,7 +41,14 @@ public sealed class SepiaEffect : BaseEffect
 			ColorBgra.White);
 	}
 
-	public override void Render (ImageSurface src, ImageSurface dest, ReadOnlySpan<RectangleI> rois)
+	public override DBNull GetPreRender (ImageSurface src, ImageSurface dst)
+		=> DBNull.Value;
+
+	public override void Render (
+		DBNull preRender,
+		ImageSurface src,
+		ImageSurface dest,
+		ReadOnlySpan<RectangleI> rois)
 	{
 		desat.Apply (dest, src, rois);
 		level.Apply (dest, dest, rois);

@@ -9,19 +9,24 @@ using Pinta.Gui.Widgets;
 
 namespace Pinta.Effects;
 
-public sealed class VoronoiDiagramEffect : BaseEffect
+public sealed class VoronoiDiagramEffect : BaseEffect<DBNull>
 {
 	// TODO: Icon
 
-	public override bool IsTileable => false;
+	public override bool IsTileable
+		=> false;
 
-	public override string Name => Translations.GetString ("Voronoi Diagram");
+	public override string Name
+		=> Translations.GetString ("Voronoi Diagram");
 
-	public override bool IsConfigurable => true;
+	public override bool IsConfigurable
+		=> true;
 
-	public override string EffectMenuCategory => Translations.GetString ("Render");
+	public override string EffectMenuCategory
+		=> Translations.GetString ("Render");
 
-	public VoronoiDiagramData Data => (VoronoiDiagramData) EffectData!; // NRT - Set in constructor
+	public VoronoiDiagramData Data
+		=> (VoronoiDiagramData) EffectData!; // NRT - Set in constructor
 
 	private readonly IChromeService chrome;
 
@@ -33,6 +38,9 @@ public sealed class VoronoiDiagramEffect : BaseEffect
 
 	public override void LaunchConfiguration ()
 		=> chrome.LaunchSimpleEffectDialog (this);
+
+	public override DBNull GetPreRender (ImageSurface src, ImageSurface dst)
+		=> DBNull.Value;
 
 	private sealed record VoronoiSettings (
 		Size size,
@@ -57,11 +65,14 @@ public sealed class VoronoiDiagramEffect : BaseEffect
 			showPoints: Data.ShowPoints,
 			points: points,
 			colors: reversedSortingColors.ToImmutableArray (),
-			distanceCalculator: GetDistanceCalculator (Data.DistanceMetric)
-		);
+			distanceCalculator: GetDistanceCalculator (Data.DistanceMetric));
 	}
 
-	protected override void Render (ImageSurface src, ImageSurface dst, RectangleI roi)
+	protected override void Render (
+		DBNull preRender, // TODO: Better pre-render
+		ImageSurface src,
+		ImageSurface dst,
+		RectangleI roi)
 	{
 		VoronoiSettings settings = CreateSettings (dst, roi);
 		Span<ColorBgra> dst_data = dst.GetPixelData ();

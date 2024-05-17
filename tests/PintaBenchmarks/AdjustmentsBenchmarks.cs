@@ -24,21 +24,24 @@ public class AdjustmentsBenchmarks
 	public void AutoLevelEffect ()
 	{
 		var effect = new AutoLevelEffect (Utilities.CreateMockServices ());
-		effect.Render (surface, dest_surface, bounds);
+		var preRender = effect.GetPreRender (surface, dest_surface);
+		effect.Render (preRender, surface, dest_surface, bounds);
 	}
 
 	[Benchmark]
 	public void BlackAndWhiteEffect ()
 	{
 		var effect = new BlackAndWhiteEffect (Utilities.CreateMockServices ());
-		effect.Render (surface, dest_surface, bounds);
+		var preRender = effect.GetPreRender (surface, dest_surface);
+		effect.Render (preRender, surface, dest_surface, bounds);
 	}
 
 	[Benchmark]
 	public void BrightnessContrastEffect ()
 	{
 		var effect = new BrightnessContrastEffect (Utilities.CreateMockServices ());
-		effect.Render (surface, dest_surface, bounds);
+		var preRender = effect.GetPreRender (surface, dest_surface);
+		effect.Render (preRender, surface, dest_surface, bounds);
 	}
 
 	[Benchmark]
@@ -56,41 +59,47 @@ public class AdjustmentsBenchmarks
 		(effect.EffectData as CurvesData)!.ControlPoints = new[] { points };
 		(effect.EffectData as CurvesData)!.Mode = ColorTransferMode.Luminosity;
 
-		effect.Render (surface, dest_surface, bounds);
+		var preRender = effect.GetPreRender (surface, dest_surface);
+		effect.Render (preRender, surface, dest_surface, bounds);
 	}
 
 	[Benchmark]
 	public void HueSaturationEffect ()
 	{
 		var effect = new HueSaturationEffect (Utilities.CreateMockServices ());
-		effect.Render (surface, dest_surface, bounds);
+		var preRender = effect.GetPreRender (surface, dest_surface);
+		effect.Render (preRender, surface, dest_surface, bounds);
 	}
 
 	[Benchmark]
 	public void InvertColorsEffect ()
 	{
 		var effect = new InvertColorsEffect (Utilities.CreateMockServices ());
-		effect.Render (surface, dest_surface, bounds);
+		var preRender = effect.GetPreRender (surface, dest_surface);
+		effect.Render (preRender, surface, dest_surface, bounds);
 	}
 
 	[Benchmark]
 	public void LevelsEffect ()
 	{
 		var effect = new LevelsEffect (Utilities.CreateMockServices ());
-		effect.Render (surface, dest_surface, bounds);
+		var preRender = effect.GetPreRender (surface, dest_surface);
+		effect.Render (preRender, surface, dest_surface, bounds);
 	}
 
 	[Benchmark]
 	public void PosterizeEffect ()
 	{
 		var effect = new PosterizeEffect (Utilities.CreateMockServices ());
-		effect.Render (surface, dest_surface, bounds);
+		var preRender = effect.GetPreRender (surface, dest_surface);
+		effect.Render (preRender, surface, dest_surface, bounds);
 	}
 
 	[Benchmark]
 	public void SepiaEffect ()
 	{
 		var effect = new SepiaEffect (Utilities.CreateMockServices ());
-		effect.Render (surface, dest_surface, bounds);
+		var preRender = effect.GetPreRender (surface, dest_surface);
+		effect.Render (preRender, surface, dest_surface, bounds);
 	}
 }

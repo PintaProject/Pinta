@@ -19,17 +19,23 @@ public sealed class OutlineEffect : LocalHistogramEffect
 	private int thickness;
 	private int intensity;
 
-	public override string Icon => Pinta.Resources.Icons.EffectsStylizeOutline;
+	public override string Icon
+		=> Pinta.Resources.Icons.EffectsStylizeOutline;
 
-	public sealed override bool IsTileable => true;
+	public sealed override bool IsTileable
+		=> true;
 
-	public override string Name => Translations.GetString ("Outline");
+	public override string Name
+		=> Translations.GetString ("Outline");
 
-	public override bool IsConfigurable => true;
+	public override bool IsConfigurable
+		=> true;
 
-	public override string EffectMenuCategory => Translations.GetString ("Stylize");
+	public override string EffectMenuCategory
+		=> Translations.GetString ("Stylize");
 
-	public OutlineData Data => (OutlineData) EffectData!;  // NRT - Set in constructor
+	public OutlineData Data
+		=> (OutlineData) EffectData!;  // NRT - Set in constructor
 
 	private readonly IChromeService chrome;
 
@@ -120,7 +126,11 @@ public sealed class OutlineEffect : LocalHistogramEffect
 			a: (byte) a2);
 	}
 
-	public override void Render (ImageSurface src, ImageSurface dest, ReadOnlySpan<RectangleI> rois)
+	public override void Render (
+		DBNull preRender,
+		ImageSurface src,
+		ImageSurface dest,
+		ReadOnlySpan<RectangleI> rois)
 	{
 		thickness = Data.Thickness;
 		intensity = Data.Intensity;

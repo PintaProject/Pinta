@@ -19,17 +19,23 @@ public sealed class MedianEffect : LocalHistogramEffect
 	private int radius;
 	private int percentile;
 
-	public override string Icon => Pinta.Resources.Icons.EffectsNoiseMedian;
+	public override string Icon
+		=> Pinta.Resources.Icons.EffectsNoiseMedian;
 
-	public sealed override bool IsTileable => true;
+	public sealed override bool IsTileable
+		=> true;
 
-	public override string Name => Translations.GetString ("Median");
+	public override string Name
+		=> Translations.GetString ("Median");
 
-	public override bool IsConfigurable => true;
+	public override bool IsConfigurable
+		=> true;
 
-	public override string EffectMenuCategory => Translations.GetString ("Noise");
+	public override string EffectMenuCategory
+		=> Translations.GetString ("Noise");
 
-	public MedianData Data => (MedianData) EffectData!;  // NRT - Set in constructor
+	public MedianData Data
+		=> (MedianData) EffectData!;  // NRT - Set in constructor
 
 	private readonly IChromeService chrome;
 
@@ -43,7 +49,11 @@ public sealed class MedianEffect : LocalHistogramEffect
 		=> chrome.LaunchSimpleEffectDialog (this);
 
 	#region Algorithm Code Ported From PDN
-	public override void Render (ImageSurface src, ImageSurface dest, ReadOnlySpan<RectangleI> rois)
+	public override void Render (
+		DBNull preRender,
+		ImageSurface src,
+		ImageSurface dest,
+		ReadOnlySpan<RectangleI> rois)
 	{
 		radius = Data.Radius;
 		percentile = Data.Percentile;

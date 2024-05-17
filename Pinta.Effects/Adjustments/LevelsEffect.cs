@@ -13,21 +13,28 @@ using Pinta.Core;
 
 namespace Pinta.Effects;
 
-public sealed class LevelsEffect : BaseEffect
+public sealed class LevelsEffect : BaseEffect<DBNull>
 {
-	public sealed override bool IsTileable => true;
+	public sealed override bool IsTileable
+		=> true;
 
-	public override string Icon => Pinta.Resources.Icons.AdjustmentsLevels;
+	public override string Icon
+		=> Pinta.Resources.Icons.AdjustmentsLevels;
 
-	public override string Name => Translations.GetString ("Levels");
+	public override string Name
+		=> Translations.GetString ("Levels");
 
-	public override bool IsConfigurable => true;
+	public override bool IsConfigurable
+		=> true;
 
-	public override string AdjustmentMenuKey => "L";
+	public override string AdjustmentMenuKey
+		=> "L";
 
-	public override string AdjustmentMenuKeyModifiers => "<Primary>";
+	public override string AdjustmentMenuKeyModifiers
+		=> "<Primary>";
 
-	public LevelsData Data => (LevelsData) EffectData!;  // NRT - Set in constructor
+	public LevelsData Data
+		=> (LevelsData) EffectData!;  // NRT - Set in constructor
 
 	private readonly IChromeService chrome;
 	private readonly IWorkspaceService workspace;
@@ -59,7 +66,15 @@ public sealed class LevelsEffect : BaseEffect
 		dialog.Present ();
 	}
 
-	public override void Render (ImageSurface src, ImageSurface dest, ReadOnlySpan<RectangleI> rois)
+	public override DBNull GetPreRender (ImageSurface src, ImageSurface dst)
+		=> DBNull.Value;
+
+	public override void Render (
+		DBNull preRender,
+		ImageSurface src,
+		ImageSurface dest,
+		ReadOnlySpan<RectangleI> rois
+	)
 		=> Data.Levels.Apply (dest, src, rois);
 }
 

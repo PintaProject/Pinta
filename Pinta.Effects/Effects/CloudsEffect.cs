@@ -16,28 +16,32 @@ using Pinta.Gui.Widgets;
 
 namespace Pinta.Effects;
 
-public sealed class CloudsEffect : BaseEffect
+public sealed class CloudsEffect : BaseEffect<DBNull>
 {
 	// This is so that repetition of the effect with CTRL+F actually shows up differently.
 	private readonly byte instance_seed = unchecked((byte) DateTime.Now.Ticks);
 	private static readonly object render_lock = new ();
 
-	public sealed override bool IsTileable => true;
+	public sealed override bool IsTileable
+		=> true;
 
-	public override string Icon => Pinta.Resources.Icons.EffectsRenderClouds;
+	public override string Icon
+		=> Pinta.Resources.Icons.EffectsRenderClouds;
 
-	public override string Name => Translations.GetString ("Clouds");
+	public override string Name
+		=> Translations.GetString ("Clouds");
 
-	public override bool IsConfigurable => true;
+	public override bool IsConfigurable
+		=> true;
 
-	public override string EffectMenuCategory => Translations.GetString ("Render");
+	public override string EffectMenuCategory
+		=> Translations.GetString ("Render");
 
-	public CloudsData Data => (CloudsData) EffectData!;  // NRT - Set in constructor
+	public CloudsData Data
+		=> (CloudsData) EffectData!;  // NRT - Set in constructor
 
 	private readonly IPaletteService palette;
-
 	private readonly IChromeService chrome;
-
 	public CloudsEffect (IServiceProvider services)
 	{
 		chrome = services.GetService<IChromeService> ();
@@ -172,7 +176,11 @@ public sealed class CloudsEffect : BaseEffect
 		return gradient.GetColor ((val + 1) / 2);
 	}
 
-	protected override void Render (ImageSurface src, ImageSurface dst, Core.RectangleI roi)
+	protected override void Render (
+		DBNull preRender,
+		ImageSurface src,
+		ImageSurface dst,
+		Core.RectangleI roi)
 	{
 		var r = roi.ToDouble ();
 
@@ -209,6 +217,10 @@ public sealed class CloudsEffect : BaseEffect
 			g.BlendSurface (temp, r.Location (), (BlendMode) CloudsData.BlendOps[Data.BlendMode]);
 		}
 	}
+
+	public override DBNull GetPreRender (ImageSurface src, ImageSurface dst)
+		=> DBNull.Value;
+
 	#endregion
 
 	public sealed class CloudsData : EffectData

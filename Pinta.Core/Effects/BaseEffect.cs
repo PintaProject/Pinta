@@ -25,7 +25,6 @@
 // THE SOFTWARE.
 
 using System;
-using System.Diagnostics;
 using Cairo;
 using Mono.Addins;
 using Mono.Addins.Localization;
@@ -38,6 +37,8 @@ namespace Pinta.Core;
 [Mono.Addins.TypeExtensionPoint]
 public abstract class BaseEffect
 {
+	private protected BaseEffect () { }
+
 	/// <summary>
 	/// Specifies whether Render() can be called separately (and possibly in parallel) for different sub-regions of the image.
 	/// If false, Render () will be called once with the entire region the effect is applied to.
@@ -122,53 +123,17 @@ public abstract class BaseEffect
 	/// <param name="src">The source surface. DO NOT MODIFY.</param>
 	/// <param name="dst">The destination surface.</param>
 	/// <param name="rois">An array of rectangles of interest (roi) specifying the area(s) to modify. Only these areas should be modified.</param>
-	public virtual void Render (ImageSurface src, ImageSurface dst, ReadOnlySpan<RectangleI> rois)
-	{
-		foreach (var rect in rois)
-			Render (src, dst, rect);
-	}
+	internal abstract void Render (
+		object preRender,
+		ImageSurface src,
+		ImageSurface dst,
+		ReadOnlySpan<RectangleI> rois);
 
-	/// <summary>
-	/// Performs the actual work of rendering an effect. Do not call base.Render ().
-	/// </summary>
-	/// <param name="src">The source surface. DO NOT MODIFY.</param>
-	/// <param name="dst">The destination surface.</param>
-	/// <param name="roi">A rectangle of interest (roi) specifying the area to modify. Only these areas should be modified</param>
-	protected virtual void Render (ImageSurface src, ImageSurface dst, RectangleI roi)
-	{
-		var src_data = src.GetReadOnlyPixelData ();
-		var dst_data = dst.GetPixelData ();
-		int src_width = src.Width;
-		int dst_width = dst.Width;
-
-		for (int y = roi.Y; y <= roi.Bottom; ++y) {
-			Render (src_data.Slice (y * src_width + roi.X, roi.Width),
-				dst_data.Slice (y * dst_width + roi.X, roi.Width));
-		}
-	}
-
-	/// <summary>
-	/// Performs the actual work of rendering an effect. This overload represent a single line of the image. Do not call base.Render ().
-	/// </summary>
-	/// <param name="src">The source surface. DO NOT MODIFY.</param>
-	/// <param name="dst">The destination surface.</param>
-	/// <param name="length">The number of pixels to render.</param>
-	protected virtual void Render (ReadOnlySpan<ColorBgra> src, Span<ColorBgra> dst)
-	{
-		for (int i = 0; i < src.Length; ++i)
-			dst[i] = Render (src[i]);
-	}
-
-	/// <summary>
-	/// Performs the actual work of rendering an effect. This overload represent a single pixel of the image.
-	/// </summary>
-	/// <param name="color">The color of the source surface pixel.</param>
-	/// <returns>The color to be used for the destination pixel.</returns>
-	protected virtual ColorBgra Render (in ColorBgra color)
-	{
-		return color;
-	}
 	#endregion
+
+	internal abstract object GetUntypedPreRender (
+		ImageSurface src,
+		ImageSurface dst);
 
 	// Effects that have any configuration state which is changed
 	// during live preview, and this this state is stored in
@@ -194,6 +159,100 @@ public abstract class BaseEffect
 		public ConfigDialogResponseEventArgs (bool accepted) { Accepted = accepted; }
 
 		public bool Accepted { get; }
+	}
+}
+
+public abstract class BaseEffect<TPreRender> : BaseEffect
+	where TPreRender : notnull
+{
+	public abstract TPreRender GetPreRender (
+		ImageSurface src,
+		ImageSurface dst);
+
+	public virtual void Render (
+		TPreRender preRender,
+		ImageSurface src,
+		ImageSurface dst,
+		ReadOnlySpan<RectangleI> rois)
+	{
+		foreach (var rect in rois)
+			Render (preRender, src, dst, rect);
+	}
+
+	#region Overridable Render Methods
+
+	/// <summary>
+	/// Performs the actual work of rendering an effect. Do not call base.Render ().
+	/// </summary>
+	/// <param name="src">The source surface. DO NOT MODIFY.</param>
+	/// <param name="dst">The destination surface.</param>
+	/// <param name="roi">A rectangle of interest (roi) specifying the area to modify. Only these areas should be modified</param>
+	protected virtual void Render (
+		TPreRender preRender,
+		ImageSurface src,
+		ImageSurface dst,
+		RectangleI roi)
+	{
+		var src_data = src.GetReadOnlyPixelData ();
+		var dst_data = dst.GetPixelData ();
+		int src_width = src.Width;
+		int dst_width = dst.Width;
+
+		for (int y = roi.Y; y <= roi.Bottom; ++y) {
+			Render (
+				preRender,
+				src_data.Slice (y * src_width + roi.X, roi.Width),
+				dst_data.Slice (y * dst_width + roi.X, roi.Width));
+		}
+	}
+
+	/// <summary>
+	/// Performs the actual work of rendering an effect. This overload represent a single line of the image. Do not call base.Render ().
+	/// </summary>
+	/// <param name="src">The source surface. DO NOT MODIFY.</param>
+	/// <param name="dst">The destination surface.</param>
+	/// <param name="length">The number of pixels to render.</param>
+	protected virtual void Render (
+		TPreRender preRender,
+		ReadOnlySpan<ColorBgra> src,
+		Span<ColorBgra> dst)
+	{
+		for (int i = 0; i < src.Length; ++i)
+			dst[i] = Render (preRender, src[i]);
+	}
+
+	/// <summary>
+	/// Performs the actual work of rendering an effect. This overload represent a single pixel of the image.
+	/// </summary>
+	/// <param name="color">The color of the source surface pixel.</param>
+	/// <returns>The color to be used for the destination pixel.</returns>
+	protected virtual ColorBgra Render (
+		TPreRender preRender,
+		in ColorBgra color)
+	{
+		return color;
+	}
+
+	#endregion
+
+	internal sealed override void Render (
+		object preRender,
+		ImageSurface src,
+		ImageSurface dst,
+		ReadOnlySpan<RectangleI> rois)
+	{
+		Render (
+			(TPreRender) preRender,
+			src,
+			dst,
+			rois);
+	}
+
+	internal sealed override object GetUntypedPreRender (
+		ImageSurface src,
+		ImageSurface dst)
+	{
+		return GetPreRender (src, dst);
 	}
 }
 

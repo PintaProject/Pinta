@@ -14,19 +14,25 @@ using Pinta.Gui.Widgets;
 
 namespace Pinta.Effects;
 
-public sealed class OilPaintingEffect : BaseEffect
+public sealed class OilPaintingEffect : BaseEffect<OilPaintingEffect.OilPaintingSettings>
 {
-	public override string Icon => Pinta.Resources.Icons.EffectsArtisticOilPainting;
+	public override string Icon
+		=> Pinta.Resources.Icons.EffectsArtisticOilPainting;
 
-	public sealed override bool IsTileable => true;
+	public sealed override bool IsTileable
+		=> true;
 
-	public override string Name => Translations.GetString ("Oil Painting");
+	public override string Name
+		=> Translations.GetString ("Oil Painting");
 
-	public override bool IsConfigurable => true;
+	public override bool IsConfigurable
+		=> true;
 
-	public override string EffectMenuCategory => Translations.GetString ("Artistic");
+	public override string EffectMenuCategory
+		=> Translations.GetString ("Artistic");
 
-	public OilPaintingData Data => (OilPaintingData) EffectData!;  // NRT - Set in constructor
+	public OilPaintingData Data
+		=> (OilPaintingData) EffectData!;  // NRT - Set in constructor
 
 	private readonly IChromeService chrome;
 
@@ -40,13 +46,14 @@ public sealed class OilPaintingEffect : BaseEffect
 		=> chrome.LaunchSimpleEffectDialog (this);
 
 	#region Algorithm Code Ported From PDN
-	public override void Render (ImageSurface src, ImageSurface dest, ReadOnlySpan<RectangleI> rois)
+	public override void Render (
+		OilPaintingSettings settings,
+		ImageSurface src,
+		ImageSurface dest,
+		ReadOnlySpan<RectangleI> rois)
 	{
-		OilPaintingSettings settings = CreateSettings (src);
-
 		ReadOnlySpan<ColorBgra> src_data = src.GetReadOnlyPixelData ();
 		Span<ColorBgra> dst_data = dest.GetPixelData ();
-
 		foreach (var rect in rois) {
 			foreach (var pixel in Utility.GeneratePixelOffsets (rect, settings.canvasSize)) {
 				int top = Math.Max (pixel.coordinates.Y - settings.brushSize, 0);
@@ -56,12 +63,13 @@ public sealed class OilPaintingEffect : BaseEffect
 		}
 	}
 
-	private sealed record OilPaintingSettings (
+	public sealed record OilPaintingSettings (
 		Size canvasSize,
 		int brushSize,
 		int arrayLens,
 		byte maxIntensity);
-	private OilPaintingSettings CreateSettings (ImageSurface src)
+
+	public override OilPaintingSettings GetPreRender (ImageSurface src, ImageSurface dst)
 	{
 		int coarseness = Data.Coarseness;
 		return new (
@@ -123,6 +131,7 @@ public sealed class OilPaintingEffect : BaseEffect
 			a: (byte) (avgAlpha[chosenIntensity] / maxInstance)
 		);
 	}
+
 	#endregion
 
 	public sealed class OilPaintingData : EffectData

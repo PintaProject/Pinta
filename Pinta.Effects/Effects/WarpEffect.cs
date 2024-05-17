@@ -39,9 +39,10 @@ public enum WarpEdgeBehavior
 	Original,
 }
 
-public abstract class WarpEffect : BaseEffect
+public abstract class WarpEffect : BaseEffect<DBNull>
 {
-	public WarpData Data => (WarpData) EffectData!;
+	public WarpData Data
+		=> (WarpData) EffectData!;
 
 	public WarpEffect ()
 	{
@@ -59,7 +60,15 @@ public abstract class WarpEffect : BaseEffect
 
 
 	#region Algorithm Code Ported From PDN
-	public override void Render (ImageSurface src, ImageSurface dst, ReadOnlySpan<RectangleI> rois)
+
+	public override DBNull GetPreRender (ImageSurface src, ImageSurface dst)
+		=> DBNull.Value;
+
+	public override void Render (
+		DBNull preRender,
+		ImageSurface src,
+		ImageSurface dst,
+		ReadOnlySpan<RectangleI> rois)
 	{
 		WarpSettings settings = CreateSettings ();
 

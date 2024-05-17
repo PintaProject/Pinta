@@ -19,17 +19,23 @@ public sealed class ReduceNoiseEffect : LocalHistogramEffect
 	private int radius;
 	private double strength;
 
-	public override string Icon => Pinta.Resources.Icons.EffectsNoiseReduceNoise;
+	public override string Icon
+		=> Pinta.Resources.Icons.EffectsNoiseReduceNoise;
 
-	public sealed override bool IsTileable => true;
+	public sealed override bool IsTileable
+		=> true;
 
-	public override string Name => Translations.GetString ("Reduce Noise");
+	public override string Name
+		=> Translations.GetString ("Reduce Noise");
 
-	public override bool IsConfigurable => true;
+	public override bool IsConfigurable
+		=> true;
 
-	public override string EffectMenuCategory => Translations.GetString ("Noise");
+	public override string EffectMenuCategory
+		=> Translations.GetString ("Noise");
 
-	public ReduceNoiseData Data => (ReduceNoiseData) EffectData!;  // NRT - Set in constructor
+	public ReduceNoiseData Data
+		=> (ReduceNoiseData) EffectData!;  // NRT - Set in constructor
 
 	private readonly IChromeService chrome;
 
@@ -74,11 +80,14 @@ public sealed class ReduceNoiseEffect : LocalHistogramEffect
 		return ColorBgra.FromBgr ((byte) bc, (byte) gc, (byte) rc);
 	}
 
-	public override void Render (ImageSurface src, ImageSurface dest, ReadOnlySpan<RectangleI> rois)
+	public override void Render (
+		DBNull preRender,
+		ImageSurface src,
+		ImageSurface dest,
+		ReadOnlySpan<RectangleI> rois)
 	{
 		radius = Data.Radius;
 		strength = -0.2 * Data.Strength;
-
 		foreach (var rect in rois)
 			RenderRect (radius, src, dest, rect);
 	}

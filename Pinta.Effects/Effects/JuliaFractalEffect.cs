@@ -14,7 +14,7 @@ using Pinta.Gui.Widgets;
 
 namespace Pinta.Effects;
 
-public sealed class JuliaFractalEffect : BaseEffect
+internal sealed class JuliaFractalEffect : BaseEffect<JuliaFractalEffect.JuliaSettings>
 {
 	public override string Icon
 		=> Pinta.Resources.Icons.EffectsRenderJuliaFractal;
@@ -69,16 +69,19 @@ public sealed class JuliaFractalEffect : BaseEffect
 		return new (x, y);
 	}
 
-	public override void Render (ImageSurface src, ImageSurface dst, ReadOnlySpan<RectangleI> rois)
+	public override void Render (
+		JuliaSettings settings,
+		ImageSurface src,
+		ImageSurface dst,
+		ReadOnlySpan<RectangleI> rois)
 	{
-		JuliaSettings settings = CreateSettings (dst);
 		Span<ColorBgra> dst_data = dst.GetPixelData ();
 		foreach (RectangleI rect in rois)
 			foreach (var pixel in Utility.GeneratePixelOffsets (rect, settings.canvasSize))
 				dst_data[pixel.memoryOffset] = GetPixelColor (settings, pixel.coordinates);
 	}
 
-	private sealed record JuliaSettings (
+	internal sealed record JuliaSettings (
 		Size canvasSize,
 		double invH,
 		double invZoom,
@@ -89,7 +92,8 @@ public sealed class JuliaFractalEffect : BaseEffect
 		double angleTheta,
 		int factor,
 		ColorGradient colorGradient);
-	private JuliaSettings CreateSettings (ImageSurface dst)
+
+	public override JuliaSettings GetPreRender (ImageSurface src, ImageSurface dst)
 	{
 		Size canvasSize = dst.GetSize ();
 		var count = Data.Quality * Data.Quality + 1;
@@ -144,9 +148,7 @@ public sealed class JuliaFractalEffect : BaseEffect
 			);
 
 			double j = Julia (jLoc, Jr, Ji);
-
 			double c = settings.factor * j;
-
 			double clamped_c = Math.Clamp (c, settings.colorGradient.StartPosition, settings.colorGradient.EndPosition);
 
 			ColorBgra colorAddend = settings.colorGradient.GetColor (clamped_c);
@@ -161,9 +163,9 @@ public sealed class JuliaFractalEffect : BaseEffect
 			b: Utility.ClampToByte (b / settings.count),
 			g: Utility.ClampToByte (g / settings.count),
 			r: Utility.ClampToByte (r / settings.count),
-			a: Utility.ClampToByte (a / settings.count)
-		);
+			a: Utility.ClampToByte (a / settings.count));
 	}
+
 	#endregion
 
 	public sealed class JuliaFractalData : EffectData

@@ -20,8 +20,11 @@ namespace Pinta.Core;
 /// It is also limited to 3x3 kernels.
 /// (Chris Crosetto)
 /// </summary>
-public abstract class ColorDifferenceEffect : BaseEffect
+public abstract class ColorDifferenceEffect : BaseEffect<DBNull>
 {
+	public override DBNull GetPreRender (ImageSurface src, ImageSurface dst)
+		=> DBNull.Value;
+
 	public void RenderColorDifferenceEffect (
 		IReadOnlyList<IReadOnlyList<double>> weights,
 		ImageSurface src,

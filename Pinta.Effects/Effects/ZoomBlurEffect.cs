@@ -14,7 +14,7 @@ using Pinta.Gui.Widgets;
 
 namespace Pinta.Effects;
 
-public sealed class ZoomBlurEffect : BaseEffect
+public sealed class ZoomBlurEffect : BaseEffect<ZoomBlurEffect.ZoomBlurSettings>
 {
 	public override string Icon => Pinta.Resources.Icons.EffectsBlursZoomBlur;
 
@@ -41,14 +41,14 @@ public sealed class ZoomBlurEffect : BaseEffect
 
 	#region Algorithm Code Ported From PDN
 
-	private sealed record ZoomBlurSettings (
+	public sealed record ZoomBlurSettings (
 		int src_width,
 		int dst_width,
 		long fcx,
 		long fcy,
 		long fz);
 
-	private ZoomBlurSettings CreateSettings (ImageSurface src, ImageSurface dst)
+	public override ZoomBlurSettings GetPreRender (ImageSurface src, ImageSurface dst)
 	{
 		PointI offset = Data.Offset;
 
@@ -66,12 +66,14 @@ public sealed class ZoomBlurEffect : BaseEffect
 		);
 	}
 
-	public override void Render (ImageSurface src, ImageSurface dst, ReadOnlySpan<RectangleI> rois)
+	public override void Render (
+		ZoomBlurSettings settings,
+		ImageSurface src,
+		ImageSurface dst,
+		ReadOnlySpan<RectangleI> rois)
 	{
 		if (Data.Amount == 0)
 			return; // Copy src to dest
-
-		ZoomBlurSettings settings = CreateSettings (src, dst);
 
 		ReadOnlySpan<ColorBgra> src_data = src.GetReadOnlyPixelData ();
 		Span<ColorBgra> dst_data = dst.GetPixelData ();
@@ -136,6 +138,7 @@ public sealed class ZoomBlurEffect : BaseEffect
 				a: Utility.ClampToByte (sa / sc))
 			: ColorBgra.FromUInt32 (0);
 	}
+
 	#endregion
 
 	public sealed class ZoomBlurData : EffectData

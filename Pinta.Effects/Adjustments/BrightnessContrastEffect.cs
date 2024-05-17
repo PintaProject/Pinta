@@ -14,24 +14,30 @@ using Pinta.Gui.Widgets;
 
 namespace Pinta.Effects;
 
-public sealed class BrightnessContrastEffect : BaseEffect
+public sealed class BrightnessContrastEffect : BaseEffect<DBNull>
 {
 	private int multiply;
 	private int divide;
 	private byte[]? rgb_table;
 	private bool table_calculated;
 
-	public sealed override bool IsTileable => true;
+	public sealed override bool IsTileable
+		=> true;
 
-	public override string Icon => Pinta.Resources.Icons.AdjustmentsBrightnessContrast;
+	public override string Icon
+		=> Pinta.Resources.Icons.AdjustmentsBrightnessContrast;
 
-	public override string Name => Translations.GetString ("Brightness / Contrast");
+	public override string Name
+		=> Translations.GetString ("Brightness / Contrast");
 
-	public override bool IsConfigurable => true;
+	public override bool IsConfigurable
+		=> true;
 
-	public override string AdjustmentMenuKey => "B";
+	public override string AdjustmentMenuKey
+		=> "B";
 
-	public BrightnessContrastData Data => (BrightnessContrastData) EffectData!;  // NRT - Set in constructor
+	public BrightnessContrastData Data
+		=> (BrightnessContrastData) EffectData!;  // NRT - Set in constructor
 
 	private readonly IChromeService chrome;
 
@@ -53,7 +59,14 @@ public sealed class BrightnessContrastEffect : BaseEffect
 	public override void LaunchConfiguration ()
 		=> chrome.LaunchSimpleEffectDialog (this);
 
-	public override void Render (ImageSurface src, ImageSurface dest, ReadOnlySpan<RectangleI> rois)
+	public override DBNull GetPreRender (ImageSurface src, ImageSurface dst)
+		=> DBNull.Value;
+
+	public override void Render (
+		DBNull preRender,
+		ImageSurface src,
+		ImageSurface dest,
+		ReadOnlySpan<RectangleI> rois)
 	{
 		if (!table_calculated)
 			Calculate ();

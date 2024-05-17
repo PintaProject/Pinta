@@ -15,19 +15,25 @@ using Pinta.Gui.Widgets;
 
 namespace Pinta.Effects;
 
-public sealed class FragmentEffect : BaseEffect
+public sealed class FragmentEffect : BaseEffect<DBNull>
 {
-	public override string Icon => Pinta.Resources.Icons.EffectsBlursFragment;
+	public override string Icon
+		=> Pinta.Resources.Icons.EffectsBlursFragment;
 
-	public sealed override bool IsTileable => true;
+	public sealed override bool IsTileable
+		=> true;
 
-	public override string Name => Translations.GetString ("Fragment");
+	public override string Name
+		=> Translations.GetString ("Fragment");
 
-	public override bool IsConfigurable => true;
+	public override bool IsConfigurable
+		=> true;
 
-	public override string EffectMenuCategory => Translations.GetString ("Blurs");
+	public override string EffectMenuCategory
+		=> Translations.GetString ("Blurs");
 
-	public FragmentData Data => (FragmentData) EffectData!;  // NRT - Set in constructor
+	public FragmentData Data
+		=> (FragmentData) EffectData!;  // NRT - Set in constructor
 
 	private readonly IChromeService chrome;
 
@@ -62,7 +68,14 @@ public sealed class FragmentEffect : BaseEffect
 		return pointOffsets.MoveToImmutable ();
 	}
 
-	public override void Render (ImageSurface src, ImageSurface dst, ReadOnlySpan<RectangleI> rois)
+	public override DBNull GetPreRender (ImageSurface src, ImageSurface dst)
+		=> DBNull.Value;
+
+	public override void Render (
+		DBNull preRender,
+		ImageSurface src,
+		ImageSurface dst,
+		ReadOnlySpan<RectangleI> rois)
 	{
 		var pointOffsets = RecalcPointOffsets (Data.Fragments, Data.Rotation.Degrees, Data.Distance);
 
@@ -105,6 +118,7 @@ public sealed class FragmentEffect : BaseEffect
 			}
 		}
 	}
+
 	#endregion
 
 	public sealed class FragmentData : EffectData

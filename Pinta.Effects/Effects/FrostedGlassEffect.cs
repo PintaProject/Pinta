@@ -14,19 +14,25 @@ using Pinta.Gui.Widgets;
 
 namespace Pinta.Effects;
 
-public sealed class FrostedGlassEffect : BaseEffect
+public sealed class FrostedGlassEffect : BaseEffect<FrostedGlassEffect.FrostedGlassSettings>
 {
-	public override string Icon => Pinta.Resources.Icons.EffectsDistortFrostedGlass;
+	public override string Icon
+		=> Pinta.Resources.Icons.EffectsDistortFrostedGlass;
 
-	public sealed override bool IsTileable => true;
+	public sealed override bool IsTileable
+		=> true;
 
-	public override string Name => Translations.GetString ("Frosted Glass");
+	public override string Name
+		=> Translations.GetString ("Frosted Glass");
 
-	public override bool IsConfigurable => true;
+	public override bool IsConfigurable
+		=> true;
 
-	public override string EffectMenuCategory => Translations.GetString ("Distort");
+	public override string EffectMenuCategory
+		=> Translations.GetString ("Distort");
 
-	public FrostedGlassData Data => (FrostedGlassData) EffectData!;
+	public FrostedGlassData Data
+		=> (FrostedGlassData) EffectData!;
 
 	private readonly IChromeService chrome;
 
@@ -41,13 +47,13 @@ public sealed class FrostedGlassEffect : BaseEffect
 
 	#region Algorithm Code Ported From PDN
 
-	private sealed record FrostedGlassSettings (
+	public sealed record FrostedGlassSettings (
 		int amount,
 		int src_width,
 		int src_height,
 		RandomSeed seed);
 
-	private FrostedGlassSettings CreateSettings (ImageSurface src)
+	public override FrostedGlassSettings GetPreRender (ImageSurface src, ImageSurface dst)
 	{
 		var data = Data;
 		return new (
@@ -58,10 +64,12 @@ public sealed class FrostedGlassEffect : BaseEffect
 		);
 	}
 
-	public override void Render (ImageSurface src, ImageSurface dst, ReadOnlySpan<RectangleI> rois)
+	public override void Render (
+		FrostedGlassSettings settings,
+		ImageSurface src,
+		ImageSurface dst,
+		ReadOnlySpan<RectangleI> rois)
 	{
-		FrostedGlassSettings settings = CreateSettings (src);
-
 		ReadOnlySpan<ColorBgra> src_data = src.GetReadOnlyPixelData ();
 		Span<ColorBgra> dst_data = dst.GetPixelData ();
 
@@ -142,6 +150,7 @@ public sealed class FrostedGlassEffect : BaseEffect
 			a: (byte) (avgAlpha[chosenIntensity] / intensityCount[chosenIntensity])
 		);
 	}
+
 	#endregion
 
 	public sealed class FrostedGlassData : EffectData

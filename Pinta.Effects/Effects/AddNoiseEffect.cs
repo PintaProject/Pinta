@@ -15,19 +15,25 @@ using Pinta.Gui.Widgets;
 
 namespace Pinta.Effects;
 
-public sealed class AddNoiseEffect : BaseEffect
+public sealed class AddNoiseEffect : BaseEffect<AddNoiseEffect.AddNoiseSettings>
 {
-	public sealed override bool IsTileable => true;
+	public sealed override bool IsTileable
+		=> true;
 
-	public override string Icon => Pinta.Resources.Icons.EffectsNoiseAddNoise;
+	public override string Icon
+		=> Pinta.Resources.Icons.EffectsNoiseAddNoise;
 
-	public override string Name => Translations.GetString ("Add Noise");
+	public override string Name
+		=> Translations.GetString ("Add Noise");
 
-	public override bool IsConfigurable => true;
+	public override bool IsConfigurable
+		=> true;
 
-	public override string EffectMenuCategory => Translations.GetString ("Noise");
+	public override string EffectMenuCategory
+		=> Translations.GetString ("Noise");
 
-	public NoiseData Data => (NoiseData) EffectData!;  // NRT - Set in constructor
+	public NoiseData Data
+		=> (NoiseData) EffectData!;  // NRT - Set in constructor
 
 	static AddNoiseEffect ()
 	{
@@ -98,14 +104,16 @@ public sealed class AddNoiseEffect : BaseEffect
 		return result.MoveToImmutable ();
 	}
 
-	private sealed record AddNoiseSettings (
+	public sealed record AddNoiseSettings (
 		Size size,
 		RandomSeed seed,
 		double coverage,
 		int dev,
 		int sat);
 
-	private AddNoiseSettings CreateSettings (ImageSurface src)
+	public override AddNoiseSettings GetPreRender (
+		ImageSurface src,
+		ImageSurface dst)
 	{
 		var data = Data;
 		int intensity = data.Intensity;
@@ -119,10 +127,12 @@ public sealed class AddNoiseEffect : BaseEffect
 		);
 	}
 
-	public override void Render (ImageSurface src, ImageSurface dst, ReadOnlySpan<RectangleI> rois)
+	public override void Render (
+		AddNoiseSettings settings,
+		ImageSurface src,
+		ImageSurface dst,
+		ReadOnlySpan<RectangleI> rois)
 	{
-		AddNoiseSettings settings = CreateSettings (src);
-
 		ReadOnlySpan<ColorBgra> src_data = src.GetReadOnlyPixelData ();
 		Span<ColorBgra> dst_data = dst.GetPixelData ();
 
@@ -160,6 +170,7 @@ public sealed class AddNoiseEffect : BaseEffect
 			}
 		}
 	}
+
 	#endregion
 
 	public sealed class NoiseData : EffectData

@@ -13,8 +13,11 @@ using Pinta.Core;
 
 namespace Pinta.Effects;
 
-public abstract class LocalHistogramEffect : BaseEffect
+public abstract class LocalHistogramEffect : BaseEffect<DBNull>
 {
+	public override DBNull GetPreRender (ImageSurface src, ImageSurface dst)
+		=> DBNull.Value;
+
 	protected static int GetMaxAreaForRadius (int radius)
 	{
 		int area = 0;
