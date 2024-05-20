@@ -44,8 +44,8 @@ public sealed class AnglePickerWidget : Box
 		hbox2.Append (anglepickergraphic1);
 
 		spin = SpinButton.NewWithRange (0, 360, 1);
+		spin.Configure (spin.GetAdjustment (), 1, 2);
 		spin.CanFocus = true;
-		spin.ClimbRate = 1;
 		spin.Numeric = true;
 		spin.Adjustment!.PageIncrement = 10;
 		spin.Valign = Align.Start;
