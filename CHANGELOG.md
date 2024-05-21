@@ -28,6 +28,7 @@ Thanks to the following contributors who worked on this release:
 - Added support for customizable gradients in the fractal and clouds effects (#578, #678, #683)
 - Added a new `Offset Selection` option to the `Edit` menu to expand or contract the current selection (#661, #740, #746)
 - The Windows build of Pinta now supports loading `.webp` images (#770)
+- Improved zooming behavior with trackpads, including support for the pinch to zoom gesture (#634, #715)
 
 ### Changed
 - When building Pinta using the Makefile, 'dotnet publish' is now run during the build step rather than the install step.
