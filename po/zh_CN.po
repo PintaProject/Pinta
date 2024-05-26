@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: pinta\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-04-28 01:12+0000\n"
+"POT-Creation-Date: 2024-05-26 01:15+0000\n"
 "PO-Revision-Date: 2023-02-23 05:42+0000\n"
 "Last-Translator: Wu Tang <Unknown>\n"
 "Language-Team: Chinese (Simplified) <zh_CN@li.org>\n"
@@ -74,7 +74,7 @@ msgstr "增加噪点"
 msgid "Add-in Manager..."
 msgstr ""
 
-#: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:799
+#: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:797
 msgid "Added"
 msgstr "已添加"
 
@@ -106,8 +106,8 @@ msgstr "锚点："
 
 #: ../Pinta.Effects/Effects/EdgeDetectEffect.cs:81
 #: ../Pinta.Effects/Effects/EmbossEffect.cs:148
-#: ../Pinta.Effects/Effects/JuliaFractalEffect.cs:187
-#: ../Pinta.Effects/Effects/MandelbrotFractalEffect.cs:192
+#: ../Pinta.Effects/Effects/JuliaFractalEffect.cs:192
+#: ../Pinta.Effects/Effects/MandelbrotFractalEffect.cs:196
 #: ../Pinta.Effects/Effects/MotionBlurEffect.cs:108
 #: ../Pinta.Effects/Effects/RadialBlurEffect.cs:170
 #: ../Pinta.Effects/Effects/ReliefEffect.cs:83
@@ -120,11 +120,11 @@ msgstr "角度"
 msgid "Antialias"
 msgstr "抗锯齿"
 
-#: ../Pinta.Core/Classes/BaseTool.cs:338
+#: ../Pinta.Core/Classes/BaseTool.cs:349
 msgid "Antialiasing Off"
 msgstr "关闭抗锯齿"
 
-#: ../Pinta.Core/Classes/BaseTool.cs:337
+#: ../Pinta.Core/Classes/BaseTool.cs:348
 msgid "Antialiasing On"
 msgstr "开启抗锯齿"
 
@@ -443,14 +443,14 @@ msgstr "色彩饱和度"
 
 #: ../Pinta.Core/Actions/ViewActions.cs:181
 #: ../Pinta.Effects/Effects/CloudsEffect.cs:250
-#: ../Pinta.Effects/Effects/JuliaFractalEffect.cs:178
-#: ../Pinta.Effects/Effects/MandelbrotFractalEffect.cs:198
+#: ../Pinta.Effects/Effects/JuliaFractalEffect.cs:183
+#: ../Pinta.Effects/Effects/MandelbrotFractalEffect.cs:202
 msgid "Color Scheme"
 msgstr ""
 
 #: ../Pinta.Effects/Effects/CloudsEffect.cs:247
-#: ../Pinta.Effects/Effects/JuliaFractalEffect.cs:175
-#: ../Pinta.Effects/Effects/MandelbrotFractalEffect.cs:195
+#: ../Pinta.Effects/Effects/JuliaFractalEffect.cs:180
+#: ../Pinta.Effects/Effects/MandelbrotFractalEffect.cs:199
 msgid "Color Scheme Source"
 msgstr ""
 
@@ -558,7 +558,7 @@ msgstr ""
 msgid "Delete Layer"
 msgstr "删除图层"
 
-#: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:644
+#: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:642
 msgid "Deleted"
 msgstr "已删除"
 
@@ -687,8 +687,8 @@ msgstr ""
 msgid "Extension packages"
 msgstr ""
 
-#: ../Pinta.Effects/Effects/JuliaFractalEffect.cs:166
-#: ../Pinta.Effects/Effects/MandelbrotFractalEffect.cs:182
+#: ../Pinta.Effects/Effects/JuliaFractalEffect.cs:171
+#: ../Pinta.Effects/Effects/MandelbrotFractalEffect.cs:187
 msgid "Factor"
 msgstr "系数"
 
@@ -750,8 +750,8 @@ msgstr "填充形式"
 msgid "Fill and Outline Shape"
 msgstr "填充和边框"
 
-#: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:1062
-#: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:1322
+#: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:1065
+#: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:1329
 msgid "Finalized"
 msgstr "已完成"
 
@@ -1004,7 +1004,7 @@ msgid "Intersect ({0} + Left Click)"
 msgstr "拦截 ({0} + 单击)"
 
 #: ../Pinta.Effects/Adjustments/InvertColorsEffect.cs:24
-#: ../Pinta.Effects/Effects/MandelbrotFractalEffect.cs:207
+#: ../Pinta.Effects/Effects/MandelbrotFractalEffect.cs:211
 msgid "Invert Colors"
 msgstr "反色"
 
@@ -1026,7 +1026,7 @@ msgstr "JPEG 质量"
 msgid "Jarvis-Judice-Ninke"
 msgstr ""
 
-#: ../Pinta.Effects/Effects/JuliaFractalEffect.cs:23
+#: ../Pinta.Effects/Effects/JuliaFractalEffect.cs:26
 msgid "Julia Fractal"
 msgstr "朱莉娅分形"
 
@@ -1264,7 +1264,7 @@ msgstr ""
 msgid "Maintain aspect ratio"
 msgstr "保持宽高比"
 
-#: ../Pinta.Effects/Effects/MandelbrotFractalEffect.cs:23
+#: ../Pinta.Effects/Effects/MandelbrotFractalEffect.cs:26
 msgid "Mandelbrot Fractal"
 msgstr "曼德勃罗分形"
 
@@ -1281,7 +1281,7 @@ msgstr "向下合并图层"
 msgid "Mode"
 msgstr "模式"
 
-#: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:876
+#: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:881
 msgid "Modified"
 msgstr "已修改"
 
@@ -1356,11 +1356,11 @@ msgstr "噪点"
 
 #: ../Pinta.Core/Effects/UserBlendOps.cs:31
 #: ../Pinta.Tools/Brushes/PlainBrush.cs:35
-#: ../Pinta.Tools/Tools/EraserTool.cs:263 ../Pinta.Tools/Tools/TextTool.cs:248
+#: ../Pinta.Tools/Tools/EraserTool.cs:262 ../Pinta.Tools/Tools/TextTool.cs:248
 msgid "Normal"
 msgstr "一般"
 
-#: ../Pinta.Core/Classes/BaseTool.cs:322
+#: ../Pinta.Core/Classes/BaseTool.cs:333
 msgid "Normal Blending"
 msgstr "一般混合"
 
@@ -1469,7 +1469,7 @@ msgstr "输出直方图"
 msgid "Overlay"
 msgstr "重叠"
 
-#: ../Pinta.Core/Classes/BaseTool.cs:323
+#: ../Pinta.Core/Classes/BaseTool.cs:334
 msgid "Overwrite"
 msgstr "覆盖"
 
@@ -1595,12 +1595,12 @@ msgstr "像素"
 msgid "Piña Colada"
 msgstr ""
 
-#: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:583
-#: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:769
+#: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:581
+#: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:767
 msgid "Point Added"
 msgstr "点已添加"
 
-#: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:630
+#: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:628
 msgid "Point Deleted"
 msgstr "点已删除"
 
@@ -1646,8 +1646,8 @@ msgstr "主要"
 msgid "Print"
 msgstr "打印"
 
-#: ../Pinta.Effects/Effects/JuliaFractalEffect.cs:169
-#: ../Pinta.Effects/Effects/MandelbrotFractalEffect.cs:185
+#: ../Pinta.Effects/Effects/JuliaFractalEffect.cs:174
+#: ../Pinta.Effects/Effects/MandelbrotFractalEffect.cs:190
 #: ../Pinta.Effects/Effects/RadialBlurEffect.cs:176
 #: ../Pinta.Effects/Effects/WarpEffect.cs:181
 msgid "Quality"
@@ -1688,8 +1688,8 @@ msgid "Random"
 msgstr ""
 
 #: ../Pinta.Effects/Effects/CloudsEffect.cs:253
-#: ../Pinta.Effects/Effects/JuliaFractalEffect.cs:181
-#: ../Pinta.Effects/Effects/MandelbrotFractalEffect.cs:201
+#: ../Pinta.Effects/Effects/JuliaFractalEffect.cs:186
+#: ../Pinta.Effects/Effects/MandelbrotFractalEffect.cs:205
 msgid "Random Color Scheme Seed"
 msgstr ""
 
@@ -1761,8 +1761,8 @@ msgid "Rename Layer"
 msgstr "重命名图层"
 
 #: ../Pinta.Effects/Effects/CloudsEffect.cs:33
-#: ../Pinta.Effects/Effects/JuliaFractalEffect.cs:27
-#: ../Pinta.Effects/Effects/MandelbrotFractalEffect.cs:27
+#: ../Pinta.Effects/Effects/JuliaFractalEffect.cs:32
+#: ../Pinta.Effects/Effects/MandelbrotFractalEffect.cs:32
 #: ../Pinta.Effects/Effects/VoronoiDiagramEffect.cs:22
 msgid "Render"
 msgstr "渲染"
@@ -1819,8 +1819,8 @@ msgid "Resize Palette"
 msgstr "调整调色板大小"
 
 #: ../Pinta.Effects/Effects/CloudsEffect.cs:256
-#: ../Pinta.Effects/Effects/JuliaFractalEffect.cs:184
-#: ../Pinta.Effects/Effects/MandelbrotFractalEffect.cs:204
+#: ../Pinta.Effects/Effects/JuliaFractalEffect.cs:189
+#: ../Pinta.Effects/Effects/MandelbrotFractalEffect.cs:208
 msgid "Reverse Color Scheme"
 msgstr ""
 
@@ -1996,7 +1996,7 @@ msgstr "单个像素"
 msgid "Size"
 msgstr "尺寸"
 
-#: ../Pinta.Tools/Tools/EraserTool.cs:263
+#: ../Pinta.Tools/Tools/EraserTool.cs:262
 msgid "Smooth"
 msgstr "平滑"
 
@@ -2188,7 +2188,7 @@ msgstr "扭曲"
 msgid "Two-Row Sierra"
 msgstr ""
 
-#: ../Pinta.Tools/Tools/EraserTool.cs:259
+#: ../Pinta.Tools/Tools/EraserTool.cs:258
 #: ../Pinta.Tools/Tools/PaintBrushTool.cs:165
 msgid "Type"
 msgstr "类型"
@@ -2329,8 +2329,8 @@ msgid ""
 "You do not have access to modify '{0}'. The file or folder may be read-only."
 msgstr "您无权修改“{0}”。文件或文件夹可能被设置为只读取。"
 
-#: ../Pinta.Effects/Effects/JuliaFractalEffect.cs:172
-#: ../Pinta.Effects/Effects/MandelbrotFractalEffect.cs:189
+#: ../Pinta.Effects/Effects/JuliaFractalEffect.cs:177
+#: ../Pinta.Effects/Effects/MandelbrotFractalEffect.cs:193
 #: ../Pinta.Tools/Tools/ZoomTool.cs:56
 #: ../Pinta/Actions/Layers/RotateZoomLayerAction.cs:121
 msgid "Zoom"
