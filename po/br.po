@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: pinta\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-04-28 01:12+0000\n"
+"POT-Creation-Date: 2024-05-26 01:15+0000\n"
 "PO-Revision-Date: 2016-08-19 19:11+0000\n"
 "Last-Translator: Alan <Unknown>\n"
 "Language-Team: Breton <br@li.org>\n"
@@ -74,7 +74,7 @@ msgstr "Ouzhpennañ trouz"
 msgid "Add-in Manager..."
 msgstr ""
 
-#: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:799
+#: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:797
 msgid "Added"
 msgstr "Ouzhpennet"
 
@@ -106,8 +106,8 @@ msgstr "Eor :"
 
 #: ../Pinta.Effects/Effects/EdgeDetectEffect.cs:81
 #: ../Pinta.Effects/Effects/EmbossEffect.cs:148
-#: ../Pinta.Effects/Effects/JuliaFractalEffect.cs:187
-#: ../Pinta.Effects/Effects/MandelbrotFractalEffect.cs:192
+#: ../Pinta.Effects/Effects/JuliaFractalEffect.cs:192
+#: ../Pinta.Effects/Effects/MandelbrotFractalEffect.cs:196
 #: ../Pinta.Effects/Effects/MotionBlurEffect.cs:108
 #: ../Pinta.Effects/Effects/RadialBlurEffect.cs:170
 #: ../Pinta.Effects/Effects/ReliefEffect.cs:83
@@ -120,11 +120,11 @@ msgstr "Korn"
 msgid "Antialias"
 msgstr "Lufrañ"
 
-#: ../Pinta.Core/Classes/BaseTool.cs:338
+#: ../Pinta.Core/Classes/BaseTool.cs:349
 msgid "Antialiasing Off"
 msgstr "Diweredekaat al lufrañ"
 
-#: ../Pinta.Core/Classes/BaseTool.cs:337
+#: ../Pinta.Core/Classes/BaseTool.cs:348
 msgid "Antialiasing On"
 msgstr "Gweredekaat al lufrañ"
 
@@ -443,14 +443,14 @@ msgstr "Peurvec'hiañ liv"
 
 #: ../Pinta.Core/Actions/ViewActions.cs:181
 #: ../Pinta.Effects/Effects/CloudsEffect.cs:250
-#: ../Pinta.Effects/Effects/JuliaFractalEffect.cs:178
-#: ../Pinta.Effects/Effects/MandelbrotFractalEffect.cs:198
+#: ../Pinta.Effects/Effects/JuliaFractalEffect.cs:183
+#: ../Pinta.Effects/Effects/MandelbrotFractalEffect.cs:202
 msgid "Color Scheme"
 msgstr ""
 
 #: ../Pinta.Effects/Effects/CloudsEffect.cs:247
-#: ../Pinta.Effects/Effects/JuliaFractalEffect.cs:175
-#: ../Pinta.Effects/Effects/MandelbrotFractalEffect.cs:195
+#: ../Pinta.Effects/Effects/JuliaFractalEffect.cs:180
+#: ../Pinta.Effects/Effects/MandelbrotFractalEffect.cs:199
 msgid "Color Scheme Source"
 msgstr ""
 
@@ -558,7 +558,7 @@ msgstr ""
 msgid "Delete Layer"
 msgstr "Dilemel an dreuzfollenn"
 
-#: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:644
+#: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:642
 msgid "Deleted"
 msgstr "Dilamet"
 
@@ -687,8 +687,8 @@ msgstr ""
 msgid "Extension packages"
 msgstr ""
 
-#: ../Pinta.Effects/Effects/JuliaFractalEffect.cs:166
-#: ../Pinta.Effects/Effects/MandelbrotFractalEffect.cs:182
+#: ../Pinta.Effects/Effects/JuliaFractalEffect.cs:171
+#: ../Pinta.Effects/Effects/MandelbrotFractalEffect.cs:187
 msgid "Factor"
 msgstr "Parenn"
 
@@ -750,8 +750,8 @@ msgstr "Stil leuniañ"
 msgid "Fill and Outline Shape"
 msgstr "Lun leuniañ ha lun an drolinenn"
 
-#: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:1062
-#: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:1322
+#: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:1065
+#: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:1329
 msgid "Finalized"
 msgstr "Peurlipet"
 
@@ -1006,7 +1006,7 @@ msgid "Intersect ({0} + Left Click)"
 msgstr ""
 
 #: ../Pinta.Effects/Adjustments/InvertColorsEffect.cs:24
-#: ../Pinta.Effects/Effects/MandelbrotFractalEffect.cs:207
+#: ../Pinta.Effects/Effects/MandelbrotFractalEffect.cs:211
 msgid "Invert Colors"
 msgstr "Tuginañ al livioù"
 
@@ -1028,7 +1028,7 @@ msgstr "Perzhded JPEG"
 msgid "Jarvis-Judice-Ninke"
 msgstr ""
 
-#: ../Pinta.Effects/Effects/JuliaFractalEffect.cs:23
+#: ../Pinta.Effects/Effects/JuliaFractalEffect.cs:26
 msgid "Julia Fractal"
 msgstr "Brevennoù mod Julia"
 
@@ -1266,7 +1266,7 @@ msgstr ""
 msgid "Maintain aspect ratio"
 msgstr "Mirout kenfeur an neuz"
 
-#: ../Pinta.Effects/Effects/MandelbrotFractalEffect.cs:23
+#: ../Pinta.Effects/Effects/MandelbrotFractalEffect.cs:26
 msgid "Mandelbrot Fractal"
 msgstr "Brevennoù mod Mandelbrot"
 
@@ -1283,7 +1283,7 @@ msgstr "Toueziañ gant an dreuzfollenn a-zindan"
 msgid "Mode"
 msgstr ""
 
-#: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:876
+#: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:881
 msgid "Modified"
 msgstr "Daskemmet"
 
@@ -1358,11 +1358,11 @@ msgstr "Trouz"
 
 #: ../Pinta.Core/Effects/UserBlendOps.cs:31
 #: ../Pinta.Tools/Brushes/PlainBrush.cs:35
-#: ../Pinta.Tools/Tools/EraserTool.cs:263 ../Pinta.Tools/Tools/TextTool.cs:248
+#: ../Pinta.Tools/Tools/EraserTool.cs:262 ../Pinta.Tools/Tools/TextTool.cs:248
 msgid "Normal"
 msgstr "Reizh"
 
-#: ../Pinta.Core/Classes/BaseTool.cs:322
+#: ../Pinta.Core/Classes/BaseTool.cs:333
 msgid "Normal Blending"
 msgstr "Meskadur reizh"
 
@@ -1471,7 +1471,7 @@ msgstr "Tellun ec'hankañ"
 msgid "Overlay"
 msgstr "Gourloañ"
 
-#: ../Pinta.Core/Classes/BaseTool.cs:323
+#: ../Pinta.Core/Classes/BaseTool.cs:334
 msgid "Overwrite"
 msgstr "Flastrañ"
 
@@ -1594,12 +1594,12 @@ msgstr "Pikselioù"
 msgid "Piña Colada"
 msgstr ""
 
-#: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:583
-#: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:769
+#: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:581
+#: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:767
 msgid "Point Added"
 msgstr "Poent ouzhpennet"
 
-#: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:630
+#: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:628
 msgid "Point Deleted"
 msgstr "Dilamet eo bet ar poent"
 
@@ -1645,8 +1645,8 @@ msgstr "Kentidik"
 msgid "Print"
 msgstr "Moullañ"
 
-#: ../Pinta.Effects/Effects/JuliaFractalEffect.cs:169
-#: ../Pinta.Effects/Effects/MandelbrotFractalEffect.cs:185
+#: ../Pinta.Effects/Effects/JuliaFractalEffect.cs:174
+#: ../Pinta.Effects/Effects/MandelbrotFractalEffect.cs:190
 #: ../Pinta.Effects/Effects/RadialBlurEffect.cs:176
 #: ../Pinta.Effects/Effects/WarpEffect.cs:181
 msgid "Quality"
@@ -1687,8 +1687,8 @@ msgid "Random"
 msgstr ""
 
 #: ../Pinta.Effects/Effects/CloudsEffect.cs:253
-#: ../Pinta.Effects/Effects/JuliaFractalEffect.cs:181
-#: ../Pinta.Effects/Effects/MandelbrotFractalEffect.cs:201
+#: ../Pinta.Effects/Effects/JuliaFractalEffect.cs:186
+#: ../Pinta.Effects/Effects/MandelbrotFractalEffect.cs:205
 msgid "Random Color Scheme Seed"
 msgstr ""
 
@@ -1760,8 +1760,8 @@ msgid "Rename Layer"
 msgstr "Adenvel an dreuzfollenn"
 
 #: ../Pinta.Effects/Effects/CloudsEffect.cs:33
-#: ../Pinta.Effects/Effects/JuliaFractalEffect.cs:27
-#: ../Pinta.Effects/Effects/MandelbrotFractalEffect.cs:27
+#: ../Pinta.Effects/Effects/JuliaFractalEffect.cs:32
+#: ../Pinta.Effects/Effects/MandelbrotFractalEffect.cs:32
 #: ../Pinta.Effects/Effects/VoronoiDiagramEffect.cs:22
 msgid "Render"
 msgstr "Deouez"
@@ -1818,8 +1818,8 @@ msgid "Resize Palette"
 msgstr "Admentañ al livaoueg"
 
 #: ../Pinta.Effects/Effects/CloudsEffect.cs:256
-#: ../Pinta.Effects/Effects/JuliaFractalEffect.cs:184
-#: ../Pinta.Effects/Effects/MandelbrotFractalEffect.cs:204
+#: ../Pinta.Effects/Effects/JuliaFractalEffect.cs:189
+#: ../Pinta.Effects/Effects/MandelbrotFractalEffect.cs:208
 msgid "Reverse Color Scheme"
 msgstr ""
 
@@ -1995,7 +1995,7 @@ msgstr "Piksel eeun"
 msgid "Size"
 msgstr "Ment"
 
-#: ../Pinta.Tools/Tools/EraserTool.cs:263
+#: ../Pinta.Tools/Tools/EraserTool.cs:262
 msgid "Smooth"
 msgstr "Lenkraat"
 
@@ -2187,7 +2187,7 @@ msgstr "Gweañ"
 msgid "Two-Row Sierra"
 msgstr ""
 
-#: ../Pinta.Tools/Tools/EraserTool.cs:259
+#: ../Pinta.Tools/Tools/EraserTool.cs:258
 #: ../Pinta.Tools/Tools/PaintBrushTool.cs:165
 msgid "Type"
 msgstr "Rizh"
@@ -2329,8 +2329,8 @@ msgid ""
 "You do not have access to modify '{0}'. The file or folder may be read-only."
 msgstr ""
 
-#: ../Pinta.Effects/Effects/JuliaFractalEffect.cs:172
-#: ../Pinta.Effects/Effects/MandelbrotFractalEffect.cs:189
+#: ../Pinta.Effects/Effects/JuliaFractalEffect.cs:177
+#: ../Pinta.Effects/Effects/MandelbrotFractalEffect.cs:193
 #: ../Pinta.Tools/Tools/ZoomTool.cs:56
 #: ../Pinta/Actions/Layers/RotateZoomLayerAction.cs:121
 msgid "Zoom"
