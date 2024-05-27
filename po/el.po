@@ -8,16 +8,16 @@ msgstr ""
 "Project-Id-Version: pinta\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2024-05-26 01:15+0000\n"
-"PO-Revision-Date: 2021-11-10 15:30+0000\n"
-"Last-Translator: Vasilis Kosmidis <Unknown>\n"
-"Language-Team: Greek <el@li.org>\n"
+"PO-Revision-Date: 2024-05-27 17:10+0000\n"
+"Last-Translator: yiannis ioannides <sub@wai.ai>\n"
+"Language-Team: Greek <https://hosted.weblate.org/projects/pinta/pinta/el/>\n"
 "Language: el\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
+"X-Generator: Weblate 5.6-dev\n"
 "X-Launchpad-Export-Date: 2023-12-18 03:00+0000\n"
-"X-Generator: Launchpad (build e1eeab5b20e19239bd7d5f36676f7a52988db88b)\n"
 
 #: ../Pinta.Gui.Addins/InstallDialog.cs:217
 msgid " (in user directory)"
@@ -72,7 +72,7 @@ msgstr "Προσθήκη θορύβου"
 
 #: ../Pinta.Core/Actions/AddinActions.cs:38
 msgid "Add-in Manager..."
-msgstr ""
+msgstr "Διαχείριση προσθέτων..."
 
 #: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:797
 msgid "Added"
@@ -80,7 +80,7 @@ msgstr "Προστέθηκε"
 
 #: ../Pinta/MainWindow.cs:382
 msgid "Adjustments"
-msgstr ""
+msgstr "Προσαρμογές"
 
 #: ../Pinta.Tools/Tools/ColorPickerTool.cs:194
 msgid "After select"
@@ -141,7 +141,7 @@ msgstr "Καλλιτεχνικό"
 #. Translators: Image dithering matrix named after Bill Atkinson
 #: ../Pinta.Effects/Classes/ErrorDiffusionMatrix.cs:28
 msgid "Atkinson"
-msgstr ""
+msgstr "Άτκινσον"
 
 #: ../Pinta.Effects/Dialogs/Effects.LevelsDialog.cs:117
 msgid "Auto"
@@ -158,7 +158,7 @@ msgstr "Αυτόματο επίπεδο"
 #: ../Pinta.Gui.Addins/AddinInfoView.cs:143
 #, csharp-format
 msgid "Available in repository: {0}"
-msgstr ""
+msgstr "Διαθέσιμο στο αποθετήριο: {0}"
 
 #: ../Pinta.Core/Managers/WorkspaceManager.cs:176
 msgid "Background"
@@ -179,7 +179,7 @@ msgstr "Βασίζεται στο Paint.NET:"
 #. Translators: Gradient with the colors of the flag of Italy: red, white, and green
 #: ../Pinta.Effects/Effects/GradientHelper.cs:24
 msgid "Beautiful Italy"
-msgstr ""
+msgstr "Όμορφη Ιταλία"
 
 #: ../Pinta.Core/Actions/ViewActions.cs:69
 msgid "Best Fit"
@@ -187,7 +187,7 @@ msgstr "Βέλτιστη προσαρμογή"
 
 #: ../Pinta.Core/Enumerations/ResamplingMode.cs:22
 msgid "Bilinear"
-msgstr ""
+msgstr "Διαγραμμικό"
 
 #. Translators: Simple gradient that goes from black to white
 #: ../Pinta.Effects/Adjustments/BlackAndWhiteEffect.cs:24
@@ -224,7 +224,7 @@ msgstr "Έντονα"
 #. Translators: Gradient that starts out white, like the core of a raging fire, and then goes through yellow, red, and black (like visible black smoke), and finally transparent, blending with the background
 #: ../Pinta.Effects/Effects/GradientHelper.cs:32
 msgid "Bonfire"
-msgstr ""
+msgstr "Φλόγα"
 
 #: ../Pinta.Effects/Adjustments/BrightnessContrastEffect.cs:143
 #: ../Pinta.Effects/Effects/GlowEffect.cs:79
@@ -251,7 +251,7 @@ msgstr "Διόγκωση"
 #. Translators: Image dithering matrix named after Daniel Burkes
 #: ../Pinta.Effects/Classes/ErrorDiffusionMatrix.cs:24
 msgid "Burkes"
-msgstr ""
+msgstr "Μπέρκ"
 
 #: ../Pinta/Dialogs/ResizeCanvasDialog.cs:69
 #: ../Pinta/Dialogs/ResizeImageDialog.cs:59
@@ -271,7 +271,7 @@ msgstr "Σε ποσοστό:"
 #: ../Pinta/Actions/File/OpenDocumentAction.cs:54
 #: ../Pinta/Actions/File/SaveDocumentImplementationAction.cs:74
 msgid "Cancel"
-msgstr ""
+msgstr "Ακύρωση"
 
 #: ../Pinta/Pads/CanvasPad.cs:41
 msgid "Canvas"
@@ -304,11 +304,11 @@ msgstr "Τροποποιημένος τύπος σχήματος"
 #. Translators: Gradient that starts out off-white, like cherry blossoms against sunlight, then goes through pink, then light blue (like the sky) and finally transparent, blending with the background
 #: ../Pinta.Effects/Effects/GradientHelper.cs:36
 msgid "Cherry Blossom"
-msgstr ""
+msgstr "Αμυγδαλιά"
 
 #: ../Pinta.Effects/Dialogs/Effects.LevelsDialog.cs:557
 msgid "Choose Color"
-msgstr ""
+msgstr "Επιλογή χρώματος"
 
 #: ../Pinta.Gui.Widgets/Widgets/StatusBarColorPaletteWidget.cs:108
 msgid "Choose Palette Color"
@@ -335,18 +335,25 @@ msgid ""
 "Click and drag to draw a rectangular selection.\n"
 "Hold Shift to constrain to a square."
 msgstr ""
+"Κάντε κλικ παρατεταμένα για τη σχεδίαση παραλληλόγραμης επιλογής.\n"
+"Κρατήστε το Shift παρατεταμένα για αναπροσαρμογή σε τετράγωνο."
 
 #: ../Pinta.Tools/Tools/EllipseSelectTool.cs:38
 msgid ""
 "Click and drag to draw an elliptical selection.\n"
 "Hold Shift to constrain to a circle."
 msgstr ""
+"Κάντε κλικ παρατεταμένα για τη σχεδίαση ελλειπτική επιλογής.\n"
+"Κρατήστε το Shift παρατεταμένα για αναπροσαρμογή σε κύκλο."
 
 #: ../Pinta.Tools/Tools/GradientTool.cs:51
 msgid ""
 "Click and drag to draw gradient from primary to secondary color.\n"
 "Right click to reverse."
 msgstr ""
+"Κάντε κλικ παρατεταμένα για την εφαρμογή ντεγκραντέ από το κυρίως χρώμα στο "
+"δευτερεύον.\n"
+"Κάντε δεξί κλικ για αναίρεση."
 
 #: ../Pinta.Tools/Tools/LassoSelectTool.cs:55
 msgid "Click and drag to draw the outline for a selection area."
@@ -429,7 +436,7 @@ msgstr "Υπερέκθεση χρώματος"
 
 #: ../Pinta.Tools/Tools/GradientTool.cs:203
 msgid "Color Mode"
-msgstr ""
+msgstr "Λειτουργεία χρώματος"
 
 #: ../Pinta.Tools/Tools/ColorPickerTool.cs:52
 msgid "Color Picker"
@@ -448,17 +455,17 @@ msgstr "Κορεσμός χρώματος"
 #: ../Pinta.Effects/Effects/JuliaFractalEffect.cs:183
 #: ../Pinta.Effects/Effects/MandelbrotFractalEffect.cs:202
 msgid "Color Scheme"
-msgstr ""
+msgstr "Συνδυασμός χρωμάτων"
 
 #: ../Pinta.Effects/Effects/CloudsEffect.cs:247
 #: ../Pinta.Effects/Effects/JuliaFractalEffect.cs:180
 #: ../Pinta.Effects/Effects/MandelbrotFractalEffect.cs:199
 msgid "Color Scheme Source"
-msgstr ""
+msgstr "Πηγή συνδυασμού χρωμάτων"
 
 #: ../Pinta.Effects/Effects/VoronoiDiagramEffect.cs:207
 msgid "Color Sorting"
-msgstr ""
+msgstr "Κατανομή χρωμάτων"
 
 #: ../Pinta.Effects/Effects/InkSketchEffect.cs:154
 msgid "Coloring"
@@ -496,13 +503,13 @@ msgstr "Πνευματικά δικαιώματα"
 #. Translators: Gradient with the colors of blue and pink cotton candy
 #: ../Pinta.Effects/Effects/GradientHelper.cs:40
 msgid "Cotton Candy"
-msgstr ""
+msgstr "Ζαχαρωτό"
 
 #. Translators: {0} is the name of a layer, and {1} is the path to a .ora file.
 #: ../Pinta.Core/ImageFormats/OraFormat.cs:122
 #, csharp-format
 msgid "Could not import layer \"{0}\" from {1}"
-msgstr ""
+msgstr "Δεν ήταν δυνατή η εισαγωγή στρώσης \"{0}\" από {1}"
 
 #: ../Pinta.Core/Classes/Palette.cs:196
 #: ../Pinta.Core/Managers/WorkspaceManager.cs:378
@@ -540,7 +547,7 @@ msgstr "Αποκοπή"
 #. Translators: This refers to using a dark variant of the color scheme.
 #: ../Pinta.Core/Actions/ViewActions.cs:189
 msgid "Dark"
-msgstr ""
+msgstr "Σκοτεινό"
 
 #: ../Pinta.Core/Effects/UserBlendOps.cs:38
 msgid "Darken"
@@ -553,7 +560,7 @@ msgstr "Παύλα"
 #. Translators: This refers to using the system's default color scheme.
 #: ../Pinta.Core/Actions/ViewActions.cs:185
 msgid "Default"
-msgstr ""
+msgstr "Προεπιλεγμένο"
 
 #: ../Pinta.Core/Actions/LayerActions.cs:49
 #: ../Pinta.Core/Actions/LayerActions.cs:312
@@ -587,7 +594,7 @@ msgstr "Απόσταση"
 
 #: ../Pinta.Effects/Effects/VoronoiDiagramEffect.cs:197
 msgid "Distance Metric"
-msgstr ""
+msgstr "Μονάδα απόστασης"
 
 #: ../Pinta.Effects/Effects/BulgeEffect.cs:27
 #: ../Pinta.Effects/Effects/FrostedGlassEffect.cs:27
@@ -600,7 +607,7 @@ msgstr "Παραμόρφωση"
 
 #: ../Pinta.Effects/Effects/DitheringEffect.cs:11
 msgid "Dithering"
-msgstr ""
+msgstr "Dithering"
 
 #: ../Pinta.Tools/Tools/ColorPickerTool.cs:203
 msgid "Do not switch tool"
@@ -609,7 +616,7 @@ msgstr "Μην αλλάξετε εργαλείο"
 #: ../Pinta.Gui.Addins/AddinInfoView.cs:137
 #, csharp-format
 msgid "Download size: {0}"
-msgstr ""
+msgstr "Μέγεθος λήψης: {0}"
 
 #: ../Pinta.Core/Actions/LayerActions.cs:50
 #: ../Pinta.Core/Actions/LayerActions.cs:303
@@ -634,12 +641,12 @@ msgstr "Ε_φέ"
 
 #: ../Pinta/MainWindow.cs:376
 msgid "Effects"
-msgstr ""
+msgstr "Εφφέ"
 
 #. Translators: Gradient that starts out white, like the the inner part of a spark, and goes through progressively dark shades of blue until it reaches black, and finally transparent, blending with the background
 #: ../Pinta.Effects/Effects/GradientHelper.cs:44
 msgid "Electric"
-msgstr ""
+msgstr "Ηλεκτρικό"
 
 #: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:319
 #: ../Pinta.Tools/Editable/EditEngines/EllipseEditEngine.cs:34
@@ -657,7 +664,7 @@ msgstr "Εμβάθυνση"
 
 #: ../Pinta/Main.cs:65
 msgid "Enable additional logging or behavior changes for debugging"
-msgstr ""
+msgstr "Επιλογή εκτενούς αναφοράς ή αλλαγή συμπεριφοράς για debugging"
 
 #: ../Pinta.Core/Actions/EditActions.cs:67
 #: ../Pinta.Core/Actions/EditActions.cs:252
@@ -674,7 +681,7 @@ msgstr "Σφάλμα"
 
 #: ../Pinta.Effects/Effects/DitheringEffect.cs:133
 msgid "Error Diffusion Method"
-msgstr ""
+msgstr "Σφάλμα μεθόδους diffusion"
 
 #: ../Pinta.Core/Classes/SelectionModeHandler.cs:48
 msgid "Exclude (-) (Right Click)"
@@ -683,11 +690,11 @@ msgstr "Αποκλεισμός (-) (δεξί κλικ)"
 #. Translators: This refers to expanding the canvas size when pasting a larger image.
 #: ../Pinta/Actions/Edit/PasteAction.cs:191
 msgid "Expand"
-msgstr ""
+msgstr "Επέκταση"
 
 #: ../Pinta.Gui.Addins/AddinManagerDialog.cs:204
 msgid "Extension packages"
-msgstr ""
+msgstr "Πακέτα προσθέτων"
 
 #: ../Pinta.Effects/Effects/JuliaFractalEffect.cs:171
 #: ../Pinta.Effects/Effects/MandelbrotFractalEffect.cs:187
@@ -696,15 +703,15 @@ msgstr "Συντελεστής"
 
 #: ../Pinta/Actions/File/NewScreenshotAction.cs:103
 msgid "Failed to access XDG Desktop Portals"
-msgstr ""
+msgstr "Σφάλμα πρόσφασης στα XDG Desktop Portals"
 
 #: ../Pinta/MainWindow.cs:269
 msgid "Failed to initialize add-in"
-msgstr ""
+msgstr "Σφάλμα εκκίνησης προσθέτου"
 
 #: ../Pinta.Gui.Addins/InstallDialog.cs:151
 msgid "Failed to load extension package"
-msgstr ""
+msgstr "Σφάλμα φόρτωσης πακέτου προσθέτου"
 
 #: ../Pinta.Core/Managers/WorkspaceManager.cs:401
 msgid "Failed to open image"
@@ -718,7 +725,7 @@ msgstr "Αποτυχία αποθήκευσης της εικόνας"
 #: ../Pinta/Actions/File/NewScreenshotAction.cs:122
 #: ../Pinta/Actions/File/NewScreenshotAction.cs:129
 msgid "Failed to take screenshot"
-msgstr ""
+msgstr "Δεν ήταν δυνατή η λήψη screenshot"
 
 #: ../Pinta.Core/Actions/HelpActions.cs:42
 msgid "File a Bug"
@@ -726,7 +733,7 @@ msgstr "Στείλτε αναφορά σφάλματος"
 
 #: ../Pinta/Main.cs:61
 msgid "Files to open"
-msgstr ""
+msgstr "Αρχεία για άνοιγμα"
 
 #: ../Pinta.Tools/Tools/TextTool.cs:251
 msgid "Fill Background"
@@ -799,12 +806,12 @@ msgstr "Λειτουργία πλημμύρας"
 #. Translators: Image dithering matrix named after Robert W. Floyd and Louis Steinberg
 #: ../Pinta.Effects/Classes/ErrorDiffusionMatrix.cs:40
 msgid "Floyd-Steinberg"
-msgstr ""
+msgstr "Φλόϋντ-Στάϊνμπεργκ"
 
 #. Translators: Image dithering matrix named after Robert W. Floyd and Louis Steinberg. Some software may use it and call it Floyd-Steinberg, but it's not the actual Floyd-Steinberg matrix
 #: ../Pinta.Effects/Classes/ErrorDiffusionMatrix.cs:44
 msgid "Floyd-Steinberg Lite"
-msgstr ""
+msgstr "Φλόϋντ-Στάϊνμπεργκ (λάιτ)"
 
 #: ../Pinta.Tools/Tools/TextTool.cs:137
 msgid "Font"
@@ -888,17 +895,17 @@ msgstr "Ιστορικό"
 #. Translators: Horizontal color sorting with blue (B) as the leading term
 #: ../Pinta.Effects/Effects/VoronoiDiagramEffect.cs:233
 msgid "Horizontal blue (B)"
-msgstr ""
+msgstr "Οριζόντιο μπλέ (B)"
 
 #. Translators: Horizontal color sorting with green (G) as the leading term
 #: ../Pinta.Effects/Effects/VoronoiDiagramEffect.cs:236
 msgid "Horizontal green (G)"
-msgstr ""
+msgstr "Οριζόντιο πράσινο (G)"
 
 #. Translators: Horizontal color sorting with red (R) as the leading term
 #: ../Pinta.Effects/Effects/VoronoiDiagramEffect.cs:239
 msgid "Horizontal red (R)"
-msgstr ""
+msgstr "Οριζόντιο κόκκινο (R)"
 
 #: ../Pinta.Core/Effects/UserBlendOps.cs:45
 #: ../Pinta.Effects/Adjustments/HueSaturationEffect.cs:60
@@ -982,7 +989,7 @@ msgstr "Εγκατάσταση"
 
 #: ../Pinta.Gui.Addins/AddinManagerDialog.cs:194
 msgid "Install Extension Package"
-msgstr ""
+msgstr "Εγκατάσταση πακέτου προσθέτου"
 
 #: ../Pinta.Gui.Addins/AddinManagerDialog.cs:40
 msgid "Install from file..."
@@ -1006,7 +1013,7 @@ msgstr "Ένταση"
 #: ../Pinta.Core/Classes/SelectionModeHandler.cs:52
 #, csharp-format
 msgid "Intersect ({0} + Left Click)"
-msgstr ""
+msgstr "Διασταύρωση ({0} + δεξί κλικ)"
 
 #: ../Pinta.Effects/Adjustments/InvertColorsEffect.cs:24
 #: ../Pinta.Effects/Effects/MandelbrotFractalEffect.cs:211
@@ -1029,7 +1036,7 @@ msgstr "Ποιότητα JPEG"
 #. Translators: Image dithering matrix named after J. F. Jarvis, C. N. Judice, and W. H. Ninke
 #: ../Pinta.Effects/Classes/ErrorDiffusionMatrix.cs:36
 msgid "Jarvis-Judice-Ninke"
-msgstr ""
+msgstr "Τζάρβις-Τζούντις-Νίνκε"
 
 #: ../Pinta.Effects/Effects/JuliaFractalEffect.cs:26
 msgid "Julia Fractal"
@@ -1072,7 +1079,7 @@ msgstr "Επίπεδο σε εμφάνιση"
 #: ../Pinta.Core/Classes/DocumentLayers.cs:128
 #, csharp-format
 msgid "Layer {0}"
-msgstr ""
+msgstr "Στρώση {0}"
 
 #: ../Pinta/Pads/LayersPad.cs:40 ../Pinta/Pads/LayersPad.cs:53
 msgid "Layers"
@@ -1091,6 +1098,11 @@ msgid ""
 "Hold Shift to rotate in steps.\n"
 "Use arrow keys to move selected content by a single pixel."
 msgstr ""
+"Κάντε κλικ παρατεταμένα για μετακίνηση επιλεγμένου περιεχομένου.\n"
+"Κρατήστε {0} για προσαρμογή μεγέθους αντί μετακίνησης.\n"
+"Κάντε δεξί κλικ παρατεταμένα για περιστροφή επιλεγμένου περιεχομένου.\n"
+"Κρατήστε το Shift για σταδιακή περιστροφή.\n"
+"Χρησιμοποιήστε τα βέλη για μετακίνηση επιλεγμένου περιεχομένου ανά pixel."
 
 #: ../Pinta.Tools/Tools/MoveSelectionTool.cs:44
 #, csharp-format
@@ -1101,6 +1113,11 @@ msgid ""
 "Hold Shift to rotate in steps.\n"
 "Use arrow keys to move selection outline by a single pixel."
 msgstr ""
+"Κάντε κλικ παρατεταμένα για μετακίνηση επιλεγμένου περιγράμματος.\n"
+"Κρατήστε {0} για προσαρμογή μεγέθους αντί μετακίνησης.\n"
+"Κάντε δεξί κλικ παρατεταμένα για περιστροφή επιλεγμένου περιγράμματος.\n"
+"Κρατήστε το Shift για σταδιακή περιστροφή.\n"
+"Χρησιμοποιήστε τα βέλη για μετακίνηση επιλεγμένου περιγράμματος ανά pixel."
 
 #. Translators: {0} is 'Ctrl', or a platform-specific key such as 'Command' on macOS.
 #: ../Pinta.Tools/Tools/ShapeTool.cs:49
@@ -1121,12 +1138,29 @@ msgid ""
 "exact same position.\n"
 "Press Enter to finalize the shape."
 msgstr ""
+"Κάντε αριστερό κλικ παρατεταμένα για προσθήκη σχήματος με το κυρίως χρώμα.\n"
+"Κάντε αριστερό κλικ στο σχήμα για προσθήκη σημείου ελέγχου.\n"
+"Κάντε αριστερό κλικ παρατεταμένα στο σημείο ελέγχου για μετακίνηση του.\n"
+"Κάντε δεξί κλικ παρατεταμένα στο σημείο ελέγχου για προσαρμογή της έντασης "
+"του.\n"
+"Κρατήστε το Shift για προσκόλληση στις γωνίες.\n"
+"Χρησιμοποιείστε τα βέλη για τη μετακίνηση του επιλεγμένου σημείου ελέγχου.\n"
+"Πατήστε {0} + αριστερό/δεξί βέλος για επιλογή σημείου ελέγχου ανά σειρά.\n"
+"Πατήστε Delete για διαγραφή επιλεγμένου σημείου ελέγχου.\n"
+"Πατήστε Space για προσθήκη νέου σημείου ελέγχου στο σημείο του κέρσορα.\n"
+"Κρατήστε {0} όσο πατάτε το Space για δημιουργία σημείο ελέγχου ακριβώς στο "
+"ίδιο σημείο.\n"
+"Κρατήστε {0} όσο πατάτε το αριστερό κλικ στο σημείο ελέγχου για δημιουργία "
+"νέου σχήματος ακριβώς στο ίδιο σημείο.\n"
+"Πατήστε Enter για ολοκλήρωση του σχήματος."
 
 #: ../Pinta.Tools/Tools/PencilTool.cs:51
 msgid ""
 "Left click to draw freeform one-pixel wide lines with the primary color.\n"
 "Right click to use the secondary color."
 msgstr ""
+"Αριστερό κλικ για ελεύθερη ζωγραφική ενος pixel με το κυρίως χρώμα.\n"
+"Δεξί κλικ για τη χρήση του δευτερεύον χρώματος."
 
 #: ../Pinta.Tools/Tools/FreeformShapeTool.cs:53
 #: ../Pinta.Tools/Tools/PaintBrushTool.cs:58
@@ -1165,12 +1199,17 @@ msgid ""
 "Left click to replace the secondary color with the primary color.\n"
 "Right click to reverse."
 msgstr ""
+"Αριστερό κλικ για την αντικατάσταση του δευτερεύοντος χρώματος με το κυρίως."
+"\n"
+"Δεξί κλικ για αντιστροφή."
 
 #: ../Pinta.Tools/Tools/ColorPickerTool.cs:54
 msgid ""
 "Left click to set primary color.\n"
 "Right click to set secondary color."
 msgstr ""
+"Αριστερό κλικ για επιλογή κυρίως χρώματος.\n"
+"Δεξί κλικ για επιλογή δευτερεύοντος χρώματος."
 
 #: ../Pinta.Gui.Widgets/Widgets/StatusBarColorPaletteWidget.cs:250
 msgid "Left click to set primary color. Right click to set secondary color."
@@ -1192,6 +1231,9 @@ msgid ""
 "Right click to zoom out.\n"
 "Click and drag to zoom in selection."
 msgstr ""
+"Αριστερό κλικ για ζουμάρισμα.\n"
+"Δεξί κλικ για ξεζουμάρισμα.\n"
+"Παρατεταμένο κλικ για ζουμάρισμα εντός του επιλεγμένου περιεχομένου."
 
 #: ../Pinta.Tools/Editable/EditEngines/ArrowedEditEngine.cs:318
 msgid "Length"
@@ -1212,7 +1254,7 @@ msgstr "Άδεια χρήσης"
 #. Translators: This refers to using a light variant of the color scheme.
 #: ../Pinta.Core/Actions/ViewActions.cs:187
 msgid "Light"
-msgstr ""
+msgstr "Φωτεινό"
 
 #: ../Pinta.Core/Effects/UserBlendOps.cs:37
 msgid "Lighten"
@@ -1229,7 +1271,7 @@ msgstr "Σχετική φωτεινότητα"
 #. Translators: Gradient with a citrusy vibe that starts out white, goes through light yellow, several shades of green, and then transparent, blending with the background
 #: ../Pinta.Effects/Effects/GradientHelper.cs:48
 msgid "Lime Lemon"
-msgstr ""
+msgstr "Λάϊμ-Λεμόνι"
 
 #: ../Pinta.Tools/Tools/LineCurveTool.cs:39
 msgid "Line/Curve"
@@ -1262,7 +1304,7 @@ msgstr "Επιλογή με το Μαγικό ραβδί"
 
 #: ../Pinta/MainWindow.cs:370
 msgid "Main Menu"
-msgstr ""
+msgstr "Κυρίως μενού"
 
 #: ../Pinta/Dialogs/ResizeCanvasDialog.cs:76
 #: ../Pinta/Dialogs/ResizeImageDialog.cs:66
@@ -1284,7 +1326,7 @@ msgstr "Συγχώνευση επιπέδου προς τα κάτω"
 
 #: ../Pinta.Tools/Tools/GradientTool.cs:197
 msgid "Mode"
-msgstr ""
+msgstr "Λειτουργία"
 
 #: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:881
 msgid "Modified"
@@ -1292,7 +1334,7 @@ msgstr "Τροποποιήθηκε"
 
 #: ../Pinta.Gui.Addins/AddinInfoView.cs:69
 msgid "More Information..."
-msgstr ""
+msgstr "Περισσότερες πληροφορίες..."
 
 #: ../Pinta.Effects/Effects/MotionBlurEffect.cs:24
 msgid "Motion Blur"
@@ -1326,7 +1368,7 @@ msgstr "Όνομα:"
 
 #: ../Pinta.Core/Enumerations/ResamplingMode.cs:23
 msgid "Nearest Neighbor"
-msgstr ""
+msgstr "Κοντινότερος γείτονας"
 
 #: ../Pinta.Core/Actions/FileActions.cs:55
 msgid "New"
@@ -1351,7 +1393,7 @@ msgstr "Νέο..."
 
 #: ../Pinta.Gui.Addins/AddinListView.cs:58
 msgid "No Items Found"
-msgstr ""
+msgstr "Δεν βρέθηκαν αποτελέσματα"
 
 #: ../Pinta.Effects/Effects/AddNoiseEffect.cs:28
 #: ../Pinta.Effects/Effects/MedianEffect.cs:30
@@ -1379,11 +1421,11 @@ msgstr "Κανονικό και περίγραμμα."
 
 #: ../Pinta.Effects/Effects/VoronoiDiagramEffect.cs:200
 msgid "Number of Cells"
-msgstr ""
+msgstr "Αριθμός κελιών"
 
 #: ../Pinta/Main.cs:55
 msgid "Number of threads to use for rendering"
-msgstr ""
+msgstr "Αριθμός νημάτων προς απόδοση"
 
 #: ../Pinta.Effects/Effects/BulgeEffect.cs:112
 #: ../Pinta.Effects/Effects/RadialBlurEffect.cs:173
@@ -1396,7 +1438,7 @@ msgstr "Μετατόπιση"
 #: ../Pinta/Actions/Edit/OffsetSelectionAction.cs:57
 #: ../Pinta/Dialogs/OffsetSelectionDialog.cs:41
 msgid "Offset Selection"
-msgstr ""
+msgstr "Επιλογή όφσετ"
 
 #: ../Pinta.Effects/Effects/OilPaintingEffect.cs:23
 msgid "Oil Painting"
@@ -1602,7 +1644,7 @@ msgstr "Εικονοστοιχεία"
 #. Translators: Gradient with different shades of brownish yellow
 #: ../Pinta.Effects/Effects/GradientHelper.cs:52
 msgid "Piña Colada"
-msgstr ""
+msgstr "Πίνα Κολάδα"
 
 #: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:581
 #: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:767
@@ -1633,11 +1675,11 @@ msgstr "Δύναμη"
 #. Translators: This refers to preserving the current canvas size when pasting a larger image.
 #: ../Pinta/Actions/Edit/PasteAction.cs:189
 msgid "Preserve"
-msgstr ""
+msgstr "Διατήρηση"
 
 #: ../Pinta.Effects/Effects/GradientHelper.cs:11
 msgid "Preset Gradient"
-msgstr ""
+msgstr "Προκαθορισμένο ντεγκραντέ"
 
 #: ../Pinta/Dialogs/NewImageDialog.cs:101
 msgid "Preset:"
@@ -1694,17 +1736,17 @@ msgstr "Ακτίνα"
 #: ../Pinta.Effects/Effects/GradientHelper.cs:17
 #: ../Pinta.Effects/Effects/VoronoiDiagramEffect.cs:230
 msgid "Random"
-msgstr ""
+msgstr "Τυχαίο"
 
 #: ../Pinta.Effects/Effects/CloudsEffect.cs:253
 #: ../Pinta.Effects/Effects/JuliaFractalEffect.cs:186
 #: ../Pinta.Effects/Effects/MandelbrotFractalEffect.cs:205
 msgid "Random Color Scheme Seed"
-msgstr ""
+msgstr "Αριθμός τυχαίου συνδυασμού χρωμάτων"
 
 #: ../Pinta.Effects/Effects/VoronoiDiagramEffect.cs:214
 msgid "Random Colors"
-msgstr ""
+msgstr "Τυχαία χρώματα"
 
 #: ../Pinta.Effects/Effects/AddNoiseEffect.cs:176
 #: ../Pinta.Effects/Effects/CloudsEffect.cs:244
@@ -1714,7 +1756,7 @@ msgstr "Τυχαίος θόρυβος"
 
 #: ../Pinta.Effects/Effects/VoronoiDiagramEffect.cs:217
 msgid "Random Point Locations"
-msgstr ""
+msgstr "Τυχαία σημεία"
 
 #: ../Pinta.Tools/Tools/RecolorTool.cs:57
 msgid "Recolor"
@@ -1786,11 +1828,11 @@ msgstr "Αντικατάσταση"
 
 #: ../Pinta/Dialogs/ErrorDialog.cs:67
 msgid "Report Bug..."
-msgstr ""
+msgstr "Αναφορά σφάλματος..."
 
 #: ../Pinta/Dialogs/ResizeImageDialog.cs:102
 msgid "Resampling:"
-msgstr ""
+msgstr "Ανασύνθεση:"
 
 #: ../Pinta.Gui.Widgets/Widgets/ReseedButtonWidget.cs:55
 msgid "Reseed"
@@ -1831,12 +1873,12 @@ msgstr "Αλλαγή μεγέθους της παλέτας"
 #: ../Pinta.Effects/Effects/JuliaFractalEffect.cs:189
 #: ../Pinta.Effects/Effects/MandelbrotFractalEffect.cs:208
 msgid "Reverse Color Scheme"
-msgstr ""
+msgstr "Αντιστροφή συνδυασμού χρωμάτων"
 
 #. Translators: In this context, "reverse" is a verb, and the user can choose whether or not they want to reverse the color sorting
 #: ../Pinta.Effects/Effects/VoronoiDiagramEffect.cs:211
 msgid "Reverse Color Sorting"
-msgstr ""
+msgstr "Αντιστροφή κατανομής χρωμάτων"
 
 #: ../Pinta.Tools/Tools/TextTool.cs:225
 msgid "Right Align"
@@ -1930,7 +1972,7 @@ msgstr "Αποθήκευση Αρχείου Παλέτας"
 #: ../Pinta/Actions/File/CloseDocumentAction.cs:57
 #, csharp-format
 msgid "Save changes to image \"{0}\" before closing?"
-msgstr ""
+msgstr "Αποθήκευση της εικόνας \"{0}\" πριν το κλείσιμο;"
 
 #: ../Pinta.Effects/Effects/CloudsEffect.cs:219
 msgid "Scale"
@@ -1951,7 +1993,7 @@ msgstr "Επιλογή όλων"
 
 #: ../Pinta.Effects/Effects/GradientHelper.cs:14
 msgid "Selected Colors"
-msgstr ""
+msgstr "Επιλεγμένα χρώματα"
 
 #: ../Pinta.Effects/Adjustments/SepiaEffect.cs:25
 msgid "Sepia"
@@ -1981,21 +2023,21 @@ msgstr "Εμφάνισηη επιπέδου"
 #. Translators: The user can choose whether or not to render the points used in the calculation of a Voronoi diagram
 #: ../Pinta.Effects/Effects/VoronoiDiagramEffect.cs:204
 msgid "Show Points"
-msgstr ""
+msgstr "Εμφάνιση σημείων"
 
 #: ../Pinta.Core/Actions/ViewActions.cs:155
 msgid "Show/Hide"
-msgstr ""
+msgstr "Εμφάνιση/Απόκρυψη"
 
 #. Translators: Image dithering matrix named after Frankie Sierra
 #: ../Pinta.Effects/Classes/ErrorDiffusionMatrix.cs:12
 msgid "Sierra"
-msgstr ""
+msgstr "Σιέρρα"
 
 #. Translators: Image dithering matrix named after Frankie Sierra
 #: ../Pinta.Effects/Classes/ErrorDiffusionMatrix.cs:20
 msgid "Sierra Lite"
-msgstr ""
+msgstr "Σιέρρα (λάιτ)"
 
 #: ../Pinta.Tools/Tools/ColorPickerTool.cs:222
 msgid "Single Pixel"
@@ -2031,7 +2073,7 @@ msgstr "Τετράγωνα"
 
 #: ../Pinta.Core/Actions/ViewActions.cs:75
 msgid "Status Bar"
-msgstr ""
+msgstr "Μπάρα κατάστασης"
 
 #: ../Pinta.Effects/Effects/ReduceNoiseEffect.cs:92
 msgid "Strength"
@@ -2040,7 +2082,7 @@ msgstr "Δύναμη"
 #. Translators: Image dithering matrix named after Peter Stucki
 #: ../Pinta.Effects/Classes/ErrorDiffusionMatrix.cs:32
 msgid "Stucki"
-msgstr ""
+msgstr "Στούκι"
 
 #: ../Pinta.Effects/Effects/EdgeDetectEffect.cs:27
 #: ../Pinta.Effects/Effects/EmbossEffect.cs:27
@@ -2074,6 +2116,7 @@ msgstr "Στυλ κειμένου"
 #, csharp-format
 msgid "The '{0}' add-in may not be compatible with this version of Pinta"
 msgstr ""
+"Το πρόσθετο '{0}' μπορεί να μην είναι συμβατό με αυτήν την έκδοση του Pinta"
 
 #: ../Pinta/Actions/Edit/PasteAction.cs:174
 msgid "The clipboard does not contain an image."
@@ -2081,7 +2124,7 @@ msgstr "Το πρόχειρο δεν περιέχει εικόνα."
 
 #: ../Pinta.Gui.Addins/InstallDialog.cs:152
 msgid "The file may be an invalid or corrupt extension package"
-msgstr ""
+msgstr "Το αρχείο μπορεί να είναι ένα άκυρο ή φθαρμένο πακέτο προσθέτου"
 
 #: ../Pinta.Gui.Addins/InstallDialog.cs:89
 msgid "The following dependencies could not be resolved:"
@@ -2104,6 +2147,8 @@ msgid ""
 "The image being pasted is larger than the canvas. What would you like to do "
 "to the canvas size?"
 msgstr ""
+"Η επικολλημένη εικόνα είναι μεγαλύτερη από τον καμβά. Τι θα θέλατε να κάνετε "
+"με το μέγεθος του καμβά;"
 
 #: ../Pinta.Gui.Addins/InstallDialog.cs:301
 msgid "The installation failed!"
@@ -2118,6 +2163,8 @@ msgid ""
 "The selected extension packages can't be installed because there are "
 "dependency conflicts."
 msgstr ""
+"Το επιλεγμένο πακέτο προσθέτου δεν μπορεί να εγκατασταθεί λόγω διιστάμενων "
+"εξαρτώμενων αρχείων."
 
 #: ../Pinta.Gui.Addins/InstallDialog.cs:308
 msgid "The uninstallation failed!"
@@ -2132,6 +2179,8 @@ msgid ""
 "There are other extension packages that depend on the previous ones which "
 "will also be uninstalled:"
 msgstr ""
+"Υπάρχουν άλλα πακέτα προσθέτων που εξαρτώνται από προηγούμενα που θα "
+"απενεγκαταστηθούν:"
 
 #: ../Pinta.Effects/Effects/OutlineEffect.cs:136
 msgid "Thickness"
@@ -2161,7 +2210,7 @@ msgstr "Εργαλείο"
 
 #: ../Pinta.Core/Actions/ViewActions.cs:76
 msgid "Tool Box"
-msgstr ""
+msgstr "Κουτί εργαλείων"
 
 #: ../Pinta/MainWindow.cs:363
 msgid "Tool Windows"
@@ -2181,7 +2230,7 @@ msgstr "Μεταφράστε την εφαρμογή"
 
 #: ../Pinta.Tools/Tools/GradientTool.cs:204
 msgid "Transparency Mode"
-msgstr ""
+msgstr "Λειτουργίας διαφάνειας"
 
 #: ../Pinta.Effects/Effects/WarpEffect.cs:35
 #: ../Pinta/Dialogs/NewImageDialog.cs:221
@@ -2195,7 +2244,7 @@ msgstr "Συστροφή"
 #. Translators: Image dithering matrix named after Frankie Sierra
 #: ../Pinta.Effects/Classes/ErrorDiffusionMatrix.cs:16
 msgid "Two-Row Sierra"
-msgstr ""
+msgstr "Δίγραμμο Σιέρρα"
 
 #: ../Pinta.Tools/Tools/EraserTool.cs:258
 #: ../Pinta.Tools/Tools/PaintBrushTool.cs:165
@@ -2221,13 +2270,13 @@ msgstr "Απεγκατάσταση"
 
 #: ../Pinta.Gui.Addins/AddinInfoView.cs:83
 msgid "Uninstall..."
-msgstr ""
+msgstr "Απενεγκατάσταση..."
 
 #. Translators: {0} is 'Ctrl', or a platform-specific key such as 'Command' on macOS.
 #: ../Pinta.Core/Classes/SelectionModeHandler.cs:47
 #, csharp-format
 msgid "Union (+) ({0} + Left Click)"
-msgstr ""
+msgstr "Ένωση (+) ({0} + αριστερό κλικ)"
 
 #: ../Pinta.Core/Managers/WorkspaceManager.cs:116
 #, csharp-format
@@ -2240,11 +2289,11 @@ msgstr "Μη υποστηριζόμενη μορφή αρχείου"
 
 #: ../Pinta.Core/Classes/Palette.cs:158
 msgid "Unsupported palette format"
-msgstr ""
+msgstr "Μη υποστηριζόμενος τύπος παλέττας"
 
 #: ../Pinta.Gui.Addins/AddinInfoView.cs:78
 msgid "Update..."
-msgstr ""
+msgstr "Αναβάθμιση..."
 
 #: ../Pinta.Gui.Addins/AddinManagerDialog.cs:64
 msgid "Updates"
@@ -2266,22 +2315,22 @@ msgstr "Γίνεται χρήση μερικών εικονιδίων από:"
 #: ../Pinta.Gui.Addins/AddinInfoView.cs:130
 #, csharp-format
 msgid "Version: {0}"
-msgstr ""
+msgstr "Έκδοση: {0}"
 
 #. Translators: Vertical color sorting with blue (B) as the leading term
 #: ../Pinta.Effects/Effects/VoronoiDiagramEffect.cs:243
 msgid "Vertical blue (B)"
-msgstr ""
+msgstr "Κάθετο μπλε (B)"
 
 #. Translators: Vertical color sorting with green (G) as the leading term
 #: ../Pinta.Effects/Effects/VoronoiDiagramEffect.cs:246
 msgid "Vertical green (G)"
-msgstr ""
+msgstr "Κάθετο πράσινο (G)"
 
 #. Translators: Vertical color sorting with red (R) as the leading term
 #: ../Pinta.Effects/Effects/VoronoiDiagramEffect.cs:249
 msgid "Vertical red (R)"
-msgstr ""
+msgstr "Κάθετο κόκκινο (R)"
 
 #: ../Pinta/Dialogs/LayerPropertiesDialog.cs:83
 msgid "Visible"
@@ -2289,7 +2338,7 @@ msgstr "Ορατό"
 
 #: ../Pinta.Effects/Effects/VoronoiDiagramEffect.cs:18
 msgid "Voronoi Diagram"
-msgstr ""
+msgstr "Διάγραμμα Voronoi"
 
 #: ../Pinta.Effects/Effects/SoftenPortraitEffect.cs:120
 msgid "Warmth"
@@ -2324,7 +2373,7 @@ msgstr "Αποκλειστικό ή"
 #: ../Pinta.Core/Classes/SelectionModeHandler.cs:50
 #, csharp-format
 msgid "Xor ({0} + Right Click)"
-msgstr ""
+msgstr "Xor ({0} + δεξί κλικ)"
 
 #. Translators: {0} is the name of a file that the user does not have permission to open.
 #: ../Pinta.Core/Managers/WorkspaceManager.cs:403
@@ -2373,11 +2422,11 @@ msgstr "_Προσαρμογές"
 #: ../Pinta/Actions/Edit/PasteAction.cs:187
 #: ../Pinta/Actions/File/CloseDocumentAction.cs:66
 msgid "_Cancel"
-msgstr ""
+msgstr "_Ακύρωση"
 
 #: ../Pinta/Actions/File/CloseDocumentAction.cs:67
 msgid "_Discard"
-msgstr ""
+msgstr "_Απόρριψη"
 
 #: ../Pinta/MainWindow.cs:324
 msgid "_Edit"
@@ -2404,11 +2453,11 @@ msgstr "Επίπε_δα"
 #: ../Pinta.Gui.Addins/InstallDialog.cs:156 ../Pinta/Dialogs/ErrorDialog.cs:41
 #: ../Pinta/Dialogs/ErrorDialog.cs:69
 msgid "_OK"
-msgstr ""
+msgstr "_ΟΚ"
 
 #: ../Pinta/Actions/File/CloseDocumentAction.cs:68
 msgid "_Save"
-msgstr ""
+msgstr "_Αποθήκευση"
 
 #: ../Pinta/MainWindow.cs:328
 msgid "_View"
@@ -2424,7 +2473,7 @@ msgstr "από τους συντελεστές της Pinta"
 
 #: ../xdg/pinta.desktop.in.h:5
 msgid "draw;drawing;paint;painting;graphics;raster;2d;"
-msgstr ""
+msgstr "ζωγραφίζω;ζωγραφική;βάφω;βαφή;γραφικά;raster;2d;"
 
 #: ../Pinta/Dialogs/NewImageDialog.cs:129
 #: ../Pinta/Dialogs/NewImageDialog.cs:149
@@ -2456,14 +2505,14 @@ msgstr ""
 #: ../Pinta.Tools/Tools/CloneStampTool.cs:47
 #, csharp-format
 msgid "{0} + left click to set origin, left click to paint."
-msgstr ""
+msgstr "{0} + αριστερό κλικ για ορισμό αρχής, αριστερό κλικ για βαφή."
 
 #. Translators: this is the auto-generated name for a duplicated layer.
 #. {0} is the name of the source layer. Example: "Layer 3 copy".
 #: ../Pinta.Core/Classes/DocumentLayers.cs:201
 #, csharp-format
 msgid "{0} copy"
-msgstr ""
+msgstr "{0} αντιγραφή"
 
 #: ../Pinta.Core/ImageFormats/FormatDescriptor.cs:111
 #, csharp-format
