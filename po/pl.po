@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: pinta\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-04-28 01:12+0000\n"
+"POT-Creation-Date: 2024-05-26 01:15+0000\n"
 "PO-Revision-Date: 2024-04-22 13:07+0000\n"
 "Last-Translator: Matthaiks <kitynska@gmail.com>\n"
 "Language-Team: Polish <https://hosted.weblate.org/projects/pinta/pinta/pl/>\n"
@@ -75,7 +75,7 @@ msgstr "Dodaj szum"
 msgid "Add-in Manager..."
 msgstr "Menedżer dodatków..."
 
-#: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:799
+#: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:797
 msgid "Added"
 msgstr "Dodano"
 
@@ -107,8 +107,8 @@ msgstr "Kotwica:"
 
 #: ../Pinta.Effects/Effects/EdgeDetectEffect.cs:81
 #: ../Pinta.Effects/Effects/EmbossEffect.cs:148
-#: ../Pinta.Effects/Effects/JuliaFractalEffect.cs:187
-#: ../Pinta.Effects/Effects/MandelbrotFractalEffect.cs:192
+#: ../Pinta.Effects/Effects/JuliaFractalEffect.cs:192
+#: ../Pinta.Effects/Effects/MandelbrotFractalEffect.cs:196
 #: ../Pinta.Effects/Effects/MotionBlurEffect.cs:108
 #: ../Pinta.Effects/Effects/RadialBlurEffect.cs:170
 #: ../Pinta.Effects/Effects/ReliefEffect.cs:83
@@ -121,11 +121,11 @@ msgstr "Kąt"
 msgid "Antialias"
 msgstr "Wygładzanie"
 
-#: ../Pinta.Core/Classes/BaseTool.cs:338
+#: ../Pinta.Core/Classes/BaseTool.cs:349
 msgid "Antialiasing Off"
 msgstr "Wygładzanie wyłączone"
 
-#: ../Pinta.Core/Classes/BaseTool.cs:337
+#: ../Pinta.Core/Classes/BaseTool.cs:348
 msgid "Antialiasing On"
 msgstr "Wygładzanie włączone"
 
@@ -451,14 +451,14 @@ msgstr "Nasycenie kolorów"
 
 #: ../Pinta.Core/Actions/ViewActions.cs:181
 #: ../Pinta.Effects/Effects/CloudsEffect.cs:250
-#: ../Pinta.Effects/Effects/JuliaFractalEffect.cs:178
-#: ../Pinta.Effects/Effects/MandelbrotFractalEffect.cs:198
+#: ../Pinta.Effects/Effects/JuliaFractalEffect.cs:183
+#: ../Pinta.Effects/Effects/MandelbrotFractalEffect.cs:202
 msgid "Color Scheme"
 msgstr "Schemat kolorów"
 
 #: ../Pinta.Effects/Effects/CloudsEffect.cs:247
-#: ../Pinta.Effects/Effects/JuliaFractalEffect.cs:175
-#: ../Pinta.Effects/Effects/MandelbrotFractalEffect.cs:195
+#: ../Pinta.Effects/Effects/JuliaFractalEffect.cs:180
+#: ../Pinta.Effects/Effects/MandelbrotFractalEffect.cs:199
 msgid "Color Scheme Source"
 msgstr "Źródło schematu kolorów"
 
@@ -566,7 +566,7 @@ msgstr "Domyślny"
 msgid "Delete Layer"
 msgstr "Usuń warstwę"
 
-#: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:644
+#: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:642
 msgid "Deleted"
 msgstr "Usunięto"
 
@@ -696,8 +696,8 @@ msgstr "Rozszerz"
 msgid "Extension packages"
 msgstr "Pakiety rozszerzeń"
 
-#: ../Pinta.Effects/Effects/JuliaFractalEffect.cs:166
-#: ../Pinta.Effects/Effects/MandelbrotFractalEffect.cs:182
+#: ../Pinta.Effects/Effects/JuliaFractalEffect.cs:171
+#: ../Pinta.Effects/Effects/MandelbrotFractalEffect.cs:187
 msgid "Factor"
 msgstr "Współczynnik"
 
@@ -759,8 +759,8 @@ msgstr "Styl wypełniania"
 msgid "Fill and Outline Shape"
 msgstr "Konturowanie i wypełnianie kształtu"
 
-#: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:1062
-#: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:1322
+#: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:1065
+#: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:1329
 msgid "Finalized"
 msgstr "Ukończono"
 
@@ -1016,7 +1016,7 @@ msgid "Intersect ({0} + Left Click)"
 msgstr "Przecięcie ({0} + lewy przycisk myszy)"
 
 #: ../Pinta.Effects/Adjustments/InvertColorsEffect.cs:24
-#: ../Pinta.Effects/Effects/MandelbrotFractalEffect.cs:207
+#: ../Pinta.Effects/Effects/MandelbrotFractalEffect.cs:211
 msgid "Invert Colors"
 msgstr "Odwróć kolory"
 
@@ -1038,7 +1038,7 @@ msgstr "Jakość JPEG"
 msgid "Jarvis-Judice-Ninke"
 msgstr "Jarvisa-Judice'a-Ninke'a"
 
-#: ../Pinta.Effects/Effects/JuliaFractalEffect.cs:23
+#: ../Pinta.Effects/Effects/JuliaFractalEffect.cs:26
 msgid "Julia Fractal"
 msgstr "Fraktal Julii"
 
@@ -1320,7 +1320,7 @@ msgstr "Menu główne"
 msgid "Maintain aspect ratio"
 msgstr "Zachowaj proporcje obrazu"
 
-#: ../Pinta.Effects/Effects/MandelbrotFractalEffect.cs:23
+#: ../Pinta.Effects/Effects/MandelbrotFractalEffect.cs:26
 msgid "Mandelbrot Fractal"
 msgstr "Fraktal Mandelbrota"
 
@@ -1337,7 +1337,7 @@ msgstr "Scal warstwę w dół"
 msgid "Mode"
 msgstr "Tryb"
 
-#: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:876
+#: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:881
 msgid "Modified"
 msgstr "Zmieniono"
 
@@ -1412,11 +1412,11 @@ msgstr "Szum"
 
 #: ../Pinta.Core/Effects/UserBlendOps.cs:31
 #: ../Pinta.Tools/Brushes/PlainBrush.cs:35
-#: ../Pinta.Tools/Tools/EraserTool.cs:263 ../Pinta.Tools/Tools/TextTool.cs:248
+#: ../Pinta.Tools/Tools/EraserTool.cs:262 ../Pinta.Tools/Tools/TextTool.cs:248
 msgid "Normal"
 msgstr "Normalny"
 
-#: ../Pinta.Core/Classes/BaseTool.cs:322
+#: ../Pinta.Core/Classes/BaseTool.cs:333
 msgid "Normal Blending"
 msgstr "Normalne mieszanie"
 
@@ -1525,7 +1525,7 @@ msgstr "Histogram wyjścia"
 msgid "Overlay"
 msgstr "Nakładka"
 
-#: ../Pinta.Core/Classes/BaseTool.cs:323
+#: ../Pinta.Core/Classes/BaseTool.cs:334
 msgid "Overwrite"
 msgstr "Zastąp"
 
@@ -1653,12 +1653,12 @@ msgstr "Piksele"
 msgid "Piña Colada"
 msgstr "Piña colada"
 
-#: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:583
-#: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:769
+#: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:581
+#: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:767
 msgid "Point Added"
 msgstr "Dodano punkt"
 
-#: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:630
+#: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:628
 msgid "Point Deleted"
 msgstr "Usunięto punkt"
 
@@ -1704,8 +1704,8 @@ msgstr "Podstawowy"
 msgid "Print"
 msgstr "Drukuj"
 
-#: ../Pinta.Effects/Effects/JuliaFractalEffect.cs:169
-#: ../Pinta.Effects/Effects/MandelbrotFractalEffect.cs:185
+#: ../Pinta.Effects/Effects/JuliaFractalEffect.cs:174
+#: ../Pinta.Effects/Effects/MandelbrotFractalEffect.cs:190
 #: ../Pinta.Effects/Effects/RadialBlurEffect.cs:176
 #: ../Pinta.Effects/Effects/WarpEffect.cs:181
 msgid "Quality"
@@ -1746,8 +1746,8 @@ msgid "Random"
 msgstr "Losowy"
 
 #: ../Pinta.Effects/Effects/CloudsEffect.cs:253
-#: ../Pinta.Effects/Effects/JuliaFractalEffect.cs:181
-#: ../Pinta.Effects/Effects/MandelbrotFractalEffect.cs:201
+#: ../Pinta.Effects/Effects/JuliaFractalEffect.cs:186
+#: ../Pinta.Effects/Effects/MandelbrotFractalEffect.cs:205
 msgid "Random Color Scheme Seed"
 msgstr "Ziarno losowego schematu kolorów"
 
@@ -1819,8 +1819,8 @@ msgid "Rename Layer"
 msgstr "Zmień nazwę warstwy"
 
 #: ../Pinta.Effects/Effects/CloudsEffect.cs:33
-#: ../Pinta.Effects/Effects/JuliaFractalEffect.cs:27
-#: ../Pinta.Effects/Effects/MandelbrotFractalEffect.cs:27
+#: ../Pinta.Effects/Effects/JuliaFractalEffect.cs:32
+#: ../Pinta.Effects/Effects/MandelbrotFractalEffect.cs:32
 #: ../Pinta.Effects/Effects/VoronoiDiagramEffect.cs:22
 msgid "Render"
 msgstr "Renderowanie"
@@ -1877,8 +1877,8 @@ msgid "Resize Palette"
 msgstr "Zmień rozmiar palety"
 
 #: ../Pinta.Effects/Effects/CloudsEffect.cs:256
-#: ../Pinta.Effects/Effects/JuliaFractalEffect.cs:184
-#: ../Pinta.Effects/Effects/MandelbrotFractalEffect.cs:204
+#: ../Pinta.Effects/Effects/JuliaFractalEffect.cs:189
+#: ../Pinta.Effects/Effects/MandelbrotFractalEffect.cs:208
 msgid "Reverse Color Scheme"
 msgstr "Odwróć schemat kolorów"
 
@@ -2054,7 +2054,7 @@ msgstr "Pojedynczy piksel"
 msgid "Size"
 msgstr "Rozmiar"
 
-#: ../Pinta.Tools/Tools/EraserTool.cs:263
+#: ../Pinta.Tools/Tools/EraserTool.cs:262
 msgid "Smooth"
 msgstr "Wygładzanie"
 
@@ -2251,7 +2251,7 @@ msgstr "Wir"
 msgid "Two-Row Sierra"
 msgstr "Dwurzędowy Sierry"
 
-#: ../Pinta.Tools/Tools/EraserTool.cs:259
+#: ../Pinta.Tools/Tools/EraserTool.cs:258
 #: ../Pinta.Tools/Tools/PaintBrushTool.cs:165
 msgid "Type"
 msgstr "Typ"
@@ -2395,8 +2395,8 @@ msgstr ""
 "Nie masz uprawnień do modyfikowania „{0}”. Plik lub folder może być tylko do "
 "odczytu."
 
-#: ../Pinta.Effects/Effects/JuliaFractalEffect.cs:172
-#: ../Pinta.Effects/Effects/MandelbrotFractalEffect.cs:189
+#: ../Pinta.Effects/Effects/JuliaFractalEffect.cs:177
+#: ../Pinta.Effects/Effects/MandelbrotFractalEffect.cs:193
 #: ../Pinta.Tools/Tools/ZoomTool.cs:56
 #: ../Pinta/Actions/Layers/RotateZoomLayerAction.cs:121
 msgid "Zoom"
