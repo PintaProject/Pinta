@@ -75,17 +75,37 @@ public sealed class MoveSelectedTool : BaseTransformTool
 			// Copy the selection to the temp layer
 			document.Layers.CreateSelectionLayer ();
 			document.Layers.ShowSelectionLayer = true;
-			// Use same BlendMode, Opacity and Visibility for SelectionLayer
-			document.Layers.SelectionLayer.BlendMode = document.Layers.CurrentUserLayer.BlendMode;
-			document.Layers.SelectionLayer.Opacity = document.Layers.CurrentUserLayer.Opacity;
-			document.Layers.SelectionLayer.Hidden = document.Layers.CurrentUserLayer.Hidden;
+			// Make the SelectionLayer fully opaque and visible.
+			document.Layers.SelectionLayer.BlendMode = BlendMode.Normal;
+			document.Layers.SelectionLayer.Opacity = 1.0;
+			document.Layers.SelectionLayer.Hidden = false;
 
 			var g = new Context (document.Layers.SelectionLayer.Surface);
 			g.AppendPath (document.Selection.SelectionPath);
 			g.FillRule = FillRule.EvenOdd;
 			g.SetSourceSurface (document.Layers.CurrentUserLayer.Surface, 0, 0);
-			g.Clip ();
-			g.Paint ();
+
+			// Ensure that the pixels we copy have 100% opacity. The layer we're pasting them back into
+			// still has its opacity (which may be less than 1.0) set as a persistent property, so as
+			// soon as the move operation is committed, that opacity will apply to them once again.
+			// Within the context of the layer, we want the pixels to be moved as though they are
+			// opaque.
+			var savedOpacity = document.Layers.CurrentUserLayer.Opacity;
+			var savedBlendMode = document.Layers.CurrentUserLayer.BlendMode;
+
+			try
+			{
+				document.Layers.CurrentUserLayer.Opacity = 1.0;
+				document.Layers.CurrentUserLayer.BlendMode = BlendMode.Normal;
+
+				g.Clip ();
+				g.Paint ();
+			}
+			finally
+			{
+				document.Layers.CurrentUserLayer.Opacity = savedOpacity;
+				document.Layers.CurrentUserLayer.BlendMode = savedBlendMode;
+			}
 
 			var surf = document.Layers.CurrentUserLayer.Surface;
 
