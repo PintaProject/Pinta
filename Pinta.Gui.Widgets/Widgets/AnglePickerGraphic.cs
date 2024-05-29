@@ -55,9 +55,8 @@ public sealed class AnglePickerGraphic : Gtk.DrawingArea
 
 	private RectangleD GetDrawBounds ()
 	{
-		var rect = new RectangleD (0, 0, GetAllocatedWidth (), GetAllocatedHeight ());
-		rect = rect.Inflated (-1, -1);
-		return rect;
+		RectangleD rect = new (0, 0, GetAllocatedWidth (), GetAllocatedHeight ());
+		return rect.Inflated (-1, -1);
 	}
 
 	private void ProcessMouseEvent (PointD pt, bool constrainAngle)
