@@ -160,7 +160,7 @@ public sealed class MainWindow
 		var doc = e.Document;
 
 		var notebook = canvas_pad.Notebook;
-		var selected_index = notebook.ActiveItemIndex;
+		int selected_index = notebook.ActiveItemIndex;
 
 		var canvas = new CanvasWindow (doc) {
 			RulersVisible = PintaCore.Actions.View.Rulers.Value,
@@ -574,8 +574,8 @@ public sealed class MainWindow
 
 			var canvas_window = PintaCore.Workspace.ActiveWorkspace.Canvas.Parent!;
 
-			var window_x = canvas_window.GetAllocatedWidth ();
-			var window_y = canvas_window.GetAllocatedHeight ();
+			int window_x = canvas_window.GetAllocatedWidth ();
+			int window_y = canvas_window.GetAllocatedHeight ();
 
 			double ratio;
 
