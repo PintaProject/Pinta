@@ -64,7 +64,7 @@ public sealed class MainWindow
 		CreateWindow ();
 
 		// Initialize interface things
-		new ActionHandlers ();
+		_ = new ActionHandlers ();
 
 		PintaCore.Chrome.InitializeProgessDialog (new ProgressDialog ());
 		PintaCore.Chrome.InitializeErrorDialogHandler (ErrorDialog.ShowError);
@@ -176,16 +176,24 @@ public sealed class MainWindow
 		// Zoom to window only on first show (if we do it always, it will be called on every resize)
 		// Note: this does seem to allow a small flicker where large images are shown at 100% zoom before
 		// zooming out (Bug 1959673)
+
+		bool canvasHasBeenShown = false;
 		canvas.Canvas.OnResize += (o, e2) => {
-			if (!canvas.HasBeenShown) {
-				GLib.Functions.TimeoutAdd (0, 0, () => {
+
+			if (canvasHasBeenShown)
+				return;
+
+			GLib.Functions.TimeoutAdd (
+				0,
+				0,
+				() => {
 					ZoomToWindow_Activated (o, e);
 					PintaCore.Workspace.Invalidate ();
 					return false;
-				});
-			}
+				}
+			);
 
-			canvas.HasBeenShown = true;
+			canvasHasBeenShown = true;
 		};
 
 		PintaCore.Actions.View.Rulers.Toggled += (active) => { canvas.RulersVisible = active; };
@@ -277,9 +285,9 @@ public sealed class MainWindow
 	private void CreateWindow ()
 	{
 		// Check for stored window settings
-		var width = PintaCore.Settings.GetSetting<int> ("window-size-width", 1100);
-		var height = PintaCore.Settings.GetSetting<int> ("window-size-height", 750);
-		var maximize = PintaCore.Settings.GetSetting<bool> ("window-maximized", false);
+		int width = PintaCore.Settings.GetSetting ("window-size-width", 1100);
+		int height = PintaCore.Settings.GetSetting ("window-size-height", 750);
+		bool maximize = PintaCore.Settings.GetSetting ("window-maximized", false);
 
 		window_shell = new WindowShell (app, "Pinta.GenericWindow", "Pinta", width, height, maximize);
 
@@ -609,9 +617,8 @@ public sealed class MainWindow
 	}
 
 	private IDockNotebookItem? FindTabWithCanvas (PintaCanvas canvas)
-	{
-		return canvas_pad.Notebook.Items
+		=>
+			canvas_pad.Notebook.Items
 			.Where (i => ((CanvasWindow) i.Widget).Canvas == canvas)
 			.FirstOrDefault ();
-	}
 }
