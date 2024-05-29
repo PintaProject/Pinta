@@ -67,39 +67,37 @@ public sealed class AnglePickerGraphic : Gtk.DrawingArea
 
 	private DegreesAngle CalculateNewAngle (PointD pt, bool constrainAngle)
 	{
-		var rect = GetDrawBounds ();
-		var diameter = Math.Min (rect.Width, rect.Height);
-		var center = new PointD (rect.X + diameter * 0.5, rect.Y + diameter * 0.5);
+		RectangleD rect = GetDrawBounds ();
 
-		var dx = pt.X - center.X;
-		var dy = pt.Y - center.Y;
-		var theta = Math.Atan2 (-dy, dx);
+		double diameter = Math.Min (rect.Width, rect.Height);
+		PointD center = new (rect.X + diameter * 0.5, rect.Y + diameter * 0.5);
 
-		var newAngle = (theta * 360) / (2 * Math.PI);
+		PointD delta = new (
+			X: pt.X - center.X,
+			Y: pt.Y - center.Y);
 
-		if (newAngle < 0)
-			newAngle += 360;
+		RadiansAngle theta = new (Math.Atan2 (-delta.Y, delta.X));
+		DegreesAngle newAngle = theta.ToDegrees ();
 
-		if (constrainAngle) {
-			const double constraintAngle = 15.0;
+		if (!constrainAngle)
+			return newAngle;
+		else
+			return GetConstrainedAngle (newAngle);
 
-			var multiple = newAngle / constraintAngle;
-			var top = Math.Floor (multiple);
-			var topDelta = Math.Abs (top - multiple);
-			var bottom = Math.Ceiling (multiple);
-			var bottomDelta = Math.Abs (bottom - multiple);
+		static DegreesAngle GetConstrainedAngle (DegreesAngle baseAngle)
+		{
+			const double constraint_angle = 15.0;
 
-			double bestMultiple;
+			double multiple = baseAngle.Degrees / constraint_angle;
+			double top = Math.Floor (multiple);
+			double topDelta = Math.Abs (top - multiple);
+			double bottom = Math.Ceiling (multiple);
+			double bottomDelta = Math.Abs (bottom - multiple);
 
-			if (bottomDelta < topDelta)
-				bestMultiple = bottom;
-			else
-				bestMultiple = top;
+			double bestMultiple = (bottomDelta < topDelta) ? bottom : top;
 
-			newAngle = bestMultiple * constraintAngle;
+			return new (bestMultiple * constraint_angle);
 		}
-
-		return new (newAngle);
 	}
 
 	private readonly record struct AngleGraphicSettings (
@@ -108,23 +106,25 @@ public sealed class AnglePickerGraphic : Gtk.DrawingArea
 		RectangleD gripEllipseRect,
 		PointD center,
 		PointD endPoint);
+
 	private AngleGraphicSettings CreateSettings ()
 	{
 		GetStyleContext ().GetColor (out var color);
 
-		var rect = GetDrawBounds ();
-		var diameter = Math.Min (rect.Width, rect.Height);
-		var radius = (diameter / 2.0);
+		RectangleD rect = GetDrawBounds ();
 
-		var center = new PointD (rect.X + radius, rect.Y + radius);
+		double diameter = Math.Min (rect.Width, rect.Height);
+		double radius = (diameter / 2.0);
 
-		var theta = (angle_value.Degrees * 2.0 * Math.PI) / 360.0;
+		PointD center = new (rect.X + radius, rect.Y + radius);
 
-		var ellipseRect = new RectangleD (0, 0, diameter, diameter);
+		double theta = (angle_value.Degrees * 2.0 * Math.PI) / 360.0;
 
-		var endPointRadius = radius - 2;
+		RectangleD ellipseRect = new (0, 0, diameter, diameter);
 
-		var endPoint = new PointD (
+		double endPointRadius = radius - 2;
+
+		PointD endPoint = new (
 			X: (float) (center.X + (endPointRadius * Math.Cos (theta))),
 			Y: (float) (center.Y - (endPointRadius * Math.Sin (theta)))
 		);
@@ -150,5 +150,6 @@ public sealed class AnglePickerGraphic : Gtk.DrawingArea
 
 	public event EventHandler? ValueChanged;
 
-	private void OnValueChanged () => ValueChanged?.Invoke (this, EventArgs.Empty);
+	private void OnValueChanged ()
+		=> ValueChanged?.Invoke (this, EventArgs.Empty);
 }
