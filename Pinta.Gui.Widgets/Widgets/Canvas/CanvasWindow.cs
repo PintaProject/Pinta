@@ -25,7 +25,6 @@
 // THE SOFTWARE.
 
 using System;
-using System.Diagnostics;
 using Gtk;
 using Pinta.Core;
 using Pinta.Gui.Widgets;
@@ -39,17 +38,17 @@ public sealed class CanvasWindow : Grid
 	private readonly Ruler vertical_ruler;
 	private readonly ScrolledWindow scrolled_window;
 	private readonly EventControllerMotion motion_controller;
-	private PointD current_window_pos = new ();
-	private PointD current_canvas_pos = new ();
+	private readonly GestureZoom gesture_zoom;
+
+	private PointD current_window_pos = PointD.Zero;
+	private PointD current_canvas_pos = PointD.Zero;
 	private double cumulative_zoom_amount;
 	private double last_scale_delta;
-	private GestureZoom gesture_zoom;
 
 	private const double ZoomThresholdScroll = 1.25;
 	private const double ZoomThresholdPinch = 0.15;
 
-	public PintaCanvas Canvas { get; set; }
-	public bool HasBeenShown { get; set; }
+	public PintaCanvas Canvas { get; }
 
 	public CanvasWindow (Document document)
 	{
@@ -154,8 +153,11 @@ public sealed class CanvasWindow : Grid
 		last_scale_delta = gesture_zoom.GetScaleDelta () - 1;
 	}
 
-	public PointD WindowMousePosition => current_window_pos;
-	public bool IsMouseOnCanvas => motion_controller.ContainsPointer;
+	public PointD WindowMousePosition
+		=> current_window_pos;
+
+	public bool IsMouseOnCanvas
+		=> motion_controller.ContainsPointer;
 
 	public bool RulersVisible {
 		get => horizontal_ruler.Visible;
@@ -179,8 +181,8 @@ public sealed class CanvasWindow : Grid
 
 	public void UpdateRulerRange (object? sender, EventArgs e)
 	{
-		var lower = new PointD (0, 0);
-		var upper = new PointD (0, 0);
+		PointD lower = PointD.Zero;
+		PointD upper = PointD.Zero;
 
 		if (scrolled_window.Hadjustment == null || scrolled_window.Vadjustment == null)
 			return;
@@ -249,6 +251,5 @@ public sealed class CanvasWindow : Grid
 		}
 
 		return true;
-
 	}
 }

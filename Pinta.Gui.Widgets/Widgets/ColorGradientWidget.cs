@@ -25,6 +25,7 @@
 // THE SOFTWARE.
 
 using System;
+using System.Collections.Immutable;
 using System.Diagnostics.CodeAnalysis;
 using System.Linq;
 using Cairo;
@@ -66,8 +67,8 @@ public sealed class ColorGradientWidget : Gtk.DrawingArea
 
 	private RectangleD GradientRectangle {
 		get {
-			var rect = GetAllocation ();
-			return new RectangleD (
+			RectangleD rect = GetAllocation ();
+			return new (
 				x: rect.X + X_pad * rect.Width,
 				y: rect.Y + Y_pad * rect.Height,
 				width: (1 - 2 * X_pad) * rect.Width,
@@ -77,7 +78,9 @@ public sealed class ColorGradientWidget : Gtk.DrawingArea
 	}
 
 	public int Count {
+
 		get => vals.Length;
+
 		[MemberNotNull (nameof (vals))]
 		set {
 			if (value < 2 || value > 3)
@@ -85,9 +88,9 @@ public sealed class ColorGradientWidget : Gtk.DrawingArea
 
 			vals = new double[value];
 
-			var step = 256 / (value - 1);
+			int step = 256 / (value - 1);
 
-			for (var i = 0; i < value; i++)
+			for (int i = 0; i < value; i++)
 				vals[i] = i * step - ((i != 0) ? 1 : 0);
 		}
 	}
@@ -116,23 +119,25 @@ public sealed class ColorGradientWidget : Gtk.DrawingArea
 		}
 	}
 
-	private RectangleD GetAllocation () => new (0, 0, GetAllocatedWidth (), GetAllocatedHeight ());
+	private RectangleD GetAllocation ()
+		=> new (0, 0, GetAllocatedWidth (), GetAllocatedHeight ());
 
 	private double GetYFromValue (double val)
 	{
-		var rect = GradientRectangle;
-		var all = GetAllocation ();
+		RectangleD rect = GradientRectangle;
+		RectangleD all = GetAllocation ();
 		return all.Y + Y_pad * all.Height + rect.Height * (255 - val) / 255;
 	}
 
-	private double NormalizeY (int index, double py)
+	private double NormalizeY (
+		int index,
+		double py)
 	{
-		var rect = GradientRectangle;
+		RectangleD rect = GradientRectangle;
+
 		var yvals = (
-			(
-				from val in vals
-				select GetYFromValue (val)
-			)
+			vals
+			.Select (GetYFromValue)
 			.Concat (
 				new double[]
 				{
@@ -141,24 +146,25 @@ public sealed class ColorGradientWidget : Gtk.DrawingArea
 				}
 			)
 			.OrderByDescending (v => v)
-			.ToArray ()
+			.ToImmutableArray ()
 		);
+
 		index++;
 
 		if (py >= yvals[index - 1])
-			py = yvals[index - 1];
+			return yvals[index - 1];
 		else if (py < yvals[index + 1])
-			py = yvals[index + 1];
-
-		return py;
+			return yvals[index + 1];
+		else
+			return py;
 	}
 
 	private int GetValueFromY (double py)
 	{
-		var rect = GradientRectangle;
-		var all = GetAllocation ();
-		var y = py - (all.Y + Y_pad * all.Height);
-		return ((int) (255 * (rect.Height - y) / rect.Height));
+		RectangleD rect = GradientRectangle;
+		RectangleD all = GetAllocation ();
+		double y = py - (all.Y + Y_pad * all.Height);
+		return (int) (255 * (rect.Height - y) / rect.Height);
 	}
 
 	private int FindValueIndex (int y)
@@ -166,13 +172,19 @@ public sealed class ColorGradientWidget : Gtk.DrawingArea
 		if (ValueIndex != -1)
 			return ValueIndex;
 
-		var yvals = (from val in vals select GetYFromValue (val)).ToArray ();
-		var count = Count - 1;
+		var yvals =
+			vals
+			.Select (GetYFromValue)
+			.ToImmutableArray ();
 
-		for (var i = 0; i < count; i++) {
-			var y1 = yvals[i];
-			var y2 = yvals[i + 1];
-			var h = (y1 - y2) / 2;
+		int count = Count - 1;
+
+		for (int i = 0; i < count; i++) {
+
+			double y1 = yvals[i];
+			double y2 = yvals[i + 1];
+
+			double h = (y1 - y2) / 2;
 
 			// pointer is below the lowest value triangle
 			if (i == 0 && y1 < y)
@@ -187,27 +199,31 @@ public sealed class ColorGradientWidget : Gtk.DrawingArea
 				continue;
 
 			// pointer is closer to lower value triangle
-			if (y1 - y <= h) return i;
+			if (y1 - y <= h)
+				return i;
+
 			// pointer is closer to higher value triangle
-			if (y - y2 <= h) return i + 1;
+			if (y - y2 <= h)
+				return i + 1;
 		}
 
 		return -1;
 	}
 
-	private void HandleMotionNotifyEvent (EventControllerMotion controller, EventControllerMotion.MotionSignalArgs args)
+	private void HandleMotionNotifyEvent (
+		EventControllerMotion controller,
+		EventControllerMotion.MotionSignalArgs args)
 	{
 		PointI p = new (
 			X: (int) args.X,
-			Y: (int) args.Y
-		);
+			Y: (int) args.Y);
 
-		var index = FindValueIndex (p.Y);
+		int index = FindValueIndex (p.Y);
 		p = p with { Y = (int) NormalizeY (index, p.Y) };
 
 		if (controller.GetCurrentEventState ().IsLeftMousePressed ()) {
 			if (index != -1) {
-				var y = GetValueFromY (p.Y);
+				int y = GetValueFromY (p.Y);
 
 				vals[index] = y;
 				OnValueChanged (index);
@@ -221,7 +237,9 @@ public sealed class ColorGradientWidget : Gtk.DrawingArea
 			QueueDraw ();
 	}
 
-	private void HandleLeaveNotifyEvent (EventControllerMotion controller, EventArgs args)
+	private void HandleLeaveNotifyEvent (
+		EventControllerMotion controller,
+		EventArgs args)
 	{
 		if (!controller.GetCurrentEventState ().IsLeftMousePressed ())
 			ValueIndex = -1;
@@ -229,23 +247,27 @@ public sealed class ColorGradientWidget : Gtk.DrawingArea
 		QueueDraw ();
 	}
 
-	private void HandleButtonPressEvent (GestureClick controller, GestureClick.PressedSignalArgs args)
+	private void HandleButtonPressEvent (
+		GestureClick controller,
+		GestureClick.PressedSignalArgs args)
 	{
-		var index = FindValueIndex ((int) args.Y);
+		int index = FindValueIndex ((int) args.Y);
 
 		if (index != -1)
 			ValueIndex = index;
 	}
 
-	private void HandleButtonReleaseEvent (GestureClick controller, GestureClick.ReleasedSignalArgs args)
+	private void HandleButtonReleaseEvent (
+		GestureClick controller,
+		GestureClick.ReleasedSignalArgs args)
 	{
 		ValueIndex = -1;
 	}
 
 	private void DrawGradient (Context g)
 	{
-		var rect = GradientRectangle;
-		var pat = new LinearGradient (rect.X, rect.Y, rect.X, rect.Y + rect.Height);
+		RectangleD rect = GradientRectangle;
+		LinearGradient pat = new (rect.X, rect.Y, rect.X, rect.Y + rect.Height);
 
 		pat.AddColorStop (0, MaxColor);
 		pat.AddColorStop (1, new Cairo.Color (0, 0, 0));
@@ -258,43 +280,51 @@ public sealed class ColorGradientWidget : Gtk.DrawingArea
 	private void DrawTriangles (Context g)
 	{
 		GetStyleContext ().GetColor (out var hover_color);
-		var inactive_color = hover_color with { A = 0.5 };
+		Cairo.Color inactive_color = hover_color with { A = 0.5 };
 
 		int px = last_mouse_pos.X;
 		int py = last_mouse_pos.Y;
 
-		var rect = GradientRectangle;
-		var all = GetAllocation ();
+		RectangleD rect = GradientRectangle;
+		RectangleD all = GetAllocation ();
 
-		var index = FindValueIndex (py);
+		int index = FindValueIndex (py);
 
-		for (var i = 0; i < Count; i++) {
+		for (int i = 0; i < Count; i++) {
 
-			var val = vals[i];
-			var y = GetYFromValue (val);
-			var hover = ((index == i)) && (all.ContainsPoint (px, py) || ValueIndex != -1);
-			var color = hover ? hover_color : inactive_color;
+			double val = vals[i];
+			double y = GetYFromValue (val);
+			bool hover = (index == i) && (all.ContainsPoint (px, py) || ValueIndex != -1);
+			Cairo.Color color = hover ? hover_color : inactive_color;
 
 			DrawLeftTriangle (g, rect, y, color);
 			DrawRightTriangle (g, rect, y, color);
 		}
 	}
 
-	private static void DrawRightTriangle (Context g, RectangleD rect, double y, Color color)
+	private static void DrawRightTriangle (
+		Context g,
+		RectangleD rect,
+		double y,
+		Color color)
 	{
-		var x = rect.X + rect.Width;
+		double x = rect.X + rect.Width;
 
 		// right triangle
 		ReadOnlySpan<PointD> points = stackalloc PointD[] {
-			new PointD (x, y),
-			new PointD (x + X_pad * rect.Width, y + Y_pad * rect.Height),
-			new PointD (x + X_pad * rect.Width, y - Y_pad * rect.Height),
+			new (x, y),
+			new (x + X_pad * rect.Width, y + Y_pad * rect.Height),
+			new (x + X_pad * rect.Width, y - Y_pad * rect.Height),
 		};
 
 		g.FillPolygonal (points, color);
 	}
 
-	private static void DrawLeftTriangle (Context g, RectangleD rect, double y, Color color)
+	private static void DrawLeftTriangle (
+		Context g,
+		RectangleD rect,
+		double y,
+		Color color)
 	{
 		// left triangle
 		ReadOnlySpan<PointD> points = stackalloc PointD[] {
@@ -312,7 +342,8 @@ public sealed class ColorGradientWidget : Gtk.DrawingArea
 		DrawTriangles (g);
 	}
 
-	private void OnValueChanged (int index) => ValueChanged?.Invoke (this, new IndexEventArgs (index));
+	private void OnValueChanged (int index)
+		=> ValueChanged?.Invoke (this, new IndexEventArgs (index));
 
 	public event EventHandler<IndexEventArgs>? ValueChanged;
 }
