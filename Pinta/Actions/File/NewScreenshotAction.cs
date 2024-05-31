@@ -27,6 +27,7 @@
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
+using System.Threading.Tasks;
 using Pinta.Core;
 using ScreenshotPortal.DBus;
 using Tmds.DBus;
@@ -35,97 +36,124 @@ namespace Pinta.Actions;
 
 internal sealed class NewScreenshotAction : IActionHandler
 {
-	#region IActionHandler Members
-	public void Initialize ()
+	void IActionHandler.Initialize ()
 	{
 		PintaCore.Actions.File.NewScreenshot.Activated += Activated;
 	}
 
-	public void Uninitialize ()
+	void IActionHandler.Uninitialize ()
 	{
 		PintaCore.Actions.File.NewScreenshot.Activated -= Activated;
 	}
-	#endregion
 
-	async private void Activated (object sender, EventArgs args)
+	private async void Activated (object sender, EventArgs args)
 	{
 		// GTK4 removed gdk_pixbuf_get_from_window(), so we need to use OS-specific APis to take a screenshot.
 		// TODO-GTK4 - implement screenshots for Windows
+		try {
 
-		// On Linux, use the XDG Desktop Portal Screenshot API.
-		if (SystemManager.GetOperatingSystem () == OS.X11) {
-			try {
-				// It's important that the portal interactions are synchronised with the main thread
-				// Otherwise the use of the portals will cause massive instability and crash Pinta
-				var systemConnection = new Connection (new ClientConnectionOptions (Address.Session) {
-					AutoConnect = true,
-					SynchronizationContext = System.Threading.SynchronizationContext.Current
-				});
+			if (SystemManager.GetOperatingSystem () == OS.X11)
+				await HandleX11 ();
+			else if (SystemManager.GetOperatingSystem () == OS.Mac)
+				HandleMac ();
+			else
+				HandleDefault ();
 
-				var portal = systemConnection.CreateProxy<IScreenshot> (
-					"org.freedesktop.portal.Desktop",
-					"/org/freedesktop/portal/desktop");
+		} catch (DBusException e) {
 
-				// The rootWindowID should be set to allow proper parenting of the screenshot dialog.
-				// However, the necessary functions are not correctly wrapped.
-				// The empty string means that the compositor may unfortunately place the dialog wherever it pleases.
-				// https://flatpak.github.io/xdg-desktop-portal/#parent_window
-				var rootWindowID = "";
-				var portalOptions = new Dictionary<string, object> // Enables options such as delay, specific windows, etc.
-				{
-					["modal"] = true,
-					["interactive"] = true,
-				};
+			PintaCore.Chrome.ShowErrorDialog (
+				PintaCore.Chrome.MainWindow,
+				Translations.GetString ("Failed to take screenshot"),
+				Translations.GetString ("Failed to access XDG Desktop Portals"),
+				e.ToString ());
 
-				var handle = await portal.ScreenshotAsync (rootWindowID, portalOptions);
-				await handle.WatchResponseAsync (
-					reply => {
-						// response 0 == success, 1 == undefined error, 2 == user cancelled (not an error)
-						// However the response 1 can occur when the user presses "Cancel" on the second stage of the UI
-						// As a result, it's not reliable to throw error messages when the retval == 1
-						if (reply.response != 0)
-							return;
+		} catch (NoHandlersForOSException e) {
 
-						string? uri = reply.results["uri"].ToString ();
+			PintaCore.Chrome.ShowMessageDialog (
+				PintaCore.Chrome.MainWindow,
+				e.Message,
+				string.Empty);
 
-						if (uri is null || !PintaCore.Workspace.OpenFile (Gio.FileHelper.NewForUri (uri)))
-							return;
+		} catch (Exception ex) {
 
-						// Mark as not having a file, so that the user doesn't unintentionally
-						// save using the temp file.
-						PintaCore.Workspace.ActiveDocument.ClearFileReference ();
-					}
-				);
+			PintaCore.Chrome.ShowErrorDialog (
+				PintaCore.Chrome.MainWindow,
+				ex.Message,
+				string.Empty,
+				ex.ToString ());
 
-			} catch (Tmds.DBus.DBusException e) {
-				PintaCore.Chrome.ShowErrorDialog (PintaCore.Chrome.MainWindow,
-					Translations.GetString ("Failed to take screenshot"),
-					Translations.GetString ("Failed to access XDG Desktop Portals"),
-					e.ToString ());
-			}
-
-			return;
-
-		} else if (SystemManager.GetOperatingSystem () == OS.Mac) {
-			try {
-				// Launch the screencapture utility in interactive mode and save to the clipboard.
-				// Note for testing: this requires screen recording permissions, so running from the generated .app bundle is required.
-				const string screencapture_path = "/usr/sbin/screencapture";
-				const string screencapture_args = "-iUc";
-
-				var process = Process.Start (screencapture_path, screencapture_args);
-				process.WaitForExit ();
-
-				PintaCore.Actions.Edit.PasteIntoNewImage.Activate ();
-			} catch (Exception e) {
-				PintaCore.Chrome.ShowErrorDialog (PintaCore.Chrome.MainWindow,
-					Translations.GetString ("Failed to take screenshot"), string.Empty, e.ToString ());
-			}
-
-			return;
 		}
+	}
 
-		PintaCore.Chrome.ShowMessageDialog (PintaCore.Chrome.MainWindow,
-			Translations.GetString ("Failed to take screenshot"), string.Empty);
+	private sealed class NoHandlersForOSException : Exception
+	{
+		internal NoHandlersForOSException ()
+			: base (Translations.GetString ("Failed to take screenshot"))
+		{ }
+	}
+	private static void HandleDefault ()
+		=> throw new NoHandlersForOSException ();
+
+	private static void HandleMac ()
+	{
+		// Launch the screencapture utility in interactive mode and save to the clipboard.
+		// Note for testing: this requires screen recording permissions, so running from the generated .app bundle is required.
+		const string screencapture_path = "/usr/sbin/screencapture";
+		const string screencapture_args = "-iUc";
+
+		var process = Process.Start (screencapture_path, screencapture_args);
+		process.WaitForExit ();
+
+		PintaCore.Actions.Edit.PasteIntoNewImage.Activate ();
+	}
+
+	private static async Task HandleX11 ()
+	{
+		// On Linux, use the XDG Desktop Portal Screenshot API.
+
+		// It's important that the portal interactions are synchronised with the main thread
+		// Otherwise the use of the portals will cause massive instability and crash Pinta
+		var systemConnection = new Connection (
+			new ClientConnectionOptions (Address.Session) {
+				AutoConnect = true,
+				SynchronizationContext = System.Threading.SynchronizationContext.Current,
+			}
+		);
+
+		var portal = systemConnection.CreateProxy<IScreenshot> (
+			"org.freedesktop.portal.Desktop",
+			"/org/freedesktop/portal/desktop");
+
+		// The rootWindowID should be set to allow proper parenting of the screenshot dialog.
+		// However, the necessary functions are not correctly wrapped.
+		// The empty string means that the compositor may unfortunately place the dialog wherever it pleases.
+		// https://flatpak.github.io/xdg-desktop-portal/#parent_window
+		var rootWindowID = "";
+
+		// Enables options such as delay, specific windows, etc.
+		Dictionary<string, object> portalOptions = new () {
+			["modal"] = true,
+			["interactive"] = true,
+		};
+
+		Requests.DBus.IRequest handle = await portal.ScreenshotAsync (rootWindowID, portalOptions);
+		await handle.WatchResponseAsync (
+			reply => {
+				// response 0 == success, 1 == undefined error, 2 == user cancelled (not an error)
+				// However the response 1 can occur when the user presses "Cancel" on the second stage of the UI
+				// As a result, it's not reliable to throw error messages when the retval == 1
+				if (reply.response != 0)
+					return;
+
+				string? uri = reply.results["uri"].ToString ();
+
+				if (uri is null || !PintaCore.Workspace.OpenFile (Gio.FileHelper.NewForUri (uri)))
+					return;
+
+				// Mark as not having a file, so that the user doesn't unintentionally
+				// save using the temp file.
+				PintaCore.Workspace.ActiveDocument.ClearFileReference ();
+			}
+		);
 	}
 }

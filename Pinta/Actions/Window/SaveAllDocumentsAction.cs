@@ -31,21 +31,20 @@ namespace Pinta.Actions;
 
 internal sealed class SaveAllDocumentsAction : IActionHandler
 {
-	#region IActionHandler Members
-	public void Initialize ()
+	void IActionHandler.Initialize ()
 	{
 		PintaCore.Actions.Window.SaveAll.Activated += Activated;
 	}
 
-	public void Uninitialize ()
+	void IActionHandler.Uninitialize ()
 	{
 		PintaCore.Actions.Window.SaveAll.Activated -= Activated;
 	}
-	#endregion
 
 	private void Activated (object sender, EventArgs e)
 	{
 		foreach (Document doc in PintaCore.Workspace.OpenDocuments) {
+
 			if (!doc.IsDirty && doc.HasFile)
 				continue;
 

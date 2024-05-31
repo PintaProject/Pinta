@@ -31,17 +31,15 @@ namespace Pinta.Actions;
 
 internal sealed class NewDocumentAction : IActionHandler
 {
-	#region IActionHandler Members
-	public void Initialize ()
+	void IActionHandler.Initialize ()
 	{
 		PintaCore.Actions.File.New.Activated += Activated;
 	}
 
-	public void Uninitialize ()
+	void IActionHandler.Uninitialize ()
 	{
 		PintaCore.Actions.File.New.Activated -= Activated;
 	}
-	#endregion
 
 	private async void Activated (object sender, EventArgs e)
 	{
@@ -68,10 +66,12 @@ internal sealed class NewDocumentAction : IActionHandler
 			using_clipboard = true;
 		}
 
-		var dialog = new NewImageDialog (imgWidth, imgHeight, bg_type, using_clipboard);
+		NewImageDialog dialog = new (imgWidth, imgHeight, bg_type, using_clipboard);
 
 		dialog.OnResponse += (_, e) => {
+
 			int response = e.ResponseId;
+
 			if (response == (int) Gtk.ResponseType.Ok) {
 				PintaCore.Workspace.NewDocument (new Size (dialog.NewImageWidth, dialog.NewImageHeight), dialog.NewImageBackground);
 

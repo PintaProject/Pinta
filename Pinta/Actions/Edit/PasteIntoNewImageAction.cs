@@ -31,9 +31,15 @@ namespace Pinta.Actions;
 
 internal sealed class PasteIntoNewImageAction : IActionHandler
 {
-	public void Initialize () => PintaCore.Actions.Edit.PasteIntoNewImage.Activated += Activated;
+	void IActionHandler.Initialize ()
+	{
+		PintaCore.Actions.Edit.PasteIntoNewImage.Activated += Activated;
+	}
 
-	public void Uninitialize () => PintaCore.Actions.Edit.PasteIntoNewImage.Activated -= Activated;
+	void IActionHandler.Uninitialize ()
+	{
+		PintaCore.Actions.Edit.PasteIntoNewImage.Activated -= Activated;
+	}
 
 	private async void Activated (object sender, EventArgs e)
 	{

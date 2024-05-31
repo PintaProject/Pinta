@@ -31,21 +31,20 @@ namespace Pinta.Actions;
 
 internal sealed class CloseAllDocumentsAction : IActionHandler
 {
-	#region IActionHandler Members
-	public void Initialize ()
+	void IActionHandler.Initialize ()
 	{
 		PintaCore.Actions.Window.CloseAll.Activated += Activated;
 	}
 
-	public void Uninitialize ()
+	void IActionHandler.Uninitialize ()
 	{
 		PintaCore.Actions.Window.CloseAll.Activated -= Activated;
 	}
-	#endregion
 
 	private void Activated (object sender, EventArgs e)
 	{
 		while (PintaCore.Workspace.HasOpenDocuments) {
+
 			int count = PintaCore.Workspace.OpenDocuments.Count;
 
 			PintaCore.Actions.File.Close.Activate ();

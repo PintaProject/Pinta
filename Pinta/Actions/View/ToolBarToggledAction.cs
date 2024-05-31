@@ -30,17 +30,15 @@ namespace Pinta.Actions;
 
 internal sealed class ToolBarToggledAction : IActionHandler
 {
-	#region IActionHandler Members
-	public void Initialize ()
+	void IActionHandler.Initialize ()
 	{
 		PintaCore.Actions.View.ToolBar.Toggled += Activated;
 	}
 
-	public void Uninitialize ()
+	void IActionHandler.Uninitialize ()
 	{
 		PintaCore.Actions.View.ToolBar.Toggled -= Activated;
 	}
-	#endregion
 
 	private void Activated (bool value)
 	{

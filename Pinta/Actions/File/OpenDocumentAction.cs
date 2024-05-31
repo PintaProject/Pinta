@@ -25,64 +25,38 @@
 // THE SOFTWARE.
 
 using System;
-using Gtk;
 using Pinta.Core;
 
 namespace Pinta.Actions;
 
 internal sealed class OpenDocumentAction : IActionHandler
 {
-	#region IActionHandler Members
-	public void Initialize ()
+	void IActionHandler.Initialize ()
 	{
 		PintaCore.Actions.File.Open.Activated += Activated;
 	}
 
-	public void Uninitialize ()
+	void IActionHandler.Uninitialize ()
 	{
 		PintaCore.Actions.File.Open.Activated -= Activated;
 	}
-	#endregion
 
 	private void Activated (object sender, EventArgs e)
 	{
-		var fcd = FileChooserNative.New (
+		var imagesFilter = CreateImagesFilter ();
+		var catchAllFilter = CreateCatchAllFilter ();
+
+		var fcd = Gtk.FileChooserNative.New (
 			Translations.GetString ("Open Image File"),
 			PintaCore.Chrome.MainWindow,
-			FileChooserAction.Open,
+			Gtk.FileChooserAction.Open,
 			Translations.GetString ("Open"),
 			Translations.GetString ("Cancel"));
+
 		fcd.Modal = true;
 
-
-		// Add image files filter
-		var ff = FileFilter.New ();
-		ff.Name = Translations.GetString ("Image files");
-
-		foreach (var format in PintaCore.ImageFormats.Formats) {
-
-			if (format.IsWriteOnly ())
-				continue;
-
-			foreach (var ext in format.Extensions)
-				ff.AddPattern ($"*.{ext}");
-
-			// On Unix-like systems, file extensions are often considered optional.
-			// Files can often also be identified by their MIME types.
-			// Windows does not understand MIME types natively.
-			// Adding a MIME filter on Windows would break the native file picker and force a GTK file picker instead.
-			if (SystemManager.GetOperatingSystem () != OS.Windows) {
-				foreach (var mime in format.Mimes)
-					ff.AddMimeType (mime);
-			}
-		}
-
-		fcd.AddFilter (ff);
-
-		var ff2 = FileFilter.New ();
-		ff2.Name = Translations.GetString ("All files");
-		ff2.AddPattern ("*");
-		fcd.AddFilter (ff2);
+		fcd.AddFilter (imagesFilter);
+		fcd.AddFilter (catchAllFilter);
 
 		if (PintaCore.RecentFiles.GetDialogDirectory () is Gio.File dir && dir.QueryExists (null))
 			fcd.SetCurrentFolder (dir);
@@ -90,8 +64,10 @@ internal sealed class OpenDocumentAction : IActionHandler
 		fcd.SelectMultiple = true;
 
 		fcd.OnResponse += (_, e) => {
+
 			if (e.ResponseId != (int) Gtk.ResponseType.Accept)
 				return;
+
 			foreach (var file in fcd.GetFileList ()) {
 				if (!PintaCore.Workspace.OpenFile (file))
 					continue;
@@ -103,5 +79,40 @@ internal sealed class OpenDocumentAction : IActionHandler
 		};
 
 		fcd.Show ();
+	}
+
+	private static Gtk.FileFilter CreateCatchAllFilter ()
+	{
+		Gtk.FileFilter result = Gtk.FileFilter.New ();
+		result.Name = Translations.GetString ("All files");
+		result.AddPattern ("*");
+		return result;
+	}
+
+	private static Gtk.FileFilter CreateImagesFilter ()
+	{
+		Gtk.FileFilter result = Gtk.FileFilter.New ();
+
+		result.Name = Translations.GetString ("Image files");
+
+		foreach (var format in PintaCore.ImageFormats.Formats) {
+
+			if (format.IsWriteOnly ())
+				continue;
+
+			foreach (var ext in format.Extensions)
+				result.AddPattern ($"*.{ext}");
+
+			// On Unix-like systems, file extensions are often considered optional.
+			// Files can often also be identified by their MIME types.
+			// Windows does not understand MIME types natively.
+			// Adding a MIME filter on Windows would break the native file picker and force a GTK file picker instead.
+			if (SystemManager.GetOperatingSystem () != OS.Windows) {
+				foreach (var mime in format.Mimes)
+					result.AddMimeType (mime);
+			}
+		}
+
+		return result;
 	}
 }

@@ -32,22 +32,20 @@ namespace Pinta.Actions;
 
 internal sealed class AddinManagerAction : IActionHandler
 {
-	#region IActionHandler Members
-	public void Initialize ()
+	void IActionHandler.Initialize ()
 	{
 		PintaCore.Actions.Addins.AddinManager.Activated += Activated;
 	}
 
-	public void Uninitialize ()
+	void IActionHandler.Uninitialize ()
 	{
 		PintaCore.Actions.Addins.AddinManager.Activated -= Activated;
 	}
-	#endregion
 
 	private void Activated (object sender, EventArgs e)
 	{
-		var service = new AddinSetupService (Mono.Addins.AddinManager.Registry);
-		var dialog = new AddinManagerDialog (PintaCore.Chrome.MainWindow, service);
+		AddinSetupService service = new (Mono.Addins.AddinManager.Registry);
+		AddinManagerDialog dialog = new (PintaCore.Chrome.MainWindow, service);
 		dialog.Show ();
 	}
 }

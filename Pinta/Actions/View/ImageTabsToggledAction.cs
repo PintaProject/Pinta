@@ -30,17 +30,15 @@ namespace Pinta.Actions;
 
 internal sealed class ImageTabsToggledAction : IActionHandler
 {
-	#region IActionHandler Members
-	public void Initialize ()
+	void IActionHandler.Initialize ()
 	{
 		PintaCore.Actions.View.ImageTabs.Toggled += Activated;
 	}
 
-	public void Uninitialize ()
+	void IActionHandler.Uninitialize ()
 	{
 		PintaCore.Actions.View.ImageTabs.Toggled -= Activated;
 	}
-	#endregion
 
 	private void Activated (bool value)
 	{

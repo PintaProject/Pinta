@@ -27,24 +27,21 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using Gtk;
 using Pinta.Core;
 
 namespace Pinta.Actions;
 
 internal sealed class SaveDocumentImplmentationAction : IActionHandler
 {
-	#region IActionHandler Members
-	public void Initialize ()
+	void IActionHandler.Initialize ()
 	{
 		PintaCore.Actions.File.SaveDocument += Activated;
 	}
 
-	public void Uninitialize ()
+	void IActionHandler.Uninitialize ()
 	{
 		PintaCore.Actions.File.SaveDocument -= Activated;
 	}
-	#endregion
 
 	private void Activated (object? sender, DocumentCancelEventArgs e)
 	{
@@ -66,10 +63,10 @@ internal sealed class SaveDocumentImplmentationAction : IActionHandler
 	// been saved before.  Either way, we need to prompt for a filename.
 	private static bool SaveFileAs (Document document)
 	{
-		var fcd = FileChooserNative.New (
+		var fcd = Gtk.FileChooserNative.New (
 			Translations.GetString ("Save Image File"),
 			PintaCore.Chrome.MainWindow,
-			FileChooserAction.Save,
+			Gtk.FileChooserAction.Save,
 			Translations.GetString ("Save"),
 			Translations.GetString ("Cancel"));
 
@@ -85,7 +82,7 @@ internal sealed class SaveDocumentImplmentationAction : IActionHandler
 		}
 
 		// Add all the formats we support to the save dialog
-		var filetypes = new Dictionary<FileFilter, FormatDescriptor> ();
+		var filetypes = new Dictionary<Gtk.FileFilter, FormatDescriptor> ();
 		foreach (var format in PintaCore.ImageFormats.Formats) {
 
 			if (format.IsReadOnly ())
@@ -111,7 +108,7 @@ internal sealed class SaveDocumentImplmentationAction : IActionHandler
 
 		fcd.Filter = format_desc.Filter;
 
-		while (fcd.RunBlocking () == ResponseType.Accept) {
+		while (fcd.RunBlocking () == Gtk.ResponseType.Accept) {
 			var file = fcd.GetFile ()!;
 
 			// Note that we can't use file.GetDisplayName() because the file doesn't exist.
@@ -152,7 +149,7 @@ internal sealed class SaveDocumentImplmentationAction : IActionHandler
 		return false;
 	}
 
-	private static bool SaveFile (Document document, Gio.File? file, FormatDescriptor? format, Window parent)
+	private static bool SaveFile (Document document, Gio.File? file, FormatDescriptor? format, Gtk.Window parent)
 	{
 		file ??= document.File;
 

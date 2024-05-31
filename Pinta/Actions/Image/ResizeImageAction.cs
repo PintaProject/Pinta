@@ -31,23 +31,22 @@ namespace Pinta.Actions;
 
 internal sealed class ResizeImageAction : IActionHandler
 {
-	#region IActionHandler Members
-	public void Initialize ()
+	void IActionHandler.Initialize ()
 	{
 		PintaCore.Actions.Image.Resize.Activated += Activated;
 	}
 
-	public void Uninitialize ()
+	void IActionHandler.Uninitialize ()
 	{
 		PintaCore.Actions.Image.Resize.Activated -= Activated;
 	}
-	#endregion
 
 	private void Activated (object sender, EventArgs e)
 	{
-		var dialog = new ResizeImageDialog ();
+		ResizeImageDialog dialog = new ();
 
 		dialog.OnResponse += (_, args) => {
+
 			if (args.ResponseId == (int) Gtk.ResponseType.Ok)
 				dialog.SaveChanges ();
 
