@@ -29,7 +29,6 @@ using System.Collections.Immutable;
 using System.Diagnostics.CodeAnalysis;
 using System.Linq;
 using Cairo;
-using Gtk;
 using Pinta.Core;
 
 namespace Pinta.Gui.Widgets;
@@ -69,11 +68,10 @@ public sealed class ColorGradientWidget : Gtk.DrawingArea
 		get {
 			RectangleD rect = GetAllocation ();
 			return new (
-				x: rect.X + X_pad * rect.Width,
-				y: rect.Y + Y_pad * rect.Height,
-				width: (1 - 2 * X_pad) * rect.Width,
-				height: (1 - 2 * Y_pad) * rect.Height
-			);
+				X: rect.X + X_pad * rect.Width,
+				Y: rect.Y + Y_pad * rect.Height,
+				Width: (1 - 2 * X_pad) * rect.Width,
+				Height: (1 - 2 * Y_pad) * rect.Height);
 		}
 	}
 
@@ -107,20 +105,22 @@ public sealed class ColorGradientWidget : Gtk.DrawingArea
 	public int ValueIndex { get; private set; }
 
 	public int GetValue (int i)
-	{
-		return (int) vals[i];
-	}
+		=> (int) vals[i];
 
 	public void SetValue (int i, int val)
 	{
-		if ((int) vals[i] != val) {
-			vals[i] = val;
-			OnValueChanged (i);
-		}
+		if ((int) vals[i] == val) return;
+		vals[i] = val;
+		OnValueChanged (i);
 	}
 
 	private RectangleD GetAllocation ()
-		=> new (0, 0, GetAllocatedWidth (), GetAllocatedHeight ());
+		=> new (
+			0,
+			0,
+			GetAllocatedWidth (),
+			GetAllocatedHeight ()
+		);
 
 	private double GetYFromValue (double val)
 	{
@@ -211,8 +211,8 @@ public sealed class ColorGradientWidget : Gtk.DrawingArea
 	}
 
 	private void HandleMotionNotifyEvent (
-		EventControllerMotion controller,
-		EventControllerMotion.MotionSignalArgs args)
+		Gtk.EventControllerMotion controller,
+		Gtk.EventControllerMotion.MotionSignalArgs args)
 	{
 		PointI p = new (
 			X: (int) args.X,
@@ -238,7 +238,7 @@ public sealed class ColorGradientWidget : Gtk.DrawingArea
 	}
 
 	private void HandleLeaveNotifyEvent (
-		EventControllerMotion controller,
+		Gtk.EventControllerMotion controller,
 		EventArgs args)
 	{
 		if (!controller.GetCurrentEventState ().IsLeftMousePressed ())
@@ -248,8 +248,8 @@ public sealed class ColorGradientWidget : Gtk.DrawingArea
 	}
 
 	private void HandleButtonPressEvent (
-		GestureClick controller,
-		GestureClick.PressedSignalArgs args)
+		Gtk.GestureClick controller,
+		Gtk.GestureClick.PressedSignalArgs args)
 	{
 		int index = FindValueIndex ((int) args.Y);
 
@@ -258,8 +258,8 @@ public sealed class ColorGradientWidget : Gtk.DrawingArea
 	}
 
 	private void HandleButtonReleaseEvent (
-		GestureClick controller,
-		GestureClick.ReleasedSignalArgs args)
+		Gtk.GestureClick controller,
+		Gtk.GestureClick.ReleasedSignalArgs args)
 	{
 		ValueIndex = -1;
 	}
@@ -328,9 +328,9 @@ public sealed class ColorGradientWidget : Gtk.DrawingArea
 	{
 		// left triangle
 		ReadOnlySpan<PointD> points = stackalloc PointD[] {
-			new PointD (rect.X, y),
-			new PointD (rect.X - X_pad * rect.Width, y + Y_pad * rect.Height),
-			new PointD (rect.X - X_pad * rect.Width, y - Y_pad * rect.Height),
+			new (rect.X, y),
+			new (rect.X - X_pad * rect.Width, y + Y_pad * rect.Height),
+			new (rect.X - X_pad * rect.Width, y - Y_pad * rect.Height),
 		};
 
 		g.FillPolygonal (points, color);
