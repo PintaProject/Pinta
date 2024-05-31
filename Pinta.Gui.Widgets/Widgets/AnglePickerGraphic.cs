@@ -100,19 +100,19 @@ public sealed class AnglePickerGraphic : Gtk.DrawingArea
 		RectangleD rect = GetDrawBounds ();
 
 		double diameter = Math.Min (rect.Width, rect.Height);
-		double radius = (diameter / 2.0);
+		double radius = diameter / 2.0;
 
 		PointD center = new (rect.X + radius, rect.Y + radius);
 
-		double theta = (angle_value.Degrees * 2.0 * Math.PI) / 360.0;
+		RadiansAngle theta = angle_value.ToRadians ();
 
 		RectangleD ellipseRect = new (0, 0, diameter, diameter);
 
 		double endPointRadius = radius - 2;
 
 		PointD endPoint = new (
-			X: (float) (center.X + (endPointRadius * Math.Cos (theta))),
-			Y: (float) (center.Y - (endPointRadius * Math.Sin (theta)))
+			X: (float) (center.X + (endPointRadius * Math.Cos (theta.Radians))),
+			Y: (float) (center.Y - (endPointRadius * Math.Sin (theta.Radians)))
 		);
 
 		const float gripSize = 2.5f;
