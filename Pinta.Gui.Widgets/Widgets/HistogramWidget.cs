@@ -69,7 +69,7 @@ public sealed class HistogramWidget : Gtk.DrawingArea
 		QueueDraw ();
 	}
 
-	private static void CheckPoint (RectangleD rect, ref PointD point)
+	private static PointD CheckedPoint (RectangleD rect, PointD point)
 	{
 		if (point.X < rect.X)
 			point = point with { X = rect.X };
@@ -80,18 +80,25 @@ public sealed class HistogramWidget : Gtk.DrawingArea
 			point = point with { Y = rect.Y };
 		else if (point.Y > rect.Y + rect.Height)
 			point = point with { Y = rect.Y + rect.Height };
+
+		return point;
 	}
 
-	private void DrawChannel (Context g, ColorBgra color, int channel, long max, float mean)
+	private void DrawChannel (
+		Context g,
+		ColorBgra color,
+		int channel,
+		long max,
+		float mean)
 	{
-		var rect = new RectangleD (0, 0, GetAllocatedWidth (), GetAllocatedHeight ());
+		RectangleD rect = new (0, 0, GetAllocatedWidth (), GetAllocatedHeight ());
 
-		var l = (int) rect.X;
-		var t = (int) rect.Y;
-		var r = (int) (rect.X + rect.Width);
-		var b = (int) (rect.Y + rect.Height);
+		int l = (int) rect.X;
+		int t = (int) rect.Y;
+		int r = (int) (rect.X + rect.Width);
+		int b = (int) (rect.Y + rect.Height);
 
-		var entries = Histogram.Entries;
+		int entryCount = Histogram.Entries;
 		var hist = Histogram.HistogramValues[channel];
 
 		++max;
@@ -102,37 +109,39 @@ public sealed class HistogramWidget : Gtk.DrawingArea
 		if (!FlipVertical)
 			Utility.Swap (ref t, ref b);
 
-		var points = new PointD[entries + 2];
+		var points = new PointD[entryCount + 2];
 
-		points[entries] = new PointD (X: Utility.Lerp<double> (l, r, -1), Y: Utility.Lerp<double> (t, b, 20));
-		points[entries + 1] = new PointD (X: Utility.Lerp<double> (l, r, -1), Y: Utility.Lerp<double> (b, t, 20));
+		points[entryCount] = new PointD (X: Utility.Lerp<double> (l, r, -1), Y: Utility.Lerp<double> (t, b, 20));
+		points[entryCount + 1] = new PointD (X: Utility.Lerp<double> (l, r, -1), Y: Utility.Lerp<double> (b, t, 20));
 
-		for (var i = 0; i < entries; i += entries - 1) {
+		for (int i = 0; i < entryCount; i += entryCount - 1) {
+
 			points[i] = new PointD (
 				X: Utility.Lerp (l, r, hist[i] / (float) max),
-				Y: Utility.Lerp (t, b, i / (float) entries)
+				Y: Utility.Lerp (t, b, i / (float) entryCount)
 			);
 
-			CheckPoint (rect, ref points[i]);
+			points[i] = CheckedPoint (rect, points[i]);
 		}
 
-		var sum3 = hist[0] + hist[1];
+		long sum3 = hist[0] + hist[1];
 
-		for (var i = 1; i < entries - 1; ++i) {
+		for (int i = 1; i < entryCount - 1; ++i) {
+
 			sum3 += hist[i + 1];
 
 			points[i] = new PointD (
 				X: Utility.Lerp (l, r, sum3 / (float) (max * 3.1f)),
-				Y: Utility.Lerp (t, b, i / (float) entries)
+				Y: Utility.Lerp (t, b, i / (float) entryCount)
 			);
 
-			CheckPoint (rect, ref points[i]);
+			points[i] = CheckedPoint (rect, points[i]);
 			sum3 -= hist[i - 1];
 		}
 
-		var intensity = selected[channel] ? (byte) 96 : (byte) 32;
-		var pen_color = ColorBgra.Blend (ColorBgra.Black, color, intensity);
-		var brush_color = color;
+		byte intensity = selected[channel] ? (byte) 96 : (byte) 32;
+		ColorBgra pen_color = ColorBgra.Blend (ColorBgra.Black, color, intensity);
+		ColorBgra brush_color = color;
 
 		brush_color.A = intensity;
 
@@ -146,12 +155,12 @@ public sealed class HistogramWidget : Gtk.DrawingArea
 
 	private void Draw (Context g)
 	{
-		var max = Histogram.GetMax ();
+		long max = Histogram.GetMax ();
 		var mean = Histogram.GetMean ();
 
-		var channels = Histogram.Channels;
+		int channelCount = Histogram.Channels;
 
-		for (var i = 0; i < channels; ++i)
+		for (int i = 0; i < channelCount; ++i)
 			DrawChannel (g, Histogram.GetVisualColor (i), i, max, mean[i]);
 	}
 }
