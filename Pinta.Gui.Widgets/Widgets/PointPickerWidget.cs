@@ -51,13 +51,13 @@ public sealed class PointPickerWidget : Box
 		adjusted_initial_point = AdjustToWidgetSize (initialPoint);
 
 		// Section label + line
-		Box hbox1 = new () { Spacing = spacing };
-		hbox1.SetOrientation (Orientation.Horizontal);
+		Box labelAndTitle = new () { Spacing = spacing };
+		labelAndTitle.SetOrientation (Orientation.Horizontal);
 
 
 		label = new Label ();
 		label.AddCssClass (AdwaitaStyles.Title4);
-		hbox1.Append (label);
+		labelAndTitle.Append (label);
 
 		// PointPickerGraphic
 		Box hbox2 = new () { Spacing = spacing };
@@ -70,7 +70,7 @@ public sealed class PointPickerWidget : Box
 		hbox2.Append (pointpickergraphic1);
 
 		// X spinner
-		var label2 = Gtk.Label.New ("X:");
+		var xLabel = Gtk.Label.New ("X:");
 
 		spin_x = SpinButton.NewWithRange (0, 100, 1);
 		spin_x.CanFocus = true;
@@ -91,12 +91,12 @@ public sealed class PointPickerWidget : Box
 		Box x_hbox = new () { Spacing = spacing };
 		x_hbox.SetOrientation (Orientation.Horizontal);
 
-		x_hbox.Append (label2);
+		x_hbox.Append (xLabel);
 		x_hbox.Append (spin_x);
 		x_hbox.Append (button1);
 
 		// Y spinner
-		var label3 = Gtk.Label.New ("Y:");
+		var yLabel = Gtk.Label.New ("Y:");
 
 		spin_y = SpinButton.NewWithRange (0, 100, 1);
 		spin_y.CanFocus = true;
@@ -117,7 +117,7 @@ public sealed class PointPickerWidget : Box
 		Box y_hbox = new () { Spacing = spacing };
 		y_hbox.SetOrientation (Orientation.Horizontal);
 
-		y_hbox.Append (label3);
+		y_hbox.Append (yLabel);
 		y_hbox.Append (spin_y);
 		y_hbox.Append (button2);
 
@@ -132,7 +132,7 @@ public sealed class PointPickerWidget : Box
 		// Main layout
 		SetOrientation (Orientation.Vertical);
 		Spacing = spacing;
-		Append (hbox1);
+		Append (labelAndTitle);
 		Append (hbox2);
 
 		// ---------------

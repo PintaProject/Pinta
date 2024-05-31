@@ -35,30 +35,35 @@ public sealed class HScaleSpinButtonWidget : Box
 	private readonly Scale hscale;
 	private readonly SpinButton spin;
 	private readonly Button button;
-	private readonly Label label;
+	private readonly Label title_label;
 
 	private int max_value;
 	private int min_value;
 	private int digits_value;
 	private double inc_value;
 
-	public HScaleSpinButtonWidget ()
+	private readonly double initial_value;
+
+	public HScaleSpinButtonWidget (double initialValue)
 	{
 		// Build
 
 		const int spacing = 6;
 
-		// Section label + line
-		var hbox1 = new Box () { Spacing = spacing };
-		hbox1.SetOrientation (Orientation.Horizontal);
+		initial_value = initialValue;
 
-		label = new Label ();
-		label.AddCssClass (AdwaitaStyles.Title4);
-		hbox1.Append (label);
+		// Section label + line
+		Box labelAndLine = new () { Spacing = spacing };
+		labelAndLine.SetOrientation (Orientation.Horizontal);
+		Label titleLabel = new ();
+		titleLabel.AddCssClass (AdwaitaStyles.Title4);
+		labelAndLine.Append (titleLabel);
+
+		title_label = titleLabel;
 
 		// Slider + spinner + reset button
-		var hbox2 = new Box () { Spacing = spacing };
-		hbox2.SetOrientation (Orientation.Horizontal);
+		Box controls = new () { Spacing = spacing };
+		controls.SetOrientation (Orientation.Horizontal);
 
 		hscale = Scale.NewWithRange (Orientation.Horizontal, 2, 64, 1);
 		hscale.CanFocus = true;
@@ -68,7 +73,7 @@ public sealed class HScaleSpinButtonWidget : Box
 		hscale.Hexpand = true;
 		hscale.Halign = Align.Fill;
 
-		hbox2.Append (hscale);
+		controls.Append (hscale);
 
 		spin = SpinButton.NewWithRange (0, 100, 1);
 		spin.CanFocus = true;
@@ -76,7 +81,7 @@ public sealed class HScaleSpinButtonWidget : Box
 		spin.Numeric = true;
 		spin.Adjustment!.PageIncrement = 10;
 
-		hbox2.Append (spin);
+		controls.Append (spin);
 
 		// Reset button
 		button = new Button {
@@ -86,13 +91,13 @@ public sealed class HScaleSpinButtonWidget : Box
 			CanFocus = true,
 			UseUnderline = true
 		};
-		hbox2.Append (button);
+		controls.Append (button);
 
 		// Main layout
 		SetOrientation (Orientation.Vertical);
 		Spacing = spacing;
-		Append (hbox1);
-		Append (hbox2);
+		Append (labelAndLine);
+		Append (controls);
 
 		// ---------------
 
@@ -100,17 +105,15 @@ public sealed class HScaleSpinButtonWidget : Box
 		spin.OnValueChanged += HandleSpinValueChanged;
 		button.OnClicked += HandleButtonClicked;
 
-		OnRealize += (_, _) => Value = DefaultValue;
+		OnRealize += (_, _) => Value = initialValue;
 
 		spin.SetActivatesDefault (true);
 	}
 
 	public string Label {
-		get => label.GetText ();
-		set => label.SetText (value);
+		get => title_label.GetText ();
+		set => title_label.SetText (value);
 	}
-
-	public double DefaultValue { get; set; }
 
 	public int MaximumValue {
 		get => max_value;
@@ -180,7 +183,7 @@ public sealed class HScaleSpinButtonWidget : Box
 
 	private void HandleButtonClicked (object? sender, EventArgs e)
 	{
-		Value = DefaultValue;
+		Value = initial_value;
 	}
 
 	private void OnValueChanged () => ValueChanged?.Invoke (this, EventArgs.Empty);

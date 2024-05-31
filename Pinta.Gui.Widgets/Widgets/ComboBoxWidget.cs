@@ -33,48 +33,58 @@ namespace Pinta.Gui.Widgets;
 
 public sealed class ComboBoxWidget : Box
 {
-	private readonly Label label;
-	private readonly ComboBoxText combobox;
+	private readonly Label title_label;
+	private readonly ComboBoxText combo_box;
 
 	public ComboBoxWidget (IEnumerable<string> entries)
 	{
 		const int spacing = 6;
 
 		// Section label + line
-		var hbox1 = new Box { Spacing = spacing };
-		hbox1.SetOrientation (Orientation.Horizontal);
-
-		label = new Label ();
-		label.AddCssClass (AdwaitaStyles.Title4);
-		hbox1.Append (label);
+		Label titleLabel = new ();
+		titleLabel.AddCssClass (AdwaitaStyles.Title4);
+		Box labelAndLine = new () { Spacing = spacing };
+		labelAndLine.SetOrientation (Orientation.Horizontal);
+		labelAndLine.Append (titleLabel);
 
 		// Combobox
-		combobox = new ComboBoxText ();
+		ComboBoxText comboBox = CreateComboBox (entries);
 
-		// Main layout
+		// Storing references
+		title_label = titleLabel;
+		combo_box = comboBox;
+
 		// Main layout
 		SetOrientation (Orientation.Vertical);
 		Spacing = spacing;
-		Append (hbox1);
-		Append (combobox);
+		Append (labelAndLine);
+		Append (comboBox);
+	}
+
+	private ComboBoxText CreateComboBox (IEnumerable<string> entries)
+	{
+		ComboBoxText result = new ();
 
 		foreach (var s in entries)
-			combobox.AppendText (s);
+			result.AppendText (s);
 
-		combobox.OnChanged += (_, _) => Changed?.Invoke (this, EventArgs.Empty);
+		result.OnChanged += (_, _) => Changed?.Invoke (this, EventArgs.Empty);
+
+		return result;
 	}
 
 	public string Label {
-		get => label.GetText ();
-		set => label.SetText (value);
+		get => title_label.GetText ();
+		set => title_label.SetText (value);
 	}
 
 	public int Active {
-		get => combobox.Active;
-		set => combobox.Active = value;
+		get => combo_box.Active;
+		set => combo_box.Active = value;
 	}
 
-	public string ActiveText => combobox.GetActiveText ()!;
+	public string ActiveText
+		=> combo_box.GetActiveText ()!;
 
 	public event EventHandler? Changed;
 }
