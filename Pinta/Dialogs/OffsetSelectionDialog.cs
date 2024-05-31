@@ -28,45 +28,44 @@ using Gtk;
 using Pinta.Core;
 using Pinta.Gui.Widgets;
 
-namespace Pinta
+namespace Pinta;
+
+public sealed class OffsetSelectionDialog : Dialog
 {
-	public class OffsetSelectionDialog : Dialog
+	private readonly HScaleSpinButtonWidget offset_spinbox;
+
+	public int Offset => offset_spinbox.ValueAsInt;
+
+	public OffsetSelectionDialog ()
 	{
-		private HScaleSpinButtonWidget offset_spinbox;
+		Title = Translations.GetString ("Offset Selection");
+		TransientFor = PintaCore.Chrome.MainWindow;
+		Modal = true;
+		this.AddCancelOkButtons ();
+		this.SetDefaultResponse (ResponseType.Ok);
 
-		public int Offset => offset_spinbox.ValueAsInt;
+		Resizable = false;
 
-		public OffsetSelectionDialog ()
-		{
-			Title = Translations.GetString ("Offset Selection");
-			TransientFor = PintaCore.Chrome.MainWindow;
-			Modal = true;
-			this.AddCancelOkButtons ();
-			this.SetDefaultResponse (ResponseType.Ok);
+		var content_area = this.GetContentAreaBox ();
+		content_area.WidthRequest = 400;
+		content_area.SetAllMargins (6);
+		content_area.Spacing = 6;
 
-			Resizable = false;
+		offset_spinbox = new HScaleSpinButtonWidget {
+			Label = Translations.GetString ("Offset")
+		};
+		InitSpinBox (offset_spinbox);
+		content_area.Append (offset_spinbox);
 
-			var content_area = this.GetContentAreaBox ();
-			content_area.WidthRequest = 400;
-			content_area.SetAllMargins (6);
-			content_area.Spacing = 6;
+		DefaultWidth = 400;
+		DefaultHeight = 100;
+	}
 
-			offset_spinbox = new HScaleSpinButtonWidget {
-				Label = Translations.GetString ("Offset")
-			};
-			InitSpinBox (offset_spinbox);
-			content_area.Append (offset_spinbox);
-
-			DefaultWidth = 400;
-			DefaultHeight = 100;
-		}
-
-		private static void InitSpinBox (HScaleSpinButtonWidget spinbox)
-		{
-			spinbox.DefaultValue = 0;
-			spinbox.MaximumValue = 100;
-			spinbox.MinimumValue = -100;
-		}
+	private static void InitSpinBox (HScaleSpinButtonWidget spinbox)
+	{
+		spinbox.DefaultValue = 0;
+		spinbox.MaximumValue = 100;
+		spinbox.MinimumValue = -100;
 	}
 }
 
