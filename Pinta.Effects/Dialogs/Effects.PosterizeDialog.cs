@@ -25,7 +25,6 @@
 // THE SOFTWARE.
 
 using System;
-using Gtk;
 using Pinta.Core;
 using Pinta.Gui.Widgets;
 
@@ -36,64 +35,60 @@ public sealed class PosterizeDialog : Gtk.Dialog
 	private readonly HScaleSpinButtonWidget red_spinbox;
 	private readonly HScaleSpinButtonWidget green_spinbox;
 	private readonly HScaleSpinButtonWidget blue_spinbox;
-	private readonly CheckButton link_button;
+	private readonly Gtk.CheckButton link_button;
 
 	public int Red => red_spinbox.ValueAsInt;
-
 	public int Green => green_spinbox.ValueAsInt;
-
 	public int Blue => blue_spinbox.ValueAsInt;
 
 	public PosterizeData? EffectData { get; set; }
 
 	public PosterizeDialog (IChromeService chrome)
 	{
-		Title = Translations.GetString ("Posterize");
-		TransientFor = chrome.MainWindow;
-		Modal = true;
-		this.AddCancelOkButtons ();
-		this.SetDefaultResponse (ResponseType.Ok);
-
-		Resizable = false;
-
-		var content_area = this.GetContentAreaBox ();
-		content_area.WidthRequest = 400;
-		content_area.SetAllMargins (6);
-		content_area.Spacing = 6;
-
-		const int initial_channels_value = 16;
-
-		red_spinbox = new HScaleSpinButtonWidget (initial_channels_value) {
-			Label = Translations.GetString ("Red"),
-			MaximumValue = 64,
-			MinimumValue = 2,
-		};
-		content_area.Append (red_spinbox);
-
-		green_spinbox = new HScaleSpinButtonWidget (initial_channels_value) {
-			Label = Translations.GetString ("Green"),
-			MaximumValue = 64,
-			MinimumValue = 2,
-		};
-		content_area.Append (green_spinbox);
-
-		blue_spinbox = new HScaleSpinButtonWidget (initial_channels_value) {
-			Label = Translations.GetString ("Blue"),
-			MaximumValue = 64,
-			MinimumValue = 2,
-		};
-		content_area.Append (blue_spinbox);
-
-		link_button = CheckButton.NewWithLabel (Translations.GetString ("Linked"));
-		link_button.Active = true;
-		content_area.Append (link_button);
-
 		DefaultWidth = 400;
 		DefaultHeight = 300;
 
-		red_spinbox.ValueChanged += HandleValueChanged;
-		green_spinbox.ValueChanged += HandleValueChanged;
-		blue_spinbox.ValueChanged += HandleValueChanged;
+		Title = Translations.GetString ("Posterize");
+		TransientFor = chrome.MainWindow;
+		Modal = true;
+
+		Resizable = false;
+
+		this.AddCancelOkButtons ();
+		this.SetDefaultResponse (Gtk.ResponseType.Ok);
+
+		red_spinbox = CreateChannelSpinBox (Translations.GetString ("Red"));
+		green_spinbox = CreateChannelSpinBox (Translations.GetString ("Green"));
+		blue_spinbox = CreateChannelSpinBox (Translations.GetString ("Blue"));
+		link_button = CreateLinkButton ();
+
+		Gtk.Box content_area = this.GetContentAreaBox ();
+		content_area.WidthRequest = 400;
+		content_area.SetAllMargins (6);
+		content_area.Spacing = 6;
+		content_area.Append (red_spinbox);
+		content_area.Append (green_spinbox);
+		content_area.Append (blue_spinbox);
+		content_area.Append (link_button);
+	}
+
+	private static Gtk.CheckButton CreateLinkButton ()
+	{
+		var result = Gtk.CheckButton.NewWithLabel (Translations.GetString ("Linked"));
+		result.Active = true;
+		return result;
+	}
+
+	private HScaleSpinButtonWidget CreateChannelSpinBox (string label)
+	{
+		const int initial_channel_value = 16;
+		HScaleSpinButtonWidget spinner = new (initial_channel_value) {
+			Label = label,
+			MaximumValue = 64,
+			MinimumValue = 2,
+		};
+		spinner.ValueChanged += HandleValueChanged;
+		return spinner;
 	}
 
 	private void HandleValueChanged (object? sender, EventArgs e)
