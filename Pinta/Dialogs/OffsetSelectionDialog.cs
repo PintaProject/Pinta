@@ -61,8 +61,6 @@ public sealed class OffsetSelectionDialog : Gtk.Dialog
 		content_area.SetAllMargins (6);
 		content_area.Spacing = 6;
 		content_area.Append (offset_spinbox);
-
-
 	}
 }
 
