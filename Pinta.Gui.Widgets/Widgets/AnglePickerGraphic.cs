@@ -46,8 +46,7 @@ public sealed class AnglePickerGraphic : Gtk.DrawingArea
 	public DegreesAngle Value {
 		get => angle_value;
 		set {
-			if (angle_value == value)
-				return;
+			if (angle_value == value) return;
 			angle_value = value;
 			OnValueChanged ();
 		}
@@ -81,7 +80,7 @@ public sealed class AnglePickerGraphic : Gtk.DrawingArea
 		static DegreesAngle GetConstrainedAngle (DegreesAngle baseAngle)
 		{
 			const double constraint_angle = 15.0;
-			double multiple = Math.Round(baseAngle.Degrees / constraint_angle);
+			double multiple = Math.Round (baseAngle.Degrees / constraint_angle);
 			return new (multiple * constraint_angle);
 		}
 	}
