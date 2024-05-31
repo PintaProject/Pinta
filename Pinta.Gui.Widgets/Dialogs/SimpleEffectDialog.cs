@@ -330,10 +330,12 @@ public sealed class SimpleEffectDialog : Gtk.Dialog
 
 	private PointPickerWidget CreateOffsetPicker (string caption, EffectData effectData, MemberSettings settings)
 	{
-		var widget = new PointPickerWidget { Label = caption };
+		PointI initialPoint =
+			(settings.reflector.GetValue (effectData) is PointI p)
+			? p
+			: default;
 
-		if (settings.reflector.GetValue (effectData) is PointD p)
-			widget.DefaultOffset = p;
+		PointPickerWidget widget = new (initialPoint) { Label = caption };
 
 		widget.PointPicked += (_, _) => SetAndNotify (settings.reflector, effectData, widget.Offset);
 
@@ -342,10 +344,12 @@ public sealed class SimpleEffectDialog : Gtk.Dialog
 
 	private PointPickerWidget CreatePointPicker (string caption, EffectData effectData, MemberSettings settings)
 	{
-		var widget = new PointPickerWidget { Label = caption };
+		PointI initialPoint =
+			(settings.reflector.GetValue (effectData) is PointI p)
+			? p
+			: default;
 
-		if (settings.reflector.GetValue (effectData) is PointI p)
-			widget.DefaultPoint = p;
+		PointPickerWidget widget = new (initialPoint) { Label = caption };
 
 		widget.PointPicked += (_, _) => SetAndNotify (settings.reflector, effectData, widget.Point);
 
@@ -354,10 +358,12 @@ public sealed class SimpleEffectDialog : Gtk.Dialog
 
 	private AnglePickerWidget CreateAnglePicker (string caption, EffectData effectData, MemberSettings settings)
 	{
-		var widget = new AnglePickerWidget { Label = caption };
+		DegreesAngle initialAngle =
+			(settings.reflector.GetValue (effectData) is DegreesAngle d)
+			? d
+			: default;
 
-		if (settings.reflector.GetValue (effectData) is DegreesAngle d)
-			widget.DefaultValue = d;
+		AnglePickerWidget widget = new (initialAngle) { Label = caption };
 
 		widget.ValueChanged += (_, _) => {
 			DelayedUpdate (() => {
