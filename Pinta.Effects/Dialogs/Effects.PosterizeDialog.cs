@@ -61,22 +61,27 @@ public sealed class PosterizeDialog : Gtk.Dialog
 		content_area.SetAllMargins (6);
 		content_area.Spacing = 6;
 
-		red_spinbox = new HScaleSpinButtonWidget {
-			Label = Translations.GetString ("Red")
+		const int initial_channels_value = 16;
+
+		red_spinbox = new HScaleSpinButtonWidget (initial_channels_value) {
+			Label = Translations.GetString ("Red"),
+			MaximumValue = 64,
+			MinimumValue = 2,
 		};
-		InitSpinBox (red_spinbox);
 		content_area.Append (red_spinbox);
 
-		green_spinbox = new HScaleSpinButtonWidget {
-			Label = Translations.GetString ("Green")
+		green_spinbox = new HScaleSpinButtonWidget (initial_channels_value) {
+			Label = Translations.GetString ("Green"),
+			MaximumValue = 64,
+			MinimumValue = 2,
 		};
-		InitSpinBox (green_spinbox);
 		content_area.Append (green_spinbox);
 
-		blue_spinbox = new HScaleSpinButtonWidget {
-			Label = Translations.GetString ("Blue")
+		blue_spinbox = new HScaleSpinButtonWidget (initial_channels_value) {
+			Label = Translations.GetString ("Blue"),
+			MaximumValue = 64,
+			MinimumValue = 2,
 		};
-		InitSpinBox (blue_spinbox);
 		content_area.Append (blue_spinbox);
 
 		link_button = CheckButton.NewWithLabel (Translations.GetString ("Linked"));
@@ -93,9 +98,7 @@ public sealed class PosterizeDialog : Gtk.Dialog
 
 	private void HandleValueChanged (object? sender, EventArgs e)
 	{
-		var widget = sender as HScaleSpinButtonWidget;
-
-		if (widget is null)
+		if (sender is not HScaleSpinButtonWidget widget)
 			return;
 
 		if (link_button.Active)
@@ -115,12 +118,5 @@ public sealed class PosterizeDialog : Gtk.Dialog
 
 		// Only fire event once, even if all properties have changed.
 		EffectData.FirePropertyChanged ("_all_");
-	}
-
-	private static void InitSpinBox (HScaleSpinButtonWidget spinbox)
-	{
-		spinbox.DefaultValue = 16;
-		spinbox.MaximumValue = 64;
-		spinbox.MinimumValue = 2;
 	}
 }
