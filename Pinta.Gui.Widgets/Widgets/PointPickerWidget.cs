@@ -33,9 +33,9 @@ namespace Pinta.Gui.Widgets;
 public sealed class PointPickerWidget : Box
 {
 	private readonly Label label;
-	private readonly PointPickerGraphic pointpickergraphic1;
-	private readonly Button button1;
-	private readonly Button button2;
+	private readonly PointPickerGraphic point_picker_graphic;
+	private readonly Button button_reset_x;
+	private readonly Button button_reset_y;
 	private readonly SpinButton spin_x;
 	private readonly SpinButton spin_y;
 	private readonly PointI adjusted_initial_point;
@@ -60,14 +60,14 @@ public sealed class PointPickerWidget : Box
 		labelAndTitle.Append (label);
 
 		// PointPickerGraphic
-		Box hbox2 = new () { Spacing = spacing };
-		hbox2.SetOrientation (Orientation.Horizontal);
+		Box pointPickerBox = new () { Spacing = spacing };
+		pointPickerBox.SetOrientation (Orientation.Horizontal);
 
-		pointpickergraphic1 = new PointPickerGraphic {
+		point_picker_graphic = new PointPickerGraphic {
 			Hexpand = true,
 			Halign = Align.Center
 		};
-		hbox2.Append (pointpickergraphic1);
+		pointPickerBox.Append (point_picker_graphic);
 
 		// X spinner
 		var xLabel = Gtk.Label.New ("X:");
@@ -79,7 +79,7 @@ public sealed class PointPickerWidget : Box
 		spin_x.Adjustment!.PageIncrement = 10;
 		spin_x.Valign = Align.Start;
 
-		button1 = new Button {
+		button_reset_x = new Button {
 			IconName = Resources.StandardIcons.GoPrevious,
 			WidthRequest = 28,
 			HeightRequest = 24,
@@ -88,12 +88,12 @@ public sealed class PointPickerWidget : Box
 			Valign = Align.Start
 		};
 
-		Box x_hbox = new () { Spacing = spacing };
-		x_hbox.SetOrientation (Orientation.Horizontal);
+		Box xControls = new () { Spacing = spacing };
+		xControls.SetOrientation (Orientation.Horizontal);
 
-		x_hbox.Append (xLabel);
-		x_hbox.Append (spin_x);
-		x_hbox.Append (button1);
+		xControls.Append (xLabel);
+		xControls.Append (spin_x);
+		xControls.Append (button_reset_x);
 
 		// Y spinner
 		var yLabel = Gtk.Label.New ("Y:");
@@ -105,7 +105,7 @@ public sealed class PointPickerWidget : Box
 		spin_y.Adjustment!.PageIncrement = 10;
 		spin_y.Valign = Align.Start;
 
-		button2 = new Button {
+		button_reset_y = new Button {
 			IconName = Resources.StandardIcons.GoPrevious,
 			WidthRequest = 28,
 			HeightRequest = 24,
@@ -114,26 +114,26 @@ public sealed class PointPickerWidget : Box
 			Valign = Align.Start
 		};
 
-		Box y_hbox = new () { Spacing = spacing };
-		y_hbox.SetOrientation (Orientation.Horizontal);
+		Box yControls = new () { Spacing = spacing };
+		yControls.SetOrientation (Orientation.Horizontal);
 
-		y_hbox.Append (yLabel);
-		y_hbox.Append (spin_y);
-		y_hbox.Append (button2);
+		yControls.Append (yLabel);
+		yControls.Append (spin_y);
+		yControls.Append (button_reset_y);
 
 		// Vbox for spinners
-		Box spin_vbox = new () { Spacing = spacing };
-		spin_vbox.SetOrientation (Orientation.Vertical);
-		spin_vbox.Append (x_hbox);
-		spin_vbox.Append (y_hbox);
+		Box spinnersBox = new () { Spacing = spacing };
+		spinnersBox.SetOrientation (Orientation.Vertical);
+		spinnersBox.Append (xControls);
+		spinnersBox.Append (yControls);
 
-		hbox2.Append (spin_vbox);
+		pointPickerBox.Append (spinnersBox);
 
 		// Main layout
 		SetOrientation (Orientation.Vertical);
 		Spacing = spacing;
 		Append (labelAndTitle);
-		Append (hbox2);
+		Append (pointPickerBox);
 
 		// ---------------
 
@@ -162,11 +162,13 @@ public sealed class PointPickerWidget : Box
 	public PointI Point {
 		get => new (spin_x.GetValueAsInt (), spin_y.GetValueAsInt ());
 		set {
-			if (value.X != spin_x.GetValueAsInt () || value.Y != spin_y.GetValueAsInt ()) {
-				spin_x.Value = value.X;
-				spin_y.Value = value.Y;
-				OnPointPicked ();
-			}
+			if (value.X == spin_x.GetValueAsInt () && value.Y == spin_y.GetValueAsInt ())
+				return;
+
+			spin_x.Value = value.X;
+			spin_y.Value = value.Y;
+
+			OnPointPicked ();
 		}
 	}
 
@@ -178,26 +180,25 @@ public sealed class PointPickerWidget : Box
 
 	private void HandlePointpickergraphic1PositionChanged (object? sender, EventArgs e)
 	{
-		if (Point != pointpickergraphic1.Position) {
-			active = false;
-			spin_x.Value = pointpickergraphic1.Position.X;
-			spin_y.Value = pointpickergraphic1.Position.Y;
-			active = true;
-			OnPointPicked ();
-		}
+		if (Point == point_picker_graphic.Position) return;
+		active = false;
+		spin_x.Value = point_picker_graphic.Position.X;
+		spin_y.Value = point_picker_graphic.Position.Y;
+		active = true;
+		OnPointPicked ();
 	}
 
 	private void HandleSpinXValueChanged (object? sender, EventArgs e)
 	{
 		if (!active) return;
-		pointpickergraphic1.Position = Point;
+		point_picker_graphic.Position = Point;
 		OnPointPicked ();
 	}
 
 	private void HandleSpinYValueChanged (object? sender, EventArgs e)
 	{
 		if (!active) return;
-		pointpickergraphic1.Position = Point;
+		point_picker_graphic.Position = Point;
 		OnPointPicked ();
 	}
 
@@ -207,19 +208,19 @@ public sealed class PointPickerWidget : Box
 
 		spin_x.OnValueChanged += HandleSpinXValueChanged;
 		spin_y.OnValueChanged += HandleSpinYValueChanged;
-		pointpickergraphic1.PositionChanged += HandlePointpickergraphic1PositionChanged;
-		button1.OnClicked += HandleButton1Pressed;
-		button2.OnClicked += HandleButton2Pressed;
+		point_picker_graphic.PositionChanged += HandlePointpickergraphic1PositionChanged;
+		button_reset_x.OnClicked += ResetX;
+		button_reset_y.OnClicked += ResetY;
 
-		pointpickergraphic1.Init (adjusted_initial_point);
+		point_picker_graphic.Init (adjusted_initial_point);
 	}
 
-	private void HandleButton1Pressed (object? sender, EventArgs e)
+	private void ResetX (object? sender, EventArgs e)
 	{
 		spin_x.Value = adjusted_initial_point.X;
 	}
 
-	private void HandleButton2Pressed (object? sender, EventArgs e)
+	private void ResetY (object? sender, EventArgs e)
 	{
 		spin_y.Value = adjusted_initial_point.Y;
 	}
