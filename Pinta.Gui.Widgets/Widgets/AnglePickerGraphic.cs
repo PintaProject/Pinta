@@ -67,14 +67,9 @@ public sealed class AnglePickerGraphic : Gtk.DrawingArea
 	private DegreesAngle CalculateNewAngle (PointD pt, bool constrainAngle)
 	{
 		RectangleD rect = GetDrawBounds ();
-
 		double diameter = Math.Min (rect.Width, rect.Height);
 		PointD center = new (rect.X + diameter * 0.5, rect.Y + diameter * 0.5);
-
-		PointD delta = new (
-			X: pt.X - center.X,
-			Y: pt.Y - center.Y);
-
+		PointD delta = pt - center;
 		RadiansAngle theta = new (Math.Atan2 (-delta.Y, delta.X));
 		DegreesAngle newAngle = theta.ToDegrees ();
 
@@ -86,16 +81,8 @@ public sealed class AnglePickerGraphic : Gtk.DrawingArea
 		static DegreesAngle GetConstrainedAngle (DegreesAngle baseAngle)
 		{
 			const double constraint_angle = 15.0;
-
-			double multiple = baseAngle.Degrees / constraint_angle;
-			double top = Math.Floor (multiple);
-			double topDelta = Math.Abs (top - multiple);
-			double bottom = Math.Ceiling (multiple);
-			double bottomDelta = Math.Abs (bottom - multiple);
-
-			double bestMultiple = (bottomDelta < topDelta) ? bottom : top;
-
-			return new (bestMultiple * constraint_angle);
+			double multiple = Math.Round(baseAngle.Degrees / constraint_angle);
+			return new (multiple * constraint_angle);
 		}
 	}
 
