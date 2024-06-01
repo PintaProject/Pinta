@@ -30,7 +30,6 @@ using System.Linq;
 using System.Runtime.InteropServices;
 using System.Threading.Tasks;
 using GObject;
-using Gtk;
 
 namespace Pinta.Core;
 
@@ -63,7 +62,10 @@ public static partial class GtkExtensions
 
 	static GtkExtensions ()
 	{
-		NativeImportResolver.RegisterLibrary (GtkLibraryName,
+		NativeImportResolver.RegisterLibrary (
+
+			library: GtkLibraryName,
+
 			windowsLibraryName: "libgtk-4-1.dll",
 			linuxLibraryName: "libgtk-4.so.1",
 			osxLibraryName: "libgtk-4.1.dylib"
@@ -96,8 +98,8 @@ public static partial class GtkExtensions
 	/// </summary>
 	public static Gtk.Box CreateToolBar ()
 	{
-		var toolbar = new Box () { Spacing = 0 };
-		toolbar.SetOrientation (Orientation.Horizontal);
+		Gtk.Box toolbar = new () { Spacing = 0 };
+		toolbar.SetOrientation (Gtk.Orientation.Horizontal);
 		toolbar.AddCssClass (AdwaitaStyles.Toolbar);
 		return toolbar;
 	}
@@ -107,14 +109,14 @@ public static partial class GtkExtensions
 	/// </summary>
 	public static void RemoveAll (this Gtk.Box box)
 	{
-		while (box.GetFirstChild () is Widget child)
+		while (box.GetFirstChild () is Gtk.Widget child)
 			box.Remove (child);
 	}
 
 	public static Gtk.Button CreateToolBarItem (this Command action, bool force_icon_only = false)
 	{
-		var label = action.ShortLabel ?? action.Label;
-		var button = new Button () {
+		string label = action.ShortLabel ?? action.Label;
+		Gtk.Button button = new () {
 			ActionName = action.FullName,
 			TooltipText = action.Tooltip ?? action.Label,
 		};
@@ -139,14 +141,18 @@ public static partial class GtkExtensions
 
 	public static Gtk.Separator CreateToolBarSeparator ()
 	{
-		var sep = new Separator ();
+		Gtk.Separator sep = new ();
 		sep.AddCssClass (AdwaitaStyles.Spacer);
 		return sep;
 	}
 
-	public static Gtk.SpinButton CreateToolBarSpinButton (double min, double max, double step, double init_value)
+	public static Gtk.SpinButton CreateToolBarSpinButton (
+		double min,
+		double max,
+		double step,
+		double init_value)
 	{
-		var spin = Gtk.SpinButton.NewWithRange (min, max, step);
+		Gtk.SpinButton spin = Gtk.SpinButton.NewWithRange (min, max, step);
 		spin.FocusOnClick = false;
 		spin.Value = init_value;
 		// After a spin button is edited, return focus to the canvas so that
@@ -158,12 +164,16 @@ public static partial class GtkExtensions
 		return spin;
 	}
 
-	public static Scale CreateToolBarSlider (int min, int max, int step, int val)
+	public static Gtk.Scale CreateToolBarSlider (
+		int min,
+		int max,
+		int step,
+		int val)
 	{
-		var slider = Scale.NewWithRange (Orientation.Horizontal, min, max, step);
+		Gtk.Scale slider = Gtk.Scale.NewWithRange (Gtk.Orientation.Horizontal, min, max, step);
 		slider.WidthRequest = 150;
 		slider.DrawValue = true;
-		slider.ValuePos = PositionType.Left;
+		slider.ValuePos = Gtk.PositionType.Left;
 		slider.SetValue (val);
 		return slider;
 	}
@@ -173,20 +183,30 @@ public static partial class GtkExtensions
 		button.Active = !button.Active;
 	}
 
-	public static void AddAction (this Gtk.Application app, Command action)
+	public static void AddAction (
+		this Gtk.Application app,
+		Command action)
 	{
 		app.AddAction (action.Action);
 	}
 
-	public static void AddAccelAction (this Gtk.Application app, Command action, string accel)
+	public static void AddAccelAction (
+		this Gtk.Application app,
+		Command action,
+		string accel)
 	{
 		app.AddAccelAction (action, new[] { accel });
 	}
 
-	public static void AddAccelAction (this Gtk.Application app, Command action, string[] accels)
+	public static void AddAccelAction (
+		this Gtk.Application app,
+		Command action,
+		IEnumerable<string> accels)
 	{
 		app.AddAction (action);
-		app.SetAccelsForAction (action.FullName, accels.Select (s => ConvertPrimaryKey (s)).ToArray ());
+		app.SetAccelsForAction (
+			action.FullName,
+			accels.Select (ConvertPrimaryKey).ToArray ());
 	}
 
 	/// <summary>
@@ -200,28 +220,31 @@ public static partial class GtkExtensions
 	/// Returns the Cancel / Ok button pair in the correct order for the current platform.
 	/// This can be used with the Gtk.Dialog constructor.
 	/// </summary>
-	public static void AddCancelOkButtons (this Dialog dialog)
+	public static void AddCancelOkButtons (this Gtk.Dialog dialog)
 	{
-		Widget ok_button;
+		Gtk.Widget ok_button;
 		if (PintaCore.System.OperatingSystem == OS.Windows) {
-			ok_button = dialog.AddButton (Translations.GetString ("_OK"), (int) ResponseType.Ok);
-			dialog.AddButton (Translations.GetString ("_Cancel"), (int) ResponseType.Cancel);
+			ok_button = dialog.AddButton (Translations.GetString ("_OK"), (int) Gtk.ResponseType.Ok);
+			dialog.AddButton (Translations.GetString ("_Cancel"), (int) Gtk.ResponseType.Cancel);
 		} else {
-			dialog.AddButton (Translations.GetString ("_Cancel"), (int) ResponseType.Cancel);
-			ok_button = dialog.AddButton (Translations.GetString ("_OK"), (int) ResponseType.Ok);
+			dialog.AddButton (Translations.GetString ("_Cancel"), (int) Gtk.ResponseType.Cancel);
+			ok_button = dialog.AddButton (Translations.GetString ("_OK"), (int) Gtk.ResponseType.Ok);
 		}
 
 		ok_button.AddCssClass (AdwaitaStyles.SuggestedAction);
 	}
 
-	public static void SetDefaultResponse (this Dialog dialog, ResponseType response)
+	public static void SetDefaultResponse (
+		this Gtk.Dialog dialog,
+		Gtk.ResponseType response
+	)
 		=> dialog.SetDefaultResponse ((int) response);
 
 	/// <summary>
 	/// Helper function to avoid repeated casts. The dialog's content area is always a Box.
 	/// </summary>
-	public static Box GetContentAreaBox (this Dialog dialog)
-		=> (Box) dialog.GetContentArea ();
+	public static Gtk.Box GetContentAreaBox (this Gtk.Dialog dialog)
+		=> (Gtk.Box) dialog.GetContentArea ();
 
 	/// <summary>
 	/// Returns the platform-specific label for the "Primary" (Ctrl) key.
@@ -229,7 +252,11 @@ public static partial class GtkExtensions
 	/// </summary>
 	public static string CtrlLabel ()
 	{
-		AcceleratorParse (ConvertPrimaryKey ("<Primary>"), out var key, out var mods);
+		AcceleratorParse (
+			ConvertPrimaryKey ("<Primary>"),
+			out var key,
+			out var mods);
+
 		return Gtk.Functions.AcceleratorGetLabel (key, mods);
 	}
 
@@ -246,14 +273,17 @@ public static partial class GtkExtensions
 	// TODO-GTK4 (bindings, unsubmitted) - need support for 'out' enum parameters.
 	[LibraryImport (GtkLibraryName, EntryPoint = "gtk_accelerator_parse")]
 	[return: MarshalAs (UnmanagedType.Bool)]
-	private static partial bool AcceleratorParse ([MarshalAs (UnmanagedType.LPUTF8Str)] string accelerator, out uint accelerator_key, out Gdk.ModifierType accelerator_mods);
+	private static partial bool AcceleratorParse (
+		[MarshalAs (UnmanagedType.LPUTF8Str)] string accelerator,
+		out uint accelerator_key,
+		out Gdk.ModifierType accelerator_mods);
 
 	/// <summary>
 	/// Set all four margins of the widget to the same value.
 	/// </summary>
 	/// <param name="w"></param>
 	/// <param name="margin"></param>
-	public static void SetAllMargins (this Widget w, int margin)
+	public static void SetAllMargins (this Gtk.Widget w, int margin)
 	{
 		w.MarginTop = w.MarginBottom = w.MarginStart = w.MarginEnd = margin;
 	}
@@ -261,23 +291,24 @@ public static partial class GtkExtensions
 	/// <summary>
 	/// Helper function to return the icon theme for the default display.
 	/// </summary>
-	public static Gtk.IconTheme GetDefaultIconTheme () => Gtk.IconTheme.GetForDisplay (Gdk.Display.GetDefault ()!);
+	public static Gtk.IconTheme GetDefaultIconTheme ()
+		=> Gtk.IconTheme.GetForDisplay (Gdk.Display.GetDefault ()!);
 
 	/// <summary>
 	/// For a combo box that has an entry, provides easy access to the child entry widget.
 	/// </summary>
-	public static Entry GetEntry (this ComboBox box)
+	public static Gtk.Entry GetEntry (this Gtk.ComboBox box)
 	{
 		if (!box.HasEntry)
 			throw new InvalidOperationException ("Combobox does not have an entry");
 
-		return (Entry) box.Child!;
+		return (Gtk.Entry) box.Child!;
 	}
 
 	/// <summary>
 	/// Find the index of a string in a Gtk.StringList.
 	/// </summary>
-	public static bool FindString (this StringList list, string s, out uint index)
+	public static bool FindString (this Gtk.StringList list, string s, out uint index)
 	{
 		for (uint i = 0, n = list.GetNItems (); i < n; ++i) {
 			if (list.GetString (i) == s) {
@@ -320,16 +351,16 @@ public static partial class GtkExtensions
 	/// This can be useful for compatibility with old code that relies on this behaviour, but new code should be
 	/// structured to use event handlers.
 	/// </summary>
-	public static ResponseType RunBlocking (this Gtk.NativeDialog dialog)
+	public static Gtk.ResponseType RunBlocking (this Gtk.NativeDialog dialog)
 	{
-		var response = ResponseType.None;
+		var response = Gtk.ResponseType.None;
 		var loop = GLib.MainLoop.New (null, false);
 
 		if (!dialog.Modal)
 			dialog.Modal = true;
 
 		dialog.OnResponse += (_, args) => {
-			response = (ResponseType) args.ResponseId;
+			response = (Gtk.ResponseType) args.ResponseId;
 			if (loop.IsRunning ())
 				loop.Quit ();
 		};
@@ -345,16 +376,16 @@ public static partial class GtkExtensions
 	/// This can be useful for compatibility with old code that relies on this behaviour, but new code should be
 	/// structured to use event handlers.
 	/// </summary>
-	public static ResponseType RunBlocking (this Gtk.Dialog dialog)
+	public static Gtk.ResponseType RunBlocking (this Gtk.Dialog dialog)
 	{
-		var response = ResponseType.None;
+		var response = Gtk.ResponseType.None;
 		var loop = GLib.MainLoop.New (null, false);
 
 		if (!dialog.Modal)
 			dialog.Modal = true;
 
 		dialog.OnResponse += (_, args) => {
-			response = (ResponseType) args.ResponseId;
+			response = (Gtk.ResponseType) args.ResponseId;
 			if (loop.IsRunning ())
 				loop.Quit ();
 		};
@@ -368,46 +399,46 @@ public static partial class GtkExtensions
 	// TODO-GTK4 (bindings) - replace with adw_message_dialog_choose() once adwaita 1.3 is available, like in v0.4 of gir.core
 	public static Task<string> RunAsync (this Adw.MessageDialog dialog)
 	{
-		var tcs = new TaskCompletionSource<string> ();
-
-		dialog.OnResponse += (_, args) => {
-			tcs.SetResult (args.Response);
-		};
-
+		TaskCompletionSource<string> tcs = new ();
+		dialog.OnResponse += (_, args) => tcs.SetResult (args.Response);
 		dialog.Show ();
-
 		return tcs.Task;
 	}
 
 	/// <summary>
 	/// Provides convenient access to the Gdk.Key of the key being pressed.
 	/// </summary>
-	public static Gdk.Key GetKey (this Gtk.EventControllerKey.KeyPressedSignalArgs args) => (Gdk.Key) args.Keyval;
+	public static Gdk.Key GetKey (this Gtk.EventControllerKey.KeyPressedSignalArgs args)
+		=> (Gdk.Key) args.Keyval;
 
 	/// <summary>
 	/// Provides convenient access to the Gdk.Key of the key being released.
 	/// </summary>
-	public static Gdk.Key GetKey (this Gtk.EventControllerKey.KeyReleasedSignalArgs args) => (Gdk.Key) args.Keyval;
+	public static Gdk.Key GetKey (this Gtk.EventControllerKey.KeyReleasedSignalArgs args)
+		=> (Gdk.Key) args.Keyval;
 
 	/// <summary>
 	/// Sets the activates-default property for the editable text field of a spin button.
 	/// </summary>
-	public static void SetActivatesDefault (this Gtk.SpinButton spin_button, bool activates)
+	public static void SetActivatesDefault (
+		this Gtk.SpinButton spin_button,
+		bool activates)
 	{
-		Editable? editable = spin_button.GetDelegate ();
+		Gtk.Editable? editable = spin_button.GetDelegate ();
+
 		if (editable is null)
 			return;
 
 		// TODO-GTK4 (bindings, unsubmitted) - should be able to cast to a Gtk.Text from Gtk.Editable
-		var text = new TextWrapper (editable.Handle, ownedRef: false);
+		TextWrapper text = new (editable.Handle, ownedRef: false);
 		text.SetActivatesDefault (activates);
 	}
 
 	internal sealed class TextWrapper : Gtk.Text
 	{
-		internal TextWrapper (IntPtr ptr, bool ownedRef) : base (ptr, ownedRef)
-		{
-		}
+		internal TextWrapper (IntPtr ptr, bool ownedRef)
+			: base (ptr, ownedRef)
+		{ }
 	}
 
 	// TODO-GTK4 (bindings) - structs are not generated (https://github.com/gircore/gir.core/issues/622)
@@ -448,15 +479,19 @@ public static partial class GtkExtensions
 	}
 
 	[LibraryImport (GtkLibraryName, EntryPoint = "gtk_color_chooser_get_rgba")]
-	private static partial void ColorChooserGetRgba (IntPtr handle, out GdkRGBA color);
+	private static partial void ColorChooserGetRgba (
+		IntPtr handle,
+		out GdkRGBA color);
 
-	private static readonly Signal<Entry> EntryChangedSignal = new (
+	private static readonly Signal<Gtk.Entry> EntryChangedSignal = new (
 		unmanagedName: "changed",
 		managedName: string.Empty
 	);
 
 	// TODO-GTK4 (bindings) - the Gtk.Editable::changed signal is not generated (https://github.com/gircore/gir.core/issues/831)
-	public static void OnChanged (this Entry o, SignalHandler<Entry> handler)
+	public static void OnChanged (
+		this Gtk.Entry o,
+		SignalHandler<Gtk.Entry> handler)
 	{
 		EntryChangedSignal.Connect (o, handler);
 	}
@@ -468,13 +503,15 @@ public static partial class GtkExtensions
 
 	}
 
-	private static readonly Signal<SingleSelection, SelectionChangedSignalArgs> SelectionChangedSignal = new (
+	private static readonly Signal<Gtk.SingleSelection, SelectionChangedSignalArgs> SelectionChangedSignal = new (
 		unmanagedName: "selection-changed",
 		managedName: string.Empty
 	);
 
 	// TODO-GTK4 (bindings) - the Gtk.SelectionModel::selection-changed signal is not generated (https://github.com/gircore/gir.core/issues/831)
-	public static void OnSelectionChanged (this SingleSelection o, SignalHandler<SingleSelection, SelectionChangedSignalArgs> handler)
+	public static void OnSelectionChanged (
+		this Gtk.SingleSelection o,
+		SignalHandler<Gtk.SingleSelection, SelectionChangedSignalArgs> handler)
 	{
 		SelectionChangedSignal.Connect (o, handler);
 	}
@@ -483,10 +520,13 @@ public static partial class GtkExtensions
 	/// Remove the widget if it is a child of the box.
 	/// Calling Remove() produces warnings from GTK if the child isn't found.
 	/// </summary>
-	public static void RemoveIfChild (this Box box, Widget to_remove)
+	public static void RemoveIfChild (
+		this Gtk.Box box,
+		Gtk.Widget to_remove)
 	{
-		Widget? child = box.GetFirstChild ();
+		Gtk.Widget? child = box.GetFirstChild ();
 		while (child != null) {
+
 			if (child == to_remove) {
 				box.Remove (child);
 				return;
@@ -497,7 +537,7 @@ public static partial class GtkExtensions
 	}
 
 	// TODO-GTK4 (bindings) - wrapper for GetFiles() since Gio.ListModel.GetObject doesn't return a Gio.File instance (https://github.com/gircore/gir.core/issues/838)
-	public static Gio.File[] GetFileList (this Gtk.FileChooser file_chooser)
+	public static IReadOnlyList<Gio.File> GetFileList (this Gtk.FileChooser file_chooser)
 	{
 		List<Gio.File> result = new ();
 
@@ -505,25 +545,49 @@ public static partial class GtkExtensions
 		for (uint i = 0, n = files.GetNItems (); i < n; ++i)
 			result.Add (new Gio.FileHelper (files.GetItem (i), ownedRef: true));
 
-		return result.ToArray ();
+		return result;
 	}
 
 	/// Wrapper around TranslateCoordinates which uses PointD instead of separate x/y parameters.
-	public static bool TranslateCoordinates (this Widget src, Widget dest, PointD src_pos, out PointD dest_pos)
+	public static bool TranslateCoordinates (
+		this Gtk.Widget src,
+		Gtk.Widget dest,
+		PointD src_pos,
+		out PointD dest_pos)
 	{
-		bool result = src.TranslateCoordinates (dest, src_pos.X, src_pos.Y, out double x, out double y);
+		bool result = src.TranslateCoordinates (
+			dest,
+			src_pos.X,
+			src_pos.Y,
+			out double x,
+			out double y);
+
 		dest_pos = new PointD (x, y);
+
 		return result;
 	}
 
 	// Manual binding for GetPreeditString
 	// TODO-GTK4 (bindings) - missing from gir.core: "opaque record parameter 'attrs' with direction != in not yet supported"
 	[DllImport (GtkLibraryName, EntryPoint = "gtk_im_context_get_preedit_string")]
-	private static extern void IMContextGetPreeditString (IntPtr handle, out GLib.Internal.NonNullableUtf8StringOwnedHandle str, out Pango.Internal.AttrListOwnedHandle attrs, out int cursor_pos);
+	private static extern void IMContextGetPreeditString (
+		IntPtr handle,
+		out GLib.Internal.NonNullableUtf8StringOwnedHandle str,
+		out Pango.Internal.AttrListOwnedHandle attrs,
+		out int cursor_pos);
 
-	public static void GetPreeditString (this IMContext context, out string str, out Pango.AttrList attrs, out int cursor_pos)
+	public static void GetPreeditString (
+		this Gtk.IMContext context,
+		out string str,
+		out Pango.AttrList attrs,
+		out int cursor_pos)
 	{
-		IMContextGetPreeditString (context.Handle, out var str_handle, out var attrs_handle, out cursor_pos);
+		IMContextGetPreeditString (
+			context.Handle,
+			out var str_handle,
+			out var attrs_handle,
+			out cursor_pos);
+
 		str = str_handle.ConvertToString ();
 		str_handle.Dispose ();
 		attrs = new Pango.AttrList (attrs_handle);
