@@ -33,9 +33,11 @@ namespace Pinta.Tools.Brushes;
 
 public sealed class SplatterBrush : BasePaintBrush
 {
-	public override string Name => Translations.GetString ("Splatter");
+	public override string Name
+		=> Translations.GetString ("Splatter");
 
-	public override double StrokeAlphaMultiplier => 0.5;
+	public override double StrokeAlphaMultiplier
+		=> 0.5;
 
 	private readonly Random random = new ();
 
@@ -52,21 +54,18 @@ public sealed class SplatterBrush : BasePaintBrush
 		PointI current = strokeArgs.CurrentPosition;
 
 		RectangleD rect = new (
-			x: current.X - random.Next (-15, 15),
-			y: current.Y - random.Next (-15, 15),
-			width: size,
-			height: size
-		);
+			X: current.X - random.Next (-15, 15),
+			Y: current.Y - random.Next (-15, 15),
+			Width: size,
+			Height: size);
 
 		PointD r = new (
 			X: rect.Width / 2,
-			Y: rect.Height / 2
-		);
+			Y: rect.Height / 2);
 
 		PointD c = new (
 			X: rect.X + r.X,
-			Y: rect.Y + r.Y
-		);
+			Y: rect.Y + r.Y);
 
 		const double c_1 = 0.552285;
 

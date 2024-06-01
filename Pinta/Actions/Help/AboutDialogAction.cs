@@ -27,31 +27,30 @@
 using System;
 using System.Text;
 using Pinta.Core;
+using Pinta.Resources;
 
 namespace Pinta.Actions;
 
 internal sealed class AboutDialogAction : IActionHandler
 {
-	#region IActionHandler Members
-	public void Initialize ()
+	void IActionHandler.Initialize ()
 	{
 		PintaCore.Actions.App.About.Activated += Activated;
 	}
 
-	public void Uninitialize ()
+	void IActionHandler.Uninitialize ()
 	{
 		PintaCore.Actions.App.About.Activated -= Activated;
 	}
-	#endregion
 
 	private void Activated (object sender, EventArgs e)
 	{
 		var dialog = Adw.AboutWindow.New ();
 		dialog.TransientFor = PintaCore.Chrome.MainWindow;
 		dialog.Title = Translations.GetString ("About Pinta");
-		dialog.IconName = Pinta.Resources.Icons.AboutPinta;
+		dialog.IconName = Icons.AboutPinta;
 		dialog.ApplicationName = Translations.GetString ("Pinta");
-		dialog.ApplicationIcon = Pinta.Resources.Icons.Pinta;
+		dialog.ApplicationIcon = Icons.Pinta;
 		dialog.Version = PintaCore.ApplicationVersion;
 		dialog.Website = "https://www.pinta-project.com";
 		dialog.Comments = Translations.GetString ("Easily create and edit images");
@@ -59,7 +58,6 @@ internal sealed class AboutDialogAction : IActionHandler
 		dialog.License = BuildLicenseText ();
 		dialog.Developers = authors;
 		dialog.TranslatorCredits = Translations.GetString ("translator-credits");
-
 		dialog.Present ();
 	}
 

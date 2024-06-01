@@ -24,39 +24,48 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 // THE SOFTWARE.
 
-using Gtk;
 using Pinta.Core;
 
 namespace Pinta;
 
-public sealed class JpegCompressionDialog : Dialog
+public sealed class JpegCompressionDialog : Gtk.Dialog
 {
-	private readonly Scale compressionLevel;
+	private readonly Gtk.Scale compression_level;
 
 	public JpegCompressionDialog (int defaultQuality, Gtk.Window parent)
 	{
 		Title = Translations.GetString ("JPEG Quality");
 		TransientFor = parent;
 		Modal = true;
-		this.AddCancelOkButtons ();
-		this.SetDefaultResponse (ResponseType.Ok);
 
-		var content_area = this.GetContentAreaBox ();
+		this.AddCancelOkButtons ();
+		this.SetDefaultResponse (Gtk.ResponseType.Ok);
+
+		Gtk.Label label = CreateQualityLabel ();
+		compression_level = CreateCompressionScale (defaultQuality);
+
+		Gtk.Box content_area = this.GetContentAreaBox ();
 		content_area.SetAllMargins (6);
 		content_area.Spacing = 3;
-
-		var label = Label.New (Translations.GetString ("Quality: "));
-		label.Xalign = 0;
 		content_area.Append (label);
-
-		compressionLevel = Scale.NewWithRange (Orientation.Horizontal, 1, 100, 1);
-		compressionLevel.SetValue (defaultQuality);
-		compressionLevel.DrawValue = true;
-		content_area.Append (compressionLevel);
+		content_area.Append (compression_level);
 	}
 
-	public int GetCompressionLevel ()
+	private static Gtk.Label CreateQualityLabel ()
 	{
-		return (int) compressionLevel.GetValue ();
+		Gtk.Label result = Gtk.Label.New (Translations.GetString ("Quality: "));
+		result.Xalign = 0;
+		return result;
 	}
+
+	private static Gtk.Scale CreateCompressionScale (int defaultQuality)
+	{
+		Gtk.Scale result = Gtk.Scale.NewWithRange (Gtk.Orientation.Horizontal, 1, 100, 1);
+		result.SetValue (defaultQuality);
+		result.DrawValue = true;
+		return result;
+	}
+
+	public int CompressionLevel
+		=> (int) compression_level.GetValue ();
 }

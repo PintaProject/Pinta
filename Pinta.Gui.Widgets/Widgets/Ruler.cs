@@ -159,25 +159,30 @@ public sealed class Ruler : DrawingArea
 
 		// Bottom line of the ruler.
 		switch (Orientation) {
+
 			case Orientation.Vertical:
+
 				rect = new (
-					x: preliminarySize.Width - 1,
-					y: 0,
-					width: 1,
-					height: preliminarySize.Height
-				);
+					X: preliminarySize.Width - 1,
+					Y: 0,
+					Width: 1,
+					Height: preliminarySize.Height);
+
 				// Swap so that width is the longer dimension (horizontal).
 				effectiveSize = new (preliminarySize.Height, preliminarySize.Width);
+
 				break;
+
 			case Orientation.Horizontal:
 			default:
 				rect = new (
-					x: 0,
-					y: preliminarySize.Height - 1,
-					width: preliminarySize.Width,
-					height: 1
-				);
+					X: 0,
+					Y: preliminarySize.Height - 1,
+					Width: preliminarySize.Width,
+					Height: 1);
+
 				effectiveSize = preliminarySize;
+
 				break;
 		}
 
@@ -250,11 +255,12 @@ public sealed class Ruler : DrawingArea
 			rect: rect,
 			effectiveSize: effectiveSize,
 			color: color,
-			orientation: Orientation
-		);
+			orientation: Orientation);
 	}
 
-	private void Draw (Context cr, Size preliminarySize)
+	private void Draw (
+		Context cr,
+		Size preliminarySize)
 	{
 		RulerDrawSettings settings = CreateSettings (preliminarySize);
 
@@ -264,6 +270,7 @@ public sealed class Ruler : DrawingArea
 		cr.Fill ();
 
 		for (int i = settings.start; i <= settings.end; ++i) {
+
 			// Position of tick (add 0.5 to center tick on pixel).
 			double position = Math.Floor (i * settings.pixels_per_tick - settings.scaled_lower * settings.increment) + 0.5;
 
@@ -329,15 +336,16 @@ public sealed class Ruler : DrawingArea
 		// TODO-GTK3 - cache the ticks
 	}
 
-	private static int GetFontSize (Pango.FontDescription font, int scale_factor)
+	private static int GetFontSize (
+		Pango.FontDescription font,
+		int scale_factor)
 	{
 		int font_size = font.GetSize ();
 		font_size = PangoExtensions.UnitsToPixels (font_size);
 
 		// Convert from points to device units.
-		if (!font.GetSizeIsAbsolute ()) {
-			font_size = (int) ((scale_factor * font_size) / 72.0);
-		}
+		if (!font.GetSizeIsAbsolute ())
+			font_size = (int) (scale_factor * font_size / 72.0);
 
 		return font_size;
 	}

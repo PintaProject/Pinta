@@ -27,16 +27,21 @@
 
 using System;
 using System.Threading.Tasks;
-using Gtk;
 using Pinta.Core;
 
 namespace Pinta.Actions;
 
 internal sealed class PasteAction : IActionHandler
 {
-	public void Initialize () => PintaCore.Actions.Edit.Paste.Activated += Activated;
+	void IActionHandler.Initialize ()
+	{
+		PintaCore.Actions.Edit.Paste.Activated += Activated;
+	}
 
-	public void Uninitialize () => PintaCore.Actions.Edit.Paste.Activated -= Activated;
+	void IActionHandler.Uninitialize ()
+	{
+		PintaCore.Actions.Edit.Paste.Activated -= Activated;
+	}
 
 	private void Activated (object sender, EventArgs e)
 	{
@@ -50,14 +55,13 @@ internal sealed class PasteAction : IActionHandler
 		var doc = PintaCore.Workspace.ActiveDocument;
 
 		// Get the scroll position in canvas coordinates
-		var view = (Viewport) doc.Workspace.Canvas.Parent!;
+		var view = (Gtk.Viewport) doc.Workspace.Canvas.Parent!;
 
 		PointD viewPoint = new (
 			X: view.Hadjustment!.Value,
-			Y: view.Vadjustment!.Value
-		);
+			Y: view.Vadjustment!.Value);
 
-		var canvasPos = doc.Workspace.ViewPointToCanvas (viewPoint);
+		PointD canvasPos = doc.Workspace.ViewPointToCanvas (viewPoint);
 
 		// Paste into the active document.
 		// The 'false' argument indicates that paste should be
@@ -114,7 +118,7 @@ internal sealed class PasteAction : IActionHandler
 
 			var response = await ShowExpandCanvasDialog ();
 
-			if (response == ResponseType.Accept) {
+			if (response == Gtk.ResponseType.Accept) {
 
 				Size newSize = new (
 					Width: Math.Max (canvas_size.Width, cb_image.Width),
@@ -124,7 +128,7 @@ internal sealed class PasteAction : IActionHandler
 				PintaCore.Workspace.ResizeCanvas (newSize, Pinta.Core.Anchor.Center, paste_action);
 				PintaCore.Actions.View.UpdateCanvasScale ();
 
-			} else if (response != ResponseType.Reject) // cancelled
+			} else if (response != Gtk.ResponseType.Reject) // cancelled
 				return;
 		}
 
@@ -175,7 +179,7 @@ internal sealed class PasteAction : IActionHandler
 		PintaCore.Chrome.ShowMessageDialog (PintaCore.Chrome.MainWindow, primary, secondary);
 	}
 
-	public static async Task<ResponseType> ShowExpandCanvasDialog ()
+	public static async Task<Gtk.ResponseType> ShowExpandCanvasDialog ()
 	{
 		var primary = Translations.GetString ("Image larger than canvas");
 		var secondary = Translations.GetString ("The image being pasted is larger than the canvas. What would you like to do to the canvas size?");
@@ -184,6 +188,7 @@ internal sealed class PasteAction : IActionHandler
 		const string cancel_response = "cancel";
 		const string reject_response = "reject";
 		const string expand_response = "expand";
+
 		dialog.AddResponse (cancel_response, Translations.GetString ("_Cancel"));
 		// Translators: This refers to preserving the current canvas size when pasting a larger image.
 		dialog.AddResponse (reject_response, Translations.GetString ("Preserve"));
@@ -195,10 +200,11 @@ internal sealed class PasteAction : IActionHandler
 		dialog.DefaultResponse = expand_response;
 
 		string response = await dialog.RunAsync ();
+
 		return response switch {
-			expand_response => ResponseType.Accept,
-			reject_response => ResponseType.Reject,
-			_ => ResponseType.Cancel
+			expand_response => Gtk.ResponseType.Accept,
+			reject_response => Gtk.ResponseType.Reject,
+			_ => Gtk.ResponseType.Cancel,
 		};
 	}
 }

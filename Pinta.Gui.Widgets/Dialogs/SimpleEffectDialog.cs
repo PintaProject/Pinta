@@ -254,7 +254,10 @@ public sealed class SimpleEffectDialog : Gtk.Dialog
 			if (attr is StaticListAttribute attribute && ReflectionHelper.GetValue (effectData, attribute.DictionaryName) is Dictionary<string, object> d)
 				dict = d;
 
-		var entries = dict == null ? ImmutableArray<string>.Empty : dict.Keys.ToImmutableArray ();
+		var entries =
+			dict == null
+			? ImmutableArray<string>.Empty
+			: dict.Keys.ToImmutableArray ();
 
 		var widget = new ComboBoxWidget (entries) { Label = caption };
 
@@ -268,18 +271,20 @@ public sealed class SimpleEffectDialog : Gtk.Dialog
 
 	private HScaleSpinButtonWidget CreateDoubleSlider (string caption, EffectData effectData, MemberSettings settings)
 	{
+		double initialValue =
+			(settings.reflector.GetValue (effectData) is double i)
+			? i
+			: default;
+
 		var attributes = settings.reflector.Attributes;
 
-		var widget = new HScaleSpinButtonWidget {
+		var widget = new HScaleSpinButtonWidget (initialValue) {
 			Label = caption,
 			MinimumValue = attributes.OfType<MinimumValueAttribute> ().Select (m => m.Value).FirstOrDefault (-100),
 			MaximumValue = attributes.OfType<MaximumValueAttribute> ().Select (m => m.Value).FirstOrDefault (100),
 			IncrementValue = attributes.OfType<IncrementValueAttribute> ().Select (i => i.Value).FirstOrDefault (0.01),
 			DigitsValue = attributes.OfType<DigitsValueAttribute> ().Select (d => d.Value).FirstOrDefault (2),
 		};
-
-		if (settings.reflector.GetValue (effectData) is double d)
-			widget.DefaultValue = d;
 
 		widget.ValueChanged += (_, _) => {
 			DelayedUpdate (() => {
@@ -293,18 +298,20 @@ public sealed class SimpleEffectDialog : Gtk.Dialog
 
 	private HScaleSpinButtonWidget CreateSlider (string caption, EffectData effectData, MemberSettings settings)
 	{
+		int initialValue =
+			(settings.reflector.GetValue (effectData) is int i)
+			? i
+			: default;
+
 		var attributes = settings.reflector.Attributes;
 
-		var widget = new HScaleSpinButtonWidget {
+		var widget = new HScaleSpinButtonWidget (initialValue) {
 			Label = caption,
 			MinimumValue = attributes.OfType<MinimumValueAttribute> ().Select (m => m.Value).FirstOrDefault (-100),
 			MaximumValue = attributes.OfType<MaximumValueAttribute> ().Select (m => m.Value).FirstOrDefault (100),
 			IncrementValue = attributes.OfType<IncrementValueAttribute> ().Select (i => i.Value).FirstOrDefault (1.0),
 			DigitsValue = attributes.OfType<DigitsValueAttribute> ().Select (d => d.Value).FirstOrDefault (0),
 		};
-
-		if (settings.reflector.GetValue (effectData) is int i)
-			widget.DefaultValue = i;
 
 		widget.ValueChanged += (_, _) => {
 			DelayedUpdate (() => {
@@ -330,10 +337,12 @@ public sealed class SimpleEffectDialog : Gtk.Dialog
 
 	private PointPickerWidget CreateOffsetPicker (string caption, EffectData effectData, MemberSettings settings)
 	{
-		var widget = new PointPickerWidget { Label = caption };
+		PointI initialPoint =
+			(settings.reflector.GetValue (effectData) is PointI p)
+			? p
+			: default;
 
-		if (settings.reflector.GetValue (effectData) is PointD p)
-			widget.DefaultOffset = p;
+		PointPickerWidget widget = new (initialPoint) { Label = caption };
 
 		widget.PointPicked += (_, _) => SetAndNotify (settings.reflector, effectData, widget.Offset);
 
@@ -342,10 +351,12 @@ public sealed class SimpleEffectDialog : Gtk.Dialog
 
 	private PointPickerWidget CreatePointPicker (string caption, EffectData effectData, MemberSettings settings)
 	{
-		var widget = new PointPickerWidget { Label = caption };
+		PointI initialPoint =
+			(settings.reflector.GetValue (effectData) is PointI p)
+			? p
+			: default;
 
-		if (settings.reflector.GetValue (effectData) is PointI p)
-			widget.DefaultPoint = p;
+		PointPickerWidget widget = new (initialPoint) { Label = caption };
 
 		widget.PointPicked += (_, _) => SetAndNotify (settings.reflector, effectData, widget.Point);
 
@@ -354,10 +365,12 @@ public sealed class SimpleEffectDialog : Gtk.Dialog
 
 	private AnglePickerWidget CreateAnglePicker (string caption, EffectData effectData, MemberSettings settings)
 	{
-		var widget = new AnglePickerWidget { Label = caption };
+		DegreesAngle initialAngle =
+			(settings.reflector.GetValue (effectData) is DegreesAngle d)
+			? d
+			: default;
 
-		if (settings.reflector.GetValue (effectData) is DegreesAngle d)
-			widget.DefaultValue = d;
+		AnglePickerWidget widget = new (initialAngle) { Label = caption };
 
 		widget.ValueChanged += (_, _) => {
 			DelayedUpdate (() => {

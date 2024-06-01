@@ -29,19 +29,17 @@ using Pinta.Core;
 
 namespace Pinta.Actions;
 
-class CloseDocumentAction : IActionHandler
+internal sealed class CloseDocumentAction : IActionHandler
 {
-	#region IActionHandler Members
-	public void Initialize ()
+	void IActionHandler.Initialize ()
 	{
 		PintaCore.Actions.File.Close.Activated += Activated;
 	}
 
-	public void Uninitialize ()
+	void IActionHandler.Uninitialize ()
 	{
 		PintaCore.Actions.File.Close.Activated -= Activated;
 	}
-	#endregion
 
 	private void Activated (object sender, EventArgs e)
 	{
@@ -54,15 +52,18 @@ class CloseDocumentAction : IActionHandler
 			return;
 		}
 
-		var heading = Translations.GetString ("Save changes to image \"{0}\" before closing?",
+		string heading = Translations.GetString (
+			"Save changes to image \"{0}\" before closing?",
 			PintaCore.Workspace.ActiveDocument.DisplayName);
-		var body = Translations.GetString ("If you don't save, all changes will be permanently lost.");
 
-		var dialog = Adw.MessageDialog.New (PintaCore.Chrome.MainWindow, heading, body);
+		string body = Translations.GetString ("If you don't save, all changes will be permanently lost.");
+
+		Adw.MessageDialog dialog = Adw.MessageDialog.New (PintaCore.Chrome.MainWindow, heading, body);
 
 		const string cancel_response = "cancel";
 		const string discard_response = "discard";
 		const string save_response = "save";
+
 		dialog.AddResponse (cancel_response, Translations.GetString ("_Cancel"));
 		dialog.AddResponse (discard_response, Translations.GetString ("_Discard"));
 		dialog.AddResponse (save_response, Translations.GetString ("_Save"));

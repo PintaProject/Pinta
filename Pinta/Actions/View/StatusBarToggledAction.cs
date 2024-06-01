@@ -30,17 +30,15 @@ namespace Pinta.Actions;
 
 internal sealed class StatusBarToggledAction : IActionHandler
 {
-	#region IActionHandler Members
-	public void Initialize ()
+	void IActionHandler.Initialize ()
 	{
 		PintaCore.Actions.View.StatusBar.Toggled += Activated;
 	}
 
-	public void Uninitialize ()
+	void IActionHandler.Uninitialize ()
 	{
 		PintaCore.Actions.View.StatusBar.Toggled -= Activated;
 	}
-	#endregion
 
 	private void Activated (bool value)
 	{

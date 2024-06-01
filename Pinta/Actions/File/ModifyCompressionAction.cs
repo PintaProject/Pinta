@@ -30,23 +30,22 @@ namespace Pinta.Actions;
 
 internal sealed class ModifyCompressionAction : IActionHandler
 {
-	#region IActionHandler Members
-	public void Initialize ()
+	void IActionHandler.Initialize ()
 	{
 		PintaCore.Actions.File.ModifyCompression += Activated;
 	}
 
-	public void Uninitialize ()
+	void IActionHandler.Uninitialize ()
 	{
 		PintaCore.Actions.File.ModifyCompression -= Activated;
 	}
-	#endregion
 
 	private void Activated (object? sender, ModifyCompressionEventArgs e)
 	{
-		var dlg = new JpegCompressionDialog (e.Quality, e.ParentWindow);
+		JpegCompressionDialog dlg = new (e.Quality, e.ParentWindow);
+
 		if (dlg.RunBlocking () == Gtk.ResponseType.Ok)
-			e.Quality = dlg.GetCompressionLevel ();
+			e.Quality = dlg.CompressionLevel;
 		else
 			e.Cancel = true;
 

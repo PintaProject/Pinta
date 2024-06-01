@@ -31,17 +31,15 @@ namespace Pinta.Actions;
 
 internal sealed class ExitProgramAction : IActionHandler
 {
-	#region IActionHandler Members
-	public void Initialize ()
+	void IActionHandler.Initialize ()
 	{
 		PintaCore.Actions.App.Exit.Activated += Activated;
 	}
 
-	public void Uninitialize ()
+	void IActionHandler.Uninitialize ()
 	{
 		PintaCore.Actions.App.Exit.Activated -= Activated;
 	}
-	#endregion
 
 	private void Activated (object sender, EventArgs e)
 	{
