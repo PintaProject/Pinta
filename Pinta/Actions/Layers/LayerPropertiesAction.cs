@@ -25,24 +25,21 @@
 // THE SOFTWARE.
 
 using System;
-using Gtk;
 using Pinta.Core;
 
 namespace Pinta.Actions;
 
 internal sealed class LayerPropertiesAction : IActionHandler
 {
-	#region IActionHandler Members
-	public void Initialize ()
+	void IActionHandler.Initialize ()
 	{
 		PintaCore.Actions.Layers.Properties.Activated += Activated;
 	}
 
-	public void Uninitialize ()
+	void IActionHandler.Uninitialize ()
 	{
 		PintaCore.Actions.Layers.Properties.Activated -= Activated;
 	}
-	#endregion
 
 	private void Activated (object sender, EventArgs e)
 	{
@@ -51,7 +48,7 @@ internal sealed class LayerPropertiesAction : IActionHandler
 		var dialog = new LayerPropertiesDialog ();
 
 		dialog.OnResponse += (_, args) => {
-			var response = (ResponseType) args.ResponseId;
+			var response = (Gtk.ResponseType) args.ResponseId;
 			if (response == Gtk.ResponseType.Ok && dialog.AreLayerPropertiesUpdated) {
 
 				var historyMessage = GetLayerPropertyUpdateMessage (
@@ -71,10 +68,11 @@ internal sealed class LayerPropertiesAction : IActionHandler
 
 			} else {
 
-				var layer = doc.Layers.CurrentUserLayer;
-				var selectionLayer = doc.Layers.SelectionLayer;
-				var initial = dialog.InitialLayerProperties;
+				Layer layer = doc.Layers.CurrentUserLayer;
+				Layer selectionLayer = doc.Layers.SelectionLayer;
+				LayerProperties initial = dialog.InitialLayerProperties;
 				initial.SetProperties (layer);
+
 				if (selectionLayer != null)
 					initial.SetProperties (selectionLayer);
 

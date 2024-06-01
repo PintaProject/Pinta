@@ -33,12 +33,12 @@ namespace Pinta.Actions;
 
 public sealed class RotateZoomLayerAction : IActionHandler
 {
-	public void Initialize ()
+	void IActionHandler.Initialize ()
 	{
 		PintaCore.Actions.Layers.RotateZoom.Activated += Activated;
 	}
 
-	public void Uninitialize ()
+	void IActionHandler.Uninitialize ()
 	{
 		PintaCore.Actions.Layers.RotateZoom.Activated -= Activated;
 	}
@@ -47,7 +47,7 @@ public sealed class RotateZoomLayerAction : IActionHandler
 	{
 		// TODO - allow the layer to be zoomed in or out
 
-		var data = new RotateZoomData ();
+		RotateZoomData data = new ();
 
 		var dialog = new SimpleEffectDialog (
 			Translations.GetString ("Rotate / Zoom Layer"),
@@ -88,7 +88,7 @@ public sealed class RotateZoomLayerAction : IActionHandler
 		var center_y = image_size.Height / 2.0;
 
 		xform.Translate ((1 + data.Pan.X) * center_x, (1 + data.Pan.Y) * center_y);
-		xform.Rotate ((-data.Angle.Degrees / 180d) * Math.PI);
+		xform.Rotate (-data.Angle.ToRadians ().Radians);
 		xform.Scale (data.Zoom, data.Zoom);
 		xform.Translate (-center_x, -center_y);
 
@@ -98,16 +98,28 @@ public sealed class RotateZoomLayerAction : IActionHandler
 	private static void ApplyTransform (RotateZoomData data)
 	{
 		var doc = PintaCore.Workspace.ActiveDocument;
+
 		PintaCore.Tools.Commit ();
 
 		var old_surf = doc.Layers.CurrentUserLayer.Surface.Clone ();
 
 		var xform = ComputeMatrix (data);
-		doc.Layers.CurrentUserLayer.ApplyTransform (xform, PintaCore.Workspace.ImageSize, PintaCore.Workspace.ImageSize);
+
+		doc.Layers.CurrentUserLayer.ApplyTransform (
+			xform,
+			PintaCore.Workspace.ImageSize,
+			PintaCore.Workspace.ImageSize);
+
 		doc.Workspace.Invalidate ();
 
-		doc.History.PushNewItem (new SimpleHistoryItem (Resources.Icons.LayerRotateZoom,
-		    Translations.GetString ("Rotate / Zoom Layer"), old_surf, doc.Layers.CurrentUserLayerIndex));
+		doc.History.PushNewItem (
+			new SimpleHistoryItem (
+				Resources.Icons.LayerRotateZoom,
+				Translations.GetString ("Rotate / Zoom Layer"),
+				old_surf,
+				doc.Layers.CurrentUserLayerIndex
+			)
+		);
 	}
 
 	private sealed class RotateZoomData : EffectData

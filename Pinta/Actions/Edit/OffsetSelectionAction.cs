@@ -30,24 +30,24 @@ using Pinta.Core;
 namespace Pinta.Actions;
 internal sealed class OffsetSelectionAction : IActionHandler
 {
-	#region IActionHandler Members
-	public void Initialize ()
+	void IActionHandler.Initialize ()
 	{
 		PintaCore.Actions.Edit.OffsetSelection.Activated += Activated;
 	}
 
-	public void Uninitialize ()
+	void IActionHandler.Uninitialize ()
 	{
 		PintaCore.Actions.Edit.OffsetSelection.Activated -= Activated;
 	}
-	#endregion
 
 	private void Activated (object sender, EventArgs e)
 	{
 		var dialog = new OffsetSelectionDialog ();
 
 		dialog.OnResponse += (_, args) => {
+
 			if (args.ResponseId == (int) Gtk.ResponseType.Ok) {
+
 				PintaCore.Tools.Commit ();
 
 				Document document = PintaCore.Workspace.ActiveDocument;

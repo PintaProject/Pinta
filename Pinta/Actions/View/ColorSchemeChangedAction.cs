@@ -5,17 +5,15 @@ namespace Pinta.Actions;
 
 internal sealed class ColorSchemeChangedAction : IActionHandler
 {
-	#region IActionHandler Members
-	public void Initialize ()
+	void IActionHandler.Initialize ()
 	{
 		PintaCore.Actions.View.ColorScheme.OnActivate += Activated;
 	}
 
-	public void Uninitialize ()
+	void IActionHandler.Uninitialize ()
 	{
 		PintaCore.Actions.View.ColorScheme.OnActivate -= Activated;
 	}
-	#endregion
 
 	private void Activated (SimpleAction action, SimpleAction.ActivateSignalArgs args)
 	{
@@ -24,7 +22,7 @@ internal sealed class ColorSchemeChangedAction : IActionHandler
 		Adw.ColorScheme scheme = args.Parameter!.GetInt32 () switch {
 			1 => Adw.ColorScheme.ForceLight,
 			2 => Adw.ColorScheme.ForceDark,
-			_ => Adw.ColorScheme.Default
+			_ => Adw.ColorScheme.Default,
 		};
 
 		Adw.StyleManager.GetDefault ().SetColorScheme (scheme);

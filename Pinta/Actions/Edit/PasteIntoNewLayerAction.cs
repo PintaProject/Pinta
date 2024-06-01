@@ -25,16 +25,21 @@
 // THE SOFTWARE.
 
 using System;
-using Gtk;
 using Pinta.Core;
 
 namespace Pinta.Actions;
 
 internal sealed class PasteIntoNewLayerAction : IActionHandler
 {
-	public void Initialize () => PintaCore.Actions.Edit.PasteIntoNewLayer.Activated += Activated;
+	void IActionHandler.Initialize ()
+	{
+		PintaCore.Actions.Edit.PasteIntoNewLayer.Activated += Activated;
+	}
 
-	public void Uninitialize () => PintaCore.Actions.Edit.PasteIntoNewLayer.Activated -= Activated;
+	void IActionHandler.Uninitialize ()
+	{
+		PintaCore.Actions.Edit.PasteIntoNewLayer.Activated -= Activated;
+	}
 
 	private void Activated (object sender, EventArgs e)
 	{
@@ -48,14 +53,14 @@ internal sealed class PasteIntoNewLayerAction : IActionHandler
 		var doc = PintaCore.Workspace.ActiveDocument;
 
 		// Get the scroll position in canvas coordinates
-		var view = (Viewport) doc.Workspace.Canvas.Parent!;
+		var view = (Gtk.Viewport) doc.Workspace.Canvas.Parent!;
 
 		PointD viewPoint = new (
 			X: view.Hadjustment!.Value,
 			Y: view.Vadjustment!.Value
 		);
 
-		var canvasPos = doc.Workspace.ViewPointToCanvas (viewPoint);
+		PointD canvasPos = doc.Workspace.ViewPointToCanvas (viewPoint);
 
 		// Paste into the active document.
 		// The 'true' argument indicates that paste should be
