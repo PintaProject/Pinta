@@ -28,37 +28,39 @@ using System;
 /// Replacements for Cairo / GDK rectangles that GtkSharp provided in the GTK3 build.
 namespace Pinta.Core;
 
-public readonly record struct RectangleD
+public readonly record struct RectangleD (
+	double X,
+	double Y,
+	double Width,
+	double Height)
 {
-	public readonly double X;
-	public readonly double Y;
-	public readonly double Width;
-	public readonly double Height;
-
-	public RectangleD (double x, double y, double width, double height)
-	{
-		X = x;
-		Y = y;
-		Width = width;
-		Height = height;
-	}
-
 	public RectangleD (in PointD point, double width, double height)
 		: this (point.X, point.Y, width, height)
-	{
-	}
+	{ }
 
 	public static readonly RectangleD Zero = new (0d, 0d, 0d, 0d);
 
-	public readonly RectangleI ToInt () => new ((int) Math.Floor (X), (int) Math.Floor (Y),
-						      (int) Math.Ceiling (Width), (int) Math.Ceiling (Height));
+	public readonly RectangleI ToInt ()
+		=> new (
+			(int) Math.Floor (X),
+			(int) Math.Floor (Y),
+			(int) Math.Ceiling (Width),
+			(int) Math.Ceiling (Height));
 
-	public readonly double Left => X;
-	public readonly double Top => Y;
-	public readonly double Right => X + Width - 1;
-	public readonly double Bottom => Y + Height - 1;
+	public readonly double Left
+		=> X;
 
-	public override readonly string ToString () => $"x:{X} y:{Y} w:{Width} h:{Height}";
+	public readonly double Top
+		=> Y;
+
+	public readonly double Right
+		=> X + Width - 1;
+
+	public readonly double Bottom
+		=> Y + Height - 1;
+
+	public override readonly string ToString ()
+		=> $"x:{X} y:{Y} w:{Width} h:{Height}";
 
 	public readonly bool ContainsPoint (double x, double y)
 	{
@@ -71,17 +73,23 @@ public readonly record struct RectangleD
 		return true;
 	}
 
-	public readonly bool ContainsPoint (in PointD point) => ContainsPoint (point.X, point.Y);
+	public readonly bool ContainsPoint (in PointD point)
+		=> ContainsPoint (point.X, point.Y);
 
-	public readonly PointD Location () => new (X, Y);
-	public readonly PointD GetCenter () => new (X + 0.5 * Width, Y + 0.5 * Height);
+	public readonly PointD Location ()
+		=> new (X, Y);
 
-	public readonly RectangleD Inflated (double width, double height)
+	public readonly PointD GetCenter ()
+		=> new (X + 0.5 * Width, Y + 0.5 * Height);
+
+	public readonly RectangleD Inflated (
+		double width,
+		double height)
 	{
-		var newX = X - width;
-		var newY = Y - height;
-		var newWidth = Width + (width * 2);
-		var newHeight = Height + (height * 2);
+		double newX = X - width;
+		double newY = Y - height;
+		double newWidth = Width + (width * 2);
+		double newHeight = Height + (height * 2);
 		return new (newX, newY, newWidth, newHeight);
 	}
 
@@ -102,38 +110,61 @@ public readonly record struct RectangleD
 			y = 0;
 		}
 
-		return new RectangleD (x, y, w, h);
+		return new (x, y, w, h);
 	}
 }
 
-public readonly record struct RectangleI (int X, int Y, int Width, int Height)
+public readonly record struct RectangleI (
+	int X,
+	int Y,
+	int Width,
+	int Height)
 {
 	public RectangleI (in PointI point, int width, int height)
 		: this (point.X, point.Y, width, height)
-	{
-	}
+	{ }
 
 	public RectangleI (in PointI point, in Size size)
 		: this (point.X, point.Y, size.Width, size.Height)
-	{
-	}
+	{ }
 
 	public static readonly RectangleI Zero = new (0, 0, 0, 0);
 
-	public static RectangleI FromLTRB (int left, int top, int right, int bottom)
-		=> new (left, top, right - left + 1, bottom - top + 1);
+	public static RectangleI FromLTRB (
+		int left,
+		int top,
+		int right,
+		int bottom
+	)
+		=> new (
+			left,
+			top,
+			right - left + 1,
+			bottom - top + 1);
 
-	public readonly RectangleD ToDouble () => new (X, Y, Width, Height);
+	public readonly RectangleD ToDouble ()
+		=> new (X, Y, Width, Height);
 
-	public readonly int Left => X;
-	public readonly int Top => Y;
-	public readonly int Right => X + Width - 1;
-	public readonly int Bottom => Y + Height - 1;
+	public readonly int Left
+		=> X;
 
-	public readonly bool IsEmpty => (Width == 0) || (Height == 0);
+	public readonly int Top
+		=> Y;
 
-	public readonly PointI Location => new (X, Y);
-	public readonly Size Size => new (Width, Height);
+	public readonly int Right
+		=> X + Width - 1;
+
+	public readonly int Bottom
+		=> Y + Height - 1;
+
+	public readonly bool IsEmpty
+		=> (Width == 0) || (Height == 0);
+
+	public readonly PointI Location
+		=> new (X, Y);
+
+	public readonly Size Size
+		=> new (Width, Height);
 
 	public override readonly string ToString ()
 		=> $"x:{X} y:{Y} w:{Width} h:{Height}";
@@ -147,7 +178,9 @@ public readonly record struct RectangleI (int X, int Y, int Width, int Height)
 	public readonly RectangleI Intersect (RectangleI r)
 		=> Intersect (this, r);
 
-	public static RectangleI Intersect (in RectangleI a, in RectangleI b)
+	public static RectangleI Intersect (
+		in RectangleI a,
+		in RectangleI b)
 	{
 		int left = Math.Max (a.Left, b.Left);
 		int right = Math.Min (a.Right, b.Right);
@@ -163,7 +196,9 @@ public readonly record struct RectangleI (int X, int Y, int Width, int Height)
 	public readonly RectangleI Union (RectangleI r)
 		=> Union (this, r);
 
-	public static RectangleI Union (in RectangleI a, in RectangleI b)
+	public static RectangleI Union (
+		in RectangleI a,
+		in RectangleI b)
 	{
 		int left = Math.Min (a.Left, b.Left);
 		int right = Math.Max (a.Right, b.Right);

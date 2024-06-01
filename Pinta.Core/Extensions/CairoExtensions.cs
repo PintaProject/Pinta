@@ -44,9 +44,15 @@ using Cairo;
 // TODO-GTK4 (bindings, unsubmitted) - should this be added to gir.core?
 namespace Cairo
 {
-	public readonly record struct Color (double R, double G, double B, double A)
+	public readonly record struct Color (
+		double R,
+		double G,
+		double B,
+		double A)
 	{
-		public Color (double r, double g, double b) : this (r, g, b, 1.0) { }
+		public Color (double r, double g, double b)
+			: this (r, g, b, 1.0)
+		{ }
 	}
 }
 
@@ -68,19 +74,25 @@ namespace Pinta.Core
 		// Most of these functions return an affected area
 		// This can be ignored if you don't need it
 
-		public static RectangleD DrawRectangle (this Context g, RectangleD r, Color color, int lineWidth)
+		/// <returns>Bounding rectangle of changed area</returns>
+		public static RectangleD DrawRectangle (
+			this Context g,
+			RectangleD r,
+			Color color,
+			int lineWidth)
 		{
-			// Put it on a pixel line
-			if (lineWidth == 1)
-				r = new RectangleD (r.X + 0.5, r.Y + 0.5, r.Width - 1, r.Height - 1);
+			RectangleD e = // Effective rectangle
+				(lineWidth == 1)
+				? new RectangleD (r.X + 0.5, r.Y + 0.5, r.Width - 1, r.Height - 1) // Put it on a pixel line
+				: r;
 
 			g.Save ();
 
-			g.MoveTo (r.X, r.Y);
-			g.LineTo (r.X + r.Width, r.Y);
-			g.LineTo (r.X + r.Width, r.Y + r.Height);
-			g.LineTo (r.X, r.Y + r.Height);
-			g.LineTo (r.X, r.Y);
+			g.MoveTo (e.X, e.Y);
+			g.LineTo (e.X + e.Width, e.Y);
+			g.LineTo (e.X + e.Width, e.Y + e.Height);
+			g.LineTo (e.X, e.Y + e.Height);
+			g.LineTo (e.X, e.Y);
 
 			g.SetSourceColor (color);
 			g.LineWidth = lineWidth;
@@ -94,7 +106,10 @@ namespace Pinta.Core
 			return dirty;
 		}
 
-		public static Path CreateRectanglePath (this Context g, RectangleD r)
+		/// <returns>Bounding rectangle of changed area</returns>
+		public static Path CreateRectanglePath (
+			this Context g,
+			RectangleD r)
 		{
 			g.Save ();
 
@@ -105,18 +120,33 @@ namespace Pinta.Core
 			g.LineTo (r.X, r.Y);
 
 			Path path = g.CopyPath ();
+
 			g.Restore ();
 
 			return path;
 		}
 
+		/// <returns>Bounding rectangle of changed area</returns>
 		public static RectangleD StrokeExtents (this Context g)
 		{
-			g.StrokeExtents (out double x1, out double y1, out double x2, out double y2);
-			return new RectangleD (x1, y1, x2 - x1, y2 - y1);
+			g.StrokeExtents (
+				out double x1,
+				out double y1,
+				out double x2,
+				out double y2);
+
+			return new (
+				x1,
+				y1,
+				x2 - x1,
+				y2 - y1);
 		}
 
-		public static RectangleD FillRectangle (this Context g, RectangleD r, Color color)
+		/// <returns>Bounding rectangle of changed area</returns>
+		public static RectangleD FillRectangle (
+			this Context g,
+			RectangleD r,
+			Color color)
 		{
 			g.Save ();
 
@@ -131,12 +161,17 @@ namespace Pinta.Core
 			RectangleD dirty = g.StrokeExtents ();
 
 			g.Fill ();
+
 			g.Restore ();
 
 			return dirty;
 		}
 
-		public static RectangleD FillRectangle (this Context g, RectangleD r, Pattern pattern)
+		/// <returns>Bounding rectangle of changed area</returns>
+		public static RectangleD FillRectangle (
+			this Context g,
+			RectangleD r,
+			Pattern pattern)
 		{
 			g.Save ();
 
@@ -149,6 +184,7 @@ namespace Pinta.Core
 			g.SetSource (pattern);
 
 			RectangleD dirty = g.StrokeExtents ();
+
 			g.Fill ();
 
 			g.Restore ();
@@ -156,7 +192,12 @@ namespace Pinta.Core
 			return dirty;
 		}
 
-		public static RectangleD FillRectangle (this Context g, RectangleD r, Pattern pattern, PointD patternOffset)
+		/// <returns>Bounding rectangle of changed area</returns>
+		public static RectangleD FillRectangle (
+			this Context g,
+			RectangleD r,
+			Pattern pattern,
+			PointD patternOffset)
 		{
 			g.Save ();
 
@@ -166,7 +207,7 @@ namespace Pinta.Core
 			g.LineTo (r.X, r.Y + r.Height);
 			g.LineTo (r.X, r.Y);
 
-			var xform = CreateIdentityMatrix ();
+			Matrix xform = CreateIdentityMatrix ();
 			pattern.GetMatrix (xform);
 			xform.Translate (-patternOffset.X, -patternOffset.Y);
 			pattern.SetMatrix (xform);
@@ -174,6 +215,7 @@ namespace Pinta.Core
 			g.SetSource (pattern);
 
 			RectangleD dirty = g.StrokeExtents ();
+
 			g.Fill ();
 
 			g.Restore ();
@@ -181,13 +223,17 @@ namespace Pinta.Core
 			return dirty;
 		}
 
-		public static RectangleD DrawPolygonal (this Context g, ReadOnlySpan<PointD> points, Color color)
+		/// <returns>Bounding rectangle of changed area</returns>
+		public static RectangleD DrawPolygonal (
+			this Context g,
+			ReadOnlySpan<PointD> points,
+			Color color)
 		{
 			g.Save ();
 			g.MoveTo (points[0].X, points[0].Y);
-			foreach (var point in points) {
+
+			foreach (var point in points)
 				g.LineTo (point.X, point.Y);
-			}
 
 			g.SetSourceColor (color);
 			g.LineCap = LineCap.Square;
@@ -200,11 +246,16 @@ namespace Pinta.Core
 			return dirty;
 		}
 
-		public static RectangleD FillPolygonal (this Context g, ReadOnlySpan<PointD> points, Color color)
+		/// <returns>Bounding rectangle of changed area</returns>
+		public static RectangleD FillPolygonal (
+			this Context g,
+			ReadOnlySpan<PointD> points,
+			Color color)
 		{
 			g.Save ();
 
 			g.MoveTo (points[0].X, points[0].Y);
+
 			foreach (var point in points)
 				g.LineTo (point.X, point.Y);
 
@@ -218,12 +269,18 @@ namespace Pinta.Core
 			return dirty;
 		}
 
-		public static RectangleD DrawEllipse (this Context g, RectangleD r, Color color, int lineWidth)
+		/// <returns>Bounding rectangle of changed area</returns>
+		public static RectangleD DrawEllipse (
+			this Context g,
+			RectangleD r,
+			Color color,
+			int lineWidth)
 		{
 			double rx = r.Width / 2;
 			double ry = r.Height / 2;
 			double cx = r.X + rx;
 			double cy = r.Y + ry;
+
 			const double c1 = 0.552285;
 
 			g.Save ();
@@ -248,12 +305,17 @@ namespace Pinta.Core
 			return dirty;
 		}
 
-		public static RectangleD FillEllipse (this Context g, RectangleD r, Color color)
+		/// <returns>Bounding rectangle of changed area</returns>
+		public static RectangleD FillEllipse (
+			this Context g,
+			RectangleD r,
+			Color color)
 		{
 			double rx = r.Width / 2;
 			double ry = r.Height / 2;
 			double cx = r.X + rx;
 			double cy = r.Y + ry;
+
 			const double c1 = 0.552285;
 
 			g.Save ();
@@ -277,12 +339,19 @@ namespace Pinta.Core
 			return dirty;
 		}
 
-		public static RectangleD FillStrokedEllipse (this Context g, RectangleD r, Color fill, Color stroke, int lineWidth)
+		/// <returns>Bounding rectangle of changed area</returns>
+		public static RectangleD FillStrokedEllipse (
+			this Context g,
+			RectangleD r,
+			Color fill,
+			Color stroke,
+			int lineWidth)
 		{
 			double rx = r.Width / 2;
 			double ry = r.Height / 2;
 			double cx = r.X + rx;
 			double cy = r.Y + ry;
+
 			const double c1 = 0.552285;
 
 			g.Save ();
@@ -310,7 +379,12 @@ namespace Pinta.Core
 			return dirty;
 		}
 
-		public static RectangleD FillRoundedRectangle (this Context g, RectangleD r, double radius, Color fill)
+		/// <returns>Bounding rectangle of changed area</returns>
+		public static RectangleD FillRoundedRectangle (
+			this Context g,
+			RectangleD r,
+			double radius,
+			Color fill)
 		{
 			g.Save ();
 
@@ -337,17 +411,32 @@ namespace Pinta.Core
 			return dirty;
 		}
 
-		public static void QuadraticCurveTo (this Context g, double x1, double y1, double x2, double y2)
+		public static void QuadraticCurveTo (
+			this Context g,
+			double x1,
+			double y1,
+			double x2,
+			double y2)
 		{
-			g.GetCurrentPoint (out double c_x, out double c_y);
-			var cp1x = c_x + 2.0 / 3.0 * (x1 - c_x);
-			var cp1y = c_y + 2.0 / 3.0 * (y1 - c_y);
-			var cp2x = cp1x + (x2 - c_x) / 3.0;
-			var cp2y = cp1y + (y2 - c_y) / 3.0;
+			g.GetCurrentPoint (
+				out double c_x,
+				out double c_y);
+
+			double cp1x = c_x + 2.0 / 3.0 * (x1 - c_x);
+			double cp1y = c_y + 2.0 / 3.0 * (y1 - c_y);
+			double cp2x = cp1x + (x2 - c_x) / 3.0;
+			double cp2y = cp1y + (y2 - c_y) / 3.0;
+
 			g.CurveTo (cp1x, cp1y, cp2x, cp2y, x2, y2);
 		}
 
-		public static RectangleD DrawLine (this Context g, PointD p1, PointD p2, Color color, int lineWidth)
+		/// <returns>Bounding rectangle of changed area</returns>
+		public static RectangleD DrawLine (
+			this Context g,
+			PointD p1,
+			PointD p2,
+			Color color,
+			int lineWidth)
 		{
 			// Put it on a pixel line
 			if (lineWidth == 1) {
@@ -372,7 +461,11 @@ namespace Pinta.Core
 			return dirty;
 		}
 
-		public static void DrawPixbuf (this Context g, GdkPixbuf.Pixbuf pixbuf, double pixbuf_x, double pixbuf_y)
+		public static void DrawPixbuf (
+			this Context g,
+			GdkPixbuf.Pixbuf pixbuf,
+			double pixbuf_x,
+			double pixbuf_y)
 		{
 			g.Save ();
 			Gdk.Functions.CairoSetSourcePixbuf (g, pixbuf, pixbuf_x, pixbuf_y);
@@ -380,38 +473,48 @@ namespace Pinta.Core
 			g.Restore ();
 		}
 
-		public static void DrawPixbuf (this Context g, GdkPixbuf.Pixbuf pixbuf, PointD pixbuf_pos)
-			=> g.DrawPixbuf (pixbuf, pixbuf_pos.X, pixbuf_pos.Y);
-
-		public static GdkPixbuf.Pixbuf ToPixbuf (this Cairo.ImageSurface surfSource)
+		public static void DrawPixbuf (
+			this Context g,
+			GdkPixbuf.Pixbuf pixbuf,
+			PointD pixbuf_pos)
 		{
-			return Gdk.Functions.PixbufGetFromSurface (surfSource, 0, 0, surfSource.Width, surfSource.Height)!;
+			g.DrawPixbuf (pixbuf, pixbuf_pos.X, pixbuf_pos.Y);
 		}
+
+		public static GdkPixbuf.Pixbuf ToPixbuf (this ImageSurface surfSource)
+			=> Gdk.Functions.PixbufGetFromSurface (
+				surfSource,
+				0,
+				0,
+				surfSource.Width,
+				surfSource.Height
+			)!;
 
 		public static ColorBgra ToColorBgra (this Cairo.Color color)
 			=> ColorBgra.FromBgra (
 				b: (byte) (color.B * 255),
 				g: (byte) (color.G * 255),
 				r: (byte) (color.R * 255),
-				a: (byte) (color.A * 255)
-			);
+				a: (byte) (color.A * 255));
 
 		public static Cairo.Color ToCairoColor (this ColorBgra color)
 			=> new (
 				R: color.R / 255d,
 				G: color.G / 255d,
 				B: color.B / 255d,
-				A: color.A / 255d
-			);
+				A: color.A / 255d);
 
 		public static ImageSurface Clone (this ImageSurface surf)
 		{
 			if (PintaCore.Workspace.HasOpenDocuments)
 				PintaCore.Workspace.ActiveDocument.SignalSurfaceCloned ();
 
-			ImageSurface newsurf = CairoExtensions.CreateImageSurface (surf.Format, surf.Width, surf.Height);
+			ImageSurface newsurf = CreateImageSurface (
+				surf.Format,
+				surf.Width,
+				surf.Height);
 
-			var g = new Context (newsurf);
+			Context g = new (newsurf);
 			g.SetSourceSurface (surf, 0, 0);
 			g.Paint ();
 
@@ -422,18 +525,15 @@ namespace Pinta.Core
 		{
 			var doc = PintaCore.Workspace.ActiveDocument;
 
-			Path newpath;
-
-			var g = new Context (doc.Layers.CurrentUserLayer.Surface);
+			Context g = new (doc.Layers.CurrentUserLayer.Surface);
 			g.AppendPath (path);
-			newpath = g.CopyPath ();
 
-			return newpath;
+			return g.CopyPath ();
 		}
 
 		public static void Clear (this ImageSurface surface)
 		{
-			var g = new Context (surface) { Operator = Operator.Clear };
+			Context g = new (surface) { Operator = Operator.Clear };
 			g.Paint ();
 		}
 
@@ -449,19 +549,32 @@ namespace Pinta.Core
 
 		public static void MarkDirty (this ImageSurface surface, in RectangleI rect)
 		{
-			surface.MarkDirty (rect.X, rect.Y, rect.Width, rect.Height);
+			surface.MarkDirty (
+				rect.X,
+				rect.Y,
+				rect.Width,
+				rect.Height);
 		}
 
 		public static RectangleD PathExtents (this Context context)
 		{
-			context.PathExtents (out double x1, out double y1, out double x2, out double y2);
-			return new RectangleD (x1, y1, x2 - x1, y2 - y1);
+			context.PathExtents (
+				out double x1,
+				out double y1,
+				out double x2,
+				out double y2);
+
+			return new (
+				x1,
+				y1,
+				x2 - x1,
+				y2 - y1);
 		}
 
 		public static RectangleI GetBounds (this Path path)
 		{
 			var doc = PintaCore.Workspace.ActiveDocument;
-			var g = new Context (doc.Layers.CurrentUserLayer.Surface);
+			Context g = new (doc.Layers.CurrentUserLayer.Surface);
 			g.AppendPath (path);
 			return g.PathExtents ().ToInt ();
 		}
@@ -485,19 +598,19 @@ namespace Pinta.Core
 		}
 
 		public static RectangleI GetBounds (this ImageSurface surf)
-		{
-			return new RectangleI (0, 0, surf.Width, surf.Height);
-		}
+			=> new (0, 0, surf.Width, surf.Height);
 
 		public static Size GetSize (this ImageSurface surf)
-		{
-			return new Size (surf.Width, surf.Height);
-		}
+			=> new (surf.Width, surf.Height);
 
 		public static ColorBgra GetBilinearSample (this ImageSurface src, float x, float y)
-		{
-			return GetBilinearSample (src, src.GetReadOnlyPixelData (), src.Width, src.Height, x, y);
-		}
+			=> GetBilinearSample (
+				src,
+				src.GetReadOnlyPixelData (),
+				src.Width,
+				src.Height,
+				x,
+				y);
 
 		public static ColorBgra GetBilinearSample (this ImageSurface src, ReadOnlySpan<ColorBgra> src_data, int srcWidth, int srcHeight, float x, float y)
 		{
@@ -507,47 +620,60 @@ namespace Pinta.Core
 			float u = x;
 			float v = y;
 
-			if (u >= 0 && v >= 0 && u < srcWidth && v < srcHeight) {
-				unchecked {
-					int iu = (int) Math.Floor (u);
-					uint sxfrac = (uint) (256 * (u - iu));
-					uint sxfracinv = 256 - sxfrac;
-
-					int iv = (int) Math.Floor (v);
-					uint syfrac = (uint) (256 * (v - iv));
-					uint syfracinv = 256 - syfrac;
-
-					uint wul = sxfracinv * syfracinv;
-					uint wur = sxfrac * syfracinv;
-					uint wll = sxfracinv * syfrac;
-					uint wlr = sxfrac * syfrac;
-
-					int sx = iu;
-					int sy = iv;
-					int sleft = sx;
-					int sright = (sleft == (srcWidth - 1)) ? sleft : sleft + 1;
-
-					int stop = sy;
-					int sbottom = (stop == (srcHeight - 1)) ? stop : stop + 1;
-
-					ColorBgra cul = src.GetColorBgra (src_data, srcWidth, new (sleft, stop));
-					ColorBgra cur = src.GetColorBgra (src_data, srcWidth, new (sright, stop));
-					ColorBgra cll = src.GetColorBgra (src_data, srcWidth, new (sleft, sbottom));
-					ColorBgra clr = src.GetColorBgra (src_data, srcWidth, new (sright, sbottom));
-
-					return ColorBgra.BlendColors4W16IP (cul, wul, cur, wur, cll, wll, clr, wlr);
-				}
-			} else {
+			if (u < 0 || v < 0 || u >= srcWidth || v >= srcHeight)
 				return ColorBgra.FromUInt32 (0);
+
+			unchecked {
+				int iu = (int) Math.Floor (u);
+				uint sxfrac = (uint) (256 * (u - iu));
+				uint sxfracinv = 256 - sxfrac;
+
+				int iv = (int) Math.Floor (v);
+				uint syfrac = (uint) (256 * (v - iv));
+				uint syfracinv = 256 - syfrac;
+
+				uint wul = sxfracinv * syfracinv;
+				uint wur = sxfrac * syfracinv;
+				uint wll = sxfracinv * syfrac;
+				uint wlr = sxfrac * syfrac;
+
+				int sx = iu;
+				int sy = iv;
+				int sleft = sx;
+				int sright = (sleft == (srcWidth - 1)) ? sleft : sleft + 1;
+
+				int stop = sy;
+				int sbottom = (stop == (srcHeight - 1)) ? stop : stop + 1;
+
+				ColorBgra cul = src.GetColorBgra (src_data, srcWidth, new (sleft, stop));
+				ColorBgra cur = src.GetColorBgra (src_data, srcWidth, new (sright, stop));
+				ColorBgra cll = src.GetColorBgra (src_data, srcWidth, new (sleft, sbottom));
+				ColorBgra clr = src.GetColorBgra (src_data, srcWidth, new (sright, sbottom));
+
+				return ColorBgra.BlendColors4W16IP (cul, wul, cur, wur, cll, wll, clr, wlr);
 			}
 		}
 
-		public static ColorBgra GetBilinearSampleClamped (this ImageSurface src, float x, float y)
-		{
-			return GetBilinearSampleClamped (src, src.GetReadOnlyPixelData (), src.Width, src.Height, x, y);
-		}
+		public static ColorBgra GetBilinearSampleClamped (
+			this ImageSurface src,
+			float x,
+			float y
+		)
+			=> GetBilinearSampleClamped (
+				src,
+				src.GetReadOnlyPixelData (),
+				src.Width,
+				src.Height,
+				x,
+				y);
 
-		public static ColorBgra GetBilinearSampleClamped (this ImageSurface src, ReadOnlySpan<ColorBgra> src_data, int srcWidth, int srcHeight, float x, float y)
+		public static ColorBgra GetBilinearSampleClamped (
+			this ImageSurface src,
+			ReadOnlySpan<ColorBgra> src_data,
+			int srcWidth,
+			int srcHeight,
+			float x,
+			float y)
 		{
 			if (!Utility.IsNumber (x) || !Utility.IsNumber (y))
 				return ColorBgra.Transparent;
@@ -586,12 +712,26 @@ namespace Pinta.Core
 			}
 		}
 
-		public static ColorBgra GetBilinearSampleWrapped (this ImageSurface src, float x, float y)
-		{
-			return GetBilinearSampleWrapped (src, src.GetReadOnlyPixelData (), src.Width, src.Height, x, y);
-		}
+		public static ColorBgra GetBilinearSampleWrapped (
+			this ImageSurface src,
+			float x,
+			float y
+		)
+			=> GetBilinearSampleWrapped (
+				src,
+				src.GetReadOnlyPixelData (),
+				src.Width,
+				src.Height,
+				x,
+				y);
 
-		public static ColorBgra GetBilinearSampleWrapped (this ImageSurface src, ReadOnlySpan<ColorBgra> src_data, int srcWidth, int srcHeight, float x, float y)
+		public static ColorBgra GetBilinearSampleWrapped (
+			this ImageSurface src,
+			ReadOnlySpan<ColorBgra> src_data,
+			int srcWidth,
+			int srcHeight,
+			float x,
+			float y)
 		{
 			if (!Utility.IsNumber (x) || !Utility.IsNumber (y))
 				return ColorBgra.Transparent;
@@ -652,9 +792,8 @@ namespace Pinta.Core
 
 		public static void TranslatePointsInPlace (this Span<PointI> points, PointI delta)
 		{
-			for (int i = 0; i < points.Length; ++i) {
+			for (int i = 0; i < points.Length; ++i)
 				points[i] += delta;
-			}
 		}
 
 		private struct Edge
@@ -821,7 +960,9 @@ namespace Pinta.Core
 			return scans.MoveToImmutable ();
 		}
 
-		public static Path CreatePolygonPath (this Context g, IReadOnlyList<IReadOnlyList<PointI>> polygonSet)
+		public static Path CreatePolygonPath (
+			this Context g,
+			IReadOnlyList<IReadOnlyList<PointI>> polygonSet)
 		{
 			g.Save ();
 			PointI p;
@@ -861,45 +1002,50 @@ namespace Pinta.Core
 		/// <param name="r1">The first given Rectangle.</param>
 		/// <param name="r2">The second given Rectangle.</param>
 		/// <returns></returns>
-		public static RectangleD? UnionRectangles (this RectangleD? r1, RectangleD? r2)
+		public static RectangleD? UnionRectangles (
+			this RectangleD? r1,
+			RectangleD? r2)
 		{
-			if (r1 == null) {
-				//r2 is the only given Rectangle that could still have a value, and if it's null, return that anyways.
+			if (!r1.HasValue) //r2 is the only given Rectangle that could still have a value, and if it's null, return that anyways.
 				return r2;
-			} else if (r2 == null) {
-				//Only r1 has a value.
+
+			if (!r2.HasValue) //Only r1 has a value.
 				return r1;
-			} else {
-				//Both r1 and r2 have values.
 
-				//Calculate the left-most and top-most values.
-				double minX = Math.Min (r1.Value.X, r2.Value.X);
-				double minY = Math.Min (r1.Value.Y, r2.Value.Y);
+			// If execution reaches this point, then both r1 and r2 have values.
 
-				//Calculate the right-most and bottom-most values and subtract the left-most and top-most values from them to get the width and height.
-				return new RectangleD (minX, minY,
-					Math.Max (r1.Value.X + r1.Value.Width, r2.Value.X + r2.Value.Width) - minX,
-					Math.Max (r1.Value.Y + r1.Value.Height, r2.Value.Y + r2.Value.Height) - minY);
-			}
+			//Calculate the left-most and top-most values.
+
+			PointD min = new (
+				X: Math.Min (r1.Value.X, r2.Value.X),
+				Y: Math.Min (r1.Value.Y, r2.Value.Y)
+			);
+
+			//Calculate the right-most and bottom-most values and subtract the left-most and top-most values from them to get the width and height.
+			return new RectangleD (
+				min.X,
+				min.Y,
+				Math.Max (r1.Value.X + r1.Value.Width, r2.Value.X + r2.Value.Width) - min.X,
+				Math.Max (r1.Value.Y + r1.Value.Height, r2.Value.Y + r2.Value.Height) - min.Y);
 		}
 
 		public static Pattern CreateTransparentBackgroundPattern (int size)
-		{
-			var surface = CreateTransparentBackgroundSurface (size);
-			return surface.ToTiledPattern ();
-		}
+			=>
+				CreateTransparentBackgroundSurface (size)
+				.ToTiledPattern ();
 
 		public static ImageSurface CreateTransparentBackgroundSurface (int size)
 		{
 			var surface = CreateImageSurface (Format.Argb32, size, size);
 
 			// Draw the checkerboard
-			var g = new Context (surface);
+			Context g = new (surface);
+
 			// Fill white
 			g.FillRectangle (new RectangleD (0, 0, size, size), new Color (1, 1, 1));
 
-			var color = new Color (0.78, 0.78, 0.78);
-			var half_size = size / 2;
+			Color color = new (0.78, 0.78, 0.78);
+			int half_size = size / 2;
 
 			// Draw gray squares
 			g.FillRectangle (new RectangleD (0, 0, half_size, half_size), color);
@@ -909,128 +1055,137 @@ namespace Pinta.Core
 		}
 
 		public static Pattern ToTiledPattern (this Surface surface)
-		{
-			var pattern = new Cairo.SurfacePattern (surface) {
-				Extend = Extend.Repeat
-			};
+			=> new SurfacePattern (surface) { Extend = Extend.Repeat };
 
-			return pattern;
-		}
-
-		public static void Rectangle (this Context g, RectangleD r)
+		public static void Rectangle (
+			this Context g,
+			RectangleD r)
 		{
 			g.Rectangle (r.X, r.Y, r.Width, r.Height);
 		}
 
-		public static void BlendSurface (this Context g, Surface src, BlendMode mode = BlendMode.Normal, double opacity = 1.0)
+		public static void BlendSurface (
+			this Context g,
+			Surface src,
+			BlendMode mode = BlendMode.Normal,
+			double opacity = 1.0)
 		{
 			g.Save ();
+
 			g.SetBlendMode (mode);
 			g.SetSourceSurface (src, 0, 0);
 			g.PaintWithAlpha (opacity);
+
 			g.Restore ();
 		}
 
-		public static void BlendSurface (this Context g, Surface src, RectangleD roi, BlendMode mode = BlendMode.Normal, double opacity = 1.0)
+		public static void BlendSurface (
+			this Context g,
+			Surface src,
+			RectangleD roi,
+			BlendMode mode = BlendMode.Normal,
+			double opacity = 1.0)
 		{
 			g.Save ();
+
 			g.Rectangle (roi);
 			g.Clip ();
 			g.SetBlendMode (mode);
 			g.SetSourceSurface (src, 0, 0);
 			g.PaintWithAlpha (opacity);
+
 			g.Restore ();
 		}
 
-		public static void BlendSurface (this Context g, Surface src, PointD offset, BlendMode mode = BlendMode.Normal, double opacity = 1.0)
+		public static void BlendSurface (
+			this Context g,
+			Surface src,
+			PointD offset,
+			BlendMode mode = BlendMode.Normal,
+			double opacity = 1.0)
 		{
 			g.Save ();
+
 			g.Translate (offset.X, offset.Y);
 			g.SetBlendMode (mode);
 			g.SetSourceSurface (src, 0, 0);
 			g.PaintWithAlpha (opacity);
+
 			g.Restore ();
 		}
 
-		public static void SetBlendMode (this Context g, BlendMode mode)
+		public static void SetBlendMode (
+			this Context g,
+			BlendMode mode)
 		{
-			switch (mode) {
-				case BlendMode.Normal:
-					g.Operator = Operator.Over;
-					break;
-				case BlendMode.Multiply:
-					g.Operator = (Operator) ExtendedOperators.Multiply;
-					break;
-				case BlendMode.ColorBurn:
-					g.Operator = (Operator) ExtendedOperators.ColorBurn;
-					break;
-				case BlendMode.ColorDodge:
-					g.Operator = (Operator) ExtendedOperators.ColorDodge;
-					break;
-				case BlendMode.HardLight:
-					g.Operator = (Operator) ExtendedOperators.HardLight;
-					break;
-				case BlendMode.SoftLight:
-					g.Operator = (Operator) ExtendedOperators.SoftLight;
-					break;
-				case BlendMode.Overlay:
-					g.Operator = (Operator) ExtendedOperators.Overlay;
-					break;
-				case BlendMode.Difference:
-					g.Operator = (Operator) ExtendedOperators.Difference;
-					break;
-				case BlendMode.Color:
-					g.Operator = (Operator) ExtendedOperators.HslColor;
-					break;
-				case BlendMode.Luminosity:
-					g.Operator = (Operator) ExtendedOperators.HslLuminosity;
-					break;
-				case BlendMode.Hue:
-					g.Operator = (Operator) ExtendedOperators.HslHue;
-					break;
-				case BlendMode.Saturation:
-					g.Operator = (Operator) ExtendedOperators.HslSaturation;
-					break;
-				case BlendMode.Lighten:
-					g.Operator = (Operator) ExtendedOperators.Lighten;
-					break;
-				case BlendMode.Darken:
-					g.Operator = (Operator) ExtendedOperators.Darken;
-					break;
-				case BlendMode.Screen:
-					g.Operator = (Operator) ExtendedOperators.Screen;
-					break;
-				case BlendMode.Xor:
-					g.Operator = Operator.Xor;
-					break;
-			}
+			g.Operator = GetBlendModeOperator (mode);
 		}
 
-		public static void SetSourceSurface (this Context g, Surface surface, double x, double y, ResamplingMode resamplingMode)
+		private static Operator GetBlendModeOperator (BlendMode mode)
+			=> mode switch {
+				BlendMode.Normal => Operator.Over,
+				BlendMode.Multiply => (Operator) ExtendedOperators.Multiply,
+				BlendMode.ColorBurn => (Operator) ExtendedOperators.ColorBurn,
+				BlendMode.ColorDodge => (Operator) ExtendedOperators.ColorDodge,
+				BlendMode.HardLight => (Operator) ExtendedOperators.HardLight,
+				BlendMode.SoftLight => (Operator) ExtendedOperators.SoftLight,
+				BlendMode.Overlay => (Operator) ExtendedOperators.Overlay,
+				BlendMode.Difference => (Operator) ExtendedOperators.Difference,
+				BlendMode.Color => (Operator) ExtendedOperators.HslColor,
+				BlendMode.Luminosity => (Operator) ExtendedOperators.HslLuminosity,
+				BlendMode.Hue => (Operator) ExtendedOperators.HslHue,
+				BlendMode.Saturation => (Operator) ExtendedOperators.HslSaturation,
+				BlendMode.Lighten => (Operator) ExtendedOperators.Lighten,
+				BlendMode.Darken => (Operator) ExtendedOperators.Darken,
+				BlendMode.Screen => (Operator) ExtendedOperators.Screen,
+				BlendMode.Xor => Operator.Xor,
+				_ => throw new ArgumentOutOfRangeException (nameof (mode)),
+			};
+
+		public static void SetSourceSurface (
+			this Context g,
+			Surface surface,
+			double x,
+			double y,
+			ResamplingMode resamplingMode)
 		{
-			var src_pattern = new SurfacePattern (surface) { Filter = resamplingMode.ToCairoFilter () };
+			SurfacePattern src_pattern = new (surface) {
+				Filter = resamplingMode.ToCairoFilter (),
+			};
+
 			g.SetSource (src_pattern);
 		}
 
-		public static RectangleI GetRectangleFromPoints (PointI a, PointI b, int inflate)
+		public static RectangleI GetRectangleFromPoints (
+			PointI a,
+			PointI b,
+			int inflate)
 		{
-			var x1 = Math.Min (a.X, b.X);
-			var y1 = Math.Min (a.Y, b.Y);
-			var x2 = Math.Max (a.X, b.X);
-			var y2 = Math.Max (a.Y, b.Y);
+			int x1 = Math.Min (a.X, b.X);
+			int y1 = Math.Min (a.Y, b.Y);
+			int x2 = Math.Max (a.X, b.X);
+			int y2 = Math.Max (a.Y, b.Y);
+
 			return new RectangleI (x1, y1, x2 - x1, y2 - y1).Inflated (inflate, inflate);
 		}
 
 		/// <summary>
 		/// Create a rectangle with a positive width / height from the provided points.
 		/// </summary>
-		public static RectangleD PointsToRectangle (PointD p1, PointD p2)
+		public static RectangleD PointsToRectangle (
+			PointD p1,
+			PointD p2)
 		{
 			double y1 = Math.Min (p1.Y, p2.Y);
 			double y2 = Math.Max (p1.Y, p2.Y);
 			double x1 = Math.Min (p1.X, p2.X);
 			double x2 = Math.Max (p1.X, p2.X);
-			return new (x1, y1, x2 - x1, y2 - y1);
+
+			return new (
+				x1,
+				y1,
+				x2 - x1,
+				y2 - y1);
 		}
 
 		// TODO-GTK4 (bindings) - remove once gir.core has improved bindings for Cairo.Region (https://github.com/gircore/gir.core/pull/621)
@@ -1063,7 +1218,13 @@ namespace Pinta.Core
 
 		public static Region CreateRegion (in RectangleI rect)
 		{
-			var cairo_rect = new CairoRectangleInt () { X = rect.X, Y = rect.Y, Width = rect.Width, Height = rect.Height };
+			CairoRectangleInt cairo_rect = new () {
+				X = rect.X,
+				Y = rect.Y,
+				Width = rect.Width,
+				Height = rect.Height
+			};
+
 			return new Cairo.Region (RegionCreateRectangle (ref cairo_rect));
 		}
 
@@ -1270,9 +1431,12 @@ namespace Pinta.Core
 		/// <summary>
 		/// Wrapper method to create an ImageSurface and handle allocation failures.
 		/// </summary>
-		public static ImageSurface CreateImageSurface (Cairo.Format format, int width, int height)
+		public static ImageSurface CreateImageSurface (
+			Cairo.Format format,
+			int width,
+			int height)
 		{
-			ImageSurface surf = new Cairo.ImageSurface (format, width, height);
+			ImageSurface surf = new (format, width, height);
 
 			if (surf == null || surf.Status == Cairo.Status.NoMemory)
 				throw new OutOfMemoryException ("Unable to allocate memory for image");
@@ -1327,7 +1491,12 @@ namespace Pinta.Core
 		/// <param name="line_cap">The line cap style being used.</param>
 		/// <param name="dash_list">The Cairo dash pattern.</param>
 		/// <param name="offset">The offset into the dash pattern to begin drawing from.</param>
-		public static void CreateDashPattern (string dash_pattern, double brush_width, LineCap line_cap, out double[] dash_list, out double offset)
+		public static void CreateDashPattern (
+			string dash_pattern,
+			double brush_width,
+			LineCap line_cap,
+			out double[] dash_list,
+			out double offset)
 		{
 			// An empty cairo pattern or a pattern with no dashes just draws a normal line.
 			// Cairo draws a normal line when the dash list is empty.
@@ -1337,18 +1506,21 @@ namespace Pinta.Core
 				return;
 			}
 
-			var dashes = new List<double> ();
+			List<double> dashes = new ();
 
 			// Count the number of consecutive dashes / spaces.
 			// e.g. "---  - " produces { 3.0, 2.0, 1.0, 1.0 }
 			{
 				var is_dash = dash_pattern.Select (c => c == '-').ToArray ();
 				int count = 0;
+
 				for (int i = 0; i < dash_pattern.Length; ++i, ++count) {
-					if (i > 0 && is_dash[i] != is_dash[i - 1]) {
-						dashes.Add (count);
-						count = 0;
-					}
+
+					if (i <= 0 || is_dash[i] == is_dash[i - 1])
+						continue;
+
+					dashes.Add (count);
+					count = 0;
 				}
 
 				dashes.Add (count);
@@ -1397,50 +1569,77 @@ namespace Pinta.Core
 		}
 
 		/// <summary>
-		/// Sets the dash pattern from a string (see CreateDashPattern()).
+		/// Sets the dash pattern from a string
+		/// (see <see cref="CreateDashPattern"/>).
 		/// </summary>
-		public static void SetDashFromString (this Context context, string dash_pattern, double brush_width, LineCap line_cap = LineCap.Butt)
+		public static void SetDashFromString (
+			this Context context,
+			string dash_pattern,
+			double brush_width,
+			LineCap line_cap = LineCap.Butt)
 		{
-			CreateDashPattern (dash_pattern, brush_width, line_cap, out var dashes, out var offset);
-			context.SetDash (dashes, offset);
+			CreateDashPattern (
+				dash_pattern,
+				brush_width,
+				line_cap,
+				out var dashes,
+				out var offset);
+
+			context.SetDash (
+				dashes,
+				offset);
 		}
 
 		/// <summary>
 		/// Access the image surface's data as a read-only span of ColorBgra pixels.
 		/// </summary>
 		public static ReadOnlySpan<ColorBgra> GetReadOnlyPixelData (this ImageSurface surface)
-		{
-			return surface.GetPixelData ();
-		}
+			=> surface.GetPixelData ();
 
 		/// <summary>
 		/// Access the image surface's data as a span of ColorBgra pixels.
 		/// </summary>
 		public static Span<ColorBgra> GetPixelData (this ImageSurface surface)
-		{
-			return MemoryMarshal.Cast<byte, ColorBgra> (surface.GetData ());
-		}
+			=> MemoryMarshal.Cast<byte, ColorBgra> (surface.GetData ());
 
-		public static void SetSourceColor (this Context context, Color color)
-		{
-			context.SetSourceRgba (color.R, color.G, color.B, color.A);
-		}
+		public static void SetSourceColor (
+			this Context context,
+			Color color
+		)
+			=> context.SetSourceRgba (
+				color.R,
+				color.G,
+				color.B,
+				color.A);
 
-		public static void AddColorStop (this Gradient gradient, double offset, Color color)
-		{
-			gradient.AddColorStopRgba (offset, color.R, color.G, color.B, color.A);
-		}
+		public static void AddColorStop (
+			this Gradient gradient,
+			double offset,
+			Color color
+		)
+			=> gradient.AddColorStopRgba (
+				offset,
+				color.R,
+				color.G,
+				color.B,
+				color.A);
 
 		public static Matrix CreateIdentityMatrix ()
 		{
-			var matrix = new Matrix ();
+			Matrix matrix = new ();
 			matrix.InitIdentity ();
 			return matrix;
 		}
 
-		public static Matrix CreateMatrix (double xx, double xy, double yx, double yy, double x0, double y0)
+		public static Matrix CreateMatrix (
+			double xx,
+			double xy,
+			double yx,
+			double yy,
+			double x0,
+			double y0)
 		{
-			var matrix = new Matrix ();
+			Matrix matrix = new ();
 			matrix.Init (xx, xy, yx, yy, x0, y0);
 			return matrix;
 		}
@@ -1448,7 +1647,9 @@ namespace Pinta.Core
 		// TODO-GTK4 (bindings) - requires improvements to struct generation (https://github.com/gircore/gir.core/issues/622)
 		// This needs to have a proper copy operator in gir.core, or access to the 6 float fields.
 		// Should also audit all usages of Cairo.Matrix which changed from a struct to a class with gir.core
-		public static void InitMatrix (this Matrix m, Matrix other)
+		public static void InitMatrix (
+			this Matrix m,
+			Matrix other)
 		{
 			m.InitIdentity ();
 			m.Multiply (other);
@@ -1458,15 +1659,17 @@ namespace Pinta.Core
 		// This needs to have a proper copy operator in gir.core, or access to the 6 float fields.
 		public static Matrix Clone (this Matrix m)
 		{
-			var result = CreateIdentityMatrix ();
+			Matrix result = CreateIdentityMatrix ();
 			result.Multiply (m);
 			return result;
 		}
 
-		public static void TransformPoint (this Matrix m, ref Core.PointD p)
+		public static void TransformPoint (
+			this Matrix m,
+			ref Core.PointD p)
 		{
-			var newX = p.X;
-			var newY = p.Y;
+			double newX = p.X;
+			double newY = p.Y;
 			m.TransformPoint (ref newX, ref newY);
 			p = new Core.PointD (newX, newY);
 		}
@@ -1474,28 +1677,41 @@ namespace Pinta.Core
 		/// <summary>
 		/// Port of gdk_cairo_get_clip_rectangle from GTK3
 		/// </summary>
-		public static bool GetClipRectangle (Cairo.Context context, out RectangleI rect)
+		public static bool GetClipRectangle (
+			Cairo.Context context,
+			out RectangleI rect)
 		{
-			context.ClipExtents (out double x1, out double y1, out double x2, out double y2);
+			context.ClipExtents (
+				out double x1,
+				out double y1,
+				out double x2,
+				out double y2);
+
 			bool clip_exists = x1 < x2 && y1 < y2;
 
 			rect = new RectangleD (x1, y1, x2 - x1, y2 - y1).ToInt ();
+
 			return clip_exists;
 		}
 
-		public static ImageSurface CreateColorSwatch (int size, Color color)
+		public static ImageSurface CreateColorSwatch (
+			int size,
+			Color color)
 		{
-			var surf = CreateImageSurface (Cairo.Format.Argb32, size, size);
-			var g = new Cairo.Context (surf);
+			ImageSurface surf = CreateImageSurface (Cairo.Format.Argb32, size, size);
+			Context g = new (surf);
+
 			g.FillRectangle (new RectangleD (0, 0, size, size), color);
 			g.DrawRectangle (new RectangleD (0, 0, size, size), new Color (0, 0, 0), 1);
+
 			return surf;
 		}
 
 		public static ImageSurface CreateTransparentColorSwatch (int size, bool drawBorder)
 		{
-			var surface = CairoExtensions.CreateTransparentBackgroundSurface (size);
-			var g = new Cairo.Context (surface);
+			ImageSurface surface = CreateTransparentBackgroundSurface (size);
+			Context g = new (surface);
+
 			if (drawBorder)
 				g.DrawRectangle (new RectangleD (0, 0, size, size), new Color (0, 0, 0), 1);
 
