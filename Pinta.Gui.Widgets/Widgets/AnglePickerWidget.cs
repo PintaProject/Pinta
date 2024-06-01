@@ -19,13 +19,16 @@ public sealed class AnglePickerWidget : Box
 	private readonly SpinButton spin;
 	private readonly Button button;
 	private readonly Label label;
+	private readonly DegreesAngle initial_angle;
 
-	public AnglePickerWidget ()
+	public AnglePickerWidget (DegreesAngle initialAngle)
 	{
 		const int spacing = 6;
 
+		initial_angle = initialAngle;
+
 		// Section label + line
-		var hbox1 = new Box { Spacing = spacing };
+		Box hbox1 = new () { Spacing = spacing };
 		hbox1.SetOrientation (Orientation.Horizontal);
 
 		label = new Label ();
@@ -34,7 +37,7 @@ public sealed class AnglePickerWidget : Box
 		hbox1.Append (label);
 
 		// Angle graphic + spinner + reset button
-		var hbox2 = new Box { Spacing = spacing };
+		Box hbox2 = new () { Spacing = spacing };
 		hbox2.SetOrientation (Orientation.Horizontal);
 
 		anglepickergraphic1 = new AnglePickerGraphic {
@@ -73,12 +76,10 @@ public sealed class AnglePickerWidget : Box
 		spin.OnValueChanged += HandleSpinValueChanged;
 		button.OnClicked += HandleButtonClicked;
 
-		OnRealize += (_, _) => anglepickergraphic1.Value = DefaultValue;
+		OnRealize += (_, _) => anglepickergraphic1.Value = initialAngle;
 
 		spin.SetActivatesDefault (true);
 	}
-
-	public DegreesAngle DefaultValue { get; set; }
 
 	public string Label {
 		get => label.GetText ();
@@ -116,7 +117,7 @@ public sealed class AnglePickerWidget : Box
 
 	private void HandleButtonClicked (object? sender, EventArgs e)
 	{
-		Value = DefaultValue;
+		Value = initial_angle;
 	}
 
 	private void OnValueChanged () => ValueChanged?.Invoke (this, EventArgs.Empty);
