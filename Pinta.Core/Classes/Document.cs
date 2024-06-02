@@ -37,6 +37,7 @@ public sealed class Document
 {
 	private string display_name = string.Empty;
 	private Gio.File? file = null;
+
 	private bool is_dirty;
 
 	private DocumentSelection selection = null!; // NRT - Set by constructor via Selection property
@@ -297,7 +298,10 @@ public sealed class Document
 	/// Optionally, the history item for resizing the canvas can be added to
 	/// a CompoundHistoryItem if it is part of a larger action (e.g. pasting an image).
 	/// </param>
-	public void ResizeCanvas (Size newSize, Anchor anchor, CompoundHistoryItem? compoundAction)
+	public void ResizeCanvas (
+		Size newSize,
+		Anchor anchor,
+		CompoundHistoryItem? compoundAction)
 	{
 		if (ImageSize == newSize)
 			return;
@@ -308,6 +312,7 @@ public sealed class Document
 			Icon = Resources.Icons.ImageResizeCanvas,
 			Text = Translations.GetString ("Resize Canvas")
 		};
+
 		hist.StartSnapshotOfImage ();
 
 		double scale = Workspace.Scale;
@@ -319,11 +324,10 @@ public sealed class Document
 
 		hist.FinishSnapshotOfImage ();
 
-		if (compoundAction != null) {
+		if (compoundAction != null)
 			compoundAction.Push (hist);
-		} else {
+		else
 			Workspace.History.PushNewItem (hist);
-		}
 
 		ResetSelectionPaths ();
 
@@ -363,17 +367,17 @@ public sealed class Document
 	// Rotate image 180 degrees (flip H+V)
 	public void RotateImage180 ()
 	{
-		RotateImage (new (180));
+		RotateImage (new DegreesAngle (180));
 	}
 
 	public void RotateImageCW ()
 	{
-		RotateImage (new (90));
+		RotateImage (new DegreesAngle (90));
 	}
 
 	public void RotateImageCCW ()
 	{
-		RotateImage (new (-90));
+		RotateImage (new DegreesAngle (-90));
 	}
 
 	/// <summary>
