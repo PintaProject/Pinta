@@ -474,16 +474,10 @@ public static class Utility
 		if (steps < 1)
 			throw new ArgumentOutOfRangeException (nameof (steps));
 
-		double fullTurn = RadiansAngle.MAX_RADIANS;
+		const double fullTurn = RadiansAngle.MAX_RADIANS;
 		double stepAngle = fullTurn / steps;
-		int sector = Convert.ToInt32 (Math.Truncate (angle.Radians / stepAngle));
+		double sector = Math.Round (angle.Radians / stepAngle) * stepAngle;
 
-		double leftStepAngle = sector * stepAngle;
-		double rightStepAngle = (sector + 1) * stepAngle;
-
-		if ((angle.Radians - leftStepAngle) < (rightStepAngle - angle.Radians))
-			return new (leftStepAngle);
-		else
-			return new (rightStepAngle);
+		return new (sector);
 	}
 }
