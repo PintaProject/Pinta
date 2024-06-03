@@ -58,7 +58,7 @@ public sealed class TileEffect : BaseEffect
 	{
 		int width = dst.Width;
 		int height = dst.Height;
-		double rotation = Data.Rotation;
+		RadiansAngle rotationTheta = Data.Rotation.ToRadians ();
 		float preliminaryIntensity = Data.Intensity;
 		int tileSize = Data.TileSize;
 
@@ -69,8 +69,8 @@ public sealed class TileEffect : BaseEffect
 			height: height,
 			hw: width / 2f,
 			hh: height / 2f,
-			sin: (float) Math.Sin (rotation * Math.PI / 180.0),
-			cos: (float) Math.Cos (rotation * Math.PI / 180.0),
+			sin: (float) Math.Sin (rotationTheta.Radians),
+			cos: (float) Math.Cos (rotationTheta.Radians),
 			scale: (float) Math.PI / tileSize,
 			intensity: preliminaryIntensity * preliminaryIntensity / 10 * Math.Sign (preliminaryIntensity),
 			aaLevel: aaLevel,
@@ -82,7 +82,7 @@ public sealed class TileEffect : BaseEffect
 	private static void InitializeAntiAliasPoints (TileSettings settings, Span<PointD> destination)
 	{
 		for (int i = 0; i < settings.aaSamples; ++i) {
-			double x = (i * settings.aaLevel) / (double) settings.aaSamples;
+			double x = i * settings.aaLevel / ((double) settings.aaSamples);
 			double y = i / (double) settings.aaSamples;
 
 			x -= (int) x;
@@ -172,7 +172,7 @@ public sealed class TileEffect : BaseEffect
 	public sealed class TileData : EffectData
 	{
 		[Caption ("Rotation"), MinimumValue (-45), MaximumValue (45)]
-		public double Rotation { get; set; } = 30;
+		public DegreesAngle Rotation { get; set; } = new (30);
 
 		[Caption ("Tile Size"), MinimumValue (2), MaximumValue (200)]
 		public int TileSize { get; set; } = 40;
