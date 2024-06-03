@@ -42,13 +42,15 @@ public abstract class BaseTransformTool : BaseTool
 	private bool using_mouse = false;
 
 	/// <summary>
-	/// Initializes a new instance of the <see cref="Pinta.Tools.BaseTransformTool"/> class.
+	/// Initializes a new instance of the <see cref="BaseTransformTool"/> class.
 	/// </summary>
 	public BaseTransformTool (IServiceProvider services) : base (services)
 	{
 	}
 
-	protected override void OnMouseDown (Document document, ToolMouseEventArgs e)
+	protected override void OnMouseDown (
+		Document document,
+		ToolMouseEventArgs e)
 	{
 		if (IsActive)
 			return;
@@ -70,37 +72,40 @@ public abstract class BaseTransformTool : BaseTool
 		OnStartTransform (document);
 	}
 
-	protected override void OnMouseMove (Document document, ToolMouseEventArgs e)
+	protected override void OnMouseMove (
+		Document document,
+		ToolMouseEventArgs e)
 	{
 		if (!IsActive || !using_mouse)
 			return;
 
-		var constrain = e.IsShiftPressed;
+		bool constrain = e.IsShiftPressed;
 
-		var center = source_rect.GetCenter ();
+		PointD center = source_rect.GetCenter ();
 
 		// The cursor position can be a subpixel value. Round to an integer
 		// so that we only translate by entire pixels.
 		// (Otherwise, blurring / anti-aliasing may be introduced)
-		var dx = Math.Floor (e.PointDouble.X - original_point.X);
-		var dy = Math.Floor (e.PointDouble.Y - original_point.Y);
 
-		var cx1 = original_point.X - center.X;
-		var cy1 = original_point.Y - center.Y;
+		double dx = Math.Floor (e.PointDouble.X - original_point.X);
+		double dy = Math.Floor (e.PointDouble.Y - original_point.Y);
 
-		var cx2 = e.PointDouble.X - center.X;
-		var cy2 = e.PointDouble.Y - center.Y;
+		PointD c1 = original_point - center;
+		PointD c2 = e.PointDouble - center;
 
-		var angle = Math.Atan2 (cy1, cx1) - Math.Atan2 (cy2, cx2);
+		RadiansAngle angle = new (Math.Atan2 (c1.Y, c1.X) - Math.Atan2 (c2.Y, c2.X));
 
 		transform.InitIdentity ();
 
 		if (is_scaling) {
-			var sx = (cx1 + dx) / cx1;
-			var sy = (cy1 + dy) / cy1;
+
+			double sx = (c1.X + dx) / c1.X;
+			double sy = (c1.Y + dy) / c1.Y;
 
 			if (constrain) {
-				var max_scale = Math.Max (Math.Abs (sx), Math.Abs (sy));
+
+				double max_scale = Math.Max (Math.Abs (sx), Math.Abs (sy));
+
 				sx = max_scale * Math.Sign (sx);
 				sy = max_scale * Math.Sign (sy);
 			}
@@ -109,12 +114,14 @@ public abstract class BaseTransformTool : BaseTool
 			transform.Scale (sx, sy);
 			transform.Translate (-center.X, -center.Y);
 		} else if (is_rotating) {
+
 			if (constrain)
 				angle = Utility.GetNearestStepAngle (angle, rotate_steps);
 
 			transform.Translate (center.X, center.Y);
-			transform.Rotate (-angle);
+			transform.Rotate (-angle.Radians);
 			transform.Translate (-center.X, -center.Y);
+
 		} else {
 			transform.Translate (dx, dy);
 		}
@@ -122,7 +129,9 @@ public abstract class BaseTransformTool : BaseTool
 		OnUpdateTransform (document, transform);
 	}
 
-	protected override void OnMouseUp (Document document, ToolMouseEventArgs e)
+	protected override void OnMouseUp (
+		Document document,
+		ToolMouseEventArgs e)
 	{
 		if (!IsActive || !using_mouse)
 			return;
@@ -130,14 +139,15 @@ public abstract class BaseTransformTool : BaseTool
 		OnFinishTransform (document, transform);
 	}
 
-	protected override bool OnKeyDown (Document document, ToolKeyEventArgs e)
+	protected override bool OnKeyDown (
+		Document document,
+		ToolKeyEventArgs e)
 	{
-		// Don't handle the arrow keys while already interacting via the mouse.
-		if (using_mouse)
+		if (using_mouse) // Don't handle the arrow keys while already interacting via the mouse.
 			return base.OnKeyDown (document, e);
 
-		var dx = 0.0;
-		var dy = 0.0;
+		double dx = 0.0;
+		double dy = 0.0;
 
 		switch (e.Key) {
 			case Gdk.Key.Left:
@@ -168,7 +178,9 @@ public abstract class BaseTransformTool : BaseTool
 		return true;
 	}
 
-	protected override bool OnKeyUp (Document document, ToolKeyEventArgs e)
+	protected override bool OnKeyUp (
+		Document document,
+		ToolKeyEventArgs e)
 	{
 		if (IsActive && !using_mouse)
 			OnFinishTransform (document, transform);
@@ -184,11 +196,14 @@ public abstract class BaseTransformTool : BaseTool
 		transform.InitIdentity ();
 	}
 
-	protected virtual void OnUpdateTransform (Document document, Matrix transform)
-	{
-	}
+	protected virtual void OnUpdateTransform (
+		Document document,
+		Matrix transform)
+	{ }
 
-	protected virtual void OnFinishTransform (Document document, Matrix transform)
+	protected virtual void OnFinishTransform (
+		Document document,
+		Matrix transform)
 	{
 		is_dragging = false;
 		is_rotating = false;
@@ -196,6 +211,7 @@ public abstract class BaseTransformTool : BaseTool
 		using_mouse = false;
 	}
 
-	private bool IsActive => is_dragging || is_rotating || is_scaling;
+	private bool IsActive
+		=> is_dragging || is_rotating || is_scaling;
 }
 

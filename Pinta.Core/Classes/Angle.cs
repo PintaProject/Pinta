@@ -4,7 +4,7 @@ namespace Pinta.Core;
 
 public readonly struct RadiansAngle
 {
-	private const double MAX_RADIANS = Math.PI * 2;
+	public const double MAX_RADIANS = Math.PI * 2;
 	public readonly double Radians { get; }
 
 	public RadiansAngle (double radians)
@@ -38,7 +38,7 @@ public readonly struct RadiansAngle
 
 public readonly struct DegreesAngle
 {
-	private const double MAX_DEGREES = 360;
+	public const double MAX_DEGREES = 360;
 	public readonly double Degrees { get; }
 
 	public DegreesAngle (double degrees)
@@ -72,7 +72,7 @@ public readonly struct DegreesAngle
 
 public readonly struct RevolutionsAngle
 {
-	private const double MAX_REVOLUTIONS = 1;
+	public const double MAX_REVOLUTIONS = 1;
 	public readonly double Revolutions { get; }
 
 	public RevolutionsAngle (double revolutions)

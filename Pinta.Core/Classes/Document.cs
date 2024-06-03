@@ -37,6 +37,7 @@ public sealed class Document
 {
 	private string display_name = string.Empty;
 	private Gio.File? file = null;
+
 	private bool is_dirty;
 
 	private DocumentSelection selection = null!; // NRT - Set by constructor via Selection property
@@ -57,7 +58,7 @@ public sealed class Document
 
 	public DocumentSelection PreviousSelection { get; set; } = new ();
 
-	public Document (Core.Size size)
+	public Document (Size size)
 	{
 		Selection = new DocumentSelection ();
 
@@ -141,14 +142,14 @@ public sealed class Document
 		int y = Math.Clamp (r.Y, 0, ImageSize.Height);
 		int width = Math.Min (r.Width, ImageSize.Width - x);
 		int height = Math.Min (r.Height, ImageSize.Height - y);
-
-		return new RectangleI (x, y, width, height);
+		return new (x, y, width, height);
 	}
 
 	public PointD ClampToImageSize (PointD p)
-	{
-		return new (Math.Clamp (p.X, 0, ImageSize.Width), Math.Clamp (p.Y, 0, ImageSize.Height));
-	}
+		=> new (
+			Math.Clamp (p.X, 0, ImageSize.Width),
+			Math.Clamp (p.Y, 0, ImageSize.Height)
+		);
 
 	/// <summary>
 	/// Sets File to null while keeping the DisplayName the same.
@@ -171,14 +172,14 @@ public sealed class Document
 
 	public Context CreateClippedContext ()
 	{
-		Context g = new Context (Layers.CurrentUserLayer.Surface);
+		Context g = new (Layers.CurrentUserLayer.Surface);
 		Selection.Clip (g);
 		return g;
 	}
 
 	public Context CreateClippedContext (bool antialias)
 	{
-		Context g = new Context (Layers.CurrentUserLayer.Surface);
+		Context g = new (Layers.CurrentUserLayer.Surface);
 		Selection.Clip (g);
 		g.Antialias = antialias ? Antialias.Subpixel : Antialias.None;
 		return g;
@@ -186,14 +187,14 @@ public sealed class Document
 
 	public Context CreateClippedToolContext ()
 	{
-		Context g = new Context (Layers.ToolLayer.Surface);
+		Context g = new (Layers.ToolLayer.Surface);
 		Selection.Clip (g);
 		return g;
 	}
 
 	public Context CreateClippedToolContext (bool antialias)
 	{
-		Context g = new Context (Layers.ToolLayer.Surface);
+		Context g = new (Layers.ToolLayer.Surface);
 		Selection.Clip (g);
 		g.Antialias = antialias ? Antialias.Subpixel : Antialias.None;
 		return g;
@@ -205,12 +206,13 @@ public sealed class Document
 		if (!Layers.ShowSelectionLayer)
 			return;
 
-		FinishPixelsHistoryItem hist = new FinishPixelsHistoryItem ();
+		FinishPixelsHistoryItem hist = new ();
+
 		hist.TakeSnapshot ();
 
 		Layer layer = Layers.SelectionLayer;
 
-		var g = new Cairo.Context (Layers.CurrentUserLayer.Surface);
+		Context g = new (Layers.CurrentUserLayer.Surface);
 		selection.Clip (g);
 		layer.Draw (g);
 
@@ -243,10 +245,16 @@ public sealed class Document
 	/// </summary>
 	public ColorBgra GetComputedPixel (PointI position)
 	{
-		var dst = CairoExtensions.CreateImageSurface (Format.Argb32, 1, 1);
-		var g = new Context (dst);
+		ImageSurface dst = CairoExtensions.CreateImageSurface (
+			Format.Argb32,
+			1,
+			1);
+
+		Context g = new (dst);
+
 		foreach (var layer in Layers.GetLayersToPaint ()) {
-			var color = layer.Surface.GetColorBgra (position).ToStraightAlpha ().ToCairoColor ();
+
+			Color color = layer.Surface.GetColorBgra (position).ToStraightAlpha ().ToCairoColor ();
 
 			g.SetBlendMode (layer.BlendMode);
 			g.SetSourceColor (color);
@@ -263,7 +271,7 @@ public sealed class Document
 	/// <param name="canvasOnly">false for the whole selection, true for the part only on our canvas</param>
 	public RectangleI GetSelectedBounds (bool canvasOnly)
 	{
-		var bounds = Selection.SelectionPath.GetBounds ();
+		RectangleI bounds = Selection.SelectionPath.GetBounds ();
 
 		if (canvasOnly)
 			bounds = ClampToImageSize (bounds);
@@ -273,7 +281,7 @@ public sealed class Document
 
 	public void ResetSelectionPaths ()
 	{
-		var rect = new Core.RectangleD (0, 0, ImageSize.Width, ImageSize.Height);
+		RectangleD rect = new (0, 0, ImageSize.Width, ImageSize.Height);
 		Selection.CreateRectangleSelection (rect);
 		PreviousSelection.CreateRectangleSelection (rect);
 		Selection.Visible = false;
@@ -290,17 +298,21 @@ public sealed class Document
 	/// Optionally, the history item for resizing the canvas can be added to
 	/// a CompoundHistoryItem if it is part of a larger action (e.g. pasting an image).
 	/// </param>
-	public void ResizeCanvas (Size newSize, Anchor anchor, CompoundHistoryItem? compoundAction)
+	public void ResizeCanvas (
+		Size newSize,
+		Anchor anchor,
+		CompoundHistoryItem? compoundAction)
 	{
 		if (ImageSize == newSize)
 			return;
 
 		PintaCore.Tools.Commit ();
 
-		ResizeHistoryItem hist = new ResizeHistoryItem (ImageSize) {
+		ResizeHistoryItem hist = new (ImageSize) {
 			Icon = Resources.Icons.ImageResizeCanvas,
 			Text = Translations.GetString ("Resize Canvas")
 		};
+
 		hist.StartSnapshotOfImage ();
 
 		double scale = Workspace.Scale;
@@ -312,25 +324,27 @@ public sealed class Document
 
 		hist.FinishSnapshotOfImage ();
 
-		if (compoundAction != null) {
+		if (compoundAction != null)
 			compoundAction.Push (hist);
-		} else {
+		else
 			Workspace.History.PushNewItem (hist);
-		}
 
 		ResetSelectionPaths ();
 
 		Workspace.Scale = scale;
 	}
 
-	public void ResizeImage (Size newSize, ResamplingMode resamplingMode)
+	public void ResizeImage (
+		Size newSize,
+		ResamplingMode resamplingMode)
 	{
 		if (ImageSize == newSize)
 			return;
 
 		PintaCore.Tools.Commit ();
 
-		ResizeHistoryItem hist = new ResizeHistoryItem (ImageSize);
+		ResizeHistoryItem hist = new (ImageSize);
+
 		hist.StartSnapshotOfImage ();
 
 		double scale = Workspace.Scale;
@@ -353,25 +367,26 @@ public sealed class Document
 	// Rotate image 180 degrees (flip H+V)
 	public void RotateImage180 ()
 	{
-		RotateImage (180);
+		RotateImage (new DegreesAngle (180));
 	}
 
 	public void RotateImageCW ()
 	{
-		RotateImage (90);
+		RotateImage (new DegreesAngle (90));
 	}
 
 	public void RotateImageCCW ()
 	{
-		RotateImage (-90);
+		RotateImage (new DegreesAngle (-90));
 	}
 
 	/// <summary>
 	/// Rotates the image by the specified angle (in degrees)
 	/// </summary>
-	private void RotateImage (double angle)
+	private void RotateImage (DegreesAngle angle)
 	{
-		var new_size = Layer.RotateDimensions (ImageSize, angle);
+		Size new_size = Layer.RotateDimensions (ImageSize, angle);
+
 		foreach (var layer in Layers.UserLayers)
 			layer.Rotate (angle, ImageSize, new_size);
 

@@ -24,7 +24,6 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 // THE SOFTWARE.
 
-using System;
 using System.Collections.ObjectModel;
 using Cairo;
 
@@ -41,12 +40,18 @@ public sealed class UserLayer : Layer
 	public ReEditableLayer TextLayer { get; }
 
 	//Call the base class constructor and setup the engines.
-	public UserLayer (ImageSurface surface) : this (surface, false, 1f, "")
-	{
-	}
+	public UserLayer (ImageSurface surface)
+		: this (surface, false, 1f, "")
+	{ }
 
 	//Call the base class constructor and setup the engines.
-	public UserLayer (ImageSurface surface, bool hidden, double opacity, string name) : base (surface, hidden, opacity, name)
+	public UserLayer (
+		ImageSurface surface,
+		bool hidden,
+		double opacity,
+		string name
+	)
+		: base (surface, hidden, opacity, name)
 	{
 		TextEngine = new TextEngine ();
 		TextLayer = new ReEditableLayer (this);
@@ -59,7 +64,10 @@ public sealed class UserLayer : Layer
 	public RectangleI TextBounds { get; set; } = RectangleI.Zero;
 	public RectangleI PreviousTextBounds { get; set; } = RectangleI.Zero;
 
-	public override void ApplyTransform (Matrix xform, Size old_size, Size new_size)
+	public override void ApplyTransform (
+		Matrix xform,
+		Size old_size,
+		Size new_size)
 	{
 		base.ApplyTransform (xform, old_size, new_size);
 
@@ -69,13 +77,16 @@ public sealed class UserLayer : Layer
 		}
 	}
 
-	public void Rotate (double angle, Size old_size, Size new_size)
+	public void Rotate (
+		DegreesAngle angle,
+		Size old_size,
+		Size new_size)
 	{
-		double radians = (angle / 180d) * Math.PI;
+		RadiansAngle radians = angle.ToRadians ();
 
-		var xform = CairoExtensions.CreateIdentityMatrix ();
+		Matrix xform = CairoExtensions.CreateIdentityMatrix ();
 		xform.Translate (new_size.Width / 2.0, new_size.Height / 2.0);
-		xform.Rotate (radians);
+		xform.Rotate (radians.Radians);
 		xform.Translate (-old_size.Width / 2.0, -old_size.Height / 2.0);
 
 		ApplyTransform (xform, old_size, new_size);
@@ -85,31 +96,26 @@ public sealed class UserLayer : Layer
 	{
 		base.Crop (rect, selection);
 
-		foreach (ReEditableLayer rel in ReEditableLayers) {
+		foreach (ReEditableLayer rel in ReEditableLayers)
 			if (rel.IsLayerSetup)
 				rel.Layer.Crop (rect, selection);
-		}
 	}
 
 	public override void ResizeCanvas (Size newSize, Anchor anchor)
 	{
 		base.ResizeCanvas (newSize, anchor);
 
-		foreach (ReEditableLayer rel in ReEditableLayers) {
-			if (rel.IsLayerSetup) {
+		foreach (ReEditableLayer rel in ReEditableLayers)
+			if (rel.IsLayerSetup)
 				rel.Layer.ResizeCanvas (newSize, anchor);
-			}
-		}
 	}
 
 	public override void Resize (Size newSize, ResamplingMode resamplingMode)
 	{
 		base.Resize (newSize, resamplingMode);
 
-		foreach (ReEditableLayer rel in ReEditableLayers) {
-			if (rel.IsLayerSetup) {
+		foreach (ReEditableLayer rel in ReEditableLayers)
+			if (rel.IsLayerSetup)
 				rel.Layer.Resize (newSize, resamplingMode);
-			}
-		}
 	}
 }

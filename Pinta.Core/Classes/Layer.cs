@@ -41,7 +41,11 @@ public class Layer : ObservableObject
 	{
 	}
 
-	public Layer (ImageSurface surface, bool hidden, double opacity, string name)
+	public Layer (
+		ImageSurface surface,
+		bool hidden,
+		double opacity,
+		string name)
 	{
 		Surface = surface;
 
@@ -89,9 +93,13 @@ public class Layer : ObservableObject
 
 	public void FlipHorizontal ()
 	{
-		var dest = CairoExtensions.CreateImageSurface (Format.Argb32, Surface.Width, Surface.Height);
+		ImageSurface dest = CairoExtensions.CreateImageSurface (
+			Format.Argb32,
+			Surface.Width,
+			Surface.Height);
 
-		var g = new Cairo.Context (dest);
+		Context g = new (dest);
+
 		g.SetMatrix (CairoExtensions.CreateMatrix (-1, 0, 0, 1, Surface.Width, 0));
 		g.SetSourceSurface (Surface, 0, 0);
 
@@ -102,9 +110,13 @@ public class Layer : ObservableObject
 
 	public void FlipVertical ()
 	{
-		var dest = CairoExtensions.CreateImageSurface (Format.Argb32, Surface.Width, Surface.Height);
+		ImageSurface dest = CairoExtensions.CreateImageSurface (
+			Format.Argb32,
+			Surface.Width,
+			Surface.Height);
 
-		var g = new Cairo.Context (dest);
+		Context g = new (dest);
+
 		g.SetMatrix (CairoExtensions.CreateMatrix (1, 0, 0, -1, 0, Surface.Height));
 		g.SetSourceSurface (Surface, 0, 0);
 
@@ -118,7 +130,11 @@ public class Layer : ObservableObject
 		Draw (ctx, Surface, Opacity);
 	}
 
-	public void Draw (Context ctx, ImageSurface surface, double opacity, bool transform = true)
+	public void Draw (
+		Context ctx,
+		ImageSurface surface,
+		double opacity,
+		bool transform = true)
 	{
 		ctx.Save ();
 
@@ -130,7 +146,12 @@ public class Layer : ObservableObject
 		ctx.Restore ();
 	}
 
-	public void DrawWithOperator (Context ctx, ImageSurface surface, Operator op, double opacity = 1.0, bool transform = true)
+	public void DrawWithOperator (
+		Context ctx,
+		ImageSurface surface,
+		Operator op,
+		double opacity = 1.0,
+		bool transform = true)
 	{
 		ctx.Save ();
 
@@ -148,11 +169,17 @@ public class Layer : ObservableObject
 		ctx.Restore ();
 	}
 
-	public virtual void ApplyTransform (Matrix xform, Size old_size, Size new_size)
+	public virtual void ApplyTransform (
+		Matrix xform,
+		Size old_size,
+		Size new_size)
 	{
-		var dest = CairoExtensions.CreateImageSurface (Format.Argb32, new_size.Width, new_size.Height);
+		ImageSurface dest = CairoExtensions.CreateImageSurface (
+			Format.Argb32,
+			new_size.Width,
+			new_size.Height);
 
-		var g = new Context (dest);
+		Context g = new (dest);
 
 		g.Transform (xform);
 		g.SetSourceSurface (Surface, 0, 0);
@@ -162,24 +189,29 @@ public class Layer : ObservableObject
 		Surface = dest;
 	}
 
-	public static Size RotateDimensions (Size originalSize, double angle)
+	public static Size RotateDimensions (Size originalSize, DegreesAngle angle)
 	{
-		double radians = (angle / 180d) * Math.PI;
+		RadiansAngle radians = angle.ToRadians ();
 
-		double cos = Math.Abs (Math.Cos (radians));
-		double sin = Math.Abs (Math.Sin (radians));
+		double cos = Math.Abs (Math.Cos (radians.Radians));
+		double sin = Math.Abs (Math.Sin (radians.Radians));
 
 		int w = originalSize.Width;
 		int h = originalSize.Height;
 
-		return new Size ((int) (w * cos + h * sin), (int) (w * sin + h * cos));
+		return new Size (
+			(int) (w * cos + h * sin),
+			(int) (w * sin + h * cos));
 	}
 
 	public virtual void Resize (Size newSize, ResamplingMode resamplingMode)
 	{
-		ImageSurface dest = CairoExtensions.CreateImageSurface (Format.Argb32, newSize.Width, newSize.Height);
+		ImageSurface dest = CairoExtensions.CreateImageSurface (
+			Format.Argb32,
+			newSize.Width,
+			newSize.Height);
 
-		var g = new Context (dest);
+		Context g = new (dest);
 
 		g.Scale (newSize.Width / (double) Surface.Width, newSize.Height / (double) Surface.Height);
 		g.SetSourceSurface (Surface, 0, 0, resamplingMode);
@@ -191,16 +223,18 @@ public class Layer : ObservableObject
 
 	public virtual void ResizeCanvas (Size newSize, Anchor anchor)
 	{
-		ImageSurface dest = CairoExtensions.CreateImageSurface (Format.Argb32, newSize.Width, newSize.Height);
+		ImageSurface dest = CairoExtensions.CreateImageSurface (
+			Format.Argb32,
+			newSize.Width,
+			newSize.Height);
 
 		PointI delta = new (
 			X: Surface.Width - newSize.Width,
-			Y: Surface.Height - newSize.Height
-		);
+			Y: Surface.Height - newSize.Height);
 
-		var anchorPoint = GetAnchorPoint (delta, anchor);
+		PointD anchorPoint = GetAnchorPoint (delta, anchor);
 
-		var g = new Context (dest);
+		Context g = new (dest);
 
 		g.SetSourceSurface (Surface, anchorPoint.X, anchorPoint.Y);
 		g.Paint ();
@@ -209,8 +243,7 @@ public class Layer : ObservableObject
 	}
 
 	private static PointD GetAnchorPoint (PointI delta, Anchor anchor)
-	{
-		return anchor switch {
+		=> anchor switch {
 			Anchor.NW => new (0, 0),
 			Anchor.N => new (-delta.X / 2, 0),
 			Anchor.NE => new (-delta.X, 0),
@@ -222,13 +255,16 @@ public class Layer : ObservableObject
 			Anchor.Center => new (-delta.X / 2, -delta.Y / 2),
 			_ => throw new InvalidEnumArgumentException (nameof (anchor), (int) anchor, typeof (Anchor)),
 		};
-	}
 
 	public virtual void Crop (RectangleI rect, Path? selection)
 	{
-		ImageSurface dest = CairoExtensions.CreateImageSurface (Format.Argb32, rect.Width, rect.Height);
+		ImageSurface dest = CairoExtensions.CreateImageSurface (
+			Format.Argb32,
+			rect.Width,
+			rect.Height);
 
-		var g = new Context (dest);
+		Context g = new (dest);
+
 		// Move the selected content to the upper left
 		g.Translate (-rect.X, -rect.Y);
 		g.Antialias = Antialias.None;
