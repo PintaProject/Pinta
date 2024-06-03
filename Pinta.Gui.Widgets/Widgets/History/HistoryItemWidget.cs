@@ -22,22 +22,22 @@
 // THE SOFTWARE.
 
 using System;
-using Gtk;
 using Pinta.Core;
 
 namespace Pinta.Gui.Widgets;
 
 // GObject subclass for use with Gio.ListStore
-public class HistoryListViewItem : GObject.Object
+public sealed class HistoryListViewItem : GObject.Object
 {
 	private readonly BaseHistoryItem item;
 
 	public HistoryListViewItem (BaseHistoryItem item) : base (true, Array.Empty<GObject.ConstructArgument> ())
 	{
 		if (string.IsNullOrEmpty (item.Text))
-			throw new ArgumentNullException ($"nameof{item.Text} must contain value.");
+			throw new ArgumentException ($"{nameof (item.Text)} must contain value.");
+
 		if (string.IsNullOrEmpty (item.Icon))
-			throw new ArgumentNullException ($"nameof{item.Icon} must contain value.");
+			throw new ArgumentException ($"{nameof (item.Icon)} must contain value.");
 
 		this.item = item;
 	}
@@ -47,7 +47,7 @@ public class HistoryListViewItem : GObject.Object
 	public bool Active => item.State == HistoryItemState.Undo;
 }
 
-public class HistoryItemWidget : Box
+public sealed class HistoryItemWidget : Gtk.Box
 {
 	private readonly Gtk.Image image;
 	private readonly Gtk.Label label;
@@ -55,14 +55,17 @@ public class HistoryItemWidget : Box
 	public HistoryItemWidget ()
 	{
 		Spacing = 6;
+
 		this.SetAllMargins (2);
-		SetOrientation (Orientation.Horizontal);
+
+		SetOrientation (Gtk.Orientation.Horizontal);
 
 		image = Gtk.Image.New ();
-		Append (image);
 
 		label = Gtk.Label.New (string.Empty);
-		label.Halign = Align.Start;
+		label.Halign = Gtk.Align.Start;
+
+		Append (image);
 		Append (label);
 	}
 
