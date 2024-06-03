@@ -83,32 +83,23 @@ public sealed class CurvesDialog : Gtk.Dialog
 
 	public CurvesDialog (IChromeService chrome, CurvesData effectData)
 	{
-		Title = Translations.GetString ("Curves");
-		TransientFor = chrome.MainWindow;
-		Modal = true;
-		this.AddCancelOkButtons ();
-		this.SetDefaultResponse (Gtk.ResponseType.Ok);
-
-		Resizable = false;
+		const int spacing = 6;
 
 		Gtk.Box content_area = this.GetContentAreaBox ();
 		content_area.SetAllMargins (12);
-		content_area.Spacing = 6;
+		content_area.Spacing = spacing;
 
-		const int spacing = 6;
 		Gtk.Box hbox1 = new () { Spacing = spacing };
 		hbox1.SetOrientation (Gtk.Orientation.Horizontal);
 		hbox1.Append (Gtk.Label.New (Translations.GetString ("Transfer Map")));
 
 		Gtk.ComboBoxText comboMap = new ();
-		combo_map = comboMap;
 		comboMap.AppendText (Translations.GetString ("RGB"));
 		comboMap.AppendText (Translations.GetString ("Luminosity"));
 		comboMap.Active = 1;
 		hbox1.Append (comboMap);
 
 		Gtk.Label labelPoint = Gtk.Label.New ("(256, 256)");
-		label_point = labelPoint;
 		labelPoint.Hexpand = true;
 		labelPoint.Halign = Gtk.Align.End;
 		hbox1.Append (labelPoint);
@@ -119,45 +110,36 @@ public sealed class CurvesDialog : Gtk.Dialog
 			HeightRequest = 256,
 			CanFocus = true,
 		};
-		curves_drawing = curvesDrawing;
 		curvesDrawing.SetAllMargins (8);
 		content_area.Append (curvesDrawing);
 
 		Gtk.Box hbox2 = new ();
 		hbox2.SetOrientation (Gtk.Orientation.Horizontal);
 
-		Gtk.CheckButton checkRed = new Gtk.CheckButton { Label = Translations.GetString ("Red  "), Active = true };
-		Gtk.CheckButton checkGreen = new Gtk.CheckButton { Label = Translations.GetString ("Green"), Active = true };
-		Gtk.CheckButton checkBlue = new Gtk.CheckButton { Label = Translations.GetString ("Blue "), Active = true };
-
-		check_red = checkRed;
-		check_green = checkGreen;
-		check_blue = checkBlue;
+		Gtk.CheckButton checkRed = new () { Label = Translations.GetString ("Red  "), Active = true };
+		Gtk.CheckButton checkGreen = new () { Label = Translations.GetString ("Green"), Active = true };
+		Gtk.CheckButton checkBlue = new () { Label = Translations.GetString ("Blue "), Active = true };
 
 		hbox2.Prepend (checkBlue);
 		hbox2.Prepend (checkGreen);
 		hbox2.Prepend (checkRed);
 
-		Gtk.Button buttonReset = new Gtk.Button {
+		Gtk.Button buttonReset = new () {
 			WidthRequest = 81,
 			HeightRequest = 30,
 			Label = Translations.GetString ("Reset"),
 			Halign = Gtk.Align.End,
 			Hexpand = true,
 		};
-		button_reset = buttonReset;
 		hbox2.Append (buttonReset);
 		content_area.Append (hbox2);
 
 		Gtk.Label labelTip = Gtk.Label.New (Translations.GetString ("Tip: Right-click to remove control points."));
-		label_tip = labelTip;
 		content_area.Append (labelTip);
 
 		checkRed.Hide ();
 		checkGreen.Hide ();
 		checkBlue.Hide ();
-
-		EffectData = effectData;
 
 		comboMap.OnChanged += HandleComboMapChanged;
 		buttonReset.OnClicked += HandleButtonResetClicked;
@@ -176,6 +158,36 @@ public sealed class CurvesDialog : Gtk.Dialog
 		click_controller.SetButton (0); // Handle all buttons
 		click_controller.OnPressed += HandleDrawingButtonPressEvent;
 		curvesDrawing.AddController (click_controller);
+
+		// --- Gtk.Window initialization
+
+		Title = Translations.GetString ("Curves");
+
+		TransientFor = chrome.MainWindow;
+
+		Modal = true;
+
+		Resizable = false;
+
+		// --- Gtk.Dialog initialization
+
+		this.AddCancelOkButtons ();
+		this.SetDefaultResponse (Gtk.ResponseType.Ok);
+
+		// --- References to keep
+
+		curves_drawing = curvesDrawing;
+		combo_map = comboMap;
+		label_point = labelPoint;
+		check_red = checkRed;
+		check_green = checkGreen;
+		check_blue = checkBlue;
+		button_reset = buttonReset;
+		label_tip = labelTip;
+
+		// --- Initialization
+
+		EffectData = effectData;
 
 		ResetControlPoints ();
 	}
