@@ -25,15 +25,13 @@
 // THE SOFTWARE.
 
 using System;
-using Gtk;
 using Pinta.Core;
 
 namespace Pinta.Gui.Widgets;
 
-public sealed class ReseedButtonWidget : Box
+public sealed class ReseedButtonWidget : Gtk.Box
 {
-	private readonly Label label;
-	private readonly Button button;
+	private readonly Gtk.Label section_label;
 
 	public event EventHandler? Clicked;
 
@@ -41,34 +39,48 @@ public sealed class ReseedButtonWidget : Box
 	{
 		const int spacing = 6;
 
-		// Section label + line
-		label = new ();
-		label.AddCssClass (AdwaitaStyles.Title4);
-		label.Hexpand = false;
-		label.Halign = Align.Start;
+		Gtk.Label sectionLabel = CreateSectionLabel ();
+		Gtk.Button reseedButton = CreateReseedButton ();
 
-		// Reseed button
-		button = new Button {
+		// Main layout
+		SetOrientation (Gtk.Orientation.Vertical);
+		Spacing = spacing;
+		Append (sectionLabel);
+		Append (reseedButton);
+
+		// --- References to keep
+
+		section_label = sectionLabel;
+	}
+
+	private Gtk.Button CreateReseedButton ()
+	{
+		Gtk.Button result = new () {
 			WidthRequest = 88,
 			CanFocus = true,
 			UseUnderline = true,
-			Label = Pinta.Core.Translations.GetString ("Reseed"),
+			Label = Translations.GetString ("Reseed"),
 			Hexpand = false,
-			Halign = Align.Start
+			Halign = Gtk.Align.Start,
 		};
 
-		// Main layout
-		SetOrientation (Orientation.Vertical);
-		Spacing = spacing;
-		Append (label);
-		Append (button);
+		result.OnClicked += (_, _) => Clicked?.Invoke (this, EventArgs.Empty);
 
-		button.OnClicked += (_, _) => Clicked?.Invoke (this, EventArgs.Empty);
+		return result;
+	}
+
+	private static Gtk.Label CreateSectionLabel ()
+	{
+		Gtk.Label result = new ();
+		result.AddCssClass (AdwaitaStyles.Title4);
+		result.Hexpand = false;
+		result.Halign = Gtk.Align.Start;
+		return result;
 	}
 
 	public string Label {
-		get => label.GetText ();
-		set => label.SetText (value);
+		get => section_label.GetText ();
+		set => section_label.SetText (value);
 	}
 }
 
