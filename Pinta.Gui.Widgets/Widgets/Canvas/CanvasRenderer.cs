@@ -120,10 +120,11 @@ public sealed class CanvasRenderer
 	{
 		Span<ColorBgra> dst_data = dst.GetPixelData ();
 
-		// Draw horizontal lines
-
 		int dstHeight = dst.Height;
 		int dstWidth = dst.Width;
+
+		// Draw horizontal lines
+
 		int sTop = D2SLookupY[offset.Y];
 		int sBottom = D2SLookupY[offset.Y + dstHeight];
 
