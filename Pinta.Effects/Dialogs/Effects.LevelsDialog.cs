@@ -36,7 +36,6 @@
 
 using System;
 using Cairo;
-using Gtk;
 using Pinta.Core;
 using Pinta.Gui.Widgets;
 
@@ -68,16 +67,17 @@ public partial class LevelsDialog : Gtk.Dialog
 
 	private ChannelsMask mask = new (R: true, G: true, B: true);
 
-	private readonly CheckButton check_red;
-	private readonly CheckButton check_green;
-	private readonly CheckButton check_blue;
-	private readonly Button button_auto;
-	private readonly Button button_reset;
-	private readonly SpinButton spin_in_low;
-	private readonly SpinButton spin_in_high;
-	private readonly SpinButton spin_out_low;
-	private readonly SpinButton spin_out_high;
-	private readonly SpinButton spin_out_gamma;
+	private readonly Gtk.CheckButton check_red;
+	private readonly Gtk.CheckButton check_green;
+	private readonly Gtk.CheckButton check_blue;
+	private readonly Gtk.Button button_auto;
+	private readonly Gtk.Button button_reset;
+	private readonly Gtk.SpinButton spin_in_low;
+	private readonly Gtk.SpinButton spin_in_high;
+	private readonly Gtk.SpinButton spin_out_low;
+	private readonly Gtk.SpinButton spin_out_high;
+	private readonly Gtk.SpinButton spin_out_gamma;
+
 	private readonly ColorGradientWidget gradient_input;
 	private readonly ColorGradientWidget gradient_output;
 	private readonly ColorPanelWidget colorpanel_in_high;
@@ -92,7 +92,10 @@ public partial class LevelsDialog : Gtk.Dialog
 
 	public LevelsData EffectData { get; }
 
-	public LevelsDialog (IChromeService chrome, IWorkspaceService workspace, LevelsData effectData)
+	public LevelsDialog (
+		IChromeService chrome,
+		IWorkspaceService workspace,
+		LevelsData effectData)
 	{
 		this.chrome = chrome;
 		this.workspace = workspace;
@@ -105,30 +108,30 @@ public partial class LevelsDialog : Gtk.Dialog
 
 		Resizable = false;
 
-		var hboxChecks = new Box { Spacing = spacing };
-		hboxChecks.SetOrientation (Orientation.Horizontal);
-		check_red = new CheckButton { Label = Translations.GetString ("Red"), Active = true };
+		var hboxChecks = new Gtk.Box { Spacing = spacing };
+		hboxChecks.SetOrientation (Gtk.Orientation.Horizontal);
+		check_red = new Gtk.CheckButton { Label = Translations.GetString ("Red"), Active = true };
 		hboxChecks.Append (check_red);
-		check_green = new CheckButton { Label = Translations.GetString ("Green"), Active = true };
+		check_green = new Gtk.CheckButton { Label = Translations.GetString ("Green"), Active = true };
 		hboxChecks.Append (check_green);
-		check_blue = new CheckButton { Label = Translations.GetString ("Blue"), Active = true };
+		check_blue = new Gtk.CheckButton { Label = Translations.GetString ("Blue"), Active = true };
 		hboxChecks.Append (check_blue);
 
-		button_auto = (Button) AddButton (Translations.GetString ("Auto"), (int) ResponseType.None);
-		button_reset = (Button) AddButton (Translations.GetString ("Reset"), (int) ResponseType.None);
-		AddActionWidget (hboxChecks, (int) ResponseType.None);
+		button_auto = (Gtk.Button) AddButton (Translations.GetString ("Auto"), (int) Gtk.ResponseType.None);
+		button_reset = (Gtk.Button) AddButton (Translations.GetString ("Reset"), (int) Gtk.ResponseType.None);
+		AddActionWidget (hboxChecks, (int) Gtk.ResponseType.None);
 
 		this.AddCancelOkButtons ();
-		this.SetDefaultResponse (ResponseType.Ok);
+		this.SetDefaultResponse (Gtk.ResponseType.Ok);
 
-		spin_in_low = SpinButton.NewWithRange (0, 254, 1);
-		spin_in_high = SpinButton.NewWithRange (1, 255, 1);
+		spin_in_low = Gtk.SpinButton.NewWithRange (0, 254, 1);
+		spin_in_high = Gtk.SpinButton.NewWithRange (1, 255, 1);
 		spin_in_high.Value = 255;
 
-		spin_out_low = SpinButton.NewWithRange (0, 252, 1);
-		spin_out_high = SpinButton.NewWithRange (2, 255, 1);
+		spin_out_low = Gtk.SpinButton.NewWithRange (0, 252, 1);
+		spin_out_high = Gtk.SpinButton.NewWithRange (2, 255, 1);
 		spin_out_high.Value = 255;
-		spin_out_gamma = SpinButton.NewWithRange (0, 100, 0.1);
+		spin_out_gamma = Gtk.SpinButton.NewWithRange (0, 100, 0.1);
 		spin_out_gamma.Value = 1;
 
 		gradient_input = new ColorGradientWidget (2) { WidthRequest = 40 };
@@ -143,19 +146,19 @@ public partial class LevelsDialog : Gtk.Dialog
 		histogram_input = new HistogramWidget { WidthRequest = 130, FlipHorizontal = true };
 		histogram_output = new HistogramWidget { WidthRequest = 130 };
 
-		var hboxLayout = new Box { Spacing = spacing };
-		hboxLayout.SetOrientation (Orientation.Horizontal);
+		var hboxLayout = new Gtk.Box { Spacing = spacing };
+		hboxLayout.SetOrientation (Gtk.Orientation.Horizontal);
 		hboxLayout.SetAllMargins (spacing);
 
-		static Box CreateLabelledWidget (Widget widget, string label)
+		static Gtk.Box CreateLabelledWidget (Gtk.Widget widget, string label)
 		{
-			var vbox = new Box { Spacing = spacing };
-			vbox.SetOrientation (Orientation.Vertical);
-			var label_widget = Label.New (label);
-			label_widget.Halign = Align.Start;
+			var vbox = new Gtk.Box { Spacing = spacing };
+			vbox.SetOrientation (Gtk.Orientation.Vertical);
+			var label_widget = Gtk.Label.New (label);
+			label_widget.Halign = Gtk.Align.Start;
 			vbox.Append (label_widget);
 			widget.Vexpand = true;
-			widget.Valign = Align.Fill;
+			widget.Valign = Gtk.Align.Fill;
 			vbox.Append (widget);
 
 			return vbox;
@@ -163,24 +166,24 @@ public partial class LevelsDialog : Gtk.Dialog
 
 		hboxLayout.Append (CreateLabelledWidget (histogram_input, Translations.GetString ("Input Histogram")));
 
-		var vboxInput = new Box { Spacing = spacing };
-		vboxInput.SetOrientation (Orientation.Vertical);
+		var vboxInput = new Gtk.Box { Spacing = spacing };
+		vboxInput.SetOrientation (Gtk.Orientation.Vertical);
 		vboxInput.Append (spin_in_high);
 		vboxInput.Append (colorpanel_in_high);
-		colorpanel_in_low.Valign = Align.End;
+		colorpanel_in_low.Valign = Gtk.Align.End;
 		colorpanel_in_low.Vexpand = true;
 		vboxInput.Append (colorpanel_in_low);
 		vboxInput.Append (spin_in_low);
 
-		var hboxInput = new Box { Spacing = spacing };
-		hboxInput.SetOrientation (Orientation.Horizontal);
+		var hboxInput = new Gtk.Box { Spacing = spacing };
+		hboxInput.SetOrientation (Gtk.Orientation.Horizontal);
 		hboxInput.Append (vboxInput);
 		hboxInput.Append (gradient_input);
 
 		hboxLayout.Append (CreateLabelledWidget (hboxInput, Translations.GetString ("Input")));
 
-		var vboxOutput = new Box { Spacing = spacing };
-		vboxOutput.SetOrientation (Orientation.Vertical);
+		var vboxOutput = new Gtk.Box { Spacing = spacing };
+		vboxOutput.SetOrientation (Gtk.Orientation.Vertical);
 		vboxOutput.Append (spin_out_high);
 		vboxOutput.Append (colorpanel_out_high);
 		vboxOutput.Append (spin_out_gamma);
@@ -188,8 +191,8 @@ public partial class LevelsDialog : Gtk.Dialog
 		vboxOutput.Append (colorpanel_out_low);
 		vboxOutput.Append (spin_out_low);
 
-		var hboxOutput = new Box { Spacing = spacing };
-		hboxOutput.SetOrientation (Orientation.Horizontal);
+		var hboxOutput = new Gtk.Box { Spacing = spacing };
+		hboxOutput.SetOrientation (Gtk.Orientation.Horizontal);
 		hboxOutput.Append (gradient_output);
 		hboxOutput.Append (vboxOutput);
 
@@ -457,12 +460,16 @@ public partial class LevelsDialog : Gtk.Dialog
 		UpdateLivePreview ();
 	}
 
-	private void HandleGradientButtonPressEvent (GestureClick controller, GestureClick.PressedSignalArgs args)
+	private void HandleGradientButtonPressEvent (
+		Gtk.GestureClick controller,
+		Gtk.GestureClick.PressedSignalArgs args)
 	{
 		button_down = true;
 	}
 
-	private void HandleGradientButtonReleaseEvent (GestureClick controller, GestureClick.ReleasedSignalArgs args)
+	private void HandleGradientButtonReleaseEvent (
+		Gtk.GestureClick controller,
+		Gtk.GestureClick.ReleasedSignalArgs args)
 	{
 		button_down = false;
 
@@ -548,7 +555,9 @@ public partial class LevelsDialog : Gtk.Dialog
 		MaskChanged ();
 	}
 
-	private void HandleColorPanelButtonPressEvent (GestureClick controller, GestureClick.PressedSignalArgs args)
+	private void HandleColorPanelButtonPressEvent (
+		Gtk.GestureClick controller,
+		Gtk.GestureClick.PressedSignalArgs args)
 	{
 		if (args.NPress != 2) // double click
 			return;
