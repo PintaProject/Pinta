@@ -85,44 +85,33 @@ public sealed class CurvesDialog : Gtk.Dialog
 	{
 		const int spacing = 6;
 
-		Gtk.Box content_area = this.GetContentAreaBox ();
-		content_area.SetAllMargins (12);
-		content_area.Spacing = spacing;
-
-		Gtk.Box hbox1 = new () { Spacing = spacing };
-		hbox1.SetOrientation (Gtk.Orientation.Horizontal);
-		hbox1.Append (Gtk.Label.New (Translations.GetString ("Transfer Map")));
-
 		Gtk.ComboBoxText comboMap = new ();
 		comboMap.AppendText (Translations.GetString ("RGB"));
 		comboMap.AppendText (Translations.GetString ("Luminosity"));
 		comboMap.Active = 1;
-		hbox1.Append (comboMap);
+		comboMap.OnChanged += HandleComboMapChanged;
 
 		Gtk.Label labelPoint = Gtk.Label.New ("(256, 256)");
 		labelPoint.Hexpand = true;
 		labelPoint.Halign = Gtk.Align.End;
+
+		Gtk.Box hbox1 = new () { Spacing = spacing };
+		hbox1.SetOrientation (Gtk.Orientation.Horizontal);
+		hbox1.Append (Gtk.Label.New (Translations.GetString ("Transfer Map")));
+		hbox1.Append (comboMap);
 		hbox1.Append (labelPoint);
-		content_area.Append (hbox1);
-
-		Gtk.DrawingArea curvesDrawing = new Gtk.DrawingArea {
-			WidthRequest = 256,
-			HeightRequest = 256,
-			CanFocus = true,
-		};
-		curvesDrawing.SetAllMargins (8);
-		content_area.Append (curvesDrawing);
-
-		Gtk.Box hbox2 = new ();
-		hbox2.SetOrientation (Gtk.Orientation.Horizontal);
 
 		Gtk.CheckButton checkRed = new () { Label = Translations.GetString ("Red  "), Active = true };
-		Gtk.CheckButton checkGreen = new () { Label = Translations.GetString ("Green"), Active = true };
-		Gtk.CheckButton checkBlue = new () { Label = Translations.GetString ("Blue "), Active = true };
+		checkRed.Hide ();
+		checkRed.OnToggled += HandleCheckToggled;
 
-		hbox2.Prepend (checkBlue);
-		hbox2.Prepend (checkGreen);
-		hbox2.Prepend (checkRed);
+		Gtk.CheckButton checkGreen = new () { Label = Translations.GetString ("Green"), Active = true };
+		checkGreen.Hide ();
+		checkGreen.OnToggled += HandleCheckToggled;
+
+		Gtk.CheckButton checkBlue = new () { Label = Translations.GetString ("Blue "), Active = true };
+		checkBlue.Hide ();
+		checkBlue.OnToggled += HandleCheckToggled;
 
 		Gtk.Button buttonReset = new () {
 			WidthRequest = 81,
@@ -131,33 +120,42 @@ public sealed class CurvesDialog : Gtk.Dialog
 			Halign = Gtk.Align.End,
 			Hexpand = true,
 		};
+		buttonReset.OnClicked += HandleButtonResetClicked;
+
+		Gtk.Box hbox2 = new ();
+		hbox2.SetOrientation (Gtk.Orientation.Horizontal);
+		hbox2.Prepend (checkBlue);
+		hbox2.Prepend (checkGreen);
+		hbox2.Prepend (checkRed);
 		hbox2.Append (buttonReset);
-		content_area.Append (hbox2);
 
 		Gtk.Label labelTip = Gtk.Label.New (Translations.GetString ("Tip: Right-click to remove control points."));
-		content_area.Append (labelTip);
 
-		checkRed.Hide ();
-		checkGreen.Hide ();
-		checkBlue.Hide ();
+		Gtk.EventControllerMotion motionController = Gtk.EventControllerMotion.New ();
+		motionController.OnMotion += HandleDrawingMotionNotifyEvent;
+		motionController.OnLeave += (_, _) => InvalidateDrawing ();
 
-		comboMap.OnChanged += HandleComboMapChanged;
-		buttonReset.OnClicked += HandleButtonResetClicked;
-		checkRed.OnToggled += HandleCheckToggled;
-		checkGreen.OnToggled += HandleCheckToggled;
-		checkBlue.OnToggled += HandleCheckToggled;
+		Gtk.GestureClick clickController = Gtk.GestureClick.New ();
+		clickController.SetButton (0); // Handle all buttons
+		clickController.OnPressed += HandleDrawingButtonPressEvent;
 
+		Gtk.DrawingArea curvesDrawing = new Gtk.DrawingArea {
+			WidthRequest = 256,
+			HeightRequest = 256,
+			CanFocus = true,
+		};
+		curvesDrawing.SetAllMargins (8);
 		curvesDrawing.SetDrawFunc ((area, context, width, height) => HandleDrawingDrawnEvent (context));
+		curvesDrawing.AddController (motionController);
+		curvesDrawing.AddController (clickController);
 
-		Gtk.EventControllerMotion motion_controller = Gtk.EventControllerMotion.New ();
-		motion_controller.OnMotion += HandleDrawingMotionNotifyEvent;
-		motion_controller.OnLeave += (_, _) => InvalidateDrawing ();
-		curvesDrawing.AddController (motion_controller);
-
-		Gtk.GestureClick click_controller = Gtk.GestureClick.New ();
-		click_controller.SetButton (0); // Handle all buttons
-		click_controller.OnPressed += HandleDrawingButtonPressEvent;
-		curvesDrawing.AddController (click_controller);
+		Gtk.Box content_area = this.GetContentAreaBox ();
+		content_area.SetAllMargins (12);
+		content_area.Spacing = spacing;
+		content_area.Append (hbox1);
+		content_area.Append (curvesDrawing);
+		content_area.Append (hbox2);
+		content_area.Append (labelTip);
 
 		// --- Gtk.Window initialization
 
@@ -266,16 +264,17 @@ public sealed class CurvesDialog : Gtk.Dialog
 
 	private void AddControlPoint (int x, int y)
 	{
-		foreach (var controlPoints in GetActiveControlPoints ()) {
+		foreach (var controlPoints in GetActiveControlPoints ())
 			controlPoints[x] = Size - 1 - y;
-		}
 
 		last_cpx = x;
 
 		UpdateLivePreview (nameof (ControlPoints));
 	}
 
-	private void HandleDrawingMotionNotifyEvent (Gtk.EventControllerMotion controller, Gtk.EventControllerMotion.MotionSignalArgs args)
+	private void HandleDrawingMotionNotifyEvent (
+		Gtk.EventControllerMotion controller,
+		Gtk.EventControllerMotion.MotionSignalArgs args)
 	{
 		int x = (int) args.X;
 		int y = (int) args.Y;
@@ -317,7 +316,9 @@ public sealed class CurvesDialog : Gtk.Dialog
 	/// <summary>
 	/// If the provided coordinates are close to an existing control point, snap to the control point's coordinates.
 	/// </summary>
-	private static bool SnapToControlPointProximity (IEnumerable<SortedList<int, int>> activeControlPoints, ref PointI pos)
+	private static bool SnapToControlPointProximity (
+		IEnumerable<SortedList<int, int>> activeControlPoints,
+		ref PointI pos)
 	{
 		foreach (var controlPoints in activeControlPoints) {
 			for (int i = 0; i < controlPoints.Count; i++) {
@@ -328,10 +329,7 @@ public sealed class CurvesDialog : Gtk.Dialog
 				if (!CheckControlPointProximity (cpx, cpy, pos))
 					continue;
 
-				pos = new PointI (
-					X: cpx,
-					Y: cpy
-				);
+				pos = new PointI (X: cpx, Y: cpy);
 
 				return true;
 			}
@@ -340,12 +338,13 @@ public sealed class CurvesDialog : Gtk.Dialog
 		return false;
 	}
 
-	private void HandleDrawingButtonPressEvent (Gtk.GestureClick controller, Gtk.GestureClick.PressedSignalArgs args)
+	private void HandleDrawingButtonPressEvent (
+		Gtk.GestureClick controller,
+		Gtk.GestureClick.PressedSignalArgs args)
 	{
 		PointI pos = new (
 			X: (int) args.X,
-			Y: (int) args.Y
-		);
+			Y: (int) args.Y);
 
 		if (controller.GetCurrentMouseButton () == MouseButton.Left) {
 
@@ -505,6 +504,7 @@ public sealed class CurvesDialog : Gtk.Dialog
 	private void DrawSpline (Context g)
 	{
 		var infos = GetDrawingInfos ();
+
 		g.Save ();
 
 		Span<PointD> line = stackalloc PointD[Size];
