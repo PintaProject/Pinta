@@ -48,10 +48,12 @@ public sealed class MotionBlurEffect : BaseEffect
 
 	private MotionBlurSettings CreateSettings (ImageSurface src)
 	{
-		PointD start = new (0, 0);
-		double theta = (double) (Data.Angle.Degrees + 180) * 2 * Math.PI / 360.0;
+		RadiansAngle theta = Data.Angle.ToRadians () + new RadiansAngle (Math.PI);
+
 		double alpha = Data.Distance;
-		PointD end = new ((float) alpha * Math.Cos (theta), (float) (-alpha * Math.Sin (theta)));
+
+		PointD start = new (0, 0);
+		PointD end = new ((float) alpha * Math.Cos (theta.Radians), (float) (-alpha * Math.Sin (theta.Radians)));
 
 		if (Data.Centered) {
 			start = new (-end.X / 2.0f, -end.Y / 2.0f);

@@ -17,17 +17,23 @@ namespace Pinta.Effects;
 
 public sealed class FragmentEffect : BaseEffect
 {
-	public override string Icon => Pinta.Resources.Icons.EffectsBlursFragment;
+	public override string Icon
+		=> Resources.Icons.EffectsBlursFragment;
 
-	public sealed override bool IsTileable => true;
+	public sealed override bool IsTileable
+		=> true;
 
-	public override string Name => Translations.GetString ("Fragment");
+	public override string Name
+		=> Translations.GetString ("Fragment");
 
-	public override bool IsConfigurable => true;
+	public override bool IsConfigurable
+		=> true;
 
-	public override string EffectMenuCategory => Translations.GetString ("Blurs");
+	public override string EffectMenuCategory
+		=> Translations.GetString ("Blurs");
 
-	public FragmentData Data => (FragmentData) EffectData!;  // NRT - Set in constructor
+	public FragmentData Data
+		=> (FragmentData) EffectData!;  // NRT - Set in constructor
 
 	private readonly IChromeService chrome;
 
@@ -42,21 +48,20 @@ public sealed class FragmentEffect : BaseEffect
 
 	#region Algorithm Code Ported From PDN
 
-	private static ImmutableArray<PointI> RecalcPointOffsets (int fragments, double rotationAngle, int distance)
+	private static ImmutableArray<PointI> RecalcPointOffsets (int fragments, DegreesAngle rotationDegrees, int distance)
 	{
-		double pointStep = 2 * Math.PI / fragments;
-		double rotationRadians = ((rotationAngle - 90.0) * Math.PI) / 180.0;
+		double pointStep = RadiansAngle.MAX_RADIANS / fragments;
+
+		RadiansAngle rotationRadians = rotationDegrees.ToRadians () - new RadiansAngle (Math.PI / 2);
 
 		var pointOffsets = ImmutableArray.CreateBuilder<PointI> (fragments);
 		pointOffsets.Count = fragments;
 
 		for (int i = 0; i < fragments; i++) {
-			double currentRadians = rotationRadians + (pointStep * i);
-
+			double currentRadians = rotationRadians.Radians + (pointStep * i);
 			pointOffsets[i] = new PointI (
 				X: (int) Math.Round (distance * -Math.Sin (currentRadians), MidpointRounding.AwayFromZero),
-				Y: (int) Math.Round (distance * -Math.Cos (currentRadians), MidpointRounding.AwayFromZero)
-			);
+				Y: (int) Math.Round (distance * -Math.Cos (currentRadians), MidpointRounding.AwayFromZero));
 		}
 
 		return pointOffsets.MoveToImmutable ();
@@ -64,7 +69,7 @@ public sealed class FragmentEffect : BaseEffect
 
 	public override void Render (ImageSurface src, ImageSurface dst, ReadOnlySpan<RectangleI> rois)
 	{
-		var pointOffsets = RecalcPointOffsets (Data.Fragments, Data.Rotation.Degrees, Data.Distance);
+		var pointOffsets = RecalcPointOffsets (Data.Fragments, Data.Rotation, Data.Distance);
 
 		int poLength = pointOffsets.Length;
 		Span<PointI> pointOffsetsPtr = stackalloc PointI[poLength];
@@ -74,14 +79,16 @@ public sealed class FragmentEffect : BaseEffect
 
 		Span<ColorBgra> samples = stackalloc ColorBgra[poLength];
 
-		// Cache these for a massive performance boost
 		int src_width = src.Width;
 		int src_height = src.Height;
+
 		ReadOnlySpan<ColorBgra> src_data = src.GetReadOnlyPixelData ();
 		Span<ColorBgra> dst_data = dst.GetPixelData ();
 
 		foreach (RectangleI rect in rois) {
+
 			for (int y = rect.Top; y <= rect.Bottom; y++) {
+
 				var dst_row = dst_data.Slice (y * src_width, src_width);
 
 				for (int x = rect.Left; x <= rect.Right; x++) {
