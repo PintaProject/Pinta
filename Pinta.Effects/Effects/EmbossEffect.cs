@@ -16,15 +16,20 @@ namespace Pinta.Effects;
 
 public sealed class EmbossEffect : BaseEffect
 {
-	public override string Icon => Pinta.Resources.Icons.EffectsStylizeEmboss;
+	public override string Icon
+		=> Pinta.Resources.Icons.EffectsStylizeEmboss;
 
-	public sealed override bool IsTileable => true;
+	public sealed override bool IsTileable
+		=> true;
 
-	public override string Name => Translations.GetString ("Emboss");
+	public override string Name
+		=> Translations.GetString ("Emboss");
 
-	public override bool IsConfigurable => true;
+	public override bool IsConfigurable
+		=> true;
 
-	public override string EffectMenuCategory => Translations.GetString ("Stylize");
+	public override string EffectMenuCategory
+		=> Translations.GetString ("Stylize");
 
 	public EmbossData Data => (EmbossData) EffectData!;
 
@@ -48,7 +53,7 @@ public sealed class EmbossEffect : BaseEffect
 
 	private EmbossSettings CreateSettings (ImageSurface src)
 		=> new (
-			weights: ComputeWeights (Data.Angle.Degrees),
+			weights: ComputeWeights (Data.Angle.ToRadians ()),
 			srcWidth: src.Width,
 			srcHeight: src.Height
 		);
@@ -115,28 +120,25 @@ public sealed class EmbossEffect : BaseEffect
 	}
 
 
-	private static double[,] ComputeWeights (double degrees)
+	private static double[,] ComputeWeights (RadiansAngle angle)
 	{
-		// adjust and convert angle to radians
-		double r = degrees * 2.0 * Math.PI / 360.0;
-
 		// angle delta for each weight
 		double dr = Math.PI / 4.0;
 
 		// for r = 0 this builds an emboss filter pointing straight left
 		double[,] weights = new double[3, 3];
 
-		weights[0, 0] = Math.Cos (r + dr);
-		weights[0, 1] = Math.Cos (r + 2.0 * dr);
-		weights[0, 2] = Math.Cos (r + 3.0 * dr);
+		weights[0, 0] = Math.Cos (angle.Radians + dr);
+		weights[0, 1] = Math.Cos (angle.Radians + 2.0 * dr);
+		weights[0, 2] = Math.Cos (angle.Radians + 3.0 * dr);
 
-		weights[1, 0] = Math.Cos (r);
+		weights[1, 0] = Math.Cos (angle.Radians);
 		weights[1, 1] = 0;
-		weights[1, 2] = Math.Cos (r + 4.0 * dr);
+		weights[1, 2] = Math.Cos (angle.Radians + 4.0 * dr);
 
-		weights[2, 0] = Math.Cos (r - dr);
-		weights[2, 1] = Math.Cos (r - 2.0 * dr);
-		weights[2, 2] = Math.Cos (r - 3.0 * dr);
+		weights[2, 0] = Math.Cos (angle.Radians - dr);
+		weights[2, 1] = Math.Cos (angle.Radians - 2.0 * dr);
+		weights[2, 2] = Math.Cos (angle.Radians - 3.0 * dr);
 
 		return weights;
 	}

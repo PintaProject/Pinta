@@ -86,7 +86,7 @@ public sealed class JuliaFractalEffect : BaseEffect
 		double aspect,
 		int count,
 		double invCount,
-		double angleTheta,
+		RadiansAngle angleTheta,
 		int factor,
 		ColorGradient colorGradient);
 	private JuliaSettings CreateSettings (ImageSurface dst)
@@ -111,7 +111,7 @@ public sealed class JuliaFractalEffect : BaseEffect
 			aspect: canvasSize.Height / (double) canvasSize.Width,
 			count: count,
 			invCount: 1.0 / count,
-			angleTheta: (Data.Angle.Degrees * Math.PI * 2) / 360.0,
+			angleTheta: Data.Angle.ToRadians (),
 			factor: Data.Factor,
 			colorGradient: Data.ReverseColorScheme ? baseGradient.Reversed () : baseGradient
 		);
@@ -128,15 +128,17 @@ public sealed class JuliaFractalEffect : BaseEffect
 		int a = 0;
 
 		for (double i = 0; i < settings.count; i++) {
+
 			double u = (2.0 * target.X - settings.canvasSize.Width + (i * settings.invCount)) * settings.invH;
 			double v = (2.0 * target.Y - settings.canvasSize.Height + ((i * settings.invQuality) % 1)) * settings.invH;
 
-			double radius = Math.Sqrt ((u * u) + (v * v));
-			double theta = Math.Atan2 (v, u);
-			double thetaP = theta + settings.angleTheta;
+			RadiansAngle theta = new (Math.Atan2 (v, u));
+			RadiansAngle thetaP = theta + settings.angleTheta;
 
-			double uP = radius * Math.Cos (thetaP);
-			double vP = radius * Math.Sin (thetaP);
+			double radius = Math.Sqrt ((u * u) + (v * v));
+
+			double uP = radius * Math.Cos (thetaP.Radians);
+			double vP = radius * Math.Sin (thetaP.Radians);
 
 			PointD jLoc = new (
 				X: (uP - vP * settings.aspect) * settings.invZoom,
@@ -161,8 +163,7 @@ public sealed class JuliaFractalEffect : BaseEffect
 			b: Utility.ClampToByte (b / settings.count),
 			g: Utility.ClampToByte (g / settings.count),
 			r: Utility.ClampToByte (r / settings.count),
-			a: Utility.ClampToByte (a / settings.count)
-		);
+			a: Utility.ClampToByte (a / settings.count));
 	}
 	#endregion
 
