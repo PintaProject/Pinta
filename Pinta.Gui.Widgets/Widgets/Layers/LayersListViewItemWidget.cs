@@ -22,8 +22,7 @@
 // THE SOFTWARE.
 
 using System;
-using System.Collections.Generic;
-using Gtk;
+using Cairo;
 using Pinta.Core;
 
 namespace Pinta.Gui.Widgets;
@@ -31,12 +30,16 @@ namespace Pinta.Gui.Widgets;
 // GObject subclass for use with Gio.ListStore
 public sealed class LayersListViewItem : GObject.Object
 {
-	CanvasRenderer? canvas_renderer;
+	private CanvasRenderer? canvas_renderer;
 
 	private readonly Document doc;
 	private readonly UserLayer layer;
 
-	public LayersListViewItem (Document doc, UserLayer layer) : base (true, Array.Empty<GObject.ConstructArgument> ())
+	public LayersListViewItem (
+		Document doc,
+		UserLayer layer
+	)
+		: base (true, Array.Empty<GObject.ConstructArgument> ())
 	{
 		this.doc = doc;
 		this.layer = layer;
@@ -45,24 +48,29 @@ public sealed class LayersListViewItem : GObject.Object
 	public string Label => layer.Name;
 	public bool Visible => !layer.Hidden;
 
-	public Cairo.ImageSurface BuildThumbnail (int width_request, int height_request)
+	public Cairo.ImageSurface BuildThumbnail (
+		int widthRequest,
+		int heightRequest)
 	{
-		// If this is the currently selected layer, we may need to draw the
+		// If this is not the currently selected layer, just directly use the layer's surface.
+		if (layer != doc.Layers.CurrentUserLayer || !doc.Layers.ShowSelectionLayer)
+			return layer.Surface;
+
+		// It it is, then we may need to draw the
 		// selection layer over it, like when dragging a selection.
-		if (layer == doc.Layers.CurrentUserLayer && doc.Layers.ShowSelectionLayer) {
-			var surface = CairoExtensions.CreateImageSurface (Cairo.Format.Argb32, width_request, height_request);
+		ImageSurface surface = CairoExtensions.CreateImageSurface (Cairo.Format.Argb32, widthRequest, heightRequest);
 
-			canvas_renderer ??= new CanvasRenderer (false, false);
-			canvas_renderer.Initialize (doc.ImageSize, new Size (width_request, height_request));
+		var layers = new Layer[]
+		{
+			layer,
+			doc.Layers.SelectionLayer,
+		};
 
-			var layers = new List<Layer> { layer, doc.Layers.SelectionLayer };
-			canvas_renderer.Render (layers, surface, PointI.Zero);
+		canvas_renderer ??= new CanvasRenderer (false, false);
+		canvas_renderer.Initialize (doc.ImageSize, new Size (widthRequest, heightRequest));
+		canvas_renderer.Render (layers, surface, PointI.Zero);
 
-			return surface;
-		}
-
-		// Otherwise just directly use the layer's surface.
-		return layer.Surface;
+		return surface;
 	}
 
 	public void HandleVisibilityToggled (bool visible)
@@ -70,60 +78,77 @@ public sealed class LayersListViewItem : GObject.Object
 		if (Visible == visible)
 			return;
 
-		var doc = PintaCore.Workspace.ActiveDocument;
+		Document doc = PintaCore.Workspace.ActiveDocument;
 
-		var initial = new LayerProperties (layer.Name, visible, layer.Opacity, layer.BlendMode);
-		var updated = new LayerProperties (layer.Name, !visible, layer.Opacity, layer.BlendMode);
+		LayerProperties initial = new (layer.Name, visible, layer.Opacity, layer.BlendMode);
+		LayerProperties updated = new (layer.Name, !visible, layer.Opacity, layer.BlendMode);
 
-		var historyItem = new UpdateLayerPropertiesHistoryItem (
+		UpdateLayerPropertiesHistoryItem historyItem = new (
 			Resources.Icons.LayerProperties,
 			visible ? Translations.GetString ("Layer Shown") : Translations.GetString ("Layer Hidden"),
 			doc.Layers.IndexOf (layer),
 			initial,
 			updated);
+
 		historyItem.Redo ();
 
 		doc.History.PushNewItem (historyItem);
 	}
 }
 
-public sealed class LayersListViewItemWidget : Box
+public sealed class LayersListViewItemWidget : Gtk.Box
 {
 	private static readonly Cairo.Pattern transparent_pattern = CairoExtensions.CreateTransparentBackgroundPattern (8);
 
 	private LayersListViewItem? item;
 	private Cairo.ImageSurface? thumbnail_surface;
 
-	private readonly Gtk.DrawingArea thumbnail;
-	private readonly Gtk.Label label;
+	private readonly Gtk.DrawingArea item_thumbnail;
+	private readonly Gtk.Label item_label;
 	private readonly Gtk.CheckButton visible_button;
 
 	public LayersListViewItemWidget ()
 	{
 		Spacing = 6;
+
 		this.SetAllMargins (2);
-		SetOrientation (Orientation.Horizontal);
 
-		thumbnail = Gtk.DrawingArea.New ();
-		thumbnail.SetDrawFunc ((area, context, width, height) => DrawThumbnail (context, width, height));
-		thumbnail.WidthRequest = 60;
-		thumbnail.HeightRequest = 40;
-		Append (thumbnail);
+		SetOrientation (Gtk.Orientation.Horizontal);
 
-		label = Gtk.Label.New (string.Empty);
-		label.Halign = Align.Start;
-		label.Hexpand = true;
-		label.Ellipsize = Pango.EllipsizeMode.End;
-		Append (label);
+		item_thumbnail = CreateItemThumbnail ();
+		item_label = CreateItemLabel ();
+		visible_button = CreateVisibleButton ();
 
-		visible_button = CheckButton.New ();
-		visible_button.Halign = Align.End;
-		visible_button.Hexpand = false;
+		Append (item_thumbnail);
+		Append (item_label);
 		Append (visible_button);
+	}
 
-		visible_button.OnToggled += (_, _) => {
-			item?.HandleVisibilityToggled (visible_button.Active);
-		};
+	private Gtk.CheckButton CreateVisibleButton ()
+	{
+		Gtk.CheckButton result = Gtk.CheckButton.New ();
+		result.Halign = Gtk.Align.End;
+		result.Hexpand = false;
+		result.OnToggled += (_, _) => item?.HandleVisibilityToggled (visible_button.Active);
+		return result;
+	}
+
+	private static Gtk.Label CreateItemLabel ()
+	{
+		Gtk.Label result = Gtk.Label.New (string.Empty);
+		result.Halign = Gtk.Align.Start;
+		result.Hexpand = true;
+		result.Ellipsize = Pango.EllipsizeMode.End;
+		return result;
+	}
+
+	private Gtk.DrawingArea CreateItemThumbnail ()
+	{
+		Gtk.DrawingArea result = Gtk.DrawingArea.New ();
+		result.SetDrawFunc ((area, context, width, height) => DrawThumbnail (context, width, height));
+		result.WidthRequest = 60;
+		result.HeightRequest = 40;
+		return result;
 	}
 
 	// Set the widget's contents to the provided layer.
@@ -131,29 +156,35 @@ public sealed class LayersListViewItemWidget : Box
 	{
 		this.item = item;
 
-		label.SetText (item.Label);
+		item_label.SetText (item.Label);
 		visible_button.SetActive (item.Visible);
 
 		thumbnail_surface = null;
-		thumbnail.QueueDraw ();
+		item_thumbnail.QueueDraw ();
 	}
 
-	private void DrawThumbnail (Cairo.Context g, int width, int height)
+	private void DrawThumbnail (
+		Cairo.Context g,
+		int width,
+		int height)
 	{
-		ArgumentNullException.ThrowIfNull (item);
+		if (item is null)
+			throw new InvalidOperationException ($"{nameof (item)} is null");
 
 		thumbnail_surface ??= item.BuildThumbnail (width, height);
 
 		double scale;
-		var draw_width = width;
-		var draw_height = height;
+		int draw_width;
+		int draw_height;
 
 		// The image is more constrained by height than width
 		if (width / (double) thumbnail_surface.Width >= height / (double) thumbnail_surface.Height) {
 			scale = height / (double) (thumbnail_surface.Height);
 			draw_width = thumbnail_surface.Width * height / thumbnail_surface.Height;
+			draw_height = height;
 		} else {
 			scale = width / (double) (thumbnail_surface.Width);
+			draw_width = width;
 			draw_height = thumbnail_surface.Height * width / thumbnail_surface.Width;
 		}
 
@@ -163,6 +194,7 @@ public sealed class LayersListViewItemWidget : Box
 		);
 
 		g.Save ();
+
 		g.Rectangle (offset.X, offset.Y, draw_width, draw_height);
 		g.Clip ();
 
@@ -179,6 +211,7 @@ public sealed class LayersListViewItemWidget : Box
 		g.SetSourceColor (new Cairo.Color (0.5, 0.5, 0.5));
 		g.Rectangle (offset.X + 0.5, offset.Y + 0.5, draw_width, draw_height);
 		g.LineWidth = 1;
+
 		g.Stroke ();
 	}
 }
