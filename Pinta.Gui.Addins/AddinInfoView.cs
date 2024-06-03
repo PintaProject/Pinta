@@ -6,20 +6,24 @@ namespace Pinta.Gui.Addins;
 
 internal sealed class AddinInfoView : Adw.Bin
 {
-	private readonly Adw.ViewStack view_stack;
-	private readonly Gtk.Box content_box;
-	private readonly Adw.Bin empty_page = new ();
-
 	private readonly Gtk.Label title_label;
 	private readonly Gtk.Label version_label;
 	private readonly Gtk.Label size_label;
 	private readonly Gtk.Label repo_label;
-	private readonly Gtk.Label desc_label;
+	private readonly Gtk.Label description_label;
+
 	private readonly Gtk.Button info_button;
 	private readonly Gtk.Button install_button;
 	private readonly Gtk.Button update_button;
 	private readonly Gtk.Button uninstall_button;
-	private readonly Gtk.Switch enable_switch = new ();
+
+	private readonly Gtk.Switch enable_switch;
+
+	private readonly Gtk.Box content_box;
+
+	private readonly Adw.Bin empty_page;
+
+	private readonly Adw.ViewStack view_stack;
 
 	private AddinListViewItem? current_item;
 
@@ -30,32 +34,98 @@ internal sealed class AddinInfoView : Adw.Bin
 
 	public AddinInfoView ()
 	{
+		// --- Control creation
+
+		Gtk.Label titleLabel = new () { Halign = Gtk.Align.Start };
+		titleLabel.AddCssClass (AdwaitaStyles.Title4);
+
+		Gtk.Label versionLabel = new () { Halign = Gtk.Align.Start };
+		versionLabel.AddCssClass (AdwaitaStyles.Heading);
+
+		Gtk.Label sizeLabel = new () { Halign = Gtk.Align.Start };
+		sizeLabel.AddCssClass (AdwaitaStyles.Heading);
+
+		Gtk.Label repoLabel = new () { Halign = Gtk.Align.Start };
+		repoLabel.AddCssClass (AdwaitaStyles.Heading);
+
+		Gtk.Label descriptionLabel = CreateDescriptionLabel ();
+
+		Adw.Bin emptyPage = new ();
+
+		Gtk.Button infoButton = CreateInfoButton ();
+		Gtk.Button installButton = CreateInstallButton ();
+		Gtk.Button updateButton = CreateUpdateButton ();
+		Gtk.Button uninstallButton = CreateUninstallButton ();
+
+		Gtk.Switch enableSwitch = CreateEnableSwitch ();
+
+		Gtk.Box hbox = Gtk.Box.New (Gtk.Orientation.Horizontal, 6);
+		hbox.AddCssClass (AdwaitaStyles.Toolbar);
+		hbox.Append (enableSwitch);
+		hbox.Append (installButton);
+		hbox.Append (updateButton);
+		hbox.Append (infoButton);
+		hbox.Append (uninstallButton);
+
+		Gtk.Box contentBox = Gtk.Box.New (Gtk.Orientation.Vertical, 10);
+		contentBox.SetAllMargins (10);
+		contentBox.Append (titleLabel);
+		contentBox.Append (versionLabel);
+		contentBox.Append (sizeLabel);
+		contentBox.Append (repoLabel);
+		contentBox.Append (descriptionLabel);
+		contentBox.Append (hbox);
+
+		Adw.ViewStack viewStack = Adw.ViewStack.New ();
+		viewStack.Add (emptyPage);
+		viewStack.Add (contentBox);
+		viewStack.SetVisibleChild (emptyPage);
+
+		// --- Gtk.Widget initialization
+
 		WidthRequest = 300;
 
-		view_stack = Adw.ViewStack.New ();
-		view_stack.Add (empty_page);
+		// --- Adwaita.Bin initialization
 
-		content_box = Gtk.Box.New (Gtk.Orientation.Vertical, 10);
-		content_box.SetAllMargins (10);
-		view_stack.Add (content_box);
+		Child = view_stack;
 
-		title_label = new Gtk.Label { Halign = Gtk.Align.Start };
-		title_label.AddCssClass (AdwaitaStyles.Title4);
-		content_box.Append (title_label);
+		// --- References to keep
 
-		version_label = new Gtk.Label { Halign = Gtk.Align.Start };
-		version_label.AddCssClass (AdwaitaStyles.Heading);
-		content_box.Append (version_label);
+		title_label = titleLabel;
+		version_label = versionLabel;
+		size_label = sizeLabel;
+		repo_label = repoLabel;
+		description_label = descriptionLabel;
 
-		size_label = new Gtk.Label { Halign = Gtk.Align.Start };
-		size_label.AddCssClass (AdwaitaStyles.Heading);
-		content_box.Append (size_label);
+		info_button = infoButton;
+		install_button = installButton;
+		update_button = updateButton;
+		uninstall_button = uninstallButton;
 
-		repo_label = new Gtk.Label { Halign = Gtk.Align.Start };
-		repo_label.AddCssClass (AdwaitaStyles.Heading);
-		content_box.Append (repo_label);
+		enable_switch = enableSwitch;
 
-		desc_label = new Gtk.Label {
+		content_box = contentBox;
+
+		empty_page = emptyPage;
+
+		view_stack = viewStack;
+	}
+
+	private Gtk.Switch CreateEnableSwitch ()
+	{
+		Gtk.Switch result = new () {
+			Visible = false
+		};
+		result.OnNotify += (o, e) => {
+			if (e.Pspec.GetName () == "active")
+				HandleEnableSwitched ();
+		};
+		return result;
+	}
+
+	private static Gtk.Label CreateDescriptionLabel ()
+	{
+		Gtk.Label result = new () {
 			Halign = Gtk.Align.Start,
 			Hexpand = true,
 			Valign = Gtk.Align.Start,
@@ -63,48 +133,47 @@ internal sealed class AddinInfoView : Adw.Bin
 			Xalign = 0,
 			Wrap = true,
 		};
-		desc_label.AddCssClass (AdwaitaStyles.Body);
-		content_box.Append (desc_label);
+		result.AddCssClass (AdwaitaStyles.Body);
+		return result;
+	}
 
-		info_button = Gtk.Button.NewWithLabel (Translations.GetString ("More Information..."));
-		info_button.OnClicked += (_, _) => HandleInfoButtonClicked ();
-		info_button.Visible = false;
+	private Gtk.Button CreateInfoButton ()
+	{
+		Gtk.Button result = Gtk.Button.NewWithLabel (Translations.GetString ("More Information..."));
+		result.OnClicked += (_, _) => HandleInfoButtonClicked ();
+		result.Visible = false;
+		return result;
+	}
 
-		install_button = Gtk.Button.NewWithLabel (Translations.GetString ("Install..."));
-		install_button.AddCssClass (AdwaitaStyles.SuggestedAction);
-		install_button.OnClicked += (_, _) => HandleInstallButtonClicked ();
-		install_button.Visible = false;
+	private Gtk.Button CreateInstallButton ()
+	{
+		Gtk.Button result = Gtk.Button.NewWithLabel (Translations.GetString ("Install..."));
+		result.AddCssClass (AdwaitaStyles.SuggestedAction);
+		result.OnClicked += (_, _) => HandleInstallButtonClicked ();
+		result.Visible = false;
+		return result;
+	}
 
-		update_button = Gtk.Button.NewWithLabel (Translations.GetString ("Update..."));
-		update_button.AddCssClass (AdwaitaStyles.SuggestedAction);
-		update_button.OnClicked += (_, _) => HandleUpdateButtonClicked ();
-		update_button.Visible = false;
+	private Gtk.Button CreateUpdateButton ()
+	{
+		Gtk.Button result = Gtk.Button.NewWithLabel (Translations.GetString ("Update..."));
+		result.AddCssClass (AdwaitaStyles.SuggestedAction);
+		result.OnClicked += (_, _) => HandleUpdateButtonClicked ();
+		result.Visible = false;
+		return result;
+	}
 
-		uninstall_button = Gtk.Button.NewWithLabel (Translations.GetString ("Uninstall..."));
-		uninstall_button.AddCssClass (AdwaitaStyles.DestructiveAction);
-		uninstall_button.OnClicked += (_, _) => HandleUninstallButtonClicked ();
-		uninstall_button.Visible = false;
+	private Gtk.Button CreateUninstallButton ()
+	{
+		Gtk.Button result = Gtk.Button.NewWithLabel (Translations.GetString ("Uninstall..."));
+		result.AddCssClass (AdwaitaStyles.DestructiveAction);
+		result.OnClicked += (_, _) => HandleUninstallButtonClicked ();
+		result.Visible = false;
 
-		enable_switch.Visible = false;
+		result.Hexpand = true;
+		result.Halign = Gtk.Align.End;
 
-		var hbox = Gtk.Box.New (Gtk.Orientation.Horizontal, 6);
-		hbox.AddCssClass (AdwaitaStyles.Toolbar);
-		hbox.Append (enable_switch);
-		hbox.Append (install_button);
-		hbox.Append (update_button);
-		hbox.Append (info_button);
-		hbox.Append (uninstall_button);
-		uninstall_button.Hexpand = true;
-		uninstall_button.Halign = Gtk.Align.End;
-		content_box.Append (hbox);
-
-		enable_switch.OnNotify += (o, e) => {
-			if (e.Pspec.GetName () == "active")
-				HandleEnableSwitched ();
-		};
-
-		view_stack.SetVisibleChild (empty_page);
-		Child = view_stack;
+		return result;
 	}
 
 	public void Update (AddinListViewItem? item)
@@ -128,7 +197,7 @@ internal sealed class AddinInfoView : Adw.Bin
 
 		title_label.SetLabel (item.Name);
 		version_label.SetLabel (Translations.GetString ("Version: {0}", item.Version));
-		desc_label.SetLabel (item.Description);
+		description_label.SetLabel (item.Description);
 
 		string? download_size = item.DownloadSize;
 		size_label.Visible = download_size != null;
@@ -165,11 +234,13 @@ internal sealed class AddinInfoView : Adw.Bin
 
 	private void HandleInstallButtonClicked ()
 	{
-		ArgumentNullException.ThrowIfNull (current_item);
-		if (current_item.RepositoryEntry is null)
-			throw new Exception ("The install button should not be available unless there is a repository entry");
+		if (current_item is null)
+			throw new InvalidOperationException ($"{nameof (current_item)} is null");
 
-		var dialog = new InstallDialog (PintaCore.Chrome.MainWindow, current_item.Service);
+		if (current_item.RepositoryEntry is null)
+			throw new InvalidOperationException ("The install button should not be available unless there is a repository entry");
+
+		InstallDialog dialog = new (PintaCore.Chrome.MainWindow, current_item.Service);
 		dialog.OnSuccess += (_, _) => OnAddinChanged?.Invoke (this, EventArgs.Empty);
 		dialog.InitForInstall (new[] { current_item.RepositoryEntry });
 		dialog.Show ();
@@ -177,11 +248,13 @@ internal sealed class AddinInfoView : Adw.Bin
 
 	private void HandleUpdateButtonClicked ()
 	{
-		ArgumentNullException.ThrowIfNull (current_item);
-		if (current_item.RepositoryEntry is null)
-			throw new Exception ("The update button should not be available unless there is a repository entry");
+		if (current_item is null)
+			throw new InvalidOperationException ($"{nameof (current_item)} is null");
 
-		var dialog = new InstallDialog (PintaCore.Chrome.MainWindow, current_item.Service);
+		if (current_item.RepositoryEntry is null)
+			throw new InvalidOperationException ("The update button should not be available unless there is a repository entry");
+
+		InstallDialog dialog = new (PintaCore.Chrome.MainWindow, current_item.Service);
 		dialog.OnSuccess += (_, _) => OnAddinChanged?.Invoke (this, EventArgs.Empty);
 		dialog.InitForInstall (new[] { current_item.RepositoryEntry });
 		dialog.Show ();
@@ -189,11 +262,13 @@ internal sealed class AddinInfoView : Adw.Bin
 
 	private void HandleUninstallButtonClicked ()
 	{
-		ArgumentNullException.ThrowIfNull (current_item);
-		if (current_item.Addin is null)
-			throw new Exception ("The uninstall button should not be available unless there is an installed addin");
+		if (current_item is null)
+			throw new InvalidOperationException ($"{nameof (current_item)} is null");
 
-		var dialog = new InstallDialog (PintaCore.Chrome.MainWindow, current_item.Service);
+		if (current_item.Addin is null)
+			throw new InvalidOperationException ("The uninstall button should not be available unless there is an installed addin");
+
+		InstallDialog dialog = new (PintaCore.Chrome.MainWindow, current_item.Service);
 		dialog.OnSuccess += (_, _) => OnAddinChanged?.Invoke (this, EventArgs.Empty);
 		dialog.InitForUninstall (new[] { current_item.Addin });
 		dialog.Show ();
