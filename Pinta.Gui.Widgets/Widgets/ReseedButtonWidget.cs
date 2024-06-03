@@ -32,7 +32,6 @@ namespace Pinta.Gui.Widgets;
 public sealed class ReseedButtonWidget : Gtk.Box
 {
 	private readonly Gtk.Label section_label;
-	private readonly Gtk.Button reseed_button;
 
 	public event EventHandler? Clicked;
 
@@ -52,7 +51,6 @@ public sealed class ReseedButtonWidget : Gtk.Box
 		// --- References to keep
 
 		section_label = sectionLabel;
-		reseed_button = reseedButton;
 	}
 
 	private Gtk.Button CreateReseedButton ()
