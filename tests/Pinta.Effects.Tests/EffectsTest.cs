@@ -417,7 +417,7 @@ internal sealed class EffectsTest
 	public void Tile2 ()
 	{
 		TileEffect effect = new (Utilities.CreateMockServices ());
-		effect.Data.Rotation = 90;
+		effect.Data.Rotation = new DegreesAngle (90);
 		effect.Data.TileSize = 32;
 		effect.Data.Intensity = 4;
 		Utilities.TestEffect (effect, "tile2.png");
