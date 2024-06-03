@@ -26,6 +26,7 @@
 
 using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using Cairo;
 using Gtk;
 using Pinta.Core;
@@ -36,7 +37,7 @@ public enum MetricType
 {
 	Pixels,
 	Inches,
-	Centimeters
+	Centimeters,
 }
 
 /// <summary>
@@ -146,7 +147,7 @@ public sealed class Ruler : DrawingArea
 		int start,
 		int end,
 		double marker_position,
-		RectangleD rect,
+		RectangleD rulerBottomLine,
 		Size effectiveSize,
 		Color color,
 		Orientation orientation);
@@ -154,105 +155,94 @@ public sealed class Ruler : DrawingArea
 	{
 		GetStyleContext ().GetColor (out Color color);
 
-		RectangleD rect;
-		Size effectiveSize;
+		RectangleD rulerBottomLine = Orientation switch {
 
-		// Bottom line of the ruler.
-		switch (Orientation) {
+			Orientation.Vertical => new (
+				X: preliminarySize.Width - 1,
+				Y: 0,
+				Width: 1,
+				Height: preliminarySize.Height),
 
-			case Orientation.Vertical:
+			Orientation.Horizontal => new (
+				X: 0,
+				Y: preliminarySize.Height - 1,
+				Width: preliminarySize.Width,
+				Height: 1),
 
-				rect = new (
-					X: preliminarySize.Width - 1,
-					Y: 0,
-					Width: 1,
-					Height: preliminarySize.Height);
+			_ => throw new UnreachableException (),
+		};
 
-				// Swap so that width is the longer dimension (horizontal).
-				effectiveSize = new (preliminarySize.Height, preliminarySize.Width);
+		Size effectiveSize = Orientation switch {
+			Orientation.Vertical => new (preliminarySize.Height, preliminarySize.Width),// Swap so that width is the longer dimension (horizontal).
+			Orientation.Horizontal => preliminarySize,
+			_ => throw new UnreachableException (),
+		};
 
-				break;
+		IReadOnlyList<double> rulerScale = Metric switch {
+			MetricType.Pixels => pixels_ruler_scale,
+			MetricType.Inches => inches_ruler_scale,
+			MetricType.Centimeters => centimeters_ruler_scale,
+			_ => throw new UnreachableException (),
+		};
 
-			case Orientation.Horizontal:
-			default:
-				rect = new (
-					X: 0,
-					Y: preliminarySize.Height - 1,
-					Width: preliminarySize.Width,
-					Height: 1);
+		IReadOnlyList<int> subdivide = Metric switch {
+			MetricType.Pixels => pixels_subdivide,
+			MetricType.Inches => inches_subdivide,
+			MetricType.Centimeters => centimeters_subdivide,
+			_ => throw new UnreachableException (),
+		};
 
-				effectiveSize = preliminarySize;
-
-				break;
-		}
-
-		IReadOnlyList<double> ruler_scale;
-		IReadOnlyList<int> subdivide;
-		double pixels_per_unit;
-
-		switch (Metric) {
-			case MetricType.Pixels:
-				ruler_scale = pixels_ruler_scale;
-				subdivide = pixels_subdivide;
-				pixels_per_unit = 1.0;
-				break;
-			case MetricType.Inches:
-				ruler_scale = inches_ruler_scale;
-				subdivide = inches_subdivide;
-				pixels_per_unit = 72;
-				break;
-			case MetricType.Centimeters:
-			default:
-				ruler_scale = centimeters_ruler_scale;
-				subdivide = centimeters_subdivide;
-				pixels_per_unit = 28.35;
-				break;
-		}
+		double pixels_per_unit = Metric switch {
+			MetricType.Pixels => 1.0,
+			MetricType.Inches => 72,
+			MetricType.Centimeters => 28.35,
+			_ => throw new UnreachableException (),
+		};
 
 		// Find our scaled range.
-		double scaled_upper = Upper / pixels_per_unit;
-		double scaled_lower = Lower / pixels_per_unit;
-		double max_size = scaled_upper - scaled_lower;
+		double scaledUpper = Upper / pixels_per_unit;
+		double scaledLower = Lower / pixels_per_unit;
+		double maxSize = scaledUpper - scaledLower;
 
 		// There must be enough space between the large ticks for the text labels.
 		Pango.FontDescription font = GetPangoContext ().GetFontDescription ()!;
-		int font_size = GetFontSize (font, ScaleFactor);
-		int max_digits = ((int) -Math.Abs (max_size)).ToString ().Length;
-		int min_separation = max_digits * font_size * 2;
+		int fontSize = GetFontSize (font, ScaleFactor);
+		int maxDigits = ((int) -Math.Abs (maxSize)).ToString ().Length;
+		int minSeparation = maxDigits * fontSize * 2;
 
-		double increment = effectiveSize.Width / max_size;
+		double increment = effectiveSize.Width / maxSize;
 
 		// Figure out how to display the ticks.
-		int scale_index;
-		for (scale_index = 0; scale_index < ruler_scale.Count - 1; ++scale_index) {
-			if (ruler_scale[scale_index] * increment > min_separation)
+		int scaleIndex;
+		for (scaleIndex = 0; scaleIndex < rulerScale.Count - 1; ++scaleIndex) {
+			if (rulerScale[scaleIndex] * increment > minSeparation)
 				break;
 		}
 
-		int divide_index;
-		for (divide_index = 0; divide_index < subdivide.Count - 1; ++divide_index) {
-			if (ruler_scale[scale_index] * increment < 5 * subdivide[divide_index + 1])
+		int divideIndex;
+		for (divideIndex = 0; divideIndex < subdivide.Count - 1; ++divideIndex) {
+			if (rulerScale[scaleIndex] * increment < 5 * subdivide[divideIndex + 1])
 				break;
 		}
 
-		double pixels_per_tick = increment * ruler_scale[scale_index] / subdivide[divide_index];
+		double pixels_per_tick = increment * rulerScale[scaleIndex] / subdivide[divideIndex];
 		double units_per_tick = pixels_per_tick / increment;
 		double ticks_per_unit = 1.0 / units_per_tick;
 
 		return new (
 			subdivide: subdivide,
-			scaled_upper: scaled_upper,
-			scaled_lower: scaled_lower,
+			scaled_upper: scaledUpper,
+			scaled_lower: scaledLower,
 			font: font,
-			font_size: font_size,
+			font_size: fontSize,
 			increment: increment,
-			divide_index: divide_index,
+			divide_index: divideIndex,
 			pixels_per_tick: pixels_per_tick,
 			units_per_tick: units_per_tick,
-			start: (int) Math.Floor (scaled_lower * ticks_per_unit),
-			end: (int) Math.Ceiling (scaled_upper * ticks_per_unit),
+			start: (int) Math.Floor (scaledLower * ticks_per_unit),
+			end: (int) Math.Ceiling (scaledUpper * ticks_per_unit),
 			marker_position: (Position - Lower) * (effectiveSize.Width / (Upper - Lower)),
-			rect: rect,
+			rulerBottomLine: rulerBottomLine,
 			effectiveSize: effectiveSize,
 			color: color,
 			orientation: Orientation);
@@ -266,7 +256,7 @@ public sealed class Ruler : DrawingArea
 
 		cr.SetSourceColor (settings.color);
 		cr.LineWidth = 1.0;
-		cr.Rectangle (settings.rect);
+		cr.Rectangle (settings.rulerBottomLine);
 		cr.Fill ();
 
 		for (int i = settings.start; i <= settings.end; ++i) {
@@ -338,15 +328,14 @@ public sealed class Ruler : DrawingArea
 
 	private static int GetFontSize (
 		Pango.FontDescription font,
-		int scale_factor)
+		int scaleFactor)
 	{
-		int font_size = font.GetSize ();
-		font_size = PangoExtensions.UnitsToPixels (font_size);
+		int fontSize = PangoExtensions.UnitsToPixels (font.GetSize ());
 
 		// Convert from points to device units.
 		if (!font.GetSizeIsAbsolute ())
-			font_size = (int) (scale_factor * font_size / 72.0);
+			fontSize = (int) (scaleFactor * fontSize / 72.0);
 
-		return font_size;
+		return fontSize;
 	}
 }
