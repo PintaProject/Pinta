@@ -97,58 +97,169 @@ public partial class LevelsDialog : Gtk.Dialog
 		IWorkspaceService workspace,
 		LevelsData effectData)
 	{
-		this.chrome = chrome;
-		this.workspace = workspace;
+		const int spacing = 6;
+
+		Gtk.CheckButton checkRed = new () { Label = Translations.GetString ("Red"), Active = true };
+		checkRed.OnToggled += HandleCheckRedToggled;
+
+		Gtk.CheckButton checkGreen = new () { Label = Translations.GetString ("Green"), Active = true };
+		checkGreen.OnToggled += HandleCheckGreenToggled;
+
+		Gtk.CheckButton checkBlue = new () { Label = Translations.GetString ("Blue"), Active = true };
+		checkBlue.OnToggled += HandleCheckBlueToggled;
+
+		Gtk.Box hboxChecks = new () { Spacing = spacing };
+		hboxChecks.SetOrientation (Gtk.Orientation.Horizontal);
+		hboxChecks.Append (checkRed);
+		hboxChecks.Append (checkGreen);
+		hboxChecks.Append (checkBlue);
+
+		Gtk.SpinButton spinInLow = Gtk.SpinButton.NewWithRange (0, 254, 1);
+		spinInLow.OnValueChanged += HandleSpinInLowValueChanged;
+		spinInLow.SetActivatesDefault (true);
+
+		Gtk.SpinButton spinInHigh = Gtk.SpinButton.NewWithRange (1, 255, 1);
+		spinInHigh.Value = 255;
+		spinInHigh.OnValueChanged += HandleSpinInHighValueChanged;
+		spinInHigh.SetActivatesDefault (true);
+
+		Gtk.SpinButton spinOutLow = Gtk.SpinButton.NewWithRange (0, 252, 1);
+		spinOutLow.OnValueChanged += HandleSpinOutLowValueChanged;
+		spinOutLow.SetActivatesDefault (true);
+
+		Gtk.SpinButton spinOutHigh = Gtk.SpinButton.NewWithRange (2, 255, 1);
+		spinOutHigh.Value = 255;
+		spinOutHigh.OnValueChanged += HandleSpinOutHighValueChanged;
+		spinOutHigh.SetActivatesDefault (true);
+
+		Gtk.SpinButton spinOutGamma = Gtk.SpinButton.NewWithRange (0, 100, 0.1);
+		spinOutGamma.Value = 1;
+		spinOutGamma.OnValueChanged += HandleSpinOutGammaValueChanged;
+		spinOutGamma.SetActivatesDefault (true);
+
+		ColorGradientWidget gradientInput = new (2) { WidthRequest = 40 };
+		gradientInput.ClickGesture.OnPressed += HandleGradientButtonPressEvent;
+		gradientInput.ClickGesture.OnReleased += HandleGradientButtonReleaseEvent;
+		gradientInput.ValueChanged += HandleGradientInputValueChanged;
+
+		ColorGradientWidget gradientOutput = new (3) { WidthRequest = 40 };
+		gradientOutput.ClickGesture.OnPressed += HandleGradientButtonPressEvent;
+		gradientOutput.ClickGesture.OnReleased += HandleGradientButtonReleaseEvent;
+		gradientOutput.ValueChanged += HandleGradientOutputValueChanged;
+
+		ColorPanelWidget colorPanelInHigh = new () { HeightRequest = 24 };
+		colorPanelInHigh.ClickGesture.OnPressed += HandleColorPanelButtonPressEvent;
+
+		ColorPanelWidget colorPanelInLow = new () {
+			HeightRequest = 24,
+			Valign = Gtk.Align.End,
+			Vexpand = true
+		};
+		colorPanelInLow.ClickGesture.OnPressed += HandleColorPanelButtonPressEvent;
+
+		ColorPanelWidget colorPanelOutLow = new () { HeightRequest = 24 };
+		colorPanelOutLow.ClickGesture.OnPressed += HandleColorPanelButtonPressEvent;
+
+		ColorPanelWidget colorPanelOutMid = new () { HeightRequest = 24 };
+
+		ColorPanelWidget colorPanelOutHigh = new () { HeightRequest = 24 };
+		colorPanelOutHigh.ClickGesture.OnPressed += HandleColorPanelButtonPressEvent;
+
+		HistogramWidget histogramInput = new () { WidthRequest = 130, FlipHorizontal = true };
+		HistogramWidget histogramOutput = new () { WidthRequest = 130 };
+
+		Gtk.Box vboxInput = new () { Spacing = spacing };
+		vboxInput.SetOrientation (Gtk.Orientation.Vertical);
+		vboxInput.Append (spinInHigh);
+		vboxInput.Append (colorPanelInHigh);
+		vboxInput.Append (colorPanelInLow);
+		vboxInput.Append (spinInLow);
+
+		Gtk.Box hboxInput = new () { Spacing = spacing };
+		hboxInput.SetOrientation (Gtk.Orientation.Horizontal);
+		hboxInput.Append (vboxInput);
+		hboxInput.Append (gradientInput);
+
+		Gtk.Box vboxOutput = new () { Spacing = spacing };
+		vboxOutput.SetOrientation (Gtk.Orientation.Vertical);
+		vboxOutput.Append (spinOutHigh);
+		vboxOutput.Append (colorPanelOutHigh);
+		vboxOutput.Append (spinOutGamma);
+		vboxOutput.Append (colorPanelOutMid);
+		vboxOutput.Append (colorPanelOutLow);
+		vboxOutput.Append (spinOutLow);
+
+		Gtk.Box hboxOutput = new () { Spacing = spacing };
+		hboxOutput.SetOrientation (Gtk.Orientation.Horizontal);
+		hboxOutput.Append (gradientOutput);
+		hboxOutput.Append (vboxOutput);
+
+		// --- References to keep
+
+		check_red = checkRed;
+		check_green = checkGreen;
+		check_blue = checkBlue;
+
+		spin_in_low = spinInLow;
+		spin_in_high = spinInHigh;
+
+		spin_out_low = spinOutLow;
+		spin_out_high = spinOutHigh;
+		spin_out_gamma = spinOutGamma;
+
+		gradient_input = gradientInput;
+		gradient_output = gradientOutput;
+
+		colorpanel_in_high = colorPanelInHigh;
+		colorpanel_in_low = colorPanelInLow;
+		colorpanel_out_low = colorPanelOutLow;
+		colorpanel_out_mid = colorPanelOutMid;
+		colorpanel_out_high = colorPanelOutHigh;
+
+		histogram_input = histogramInput;
+		histogram_output = histogramOutput;
+
+		// --- Initialization (Gtk.Window)
 
 		Title = Translations.GetString ("Levels Adjustment");
 		TransientFor = chrome.MainWindow;
 		Modal = true;
-
-		const int spacing = 6;
-
 		Resizable = false;
 
-		Gtk.Box hboxChecks = new () { Spacing = spacing };
-		hboxChecks.SetOrientation (Gtk.Orientation.Horizontal);
-		check_red = new Gtk.CheckButton { Label = Translations.GetString ("Red"), Active = true };
-		hboxChecks.Append (check_red);
-		check_green = new Gtk.CheckButton { Label = Translations.GetString ("Green"), Active = true };
-		hboxChecks.Append (check_green);
-		check_blue = new Gtk.CheckButton { Label = Translations.GetString ("Blue"), Active = true };
-		hboxChecks.Append (check_blue);
+		// --- Initialization (LevelsDialog)
+
+		this.chrome = chrome;
+		this.workspace = workspace;
+
+		EffectData = effectData;
+
+		// --- TODO: Refactor
 
 		button_auto = (Gtk.Button) AddButton (Translations.GetString ("Auto"), (int) Gtk.ResponseType.None);
+		button_auto.OnClicked += HandleButtonAutoClicked;
+
 		button_reset = (Gtk.Button) AddButton (Translations.GetString ("Reset"), (int) Gtk.ResponseType.None);
+		button_reset.OnClicked += HandleButtonResetClicked;
+
 		AddActionWidget (hboxChecks, (int) Gtk.ResponseType.None);
 
 		this.AddCancelOkButtons ();
 		this.SetDefaultResponse (Gtk.ResponseType.Ok);
 
-		spin_in_low = Gtk.SpinButton.NewWithRange (0, 254, 1);
-		spin_in_high = Gtk.SpinButton.NewWithRange (1, 255, 1);
-		spin_in_high.Value = 255;
-
-		spin_out_low = Gtk.SpinButton.NewWithRange (0, 252, 1);
-		spin_out_high = Gtk.SpinButton.NewWithRange (2, 255, 1);
-		spin_out_high.Value = 255;
-		spin_out_gamma = Gtk.SpinButton.NewWithRange (0, 100, 0.1);
-		spin_out_gamma.Value = 1;
-
-		gradient_input = new ColorGradientWidget (2) { WidthRequest = 40 };
-		gradient_output = new ColorGradientWidget (3) { WidthRequest = 40 };
-
-		colorpanel_in_high = new ColorPanelWidget { HeightRequest = 24 };
-		colorpanel_in_low = new ColorPanelWidget { HeightRequest = 24 };
-		colorpanel_out_low = new ColorPanelWidget { HeightRequest = 24 };
-		colorpanel_out_mid = new ColorPanelWidget { HeightRequest = 24 };
-		colorpanel_out_high = new ColorPanelWidget { HeightRequest = 24 };
-
-		histogram_input = new HistogramWidget { WidthRequest = 130, FlipHorizontal = true };
-		histogram_output = new HistogramWidget { WidthRequest = 130 };
-
 		Gtk.Box hboxLayout = new () { Spacing = spacing };
 		hboxLayout.SetOrientation (Gtk.Orientation.Horizontal);
 		hboxLayout.SetAllMargins (spacing);
+		hboxLayout.Append (CreateLabelledWidget (histogram_input, Translations.GetString ("Input Histogram")));
+		hboxLayout.Append (CreateLabelledWidget (hboxInput, Translations.GetString ("Input")));
+		hboxLayout.Append (CreateLabelledWidget (hboxOutput, Translations.GetString ("Output")));
+		hboxLayout.Append (CreateLabelledWidget (histogram_output, Translations.GetString ("Output Histogram")));
+
+		Gtk.Box contentArea = this.GetContentAreaBox ();
+		contentArea.Append (hboxLayout);
+
+		UpdateInputHistogram ();
+		Reset ();
+		UpdateLevels ();
 
 		static Gtk.Box CreateLabelledWidget (Gtk.Widget widget, string label)
 		{
@@ -165,78 +276,6 @@ public partial class LevelsDialog : Gtk.Dialog
 
 			return vbox;
 		}
-
-		hboxLayout.Append (CreateLabelledWidget (histogram_input, Translations.GetString ("Input Histogram")));
-
-		Gtk.Box vboxInput = new () { Spacing = spacing };
-		vboxInput.SetOrientation (Gtk.Orientation.Vertical);
-		vboxInput.Append (spin_in_high);
-		vboxInput.Append (colorpanel_in_high);
-		colorpanel_in_low.Valign = Gtk.Align.End;
-		colorpanel_in_low.Vexpand = true;
-		vboxInput.Append (colorpanel_in_low);
-		vboxInput.Append (spin_in_low);
-
-		Gtk.Box hboxInput = new () { Spacing = spacing };
-		hboxInput.SetOrientation (Gtk.Orientation.Horizontal);
-		hboxInput.Append (vboxInput);
-		hboxInput.Append (gradient_input);
-
-		hboxLayout.Append (CreateLabelledWidget (hboxInput, Translations.GetString ("Input")));
-
-		Gtk.Box vboxOutput = new () { Spacing = spacing };
-		vboxOutput.SetOrientation (Gtk.Orientation.Vertical);
-		vboxOutput.Append (spin_out_high);
-		vboxOutput.Append (colorpanel_out_high);
-		vboxOutput.Append (spin_out_gamma);
-		vboxOutput.Append (colorpanel_out_mid);
-		vboxOutput.Append (colorpanel_out_low);
-		vboxOutput.Append (spin_out_low);
-
-		Gtk.Box hboxOutput = new () { Spacing = spacing };
-		hboxOutput.SetOrientation (Gtk.Orientation.Horizontal);
-		hboxOutput.Append (gradient_output);
-		hboxOutput.Append (vboxOutput);
-
-		hboxLayout.Append (CreateLabelledWidget (hboxOutput, Translations.GetString ("Output")));
-
-		hboxLayout.Append (CreateLabelledWidget (histogram_output, Translations.GetString ("Output Histogram")));
-
-		Gtk.Box content_area = this.GetContentAreaBox ();
-		content_area.Append (hboxLayout);
-
-		EffectData = effectData;
-
-		UpdateInputHistogram ();
-		Reset ();
-		UpdateLevels ();
-
-		check_red.OnToggled += HandleCheckRedToggled;
-		check_green.OnToggled += HandleCheckGreenToggled;
-		check_blue.OnToggled += HandleCheckBlueToggled;
-		button_reset.OnClicked += HandleButtonResetClicked;
-		button_auto.OnClicked += HandleButtonAutoClicked;
-		spin_in_low.OnValueChanged += HandleSpinInLowValueChanged;
-		spin_in_high.OnValueChanged += HandleSpinInHighValueChanged;
-		spin_out_low.OnValueChanged += HandleSpinOutLowValueChanged;
-		spin_out_gamma.OnValueChanged += HandleSpinOutGammaValueChanged;
-		spin_out_high.OnValueChanged += HandleSpinOutHighValueChanged;
-		gradient_input.ValueChanged += HandleGradientInputValueChanged;
-		gradient_output.ValueChanged += HandleGradientOutputValueChanged;
-		gradient_input.ClickGesture.OnReleased += HandleGradientButtonReleaseEvent;
-		gradient_output.ClickGesture.OnReleased += HandleGradientButtonReleaseEvent;
-		gradient_input.ClickGesture.OnPressed += HandleGradientButtonPressEvent;
-		gradient_output.ClickGesture.OnPressed += HandleGradientButtonPressEvent;
-		colorpanel_in_low.ClickGesture.OnPressed += HandleColorPanelButtonPressEvent;
-		colorpanel_in_high.ClickGesture.OnPressed += HandleColorPanelButtonPressEvent;
-		colorpanel_out_low.ClickGesture.OnPressed += HandleColorPanelButtonPressEvent;
-		colorpanel_out_high.ClickGesture.OnPressed += HandleColorPanelButtonPressEvent;
-
-		spin_in_low.SetActivatesDefault (true);
-		spin_in_high.SetActivatesDefault (true);
-		spin_out_gamma.SetActivatesDefault (true);
-		spin_out_low.SetActivatesDefault (true);
-		spin_out_high.SetActivatesDefault (true);
 	}
 
 	private UnaryPixelOps.Level Levels {
