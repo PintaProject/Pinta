@@ -91,12 +91,12 @@ public sealed class CurvesDialog : Gtk.Dialog
 
 		Resizable = false;
 
-		var content_area = this.GetContentAreaBox ();
+		Gtk.Box content_area = this.GetContentAreaBox ();
 		content_area.SetAllMargins (12);
 		content_area.Spacing = 6;
 
 		const int spacing = 6;
-		var hbox1 = new Gtk.Box { Spacing = spacing };
+		Gtk.Box hbox1 = new () { Spacing = spacing };
 		hbox1.SetOrientation (Gtk.Orientation.Horizontal);
 		hbox1.Append (Gtk.Label.New (Translations.GetString ("Transfer Map")));
 
@@ -120,7 +120,7 @@ public sealed class CurvesDialog : Gtk.Dialog
 		drawing.SetAllMargins (8);
 		content_area.Append (drawing);
 
-		var hbox2 = new Gtk.Box ();
+		Gtk.Box hbox2 = new ();
 		hbox2.SetOrientation (Gtk.Orientation.Horizontal);
 		check_red = new Gtk.CheckButton { Label = Translations.GetString ("Red  "), Active = true };
 		check_green = new Gtk.CheckButton { Label = Translations.GetString ("Green"), Active = true };
@@ -156,12 +156,12 @@ public sealed class CurvesDialog : Gtk.Dialog
 
 		drawing.SetDrawFunc ((area, context, width, height) => HandleDrawingDrawnEvent (context));
 
-		var motion_controller = Gtk.EventControllerMotion.New ();
+		Gtk.EventControllerMotion motion_controller = Gtk.EventControllerMotion.New ();
 		motion_controller.OnMotion += HandleDrawingMotionNotifyEvent;
 		motion_controller.OnLeave += (_, _) => InvalidateDrawing ();
 		drawing.AddController (motion_controller);
 
-		var click_controller = Gtk.GestureClick.New ();
+		Gtk.GestureClick click_controller = Gtk.GestureClick.New ();
 		click_controller.SetButton (0); // Handle all buttons
 		click_controller.OnPressed += HandleDrawingButtonPressEvent;
 		drawing.AddController (click_controller);
