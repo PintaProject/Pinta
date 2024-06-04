@@ -10,6 +10,8 @@
 using System;
 using System.Collections.Generic;
 using System.Collections.Immutable;
+using System.Collections.ObjectModel;
+using System.Linq;
 using Cairo;
 using Pinta.Core;
 using Pinta.Gui.Widgets;
@@ -18,21 +20,25 @@ namespace Pinta.Effects;
 
 public sealed class CloudsEffect : BaseEffect
 {
-	// This is so that repetition of the effect with CTRL+F actually shows up differently.
-	private readonly byte instance_seed = unchecked((byte) DateTime.Now.Ticks);
 	private static readonly object render_lock = new ();
 
-	public sealed override bool IsTileable => true;
+	public sealed override bool IsTileable
+		=> true;
 
-	public override string Icon => Pinta.Resources.Icons.EffectsRenderClouds;
+	public override string Icon
+		=> Resources.Icons.EffectsRenderClouds;
 
-	public override string Name => Translations.GetString ("Clouds");
+	public override string Name
+		=> Translations.GetString ("Clouds");
 
-	public override bool IsConfigurable => true;
+	public override bool IsConfigurable
+		=> true;
 
-	public override string EffectMenuCategory => Translations.GetString ("Render");
+	public override string EffectMenuCategory
+		=> Translations.GetString ("Render");
 
-	public CloudsData Data => (CloudsData) EffectData!;  // NRT - Set in constructor
+	public CloudsData Data
+		=> (CloudsData) EffectData!;  // NRT - Set in constructor
 
 	private readonly IPaletteService palette;
 
@@ -122,7 +128,7 @@ public sealed class CloudsEffect : BaseEffect
 		return Utility.Lerp (edge1, edge2, v);
 	}
 
-	private static void RenderClouds (ImageSurface surface, Core.RectangleI rect, int scale, byte seed, double power, ColorGradient gradient)
+	private static void RenderClouds (ImageSurface surface, RectangleI rect, int scale, byte seed, double power, ColorGradient gradient)
 	{
 		int w = surface.Width;
 		int h = surface.Height;
@@ -172,11 +178,14 @@ public sealed class CloudsEffect : BaseEffect
 		return gradient.GetColor ((val + 1) / 2);
 	}
 
-	protected override void Render (ImageSurface src, ImageSurface dst, Core.RectangleI roi)
+	protected override void Render (
+		ImageSurface src,
+		ImageSurface dst,
+		RectangleI roi)
 	{
-		var r = roi.ToDouble ();
+		RectangleD r = roi.ToDouble ();
 
-		var temp = CairoExtensions.CreateImageSurface (Format.Argb32, roi.Width, roi.Height);
+		ImageSurface temp = CairoExtensions.CreateImageSurface (Format.Argb32, roi.Width, roi.Height);
 
 		var baseGradient =
 			GradientHelper
@@ -191,7 +200,7 @@ public sealed class CloudsEffect : BaseEffect
 			temp,
 			roi,
 			Data.Scale,
-			(byte) (Data.Seed.Value ^ instance_seed),
+			unchecked((byte) Data.Seed.Value),
 			Data.Power / 100.0,
 			Data.ReverseColorScheme ? baseGradient.Reversed () : baseGradient
 		);
@@ -200,10 +209,13 @@ public sealed class CloudsEffect : BaseEffect
 
 		// Have to lock because effect renderer is multithreaded
 		lock (render_lock) {
-			var g = new Context (dst);
+
+			Context g = new (dst);
+
 			// - Clear any previous render from the destination
 			// - Copy the source to the destination
 			// - Blend the clouds over the source
+
 			g.Clear (r);
 			g.BlendSurface (src, r);
 			g.BlendSurface (temp, r.Location (), (BlendMode) CloudsData.BlendOps[Data.BlendMode]);
@@ -223,17 +235,19 @@ public sealed class CloudsEffect : BaseEffect
 		public int Power { get; set; } = 50;
 
 		[Skip]
-		public static Dictionary<string, object> BlendOps { get; }
+		public static ReadOnlyDictionary<string, object> BlendOps { get; }
 
 		[Skip]
 		private static readonly string default_blend_op;
 
 		static CloudsData ()
 		{
-			BlendOps = new Dictionary<string, object> ();
-
-			foreach (string name in UserBlendOps.GetAllBlendModeNames ())
-				BlendOps.Add (name, UserBlendOps.GetBlendModeByName (name));
+			BlendOps =
+				UserBlendOps.GetAllBlendModeNames ()
+				.ToDictionary (
+					o => o,
+					o => (object) UserBlendOps.GetBlendModeByName (o))
+				.AsReadOnly ();
 
 			default_blend_op = UserBlendOps.GetBlendModeName (Pinta.Core.BlendMode.Normal);
 		}
