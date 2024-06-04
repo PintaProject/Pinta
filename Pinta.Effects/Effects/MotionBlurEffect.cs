@@ -17,17 +17,23 @@ namespace Pinta.Effects;
 
 public sealed class MotionBlurEffect : BaseEffect
 {
-	public override string Icon => Pinta.Resources.Icons.EffectsBlursMotionBlur;
+	public override string Icon
+		=> Resources.Icons.EffectsBlursMotionBlur;
 
-	public sealed override bool IsTileable => true;
+	public sealed override bool IsTileable
+		=> true;
 
-	public override string Name => Translations.GetString ("Motion Blur");
+	public override string Name
+		=> Translations.GetString ("Motion Blur");
 
-	public override bool IsConfigurable => true;
+	public override bool IsConfigurable
+		=> true;
 
-	public override string EffectMenuCategory => Translations.GetString ("Blurs");
+	public override string EffectMenuCategory
+		=> Translations.GetString ("Blurs");
 
-	public MotionBlurData Data => (MotionBlurData) EffectData!;  // NRT - Set in constructor
+	public MotionBlurData Data
+		=> (MotionBlurData) EffectData!;  // NRT - Set in constructor
 
 	private readonly IChromeService chrome;
 
@@ -48,10 +54,14 @@ public sealed class MotionBlurEffect : BaseEffect
 
 	private MotionBlurSettings CreateSettings (ImageSurface src)
 	{
-		PointD start = new (0, 0);
-		double theta = (double) (Data.Angle.Degrees + 180) * 2 * Math.PI / 360.0;
+		RadiansAngle theta = Data.Angle.ToRadians () + new RadiansAngle (Math.PI);
+
 		double alpha = Data.Distance;
-		PointD end = new ((float) alpha * Math.Cos (theta), (float) (-alpha * Math.Sin (theta)));
+
+		PointD start = PointD.Zero;
+		PointD end = new (
+			X: (float) alpha * Math.Cos (theta.Radians),
+			Y: (float) (-alpha * Math.Sin (theta.Radians)));
 
 		if (Data.Centered) {
 			start = new (-end.X / 2.0f, -end.Y / 2.0f);
@@ -75,7 +85,10 @@ public sealed class MotionBlurEffect : BaseEffect
 			points: points.MoveToImmutable ());
 	}
 
-	public override void Render (ImageSurface src, ImageSurface dst, ReadOnlySpan<RectangleI> rois)
+	public override void Render (
+		ImageSurface src,
+		ImageSurface dst,
+		ReadOnlySpan<RectangleI> rois)
 	{
 		MotionBlurSettings settings = CreateSettings (src);
 
