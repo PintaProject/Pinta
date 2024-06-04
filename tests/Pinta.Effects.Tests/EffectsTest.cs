@@ -48,10 +48,11 @@ internal sealed class EffectsTest
 	}
 
 	[Test]
-	[Ignore ("Produces non-deterministic results because the random seed is not fixed")]
 	public void Clouds1 ()
 	{
-		// TODO:
+		CloudsEffect effect = new (Utilities.CreateMockServices ());
+		effect.Data.ColorSchemeSource = ColorSchemeSource.SelectedColors;
+		Utilities.TestEffect (effect, "clouds1.png");
 	}
 
 	[Test]
