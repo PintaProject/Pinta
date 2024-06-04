@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: pinta\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2024-05-26 01:15+0000\n"
-"PO-Revision-Date: 2024-05-27 17:10+0000\n"
+"PO-Revision-Date: 2024-06-03 15:09+0000\n"
 "Last-Translator: yiannis ioannides <sub@wai.ai>\n"
 "Language-Team: Greek <https://hosted.weblate.org/projects/pinta/pinta/el/>\n"
 "Language: el\n"
@@ -2293,7 +2293,7 @@ msgstr "Μη υποστηριζόμενος τύπος παλέττας"
 
 #: ../Pinta.Gui.Addins/AddinInfoView.cs:78
 msgid "Update..."
-msgstr "Αναβάθμιση..."
+msgstr "Ενημέρωση..."
 
 #: ../Pinta.Gui.Addins/AddinManagerDialog.cs:64
 msgid "Updates"
