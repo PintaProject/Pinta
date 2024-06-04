@@ -261,11 +261,11 @@ public sealed class EraserTool : BaseBrushTool
 			if (type_combobox is null) {
 				type_combobox = new ToolBarComboBox (100, 0, false, Translations.GetString ("Normal"), Translations.GetString ("Smooth"));
 
-				type_combobox.ComboBox.Active = Settings.GetSetting (ERASER_TYPE_SETTING, 0);
-
 				type_combobox.ComboBox.OnChanged += (o, e) => {
 					eraser_type = (EraserType) type_combobox.ComboBox.Active;
 				};
+
+				type_combobox.ComboBox.Active = Settings.GetSetting (ERASER_TYPE_SETTING, 0);
 			}
 
 			return type_combobox;
