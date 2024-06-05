@@ -15,10 +15,10 @@ internal sealed class InstallDialog : Adw.Window
 {
 	private readonly SetupService service;
 	private readonly PackageCollection packages_to_install = new ();
-	private List<string> addins_to_remove = new ();
-	private readonly InstallErrorReporter error_reporter = new ();
+	private IReadOnlyList<string> addins_to_remove = Array.Empty<string> ();
+	private readonly InstallErrorReporter error_reporter;
 
-	private readonly Adw.WindowTitle window_title = new ();
+	private readonly Adw.WindowTitle window_title;
 	private readonly StatusProgressBar progress_bar;
 
 	private readonly Gtk.Label error_heading_label;
@@ -39,61 +39,57 @@ internal sealed class InstallDialog : Adw.Window
 
 	public InstallDialog (Gtk.Window parent, SetupService service)
 	{
-		this.service = service;
+		Adw.WindowTitle windowTitle = new ();
 
-		TransientFor = parent;
-		WidthRequest = 500;
-		HeightRequest = 250;
+		Gtk.Box content = Gtk.Box.New (Gtk.Orientation.Vertical, 12);
+		content.Append (new Adw.HeaderBar { TitleWidget = windowTitle });
 
-		var content = Gtk.Box.New (Gtk.Orientation.Vertical, 12);
-		content.Append (new Adw.HeaderBar { TitleWidget = window_title });
+		Gtk.Label errorHeadingLabel = Gtk.Label.New (Translations.GetString ("The selected extension packages can't be installed because there are dependency conflicts."));
+		errorHeadingLabel.AddCssClass (AdwaitaStyles.Title4);
 
-		var labels = Gtk.Box.New (Gtk.Orientation.Vertical, 12);
+		Gtk.Label errorLabel = new ();
+		errorLabel.AddCssClass (AdwaitaStyles.Body);
+		errorLabel.AddCssClass (AdwaitaStyles.Error);
+
+		Gtk.Label warningHeadingLabel = new ();
+		warningHeadingLabel.AddCssClass (AdwaitaStyles.Title4);
+
+		Gtk.Label warningLabel = new ();
+		warningLabel.AddCssClass (AdwaitaStyles.Body);
+		warningLabel.AddCssClass (AdwaitaStyles.Warning);
+
+		Gtk.Label installHeadingLabel = Gtk.Label.New (Translations.GetString ("The following packages will be installed:"));
+		installHeadingLabel.AddCssClass (AdwaitaStyles.Title4);
+
+		Gtk.Label installLabel = new ();
+		installLabel.AddCssClass (AdwaitaStyles.Body);
+
+		Gtk.Label uninstallHeadingLabel = Gtk.Label.New (Translations.GetString ("The following packages need to be uninstalled:"));
+		uninstallHeadingLabel.AddCssClass (AdwaitaStyles.Title4);
+
+		Gtk.Label uninstallLabel = new ();
+		uninstallLabel.AddCssClass (AdwaitaStyles.Body);
+		uninstallLabel.AddCssClass (AdwaitaStyles.Warning);
+
+		Gtk.Label dependenciesHeadingLabel = Gtk.Label.New (Translations.GetString ("The following dependencies could not be resolved:"));
+		dependenciesHeadingLabel.AddCssClass (AdwaitaStyles.Title4);
+
+		Gtk.Label dependenciesLabel = new ();
+		dependenciesLabel.AddCssClass (AdwaitaStyles.Body);
+		dependenciesLabel.AddCssClass (AdwaitaStyles.Error);
+
+		Gtk.Box labels = Gtk.Box.New (Gtk.Orientation.Vertical, 12);
 		labels.SetAllMargins (6);
-
-		error_heading_label = Gtk.Label.New (Translations.GetString ("The selected extension packages can't be installed because there are dependency conflicts."));
-		error_heading_label.AddCssClass (AdwaitaStyles.Title4);
-		labels.Append (error_heading_label);
-
-		error_label = new Gtk.Label ();
-		error_label.AddCssClass (AdwaitaStyles.Body);
-		error_label.AddCssClass (AdwaitaStyles.Error);
-		labels.Append (error_label);
-
-		warning_heading_label = new Gtk.Label ();
-		warning_heading_label.AddCssClass (AdwaitaStyles.Title4);
-		labels.Append (warning_heading_label);
-
-		warning_label = new Gtk.Label ();
-		warning_label.AddCssClass (AdwaitaStyles.Body);
-		warning_label.AddCssClass (AdwaitaStyles.Warning);
-		labels.Append (warning_label);
-
-		install_heading_label = Gtk.Label.New (Translations.GetString ("The following packages will be installed:"));
-		install_heading_label.AddCssClass (AdwaitaStyles.Title4);
-		labels.Append (install_heading_label);
-
-		install_label = new Gtk.Label ();
-		install_label.AddCssClass (AdwaitaStyles.Body);
-		labels.Append (install_label);
-
-		uninstall_heading_label = Gtk.Label.New (Translations.GetString ("The following packages need to be uninstalled:"));
-		uninstall_heading_label.AddCssClass (AdwaitaStyles.Title4);
-		labels.Append (uninstall_heading_label);
-
-		uninstall_label = new Gtk.Label ();
-		uninstall_label.AddCssClass (AdwaitaStyles.Body);
-		uninstall_label.AddCssClass (AdwaitaStyles.Warning);
-		labels.Append (uninstall_label);
-
-		dependencies_heading_label = Gtk.Label.New (Translations.GetString ("The following dependencies could not be resolved:"));
-		dependencies_heading_label.AddCssClass (AdwaitaStyles.Title4);
-		labels.Append (dependencies_heading_label);
-
-		dependencies_label = new Gtk.Label ();
-		dependencies_label.AddCssClass (AdwaitaStyles.Body);
-		dependencies_label.AddCssClass (AdwaitaStyles.Error);
-		labels.Append (dependencies_label);
+		labels.Append (errorHeadingLabel);
+		labels.Append (errorLabel);
+		labels.Append (warningHeadingLabel);
+		labels.Append (warningLabel);
+		labels.Append (installHeadingLabel);
+		labels.Append (installLabel);
+		labels.Append (uninstallHeadingLabel);
+		labels.Append (uninstallLabel);
+		labels.Append (dependenciesHeadingLabel);
+		labels.Append (dependenciesLabel);
 
 		// Left align all labels.
 		Gtk.Widget? label = labels.GetFirstChild ();
@@ -102,29 +98,70 @@ internal sealed class InstallDialog : Adw.Window
 			label = label.GetNextSibling ();
 		}
 
-		var scroll = Gtk.ScrolledWindow.New ();
+		Gtk.ScrolledWindow scroll = Gtk.ScrolledWindow.New ();
 		scroll.Child = labels;
 		scroll.HscrollbarPolicy = Gtk.PolicyType.Never;
 		scroll.Vexpand = true;
 
-		progress_bar = new StatusProgressBar (scroll, error_reporter);
-		content.Append (progress_bar);
+		InstallErrorReporter errorReporter = new ();
 
-		var buttons = Gtk.Box.New (Gtk.Orientation.Horizontal, 12);
+		StatusProgressBar progressBar = new (scroll, errorReporter);
+		content.Append (progressBar);
+
+		Gtk.Button cancelButton = Gtk.Button.NewWithLabel (Translations.GetString ("Cancel"));
+		cancelButton.OnClicked += (_, _) => Close ();
+
+		Gtk.Button installButton = Gtk.Button.NewWithLabel (Translations.GetString ("Install"));
+		installButton.OnClicked += (_, _) => HandleInstallClicked ();
+
+		Gtk.Box buttons = Gtk.Box.New (Gtk.Orientation.Horizontal, 12);
 		buttons.Halign = Gtk.Align.End;
 		buttons.SetAllMargins (12);
-
-		cancel_button = Gtk.Button.NewWithLabel (Translations.GetString ("Cancel"));
-		buttons.Append (cancel_button);
-
-		install_button = Gtk.Button.NewWithLabel (Translations.GetString ("Install"));
-		buttons.Append (install_button);
+		buttons.Append (cancelButton);
+		buttons.Append (installButton);
 
 		content.Append (buttons);
+
+		// --- Initialization (Gtk.Widget)
+
+		WidthRequest = 500;
+		HeightRequest = 250;
+
+		// --- Initialization (Gtk.Window)
+
+		TransientFor = parent;
+
+		// --- Initialization (Adw.Window)
+
 		Content = content;
 
-		install_button.OnClicked += (_, _) => HandleInstallClicked ();
-		cancel_button.OnClicked += (_, _) => Close ();
+		// --- References to keep
+
+		this.service = service;
+
+		window_title = windowTitle;
+
+		error_heading_label = errorHeadingLabel;
+		error_label = errorLabel;
+
+		warning_heading_label = warningHeadingLabel;
+		warning_label = warningLabel;
+
+		install_heading_label = installHeadingLabel;
+		install_label = installLabel;
+
+		uninstall_heading_label = uninstallHeadingLabel;
+		uninstall_label = uninstallLabel;
+
+		dependencies_heading_label = dependenciesHeadingLabel;
+		dependencies_label = dependenciesLabel;
+
+		progress_bar = progressBar;
+
+		cancel_button = cancelButton;
+		install_button = installButton;
+
+		error_reporter = errorReporter;
 	}
 
 	public void InitForInstall (AddinRepositoryEntry[] addins_to_install)
@@ -163,22 +200,25 @@ internal sealed class InstallDialog : Adw.Window
 		}
 	}
 
-	public void InitForUninstall (IReadOnlyList<Addin> addins_to_uninstall)
+	public void InitForUninstall (IReadOnlyList<Addin> addinsToUninstall)
 	{
 		window_title.Title = Translations.GetString ("Uninstall");
 		install_button.Label = Translations.GetString ("Uninstall");
 		install_button.AddCssClass (AdwaitaStyles.DestructiveAction);
 
-		addins_to_remove = addins_to_uninstall.Select (a => a.Id).ToList ();
+		addins_to_remove =
+			addinsToUninstall
+			.Select (a => a.Id)
+			.ToArray ();
 
 		error_heading_label.Visible = error_label.Visible = false;
 		warning_heading_label.Visible = warning_label.Visible = false;
 		install_heading_label.Visible = install_label.Visible = false;
 
 		uninstall_heading_label.SetLabel (Translations.GetString ("The following packages will be uninstalled:"));
-		uninstall_label.SetLabel (string.Join (Environment.NewLine, addins_to_uninstall.Select (a => a.Name)));
+		uninstall_label.SetLabel (string.Join (Environment.NewLine, addinsToUninstall.Select (a => a.Name)));
 
-		var dependents = new HashSet<Addin> ();
+		HashSet<Addin> dependents = new ();
 		foreach (string id in addins_to_remove)
 			dependents.UnionWith (service.GetDependentAddins (id, true));
 
