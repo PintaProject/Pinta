@@ -116,11 +116,16 @@ public sealed class SimpleEffectDialog : Gtk.Dialog
 			.GetType ()
 			.GetMembers ()
 			.Where (IsInstanceFieldOrProperty)
-			.Where (m => string.Compare (m.Name, nameof (EffectData.IsDefault), true) != 0)
+			.Where (IsCustomProperty)
 			.Select (CreateSettings)
 			.Where (settings => !settings.skip)
 			.Select (settings => GetMemberWidgets (settings, effectData, localizer))
 			.SelectMany (widgets => widgets);
+
+	private bool IsCustomProperty (MemberInfo memberInfo)
+	{
+		return string.Compare (memberInfo.Name, nameof (EffectData.IsDefault), true) != 0;
+	}
 
 	private bool IsInstanceFieldOrProperty (MemberInfo memberInfo)
 	{
