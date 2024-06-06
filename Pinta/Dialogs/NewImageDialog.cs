@@ -65,6 +65,8 @@ public sealed class NewImageDialog : Gtk.Dialog
 		BackgroundType initialBackgroundType,
 		bool isClipboardSize)
 	{
+		// --- Control creation
+
 		// We don't show the background color option if it's the same as "White"
 		bool allowBackgroundColor = PintaCore.Palette.SecondaryColor.ToColorBgra () != ColorBgra.White;
 
@@ -117,6 +119,7 @@ public sealed class NewImageDialog : Gtk.Dialog
 		Gtk.Label orientationLabel = Gtk.Label.New (Translations.GetString ("Orientation:"));
 		orientationLabel.Xalign = 0f;
 		orientationLabel.Yalign = .5f;
+		orientationLabel.MarginBottom = 4;
 
 		Gtk.CheckButton portraitRadio = Gtk.CheckButton.NewWithLabel (Translations.GetString ("Portrait"));
 
@@ -139,22 +142,21 @@ public sealed class NewImageDialog : Gtk.Dialog
 			MarginEnd = 7,
 		};
 
-		Gtk.Box landscape_hbox = Gtk.Box.New (Gtk.Orientation.Horizontal, 0);
-		landscape_hbox.Append (landscapeImage);
-		landscape_hbox.Append (landscapeRadio);
+		Gtk.Box landscapeHbox = Gtk.Box.New (Gtk.Orientation.Horizontal, 0);
+		landscapeHbox.Append (landscapeImage);
+		landscapeHbox.Append (landscapeRadio);
 
 		// Orientation VBox
 		Gtk.Box orientationVbox = Gtk.Box.New (Gtk.Orientation.Vertical, 0);
-		orientationLabel.MarginBottom = 4;
 		orientationVbox.Append (orientationLabel);
 		orientationVbox.Append (portraitHbox);
-		orientationVbox.Append (landscape_hbox);
+		orientationVbox.Append (landscapeHbox);
 
 		// Background Color options
-		Gtk.Label background_label = Gtk.Label.New (Translations.GetString ("Background:"));
-		background_label.Xalign = 0f;
-		background_label.Yalign = .5f;
-		background_label.MarginBottom = 4;
+		Gtk.Label backgroundLabel = Gtk.Label.New (Translations.GetString ("Background:"));
+		backgroundLabel.Xalign = 0f;
+		backgroundLabel.Yalign = .5f;
+		backgroundLabel.MarginBottom = 4;
 
 		Gtk.CheckButton whiteBackgroundRadio = Gtk.CheckButton.NewWithLabel (Translations.GetString ("White"));
 
@@ -169,10 +171,9 @@ public sealed class NewImageDialog : Gtk.Dialog
 		secondaryBackgroundRadio.SetGroup (whiteBackgroundRadio);
 
 		Gtk.Image imageBackground = Gtk.Image.NewFromPixbuf (CairoExtensions.CreateColorSwatch (16, PintaCore.Palette.SecondaryColor).ToPixbuf ());
-
-		Gtk.Box hboxBackground = Gtk.Box.New (Gtk.Orientation.Horizontal, 0);
 		imageBackground.MarginEnd = 7;
 
+		Gtk.Box hboxBackground = Gtk.Box.New (Gtk.Orientation.Horizontal, 0);
 		hboxBackground.Append (imageBackground);
 		hboxBackground.Append (secondaryBackgroundRadio);
 
@@ -187,7 +188,7 @@ public sealed class NewImageDialog : Gtk.Dialog
 		hboxTransparent.Append (transparentBackgroundRadio);
 
 		Gtk.Box backgroundVbox = Gtk.Box.New (Gtk.Orientation.Vertical, 0);
-		backgroundVbox.Append (background_label);
+		backgroundVbox.Append (backgroundLabel);
 		backgroundVbox.Append (hboxWhite);
 
 		if (allowBackgroundColor)
@@ -238,6 +239,8 @@ public sealed class NewImageDialog : Gtk.Dialog
 		Gtk.Box contentArea = this.GetContentAreaBox ();
 		contentArea.SetAllMargins (8);
 		contentArea.Append (mainHbox);
+
+		// --- Sub-component post-initialization
 
 		if (initialBackgroundType == BackgroundType.SecondaryColor && allowBackgroundColor)
 			secondaryBackgroundRadio.Active = true;
@@ -326,7 +329,7 @@ public sealed class NewImageDialog : Gtk.Dialog
 	{
 		White,
 		Transparent,
-		SecondaryColor
+		SecondaryColor,
 	}
 
 	public BackgroundType NewImageBackgroundType {
@@ -340,15 +343,12 @@ public sealed class NewImageDialog : Gtk.Dialog
 		}
 	}
 
-	public Cairo.Color NewImageBackground {
-		get {
-			return NewImageBackgroundType switch {
-				BackgroundType.White => new Cairo.Color (1, 1, 1),
-				BackgroundType.Transparent => new Cairo.Color (1, 1, 1, 0),
-				_ => PintaCore.Palette.SecondaryColor,
-			};
-		}
-	}
+	public Cairo.Color NewImageBackground =>
+		NewImageBackgroundType switch {
+			BackgroundType.White => new Cairo.Color (1, 1, 1),
+			BackgroundType.Transparent => new Cairo.Color (1, 1, 1, 0),
+			_ => PintaCore.Palette.SecondaryColor,
+		};
 
 
 	private bool IsValidSize {
@@ -370,9 +370,9 @@ public sealed class NewImageDialog : Gtk.Dialog
 			if (text == Translations.GetString ("Clipboard") || text == Translations.GetString ("Custom"))
 				return Size.Empty;
 
-			var text_parts = text.Split (' ');
-			int width = int.Parse (text_parts[0]);
-			int height = int.Parse (text_parts[2]);
+			var textParts = text.Split (' ');
+			int width = int.Parse (textParts[0]);
+			int height = int.Parse (textParts[2]);
 
 			return new (width, height);
 		}
@@ -481,15 +481,15 @@ public sealed class NewImageDialog : Gtk.Dialog
 			if (text == Translations.GetString ("Clipboard") || text == Translations.GetString ("Custom"))
 				continue;
 
-			var text_parts = text.Split ('x');
-			int width = int.Parse (text_parts[0].Trim ());
-			int height = int.Parse (text_parts[1].Trim ());
+			var textParts = text.Split ('x');
+			int width = int.Parse (textParts[0].Trim ());
+			int height = int.Parse (textParts[1].Trim ());
 
-			Size new_size = new (NewImageWidth < NewImageHeight ? Math.Min (width, height) : Math.Max (width, height), NewImageWidth < NewImageHeight ? Math.Max (width, height) : Math.Min (width, height));
-			string new_text = $"{new_size.Width} x {new_size.Height}";
+			Size newSize = new (NewImageWidth < NewImageHeight ? Math.Min (width, height) : Math.Max (width, height), NewImageWidth < NewImageHeight ? Math.Max (width, height) : Math.Min (width, height));
+			string newText = $"{newSize.Width} x {newSize.Height}";
 
-			if (new_text != text)
-				preset_dropdown_model.Splice (i, 1, new[] { new_text });
+			if (newText != text)
+				preset_dropdown_model.Splice (i, 1, new[] { newText });
 		}
 	}
 
