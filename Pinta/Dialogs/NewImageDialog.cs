@@ -88,7 +88,7 @@ public sealed class NewImageDialog : Gtk.Dialog
 
 		Gtk.Entry widthEntry = new () {
 			WidthRequest = 50,
-			ActivatesDefault = true
+			ActivatesDefault = true,
 		};
 
 		Gtk.Label widthUnits = Gtk.Label.New (Translations.GetString ("pixels"));
@@ -105,7 +105,7 @@ public sealed class NewImageDialog : Gtk.Dialog
 
 		Gtk.Entry heightEntry = new () {
 			WidthRequest = 50,
-			ActivatesDefault = true
+			ActivatesDefault = true,
 		};
 
 		Gtk.Label heightUnits = Gtk.Label.New (Translations.GetString ("pixels"));
@@ -445,21 +445,25 @@ public sealed class NewImageDialog : Gtk.Dialog
 
 		// Handle orientation changes
 		portrait_radio.OnToggled += (o, e) => {
-			if (portrait_radio.Active && IsValidSize && NewImageWidth > NewImageHeight) {
-				int temp = NewImageWidth;
-				width_entry.Buffer!.Text = height_entry.Buffer!.Text;
-				height_entry.Buffer!.Text = temp.ToString ();
-				preview_box.Update (NewImageSize);
-			}
+
+			if (!portrait_radio.Active || !IsValidSize || NewImageWidth <= NewImageHeight)
+				return;
+
+			int temp = NewImageWidth;
+			width_entry.Buffer!.Text = height_entry.Buffer!.Text;
+			height_entry.Buffer!.Text = temp.ToString ();
+			preview_box.Update (NewImageSize);
 		};
 
 		landscape_radio.OnToggled += (o, e) => {
-			if (landscape_radio.Active && IsValidSize && NewImageWidth < NewImageHeight) {
-				int temp = NewImageWidth;
-				width_entry.Buffer!.Text = height_entry.Buffer!.Text;
-				height_entry.Buffer!.Text = temp.ToString ();
-				preview_box.Update (NewImageSize);
-			}
+
+			if (!landscape_radio.Active || !IsValidSize || NewImageWidth >= NewImageHeight)
+				return;
+
+			int temp = NewImageWidth;
+			width_entry.Buffer!.Text = height_entry.Buffer!.Text;
+			height_entry.Buffer!.Text = temp.ToString ();
+			preview_box.Update (NewImageSize);
 		};
 
 		// Handle background color changes
@@ -547,15 +551,7 @@ public sealed class NewImageDialog : Gtk.Dialog
 
 		private void Draw (Context cr, int widget_width, int widget_height)
 		{
-			Size preview_size;
-
-			// Figure out the dimensions of the preview to draw
-			if (size.Width <= MAX_SIZE && size.Height <= MAX_SIZE)
-				preview_size = size;
-			else if (size.Width > size.Height)
-				preview_size = new Size (MAX_SIZE, (int) (MAX_SIZE / (size.Width / (float) size.Height)));
-			else
-				preview_size = new Size ((int) (MAX_SIZE / (size.Height / (float) size.Width)), MAX_SIZE);
+			Size preview_size = GetPreviewSizeForDraw ();
 
 			RectangleD r = new (
 				(widget_width - preview_size.Width) / 2,
@@ -576,6 +572,16 @@ public sealed class NewImageDialog : Gtk.Dialog
 			cr.DrawRectangle (new RectangleD (r.X - 1, r.Y - 1, r.Width + 2, r.Height + 2), new Cairo.Color (.5, .5, .5), 1);
 			cr.DrawRectangle (new RectangleD (r.X - 2, r.Y - 2, r.Width + 4, r.Height + 4), new Cairo.Color (.8, .8, .8), 1);
 			cr.DrawRectangle (new RectangleD (r.X - 3, r.Y - 3, r.Width + 6, r.Height + 6), new Cairo.Color (.9, .9, .9), 1);
+		}
+
+		private Size GetPreviewSizeForDraw () // Figure out the dimensions of the preview to draw
+		{
+			if (size.Width <= MAX_SIZE && size.Height <= MAX_SIZE)
+				return size;
+			else if (size.Width > size.Height)
+				return new Size (MAX_SIZE, (int) (MAX_SIZE / (size.Width / (float) size.Height)));
+			else
+				return new Size ((int) (MAX_SIZE / (size.Height / (float) size.Width)), MAX_SIZE);
 		}
 	}
 }
