@@ -23,7 +23,6 @@
 // THE SOFTWARE.
 
 using System;
-using Gtk;
 using Pinta.Core;
 using Pinta.Resources;
 
@@ -33,12 +32,12 @@ namespace Pinta.Docking;
 /// A dock item contains a single child widget, and can be docked at
 /// various locations.
 /// </summary>
-public sealed class DockItem : Box
+public sealed class DockItem : Gtk.Box
 {
-	private readonly Label label_widget;
-	private readonly Stack button_stack;
-	private readonly Button minimize_button;
-	private readonly Button maximize_button;
+	private readonly Gtk.Label label_widget;
+	private readonly Gtk.Stack button_stack;
+	private readonly Gtk.Button minimize_button;
+	private readonly Gtk.Button maximize_button;
 
 	/// <summary>
 	/// Unique identifier for the dock item. Used e.g. when saving the dock layout to disk.
@@ -53,7 +52,10 @@ public sealed class DockItem : Box
 	/// <summary>
 	/// Visible label for the dock item.
 	/// </summary>
-	public string Label { get => label_widget.GetLabel (); set => label_widget.SetLabel (value); }
+	public string Label {
+		get => label_widget.GetLabel ();
+		set => label_widget.SetLabel (value);
+	}
 
 	/// <summary>
 	/// Triggered when the minimize button is pressed.
@@ -65,44 +67,89 @@ public sealed class DockItem : Box
 	/// </summary>
 	public event EventHandler? MaximizeClicked;
 
-	public DockItem (Widget child, string unique_name, string icon_name, bool locked = false)
+	public DockItem (
+		Gtk.Widget child,
+		string uniqueName,
+		string iconName,
+		bool locked = false)
 	{
-		SetOrientation (Orientation.Vertical);
+		Gtk.Button minimizeButton = CreateMinimizeButton (locked);
+		Gtk.Button maximizeButton = CreateMaximizeButton (locked);
 
-		UniqueName = unique_name;
-		IconName = icon_name;
+		Gtk.Stack buttonStack = new ();
+		buttonStack.AddChild (minimizeButton);
+		buttonStack.AddChild (maximizeButton);
 
-		minimize_button = Button.NewFromIconName (StandardIcons.WindowMinimize);
-		minimize_button.AddCssClass (Pinta.Core.AdwaitaStyles.Flat);
-		maximize_button = Button.NewFromIconName (StandardIcons.WindowMaximize);
-		maximize_button.AddCssClass (Pinta.Core.AdwaitaStyles.Flat);
+		Gtk.Label labelWidget = CreateLabelWidget (locked);
 
-		button_stack = new Stack ();
-		button_stack.AddChild (minimize_button);
-		button_stack.AddChild (maximize_button);
+		// --- Initialization (Gtk.Box)
 
-		label_widget = new Label ();
+		SetOrientation (Gtk.Orientation.Vertical);
+
+		// --- Initialization
+
+		UniqueName = uniqueName;
+		IconName = iconName;
+
+		child.Valign = Gtk.Align.Fill;
+		child.Vexpand = true;
+
 		if (!locked) {
-			const int padding = 8;
-			var title_layout = Box.New (Orientation.Horizontal, 0);
-			label_widget.MarginStart = label_widget.MarginEnd = padding;
-			label_widget.Hexpand = true;
-			label_widget.Halign = Align.Start;
-			title_layout.Append (label_widget);
 
-			title_layout.Append (button_stack);
+			Gtk.Box titleLayout = Gtk.Box.New (Gtk.Orientation.Horizontal, 0);
+			titleLayout.Append (labelWidget);
+			titleLayout.Append (buttonStack);
 
-			minimize_button.OnClicked += (o, args) => Minimize ();
-			maximize_button.OnClicked += (o, args) => Maximize ();
-
-			Append (title_layout);
+			Append (titleLayout);
 		}
 
-		child.Valign = Align.Fill;
-		child.Vexpand = true;
 		Append (child);
 
 		// TODO - support dragging into floating panel?
+
+		// --- References to keep
+
+		minimize_button = minimizeButton;
+		maximize_button = maximizeButton;
+
+		button_stack = buttonStack;
+
+		label_widget = labelWidget;
+	}
+
+	private Gtk.Button CreateMinimizeButton (bool locked)
+	{
+		Gtk.Button result = Gtk.Button.NewFromIconName (StandardIcons.WindowMinimize);
+		result.AddCssClass (AdwaitaStyles.Flat);
+		if (!locked)
+			result.OnClicked += (o, args) => Minimize ();
+
+		return result;
+	}
+
+	private Gtk.Button CreateMaximizeButton (bool locked)
+	{
+		Gtk.Button result = Gtk.Button.NewFromIconName (StandardIcons.WindowMaximize);
+		result.AddCssClass (AdwaitaStyles.Flat);
+		if (!locked)
+			result.OnClicked += (o, args) => Maximize ();
+
+		return result;
+	}
+
+	private static Gtk.Label CreateLabelWidget (bool locked)
+	{
+		if (locked)
+			return new ();
+
+		const int padding = 8;
+
+		Gtk.Label result = new ();
+		result.MarginStart = result.MarginEnd = padding;
+		result.Hexpand = true;
+		result.Halign = Gtk.Align.Start;
+
+		return result;
 	}
 
 	/// <summary>
@@ -110,7 +157,7 @@ public sealed class DockItem : Box
 	/// </summary>
 	public Gtk.Box AddToolBar ()
 	{
-		var toolbar = GtkExtensions.CreateToolBar ();
+		Gtk.Box toolbar = GtkExtensions.CreateToolBar ();
 		Append (toolbar);
 		return toolbar;
 	}
@@ -120,10 +167,11 @@ public sealed class DockItem : Box
 	/// </summary>
 	public void Minimize ()
 	{
-		if (button_stack.VisibleChild != maximize_button) {
-			button_stack.VisibleChild = maximize_button;
-			MinimizeClicked?.Invoke (this, new EventArgs ());
-		}
+		if (button_stack.VisibleChild == maximize_button)
+			return;
+
+		button_stack.VisibleChild = maximize_button;
+		MinimizeClicked?.Invoke (this, new EventArgs ());
 	}
 
 	/// <summary>
@@ -131,9 +179,10 @@ public sealed class DockItem : Box
 	/// </summary>
 	public void Maximize ()
 	{
-		if (button_stack.VisibleChild != minimize_button) {
-			button_stack.VisibleChild = minimize_button;
-			MaximizeClicked?.Invoke (this, new EventArgs ());
-		}
+		if (button_stack.VisibleChild == minimize_button)
+			return;
+
+		button_stack.VisibleChild = minimize_button;
+		MaximizeClicked?.Invoke (this, new EventArgs ());
 	}
 }

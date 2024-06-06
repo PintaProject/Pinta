@@ -37,7 +37,7 @@ public sealed class CanvasPad : IDockPad
 	{
 		Notebook = new DockNotebook ();
 
-		var canvas_dock = new DockItem (Notebook, "Canvas", icon_name: string.Empty, locked: true) {
+		var canvas_dock = new DockItem (Notebook, "Canvas", iconName: string.Empty, locked: true) {
 			Label = Translations.GetString ("Canvas")
 		};
 		workspace.AddItem (canvas_dock, DockPlacement.Center);
