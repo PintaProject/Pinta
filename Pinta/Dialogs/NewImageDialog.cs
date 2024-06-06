@@ -59,145 +59,96 @@ public sealed class NewImageDialog : Gtk.Dialog
 	/// <param name="imgWidth">Initial value of the width entry.</param>
 	/// <param name="imgHeight">Initial value of the height entry.</param>
 	/// <param name="isClipboardSize">Indicates if there is an image on the clipboard (and the size parameters represent the clipboard image size).</param>
-	public NewImageDialog (int initialWidth, int initialHeight, BackgroundType initial_bg_type, bool isClipboardSize)
+	public NewImageDialog (
+		int initialWidth,
+		int initialHeight,
+		BackgroundType initialBackgroundType,
+		bool isClipboardSize)
 	{
-		Title = Translations.GetString ("New Image");
-		TransientFor = PintaCore.Chrome.MainWindow;
-		Modal = true;
-		this.AddCancelOkButtons ();
-		this.SetDefaultResponse (Gtk.ResponseType.Ok);
-
 		// We don't show the background color option if it's the same as "White"
 		bool allowBackgroundColor = PintaCore.Palette.SecondaryColor.ToColorBgra () != ColorBgra.White;
 
-		Gtk.Box contentArea = this.GetContentAreaBox ();
-		contentArea.SetAllMargins (8);
-
-		Resizable = false;
-
-		IconName = Resources.StandardIcons.DocumentNew;
-
 		bool hasClipboard = isClipboardSize;
-		has_clipboard = hasClipboard;
-		clipboard_size = new Size (initialWidth, initialHeight);
-
-		// Some arbitrary presets
-		IReadOnlyList<Size> presetSizes = new Size[] {
-			new (640, 480),
-			new (800, 600),
-			new (1024, 768),
-			new (1600, 1200),
-		};
-
-		// Layout table for preset, width, and height
-		Gtk.Grid layout_grid = new () {
-			RowSpacing = 5,
-			ColumnSpacing = 6
-		};
 
 		// Preset Combo
 		Gtk.Label sizeLabel = Gtk.Label.New (Translations.GetString ("Preset:"));
 		sizeLabel.Xalign = 1f;
 		sizeLabel.Yalign = .5f;
 
-		List<string> presetEntries = new ();
-
-		if (hasClipboard)
-			presetEntries.Add (Translations.GetString ("Clipboard"));
-
-		presetEntries.Add (Translations.GetString ("Custom"));
-		presetEntries.AddRange (presetSizes.Select (p => $"{p.Width} x {p.Height}"));
-
-		Gtk.StringList presetDropdownModel = Gtk.StringList.New (presetEntries.ToArray ());
-		preset_dropdown_model = presetDropdownModel;
+		Gtk.StringList presetDropdownModel = Gtk.StringList.New (GeneratePresetEntries (hasClipboard).ToArray ());
 
 		Gtk.DropDown presetDropdown = Gtk.DropDown.New (presetDropdownModel, expression: null);
-		preset_dropdown = presetDropdown;
-
-		layout_grid.Attach (sizeLabel, 0, 0, 1, 1);
-		layout_grid.Attach (presetDropdown, 1, 0, 1, 1);
 
 		// Width Entry
-		Gtk.Label width_label = Gtk.Label.New (Translations.GetString ("Width:"));
-		width_label.Xalign = 1f;
-		width_label.Yalign = .5f;
+		Gtk.Label widthLabel = Gtk.Label.New (Translations.GetString ("Width:"));
+		widthLabel.Xalign = 1f;
+		widthLabel.Yalign = .5f;
 
-		Gtk.Entry widthEntry = new Gtk.Entry () {
+		Gtk.Entry widthEntry = new () {
 			WidthRequest = 50,
 			ActivatesDefault = true
 		};
-		width_entry = widthEntry;
 
 		Gtk.Label widthUnits = Gtk.Label.New (Translations.GetString ("pixels"));
 		widthUnits.MarginStart = 5;
 
-		Gtk.Box width_hbox = Gtk.Box.New (Gtk.Orientation.Horizontal, 0);
-		width_hbox.Append (widthEntry);
-		width_hbox.Append (widthUnits);
-
-		layout_grid.Attach (width_label, 0, 1, 1, 1);
-		layout_grid.Attach (width_hbox, 1, 1, 1, 1);
+		Gtk.Box widthHbox = Gtk.Box.New (Gtk.Orientation.Horizontal, 0);
+		widthHbox.Append (widthEntry);
+		widthHbox.Append (widthUnits);
 
 		// Height Entry
-		Gtk.Label height_label = Gtk.Label.New (Translations.GetString ("Height:"));
-		height_label.Xalign = 1f;
-		height_label.Yalign = .5f;
+		Gtk.Label heightLabel = Gtk.Label.New (Translations.GetString ("Height:"));
+		heightLabel.Xalign = 1f;
+		heightLabel.Yalign = .5f;
 
-		Gtk.Entry heightEntry = new Gtk.Entry () {
+		Gtk.Entry heightEntry = new () {
 			WidthRequest = 50,
 			ActivatesDefault = true
 		};
-		height_entry = heightEntry;
 
 		Gtk.Label heightUnits = Gtk.Label.New (Translations.GetString ("pixels"));
 		heightUnits.MarginStart = 5;
 
-		Gtk.Box height_hbox = Gtk.Box.New (Gtk.Orientation.Horizontal, 0);
-		height_hbox.Append (heightEntry);
-		height_hbox.Append (heightUnits);
-
-		layout_grid.Attach (height_label, 0, 2, 1, 1);
-		layout_grid.Attach (height_hbox, 1, 2, 1, 1);
+		Gtk.Box heightHbox = Gtk.Box.New (Gtk.Orientation.Horizontal, 0);
+		heightHbox.Append (heightEntry);
+		heightHbox.Append (heightUnits);
 
 		// Orientation Radio options
-		Gtk.Label orientation_label = Gtk.Label.New (Translations.GetString ("Orientation:"));
-		orientation_label.Xalign = 0f;
-		orientation_label.Yalign = .5f;
+		Gtk.Label orientationLabel = Gtk.Label.New (Translations.GetString ("Orientation:"));
+		orientationLabel.Xalign = 0f;
+		orientationLabel.Yalign = .5f;
 
 		Gtk.CheckButton portraitRadio = Gtk.CheckButton.NewWithLabel (Translations.GetString ("Portrait"));
-		portrait_radio = portraitRadio;
 
-		Gtk.Image portrait_image = new () {
+		Gtk.Image portraitImage = new () {
 			IconName = Resources.Icons.OrientationPortrait,
-			PixelSize = 16
+			PixelSize = 16,
+			MarginEnd = 7,
 		};
 
-		Gtk.Box portrait_hbox = Gtk.Box.New (Gtk.Orientation.Horizontal, 0);
-		portrait_image.MarginEnd = 7;
-
-		portrait_hbox.Append (portrait_image);
-		portrait_hbox.Append (portraitRadio);
+		Gtk.Box portraitHbox = Gtk.Box.New (Gtk.Orientation.Horizontal, 0);
+		portraitHbox.Append (portraitImage);
+		portraitHbox.Append (portraitRadio);
 
 		Gtk.CheckButton landscapeRadio = Gtk.CheckButton.NewWithLabel (Translations.GetString ("Landscape"));
-		landscape_radio = landscapeRadio;
 		landscapeRadio.SetGroup (portraitRadio);
-		Gtk.Image landscape_image = new () {
+
+		Gtk.Image landscapeImage = new () {
 			IconName = Resources.Icons.OrientationLandscape,
-			PixelSize = 16
+			PixelSize = 16,
+			MarginEnd = 7,
 		};
 
 		Gtk.Box landscape_hbox = Gtk.Box.New (Gtk.Orientation.Horizontal, 0);
-		landscape_image.MarginEnd = 7;
-
-		landscape_hbox.Append (landscape_image);
+		landscape_hbox.Append (landscapeImage);
 		landscape_hbox.Append (landscapeRadio);
 
 		// Orientation VBox
-		Gtk.Box orientation_vbox = Gtk.Box.New (Gtk.Orientation.Vertical, 0);
-		orientation_label.MarginBottom = 4;
-		orientation_vbox.Append (orientation_label);
-		orientation_vbox.Append (portrait_hbox);
-		orientation_vbox.Append (landscape_hbox);
+		Gtk.Box orientationVbox = Gtk.Box.New (Gtk.Orientation.Vertical, 0);
+		orientationLabel.MarginBottom = 4;
+		orientationVbox.Append (orientationLabel);
+		orientationVbox.Append (portraitHbox);
+		orientationVbox.Append (landscape_hbox);
 
 		// Background Color options
 		Gtk.Label background_label = Gtk.Label.New (Translations.GetString ("Background:"));
@@ -206,97 +157,160 @@ public sealed class NewImageDialog : Gtk.Dialog
 		background_label.MarginBottom = 4;
 
 		Gtk.CheckButton whiteBackgroundRadio = Gtk.CheckButton.NewWithLabel (Translations.GetString ("White"));
-		white_background_radio = whiteBackgroundRadio;
-		Gtk.Image image_white = Gtk.Image.NewFromPixbuf (CairoExtensions.CreateColorSwatch (16, new Cairo.Color (1, 1, 1)).ToPixbuf ());
 
-		Gtk.Box hbox_white = Gtk.Box.New (Gtk.Orientation.Horizontal, 0);
-		image_white.MarginEnd = 7;
+		Gtk.Image imageWhite = Gtk.Image.NewFromPixbuf (CairoExtensions.CreateColorSwatch (16, new Cairo.Color (1, 1, 1)).ToPixbuf ());
+		imageWhite.MarginEnd = 7;
 
-		hbox_white.Append (image_white);
-		hbox_white.Append (whiteBackgroundRadio);
+		Gtk.Box hboxWhite = Gtk.Box.New (Gtk.Orientation.Horizontal, 0);
+		hboxWhite.Append (imageWhite);
+		hboxWhite.Append (whiteBackgroundRadio);
 
 		Gtk.CheckButton secondaryBackgroundRadio = Gtk.CheckButton.NewWithLabel (Translations.GetString ("Background Color"));
-		secondary_background_radio = secondaryBackgroundRadio;
 		secondaryBackgroundRadio.SetGroup (whiteBackgroundRadio);
-		Gtk.Image image_bg = Gtk.Image.NewFromPixbuf (CairoExtensions.CreateColorSwatch (16, PintaCore.Palette.SecondaryColor).ToPixbuf ());
 
-		Gtk.Box hbox_bg = Gtk.Box.New (Gtk.Orientation.Horizontal, 0);
-		image_bg.MarginEnd = 7;
+		Gtk.Image imageBackground = Gtk.Image.NewFromPixbuf (CairoExtensions.CreateColorSwatch (16, PintaCore.Palette.SecondaryColor).ToPixbuf ());
 
-		hbox_bg.Append (image_bg);
-		hbox_bg.Append (secondaryBackgroundRadio);
+		Gtk.Box hboxBackground = Gtk.Box.New (Gtk.Orientation.Horizontal, 0);
+		imageBackground.MarginEnd = 7;
+
+		hboxBackground.Append (imageBackground);
+		hboxBackground.Append (secondaryBackgroundRadio);
 
 		Gtk.CheckButton transparentBackgroundRadio = Gtk.CheckButton.NewWithLabel (Translations.GetString ("Transparent"));
-		transparent_background_radio = transparentBackgroundRadio;
 		transparentBackgroundRadio.SetGroup (secondaryBackgroundRadio);
-		Gtk.Image image_trans = Gtk.Image.NewFromPixbuf (CairoExtensions.CreateTransparentColorSwatch (16, true).ToPixbuf ());
-		image_trans.MarginEnd = 7;
 
-		Gtk.Box hbox_trans = Gtk.Box.New (Gtk.Orientation.Horizontal, 0);
+		Gtk.Image imageTransparent = Gtk.Image.NewFromPixbuf (CairoExtensions.CreateTransparentColorSwatch (16, true).ToPixbuf ());
+		imageTransparent.MarginEnd = 7;
 
-		hbox_trans.Append (image_trans);
-		hbox_trans.Append (transparentBackgroundRadio);
+		Gtk.Box hboxTransparent = Gtk.Box.New (Gtk.Orientation.Horizontal, 0);
+		hboxTransparent.Append (imageTransparent);
+		hboxTransparent.Append (transparentBackgroundRadio);
 
-		// Background VBox
-		Gtk.Box background_vbox = Gtk.Box.New (Gtk.Orientation.Vertical, 0);
-		background_vbox.Append (background_label);
-		background_vbox.Append (hbox_white);
+		Gtk.Box backgroundVbox = Gtk.Box.New (Gtk.Orientation.Vertical, 0);
+		backgroundVbox.Append (background_label);
+		backgroundVbox.Append (hboxWhite);
 
 		if (allowBackgroundColor)
-			background_vbox.Append (hbox_bg);
+			backgroundVbox.Append (hboxBackground);
 
-		background_vbox.Append (hbox_trans);
+		backgroundVbox.Append (hboxTransparent);
+		backgroundVbox.MarginTop = 4;
+
+		// Layout table for preset, width, and height
+		Gtk.Grid layoutGrid = new () {
+			RowSpacing = 5,
+			ColumnSpacing = 6,
+			MarginBottom = 3,
+		};
+		layoutGrid.Attach (sizeLabel, 0, 0, 1, 1);
+		layoutGrid.Attach (presetDropdown, 1, 0, 1, 1);
+		layoutGrid.Attach (widthLabel, 0, 1, 1, 1);
+		layoutGrid.Attach (widthHbox, 1, 1, 1, 1);
+		layoutGrid.Attach (heightLabel, 0, 2, 1, 1);
+		layoutGrid.Attach (heightHbox, 1, 2, 1, 1);
 
 		// Put all the options together
-		Gtk.Box options_vbox = Gtk.Box.New (Gtk.Orientation.Vertical, 0);
-		options_vbox.Spacing = 10;
-
-		layout_grid.MarginBottom = 3;
-		background_vbox.MarginTop = 4;
-		options_vbox.Append (layout_grid);
-		options_vbox.Append (orientation_vbox);
-		options_vbox.Append (background_vbox);
+		Gtk.Box optionsVbox = Gtk.Box.New (Gtk.Orientation.Vertical, 0);
+		optionsVbox.Spacing = 10;
+		optionsVbox.Append (layoutGrid);
+		optionsVbox.Append (orientationVbox);
+		optionsVbox.Append (backgroundVbox);
 
 		// Layout the preview + the options
-		PreviewArea previewBox = new PreviewArea () {
+
+		Gtk.Label previewLabel = Gtk.Label.New (Translations.GetString ("Preview"));
+
+		PreviewArea previewBox = new () {
 			Vexpand = true,
-			Valign = Gtk.Align.Fill
+			Valign = Gtk.Align.Fill,
+			Hexpand = true,
+			Halign = Gtk.Align.Fill,
 		};
-		preview_box = previewBox;
 
-		Gtk.Label preview_label = Gtk.Label.New (Translations.GetString ("Preview"));
+		Gtk.Box previewVbox = Gtk.Box.New (Gtk.Orientation.Vertical, 0);
+		previewVbox.Append (previewLabel);
+		previewVbox.Append (previewBox);
 
-		Gtk.Box preview_vbox = Gtk.Box.New (Gtk.Orientation.Vertical, 0);
-		previewBox.Hexpand = true;
-		previewBox.Halign = Gtk.Align.Fill;
+		Gtk.Box mainHbox = Gtk.Box.New (Gtk.Orientation.Horizontal, 10);
+		mainHbox.Append (optionsVbox);
+		mainHbox.Append (previewVbox);
 
-		preview_vbox.Append (preview_label);
-		preview_vbox.Append (previewBox);
+		Gtk.Box contentArea = this.GetContentAreaBox ();
+		contentArea.SetAllMargins (8);
+		contentArea.Append (mainHbox);
 
-		Gtk.Box main_hbox = Gtk.Box.New (Gtk.Orientation.Horizontal, 10);
-		main_hbox.Append (options_vbox);
-		main_hbox.Append (preview_vbox);
-
-		contentArea.Append (main_hbox);
-
-		if (initial_bg_type == BackgroundType.SecondaryColor && allowBackgroundColor)
+		if (initialBackgroundType == BackgroundType.SecondaryColor && allowBackgroundColor)
 			secondaryBackgroundRadio.Active = true;
-		else if (initial_bg_type == BackgroundType.Transparent)
+
+		if (initialBackgroundType == BackgroundType.Transparent)
 			transparentBackgroundRadio.Active = true;
-		else
+
+		if (initialBackgroundType == BackgroundType.White)
 			whiteBackgroundRadio.Active = true;
 
-		widthEntry.Buffer!.Text = initialWidth.ToString ();
+
 		heightEntry.Buffer!.Text = initialHeight.ToString ();
 
+		widthEntry.Buffer!.Text = initialWidth.ToString ();
 		widthEntry.GrabFocus ();
 		widthEntry.SelectRegion (0, (int) widthEntry.TextLength);
+
+		// --- Initialization (Gtk.Window)
+
+		Title = Translations.GetString ("New Image");
+		TransientFor = PintaCore.Chrome.MainWindow;
+		Modal = true;
+		Resizable = false;
+		IconName = Resources.StandardIcons.DocumentNew;
+
+		// --- Initialization (Gtk.Dialog)
+
+		this.AddCancelOkButtons ();
+		this.SetDefaultResponse (Gtk.ResponseType.Ok);
+
+		// --- References to keep
+
+		has_clipboard = hasClipboard;
+		clipboard_size = new Size (initialWidth, initialHeight);
+		preset_dropdown_model = presetDropdownModel;
+		preset_dropdown = presetDropdown;
+		width_entry = widthEntry;
+		height_entry = heightEntry;
+		portrait_radio = portraitRadio;
+		landscape_radio = landscapeRadio;
+		white_background_radio = whiteBackgroundRadio;
+		secondary_background_radio = secondaryBackgroundRadio;
+		transparent_background_radio = transparentBackgroundRadio;
+		preview_box = previewBox;
+
+		// --- TODO: Refactor this post-initialization
 
 		WireUpEvents ();
 
 		UpdateOrientation ();
+
 		UpdatePresetSelection ();
+
 		previewBox.Update (NewImageSize, NewImageBackground);
+	}
+
+	// Some arbitrary presets
+	private static readonly IReadOnlyList<Size> preset_sizes = new Size[] {
+		new (640, 480),
+		new (800, 600),
+		new (1024, 768),
+		new (1600, 1200),
+	};
+
+	private static IEnumerable<string> GeneratePresetEntries (bool hasClipboard)
+	{
+		if (hasClipboard)
+			yield return Translations.GetString ("Clipboard");
+
+		yield return Translations.GetString ("Custom");
+
+		foreach (Size p in preset_sizes)
+			yield return $"{p.Width} x {p.Height}";
 	}
 
 	public int NewImageWidth
