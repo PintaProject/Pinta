@@ -84,14 +84,14 @@ public sealed class NewImageDialog : Gtk.Dialog
 
 		// Some arbitrary presets
 		preset_sizes = new List<Size> {
-			new Size (640, 480),
-			new Size (800, 600),
-			new Size (1024, 768),
-			new Size (1600, 1200)
+			new (640, 480),
+			new (800, 600),
+			new (1024, 768),
+			new (1600, 1200)
 		};
 
 		// Layout table for preset, width, and height
-		Gtk.Grid layout_grid = new Gtk.Grid {
+		Gtk.Grid layout_grid = new () {
 			RowSpacing = 5,
 			ColumnSpacing = 6
 		};
@@ -101,7 +101,7 @@ public sealed class NewImageDialog : Gtk.Dialog
 		size_label.Xalign = 1f;
 		size_label.Yalign = .5f;
 
-		List<string> preset_entries = new List<string> ();
+		List<string> preset_entries = new ();
 
 		if (has_clipboard)
 			preset_entries.Add (Translations.GetString ("Clipboard"));
@@ -120,7 +120,7 @@ public sealed class NewImageDialog : Gtk.Dialog
 		width_label.Xalign = 1f;
 		width_label.Yalign = .5f;
 
-		width_entry = new Gtk.Entry {
+		width_entry = new Gtk.Entry () {
 			WidthRequest = 50,
 			ActivatesDefault = true
 		};
@@ -140,7 +140,7 @@ public sealed class NewImageDialog : Gtk.Dialog
 		height_label.Xalign = 1f;
 		height_label.Yalign = .5f;
 
-		height_entry = new Gtk.Entry {
+		height_entry = new Gtk.Entry () {
 			WidthRequest = 50,
 			ActivatesDefault = true
 		};
@@ -161,7 +161,7 @@ public sealed class NewImageDialog : Gtk.Dialog
 		orientation_label.Yalign = .5f;
 
 		portrait_radio = Gtk.CheckButton.NewWithLabel (Translations.GetString ("Portrait"));
-		Gtk.Image portrait_image = new Gtk.Image () {
+		Gtk.Image portrait_image = new () {
 			IconName = Resources.Icons.OrientationPortrait,
 			PixelSize = 16
 		};
@@ -174,7 +174,7 @@ public sealed class NewImageDialog : Gtk.Dialog
 
 		landscape_radio = Gtk.CheckButton.NewWithLabel (Translations.GetString ("Landscape"));
 		landscape_radio.SetGroup (portrait_radio);
-		Gtk.Image landscape_image = new Gtk.Image () {
+		Gtk.Image landscape_image = new () {
 			IconName = Resources.Icons.OrientationLandscape,
 			PixelSize = 16
 		};
@@ -248,7 +248,7 @@ public sealed class NewImageDialog : Gtk.Dialog
 		options_vbox.Append (background_vbox);
 
 		// Layout the preview + the options
-		preview = new PreviewArea {
+		preview = new PreviewArea () {
 			Vexpand = true,
 			Valign = Gtk.Align.Fill
 		};
@@ -288,9 +288,14 @@ public sealed class NewImageDialog : Gtk.Dialog
 		preview.Update (NewImageSize, NewImageBackground);
 	}
 
-	public int NewImageWidth => int.Parse (width_entry.Buffer!.Text!);
-	public int NewImageHeight => int.Parse (height_entry.Buffer!.Text!);
-	public Size NewImageSize => new (NewImageWidth, NewImageHeight);
+	public int NewImageWidth
+		=> int.Parse (width_entry.Buffer!.Text!);
+
+	public int NewImageHeight
+		=> int.Parse (height_entry.Buffer!.Text!);
+
+	public Size NewImageSize
+		=> new (NewImageWidth, NewImageHeight);
 
 	public enum BackgroundType
 	{
@@ -344,7 +349,7 @@ public sealed class NewImageDialog : Gtk.Dialog
 			int width = int.Parse (text_parts[0]);
 			int height = int.Parse (text_parts[2]);
 
-			return new Size (width, height);
+			return new (width, height);
 		}
 	}
 
@@ -455,7 +460,7 @@ public sealed class NewImageDialog : Gtk.Dialog
 			int width = int.Parse (text_parts[0].Trim ());
 			int height = int.Parse (text_parts[1].Trim ());
 
-			Size new_size = new Size (NewImageWidth < NewImageHeight ? Math.Min (width, height) : Math.Max (width, height), NewImageWidth < NewImageHeight ? Math.Max (width, height) : Math.Min (width, height));
+			Size new_size = new (NewImageWidth < NewImageHeight ? Math.Min (width, height) : Math.Max (width, height), NewImageWidth < NewImageHeight ? Math.Max (width, height) : Math.Min (width, height));
 			string new_text = $"{new_size.Width} x {new_size.Height}";
 
 			if (new_text != text)
@@ -475,9 +480,8 @@ public sealed class NewImageDialog : Gtk.Dialog
 			return;
 
 		string text = $"{NewImageWidth} x {NewImageHeight}";
-		if (preset_dropdown_model.FindString (text, out uint index) && preset_dropdown.Selected != index) {
+		if (preset_dropdown_model.FindString (text, out uint index) && preset_dropdown.Selected != index)
 			preset_dropdown.Selected = index;
-		}
 	}
 
 	private sealed class PreviewArea : Gtk.DrawingArea
@@ -528,11 +532,15 @@ public sealed class NewImageDialog : Gtk.Dialog
 			else
 				preview_size = new Size ((int) (MAX_SIZE / (size.Height / (float) size.Width)), MAX_SIZE);
 
-			RectangleD r = new RectangleD ((widget_width - preview_size.Width) / 2, (widget_height - preview_size.Height) / 2, preview_size.Width, preview_size.Height);
+			RectangleD r = new (
+				(widget_width - preview_size.Width) / 2,
+				(widget_height - preview_size.Height) / 2,
+				preview_size.Width,
+				preview_size.Height);
 
 			if (color.A == 0) {
 				// Fill with transparent checkerboard pattern
-				var pattern = CairoExtensions.CreateTransparentBackgroundPattern (16);
+				Pattern pattern = CairoExtensions.CreateTransparentBackgroundPattern (16);
 				cr.FillRectangle (r, pattern);
 			} else {
 				// Fill with selected color
