@@ -389,6 +389,8 @@ public sealed class EditActions
 			last_palette_dir = file.GetParent ();
 			PintaCore.Palette.CurrentPalette.Load (file);
 		};
+
+		fcd.Show ();
 	}
 
 	private void HandlerPintaCoreActionsEditSavePaletteActivated (object sender, EventArgs e)
@@ -433,6 +435,8 @@ public sealed class EditActions
 			PintaCore.Palette.CurrentPalette.Save (file, format.Saver);
 			last_palette_dir = file.GetParent ();
 		};
+
+		fcd.Show ();
 	}
 
 	private void HandlerPintaCoreActionsEditResetPaletteActivated (object sender, EventArgs e)
