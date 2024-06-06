@@ -72,7 +72,7 @@ public sealed class NewImageDialog : Gtk.Dialog
 		// We don't show the background color option if it's the same as "White"
 		allow_background_color = PintaCore.Palette.SecondaryColor.ToColorBgra () != ColorBgra.White;
 
-		var content_area = this.GetContentAreaBox ();
+		Gtk.Box content_area = this.GetContentAreaBox ();
 		content_area.SetAllMargins (8);
 
 		Resizable = false;
@@ -91,17 +91,17 @@ public sealed class NewImageDialog : Gtk.Dialog
 		};
 
 		// Layout table for preset, width, and height
-		var layout_grid = new Gtk.Grid {
+		Gtk.Grid layout_grid = new Gtk.Grid {
 			RowSpacing = 5,
 			ColumnSpacing = 6
 		};
 
 		// Preset Combo
-		var size_label = Gtk.Label.New (Translations.GetString ("Preset:"));
+		Gtk.Label size_label = Gtk.Label.New (Translations.GetString ("Preset:"));
 		size_label.Xalign = 1f;
 		size_label.Yalign = .5f;
 
-		var preset_entries = new List<string> ();
+		List<string> preset_entries = new List<string> ();
 
 		if (has_clipboard)
 			preset_entries.Add (Translations.GetString ("Clipboard"));
@@ -116,7 +116,7 @@ public sealed class NewImageDialog : Gtk.Dialog
 		layout_grid.Attach (preset_dropdown, 1, 0, 1, 1);
 
 		// Width Entry
-		var width_label = Gtk.Label.New (Translations.GetString ("Width:"));
+		Gtk.Label width_label = Gtk.Label.New (Translations.GetString ("Width:"));
 		width_label.Xalign = 1f;
 		width_label.Yalign = .5f;
 
@@ -125,10 +125,10 @@ public sealed class NewImageDialog : Gtk.Dialog
 			ActivatesDefault = true
 		};
 
-		var width_units = Gtk.Label.New (Translations.GetString ("pixels"));
+		Gtk.Label width_units = Gtk.Label.New (Translations.GetString ("pixels"));
 		width_units.MarginStart = 5;
 
-		var width_hbox = Gtk.Box.New (Gtk.Orientation.Horizontal, 0);
+		Gtk.Box width_hbox = Gtk.Box.New (Gtk.Orientation.Horizontal, 0);
 		width_hbox.Append (width_entry);
 		width_hbox.Append (width_units);
 
@@ -136,7 +136,7 @@ public sealed class NewImageDialog : Gtk.Dialog
 		layout_grid.Attach (width_hbox, 1, 1, 1, 1);
 
 		// Height Entry
-		var height_label = Gtk.Label.New (Translations.GetString ("Height:"));
+		Gtk.Label height_label = Gtk.Label.New (Translations.GetString ("Height:"));
 		height_label.Xalign = 1f;
 		height_label.Yalign = .5f;
 
@@ -145,10 +145,10 @@ public sealed class NewImageDialog : Gtk.Dialog
 			ActivatesDefault = true
 		};
 
-		var height_units = Gtk.Label.New (Translations.GetString ("pixels"));
+		Gtk.Label height_units = Gtk.Label.New (Translations.GetString ("pixels"));
 		height_units.MarginStart = 5;
 
-		var height_hbox = Gtk.Box.New (Gtk.Orientation.Horizontal, 0);
+		Gtk.Box height_hbox = Gtk.Box.New (Gtk.Orientation.Horizontal, 0);
 		height_hbox.Append (height_entry);
 		height_hbox.Append (height_units);
 
@@ -156,12 +156,12 @@ public sealed class NewImageDialog : Gtk.Dialog
 		layout_grid.Attach (height_hbox, 1, 2, 1, 1);
 
 		// Orientation Radio options
-		var orientation_label = Gtk.Label.New (Translations.GetString ("Orientation:"));
+		Gtk.Label orientation_label = Gtk.Label.New (Translations.GetString ("Orientation:"));
 		orientation_label.Xalign = 0f;
 		orientation_label.Yalign = .5f;
 
 		portrait_radio = Gtk.CheckButton.NewWithLabel (Translations.GetString ("Portrait"));
-		var portrait_image = new Gtk.Image () {
+		Gtk.Image portrait_image = new Gtk.Image () {
 			IconName = Resources.Icons.OrientationPortrait,
 			PixelSize = 16
 		};
@@ -174,34 +174,34 @@ public sealed class NewImageDialog : Gtk.Dialog
 
 		landscape_radio = Gtk.CheckButton.NewWithLabel (Translations.GetString ("Landscape"));
 		landscape_radio.SetGroup (portrait_radio);
-		var landscape_image = new Gtk.Image () {
+		Gtk.Image landscape_image = new Gtk.Image () {
 			IconName = Resources.Icons.OrientationLandscape,
 			PixelSize = 16
 		};
 
-		var landscape_hbox = Gtk.Box.New (Gtk.Orientation.Horizontal, 0);
+		Gtk.Box landscape_hbox = Gtk.Box.New (Gtk.Orientation.Horizontal, 0);
 		landscape_image.MarginEnd = 7;
 
 		landscape_hbox.Append (landscape_image);
 		landscape_hbox.Append (landscape_radio);
 
 		// Orientation VBox
-		var orientation_vbox = Gtk.Box.New (Gtk.Orientation.Vertical, 0);
+		Gtk.Box orientation_vbox = Gtk.Box.New (Gtk.Orientation.Vertical, 0);
 		orientation_label.MarginBottom = 4;
 		orientation_vbox.Append (orientation_label);
 		orientation_vbox.Append (portrait_hbox);
 		orientation_vbox.Append (landscape_hbox);
 
 		// Background Color options
-		var background_label = Gtk.Label.New (Translations.GetString ("Background:"));
+		Gtk.Label background_label = Gtk.Label.New (Translations.GetString ("Background:"));
 		background_label.Xalign = 0f;
 		background_label.Yalign = .5f;
 		background_label.MarginBottom = 4;
 
 		white_bg_radio = Gtk.CheckButton.NewWithLabel (Translations.GetString ("White"));
-		var image_white = Gtk.Image.NewFromPixbuf (CairoExtensions.CreateColorSwatch (16, new Cairo.Color (1, 1, 1)).ToPixbuf ());
+		Gtk.Image image_white = Gtk.Image.NewFromPixbuf (CairoExtensions.CreateColorSwatch (16, new Cairo.Color (1, 1, 1)).ToPixbuf ());
 
-		var hbox_white = Gtk.Box.New (Gtk.Orientation.Horizontal, 0);
+		Gtk.Box hbox_white = Gtk.Box.New (Gtk.Orientation.Horizontal, 0);
 		image_white.MarginEnd = 7;
 
 		hbox_white.Append (image_white);
@@ -209,9 +209,9 @@ public sealed class NewImageDialog : Gtk.Dialog
 
 		secondary_bg_radio = Gtk.CheckButton.NewWithLabel (Translations.GetString ("Background Color"));
 		secondary_bg_radio.SetGroup (white_bg_radio);
-		var image_bg = Gtk.Image.NewFromPixbuf (CairoExtensions.CreateColorSwatch (16, PintaCore.Palette.SecondaryColor).ToPixbuf ());
+		Gtk.Image image_bg = Gtk.Image.NewFromPixbuf (CairoExtensions.CreateColorSwatch (16, PintaCore.Palette.SecondaryColor).ToPixbuf ());
 
-		var hbox_bg = Gtk.Box.New (Gtk.Orientation.Horizontal, 0);
+		Gtk.Box hbox_bg = Gtk.Box.New (Gtk.Orientation.Horizontal, 0);
 		image_bg.MarginEnd = 7;
 
 		hbox_bg.Append (image_bg);
@@ -219,16 +219,16 @@ public sealed class NewImageDialog : Gtk.Dialog
 
 		trans_bg_radio = Gtk.CheckButton.NewWithLabel (Translations.GetString ("Transparent"));
 		trans_bg_radio.SetGroup (secondary_bg_radio);
-		var image_trans = Gtk.Image.NewFromPixbuf (CairoExtensions.CreateTransparentColorSwatch (16, true).ToPixbuf ());
+		Gtk.Image image_trans = Gtk.Image.NewFromPixbuf (CairoExtensions.CreateTransparentColorSwatch (16, true).ToPixbuf ());
 		image_trans.MarginEnd = 7;
 
-		var hbox_trans = Gtk.Box.New (Gtk.Orientation.Horizontal, 0);
+		Gtk.Box hbox_trans = Gtk.Box.New (Gtk.Orientation.Horizontal, 0);
 
 		hbox_trans.Append (image_trans);
 		hbox_trans.Append (trans_bg_radio);
 
 		// Background VBox
-		var background_vbox = Gtk.Box.New (Gtk.Orientation.Vertical, 0);
+		Gtk.Box background_vbox = Gtk.Box.New (Gtk.Orientation.Vertical, 0);
 		background_vbox.Append (background_label);
 		background_vbox.Append (hbox_white);
 
@@ -238,7 +238,7 @@ public sealed class NewImageDialog : Gtk.Dialog
 		background_vbox.Append (hbox_trans);
 
 		// Put all the options together
-		var options_vbox = Gtk.Box.New (Gtk.Orientation.Vertical, 0);
+		Gtk.Box options_vbox = Gtk.Box.New (Gtk.Orientation.Vertical, 0);
 		options_vbox.Spacing = 10;
 
 		layout_grid.MarginBottom = 3;
@@ -253,16 +253,16 @@ public sealed class NewImageDialog : Gtk.Dialog
 			Valign = Gtk.Align.Fill
 		};
 
-		var preview_label = Gtk.Label.New (Translations.GetString ("Preview"));
+		Gtk.Label preview_label = Gtk.Label.New (Translations.GetString ("Preview"));
 
-		var preview_vbox = Gtk.Box.New (Gtk.Orientation.Vertical, 0);
+		Gtk.Box preview_vbox = Gtk.Box.New (Gtk.Orientation.Vertical, 0);
 		preview.Hexpand = true;
 		preview.Halign = Gtk.Align.Fill;
 
 		preview_vbox.Append (preview_label);
 		preview_vbox.Append (preview);
 
-		var main_hbox = Gtk.Box.New (Gtk.Orientation.Horizontal, 10);
+		Gtk.Box main_hbox = Gtk.Box.New (Gtk.Orientation.Horizontal, 10);
 		main_hbox.Append (options_vbox);
 		main_hbox.Append (preview_vbox);
 
@@ -324,10 +324,10 @@ public sealed class NewImageDialog : Gtk.Dialog
 	private bool IsValidSize {
 		get {
 
-			if (!int.TryParse (width_entry.Buffer!.Text!, out var width))
+			if (!int.TryParse (width_entry.Buffer!.Text!, out int width))
 				return false;
 
-			if (!int.TryParse (height_entry.Buffer!.Text!, out var height))
+			if (!int.TryParse (height_entry.Buffer!.Text!, out int height))
 				return false;
 
 			return width > 0 && height > 0;
@@ -341,8 +341,8 @@ public sealed class NewImageDialog : Gtk.Dialog
 				return Size.Empty;
 
 			var text_parts = text.Split (' ');
-			var width = int.Parse (text_parts[0]);
-			var height = int.Parse (text_parts[2]);
+			int width = int.Parse (text_parts[0]);
+			int height = int.Parse (text_parts[2]);
 
 			return new Size (width, height);
 		}
@@ -356,7 +356,7 @@ public sealed class NewImageDialog : Gtk.Dialog
 			if (args.Pspec.GetName () != "selected")
 				return;
 
-			var new_size = IsValidSize ? NewImageSize : Size.Empty;
+			Size new_size = IsValidSize ? NewImageSize : Size.Empty;
 
 			string? preset_text = preset_dropdown_model.GetString (preset_dropdown.Selected);
 			if (has_clipboard && preset_text == Translations.GetString ("Clipboard"))
@@ -416,7 +416,7 @@ public sealed class NewImageDialog : Gtk.Dialog
 		// Handle orientation changes
 		portrait_radio.OnToggled += (o, e) => {
 			if (portrait_radio.Active && IsValidSize && NewImageWidth > NewImageHeight) {
-				var temp = NewImageWidth;
+				int temp = NewImageWidth;
 				width_entry.Buffer!.Text = height_entry.Buffer!.Text;
 				height_entry.Buffer!.Text = temp.ToString ();
 				preview.Update (NewImageSize);
@@ -425,7 +425,7 @@ public sealed class NewImageDialog : Gtk.Dialog
 
 		landscape_radio.OnToggled += (o, e) => {
 			if (landscape_radio.Active && IsValidSize && NewImageWidth < NewImageHeight) {
-				var temp = NewImageWidth;
+				int temp = NewImageWidth;
 				width_entry.Buffer!.Text = height_entry.Buffer!.Text;
 				height_entry.Buffer!.Text = temp.ToString ();
 				preview.Update (NewImageSize);
@@ -446,17 +446,17 @@ public sealed class NewImageDialog : Gtk.Dialog
 			landscape_radio.Activate ();
 
 		for (uint i = 1, n = preset_dropdown_model.GetNItems (); i < n; i++) {
-			var text = preset_dropdown_model.GetString (i)!;
+			string text = preset_dropdown_model.GetString (i)!;
 
 			if (text == Translations.GetString ("Clipboard") || text == Translations.GetString ("Custom"))
 				continue;
 
 			var text_parts = text.Split ('x');
-			var width = int.Parse (text_parts[0].Trim ());
-			var height = int.Parse (text_parts[1].Trim ());
+			int width = int.Parse (text_parts[0].Trim ());
+			int height = int.Parse (text_parts[1].Trim ());
 
-			var new_size = new Size (NewImageWidth < NewImageHeight ? Math.Min (width, height) : Math.Max (width, height), NewImageWidth < NewImageHeight ? Math.Max (width, height) : Math.Min (width, height));
-			var new_text = $"{new_size.Width} x {new_size.Height}";
+			Size new_size = new Size (NewImageWidth < NewImageHeight ? Math.Min (width, height) : Math.Max (width, height), NewImageWidth < NewImageHeight ? Math.Max (width, height) : Math.Min (width, height));
+			string new_text = $"{new_size.Width} x {new_size.Height}";
 
 			if (new_text != text)
 				preset_dropdown_model.Splice (i, 1, new[] { new_text });
@@ -474,7 +474,7 @@ public sealed class NewImageDialog : Gtk.Dialog
 		if (!IsValidSize)
 			return;
 
-		var text = $"{NewImageWidth} x {NewImageHeight}";
+		string text = $"{NewImageWidth} x {NewImageHeight}";
 		if (preset_dropdown_model.FindString (text, out uint index) && preset_dropdown.Selected != index) {
 			preset_dropdown.Selected = index;
 		}
@@ -528,7 +528,7 @@ public sealed class NewImageDialog : Gtk.Dialog
 			else
 				preview_size = new Size ((int) (MAX_SIZE / (size.Height / (float) size.Width)), MAX_SIZE);
 
-			var r = new RectangleD ((widget_width - preview_size.Width) / 2, (widget_height - preview_size.Height) / 2, preview_size.Width, preview_size.Height);
+			RectangleD r = new RectangleD ((widget_width - preview_size.Width) / 2, (widget_height - preview_size.Height) / 2, preview_size.Width, preview_size.Height);
 
 			if (color.A == 0) {
 				// Fill with transparent checkerboard pattern
