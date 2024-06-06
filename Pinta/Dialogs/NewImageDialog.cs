@@ -60,8 +60,7 @@ public sealed class NewImageDialog : Gtk.Dialog
 	/// <param name="imgHeight">Initial value of the height entry.</param>
 	/// <param name="isClipboardSize">Indicates if there is an image on the clipboard (and the size parameters represent the clipboard image size).</param>
 	public NewImageDialog (
-		int initialWidth,
-		int initialHeight,
+		Size initialSize,
 		BackgroundType initialBackgroundType,
 		bool isClipboardSize)
 	{
@@ -252,9 +251,9 @@ public sealed class NewImageDialog : Gtk.Dialog
 			whiteBackgroundRadio.Active = true;
 
 
-		heightEntry.Buffer!.Text = initialHeight.ToString ();
+		heightEntry.Buffer!.Text = initialSize.Height.ToString ();
 
-		widthEntry.Buffer!.Text = initialWidth.ToString ();
+		widthEntry.Buffer!.Text = initialSize.Width.ToString ();
 		widthEntry.GrabFocus ();
 		widthEntry.SelectRegion (0, (int) widthEntry.TextLength);
 
@@ -274,7 +273,7 @@ public sealed class NewImageDialog : Gtk.Dialog
 		// --- References to keep
 
 		has_clipboard = hasClipboard;
-		clipboard_size = new Size (initialWidth, initialHeight);
+		clipboard_size = initialSize;
 		preset_dropdown_model = presetDropdownModel;
 		preset_dropdown = presetDropdown;
 		width_entry = widthEntry;
