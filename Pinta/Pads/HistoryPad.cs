@@ -36,7 +36,7 @@ public sealed class HistoryPad : IDockPad
 	public void Initialize (Dock workspace, Application app, Gio.Menu padMenu)
 	{
 		var history = new HistoryListView ();
-		DockItem history_item = new DockItem (history, "History", icon_name: Pinta.Resources.Icons.HistoryList) {
+		DockItem history_item = new DockItem (history, "History", iconName: Pinta.Resources.Icons.HistoryList) {
 			Label = Translations.GetString ("History")
 		};
 
