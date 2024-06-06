@@ -115,12 +115,26 @@ public sealed class SimpleEffectDialog : Gtk.Dialog
 			effectData
 			.GetType ()
 			.GetMembers ()
-			.Where (m => m is FieldInfo || m is PropertyInfo)
+			.Where (IsInstanceFieldOrProperty)
 			.Where (m => string.Compare (m.Name, nameof (EffectData.IsDefault), true) != 0)
 			.Select (CreateSettings)
 			.Where (settings => !settings.skip)
 			.Select (settings => GetMemberWidgets (settings, effectData, localizer))
 			.SelectMany (widgets => widgets);
+
+	private bool IsInstanceFieldOrProperty (MemberInfo memberInfo)
+	{
+		switch (memberInfo) {
+			case FieldInfo fieldInfo:
+				return !fieldInfo.IsStatic;
+			case PropertyInfo propertyInfo:
+				MethodInfo? getter = propertyInfo.GetGetMethod ();
+				if (getter is null) return false;
+				return !getter.IsStatic;
+			default:
+				return false;
+		}
+	}
 
 	private sealed record MemberSettings (
 		MemberReflector reflector,
