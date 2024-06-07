@@ -40,7 +40,7 @@ internal sealed class MemberReflector
 			case FieldInfo f:
 				return f.SetValue;
 			case PropertyInfo p:
-				MethodInfo setter = p.GetSetMethod () ?? throw new ArgumentException ("Property has no 'set' method", nameof (memberInfo));
+				MethodInfo setter = p.GetSetMethod () ?? throw new ArgumentException ($"Property {p.Name} has no 'set' method", nameof (memberInfo));
 				return (o, v) => setter.Invoke (o, new[] { v });
 			default:
 				throw new ArgumentException ($"Member type {memberInfo.GetType ()} not supported", nameof (memberInfo));
