@@ -125,12 +125,18 @@ public sealed class NewImageDialog : Gtk.Dialog
 
 		Gtk.Box hboxTransparent = CreateHorizontalBox (0, imageTransparent, transparentBackgroundRadio);
 
-		Gtk.Box backgroundVbox = CreateVerticalBox (0, backgroundLabel, hboxWhite);
+		IEnumerable<Gtk.Widget> GenerateBackgroundBoxItems ()
+		{
+			yield return backgroundLabel;
+			yield return hboxWhite;
 
-		if (allowBackgroundColor)
-			backgroundVbox.Append (hboxBackground);
+			if (allowBackgroundColor)
+				yield return hboxBackground;
 
-		backgroundVbox.Append (hboxTransparent);
+			yield return hboxTransparent;
+		}
+
+		Gtk.Box backgroundVbox = CreateVerticalBox (0, GenerateBackgroundBoxItems ());
 		backgroundVbox.MarginTop = 4;
 
 		// Layout table for preset, width, and height
@@ -178,7 +184,6 @@ public sealed class NewImageDialog : Gtk.Dialog
 
 		if (initialBackgroundType == BackgroundType.White)
 			whiteBackgroundRadio.Active = true;
-
 
 		heightEntry.Buffer!.Text = initialSize.Height.ToString ();
 
@@ -249,7 +254,7 @@ public sealed class NewImageDialog : Gtk.Dialog
 
 	private static Gtk.Box CreateVerticalBox (
 		int spacing,
-		params Gtk.Widget[] children)
+		IEnumerable<Gtk.Widget> children)
 	{
 		Gtk.Box vbox = Gtk.Box.New (Gtk.Orientation.Vertical, spacing);
 
@@ -258,6 +263,14 @@ public sealed class NewImageDialog : Gtk.Dialog
 
 		return vbox;
 	}
+
+	private static Gtk.Box CreateVerticalBox (
+		int spacing,
+		params Gtk.Widget[] children
+	)
+		=> CreateVerticalBox (
+			spacing,
+			(IEnumerable<Gtk.Widget>) children);
 
 	private static Gtk.Label CreateUnitsLabel ()
 	{
