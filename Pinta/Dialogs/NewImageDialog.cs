@@ -79,27 +79,13 @@ public sealed class NewImageDialog : Gtk.Dialog
 		Gtk.DropDown presetDropdown = Gtk.DropDown.New (presetDropdownModel, expression: null);
 
 		Gtk.Label widthLabel = CreateWidthLabel ();
-
-		Gtk.Entry widthEntry = new () {
-			WidthRequest = 50,
-			ActivatesDefault = true,
-		};
-
-		Gtk.Label widthUnitsLabel = Gtk.Label.New (Translations.GetString ("pixels"));
-		widthUnitsLabel.MarginStart = 5;
-
+		Gtk.Entry widthEntry = CreateLengthEntry ();
+		Gtk.Label widthUnitsLabel = CreateUnitsLabel ();
 		Gtk.Box widthHbox = CreateHorizontalBox (widthEntry, widthUnitsLabel);
 
 		Gtk.Label heightLabel = CreateHeightLabel ();
-
-		Gtk.Entry heightEntry = new () {
-			WidthRequest = 50,
-			ActivatesDefault = true,
-		};
-
-		Gtk.Label heightUnitsLabel = Gtk.Label.New (Translations.GetString ("pixels"));
-		heightUnitsLabel.MarginStart = 5;
-
+		Gtk.Entry heightEntry = CreateLengthEntry ();
+		Gtk.Label heightUnitsLabel = CreateUnitsLabel ();
 		Gtk.Box heightHbox = CreateHorizontalBox (heightEntry, heightUnitsLabel);
 
 		// Orientation Radio options
@@ -287,6 +273,19 @@ public sealed class NewImageDialog : Gtk.Dialog
 
 		return vbox;
 	}
+
+	private static Gtk.Label CreateUnitsLabel ()
+	{
+		Gtk.Label label = Gtk.Label.New (Translations.GetString ("pixels"));
+		label.MarginStart = 5;
+		return label;
+	}
+
+	private static Gtk.Entry CreateLengthEntry ()
+		=> new () {
+			WidthRequest = 50,
+			ActivatesDefault = true,
+		};
 
 	private static Gtk.Label CreateBackgroundLabel ()
 	{
