@@ -40,43 +40,25 @@ public sealed class ResizeImageDialog : Gtk.Dialog
 
 	private bool value_changing;
 
+	const int SPACING = 6;
+
 	public ResizeImageDialog ()
 	{
 		Gtk.CheckButton percentageRadio = CreatePercentageRadio ();
-
 		Gtk.CheckButton absoluteRadio = CreateAbsoluteRadio (percentageRadio);
-
 		Gtk.SpinButton percentageSpinner = CreatePercentageSpinner ();
-
 		Gtk.SpinButton widthSpinner = CreateWidthSpinner ();
-
 		Gtk.SpinButton heightSpinner = CreateHeightSpinner ();
+		Gtk.CheckButton aspectCheckbox = CreateAspectCheckbox ();
+		Gtk.ComboBoxText resamplingCombobox = CreateResamplingCombobox ();
+		Gtk.Box hboxPercent = CreatePercentBox (percentageRadio, percentageSpinner);
+		Gtk.Label widthLabel = CreateWidthLabel ();
 
-		Gtk.CheckButton aspectCheckbox = Gtk.CheckButton.NewWithLabel (Translations.GetString ("Maintain aspect ratio"));
-		aspectCheckbox.Active = true;
-
-		Gtk.ComboBoxText resamplingCombobox = new () { Hexpand = true, Halign = Gtk.Align.Fill };
-		foreach (ResamplingMode mode in Enum.GetValues (typeof (ResamplingMode)))
-			resamplingCombobox.AppendText (mode.GetLabel ());
-		resamplingCombobox.Active = 0;
-
-		const int spacing = 6;
-
-		Gtk.Box hboxPercent = new () { Spacing = spacing };
-		hboxPercent.SetOrientation (Gtk.Orientation.Horizontal);
-		hboxPercent.Append (percentageRadio);
-		hboxPercent.Append (percentageSpinner);
-		hboxPercent.Append (Gtk.Label.New ("%"));
-
-		Gtk.Label widthLabel = Gtk.Label.New (Translations.GetString ("Width:"));
-		widthLabel.Halign = Gtk.Align.End;
-
-		Gtk.Label heightLabel = Gtk.Label.New (Translations.GetString ("Height:"));
-		heightLabel.Halign = Gtk.Align.End;
+		Gtk.Label heightLabel = CreateHeightLabel ();
 
 		Gtk.Grid grid = new () {
-			RowSpacing = spacing,
-			ColumnSpacing = spacing,
+			RowSpacing = SPACING,
+			ColumnSpacing = SPACING,
 			ColumnHomogeneous = false,
 		};
 		grid.Attach (widthLabel, 0, 0, 1, 1);
@@ -89,7 +71,7 @@ public sealed class ResizeImageDialog : Gtk.Dialog
 		grid.Attach (Gtk.Label.New (Translations.GetString ("Resampling:")), 0, 3, 1, 1);
 		grid.Attach (resamplingCombobox, 1, 3, 2, 1);
 
-		Gtk.Box mainVbox = new () { Spacing = spacing };
+		Gtk.Box mainVbox = new () { Spacing = SPACING };
 		mainVbox.SetOrientation (Gtk.Orientation.Vertical);
 		mainVbox.Append (hboxPercent);
 		mainVbox.Append (absoluteRadio);
@@ -125,6 +107,54 @@ public sealed class ResizeImageDialog : Gtk.Dialog
 		height_spinner = heightSpinner;
 		aspect_checkbox = aspectCheckbox;
 		resampling_combobox = resamplingCombobox;
+	}
+
+	private static Gtk.CheckButton CreateAspectCheckbox ()
+	{
+		Gtk.CheckButton result = Gtk.CheckButton.NewWithLabel (Translations.GetString ("Maintain aspect ratio"));
+		result.Active = true;
+		return result;
+	}
+
+	private static Gtk.ComboBoxText CreateResamplingCombobox ()
+	{
+		Gtk.ComboBoxText result = new () {
+			Hexpand = true,
+			Halign = Gtk.Align.Fill,
+		};
+
+		foreach (ResamplingMode mode in Enum.GetValues (typeof (ResamplingMode)))
+			result.AppendText (mode.GetLabel ());
+
+		result.Active = 0;
+
+		return result;
+	}
+
+	private static Gtk.Box CreatePercentBox (
+		Gtk.CheckButton percentageRadio,
+		Gtk.SpinButton percentageSpinner)
+	{
+		Gtk.Box result = new () { Spacing = SPACING };
+		result.SetOrientation (Gtk.Orientation.Horizontal);
+		result.Append (percentageRadio);
+		result.Append (percentageSpinner);
+		result.Append (Gtk.Label.New ("%"));
+		return result;
+	}
+
+	private static Gtk.Label CreateWidthLabel ()
+	{
+		Gtk.Label result = Gtk.Label.New (Translations.GetString ("Width:"));
+		result.Halign = Gtk.Align.End;
+		return result;
+	}
+
+	private static Gtk.Label CreateHeightLabel ()
+	{
+		Gtk.Label result = Gtk.Label.New (Translations.GetString ("Height:"));
+		result.Halign = Gtk.Align.End;
+		return result;
 	}
 
 	private Gtk.CheckButton CreatePercentageRadio ()
