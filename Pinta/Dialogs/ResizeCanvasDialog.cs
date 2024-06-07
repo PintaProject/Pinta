@@ -75,10 +75,10 @@ public sealed class ResizeCanvasDialog : Gtk.Dialog
 		aspect_checkbox = Gtk.CheckButton.NewWithLabel (Translations.GetString ("Maintain aspect ratio"));
 
 		const int spacing = 6;
-		var main_vbox = new Gtk.Box { Spacing = spacing };
+		Gtk.Box main_vbox = new () { Spacing = spacing };
 		main_vbox.SetOrientation (Gtk.Orientation.Vertical);
 
-		var hbox_percent = new Gtk.Box { Spacing = spacing };
+		Gtk.Box hbox_percent = new () { Spacing = spacing };
 		hbox_percent.SetOrientation (Gtk.Orientation.Horizontal);
 		hbox_percent.Append (percentage_radio);
 		hbox_percent.Append (percentage_spinner);
@@ -87,14 +87,14 @@ public sealed class ResizeCanvasDialog : Gtk.Dialog
 
 		main_vbox.Append (absolute_radio);
 
-		var hw_grid = new Gtk.Grid { RowSpacing = spacing, ColumnSpacing = spacing, ColumnHomogeneous = false };
-		var width_label = Gtk.Label.New (Translations.GetString ("Width:"));
+		Gtk.Grid hw_grid = new () { RowSpacing = spacing, ColumnSpacing = spacing, ColumnHomogeneous = false };
+		Gtk.Label width_label = Gtk.Label.New (Translations.GetString ("Width:"));
 		width_label.Halign = Gtk.Align.End;
 		hw_grid.Attach (width_label, 0, 0, 1, 1);
 		hw_grid.Attach (width_spinner, 1, 0, 1, 1);
 		hw_grid.Attach (Gtk.Label.New (Translations.GetString ("pixels")), 2, 0, 1, 1);
 
-		var height_label = Gtk.Label.New (Translations.GetString ("Height:"));
+		Gtk.Label height_label = Gtk.Label.New (Translations.GetString ("Height:"));
 		height_label.Halign = Gtk.Align.End;
 		hw_grid.Attach (height_label, 0, 1, 1, 1);
 		hw_grid.Attach (height_spinner, 1, 1, 1, 1);
@@ -103,11 +103,11 @@ public sealed class ResizeCanvasDialog : Gtk.Dialog
 		main_vbox.Append (hw_grid);
 
 		main_vbox.Append (aspect_checkbox);
-		var sep = new Gtk.Separator ();
+		Gtk.Separator sep = new ();
 		sep.SetOrientation (Gtk.Orientation.Horizontal);
 		main_vbox.Append (sep);
 
-		var align_label = Gtk.Label.New (Translations.GetString ("Anchor:"));
+		Gtk.Label align_label = Gtk.Label.New (Translations.GetString ("Anchor:"));
 		align_label.Xalign = 0;
 		main_vbox.Append (align_label);
 
@@ -121,7 +121,7 @@ public sealed class ResizeCanvasDialog : Gtk.Dialog
 		s_button = CreateAnchorButton ();
 		se_button = CreateAnchorButton ();
 
-		var grid = new Gtk.Grid {
+		Gtk.Grid grid = new () {
 			RowSpacing = spacing,
 			ColumnSpacing = spacing,
 			Halign = Gtk.Align.Center,
