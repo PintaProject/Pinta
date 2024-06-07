@@ -66,14 +66,15 @@ internal sealed class NewDocumentAction : IActionHandler
 			using_clipboard = true;
 		}
 
-		NewImageDialog dialog = new (imgWidth, imgHeight, bg_type, using_clipboard);
+		Size imageSize = new (imgWidth, imgHeight);
+		NewImageDialog dialog = new (imageSize, bg_type, using_clipboard);
 
 		dialog.OnResponse += (_, e) => {
 
 			int response = e.ResponseId;
 
 			if (response == (int) Gtk.ResponseType.Ok) {
-				PintaCore.Workspace.NewDocument (new Size (dialog.NewImageWidth, dialog.NewImageHeight), dialog.NewImageBackground);
+				PintaCore.Workspace.NewDocument (dialog.NewImageSize, dialog.NewImageBackground);
 
 				PintaCore.Settings.PutSetting ("new-image-width", dialog.NewImageWidth);
 				PintaCore.Settings.PutSetting ("new-image-height", dialog.NewImageHeight);
