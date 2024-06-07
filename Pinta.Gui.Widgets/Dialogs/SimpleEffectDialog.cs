@@ -197,7 +197,7 @@ public sealed class SimpleEffectDialog : Gtk.Dialog
 
 	private IEnumerable<Gtk.Widget> GetMemberWidgets (MemberSettings settings, EffectData effectData, IAddinLocalizer localizer)
 	{
-		var widgetFactory = GetWidgetFactory (settings);
+		WidgetFactory? widgetFactory = GetWidgetFactory (settings);
 
 		if (widgetFactory is not null)
 			yield return widgetFactory (localizer.GetString (settings.caption), effectData, settings);
@@ -236,17 +236,20 @@ public sealed class SimpleEffectDialog : Gtk.Dialog
 	#endregion
 
 	#region Control Builders
-	private ComboBoxWidget CreateEnumComboBox (string caption, EffectData effectData, MemberSettings settings)
+	private ComboBoxWidget CreateEnumComboBox (
+		string caption,
+		EffectData effectData,
+		MemberSettings settings)
 	{
-		var member_names = Enum.GetNames (settings.reflector.MemberType);
+		var memberNames = Enum.GetNames (settings.reflector.MemberType);
 
 		var mapping_items =
-			from member_name in member_names
-			let members = settings.reflector.MemberType.GetMember (member_name)
+			from memberName in memberNames
+			let members = settings.reflector.MemberType.GetMember (memberName)
 			let attrs = members[0].GetCustomAttributes<CaptionAttribute> (false).Take (1).ToArray ()
-			let label = attrs.Length > 0 ? attrs[0].Caption : member_name
+			let label = attrs.Length > 0 ? attrs[0].Caption : memberName
 			let translatedLabel = Translations.GetString (label)
-			select KeyValuePair.Create (translatedLabel, member_name);
+			select KeyValuePair.Create (translatedLabel, memberName);
 
 		Dictionary<string, string> label_to_member = new (mapping_items);
 		List<string> labels = new ();
@@ -258,19 +261,22 @@ public sealed class SimpleEffectDialog : Gtk.Dialog
 		ComboBoxWidget widget = new (labels) { Label = caption };
 
 		if (settings.reflector.GetValue (effectData) is object obj)
-			widget.Active = Array.IndexOf (member_names, obj.ToString ());
+			widget.Active = Array.IndexOf (memberNames, obj.ToString ());
 
 		widget.Changed += (_, _) => SetAndNotify (settings.reflector, effectData, Enum.Parse (settings.reflector.MemberType, label_to_member[widget.ActiveText]));
 
 		return widget;
 	}
 
-	private ComboBoxWidget CreateComboBox (string caption, EffectData effectData, MemberSettings settings)
+	private ComboBoxWidget CreateComboBox (
+		string caption,
+		EffectData effectData,
+		MemberSettings settings)
 	{
-		Dictionary<string, object>? dict = null;
+		IDictionary<string, object>? dict = null;
 
 		foreach (var attr in settings.reflector.Attributes)
-			if (attr is StaticListAttribute attribute && ReflectionHelper.GetValue (effectData, attribute.DictionaryName) is Dictionary<string, object> d)
+			if (attr is StaticListAttribute attribute && ReflectionHelper.GetValue (effectData, attribute.DictionaryName) is IDictionary<string, object> d)
 				dict = d;
 
 		var entries =
@@ -278,7 +284,7 @@ public sealed class SimpleEffectDialog : Gtk.Dialog
 			? ImmutableArray<string>.Empty
 			: dict.Keys.ToImmutableArray ();
 
-		var widget = new ComboBoxWidget (entries) { Label = caption };
+		ComboBoxWidget widget = new (entries) { Label = caption };
 
 		if (settings.reflector.GetValue (effectData) is string s)
 			widget.Active = entries.IndexOf (s);
@@ -288,7 +294,10 @@ public sealed class SimpleEffectDialog : Gtk.Dialog
 		return widget;
 	}
 
-	private HScaleSpinButtonWidget CreateDoubleSlider (string caption, EffectData effectData, MemberSettings settings)
+	private HScaleSpinButtonWidget CreateDoubleSlider (
+		string caption,
+		EffectData effectData,
+		MemberSettings settings)
 	{
 		double initialValue =
 			(settings.reflector.GetValue (effectData) is double i)
@@ -297,7 +306,7 @@ public sealed class SimpleEffectDialog : Gtk.Dialog
 
 		var attributes = settings.reflector.Attributes;
 
-		var widget = new HScaleSpinButtonWidget (initialValue) {
+		HScaleSpinButtonWidget widget = new (initialValue) {
 			Label = caption,
 			MinimumValue = attributes.OfType<MinimumValueAttribute> ().Select (m => m.Value).FirstOrDefault (-100),
 			MaximumValue = attributes.OfType<MaximumValueAttribute> ().Select (m => m.Value).FirstOrDefault (100),
@@ -315,7 +324,10 @@ public sealed class SimpleEffectDialog : Gtk.Dialog
 		return widget;
 	}
 
-	private HScaleSpinButtonWidget CreateSlider (string caption, EffectData effectData, MemberSettings settings)
+	private HScaleSpinButtonWidget CreateSlider (
+		string caption,
+		EffectData effectData,
+		MemberSettings settings)
 	{
 		int initialValue =
 			(settings.reflector.GetValue (effectData) is int i)
@@ -342,9 +354,12 @@ public sealed class SimpleEffectDialog : Gtk.Dialog
 		return widget;
 	}
 
-	private Gtk.CheckButton CreateCheckBox (string caption, EffectData effectData, MemberSettings settings)
+	private Gtk.CheckButton CreateCheckBox (
+		string caption,
+		EffectData effectData,
+		MemberSettings settings)
 	{
-		var widget = new Gtk.CheckButton { Label = caption };
+		Gtk.CheckButton widget = new () { Label = caption };
 
 		if (settings.reflector.GetValue (effectData) is bool b)
 			widget.Active = b;
@@ -354,7 +369,10 @@ public sealed class SimpleEffectDialog : Gtk.Dialog
 		return widget;
 	}
 
-	private PointPickerWidget CreateOffsetPicker (string caption, EffectData effectData, MemberSettings settings)
+	private PointPickerWidget CreateOffsetPicker (
+		string caption,
+		EffectData effectData,
+		MemberSettings settings)
 	{
 		PointI initialPoint =
 			(settings.reflector.GetValue (effectData) is PointI p)
@@ -368,7 +386,10 @@ public sealed class SimpleEffectDialog : Gtk.Dialog
 		return widget;
 	}
 
-	private PointPickerWidget CreatePointPicker (string caption, EffectData effectData, MemberSettings settings)
+	private PointPickerWidget CreatePointPicker (
+		string caption,
+		EffectData effectData,
+		MemberSettings settings)
 	{
 		PointI initialPoint =
 			(settings.reflector.GetValue (effectData) is PointI p)
@@ -382,7 +403,10 @@ public sealed class SimpleEffectDialog : Gtk.Dialog
 		return widget;
 	}
 
-	private AnglePickerWidget CreateAnglePicker (string caption, EffectData effectData, MemberSettings settings)
+	private AnglePickerWidget CreateAnglePicker (
+		string caption,
+		EffectData effectData,
+		MemberSettings settings)
 	{
 		DegreesAngle initialAngle =
 			(settings.reflector.GetValue (effectData) is DegreesAngle d)
@@ -403,7 +427,7 @@ public sealed class SimpleEffectDialog : Gtk.Dialog
 
 	private static Gtk.Label CreateHintLabel (string hint)
 	{
-		var label = Gtk.Label.New (hint);
+		Gtk.Label label = Gtk.Label.New (hint);
 		label.Wrap = true;
 		label.Halign = Gtk.Align.Start;
 		label.MaxWidthChars = 40;
@@ -416,7 +440,10 @@ public sealed class SimpleEffectDialog : Gtk.Dialog
 		EffectDataChanged?.Invoke (this, new PropertyChangedEventArgs (reflector.OriginalMemberInfo.Name));
 	}
 
-	private ReseedButtonWidget CreateSeed (string caption, EffectData effectData, MemberSettings settings)
+	private ReseedButtonWidget CreateSeed (
+		string caption,
+		EffectData effectData,
+		MemberSettings settings)
 	{
 		var attributes = settings.reflector.Attributes;
 
