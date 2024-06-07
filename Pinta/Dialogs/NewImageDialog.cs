@@ -72,18 +72,14 @@ public sealed class NewImageDialog : Gtk.Dialog
 		bool hasClipboard = isClipboardSize;
 
 		// Preset Combo
-		Gtk.Label sizeLabel = Gtk.Label.New (Translations.GetString ("Preset:"));
-		sizeLabel.Xalign = 1f;
-		sizeLabel.Yalign = .5f;
+		Gtk.Label sizeLabel = CreateSizeLabel ();
 
 		Gtk.StringList presetDropdownModel = Gtk.StringList.New (GeneratePresetEntries (hasClipboard).ToArray ());
 
 		Gtk.DropDown presetDropdown = Gtk.DropDown.New (presetDropdownModel, expression: null);
 
 		// Width Entry
-		Gtk.Label widthLabel = Gtk.Label.New (Translations.GetString ("Width:"));
-		widthLabel.Xalign = 1f;
-		widthLabel.Yalign = .5f;
+		Gtk.Label widthLabel = CreateWidthLabel ();
 
 		Gtk.Entry widthEntry = new () {
 			WidthRequest = 50,
@@ -98,9 +94,7 @@ public sealed class NewImageDialog : Gtk.Dialog
 		widthHbox.Append (widthUnits);
 
 		// Height Entry
-		Gtk.Label heightLabel = Gtk.Label.New (Translations.GetString ("Height:"));
-		heightLabel.Xalign = 1f;
-		heightLabel.Yalign = .5f;
+		Gtk.Label heightLabel = CreateHeightLabel ();
 
 		Gtk.Entry heightEntry = new () {
 			WidthRequest = 50,
@@ -115,10 +109,7 @@ public sealed class NewImageDialog : Gtk.Dialog
 		heightHbox.Append (heightUnits);
 
 		// Orientation Radio options
-		Gtk.Label orientationLabel = Gtk.Label.New (Translations.GetString ("Orientation:"));
-		orientationLabel.Xalign = 0f;
-		orientationLabel.Yalign = .5f;
-		orientationLabel.MarginBottom = 4;
+		Gtk.Label orientationLabel = CreateOrientationLabel ();
 
 		Gtk.CheckButton portraitRadio = Gtk.CheckButton.NewWithLabel (Translations.GetString ("Portrait"));
 
@@ -152,10 +143,7 @@ public sealed class NewImageDialog : Gtk.Dialog
 		orientationVbox.Append (landscapeHbox);
 
 		// Background Color options
-		Gtk.Label backgroundLabel = Gtk.Label.New (Translations.GetString ("Background:"));
-		backgroundLabel.Xalign = 0f;
-		backgroundLabel.Yalign = .5f;
-		backgroundLabel.MarginBottom = 4;
+		Gtk.Label backgroundLabel = CreateBackgroundLabel ();
 
 		Gtk.CheckButton whiteBackgroundRadio = Gtk.CheckButton.NewWithLabel (Translations.GetString ("White"));
 
@@ -294,6 +282,48 @@ public sealed class NewImageDialog : Gtk.Dialog
 		UpdatePresetSelection ();
 
 		previewBox.Update (NewImageSize, NewImageBackground);
+	}
+
+	private static Gtk.Label CreateBackgroundLabel ()
+	{
+		Gtk.Label result = Gtk.Label.New (Translations.GetString ("Background:"));
+		result.Xalign = 0f;
+		result.Yalign = .5f;
+		result.MarginBottom = 4;
+		return result;
+	}
+
+	private static Gtk.Label CreateOrientationLabel ()
+	{
+		Gtk.Label result = Gtk.Label.New (Translations.GetString ("Orientation:"));
+		result.Xalign = 0f;
+		result.Yalign = .5f;
+		result.MarginBottom = 4;
+		return result;
+	}
+
+	private static Gtk.Label CreateWidthLabel ()
+	{
+		Gtk.Label result = Gtk.Label.New (Translations.GetString ("Width:"));
+		result.Xalign = 1f;
+		result.Yalign = .5f;
+		return result;
+	}
+
+	private static Gtk.Label CreateHeightLabel ()
+	{
+		Gtk.Label result = Gtk.Label.New (Translations.GetString ("Height:"));
+		result.Xalign = 1f;
+		result.Yalign = .5f;
+		return result;
+	}
+
+	private static Gtk.Label CreateSizeLabel ()
+	{
+		Gtk.Label result = Gtk.Label.New (Translations.GetString ("Preset:"));
+		result.Xalign = 1f;
+		result.Yalign = .5f;
+		return result;
 	}
 
 	// Some arbitrary presets
