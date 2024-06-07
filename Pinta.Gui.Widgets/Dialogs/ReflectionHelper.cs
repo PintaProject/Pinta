@@ -13,6 +13,6 @@ internal static class ReflectionHelper
 		if (o.GetType ().GetProperty (name) is PropertyInfo pi)
 			return pi.GetGetMethod ()?.Invoke (o, Array.Empty<object> ());
 
-		throw new ArgumentException ("Only fields and attributes are supported");
+		throw new ArgumentException ($"Member '{name}' is not supported. Only fields and attributes are supported");
 	}
 }
