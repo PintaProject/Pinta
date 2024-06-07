@@ -42,29 +42,15 @@ public sealed class ResizeImageDialog : Gtk.Dialog
 
 	public ResizeImageDialog ()
 	{
-		Gtk.CheckButton percentageRadio = Gtk.CheckButton.NewWithLabel (Translations.GetString ("By percentage:"));
-		percentageRadio.Active = true;
-		percentageRadio.OnToggled += percentageRadio_Toggled;
+		Gtk.CheckButton percentageRadio = CreatePercentageRadio ();
 
-		Gtk.CheckButton absoluteRadio = Gtk.CheckButton.NewWithLabel (Translations.GetString ("By absolute size:"));
-		absoluteRadio.SetGroup (percentageRadio);
-		absoluteRadio.OnToggled += absoluteRadio_Toggled;
+		Gtk.CheckButton absoluteRadio = CreateAbsoluteRadio (percentageRadio);
 
-		Gtk.SpinButton percentageSpinner = Gtk.SpinButton.NewWithRange (1, int.MaxValue, 1);
-		percentageSpinner.Value = 100;
-		percentageSpinner.OnValueChanged += percentageSpinner_ValueChanged;
-		percentageSpinner.SetActivatesDefault (true);
-		percentageSpinner.GrabFocus ();
+		Gtk.SpinButton percentageSpinner = CreatePercentageSpinner ();
 
-		Gtk.SpinButton widthSpinner = Gtk.SpinButton.NewWithRange (1, int.MaxValue, 1);
-		widthSpinner.Value = PintaCore.Workspace.ImageSize.Width;
-		widthSpinner.OnValueChanged += widthSpinner_ValueChanged;
-		widthSpinner.SetActivatesDefault (true);
+		Gtk.SpinButton widthSpinner = CreateWidthSpinner ();
 
-		Gtk.SpinButton heightSpinner = Gtk.SpinButton.NewWithRange (1, int.MaxValue, 1);
-		heightSpinner.Value = PintaCore.Workspace.ImageSize.Height;
-		heightSpinner.OnValueChanged += heightSpinner_ValueChanged;
-		heightSpinner.SetActivatesDefault (true);
+		Gtk.SpinButton heightSpinner = CreateHeightSpinner ();
 
 		Gtk.CheckButton aspectCheckbox = Gtk.CheckButton.NewWithLabel (Translations.GetString ("Maintain aspect ratio"));
 		aspectCheckbox.Active = true;
@@ -139,6 +125,50 @@ public sealed class ResizeImageDialog : Gtk.Dialog
 		height_spinner = heightSpinner;
 		aspect_checkbox = aspectCheckbox;
 		resampling_combobox = resamplingCombobox;
+	}
+
+	private Gtk.CheckButton CreatePercentageRadio ()
+	{
+		Gtk.CheckButton result = Gtk.CheckButton.NewWithLabel (Translations.GetString ("By percentage:"));
+		result.Active = true;
+		result.OnToggled += percentageRadio_Toggled;
+		return result;
+	}
+
+	private Gtk.CheckButton CreateAbsoluteRadio (Gtk.CheckButton percentageRadio)
+	{
+		Gtk.CheckButton result = Gtk.CheckButton.NewWithLabel (Translations.GetString ("By absolute size:"));
+		result.SetGroup (percentageRadio);
+		result.OnToggled += absoluteRadio_Toggled;
+		return result;
+	}
+
+	private Gtk.SpinButton CreatePercentageSpinner ()
+	{
+		Gtk.SpinButton result = Gtk.SpinButton.NewWithRange (1, int.MaxValue, 1);
+		result.Value = 100;
+		result.OnValueChanged += percentageSpinner_ValueChanged;
+		result.SetActivatesDefault (true);
+		result.GrabFocus ();
+		return result;
+	}
+
+	private Gtk.SpinButton CreateWidthSpinner ()
+	{
+		Gtk.SpinButton result = Gtk.SpinButton.NewWithRange (1, int.MaxValue, 1);
+		result.Value = PintaCore.Workspace.ImageSize.Width;
+		result.OnValueChanged += widthSpinner_ValueChanged;
+		result.SetActivatesDefault (true);
+		return result;
+	}
+
+	private Gtk.SpinButton CreateHeightSpinner ()
+	{
+		Gtk.SpinButton result = Gtk.SpinButton.NewWithRange (1, int.MaxValue, 1);
+		result.Value = PintaCore.Workspace.ImageSize.Height;
+		result.OnValueChanged += heightSpinner_ValueChanged;
+		result.SetActivatesDefault (true);
+		return result;
 	}
 
 	public void SaveChanges ()
