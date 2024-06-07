@@ -267,10 +267,10 @@ public sealed class SimpleEffectDialog : Gtk.Dialog
 
 	private ComboBoxWidget CreateComboBox (string caption, EffectData effectData, MemberSettings settings)
 	{
-		Dictionary<string, object>? dict = null;
+		IDictionary<string, object>? dict = null;
 
 		foreach (var attr in settings.reflector.Attributes)
-			if (attr is StaticListAttribute attribute && ReflectionHelper.GetValue (effectData, attribute.DictionaryName) is Dictionary<string, object> d)
+			if (attr is StaticListAttribute attribute && ReflectionHelper.GetValue (effectData, attribute.DictionaryName) is IDictionary<string, object> d)
 				dict = d;
 
 		var entries =

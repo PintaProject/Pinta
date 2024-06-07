@@ -247,7 +247,10 @@ public sealed class CloudsEffect : BaseEffect
 		[Caption ("Power"), MinimumValue (0), MaximumValue (100)]
 		public int Power { get; set; } = 50;
 
-		[StaticList ("BlendOps")]
+		public ReadOnlyDictionary<string, object> BlendOpChoices
+			=> BlendOps;
+
+		[StaticList (nameof (BlendOps))]
 		public string BlendMode { get; set; } = default_blend_op;
 
 		[Caption ("Random Noise")]
