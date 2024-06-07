@@ -344,7 +344,7 @@ public sealed class SimpleEffectDialog : Gtk.Dialog
 
 	private Gtk.CheckButton CreateCheckBox (string caption, EffectData effectData, MemberSettings settings)
 	{
-		var widget = new Gtk.CheckButton { Label = caption };
+		Gtk.CheckButton widget = new () { Label = caption };
 
 		if (settings.reflector.GetValue (effectData) is bool b)
 			widget.Active = b;
