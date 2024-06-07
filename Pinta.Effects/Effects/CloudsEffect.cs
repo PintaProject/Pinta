@@ -250,7 +250,7 @@ public sealed class CloudsEffect : BaseEffect
 		public ReadOnlyDictionary<string, object> BlendOpChoices
 			=> BlendOps;
 
-		[StaticList (nameof (BlendOps))]
+		[StaticList (nameof (BlendOpChoices))]
 		public string BlendMode { get; set; } = default_blend_op;
 
 		[Caption ("Random Noise")]
