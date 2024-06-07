@@ -88,7 +88,7 @@ public sealed class NewImageDialog : Gtk.Dialog
 		Gtk.Label widthUnitsLabel = Gtk.Label.New (Translations.GetString ("pixels"));
 		widthUnitsLabel.MarginStart = 5;
 
-		Gtk.Box widthHbox = CreateWidthBox (widthEntry, widthUnitsLabel);
+		Gtk.Box widthHbox = CreateHorizontalBox (widthEntry, widthUnitsLabel);
 
 		Gtk.Label heightLabel = CreateHeightLabel ();
 
@@ -100,7 +100,7 @@ public sealed class NewImageDialog : Gtk.Dialog
 		Gtk.Label heightUnitsLabel = Gtk.Label.New (Translations.GetString ("pixels"));
 		heightUnitsLabel.MarginStart = 5;
 
-		Gtk.Box heightHbox = CreateHeightBox (heightEntry, heightUnitsLabel);
+		Gtk.Box heightHbox = CreateHorizontalBox (heightEntry, heightUnitsLabel);
 
 		// Orientation Radio options
 		Gtk.Label orientationLabel = CreateOrientationLabel ();
@@ -113,7 +113,7 @@ public sealed class NewImageDialog : Gtk.Dialog
 			MarginEnd = 7,
 		};
 
-		Gtk.Box portraitHbox = CreatePortraitBox (portraitImage, portraitRadio);
+		Gtk.Box portraitHbox = CreateHorizontalBox (portraitImage, portraitRadio);
 
 		Gtk.CheckButton landscapeRadio = Gtk.CheckButton.NewWithLabel (Translations.GetString ("Landscape"));
 		landscapeRadio.SetGroup (portraitRadio);
@@ -124,13 +124,9 @@ public sealed class NewImageDialog : Gtk.Dialog
 			MarginEnd = 7,
 		};
 
-		Gtk.Box landscapeHbox = CreateLandscapeBox (landscapeImage, landscapeRadio);
+		Gtk.Box landscapeHbox = CreateHorizontalBox (landscapeImage, landscapeRadio);
 
-		// Orientation VBox
-		Gtk.Box orientationVbox = Gtk.Box.New (Gtk.Orientation.Vertical, 0);
-		orientationVbox.Append (orientationLabel);
-		orientationVbox.Append (portraitHbox);
-		orientationVbox.Append (landscapeHbox);
+		Gtk.Box orientationVbox = CreateVerticalBox (orientationLabel, portraitHbox, landscapeHbox);
 
 		// Background Color options
 		Gtk.Label backgroundLabel = CreateBackgroundLabel ();
@@ -140,9 +136,7 @@ public sealed class NewImageDialog : Gtk.Dialog
 		Gtk.Image imageWhite = Gtk.Image.NewFromPixbuf (CairoExtensions.CreateColorSwatch (16, new Cairo.Color (1, 1, 1)).ToPixbuf ());
 		imageWhite.MarginEnd = 7;
 
-		Gtk.Box hboxWhite = Gtk.Box.New (Gtk.Orientation.Horizontal, 0);
-		hboxWhite.Append (imageWhite);
-		hboxWhite.Append (whiteBackgroundRadio);
+		Gtk.Box hboxWhite = CreateHorizontalBox (imageWhite, whiteBackgroundRadio);
 
 		Gtk.CheckButton secondaryBackgroundRadio = Gtk.CheckButton.NewWithLabel (Translations.GetString ("Background Color"));
 		secondaryBackgroundRadio.SetGroup (whiteBackgroundRadio);
@@ -150,9 +144,7 @@ public sealed class NewImageDialog : Gtk.Dialog
 		Gtk.Image imageBackground = Gtk.Image.NewFromPixbuf (CairoExtensions.CreateColorSwatch (16, PintaCore.Palette.SecondaryColor).ToPixbuf ());
 		imageBackground.MarginEnd = 7;
 
-		Gtk.Box hboxBackground = Gtk.Box.New (Gtk.Orientation.Horizontal, 0);
-		hboxBackground.Append (imageBackground);
-		hboxBackground.Append (secondaryBackgroundRadio);
+		Gtk.Box hboxBackground = CreateHorizontalBox (imageBackground, secondaryBackgroundRadio);
 
 		Gtk.CheckButton transparentBackgroundRadio = Gtk.CheckButton.NewWithLabel (Translations.GetString ("Transparent"));
 		transparentBackgroundRadio.SetGroup (secondaryBackgroundRadio);
@@ -160,13 +152,9 @@ public sealed class NewImageDialog : Gtk.Dialog
 		Gtk.Image imageTransparent = Gtk.Image.NewFromPixbuf (CairoExtensions.CreateTransparentColorSwatch (16, true).ToPixbuf ());
 		imageTransparent.MarginEnd = 7;
 
-		Gtk.Box hboxTransparent = Gtk.Box.New (Gtk.Orientation.Horizontal, 0);
-		hboxTransparent.Append (imageTransparent);
-		hboxTransparent.Append (transparentBackgroundRadio);
+		Gtk.Box hboxTransparent = CreateHorizontalBox (imageTransparent, transparentBackgroundRadio);
 
-		Gtk.Box backgroundVbox = Gtk.Box.New (Gtk.Orientation.Vertical, 0);
-		backgroundVbox.Append (backgroundLabel);
-		backgroundVbox.Append (hboxWhite);
+		Gtk.Box backgroundVbox = CreateVerticalBox (backgroundLabel, hboxWhite);
 
 		if (allowBackgroundColor)
 			backgroundVbox.Append (hboxBackground);
@@ -274,44 +262,30 @@ public sealed class NewImageDialog : Gtk.Dialog
 		previewBox.Update (NewImageSize, NewImageBackground);
 	}
 
-	private static Gtk.Box CreatePortraitBox (
-		Gtk.Image portraitImage,
-		Gtk.CheckButton portraitRadio)
+	private static Gtk.Box CreateHorizontalBox (Gtk.Widget w1, Gtk.Widget w2)
 	{
-		Gtk.Box result = Gtk.Box.New (Gtk.Orientation.Horizontal, 0);
-		result.Append (portraitImage);
-		result.Append (portraitRadio);
-		return result;
+		Gtk.Box hbox = Gtk.Box.New (Gtk.Orientation.Horizontal, 0);
+		hbox.Append (w1);
+		hbox.Append (w2);
+		return hbox;
 	}
 
-	private static Gtk.Box CreateLandscapeBox (
-		Gtk.Image landscapeImage,
-		Gtk.CheckButton landscapeRadio)
+	private static Gtk.Box CreateVerticalBox (Gtk.Widget w1, Gtk.Widget w2)
 	{
-		Gtk.Box result = Gtk.Box.New (Gtk.Orientation.Horizontal, 0);
-		result.Append (landscapeImage);
-		result.Append (landscapeRadio);
-		return result;
+		Gtk.Box vbox = Gtk.Box.New (Gtk.Orientation.Vertical, 0);
+		vbox.Append (w1);
+		vbox.Append (w2);
+		return vbox;
 	}
 
-	private static Gtk.Box CreateWidthBox (
-		Gtk.Entry widthEntry,
-		Gtk.Label widthUnitsLabel)
+	private static Gtk.Box CreateVerticalBox (params Gtk.Widget[] children)
 	{
-		Gtk.Box result = Gtk.Box.New (Gtk.Orientation.Horizontal, 0);
-		result.Append (widthEntry);
-		result.Append (widthUnitsLabel);
-		return result;
-	}
+		Gtk.Box vbox = Gtk.Box.New (Gtk.Orientation.Vertical, 0);
 
-	private static Gtk.Box CreateHeightBox (
-		Gtk.Entry heightEntry,
-		Gtk.Label heightUnitsLabel)
-	{
-		Gtk.Box result = Gtk.Box.New (Gtk.Orientation.Horizontal, 0);
-		result.Append (heightEntry);
-		result.Append (heightUnitsLabel);
-		return result;
+		foreach (var child in children)
+			vbox.Append (child);
+
+		return vbox;
 	}
 
 	private static Gtk.Label CreateBackgroundLabel ()
