@@ -177,7 +177,6 @@ public sealed class ResizeCanvasDialog : Gtk.Dialog
 		percentage_spinner.GrabFocus ();
 	}
 
-	#region Public Methods
 	public void SaveChanges ()
 	{
 		Size newSize = new (
@@ -187,9 +186,7 @@ public sealed class ResizeCanvasDialog : Gtk.Dialog
 
 		PintaCore.Workspace.ResizeCanvas (newSize, anchor, null);
 	}
-	#endregion
 
-	#region Private Methods
 	private void heightSpinner_ValueChanged (object? sender, EventArgs e)
 	{
 		if (value_changing)
@@ -199,7 +196,7 @@ public sealed class ResizeCanvasDialog : Gtk.Dialog
 			return;
 
 		value_changing = true;
-		width_spinner.Value = (int) ((height_spinner.Value * PintaCore.Workspace.ImageSize.Width) / PintaCore.Workspace.ImageSize.Height);
+		width_spinner.Value = (int) (height_spinner.Value * PintaCore.Workspace.ImageSize.Width / PintaCore.Workspace.ImageSize.Height);
 		value_changing = false;
 	}
 
@@ -212,7 +209,7 @@ public sealed class ResizeCanvasDialog : Gtk.Dialog
 			return;
 
 		value_changing = true;
-		height_spinner.Value = (int) ((width_spinner.Value * PintaCore.Workspace.ImageSize.Height) / PintaCore.Workspace.ImageSize.Width);
+		height_spinner.Value = (int) (width_spinner.Value * PintaCore.Workspace.ImageSize.Height / PintaCore.Workspace.ImageSize.Width);
 		value_changing = false;
 	}
 
@@ -388,10 +385,10 @@ public sealed class ResizeCanvasDialog : Gtk.Dialog
 		}
 	}
 
-	private static Button CreateAnchorButton ()
-	{
-		return new Button { WidthRequest = 30, HeightRequest = 30 };
-	}
-	#endregion
+	private static Gtk.Button CreateAnchorButton ()
+		=> new () {
+			WidthRequest = 30,
+			HeightRequest = 30,
+		};
 }
 
