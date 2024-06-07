@@ -59,10 +59,6 @@ public sealed class CloudsEffect : BaseEffect
 	// Adapted to 2-D version in C# from 3-D version in Java from http://mrl.nyu.edu/~perlin/noise/
 	private static readonly ImmutableArray<int> permute_lookup;
 
-	public static ReadOnlyDictionary<string, object> BlendOps { get; }
-
-	private static readonly string default_blend_op;
-
 	static CloudsEffect ()
 	{
 #pragma warning disable format
@@ -94,15 +90,6 @@ public sealed class CloudsEffect : BaseEffect
 			permuteLookup[i] = permutationTable[i];
 		}
 		permute_lookup = permuteLookup.MoveToImmutable ();
-
-		BlendOps =
-			UserBlendOps.GetAllBlendModeNames ()
-			.ToDictionary (
-				o => o,
-				o => (object) UserBlendOps.GetBlendModeByName (o))
-			.AsReadOnly ();
-
-		default_blend_op = UserBlendOps.GetBlendModeName (Pinta.Core.BlendMode.Normal);
 	}
 
 	private static double Fade (double t)
@@ -231,7 +218,7 @@ public sealed class CloudsEffect : BaseEffect
 
 			g.Clear (r);
 			g.BlendSurface (src, r);
-			g.BlendSurface (temp, r.Location (), (BlendMode) BlendOps[Data.BlendMode]);
+			g.BlendSurface (temp, r.Location (), (BlendMode) CloudsData.BlendOps[Data.BlendMode]);
 		}
 	}
 	#endregion
@@ -246,6 +233,24 @@ public sealed class CloudsEffect : BaseEffect
 
 		[Caption ("Power"), MinimumValue (0), MaximumValue (100)]
 		public int Power { get; set; } = 50;
+
+		[Skip]
+		public static ReadOnlyDictionary<string, object> BlendOps { get; }
+
+		[Skip]
+		private static readonly string default_blend_op;
+
+		static CloudsData ()
+		{
+			BlendOps =
+				UserBlendOps.GetAllBlendModeNames ()
+				.ToDictionary (
+					o => o,
+					o => (object) UserBlendOps.GetBlendModeByName (o))
+				.AsReadOnly ();
+
+			default_blend_op = UserBlendOps.GetBlendModeName (Pinta.Core.BlendMode.Normal);
+		}
 
 		[StaticList ("BlendOps")]
 		public string BlendMode { get; set; } = default_blend_op;
