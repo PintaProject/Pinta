@@ -25,6 +25,7 @@
 // THE SOFTWARE.
 
 using System;
+using System.Collections.Immutable;
 using System.Linq;
 using Pinta.Core;
 
@@ -60,16 +61,16 @@ public sealed class LayerPropertiesDialog : Gtk.Dialog
 
 		const int spacing = 6;
 
-		var content_area = this.GetContentAreaBox ();
-		content_area.Spacing = spacing;
-		content_area.SetAllMargins (10);
+		var contentArea = this.GetContentAreaBox ();
+		contentArea.Spacing = spacing;
+		contentArea.SetAllMargins (10);
 
 		Gtk.Grid grid = new () { RowSpacing = spacing, ColumnSpacing = spacing, ColumnHomogeneous = false };
 
 		// Layer name
-		Gtk.Label name_label = Gtk.Label.New (Translations.GetString ("Name:"));
-		name_label.Halign = Gtk.Align.End;
-		grid.Attach (name_label, 0, 0, 1, 1);
+		Gtk.Label nameLabel = Gtk.Label.New (Translations.GetString ("Name:"));
+		nameLabel.Halign = Gtk.Align.End;
+		grid.Attach (nameLabel, 0, 0, 1, 1);
 
 		layer_name_entry = new Gtk.Entry () {
 			Hexpand = true,
@@ -83,9 +84,9 @@ public sealed class LayerPropertiesDialog : Gtk.Dialog
 		grid.Attach (visibility_checkbox, 1, 1, 1, 1);
 
 		// Blend mode
-		Gtk.Label blend_label = Gtk.Label.New (Translations.GetString ("Blend Mode") + ":");
-		blend_label.Halign = Gtk.Align.End;
-		grid.Attach (blend_label, 0, 2, 1, 1);
+		Gtk.Label blendLabel = Gtk.Label.New (Translations.GetString ("Blend Mode") + ":");
+		blendLabel.Halign = Gtk.Align.End;
+		grid.Attach (blendLabel, 0, 2, 1, 1);
 
 		blend_combo_box = new Gtk.ComboBoxText ();
 		foreach (string name in UserBlendOps.GetAllBlendModeNames ())
@@ -96,27 +97,27 @@ public sealed class LayerPropertiesDialog : Gtk.Dialog
 		grid.Attach (blend_combo_box, 1, 2, 1, 1);
 
 		// Opacity
-		Gtk.Label opacity_label = Gtk.Label.New (Translations.GetString ("Opacity:"));
-		opacity_label.Halign = Gtk.Align.End;
-		grid.Attach (opacity_label, 0, 3, 1, 1);
+		Gtk.Label opacityLabel = Gtk.Label.New (Translations.GetString ("Opacity:"));
+		opacityLabel.Halign = Gtk.Align.End;
+		grid.Attach (opacityLabel, 0, 3, 1, 1);
 
-		Gtk.Box opacity_box = new () { Spacing = spacing };
-		opacity_box.SetOrientation (Gtk.Orientation.Horizontal);
+		Gtk.Box opacityBox = new () { Spacing = spacing };
+		opacityBox.SetOrientation (Gtk.Orientation.Horizontal);
 		opacity_spinner = Gtk.SpinButton.NewWithRange (0, 100, 1);
 		opacity_spinner.Adjustment!.PageIncrement = 10;
 		opacity_spinner.ClimbRate = 1;
-		opacity_box.Append (opacity_spinner);
+		opacityBox.Append (opacity_spinner);
 
 		opacity_slider = Gtk.Scale.NewWithRange (Gtk.Orientation.Horizontal, 0, 100, 1);
 		opacity_slider.Digits = 0;
 		opacity_slider.Adjustment!.PageIncrement = 10;
 		opacity_slider.Hexpand = true;
 		opacity_slider.Halign = Gtk.Align.Fill;
-		opacity_box.Append (opacity_slider);
+		opacityBox.Append (opacity_slider);
 
-		grid.Attach (opacity_box, 1, 3, 1, 1);
+		grid.Attach (opacityBox, 1, 3, 1, 1);
 
-		content_area.Append (grid);
+		contentArea.Append (grid);
 
 		IconName = Resources.Icons.LayerProperties;
 
@@ -136,11 +137,11 @@ public sealed class LayerPropertiesDialog : Gtk.Dialog
 		opacity_spinner.Value = Math.Round (initial_properties.Opacity * 100);
 		opacity_slider.SetValue (Math.Round (initial_properties.Opacity * 100));
 
-		var all_blendmodes = UserBlendOps.GetAllBlendModeNames ().ToList ();
-		var index = all_blendmodes.IndexOf (UserBlendOps.GetBlendModeName (blendmode));
+		var allBlendmodes = UserBlendOps.GetAllBlendModeNames ().ToImmutableArray ();
+		var index = allBlendmodes.IndexOf (UserBlendOps.GetBlendModeName (blendmode));
 		blend_combo_box.Active = index;
 
-		layer_name_entry.OnChanged ((o, e) => OnLayerNameChanged (o, e));
+		layer_name_entry.OnChanged (OnLayerNameChanged);
 
 		visibility_checkbox.OnToggled += OnVisibilityToggled;
 		opacity_spinner.OnValueChanged += OnOpacitySpinnerChanged;
