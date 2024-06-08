@@ -26,12 +26,11 @@
 
 using System;
 using System.Linq;
-using Gtk;
 using Pinta.Core;
 
 namespace Pinta;
 
-public sealed class LayerPropertiesDialog : Dialog
+public sealed class LayerPropertiesDialog : Gtk.Dialog
 {
 	private readonly LayerProperties initial_properties;
 
@@ -40,11 +39,11 @@ public sealed class LayerPropertiesDialog : Dialog
 	private string name;
 	private BlendMode blendmode;
 
-	private readonly Entry layer_name_entry;
-	private readonly CheckButton visibility_checkbox;
-	private readonly SpinButton opacity_spinner;
-	private readonly Scale opacity_slider;
-	private readonly ComboBoxText blend_combo_box;
+	private readonly Gtk.Entry layer_name_entry;
+	private readonly Gtk.CheckButton visibility_checkbox;
+	private readonly Gtk.SpinButton opacity_spinner;
+	private readonly Gtk.Scale opacity_slider;
+	private readonly Gtk.ComboBoxText blend_combo_box;
 
 	public LayerPropertiesDialog ()
 	{
@@ -52,74 +51,72 @@ public sealed class LayerPropertiesDialog : Dialog
 		TransientFor = PintaCore.Chrome.MainWindow;
 		Modal = true;
 		this.AddCancelOkButtons ();
-		this.SetDefaultResponse (ResponseType.Ok);
+		this.SetDefaultResponse (Gtk.ResponseType.Ok);
 
 		var doc = PintaCore.Workspace.ActiveDocument;
 
-		// Build
-		{
-			DefaultWidth = 349;
-			DefaultHeight = 224;
-			const int spacing = 6;
+		DefaultWidth = 349;
+		DefaultHeight = 224;
 
-			var content_area = this.GetContentAreaBox ();
-			content_area.Spacing = spacing;
-			content_area.SetAllMargins (10);
+		const int spacing = 6;
 
-			var grid = new Grid { RowSpacing = spacing, ColumnSpacing = spacing, ColumnHomogeneous = false };
+		var content_area = this.GetContentAreaBox ();
+		content_area.Spacing = spacing;
+		content_area.SetAllMargins (10);
 
-			// Layer name
-			var name_label = Label.New (Translations.GetString ("Name:"));
-			name_label.Halign = Align.End;
-			grid.Attach (name_label, 0, 0, 1, 1);
+		var grid = new Gtk.Grid { RowSpacing = spacing, ColumnSpacing = spacing, ColumnHomogeneous = false };
 
-			layer_name_entry = new Entry {
-				Hexpand = true,
-				Halign = Align.Fill
-			};
-			grid.Attach (layer_name_entry, 1, 0, 1, 1);
+		// Layer name
+		var name_label = Gtk.Label.New (Translations.GetString ("Name:"));
+		name_label.Halign = Gtk.Align.End;
+		grid.Attach (name_label, 0, 0, 1, 1);
 
-			// Visible checkbox
-			visibility_checkbox = CheckButton.NewWithLabel (Translations.GetString ("Visible"));
+		layer_name_entry = new Gtk.Entry {
+			Hexpand = true,
+			Halign = Gtk.Align.Fill
+		};
+		grid.Attach (layer_name_entry, 1, 0, 1, 1);
 
-			grid.Attach (visibility_checkbox, 1, 1, 1, 1);
+		// Visible checkbox
+		visibility_checkbox = Gtk.CheckButton.NewWithLabel (Translations.GetString ("Visible"));
 
-			// Blend mode
-			var blend_label = Label.New (Translations.GetString ("Blend Mode") + ":");
-			blend_label.Halign = Align.End;
-			grid.Attach (blend_label, 0, 2, 1, 1);
+		grid.Attach (visibility_checkbox, 1, 1, 1, 1);
 
-			blend_combo_box = new ComboBoxText ();
-			foreach (string name in UserBlendOps.GetAllBlendModeNames ())
-				blend_combo_box.AppendText (name);
+		// Blend mode
+		var blend_label = Gtk.Label.New (Translations.GetString ("Blend Mode") + ":");
+		blend_label.Halign = Gtk.Align.End;
+		grid.Attach (blend_label, 0, 2, 1, 1);
 
-			blend_combo_box.Hexpand = true;
-			blend_combo_box.Halign = Align.Fill;
-			grid.Attach (blend_combo_box, 1, 2, 1, 1);
+		blend_combo_box = new Gtk.ComboBoxText ();
+		foreach (string name in UserBlendOps.GetAllBlendModeNames ())
+			blend_combo_box.AppendText (name);
 
-			// Opacity
-			var opacity_label = Label.New (Translations.GetString ("Opacity:"));
-			opacity_label.Halign = Align.End;
-			grid.Attach (opacity_label, 0, 3, 1, 1);
+		blend_combo_box.Hexpand = true;
+		blend_combo_box.Halign = Gtk.Align.Fill;
+		grid.Attach (blend_combo_box, 1, 2, 1, 1);
 
-			var opacity_box = new Box { Spacing = spacing };
-			opacity_box.SetOrientation (Orientation.Horizontal);
-			opacity_spinner = SpinButton.NewWithRange (0, 100, 1);
-			opacity_spinner.Adjustment!.PageIncrement = 10;
-			opacity_spinner.ClimbRate = 1;
-			opacity_box.Append (opacity_spinner);
+		// Opacity
+		var opacity_label = Gtk.Label.New (Translations.GetString ("Opacity:"));
+		opacity_label.Halign = Gtk.Align.End;
+		grid.Attach (opacity_label, 0, 3, 1, 1);
 
-			opacity_slider = Scale.NewWithRange (Orientation.Horizontal, 0, 100, 1);
-			opacity_slider.Digits = 0;
-			opacity_slider.Adjustment!.PageIncrement = 10;
-			opacity_slider.Hexpand = true;
-			opacity_slider.Halign = Align.Fill;
-			opacity_box.Append (opacity_slider);
+		var opacity_box = new Gtk.Box { Spacing = spacing };
+		opacity_box.SetOrientation (Gtk.Orientation.Horizontal);
+		opacity_spinner = Gtk.SpinButton.NewWithRange (0, 100, 1);
+		opacity_spinner.Adjustment!.PageIncrement = 10;
+		opacity_spinner.ClimbRate = 1;
+		opacity_box.Append (opacity_spinner);
 
-			grid.Attach (opacity_box, 1, 3, 1, 1);
+		opacity_slider = Gtk.Scale.NewWithRange (Gtk.Orientation.Horizontal, 0, 100, 1);
+		opacity_slider.Digits = 0;
+		opacity_slider.Adjustment!.PageIncrement = 10;
+		opacity_slider.Hexpand = true;
+		opacity_slider.Halign = Gtk.Align.Fill;
+		opacity_box.Append (opacity_slider);
 
-			content_area.Append (grid);
-		}
+		grid.Attach (opacity_box, 1, 3, 1, 1);
+
+		content_area.Append (grid);
 
 		IconName = Resources.Icons.LayerProperties;
 
@@ -163,7 +160,6 @@ public sealed class LayerPropertiesDialog : Dialog
 
 	public LayerProperties UpdatedLayerProperties => new (name, hidden, opacity, blendmode);
 
-	#region Private Methods
 	private void OnLayerNameChanged (object? sender, EventArgs e)
 	{
 		var doc = PintaCore.Workspace.ActiveDocument;
@@ -223,7 +219,5 @@ public sealed class LayerPropertiesDialog : Dialog
 		}
 		PintaCore.Workspace.Invalidate ();
 	}
-
-	#endregion
 }
 
