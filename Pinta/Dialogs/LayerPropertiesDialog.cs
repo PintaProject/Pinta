@@ -26,7 +26,6 @@
 
 using System;
 using System.Collections.Immutable;
-using System.Reflection;
 using Pinta.Core;
 
 namespace Pinta;
@@ -48,6 +47,8 @@ public sealed class LayerPropertiesDialog : Gtk.Dialog
 
 	public LayerPropertiesDialog ()
 	{
+		const int spacing = 6;
+
 		Document doc = PintaCore.Workspace.ActiveDocument;
 
 		string currentLayerName = doc.Layers.CurrentUserLayer.Name;
@@ -110,14 +111,16 @@ public sealed class LayerPropertiesDialog : Gtk.Dialog
 		opacitySlider.SetValue (Math.Round (initialProperties.Opacity * 100));
 		opacitySlider.OnValueChanged += OnOpacitySliderChanged;
 
-		const int spacing = 6;
-
 		Gtk.Box opacityBox = new () { Spacing = spacing };
 		opacityBox.SetOrientation (Gtk.Orientation.Horizontal);
 		opacityBox.Append (opacitySpinner);
 		opacityBox.Append (opacitySlider);
 
-		Gtk.Grid grid = new () { RowSpacing = spacing, ColumnSpacing = spacing, ColumnHomogeneous = false };
+		Gtk.Grid grid = new () {
+			RowSpacing = spacing,
+			ColumnSpacing = spacing,
+			ColumnHomogeneous = false,
+		};
 		grid.Attach (nameLabel, 0, 0, 1, 1);
 		grid.Attach (layerNameEntry, 1, 0, 1, 1);
 		grid.Attach (visibilityCheckbox, 1, 1, 1, 1);
@@ -133,6 +136,7 @@ public sealed class LayerPropertiesDialog : Gtk.Dialog
 		Modal = true;
 		DefaultWidth = 349;
 		DefaultHeight = 224;
+		IconName = Resources.Icons.LayerProperties;
 
 		// --- Initialization (Gtk.Dialog)
 
@@ -147,8 +151,6 @@ public sealed class LayerPropertiesDialog : Gtk.Dialog
 		contentArea.Append (grid);
 
 		// --- References to keep
-
-		IconName = Resources.Icons.LayerProperties;
 
 		layer_name_entry = layerNameEntry;
 		visibility_checkbox = visibilityCheckbox;
@@ -174,12 +176,15 @@ public sealed class LayerPropertiesDialog : Gtk.Dialog
 		=> initial_properties;
 
 	public LayerProperties UpdatedLayerProperties
-		=> new (current_layer_name, current_layer_hidden, current_layer_opacity, current_layer_blend_mode);
+		=> new (
+			current_layer_name,
+			current_layer_hidden,
+			current_layer_opacity,
+			current_layer_blend_mode);
 
 	private void OnLayerNameChanged (object? sender, EventArgs e)
 	{
 		Document doc = PintaCore.Workspace.ActiveDocument;
-
 		current_layer_name = layer_name_entry.GetText ();
 		doc.Layers.CurrentUserLayer.Name = current_layer_name;
 	}
@@ -189,11 +194,12 @@ public sealed class LayerPropertiesDialog : Gtk.Dialog
 		Document doc = PintaCore.Workspace.ActiveDocument;
 
 		current_layer_hidden = !visibility_checkbox.Active;
+
 		doc.Layers.CurrentUserLayer.Hidden = current_layer_hidden;
-		if (doc.Layers.SelectionLayer != null) {
-			//Update Visibility for SelectionLayer and force redraw			
-			doc.Layers.SelectionLayer.Hidden = doc.Layers.CurrentUserLayer.Hidden;
-		}
+
+		if (doc.Layers.SelectionLayer != null)
+			doc.Layers.SelectionLayer.Hidden = doc.Layers.CurrentUserLayer.Hidden; // Update Visibility for SelectionLayer and force redraw
+
 		PintaCore.Workspace.Invalidate ();
 	}
 
@@ -215,11 +221,12 @@ public sealed class LayerPropertiesDialog : Gtk.Dialog
 
 		//TODO check redraws are being throttled.
 		current_layer_opacity = opacity_spinner.Value / 100d;
+
 		doc.Layers.CurrentUserLayer.Opacity = current_layer_opacity;
-		if (doc.Layers.SelectionLayer != null) {
-			//Update Opacity for SelectionLayer and force redraw			
-			doc.Layers.SelectionLayer.Opacity = doc.Layers.CurrentUserLayer.Opacity;
-		}
+
+		if (doc.Layers.SelectionLayer != null)
+			doc.Layers.SelectionLayer.Opacity = doc.Layers.CurrentUserLayer.Opacity; // Update Opacity for SelectionLayer and force redraw
+
 		PintaCore.Workspace.Invalidate ();
 	}
 
@@ -228,11 +235,12 @@ public sealed class LayerPropertiesDialog : Gtk.Dialog
 		Document doc = PintaCore.Workspace.ActiveDocument;
 
 		current_layer_blend_mode = UserBlendOps.GetBlendModeByName (blend_combo_box.GetActiveText ()!);
+
 		doc.Layers.CurrentUserLayer.BlendMode = current_layer_blend_mode;
-		if (doc.Layers.SelectionLayer != null) {
-			//Update BlendMode for SelectionLayer and force redraw
-			doc.Layers.SelectionLayer.BlendMode = doc.Layers.CurrentUserLayer.BlendMode;
-		}
+
+		if (doc.Layers.SelectionLayer != null)
+			doc.Layers.SelectionLayer.BlendMode = doc.Layers.CurrentUserLayer.BlendMode; //Update BlendMode for SelectionLayer and force redraw
+
 		PintaCore.Workspace.Invalidate ();
 	}
 }
