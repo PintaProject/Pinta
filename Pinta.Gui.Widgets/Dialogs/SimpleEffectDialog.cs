@@ -49,24 +49,31 @@ public sealed class SimpleEffectDialog : Gtk.Dialog
 	/// Since this dialog is used by add-ins, the IAddinLocalizer allows for translations to be
 	/// fetched from the appropriate place.
 	/// </param>
-	public SimpleEffectDialog (string title, string icon_name, EffectData effectData, IAddinLocalizer localizer)
+	public SimpleEffectDialog (
+		string title,
+		string iconName,
+		EffectData effectData,
+		IAddinLocalizer localizer)
 	{
+		// --- Initialization (Gtk.Window)
+
 		Title = title;
 		TransientFor = PintaCore.Chrome.MainWindow;
 		Modal = true;
-		this.AddCancelOkButtons ();
-		this.SetDefaultResponse (Gtk.ResponseType.Ok);
-
-		IconName = icon_name;
-
-		var contentAreaBox = this.GetContentAreaBox ();
-
-		contentAreaBox.Spacing = 12;
-		contentAreaBox.SetAllMargins (6);
+		IconName = iconName;
 		WidthRequest = 400;
 		Resizable = false;
 
-		// Build dialog
+		// --- Initialization (Gtk.Dialog)
+
+		this.AddCancelOkButtons ();
+		this.SetDefaultResponse (Gtk.ResponseType.Ok);
+
+		// --- Initialization
+
+		Gtk.Box contentAreaBox = this.GetContentAreaBox ();
+		contentAreaBox.Spacing = 12;
+		contentAreaBox.SetAllMargins (6);
 		foreach (var widget in GenerateDialogWidgets (effectData, localizer))
 			contentAreaBox.Append (widget);
 
@@ -82,7 +89,7 @@ public sealed class SimpleEffectDialog : Gtk.Dialog
 	{
 		ArgumentNullException.ThrowIfNull (effect.EffectData);
 
-		var dialog = new SimpleEffectDialog (
+		SimpleEffectDialog dialog = new (
 			effect.Name,
 			effect.Icon,
 			effect.EffectData,
@@ -109,8 +116,6 @@ public sealed class SimpleEffectDialog : Gtk.Dialog
 		timeout_func?.Invoke ();
 	}
 
-	#region EffectData Parser
-
 	private IEnumerable<Gtk.Widget> GenerateDialogWidgets (EffectData effectData, IAddinLocalizer localizer) =>
 			effectData
 			.GetType ()
@@ -119,7 +124,7 @@ public sealed class SimpleEffectDialog : Gtk.Dialog
 			.Where (IsCustomProperty)
 			.Select (CreateSettings)
 			.Where (settings => !settings.skip)
-			.Select (settings => GetMemberWidgets (settings, effectData, localizer))
+			.Select (settings => GenerateWidgetsForMember (settings, effectData, localizer))
 			.SelectMany (widgets => widgets);
 
 	private bool IsCustomProperty (MemberInfo memberInfo)
@@ -157,12 +162,11 @@ public sealed class SimpleEffectDialog : Gtk.Dialog
 			.Select (h => h.Caption)
 			.FirstOrDefault ();
 
-		return new MemberSettings (
+		return new (
 			reflector: reflector,
 			caption: caption ?? MakeCaption (memberInfo.Name),
 			hint: reflector.Attributes.OfType<HintAttribute> ().Select (h => h.Hint).FirstOrDefault (),
-			skip: reflector.Attributes.OfType<SkipAttribute> ().Any ()
-		);
+			skip: reflector.Attributes.OfType<SkipAttribute> ().Any ());
 	}
 
 	private static string MakeCaption (string name)
@@ -195,7 +199,10 @@ public sealed class SimpleEffectDialog : Gtk.Dialog
 		}
 	}
 
-	private IEnumerable<Gtk.Widget> GetMemberWidgets (MemberSettings settings, EffectData effectData, IAddinLocalizer localizer)
+	private IEnumerable<Gtk.Widget> GenerateWidgetsForMember (
+		MemberSettings settings,
+		EffectData effectData,
+		IAddinLocalizer localizer)
 	{
 		WidgetFactory? widgetFactory = GetWidgetFactory (settings);
 
@@ -233,9 +240,6 @@ public sealed class SimpleEffectDialog : Gtk.Dialog
 
 	private delegate Gtk.Widget WidgetFactory (string caption, EffectData effectData, MemberSettings settings);
 
-	#endregion
-
-	#region Control Builders
 	private ComboBoxWidget CreateEnumComboBox (
 		string caption,
 		EffectData effectData,
@@ -336,7 +340,7 @@ public sealed class SimpleEffectDialog : Gtk.Dialog
 
 		var attributes = settings.reflector.Attributes;
 
-		var widget = new HScaleSpinButtonWidget (initialValue) {
+		HScaleSpinButtonWidget widget = new (initialValue) {
 			Label = caption,
 			MinimumValue = attributes.OfType<MinimumValueAttribute> ().Select (m => m.Value).FirstOrDefault (-100),
 			MaximumValue = attributes.OfType<MaximumValueAttribute> ().Select (m => m.Value).FirstOrDefault (100),
@@ -459,8 +463,6 @@ public sealed class SimpleEffectDialog : Gtk.Dialog
 		};
 		return widget;
 	}
-
-	#endregion
 
 	private void DelayedUpdate (TimeoutHandler handler)
 	{
