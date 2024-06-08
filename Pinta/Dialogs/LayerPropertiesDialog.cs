@@ -53,7 +53,7 @@ public sealed class LayerPropertiesDialog : Gtk.Dialog
 		this.AddCancelOkButtons ();
 		this.SetDefaultResponse (Gtk.ResponseType.Ok);
 
-		var doc = PintaCore.Workspace.ActiveDocument;
+		Document doc = PintaCore.Workspace.ActiveDocument;
 
 		DefaultWidth = 349;
 		DefaultHeight = 224;
@@ -64,14 +64,14 @@ public sealed class LayerPropertiesDialog : Gtk.Dialog
 		content_area.Spacing = spacing;
 		content_area.SetAllMargins (10);
 
-		var grid = new Gtk.Grid { RowSpacing = spacing, ColumnSpacing = spacing, ColumnHomogeneous = false };
+		Gtk.Grid grid = new () { RowSpacing = spacing, ColumnSpacing = spacing, ColumnHomogeneous = false };
 
 		// Layer name
-		var name_label = Gtk.Label.New (Translations.GetString ("Name:"));
+		Gtk.Label name_label = Gtk.Label.New (Translations.GetString ("Name:"));
 		name_label.Halign = Gtk.Align.End;
 		grid.Attach (name_label, 0, 0, 1, 1);
 
-		layer_name_entry = new Gtk.Entry {
+		layer_name_entry = new Gtk.Entry () {
 			Hexpand = true,
 			Halign = Gtk.Align.Fill
 		};
@@ -83,7 +83,7 @@ public sealed class LayerPropertiesDialog : Gtk.Dialog
 		grid.Attach (visibility_checkbox, 1, 1, 1, 1);
 
 		// Blend mode
-		var blend_label = Gtk.Label.New (Translations.GetString ("Blend Mode") + ":");
+		Gtk.Label blend_label = Gtk.Label.New (Translations.GetString ("Blend Mode") + ":");
 		blend_label.Halign = Gtk.Align.End;
 		grid.Attach (blend_label, 0, 2, 1, 1);
 
@@ -96,11 +96,11 @@ public sealed class LayerPropertiesDialog : Gtk.Dialog
 		grid.Attach (blend_combo_box, 1, 2, 1, 1);
 
 		// Opacity
-		var opacity_label = Gtk.Label.New (Translations.GetString ("Opacity:"));
+		Gtk.Label opacity_label = Gtk.Label.New (Translations.GetString ("Opacity:"));
 		opacity_label.Halign = Gtk.Align.End;
 		grid.Attach (opacity_label, 0, 3, 1, 1);
 
-		var opacity_box = new Gtk.Box { Spacing = spacing };
+		Gtk.Box opacity_box = new () { Spacing = spacing };
 		opacity_box.SetOrientation (Gtk.Orientation.Horizontal);
 		opacity_spinner = Gtk.SpinButton.NewWithRange (0, 100, 1);
 		opacity_spinner.Adjustment!.PageIncrement = 10;
@@ -151,18 +151,21 @@ public sealed class LayerPropertiesDialog : Gtk.Dialog
 		opacity_spinner.SetActivatesDefault (true);
 	}
 
-	public bool AreLayerPropertiesUpdated => initial_properties.Opacity != opacity
-				|| initial_properties.Hidden != hidden
-				|| initial_properties.Name != name
-				|| initial_properties.BlendMode != blendmode;
+	public bool AreLayerPropertiesUpdated =>
+		initial_properties.Opacity != opacity
+		|| initial_properties.Hidden != hidden
+		|| initial_properties.Name != name
+		|| initial_properties.BlendMode != blendmode;
 
-	public LayerProperties InitialLayerProperties => initial_properties;
+	public LayerProperties InitialLayerProperties
+		=> initial_properties;
 
-	public LayerProperties UpdatedLayerProperties => new (name, hidden, opacity, blendmode);
+	public LayerProperties UpdatedLayerProperties
+		=> new (name, hidden, opacity, blendmode);
 
 	private void OnLayerNameChanged (object? sender, EventArgs e)
 	{
-		var doc = PintaCore.Workspace.ActiveDocument;
+		Document doc = PintaCore.Workspace.ActiveDocument;
 
 		name = layer_name_entry.GetText ();
 		doc.Layers.CurrentUserLayer.Name = name;
@@ -170,7 +173,7 @@ public sealed class LayerPropertiesDialog : Gtk.Dialog
 
 	private void OnVisibilityToggled (object? sender, EventArgs e)
 	{
-		var doc = PintaCore.Workspace.ActiveDocument;
+		Document doc = PintaCore.Workspace.ActiveDocument;
 
 		hidden = !visibility_checkbox.Active;
 		doc.Layers.CurrentUserLayer.Hidden = hidden;
@@ -195,7 +198,7 @@ public sealed class LayerPropertiesDialog : Gtk.Dialog
 
 	private void UpdateOpacity ()
 	{
-		var doc = PintaCore.Workspace.ActiveDocument;
+		Document doc = PintaCore.Workspace.ActiveDocument;
 
 		//TODO check redraws are being throttled.
 		opacity = opacity_spinner.Value / 100d;
@@ -209,7 +212,7 @@ public sealed class LayerPropertiesDialog : Gtk.Dialog
 
 	private void OnBlendModeChanged (object? sender, EventArgs e)
 	{
-		var doc = PintaCore.Workspace.ActiveDocument;
+		Document doc = PintaCore.Workspace.ActiveDocument;
 
 		blendmode = UserBlendOps.GetBlendModeByName (blend_combo_box.GetActiveText ()!);
 		doc.Layers.CurrentUserLayer.BlendMode = blendmode;
