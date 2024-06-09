@@ -25,163 +25,181 @@
 // THE SOFTWARE.
 
 using System;
-using System.Linq;
-using Gtk;
+using System.Collections.Immutable;
 using Pinta.Core;
 
 namespace Pinta;
 
-public sealed class LayerPropertiesDialog : Dialog
+public sealed class LayerPropertiesDialog : Gtk.Dialog
 {
 	private readonly LayerProperties initial_properties;
 
-	private double opacity;
-	private bool hidden;
-	private string name;
-	private BlendMode blendmode;
+	private double current_layer_opacity;
+	private bool current_layer_hidden;
+	private string current_layer_name;
+	private BlendMode current_layer_blend_mode;
 
-	private readonly Entry layer_name_entry;
-	private readonly CheckButton visibility_checkbox;
-	private readonly SpinButton opacity_spinner;
-	private readonly Scale opacity_slider;
-	private readonly ComboBoxText blend_combo_box;
+	private readonly Gtk.Entry layer_name_entry;
+	private readonly Gtk.CheckButton visibility_checkbox;
+	private readonly Gtk.SpinButton opacity_spinner;
+	private readonly Gtk.Scale opacity_slider;
+	private readonly Gtk.ComboBoxText blend_combo_box;
 
 	public LayerPropertiesDialog ()
 	{
+		const int spacing = 6;
+
+		Document doc = PintaCore.Workspace.ActiveDocument;
+
+		string currentLayerName = doc.Layers.CurrentUserLayer.Name;
+		bool currentLayerHidden = doc.Layers.CurrentUserLayer.Hidden;
+		double currentLayerOpacity = doc.Layers.CurrentUserLayer.Opacity;
+		BlendMode currentLayerBlendMode = doc.Layers.CurrentUserLayer.BlendMode;
+
+		LayerProperties initialProperties = new (
+			currentLayerName,
+			currentLayerHidden,
+			currentLayerOpacity,
+			currentLayerBlendMode);
+
+		Gtk.Label nameLabel = Gtk.Label.New (Translations.GetString ("Name:"));
+		nameLabel.Halign = Gtk.Align.End;
+
+		Gtk.Entry layerNameEntry = new () {
+			Hexpand = true,
+			Halign = Gtk.Align.Fill,
+		};
+		layerNameEntry.SetText (initialProperties.Name);
+		layerNameEntry.OnChanged (OnLayerNameChanged);
+		layerNameEntry.SetActivatesDefault (true);
+
+		Gtk.CheckButton visibilityCheckbox = Gtk.CheckButton.NewWithLabel (Translations.GetString ("Visible"));
+		visibilityCheckbox.Active = !initialProperties.Hidden;
+		visibilityCheckbox.OnToggled += OnVisibilityToggled;
+
+		Gtk.Label blendLabel = Gtk.Label.New (Translations.GetString ("Blend Mode") + ":");
+		blendLabel.Halign = Gtk.Align.End;
+
+		var allBlendmodes = UserBlendOps.GetAllBlendModeNames ().ToImmutableArray ();
+		var index = allBlendmodes.IndexOf (UserBlendOps.GetBlendModeName (currentLayerBlendMode));
+
+		Gtk.ComboBoxText blendComboBox = new ();
+
+		foreach (string name in UserBlendOps.GetAllBlendModeNames ())
+			blendComboBox.AppendText (name);
+
+		blendComboBox.Hexpand = true;
+		blendComboBox.Halign = Gtk.Align.Fill;
+		blendComboBox.Active = index;
+		blendComboBox.OnChanged += OnBlendModeChanged;
+
+		Gtk.Label opacityLabel = Gtk.Label.New (Translations.GetString ("Opacity:"));
+		opacityLabel.Halign = Gtk.Align.End;
+
+		Gtk.SpinButton opacitySpinner = Gtk.SpinButton.NewWithRange (0, 100, 1);
+		opacitySpinner.Adjustment!.PageIncrement = 10;
+		opacitySpinner.ClimbRate = 1;
+		opacitySpinner.Value = Math.Round (initialProperties.Opacity * 100);
+		opacitySpinner.OnValueChanged += OnOpacitySpinnerChanged;
+		opacitySpinner.SetActivatesDefault (true);
+
+		Gtk.Scale opacitySlider = Gtk.Scale.NewWithRange (Gtk.Orientation.Horizontal, 0, 100, 1);
+		opacitySlider.Digits = 0;
+		opacitySlider.Adjustment!.PageIncrement = 10;
+		opacitySlider.Hexpand = true;
+		opacitySlider.Halign = Gtk.Align.Fill;
+		opacitySlider.SetValue (Math.Round (initialProperties.Opacity * 100));
+		opacitySlider.OnValueChanged += OnOpacitySliderChanged;
+
+		Gtk.Box opacityBox = new () { Spacing = spacing };
+		opacityBox.SetOrientation (Gtk.Orientation.Horizontal);
+		opacityBox.Append (opacitySpinner);
+		opacityBox.Append (opacitySlider);
+
+		Gtk.Grid grid = new () {
+			RowSpacing = spacing,
+			ColumnSpacing = spacing,
+			ColumnHomogeneous = false,
+		};
+		grid.Attach (nameLabel, 0, 0, 1, 1);
+		grid.Attach (layerNameEntry, 1, 0, 1, 1);
+		grid.Attach (visibilityCheckbox, 1, 1, 1, 1);
+		grid.Attach (blendLabel, 0, 2, 1, 1);
+		grid.Attach (blendComboBox, 1, 2, 1, 1);
+		grid.Attach (opacityLabel, 0, 3, 1, 1);
+		grid.Attach (opacityBox, 1, 3, 1, 1);
+
+		// --- Initialization (Gtk.Window)
+
 		Title = Translations.GetString ("Layer Properties");
 		TransientFor = PintaCore.Chrome.MainWindow;
 		Modal = true;
-		this.AddCancelOkButtons ();
-		this.SetDefaultResponse (ResponseType.Ok);
-
-		var doc = PintaCore.Workspace.ActiveDocument;
-
-		// Build
-		{
-			DefaultWidth = 349;
-			DefaultHeight = 224;
-			const int spacing = 6;
-
-			var content_area = this.GetContentAreaBox ();
-			content_area.Spacing = spacing;
-			content_area.SetAllMargins (10);
-
-			var grid = new Grid { RowSpacing = spacing, ColumnSpacing = spacing, ColumnHomogeneous = false };
-
-			// Layer name
-			var name_label = Label.New (Translations.GetString ("Name:"));
-			name_label.Halign = Align.End;
-			grid.Attach (name_label, 0, 0, 1, 1);
-
-			layer_name_entry = new Entry {
-				Hexpand = true,
-				Halign = Align.Fill
-			};
-			grid.Attach (layer_name_entry, 1, 0, 1, 1);
-
-			// Visible checkbox
-			visibility_checkbox = CheckButton.NewWithLabel (Translations.GetString ("Visible"));
-
-			grid.Attach (visibility_checkbox, 1, 1, 1, 1);
-
-			// Blend mode
-			var blend_label = Label.New (Translations.GetString ("Blend Mode") + ":");
-			blend_label.Halign = Align.End;
-			grid.Attach (blend_label, 0, 2, 1, 1);
-
-			blend_combo_box = new ComboBoxText ();
-			foreach (string name in UserBlendOps.GetAllBlendModeNames ())
-				blend_combo_box.AppendText (name);
-
-			blend_combo_box.Hexpand = true;
-			blend_combo_box.Halign = Align.Fill;
-			grid.Attach (blend_combo_box, 1, 2, 1, 1);
-
-			// Opacity
-			var opacity_label = Label.New (Translations.GetString ("Opacity:"));
-			opacity_label.Halign = Align.End;
-			grid.Attach (opacity_label, 0, 3, 1, 1);
-
-			var opacity_box = new Box { Spacing = spacing };
-			opacity_box.SetOrientation (Orientation.Horizontal);
-			opacity_spinner = SpinButton.NewWithRange (0, 100, 1);
-			opacity_spinner.Adjustment!.PageIncrement = 10;
-			opacity_spinner.ClimbRate = 1;
-			opacity_box.Append (opacity_spinner);
-
-			opacity_slider = Scale.NewWithRange (Orientation.Horizontal, 0, 100, 1);
-			opacity_slider.Digits = 0;
-			opacity_slider.Adjustment!.PageIncrement = 10;
-			opacity_slider.Hexpand = true;
-			opacity_slider.Halign = Align.Fill;
-			opacity_box.Append (opacity_slider);
-
-			grid.Attach (opacity_box, 1, 3, 1, 1);
-
-			content_area.Append (grid);
-		}
-
+		DefaultWidth = 349;
+		DefaultHeight = 224;
 		IconName = Resources.Icons.LayerProperties;
 
-		name = doc.Layers.CurrentUserLayer.Name;
-		hidden = doc.Layers.CurrentUserLayer.Hidden;
-		opacity = doc.Layers.CurrentUserLayer.Opacity;
-		blendmode = doc.Layers.CurrentUserLayer.BlendMode;
+		// --- Initialization (Gtk.Dialog)
 
-		initial_properties = new LayerProperties (
-			name,
-			hidden,
-			opacity,
-			blendmode);
+		this.AddCancelOkButtons ();
+		this.SetDefaultResponse (Gtk.ResponseType.Ok);
 
-		layer_name_entry.SetText (initial_properties.Name);
-		visibility_checkbox.Active = !initial_properties.Hidden;
-		opacity_spinner.Value = Math.Round (initial_properties.Opacity * 100);
-		opacity_slider.SetValue (Math.Round (initial_properties.Opacity * 100));
+		// --- Initialization
 
-		var all_blendmodes = UserBlendOps.GetAllBlendModeNames ().ToList ();
-		var index = all_blendmodes.IndexOf (UserBlendOps.GetBlendModeName (blendmode));
-		blend_combo_box.Active = index;
+		var contentArea = this.GetContentAreaBox ();
+		contentArea.Spacing = spacing;
+		contentArea.SetAllMargins (10);
+		contentArea.Append (grid);
 
-		layer_name_entry.OnChanged ((o, e) => OnLayerNameChanged (o, e));
+		// --- References to keep
 
-		visibility_checkbox.OnToggled += OnVisibilityToggled;
-		opacity_spinner.OnValueChanged += OnOpacitySpinnerChanged;
-		opacity_slider.OnValueChanged += OnOpacitySliderChanged;
-		blend_combo_box.OnChanged += OnBlendModeChanged;
+		layer_name_entry = layerNameEntry;
+		visibility_checkbox = visibilityCheckbox;
+		blend_combo_box = blendComboBox;
+		opacity_spinner = opacitySpinner;
+		opacity_slider = opacitySlider;
 
-		layer_name_entry.SetActivatesDefault (true);
-		opacity_spinner.SetActivatesDefault (true);
+		current_layer_name = currentLayerName;
+		current_layer_hidden = currentLayerHidden;
+		current_layer_opacity = currentLayerOpacity;
+		current_layer_blend_mode = currentLayerBlendMode;
+
+		initial_properties = initialProperties;
 	}
 
-	public bool AreLayerPropertiesUpdated => initial_properties.Opacity != opacity
-				|| initial_properties.Hidden != hidden
-				|| initial_properties.Name != name
-				|| initial_properties.BlendMode != blendmode;
+	public bool AreLayerPropertiesUpdated =>
+		initial_properties.Opacity != current_layer_opacity
+		|| initial_properties.Hidden != current_layer_hidden
+		|| initial_properties.Name != current_layer_name
+		|| initial_properties.BlendMode != current_layer_blend_mode;
 
-	public LayerProperties InitialLayerProperties => initial_properties;
+	public LayerProperties InitialLayerProperties
+		=> initial_properties;
 
-	public LayerProperties UpdatedLayerProperties => new (name, hidden, opacity, blendmode);
+	public LayerProperties UpdatedLayerProperties
+		=> new (
+			current_layer_name,
+			current_layer_hidden,
+			current_layer_opacity,
+			current_layer_blend_mode);
 
-	#region Private Methods
 	private void OnLayerNameChanged (object? sender, EventArgs e)
 	{
-		var doc = PintaCore.Workspace.ActiveDocument;
-
-		name = layer_name_entry.GetText ();
-		doc.Layers.CurrentUserLayer.Name = name;
+		Document doc = PintaCore.Workspace.ActiveDocument;
+		current_layer_name = layer_name_entry.GetText ();
+		doc.Layers.CurrentUserLayer.Name = current_layer_name;
 	}
 
 	private void OnVisibilityToggled (object? sender, EventArgs e)
 	{
-		var doc = PintaCore.Workspace.ActiveDocument;
+		Document doc = PintaCore.Workspace.ActiveDocument;
 
-		hidden = !visibility_checkbox.Active;
-		doc.Layers.CurrentUserLayer.Hidden = hidden;
-		if (doc.Layers.SelectionLayer != null) {
-			//Update Visibility for SelectionLayer and force redraw			
-			doc.Layers.SelectionLayer.Hidden = doc.Layers.CurrentUserLayer.Hidden;
-		}
+		current_layer_hidden = !visibility_checkbox.Active;
+
+		doc.Layers.CurrentUserLayer.Hidden = current_layer_hidden;
+
+		if (doc.Layers.SelectionLayer != null)
+			doc.Layers.SelectionLayer.Hidden = doc.Layers.CurrentUserLayer.Hidden; // Update Visibility for SelectionLayer and force redraw
+
 		PintaCore.Workspace.Invalidate ();
 	}
 
@@ -199,31 +217,31 @@ public sealed class LayerPropertiesDialog : Dialog
 
 	private void UpdateOpacity ()
 	{
-		var doc = PintaCore.Workspace.ActiveDocument;
+		Document doc = PintaCore.Workspace.ActiveDocument;
 
 		//TODO check redraws are being throttled.
-		opacity = opacity_spinner.Value / 100d;
-		doc.Layers.CurrentUserLayer.Opacity = opacity;
-		if (doc.Layers.SelectionLayer != null) {
-			//Update Opacity for SelectionLayer and force redraw			
-			doc.Layers.SelectionLayer.Opacity = doc.Layers.CurrentUserLayer.Opacity;
-		}
+		current_layer_opacity = opacity_spinner.Value / 100d;
+
+		doc.Layers.CurrentUserLayer.Opacity = current_layer_opacity;
+
+		if (doc.Layers.SelectionLayer != null)
+			doc.Layers.SelectionLayer.Opacity = doc.Layers.CurrentUserLayer.Opacity; // Update Opacity for SelectionLayer and force redraw
+
 		PintaCore.Workspace.Invalidate ();
 	}
 
 	private void OnBlendModeChanged (object? sender, EventArgs e)
 	{
-		var doc = PintaCore.Workspace.ActiveDocument;
+		Document doc = PintaCore.Workspace.ActiveDocument;
 
-		blendmode = UserBlendOps.GetBlendModeByName (blend_combo_box.GetActiveText ()!);
-		doc.Layers.CurrentUserLayer.BlendMode = blendmode;
-		if (doc.Layers.SelectionLayer != null) {
-			//Update BlendMode for SelectionLayer and force redraw
-			doc.Layers.SelectionLayer.BlendMode = doc.Layers.CurrentUserLayer.BlendMode;
-		}
+		current_layer_blend_mode = UserBlendOps.GetBlendModeByName (blend_combo_box.GetActiveText ()!);
+
+		doc.Layers.CurrentUserLayer.BlendMode = current_layer_blend_mode;
+
+		if (doc.Layers.SelectionLayer != null)
+			doc.Layers.SelectionLayer.BlendMode = doc.Layers.CurrentUserLayer.BlendMode; //Update BlendMode for SelectionLayer and force redraw
+
 		PintaCore.Workspace.Invalidate ();
 	}
-
-	#endregion
 }
 
