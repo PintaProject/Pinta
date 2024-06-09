@@ -25,160 +25,193 @@
 // THE SOFTWARE.
 
 using System;
-using Gtk;
 using Pinta.Core;
 
 namespace Pinta;
 
-public sealed class ResizeCanvasDialog : Dialog
+public sealed class ResizeCanvasDialog : Gtk.Dialog
 {
-	private readonly CheckButton percentage_radio;
-	private readonly CheckButton absolute_radio;
-	private readonly SpinButton percentage_spinner;
-	private readonly SpinButton width_spinner;
-	private readonly SpinButton height_spinner;
-	private readonly CheckButton aspect_checkbox;
+	private readonly Gtk.CheckButton percentage_radio;
+	private readonly Gtk.SpinButton percentage_spinner;
+	private readonly Gtk.SpinButton width_spinner;
+	private readonly Gtk.SpinButton height_spinner;
+	private readonly Gtk.CheckButton aspect_checkbox;
 
-	private readonly Button nw_button;
-	private readonly Button n_button;
-	private readonly Button ne_button;
-	private readonly Button w_button;
-	private readonly Button e_button;
-	private readonly Button center_button;
-	private readonly Button sw_button;
-	private readonly Button s_button;
-	private readonly Button se_button;
+	private readonly Gtk.Button nw_button;
+	private readonly Gtk.Button n_button;
+	private readonly Gtk.Button ne_button;
+	private readonly Gtk.Button w_button;
+	private readonly Gtk.Button e_button;
+	private readonly Gtk.Button center_button;
+	private readonly Gtk.Button sw_button;
+	private readonly Gtk.Button s_button;
+	private readonly Gtk.Button se_button;
 
 	private bool value_changing;
 	private Anchor anchor;
 
 	public ResizeCanvasDialog ()
 	{
+		const int spacing = 6;
+
+		Gtk.CheckButton percentageRadio = Gtk.CheckButton.NewWithLabel (Translations.GetString ("By percentage:"));
+		percentageRadio.OnToggled += percentageRadio_Toggled;
+		percentageRadio.Active = true;
+
+		Gtk.SpinButton percentageSpinner = Gtk.SpinButton.NewWithRange (1, int.MaxValue, 1);
+		percentageSpinner.Value = 100;
+		percentageSpinner.OnValueChanged += percentageSpinner_ValueChanged;
+		percentageSpinner.SetActivatesDefault (true);
+
+		Gtk.Box hboxPercent = new () { Spacing = spacing };
+		hboxPercent.SetOrientation (Gtk.Orientation.Horizontal);
+		hboxPercent.Append (percentageRadio);
+		hboxPercent.Append (percentageSpinner);
+		hboxPercent.Append (Gtk.Label.New ("%"));
+
+		Gtk.Label widthLabel = Gtk.Label.New (Translations.GetString ("Width:"));
+		widthLabel.Halign = Gtk.Align.End;
+
+		Gtk.SpinButton widthSpinner = Gtk.SpinButton.NewWithRange (1, int.MaxValue, 1);
+		widthSpinner.Value = PintaCore.Workspace.ImageSize.Width;
+		widthSpinner.OnValueChanged += widthSpinner_ValueChanged;
+		widthSpinner.SetActivatesDefault (true);
+
+		Gtk.Label heightLabel = Gtk.Label.New (Translations.GetString ("Height:"));
+		heightLabel.Halign = Gtk.Align.End;
+
+		Gtk.SpinButton heightSpinner = Gtk.SpinButton.NewWithRange (1, int.MaxValue, 1);
+		heightSpinner.Value = PintaCore.Workspace.ImageSize.Height;
+		heightSpinner.OnValueChanged += heightSpinner_ValueChanged;
+		heightSpinner.SetActivatesDefault (true);
+
+		Gtk.Grid hwGrid = new () {
+			RowSpacing = spacing,
+			ColumnSpacing = spacing,
+			ColumnHomogeneous = false,
+		};
+		hwGrid.Attach (widthLabel, 0, 0, 1, 1);
+		hwGrid.Attach (widthSpinner, 1, 0, 1, 1);
+		hwGrid.Attach (Gtk.Label.New (Translations.GetString ("pixels")), 2, 0, 1, 1);
+		hwGrid.Attach (heightLabel, 0, 1, 1, 1);
+		hwGrid.Attach (heightSpinner, 1, 1, 1, 1);
+		hwGrid.Attach (Gtk.Label.New (Translations.GetString ("pixels")), 2, 1, 1, 1);
+
+		Gtk.CheckButton absoluteRadio = Gtk.CheckButton.NewWithLabel (Translations.GetString ("By absolute size:"));
+		absoluteRadio.SetGroup (percentageRadio);
+		absoluteRadio.OnToggled += absoluteRadio_Toggled;
+
+		Gtk.CheckButton aspectCheckBox = Gtk.CheckButton.NewWithLabel (Translations.GetString ("Maintain aspect ratio"));
+		aspectCheckBox.Active = true;
+
+		Gtk.Separator sep = new ();
+		sep.SetOrientation (Gtk.Orientation.Horizontal);
+
+		Gtk.Label alignLabel = Gtk.Label.New (Translations.GetString ("Anchor:"));
+		alignLabel.Xalign = 0;
+
+		Gtk.Button nwButton = CreateAnchorButton ();
+		nwButton.OnClicked += HandleNWButtonClicked;
+
+		Gtk.Button nButton = CreateAnchorButton ();
+		nButton.OnClicked += HandleNButtonClicked;
+
+		Gtk.Button neButton = CreateAnchorButton ();
+		neButton.OnClicked += HandleNEButtonClicked;
+
+		Gtk.Button wButton = CreateAnchorButton ();
+		wButton.OnClicked += HandleWButtonClicked;
+
+		Gtk.Button eButton = CreateAnchorButton ();
+		eButton.OnClicked += HandleEButtonClicked;
+
+		Gtk.Button centerButton = CreateAnchorButton ();
+		centerButton.OnClicked += HandleCenterButtonClicked;
+
+		Gtk.Button swButton = CreateAnchorButton ();
+		swButton.OnClicked += HandleSWButtonClicked;
+
+		Gtk.Button sButton = CreateAnchorButton ();
+		sButton.OnClicked += HandleSButtonClicked;
+
+		Gtk.Button seButton = CreateAnchorButton ();
+		seButton.OnClicked += HandleSEButtonClicked;
+
+		Gtk.Grid grid = new () {
+			RowSpacing = spacing,
+			ColumnSpacing = spacing,
+			Halign = Gtk.Align.Center,
+			Valign = Gtk.Align.Center,
+		};
+		grid.Attach (nwButton, 0, 0, 1, 1);
+		grid.Attach (nButton, 1, 0, 1, 1);
+		grid.Attach (neButton, 2, 0, 1, 1);
+		grid.Attach (wButton, 0, 1, 1, 1);
+		grid.Attach (centerButton, 1, 1, 1, 1);
+		grid.Attach (eButton, 2, 1, 1, 1);
+		grid.Attach (swButton, 0, 2, 1, 1);
+		grid.Attach (sButton, 1, 2, 1, 1);
+		grid.Attach (seButton, 2, 2, 1, 1);
+
+		Gtk.Box mainVbox = new () { Spacing = spacing };
+		mainVbox.SetOrientation (Gtk.Orientation.Vertical);
+		mainVbox.Append (hboxPercent);
+		mainVbox.Append (absoluteRadio);
+		mainVbox.Append (hwGrid);
+		mainVbox.Append (aspectCheckBox);
+		mainVbox.Append (sep);
+		mainVbox.Append (alignLabel);
+		mainVbox.Append (grid);
+
+		// --- Initialization (Gtk.Window)
+
 		Title = Translations.GetString ("Resize Canvas");
 		TransientFor = PintaCore.Chrome.MainWindow;
 		Modal = true;
-		this.AddCancelOkButtons ();
-		this.SetDefaultResponse (ResponseType.Ok);
-
 		IconName = Resources.Icons.ImageResizeCanvas;
-
 		DefaultWidth = 300;
 		DefaultHeight = 200;
 
-		percentage_radio = CheckButton.NewWithLabel (Translations.GetString ("By percentage:"));
-		absolute_radio = CheckButton.NewWithLabel (Translations.GetString ("By absolute size:"));
-		absolute_radio.SetGroup (percentage_radio);
+		// --- Initialization (Gtk.Dialog)
 
-		percentage_spinner = SpinButton.NewWithRange (1, int.MaxValue, 1);
-		width_spinner = SpinButton.NewWithRange (1, int.MaxValue, 1);
-		height_spinner = SpinButton.NewWithRange (1, int.MaxValue, 1);
+		this.AddCancelOkButtons ();
+		this.SetDefaultResponse (Gtk.ResponseType.Ok);
 
-		aspect_checkbox = CheckButton.NewWithLabel (Translations.GetString ("Maintain aspect ratio"));
+		// --- Initialization
 
-		const int spacing = 6;
-		var main_vbox = new Box { Spacing = spacing };
-		main_vbox.SetOrientation (Orientation.Vertical);
+		var contentArea = this.GetContentAreaBox ();
+		contentArea.SetAllMargins (12);
+		contentArea.Append (mainVbox);
 
-		var hbox_percent = new Box { Spacing = spacing };
-		hbox_percent.SetOrientation (Orientation.Horizontal);
-		hbox_percent.Append (percentage_radio);
-		hbox_percent.Append (percentage_spinner);
-		hbox_percent.Append (Label.New ("%"));
-		main_vbox.Append (hbox_percent);
-
-		main_vbox.Append (absolute_radio);
-
-		var hw_grid = new Grid { RowSpacing = spacing, ColumnSpacing = spacing, ColumnHomogeneous = false };
-		var width_label = Label.New (Translations.GetString ("Width:"));
-		width_label.Halign = Align.End;
-		hw_grid.Attach (width_label, 0, 0, 1, 1);
-		hw_grid.Attach (width_spinner, 1, 0, 1, 1);
-		hw_grid.Attach (Label.New (Translations.GetString ("pixels")), 2, 0, 1, 1);
-
-		var height_label = Label.New (Translations.GetString ("Height:"));
-		height_label.Halign = Align.End;
-		hw_grid.Attach (height_label, 0, 1, 1, 1);
-		hw_grid.Attach (height_spinner, 1, 1, 1, 1);
-		hw_grid.Attach (Label.New (Translations.GetString ("pixels")), 2, 1, 1, 1);
-
-		main_vbox.Append (hw_grid);
-
-		main_vbox.Append (aspect_checkbox);
-		var sep = new Separator ();
-		sep.SetOrientation (Orientation.Horizontal);
-		main_vbox.Append (sep);
-
-		var align_label = Label.New (Translations.GetString ("Anchor:"));
-		align_label.Xalign = 0;
-		main_vbox.Append (align_label);
-
-		nw_button = CreateAnchorButton ();
-		n_button = CreateAnchorButton ();
-		ne_button = CreateAnchorButton ();
-		w_button = CreateAnchorButton ();
-		e_button = CreateAnchorButton ();
-		center_button = CreateAnchorButton ();
-		sw_button = CreateAnchorButton ();
-		s_button = CreateAnchorButton ();
-		se_button = CreateAnchorButton ();
-
-		var grid = new Grid {
-			RowSpacing = spacing,
-			ColumnSpacing = spacing,
-			Halign = Align.Center,
-			Valign = Align.Center
-		};
-		grid.Attach (nw_button, 0, 0, 1, 1);
-		grid.Attach (n_button, 1, 0, 1, 1);
-		grid.Attach (ne_button, 2, 0, 1, 1);
-		grid.Attach (w_button, 0, 1, 1, 1);
-		grid.Attach (center_button, 1, 1, 1, 1);
-		grid.Attach (e_button, 2, 1, 1, 1);
-		grid.Attach (sw_button, 0, 2, 1, 1);
-		grid.Attach (s_button, 1, 2, 1, 1);
-		grid.Attach (se_button, 2, 2, 1, 1);
-
-		main_vbox.Append (grid);
-
-		var content_area = this.GetContentAreaBox ();
-		content_area.SetAllMargins (12);
-		content_area.Append (main_vbox);
-
-		aspect_checkbox.Active = true;
-
-		width_spinner.Value = PintaCore.Workspace.ImageSize.Width;
-		height_spinner.Value = PintaCore.Workspace.ImageSize.Height;
-
-		percentage_radio.OnToggled += percentageRadio_Toggled;
-		absolute_radio.OnToggled += absoluteRadio_Toggled;
-		percentage_radio.Active = true;
-
-		percentage_spinner.Value = 100;
-		percentage_spinner.OnValueChanged += percentageSpinner_ValueChanged;
-
-		width_spinner.OnValueChanged += widthSpinner_ValueChanged;
-		height_spinner.OnValueChanged += heightSpinner_ValueChanged;
-
-		nw_button.OnClicked += HandleNWButtonClicked;
-		n_button.OnClicked += HandleNButtonClicked;
-		ne_button.OnClicked += HandleNEButtonClicked;
-		w_button.OnClicked += HandleWButtonClicked;
-		center_button.OnClicked += HandleCenterButtonClicked;
-		e_button.OnClicked += HandleEButtonClicked;
-		sw_button.OnClicked += HandleSWButtonClicked;
-		s_button.OnClicked += HandleSButtonClicked;
-		se_button.OnClicked += HandleSEButtonClicked;
+		percentageSpinner.GrabFocus ();
 
 		SetAnchor (Anchor.Center);
 
-		width_spinner.SetActivatesDefault (true);
-		height_spinner.SetActivatesDefault (true);
-		percentage_spinner.SetActivatesDefault (true);
+		// --- References to keep
 
-		percentage_spinner.GrabFocus ();
+		percentage_radio = percentageRadio;
+		percentage_spinner = percentageSpinner;
+		width_spinner = widthSpinner;
+		height_spinner = heightSpinner;
+		aspect_checkbox = aspectCheckBox;
+
+		nw_button = nwButton;
+		n_button = nButton;
+		ne_button = neButton;
+		w_button = wButton;
+		e_button = eButton;
+		center_button = centerButton;
+		sw_button = swButton;
+		s_button = sButton;
+		se_button = seButton;
 	}
 
-	#region Public Methods
+	private static Gtk.Button CreateAnchorButton ()
+		=> new () {
+			WidthRequest = 30,
+			HeightRequest = 30,
+		};
+
 	public void SaveChanges ()
 	{
 		Size newSize = new (
@@ -188,9 +221,7 @@ public sealed class ResizeCanvasDialog : Dialog
 
 		PintaCore.Workspace.ResizeCanvas (newSize, anchor, null);
 	}
-	#endregion
 
-	#region Private Methods
 	private void heightSpinner_ValueChanged (object? sender, EventArgs e)
 	{
 		if (value_changing)
@@ -200,7 +231,7 @@ public sealed class ResizeCanvasDialog : Dialog
 			return;
 
 		value_changing = true;
-		width_spinner.Value = (int) ((height_spinner.Value * PintaCore.Workspace.ImageSize.Width) / PintaCore.Workspace.ImageSize.Height);
+		width_spinner.Value = (int) (height_spinner.Value * PintaCore.Workspace.ImageSize.Width / PintaCore.Workspace.ImageSize.Height);
 		value_changing = false;
 	}
 
@@ -213,7 +244,7 @@ public sealed class ResizeCanvasDialog : Dialog
 			return;
 
 		value_changing = true;
-		height_spinner.Value = (int) ((width_spinner.Value * PintaCore.Workspace.ImageSize.Height) / PintaCore.Workspace.ImageSize.Width);
+		height_spinner.Value = (int) (width_spinner.Value * PintaCore.Workspace.ImageSize.Height / PintaCore.Workspace.ImageSize.Width);
 		value_changing = false;
 	}
 
@@ -388,11 +419,5 @@ public sealed class ResizeCanvasDialog : Dialog
 				break;
 		}
 	}
-
-	private static Button CreateAnchorButton ()
-	{
-		return new Button { WidthRequest = 30, HeightRequest = 30 };
-	}
-	#endregion
 }
 
