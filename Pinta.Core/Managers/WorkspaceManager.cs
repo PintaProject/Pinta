@@ -73,6 +73,27 @@ public static class WorkspaceServiceExtensions
 	{
 		return workspace.ActiveWorkspace.CanvasPointToView (canvas_pos);
 	}
+
+	/// <summary>
+	/// Converts a point from the active document's view coordinates to canvas coordinates.
+	/// </summary>
+	/// <param name='canvas_pos'>
+	/// The position of the view point
+	/// </param>
+	public static PointD ViewPointToCanvas (this IWorkspaceService workspace, PointD view_pos)
+	{
+		return workspace.ActiveWorkspace.ViewPointToCanvas (view_pos);
+	}
+
+	public static void ResizeImage (this IWorkspaceService workspace, Size newSize, ResamplingMode resamplingMode)
+	{
+		workspace.ActiveDocument.ResizeImage (newSize, resamplingMode);
+	}
+
+	public static void ResizeCanvas (this IWorkspaceService workspace, Size newSize, Anchor anchor, CompoundHistoryItem? compoundAction)
+	{
+		workspace.ActiveDocument.ResizeCanvas (newSize, anchor, compoundAction);
+	}
 }
 
 public sealed class WorkspaceManager : IWorkspaceService
@@ -207,9 +228,9 @@ public sealed class WorkspaceManager : IWorkspaceService
 	/// </summary>
 	public Document NewDocumentFromImage (Cairo.ImageSurface image)
 	{
-		var doc = NewDocument (new Size (image.Width, image.Height), new Color (0, 0, 0, 0));
+		Document doc = NewDocument (new Size (image.Width, image.Height), new Color (0, 0, 0, 0));
 
-		var g = new Context (doc.Layers[0].Surface);
+		Context g = new (doc.Layers[0].Surface);
 		g.SetSourceSurface (image, 0, 0);
 		g.Paint ();
 
@@ -273,30 +294,9 @@ public sealed class WorkspaceManager : IWorkspaceService
 		return fileOpened;
 	}
 
-	public void ResizeImage (Size newSize, ResamplingMode resamplingMode)
-	{
-		ActiveDocument.ResizeImage (newSize, resamplingMode);
-	}
-
-	public void ResizeCanvas (Size newSize, Anchor anchor, CompoundHistoryItem? compoundAction)
-	{
-		ActiveDocument.ResizeCanvas (newSize, anchor, compoundAction);
-	}
-
 	public RectangleI ClampToImageSize (RectangleI r)
 	{
 		return ActiveDocument.ClampToImageSize (r);
-	}
-
-	/// <summary>
-	/// Converts a point from the active document's view coordinates to canvas coordinates.
-	/// </summary>
-	/// <param name='canvas_pos'>
-	/// The position of the view point
-	/// </param>
-	public PointD ViewPointToCanvas (PointD view_pos)
-	{
-		return ActiveWorkspace.ViewPointToCanvas (view_pos);
 	}
 
 	public bool ImageFitsInWindow => ActiveWorkspace.ImageFitsInWindow;
@@ -384,16 +384,19 @@ public sealed class WorkspaceManager : IWorkspaceService
 
 	private static void ShowUnsupportedFormatDialog (Window parent, string filename, string message, string errors)
 	{
-		var body = new StringBuilder ();
+		StringBuilder body = new ();
+
 		body.AppendLine (Translations.GetString ("Could not open file: {0}", filename));
 		body.AppendLine (Translations.GetString ("Pinta supports the following file formats:"));
 
-		var extensions = from format in PintaCore.ImageFormats.Formats
-				 where format.Importer != null
-				 from extension in format.Extensions
-				 where char.IsLower (extension.FirstOrDefault ())
-				 orderby extension
-				 select extension;
+		var extensions =
+			from format in PintaCore.ImageFormats.Formats
+			where format.Importer != null
+			from extension in format.Extensions
+			where char.IsLower (extension.FirstOrDefault ())
+			orderby extension
+			select extension;
+
 		body.AppendJoin (", ", extensions);
 
 		PintaCore.Chrome.ShowErrorDialog (parent, message, body.ToString (), errors);
@@ -409,11 +412,14 @@ public sealed class WorkspaceManager : IWorkspaceService
 	}
 
 	#region Public Events
-	public event EventHandler? ActiveDocumentChanged;
+
 	public event EventHandler<DocumentEventArgs>? DocumentCreated;
 	public event EventHandler<DocumentEventArgs>? DocumentOpened;
 	public event EventHandler<DocumentEventArgs>? DocumentClosed;
+
+	public event EventHandler? ActiveDocumentChanged;
 	public event EventHandler? SelectionChanged;
+
 	#endregion
 
 }
