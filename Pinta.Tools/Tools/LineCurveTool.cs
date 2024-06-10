@@ -31,8 +31,10 @@ namespace Pinta.Tools;
 
 public sealed class LineCurveTool : ShapeTool
 {
+	private readonly IServiceProvider services;
 	public LineCurveTool (IServiceProvider services) : base (services)
 	{
+		this.services = services;
 		BaseEditEngine.CorrespondingTools[ShapeType] = this;
 	}
 
@@ -41,7 +43,9 @@ public sealed class LineCurveTool : ShapeTool
 	public override Gdk.Cursor DefaultCursor => Gdk.Cursor.NewFromTexture (Resources.GetIcon ("Cursor.Line.png"), 9, 18, null);
 	public override int Priority => 37;
 
-	public override BaseEditEngine.ShapeTypes ShapeType => BaseEditEngine.ShapeTypes.OpenLineCurveSeries;
+	public override BaseEditEngine.ShapeTypes ShapeType
+		=> BaseEditEngine.ShapeTypes.OpenLineCurveSeries;
 
-	protected override BaseEditEngine CreateEditEngine () => new LineCurveEditEngine (this);
+	protected override BaseEditEngine CreateEditEngine ()
+		=> new LineCurveEditEngine (services, this);
 }

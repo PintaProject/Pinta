@@ -31,8 +31,10 @@ namespace Pinta.Tools;
 
 public sealed class RectangleTool : ShapeTool
 {
+	private readonly IServiceProvider services;
 	public RectangleTool (IServiceProvider services) : base (services)
 	{
+		this.services = services;
 		BaseEditEngine.CorrespondingTools[ShapeType] = this;
 	}
 
@@ -45,5 +47,5 @@ public sealed class RectangleTool : ShapeTool
 		=> BaseEditEngine.ShapeTypes.ClosedLineCurveSeries;
 
 	protected override BaseEditEngine CreateEditEngine ()
-		=> new RectangleEditEngine (this);
+		=> new RectangleEditEngine (services, this);
 }
