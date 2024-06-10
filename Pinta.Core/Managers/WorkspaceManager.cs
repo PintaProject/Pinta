@@ -108,7 +108,8 @@ public sealed class WorkspaceManager : IWorkspaceService
 		SelectionHandler = new SelectionModeHandler ();
 	}
 
-	public int ActiveDocumentIndex => active_document_index;
+	public int ActiveDocumentIndex
+		=> active_document_index;
 
 	public Document ActiveDocument {
 		get {
@@ -119,7 +120,8 @@ public sealed class WorkspaceManager : IWorkspaceService
 		}
 	}
 
-	public Document? ActiveDocumentOrDefault => HasOpenDocuments ? open_documents[active_document_index] : null;
+	public Document? ActiveDocumentOrDefault
+		=> HasOpenDocuments ? open_documents[active_document_index] : null;
 
 	public SelectionModeHandler SelectionHandler { get; }
 
@@ -142,7 +144,8 @@ public sealed class WorkspaceManager : IWorkspaceService
 		set => ActiveWorkspace.ViewSize = value;
 	}
 
-	public PointD Offset => ActiveWorkspace.Offset;
+	public PointD Offset
+		=> ActiveWorkspace.Offset;
 
 	public double Scale {
 		get => ActiveWorkspace.Scale;
@@ -158,6 +161,7 @@ public sealed class WorkspaceManager : IWorkspaceService
 		Document doc = new Document (size);
 
 		if (file is not null) {
+
 			if (string.IsNullOrEmpty (file_type))
 				throw new ArgumentNullException ($"nameof{file_type} must contain value.");
 
@@ -167,6 +171,7 @@ public sealed class WorkspaceManager : IWorkspaceService
 			doc.DisplayName = Translations.GetString ("Unsaved Image {0}", new_file_name++);
 
 		open_documents.Add (doc);
+
 		OnDocumentCreated (new DocumentEventArgs (doc));
 
 		SetActiveDocument (doc);
@@ -299,7 +304,8 @@ public sealed class WorkspaceManager : IWorkspaceService
 		return ActiveDocument.ClampToImageSize (r);
 	}
 
-	public bool ImageFitsInWindow => ActiveWorkspace.ImageFitsInWindow;
+	public bool ImageFitsInWindow
+		=> ActiveWorkspace.ImageFitsInWindow;
 
 	internal void ResetTitle ()
 	{
