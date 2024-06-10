@@ -36,6 +36,9 @@ public interface IPaletteService
 	Color PrimaryColor { get; set; }
 	Color SecondaryColor { get; set; }
 	void SetColor (bool setPrimary, Color color, bool addToRecent = true);
+
+	public event EventHandler? PrimaryColorChanged;
+	public event EventHandler? SecondaryColorChanged;
 }
 
 public sealed class PaletteManager : IPaletteService
@@ -198,9 +201,7 @@ public sealed class PaletteManager : IPaletteService
 		SecondaryColorChanged?.Invoke (this, EventArgs.Empty);
 	}
 
-	#region Events
 	public event EventHandler? PrimaryColorChanged;
 	public event EventHandler? SecondaryColorChanged;
 	public event EventHandler? RecentColorsChanged;
-	#endregion
 }

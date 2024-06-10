@@ -24,6 +24,7 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 // THE SOFTWARE.
 
+using System;
 using System.Collections.Generic;
 using Pinta.Core;
 
@@ -31,16 +32,35 @@ namespace Pinta.Tools;
 
 public sealed class LineCurveEditEngine : ArrowedEditEngine
 {
-	protected override string ShapeName => Translations.GetString ("Open Curve Shape");
+	protected override string ShapeName
+		=> Translations.GetString ("Open Curve Shape");
 
-	public LineCurveEditEngine (ShapeTool passedOwner) : base (passedOwner) { }
-
-	protected override ShapeEngine CreateShape (bool ctrlKey, bool clickedOnControlPoint, PointD prevSelPoint)
+	private readonly IWorkspaceService workspace;
+	public LineCurveEditEngine (
+		IServiceProvider services,
+		ShapeTool passedOwner
+	)
+		: base (services, passedOwner)
 	{
-		Document doc = PintaCore.Workspace.ActiveDocument;
+		workspace = services.GetService<IWorkspaceService> ();
+	}
 
-		LineCurveSeriesEngine newEngine = new LineCurveSeriesEngine (doc.Layers.CurrentUserLayer, null, BaseEditEngine.ShapeTypes.OpenLineCurveSeries,
-			owner.UseAntialiasing, false, BaseEditEngine.OutlineColor, BaseEditEngine.FillColor, owner.EditEngine.BrushWidth);
+	protected override ShapeEngine CreateShape (
+		bool ctrlKey,
+		bool clickedOnControlPoint,
+		PointD prevSelPoint)
+	{
+		Document doc = workspace.ActiveDocument;
+
+		LineCurveSeriesEngine newEngine = new (
+			doc.Layers.CurrentUserLayer,
+			null,
+			BaseEditEngine.ShapeTypes.OpenLineCurveSeries,
+			owner.UseAntialiasing,
+			false,
+			BaseEditEngine.OutlineColor,
+			BaseEditEngine.FillColor,
+			owner.EditEngine.BrushWidth);
 
 		AddLinePoints (ctrlKey, clickedOnControlPoint, newEngine, prevSelPoint);
 

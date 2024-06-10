@@ -223,18 +223,36 @@ public abstract class BaseEditEngine
 
 	#endregion ToolbarEventHandlers
 
+	private readonly IToolService tools;
+	private readonly ActionManager actions;
+	private readonly IPaletteService palette;
+	private readonly IWorkspaceService workspace;
 
-	public BaseEditEngine (ShapeTool passedOwner)
+	public BaseEditEngine (
+		IServiceProvider services,
+		ShapeTool passedOwner)
 	{
+		tools = services.GetService<IToolService> ();
+		actions = services.GetService<ActionManager> ();
+		palette = services.GetService<IPaletteService> ();
+		workspace = services.GetService<IWorkspaceService> ();
+
 		owner = passedOwner;
 
 		ResetShapes ();
 	}
 
-	private static string BRUSH_WIDTH_SETTING (string prefix) => $"{prefix}-brush-width";
-	private static string FILL_TYPE_SETTING (string prefix) => $"{prefix}-fill-style";
-	private static string SHAPE_TYPE_SETTING (string prefix) => $"{prefix}-shape-type";
-	private static string DASH_PATTERN_SETTING (string prefix) => $"{prefix}-dash-pattern";
+	private static string BRUSH_WIDTH_SETTING (string prefix)
+		=> $"{prefix}-brush-width";
+
+	private static string FILL_TYPE_SETTING (string prefix)
+		=> $"{prefix}-fill-style";
+
+	private static string SHAPE_TYPE_SETTING (string prefix)
+		=> $"{prefix}-shape-type";
+
+	private static string DASH_PATTERN_SETTING (string prefix)
+		=> $"{prefix}-dash-pattern";
 
 	public virtual void OnSaveSettings (ISettingsService settings, string toolPrefix)
 	{
@@ -337,7 +355,7 @@ public abstract class BaseEditEngine
 				//if shape is selected it will be converted to new shape and shape type will be changed, otherwise only shape type will be changed.
 
 				//Create a new ShapesModifyHistoryItem so that the changing of the shape type can be undone.
-				PintaCore.Workspace.ActiveDocument.History.PushNewItem (new ShapesModifyHistoryItem (
+				workspace.ActiveDocument.History.PushNewItem (new ShapesModifyHistoryItem (
 					this, owner.Icon, Translations.GetString ("Changed Shape Type")));
 
 				//Clone the old shape; it should be automatically garbage-collected. newShapeType already has the updated value.
@@ -380,8 +398,8 @@ public abstract class BaseEditEngine
 	{
 		RecallPreviousSettings ();
 
-		PintaCore.Palette.PrimaryColorChanged += new EventHandler (Palette_PrimaryColorChanged);
-		PintaCore.Palette.SecondaryColorChanged += new EventHandler (Palette_SecondaryColorChanged);
+		palette.PrimaryColorChanged += Palette_PrimaryColorChanged;
+		palette.SecondaryColorChanged += Palette_SecondaryColorChanged;
 	}
 
 	public virtual void HandleDeactivated (BaseTool? newTool)
@@ -392,20 +410,20 @@ public abstract class BaseEditEngine
 		StorePreviousSettings ();
 
 		//Determine if the tool being switched to will be another editable tool.
-		if (PintaCore.Workspace.HasOpenDocuments && !(newTool?.IsEditableShapeTool == true)) {
+		if (workspace.HasOpenDocuments && !(newTool?.IsEditableShapeTool == true)) {
 			//The tool being switched to is not editable. Finalize every editable shape not yet finalized.
 			FinalizeAllShapes ();
 		}
 
-		PintaCore.Palette.PrimaryColorChanged -= Palette_PrimaryColorChanged;
-		PintaCore.Palette.SecondaryColorChanged -= Palette_SecondaryColorChanged;
+		palette.PrimaryColorChanged -= Palette_PrimaryColorChanged;
+		palette.SecondaryColorChanged -= Palette_SecondaryColorChanged;
 	}
 
 	public virtual void HandleAfterSave ()
 	{
 		//When saving, everything will be finalized, which is good; however, afterwards, the user will expect
 		//everything to remain editable. Currently, a finalization history item will always be added.
-		PintaCore.Actions.Edit.Undo.Activate ();
+		actions.Edit.Undo.Activate ();
 
 		//Redraw all of the editable shapes in case saving caused some extra/unexpected behavior.
 		DrawAllShapes ();
@@ -577,7 +595,7 @@ public abstract class BaseEditEngine
 		ShapeEngine selEngine = SelectedShapeEngine!; // NRT - ^^
 
 		//Create a new ShapesModifyHistoryItem so that the adding of a control point can be undone.
-		PintaCore.Workspace.ActiveDocument.History.PushNewItem (
+		workspace.ActiveDocument.History.PushNewItem (
 					    new ShapesModifyHistoryItem (this, owner.Icon, ShapeName + " " + Translations.GetString ("Point Added")));
 
 
@@ -624,7 +642,7 @@ public abstract class BaseEditEngine
 		//Either delete a ControlPoint or an entire shape (if there's only 1 ControlPoint left).
 		if (controlPoints.Count > 1) {
 			//Create a new ShapesModifyHistoryItem so that the deletion of a control point can be undone.
-			PintaCore.Workspace.ActiveDocument.History.PushNewItem (
+			workspace.ActiveDocument.History.PushNewItem (
 				new ShapesModifyHistoryItem (this, owner.Icon, ShapeName + " " + Translations.GetString ("Point Deleted")));
 
 			//Delete the selected point from the shape.
@@ -635,7 +653,7 @@ public abstract class BaseEditEngine
 				--SelectedPointIndex;
 			}
 		} else {
-			Document doc = PintaCore.Workspace.ActiveDocument;
+			Document doc = workspace.ActiveDocument;
 
 			//Create a new ShapesHistoryItem so that the deletion of a shape can be undone.
 			doc.History.PushNewItem (
@@ -698,7 +716,7 @@ public abstract class BaseEditEngine
 		//Redraw the previously (and possibly currently) active shape without any control points in case another shape is made active.
 		DrawActiveShape (false, false, false, false, false);
 
-		Document doc = PintaCore.Workspace.ActiveDocument;
+		Document doc = workspace.ActiveDocument;
 
 		shape_origin = doc.ClampToImageSize (unclamped_point);
 		current_point = shape_origin;
@@ -727,8 +745,8 @@ public abstract class BaseEditEngine
 		bool clicked_control_point = false;
 		bool clicked_generated_point = false;
 		{
-			var current_window_point = PintaCore.Workspace.CanvasPointToView (unclamped_point);
-			var test_handle = new MoveHandle ();
+			var current_window_point = workspace.CanvasPointToView (unclamped_point);
+			MoveHandle test_handle = new ();
 
 			// Check if the user is directly clicking on a control point.
 			if (closestControlPoint != null) {
@@ -753,7 +771,7 @@ public abstract class BaseEditEngine
 			//Determine if the currently active tool matches the clicked on shape's corresponding tool, and if not, switch to it.
 			if (ActivateCorrespondingTool (closestShapeIndex, true) != null) {
 				//Pass on the event and its data to the newly activated tool.
-				PintaCore.Tools.DoMouseDown (document, e);
+				tools.DoMouseDown (document, e);
 
 				//Don't do anything else here once the tool is switched and the event is passed on.
 				return;
@@ -816,7 +834,7 @@ public abstract class BaseEditEngine
 			//whether the currently active tool matches the clicked on shape's corresponding tool, and if not, switch to it.
 			if (ActivateCorrespondingTool (SelectedShapeIndex, true) != null) {
 				//Pass on the event and its data to the newly activated tool.
-				PintaCore.Tools.DoMouseDown (document, e);
+				tools.DoMouseDown (document, e);
 
 				//Don't do anything else here once the tool is switched and the event is passed on.
 				return;
@@ -977,7 +995,7 @@ public abstract class BaseEditEngine
 		//First, determine if the currently active tool matches the shape's corresponding tool, and if not, switch to it.
 		if (oldTool != null) {
 			//The tool has switched, so call DrawActiveShape again but inside that tool.
-			if (PintaCore.Tools.CurrentTool is ShapeTool tool)
+			if (tools.CurrentTool is ShapeTool tool)
 				tool.EditEngine.DrawActiveShape (
 				calculateOrganizedPoints, finalize, drawHoverSelection, shiftKey, preventSwitchBack);
 
@@ -1042,7 +1060,7 @@ public abstract class BaseEditEngine
 	/// <param name="shiftKey"></param>
 	private RectangleD DrawFinalized (ShapeEngine engine, bool createHistoryItem, bool shiftKey)
 	{
-		Document doc = PintaCore.Workspace.ActiveDocument;
+		Document doc = workspace.ActiveDocument;
 
 		//Finalize the shape onto the CurrentUserLayer.
 
@@ -1107,7 +1125,7 @@ public abstract class BaseEditEngine
 
 	private void InvalidateAfterDraw (RectangleD dirty)
 	{
-		Document doc = PintaCore.Workspace.ActiveDocument;
+		Document doc = workspace.ActiveDocument;
 
 		// Increase the size of the dirty rect to account for antialiasing.
 		if (owner.UseAntialiasing)
@@ -1131,7 +1149,7 @@ public abstract class BaseEditEngine
 		if (activeEngine == null)
 			return RectangleD.Zero;
 
-		Document doc = PintaCore.Workspace.ActiveDocument;
+		Document doc = workspace.ActiveDocument;
 
 		var g = new Context (l.Surface);
 		g.AppendPath (doc.Selection.SelectionPath);
@@ -1182,7 +1200,7 @@ public abstract class BaseEditEngine
 		shape.ControlPointHandles.Clear ();
 
 		if (!draw_controls) {
-			PintaCore.Workspace.InvalidateWindowRect (dirty);
+			workspace.InvalidateWindowRect (dirty);
 			return;
 		}
 
@@ -1205,7 +1223,7 @@ public abstract class BaseEditEngine
 
 		dirty = dirty.Union (MoveHandle.UnionInvalidateRects (shape.ControlPointHandles));
 
-		PintaCore.Workspace.InvalidateWindowRect (dirty);
+		workspace.InvalidateWindowRect (dirty);
 	}
 
 	/// <summary>
@@ -1221,7 +1239,7 @@ public abstract class BaseEditEngine
 		hover_handle.Active = hover_handle.Selected = false;
 
 		if (!changing_tension && draw_selection) {
-			var current_window_point = PintaCore.Workspace.CanvasPointToView (current_point);
+			var current_window_point = workspace.CanvasPointToView (current_point);
 			SEngines.FindClosestControlPoint (current_point,
 				out _, out _, out var closestControlPoint, out _);
 
@@ -1249,13 +1267,13 @@ public abstract class BaseEditEngine
 		// Update the tool's cursor if we are hovering over a control point / generated point,
 		// and Ctrl is not pressed (since Ctrl+click starts a new shape).
 		// Otherwise, the normal cursor is shown to indicate that a shape can be drawn.
-		var tool = PintaCore.Tools.CurrentTool!;
+		var tool = tools.CurrentTool!;
 		if (hover_handle.Active && !is_drawing && !ctrl_key)
 			tool.SetCursor (grab_cursor);
 		else
 			tool.SetCursor (tool.DefaultCursor);
 
-		PintaCore.Workspace.InvalidateWindowRect (dirty);
+		workspace.InvalidateWindowRect (dirty);
 	}
 
 	/// <summary>
@@ -1291,7 +1309,7 @@ public abstract class BaseEditEngine
 		if (SEngines.Count == 0)
 			return;
 
-		Document doc = PintaCore.Workspace.ActiveDocument;
+		Document doc = workspace.ActiveDocument;
 
 		ImageSurface undoSurface = doc.Layers.CurrentUserLayer.Surface.Clone ();
 

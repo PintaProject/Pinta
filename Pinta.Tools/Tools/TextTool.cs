@@ -10,8 +10,6 @@
 
 using System;
 using System.Threading.Tasks;
-using Gdk;
-using Gtk;
 using Pinta.Core;
 
 namespace Pinta.Tools;
@@ -40,14 +38,13 @@ public sealed class TextTool : BaseTool
 	private DocumentSelection? selection;
 
 	private readonly Gtk.IMMulticontext im_context;
-	private readonly Pinta.Core.TextLayout layout;
+	private readonly TextLayout layout;
 
 	private static RectangleI CurrentTextBounds {
 		get => PintaCore.Workspace.ActiveDocument.Layers.CurrentUserLayer.TextBounds;
 
 		set {
 			PintaCore.Workspace.ActiveDocument.Layers.CurrentUserLayer.PreviousTextBounds = PintaCore.Workspace.ActiveDocument.Layers.CurrentUserLayer.TextBounds;
-
 			PintaCore.Workspace.ActiveDocument.Layers.CurrentUserLayer.TextBounds = value;
 		}
 	}
@@ -81,19 +78,39 @@ public sealed class TextTool : BaseTool
 	//Whether or not the previous TextTool mouse cursor shown was the normal one.
 	private bool previous_mouse_cursor_normal = true;
 
-	public override string Name => Translations.GetString ("Text");
-	private static string FinalizeName => Translations.GetString ("Text - Finalize");
-	public override string Icon => Pinta.Resources.Icons.ToolText;
-	public override Gdk.Key ShortcutKey => Gdk.Key.T;
-	public override int Priority => 35;
+	public override string Name
+		=> Translations.GetString ("Text");
 
-	public override string StatusBarText => Translations.GetString ("Left click to place cursor, then type desired text. Text color is primary color.");
+	private static string FinalizeName
+		=> Translations.GetString ("Text - Finalize");
 
-	public override Gdk.Cursor DefaultCursor => GdkExtensions.CursorFromName (Pinta.Resources.StandardCursors.Text);
+	public override string Icon
+		=> Pinta.Resources.Icons.ToolText;
+
+	public override Gdk.Key ShortcutKey
+		=> Gdk.Key.T;
+
+	public override int Priority
+		=> 35;
+
+	public override string StatusBarText
+		=> Translations.GetString ("Left click to place cursor, then type desired text. Text color is primary color.");
+
+	public override Gdk.Cursor DefaultCursor
+		=> GdkExtensions.CursorFromName (Pinta.Resources.StandardCursors.Text);
+
+	private readonly IWorkspaceService workspace;
+	private readonly IPaletteService palette;
+	private readonly LayerManager layers;
 
 	#region Constructor
+
 	public TextTool (IServiceProvider services) : base (services)
 	{
+		workspace = services.GetService<IWorkspaceService> ();
+		palette = services.GetService<IPaletteService> ();
+		layers = services.GetService<LayerManager> ();
+
 		im_context = Gtk.IMMulticontext.New ();
 		im_context.OnCommit += OnIMCommit;
 		im_context.OnPreeditStart += OnPreeditStart;
@@ -106,20 +123,20 @@ public sealed class TextTool : BaseTool
 
 	#region ToolBar
 	// NRT - Created by OnBuildToolBar
-	private Label font_label = null!;
-	private FontButton font_button = null!;
-	private ToggleButton bold_btn = null!;
-	private ToggleButton italic_btn = null!;
-	private ToggleButton underscore_btn = null!;
-	private ToggleButton left_alignment_btn = null!;
-	private ToggleButton center_alignment_btn = null!;
-	private ToggleButton right_alignment_btn = null!;
-	private Label fill_label = null!;
+	private Gtk.Label font_label = null!;
+	private Gtk.FontButton font_button = null!;
+	private Gtk.ToggleButton bold_btn = null!;
+	private Gtk.ToggleButton italic_btn = null!;
+	private Gtk.ToggleButton underscore_btn = null!;
+	private Gtk.ToggleButton left_alignment_btn = null!;
+	private Gtk.ToggleButton center_alignment_btn = null!;
+	private Gtk.ToggleButton right_alignment_btn = null!;
+	private Gtk.Label fill_label = null!;
 	private ToolBarDropDownButton fill_button = null!;
-	private Separator fill_sep = null!;
-	private Separator outline_sep = null!;
-	private SpinButton outline_width = null!;
-	private Label outline_width_label = null!;
+	private Gtk.Separator fill_sep = null!;
+	private Gtk.Separator outline_sep = null!;
+	private Gtk.SpinButton outline_width = null!;
+	private Gtk.Label outline_width_label = null!;
 
 	private const string FONT_SETTING = "text-font";
 	private const string BOLD_SETTING = "text-bold";
@@ -134,18 +151,18 @@ public sealed class TextTool : BaseTool
 		base.OnBuildToolBar (tb);
 
 		if (font_label == null) {
-			var fontText = Translations.GetString ("Font");
-			font_label = Label.New ($" {fontText}: ");
+			string fontText = Translations.GetString ("Font");
+			font_label = Gtk.Label.New ($" {fontText}: ");
 		}
 
 		tb.Append (font_label);
 
 		if (font_button == null) {
-			font_button = new FontButton {
+			font_button = new Gtk.FontButton {
 				UseSize = false,
 				UseFont = true,
-				CanFocus = false,                               // Default to Arial if possible.
-				Font = Settings.GetSetting (FONT_SETTING, "Arial 12")
+				CanFocus = false, // Default to Arial if possible.
+				Font = Settings.GetSetting (FONT_SETTING, "Arial 12"),
 			};
 
 			font_button.OnFontSet += HandleFontChanged;
@@ -156,11 +173,11 @@ public sealed class TextTool : BaseTool
 		tb.Append (GtkExtensions.CreateToolBarSeparator ());
 
 		if (bold_btn == null) {
-			bold_btn = new ToggleButton {
+			bold_btn = new Gtk.ToggleButton {
 				IconName = Pinta.Resources.StandardIcons.FormatTextBold,
 				TooltipText = Translations.GetString ("Bold"),
 				CanFocus = false,
-				Active = Settings.GetSetting (BOLD_SETTING, false)
+				Active = Settings.GetSetting (BOLD_SETTING, false),
 			};
 			bold_btn.OnToggled += HandleBoldButtonToggled;
 		}
@@ -168,11 +185,11 @@ public sealed class TextTool : BaseTool
 		tb.Append (bold_btn);
 
 		if (italic_btn == null) {
-			italic_btn = new ToggleButton {
+			italic_btn = new Gtk.ToggleButton {
 				IconName = Pinta.Resources.StandardIcons.FormatTextItalic,
 				TooltipText = Translations.GetString ("Italic"),
 				CanFocus = false,
-				Active = Settings.GetSetting (ITALIC_SETTING, false)
+				Active = Settings.GetSetting (ITALIC_SETTING, false),
 			};
 			italic_btn.OnToggled += HandleItalicButtonToggled;
 		}
@@ -180,11 +197,11 @@ public sealed class TextTool : BaseTool
 		tb.Append (italic_btn);
 
 		if (underscore_btn == null) {
-			underscore_btn = new ToggleButton {
+			underscore_btn = new Gtk.ToggleButton {
 				IconName = Pinta.Resources.StandardIcons.FormatTextUnderline,
 				TooltipText = Translations.GetString ("Underline"),
 				CanFocus = false,
-				Active = Settings.GetSetting (UNDERLINE_SETTING, false)
+				Active = Settings.GetSetting (UNDERLINE_SETTING, false),
 			};
 			underscore_btn.OnToggled += HandleUnderscoreButtonToggled;
 		}
@@ -196,11 +213,11 @@ public sealed class TextTool : BaseTool
 		var alignment = (TextAlignment) Settings.GetSetting (ALIGNMENT_SETTING, (int) TextAlignment.Left);
 
 		if (left_alignment_btn == null) {
-			left_alignment_btn = new ToggleButton {
+			left_alignment_btn = new Gtk.ToggleButton {
 				IconName = Pinta.Resources.StandardIcons.FormatJustifyLeft,
 				TooltipText = Translations.GetString ("Left Align"),
 				CanFocus = false,
-				Active = alignment == TextAlignment.Left
+				Active = alignment == TextAlignment.Left,
 			};
 			left_alignment_btn.OnToggled += HandleLeftAlignmentButtonToggled;
 		}
@@ -208,11 +225,11 @@ public sealed class TextTool : BaseTool
 		tb.Append (left_alignment_btn);
 
 		if (center_alignment_btn == null) {
-			center_alignment_btn = new ToggleButton {
+			center_alignment_btn = new Gtk.ToggleButton {
 				IconName = Pinta.Resources.StandardIcons.FormatJustifyCenter,
 				TooltipText = Translations.GetString ("Center Align"),
 				CanFocus = false,
-				Active = alignment == TextAlignment.Center
+				Active = alignment == TextAlignment.Center,
 			};
 			center_alignment_btn.OnToggled += HandleCenterAlignmentButtonToggled;
 		}
@@ -220,11 +237,11 @@ public sealed class TextTool : BaseTool
 		tb.Append (center_alignment_btn);
 
 		if (right_alignment_btn == null) {
-			right_alignment_btn = new ToggleButton {
+			right_alignment_btn = new Gtk.ToggleButton {
 				IconName = Pinta.Resources.StandardIcons.FormatJustifyRight,
 				TooltipText = Translations.GetString ("Right Align"),
 				CanFocus = false,
-				Active = alignment == TextAlignment.Right
+				Active = alignment == TextAlignment.Right,
 			};
 			right_alignment_btn.OnToggled += HandleRightAlignmentButtonToggled;
 		}
@@ -236,8 +253,8 @@ public sealed class TextTool : BaseTool
 		tb.Append (fill_sep);
 
 		if (fill_label == null) {
-			var textStyleText = Translations.GetString ("Text Style");
-			fill_label = Label.New ($" {textStyleText}: ");
+			string textStyleText = Translations.GetString ("Text Style");
+			fill_label = Gtk.Label.New ($" {textStyleText}: ");
 		}
 
 		tb.Append (fill_label);
@@ -261,8 +278,8 @@ public sealed class TextTool : BaseTool
 		tb.Append (outline_sep);
 
 		if (outline_width_label == null) {
-			var outlineWidthText = Translations.GetString ("Outline width");
-			outline_width_label = Label.New ($" {outlineWidthText}: ");
+			string outlineWidthText = Translations.GetString ("Outline width");
+			outline_width_label = Gtk.Label.New ($" {outlineWidthText}: ");
 		}
 
 		tb.Append (outline_width_label);
@@ -278,12 +295,12 @@ public sealed class TextTool : BaseTool
 
 		UpdateFont ();
 
-		if (PintaCore.Workspace.HasOpenDocuments) {
+		if (workspace.HasOpenDocuments) {
 			//Make sure the event handler is never added twice.
-			PintaCore.Workspace.ActiveDocument.LayerCloned -= FinalizeText;
+			workspace.ActiveDocument.LayerCloned -= FinalizeText;
 
 			//When an ImageSurface is Cloned, finalize the re-editable text (if applicable).
-			PintaCore.Workspace.ActiveDocument.LayerCloned += FinalizeText;
+			workspace.ActiveDocument.LayerCloned += FinalizeText;
 		}
 	}
 
@@ -293,24 +310,30 @@ public sealed class TextTool : BaseTool
 
 		if (font_button is not null)
 			settings.PutSetting (FONT_SETTING, font_button.Font!);
+
 		if (bold_btn is not null)
 			settings.PutSetting (BOLD_SETTING, bold_btn.Active);
+
 		if (italic_btn is not null)
 			settings.PutSetting (ITALIC_SETTING, italic_btn.Active);
+
 		if (underscore_btn is not null)
 			settings.PutSetting (UNDERLINE_SETTING, underscore_btn.Active);
+
 		if (left_alignment_btn is not null)
 			settings.PutSetting (ALIGNMENT_SETTING, (int) Alignment);
+
 		if (fill_button is not null)
 			settings.PutSetting (STYLE_SETTING, fill_button.SelectedIndex);
+
 		if (outline_width is not null)
 			settings.PutSetting (OUTLINE_WIDTH_SETTING, outline_width.GetValueAsInt ());
 	}
 
 	private void HandleFontChanged (object? sender, EventArgs e)
 	{
-		if (PintaCore.Workspace.HasOpenDocuments)
-			PintaCore.Workspace.ActiveDocument.Workspace.Canvas.GrabFocus ();
+		if (workspace.HasOpenDocuments)
+			workspace.ActiveDocument.Workspace.Canvas.GrabFocus ();
 
 		UpdateFont ();
 	}
@@ -392,7 +415,8 @@ public sealed class TextTool : BaseTool
 
 	private void UpdateFont ()
 	{
-		if (PintaCore.Workspace.HasOpenDocuments) {
+		if (workspace.HasOpenDocuments) {
+
 			var font = font_button.GetFontDesc ()!.Copy ()!; // NRT: Only nullable when nullptr is passed.
 			font.SetWeight (bold_btn.Active ? Pango.Weight.Bold : Pango.Weight.Normal);
 			font.SetStyle (italic_btn.Active ? Pango.Style.Italic : Pango.Style.Normal);
@@ -404,11 +428,18 @@ public sealed class TextTool : BaseTool
 			RedrawText (true, true);
 	}
 
-	private int OutlineWidth => outline_width.GetValueAsInt ();
+	private int OutlineWidth
+		=> outline_width.GetValueAsInt ();
 
-	private bool StrokeText => (fill_button.SelectedItem.GetTagOrDefault (0) >= 1 && fill_button.SelectedItem.GetTagOrDefault (0) != 3);
-	private bool FillText => fill_button.SelectedItem.GetTagOrDefault (0) <= 1 || fill_button.SelectedItem.GetTagOrDefault (0) == 3;
-	private bool BackgroundFill => fill_button.SelectedItem.GetTagOrDefault (0) == 3;
+	private bool StrokeText
+		=> fill_button.SelectedItem.GetTagOrDefault (0) >= 1 && fill_button.SelectedItem.GetTagOrDefault (0) != 3;
+
+	private bool FillText
+		=> fill_button.SelectedItem.GetTagOrDefault (0) <= 1 || fill_button.SelectedItem.GetTagOrDefault (0) == 3;
+
+	private bool BackgroundFill
+		=> fill_button.SelectedItem.GetTagOrDefault (0) == 3;
+
 	#endregion
 
 	#region Activation/Deactivation
@@ -417,12 +448,12 @@ public sealed class TextTool : BaseTool
 		base.OnActivated (document);
 
 		// We may need to redraw our text when the color changes
-		PintaCore.Palette.PrimaryColorChanged += HandlePintaCorePalettePrimaryColorChanged;
-		PintaCore.Palette.SecondaryColorChanged += HandlePintaCorePalettePrimaryColorChanged;
+		palette.PrimaryColorChanged += HandlePintaCorePalettePrimaryColorChanged;
+		palette.SecondaryColorChanged += HandlePintaCorePalettePrimaryColorChanged;
 
-		PintaCore.Layers.LayerAdded += HandleSelectedLayerChanged;
-		PintaCore.Layers.LayerRemoved += HandleSelectedLayerChanged;
-		PintaCore.Layers.SelectedLayerChanged += HandleSelectedLayerChanged;
+		layers.LayerAdded += HandleSelectedLayerChanged;
+		layers.LayerRemoved += HandleSelectedLayerChanged;
+		layers.SelectedLayerChanged += HandleSelectedLayerChanged;
 
 		// We always start off not in edit mode
 		is_editing = false;
@@ -439,12 +470,12 @@ public sealed class TextTool : BaseTool
 		base.OnDeactivated (document, newTool);
 
 		// Stop listening for color change events
-		PintaCore.Palette.PrimaryColorChanged -= HandlePintaCorePalettePrimaryColorChanged;
-		PintaCore.Palette.SecondaryColorChanged -= HandlePintaCorePalettePrimaryColorChanged;
+		palette.PrimaryColorChanged -= HandlePintaCorePalettePrimaryColorChanged;
+		palette.SecondaryColorChanged -= HandlePintaCorePalettePrimaryColorChanged;
 
-		PintaCore.Layers.LayerAdded -= HandleSelectedLayerChanged;
-		PintaCore.Layers.LayerRemoved -= HandleSelectedLayerChanged;
-		PintaCore.Layers.SelectedLayerChanged -= HandleSelectedLayerChanged;
+		layers.LayerAdded -= HandleSelectedLayerChanged;
+		layers.LayerRemoved -= HandleSelectedLayerChanged;
+		layers.SelectedLayerChanged -= HandleSelectedLayerChanged;
 
 		StopEditing (false);
 	}
@@ -569,7 +600,9 @@ public sealed class TextTool : BaseTool
 
 		// If we're dragging the text around, do that
 		if (tracking) {
-			PointD delta = new PointD (e.PointDouble.X - start_mouse_xy.X, e.PointDouble.Y - start_mouse_xy.Y);
+			PointD delta = new (
+				e.PointDouble.X - start_mouse_xy.X,
+				e.PointDouble.Y - start_mouse_xy.Y);
 
 			click_point = new PointI ((int) (start_click_point.X + delta.X), (int) (start_click_point.Y + delta.Y));
 			CurrentTextEngine.Origin = click_point;
@@ -601,7 +634,7 @@ public sealed class TextTool : BaseTool
 		//Whether or not to show the normal text cursor.
 		bool showNormalCursor = false;
 
-		if (ctrl_key && PintaCore.Workspace.HasOpenDocuments) {
+		if (ctrl_key && workspace.HasOpenDocuments) {
 			//Go through every UserLayer.
 			foreach (UserLayer ul in document.Layers.UserLayers) {
 				//Check each UserLayer's editable text boundaries to see if they contain the mouse position.
@@ -621,7 +654,7 @@ public sealed class TextTool : BaseTool
 
 				previous_mouse_cursor_normal = showNormalCursor;
 
-				if (PintaCore.Workspace.HasOpenDocuments)
+				if (workspace.HasOpenDocuments)
 					RedrawText (is_editing, true);
 			}
 		} else {
@@ -637,9 +670,10 @@ public sealed class TextTool : BaseTool
 	#endregion
 
 	#region Keyboard Handlers
+
 	protected override bool OnKeyDown (Document document, ToolKeyEventArgs e)
 	{
-		if (!PintaCore.Workspace.HasOpenDocuments)
+		if (!workspace.HasOpenDocuments)
 			return false;
 
 		// If we are dragging the text, we
@@ -724,8 +758,8 @@ public sealed class TextTool : BaseTool
 								//Ctrl + Z for undo while editing.
 								OnHandleUndo (document);
 
-								if (PintaCore.Workspace.ActiveDocument.History.CanUndo)
-									PintaCore.Workspace.ActiveDocument.History.Undo ();
+								if (workspace.ActiveDocument.History.CanUndo)
+									workspace.ActiveDocument.History.Undo ();
 
 								return true;
 							} else if (e.Key == Gdk.Key.i) {
@@ -771,7 +805,7 @@ public sealed class TextTool : BaseTool
 		return false;
 	}
 
-	private bool TryHandleChar (Event eventKey)
+	private bool TryHandleChar (Gdk.Event eventKey)
 	{
 		// Try to handle it as a character
 		if (im_context.FilterKeypress (eventKey))
@@ -827,23 +861,25 @@ public sealed class TextTool : BaseTool
 
 		RedrawText (true, true);
 	}
+
 	#endregion
 
 	#region Start/Stop Editing
+
 	private void StartEditing ()
 	{
 		is_editing = true;
 
-		im_context.SetClientWidget (PintaCore.Workspace.ActiveWorkspace.Canvas);
+		im_context.SetClientWidget (workspace.ActiveWorkspace.Canvas);
 
-		selection ??= PintaCore.Workspace.ActiveDocument.Selection.Clone ();
+		selection ??= workspace.ActiveDocument.Selection.Clone ();
 
 		//Start ignoring any Surface.Clone calls from this point on (so that it doesn't start to loop).
 		ignore_clone_finalizations = true;
 
 		//Store the previous state of the current UserLayer's and TextLayer's ImageSurfaces.
-		user_undo_surface = PintaCore.Workspace.ActiveDocument.Layers.CurrentUserLayer.Surface.Clone ();
-		text_undo_surface = PintaCore.Workspace.ActiveDocument.Layers.CurrentUserLayer.TextLayer.Layer.Surface.Clone ();
+		user_undo_surface = workspace.ActiveDocument.Layers.CurrentUserLayer.Surface.Clone ();
+		text_undo_surface = workspace.ActiveDocument.Layers.CurrentUserLayer.TextLayer.Layer.Surface.Clone ();
 
 		//Store the previous state of the Text Engine.
 		undo_engine = CurrentTextEngine.Clone ();
@@ -856,7 +892,7 @@ public sealed class TextTool : BaseTool
 	{
 		im_context.SetClientWidget (null);
 
-		if (!PintaCore.Workspace.HasOpenDocuments)
+		if (!workspace.HasOpenDocuments)
 			return;
 
 		if (!is_editing)
@@ -866,7 +902,7 @@ public sealed class TextTool : BaseTool
 
 		//Make sure that neither undo surface is null, the user is editing, and there are uncommitted changes.
 		if (text_undo_surface != null && user_undo_surface != null && CurrentTextEngine.State == TextMode.Uncommitted) {
-			Document doc = PintaCore.Workspace.ActiveDocument;
+			Document doc = workspace.ActiveDocument;
 
 			RedrawText (false, true);
 
@@ -874,9 +910,16 @@ public sealed class TextTool : BaseTool
 			ignore_clone_finalizations = true;
 
 			//Create a new TextHistoryItem so that the committing of text can be undone.
-			doc.History.PushNewItem (new TextHistoryItem (Icon, Name,
-						text_undo_surface.Clone (), user_undo_surface.Clone (),
-						undo_engine!.Clone (), doc.Layers.CurrentUserLayer)); // NRT - Set in StartEditing
+			doc.History.PushNewItem (
+				new TextHistoryItem (
+					Icon,
+					Name,
+					text_undo_surface.Clone (),
+					user_undo_surface.Clone (),
+					undo_engine!.Clone (), // NRT - Set in StartEditing
+					doc.Layers.CurrentUserLayer
+				)
+			);
 
 			//Stop ignoring any Surface.Clone calls from this point on.
 			ignore_clone_finalizations = false;
@@ -897,13 +940,13 @@ public sealed class TextTool : BaseTool
 	/// <summary>
 	/// Clears the entire TextLayer and redraw the previous text boundary.
 	/// </summary>
-	private static void ClearTextLayer ()
+	private void ClearTextLayer ()
 	{
 		//Clear the TextLayer.
-		PintaCore.Workspace.ActiveDocument.Layers.CurrentUserLayer.TextLayer.Layer.Surface.Clear ();
+		workspace.ActiveDocument.Layers.CurrentUserLayer.TextLayer.Layer.Surface.Clear ();
 
 		//Redraw the previous text boundary.
-		InflateAndInvalidate (PintaCore.Workspace.ActiveDocument.Layers.CurrentUserLayer.PreviousTextBounds);
+		InflateAndInvalidate (workspace.ActiveDocument.Layers.CurrentUserLayer.PreviousTextBounds);
 	}
 
 	/// <summary>
@@ -924,15 +967,15 @@ public sealed class TextTool : BaseTool
 
 		if (!useTextLayer) {
 			//Draw text on the current UserLayer's surface as finalized text.
-			surf = PintaCore.Workspace.ActiveDocument.Layers.CurrentUserLayer.Surface;
+			surf = workspace.ActiveDocument.Layers.CurrentUserLayer.Surface;
 		} else {
 			//Draw text on the current UserLayer's TextLayer's surface as re-editable text.
-			surf = PintaCore.Workspace.ActiveDocument.Layers.CurrentUserLayer.TextLayer.Layer.Surface;
+			surf = workspace.ActiveDocument.Layers.CurrentUserLayer.TextLayer.Layer.Surface;
 
 			ClearTextLayer ();
 		}
 
-		var g = new Cairo.Context (surf);
+		Cairo.Context g = new (surf);
 		g.Save ();
 
 		// Show selection if on text layer
@@ -947,14 +990,14 @@ public sealed class TextTool : BaseTool
 
 		g.MoveTo (CurrentTextEngine.Origin.X, CurrentTextEngine.Origin.Y);
 
-		g.SetSourceColor (PintaCore.Palette.PrimaryColor);
+		g.SetSourceColor (palette.PrimaryColor);
 
 		//Fill in background
 		if (BackgroundFill) {
-			var g2 = new Cairo.Context (surf);
+			Cairo.Context g2 = new (surf);
 			selection?.Clip (g2);
 
-			g2.FillRectangle (CurrentTextLayout.GetLayoutBounds ().ToDouble (), PintaCore.Palette.SecondaryColor);
+			g2.FillRectangle (CurrentTextLayout.GetLayoutBounds ().ToDouble (), palette.SecondaryColor);
 		}
 
 		// Draw the text
@@ -962,13 +1005,13 @@ public sealed class TextTool : BaseTool
 			PangoCairo.Functions.ShowLayout (g, CurrentTextLayout.Layout);
 
 		if (FillText && StrokeText) {
-			g.SetSourceColor (PintaCore.Palette.SecondaryColor);
+			g.SetSourceColor (palette.SecondaryColor);
 			g.LineWidth = OutlineWidth;
 
 			PangoCairo.Functions.LayoutPath (g, CurrentTextLayout.Layout);
 			g.Stroke ();
 		} else if (StrokeText) {
-			g.SetSourceColor (PintaCore.Palette.PrimaryColor);
+			g.SetSourceColor (palette.PrimaryColor);
 			g.LineWidth = OutlineWidth;
 
 			PangoCairo.Functions.LayoutPath (g, CurrentTextLayout.Layout);
@@ -976,13 +1019,15 @@ public sealed class TextTool : BaseTool
 		}
 
 		if (showCursor) {
+
 			var loc = CurrentTextLayout.GetCursorLocation ();
-			var color = PintaCore.Palette.PrimaryColor;
+			var color = palette.PrimaryColor;
 
 			g.Antialias = Cairo.Antialias.None;
-			g.DrawLine (new PointD (loc.X, loc.Y),
-					new PointD (loc.X, loc.Y + loc.Height),
-					color, 1);
+			g.DrawLine (
+				new PointD (loc.X, loc.Y),
+				new PointD (loc.X, loc.Y + loc.Height),
+				color, 1);
 
 			cursorBounds = loc;
 			cursorBounds = cursorBounds.Inflated (2, 10);
@@ -1013,10 +1058,10 @@ public sealed class TextTool : BaseTool
 			g.Restore ();
 		}
 
-		InflateAndInvalidate (PintaCore.Workspace.ActiveDocument.Layers.CurrentUserLayer.PreviousTextBounds);
-		PintaCore.Workspace.Invalidate (old_cursor_bounds);
+		InflateAndInvalidate (workspace.ActiveDocument.Layers.CurrentUserLayer.PreviousTextBounds);
+		workspace.Invalidate (old_cursor_bounds);
 		InflateAndInvalidate (r);
-		PintaCore.Workspace.Invalidate (cursorBounds);
+		workspace.Invalidate (cursorBounds);
 
 		old_cursor_bounds = cursorBounds;
 	}
@@ -1036,7 +1081,7 @@ public sealed class TextTool : BaseTool
 
 		//Start ignoring any Surface.Clone calls from this point on (so that it doesn't start to loop).
 		ignore_clone_finalizations = true;
-		Document doc = PintaCore.Workspace.ActiveDocument;
+		Document doc = workspace.ActiveDocument;
 
 		//Create a backup of everything before redrawing the text and etc.
 		Cairo.ImageSurface oldTextSurface = doc.Layers.CurrentUserLayer.TextLayer.Layer.Surface.Clone ();
@@ -1055,8 +1100,13 @@ public sealed class TextTool : BaseTool
 
 		//Create a new TextHistoryItem so that the finalization of the text can be undone. Construct
 		//it on the spot so that it is more memory efficient if the changes are small.
-		TextHistoryItem hist = new TextHistoryItem (Icon, FinalizeName, oldTextSurface, oldUserSurface,
-				oldTextEngine, doc.Layers.CurrentUserLayer);
+		TextHistoryItem hist = new (
+			Icon,
+			FinalizeName,
+			oldTextSurface,
+			oldUserSurface,
+			oldTextEngine,
+			doc.Layers.CurrentUserLayer);
 
 		//Add the new TextHistoryItem.
 		doc.History.PushNewItem (hist);
@@ -1070,15 +1120,20 @@ public sealed class TextTool : BaseTool
 		selection = null;
 	}
 
-	private static void InflateAndInvalidate (in RectangleI passedRectangle)
+	private void InflateAndInvalidate (in RectangleI passedRectangle)
 	{
 		//Create a new instance to preserve the passed Rectangle.
-		var r = new RectangleI (passedRectangle.Location, passedRectangle.Size);
+		RectangleI r = new (
+			passedRectangle.Location,
+			passedRectangle.Size);
 
 		r = r.Inflated (2, 2);
-		PintaCore.Workspace.Invalidate (r);
+
+		workspace.Invalidate (r);
 	}
+
 	#endregion
+
 	#region Undo/Redo
 
 	protected override bool OnHandleUndo (Document document)
@@ -1105,9 +1160,10 @@ public sealed class TextTool : BaseTool
 	}
 
 	#endregion
+
 	#region Copy/Paste
 
-	protected override async Task<bool> OnHandlePaste (Document document, Clipboard cb)
+	protected override async Task<bool> OnHandlePaste (Document document, Gdk.Clipboard cb)
 	{
 		if (!is_editing)
 			return false;
@@ -1120,7 +1176,7 @@ public sealed class TextTool : BaseTool
 		return false;
 	}
 
-	protected override bool OnHandleCopy (Document document, Clipboard cb)
+	protected override bool OnHandleCopy (Document document, Gdk.Clipboard cb)
 	{
 		if (!is_editing)
 			return false;
@@ -1129,7 +1185,7 @@ public sealed class TextTool : BaseTool
 		return true;
 	}
 
-	protected override bool OnHandleCut (Document document, Clipboard cb)
+	protected override bool OnHandleCut (Document document, Gdk.Clipboard cb)
 	{
 		if (!is_editing)
 			return false;
@@ -1139,5 +1195,5 @@ public sealed class TextTool : BaseTool
 		return true;
 	}
 
-	#endregion#endregion
+	#endregion
 }

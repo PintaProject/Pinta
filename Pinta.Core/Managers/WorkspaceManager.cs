@@ -45,6 +45,36 @@ public interface IWorkspaceService
 	SelectionModeHandler SelectionHandler { get; }
 }
 
+public static class WorkspaceServiceExtensions
+{
+	public static void Invalidate (this IWorkspaceService workspace)
+	{
+		if (workspace.HasOpenDocuments)
+			workspace.ActiveWorkspace.Invalidate ();
+	}
+
+	public static void Invalidate (this IWorkspaceService workspace, RectangleI rect)
+	{
+		workspace.ActiveWorkspace.Invalidate (rect);
+	}
+
+	public static void InvalidateWindowRect (this IWorkspaceService workspace, RectangleI windowRect)
+	{
+		workspace.ActiveWorkspace.InvalidateWindowRect (windowRect);
+	}
+
+	/// <summary>
+	/// Converts a point from the active document's canvas coordinates to view coordinates.
+	/// </summary>
+	/// <param name='canvas_pos'>
+	/// The position of the canvas point
+	/// </param>
+	public static PointD CanvasPointToView (this IWorkspaceService workspace, PointD canvas_pos)
+	{
+		return workspace.ActiveWorkspace.CanvasPointToView (canvas_pos);
+	}
+}
+
 public sealed class WorkspaceManager : IWorkspaceService
 {
 	private int active_document_index = -1;
@@ -151,22 +181,6 @@ public sealed class WorkspaceManager : IWorkspaceService
 		OnDocumentClosed (new DocumentEventArgs (document));
 	}
 
-	public void Invalidate ()
-	{
-		if (HasOpenDocuments)
-			ActiveWorkspace.Invalidate ();
-	}
-
-	public void Invalidate (RectangleI rect)
-	{
-		ActiveWorkspace.Invalidate (rect);
-	}
-
-	public void InvalidateWindowRect (RectangleI windowRect)
-	{
-		ActiveWorkspace.InvalidateWindowRect (windowRect);
-	}
-
 	public Document NewDocument (Size imageSize, Color backgroundColor)
 	{
 		Document doc = CreateAndActivateDocument (null, null, imageSize);
@@ -269,6 +283,11 @@ public sealed class WorkspaceManager : IWorkspaceService
 		ActiveDocument.ResizeCanvas (newSize, anchor, compoundAction);
 	}
 
+	public RectangleI ClampToImageSize (RectangleI r)
+	{
+		return ActiveDocument.ClampToImageSize (r);
+	}
+
 	/// <summary>
 	/// Converts a point from the active document's view coordinates to canvas coordinates.
 	/// </summary>
@@ -278,22 +297,6 @@ public sealed class WorkspaceManager : IWorkspaceService
 	public PointD ViewPointToCanvas (PointD view_pos)
 	{
 		return ActiveWorkspace.ViewPointToCanvas (view_pos);
-	}
-
-	/// <summary>
-	/// Converts a point from the active document's canvas coordinates to view coordinates.
-	/// </summary>
-	/// <param name='canvas_pos'>
-	/// The position of the canvas point
-	/// </param>
-	public PointD CanvasPointToView (PointD canvas_pos)
-	{
-		return ActiveWorkspace.CanvasPointToView (canvas_pos);
-	}
-
-	public RectangleI ClampToImageSize (RectangleI r)
-	{
-		return ActiveDocument.ClampToImageSize (r);
 	}
 
 	public bool ImageFitsInWindow => ActiveWorkspace.ImageFitsInWindow;
