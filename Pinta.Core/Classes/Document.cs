@@ -214,7 +214,7 @@ public sealed class Document
 
 		Context g = new (Layers.CurrentUserLayer.Surface);
 		selection.Clip (g);
-		layer.Draw (g);
+		layer.DrawWithOperator (g, Operator.Source, opacity: 1.0, transform: true);
 
 		Layers.DestroySelectionLayer ();
 		Workspace.Invalidate ();
