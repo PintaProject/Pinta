@@ -53,8 +53,7 @@ public sealed class ProgressDialog : Dialog, IProgressDialog
 		progress_bar = new ProgressBar ();
 		content_area.Append (progress_bar);
 
-		// TODO-GTK4 - can this use the translations from GTK?
-		AddButton ("_Cancel", (int) ResponseType.Cancel);
+		AddButton (Translations.GetString ("_Cancel"), (int) ResponseType.Cancel);
 
 		DefaultWidth = 400;
 		DefaultHeight = 114;
