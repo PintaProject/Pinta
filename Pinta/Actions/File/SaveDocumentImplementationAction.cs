@@ -70,12 +70,12 @@ internal sealed class SaveDocumentImplmentationAction : IActionHandler
 			Translations.GetString ("Save"),
 			Translations.GetString ("Cancel"));
 
-		if (PintaCore.RecentFiles.GetDialogDirectory () is Gio.File dir && dir.QueryExists (null))
-			fcd.SetCurrentFolder (dir);
-
 		if (document.HasFile)
 			fcd.SetFile (document.File!);
 		else {
+			if (PintaCore.RecentFiles.GetDialogDirectory () is Gio.File dir && dir.QueryExists (null))
+				fcd.SetCurrentFolder (dir);
+
 			// Append the default extension, producing e.g. "Unsaved Image 1.png"
 			var default_ext = PintaCore.ImageFormats.GetDefaultSaveFormat ().Extensions.First ();
 			fcd.SetCurrentName ($"{document.DisplayName}.{default_ext}");
