@@ -320,7 +320,7 @@ public sealed class CurvesDialog : Gtk.Dialog
 		if (x < 0 || x >= Size || y < 0 || y >= Size)
 			return;
 
-		if (controller.GetCurrentEventState () != Gdk.ModifierType.Button1Mask) {
+		if (!controller.GetCurrentEventState ().IsLeftMousePressed ()) {
 			InvalidateDrawing ();
 			return;
 		}

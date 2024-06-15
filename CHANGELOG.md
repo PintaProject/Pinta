@@ -53,6 +53,7 @@ Thanks to the following contributors who worked on this release:
 - Fixed a potential crash on some platforms when entering characters in the text tool using an input method (#722)
 - The angle picker widget now supports fractional angles (#807)
 - Fixed issues with restoring saved settings in the Eraser tool (#839)
+- Fixed dragging issues in the Curves adjustment dialog with modifiers such as Num Lock active (#871)
 
 ## [2.1.2](https://github.com/PintaProject/Pinta/releases/tag/2.1.2) - 2024/04/20
 
