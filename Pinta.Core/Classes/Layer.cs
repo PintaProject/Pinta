@@ -146,6 +146,11 @@ public class Layer : ObservableObject
 		ctx.Restore ();
 	}
 
+	public void DrawWithOperator (Context ctx, Operator op, double opacity = 1.0, bool transform = true)
+	{
+		DrawWithOperator (ctx, Surface, op, opacity, transform);
+	}
+
 	public void DrawWithOperator (
 		Context ctx,
 		ImageSurface surface,
