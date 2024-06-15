@@ -77,7 +77,7 @@ public sealed class HelpActions
 
 	private void Bugs_Activated (object sender, EventArgs e)
 	{
-		GtkExtensions.LaunchUri ("https://bugs.launchpad.net/pinta");
+		GtkExtensions.LaunchUri ("https://github.com/PintaProject/Pinta/issues");
 	}
 
 	private void DisplayHelp (object sender, EventArgs e)
