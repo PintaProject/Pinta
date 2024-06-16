@@ -139,7 +139,7 @@ public sealed class LayersListView : ScrolledWindow
 			model.Insert (i, new LayersListViewItem (active_document, active_document.Layers[layer_idx]));
 		}
 
-  		// Restore the selection.
+		// Restore the selection.
 		selection_model.Selected = selected_idx;
 	}
 
