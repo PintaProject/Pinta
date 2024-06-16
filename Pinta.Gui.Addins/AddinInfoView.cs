@@ -229,7 +229,7 @@ internal sealed class AddinInfoView : Adw.Bin
 
 	private void HandleInfoButtonClicked ()
 	{
-		Gtk.Functions.ShowUri (null, current_item!.Url, /* GDK_CURRENT_TIME */ 0);
+		GtkExtensions.LaunchUri (current_item!.Url);
 	}
 
 	private void HandleInstallButtonClicked ()

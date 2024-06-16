@@ -42,8 +42,6 @@ public sealed class HelpActions
 		Bugs = new Command ("bugs", Translations.GetString ("File a Bug"), null, Resources.Icons.HelpBug);
 		Translate = new Command ("translate", Translations.GetString ("Translate This Application"), null, Resources.Icons.HelpTranslate);
 	}
-
-	#region Initialization
 	public void RegisterActions (Gtk.Application app, Gio.Menu menu)
 	{
 		app.AddAccelAction (Contents, "F1");
@@ -79,28 +77,21 @@ public sealed class HelpActions
 
 	private void Bugs_Activated (object sender, EventArgs e)
 	{
-		OpenUrl ("https://bugs.launchpad.net/pinta");
+		GtkExtensions.LaunchUri ("https://github.com/PintaProject/Pinta/issues");
 	}
 
 	private void DisplayHelp (object sender, EventArgs e)
 	{
-		OpenUrl ("https://pinta-project.com/user-guide");
+		GtkExtensions.LaunchUri ("https://pinta-project.com/user-guide");
 	}
 
 	private void Translate_Activated (object sender, EventArgs e)
 	{
-		OpenUrl ("https://hosted.weblate.org/engage/pinta/");
+		GtkExtensions.LaunchUri ("https://hosted.weblate.org/engage/pinta/");
 	}
 
 	private void Website_Activated (object sender, EventArgs e)
 	{
-		OpenUrl ("https://www.pinta-project.com");
+		GtkExtensions.LaunchUri ("https://www.pinta-project.com");
 	}
-
-	private static void OpenUrl (string url)
-	{
-		// TODO-GTK4 - this produces an "unsupported on current backend" error on macOS
-		Gtk.Functions.ShowUri (PintaCore.Chrome.MainWindow, url, /* GDK_CURRENT_TIME */ 0);
-	}
-	#endregion
 }

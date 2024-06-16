@@ -128,9 +128,19 @@ public sealed class LayersListView : ScrolledWindow
 
 	private void HandleHistoryChanged (object? sender, EventArgs e)
 	{
-		// Update the widgets by flagging every item as having changed.
-		for (uint i = 0; i < model.GetNItems (); ++i)
-			model.ItemsChanged (i, 0, 0);
+		ArgumentNullException.ThrowIfNull (active_document);
+
+		// Recreate all the widgets.
+		// This update should ideally be done by changing gobject properties instead, but we don't have the ability to add custom properties yet
+		uint selected_idx = selection_model.Selected;
+		for (uint i = 0; i < model.GetNItems (); ++i) {
+			int layer_idx = active_document.Layers.Count () - 1 - (int) i;
+			model.Remove (i);
+			model.Insert (i, new LayersListViewItem (active_document, active_document.Layers[layer_idx]));
+		}
+
+		// Restore the selection.
+		selection_model.Selected = selected_idx;
 	}
 
 	private void HandleLayerAdded (object? sender, IndexEventArgs e)
