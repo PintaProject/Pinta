@@ -68,9 +68,9 @@ public sealed class VignetteEffect : BaseEffect
 	public override void Render (ImageSurface src, ImageSurface dst, ReadOnlySpan<RectangleI> rois)
 	{
 		Size canvasSize = src.GetSize ();
-		double effectiveRadius = Math.Max (canvasSize.Width, canvasSize.Height) * 0.5d;
-		effectiveRadius *= Data.Radius;
-		effectiveRadius *= effectiveRadius;
+		double r1 = Math.Max (canvasSize.Width, canvasSize.Height) * 0.5d;
+		double r2 = r1 * Data.Radius;
+		double effectiveRadius = r2 * r2;
 		double radiusR = Math.PI / (8 * effectiveRadius);
 		double amount = Data.Amount;
 		double amount1 = 1d - amount;
@@ -79,8 +79,8 @@ public sealed class VignetteEffect : BaseEffect
 		Span<ColorBgra> dst_data = dst.GetPixelData ();
 		foreach (RectangleI roi in rois) {
 			foreach (var pixel in Utility.GeneratePixelOffsets (roi, canvasSize)) {
-				double iy2 = pixel.coordinates.Y - centerOffset.Y;
-				iy2 *= iy2;
+				double iy = pixel.coordinates.Y - centerOffset.Y;
+				double iy2 = iy * iy;
 				double ix = pixel.coordinates.X - centerOffset.X;
 				double d = (iy2 + (ix * ix)) * radiusR;
 				double factor = Math.Cos (d);
