@@ -117,5 +117,5 @@ public sealed class VignetteData : EffectData
 
 	[MinimumValue (0), MaximumValue (1)]
 	[Caption ("Strength")]
-	public double Amount { get; set; }
+	public double Amount { get; set; } = 1;
 }
