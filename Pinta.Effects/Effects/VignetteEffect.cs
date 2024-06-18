@@ -75,7 +75,7 @@ public sealed class VignetteEffect : BaseEffect
 		double amount = Data.Amount;
 		double amount1 = 1d - amount;
 		PointI centerOffset = Data.CenterOffset;
-		ReadOnlySpan<ColorBgra> src_data = src.GetPixelData ();
+		ReadOnlySpan<ColorBgra> src_data = src.GetReadOnlyPixelData ();
 		Span<ColorBgra> dst_data = dst.GetPixelData ();
 		foreach (RectangleI roi in rois) {
 			foreach (var pixel in Utility.GeneratePixelOffsets (roi, canvasSize)) {
