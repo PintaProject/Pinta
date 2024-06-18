@@ -92,13 +92,13 @@ public sealed class VignetteEffect : BaseEffect
 						b: (byte) (0.5 + (255 * SrgbUtility.ToSrgbClamped (SrgbUtility.ToLinear (src_color.B) * amount1))),
 						a: src_color.A);
 				} else {
-					factor *= factor;
-					factor *= factor;
-					factor = amount1 + (amount * factor);
+					double factor2 = factor * factor;
+					double factor4 = factor2 * factor2;
+					double effectiveFactor = amount1 + (amount * factor4);
 					dst_data[pixel.memoryOffset] = ColorBgra.FromBgra (
-						r: (byte) (0.5 + (255 * SrgbUtility.ToSrgbClamped (SrgbUtility.ToLinear (src_color.R) * factor))),
-						g: (byte) (0.5 + (255 * SrgbUtility.ToSrgbClamped (SrgbUtility.ToLinear (src_color.G) * factor))),
-						b: (byte) (0.5 + (255 * SrgbUtility.ToSrgbClamped (SrgbUtility.ToLinear (src_color.B) * factor))),
+						r: (byte) (0.5 + (255 * SrgbUtility.ToSrgbClamped (SrgbUtility.ToLinear (src_color.R) * effectiveFactor))),
+						g: (byte) (0.5 + (255 * SrgbUtility.ToSrgbClamped (SrgbUtility.ToLinear (src_color.G) * effectiveFactor))),
+						b: (byte) (0.5 + (255 * SrgbUtility.ToSrgbClamped (SrgbUtility.ToLinear (src_color.B) * effectiveFactor))),
 						a: src_color.A);
 				}
 			}
