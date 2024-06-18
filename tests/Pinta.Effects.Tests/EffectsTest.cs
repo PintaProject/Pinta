@@ -455,6 +455,13 @@ internal sealed class EffectsTest
 	}
 
 	[Test]
+	public void Vignette1 ()
+	{
+		VignetteEffect effect = new (Utilities.CreateMockServices ());
+		Utilities.TestEffect (effect, "vignette1.png");
+	}
+
+	[Test]
 	public void Voronoi1 ()
 	{
 		var effect = new VoronoiDiagramEffect (Utilities.CreateMockServices ());
