@@ -418,9 +418,11 @@ public static partial class GtkExtensions
 		=> (Gdk.Key) args.Keyval;
 
 	/// <summary>
-	/// Sets the activates-default property for the editable text field of a spin button.
+	/// Configures a spin button to immediately activate the default widget after pressing Enter,
+	/// by configuring the editable text field.
+	/// In GTK4, Gtk.SpinButton.SetActivateDefault() requires a second Enter to activate.
 	/// </summary>
-	public static void SetActivatesDefault (
+	public static void SetActivatesDefaultImmediate (
 		this Gtk.SpinButton spin_button,
 		bool activates)
 	{

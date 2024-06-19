@@ -116,26 +116,26 @@ public partial class LevelsDialog : Gtk.Dialog
 
 		Gtk.SpinButton spinInLow = Gtk.SpinButton.NewWithRange (0, 254, 1);
 		spinInLow.OnValueChanged += HandleSpinInLowValueChanged;
-		spinInLow.SetActivatesDefault (true);
+		spinInLow.SetActivatesDefaultImmediate (true);
 
 		Gtk.SpinButton spinInHigh = Gtk.SpinButton.NewWithRange (1, 255, 1);
 		spinInHigh.Value = 255;
 		spinInHigh.OnValueChanged += HandleSpinInHighValueChanged;
-		spinInHigh.SetActivatesDefault (true);
+		spinInHigh.SetActivatesDefaultImmediate (true);
 
 		Gtk.SpinButton spinOutLow = Gtk.SpinButton.NewWithRange (0, 252, 1);
 		spinOutLow.OnValueChanged += HandleSpinOutLowValueChanged;
-		spinOutLow.SetActivatesDefault (true);
+		spinOutLow.SetActivatesDefaultImmediate (true);
 
 		Gtk.SpinButton spinOutHigh = Gtk.SpinButton.NewWithRange (2, 255, 1);
 		spinOutHigh.Value = 255;
 		spinOutHigh.OnValueChanged += HandleSpinOutHighValueChanged;
-		spinOutHigh.SetActivatesDefault (true);
+		spinOutHigh.SetActivatesDefaultImmediate (true);
 
 		Gtk.SpinButton spinOutGamma = Gtk.SpinButton.NewWithRange (0, 100, 0.1);
 		spinOutGamma.Value = 1;
 		spinOutGamma.OnValueChanged += HandleSpinOutGammaValueChanged;
-		spinOutGamma.SetActivatesDefault (true);
+		spinOutGamma.SetActivatesDefaultImmediate (true);
 
 		ColorGradientWidget gradientInput = new (2) { WidthRequest = 40 };
 		gradientInput.ClickGesture.OnPressed += HandleGradientButtonPressEvent;

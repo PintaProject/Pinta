@@ -56,12 +56,11 @@ public sealed class ResizeCanvasDialog : Gtk.Dialog
 
 		Gtk.CheckButton percentageRadio = Gtk.CheckButton.NewWithLabel (Translations.GetString ("By percentage:"));
 		percentageRadio.OnToggled += percentageRadio_Toggled;
-		percentageRadio.Active = true;
 
 		Gtk.SpinButton percentageSpinner = Gtk.SpinButton.NewWithRange (1, int.MaxValue, 1);
 		percentageSpinner.Value = 100;
 		percentageSpinner.OnValueChanged += percentageSpinner_ValueChanged;
-		percentageSpinner.SetActivatesDefault (true);
+		percentageSpinner.SetActivatesDefaultImmediate (true);
 
 		Gtk.Box hboxPercent = new () { Spacing = spacing };
 		hboxPercent.SetOrientation (Gtk.Orientation.Horizontal);
@@ -75,7 +74,7 @@ public sealed class ResizeCanvasDialog : Gtk.Dialog
 		Gtk.SpinButton widthSpinner = Gtk.SpinButton.NewWithRange (1, int.MaxValue, 1);
 		widthSpinner.Value = PintaCore.Workspace.ImageSize.Width;
 		widthSpinner.OnValueChanged += widthSpinner_ValueChanged;
-		widthSpinner.SetActivatesDefault (true);
+		widthSpinner.SetActivatesDefaultImmediate (true);
 
 		Gtk.Label heightLabel = Gtk.Label.New (Translations.GetString ("Height:"));
 		heightLabel.Halign = Gtk.Align.End;
@@ -83,7 +82,7 @@ public sealed class ResizeCanvasDialog : Gtk.Dialog
 		Gtk.SpinButton heightSpinner = Gtk.SpinButton.NewWithRange (1, int.MaxValue, 1);
 		heightSpinner.Value = PintaCore.Workspace.ImageSize.Height;
 		heightSpinner.OnValueChanged += heightSpinner_ValueChanged;
-		heightSpinner.SetActivatesDefault (true);
+		heightSpinner.SetActivatesDefaultImmediate (true);
 
 		Gtk.Grid hwGrid = new () {
 			RowSpacing = spacing,
@@ -185,8 +184,6 @@ public sealed class ResizeCanvasDialog : Gtk.Dialog
 
 		percentageSpinner.GrabFocus ();
 
-		SetAnchor (Anchor.Center);
-
 		// --- References to keep
 
 		percentage_radio = percentageRadio;
@@ -204,6 +201,10 @@ public sealed class ResizeCanvasDialog : Gtk.Dialog
 		sw_button = swButton;
 		s_button = sButton;
 		se_button = seButton;
+
+		// Final initialization
+		percentageRadio.Active = true;
+		SetAnchor (Anchor.Center);
 	}
 
 	private static Gtk.Button CreateAnchorButton ()
