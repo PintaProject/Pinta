@@ -64,40 +64,55 @@ public sealed class VignetteEffect : BaseEffect
 	public override void LaunchConfiguration ()
 		=> chrome.LaunchSimpleEffectDialog (this);
 
+	private sealed record VignetteSettings (
+		Size canvasSize,
+		double radiusR,
+		double amount,
+		double amount1,
+		PointI centerOffset);
+
+	private VignetteSettings CreateSettings (ImageSurface src)
+	{
+		Size canvasSize = src.GetSize ();
+		double r1 = Math.Max (canvasSize.Width, canvasSize.Height) * 0.5d;
+		double r2 = r1 * Convert.ToDouble (Data.RadiusFactor) / 100d;
+		double effectiveRadius = r2 * r2;
+		double amount = Data.Amount;
+		return new (
+			canvasSize: canvasSize,
+			radiusR: Math.PI / (8 * effectiveRadius),
+			amount: amount,
+			amount1: 1d - amount,
+			centerOffset: Data.CenterOffset);
+	}
+
 	// Algorithm code ported from PDN
 	public override void Render (
 		ImageSurface src,
 		ImageSurface dst,
 		ReadOnlySpan<RectangleI> rois)
 	{
-		Size canvasSize = src.GetSize ();
-		double r1 = Math.Max (canvasSize.Width, canvasSize.Height) * 0.5d;
-		double r2 = r1 * Convert.ToDouble (Data.RadiusFactor) / 100d;
-		double effectiveRadius = r2 * r2;
-		double radiusR = Math.PI / (8 * effectiveRadius);
-		double amount = Data.Amount;
-		double amount1 = 1d - amount;
-		PointI centerOffset = Data.CenterOffset;
+		VignetteSettings settings = CreateSettings (src);
 		ReadOnlySpan<ColorBgra> src_data = src.GetReadOnlyPixelData ();
 		Span<ColorBgra> dst_data = dst.GetPixelData ();
 		foreach (RectangleI roi in rois) {
-			foreach (var pixel in Utility.GeneratePixelOffsets (roi, canvasSize)) {
-				double iy = pixel.coordinates.Y - centerOffset.Y;
+			foreach (var pixel in Utility.GeneratePixelOffsets (roi, settings.canvasSize)) {
+				double iy = pixel.coordinates.Y - settings.centerOffset.Y;
 				double iy2 = iy * iy;
-				double ix = pixel.coordinates.X - centerOffset.X;
-				double d = (iy2 + (ix * ix)) * radiusR;
+				double ix = pixel.coordinates.X - settings.centerOffset.X;
+				double d = (iy2 + (ix * ix)) * settings.radiusR;
 				double factor = Math.Cos (d);
 				ColorBgra src_color = src_data[pixel.memoryOffset];
 				if (factor <= 0 || d > Math.PI) {
 					dst_data[pixel.memoryOffset] = ColorBgra.FromBgra (
-						r: (byte) (0.5 + (255 * SrgbUtility.ToSrgbClamped (SrgbUtility.ToLinear (src_color.R) * amount1))),
-						g: (byte) (0.5 + (255 * SrgbUtility.ToSrgbClamped (SrgbUtility.ToLinear (src_color.G) * amount1))),
-						b: (byte) (0.5 + (255 * SrgbUtility.ToSrgbClamped (SrgbUtility.ToLinear (src_color.B) * amount1))),
+						r: (byte) (0.5 + (255 * SrgbUtility.ToSrgbClamped (SrgbUtility.ToLinear (src_color.R) * settings.amount1))),
+						g: (byte) (0.5 + (255 * SrgbUtility.ToSrgbClamped (SrgbUtility.ToLinear (src_color.G) * settings.amount1))),
+						b: (byte) (0.5 + (255 * SrgbUtility.ToSrgbClamped (SrgbUtility.ToLinear (src_color.B) * settings.amount1))),
 						a: src_color.A);
 				} else {
 					double factor2 = factor * factor;
 					double factor4 = factor2 * factor2;
-					double effectiveFactor = amount1 + (amount * factor4);
+					double effectiveFactor = settings.amount1 + (settings.amount * factor4);
 					dst_data[pixel.memoryOffset] = ColorBgra.FromBgra (
 						r: (byte) (0.5 + (255 * SrgbUtility.ToSrgbClamped (SrgbUtility.ToLinear (src_color.R) * effectiveFactor))),
 						g: (byte) (0.5 + (255 * SrgbUtility.ToSrgbClamped (SrgbUtility.ToLinear (src_color.G) * effectiveFactor))),
