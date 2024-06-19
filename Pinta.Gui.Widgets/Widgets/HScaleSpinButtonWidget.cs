@@ -81,7 +81,7 @@ public sealed class HScaleSpinButtonWidget : Box
 
 		OnRealize += (_, _) => Value = initialValue;
 
-		spin.SetActivatesDefault (true);
+		spin.SetActivatesDefaultImmediate (true);
 	}
 
 	private Scale CreateSlider ()

@@ -56,7 +56,7 @@ public sealed class SpinButtonEntryDialog : Dialog
 		content_area.SetAllMargins (12);
 		content_area.Append (hbox);
 
-		spin_button.SetActivatesDefault (true);
+		spin_button.SetActivatesDefaultImmediate (true);
 	}
 
 	public int GetValue ()

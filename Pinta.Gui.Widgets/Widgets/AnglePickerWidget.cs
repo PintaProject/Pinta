@@ -78,7 +78,7 @@ public sealed class AnglePickerWidget : Box
 
 		OnRealize += (_, _) => anglepickergraphic1.Value = initialAngle;
 
-		spin.SetActivatesDefault (true);
+		spin.SetActivatesDefaultImmediate (true);
 	}
 
 	public string Label {

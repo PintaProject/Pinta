@@ -147,7 +147,7 @@ public sealed class PointPickerWidget : Gtk.Box
 		result.Valign = Gtk.Align.Start;
 		result.Adjustment!.Upper = PintaCore.Workspace.ImageSize.Width;
 		result.Adjustment!.Lower = 0;
-		result.SetActivatesDefault (true);
+		result.SetActivatesDefaultImmediate (true);
 		return result;
 	}
 
@@ -161,7 +161,7 @@ public sealed class PointPickerWidget : Gtk.Box
 		result.Valign = Gtk.Align.Start;
 		result.Adjustment!.Upper = PintaCore.Workspace.ImageSize.Height;
 		result.Adjustment!.Lower = 0;
-		result.SetActivatesDefault (true);
+		result.SetActivatesDefaultImmediate (true);
 		return result;
 	}
 

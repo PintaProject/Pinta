@@ -180,7 +180,7 @@ public sealed class ResizeImageDialog : Gtk.Dialog
 		Gtk.SpinButton result = Gtk.SpinButton.NewWithRange (1, int.MaxValue, 1);
 		result.Value = 100;
 		result.OnValueChanged += percentageSpinner_ValueChanged;
-		result.SetActivatesDefault (true);
+		result.SetActivatesDefaultImmediate (true);
 		return result;
 	}
 
@@ -189,7 +189,7 @@ public sealed class ResizeImageDialog : Gtk.Dialog
 		Gtk.SpinButton result = Gtk.SpinButton.NewWithRange (1, int.MaxValue, 1);
 		result.Value = PintaCore.Workspace.ImageSize.Width;
 		result.OnValueChanged += widthSpinner_ValueChanged;
-		result.SetActivatesDefault (true);
+		result.SetActivatesDefaultImmediate (true);
 		return result;
 	}
 
@@ -198,7 +198,7 @@ public sealed class ResizeImageDialog : Gtk.Dialog
 		Gtk.SpinButton result = Gtk.SpinButton.NewWithRange (1, int.MaxValue, 1);
 		result.Value = PintaCore.Workspace.ImageSize.Height;
 		result.OnValueChanged += heightSpinner_ValueChanged;
-		result.SetActivatesDefault (true);
+		result.SetActivatesDefaultImmediate (true);
 		return result;
 	}
 
