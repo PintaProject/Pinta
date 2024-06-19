@@ -31,59 +31,50 @@
 //
 
 using System;
+using System.Collections.Immutable;
 
 namespace Pinta.Effects;
 
 internal static class SrgbUtility
 {
 	// pre-calculated array of linear intensity for 8bit values
-	private static readonly double[] linear_intensity;
+	private static readonly ImmutableArray<double> linear_intensity = CalculateLinearIntensities ();
 
-	static SrgbUtility ()
+	private static ImmutableArray<double> CalculateLinearIntensities ()
 	{
-		linear_intensity = new double[256];
-
+		var linearIntensity = ImmutableArray.CreateBuilder<double> ();
+		linearIntensity.Count = 256;
 		for (int i = 0; i <= 255; i++) {
 			double x = i / 255d;
-			linear_intensity[i] = ToLinear (x);
+			linearIntensity[i] = ToLinear (x);
 		}
+		return linearIntensity.MoveToImmutable ();
 	}
 
 	public static double ToSrgb (double linearLevel)
 	{
 		System.Diagnostics.Debug.Assert ((linearLevel >= 0d && linearLevel <= 1d), "level is out of range 0-1");
 		const double power = 1d / 2.4d;
-		if (linearLevel <= 0.0031308d) {
+		if (linearLevel <= 0.0031308d)
 			return 12.92d * linearLevel;
-		} else {
-			double result = (1.055d * Math.Pow (linearLevel, power)) - 0.055d;
-			return result;
-		}
+		else
+			return (1.055d * Math.Pow (linearLevel, power)) - 0.055d;
 	}
 
 	public static double ToSrgbClamped (double linearLevel)
-	{
-		double result = (linearLevel < 0d) ? 0d : (linearLevel > 1d) ? 1d : ToSrgb (linearLevel);
-		return result;
-	}
+		=> (linearLevel < 0d) ? 0d : (linearLevel > 1d) ? 1d : ToSrgb (linearLevel);
 
 	public static double ToLinear (byte srgbLevel)
-	{
-		return linear_intensity[srgbLevel];
-	}
+		=> linear_intensity[srgbLevel];
 
 	public static double ToLinear (double srgbLevel)
 	{
-		double Y;
 		const double factor1 = 1d / 12.92d;
 		const double factor2 = 1d / 1.055d;
 
-		if (srgbLevel <= 0.04045d) {
-			Y = srgbLevel * factor1;
-		} else {
-			Y = Math.Pow (((srgbLevel + 0.055d) * factor2), 2.4d);
-		}
-
-		return Y;
+		if (srgbLevel <= 0.04045d)
+			return srgbLevel * factor1;
+		else
+			return Math.Pow ((srgbLevel + 0.055d) * factor2, 2.4d);
 	}
 }
