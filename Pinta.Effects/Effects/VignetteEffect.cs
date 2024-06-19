@@ -69,7 +69,7 @@ public sealed class VignetteEffect : BaseEffect
 	{
 		Size canvasSize = src.GetSize ();
 		double r1 = Math.Max (canvasSize.Width, canvasSize.Height) * 0.5d;
-		double r2 = r1 * Data.Radius;
+		double r2 = r1 * Data.Radius / 100d;
 		double effectiveRadius = r2 * r2;
 		double radiusR = Math.PI / (8 * effectiveRadius);
 		double amount = Data.Amount;
@@ -111,9 +111,9 @@ public sealed class VignetteData : EffectData
 	[Caption ("Center Offset")]
 	public PointI CenterOffset { get; set; }
 
-	[MinimumValue (0), MaximumValue (4)] // TODO: In Paint.NET, the minimum is 0.1. Make it possible to constrain fractionally
-	[Caption ("Radius")]
-	public double Radius { get; set; } = 0.5;
+	[MinimumValue (10), MaximumValue (400)]
+	[Caption ("Radius (as a percentage)")]
+	public double Radius { get; set; } = 50;
 
 	[MinimumValue (0), MaximumValue (1)]
 	[Caption ("Strength")]
