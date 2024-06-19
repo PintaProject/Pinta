@@ -69,7 +69,7 @@ public sealed class VignetteEffect : BaseEffect
 	{
 		Size canvasSize = src.GetSize ();
 		double r1 = Math.Max (canvasSize.Width, canvasSize.Height) * 0.5d;
-		double r2 = r1 * Data.Radius / 100d;
+		double r2 = r1 * Convert.ToDouble (Data.Radius) / 100d;
 		double effectiveRadius = r2 * r2;
 		double radiusR = Math.PI / (8 * effectiveRadius);
 		double amount = Data.Amount;
@@ -113,7 +113,7 @@ public sealed class VignetteData : EffectData
 
 	[MinimumValue (10), MaximumValue (400)]
 	[Caption ("Radius (as a percentage)")]
-	public double Radius { get; set; } = 50;
+	public int Radius { get; set; } = 50;
 
 	[MinimumValue (0), MaximumValue (1)]
 	[Caption ("Strength")]
