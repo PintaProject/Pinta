@@ -99,6 +99,8 @@ public sealed class ResizeImageDialog : Gtk.Dialog
 		contentArea.SetAllMargins (12);
 		contentArea.Append (mainVbox);
 
+		percentageSpinner.GrabFocus ();
+
 		// --- References to keep
 
 		percentage_radio = percentageRadio;
@@ -179,7 +181,6 @@ public sealed class ResizeImageDialog : Gtk.Dialog
 		result.Value = 100;
 		result.OnValueChanged += percentageSpinner_ValueChanged;
 		result.SetActivatesDefault (true);
-		result.GrabFocus ();
 		return result;
 	}
 

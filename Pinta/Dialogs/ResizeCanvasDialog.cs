@@ -56,7 +56,6 @@ public sealed class ResizeCanvasDialog : Gtk.Dialog
 
 		Gtk.CheckButton percentageRadio = Gtk.CheckButton.NewWithLabel (Translations.GetString ("By percentage:"));
 		percentageRadio.OnToggled += percentageRadio_Toggled;
-		percentageRadio.Active = true;
 
 		Gtk.SpinButton percentageSpinner = Gtk.SpinButton.NewWithRange (1, int.MaxValue, 1);
 		percentageSpinner.Value = 100;
@@ -185,8 +184,6 @@ public sealed class ResizeCanvasDialog : Gtk.Dialog
 
 		percentageSpinner.GrabFocus ();
 
-		SetAnchor (Anchor.Center);
-
 		// --- References to keep
 
 		percentage_radio = percentageRadio;
@@ -204,6 +201,10 @@ public sealed class ResizeCanvasDialog : Gtk.Dialog
 		sw_button = swButton;
 		s_button = sButton;
 		se_button = seButton;
+
+		// Final initialization
+		percentageRadio.Active = true;
+		SetAnchor (Anchor.Center);
 	}
 
 	private static Gtk.Button CreateAnchorButton ()
