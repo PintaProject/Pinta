@@ -11,7 +11,7 @@ namespace Pinta.Effects;
 
 public sealed class VoronoiDiagramEffect : BaseEffect
 {
-	// TODO: Icon
+	public override string Icon => Pinta.Resources.Icons.EffectsRenderVoronoiDiagram;
 
 	public override bool IsTileable => false;
 

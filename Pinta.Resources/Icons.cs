@@ -142,6 +142,7 @@ public static class Icons
 	public const string EffectsRenderClouds = "effects-render-clouds";
 	public const string EffectsRenderJuliaFractal = "effects-render-juliafractal";
 	public const string EffectsRenderMandelbrotFractal = "effects-render-mandelbrotfractal";
+	public const string EffectsRenderVoronoiDiagram = "effects-render-voronoidiagram";
 	public const string EffectsStylizeEdgeDetect = "effects-stylize-edgedetect";
 	public const string EffectsStylizeEmboss = "effects-stylize-emboss";
 	public const string EffectsStylizeOutline = "effects-stylize-outline";
