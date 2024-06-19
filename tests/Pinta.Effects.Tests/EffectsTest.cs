@@ -30,7 +30,7 @@ internal sealed class EffectsTest
 	}
 
 	[Test]
-	public void Bulge1 ()
+	public void Bulge ()
 	{
 		BulgeEffect effect = new (Utilities.CreateMockServices ());
 		effect.Data.Amount = 56;
