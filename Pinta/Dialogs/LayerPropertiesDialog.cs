@@ -101,7 +101,7 @@ public sealed class LayerPropertiesDialog : Gtk.Dialog
 		opacitySpinner.ClimbRate = 1;
 		opacitySpinner.Value = Math.Round (initialProperties.Opacity * 100);
 		opacitySpinner.OnValueChanged += OnOpacitySpinnerChanged;
-		opacitySpinner.SetActivatesDefault (true);
+		opacitySpinner.SetActivatesDefaultImmediate (true);
 
 		Gtk.Scale opacitySlider = Gtk.Scale.NewWithRange (Gtk.Orientation.Horizontal, 0, 100, 1);
 		opacitySlider.Digits = 0;
