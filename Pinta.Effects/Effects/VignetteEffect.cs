@@ -129,8 +129,9 @@ public sealed class VignetteData : EffectData
 	[Caption ("Offset")]
 	public PointI Offset { get; set; }
 
-	[MinimumValue (10), MaximumValue (400)]
+	// Translators: This refers to how big the radius is as a percentage of the image's dimensions
 	[Caption ("Radius Percentage")]
+	[MinimumValue (10), MaximumValue (400)]
 	public int RadiusPercentage { get; set; } = 50;
 
 	[MinimumValue (0), MaximumValue (1)]
