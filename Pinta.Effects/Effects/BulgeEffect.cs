@@ -54,7 +54,7 @@ public sealed class BulgeEffect : BaseEffect
 
 		float hw = dst.Width / 2f;
 		float hh = dst.Height / 2f;
-		float maxrad = Math.Min (hw, hh) * Data.RadiusFactor / 100f;
+		float maxrad = Math.Min (hw, hh) * Data.RadiusPercentage / 100f;
 		float amt = bulge / 100f;
 
 		hh += (float) Data.Offset.Y * hh;
@@ -112,9 +112,10 @@ public sealed class BulgeEffect : BaseEffect
 		[Caption ("Offset")]
 		public PointD Offset { get; set; } = new (0.0, 0.0);
 
+		// Translators: This refers to how big the radius is as a percentage of the image's dimensions
+		[Caption ("Radius Percentage")]
 		[MinimumValue (10), MaximumValue (100)]
-		[Caption ("Radius (as a percentage)")]
-		public int RadiusFactor { get; set; } = 100;
+		public int RadiusPercentage { get; set; } = 100;
 
 		[Skip]
 		public override bool IsDefault => Amount == 0;

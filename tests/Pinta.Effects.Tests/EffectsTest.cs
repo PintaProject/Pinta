@@ -53,7 +53,7 @@ internal sealed class EffectsTest
 		BulgeEffect effect = new BulgeEffect (Utilities.CreateMockServices ());
 		effect.Data.Amount = 56;
 		effect.Data.Offset = PointD.Zero;
-		effect.Data.RadiusFactor = 50;
+		effect.Data.RadiusPercentage = 50;
 		Utilities.TestEffect (effect, "bulge3.png");
 	}
 
