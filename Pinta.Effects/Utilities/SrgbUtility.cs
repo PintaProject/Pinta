@@ -71,10 +71,9 @@ internal static class SrgbUtility
 	{
 		const double factor1 = 1d / 12.92d;
 		const double factor2 = 1d / 1.055d;
-
-		if (srgbLevel <= 0.04045d)
-			return srgbLevel * factor1;
-		else
-			return Math.Pow ((srgbLevel + 0.055d) * factor2, 2.4d);
+		return
+			(srgbLevel <= 0.04045d)
+			? srgbLevel * factor1
+			: Math.Pow ((srgbLevel + 0.055d) * factor2, 2.4d);
 	}
 }
