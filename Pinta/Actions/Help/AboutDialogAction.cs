@@ -85,6 +85,7 @@ internal sealed class AboutDialogAction : IActionHandler
 		sb.AppendLine ("Fugue - http://pinvoke.com/");
 		sb.AppendLine ("Google Material Icons - https://github.com/google/material-design-icons");
 		sb.AppendLine ("Microsoft Fluent UI System Icons - https://github.com/microsoft/fluentui-system-icons");
+		sb.AppendLine ("Pinta contributors");
 
 		return sb.ToString ();
 	}
