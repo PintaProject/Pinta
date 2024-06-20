@@ -458,7 +458,7 @@ internal sealed class EffectsTest
 	public void Vignette1 ()
 	{
 		VignetteEffect effect = new (Utilities.CreateMockServices ());
-		effect.Data.CenterOffset = new PointI (0, 0);
+		effect.Data.Offset = new PointI (0, 0);
 		Utilities.TestEffect (effect, "vignette1.png");
 	}
 
@@ -466,7 +466,7 @@ internal sealed class EffectsTest
 	public void Vignette2 ()
 	{
 		VignetteEffect effect = new (Utilities.CreateMockServices ());
-		effect.Data.CenterOffset = new PointI (125, 125);
+		effect.Data.Offset = new PointI (125, 125);
 		Utilities.TestEffect (effect, "vignette2.png");
 	}
 

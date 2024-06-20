@@ -75,7 +75,7 @@ public sealed class VignetteEffect : BaseEffect
 	{
 		Size canvasSize = src.GetSize ();
 		double r1 = Math.Max (canvasSize.Width, canvasSize.Height) * 0.5d;
-		double r2 = r1 * Convert.ToDouble (Data.RadiusFactor) / 100d;
+		double r2 = r1 * Convert.ToDouble (Data.RadiusPercentage) / 100d;
 		double effectiveRadius = r2 * r2;
 		double amount = Data.Amount;
 		return new (
@@ -83,7 +83,7 @@ public sealed class VignetteEffect : BaseEffect
 			radiusR: Math.PI / (8 * effectiveRadius),
 			amount: amount,
 			amount1: 1d - amount,
-			centerOffset: Data.CenterOffset);
+			centerOffset: Data.Offset);
 	}
 
 	// Algorithm code ported from PDN
@@ -126,12 +126,12 @@ public sealed class VignetteEffect : BaseEffect
 
 public sealed class VignetteData : EffectData
 {
-	[Caption ("Center Offset")]
-	public PointI CenterOffset { get; set; }
+	[Caption ("Offset")]
+	public PointI Offset { get; set; }
 
 	[MinimumValue (10), MaximumValue (400)]
-	[Caption ("Radius (as a percentage)")]
-	public int RadiusFactor { get; set; } = 50;
+	[Caption ("Radius Percentage")]
+	public int RadiusPercentage { get; set; } = 50;
 
 	[MinimumValue (0), MaximumValue (1)]
 	[Caption ("Strength")]
