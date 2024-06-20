@@ -55,10 +55,10 @@ internal static class SrgbUtility
 	{
 		System.Diagnostics.Debug.Assert ((linearLevel >= 0d && linearLevel <= 1d), "level is out of range 0-1");
 		const double power = 1d / 2.4d;
-		if (linearLevel <= 0.0031308d)
-			return 12.92d * linearLevel;
-		else
-			return (1.055d * Math.Pow (linearLevel, power)) - 0.055d;
+		return
+			(linearLevel <= 0.0031308d)
+			? 12.92d * linearLevel
+			: (1.055d * Math.Pow (linearLevel, power)) - 0.055d;
 	}
 
 	public static double ToSrgbClamped (double linearLevel)
