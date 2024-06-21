@@ -30,7 +30,6 @@
 // THE SOFTWARE. 
 
 using System;
-using System.Data.Common;
 using Pinta.Core;
 using Pinta.Gui.Widgets;
 
@@ -90,7 +89,7 @@ public sealed class DentsEffect : WarpEffect
 
 		double detail3 = 1.0 + (detail2 / 10.0);
 
-		// we don't want the perlin noise frequency components exceeding the nyquist limit, so we will limit 'detail' appropriately
+		// We don't want the perlin noise frequency components exceeding the nyquist limit, so we will limit 'detail' appropriately
 		double maxDetail = Math.Floor (Math.Log (scaleR) / Math.Log (0.5));
 
 		double effectiveDetail = (detail3 > maxDetail && maxDetail >= 1.0) ? maxDetail : detail3;
