@@ -30,6 +30,7 @@
 // THE SOFTWARE. 
 
 using System;
+using System.Data.Common;
 using Pinta.Core;
 using Pinta.Gui.Widgets;
 
@@ -71,17 +72,27 @@ public sealed class DentsEffect : WarpEffect
 	// Algoritm code ported from PDN
 	protected override TransformData InverseTransform (TransformData data)
 	{
-		double scaleR = 400.0 / DefaultRadius / Data.Scale;
+		double scale = Data.Scale;
+
+		double refraction = Data.Refraction;
 		double detail1 = Data.Roughness;
 		double detail2 = detail1;
-		double detail3 = 1.0 + (detail2 / 10.0);
-		double maxDetail = Math.Floor (Math.Log (scaleR) / Math.Log (0.5)); // we don't want the perlin noise frequency components exceeding the nyquist limit, so we will limit 'detail' appropriately
 		double roughness = detail2;
-		double refractionScale = Data.Refraction / 100.0 / scaleR;
-		double theta = Math.PI * 2.0 * Data.Tension / 10.0;
+
+		double turbulence = Data.Tension;
+
 		byte seed = Utility.ClampToByte (Data.Seed.Value);
 
+		double scaleR = (400.0 / DefaultRadius) / scale;
+		double refractionScale = (refraction / 100.0) / scaleR;
+		double theta = Math.PI * 2.0 * turbulence / 10.0;
 		double effectiveRoughness = roughness / 100.0;
+
+		double detail3 = 1.0 + (detail2 / 10.0);
+
+		// we don't want the perlin noise frequency components exceeding the nyquist limit, so we will limit 'detail' appropriately
+		double maxDetail = Math.Floor (Math.Log (scaleR) / Math.Log (0.5));
+
 		double effectiveDetail = (detail3 > maxDetail && maxDetail >= 1.0) ? maxDetail : detail3;
 
 		double x = data.X;
@@ -93,8 +104,9 @@ public sealed class DentsEffect : WarpEffect
 		double bumpAngle = theta * PerlinNoise.Compute (ix, iy, effectiveDetail, effectiveRoughness, seed);
 
 		return new (
-			X: refractionScale * Math.Sin (-bumpAngle),
-			Y: refractionScale * Math.Cos (bumpAngle));
+			X: data.X + (refractionScale * Math.Sin (-bumpAngle)),
+			Y: data.Y + (refractionScale * Math.Cos (bumpAngle))
+		);
 	}
 }
 
