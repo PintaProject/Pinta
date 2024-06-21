@@ -65,6 +65,58 @@ internal sealed class EffectsTest
 	}
 
 	[Test]
+	public void Dents1 ()
+	{
+		DentsEffect effect = new (Utilities.CreateMockServices ());
+		effect.Data.CenterOffset = new PointD (125, 125);
+		Utilities.TestEffect (effect, "dents1.png");
+	}
+
+	[Test]
+	public void Dents2 ()
+	{
+		DentsEffect effect = new (Utilities.CreateMockServices ());
+		effect.Data.CenterOffset = new PointD (125, 125);
+		effect.Data.Scale = 50;
+		Utilities.TestEffect (effect, "dents2.png");
+	}
+
+	[Test]
+	public void Dents3 ()
+	{
+		DentsEffect effect = new (Utilities.CreateMockServices ());
+		effect.Data.CenterOffset = new PointD (125, 125);
+		effect.Data.Roughness = 100;
+		Utilities.TestEffect (effect, "dents3.png");
+	}
+
+	[Test]
+	public void Dents4 ()
+	{
+		DentsEffect effect = new (Utilities.CreateMockServices ());
+		effect.Data.CenterOffset = new PointD (125, 125);
+		effect.Data.Tension = 100;
+		Utilities.TestEffect (effect, "dents4.png");
+	}
+
+	[Test]
+	public void Dents5 ()
+	{
+		DentsEffect effect = new (Utilities.CreateMockServices ());
+		effect.Data.CenterOffset = new PointD (125, 125);
+		effect.Data.Quality = 1;
+		Utilities.TestEffect (effect, "dents5.png");
+	}
+
+	[Test]
+	public void Dents6 ()
+	{
+		DentsEffect effect = new (Utilities.CreateMockServices ());
+		effect.Data.CenterOffset = new PointD (0, 0);
+		Utilities.TestEffect (effect, "dents6.png");
+	}
+
+	[Test]
 	public void Dithering1 ()
 	{
 		DitheringEffect effect = new (Utilities.CreateMockServices ());
