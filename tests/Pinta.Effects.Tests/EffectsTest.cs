@@ -34,7 +34,7 @@ internal sealed class EffectsTest
 	{
 		BulgeEffect effect = new (Utilities.CreateMockServices ());
 		effect.Data.Amount = 56;
-		effect.Data.Offset = new PointD (0, 0);
+		effect.Data.Offset = PointD.Zero;
 		Utilities.TestEffect (effect, "bulge1.png");
 	}
 
@@ -45,6 +45,16 @@ internal sealed class EffectsTest
 		effect.Data.Amount = -59;
 		effect.Data.Offset = new PointD (-0.184, -0.304);
 		Utilities.TestEffect (effect, "bulge2.png");
+	}
+
+	[Test]
+	public void BulgeSmallerRadius ()
+	{
+		BulgeEffect effect = new BulgeEffect (Utilities.CreateMockServices ());
+		effect.Data.Amount = 56;
+		effect.Data.Offset = PointD.Zero;
+		effect.Data.RadiusPercentage = 50;
+		Utilities.TestEffect (effect, "bulge3.png");
 	}
 
 	[Test]
@@ -452,6 +462,31 @@ internal sealed class EffectsTest
 		UnfocusEffect effect = new (Utilities.CreateMockServices ());
 		effect.Data.Radius = 50;
 		Utilities.TestEffect (effect, "unfocus2.png");
+	}
+
+	[Test]
+	public void Vignette1 ()
+	{
+		VignetteEffect effect = new (Utilities.CreateMockServices ());
+		effect.Data.Offset = PointI.Zero;
+		Utilities.TestEffect (effect, "vignette1.png");
+	}
+
+	[Test]
+	public void Vignette2 ()
+	{
+		VignetteEffect effect = new (Utilities.CreateMockServices ());
+		effect.Data.Offset = new PointI (125, 125);
+		Utilities.TestEffect (effect, "vignette2.png");
+	}
+
+	[Test]
+	public void Vignette3 ()
+	{
+		VignetteEffect effect = new (Utilities.CreateMockServices ());
+		effect.Data.Offset = new PointI (125, 125);
+		effect.Data.RadiusPercentage = 33;
+		Utilities.TestEffect (effect, "vignette3.png");
 	}
 
 	[Test]
