@@ -38,7 +38,9 @@ namespace Pinta.Effects;
 
 public sealed class VignetteEffect : BaseEffect
 {
-	// TODO: Icon
+	public override string Icon
+		=> Resources.Icons.EffectsPhotoVignette;
+
 	public override bool IsTileable
 		=> true;
 
