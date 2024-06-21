@@ -11,20 +11,25 @@ namespace Pinta.Effects;
 
 public sealed class VoronoiDiagramEffect : BaseEffect
 {
-	// TODO: Icon
+	public override string Icon
+		=> Pinta.Resources.Icons.EffectsRenderVoronoiDiagram;
 
-	public override bool IsTileable => false;
+	public override bool IsTileable
+		=> false;
 
-	public override string Name => Translations.GetString ("Voronoi Diagram");
+	public override string Name
+		=> Translations.GetString ("Voronoi Diagram");
 
-	public override bool IsConfigurable => true;
+	public override bool IsConfigurable
+		=> true;
 
-	public override string EffectMenuCategory => Translations.GetString ("Render");
+	public override string EffectMenuCategory
+		=> Translations.GetString ("Render");
 
-	public VoronoiDiagramData Data => (VoronoiDiagramData) EffectData!; // NRT - Set in constructor
+	public VoronoiDiagramData Data
+		=> (VoronoiDiagramData) EffectData!; // NRT - Set in constructor
 
 	private readonly IChromeService chrome;
-
 	public VoronoiDiagramEffect (IServiceProvider services)
 	{
 		chrome = services.GetService<IChromeService> ();
