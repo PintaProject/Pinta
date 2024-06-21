@@ -465,6 +465,31 @@ internal sealed class EffectsTest
 	}
 
 	[Test]
+	public void Vignette1 ()
+	{
+		VignetteEffect effect = new (Utilities.CreateMockServices ());
+		effect.Data.Offset = PointI.Zero;
+		Utilities.TestEffect (effect, "vignette1.png");
+	}
+
+	[Test]
+	public void Vignette2 ()
+	{
+		VignetteEffect effect = new (Utilities.CreateMockServices ());
+		effect.Data.Offset = new PointI (125, 125);
+		Utilities.TestEffect (effect, "vignette2.png");
+	}
+
+	[Test]
+	public void Vignette3 ()
+	{
+		VignetteEffect effect = new (Utilities.CreateMockServices ());
+		effect.Data.Offset = new PointI (125, 125);
+		effect.Data.RadiusPercentage = 33;
+		Utilities.TestEffect (effect, "vignette3.png");
+	}
+
+	[Test]
 	public void Voronoi1 ()
 	{
 		var effect = new VoronoiDiagramEffect (Utilities.CreateMockServices ());
