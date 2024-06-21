@@ -37,34 +37,32 @@ namespace Pinta.Effects;
 
 public sealed class DentsEffect : WarpEffect
 {
-	// TODO: Icon
+	public sealed override string Icon
+		=> Resources.Icons.EffectsDistortDents;
 
-	public override bool IsTileable
+	public sealed override bool IsTileable
 		=> true;
 
 	// Translators: This refers to an image distortion that creates small, random warps or distortions in the image, like tiny dents, bumps, or waves
-	public override string Name
+	public sealed override string Name
 		=> Translations.GetString ("Dents");
 
-	public override string EffectMenuCategory
+	public sealed override string EffectMenuCategory
 		=> Translations.GetString ("Distort");
 
 	public new DentsData Data
 		=> (DentsData) EffectData!; // NRT - Set in constructor
 
-	public override bool IsConfigurable
+	public sealed override bool IsConfigurable
 		=> true;
 
 	protected override IPaletteService Palette { get; }
 	protected override IChromeService Chrome { get; }
 
-	private readonly IWorkspaceService workspace;
-
 	public DentsEffect (IServiceProvider services)
 	{
 		Palette = services.GetService<IPaletteService> ();
 		Chrome = services.GetService<IChromeService> ();
-		workspace = services.GetService<IWorkspaceService> ();
 		EffectData = new DentsData ();
 	}
 
