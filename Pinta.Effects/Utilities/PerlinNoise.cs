@@ -55,7 +55,7 @@ internal static class PerlinNoise
 		}
 		permute_lookup = permuteLookup.MoveToImmutable ();
 
-		// precalculate a rotation matrix - arbitary angle... 
+		// precalculate a rotation matrix - arbitrary angle... 
 		double angle = 137.2 / 180.0 * Math.PI;
 
 		rot_11 = Math.Cos (angle);
@@ -129,7 +129,7 @@ internal static class PerlinNoise
 			// scale amplitude for next octave.
 			amplitude *= roughness;
 
-			// if the contribution is going to be negligable,
+			// if the contribution is going to be negligible,
 			// don't bother with higher octaves.
 			if (amplitude < 0.001) {
 				break;

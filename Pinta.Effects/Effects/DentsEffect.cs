@@ -66,7 +66,7 @@ public sealed class DentsEffect : WarpEffect
 		EffectData = new DentsData ();
 	}
 
-	// Algoritm code ported from PDN
+	// Algorithm code ported from PDN
 	protected override TransformData InverseTransform (TransformData data)
 	{
 		double scale = Data.Scale;
