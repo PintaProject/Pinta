@@ -92,7 +92,7 @@ public sealed class DentsEffect : WarpEffect
 
 		double bumpAngle = theta * PerlinNoise.Compute (ix, iy, effectiveDetail, effectiveRoughness, seed);
 
-		return new TransformData (
+		return new (
 			X: refractionScale * Math.Sin (-bumpAngle),
 			Y: refractionScale * Math.Cos (bumpAngle));
 	}
