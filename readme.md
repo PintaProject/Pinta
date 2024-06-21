@@ -28,7 +28,7 @@ Used under [Creative Commons Attribution 3.0 License](http://creativecommons.org
 Used under [Creative Commons Attribution 3.0 License](http://creativecommons.org/licenses/by/3.0/)
 
 - Pinta contributors, under the same license as the project itself
-(see `Pinta.Resources/icons/pinta-icons.md`) for the list of such icons
+(see `Pinta.Resources/icons/pinta-icons.md` for the list of such icons)
 
 ## Building on Windows
 
