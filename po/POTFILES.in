@@ -210,12 +210,14 @@ Pinta.Effects/Effects/SoftenPortraitEffect.cs
 Pinta.Effects/Effects/TileEffect.cs
 Pinta.Effects/Effects/TwistEffect.cs
 Pinta.Effects/Effects/UnfocusEffect.cs
+Pinta.Effects/Effects/VignetteEffect.cs
 Pinta.Effects/Effects/VoronoiDiagramEffect.cs
 Pinta.Effects/Effects/WarpEffect.cs
 Pinta.Effects/Effects/ZoomBlurEffect.cs
 Pinta.Effects/FriendAssemblies.cs
 Pinta.Effects/Utilities/EffectHelper.cs
 Pinta.Effects/Utilities/PaletteHelper.cs
+Pinta.Effects/Utilities/SrgbUtility.cs
 Pinta.Gui.Addins/AddinInfoView.cs
 Pinta.Gui.Addins/AddinListView.cs
 Pinta.Gui.Addins/AddinListViewItem.cs
