@@ -127,6 +127,7 @@ public static class Icons
 	public const string EffectsBlursZoomBlur = "effects-blurs-zoomblur";
 	public const string EffectsDefault = "effects-default-symbolic";
 	public const string EffectsDistortBulge = "effects-distort-bulge";
+	public const string EffectsDistortDents = "effects-distort-dents";
 	public const string EffectsDistortFrostedGlass = "effects-distort-frostedglass";
 	public const string EffectsDistortPixelate = "effects-distort-pixelate";
 	public const string EffectsDistortPolarInversion = "effects-distort-polarinversion";

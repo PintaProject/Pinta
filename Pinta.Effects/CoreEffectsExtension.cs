@@ -59,9 +59,10 @@ internal sealed class CoreEffectsExtension : IExtension
 		PintaCore.Effects.RegisterEffect (new AddNoiseEffect (services));
 		PintaCore.Effects.RegisterEffect (new BulgeEffect (services));
 		PintaCore.Effects.RegisterEffect (new CloudsEffect (services));
+		PintaCore.Effects.RegisterEffect (new DentsEffect (services));
+		PintaCore.Effects.RegisterEffect (new DitheringEffect (services));
 		PintaCore.Effects.RegisterEffect (new EdgeDetectEffect (services));
 		PintaCore.Effects.RegisterEffect (new EmbossEffect (services));
-		PintaCore.Effects.RegisterEffect (new DitheringEffect (services));
 		PintaCore.Effects.RegisterEffect (new FragmentEffect (services));
 		PintaCore.Effects.RegisterEffect (new FrostedGlassEffect (services));
 		PintaCore.Effects.RegisterEffect (new GaussianBlurEffect (services));
@@ -107,9 +108,10 @@ internal sealed class CoreEffectsExtension : IExtension
 		PintaCore.Effects.UnregisterInstanceOfEffect (typeof (AddNoiseEffect));
 		PintaCore.Effects.UnregisterInstanceOfEffect (typeof (BulgeEffect));
 		PintaCore.Effects.UnregisterInstanceOfEffect (typeof (CloudsEffect));
+		PintaCore.Effects.UnregisterInstanceOfEffect (typeof (DentsEffect));
+		PintaCore.Effects.UnregisterInstanceOfEffect (typeof (DitheringEffect));
 		PintaCore.Effects.UnregisterInstanceOfEffect (typeof (EdgeDetectEffect));
 		PintaCore.Effects.UnregisterInstanceOfEffect (typeof (EmbossEffect));
-		PintaCore.Effects.UnregisterInstanceOfEffect (typeof (DitheringEffect));
 		PintaCore.Effects.UnregisterInstanceOfEffect (typeof (FragmentEffect));
 		PintaCore.Effects.UnregisterInstanceOfEffect (typeof (FrostedGlassEffect));
 		PintaCore.Effects.UnregisterInstanceOfEffect (typeof (GaussianBlurEffect));
