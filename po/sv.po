@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: pinta\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-06-16 01:18+0000\n"
+"POT-Creation-Date: 2024-06-23 01:17+0000\n"
 "PO-Revision-Date: 2024-06-06 05:18+0000\n"
 "Last-Translator: Åke Engelbrektson <eson@svenskasprakfiler.se>\n"
 "Language-Team: Swedish <https://hosted.weblate.org/projects/pinta/pinta/sv/"
@@ -101,7 +101,7 @@ msgstr "Alla filer"
 msgid "Amount"
 msgstr "Mängd"
 
-#: ../Pinta/Dialogs/ResizeCanvasDialog.cs:110
+#: ../Pinta/Dialogs/ResizeCanvasDialog.cs:109
 msgid "Anchor:"
 msgstr "Ankare:"
 
@@ -254,13 +254,13 @@ msgstr "Utbuktning"
 msgid "Burkes"
 msgstr "Burkes"
 
-#: ../Pinta/Dialogs/ResizeCanvasDialog.cs:100
-#: ../Pinta/Dialogs/ResizeImageDialog.cs:170
+#: ../Pinta/Dialogs/ResizeCanvasDialog.cs:99
+#: ../Pinta/Dialogs/ResizeImageDialog.cs:174
 msgid "By absolute size:"
 msgstr "Efter absolut storlek:"
 
 #: ../Pinta/Dialogs/ResizeCanvasDialog.cs:57
-#: ../Pinta/Dialogs/ResizeImageDialog.cs:162
+#: ../Pinta/Dialogs/ResizeImageDialog.cs:167
 msgid "By percentage:"
 msgstr "Efter procent:"
 
@@ -461,7 +461,7 @@ msgstr "Färgschema"
 msgid "Color Scheme Source"
 msgstr "Källa för färgschema"
 
-#: ../Pinta.Effects/Effects/VoronoiDiagramEffect.cs:207
+#: ../Pinta.Effects/Effects/VoronoiDiagramEffect.cs:212
 msgid "Color Sorting"
 msgstr "Färgsortering"
 
@@ -590,7 +590,7 @@ msgstr "Skillnad"
 msgid "Distance"
 msgstr "Avstånd"
 
-#: ../Pinta.Effects/Effects/VoronoiDiagramEffect.cs:197
+#: ../Pinta.Effects/Effects/VoronoiDiagramEffect.cs:202
 msgid "Distance Metric"
 msgstr "Avstånd metriskt"
 
@@ -870,8 +870,8 @@ msgid "Hard Light"
 msgstr "Skarpt ljus"
 
 #: ../Pinta/Dialogs/NewImageDialog.cs:333
-#: ../Pinta/Dialogs/ResizeCanvasDialog.cs:80
-#: ../Pinta/Dialogs/ResizeImageDialog.cs:155
+#: ../Pinta/Dialogs/ResizeCanvasDialog.cs:79
+#: ../Pinta/Dialogs/ResizeImageDialog.cs:160
 msgid "Height:"
 msgstr "Höjd:"
 
@@ -890,17 +890,17 @@ msgid "History"
 msgstr "Historik"
 
 #. Translators: Horizontal color sorting with blue (B) as the leading term
-#: ../Pinta.Effects/Effects/VoronoiDiagramEffect.cs:233
+#: ../Pinta.Effects/Effects/VoronoiDiagramEffect.cs:238
 msgid "Horizontal blue (B)"
 msgstr "Horisontell blå (B)"
 
 #. Translators: Horizontal color sorting with green (G) as the leading term
-#: ../Pinta.Effects/Effects/VoronoiDiagramEffect.cs:236
+#: ../Pinta.Effects/Effects/VoronoiDiagramEffect.cs:241
 msgid "Horizontal green (G)"
 msgstr "Horisontell grön (G)"
 
 #. Translators: Horizontal color sorting with red (R) as the leading term
-#: ../Pinta.Effects/Effects/VoronoiDiagramEffect.cs:239
+#: ../Pinta.Effects/Effects/VoronoiDiagramEffect.cs:244
 msgid "Horizontal red (R)"
 msgstr "Horisontell röd (R)"
 
@@ -1302,8 +1302,8 @@ msgstr "Trollspömarkering"
 msgid "Main Menu"
 msgstr "Huvudmeny"
 
-#: ../Pinta/Dialogs/ResizeCanvasDialog.cs:104
-#: ../Pinta/Dialogs/ResizeImageDialog.cs:114
+#: ../Pinta/Dialogs/ResizeCanvasDialog.cs:103
+#: ../Pinta/Dialogs/ResizeImageDialog.cs:119
 msgid "Maintain aspect ratio"
 msgstr "Bevara proportioner"
 
@@ -1415,7 +1415,7 @@ msgstr "Normal storlek"
 msgid "Normal and Outline"
 msgstr "Normalt och Konturlinje"
 
-#: ../Pinta.Effects/Effects/VoronoiDiagramEffect.cs:200
+#: ../Pinta.Effects/Effects/VoronoiDiagramEffect.cs:205
 msgid "Number of Cells"
 msgstr "Antal celler"
 
@@ -1425,6 +1425,7 @@ msgstr "Antal trådar att använda för rendering"
 
 #: ../Pinta.Effects/Effects/BulgeEffect.cs:112
 #: ../Pinta.Effects/Effects/RadialBlurEffect.cs:173
+#: ../Pinta.Effects/Effects/VignetteEffect.cs:131
 #: ../Pinta.Effects/Effects/ZoomBlurEffect.cs:146
 #: ../Pinta/Dialogs/OffsetSelectionDialog.cs:54
 msgid "Offset"
@@ -1573,6 +1574,7 @@ msgstr "Percentil"
 #: ../Pinta.Effects/Effects/RedEyeRemoveEffect.cs:27
 #: ../Pinta.Effects/Effects/SharpenEffect.cs:27
 #: ../Pinta.Effects/Effects/SoftenPortraitEffect.cs:58
+#: ../Pinta.Effects/Effects/VignetteEffect.cs:51
 msgid "Photo"
 msgstr "Foto"
 
@@ -1727,8 +1729,14 @@ msgstr "Radiell gradient"
 msgid "Radius"
 msgstr "Radie"
 
+#. Translators: This refers to how big the radius is as a percentage of the image's dimensions
+#: ../Pinta.Effects/Effects/BulgeEffect.cs:116
+#: ../Pinta.Effects/Effects/VignetteEffect.cs:135
+msgid "Radius Percentage"
+msgstr ""
+
 #: ../Pinta.Effects/Effects/GradientHelper.cs:17
-#: ../Pinta.Effects/Effects/VoronoiDiagramEffect.cs:230
+#: ../Pinta.Effects/Effects/VoronoiDiagramEffect.cs:235
 msgid "Random"
 msgstr "Slumpmässig"
 
@@ -1738,7 +1746,7 @@ msgstr "Slumpmässig"
 msgid "Random Color Scheme Seed"
 msgstr "Slumpmässigt färgschema"
 
-#: ../Pinta.Effects/Effects/VoronoiDiagramEffect.cs:214
+#: ../Pinta.Effects/Effects/VoronoiDiagramEffect.cs:219
 msgid "Random Colors"
 msgstr "Slumpmässiga färger"
 
@@ -1748,7 +1756,7 @@ msgstr "Slumpmässiga färger"
 msgid "Random Noise"
 msgstr "Slumpmässigt brus"
 
-#: ../Pinta.Effects/Effects/VoronoiDiagramEffect.cs:217
+#: ../Pinta.Effects/Effects/VoronoiDiagramEffect.cs:222
 msgid "Random Point Locations"
 msgstr "Slumpmässiga punktplatser"
 
@@ -1808,7 +1816,7 @@ msgstr "Döp om lager"
 #: ../Pinta.Effects/Effects/CloudsEffect.cs:38
 #: ../Pinta.Effects/Effects/JuliaFractalEffect.cs:32
 #: ../Pinta.Effects/Effects/MandelbrotFractalEffect.cs:32
-#: ../Pinta.Effects/Effects/VoronoiDiagramEffect.cs:22
+#: ../Pinta.Effects/Effects/VoronoiDiagramEffect.cs:27
 msgid "Render"
 msgstr "Rendera"
 
@@ -1842,7 +1850,7 @@ msgid "Reset to Default"
 msgstr "Återställ till standard"
 
 #: ../Pinta.Core/Classes/Document.cs:313
-#: ../Pinta/Dialogs/ResizeCanvasDialog.cs:168
+#: ../Pinta/Dialogs/ResizeCanvasDialog.cs:167
 msgid "Resize Canvas"
 msgstr "Ändra storlek på arbetsytan"
 
@@ -1870,7 +1878,7 @@ msgid "Reverse Color Scheme"
 msgstr "Omvänt färgschema"
 
 #. Translators: In this context, "reverse" is a verb, and the user can choose whether or not they want to reverse the color sorting
-#: ../Pinta.Effects/Effects/VoronoiDiagramEffect.cs:211
+#: ../Pinta.Effects/Effects/VoronoiDiagramEffect.cs:216
 msgid "Reverse Color Sorting"
 msgstr "Omvänd färgsortering"
 
@@ -2015,7 +2023,7 @@ msgid "Show Layer"
 msgstr "Visa lager"
 
 #. Translators: The user can choose whether or not to render the points used in the calculation of a Voronoi diagram
-#: ../Pinta.Effects/Effects/VoronoiDiagramEffect.cs:204
+#: ../Pinta.Effects/Effects/VoronoiDiagramEffect.cs:209
 msgid "Show Points"
 msgstr "Visa punkter"
 
@@ -2070,6 +2078,7 @@ msgid "Status Bar"
 msgstr "Statusfält"
 
 #: ../Pinta.Effects/Effects/ReduceNoiseEffect.cs:92
+#: ../Pinta.Effects/Effects/VignetteEffect.cs:140
 msgid "Strength"
 msgstr "Styrka"
 
@@ -2311,25 +2320,29 @@ msgid "Version: {0}"
 msgstr "Version: {0}"
 
 #. Translators: Vertical color sorting with blue (B) as the leading term
-#: ../Pinta.Effects/Effects/VoronoiDiagramEffect.cs:243
+#: ../Pinta.Effects/Effects/VoronoiDiagramEffect.cs:248
 msgid "Vertical blue (B)"
 msgstr "Vertikal blå (B)"
 
 #. Translators: Vertical color sorting with green (G) as the leading term
-#: ../Pinta.Effects/Effects/VoronoiDiagramEffect.cs:246
+#: ../Pinta.Effects/Effects/VoronoiDiagramEffect.cs:251
 msgid "Vertical green (G)"
 msgstr "Vertikal grön (G)"
 
 #. Translators: Vertical color sorting with red (R) as the leading term
-#: ../Pinta.Effects/Effects/VoronoiDiagramEffect.cs:249
+#: ../Pinta.Effects/Effects/VoronoiDiagramEffect.cs:254
 msgid "Vertical red (R)"
 msgstr "Vertikal röd (R)"
+
+#: ../Pinta.Effects/Effects/VignetteEffect.cs:48
+msgid "Vignette"
+msgstr ""
 
 #: ../Pinta/Dialogs/LayerPropertiesDialog.cs:76
 msgid "Visible"
 msgstr "Synligt"
 
-#: ../Pinta.Effects/Effects/VoronoiDiagramEffect.cs:18
+#: ../Pinta.Effects/Effects/VoronoiDiagramEffect.cs:21
 msgid "Voronoi Diagram"
 msgstr "Voronoi-diagram"
 
@@ -2342,8 +2355,8 @@ msgid "White"
 msgstr "Vit"
 
 #: ../Pinta/Dialogs/NewImageDialog.cs:325
-#: ../Pinta/Dialogs/ResizeCanvasDialog.cs:72
-#: ../Pinta/Dialogs/ResizeImageDialog.cs:148
+#: ../Pinta/Dialogs/ResizeCanvasDialog.cs:71
+#: ../Pinta/Dialogs/ResizeImageDialog.cs:153
 msgid "Width:"
 msgstr "Bredd:"
 
@@ -2470,8 +2483,8 @@ msgid "draw;drawing;paint;painting;graphics;raster;2d;"
 msgstr "rita;teckning;måla;målning;grafik;raster;2d;"
 
 #: ../Pinta/Dialogs/NewImageDialog.cs:277
-#: ../Pinta/Dialogs/ResizeCanvasDialog.cs:95
-#: ../Pinta/Dialogs/ResizeCanvasDialog.cs:98
+#: ../Pinta/Dialogs/ResizeCanvasDialog.cs:94
+#: ../Pinta/Dialogs/ResizeCanvasDialog.cs:97
 #: ../Pinta/Dialogs/ResizeImageDialog.cs:66
 #: ../Pinta/Dialogs/ResizeImageDialog.cs:69
 msgid "pixels"
