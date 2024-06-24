@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: pinta\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-06-16 01:18+0000\n"
+"POT-Creation-Date: 2024-06-23 01:17+0000\n"
 "PO-Revision-Date: 2014-10-04 07:12+0000\n"
 "Last-Translator: Ve4ernik <ve4ernik@gmail.com>\n"
 "Language-Team: Bulgarian <bg@li.org>\n"
@@ -100,7 +100,7 @@ msgstr "Всички файлове"
 msgid "Amount"
 msgstr "Сума"
 
-#: ../Pinta/Dialogs/ResizeCanvasDialog.cs:110
+#: ../Pinta/Dialogs/ResizeCanvasDialog.cs:109
 msgid "Anchor:"
 msgstr "Посока"
 
@@ -253,13 +253,13 @@ msgstr "Издатина"
 msgid "Burkes"
 msgstr ""
 
-#: ../Pinta/Dialogs/ResizeCanvasDialog.cs:100
-#: ../Pinta/Dialogs/ResizeImageDialog.cs:170
+#: ../Pinta/Dialogs/ResizeCanvasDialog.cs:99
+#: ../Pinta/Dialogs/ResizeImageDialog.cs:174
 msgid "By absolute size:"
 msgstr "По абсолютен размер"
 
 #: ../Pinta/Dialogs/ResizeCanvasDialog.cs:57
-#: ../Pinta/Dialogs/ResizeImageDialog.cs:162
+#: ../Pinta/Dialogs/ResizeImageDialog.cs:167
 msgid "By percentage:"
 msgstr "По процент"
 
@@ -454,7 +454,7 @@ msgstr ""
 msgid "Color Scheme Source"
 msgstr ""
 
-#: ../Pinta.Effects/Effects/VoronoiDiagramEffect.cs:207
+#: ../Pinta.Effects/Effects/VoronoiDiagramEffect.cs:212
 msgid "Color Sorting"
 msgstr ""
 
@@ -583,7 +583,7 @@ msgstr ""
 msgid "Distance"
 msgstr "Разстояние"
 
-#: ../Pinta.Effects/Effects/VoronoiDiagramEffect.cs:197
+#: ../Pinta.Effects/Effects/VoronoiDiagramEffect.cs:202
 msgid "Distance Metric"
 msgstr ""
 
@@ -863,8 +863,8 @@ msgid "Hard Light"
 msgstr ""
 
 #: ../Pinta/Dialogs/NewImageDialog.cs:333
-#: ../Pinta/Dialogs/ResizeCanvasDialog.cs:80
-#: ../Pinta/Dialogs/ResizeImageDialog.cs:155
+#: ../Pinta/Dialogs/ResizeCanvasDialog.cs:79
+#: ../Pinta/Dialogs/ResizeImageDialog.cs:160
 msgid "Height:"
 msgstr "Височина:"
 
@@ -883,17 +883,17 @@ msgid "History"
 msgstr "История"
 
 #. Translators: Horizontal color sorting with blue (B) as the leading term
-#: ../Pinta.Effects/Effects/VoronoiDiagramEffect.cs:233
+#: ../Pinta.Effects/Effects/VoronoiDiagramEffect.cs:238
 msgid "Horizontal blue (B)"
 msgstr ""
 
 #. Translators: Horizontal color sorting with green (G) as the leading term
-#: ../Pinta.Effects/Effects/VoronoiDiagramEffect.cs:236
+#: ../Pinta.Effects/Effects/VoronoiDiagramEffect.cs:241
 msgid "Horizontal green (G)"
 msgstr ""
 
 #. Translators: Horizontal color sorting with red (R) as the leading term
-#: ../Pinta.Effects/Effects/VoronoiDiagramEffect.cs:239
+#: ../Pinta.Effects/Effects/VoronoiDiagramEffect.cs:244
 msgid "Horizontal red (R)"
 msgstr ""
 
@@ -1254,8 +1254,8 @@ msgstr "Вълшебна пръчица"
 msgid "Main Menu"
 msgstr ""
 
-#: ../Pinta/Dialogs/ResizeCanvasDialog.cs:104
-#: ../Pinta/Dialogs/ResizeImageDialog.cs:114
+#: ../Pinta/Dialogs/ResizeCanvasDialog.cs:103
+#: ../Pinta/Dialogs/ResizeImageDialog.cs:119
 msgid "Maintain aspect ratio"
 msgstr "Запазване на съотношението"
 
@@ -1367,7 +1367,7 @@ msgstr "Нормален размер"
 msgid "Normal and Outline"
 msgstr "Нормален и контури"
 
-#: ../Pinta.Effects/Effects/VoronoiDiagramEffect.cs:200
+#: ../Pinta.Effects/Effects/VoronoiDiagramEffect.cs:205
 msgid "Number of Cells"
 msgstr ""
 
@@ -1377,6 +1377,7 @@ msgstr ""
 
 #: ../Pinta.Effects/Effects/BulgeEffect.cs:112
 #: ../Pinta.Effects/Effects/RadialBlurEffect.cs:173
+#: ../Pinta.Effects/Effects/VignetteEffect.cs:131
 #: ../Pinta.Effects/Effects/ZoomBlurEffect.cs:146
 #: ../Pinta/Dialogs/OffsetSelectionDialog.cs:54
 msgid "Offset"
@@ -1525,6 +1526,7 @@ msgstr ""
 #: ../Pinta.Effects/Effects/RedEyeRemoveEffect.cs:27
 #: ../Pinta.Effects/Effects/SharpenEffect.cs:27
 #: ../Pinta.Effects/Effects/SoftenPortraitEffect.cs:58
+#: ../Pinta.Effects/Effects/VignetteEffect.cs:51
 msgid "Photo"
 msgstr "Снимка"
 
@@ -1674,8 +1676,14 @@ msgstr "Радиален"
 msgid "Radius"
 msgstr "Радиус"
 
+#. Translators: This refers to how big the radius is as a percentage of the image's dimensions
+#: ../Pinta.Effects/Effects/BulgeEffect.cs:116
+#: ../Pinta.Effects/Effects/VignetteEffect.cs:135
+msgid "Radius Percentage"
+msgstr ""
+
 #: ../Pinta.Effects/Effects/GradientHelper.cs:17
-#: ../Pinta.Effects/Effects/VoronoiDiagramEffect.cs:230
+#: ../Pinta.Effects/Effects/VoronoiDiagramEffect.cs:235
 msgid "Random"
 msgstr ""
 
@@ -1685,7 +1693,7 @@ msgstr ""
 msgid "Random Color Scheme Seed"
 msgstr ""
 
-#: ../Pinta.Effects/Effects/VoronoiDiagramEffect.cs:214
+#: ../Pinta.Effects/Effects/VoronoiDiagramEffect.cs:219
 msgid "Random Colors"
 msgstr ""
 
@@ -1695,7 +1703,7 @@ msgstr ""
 msgid "Random Noise"
 msgstr "Произволно замъгляване"
 
-#: ../Pinta.Effects/Effects/VoronoiDiagramEffect.cs:217
+#: ../Pinta.Effects/Effects/VoronoiDiagramEffect.cs:222
 msgid "Random Point Locations"
 msgstr ""
 
@@ -1755,7 +1763,7 @@ msgstr "Преименуване на слоя"
 #: ../Pinta.Effects/Effects/CloudsEffect.cs:38
 #: ../Pinta.Effects/Effects/JuliaFractalEffect.cs:32
 #: ../Pinta.Effects/Effects/MandelbrotFractalEffect.cs:32
-#: ../Pinta.Effects/Effects/VoronoiDiagramEffect.cs:22
+#: ../Pinta.Effects/Effects/VoronoiDiagramEffect.cs:27
 msgid "Render"
 msgstr "Генериране"
 
@@ -1789,7 +1797,7 @@ msgid "Reset to Default"
 msgstr "Reset to Default"
 
 #: ../Pinta.Core/Classes/Document.cs:313
-#: ../Pinta/Dialogs/ResizeCanvasDialog.cs:168
+#: ../Pinta/Dialogs/ResizeCanvasDialog.cs:167
 msgid "Resize Canvas"
 msgstr "Преоразмеряване на платното"
 
@@ -1817,7 +1825,7 @@ msgid "Reverse Color Scheme"
 msgstr ""
 
 #. Translators: In this context, "reverse" is a verb, and the user can choose whether or not they want to reverse the color sorting
-#: ../Pinta.Effects/Effects/VoronoiDiagramEffect.cs:211
+#: ../Pinta.Effects/Effects/VoronoiDiagramEffect.cs:216
 msgid "Reverse Color Sorting"
 msgstr ""
 
@@ -1962,7 +1970,7 @@ msgid "Show Layer"
 msgstr "Покажи слоя"
 
 #. Translators: The user can choose whether or not to render the points used in the calculation of a Voronoi diagram
-#: ../Pinta.Effects/Effects/VoronoiDiagramEffect.cs:204
+#: ../Pinta.Effects/Effects/VoronoiDiagramEffect.cs:209
 msgid "Show Points"
 msgstr ""
 
@@ -2017,6 +2025,7 @@ msgid "Status Bar"
 msgstr ""
 
 #: ../Pinta.Effects/Effects/ReduceNoiseEffect.cs:92
+#: ../Pinta.Effects/Effects/VignetteEffect.cs:140
 msgid "Strength"
 msgstr "Сила"
 
@@ -2251,25 +2260,29 @@ msgid "Version: {0}"
 msgstr ""
 
 #. Translators: Vertical color sorting with blue (B) as the leading term
-#: ../Pinta.Effects/Effects/VoronoiDiagramEffect.cs:243
+#: ../Pinta.Effects/Effects/VoronoiDiagramEffect.cs:248
 msgid "Vertical blue (B)"
 msgstr ""
 
 #. Translators: Vertical color sorting with green (G) as the leading term
-#: ../Pinta.Effects/Effects/VoronoiDiagramEffect.cs:246
+#: ../Pinta.Effects/Effects/VoronoiDiagramEffect.cs:251
 msgid "Vertical green (G)"
 msgstr ""
 
 #. Translators: Vertical color sorting with red (R) as the leading term
-#: ../Pinta.Effects/Effects/VoronoiDiagramEffect.cs:249
+#: ../Pinta.Effects/Effects/VoronoiDiagramEffect.cs:254
 msgid "Vertical red (R)"
+msgstr ""
+
+#: ../Pinta.Effects/Effects/VignetteEffect.cs:48
+msgid "Vignette"
 msgstr ""
 
 #: ../Pinta/Dialogs/LayerPropertiesDialog.cs:76
 msgid "Visible"
 msgstr "Видим"
 
-#: ../Pinta.Effects/Effects/VoronoiDiagramEffect.cs:18
+#: ../Pinta.Effects/Effects/VoronoiDiagramEffect.cs:21
 msgid "Voronoi Diagram"
 msgstr ""
 
@@ -2282,8 +2295,8 @@ msgid "White"
 msgstr ""
 
 #: ../Pinta/Dialogs/NewImageDialog.cs:325
-#: ../Pinta/Dialogs/ResizeCanvasDialog.cs:72
-#: ../Pinta/Dialogs/ResizeImageDialog.cs:148
+#: ../Pinta/Dialogs/ResizeCanvasDialog.cs:71
+#: ../Pinta/Dialogs/ResizeImageDialog.cs:153
 msgid "Width:"
 msgstr "Широчина:"
 
@@ -2408,8 +2421,8 @@ msgid "draw;drawing;paint;painting;graphics;raster;2d;"
 msgstr ""
 
 #: ../Pinta/Dialogs/NewImageDialog.cs:277
-#: ../Pinta/Dialogs/ResizeCanvasDialog.cs:95
-#: ../Pinta/Dialogs/ResizeCanvasDialog.cs:98
+#: ../Pinta/Dialogs/ResizeCanvasDialog.cs:94
+#: ../Pinta/Dialogs/ResizeCanvasDialog.cs:97
 #: ../Pinta/Dialogs/ResizeImageDialog.cs:66
 #: ../Pinta/Dialogs/ResizeImageDialog.cs:69
 msgid "pixels"

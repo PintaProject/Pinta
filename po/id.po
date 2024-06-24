@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: pinta\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-06-16 01:18+0000\n"
+"POT-Creation-Date: 2024-06-23 01:17+0000\n"
 "PO-Revision-Date: 2024-03-24 08:01+0000\n"
 "Last-Translator: Rizal Muttaqin <riz_17_oke@yahoo.co.id>\n"
 "Language-Team: Indonesian <https://hosted.weblate.org/projects/pinta/pinta/"
@@ -103,7 +103,7 @@ msgstr "Semua berkas"
 msgid "Amount"
 msgstr "Sebanyak"
 
-#: ../Pinta/Dialogs/ResizeCanvasDialog.cs:110
+#: ../Pinta/Dialogs/ResizeCanvasDialog.cs:109
 msgid "Anchor:"
 msgstr "Jangkar:"
 
@@ -256,13 +256,13 @@ msgstr "Tonjolkan"
 msgid "Burkes"
 msgstr ""
 
-#: ../Pinta/Dialogs/ResizeCanvasDialog.cs:100
-#: ../Pinta/Dialogs/ResizeImageDialog.cs:170
+#: ../Pinta/Dialogs/ResizeCanvasDialog.cs:99
+#: ../Pinta/Dialogs/ResizeImageDialog.cs:174
 msgid "By absolute size:"
 msgstr "Per ukuran absolut:"
 
 #: ../Pinta/Dialogs/ResizeCanvasDialog.cs:57
-#: ../Pinta/Dialogs/ResizeImageDialog.cs:162
+#: ../Pinta/Dialogs/ResizeImageDialog.cs:167
 msgid "By percentage:"
 msgstr "Per persentasi:"
 
@@ -463,7 +463,7 @@ msgstr ""
 msgid "Color Scheme Source"
 msgstr ""
 
-#: ../Pinta.Effects/Effects/VoronoiDiagramEffect.cs:207
+#: ../Pinta.Effects/Effects/VoronoiDiagramEffect.cs:212
 msgid "Color Sorting"
 msgstr ""
 
@@ -592,7 +592,7 @@ msgstr "Selisih"
 msgid "Distance"
 msgstr "Jarak"
 
-#: ../Pinta.Effects/Effects/VoronoiDiagramEffect.cs:197
+#: ../Pinta.Effects/Effects/VoronoiDiagramEffect.cs:202
 msgid "Distance Metric"
 msgstr ""
 
@@ -872,8 +872,8 @@ msgid "Hard Light"
 msgstr "Cahaya Keras"
 
 #: ../Pinta/Dialogs/NewImageDialog.cs:333
-#: ../Pinta/Dialogs/ResizeCanvasDialog.cs:80
-#: ../Pinta/Dialogs/ResizeImageDialog.cs:155
+#: ../Pinta/Dialogs/ResizeCanvasDialog.cs:79
+#: ../Pinta/Dialogs/ResizeImageDialog.cs:160
 msgid "Height:"
 msgstr "Tinggi:"
 
@@ -892,17 +892,17 @@ msgid "History"
 msgstr "Riwayat"
 
 #. Translators: Horizontal color sorting with blue (B) as the leading term
-#: ../Pinta.Effects/Effects/VoronoiDiagramEffect.cs:233
+#: ../Pinta.Effects/Effects/VoronoiDiagramEffect.cs:238
 msgid "Horizontal blue (B)"
 msgstr ""
 
 #. Translators: Horizontal color sorting with green (G) as the leading term
-#: ../Pinta.Effects/Effects/VoronoiDiagramEffect.cs:236
+#: ../Pinta.Effects/Effects/VoronoiDiagramEffect.cs:241
 msgid "Horizontal green (G)"
 msgstr ""
 
 #. Translators: Horizontal color sorting with red (R) as the leading term
-#: ../Pinta.Effects/Effects/VoronoiDiagramEffect.cs:239
+#: ../Pinta.Effects/Effects/VoronoiDiagramEffect.cs:244
 msgid "Horizontal red (R)"
 msgstr ""
 
@@ -1304,8 +1304,8 @@ msgstr "Pemilih Tongkat Ajaib"
 msgid "Main Menu"
 msgstr ""
 
-#: ../Pinta/Dialogs/ResizeCanvasDialog.cs:104
-#: ../Pinta/Dialogs/ResizeImageDialog.cs:114
+#: ../Pinta/Dialogs/ResizeCanvasDialog.cs:103
+#: ../Pinta/Dialogs/ResizeImageDialog.cs:119
 msgid "Maintain aspect ratio"
 msgstr "Pertahankan rasio panjang-lebar"
 
@@ -1417,7 +1417,7 @@ msgstr "Ukuran Normal"
 msgid "Normal and Outline"
 msgstr "Normal dan Skema"
 
-#: ../Pinta.Effects/Effects/VoronoiDiagramEffect.cs:200
+#: ../Pinta.Effects/Effects/VoronoiDiagramEffect.cs:205
 msgid "Number of Cells"
 msgstr ""
 
@@ -1427,6 +1427,7 @@ msgstr ""
 
 #: ../Pinta.Effects/Effects/BulgeEffect.cs:112
 #: ../Pinta.Effects/Effects/RadialBlurEffect.cs:173
+#: ../Pinta.Effects/Effects/VignetteEffect.cs:131
 #: ../Pinta.Effects/Effects/ZoomBlurEffect.cs:146
 #: ../Pinta/Dialogs/OffsetSelectionDialog.cs:54
 msgid "Offset"
@@ -1575,6 +1576,7 @@ msgstr "Persentil"
 #: ../Pinta.Effects/Effects/RedEyeRemoveEffect.cs:27
 #: ../Pinta.Effects/Effects/SharpenEffect.cs:27
 #: ../Pinta.Effects/Effects/SoftenPortraitEffect.cs:58
+#: ../Pinta.Effects/Effects/VignetteEffect.cs:51
 msgid "Photo"
 msgstr "Foto"
 
@@ -1731,8 +1733,14 @@ msgstr "Gradasi Melingkar"
 msgid "Radius"
 msgstr "Jari-jari"
 
+#. Translators: This refers to how big the radius is as a percentage of the image's dimensions
+#: ../Pinta.Effects/Effects/BulgeEffect.cs:116
+#: ../Pinta.Effects/Effects/VignetteEffect.cs:135
+msgid "Radius Percentage"
+msgstr ""
+
 #: ../Pinta.Effects/Effects/GradientHelper.cs:17
-#: ../Pinta.Effects/Effects/VoronoiDiagramEffect.cs:230
+#: ../Pinta.Effects/Effects/VoronoiDiagramEffect.cs:235
 msgid "Random"
 msgstr ""
 
@@ -1742,7 +1750,7 @@ msgstr ""
 msgid "Random Color Scheme Seed"
 msgstr ""
 
-#: ../Pinta.Effects/Effects/VoronoiDiagramEffect.cs:214
+#: ../Pinta.Effects/Effects/VoronoiDiagramEffect.cs:219
 msgid "Random Colors"
 msgstr ""
 
@@ -1752,7 +1760,7 @@ msgstr ""
 msgid "Random Noise"
 msgstr "Derau Acak"
 
-#: ../Pinta.Effects/Effects/VoronoiDiagramEffect.cs:217
+#: ../Pinta.Effects/Effects/VoronoiDiagramEffect.cs:222
 msgid "Random Point Locations"
 msgstr ""
 
@@ -1812,7 +1820,7 @@ msgstr "Ubah Nama Lapisan"
 #: ../Pinta.Effects/Effects/CloudsEffect.cs:38
 #: ../Pinta.Effects/Effects/JuliaFractalEffect.cs:32
 #: ../Pinta.Effects/Effects/MandelbrotFractalEffect.cs:32
-#: ../Pinta.Effects/Effects/VoronoiDiagramEffect.cs:22
+#: ../Pinta.Effects/Effects/VoronoiDiagramEffect.cs:27
 msgid "Render"
 msgstr "Pencitraan"
 
@@ -1846,7 +1854,7 @@ msgid "Reset to Default"
 msgstr "Setel ulang ke Bawaan"
 
 #: ../Pinta.Core/Classes/Document.cs:313
-#: ../Pinta/Dialogs/ResizeCanvasDialog.cs:168
+#: ../Pinta/Dialogs/ResizeCanvasDialog.cs:167
 msgid "Resize Canvas"
 msgstr "Ubah Ukuran Kanvas"
 
@@ -1874,7 +1882,7 @@ msgid "Reverse Color Scheme"
 msgstr ""
 
 #. Translators: In this context, "reverse" is a verb, and the user can choose whether or not they want to reverse the color sorting
-#: ../Pinta.Effects/Effects/VoronoiDiagramEffect.cs:211
+#: ../Pinta.Effects/Effects/VoronoiDiagramEffect.cs:216
 msgid "Reverse Color Sorting"
 msgstr ""
 
@@ -2019,7 +2027,7 @@ msgid "Show Layer"
 msgstr "Tampilkan Lapisan"
 
 #. Translators: The user can choose whether or not to render the points used in the calculation of a Voronoi diagram
-#: ../Pinta.Effects/Effects/VoronoiDiagramEffect.cs:204
+#: ../Pinta.Effects/Effects/VoronoiDiagramEffect.cs:209
 msgid "Show Points"
 msgstr ""
 
@@ -2074,6 +2082,7 @@ msgid "Status Bar"
 msgstr "Bilah Status"
 
 #: ../Pinta.Effects/Effects/ReduceNoiseEffect.cs:92
+#: ../Pinta.Effects/Effects/VignetteEffect.cs:140
 msgid "Strength"
 msgstr "Kekuatan"
 
@@ -2308,25 +2317,29 @@ msgid "Version: {0}"
 msgstr ""
 
 #. Translators: Vertical color sorting with blue (B) as the leading term
-#: ../Pinta.Effects/Effects/VoronoiDiagramEffect.cs:243
+#: ../Pinta.Effects/Effects/VoronoiDiagramEffect.cs:248
 msgid "Vertical blue (B)"
 msgstr ""
 
 #. Translators: Vertical color sorting with green (G) as the leading term
-#: ../Pinta.Effects/Effects/VoronoiDiagramEffect.cs:246
+#: ../Pinta.Effects/Effects/VoronoiDiagramEffect.cs:251
 msgid "Vertical green (G)"
 msgstr ""
 
 #. Translators: Vertical color sorting with red (R) as the leading term
-#: ../Pinta.Effects/Effects/VoronoiDiagramEffect.cs:249
+#: ../Pinta.Effects/Effects/VoronoiDiagramEffect.cs:254
 msgid "Vertical red (R)"
+msgstr ""
+
+#: ../Pinta.Effects/Effects/VignetteEffect.cs:48
+msgid "Vignette"
 msgstr ""
 
 #: ../Pinta/Dialogs/LayerPropertiesDialog.cs:76
 msgid "Visible"
 msgstr "Terlihat"
 
-#: ../Pinta.Effects/Effects/VoronoiDiagramEffect.cs:18
+#: ../Pinta.Effects/Effects/VoronoiDiagramEffect.cs:21
 msgid "Voronoi Diagram"
 msgstr ""
 
@@ -2339,8 +2352,8 @@ msgid "White"
 msgstr "Putih"
 
 #: ../Pinta/Dialogs/NewImageDialog.cs:325
-#: ../Pinta/Dialogs/ResizeCanvasDialog.cs:72
-#: ../Pinta/Dialogs/ResizeImageDialog.cs:148
+#: ../Pinta/Dialogs/ResizeCanvasDialog.cs:71
+#: ../Pinta/Dialogs/ResizeImageDialog.cs:153
 msgid "Width:"
 msgstr "Lebar:"
 
@@ -2467,8 +2480,8 @@ msgid "draw;drawing;paint;painting;graphics;raster;2d;"
 msgstr "gambar,menggambar,cat,mencat,grafik,raster;2d;"
 
 #: ../Pinta/Dialogs/NewImageDialog.cs:277
-#: ../Pinta/Dialogs/ResizeCanvasDialog.cs:95
-#: ../Pinta/Dialogs/ResizeCanvasDialog.cs:98
+#: ../Pinta/Dialogs/ResizeCanvasDialog.cs:94
+#: ../Pinta/Dialogs/ResizeCanvasDialog.cs:97
 #: ../Pinta/Dialogs/ResizeImageDialog.cs:66
 #: ../Pinta/Dialogs/ResizeImageDialog.cs:69
 msgid "pixels"

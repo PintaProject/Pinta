@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: pinta\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-06-16 01:18+0000\n"
+"POT-Creation-Date: 2024-06-23 01:17+0000\n"
 "PO-Revision-Date: 2024-06-03 15:09+0000\n"
 "Last-Translator: yiannis ioannides <sub@wai.ai>\n"
 "Language-Team: Greek <https://hosted.weblate.org/projects/pinta/pinta/el/>\n"
@@ -100,7 +100,7 @@ msgstr "Όλα τα αρχεία"
 msgid "Amount"
 msgstr "Ποσότητα"
 
-#: ../Pinta/Dialogs/ResizeCanvasDialog.cs:110
+#: ../Pinta/Dialogs/ResizeCanvasDialog.cs:109
 msgid "Anchor:"
 msgstr "Αγκύρωση:"
 
@@ -253,13 +253,13 @@ msgstr "Διόγκωση"
 msgid "Burkes"
 msgstr "Μπέρκ"
 
-#: ../Pinta/Dialogs/ResizeCanvasDialog.cs:100
-#: ../Pinta/Dialogs/ResizeImageDialog.cs:170
+#: ../Pinta/Dialogs/ResizeCanvasDialog.cs:99
+#: ../Pinta/Dialogs/ResizeImageDialog.cs:174
 msgid "By absolute size:"
 msgstr "Σε απόλυτο μέγεθος:"
 
 #: ../Pinta/Dialogs/ResizeCanvasDialog.cs:57
-#: ../Pinta/Dialogs/ResizeImageDialog.cs:162
+#: ../Pinta/Dialogs/ResizeImageDialog.cs:167
 msgid "By percentage:"
 msgstr "Σε ποσοστό:"
 
@@ -463,7 +463,7 @@ msgstr "Συνδυασμός χρωμάτων"
 msgid "Color Scheme Source"
 msgstr "Πηγή συνδυασμού χρωμάτων"
 
-#: ../Pinta.Effects/Effects/VoronoiDiagramEffect.cs:207
+#: ../Pinta.Effects/Effects/VoronoiDiagramEffect.cs:212
 msgid "Color Sorting"
 msgstr "Κατανομή χρωμάτων"
 
@@ -592,7 +592,7 @@ msgstr "Διαφορά"
 msgid "Distance"
 msgstr "Απόσταση"
 
-#: ../Pinta.Effects/Effects/VoronoiDiagramEffect.cs:197
+#: ../Pinta.Effects/Effects/VoronoiDiagramEffect.cs:202
 msgid "Distance Metric"
 msgstr "Μονάδα απόστασης"
 
@@ -872,8 +872,8 @@ msgid "Hard Light"
 msgstr "Έντονο φως"
 
 #: ../Pinta/Dialogs/NewImageDialog.cs:333
-#: ../Pinta/Dialogs/ResizeCanvasDialog.cs:80
-#: ../Pinta/Dialogs/ResizeImageDialog.cs:155
+#: ../Pinta/Dialogs/ResizeCanvasDialog.cs:79
+#: ../Pinta/Dialogs/ResizeImageDialog.cs:160
 msgid "Height:"
 msgstr "Ύψος:"
 
@@ -892,17 +892,17 @@ msgid "History"
 msgstr "Ιστορικό"
 
 #. Translators: Horizontal color sorting with blue (B) as the leading term
-#: ../Pinta.Effects/Effects/VoronoiDiagramEffect.cs:233
+#: ../Pinta.Effects/Effects/VoronoiDiagramEffect.cs:238
 msgid "Horizontal blue (B)"
 msgstr "Οριζόντιο μπλέ (B)"
 
 #. Translators: Horizontal color sorting with green (G) as the leading term
-#: ../Pinta.Effects/Effects/VoronoiDiagramEffect.cs:236
+#: ../Pinta.Effects/Effects/VoronoiDiagramEffect.cs:241
 msgid "Horizontal green (G)"
 msgstr "Οριζόντιο πράσινο (G)"
 
 #. Translators: Horizontal color sorting with red (R) as the leading term
-#: ../Pinta.Effects/Effects/VoronoiDiagramEffect.cs:239
+#: ../Pinta.Effects/Effects/VoronoiDiagramEffect.cs:244
 msgid "Horizontal red (R)"
 msgstr "Οριζόντιο κόκκινο (R)"
 
@@ -1305,8 +1305,8 @@ msgstr "Επιλογή με το Μαγικό ραβδί"
 msgid "Main Menu"
 msgstr "Κυρίως μενού"
 
-#: ../Pinta/Dialogs/ResizeCanvasDialog.cs:104
-#: ../Pinta/Dialogs/ResizeImageDialog.cs:114
+#: ../Pinta/Dialogs/ResizeCanvasDialog.cs:103
+#: ../Pinta/Dialogs/ResizeImageDialog.cs:119
 msgid "Maintain aspect ratio"
 msgstr "Διατήρηση αναλογίας διαστάσεων"
 
@@ -1418,7 +1418,7 @@ msgstr "Κανονικό μέγεθος"
 msgid "Normal and Outline"
 msgstr "Κανονικό και περίγραμμα."
 
-#: ../Pinta.Effects/Effects/VoronoiDiagramEffect.cs:200
+#: ../Pinta.Effects/Effects/VoronoiDiagramEffect.cs:205
 msgid "Number of Cells"
 msgstr "Αριθμός κελιών"
 
@@ -1428,6 +1428,7 @@ msgstr "Αριθμός νημάτων προς απόδοση"
 
 #: ../Pinta.Effects/Effects/BulgeEffect.cs:112
 #: ../Pinta.Effects/Effects/RadialBlurEffect.cs:173
+#: ../Pinta.Effects/Effects/VignetteEffect.cs:131
 #: ../Pinta.Effects/Effects/ZoomBlurEffect.cs:146
 #: ../Pinta/Dialogs/OffsetSelectionDialog.cs:54
 msgid "Offset"
@@ -1576,6 +1577,7 @@ msgstr "Ποσοστημόριο"
 #: ../Pinta.Effects/Effects/RedEyeRemoveEffect.cs:27
 #: ../Pinta.Effects/Effects/SharpenEffect.cs:27
 #: ../Pinta.Effects/Effects/SoftenPortraitEffect.cs:58
+#: ../Pinta.Effects/Effects/VignetteEffect.cs:51
 msgid "Photo"
 msgstr "Φωτογραφία"
 
@@ -1732,8 +1734,14 @@ msgstr "Ακτινική διαβάθμιση χρώματος"
 msgid "Radius"
 msgstr "Ακτίνα"
 
+#. Translators: This refers to how big the radius is as a percentage of the image's dimensions
+#: ../Pinta.Effects/Effects/BulgeEffect.cs:116
+#: ../Pinta.Effects/Effects/VignetteEffect.cs:135
+msgid "Radius Percentage"
+msgstr ""
+
 #: ../Pinta.Effects/Effects/GradientHelper.cs:17
-#: ../Pinta.Effects/Effects/VoronoiDiagramEffect.cs:230
+#: ../Pinta.Effects/Effects/VoronoiDiagramEffect.cs:235
 msgid "Random"
 msgstr "Τυχαίο"
 
@@ -1743,7 +1751,7 @@ msgstr "Τυχαίο"
 msgid "Random Color Scheme Seed"
 msgstr "Αριθμός τυχαίου συνδυασμού χρωμάτων"
 
-#: ../Pinta.Effects/Effects/VoronoiDiagramEffect.cs:214
+#: ../Pinta.Effects/Effects/VoronoiDiagramEffect.cs:219
 msgid "Random Colors"
 msgstr "Τυχαία χρώματα"
 
@@ -1753,7 +1761,7 @@ msgstr "Τυχαία χρώματα"
 msgid "Random Noise"
 msgstr "Τυχαίος θόρυβος"
 
-#: ../Pinta.Effects/Effects/VoronoiDiagramEffect.cs:217
+#: ../Pinta.Effects/Effects/VoronoiDiagramEffect.cs:222
 msgid "Random Point Locations"
 msgstr "Τυχαία σημεία"
 
@@ -1813,7 +1821,7 @@ msgstr "Μετονομασία επιπέδου"
 #: ../Pinta.Effects/Effects/CloudsEffect.cs:38
 #: ../Pinta.Effects/Effects/JuliaFractalEffect.cs:32
 #: ../Pinta.Effects/Effects/MandelbrotFractalEffect.cs:32
-#: ../Pinta.Effects/Effects/VoronoiDiagramEffect.cs:22
+#: ../Pinta.Effects/Effects/VoronoiDiagramEffect.cs:27
 msgid "Render"
 msgstr "Απόδοση"
 
@@ -1847,7 +1855,7 @@ msgid "Reset to Default"
 msgstr "Επαναφορά στην προεπιλογή"
 
 #: ../Pinta.Core/Classes/Document.cs:313
-#: ../Pinta/Dialogs/ResizeCanvasDialog.cs:168
+#: ../Pinta/Dialogs/ResizeCanvasDialog.cs:167
 msgid "Resize Canvas"
 msgstr "Αλλαγή μεγέθους καμβά"
 
@@ -1875,7 +1883,7 @@ msgid "Reverse Color Scheme"
 msgstr "Αντιστροφή συνδυασμού χρωμάτων"
 
 #. Translators: In this context, "reverse" is a verb, and the user can choose whether or not they want to reverse the color sorting
-#: ../Pinta.Effects/Effects/VoronoiDiagramEffect.cs:211
+#: ../Pinta.Effects/Effects/VoronoiDiagramEffect.cs:216
 msgid "Reverse Color Sorting"
 msgstr "Αντιστροφή κατανομής χρωμάτων"
 
@@ -2020,7 +2028,7 @@ msgid "Show Layer"
 msgstr "Εμφάνισηη επιπέδου"
 
 #. Translators: The user can choose whether or not to render the points used in the calculation of a Voronoi diagram
-#: ../Pinta.Effects/Effects/VoronoiDiagramEffect.cs:204
+#: ../Pinta.Effects/Effects/VoronoiDiagramEffect.cs:209
 msgid "Show Points"
 msgstr "Εμφάνιση σημείων"
 
@@ -2075,6 +2083,7 @@ msgid "Status Bar"
 msgstr "Μπάρα κατάστασης"
 
 #: ../Pinta.Effects/Effects/ReduceNoiseEffect.cs:92
+#: ../Pinta.Effects/Effects/VignetteEffect.cs:140
 msgid "Strength"
 msgstr "Δύναμη"
 
@@ -2317,25 +2326,29 @@ msgid "Version: {0}"
 msgstr "Έκδοση: {0}"
 
 #. Translators: Vertical color sorting with blue (B) as the leading term
-#: ../Pinta.Effects/Effects/VoronoiDiagramEffect.cs:243
+#: ../Pinta.Effects/Effects/VoronoiDiagramEffect.cs:248
 msgid "Vertical blue (B)"
 msgstr "Κάθετο μπλε (B)"
 
 #. Translators: Vertical color sorting with green (G) as the leading term
-#: ../Pinta.Effects/Effects/VoronoiDiagramEffect.cs:246
+#: ../Pinta.Effects/Effects/VoronoiDiagramEffect.cs:251
 msgid "Vertical green (G)"
 msgstr "Κάθετο πράσινο (G)"
 
 #. Translators: Vertical color sorting with red (R) as the leading term
-#: ../Pinta.Effects/Effects/VoronoiDiagramEffect.cs:249
+#: ../Pinta.Effects/Effects/VoronoiDiagramEffect.cs:254
 msgid "Vertical red (R)"
 msgstr "Κάθετο κόκκινο (R)"
+
+#: ../Pinta.Effects/Effects/VignetteEffect.cs:48
+msgid "Vignette"
+msgstr ""
 
 #: ../Pinta/Dialogs/LayerPropertiesDialog.cs:76
 msgid "Visible"
 msgstr "Ορατό"
 
-#: ../Pinta.Effects/Effects/VoronoiDiagramEffect.cs:18
+#: ../Pinta.Effects/Effects/VoronoiDiagramEffect.cs:21
 msgid "Voronoi Diagram"
 msgstr "Διάγραμμα Voronoi"
 
@@ -2348,8 +2361,8 @@ msgid "White"
 msgstr "Άσπρο"
 
 #: ../Pinta/Dialogs/NewImageDialog.cs:325
-#: ../Pinta/Dialogs/ResizeCanvasDialog.cs:72
-#: ../Pinta/Dialogs/ResizeImageDialog.cs:148
+#: ../Pinta/Dialogs/ResizeCanvasDialog.cs:71
+#: ../Pinta/Dialogs/ResizeImageDialog.cs:153
 msgid "Width:"
 msgstr "Πλάτος:"
 
@@ -2476,8 +2489,8 @@ msgid "draw;drawing;paint;painting;graphics;raster;2d;"
 msgstr "ζωγραφίζω;ζωγραφική;βάφω;βαφή;γραφικά;raster;2d;"
 
 #: ../Pinta/Dialogs/NewImageDialog.cs:277
-#: ../Pinta/Dialogs/ResizeCanvasDialog.cs:95
-#: ../Pinta/Dialogs/ResizeCanvasDialog.cs:98
+#: ../Pinta/Dialogs/ResizeCanvasDialog.cs:94
+#: ../Pinta/Dialogs/ResizeCanvasDialog.cs:97
 #: ../Pinta/Dialogs/ResizeImageDialog.cs:66
 #: ../Pinta/Dialogs/ResizeImageDialog.cs:69
 msgid "pixels"
