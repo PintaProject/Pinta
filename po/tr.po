@@ -8,16 +8,16 @@ msgstr ""
 "Project-Id-Version: pinta\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2024-06-23 01:17+0000\n"
-"PO-Revision-Date: 2024-03-18 07:01+0000\n"
+"PO-Revision-Date: 2024-06-26 13:09+0000\n"
 "Last-Translator: Oğuz Ersen <oguz@ersen.moe>\n"
-"Language-Team: Turkish <https://hosted.weblate.org/projects/pinta/pinta/tr/"
-">\n"
+"Language-Team: Turkish <https://hosted.weblate.org/projects/pinta/pinta/tr/>"
+"\n"
 "Language: tr\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Generator: Weblate 5.5-dev\n"
+"X-Generator: Weblate 5.6-rc\n"
 "X-Launchpad-Export-Date: 2023-12-18 03:00+0000\n"
 
 #: ../Pinta.Gui.Addins/InstallDialog.cs:257
@@ -1735,7 +1735,7 @@ msgstr "Yarıçap"
 #: ../Pinta.Effects/Effects/BulgeEffect.cs:116
 #: ../Pinta.Effects/Effects/VignetteEffect.cs:135
 msgid "Radius Percentage"
-msgstr ""
+msgstr "Yarıçap Yüzdesi"
 
 #: ../Pinta.Effects/Effects/GradientHelper.cs:17
 #: ../Pinta.Effects/Effects/VoronoiDiagramEffect.cs:235
@@ -2338,7 +2338,7 @@ msgstr "Dikey kırmızı (K)"
 
 #: ../Pinta.Effects/Effects/VignetteEffect.cs:48
 msgid "Vignette"
-msgstr ""
+msgstr "Süsleme"
 
 #: ../Pinta/Dialogs/LayerPropertiesDialog.cs:76
 msgid "Visible"
