@@ -42,15 +42,12 @@ public sealed class ActionManager
 
 	private readonly SystemManager system_manager;
 	private readonly ChromeManager chrome_manager;
-	private readonly WorkspaceManager workspace_manager;
 	public ActionManager (
 		SystemManager systemManager,
-		ChromeManager chromeManager,
-		WorkspaceManager workspaceManager)
+		ChromeManager chromeManager)
 	{
 		system_manager = systemManager;
 		chrome_manager = chromeManager;
-		workspace_manager = workspaceManager;
 	}
 
 	public void CreateToolBar (Gtk.Box toolbar)
@@ -106,7 +103,7 @@ public sealed class ActionManager
 		header.PackStart (Edit.Deselect.CreateToolBarItem ());
 	}
 
-	public void CreateStatusBar (Gtk.Box statusbar)
+	public void CreateStatusBar (Gtk.Box statusbar, WorkspaceManager workspaceManager)
 	{
 		// Cursor position widget
 		statusbar.Append (Gtk.Image.NewFromIconName (Resources.Icons.CursorPosition));
@@ -125,8 +122,8 @@ public sealed class ActionManager
 		var selection_size = Gtk.Label.New ("  0, 0");
 		statusbar.Append (selection_size);
 
-		workspace_manager.SelectionChanged += delegate {
-			var bounds = workspace_manager.HasOpenDocuments ? workspace_manager.ActiveDocument.Selection.GetBounds () : new RectangleD ();
+		workspaceManager.SelectionChanged += delegate {
+			var bounds = workspaceManager.HasOpenDocuments ? workspaceManager.ActiveDocument.Selection.GetBounds () : new RectangleD ();
 			selection_size.SetText ($"  {bounds.Width}, {bounds.Height}");
 		};
 

@@ -427,7 +427,7 @@ public sealed class MainWindow
 			Halign = Align.Fill
 		});
 
-		PintaCore.Actions.CreateStatusBar (statusbar);
+		PintaCore.Actions.CreateStatusBar (statusbar, PintaCore.Workspace);
 
 		PintaCore.Chrome.InitializeStatusBar (statusbar);
 	}

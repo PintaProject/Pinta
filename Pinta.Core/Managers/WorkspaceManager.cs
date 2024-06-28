@@ -223,7 +223,7 @@ public sealed class WorkspaceManager : IWorkspaceService
 		Layer background = doc.Layers.AddNewLayer (Translations.GetString ("Background"));
 
 		if (backgroundColor.A != 0) {
-			var g = new Cairo.Context (background.Surface);
+			Cairo.Context g = new (background.Surface);
 			g.SetSourceColor (backgroundColor);
 			g.Paint ();
 		}
