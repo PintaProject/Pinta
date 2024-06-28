@@ -87,6 +87,16 @@ public sealed class ToolManager : IEnumerable<BaseTool>, IToolService
 {
 	private readonly SortedSet<BaseTool> tools = new (new ToolSorter ());
 
+	private readonly WorkspaceManager workspace_manager;
+	private readonly ChromeManager chrome_manager;
+	public ToolManager (
+		WorkspaceManager workspaceManager,
+		ChromeManager chromeManager)
+	{
+		workspace_manager = workspaceManager;
+		chrome_manager = chromeManager;
+	}
+
 	private bool is_panning;
 	private Cursor? stored_cursor;
 
@@ -167,7 +177,7 @@ public sealed class ToolManager : IEnumerable<BaseTool>, IToolService
 
 	public void Commit ()
 	{
-		CurrentTool?.DoCommit (PintaCore.Workspace.ActiveDocumentOrDefault);
+		CurrentTool?.DoCommit (workspace_manager.ActiveDocumentOrDefault);
 	}
 
 	public void SetCurrentTool (BaseTool tool)
@@ -186,19 +196,19 @@ public sealed class ToolManager : IEnumerable<BaseTool>, IToolService
 		CurrentTool = tool;
 
 		tool.ToolItem.Active = true;
-		tool.DoActivated (PintaCore.Workspace.ActiveDocumentOrDefault);
+		tool.DoActivated (workspace_manager.ActiveDocumentOrDefault);
 
 		ToolImage.SetFromIconName (tool.Icon);
 
-		PintaCore.Chrome.ToolToolBar.Append (ToolLabel);
-		PintaCore.Chrome.ToolToolBar.Append (ToolImage);
-		PintaCore.Chrome.ToolToolBar.Append (ToolSeparator);
+		chrome_manager.ToolToolBar.Append (ToolLabel);
+		chrome_manager.ToolToolBar.Append (ToolImage);
+		chrome_manager.ToolToolBar.Append (ToolSeparator);
 
-		PintaCore.Chrome.ToolToolBar.Append (ToolWidgetsScroll);
+		chrome_manager.ToolToolBar.Append (ToolWidgetsScroll);
 		tool.DoBuildToolBar (ToolWidgetsBox);
 
-		PintaCore.Workspace.Invalidate ();
-		PintaCore.Chrome.SetStatusBarText ($" {tool.Name}: {tool.StatusBarText}");
+		workspace_manager.Invalidate ();
+		chrome_manager.SetStatusBarText ($" {tool.Name}: {tool.StatusBarText}");
 	}
 
 	public bool SetCurrentTool (string tool)
@@ -246,9 +256,9 @@ public sealed class ToolManager : IEnumerable<BaseTool>, IToolService
 	private void DeactivateTool (BaseTool tool, BaseTool? newTool)
 	{
 		ToolWidgetsBox.RemoveAll ();
-		PintaCore.Chrome.ToolToolBar.RemoveAll ();
+		chrome_manager.ToolToolBar.RemoveAll ();
 
-		tool.DoDeactivated (PintaCore.Workspace.ActiveDocumentOrDefault, newTool);
+		tool.DoDeactivated (workspace_manager.ActiveDocumentOrDefault, newTool);
 		tool.ToolItem.Active = false;
 	}
 

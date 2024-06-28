@@ -52,11 +52,24 @@ public sealed class LivePreviewManager
 
 	AsyncEffectRenderer renderer = null!;
 
-	internal LivePreviewManager ()
+	private readonly WorkspaceManager workspace_manager;
+	private readonly ToolManager tool_manager;
+	private readonly SystemManager system_manager;
+	private readonly ChromeManager chrome_manager;
+	internal LivePreviewManager (
+		WorkspaceManager workspaceManager,
+		ToolManager toolManager,
+		SystemManager systemManager,
+		ChromeManager chromeManager)
 	{
 		live_preview_enabled = false;
 
 		RenderUpdated += LivePreview_RenderUpdated;
+
+		workspace_manager = workspaceManager;
+		tool_manager = toolManager;
+		system_manager = systemManager;
+		chrome_manager = chromeManager;
 	}
 
 	public bool IsEnabled => live_preview_enabled;
@@ -76,7 +89,7 @@ public sealed class LivePreviewManager
 		// Start rendering.
 		// Listen for changes to effectConfiguration object, and restart render if needed.
 
-		var doc = PintaCore.Workspace.ActiveDocument;
+		var doc = workspace_manager.ActiveDocument;
 
 		live_preview_enabled = true;
 		apply_live_preview_flag = false;
@@ -86,16 +99,17 @@ public sealed class LivePreviewManager
 		this.effect = effect;
 
 		//TODO Use the current tool layer instead.
-		live_preview_surface = CairoExtensions.CreateImageSurface (Cairo.Format.Argb32,
-										  PintaCore.Workspace.ImageSize.Width,
-										  PintaCore.Workspace.ImageSize.Height);
+		live_preview_surface = CairoExtensions.CreateImageSurface (
+			Cairo.Format.Argb32,
+			workspace_manager.ImageSize.Width,
+			workspace_manager.ImageSize.Height);
 
 		// Handle selection path.
-		PintaCore.Tools.Commit ();
+		tool_manager.Commit ();
 		var selection = doc.Selection;
 		selection_path = (selection.Visible) ? selection.SelectionPath : null;
 		render_bounds = (selection_path != null) ? selection_path.GetBounds () : live_preview_surface.GetBounds ();
-		render_bounds = PintaCore.Workspace.ClampToImageSize (render_bounds);
+		render_bounds = workspace_manager.ClampToImageSize (render_bounds);
 
 		history_item = new SimpleHistoryItem (effect.Icon, effect.Name);
 		history_item.TakeSnapshotOfLayer (doc.Layers.CurrentUserLayerIndex);
@@ -117,7 +131,7 @@ public sealed class LivePreviewManager
 			tileHeight = render_bounds.Height;
 
 		var settings = new AsyncEffectRenderer.Settings () {
-			ThreadCount = PintaCore.System.RenderThreads,
+			ThreadCount = system_manager.RenderThreads,
 			TileWidth = tileWidth,
 			TileHeight = tileHeight,
 			ThreadPriority = ThreadPriority.BelowNormal
@@ -125,17 +139,17 @@ public sealed class LivePreviewManager
 
 		Debug.WriteLine (DateTime.Now.ToString ("HH:mm:ss:ffff") + "Start Live preview.");
 
-		renderer = new Renderer (this, settings);
+		renderer = new Renderer (this, settings, chrome_manager);
 		renderer.Start (effect, layer.Surface, live_preview_surface, render_bounds);
 
 		if (effect.IsConfigurable) {
 			EventHandler<BaseEffect.ConfigDialogResponseEventArgs>? handler = null;
 			handler = (_, args) => {
 				if (!args.Accepted) {
-					PintaCore.Chrome.MainWindowBusy = true;
+					chrome_manager.MainWindowBusy = true;
 					Cancel ();
 				} else {
-					PintaCore.Chrome.MainWindowBusy = true;
+					chrome_manager.MainWindowBusy = true;
 					Apply ();
 				}
 
@@ -148,7 +162,7 @@ public sealed class LivePreviewManager
 			effect.LaunchConfiguration ();
 
 		} else {
-			PintaCore.Chrome.MainWindowBusy = true;
+			chrome_manager.MainWindowBusy = true;
 			Apply ();
 		}
 	}
@@ -165,7 +179,7 @@ public sealed class LivePreviewManager
 
 		// Show a busy cursor, and make the main window insensitive,
 		// until the cancel has completed.
-		PintaCore.Chrome.MainWindowBusy = true;
+		chrome_manager.MainWindowBusy = true;
 
 		if (renderer == null || !renderer.IsRendering)
 			HandleCancel ();
@@ -181,7 +195,7 @@ public sealed class LivePreviewManager
 
 		live_preview_surface = null!;
 
-		PintaCore.Workspace.Invalidate ();
+		workspace_manager.Invalidate ();
 		CleanUp ();
 	}
 
@@ -193,7 +207,7 @@ public sealed class LivePreviewManager
 		if (!renderer.IsRendering) {
 			HandleApply ();
 		} else {
-			var dialog = PintaCore.Chrome.ProgressDialog;
+			var dialog = chrome_manager.ProgressDialog;
 			dialog.Title = Translations.GetString ("Rendering Effect");
 			dialog.Text = effect.Name;
 			dialog.Progress = renderer.Progress;
@@ -214,19 +228,19 @@ public sealed class LivePreviewManager
 
 		var ctx = new Cairo.Context (layer.Surface);
 		ctx.Save ();
-		PintaCore.Workspace.ActiveDocument.Selection.Clip (ctx);
+		workspace_manager.ActiveDocument.Selection.Clip (ctx);
 
 		layer.DrawWithOperator (ctx, live_preview_surface, Cairo.Operator.Source);
 		ctx.Restore ();
 
-		PintaCore.Workspace.ActiveDocument.History.PushNewItem (history_item);
+		workspace_manager.ActiveDocument.History.PushNewItem (history_item);
 		history_item = null!;
 
 		FireLivePreviewEndedEvent (RenderStatus.Completed, null);
 
 		live_preview_enabled = false;
 
-		PintaCore.Workspace.Invalidate (); //TODO keep track of dirty bounds.
+		workspace_manager.Invalidate (); //TODO keep track of dirty bounds.
 		CleanUp ();
 	}
 
@@ -253,11 +267,11 @@ public sealed class LivePreviewManager
 		history_item = null!;
 
 		// Hide progress dialog and clean up events.
-		var dialog = PintaCore.Chrome.ProgressDialog;
+		var dialog = chrome_manager.ProgressDialog;
 		dialog.Hide ();
 		dialog.Canceled -= HandleProgressDialogCancel;
 
-		PintaCore.Chrome.MainWindowBusy = false;
+		chrome_manager.MainWindowBusy = false;
 	}
 
 	void EffectData_PropertyChanged (object? sender, PropertyChangedEventArgs e)
@@ -269,17 +283,21 @@ public sealed class LivePreviewManager
 	private sealed class Renderer : AsyncEffectRenderer
 	{
 		readonly LivePreviewManager manager;
-
-		internal Renderer (LivePreviewManager manager, AsyncEffectRenderer.Settings settings)
+		readonly ChromeManager chrome_manager;
+		internal Renderer (
+			LivePreviewManager manager,
+			AsyncEffectRenderer.Settings settings,
+			ChromeManager chromeManager)
 			: base (settings)
 		{
 			this.manager = manager;
+			this.chrome_manager = chromeManager;
 		}
 
 		protected override void OnUpdate (double progress, RectangleI updatedBounds)
 		{
 			Debug.WriteLine (DateTime.Now.ToString ("HH:mm:ss:ffff") + " LivePreviewManager.OnUpdate() progress: " + progress);
-			PintaCore.Chrome.ProgressDialog.Progress = progress;
+			chrome_manager.ProgressDialog.Progress = progress;
 			manager.FireLivePreviewRenderUpdatedEvent (progress, updatedBounds);
 		}
 
@@ -313,8 +331,8 @@ public sealed class LivePreviewManager
 
 	private void LivePreview_RenderUpdated (object? o, LivePreviewRenderUpdatedEventArgs args)
 	{
-		double scale = PintaCore.Workspace.Scale;
-		var offset = PintaCore.Workspace.Offset;
+		double scale = workspace_manager.Scale;
+		var offset = workspace_manager.Offset;
 
 		var bounds = args.Bounds;
 
@@ -356,6 +374,6 @@ public sealed class LivePreviewManager
 		);
 
 		// Tell GTK to expose the drawing area.
-		PintaCore.Workspace.ActiveWorkspace.InvalidateWindowRect (areaToInvalidate);
+		workspace_manager.ActiveWorkspace.InvalidateWindowRect (areaToInvalidate);
 	}
 }

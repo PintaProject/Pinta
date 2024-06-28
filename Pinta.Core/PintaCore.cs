@@ -49,42 +49,61 @@ public static class PintaCore
 
 	static PintaCore ()
 	{
-		// Resources and Settings are initialized first so later
-		// Managers can access them as needed.
-		Resources = new ResourceManager ();
-		System = new SystemManager ();
-		Settings = new SettingsManager ();
-		Actions = new ActionManager ();
-		Workspace = new WorkspaceManager ();
-		Layers = new LayerManager ();
-		PaintBrushes = new PaintBrushManager ();
-		Tools = new ToolManager ();
-		ImageFormats = new ImageConverterManager ();
-		PaletteFormats = new PaletteFormatManager ();
-		RecentFiles = new RecentFileManager ();
-		LivePreview = new LivePreviewManager ();
-		Palette = new PaletteManager ();
-		Chrome = new ChromeManager ();
-		Effects = new EffectsManager ();
+		// --- Services that don't depend on other services
+		ResourceManager resources = new ();
+		SystemManager system = new ();
+		SettingsManager settings = new ();
+		ChromeManager chrome = new ();
+		PaintBrushManager paintBrushes = new ();
+		PaletteFormatManager paletteFormats = new ();
+		RecentFileManager recentFiles = new ();
 
-		Services = new ServiceManager ();
+		// --- Services that depend on other services
+		ImageConverterManager imageFormats = new (settings);
+		WorkspaceManager workspace = new (chrome, imageFormats);
+		ToolManager tools = new (workspace, chrome);
+		ActionManager actions = new (system, chrome, workspace);
+		LivePreviewManager livePreview = new (workspace, tools, system, chrome);
+		LayerManager layers = new (workspace);
+		PaletteManager palette = new (settings, paletteFormats);
+		EffectsManager effects = new (actions, chrome, livePreview);
 
-		Services.AddService<IResourceService> (Resources);
-		Services.AddService<ISettingsService> (Settings);
-		Services.AddService (Actions);
-		Services.AddService<IWorkspaceService> (Workspace);
-		Services.AddService (Layers);
-		Services.AddService<IPaintBrushService> (PaintBrushes);
-		Services.AddService<IToolService> (Tools);
-		Services.AddService (ImageFormats);
-		Services.AddService (PaletteFormats);
-		Services.AddService (System);
-		Services.AddService (RecentFiles);
+		// --- Service manager
+		ServiceManager services = new ();
+		services.AddService<IResourceService> (resources);
+		services.AddService<ISettingsService> (settings);
+		services.AddService (actions);
+		services.AddService<IWorkspaceService> (workspace);
+		services.AddService (layers);
+		services.AddService<IPaintBrushService> (paintBrushes);
+		services.AddService<IToolService> (tools);
+		services.AddService (imageFormats);
+		services.AddService (paletteFormats);
+		services.AddService (system);
+		services.AddService (recentFiles);
+		services.AddService (livePreview);
+		services.AddService<IPaletteService> (palette);
+		services.AddService<IChromeService> (chrome);
+		services.AddService (effects);
 
-		Services.AddService (LivePreview);
-		Services.AddService<IPaletteService> (Palette);
-		Services.AddService<IChromeService> (Chrome);
-		Services.AddService (Effects);
+		// --- References to expose
+		Resources = resources;
+		System = system;
+		Settings = settings;
+		Actions = actions;
+		Workspace = workspace;
+		Layers = layers;
+		PaintBrushes = paintBrushes;
+		Tools = tools;
+		ImageFormats = imageFormats;
+		PaletteFormats = paletteFormats;
+		RecentFiles = recentFiles;
+		LivePreview = livePreview;
+		Palette = palette;
+		Chrome = chrome;
+		Effects = effects;
+
+		Services = services;
 	}
 
 	public static void Initialize ()

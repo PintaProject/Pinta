@@ -42,8 +42,17 @@ public sealed class ActionManager
 	public HelpActions Help { get; } = new ();
 	public AddinActions Addins { get; } = new ();
 
-	public ActionManager ()
+	private readonly SystemManager system_manager;
+	private readonly ChromeManager chrome_manager;
+	private readonly WorkspaceManager workspace_manager;
+	public ActionManager (
+		SystemManager systemManager,
+		ChromeManager chromeManager,
+		WorkspaceManager workspaceManager)
 	{
+		system_manager = systemManager;
+		chrome_manager = chromeManager;
+		workspace_manager = workspaceManager;
 	}
 
 	public void CreateToolBar (Gtk.Box toolbar)
@@ -58,7 +67,7 @@ public sealed class ActionManager
 		toolbar.Append (GtkExtensions.CreateToolBarSeparator ());
 
 		// Cut/Copy/Paste comes before Undo/Redo on Windows
-		if (PintaCore.System.OperatingSystem == OS.Windows) {
+		if (system_manager.OperatingSystem == OS.Windows) {
 			toolbar.Append (Edit.Cut.CreateToolBarItem ());
 			toolbar.Append (Edit.Copy.CreateToolBarItem ());
 			toolbar.Append (Edit.Paste.CreateToolBarItem ());
@@ -106,8 +115,8 @@ public sealed class ActionManager
 		var cursor = Label.New ("  0, 0");
 		statusbar.Append (cursor);
 
-		PintaCore.Chrome.LastCanvasCursorPointChanged += delegate {
-			var pt = PintaCore.Chrome.LastCanvasCursorPoint;
+		chrome_manager.LastCanvasCursorPointChanged += delegate {
+			var pt = chrome_manager.LastCanvasCursorPoint;
 			cursor.SetText ($"  {pt.X}, {pt.Y}");
 		};
 
@@ -118,8 +127,8 @@ public sealed class ActionManager
 		var selection_size = Label.New ("  0, 0");
 		statusbar.Append (selection_size);
 
-		PintaCore.Workspace.SelectionChanged += delegate {
-			var bounds = PintaCore.Workspace.HasOpenDocuments ? PintaCore.Workspace.ActiveDocument.Selection.GetBounds () : new RectangleD ();
+		workspace_manager.SelectionChanged += delegate {
+			var bounds = workspace_manager.HasOpenDocuments ? workspace_manager.ActiveDocument.Selection.GetBounds () : new RectangleD ();
 			selection_size.SetText ($"  {bounds.Width}, {bounds.Height}");
 		};
 

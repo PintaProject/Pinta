@@ -72,15 +72,22 @@ public sealed class PaletteManager : IPaletteService
 
 	public Palette CurrentPalette => palette ??= Palette.GetDefault ();
 
-	public PaletteManager ()
+	private readonly SettingsManager settings_manager;
+	private readonly PaletteFormatManager palette_format_manager;
+	public PaletteManager (
+		SettingsManager settingsManager,
+		PaletteFormatManager paletteFormatManager)
 	{
 		PopulateSavedPalette ();
 		PopulateRecentlyUsedColors ();
 
-		PintaCore.Settings.SaveSettingsBeforeQuit += (o, e) => {
+		settingsManager.SaveSettingsBeforeQuit += (o, e) => {
 			SaveCurrentPalette ();
 			SaveRecentlyUsedColors ();
 		};
+
+		settings_manager = settingsManager;
+		palette_format_manager = paletteFormatManager;
 	}
 
 	public bool DoKeyPress (Gtk.EventControllerKey.KeyPressedSignalArgs args)
@@ -88,9 +95,9 @@ public sealed class PaletteManager : IPaletteService
 		if (args.State.HasModifierKey () || args.GetKey ().ToUpper () != Gdk.Key.X)
 			return false;
 
-		Color temp = PintaCore.Palette.PrimaryColor;
-		PintaCore.Palette.PrimaryColor = PintaCore.Palette.SecondaryColor;
-		PintaCore.Palette.SecondaryColor = temp;
+		Color temp = PrimaryColor;
+		PrimaryColor = SecondaryColor;
+		SecondaryColor = temp;
 
 		return true;
 	}
@@ -140,7 +147,7 @@ public sealed class PaletteManager : IPaletteService
 
 	private void PopulateSavedPalette ()
 	{
-		var palette_file = System.IO.Path.Combine (PintaCore.Settings.GetUserSettingsDirectory (), PALETTE_FILE);
+		var palette_file = System.IO.Path.Combine (settings_manager.GetUserSettingsDirectory (), PALETTE_FILE);
 
 		if (System.IO.File.Exists (palette_file))
 			CurrentPalette.Load (Gio.FileHelper.NewForPath (palette_file));
@@ -149,14 +156,14 @@ public sealed class PaletteManager : IPaletteService
 	private void PopulateRecentlyUsedColors ()
 	{
 		// Primary / Secondary colors
-		var primary_color = PintaCore.Settings.GetSetting (PRIMARY_COLOR_SETTINGS_KEY, ColorBgra.Black.ToHexString ());
-		var secondary_color = PintaCore.Settings.GetSetting (SECONDARY_COLOR_SETTINGS_KEY, ColorBgra.White.ToHexString ());
+		var primary_color = settings_manager.GetSetting (PRIMARY_COLOR_SETTINGS_KEY, ColorBgra.Black.ToHexString ());
+		var secondary_color = settings_manager.GetSetting (SECONDARY_COLOR_SETTINGS_KEY, ColorBgra.White.ToHexString ());
 
 		SetColor (true, ColorBgra.TryParseHexString (primary_color, out var primary) ? primary.ToCairoColor () : new Color (0, 0, 0), false);
 		SetColor (false, ColorBgra.TryParseHexString (secondary_color, out var secondary) ? secondary.ToCairoColor () : new Color (1, 0, 0), false);
 
 		// Recently used palette
-		var saved_colors = PintaCore.Settings.GetSetting (RECENT_COLORS_SETTINGS_KEY, string.Empty);
+		var saved_colors = settings_manager.GetSetting (RECENT_COLORS_SETTINGS_KEY, string.Empty);
 
 		foreach (var hex_color in saved_colors.Split (',')) {
 			if (ColorBgra.TryParseHexString (hex_color, out var color))
@@ -172,8 +179,8 @@ public sealed class PaletteManager : IPaletteService
 
 	private void SaveCurrentPalette ()
 	{
-		var palette_file = System.IO.Path.Combine (PintaCore.Settings.GetUserSettingsDirectory (), PALETTE_FILE);
-		var palette_saver = PintaCore.PaletteFormats.Formats.FirstOrDefault (p => p.Extensions.Contains ("txt"))?.Saver;
+		var palette_file = System.IO.Path.Combine (settings_manager.GetUserSettingsDirectory (), PALETTE_FILE);
+		var palette_saver = palette_format_manager.Formats.FirstOrDefault (p => p.Extensions.Contains ("txt"))?.Saver;
 		if (palette_saver is not null)
 			CurrentPalette.Save (Gio.FileHelper.NewForPath (palette_file), palette_saver);
 	}
@@ -181,12 +188,12 @@ public sealed class PaletteManager : IPaletteService
 	private void SaveRecentlyUsedColors ()
 	{
 		// Primary / Secondary colors
-		PintaCore.Settings.PutSetting (PRIMARY_COLOR_SETTINGS_KEY, PrimaryColor.ToColorBgra ().ToHexString ());
-		PintaCore.Settings.PutSetting (SECONDARY_COLOR_SETTINGS_KEY, SecondaryColor.ToColorBgra ().ToHexString ());
+		settings_manager.PutSetting (PRIMARY_COLOR_SETTINGS_KEY, PrimaryColor.ToColorBgra ().ToHexString ());
+		settings_manager.PutSetting (SECONDARY_COLOR_SETTINGS_KEY, SecondaryColor.ToColorBgra ().ToHexString ());
 
 		// Recently used palette
 		var colors = string.Join (",", recently_used.Select (c => c.ToColorBgra ().ToHexString ()));
-		PintaCore.Settings.PutSetting (RECENT_COLORS_SETTINGS_KEY, colors);
+		settings_manager.PutSetting (RECENT_COLORS_SETTINGS_KEY, colors);
 	}
 
 	private void OnPrimaryColorChanged ()

@@ -47,6 +47,13 @@ public interface IWorkspaceService
 
 public static class WorkspaceServiceExtensions
 {
+	public static void SetActiveDocument (
+		this IWorkspaceService _,
+		Document document)
+	{
+		PintaCore.Actions.Window.SetActiveDocument (document);
+	}
+
 	public static void Invalidate (this IWorkspaceService workspace)
 	{
 		if (workspace.HasOpenDocuments)
@@ -101,11 +108,18 @@ public sealed class WorkspaceManager : IWorkspaceService
 	private int active_document_index = -1;
 	private int new_file_name = 1;
 
-	public WorkspaceManager ()
+	private readonly ChromeManager chrome_manager;
+	private readonly ImageConverterManager image_formats;
+	public WorkspaceManager (
+		ChromeManager chromeManager,
+		ImageConverterManager imageFormats)
 	{
 		open_documents = new List<Document> ();
 		OpenDocuments = new ReadOnlyCollection<Document> (open_documents);
 		SelectionHandler = new SelectionModeHandler ();
+
+		chrome_manager = chromeManager;
+		image_formats = imageFormats;
 	}
 
 	public int ActiveDocumentIndex
@@ -174,7 +188,7 @@ public sealed class WorkspaceManager : IWorkspaceService
 
 		OnDocumentCreated (new DocumentEventArgs (doc));
 
-		SetActiveDocument (doc);
+		this.SetActiveDocument (doc);
 
 		return doc;
 	}
@@ -251,18 +265,18 @@ public sealed class WorkspaceManager : IWorkspaceService
 	{
 		bool fileOpened = false;
 
-		parent ??= PintaCore.Chrome.MainWindow;
+		parent ??= chrome_manager.MainWindow;
 
 		try {
 			// Open the image and add it to the layers
-			IImageImporter? importer = PintaCore.ImageFormats.GetImporterByFile (file.GetDisplayName ());
+			IImageImporter? importer = image_formats.GetImporterByFile (file.GetDisplayName ());
 			if (importer is not null) {
 				importer.Import (file, parent);
 			} else {
 				// Unknown extension, so try every loader.
 				var errors = new StringBuilder ();
 				bool loaded = false;
-				foreach (var format in PintaCore.ImageFormats.Formats.Where (f => !f.IsWriteOnly ())) {
+				foreach (var format in image_formats.Formats.Where (f => !f.IsWriteOnly ())) {
 					try {
 						format.Importer!.Import (file, parent);
 						loaded = true;
@@ -286,8 +300,8 @@ public sealed class WorkspaceManager : IWorkspaceService
 				}
 			}
 
-			PintaCore.Workspace.ActiveWorkspace.History.PushNewItem (new BaseHistoryItem (Resources.StandardIcons.DocumentOpen, Translations.GetString ("Open Image")));
-			PintaCore.Workspace.ActiveDocument.History.SetClean ();
+			ActiveWorkspace.History.PushNewItem (new BaseHistoryItem (Resources.StandardIcons.DocumentOpen, Translations.GetString ("Open Image")));
+			ActiveDocument.History.SetClean ();
 
 			fileOpened = true;
 		} catch (UnauthorizedAccessException) {
@@ -310,9 +324,9 @@ public sealed class WorkspaceManager : IWorkspaceService
 	internal void ResetTitle ()
 	{
 		if (HasOpenDocuments)
-			PintaCore.Chrome.MainWindow.Title = $"{ActiveDocument.DisplayName}{(ActiveDocument.IsDirty ? "*" : "")} - Pinta";
+			chrome_manager.MainWindow.Title = $"{ActiveDocument.DisplayName}{(ActiveDocument.IsDirty ? "*" : "")} - Pinta";
 		else
-			PintaCore.Chrome.MainWindow.Title = "Pinta";
+			chrome_manager.MainWindow.Title = "Pinta";
 	}
 
 	public void SetActiveDocument (int index)
@@ -328,12 +342,7 @@ public sealed class WorkspaceManager : IWorkspaceService
 				$"Tried to {nameof (WorkspaceManager)}.{nameof (SetActiveDocument)} less that zero."
 			);
 
-		SetActiveDocument (open_documents[index]);
-	}
-
-	public void SetActiveDocument (Document document)
-	{
-		PintaCore.Actions.Window.SetActiveDocument (document);
+		this.SetActiveDocument (open_documents[index]);
 	}
 
 	internal void SetActiveDocumentInternal (Document document)
