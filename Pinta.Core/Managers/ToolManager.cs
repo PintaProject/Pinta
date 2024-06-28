@@ -29,8 +29,6 @@ using System.Collections.Generic;
 using System.Diagnostics.CodeAnalysis;
 using System.Linq;
 using System.Threading.Tasks;
-using Gdk;
-using Gtk;
 
 namespace Pinta.Core;
 
@@ -98,7 +96,7 @@ public sealed class ToolManager : IEnumerable<BaseTool>, IToolService
 	}
 
 	private bool is_panning;
-	private Cursor? stored_cursor;
+	private Gdk.Cursor? stored_cursor;
 
 	public event EventHandler<ToolEventArgs>? ToolAdded;
 	public event EventHandler<ToolEventArgs>? ToolRemoved;
@@ -284,7 +282,7 @@ public sealed class ToolManager : IEnumerable<BaseTool>, IToolService
 	public bool DoKeyUp (Document document, ToolKeyEventArgs args) => CurrentTool?.DoKeyUp (document, args) ?? false;
 
 	public void DoAfterSave (Document document) => CurrentTool?.DoAfterSave (document);
-	public Task<bool> DoHandlePaste (Document document, Clipboard clipboard) => CurrentTool?.DoHandlePaste (document, clipboard) ?? Task.FromResult (false);
+	public Task<bool> DoHandlePaste (Document document, Gdk.Clipboard clipboard) => CurrentTool?.DoHandlePaste (document, clipboard) ?? Task.FromResult (false);
 
 	public IEnumerator<BaseTool> GetEnumerator () => tools.GetEnumerator ();
 
@@ -356,25 +354,25 @@ public sealed class ToolManager : IEnumerable<BaseTool>, IToolService
 		}
 	}
 
-	private Label? tool_label;
-	private Image? tool_image;
-	private Separator? tool_sep;
-	private Box? tool_widgets_box;
-	private ScrolledWindow? tool_widgets_scroll;
+	private Gtk.Label? tool_label;
+	private Gtk.Image? tool_image;
+	private Gtk.Separator? tool_sep;
+	private Gtk.Box? tool_widgets_box;
+	private Gtk.ScrolledWindow? tool_widgets_scroll;
 
-	private Label ToolLabel => tool_label ??= Label.New (string.Format (" {0}:  ", Translations.GetString ("Tool")));
-	private Image ToolImage => tool_image ??= new Image ();
-	private Separator ToolSeparator => tool_sep ??= GtkExtensions.CreateToolBarSeparator ();
-	private Box ToolWidgetsBox => tool_widgets_box ??= Gtk.Box.New (Orientation.Horizontal, 0);
+	private Gtk.Label ToolLabel => tool_label ??= Gtk.Label.New (string.Format (" {0}:  ", Translations.GetString ("Tool")));
+	private Gtk.Image ToolImage => tool_image ??= new Gtk.Image ();
+	private Gtk.Separator ToolSeparator => tool_sep ??= GtkExtensions.CreateToolBarSeparator ();
+	private Gtk.Box ToolWidgetsBox => tool_widgets_box ??= Gtk.Box.New (Gtk.Orientation.Horizontal, 0);
 	// Scroll the toolbar contents if they are very long (e.g. the line/curve tool).
-	private ScrolledWindow ToolWidgetsScroll => tool_widgets_scroll ??= new ScrolledWindow () {
+	private Gtk.ScrolledWindow ToolWidgetsScroll => tool_widgets_scroll ??= new Gtk.ScrolledWindow () {
 		Child = ToolWidgetsBox,
-		HscrollbarPolicy = PolicyType.Automatic,
-		VscrollbarPolicy = PolicyType.Never,
+		HscrollbarPolicy = Gtk.PolicyType.Automatic,
+		VscrollbarPolicy = Gtk.PolicyType.Never,
 		HasFrame = false,
 		OverlayScrolling = true,
-		WindowPlacement = CornerType.BottomRight,
+		WindowPlacement = Gtk.CornerType.BottomRight,
 		Hexpand = true,
-		Halign = Align.Fill
+		Halign = Gtk.Align.Fill
 	};
 }
