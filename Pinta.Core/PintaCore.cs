@@ -50,6 +50,7 @@ public static class PintaCore
 	static PintaCore ()
 	{
 		// --- Services that don't depend on other services
+
 		ResourceManager resources = new ();
 		SystemManager system = new ();
 		SettingsManager settings = new ();
@@ -59,8 +60,9 @@ public static class PintaCore
 		RecentFileManager recentFiles = new ();
 
 		// --- Services that depend on other services
+
 		ImageConverterManager imageFormats = new (settings);
-		WorkspaceManager workspace = new (chrome, imageFormats);
+		WorkspaceManager workspace = new (chrome, imageFormats); // TODO: still has some `PintaCore` references
 		ToolManager tools = new (workspace, chrome);
 		ActionManager actions = new (system, chrome, workspace);
 		LivePreviewManager livePreview = new (workspace, tools, system, chrome);
@@ -69,6 +71,7 @@ public static class PintaCore
 		EffectsManager effects = new (actions, chrome, livePreview);
 
 		// --- Service manager
+
 		ServiceManager services = new ();
 		services.AddService<IResourceService> (resources);
 		services.AddService<ISettingsService> (settings);
@@ -87,6 +90,7 @@ public static class PintaCore
 		services.AddService (effects);
 
 		// --- References to expose
+
 		Resources = resources;
 		System = system;
 		Settings = settings;
