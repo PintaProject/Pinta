@@ -63,8 +63,8 @@ public static class PintaCore
 
 		ImageConverterManager imageFormats = new (settings);
 		WorkspaceManager workspace = new (chrome, imageFormats); // TODO: still has some `PintaCore` references
-		ToolManager tools = new (workspace, chrome);
-		ActionManager actions = new (system, chrome, workspace);
+		ToolManager tools = new (workspace, chrome); // Circular reference with workspace
+		ActionManager actions = new (system, chrome, workspace); // Circular reference with workspace
 		LivePreviewManager livePreview = new (workspace, tools, system, chrome);
 		LayerManager layers = new (workspace);
 		PaletteManager palette = new (settings, paletteFormats);
