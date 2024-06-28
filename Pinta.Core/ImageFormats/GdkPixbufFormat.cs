@@ -57,7 +57,11 @@ public class GdkPixbufFormat : IImageImporter, IImageExporter
 
 		Size imagesize = new Size (bg.Width, bg.Height);
 
-		Document doc = PintaCore.Workspace.CreateAndActivateDocument (file, filetype, imagesize);
+		Document doc = PintaCore.Workspace.CreateAndActivateDocument ( // TODO: Move "activate document" part out of file format class
+			PintaCore.Actions,
+			file,
+			filetype,
+			imagesize);
 		doc.ImageSize = imagesize;
 		doc.Workspace.ViewSize = imagesize;
 

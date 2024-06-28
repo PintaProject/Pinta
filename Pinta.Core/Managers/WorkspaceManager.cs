@@ -163,7 +163,11 @@ public sealed class WorkspaceManager : IWorkspaceService
 	public ReadOnlyCollection<Document> OpenDocuments { get; }
 	public bool HasOpenDocuments => open_documents.Count > 0;
 
-	public Document CreateAndActivateDocument (Gio.File? file, string? file_type, Size size)
+	public Document CreateAndActivateDocument (
+		ActionManager actions,
+		Gio.File? file,
+		string? file_type,
+		Size size)
 	{
 		Document doc = new Document (size);
 
@@ -181,17 +185,17 @@ public sealed class WorkspaceManager : IWorkspaceService
 
 		OnDocumentCreated (new DocumentEventArgs (doc));
 
-		PintaCore.Actions.Window.SetActiveDocument (doc);
+		actions.Window.SetActiveDocument (doc);
 
 		return doc;
 	}
 
-	public void CloseActiveDocument ()
+	public void CloseActiveDocument (ActionManager actions)
 	{
-		CloseDocument (ActiveDocument);
+		CloseDocument (actions, ActiveDocument);
 	}
 
-	public void CloseDocument (Document document)
+	public void CloseDocument (ActionManager actions, Document document)
 	{
 		int index = open_documents.IndexOf (document);
 		open_documents.Remove (document);
@@ -200,9 +204,9 @@ public sealed class WorkspaceManager : IWorkspaceService
 			// If there's other documents open, switch to one of them
 			if (HasOpenDocuments) {
 				if (index > 0)
-					SetActiveDocument (index - 1);
+					SetActiveDocument (actions, index - 1);
 				else
-					SetActiveDocument (index);
+					SetActiveDocument (actions, index);
 			} else {
 				active_document_index = -1;
 				OnActiveDocumentChanged (EventArgs.Empty);
@@ -214,9 +218,9 @@ public sealed class WorkspaceManager : IWorkspaceService
 		OnDocumentClosed (new DocumentEventArgs (document));
 	}
 
-	public Document NewDocument (Size imageSize, Color backgroundColor)
+	public Document NewDocument (ActionManager actions, Size imageSize, Color backgroundColor)
 	{
-		Document doc = CreateAndActivateDocument (null, null, imageSize);
+		Document doc = CreateAndActivateDocument (actions, null, null, imageSize);
 		doc.Workspace.ViewSize = imageSize;
 
 		// Start with an empty white layer
@@ -238,9 +242,12 @@ public sealed class WorkspaceManager : IWorkspaceService
 	/// Creates a new Document with a specified image as content.
 	/// Primarily used for Paste Into New Image.
 	/// </summary>
-	public Document NewDocumentFromImage (Cairo.ImageSurface image)
+	public Document NewDocumentFromImage (ActionManager actions, Cairo.ImageSurface image)
 	{
-		Document doc = NewDocument (new Size (image.Width, image.Height), new Color (0, 0, 0, 0));
+		Document doc = NewDocument (
+			actions,
+			new Size (image.Width, image.Height),
+			new Color (0, 0, 0, 0));
 
 		Context g = new (doc.Layers[0].Surface);
 		g.SetSourceSurface (image, 0, 0);
@@ -322,7 +329,7 @@ public sealed class WorkspaceManager : IWorkspaceService
 			chrome_manager.MainWindow.Title = "Pinta";
 	}
 
-	public void SetActiveDocument (int index)
+	public void SetActiveDocument (ActionManager actions, int index)
 	{
 		if (index >= open_documents.Count)
 			throw new ArgumentOutOfRangeException (
@@ -335,15 +342,15 @@ public sealed class WorkspaceManager : IWorkspaceService
 				$"Tried to {nameof (WorkspaceManager)}.{nameof (SetActiveDocument)} less that zero."
 			);
 
-		PintaCore.Actions.Window.SetActiveDocument (open_documents[index]);
+		actions.Window.SetActiveDocument (open_documents[index]);
 	}
 
-	internal void SetActiveDocumentInternal (Document document)
+	internal void SetActiveDocumentInternal (ToolManager tools, Document document)
 	{
 		// Work around a case where we closed a document but haven't updated
 		// the active_document_index yet and it points to the closed document
 		if (HasOpenDocuments && active_document_index != -1 && open_documents.Count > active_document_index)
-			PintaCore.Tools.Commit ();
+			tools.Commit ();
 
 		int index = open_documents.IndexOf (document);
 		active_document_index = index;

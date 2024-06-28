@@ -47,7 +47,7 @@ internal sealed class PasteIntoNewImageAction : IActionHandler
 		Gdk.Texture? cb_texture = await cb.ReadTextureAsync ();
 
 		if (cb_texture is not null)
-			PintaCore.Workspace.NewDocumentFromImage (cb_texture.ToSurface ());
+			PintaCore.Workspace.NewDocumentFromImage (PintaCore.Actions, cb_texture.ToSurface ());
 		else
 			PasteAction.ShowClipboardEmptyDialog ();
 	}

@@ -62,8 +62,8 @@ public static class PintaCore
 		// --- Services that depend on other services
 
 		ImageConverterManager imageFormats = new (settings);
-		WorkspaceManager workspace = new (chrome, imageFormats); // TODO: still has some `PintaCore` references
-		ToolManager tools = new (workspace, chrome); // Circular reference with workspace
+		WorkspaceManager workspace = new (chrome, imageFormats);
+		ToolManager tools = new (workspace, chrome);
 		ActionManager actions = new (system, chrome);
 		LivePreviewManager livePreview = new (workspace, tools, system, chrome);
 		LayerManager layers = new (workspace);
