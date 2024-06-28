@@ -391,13 +391,13 @@ public sealed class WorkspaceManager : IWorkspaceService
 		SelectionChanged?.Invoke (this, EventArgs.Empty);
 	}
 
-	private static void ShowOpenFileErrorDialog (Window parent, string filename, string primary_text, string details)
+	private void ShowOpenFileErrorDialog (Window parent, string filename, string primary_text, string details)
 	{
 		string secondary_text = Translations.GetString ("Could not open file: {0}", filename);
-		PintaCore.Chrome.ShowErrorDialog (parent, primary_text, secondary_text, details);
+		chrome_manager.ShowErrorDialog (parent, primary_text, secondary_text, details);
 	}
 
-	private static void ShowUnsupportedFormatDialog (Window parent, string filename, string message, string errors)
+	private void ShowUnsupportedFormatDialog (Window parent, string filename, string message, string errors)
 	{
 		StringBuilder body = new ();
 
@@ -405,7 +405,7 @@ public sealed class WorkspaceManager : IWorkspaceService
 		body.AppendLine (Translations.GetString ("Pinta supports the following file formats:"));
 
 		var extensions =
-			from format in PintaCore.ImageFormats.Formats
+			from format in image_formats.Formats
 			where format.Importer != null
 			from extension in format.Extensions
 			where char.IsLower (extension.FirstOrDefault ())
@@ -414,16 +414,16 @@ public sealed class WorkspaceManager : IWorkspaceService
 
 		body.AppendJoin (", ", extensions);
 
-		PintaCore.Chrome.ShowErrorDialog (parent, message, body.ToString (), errors);
+		chrome_manager.ShowErrorDialog (parent, message, body.ToString (), errors);
 	}
 
-	private static void ShowFilePermissionErrorDialog (Window parent, string filename)
+	private void ShowFilePermissionErrorDialog (Window parent, string filename)
 	{
 		string message = Translations.GetString ("Failed to open image");
 		// Translators: {0} is the name of a file that the user does not have permission to open.
 		string details = Translations.GetString ("You do not have access to '{0}'.", filename);
 
-		PintaCore.Chrome.ShowMessageDialog (parent, message, details);
+		chrome_manager.ShowMessageDialog (parent, message, details);
 	}
 
 	#region Public Events
