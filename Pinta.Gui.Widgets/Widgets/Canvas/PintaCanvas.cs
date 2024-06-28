@@ -85,7 +85,7 @@ public sealed class PintaCanvas : DrawingArea
 			// we need to go ahead and make it the active document for the tools
 			// to use it, even though right after this the tab system would have switched it
 			if (PintaCore.Workspace.ActiveDocument != document)
-				PintaCore.Workspace.SetActiveDocument (document);
+				PintaCore.Actions.Window.SetActiveDocument (document);
 
 			var window_point = new PointD (args.X, args.Y);
 			var canvas_point = document.Workspace.ViewPointToCanvas (window_point);

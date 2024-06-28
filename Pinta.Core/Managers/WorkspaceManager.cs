@@ -47,13 +47,6 @@ public interface IWorkspaceService
 
 public static class WorkspaceServiceExtensions
 {
-	public static void SetActiveDocument (
-		this IWorkspaceService _,
-		Document document)
-	{
-		PintaCore.Actions.Window.SetActiveDocument (document);
-	}
-
 	public static void Invalidate (this IWorkspaceService workspace)
 	{
 		if (workspace.HasOpenDocuments)
@@ -188,7 +181,7 @@ public sealed class WorkspaceManager : IWorkspaceService
 
 		OnDocumentCreated (new DocumentEventArgs (doc));
 
-		this.SetActiveDocument (doc);
+		PintaCore.Actions.Window.SetActiveDocument (doc);
 
 		return doc;
 	}
@@ -342,7 +335,7 @@ public sealed class WorkspaceManager : IWorkspaceService
 				$"Tried to {nameof (WorkspaceManager)}.{nameof (SetActiveDocument)} less that zero."
 			);
 
-		this.SetActiveDocument (open_documents[index]);
+		PintaCore.Actions.Window.SetActiveDocument (open_documents[index]);
 	}
 
 	internal void SetActiveDocumentInternal (Document document)

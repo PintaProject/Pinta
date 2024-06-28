@@ -48,7 +48,7 @@ internal sealed class SaveAllDocumentsAction : IActionHandler
 			if (!doc.IsDirty && doc.HasFile)
 				continue;
 
-			PintaCore.Workspace.SetActiveDocument (doc);
+			PintaCore.Actions.Window.SetActiveDocument (doc);
 
 			// Loop through all of these until we get a cancel
 			if (!doc.Save (false))
