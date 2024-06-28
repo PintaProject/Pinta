@@ -24,8 +24,6 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 // THE SOFTWARE.
 
-using Gtk;
-
 namespace Pinta.Core;
 
 public sealed class ActionManager
@@ -108,11 +106,11 @@ public sealed class ActionManager
 		header.PackStart (Edit.Deselect.CreateToolBarItem ());
 	}
 
-	public void CreateStatusBar (Box statusbar)
+	public void CreateStatusBar (Gtk.Box statusbar)
 	{
 		// Cursor position widget
 		statusbar.Append (Gtk.Image.NewFromIconName (Resources.Icons.CursorPosition));
-		var cursor = Label.New ("  0, 0");
+		var cursor = Gtk.Label.New ("  0, 0");
 		statusbar.Append (cursor);
 
 		chrome_manager.LastCanvasCursorPointChanged += delegate {
@@ -124,7 +122,7 @@ public sealed class ActionManager
 
 		// Selection size widget
 		statusbar.Append (Gtk.Image.NewFromIconName (Resources.Icons.ToolSelectRectangle));
-		var selection_size = Label.New ("  0, 0");
+		var selection_size = Gtk.Label.New ("  0, 0");
 		statusbar.Append (selection_size);
 
 		workspace_manager.SelectionChanged += delegate {
