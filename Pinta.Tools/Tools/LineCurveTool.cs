@@ -46,6 +46,6 @@ public sealed class LineCurveTool : ShapeTool
 	public override BaseEditEngine.ShapeTypes ShapeType
 		=> BaseEditEngine.ShapeTypes.OpenLineCurveSeries;
 
-	protected override BaseEditEngine CreateEditEngine ()
-		=> new LineCurveEditEngine (services, this);
+	protected override LineCurveEditEngine CreateEditEngine ()
+		=> new (services, this);
 }

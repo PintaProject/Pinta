@@ -53,6 +53,6 @@ public sealed class EllipseTool : ShapeTool
 	public override BaseEditEngine.ShapeTypes ShapeType
 		=> BaseEditEngine.ShapeTypes.Ellipse;
 
-	protected override BaseEditEngine CreateEditEngine ()
-		=> new EllipseEditEngine (services, this);
+	protected override EllipseEditEngine CreateEditEngine ()
+		=> new (services, this);
 }

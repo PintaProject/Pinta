@@ -46,6 +46,6 @@ public sealed class RectangleTool : ShapeTool
 	public override BaseEditEngine.ShapeTypes ShapeType
 		=> BaseEditEngine.ShapeTypes.ClosedLineCurveSeries;
 
-	protected override BaseEditEngine CreateEditEngine ()
-		=> new RectangleEditEngine (services, this);
+	protected override RectangleEditEngine CreateEditEngine ()
+		=> new (services, this);
 }
