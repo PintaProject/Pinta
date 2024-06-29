@@ -27,7 +27,6 @@
 using System;
 using System.Linq;
 using Cairo;
-using Gtk;
 
 namespace Pinta.Core;
 
@@ -352,14 +351,14 @@ public sealed class EditActions
 
 	private void HandlerPintaCoreActionsEditLoadPaletteActivated (object sender, EventArgs e)
 	{
-		var fcd = FileChooserNative.New (
+		var fcd = Gtk.FileChooserNative.New (
 			Translations.GetString ("Open Palette File"),
 			PintaCore.Chrome.MainWindow,
-			FileChooserAction.Open,
+			Gtk.FileChooserAction.Open,
 			Translations.GetString ("Open"),
 			Translations.GetString ("Cancel"));
 
-		var ff = FileFilter.New ();
+		var ff = Gtk.FileFilter.New ();
 		ff.Name = Translations.GetString ("Palette files");
 
 		foreach (var format in PintaCore.PaletteFormats.Formats) {
@@ -371,7 +370,7 @@ public sealed class EditActions
 
 		fcd.AddFilter (ff);
 
-		var ff2 = FileFilter.New ();
+		var ff2 = Gtk.FileFilter.New ();
 		ff2.Name = Translations.GetString ("All files");
 		ff2.AddPattern ("*");
 		fcd.AddFilter (ff2);
@@ -380,14 +379,14 @@ public sealed class EditActions
 			fcd.SetCurrentFolder (last_palette_dir);
 
 		fcd.OnResponse += (_, args) => {
-			var response = (ResponseType) args.ResponseId;
+			var response = (Gtk.ResponseType) args.ResponseId;
 
-			if (response != ResponseType.Accept)
+			if (response != Gtk.ResponseType.Accept)
 				return;
 
 			Gio.File file = fcd.GetFile ()!;
 			last_palette_dir = file.GetParent ();
-			PintaCore.Palette.CurrentPalette.Load (file);
+			PintaCore.Palette.CurrentPalette.Load (PintaCore.PaletteFormats, file);
 		};
 
 		fcd.Show ();
@@ -395,17 +394,17 @@ public sealed class EditActions
 
 	private void HandlerPintaCoreActionsEditSavePaletteActivated (object sender, EventArgs e)
 	{
-		var fcd = FileChooserNative.New (
+		var fcd = Gtk.FileChooserNative.New (
 			Translations.GetString ("Save Palette File"),
 			PintaCore.Chrome.MainWindow,
-			FileChooserAction.Save,
+			Gtk.FileChooserAction.Save,
 			Translations.GetString ("Save"),
 			Translations.GetString ("Cancel"));
 
 		foreach (var format in PintaCore.PaletteFormats.Formats) {
 			if (format.IsReadOnly ())
 				continue;
-			FileFilter fileFilter = format.Filter;
+			Gtk.FileFilter fileFilter = format.Filter;
 			fcd.AddFilter (fileFilter);
 		}
 
@@ -413,7 +412,7 @@ public sealed class EditActions
 			fcd.SetCurrentFolder (last_palette_dir);
 
 		fcd.OnResponse += (_, args) => {
-			var response = (ResponseType) args.ResponseId;
+			var response = (Gtk.ResponseType) args.ResponseId;
 
 			if (response != Gtk.ResponseType.Accept)
 				return;

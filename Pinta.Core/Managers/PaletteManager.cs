@@ -80,7 +80,7 @@ public sealed class PaletteManager : IPaletteService
 		settings_manager = settingsManager;
 		palette_format_manager = paletteFormatManager;
 
-		PopulateSavedPalette ();
+		PopulateSavedPalette (paletteFormatManager);
 		PopulateRecentlyUsedColors ();
 
 		settingsManager.SaveSettingsBeforeQuit += (o, e) => {
@@ -144,11 +144,11 @@ public sealed class PaletteManager : IPaletteService
 		OnRecentColorsChanged ();
 	}
 
-	private void PopulateSavedPalette ()
+	private void PopulateSavedPalette (PaletteFormatManager paletteFormats)
 	{
 		string palette_file = System.IO.Path.Combine (settings_manager.GetUserSettingsDirectory (), PALETTE_FILE);
 		if (System.IO.File.Exists (palette_file))
-			CurrentPalette.Load (Gio.FileHelper.NewForPath (palette_file));
+			CurrentPalette.Load (paletteFormats, Gio.FileHelper.NewForPath (palette_file));
 	}
 
 	private void PopulateRecentlyUsedColors ()
