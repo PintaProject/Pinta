@@ -104,12 +104,13 @@ public sealed class WorkspaceManager : IWorkspaceService
 	private readonly ChromeManager chrome_manager;
 	private readonly ImageConverterManager image_formats;
 	public WorkspaceManager (
+		SystemManager systemManager,
 		ChromeManager chromeManager,
 		ImageConverterManager imageFormats)
 	{
 		open_documents = new List<Document> ();
 		OpenDocuments = new ReadOnlyCollection<Document> (open_documents);
-		SelectionHandler = new SelectionModeHandler ();
+		SelectionHandler = new SelectionModeHandler (systemManager);
 
 		chrome_manager = chromeManager;
 		image_formats = imageFormats;

@@ -39,15 +39,15 @@ public sealed class SelectionModeHandler
 
 	private const string COMBINE_MODE_SETTING = "selection-combine-mode";
 
-	public SelectionModeHandler ()
+	public SelectionModeHandler (SystemManager system)
 	{
 		combine_modes = new Dictionary<string, CombineMode> () {
 			[Translations.GetString ("Replace")] = CombineMode.Replace,
 			// Translators: {0} is 'Ctrl', or a platform-specific key such as 'Command' on macOS.
-			[Translations.GetString ("Union (+) ({0} + Left Click)", GtkExtensions.CtrlLabel ())] = CombineMode.Union,
+			[Translations.GetString ("Union (+) ({0} + Left Click)", GtkExtensions.CtrlLabel (system))] = CombineMode.Union,
 			[Translations.GetString ("Exclude (-) (Right Click)")] = CombineMode.Exclude,
 			// Translators: {0} is 'Ctrl', or a platform-specific key such as 'Command' on macOS.
-			[Translations.GetString ("Xor ({0} + Right Click)", GtkExtensions.CtrlLabel ())] = CombineMode.Xor,
+			[Translations.GetString ("Xor ({0} + Right Click)", GtkExtensions.CtrlLabel (system))] = CombineMode.Xor,
 			// Translators: {0} is 'Alt', or a platform-specific key such as 'Option' on macOS.
 			[Translations.GetString ("Intersect ({0} + Left Click)", GtkExtensions.AltLabel ())] = CombineMode.Intersect,
 		};
