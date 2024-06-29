@@ -41,9 +41,11 @@ public abstract class ShapeTool : BaseTool
 	public BaseEditEngine EditEngine
 		=> lazy_edit_engine.Value;
 
+	private readonly SystemManager system_manager;
 	public ShapeTool (IServiceProvider services) : base (services)
 	{
 		lazy_edit_engine = new (CreateEditEngine);
+		system_manager = services.GetService<SystemManager> ();
 	}
 
 	public override Gdk.Key ShortcutKey => Gdk.Key.O;
@@ -64,7 +66,7 @@ public abstract class ShapeTool : BaseTool
 			    "\nPress Space to add a new control point at the mouse position." +
 			    "\nHold {0} while pressing Space to create the control point at the exact same position." +
 			    "\nHold {0} while left clicking on a control point to create a new shape at the exact same position." +
-			    "\nPress Enter to finalize the shape.", GtkExtensions.CtrlLabel ());
+			    "\nPress Enter to finalize the shape.", GtkExtensions.CtrlLabel (system_manager));
 
 	protected abstract BaseEditEngine CreateEditEngine ();
 
