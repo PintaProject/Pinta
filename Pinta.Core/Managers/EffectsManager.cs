@@ -65,7 +65,11 @@ public sealed class EffectsManager
 #endif
 
 		// Create a gtk action for each adjustment
-		var act = new Command (adjustment.GetType ().Name, adjustment.Name + (adjustment.IsConfigurable ? Translations.GetString ("...") : ""), string.Empty, adjustment.Icon);
+		Command act = new (
+			adjustment.GetType ().Name,
+			adjustment.Name + (adjustment.IsConfigurable ? Translations.GetString ("...") : ""),
+			string.Empty,
+			adjustment.Icon);
 		act.Activated += (o, args) => { live_preview_manager.Start (adjustment); };
 
 		action_manager.Adjustments.Actions.Add (act);
@@ -95,7 +99,11 @@ public sealed class EffectsManager
 #endif
 
 		// Create a gtk action and menu item for each effect
-		var act = new Command (effect.GetType ().Name, effect.Name + (effect.IsConfigurable ? Translations.GetString ("...") : ""), string.Empty, effect.Icon);
+		Command act = new (
+			effect.GetType ().Name,
+			effect.Name + (effect.IsConfigurable ? Translations.GetString ("...") : ""),
+			string.Empty,
+			effect.Icon);
 		chrome_manager.Application.AddAction (act);
 		act.Activated += (o, args) => live_preview_manager.Start (effect);
 
@@ -111,13 +119,15 @@ public sealed class EffectsManager
 	public void UnregisterInstanceOfEffect (System.Type effect_type)
 	{
 		foreach (BaseEffect effect in effects.Keys) {
-			if (effect.GetType () == effect_type) {
-				var action = effects[effect];
 
-				effects.Remove (effect);
-				action_manager.Effects.RemoveEffect (effect.EffectMenuCategory, action);
-				return;
-			}
+			if (effect.GetType () != effect_type)
+				continue;
+
+			var action = effects[effect];
+
+			effects.Remove (effect);
+			action_manager.Effects.RemoveEffect (effect.EffectMenuCategory, action);
+			return;
 		}
 	}
 
@@ -128,16 +138,17 @@ public sealed class EffectsManager
 	public void UnregisterInstanceOfAdjustment (System.Type adjustment_type)
 	{
 		foreach (BaseEffect adjustment in adjustments.Keys) {
-			if (adjustment.GetType () == adjustment_type) {
 
-				var action = adjustments[adjustment];
+			if (adjustment.GetType () != adjustment_type)
+				continue;
 
-				adjustments.Remove (adjustment);
-				action_manager.Adjustments.Actions.Remove (action);
-				chrome_manager.AdjustmentsMenu.Remove (action);
+			var action = adjustments[adjustment];
 
-				return;
-			}
+			adjustments.Remove (adjustment);
+			action_manager.Adjustments.Actions.Remove (action);
+			chrome_manager.AdjustmentsMenu.Remove (action);
+
+			return;
 		}
 	}
 }
