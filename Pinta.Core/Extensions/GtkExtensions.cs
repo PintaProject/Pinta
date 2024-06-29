@@ -206,14 +206,14 @@ public static partial class GtkExtensions
 		app.AddAction (action);
 		app.SetAccelsForAction (
 			action.FullName,
-			accels.Select (a => ConvertPrimaryKey (PintaCore.System, a)).ToArray ());
+			accels.Select (a => PintaCore.System.ConvertPrimaryKey (a)).ToArray ());
 	}
 
 	/// <summary>
 	/// Convert the "<Primary>" accelerator to the Ctrl or Command key, depending on the platform.
 	/// This was done automatically in GTK3, but does not happen in GTK4.
 	/// </summary>
-	private static string ConvertPrimaryKey (SystemManager system, string accel) =>
+	private static string ConvertPrimaryKey (this SystemManager system, string accel) =>
 		accel.Replace ("<Primary>", system.OperatingSystem == OS.Mac ? "<Meta>" : "<Control>");
 
 	/// <summary>
@@ -250,10 +250,10 @@ public static partial class GtkExtensions
 	/// Returns the platform-specific label for the "Primary" (Ctrl) key.
 	/// For example, this is the Cmd key on macOS.
 	/// </summary>
-	public static string CtrlLabel (SystemManager system)
+	public static string CtrlLabel (this SystemManager system)
 	{
 		AcceleratorParse (
-			ConvertPrimaryKey (system, "<Primary>"),
+			system.ConvertPrimaryKey ("<Primary>"),
 			out var key,
 			out var mods);
 

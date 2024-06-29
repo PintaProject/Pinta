@@ -50,7 +50,7 @@ public sealed class MoveSelectionTool : BaseTransformTool
 		"\nRight click and drag the selection to rotate selection outline." +
 		"\nHold Shift to rotate in steps." +
 		"\nUse arrow keys to move selection outline by a single pixel.",
-		GtkExtensions.CtrlLabel (system_manager));
+		system_manager.CtrlLabel ());
 
 	public override Gdk.Cursor DefaultCursor => Gdk.Cursor.NewFromTexture (Resources.GetIcon (Pinta.Resources.Icons.ToolMoveSelection), 0, 0, null);
 	public override Gdk.Key ShortcutKey => Gdk.Key.M;

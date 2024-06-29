@@ -66,7 +66,7 @@ public abstract class ShapeTool : BaseTool
 			    "\nPress Space to add a new control point at the mouse position." +
 			    "\nHold {0} while pressing Space to create the control point at the exact same position." +
 			    "\nHold {0} while left clicking on a control point to create a new shape at the exact same position." +
-			    "\nPress Enter to finalize the shape.", GtkExtensions.CtrlLabel (system_manager));
+			    "\nPress Enter to finalize the shape.", system_manager.CtrlLabel ());
 
 	protected abstract BaseEditEngine CreateEditEngine ();
 
