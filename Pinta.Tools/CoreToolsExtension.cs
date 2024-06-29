@@ -25,14 +25,13 @@
 // THE SOFTWARE.
 
 using System;
-using Mono.Addins;
 using Pinta.Core;
 
-[assembly: Addin ("DefaultTools", PintaCore.ApplicationVersion, Category = "Core")]
-[assembly: AddinName ("Default Tools")]
-[assembly: AddinDescription ("The default tools and brushes that ship with Pinta")]
-[assembly: AddinDependency ("Pinta", PintaCore.ApplicationVersion)]
-[assembly: AddinFlags (Mono.Addins.Description.AddinFlags.Hidden | Mono.Addins.Description.AddinFlags.CantUninstall)]
+[assembly: Mono.Addins.Addin ("DefaultTools", PintaCore.ApplicationVersion, Category = "Core")]
+[assembly: Mono.Addins.AddinName ("Default Tools")]
+[assembly: Mono.Addins.AddinDescription ("The default tools and brushes that ship with Pinta")]
+[assembly: Mono.Addins.AddinDependency ("Pinta", PintaCore.ApplicationVersion)]
+[assembly: Mono.Addins.AddinFlags (Mono.Addins.Description.AddinFlags.Hidden | Mono.Addins.Description.AddinFlags.CantUninstall)]
 
 namespace Pinta.Tools;
 
