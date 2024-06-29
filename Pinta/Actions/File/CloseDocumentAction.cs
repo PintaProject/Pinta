@@ -48,7 +48,7 @@ internal sealed class CloseDocumentAction : IActionHandler
 
 		// If it's not dirty, just close it
 		if (!PintaCore.Workspace.ActiveDocument.IsDirty) {
-			PintaCore.Workspace.CloseActiveDocument ();
+			PintaCore.Workspace.CloseActiveDocument (PintaCore.Actions);
 			return;
 		}
 
@@ -82,9 +82,9 @@ internal sealed class CloseDocumentAction : IActionHandler
 			// If the image is still dirty, the user
 			// must have cancelled the Save dialog
 			if (!PintaCore.Workspace.ActiveDocument.IsDirty)
-				PintaCore.Workspace.CloseActiveDocument ();
+				PintaCore.Workspace.CloseActiveDocument (PintaCore.Actions);
 		} else if (response == discard_response) {
-			PintaCore.Workspace.CloseActiveDocument ();
+			PintaCore.Workspace.CloseActiveDocument (PintaCore.Actions);
 		}
 
 	}
