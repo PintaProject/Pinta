@@ -44,7 +44,7 @@ public sealed class VignetteEffect : BaseEffect
 	public override bool IsTileable
 		=> true;
 
-	// Translators: The vignette effect darkens the outer edges of an image, leaving a bright circular area in the center (or at some other point chosen by the user), similar to what is seen during the closing scene in old cartoons
+	// Translators: The vignette effect darkens the outer edges of an image, which fade into an unchanged circular area in the center (or at some other point chosen by the user), similar to what is seen during the closing scene in old cartoons
 	public override string Name
 		=> Translations.GetString ("Vignette");
 
