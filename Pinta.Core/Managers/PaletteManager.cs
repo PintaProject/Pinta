@@ -78,6 +78,9 @@ public sealed class PaletteManager : IPaletteService
 		SettingsManager settingsManager,
 		PaletteFormatManager paletteFormatManager)
 	{
+		settings_manager = settingsManager;
+		palette_format_manager = paletteFormatManager;
+
 		PopulateSavedPalette ();
 		PopulateRecentlyUsedColors ();
 
@@ -85,9 +88,6 @@ public sealed class PaletteManager : IPaletteService
 			SaveCurrentPalette ();
 			SaveRecentlyUsedColors ();
 		};
-
-		settings_manager = settingsManager;
-		palette_format_manager = paletteFormatManager;
 	}
 
 	public bool DoKeyPress (Gtk.EventControllerKey.KeyPressedSignalArgs args)
