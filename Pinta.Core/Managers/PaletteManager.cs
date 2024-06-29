@@ -45,7 +45,6 @@ public sealed class PaletteManager : IPaletteService
 {
 	private Color primary;
 	private Color secondary;
-	private Palette? palette;
 
 	private const int MAX_RECENT_COLORS = 10;
 	private const string PALETTE_FILE = "palette.txt";
@@ -70,7 +69,7 @@ public sealed class PaletteManager : IPaletteService
 		set => SetColor (false, value, true);
 	}
 
-	public Palette CurrentPalette => palette ??= Palette.GetDefault ();
+	public Palette CurrentPalette { get; } = Palette.GetDefault ();
 
 	private readonly SettingsManager settings_manager;
 	private readonly PaletteFormatManager palette_format_manager;
@@ -147,8 +146,7 @@ public sealed class PaletteManager : IPaletteService
 
 	private void PopulateSavedPalette ()
 	{
-		var palette_file = System.IO.Path.Combine (settings_manager.GetUserSettingsDirectory (), PALETTE_FILE);
-
+		string palette_file = System.IO.Path.Combine (settings_manager.GetUserSettingsDirectory (), PALETTE_FILE);
 		if (System.IO.File.Exists (palette_file))
 			CurrentPalette.Load (Gio.FileHelper.NewForPath (palette_file));
 	}
