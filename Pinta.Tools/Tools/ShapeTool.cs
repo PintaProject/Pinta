@@ -32,11 +32,18 @@ namespace Pinta.Tools;
 
 public abstract class ShapeTool : BaseTool
 {
-	public BaseEditEngine EditEngine { get; }
+	// TODO:
+	// This is `Lazy<T>` because the services used by derived classes
+	// are not initialized when the constructor of `ShapeTool` is called.
+	// Ideally we shouldn't have to call a virtual method in a constructor,
+	// so let's get rid of this at some point.
+	private readonly Lazy<BaseEditEngine> lazy_edit_engine;
+	public BaseEditEngine EditEngine
+		=> lazy_edit_engine.Value;
 
 	public ShapeTool (IServiceProvider services) : base (services)
 	{
-		EditEngine = CreateEditEngine ();
+		lazy_edit_engine = new (CreateEditEngine);
 	}
 
 	public override Gdk.Key ShortcutKey => Gdk.Key.O;
