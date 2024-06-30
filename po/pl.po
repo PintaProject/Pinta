@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: pinta\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-06-23 01:17+0000\n"
+"POT-Creation-Date: 2024-06-30 13:14+0000\n"
 "PO-Revision-Date: 2024-06-24 21:29+0000\n"
 "Last-Translator: Matthaiks <kitynska@gmail.com>\n"
 "Language-Team: Polish <https://hosted.weblate.org/projects/pinta/pinta/pl/>\n"
@@ -412,7 +412,7 @@ msgstr "Kształt krzywej zamkniętej"
 msgid "Closed Line/Curve Series"
 msgstr "Ciąg linii/krzywych zamkniętych"
 
-#: ../Pinta.Effects/Effects/CloudsEffect.cs:32
+#: ../Pinta.Effects/Effects/CloudsEffect.cs:31
 msgid "Clouds"
 msgstr "Chmury"
 
@@ -450,13 +450,13 @@ msgid "Color Saturation"
 msgstr "Nasycenie kolorów"
 
 #: ../Pinta.Core/Actions/ViewActions.cs:181
-#: ../Pinta.Effects/Effects/CloudsEffect.cs:264
+#: ../Pinta.Effects/Effects/CloudsEffect.cs:191
 #: ../Pinta.Effects/Effects/JuliaFractalEffect.cs:184
 #: ../Pinta.Effects/Effects/MandelbrotFractalEffect.cs:202
 msgid "Color Scheme"
 msgstr "Schemat kolorów"
 
-#: ../Pinta.Effects/Effects/CloudsEffect.cs:261
+#: ../Pinta.Effects/Effects/CloudsEffect.cs:188
 #: ../Pinta.Effects/Effects/JuliaFractalEffect.cs:181
 #: ../Pinta.Effects/Effects/MandelbrotFractalEffect.cs:199
 msgid "Color Scheme Source"
@@ -570,6 +570,10 @@ msgstr "Usuń warstwę"
 msgid "Deleted"
 msgstr "Usunięto"
 
+#: ../Pinta.Effects/Effects/DentsEffect.cs:48
+msgid "Dents"
+msgstr ""
+
 #: ../Pinta.Core/Actions/EditActions.cs:263
 msgid "Deselect"
 msgstr "Odznacz"
@@ -596,6 +600,7 @@ msgid "Distance Metric"
 msgstr "Pomiar odległości"
 
 #: ../Pinta.Effects/Effects/BulgeEffect.cs:27
+#: ../Pinta.Effects/Effects/DentsEffect.cs:51
 #: ../Pinta.Effects/Effects/FrostedGlassEffect.cs:27
 #: ../Pinta.Effects/Effects/PixelateEffect.cs:29
 #: ../Pinta.Effects/Effects/PolarInversionEffect.cs:28
@@ -1437,7 +1442,7 @@ msgstr "Liczba wątków używanych do renderowania"
 
 #: ../Pinta.Effects/Effects/BulgeEffect.cs:112
 #: ../Pinta.Effects/Effects/RadialBlurEffect.cs:173
-#: ../Pinta.Effects/Effects/VignetteEffect.cs:131
+#: ../Pinta.Effects/Effects/VignetteEffect.cs:132
 #: ../Pinta.Effects/Effects/ZoomBlurEffect.cs:146
 #: ../Pinta/Dialogs/OffsetSelectionDialog.cs:54
 msgid "Offset"
@@ -1586,7 +1591,7 @@ msgstr "Percentyl"
 #: ../Pinta.Effects/Effects/RedEyeRemoveEffect.cs:27
 #: ../Pinta.Effects/Effects/SharpenEffect.cs:27
 #: ../Pinta.Effects/Effects/SoftenPortraitEffect.cs:58
-#: ../Pinta.Effects/Effects/VignetteEffect.cs:51
+#: ../Pinta.Effects/Effects/VignetteEffect.cs:52
 msgid "Photo"
 msgstr "Fotografia"
 
@@ -1676,7 +1681,7 @@ msgstr "Pionowa"
 msgid "Posterize"
 msgstr "Redukcja kolorów"
 
-#: ../Pinta.Effects/Effects/CloudsEffect.cs:234
+#: ../Pinta.Effects/Effects/CloudsEffect.cs:161
 msgid "Power"
 msgstr "Moc"
 
@@ -1743,7 +1748,7 @@ msgstr "Promień"
 
 #. Translators: This refers to how big the radius is as a percentage of the image's dimensions
 #: ../Pinta.Effects/Effects/BulgeEffect.cs:116
-#: ../Pinta.Effects/Effects/VignetteEffect.cs:135
+#: ../Pinta.Effects/Effects/VignetteEffect.cs:136
 msgid "Radius Percentage"
 msgstr "Procent promienia"
 
@@ -1752,7 +1757,7 @@ msgstr "Procent promienia"
 msgid "Random"
 msgstr "Losowy"
 
-#: ../Pinta.Effects/Effects/CloudsEffect.cs:267
+#: ../Pinta.Effects/Effects/CloudsEffect.cs:194
 #: ../Pinta.Effects/Effects/JuliaFractalEffect.cs:187
 #: ../Pinta.Effects/Effects/MandelbrotFractalEffect.cs:205
 msgid "Random Color Scheme Seed"
@@ -1763,7 +1768,7 @@ msgid "Random Colors"
 msgstr "Kolory losowe"
 
 #: ../Pinta.Effects/Effects/AddNoiseEffect.cs:176
-#: ../Pinta.Effects/Effects/CloudsEffect.cs:258
+#: ../Pinta.Effects/Effects/CloudsEffect.cs:185
 #: ../Pinta.Effects/Effects/FrostedGlassEffect.cs:152
 msgid "Random Noise"
 msgstr "Szum losowy"
@@ -1825,7 +1830,7 @@ msgstr "Płaskorzeźba"
 msgid "Rename Layer"
 msgstr "Zmień nazwę warstwy"
 
-#: ../Pinta.Effects/Effects/CloudsEffect.cs:38
+#: ../Pinta.Effects/Effects/CloudsEffect.cs:37
 #: ../Pinta.Effects/Effects/JuliaFractalEffect.cs:32
 #: ../Pinta.Effects/Effects/MandelbrotFractalEffect.cs:32
 #: ../Pinta.Effects/Effects/VoronoiDiagramEffect.cs:27
@@ -1883,7 +1888,7 @@ msgstr "Zmień rozmiar obrazu…"
 msgid "Resize Palette"
 msgstr "Zmień rozmiar palety"
 
-#: ../Pinta.Effects/Effects/CloudsEffect.cs:270
+#: ../Pinta.Effects/Effects/CloudsEffect.cs:197
 #: ../Pinta.Effects/Effects/JuliaFractalEffect.cs:190
 #: ../Pinta.Effects/Effects/MandelbrotFractalEffect.cs:208
 msgid "Reverse Color Scheme"
@@ -1988,7 +1993,7 @@ msgstr "Zapisz plik palety"
 msgid "Save changes to image \"{0}\" before closing?"
 msgstr "Zapisać zmiany w obrazie „{0}” przed zamknięciem?"
 
-#: ../Pinta.Effects/Effects/CloudsEffect.cs:231
+#: ../Pinta.Effects/Effects/CloudsEffect.cs:158
 msgid "Scale"
 msgstr "Skalowanie"
 
@@ -2090,7 +2095,7 @@ msgid "Status Bar"
 msgstr "Pasek stanu"
 
 #: ../Pinta.Effects/Effects/ReduceNoiseEffect.cs:92
-#: ../Pinta.Effects/Effects/VignetteEffect.cs:140
+#: ../Pinta.Effects/Effects/VignetteEffect.cs:141
 msgid "Strength"
 msgstr "Siła"
 
@@ -2250,6 +2255,10 @@ msgstr "Tryb przezroczystości"
 msgid "Transparent"
 msgstr "Przezroczysty"
 
+#: ../Pinta.Effects/Effects/DentsEffect.cs:121
+msgid "Turbulence"
+msgstr ""
+
 #: ../Pinta.Effects/Effects/TwistEffect.cs:24
 msgid "Twist"
 msgstr "Wir"
@@ -2345,7 +2354,7 @@ msgstr "Pionowe zielonym (G)"
 msgid "Vertical red (R)"
 msgstr "Pionowe czerwonym (R)"
 
-#: ../Pinta.Effects/Effects/VignetteEffect.cs:48
+#: ../Pinta.Effects/Effects/VignetteEffect.cs:49
 msgid "Vignette"
 msgstr "Winieta"
 

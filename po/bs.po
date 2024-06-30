@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: pinta\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-06-23 01:17+0000\n"
+"POT-Creation-Date: 2024-06-30 13:14+0000\n"
 "PO-Revision-Date: 2012-09-09 07:24+0000\n"
 "Last-Translator: Kenan Dervišević <6nm0uygdd@mozmail.com>\n"
 "Language-Team: Bosnian <bs@li.org>\n"
@@ -405,7 +405,7 @@ msgstr ""
 msgid "Closed Line/Curve Series"
 msgstr ""
 
-#: ../Pinta.Effects/Effects/CloudsEffect.cs:32
+#: ../Pinta.Effects/Effects/CloudsEffect.cs:31
 msgid "Clouds"
 msgstr "Oblaci"
 
@@ -443,13 +443,13 @@ msgid "Color Saturation"
 msgstr "Zasićenje boje"
 
 #: ../Pinta.Core/Actions/ViewActions.cs:181
-#: ../Pinta.Effects/Effects/CloudsEffect.cs:264
+#: ../Pinta.Effects/Effects/CloudsEffect.cs:191
 #: ../Pinta.Effects/Effects/JuliaFractalEffect.cs:184
 #: ../Pinta.Effects/Effects/MandelbrotFractalEffect.cs:202
 msgid "Color Scheme"
 msgstr ""
 
-#: ../Pinta.Effects/Effects/CloudsEffect.cs:261
+#: ../Pinta.Effects/Effects/CloudsEffect.cs:188
 #: ../Pinta.Effects/Effects/JuliaFractalEffect.cs:181
 #: ../Pinta.Effects/Effects/MandelbrotFractalEffect.cs:199
 msgid "Color Scheme Source"
@@ -563,6 +563,10 @@ msgstr "Izbriši sloj"
 msgid "Deleted"
 msgstr ""
 
+#: ../Pinta.Effects/Effects/DentsEffect.cs:48
+msgid "Dents"
+msgstr ""
+
 #: ../Pinta.Core/Actions/EditActions.cs:263
 msgid "Deselect"
 msgstr "Poništi izbor"
@@ -589,6 +593,7 @@ msgid "Distance Metric"
 msgstr ""
 
 #: ../Pinta.Effects/Effects/BulgeEffect.cs:27
+#: ../Pinta.Effects/Effects/DentsEffect.cs:51
 #: ../Pinta.Effects/Effects/FrostedGlassEffect.cs:27
 #: ../Pinta.Effects/Effects/PixelateEffect.cs:29
 #: ../Pinta.Effects/Effects/PolarInversionEffect.cs:28
@@ -1379,7 +1384,7 @@ msgstr ""
 
 #: ../Pinta.Effects/Effects/BulgeEffect.cs:112
 #: ../Pinta.Effects/Effects/RadialBlurEffect.cs:173
-#: ../Pinta.Effects/Effects/VignetteEffect.cs:131
+#: ../Pinta.Effects/Effects/VignetteEffect.cs:132
 #: ../Pinta.Effects/Effects/ZoomBlurEffect.cs:146
 #: ../Pinta/Dialogs/OffsetSelectionDialog.cs:54
 msgid "Offset"
@@ -1528,7 +1533,7 @@ msgstr "Procenat"
 #: ../Pinta.Effects/Effects/RedEyeRemoveEffect.cs:27
 #: ../Pinta.Effects/Effects/SharpenEffect.cs:27
 #: ../Pinta.Effects/Effects/SoftenPortraitEffect.cs:58
-#: ../Pinta.Effects/Effects/VignetteEffect.cs:51
+#: ../Pinta.Effects/Effects/VignetteEffect.cs:52
 msgid "Photo"
 msgstr "Fotografija"
 
@@ -1613,7 +1618,7 @@ msgstr ""
 msgid "Posterize"
 msgstr "Napravi plakat"
 
-#: ../Pinta.Effects/Effects/CloudsEffect.cs:234
+#: ../Pinta.Effects/Effects/CloudsEffect.cs:161
 msgid "Power"
 msgstr "Eksponent"
 
@@ -1680,7 +1685,7 @@ msgstr "Poluprečnik"
 
 #. Translators: This refers to how big the radius is as a percentage of the image's dimensions
 #: ../Pinta.Effects/Effects/BulgeEffect.cs:116
-#: ../Pinta.Effects/Effects/VignetteEffect.cs:135
+#: ../Pinta.Effects/Effects/VignetteEffect.cs:136
 msgid "Radius Percentage"
 msgstr ""
 
@@ -1689,7 +1694,7 @@ msgstr ""
 msgid "Random"
 msgstr ""
 
-#: ../Pinta.Effects/Effects/CloudsEffect.cs:267
+#: ../Pinta.Effects/Effects/CloudsEffect.cs:194
 #: ../Pinta.Effects/Effects/JuliaFractalEffect.cs:187
 #: ../Pinta.Effects/Effects/MandelbrotFractalEffect.cs:205
 msgid "Random Color Scheme Seed"
@@ -1700,7 +1705,7 @@ msgid "Random Colors"
 msgstr ""
 
 #: ../Pinta.Effects/Effects/AddNoiseEffect.cs:176
-#: ../Pinta.Effects/Effects/CloudsEffect.cs:258
+#: ../Pinta.Effects/Effects/CloudsEffect.cs:185
 #: ../Pinta.Effects/Effects/FrostedGlassEffect.cs:152
 msgid "Random Noise"
 msgstr "Nasumični šum"
@@ -1762,7 +1767,7 @@ msgstr "Reljef"
 msgid "Rename Layer"
 msgstr "Preimenuj sloj"
 
-#: ../Pinta.Effects/Effects/CloudsEffect.cs:38
+#: ../Pinta.Effects/Effects/CloudsEffect.cs:37
 #: ../Pinta.Effects/Effects/JuliaFractalEffect.cs:32
 #: ../Pinta.Effects/Effects/MandelbrotFractalEffect.cs:32
 #: ../Pinta.Effects/Effects/VoronoiDiagramEffect.cs:27
@@ -1820,7 +1825,7 @@ msgstr "Promjeni veličinu slike..."
 msgid "Resize Palette"
 msgstr "Promjeni veličinu palete"
 
-#: ../Pinta.Effects/Effects/CloudsEffect.cs:270
+#: ../Pinta.Effects/Effects/CloudsEffect.cs:197
 #: ../Pinta.Effects/Effects/JuliaFractalEffect.cs:190
 #: ../Pinta.Effects/Effects/MandelbrotFractalEffect.cs:208
 msgid "Reverse Color Scheme"
@@ -1925,7 +1930,7 @@ msgstr "Sačuvaj Datoteku Palete"
 msgid "Save changes to image \"{0}\" before closing?"
 msgstr ""
 
-#: ../Pinta.Effects/Effects/CloudsEffect.cs:231
+#: ../Pinta.Effects/Effects/CloudsEffect.cs:158
 msgid "Scale"
 msgstr "Razmjer"
 
@@ -2027,7 +2032,7 @@ msgid "Status Bar"
 msgstr ""
 
 #: ../Pinta.Effects/Effects/ReduceNoiseEffect.cs:92
-#: ../Pinta.Effects/Effects/VignetteEffect.cs:140
+#: ../Pinta.Effects/Effects/VignetteEffect.cs:141
 msgid "Strength"
 msgstr "Jačina"
 
@@ -2182,6 +2187,10 @@ msgstr ""
 msgid "Transparent"
 msgstr ""
 
+#: ../Pinta.Effects/Effects/DentsEffect.cs:121
+msgid "Turbulence"
+msgstr ""
+
 #: ../Pinta.Effects/Effects/TwistEffect.cs:24
 msgid "Twist"
 msgstr "Uvrni"
@@ -2276,7 +2285,7 @@ msgstr ""
 msgid "Vertical red (R)"
 msgstr ""
 
-#: ../Pinta.Effects/Effects/VignetteEffect.cs:48
+#: ../Pinta.Effects/Effects/VignetteEffect.cs:49
 msgid "Vignette"
 msgstr ""
 
