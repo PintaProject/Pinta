@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: pinta\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-06-30 13:14+0000\n"
+"POT-Creation-Date: 2024-06-30 09:24-0400\n"
 "PO-Revision-Date: 2024-06-30 13:12+0000\n"
 "Last-Translator: gallegonovato <fran-carro@hotmail.es>\n"
 "Language-Team: Spanish <https://hosted.weblate.org/projects/pinta/pinta/es/"
@@ -2353,6 +2353,7 @@ msgstr "Verde vertical (G)"
 msgid "Vertical red (R)"
 msgstr "Rojo vertical (R)"
 
+#. Translators: The vignette effect darkens the outer edges of an image, which fade into an unchanged circular area in the center (or at some other point chosen by the user), similar to what is seen during the closing scene in old cartoons
 #: ../Pinta.Effects/Effects/VignetteEffect.cs:49
 msgid "Vignette"
 msgstr "Viñeta"
