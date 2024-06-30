@@ -182,6 +182,7 @@ Pinta.Effects/Effects/AddNoiseEffect.cs
 Pinta.Effects/Effects/BulgeEffect.cs
 Pinta.Effects/Effects/CloudsEffect.cs
 Pinta.Effects/Effects/ColorGradient.cs
+Pinta.Effects/Effects/DentsEffect.cs
 Pinta.Effects/Effects/DitheringEffect.cs
 Pinta.Effects/Effects/EdgeDetectEffect.cs
 Pinta.Effects/Effects/EmbossEffect.cs
@@ -217,6 +218,7 @@ Pinta.Effects/Effects/ZoomBlurEffect.cs
 Pinta.Effects/FriendAssemblies.cs
 Pinta.Effects/Utilities/EffectHelper.cs
 Pinta.Effects/Utilities/PaletteHelper.cs
+Pinta.Effects/Utilities/PerlinNoise.cs
 Pinta.Effects/Utilities/SrgbUtility.cs
 Pinta.Gui.Addins/AddinInfoView.cs
 Pinta.Gui.Addins/AddinListView.cs
