@@ -33,14 +33,28 @@ namespace Pinta.Actions;
 
 public sealed class RotateZoomLayerAction : IActionHandler
 {
+	private readonly LayerActions layer_actions;
+	private readonly WorkspaceManager workspace_manager;
+	private readonly ToolManager tool_manager;
+
+	internal RotateZoomLayerAction (
+		LayerActions layerActions,
+		WorkspaceManager workspaceManager,
+		ToolManager toolManager)
+	{
+		layer_actions = layerActions;
+		workspace_manager = workspaceManager;
+		tool_manager = toolManager;
+	}
+
 	void IActionHandler.Initialize ()
 	{
-		PintaCore.Actions.Layers.RotateZoom.Activated += Activated;
+		layer_actions.RotateZoom.Activated += Activated;
 	}
 
 	void IActionHandler.Uninitialize ()
 	{
-		PintaCore.Actions.Layers.RotateZoom.Activated -= Activated;
+		layer_actions.RotateZoom.Activated -= Activated;
 	}
 
 	private void Activated (object sender, EventArgs e)
@@ -49,7 +63,7 @@ public sealed class RotateZoomLayerAction : IActionHandler
 
 		RotateZoomData data = new ();
 
-		var dialog = new SimpleEffectDialog (
+		SimpleEffectDialog dialog = new (
 			Translations.GetString ("Rotate / Zoom Layer"),
 			Resources.Icons.LayerRotateZoom,
 			data,
@@ -58,9 +72,9 @@ public sealed class RotateZoomLayerAction : IActionHandler
 		// When parameters are modified, update the display transform of the layer.
 		dialog.EffectDataChanged += (o, args) => {
 			var xform = ComputeMatrix (data);
-			var doc = PintaCore.Workspace.ActiveDocument;
+			var doc = workspace_manager.ActiveDocument;
 			doc.Layers.CurrentUserLayer.Transform = xform.Clone ();
-			PintaCore.Workspace.Invalidate ();
+			workspace_manager.Invalidate ();
 		};
 
 		dialog.OnResponse += (_, args) => {
@@ -74,16 +88,16 @@ public sealed class RotateZoomLayerAction : IActionHandler
 		dialog.Present ();
 	}
 
-	private static void ClearLivePreview ()
+	private void ClearLivePreview ()
 	{
-		PintaCore.Workspace.ActiveDocument.Layers.CurrentUserLayer.Transform.InitIdentity ();
-		PintaCore.Workspace.Invalidate ();
+		workspace_manager.ActiveDocument.Layers.CurrentUserLayer.Transform.InitIdentity ();
+		workspace_manager.Invalidate ();
 	}
 
-	private static Matrix ComputeMatrix (RotateZoomData data)
+	private Matrix ComputeMatrix (RotateZoomData data)
 	{
 		var xform = CairoExtensions.CreateIdentityMatrix ();
-		var image_size = PintaCore.Workspace.ImageSize;
+		var image_size = workspace_manager.ImageSize;
 		var center_x = image_size.Width / 2.0;
 		var center_y = image_size.Height / 2.0;
 
@@ -95,11 +109,11 @@ public sealed class RotateZoomLayerAction : IActionHandler
 		return xform;
 	}
 
-	private static void ApplyTransform (RotateZoomData data)
+	private void ApplyTransform (RotateZoomData data)
 	{
-		var doc = PintaCore.Workspace.ActiveDocument;
+		var doc = workspace_manager.ActiveDocument;
 
-		PintaCore.Tools.Commit ();
+		tool_manager.Commit ();
 
 		var old_surf = doc.Layers.CurrentUserLayer.Surface.Clone ();
 
@@ -107,8 +121,8 @@ public sealed class RotateZoomLayerAction : IActionHandler
 
 		doc.Layers.CurrentUserLayer.ApplyTransform (
 			xform,
-			PintaCore.Workspace.ImageSize,
-			PintaCore.Workspace.ImageSize);
+			workspace_manager.ImageSize,
+			workspace_manager.ImageSize);
 
 		doc.Workspace.Invalidate ();
 
