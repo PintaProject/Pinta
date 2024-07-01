@@ -33,25 +33,39 @@ namespace Pinta.Actions;
 
 internal sealed class AboutDialogAction : IActionHandler
 {
+	private readonly AppActions app_actions;
+	private readonly ChromeManager chrome_manager;
+	private readonly string application_version;
+
+	internal AboutDialogAction (
+		AppActions appActions,
+		ChromeManager chromeManager,
+		string applicationVersion)
+	{
+		app_actions = appActions;
+		chrome_manager = chromeManager;
+		application_version = applicationVersion;
+	}
+
 	void IActionHandler.Initialize ()
 	{
-		PintaCore.Actions.App.About.Activated += Activated;
+		app_actions.About.Activated += Activated;
 	}
 
 	void IActionHandler.Uninitialize ()
 	{
-		PintaCore.Actions.App.About.Activated -= Activated;
+		app_actions.About.Activated -= Activated;
 	}
 
 	private void Activated (object sender, EventArgs e)
 	{
-		var dialog = Adw.AboutWindow.New ();
-		dialog.TransientFor = PintaCore.Chrome.MainWindow;
+		Adw.AboutWindow dialog = Adw.AboutWindow.New ();
+		dialog.TransientFor = chrome_manager.MainWindow;
 		dialog.Title = Translations.GetString ("About Pinta");
 		dialog.IconName = Icons.AboutPinta;
 		dialog.ApplicationName = Translations.GetString ("Pinta");
 		dialog.ApplicationIcon = Icons.Pinta;
-		dialog.Version = PintaCore.ApplicationVersion;
+		dialog.Version = application_version;
 		dialog.Website = "https://www.pinta-project.com";
 		dialog.Comments = Translations.GetString ("Easily create and edit images");
 		dialog.Copyright = BuildCopyrightText ();
@@ -63,14 +77,14 @@ internal sealed class AboutDialogAction : IActionHandler
 
 	private static string BuildCopyrightText ()
 	{
-		var copyrightText = Translations.GetString ("Copyright");
-		var contributorsText = Translations.GetString ("by Pinta contributors");
+		string copyrightText = Translations.GetString ("Copyright");
+		string contributorsText = Translations.GetString ("by Pinta contributors");
 		return $"{copyrightText} (c) 2010-2023 {contributorsText}";
 	}
 
 	private static string BuildLicenseText ()
 	{
-		var sb = new StringBuilder ();
+		StringBuilder sb = new ();
 
 		sb.AppendFormat ("{0}:\n", Translations.GetString ("License"));
 		sb.AppendLine (Translations.GetString ("Released under the MIT X11 License."));

@@ -43,6 +43,7 @@ public sealed class ActionHandlers
 		ImageConverterManager imageFormats = PintaCore.ImageFormats;
 		SettingsManager settings = PintaCore.Settings;
 		ToolManager tools = PintaCore.Tools;
+		string applicationVersion = PintaCore.ApplicationVersion;
 
 		action_handlers = new ()
 		{
@@ -86,7 +87,7 @@ public sealed class ActionHandlers
 			new SaveAllDocumentsAction (),
 
 			// Help
-			new AboutDialogAction (),
+			new AboutDialogAction (actions.App, chrome, applicationVersion),
 		};
 
 		// Initialize each action handler
