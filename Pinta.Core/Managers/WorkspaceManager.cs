@@ -38,11 +38,12 @@ public interface IWorkspaceService
 {
 	Document ActiveDocument { get; }
 	DocumentWorkspace ActiveWorkspace { get; }
-	event EventHandler? ActiveDocumentChanged;
-	RectangleI ClampToImageSize (RectangleI r);
 	bool HasOpenDocuments { get; }
-	event EventHandler? SelectionChanged;
+
 	SelectionModeHandler SelectionHandler { get; }
+
+	event EventHandler? SelectionChanged;
+	event EventHandler? ActiveDocumentChanged;
 }
 
 public static class WorkspaceServiceExtensions
@@ -94,6 +95,40 @@ public static class WorkspaceServiceExtensions
 	{
 		workspace.ActiveDocument.ResizeCanvas (newSize, anchor, compoundAction);
 	}
+
+	public static void CloseActiveDocument (this WorkspaceManager workspace, ActionManager actions)
+	{
+		workspace.CloseDocument (actions, workspace.ActiveDocument);
+	}
+
+	public static RectangleI ClampToImageSize (this IWorkspaceService workspace, RectangleI r)
+	{
+		return workspace.ActiveDocument.ClampToImageSize (r);
+	}
+
+	public static Document NewDocument (
+		this WorkspaceManager workspace,
+		ActionManager actions,
+		Size imageSize,
+		Color backgroundColor)
+	{
+		Document doc = workspace.CreateAndActivateDocument (actions, null, null, imageSize);
+		doc.Workspace.ViewSize = imageSize;
+
+		// Start with an empty white layer
+		Layer background = doc.Layers.AddNewLayer (Translations.GetString ("Background"));
+
+		if (backgroundColor.A != 0) {
+			Cairo.Context g = new (background.Surface);
+			g.SetSourceColor (backgroundColor);
+			g.Paint ();
+		}
+
+		doc.Workspace.History.PushNewItem (new BaseHistoryItem (Resources.StandardIcons.DocumentNew, Translations.GetString ("New Image")));
+		doc.Workspace.History.SetClean ();
+
+		return doc;
+	}
 }
 
 public sealed class WorkspaceManager : IWorkspaceService
@@ -124,7 +159,7 @@ public sealed class WorkspaceManager : IWorkspaceService
 			if (HasOpenDocuments)
 				return open_documents[active_document_index];
 
-			throw new InvalidOperationException ("Tried to get WorkspaceManager.ActiveDocument when there are no open Documents.  Check HasOpenDocuments first.");
+			throw new InvalidOperationException ($"Tried to get {nameof (WorkspaceManager)}.{nameof (ActiveDocument)} when there are no open Documents.  Check HasOpenDocuments first.");
 		}
 	}
 
@@ -170,7 +205,7 @@ public sealed class WorkspaceManager : IWorkspaceService
 		string? file_type,
 		Size size)
 	{
-		Document doc = new Document (size);
+		Document doc = new (size);
 
 		if (file is not null) {
 
@@ -189,11 +224,6 @@ public sealed class WorkspaceManager : IWorkspaceService
 		actions.Window.SetActiveDocument (doc);
 
 		return doc;
-	}
-
-	public void CloseActiveDocument (ActionManager actions)
-	{
-		CloseDocument (actions, ActiveDocument);
 	}
 
 	public void CloseDocument (ActionManager actions, Document document)
@@ -219,33 +249,13 @@ public sealed class WorkspaceManager : IWorkspaceService
 		OnDocumentClosed (new DocumentEventArgs (document));
 	}
 
-	public Document NewDocument (ActionManager actions, Size imageSize, Color backgroundColor)
-	{
-		Document doc = CreateAndActivateDocument (actions, null, null, imageSize);
-		doc.Workspace.ViewSize = imageSize;
-
-		// Start with an empty white layer
-		Layer background = doc.Layers.AddNewLayer (Translations.GetString ("Background"));
-
-		if (backgroundColor.A != 0) {
-			Cairo.Context g = new (background.Surface);
-			g.SetSourceColor (backgroundColor);
-			g.Paint ();
-		}
-
-		doc.Workspace.History.PushNewItem (new BaseHistoryItem (Resources.StandardIcons.DocumentNew, Translations.GetString ("New Image")));
-		doc.Workspace.History.SetClean ();
-
-		return doc;
-	}
-
 	/// <summary>
 	/// Creates a new Document with a specified image as content.
 	/// Primarily used for Paste Into New Image.
 	/// </summary>
 	public Document NewDocumentFromImage (ActionManager actions, Cairo.ImageSurface image)
 	{
-		Document doc = NewDocument (
+		Document doc = this.NewDocument (
 			actions,
 			new Size (image.Width, image.Height),
 			new Color (0, 0, 0, 0));
@@ -275,7 +285,7 @@ public sealed class WorkspaceManager : IWorkspaceService
 				importer.Import (file, parent);
 			} else {
 				// Unknown extension, so try every loader.
-				var errors = new StringBuilder ();
+				StringBuilder errors = new ();
 				bool loaded = false;
 				foreach (var format in image_formats.Formats.Where (f => !f.IsWriteOnly ())) {
 					try {
@@ -312,11 +322,6 @@ public sealed class WorkspaceManager : IWorkspaceService
 		}
 
 		return fileOpened;
-	}
-
-	public RectangleI ClampToImageSize (RectangleI r)
-	{
-		return ActiveDocument.ClampToImageSize (r);
 	}
 
 	public bool ImageFitsInWindow
@@ -427,15 +432,11 @@ public sealed class WorkspaceManager : IWorkspaceService
 		chrome_manager.ShowMessageDialog (parent, message, details);
 	}
 
-	#region Public Events
-
 	public event EventHandler<DocumentEventArgs>? DocumentCreated;
 	public event EventHandler<DocumentEventArgs>? DocumentOpened;
 	public event EventHandler<DocumentEventArgs>? DocumentClosed;
 
 	public event EventHandler? ActiveDocumentChanged;
 	public event EventHandler? SelectionChanged;
-
-	#endregion
 
 }
