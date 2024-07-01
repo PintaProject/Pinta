@@ -25,7 +25,6 @@
 // THE SOFTWARE.
 
 using System.Collections.Generic;
-using System.Diagnostics.CodeAnalysis;
 using Pinta.Actions;
 using Pinta.Core;
 
@@ -33,17 +32,23 @@ namespace Pinta;
 
 public sealed class ActionHandlers
 {
-	[SuppressMessage ("CodeQuality", "IDE0052:Remove unread private members", Justification = "Objects contained herein have to be kept alive")]
 	private readonly List<IActionHandler> action_handlers;
 
 	public ActionHandlers ()
 	{
+		ChromeManager chrome = PintaCore.Chrome;
+		WorkspaceManager workspace = PintaCore.Workspace;
+		ActionManager actions = PintaCore.Actions;
+		RecentFileManager recentFiles = PintaCore.RecentFiles;
+		ImageConverterManager imageFormats = PintaCore.ImageFormats;
+		SettingsManager settings = PintaCore.Settings;
+
 		action_handlers = new ()
 		{
 			// File
-			new NewDocumentAction (),
-			new NewScreenshotAction (),
-			new OpenDocumentAction (),
+			new NewDocumentAction (actions, workspace, settings),
+			new NewScreenshotAction (chrome, workspace, actions),
+			new OpenDocumentAction (actions.File, chrome, workspace, recentFiles, imageFormats),
 			new SaveDocumentAction (),
 			new SaveDocumentAsAction (),
 			new SaveDocumentImplmentationAction (),
@@ -62,7 +67,7 @@ public sealed class ActionHandlers
 
 			// Image
 			new ResizeImageAction (),
-			new ResizeCanvasAction (),
+			new ResizeCanvasAction (chrome, workspace, actions),
 
 			// Layers
 			new LayerPropertiesAction (),

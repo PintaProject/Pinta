@@ -31,14 +31,27 @@ namespace Pinta.Actions;
 
 internal sealed class NewDocumentAction : IActionHandler
 {
+	private readonly ActionManager action_manager;
+	private readonly WorkspaceManager workspace_manager;
+	private readonly SettingsManager settings_manager;
+	internal NewDocumentAction (
+		ActionManager actionManager,
+		WorkspaceManager workspaceManager,
+		SettingsManager settingsManager)
+	{
+		action_manager = actionManager;
+		workspace_manager = workspaceManager;
+		settings_manager = settingsManager;
+	}
+
 	void IActionHandler.Initialize ()
 	{
-		PintaCore.Actions.File.New.Activated += Activated;
+		action_manager.File.New.Activated += Activated;
 	}
 
 	void IActionHandler.Uninitialize ()
 	{
-		PintaCore.Actions.File.New.Activated -= Activated;
+		action_manager.File.New.Activated -= Activated;
 	}
 
 	private async void Activated (object sender, EventArgs e)
@@ -54,9 +67,9 @@ internal sealed class NewDocumentAction : IActionHandler
 		if (cb_texture is null) {
 			// An image was not on the clipboard,
 			// so use saved dimensions from settings
-			imgWidth = PintaCore.Settings.GetSetting<int> ("new-image-width", 800);
-			imgHeight = PintaCore.Settings.GetSetting<int> ("new-image-height", 600);
-			bg_type = PintaCore.Settings.GetSetting<NewImageDialog.BackgroundType> (
+			imgWidth = settings_manager.GetSetting<int> ("new-image-width", 800);
+			imgHeight = settings_manager.GetSetting<int> ("new-image-height", 600);
+			bg_type = settings_manager.GetSetting<NewImageDialog.BackgroundType> (
 				"new-image-bg", NewImageDialog.BackgroundType.White);
 			using_clipboard = false;
 		} else {
@@ -74,14 +87,14 @@ internal sealed class NewDocumentAction : IActionHandler
 			int response = e.ResponseId;
 
 			if (response == (int) Gtk.ResponseType.Ok) {
-				PintaCore.Workspace.NewDocument (
-					PintaCore.Actions,
+				workspace_manager.NewDocument (
+					action_manager,
 					dialog.NewImageSize,
 					dialog.NewImageBackground);
 
-				PintaCore.Settings.PutSetting ("new-image-width", dialog.NewImageWidth);
-				PintaCore.Settings.PutSetting ("new-image-height", dialog.NewImageHeight);
-				PintaCore.Settings.PutSetting ("new-image-bg", dialog.NewImageBackgroundType);
+				settings_manager.PutSetting ("new-image-width", dialog.NewImageWidth);
+				settings_manager.PutSetting ("new-image-height", dialog.NewImageHeight);
+				settings_manager.PutSetting ("new-image-bg", dialog.NewImageBackgroundType);
 			}
 
 			dialog.Destroy ();

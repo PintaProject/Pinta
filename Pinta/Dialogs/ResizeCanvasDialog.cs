@@ -50,7 +50,9 @@ public sealed class ResizeCanvasDialog : Gtk.Dialog
 	private bool value_changing;
 	private Anchor anchor;
 
-	public ResizeCanvasDialog ()
+	private readonly WorkspaceManager workspace_manager;
+
+	public ResizeCanvasDialog (ChromeManager chromeManager, WorkspaceManager workspaceManager)
 	{
 		const int spacing = 6;
 
@@ -72,7 +74,7 @@ public sealed class ResizeCanvasDialog : Gtk.Dialog
 		widthLabel.Halign = Gtk.Align.End;
 
 		Gtk.SpinButton widthSpinner = Gtk.SpinButton.NewWithRange (1, int.MaxValue, 1);
-		widthSpinner.Value = PintaCore.Workspace.ImageSize.Width;
+		widthSpinner.Value = workspaceManager.ImageSize.Width;
 		widthSpinner.OnValueChanged += widthSpinner_ValueChanged;
 		widthSpinner.SetActivatesDefaultImmediate (true);
 
@@ -80,7 +82,7 @@ public sealed class ResizeCanvasDialog : Gtk.Dialog
 		heightLabel.Halign = Gtk.Align.End;
 
 		Gtk.SpinButton heightSpinner = Gtk.SpinButton.NewWithRange (1, int.MaxValue, 1);
-		heightSpinner.Value = PintaCore.Workspace.ImageSize.Height;
+		heightSpinner.Value = workspaceManager.ImageSize.Height;
 		heightSpinner.OnValueChanged += heightSpinner_ValueChanged;
 		heightSpinner.SetActivatesDefaultImmediate (true);
 
@@ -165,7 +167,7 @@ public sealed class ResizeCanvasDialog : Gtk.Dialog
 		// --- Initialization (Gtk.Window)
 
 		Title = Translations.GetString ("Resize Canvas");
-		TransientFor = PintaCore.Chrome.MainWindow;
+		TransientFor = chromeManager.MainWindow;
 		Modal = true;
 		IconName = Resources.Icons.ImageResizeCanvas;
 		DefaultWidth = 300;
@@ -185,6 +187,8 @@ public sealed class ResizeCanvasDialog : Gtk.Dialog
 		percentageSpinner.GrabFocus ();
 
 		// --- References to keep
+
+		workspace_manager = workspaceManager;
 
 		percentage_radio = percentageRadio;
 		percentage_spinner = percentageSpinner;
@@ -220,7 +224,7 @@ public sealed class ResizeCanvasDialog : Gtk.Dialog
 			Height: height_spinner.GetValueAsInt ()
 		);
 
-		PintaCore.Workspace.ResizeCanvas (newSize, anchor, null);
+		workspace_manager.ResizeCanvas (newSize, anchor, null);
 	}
 
 	private void heightSpinner_ValueChanged (object? sender, EventArgs e)
@@ -232,7 +236,7 @@ public sealed class ResizeCanvasDialog : Gtk.Dialog
 			return;
 
 		value_changing = true;
-		width_spinner.Value = (int) (height_spinner.Value * PintaCore.Workspace.ImageSize.Width / PintaCore.Workspace.ImageSize.Height);
+		width_spinner.Value = (int) (height_spinner.Value * workspace_manager.ImageSize.Width / workspace_manager.ImageSize.Height);
 		value_changing = false;
 	}
 
@@ -245,14 +249,14 @@ public sealed class ResizeCanvasDialog : Gtk.Dialog
 			return;
 
 		value_changing = true;
-		height_spinner.Value = (int) (width_spinner.Value * PintaCore.Workspace.ImageSize.Height / PintaCore.Workspace.ImageSize.Width);
+		height_spinner.Value = (int) (width_spinner.Value * workspace_manager.ImageSize.Height / workspace_manager.ImageSize.Width);
 		value_changing = false;
 	}
 
 	private void percentageSpinner_ValueChanged (object? sender, EventArgs e)
 	{
-		width_spinner.Value = (int) (PintaCore.Workspace.ImageSize.Width * (percentage_spinner.GetValueAsInt () / 100f));
-		height_spinner.Value = (int) (PintaCore.Workspace.ImageSize.Height * (percentage_spinner.GetValueAsInt () / 100f));
+		width_spinner.Value = (int) (workspace_manager.ImageSize.Width * (percentage_spinner.GetValueAsInt () / 100f));
+		height_spinner.Value = (int) (workspace_manager.ImageSize.Height * (percentage_spinner.GetValueAsInt () / 100f));
 	}
 
 	private void absoluteRadio_Toggled (object? sender, EventArgs e)
