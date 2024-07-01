@@ -71,7 +71,7 @@ public sealed class ActionHandlers
 			new ResizeCanvasAction (chrome, workspace, actions),
 
 			// Layers
-			new LayerPropertiesAction (),
+			new LayerPropertiesAction (chrome, actions.Layers, workspace),
 			new RotateZoomLayerAction (),
 
 			// View

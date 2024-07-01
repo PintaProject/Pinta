@@ -31,21 +31,34 @@ namespace Pinta.Actions;
 
 internal sealed class LayerPropertiesAction : IActionHandler
 {
+	private readonly ChromeManager chrome_manager;
+	private readonly LayerActions layer_actions;
+	private readonly WorkspaceManager workspace_manager;
+	internal LayerPropertiesAction (
+		ChromeManager chromeManager,
+		LayerActions layerActions,
+		WorkspaceManager workspaceManager)
+	{
+		chrome_manager = chromeManager;
+		layer_actions = layerActions;
+		workspace_manager = workspaceManager;
+	}
+
 	void IActionHandler.Initialize ()
 	{
-		PintaCore.Actions.Layers.Properties.Activated += Activated;
+		layer_actions.Properties.Activated += Activated;
 	}
 
 	void IActionHandler.Uninitialize ()
 	{
-		PintaCore.Actions.Layers.Properties.Activated -= Activated;
+		layer_actions.Properties.Activated -= Activated;
 	}
 
 	private void Activated (object sender, EventArgs e)
 	{
-		var doc = PintaCore.Workspace.ActiveDocument;
+		var doc = workspace_manager.ActiveDocument;
 
-		var dialog = new LayerPropertiesDialog ();
+		LayerPropertiesDialog dialog = new (chrome_manager, workspace_manager);
 
 		dialog.OnResponse += (_, args) => {
 			var response = (Gtk.ResponseType) args.ResponseId;
@@ -64,7 +77,7 @@ internal sealed class LayerPropertiesAction : IActionHandler
 
 				doc.History.PushNewItem (historyItem);
 
-				PintaCore.Workspace.ActiveWorkspace.Invalidate ();
+				workspace_manager.ActiveWorkspace.Invalidate ();
 
 			} else {
 
@@ -77,7 +90,7 @@ internal sealed class LayerPropertiesAction : IActionHandler
 					initial.SetProperties (selectionLayer);
 
 				if ((layer.Opacity != initial.Opacity) || (layer.BlendMode != initial.BlendMode) || (layer.Hidden != initial.Hidden))
-					PintaCore.Workspace.ActiveWorkspace.Invalidate ();
+					workspace_manager.ActiveWorkspace.Invalidate ();
 			}
 
 			dialog.Destroy ();

@@ -45,11 +45,13 @@ public sealed class LayerPropertiesDialog : Gtk.Dialog
 	private readonly Gtk.Scale opacity_slider;
 	private readonly Gtk.ComboBoxText blend_combo_box;
 
-	public LayerPropertiesDialog ()
+	private readonly WorkspaceManager workspace_manager;
+
+	public LayerPropertiesDialog (ChromeManager chromeManager, WorkspaceManager workspaceManager)
 	{
 		const int spacing = 6;
 
-		Document doc = PintaCore.Workspace.ActiveDocument;
+		Document doc = workspaceManager.ActiveDocument;
 
 		string currentLayerName = doc.Layers.CurrentUserLayer.Name;
 		bool currentLayerHidden = doc.Layers.CurrentUserLayer.Hidden;
@@ -132,7 +134,7 @@ public sealed class LayerPropertiesDialog : Gtk.Dialog
 		// --- Initialization (Gtk.Window)
 
 		Title = Translations.GetString ("Layer Properties");
-		TransientFor = PintaCore.Chrome.MainWindow;
+		TransientFor = chromeManager.MainWindow;
 		Modal = true;
 		DefaultWidth = 349;
 		DefaultHeight = 224;
@@ -164,6 +166,8 @@ public sealed class LayerPropertiesDialog : Gtk.Dialog
 		current_layer_blend_mode = currentLayerBlendMode;
 
 		initial_properties = initialProperties;
+
+		workspace_manager = workspaceManager;
 	}
 
 	public bool AreLayerPropertiesUpdated =>
@@ -184,14 +188,14 @@ public sealed class LayerPropertiesDialog : Gtk.Dialog
 
 	private void OnLayerNameChanged (object? sender, EventArgs e)
 	{
-		Document doc = PintaCore.Workspace.ActiveDocument;
+		Document doc = workspace_manager.ActiveDocument;
 		current_layer_name = layer_name_entry.GetText ();
 		doc.Layers.CurrentUserLayer.Name = current_layer_name;
 	}
 
 	private void OnVisibilityToggled (object? sender, EventArgs e)
 	{
-		Document doc = PintaCore.Workspace.ActiveDocument;
+		Document doc = workspace_manager.ActiveDocument;
 
 		current_layer_hidden = !visibility_checkbox.Active;
 
@@ -200,7 +204,7 @@ public sealed class LayerPropertiesDialog : Gtk.Dialog
 		if (doc.Layers.SelectionLayer != null)
 			doc.Layers.SelectionLayer.Hidden = doc.Layers.CurrentUserLayer.Hidden; // Update Visibility for SelectionLayer and force redraw
 
-		PintaCore.Workspace.Invalidate ();
+		workspace_manager.Invalidate ();
 	}
 
 	private void OnOpacitySliderChanged (object? sender, EventArgs e)
@@ -217,7 +221,7 @@ public sealed class LayerPropertiesDialog : Gtk.Dialog
 
 	private void UpdateOpacity ()
 	{
-		Document doc = PintaCore.Workspace.ActiveDocument;
+		Document doc = workspace_manager.ActiveDocument;
 
 		//TODO check redraws are being throttled.
 		current_layer_opacity = opacity_spinner.Value / 100d;
@@ -227,12 +231,12 @@ public sealed class LayerPropertiesDialog : Gtk.Dialog
 		if (doc.Layers.SelectionLayer != null)
 			doc.Layers.SelectionLayer.Opacity = doc.Layers.CurrentUserLayer.Opacity; // Update Opacity for SelectionLayer and force redraw
 
-		PintaCore.Workspace.Invalidate ();
+		workspace_manager.Invalidate ();
 	}
 
 	private void OnBlendModeChanged (object? sender, EventArgs e)
 	{
-		Document doc = PintaCore.Workspace.ActiveDocument;
+		Document doc = workspace_manager.ActiveDocument;
 
 		current_layer_blend_mode = UserBlendOps.GetBlendModeByName (blend_combo_box.GetActiveText ()!);
 
@@ -241,7 +245,7 @@ public sealed class LayerPropertiesDialog : Gtk.Dialog
 		if (doc.Layers.SelectionLayer != null)
 			doc.Layers.SelectionLayer.BlendMode = doc.Layers.CurrentUserLayer.BlendMode; //Update BlendMode for SelectionLayer and force redraw
 
-		PintaCore.Workspace.Invalidate ();
+		workspace_manager.Invalidate ();
 	}
 }
 
