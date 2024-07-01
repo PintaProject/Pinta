@@ -37,18 +37,20 @@ public sealed class ResizeImageDialog : Gtk.Dialog
 	private readonly Gtk.SpinButton height_spinner;
 	private readonly Gtk.CheckButton aspect_checkbox;
 	private readonly Gtk.ComboBoxText resampling_combobox;
-
+	private readonly WorkspaceManager workspace_manager;
 	private bool value_changing;
 
 	const int SPACING = 6;
 
-	public ResizeImageDialog ()
+	internal ResizeImageDialog (
+		ChromeManager chromeManager,
+		WorkspaceManager workspaceManager)
 	{
 		Gtk.CheckButton percentageRadio = CreatePercentageRadio ();
 		Gtk.CheckButton absoluteRadio = CreateAbsoluteRadio (percentageRadio);
 		Gtk.SpinButton percentageSpinner = CreatePercentageSpinner ();
-		Gtk.SpinButton widthSpinner = CreateWidthSpinner ();
-		Gtk.SpinButton heightSpinner = CreateHeightSpinner ();
+		Gtk.SpinButton widthSpinner = CreateWidthSpinner (workspaceManager.ImageSize.Width);
+		Gtk.SpinButton heightSpinner = CreateHeightSpinner (workspaceManager.ImageSize.Height);
 		Gtk.CheckButton aspectCheckbox = CreateAspectCheckbox ();
 		Gtk.ComboBoxText resamplingCombobox = CreateResamplingCombobox ();
 		Gtk.Box hboxPercent = CreatePercentBox (percentageRadio, percentageSpinner);
@@ -80,7 +82,7 @@ public sealed class ResizeImageDialog : Gtk.Dialog
 		// --- Initialization (Gtk.Window)
 
 		Title = Translations.GetString ("Resize Image");
-		TransientFor = PintaCore.Chrome.MainWindow;
+		TransientFor = chromeManager.MainWindow;
 		Modal = true;
 
 		IconName = Resources.Icons.ImageResize;
@@ -109,8 +111,10 @@ public sealed class ResizeImageDialog : Gtk.Dialog
 		height_spinner = heightSpinner;
 		aspect_checkbox = aspectCheckbox;
 		resampling_combobox = resamplingCombobox;
+		workspace_manager = workspaceManager;
 
-		// Initialization which depends on members (via event handlers).
+		// --- Initialization which depends on members (via event handlers).
+
 		percentage_radio.Active = true;
 	}
 
@@ -186,19 +190,19 @@ public sealed class ResizeImageDialog : Gtk.Dialog
 		return result;
 	}
 
-	private Gtk.SpinButton CreateWidthSpinner ()
+	private Gtk.SpinButton CreateWidthSpinner (int initialWidth)
 	{
 		Gtk.SpinButton result = Gtk.SpinButton.NewWithRange (1, int.MaxValue, 1);
-		result.Value = PintaCore.Workspace.ImageSize.Width;
+		result.Value = initialWidth;
 		result.OnValueChanged += widthSpinner_ValueChanged;
 		result.SetActivatesDefaultImmediate (true);
 		return result;
 	}
 
-	private Gtk.SpinButton CreateHeightSpinner ()
+	private Gtk.SpinButton CreateHeightSpinner (int initialHeight)
 	{
 		Gtk.SpinButton result = Gtk.SpinButton.NewWithRange (1, int.MaxValue, 1);
-		result.Value = PintaCore.Workspace.ImageSize.Height;
+		result.Value = initialHeight;
 		result.OnValueChanged += heightSpinner_ValueChanged;
 		result.SetActivatesDefaultImmediate (true);
 		return result;
@@ -210,7 +214,7 @@ public sealed class ResizeImageDialog : Gtk.Dialog
 			Width: width_spinner.GetValueAsInt (),
 			Height: height_spinner.GetValueAsInt ());
 
-		PintaCore.Workspace.ResizeImage (
+		workspace_manager.ResizeImage (
 			newSize,
 			(ResamplingMode) resampling_combobox.Active);
 	}
@@ -224,7 +228,7 @@ public sealed class ResizeImageDialog : Gtk.Dialog
 			return;
 
 		value_changing = true;
-		width_spinner.Value = (int) (height_spinner.Value * PintaCore.Workspace.ImageSize.Width / PintaCore.Workspace.ImageSize.Height);
+		width_spinner.Value = (int) (height_spinner.Value * workspace_manager.ImageSize.Width / workspace_manager.ImageSize.Height);
 		value_changing = false;
 	}
 
@@ -237,15 +241,15 @@ public sealed class ResizeImageDialog : Gtk.Dialog
 			return;
 
 		value_changing = true;
-		height_spinner.Value = (int) (width_spinner.Value * PintaCore.Workspace.ImageSize.Height / PintaCore.Workspace.ImageSize.Width);
+		height_spinner.Value = (int) (width_spinner.Value * workspace_manager.ImageSize.Height / workspace_manager.ImageSize.Width);
 		value_changing = false;
 	}
 
 	private void percentageSpinner_ValueChanged (object? sender, EventArgs e)
 	{
 		float proportion = percentage_spinner.GetValueAsInt () / 100f;
-		width_spinner.Value = (int) (PintaCore.Workspace.ImageSize.Width * proportion);
-		height_spinner.Value = (int) (PintaCore.Workspace.ImageSize.Height * proportion);
+		width_spinner.Value = (int) (workspace_manager.ImageSize.Width * proportion);
+		height_spinner.Value = (int) (workspace_manager.ImageSize.Height * proportion);
 	}
 
 	private void absoluteRadio_Toggled (object? sender, EventArgs e)

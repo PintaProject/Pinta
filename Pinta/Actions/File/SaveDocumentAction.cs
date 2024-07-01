@@ -31,18 +31,28 @@ namespace Pinta.Actions;
 
 internal sealed class SaveDocumentAction : IActionHandler
 {
+	private readonly FileActions file_actions;
+	private readonly WorkspaceManager workspace_manager;
+	internal SaveDocumentAction (
+		FileActions fileActions,
+		WorkspaceManager workspace)
+	{
+		file_actions = fileActions;
+		workspace_manager = workspace;
+	}
+
 	void IActionHandler.Initialize ()
 	{
-		PintaCore.Actions.File.Save.Activated += Activated;
+		file_actions.Save.Activated += Activated;
 	}
 
 	void IActionHandler.Uninitialize ()
 	{
-		PintaCore.Actions.File.Save.Activated -= Activated;
+		file_actions.Save.Activated -= Activated;
 	}
 
 	private void Activated (object sender, EventArgs e)
 	{
-		PintaCore.Workspace.ActiveDocument.Save (false);
+		workspace_manager.ActiveDocument.Save (false);
 	}
 }

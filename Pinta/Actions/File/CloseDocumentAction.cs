@@ -31,34 +31,50 @@ namespace Pinta.Actions;
 
 internal sealed class CloseDocumentAction : IActionHandler
 {
+	private readonly ActionManager action_manager;
+	private readonly ChromeManager chrome_manager;
+	private readonly WorkspaceManager workspace_manager;
+	private readonly ToolManager tool_manager;
+	internal CloseDocumentAction (
+		ActionManager actionManager,
+		ChromeManager chromeManager,
+		WorkspaceManager workspaceManager,
+		ToolManager toolManager)
+	{
+		action_manager = actionManager;
+		chrome_manager = chromeManager;
+		workspace_manager = workspaceManager;
+		tool_manager = toolManager;
+	}
+
 	void IActionHandler.Initialize ()
 	{
-		PintaCore.Actions.File.Close.Activated += Activated;
+		action_manager.File.Close.Activated += Activated;
 	}
 
 	void IActionHandler.Uninitialize ()
 	{
-		PintaCore.Actions.File.Close.Activated -= Activated;
+		action_manager.File.Close.Activated -= Activated;
 	}
 
 	private void Activated (object sender, EventArgs e)
 	{
 		// Commit any pending changes
-		PintaCore.Tools.Commit ();
+		tool_manager.Commit ();
 
 		// If it's not dirty, just close it
-		if (!PintaCore.Workspace.ActiveDocument.IsDirty) {
-			PintaCore.Workspace.CloseActiveDocument (PintaCore.Actions);
+		if (!workspace_manager.ActiveDocument.IsDirty) {
+			workspace_manager.CloseActiveDocument (action_manager);
 			return;
 		}
 
 		string heading = Translations.GetString (
 			"Save changes to image \"{0}\" before closing?",
-			PintaCore.Workspace.ActiveDocument.DisplayName);
+			workspace_manager.ActiveDocument.DisplayName);
 
 		string body = Translations.GetString ("If you don't save, all changes will be permanently lost.");
 
-		Adw.MessageDialog dialog = Adw.MessageDialog.New (PintaCore.Chrome.MainWindow, heading, body);
+		Adw.MessageDialog dialog = Adw.MessageDialog.New (chrome_manager.MainWindow, heading, body);
 
 		const string cancel_response = "cancel";
 		const string discard_response = "discard";
@@ -77,14 +93,14 @@ internal sealed class CloseDocumentAction : IActionHandler
 
 		string response = dialog.RunBlocking ();
 		if (response == save_response) {
-			PintaCore.Workspace.ActiveDocument.Save (false);
+			workspace_manager.ActiveDocument.Save (false);
 
 			// If the image is still dirty, the user
 			// must have cancelled the Save dialog
-			if (!PintaCore.Workspace.ActiveDocument.IsDirty)
-				PintaCore.Workspace.CloseActiveDocument (PintaCore.Actions);
+			if (!workspace_manager.ActiveDocument.IsDirty)
+				workspace_manager.CloseActiveDocument (action_manager);
 		} else if (response == discard_response) {
-			PintaCore.Workspace.CloseActiveDocument (PintaCore.Actions);
+			workspace_manager.CloseActiveDocument (action_manager);
 		}
 
 	}

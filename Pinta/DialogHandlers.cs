@@ -42,6 +42,7 @@ public sealed class ActionHandlers
 		RecentFileManager recentFiles = PintaCore.RecentFiles;
 		ImageConverterManager imageFormats = PintaCore.ImageFormats;
 		SettingsManager settings = PintaCore.Settings;
+		ToolManager tools = PintaCore.Tools;
 
 		action_handlers = new ()
 		{
@@ -49,13 +50,13 @@ public sealed class ActionHandlers
 			new NewDocumentAction (actions, workspace, settings),
 			new NewScreenshotAction (chrome, workspace, actions),
 			new OpenDocumentAction (actions.File, chrome, workspace, recentFiles, imageFormats),
-			new SaveDocumentAction (),
-			new SaveDocumentAsAction (),
-			new SaveDocumentImplmentationAction (),
-			new ModifyCompressionAction (),
+			new SaveDocumentAction (actions.File, workspace),
+			new SaveDocumentAsAction (actions.File, workspace),
+			new SaveDocumentImplmentationAction (actions.File, chrome, imageFormats, recentFiles, tools),
+			new ModifyCompressionAction (actions.File),
 			//new PrintDocumentAction ();
-			new CloseDocumentAction (),
-			new ExitProgramAction (),
+			new CloseDocumentAction (actions, chrome, workspace, tools),
+			new ExitProgramAction (actions, chrome, workspace),
 
 			// Edit
 			new OffsetSelectionAction (),
@@ -66,7 +67,7 @@ public sealed class ActionHandlers
 			new AddinManagerAction (),
 
 			// Image
-			new ResizeImageAction (),
+			new ResizeImageAction (actions.Image, chrome, workspace),
 			new ResizeCanvasAction (chrome, workspace, actions),
 
 			// Layers
@@ -85,7 +86,7 @@ public sealed class ActionHandlers
 			new SaveAllDocumentsAction (),
 
 			// Help
-			new AboutDialogAction ()
+			new AboutDialogAction (),
 		};
 
 		// Initialize each action handler
