@@ -8,16 +8,16 @@ msgstr ""
 "Project-Id-Version: pinta\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2024-06-30 09:24-0400\n"
-"PO-Revision-Date: 2024-06-26 13:09+0000\n"
+"PO-Revision-Date: 2024-07-01 16:09+0000\n"
 "Last-Translator: Oğuz Ersen <oguz@ersen.moe>\n"
-"Language-Team: Turkish <https://hosted.weblate.org/projects/pinta/pinta/tr/"
-">\n"
+"Language-Team: Turkish <https://hosted.weblate.org/projects/pinta/pinta/tr/>"
+"\n"
 "Language: tr\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Generator: Weblate 5.6-rc\n"
+"X-Generator: Weblate 5.7-dev\n"
 "X-Launchpad-Export-Date: 2023-12-18 03:00+0000\n"
 
 #: ../Pinta.Gui.Addins/InstallDialog.cs:257
@@ -572,7 +572,7 @@ msgstr "Silindi"
 
 #: ../Pinta.Effects/Effects/DentsEffect.cs:48
 msgid "Dents"
-msgstr ""
+msgstr "Çentik"
 
 #: ../Pinta.Core/Actions/EditActions.cs:263
 msgid "Deselect"
@@ -2249,7 +2249,7 @@ msgstr "Şeffaf"
 
 #: ../Pinta.Effects/Effects/DentsEffect.cs:121
 msgid "Turbulence"
-msgstr ""
+msgstr "Türbülans"
 
 #: ../Pinta.Effects/Effects/TwistEffect.cs:24
 msgid "Twist"
