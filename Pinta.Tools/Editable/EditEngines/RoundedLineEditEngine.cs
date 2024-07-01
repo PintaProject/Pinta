@@ -24,6 +24,7 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 // THE SOFTWARE.
 
+using System;
 using System.Collections.Generic;
 using Pinta.Core;
 
@@ -31,7 +32,8 @@ namespace Pinta.Tools;
 
 public sealed class RoundedLineEditEngine : BaseEditEngine
 {
-	protected override string ShapeName => Translations.GetString ("Rounded Line Shape");
+	protected override string ShapeName
+		=> Translations.GetString ("Rounded Line Shape");
 
 	public const double DefaultRadius = 20d;
 
@@ -43,12 +45,11 @@ public sealed class RoundedLineEditEngine : BaseEditEngine
 	private Gtk.Separator radius_sep = null!;
 
 	public double Radius {
-		get {
-			if (radius != null)
-				return radius.Value;
-			else
-				return BrushWidth;
-		}
+
+		get =>
+			(radius != null)
+			? radius.Value
+			: BrushWidth;
 
 		set {
 			if (radius == null)
@@ -75,10 +76,12 @@ public sealed class RoundedLineEditEngine : BaseEditEngine
 			settings.PutSetting (RADIUS_SETTING (toolPrefix), (int) radius.Value);
 	}
 
-	public override void HandleBuildToolBar (Gtk.Box tb, ISettingsService settings, string toolPrefix)
+	public override void HandleBuildToolBar (
+		Gtk.Box tb,
+		ISettingsService settings,
+		string toolPrefix)
 	{
 		base.HandleBuildToolBar (tb, settings, toolPrefix);
-
 
 		radius_sep ??= GtkExtensions.CreateToolBarSeparator ();
 
@@ -103,15 +106,30 @@ public sealed class RoundedLineEditEngine : BaseEditEngine
 		tb.Append (radius);
 	}
 
-
-	public RoundedLineEditEngine (ShapeTool passedOwner) : base (passedOwner) { }
-
-	protected override ShapeEngine CreateShape (bool ctrlKey, bool clickedOnControlPoint, PointD prevSelPoint)
+	private readonly IWorkspaceService workspace;
+	public RoundedLineEditEngine (
+		IServiceProvider services,
+		ShapeTool passedOwner
+	) : base (services, passedOwner)
 	{
-		Document doc = PintaCore.Workspace.ActiveDocument;
+		workspace = services.GetService<IWorkspaceService> ();
+	}
 
-		ShapeEngine newEngine = new RoundedLineEngine (doc.Layers.CurrentUserLayer, null, Radius, owner.UseAntialiasing,
-			BaseEditEngine.OutlineColor, BaseEditEngine.FillColor, owner.EditEngine.BrushWidth);
+	protected override ShapeEngine CreateShape (
+		bool ctrlKey,
+		bool clickedOnControlPoint,
+		PointD prevSelPoint)
+	{
+		Document doc = workspace.ActiveDocument;
+
+		RoundedLineEngine newEngine = new (
+			doc.Layers.CurrentUserLayer,
+			null,
+			Radius,
+			owner.UseAntialiasing,
+			BaseEditEngine.OutlineColor,
+			BaseEditEngine.FillColor,
+			owner.EditEngine.BrushWidth);
 
 		AddRectanglePoints (ctrlKey, clickedOnControlPoint, newEngine, prevSelPoint);
 
@@ -129,10 +147,10 @@ public sealed class RoundedLineEditEngine : BaseEditEngine
 
 	public override void UpdateToolbarSettings (ShapeEngine engine)
 	{
-		if (engine is not RoundedLineEngine rLEngine)
+		if (engine is not RoundedLineEngine roundedLineEngine)
 			return;
 
-		Radius = rLEngine.Radius;
+		Radius = roundedLineEngine.Radius;
 
 		base.UpdateToolbarSettings (engine);
 	}

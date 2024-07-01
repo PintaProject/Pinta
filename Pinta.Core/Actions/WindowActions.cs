@@ -43,11 +43,17 @@ public sealed class WindowActions
 		active_doc_action = Gio.SimpleAction.NewStateful (doc_action_id, GtkExtensions.IntVariantType, GLib.Variant.NewInt32 (-1));
 
 		active_doc_action.OnActivate += (o, e) => {
+
 			var idx = e.Parameter!.GetInt32 ();
-			if (idx < PintaCore.Workspace.OpenDocuments.Count) {
-				PintaCore.Workspace.SetActiveDocumentInternal (PintaCore.Workspace.OpenDocuments[idx]);
-				active_doc_action.ChangeState (e.Parameter);
-			}
+
+			if (idx >= PintaCore.Workspace.OpenDocuments.Count)
+				return;
+
+			PintaCore.Workspace.SetActiveDocumentInternal (
+				PintaCore.Tools,
+				PintaCore.Workspace.OpenDocuments[idx]);
+
+			active_doc_action.ChangeState (e.Parameter);
 		};
 	}
 

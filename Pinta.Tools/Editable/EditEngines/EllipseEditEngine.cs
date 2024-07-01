@@ -24,6 +24,7 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 // THE SOFTWARE.
 
+using System;
 using System.Collections.Generic;
 using Pinta.Core;
 
@@ -33,14 +34,23 @@ public sealed class EllipseEditEngine : BaseEditEngine
 {
 	protected override string ShapeName => Translations.GetString ("Ellipse");
 
-	public EllipseEditEngine (ShapeTool owner) : base (owner) { }
+	private readonly IWorkspaceService workspace;
+	public EllipseEditEngine (IServiceProvider services, ShapeTool owner) : base (services, owner)
+	{
+		workspace = services.GetService<IWorkspaceService> ();
+	}
 
 	protected override ShapeEngine CreateShape (bool ctrlKey, bool clickedOnControlPoint, PointD prevSelPoint)
 	{
-		Document doc = PintaCore.Workspace.ActiveDocument;
+		Document doc = workspace.ActiveDocument;
 
-		ShapeEngine newEngine = new EllipseEngine (doc.Layers.CurrentUserLayer, null, owner.UseAntialiasing,
-			BaseEditEngine.OutlineColor, BaseEditEngine.FillColor, owner.EditEngine.BrushWidth);
+		EllipseEngine newEngine = new (
+			doc.Layers.CurrentUserLayer,
+			null,
+			owner.UseAntialiasing,
+			BaseEditEngine.OutlineColor,
+			BaseEditEngine.FillColor,
+			owner.EditEngine.BrushWidth);
 
 		AddRectanglePoints (ctrlKey, clickedOnControlPoint, newEngine, prevSelPoint);
 
@@ -53,7 +63,6 @@ public sealed class EllipseEditEngine : BaseEditEngine
 	protected override void MovePoint (List<ControlPoint> controlPoints)
 	{
 		MoveRectangularPoint (controlPoints);
-
 		base.MovePoint (controlPoints);
 	}
 }

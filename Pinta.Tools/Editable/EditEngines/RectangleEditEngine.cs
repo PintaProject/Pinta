@@ -24,6 +24,7 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 // THE SOFTWARE.
 
+using System;
 using System.Collections.Generic;
 using Pinta.Core;
 
@@ -31,15 +32,26 @@ namespace Pinta.Tools;
 
 public sealed class RectangleEditEngine : BaseEditEngine
 {
-	protected override string ShapeName => Translations.GetString ("Closed Curve Shape");
+	protected override string ShapeName
+		=> Translations.GetString ("Closed Curve Shape");
 
-	public RectangleEditEngine (ShapeTool passedOwner) : base (passedOwner) { }
-
-	protected override ShapeEngine CreateShape (bool ctrlKey, bool clickedOnControlPoint, PointD prevSelPoint)
+	private readonly IWorkspaceService workspace;
+	public RectangleEditEngine (
+		IServiceProvider services,
+		ShapeTool passedOwner
+	) : base (services, passedOwner)
 	{
-		Document doc = PintaCore.Workspace.ActiveDocument;
+		workspace = services.GetService<IWorkspaceService> ();
+	}
 
-		ShapeEngine newEngine = new LineCurveSeriesEngine (doc.Layers.CurrentUserLayer, null, BaseEditEngine.ShapeTypes.ClosedLineCurveSeries,
+	protected override ShapeEngine CreateShape (
+		bool ctrlKey,
+		bool clickedOnControlPoint,
+		PointD prevSelPoint)
+	{
+		Document doc = workspace.ActiveDocument;
+
+		LineCurveSeriesEngine newEngine = new (doc.Layers.CurrentUserLayer, null, BaseEditEngine.ShapeTypes.ClosedLineCurveSeries,
 			owner.UseAntialiasing, true, BaseEditEngine.OutlineColor, BaseEditEngine.FillColor, owner.EditEngine.BrushWidth);
 
 		AddRectanglePoints (ctrlKey, clickedOnControlPoint, newEngine, prevSelPoint);
@@ -53,7 +65,6 @@ public sealed class RectangleEditEngine : BaseEditEngine
 	protected override void MovePoint (List<ControlPoint> controlPoints)
 	{
 		MoveRectangularPoint (controlPoints);
-
 		base.MovePoint (controlPoints);
 	}
 }

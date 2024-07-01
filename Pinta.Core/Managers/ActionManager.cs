@@ -24,8 +24,6 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 // THE SOFTWARE.
 
-using Gtk;
-
 namespace Pinta.Core;
 
 public sealed class ActionManager
@@ -42,8 +40,14 @@ public sealed class ActionManager
 	public HelpActions Help { get; } = new ();
 	public AddinActions Addins { get; } = new ();
 
-	public ActionManager ()
+	private readonly SystemManager system_manager;
+	private readonly ChromeManager chrome_manager;
+	public ActionManager (
+		SystemManager systemManager,
+		ChromeManager chromeManager)
 	{
+		system_manager = systemManager;
+		chrome_manager = chromeManager;
 	}
 
 	public void CreateToolBar (Gtk.Box toolbar)
@@ -58,7 +62,7 @@ public sealed class ActionManager
 		toolbar.Append (GtkExtensions.CreateToolBarSeparator ());
 
 		// Cut/Copy/Paste comes before Undo/Redo on Windows
-		if (PintaCore.System.OperatingSystem == OS.Windows) {
+		if (system_manager.OperatingSystem == OS.Windows) {
 			toolbar.Append (Edit.Cut.CreateToolBarItem ());
 			toolbar.Append (Edit.Copy.CreateToolBarItem ());
 			toolbar.Append (Edit.Paste.CreateToolBarItem ());
@@ -99,15 +103,15 @@ public sealed class ActionManager
 		header.PackStart (Edit.Deselect.CreateToolBarItem ());
 	}
 
-	public void CreateStatusBar (Box statusbar)
+	public void CreateStatusBar (Gtk.Box statusbar, WorkspaceManager workspaceManager)
 	{
 		// Cursor position widget
 		statusbar.Append (Gtk.Image.NewFromIconName (Resources.Icons.CursorPosition));
-		var cursor = Label.New ("  0, 0");
+		var cursor = Gtk.Label.New ("  0, 0");
 		statusbar.Append (cursor);
 
-		PintaCore.Chrome.LastCanvasCursorPointChanged += delegate {
-			var pt = PintaCore.Chrome.LastCanvasCursorPoint;
+		chrome_manager.LastCanvasCursorPointChanged += delegate {
+			var pt = chrome_manager.LastCanvasCursorPoint;
 			cursor.SetText ($"  {pt.X}, {pt.Y}");
 		};
 
@@ -115,11 +119,11 @@ public sealed class ActionManager
 
 		// Selection size widget
 		statusbar.Append (Gtk.Image.NewFromIconName (Resources.Icons.ToolSelectRectangle));
-		var selection_size = Label.New ("  0, 0");
+		var selection_size = Gtk.Label.New ("  0, 0");
 		statusbar.Append (selection_size);
 
-		PintaCore.Workspace.SelectionChanged += delegate {
-			var bounds = PintaCore.Workspace.HasOpenDocuments ? PintaCore.Workspace.ActiveDocument.Selection.GetBounds () : new RectangleD ();
+		workspaceManager.SelectionChanged += delegate {
+			var bounds = workspaceManager.HasOpenDocuments ? workspaceManager.ActiveDocument.Selection.GetBounds () : new RectangleD ();
 			selection_size.SetText ($"  {bounds.Width}, {bounds.Height}");
 		};
 

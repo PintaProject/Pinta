@@ -74,7 +74,10 @@ internal sealed class NewDocumentAction : IActionHandler
 			int response = e.ResponseId;
 
 			if (response == (int) Gtk.ResponseType.Ok) {
-				PintaCore.Workspace.NewDocument (dialog.NewImageSize, dialog.NewImageBackground);
+				PintaCore.Workspace.NewDocument (
+					PintaCore.Actions,
+					dialog.NewImageSize,
+					dialog.NewImageBackground);
 
 				PintaCore.Settings.PutSetting ("new-image-width", dialog.NewImageWidth);
 				PintaCore.Settings.PutSetting ("new-image-height", dialog.NewImageHeight);

@@ -36,10 +36,20 @@ public sealed class EffectsManager
 	private readonly Dictionary<BaseEffect, Command> adjustments;
 	private readonly Dictionary<BaseEffect, Command> effects;
 
-	internal EffectsManager ()
+	private readonly ActionManager action_manager;
+	private readonly ChromeManager chrome_manager;
+	private readonly LivePreviewManager live_preview_manager;
+	internal EffectsManager (
+		ActionManager actionManager,
+		ChromeManager chromeManager,
+		LivePreviewManager livePreviewManager)
 	{
 		adjustments = new Dictionary<BaseEffect, Command> ();
 		effects = new Dictionary<BaseEffect, Command> ();
+
+		action_manager = actionManager;
+		chrome_manager = chromeManager;
+		live_preview_manager = livePreviewManager;
 	}
 
 	/// <summary>
@@ -55,19 +65,23 @@ public sealed class EffectsManager
 #endif
 
 		// Create a gtk action for each adjustment
-		var act = new Command (adjustment.GetType ().Name, adjustment.Name + (adjustment.IsConfigurable ? Translations.GetString ("...") : ""), string.Empty, adjustment.Icon);
-		act.Activated += (o, args) => { PintaCore.LivePreview.Start (adjustment); };
+		Command act = new (
+			adjustment.GetType ().Name,
+			adjustment.Name + (adjustment.IsConfigurable ? Translations.GetString ("...") : ""),
+			string.Empty,
+			adjustment.Icon);
+		act.Activated += (o, args) => { live_preview_manager.Start (adjustment); };
 
-		PintaCore.Actions.Adjustments.Actions.Add (act);
+		action_manager.Adjustments.Actions.Add (act);
 
 		// If no key is specified, don't use an accelerated menu item
 		if (adjustment.AdjustmentMenuKey is null)
-			PintaCore.Chrome.Application.AddAction (act);
+			chrome_manager.Application.AddAction (act);
 		else {
-			PintaCore.Chrome.Application.AddAccelAction (act, adjustment.AdjustmentMenuKeyModifiers + adjustment.AdjustmentMenuKey);
+			chrome_manager.Application.AddAccelAction (act, adjustment.AdjustmentMenuKeyModifiers + adjustment.AdjustmentMenuKey);
 		}
 
-		PintaCore.Chrome.AdjustmentsMenu.AppendMenuItemSorted (act.CreateMenuItem ());
+		chrome_manager.AdjustmentsMenu.AppendMenuItemSorted (act.CreateMenuItem ());
 
 		adjustments.Add (adjustment, act);
 	}
@@ -85,11 +99,15 @@ public sealed class EffectsManager
 #endif
 
 		// Create a gtk action and menu item for each effect
-		var act = new Command (effect.GetType ().Name, effect.Name + (effect.IsConfigurable ? Translations.GetString ("...") : ""), string.Empty, effect.Icon);
-		PintaCore.Chrome.Application.AddAction (act);
-		act.Activated += (o, args) => { PintaCore.LivePreview.Start (effect); };
+		Command act = new (
+			effect.GetType ().Name,
+			effect.Name + (effect.IsConfigurable ? Translations.GetString ("...") : ""),
+			string.Empty,
+			effect.Icon);
+		chrome_manager.Application.AddAction (act);
+		act.Activated += (o, args) => live_preview_manager.Start (effect);
 
-		PintaCore.Actions.Effects.AddEffect (effect.EffectMenuCategory, act);
+		action_manager.Effects.AddEffect (effect.EffectMenuCategory, act);
 
 		effects.Add (effect, act);
 	}
@@ -101,13 +119,15 @@ public sealed class EffectsManager
 	public void UnregisterInstanceOfEffect (System.Type effect_type)
 	{
 		foreach (BaseEffect effect in effects.Keys) {
-			if (effect.GetType () == effect_type) {
-				var action = effects[effect];
 
-				effects.Remove (effect);
-				PintaCore.Actions.Effects.RemoveEffect (effect.EffectMenuCategory, action);
-				return;
-			}
+			if (effect.GetType () != effect_type)
+				continue;
+
+			var action = effects[effect];
+
+			effects.Remove (effect);
+			action_manager.Effects.RemoveEffect (effect.EffectMenuCategory, action);
+			return;
 		}
 	}
 
@@ -118,16 +138,17 @@ public sealed class EffectsManager
 	public void UnregisterInstanceOfAdjustment (System.Type adjustment_type)
 	{
 		foreach (BaseEffect adjustment in adjustments.Keys) {
-			if (adjustment.GetType () == adjustment_type) {
 
-				var action = adjustments[adjustment];
+			if (adjustment.GetType () != adjustment_type)
+				continue;
 
-				adjustments.Remove (adjustment);
-				PintaCore.Actions.Adjustments.Actions.Remove (action);
-				PintaCore.Chrome.AdjustmentsMenu.Remove (action);
+			var action = adjustments[adjustment];
 
-				return;
-			}
+			adjustments.Remove (adjustment);
+			action_manager.Adjustments.Actions.Remove (action);
+			chrome_manager.AdjustmentsMenu.Remove (action);
+
+			return;
 		}
 	}
 }

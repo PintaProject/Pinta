@@ -57,7 +57,14 @@ public sealed class OraFormat : IImageImporter, IImageExporter
 			Height: int.Parse (imageElement.GetAttribute ("h"))
 		);
 
-		Document doc = PintaCore.Workspace.CreateAndActivateDocument (file, "ora", imagesize);
+		// TODO: Move "activate document" part out of file format class.
+		//       The creation of the document should be separate from
+		//       its activation.
+		Document doc = PintaCore.Workspace.CreateAndActivateDocument (
+			PintaCore.Actions,
+			file,
+			"ora",
+			imagesize);
 
 		XmlElement stackElement = (XmlElement) stackXml.GetElementsByTagName ("stack")[0]!;
 		XmlNodeList layerElements = stackElement.GetElementsByTagName ("layer");

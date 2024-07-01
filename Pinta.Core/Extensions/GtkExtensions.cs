@@ -206,15 +206,15 @@ public static partial class GtkExtensions
 		app.AddAction (action);
 		app.SetAccelsForAction (
 			action.FullName,
-			accels.Select (ConvertPrimaryKey).ToArray ());
+			accels.Select (a => PintaCore.System.ConvertPrimaryKey (a)).ToArray ());
 	}
 
 	/// <summary>
 	/// Convert the "<Primary>" accelerator to the Ctrl or Command key, depending on the platform.
 	/// This was done automatically in GTK3, but does not happen in GTK4.
 	/// </summary>
-	private static string ConvertPrimaryKey (string accel) =>
-		accel.Replace ("<Primary>", PintaCore.System.OperatingSystem == OS.Mac ? "<Meta>" : "<Control>");
+	private static string ConvertPrimaryKey (this SystemManager system, string accel) =>
+		accel.Replace ("<Primary>", system.OperatingSystem == OS.Mac ? "<Meta>" : "<Control>");
 
 	/// <summary>
 	/// Returns the Cancel / Ok button pair in the correct order for the current platform.
@@ -250,10 +250,10 @@ public static partial class GtkExtensions
 	/// Returns the platform-specific label for the "Primary" (Ctrl) key.
 	/// For example, this is the Cmd key on macOS.
 	/// </summary>
-	public static string CtrlLabel ()
+	public static string CtrlLabel (this SystemManager system)
 	{
 		AcceleratorParse (
-			ConvertPrimaryKey ("<Primary>"),
+			system.ConvertPrimaryKey ("<Primary>"),
 			out var key,
 			out var mods);
 

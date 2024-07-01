@@ -37,14 +37,16 @@ public sealed class CloneStampTool : BaseBrushTool
 	private PointI? offset = null;
 	private PointI? last_point = null;
 
+	private readonly SystemManager system_manager;
 	public CloneStampTool (IServiceProvider services) : base (services)
 	{
+		system_manager = services.GetService<SystemManager> ();
 	}
 
 	public override string Name => Translations.GetString ("Clone Stamp");
 	public override string Icon => Pinta.Resources.Icons.ToolCloneStamp;
 	// Translators: {0} is 'Ctrl', or a platform-specific key such as 'Command' on macOS.
-	public override string StatusBarText => Translations.GetString ("{0} + left click to set origin, left click to paint.", GtkExtensions.CtrlLabel ());
+	public override string StatusBarText => Translations.GetString ("{0} + left click to set origin, left click to paint.", system_manager.CtrlLabel ());
 	public override bool CursorChangesOnZoom => true;
 	public override Key ShortcutKey => Key.L;
 	public override int Priority => 47;

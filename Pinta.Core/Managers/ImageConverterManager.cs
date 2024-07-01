@@ -34,6 +34,12 @@ namespace Pinta.Core;
 
 public sealed class ImageConverterManager
 {
+	private readonly SettingsManager settings_manager;
+	public ImageConverterManager (SettingsManager settingsManager)
+	{
+		settings_manager = settingsManager;
+	}
+
 	private readonly List<FormatDescriptor> formats = GetInitialFormats ().ToList ();
 
 	private static IEnumerable<FormatDescriptor> GetInitialFormats ()
@@ -108,7 +114,7 @@ public sealed class ImageConverterManager
 	/// </summary>
 	public FormatDescriptor GetDefaultSaveFormat ()
 	{
-		string extension = PintaCore.Settings.GetSetting<string> ("default-image-type", "jpeg");
+		string extension = settings_manager.GetSetting<string> ("default-image-type", "jpeg");
 
 		var fd = GetFormatByExtension (extension);
 
@@ -166,7 +172,7 @@ public sealed class ImageConverterManager
 	public void SetDefaultFormat (string extension)
 	{
 		var normalized = NormalizeExtension (extension);
-		PintaCore.Settings.PutSetting ("default-image-type", normalized);
+		settings_manager.PutSetting ("default-image-type", normalized);
 	}
 
 	/// <summary>

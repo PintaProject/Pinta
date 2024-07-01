@@ -36,7 +36,11 @@ public sealed class MoveSelectedTool : BaseTransformTool
 	private DocumentSelection? original_selection;
 	private readonly Matrix original_transform = CairoExtensions.CreateIdentityMatrix ();
 
-	public MoveSelectedTool (IServiceProvider services) : base (services) { }
+	private readonly SystemManager system_manager;
+	public MoveSelectedTool (IServiceProvider services) : base (services)
+	{
+		system_manager = services.GetService<SystemManager> ();
+	}
 
 	public override string Name => Translations.GetString ("Move Selected Pixels");
 	public override string Icon => Pinta.Resources.Icons.ToolMove;
@@ -47,7 +51,8 @@ public sealed class MoveSelectedTool : BaseTransformTool
 		"\nRight click and drag the selection to rotate selected content." +
 		"\nHold Shift to rotate in steps." +
 		"\nUse arrow keys to move selected content by a single pixel.",
-		GtkExtensions.CtrlLabel ());
+		system_manager.CtrlLabel ());
+
 	public override Gdk.Cursor DefaultCursor => Gdk.Cursor.NewFromTexture (Resources.GetIcon (Pinta.Resources.Icons.ToolMoveCursor), 0, 0, null);
 	public override Gdk.Key ShortcutKey => Gdk.Key.M;
 	public override int Priority => 5;

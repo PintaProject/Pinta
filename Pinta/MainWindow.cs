@@ -132,7 +132,7 @@ public sealed class MainWindow
 		if (PintaCore.Workspace.OpenDocuments.IndexOf (view.Document) < 0)
 			return;
 
-		PintaCore.Workspace.SetActiveDocument (view.Document);
+		PintaCore.Actions.Window.SetActiveDocument (view.Document);
 		PintaCore.Actions.File.Close.Activate ();
 
 		if (PintaCore.Workspace.OpenDocuments.IndexOf (view.Document) < 0)
@@ -151,7 +151,7 @@ public sealed class MainWindow
 
 		var view = (DocumentViewContent) item;
 
-		PintaCore.Workspace.SetActiveDocument (view.Document);
+		PintaCore.Actions.Window.SetActiveDocument (view.Document);
 		((CanvasWindow) view.Widget).Canvas.Cursor = PintaCore.Tools.CurrentTool?.CurrentCursor;
 	}
 
@@ -427,7 +427,7 @@ public sealed class MainWindow
 			Halign = Align.Fill
 		});
 
-		PintaCore.Actions.CreateStatusBar (statusbar);
+		PintaCore.Actions.CreateStatusBar (statusbar, PintaCore.Workspace);
 
 		PintaCore.Chrome.InitializeStatusBar (statusbar);
 	}

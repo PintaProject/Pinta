@@ -32,11 +32,20 @@ namespace Pinta.Tools;
 
 public abstract class ShapeTool : BaseTool
 {
-	public BaseEditEngine EditEngine { get; }
+	// TODO:
+	// This is `Lazy<T>` because the services used by derived classes
+	// are not initialized when the constructor of `ShapeTool` is called.
+	// Ideally we shouldn't have to call a virtual method in a constructor,
+	// so let's get rid of this at some point.
+	private readonly Lazy<BaseEditEngine> lazy_edit_engine;
+	public BaseEditEngine EditEngine
+		=> lazy_edit_engine.Value;
 
+	private readonly SystemManager system_manager;
 	public ShapeTool (IServiceProvider services) : base (services)
 	{
-		EditEngine = CreateEditEngine ();
+		lazy_edit_engine = new (CreateEditEngine);
+		system_manager = services.GetService<SystemManager> ();
 	}
 
 	public override Gdk.Key ShortcutKey => Gdk.Key.O;
@@ -57,7 +66,7 @@ public abstract class ShapeTool : BaseTool
 			    "\nPress Space to add a new control point at the mouse position." +
 			    "\nHold {0} while pressing Space to create the control point at the exact same position." +
 			    "\nHold {0} while left clicking on a control point to create a new shape at the exact same position." +
-			    "\nPress Enter to finalize the shape.", GtkExtensions.CtrlLabel ());
+			    "\nPress Enter to finalize the shape.", system_manager.CtrlLabel ());
 
 	protected abstract BaseEditEngine CreateEditEngine ();
 

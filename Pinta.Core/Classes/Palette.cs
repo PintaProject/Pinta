@@ -37,12 +37,7 @@ public sealed class Palette
 {
 	public event EventHandler? PaletteChanged;
 
-	private List<Color> colors;
-
-	private Palette ()
-	{
-		colors = new List<Color> ();
-	}
+	private List<Color> colors = new ();
 
 	private void OnPaletteChanged ()
 	{
@@ -145,9 +140,9 @@ public sealed class Palette
 		yield return new (255 / 255f, 127 / 255f, 182 / 255f);
 	}
 
-	public void Load (Gio.File file)
+	public void Load (PaletteFormatManager paletteFormats, Gio.File file)
 	{
-		(var loadedColors, var errors) = LoadColors (file);
+		(var loadedColors, var errors) = LoadColors (paletteFormats, file);
 
 		if (loadedColors is not null) {
 			colors = loadedColors;
@@ -159,9 +154,9 @@ public sealed class Palette
 		}
 	}
 
-	static (List<Color>? loadedColors, string errors) LoadColors (Gio.File file)
+	static (List<Color>? loadedColors, string errors) LoadColors (PaletteFormatManager paletteFormats, Gio.File file)
 	{
-		var loader = PintaCore.PaletteFormats.GetFormatByFilename (file.GetDisplayName ())?.Loader;
+		var loader = paletteFormats.GetFormatByFilename (file.GetDisplayName ())?.Loader;
 
 		if (loader != null)
 			return (loader.Load (file), string.Empty);
@@ -169,7 +164,7 @@ public sealed class Palette
 		StringBuilder errors = new ();
 
 		// Not a recognized extension, so attempt all formats
-		foreach (var format in PintaCore.PaletteFormats.Formats.Where (f => !f.IsWriteOnly ())) {
+		foreach (var format in paletteFormats.Formats.Where (f => !f.IsWriteOnly ())) {
 			try {
 				var loaded_colors = format.Loader.Load (file);
 				if (loaded_colors != null)

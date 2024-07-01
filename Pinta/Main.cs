@@ -132,7 +132,10 @@ internal sealed class MainClass
 			}
 		} else {
 			// Create a blank document
-			PintaCore.Workspace.NewDocument (new Core.Size (800, 600), new Cairo.Color (1, 1, 1));
+			PintaCore.Workspace.NewDocument (
+				PintaCore.Actions,
+				new Core.Size (800, 600),
+				new Cairo.Color (1, 1, 1));
 		}
 	}
 
