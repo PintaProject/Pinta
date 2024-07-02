@@ -50,9 +50,9 @@ public sealed class ResizeCanvasDialog : Gtk.Dialog
 	private bool value_changing;
 	private Anchor anchor;
 
-	private readonly WorkspaceManager workspace_manager;
+	private readonly WorkspaceManager workspace;
 
-	public ResizeCanvasDialog (ChromeManager chromeManager, WorkspaceManager workspaceManager)
+	public ResizeCanvasDialog (ChromeManager chrome, WorkspaceManager workspace)
 	{
 		const int spacing = 6;
 
@@ -74,7 +74,7 @@ public sealed class ResizeCanvasDialog : Gtk.Dialog
 		widthLabel.Halign = Gtk.Align.End;
 
 		Gtk.SpinButton widthSpinner = Gtk.SpinButton.NewWithRange (1, int.MaxValue, 1);
-		widthSpinner.Value = workspaceManager.ImageSize.Width;
+		widthSpinner.Value = workspace.ImageSize.Width;
 		widthSpinner.OnValueChanged += widthSpinner_ValueChanged;
 		widthSpinner.SetActivatesDefaultImmediate (true);
 
@@ -82,7 +82,7 @@ public sealed class ResizeCanvasDialog : Gtk.Dialog
 		heightLabel.Halign = Gtk.Align.End;
 
 		Gtk.SpinButton heightSpinner = Gtk.SpinButton.NewWithRange (1, int.MaxValue, 1);
-		heightSpinner.Value = workspaceManager.ImageSize.Height;
+		heightSpinner.Value = workspace.ImageSize.Height;
 		heightSpinner.OnValueChanged += heightSpinner_ValueChanged;
 		heightSpinner.SetActivatesDefaultImmediate (true);
 
@@ -167,7 +167,7 @@ public sealed class ResizeCanvasDialog : Gtk.Dialog
 		// --- Initialization (Gtk.Window)
 
 		Title = Translations.GetString ("Resize Canvas");
-		TransientFor = chromeManager.MainWindow;
+		TransientFor = chrome.MainWindow;
 		Modal = true;
 		IconName = Resources.Icons.ImageResizeCanvas;
 		DefaultWidth = 300;
@@ -188,7 +188,7 @@ public sealed class ResizeCanvasDialog : Gtk.Dialog
 
 		// --- References to keep
 
-		workspace_manager = workspaceManager;
+		this.workspace = workspace;
 
 		percentage_radio = percentageRadio;
 		percentage_spinner = percentageSpinner;
@@ -224,7 +224,7 @@ public sealed class ResizeCanvasDialog : Gtk.Dialog
 			Height: height_spinner.GetValueAsInt ()
 		);
 
-		workspace_manager.ResizeCanvas (newSize, anchor, null);
+		workspace.ResizeCanvas (newSize, anchor, null);
 	}
 
 	private void heightSpinner_ValueChanged (object? sender, EventArgs e)
@@ -236,7 +236,7 @@ public sealed class ResizeCanvasDialog : Gtk.Dialog
 			return;
 
 		value_changing = true;
-		width_spinner.Value = (int) (height_spinner.Value * workspace_manager.ImageSize.Width / workspace_manager.ImageSize.Height);
+		width_spinner.Value = (int) (height_spinner.Value * workspace.ImageSize.Width / workspace.ImageSize.Height);
 		value_changing = false;
 	}
 
@@ -249,14 +249,14 @@ public sealed class ResizeCanvasDialog : Gtk.Dialog
 			return;
 
 		value_changing = true;
-		height_spinner.Value = (int) (width_spinner.Value * workspace_manager.ImageSize.Height / workspace_manager.ImageSize.Width);
+		height_spinner.Value = (int) (width_spinner.Value * workspace.ImageSize.Height / workspace.ImageSize.Width);
 		value_changing = false;
 	}
 
 	private void percentageSpinner_ValueChanged (object? sender, EventArgs e)
 	{
-		width_spinner.Value = (int) (workspace_manager.ImageSize.Width * (percentage_spinner.GetValueAsInt () / 100f));
-		height_spinner.Value = (int) (workspace_manager.ImageSize.Height * (percentage_spinner.GetValueAsInt () / 100f));
+		width_spinner.Value = (int) (workspace.ImageSize.Width * (percentage_spinner.GetValueAsInt () / 100f));
+		height_spinner.Value = (int) (workspace.ImageSize.Height * (percentage_spinner.GetValueAsInt () / 100f));
 	}
 
 	private void absoluteRadio_Toggled (object? sender, EventArgs e)
