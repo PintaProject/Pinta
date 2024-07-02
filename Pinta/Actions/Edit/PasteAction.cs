@@ -33,26 +33,42 @@ namespace Pinta.Actions;
 
 internal sealed class PasteAction : IActionHandler
 {
+	private readonly ChromeManager chrome_manager;
+	private readonly ActionManager action_manager;
+	private readonly WorkspaceManager workspace_manager;
+	private readonly ToolManager tool_manager;
+	internal PasteAction (
+		ChromeManager chromeManager,
+		ActionManager actionManager,
+		WorkspaceManager workspaceManager,
+		ToolManager toolManager)
+	{
+		chrome_manager = chromeManager;
+		action_manager = actionManager;
+		workspace_manager = workspaceManager;
+		tool_manager = toolManager;
+	}
+
 	void IActionHandler.Initialize ()
 	{
-		PintaCore.Actions.Edit.Paste.Activated += Activated;
+		action_manager.Edit.Paste.Activated += Activated;
 	}
 
 	void IActionHandler.Uninitialize ()
 	{
-		PintaCore.Actions.Edit.Paste.Activated -= Activated;
+		action_manager.Edit.Paste.Activated -= Activated;
 	}
 
 	private void Activated (object sender, EventArgs e)
 	{
 		// If no documents are open, activate the
 		// PasteIntoNewImage action and abort this Paste action.
-		if (!PintaCore.Workspace.HasOpenDocuments) {
-			PintaCore.Actions.Edit.PasteIntoNewImage.Activate ();
+		if (!workspace_manager.HasOpenDocuments) {
+			action_manager.Edit.PasteIntoNewImage.Activate ();
 			return;
 		}
 
-		var doc = PintaCore.Workspace.ActiveDocument;
+		var doc = workspace_manager.ActiveDocument;
 
 		// Get the scroll position in canvas coordinates
 		var view = (Gtk.Viewport) doc.Workspace.Canvas.Parent!;
@@ -67,6 +83,10 @@ internal sealed class PasteAction : IActionHandler
 		// The 'false' argument indicates that paste should be
 		// performed into the current (not a new) layer.
 		Paste (
+			actions: action_manager,
+			chrome: chrome_manager,
+			workspace: workspace_manager,
+			tools: tool_manager,
 			doc: doc,
 			toNewLayer: false,
 			pastePosition: canvasPos.ToInt ()
@@ -84,39 +104,46 @@ internal sealed class PasteAction : IActionHandler
 	/// <param name="y">Optional. Location within image to paste to.
 	/// Position will be adjusted if pasted image would hang
 	/// over right or bottom edges of canvas.</param>
-	public static async void Paste (Document doc, bool toNewLayer, PointI pastePosition = new ())
+	public static async void Paste (
+		ActionManager actions,
+		ChromeManager chrome,
+		WorkspaceManager workspace,
+		ToolManager tools,
+		Document doc,
+		bool toNewLayer,
+		PointI pastePosition = new ())
 	{
 		// Create a compound history item for recording several
 		// operations so that they can all be undone/redone together.
 		var history_text = toNewLayer ? Translations.GetString ("Paste Into New Layer") : Translations.GetString ("Paste");
-		var paste_action = new CompoundHistoryItem (Resources.StandardIcons.EditPaste, history_text);
+		CompoundHistoryItem paste_action = new (Resources.StandardIcons.EditPaste, history_text);
 
 		var cb = GdkExtensions.GetDefaultClipboard ();
 
 		// See if the current tool wants to handle the paste
 		// operation (e.g., the text tool could paste text)
 		if (!toNewLayer) {
-			if (await PintaCore.Tools.DoHandlePaste (doc, cb))
+			if (await tools.DoHandlePaste (doc, cb))
 				return;
 		}
 
 		// Commit any unfinished tool actions
-		PintaCore.Tools.Commit ();
+		tools.Commit ();
 
 		Gdk.Texture? cb_texture = await cb.ReadTextureAsync ();
 		if (cb_texture is null) {
-			ShowClipboardEmptyDialog ();
+			ShowClipboardEmptyDialog (chrome);
 			return;
 		}
 
 		Cairo.ImageSurface cb_image = cb_texture.ToSurface ();
 
-		var canvas_size = PintaCore.Workspace.ImageSize;
+		var canvas_size = workspace.ImageSize;
 
 		// If the image being pasted is larger than the canvas size, allow the user to optionally resize the canvas
 		if (cb_image.Width > canvas_size.Width || cb_image.Height > canvas_size.Height) {
 
-			var response = await ShowExpandCanvasDialog ();
+			var response = await ShowExpandCanvasDialog (chrome);
 
 			if (response == Gtk.ResponseType.Accept) {
 
@@ -125,8 +152,8 @@ internal sealed class PasteAction : IActionHandler
 					Height: Math.Max (canvas_size.Height, cb_image.Height)
 				);
 
-				PintaCore.Workspace.ResizeCanvas (newSize, Pinta.Core.Anchor.Center, paste_action);
-				PintaCore.Actions.View.UpdateCanvasScale ();
+				workspace.ResizeCanvas (newSize, Pinta.Core.Anchor.Center, paste_action);
+				actions.View.UpdateCanvasScale ();
 
 			} else if (response != Gtk.ResponseType.Reject) // cancelled
 				return;
@@ -152,14 +179,14 @@ internal sealed class PasteAction : IActionHandler
 								 Math.Max (doc.ImageSize.Height, cb_image.Height));
 		doc.Layers.ShowSelectionLayer = true;
 
-		var g = new Cairo.Context (doc.Layers.SelectionLayer.Surface);
+		Cairo.Context g = new (doc.Layers.SelectionLayer.Surface);
 		g.SetSourceSurface (cb_image, 0, 0);
 		g.Paint ();
 
 		doc.Layers.SelectionLayer.Transform.InitIdentity ();
 		doc.Layers.SelectionLayer.Transform.Translate (pastePosition.X, pastePosition.Y);
 
-		PintaCore.Tools.SetCurrentTool ("MoveSelectedTool");
+		tools.SetCurrentTool ("MoveSelectedTool");
 
 		var old_selection = doc.Selection.Clone ();
 
@@ -172,18 +199,18 @@ internal sealed class PasteAction : IActionHandler
 		doc.History.PushNewItem (paste_action);
 	}
 
-	public static void ShowClipboardEmptyDialog ()
+	public static void ShowClipboardEmptyDialog (ChromeManager chrome)
 	{
 		var primary = Translations.GetString ("Image cannot be pasted");
 		var secondary = Translations.GetString ("The clipboard does not contain an image.");
-		PintaCore.Chrome.ShowMessageDialog (PintaCore.Chrome.MainWindow, primary, secondary);
+		chrome.ShowMessageDialog (chrome.MainWindow, primary, secondary);
 	}
 
-	public static async Task<Gtk.ResponseType> ShowExpandCanvasDialog ()
+	public static async Task<Gtk.ResponseType> ShowExpandCanvasDialog (ChromeManager chrome)
 	{
 		var primary = Translations.GetString ("Image larger than canvas");
 		var secondary = Translations.GetString ("The image being pasted is larger than the canvas. What would you like to do to the canvas size?");
-		var dialog = Adw.MessageDialog.New (PintaCore.Chrome.MainWindow, primary, secondary);
+		var dialog = Adw.MessageDialog.New (chrome.MainWindow, primary, secondary);
 
 		const string cancel_response = "cancel";
 		const string reject_response = "reject";

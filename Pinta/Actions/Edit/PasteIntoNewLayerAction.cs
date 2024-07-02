@@ -66,6 +66,10 @@ internal sealed class PasteIntoNewLayerAction : IActionHandler
 		// The 'true' argument indicates that paste should be
 		// performed into a new layer.
 		PasteAction.Paste (
+			actions: PintaCore.Actions,
+			chrome: PintaCore.Chrome,
+			workspace: PintaCore.Workspace,
+			tools: PintaCore.Tools,
 			doc: doc,
 			toNewLayer: true,
 			pastePosition: canvasPos.ToInt ()

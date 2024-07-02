@@ -49,6 +49,6 @@ internal sealed class PasteIntoNewImageAction : IActionHandler
 		if (cb_texture is not null)
 			PintaCore.Workspace.NewDocumentFromImage (PintaCore.Actions, cb_texture.ToSurface ());
 		else
-			PasteAction.ShowClipboardEmptyDialog ();
+			PasteAction.ShowClipboardEmptyDialog (PintaCore.Chrome);
 	}
 }
