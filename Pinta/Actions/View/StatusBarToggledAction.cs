@@ -30,18 +30,28 @@ namespace Pinta.Actions;
 
 internal sealed class StatusBarToggledAction : IActionHandler
 {
+	private readonly ViewActions view_actions;
+	private readonly ChromeManager chrome_manager;
+	internal StatusBarToggledAction (
+		ViewActions viewActions,
+		ChromeManager chromeManager)
+	{
+		view_actions = viewActions;
+		chrome_manager = chromeManager;
+	}
+
 	void IActionHandler.Initialize ()
 	{
-		PintaCore.Actions.View.StatusBar.Toggled += Activated;
+		view_actions.StatusBar.Toggled += Activated;
 	}
 
 	void IActionHandler.Uninitialize ()
 	{
-		PintaCore.Actions.View.StatusBar.Toggled -= Activated;
+		view_actions.StatusBar.Toggled -= Activated;
 	}
 
 	private void Activated (bool value)
 	{
-		PintaCore.Chrome.StatusBar.Visible = value;
+		chrome_manager.StatusBar.Visible = value;
 	}
 }

@@ -76,11 +76,11 @@ public sealed class ActionHandlers
 			new RotateZoomLayerAction (actions.Layers, workspace, tools),
 
 			// View
-			new ToolBarToggledAction (),
-			new ImageTabsToggledAction (),
-			new StatusBarToggledAction (),
-			new ToolBoxToggledAction (),
-			new ColorSchemeChangedAction (),
+			new ToolBarToggledAction (actions.View, chrome),
+			new ImageTabsToggledAction (actions.View, chrome),
+			new StatusBarToggledAction (actions.View, chrome),
+			new ToolBoxToggledAction (actions.View, chrome),
+			new ColorSchemeChangedAction (actions.View),
 
 			// Window
 			new CloseAllDocumentsAction (actions, workspace),

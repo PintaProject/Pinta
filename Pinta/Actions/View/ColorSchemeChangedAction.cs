@@ -5,14 +5,20 @@ namespace Pinta.Actions;
 
 internal sealed class ColorSchemeChangedAction : IActionHandler
 {
+	private readonly ViewActions view_actions;
+	internal ColorSchemeChangedAction (ViewActions viewActions)
+	{
+		view_actions = viewActions;
+	}
+
 	void IActionHandler.Initialize ()
 	{
-		PintaCore.Actions.View.ColorScheme.OnActivate += Activated;
+		view_actions.ColorScheme.OnActivate += Activated;
 	}
 
 	void IActionHandler.Uninitialize ()
 	{
-		PintaCore.Actions.View.ColorScheme.OnActivate -= Activated;
+		view_actions.ColorScheme.OnActivate -= Activated;
 	}
 
 	private void Activated (SimpleAction action, SimpleAction.ActivateSignalArgs args)

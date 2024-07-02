@@ -30,19 +30,29 @@ namespace Pinta.Actions;
 
 internal sealed class ToolBarToggledAction : IActionHandler
 {
+	private readonly ViewActions view_actions;
+	private readonly ChromeManager chrome_actions;
+	internal ToolBarToggledAction (
+		ViewActions viewActions,
+		ChromeManager chromeActions)
+	{
+		view_actions = viewActions;
+		chrome_actions = chromeActions;
+	}
+
 	void IActionHandler.Initialize ()
 	{
-		PintaCore.Actions.View.ToolBar.Toggled += Activated;
+		view_actions.ToolBar.Toggled += Activated;
 	}
 
 	void IActionHandler.Uninitialize ()
 	{
-		PintaCore.Actions.View.ToolBar.Toggled -= Activated;
+		view_actions.ToolBar.Toggled -= Activated;
 	}
 
 	private void Activated (bool value)
 	{
-		if (PintaCore.Chrome.MainToolBar is not null)
-			PintaCore.Chrome.MainToolBar.Visible = value;
+		if (chrome_actions.MainToolBar is not null)
+			chrome_actions.MainToolBar.Visible = value;
 	}
 }
