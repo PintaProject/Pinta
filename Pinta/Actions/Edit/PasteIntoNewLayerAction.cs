@@ -31,42 +31,42 @@ namespace Pinta.Actions;
 
 internal sealed class PasteIntoNewLayerAction : IActionHandler
 {
-	private readonly ActionManager action_manager;
-	private readonly ChromeManager chrome_manager;
-	private readonly WorkspaceManager workspace_manager;
-	private readonly ToolManager tool_manager;
+	private readonly ActionManager actions;
+	private readonly ChromeManager chrome;
+	private readonly WorkspaceManager workspace;
+	private readonly ToolManager tools;
 	internal PasteIntoNewLayerAction (
-		ActionManager actionManager,
-		ChromeManager chromeManager,
-		WorkspaceManager workspaceManager,
-		ToolManager toolManager)
+		ActionManager actions,
+		ChromeManager chrome,
+		WorkspaceManager workspace,
+		ToolManager tools)
 	{
-		action_manager = actionManager;
-		chrome_manager = chromeManager;
-		workspace_manager = workspaceManager;
-		tool_manager = toolManager;
+		this.actions = actions;
+		this.chrome = chrome;
+		this.workspace = workspace;
+		this.tools = tools;
 	}
 
 	void IActionHandler.Initialize ()
 	{
-		action_manager.Edit.PasteIntoNewLayer.Activated += Activated;
+		actions.Edit.PasteIntoNewLayer.Activated += Activated;
 	}
 
 	void IActionHandler.Uninitialize ()
 	{
-		action_manager.Edit.PasteIntoNewLayer.Activated -= Activated;
+		actions.Edit.PasteIntoNewLayer.Activated -= Activated;
 	}
 
 	private void Activated (object sender, EventArgs e)
 	{
 		// If no documents are open, activate the
 		// PasteIntoNewImage action and abort this Paste action.
-		if (!workspace_manager.HasOpenDocuments) {
-			action_manager.Edit.PasteIntoNewImage.Activate ();
+		if (!workspace.HasOpenDocuments) {
+			actions.Edit.PasteIntoNewImage.Activate ();
 			return;
 		}
 
-		var doc = workspace_manager.ActiveDocument;
+		var doc = workspace.ActiveDocument;
 
 		// Get the scroll position in canvas coordinates
 		var view = (Gtk.Viewport) doc.Workspace.Canvas.Parent!;
@@ -82,10 +82,10 @@ internal sealed class PasteIntoNewLayerAction : IActionHandler
 		// The 'true' argument indicates that paste should be
 		// performed into a new layer.
 		PasteAction.Paste (
-			actions: action_manager,
-			chrome: chrome_manager,
-			workspace: workspace_manager,
-			tools: tool_manager,
+			actions: actions,
+			chrome: chrome,
+			workspace: workspace,
+			tools: tools,
 			doc: doc,
 			toNewLayer: true,
 			pastePosition: canvasPos.ToInt ()

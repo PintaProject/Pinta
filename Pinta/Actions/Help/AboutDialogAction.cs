@@ -33,34 +33,34 @@ namespace Pinta.Actions;
 
 internal sealed class AboutDialogAction : IActionHandler
 {
-	private readonly AppActions app_actions;
-	private readonly ChromeManager chrome_manager;
+	private readonly AppActions app;
+	private readonly ChromeManager chrome;
 	private readonly string application_version;
 
 	internal AboutDialogAction (
-		AppActions appActions,
-		ChromeManager chromeManager,
+		AppActions app,
+		ChromeManager chrome,
 		string applicationVersion)
 	{
-		app_actions = appActions;
-		chrome_manager = chromeManager;
+		this.app = app;
+		this.chrome = chrome;
 		application_version = applicationVersion;
 	}
 
 	void IActionHandler.Initialize ()
 	{
-		app_actions.About.Activated += Activated;
+		app.About.Activated += Activated;
 	}
 
 	void IActionHandler.Uninitialize ()
 	{
-		app_actions.About.Activated -= Activated;
+		app.About.Activated -= Activated;
 	}
 
 	private void Activated (object sender, EventArgs e)
 	{
 		Adw.AboutWindow dialog = Adw.AboutWindow.New ();
-		dialog.TransientFor = chrome_manager.MainWindow;
+		dialog.TransientFor = chrome.MainWindow;
 		dialog.Title = Translations.GetString ("About Pinta");
 		dialog.IconName = Icons.AboutPinta;
 		dialog.ApplicationName = Translations.GetString ("Pinta");

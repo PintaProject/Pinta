@@ -30,44 +30,44 @@ using Pinta.Core;
 namespace Pinta.Actions;
 internal sealed class OffsetSelectionAction : IActionHandler
 {
-	private readonly EditActions edit_actions;
-	private readonly ChromeManager chrome_manager;
-	private readonly WorkspaceManager workspace_manager;
-	private readonly ToolManager tool_manager;
+	private readonly EditActions edit;
+	private readonly ChromeManager chrome;
+	private readonly WorkspaceManager workspace;
+	private readonly ToolManager tools;
 
 	internal OffsetSelectionAction (
-		EditActions editActions,
-		ChromeManager chromeManager,
-		WorkspaceManager workspaceManager,
-		ToolManager toolManager)
+		EditActions edit,
+		ChromeManager chrome,
+		WorkspaceManager workspace,
+		ToolManager tools)
 	{
-		edit_actions = editActions;
-		chrome_manager = chromeManager;
-		workspace_manager = workspaceManager;
-		tool_manager = toolManager;
+		this.edit = edit;
+		this.chrome = chrome;
+		this.workspace = workspace;
+		this.tools = tools;
 	}
 
 	void IActionHandler.Initialize ()
 	{
-		edit_actions.OffsetSelection.Activated += Activated;
+		edit.OffsetSelection.Activated += Activated;
 	}
 
 	void IActionHandler.Uninitialize ()
 	{
-		edit_actions.OffsetSelection.Activated -= Activated;
+		edit.OffsetSelection.Activated -= Activated;
 	}
 
 	private void Activated (object sender, EventArgs e)
 	{
-		OffsetSelectionDialog dialog = new (chrome_manager);
+		OffsetSelectionDialog dialog = new (chrome);
 
 		dialog.OnResponse += (_, args) => {
 
 			if (args.ResponseId == (int) Gtk.ResponseType.Ok) {
 
-				tool_manager.Commit ();
+				tools.Commit ();
 
-				Document document = workspace_manager.ActiveDocument;
+				Document document = workspace.ActiveDocument;
 
 				document.Layers.ToolLayer.Clear ();
 

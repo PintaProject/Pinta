@@ -32,30 +32,30 @@ namespace Pinta.Actions;
 
 internal sealed class AddinManagerAction : IActionHandler
 {
-	private readonly AddinActions addin_actions;
-	private readonly ChromeManager chrome_manager;
+	private readonly AddinActions addins;
+	private readonly ChromeManager chrome;
 	internal AddinManagerAction (
-		AddinActions addinActions,
-		ChromeManager chromeManager)
+		AddinActions addins,
+		ChromeManager chrome)
 	{
-		addin_actions = addinActions;
-		chrome_manager = chromeManager;
+		this.addins = addins;
+		this.chrome = chrome;
 	}
 
 	void IActionHandler.Initialize ()
 	{
-		addin_actions.AddinManager.Activated += Activated;
+		addins.AddinManager.Activated += Activated;
 	}
 
 	void IActionHandler.Uninitialize ()
 	{
-		addin_actions.AddinManager.Activated -= Activated;
+		addins.AddinManager.Activated -= Activated;
 	}
 
 	private void Activated (object sender, EventArgs e)
 	{
 		AddinSetupService service = new (Mono.Addins.AddinManager.Registry);
-		AddinManagerDialog dialog = new (chrome_manager.MainWindow, service);
+		AddinManagerDialog dialog = new (chrome.MainWindow, service);
 		dialog.Show ();
 	}
 }

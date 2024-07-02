@@ -31,27 +31,27 @@ namespace Pinta.Actions;
 
 internal sealed class NewDocumentAction : IActionHandler
 {
-	private readonly ActionManager action_manager;
-	private readonly WorkspaceManager workspace_manager;
-	private readonly SettingsManager settings_manager;
+	private readonly ActionManager actions;
+	private readonly WorkspaceManager workspace;
+	private readonly SettingsManager settings;
 	internal NewDocumentAction (
-		ActionManager actionManager,
-		WorkspaceManager workspaceManager,
-		SettingsManager settingsManager)
+		ActionManager actions,
+		WorkspaceManager workspace,
+		SettingsManager settings)
 	{
-		action_manager = actionManager;
-		workspace_manager = workspaceManager;
-		settings_manager = settingsManager;
+		this.actions = actions;
+		this.workspace = workspace;
+		this.settings = settings;
 	}
 
 	void IActionHandler.Initialize ()
 	{
-		action_manager.File.New.Activated += Activated;
+		actions.File.New.Activated += Activated;
 	}
 
 	void IActionHandler.Uninitialize ()
 	{
-		action_manager.File.New.Activated -= Activated;
+		actions.File.New.Activated -= Activated;
 	}
 
 	private async void Activated (object sender, EventArgs e)
@@ -67,9 +67,9 @@ internal sealed class NewDocumentAction : IActionHandler
 		if (cb_texture is null) {
 			// An image was not on the clipboard,
 			// so use saved dimensions from settings
-			imgWidth = settings_manager.GetSetting<int> ("new-image-width", 800);
-			imgHeight = settings_manager.GetSetting<int> ("new-image-height", 600);
-			bg_type = settings_manager.GetSetting<NewImageDialog.BackgroundType> (
+			imgWidth = settings.GetSetting<int> ("new-image-width", 800);
+			imgHeight = settings.GetSetting<int> ("new-image-height", 600);
+			bg_type = settings.GetSetting<NewImageDialog.BackgroundType> (
 				"new-image-bg", NewImageDialog.BackgroundType.White);
 			using_clipboard = false;
 		} else {
@@ -87,14 +87,14 @@ internal sealed class NewDocumentAction : IActionHandler
 			int response = e.ResponseId;
 
 			if (response == (int) Gtk.ResponseType.Ok) {
-				workspace_manager.NewDocument (
-					action_manager,
+				workspace.NewDocument (
+					actions,
 					dialog.NewImageSize,
 					dialog.NewImageBackground);
 
-				settings_manager.PutSetting ("new-image-width", dialog.NewImageWidth);
-				settings_manager.PutSetting ("new-image-height", dialog.NewImageHeight);
-				settings_manager.PutSetting ("new-image-bg", dialog.NewImageBackgroundType);
+				settings.PutSetting ("new-image-width", dialog.NewImageWidth);
+				settings.PutSetting ("new-image-height", dialog.NewImageHeight);
+				settings.PutSetting ("new-image-bg", dialog.NewImageBackgroundType);
 			}
 
 			dialog.Destroy ();

@@ -36,27 +36,27 @@ namespace Pinta.Actions;
 
 internal sealed class NewScreenshotAction : IActionHandler
 {
-	private readonly ChromeManager chrome_manager;
-	private readonly WorkspaceManager workspace_manager;
-	private readonly ActionManager action_manager;
+	private readonly ChromeManager chrome;
+	private readonly WorkspaceManager workspace;
+	private readonly ActionManager actions;
 	internal NewScreenshotAction (
-		ChromeManager chromeManager,
-		WorkspaceManager workspaceManager,
-		ActionManager actionManager)
+		ChromeManager chrome,
+		WorkspaceManager workspace,
+		ActionManager actions)
 	{
-		chrome_manager = chromeManager;
-		workspace_manager = workspaceManager;
-		action_manager = actionManager;
+		this.chrome = chrome;
+		this.workspace = workspace;
+		this.actions = actions;
 	}
 
 	void IActionHandler.Initialize ()
 	{
-		action_manager.File.NewScreenshot.Activated += Activated;
+		actions.File.NewScreenshot.Activated += Activated;
 	}
 
 	void IActionHandler.Uninitialize ()
 	{
-		action_manager.File.NewScreenshot.Activated -= Activated;
+		actions.File.NewScreenshot.Activated -= Activated;
 	}
 
 	private async void Activated (object sender, EventArgs args)
@@ -74,23 +74,23 @@ internal sealed class NewScreenshotAction : IActionHandler
 
 		} catch (DBusException e) {
 
-			chrome_manager.ShowErrorDialog (
-				chrome_manager.MainWindow,
+			chrome.ShowErrorDialog (
+				chrome.MainWindow,
 				Translations.GetString ("Failed to take screenshot"),
 				Translations.GetString ("Failed to access XDG Desktop Portals"),
 				e.ToString ());
 
 		} catch (NoHandlersForOSException e) {
 
-			chrome_manager.ShowMessageDialog (
-				chrome_manager.MainWindow,
+			chrome.ShowMessageDialog (
+				chrome.MainWindow,
 				e.Message,
 				string.Empty);
 
 		} catch (Exception ex) {
 
-			chrome_manager.ShowErrorDialog (
-				chrome_manager.MainWindow,
+			chrome.ShowErrorDialog (
+				chrome.MainWindow,
 				ex.Message,
 				string.Empty,
 				ex.ToString ());
@@ -117,7 +117,7 @@ internal sealed class NewScreenshotAction : IActionHandler
 		var process = Process.Start (screencapture_path, screencapture_args);
 		process.WaitForExit ();
 
-		action_manager.Edit.PasteIntoNewImage.Activate ();
+		actions.Edit.PasteIntoNewImage.Activate ();
 	}
 
 	private async Task HandleX11 ()
@@ -160,12 +160,12 @@ internal sealed class NewScreenshotAction : IActionHandler
 
 				string? uri = reply.results["uri"].ToString ();
 
-				if (uri is null || !workspace_manager.OpenFile (Gio.FileHelper.NewForUri (uri)))
+				if (uri is null || !workspace.OpenFile (Gio.FileHelper.NewForUri (uri)))
 					return;
 
 				// Mark as not having a file, so that the user doesn't unintentionally
 				// save using the temp file.
-				workspace_manager.ActiveDocument.ClearFileReference ();
+				workspace.ActiveDocument.ClearFileReference ();
 			}
 		);
 	}

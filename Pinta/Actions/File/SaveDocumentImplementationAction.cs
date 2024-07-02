@@ -33,33 +33,33 @@ namespace Pinta.Actions;
 
 internal sealed class SaveDocumentImplmentationAction : IActionHandler
 {
-	private readonly FileActions file_actions;
-	private readonly ChromeManager chrome_manager;
+	private readonly FileActions file;
+	private readonly ChromeManager chrome;
 	private readonly ImageConverterManager image_formats;
 	private readonly RecentFileManager recent_files;
-	private readonly ToolManager tool_manager;
+	private readonly ToolManager tools;
 	internal SaveDocumentImplmentationAction (
-		FileActions fileActions,
-		ChromeManager chromeManager,
+		FileActions file,
+		ChromeManager chrome,
 		ImageConverterManager imageFormats,
 		RecentFileManager recentFiles,
-		ToolManager toolManager)
+		ToolManager tools)
 	{
-		file_actions = fileActions;
-		chrome_manager = chromeManager;
+		this.file = file;
+		this.chrome = chrome;
 		image_formats = imageFormats;
 		recent_files = recentFiles;
-		tool_manager = toolManager;
+		this.tools = tools;
 	}
 
 	void IActionHandler.Initialize ()
 	{
-		file_actions.SaveDocument += Activated;
+		file.SaveDocument += Activated;
 	}
 
 	void IActionHandler.Uninitialize ()
 	{
-		file_actions.SaveDocument -= Activated;
+		file.SaveDocument -= Activated;
 	}
 
 	private void Activated (object? sender, DocumentCancelEventArgs e)
@@ -75,7 +75,7 @@ internal sealed class SaveDocumentImplmentationAction : IActionHandler
 			return;
 
 		// If the document already has a filename, just re-save it
-		e.Cancel = !SaveFile (e.Document, null, null, chrome_manager.MainWindow);
+		e.Cancel = !SaveFile (e.Document, null, null, chrome.MainWindow);
 	}
 
 	// This is actually both for "Save As" and saving a file that never
@@ -84,7 +84,7 @@ internal sealed class SaveDocumentImplmentationAction : IActionHandler
 	{
 		var fcd = Gtk.FileChooserNative.New (
 			Translations.GetString ("Save Image File"),
-			chrome_manager.MainWindow,
+			chrome.MainWindow,
 			Gtk.FileChooserAction.Save,
 			Translations.GetString ("Save"),
 			Translations.GetString ("Cancel"));
@@ -150,7 +150,7 @@ internal sealed class SaveDocumentImplmentationAction : IActionHandler
 
 			// If saving the file failed or was cancelled, let the user select
 			// a different file type.
-			if (!SaveFile (document, file, format, chrome_manager.MainWindow))
+			if (!SaveFile (document, file, format, chrome.MainWindow))
 				continue;
 
 			//The user is saving the Document to a new file, so technically it
@@ -183,14 +183,14 @@ internal sealed class SaveDocumentImplmentationAction : IActionHandler
 		}
 
 		if (format == null || format.IsReadOnly ()) {
-			chrome_manager.ShowMessageDialog (parent,
+			chrome.ShowMessageDialog (parent,
 				Translations.GetString ("Pinta does not support saving images in this file format."),
 				file.GetDisplayName ());
 			return false;
 		}
 
 		// Commit any pending changes
-		tool_manager.Commit ();
+		tools.Commit ();
 
 		try {
 			format.Exporter.Export (document, file, parent);
@@ -198,14 +198,14 @@ internal sealed class SaveDocumentImplmentationAction : IActionHandler
 			string primary = Translations.GetString ("Image too large");
 			string secondary = Translations.GetString ("ICO files can not be larger than 255 x 255 pixels.");
 
-			chrome_manager.ShowMessageDialog (parent, primary, secondary);
+			chrome.ShowMessageDialog (parent, primary, secondary);
 			return false;
 		} catch (GLib.GException e) when (e.Message.Contains ("Permission denied") && e.Message.Contains ("Failed to open")) {
 			string primary = Translations.GetString ("Failed to save image");
 			// Translators: {0} is the name of a file that the user does not have write permission for.
 			string secondary = Translations.GetString ("You do not have access to modify '{0}'. The file or folder may be read-only.", file);
 
-			chrome_manager.ShowMessageDialog (parent, primary, secondary);
+			chrome.ShowMessageDialog (parent, primary, secondary);
 			return false;
 		} catch (OperationCanceledException) {
 			return false;
@@ -214,7 +214,7 @@ internal sealed class SaveDocumentImplmentationAction : IActionHandler
 		document.File = file;
 		document.FileType = format.Extensions.First ();
 
-		tool_manager.DoAfterSave (document);
+		tools.DoAfterSave (document);
 
 		// Mark the document as clean following the tool's after-save handler, which might
 		// adjust history (e.g. undo changes that were committed before saving).

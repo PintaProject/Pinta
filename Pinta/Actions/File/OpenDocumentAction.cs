@@ -31,33 +31,33 @@ namespace Pinta.Actions;
 
 internal sealed class OpenDocumentAction : IActionHandler
 {
-	private readonly FileActions file_actions;
-	private readonly ChromeManager chrome_manager;
-	private readonly WorkspaceManager workspace_manager;
+	private readonly FileActions file;
+	private readonly ChromeManager chrome;
+	private readonly WorkspaceManager workspace;
 	private readonly RecentFileManager recent_files;
 	private readonly ImageConverterManager image_formats;
 	internal OpenDocumentAction (
-		FileActions fileActions,
-		ChromeManager chromeManager,
-		WorkspaceManager workspaceManager,
+		FileActions file,
+		ChromeManager chrome,
+		WorkspaceManager workspace,
 		RecentFileManager recentFiles,
 		ImageConverterManager imageFormats)
 	{
-		file_actions = fileActions;
-		chrome_manager = chromeManager;
-		workspace_manager = workspaceManager;
+		this.file = file;
+		this.chrome = chrome;
+		this.workspace = workspace;
 		recent_files = recentFiles;
 		image_formats = imageFormats;
 	}
 
 	void IActionHandler.Initialize ()
 	{
-		file_actions.Open.Activated += Activated;
+		file.Open.Activated += Activated;
 	}
 
 	void IActionHandler.Uninitialize ()
 	{
-		file_actions.Open.Activated -= Activated;
+		file.Open.Activated -= Activated;
 	}
 
 	private void Activated (object sender, EventArgs e)
@@ -67,7 +67,7 @@ internal sealed class OpenDocumentAction : IActionHandler
 
 		var fcd = Gtk.FileChooserNative.New (
 			Translations.GetString ("Open Image File"),
-			chrome_manager.MainWindow,
+			chrome.MainWindow,
 			Gtk.FileChooserAction.Open,
 			Translations.GetString ("Open"),
 			Translations.GetString ("Cancel"));
@@ -88,7 +88,7 @@ internal sealed class OpenDocumentAction : IActionHandler
 				return;
 
 			foreach (var file in fcd.GetFileList ()) {
-				if (!workspace_manager.OpenFile (file))
+				if (!workspace.OpenFile (file))
 					continue;
 				recent_files.AddFile (file);
 				var directory = file.GetParent ();

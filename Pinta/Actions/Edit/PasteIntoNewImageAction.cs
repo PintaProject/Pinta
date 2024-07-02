@@ -31,27 +31,27 @@ namespace Pinta.Actions;
 
 internal sealed class PasteIntoNewImageAction : IActionHandler
 {
-	private readonly ActionManager action_manager;
-	private readonly ChromeManager chrome_manager;
-	private readonly WorkspaceManager workspace_manager;
+	private readonly ActionManager actions;
+	private readonly ChromeManager chrome;
+	private readonly WorkspaceManager workspace;
 	internal PasteIntoNewImageAction (
-		ActionManager actionManager,
-		ChromeManager chromeManager,
-		WorkspaceManager workspaceManager)
+		ActionManager actions,
+		ChromeManager chrome,
+		WorkspaceManager workspace)
 	{
-		action_manager = actionManager;
-		chrome_manager = chromeManager;
-		workspace_manager = workspaceManager;
+		this.actions = actions;
+		this.chrome = chrome;
+		this.workspace = workspace;
 	}
 
 	void IActionHandler.Initialize ()
 	{
-		action_manager.Edit.PasteIntoNewImage.Activated += Activated;
+		actions.Edit.PasteIntoNewImage.Activated += Activated;
 	}
 
 	void IActionHandler.Uninitialize ()
 	{
-		action_manager.Edit.PasteIntoNewImage.Activated -= Activated;
+		actions.Edit.PasteIntoNewImage.Activated -= Activated;
 	}
 
 	private async void Activated (object sender, EventArgs e)
@@ -60,8 +60,8 @@ internal sealed class PasteIntoNewImageAction : IActionHandler
 		Gdk.Texture? cb_texture = await cb.ReadTextureAsync ();
 
 		if (cb_texture is not null)
-			workspace_manager.NewDocumentFromImage (action_manager, cb_texture.ToSurface ());
+			workspace.NewDocumentFromImage (actions, cb_texture.ToSurface ());
 		else
-			PasteAction.ShowClipboardEmptyDialog (chrome_manager);
+			PasteAction.ShowClipboardEmptyDialog (chrome);
 	}
 }

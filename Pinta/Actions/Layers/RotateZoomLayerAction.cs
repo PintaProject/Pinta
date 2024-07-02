@@ -33,28 +33,27 @@ namespace Pinta.Actions;
 
 public sealed class RotateZoomLayerAction : IActionHandler
 {
-	private readonly LayerActions layer_actions;
-	private readonly WorkspaceManager workspace_manager;
-	private readonly ToolManager tool_manager;
-
+	private readonly LayerActions layers;
+	private readonly WorkspaceManager workspace;
+	private readonly ToolManager tools;
 	internal RotateZoomLayerAction (
-		LayerActions layerActions,
-		WorkspaceManager workspaceManager,
-		ToolManager toolManager)
+		LayerActions layers,
+		WorkspaceManager workspace,
+		ToolManager tools)
 	{
-		layer_actions = layerActions;
-		workspace_manager = workspaceManager;
-		tool_manager = toolManager;
+		this.layers = layers;
+		this.workspace = workspace;
+		this.tools = tools;
 	}
 
 	void IActionHandler.Initialize ()
 	{
-		layer_actions.RotateZoom.Activated += Activated;
+		layers.RotateZoom.Activated += Activated;
 	}
 
 	void IActionHandler.Uninitialize ()
 	{
-		layer_actions.RotateZoom.Activated -= Activated;
+		layers.RotateZoom.Activated -= Activated;
 	}
 
 	private void Activated (object sender, EventArgs e)
@@ -72,9 +71,9 @@ public sealed class RotateZoomLayerAction : IActionHandler
 		// When parameters are modified, update the display transform of the layer.
 		dialog.EffectDataChanged += (o, args) => {
 			var xform = ComputeMatrix (data);
-			var doc = workspace_manager.ActiveDocument;
+			var doc = workspace.ActiveDocument;
 			doc.Layers.CurrentUserLayer.Transform = xform.Clone ();
-			workspace_manager.Invalidate ();
+			workspace.Invalidate ();
 		};
 
 		dialog.OnResponse += (_, args) => {
@@ -90,14 +89,14 @@ public sealed class RotateZoomLayerAction : IActionHandler
 
 	private void ClearLivePreview ()
 	{
-		workspace_manager.ActiveDocument.Layers.CurrentUserLayer.Transform.InitIdentity ();
-		workspace_manager.Invalidate ();
+		workspace.ActiveDocument.Layers.CurrentUserLayer.Transform.InitIdentity ();
+		workspace.Invalidate ();
 	}
 
 	private Matrix ComputeMatrix (RotateZoomData data)
 	{
 		var xform = CairoExtensions.CreateIdentityMatrix ();
-		var image_size = workspace_manager.ImageSize;
+		var image_size = workspace.ImageSize;
 		var center_x = image_size.Width / 2.0;
 		var center_y = image_size.Height / 2.0;
 
@@ -111,9 +110,9 @@ public sealed class RotateZoomLayerAction : IActionHandler
 
 	private void ApplyTransform (RotateZoomData data)
 	{
-		var doc = workspace_manager.ActiveDocument;
+		var doc = workspace.ActiveDocument;
 
-		tool_manager.Commit ();
+		tools.Commit ();
 
 		var old_surf = doc.Layers.CurrentUserLayer.Surface.Clone ();
 
@@ -121,8 +120,8 @@ public sealed class RotateZoomLayerAction : IActionHandler
 
 		doc.Layers.CurrentUserLayer.ApplyTransform (
 			xform,
-			workspace_manager.ImageSize,
-			workspace_manager.ImageSize);
+			workspace.ImageSize,
+			workspace.ImageSize);
 
 		doc.Workspace.Invalidate ();
 

@@ -31,32 +31,32 @@ namespace Pinta.Actions;
 
 internal sealed class ResizeImageAction : IActionHandler
 {
-	private readonly ImageActions image_actions;
-	private readonly ChromeManager chrome_manager;
-	private readonly WorkspaceManager workspace_manager;
+	private readonly ImageActions image;
+	private readonly ChromeManager chrome;
+	private readonly WorkspaceManager workspace;
 	internal ResizeImageAction (
-		ImageActions imageActions,
-		ChromeManager chromeManager,
-		WorkspaceManager workspaceManager)
+		ImageActions image,
+		ChromeManager chrome,
+		WorkspaceManager workspace)
 	{
-		image_actions = imageActions;
-		chrome_manager = chromeManager;
-		workspace_manager = workspaceManager;
+		this.image = image;
+		this.chrome = chrome;
+		this.workspace = workspace;
 	}
 
 	void IActionHandler.Initialize ()
 	{
-		image_actions.Resize.Activated += Activated;
+		image.Resize.Activated += Activated;
 	}
 
 	void IActionHandler.Uninitialize ()
 	{
-		image_actions.Resize.Activated -= Activated;
+		image.Resize.Activated -= Activated;
 	}
 
 	private void Activated (object sender, EventArgs e)
 	{
-		ResizeImageDialog dialog = new (chrome_manager, workspace_manager);
+		ResizeImageDialog dialog = new (chrome, workspace);
 
 		dialog.OnResponse += (_, args) => {
 

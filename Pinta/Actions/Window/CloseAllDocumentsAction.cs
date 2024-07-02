@@ -31,37 +31,37 @@ namespace Pinta.Actions;
 
 internal sealed class CloseAllDocumentsAction : IActionHandler
 {
-	private readonly ActionManager action_manager;
-	private readonly WorkspaceManager workspace_manager;
+	private readonly ActionManager actions;
+	private readonly WorkspaceManager workspace;
 	internal CloseAllDocumentsAction (
-		ActionManager actionManager,
-		WorkspaceManager workspaceManager)
+		ActionManager actions,
+		WorkspaceManager workspace)
 	{
-		action_manager = actionManager;
-		workspace_manager = workspaceManager;
+		this.actions = actions;
+		this.workspace = workspace;
 	}
 
 	void IActionHandler.Initialize ()
 	{
-		action_manager.Window.CloseAll.Activated += Activated;
+		actions.Window.CloseAll.Activated += Activated;
 	}
 
 	void IActionHandler.Uninitialize ()
 	{
-		action_manager.Window.CloseAll.Activated -= Activated;
+		actions.Window.CloseAll.Activated -= Activated;
 	}
 
 	private void Activated (object sender, EventArgs e)
 	{
-		while (workspace_manager.HasOpenDocuments) {
+		while (workspace.HasOpenDocuments) {
 
-			int count = workspace_manager.OpenDocuments.Count;
+			int count = workspace.OpenDocuments.Count;
 
-			action_manager.File.Close.Activate ();
+			actions.File.Close.Activate ();
 
 			// If we still have the same number of open documents,
 			// the user cancelled on a Save prompt.
-			if (count == workspace_manager.OpenDocuments.Count)
+			if (count == workspace.OpenDocuments.Count)
 				return;
 		}
 	}

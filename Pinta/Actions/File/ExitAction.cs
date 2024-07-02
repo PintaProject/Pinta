@@ -31,45 +31,45 @@ namespace Pinta.Actions;
 
 internal sealed class ExitProgramAction : IActionHandler
 {
-	private readonly ActionManager action_manager;
-	private readonly ChromeManager chrome_manager;
-	private readonly WorkspaceManager workspace_manager;
+	private readonly ActionManager actions;
+	private readonly ChromeManager chrome;
+	private readonly WorkspaceManager workspace;
 	internal ExitProgramAction (
-		ActionManager actionManager,
-		ChromeManager chromeManager,
-		WorkspaceManager workspaceManager)
+		ActionManager actions,
+		ChromeManager chrome,
+		WorkspaceManager workspace)
 	{
-		action_manager = actionManager;
-		chrome_manager = chromeManager;
-		workspace_manager = workspaceManager;
+		this.actions = actions;
+		this.chrome = chrome;
+		this.workspace = workspace;
 	}
 
 	void IActionHandler.Initialize ()
 	{
-		action_manager.App.Exit.Activated += Activated;
+		actions.App.Exit.Activated += Activated;
 	}
 
 	void IActionHandler.Uninitialize ()
 	{
-		action_manager.App.Exit.Activated -= Activated;
+		actions.App.Exit.Activated -= Activated;
 	}
 
 	private void Activated (object sender, EventArgs e)
 	{
-		while (workspace_manager.HasOpenDocuments) {
-			int count = workspace_manager.OpenDocuments.Count;
+		while (workspace.HasOpenDocuments) {
+			int count = workspace.OpenDocuments.Count;
 
-			action_manager.File.Close.Activate ();
+			actions.File.Close.Activate ();
 
 			// If we still have the same number of open documents,
 			// the user cancelled on a Save prompt.
-			if (count == workspace_manager.OpenDocuments.Count)
+			if (count == workspace.OpenDocuments.Count)
 				return;
 		}
 
 		// Let everyone know we are quitting
-		action_manager.App.RaiseBeforeQuit ();
+		actions.App.RaiseBeforeQuit ();
 
-		chrome_manager.Application.Quit ();
+		chrome.Application.Quit ();
 	}
 }

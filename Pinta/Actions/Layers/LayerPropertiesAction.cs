@@ -31,34 +31,34 @@ namespace Pinta.Actions;
 
 internal sealed class LayerPropertiesAction : IActionHandler
 {
-	private readonly ChromeManager chrome_manager;
-	private readonly LayerActions layer_actions;
-	private readonly WorkspaceManager workspace_manager;
+	private readonly ChromeManager chrome;
+	private readonly LayerActions layers;
+	private readonly WorkspaceManager workspace;
 	internal LayerPropertiesAction (
-		ChromeManager chromeManager,
-		LayerActions layerActions,
-		WorkspaceManager workspaceManager)
+		ChromeManager chrome,
+		LayerActions layers,
+		WorkspaceManager workspace)
 	{
-		chrome_manager = chromeManager;
-		layer_actions = layerActions;
-		workspace_manager = workspaceManager;
+		this.chrome = chrome;
+		this.layers = layers;
+		this.workspace = workspace;
 	}
 
 	void IActionHandler.Initialize ()
 	{
-		layer_actions.Properties.Activated += Activated;
+		layers.Properties.Activated += Activated;
 	}
 
 	void IActionHandler.Uninitialize ()
 	{
-		layer_actions.Properties.Activated -= Activated;
+		layers.Properties.Activated -= Activated;
 	}
 
 	private void Activated (object sender, EventArgs e)
 	{
-		var doc = workspace_manager.ActiveDocument;
+		var doc = workspace.ActiveDocument;
 
-		LayerPropertiesDialog dialog = new (chrome_manager, workspace_manager);
+		LayerPropertiesDialog dialog = new (chrome, workspace);
 
 		dialog.OnResponse += (_, args) => {
 			var response = (Gtk.ResponseType) args.ResponseId;
@@ -68,7 +68,7 @@ internal sealed class LayerPropertiesAction : IActionHandler
 						dialog.InitialLayerProperties,
 						dialog.UpdatedLayerProperties);
 
-				var historyItem = new UpdateLayerPropertiesHistoryItem (
+				UpdateLayerPropertiesHistoryItem historyItem = new (
 					Resources.Icons.LayerProperties,
 					historyMessage,
 					doc.Layers.CurrentUserLayerIndex,
@@ -77,7 +77,7 @@ internal sealed class LayerPropertiesAction : IActionHandler
 
 				doc.History.PushNewItem (historyItem);
 
-				workspace_manager.ActiveWorkspace.Invalidate ();
+				workspace.ActiveWorkspace.Invalidate ();
 
 			} else {
 
@@ -90,7 +90,7 @@ internal sealed class LayerPropertiesAction : IActionHandler
 					initial.SetProperties (selectionLayer);
 
 				if ((layer.Opacity != initial.Opacity) || (layer.BlendMode != initial.BlendMode) || (layer.Hidden != initial.Hidden))
-					workspace_manager.ActiveWorkspace.Invalidate ();
+					workspace.ActiveWorkspace.Invalidate ();
 			}
 
 			dialog.Destroy ();

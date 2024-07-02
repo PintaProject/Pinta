@@ -33,42 +33,42 @@ namespace Pinta.Actions;
 
 internal sealed class PasteAction : IActionHandler
 {
-	private readonly ChromeManager chrome_manager;
-	private readonly ActionManager action_manager;
-	private readonly WorkspaceManager workspace_manager;
-	private readonly ToolManager tool_manager;
+	private readonly ChromeManager chrome;
+	private readonly ActionManager actions;
+	private readonly WorkspaceManager workspace;
+	private readonly ToolManager tools;
 	internal PasteAction (
-		ChromeManager chromeManager,
-		ActionManager actionManager,
-		WorkspaceManager workspaceManager,
-		ToolManager toolManager)
+		ChromeManager chrome,
+		ActionManager actions,
+		WorkspaceManager workspace,
+		ToolManager tools)
 	{
-		chrome_manager = chromeManager;
-		action_manager = actionManager;
-		workspace_manager = workspaceManager;
-		tool_manager = toolManager;
+		this.chrome = chrome;
+		this.actions = actions;
+		this.workspace = workspace;
+		this.tools = tools;
 	}
 
 	void IActionHandler.Initialize ()
 	{
-		action_manager.Edit.Paste.Activated += Activated;
+		actions.Edit.Paste.Activated += Activated;
 	}
 
 	void IActionHandler.Uninitialize ()
 	{
-		action_manager.Edit.Paste.Activated -= Activated;
+		actions.Edit.Paste.Activated -= Activated;
 	}
 
 	private void Activated (object sender, EventArgs e)
 	{
 		// If no documents are open, activate the
 		// PasteIntoNewImage action and abort this Paste action.
-		if (!workspace_manager.HasOpenDocuments) {
-			action_manager.Edit.PasteIntoNewImage.Activate ();
+		if (!workspace.HasOpenDocuments) {
+			actions.Edit.PasteIntoNewImage.Activate ();
 			return;
 		}
 
-		var doc = workspace_manager.ActiveDocument;
+		var doc = workspace.ActiveDocument;
 
 		// Get the scroll position in canvas coordinates
 		var view = (Gtk.Viewport) doc.Workspace.Canvas.Parent!;
@@ -83,10 +83,10 @@ internal sealed class PasteAction : IActionHandler
 		// The 'false' argument indicates that paste should be
 		// performed into the current (not a new) layer.
 		Paste (
-			actions: action_manager,
-			chrome: chrome_manager,
-			workspace: workspace_manager,
-			tools: tool_manager,
+			actions: actions,
+			chrome: chrome,
+			workspace: workspace,
+			tools: tools,
 			doc: doc,
 			toNewLayer: false,
 			pastePosition: canvasPos.ToInt ()
