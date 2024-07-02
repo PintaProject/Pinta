@@ -43,6 +43,7 @@ public sealed class ActionHandlers
 		ImageConverterManager imageFormats = PintaCore.ImageFormats;
 		SettingsManager settings = PintaCore.Settings;
 		ToolManager tools = PintaCore.Tools;
+		PaletteManager palette = PintaCore.Palette;
 		string applicationVersion = PintaCore.ApplicationVersion;
 
 		action_handlers = new ()
@@ -62,10 +63,10 @@ public sealed class ActionHandlers
 			// Edit
 			new OffsetSelectionAction (actions.Edit, chrome, workspace, tools),
 			new PasteAction (chrome, actions, workspace, tools),
-			new PasteIntoNewLayerAction (),
-			new PasteIntoNewImageAction (),
-			new ResizePaletteAction (),
-			new AddinManagerAction (),
+			new PasteIntoNewLayerAction (actions, chrome, workspace, tools),
+			new PasteIntoNewImageAction (actions, chrome, workspace),
+			new ResizePaletteAction (actions.Edit, chrome, palette),
+			new AddinManagerAction (actions.Addins, chrome),
 
 			// Image
 			new ResizeImageAction (actions.Image, chrome, workspace),

@@ -31,30 +31,43 @@ namespace Pinta.Actions;
 
 internal sealed class ResizePaletteAction : IActionHandler
 {
+	private readonly EditActions edit_actions;
+	private readonly ChromeManager chrome_manager;
+	private readonly PaletteManager palette_manager;
+	internal ResizePaletteAction (
+		EditActions editActions,
+		ChromeManager chromeManager,
+		PaletteManager paletteManager)
+	{
+		edit_actions = editActions;
+		chrome_manager = chromeManager;
+		palette_manager = paletteManager;
+	}
+
 	void IActionHandler.Initialize ()
 	{
-		PintaCore.Actions.Edit.ResizePalette.Activated += Activated;
+		edit_actions.ResizePalette.Activated += Activated;
 	}
 
 	void IActionHandler.Uninitialize ()
 	{
-		PintaCore.Actions.Edit.ResizePalette.Activated -= Activated;
+		edit_actions.ResizePalette.Activated -= Activated;
 	}
 
 	private void Activated (object sender, EventArgs e)
 	{
 		SpinButtonEntryDialog dialog = new (
 			Translations.GetString ("Resize Palette"),
-			PintaCore.Chrome.MainWindow,
+			chrome_manager.MainWindow,
 			Translations.GetString ("New palette size:"),
 			1,
 			96,
-			PintaCore.Palette.CurrentPalette.Count);
+			palette_manager.CurrentPalette.Count);
 
 		dialog.OnResponse += (_, args) => {
 
 			if (args.ResponseId == (int) Gtk.ResponseType.Ok)
-				PintaCore.Palette.CurrentPalette.Resize (dialog.GetValue ());
+				palette_manager.CurrentPalette.Resize (dialog.GetValue ());
 
 			dialog.Destroy ();
 		};

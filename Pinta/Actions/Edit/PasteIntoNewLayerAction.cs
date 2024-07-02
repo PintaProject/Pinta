@@ -31,26 +31,42 @@ namespace Pinta.Actions;
 
 internal sealed class PasteIntoNewLayerAction : IActionHandler
 {
+	private readonly ActionManager action_manager;
+	private readonly ChromeManager chrome_manager;
+	private readonly WorkspaceManager workspace_manager;
+	private readonly ToolManager tool_manager;
+	internal PasteIntoNewLayerAction (
+		ActionManager actionManager,
+		ChromeManager chromeManager,
+		WorkspaceManager workspaceManager,
+		ToolManager toolManager)
+	{
+		action_manager = actionManager;
+		chrome_manager = chromeManager;
+		workspace_manager = workspaceManager;
+		tool_manager = toolManager;
+	}
+
 	void IActionHandler.Initialize ()
 	{
-		PintaCore.Actions.Edit.PasteIntoNewLayer.Activated += Activated;
+		action_manager.Edit.PasteIntoNewLayer.Activated += Activated;
 	}
 
 	void IActionHandler.Uninitialize ()
 	{
-		PintaCore.Actions.Edit.PasteIntoNewLayer.Activated -= Activated;
+		action_manager.Edit.PasteIntoNewLayer.Activated -= Activated;
 	}
 
 	private void Activated (object sender, EventArgs e)
 	{
 		// If no documents are open, activate the
 		// PasteIntoNewImage action and abort this Paste action.
-		if (!PintaCore.Workspace.HasOpenDocuments) {
-			PintaCore.Actions.Edit.PasteIntoNewImage.Activate ();
+		if (!workspace_manager.HasOpenDocuments) {
+			action_manager.Edit.PasteIntoNewImage.Activate ();
 			return;
 		}
 
-		var doc = PintaCore.Workspace.ActiveDocument;
+		var doc = workspace_manager.ActiveDocument;
 
 		// Get the scroll position in canvas coordinates
 		var view = (Gtk.Viewport) doc.Workspace.Canvas.Parent!;
@@ -66,10 +82,10 @@ internal sealed class PasteIntoNewLayerAction : IActionHandler
 		// The 'true' argument indicates that paste should be
 		// performed into a new layer.
 		PasteAction.Paste (
-			actions: PintaCore.Actions,
-			chrome: PintaCore.Chrome,
-			workspace: PintaCore.Workspace,
-			tools: PintaCore.Tools,
+			actions: action_manager,
+			chrome: chrome_manager,
+			workspace: workspace_manager,
+			tools: tool_manager,
 			doc: doc,
 			toNewLayer: true,
 			pastePosition: canvasPos.ToInt ()
