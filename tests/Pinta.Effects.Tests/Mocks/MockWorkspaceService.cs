@@ -18,9 +18,4 @@ internal sealed class MockWorkspaceService : IWorkspaceService
 	public event EventHandler? ActiveDocumentChanged;
 	public event EventHandler? SelectionChanged;
 #pragma warning restore CS0067
-
-	public RectangleI ClampToImageSize (RectangleI r)
-	{
-		throw new NotImplementedException ();
-	}
 }
