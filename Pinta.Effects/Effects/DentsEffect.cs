@@ -43,8 +43,8 @@ public sealed class DentsEffect : WarpEffect
 	public sealed override bool IsTileable
 		=> true;
 
-	// Translators: This refers to an image distortion that creates small, random warps or distortions in the image, like tiny dents, bumps, or waves
 	public sealed override string Name
+		// Translators: This refers to an image distortion that creates small, random warps or distortions in the image, like tiny dents, bumps, or waves
 		=> Translations.GetString ("Dents");
 
 	public sealed override string EffectMenuCategory
