@@ -31,24 +31,34 @@ namespace Pinta.Actions;
 
 internal sealed class SaveAllDocumentsAction : IActionHandler
 {
+	private readonly WindowActions window_actions;
+	private readonly WorkspaceManager workspace_manager;
+	internal SaveAllDocumentsAction (
+		WindowActions windowActions,
+		WorkspaceManager workspaceManager)
+	{
+		window_actions = windowActions;
+		workspace_manager = workspaceManager;
+	}
+
 	void IActionHandler.Initialize ()
 	{
-		PintaCore.Actions.Window.SaveAll.Activated += Activated;
+		window_actions.SaveAll.Activated += Activated;
 	}
 
 	void IActionHandler.Uninitialize ()
 	{
-		PintaCore.Actions.Window.SaveAll.Activated -= Activated;
+		window_actions.SaveAll.Activated -= Activated;
 	}
 
 	private void Activated (object sender, EventArgs e)
 	{
-		foreach (Document doc in PintaCore.Workspace.OpenDocuments) {
+		foreach (Document doc in workspace_manager.OpenDocuments) {
 
 			if (!doc.IsDirty && doc.HasFile)
 				continue;
 
-			PintaCore.Actions.Window.SetActiveDocument (doc);
+			window_actions.SetActiveDocument (doc);
 
 			// Loop through all of these until we get a cancel
 			if (!doc.Save (false))

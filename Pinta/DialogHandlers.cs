@@ -83,8 +83,8 @@ public sealed class ActionHandlers
 			new ColorSchemeChangedAction (),
 
 			// Window
-			new CloseAllDocumentsAction (),
-			new SaveAllDocumentsAction (),
+			new CloseAllDocumentsAction (actions, workspace),
+			new SaveAllDocumentsAction (actions.Window, workspace),
 
 			// Help
 			new AboutDialogAction (actions.App, chrome, applicationVersion),
