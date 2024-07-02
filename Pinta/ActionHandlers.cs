@@ -25,7 +25,6 @@
 // THE SOFTWARE.
 
 using System.Collections.Generic;
-using System.Diagnostics.CodeAnalysis;
 using Pinta.Actions;
 using Pinta.Core;
 
@@ -33,54 +32,63 @@ namespace Pinta;
 
 public sealed class ActionHandlers
 {
-	[SuppressMessage ("CodeQuality", "IDE0052:Remove unread private members", Justification = "Objects contained herein have to be kept alive")]
 	private readonly List<IActionHandler> action_handlers;
 
 	public ActionHandlers ()
 	{
+		ChromeManager chrome = PintaCore.Chrome;
+		WorkspaceManager workspace = PintaCore.Workspace;
+		ActionManager actions = PintaCore.Actions;
+		RecentFileManager recentFiles = PintaCore.RecentFiles;
+		ImageConverterManager imageFormats = PintaCore.ImageFormats;
+		SettingsManager settings = PintaCore.Settings;
+		ToolManager tools = PintaCore.Tools;
+		PaletteManager palette = PintaCore.Palette;
+		string applicationVersion = PintaCore.ApplicationVersion;
+
 		action_handlers = new ()
 		{
 			// File
-			new NewDocumentAction (),
-			new NewScreenshotAction (),
-			new OpenDocumentAction (),
-			new SaveDocumentAction (),
-			new SaveDocumentAsAction (),
-			new SaveDocumentImplmentationAction (),
-			new ModifyCompressionAction (),
+			new NewDocumentAction (actions, workspace, settings),
+			new NewScreenshotAction (chrome, workspace, actions),
+			new OpenDocumentAction (actions.File, chrome, workspace, recentFiles, imageFormats),
+			new SaveDocumentAction (actions.File, workspace),
+			new SaveDocumentAsAction (actions.File, workspace),
+			new SaveDocumentImplmentationAction (actions.File, chrome, imageFormats, recentFiles, tools),
+			new ModifyCompressionAction (actions.File),
 			//new PrintDocumentAction ();
-			new CloseDocumentAction (),
-			new ExitProgramAction (),
+			new CloseDocumentAction (actions, chrome, workspace, tools),
+			new ExitProgramAction (actions, chrome, workspace),
 
 			// Edit
-			new OffsetSelectionAction (),
-			new PasteAction (),
-			new PasteIntoNewLayerAction (),
-			new PasteIntoNewImageAction (),
-			new ResizePaletteAction (),
-			new AddinManagerAction (),
+			new OffsetSelectionAction (actions.Edit, chrome, workspace, tools),
+			new PasteAction (chrome, actions, workspace, tools),
+			new PasteIntoNewLayerAction (actions, chrome, workspace, tools),
+			new PasteIntoNewImageAction (actions, chrome, workspace),
+			new ResizePaletteAction (actions.Edit, chrome, palette),
+			new AddinManagerAction (actions.Addins, chrome),
 
 			// Image
-			new ResizeImageAction (),
-			new ResizeCanvasAction (),
+			new ResizeImageAction (actions.Image, chrome, workspace),
+			new ResizeCanvasAction (chrome, workspace, actions),
 
 			// Layers
-			new LayerPropertiesAction (),
-			new RotateZoomLayerAction (),
+			new LayerPropertiesAction (chrome, actions.Layers, workspace),
+			new RotateZoomLayerAction (actions.Layers, workspace, tools),
 
 			// View
-			new ToolBarToggledAction (),
-			new ImageTabsToggledAction (),
-			new StatusBarToggledAction (),
-			new ToolBoxToggledAction (),
-			new ColorSchemeChangedAction (),
+			new ToolBarToggledAction (actions.View, chrome),
+			new ImageTabsToggledAction (actions.View, chrome),
+			new StatusBarToggledAction (actions.View, chrome),
+			new ToolBoxToggledAction (actions.View, chrome),
+			new ColorSchemeChangedAction (actions.View),
 
 			// Window
-			new CloseAllDocumentsAction (),
-			new SaveAllDocumentsAction (),
+			new CloseAllDocumentsAction (actions, workspace),
+			new SaveAllDocumentsAction (actions.Window, workspace),
 
 			// Help
-			new AboutDialogAction ()
+			new AboutDialogAction (actions.App, chrome, applicationVersion),
 		};
 
 		// Initialize each action handler

@@ -31,14 +31,33 @@ namespace Pinta.Actions;
 
 internal sealed class OpenDocumentAction : IActionHandler
 {
+	private readonly FileActions file;
+	private readonly ChromeManager chrome;
+	private readonly WorkspaceManager workspace;
+	private readonly RecentFileManager recent_files;
+	private readonly ImageConverterManager image_formats;
+	internal OpenDocumentAction (
+		FileActions file,
+		ChromeManager chrome,
+		WorkspaceManager workspace,
+		RecentFileManager recentFiles,
+		ImageConverterManager imageFormats)
+	{
+		this.file = file;
+		this.chrome = chrome;
+		this.workspace = workspace;
+		recent_files = recentFiles;
+		image_formats = imageFormats;
+	}
+
 	void IActionHandler.Initialize ()
 	{
-		PintaCore.Actions.File.Open.Activated += Activated;
+		file.Open.Activated += Activated;
 	}
 
 	void IActionHandler.Uninitialize ()
 	{
-		PintaCore.Actions.File.Open.Activated -= Activated;
+		file.Open.Activated -= Activated;
 	}
 
 	private void Activated (object sender, EventArgs e)
@@ -48,7 +67,7 @@ internal sealed class OpenDocumentAction : IActionHandler
 
 		var fcd = Gtk.FileChooserNative.New (
 			Translations.GetString ("Open Image File"),
-			PintaCore.Chrome.MainWindow,
+			chrome.MainWindow,
 			Gtk.FileChooserAction.Open,
 			Translations.GetString ("Open"),
 			Translations.GetString ("Cancel"));
@@ -58,7 +77,7 @@ internal sealed class OpenDocumentAction : IActionHandler
 		fcd.AddFilter (imagesFilter);
 		fcd.AddFilter (catchAllFilter);
 
-		if (PintaCore.RecentFiles.GetDialogDirectory () is Gio.File dir && dir.QueryExists (null))
+		if (recent_files.GetDialogDirectory () is Gio.File dir && dir.QueryExists (null))
 			fcd.SetCurrentFolder (dir);
 
 		fcd.SelectMultiple = true;
@@ -69,12 +88,12 @@ internal sealed class OpenDocumentAction : IActionHandler
 				return;
 
 			foreach (var file in fcd.GetFileList ()) {
-				if (!PintaCore.Workspace.OpenFile (file))
+				if (!workspace.OpenFile (file))
 					continue;
-				PintaCore.RecentFiles.AddFile (file);
+				recent_files.AddFile (file);
 				var directory = file.GetParent ();
 				if (directory is not null)
-					PintaCore.RecentFiles.LastDialogDirectory = directory;
+					recent_files.LastDialogDirectory = directory;
 			}
 		};
 
@@ -89,13 +108,13 @@ internal sealed class OpenDocumentAction : IActionHandler
 		return result;
 	}
 
-	private static Gtk.FileFilter CreateImagesFilter ()
+	private Gtk.FileFilter CreateImagesFilter ()
 	{
 		Gtk.FileFilter result = Gtk.FileFilter.New ();
 
 		result.Name = Translations.GetString ("Image files");
 
-		foreach (var format in PintaCore.ImageFormats.Formats) {
+		foreach (var format in image_formats.Formats) {
 
 			if (format.IsWriteOnly ())
 				continue;

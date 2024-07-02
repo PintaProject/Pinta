@@ -30,31 +30,48 @@ using Pinta.Core;
 namespace Pinta.Actions;
 internal sealed class OffsetSelectionAction : IActionHandler
 {
+	private readonly EditActions edit;
+	private readonly ChromeManager chrome;
+	private readonly WorkspaceManager workspace;
+	private readonly ToolManager tools;
+
+	internal OffsetSelectionAction (
+		EditActions edit,
+		ChromeManager chrome,
+		WorkspaceManager workspace,
+		ToolManager tools)
+	{
+		this.edit = edit;
+		this.chrome = chrome;
+		this.workspace = workspace;
+		this.tools = tools;
+	}
+
 	void IActionHandler.Initialize ()
 	{
-		PintaCore.Actions.Edit.OffsetSelection.Activated += Activated;
+		edit.OffsetSelection.Activated += Activated;
 	}
 
 	void IActionHandler.Uninitialize ()
 	{
-		PintaCore.Actions.Edit.OffsetSelection.Activated -= Activated;
+		edit.OffsetSelection.Activated -= Activated;
 	}
 
 	private void Activated (object sender, EventArgs e)
 	{
-		var dialog = new OffsetSelectionDialog ();
+		OffsetSelectionDialog dialog = new (chrome);
 
 		dialog.OnResponse += (_, args) => {
 
 			if (args.ResponseId == (int) Gtk.ResponseType.Ok) {
 
-				PintaCore.Tools.Commit ();
+				tools.Commit ();
 
-				Document document = PintaCore.Workspace.ActiveDocument;
+				Document document = workspace.ActiveDocument;
 
 				document.Layers.ToolLayer.Clear ();
 
-				var historyItem = new SelectionHistoryItem (Resources.Icons.EditSelectionOffset, Translations.GetString ("Offset Selection"));
+				SelectionHistoryItem historyItem = new (Resources.Icons.EditSelectionOffset, Translations.GetString ("Offset Selection"));
 				historyItem.TakeSnapshot ();
 
 				document.Selection.Offset (dialog.Offset);

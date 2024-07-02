@@ -31,26 +31,42 @@ namespace Pinta.Actions;
 
 internal sealed class PasteIntoNewLayerAction : IActionHandler
 {
+	private readonly ActionManager actions;
+	private readonly ChromeManager chrome;
+	private readonly WorkspaceManager workspace;
+	private readonly ToolManager tools;
+	internal PasteIntoNewLayerAction (
+		ActionManager actions,
+		ChromeManager chrome,
+		WorkspaceManager workspace,
+		ToolManager tools)
+	{
+		this.actions = actions;
+		this.chrome = chrome;
+		this.workspace = workspace;
+		this.tools = tools;
+	}
+
 	void IActionHandler.Initialize ()
 	{
-		PintaCore.Actions.Edit.PasteIntoNewLayer.Activated += Activated;
+		actions.Edit.PasteIntoNewLayer.Activated += Activated;
 	}
 
 	void IActionHandler.Uninitialize ()
 	{
-		PintaCore.Actions.Edit.PasteIntoNewLayer.Activated -= Activated;
+		actions.Edit.PasteIntoNewLayer.Activated -= Activated;
 	}
 
 	private void Activated (object sender, EventArgs e)
 	{
 		// If no documents are open, activate the
 		// PasteIntoNewImage action and abort this Paste action.
-		if (!PintaCore.Workspace.HasOpenDocuments) {
-			PintaCore.Actions.Edit.PasteIntoNewImage.Activate ();
+		if (!workspace.HasOpenDocuments) {
+			actions.Edit.PasteIntoNewImage.Activate ();
 			return;
 		}
 
-		var doc = PintaCore.Workspace.ActiveDocument;
+		var doc = workspace.ActiveDocument;
 
 		// Get the scroll position in canvas coordinates
 		var view = (Gtk.Viewport) doc.Workspace.Canvas.Parent!;
@@ -66,6 +82,10 @@ internal sealed class PasteIntoNewLayerAction : IActionHandler
 		// The 'true' argument indicates that paste should be
 		// performed into a new layer.
 		PasteAction.Paste (
+			actions: actions,
+			chrome: chrome,
+			workspace: workspace,
+			tools: tools,
 			doc: doc,
 			toNewLayer: true,
 			pastePosition: canvasPos.ToInt ()

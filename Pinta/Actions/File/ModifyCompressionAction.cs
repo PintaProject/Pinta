@@ -30,14 +30,20 @@ namespace Pinta.Actions;
 
 internal sealed class ModifyCompressionAction : IActionHandler
 {
+	private readonly FileActions file;
+	internal ModifyCompressionAction (FileActions file)
+	{
+		this.file = file;
+	}
+
 	void IActionHandler.Initialize ()
 	{
-		PintaCore.Actions.File.ModifyCompression += Activated;
+		file.ModifyCompression += Activated;
 	}
 
 	void IActionHandler.Uninitialize ()
 	{
-		PintaCore.Actions.File.ModifyCompression -= Activated;
+		file.ModifyCompression -= Activated;
 	}
 
 	private void Activated (object? sender, ModifyCompressionEventArgs e)
