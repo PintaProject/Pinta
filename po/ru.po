@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2024-06-30 09:24-0400\n"
-"PO-Revision-Date: 2024-07-01 16:09+0000\n"
+"PO-Revision-Date: 2024-07-03 12:09+0000\n"
 "Last-Translator: Сергей <asvmail.as@gmail.com>\n"
 "Language-Team: Russian <https://hosted.weblate.org/projects/pinta/pinta/ru/>"
 "\n"
@@ -577,7 +577,7 @@ msgstr "Удалено"
 
 #: ../Pinta.Effects/Effects/DentsEffect.cs:48
 msgid "Dents"
-msgstr "Замятие"
+msgstr "Вмятины"
 
 #: ../Pinta.Core/Actions/EditActions.cs:263
 msgid "Deselect"
