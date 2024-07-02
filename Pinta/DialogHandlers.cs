@@ -60,7 +60,7 @@ public sealed class ActionHandlers
 			new ExitProgramAction (actions, chrome, workspace),
 
 			// Edit
-			new OffsetSelectionAction (),
+			new OffsetSelectionAction (actions.Edit, chrome, workspace, tools),
 			new PasteAction (),
 			new PasteIntoNewLayerAction (),
 			new PasteIntoNewImageAction (),

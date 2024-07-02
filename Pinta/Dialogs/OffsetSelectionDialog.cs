@@ -36,13 +36,13 @@ public sealed class OffsetSelectionDialog : Gtk.Dialog
 	public int Offset
 		=> offset_spinbox.ValueAsInt;
 
-	public OffsetSelectionDialog ()
+	public OffsetSelectionDialog (ChromeManager chromeManager)
 	{
 		DefaultWidth = 400;
 		DefaultHeight = 100;
 
 		Title = Translations.GetString ("Offset Selection");
-		TransientFor = PintaCore.Chrome.MainWindow;
+		TransientFor = chromeManager.MainWindow;
 		Modal = true;
 
 		Resizable = false;
