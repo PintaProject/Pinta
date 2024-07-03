@@ -31,14 +31,27 @@ namespace Pinta.Actions;
 
 internal sealed class NewDocumentAction : IActionHandler
 {
+	private readonly ActionManager actions;
+	private readonly WorkspaceManager workspace;
+	private readonly SettingsManager settings;
+	internal NewDocumentAction (
+		ActionManager actions,
+		WorkspaceManager workspace,
+		SettingsManager settings)
+	{
+		this.actions = actions;
+		this.workspace = workspace;
+		this.settings = settings;
+	}
+
 	void IActionHandler.Initialize ()
 	{
-		PintaCore.Actions.File.New.Activated += Activated;
+		actions.File.New.Activated += Activated;
 	}
 
 	void IActionHandler.Uninitialize ()
 	{
-		PintaCore.Actions.File.New.Activated -= Activated;
+		actions.File.New.Activated -= Activated;
 	}
 
 	private async void Activated (object sender, EventArgs e)
@@ -54,9 +67,9 @@ internal sealed class NewDocumentAction : IActionHandler
 		if (cb_texture is null) {
 			// An image was not on the clipboard,
 			// so use saved dimensions from settings
-			imgWidth = PintaCore.Settings.GetSetting<int> ("new-image-width", 800);
-			imgHeight = PintaCore.Settings.GetSetting<int> ("new-image-height", 600);
-			bg_type = PintaCore.Settings.GetSetting<NewImageDialog.BackgroundType> (
+			imgWidth = settings.GetSetting<int> ("new-image-width", 800);
+			imgHeight = settings.GetSetting<int> ("new-image-height", 600);
+			bg_type = settings.GetSetting<NewImageDialog.BackgroundType> (
 				"new-image-bg", NewImageDialog.BackgroundType.White);
 			using_clipboard = false;
 		} else {
@@ -74,14 +87,14 @@ internal sealed class NewDocumentAction : IActionHandler
 			int response = e.ResponseId;
 
 			if (response == (int) Gtk.ResponseType.Ok) {
-				PintaCore.Workspace.NewDocument (
-					PintaCore.Actions,
+				workspace.NewDocument (
+					actions,
 					dialog.NewImageSize,
 					dialog.NewImageBackground);
 
-				PintaCore.Settings.PutSetting ("new-image-width", dialog.NewImageWidth);
-				PintaCore.Settings.PutSetting ("new-image-height", dialog.NewImageHeight);
-				PintaCore.Settings.PutSetting ("new-image-bg", dialog.NewImageBackgroundType);
+				settings.PutSetting ("new-image-width", dialog.NewImageWidth);
+				settings.PutSetting ("new-image-height", dialog.NewImageHeight);
+				settings.PutSetting ("new-image-bg", dialog.NewImageBackgroundType);
 			}
 
 			dialog.Destroy ();

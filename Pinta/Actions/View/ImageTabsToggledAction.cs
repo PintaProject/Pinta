@@ -30,19 +30,29 @@ namespace Pinta.Actions;
 
 internal sealed class ImageTabsToggledAction : IActionHandler
 {
+	private readonly ViewActions view;
+	private readonly ChromeManager chrome;
+	internal ImageTabsToggledAction (
+		ViewActions view,
+		ChromeManager chrome)
+	{
+		this.view = view;
+		this.chrome = chrome;
+	}
+
 	void IActionHandler.Initialize ()
 	{
-		PintaCore.Actions.View.ImageTabs.Toggled += Activated;
+		view.ImageTabs.Toggled += Activated;
 	}
 
 	void IActionHandler.Uninitialize ()
 	{
-		PintaCore.Actions.View.ImageTabs.Toggled -= Activated;
+		view.ImageTabs.Toggled -= Activated;
 	}
 
 	private void Activated (bool value)
 	{
-		var notebook = (Docking.DockNotebook) PintaCore.Chrome.ImageTabsNotebook;
+		var notebook = (Docking.DockNotebook) chrome.ImageTabsNotebook;
 		notebook.EnableTabs = value;
 	}
 }

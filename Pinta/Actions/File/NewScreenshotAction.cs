@@ -36,14 +36,27 @@ namespace Pinta.Actions;
 
 internal sealed class NewScreenshotAction : IActionHandler
 {
+	private readonly ChromeManager chrome;
+	private readonly WorkspaceManager workspace;
+	private readonly ActionManager actions;
+	internal NewScreenshotAction (
+		ChromeManager chrome,
+		WorkspaceManager workspace,
+		ActionManager actions)
+	{
+		this.chrome = chrome;
+		this.workspace = workspace;
+		this.actions = actions;
+	}
+
 	void IActionHandler.Initialize ()
 	{
-		PintaCore.Actions.File.NewScreenshot.Activated += Activated;
+		actions.File.NewScreenshot.Activated += Activated;
 	}
 
 	void IActionHandler.Uninitialize ()
 	{
-		PintaCore.Actions.File.NewScreenshot.Activated -= Activated;
+		actions.File.NewScreenshot.Activated -= Activated;
 	}
 
 	private async void Activated (object sender, EventArgs args)
@@ -61,23 +74,23 @@ internal sealed class NewScreenshotAction : IActionHandler
 
 		} catch (DBusException e) {
 
-			PintaCore.Chrome.ShowErrorDialog (
-				PintaCore.Chrome.MainWindow,
+			chrome.ShowErrorDialog (
+				chrome.MainWindow,
 				Translations.GetString ("Failed to take screenshot"),
 				Translations.GetString ("Failed to access XDG Desktop Portals"),
 				e.ToString ());
 
 		} catch (NoHandlersForOSException e) {
 
-			PintaCore.Chrome.ShowMessageDialog (
-				PintaCore.Chrome.MainWindow,
+			chrome.ShowMessageDialog (
+				chrome.MainWindow,
 				e.Message,
 				string.Empty);
 
 		} catch (Exception ex) {
 
-			PintaCore.Chrome.ShowErrorDialog (
-				PintaCore.Chrome.MainWindow,
+			chrome.ShowErrorDialog (
+				chrome.MainWindow,
 				ex.Message,
 				string.Empty,
 				ex.ToString ());
@@ -94,7 +107,7 @@ internal sealed class NewScreenshotAction : IActionHandler
 	private static void HandleDefault ()
 		=> throw new NoHandlersForOSException ();
 
-	private static void HandleMac ()
+	private void HandleMac ()
 	{
 		// Launch the screencapture utility in interactive mode and save to the clipboard.
 		// Note for testing: this requires screen recording permissions, so running from the generated .app bundle is required.
@@ -104,16 +117,16 @@ internal sealed class NewScreenshotAction : IActionHandler
 		var process = Process.Start (screencapture_path, screencapture_args);
 		process.WaitForExit ();
 
-		PintaCore.Actions.Edit.PasteIntoNewImage.Activate ();
+		actions.Edit.PasteIntoNewImage.Activate ();
 	}
 
-	private static async Task HandleX11 ()
+	private async Task HandleX11 ()
 	{
 		// On Linux, use the XDG Desktop Portal Screenshot API.
 
 		// It's important that the portal interactions are synchronised with the main thread
 		// Otherwise the use of the portals will cause massive instability and crash Pinta
-		var systemConnection = new Connection (
+		Connection systemConnection = new (
 			new ClientConnectionOptions (Address.Session) {
 				AutoConnect = true,
 				SynchronizationContext = System.Threading.SynchronizationContext.Current,
@@ -147,12 +160,12 @@ internal sealed class NewScreenshotAction : IActionHandler
 
 				string? uri = reply.results["uri"].ToString ();
 
-				if (uri is null || !PintaCore.Workspace.OpenFile (Gio.FileHelper.NewForUri (uri)))
+				if (uri is null || !workspace.OpenFile (Gio.FileHelper.NewForUri (uri)))
 					return;
 
 				// Mark as not having a file, so that the user doesn't unintentionally
 				// save using the temp file.
-				PintaCore.Workspace.ActiveDocument.ClearFileReference ();
+				workspace.ActiveDocument.ClearFileReference ();
 			}
 		);
 	}

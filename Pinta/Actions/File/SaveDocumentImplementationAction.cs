@@ -33,14 +33,33 @@ namespace Pinta.Actions;
 
 internal sealed class SaveDocumentImplmentationAction : IActionHandler
 {
+	private readonly FileActions file;
+	private readonly ChromeManager chrome;
+	private readonly ImageConverterManager image_formats;
+	private readonly RecentFileManager recent_files;
+	private readonly ToolManager tools;
+	internal SaveDocumentImplmentationAction (
+		FileActions file,
+		ChromeManager chrome,
+		ImageConverterManager imageFormats,
+		RecentFileManager recentFiles,
+		ToolManager tools)
+	{
+		this.file = file;
+		this.chrome = chrome;
+		image_formats = imageFormats;
+		recent_files = recentFiles;
+		this.tools = tools;
+	}
+
 	void IActionHandler.Initialize ()
 	{
-		PintaCore.Actions.File.SaveDocument += Activated;
+		file.SaveDocument += Activated;
 	}
 
 	void IActionHandler.Uninitialize ()
 	{
-		PintaCore.Actions.File.SaveDocument -= Activated;
+		file.SaveDocument -= Activated;
 	}
 
 	private void Activated (object? sender, DocumentCancelEventArgs e)
@@ -56,16 +75,16 @@ internal sealed class SaveDocumentImplmentationAction : IActionHandler
 			return;
 
 		// If the document already has a filename, just re-save it
-		e.Cancel = !SaveFile (e.Document, null, null, PintaCore.Chrome.MainWindow);
+		e.Cancel = !SaveFile (e.Document, null, null, chrome.MainWindow);
 	}
 
 	// This is actually both for "Save As" and saving a file that never
 	// been saved before.  Either way, we need to prompt for a filename.
-	private static bool SaveFileAs (Document document)
+	private bool SaveFileAs (Document document)
 	{
 		var fcd = Gtk.FileChooserNative.New (
 			Translations.GetString ("Save Image File"),
-			PintaCore.Chrome.MainWindow,
+			chrome.MainWindow,
 			Gtk.FileChooserAction.Save,
 			Translations.GetString ("Save"),
 			Translations.GetString ("Cancel"));
@@ -73,17 +92,17 @@ internal sealed class SaveDocumentImplmentationAction : IActionHandler
 		if (document.HasFile)
 			fcd.SetFile (document.File!);
 		else {
-			if (PintaCore.RecentFiles.GetDialogDirectory () is Gio.File dir && dir.QueryExists (null))
+			if (recent_files.GetDialogDirectory () is Gio.File dir && dir.QueryExists (null))
 				fcd.SetCurrentFolder (dir);
 
 			// Append the default extension, producing e.g. "Unsaved Image 1.png"
-			var default_ext = PintaCore.ImageFormats.GetDefaultSaveFormat ().Extensions.First ();
+			var default_ext = image_formats.GetDefaultSaveFormat ().Extensions.First ();
 			fcd.SetCurrentName ($"{document.DisplayName}.{default_ext}");
 		}
 
 		// Add all the formats we support to the save dialog
 		var filetypes = new Dictionary<Gtk.FileFilter, FormatDescriptor> ();
-		foreach (var format in PintaCore.ImageFormats.Formats) {
+		foreach (var format in image_formats.Formats) {
 
 			if (format.IsReadOnly ())
 				continue;
@@ -101,10 +120,10 @@ internal sealed class SaveDocumentImplmentationAction : IActionHandler
 		FormatDescriptor? format_desc = null;
 
 		if (document.HasFile)
-			format_desc = PintaCore.ImageFormats.GetFormatByFile (document.DisplayName);
+			format_desc = image_formats.GetFormatByFile (document.DisplayName);
 
 		if (format_desc == null || format_desc.IsReadOnly ())
-			format_desc = PintaCore.ImageFormats.GetDefaultSaveFormat ();
+			format_desc = image_formats.GetDefaultSaveFormat ();
 
 		fcd.Filter = format_desc.Filter;
 
@@ -117,29 +136,29 @@ internal sealed class SaveDocumentImplmentationAction : IActionHandler
 			// Always follow the extension rather than the file type drop down
 			// ie: if the user chooses to save a "jpeg" as "foo.png", we are going
 			// to assume they just didn't update the dropdown and really want png
-			FormatDescriptor? format = PintaCore.ImageFormats.GetFormatByFile (display_name);
+			FormatDescriptor? format = image_formats.GetFormatByFile (display_name);
 			if (format is null) {
 				if (fcd.Filter is not null)
 					format = filetypes[fcd.Filter];
 				else // Somehow, no file filter was selected...
-					format = PintaCore.ImageFormats.GetDefaultSaveFormat ();
+					format = image_formats.GetDefaultSaveFormat ();
 			}
 
 			var directory = file.GetParent ();
 			if (directory is not null)
-				PintaCore.RecentFiles.LastDialogDirectory = directory;
+				recent_files.LastDialogDirectory = directory;
 
 			// If saving the file failed or was cancelled, let the user select
 			// a different file type.
-			if (!SaveFile (document, file, format, PintaCore.Chrome.MainWindow))
+			if (!SaveFile (document, file, format, chrome.MainWindow))
 				continue;
 
 			//The user is saving the Document to a new file, so technically it
 			//hasn't been saved to its associated file in this session.
 			document.HasBeenSavedInSession = false;
 
-			PintaCore.RecentFiles.AddFile (file);
-			PintaCore.ImageFormats.SetDefaultFormat (format.Extensions.First ());
+			recent_files.AddFile (file);
+			image_formats.SetDefaultFormat (format.Extensions.First ());
 
 			document.File = file;
 			document.FileType = format.Extensions.First ();
@@ -149,7 +168,7 @@ internal sealed class SaveDocumentImplmentationAction : IActionHandler
 		return false;
 	}
 
-	private static bool SaveFile (Document document, Gio.File? file, FormatDescriptor? format, Gtk.Window parent)
+	private bool SaveFile (Document document, Gio.File? file, FormatDescriptor? format, Gtk.Window parent)
 	{
 		file ??= document.File;
 
@@ -160,18 +179,18 @@ internal sealed class SaveDocumentImplmentationAction : IActionHandler
 			if (string.IsNullOrEmpty (document.FileType))
 				throw new ArgumentNullException ($"nameof{document.FileType} must contain value.");
 
-			format = PintaCore.ImageFormats.GetFormatByExtension (document.FileType);
+			format = image_formats.GetFormatByExtension (document.FileType);
 		}
 
 		if (format == null || format.IsReadOnly ()) {
-			PintaCore.Chrome.ShowMessageDialog (parent,
+			chrome.ShowMessageDialog (parent,
 				Translations.GetString ("Pinta does not support saving images in this file format."),
 				file.GetDisplayName ());
 			return false;
 		}
 
 		// Commit any pending changes
-		PintaCore.Tools.Commit ();
+		tools.Commit ();
 
 		try {
 			format.Exporter.Export (document, file, parent);
@@ -179,14 +198,14 @@ internal sealed class SaveDocumentImplmentationAction : IActionHandler
 			string primary = Translations.GetString ("Image too large");
 			string secondary = Translations.GetString ("ICO files can not be larger than 255 x 255 pixels.");
 
-			PintaCore.Chrome.ShowMessageDialog (parent, primary, secondary);
+			chrome.ShowMessageDialog (parent, primary, secondary);
 			return false;
 		} catch (GLib.GException e) when (e.Message.Contains ("Permission denied") && e.Message.Contains ("Failed to open")) {
 			string primary = Translations.GetString ("Failed to save image");
 			// Translators: {0} is the name of a file that the user does not have write permission for.
 			string secondary = Translations.GetString ("You do not have access to modify '{0}'. The file or folder may be read-only.", file);
 
-			PintaCore.Chrome.ShowMessageDialog (parent, primary, secondary);
+			chrome.ShowMessageDialog (parent, primary, secondary);
 			return false;
 		} catch (OperationCanceledException) {
 			return false;
@@ -195,7 +214,7 @@ internal sealed class SaveDocumentImplmentationAction : IActionHandler
 		document.File = file;
 		document.FileType = format.Extensions.First ();
 
-		PintaCore.Tools.DoAfterSave (document);
+		tools.DoAfterSave (document);
 
 		// Mark the document as clean following the tool's after-save handler, which might
 		// adjust history (e.g. undo changes that were committed before saving).

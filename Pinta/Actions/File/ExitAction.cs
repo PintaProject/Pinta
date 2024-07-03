@@ -31,32 +31,45 @@ namespace Pinta.Actions;
 
 internal sealed class ExitProgramAction : IActionHandler
 {
+	private readonly ActionManager actions;
+	private readonly ChromeManager chrome;
+	private readonly WorkspaceManager workspace;
+	internal ExitProgramAction (
+		ActionManager actions,
+		ChromeManager chrome,
+		WorkspaceManager workspace)
+	{
+		this.actions = actions;
+		this.chrome = chrome;
+		this.workspace = workspace;
+	}
+
 	void IActionHandler.Initialize ()
 	{
-		PintaCore.Actions.App.Exit.Activated += Activated;
+		actions.App.Exit.Activated += Activated;
 	}
 
 	void IActionHandler.Uninitialize ()
 	{
-		PintaCore.Actions.App.Exit.Activated -= Activated;
+		actions.App.Exit.Activated -= Activated;
 	}
 
 	private void Activated (object sender, EventArgs e)
 	{
-		while (PintaCore.Workspace.HasOpenDocuments) {
-			int count = PintaCore.Workspace.OpenDocuments.Count;
+		while (workspace.HasOpenDocuments) {
+			int count = workspace.OpenDocuments.Count;
 
-			PintaCore.Actions.File.Close.Activate ();
+			actions.File.Close.Activate ();
 
 			// If we still have the same number of open documents,
 			// the user cancelled on a Save prompt.
-			if (count == PintaCore.Workspace.OpenDocuments.Count)
+			if (count == workspace.OpenDocuments.Count)
 				return;
 		}
 
 		// Let everyone know we are quitting
-		PintaCore.Actions.App.RaiseBeforeQuit ();
+		actions.App.RaiseBeforeQuit ();
 
-		PintaCore.Chrome.Application.Quit ();
+		chrome.Application.Quit ();
 	}
 }
