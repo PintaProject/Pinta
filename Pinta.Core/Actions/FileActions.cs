@@ -41,7 +41,11 @@ public sealed class FileActions
 	public event EventHandler<ModifyCompressionEventArgs>? ModifyCompression;
 	public event EventHandler<DocumentCancelEventArgs>? SaveDocument;
 
-	public FileActions ()
+	private readonly SystemManager system;
+	private readonly AppActions app;
+	public FileActions (
+		SystemManager system,
+		AppActions app)
 	{
 		New = new Command ("new", Translations.GetString ("New..."), null, Resources.StandardIcons.DocumentNew);
 		NewScreenshot = new Command ("NewScreenshot", Translations.GetString ("New Screenshot..."), null, Resources.StandardIcons.ViewFullscreen);
@@ -54,39 +58,42 @@ public sealed class FileActions
 
 		New.ShortLabel = Translations.GetString ("New");
 		Open.ShortLabel = Translations.GetString ("Open");
+
+		this.system = system;
+		this.app = app;
 	}
 
 	#region Initialization
-	public void RegisterActions (Gtk.Application app, Gio.Menu menu)
+	public void RegisterActions (Gtk.Application application, Gio.Menu menu)
 	{
-		app.AddAccelAction (New, "<Primary>N");
+		application.AddAccelAction (New, "<Primary>N");
 		menu.AppendItem (New.CreateMenuItem ());
 
-		app.AddAction (NewScreenshot);
+		application.AddAction (NewScreenshot);
 		menu.AppendItem (NewScreenshot.CreateMenuItem ());
 
-		app.AddAccelAction (Open, "<Primary>O");
+		application.AddAccelAction (Open, "<Primary>O");
 		menu.AppendItem (Open.CreateMenuItem ());
 
 		var save_section = Gio.Menu.New ();
 		menu.AppendSection (null, save_section);
 
-		app.AddAccelAction (Save, "<Primary>S");
+		application.AddAccelAction (Save, "<Primary>S");
 		save_section.AppendItem (Save.CreateMenuItem ());
 
-		app.AddAccelAction (SaveAs, "<Primary><Shift>S");
+		application.AddAccelAction (SaveAs, "<Primary><Shift>S");
 		save_section.AppendItem (SaveAs.CreateMenuItem ());
 
 		var close_section = Gio.Menu.New ();
 		menu.AppendSection (null, close_section);
 
-		app.AddAccelAction (Close, "<Primary>W");
+		application.AddAccelAction (Close, "<Primary>W");
 		close_section.AppendItem (Close.CreateMenuItem ());
 
 		// This is part of the application menu on macOS.
-		if (PintaCore.System.OperatingSystem != OS.Mac) {
-			var exit = PintaCore.Actions.App.Exit;
-			app.AddAccelAction (exit, "<Primary>Q");
+		if (system.OperatingSystem != OS.Mac) {
+			var exit = app.Exit;
+			application.AddAccelAction (exit, "<Primary>Q");
 			close_section.AppendItem (exit.CreateMenuItem ());
 		}
 
@@ -105,16 +112,16 @@ public sealed class FileActions
 	internal bool RaiseSaveDocument (Document document, bool saveAs)
 	{
 		if (SaveDocument == null)
-			throw new InvalidOperationException ("GUI is not handling PintaCore.Workspace.SaveDocument");
+			throw new InvalidOperationException ("GUI is not handling Workspace.SaveDocument");
 
-		DocumentCancelEventArgs e = new DocumentCancelEventArgs (document, saveAs);
+		DocumentCancelEventArgs e = new (document, saveAs);
 		SaveDocument (this, e);
 		return !e.Cancel;
 	}
 
 	internal int RaiseModifyCompression (int defaultCompression, Gtk.Window parent)
 	{
-		ModifyCompressionEventArgs e = new ModifyCompressionEventArgs (defaultCompression, parent);
+		ModifyCompressionEventArgs e = new (defaultCompression, parent);
 		ModifyCompression?.Invoke (this, e);
 		return e.Cancel ? -1 : e.Quality;
 	}

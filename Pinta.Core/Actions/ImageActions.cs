@@ -42,7 +42,14 @@ public sealed class ImageActions
 	public Command Rotate180 { get; }
 	public Command Flatten { get; }
 
-	public ImageActions ()
+	private readonly ToolManager tools;
+	private readonly WorkspaceManager workspace;
+	private readonly ViewActions view;
+
+	public ImageActions (
+		ToolManager tools,
+		WorkspaceManager workspace,
+		ViewActions view)
 	{
 		CropToSelection = new Command ("croptoselection", Translations.GetString ("Crop to Selection"), null, Resources.Icons.ImageCrop);
 		AutoCrop = new Command ("autocrop", Translations.GetString ("Auto Crop"), null, Resources.Icons.ImageCrop);
@@ -54,6 +61,10 @@ public sealed class ImageActions
 		RotateCCW = new Command ("rotateccw", Translations.GetString ("Rotate 90° Counter-Clockwise"), null, Resources.Icons.ImageRotate90CCW);
 		Rotate180 = new Command ("rotate180", Translations.GetString ("Rotate 180°"), null, Resources.Icons.ImageRotate180);
 		Flatten = new Command ("flatten", Translations.GetString ("Flatten"), null, Resources.Icons.ImageFlatten);
+
+		this.tools = tools;
+		this.workspace = workspace;
+		this.view = view;
 	}
 
 	#region Initialization
@@ -110,10 +121,10 @@ public sealed class ImageActions
 		CropToSelection.Activated += HandlePintaCoreActionsImageCropToSelectionActivated;
 		AutoCrop.Activated += HandlePintaCoreActionsImageAutoCropActivated;
 
-		PintaCore.Workspace.SelectionChanged += (o, _) => {
+		workspace.SelectionChanged += (o, _) => {
 			var visible = false;
-			if (PintaCore.Workspace.HasOpenDocuments)
-				visible = PintaCore.Workspace.ActiveDocument.Selection.Visible;
+			if (workspace.HasOpenDocuments)
+				visible = workspace.ActiveDocument.Selection.Visible;
 
 			CropToSelection.Sensitive = visible;
 		};
@@ -123,9 +134,9 @@ public sealed class ImageActions
 	#region Action Handlers
 	private void HandlePintaCoreActionsImageRotateCCWActivated (object sender, EventArgs e)
 	{
-		Document doc = PintaCore.Workspace.ActiveDocument;
+		Document doc = workspace.ActiveDocument;
 
-		PintaCore.Tools.Commit ();
+		tools.Commit ();
 		doc.RotateImageCCW ();
 
 		doc.History.PushNewItem (new InvertHistoryItem (InvertType.Rotate90CCW));
@@ -133,9 +144,9 @@ public sealed class ImageActions
 
 	private void HandlePintaCoreActionsImageRotateCWActivated (object sender, EventArgs e)
 	{
-		Document doc = PintaCore.Workspace.ActiveDocument;
+		Document doc = workspace.ActiveDocument;
 
-		PintaCore.Tools.Commit ();
+		tools.Commit ();
 		doc.RotateImageCW ();
 
 		doc.History.PushNewItem (new InvertHistoryItem (InvertType.Rotate90CW));
@@ -143,9 +154,9 @@ public sealed class ImageActions
 
 	private void HandlePintaCoreActionsImageFlattenActivated (object sender, EventArgs e)
 	{
-		Document doc = PintaCore.Workspace.ActiveDocument;
+		Document doc = workspace.ActiveDocument;
 
-		PintaCore.Tools.Commit ();
+		tools.Commit ();
 
 		var oldBottomSurface = doc.Layers.UserLayers[0].Surface.Clone ();
 
@@ -162,9 +173,9 @@ public sealed class ImageActions
 
 	private void HandlePintaCoreActionsImageRotate180Activated (object sender, EventArgs e)
 	{
-		Document doc = PintaCore.Workspace.ActiveDocument;
+		Document doc = workspace.ActiveDocument;
 
-		PintaCore.Tools.Commit ();
+		tools.Commit ();
 		doc.RotateImage180 ();
 
 		doc.History.PushNewItem (new InvertHistoryItem (InvertType.Rotate180));
@@ -172,9 +183,9 @@ public sealed class ImageActions
 
 	private void HandlePintaCoreActionsImageFlipVerticalActivated (object sender, EventArgs e)
 	{
-		Document doc = PintaCore.Workspace.ActiveDocument;
+		Document doc = workspace.ActiveDocument;
 
-		PintaCore.Tools.Commit ();
+		tools.Commit ();
 		doc.FlipImageVertical ();
 
 		doc.History.PushNewItem (new InvertHistoryItem (InvertType.FlipVertical));
@@ -182,9 +193,9 @@ public sealed class ImageActions
 
 	private void HandlePintaCoreActionsImageFlipHorizontalActivated (object sender, EventArgs e)
 	{
-		Document doc = PintaCore.Workspace.ActiveDocument;
+		Document doc = workspace.ActiveDocument;
 
-		PintaCore.Tools.Commit ();
+		tools.Commit ();
 		doc.FlipImageHorizontal ();
 
 		doc.History.PushNewItem (new InvertHistoryItem (InvertType.FlipHorizontal));
@@ -192,9 +203,9 @@ public sealed class ImageActions
 
 	private void HandlePintaCoreActionsImageCropToSelectionActivated (object sender, EventArgs e)
 	{
-		Document doc = PintaCore.Workspace.ActiveDocument;
+		Document doc = workspace.ActiveDocument;
 
-		PintaCore.Tools.Commit ();
+		tools.Commit ();
 
 		RectangleI rect = doc.GetSelectedBounds (true);
 
@@ -229,9 +240,9 @@ public sealed class ImageActions
 
 	private void HandlePintaCoreActionsImageAutoCropActivated (object sender, EventArgs e)
 	{
-		Document doc = PintaCore.Workspace.ActiveDocument;
+		Document doc = workspace.ActiveDocument;
 
-		PintaCore.Tools.Commit ();
+		tools.Commit ();
 
 		var image = doc.GetFlattenedImage ();
 		RectangleI rect = image.GetBounds ();
@@ -274,7 +285,7 @@ public sealed class ImageActions
 	}
 	#endregion
 
-	static void CropImageToRectangle (Document doc, RectangleI rect, Path? selection)
+	void CropImageToRectangle (Document doc, RectangleI rect, Path? selection)
 	{
 		if (rect.Width <= 0 || rect.Height <= 0)
 			return;
@@ -291,7 +302,7 @@ public sealed class ImageActions
 		doc.Workspace.ViewSize = rect.Size;
 		doc.Workspace.Scale = original_scale;
 
-		PintaCore.Actions.View.UpdateCanvasScale ();
+		view.UpdateCanvasScale ();
 
 		foreach (var layer in doc.Layers.UserLayers)
 			layer.Crop (rect, selection);

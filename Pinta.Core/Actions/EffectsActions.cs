@@ -34,14 +34,16 @@ public sealed class EffectsActions
 	public Dictionary<string, Gio.Menu> Menus { get; } = new ();
 	public Collection<Command> Actions { get; } = new ();
 
-	public EffectsActions ()
+	private readonly ChromeManager chrome;
+	public EffectsActions (ChromeManager chrome)
 	{
+		this.chrome = chrome;
 	}
 
 	#region Initialization
 	public void AddEffect (string category, Command action)
 	{
-		var effects_menu = PintaCore.Chrome.EffectsMenu;
+		var effects_menu = chrome.EffectsMenu;
 
 		if (!Menus.ContainsKey (category)) {
 			var category_menu = Gio.Menu.New ();

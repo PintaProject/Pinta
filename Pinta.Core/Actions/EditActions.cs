@@ -53,7 +53,17 @@ public sealed class EditActions
 
 	private Gio.File? last_palette_dir = null;
 
-	public EditActions ()
+	private readonly ChromeManager chrome;
+	private readonly PaletteFormatManager palette_formats;
+	private readonly PaletteManager palette;
+	private readonly ToolManager tools;
+	private readonly WorkspaceManager workspace;
+	public EditActions (
+		ChromeManager chrome,
+		PaletteFormatManager paletteFormats,
+		PaletteManager palette,
+		ToolManager tools,
+		WorkspaceManager workspace)
 	{
 		Undo = new Command ("undo", Translations.GetString ("Undo"), null, Resources.StandardIcons.EditUndo);
 		Redo = new Command ("redo", Translations.GetString ("Redo"), null, Resources.StandardIcons.EditRedo);
@@ -77,6 +87,12 @@ public sealed class EditActions
 
 		Undo.Sensitive = false;
 		Redo.Sensitive = false;
+
+		this.chrome = chrome;
+		palette_formats = paletteFormats;
+		this.palette = palette;
+		this.tools = tools;
+		this.workspace = workspace;
 	}
 
 	#region Initialization
@@ -175,12 +191,12 @@ public sealed class EditActions
 		ResetPalette.Activated += HandlerPintaCoreActionsEditResetPaletteActivated;
 		InvertSelection.Activated += HandleInvertSelectionActivated;
 
-		PintaCore.Workspace.ActiveDocumentChanged += WorkspaceActiveDocumentChanged;
+		workspace.ActiveDocumentChanged += WorkspaceActiveDocumentChanged;
 
-		PintaCore.Workspace.SelectionChanged += (o, _) => {
+		workspace.SelectionChanged += (o, _) => {
 			var visible = false;
-			if (PintaCore.Workspace.HasOpenDocuments)
-				visible = PintaCore.Workspace.ActiveDocument.Selection.Visible;
+			if (workspace.HasOpenDocuments)
+				visible = workspace.ActiveDocument.Selection.Visible;
 
 			Deselect.Sensitive = visible;
 			EraseSelection.Sensitive = visible;
@@ -195,9 +211,9 @@ public sealed class EditActions
 	#region Action Handlers
 	private void HandlePintaCoreActionsEditFillSelectionActivated (object sender, EventArgs e)
 	{
-		Document doc = PintaCore.Workspace.ActiveDocument;
+		Document doc = workspace.ActiveDocument;
 
-		PintaCore.Tools.Commit ();
+		tools.Commit ();
 
 		Cairo.ImageSurface old = doc.Layers.CurrentUserLayer.Surface.Clone ();
 
@@ -205,7 +221,7 @@ public sealed class EditActions
 		g.AppendPath (doc.Selection.SelectionPath);
 		g.FillRule = FillRule.EvenOdd;
 
-		g.SetSourceColor (PintaCore.Palette.PrimaryColor);
+		g.SetSourceColor (palette.PrimaryColor);
 		g.Fill ();
 
 		doc.Workspace.Invalidate ();
@@ -214,9 +230,9 @@ public sealed class EditActions
 
 	private void HandlePintaCoreActionsEditSelectAllActivated (object sender, EventArgs e)
 	{
-		Document doc = PintaCore.Workspace.ActiveDocument;
+		Document doc = workspace.ActiveDocument;
 
-		PintaCore.Tools.Commit ();
+		tools.Commit ();
 
 		SelectionHistoryItem hist = new SelectionHistoryItem (Resources.StandardIcons.EditSelectAll, Translations.GetString ("Select All"));
 		hist.TakeSnapshot ();
@@ -230,9 +246,9 @@ public sealed class EditActions
 
 	private void HandlePintaCoreActionsEditEraseSelectionActivated (object sender, EventArgs e)
 	{
-		Document doc = PintaCore.Workspace.ActiveDocument;
+		Document doc = workspace.ActiveDocument;
 
-		PintaCore.Tools.Commit ();
+		tools.Commit ();
 
 		Cairo.ImageSurface old = doc.Layers.CurrentUserLayer.Surface.Clone ();
 
@@ -255,9 +271,9 @@ public sealed class EditActions
 
 	private void HandlePintaCoreActionsEditDeselectActivated (object sender, EventArgs e)
 	{
-		Document doc = PintaCore.Workspace.ActiveDocument;
+		Document doc = workspace.ActiveDocument;
 
-		PintaCore.Tools.Commit ();
+		tools.Commit ();
 
 		SelectionHistoryItem hist = new SelectionHistoryItem (Resources.Icons.EditSelectionNone, Translations.GetString ("Deselect"));
 		hist.TakeSnapshot ();
@@ -270,13 +286,13 @@ public sealed class EditActions
 
 	private void HandlerPintaCoreActionsEditCopyActivated (object sender, EventArgs e)
 	{
-		Document doc = PintaCore.Workspace.ActiveDocument;
+		Document doc = workspace.ActiveDocument;
 
 		var cb = GdkExtensions.GetDefaultClipboard ();
-		if (PintaCore.Tools.CurrentTool?.DoHandleCopy (doc, cb) == true)
+		if (tools.CurrentTool?.DoHandleCopy (doc, cb) == true)
 			return;
 
-		PintaCore.Tools.Commit ();
+		tools.Commit ();
 
 		ImageSurface src = doc.Layers.GetClippedLayer (doc.Layers.CurrentUserLayerIndex);
 
@@ -296,9 +312,9 @@ public sealed class EditActions
 	private void HandlerPintaCoreActionsEditCopyMergedActivated (object sender, EventArgs e)
 	{
 		var cb = GdkExtensions.GetDefaultClipboard ();
-		var doc = PintaCore.Workspace.ActiveDocument;
+		var doc = workspace.ActiveDocument;
 
-		PintaCore.Tools.Commit ();
+		tools.Commit ();
 
 		// Get our merged ("flattened") image
 		var src = doc.GetFlattenedImage (/* clip_to_selection */ true);
@@ -317,12 +333,12 @@ public sealed class EditActions
 
 	private void HandlerPintaCoreActionsEditCutActivated (object sender, EventArgs e)
 	{
-		var doc = PintaCore.Workspace.ActiveDocument;
+		var doc = workspace.ActiveDocument;
 
 		Gdk.Clipboard cb = GdkExtensions.GetDefaultClipboard ();
-		if (PintaCore.Tools.CurrentTool?.DoHandleCut (doc, cb) == true)
+		if (tools.CurrentTool?.DoHandleCut (doc, cb) == true)
 			return;
-		PintaCore.Tools.Commit ();
+		tools.Commit ();
 
 		// Copy selection
 		HandlerPintaCoreActionsEditCopyActivated (sender, e);
@@ -333,27 +349,27 @@ public sealed class EditActions
 
 	private void HandlerPintaCoreActionsEditUndoActivated (object sender, EventArgs e)
 	{
-		Document doc = PintaCore.Workspace.ActiveDocument;
-		if (PintaCore.Tools.CurrentTool?.DoHandleUndo (doc) == true)
+		Document doc = workspace.ActiveDocument;
+		if (tools.CurrentTool?.DoHandleUndo (doc) == true)
 			return;
 		doc.History.Undo ();
-		PintaCore.Tools.CurrentTool?.DoAfterUndo (doc);
+		tools.CurrentTool?.DoAfterUndo (doc);
 	}
 
 	private void HandlerPintaCoreActionsEditRedoActivated (object sender, EventArgs e)
 	{
-		Document doc = PintaCore.Workspace.ActiveDocument;
-		if (PintaCore.Tools.CurrentTool?.DoHandleRedo (doc) == true)
+		Document doc = workspace.ActiveDocument;
+		if (tools.CurrentTool?.DoHandleRedo (doc) == true)
 			return;
 		doc.History.Redo ();
-		PintaCore.Tools.CurrentTool?.DoAfterRedo (doc);
+		tools.CurrentTool?.DoAfterRedo (doc);
 	}
 
 	private void HandlerPintaCoreActionsEditLoadPaletteActivated (object sender, EventArgs e)
 	{
 		var fcd = Gtk.FileChooserNative.New (
 			Translations.GetString ("Open Palette File"),
-			PintaCore.Chrome.MainWindow,
+			chrome.MainWindow,
 			Gtk.FileChooserAction.Open,
 			Translations.GetString ("Open"),
 			Translations.GetString ("Cancel"));
@@ -361,7 +377,7 @@ public sealed class EditActions
 		var ff = Gtk.FileFilter.New ();
 		ff.Name = Translations.GetString ("Palette files");
 
-		foreach (var format in PintaCore.PaletteFormats.Formats) {
+		foreach (var format in palette_formats.Formats) {
 			if (format.IsWriteOnly ())
 				continue;
 			foreach (var ext in format.Extensions)
@@ -386,7 +402,7 @@ public sealed class EditActions
 
 			Gio.File file = fcd.GetFile ()!;
 			last_palette_dir = file.GetParent ();
-			PintaCore.Palette.CurrentPalette.Load (PintaCore.PaletteFormats, file);
+			palette.CurrentPalette.Load (palette_formats, file);
 		};
 
 		fcd.Show ();
@@ -396,12 +412,12 @@ public sealed class EditActions
 	{
 		var fcd = Gtk.FileChooserNative.New (
 			Translations.GetString ("Save Palette File"),
-			PintaCore.Chrome.MainWindow,
+			chrome.MainWindow,
 			Gtk.FileChooserAction.Save,
 			Translations.GetString ("Save"),
 			Translations.GetString ("Cancel"));
 
-		foreach (var format in PintaCore.PaletteFormats.Formats) {
+		foreach (var format in palette_formats.Formats) {
 			if (format.IsReadOnly ())
 				continue;
 			Gtk.FileFilter fileFilter = format.Filter;
@@ -425,13 +441,13 @@ public sealed class EditActions
 			var basename = file.GetParent ()!.GetRelativePath (file)!;
 			string extension = System.IO.Path.GetExtension (basename);
 			if (string.IsNullOrEmpty (extension)) {
-				var currentFormat = PintaCore.PaletteFormats.Formats.First (f => f.Filter == fcd.Filter);
+				var currentFormat = palette_formats.Formats.First (f => f.Filter == fcd.Filter);
 				basename += "." + currentFormat.Extensions.First ();
 				file = file.GetParent ()!.GetChild (basename);
 			}
 
-			var format = PintaCore.PaletteFormats.GetFormatByFilename (basename) ?? throw new FormatException ();
-			PintaCore.Palette.CurrentPalette.Save (file, format.Saver);
+			var format = palette_formats.GetFormatByFilename (basename) ?? throw new FormatException ();
+			palette.CurrentPalette.Save (file, format.Saver);
 			last_palette_dir = file.GetParent ();
 		};
 
@@ -440,14 +456,14 @@ public sealed class EditActions
 
 	private void HandlerPintaCoreActionsEditResetPaletteActivated (object sender, EventArgs e)
 	{
-		PintaCore.Palette.CurrentPalette.LoadDefault ();
+		palette.CurrentPalette.LoadDefault ();
 	}
 
 	void HandleInvertSelectionActivated (object sender, EventArgs e)
 	{
-		PintaCore.Tools.Commit ();
+		tools.Commit ();
 
-		Document doc = PintaCore.Workspace.ActiveDocument;
+		Document doc = workspace.ActiveDocument;
 
 		// Clear the selection resize handles if necessary.
 		doc.Layers.ToolLayer.Clear ();
@@ -464,14 +480,14 @@ public sealed class EditActions
 
 	private void WorkspaceActiveDocumentChanged (object? sender, EventArgs e)
 	{
-		if (!PintaCore.Workspace.HasOpenDocuments) {
+		if (!workspace.HasOpenDocuments) {
 			Undo.Sensitive = false;
 			Redo.Sensitive = false;
 			return;
 		}
 
-		Redo.Sensitive = PintaCore.Workspace.ActiveWorkspace.History.CanRedo;
-		Undo.Sensitive = PintaCore.Workspace.ActiveWorkspace.History.CanUndo;
+		Redo.Sensitive = workspace.ActiveWorkspace.History.CanRedo;
+		Undo.Sensitive = workspace.ActiveWorkspace.History.CanUndo;
 	}
 	#endregion
 }
