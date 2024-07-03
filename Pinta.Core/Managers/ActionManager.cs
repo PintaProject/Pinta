@@ -28,17 +28,17 @@ namespace Pinta.Core;
 
 public sealed class ActionManager
 {
-	public AppActions App { get; } = new ();
-	public FileActions File { get; } = new ();
-	public EditActions Edit { get; } = new ();
-	public ViewActions View { get; } = new ();
-	public ImageActions Image { get; } = new ();
-	public LayerActions Layers { get; } = new ();
-	public AdjustmentsActions Adjustments { get; } = new ();
-	public EffectsActions Effects { get; } = new ();
-	public WindowActions Window { get; } = new ();
-	public HelpActions Help { get; } = new ();
-	public AddinActions Addins { get; } = new ();
+	public AppActions App { get; }
+	public FileActions File { get; }
+	public EditActions Edit { get; }
+	public ViewActions View { get; }
+	public ImageActions Image { get; }
+	public LayerActions Layers { get; }
+	public AdjustmentsActions Adjustments { get; }
+	public EffectsActions Effects { get; }
+	public WindowActions Window { get; }
+	public HelpActions Help { get; }
+	public AddinActions Addins { get; }
 
 	private readonly SystemManager system_manager;
 	private readonly ChromeManager chrome_manager;
@@ -46,6 +46,18 @@ public sealed class ActionManager
 		SystemManager systemManager,
 		ChromeManager chromeManager)
 	{
+		App = new AppActions ();
+		File = new FileActions ();
+		Edit = new EditActions ();
+		View = new ViewActions ();
+		Image = new ImageActions ();
+		Layers = new LayerActions ();
+		Adjustments = new AdjustmentsActions ();
+		Effects = new EffectsActions ();
+		Window = new WindowActions ();
+		Help = new HelpActions ();
+		Addins = new AddinActions ();
+
 		system_manager = systemManager;
 		chrome_manager = chromeManager;
 	}
