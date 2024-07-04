@@ -62,7 +62,9 @@ public sealed class ViewActions
 		}
 	}
 
-	public ViewActions ()
+	private readonly ChromeManager chrome;
+	private readonly WorkspaceManager workspace;
+	public ViewActions (ChromeManager chrome, WorkspaceManager workspace)
 	{
 		ZoomIn = new Command ("ZoomIn", Translations.GetString ("Zoom In"), null, Resources.StandardIcons.ValueIncrease);
 		ZoomOut = new Command ("ZoomOut", Translations.GetString ("Zoom Out"), null, Resources.StandardIcons.ValueDecrease);
@@ -87,6 +89,9 @@ public sealed class ViewActions
 		ImageTabs.Value = true;
 		StatusBar.Value = true;
 		ToolBox.Value = true;
+
+		this.chrome = chrome;
+		this.workspace = workspace;
 	}
 
 	private static readonly ReadOnlyCollection<string> default_zoom_levels = new[] {
@@ -160,7 +165,7 @@ public sealed class ViewActions
 		app.AddAction (Rulers);
 		show_hide_menu.AppendItem (Rulers.CreateMenuItem ());
 
-		if (PintaCore.Chrome.MainToolBar is not null) {
+		if (chrome.MainToolBar is not null) {
 			app.AddAction (ToolBar);
 			show_hide_menu.AppendItem (ToolBar.CreateMenuItem ());
 		}
@@ -211,16 +216,16 @@ public sealed class ViewActions
 		ActualSize.Activated += HandlePintaCoreActionsViewActualSizeActivated;
 
 		PixelGrid.Toggled += (_) => {
-			PintaCore.Workspace.Invalidate ();
+			workspace.Invalidate ();
 		};
 
 		var isFullscreen = false;
 
 		Fullscreen.Activated += (foo, bar) => {
 			if (!isFullscreen)
-				PintaCore.Chrome.MainWindow.Fullscreen ();
+				chrome.MainWindow.Fullscreen ();
 			else
-				PintaCore.Chrome.MainWindow.Unfullscreen ();
+				chrome.MainWindow.Unfullscreen ();
 
 			isFullscreen = !isFullscreen;
 		};
@@ -231,20 +236,20 @@ public sealed class ViewActions
 
 	private void Entry_FocusInEvent (object o, EventArgs args)
 	{
-		temp_zoom = PintaCore.Actions.View.ZoomComboBox.ComboBox.GetActiveText ()!;
+		temp_zoom = ZoomComboBox.ComboBox.GetActiveText ()!;
 	}
 
 	private void Entry_FocusOutEvent (object o, EventArgs args)
 	{
-		string text = PintaCore.Actions.View.ZoomComboBox.ComboBox.GetActiveText ()!;
+		string text = ZoomComboBox.ComboBox.GetActiveText ()!;
 
 		if (!TryParsePercent (text, out var percent)) {
-			PintaCore.Actions.View.ZoomComboBox.ComboBox.GetEntry ().SetText (temp_zoom!);
+			ZoomComboBox.ComboBox.GetEntry ().SetText (temp_zoom!);
 			return;
 		}
 
 		if (percent > 3600)
-			PintaCore.Actions.View.ZoomComboBox.ComboBox.Active = 0;
+			ZoomComboBox.ComboBox.Active = 0;
 	}
 	#endregion
 
@@ -299,12 +304,12 @@ public sealed class ViewActions
 
 	public void UpdateCanvasScale ()
 	{
-		string text = PintaCore.Actions.View.ZoomComboBox.ComboBox.GetActiveText ()!;
+		string text = ZoomComboBox.ComboBox.GetActiveText ()!;
 
 		// stay in "Zoom to Window" mode if this function was called without the zoom level being changed by the user (e.g. if the
 		// image was rotated or cropped) and "Zoom to Window" mode is active
 		if (text == Translations.GetString ("Window") || (ZoomToWindowActivated && old_zoom_text == text)) {
-			PintaCore.Actions.View.ZoomToWindow.Activate ();
+			ZoomToWindow.Activate ();
 			ZoomToWindowActivated = true;
 			return;
 		} else {
@@ -318,7 +323,7 @@ public sealed class ViewActions
 		percent = Math.Min (percent, 3600);
 		percent /= 100.0;
 
-		PintaCore.Workspace.Scale = percent;
+		workspace.Scale = percent;
 	}
 
 	#region Action Handlers
@@ -336,17 +341,17 @@ public sealed class ViewActions
 		if (suspend_zoom_change)
 			return;
 
-		PintaCore.Workspace.ActiveDocument.Workspace.ZoomManually ();
+		workspace.ActiveDocument.Workspace.ZoomManually ();
 	}
 
 	private void HandlePintaCoreActionsViewZoomOutActivated (object sender, EventArgs e)
 	{
-		PintaCore.Workspace.ActiveDocument.Workspace.ZoomOut ();
+		workspace.ActiveDocument.Workspace.ZoomOut ();
 	}
 
 	private void HandlePintaCoreActionsViewZoomInActivated (object sender, EventArgs e)
 	{
-		PintaCore.Workspace.ActiveDocument.Workspace.ZoomIn ();
+		workspace.ActiveDocument.Workspace.ZoomIn ();
 	}
 	#endregion
 
