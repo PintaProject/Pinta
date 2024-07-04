@@ -130,12 +130,12 @@ public sealed class LivePreviewManager
 		if (!effect.IsTileable)
 			tileHeight = render_bounds.Height;
 
-		var settings = new AsyncEffectRenderer.Settings () {
-			ThreadCount = system_manager.RenderThreads,
-			TileWidth = tileWidth,
-			TileHeight = tileHeight,
-			ThreadPriority = ThreadPriority.BelowNormal
-		};
+		AsyncEffectRenderer.Settings settings = new (
+			threadCount: system_manager.RenderThreads,
+			tileWidth: tileWidth,
+			tileHeight: tileHeight,
+			updateMilliseconds: 100,
+			threadPriority: ThreadPriority.Normal);
 
 		Debug.WriteLine (DateTime.Now.ToString ("HH:mm:ss:ffff") + "Start Live preview.");
 

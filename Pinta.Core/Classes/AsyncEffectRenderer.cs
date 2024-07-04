@@ -39,15 +39,38 @@ namespace Pinta.Core;
 // Only call methods on this class from a single thread (The UI thread).
 internal abstract class AsyncEffectRenderer
 {
-	Settings settings;
+	private readonly Settings settings;
 
-	internal struct Settings
+	internal sealed class Settings
 	{
-		internal int ThreadCount { get; set; }
-		internal int TileWidth { get; set; }
-		internal int TileHeight { get; set; }
-		internal int UpdateMillis { get; set; }
-		internal ThreadPriority ThreadPriority { get; set; }
+		internal int ThreadCount { get; }
+		internal int TileWidth { get; }
+		internal int TileHeight { get; }
+		internal int UpdateMillis { get; }
+		internal ThreadPriority ThreadPriority { get; }
+
+		internal Settings (
+			int threadCount,
+			int tileWidth,
+			int tileHeight,
+			int updateMilliseconds,
+			ThreadPriority threadPriority)
+		{
+			if (tileWidth < 0)
+				throw new ArgumentOutOfRangeException (nameof (tileWidth), "Cannot be negative");
+
+			if (tileHeight < 0)
+				throw new ArgumentOutOfRangeException (nameof (tileHeight), "Cannot be negative");
+
+			// TODO: Prepare the calling code and
+			//       instead of coercing values,
+			//       throw an exception
+			TileWidth = tileWidth;
+			TileHeight = tileHeight;
+			ThreadCount = Math.Clamp (threadCount, 1, int.MaxValue);
+			UpdateMillis = updateMilliseconds <= 0 ? 100 : updateMilliseconds;
+			ThreadPriority = threadPriority;
+		}
 	}
 
 	BaseEffect? effect;
@@ -72,22 +95,9 @@ internal abstract class AsyncEffectRenderer
 
 	internal AsyncEffectRenderer (Settings settings)
 	{
-		if (settings.ThreadCount < 1)
-			settings.ThreadCount = 1;
-
-		if (settings.TileWidth < 0)
-			throw new ArgumentException ("EffectRenderSettings.TileWidth");
-
-		if (settings.TileHeight < 0)
-			throw new ArgumentException ("EffectRenderSettings.TileHeight");
-
-		if (settings.UpdateMillis <= 0)
-			settings.UpdateMillis = 100;
-
 		effect = null;
 		source_surface = null;
 		dest_surface = null;
-		this.settings = settings;
 
 		is_rendering = false;
 		render_id = 0;
@@ -96,6 +106,8 @@ internal abstract class AsyncEffectRenderer
 		render_exceptions = new List<Exception> ();
 
 		timer_tick_id = 0;
+
+		this.settings = settings;
 	}
 
 	internal bool IsRendering => is_rendering;
