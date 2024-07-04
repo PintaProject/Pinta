@@ -64,10 +64,10 @@ public static class PintaCore
 		ImageConverterManager imageFormats = new (settings);
 		WorkspaceManager workspace = new (system, chrome, imageFormats);
 		ToolManager tools = new (workspace, chrome);
-		ActionManager actions = new (system, chrome);
-		LivePreviewManager livePreview = new (workspace, tools, system, chrome);
-		LayerManager layers = new (workspace);
 		PaletteManager palette = new (settings, paletteFormats);
+		LayerManager layers = new (workspace);
+		ActionManager actions = new (chrome, imageFormats, layers, paletteFormats, palette, recentFiles, system, tools, workspace);
+		LivePreviewManager livePreview = new (workspace, tools, system, chrome);
 		EffectsManager effects = new (actions, chrome, livePreview);
 
 		// --- Service manager

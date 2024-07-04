@@ -35,8 +35,11 @@ public sealed class AddinActions
 
 	public AddinActions ()
 	{
-		AddinManager = new Command ("AddinManager", Translations.GetString ("Add-in Manager..."),
-					       null, Resources.Icons.AddinsManage);
+		AddinManager = new Command (
+			"AddinManager",
+			Translations.GetString ("Add-in Manager..."),
+			null,
+			Resources.Icons.AddinsManage);
 	}
 
 	/// <summary>

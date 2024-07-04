@@ -8,15 +8,15 @@ msgstr ""
 "Project-Id-Version: pinta\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2024-06-30 09:24-0400\n"
-"PO-Revision-Date: 2024-01-16 07:06+0000\n"
-"Last-Translator: philippe dalet <philippe.dalet@gmail.com>\n"
+"PO-Revision-Date: 2024-07-03 12:09+0000\n"
+"Last-Translator: Julien Maulny <julien.maulny@protonmail.com>\n"
 "Language-Team: French <https://hosted.weblate.org/projects/pinta/pinta/fr/>\n"
 "Language: fr\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n > 1;\n"
-"X-Generator: Weblate 5.4-dev\n"
+"X-Generator: Weblate 5.7-dev\n"
 "X-Launchpad-Export-Date: 2023-12-18 03:00+0000\n"
 "X-Poedit-SourceCharset: utf-8\n"
 
@@ -142,7 +142,7 @@ msgstr "Artistique"
 #. Translators: Image dithering matrix named after Bill Atkinson
 #: ../Pinta.Effects/Classes/ErrorDiffusionMatrix.cs:28
 msgid "Atkinson"
-msgstr ""
+msgstr "Atkinson"
 
 #: ../Pinta.Effects/Dialogs/Effects.LevelsDialog.cs:238
 msgid "Auto"
@@ -252,7 +252,7 @@ msgstr "Bomber"
 #. Translators: Image dithering matrix named after Daniel Burkes
 #: ../Pinta.Effects/Classes/ErrorDiffusionMatrix.cs:24
 msgid "Burkes"
-msgstr ""
+msgstr "Burkes"
 
 #: ../Pinta/Dialogs/ResizeCanvasDialog.cs:99
 #: ../Pinta/Dialogs/ResizeImageDialog.cs:174
@@ -464,7 +464,7 @@ msgstr ""
 
 #: ../Pinta.Effects/Effects/VoronoiDiagramEffect.cs:212
 msgid "Color Sorting"
-msgstr ""
+msgstr "Tri de couleur"
 
 #: ../Pinta.Effects/Effects/InkSketchEffect.cs:154
 msgid "Coloring"
@@ -508,7 +508,7 @@ msgstr "Barbe à papa"
 #: ../Pinta.Core/ImageFormats/OraFormat.cs:122
 #, csharp-format
 msgid "Could not import layer \"{0}\" from {1}"
-msgstr ""
+msgstr "Impossible d'importer le calque \"{0}\" depuis {1}"
 
 #: ../Pinta.Core/Classes/Palette.cs:196
 #: ../Pinta.Core/Managers/WorkspaceManager.cs:378
@@ -687,7 +687,7 @@ msgstr "Erreur"
 
 #: ../Pinta.Effects/Effects/DitheringEffect.cs:133
 msgid "Error Diffusion Method"
-msgstr ""
+msgstr "Méthode de diffusion d'erreur"
 
 #: ../Pinta.Core/Classes/SelectionModeHandler.cs:48
 msgid "Exclude (-) (Right Click)"
@@ -811,7 +811,7 @@ msgstr "Mode de remplissage"
 #. Translators: Image dithering matrix named after Robert W. Floyd and Louis Steinberg
 #: ../Pinta.Effects/Classes/ErrorDiffusionMatrix.cs:40
 msgid "Floyd-Steinberg"
-msgstr ""
+msgstr "Floyd-Steinberg"
 
 #. Translators: Image dithering matrix named after Robert W. Floyd and Louis Steinberg. Some software may use it and call it Floyd-Steinberg, but it's not the actual Floyd-Steinberg matrix
 #: ../Pinta.Effects/Classes/ErrorDiffusionMatrix.cs:44
@@ -1102,6 +1102,12 @@ msgid ""
 "Hold Shift to rotate in steps.\n"
 "Use arrow keys to move selected content by a single pixel."
 msgstr ""
+"Clic gauche et glisser la selection pour déplacer le contenu sélectionné.\n"
+"Maintenir {0} pour mettre à l'échelle au lieu de déplacer.\n"
+"Clic droit et glisser la selection pour tourner le contenu sélectionné.\n"
+"Maintenir shift pour tourner pas à pas.\n"
+"Utiliser les touches flèchées pour déplacer le contenu sélectionné pixel par "
+"pixel."
 
 #: ../Pinta.Tools/Tools/MoveSelectionTool.cs:44
 #, csharp-format
@@ -1347,7 +1353,7 @@ msgstr "Nom :"
 
 #: ../Pinta.Core/Enumerations/ResamplingMode.cs:23
 msgid "Nearest Neighbor"
-msgstr ""
+msgstr "Plus proche voisin"
 
 #: ../Pinta.Core/Actions/FileActions.cs:55
 msgid "New"
@@ -1372,7 +1378,7 @@ msgstr "Nouveau..."
 
 #: ../Pinta.Gui.Addins/AddinListView.cs:58
 msgid "No Items Found"
-msgstr ""
+msgstr "Aucun élément trouvé"
 
 #: ../Pinta.Effects/Effects/AddNoiseEffect.cs:28
 #: ../Pinta.Effects/Effects/MedianEffect.cs:30
@@ -1400,11 +1406,11 @@ msgstr "Normal avec contours"
 
 #: ../Pinta.Effects/Effects/VoronoiDiagramEffect.cs:205
 msgid "Number of Cells"
-msgstr ""
+msgstr "Nombre de cellules"
 
 #: ../Pinta/Main.cs:55
 msgid "Number of threads to use for rendering"
-msgstr ""
+msgstr "Nombre de fils d'éxecution à utiliser pour le rendu"
 
 #: ../Pinta.Effects/Effects/BulgeEffect.cs:112
 #: ../Pinta.Effects/Effects/RadialBlurEffect.cs:173
@@ -1626,7 +1632,7 @@ msgstr "Pixels"
 #. Translators: Gradient with different shades of brownish yellow
 #: ../Pinta.Effects/Effects/GradientHelper.cs:52
 msgid "Piña Colada"
-msgstr ""
+msgstr "Piña Colada"
 
 #: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:581
 #: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:767
@@ -1657,11 +1663,11 @@ msgstr "Puissance"
 #. Translators: This refers to preserving the current canvas size when pasting a larger image.
 #: ../Pinta/Actions/Edit/PasteAction.cs:194
 msgid "Preserve"
-msgstr ""
+msgstr "Préserver"
 
 #: ../Pinta.Effects/Effects/GradientHelper.cs:11
 msgid "Preset Gradient"
-msgstr ""
+msgstr "Dégradé par défaut"
 
 #: ../Pinta/Dialogs/NewImageDialog.cs:341
 msgid "Preset:"
@@ -1724,17 +1730,17 @@ msgstr ""
 #: ../Pinta.Effects/Effects/GradientHelper.cs:17
 #: ../Pinta.Effects/Effects/VoronoiDiagramEffect.cs:235
 msgid "Random"
-msgstr ""
+msgstr "Aléatoire"
 
 #: ../Pinta.Effects/Effects/CloudsEffect.cs:194
 #: ../Pinta.Effects/Effects/JuliaFractalEffect.cs:187
 #: ../Pinta.Effects/Effects/MandelbrotFractalEffect.cs:205
 msgid "Random Color Scheme Seed"
-msgstr ""
+msgstr "Graine de schéma de couleur aléatoire"
 
 #: ../Pinta.Effects/Effects/VoronoiDiagramEffect.cs:219
 msgid "Random Colors"
-msgstr ""
+msgstr "Couleurs aléatoires"
 
 #: ../Pinta.Effects/Effects/AddNoiseEffect.cs:176
 #: ../Pinta.Effects/Effects/CloudsEffect.cs:185

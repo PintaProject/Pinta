@@ -28,26 +28,64 @@ namespace Pinta.Core;
 
 public sealed class ActionManager
 {
-	public AppActions App { get; } = new ();
-	public FileActions File { get; } = new ();
-	public EditActions Edit { get; } = new ();
-	public ViewActions View { get; } = new ();
-	public ImageActions Image { get; } = new ();
-	public LayerActions Layers { get; } = new ();
-	public AdjustmentsActions Adjustments { get; } = new ();
-	public EffectsActions Effects { get; } = new ();
-	public WindowActions Window { get; } = new ();
-	public HelpActions Help { get; } = new ();
-	public AddinActions Addins { get; } = new ();
+	public AppActions App { get; }
+	public FileActions File { get; }
+	public EditActions Edit { get; }
+	public ViewActions View { get; }
+	public ImageActions Image { get; }
+	public LayerActions Layers { get; }
+	public AdjustmentsActions Adjustments { get; }
+	public EffectsActions Effects { get; }
+	public WindowActions Window { get; }
+	public HelpActions Help { get; }
+	public AddinActions Addins { get; }
 
-	private readonly SystemManager system_manager;
-	private readonly ChromeManager chrome_manager;
+	private readonly SystemManager system;
+	private readonly ChromeManager chrome;
 	public ActionManager (
-		SystemManager systemManager,
-		ChromeManager chromeManager)
+		ChromeManager chrome,
+		ImageConverterManager imageFormats,
+		LayerManager layerManager,
+		PaletteFormatManager paletteFormats,
+		PaletteManager palette,
+		RecentFileManager recentFiles,
+		SystemManager system,
+		ToolManager tools,
+		WorkspaceManager workspace)
 	{
-		system_manager = systemManager;
-		chrome_manager = chromeManager;
+		// --- Action handlers that don't depend on other handlers
+
+		AddinActions addins = new ();
+		AdjustmentsActions adjustments = new ();
+		AppActions app = new ();
+		EditActions edit = new (chrome, paletteFormats, palette, tools, workspace);
+		EffectsActions effects = new (chrome);
+		ViewActions view = new (chrome, workspace);
+		WindowActions window = new (chrome, tools, workspace);
+
+		// --- Action handlers that depend on other handlers
+
+		FileActions file = new (system, app);
+		HelpActions help = new (system, app);
+		ImageActions image = new (tools, workspace, view);
+		LayerActions layers = new (chrome, imageFormats, layerManager, recentFiles, tools, workspace, image);
+
+		// --- References to keep
+
+		App = app;
+		File = file;
+		Edit = edit;
+		View = view;
+		Image = image;
+		Layers = layers;
+		Adjustments = adjustments;
+		Effects = effects;
+		Window = window;
+		Help = help;
+		Addins = addins;
+
+		this.system = system;
+		this.chrome = chrome;
 	}
 
 	public void CreateToolBar (Gtk.Box toolbar)
@@ -62,7 +100,7 @@ public sealed class ActionManager
 		toolbar.Append (GtkExtensions.CreateToolBarSeparator ());
 
 		// Cut/Copy/Paste comes before Undo/Redo on Windows
-		if (system_manager.OperatingSystem == OS.Windows) {
+		if (system.OperatingSystem == OS.Windows) {
 			toolbar.Append (Edit.Cut.CreateToolBarItem ());
 			toolbar.Append (Edit.Copy.CreateToolBarItem ());
 			toolbar.Append (Edit.Paste.CreateToolBarItem ());
@@ -110,8 +148,8 @@ public sealed class ActionManager
 		var cursor = Gtk.Label.New ("  0, 0");
 		statusbar.Append (cursor);
 
-		chrome_manager.LastCanvasCursorPointChanged += delegate {
-			var pt = chrome_manager.LastCanvasCursorPoint;
+		chrome.LastCanvasCursorPointChanged += delegate {
+			var pt = chrome.LastCanvasCursorPoint;
 			cursor.SetText ($"  {pt.X}, {pt.Y}");
 		};
 

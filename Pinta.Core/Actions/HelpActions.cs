@@ -35,34 +35,41 @@ public sealed class HelpActions
 	public Command Bugs { get; }
 	public Command Translate { get; }
 
-	public HelpActions ()
+	private readonly SystemManager system;
+	private readonly AppActions app;
+	public HelpActions (
+		SystemManager system,
+		AppActions app)
 	{
 		Contents = new Command ("contents", Translations.GetString ("Contents"), null, Resources.StandardIcons.HelpBrowser);
 		Website = new Command ("website", Translations.GetString ("Pinta Website"), null, Resources.Icons.HelpWebsite);
 		Bugs = new Command ("bugs", Translations.GetString ("File a Bug"), null, Resources.Icons.HelpBug);
 		Translate = new Command ("translate", Translations.GetString ("Translate This Application"), null, Resources.Icons.HelpTranslate);
+
+		this.system = system;
+		this.app = app;
 	}
-	public void RegisterActions (Gtk.Application app, Gio.Menu menu)
+	public void RegisterActions (Gtk.Application application, Gio.Menu menu)
 	{
-		app.AddAccelAction (Contents, "F1");
+		application.AddAccelAction (Contents, "F1");
 		menu.AppendItem (Contents.CreateMenuItem ());
 
-		app.AddAction (Website);
+		application.AddAction (Website);
 		menu.AppendItem (Website.CreateMenuItem ());
 
-		app.AddAction (Bugs);
+		application.AddAction (Bugs);
 		menu.AppendItem (Bugs.CreateMenuItem ());
 
-		app.AddAction (Translate);
+		application.AddAction (Translate);
 		menu.AppendItem (Translate.CreateMenuItem ());
 
 		// This is part of the application menu on macOS.
-		if (PintaCore.System.OperatingSystem != OS.Mac) {
+		if (system.OperatingSystem != OS.Mac) {
 			var about_section = Gio.Menu.New ();
 			menu.AppendSection (null, about_section);
 
-			var about = PintaCore.Actions.App.About;
-			app.AddAction (about);
+			var about = app.About;
+			application.AddAction (about);
 			about_section.AppendItem (about.CreateMenuItem ());
 		}
 	}

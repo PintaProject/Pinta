@@ -35,7 +35,12 @@ public sealed class WindowActions
 	public Command SaveAll { get; }
 	public Command CloseAll { get; }
 
-	public WindowActions ()
+	private readonly ChromeManager chrome;
+	private readonly WorkspaceManager workspace;
+	public WindowActions (
+		ChromeManager chrome,
+		ToolManager tools,
+		WorkspaceManager workspace)
 	{
 		SaveAll = new Command ("SaveAll", Translations.GetString ("Save All"), null, Resources.StandardIcons.DocumentSave);
 		CloseAll = new Command ("CloseAll", Translations.GetString ("Close All"), null, Resources.StandardIcons.WindowClose);
@@ -46,15 +51,18 @@ public sealed class WindowActions
 
 			var idx = e.Parameter!.GetInt32 ();
 
-			if (idx >= PintaCore.Workspace.OpenDocuments.Count)
+			if (idx >= workspace.OpenDocuments.Count)
 				return;
 
-			PintaCore.Workspace.SetActiveDocumentInternal (
-				PintaCore.Tools,
-				PintaCore.Workspace.OpenDocuments[idx]);
+			workspace.SetActiveDocumentInternal (
+				tools,
+				workspace.OpenDocuments[idx]);
 
 			active_doc_action.ChangeState (e.Parameter);
 		};
+
+		this.chrome = chrome;
+		this.workspace = workspace;
 	}
 
 	#region Initialization
@@ -77,7 +85,7 @@ public sealed class WindowActions
 
 	public void SetActiveDocument (Document doc)
 	{
-		var idx = PintaCore.Workspace.OpenDocuments.IndexOf (doc);
+		var idx = workspace.OpenDocuments.IndexOf (doc);
 		active_doc_action.Activate (GLib.Variant.NewInt32 (idx));
 	}
 
@@ -86,7 +94,7 @@ public sealed class WindowActions
 		doc.Renamed += (o, e) => { RebuildDocumentMenu (); };
 		doc.IsDirtyChanged += (o, e) => { RebuildDocumentMenu (); };
 
-		AddDocumentMenuItem (PintaCore.Workspace.OpenDocuments.IndexOf (doc));
+		AddDocumentMenuItem (workspace.OpenDocuments.IndexOf (doc));
 	}
 
 	public void RemoveDocument (Document doc)
@@ -98,7 +106,7 @@ public sealed class WindowActions
 	#region Private Methods
 	private void AddDocumentMenuItem (int idx)
 	{
-		var doc = PintaCore.Workspace.OpenDocuments[idx];
+		var doc = workspace.OpenDocuments[idx];
 		var action_id = $"app.{doc_action_id}({idx})";
 		var label = $"{doc.DisplayName}{(doc.IsDirty ? '*' : string.Empty)}";
 		var menu_item = Gio.MenuItem.New (label, action_id);
@@ -106,16 +114,16 @@ public sealed class WindowActions
 
 		// We only assign accelerators up to Alt-9
 		if (idx < 9)
-			PintaCore.Chrome.Application.SetAccelsForAction (action_id, new[] { $"<Alt>{idx + 1}" });
+			chrome.Application.SetAccelsForAction (action_id, new[] { $"<Alt>{idx + 1}" });
 	}
 
 	private void RebuildDocumentMenu ()
 	{
 		doc_section.RemoveAll ();
-		for (int i = 0; i < PintaCore.Workspace.OpenDocuments.Count; ++i)
+		for (int i = 0; i < workspace.OpenDocuments.Count; ++i)
 			AddDocumentMenuItem (i);
 
-		PintaCore.Workspace.ResetTitle ();
+		workspace.ResetTitle ();
 	}
 	#endregion
 }
