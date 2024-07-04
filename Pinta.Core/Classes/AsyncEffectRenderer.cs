@@ -56,19 +56,14 @@ internal abstract class AsyncEffectRenderer
 			int updateMilliseconds,
 			ThreadPriority threadPriority)
 		{
-			if (tileWidth < 0)
-				throw new ArgumentOutOfRangeException (nameof (tileWidth), "Cannot be negative");
-
-			if (tileHeight < 0)
-				throw new ArgumentOutOfRangeException (nameof (tileHeight), "Cannot be negative");
-
-			// TODO: Prepare the calling code and
-			//       instead of coercing values,
-			//       throw an exception
+			if (tileWidth < 0) throw new ArgumentOutOfRangeException (nameof (tileWidth), "Cannot be negative");
+			if (tileHeight < 0) throw new ArgumentOutOfRangeException (nameof (tileHeight), "Cannot be negative");
+			if (updateMilliseconds <= 0) throw new ArgumentOutOfRangeException (nameof (updateMilliseconds), "Strictly positive value expected");
+			if (threadCount < 1) throw new ArgumentOutOfRangeException (nameof (threadCount), "Invalid number of threads");
 			TileWidth = tileWidth;
 			TileHeight = tileHeight;
-			ThreadCount = Math.Clamp (threadCount, 1, int.MaxValue);
-			UpdateMillis = updateMilliseconds <= 0 ? 100 : updateMilliseconds;
+			ThreadCount = threadCount;
+			UpdateMillis = updateMilliseconds;
 			ThreadPriority = threadPriority;
 		}
 	}
