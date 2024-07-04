@@ -135,7 +135,7 @@ public sealed class LivePreviewManager
 			tileWidth: tileWidth,
 			tileHeight: tileHeight,
 			updateMilliseconds: 100,
-			threadPriority: ThreadPriority.Normal);
+			threadPriority: ThreadPriority.BelowNormal);
 
 		Debug.WriteLine (DateTime.Now.ToString ("HH:mm:ss:ffff") + "Start Live preview.");
 
