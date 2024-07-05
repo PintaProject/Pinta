@@ -51,7 +51,7 @@ public sealed class ImageConverterManager
 		// Create all the formats we have our own importers/exporters for
 
 		OraFormat oraHandler = new ();
-		FormatDescriptor oraFormatDescriptor = new ("OpenRaster", new[] { "ora", "ORA" }, new[] { "image/openraster" }, oraHandler, oraHandler);
+		FormatDescriptor oraFormatDescriptor = new ("OpenRaster", new[] { "ora", "ORA" }, new[] { "image/openraster" }, oraHandler, oraHandler, true);
 		yield return oraFormatDescriptor;
 
 		NetpbmPortablePixmap netpbmPortablePixmap = new ();
@@ -60,7 +60,8 @@ public sealed class ImageConverterManager
 			extensions: new[] { "ppm", "PPM" },
 			mimes: new[] { "image/x-portable-pixmap" }, // Not official, but conventional
 			importer: null,
-			exporter: netpbmPortablePixmap
+			exporter: netpbmPortablePixmap,
+			supportsLayers: false
 		);
 		yield return netpbmPortablePixmapDescriptor;
 	}
@@ -85,7 +86,7 @@ public sealed class ImageConverterManager
 		else
 			exporter = null;
 
-		var formatDescriptor = new FormatDescriptor (formatNameUpperCase, extensions, format.GetMimeTypes (), importer, exporter);
+		var formatDescriptor = new FormatDescriptor (formatNameUpperCase, extensions, format.GetMimeTypes (), importer, exporter, false);
 		return formatDescriptor;
 	}
 
