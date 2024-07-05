@@ -8,10 +8,10 @@ msgstr ""
 "Project-Id-Version: pinta\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2024-06-30 09:24-0400\n"
-"PO-Revision-Date: 2024-06-29 08:09+0000\n"
+"PO-Revision-Date: 2024-07-06 06:09+0000\n"
 "Last-Translator: Åke Engelbrektson <eson@svenskasprakfiler.se>\n"
-"Language-Team: Swedish <https://hosted.weblate.org/projects/pinta/pinta/sv/"
-">\n"
+"Language-Team: Swedish <https://hosted.weblate.org/projects/pinta/pinta/sv/>"
+"\n"
 "Language: sv\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -571,7 +571,7 @@ msgstr "Borttagen"
 
 #: ../Pinta.Effects/Effects/DentsEffect.cs:48
 msgid "Dents"
-msgstr ""
+msgstr "Bucklor"
 
 #: ../Pinta.Core/Actions/EditActions.cs:263
 msgid "Deselect"
@@ -2247,7 +2247,7 @@ msgstr "Transparent"
 
 #: ../Pinta.Effects/Effects/DentsEffect.cs:121
 msgid "Turbulence"
-msgstr ""
+msgstr "Turbulens"
 
 #: ../Pinta.Effects/Effects/TwistEffect.cs:24
 msgid "Twist"
