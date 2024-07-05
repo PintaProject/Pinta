@@ -148,30 +148,6 @@ internal sealed class SaveDocumentImplmentationAction : IActionHandler
 			if (directory is not null)
 				recent_files.LastDialogDirectory = directory;
 
-			// If the format doesn't support layers, ask to flatten the image
-			if (!format.SupportsLayers && document.Layers.Count() > 1)
-			{
-				string heading = Translations.GetString("This format does not support layers. Flatten image?");
-				string body = Translations.GetString("Flattening the image will merge all layers into a single layer.");
-
-				using var dialog = Adw.MessageDialog.New(chrome.MainWindow, heading, body);
-				dialog.AddResponse("cancel", Translations.GetString("_Cancel"));
-				dialog.AddResponse("flatten", Translations.GetString("Flatten"));
-				dialog.SetResponseAppearance("flatten", Adw.ResponseAppearance.Suggested);
-
-				dialog.CloseResponse = "cancel";
-				dialog.DefaultResponse = "flatten";
-
-				string response = dialog.RunBlocking();
-				if (response == "cancel")
-				{
-					continue; // Allow user to choose a different format or cancel
-				}
-
-				// Flatten the image
-				PintaCore.Actions.Image.Flatten.Activate();
-			}
-
 			// If saving the file failed or was cancelled, let the user select
 			// a different file type.
 			if (!SaveFile (document, file, format, chrome.MainWindow))
@@ -211,6 +187,26 @@ internal sealed class SaveDocumentImplmentationAction : IActionHandler
 				Translations.GetString ("Pinta does not support saving images in this file format."),
 				file.GetDisplayName ());
 			return false;
+		}
+
+		// If the format doesn't support layers, ask to flatten the image
+		if (!format.SupportsLayers && document.Layers.Count() > 1)
+		{
+			string heading = Translations.GetString("This format does not support layers. Flatten image?");
+			string body = Translations.GetString("Flattening the image will merge all layers into a single layer.");
+
+			using var dialog = Adw.MessageDialog.New(chrome.MainWindow, heading, body);
+			dialog.AddResponse("cancel", Translations.GetString("_Cancel"));
+			dialog.AddResponse("flatten", Translations.GetString("Flatten"));
+			dialog.SetResponseAppearance("flatten", Adw.ResponseAppearance.Suggested);
+
+			dialog.CloseResponse = "cancel";
+			dialog.DefaultResponse = "flatten";
+
+			string response = dialog.RunBlocking();
+
+			// Flatten the image
+			PintaCore.Actions.Image.Flatten.Activate();
 		}
 
 		// Commit any pending changes
