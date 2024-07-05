@@ -11,6 +11,7 @@ Thanks to the following contributors who worked on this release:
 - @zWolfrost
 - @ptixed
 - @logiclrd
+- @Matthieu-LAURENT39
 
 ### Added
 - Ported to GTK4 and libadwaita
@@ -35,6 +36,7 @@ Thanks to the following contributors who worked on this release:
 ### Changed
 - When building Pinta using the Makefile, 'dotnet publish' is now run during the build step rather than the install step.
 - Added a "Reseed" button for the random noise used by several effects (such as "Add Noise" and "Frosted Glass").  Previously, the noise pattern changed every time the effect was computed (including when other parameters were changed).
+- Saving an image with multiple layers to a format that does not support layers will now explicitely prompt the user to flatten the image before saving, rather than silently flattening it (#909)
 
 ### Fixed
 - Fixed issues where the system language settings on macOS did not properly take effect in Pinta ([#1976178](https://bugs.launchpad.net/pinta/+bug/1976178))
