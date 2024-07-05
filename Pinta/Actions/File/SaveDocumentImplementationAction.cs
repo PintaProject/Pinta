@@ -167,6 +167,9 @@ internal sealed class SaveDocumentImplmentationAction : IActionHandler
 				{
 					continue; // Allow user to choose a different format or cancel
 				}
+
+				// Flatten the image
+				PintaCore.Actions.Image.Flatten.Activate();
 			}
 
 			// If saving the file failed or was cancelled, let the user select
