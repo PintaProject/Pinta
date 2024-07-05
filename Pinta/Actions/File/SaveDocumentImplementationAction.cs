@@ -205,6 +205,9 @@ internal sealed class SaveDocumentImplmentationAction : IActionHandler
 
 			string response = dialog.RunBlocking();
 
+			if (response == "cancel")
+				return false;
+
 			// Flatten the image
 			PintaCore.Actions.Image.Flatten.Activate();
 		}
