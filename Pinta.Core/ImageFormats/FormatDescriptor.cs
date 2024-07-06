@@ -67,6 +67,11 @@ public sealed class FormatDescriptor
 	/// </summary>
 	public FileFilter Filter { get; }
 
+	/// <summary>
+	/// Whether the format supports layers.
+	/// </summary>
+	public bool SupportsLayers { get; }
+
 	/// <param name="displayPrefix">
 	/// A descriptive name for the format, such as "OpenRaster". This will be displayed
 	/// in the file dialog's filter.
@@ -75,8 +80,9 @@ public sealed class FormatDescriptor
 	/// <param name="mimes">A list of supported file MIME types (for example, "image/jpeg" and "image/png").</param>
 	/// <param name="importer">The importer for this file format, or null if importing is not supported.</param>
 	/// <param name="exporter">The exporter for this file format, or null if exporting is not supported.</param>
+	/// <param name="supportsLayers">Whether the format supports layers.</param>
 	public FormatDescriptor (string displayPrefix, IEnumerable<string> extensions, IEnumerable<string> mimes,
-				 IImageImporter? importer, IImageExporter? exporter)
+				 IImageImporter? importer, IImageExporter? exporter, bool supportsLayers = false)
 	{
 		if (importer == null && exporter == null)
 			throw new ArgumentException ("Format descriptor is initialized incorrectly", $"{nameof (importer)}, {nameof (exporter)}");
@@ -85,6 +91,7 @@ public sealed class FormatDescriptor
 		Mimes = mimes.ToReadOnlyCollection (); // Create a read-only copy
 		Importer = importer;
 		Exporter = exporter;
+		SupportsLayers = supportsLayers;
 
 		FileFilter ff = FileFilter.New ();
 		StringBuilder formatNames = new StringBuilder ();
