@@ -118,9 +118,11 @@ internal sealed class SaveDocumentImplmentationAction : IActionHandler
 		// If we already have a format, set it to the default.
 		// If not, default to jpeg
 		FormatDescriptor? format_desc = null;
+		FormatDescriptor? previous_format_desc = null;
 
 		if (document.HasFile)
-			format_desc = image_formats.GetFormatByFile (document.DisplayName);
+			previous_format_desc = image_formats.GetFormatByFile (document.DisplayName);
+			format_desc = previous_format_desc;
 
 		if (format_desc == null || format_desc.IsReadOnly ())
 			format_desc = image_formats.GetDefaultSaveFormat ();
@@ -142,6 +144,31 @@ internal sealed class SaveDocumentImplmentationAction : IActionHandler
 					format = filetypes[fcd.Filter];
 				else // Somehow, no file filter was selected...
 					format = image_formats.GetDefaultSaveFormat ();
+			}
+
+			// If the format doesn't support layers but the previous one did, ask to flatten the image
+			if (!format.SupportsLayers 
+				&& previous_format_desc?.SupportsLayers == true
+				&& document.Layers.Count() > 1)
+			{
+				string heading = Translations.GetString("This format does not support layers. Flatten image?");
+				string body = Translations.GetString("Flattening the image will merge all layers into a single layer.");
+
+				using var dialog = Adw.MessageDialog.New(chrome.MainWindow, heading, body);
+				dialog.AddResponse("cancel", Translations.GetString("_Cancel"));
+				dialog.AddResponse("flatten", Translations.GetString("Flatten"));
+				dialog.SetResponseAppearance("flatten", Adw.ResponseAppearance.Suggested);
+
+				dialog.CloseResponse = "cancel";
+				dialog.DefaultResponse = "flatten";
+
+				string response = dialog.RunBlocking();
+
+				if (response == "cancel")
+					return false;
+
+				// Flatten the image
+				PintaCore.Actions.Image.Flatten.Activate();
 			}
 
 			var directory = file.GetParent ();
@@ -187,29 +214,6 @@ internal sealed class SaveDocumentImplmentationAction : IActionHandler
 				Translations.GetString ("Pinta does not support saving images in this file format."),
 				file.GetDisplayName ());
 			return false;
-		}
-
-		// If the format doesn't support layers, ask to flatten the image
-		if (!format.SupportsLayers && document.Layers.Count() > 1)
-		{
-			string heading = Translations.GetString("This format does not support layers. Flatten image?");
-			string body = Translations.GetString("Flattening the image will merge all layers into a single layer.");
-
-			using var dialog = Adw.MessageDialog.New(chrome.MainWindow, heading, body);
-			dialog.AddResponse("cancel", Translations.GetString("_Cancel"));
-			dialog.AddResponse("flatten", Translations.GetString("Flatten"));
-			dialog.SetResponseAppearance("flatten", Adw.ResponseAppearance.Suggested);
-
-			dialog.CloseResponse = "cancel";
-			dialog.DefaultResponse = "flatten";
-
-			string response = dialog.RunBlocking();
-
-			if (response == "cancel")
-				return false;
-
-			// Flatten the image
-			PintaCore.Actions.Image.Flatten.Activate();
 		}
 
 		// Commit any pending changes
