@@ -120,9 +120,10 @@ internal sealed class SaveDocumentImplmentationAction : IActionHandler
 		FormatDescriptor? format_desc = null;
 		FormatDescriptor? previous_format_desc = null;
 
-		if (document.HasFile)
+		if (document.HasFile) {
 			previous_format_desc = image_formats.GetFormatByFile (document.DisplayName);
 			format_desc = previous_format_desc;
+		}
 
 		if (format_desc == null || format_desc.IsReadOnly ())
 			format_desc = image_formats.GetDefaultSaveFormat ();
