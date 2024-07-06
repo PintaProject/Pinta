@@ -165,7 +165,7 @@ internal sealed class SaveDocumentImplmentationAction : IActionHandler
 				string response = dialog.RunBlocking();
 
 				if (response == "cancel")
-					return false;
+					continue;
 
 				// Flatten the image
 				tools.Commit ();
