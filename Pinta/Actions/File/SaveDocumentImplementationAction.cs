@@ -168,6 +168,7 @@ internal sealed class SaveDocumentImplmentationAction : IActionHandler
 					return false;
 
 				// Flatten the image
+				tools.Commit ();
 				PintaCore.Actions.Image.Flatten.Activate();
 			}
 
