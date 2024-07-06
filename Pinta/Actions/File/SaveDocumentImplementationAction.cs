@@ -148,29 +148,28 @@ internal sealed class SaveDocumentImplmentationAction : IActionHandler
 			}
 
 			// If the format doesn't support layers but the previous one did, ask to flatten the image
-			if (!format.SupportsLayers 
+			if (!format.SupportsLayers
 				&& previous_format_desc?.SupportsLayers == true
-				&& document.Layers.Count() > 1)
-			{
-				string heading = Translations.GetString("This format does not support layers. Flatten image?");
-				string body = Translations.GetString("Flattening the image will merge all layers into a single layer.");
+				&& document.Layers.Count () > 1) {
+				string heading = Translations.GetString ("This format does not support layers. Flatten image?");
+				string body = Translations.GetString ("Flattening the image will merge all layers into a single layer.");
 
-				using var dialog = Adw.MessageDialog.New(chrome.MainWindow, heading, body);
-				dialog.AddResponse("cancel", Translations.GetString("_Cancel"));
-				dialog.AddResponse("flatten", Translations.GetString("Flatten"));
-				dialog.SetResponseAppearance("flatten", Adw.ResponseAppearance.Suggested);
+				using var dialog = Adw.MessageDialog.New (chrome.MainWindow, heading, body);
+				dialog.AddResponse ("cancel", Translations.GetString ("_Cancel"));
+				dialog.AddResponse ("flatten", Translations.GetString ("Flatten"));
+				dialog.SetResponseAppearance ("flatten", Adw.ResponseAppearance.Suggested);
 
 				dialog.CloseResponse = "cancel";
 				dialog.DefaultResponse = "flatten";
 
-				string response = dialog.RunBlocking();
+				string response = dialog.RunBlocking ();
 
 				if (response == "cancel")
 					continue;
 
 				// Flatten the image
 				tools.Commit ();
-				PintaCore.Actions.Image.Flatten.Activate();
+				PintaCore.Actions.Image.Flatten.Activate ();
 			}
 
 			var directory = file.GetParent ();
