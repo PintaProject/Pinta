@@ -8,10 +8,10 @@ msgstr ""
 "Project-Id-Version: pinta\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2024-07-07 01:20+0000\n"
-"PO-Revision-Date: 2024-07-01 16:09+0000\n"
+"PO-Revision-Date: 2024-07-08 17:09+0000\n"
 "Last-Translator: Oğuz Ersen <oguz@ersen.moe>\n"
-"Language-Team: Turkish <https://hosted.weblate.org/projects/pinta/pinta/tr/"
-">\n"
+"Language-Team: Turkish <https://hosted.weblate.org/projects/pinta/pinta/tr/>"
+"\n"
 "Language: tr\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -782,6 +782,8 @@ msgstr "Düzleştir"
 #: ../Pinta/Actions/File/SaveDocumentImplementationAction.cs:155
 msgid "Flattening the image will merge all layers into a single layer."
 msgstr ""
+"Görüntüyü düzleştirmek tüm katmanları tek bir katman halinde "
+"birleştirecektir."
 
 #: ../Pinta.Core/Actions/ImageActions.cs:58
 #: ../Pinta.Core/Actions/LayerActions.cs:67
@@ -2204,7 +2206,7 @@ msgstr "Kalınlık"
 
 #: ../Pinta/Actions/File/SaveDocumentImplementationAction.cs:154
 msgid "This format does not support layers. Flatten image?"
-msgstr ""
+msgstr "Bu biçim katmanları desteklemiyor. Görüntü düzleştirilsin mi?"
 
 #: ../Pinta.Effects/Effects/TileEffect.cs:23
 msgid "Tile Reflection"
