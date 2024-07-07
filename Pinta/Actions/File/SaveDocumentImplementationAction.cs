@@ -178,8 +178,12 @@ internal sealed class SaveDocumentImplmentationAction : IActionHandler
 
 			// If saving the file failed or was cancelled, let the user select
 			// a different file type.
-			if (!SaveFile (document, file, format, chrome.MainWindow))
+			if (!SaveFile (document, file, format, chrome.MainWindow)) {
+				// Re-set the current name and directory
+				fcd.SetCurrentName (display_name);
+				fcd.SetCurrentFolder (directory);
 				continue;
+			}
 
 			//The user is saving the Document to a new file, so technically it
 			//hasn't been saved to its associated file in this session.
