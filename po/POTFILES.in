@@ -305,6 +305,7 @@ Pinta.Tools/Tools/SelectTool.cs
 Pinta.Tools/Tools/ShapeTool.cs
 Pinta.Tools/Tools/TextTool.cs
 Pinta.Tools/Tools/ZoomTool.cs
+Pinta/ActionHandlers.cs
 Pinta/Actions/Addins/AddinManagerAction.cs
 Pinta/Actions/Edit/OffsetSelectionAction.cs
 Pinta/Actions/Edit/PasteAction.cs
@@ -337,7 +338,6 @@ Pinta/Actions/View/ToolBoxToggledAction.cs
 Pinta/Actions/Window/CloseAllDocumentsAction.cs
 Pinta/Actions/Window/SaveAllDocumentsAction.cs
 Pinta/AddinSetupService.cs
-Pinta/DialogHandlers.cs
 Pinta/Dialogs/ErrorDialog.cs
 Pinta/Dialogs/JpegCompressionDialog.cs
 Pinta/Dialogs/LayerPropertiesDialog.cs
