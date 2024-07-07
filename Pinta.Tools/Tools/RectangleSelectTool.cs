@@ -31,14 +31,17 @@ namespace Pinta.Tools;
 
 public sealed class RectangleSelectTool : SelectTool
 {
-	public RectangleSelectTool (IServiceProvider services) : base (services) { }
+	public RectangleSelectTool (IServiceProvider services) : base (services)
+	{
+		DefaultCursor = Gdk.Cursor.NewFromTexture (Resources.GetIcon ("Cursor.RectangleSelect.png"), 9, 18, null);
+	}
 
 	public override string Name => Translations.GetString ("Rectangle Select");
 	public override string Icon => Pinta.Resources.Icons.ToolSelectRectangle;
 	public override string StatusBarText => Translations.GetString (
 		"Click and drag to draw a rectangular selection." +
 		"\nHold Shift to constrain to a square.");
-	public override Gdk.Cursor DefaultCursor => Gdk.Cursor.NewFromTexture (Resources.GetIcon ("Cursor.RectangleSelect.png"), 9, 18, null);
+	public override Gdk.Cursor DefaultCursor { get; }
 	public override int Priority => 13;
 
 	protected override void DrawShape (Document document, RectangleD r, Layer l)

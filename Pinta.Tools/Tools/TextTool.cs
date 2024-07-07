@@ -96,8 +96,7 @@ public sealed class TextTool : BaseTool
 	public override string StatusBarText
 		=> Translations.GetString ("Left click to place cursor, then type desired text. Text color is primary color.");
 
-	public override Gdk.Cursor DefaultCursor
-		=> GdkExtensions.CursorFromName (Pinta.Resources.StandardCursors.Text);
+	public override Gdk.Cursor DefaultCursor { get; }
 
 	private readonly IWorkspaceService workspace;
 	private readonly IPaletteService palette;
@@ -118,6 +117,8 @@ public sealed class TextTool : BaseTool
 		im_context.OnPreeditEnd += OnPreeditEnd;
 
 		layout = new Pinta.Core.TextLayout ();
+
+		DefaultCursor = GdkExtensions.CursorFromName (Pinta.Resources.StandardCursors.Text);
 	}
 	#endregion
 
