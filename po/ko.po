@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: pinta\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-06-30 09:24-0400\n"
+"POT-Creation-Date: 2024-07-07 01:20+0000\n"
 "PO-Revision-Date: 2023-01-15 08:04+0000\n"
 "Last-Translator: Jongwon Kim <nanpa777@hanmail.net>\n"
 "Language-Team: Korean <ko@li.org>\n"
@@ -27,8 +27,8 @@ msgstr ""
 msgid " Selection Mode: "
 msgstr " 선택 모드 "
 
-#: ../Pinta.Core/Managers/EffectsManager.cs:58
-#: ../Pinta.Core/Managers/EffectsManager.cs:88
+#: ../Pinta.Core/Managers/EffectsManager.cs:70
+#: ../Pinta.Core/Managers/EffectsManager.cs:104
 msgid "..."
 msgstr "..."
 
@@ -56,13 +56,13 @@ msgstr ""
 msgid "About"
 msgstr "소개"
 
-#: ../Pinta/Actions/Help/AboutDialogAction.cs:50
+#: ../Pinta/Actions/Help/AboutDialogAction.cs:64
 msgid "About Pinta"
 msgstr "Pinta에 대하여"
 
-#: ../Pinta.Core/Actions/LayerActions.cs:48
-#: ../Pinta.Core/Actions/LayerActions.cs:329
-#: ../Pinta/Actions/Edit/PasteAction.cs:147
+#: ../Pinta.Core/Actions/LayerActions.cs:62
+#: ../Pinta.Core/Actions/LayerActions.cs:350
+#: ../Pinta/Actions/Edit/PasteAction.cs:174
 msgid "Add New Layer"
 msgstr "신규 레이어 추가"
 
@@ -70,11 +70,11 @@ msgstr "신규 레이어 추가"
 msgid "Add Noise"
 msgstr "잡티 섞기"
 
-#: ../Pinta.Core/Actions/AddinActions.cs:38
+#: ../Pinta.Core/Actions/AddinActions.cs:40
 msgid "Add-in Manager..."
 msgstr ""
 
-#: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:797
+#: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:815
 msgid "Added"
 msgstr ""
 
@@ -86,9 +86,9 @@ msgstr ""
 msgid "After select"
 msgstr "색 고른 후"
 
-#: ../Pinta.Core/Actions/EditActions.cs:375
+#: ../Pinta.Core/Actions/EditActions.cs:390
 #: ../Pinta.Gui.Addins/AddinManagerDialog.cs:289
-#: ../Pinta/Actions/File/OpenDocumentAction.cs:87
+#: ../Pinta/Actions/File/OpenDocumentAction.cs:106
 msgid "All files"
 msgstr "모든 파일"
 
@@ -100,7 +100,7 @@ msgstr "모든 파일"
 msgid "Amount"
 msgstr "총계"
 
-#: ../Pinta/Dialogs/ResizeCanvasDialog.cs:109
+#: ../Pinta/Dialogs/ResizeCanvasDialog.cs:111
 msgid "Anchor:"
 msgstr "저자:"
 
@@ -111,8 +111,8 @@ msgstr "저자:"
 #: ../Pinta.Effects/Effects/MotionBlurEffect.cs:121
 #: ../Pinta.Effects/Effects/RadialBlurEffect.cs:170
 #: ../Pinta.Effects/Effects/ReliefEffect.cs:80
-#: ../Pinta.Tools/Editable/EditEngines/ArrowedEditEngine.cs:298
-#: ../Pinta/Actions/Layers/RotateZoomLayerAction.cs:127
+#: ../Pinta.Tools/Editable/EditEngines/ArrowedEditEngine.cs:308
+#: ../Pinta/Actions/Layers/RotateZoomLayerAction.cs:140
 msgid "Angle"
 msgstr ""
 
@@ -128,7 +128,7 @@ msgstr "안티알리아싱 해제"
 msgid "Antialiasing On"
 msgstr "안티알리아싱 설정"
 
-#: ../Pinta.Tools/Editable/EditEngines/ArrowedEditEngine.cs:256
+#: ../Pinta.Tools/Editable/EditEngines/ArrowedEditEngine.cs:261
 msgid "Arrow"
 msgstr ""
 
@@ -147,7 +147,7 @@ msgstr ""
 msgid "Auto"
 msgstr "자동"
 
-#: ../Pinta.Core/Actions/ImageActions.cs:48
+#: ../Pinta.Core/Actions/ImageActions.cs:55
 msgid "Auto Crop"
 msgstr "자동으로 잘라내기"
 
@@ -160,7 +160,7 @@ msgstr "자동 색보정"
 msgid "Available in repository: {0}"
 msgstr ""
 
-#: ../Pinta.Core/Managers/WorkspaceManager.cs:176
+#: ../Pinta.Core/Managers/WorkspaceManager.cs:119
 msgid "Background"
 msgstr "배경색"
 
@@ -172,7 +172,7 @@ msgstr ""
 msgid "Background:"
 msgstr ""
 
-#: ../Pinta/Actions/Help/AboutDialogAction.cs:79
+#: ../Pinta/Actions/Help/AboutDialogAction.cs:93
 msgid "Based on the work of Paint.NET:"
 msgstr "이 무른모는 Paint.NET을 기반으로 합니다."
 
@@ -181,7 +181,7 @@ msgstr "이 무른모는 Paint.NET을 기반으로 합니다."
 msgid "Beautiful Italy"
 msgstr ""
 
-#: ../Pinta.Core/Actions/ViewActions.cs:69
+#: ../Pinta.Core/Actions/ViewActions.cs:71
 msgid "Best Fit"
 msgstr "최적 맞춤"
 
@@ -195,7 +195,7 @@ msgstr ""
 msgid "Black and White"
 msgstr "흑백변환"
 
-#: ../Pinta/Dialogs/LayerPropertiesDialog.cs:80
+#: ../Pinta/Dialogs/LayerPropertiesDialog.cs:82
 msgid "Blend Mode"
 msgstr ""
 
@@ -217,7 +217,7 @@ msgstr "파랑 "
 msgid "Blurs"
 msgstr "흐릿하게 만들기"
 
-#: ../Pinta.Tools/Tools/TextTool.cs:161
+#: ../Pinta.Tools/Tools/TextTool.cs:178
 msgid "Bold"
 msgstr "굵게"
 
@@ -239,7 +239,7 @@ msgstr "밝기 / 대비"
 msgid "Brush Size"
 msgstr "붓 크기"
 
-#: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:254
+#: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:272
 #: ../Pinta.Tools/Tools/BaseBrushTool.cs:101
 msgid "Brush width"
 msgstr "브러시 너비"
@@ -253,23 +253,23 @@ msgstr "부풀리기"
 msgid "Burkes"
 msgstr ""
 
-#: ../Pinta/Dialogs/ResizeCanvasDialog.cs:99
-#: ../Pinta/Dialogs/ResizeImageDialog.cs:174
+#: ../Pinta/Dialogs/ResizeCanvasDialog.cs:101
+#: ../Pinta/Dialogs/ResizeImageDialog.cs:178
 msgid "By absolute size:"
 msgstr "절대 크기 기준:"
 
-#: ../Pinta/Dialogs/ResizeCanvasDialog.cs:57
-#: ../Pinta/Dialogs/ResizeImageDialog.cs:167
+#: ../Pinta/Dialogs/ResizeCanvasDialog.cs:59
+#: ../Pinta/Dialogs/ResizeImageDialog.cs:171
 msgid "By percentage:"
 msgstr "백분율 기준:"
 
-#: ../Pinta.Core/Actions/EditActions.cs:360
-#: ../Pinta.Core/Actions/EditActions.cs:403
-#: ../Pinta.Core/Actions/LayerActions.cs:167
+#: ../Pinta.Core/Actions/EditActions.cs:375
+#: ../Pinta.Core/Actions/EditActions.cs:418
+#: ../Pinta.Core/Actions/LayerActions.cs:188
 #: ../Pinta.Gui.Addins/AddinManagerDialog.cs:249
 #: ../Pinta.Gui.Addins/InstallDialog.cs:111
-#: ../Pinta/Actions/File/OpenDocumentAction.cs:54
-#: ../Pinta/Actions/File/SaveDocumentImplementationAction.cs:71
+#: ../Pinta/Actions/File/OpenDocumentAction.cs:73
+#: ../Pinta/Actions/File/SaveDocumentImplementationAction.cs:90
 msgid "Cancel"
 msgstr ""
 
@@ -281,7 +281,7 @@ msgstr ""
 msgid "Cell Size"
 msgstr "셀 크기"
 
-#: ../Pinta.Tools/Tools/TextTool.cs:213
+#: ../Pinta.Tools/Tools/TextTool.cs:230
 msgid "Center Align"
 msgstr "가운데 정렬"
 
@@ -293,11 +293,11 @@ msgstr "중앙 오프셋"
 msgid "Centered"
 msgstr ""
 
-#: ../Pinta.Core/Actions/ViewActions.cs:149
+#: ../Pinta.Core/Actions/ViewActions.cs:154
 msgid "Centimeters"
 msgstr "센티미터"
 
-#: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:341
+#: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:359
 msgid "Changed Shape Type"
 msgstr ""
 
@@ -383,24 +383,24 @@ msgstr ""
 msgid "Clipboard"
 msgstr ""
 
-#: ../Pinta.Tools/Tools/CloneStampTool.cs:44
+#: ../Pinta.Tools/Tools/CloneStampTool.cs:46
 msgid "Clone Stamp"
 msgstr "따라그리기"
 
-#: ../Pinta.Core/Actions/FileActions.cs:50
+#: ../Pinta.Core/Actions/FileActions.cs:54
 #: ../Pinta.Gui.Addins/InstallDialog.cs:316
 msgid "Close"
 msgstr "닫기"
 
-#: ../Pinta.Core/Actions/WindowActions.cs:41
+#: ../Pinta.Core/Actions/WindowActions.cs:46
 msgid "Close All"
 msgstr "모두 닫기"
 
-#: ../Pinta.Tools/Editable/EditEngines/RectangleEditEngine.cs:34
+#: ../Pinta.Tools/Editable/EditEngines/RectangleEditEngine.cs:36
 msgid "Closed Curve Shape"
 msgstr ""
 
-#: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:318
+#: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:336
 msgid "Closed Line/Curve Series"
 msgstr ""
 
@@ -441,7 +441,7 @@ msgstr "색 범위"
 msgid "Color Saturation"
 msgstr "채도"
 
-#: ../Pinta.Core/Actions/ViewActions.cs:181
+#: ../Pinta.Core/Actions/ViewActions.cs:186
 #: ../Pinta.Effects/Effects/CloudsEffect.cs:191
 #: ../Pinta.Effects/Effects/JuliaFractalEffect.cs:184
 #: ../Pinta.Effects/Effects/MandelbrotFractalEffect.cs:202
@@ -466,7 +466,7 @@ msgstr ""
 msgid "Conical Gradient"
 msgstr "원추형 그라데이션"
 
-#: ../Pinta.Core/Actions/HelpActions.cs:40
+#: ../Pinta.Core/Actions/HelpActions.cs:44
 msgid "Contents"
 msgstr "내용"
 
@@ -479,15 +479,15 @@ msgstr "내부"
 msgid "Contrast"
 msgstr "대비"
 
-#: ../Pinta.Core/Actions/EditActions.cs:62
+#: ../Pinta.Core/Actions/EditActions.cs:71
 msgid "Copy"
 msgstr "복사"
 
-#: ../Pinta.Core/Actions/EditActions.cs:63
+#: ../Pinta.Core/Actions/EditActions.cs:72
 msgid "Copy Merged"
 msgstr ""
 
-#: ../Pinta/Actions/Help/AboutDialogAction.cs:66
+#: ../Pinta/Actions/Help/AboutDialogAction.cs:80
 msgid "Copyright"
 msgstr "저작권"
 
@@ -497,14 +497,14 @@ msgid "Cotton Candy"
 msgstr ""
 
 #. Translators: {0} is the name of a layer, and {1} is the path to a .ora file.
-#: ../Pinta.Core/ImageFormats/OraFormat.cs:122
+#: ../Pinta.Core/ImageFormats/OraFormat.cs:129
 #, csharp-format
 msgid "Could not import layer \"{0}\" from {1}"
 msgstr ""
 
-#: ../Pinta.Core/Classes/Palette.cs:196
-#: ../Pinta.Core/Managers/WorkspaceManager.cs:378
-#: ../Pinta.Core/Managers/WorkspaceManager.cs:385
+#: ../Pinta.Core/Classes/Palette.cs:191
+#: ../Pinta.Core/Managers/WorkspaceManager.cs:402
+#: ../Pinta.Core/Managers/WorkspaceManager.cs:410
 #, csharp-format
 msgid "Could not open file: {0}"
 msgstr "열 수 없는 파일 : {0}"
@@ -513,8 +513,8 @@ msgstr "열 수 없는 파일 : {0}"
 msgid "Coverage"
 msgstr ""
 
-#: ../Pinta.Core/Actions/ImageActions.cs:47
-#: ../Pinta.Core/Actions/ImageActions.cs:284
+#: ../Pinta.Core/Actions/ImageActions.cs:54
+#: ../Pinta.Core/Actions/ImageActions.cs:295
 msgid "Crop to Selection"
 msgstr "선택영역 잘라내기"
 
@@ -530,13 +530,13 @@ msgstr "커브"
 msgid "Custom"
 msgstr ""
 
-#: ../Pinta.Core/Actions/EditActions.cs:61
-#: ../Pinta.Core/Actions/EditActions.cs:251
+#: ../Pinta.Core/Actions/EditActions.cs:70
+#: ../Pinta.Core/Actions/EditActions.cs:266
 msgid "Cut"
 msgstr "오려두기"
 
 #. Translators: This refers to using a dark variant of the color scheme.
-#: ../Pinta.Core/Actions/ViewActions.cs:189
+#: ../Pinta.Core/Actions/ViewActions.cs:194
 msgid "Dark"
 msgstr ""
 
@@ -549,28 +549,29 @@ msgid "Dash"
 msgstr ""
 
 #. Translators: This refers to using the system's default color scheme.
-#: ../Pinta.Core/Actions/ViewActions.cs:185
+#: ../Pinta.Core/Actions/ViewActions.cs:190
 msgid "Default"
 msgstr ""
 
-#: ../Pinta.Core/Actions/LayerActions.cs:49
-#: ../Pinta.Core/Actions/LayerActions.cs:312
+#: ../Pinta.Core/Actions/LayerActions.cs:63
+#: ../Pinta.Core/Actions/LayerActions.cs:333
 msgid "Delete Layer"
 msgstr "레이어 삭제"
 
-#: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:642
+#: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:660
 msgid "Deleted"
 msgstr ""
 
+#. Translators: This refers to an image distortion that creates small, random warps or distortions in the image, like tiny dents, bumps, or waves
 #: ../Pinta.Effects/Effects/DentsEffect.cs:48
 msgid "Dents"
 msgstr ""
 
-#: ../Pinta.Core/Actions/EditActions.cs:263
+#: ../Pinta.Core/Actions/EditActions.cs:278
 msgid "Deselect"
 msgstr "선택해제"
 
-#: ../Pinta.Core/Actions/EditActions.cs:72
+#: ../Pinta.Core/Actions/EditActions.cs:81
 msgid "Deselect All"
 msgstr "전체 선택해제"
 
@@ -614,12 +615,12 @@ msgstr "계속 색 고르기"
 msgid "Download size: {0}"
 msgstr ""
 
-#: ../Pinta.Core/Actions/LayerActions.cs:50
-#: ../Pinta.Core/Actions/LayerActions.cs:303
+#: ../Pinta.Core/Actions/LayerActions.cs:64
+#: ../Pinta.Core/Actions/LayerActions.cs:324
 msgid "Duplicate Layer"
 msgstr "레이어 복제"
 
-#: ../xdg/pinta.desktop.in.h:2 ../Pinta/Actions/Help/AboutDialogAction.cs:56
+#: ../xdg/pinta.desktop.in.h:2 ../Pinta/Actions/Help/AboutDialogAction.cs:70
 msgid "Easily create and edit images"
 msgstr "쉽게 이미지를 생성하고 편집하세요."
 
@@ -644,9 +645,9 @@ msgstr ""
 msgid "Electric"
 msgstr ""
 
-#: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:319
-#: ../Pinta.Tools/Editable/EditEngines/EllipseEditEngine.cs:34
-#: ../Pinta.Tools/Tools/EllipseTool.cs:39
+#: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:337
+#: ../Pinta.Tools/Editable/EditEngines/EllipseEditEngine.cs:35
+#: ../Pinta.Tools/Tools/EllipseTool.cs:43
 msgid "Ellipse"
 msgstr "타원"
 
@@ -662,8 +663,8 @@ msgstr "돋을새김"
 msgid "Enable additional logging or behavior changes for debugging"
 msgstr ""
 
-#: ../Pinta.Core/Actions/EditActions.cs:67
-#: ../Pinta.Core/Actions/EditActions.cs:252
+#: ../Pinta.Core/Actions/EditActions.cs:76
+#: ../Pinta.Core/Actions/EditActions.cs:267
 msgid "Erase Selection"
 msgstr "선택 영역 지우기"
 
@@ -671,7 +672,7 @@ msgstr "선택 영역 지우기"
 msgid "Eraser"
 msgstr "지우개"
 
-#: ../Pinta.Core/ImageFormats/OraFormat.cs:123
+#: ../Pinta.Core/ImageFormats/OraFormat.cs:130
 msgid "Error"
 msgstr "오류"
 
@@ -684,7 +685,7 @@ msgid "Exclude (-) (Right Click)"
 msgstr "빼기(-) (오른쪽 클릭)"
 
 #. Translators: This refers to expanding the canvas size when pasting a larger image.
-#: ../Pinta/Actions/Edit/PasteAction.cs:196
+#: ../Pinta/Actions/Edit/PasteAction.cs:223
 msgid "Expand"
 msgstr ""
 
@@ -697,7 +698,7 @@ msgstr ""
 msgid "Factor"
 msgstr ""
 
-#: ../Pinta/Actions/File/NewScreenshotAction.cs:67
+#: ../Pinta/Actions/File/NewScreenshotAction.cs:80
 msgid "Failed to access XDG Desktop Portals"
 msgstr ""
 
@@ -709,20 +710,20 @@ msgstr ""
 msgid "Failed to load extension package"
 msgstr ""
 
-#: ../Pinta.Core/Managers/WorkspaceManager.cs:401
+#: ../Pinta.Core/Managers/WorkspaceManager.cs:428
 msgid "Failed to open image"
 msgstr ""
 
-#: ../Pinta/Actions/File/SaveDocumentImplementationAction.cs:185
+#: ../Pinta/Actions/File/SaveDocumentImplementationAction.cs:232
 msgid "Failed to save image"
 msgstr ""
 
-#: ../Pinta/Actions/File/NewScreenshotAction.cs:66
-#: ../Pinta/Actions/File/NewScreenshotAction.cs:91
+#: ../Pinta/Actions/File/NewScreenshotAction.cs:79
+#: ../Pinta/Actions/File/NewScreenshotAction.cs:104
 msgid "Failed to take screenshot"
 msgstr ""
 
-#: ../Pinta.Core/Actions/HelpActions.cs:42
+#: ../Pinta.Core/Actions/HelpActions.cs:46
 msgid "File a Bug"
 msgstr "버그 정보 파일"
 
@@ -730,32 +731,32 @@ msgstr "버그 정보 파일"
 msgid "Files to open"
 msgstr ""
 
-#: ../Pinta.Tools/Tools/TextTool.cs:251
+#: ../Pinta.Tools/Tools/TextTool.cs:268
 msgid "Fill Background"
 msgstr "배경 채우기"
 
-#: ../Pinta.Core/Actions/EditActions.cs:68
-#: ../Pinta.Core/Actions/EditActions.cs:213
+#: ../Pinta.Core/Actions/EditActions.cs:77
+#: ../Pinta.Core/Actions/EditActions.cs:228
 msgid "Fill Selection"
 msgstr "선택 영역 채우기"
 
-#: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:294
+#: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:312
 #: ../Pinta.Tools/Tools/FreeformShapeTool.cs:222
 msgid "Fill Shape"
 msgstr "채움 모양"
 
-#: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:284
+#: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:302
 #: ../Pinta.Tools/Tools/FreeformShapeTool.cs:215
 msgid "Fill Style"
 msgstr "채움 방식"
 
-#: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:295
+#: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:313
 #: ../Pinta.Tools/Tools/FreeformShapeTool.cs:223
 msgid "Fill and Outline Shape"
 msgstr "채움과 외곽선 모양"
 
-#: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:1065
-#: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:1329
+#: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:1083
+#: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:1347
 msgid "Finalized"
 msgstr ""
 
@@ -763,13 +764,18 @@ msgstr ""
 msgid "Finish Pixels"
 msgstr ""
 
-#: ../Pinta.Core/Actions/ImageActions.cs:56
-#: ../Pinta.Core/Actions/ImageActions.cs:152
+#: ../Pinta.Core/Actions/ImageActions.cs:63
+#: ../Pinta.Core/Actions/ImageActions.cs:163
+#: ../Pinta/Actions/File/SaveDocumentImplementationAction.cs:159
 msgid "Flatten"
 msgstr "편평하게"
 
-#: ../Pinta.Core/Actions/ImageActions.cs:51
-#: ../Pinta.Core/Actions/LayerActions.cs:53
+#: ../Pinta/Actions/File/SaveDocumentImplementationAction.cs:155
+msgid "Flattening the image will merge all layers into a single layer."
+msgstr ""
+
+#: ../Pinta.Core/Actions/ImageActions.cs:58
+#: ../Pinta.Core/Actions/LayerActions.cs:67
 msgid "Flip Horizontal"
 msgstr "수평 뒤집기"
 
@@ -789,8 +795,8 @@ msgstr "레이어 수평 뒤집기"
 msgid "Flip Layer Vertical"
 msgstr "레이어 수직 뒤집기"
 
-#: ../Pinta.Core/Actions/ImageActions.cs:52
-#: ../Pinta.Core/Actions/LayerActions.cs:54
+#: ../Pinta.Core/Actions/ImageActions.cs:59
+#: ../Pinta.Core/Actions/LayerActions.cs:68
 msgid "Flip Vertical"
 msgstr "수직 뒤집기"
 
@@ -808,7 +814,7 @@ msgstr ""
 msgid "Floyd-Steinberg Lite"
 msgstr ""
 
-#: ../Pinta.Tools/Tools/TextTool.cs:137
+#: ../Pinta.Tools/Tools/TextTool.cs:154
 msgid "Font"
 msgstr "글꼴"
 
@@ -828,7 +834,7 @@ msgstr "자유도형 그리기"
 msgid "Frosted Glass"
 msgstr "젖빛 유리 씌우기"
 
-#: ../Pinta.Core/Actions/ViewActions.cs:80
+#: ../Pinta.Core/Actions/ViewActions.cs:82
 msgid "Fullscreen"
 msgstr "전체화면"
 
@@ -868,12 +874,12 @@ msgid "Hard Light"
 msgstr ""
 
 #: ../Pinta/Dialogs/NewImageDialog.cs:333
-#: ../Pinta/Dialogs/ResizeCanvasDialog.cs:79
-#: ../Pinta/Dialogs/ResizeImageDialog.cs:160
+#: ../Pinta/Dialogs/ResizeCanvasDialog.cs:81
+#: ../Pinta/Dialogs/ResizeImageDialog.cs:164
 msgid "Height:"
 msgstr "높이:"
 
-#: ../Pinta/Actions/Layers/LayerPropertiesAction.cs:106
+#: ../Pinta/Actions/Layers/LayerPropertiesAction.cs:119
 msgid "Hide Layer"
 msgstr "레이어 숨기기"
 
@@ -910,11 +916,11 @@ msgstr ""
 msgid "Hue / Saturation"
 msgstr "색조 / 채도"
 
-#: ../Pinta/Actions/File/SaveDocumentImplementationAction.cs:180
+#: ../Pinta/Actions/File/SaveDocumentImplementationAction.cs:227
 msgid "ICO files can not be larger than 255 x 255 pixels."
 msgstr "ICO 파일은 255 x 255 픽셀보다 클 수 없습니다."
 
-#: ../Pinta/Actions/File/CloseDocumentAction.cs:59
+#: ../Pinta/Actions/File/CloseDocumentAction.cs:75
 msgid "If you don't save, all changes will be permanently lost."
 msgstr "저장하지 않으면, 모든 변경 사항을 잃어버립니다"
 
@@ -926,36 +932,36 @@ msgstr "이미지"
 msgid "Image Editor"
 msgstr "이미지 편집기"
 
-#: ../Pinta.Core/Actions/ViewActions.cs:73
+#: ../Pinta.Core/Actions/ViewActions.cs:75
 msgid "Image Tabs"
 msgstr "이미지 탭"
 
-#: ../Pinta/Actions/Edit/PasteAction.cs:177
+#: ../Pinta/Actions/Edit/PasteAction.cs:204
 msgid "Image cannot be pasted"
 msgstr "이미지를 붙여넣을 수 없음"
 
-#: ../Pinta.Core/Actions/LayerActions.cs:193
-#: ../Pinta/Actions/File/OpenDocumentAction.cs:96
+#: ../Pinta.Core/Actions/LayerActions.cs:214
+#: ../Pinta/Actions/File/OpenDocumentAction.cs:115
 msgid "Image files"
 msgstr "이미지 파일"
 
-#: ../Pinta/Actions/Edit/PasteAction.cs:184
+#: ../Pinta/Actions/Edit/PasteAction.cs:211
 msgid "Image larger than canvas"
 msgstr "캔버스보다 큰 이미지"
 
-#: ../Pinta/Actions/File/SaveDocumentImplementationAction.cs:179
+#: ../Pinta/Actions/File/SaveDocumentImplementationAction.cs:226
 msgid "Image too large"
 msgstr "너무 큰 이미지"
 
-#: ../Pinta.Core/Actions/LayerActions.cs:220
+#: ../Pinta.Core/Actions/LayerActions.cs:241
 msgid "Import From File"
 msgstr "파일에서 가져오기"
 
-#: ../Pinta.Core/Actions/LayerActions.cs:52
+#: ../Pinta.Core/Actions/LayerActions.cs:66
 msgid "Import from File..."
 msgstr "파일에서 가져오기..."
 
-#: ../Pinta.Core/Actions/ViewActions.cs:148
+#: ../Pinta.Core/Actions/ViewActions.cs:153
 msgid "Inches"
 msgstr "인치"
 
@@ -1013,12 +1019,12 @@ msgstr ""
 msgid "Invert Colors"
 msgstr "색 반전"
 
-#: ../Pinta.Core/Actions/EditActions.cs:69
-#: ../Pinta.Core/Actions/EditActions.cs:457
+#: ../Pinta.Core/Actions/EditActions.cs:78
+#: ../Pinta.Core/Actions/EditActions.cs:472
 msgid "Invert Selection"
 msgstr "선택 영역 반전"
 
-#: ../Pinta.Tools/Tools/TextTool.cs:173
+#: ../Pinta.Tools/Tools/TextTool.cs:190
 msgid "Italic"
 msgstr "기울임"
 
@@ -1051,16 +1057,16 @@ msgstr "레이어"
 msgid "Layer Hidden"
 msgstr "숨긴 레이어"
 
-#: ../Pinta/Actions/Layers/LayerPropertiesAction.cs:96
+#: ../Pinta/Actions/Layers/LayerPropertiesAction.cs:109
 msgid "Layer Opacity"
 msgstr "레이어 투명도"
 
-#: ../Pinta/Actions/Layers/LayerPropertiesAction.cs:111
-#: ../Pinta/Dialogs/LayerPropertiesDialog.cs:134
+#: ../Pinta/Actions/Layers/LayerPropertiesAction.cs:124
+#: ../Pinta/Dialogs/LayerPropertiesDialog.cs:136
 msgid "Layer Properties"
 msgstr "레이어 속성"
 
-#: ../Pinta.Core/Actions/LayerActions.cs:58
+#: ../Pinta.Core/Actions/LayerActions.cs:72
 msgid "Layer Properties..."
 msgstr "레이어 속성.."
 
@@ -1078,11 +1084,11 @@ msgstr ""
 msgid "Layers"
 msgstr "레이어"
 
-#: ../Pinta.Tools/Tools/TextTool.cs:201
+#: ../Pinta.Tools/Tools/TextTool.cs:218
 msgid "Left Align"
 msgstr "왼쪽 정렬"
 
-#: ../Pinta.Tools/Tools/MoveSelectedTool.cs:45
+#: ../Pinta.Tools/Tools/MoveSelectedTool.cs:49
 #, csharp-format
 msgid ""
 "Left click and drag the selection to move selected content.\n"
@@ -1092,7 +1098,7 @@ msgid ""
 "Use arrow keys to move selected content by a single pixel."
 msgstr ""
 
-#: ../Pinta.Tools/Tools/MoveSelectionTool.cs:44
+#: ../Pinta.Tools/Tools/MoveSelectionTool.cs:48
 #, csharp-format
 msgid ""
 "Left click and drag the selection to move selection outline.\n"
@@ -1103,7 +1109,7 @@ msgid ""
 msgstr ""
 
 #. Translators: {0} is 'Ctrl', or a platform-specific key such as 'Command' on macOS.
-#: ../Pinta.Tools/Tools/ShapeTool.cs:49
+#: ../Pinta.Tools/Tools/ShapeTool.cs:58
 #, csharp-format
 msgid ""
 "Left click to draw a shape with the primary color.\n"
@@ -1149,7 +1155,7 @@ msgid ""
 msgstr ""
 "기본색으로 채우려면 왼쪽 클릭. 보조색으로 채우려면 오른쪽 클릭을 하세요."
 
-#: ../Pinta.Tools/Tools/TextTool.cs:90
+#: ../Pinta.Tools/Tools/TextTool.cs:97
 msgid ""
 "Left click to place cursor, then type desired text. Text color is primary "
 "color."
@@ -1188,7 +1194,7 @@ msgid ""
 "Click and drag to zoom in selection."
 msgstr ""
 
-#: ../Pinta.Tools/Editable/EditEngines/ArrowedEditEngine.cs:318
+#: ../Pinta.Tools/Editable/EditEngines/ArrowedEditEngine.cs:330
 msgid "Length"
 msgstr ""
 
@@ -1200,12 +1206,12 @@ msgstr "레벨"
 msgid "Levels Adjustment"
 msgstr "색보정"
 
-#: ../Pinta/Actions/Help/AboutDialogAction.cs:75
+#: ../Pinta/Actions/Help/AboutDialogAction.cs:89
 msgid "License"
 msgstr "사용권"
 
 #. Translators: This refers to using a light variant of the color scheme.
-#: ../Pinta.Core/Actions/ViewActions.cs:187
+#: ../Pinta.Core/Actions/ViewActions.cs:192
 msgid "Light"
 msgstr ""
 
@@ -1226,7 +1232,7 @@ msgstr "명도"
 msgid "Lime Lemon"
 msgstr ""
 
-#: ../Pinta.Tools/Tools/LineCurveTool.cs:39
+#: ../Pinta.Tools/Tools/LineCurveTool.cs:41
 msgid "Line/Curve"
 msgstr ""
 
@@ -1259,8 +1265,8 @@ msgstr "요술봉 선택"
 msgid "Main Menu"
 msgstr ""
 
-#: ../Pinta/Dialogs/ResizeCanvasDialog.cs:103
-#: ../Pinta/Dialogs/ResizeImageDialog.cs:119
+#: ../Pinta/Dialogs/ResizeCanvasDialog.cs:105
+#: ../Pinta/Dialogs/ResizeImageDialog.cs:123
 msgid "Maintain aspect ratio"
 msgstr "비율 유지"
 
@@ -1272,8 +1278,8 @@ msgstr "만델브로트의 프랙탈"
 msgid "Median"
 msgstr "뭉개기"
 
-#: ../Pinta.Core/Actions/LayerActions.cs:51
-#: ../Pinta.Core/Actions/LayerActions.cs:281
+#: ../Pinta.Core/Actions/LayerActions.cs:65
+#: ../Pinta.Core/Actions/LayerActions.cs:302
 msgid "Merge Layer Down"
 msgstr "레이어 합치기"
 
@@ -1281,7 +1287,7 @@ msgstr "레이어 합치기"
 msgid "Mode"
 msgstr ""
 
-#: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:881
+#: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:899
 msgid "Modified"
 msgstr ""
 
@@ -1293,21 +1299,21 @@ msgstr ""
 msgid "Motion Blur"
 msgstr "움직임 효과"
 
-#: ../Pinta.Core/Actions/LayerActions.cs:57
-#: ../Pinta.Core/Actions/LayerActions.cs:267
+#: ../Pinta.Core/Actions/LayerActions.cs:71
+#: ../Pinta.Core/Actions/LayerActions.cs:288
 msgid "Move Layer Down"
 msgstr "레이어 아래로 보내기"
 
-#: ../Pinta.Core/Actions/LayerActions.cs:56
-#: ../Pinta.Core/Actions/LayerActions.cs:256
+#: ../Pinta.Core/Actions/LayerActions.cs:70
+#: ../Pinta.Core/Actions/LayerActions.cs:277
 msgid "Move Layer Up"
 msgstr "레이어 위로 보내기"
 
-#: ../Pinta.Tools/Tools/MoveSelectedTool.cs:41
+#: ../Pinta.Tools/Tools/MoveSelectedTool.cs:45
 msgid "Move Selected Pixels"
 msgstr "선택 영역 이동"
 
-#: ../Pinta.Tools/Tools/MoveSelectionTool.cs:40
+#: ../Pinta.Tools/Tools/MoveSelectionTool.cs:44
 msgid "Move Selection"
 msgstr "선택한 부분 옮기기"
 
@@ -1315,7 +1321,7 @@ msgstr "선택한 부분 옮기기"
 msgid "Multiply"
 msgstr "곱하기"
 
-#: ../Pinta/Dialogs/LayerPropertiesDialog.cs:65
+#: ../Pinta/Dialogs/LayerPropertiesDialog.cs:67
 msgid "Name:"
 msgstr "이름:"
 
@@ -1323,24 +1329,24 @@ msgstr "이름:"
 msgid "Nearest Neighbor"
 msgstr ""
 
-#: ../Pinta.Core/Actions/FileActions.cs:55
+#: ../Pinta.Core/Actions/FileActions.cs:59
 msgid "New"
 msgstr "새 파일"
 
-#: ../Pinta.Core/Managers/WorkspaceManager.cs:184
+#: ../Pinta.Core/Managers/WorkspaceManager.cs:127
 #: ../Pinta/Dialogs/NewImageDialog.cs:196
 msgid "New Image"
 msgstr "새 그림"
 
-#: ../Pinta.Core/Actions/FileActions.cs:47
+#: ../Pinta.Core/Actions/FileActions.cs:51
 msgid "New Screenshot..."
 msgstr "새로운 스크린샷..."
 
-#: ../Pinta/Actions/Edit/ResizePaletteAction.cs:49
+#: ../Pinta/Actions/Edit/ResizePaletteAction.cs:62
 msgid "New palette size:"
 msgstr "새 팔렛트 크기:"
 
-#: ../Pinta.Core/Actions/FileActions.cs:46
+#: ../Pinta.Core/Actions/FileActions.cs:50
 msgid "New..."
 msgstr "새로 만듦..."
 
@@ -1356,7 +1362,7 @@ msgstr "노이즈"
 
 #: ../Pinta.Core/Effects/UserBlendOps.cs:31
 #: ../Pinta.Tools/Brushes/PlainBrush.cs:35
-#: ../Pinta.Tools/Tools/EraserTool.cs:262 ../Pinta.Tools/Tools/TextTool.cs:248
+#: ../Pinta.Tools/Tools/EraserTool.cs:262 ../Pinta.Tools/Tools/TextTool.cs:265
 msgid "Normal"
 msgstr "보통"
 
@@ -1364,11 +1370,11 @@ msgstr "보통"
 msgid "Normal Blending"
 msgstr "평균 혼합"
 
-#: ../Pinta.Core/Actions/ViewActions.cs:71
+#: ../Pinta.Core/Actions/ViewActions.cs:73
 msgid "Normal Size"
 msgstr ""
 
-#: ../Pinta.Tools/Tools/TextTool.cs:249
+#: ../Pinta.Tools/Tools/TextTool.cs:266
 msgid "Normal and Outline"
 msgstr "보통 과 외곽선"
 
@@ -1388,8 +1394,8 @@ msgstr ""
 msgid "Offset"
 msgstr ""
 
-#: ../Pinta.Core/Actions/EditActions.cs:70
-#: ../Pinta/Actions/Edit/OffsetSelectionAction.cs:57
+#: ../Pinta.Core/Actions/EditActions.cs:79
+#: ../Pinta/Actions/Edit/OffsetSelectionAction.cs:74
 #: ../Pinta/Dialogs/OffsetSelectionDialog.cs:44
 msgid "Offset Selection"
 msgstr ""
@@ -1398,41 +1404,41 @@ msgstr ""
 msgid "Oil Painting"
 msgstr "유화효과"
 
-#: ../Pinta/Dialogs/LayerPropertiesDialog.cs:96
+#: ../Pinta/Dialogs/LayerPropertiesDialog.cs:98
 msgid "Opacity:"
 msgstr "투명도:"
 
-#: ../Pinta.Core/Actions/EditActions.cs:359
-#: ../Pinta.Core/Actions/FileActions.cs:56
-#: ../Pinta.Core/Actions/LayerActions.cs:166
+#: ../Pinta.Core/Actions/EditActions.cs:374
+#: ../Pinta.Core/Actions/FileActions.cs:60
+#: ../Pinta.Core/Actions/LayerActions.cs:187
 #: ../Pinta.Gui.Addins/AddinManagerDialog.cs:248
-#: ../Pinta/Actions/File/OpenDocumentAction.cs:53
+#: ../Pinta/Actions/File/OpenDocumentAction.cs:72
 msgid "Open"
 msgstr "열기"
 
-#: ../Pinta.Tools/Editable/EditEngines/LineCurveEditEngine.cs:34
+#: ../Pinta.Tools/Editable/EditEngines/LineCurveEditEngine.cs:36
 msgid "Open Curve Shape"
 msgstr ""
 
-#: ../Pinta.Core/Managers/WorkspaceManager.cs:249
+#: ../Pinta.Core/Managers/WorkspaceManager.cs:314
 msgid "Open Image"
 msgstr "이미지 열기"
 
-#: ../Pinta.Core/Actions/LayerActions.cs:163
-#: ../Pinta/Actions/File/OpenDocumentAction.cs:50
+#: ../Pinta.Core/Actions/LayerActions.cs:184
+#: ../Pinta/Actions/File/OpenDocumentAction.cs:69
 msgid "Open Image File"
 msgstr "이미지 파일 열기"
 
-#: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:317
+#: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:335
 msgid "Open Line/Curve Series"
 msgstr ""
 
-#: ../Pinta.Core/Actions/EditActions.cs:356
+#: ../Pinta.Core/Actions/EditActions.cs:371
 msgid "Open Palette File"
 msgstr "팔렛트 파일 열기"
 
-#: ../Pinta.Core/Actions/EditActions.cs:74
-#: ../Pinta.Core/Actions/FileActions.cs:48
+#: ../Pinta.Core/Actions/EditActions.cs:83
+#: ../Pinta.Core/Actions/FileActions.cs:52
 msgid "Open..."
 msgstr "열기"
 
@@ -1445,16 +1451,16 @@ msgid "Original"
 msgstr ""
 
 #: ../Pinta.Effects/Effects/OutlineEffect.cs:26
-#: ../Pinta.Tools/Tools/TextTool.cs:250
+#: ../Pinta.Tools/Tools/TextTool.cs:267
 msgid "Outline"
 msgstr "윤곽선"
 
-#: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:293
+#: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:311
 #: ../Pinta.Tools/Tools/FreeformShapeTool.cs:221
 msgid "Outline Shape"
 msgstr "윤곽 모양"
 
-#: ../Pinta.Tools/Tools/TextTool.cs:264
+#: ../Pinta.Tools/Tools/TextTool.cs:281
 msgid "Outline width"
 msgstr "외곽선 너비"
 
@@ -1482,32 +1488,32 @@ msgstr "색칠"
 msgid "Paintbrush"
 msgstr "붓"
 
-#: ../Pinta.Core/Actions/EditActions.cs:142
+#: ../Pinta.Core/Actions/EditActions.cs:157
 #: ../Pinta.Effects/Effects/DitheringEffect.cs:136
 msgid "Palette"
 msgstr "팔렛트"
 
-#: ../Pinta.Core/Actions/EditActions.cs:363
+#: ../Pinta.Core/Actions/EditActions.cs:378
 msgid "Palette files"
 msgstr ""
 
 #: ../Pinta.Tools/Tools/PanTool.cs:40
-#: ../Pinta/Actions/Layers/RotateZoomLayerAction.cs:130
+#: ../Pinta/Actions/Layers/RotateZoomLayerAction.cs:143
 msgid "Pan"
 msgstr "잡기"
 
-#: ../Pinta.Core/Actions/EditActions.cs:64
+#: ../Pinta.Core/Actions/EditActions.cs:73
 #: ../Pinta.Core/HistoryItems/PasteHistoryItem.cs:38
-#: ../Pinta/Actions/Edit/PasteAction.cs:91
+#: ../Pinta/Actions/Edit/PasteAction.cs:118
 msgid "Paste"
 msgstr "붙여넣기"
 
-#: ../Pinta.Core/Actions/EditActions.cs:66
+#: ../Pinta.Core/Actions/EditActions.cs:75
 msgid "Paste Into New Image"
 msgstr "새 이미지로 붙여넣기"
 
-#: ../Pinta.Core/Actions/EditActions.cs:65
-#: ../Pinta/Actions/Edit/PasteAction.cs:91
+#: ../Pinta.Core/Actions/EditActions.cs:74
+#: ../Pinta/Actions/Edit/PasteAction.cs:118
 msgid "Paste Into New Layer"
 msgstr "새 레이어로 붙여넣기"
 
@@ -1535,7 +1541,7 @@ msgstr ""
 msgid "Photo"
 msgstr "사진"
 
-#: ../xdg/pinta.desktop.in.h:1 ../Pinta/Actions/Help/AboutDialogAction.cs:52
+#: ../xdg/pinta.desktop.in.h:1 ../Pinta/Actions/Help/AboutDialogAction.cs:66
 #: ../Pinta/Main.cs:68 ../Pinta/MainWindow.cs:58
 msgid "Pinta"
 msgstr ""
@@ -1552,11 +1558,11 @@ msgstr ""
 msgid "Pinta Image Editor"
 msgstr ""
 
-#: ../Pinta.Core/Actions/HelpActions.cs:41
+#: ../Pinta.Core/Actions/HelpActions.cs:45
 msgid "Pinta Website"
 msgstr "Pinta 웹사이트"
 
-#: ../Pinta/Actions/File/SaveDocumentImplementationAction.cs:168
+#: ../Pinta/Actions/File/SaveDocumentImplementationAction.cs:215
 msgid "Pinta does not support saving images in this file format."
 msgstr "Pinta는 해당 형식의 이미지 파일을 지원하지 않습니다."
 
@@ -1569,15 +1575,15 @@ msgid ""
 "help organize your creativity."
 msgstr ""
 
-#: ../Pinta.Core/Managers/WorkspaceManager.cs:386
+#: ../Pinta.Core/Managers/WorkspaceManager.cs:411
 msgid "Pinta supports the following file formats:"
 msgstr ""
 
-#: ../Pinta.Core/Classes/Palette.cs:197
+#: ../Pinta.Core/Classes/Palette.cs:192
 msgid "Pinta supports the following palette formats:"
 msgstr ""
 
-#: ../Pinta.Core/Actions/ViewActions.cs:74
+#: ../Pinta.Core/Actions/ViewActions.cs:76
 msgid "Pixel Grid"
 msgstr "픽셀 안내선"
 
@@ -1585,7 +1591,7 @@ msgstr "픽셀 안내선"
 msgid "Pixelate"
 msgstr "그림낱 강조"
 
-#: ../Pinta.Core/Actions/ViewActions.cs:147
+#: ../Pinta.Core/Actions/ViewActions.cs:152
 msgid "Pixels"
 msgstr "픽셀(Pixel)"
 
@@ -1594,12 +1600,12 @@ msgstr "픽셀(Pixel)"
 msgid "Piña Colada"
 msgstr ""
 
-#: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:581
-#: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:767
+#: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:599
+#: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:785
 msgid "Point Added"
 msgstr ""
 
-#: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:628
+#: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:646
 msgid "Point Deleted"
 msgstr ""
 
@@ -1621,7 +1627,7 @@ msgid "Power"
 msgstr ""
 
 #. Translators: This refers to preserving the current canvas size when pasting a larger image.
-#: ../Pinta/Actions/Edit/PasteAction.cs:194
+#: ../Pinta/Actions/Edit/PasteAction.cs:221
 msgid "Preserve"
 msgstr ""
 
@@ -1641,7 +1647,7 @@ msgstr ""
 msgid "Primary"
 msgstr ""
 
-#: ../Pinta.Core/Actions/FileActions.cs:53
+#: ../Pinta.Core/Actions/FileActions.cs:57
 msgid "Print"
 msgstr "출력"
 
@@ -1677,7 +1683,7 @@ msgstr ""
 #: ../Pinta.Effects/Effects/MedianEffect.cs:62
 #: ../Pinta.Effects/Effects/ReduceNoiseEffect.cs:89
 #: ../Pinta.Effects/Effects/UnfocusEffect.cs:94
-#: ../Pinta.Tools/Editable/EditEngines/RoundedLineEditEngine.cs:88
+#: ../Pinta.Tools/Editable/EditEngines/RoundedLineEditEngine.cs:91
 msgid "Radius"
 msgstr "둥글림 정도"
 
@@ -1716,7 +1722,7 @@ msgstr ""
 msgid "Recolor"
 msgstr "색바꾸기"
 
-#: ../Pinta.Tools/Tools/RectangleTool.cs:39
+#: ../Pinta.Tools/Tools/RectangleTool.cs:41
 msgid "Rectangle"
 msgstr "사각형"
 
@@ -1737,7 +1743,7 @@ msgstr "빨강  "
 msgid "Red Eye Removal"
 msgstr "적목현상 제거"
 
-#: ../Pinta.Core/Actions/EditActions.cs:60
+#: ../Pinta.Core/Actions/EditActions.cs:69
 msgid "Redo"
 msgstr "재실행"
 
@@ -1753,7 +1759,7 @@ msgstr ""
 msgid "Refresh"
 msgstr "새로 고침"
 
-#: ../Pinta/Actions/Help/AboutDialogAction.cs:76
+#: ../Pinta/Actions/Help/AboutDialogAction.cs:90
 msgid "Released under the MIT X11 License."
 msgstr "MIT X11 사용허가 하에 배포됐습니다."
 
@@ -1761,7 +1767,7 @@ msgstr "MIT X11 사용허가 하에 배포됐습니다."
 msgid "Relief"
 msgstr "돋을새김"
 
-#: ../Pinta/Actions/Layers/LayerPropertiesAction.cs:101
+#: ../Pinta/Actions/Layers/LayerPropertiesAction.cs:114
 msgid "Rename Layer"
 msgstr "레이어 이름변경"
 
@@ -1772,7 +1778,7 @@ msgstr "레이어 이름변경"
 msgid "Render"
 msgstr "덧씌우기"
 
-#: ../Pinta.Core/Managers/LivePreviewManager.cs:197
+#: ../Pinta.Core/Managers/LivePreviewManager.cs:211
 msgid "Rendering Effect"
 msgstr ""
 
@@ -1784,7 +1790,7 @@ msgstr ""
 msgid "Report Bug..."
 msgstr ""
 
-#: ../Pinta/Dialogs/ResizeImageDialog.cs:71
+#: ../Pinta/Dialogs/ResizeImageDialog.cs:73
 msgid "Resampling:"
 msgstr ""
 
@@ -1797,29 +1803,29 @@ msgstr ""
 msgid "Reset"
 msgstr "초기화"
 
-#: ../Pinta.Core/Actions/EditActions.cs:76
+#: ../Pinta.Core/Actions/EditActions.cs:85
 msgid "Reset to Default"
 msgstr "기본값으로 재설정"
 
 #: ../Pinta.Core/Classes/Document.cs:313
-#: ../Pinta/Dialogs/ResizeCanvasDialog.cs:167
+#: ../Pinta/Dialogs/ResizeCanvasDialog.cs:169
 msgid "Resize Canvas"
 msgstr "캔버스 크기 변경"
 
-#: ../Pinta.Core/Actions/ImageActions.cs:50
+#: ../Pinta.Core/Actions/ImageActions.cs:57
 msgid "Resize Canvas..."
 msgstr "캔버스 크기조정..."
 
 #: ../Pinta.Core/HistoryItems/ResizeHistoryItem.cs:38
-#: ../Pinta/Dialogs/ResizeImageDialog.cs:82
+#: ../Pinta/Dialogs/ResizeImageDialog.cs:84
 msgid "Resize Image"
 msgstr "그림 크기 조정"
 
-#: ../Pinta.Core/Actions/ImageActions.cs:49
+#: ../Pinta.Core/Actions/ImageActions.cs:56
 msgid "Resize Image..."
 msgstr "이미지 크기조정..."
 
-#: ../Pinta/Actions/Edit/ResizePaletteAction.cs:47
+#: ../Pinta/Actions/Edit/ResizePaletteAction.cs:60
 msgid "Resize Palette"
 msgstr "팔렛트 크기 조정"
 
@@ -1834,30 +1840,30 @@ msgstr ""
 msgid "Reverse Color Sorting"
 msgstr ""
 
-#: ../Pinta.Tools/Tools/TextTool.cs:225
+#: ../Pinta.Tools/Tools/TextTool.cs:242
 msgid "Right Align"
 msgstr "오른쪽 정렬"
 
-#: ../Pinta/Actions/Layers/RotateZoomLayerAction.cs:53
-#: ../Pinta/Actions/Layers/RotateZoomLayerAction.cs:118
+#: ../Pinta/Actions/Layers/RotateZoomLayerAction.cs:66
+#: ../Pinta/Actions/Layers/RotateZoomLayerAction.cs:131
 msgid "Rotate / Zoom Layer"
 msgstr "레이어 회전/줌"
 
-#: ../Pinta.Core/Actions/LayerActions.cs:55
+#: ../Pinta.Core/Actions/LayerActions.cs:69
 msgid "Rotate / Zoom Layer..."
 msgstr "레이어 회전/줌..."
 
-#: ../Pinta.Core/Actions/ImageActions.cs:55
+#: ../Pinta.Core/Actions/ImageActions.cs:62
 #: ../Pinta.Core/HistoryItems/InvertHistoryItem.cs:47
 msgid "Rotate 180°"
 msgstr "180° 회전"
 
-#: ../Pinta.Core/Actions/ImageActions.cs:53
+#: ../Pinta.Core/Actions/ImageActions.cs:60
 #: ../Pinta.Core/HistoryItems/InvertHistoryItem.cs:59
 msgid "Rotate 90° Clockwise"
 msgstr "시계방향으로  90° 회전"
 
-#: ../Pinta.Core/Actions/ImageActions.cs:54
+#: ../Pinta.Core/Actions/ImageActions.cs:61
 #: ../Pinta.Core/HistoryItems/InvertHistoryItem.cs:63
 msgid "Rotate 90° Counter-Clockwise"
 msgstr "반시계 방향으로   90° 회전"
@@ -1867,23 +1873,23 @@ msgstr "반시계 방향으로   90° 회전"
 msgid "Rotation"
 msgstr "회전"
 
-#: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:320
+#: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:338
 msgid "Rounded Line Series"
 msgstr ""
 
-#: ../Pinta.Tools/Editable/EditEngines/RoundedLineEditEngine.cs:34
+#: ../Pinta.Tools/Editable/EditEngines/RoundedLineEditEngine.cs:36
 msgid "Rounded Line Shape"
 msgstr ""
 
-#: ../Pinta.Tools/Tools/RoundedRectangleTool.cs:39
+#: ../Pinta.Tools/Tools/RoundedRectangleTool.cs:42
 msgid "Rounded Rectangle"
 msgstr "둥근 사각형"
 
-#: ../Pinta.Core/Actions/ViewActions.cs:144
+#: ../Pinta.Core/Actions/ViewActions.cs:149
 msgid "Ruler Units"
 msgstr "눈금 단위"
 
-#: ../Pinta.Core/Actions/ViewActions.cs:77
+#: ../Pinta.Core/Actions/ViewActions.cs:79
 msgid "Rulers"
 msgstr "눈금자"
 
@@ -1900,30 +1906,30 @@ msgstr ""
 msgid "Saturation Percentage"
 msgstr ""
 
-#: ../Pinta.Core/Actions/EditActions.cs:402
-#: ../Pinta.Core/Actions/FileActions.cs:51
-#: ../Pinta/Actions/File/SaveDocumentImplementationAction.cs:70
+#: ../Pinta.Core/Actions/EditActions.cs:417
+#: ../Pinta.Core/Actions/FileActions.cs:55
+#: ../Pinta/Actions/File/SaveDocumentImplementationAction.cs:89
 msgid "Save"
 msgstr "저장"
 
-#: ../Pinta.Core/Actions/WindowActions.cs:40
+#: ../Pinta.Core/Actions/WindowActions.cs:45
 msgid "Save All"
 msgstr "모두 저장"
 
-#: ../Pinta.Core/Actions/EditActions.cs:75
-#: ../Pinta.Core/Actions/FileActions.cs:52
+#: ../Pinta.Core/Actions/EditActions.cs:84
+#: ../Pinta.Core/Actions/FileActions.cs:56
 msgid "Save As..."
 msgstr "다른 이름으로 저장..."
 
-#: ../Pinta/Actions/File/SaveDocumentImplementationAction.cs:67
+#: ../Pinta/Actions/File/SaveDocumentImplementationAction.cs:86
 msgid "Save Image File"
 msgstr "이미지 파일 저장"
 
-#: ../Pinta.Core/Actions/EditActions.cs:399
+#: ../Pinta.Core/Actions/EditActions.cs:414
 msgid "Save Palette File"
 msgstr "팔렛트 파일 저장"
 
-#: ../Pinta/Actions/File/CloseDocumentAction.cs:56
+#: ../Pinta/Actions/File/CloseDocumentAction.cs:72
 #, csharp-format
 msgid "Save changes to image \"{0}\" before closing?"
 msgstr ""
@@ -1940,8 +1946,8 @@ msgstr ""
 msgid "Secondary"
 msgstr ""
 
-#: ../Pinta.Core/Actions/EditActions.cs:71
-#: ../Pinta.Core/Actions/EditActions.cs:222
+#: ../Pinta.Core/Actions/EditActions.cs:80
+#: ../Pinta.Core/Actions/EditActions.cs:237
 msgid "Select All"
 msgstr "전체 선택"
 
@@ -1953,11 +1959,11 @@ msgstr ""
 msgid "Sepia"
 msgstr "세피아"
 
-#: ../Pinta.Core/Actions/EditActions.cs:77
+#: ../Pinta.Core/Actions/EditActions.cs:86
 msgid "Set Number of Colors"
 msgstr "색상 수 설정"
 
-#: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:308
+#: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:326
 msgid "Shape Type"
 msgstr ""
 
@@ -1970,7 +1976,7 @@ msgstr "선명하게"
 msgid "Shortcut key"
 msgstr "단축키"
 
-#: ../Pinta/Actions/Layers/LayerPropertiesAction.cs:106
+#: ../Pinta/Actions/Layers/LayerPropertiesAction.cs:119
 msgid "Show Layer"
 msgstr "레이어 보이기"
 
@@ -1979,7 +1985,7 @@ msgstr "레이어 보이기"
 msgid "Show Points"
 msgstr ""
 
-#: ../Pinta.Core/Actions/ViewActions.cs:155
+#: ../Pinta.Core/Actions/ViewActions.cs:160
 msgid "Show/Hide"
 msgstr ""
 
@@ -1997,7 +2003,7 @@ msgstr ""
 msgid "Single Pixel"
 msgstr "단일 픽셀"
 
-#: ../Pinta.Tools/Editable/EditEngines/ArrowedEditEngine.cs:278
+#: ../Pinta.Tools/Editable/EditEngines/ArrowedEditEngine.cs:286
 msgid "Size"
 msgstr ""
 
@@ -2025,7 +2031,7 @@ msgstr "흩뿌리기"
 msgid "Squares"
 msgstr "사각형"
 
-#: ../Pinta.Core/Actions/ViewActions.cs:75
+#: ../Pinta.Core/Actions/ViewActions.cs:77
 msgid "Status Bar"
 msgstr ""
 
@@ -2054,7 +2060,7 @@ msgstr "연필 도구로 전환"
 msgid "Switch to previous tool"
 msgstr "이전 도구로 전환"
 
-#: ../Pinta.Tools/Tools/TextTool.cs:84
+#: ../Pinta.Tools/Tools/TextTool.cs:82
 msgid "Text"
 msgstr "글자"
 
@@ -2062,7 +2068,7 @@ msgstr "글자"
 msgid "Text - Finalize"
 msgstr ""
 
-#: ../Pinta.Tools/Tools/TextTool.cs:239
+#: ../Pinta.Tools/Tools/TextTool.cs:256
 msgid "Text Style"
 msgstr "글꼴처리"
 
@@ -2072,7 +2078,7 @@ msgstr "글꼴처리"
 msgid "The '{0}' add-in may not be compatible with this version of Pinta"
 msgstr ""
 
-#: ../Pinta/Actions/Edit/PasteAction.cs:178
+#: ../Pinta/Actions/Edit/PasteAction.cs:205
 msgid "The clipboard does not contain an image."
 msgstr "클립보드에 이미지가 없습니다."
 
@@ -2096,7 +2102,7 @@ msgstr "다음 패키지들이 설치됩니다:"
 msgid "The following packages will be uninstalled:"
 msgstr "다음 패키지가 제거됩니다 :"
 
-#: ../Pinta/Actions/Edit/PasteAction.cs:185
+#: ../Pinta/Actions/Edit/PasteAction.cs:212
 msgid ""
 "The image being pasted is larger than the canvas. What would you like to do "
 "to the canvas size?"
@@ -2134,6 +2140,10 @@ msgstr ""
 msgid "Thickness"
 msgstr ""
 
+#: ../Pinta/Actions/File/SaveDocumentImplementationAction.cs:154
+msgid "This format does not support layers. Flatten image?"
+msgstr ""
+
 #: ../Pinta.Effects/Effects/TileEffect.cs:23
 msgid "Tile Reflection"
 msgstr "매끄러운 타일에 반사효과"
@@ -2152,11 +2162,11 @@ msgstr "도움말: 오른쪽 딸깍으로 조정점을 지울 수 있습니다."
 msgid "Tolerance"
 msgstr "오차"
 
-#: ../Pinta.Core/Managers/ToolManager.cs:355
+#: ../Pinta.Core/Managers/ToolManager.cs:363
 msgid "Tool"
 msgstr "도구"
 
-#: ../Pinta.Core/Actions/ViewActions.cs:76
+#: ../Pinta.Core/Actions/ViewActions.cs:78
 msgid "Tool Box"
 msgstr ""
 
@@ -2164,7 +2174,7 @@ msgstr ""
 msgid "Tool Windows"
 msgstr "도구 창"
 
-#: ../Pinta.Core/Actions/ViewActions.cs:72
+#: ../Pinta.Core/Actions/ViewActions.cs:74
 msgid "Toolbar"
 msgstr "도구 모음"
 
@@ -2172,7 +2182,7 @@ msgstr "도구 모음"
 msgid "Transfer Map"
 msgstr "보정대상 기준"
 
-#: ../Pinta.Core/Actions/HelpActions.cs:43
+#: ../Pinta.Core/Actions/HelpActions.cs:47
 msgid "Translate This Application"
 msgstr "현재 어플리케이션 번역하기"
 
@@ -2203,11 +2213,11 @@ msgstr ""
 msgid "Type"
 msgstr "형식"
 
-#: ../Pinta.Tools/Tools/TextTool.cs:185
+#: ../Pinta.Tools/Tools/TextTool.cs:202
 msgid "Underline"
 msgstr "밑줄"
 
-#: ../Pinta.Core/Actions/EditActions.cs:59
+#: ../Pinta.Core/Actions/EditActions.cs:68
 msgid "Undo"
 msgstr "실행취소"
 
@@ -2230,16 +2240,16 @@ msgstr ""
 msgid "Union (+) ({0} + Left Click)"
 msgstr ""
 
-#: ../Pinta.Core/Managers/WorkspaceManager.cs:116
+#: ../Pinta.Core/Managers/WorkspaceManager.cs:218
 #, csharp-format
 msgid "Unsaved Image {0}"
 msgstr "저장되지 않은 이미지 {0}"
 
-#: ../Pinta.Core/Managers/WorkspaceManager.cs:244
+#: ../Pinta.Core/Managers/WorkspaceManager.cs:309
 msgid "Unsupported file format"
 msgstr "지원하지 않는 파일 형식"
 
-#: ../Pinta.Core/Classes/Palette.cs:158
+#: ../Pinta.Core/Classes/Palette.cs:153
 msgid "Unsupported palette format"
 msgstr ""
 
@@ -2257,7 +2267,7 @@ msgid ""
 "quality for final quality, large images, and large angles."
 msgstr ""
 
-#: ../Pinta/Actions/Help/AboutDialogAction.cs:83
+#: ../Pinta/Actions/Help/AboutDialogAction.cs:97
 msgid "Using some icons from:"
 msgstr "일부 아이콘의 출처 :"
 
@@ -2286,7 +2296,7 @@ msgstr ""
 msgid "Vignette"
 msgstr ""
 
-#: ../Pinta/Dialogs/LayerPropertiesDialog.cs:76
+#: ../Pinta/Dialogs/LayerPropertiesDialog.cs:78
 msgid "Visible"
 msgstr "표시"
 
@@ -2303,13 +2313,13 @@ msgid "White"
 msgstr ""
 
 #: ../Pinta/Dialogs/NewImageDialog.cs:325
-#: ../Pinta/Dialogs/ResizeCanvasDialog.cs:71
-#: ../Pinta/Dialogs/ResizeImageDialog.cs:153
+#: ../Pinta/Dialogs/ResizeCanvasDialog.cs:73
+#: ../Pinta/Dialogs/ResizeImageDialog.cs:157
 msgid "Width:"
 msgstr "너비:"
 
-#: ../Pinta.Core/Actions/ViewActions.cs:116
-#: ../Pinta.Core/Actions/ViewActions.cs:306
+#: ../Pinta.Core/Actions/ViewActions.cs:121
+#: ../Pinta.Core/Actions/ViewActions.cs:311
 #: ../Pinta.Core/Classes/DocumentWorkspace.cs:357
 #: ../Pinta.Core/Classes/DocumentWorkspace.cs:366
 msgid "Window"
@@ -2330,13 +2340,13 @@ msgid "Xor ({0} + Right Click)"
 msgstr ""
 
 #. Translators: {0} is the name of a file that the user does not have permission to open.
-#: ../Pinta.Core/Managers/WorkspaceManager.cs:403
+#: ../Pinta.Core/Managers/WorkspaceManager.cs:430
 #, csharp-format
 msgid "You do not have access to '{0}'."
 msgstr ""
 
 #. Translators: {0} is the name of a file that the user does not have write permission for.
-#: ../Pinta/Actions/File/SaveDocumentImplementationAction.cs:187
+#: ../Pinta/Actions/File/SaveDocumentImplementationAction.cs:234
 #, csharp-format
 msgid ""
 "You do not have access to modify '{0}'. The file or folder may be read-only."
@@ -2345,7 +2355,7 @@ msgstr ""
 #: ../Pinta.Effects/Effects/JuliaFractalEffect.cs:178
 #: ../Pinta.Effects/Effects/MandelbrotFractalEffect.cs:193
 #: ../Pinta.Tools/Tools/ZoomTool.cs:56
-#: ../Pinta/Actions/Layers/RotateZoomLayerAction.cs:133
+#: ../Pinta/Actions/Layers/RotateZoomLayerAction.cs:146
 msgid "Zoom"
 msgstr "확대"
 
@@ -2353,15 +2363,15 @@ msgstr "확대"
 msgid "Zoom Blur"
 msgstr "확대해 흐리기"
 
-#: ../Pinta.Core/Actions/ViewActions.cs:67
+#: ../Pinta.Core/Actions/ViewActions.cs:69
 msgid "Zoom In"
 msgstr "확대"
 
-#: ../Pinta.Core/Actions/ViewActions.cs:68
+#: ../Pinta.Core/Actions/ViewActions.cs:70
 msgid "Zoom Out"
 msgstr "축소"
 
-#: ../Pinta.Core/Actions/ViewActions.cs:70
+#: ../Pinta.Core/Actions/ViewActions.cs:72
 msgid "Zoom to Selection"
 msgstr "선택영역 확대"
 
@@ -2371,13 +2381,14 @@ msgstr "조정(_A)"
 
 #: ../Pinta.Core/Extensions/GtkExtensions.cs:228
 #: ../Pinta.Core/Extensions/GtkExtensions.cs:230
-#: ../Pinta/Actions/Edit/PasteAction.cs:192
-#: ../Pinta/Actions/File/CloseDocumentAction.cs:67
+#: ../Pinta/Actions/Edit/PasteAction.cs:219
+#: ../Pinta/Actions/File/CloseDocumentAction.cs:83
+#: ../Pinta/Actions/File/SaveDocumentImplementationAction.cs:158
 #: ../Pinta/Dialogs/ProgressDialog.cs:56
 msgid "_Cancel"
 msgstr ""
 
-#: ../Pinta/Actions/File/CloseDocumentAction.cs:68
+#: ../Pinta/Actions/File/CloseDocumentAction.cs:84
 msgid "_Discard"
 msgstr ""
 
@@ -2408,7 +2419,7 @@ msgstr "레이어(_L)"
 msgid "_OK"
 msgstr ""
 
-#: ../Pinta/Actions/File/CloseDocumentAction.cs:69
+#: ../Pinta/Actions/File/CloseDocumentAction.cs:85
 msgid "_Save"
 msgstr ""
 
@@ -2420,7 +2431,7 @@ msgstr "보기(_V)"
 msgid "_Window"
 msgstr "창(_W)"
 
-#: ../Pinta/Actions/Help/AboutDialogAction.cs:67
+#: ../Pinta/Actions/Help/AboutDialogAction.cs:81
 msgid "by Pinta contributors"
 msgstr "Pinta 기여자"
 
@@ -2429,14 +2440,14 @@ msgid "draw;drawing;paint;painting;graphics;raster;2d;"
 msgstr ""
 
 #: ../Pinta/Dialogs/NewImageDialog.cs:277
-#: ../Pinta/Dialogs/ResizeCanvasDialog.cs:94
-#: ../Pinta/Dialogs/ResizeCanvasDialog.cs:97
-#: ../Pinta/Dialogs/ResizeImageDialog.cs:66
-#: ../Pinta/Dialogs/ResizeImageDialog.cs:69
+#: ../Pinta/Dialogs/ResizeCanvasDialog.cs:96
+#: ../Pinta/Dialogs/ResizeCanvasDialog.cs:99
+#: ../Pinta/Dialogs/ResizeImageDialog.cs:68
+#: ../Pinta/Dialogs/ResizeImageDialog.cs:71
 msgid "pixels"
 msgstr "픽셀"
 
-#: ../Pinta/Actions/Help/AboutDialogAction.cs:60
+#: ../Pinta/Actions/Help/AboutDialogAction.cs:74
 msgid "translator-credits"
 msgstr ""
 "Launchpad Contributions:\n"
@@ -2450,7 +2461,7 @@ msgstr ""
 "  Softblow https://launchpad.net/~sftblw"
 
 #. Translators: {0} is 'Ctrl', or a platform-specific key such as 'Command' on macOS.
-#: ../Pinta.Tools/Tools/CloneStampTool.cs:47
+#: ../Pinta.Tools/Tools/CloneStampTool.cs:49
 #, csharp-format
 msgid "{0} + left click to set origin, left click to paint."
 msgstr ""
@@ -2462,7 +2473,7 @@ msgstr ""
 msgid "{0} copy"
 msgstr ""
 
-#: ../Pinta.Core/ImageFormats/FormatDescriptor.cs:111
+#: ../Pinta.Core/ImageFormats/FormatDescriptor.cs:118
 #, csharp-format
 msgid "{0} image ({1})"
 msgstr "{0} 이미지 ({1})"
@@ -2475,7 +2486,7 @@ msgstr ""
 
 #. Translators: This specifies the format of the zoom percentage choices
 #. in the toolbar.
-#: ../Pinta.Core/Actions/ViewActions.cs:287
+#: ../Pinta.Core/Actions/ViewActions.cs:292
 #, csharp-format
 msgid "{0}%"
 msgstr "{0}%"
