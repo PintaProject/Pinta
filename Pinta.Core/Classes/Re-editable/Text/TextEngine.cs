@@ -317,22 +317,24 @@ public sealed class TextEngine
 
 	public void PerformCopy (Gdk.Clipboard clipboard)
 	{
-		if (HasSelection ()) {
-			StringBuilder strbld = new StringBuilder ();
+		// Note we could set the clipboard text to empty if nothing is selected,
+		// but this seems to crash on Windows (bug 2070035)
+		if (!HasSelection ())
+			return;
 
-			TextPosition start = TextPosition.Min (current_pos, selection_start);
-			TextPosition end = TextPosition.Max (current_pos, selection_start);
-			ForeachLine (start, end, (currentLinePos, strpos, endpos) => {
-				if (endpos - strpos > 0)
-					strbld.AppendLine (lines[currentLinePos][strpos..endpos]);
-				else if (endpos == strpos)
-					strbld.AppendLine ();
-			});
-			strbld.Remove (strbld.Length - Environment.NewLine.Length, Environment.NewLine.Length);
+		StringBuilder strbld = new ();
 
-			clipboard.SetText (strbld.ToString ());
-		} else
-			clipboard.SetText (string.Empty);
+		TextPosition start = TextPosition.Min (current_pos, selection_start);
+		TextPosition end = TextPosition.Max (current_pos, selection_start);
+		ForeachLine (start, end, (currentLinePos, strpos, endpos) => {
+			if (endpos - strpos > 0)
+				strbld.AppendLine (lines[currentLinePos][strpos..endpos]);
+			else if (endpos == strpos)
+				strbld.AppendLine ();
+		});
+		strbld.Remove (strbld.Length - Environment.NewLine.Length, Environment.NewLine.Length);
+
+		clipboard.SetText (strbld.ToString ());
 	}
 
 	public void PerformCut (Gdk.Clipboard clipboard)
