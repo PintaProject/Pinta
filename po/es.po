@@ -8,10 +8,10 @@ msgstr ""
 "Project-Id-Version: pinta\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2024-07-07 01:20+0000\n"
-"PO-Revision-Date: 2024-07-01 16:09+0000\n"
+"PO-Revision-Date: 2024-07-08 17:09+0000\n"
 "Last-Translator: gallegonovato <fran-carro@hotmail.es>\n"
-"Language-Team: Spanish <https://hosted.weblate.org/projects/pinta/pinta/es/"
-">\n"
+"Language-Team: Spanish <https://hosted.weblate.org/projects/pinta/pinta/es/>"
+"\n"
 "Language: es\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -573,7 +573,7 @@ msgstr "Eliminado"
 #. Translators: This refers to an image distortion that creates small, random warps or distortions in the image, like tiny dents, bumps, or waves
 #: ../Pinta.Effects/Effects/DentsEffect.cs:48
 msgid "Dents"
-msgstr ""
+msgstr "Abolladuras"
 
 #: ../Pinta.Core/Actions/EditActions.cs:278
 msgid "Deselect"
@@ -781,7 +781,7 @@ msgstr "Acoplar"
 
 #: ../Pinta/Actions/File/SaveDocumentImplementationAction.cs:155
 msgid "Flattening the image will merge all layers into a single layer."
-msgstr ""
+msgstr "Aplanar la imagen fusionará todas las capas en una sola."
 
 #: ../Pinta.Core/Actions/ImageActions.cs:58
 #: ../Pinta.Core/Actions/LayerActions.cs:67
@@ -2212,7 +2212,7 @@ msgstr "Grosor"
 
 #: ../Pinta/Actions/File/SaveDocumentImplementationAction.cs:154
 msgid "This format does not support layers. Flatten image?"
-msgstr ""
+msgstr "Este formato no admite capas. ¿Aplanar la imagen?"
 
 #: ../Pinta.Effects/Effects/TileEffect.cs:23
 msgid "Tile Reflection"
