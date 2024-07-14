@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-07-07 01:20+0000\n"
+"POT-Creation-Date: 2024-07-14 01:21+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -712,7 +712,7 @@ msgstr ""
 msgid "Failed to open image"
 msgstr ""
 
-#: ../Pinta/Actions/File/SaveDocumentImplementationAction.cs:232
+#: ../Pinta/Actions/File/SaveDocumentImplementationAction.cs:236
 msgid "Failed to save image"
 msgstr ""
 
@@ -913,7 +913,7 @@ msgstr ""
 msgid "Hue / Saturation"
 msgstr ""
 
-#: ../Pinta/Actions/File/SaveDocumentImplementationAction.cs:227
+#: ../Pinta/Actions/File/SaveDocumentImplementationAction.cs:231
 msgid "ICO files can not be larger than 255 x 255 pixels."
 msgstr ""
 
@@ -946,7 +946,7 @@ msgstr ""
 msgid "Image larger than canvas"
 msgstr ""
 
-#: ../Pinta/Actions/File/SaveDocumentImplementationAction.cs:226
+#: ../Pinta/Actions/File/SaveDocumentImplementationAction.cs:230
 msgid "Image too large"
 msgstr ""
 
@@ -1552,7 +1552,7 @@ msgstr ""
 msgid "Pinta Website"
 msgstr ""
 
-#: ../Pinta/Actions/File/SaveDocumentImplementationAction.cs:215
+#: ../Pinta/Actions/File/SaveDocumentImplementationAction.cs:219
 msgid "Pinta does not support saving images in this file format."
 msgstr ""
 
@@ -2336,7 +2336,7 @@ msgid "You do not have access to '{0}'."
 msgstr ""
 
 #. Translators: {0} is the name of a file that the user does not have write permission for.
-#: ../Pinta/Actions/File/SaveDocumentImplementationAction.cs:234
+#: ../Pinta/Actions/File/SaveDocumentImplementationAction.cs:238
 #, csharp-format
 msgid ""
 "You do not have access to modify '{0}'. The file or folder may be read-only."
