@@ -9,8 +9,8 @@ msgstr ""
 "Project-Id-Version: pinta\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2024-07-07 01:20+0000\n"
-"PO-Revision-Date: 2024-06-15 15:09+0000\n"
-"Last-Translator: Renan Birck Pinheiro <renan.birck.pinheiro@gmail.com>\n"
+"PO-Revision-Date: 2024-07-17 14:09+0000\n"
+"Last-Translator: Lucas Campello <lucas.campello@gmail.com>\n"
 "Language-Team: Portuguese <https://hosted.weblate.org/projects/pinta/pinta/"
 "pt/>\n"
 "Language: pt\n"
@@ -18,7 +18,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Generator: Weblate 5.6-dev\n"
+"X-Generator: Weblate 5.7-dev\n"
 "X-Launchpad-Export-Date: 2023-12-18 03:00+0000\n"
 
 #: ../Pinta.Gui.Addins/InstallDialog.cs:257
@@ -181,7 +181,7 @@ msgstr "Inspirado no Paint.NET:"
 #. Translators: Gradient with the colors of the flag of Italy: red, white, and green
 #: ../Pinta.Effects/Effects/GradientHelper.cs:24
 msgid "Beautiful Italy"
-msgstr ""
+msgstr "Bela Itália"
 
 #: ../Pinta.Core/Actions/ViewActions.cs:71
 msgid "Best Fit"
@@ -472,7 +472,7 @@ msgstr "Colorir"
 
 #: ../Pinta.Tools/Tools/GradientTool.cs:188
 msgid "Conical Gradient"
-msgstr "Gradiente cónico"
+msgstr "Gradiente cônico"
 
 #: ../Pinta.Core/Actions/HelpActions.cs:44
 msgid "Contents"
@@ -568,12 +568,12 @@ msgstr "Eliminar camada"
 
 #: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:660
 msgid "Deleted"
-msgstr "Eliminado"
+msgstr "Excluído"
 
 #. Translators: This refers to an image distortion that creates small, random warps or distortions in the image, like tiny dents, bumps, or waves
 #: ../Pinta.Effects/Effects/DentsEffect.cs:48
 msgid "Dents"
-msgstr ""
+msgstr "Amassados"
 
 #: ../Pinta.Core/Actions/EditActions.cs:278
 msgid "Deselect"
@@ -612,11 +612,11 @@ msgstr "Distorcer"
 
 #: ../Pinta.Effects/Effects/DitheringEffect.cs:11
 msgid "Dithering"
-msgstr ""
+msgstr "Dispersão de Erro"
 
 #: ../Pinta.Tools/Tools/ColorPickerTool.cs:203
 msgid "Do not switch tool"
-msgstr "Não trocar ferramenta"
+msgstr "Não mude de ferramenta"
 
 #: ../Pinta.Gui.Addins/AddinInfoView.cs:206
 #, csharp-format
@@ -638,7 +638,7 @@ msgstr "Comportamento nos limites"
 
 #: ../Pinta.Effects/Effects/EdgeDetectEffect.cs:26
 msgid "Edge Detect"
-msgstr "Deteção de contornos"
+msgstr "Detecção de contornos"
 
 #: ../Pinta/MainWindow.cs:353
 msgid "Effe_cts"
@@ -669,7 +669,7 @@ msgstr "Gravar em relevo"
 
 #: ../Pinta/Main.cs:65
 msgid "Enable additional logging or behavior changes for debugging"
-msgstr ""
+msgstr "Ativar registro adicional ou mudanças de comportamento para depuração"
 
 #: ../Pinta.Core/Actions/EditActions.cs:76
 #: ../Pinta.Core/Actions/EditActions.cs:267
@@ -686,7 +686,7 @@ msgstr "Erro"
 
 #: ../Pinta.Effects/Effects/DitheringEffect.cs:133
 msgid "Error Diffusion Method"
-msgstr ""
+msgstr "Método de Difusão de Erro"
 
 #: ../Pinta.Core/Classes/SelectionModeHandler.cs:48
 msgid "Exclude (-) (Right Click)"
@@ -695,11 +695,11 @@ msgstr "Exclusão (-) (Botão direito do rato)"
 #. Translators: This refers to expanding the canvas size when pasting a larger image.
 #: ../Pinta/Actions/Edit/PasteAction.cs:223
 msgid "Expand"
-msgstr ""
+msgstr "Expandir"
 
 #: ../Pinta.Gui.Addins/AddinManagerDialog.cs:281
 msgid "Extension packages"
-msgstr ""
+msgstr "Pacote de Expansão"
 
 #: ../Pinta.Effects/Effects/JuliaFractalEffect.cs:172
 #: ../Pinta.Effects/Effects/MandelbrotFractalEffect.cs:187
@@ -708,15 +708,15 @@ msgstr "Fator"
 
 #: ../Pinta/Actions/File/NewScreenshotAction.cs:80
 msgid "Failed to access XDG Desktop Portals"
-msgstr ""
+msgstr "Falha ao acessar XDG Desktop Portals"
 
 #: ../Pinta/MainWindow.cs:277
 msgid "Failed to initialize add-in"
-msgstr ""
+msgstr "Falha ao inicializar complemento"
 
 #: ../Pinta.Gui.Addins/InstallDialog.cs:188
 msgid "Failed to load extension package"
-msgstr ""
+msgstr "Falha ao carregar pacote de extensão"
 
 #: ../Pinta.Core/Managers/WorkspaceManager.cs:428
 msgid "Failed to open image"
@@ -729,7 +729,7 @@ msgstr "Falha ao guardar imagem"
 #: ../Pinta/Actions/File/NewScreenshotAction.cs:79
 #: ../Pinta/Actions/File/NewScreenshotAction.cs:104
 msgid "Failed to take screenshot"
-msgstr "Falhou em fazer captura do ecrã"
+msgstr "Falhou em fazer captura de tela"
 
 #: ../Pinta.Core/Actions/HelpActions.cs:46
 msgid "File a Bug"
@@ -737,7 +737,7 @@ msgstr "Reportar um erro"
 
 #: ../Pinta/Main.cs:61
 msgid "Files to open"
-msgstr ""
+msgstr "Arquivos para abrir"
 
 #: ../Pinta.Tools/Tools/TextTool.cs:268
 msgid "Fill Background"
@@ -770,7 +770,7 @@ msgstr "Finalizado"
 
 #: ../Pinta.Core/HistoryItems/FinishPixelsHistoryItem.cs:41
 msgid "Finish Pixels"
-msgstr "Finalizar pixéis"
+msgstr "Finalizar pixels"
 
 #: ../Pinta.Core/Actions/ImageActions.cs:63
 #: ../Pinta.Core/Actions/ImageActions.cs:163
@@ -780,7 +780,7 @@ msgstr "Alisar"
 
 #: ../Pinta/Actions/File/SaveDocumentImplementationAction.cs:155
 msgid "Flattening the image will merge all layers into a single layer."
-msgstr ""
+msgstr "Achatar a imagem irá mesclar todas as camadas em uma única camada."
 
 #: ../Pinta.Core/Actions/ImageActions.cs:58
 #: ../Pinta.Core/Actions/LayerActions.cs:67
@@ -815,12 +815,12 @@ msgstr "Modo de inundação"
 #. Translators: Image dithering matrix named after Robert W. Floyd and Louis Steinberg
 #: ../Pinta.Effects/Classes/ErrorDiffusionMatrix.cs:40
 msgid "Floyd-Steinberg"
-msgstr ""
+msgstr "Floyd-Steinberg"
 
 #. Translators: Image dithering matrix named after Robert W. Floyd and Louis Steinberg. Some software may use it and call it Floyd-Steinberg, but it's not the actual Floyd-Steinberg matrix
 #: ../Pinta.Effects/Classes/ErrorDiffusionMatrix.cs:44
 msgid "Floyd-Steinberg Lite"
-msgstr ""
+msgstr "Floyd-Steinberg Leve"
 
 #: ../Pinta.Tools/Tools/TextTool.cs:154
 msgid "Font"
@@ -844,7 +844,7 @@ msgstr "Vidro fosco"
 
 #: ../Pinta.Core/Actions/ViewActions.cs:82
 msgid "Fullscreen"
-msgstr "Ecrã inteiro"
+msgstr "Tela inteira"
 
 #: ../Pinta.Gui.Addins/AddinManagerDialog.cs:84
 msgid "Gallery"
@@ -904,17 +904,17 @@ msgstr "Histórico"
 #. Translators: Horizontal color sorting with blue (B) as the leading term
 #: ../Pinta.Effects/Effects/VoronoiDiagramEffect.cs:238
 msgid "Horizontal blue (B)"
-msgstr ""
+msgstr "Azul Horizontal (B)"
 
 #. Translators: Horizontal color sorting with green (G) as the leading term
 #: ../Pinta.Effects/Effects/VoronoiDiagramEffect.cs:241
 msgid "Horizontal green (G)"
-msgstr ""
+msgstr "Verde Horizontal (G)"
 
 #. Translators: Horizontal color sorting with red (R) as the leading term
 #: ../Pinta.Effects/Effects/VoronoiDiagramEffect.cs:244
 msgid "Horizontal red (R)"
-msgstr ""
+msgstr "Vermelho Horizontal (R)"
 
 #: ../Pinta.Core/Effects/UserBlendOps.cs:45
 #: ../Pinta.Effects/Adjustments/HueSaturationEffect.cs:60
@@ -997,7 +997,7 @@ msgstr "Instalar"
 
 #: ../Pinta.Gui.Addins/AddinManagerDialog.cs:245
 msgid "Install Extension Package"
-msgstr ""
+msgstr "Instalar Pacote de Expansão"
 
 #: ../Pinta.Gui.Addins/AddinManagerDialog.cs:108
 msgid "Install from file..."
@@ -1044,7 +1044,7 @@ msgstr "Qualidade JPEG"
 #. Translators: Image dithering matrix named after J. F. Jarvis, C. N. Judice, and W. H. Ninke
 #: ../Pinta.Effects/Classes/ErrorDiffusionMatrix.cs:36
 msgid "Jarvis-Judice-Ninke"
-msgstr ""
+msgstr "Jarvis-Judice-Ninke"
 
 #: ../Pinta.Effects/Effects/JuliaFractalEffect.cs:26
 msgid "Julia Fractal"
@@ -1106,6 +1106,13 @@ msgid ""
 "Hold Shift to rotate in steps.\n"
 "Use arrow keys to move selected content by a single pixel."
 msgstr ""
+"Clique com o botão esquerdo e arraste a seleção para mover o conteúdo "
+"selecionado.\n"
+"Segure {0} para redimensionar em vez de mover.\n"
+"Clique com o botão direito e arraste a seleção para rotacionar o conteúdo "
+"selecionado.\n"
+"Mantenha Shift para rotacionar em etapas.\n"
+"Use as teclas de seta para mover o conteúdo selecionado um pixel por vez."
 
 #: ../Pinta.Tools/Tools/MoveSelectionTool.cs:48
 #, csharp-format
@@ -1116,6 +1123,13 @@ msgid ""
 "Hold Shift to rotate in steps.\n"
 "Use arrow keys to move selection outline by a single pixel."
 msgstr ""
+"Clique com o botão esquerdo e arraste a seleção para mover o contorno da "
+"seleção.\n"
+"Mantenha {0} pressionado para redimensionar em vez de mover.\n"
+"Clique com o botão direito e arraste a seleção para rotacionar o contorno da "
+"seleção.\n"
+"Mantenha Shift pressionado para rotacionar em etapas.\n"
+"Use as teclas de seta para mover o contorno da seleção um pixel por vez."
 
 #. Translators: {0} is 'Ctrl', or a platform-specific key such as 'Command' on macOS.
 #: ../Pinta.Tools/Tools/ShapeTool.cs:58
@@ -1136,12 +1150,33 @@ msgid ""
 "exact same position.\n"
 "Press Enter to finalize the shape."
 msgstr ""
+"Clique com o botão esquerdo para desenhar uma forma com a cor primária.\n"
+"Clique com o botão esquerdo em uma forma para adicionar um ponto de controle."
+"\n"
+"Clique com o botão esquerdo em um ponto de controle e arraste para movê-lo.\n"
+"Clique com o botão direito em um ponto de controle e arraste para alterar "
+"sua tensão.\n"
+"Mantenha Shift pressionado para alinhar aos ângulos.\n"
+"Use as teclas de seta para mover o ponto de controle selecionado.\n"
+"Pressione {0} + setas esquerda/direita para selecionar pontos de controle "
+"por ordem.\n"
+"Pressione Delete para excluir o ponto de controle selecionado.\n"
+"Pressione Espaço para adicionar um novo ponto de controle na posição do "
+"mouse.\n"
+"Mantenha {0} pressionado ao pressionar Espaço para criar o ponto de controle "
+"exatamente na mesma posição.\n"
+"Mantenha {0} pressionado ao clicar com o botão esquerdo em um ponto de "
+"controle para criar uma nova forma exatamente na mesma posição.\n"
+"Pressione Enter para finalizar a forma."
 
 #: ../Pinta.Tools/Tools/PencilTool.cs:51
 msgid ""
 "Left click to draw freeform one-pixel wide lines with the primary color.\n"
 "Right click to use the secondary color."
 msgstr ""
+"Clique com o botão esquerdo para desenhar linhas livres de um pixel de "
+"largura com a cor primária.\n"
+"Clique com o botão direito para usar a cor secundária."
 
 #: ../Pinta.Tools/Tools/FreeformShapeTool.cs:53
 #: ../Pinta.Tools/Tools/PaintBrushTool.cs:58
@@ -1180,12 +1215,17 @@ msgid ""
 "Left click to replace the secondary color with the primary color.\n"
 "Right click to reverse."
 msgstr ""
+"Clique com o botão esquerdo para trocar a cor secundária com a cor primária."
+"\n"
+"Clique com o botão direito para reverter."
 
 #: ../Pinta.Tools/Tools/ColorPickerTool.cs:54
 msgid ""
 "Left click to set primary color.\n"
 "Right click to set secondary color."
 msgstr ""
+"Clique com o botão esquerdo para definir a cor principal.\n"
+"Clique com o botão direito para definir a cor secundária."
 
 #: ../Pinta.Gui.Widgets/Widgets/StatusBarColorPaletteWidget.cs:250
 msgid "Left click to set primary color. Right click to set secondary color."
@@ -1207,6 +1247,9 @@ msgid ""
 "Right click to zoom out.\n"
 "Click and drag to zoom in selection."
 msgstr ""
+"Clique com o botão esquerdo para aumentar o zoom.\n"
+"Clique com o botão direito para diminuir o zoom.\n"
+"Clique e arraste para ampliar a seleção."
 
 #: ../Pinta.Tools/Editable/EditEngines/ArrowedEditEngine.cs:330
 msgid "Length"
@@ -1227,7 +1270,7 @@ msgstr "Licença"
 #. Translators: This refers to using a light variant of the color scheme.
 #: ../Pinta.Core/Actions/ViewActions.cs:192
 msgid "Light"
-msgstr ""
+msgstr "Claro"
 
 #: ../Pinta.Core/Effects/UserBlendOps.cs:37
 msgid "Lighten"
@@ -1244,7 +1287,7 @@ msgstr "Luz"
 #. Translators: Gradient with a citrusy vibe that starts out white, goes through light yellow, several shades of green, and then transparent, blending with the background
 #: ../Pinta.Effects/Effects/GradientHelper.cs:48
 msgid "Lime Lemon"
-msgstr ""
+msgstr "Limão Lima"
 
 #: ../Pinta.Tools/Tools/LineCurveTool.cs:41
 msgid "Line/Curve"
@@ -1277,7 +1320,7 @@ msgstr "Seleção varinha mágica"
 
 #: ../Pinta/MainWindow.cs:378
 msgid "Main Menu"
-msgstr ""
+msgstr "Menu Principal"
 
 #: ../Pinta/Dialogs/ResizeCanvasDialog.cs:105
 #: ../Pinta/Dialogs/ResizeImageDialog.cs:123
@@ -1307,7 +1350,7 @@ msgstr "Modificado"
 
 #: ../Pinta.Gui.Addins/AddinInfoView.cs:142
 msgid "More Information..."
-msgstr ""
+msgstr "Mais informações..."
 
 #: ../Pinta.Effects/Effects/MotionBlurEffect.cs:27
 msgid "Motion Blur"
@@ -1341,7 +1384,7 @@ msgstr "Nome:"
 
 #: ../Pinta.Core/Enumerations/ResamplingMode.cs:23
 msgid "Nearest Neighbor"
-msgstr ""
+msgstr "Vizinho mais Próximo"
 
 #: ../Pinta.Core/Actions/FileActions.cs:59
 msgid "New"
@@ -1366,7 +1409,7 @@ msgstr "Novo..."
 
 #: ../Pinta.Gui.Addins/AddinListView.cs:58
 msgid "No Items Found"
-msgstr ""
+msgstr "Nenhum item encontrado"
 
 #: ../Pinta.Effects/Effects/AddNoiseEffect.cs:28
 #: ../Pinta.Effects/Effects/MedianEffect.cs:30
@@ -1394,11 +1437,11 @@ msgstr "Normal e contorno"
 
 #: ../Pinta.Effects/Effects/VoronoiDiagramEffect.cs:205
 msgid "Number of Cells"
-msgstr ""
+msgstr "Número de células"
 
 #: ../Pinta/Main.cs:55
 msgid "Number of threads to use for rendering"
-msgstr ""
+msgstr "Número de threads a serem utilizados para renderização"
 
 #: ../Pinta.Effects/Effects/BulgeEffect.cs:112
 #: ../Pinta.Effects/Effects/RadialBlurEffect.cs:173
@@ -1412,7 +1455,7 @@ msgstr "Desvio"
 #: ../Pinta/Actions/Edit/OffsetSelectionAction.cs:74
 #: ../Pinta/Dialogs/OffsetSelectionDialog.cs:44
 msgid "Offset Selection"
-msgstr ""
+msgstr "Seleção de deslocamento"
 
 #: ../Pinta.Effects/Effects/OilPaintingEffect.cs:23
 msgid "Oil Painting"
@@ -1617,7 +1660,7 @@ msgstr "Pixéis"
 #. Translators: Gradient with different shades of brownish yellow
 #: ../Pinta.Effects/Effects/GradientHelper.cs:52
 msgid "Piña Colada"
-msgstr ""
+msgstr "Pina Colada"
 
 #: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:599
 #: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:785
@@ -1648,11 +1691,11 @@ msgstr "Energia"
 #. Translators: This refers to preserving the current canvas size when pasting a larger image.
 #: ../Pinta/Actions/Edit/PasteAction.cs:221
 msgid "Preserve"
-msgstr ""
+msgstr "Manter"
 
 #: ../Pinta.Effects/Effects/GradientHelper.cs:11
 msgid "Preset Gradient"
-msgstr ""
+msgstr "Manter Gradiente"
 
 #: ../Pinta/Dialogs/NewImageDialog.cs:341
 msgid "Preset:"
@@ -1710,22 +1753,22 @@ msgstr "Raio"
 #: ../Pinta.Effects/Effects/BulgeEffect.cs:116
 #: ../Pinta.Effects/Effects/VignetteEffect.cs:136
 msgid "Radius Percentage"
-msgstr ""
+msgstr "Manter Radius"
 
 #: ../Pinta.Effects/Effects/GradientHelper.cs:17
 #: ../Pinta.Effects/Effects/VoronoiDiagramEffect.cs:235
 msgid "Random"
-msgstr ""
+msgstr "Aleatório"
 
 #: ../Pinta.Effects/Effects/CloudsEffect.cs:194
 #: ../Pinta.Effects/Effects/JuliaFractalEffect.cs:187
 #: ../Pinta.Effects/Effects/MandelbrotFractalEffect.cs:205
 msgid "Random Color Scheme Seed"
-msgstr ""
+msgstr "Semente de Esquema de Cores Aleatório"
 
 #: ../Pinta.Effects/Effects/VoronoiDiagramEffect.cs:219
 msgid "Random Colors"
-msgstr ""
+msgstr "Cores Aleatórias"
 
 #: ../Pinta.Effects/Effects/AddNoiseEffect.cs:176
 #: ../Pinta.Effects/Effects/CloudsEffect.cs:185
@@ -1735,7 +1778,7 @@ msgstr "Ruído aleatório"
 
 #: ../Pinta.Effects/Effects/VoronoiDiagramEffect.cs:222
 msgid "Random Point Locations"
-msgstr ""
+msgstr "Ponto de Localização Aleatória"
 
 #: ../Pinta.Tools/Tools/RecolorTool.cs:57
 msgid "Recolor"
@@ -1807,11 +1850,11 @@ msgstr "Substituir"
 
 #: ../Pinta/Dialogs/ErrorDialog.cs:67
 msgid "Report Bug..."
-msgstr ""
+msgstr "Reportar Erro..."
 
 #: ../Pinta/Dialogs/ResizeImageDialog.cs:73
 msgid "Resampling:"
-msgstr ""
+msgstr "Reamostragem:"
 
 #: ../Pinta.Gui.Widgets/Widgets/ReseedButtonWidget.cs:62
 msgid "Reseed"
@@ -1852,12 +1895,12 @@ msgstr "Ajustar paleta"
 #: ../Pinta.Effects/Effects/JuliaFractalEffect.cs:190
 #: ../Pinta.Effects/Effects/MandelbrotFractalEffect.cs:208
 msgid "Reverse Color Scheme"
-msgstr ""
+msgstr "Esquema de Cor Reversa"
 
 #. Translators: In this context, "reverse" is a verb, and the user can choose whether or not they want to reverse the color sorting
 #: ../Pinta.Effects/Effects/VoronoiDiagramEffect.cs:216
 msgid "Reverse Color Sorting"
-msgstr ""
+msgstr "Ordenação Reversa de Cores"
 
 #: ../Pinta.Tools/Tools/TextTool.cs:242
 msgid "Right Align"
@@ -1972,7 +2015,7 @@ msgstr "Selecionar tudo"
 
 #: ../Pinta.Effects/Effects/GradientHelper.cs:14
 msgid "Selected Colors"
-msgstr ""
+msgstr "Cor Selecionada"
 
 #: ../Pinta.Effects/Adjustments/SepiaEffect.cs:25
 msgid "Sepia"
@@ -2002,7 +2045,7 @@ msgstr "Mostrar camada"
 #. Translators: The user can choose whether or not to render the points used in the calculation of a Voronoi diagram
 #: ../Pinta.Effects/Effects/VoronoiDiagramEffect.cs:209
 msgid "Show Points"
-msgstr ""
+msgstr "Mostrar Pontos"
 
 #: ../Pinta.Core/Actions/ViewActions.cs:160
 msgid "Show/Hide"
@@ -2011,12 +2054,12 @@ msgstr "Mostrar/Ocultar"
 #. Translators: Image dithering matrix named after Frankie Sierra
 #: ../Pinta.Effects/Classes/ErrorDiffusionMatrix.cs:12
 msgid "Sierra"
-msgstr ""
+msgstr "Sierra"
 
 #. Translators: Image dithering matrix named after Frankie Sierra
 #: ../Pinta.Effects/Classes/ErrorDiffusionMatrix.cs:20
 msgid "Sierra Lite"
-msgstr ""
+msgstr "Sierra Lite"
 
 #: ../Pinta.Tools/Tools/ColorPickerTool.cs:222
 msgid "Single Pixel"
@@ -2062,7 +2105,7 @@ msgstr "Intensidade"
 #. Translators: Image dithering matrix named after Peter Stucki
 #: ../Pinta.Effects/Classes/ErrorDiffusionMatrix.cs:32
 msgid "Stucki"
-msgstr ""
+msgstr "Stucki"
 
 #: ../Pinta.Effects/Effects/EdgeDetectEffect.cs:32
 #: ../Pinta.Effects/Effects/EmbossEffect.cs:32
@@ -2095,7 +2138,7 @@ msgstr "Estilo do texto"
 #: ../Pinta/MainWindow.cs:275
 #, csharp-format
 msgid "The '{0}' add-in may not be compatible with this version of Pinta"
-msgstr ""
+msgstr "O complemento '{0}' talvez não seja compatível com esta versão do Pinta"
 
 #: ../Pinta/Actions/Edit/PasteAction.cs:205
 msgid "The clipboard does not contain an image."
@@ -2103,7 +2146,7 @@ msgstr "A área de transferência não tem imagens."
 
 #: ../Pinta.Gui.Addins/InstallDialog.cs:189
 msgid "The file may be an invalid or corrupt extension package"
-msgstr ""
+msgstr "O arquivo pode ser um pacote de extensão inválido ou corrompido"
 
 #: ../Pinta.Gui.Addins/InstallDialog.cs:74
 msgid "The following dependencies could not be resolved:"
@@ -2126,6 +2169,8 @@ msgid ""
 "The image being pasted is larger than the canvas. What would you like to do "
 "to the canvas size?"
 msgstr ""
+"A imagem colada é maior que o tamanho da área atual. Você deseja alterar o "
+"tamanho do área?"
 
 #: ../Pinta.Gui.Addins/InstallDialog.cs:341
 msgid "The installation failed!"
@@ -2140,6 +2185,8 @@ msgid ""
 "The selected extension packages can't be installed because there are "
 "dependency conflicts."
 msgstr ""
+"O pacote de extensão não pode ser instalado porque ele tem conflito de "
+"dependências."
 
 #: ../Pinta.Gui.Addins/InstallDialog.cs:348
 msgid "The uninstallation failed!"
@@ -2154,6 +2201,8 @@ msgid ""
 "There are other extension packages that depend on the previous ones which "
 "will also be uninstalled:"
 msgstr ""
+"Há outros pacotes de extensão que dependem dos anteriores e também serão "
+"desinstalados:"
 
 #: ../Pinta.Effects/Effects/OutlineEffect.cs:136
 msgid "Thickness"
@@ -2161,7 +2210,7 @@ msgstr "Espessura"
 
 #: ../Pinta/Actions/File/SaveDocumentImplementationAction.cs:154
 msgid "This format does not support layers. Flatten image?"
-msgstr ""
+msgstr "Este formato não suporte camadas. Achatar a imagem?"
 
 #: ../Pinta.Effects/Effects/TileEffect.cs:23
 msgid "Tile Reflection"
@@ -2216,7 +2265,7 @@ msgstr "Transparente"
 
 #: ../Pinta.Effects/Effects/DentsEffect.cs:121
 msgid "Turbulence"
-msgstr ""
+msgstr "Turbulência"
 
 #: ../Pinta.Effects/Effects/TwistEffect.cs:24
 msgid "Twist"
@@ -2225,7 +2274,7 @@ msgstr "Torção"
 #. Translators: Image dithering matrix named after Frankie Sierra
 #: ../Pinta.Effects/Classes/ErrorDiffusionMatrix.cs:16
 msgid "Two-Row Sierra"
-msgstr ""
+msgstr "Sierra Duas-Setas"
 
 #: ../Pinta.Tools/Tools/EraserTool.cs:258
 #: ../Pinta.Tools/Tools/PaintBrushTool.cs:165
@@ -2251,7 +2300,7 @@ msgstr "Desinstalar"
 
 #: ../Pinta.Gui.Addins/AddinInfoView.cs:168
 msgid "Uninstall..."
-msgstr ""
+msgstr "Desinstalar..."
 
 #. Translators: {0} is 'Ctrl', or a platform-specific key such as 'Command' on macOS.
 #: ../Pinta.Core/Classes/SelectionModeHandler.cs:47
@@ -2270,11 +2319,11 @@ msgstr "Formato de ficheiro nao suportado"
 
 #: ../Pinta.Core/Classes/Palette.cs:153
 msgid "Unsupported palette format"
-msgstr ""
+msgstr "Formato de paleta não suportada"
 
 #: ../Pinta.Gui.Addins/AddinInfoView.cs:159
 msgid "Update..."
-msgstr ""
+msgstr "Atualizar..."
 
 #: ../Pinta.Gui.Addins/AddinManagerDialog.cs:86
 msgid "Updates"
@@ -2295,27 +2344,27 @@ msgstr "Utiliza alguns ícones de:"
 #: ../Pinta.Gui.Addins/AddinInfoView.cs:199
 #, csharp-format
 msgid "Version: {0}"
-msgstr ""
+msgstr "Versão: {0}"
 
 #. Translators: Vertical color sorting with blue (B) as the leading term
 #: ../Pinta.Effects/Effects/VoronoiDiagramEffect.cs:248
 msgid "Vertical blue (B)"
-msgstr ""
+msgstr "Azul Vertical (B)"
 
 #. Translators: Vertical color sorting with green (G) as the leading term
 #: ../Pinta.Effects/Effects/VoronoiDiagramEffect.cs:251
 msgid "Vertical green (G)"
-msgstr ""
+msgstr "Verde Vertical (G)"
 
 #. Translators: Vertical color sorting with red (R) as the leading term
 #: ../Pinta.Effects/Effects/VoronoiDiagramEffect.cs:254
 msgid "Vertical red (R)"
-msgstr ""
+msgstr "Vermelho Vertical (B)"
 
 #. Translators: The vignette effect darkens the outer edges of an image, which fade into an unchanged circular area in the center (or at some other point chosen by the user), similar to what is seen during the closing scene in old cartoons
 #: ../Pinta.Effects/Effects/VignetteEffect.cs:49
 msgid "Vignette"
-msgstr ""
+msgstr "Vinheta (Vignette)"
 
 #: ../Pinta/Dialogs/LayerPropertiesDialog.cs:78
 msgid "Visible"
@@ -2323,7 +2372,7 @@ msgstr "Visível"
 
 #: ../Pinta.Effects/Effects/VoronoiDiagramEffect.cs:21
 msgid "Voronoi Diagram"
-msgstr ""
+msgstr "Diagrama de Voronoi"
 
 #: ../Pinta.Effects/Effects/SoftenPortraitEffect.cs:120
 msgid "Warmth"
@@ -2409,11 +2458,11 @@ msgstr "_Ajustes"
 #: ../Pinta/Actions/File/SaveDocumentImplementationAction.cs:158
 #: ../Pinta/Dialogs/ProgressDialog.cs:56
 msgid "_Cancel"
-msgstr ""
+msgstr "_Cancelar"
 
 #: ../Pinta/Actions/File/CloseDocumentAction.cs:84
 msgid "_Discard"
-msgstr ""
+msgstr "_Descartar"
 
 #: ../Pinta/MainWindow.cs:332
 msgid "_Edit"
@@ -2440,7 +2489,7 @@ msgstr "_Camadas"
 #: ../Pinta.Gui.Addins/InstallDialog.cs:193 ../Pinta/Dialogs/ErrorDialog.cs:41
 #: ../Pinta/Dialogs/ErrorDialog.cs:69
 msgid "_OK"
-msgstr ""
+msgstr "_OK"
 
 #: ../Pinta/Actions/File/CloseDocumentAction.cs:85
 msgid "_Save"
