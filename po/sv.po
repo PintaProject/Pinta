@@ -8,10 +8,10 @@ msgstr ""
 "Project-Id-Version: pinta\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2024-07-07 01:20+0000\n"
-"PO-Revision-Date: 2024-07-06 06:09+0000\n"
-"Last-Translator: Åke Engelbrektson <eson@svenskasprakfiler.se>\n"
-"Language-Team: Swedish <https://hosted.weblate.org/projects/pinta/pinta/sv/"
-">\n"
+"PO-Revision-Date: 2024-07-22 23:09+0000\n"
+"Last-Translator: bittin1ddc447d824349b2 <bittin@reimu.nl>\n"
+"Language-Team: Swedish <https://hosted.weblate.org/projects/pinta/pinta/sv/>"
+"\n"
 "Language: sv\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -779,7 +779,7 @@ msgstr "Tillplatta"
 
 #: ../Pinta/Actions/File/SaveDocumentImplementationAction.cs:155
 msgid "Flattening the image will merge all layers into a single layer."
-msgstr ""
+msgstr "Om du plattar ut bilden sammanfogas alla lager till ett enda lager."
 
 #: ../Pinta.Core/Actions/ImageActions.cs:58
 #: ../Pinta.Core/Actions/LayerActions.cs:67
@@ -2202,7 +2202,7 @@ msgstr "Tjocklek"
 
 #: ../Pinta/Actions/File/SaveDocumentImplementationAction.cs:154
 msgid "This format does not support layers. Flatten image?"
-msgstr ""
+msgstr "Det här formatet stöder inte lager. Platta ut bild?"
 
 #: ../Pinta.Effects/Effects/TileEffect.cs:23
 msgid "Tile Reflection"
