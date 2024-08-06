@@ -10,6 +10,8 @@
 
 using System;
 using System.Threading.Tasks;
+using Cairo;
+using Pango;
 using Pinta.Core;
 
 namespace Pinta.Tools;
@@ -25,6 +27,7 @@ public sealed class TextTool : BaseTool
 
 	private PointI click_point;
 	private bool is_editing;
+	private bool is_antialiased = true;
 	private RectangleI old_cursor_bounds = RectangleI.Zero;
 
 	//This is used to temporarily store the UserLayer's and TextLayer's previous ImageSurface states.
@@ -137,6 +140,7 @@ public sealed class TextTool : BaseTool
 	private Gtk.Separator outline_sep = null!;
 	private Gtk.SpinButton outline_width = null!;
 	private Gtk.Label outline_width_label = null!;
+	private ToolBarDropDownButton antialiasing_button = null!;
 
 	private const string FONT_SETTING = "text-font";
 	private const string BOLD_SETTING = "text-bold";
@@ -145,6 +149,8 @@ public sealed class TextTool : BaseTool
 	private const string ALIGNMENT_SETTING = "text-alignment";
 	private const string STYLE_SETTING = "text-style";
 	private const string OUTLINE_WIDTH_SETTING = "text-outline-width";
+	private string ANTIALIAS_SETTING
+		=> $"{GetType ().Name.ToLowerInvariant ()}-antialias";
 
 	protected override void OnBuildToolBar (Gtk.Box tb)
 	{
@@ -293,6 +299,19 @@ public sealed class TextTool : BaseTool
 
 		outline_width.Visible = outline_width_label.Visible = outline_sep.Visible = StrokeText;
 
+		if (antialiasing_button is null) {
+			antialiasing_button = new ToolBarDropDownButton ();
+
+			antialiasing_button.AddItem (Translations.GetString ("Antialiasing On"), Pinta.Resources.Icons.AntiAliasingEnabled, true);
+			antialiasing_button.AddItem (Translations.GetString ("Antialiasing Off"), Pinta.Resources.Icons.AntiAliasingDisabled, false);
+
+			antialiasing_button.SelectedIndex = Settings.GetSetting (ANTIALIAS_SETTING, 0);
+
+			antialiasing_button.SelectedItemChanged += HandleAntiAliasing;
+		}
+
+		tb.Append (antialiasing_button);
+
 		UpdateFont ();
 
 		if (workspace.HasOpenDocuments) {
@@ -410,6 +429,25 @@ public sealed class TextTool : BaseTool
 
 	private void HandleSelectedLayerChanged (object? sender, EventArgs e)
 	{
+		UpdateFont ();
+	}
+
+	private void HandleAntiAliasing (object? sender, EventArgs e)
+	{
+		var antialiasing = antialiasing_button.SelectedItem.GetTagOrDefault (true);
+		if (antialiasing) {
+			Settings.PutSetting (ANTIALIAS_SETTING, 0);
+			var options = new Cairo.FontOptions ();
+			options.Antialias = Antialias.Gray;
+			PangoCairo.Functions.ContextSetFontOptions (PintaCore.Chrome.MainWindow.GetPangoContext (), options);
+		} else {
+			Settings.PutSetting (ANTIALIAS_SETTING, 1);
+			var options = new Cairo.FontOptions ();
+			options.Antialias = Antialias.None;
+			PangoCairo.Functions.ContextSetFontOptions (PintaCore.Chrome.MainWindow.GetPangoContext (), options);
+		}
+
+
 		UpdateFont ();
 	}
 
@@ -976,6 +1014,8 @@ public sealed class TextTool : BaseTool
 		}
 
 		Cairo.Context g = new (surf);
+		if(Settings.GetSetting (ANTIALIAS_SETTING, 0) == 1)
+			g.Antialias = Cairo.Antialias.None;
 		g.Save ();
 
 		// Show selection if on text layer
