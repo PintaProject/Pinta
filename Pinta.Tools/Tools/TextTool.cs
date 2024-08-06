@@ -27,7 +27,6 @@ public sealed class TextTool : BaseTool
 
 	private PointI click_point;
 	private bool is_editing;
-	private bool is_antialiased = true;
 	private RectangleI old_cursor_bounds = RectangleI.Zero;
 
 	//This is used to temporarily store the UserLayer's and TextLayer's previous ImageSurface states.
