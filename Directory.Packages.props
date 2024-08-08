@@ -19,6 +19,6 @@
     <PackageVersion Include="BenchmarkDotNet" Version="0.13.12" />
     <PackageVersion Include="NUnit" Version="4.1.0" />
     <PackageVersion Include="Microsoft.NET.Test.Sdk" Version="17.10.0" />
-    <PackageVersion Include="NUnit3TestAdapter" Version="4.5.0" />
+    <PackageVersion Include="NUnit3TestAdapter" Version="4.6.0" />
   </ItemGroup>
 </Project>
