@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: pinta\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2024-07-07 01:20+0000\n"
-"PO-Revision-Date: 2024-06-27 14:09+0000\n"
+"PO-Revision-Date: 2024-07-30 11:09+0000\n"
 "Last-Translator: grof <grofaty@hotmail.com>\n"
 "Language-Team: Slovenian <https://hosted.weblate.org/projects/pinta/pinta/sl/"
 ">\n"
@@ -573,7 +573,7 @@ msgstr "Izbrisano"
 #. Translators: This refers to an image distortion that creates small, random warps or distortions in the image, like tiny dents, bumps, or waves
 #: ../Pinta.Effects/Effects/DentsEffect.cs:48
 msgid "Dents"
-msgstr ""
+msgstr "Udrtine"
 
 #: ../Pinta.Core/Actions/EditActions.cs:278
 msgid "Deselect"
@@ -781,7 +781,7 @@ msgstr "Splošči"
 
 #: ../Pinta/Actions/File/SaveDocumentImplementationAction.cs:155
 msgid "Flattening the image will merge all layers into a single layer."
-msgstr ""
+msgstr "Sploščitev slike bo združilo vse plasti v eno plast."
 
 #: ../Pinta.Core/Actions/ImageActions.cs:58
 #: ../Pinta.Core/Actions/LayerActions.cs:67
@@ -2200,7 +2200,7 @@ msgstr "Debelina"
 
 #: ../Pinta/Actions/File/SaveDocumentImplementationAction.cs:154
 msgid "This format does not support layers. Flatten image?"
-msgstr ""
+msgstr "Ta zapis ne omogoča plasti. Splošči sliko?"
 
 #: ../Pinta.Effects/Effects/TileEffect.cs:23
 msgid "Tile Reflection"
@@ -2255,7 +2255,7 @@ msgstr "Prosojno"
 
 #: ../Pinta.Effects/Effects/DentsEffect.cs:121
 msgid "Turbulence"
-msgstr ""
+msgstr "Turbolenca"
 
 #: ../Pinta.Effects/Effects/TwistEffect.cs:24
 msgid "Twist"
