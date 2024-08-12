@@ -24,6 +24,7 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 // THE SOFTWARE.
 
+
 using System;
 using System.Linq;
 using Cairo;
@@ -39,6 +40,9 @@ public sealed class PaintBrushTool : BaseBrushTool
 	private BasePaintBrush? default_brush;
 	private BasePaintBrush? active_brush;
 	private PointI? last_point = PointI.Zero;
+
+	private ImageSurface? old_surface;
+	private Path? path;
 
 	private const string BRUSH_SETTING = "paint-brush-brush";
 
@@ -84,6 +88,8 @@ public sealed class PaintBrushTool : BaseBrushTool
 	{
 		base.OnMouseDown (document, e);
 
+		old_surface = CairoExtensions.Clone (document.Layers.CurrentUserLayer.Surface);
+
 		active_brush?.DoMouseDown ();
 	}
 
@@ -96,6 +102,11 @@ public sealed class PaintBrushTool : BaseBrushTool
 			last_point = null;
 			return;
 		}
+
+		if (old_surface is null)
+			return;
+
+		bool isPlainBrush = active_brush is Pinta.Tools.Brushes.PlainBrush;
 
 		// TODO: also multiply color by pressure
 		Color strokeColor = mouse_button switch {
@@ -119,15 +130,23 @@ public sealed class PaintBrushTool : BaseBrushTool
 		if (document.Workspace.PointInCanvas (e.PointDouble))
 			surface_modified = true;
 
-		var surf = document.Layers.CurrentUserLayer.Surface;
-		var brush_width = BrushWidth;
+		var surf = (isPlainBrush) ?
+			CairoExtensions.Clone (old_surface) :
+			document.Layers.CurrentUserLayer.Surface
+		;
 
-		var g = document.CreateClippedContext ();
+		var g = document.CreateClippedContextFromSurface(surf);
+
 		g.Antialias = UseAntialiasing ? Antialias.Subpixel : Antialias.None;
-		g.LineWidth = brush_width;
+		g.LineWidth = BrushWidth;
 		g.LineJoin = LineJoin.Round;
 		g.LineCap = BrushWidth == 1 ? LineCap.Butt : LineCap.Round;
 		g.SetSourceColor (strokeColor);
+
+		if (isPlainBrush && path is not null) {
+			g.AppendPath (path);
+			g.MoveTo (last_point.Value.X, last_point.Value.Y);
+		}
 
 		BrushStrokeArgs strokeArgs = new (strokeColor, e.Point, last_point.Value);
 
@@ -141,11 +160,20 @@ public sealed class PaintBrushTool : BaseBrushTool
 			document.Workspace.Invalidate (document.ClampToImageSize (invalidate_rect));
 
 		last_point = e.Point;
+
+		path = g.CopyPath ();
+
+		if (isPlainBrush)
+			document.Layers.CurrentUserLayer.Surface = surf;
 	}
 
 	protected override void OnMouseUp (Document document, ToolMouseEventArgs e)
 	{
 		base.OnMouseUp (document, e);
+
+		old_surface = null;
+		path = null;
+
 		active_brush?.DoMouseUp ();
 	}
 

@@ -75,7 +75,6 @@ public sealed class PlainBrush : BasePaintBrush
 
 	private static void DrawNonSinglePixelLine (Context g, BrushStrokeArgs strokeArgs)
 	{
-		g.MoveTo (strokeArgs.LastPosition.X + 0.5, strokeArgs.LastPosition.Y + 0.5);
 		g.LineTo (strokeArgs.CurrentPosition.X + 0.5, strokeArgs.CurrentPosition.Y + 0.5);
 		g.StrokePreserve ();
 	}
