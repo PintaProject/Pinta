@@ -41,7 +41,6 @@ public sealed class PaintBrushTool : BaseBrushTool
 	private BasePaintBrush? active_brush;
 	private PointI? last_point = PointI.Zero;
 
-	private ImageSurface? old_surface;
 	private Path? path;
 
 	private const string BRUSH_SETTING = "paint-brush-brush";
@@ -88,7 +87,9 @@ public sealed class PaintBrushTool : BaseBrushTool
 	{
 		base.OnMouseDown (document, e);
 
-		old_surface = CairoExtensions.Clone (document.Layers.CurrentUserLayer.Surface);
+		document.Layers.ToolLayer.Clear ();
+		document.Layers.ToolLayer.Hidden = false;
+		path = null;
 
 		active_brush?.DoMouseDown ();
 	}
@@ -102,11 +103,6 @@ public sealed class PaintBrushTool : BaseBrushTool
 			last_point = null;
 			return;
 		}
-
-		if (old_surface is null)
-			return;
-
-		bool isPlainBrush = active_brush is Pinta.Tools.Brushes.PlainBrush;
 
 		// TODO: also multiply color by pressure
 		Color strokeColor = mouse_button switch {
@@ -130,12 +126,8 @@ public sealed class PaintBrushTool : BaseBrushTool
 		if (document.Workspace.PointInCanvas (e.PointDouble))
 			surface_modified = true;
 
-		var surf = (isPlainBrush) ?
-			CairoExtensions.Clone (old_surface) :
-			document.Layers.CurrentUserLayer.Surface
-		;
-
-		var g = document.CreateClippedContextFromSurface(surf);
+		var surf = document.Layers.ToolLayer.Surface;
+		var g = document.CreateClippedToolContext ();
 
 		g.Antialias = UseAntialiasing ? Antialias.Subpixel : Antialias.None;
 		g.LineWidth = BrushWidth;
@@ -143,9 +135,13 @@ public sealed class PaintBrushTool : BaseBrushTool
 		g.LineCap = BrushWidth == 1 ? LineCap.Butt : LineCap.Round;
 		g.SetSourceColor (strokeColor);
 
-		if (isPlainBrush && path is not null) {
-			g.AppendPath (path);
-			g.MoveTo (last_point.Value.X, last_point.Value.Y);
+		if (active_brush is Pinta.Tools.Brushes.PlainBrush) {
+			document.Layers.ToolLayer.Clear ();
+
+			if (path is null)
+				g.MoveTo (last_point.Value.X, last_point.Value.Y);
+			else
+				g.AppendPath (path);
 		}
 
 		BrushStrokeArgs strokeArgs = new (strokeColor, e.Point, last_point.Value);
@@ -162,17 +158,17 @@ public sealed class PaintBrushTool : BaseBrushTool
 		last_point = e.Point;
 
 		path = g.CopyPath ();
-
-		if (isPlainBrush)
-			document.Layers.CurrentUserLayer.Surface = surf;
 	}
 
 	protected override void OnMouseUp (Document document, ToolMouseEventArgs e)
 	{
-		base.OnMouseUp (document, e);
+		var gDest = new Context (document.Layers.CurrentUserLayer.Surface);
+		document.Layers.ToolLayer.Draw (gDest);
 
-		old_surface = null;
-		path = null;
+		document.Layers.ToolLayer.Clear ();
+		document.Layers.ToolLayer.Hidden = true;
+
+		base.OnMouseUp (document, e);
 
 		active_brush?.DoMouseUp ();
 	}

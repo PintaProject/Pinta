@@ -177,13 +177,6 @@ public sealed class Document
 		return g;
 	}
 
-	public Context CreateClippedContextFromSurface(ImageSurface surf)
-	{
-		Context g = new (surf);
-		Selection.Clip (g);
-		return g;
-	}
-
 	public Context CreateClippedContext (bool antialias)
 	{
 		Context g = new (Layers.CurrentUserLayer.Surface);
