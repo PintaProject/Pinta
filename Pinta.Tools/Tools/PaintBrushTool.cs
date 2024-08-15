@@ -41,8 +41,6 @@ public sealed class PaintBrushTool : BaseBrushTool
 	private BasePaintBrush? active_brush;
 	private PointI? last_point = PointI.Zero;
 
-	private Path? path;
-
 	private const string BRUSH_SETTING = "paint-brush-brush";
 
 	public PaintBrushTool (IServiceProvider services) : base (services)
@@ -87,9 +85,7 @@ public sealed class PaintBrushTool : BaseBrushTool
 	{
 		base.OnMouseDown (document, e);
 
-		document.Layers.ToolLayer.Clear ();
 		document.Layers.ToolLayer.Hidden = false;
-		path = null;
 
 		active_brush?.DoMouseDown ();
 	}
@@ -135,14 +131,8 @@ public sealed class PaintBrushTool : BaseBrushTool
 		g.LineCap = BrushWidth == 1 ? LineCap.Butt : LineCap.Round;
 		g.SetSourceColor (strokeColor);
 
-		if (active_brush is Pinta.Tools.Brushes.PlainBrush) {
+		if (active_brush is Pinta.Tools.Brushes.PlainBrush)
 			document.Layers.ToolLayer.Clear ();
-
-			if (path is null)
-				g.MoveTo (last_point.Value.X, last_point.Value.Y);
-			else
-				g.AppendPath (path);
-		}
 
 		BrushStrokeArgs strokeArgs = new (strokeColor, e.Point, last_point.Value);
 
@@ -156,13 +146,12 @@ public sealed class PaintBrushTool : BaseBrushTool
 			document.Workspace.Invalidate (document.ClampToImageSize (invalidate_rect));
 
 		last_point = e.Point;
-
-		path = g.CopyPath ();
 	}
 
 	protected override void OnMouseUp (Document document, ToolMouseEventArgs e)
 	{
 		var gDest = new Context (document.Layers.CurrentUserLayer.Surface);
+
 		document.Layers.ToolLayer.Draw (gDest);
 
 		document.Layers.ToolLayer.Clear ();
