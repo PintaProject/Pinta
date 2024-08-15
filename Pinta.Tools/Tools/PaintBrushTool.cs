@@ -128,7 +128,7 @@ public sealed class PaintBrushTool : BaseBrushTool
 		g.Antialias = UseAntialiasing ? Antialias.Subpixel : Antialias.None;
 		g.LineWidth = BrushWidth;
 		g.LineJoin = LineJoin.Round;
-		g.LineCap = BrushWidth == 1 ? LineCap.Butt : LineCap.Round;
+		g.LineCap = LineCap.Round;
 		g.SetSourceColor (strokeColor);
 
 		if (active_brush is Pinta.Tools.Brushes.PlainBrush)
