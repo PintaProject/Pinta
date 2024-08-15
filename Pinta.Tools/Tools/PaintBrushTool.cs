@@ -131,9 +131,6 @@ public sealed class PaintBrushTool : BaseBrushTool
 		g.LineCap = LineCap.Round;
 		g.SetSourceColor (strokeColor);
 
-		if (active_brush is Pinta.Tools.Brushes.PlainBrush)
-			document.Layers.ToolLayer.Clear ();
-
 		BrushStrokeArgs strokeArgs = new (strokeColor, e.Point, last_point.Value);
 
 		var invalidate_rect = active_brush.DoMouseMove (g, surf, strokeArgs);

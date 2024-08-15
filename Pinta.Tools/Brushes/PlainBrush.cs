@@ -43,6 +43,8 @@ public sealed class PlainBrush : BasePaintBrush
 		ImageSurface surface,
 		BrushStrokeArgs strokeArgs)
 	{
+		surface.Clear ();
+
 		g.LineCap = g.LineWidth == 1 ? LineCap.Butt : LineCap.Round;
 
 		if (path is null)
