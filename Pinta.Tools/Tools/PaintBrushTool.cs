@@ -83,9 +83,10 @@ public sealed class PaintBrushTool : BaseBrushTool
 
 	protected override void OnMouseDown (Document document, ToolMouseEventArgs e)
 	{
-		base.OnMouseDown (document, e);
-
+		document.Layers.ToolLayer.Clear ();
 		document.Layers.ToolLayer.Hidden = false;
+
+		base.OnMouseDown (document, e);
 
 		active_brush?.DoMouseDown ();
 	}
@@ -151,7 +152,6 @@ public sealed class PaintBrushTool : BaseBrushTool
 
 		document.Layers.ToolLayer.Draw (gDest);
 
-		document.Layers.ToolLayer.Clear ();
 		document.Layers.ToolLayer.Hidden = true;
 
 		base.OnMouseUp (document, e);

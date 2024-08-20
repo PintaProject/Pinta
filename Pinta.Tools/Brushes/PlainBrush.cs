@@ -67,7 +67,20 @@ public sealed class PlainBrush : BasePaintBrush
 
 	private static void DrawNonSinglePixelLine (Context g, BrushStrokeArgs strokeArgs)
 	{
-		g.LineTo (strokeArgs.CurrentPosition.X + 0.5, strokeArgs.CurrentPosition.Y + 0.5);
+		var x = strokeArgs.CurrentPosition.X;
+		var y = strokeArgs.CurrentPosition.Y;
+
+		if (
+			(x == strokeArgs.LastPosition.X) &&
+			(y == strokeArgs.LastPosition.Y) &&
+			(g.LineWidth == 1) &&
+			PintaCore.Workspace.ActiveWorkspace.PointInCanvas ((PointD) strokeArgs.CurrentPosition)
+		) {
+			x += 1;
+			y += 1;
+		}
+
+		g.LineTo (x, y);
 		g.StrokePreserve ();
 	}
 
