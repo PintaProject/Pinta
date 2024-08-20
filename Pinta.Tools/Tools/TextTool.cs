@@ -101,6 +101,8 @@ public sealed class TextTool : BaseTool
 	public override Gdk.Cursor DefaultCursor
 		=> GdkExtensions.CursorFromName (Pinta.Resources.StandardCursors.Text);
 
+	protected override bool ShowAntialiasingButton => true;
+
 	private readonly IWorkspaceService workspace;
 	private readonly IPaletteService palette;
 	private readonly LayerManager layers;
@@ -139,7 +141,6 @@ public sealed class TextTool : BaseTool
 	private Gtk.Separator outline_sep = null!;
 	private Gtk.SpinButton outline_width = null!;
 	private Gtk.Label outline_width_label = null!;
-	private ToolBarDropDownButton antialiasing_button = null!;
 
 	private const string FONT_SETTING = "text-font";
 	private const string BOLD_SETTING = "text-bold";
@@ -148,8 +149,6 @@ public sealed class TextTool : BaseTool
 	private const string ALIGNMENT_SETTING = "text-alignment";
 	private const string STYLE_SETTING = "text-style";
 	private const string OUTLINE_WIDTH_SETTING = "text-outline-width";
-	private string ANTIALIAS_SETTING
-		=> $"{GetType ().Name.ToLowerInvariant ()}-antialias";
 
 	protected override void OnBuildToolBar (Gtk.Box tb)
 	{
@@ -298,19 +297,6 @@ public sealed class TextTool : BaseTool
 
 		outline_width.Visible = outline_width_label.Visible = outline_sep.Visible = StrokeText;
 
-		if (antialiasing_button is null) {
-			antialiasing_button = new ToolBarDropDownButton ();
-
-			antialiasing_button.AddItem (Translations.GetString ("Antialiasing On"), Pinta.Resources.Icons.AntiAliasingEnabled, true);
-			antialiasing_button.AddItem (Translations.GetString ("Antialiasing Off"), Pinta.Resources.Icons.AntiAliasingDisabled, false);
-
-			antialiasing_button.SelectedIndex = Settings.GetSetting (ANTIALIAS_SETTING, 0);
-
-			antialiasing_button.SelectedItemChanged += HandleAntiAliasing;
-		}
-
-		tb.Append (antialiasing_button);
-
 		UpdateFont ();
 
 		if (workspace.HasOpenDocuments) {
@@ -431,23 +417,9 @@ public sealed class TextTool : BaseTool
 		UpdateFont ();
 	}
 
-	private void HandleAntiAliasing (object? sender, EventArgs e)
+	protected override void OnChangeAntialias (object? sender, EventArgs e)
 	{
-		var antialiasing = antialiasing_button.SelectedItem.GetTagOrDefault (true);
-		if (antialiasing) {
-			Settings.PutSetting (ANTIALIAS_SETTING, 0);
-			var options = new Cairo.FontOptions ();
-			options.Antialias = Antialias.Gray;
-			PangoCairo.Functions.ContextSetFontOptions (PintaCore.Chrome.MainWindow.GetPangoContext (), options);
-		} else {
-			Settings.PutSetting (ANTIALIAS_SETTING, 1);
-			var options = new Cairo.FontOptions ();
-			options.Antialias = Antialias.None;
-			PangoCairo.Functions.ContextSetFontOptions (PintaCore.Chrome.MainWindow.GetPangoContext (), options);
-		}
-
-
-		UpdateFont ();
+		UpdateFont();
 	}
 
 	private void UpdateFont ()
@@ -1012,9 +984,35 @@ public sealed class TextTool : BaseTool
 			ClearTextLayer ();
 		}
 
+		/*		var antialiasing = antialiasing_button.SelectedItem.GetTagOrDefault (true);
+		   if (antialiasing) {
+
+		   } else {
+		   	Settings.PutSetting (ANTIALIAS_SETTING, 1);
+		   	var options = new Cairo.FontOptions ();
+		   	options.Antialias = Antialias.None;
+		   	PangoCairo.Functions.ContextSetFontOptions (PintaCore.Chrome.MainWindow.GetPangoContext (), options);
+		   }
+*/
+
 		Cairo.Context g = new (surf);
-		if(Settings.GetSetting (ANTIALIAS_SETTING, 0) == 1)
+
+		if (UseAntialiasing) {
+			// Adjusts antialiasing JUST for the outline brush
+			g.Antialias = Cairo.Antialias.Gray;
+			// Adjusts antialiasing for PangoCairo's text draw function
+			var options = new Cairo.FontOptions ();
+			options.Antialias = Antialias.Gray;
+			PangoCairo.Functions.ContextSetFontOptions (PintaCore.Chrome.MainWindow.GetPangoContext (), options);
+		}
+		else
+		{
 			g.Antialias = Cairo.Antialias.None;
+			var options = new Cairo.FontOptions ();
+			options.Antialias = Antialias.None;
+			PangoCairo.Functions.ContextSetFontOptions (PintaCore.Chrome.MainWindow.GetPangoContext (), options);
+		}
+
 		g.Save ();
 
 		// Show selection if on text layer
@@ -1062,7 +1060,6 @@ public sealed class TextTool : BaseTool
 			var loc = CurrentTextLayout.GetCursorLocation ();
 			var color = palette.PrimaryColor;
 
-			g.Antialias = Cairo.Antialias.None;
 			g.DrawLine (
 				new PointD (loc.X, loc.Y),
 				new PointD (loc.X, loc.Y + loc.Height),
