@@ -52,7 +52,7 @@ public sealed class PlainBrush : BasePaintBrush
 		else
 			g.AppendPath (path);
 
-		DrawNonSinglePixelLine (g, strokeArgs);
+		Draw (g, strokeArgs);
 
 		path = g.CopyPath ();
 
@@ -65,7 +65,7 @@ public sealed class PlainBrush : BasePaintBrush
 		return inflated;
 	}
 
-	private static void DrawNonSinglePixelLine (Context g, BrushStrokeArgs strokeArgs)
+	private static void Draw (Context g, BrushStrokeArgs strokeArgs)
 	{
 		var x = strokeArgs.CurrentPosition.X;
 		var y = strokeArgs.CurrentPosition.Y;
