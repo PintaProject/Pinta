@@ -12,6 +12,7 @@ Thanks to the following contributors who worked on this release:
 - @ptixed
 - @logiclrd
 - @Matthieu-LAURENT39
+- @khoidauminh
 
 ### Added
 - Ported to GTK4 and libadwaita
@@ -58,6 +59,7 @@ Thanks to the following contributors who worked on this release:
 - Fixed issues with restoring saved settings in the Eraser tool (#839)
 - Fixed dragging issues in the Curves adjustment dialog with modifiers such as Num Lock active (#871)
 - Fixed a bug where the file picker dialogue would open the wrong directory after a failed save (#914)
+- Fixed unexpected drawing behavior when using semi-transparent colors with the Paint Brush tool (#941)
 
 ## [2.1.2](https://github.com/PintaProject/Pinta/releases/tag/2.1.2) - 2024/04/20
 
