@@ -419,7 +419,7 @@ public sealed class TextTool : BaseTool
 
 	protected override void OnAntialiasingChanged ()
 	{
-		UpdateFont();
+		UpdateFont ();
 	}
 
 	private void UpdateFont ()

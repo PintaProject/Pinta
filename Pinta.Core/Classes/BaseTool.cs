@@ -359,7 +359,7 @@ public abstract class BaseTool
 				antialiasing_button.SelectedIndex = Settings.GetSetting (ANTIALIAS_SETTING, 0);
 
 				antialiasing_button.SelectedItemChanged += (object? sender, EventArgs e) => {
-					OnAntialiasingChanged();
+					OnAntialiasingChanged ();
 				};
 			}
 
