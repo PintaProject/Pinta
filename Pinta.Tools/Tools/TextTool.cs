@@ -10,6 +10,8 @@
 
 using System;
 using System.Threading.Tasks;
+using Cairo;
+using Pango;
 using Pinta.Core;
 
 namespace Pinta.Tools;
@@ -98,6 +100,8 @@ public sealed class TextTool : BaseTool
 
 	public override Gdk.Cursor DefaultCursor
 		=> GdkExtensions.CursorFromName (Pinta.Resources.StandardCursors.Text);
+
+	protected override bool ShowAntialiasingButton => true;
 
 	private readonly IWorkspaceService workspace;
 	private readonly IPaletteService palette;
@@ -409,6 +413,11 @@ public sealed class TextTool : BaseTool
 	}
 
 	private void HandleSelectedLayerChanged (object? sender, EventArgs e)
+	{
+		UpdateFont ();
+	}
+
+	protected override void OnAntialiasingChanged ()
 	{
 		UpdateFont ();
 	}
@@ -976,7 +985,22 @@ public sealed class TextTool : BaseTool
 		}
 
 		Cairo.Context g = new (surf);
+
+		var options = new Cairo.FontOptions ();
+
+		if (UseAntialiasing) {
+			// Adjusts antialiasing JUST for the outline brush
+			g.Antialias = Cairo.Antialias.Gray;
+			// Adjusts antialiasing for PangoCairo's text draw function
+			options.Antialias = Antialias.Gray;
+		} else {
+			g.Antialias = Cairo.Antialias.None;
+			options.Antialias = Antialias.None;
+		}
+
 		g.Save ();
+		PangoCairo.Functions.ContextSetFontOptions (PintaCore.Chrome.MainWindow.GetPangoContext (), options);
+
 
 		// Show selection if on text layer
 		if (useTextLayer) {
@@ -1023,7 +1047,6 @@ public sealed class TextTool : BaseTool
 			var loc = CurrentTextLayout.GetCursorLocation ();
 			var color = palette.PrimaryColor;
 
-			g.Antialias = Cairo.Antialias.None;
 			g.DrawLine (
 				new PointD (loc.X, loc.Y),
 				new PointD (loc.X, loc.Y + loc.Height),
