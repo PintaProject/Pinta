@@ -24,6 +24,7 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 // THE SOFTWARE.
 
+
 using System;
 using System.Linq;
 using Cairo;
@@ -82,6 +83,9 @@ public sealed class PaintBrushTool : BaseBrushTool
 
 	protected override void OnMouseDown (Document document, ToolMouseEventArgs e)
 	{
+		document.Layers.ToolLayer.Clear ();
+		document.Layers.ToolLayer.Hidden = false;
+
 		base.OnMouseDown (document, e);
 
 		active_brush?.DoMouseDown ();
@@ -119,14 +123,13 @@ public sealed class PaintBrushTool : BaseBrushTool
 		if (document.Workspace.PointInCanvas (e.PointDouble))
 			surface_modified = true;
 
-		var surf = document.Layers.CurrentUserLayer.Surface;
-		var brush_width = BrushWidth;
+		var surf = document.Layers.ToolLayer.Surface;
+		var g = document.CreateClippedToolContext ();
 
-		var g = document.CreateClippedContext ();
 		g.Antialias = UseAntialiasing ? Antialias.Subpixel : Antialias.None;
-		g.LineWidth = brush_width;
+		g.LineWidth = BrushWidth;
 		g.LineJoin = LineJoin.Round;
-		g.LineCap = BrushWidth == 1 ? LineCap.Butt : LineCap.Round;
+		g.LineCap = LineCap.Round;
 		g.SetSourceColor (strokeColor);
 
 		BrushStrokeArgs strokeArgs = new (strokeColor, e.Point, last_point.Value);
@@ -145,7 +148,14 @@ public sealed class PaintBrushTool : BaseBrushTool
 
 	protected override void OnMouseUp (Document document, ToolMouseEventArgs e)
 	{
+		var gDest = new Context (document.Layers.CurrentUserLayer.Surface);
+
+		document.Layers.ToolLayer.Draw (gDest);
+
+		document.Layers.ToolLayer.Hidden = true;
+
 		base.OnMouseUp (document, e);
+
 		active_brush?.DoMouseUp ();
 	}
 

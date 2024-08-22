@@ -36,17 +36,25 @@ public sealed class PlainBrush : BasePaintBrush
 
 	public override int Priority => -100;
 
+	private Path? path;
+
 	protected override RectangleI OnMouseMove (
 		Context g,
 		ImageSurface surface,
 		BrushStrokeArgs strokeArgs)
 	{
-		// Cairo does not support a single-pixel-long single-pixel-wide line
-		bool isSinglePixelLine = IsSinglePixelLine (g, strokeArgs);
-		if (isSinglePixelLine)
-			DrawSinglePixelLine (g, strokeArgs);
+		surface.Clear ();
+
+		g.LineCap = g.LineWidth == 1 ? LineCap.Butt : LineCap.Round;
+
+		if (path is null)
+			g.MoveTo (strokeArgs.LastPosition.X, strokeArgs.LastPosition.Y);
 		else
-			DrawNonSinglePixelLine (g, strokeArgs);
+			g.AppendPath (path);
+
+		Draw (g, strokeArgs);
+
+		path = g.CopyPath ();
 
 		RectangleI dirty = g.StrokeExtents ().ToInt ();
 
@@ -57,26 +65,27 @@ public sealed class PlainBrush : BasePaintBrush
 		return inflated;
 	}
 
-	private static bool IsSinglePixelLine (Context g, BrushStrokeArgs strokeArgs)
+	private static void Draw (Context g, BrushStrokeArgs strokeArgs)
 	{
-		return
-			(strokeArgs.CurrentPosition.X == strokeArgs.LastPosition.X) &&
-			(strokeArgs.CurrentPosition.Y == strokeArgs.LastPosition.Y) &&
+		var x = strokeArgs.CurrentPosition.X;
+		var y = strokeArgs.CurrentPosition.Y;
+
+		if (
+			(x == strokeArgs.LastPosition.X) &&
+			(y == strokeArgs.LastPosition.Y) &&
 			(g.LineWidth == 1) &&
 			PintaCore.Workspace.ActiveWorkspace.PointInCanvas ((PointD) strokeArgs.CurrentPosition)
-		;
-	}
+		) {
+			x += 1;
+			y += 1;
+		}
 
-	private static void DrawSinglePixelLine (Context g, BrushStrokeArgs strokeArgs)
-	{
-		g.Rectangle (strokeArgs.CurrentPosition.X, strokeArgs.CurrentPosition.Y, 1.0, 1.0);
-		g.Fill ();
-	}
-
-	private static void DrawNonSinglePixelLine (Context g, BrushStrokeArgs strokeArgs)
-	{
-		g.MoveTo (strokeArgs.LastPosition.X + 0.5, strokeArgs.LastPosition.Y + 0.5);
-		g.LineTo (strokeArgs.CurrentPosition.X + 0.5, strokeArgs.CurrentPosition.Y + 0.5);
+		g.LineTo (x, y);
 		g.StrokePreserve ();
+	}
+
+	protected override void OnMouseUp ()
+	{
+		path = null;
 	}
 }
