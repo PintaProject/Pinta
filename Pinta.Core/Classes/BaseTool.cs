@@ -304,9 +304,9 @@ public abstract class BaseTool
 	}
 
 	/// <summary>
-	/// Called when the tool is deselected from the toolbox.
+	/// Called when the antialias setting is changed.
 	/// </summary>
-	protected virtual void OnChangeAntialias (object? sender, EventArgs e)
+	protected virtual void OnAntialiasingChanged ()
 	{
 
 	}
@@ -357,9 +357,11 @@ public abstract class BaseTool
 				antialiasing_button.AddItem (Translations.GetString ("Antialiasing Off"), Pinta.Resources.Icons.AntiAliasingDisabled, false);
 
 				antialiasing_button.SelectedIndex = Settings.GetSetting (ANTIALIAS_SETTING, 0);
-			}
 
-			antialiasing_button.SelectedItemChanged += OnChangeAntialias;
+				antialiasing_button.SelectedItemChanged += (object? sender, EventArgs e) => {
+					OnAntialiasingChanged();
+				};
+			}
 
 			return antialiasing_button;
 		}

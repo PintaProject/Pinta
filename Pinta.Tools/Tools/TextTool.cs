@@ -417,7 +417,7 @@ public sealed class TextTool : BaseTool
 		UpdateFont ();
 	}
 
-	protected override void OnChangeAntialias (object? sender, EventArgs e)
+	protected override void OnAntialiasingChanged ()
 	{
 		UpdateFont();
 	}
@@ -984,36 +984,23 @@ public sealed class TextTool : BaseTool
 			ClearTextLayer ();
 		}
 
-		/*		var antialiasing = antialiasing_button.SelectedItem.GetTagOrDefault (true);
-		   if (antialiasing) {
-
-		   } else {
-		   	Settings.PutSetting (ANTIALIAS_SETTING, 1);
-		   	var options = new Cairo.FontOptions ();
-		   	options.Antialias = Antialias.None;
-		   	PangoCairo.Functions.ContextSetFontOptions (PintaCore.Chrome.MainWindow.GetPangoContext (), options);
-		   }
-*/
-
 		Cairo.Context g = new (surf);
+
+		var options = new Cairo.FontOptions ();
 
 		if (UseAntialiasing) {
 			// Adjusts antialiasing JUST for the outline brush
 			g.Antialias = Cairo.Antialias.Gray;
 			// Adjusts antialiasing for PangoCairo's text draw function
-			var options = new Cairo.FontOptions ();
 			options.Antialias = Antialias.Gray;
-			PangoCairo.Functions.ContextSetFontOptions (PintaCore.Chrome.MainWindow.GetPangoContext (), options);
-		}
-		else
-		{
+		} else {
 			g.Antialias = Cairo.Antialias.None;
-			var options = new Cairo.FontOptions ();
 			options.Antialias = Antialias.None;
-			PangoCairo.Functions.ContextSetFontOptions (PintaCore.Chrome.MainWindow.GetPangoContext (), options);
 		}
 
 		g.Save ();
+		PangoCairo.Functions.ContextSetFontOptions (PintaCore.Chrome.MainWindow.GetPangoContext (), options);
+
 
 		// Show selection if on text layer
 		if (useTextLayer) {
