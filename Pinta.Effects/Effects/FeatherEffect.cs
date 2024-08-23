@@ -46,11 +46,10 @@ public sealed class FeatherEffect : BaseEffect
 		// Removing this causes preview to not update to lower radius levels
 		foreach (RectangleI roi in rois) {
 			for (int y = roi.Top; y <= roi.Bottom; ++y) {
-				var src_row = src_data.Slice (y * src_width + roi.Left, roi.Width);
-				var dst_row = dst_data.Slice (y * dst_width + roi.Left, roi.Width);
+				var src_row = src_data.Slice (y * src_width, src_width);
+				var dst_row = dst_data.Slice (y * src_width, src_width);
 				for (int x = roi.Left; x <= roi.Right; x++) {
-					if (x < dst_row.Length)
-						dst_row[x].Bgra = src_row[x].Bgra;
+					dst_row[x].Bgra = src_row[x].Bgra;
 				}
 			}
 		}
@@ -93,7 +92,7 @@ public sealed class FeatherEffect : BaseEffect
 						float mult = distance / radius;
 						byte alpha = (byte) (src_data[pixel_index].A * mult);
 						if (alpha < dst_data[pixel_index].A)
-							dst_data[pixel_index].Bgra = src_data[pixel_index].NewAlpha (alpha).ToPremultipliedAlpha ().Bgra;
+							dst_data[pixel_index].Bgra = src_data[pixel_index].ToStraightAlpha ().NewAlpha (alpha).ToPremultipliedAlpha ().Bgra;
 					}
 				}
 			}
