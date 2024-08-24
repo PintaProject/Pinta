@@ -1,21 +1,21 @@
-// 
+//
 // EllipseEngine.cs
-//  
+//
 // Author:
 //       Andrew Davis <andrew.3.1415@gmail.com>
-// 
+//
 // Copyright (c) 2014 Andrew Davis, GSoC 2014
-// 
+//
 // Permission is hereby granted, free of charge, to any person obtaining a copy
 // of this software and associated documentation files (the "Software"), to deal
 // in the Software without restriction, including without limitation the rights
 // to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
 // copies of the Software, and to permit persons to whom the Software is
 // furnished to do so, subject to the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be included in
 // all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
 // IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
 // FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
@@ -37,17 +37,18 @@ public class EllipseEngine : ShapeEngine
 	/// <summary>
 	/// Create a new EllipseEngine.
 	/// </summary>
-	/// <param name="parent_layer">The parent UserLayer for the re-editable DrawingLayer.</param>
-	/// <param name="drawing_layer">An existing ReEditableLayer to reuse. This is for cloning only. If not cloning, pass in null.</param>
+	/// <param name="parentLayer">The parent UserLayer for the re-editable DrawingLayer.</param>
+	/// <param name="drawingLayer">An existing ReEditableLayer to reuse. This is for cloning only. If not cloning, pass in null.</param>
 	/// <param name="antialiasing">Whether or not antialiasing is enabled.</param>
-	/// <param name="outline_color">The outline color for the shape.</param>
-	/// <param name="fill_color">The fill color for the shape.</param>
-	/// <param name="brush_width">The width of the outline of the shape.</param>
-	public EllipseEngine (UserLayer parent_layer, ReEditableLayer? drawing_layer,
-			      bool antialiasing, Color outline_color, Color fill_color,
-			      int brush_width)
-	    : base (parent_layer, drawing_layer, BaseEditEngine.ShapeTypes.Ellipse,
-		    antialiasing, true, outline_color, fill_color, brush_width)
+	/// <param name="outlineColor">The outline color for the shape.</param>
+	/// <param name="fillColor">The fill color for the shape.</param>
+	/// <param name="brushWidth">The width of the outline of the shape.</param>
+	/// <param name="lineCap">Defines the edge of the line drawn.</param>
+	public EllipseEngine (UserLayer parentLayer, ReEditableLayer? drawingLayer,
+			      bool antialiasing, Color outlineColor, Color fillColor,
+			      int brushWidth, LineCap lineCap)
+	    : base (parentLayer, drawingLayer, BaseEditEngine.ShapeTypes.Ellipse,
+		    antialiasing, true, outlineColor, fillColor, brushWidth, lineCap)
 	{
 
 	}
@@ -210,16 +211,19 @@ public class EllipseEngine : ShapeEngine
 
 		const double c_1 = 0.5522847498307933984022516322796d; //tan(pi / 8d) * 4d / 3d ~= 0.5522847498307933984022516322796d
 
+		// Save first quadrant to later close the ellipse
+		var first_quadrant = calculateCurvePoints (
+			tInterval,
+			c.X + r_x, c.Y,
+			c.X + r_x, c.Y - c_1 * r_y,
+			c.X + c_1 * r_x, c.Y - r_y,
+			c.X, c.Y - r_y,
+			3
+		);
+
 		foreach (
-			var p in
-			calculateCurvePoints (
-				tInterval,
-				c.X + r_x, c.Y,
-				c.X + r_x, c.Y - c_1 * r_y,
-				c.X + c_1 * r_x, c.Y - r_y,
-				c.X, c.Y - r_y,
-				3
-			)
+			var p in first_quadrant
+
 		) yield return p;
 
 		foreach (
@@ -259,7 +263,12 @@ public class EllipseEngine : ShapeEngine
 		) yield return p;
 
 		// Close the curve.
-		yield return new GeneratedPoint (new PointD (c.X + r_x, c.Y), 3);
+		// Do not close the curve if no dash pattern used, or else dash pattern wraps past the end of the ellipse
+		if (DashPattern == "-") {
+			yield return first_quadrant.Take (2).Last ();
+			// Closes the curve in more extreme, near-flat circle (width >>> height) cases.
+			yield return first_quadrant.Take (3).Last ();
+		}
 	}
 
 	/// <summary>

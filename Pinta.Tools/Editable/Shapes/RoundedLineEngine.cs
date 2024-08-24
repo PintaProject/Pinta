@@ -1,21 +1,21 @@
-// 
+//
 // RoundedLineEngine.cs
-//  
+//
 // Author:
 //       Andrew Davis <andrew.3.1415@gmail.com>
-// 
+//
 // Copyright (c) 2014 Andrew Davis, GSoC 2014
-// 
+//
 // Permission is hereby granted, free of charge, to any person obtaining a copy
 // of this software and associated documentation files (the "Software"), to deal
 // in the Software without restriction, including without limitation the rights
 // to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
 // copies of the Software, and to permit persons to whom the Software is
 // furnished to do so, subject to the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be included in
 // all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
 // IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
 // FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
@@ -38,18 +38,19 @@ public sealed class RoundedLineEngine : ShapeEngine
 	/// <summary>
 	/// Create a new RoundedLineEngine.
 	/// </summary>
-	/// <param name="parent_layer">The parent UserLayer for the re-editable DrawingLayer.</param>
-	/// <param name="drawing_layer">An existing ReEditableLayer to reuse. This is for cloning only. If not cloning, pass in null.</param>
-	/// <param name="passedRadius">The radius of the corners.</param>
+	/// <param name="parentLayer">The parent UserLayer for the re-editable DrawingLayer.</param>
+	/// <param name="drawingLayer">An existing ReEditableLayer to reuse. This is for cloning only. If not cloning, pass in null.</param>
+	/// <param name="radius">The radius of the corners.</param>
 	/// <param name="antialiasing">Whether or not antialiasing is enabled.</param>
-	/// <param name="outline_color">The outline color for the shape.</param>
-	/// <param name="fill_color">The fill color for the shape.</param>
-	/// <param name="brush_width">The width of the outline of the shape.</param>
-	public RoundedLineEngine (UserLayer parentLayer, ReEditableLayer? passedDrawingLayer, double passedRadius, bool passedAA,
-		Color passedOutlineColor, Color passedFillColor, int passedBrushWidth) : base (parentLayer, passedDrawingLayer,
-		BaseEditEngine.ShapeTypes.RoundedLineSeries, passedAA, true, passedOutlineColor, passedFillColor, passedBrushWidth)
+	/// <param name="outlineColor">The outline color for the shape.</param>
+	/// <param name="fillColor">The fill color for the shape.</param>
+	/// <param name="brushWidth">The width of the outline of the shape.</param>
+	/// <param name="lineCap">Defines the edge of the line drawn.</param>
+	public RoundedLineEngine (UserLayer parentLayer, ReEditableLayer? drawingLayer, double radius, bool antialiasing,
+		Color outlineColor, Color fillColor, int brushWidth, LineCap lineCap) : base (parentLayer, drawingLayer,
+		BaseEditEngine.ShapeTypes.RoundedLineSeries, antialiasing, true, outlineColor, fillColor, brushWidth, lineCap)
 	{
-		Radius = passedRadius;
+		Radius = radius;
 	}
 
 	public RoundedLineEngine (RoundedLineEngine src) : base (src)

@@ -1,21 +1,21 @@
-// 
+//
 // CairoExtensions.cs
-//  
+//
 // Author:
 //       Jonathan Pobst <monkey@jpobst.com>
-// 
+//
 // Copyright (c) 2010 Jonathan Pobst
-// 
+//
 // Permission is hereby granted, free of charge, to any person obtaining a copy
 // of this software and associated documentation files (the "Software"), to deal
 // in the Software without restriction, including without limitation the rights
 // to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
 // copies of the Software, and to permit persons to whom the Software is
 // furnished to do so, subject to the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be included in
 // all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
 // IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
 // FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
@@ -227,7 +227,8 @@ namespace Pinta.Core
 		public static RectangleD DrawPolygonal (
 			this Context g,
 			ReadOnlySpan<PointD> points,
-			Color color)
+			Color color,
+			LineCap lineCap)
 		{
 			g.Save ();
 			g.MoveTo (points[0].X, points[0].Y);
@@ -236,7 +237,7 @@ namespace Pinta.Core
 				g.LineTo (point.X, point.Y);
 
 			g.SetSourceColor (color);
-			g.LineCap = LineCap.Square;
+			g.LineCap = lineCap;
 
 			RectangleD dirty = g.StrokeExtents ();
 			g.Stroke ();
@@ -993,10 +994,10 @@ namespace Pinta.Core
 		/// <summary>
 		/// Computes and returns the Union (largest possible combination) of two Rectangles.
 		/// The two given Rectangles do not need to intersect.
-		/// 
+		///
 		/// Another way to understand this function is that it computes and returns the
 		/// smallest possible Rectangle that encompasses both given Rectangles.
-		/// 
+		///
 		/// This function works as is intuitively expected with neither, either, or both given Rectangles being null.
 		/// </summary>
 		/// <param name="r1">The first given Rectangle.</param>
