@@ -81,5 +81,5 @@ Alternatively, Pinta can be built by opening `Pinta.sln` in [Visual Studio for M
 - You can help [translate Pinta to your native language](https://hosted.weblate.org/engage/pinta/).
 - You can fork the project on [Github](https://github.com/PintaProject/Pinta).
 - You can get help in #pinta on irc.gnome.org.
-- For details on notable changes of each release, take a loot at the [CHANGELOG](https://github.com/PintaProject/Pinta/blob/master/CHANGELOG.md).
+- For details on notable changes of each release, take a look at the [CHANGELOG](https://github.com/PintaProject/Pinta/blob/master/CHANGELOG.md).
 - For details on patching, take a look at `patch-guidelines.md` in the repo.
