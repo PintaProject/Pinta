@@ -1483,6 +1483,17 @@ namespace Pinta.Core
 		}
 
 		/// <summary>
+		/// Returns the validity of the dash pattern.
+		/// </summary>
+		/// <param name="dash_pattern">The dash pattern string.</param>
+		/// <returns>Returns false if dash pattern invalid or would draw a normal line, returns true if draws a dash pattern.</returns>
+		public static bool IsValidDashPattern (string dash_pattern)
+		{
+			// dashpattern "-" and "" produce different results at high brush size (see #733), so we default "-" to "" (a normal line.)
+			return dash_pattern.Contains ('-') && dash_pattern != "-";
+		}
+
+		/// <summary>
 		/// Given a string pattern consisting of dashes and spaces, creates the Cairo dash pattern.
 		/// Any other characters are treated as a space.
 		/// See https://www.cairographics.org/manual/cairo-cairo-t.html#cairo-set-dash
@@ -1492,19 +1503,20 @@ namespace Pinta.Core
 		/// <param name="line_cap">The line cap style being used.</param>
 		/// <param name="dash_list">The Cairo dash pattern.</param>
 		/// <param name="offset">The offset into the dash pattern to begin drawing from.</param>
-		public static void CreateDashPattern (
+		/// <returns>Returns false if dash pattern invalid or would draw a normal line, returns true if draws a dash pattern. See <see cref="IsValidDashPattern"/></returns>
+		public static bool CreateDashPattern (
 			string dash_pattern,
 			double brush_width,
 			LineCap line_cap,
 			out double[] dash_list,
 			out double offset)
 		{
-			// An empty cairo pattern or a pattern with no dashes just draws a normal line.
+			// An empty cairo pattern, a pattern with no dashes, or a pattern with a single dash just draws a normal line.
 			// Cairo draws a normal line when the dash list is empty.
-			if (!dash_pattern.Contains ('-')) {
+			if (!IsValidDashPattern (dash_pattern)) {
 				dash_list = Array.Empty<double> ();
 				offset = 0.0;
-				return;
+				return false;
 			}
 
 			List<double> dashes = new ();
@@ -1567,19 +1579,21 @@ namespace Pinta.Core
 			offset = 0;
 			if (offset_from_end.HasValue)
 				offset = dash_list.Sum () - (offset_from_end.Value * brush_width + 0.5 * space_size_offset);
+			return true;
 		}
 
 		/// <summary>
 		/// Sets the dash pattern from a string
 		/// (see <see cref="CreateDashPattern"/>).
 		/// </summary>
-		public static void SetDashFromString (
+		/// <returns>Returns false if dash pattern invalid or would draw a normal line, returns true if draws a dash pattern.</returns>
+		public static bool SetDashFromString (
 			this Context context,
 			string dash_pattern,
 			double brush_width,
 			LineCap line_cap = LineCap.Butt)
 		{
-			CreateDashPattern (
+			bool isValidDashPattern = CreateDashPattern (
 				dash_pattern,
 				brush_width,
 				line_cap,
@@ -1589,6 +1603,7 @@ namespace Pinta.Core
 			context.SetDash (
 				dashes,
 				offset);
+			return isValidDashPattern;
 		}
 
 		/// <summary>

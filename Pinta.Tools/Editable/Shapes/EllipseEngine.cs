@@ -264,7 +264,7 @@ public class EllipseEngine : ShapeEngine
 
 		// Close the curve.
 		// Do not close the curve if no dash pattern used, or else dash pattern wraps past the end of the ellipse
-		if (DashPattern == "-") {
+		if (!CairoExtensions.IsValidDashPattern (DashPattern)) {
 			yield return first_quadrant.Take (2).Last ();
 			// Closes the curve in more extreme, near-flat circle (width >>> height) cases.
 			yield return first_quadrant.Take (3).Last ();

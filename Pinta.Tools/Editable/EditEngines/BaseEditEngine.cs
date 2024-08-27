@@ -1158,12 +1158,7 @@ public abstract class BaseEditEngine
 
 		g.Antialias = activeEngine.AntiAliasing ? Antialias.Subpixel : Antialias.None;
 
-		// dashpattern "-" and "" produce different results at high brush size (see #733)
-		var dashPattern = activeEngine.DashPattern;
-		if (dashPattern == "-")
-			dashPattern = "";
-
-		g.SetDashFromString (dashPattern, activeEngine.BrushWidth, LineCap.Square);
+		var isDashedLine = g.SetDashFromString (activeEngine.DashPattern, activeEngine.BrushWidth, LineCap.Square);
 
 		g.LineWidth = activeEngine.BrushWidth;
 
@@ -1187,7 +1182,7 @@ public abstract class BaseEditEngine
 
 				// dashpatterns cannot work with butt, so if we are using a dashpattern we default to square.
 				var lineCap = activeEngine.LineCap;
-				if (dashPattern != "")
+				if (isDashedLine)
 					lineCap = LineCap.Square;
 
 				dirty = dirty.UnionRectangles (g.DrawPolygonal (points.AsSpan (), activeEngine.OutlineColor, lineCap));
