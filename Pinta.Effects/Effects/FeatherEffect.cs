@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
+using System.Threading;
 using Cairo;
 using Pinta.Core;
 using Pinta.Gui.Widgets;
@@ -12,7 +13,8 @@ public sealed class FeatherEffect : BaseEffect
 
 	public override string Icon => Pinta.Resources.Icons.EffectsDefault;
 
-	public sealed override bool IsTileable => true;
+	// Multithread internally within FeatherEffect to get the full-sized rois
+	public sealed override bool IsTileable => false;
 
 	public override string Name => Translations.GetString ("Feather");
 
@@ -33,62 +35,65 @@ public sealed class FeatherEffect : BaseEffect
 	public override void LaunchConfiguration ()
 		=> chrome.LaunchSimpleEffectDialog (this);
 
-	public override void Render (ImageSurface src, ImageSurface dest, ReadOnlySpan<RectangleI> rois)
+	public void RenderAsync (ImageSurface src, ImageSurface dest, RectangleI roi, int y)
 	{
 		int radius = Data.Radius;
 		var src_data = src.GetReadOnlyPixelData ();
 		int src_width = src.Width;
 		int src_height = src.Height;
 		var dst_data = dest.GetPixelData ();
-		int dst_width = dest.Width;
 
 		// reset dest to src
 		// Removing this causes preview to not update to lower radius levels
-		foreach (RectangleI roi in rois) {
-			for (int y = roi.Top; y <= roi.Bottom; ++y) {
-				var src_row = src_data.Slice (y * src_width, src_width);
-				var dst_row = dst_data.Slice (y * src_width, src_width);
-				for (int x = roi.Left; x <= roi.Right; x++) {
-					dst_row[x].Bgra = src_row[x].Bgra;
-				}
-			}
+		var src_row = src_data.Slice (y * src_width, src_width);
+		var dst_row = dst_data.Slice (y * src_width, src_width);
+		for (int x = roi.Left; x <= roi.Right; x++) {
+			dst_row[x].Bgra = src_row[x].Bgra;
 		}
 
 
 		// Collect a list of pixels that surround the object
 		List<PointI> borderPixels = new List<PointI> ();
-		foreach (RectangleI roi in rois) {
-			for (int y = roi.Top; y <= roi.Bottom; ++y) {
-				for (int x = roi.Left; x <= roi.Right; x++) {
-					PointI potentialBorderPixel = new (x, y);
-					if (src.GetColorBgra (src_data, src_width, potentialBorderPixel).A <= Data.TransparencyThreshold) {
-						for (int sx = x - 1; sx <= x + 1; sx++) {
-							for (int sy = y - 1; sy <= y + 1; sy++) {
-								PointI pixel = new (sx, sy);
+		for (int x = roi.Left; x <= roi.Right; x++) {
+			PointI potentialBorderPixel = new (x, y);
+			if (src.GetColorBgra (src_data, src_width, potentialBorderPixel).A <= Data.Tolerance) {
+				// Test pixel above, below, left, & right
+				PointI[] testPixels = [
+					new PointI(x - 1, y),
+					new PointI(x + 1, y),
+					new PointI(x, y - 1),
+					new PointI(x, y + 1)
+				];
 
-								if (sx < 0 || sx >= src_width || sy < 0 || sy >= src_height)
-									continue;
-
-								if (src.GetColorBgra (src_data, src_width, pixel).A != 0)
-									borderPixels.Add (potentialBorderPixel);
-							}
-						}
+				foreach (var pixel in testPixels) {
+					var px = pixel.X;
+					var py = pixel.Y;
+					if (px < 0 || px >= src_width || py < 0 || py >= src_height)
+						continue;
+					if (src.GetColorBgra (src_data, src_width, pixel).A > Data.Tolerance) {
+						borderPixels.Add (potentialBorderPixel);
+						break;
 					}
 				}
 			}
 		}
 
-		// For each pixel, lower alpha based off distance to border pixel
+
+		// Pass through all border pixels and reduce the alpha of pixels around it
 		foreach (var borderPixel in borderPixels) {
-			for (int y = borderPixel.Y - radius; y <= borderPixel.Y + radius; ++y) {
-				for (int x = borderPixel.X - radius; x <= borderPixel.X + radius; x++) {
-					// Within manhattan distance to narrow points down
-					var dx = borderPixel.X - x;
-					var dy = borderPixel.Y - y;
+			var top = Math.Max (borderPixel.Y - radius, roi.Top);
+			var bottom = Math.Min (borderPixel.Y + radius, roi.Bottom);
+			var left = Math.Max (borderPixel.X - radius, roi.Left);
+			var right = Math.Min (borderPixel.X + radius, roi.Right);
+
+			for (int py = top; py <= bottom; py++) {
+				for (int px = left; px <= right; px++) {
+					var dx = borderPixel.X - px;
+					var dy = borderPixel.Y - py;
 					float distance = MathF.Sqrt (dx * dx + dy * dy);
 					// If within actual distance
 					if (distance <= radius) {
-						int pixel_index = y * src_width + x;
+						int pixel_index = py * src_width + px;
 						float mult = distance / radius;
 						byte alpha = (byte) (src_data[pixel_index].A * mult);
 						if (alpha < dst_data[pixel_index].A)
@@ -99,12 +104,41 @@ public sealed class FeatherEffect : BaseEffect
 		}
 	}
 
+	public override void Render (ImageSurface src, ImageSurface dest, ReadOnlySpan<RectangleI> rois)
+	{
+		foreach (var roi in rois) {
+			int top = roi.Top;
+			int bottom = roi.Bottom;
+			int currentRow = top;
+
+			int threadCount = PintaCore.System.RenderThreads;
+			var slaves = new Thread[threadCount - 1];
+			for (int threadId = 1; threadId < threadCount; threadId++) {
+				var slave = new Thread (() => {
+					while (true) {
+						int rowIndex = Interlocked.Increment (ref currentRow);
+						if (rowIndex >= bottom)
+							return;
+
+						RenderAsync(src, dest, roi, rowIndex);
+					}
+				}) { Priority = ThreadPriority.BelowNormal };
+				slave.Start ();
+
+				slaves[threadId - 1] = slave;
+			}
+
+			foreach (var slave in slaves)
+				slave.Join ();
+		}
+	}
+
 	public sealed class FeatherData : EffectData
 	{
 		[Caption ("Radius"), MinimumValue (1), MaximumValue (100)]
 		public int Radius { get; set; } = 6;
 
-		[Caption ("Transparency Threshold"), MinimumValue (0), MaximumValue (255)]
-		public int TransparencyThreshold { get; set; } = 20;
+		[Caption ("Tolerance"), MinimumValue (0), MaximumValue (255)]
+		public int Tolerance { get; set; } = 20;
 	}
 }
