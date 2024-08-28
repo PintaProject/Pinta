@@ -598,4 +598,24 @@ internal sealed class EffectsTest
 		effect.Data.Offset = new (10, 20);
 		Utilities.TestEffect (effect, "zoomblur2.png");
 	}
+
+	[Test]
+	public void Feather1 ()
+	{
+		FeatherEffect effect = new (Utilities.CreateMockServices ());
+		effect.Data.Tolerance = 20;
+		effect.Data.Radius = 5;
+		effect.Data.FeatherCanvasEdge = true;
+		Utilities.TestEffect (effect, "feather1.png");
+	}
+
+	[Test]
+	public void Feather2 ()
+	{
+		FeatherEffect effect = new (Utilities.CreateMockServices ());
+		effect.Data.Tolerance = 20;
+		effect.Data.Radius = 10;
+		effect.Data.FeatherCanvasEdge = true;
+		Utilities.TestEffect (effect, "feather2.png", "out.png");
+	}
 }

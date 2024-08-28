@@ -121,7 +121,13 @@ public sealed class FeatherEffect : BaseEffect
 				}
 			}
 
-			int threadCount = PintaCore.System.RenderThreads;
+			// crashes on test if try-catch not implemented
+			int threadCount = 0;
+			try {
+				threadCount = PintaCore.System.RenderThreads;
+			} catch {
+				threadCount = 1;
+			}
 			var slaves = new Thread[threadCount];
 			for (int threadId = 0; threadId < threadCount; threadId++) {
 				var slave = new Thread (() => {
