@@ -53,7 +53,7 @@ public sealed class FeatherEffect : BaseEffect
 			} else if (src.GetColorBgra (src_data, src_width, potentialBorderPixel).A <= Data.Tolerance) {
 				// Test pixel above, below, left, & right
 
-				foreach (var pixel in new PointI[] { new(x - 1, y), new(x + 1, y), new(x, y - 1), new(x, y + 1) }) {
+				foreach (var pixel in new PointI[] { new (x - 1, y), new (x + 1, y), new (x, y - 1), new (x, y + 1) }) {
 					var px = pixel.X;
 					var py = pixel.Y;
 					if (px < 0 || px >= src_width || py < 0 || py >= src_height)
@@ -137,7 +137,7 @@ public sealed class FeatherEffect : BaseEffect
 						if (rowIndex >= bottom + 1)
 							return;
 
-						RenderAsync(src, dest, roi, rowIndex);
+						RenderAsync (src, dest, roi, rowIndex);
 					}
 				}) { Priority = ThreadPriority.BelowNormal };
 				slave.Start ();
