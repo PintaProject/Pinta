@@ -1158,7 +1158,7 @@ public abstract class BaseEditEngine
 
 		g.Antialias = activeEngine.AntiAliasing ? Antialias.Subpixel : Antialias.None;
 
-		g.SetDashFromString (activeEngine.DashPattern, activeEngine.BrushWidth, LineCap.Square);
+		var isDashedLine = g.SetDashFromString (activeEngine.DashPattern, activeEngine.BrushWidth, LineCap.Square);
 
 		g.LineWidth = activeEngine.BrushWidth;
 
@@ -1179,7 +1179,13 @@ public abstract class BaseEditEngine
 			}
 
 			if (StrokeShape) {
-				dirty = dirty.UnionRectangles (g.DrawPolygonal (points.AsSpan (), activeEngine.OutlineColor));
+
+				// dashpatterns cannot work with butt, so if we are using a dashpattern we default to square.
+				var lineCap = activeEngine.LineCap;
+				if (isDashedLine)
+					lineCap = LineCap.Square;
+
+				dirty = dirty.UnionRectangles (g.DrawPolygonal (points.AsSpan (), activeEngine.OutlineColor, lineCap));
 			}
 		}
 

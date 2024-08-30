@@ -7,7 +7,7 @@ namespace Pinta.Core.Tests;
 internal sealed class DashPatternTest
 {
 	[TestCase (LineCap.Butt, "", new double[] { }, 0.0)]
-	[TestCase (LineCap.Butt, "-", new[] { 3.0, 0.0 }, 0.0)]
+	[TestCase (LineCap.Butt, "-", new double[] { }, 0.0)]
 	[TestCase (LineCap.Butt, " ", new double[] { }, 0.0)]
 	[TestCase (LineCap.Butt, " -", new[] { 3.0, 3.0 }, 3.0)]
 	[TestCase (LineCap.Butt, "- -", new[] { 3.0, 3.0, 3.0, 0.0 }, 0.0)]
@@ -19,7 +19,7 @@ internal sealed class DashPatternTest
 	[TestCase (LineCap.Butt, " - - --------", new[] { 3.0, 3.0, 3.0, 3.0, 24.0, 3.0 }, 36.0)]
 
 	[TestCase (LineCap.Square, "", new double[] { }, 0.0)]
-	[TestCase (LineCap.Square, "-", new[] { 1.0, 3.0 }, 0.0)]
+	[TestCase (LineCap.Square, "-", new double[] { }, 0.0)]
 	[TestCase (LineCap.Square, " ", new double[] { }, 0.0)]
 	[TestCase (LineCap.Square, " -", new[] { 1.0, 6.0 }, 2.5)]
 	[TestCase (LineCap.Square, "- -", new[] { 1.0, 6.0, 1.0, 3.0 }, 0.0)]

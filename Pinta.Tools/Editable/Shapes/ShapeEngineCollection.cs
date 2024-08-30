@@ -1,21 +1,21 @@
-// 
+//
 // ShapeEngineCollection.cs
-//  
+//
 // Author:
 //       Andrew Davis <andrew.3.1415@gmail.com>
-// 
+//
 // Copyright (c) 2013 Andrew Davis, GSoC 2013 & 2014
-// 
+//
 // Permission is hereby granted, free of charge, to any person obtaining a copy
 // of this software and associated documentation files (the "Software"), to deal
 // in the Software without restriction, including without limitation the rights
 // to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
 // copies of the Software, and to permit persons to whom the Software is
 // furnished to do so, subject to the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be included in
 // all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
 // IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
 // FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
@@ -124,6 +124,8 @@ public abstract class ShapeEngine
 
 	public BaseEditEngine.ShapeTypes ShapeType { get; }
 
+	public LineCap LineCap { get; set; }
+
 	/// <summary>
 	/// Create a new ShapeEngine.
 	/// </summary>
@@ -138,7 +140,7 @@ public abstract class ShapeEngine
 	public ShapeEngine (UserLayer parent_layer, ReEditableLayer? drawing_layer,
 			    BaseEditEngine.ShapeTypes shape_type, bool antialiasing,
 			    bool closed, Color outline_color, Color fill_color,
-			    int brush_width)
+			    int brush_width, LineCap lineCap)
 	{
 		this.parent_layer = parent_layer;
 
@@ -153,6 +155,7 @@ public abstract class ShapeEngine
 		OutlineColor = outline_color;
 		FillColor = fill_color;
 		BrushWidth = brush_width;
+		LineCap = lineCap;
 	}
 
 	protected ShapeEngine (ShapeEngine src)
@@ -164,6 +167,7 @@ public abstract class ShapeEngine
 		OutlineColor = src.OutlineColor;
 		FillColor = src.FillColor;
 		BrushWidth = src.BrushWidth;
+		LineCap = src.LineCap;
 
 		// Don't clone the GeneratedPoints or OrganizedPoints, as they will be calculated.
 		ControlPoints = src.ControlPoints.Select (i => i.Clone ()).ToList ();
@@ -197,7 +201,8 @@ public abstract class ShapeEngine
 				true,
 				OutlineColor,
 				FillColor,
-				BrushWidth
+				BrushWidth,
+				LineCap
 			),
 
 			BaseEditEngine.ShapeTypes.Ellipse => new EllipseEngine (
@@ -206,7 +211,8 @@ public abstract class ShapeEngine
 				AntiAliasing,
 				OutlineColor,
 				FillColor,
-				BrushWidth
+				BrushWidth,
+				LineCap
 			),
 
 			BaseEditEngine.ShapeTypes.RoundedLineSeries => new RoundedLineEngine (
@@ -216,7 +222,8 @@ public abstract class ShapeEngine
 				AntiAliasing,
 				OutlineColor,
 				FillColor,
-				BrushWidth
+				BrushWidth,
+				LineCap
 			),
 
 			_ => new LineCurveSeriesEngine (
@@ -227,7 +234,8 @@ public abstract class ShapeEngine
 				false,
 				OutlineColor,
 				FillColor,
-				BrushWidth
+				BrushWidth,
+				LineCap
 			),//Defaults to OpenLineCurveSeries.
 		};
 
