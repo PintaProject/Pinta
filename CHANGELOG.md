@@ -62,6 +62,7 @@ Thanks to the following contributors who worked on this release:
 - Fixed a bug where the file picker dialogue would open the wrong directory after a failed save (#914)
 - Fixed unexpected drawing behavior when using semi-transparent colors with the Paint Brush tool (#941)
 - The Text tool now supports configuring whether antialiasing is enabled (#935)
+- Fixed various artifacts in the shape tools, particularly with larger brush widths (#733, #955)
 
 ## [2.1.2](https://github.com/PintaProject/Pinta/releases/tag/2.1.2) - 2024/04/20
 
