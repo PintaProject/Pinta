@@ -87,6 +87,7 @@ public static class PintaCore
 		services.AddService (livePreview);
 		services.AddService<IPaletteService> (palette);
 		services.AddService<IChromeService> (chrome);
+		services.AddService<ISystemService> (system);
 		services.AddService (effects);
 
 		// --- References to expose

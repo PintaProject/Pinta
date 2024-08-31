@@ -616,6 +616,6 @@ internal sealed class EffectsTest
 		effect.Data.Tolerance = 20;
 		effect.Data.Radius = 10;
 		effect.Data.FeatherCanvasEdge = true;
-		Utilities.TestEffect (effect, "feather2.png", "out.png");
+		Utilities.TestEffect (effect, "feather2.png");
 	}
 }

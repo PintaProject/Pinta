@@ -30,7 +30,12 @@ using System.Runtime.InteropServices;
 
 namespace Pinta.Core;
 
-public sealed class SystemManager
+public interface ISystemService
+{
+	int RenderThreads { get; set; }
+}
+
+public sealed class SystemManager : ISystemService
 {
 	private static readonly OS operating_system;
 
