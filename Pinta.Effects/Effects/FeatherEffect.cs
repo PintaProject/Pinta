@@ -106,6 +106,9 @@ public sealed class FeatherEffect : BaseEffect
 			for (int px = roi.Left; px <= roi.Right; px++) {
 				int pixel_index = py * src_width + px;
 				byte lowestAlpha = dst_data[pixel_index].A;
+				// Can't feather further than alpha 0
+				if (lowestAlpha == 0)
+					continue;
 				foreach (var borderPixel in relevantBorderPixels) {
 					if (borderPixel.X > px - radius && borderPixel.X < px + radius) {
 						var dx = borderPixel.X - px;
