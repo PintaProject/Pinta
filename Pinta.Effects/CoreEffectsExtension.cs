@@ -45,6 +45,7 @@ internal sealed class CoreEffectsExtension : IExtension
 		IServiceProvider services = PintaCore.Services;
 
 		// Add the adjustments
+		PintaCore.Effects.RegisterAdjustment (new AlignObjectEffect (services));
 		PintaCore.Effects.RegisterAdjustment (new AutoLevelEffect (services));
 		PintaCore.Effects.RegisterAdjustment (new BlackAndWhiteEffect (services));
 		PintaCore.Effects.RegisterAdjustment (new BrightnessContrastEffect (services));
