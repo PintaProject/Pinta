@@ -13,7 +13,7 @@ public sealed class FeatherEffect : BaseEffect
 
 	public override string Icon => Pinta.Resources.Icons.EffectsDefault;
 
-	// Multithread internally within FeatherEffect to get the full-sized rois
+	// Takes two passes, so must be multithreaded internally
 	public sealed override bool IsTileable => false;
 
 	public override string Name => Translations.GetString ("Feather");
@@ -39,7 +39,10 @@ public sealed class FeatherEffect : BaseEffect
 
 	protected override void Render (ImageSurface src, ImageSurface dest, RectangleI roi)
 	{
+		int top = roi.Top;
 		int bottom = roi.Bottom;
+		int left = roi.Left;
+		int right = roi.Right;
 		int src_height = src.Height;
 		int radius = Data.Radius;
 		int threads = system.RenderThreads;
@@ -48,7 +51,7 @@ public sealed class FeatherEffect : BaseEffect
 		// Color in any pixel that the stencil says we need to fill
 		// First pass
 		// Clean up dest, then collect all border pixels
-		Parallel.For (0, bottom, new ParallelOptions { MaxDegreeOfParallelism = threads }, y => {
+		Parallel.For (top, bottom, new ParallelOptions { MaxDegreeOfParallelism = threads }, y => {
 			var src_data = src.GetReadOnlyPixelData ();
 			int src_width = src.Width;
 			var dst_data = dest.GetPixelData ();
@@ -57,13 +60,13 @@ public sealed class FeatherEffect : BaseEffect
 			// Removing this causes preview to not update to lower radius levels
 			var src_row = src_data.Slice (y * src_width, src_width);
 			var dst_row = dst_data.Slice (y * src_width, src_width);
-			for (int x = roi.Left; x <= roi.Right; x++) {
+			for (int x = left; x <= right; x++) {
 				dst_row[x].Bgra = src_row[x].Bgra;
 			}
 
 			Span<PointI> pixels = stackalloc PointI[] { new (0, 0), new (0, 0), new (0, 0), new (0, 0) };
 			// Collect a list of pixels that surround the object (border pixels)
-			for (int x = roi.Left; x <= roi.Right; x++) {
+			for (int x = left; x <= right; x++) {
 				PointI potentialBorderPixel = new (x, y);
 				if (Data.FeatherCanvasEdge && (x == 0 || x == src_width - 1 || y == 0 || y == src_height - 1)) {
 					borderPixels.Add (potentialBorderPixel);
@@ -96,14 +99,14 @@ public sealed class FeatherEffect : BaseEffect
 
 		// Second pass
 		// Feather pixels according to distance to border pixels
-		Parallel.For (0, bottom, new ParallelOptions { MaxDegreeOfParallelism = threads }, py => {
+		Parallel.For (top, bottom, new ParallelOptions { MaxDegreeOfParallelism = threads }, py => {
 			var src_data = src.GetReadOnlyPixelData ();
 			int src_width = src.Width;
 			var dst_data = dest.GetPixelData ();
 
 			var relevantBorderPixels = borderPixels.Where (borderPixel => borderPixel.Y > py - radius && borderPixel.Y < py + radius).ToArray ();
 
-			for (int px = roi.Left; px <= roi.Right; px++) {
+			for (int px = left; px <= right; px++) {
 				int pixel_index = py * src_width + px;
 				byte lowestAlpha = dst_data[pixel_index].A;
 				// Can't feather further than alpha 0
