@@ -8,8 +8,7 @@ namespace Pinta.Effects;
 
 public sealed class AlignObjectEffect : BaseEffect
 {
-	// TODO: Add icon
-	public override string Icon => Pinta.Resources.Icons.ToolMove;
+	public override string Icon => Pinta.Resources.Icons.EffectsAlignObject;
 
 	public override string Name => Translations.GetString ("Align Object");
 
