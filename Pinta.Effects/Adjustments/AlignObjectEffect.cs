@@ -66,45 +66,43 @@ public sealed class AlignObjectEffect : BaseEffect
 		int y = 0;
 
 		// Align with the selection bounds
-		if (selectionBounds.Width > 0 && selectionBounds.Height > 0) {
-			switch (align) {
-				case AlignPosition.TopLeft:
-					x = selectionBounds.X;
-					y = selectionBounds.Y;
-					break;
-				case AlignPosition.TopCenter:
-					x = selectionBounds.X + selectionBounds.Width / 2 - objectBounds.Width / 2;
-					y = selectionBounds.Y;
-					break;
-				case AlignPosition.TopRight:
-					x = selectionBounds.Right - objectBounds.Width;
-					y = selectionBounds.Y;
-					break;
-				case AlignPosition.CenterLeft:
-					x = selectionBounds.X;
-					y = selectionBounds.Y + selectionBounds.Height / 2 - objectBounds.Height / 2;
-					break;
-				case AlignPosition.Center:
-					x = selectionBounds.X + selectionBounds.Width / 2 - objectBounds.Width / 2;
-					y = selectionBounds.Y + selectionBounds.Height / 2 - objectBounds.Height / 2;
-					break;
-				case AlignPosition.CenterRight:
-					x = selectionBounds.Right - objectBounds.Width;
-					y = selectionBounds.Y + selectionBounds.Height / 2 - objectBounds.Height / 2;
-					break;
-				case AlignPosition.BottomLeft:
-					x = selectionBounds.X;
-					y = selectionBounds.Bottom - objectBounds.Height;
-					break;
-				case AlignPosition.BottomCenter:
-					x = selectionBounds.X + selectionBounds.Width / 2 - objectBounds.Width / 2;
-					y = selectionBounds.Bottom - objectBounds.Height;
-					break;
-				case AlignPosition.BottomRight:
-					x = selectionBounds.Right - objectBounds.Width;
-					y = selectionBounds.Bottom - objectBounds.Height;
-					break;
-			}
+		switch (align) {
+			case AlignPosition.TopLeft:
+				x = selectionBounds.X;
+				y = selectionBounds.Y;
+				break;
+			case AlignPosition.TopCenter:
+				x = selectionBounds.X + selectionBounds.Width / 2 - objectBounds.Width / 2;
+				y = selectionBounds.Y;
+				break;
+			case AlignPosition.TopRight:
+				x = selectionBounds.Right - objectBounds.Width;
+				y = selectionBounds.Y;
+				break;
+			case AlignPosition.CenterLeft:
+				x = selectionBounds.X;
+				y = selectionBounds.Y + selectionBounds.Height / 2 - objectBounds.Height / 2;
+				break;
+			case AlignPosition.Center:
+				x = selectionBounds.X + selectionBounds.Width / 2 - objectBounds.Width / 2;
+				y = selectionBounds.Y + selectionBounds.Height / 2 - objectBounds.Height / 2;
+				break;
+			case AlignPosition.CenterRight:
+				x = selectionBounds.Right - objectBounds.Width;
+				y = selectionBounds.Y + selectionBounds.Height / 2 - objectBounds.Height / 2;
+				break;
+			case AlignPosition.BottomLeft:
+				x = selectionBounds.X;
+				y = selectionBounds.Bottom - objectBounds.Height;
+				break;
+			case AlignPosition.BottomCenter:
+				x = selectionBounds.X + selectionBounds.Width / 2 - objectBounds.Width / 2;
+				y = selectionBounds.Bottom - objectBounds.Height;
+				break;
+			case AlignPosition.BottomRight:
+				x = selectionBounds.Right - objectBounds.Width;
+				y = selectionBounds.Bottom - objectBounds.Height;
+				break;
 		}
 
 		return new PointI (x, y);
