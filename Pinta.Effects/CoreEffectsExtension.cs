@@ -45,7 +45,6 @@ internal sealed class CoreEffectsExtension : IExtension
 		IServiceProvider services = PintaCore.Services;
 
 		// Add the adjustments
-		PintaCore.Effects.RegisterAdjustment (new AlignObjectEffect (services));
 		PintaCore.Effects.RegisterAdjustment (new AutoLevelEffect (services));
 		PintaCore.Effects.RegisterAdjustment (new BlackAndWhiteEffect (services));
 		PintaCore.Effects.RegisterAdjustment (new BrightnessContrastEffect (services));
@@ -58,6 +57,7 @@ internal sealed class CoreEffectsExtension : IExtension
 
 		// Add the effects
 		PintaCore.Effects.RegisterEffect (new AddNoiseEffect (services));
+		PintaCore.Effects.RegisterEffect (new AlignObjectEffect (services));
 		PintaCore.Effects.RegisterEffect (new BulgeEffect (services));
 		PintaCore.Effects.RegisterEffect (new CloudsEffect (services));
 		PintaCore.Effects.RegisterEffect (new DentsEffect (services));
@@ -107,6 +107,7 @@ internal sealed class CoreEffectsExtension : IExtension
 
 		// Remove the effects
 		PintaCore.Effects.UnregisterInstanceOfEffect (typeof (AddNoiseEffect));
+		PintaCore.Effects.UnregisterInstanceOfEffect (typeof (AlignObjectEffect));
 		PintaCore.Effects.UnregisterInstanceOfEffect (typeof (BulgeEffect));
 		PintaCore.Effects.UnregisterInstanceOfEffect (typeof (CloudsEffect));
 		PintaCore.Effects.UnregisterInstanceOfEffect (typeof (DentsEffect));

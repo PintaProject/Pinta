@@ -12,6 +12,8 @@ public sealed class AlignObjectEffect : BaseEffect
 
 	public override string Name => Translations.GetString ("Align Object");
 
+	public override string EffectMenuCategory => Translations.GetString ("Object");
+
 	public override bool IsConfigurable => true;
 
 	public override bool IsTileable => false;
