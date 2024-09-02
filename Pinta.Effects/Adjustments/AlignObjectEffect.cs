@@ -47,75 +47,85 @@ public sealed class AlignObjectEffect : BaseEffect
 
 	public override void Render (ImageSurface src, ImageSurface dest, ReadOnlySpan<RectangleI> rois)
 	{
-		RectangleI objectBounds = Utility.GetObjectBounds (src);
-
+		// If no selection, it's the whole image
+		RectangleI selection = rois[0];
 		AlignPosition align = Data.Position;
 
+		RectangleI objectBounds = Utility.GetObjectBounds (src, selection);
+
 		// Calculate the new position for the object
-		PointI newPosition = CalculateNewPosition (objectBounds, dest.GetSize (), align);
+		PointI newPosition = CalculateNewPosition (objectBounds, align, selection);
 
 		// Draw the object in the new position
-		MoveObject (src, dest, objectBounds, newPosition);
+		MoveObject (src, dest, objectBounds, newPosition, selection);
 	}
 
-	private PointI CalculateNewPosition (RectangleI objectBounds, Size destSize, AlignPosition align)
+	private PointI CalculateNewPosition (RectangleI objectBounds, AlignPosition align, RectangleI selectionBounds)
 	{
-		int newX = 0;
-		int newY = 0;
+		int x = 0;
+		int y = 0;
 
-		switch (align) {
-			case AlignPosition.TopLeft:
-				newX = 0;
-				newY = 0;
-				break;
-			case AlignPosition.TopCenter:
-				newX = (destSize.Width - objectBounds.Width) / 2;
-				newY = 0;
-				break;
-			case AlignPosition.TopRight:
-				newX = destSize.Width - objectBounds.Width;
-				newY = 0;
-				break;
-			case AlignPosition.CenterLeft:
-				newX = 0;
-				newY = (destSize.Height - objectBounds.Height) / 2;
-				break;
-			case AlignPosition.Center:
-				newX = (destSize.Width - objectBounds.Width) / 2;
-				newY = (destSize.Height - objectBounds.Height) / 2;
-				break;
-			case AlignPosition.CenterRight:
-				newX = destSize.Width - objectBounds.Width;
-				newY = (destSize.Height - objectBounds.Height) / 2;
-				break;
-			case AlignPosition.BottomLeft:
-				newX = 0;
-				newY = destSize.Height - objectBounds.Height;
-				break;
-			case AlignPosition.BottomCenter:
-				newX = (destSize.Width - objectBounds.Width) / 2;
-				newY = destSize.Height - objectBounds.Height;
-				break;
-			case AlignPosition.BottomRight:
-				newX = destSize.Width - objectBounds.Width;
-				newY = destSize.Height - objectBounds.Height;
-				break;
+		// Align with the selection bounds
+		if (selectionBounds.Width > 0 && selectionBounds.Height > 0) {
+			switch (align) {
+				case AlignPosition.TopLeft:
+					x = selectionBounds.X;
+					y = selectionBounds.Y;
+					break;
+				case AlignPosition.TopCenter:
+					x = selectionBounds.X + selectionBounds.Width / 2 - objectBounds.Width / 2;
+					y = selectionBounds.Y;
+					break;
+				case AlignPosition.TopRight:
+					x = selectionBounds.Right - objectBounds.Width;
+					y = selectionBounds.Y;
+					break;
+				case AlignPosition.CenterLeft:
+					x = selectionBounds.X;
+					y = selectionBounds.Y + selectionBounds.Height / 2 - objectBounds.Height / 2;
+					break;
+				case AlignPosition.Center:
+					x = selectionBounds.X + selectionBounds.Width / 2 - objectBounds.Width / 2;
+					y = selectionBounds.Y + selectionBounds.Height / 2 - objectBounds.Height / 2;
+					break;
+				case AlignPosition.CenterRight:
+					x = selectionBounds.Right - objectBounds.Width;
+					y = selectionBounds.Y + selectionBounds.Height / 2 - objectBounds.Height / 2;
+					break;
+				case AlignPosition.BottomLeft:
+					x = selectionBounds.X;
+					y = selectionBounds.Bottom - objectBounds.Height;
+					break;
+				case AlignPosition.BottomCenter:
+					x = selectionBounds.X + selectionBounds.Width / 2 - objectBounds.Width / 2;
+					y = selectionBounds.Bottom - objectBounds.Height;
+					break;
+				case AlignPosition.BottomRight:
+					x = selectionBounds.Right - objectBounds.Width;
+					y = selectionBounds.Bottom - objectBounds.Height;
+					break;
+			}
 		}
 
-		return new PointI (newX, newY);
+		return new PointI (x, y);
 	}
 
-	private void MoveObject (ImageSurface src, ImageSurface dest, RectangleI objectBounds, PointI newPosition)
+	private void MoveObject (ImageSurface src, ImageSurface dest, RectangleI objectBounds, PointI newPosition, RectangleI selectionBounds)
 	{
 		var src_data = src.GetReadOnlyPixelData ();
 		var dst_data = dest.GetPixelData ();
 		int width = src.Width;
 
-		// Clear the whole destination surface
-		for (int i = 0; i < dst_data.Length; i++) {
-			dst_data[i] = src.GetColorBgra (PointI.Zero);
+		// Clear the selection area
+		for (int y = 0; y < selectionBounds.Height; y++) {
+			var dst_row = dst_data.Slice ((selectionBounds.Y + y) * width + selectionBounds.X, selectionBounds.Width);
+
+			for (int i = 0; i < dst_row.Length; i++) {
+				dst_row[i] = src.GetColorBgra (PointI.Zero);
+			}
 		}
 
+		// Draw the object in the new position
 		for (int y = 0; y < objectBounds.Height; y++) {
 			var src_row = src_data.Slice ((objectBounds.Y + y) * width + objectBounds.X, objectBounds.Width);
 			var dst_row = dst_data.Slice ((newPosition.Y + y) * width + newPosition.X, objectBounds.Width);
