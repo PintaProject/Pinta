@@ -618,4 +618,26 @@ internal sealed class EffectsTest
 		effect.Data.FeatherCanvasEdge = true;
 		Utilities.TestEffect (effect, "feather2.png");
 	}
+
+	[Test]
+	public void AlignObject1 ()
+	{
+		AlignObjectEffect effect = new (Utilities.CreateMockServices ());
+		effect.Data.Position = AlignPosition.TopLeft;
+		Utilities.TestEffect (effect, "alignobject1.png", source_image_name: "alignobjectinput.png");
+	}
+
+	[Test]
+	public void AlignObject2 ()
+	{
+		AlignObjectEffect effect = new (Utilities.CreateMockServices ());
+		effect.Data.Position = AlignPosition.Center;
+		Utilities.TestEffect (effect, "alignobject2.png", source_image_name: "alignobjectinput.png");
+	}
+	public void AlignObject3 ()
+	{
+		AlignObjectEffect effect = new (Utilities.CreateMockServices ());
+		effect.Data.Position = AlignPosition.BottomRight;
+		Utilities.TestEffect (effect, "alignobject3.png", source_image_name: "alignobjectinput.png");
+	}
 }
