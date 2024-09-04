@@ -57,7 +57,7 @@ public sealed class AlignmentDialog : Gtk.Dialog
 		grid.Attach (bottomRight, 2, 2, 1, 1);
 
 		// Set the default selection
-		SetSelectedPosition(AlignPosition.Center);
+		SetSelectedPosition (AlignPosition.Center);
 
 		var content_area = this.GetContentAreaBox ();
 		content_area.Append (grid);
@@ -78,20 +78,20 @@ public sealed class AlignmentDialog : Gtk.Dialog
 
 	private Gtk.ToggleButton CreateIconButton (string tooltip, string iconName, AlignPosition position)
 	{
-		var button = new Gtk.ToggleButton();
-		button.SetIconName(iconName);
+		var button = new Gtk.ToggleButton ();
+		button.SetIconName (iconName);
 
 		button.TooltipText = tooltip;
 
 		button.OnClicked += (sender, args) => {
-			SetSelectedPosition(position);
+			SetSelectedPosition (position);
 			PositionChanged?.Invoke (this, EventArgs.Empty);
 		};
 
 		return button;
 	}
 
-	private void SetSelectedPosition(AlignPosition position)
+	private void SetSelectedPosition (AlignPosition position)
 	{
 		SelectedPosition = position;
 
@@ -105,7 +105,7 @@ public sealed class AlignmentDialog : Gtk.Dialog
 		bottomCenter.SetActive (position == AlignPosition.BottomCenter);
 		bottomRight.SetActive (position == AlignPosition.BottomRight);
 	}
-	
+
 	public void RunDialog ()
 	{
 		Present ();

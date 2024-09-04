@@ -116,11 +116,11 @@ public sealed class AlignObjectEffect : BaseEffect
 		int width = src.Width;
 
 		// Clear the selection area
-		var backgroundColor = src.GetColorBgra(PointI.Zero);
+		var backgroundColor = src.GetColorBgra (PointI.Zero);
 		for (int y = 0; y < selectionBounds.Height; y++) {
 			var dst_row = dst_data.Slice ((selectionBounds.Y + y) * width + selectionBounds.X, selectionBounds.Width);
 
-			dst_row.Fill(backgroundColor);
+			dst_row.Fill (backgroundColor);
 		}
 
 		// Draw the object in the new position
@@ -128,7 +128,7 @@ public sealed class AlignObjectEffect : BaseEffect
 			var src_row = src_data.Slice ((objectBounds.Y + y) * width + objectBounds.X, objectBounds.Width);
 			var dst_row = dst_data.Slice ((newPosition.Y + y) * width + newPosition.X, objectBounds.Width);
 
-			src_row.CopyTo(dst_row);
+			src_row.CopyTo (dst_row);
 		}
 	}
 
