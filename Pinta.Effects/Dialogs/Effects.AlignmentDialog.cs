@@ -6,15 +6,15 @@ namespace Pinta.Effects;
 
 public sealed class AlignmentDialog : Gtk.Dialog
 {
-	private readonly Gtk.CheckButton topLeft;
-	private readonly Gtk.CheckButton topCenter;
-	private readonly Gtk.CheckButton topRight;
-	private readonly Gtk.CheckButton centerLeft;
-	private readonly Gtk.CheckButton center;
-	private readonly Gtk.CheckButton centerRight;
-	private readonly Gtk.CheckButton bottomLeft;
-	private readonly Gtk.CheckButton bottomCenter;
-	private readonly Gtk.CheckButton bottomRight;
+	private readonly Gtk.ToggleButton topLeft;
+	private readonly Gtk.ToggleButton topCenter;
+	private readonly Gtk.ToggleButton topRight;
+	private readonly Gtk.ToggleButton centerLeft;
+	private readonly Gtk.ToggleButton center;
+	private readonly Gtk.ToggleButton centerRight;
+	private readonly Gtk.ToggleButton bottomLeft;
+	private readonly Gtk.ToggleButton bottomCenter;
+	private readonly Gtk.ToggleButton bottomRight;
 
 	public AlignPosition SelectedPosition { get; private set; }
 
@@ -35,26 +35,17 @@ public sealed class AlignmentDialog : Gtk.Dialog
 			MarginBottom = 12
 		};
 
-		topLeft = CreateCheckButton ("Top Left", AlignPosition.TopLeft);
-		topCenter = CreateCheckButton ("Top Center", AlignPosition.TopCenter);
-		topRight = CreateCheckButton ("Top Right", AlignPosition.TopRight);
-		centerLeft = CreateCheckButton ("Center Left", AlignPosition.CenterLeft);
-		center = CreateCheckButton ("Center", AlignPosition.Center);
-		centerRight = CreateCheckButton ("Center Right", AlignPosition.CenterRight);
-		bottomLeft = CreateCheckButton ("Bottom Left", AlignPosition.BottomLeft);
-		bottomCenter = CreateCheckButton ("Bottom Center", AlignPosition.BottomCenter);
-		bottomRight = CreateCheckButton ("Bottom Right", AlignPosition.BottomRight);
+		topLeft = CreateIconButton ("Top Left", Resources.Icons.ResizeCanvasNW, AlignPosition.TopLeft);
+		topCenter = CreateIconButton ("Top Center", Resources.Icons.ResizeCanvasUp, AlignPosition.TopCenter);
+		topRight = CreateIconButton ("Top Right", Resources.Icons.ResizeCanvasNE, AlignPosition.TopRight);
+		centerLeft = CreateIconButton ("Center Left", Resources.Icons.ResizeCanvasLeft, AlignPosition.CenterLeft);
+		center = CreateIconButton ("Center", Resources.Icons.ResizeCanvasBase, AlignPosition.Center);
+		centerRight = CreateIconButton ("Center Right", Resources.Icons.ResizeCanvasRight, AlignPosition.CenterRight);
+		bottomLeft = CreateIconButton ("Bottom Left", Resources.Icons.ResizeCanvasSW, AlignPosition.BottomLeft);
+		bottomCenter = CreateIconButton ("Bottom Center", Resources.Icons.ResizeCanvasDown, AlignPosition.BottomCenter);
+		bottomRight = CreateIconButton ("Bottom Right", Resources.Icons.ResizeCanvasSE, AlignPosition.BottomRight);
 
-		// Group the check buttons so they behave like radio buttons
-		topCenter.SetGroup (topLeft);
-		topRight.SetGroup (topLeft);
-		centerLeft.SetGroup (topLeft);
-		center.SetGroup (topLeft);
-		centerRight.SetGroup (topLeft);
-		bottomLeft.SetGroup (topLeft);
-		bottomCenter.SetGroup (topLeft);
-		bottomRight.SetGroup (topLeft);
-
+		// Add buttons to the grid
 		grid.Attach (topLeft, 0, 0, 1, 1);
 		grid.Attach (topCenter, 1, 0, 1, 1);
 		grid.Attach (topRight, 2, 0, 1, 1);
@@ -66,7 +57,7 @@ public sealed class AlignmentDialog : Gtk.Dialog
 		grid.Attach (bottomRight, 2, 2, 1, 1);
 
 		// Set the default selection
-		center.Active = true;
+		SetSelectedPosition(AlignPosition.Center);
 
 		var content_area = this.GetContentAreaBox ();
 		content_area.Append (grid);
@@ -85,18 +76,36 @@ public sealed class AlignmentDialog : Gtk.Dialog
 		Show ();
 	}
 
-	private Gtk.CheckButton CreateCheckButton (string label, AlignPosition position)
+	private Gtk.ToggleButton CreateIconButton (string tooltip, string iconName, AlignPosition position)
 	{
-		var button = new Gtk.CheckButton { Label = label };
-		button.OnToggled += (sender, args) => {
-			if (button.Active) {
-				SelectedPosition = position;
-				PositionChanged?.Invoke (this, EventArgs.Empty);
-			}
+		var button = new Gtk.ToggleButton();
+		button.SetIconName(iconName);
+
+		button.TooltipText = tooltip;
+
+		button.OnClicked += (sender, args) => {
+			SetSelectedPosition(position);
+			PositionChanged?.Invoke (this, EventArgs.Empty);
 		};
+
 		return button;
 	}
 
+	private void SetSelectedPosition(AlignPosition position)
+	{
+		SelectedPosition = position;
+
+		topLeft.SetActive (position == AlignPosition.TopLeft);
+		topCenter.SetActive (position == AlignPosition.TopCenter);
+		topRight.SetActive (position == AlignPosition.TopRight);
+		centerLeft.SetActive (position == AlignPosition.CenterLeft);
+		center.SetActive (position == AlignPosition.Center);
+		centerRight.SetActive (position == AlignPosition.CenterRight);
+		bottomLeft.SetActive (position == AlignPosition.BottomLeft);
+		bottomCenter.SetActive (position == AlignPosition.BottomCenter);
+		bottomRight.SetActive (position == AlignPosition.BottomRight);
+	}
+	
 	public void RunDialog ()
 	{
 		Present ();
