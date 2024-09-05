@@ -512,11 +512,12 @@ public static class Utility
 	{
 		// Use the entire image bounds by default, or restrict to the provided search area.
 		RectangleI rect = searchArea ?? image.GetBounds ();
-		Cairo.Color border_color = image.GetColorBgra (PointI.Zero).ToCairoColor ();
+		// Get the background color from the top-left pixel of the rectangle
+		Cairo.Color borderColor = image.GetColorBgra (new PointI (rect.Left, rect.Top)).ToCairoColor ();
 
 		// Top down.
 		for (int y = rect.Top; y < rect.Bottom; ++y) {
-			if (!IsConstantRow (image, border_color, rect, y))
+			if (!IsConstantRow (image, borderColor, rect, y))
 				break;
 
 			rect = rect with { Y = rect.Y + 1, Height = rect.Height - 1 };
@@ -524,7 +525,7 @@ public static class Utility
 
 		// Bottom up.
 		for (int y = rect.Bottom - 1; y >= rect.Top; --y) {
-			if (!IsConstantRow (image, border_color, rect, y))
+			if (!IsConstantRow (image, borderColor, rect, y))
 				break;
 
 			rect = rect with { Height = rect.Height - 1 };
@@ -532,7 +533,7 @@ public static class Utility
 
 		// Left side.
 		for (int x = rect.Left; x < rect.Right; ++x) {
-			if (!IsConstantColumn (image, border_color, rect, x))
+			if (!IsConstantColumn (image, borderColor, rect, x))
 				break;
 
 			rect = rect with { X = rect.X + 1, Width = rect.Width - 1 };
@@ -540,7 +541,7 @@ public static class Utility
 
 		// Right side.
 		for (int x = rect.Right - 1; x >= rect.Left; --x) {
-			if (!IsConstantColumn (image, border_color, rect, x))
+			if (!IsConstantColumn (image, borderColor, rect, x))
 				break;
 
 			rect = rect with { Width = rect.Width - 1 };

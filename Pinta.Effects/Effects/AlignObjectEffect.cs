@@ -116,7 +116,7 @@ public sealed class AlignObjectEffect : BaseEffect
 		int width = src.Width;
 
 		// Clear the selection area
-		var backgroundColor = src.GetColorBgra (PointI.Zero);
+		var backgroundColor = src.GetColorBgra (new PointI (selectionBounds.Left, selectionBounds.Top));
 		for (int y = 0; y < selectionBounds.Height; y++) {
 			var dst_row = dst_data.Slice ((selectionBounds.Y + y) * width + selectionBounds.X, selectionBounds.Width);
 
