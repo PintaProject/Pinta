@@ -81,7 +81,7 @@ public sealed class AlignmentDialog : Gtk.Dialog
 		var button = new Gtk.ToggleButton ();
 		button.SetIconName (iconName);
 
-		button.TooltipText = tooltip;
+		button.TooltipText = Translations.GetString(tooltip);
 
 		button.OnClicked += (sender, args) => {
 			SetSelectedPosition (position);
