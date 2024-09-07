@@ -35,15 +35,15 @@ public sealed class AlignmentDialog : Gtk.Dialog
 			MarginBottom = 12
 		};
 
-		topLeft = CreateIconButton ("Top Left", Resources.Icons.ResizeCanvasNW, AlignPosition.TopLeft);
-		topCenter = CreateIconButton ("Top Center", Resources.Icons.ResizeCanvasUp, AlignPosition.TopCenter);
-		topRight = CreateIconButton ("Top Right", Resources.Icons.ResizeCanvasNE, AlignPosition.TopRight);
-		centerLeft = CreateIconButton ("Center Left", Resources.Icons.ResizeCanvasLeft, AlignPosition.CenterLeft);
-		center = CreateIconButton ("Center", Resources.Icons.ResizeCanvasBase, AlignPosition.Center);
-		centerRight = CreateIconButton ("Center Right", Resources.Icons.ResizeCanvasRight, AlignPosition.CenterRight);
-		bottomLeft = CreateIconButton ("Bottom Left", Resources.Icons.ResizeCanvasSW, AlignPosition.BottomLeft);
-		bottomCenter = CreateIconButton ("Bottom Center", Resources.Icons.ResizeCanvasDown, AlignPosition.BottomCenter);
-		bottomRight = CreateIconButton ("Bottom Right", Resources.Icons.ResizeCanvasSE, AlignPosition.BottomRight);
+		topLeft = CreateIconButton (Translations.GetString ("Top Left"), Resources.Icons.ResizeCanvasNW, AlignPosition.TopLeft);
+		topCenter = CreateIconButton (Translations.GetString ("Top Center"), Resources.Icons.ResizeCanvasUp, AlignPosition.TopCenter);
+		topRight = CreateIconButton (Translations.GetString ("Top Right"), Resources.Icons.ResizeCanvasNE, AlignPosition.TopRight);
+		centerLeft = CreateIconButton (Translations.GetString ("Center Left"), Resources.Icons.ResizeCanvasLeft, AlignPosition.CenterLeft);
+		center = CreateIconButton (Translations.GetString ("Center"), Resources.Icons.ResizeCanvasBase, AlignPosition.Center);
+		centerRight = CreateIconButton (Translations.GetString ("Center Right"), Resources.Icons.ResizeCanvasRight, AlignPosition.CenterRight);
+		bottomLeft = CreateIconButton (Translations.GetString ("Bottom Left"), Resources.Icons.ResizeCanvasSW, AlignPosition.BottomLeft);
+		bottomCenter = CreateIconButton (Translations.GetString ("Bottom Center"), Resources.Icons.ResizeCanvasDown, AlignPosition.BottomCenter);
+		bottomRight = CreateIconButton (Translations.GetString ("Bottom Right"), Resources.Icons.ResizeCanvasSE, AlignPosition.BottomRight);
 
 		// Add buttons to the grid
 		grid.Attach (topLeft, 0, 0, 1, 1);
@@ -81,7 +81,7 @@ public sealed class AlignmentDialog : Gtk.Dialog
 		var button = new Gtk.ToggleButton ();
 		button.SetIconName (iconName);
 
-		button.TooltipText = Translations.GetString (tooltip);
+		button.TooltipText = tooltip;
 
 		button.OnClicked += (sender, args) => {
 			SetSelectedPosition (position);
