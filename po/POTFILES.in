@@ -175,10 +175,12 @@ Pinta.Effects/Adjustments/PosterizeEffect.cs
 Pinta.Effects/Adjustments/SepiaEffect.cs
 Pinta.Effects/Classes/ErrorDiffusionMatrix.cs
 Pinta.Effects/CoreEffectsExtension.cs
+Pinta.Effects/Dialogs/Effects.AlignmentDialog.cs
 Pinta.Effects/Dialogs/Effects.CurvesDialog.cs
 Pinta.Effects/Dialogs/Effects.LevelsDialog.cs
 Pinta.Effects/Dialogs/Effects.PosterizeDialog.cs
 Pinta.Effects/Effects/AddNoiseEffect.cs
+Pinta.Effects/Effects/AlignObjectEffect.cs
 Pinta.Effects/Effects/BulgeEffect.cs
 Pinta.Effects/Effects/CloudsEffect.cs
 Pinta.Effects/Effects/ColorGradient.cs
@@ -186,6 +188,7 @@ Pinta.Effects/Effects/DentsEffect.cs
 Pinta.Effects/Effects/DitheringEffect.cs
 Pinta.Effects/Effects/EdgeDetectEffect.cs
 Pinta.Effects/Effects/EmbossEffect.cs
+Pinta.Effects/Effects/FeatherEffect.cs
 Pinta.Effects/Effects/FragmentEffect.cs
 Pinta.Effects/Effects/FrostedGlassEffect.cs
 Pinta.Effects/Effects/GaussianBlurEffect.cs
