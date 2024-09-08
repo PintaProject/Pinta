@@ -13,7 +13,7 @@ public sealed class OutlineObjectEffect : BaseEffect
 
 	public override string Icon => Pinta.Resources.Icons.EffectsStylizeOutline;
 
-	// Takes three passes, so must be multithreaded internally
+	// Takes two passes, so must be multithreaded internally
 	public sealed override bool IsTileable => false;
 
 	public override string Name => Translations.GetString ("Outline Object");
@@ -120,6 +120,7 @@ public sealed class OutlineObjectEffect : BaseEffect
 			var relevantBorderPixels = borderPixels.Where (borderPixel => borderPixel.Y > y - radius && borderPixel.Y < y + radius).ToArray ();
 			var destRow = dest.GetPixelData ().Slice (y * srcWidth, srcWidth);
 
+			// otherwise produces nothing at radius == 0
 			if (radius == 0)
 				radius = 1;
 
