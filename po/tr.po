@@ -8,16 +8,16 @@ msgstr ""
 "Project-Id-Version: pinta\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2024-09-08 01:27+0000\n"
-"PO-Revision-Date: 2024-07-08 17:09+0000\n"
+"PO-Revision-Date: 2024-09-09 05:09+0000\n"
 "Last-Translator: Oğuz Ersen <oguz@ersen.moe>\n"
-"Language-Team: Turkish <https://hosted.weblate.org/projects/pinta/pinta/tr/"
-">\n"
+"Language-Team: Turkish <https://hosted.weblate.org/projects/pinta/pinta/tr/>"
+"\n"
 "Language: tr\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Generator: Weblate 5.7-dev\n"
+"X-Generator: Weblate 5.8-dev\n"
 "X-Launchpad-Export-Date: 2023-12-18 03:00+0000\n"
 
 #: ../Pinta.Gui.Addins/InstallDialog.cs:257
@@ -90,7 +90,7 @@ msgstr "Seçimden sonra"
 #: ../Pinta.Effects/Dialogs/Effects.AlignmentDialog.cs:65
 #: ../Pinta.Effects/Effects/AlignObjectEffect.cs:13
 msgid "Align Object"
-msgstr ""
+msgstr "Nesneyi Hizala"
 
 #: ../Pinta.Core/Actions/EditActions.cs:390
 #: ../Pinta.Gui.Addins/AddinManagerDialog.cs:289
@@ -234,15 +234,15 @@ msgstr "Şenlik Ateşi"
 
 #: ../Pinta.Effects/Dialogs/Effects.AlignmentDialog.cs:45
 msgid "Bottom Center"
-msgstr ""
+msgstr "Alt Orta"
 
 #: ../Pinta.Effects/Dialogs/Effects.AlignmentDialog.cs:44
 msgid "Bottom Left"
-msgstr ""
+msgstr "Sol Alt"
 
 #: ../Pinta.Effects/Dialogs/Effects.AlignmentDialog.cs:46
 msgid "Bottom Right"
-msgstr ""
+msgstr "Sağ Alt"
 
 #: ../Pinta.Effects/Adjustments/BrightnessContrastEffect.cs:143
 #: ../Pinta.Effects/Effects/GlowEffect.cs:79
@@ -301,7 +301,7 @@ msgstr "Hücre Boyutu"
 
 #: ../Pinta.Effects/Dialogs/Effects.AlignmentDialog.cs:42
 msgid "Center"
-msgstr ""
+msgstr "Orta"
 
 #: ../Pinta.Tools/Tools/TextTool.cs:234
 msgid "Center Align"
@@ -309,7 +309,7 @@ msgstr "Ortala"
 
 #: ../Pinta.Effects/Dialogs/Effects.AlignmentDialog.cs:41
 msgid "Center Left"
-msgstr ""
+msgstr "Sol Orta"
 
 #: ../Pinta.Effects/Effects/WarpEffect.cs:184
 msgid "Center Offset"
@@ -317,7 +317,7 @@ msgstr "Orta Baskı"
 
 #: ../Pinta.Effects/Dialogs/Effects.AlignmentDialog.cs:43
 msgid "Center Right"
-msgstr ""
+msgstr "Sağ Orta"
 
 #: ../Pinta.Effects/Effects/MotionBlurEffect.cs:127
 msgid "Centered"
@@ -763,11 +763,11 @@ msgstr "Ekran görüntüsü alınamadı"
 
 #: ../Pinta.Effects/Effects/FeatherEffect.cs:19
 msgid "Feather"
-msgstr ""
+msgstr "Kenarları Yumuşat"
 
 #: ../Pinta.Effects/Effects/FeatherEffect.cs:143
 msgid "Feather Canvas Edge"
-msgstr ""
+msgstr "Tuval Kenarlarını Yumuşat"
 
 #: ../Pinta.Core/Actions/HelpActions.cs:46
 msgid "File a Bug"
@@ -1477,7 +1477,7 @@ msgstr "Görselleştirme için kullanılacak iş parçacığı sayısı"
 #: ../Pinta.Effects/Effects/AlignObjectEffect.cs:15
 #: ../Pinta.Effects/Effects/FeatherEffect.cs:23
 msgid "Object"
-msgstr ""
+msgstr "Nesne"
 
 #: ../Pinta.Effects/Effects/BulgeEffect.cs:112
 #: ../Pinta.Effects/Effects/RadialBlurEffect.cs:173
@@ -1718,7 +1718,7 @@ msgstr "Dikey"
 
 #: ../Pinta.Effects/Effects/AlignObjectEffect.cs:139
 msgid "Position"
-msgstr ""
+msgstr "Konum"
 
 #: ../Pinta.Effects/Adjustments/PosterizeEffect.cs:24
 #: ../Pinta.Effects/Dialogs/Effects.PosterizeDialog.cs:51
@@ -2292,15 +2292,15 @@ msgstr "Araç Çubuğu"
 
 #: ../Pinta.Effects/Dialogs/Effects.AlignmentDialog.cs:39
 msgid "Top Center"
-msgstr ""
+msgstr "Üst Orta"
 
 #: ../Pinta.Effects/Dialogs/Effects.AlignmentDialog.cs:38
 msgid "Top Left"
-msgstr ""
+msgstr "Sol Üst"
 
 #: ../Pinta.Effects/Dialogs/Effects.AlignmentDialog.cs:40
 msgid "Top Right"
-msgstr ""
+msgstr "Sağ Üst"
 
 #: ../Pinta.Effects/Dialogs/Effects.CurvesDialog.cs:107
 msgid "Transfer Map"
