@@ -212,32 +212,6 @@ public sealed class ImageActions
 		CropImageToRectangle (doc, rect, doc.Selection.SelectionPath);
 	}
 
-	/// <summary>
-	/// Checks if all of the pixels in the row match the specified color.
-	/// </summary>
-	private static bool IsConstantRow (ImageSurface surf, Cairo.Color color, int y)
-	{
-		for (int x = 0; x < surf.Width; ++x) {
-			if (!color.Equals (surf.GetColorBgra (new (x, y)).ToCairoColor ()))
-				return false;
-		}
-
-		return true;
-	}
-
-	/// <summary>
-	/// Checks if all of the pixels in the column (within the bounds of the rectangle) match the specified color.
-	/// </summary>
-	private static bool IsConstantColumn (ImageSurface surf, Cairo.Color color, RectangleI rect, int x)
-	{
-		for (int y = rect.Top; y < rect.Bottom; ++y) {
-			if (!color.Equals (surf.GetColorBgra (new (x, y)).ToCairoColor ()))
-				return false;
-		}
-
-		return true;
-	}
-
 	private void HandlePintaCoreActionsImageAutoCropActivated (object sender, EventArgs e)
 	{
 		Document doc = workspace.ActiveDocument;
@@ -245,40 +219,8 @@ public sealed class ImageActions
 		tools.Commit ();
 
 		var image = doc.GetFlattenedImage ();
-		RectangleI rect = image.GetBounds ();
-		Cairo.Color border_color = image.GetColorBgra (PointI.Zero).ToCairoColor ();
 
-		// Top down.
-		for (int y = 0; y < image.Height; ++y) {
-			if (!IsConstantRow (image, border_color, y))
-				break;
-
-			rect = rect with { Y = rect.Y + 1, Height = rect.Height - 1 };
-		}
-
-		// Bottom up.
-		for (int y = rect.Bottom; y >= rect.Top; --y) {
-			if (!IsConstantRow (image, border_color, y))
-				break;
-
-			rect = rect with { Height = rect.Height - 1 };
-		}
-
-		// Left side.
-		for (int x = 0; x < image.Width; ++x) {
-			if (!IsConstantColumn (image, border_color, rect, x))
-				break;
-
-			rect = rect with { X = rect.X + 1, Width = rect.Width - 1 };
-		}
-
-		// Right side.
-		for (int x = rect.Right; x >= rect.Left; --x) {
-			if (!IsConstantColumn (image, border_color, rect, x))
-				break;
-
-			rect = rect with { Width = rect.Width - 1 };
-		}
+		var rect = Utility.GetObjectBounds (image);
 
 		// Ignore the current selection when auto-cropping.
 		CropImageToRectangle (doc, rect, /*selection*/ null);

@@ -63,9 +63,9 @@ internal static class Utilities
 		Assert.That (diffs, Is.EqualTo (0));
 	}
 
-	public static void TestEffect (BaseEffect effect, string result_image_name, string? save_image_name = null)
+	public static void TestEffect (BaseEffect effect, string result_image_name, string? save_image_name = null, string source_image_name = "input.png")
 	{
-		var source = Utilities.LoadImage ("input.png");
+		var source = Utilities.LoadImage (source_image_name);
 		var result = CairoExtensions.CreateImageSurface (Format.Argb32, source.Width, source.Height);
 		var expected = LoadImage (result_image_name);
 

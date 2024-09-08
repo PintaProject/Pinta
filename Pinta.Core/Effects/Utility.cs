@@ -9,6 +9,7 @@ using System;
 using System.Collections.Generic;
 using System.Numerics;
 using System.Reflection;
+using Cairo;
 
 namespace Pinta.Core;
 
@@ -479,5 +480,73 @@ public static class Utility
 		double sector = Math.Round (angle.Radians / stepAngle) * stepAngle;
 
 		return new (sector);
+	}
+
+	/// <summary>
+	/// Checks if all of the pixels in the row match the specified color.
+	/// </summary>
+	private static bool IsConstantRow (ImageSurface surf, Cairo.Color color, RectangleI rect, int y)
+	{
+		for (int x = rect.Left; x < rect.Right; ++x) {
+			if (!color.Equals (surf.GetColorBgra (new (x, y)).ToCairoColor ()))
+				return false;
+		}
+
+		return true;
+	}
+
+	/// <summary>
+	/// Checks if all of the pixels in the column (within the bounds of the rectangle) match the specified color.
+	/// </summary>
+	private static bool IsConstantColumn (ImageSurface surf, Cairo.Color color, RectangleI rect, int x)
+	{
+		for (int y = rect.Top; y < rect.Bottom; ++y) {
+			if (!color.Equals (surf.GetColorBgra (new (x, y)).ToCairoColor ()))
+				return false;
+		}
+
+		return true;
+	}
+
+	public static RectangleI GetObjectBounds (ImageSurface image, RectangleI? searchArea = null)
+	{
+		// Use the entire image bounds by default, or restrict to the provided search area.
+		RectangleI rect = searchArea ?? image.GetBounds ();
+		// Get the background color from the top-left pixel of the rectangle
+		Cairo.Color borderColor = image.GetColorBgra (new PointI (rect.Left, rect.Top)).ToCairoColor ();
+
+		// Top down.
+		for (int y = rect.Top; y < rect.Bottom; ++y) {
+			if (!IsConstantRow (image, borderColor, rect, y))
+				break;
+
+			rect = rect with { Y = rect.Y + 1, Height = rect.Height - 1 };
+		}
+
+		// Bottom up.
+		for (int y = rect.Bottom - 1; y >= rect.Top; --y) {
+			if (!IsConstantRow (image, borderColor, rect, y))
+				break;
+
+			rect = rect with { Height = rect.Height - 1 };
+		}
+
+		// Left side.
+		for (int x = rect.Left; x < rect.Right; ++x) {
+			if (!IsConstantColumn (image, borderColor, rect, x))
+				break;
+
+			rect = rect with { X = rect.X + 1, Width = rect.Width - 1 };
+		}
+
+		// Right side.
+		for (int x = rect.Right - 1; x >= rect.Left; --x) {
+			if (!IsConstantColumn (image, borderColor, rect, x))
+				break;
+
+			rect = rect with { Width = rect.Width - 1 };
+		}
+
+		return rect;
 	}
 }

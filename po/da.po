@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: pinta\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-07-07 01:20+0000\n"
+"POT-Creation-Date: 2024-09-08 01:27+0000\n"
 "PO-Revision-Date: 2022-12-06 14:02+0000\n"
 "Last-Translator: mlohdrac <Unknown>\n"
 "Language-Team: Danish <da@li.org>\n"
@@ -86,6 +86,11 @@ msgstr ""
 msgid "After select"
 msgstr "Efter markering"
 
+#: ../Pinta.Effects/Dialogs/Effects.AlignmentDialog.cs:65
+#: ../Pinta.Effects/Effects/AlignObjectEffect.cs:13
+msgid "Align Object"
+msgstr ""
+
 #: ../Pinta.Core/Actions/EditActions.cs:390
 #: ../Pinta.Gui.Addins/AddinManagerDialog.cs:289
 #: ../Pinta/Actions/File/OpenDocumentAction.cs:106
@@ -120,11 +125,11 @@ msgstr "Vinkel"
 msgid "Antialias"
 msgstr "Udjævning"
 
-#: ../Pinta.Core/Classes/BaseTool.cs:349
+#: ../Pinta.Core/Classes/BaseTool.cs:357
 msgid "Antialiasing Off"
 msgstr "Kantudjævning fra"
 
-#: ../Pinta.Core/Classes/BaseTool.cs:348
+#: ../Pinta.Core/Classes/BaseTool.cs:356
 msgid "Antialiasing On"
 msgstr "Kantudjævning til"
 
@@ -217,13 +222,25 @@ msgstr "Blå "
 msgid "Blurs"
 msgstr "Sløringer"
 
-#: ../Pinta.Tools/Tools/TextTool.cs:178
+#: ../Pinta.Tools/Tools/TextTool.cs:182
 msgid "Bold"
 msgstr "Fed"
 
 #. Translators: Gradient that starts out white, like the core of a raging fire, and then goes through yellow, red, and black (like visible black smoke), and finally transparent, blending with the background
 #: ../Pinta.Effects/Effects/GradientHelper.cs:32
 msgid "Bonfire"
+msgstr ""
+
+#: ../Pinta.Effects/Dialogs/Effects.AlignmentDialog.cs:45
+msgid "Bottom Center"
+msgstr ""
+
+#: ../Pinta.Effects/Dialogs/Effects.AlignmentDialog.cs:44
+msgid "Bottom Left"
+msgstr ""
+
+#: ../Pinta.Effects/Dialogs/Effects.AlignmentDialog.cs:46
+msgid "Bottom Right"
 msgstr ""
 
 #: ../Pinta.Effects/Adjustments/BrightnessContrastEffect.cs:143
@@ -281,13 +298,25 @@ msgstr "Lærred"
 msgid "Cell Size"
 msgstr "Cellestørrelse"
 
-#: ../Pinta.Tools/Tools/TextTool.cs:230
+#: ../Pinta.Effects/Dialogs/Effects.AlignmentDialog.cs:42
+msgid "Center"
+msgstr ""
+
+#: ../Pinta.Tools/Tools/TextTool.cs:234
 msgid "Center Align"
 msgstr "Centreret"
+
+#: ../Pinta.Effects/Dialogs/Effects.AlignmentDialog.cs:41
+msgid "Center Left"
+msgstr ""
 
 #: ../Pinta.Effects/Effects/WarpEffect.cs:184
 msgid "Center Offset"
 msgstr "Centerforskydning"
+
+#: ../Pinta.Effects/Dialogs/Effects.AlignmentDialog.cs:43
+msgid "Center Right"
+msgstr ""
 
 #: ../Pinta.Effects/Effects/MotionBlurEffect.cs:127
 msgid "Centered"
@@ -396,7 +425,7 @@ msgstr "Luk"
 msgid "Close All"
 msgstr "Luk alle"
 
-#: ../Pinta.Tools/Editable/EditEngines/RectangleEditEngine.cs:36
+#: ../Pinta.Tools/Editable/EditEngines/RectangleEditEngine.cs:37
 msgid "Closed Curve Shape"
 msgstr "Lukket kurveform"
 
@@ -514,7 +543,7 @@ msgid "Coverage"
 msgstr "Dækning"
 
 #: ../Pinta.Core/Actions/ImageActions.cs:54
-#: ../Pinta.Core/Actions/ImageActions.cs:295
+#: ../Pinta.Core/Actions/ImageActions.cs:237
 msgid "Crop to Selection"
 msgstr "Beskær til markering"
 
@@ -646,7 +675,7 @@ msgid "Electric"
 msgstr ""
 
 #: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:337
-#: ../Pinta.Tools/Editable/EditEngines/EllipseEditEngine.cs:35
+#: ../Pinta.Tools/Editable/EditEngines/EllipseEditEngine.cs:36
 #: ../Pinta.Tools/Tools/EllipseTool.cs:43
 msgid "Ellipse"
 msgstr "Ellipse"
@@ -714,7 +743,7 @@ msgstr ""
 msgid "Failed to open image"
 msgstr "Det lykkedes ikke at åbne billedet"
 
-#: ../Pinta/Actions/File/SaveDocumentImplementationAction.cs:232
+#: ../Pinta/Actions/File/SaveDocumentImplementationAction.cs:236
 msgid "Failed to save image"
 msgstr "Kunne ikke gemme billede"
 
@@ -722,6 +751,14 @@ msgstr "Kunne ikke gemme billede"
 #: ../Pinta/Actions/File/NewScreenshotAction.cs:104
 msgid "Failed to take screenshot"
 msgstr "Det lykkedes ikke at tage et skærmbillede"
+
+#: ../Pinta.Effects/Effects/FeatherEffect.cs:19
+msgid "Feather"
+msgstr ""
+
+#: ../Pinta.Effects/Effects/FeatherEffect.cs:143
+msgid "Feather Canvas Edge"
+msgstr ""
 
 #: ../Pinta.Core/Actions/HelpActions.cs:46
 msgid "File a Bug"
@@ -731,7 +768,7 @@ msgstr "Rapportér en fejl"
 msgid "Files to open"
 msgstr ""
 
-#: ../Pinta.Tools/Tools/TextTool.cs:268
+#: ../Pinta.Tools/Tools/TextTool.cs:272
 msgid "Fill Background"
 msgstr "Fyldt baggrund"
 
@@ -756,7 +793,7 @@ msgid "Fill and Outline Shape"
 msgstr "Fyld og omrids"
 
 #: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:1083
-#: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:1347
+#: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:1353
 msgid "Finalized"
 msgstr "Færdiggjort"
 
@@ -814,7 +851,7 @@ msgstr ""
 msgid "Floyd-Steinberg Lite"
 msgstr ""
 
-#: ../Pinta.Tools/Tools/TextTool.cs:154
+#: ../Pinta.Tools/Tools/TextTool.cs:158
 msgid "Font"
 msgstr "Skrifttype"
 
@@ -917,7 +954,7 @@ msgstr "Nuance"
 msgid "Hue / Saturation"
 msgstr "Nuance / Mætning"
 
-#: ../Pinta/Actions/File/SaveDocumentImplementationAction.cs:227
+#: ../Pinta/Actions/File/SaveDocumentImplementationAction.cs:231
 msgid "ICO files can not be larger than 255 x 255 pixels."
 msgstr "ICO filer kan ikke være større end 255 x 255 billedpunkter."
 
@@ -950,7 +987,7 @@ msgstr "Billedfiler"
 msgid "Image larger than canvas"
 msgstr "Billede større end lærred"
 
-#: ../Pinta/Actions/File/SaveDocumentImplementationAction.cs:226
+#: ../Pinta/Actions/File/SaveDocumentImplementationAction.cs:230
 msgid "Image too large"
 msgstr "Billede for stort"
 
@@ -1025,7 +1062,7 @@ msgstr "Invertér farver"
 msgid "Invert Selection"
 msgstr "Omvend markering"
 
-#: ../Pinta.Tools/Tools/TextTool.cs:190
+#: ../Pinta.Tools/Tools/TextTool.cs:194
 msgid "Italic"
 msgstr "Kursiv"
 
@@ -1085,7 +1122,7 @@ msgstr "Lag {0}"
 msgid "Layers"
 msgstr "Lag"
 
-#: ../Pinta.Tools/Tools/TextTool.cs:218
+#: ../Pinta.Tools/Tools/TextTool.cs:222
 msgid "Left Align"
 msgstr "Venstrejusteret"
 
@@ -1136,7 +1173,7 @@ msgid ""
 msgstr ""
 
 #: ../Pinta.Tools/Tools/FreeformShapeTool.cs:53
-#: ../Pinta.Tools/Tools/PaintBrushTool.cs:58
+#: ../Pinta.Tools/Tools/PaintBrushTool.cs:59
 msgid ""
 "Left click to draw with primary color, right click to draw with secondary "
 "color."
@@ -1159,7 +1196,7 @@ msgstr ""
 "Venstreklik for at fylde med primær farve, højreklik for at fylde med "
 "sekundær farve."
 
-#: ../Pinta.Tools/Tools/TextTool.cs:97
+#: ../Pinta.Tools/Tools/TextTool.cs:99
 msgid ""
 "Left click to place cursor, then type desired text. Text color is primary "
 "color."
@@ -1367,11 +1404,11 @@ msgstr "Støj"
 
 #: ../Pinta.Core/Effects/UserBlendOps.cs:31
 #: ../Pinta.Tools/Brushes/PlainBrush.cs:35
-#: ../Pinta.Tools/Tools/EraserTool.cs:262 ../Pinta.Tools/Tools/TextTool.cs:265
+#: ../Pinta.Tools/Tools/EraserTool.cs:262 ../Pinta.Tools/Tools/TextTool.cs:269
 msgid "Normal"
 msgstr "Normal"
 
-#: ../Pinta.Core/Classes/BaseTool.cs:333
+#: ../Pinta.Core/Classes/BaseTool.cs:341
 msgid "Normal Blending"
 msgstr "Almindelig Blanding"
 
@@ -1379,7 +1416,7 @@ msgstr "Almindelig Blanding"
 msgid "Normal Size"
 msgstr "Normal størrelse"
 
-#: ../Pinta.Tools/Tools/TextTool.cs:266
+#: ../Pinta.Tools/Tools/TextTool.cs:270
 msgid "Normal and Outline"
 msgstr "Normal og omrids"
 
@@ -1389,6 +1426,11 @@ msgstr ""
 
 #: ../Pinta/Main.cs:55
 msgid "Number of threads to use for rendering"
+msgstr ""
+
+#: ../Pinta.Effects/Effects/AlignObjectEffect.cs:15
+#: ../Pinta.Effects/Effects/FeatherEffect.cs:23
+msgid "Object"
 msgstr ""
 
 #: ../Pinta.Effects/Effects/BulgeEffect.cs:112
@@ -1421,7 +1463,7 @@ msgstr "Uigennemsigtighed:"
 msgid "Open"
 msgstr "Åbn"
 
-#: ../Pinta.Tools/Editable/EditEngines/LineCurveEditEngine.cs:36
+#: ../Pinta.Tools/Editable/EditEngines/LineCurveEditEngine.cs:37
 msgid "Open Curve Shape"
 msgstr "Åben kurveform"
 
@@ -1456,7 +1498,7 @@ msgid "Original"
 msgstr "Original"
 
 #: ../Pinta.Effects/Effects/OutlineEffect.cs:26
-#: ../Pinta.Tools/Tools/TextTool.cs:267
+#: ../Pinta.Tools/Tools/TextTool.cs:271
 msgid "Outline"
 msgstr "Omrids"
 
@@ -1465,7 +1507,7 @@ msgstr "Omrids"
 msgid "Outline Shape"
 msgstr "Kun omrids"
 
-#: ../Pinta.Tools/Tools/TextTool.cs:281
+#: ../Pinta.Tools/Tools/TextTool.cs:285
 msgid "Outline width"
 msgstr "Bredde af omrids"
 
@@ -1481,7 +1523,7 @@ msgstr "Outputhistogram"
 msgid "Overlay"
 msgstr "Læg over"
 
-#: ../Pinta.Core/Classes/BaseTool.cs:334
+#: ../Pinta.Core/Classes/BaseTool.cs:342
 msgid "Overwrite"
 msgstr "Overskriv"
 
@@ -1489,7 +1531,7 @@ msgstr "Overskriv"
 msgid "Paint Bucket"
 msgstr "Farvespand"
 
-#: ../Pinta.Tools/Tools/PaintBrushTool.cs:56
+#: ../Pinta.Tools/Tools/PaintBrushTool.cs:57
 msgid "Paintbrush"
 msgstr "Malerpensel"
 
@@ -1567,7 +1609,7 @@ msgstr "Pinta billedredigeringsprogram"
 msgid "Pinta Website"
 msgstr "Pinta hjemmeside"
 
-#: ../Pinta/Actions/File/SaveDocumentImplementationAction.cs:215
+#: ../Pinta/Actions/File/SaveDocumentImplementationAction.cs:219
 msgid "Pinta does not support saving images in this file format."
 msgstr "Pinta understøtter ikke at gemme billeder i dette filformat."
 
@@ -1626,6 +1668,10 @@ msgstr "Polinvertering"
 #: ../Pinta/Dialogs/NewImageDialog.cs:296
 msgid "Portrait"
 msgstr "Stående"
+
+#: ../Pinta.Effects/Effects/AlignObjectEffect.cs:139
+msgid "Position"
+msgstr ""
 
 #: ../Pinta.Effects/Adjustments/PosterizeEffect.cs:24
 #: ../Pinta.Effects/Dialogs/Effects.PosterizeDialog.cs:51
@@ -1688,12 +1734,13 @@ msgstr "Radial sløring"
 msgid "Radial Gradient"
 msgstr "Radial farveovergang"
 
+#: ../Pinta.Effects/Effects/FeatherEffect.cs:137
 #: ../Pinta.Effects/Effects/GaussianBlurEffect.cs:246
 #: ../Pinta.Effects/Effects/GlowEffect.cs:76
 #: ../Pinta.Effects/Effects/MedianEffect.cs:62
 #: ../Pinta.Effects/Effects/ReduceNoiseEffect.cs:89
 #: ../Pinta.Effects/Effects/UnfocusEffect.cs:94
-#: ../Pinta.Tools/Editable/EditEngines/RoundedLineEditEngine.cs:91
+#: ../Pinta.Tools/Editable/EditEngines/RoundedLineEditEngine.cs:92
 msgid "Radius"
 msgstr "Radius"
 
@@ -1850,7 +1897,7 @@ msgstr ""
 msgid "Reverse Color Sorting"
 msgstr ""
 
-#: ../Pinta.Tools/Tools/TextTool.cs:242
+#: ../Pinta.Tools/Tools/TextTool.cs:246
 msgid "Right Align"
 msgstr "Højrejusteret"
 
@@ -1887,7 +1934,7 @@ msgstr "Rotation"
 msgid "Rounded Line Series"
 msgstr "Afrundede linjeserier"
 
-#: ../Pinta.Tools/Editable/EditEngines/RoundedLineEditEngine.cs:36
+#: ../Pinta.Tools/Editable/EditEngines/RoundedLineEditEngine.cs:37
 msgid "Rounded Line Shape"
 msgstr "Afrundet linjeform"
 
@@ -2070,15 +2117,15 @@ msgstr "Skift til blyant"
 msgid "Switch to previous tool"
 msgstr "Skift til forrige værktøj"
 
-#: ../Pinta.Tools/Tools/TextTool.cs:82
+#: ../Pinta.Tools/Tools/TextTool.cs:84
 msgid "Text"
 msgstr "Tekst"
 
-#: ../Pinta.Tools/Tools/TextTool.cs:85
+#: ../Pinta.Tools/Tools/TextTool.cs:87
 msgid "Text - Finalize"
 msgstr "Text - Færdiggør"
 
-#: ../Pinta.Tools/Tools/TextTool.cs:256
+#: ../Pinta.Tools/Tools/TextTool.cs:260
 msgid "Text Style"
 msgstr "Typografi"
 
@@ -2166,6 +2213,7 @@ msgstr "Flisestørrelse"
 msgid "Tip: Right-click to remove control points."
 msgstr "Tip: Højreklik for at fjerne kontrolpunkter"
 
+#: ../Pinta.Effects/Effects/FeatherEffect.cs:140
 #: ../Pinta.Effects/Effects/RedEyeRemoveEffect.cs:52
 #: ../Pinta.Tools/Tools/FloodTool.cs:124
 #: ../Pinta.Tools/Tools/RecolorTool.cs:197
@@ -2187,6 +2235,18 @@ msgstr "Værktøjsvinduer"
 #: ../Pinta.Core/Actions/ViewActions.cs:74
 msgid "Toolbar"
 msgstr "Værktøjslinje"
+
+#: ../Pinta.Effects/Dialogs/Effects.AlignmentDialog.cs:39
+msgid "Top Center"
+msgstr ""
+
+#: ../Pinta.Effects/Dialogs/Effects.AlignmentDialog.cs:38
+msgid "Top Left"
+msgstr ""
+
+#: ../Pinta.Effects/Dialogs/Effects.AlignmentDialog.cs:40
+msgid "Top Right"
+msgstr ""
 
 #: ../Pinta.Effects/Dialogs/Effects.CurvesDialog.cs:107
 msgid "Transfer Map"
@@ -2219,11 +2279,11 @@ msgid "Two-Row Sierra"
 msgstr ""
 
 #: ../Pinta.Tools/Tools/EraserTool.cs:258
-#: ../Pinta.Tools/Tools/PaintBrushTool.cs:165
+#: ../Pinta.Tools/Tools/PaintBrushTool.cs:175
 msgid "Type"
 msgstr "Type"
 
-#: ../Pinta.Tools/Tools/TextTool.cs:202
+#: ../Pinta.Tools/Tools/TextTool.cs:206
 msgid "Underline"
 msgstr "Understreg"
 
@@ -2358,7 +2418,7 @@ msgid "You do not have access to '{0}'."
 msgstr "Du mangler adgang til '{0}'."
 
 #. Translators: {0} is the name of a file that the user does not have write permission for.
-#: ../Pinta/Actions/File/SaveDocumentImplementationAction.cs:234
+#: ../Pinta/Actions/File/SaveDocumentImplementationAction.cs:238
 #, csharp-format
 msgid ""
 "You do not have access to modify '{0}'. The file or folder may be read-only."

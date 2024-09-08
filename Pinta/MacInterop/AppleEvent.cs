@@ -41,25 +41,17 @@ internal static partial class AppleEvent
 	private static extern AEDescStatus AECreateDesc (OSType typeCode, byte[] data, int dataSize, out AEDesc desc);
 
 	[LibraryImport (AELib)]
-	private static partial AEDescStatus AEGetNthPtr (ref AEDesc descList, int index, OSType desiredType, uint keyword,
-						out CarbonEventParameterType actualType, IntPtr buffer, int bufferSize, out int actualSize);
-
-	[LibraryImport (AELib)]
-	private static partial AEDescStatus AEGetNthPtr (ref AEDesc descList, int index, OSType desiredType, uint keyword,
-						uint zero, IntPtr buffer, int bufferSize, int zero2);
+	private static partial AEDescStatus AEGetNthPtr (ref AEDesc descList, long index, OSType desiredType, IntPtr keyword,
+						IntPtr zero, IntPtr buffer, int bufferSize, IntPtr zero2);
 
 	[LibraryImport (AELib)]
 	private static partial AEDescStatus AECountItems (ref AEDesc descList, out int count); //return an OSErr
 
 	[LibraryImport (AELib)]
-	private static partial AEDescStatus AEGetNthPtr (ref AEDesc descList, int index, OSType desiredType, uint keyword,
-						uint zero, out IntPtr outPtr, int bufferSize, int zero2);
-
-	[LibraryImport (AELib)]
 	public static partial AEDescStatus AEDisposeDesc (ref AEDesc desc);
 
 	[LibraryImport (AELib)]
-	public static partial AEDescStatus AESizeOfNthItem (ref AEDesc descList, int index, ref OSType type, out int size);
+	public static partial AEDescStatus AESizeOfNthItem (ref AEDesc descList, long index, ref OSType type, out int size);
 
 	[LibraryImport (AELib)]
 	private static partial AEDescStatus AEGetDescData (ref AEDesc desc, IntPtr ptr, int maximumSize);
@@ -111,12 +103,6 @@ internal static partial class AppleEvent
 		} finally {
 			Marshal.FreeHGlobal (bufferPtr);
 		}
-	}
-
-	public static IntPtr AEGetNthPtr (ref AEDesc descList, int index, OSType desiredType)
-	{
-		CheckReturn (AEGetNthPtr (ref descList, index, desiredType, 0, 0, out var ret, 4, 0));
-		return ret;
 	}
 
 	//FIXME: this might not work in some encodings. need to test more.

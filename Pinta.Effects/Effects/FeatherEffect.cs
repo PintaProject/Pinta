@@ -20,7 +20,7 @@ public sealed class FeatherEffect : BaseEffect
 
 	public override bool IsConfigurable => true;
 
-	public override string EffectMenuCategory => Translations.GetString ("Stylize");
+	public override string EffectMenuCategory => Translations.GetString ("Object");
 
 	public FeatherData Data => (FeatherData) EffectData!;  // NRT - Set in constructor
 
