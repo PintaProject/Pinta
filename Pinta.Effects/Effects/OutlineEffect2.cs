@@ -58,16 +58,13 @@ public sealed class OutlineEffect2 : BaseEffect
 		// Clean up dest, then collect all border pixels
 		Parallel.For (top, bottom + 1, new ParallelOptions { MaxDegreeOfParallelism = threads }, y => {
 			var srcData = src.GetReadOnlyPixelData ();
-			var dstData = dest.GetPixelData ();
-			//var borderData = border.GetPixelData ();
 
 			// reset dest to src
 			// Removing this causes preview to not update to lower radius levels
 			var srcRow = srcData.Slice (y * srcWidth, srcWidth);
-			var dstRow = dstData.Slice (y * srcWidth, srcWidth);
-			for (int x = left; x <= right; x++) {
+			var dstRow = dest.GetPixelData ().Slice (y * srcWidth, srcWidth);
+			for (int x = left; x <= right; x++)
 				dstRow[x].Bgra = srcRow[x].Bgra;
-			}
 
 			// Produces different behaviour at radius == 0 and radius == 1
 			// When radius == 0, only consider direct border pixels
@@ -118,7 +115,7 @@ public sealed class OutlineEffect2 : BaseEffect
 
 
 		// Second pass
-		// Generate outline, blend with dest
+		// Generate outline and blend to dest
 		Parallel.For (top, bottom + 1, new ParallelOptions { MaxDegreeOfParallelism = threads }, y => {
 			var relevantBorderPixels = borderPixels.Where (borderPixel => borderPixel.Y > y - radius && borderPixel.Y < y + radius).ToArray ();
 			var destRow = dest.GetPixelData ().Slice (y * srcWidth, srcWidth);
@@ -128,7 +125,18 @@ public sealed class OutlineEffect2 : BaseEffect
 
 			for (int x = left; x <= right; x++) {
 				byte highestAlpha = 0;
+
+				// optimization: no change if destination has max alpha already
+				if (destRow[x].A == 255)
+					continue;
+
+				if (Data.FillObjectBackground && destRow[x].A >= Data.Tolerance)
+					highestAlpha = 255;
+
+				// Grab nearest border pixel, and calculate outline alpha based off it
 				foreach (var borderPixel in relevantBorderPixels) {
+					if (highestAlpha == 255)
+						break;
 					if (borderPixel.X > x - radius && borderPixel.X < x + radius) {
 						var dx = borderPixel.X - x;
 						var dy = borderPixel.Y - y;
@@ -144,14 +152,15 @@ public sealed class OutlineEffect2 : BaseEffect
 					}
 				}
 
+				// Handle color gradient / no alpha gradient option
 				var color = primaryColor;
-				if(Data.ColorGradient)
+				if (Data.ColorGradient)
 					color = ColorBgra.Blend (secondaryColor, primaryColor, highestAlpha);
-				if (Data.AlphaGradient && highestAlpha != 0)
+				if (!Data.AlphaGradient && highestAlpha != 0)
 					highestAlpha = 255;
 
-				var outlineColor = color.ToStraightAlpha ().NewAlpha (highestAlpha).ToPremultipliedAlpha ();
-				destRow[x] = ColorBgra.Blend (outlineColor, destRow[x], destRow[x].A);
+				var outlineColor = color.NewAlpha (highestAlpha).ToPremultipliedAlpha ();
+				destRow[x] = ColorBgra.AlphaBlend (destRow[x], outlineColor);
 			}
 		});
 	}
@@ -172,5 +181,8 @@ public sealed class OutlineEffect2 : BaseEffect
 
 		[Caption ("Outline Border")]
 		public bool OutlineBorder { get; set; } = false;
+
+		[Caption ("Fill Object Background")]
+		public bool FillObjectBackground { get; set; } = true;
 	}
 }
