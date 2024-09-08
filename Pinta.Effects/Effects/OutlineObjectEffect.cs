@@ -8,7 +8,7 @@ using Pinta.Gui.Widgets;
 
 namespace Pinta.Effects;
 
-public sealed class OutlineEffect2 : BaseEffect
+public sealed class OutlineObjectEffect : BaseEffect
 {
 
 	public override string Icon => Pinta.Resources.Icons.EffectsStylizeOutline;
@@ -16,24 +16,24 @@ public sealed class OutlineEffect2 : BaseEffect
 	// Takes three passes, so must be multithreaded internally
 	public sealed override bool IsTileable => false;
 
-	public override string Name => Translations.GetString ("Outline2");
+	public override string Name => Translations.GetString ("Outline Object");
 
 	public override bool IsConfigurable => true;
 
 	public override string EffectMenuCategory => Translations.GetString ("Object");
 
-	public Outline2Data Data => (Outline2Data) EffectData!;  // NRT - Set in constructor
+	public OutlineObjectData Data => (OutlineObjectData) EffectData!;  // NRT - Set in constructor
 
 	private readonly IChromeService chrome;
 	private readonly ISystemService system;
 	private readonly IPaletteService palette;
 
-	public OutlineEffect2 (IServiceProvider services)
+	public OutlineObjectEffect (IServiceProvider services)
 	{
 		chrome = services.GetService<IChromeService> ();
 		system = services.GetService<ISystemService> ();
 		palette = services.GetService<IPaletteService> ();
-		EffectData = new Outline2Data ();
+		EffectData = new OutlineObjectData ();
 	}
 
 	public override void LaunchConfiguration ()
@@ -165,7 +165,7 @@ public sealed class OutlineEffect2 : BaseEffect
 		});
 	}
 
-	public sealed class Outline2Data : EffectData
+	public sealed class OutlineObjectData : EffectData
 	{
 		[Caption ("Radius"), MinimumValue (0), MaximumValue (100)]
 		public int Radius { get; set; } = 6;
