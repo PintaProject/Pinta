@@ -634,10 +634,48 @@ internal sealed class EffectsTest
 		effect.Data.Position = AlignPosition.Center;
 		Utilities.TestEffect (effect, "alignobject2.png", source_image_name: "alignobjectinput.png");
 	}
+	[Test]
 	public void AlignObject3 ()
 	{
 		AlignObjectEffect effect = new (Utilities.CreateMockServices ());
 		effect.Data.Position = AlignPosition.BottomRight;
 		Utilities.TestEffect (effect, "alignobject3.png", source_image_name: "alignobjectinput.png");
+	}
+
+	[Test]
+	public void OutlineObject1 ()
+	{
+		OutlineEffect2 effect = new (Utilities.CreateMockServices ());
+		effect.Data.Radius = 10;
+		effect.Data.Tolerance = 130;
+		effect.Data.AlphaGradient = true;
+		effect.Data.ColorGradient = false;
+		effect.Data.OutlineBorder = false;
+		effect.Data.FillObjectBackground = false;
+		Utilities.TestEffect (effect, "outline2_1.png", source_image_name: "outlineobjectinput.png");
+	}
+	[Test]
+	public void OutlineObject2 ()
+	{
+		OutlineEffect2 effect = new (Utilities.CreateMockServices ());
+		effect.Data.Radius = 10;
+		effect.Data.Tolerance = 20;
+		effect.Data.AlphaGradient = false;
+		effect.Data.ColorGradient = true;
+		effect.Data.OutlineBorder = true;
+		effect.Data.FillObjectBackground = false;
+		Utilities.TestEffect (effect, "outline2_2.png", source_image_name: "outlineobjectinput.png");
+	}
+	[Test]
+	public void OutlineObject3 ()
+	{
+		OutlineEffect2 effect = new (Utilities.CreateMockServices ());
+		effect.Data.Radius = 10;
+		effect.Data.Tolerance = 20;
+		effect.Data.AlphaGradient = true;
+		effect.Data.ColorGradient = true;
+		effect.Data.OutlineBorder = false;
+		effect.Data.FillObjectBackground = true;
+		Utilities.TestEffect (effect, "outline2_3.png", source_image_name: "outlineobjectinput.png");
 	}
 }
