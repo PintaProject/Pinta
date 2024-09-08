@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: pinta\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-07-07 01:20+0000\n"
+"POT-Creation-Date: 2024-09-08 01:27+0000\n"
 "PO-Revision-Date: 2023-02-23 05:42+0000\n"
 "Last-Translator: Wu Tang <Unknown>\n"
 "Language-Team: Chinese (Simplified) <zh_CN@li.org>\n"
@@ -86,6 +86,11 @@ msgstr ""
 msgid "After select"
 msgstr "选择后"
 
+#: ../Pinta.Effects/Dialogs/Effects.AlignmentDialog.cs:65
+#: ../Pinta.Effects/Effects/AlignObjectEffect.cs:13
+msgid "Align Object"
+msgstr ""
+
 #: ../Pinta.Core/Actions/EditActions.cs:390
 #: ../Pinta.Gui.Addins/AddinManagerDialog.cs:289
 #: ../Pinta/Actions/File/OpenDocumentAction.cs:106
@@ -120,11 +125,11 @@ msgstr "角度"
 msgid "Antialias"
 msgstr "抗锯齿"
 
-#: ../Pinta.Core/Classes/BaseTool.cs:349
+#: ../Pinta.Core/Classes/BaseTool.cs:357
 msgid "Antialiasing Off"
 msgstr "关闭抗锯齿"
 
-#: ../Pinta.Core/Classes/BaseTool.cs:348
+#: ../Pinta.Core/Classes/BaseTool.cs:356
 msgid "Antialiasing On"
 msgstr "开启抗锯齿"
 
@@ -217,13 +222,25 @@ msgstr "蓝色 "
 msgid "Blurs"
 msgstr "模糊"
 
-#: ../Pinta.Tools/Tools/TextTool.cs:178
+#: ../Pinta.Tools/Tools/TextTool.cs:182
 msgid "Bold"
 msgstr "粗体"
 
 #. Translators: Gradient that starts out white, like the core of a raging fire, and then goes through yellow, red, and black (like visible black smoke), and finally transparent, blending with the background
 #: ../Pinta.Effects/Effects/GradientHelper.cs:32
 msgid "Bonfire"
+msgstr ""
+
+#: ../Pinta.Effects/Dialogs/Effects.AlignmentDialog.cs:45
+msgid "Bottom Center"
+msgstr ""
+
+#: ../Pinta.Effects/Dialogs/Effects.AlignmentDialog.cs:44
+msgid "Bottom Left"
+msgstr ""
+
+#: ../Pinta.Effects/Dialogs/Effects.AlignmentDialog.cs:46
+msgid "Bottom Right"
 msgstr ""
 
 #: ../Pinta.Effects/Adjustments/BrightnessContrastEffect.cs:143
@@ -281,13 +298,25 @@ msgstr "画布"
 msgid "Cell Size"
 msgstr "格子大小"
 
-#: ../Pinta.Tools/Tools/TextTool.cs:230
+#: ../Pinta.Effects/Dialogs/Effects.AlignmentDialog.cs:42
+msgid "Center"
+msgstr ""
+
+#: ../Pinta.Tools/Tools/TextTool.cs:234
 msgid "Center Align"
 msgstr "居中对齐"
+
+#: ../Pinta.Effects/Dialogs/Effects.AlignmentDialog.cs:41
+msgid "Center Left"
+msgstr ""
 
 #: ../Pinta.Effects/Effects/WarpEffect.cs:184
 msgid "Center Offset"
 msgstr "中心偏移"
+
+#: ../Pinta.Effects/Dialogs/Effects.AlignmentDialog.cs:43
+msgid "Center Right"
+msgstr ""
 
 #: ../Pinta.Effects/Effects/MotionBlurEffect.cs:127
 msgid "Centered"
@@ -396,7 +425,7 @@ msgstr "关闭"
 msgid "Close All"
 msgstr "关闭全部"
 
-#: ../Pinta.Tools/Editable/EditEngines/RectangleEditEngine.cs:36
+#: ../Pinta.Tools/Editable/EditEngines/RectangleEditEngine.cs:37
 msgid "Closed Curve Shape"
 msgstr "闭合曲线形状"
 
@@ -514,7 +543,7 @@ msgid "Coverage"
 msgstr "覆盖范围"
 
 #: ../Pinta.Core/Actions/ImageActions.cs:54
-#: ../Pinta.Core/Actions/ImageActions.cs:295
+#: ../Pinta.Core/Actions/ImageActions.cs:237
 msgid "Crop to Selection"
 msgstr "裁剪到选择部分"
 
@@ -646,7 +675,7 @@ msgid "Electric"
 msgstr ""
 
 #: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:337
-#: ../Pinta.Tools/Editable/EditEngines/EllipseEditEngine.cs:35
+#: ../Pinta.Tools/Editable/EditEngines/EllipseEditEngine.cs:36
 #: ../Pinta.Tools/Tools/EllipseTool.cs:43
 msgid "Ellipse"
 msgstr "椭圆"
@@ -714,7 +743,7 @@ msgstr ""
 msgid "Failed to open image"
 msgstr "无法打开图像"
 
-#: ../Pinta/Actions/File/SaveDocumentImplementationAction.cs:232
+#: ../Pinta/Actions/File/SaveDocumentImplementationAction.cs:236
 msgid "Failed to save image"
 msgstr "无法保存图像"
 
@@ -722,6 +751,14 @@ msgstr "无法保存图像"
 #: ../Pinta/Actions/File/NewScreenshotAction.cs:104
 msgid "Failed to take screenshot"
 msgstr "截图失败"
+
+#: ../Pinta.Effects/Effects/FeatherEffect.cs:19
+msgid "Feather"
+msgstr ""
+
+#: ../Pinta.Effects/Effects/FeatherEffect.cs:143
+msgid "Feather Canvas Edge"
+msgstr ""
 
 #: ../Pinta.Core/Actions/HelpActions.cs:46
 msgid "File a Bug"
@@ -731,7 +768,7 @@ msgstr "报告一个错误"
 msgid "Files to open"
 msgstr ""
 
-#: ../Pinta.Tools/Tools/TextTool.cs:268
+#: ../Pinta.Tools/Tools/TextTool.cs:272
 msgid "Fill Background"
 msgstr "填充背景"
 
@@ -756,7 +793,7 @@ msgid "Fill and Outline Shape"
 msgstr "填充和边框"
 
 #: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:1083
-#: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:1347
+#: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:1353
 msgid "Finalized"
 msgstr "已完成"
 
@@ -814,7 +851,7 @@ msgstr ""
 msgid "Floyd-Steinberg Lite"
 msgstr ""
 
-#: ../Pinta.Tools/Tools/TextTool.cs:154
+#: ../Pinta.Tools/Tools/TextTool.cs:158
 msgid "Font"
 msgstr "字体"
 
@@ -915,7 +952,7 @@ msgstr "色调"
 msgid "Hue / Saturation"
 msgstr "色相 / 饱和度"
 
-#: ../Pinta/Actions/File/SaveDocumentImplementationAction.cs:227
+#: ../Pinta/Actions/File/SaveDocumentImplementationAction.cs:231
 msgid "ICO files can not be larger than 255 x 255 pixels."
 msgstr "ICO文件不能大于255 x 255像素。"
 
@@ -948,7 +985,7 @@ msgstr "图像文件"
 msgid "Image larger than canvas"
 msgstr "图像比画布大"
 
-#: ../Pinta/Actions/File/SaveDocumentImplementationAction.cs:226
+#: ../Pinta/Actions/File/SaveDocumentImplementationAction.cs:230
 msgid "Image too large"
 msgstr "图像太大"
 
@@ -1023,7 +1060,7 @@ msgstr "反色"
 msgid "Invert Selection"
 msgstr "反向选择"
 
-#: ../Pinta.Tools/Tools/TextTool.cs:190
+#: ../Pinta.Tools/Tools/TextTool.cs:194
 msgid "Italic"
 msgstr "斜体"
 
@@ -1083,7 +1120,7 @@ msgstr "第 {0} 图层"
 msgid "Layers"
 msgstr "图层"
 
-#: ../Pinta.Tools/Tools/TextTool.cs:218
+#: ../Pinta.Tools/Tools/TextTool.cs:222
 msgid "Left Align"
 msgstr "左对齐"
 
@@ -1146,7 +1183,7 @@ msgid ""
 msgstr ""
 
 #: ../Pinta.Tools/Tools/FreeformShapeTool.cs:53
-#: ../Pinta.Tools/Tools/PaintBrushTool.cs:58
+#: ../Pinta.Tools/Tools/PaintBrushTool.cs:59
 msgid ""
 "Left click to draw with primary color, right click to draw with secondary "
 "color."
@@ -1163,7 +1200,7 @@ msgid ""
 "the secondary color."
 msgstr "左击用主颜色填充一个区域，右击使用副颜色填充。"
 
-#: ../Pinta.Tools/Tools/TextTool.cs:97
+#: ../Pinta.Tools/Tools/TextTool.cs:99
 msgid ""
 "Left click to place cursor, then type desired text. Text color is primary "
 "color."
@@ -1366,11 +1403,11 @@ msgstr "噪点"
 
 #: ../Pinta.Core/Effects/UserBlendOps.cs:31
 #: ../Pinta.Tools/Brushes/PlainBrush.cs:35
-#: ../Pinta.Tools/Tools/EraserTool.cs:262 ../Pinta.Tools/Tools/TextTool.cs:265
+#: ../Pinta.Tools/Tools/EraserTool.cs:262 ../Pinta.Tools/Tools/TextTool.cs:269
 msgid "Normal"
 msgstr "一般"
 
-#: ../Pinta.Core/Classes/BaseTool.cs:333
+#: ../Pinta.Core/Classes/BaseTool.cs:341
 msgid "Normal Blending"
 msgstr "一般混合"
 
@@ -1378,7 +1415,7 @@ msgstr "一般混合"
 msgid "Normal Size"
 msgstr "普通大小"
 
-#: ../Pinta.Tools/Tools/TextTool.cs:266
+#: ../Pinta.Tools/Tools/TextTool.cs:270
 msgid "Normal and Outline"
 msgstr "正常与大纲"
 
@@ -1388,6 +1425,11 @@ msgstr ""
 
 #: ../Pinta/Main.cs:55
 msgid "Number of threads to use for rendering"
+msgstr ""
+
+#: ../Pinta.Effects/Effects/AlignObjectEffect.cs:15
+#: ../Pinta.Effects/Effects/FeatherEffect.cs:23
+msgid "Object"
 msgstr ""
 
 #: ../Pinta.Effects/Effects/BulgeEffect.cs:112
@@ -1420,7 +1462,7 @@ msgstr "透明度："
 msgid "Open"
 msgstr "打开"
 
-#: ../Pinta.Tools/Editable/EditEngines/LineCurveEditEngine.cs:36
+#: ../Pinta.Tools/Editable/EditEngines/LineCurveEditEngine.cs:37
 msgid "Open Curve Shape"
 msgstr "开放曲线形状"
 
@@ -1455,7 +1497,7 @@ msgid "Original"
 msgstr "原始"
 
 #: ../Pinta.Effects/Effects/OutlineEffect.cs:26
-#: ../Pinta.Tools/Tools/TextTool.cs:267
+#: ../Pinta.Tools/Tools/TextTool.cs:271
 msgid "Outline"
 msgstr "轮廓"
 
@@ -1464,7 +1506,7 @@ msgstr "轮廓"
 msgid "Outline Shape"
 msgstr "轮廓形状"
 
-#: ../Pinta.Tools/Tools/TextTool.cs:281
+#: ../Pinta.Tools/Tools/TextTool.cs:285
 msgid "Outline width"
 msgstr "描边宽度"
 
@@ -1480,7 +1522,7 @@ msgstr "输出直方图"
 msgid "Overlay"
 msgstr "重叠"
 
-#: ../Pinta.Core/Classes/BaseTool.cs:334
+#: ../Pinta.Core/Classes/BaseTool.cs:342
 msgid "Overwrite"
 msgstr "覆盖"
 
@@ -1488,7 +1530,7 @@ msgstr "覆盖"
 msgid "Paint Bucket"
 msgstr "油漆桶"
 
-#: ../Pinta.Tools/Tools/PaintBrushTool.cs:56
+#: ../Pinta.Tools/Tools/PaintBrushTool.cs:57
 msgid "Paintbrush"
 msgstr "画笔"
 
@@ -1566,7 +1608,7 @@ msgstr "Pinta 图片编辑器"
 msgid "Pinta Website"
 msgstr "Pinta 网站"
 
-#: ../Pinta/Actions/File/SaveDocumentImplementationAction.cs:215
+#: ../Pinta/Actions/File/SaveDocumentImplementationAction.cs:219
 msgid "Pinta does not support saving images in this file format."
 msgstr "Pinta 不支持保存图像为这种格式。"
 
@@ -1623,6 +1665,10 @@ msgstr "极性反转"
 #: ../Pinta/Dialogs/NewImageDialog.cs:296
 msgid "Portrait"
 msgstr "肖像"
+
+#: ../Pinta.Effects/Effects/AlignObjectEffect.cs:139
+msgid "Position"
+msgstr ""
 
 #: ../Pinta.Effects/Adjustments/PosterizeEffect.cs:24
 #: ../Pinta.Effects/Dialogs/Effects.PosterizeDialog.cs:51
@@ -1685,12 +1731,13 @@ msgstr "径向模糊"
 msgid "Radial Gradient"
 msgstr "径向渐变"
 
+#: ../Pinta.Effects/Effects/FeatherEffect.cs:137
 #: ../Pinta.Effects/Effects/GaussianBlurEffect.cs:246
 #: ../Pinta.Effects/Effects/GlowEffect.cs:76
 #: ../Pinta.Effects/Effects/MedianEffect.cs:62
 #: ../Pinta.Effects/Effects/ReduceNoiseEffect.cs:89
 #: ../Pinta.Effects/Effects/UnfocusEffect.cs:94
-#: ../Pinta.Tools/Editable/EditEngines/RoundedLineEditEngine.cs:91
+#: ../Pinta.Tools/Editable/EditEngines/RoundedLineEditEngine.cs:92
 msgid "Radius"
 msgstr "半径"
 
@@ -1847,7 +1894,7 @@ msgstr ""
 msgid "Reverse Color Sorting"
 msgstr ""
 
-#: ../Pinta.Tools/Tools/TextTool.cs:242
+#: ../Pinta.Tools/Tools/TextTool.cs:246
 msgid "Right Align"
 msgstr "右对齐"
 
@@ -1884,7 +1931,7 @@ msgstr "旋转"
 msgid "Rounded Line Series"
 msgstr "圆角直线系列"
 
-#: ../Pinta.Tools/Editable/EditEngines/RoundedLineEditEngine.cs:36
+#: ../Pinta.Tools/Editable/EditEngines/RoundedLineEditEngine.cs:37
 msgid "Rounded Line Shape"
 msgstr "圆角直线形状"
 
@@ -2067,15 +2114,15 @@ msgstr "切换到铅笔工具"
 msgid "Switch to previous tool"
 msgstr "切换到上一个工具"
 
-#: ../Pinta.Tools/Tools/TextTool.cs:82
+#: ../Pinta.Tools/Tools/TextTool.cs:84
 msgid "Text"
 msgstr "文字"
 
-#: ../Pinta.Tools/Tools/TextTool.cs:85
+#: ../Pinta.Tools/Tools/TextTool.cs:87
 msgid "Text - Finalize"
 msgstr "文本 - 确认"
 
-#: ../Pinta.Tools/Tools/TextTool.cs:256
+#: ../Pinta.Tools/Tools/TextTool.cs:260
 msgid "Text Style"
 msgstr "文本样式"
 
@@ -2163,6 +2210,7 @@ msgstr "方块大小"
 msgid "Tip: Right-click to remove control points."
 msgstr "提示：右击以移除控制点。"
 
+#: ../Pinta.Effects/Effects/FeatherEffect.cs:140
 #: ../Pinta.Effects/Effects/RedEyeRemoveEffect.cs:52
 #: ../Pinta.Tools/Tools/FloodTool.cs:124
 #: ../Pinta.Tools/Tools/RecolorTool.cs:197
@@ -2184,6 +2232,18 @@ msgstr "工具窗口"
 #: ../Pinta.Core/Actions/ViewActions.cs:74
 msgid "Toolbar"
 msgstr "工具栏"
+
+#: ../Pinta.Effects/Dialogs/Effects.AlignmentDialog.cs:39
+msgid "Top Center"
+msgstr ""
+
+#: ../Pinta.Effects/Dialogs/Effects.AlignmentDialog.cs:38
+msgid "Top Left"
+msgstr ""
+
+#: ../Pinta.Effects/Dialogs/Effects.AlignmentDialog.cs:40
+msgid "Top Right"
+msgstr ""
 
 #: ../Pinta.Effects/Dialogs/Effects.CurvesDialog.cs:107
 msgid "Transfer Map"
@@ -2216,11 +2276,11 @@ msgid "Two-Row Sierra"
 msgstr ""
 
 #: ../Pinta.Tools/Tools/EraserTool.cs:258
-#: ../Pinta.Tools/Tools/PaintBrushTool.cs:165
+#: ../Pinta.Tools/Tools/PaintBrushTool.cs:175
 msgid "Type"
 msgstr "类型"
 
-#: ../Pinta.Tools/Tools/TextTool.cs:202
+#: ../Pinta.Tools/Tools/TextTool.cs:206
 msgid "Underline"
 msgstr "下划线"
 
@@ -2355,7 +2415,7 @@ msgid "You do not have access to '{0}'."
 msgstr "您无权访问“{0}”。"
 
 #. Translators: {0} is the name of a file that the user does not have write permission for.
-#: ../Pinta/Actions/File/SaveDocumentImplementationAction.cs:234
+#: ../Pinta/Actions/File/SaveDocumentImplementationAction.cs:238
 #, csharp-format
 msgid ""
 "You do not have access to modify '{0}'. The file or folder may be read-only."

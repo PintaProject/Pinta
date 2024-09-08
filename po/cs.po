@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: pinta\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-07-07 01:20+0000\n"
+"POT-Creation-Date: 2024-09-08 01:27+0000\n"
 "PO-Revision-Date: 2023-12-20 15:51+0000\n"
 "Last-Translator: Miraficus <6325410@seznam.cz>\n"
 "Language-Team: Czech <https://hosted.weblate.org/projects/pinta/pinta/cs/>\n"
@@ -86,6 +86,11 @@ msgstr ""
 msgid "After select"
 msgstr "Po výběru"
 
+#: ../Pinta.Effects/Dialogs/Effects.AlignmentDialog.cs:65
+#: ../Pinta.Effects/Effects/AlignObjectEffect.cs:13
+msgid "Align Object"
+msgstr ""
+
 #: ../Pinta.Core/Actions/EditActions.cs:390
 #: ../Pinta.Gui.Addins/AddinManagerDialog.cs:289
 #: ../Pinta/Actions/File/OpenDocumentAction.cs:106
@@ -120,11 +125,11 @@ msgstr "Úhel"
 msgid "Antialias"
 msgstr "Vyhlazování"
 
-#: ../Pinta.Core/Classes/BaseTool.cs:349
+#: ../Pinta.Core/Classes/BaseTool.cs:357
 msgid "Antialiasing Off"
 msgstr "Antialiasing Vypnout"
 
-#: ../Pinta.Core/Classes/BaseTool.cs:348
+#: ../Pinta.Core/Classes/BaseTool.cs:356
 msgid "Antialiasing On"
 msgstr "Antialiasing Zapnout"
 
@@ -217,13 +222,25 @@ msgstr "Modrá "
 msgid "Blurs"
 msgstr "Rozmazání"
 
-#: ../Pinta.Tools/Tools/TextTool.cs:178
+#: ../Pinta.Tools/Tools/TextTool.cs:182
 msgid "Bold"
 msgstr "Tučně"
 
 #. Translators: Gradient that starts out white, like the core of a raging fire, and then goes through yellow, red, and black (like visible black smoke), and finally transparent, blending with the background
 #: ../Pinta.Effects/Effects/GradientHelper.cs:32
 msgid "Bonfire"
+msgstr ""
+
+#: ../Pinta.Effects/Dialogs/Effects.AlignmentDialog.cs:45
+msgid "Bottom Center"
+msgstr ""
+
+#: ../Pinta.Effects/Dialogs/Effects.AlignmentDialog.cs:44
+msgid "Bottom Left"
+msgstr ""
+
+#: ../Pinta.Effects/Dialogs/Effects.AlignmentDialog.cs:46
+msgid "Bottom Right"
 msgstr ""
 
 #: ../Pinta.Effects/Adjustments/BrightnessContrastEffect.cs:143
@@ -281,13 +298,25 @@ msgstr "Plátno"
 msgid "Cell Size"
 msgstr "Velikost buňky"
 
-#: ../Pinta.Tools/Tools/TextTool.cs:230
+#: ../Pinta.Effects/Dialogs/Effects.AlignmentDialog.cs:42
+msgid "Center"
+msgstr ""
+
+#: ../Pinta.Tools/Tools/TextTool.cs:234
 msgid "Center Align"
 msgstr "Zarovnat na střed"
+
+#: ../Pinta.Effects/Dialogs/Effects.AlignmentDialog.cs:41
+msgid "Center Left"
+msgstr ""
 
 #: ../Pinta.Effects/Effects/WarpEffect.cs:184
 msgid "Center Offset"
 msgstr "Středové odsazení"
+
+#: ../Pinta.Effects/Dialogs/Effects.AlignmentDialog.cs:43
+msgid "Center Right"
+msgstr ""
 
 #: ../Pinta.Effects/Effects/MotionBlurEffect.cs:127
 msgid "Centered"
@@ -398,7 +427,7 @@ msgstr "Zavřít"
 msgid "Close All"
 msgstr "Zavřít vše"
 
-#: ../Pinta.Tools/Editable/EditEngines/RectangleEditEngine.cs:36
+#: ../Pinta.Tools/Editable/EditEngines/RectangleEditEngine.cs:37
 msgid "Closed Curve Shape"
 msgstr "Tvar uzavřené křivky"
 
@@ -516,7 +545,7 @@ msgid "Coverage"
 msgstr "Pokrytí"
 
 #: ../Pinta.Core/Actions/ImageActions.cs:54
-#: ../Pinta.Core/Actions/ImageActions.cs:295
+#: ../Pinta.Core/Actions/ImageActions.cs:237
 msgid "Crop to Selection"
 msgstr "Vystřihnout do výběru"
 
@@ -648,7 +677,7 @@ msgid "Electric"
 msgstr ""
 
 #: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:337
-#: ../Pinta.Tools/Editable/EditEngines/EllipseEditEngine.cs:35
+#: ../Pinta.Tools/Editable/EditEngines/EllipseEditEngine.cs:36
 #: ../Pinta.Tools/Tools/EllipseTool.cs:43
 msgid "Ellipse"
 msgstr "Elipsa"
@@ -716,7 +745,7 @@ msgstr "Nemohli jsme načíst balíčky s rozšířeními"
 msgid "Failed to open image"
 msgstr "Obrázek se nepodařilo otevřít"
 
-#: ../Pinta/Actions/File/SaveDocumentImplementationAction.cs:232
+#: ../Pinta/Actions/File/SaveDocumentImplementationAction.cs:236
 msgid "Failed to save image"
 msgstr "Obrázek se nepodařilo uložit"
 
@@ -724,6 +753,14 @@ msgstr "Obrázek se nepodařilo uložit"
 #: ../Pinta/Actions/File/NewScreenshotAction.cs:104
 msgid "Failed to take screenshot"
 msgstr "Snímek obrazovky se nezdařil"
+
+#: ../Pinta.Effects/Effects/FeatherEffect.cs:19
+msgid "Feather"
+msgstr ""
+
+#: ../Pinta.Effects/Effects/FeatherEffect.cs:143
+msgid "Feather Canvas Edge"
+msgstr ""
 
 #: ../Pinta.Core/Actions/HelpActions.cs:46
 msgid "File a Bug"
@@ -733,7 +770,7 @@ msgstr "Nahlásit chybu"
 msgid "Files to open"
 msgstr ""
 
-#: ../Pinta.Tools/Tools/TextTool.cs:268
+#: ../Pinta.Tools/Tools/TextTool.cs:272
 msgid "Fill Background"
 msgstr "Vyplnit pozadí"
 
@@ -758,7 +795,7 @@ msgid "Fill and Outline Shape"
 msgstr "Vyplnit a Obtáhnout tvar"
 
 #: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:1083
-#: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:1347
+#: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:1353
 msgid "Finalized"
 msgstr "Dokončeno"
 
@@ -816,7 +853,7 @@ msgstr ""
 msgid "Floyd-Steinberg Lite"
 msgstr ""
 
-#: ../Pinta.Tools/Tools/TextTool.cs:154
+#: ../Pinta.Tools/Tools/TextTool.cs:158
 msgid "Font"
 msgstr "Písmo"
 
@@ -919,7 +956,7 @@ msgstr "Odstín"
 msgid "Hue / Saturation"
 msgstr "Odstín / Sytost"
 
-#: ../Pinta/Actions/File/SaveDocumentImplementationAction.cs:227
+#: ../Pinta/Actions/File/SaveDocumentImplementationAction.cs:231
 msgid "ICO files can not be larger than 255 x 255 pixels."
 msgstr "Soubory ICO nesmí být větší než 255 x 255 pixelů"
 
@@ -952,7 +989,7 @@ msgstr "Soubory obrázků"
 msgid "Image larger than canvas"
 msgstr "Obrázek větší než plátno"
 
-#: ../Pinta/Actions/File/SaveDocumentImplementationAction.cs:226
+#: ../Pinta/Actions/File/SaveDocumentImplementationAction.cs:230
 msgid "Image too large"
 msgstr "Obrázek je příliš velký"
 
@@ -1027,7 +1064,7 @@ msgstr "Invertovat barvy"
 msgid "Invert Selection"
 msgstr "Obrátit výběr"
 
-#: ../Pinta.Tools/Tools/TextTool.cs:190
+#: ../Pinta.Tools/Tools/TextTool.cs:194
 msgid "Italic"
 msgstr "Kurzíva"
 
@@ -1087,7 +1124,7 @@ msgstr "Vrstva {0}"
 msgid "Layers"
 msgstr "Vrstvy"
 
-#: ../Pinta.Tools/Tools/TextTool.cs:218
+#: ../Pinta.Tools/Tools/TextTool.cs:222
 msgid "Left Align"
 msgstr "Zarovnat doleva"
 
@@ -1138,7 +1175,7 @@ msgid ""
 msgstr ""
 
 #: ../Pinta.Tools/Tools/FreeformShapeTool.cs:53
-#: ../Pinta.Tools/Tools/PaintBrushTool.cs:58
+#: ../Pinta.Tools/Tools/PaintBrushTool.cs:59
 msgid ""
 "Left click to draw with primary color, right click to draw with secondary "
 "color."
@@ -1157,7 +1194,7 @@ msgstr ""
 "Levý klik vyplní oblast primární barvou, pravý klik vyplní oblast sekundární "
 "barvou."
 
-#: ../Pinta.Tools/Tools/TextTool.cs:97
+#: ../Pinta.Tools/Tools/TextTool.cs:99
 msgid ""
 "Left click to place cursor, then type desired text. Text color is primary "
 "color."
@@ -1363,11 +1400,11 @@ msgstr "Šum"
 
 #: ../Pinta.Core/Effects/UserBlendOps.cs:31
 #: ../Pinta.Tools/Brushes/PlainBrush.cs:35
-#: ../Pinta.Tools/Tools/EraserTool.cs:262 ../Pinta.Tools/Tools/TextTool.cs:265
+#: ../Pinta.Tools/Tools/EraserTool.cs:262 ../Pinta.Tools/Tools/TextTool.cs:269
 msgid "Normal"
 msgstr "Normální"
 
-#: ../Pinta.Core/Classes/BaseTool.cs:333
+#: ../Pinta.Core/Classes/BaseTool.cs:341
 msgid "Normal Blending"
 msgstr "Normální míchání"
 
@@ -1375,7 +1412,7 @@ msgstr "Normální míchání"
 msgid "Normal Size"
 msgstr "Normální velikost"
 
-#: ../Pinta.Tools/Tools/TextTool.cs:266
+#: ../Pinta.Tools/Tools/TextTool.cs:270
 msgid "Normal and Outline"
 msgstr "Normální a ohraničený"
 
@@ -1385,6 +1422,11 @@ msgstr ""
 
 #: ../Pinta/Main.cs:55
 msgid "Number of threads to use for rendering"
+msgstr ""
+
+#: ../Pinta.Effects/Effects/AlignObjectEffect.cs:15
+#: ../Pinta.Effects/Effects/FeatherEffect.cs:23
+msgid "Object"
 msgstr ""
 
 #: ../Pinta.Effects/Effects/BulgeEffect.cs:112
@@ -1417,7 +1459,7 @@ msgstr "Průhlednost"
 msgid "Open"
 msgstr "Otevřít"
 
-#: ../Pinta.Tools/Editable/EditEngines/LineCurveEditEngine.cs:36
+#: ../Pinta.Tools/Editable/EditEngines/LineCurveEditEngine.cs:37
 msgid "Open Curve Shape"
 msgstr "Tvar otevřené křivky"
 
@@ -1452,7 +1494,7 @@ msgid "Original"
 msgstr "Původní"
 
 #: ../Pinta.Effects/Effects/OutlineEffect.cs:26
-#: ../Pinta.Tools/Tools/TextTool.cs:267
+#: ../Pinta.Tools/Tools/TextTool.cs:271
 msgid "Outline"
 msgstr "Obtáhnout"
 
@@ -1461,7 +1503,7 @@ msgstr "Obtáhnout"
 msgid "Outline Shape"
 msgstr "Obtáhnout tvar"
 
-#: ../Pinta.Tools/Tools/TextTool.cs:281
+#: ../Pinta.Tools/Tools/TextTool.cs:285
 msgid "Outline width"
 msgstr "Šířka ohraničení"
 
@@ -1477,7 +1519,7 @@ msgstr "Výstupní histogram"
 msgid "Overlay"
 msgstr "Překrytí"
 
-#: ../Pinta.Core/Classes/BaseTool.cs:334
+#: ../Pinta.Core/Classes/BaseTool.cs:342
 msgid "Overwrite"
 msgstr "Přepsat"
 
@@ -1485,7 +1527,7 @@ msgstr "Přepsat"
 msgid "Paint Bucket"
 msgstr "Plechovka barvy"
 
-#: ../Pinta.Tools/Tools/PaintBrushTool.cs:56
+#: ../Pinta.Tools/Tools/PaintBrushTool.cs:57
 msgid "Paintbrush"
 msgstr "Štětec"
 
@@ -1563,7 +1605,7 @@ msgstr "Grafický editor Pinta"
 msgid "Pinta Website"
 msgstr "Stránky Pinta"
 
-#: ../Pinta/Actions/File/SaveDocumentImplementationAction.cs:215
+#: ../Pinta/Actions/File/SaveDocumentImplementationAction.cs:219
 msgid "Pinta does not support saving images in this file format."
 msgstr "Pinta nepodporuje ukládání obrázků v tomto typu souborů.."
 
@@ -1622,6 +1664,10 @@ msgstr "Převrácení pólů"
 #: ../Pinta/Dialogs/NewImageDialog.cs:296
 msgid "Portrait"
 msgstr "Na výšku"
+
+#: ../Pinta.Effects/Effects/AlignObjectEffect.cs:139
+msgid "Position"
+msgstr ""
 
 #: ../Pinta.Effects/Adjustments/PosterizeEffect.cs:24
 #: ../Pinta.Effects/Dialogs/Effects.PosterizeDialog.cs:51
@@ -1684,12 +1730,13 @@ msgstr "Rozmazání otáčením"
 msgid "Radial Gradient"
 msgstr "Radiální přechod"
 
+#: ../Pinta.Effects/Effects/FeatherEffect.cs:137
 #: ../Pinta.Effects/Effects/GaussianBlurEffect.cs:246
 #: ../Pinta.Effects/Effects/GlowEffect.cs:76
 #: ../Pinta.Effects/Effects/MedianEffect.cs:62
 #: ../Pinta.Effects/Effects/ReduceNoiseEffect.cs:89
 #: ../Pinta.Effects/Effects/UnfocusEffect.cs:94
-#: ../Pinta.Tools/Editable/EditEngines/RoundedLineEditEngine.cs:91
+#: ../Pinta.Tools/Editable/EditEngines/RoundedLineEditEngine.cs:92
 msgid "Radius"
 msgstr "Poloměr"
 
@@ -1846,7 +1893,7 @@ msgstr ""
 msgid "Reverse Color Sorting"
 msgstr ""
 
-#: ../Pinta.Tools/Tools/TextTool.cs:242
+#: ../Pinta.Tools/Tools/TextTool.cs:246
 msgid "Right Align"
 msgstr "Zarovnat doprava"
 
@@ -1883,7 +1930,7 @@ msgstr "Rotace"
 msgid "Rounded Line Series"
 msgstr "Zakulacená sada čar"
 
-#: ../Pinta.Tools/Editable/EditEngines/RoundedLineEditEngine.cs:36
+#: ../Pinta.Tools/Editable/EditEngines/RoundedLineEditEngine.cs:37
 msgid "Rounded Line Shape"
 msgstr "Tvar zakulacené čáry"
 
@@ -2066,15 +2113,15 @@ msgstr "Přepnout na tužku"
 msgid "Switch to previous tool"
 msgstr "Přepnout na předchozí nástroj"
 
-#: ../Pinta.Tools/Tools/TextTool.cs:82
+#: ../Pinta.Tools/Tools/TextTool.cs:84
 msgid "Text"
 msgstr "Text"
 
-#: ../Pinta.Tools/Tools/TextTool.cs:85
+#: ../Pinta.Tools/Tools/TextTool.cs:87
 msgid "Text - Finalize"
 msgstr "Text - Dokončení"
 
-#: ../Pinta.Tools/Tools/TextTool.cs:256
+#: ../Pinta.Tools/Tools/TextTool.cs:260
 msgid "Text Style"
 msgstr "Styl textu"
 
@@ -2166,6 +2213,7 @@ msgstr "Velikost dlaždic"
 msgid "Tip: Right-click to remove control points."
 msgstr "Tip: Pravým kliknutím odstraníte ovládací body"
 
+#: ../Pinta.Effects/Effects/FeatherEffect.cs:140
 #: ../Pinta.Effects/Effects/RedEyeRemoveEffect.cs:52
 #: ../Pinta.Tools/Tools/FloodTool.cs:124
 #: ../Pinta.Tools/Tools/RecolorTool.cs:197
@@ -2187,6 +2235,18 @@ msgstr "Okna Nástrojů"
 #: ../Pinta.Core/Actions/ViewActions.cs:74
 msgid "Toolbar"
 msgstr "Panel nástrojů"
+
+#: ../Pinta.Effects/Dialogs/Effects.AlignmentDialog.cs:39
+msgid "Top Center"
+msgstr ""
+
+#: ../Pinta.Effects/Dialogs/Effects.AlignmentDialog.cs:38
+msgid "Top Left"
+msgstr ""
+
+#: ../Pinta.Effects/Dialogs/Effects.AlignmentDialog.cs:40
+msgid "Top Right"
+msgstr ""
 
 #: ../Pinta.Effects/Dialogs/Effects.CurvesDialog.cs:107
 msgid "Transfer Map"
@@ -2219,11 +2279,11 @@ msgid "Two-Row Sierra"
 msgstr ""
 
 #: ../Pinta.Tools/Tools/EraserTool.cs:258
-#: ../Pinta.Tools/Tools/PaintBrushTool.cs:165
+#: ../Pinta.Tools/Tools/PaintBrushTool.cs:175
 msgid "Type"
 msgstr "Typ"
 
-#: ../Pinta.Tools/Tools/TextTool.cs:202
+#: ../Pinta.Tools/Tools/TextTool.cs:206
 msgid "Underline"
 msgstr "Podtržené"
 
@@ -2358,7 +2418,7 @@ msgid "You do not have access to '{0}'."
 msgstr "Nemáte přístup do '{0}'."
 
 #. Translators: {0} is the name of a file that the user does not have write permission for.
-#: ../Pinta/Actions/File/SaveDocumentImplementationAction.cs:234
+#: ../Pinta/Actions/File/SaveDocumentImplementationAction.cs:238
 #, csharp-format
 msgid ""
 "You do not have access to modify '{0}'. The file or folder may be read-only."
