@@ -117,12 +117,11 @@ public sealed class OutlineObjectEffect : BaseEffect
 		// Second pass
 		// Generate outline and blend to dest
 		Parallel.For (top, bottom + 1, new ParallelOptions { MaxDegreeOfParallelism = threads }, y => {
-			var relevantBorderPixels = borderPixels.Where (borderPixel => borderPixel.Y > y - radius && borderPixel.Y < y + radius).ToArray ();
-			var destRow = dest.GetPixelData ().Slice (y * srcWidth, srcWidth);
-
 			// otherwise produces nothing at radius == 0
 			if (radius == 0)
 				radius = 1;
+			var relevantBorderPixels = borderPixels.Where (borderPixel => borderPixel.Y > y - radius && borderPixel.Y < y + radius).ToArray ();
+			var destRow = dest.GetPixelData ().Slice (y * srcWidth, srcWidth);
 
 			for (int x = left; x <= right; x++) {
 				byte highestAlpha = 0;
@@ -136,8 +135,12 @@ public sealed class OutlineObjectEffect : BaseEffect
 
 				// Grab nearest border pixel, and calculate outline alpha based off it
 				foreach (var borderPixel in relevantBorderPixels) {
+					if (borderPixel.X == x && borderPixel.Y == y)
+						highestAlpha = 255;
+
 					if (highestAlpha == 255)
 						break;
+
 					if (borderPixel.X > x - radius && borderPixel.X < x + radius) {
 						var dx = borderPixel.X - x;
 						var dy = borderPixel.Y - y;
