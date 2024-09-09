@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2024-09-08 01:27+0000\n"
-"PO-Revision-Date: 2024-09-09 05:09+0000\n"
+"PO-Revision-Date: 2024-09-10 11:09+0000\n"
 "Last-Translator: Сергей <asvmail.as@gmail.com>\n"
 "Language-Team: Russian <https://hosted.weblate.org/projects/pinta/pinta/ru/>"
 "\n"
@@ -769,11 +769,11 @@ msgstr "Не удалось сделать снимок экрана"
 
 #: ../Pinta.Effects/Effects/FeatherEffect.cs:19
 msgid "Feather"
-msgstr "Растушевка"
+msgstr "Растушёвка"
 
 #: ../Pinta.Effects/Effects/FeatherEffect.cs:143
 msgid "Feather Canvas Edge"
-msgstr "Растушевка краёв холста"
+msgstr "Растушёвка краёв холста"
 
 #: ../Pinta.Core/Actions/HelpActions.cs:46
 msgid "File a Bug"
