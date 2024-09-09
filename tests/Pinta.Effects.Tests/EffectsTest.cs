@@ -678,4 +678,28 @@ internal sealed class EffectsTest
 		effect.Data.FillObjectBackground = true;
 		Utilities.TestEffect (effect, "outlineobject3.png", source_image_name: "outlineobjectinput.png");
 	}
+	[Test]
+	public void OutlineObject4 ()
+	{
+		OutlineObjectEffect effect = new (Utilities.CreateMockServices ());
+		effect.Data.Radius = 1;
+		effect.Data.Tolerance = 20;
+		effect.Data.AlphaGradient = false;
+		effect.Data.ColorGradient = false;
+		effect.Data.OutlineBorder = false;
+		effect.Data.FillObjectBackground = false;
+		Utilities.TestEffect (effect, "outlineobject4.png", source_image_name: "outlineobjectinput.png");
+	}
+	[Test]
+	public void OutlineObject5 ()
+	{
+		OutlineObjectEffect effect = new (Utilities.CreateMockServices ());
+		effect.Data.Radius = 0;
+		effect.Data.Tolerance = 20;
+		effect.Data.AlphaGradient = false;
+		effect.Data.ColorGradient = false;
+		effect.Data.OutlineBorder = false;
+		effect.Data.FillObjectBackground = false;
+		Utilities.TestEffect (effect, "outlineobject5.png", source_image_name: "outlineobjectinput.png");
+	}
 }
