@@ -8,16 +8,16 @@ msgstr ""
 "Project-Id-Version: pinta\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2024-09-08 01:27+0000\n"
-"PO-Revision-Date: 2024-07-22 23:09+0000\n"
+"PO-Revision-Date: 2024-09-10 23:57+0000\n"
 "Last-Translator: bittin1ddc447d824349b2 <bittin@reimu.nl>\n"
-"Language-Team: Swedish <https://hosted.weblate.org/projects/pinta/pinta/sv/"
-">\n"
+"Language-Team: Swedish <https://hosted.weblate.org/projects/pinta/pinta/sv/>"
+"\n"
 "Language: sv\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Generator: Weblate 5.7-dev\n"
+"X-Generator: Weblate 5.8-dev\n"
 "X-Launchpad-Export-Date: 2023-12-18 03:00+0000\n"
 
 #: ../Pinta.Gui.Addins/InstallDialog.cs:257
@@ -90,7 +90,7 @@ msgstr "Efter markering"
 #: ../Pinta.Effects/Dialogs/Effects.AlignmentDialog.cs:65
 #: ../Pinta.Effects/Effects/AlignObjectEffect.cs:13
 msgid "Align Object"
-msgstr ""
+msgstr "Justera objekt"
 
 #: ../Pinta.Core/Actions/EditActions.cs:390
 #: ../Pinta.Gui.Addins/AddinManagerDialog.cs:289
@@ -234,15 +234,15 @@ msgstr "Brasa"
 
 #: ../Pinta.Effects/Dialogs/Effects.AlignmentDialog.cs:45
 msgid "Bottom Center"
-msgstr ""
+msgstr "Nedre mitten"
 
 #: ../Pinta.Effects/Dialogs/Effects.AlignmentDialog.cs:44
 msgid "Bottom Left"
-msgstr ""
+msgstr "Nedre vänster"
 
 #: ../Pinta.Effects/Dialogs/Effects.AlignmentDialog.cs:46
 msgid "Bottom Right"
-msgstr ""
+msgstr "Nedre höger"
 
 #: ../Pinta.Effects/Adjustments/BrightnessContrastEffect.cs:143
 #: ../Pinta.Effects/Effects/GlowEffect.cs:79
@@ -301,7 +301,7 @@ msgstr "Cellstorlek"
 
 #: ../Pinta.Effects/Dialogs/Effects.AlignmentDialog.cs:42
 msgid "Center"
-msgstr ""
+msgstr "Mitten"
 
 #: ../Pinta.Tools/Tools/TextTool.cs:234
 msgid "Center Align"
@@ -309,7 +309,7 @@ msgstr "Centrera"
 
 #: ../Pinta.Effects/Dialogs/Effects.AlignmentDialog.cs:41
 msgid "Center Left"
-msgstr ""
+msgstr "Mitten vänster"
 
 #: ../Pinta.Effects/Effects/WarpEffect.cs:184
 msgid "Center Offset"
@@ -317,7 +317,7 @@ msgstr "Centrera positionen"
 
 #: ../Pinta.Effects/Dialogs/Effects.AlignmentDialog.cs:43
 msgid "Center Right"
-msgstr ""
+msgstr "Mitten höger"
 
 #: ../Pinta.Effects/Effects/MotionBlurEffect.cs:127
 msgid "Centered"
@@ -761,11 +761,11 @@ msgstr "Kunde inte ta skärmklipp"
 
 #: ../Pinta.Effects/Effects/FeatherEffect.cs:19
 msgid "Feather"
-msgstr ""
+msgstr "Fjäderduk"
 
 #: ../Pinta.Effects/Effects/FeatherEffect.cs:143
 msgid "Feather Canvas Edge"
-msgstr ""
+msgstr "Kant av fjäderduk"
 
 #: ../Pinta.Core/Actions/HelpActions.cs:46
 msgid "File a Bug"
@@ -1474,7 +1474,7 @@ msgstr "Antal trådar att använda för rendering"
 #: ../Pinta.Effects/Effects/AlignObjectEffect.cs:15
 #: ../Pinta.Effects/Effects/FeatherEffect.cs:23
 msgid "Object"
-msgstr ""
+msgstr "Objekt"
 
 #: ../Pinta.Effects/Effects/BulgeEffect.cs:112
 #: ../Pinta.Effects/Effects/RadialBlurEffect.cs:173
@@ -1714,7 +1714,7 @@ msgstr "Stående"
 
 #: ../Pinta.Effects/Effects/AlignObjectEffect.cs:139
 msgid "Position"
-msgstr ""
+msgstr "Position"
 
 #: ../Pinta.Effects/Adjustments/PosterizeEffect.cs:24
 #: ../Pinta.Effects/Dialogs/Effects.PosterizeDialog.cs:51
@@ -2288,15 +2288,15 @@ msgstr "Verktygsrad"
 
 #: ../Pinta.Effects/Dialogs/Effects.AlignmentDialog.cs:39
 msgid "Top Center"
-msgstr ""
+msgstr "Översta mitten"
 
 #: ../Pinta.Effects/Dialogs/Effects.AlignmentDialog.cs:38
 msgid "Top Left"
-msgstr ""
+msgstr "Översta vänster"
 
 #: ../Pinta.Effects/Dialogs/Effects.AlignmentDialog.cs:40
 msgid "Top Right"
-msgstr ""
+msgstr "Översta höger"
 
 #: ../Pinta.Effects/Dialogs/Effects.CurvesDialog.cs:107
 msgid "Transfer Map"
