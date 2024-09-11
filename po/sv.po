@@ -8,8 +8,8 @@ msgstr ""
 "Project-Id-Version: pinta\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2024-09-08 01:27+0000\n"
-"PO-Revision-Date: 2024-09-10 23:57+0000\n"
-"Last-Translator: bittin1ddc447d824349b2 <bittin@reimu.nl>\n"
+"PO-Revision-Date: 2024-09-11 06:31+0000\n"
+"Last-Translator: Åke Engelbrektson <eson@svenskasprakfiler.se>\n"
 "Language-Team: Swedish <https://hosted.weblate.org/projects/pinta/pinta/sv/>"
 "\n"
 "Language: sv\n"
@@ -234,15 +234,15 @@ msgstr "Brasa"
 
 #: ../Pinta.Effects/Dialogs/Effects.AlignmentDialog.cs:45
 msgid "Bottom Center"
-msgstr "Nedre mitten"
+msgstr "Centrum underkant"
 
 #: ../Pinta.Effects/Dialogs/Effects.AlignmentDialog.cs:44
 msgid "Bottom Left"
-msgstr "Nedre vänster"
+msgstr "Vänster underkant"
 
 #: ../Pinta.Effects/Dialogs/Effects.AlignmentDialog.cs:46
 msgid "Bottom Right"
-msgstr "Nedre höger"
+msgstr "Höger underkant"
 
 #: ../Pinta.Effects/Adjustments/BrightnessContrastEffect.cs:143
 #: ../Pinta.Effects/Effects/GlowEffect.cs:79
@@ -301,7 +301,7 @@ msgstr "Cellstorlek"
 
 #: ../Pinta.Effects/Dialogs/Effects.AlignmentDialog.cs:42
 msgid "Center"
-msgstr "Mitten"
+msgstr "Centrum"
 
 #: ../Pinta.Tools/Tools/TextTool.cs:234
 msgid "Center Align"
@@ -309,15 +309,15 @@ msgstr "Centrera"
 
 #: ../Pinta.Effects/Dialogs/Effects.AlignmentDialog.cs:41
 msgid "Center Left"
-msgstr "Mitten vänster"
+msgstr "Centrum vänster"
 
 #: ../Pinta.Effects/Effects/WarpEffect.cs:184
 msgid "Center Offset"
-msgstr "Centrera positionen"
+msgstr "Centrum förskjutning"
 
 #: ../Pinta.Effects/Dialogs/Effects.AlignmentDialog.cs:43
 msgid "Center Right"
-msgstr "Mitten höger"
+msgstr "Centrum höger"
 
 #: ../Pinta.Effects/Effects/MotionBlurEffect.cs:127
 msgid "Centered"
@@ -761,11 +761,11 @@ msgstr "Kunde inte ta skärmklipp"
 
 #: ../Pinta.Effects/Effects/FeatherEffect.cs:19
 msgid "Feather"
-msgstr "Fjäderduk"
+msgstr "Fjäder"
 
 #: ../Pinta.Effects/Effects/FeatherEffect.cs:143
 msgid "Feather Canvas Edge"
-msgstr "Kant av fjäderduk"
+msgstr "Mjukt tonad objektkant"
 
 #: ../Pinta.Core/Actions/HelpActions.cs:46
 msgid "File a Bug"
@@ -2288,15 +2288,15 @@ msgstr "Verktygsrad"
 
 #: ../Pinta.Effects/Dialogs/Effects.AlignmentDialog.cs:39
 msgid "Top Center"
-msgstr "Översta mitten"
+msgstr "Centrum överkant"
 
 #: ../Pinta.Effects/Dialogs/Effects.AlignmentDialog.cs:38
 msgid "Top Left"
-msgstr "Översta vänster"
+msgstr "Vänster överkant"
 
 #: ../Pinta.Effects/Dialogs/Effects.AlignmentDialog.cs:40
 msgid "Top Right"
-msgstr "Översta höger"
+msgstr "Höger överkant"
 
 #: ../Pinta.Effects/Dialogs/Effects.CurvesDialog.cs:107
 msgid "Transfer Map"
