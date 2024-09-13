@@ -8,17 +8,17 @@ msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2024-09-08 01:27+0000\n"
-"PO-Revision-Date: 2024-07-12 06:09+0000\n"
+"PO-Revision-Date: 2024-09-10 11:09+0000\n"
 "Last-Translator: Сергей <asvmail.as@gmail.com>\n"
-"Language-Team: Russian <https://hosted.weblate.org/projects/pinta/pinta/ru/"
-">\n"
+"Language-Team: Russian <https://hosted.weblate.org/projects/pinta/pinta/ru/>"
+"\n"
 "Language: ru\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && "
 "n%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2);\n"
-"X-Generator: Weblate 5.7-dev\n"
+"X-Generator: Weblate 5.8-dev\n"
 "X-Launchpad-Export-Date: 2023-12-18 03:00+0000\n"
 
 #: ../Pinta.Gui.Addins/InstallDialog.cs:257
@@ -91,7 +91,7 @@ msgstr "После выбора"
 #: ../Pinta.Effects/Dialogs/Effects.AlignmentDialog.cs:65
 #: ../Pinta.Effects/Effects/AlignObjectEffect.cs:13
 msgid "Align Object"
-msgstr ""
+msgstr "Выровнять объект"
 
 #: ../Pinta.Core/Actions/EditActions.cs:390
 #: ../Pinta.Gui.Addins/AddinManagerDialog.cs:289
@@ -235,15 +235,15 @@ msgstr "Костёр"
 
 #: ../Pinta.Effects/Dialogs/Effects.AlignmentDialog.cs:45
 msgid "Bottom Center"
-msgstr ""
+msgstr "Центрировать по нижнему краю"
 
 #: ../Pinta.Effects/Dialogs/Effects.AlignmentDialog.cs:44
 msgid "Bottom Left"
-msgstr ""
+msgstr "По нижнему краю влево"
 
 #: ../Pinta.Effects/Dialogs/Effects.AlignmentDialog.cs:46
 msgid "Bottom Right"
-msgstr ""
+msgstr "По нижнему краю вправо"
 
 #: ../Pinta.Effects/Adjustments/BrightnessContrastEffect.cs:143
 #: ../Pinta.Effects/Effects/GlowEffect.cs:79
@@ -302,7 +302,7 @@ msgstr "Размер ячейки"
 
 #: ../Pinta.Effects/Dialogs/Effects.AlignmentDialog.cs:42
 msgid "Center"
-msgstr ""
+msgstr "Центрировать"
 
 #: ../Pinta.Tools/Tools/TextTool.cs:234
 msgid "Center Align"
@@ -310,7 +310,7 @@ msgstr "По центру"
 
 #: ../Pinta.Effects/Dialogs/Effects.AlignmentDialog.cs:41
 msgid "Center Left"
-msgstr ""
+msgstr "По центру влево"
 
 #: ../Pinta.Effects/Effects/WarpEffect.cs:184
 msgid "Center Offset"
@@ -318,7 +318,7 @@ msgstr "Смещение центра"
 
 #: ../Pinta.Effects/Dialogs/Effects.AlignmentDialog.cs:43
 msgid "Center Right"
-msgstr ""
+msgstr "По центру вправо"
 
 #: ../Pinta.Effects/Effects/MotionBlurEffect.cs:127
 msgid "Centered"
@@ -769,11 +769,11 @@ msgstr "Не удалось сделать снимок экрана"
 
 #: ../Pinta.Effects/Effects/FeatherEffect.cs:19
 msgid "Feather"
-msgstr ""
+msgstr "Растушёвка"
 
 #: ../Pinta.Effects/Effects/FeatherEffect.cs:143
 msgid "Feather Canvas Edge"
-msgstr ""
+msgstr "Растушёвка краёв холста"
 
 #: ../Pinta.Core/Actions/HelpActions.cs:46
 msgid "File a Bug"
@@ -1493,7 +1493,7 @@ msgstr "Количество потоков, используемых для о�
 #: ../Pinta.Effects/Effects/AlignObjectEffect.cs:15
 #: ../Pinta.Effects/Effects/FeatherEffect.cs:23
 msgid "Object"
-msgstr ""
+msgstr "Объект"
 
 #: ../Pinta.Effects/Effects/BulgeEffect.cs:112
 #: ../Pinta.Effects/Effects/RadialBlurEffect.cs:173
@@ -1734,7 +1734,7 @@ msgstr "Книжная"
 
 #: ../Pinta.Effects/Effects/AlignObjectEffect.cs:139
 msgid "Position"
-msgstr ""
+msgstr "Положение"
 
 #: ../Pinta.Effects/Adjustments/PosterizeEffect.cs:24
 #: ../Pinta.Effects/Dialogs/Effects.PosterizeDialog.cs:51
@@ -2307,15 +2307,15 @@ msgstr "Панель инструментов"
 
 #: ../Pinta.Effects/Dialogs/Effects.AlignmentDialog.cs:39
 msgid "Top Center"
-msgstr ""
+msgstr "Центрировать по верхнему краю"
 
 #: ../Pinta.Effects/Dialogs/Effects.AlignmentDialog.cs:38
 msgid "Top Left"
-msgstr ""
+msgstr "По верхнему краю влево"
 
 #: ../Pinta.Effects/Dialogs/Effects.AlignmentDialog.cs:40
 msgid "Top Right"
-msgstr ""
+msgstr "По верхнему краю вправо"
 
 #: ../Pinta.Effects/Dialogs/Effects.CurvesDialog.cs:107
 msgid "Transfer Map"
