@@ -14,6 +14,7 @@ Thanks to the following contributors who worked on this release:
 - @Matthieu-LAURENT39
 - @khoidauminh
 - @potatoes1286
+- @TheodorLasse
 
 ### Added
 - Ported to GTK4 and libadwaita
@@ -65,6 +66,7 @@ Thanks to the following contributors who worked on this release:
 - Fixed unexpected drawing behavior when using semi-transparent colors with the Paint Brush tool (#941)
 - The Text tool now supports configuring whether antialiasing is enabled (#935)
 - Fixed various artifacts in the shape tools, particularly with larger brush widths (#733, #955)
+- Fixed an issue where the text tool did not immediately redraw after changes to the font or color of unfinalized text (#952, #975)
 
 ## [2.1.2](https://github.com/PintaProject/Pinta/releases/tag/2.1.2) - 2024/04/20
 
