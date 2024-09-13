@@ -355,8 +355,8 @@ public sealed class TextTool : BaseTool
 
 	private void HandlePintaCorePalettePrimaryColorChanged (object? sender, EventArgs e)
 	{
-		if (is_editing)
-			RedrawText (true, true);
+		if (is_editing || (workspace.HasOpenDocuments && CurrentTextEngine.State == TextMode.NotFinalized))
+			RedrawText (is_editing, true);
 	}
 
 	private void HandleLeftAlignmentButtonToggled (object? sender, EventArgs e)
@@ -433,8 +433,8 @@ public sealed class TextTool : BaseTool
 			CurrentTextEngine.SetFont (font, Alignment, underscore_btn.Active);
 		}
 
-		if (is_editing)
-			RedrawText (true, true);
+		if (is_editing || (workspace.HasOpenDocuments && CurrentTextEngine.State == TextMode.NotFinalized))
+			RedrawText (is_editing, true);
 	}
 
 	private int OutlineWidth
