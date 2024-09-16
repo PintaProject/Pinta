@@ -63,8 +63,7 @@ public sealed class OutlineObjectEffect : BaseEffect
 			// Removing this causes preview to not update to lower radius levels
 			var srcRow = srcData.Slice (y * srcWidth, srcWidth);
 			var dstRow = dest.GetPixelData ().Slice (y * srcWidth, srcWidth);
-			for (int x = left; x <= right; x++)
-				dstRow[x].Bgra = srcRow[x].Bgra;
+			srcRow.CopyTo (dstRow);
 
 			// Produces different behaviour at radius == 0 and radius == 1
 			// When radius == 0, only consider direct border pixels
@@ -122,6 +121,7 @@ public sealed class OutlineObjectEffect : BaseEffect
 				radius = 1;
 			var relevantBorderPixels = borderPixels.Where (borderPixel => borderPixel.Y > y - radius && borderPixel.Y < y + radius).ToArray ();
 			var destRow = dest.GetPixelData ().Slice (y * srcWidth, srcWidth);
+			Span<ColorBgra> outlineRow = stackalloc ColorBgra[destRow.Length];
 
 			for (int x = left; x <= right; x++) {
 				byte highestAlpha = 0;
@@ -163,9 +163,11 @@ public sealed class OutlineObjectEffect : BaseEffect
 				if (!Data.AlphaGradient && highestAlpha != 0)
 					highestAlpha = 255;
 
-				var outlineColor = color.NewAlpha (highestAlpha).ToPremultipliedAlpha ();
-				destRow[x] = ColorBgra.AlphaBlend (destRow[x], outlineColor);
+				outlineRow[x] = color.NewAlpha (highestAlpha).ToPremultipliedAlpha ();
 			}
+			// Performs alpha blending
+			new UserBlendOps.NormalBlendOp().Apply (outlineRow, destRow);
+			outlineRow.CopyTo (destRow);
 		});
 	}
 
