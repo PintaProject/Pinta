@@ -208,27 +208,6 @@ public struct ColorBgra
 	}
 
 	/// <summary>
-	/// Performs Alpha Blending between two colors. In practice, Alpha Blending two images produces the same result
-	/// as layering the top image on top of the bottom image.
-	/// </summary>
-	/// <param name="colorTop">The color layered on top. Color must be in premultiplied form. See <see cref="ToPremultipliedAlpha"/>.</param>
-	/// <param name="colorBottom">The color layered below. Color must be in premultiplied form. See  <see cref="ToPremultipliedAlpha"/>.</param>
-	/// <returns>Premultiplied form of the alpha-blend between colorTop and colorBottom.</returns>
-	public static ColorBgra AlphaBlend (ColorBgra colorTop, ColorBgra colorBottom)
-	{
-		if (colorTop.A == 255)
-			return colorTop;
-		if (colorTop.A == 0)
-			return colorBottom;
-		float cTopA = colorTop.A / 255f;
-		byte r = (byte) (colorTop.R + colorBottom.R * (1f - cTopA));
-		byte g = (byte) (colorTop.G + colorBottom.G * (1f - cTopA));
-		byte b = (byte) (colorTop.B + colorBottom.B * (1f - cTopA));
-		byte a = (byte) (colorTop.A + colorBottom.A * (1f - cTopA));
-		return FromBgra (b, g, r, a);
-	}
-
-	/// <summary>
 	/// Smoothly blends between two colors.
 	/// </summary>
 	public static ColorBgra Blend (ColorBgra ca, ColorBgra cb, byte cbAlpha)
