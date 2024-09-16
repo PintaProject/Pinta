@@ -128,7 +128,7 @@ public class EffectsBenchmarks
 	[Benchmark]
 	public void OutlineEffect ()
 	{
-		var effect = new OutlineEffect (Utilities.CreateMockServices ());
+		var effect = new OutlineEdgeEffect (Utilities.CreateMockServices ());
 		effect.Render (surface, dest_surface, bounds);
 	}
 

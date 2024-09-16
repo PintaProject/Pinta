@@ -14,7 +14,7 @@ using Pinta.Gui.Widgets;
 
 namespace Pinta.Effects;
 
-public sealed class OutlineEffect : LocalHistogramEffect
+public sealed class OutlineEdgeEffect : LocalHistogramEffect
 {
 	private int thickness;
 	private int intensity;
@@ -23,20 +23,20 @@ public sealed class OutlineEffect : LocalHistogramEffect
 
 	public sealed override bool IsTileable => true;
 
-	public override string Name => Translations.GetString ("Outline");
+	public override string Name => Translations.GetString ("Outline Edge");
 
 	public override bool IsConfigurable => true;
 
 	public override string EffectMenuCategory => Translations.GetString ("Stylize");
 
-	public OutlineData Data => (OutlineData) EffectData!;  // NRT - Set in constructor
+	public OutlineEdgeData Data => (OutlineEdgeData) EffectData!;  // NRT - Set in constructor
 
 	private readonly IChromeService chrome;
 
-	public OutlineEffect (IServiceProvider services)
+	public OutlineEdgeEffect (IServiceProvider services)
 	{
 		chrome = services.GetService<IChromeService> ();
-		EffectData = new OutlineData ();
+		EffectData = new OutlineEdgeData ();
 	}
 
 	public override void LaunchConfiguration ()
@@ -131,7 +131,7 @@ public sealed class OutlineEffect : LocalHistogramEffect
 
 	#endregion
 
-	public sealed class OutlineData : EffectData
+	public sealed class OutlineEdgeData : EffectData
 	{
 		[Caption ("Thickness"), MinimumValue (1), MaximumValue (200)]
 		public int Thickness { get; set; } = 3;
