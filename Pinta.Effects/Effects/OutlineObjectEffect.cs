@@ -166,7 +166,7 @@ public sealed class OutlineObjectEffect : BaseEffect
 				outlineRow[x] = color.NewAlpha (highestAlpha).ToPremultipliedAlpha ();
 			}
 			// Performs alpha blending
-			new UserBlendOps.NormalBlendOp().Apply (outlineRow, destRow);
+			new UserBlendOps.NormalBlendOp ().Apply (outlineRow, destRow);
 			outlineRow.CopyTo (destRow);
 		});
 	}
