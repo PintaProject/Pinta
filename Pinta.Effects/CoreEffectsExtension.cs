@@ -121,6 +121,7 @@ internal sealed class CoreEffectsExtension : IExtension
 		PintaCore.Effects.UnregisterInstanceOfEffect (typeof (GaussianBlurEffect));
 		PintaCore.Effects.UnregisterInstanceOfEffect (typeof (GlowEffect));
 		PintaCore.Effects.UnregisterInstanceOfEffect (typeof (FeatherEffect));
+		PintaCore.Effects.UnregisterInstanceOfEffect (typeof (OutlineObjectEffect));
 		PintaCore.Effects.UnregisterInstanceOfEffect (typeof (InkSketchEffect));
 		PintaCore.Effects.UnregisterInstanceOfEffect (typeof (JuliaFractalEffect));
 		PintaCore.Effects.UnregisterInstanceOfEffect (typeof (MandelbrotFractalEffect));
