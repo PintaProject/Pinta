@@ -28,8 +28,9 @@ Thanks to the following contributors who worked on this release:
 - Added a new "Dithering" effect (#457)
 - Added "Voronoi Diagram" effect (#692)
 - Ported "Vignette" and "Dents" effects from Paint.NET 3.36 (#881, #885)
-- Added "Feather" effect (#886, #953)
-- Added "Align object" effect (#936, #961)
+- Added "Feather Object" effect (#886, #953)
+- Added "Align Object" effect (#936, #961)
+- Added "Outline Object" effect (#971)
 - Added support for exporting to portable pixmap (`.ppm`) files (#549)
   - Importing is not supported yet.
 - Added a nearest-neighbor resampling mode when resizing images (#596)
