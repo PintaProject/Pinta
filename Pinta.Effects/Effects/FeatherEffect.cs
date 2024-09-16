@@ -16,7 +16,7 @@ public sealed class FeatherEffect : BaseEffect
 	// Takes two passes, so must be multithreaded internally
 	public sealed override bool IsTileable => false;
 
-	public override string Name => Translations.GetString ("Feather");
+	public override string Name => Translations.GetString ("Feather Object");
 
 	public override bool IsConfigurable => true;
 

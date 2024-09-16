@@ -340,14 +340,14 @@ internal sealed class EffectsTest
 	[Test]
 	public void Outline1 ()
 	{
-		OutlineEffect effect = new (Utilities.CreateMockServices ());
+		OutlineEdgeEffect effect = new (Utilities.CreateMockServices ());
 		Utilities.TestEffect (effect, "outline1.png");
 	}
 
 	[Test]
 	public void Outline2 ()
 	{
-		OutlineEffect effect = new (Utilities.CreateMockServices ());
+		OutlineEdgeEffect effect = new (Utilities.CreateMockServices ());
 		effect.Data.Thickness = 25;
 		effect.Data.Intensity = 20;
 		Utilities.TestEffect (effect, "outline2.png");

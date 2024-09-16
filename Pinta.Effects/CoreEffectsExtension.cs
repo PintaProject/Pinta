@@ -76,7 +76,7 @@ internal sealed class CoreEffectsExtension : IExtension
 		PintaCore.Effects.RegisterEffect (new MedianEffect (services));
 		PintaCore.Effects.RegisterEffect (new MotionBlurEffect (services));
 		PintaCore.Effects.RegisterEffect (new OilPaintingEffect (services));
-		PintaCore.Effects.RegisterEffect (new OutlineEffect (services));
+		PintaCore.Effects.RegisterEffect (new OutlineEdgeEffect (services));
 		PintaCore.Effects.RegisterEffect (new PencilSketchEffect (services));
 		PintaCore.Effects.RegisterEffect (new PixelateEffect (services));
 		PintaCore.Effects.RegisterEffect (new PolarInversionEffect (services));
@@ -127,7 +127,7 @@ internal sealed class CoreEffectsExtension : IExtension
 		PintaCore.Effects.UnregisterInstanceOfEffect (typeof (MedianEffect));
 		PintaCore.Effects.UnregisterInstanceOfEffect (typeof (MotionBlurEffect));
 		PintaCore.Effects.UnregisterInstanceOfEffect (typeof (OilPaintingEffect));
-		PintaCore.Effects.UnregisterInstanceOfEffect (typeof (OutlineEffect));
+		PintaCore.Effects.UnregisterInstanceOfEffect (typeof (OutlineEdgeEffect));
 		PintaCore.Effects.UnregisterInstanceOfEffect (typeof (PencilSketchEffect));
 		PintaCore.Effects.UnregisterInstanceOfEffect (typeof (PixelateEffect));
 		PintaCore.Effects.UnregisterInstanceOfEffect (typeof (PolarInversionEffect));
