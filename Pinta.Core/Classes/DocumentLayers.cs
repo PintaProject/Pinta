@@ -334,6 +334,8 @@ public sealed class DocumentLayers
 
 		LayerAdded?.Invoke (this, new IndexEventArgs (index));
 		PintaCore.Layers.OnLayerAdded ();
+
+		document.Workspace.Invalidate ();
 	}
 
 	/// <summary>
