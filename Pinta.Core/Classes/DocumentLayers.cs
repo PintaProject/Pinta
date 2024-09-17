@@ -251,7 +251,7 @@ public sealed class DocumentLayers
 		var surf = CairoExtensions.CreateImageSurface (Format.Argb32, document.ImageSize.Width, document.ImageSize.Height);
 
 		var g = new Context (surf);
-		document.Selection.Clip(g);
+		document.Selection.Clip (g);
 
 		g.SetSourceSurface (user_layers[index].Surface, 0, 0);
 		g.Paint ();
