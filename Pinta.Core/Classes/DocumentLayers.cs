@@ -251,12 +251,7 @@ public sealed class DocumentLayers
 		var surf = CairoExtensions.CreateImageSurface (Format.Argb32, document.ImageSize.Width, document.ImageSize.Height);
 
 		var g = new Context (surf);
-
-		// Use the EvenOdd fill rule to account for "holes" in the selection
-		g.FillRule = FillRule.EvenOdd;
-
-		g.AppendPath (document.Selection.SelectionPath);
-		g.Clip ();
+		document.Selection.Clip(g);
 
 		g.SetSourceSurface (user_layers[index].Surface, 0, 0);
 		g.Paint ();
