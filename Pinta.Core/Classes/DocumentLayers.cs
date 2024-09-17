@@ -177,6 +177,8 @@ public sealed class DocumentLayers
 
 		LayerRemoved?.Invoke (this, new IndexEventArgs (index));
 		PintaCore.Layers.OnLayerRemoved ();
+
+		document.Workspace.Invalidate ();
 	}
 
 	/// <summary>
