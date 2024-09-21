@@ -138,17 +138,17 @@ public sealed class AlignObjectEffect : BaseEffect
 		[Skip]
 		public override bool IsDefault => Position == AlignPosition.Center;
 	}
+}
 
-	public enum AlignPosition
-	{
-		TopLeft,
-		TopCenter,
-		TopRight,
-		CenterLeft,
-		Center,
-		CenterRight,
-		BottomLeft,
-		BottomCenter,
-		BottomRight,
-	}
+public enum AlignPosition
+{
+	TopLeft,
+	TopCenter,
+	TopRight,
+	CenterLeft,
+	Center,
+	CenterRight,
+	BottomLeft,
+	BottomCenter,
+	BottomRight,
 }
