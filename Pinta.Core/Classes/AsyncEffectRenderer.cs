@@ -81,7 +81,7 @@ internal abstract class AsyncEffectRenderer
 	bool restart_render_flag;
 	int render_id;
 	int current_tile;
-	ImmutableArray<RectangleI> target_tiles = ImmutableArray<RectangleI>.Empty;
+	readonly ImmutableArray<RectangleI> target_tiles;
 	readonly List<Exception> render_exceptions;
 
 	uint timer_tick_id;
@@ -104,6 +104,10 @@ internal abstract class AsyncEffectRenderer
 		render_exceptions = new List<Exception> ();
 
 		timer_tick_id = 0;
+		target_tiles =
+			settings.EffectIsTileable
+			? settings.RenderBounds.VerticalSliceup ().ToImmutableArray ()
+			: ImmutableArray.Create (settings.RenderBounds);
 
 		this.settings = settings;
 	}
@@ -179,11 +183,6 @@ internal abstract class AsyncEffectRenderer
 		render_exceptions.Clear ();
 
 		current_tile = -1;
-
-		target_tiles =
-			settings.EffectIsTileable
-			? settings.RenderBounds.VerticalSliceup ().ToImmutableArray ()
-			: ImmutableArray.Create (settings.RenderBounds);
 
 		Debug.WriteLine ("AsyncEffectRenderer.Start () Render " + render_id + " starting.");
 
