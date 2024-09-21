@@ -28,10 +28,11 @@ namespace Pinta.Core;
 
 public sealed class ResizeHistoryItem : CompoundHistoryItem
 {
+	private readonly WorkspaceManager workspace;
 	private Size old_size;
-
-	public ResizeHistoryItem (Size oldSize) : base ()
+	public ResizeHistoryItem (WorkspaceManager workspace, Size oldSize) : base ()
 	{
+		this.workspace = workspace;
 		old_size = oldSize;
 
 		Icon = Resources.Icons.ImageResize;
@@ -42,50 +43,49 @@ public sealed class ResizeHistoryItem : CompoundHistoryItem
 
 	public override void Undo ()
 	{
-		var doc = PintaCore.Workspace.ActiveDocument;
+		var doc = workspace.ActiveDocument;
 
 		// maintain the current scaling setting after the operation
-		double scale = PintaCore.Workspace.Scale;
+		double scale = workspace.Scale;
 
-		Size swap = PintaCore.Workspace.ImageSize;
+		Size swap = workspace.ImageSize;
 
-		PintaCore.Workspace.ImageSize = old_size;
-		PintaCore.Workspace.CanvasSize = old_size;
+		workspace.ImageSize = old_size;
+		workspace.CanvasSize = old_size;
 
 		old_size = swap;
 
 		base.Undo ();
 
-		if (RestoreSelection != null) {
+		if (RestoreSelection != null)
 			doc.Selection = RestoreSelection.Clone ();
-		} else {
+		else
 			doc.ResetSelectionPaths ();
-		}
 
-		PintaCore.Workspace.Invalidate ();
+		workspace.Invalidate ();
 
-		PintaCore.Workspace.Scale = scale;
+		workspace.Scale = scale;
 	}
 
 	public override void Redo ()
 	{
-		var doc = PintaCore.Workspace.ActiveDocument;
+		var doc = workspace.ActiveDocument;
 
 		// maintain the current scaling setting after the operation
-		double scale = PintaCore.Workspace.Scale;
+		double scale = workspace.Scale;
 
-		Size swap = PintaCore.Workspace.ImageSize;
+		Size swap = workspace.ImageSize;
 
-		PintaCore.Workspace.ImageSize = old_size;
-		PintaCore.Workspace.CanvasSize = old_size;
+		workspace.ImageSize = old_size;
+		workspace.CanvasSize = old_size;
 
 		old_size = swap;
 
 		base.Redo ();
 
 		doc.ResetSelectionPaths ();
-		PintaCore.Workspace.Invalidate ();
+		workspace.Invalidate ();
 
-		PintaCore.Workspace.Scale = scale;
+		workspace.Scale = scale;
 	}
 }

@@ -47,9 +47,7 @@ public sealed class Document
 			selection = value;
 
 			// Listen for any changes to this selection.
-			selection.SelectionModified += (sender, args) => {
-				OnSelectionChanged ();
-			};
+			selection.SelectionModified += (_, _) => OnSelectionChanged ();
 
 			// Notify listeners that our selection has been modified.
 			OnSelectionChanged ();
@@ -116,15 +114,14 @@ public sealed class Document
 
 	public DocumentHistory History => Workspace.History;
 
-	public Core.Size ImageSize { get; set; }
+	public Size ImageSize { get; set; }
 
 	public bool IsDirty {
 		get => is_dirty;
 		set {
-			if (is_dirty != value) {
-				is_dirty = value;
-				OnIsDirtyChanged ();
-			}
+			if (is_dirty == value) return;
+			is_dirty = value;
+			OnIsDirtyChanged ();
 		}
 	}
 
@@ -157,7 +154,7 @@ public sealed class Document
 	/// </summary>
 	public void ClearFileReference ()
 	{
-		var name = DisplayName;
+		string name = DisplayName;
 		File = null;
 		FileType = null;
 		DisplayName = name;
@@ -308,9 +305,9 @@ public sealed class Document
 
 		PintaCore.Tools.Commit ();
 
-		ResizeHistoryItem hist = new (ImageSize) {
+		ResizeHistoryItem hist = new (PintaCore.Workspace, ImageSize) {
 			Icon = Resources.Icons.ImageResizeCanvas,
-			Text = Translations.GetString ("Resize Canvas")
+			Text = Translations.GetString ("Resize Canvas"),
 		};
 
 		hist.StartSnapshotOfImage ();
@@ -343,7 +340,7 @@ public sealed class Document
 
 		PintaCore.Tools.Commit ();
 
-		ResizeHistoryItem hist = new (ImageSize);
+		ResizeHistoryItem hist = new (PintaCore.Workspace, ImageSize);
 
 		hist.StartSnapshotOfImage ();
 
