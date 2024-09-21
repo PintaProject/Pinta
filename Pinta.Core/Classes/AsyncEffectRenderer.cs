@@ -30,6 +30,7 @@
 
 using System;
 using System.Collections.Generic;
+using System.Collections.Immutable;
 using System.Threading;
 using Debug = System.Diagnostics.Debug;
 
@@ -44,8 +45,8 @@ internal abstract class AsyncEffectRenderer
 	internal sealed class Settings
 	{
 		internal int ThreadCount { get; }
-		internal int TileWidth { get; }
-		internal int TileHeight { get; }
+		internal RectangleI RenderBounds { get; }
+		internal bool EffectIsTileable { get; }
 		internal int UpdateMillis { get; }
 		internal ThreadPriority ThreadPriority { get; }
 
@@ -63,8 +64,8 @@ internal abstract class AsyncEffectRenderer
 
 			// If the effect isn't tileable, there is a single tile for the entire render bounds.
 			// Otherwise, render each row in parallel.
-			TileWidth = renderBounds.Width;
-			TileHeight = effectIsTileable ? 1 : renderBounds.Height;
+			RenderBounds = renderBounds;
+			EffectIsTileable = effectIsTileable;
 			ThreadCount = threadCount;
 			UpdateMillis = updateMilliseconds;
 			ThreadPriority = threadPriority;
@@ -81,7 +82,7 @@ internal abstract class AsyncEffectRenderer
 	bool restart_render_flag;
 	int render_id;
 	int current_tile;
-	int total_tiles;
+	ImmutableArray<RectangleI> target_tiles = ImmutableArray<RectangleI>.Empty;
 	readonly List<Exception> render_exceptions;
 
 	uint timer_tick_id;
@@ -112,10 +113,10 @@ internal abstract class AsyncEffectRenderer
 
 	internal double Progress {
 		get {
-			if (total_tiles == 0 || current_tile < 0)
+			if (target_tiles.Length == 0 || current_tile < 0)
 				return 0;
-			else if (current_tile < total_tiles)
-				return current_tile / (double) total_tiles;
+			else if (current_tile < target_tiles.Length)
+				return current_tile / (double) target_tiles.Length;
 			else
 				return 1;
 		}
@@ -182,7 +183,10 @@ internal abstract class AsyncEffectRenderer
 
 		current_tile = -1;
 
-		total_tiles = CalculateTotalTiles ();
+		target_tiles =
+			settings.EffectIsTileable
+			? settings.RenderBounds.VerticalSliceup ().ToImmutableArray ()
+			: ImmutableArray.Create (settings.RenderBounds);
 
 		Debug.WriteLine ("AsyncEffectRenderer.Start () Render " + render_id + " starting.");
 
@@ -221,7 +225,7 @@ internal abstract class AsyncEffectRenderer
 
 	Thread StartSlaveThread (int renderId, int threadId)
 	{
-		var slave = new Thread (() => {
+		Thread slave = new (() => {
 			Render (renderId, threadId);
 		}) {
 			Priority = settings.ThreadPriority
@@ -237,7 +241,7 @@ internal abstract class AsyncEffectRenderer
 		// Fetch the next tile index and render it.
 		for (; ; ) {
 			int tileIndex = Interlocked.Increment (ref current_tile);
-			if (tileIndex >= total_tiles || cancel_render_flag)
+			if (tileIndex >= target_tiles.Length || cancel_render_flag)
 				return;
 			RenderTile (renderId, threadId, tileIndex);
 		}
@@ -250,7 +254,7 @@ internal abstract class AsyncEffectRenderer
 		RectangleI bounds = new ();
 
 		try {
-			bounds = GetTileBounds (tileIndex);
+			bounds = target_tiles[tileIndex]; // Get tile bounds
 
 			// NRT - These are set in Start () before getting here
 			if (!cancel_render_flag) {
@@ -283,23 +287,6 @@ internal abstract class AsyncEffectRenderer
 				render_exceptions.Add (exception);
 			}
 		}
-	}
-
-	// Runs on a background thread.
-	private RectangleI GetTileBounds (int tileIndex)
-	{
-		int horizTileCount = (int) Math.Ceiling (render_bounds.Width / (float) settings.TileWidth);
-		int x = ((tileIndex % horizTileCount) * settings.TileWidth) + render_bounds.X;
-		int y = ((tileIndex / horizTileCount) * settings.TileHeight) + render_bounds.Y;
-		int w = Math.Min (settings.TileWidth, render_bounds.Right + 1 - x);
-		int h = Math.Min (settings.TileHeight, render_bounds.Bottom + 1 - y);
-		return new (x, y, w, h);
-	}
-
-	int CalculateTotalTiles ()
-	{
-		return (int) (Math.Ceiling (render_bounds.Width / (float) settings.TileWidth)
-			* Math.Ceiling (render_bounds.Height / (float) settings.TileHeight));
 	}
 
 	// Called on the UI thread.
