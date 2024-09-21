@@ -123,24 +123,17 @@ public sealed class LivePreviewManager
 
 		Started?.Invoke (this, new LivePreviewStartedEventArgs ());
 
-		// If the effect isn't tileable, there is a single tile for the entire render bounds.
-		// Otherwise, render each row in parallel.
-		int tileWidth = render_bounds.Width;
-		int tileHeight = 1;
-		if (!effect.IsTileable)
-			tileHeight = render_bounds.Height;
-
 		AsyncEffectRenderer.Settings settings = new (
 			threadCount: system_manager.RenderThreads,
-			tileWidth: tileWidth,
-			tileHeight: tileHeight,
+			renderBounds: render_bounds,
+			effectIsTileable: effect.IsTileable,
 			updateMilliseconds: 100,
 			threadPriority: ThreadPriority.BelowNormal);
 
 		Debug.WriteLine (DateTime.Now.ToString ("HH:mm:ss:ffff") + "Start Live preview.");
 
 		renderer = new Renderer (this, settings, chrome_manager);
-		renderer.Start (effect, layer.Surface, live_preview_surface, render_bounds);
+		renderer.Start (effect, layer.Surface, live_preview_surface);
 
 		if (effect.IsConfigurable) {
 			EventHandler<BaseEffect.ConfigDialogResponseEventArgs>? handler = null;
@@ -277,7 +270,7 @@ public sealed class LivePreviewManager
 	void EffectData_PropertyChanged (object? sender, PropertyChangedEventArgs e)
 	{
 		//TODO calculate bounds.
-		renderer.Start (effect, layer.Surface, live_preview_surface, render_bounds);
+		renderer.Start (effect, layer.Surface, live_preview_surface);
 	}
 
 	private sealed class Renderer : AsyncEffectRenderer

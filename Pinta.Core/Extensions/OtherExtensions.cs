@@ -68,12 +68,25 @@ public static class OtherExtensions
 
 	private sealed class ImmutableBackedReadOnlyCollection<T> : ReadOnlyCollection<T>
 	{
-		internal ImmutableBackedReadOnlyCollection (ImmutableList<T> list) : base (list)
-		{
-		}
-		internal ImmutableBackedReadOnlyCollection (ImmutableArray<T> array) : base (array)
-		{
-		}
+		internal ImmutableBackedReadOnlyCollection (ImmutableList<T> list)
+			: base (list)
+		{ }
+
+		internal ImmutableBackedReadOnlyCollection (ImmutableArray<T> array)
+			: base (array)
+		{ }
+	}
+
+	public static IEnumerable<RectangleI> ToRows (this RectangleI original)
+	{
+		if (original.Height < 0) throw new ArgumentException ("Height cannot be negative", nameof (original));
+		if (original.Height == 0) yield break;
+		for (int i = 0; i < original.Height; i++)
+			yield return new (
+				original.X,
+				original.Y + i,
+				original.Width,
+				1);
 	}
 
 	public static bool In<T> (this T enumeration, params T[] values)

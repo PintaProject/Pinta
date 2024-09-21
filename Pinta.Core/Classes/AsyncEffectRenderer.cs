@@ -30,6 +30,7 @@
 
 using System;
 using System.Collections.Generic;
+using System.Collections.Immutable;
 using System.Threading;
 using Debug = System.Diagnostics.Debug;
 
@@ -44,24 +45,24 @@ internal abstract class AsyncEffectRenderer
 	internal sealed class Settings
 	{
 		internal int ThreadCount { get; }
-		internal int TileWidth { get; }
-		internal int TileHeight { get; }
+		internal RectangleI RenderBounds { get; }
+		internal bool EffectIsTileable { get; }
 		internal int UpdateMillis { get; }
 		internal ThreadPriority ThreadPriority { get; }
 
 		internal Settings (
 			int threadCount,
-			int tileWidth,
-			int tileHeight,
+			RectangleI renderBounds,
+			bool effectIsTileable,
 			int updateMilliseconds,
 			ThreadPriority threadPriority)
 		{
-			if (tileWidth < 0) throw new ArgumentOutOfRangeException (nameof (tileWidth), "Cannot be negative");
-			if (tileHeight < 0) throw new ArgumentOutOfRangeException (nameof (tileHeight), "Cannot be negative");
+			if (renderBounds.Width < 0) throw new ArgumentException ("Width cannot be negative", nameof (renderBounds));
+			if (renderBounds.Height < 0) throw new ArgumentException ("Height cannot be negative", nameof (renderBounds));
 			if (updateMilliseconds <= 0) throw new ArgumentOutOfRangeException (nameof (updateMilliseconds), "Strictly positive value expected");
 			if (threadCount < 1) throw new ArgumentOutOfRangeException (nameof (threadCount), "Invalid number of threads");
-			TileWidth = tileWidth;
-			TileHeight = tileHeight;
+			RenderBounds = renderBounds;
+			EffectIsTileable = effectIsTileable;
 			ThreadCount = threadCount;
 			UpdateMillis = updateMilliseconds;
 			ThreadPriority = threadPriority;
@@ -71,14 +72,13 @@ internal abstract class AsyncEffectRenderer
 	BaseEffect? effect;
 	Cairo.ImageSurface? source_surface;
 	Cairo.ImageSurface? dest_surface;
-	RectangleI render_bounds;
 
 	bool is_rendering;
 	bool cancel_render_flag;
 	bool restart_render_flag;
 	int render_id;
 	int current_tile;
-	int total_tiles;
+	readonly ImmutableArray<RectangleI> target_tiles;
 	readonly List<Exception> render_exceptions;
 
 	uint timer_tick_id;
@@ -101,6 +101,10 @@ internal abstract class AsyncEffectRenderer
 		render_exceptions = new List<Exception> ();
 
 		timer_tick_id = 0;
+		target_tiles =
+			settings.EffectIsTileable
+			? settings.RenderBounds.ToRows ().ToImmutableArray () // If effect is tileable, render each row in parallel.
+			: ImmutableArray.Create (settings.RenderBounds); // If the effect isn't tileable, there is a single tile for the entire render bounds
 
 		this.settings = settings;
 	}
@@ -109,10 +113,10 @@ internal abstract class AsyncEffectRenderer
 
 	internal double Progress {
 		get {
-			if (total_tiles == 0 || current_tile < 0)
+			if (target_tiles.Length == 0 || current_tile < 0)
 				return 0;
-			else if (current_tile < total_tiles)
-				return current_tile / (double) total_tiles;
+			else if (current_tile < target_tiles.Length)
+				return current_tile / (double) target_tiles.Length;
 			else
 				return 1;
 		}
@@ -121,8 +125,7 @@ internal abstract class AsyncEffectRenderer
 	internal void Start (
 		BaseEffect effect,
 		Cairo.ImageSurface source,
-		Cairo.ImageSurface dest,
-		RectangleI renderBounds)
+		Cairo.ImageSurface dest)
 	{
 		Debug.WriteLine ("AsyncEffectRenderer.Start ()");
 
@@ -132,7 +135,6 @@ internal abstract class AsyncEffectRenderer
 
 		source_surface = source;
 		dest_surface = dest;
-		render_bounds = renderBounds;
 
 		// If a render is already in progress, then cancel it,
 		// and start a new render.
@@ -179,8 +181,6 @@ internal abstract class AsyncEffectRenderer
 
 		current_tile = -1;
 
-		total_tiles = CalculateTotalTiles ();
-
 		Debug.WriteLine ("AsyncEffectRenderer.Start () Render " + render_id + " starting.");
 
 		// Copy the current render id.
@@ -193,7 +193,7 @@ internal abstract class AsyncEffectRenderer
 			slaves[threadId - 1] = StartSlaveThread (renderId, threadId);
 
 		// Start the master render thread.
-		var master = new Thread (() => {
+		Thread master = new (() => {
 
 			// Do part of the rendering on the master thread.
 			Render (renderId, 0);
@@ -218,7 +218,7 @@ internal abstract class AsyncEffectRenderer
 
 	Thread StartSlaveThread (int renderId, int threadId)
 	{
-		var slave = new Thread (() => {
+		Thread slave = new (() => {
 			Render (renderId, threadId);
 		}) {
 			Priority = settings.ThreadPriority
@@ -234,7 +234,7 @@ internal abstract class AsyncEffectRenderer
 		// Fetch the next tile index and render it.
 		for (; ; ) {
 			int tileIndex = Interlocked.Increment (ref current_tile);
-			if (tileIndex >= total_tiles || cancel_render_flag)
+			if (tileIndex >= target_tiles.Length || cancel_render_flag)
 				return;
 			RenderTile (renderId, threadId, tileIndex);
 		}
@@ -244,17 +244,14 @@ internal abstract class AsyncEffectRenderer
 	void RenderTile (int renderId, int threadId, int tileIndex)
 	{
 		Exception? exception = null;
-		var bounds = new RectangleI ();
+		RectangleI tileBounds = target_tiles[tileIndex];
 
 		try {
-
-			bounds = GetTileBounds (tileIndex);
-
 			// NRT - These are set in Start () before getting here
 			if (!cancel_render_flag) {
 				dest_surface!.Flush ();
-				effect!.Render (source_surface!, dest_surface, stackalloc[] { bounds });
-				dest_surface.MarkDirty (bounds);
+				effect!.Render (source_surface!, dest_surface, stackalloc[] { tileBounds });
+				dest_surface.MarkDirty (tileBounds);
 			}
 
 		} catch (Exception ex) {
@@ -269,38 +266,19 @@ internal abstract class AsyncEffectRenderer
 		// Update bounds to be shown on next expose.
 		lock (updated_lock) {
 			if (is_updated) {
-				updated_area = RectangleI.Union (bounds, updated_area);
+				updated_area = RectangleI.Union (tileBounds, updated_area);
 			} else {
 				is_updated = true;
-				updated_area = bounds;
+				updated_area = tileBounds;
 			}
 		}
 
-		if (exception != null) {
-			lock (render_exceptions) {
-				render_exceptions.Add (exception);
-			}
+		if (exception == null)
+			return;
+
+		lock (render_exceptions) {
+			render_exceptions.Add (exception);
 		}
-	}
-
-	// Runs on a background thread.
-	RectangleI GetTileBounds (int tileIndex)
-	{
-		int horizTileCount = (int) Math.Ceiling (render_bounds.Width
-						       / (float) settings.TileWidth);
-
-		int x = ((tileIndex % horizTileCount) * settings.TileWidth) + render_bounds.X;
-		int y = ((tileIndex / horizTileCount) * settings.TileHeight) + render_bounds.Y;
-		int w = Math.Min (settings.TileWidth, render_bounds.Right + 1 - x);
-		int h = Math.Min (settings.TileHeight, render_bounds.Bottom + 1 - y);
-
-		return new RectangleI (x, y, w, h);
-	}
-
-	int CalculateTotalTiles ()
-	{
-		return (int) (Math.Ceiling (render_bounds.Width / (float) settings.TileWidth)
-			* Math.Ceiling (render_bounds.Height / (float) settings.TileHeight));
 	}
 
 	// Called on the UI thread.
@@ -328,9 +306,10 @@ internal abstract class AsyncEffectRenderer
 
 	void HandleRenderCompletion ()
 	{
-		var exceptions = (render_exceptions.Count == 0)
-				? Array.Empty<Exception> ()
-				: render_exceptions.ToArray ();
+		var exceptions =
+			render_exceptions.Count == 0
+			? Array.Empty<Exception> ()
+			: render_exceptions.ToArray ();
 
 		HandleTimerTick ();
 

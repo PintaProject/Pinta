@@ -48,6 +48,29 @@ internal sealed class RectangleTests
 	public void CorrectInflation (RectangleI a, int widthInflation, int heightInflation, RectangleI expected)
 		=> Assert.That (a.Inflated (widthInflation, heightInflation), Is.EqualTo (expected));
 
+	[TestCaseSource (nameof (vertical_slicing_cases))]
+	public void CorrectVerticalSlicing (RectangleI original, IReadOnlyList<RectangleI> expectedSlices)
+	{
+		var actualSlices = original.ToRows ().ToArray ();
+		Assert.That (actualSlices.Length, Is.EqualTo (expectedSlices.Count));
+		for (int i = 0; i < expectedSlices.Count; i++)
+			Assert.That (actualSlices[i], Is.EqualTo (expectedSlices[i]));
+	}
+
+	private static readonly IReadOnlyList<TestCaseData> vertical_slicing_cases = CreateVerticalSlicingCases ().ToArray ();
+	private static IEnumerable<TestCaseData> CreateVerticalSlicingCases ()
+	{
+		yield return new (
+			new RectangleI (1, 1, 5, 5),
+			new[] {
+				new RectangleI(1,1,5,1),
+				new RectangleI(1,2,5,1),
+				new RectangleI(1,3,5,1),
+				new RectangleI(1,4,5,1),
+				new RectangleI(1,5,5,1),
+			});
+	}
+
 	private static readonly IReadOnlyList<TestCaseData> inflation_cases = CreateInflationCases ().ToArray ();
 	private static IEnumerable<TestCaseData> CreateInflationCases ()
 	{
