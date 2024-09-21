@@ -48,6 +48,7 @@ public sealed class OutlineObjectEffect : BaseEffect
 
 		ColorBgra primaryColor = palette.PrimaryColor.ToColorBgra ();
 		ColorBgra secondaryColor = palette.SecondaryColor.ToColorBgra ();
+
 		ConcurrentBag<PointI> borderPixels = new ();
 
 		// First pass
@@ -152,6 +153,7 @@ public sealed class OutlineObjectEffect : BaseEffect
 
 					// Grab nearest border pixel, and calculate outline alpha based off it
 					foreach (var borderPixel in relevantBorderPixels) {
+
 						if (borderPixel.X == x && borderPixel.Y == y)
 							highestAlpha = 255;
 
@@ -180,7 +182,8 @@ public sealed class OutlineObjectEffect : BaseEffect
 					}
 
 					// Handle color gradient / no alpha gradient option
-					var color = primaryColor;
+					ColorBgra color = primaryColor;
+
 					if (Data.ColorGradient)
 						color = ColorBgra.Blend (secondaryColor, primaryColor, highestAlpha);
 
