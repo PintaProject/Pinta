@@ -133,7 +133,7 @@ public sealed class LivePreviewManager
 		Debug.WriteLine (DateTime.Now.ToString ("HH:mm:ss:ffff") + "Start Live preview.");
 
 		renderer = new Renderer (this, settings, chrome_manager);
-		renderer.Start (effect, layer.Surface, live_preview_surface, render_bounds);
+		renderer.Start (effect, layer.Surface, live_preview_surface);
 
 		if (effect.IsConfigurable) {
 			EventHandler<BaseEffect.ConfigDialogResponseEventArgs>? handler = null;
@@ -270,7 +270,7 @@ public sealed class LivePreviewManager
 	void EffectData_PropertyChanged (object? sender, PropertyChangedEventArgs e)
 	{
 		//TODO calculate bounds.
-		renderer.Start (effect, layer.Surface, live_preview_surface, render_bounds);
+		renderer.Start (effect, layer.Surface, live_preview_surface);
 	}
 
 	private sealed class Renderer : AsyncEffectRenderer

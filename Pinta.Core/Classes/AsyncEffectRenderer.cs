@@ -75,7 +75,6 @@ internal abstract class AsyncEffectRenderer
 	BaseEffect? effect;
 	Cairo.ImageSurface? source_surface;
 	Cairo.ImageSurface? dest_surface;
-	RectangleI render_bounds;
 
 	bool is_rendering;
 	bool cancel_render_flag;
@@ -125,8 +124,7 @@ internal abstract class AsyncEffectRenderer
 	internal void Start (
 		BaseEffect effect,
 		Cairo.ImageSurface source,
-		Cairo.ImageSurface dest,
-		RectangleI renderBounds)
+		Cairo.ImageSurface dest)
 	{
 		Debug.WriteLine ("AsyncEffectRenderer.Start ()");
 
@@ -136,7 +134,6 @@ internal abstract class AsyncEffectRenderer
 
 		source_surface = source;
 		dest_surface = dest;
-		render_bounds = renderBounds;
 
 		// If a render is already in progress, then cancel it,
 		// and start a new render.
