@@ -273,10 +273,11 @@ internal abstract class AsyncEffectRenderer
 			}
 		}
 
-		if (exception != null) {
-			lock (render_exceptions) {
-				render_exceptions.Add (exception);
-			}
+		if (exception == null)
+			return;
+
+		lock (render_exceptions) {
+			render_exceptions.Add (exception);
 		}
 	}
 
