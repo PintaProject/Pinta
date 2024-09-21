@@ -99,13 +99,12 @@ public sealed class OutlineObjectEffect : BaseEffect
 
 					for (int i = 0; i < pixelCount; i++) {
 
-						int px = pixels[i].X;
-						int py = pixels[i].Y;
+						PointI p = pixels[i];
 
-						if (px < 0 || px >= srcSize.Width || py < 0 || py >= srcSize.Height)
+						if (p.X < 0 || p.X >= srcSize.Width || p.Y < 0 || p.Y >= srcSize.Height)
 							continue;
 
-						if (src.GetColorBgra (srcData, srcSize.Width, new PointI (px, py)).A <= tolerance)
+						if (src.GetColorBgra (srcData, srcSize.Width, p).A <= tolerance)
 							continue;
 
 						borderPixels.Add (potentialBorderPixel);
