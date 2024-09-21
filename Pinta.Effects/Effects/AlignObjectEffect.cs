@@ -1,6 +1,5 @@
 using System;
 using Cairo;
-using Gtk;
 using Pinta.Core;
 using Pinta.Gui.Widgets;
 
@@ -29,14 +28,12 @@ public sealed class AlignObjectEffect : BaseEffect
 	}
 	public override void LaunchConfiguration ()
 	{
-		var dialog = new AlignmentDialog (chrome);
+		AlignmentDialog dialog = new (chrome);
 
 		// Align to the default position
 		Data.Position = dialog.SelectedPosition;
 
-		dialog.PositionChanged += (sender, e) => {
-			Data.Position = dialog.SelectedPosition;
-		};
+		dialog.PositionChanged += (_, _) => Data.Position = dialog.SelectedPosition;
 
 		dialog.OnResponse += (_, args) => {
 			OnConfigDialogResponse (args.ResponseId == (int) Gtk.ResponseType.Ok);
@@ -61,55 +58,49 @@ public sealed class AlignObjectEffect : BaseEffect
 		MoveObject (src, dest, objectBounds, newPosition, selection);
 	}
 
-	private PointI CalculateNewPosition (RectangleI objectBounds, AlignPosition align, RectangleI selectionBounds)
+	private static PointI CalculateNewPosition (
+		RectangleI objectBounds,
+		AlignPosition align,
+		RectangleI selectionBounds)
 	{
-		int x = 0;
-		int y = 0;
-
-		// Align with the selection bounds
-		switch (align) {
-			case AlignPosition.TopLeft:
-				x = selectionBounds.X;
-				y = selectionBounds.Y;
-				break;
-			case AlignPosition.TopCenter:
-				x = selectionBounds.X + selectionBounds.Width / 2 - objectBounds.Width / 2;
-				y = selectionBounds.Y;
-				break;
-			case AlignPosition.TopRight:
-				x = selectionBounds.Right - objectBounds.Width;
-				y = selectionBounds.Y;
-				break;
-			case AlignPosition.CenterLeft:
-				x = selectionBounds.X;
-				y = selectionBounds.Y + selectionBounds.Height / 2 - objectBounds.Height / 2;
-				break;
-			case AlignPosition.Center:
-				x = selectionBounds.X + selectionBounds.Width / 2 - objectBounds.Width / 2;
-				y = selectionBounds.Y + selectionBounds.Height / 2 - objectBounds.Height / 2;
-				break;
-			case AlignPosition.CenterRight:
-				x = selectionBounds.Right - objectBounds.Width;
-				y = selectionBounds.Y + selectionBounds.Height / 2 - objectBounds.Height / 2;
-				break;
-			case AlignPosition.BottomLeft:
-				x = selectionBounds.X;
-				y = selectionBounds.Bottom - objectBounds.Height;
-				break;
-			case AlignPosition.BottomCenter:
-				x = selectionBounds.X + selectionBounds.Width / 2 - objectBounds.Width / 2;
-				y = selectionBounds.Bottom - objectBounds.Height;
-				break;
-			case AlignPosition.BottomRight:
-				x = selectionBounds.Right - objectBounds.Width;
-				y = selectionBounds.Bottom - objectBounds.Height;
-				break;
-		}
-
-		return new PointI (x, y);
+		return align switch {
+			AlignPosition.TopLeft => new (
+				selectionBounds.X,
+				selectionBounds.Y),
+			AlignPosition.TopCenter => new (
+				selectionBounds.X + selectionBounds.Width / 2 - objectBounds.Width / 2,
+				selectionBounds.Y),
+			AlignPosition.TopRight => new (
+				selectionBounds.Right - objectBounds.Width,
+				selectionBounds.Y),
+			AlignPosition.CenterLeft => new (
+				selectionBounds.X,
+				selectionBounds.Y + selectionBounds.Height / 2 - objectBounds.Height / 2),
+			AlignPosition.Center => new (
+				selectionBounds.X + selectionBounds.Width / 2 - objectBounds.Width / 2,
+				selectionBounds.Y + selectionBounds.Height / 2 - objectBounds.Height / 2),
+			AlignPosition.CenterRight => new (
+				selectionBounds.Right - objectBounds.Width,
+				selectionBounds.Y + selectionBounds.Height / 2 - objectBounds.Height / 2),
+			AlignPosition.BottomLeft => new (
+				selectionBounds.X,
+				selectionBounds.Bottom - objectBounds.Height),
+			AlignPosition.BottomCenter => new (
+				selectionBounds.X + selectionBounds.Width / 2 - objectBounds.Width / 2,
+				selectionBounds.Bottom - objectBounds.Height),
+			AlignPosition.BottomRight => new (
+				selectionBounds.Right - objectBounds.Width,
+				selectionBounds.Bottom - objectBounds.Height),
+			_ => PointI.Zero,
+		};
 	}
 
-	private void MoveObject (ImageSurface src, ImageSurface dest, RectangleI objectBounds, PointI newPosition, RectangleI selectionBounds)
+	private static void MoveObject (
+		ImageSurface src,
+		ImageSurface dest,
+		RectangleI objectBounds,
+		PointI newPosition,
+		RectangleI selectionBounds)
 	{
 		var src_data = src.GetReadOnlyPixelData ();
 		var dst_data = dest.GetPixelData ();
@@ -119,7 +110,6 @@ public sealed class AlignObjectEffect : BaseEffect
 		var backgroundColor = src.GetColorBgra (new PointI (selectionBounds.Left, selectionBounds.Top));
 		for (int y = 0; y < selectionBounds.Height; y++) {
 			var dst_row = dst_data.Slice ((selectionBounds.Y + y) * width + selectionBounds.X, selectionBounds.Width);
-
 			dst_row.Fill (backgroundColor);
 		}
 
@@ -127,7 +117,6 @@ public sealed class AlignObjectEffect : BaseEffect
 		for (int y = 0; y < objectBounds.Height; y++) {
 			var src_row = src_data.Slice ((objectBounds.Y + y) * width + objectBounds.X, objectBounds.Width);
 			var dst_row = dst_data.Slice ((newPosition.Y + y) * width + newPosition.X, objectBounds.Width);
-
 			src_row.CopyTo (dst_row);
 		}
 	}
@@ -140,27 +129,26 @@ public sealed class AlignObjectEffect : BaseEffect
 		public AlignPosition Position {
 			get => position;
 			set {
-				if (value != position) {
-					position = value;
-					FirePropertyChanged (nameof (Position));
-				}
+				if (value == position) return;
+				position = value;
+				FirePropertyChanged (nameof (Position));
 			}
 		}
 
 		[Skip]
 		public override bool IsDefault => Position == AlignPosition.Center;
 	}
-}
 
-public enum AlignPosition
-{
-	TopLeft,
-	TopCenter,
-	TopRight,
-	CenterLeft,
-	Center,
-	CenterRight,
-	BottomLeft,
-	BottomCenter,
-	BottomRight
+	public enum AlignPosition
+	{
+		TopLeft,
+		TopCenter,
+		TopRight,
+		CenterLeft,
+		Center,
+		CenterRight,
+		BottomLeft,
+		BottomCenter,
+		BottomRight,
+	}
 }
