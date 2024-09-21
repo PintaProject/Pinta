@@ -68,12 +68,13 @@ public static class OtherExtensions
 
 	private sealed class ImmutableBackedReadOnlyCollection<T> : ReadOnlyCollection<T>
 	{
-		internal ImmutableBackedReadOnlyCollection (ImmutableList<T> list) : base (list)
-		{
-		}
-		internal ImmutableBackedReadOnlyCollection (ImmutableArray<T> array) : base (array)
-		{
-		}
+		internal ImmutableBackedReadOnlyCollection (ImmutableList<T> list)
+			: base (list)
+		{ }
+
+		internal ImmutableBackedReadOnlyCollection (ImmutableArray<T> array)
+			: base (array)
+		{ }
 	}
 
 	public static IEnumerable<RectangleI> VerticalSliceup (this RectangleI original)
