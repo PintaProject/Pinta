@@ -51,7 +51,7 @@ internal sealed class RectangleTests
 	[TestCaseSource (nameof (vertical_slicing_cases))]
 	public void CorrectVerticalSlicing (RectangleI original, IReadOnlyList<RectangleI> expectedSlices)
 	{
-		var actualSlices = original.VerticalSliceup ().ToArray ();
+		var actualSlices = original.ToRows ().ToArray ();
 		Assert.That (actualSlices.Length, Is.EqualTo (expectedSlices.Count));
 		for (int i = 0; i < expectedSlices.Count; i++)
 			Assert.That (actualSlices[i], Is.EqualTo (expectedSlices[i]));

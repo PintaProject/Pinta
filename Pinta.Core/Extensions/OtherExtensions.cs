@@ -77,7 +77,7 @@ public static class OtherExtensions
 		{ }
 	}
 
-	public static IEnumerable<RectangleI> VerticalSliceup (this RectangleI original)
+	public static IEnumerable<RectangleI> ToRows (this RectangleI original)
 	{
 		if (original.Height < 0) throw new ArgumentException ("Height cannot be negative", nameof (original));
 		if (original.Height == 0) yield break;

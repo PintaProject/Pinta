@@ -58,12 +58,9 @@ internal abstract class AsyncEffectRenderer
 			ThreadPriority threadPriority)
 		{
 			if (renderBounds.Width < 0) throw new ArgumentException ("Width cannot be negative", nameof (renderBounds));
-			if (renderBounds.Height < 0) throw new ArgumentException ("Cannot be negative", nameof (renderBounds));
+			if (renderBounds.Height < 0) throw new ArgumentException ("Height cannot be negative", nameof (renderBounds));
 			if (updateMilliseconds <= 0) throw new ArgumentOutOfRangeException (nameof (updateMilliseconds), "Strictly positive value expected");
 			if (threadCount < 1) throw new ArgumentOutOfRangeException (nameof (threadCount), "Invalid number of threads");
-
-			// If the effect isn't tileable, there is a single tile for the entire render bounds.
-			// Otherwise, render each row in parallel.
 			RenderBounds = renderBounds;
 			EffectIsTileable = effectIsTileable;
 			ThreadCount = threadCount;
@@ -106,8 +103,8 @@ internal abstract class AsyncEffectRenderer
 		timer_tick_id = 0;
 		target_tiles =
 			settings.EffectIsTileable
-			? settings.RenderBounds.VerticalSliceup ().ToImmutableArray ()
-			: ImmutableArray.Create (settings.RenderBounds);
+			? settings.RenderBounds.ToRows ().ToImmutableArray () // If effect is tileable, render each row in parallel.
+			: ImmutableArray.Create (settings.RenderBounds); // If the effect isn't tileable, there is a single tile for the entire render bounds
 
 		this.settings = settings;
 	}
@@ -247,16 +244,14 @@ internal abstract class AsyncEffectRenderer
 	void RenderTile (int renderId, int threadId, int tileIndex)
 	{
 		Exception? exception = null;
-		RectangleI bounds = new ();
+		RectangleI tileBounds = target_tiles[tileIndex];
 
 		try {
-			bounds = target_tiles[tileIndex]; // Get tile bounds
-
 			// NRT - These are set in Start () before getting here
 			if (!cancel_render_flag) {
 				dest_surface!.Flush ();
-				effect!.Render (source_surface!, dest_surface, stackalloc[] { bounds });
-				dest_surface.MarkDirty (bounds);
+				effect!.Render (source_surface!, dest_surface, stackalloc[] { tileBounds });
+				dest_surface.MarkDirty (tileBounds);
 			}
 
 		} catch (Exception ex) {
@@ -271,10 +266,10 @@ internal abstract class AsyncEffectRenderer
 		// Update bounds to be shown on next expose.
 		lock (updated_lock) {
 			if (is_updated) {
-				updated_area = RectangleI.Union (bounds, updated_area);
+				updated_area = RectangleI.Union (tileBounds, updated_area);
 			} else {
 				is_updated = true;
-				updated_area = bounds;
+				updated_area = tileBounds;
 			}
 		}
 
@@ -310,9 +305,10 @@ internal abstract class AsyncEffectRenderer
 
 	void HandleRenderCompletion ()
 	{
-		var exceptions = (render_exceptions.Count == 0)
-				? Array.Empty<Exception> ()
-				: render_exceptions.ToArray ();
+		var exceptions =
+			render_exceptions.Count == 0
+			? Array.Empty<Exception> ()
+			: render_exceptions.ToArray ();
 
 		HandleTimerTick ();
 
