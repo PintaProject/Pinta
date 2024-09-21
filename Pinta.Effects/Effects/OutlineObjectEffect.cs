@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Concurrent;
+using System.Collections.Immutable;
 using System.Linq;
 using System.Threading.Tasks;
 using Cairo;
@@ -10,7 +11,6 @@ namespace Pinta.Effects;
 
 public sealed class OutlineObjectEffect : BaseEffect
 {
-
 	public override string Icon => Pinta.Resources.Icons.EffectsStylizeOutline;
 
 	// Takes two passes, so must be multithreaded internally
@@ -41,40 +41,48 @@ public sealed class OutlineObjectEffect : BaseEffect
 
 	protected override void Render (ImageSurface src, ImageSurface dest, RectangleI roi)
 	{
-		int top = roi.Top;
-		int bottom = roi.Bottom;
-		int left = roi.Left;
-		int right = roi.Right;
-		int srcHeight = src.Height;
-		int srcWidth = src.Width;
+		Size srcSize = src.GetSize ();
 		int radius = Data.Radius;
 		int threads = system.RenderThreads;
+		int tolerance = Data.Tolerance;
 
 		ColorBgra primaryColor = palette.PrimaryColor.ToColorBgra ();
 		ColorBgra secondaryColor = palette.SecondaryColor.ToColorBgra ();
-		ConcurrentBag<PointI> borderPixels = new ConcurrentBag<PointI> ();
+
+		ConcurrentBag<PointI> borderPixels = new ();
 
 		// First pass
 		// Clean up dest, then collect all border pixels
-		Parallel.For (top, bottom + 1, new ParallelOptions { MaxDegreeOfParallelism = threads }, y => {
-			var srcData = src.GetReadOnlyPixelData ();
+		Parallel.For (
+			roi.Top,
+			roi.Bottom + 1,
+			new ParallelOptions { MaxDegreeOfParallelism = threads },
+			y => {
+				var srcData = src.GetReadOnlyPixelData ();
 
-			// reset dest to src
-			// Removing this causes preview to not update to lower radius levels
-			var srcRow = srcData.Slice (y * srcWidth, srcWidth);
-			var dstRow = dest.GetPixelData ().Slice (y * srcWidth, srcWidth);
-			srcRow.CopyTo (dstRow);
+				// reset dest to src
+				// Removing this causes preview to not update to lower radius levels
+				var srcRow = srcData.Slice (y * srcSize.Width, srcSize.Width);
+				var dstRow = dest.GetPixelData ().Slice (y * srcSize.Width, srcSize.Width);
+				srcRow.CopyTo (dstRow);
 
-			// Produces different behaviour at radius == 0 and radius == 1
-			// When radius == 0, only consider direct border pixels
-			// When radius == 1, consider border pixels on diagonal
-			Span<PointI> pixels = stackalloc PointI[8];
-			// Collect a list of pixels that surround the object (border pixels)
-			for (int x = left; x <= right; x++) {
-				PointI potentialBorderPixel = new (x, y);
-				if (Data.OutlineBorder && (x == 0 || x == srcWidth - 1 || y == 0 || y == srcHeight - 1)) {
-					borderPixels.Add (potentialBorderPixel);
-				} else if (src.GetColorBgra (srcData, srcWidth, potentialBorderPixel).A <= Data.Tolerance) {
+				// Produces different behaviour at radius == 0 and radius == 1
+				// When radius == 0, only consider direct border pixels
+				// When radius == 1, consider border pixels on diagonal
+				Span<PointI> pixels = stackalloc PointI[8];
+				// Collect a list of pixels that surround the object (border pixels)
+				for (int x = roi.Left; x <= roi.Right; x++) {
+
+					PointI potentialBorderPixel = new (x, y);
+
+					if (Data.OutlineBorder && (x == 0 || x == srcSize.Width - 1 || y == 0 || y == srcSize.Height - 1)) {
+						borderPixels.Add (potentialBorderPixel);
+						continue;
+					}
+
+					if (src.GetColorBgra (srcData, srcSize.Width, potentialBorderPixel).A > tolerance)
+						continue;
+
 					// Test pixel above, below, left, & right
 					pixels[0] = new (x - 1, y);
 					pixels[1] = new (x + 1, y);
@@ -91,84 +99,104 @@ public sealed class OutlineObjectEffect : BaseEffect
 					}
 
 					for (int i = 0; i < pixelCount; i++) {
-						var px = pixels[i].X;
-						var py = pixels[i].Y;
-						if (px < 0 || px >= srcWidth || py < 0 || py >= srcHeight)
+
+						PointI p = pixels[i];
+
+						if (p.X < 0 || p.X >= srcSize.Width || p.Y < 0 || p.Y >= srcSize.Height)
 							continue;
-						if (src.GetColorBgra (srcData, srcWidth, new PointI (px, py)).A > Data.Tolerance) {
-							borderPixels.Add (potentialBorderPixel);
-							// Remove comments below to draw border pixels
-							// You will also have to comment out the 2nd pass because it will overwrite this
-							//int pos = srcWidth * y + x;
-							//borderData[pos].Bgra = 0;
-							//borderData[pos].A = 255;
 
-							break;
-						}
+						if (src.GetColorBgra (srcData, srcSize.Width, p).A <= tolerance)
+							continue;
+
+						borderPixels.Add (potentialBorderPixel);
+						// Remove comments below to draw border pixels
+						// You will also have to comment out the 2nd pass because it will overwrite this
+						//int pos = srcWidth * y + x;
+						//borderData[pos].Bgra = 0;
+						//borderData[pos].A = 255;
+
+						break;
 					}
-
-
 				}
 			}
-		});
-
+		);
 
 		// Second pass
 		// Generate outline and blend to dest
-		Parallel.For (top, bottom + 1, new ParallelOptions { MaxDegreeOfParallelism = threads }, y => {
-			// otherwise produces nothing at radius == 0
-			if (radius == 0)
-				radius = 1;
-			var relevantBorderPixels = borderPixels.Where (borderPixel => borderPixel.Y > y - radius && borderPixel.Y < y + radius).ToArray ();
-			var destRow = dest.GetPixelData ().Slice (y * srcWidth, srcWidth);
-			Span<ColorBgra> outlineRow = stackalloc ColorBgra[destRow.Length];
+		Parallel.For (
+			roi.Top,
+			roi.Bottom + 1,
+			new ParallelOptions { MaxDegreeOfParallelism = threads },
+			y => {
+				// otherwise produces nothing at radius == 0
+				if (radius == 0)
+					radius = 1;
 
-			for (int x = left; x <= right; x++) {
-				byte highestAlpha = 0;
+				var relevantBorderPixels =
+					borderPixels
+					.Where (borderPixel => borderPixel.Y > y - radius && borderPixel.Y < y + radius)
+					.ToImmutableArray ();
 
-				// optimization: no change if destination has max alpha already
-				if (destRow[x].A == 255)
-					continue;
+				var destRow = dest.GetPixelData ().Slice (y * srcSize.Width, srcSize.Width);
+				Span<ColorBgra> outlineRow = stackalloc ColorBgra[destRow.Length];
 
-				if (Data.FillObjectBackground && destRow[x].A >= Data.Tolerance)
-					highestAlpha = 255;
+				for (int x = roi.Left; x <= roi.Right; x++) {
 
-				// Grab nearest border pixel, and calculate outline alpha based off it
-				foreach (var borderPixel in relevantBorderPixels) {
-					if (borderPixel.X == x && borderPixel.Y == y)
+					byte highestAlpha = 0;
+
+					// optimization: no change if destination has max alpha already
+					if (destRow[x].A == 255)
+						continue;
+
+					if (Data.FillObjectBackground && destRow[x].A >= tolerance)
 						highestAlpha = 255;
 
-					if (highestAlpha == 255)
-						break;
+					// Grab nearest border pixel, and calculate outline alpha based off it
+					foreach (var borderPixel in relevantBorderPixels) {
 
-					if (borderPixel.X > x - radius && borderPixel.X < x + radius) {
-						var dx = borderPixel.X - x;
-						var dy = borderPixel.Y - y;
+						if (borderPixel.X == x && borderPixel.Y == y)
+							highestAlpha = 255;
+
+						if (highestAlpha == 255)
+							break;
+
+						if (borderPixel.X <= x - radius || borderPixel.X >= x + radius)
+							continue;
+
+						int dx = borderPixel.X - x;
+						int dy = borderPixel.Y - y;
 						float distance = MathF.Sqrt (dx * dx + dy * dy);
-						if (distance <= radius) {
-							float mult = 1 - distance / radius;
-							if (mult <= 0)
-								continue;
-							byte alpha = (byte) (255 * mult);
-							if (alpha > highestAlpha)
-								highestAlpha = alpha;
-						}
+
+						if (distance > radius)
+							continue;
+
+						float mult = 1 - distance / radius;
+
+						if (mult <= 0)
+							continue;
+
+						byte alpha = (byte) (255 * mult);
+
+						if (alpha > highestAlpha)
+							highestAlpha = alpha;
 					}
+
+					// Handle color gradient / no alpha gradient option
+					ColorBgra color = primaryColor;
+
+					if (Data.ColorGradient)
+						color = ColorBgra.Blend (secondaryColor, primaryColor, highestAlpha);
+
+					if (!Data.AlphaGradient && highestAlpha != 0)
+						highestAlpha = 255;
+
+					outlineRow[x] = color.NewAlpha (highestAlpha).ToPremultipliedAlpha ();
 				}
-
-				// Handle color gradient / no alpha gradient option
-				var color = primaryColor;
-				if (Data.ColorGradient)
-					color = ColorBgra.Blend (secondaryColor, primaryColor, highestAlpha);
-				if (!Data.AlphaGradient && highestAlpha != 0)
-					highestAlpha = 255;
-
-				outlineRow[x] = color.NewAlpha (highestAlpha).ToPremultipliedAlpha ();
+				// Performs alpha blending
+				new UserBlendOps.NormalBlendOp ().Apply (outlineRow, destRow);
+				outlineRow.CopyTo (destRow);
 			}
-			// Performs alpha blending
-			new UserBlendOps.NormalBlendOp ().Apply (outlineRow, destRow);
-			outlineRow.CopyTo (destRow);
-		});
+		);
 	}
 
 	public sealed class OutlineObjectData : EffectData
