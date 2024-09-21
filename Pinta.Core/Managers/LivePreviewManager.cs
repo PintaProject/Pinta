@@ -123,17 +123,10 @@ public sealed class LivePreviewManager
 
 		Started?.Invoke (this, new LivePreviewStartedEventArgs ());
 
-		// If the effect isn't tileable, there is a single tile for the entire render bounds.
-		// Otherwise, render each row in parallel.
-		int tileWidth = render_bounds.Width;
-		int tileHeight = 1;
-		if (!effect.IsTileable)
-			tileHeight = render_bounds.Height;
-
 		AsyncEffectRenderer.Settings settings = new (
 			threadCount: system_manager.RenderThreads,
-			tileWidth: tileWidth,
-			tileHeight: tileHeight,
+			renderBounds: render_bounds,
+			effectIsTileable: effect.IsTileable,
 			updateMilliseconds: 100,
 			threadPriority: ThreadPriority.BelowNormal);
 

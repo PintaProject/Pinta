@@ -76,6 +76,18 @@ public static class OtherExtensions
 		}
 	}
 
+	public static IEnumerable<RectangleI> VerticalSliceup (this RectangleI original)
+	{
+		if (original.Height < 0) throw new ArgumentException ("Height cannot be negative", nameof (original));
+		if (original.Height == 0) yield break;
+		for (int i = 0; i < original.Height; i++)
+			yield return new (
+				original.X,
+				original.Y + i,
+				original.Width,
+				1);
+	}
+
 	public static bool In<T> (this T enumeration, params T[] values)
 	{
 		if (enumeration is null)

@@ -51,17 +51,20 @@ internal abstract class AsyncEffectRenderer
 
 		internal Settings (
 			int threadCount,
-			int tileWidth,
-			int tileHeight,
+			RectangleI renderBounds,
+			bool effectIsTileable,
 			int updateMilliseconds,
 			ThreadPriority threadPriority)
 		{
-			if (tileWidth < 0) throw new ArgumentOutOfRangeException (nameof (tileWidth), "Cannot be negative");
-			if (tileHeight < 0) throw new ArgumentOutOfRangeException (nameof (tileHeight), "Cannot be negative");
+			if (renderBounds.Width < 0) throw new ArgumentException ("Width cannot be negative", nameof (renderBounds));
+			if (renderBounds.Height < 0) throw new ArgumentException ("Cannot be negative", nameof (renderBounds));
 			if (updateMilliseconds <= 0) throw new ArgumentOutOfRangeException (nameof (updateMilliseconds), "Strictly positive value expected");
 			if (threadCount < 1) throw new ArgumentOutOfRangeException (nameof (threadCount), "Invalid number of threads");
-			TileWidth = tileWidth;
-			TileHeight = tileHeight;
+
+			// If the effect isn't tileable, there is a single tile for the entire render bounds.
+			// Otherwise, render each row in parallel.
+			TileWidth = renderBounds.Width;
+			TileHeight = effectIsTileable ? 1 : renderBounds.Height;
 			ThreadCount = threadCount;
 			UpdateMillis = updateMilliseconds;
 			ThreadPriority = threadPriority;
@@ -193,7 +196,7 @@ internal abstract class AsyncEffectRenderer
 			slaves[threadId - 1] = StartSlaveThread (renderId, threadId);
 
 		// Start the master render thread.
-		var master = new Thread (() => {
+		Thread master = new (() => {
 
 			// Do part of the rendering on the master thread.
 			Render (renderId, 0);
@@ -244,10 +247,9 @@ internal abstract class AsyncEffectRenderer
 	void RenderTile (int renderId, int threadId, int tileIndex)
 	{
 		Exception? exception = null;
-		var bounds = new RectangleI ();
+		RectangleI bounds = new ();
 
 		try {
-
 			bounds = GetTileBounds (tileIndex);
 
 			// NRT - These are set in Start () before getting here
@@ -284,17 +286,14 @@ internal abstract class AsyncEffectRenderer
 	}
 
 	// Runs on a background thread.
-	RectangleI GetTileBounds (int tileIndex)
+	private RectangleI GetTileBounds (int tileIndex)
 	{
-		int horizTileCount = (int) Math.Ceiling (render_bounds.Width
-						       / (float) settings.TileWidth);
-
+		int horizTileCount = (int) Math.Ceiling (render_bounds.Width / (float) settings.TileWidth);
 		int x = ((tileIndex % horizTileCount) * settings.TileWidth) + render_bounds.X;
 		int y = ((tileIndex / horizTileCount) * settings.TileHeight) + render_bounds.Y;
 		int w = Math.Min (settings.TileWidth, render_bounds.Right + 1 - x);
 		int h = Math.Min (settings.TileHeight, render_bounds.Bottom + 1 - y);
-
-		return new RectangleI (x, y, w, h);
+		return new (x, y, w, h);
 	}
 
 	int CalculateTotalTiles ()
