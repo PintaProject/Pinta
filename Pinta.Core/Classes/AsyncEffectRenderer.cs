@@ -31,6 +31,7 @@
 using System;
 using System.Collections.Generic;
 using System.Collections.Immutable;
+using System.Linq;
 using System.Threading;
 using Debug = System.Diagnostics.Debug;
 
@@ -187,13 +188,21 @@ internal abstract class AsyncEffectRenderer
 		int renderId = render_id;
 
 		// Start slave render threads.
-		int threadCount = settings.ThreadCount;
-		var slaves = new Thread[threadCount - 1];
-		for (int threadId = 1; threadId < threadCount; threadId++)
-			slaves[threadId - 1] = StartSlaveThread (renderId);
+		var slaves =
+			Enumerable.Range (0, settings.ThreadCount - 1)
+			.Select (StartSlaveThread)
+			.ToImmutableArray ();
 
 		// Start the master render thread.
-		Thread master = new (() => {
+		Thread master = StartMasterThread (renderId, slaves);
+
+		// Start timer used to periodically fire update events on the UI thread.
+		timer_tick_id = GLib.Functions.TimeoutAdd (0, (uint) settings.UpdateMillis, () => HandleTimerTick ());
+	}
+
+	Thread StartMasterThread (int renderId, ImmutableArray<Thread> slaves)
+	{
+		return StartRenderThread (() => {
 
 			// Do part of the rendering on the master thread.
 			Render (renderId);
@@ -207,25 +216,20 @@ internal abstract class AsyncEffectRenderer
 				HandleRenderCompletion ();
 				return false; // don't call the timer again
 			});
-		}) {
-			Priority = settings.ThreadPriority
-		};
-		master.Start ();
 
-		// Start timer used to periodically fire update events on the UI thread.
-		timer_tick_id = GLib.Functions.TimeoutAdd (0, (uint) settings.UpdateMillis, () => HandleTimerTick ());
+		});
 	}
 
 	Thread StartSlaveThread (int renderId)
 	{
-		Thread slave = new (() => {
-			Render (renderId);
-		}) {
-			Priority = settings.ThreadPriority
-		};
-		slave.Start ();
+		return StartRenderThread (() => Render (renderId));
+	}
 
-		return slave;
+	Thread StartRenderThread (ThreadStart callback)
+	{
+		Thread result = new (callback) { Priority = settings.ThreadPriority };
+		result.Start ();
+		return result;
 	}
 
 	// Runs on a background thread.
