@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: pinta\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-09-08 01:27+0000\n"
+"POT-Creation-Date: 2024-09-22 01:36+0000\n"
 "PO-Revision-Date: 2024-09-09 05:09+0000\n"
 "Last-Translator: Matthieu LAURENT <matthieu.laurent69@proton.me>\n"
 "Language-Team: French <https://hosted.weblate.org/projects/pinta/pinta/fr/>\n"
@@ -88,7 +88,7 @@ msgid "After select"
 msgstr "Après la sélection"
 
 #: ../Pinta.Effects/Dialogs/Effects.AlignmentDialog.cs:65
-#: ../Pinta.Effects/Effects/AlignObjectEffect.cs:13
+#: ../Pinta.Effects/Effects/AlignObjectEffect.cs:12
 msgid "Align Object"
 msgstr "Aligner l'Objet"
 
@@ -97,6 +97,10 @@ msgstr "Aligner l'Objet"
 #: ../Pinta/Actions/File/OpenDocumentAction.cs:106
 msgid "All files"
 msgstr "Tous les fichiers"
+
+#: ../Pinta.Effects/Effects/OutlineObjectEffect.cs:210
+msgid "Alpha Gradient"
+msgstr ""
 
 #: ../Pinta.Effects/Effects/BulgeEffect.cs:109
 #: ../Pinta.Effects/Effects/FrostedGlassEffect.cs:149
@@ -462,6 +466,10 @@ msgstr "Densité couleur +"
 msgid "Color Dodge"
 msgstr "Densité couleur -"
 
+#: ../Pinta.Effects/Effects/OutlineObjectEffect.cs:213
+msgid "Color Gradient"
+msgstr ""
+
 #: ../Pinta.Tools/Tools/GradientTool.cs:203
 msgid "Color Mode"
 msgstr "Mode de couleur"
@@ -762,13 +770,13 @@ msgstr "Impossible d'enregistrer l'image"
 msgid "Failed to take screenshot"
 msgstr "Impossible de faire une capture d'écran"
 
-#: ../Pinta.Effects/Effects/FeatherEffect.cs:19
-msgid "Feather"
-msgstr "Plume"
-
-#: ../Pinta.Effects/Effects/FeatherEffect.cs:143
+#: ../Pinta.Effects/Effects/FeatherEffect.cs:169
 msgid "Feather Canvas Edge"
 msgstr "Adoucir le Bord du Canevas"
+
+#: ../Pinta.Effects/Effects/FeatherEffect.cs:19
+msgid "Feather Object"
+msgstr ""
 
 #: ../Pinta.Core/Actions/HelpActions.cs:46
 msgid "File a Bug"
@@ -781,6 +789,10 @@ msgstr "Fichiers à ouvrir"
 #: ../Pinta.Tools/Tools/TextTool.cs:272
 msgid "Fill Background"
 msgstr "Remplir le fond"
+
+#: ../Pinta.Effects/Effects/OutlineObjectEffect.cs:219
+msgid "Fill Object Background"
+msgstr ""
 
 #: ../Pinta.Core/Actions/EditActions.cs:77
 #: ../Pinta.Core/Actions/EditActions.cs:228
@@ -1051,7 +1063,7 @@ msgid "Installed"
 msgstr "Installé"
 
 #: ../Pinta.Effects/Effects/AddNoiseEffect.cs:167
-#: ../Pinta.Effects/Effects/OutlineEffect.cs:139
+#: ../Pinta.Effects/Effects/OutlineEdgeEffect.cs:139
 #: ../Pinta.Effects/Effects/TileEffect.cs:180
 msgid "Intensity"
 msgstr "Intensité"
@@ -1455,8 +1467,9 @@ msgstr "Nombre de cellules"
 msgid "Number of threads to use for rendering"
 msgstr "Nombre de fils d'éxecution à utiliser pour le rendu"
 
-#: ../Pinta.Effects/Effects/AlignObjectEffect.cs:15
+#: ../Pinta.Effects/Effects/AlignObjectEffect.cs:14
 #: ../Pinta.Effects/Effects/FeatherEffect.cs:23
+#: ../Pinta.Effects/Effects/OutlineObjectEffect.cs:23
 msgid "Object"
 msgstr "Objet"
 
@@ -1524,10 +1537,21 @@ msgstr "Orientation :"
 msgid "Original"
 msgstr "Original"
 
-#: ../Pinta.Effects/Effects/OutlineEffect.cs:26
 #: ../Pinta.Tools/Tools/TextTool.cs:271
 msgid "Outline"
 msgstr "Sélection des contours"
+
+#: ../Pinta.Effects/Effects/OutlineObjectEffect.cs:216
+msgid "Outline Border"
+msgstr ""
+
+#: ../Pinta.Effects/Effects/OutlineEdgeEffect.cs:26
+msgid "Outline Edge"
+msgstr ""
+
+#: ../Pinta.Effects/Effects/OutlineObjectEffect.cs:19
+msgid "Outline Object"
+msgstr ""
 
 #: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:311
 #: ../Pinta.Tools/Tools/FreeformShapeTool.cs:221
@@ -1699,7 +1723,7 @@ msgstr "Transformation symétrique"
 msgid "Portrait"
 msgstr "Portrait"
 
-#: ../Pinta.Effects/Effects/AlignObjectEffect.cs:139
+#: ../Pinta.Effects/Effects/AlignObjectEffect.cs:128
 msgid "Position"
 msgstr "Position"
 
@@ -1764,10 +1788,11 @@ msgstr "Flou radial"
 msgid "Radial Gradient"
 msgstr "Dégradé radial"
 
-#: ../Pinta.Effects/Effects/FeatherEffect.cs:137
+#: ../Pinta.Effects/Effects/FeatherEffect.cs:163
 #: ../Pinta.Effects/Effects/GaussianBlurEffect.cs:246
 #: ../Pinta.Effects/Effects/GlowEffect.cs:76
 #: ../Pinta.Effects/Effects/MedianEffect.cs:62
+#: ../Pinta.Effects/Effects/OutlineObjectEffect.cs:204
 #: ../Pinta.Effects/Effects/ReduceNoiseEffect.cs:89
 #: ../Pinta.Effects/Effects/UnfocusEffect.cs:94
 #: ../Pinta.Tools/Editable/EditEngines/RoundedLineEditEngine.cs:92
@@ -1865,7 +1890,7 @@ msgstr "Renommer le calque"
 msgid "Render"
 msgstr "Effectuer le rendu"
 
-#: ../Pinta.Core/Managers/LivePreviewManager.cs:211
+#: ../Pinta.Core/Managers/LivePreviewManager.cs:204
 msgid "Rendering Effect"
 msgstr "Effet de rendu"
 
@@ -1894,7 +1919,7 @@ msgstr "Réinitialiser"
 msgid "Reset to Default"
 msgstr "Réinitialiser"
 
-#: ../Pinta.Core/Classes/Document.cs:313
+#: ../Pinta.Core/Classes/Document.cs:310
 #: ../Pinta/Dialogs/ResizeCanvasDialog.cs:169
 msgid "Resize Canvas"
 msgstr "Redimensionner le canevas"
@@ -1903,7 +1928,7 @@ msgstr "Redimensionner le canevas"
 msgid "Resize Canvas..."
 msgstr "Redimensionner le canevas..."
 
-#: ../Pinta.Core/HistoryItems/ResizeHistoryItem.cs:38
+#: ../Pinta.Core/HistoryItems/ResizeHistoryItem.cs:39
 #: ../Pinta/Dialogs/ResizeImageDialog.cs:84
 msgid "Resize Image"
 msgstr "Redimensionner l'image"
@@ -2134,7 +2159,7 @@ msgstr ""
 
 #: ../Pinta.Effects/Effects/EdgeDetectEffect.cs:32
 #: ../Pinta.Effects/Effects/EmbossEffect.cs:32
-#: ../Pinta.Effects/Effects/OutlineEffect.cs:30
+#: ../Pinta.Effects/Effects/OutlineEdgeEffect.cs:30
 #: ../Pinta.Effects/Effects/ReliefEffect.cs:33
 msgid "Stylize"
 msgstr "Styliser"
@@ -2163,7 +2188,8 @@ msgstr "Style du texte"
 #: ../Pinta/MainWindow.cs:275
 #, csharp-format
 msgid "The '{0}' add-in may not be compatible with this version of Pinta"
-msgstr "Le plugin '{0}' peut ne pas être compatible avec cette version de Pinta"
+msgstr ""
+"Le plugin '{0}' peut ne pas être compatible avec cette version de Pinta"
 
 #: ../Pinta/Actions/Edit/PasteAction.cs:205
 msgid "The clipboard does not contain an image."
@@ -2223,7 +2249,7 @@ msgid ""
 "will also be uninstalled:"
 msgstr ""
 
-#: ../Pinta.Effects/Effects/OutlineEffect.cs:136
+#: ../Pinta.Effects/Effects/OutlineEdgeEffect.cs:136
 msgid "Thickness"
 msgstr "Épaisseur"
 
@@ -2243,7 +2269,8 @@ msgstr "Taille des carreaux"
 msgid "Tip: Right-click to remove control points."
 msgstr "Astuce : clic droit pour supprimer les points de contrôle."
 
-#: ../Pinta.Effects/Effects/FeatherEffect.cs:140
+#: ../Pinta.Effects/Effects/FeatherEffect.cs:166
+#: ../Pinta.Effects/Effects/OutlineObjectEffect.cs:207
 #: ../Pinta.Effects/Effects/RedEyeRemoveEffect.cs:52
 #: ../Pinta.Tools/Tools/FloodTool.cs:124
 #: ../Pinta.Tools/Tools/RecolorTool.cs:197
@@ -2593,7 +2620,7 @@ msgstr "{0} + Clic Gauche pour définir l'origine, clic gauche pour peindre."
 
 #. Translators: this is the auto-generated name for a duplicated layer.
 #. {0} is the name of the source layer. Example: "Layer 3 copy".
-#: ../Pinta.Core/Classes/DocumentLayers.cs:201
+#: ../Pinta.Core/Classes/DocumentLayers.cs:203
 #, csharp-format
 msgid "{0} copy"
 msgstr "Copie de {0}"
@@ -2615,6 +2642,9 @@ msgstr "Palette {0} ({1})"
 #, csharp-format
 msgid "{0}%"
 msgstr "{0} %"
+
+#~ msgid "Feather"
+#~ msgstr "Plume"
 
 #~ msgid "Don't change canvas size"
 #~ msgstr "Ne pas changer la taille du canevas"
