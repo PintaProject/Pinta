@@ -190,13 +190,13 @@ internal abstract class AsyncEffectRenderer
 		int threadCount = settings.ThreadCount;
 		var slaves = new Thread[threadCount - 1];
 		for (int threadId = 1; threadId < threadCount; threadId++)
-			slaves[threadId - 1] = StartSlaveThread (renderId, threadId);
+			slaves[threadId - 1] = StartSlaveThread (renderId);
 
 		// Start the master render thread.
 		Thread master = new (() => {
 
 			// Do part of the rendering on the master thread.
-			Render (renderId, 0);
+			Render (renderId);
 
 			// Wait for slave threads to complete.
 			foreach (var slave in slaves)
@@ -216,10 +216,10 @@ internal abstract class AsyncEffectRenderer
 		timer_tick_id = GLib.Functions.TimeoutAdd (0, (uint) settings.UpdateMillis, () => HandleTimerTick ());
 	}
 
-	Thread StartSlaveThread (int renderId, int threadId)
+	Thread StartSlaveThread (int renderId)
 	{
 		Thread slave = new (() => {
-			Render (renderId, threadId);
+			Render (renderId);
 		}) {
 			Priority = settings.ThreadPriority
 		};
@@ -229,19 +229,19 @@ internal abstract class AsyncEffectRenderer
 	}
 
 	// Runs on a background thread.
-	void Render (int renderId, int threadId)
+	void Render (int renderId)
 	{
 		// Fetch the next tile index and render it.
 		for (; ; ) {
 			int tileIndex = Interlocked.Increment (ref current_tile);
 			if (tileIndex >= target_tiles.Length || cancel_render_flag)
 				return;
-			RenderTile (renderId, threadId, tileIndex);
+			RenderTile (renderId, tileIndex);
 		}
 	}
 
 	// Runs on a background thread.
-	void RenderTile (int renderId, int threadId, int tileIndex)
+	void RenderTile (int renderId, int tileIndex)
 	{
 		Exception? exception = null;
 		RectangleI tileBounds = target_tiles[tileIndex];
