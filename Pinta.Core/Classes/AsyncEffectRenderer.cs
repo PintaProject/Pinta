@@ -29,7 +29,7 @@
 #endif
 
 using System;
-using System.Collections.Generic;
+using System.Collections.Concurrent;
 using System.Collections.Immutable;
 using System.Linq;
 using System.Threading;
@@ -80,7 +80,7 @@ internal abstract class AsyncEffectRenderer
 	int render_id;
 	int current_tile;
 	readonly ImmutableArray<RectangleI> target_tiles;
-	readonly List<Exception> render_exceptions;
+	readonly ConcurrentQueue<Exception> render_exceptions;
 
 	uint timer_tick_id;
 
@@ -99,7 +99,7 @@ internal abstract class AsyncEffectRenderer
 		render_id = 0;
 		updated_lock = new object ();
 		is_updated = false;
-		render_exceptions = new List<Exception> ();
+		render_exceptions = new ConcurrentQueue<Exception> ();
 
 		timer_tick_id = 0;
 		target_tiles =
@@ -274,9 +274,7 @@ internal abstract class AsyncEffectRenderer
 			if (exception == null)
 				continue;
 
-			lock (render_exceptions) {
-				render_exceptions.Add (exception);
-			}
+			render_exceptions.Enqueue (exception);
 		}
 	}
 
@@ -306,7 +304,7 @@ internal abstract class AsyncEffectRenderer
 	void HandleRenderCompletion ()
 	{
 		var exceptions =
-			render_exceptions.Count == 0
+			render_exceptions.IsEmpty
 			? Array.Empty<Exception> ()
 			: render_exceptions.ToArray ();
 
