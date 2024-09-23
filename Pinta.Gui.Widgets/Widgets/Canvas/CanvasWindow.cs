@@ -25,20 +25,21 @@
 // THE SOFTWARE.
 
 using System;
-using Gtk;
 using Pinta.Core;
 using Pinta.Gui.Widgets;
 
 namespace Pinta;
 
-public sealed class CanvasWindow : Grid
+public sealed class CanvasWindow : Gtk.Grid
 {
+	private WorkspaceManager workspace;
 	private readonly Document document;
+
 	private readonly Ruler horizontal_ruler;
 	private readonly Ruler vertical_ruler;
-	private readonly ScrolledWindow scrolled_window;
-	private readonly EventControllerMotion motion_controller;
-	private readonly GestureZoom gesture_zoom;
+	private readonly Gtk.ScrolledWindow scrolled_window;
+	private readonly Gtk.EventControllerMotion motion_controller;
+	private readonly Gtk.GestureZoom gesture_zoom;
 
 	private PointD current_window_pos = PointD.Zero;
 	private PointD current_canvas_pos = PointD.Zero;
@@ -50,26 +51,27 @@ public sealed class CanvasWindow : Grid
 
 	public PintaCanvas Canvas { get; }
 
-	public CanvasWindow (Document document)
+	public CanvasWindow (WorkspaceManager workspace, Document document)
 	{
+		this.workspace = workspace;
 		this.document = document;
 
 		ColumnHomogeneous = false;
 		RowHomogeneous = false;
 
-		scrolled_window = new ScrolledWindow ();
+		scrolled_window = new Gtk.ScrolledWindow ();
 
-		gesture_zoom = GestureZoom.New ();
-		gesture_zoom.SetPropagationPhase (PropagationPhase.Bubble);
+		gesture_zoom = Gtk.GestureZoom.New ();
+		gesture_zoom.SetPropagationPhase (Gtk.PropagationPhase.Bubble);
 		gesture_zoom.OnScaleChanged += HandleGestureZoomScaleChanged;
 		gesture_zoom.OnEnd += (_, _) => cumulative_zoom_amount = last_scale_delta = 0;
 		gesture_zoom.OnCancel += (_, _) => cumulative_zoom_amount = last_scale_delta = 0;
 
 		AddController (gesture_zoom);
 
-		var vp = new Viewport ();
+		Gtk.Viewport vp = new ();
 
-		var scroll_controller = Gtk.EventControllerScroll.New (EventControllerScrollFlags.BothAxes); // Both axes must be captured so the zoom gesture can cancel them
+		var scroll_controller = Gtk.EventControllerScroll.New (Gtk.EventControllerScrollFlags.BothAxes); // Both axes must be captured so the zoom gesture can cancel them
 		scroll_controller.OnScroll += HandleScrollEvent;
 		scroll_controller.OnDecelerate += (_, _) => gesture_zoom.IsActive (); // Cancel scroll deceleration when zooming
 		vp.AddController (scroll_controller);
@@ -82,15 +84,11 @@ public sealed class CanvasWindow : Grid
 		};
 
 		// Rulers
-		horizontal_ruler = new Ruler (Orientation.Horizontal) {
-			Metric = MetricType.Pixels
-		};
+		horizontal_ruler = new Ruler (Gtk.Orientation.Horizontal) { Metric = MetricType.Pixels };
 
 		Attach (horizontal_ruler, 1, 0, 1, 1);
 
-		vertical_ruler = new Ruler (Orientation.Vertical) {
-			Metric = MetricType.Pixels
-		};
+		vertical_ruler = new Ruler (Gtk.Orientation.Vertical) { Metric = MetricType.Pixels };
 
 		Attach (vertical_ruler, 0, 1, 1, 1);
 
@@ -111,14 +109,14 @@ public sealed class CanvasWindow : Grid
 
 		motion_controller = Gtk.EventControllerMotion.New ();
 		motion_controller.OnMotion += (_, args) => {
-			if (!PintaCore.Workspace.HasOpenDocuments)
+			if (!workspace.HasOpenDocuments)
 				return;
 
 			current_window_pos = new PointD (args.X, args.Y);
 			// These coordinates are relative to our grid widget, so transform into the child image
 			// view's coordinates, and then to the canvas coordinates.
 			this.TranslateCoordinates (Canvas, current_window_pos, out PointD view_pos);
-			current_canvas_pos = PintaCore.Workspace.ViewPointToCanvas (view_pos);
+			current_canvas_pos = workspace.ViewPointToCanvas (view_pos);
 
 			horizontal_ruler.Position = current_canvas_pos.X;
 			vertical_ruler.Position = current_canvas_pos.Y;
@@ -187,20 +185,22 @@ public sealed class CanvasWindow : Grid
 		if (scrolled_window.Hadjustment == null || scrolled_window.Vadjustment == null)
 			return;
 
-		if (PintaCore.Workspace.HasOpenDocuments) {
-			if (PintaCore.Workspace.Offset.X > 0) {
-				lower = lower with { X = -PintaCore.Workspace.Offset.X / PintaCore.Workspace.Scale };
-				upper = upper with { X = PintaCore.Workspace.ImageSize.Width - lower.X };
+		if (workspace.HasOpenDocuments) {
+
+			if (workspace.Offset.X > 0) {
+				lower = lower with { X = -workspace.Offset.X / workspace.Scale };
+				upper = upper with { X = workspace.ImageSize.Width - lower.X };
 			} else {
-				lower = lower with { X = scrolled_window.Hadjustment.Value / PintaCore.Workspace.Scale };
-				upper = upper with { X = (scrolled_window.Hadjustment.Value + scrolled_window.Hadjustment.PageSize) / PintaCore.Workspace.Scale };
+				lower = lower with { X = scrolled_window.Hadjustment.Value / workspace.Scale };
+				upper = upper with { X = (scrolled_window.Hadjustment.Value + scrolled_window.Hadjustment.PageSize) / workspace.Scale };
 			}
-			if (PintaCore.Workspace.Offset.Y > 0) {
-				lower = lower with { Y = -PintaCore.Workspace.Offset.Y / PintaCore.Workspace.Scale };
-				upper = upper with { Y = PintaCore.Workspace.ImageSize.Height - lower.Y };
+
+			if (workspace.Offset.Y > 0) {
+				lower = lower with { Y = -workspace.Offset.Y / workspace.Scale };
+				upper = upper with { Y = workspace.ImageSize.Height - lower.Y };
 			} else {
-				lower = lower with { Y = scrolled_window.Vadjustment.Value / PintaCore.Workspace.Scale };
-				upper = upper with { Y = (scrolled_window.Vadjustment.Value + scrolled_window.Vadjustment.PageSize) / PintaCore.Workspace.Scale };
+				lower = lower with { Y = scrolled_window.Vadjustment.Value / workspace.Scale };
+				upper = upper with { Y = (scrolled_window.Vadjustment.Value + scrolled_window.Vadjustment.PageSize) / workspace.Scale };
 			}
 		}
 
@@ -208,7 +208,7 @@ public sealed class CanvasWindow : Grid
 		vertical_ruler.SetRange (lower.Y, upper.Y);
 	}
 
-	private bool HandleScrollEvent (EventControllerScroll controller, EventControllerScroll.ScrollSignalArgs args)
+	private bool HandleScrollEvent (Gtk.EventControllerScroll controller, Gtk.EventControllerScroll.ScrollSignalArgs args)
 	{
 		if (gesture_zoom.IsActive ())
 			return true;

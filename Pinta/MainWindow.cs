@@ -161,7 +161,7 @@ public sealed class MainWindow
 		var notebook = canvas_pad.Notebook;
 		int selected_index = notebook.ActiveItemIndex;
 
-		CanvasWindow canvas = new (doc) {
+		CanvasWindow canvas = new (PintaCore.Workspace, doc) {
 			RulersVisible = PintaCore.Actions.View.Rulers.Value,
 			RulerMetric = GetCurrentRulerMetric ()
 		};
