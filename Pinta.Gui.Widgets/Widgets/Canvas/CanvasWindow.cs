@@ -32,7 +32,7 @@ namespace Pinta;
 
 public sealed class CanvasWindow : Gtk.Grid
 {
-	private WorkspaceManager workspace;
+	private readonly WorkspaceManager workspace;
 	private readonly Document document;
 
 	private readonly Ruler horizontal_ruler;
@@ -51,7 +51,9 @@ public sealed class CanvasWindow : Gtk.Grid
 
 	public PintaCanvas Canvas { get; }
 
-	public CanvasWindow (WorkspaceManager workspace, Document document)
+	public CanvasWindow (
+		WorkspaceManager workspace,
+		Document document)
 	{
 		this.workspace = workspace;
 		this.document = document;
@@ -79,9 +81,7 @@ public sealed class CanvasWindow : Gtk.Grid
 		// The mouse handler in PintaCanvas grabs focus away from toolbar widgets.
 		Focusable = true;
 
-		Canvas = new PintaCanvas (this, document) {
-			Name = "canvas",
-		};
+		Canvas = new PintaCanvas (this, document) { Name = "canvas" };
 
 		// Rulers
 		horizontal_ruler = new Ruler (Gtk.Orientation.Horizontal) { Metric = MetricType.Pixels };
@@ -160,20 +160,18 @@ public sealed class CanvasWindow : Gtk.Grid
 	public bool RulersVisible {
 		get => horizontal_ruler.Visible;
 		set {
-			if (horizontal_ruler.Visible != value) {
-				horizontal_ruler.Visible = value;
-				vertical_ruler.Visible = value;
-			}
+			if (horizontal_ruler.Visible == value) return;
+			horizontal_ruler.Visible = value;
+			vertical_ruler.Visible = value;
 		}
 	}
 
 	public MetricType RulerMetric {
 		get => horizontal_ruler.Metric;
 		set {
-			if (horizontal_ruler.Metric != value) {
-				horizontal_ruler.Metric = value;
-				vertical_ruler.Metric = value;
-			}
+			if (horizontal_ruler.Metric == value) return;
+			horizontal_ruler.Metric = value;
+			vertical_ruler.Metric = value;
 		}
 	}
 
@@ -217,10 +215,12 @@ public sealed class CanvasWindow : Gtk.Grid
 			return false;
 
 		// "clicky" scroll wheels generate 1 or -1
+
 		if (args.Dy == -1) {
 			document.Workspace.ZoomInAroundCanvasPoint (current_canvas_pos);
 			return true;
 		}
+
 		if (args.Dy == 1) {
 			document.Workspace.ZoomOutAroundCanvasPoint (current_canvas_pos);
 			return true;
