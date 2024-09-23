@@ -24,7 +24,6 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 // THE SOFTWARE.
 
-using Gtk;
 using Pinta.Core;
 
 namespace Pinta;
@@ -33,18 +32,24 @@ public sealed class WindowShell
 {
 	private readonly Gtk.ApplicationWindow app_window;
 	private readonly Adw.HeaderBar? header_bar;
-	private readonly Box shell_layout;
-	private Box? workspace_layout;
-	private Box? main_toolbar;
+	private readonly Gtk.Box shell_layout;
+	private Gtk.Box? workspace_layout;
+	private Gtk.Box? main_toolbar;
 
-	public WindowShell (Application app, string name, string title, int width, int height, bool maximize)
+	public WindowShell (
+		Gtk.Application app,
+		string name,
+		string title,
+		int width,
+		int height,
+		bool useHeaderBar,
+		bool maximize)
 	{
 		var app_layout = Adw.ToolbarView.New ();
 
 		// On macOS the global menubar is used, but otherwise use a header bar.
 		// We also use a regular Gtk window on macOS to have a traditional titlebar with the standard close / minimize buttons.
-		bool use_header_bar = PintaCore.System.OperatingSystem != OS.Mac;
-		if (use_header_bar) {
+		if (useHeaderBar) {
 			var adwWindow = Adw.ApplicationWindow.New (app);
 			adwWindow.SetContent (app_layout);
 			app_window = adwWindow;
@@ -65,7 +70,7 @@ public sealed class WindowShell
 		if (maximize)
 			app_window.Maximize ();
 
-		shell_layout = Box.New (Orientation.Vertical, 0);
+		shell_layout = Gtk.Box.New (Gtk.Orientation.Vertical, 0);
 		app_layout.SetContent (shell_layout);
 
 		app_window.Present ();
@@ -74,7 +79,7 @@ public sealed class WindowShell
 	public Gtk.ApplicationWindow Window => app_window;
 	public Adw.HeaderBar? HeaderBar => header_bar;
 
-	public Box CreateToolBar (string name)
+	public Gtk.Box CreateToolBar (string name)
 	{
 		main_toolbar = GtkExtensions.CreateToolBar ();
 		main_toolbar.Name = name;
@@ -85,7 +90,7 @@ public sealed class WindowShell
 		return main_toolbar;
 	}
 
-	public Box CreateStatusBar (string name)
+	public Gtk.Box CreateStatusBar (string name)
 	{
 		var statusbar = GtkExtensions.CreateToolBar ();
 		statusbar.Name = name;
@@ -95,12 +100,12 @@ public sealed class WindowShell
 		return statusbar;
 	}
 
-	public Box CreateWorkspace ()
+	public Gtk.Box CreateWorkspace ()
 	{
-		workspace_layout = Box.New (Orientation.Horizontal, 0);
+		workspace_layout = Gtk.Box.New (Gtk.Orientation.Horizontal, 0);
 		workspace_layout.Name = "workspace_layout";
 		workspace_layout.Hexpand = true;
-		workspace_layout.Halign = Align.Fill;
+		workspace_layout.Halign = Gtk.Align.Fill;
 
 		shell_layout.Append (workspace_layout);
 
