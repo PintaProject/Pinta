@@ -206,7 +206,9 @@ public sealed class CanvasWindow : Gtk.Grid
 		vertical_ruler.SetRange (lower.Y, upper.Y);
 	}
 
-	private bool HandleScrollEvent (Gtk.EventControllerScroll controller, Gtk.EventControllerScroll.ScrollSignalArgs args)
+	private bool HandleScrollEvent (
+		Gtk.EventControllerScroll controller,
+		Gtk.EventControllerScroll.ScrollSignalArgs args)
 	{
 		if (gesture_zoom.IsActive ())
 			return true;
