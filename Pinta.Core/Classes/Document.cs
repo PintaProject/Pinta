@@ -54,11 +54,11 @@ public sealed class Document
 		}
 	}
 
-	public DocumentSelection PreviousSelection { get; set; } = new ();
+	public DocumentSelection PreviousSelection { get; set; } = new (PintaCore.Workspace);
 
 	public Document (Size size)
 	{
-		Selection = new DocumentSelection ();
+		Selection = new DocumentSelection (PintaCore.Workspace);
 
 		Layers = new DocumentLayers (this);
 		Workspace = new DocumentWorkspace (this);
@@ -68,8 +68,6 @@ public sealed class Document
 
 		ResetSelectionPaths ();
 	}
-
-	#region Public Properties
 
 	/// <summary>
 	/// Just the file name, like "dog.jpg".
@@ -130,9 +128,7 @@ public sealed class Document
 	public DocumentWorkspace Workspace { get; }
 
 	public delegate void LayerCloneEvent ();
-	#endregion
 
-	#region Public Methods
 	public RectangleI ClampToImageSize (RectangleI r)
 	{
 		int x = Math.Clamp (r.X, 0, ImageSize.Width);
@@ -408,7 +404,6 @@ public sealed class Document
 	{
 		LayerCloned?.Invoke ();
 	}
-	#endregion
 
 	private void OnIsDirtyChanged ()
 	{
@@ -420,18 +415,13 @@ public sealed class Document
 		Renamed?.Invoke (this, EventArgs.Empty);
 	}
 
-	#region Private Methods
 	private void OnSelectionChanged ()
 	{
 		SelectionChanged?.Invoke (this, EventArgs.Empty);
 	}
-	#endregion
 
-	#region Public Events
 	public event EventHandler? IsDirtyChanged;
 	public event EventHandler? Renamed;
 	public event LayerCloneEvent? LayerCloned;
 	public event EventHandler? SelectionChanged;
-
-	#endregion
 }
