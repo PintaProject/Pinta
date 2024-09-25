@@ -172,6 +172,10 @@ internal abstract class AsyncEffectRenderer
 
 	void StartRender ()
 	{
+		// ------------
+		// === Body ===
+		// ------------
+
 		is_rendering = true;
 		cancel_render_flag = false;
 		restart_render_flag = false;
@@ -198,45 +202,53 @@ internal abstract class AsyncEffectRenderer
 
 		// Start timer used to periodically fire update events on the UI thread.
 		timer_tick_id = GLib.Functions.TimeoutAdd (0, (uint) settings.UpdateMillis, () => HandleTimerTick ());
-	}
 
-	Thread StartMasterThread (int renderId, ImmutableArray<Thread> slaves)
-	{
-		return StartRenderThread (() => {
+		// ---------------
+		// === Methods ===
+		// ---------------
 
-			// Do part of the rendering on the master thread.
-			RenderNextTile (renderId);
+		Thread StartSlaveThread (int renderId)
+		{
+			return StartRenderThread (() => RenderNextTile (renderId));
+		}
 
-			// Wait for slave threads to complete.
-			foreach (var slave in slaves)
-				slave.Join ();
+		Thread StartRenderThread (ThreadStart callback)
+		{
+			Thread result = new (callback) { Priority = settings.ThreadPriority };
+			result.Start ();
+			return result;
+		}
 
-			// Change back to the UI thread to notify of completion.
-			GLib.Functions.TimeoutAdd (0, 0, () => {
-				HandleRenderCompletion ();
-				return false; // don't call the timer again
+		Thread StartMasterThread (int renderId, ImmutableArray<Thread> slaves)
+		{
+			return StartRenderThread (() => {
+
+				// Do part of the rendering on the master thread.
+				RenderNextTile (renderId);
+
+				// Wait for slave threads to complete.
+				foreach (var slave in slaves)
+					slave.Join ();
+
+				// Change back to the UI thread to notify of completion.
+				GLib.Functions.TimeoutAdd (
+					0,
+					0,
+					() => {
+						HandleRenderCompletion ();
+						return false; // don't call the timer again
+					}
+				);
+
 			});
-
-		});
-	}
-
-	Thread StartSlaveThread (int renderId)
-	{
-		return StartRenderThread (() => RenderNextTile (renderId));
-	}
-
-	Thread StartRenderThread (ThreadStart callback)
-	{
-		Thread result = new (callback) { Priority = settings.ThreadPriority };
-		result.Start ();
-		return result;
+		}
 	}
 
 	// Runs on a background thread.
 	void RenderNextTile (int renderId)
 	{
 		// Fetch the next tile index and render it.
-		for (; ; ) {
+		while (true) {
 
 			int tileIndex = Interlocked.Increment (ref current_tile);
 			if (tileIndex >= target_tiles.Length || cancel_render_flag) return;
