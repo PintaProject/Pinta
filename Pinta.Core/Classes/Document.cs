@@ -54,11 +54,11 @@ public sealed class Document
 		}
 	}
 
-	public DocumentSelection PreviousSelection { get; set; } = new (PintaCore.Workspace);
+	public DocumentSelection PreviousSelection { get; set; } = new (this);
 
 	public Document (Size size)
 	{
-		Selection = new DocumentSelection (PintaCore.Workspace);
+		Selection = new DocumentSelection (this);
 
 		Layers = new DocumentLayers (this);
 		Workspace = new DocumentWorkspace (this);

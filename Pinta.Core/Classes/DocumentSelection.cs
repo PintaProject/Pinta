@@ -34,10 +34,10 @@ namespace Pinta.Core;
 
 public sealed class DocumentSelection
 {
-	private readonly WorkspaceManager workspace;
-	internal DocumentSelection (WorkspaceManager workspace)
+	private readonly Document owning_document;
+	internal DocumentSelection (Document owningDocument)
 	{
-		this.workspace = workspace;
+		this.owning_document = owningDocument;
 	}
 
 	private Path? selection_path;
@@ -62,8 +62,7 @@ public sealed class DocumentSelection
 	public Path SelectionPath {
 		get {
 			if (selection_path == null) {
-				var doc = workspace.ActiveDocument;
-				Context g = new (doc.Layers.CurrentUserLayer.Surface);
+				Context g = new (owning_document.Layers.CurrentUserLayer.Surface);
 				selection_path = g.CreatePolygonPath (ConvertToPolygonSet (SelectionPolygons));
 			}
 
@@ -126,7 +125,7 @@ public sealed class DocumentSelection
 	/// </summary>
 	public DocumentSelection Clone ()
 	{
-		return new (workspace) {
+		return new (owning_document) {
 			SelectionPolygons = SelectionPolygons.ToList (),
 			Origin = new PointD (Origin.X, Origin.Y),
 			End = new PointD (End.X, End.Y),
@@ -205,7 +204,7 @@ public sealed class DocumentSelection
 		transform.TransformPoint (ref origin);
 		transform.TransformPoint (ref end);
 
-		return new (workspace) {
+		return new (owning_document) {
 			SelectionPolygons = newPolygons,
 			Origin = origin,
 			End = end,
