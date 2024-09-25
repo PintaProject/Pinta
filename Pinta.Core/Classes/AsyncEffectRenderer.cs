@@ -170,10 +170,10 @@ internal abstract class AsyncEffectRenderer
 		timer_tick_id = 0;
 	}
 
-	readonly object cancellation_token_lock = new ();
+	readonly object cancellation_source_lock = new ();
 	CancellationToken ReplaceCancellationSource ()
 	{
-		lock (cancellation_token_lock) {
+		lock (cancellation_source_lock) {
 			CancellationTokenSource newSource = new ();
 			cancellation_source.Cancel ();
 			cancellation_source.Dispose ();
