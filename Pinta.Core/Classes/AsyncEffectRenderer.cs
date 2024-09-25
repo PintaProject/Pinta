@@ -181,12 +181,11 @@ internal abstract class AsyncEffectRenderer
 		restart_render_flag = false;
 		is_updated = false;
 
-		CancellationToken cancellationToken;
-		lock (cancellation_source) {
-			cancellation_source.Cancel ();
-			cancellation_source = new ();
-			cancellationToken = cancellation_source.Token;
-		}
+		cancellation_source.Cancel ();
+		cancellation_source.Dispose ();
+		cancellation_source = new ();
+
+		CancellationToken cancellationToken = cancellation_source.Token;
 
 		render_exceptions.Clear ();
 
