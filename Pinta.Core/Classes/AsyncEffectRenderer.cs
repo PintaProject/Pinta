@@ -170,6 +170,18 @@ internal abstract class AsyncEffectRenderer
 		timer_tick_id = 0;
 	}
 
+	readonly object cancellation_token_lock = new ();
+	CancellationToken ReplaceCancellationSource ()
+	{
+		lock (cancellation_token_lock) {
+			CancellationTokenSource newSource = new ();
+			cancellation_source.Cancel ();
+			cancellation_source.Dispose ();
+			cancellation_source = newSource;
+			return newSource.Token;
+		}
+	}
+
 	void StartRender ()
 	{
 		// ------------
@@ -181,17 +193,13 @@ internal abstract class AsyncEffectRenderer
 		restart_render_flag = false;
 		is_updated = false;
 
-		cancellation_source.Cancel ();
-		cancellation_source.Dispose ();
-		cancellation_source = new ();
-
-		CancellationToken cancellationToken = cancellation_source.Token;
-
 		render_exceptions.Clear ();
 
 		current_tile = -1;
 
-		Debug.WriteLine ("AsyncEffectRenderer.Start () Render " + cancellationToken + " starting.");
+		Debug.WriteLine ("AsyncEffectRenderer.Start () Render starting."); // TODO: Show some kind of ID, perhaps the address
+
+		CancellationToken cancellationToken = ReplaceCancellationSource ();
 
 		// Start slave render threads.
 		var slaves =
