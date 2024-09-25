@@ -170,16 +170,13 @@ internal abstract class AsyncEffectRenderer
 		timer_tick_id = 0;
 	}
 
-	readonly object cancellation_source_lock = new ();
 	CancellationToken ReplaceCancellationSource ()
 	{
-		lock (cancellation_source_lock) {
-			CancellationTokenSource newSource = new ();
-			cancellation_source.Cancel ();
-			cancellation_source.Dispose ();
-			cancellation_source = newSource;
-			return newSource.Token;
-		}
+		CancellationTokenSource newSource = new ();
+		CancellationTokenSource oldSource = Interlocked.Exchange (ref cancellation_source, newSource);
+		oldSource.Cancel ();
+		oldSource.Dispose ();
+		return newSource.Token;
 	}
 
 	void StartRender ()
