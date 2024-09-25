@@ -281,7 +281,7 @@ internal abstract class AsyncEffectRenderer
 
 			// Ignore completions of tiles after a cancel or from a previous render.
 			if (!IsRendering || cancellationToken.IsCancellationRequested)
-				continue;
+				return;
 
 			// Update bounds to be shown on next expose.
 			lock (updated_lock) {
