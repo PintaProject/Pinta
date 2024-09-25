@@ -30,7 +30,6 @@ using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
 using Cairo;
-using Gtk;
 
 namespace Pinta.Core;
 
@@ -54,12 +53,16 @@ public static class WorkspaceServiceExtensions
 			workspace.ActiveWorkspace.Invalidate ();
 	}
 
-	public static void Invalidate (this IWorkspaceService workspace, RectangleI rect)
+	public static void Invalidate (
+		this IWorkspaceService workspace,
+		RectangleI rect)
 	{
 		workspace.ActiveWorkspace.Invalidate (rect);
 	}
 
-	public static void InvalidateWindowRect (this IWorkspaceService workspace, RectangleI windowRect)
+	public static void InvalidateWindowRect (
+		this IWorkspaceService workspace,
+		RectangleI windowRect)
 	{
 		workspace.ActiveWorkspace.InvalidateWindowRect (windowRect);
 	}
@@ -70,7 +73,9 @@ public static class WorkspaceServiceExtensions
 	/// <param name='canvas_pos'>
 	/// The position of the canvas point
 	/// </param>
-	public static PointD CanvasPointToView (this IWorkspaceService workspace, PointD canvas_pos)
+	public static PointD CanvasPointToView (
+		this IWorkspaceService workspace,
+		PointD canvas_pos)
 	{
 		return workspace.ActiveWorkspace.CanvasPointToView (canvas_pos);
 	}
@@ -81,27 +86,40 @@ public static class WorkspaceServiceExtensions
 	/// <param name='canvas_pos'>
 	/// The position of the view point
 	/// </param>
-	public static PointD ViewPointToCanvas (this IWorkspaceService workspace, PointD view_pos)
+	public static PointD ViewPointToCanvas (
+		this IWorkspaceService workspace,
+		PointD view_pos)
 	{
 		return workspace.ActiveWorkspace.ViewPointToCanvas (view_pos);
 	}
 
-	public static void ResizeImage (this IWorkspaceService workspace, Size newSize, ResamplingMode resamplingMode)
+	public static void ResizeImage (
+		this IWorkspaceService workspace,
+		Size newSize,
+		ResamplingMode resamplingMode)
 	{
 		workspace.ActiveDocument.ResizeImage (newSize, resamplingMode);
 	}
 
-	public static void ResizeCanvas (this IWorkspaceService workspace, Size newSize, Anchor anchor, CompoundHistoryItem? compoundAction)
+	public static void ResizeCanvas (
+		this IWorkspaceService workspace,
+		Size newSize,
+		Anchor anchor,
+		CompoundHistoryItem? compoundAction)
 	{
 		workspace.ActiveDocument.ResizeCanvas (newSize, anchor, compoundAction);
 	}
 
-	public static void CloseActiveDocument (this WorkspaceManager workspace, ActionManager actions)
+	public static void CloseActiveDocument (
+		this WorkspaceManager workspace,
+		ActionManager actions)
 	{
 		workspace.CloseDocument (actions, workspace.ActiveDocument);
 	}
 
-	public static RectangleI ClampToImageSize (this IWorkspaceService workspace, RectangleI r)
+	public static RectangleI ClampToImageSize (
+		this IWorkspaceService workspace,
+		RectangleI r)
 	{
 		return workspace.ActiveDocument.ClampToImageSize (r);
 	}
@@ -119,7 +137,7 @@ public static class WorkspaceServiceExtensions
 		Layer background = doc.Layers.AddNewLayer (Translations.GetString ("Background"));
 
 		if (backgroundColor.A != 0) {
-			Cairo.Context g = new (background.Surface);
+			Context g = new (background.Surface);
 			g.SetSourceColor (backgroundColor);
 			g.Paint ();
 		}
@@ -154,28 +172,22 @@ public sealed class WorkspaceManager : IWorkspaceService
 	public int ActiveDocumentIndex
 		=> active_document_index;
 
-	public Document ActiveDocument {
-		get {
-			if (HasOpenDocuments)
-				return open_documents[active_document_index];
+	public Document ActiveDocument =>
+		HasOpenDocuments
+		? open_documents[active_document_index]
+		: throw new InvalidOperationException ($"Tried to get {nameof (WorkspaceManager)}.{nameof (ActiveDocument)} when there are no open Documents.  Check HasOpenDocuments first.");
 
-			throw new InvalidOperationException ($"Tried to get {nameof (WorkspaceManager)}.{nameof (ActiveDocument)} when there are no open Documents.  Check HasOpenDocuments first.");
-		}
-	}
-
-	public Document? ActiveDocumentOrDefault
-		=> HasOpenDocuments ? open_documents[active_document_index] : null;
+	public Document? ActiveDocumentOrDefault =>
+		HasOpenDocuments
+		? open_documents[active_document_index]
+		: null;
 
 	public SelectionModeHandler SelectionHandler { get; }
 
-	public DocumentWorkspace ActiveWorkspace {
-		get {
-			if (HasOpenDocuments)
-				return open_documents[active_document_index].Workspace;
-
-			throw new InvalidOperationException ("Tried to get WorkspaceManager.ActiveWorkspace when there are no open Documents.  Check HasOpenDocuments first.");
-		}
-	}
+	public DocumentWorkspace ActiveWorkspace =>
+		HasOpenDocuments
+		? open_documents[active_document_index].Workspace
+		: throw new InvalidOperationException ("Tried to get WorkspaceManager.ActiveWorkspace when there are no open Documents.  Check HasOpenDocuments first.");
 
 	public Size ImageSize {
 		get => ActiveDocument.ImageSize;
@@ -226,7 +238,9 @@ public sealed class WorkspaceManager : IWorkspaceService
 		return doc;
 	}
 
-	public void CloseDocument (ActionManager actions, Document document)
+	public void CloseDocument (
+		ActionManager actions,
+		Document document)
 	{
 		int index = open_documents.IndexOf (document);
 		open_documents.Remove (document);
@@ -272,10 +286,11 @@ public sealed class WorkspaceManager : IWorkspaceService
 	}
 
 	// TODO: Standardize add to recent files
-	public bool OpenFile (Gio.File file, Window? parent = null)
+	/// <returns>Flag that indicates if file was opened successfully</returns>
+	public bool OpenFile (
+		Gio.File file,
+		Gtk.Window? parent = null)
 	{
-		bool fileOpened = false;
-
 		parent ??= chrome_manager.MainWindow;
 
 		try {
@@ -314,14 +329,15 @@ public sealed class WorkspaceManager : IWorkspaceService
 			ActiveWorkspace.History.PushNewItem (new BaseHistoryItem (Resources.StandardIcons.DocumentOpen, Translations.GetString ("Open Image")));
 			ActiveDocument.History.SetClean ();
 
-			fileOpened = true;
+			return true;
+
 		} catch (UnauthorizedAccessException) {
 			ShowFilePermissionErrorDialog (parent, file.GetParseName ());
 		} catch (Exception e) {
 			ShowOpenFileErrorDialog (parent, file.GetParseName (), e.Message, e.ToString ());
 		}
 
-		return fileOpened;
+		return false;
 	}
 
 	public bool ImageFitsInWindow
@@ -335,7 +351,9 @@ public sealed class WorkspaceManager : IWorkspaceService
 			chrome_manager.MainWindow.Title = "Pinta";
 	}
 
-	public void SetActiveDocument (ActionManager actions, int index)
+	public void SetActiveDocument (
+		ActionManager actions,
+		int index)
 	{
 		if (index >= open_documents.Count)
 			throw new ArgumentOutOfRangeException (
@@ -351,7 +369,9 @@ public sealed class WorkspaceManager : IWorkspaceService
 		actions.Window.SetActiveDocument (open_documents[index]);
 	}
 
-	internal void SetActiveDocumentInternal (ToolManager tools, Document document)
+	internal void SetActiveDocumentInternal (
+		ToolManager tools,
+		Document document)
 	{
 		// Work around a case where we closed a document but haven't updated
 		// the active_document_index yet and it points to the closed document
@@ -364,21 +384,16 @@ public sealed class WorkspaceManager : IWorkspaceService
 		OnActiveDocumentChanged (EventArgs.Empty);
 	}
 
-	private void OnActiveDocumentChanged (EventArgs e)
+	private void OnActiveDocumentChanged (EventArgs _)
 	{
 		ActiveDocumentChanged?.Invoke (this, EventArgs.Empty);
-
 		OnSelectionChanged ();
-
 		ResetTitle ();
 	}
 
 	private void OnDocumentCreated (DocumentEventArgs e)
 	{
-		e.Document.SelectionChanged += (sender, args) => {
-			OnSelectionChanged ();
-		};
-
+		e.Document.SelectionChanged += (_, _) => OnSelectionChanged ();
 		DocumentCreated?.Invoke (this, e);
 	}
 
@@ -397,13 +412,21 @@ public sealed class WorkspaceManager : IWorkspaceService
 		SelectionChanged?.Invoke (this, EventArgs.Empty);
 	}
 
-	private void ShowOpenFileErrorDialog (Window parent, string filename, string primary_text, string details)
+	private void ShowOpenFileErrorDialog (
+		Gtk.Window parent,
+		string filename,
+		string primary_text,
+		string details)
 	{
 		string secondary_text = Translations.GetString ("Could not open file: {0}", filename);
 		chrome_manager.ShowErrorDialog (parent, primary_text, secondary_text, details);
 	}
 
-	private void ShowUnsupportedFormatDialog (Window parent, string filename, string message, string errors)
+	private void ShowUnsupportedFormatDialog (
+		Gtk.Window parent,
+		string filename,
+		string message,
+		string errors)
 	{
 		StringBuilder body = new ();
 
@@ -423,9 +446,12 @@ public sealed class WorkspaceManager : IWorkspaceService
 		chrome_manager.ShowErrorDialog (parent, message, body.ToString (), errors);
 	}
 
-	private void ShowFilePermissionErrorDialog (Window parent, string filename)
+	private void ShowFilePermissionErrorDialog (
+		Gtk.Window parent,
+		string filename)
 	{
 		string message = Translations.GetString ("Failed to open image");
+
 		// Translators: {0} is the name of a file that the user does not have permission to open.
 		string details = Translations.GetString ("You do not have access to '{0}'.", filename);
 
@@ -438,5 +464,4 @@ public sealed class WorkspaceManager : IWorkspaceService
 
 	public event EventHandler? ActiveDocumentChanged;
 	public event EventHandler? SelectionChanged;
-
 }
