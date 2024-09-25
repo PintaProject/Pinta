@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: pinta\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2024-09-22 01:36+0000\n"
-"PO-Revision-Date: 2024-09-09 05:09+0000\n"
+"PO-Revision-Date: 2024-09-23 05:16+0000\n"
 "Last-Translator: Matthaiks <kitynska@gmail.com>\n"
 "Language-Team: Polish <https://hosted.weblate.org/projects/pinta/pinta/pl/>\n"
 "Language: pl\n"
@@ -100,7 +100,7 @@ msgstr "Wszystkie pliki"
 
 #: ../Pinta.Effects/Effects/OutlineObjectEffect.cs:210
 msgid "Alpha Gradient"
-msgstr ""
+msgstr "Gradient alfa"
 
 #: ../Pinta.Effects/Effects/BulgeEffect.cs:109
 #: ../Pinta.Effects/Effects/FrostedGlassEffect.cs:149
@@ -468,7 +468,7 @@ msgstr "Rozświetlenie"
 
 #: ../Pinta.Effects/Effects/OutlineObjectEffect.cs:213
 msgid "Color Gradient"
-msgstr ""
+msgstr "Gradient kolorów"
 
 #: ../Pinta.Tools/Tools/GradientTool.cs:203
 msgid "Color Mode"
@@ -775,7 +775,7 @@ msgstr "Wtapianie krawędzi płótna"
 
 #: ../Pinta.Effects/Effects/FeatherEffect.cs:19
 msgid "Feather Object"
-msgstr ""
+msgstr "Wtapianie obiektu"
 
 #: ../Pinta.Core/Actions/HelpActions.cs:46
 msgid "File a Bug"
@@ -787,11 +787,11 @@ msgstr "Pliki do otwarcia"
 
 #: ../Pinta.Tools/Tools/TextTool.cs:272
 msgid "Fill Background"
-msgstr "Wypełnienie tła"
+msgstr "Wypełnij tło"
 
 #: ../Pinta.Effects/Effects/OutlineObjectEffect.cs:219
 msgid "Fill Object Background"
-msgstr ""
+msgstr "Wypełnij tło obiektu"
 
 #: ../Pinta.Core/Actions/EditActions.cs:77
 #: ../Pinta.Core/Actions/EditActions.cs:228
@@ -801,7 +801,7 @@ msgstr "Wypełnij zaznaczenie"
 #: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:312
 #: ../Pinta.Tools/Tools/FreeformShapeTool.cs:222
 msgid "Fill Shape"
-msgstr "Wypełnianie kształtu"
+msgstr "Wypełnij kształt"
 
 #: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:302
 #: ../Pinta.Tools/Tools/FreeformShapeTool.cs:215
@@ -1571,20 +1571,20 @@ msgstr "Kontur"
 
 #: ../Pinta.Effects/Effects/OutlineObjectEffect.cs:216
 msgid "Outline Border"
-msgstr ""
+msgstr "Kontur obramowania"
 
 #: ../Pinta.Effects/Effects/OutlineEdgeEffect.cs:26
 msgid "Outline Edge"
-msgstr ""
+msgstr "Kontur krawędzi"
 
 #: ../Pinta.Effects/Effects/OutlineObjectEffect.cs:19
 msgid "Outline Object"
-msgstr ""
+msgstr "Kontur obiektu"
 
 #: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:311
 #: ../Pinta.Tools/Tools/FreeformShapeTool.cs:221
 msgid "Outline Shape"
-msgstr "Konturowanie kształtu"
+msgstr "Kontur kształtu"
 
 #: ../Pinta.Tools/Tools/TextTool.cs:285
 msgid "Outline width"

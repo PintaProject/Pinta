@@ -8,10 +8,10 @@ msgstr ""
 "Project-Id-Version: pinta\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2024-09-22 01:36+0000\n"
-"PO-Revision-Date: 2024-09-10 11:09+0000\n"
+"PO-Revision-Date: 2024-09-23 05:16+0000\n"
 "Last-Translator: gallegonovato <fran-carro@hotmail.es>\n"
-"Language-Team: Spanish <https://hosted.weblate.org/projects/pinta/pinta/es/"
-">\n"
+"Language-Team: Spanish <https://hosted.weblate.org/projects/pinta/pinta/es/>"
+"\n"
 "Language: es\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -100,7 +100,7 @@ msgstr "Todos los archivos"
 
 #: ../Pinta.Effects/Effects/OutlineObjectEffect.cs:210
 msgid "Alpha Gradient"
-msgstr ""
+msgstr "Degradado alfa"
 
 #: ../Pinta.Effects/Effects/BulgeEffect.cs:109
 #: ../Pinta.Effects/Effects/FrostedGlassEffect.cs:149
@@ -468,7 +468,7 @@ msgstr "Sobreexponer el color"
 
 #: ../Pinta.Effects/Effects/OutlineObjectEffect.cs:213
 msgid "Color Gradient"
-msgstr ""
+msgstr "Degradado del color"
 
 #: ../Pinta.Tools/Tools/GradientTool.cs:203
 msgid "Color Mode"
@@ -775,7 +775,7 @@ msgstr "Suaviza el borde del lienzo"
 
 #: ../Pinta.Effects/Effects/FeatherEffect.cs:19
 msgid "Feather Object"
-msgstr ""
+msgstr "Pluma"
 
 #: ../Pinta.Core/Actions/HelpActions.cs:46
 msgid "File a Bug"
@@ -791,7 +791,7 @@ msgstr "Rellenar el fondo"
 
 #: ../Pinta.Effects/Effects/OutlineObjectEffect.cs:219
 msgid "Fill Object Background"
-msgstr ""
+msgstr "Rellenar el fondo del objeto"
 
 #: ../Pinta.Core/Actions/EditActions.cs:77
 #: ../Pinta.Core/Actions/EditActions.cs:228
@@ -1570,15 +1570,15 @@ msgstr "Contorno"
 
 #: ../Pinta.Effects/Effects/OutlineObjectEffect.cs:216
 msgid "Outline Border"
-msgstr ""
+msgstr "Contorno del borde"
 
 #: ../Pinta.Effects/Effects/OutlineEdgeEffect.cs:26
 msgid "Outline Edge"
-msgstr ""
+msgstr "Borde del contorno"
 
 #: ../Pinta.Effects/Effects/OutlineObjectEffect.cs:19
 msgid "Outline Object"
-msgstr ""
+msgstr "Contorno del objeto"
 
 #: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:311
 #: ../Pinta.Tools/Tools/FreeformShapeTool.cs:221

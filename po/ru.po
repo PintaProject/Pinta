@@ -8,10 +8,10 @@ msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2024-09-22 01:36+0000\n"
-"PO-Revision-Date: 2024-09-10 11:09+0000\n"
+"PO-Revision-Date: 2024-09-23 20:41+0000\n"
 "Last-Translator: Сергей <asvmail.as@gmail.com>\n"
-"Language-Team: Russian <https://hosted.weblate.org/projects/pinta/pinta/ru/"
-">\n"
+"Language-Team: Russian <https://hosted.weblate.org/projects/pinta/pinta/ru/>"
+"\n"
 "Language: ru\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -101,7 +101,7 @@ msgstr "Все файлы"
 
 #: ../Pinta.Effects/Effects/OutlineObjectEffect.cs:210
 msgid "Alpha Gradient"
-msgstr ""
+msgstr "Градиент Альфа"
 
 #: ../Pinta.Effects/Effects/BulgeEffect.cs:109
 #: ../Pinta.Effects/Effects/FrostedGlassEffect.cs:149
@@ -473,7 +473,7 @@ msgstr "Осветление основы"
 
 #: ../Pinta.Effects/Effects/OutlineObjectEffect.cs:213
 msgid "Color Gradient"
-msgstr ""
+msgstr "Цветовой градиент"
 
 #: ../Pinta.Tools/Tools/GradientTool.cs:203
 msgid "Color Mode"
@@ -781,7 +781,7 @@ msgstr "Растушёвка краёв холста"
 
 #: ../Pinta.Effects/Effects/FeatherEffect.cs:19
 msgid "Feather Object"
-msgstr ""
+msgstr "Растушёвка объекта"
 
 #: ../Pinta.Core/Actions/HelpActions.cs:46
 msgid "File a Bug"
@@ -797,7 +797,7 @@ msgstr "Заливка фона"
 
 #: ../Pinta.Effects/Effects/OutlineObjectEffect.cs:219
 msgid "Fill Object Background"
-msgstr ""
+msgstr "Заливка фона объекта"
 
 #: ../Pinta.Core/Actions/EditActions.cs:77
 #: ../Pinta.Core/Actions/EditActions.cs:228
@@ -1582,16 +1582,16 @@ msgstr ""
 
 #: ../Pinta.Effects/Effects/OutlineEdgeEffect.cs:26
 msgid "Outline Edge"
-msgstr ""
+msgstr "Контур по краю"
 
 #: ../Pinta.Effects/Effects/OutlineObjectEffect.cs:19
 msgid "Outline Object"
-msgstr ""
+msgstr "Контур объекта"
 
 #: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:311
 #: ../Pinta.Tools/Tools/FreeformShapeTool.cs:221
 msgid "Outline Shape"
-msgstr "Обвести фигуру"
+msgstr "Контур фигуры"
 
 #: ../Pinta.Tools/Tools/TextTool.cs:285
 msgid "Outline width"
