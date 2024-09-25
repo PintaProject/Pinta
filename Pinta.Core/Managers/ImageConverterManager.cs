@@ -51,7 +51,13 @@ public sealed class ImageConverterManager
 		// Create all the formats we have our own importers/exporters for
 
 		OraFormat oraHandler = new ();
-		FormatDescriptor oraFormatDescriptor = new ("OpenRaster", new[] { "ora", "ORA" }, new[] { "image/openraster" }, oraHandler, oraHandler, supportsLayers: true);
+		FormatDescriptor oraFormatDescriptor = new (
+			displayPrefix: "OpenRaster",
+			extensions: new[] { "ora", "ORA" },
+			mimes: new[] { "image/openraster" },
+			importer: oraHandler,
+			exporter: oraHandler,
+			supportsLayers: true);
 		yield return oraFormatDescriptor;
 
 		NetpbmPortablePixmap netpbmPortablePixmap = new ();
@@ -86,11 +92,19 @@ public sealed class ImageConverterManager
 		else
 			exporter = null;
 
-		var formatDescriptor = new FormatDescriptor (formatNameUpperCase, extensions, format.GetMimeTypes (), importer, exporter, supportsLayers: false);
+		FormatDescriptor formatDescriptor = new (
+			displayPrefix: formatNameUpperCase,
+			extensions: extensions,
+			mimes: format.GetMimeTypes (),
+			importer: importer,
+			exporter: exporter,
+			supportsLayers: false);
+
 		return formatDescriptor;
 	}
 
-	public IEnumerable<FormatDescriptor> Formats => formats;
+	public IEnumerable<FormatDescriptor> Formats
+		=> formats;
 
 	/// <summary>
 	/// Registers a new file format.
@@ -117,7 +131,7 @@ public sealed class ImageConverterManager
 	{
 		string extension = settings_manager.GetSetting<string> ("default-image-type", "jpeg");
 
-		var fd = GetFormatByExtension (extension);
+		FormatDescriptor? fd = GetFormatByExtension (extension);
 
 		// We found the last one we used
 		if (fd != null)
@@ -159,12 +173,7 @@ public sealed class ImageConverterManager
 	public IImageImporter? GetImporterByFile (string file)
 	{
 		string extension = Path.GetExtension (file);
-
-		if (extension == null) {
-			return null;
-		} else {
-			return GetImporterByExtension (extension);
-		}
+		return extension == null ? null : GetImporterByExtension (extension);
 	}
 
 	/// <summary>
@@ -172,7 +181,7 @@ public sealed class ImageConverterManager
 	/// </summary>
 	public void SetDefaultFormat (string extension)
 	{
-		var normalized = NormalizeExtension (extension);
+		string normalized = NormalizeExtension (extension);
 		settings_manager.PutSetting ("default-image-type", normalized);
 	}
 
@@ -183,11 +192,7 @@ public sealed class ImageConverterManager
 	private IImageExporter? GetExporterByExtension (string extension)
 	{
 		FormatDescriptor? format = GetFormatByExtension (extension);
-
-		if (format == null)
-			return null;
-
-		return format.Exporter;
+		return format?.Exporter;
 	}
 
 	/// <summary>
@@ -197,11 +202,7 @@ public sealed class ImageConverterManager
 	private IImageImporter? GetImporterByExtension (string extension)
 	{
 		FormatDescriptor? format = GetFormatByExtension (extension);
-
-		if (format == null)
-			return null;
-
-		return format.Importer;
+		return format?.Importer;
 	}
 
 	/// <summary>
@@ -210,12 +211,13 @@ public sealed class ImageConverterManager
 	/// </summary>
 	public FormatDescriptor? GetFormatByExtension (string extension)
 	{
-		var normalized = NormalizeExtension (extension);
+		string normalized = NormalizeExtension (extension);
 		return Formats.Where (p => p.Extensions.Contains (normalized)).FirstOrDefault ();
 	}
 
 	/// <summary>
 	/// Normalizes the extension.
 	/// </summary>
-	private static string NormalizeExtension (string extension) => extension.ToLowerInvariant ().TrimStart ('.').Trim ();
+	private static string NormalizeExtension (string extension)
+		=> extension.ToLowerInvariant ().TrimStart ('.').Trim ();
 }
