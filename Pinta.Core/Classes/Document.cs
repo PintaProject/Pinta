@@ -54,10 +54,11 @@ public sealed class Document
 		}
 	}
 
-	public DocumentSelection PreviousSelection { get; set; } = new (this);
+	public DocumentSelection PreviousSelection { get; set; }
 
 	public Document (Size size)
 	{
+		PreviousSelection = new (this);
 		Selection = new DocumentSelection (this);
 
 		Layers = new DocumentLayers (this);
