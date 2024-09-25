@@ -29,8 +29,9 @@
 #endif
 
 using System;
-using System.Collections.Generic;
+using System.Collections.Concurrent;
 using System.Collections.Immutable;
+using System.Linq;
 using System.Threading;
 using Debug = System.Diagnostics.Debug;
 
@@ -79,7 +80,7 @@ internal abstract class AsyncEffectRenderer
 	int render_id;
 	int current_tile;
 	readonly ImmutableArray<RectangleI> target_tiles;
-	readonly List<Exception> render_exceptions;
+	readonly ConcurrentQueue<Exception> render_exceptions;
 
 	uint timer_tick_id;
 
@@ -98,7 +99,7 @@ internal abstract class AsyncEffectRenderer
 		render_id = 0;
 		updated_lock = new object ();
 		is_updated = false;
-		render_exceptions = new List<Exception> ();
+		render_exceptions = new ConcurrentQueue<Exception> ();
 
 		timer_tick_id = 0;
 		target_tiles =
@@ -187,16 +188,24 @@ internal abstract class AsyncEffectRenderer
 		int renderId = render_id;
 
 		// Start slave render threads.
-		int threadCount = settings.ThreadCount;
-		var slaves = new Thread[threadCount - 1];
-		for (int threadId = 1; threadId < threadCount; threadId++)
-			slaves[threadId - 1] = StartSlaveThread (renderId, threadId);
+		var slaves =
+			Enumerable.Range (0, settings.ThreadCount - 1)
+			.Select (StartSlaveThread)
+			.ToImmutableArray ();
 
 		// Start the master render thread.
-		Thread master = new (() => {
+		Thread master = StartMasterThread (renderId, slaves);
+
+		// Start timer used to periodically fire update events on the UI thread.
+		timer_tick_id = GLib.Functions.TimeoutAdd (0, (uint) settings.UpdateMillis, () => HandleTimerTick ());
+	}
+
+	Thread StartMasterThread (int renderId, ImmutableArray<Thread> slaves)
+	{
+		return StartRenderThread (() => {
 
 			// Do part of the rendering on the master thread.
-			Render (renderId, 0);
+			RenderNextTile (renderId);
 
 			// Wait for slave threads to complete.
 			foreach (var slave in slaves)
@@ -207,77 +216,65 @@ internal abstract class AsyncEffectRenderer
 				HandleRenderCompletion ();
 				return false; // don't call the timer again
 			});
-		}) {
-			Priority = settings.ThreadPriority
-		};
-		master.Start ();
 
-		// Start timer used to periodically fire update events on the UI thread.
-		timer_tick_id = GLib.Functions.TimeoutAdd (0, (uint) settings.UpdateMillis, () => HandleTimerTick ());
+		});
 	}
 
-	Thread StartSlaveThread (int renderId, int threadId)
+	Thread StartSlaveThread (int renderId)
 	{
-		Thread slave = new (() => {
-			Render (renderId, threadId);
-		}) {
-			Priority = settings.ThreadPriority
-		};
-		slave.Start ();
+		return StartRenderThread (() => RenderNextTile (renderId));
+	}
 
-		return slave;
+	Thread StartRenderThread (ThreadStart callback)
+	{
+		Thread result = new (callback) { Priority = settings.ThreadPriority };
+		result.Start ();
+		return result;
 	}
 
 	// Runs on a background thread.
-	void Render (int renderId, int threadId)
+	void RenderNextTile (int renderId)
 	{
 		// Fetch the next tile index and render it.
 		for (; ; ) {
+
 			int tileIndex = Interlocked.Increment (ref current_tile);
-			if (tileIndex >= target_tiles.Length || cancel_render_flag)
-				return;
-			RenderTile (renderId, threadId, tileIndex);
-		}
-	}
+			if (tileIndex >= target_tiles.Length || cancel_render_flag) return;
 
-	// Runs on a background thread.
-	void RenderTile (int renderId, int threadId, int tileIndex)
-	{
-		Exception? exception = null;
-		RectangleI tileBounds = target_tiles[tileIndex];
+			Exception? exception = null;
+			RectangleI tileBounds = target_tiles[tileIndex];
 
-		try {
-			// NRT - These are set in Start () before getting here
-			if (!cancel_render_flag) {
-				dest_surface!.Flush ();
-				effect!.Render (source_surface!, dest_surface, stackalloc[] { tileBounds });
-				dest_surface.MarkDirty (tileBounds);
+			try {
+				// NRT - These are set in Start () before getting here
+				if (!cancel_render_flag) {
+					dest_surface!.Flush ();
+					effect!.Render (source_surface!, dest_surface, stackalloc[] { tileBounds });
+					dest_surface.MarkDirty (tileBounds);
+				}
+
+			} catch (Exception ex) {
+				exception = ex;
+				Debug.WriteLine ("AsyncEffectRenderer Error while rendering effect: " + effect!.Name + " exception: " + ex.Message + "\n" + ex.StackTrace);
 			}
 
-		} catch (Exception ex) {
-			exception = ex;
-			Debug.WriteLine ("AsyncEffectRenderer Error while rendering effect: " + effect!.Name + " exception: " + ex.Message + "\n" + ex.StackTrace);
-		}
+			// Ignore completions of tiles after a cancel or from a previous render.
+			if (!IsRendering || renderId != render_id)
+				continue;
 
-		// Ignore completions of tiles after a cancel or from a previous render.
-		if (!IsRendering || renderId != render_id)
-			return;
-
-		// Update bounds to be shown on next expose.
-		lock (updated_lock) {
-			if (is_updated) {
-				updated_area = RectangleI.Union (tileBounds, updated_area);
-			} else {
-				is_updated = true;
-				updated_area = tileBounds;
+			// Update bounds to be shown on next expose.
+			lock (updated_lock) {
+				if (is_updated) {
+					updated_area = RectangleI.Union (tileBounds, updated_area);
+				} else {
+					is_updated = true;
+					updated_area = tileBounds;
+				}
 			}
-		}
 
-		if (exception == null)
-			return;
+			if (exception == null)
+				continue;
 
-		lock (render_exceptions) {
-			render_exceptions.Add (exception);
+			render_exceptions.Enqueue (exception);
 		}
 	}
 
@@ -307,7 +304,7 @@ internal abstract class AsyncEffectRenderer
 	void HandleRenderCompletion ()
 	{
 		var exceptions =
-			render_exceptions.Count == 0
+			render_exceptions.IsEmpty
 			? Array.Empty<Exception> ()
 			: render_exceptions.ToArray ();
 
