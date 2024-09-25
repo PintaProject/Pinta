@@ -294,7 +294,7 @@ public sealed class MainWindow
 			"Pinta",
 			width,
 			height,
-			useHeaderBar: PintaCore.System.OperatingSystem != OS.Mac,
+			useHeaderBar: PintaCore.System.OperatingSystem != OS.Mac, // On macOS the global menubar is used, but otherwise use a header bar. We also use a regular Gtk window on macOS to have a traditional titlebar with the standard close / minimize buttons.
 			maximize);
 
 		CreateMainMenu (window_shell);

@@ -47,8 +47,6 @@ public sealed class WindowShell
 	{
 		var app_layout = Adw.ToolbarView.New ();
 
-		// On macOS the global menubar is used, but otherwise use a header bar.
-		// We also use a regular Gtk window on macOS to have a traditional titlebar with the standard close / minimize buttons.
 		if (useHeaderBar) {
 			var adwWindow = Adw.ApplicationWindow.New (app);
 			adwWindow.SetContent (app_layout);
