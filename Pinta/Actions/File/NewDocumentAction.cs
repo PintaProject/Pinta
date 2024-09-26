@@ -34,14 +34,20 @@ internal sealed class NewDocumentAction : IActionHandler
 	private readonly ActionManager actions;
 	private readonly WorkspaceManager workspace;
 	private readonly SettingsManager settings;
+	private readonly PaletteManager palette;
+	private readonly ChromeManager chrome;
 	internal NewDocumentAction (
 		ActionManager actions,
-		WorkspaceManager workspace,
-		SettingsManager settings)
+		ChromeManager chrome,
+		PaletteManager palette,
+		SettingsManager settings,
+		WorkspaceManager workspace)
 	{
 		this.actions = actions;
-		this.workspace = workspace;
+		this.chrome = chrome;
+		this.palette = palette;
 		this.settings = settings;
+		this.workspace = workspace;
 	}
 
 	void IActionHandler.Initialize ()
@@ -80,7 +86,7 @@ internal sealed class NewDocumentAction : IActionHandler
 		}
 
 		Size imageSize = new (imgWidth, imgHeight);
-		NewImageDialog dialog = new (imageSize, bg_type, using_clipboard);
+		NewImageDialog dialog = new (chrome, palette, imageSize, bg_type, using_clipboard);
 
 		dialog.OnResponse += (_, e) => {
 

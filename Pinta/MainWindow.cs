@@ -65,7 +65,7 @@ public sealed class MainWindow
 		// Initialize interface things
 		_ = new ActionHandlers ();
 
-		PintaCore.Chrome.InitializeProgessDialog (new ProgressDialog ());
+		PintaCore.Chrome.InitializeProgessDialog (new ProgressDialog (PintaCore.Chrome));
 		PintaCore.Chrome.InitializeErrorDialogHandler (ErrorDialog.ShowError);
 		PintaCore.Chrome.InitializeMessageDialog (ErrorDialog.ShowMessage);
 		PintaCore.Chrome.InitializeSimpleEffectDialog (SimpleEffectDialog.Launch);
@@ -255,10 +255,7 @@ public sealed class MainWindow
 	private bool SendToFocusWidget (Gtk.EventControllerKey key_controller)
 	{
 		var widget = window_shell.Window.FocusWidget;
-		if (widget != null && key_controller.Forward (widget)) {
-			return true;
-		}
-
+		if (widget != null && key_controller.Forward (widget)) return true;
 		return false;
 	}
 
@@ -311,7 +308,7 @@ public sealed class MainWindow
 	}
 	#endregion
 
-	private void CreateMainMenu (WindowShell shell)
+	private void CreateMainMenu (WindowShell _)
 	{
 		bool using_header_bar = window_shell.HeaderBar is not null;
 		var menu_bar = Gio.Menu.New ();
@@ -381,32 +378,32 @@ public sealed class MainWindow
 			header_bar.PackEnd (new Gtk.MenuButton () {
 				MenuModel = menu_bar,
 				IconName = Resources.StandardIcons.OpenMenu,
-				TooltipText = Translations.GetString ("Main Menu")
+				TooltipText = Translations.GetString ("Main Menu"),
 			});
 
 			header_bar.PackEnd (new Gtk.MenuButton () {
 				MenuModel = effects_menu,
 				IconName = Resources.Icons.EffectsDefault,
-				TooltipText = Translations.GetString ("Effects")
+				TooltipText = Translations.GetString ("Effects"),
 			});
 
 			header_bar.PackEnd (new Gtk.MenuButton () {
 				MenuModel = adj_menu,
 				IconName = Resources.Icons.AdjustmentsBrightnessContrast,
-				TooltipText = Translations.GetString ("Adjustments")
+				TooltipText = Translations.GetString ("Adjustments"),
 			});
 
 			header_bar.PackEnd (new Gtk.MenuButton () {
 				MenuModel = image_menu,
 				IconName = Resources.StandardIcons.ImageGeneric,
-				TooltipText = Translations.GetString ("Image")
+				TooltipText = Translations.GetString ("Image"),
 			});
 		}
 
 		PintaCore.Chrome.InitializeMainMenu (adj_menu, effects_menu);
 	}
 
-	private void CreateMainToolBar (WindowShell shell)
+	private void CreateMainToolBar (WindowShell _)
 	{
 		if (window_shell.HeaderBar is not null)
 			PintaCore.Actions.CreateHeaderToolBar (window_shell.HeaderBar!);
@@ -416,7 +413,7 @@ public sealed class MainWindow
 		}
 	}
 
-	private void CreateToolToolBar (WindowShell shell)
+	private void CreateToolToolBar (WindowShell _)
 	{
 		var tool_toolbar = window_shell.CreateToolBar ("tool_toolbar");
 		tool_toolbar.HeightRequest = 48;
