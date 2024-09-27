@@ -173,9 +173,10 @@ internal abstract class AsyncEffectRenderer
 	CancellationToken ReplaceCancellationSource ()
 	{
 		CancellationTokenSource newSource = new ();
-		CancellationTokenSource oldSource = Interlocked.Exchange (ref cancellation_source, newSource);
+		CancellationTokenSource oldSource = cancellation_source;
 		oldSource.Cancel ();
 		oldSource.Dispose ();
+		cancellation_source = newSource;
 		return newSource.Token;
 	}
 
