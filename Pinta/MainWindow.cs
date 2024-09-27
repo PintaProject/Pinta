@@ -294,12 +294,12 @@ public sealed class MainWindow
 			useHeaderBar: PintaCore.System.OperatingSystem != OS.Mac, // On macOS the global menubar is used, but otherwise use a header bar. We also use a regular Gtk window on macOS to have a traditional titlebar with the standard close / minimize buttons.
 			maximize);
 
-		CreateMainMenu (window_shell);
-		CreateMainToolBar (window_shell);
-		CreateToolToolBar (window_shell);
+		CreateMainMenu ();
+		CreateMainToolBar ();
+		CreateToolToolBar ();
 
-		CreatePanels (window_shell);
-		CreateStatusBar (window_shell);
+		CreatePanels ();
+		CreateStatusBar ();
 
 		app.AddWindow (window_shell.Window);
 
@@ -308,7 +308,7 @@ public sealed class MainWindow
 	}
 	#endregion
 
-	private void CreateMainMenu (WindowShell _)
+	private void CreateMainMenu ()
 	{
 		bool using_header_bar = window_shell.HeaderBar is not null;
 		var menu_bar = Gio.Menu.New ();
@@ -403,7 +403,7 @@ public sealed class MainWindow
 		PintaCore.Chrome.InitializeMainMenu (adj_menu, effects_menu);
 	}
 
-	private void CreateMainToolBar (WindowShell _)
+	private void CreateMainToolBar ()
 	{
 		if (window_shell.HeaderBar is not null)
 			PintaCore.Actions.CreateHeaderToolBar (window_shell.HeaderBar!);
@@ -413,7 +413,7 @@ public sealed class MainWindow
 		}
 	}
 
-	private void CreateToolToolBar (WindowShell _)
+	private void CreateToolToolBar ()
 	{
 		var tool_toolbar = window_shell.CreateToolBar ("tool_toolbar");
 		tool_toolbar.HeightRequest = 48;
@@ -421,9 +421,9 @@ public sealed class MainWindow
 		PintaCore.Chrome.InitializeToolToolBar (tool_toolbar);
 	}
 
-	private static void CreateStatusBar (WindowShell shell)
+	private void CreateStatusBar ()
 	{
-		var statusbar = shell.CreateStatusBar ("statusbar");
+		var statusbar = window_shell.CreateStatusBar ("statusbar");
 
 		statusbar.Append (new StatusBarColorPaletteWidget () {
 			Hexpand = true,
@@ -435,9 +435,9 @@ public sealed class MainWindow
 		PintaCore.Chrome.InitializeStatusBar (statusbar);
 	}
 
-	private void CreatePanels (WindowShell shell)
+	private void CreatePanels ()
 	{
-		Gtk.Box panel_container = shell.CreateWorkspace ();
+		Gtk.Box panel_container = window_shell.CreateWorkspace ();
 		CreateDockAndPads (panel_container);
 	}
 
