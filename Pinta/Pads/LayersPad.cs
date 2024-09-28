@@ -24,34 +24,42 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 // THE SOFTWARE.
 
-using Gtk;
 using Pinta.Core;
 using Pinta.Docking;
 using Pinta.Gui.Widgets;
 
 namespace Pinta;
 
-public sealed class LayersPad : IDockPad
+internal sealed class LayersPad : IDockPad
 {
-	public void Initialize (Dock workspace, Application app, Gio.Menu padMenu)
+	private readonly LayerActions layer_actions;
+	internal LayersPad (LayerActions layerActions)
 	{
-		var layers = new LayersListView ();
+		layer_actions = layerActions;
+	}
+
+	public void Initialize (
+		Dock workspace,
+		Gtk.Application app,
+		Gio.Menu padMenu)
+	{
+		LayersListView layers = new ();
 		DockItem layers_item = new DockItem (layers, "Layers", iconName: Pinta.Resources.Icons.LayerDuplicate) {
-			Label = Translations.GetString ("Layers")
+			Label = Translations.GetString ("Layers"),
 		};
 
-		var layers_tb = layers_item.AddToolBar ();
-		layers_tb.Append (PintaCore.Actions.Layers.AddNewLayer.CreateDockToolBarItem ());
-		layers_tb.Append (PintaCore.Actions.Layers.DeleteLayer.CreateDockToolBarItem ());
-		layers_tb.Append (PintaCore.Actions.Layers.DuplicateLayer.CreateDockToolBarItem ());
-		layers_tb.Append (PintaCore.Actions.Layers.MergeLayerDown.CreateDockToolBarItem ());
-		layers_tb.Append (PintaCore.Actions.Layers.MoveLayerUp.CreateDockToolBarItem ());
-		layers_tb.Append (PintaCore.Actions.Layers.MoveLayerDown.CreateDockToolBarItem ());
+		Gtk.Box layers_tb = layers_item.AddToolBar ();
+		layers_tb.Append (layer_actions.AddNewLayer.CreateDockToolBarItem ());
+		layers_tb.Append (layer_actions.DeleteLayer.CreateDockToolBarItem ());
+		layers_tb.Append (layer_actions.DuplicateLayer.CreateDockToolBarItem ());
+		layers_tb.Append (layer_actions.MergeLayerDown.CreateDockToolBarItem ());
+		layers_tb.Append (layer_actions.MoveLayerUp.CreateDockToolBarItem ());
+		layers_tb.Append (layer_actions.MoveLayerDown.CreateDockToolBarItem ());
 
 		workspace.AddItem (layers_item, DockPlacement.Right);
 
-		var show_layers = new ToggleCommand ("layers", Translations.GetString ("Layers"), null, Resources.Icons.LayerMergeDown) {
-			Value = true
+		ToggleCommand show_layers = new ("layers", Translations.GetString ("Layers"), null, Resources.Icons.LayerMergeDown) {
+			Value = true,
 		};
 		app.AddAction (show_layers);
 		padMenu.AppendItem (show_layers.CreateMenuItem ());
