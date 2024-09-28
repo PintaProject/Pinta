@@ -77,7 +77,7 @@ internal abstract class AsyncEffectRenderer
 	bool is_rendering;
 	bool cancel_render_flag;
 	bool restart_render_flag;
-	int render_id;
+	CancellationTokenSource cancellation_source;
 	int current_tile;
 	readonly ImmutableArray<RectangleI> target_tiles;
 	readonly ConcurrentQueue<Exception> render_exceptions;
@@ -96,7 +96,7 @@ internal abstract class AsyncEffectRenderer
 		dest_surface = null;
 
 		is_rendering = false;
-		render_id = 0;
+		cancellation_source = new ();
 		updated_lock = new object ();
 		is_updated = false;
 		render_exceptions = new ConcurrentQueue<Exception> ();
@@ -170,73 +170,93 @@ internal abstract class AsyncEffectRenderer
 		timer_tick_id = 0;
 	}
 
+	CancellationToken ReplaceCancellationSource ()
+	{
+		CancellationTokenSource newSource = new ();
+		CancellationTokenSource oldSource = cancellation_source;
+		oldSource.Cancel ();
+		oldSource.Dispose ();
+		cancellation_source = newSource;
+		return newSource.Token;
+	}
+
 	void StartRender ()
 	{
+		// ------------
+		// === Body ===
+		// ------------
+
 		is_rendering = true;
 		cancel_render_flag = false;
 		restart_render_flag = false;
 		is_updated = false;
 
-		render_id++;
 		render_exceptions.Clear ();
 
 		current_tile = -1;
 
-		Debug.WriteLine ("AsyncEffectRenderer.Start () Render " + render_id + " starting.");
+		Debug.WriteLine ("AsyncEffectRenderer.Start () Render starting."); // TODO: Show some kind of ID, perhaps the address
 
-		// Copy the current render id.
-		int renderId = render_id;
+		CancellationToken cancellationToken = ReplaceCancellationSource ();
 
 		// Start slave render threads.
 		var slaves =
 			Enumerable.Range (0, settings.ThreadCount - 1)
-			.Select (StartSlaveThread)
+			.Select (_ => StartSlaveThread (cancellationToken))
 			.ToImmutableArray ();
 
 		// Start the master render thread.
-		Thread master = StartMasterThread (renderId, slaves);
+		Thread master = StartMasterThread (cancellationToken, slaves);
 
 		// Start timer used to periodically fire update events on the UI thread.
 		timer_tick_id = GLib.Functions.TimeoutAdd (0, (uint) settings.UpdateMillis, () => HandleTimerTick ());
-	}
 
-	Thread StartMasterThread (int renderId, ImmutableArray<Thread> slaves)
-	{
-		return StartRenderThread (() => {
+		// ---------------
+		// === Methods ===
+		// ---------------
 
-			// Do part of the rendering on the master thread.
-			RenderNextTile (renderId);
+		Thread StartSlaveThread (CancellationToken cancellationToken)
+		{
+			return StartRenderThread (() => RenderNextTile (cancellationToken));
+		}
 
-			// Wait for slave threads to complete.
-			foreach (var slave in slaves)
-				slave.Join ();
+		Thread StartRenderThread (ThreadStart callback)
+		{
+			Thread result = new (callback) { Priority = settings.ThreadPriority };
+			result.Start ();
+			return result;
+		}
 
-			// Change back to the UI thread to notify of completion.
-			GLib.Functions.TimeoutAdd (0, 0, () => {
-				HandleRenderCompletion ();
-				return false; // don't call the timer again
+		Thread StartMasterThread (CancellationToken cancellationToken, ImmutableArray<Thread> slaves)
+		{
+			return StartRenderThread (() => {
+
+				// Do part of the rendering on the master thread.
+				RenderNextTile (cancellationToken);
+
+				// Wait for slave threads to complete.
+				foreach (var slave in slaves)
+					slave.Join ();
+
+				// Change back to the UI thread to notify of completion.
+				GLib.Functions.TimeoutAdd (
+					0,
+					0,
+					() => {
+						HandleRenderCompletion ();
+						return false; // don't call the timer again
+					}
+				);
+
 			});
-
-		});
-	}
-
-	Thread StartSlaveThread (int renderId)
-	{
-		return StartRenderThread (() => RenderNextTile (renderId));
-	}
-
-	Thread StartRenderThread (ThreadStart callback)
-	{
-		Thread result = new (callback) { Priority = settings.ThreadPriority };
-		result.Start ();
-		return result;
+		}
 	}
 
 	// Runs on a background thread.
-	void RenderNextTile (int renderId)
+	void RenderNextTile (CancellationToken cancellationToken)
 	{
 		// Fetch the next tile index and render it.
-		for (; ; ) {
+		while (true) {
 
 			int tileIndex = Interlocked.Increment (ref current_tile);
 			if (tileIndex >= target_tiles.Length || cancel_render_flag) return;
@@ -258,8 +278,8 @@ internal abstract class AsyncEffectRenderer
 			}
 
 			// Ignore completions of tiles after a cancel or from a previous render.
-			if (!IsRendering || renderId != render_id)
-				continue;
+			if (!IsRendering || cancellationToken.IsCancellationRequested)
+				return;
 
 			// Update bounds to be shown on next expose.
 			lock (updated_lock) {
