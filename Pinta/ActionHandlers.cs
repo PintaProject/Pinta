@@ -49,7 +49,7 @@ public sealed class ActionHandlers
 		action_handlers = new ()
 		{
 			// File
-			new NewDocumentAction (actions, workspace, settings),
+			new NewDocumentAction (actions, chrome, palette, settings, workspace),
 			new NewScreenshotAction (chrome, workspace, actions),
 			new OpenDocumentAction (actions.File, chrome, workspace, recentFiles, imageFormats),
 			new SaveDocumentAction (actions.File, workspace),

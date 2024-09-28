@@ -65,7 +65,7 @@ public sealed class MainWindow
 		// Initialize interface things
 		_ = new ActionHandlers ();
 
-		PintaCore.Chrome.InitializeProgessDialog (new ProgressDialog ());
+		PintaCore.Chrome.InitializeProgessDialog (new ProgressDialog (PintaCore.Chrome));
 		PintaCore.Chrome.InitializeErrorDialogHandler (ErrorDialog.ShowError);
 		PintaCore.Chrome.InitializeMessageDialog (ErrorDialog.ShowMessage);
 		PintaCore.Chrome.InitializeSimpleEffectDialog (SimpleEffectDialog.Launch);
@@ -255,10 +255,7 @@ public sealed class MainWindow
 	private bool SendToFocusWidget (Gtk.EventControllerKey key_controller)
 	{
 		var widget = window_shell.Window.FocusWidget;
-		if (widget != null && key_controller.Forward (widget)) {
-			return true;
-		}
-
+		if (widget != null && key_controller.Forward (widget)) return true;
 		return false;
 	}
 
@@ -297,12 +294,12 @@ public sealed class MainWindow
 			useHeaderBar: PintaCore.System.OperatingSystem != OS.Mac, // On macOS the global menubar is used, but otherwise use a header bar. We also use a regular Gtk window on macOS to have a traditional titlebar with the standard close / minimize buttons.
 			maximize);
 
-		CreateMainMenu (window_shell);
-		CreateMainToolBar (window_shell);
-		CreateToolToolBar (window_shell);
+		CreateMainMenu ();
+		CreateMainToolBar ();
+		CreateToolToolBar ();
 
-		CreatePanels (window_shell);
-		CreateStatusBar (window_shell);
+		CreatePanels ();
+		CreateStatusBar ();
 
 		app.AddWindow (window_shell.Window);
 
@@ -311,7 +308,7 @@ public sealed class MainWindow
 	}
 	#endregion
 
-	private void CreateMainMenu (WindowShell shell)
+	private void CreateMainMenu ()
 	{
 		bool using_header_bar = window_shell.HeaderBar is not null;
 		var menu_bar = Gio.Menu.New ();
@@ -381,32 +378,32 @@ public sealed class MainWindow
 			header_bar.PackEnd (new Gtk.MenuButton () {
 				MenuModel = menu_bar,
 				IconName = Resources.StandardIcons.OpenMenu,
-				TooltipText = Translations.GetString ("Main Menu")
+				TooltipText = Translations.GetString ("Main Menu"),
 			});
 
 			header_bar.PackEnd (new Gtk.MenuButton () {
 				MenuModel = effects_menu,
 				IconName = Resources.Icons.EffectsDefault,
-				TooltipText = Translations.GetString ("Effects")
+				TooltipText = Translations.GetString ("Effects"),
 			});
 
 			header_bar.PackEnd (new Gtk.MenuButton () {
 				MenuModel = adj_menu,
 				IconName = Resources.Icons.AdjustmentsBrightnessContrast,
-				TooltipText = Translations.GetString ("Adjustments")
+				TooltipText = Translations.GetString ("Adjustments"),
 			});
 
 			header_bar.PackEnd (new Gtk.MenuButton () {
 				MenuModel = image_menu,
 				IconName = Resources.StandardIcons.ImageGeneric,
-				TooltipText = Translations.GetString ("Image")
+				TooltipText = Translations.GetString ("Image"),
 			});
 		}
 
 		PintaCore.Chrome.InitializeMainMenu (adj_menu, effects_menu);
 	}
 
-	private void CreateMainToolBar (WindowShell shell)
+	private void CreateMainToolBar ()
 	{
 		if (window_shell.HeaderBar is not null)
 			PintaCore.Actions.CreateHeaderToolBar (window_shell.HeaderBar!);
@@ -416,7 +413,7 @@ public sealed class MainWindow
 		}
 	}
 
-	private void CreateToolToolBar (WindowShell shell)
+	private void CreateToolToolBar ()
 	{
 		var tool_toolbar = window_shell.CreateToolBar ("tool_toolbar");
 		tool_toolbar.HeightRequest = 48;
@@ -424,9 +421,9 @@ public sealed class MainWindow
 		PintaCore.Chrome.InitializeToolToolBar (tool_toolbar);
 	}
 
-	private static void CreateStatusBar (WindowShell shell)
+	private void CreateStatusBar ()
 	{
-		var statusbar = shell.CreateStatusBar ("statusbar");
+		var statusbar = window_shell.CreateStatusBar ("statusbar");
 
 		statusbar.Append (new StatusBarColorPaletteWidget () {
 			Hexpand = true,
@@ -438,9 +435,9 @@ public sealed class MainWindow
 		PintaCore.Chrome.InitializeStatusBar (statusbar);
 	}
 
-	private void CreatePanels (WindowShell shell)
+	private void CreatePanels ()
 	{
-		Gtk.Box panel_container = shell.CreateWorkspace ();
+		Gtk.Box panel_container = window_shell.CreateWorkspace ();
 		CreateDockAndPads (panel_container);
 	}
 
