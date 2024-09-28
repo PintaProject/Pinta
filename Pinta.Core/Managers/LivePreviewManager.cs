@@ -360,9 +360,11 @@ public sealed class LivePreviewManager
 
 		// Convert to integer, carefully not to miss partially covered
 		// pixels by rounding incorrectly.
+		int x = (int) Math.Floor (bounds1.X);
+		int y = (int) Math.Floor (bounds1.Y);
 		RectangleI areaToInvalidate = new (
-			X: (int) Math.Floor (bounds1.X),
-			Y: (int) Math.Floor (bounds1.Y),
+			X: x,
+			Y: y,
 			Width: (int) Math.Ceiling (bounds2.X) - x,
 			Height: (int) Math.Ceiling (bounds2.Y) - y);
 
