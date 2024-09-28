@@ -29,6 +29,7 @@
 #endif
 
 using System;
+using System.Collections.Generic;
 using System.ComponentModel;
 using System.Threading;
 using Debug = System.Diagnostics.Debug;
@@ -115,7 +116,7 @@ public sealed class LivePreviewManager
 		history_item.TakeSnapshotOfLayer (doc.Layers.CurrentUserLayerIndex);
 
 		// Paint the pre-effect layer surface into into the working surface.
-		var ctx = new Cairo.Context (live_preview_surface);
+		Cairo.Context ctx = new (live_preview_surface);
 		layer.Draw (ctx, layer.Surface, 1);
 
 		if (effect.EffectData != null)
@@ -287,16 +288,20 @@ public sealed class LivePreviewManager
 			this.chrome_manager = chromeManager;
 		}
 
-		protected override void OnUpdate (double progress, RectangleI updatedBounds)
+		protected override void OnUpdate (
+			double progress,
+			RectangleI updatedBounds)
 		{
 			Debug.WriteLine (DateTime.Now.ToString ("HH:mm:ss:ffff") + " LivePreviewManager.OnUpdate() progress: " + progress);
 			chrome_manager.ProgressDialog.Progress = progress;
 			manager.FireLivePreviewRenderUpdatedEvent (progress, updatedBounds);
 		}
 
-		protected override void OnCompletion (bool cancelled, Exception[] exceptions)
+		protected override void OnCompletion (
+			IReadOnlyList<Exception> exceptions,
+			CancellationToken cancellationToken)
 		{
-			Debug.WriteLine (DateTime.Now.ToString ("HH:mm:ss:ffff") + " LivePreviewManager.OnCompletion() cancelled: " + cancelled);
+			Debug.WriteLine (DateTime.Now.ToString ("HH:mm:ss:ffff") + " LivePreviewManager.OnCompletion() cancelled: " + cancellationToken.IsCancellationRequested);
 
 			if (!manager.live_preview_enabled)
 				return;
@@ -310,10 +315,9 @@ public sealed class LivePreviewManager
 
 	void FireLivePreviewEndedEvent (RenderStatus status, Exception? ex)
 	{
-		if (Ended != null) {
-			var args = new LivePreviewEndedEventArgs (status, ex);
-			Ended (this, args);
-		}
+		if (Ended == null) return;
+		LivePreviewEndedEventArgs args = new (status, ex);
+		Ended (this, args);
 	}
 
 	void FireLivePreviewRenderUpdatedEvent (double progress, RectangleI bounds)
@@ -334,12 +338,11 @@ public sealed class LivePreviewManager
 		// Calculate canvas bounds.
 		PointD bounds1 = new (
 			X: bounds.Left * scale,
-			Y: bounds.Top * scale
-		);
+			Y: bounds.Top * scale);
+
 		PointD bounds2 = new (
 			X: (bounds.Right + 1) * scale,
-			Y: (bounds.Bottom + 1) * scale
-		);
+			Y: (bounds.Bottom + 1) * scale);
 
 		// TODO Figure out why when scale > 1 that I need add on an
 		// extra pixel of padding.
@@ -357,14 +360,11 @@ public sealed class LivePreviewManager
 
 		// Convert to integer, carefully not to miss partially covered
 		// pixels by rounding incorrectly.
-		int x = (int) Math.Floor (bounds1.X);
-		int y = (int) Math.Floor (bounds1.Y);
 		RectangleI areaToInvalidate = new (
-			X: x,
-			Y: y,
+			X: (int) Math.Floor (bounds1.X),
+			Y: (int) Math.Floor (bounds1.Y),
 			Width: (int) Math.Ceiling (bounds2.X) - x,
-			Height: (int) Math.Ceiling (bounds2.Y) - y
-		);
+			Height: (int) Math.Ceiling (bounds2.Y) - y);
 
 		// Tell GTK to expose the drawing area.
 		workspace_manager.ActiveWorkspace.InvalidateWindowRect (areaToInvalidate);
