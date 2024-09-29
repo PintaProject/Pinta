@@ -78,7 +78,7 @@ internal abstract class AsyncEffectRenderer
 	bool is_rendering;
 	bool restart_render_flag;
 	CancellationTokenSource cancellation_source;
-	int current_tile;
+	ConcurrentQueue<RectangleI> queued_tiles;
 	readonly ImmutableArray<RectangleI> target_tiles;
 	readonly ConcurrentQueue<Exception> render_exceptions;
 
@@ -99,6 +99,7 @@ internal abstract class AsyncEffectRenderer
 		cancellation_source = new ();
 		updated_lock = new object ();
 		is_updated = false;
+		queued_tiles = new ConcurrentQueue<RectangleI> ();
 		render_exceptions = new ConcurrentQueue<Exception> ();
 
 		timer_tick_id = 0;
@@ -114,12 +115,9 @@ internal abstract class AsyncEffectRenderer
 
 	internal double Progress {
 		get {
-			if (target_tiles.Length == 0 || current_tile < 0)
-				return 0;
-			else if (current_tile < target_tiles.Length)
-				return current_tile / (double) target_tiles.Length;
-			else
-				return 1;
+			if (target_tiles.Length == 0) return 0;
+			int dequeued = target_tiles.Length - queued_tiles.Count;
+			return dequeued / (double) target_tiles.Length;
 		}
 	}
 
@@ -198,7 +196,7 @@ internal abstract class AsyncEffectRenderer
 
 		render_exceptions.Clear ();
 
-		current_tile = -1;
+		queued_tiles = new ConcurrentQueue<RectangleI> (target_tiles);
 
 		CancellationToken cancellationToken = ReplaceCancellationSource ();
 
@@ -266,11 +264,10 @@ internal abstract class AsyncEffectRenderer
 		// Fetch the next tile index and render it.
 		while (true) {
 
-			int tileIndex = Interlocked.Increment (ref current_tile);
-			if (tileIndex >= target_tiles.Length || cancellationToken.IsCancellationRequested) return;
+			if (cancellationToken.IsCancellationRequested) return;
+			if (!queued_tiles.TryDequeue (out RectangleI tileBounds)) return;
 
 			Exception? exception = null;
-			RectangleI tileBounds = target_tiles[tileIndex];
 
 			try {
 				// NRT - These are set in Start () before getting here
