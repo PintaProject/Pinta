@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-09-22 01:36+0000\n"
+"POT-Creation-Date: 2024-09-29 01:38+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -46,7 +46,7 @@ msgstr ""
 msgid "9 x 9 Region"
 msgstr ""
 
-#: ../Pinta/MainWindow.cs:357
+#: ../Pinta/MainWindow.cs:360
 msgid "A_dd-ins"
 msgstr ""
 
@@ -76,7 +76,7 @@ msgstr ""
 msgid "Added"
 msgstr ""
 
-#: ../Pinta/MainWindow.cs:390
+#: ../Pinta/MainWindow.cs:393
 msgid "Adjustments"
 msgstr ""
 
@@ -167,15 +167,15 @@ msgstr ""
 msgid "Available in repository: {0}"
 msgstr ""
 
-#: ../Pinta.Core/Managers/WorkspaceManager.cs:119
+#: ../Pinta.Core/Managers/WorkspaceManager.cs:137
 msgid "Background"
 msgstr ""
 
-#: ../Pinta/Dialogs/NewImageDialog.cs:112
+#: ../Pinta/Dialogs/NewImageDialog.cs:113
 msgid "Background Color"
 msgstr ""
 
-#: ../Pinta/Dialogs/NewImageDialog.cs:307
+#: ../Pinta/Dialogs/NewImageDialog.cs:309
 msgid "Background:"
 msgstr ""
 
@@ -407,10 +407,10 @@ msgstr ""
 msgid "Click to switch between primary and secondary color."
 msgstr ""
 
-#: ../Pinta/Dialogs/NewImageDialog.cs:358
-#: ../Pinta/Dialogs/NewImageDialog.cs:417
-#: ../Pinta/Dialogs/NewImageDialog.cs:439
-#: ../Pinta/Dialogs/NewImageDialog.cs:532
+#: ../Pinta/Dialogs/NewImageDialog.cs:360
+#: ../Pinta/Dialogs/NewImageDialog.cs:419
+#: ../Pinta/Dialogs/NewImageDialog.cs:441
+#: ../Pinta/Dialogs/NewImageDialog.cs:534
 msgid "Clipboard"
 msgstr ""
 
@@ -538,8 +538,8 @@ msgid "Could not import layer \"{0}\" from {1}"
 msgstr ""
 
 #: ../Pinta.Core/Classes/Palette.cs:191
-#: ../Pinta.Core/Managers/WorkspaceManager.cs:402
-#: ../Pinta.Core/Managers/WorkspaceManager.cs:410
+#: ../Pinta.Core/Managers/WorkspaceManager.cs:421
+#: ../Pinta.Core/Managers/WorkspaceManager.cs:433
 #, csharp-format
 msgid "Could not open file: {0}"
 msgstr ""
@@ -558,10 +558,10 @@ msgstr ""
 msgid "Curves"
 msgstr ""
 
-#: ../Pinta/Dialogs/NewImageDialog.cs:360
-#: ../Pinta/Dialogs/NewImageDialog.cs:417
-#: ../Pinta/Dialogs/NewImageDialog.cs:441
-#: ../Pinta/Dialogs/NewImageDialog.cs:532
+#: ../Pinta/Dialogs/NewImageDialog.cs:362
+#: ../Pinta/Dialogs/NewImageDialog.cs:419
+#: ../Pinta/Dialogs/NewImageDialog.cs:443
+#: ../Pinta/Dialogs/NewImageDialog.cs:534
 msgid "Custom"
 msgstr ""
 
@@ -667,11 +667,11 @@ msgstr ""
 msgid "Edge Detect"
 msgstr ""
 
-#: ../Pinta/MainWindow.cs:353
+#: ../Pinta/MainWindow.cs:356
 msgid "Effe_cts"
 msgstr ""
 
-#: ../Pinta/MainWindow.cs:384
+#: ../Pinta/MainWindow.cs:387
 msgid "Effects"
 msgstr ""
 
@@ -737,7 +737,7 @@ msgstr ""
 msgid "Failed to access XDG Desktop Portals"
 msgstr ""
 
-#: ../Pinta/MainWindow.cs:277
+#: ../Pinta/MainWindow.cs:273
 msgid "Failed to initialize add-in"
 msgstr ""
 
@@ -745,7 +745,7 @@ msgstr ""
 msgid "Failed to load extension package"
 msgstr ""
 
-#: ../Pinta.Core/Managers/WorkspaceManager.cs:428
+#: ../Pinta.Core/Managers/WorkspaceManager.cs:453
 msgid "Failed to open image"
 msgstr ""
 
@@ -920,7 +920,7 @@ msgstr ""
 msgid "Hard Light"
 msgstr ""
 
-#: ../Pinta/Dialogs/NewImageDialog.cs:333
+#: ../Pinta/Dialogs/NewImageDialog.cs:335
 #: ../Pinta/Dialogs/ResizeCanvasDialog.cs:81
 #: ../Pinta/Dialogs/ResizeImageDialog.cs:164
 msgid "Height:"
@@ -970,7 +970,7 @@ msgstr ""
 msgid "If you don't save, all changes will be permanently lost."
 msgstr ""
 
-#: ../Pinta.Tools/Tools/ColorPickerTool.cs:241 ../Pinta/MainWindow.cs:396
+#: ../Pinta.Tools/Tools/ColorPickerTool.cs:241 ../Pinta/MainWindow.cs:399
 msgid "Image"
 msgstr ""
 
@@ -1087,7 +1087,7 @@ msgstr ""
 msgid "Julia Fractal"
 msgstr ""
 
-#: ../Pinta/Dialogs/NewImageDialog.cs:300
+#: ../Pinta/Dialogs/NewImageDialog.cs:302
 msgid "Landscape"
 msgstr ""
 
@@ -1300,7 +1300,7 @@ msgstr ""
 msgid "Magic Wand Select"
 msgstr ""
 
-#: ../Pinta/MainWindow.cs:378
+#: ../Pinta/MainWindow.cs:381
 msgid "Main Menu"
 msgstr ""
 
@@ -1372,8 +1372,8 @@ msgstr ""
 msgid "New"
 msgstr ""
 
-#: ../Pinta.Core/Managers/WorkspaceManager.cs:127
-#: ../Pinta/Dialogs/NewImageDialog.cs:196
+#: ../Pinta.Core/Managers/WorkspaceManager.cs:145
+#: ../Pinta/Dialogs/NewImageDialog.cs:197
 msgid "New Image"
 msgstr ""
 
@@ -1465,7 +1465,7 @@ msgstr ""
 msgid "Open Curve Shape"
 msgstr ""
 
-#: ../Pinta.Core/Managers/WorkspaceManager.cs:314
+#: ../Pinta.Core/Managers/WorkspaceManager.cs:329
 msgid "Open Image"
 msgstr ""
 
@@ -1487,7 +1487,7 @@ msgstr ""
 msgid "Open..."
 msgstr ""
 
-#: ../Pinta/Dialogs/NewImageDialog.cs:316
+#: ../Pinta/Dialogs/NewImageDialog.cs:318
 msgid "Orientation:"
 msgstr ""
 
@@ -1598,7 +1598,7 @@ msgid "Photo"
 msgstr ""
 
 #: ../xdg/pinta.desktop.in.h:1 ../Pinta/Actions/Help/AboutDialogAction.cs:66
-#: ../Pinta/Main.cs:68 ../Pinta/MainWindow.cs:58
+#: ../Pinta/Main.cs:68 ../Pinta/MainWindow.cs:57
 msgid "Pinta"
 msgstr ""
 
@@ -1631,7 +1631,7 @@ msgid ""
 "help organize your creativity."
 msgstr ""
 
-#: ../Pinta.Core/Managers/WorkspaceManager.cs:411
+#: ../Pinta.Core/Managers/WorkspaceManager.cs:434
 msgid "Pinta supports the following file formats:"
 msgstr ""
 
@@ -1669,7 +1669,7 @@ msgstr ""
 msgid "Polar Inversion"
 msgstr ""
 
-#: ../Pinta/Dialogs/NewImageDialog.cs:296
+#: ../Pinta/Dialogs/NewImageDialog.cs:298
 msgid "Portrait"
 msgstr ""
 
@@ -1695,11 +1695,11 @@ msgstr ""
 msgid "Preset Gradient"
 msgstr ""
 
-#: ../Pinta/Dialogs/NewImageDialog.cs:341
+#: ../Pinta/Dialogs/NewImageDialog.cs:343
 msgid "Preset:"
 msgstr ""
 
-#: ../Pinta/Dialogs/NewImageDialog.cs:160
+#: ../Pinta/Dialogs/NewImageDialog.cs:161
 msgid "Preview"
 msgstr ""
 
@@ -1869,7 +1869,7 @@ msgstr ""
 msgid "Reset to Default"
 msgstr ""
 
-#: ../Pinta.Core/Classes/Document.cs:310
+#: ../Pinta.Core/Classes/Document.cs:307
 #: ../Pinta/Dialogs/ResizeCanvasDialog.cs:169
 msgid "Resize Canvas"
 msgstr ""
@@ -2135,7 +2135,7 @@ msgid "Text Style"
 msgstr ""
 
 #. Translators: {0} is the name of an add-in.
-#: ../Pinta/MainWindow.cs:275
+#: ../Pinta/MainWindow.cs:271
 #, csharp-format
 msgid "The '{0}' add-in may not be compatible with this version of Pinta"
 msgstr ""
@@ -2234,7 +2234,7 @@ msgstr ""
 msgid "Tool Box"
 msgstr ""
 
-#: ../Pinta/MainWindow.cs:371
+#: ../Pinta/MainWindow.cs:374
 msgid "Tool Windows"
 msgstr ""
 
@@ -2267,7 +2267,7 @@ msgid "Transparency Mode"
 msgstr ""
 
 #: ../Pinta.Effects/Effects/WarpEffect.cs:35
-#: ../Pinta/Dialogs/NewImageDialog.cs:120
+#: ../Pinta/Dialogs/NewImageDialog.cs:121
 msgid "Transparent"
 msgstr ""
 
@@ -2316,12 +2316,12 @@ msgstr ""
 msgid "Union (+) ({0} + Left Click)"
 msgstr ""
 
-#: ../Pinta.Core/Managers/WorkspaceManager.cs:218
+#: ../Pinta.Core/Managers/WorkspaceManager.cs:230
 #, csharp-format
 msgid "Unsaved Image {0}"
 msgstr ""
 
-#: ../Pinta.Core/Managers/WorkspaceManager.cs:309
+#: ../Pinta.Core/Managers/WorkspaceManager.cs:324
 msgid "Unsupported file format"
 msgstr ""
 
@@ -2384,11 +2384,11 @@ msgstr ""
 msgid "Warmth"
 msgstr ""
 
-#: ../Pinta/Dialogs/NewImageDialog.cs:105
+#: ../Pinta/Dialogs/NewImageDialog.cs:106
 msgid "White"
 msgstr ""
 
-#: ../Pinta/Dialogs/NewImageDialog.cs:325
+#: ../Pinta/Dialogs/NewImageDialog.cs:327
 #: ../Pinta/Dialogs/ResizeCanvasDialog.cs:73
 #: ../Pinta/Dialogs/ResizeImageDialog.cs:157
 msgid "Width:"
@@ -2416,7 +2416,7 @@ msgid "Xor ({0} + Right Click)"
 msgstr ""
 
 #. Translators: {0} is the name of a file that the user does not have permission to open.
-#: ../Pinta.Core/Managers/WorkspaceManager.cs:430
+#: ../Pinta.Core/Managers/WorkspaceManager.cs:456
 #, csharp-format
 msgid "You do not have access to '{0}'."
 msgstr ""
@@ -2451,7 +2451,7 @@ msgstr ""
 msgid "Zoom to Selection"
 msgstr ""
 
-#: ../Pinta/MainWindow.cs:349
+#: ../Pinta/MainWindow.cs:352
 msgid "_Adjustments"
 msgstr ""
 
@@ -2468,23 +2468,23 @@ msgstr ""
 msgid "_Discard"
 msgstr ""
 
-#: ../Pinta/MainWindow.cs:332
+#: ../Pinta/MainWindow.cs:335
 msgid "_Edit"
 msgstr ""
 
-#: ../Pinta/MainWindow.cs:328
+#: ../Pinta/MainWindow.cs:331
 msgid "_File"
 msgstr ""
 
-#: ../Pinta/MainWindow.cs:365
+#: ../Pinta/MainWindow.cs:368
 msgid "_Help"
 msgstr ""
 
-#: ../Pinta/MainWindow.cs:341
+#: ../Pinta/MainWindow.cs:344
 msgid "_Image"
 msgstr ""
 
-#: ../Pinta/MainWindow.cs:345
+#: ../Pinta/MainWindow.cs:348
 msgid "_Layers"
 msgstr ""
 
@@ -2499,11 +2499,11 @@ msgstr ""
 msgid "_Save"
 msgstr ""
 
-#: ../Pinta/MainWindow.cs:336
+#: ../Pinta/MainWindow.cs:339
 msgid "_View"
 msgstr ""
 
-#: ../Pinta/MainWindow.cs:361
+#: ../Pinta/MainWindow.cs:364
 msgid "_Window"
 msgstr ""
 
@@ -2515,7 +2515,7 @@ msgstr ""
 msgid "draw;drawing;paint;painting;graphics;raster;2d;"
 msgstr ""
 
-#: ../Pinta/Dialogs/NewImageDialog.cs:277
+#: ../Pinta/Dialogs/NewImageDialog.cs:279
 #: ../Pinta/Dialogs/ResizeCanvasDialog.cs:96
 #: ../Pinta/Dialogs/ResizeCanvasDialog.cs:99
 #: ../Pinta/Dialogs/ResizeImageDialog.cs:68
