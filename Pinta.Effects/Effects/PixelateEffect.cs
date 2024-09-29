@@ -41,10 +41,14 @@ public sealed class PixelateEffect : BaseEffect
 		=> chrome.LaunchSimpleEffectDialog (this);
 
 	#region Algorithm Code Ported From PDN
-	private static ColorBgra ComputeCellColor (int x, int y, ReadOnlySpan<ColorBgra> src_data, int cellSize, RectangleI srcBounds)
+	private static ColorBgra ComputeCellColor (
+		int x,
+		int y,
+		ReadOnlySpan<ColorBgra> src_data,
+		int cellSize,
+		RectangleI srcBounds)
 	{
-		RectangleI cell = GetCellBox (x, y, cellSize);
-		cell = cell.Intersect (srcBounds);
+		RectangleI cell = GetCellBox (x, y, cellSize).Intersect (srcBounds);
 
 		int left = cell.Left;
 		int right = cell.Right;
@@ -56,7 +60,11 @@ public sealed class PixelateEffect : BaseEffect
 		ColorBgra colorBottomLeft = src_data[bottom * srcBounds.Width + left].ToStraightAlpha ();
 		ColorBgra colorBottomRight = src_data[bottom * srcBounds.Width + right].ToStraightAlpha ();
 
-		ColorBgra c = ColorBgra.BlendColors4W16IP (colorTopLeft, 16384, colorTopRight, 16384, colorBottomLeft, 16384, colorBottomRight, 16384);
+		ColorBgra c = ColorBgra.BlendColors4W16IP (
+			colorTopLeft, 16384,
+			colorTopRight, 16384,
+			colorBottomLeft, 16384,
+			colorBottomRight, 16384);
 
 		return c.ToPremultipliedAlpha ();
 	}
@@ -70,7 +78,10 @@ public sealed class PixelateEffect : BaseEffect
 	}
 
 
-	public override void Render (ImageSurface src, ImageSurface dest, ReadOnlySpan<RectangleI> rois)
+	public override void Render (
+		ImageSurface src,
+		ImageSurface dest,
+		ReadOnlySpan<RectangleI> rois)
 	{
 		var cellSize = Data.CellSize;
 
@@ -85,9 +96,8 @@ public sealed class PixelateEffect : BaseEffect
 				int yEnd = y + 1;
 
 				for (int x = rect.Left; x <= rect.Right; ++x) {
-					var cellRect = GetCellBox (x, y, cellSize);
-					cellRect = cellRect.Intersect (dest_bounds);
-					var color = ComputeCellColor (x, y, src_data, cellSize, src_bounds);
+					RectangleI cellRect = GetCellBox (x, y, cellSize).Intersect (dest_bounds);
+					ColorBgra color = ComputeCellColor (x, y, src_data, cellSize, src_bounds);
 
 					int xEnd = Math.Min (rect.Right, cellRect.Right);
 					yEnd = Math.Min (rect.Bottom, cellRect.Bottom);
@@ -96,7 +106,7 @@ public sealed class PixelateEffect : BaseEffect
 						var dst_row = dst_data.Slice (y2 * dest_bounds.Width, dest_bounds.Width);
 
 						for (int x2 = x; x2 <= xEnd; ++x2)
-							dst_row[x2].Bgra = color.Bgra;
+							dst_row[x2] = color;
 					}
 
 					x = xEnd;
