@@ -693,24 +693,24 @@ namespace Pinta.Core
 		// the passed in argument, but it's nice to have the same calling
 		// convention as the uncached version.  If you can use this one
 		// over the other, it is much faster in tight loops (like effects).
-		public static ColorBgra GetColorBgra (
+		public static ref readonly ColorBgra GetColorBgra (
 			this ImageSurface surf,
 			ReadOnlySpan<ColorBgra> data,
 			int width,
 			PointI position)
 		{
-			return data[width * position.Y + position.X];
+			return ref data[width * position.Y + position.X];
 		}
 
 		/// <summary>
 		/// Prefer using the variant which takes the surface data and width, for improved performance
 		/// if there are repeated calls in a loop.
 		/// </summary>
-		public static ColorBgra GetColorBgra (
+		public static ref readonly ColorBgra GetColorBgra (
 			this ImageSurface surf,
 			PointI position)
 		{
-			return surf.GetColorBgra (surf.GetReadOnlyPixelData (), surf.Width, position);
+			return ref surf.GetColorBgra (surf.GetReadOnlyPixelData (), surf.Width, position);
 		}
 
 		public static RectangleI GetBounds (this ImageSurface surf)
