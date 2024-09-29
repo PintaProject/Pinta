@@ -22,8 +22,8 @@ public abstract class GradientRenderer
 	private readonly ColorBgra[] lerp_colors;
 
 	protected internal GradientRenderer (
-	bool alphaOnly,
-	BinaryPixelOp normalBlendOp)
+		bool alphaOnly,
+		BinaryPixelOp normalBlendOp)
 	{
 		normal_blend_op = normalBlendOp;
 		AlphaOnly = alphaOnly;
