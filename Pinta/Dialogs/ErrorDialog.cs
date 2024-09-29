@@ -24,14 +24,22 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 // THE SOFTWARE.
 
-using Gtk;
 using Pinta.Core;
 
 namespace Pinta;
 
-public static class ErrorDialog
+internal sealed class ErrorDialog
 {
-	public static void ShowMessage (Window parent, string message, string body)
+	private readonly HelpActions help;
+	internal ErrorDialog (HelpActions help)
+	{
+		this.help = help;
+	}
+
+	internal static void ShowMessage (
+		Gtk.Window parent,
+		string message,
+		string body)
 	{
 		System.Console.Error.WriteLine ("Pinta: {0}\n{1}", message, body);
 
@@ -45,7 +53,11 @@ public static class ErrorDialog
 		dialog.Present ();
 	}
 
-	public static void ShowError (Window parent, string message, string body, string details)
+	internal void ShowError (
+		Gtk.Window parent,
+		string message,
+		string body,
+		string details)
 	{
 		System.Console.Error.WriteLine ("Pinta: {0}\n{1}", message, details);
 
@@ -72,7 +84,7 @@ public static class ErrorDialog
 
 		dialog.OnResponse += (_, args) => {
 			if (args.Response == bug_response)
-				PintaCore.Actions.Help.Bugs.Activate ();
+				help.Bugs.Activate ();
 		};
 
 		dialog.Present ();

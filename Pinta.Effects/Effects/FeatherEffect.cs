@@ -37,7 +37,10 @@ public sealed class FeatherEffect : BaseEffect
 	public override void LaunchConfiguration ()
 		=> chrome.LaunchSimpleEffectDialog (this);
 
-	protected override void Render (ImageSurface src, ImageSurface dest, RectangleI roi)
+	protected override void Render (
+		ImageSurface src,
+		ImageSurface dest,
+		RectangleI roi)
 	{
 		int src_height = src.Height;
 		int radius = Data.Radius;
@@ -63,7 +66,7 @@ public sealed class FeatherEffect : BaseEffect
 				var dst_row = dst_data.Slice (y * src_width, src_width);
 
 				for (int x = roi.Left; x <= roi.Right; x++)
-					dst_row[x].Bgra = src_row[x].Bgra;
+					dst_row[x] = src_row[x];
 
 				Span<PointI> pixels = stackalloc PointI[] { PointI.Zero, PointI.Zero, PointI.Zero, PointI.Zero };
 
@@ -124,6 +127,7 @@ public sealed class FeatherEffect : BaseEffect
 					.ToImmutableArray ();
 
 				for (int px = roi.Left; px <= roi.Right; px++) {
+
 					int pixel_index = py * src_width + px;
 					byte lowestAlpha = dst_data[pixel_index].A;
 
@@ -136,8 +140,8 @@ public sealed class FeatherEffect : BaseEffect
 						if (borderPixel.X <= px - radius || borderPixel.X >= px + radius)
 							continue;
 
-						var dx = borderPixel.X - px;
-						var dy = borderPixel.Y - py;
+						int dx = borderPixel.X - px;
+						int dy = borderPixel.Y - py;
 						float distance = MathF.Sqrt (dx * dx + dy * dy);
 
 						if (distance > radius)
@@ -152,7 +156,7 @@ public sealed class FeatherEffect : BaseEffect
 					}
 
 					if (lowestAlpha < dst_data[pixel_index].A)
-						dst_data[pixel_index].Bgra = src_data[pixel_index].ToStraightAlpha ().NewAlpha (lowestAlpha).ToPremultipliedAlpha ().Bgra;
+						dst_data[pixel_index] = src_data[pixel_index].ToStraightAlpha ().NewAlpha (lowestAlpha).ToPremultipliedAlpha ();
 				}
 			}
 		);

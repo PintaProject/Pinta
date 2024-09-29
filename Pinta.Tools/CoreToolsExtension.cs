@@ -45,7 +45,7 @@ public sealed class CoreToolsExtension : IExtension
 
 		PintaCore.PaintBrushes.AddPaintBrush (new Brushes.CircleBrush ());
 		PintaCore.PaintBrushes.AddPaintBrush (new Brushes.GridBrush ());
-		PintaCore.PaintBrushes.AddPaintBrush (new Brushes.PlainBrush ());
+		PintaCore.PaintBrushes.AddPaintBrush (new Brushes.PlainBrush (PintaCore.Workspace));
 		PintaCore.PaintBrushes.AddPaintBrush (new Brushes.SplatterBrush ());
 		PintaCore.PaintBrushes.AddPaintBrush (new Brushes.SquaresBrush ());
 

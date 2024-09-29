@@ -31,7 +31,7 @@ using Pinta.Core;
 
 namespace Pinta.Tools.Brushes;
 
-public sealed class GridBrush : BasePaintBrush
+internal sealed class GridBrush : BasePaintBrush
 {
 	public override string Name => Translations.GetString ("Grid");
 
@@ -46,13 +46,11 @@ public sealed class GridBrush : BasePaintBrush
 	{
 		PointD c = new (
 			X: Math.Round (strokeArgs.CurrentPosition.X / 100.0) * 100.0,
-			Y: Math.Round (strokeArgs.CurrentPosition.Y / 100.0) * 100.0
-		);
+			Y: Math.Round (strokeArgs.CurrentPosition.Y / 100.0) * 100.0);
 
 		PointD d = new (
 			X: (c.X - strokeArgs.CurrentPosition.X) * 10.0,
-			Y: (c.Y - strokeArgs.CurrentPosition.Y) * 10.0
-		);
+			Y: (c.Y - strokeArgs.CurrentPosition.Y) * 10.0);
 
 		for (int i = 0; i < 50; i++) {
 			g.MoveTo (c.X, c.Y);
