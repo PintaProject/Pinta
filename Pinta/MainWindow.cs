@@ -33,7 +33,7 @@ using Pinta.Gui.Widgets;
 
 namespace Pinta;
 
-public sealed class MainWindow
+internal sealed class MainWindow
 {
 	readonly Adw.Application app;
 	// NRT - Created in OnActivated
@@ -65,8 +65,10 @@ public sealed class MainWindow
 		// Initialize interface things
 		_ = new ActionHandlers ();
 
+		ErrorDialog errorDialog = new (PintaCore.Actions.Help);
+
 		PintaCore.Chrome.InitializeProgessDialog (new ProgressDialog (PintaCore.Chrome));
-		PintaCore.Chrome.InitializeErrorDialogHandler (ErrorDialog.ShowError);
+		PintaCore.Chrome.InitializeErrorDialogHandler (errorDialog.ShowError);
 		PintaCore.Chrome.InitializeMessageDialog (ErrorDialog.ShowMessage);
 		PintaCore.Chrome.InitializeSimpleEffectDialog (SimpleEffectDialog.Launch);
 
@@ -111,7 +113,7 @@ public sealed class MainWindow
 		PintaCore.Workspace.DocumentCreated += Workspace_DocumentCreated;
 		PintaCore.Workspace.DocumentClosed += Workspace_DocumentClosed;
 
-		var notebook = canvas_pad.Notebook;
+		DockNotebook notebook = canvas_pad.Notebook;
 		notebook.TabClosed += DockNotebook_TabClosed;
 		notebook.ActiveTabChanged += DockNotebook_ActiveTabChanged;
 	}
@@ -211,7 +213,9 @@ public sealed class MainWindow
 		return (MetricType) state.GetInt32 ();
 	}
 
-	private bool HandleGlobalKeyPress (Gtk.EventControllerKey controller, Gtk.EventControllerKey.KeyPressedSignalArgs args)
+	private bool HandleGlobalKeyPress (
+		Gtk.EventControllerKey controller,
+		Gtk.EventControllerKey.KeyPressedSignalArgs args)
 	{
 		// Give the widget that has focus a first shot at handling the event.
 		// Otherwise, key presses may be intercepted by shortcuts for menu items.
@@ -238,7 +242,9 @@ public sealed class MainWindow
 		return PintaCore.Palette.DoKeyPress (args);
 	}
 
-	private void HandleGlobalKeyRelease (Gtk.EventControllerKey controller, Gtk.EventControllerKey.KeyReleasedSignalArgs args)
+	private void HandleGlobalKeyRelease (
+		Gtk.EventControllerKey controller,
+		Gtk.EventControllerKey.KeyReleasedSignalArgs args)
 	{
 		if (SendToFocusWidget (controller) || !PintaCore.Workspace.HasOpenDocuments)
 			return;
@@ -268,10 +274,11 @@ public sealed class MainWindow
 				extension.Initialize ();
 			} catch (Exception e) {
 				// Translators: {0} is the name of an add-in.
-				var body = Translations.GetString ("The '{0}' add-in may not be compatible with this version of Pinta", args.ExtensionNode.Addin.Id);
-				PintaCore.Chrome.ShowErrorDialog (PintaCore.Chrome.MainWindow,
-						Translations.GetString ("Failed to initialize add-in"),
-						body, e.ToString ());
+				string body = Translations.GetString ("The '{0}' add-in may not be compatible with this version of Pinta", args.ExtensionNode.Addin.Id);
+				PintaCore.Chrome.ShowErrorDialog (
+					PintaCore.Chrome.MainWindow,
+					Translations.GetString ("Failed to initialize add-in"),
+					body, e.ToString ());
 			}
 		} else
 			extension.Uninitialize ();
@@ -311,7 +318,7 @@ public sealed class MainWindow
 	private void CreateMainMenu ()
 	{
 		bool using_header_bar = window_shell.HeaderBar is not null;
-		var menu_bar = Gio.Menu.New ();
+		Gio.Menu menu_bar = Gio.Menu.New ();
 
 		if (!using_header_bar) {
 			app.Menubar = menu_bar;
@@ -415,7 +422,7 @@ public sealed class MainWindow
 
 	private void CreateToolToolBar ()
 	{
-		var tool_toolbar = window_shell.CreateToolBar ("tool_toolbar");
+		Gtk.Box tool_toolbar = window_shell.CreateToolBar ("tool_toolbar");
 		tool_toolbar.HeightRequest = 48;
 
 		PintaCore.Chrome.InitializeToolToolBar (tool_toolbar);
@@ -423,7 +430,7 @@ public sealed class MainWindow
 
 	private void CreateStatusBar ()
 	{
-		var statusbar = window_shell.CreateStatusBar ("statusbar");
+		Gtk.Box statusbar = window_shell.CreateStatusBar ("statusbar");
 
 		statusbar.Append (new StatusBarColorPaletteWidget () {
 			Hexpand = true,
@@ -467,11 +474,11 @@ public sealed class MainWindow
 		PintaCore.Chrome.InitializeImageTabsNotebook (canvas_pad.Notebook);
 
 		// Layer pad
-		LayersPad layers_pad = new ();
+		LayersPad layers_pad = new (PintaCore.Actions.Layers);
 		layers_pad.Initialize (dock, app, show_pad);
 
 		// History pad
-		HistoryPad history_pad = new ();
+		HistoryPad history_pad = new (PintaCore.Actions.Edit);
 		history_pad.Initialize (dock, app, show_pad);
 
 		container.Append (dock);
@@ -616,9 +623,8 @@ public sealed class MainWindow
 		doc.Workspace.Canvas.GrabFocus ();
 	}
 
-	private IDockNotebookItem? FindTabWithCanvas (PintaCanvas canvas)
-		=>
-			canvas_pad.Notebook.Items
-			.Where (i => ((CanvasWindow) i.Widget).Canvas == canvas)
-			.FirstOrDefault ();
+	private IDockNotebookItem? FindTabWithCanvas (PintaCanvas canvas) =>
+		canvas_pad.Notebook.Items
+		.Where (i => ((CanvasWindow) i.Widget).Canvas == canvas)
+		.FirstOrDefault ();
 }

@@ -31,7 +31,7 @@ using Pinta.Core;
 
 namespace Pinta.Tools.Brushes;
 
-public sealed class SplatterBrush : BasePaintBrush
+internal sealed class SplatterBrush : BasePaintBrush
 {
 	public override string Name
 		=> Translations.GetString ("Splatter");
@@ -73,10 +73,37 @@ public sealed class SplatterBrush : BasePaintBrush
 
 		g.MoveTo (c.X + r.X, c.Y);
 
-		g.CurveTo (c.X + r.X, c.Y - c_1 * r.Y, c.X + c_1 * r.X, c.Y - r.Y, c.X, c.Y - r.Y);
-		g.CurveTo (c.X - c_1 * r.X, c.Y - r.Y, c.X - r.X, c.Y - c_1 * r.Y, c.X - r.X, c.Y);
-		g.CurveTo (c.X - r.X, c.Y + c_1 * r.Y, c.X - c_1 * r.X, c.Y + r.Y, c.X, c.Y + r.Y);
-		g.CurveTo (c.X + c_1 * r.X, c.Y + r.Y, c.X + r.X, c.Y + c_1 * r.Y, c.X + r.X, c.Y);
+		g.CurveTo (
+			c.X + r.X,
+			c.Y - c_1 * r.Y,
+			c.X + c_1 * r.X,
+			c.Y - r.Y,
+			c.X,
+			c.Y - r.Y);
+
+		g.CurveTo (
+			c.X - c_1 * r.X,
+			c.Y - r.Y,
+			c.X - r.X,
+			c.Y - c_1 * r.Y,
+			c.X - r.X,
+			c.Y);
+
+		g.CurveTo (
+			c.X - r.X,
+			c.Y + c_1 * r.Y,
+			c.X - c_1 * r.X,
+			c.Y + r.Y,
+			c.X,
+			c.Y + r.Y);
+
+		g.CurveTo (
+			c.X + c_1 * r.X,
+			c.Y + r.Y,
+			c.X + r.X,
+			c.Y + c_1 * r.Y,
+			c.X + r.X,
+			c.Y);
 
 		g.ClosePath ();
 

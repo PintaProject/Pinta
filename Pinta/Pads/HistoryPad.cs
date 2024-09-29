@@ -24,30 +24,38 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 // THE SOFTWARE.
 
-using Gtk;
 using Pinta.Core;
 using Pinta.Docking;
 using Pinta.Gui.Widgets;
 
 namespace Pinta;
 
-public sealed class HistoryPad : IDockPad
+internal sealed class HistoryPad : IDockPad
 {
-	public void Initialize (Dock workspace, Application app, Gio.Menu padMenu)
+	private readonly EditActions edit;
+	internal HistoryPad (EditActions edit)
 	{
-		var history = new HistoryListView ();
-		DockItem history_item = new DockItem (history, "History", iconName: Pinta.Resources.Icons.HistoryList) {
-			Label = Translations.GetString ("History")
+		this.edit = edit;
+	}
+
+	public void Initialize (
+		Dock workspace,
+		Gtk.Application app,
+		Gio.Menu padMenu)
+	{
+		HistoryListView history = new ();
+		DockItem history_item = new (history, "History", iconName: Pinta.Resources.Icons.HistoryList) {
+			Label = Translations.GetString ("History"),
 		};
 
-		var history_tb = history_item.AddToolBar ();
-		history_tb.Append (PintaCore.Actions.Edit.Undo.CreateDockToolBarItem ());
-		history_tb.Append (PintaCore.Actions.Edit.Redo.CreateDockToolBarItem ());
+		Gtk.Box history_tb = history_item.AddToolBar ();
+		history_tb.Append (edit.Undo.CreateDockToolBarItem ());
+		history_tb.Append (edit.Redo.CreateDockToolBarItem ());
 
 		workspace.AddItem (history_item, DockPlacement.Right);
 
-		var show_history = new ToggleCommand ("history", Translations.GetString ("History"), null, Resources.Icons.LayerDuplicate) {
-			Value = true
+		ToggleCommand show_history = new ("history", Translations.GetString ("History"), null, Resources.Icons.LayerDuplicate) {
+			Value = true,
 		};
 		app.AddAction (show_history);
 		padMenu.AppendItem (show_history.CreateMenuItem ());
