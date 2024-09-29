@@ -288,10 +288,37 @@ namespace Pinta.Core
 
 			g.MoveTo (cx + rx, cy);
 
-			g.CurveTo (cx + rx, cy - c1 * ry, cx + c1 * rx, cy - ry, cx, cy - ry);
-			g.CurveTo (cx - c1 * rx, cy - ry, cx - rx, cy - c1 * ry, cx - rx, cy);
-			g.CurveTo (cx - rx, cy + c1 * ry, cx - c1 * rx, cy + ry, cx, cy + ry);
-			g.CurveTo (cx + c1 * rx, cy + ry, cx + rx, cy + c1 * ry, cx + rx, cy);
+			g.CurveTo (
+				cx + rx,
+				cy - c1 * ry,
+				cx + c1 * rx,
+				cy - ry,
+				cx,
+				cy - ry);
+
+			g.CurveTo (
+				cx - c1 * rx,
+				cy - ry,
+				cx - rx,
+				cy - c1 * ry,
+				cx - rx,
+				cy);
+
+			g.CurveTo (
+				cx - rx,
+				cy + c1 * ry,
+				cx - c1 * rx,
+				cy + ry,
+				cx,
+				cy + ry);
+
+			g.CurveTo (
+				cx + c1 * rx,
+				cy + ry,
+				cx + rx,
+				cy + c1 * ry,
+				cx + rx,
+				cy);
 
 			g.ClosePath ();
 
@@ -323,10 +350,37 @@ namespace Pinta.Core
 
 			g.MoveTo (cx + rx, cy);
 
-			g.CurveTo (cx + rx, cy - c1 * ry, cx + c1 * rx, cy - ry, cx, cy - ry);
-			g.CurveTo (cx - c1 * rx, cy - ry, cx - rx, cy - c1 * ry, cx - rx, cy);
-			g.CurveTo (cx - rx, cy + c1 * ry, cx - c1 * rx, cy + ry, cx, cy + ry);
-			g.CurveTo (cx + c1 * rx, cy + ry, cx + rx, cy + c1 * ry, cx + rx, cy);
+			g.CurveTo (
+				cx + rx,
+				cy - c1 * ry,
+				cx + c1 * rx,
+				cy - ry,
+				cx,
+				cy - ry);
+
+			g.CurveTo (
+				cx - c1 * rx,
+				cy - ry,
+				cx - rx,
+				cy - c1 * ry,
+				cx - rx,
+				cy);
+
+			g.CurveTo (
+				cx - rx,
+				cy + c1 * ry,
+				cx - c1 * rx,
+				cy + ry,
+				cx,
+				cy + ry);
+
+			g.CurveTo (
+				cx + c1 * rx,
+				cy + ry,
+				cx + rx,
+				cy + c1 * ry,
+				cx + rx,
+				cy);
 
 			g.ClosePath ();
 
@@ -359,10 +413,37 @@ namespace Pinta.Core
 
 			g.MoveTo (cx + rx, cy);
 
-			g.CurveTo (cx + rx, cy - c1 * ry, cx + c1 * rx, cy - ry, cx, cy - ry);
-			g.CurveTo (cx - c1 * rx, cy - ry, cx - rx, cy - c1 * ry, cx - rx, cy);
-			g.CurveTo (cx - rx, cy + c1 * ry, cx - c1 * rx, cy + ry, cx, cy + ry);
-			g.CurveTo (cx + c1 * rx, cy + ry, cx + rx, cy + c1 * ry, cx + rx, cy);
+			g.CurveTo (
+				cx + rx,
+				cy - c1 * ry,
+				cx + c1 * rx,
+				cy - ry,
+				cx,
+				cy - ry);
+
+			g.CurveTo (
+				cx - c1 * rx,
+				cy - ry,
+				cx - rx,
+				cy - c1 * ry,
+				cx - rx,
+				cy);
+
+			g.CurveTo (
+				cx - rx,
+				cy + c1 * ry,
+				cx - c1 * rx,
+				cy + ry,
+				cx,
+				cy + ry);
+
+			g.CurveTo (
+				cx + c1 * rx,
+				cy + ry,
+				cx + rx,
+				cy + c1 * ry,
+				cx + rx,
+				cy);
 
 			g.ClosePath ();
 
@@ -393,13 +474,41 @@ namespace Pinta.Core
 				radius = Math.Min (r.Height / 2, r.Width / 2);
 
 			g.MoveTo (r.X, r.Y + radius);
-			g.Arc (r.X + radius, r.Y + radius, radius, Math.PI, -Math.PI / 2);
+
+			g.Arc (
+				r.X + radius,
+				r.Y + radius,
+				radius,
+				Math.PI,
+				-Math.PI / 2);
+
 			g.LineTo (r.X + r.Width - radius, r.Y);
-			g.Arc (r.X + r.Width - radius, r.Y + radius, radius, -Math.PI / 2, 0);
+
+			g.Arc (
+				r.X + r.Width - radius,
+				r.Y + radius,
+				radius,
+				-Math.PI / 2,
+				0);
+
 			g.LineTo (r.X + r.Width, r.Y + r.Height - radius);
-			g.Arc (r.X + r.Width - radius, r.Y + r.Height - radius, radius, 0, Math.PI / 2);
+
+			g.Arc (
+				r.X + r.Width - radius,
+				r.Y + r.Height - radius,
+				radius,
+				0,
+				Math.PI / 2);
+
 			g.LineTo (r.X + radius, r.Y + r.Height);
-			g.Arc (r.X + radius, r.Y + r.Height - radius, radius, Math.PI / 2, Math.PI);
+
+			g.Arc (
+				r.X + radius,
+				r.Y + r.Height - radius,
+				radius,
+				Math.PI / 2,
+				Math.PI);
+
 			g.ClosePath ();
 
 			g.SetSourceColor (fill);
@@ -584,7 +693,11 @@ namespace Pinta.Core
 		// the passed in argument, but it's nice to have the same calling
 		// convention as the uncached version.  If you can use this one
 		// over the other, it is much faster in tight loops (like effects).
-		public static ref readonly ColorBgra GetColorBgra (this ImageSurface surf, ReadOnlySpan<ColorBgra> data, int width, PointI position)
+		public static ref readonly ColorBgra GetColorBgra (
+			this ImageSurface surf,
+			ReadOnlySpan<ColorBgra> data,
+			int width,
+			PointI position)
 		{
 			return ref data[width * position.Y + position.X];
 		}
@@ -593,7 +706,9 @@ namespace Pinta.Core
 		/// Prefer using the variant which takes the surface data and width, for improved performance
 		/// if there are repeated calls in a loop.
 		/// </summary>
-		public static ref readonly ColorBgra GetColorBgra (this ImageSurface surf, PointI position)
+		public static ref readonly ColorBgra GetColorBgra (
+			this ImageSurface surf,
+			PointI position)
 		{
 			return ref surf.GetColorBgra (surf.GetReadOnlyPixelData (), surf.Width, position);
 		}
@@ -1019,11 +1134,10 @@ namespace Pinta.Core
 
 			PointD min = new (
 				X: Math.Min (r1.Value.X, r2.Value.X),
-				Y: Math.Min (r1.Value.Y, r2.Value.Y)
-			);
+				Y: Math.Min (r1.Value.Y, r2.Value.Y));
 
 			//Calculate the right-most and bottom-most values and subtract the left-most and top-most values from them to get the width and height.
-			return new RectangleD (
+			return new (
 				min.X,
 				min.Y,
 				Math.Max (r1.Value.X + r1.Value.Width, r2.Value.X + r2.Value.Width) - min.X,
@@ -1223,10 +1337,10 @@ namespace Pinta.Core
 				X = rect.X,
 				Y = rect.Y,
 				Width = rect.Width,
-				Height = rect.Height
+				Height = rect.Height,
 			};
 
-			return new Cairo.Region (RegionCreateRectangle (ref cairo_rect));
+			return new (RegionCreateRectangle (ref cairo_rect));
 		}
 
 		public static bool ContainsPoint (this Cairo.Region region, int x, int y)
