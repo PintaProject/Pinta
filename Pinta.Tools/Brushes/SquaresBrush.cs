@@ -30,7 +30,7 @@ using Pinta.Core;
 
 namespace Pinta.Tools.Brushes;
 
-public sealed class SquaresBrush : BasePaintBrush
+internal sealed class SquaresBrush : BasePaintBrush
 {
 	public override string Name => Translations.GetString ("Squares");
 
@@ -45,11 +45,25 @@ public sealed class SquaresBrush : BasePaintBrush
 		PointI mouseDelta = current - last;
 		PointD rotated = (PointD) mouseDelta.Rotated90CCW ();
 
-		g.MoveTo (last.X - rotated.X, last.Y - rotated.Y);
-		g.LineTo (last.X + rotated.X, last.Y + rotated.Y);
-		g.LineTo (current.X + rotated.X, current.Y + rotated.Y);
-		g.LineTo (current.X - rotated.X, current.Y - rotated.Y);
-		g.LineTo (last.X - rotated.X, last.Y - rotated.Y);
+		g.MoveTo (
+			last.X - rotated.X,
+			last.Y - rotated.Y);
+
+		g.LineTo (
+			last.X + rotated.X,
+			last.Y + rotated.Y);
+
+		g.LineTo (
+			current.X + rotated.X,
+			current.Y + rotated.Y);
+
+		g.LineTo (
+			current.X - rotated.X,
+			current.Y - rotated.Y);
+
+		g.LineTo (
+			last.X - rotated.X,
+			last.Y - rotated.Y);
 
 		g.StrokePreserve ();
 
