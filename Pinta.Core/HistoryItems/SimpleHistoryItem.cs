@@ -39,6 +39,7 @@ public sealed class SimpleHistoryItem : BaseHistoryItem
 		var doc = PintaCore.Workspace.ActiveDocument;
 
 		layer_index = layerIndex;
+
 		surface_diff = SurfaceDiff.Create (oldSurface, doc.Layers[layer_index].Surface);
 
 		// If the diff was too big, store the original surface, else, dispose it
