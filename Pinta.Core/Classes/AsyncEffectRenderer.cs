@@ -30,6 +30,7 @@
 
 using System;
 using System.Collections.Concurrent;
+using System.Collections.Generic;
 using System.Collections.Immutable;
 using System.Linq;
 using System.Threading;
@@ -75,7 +76,6 @@ internal abstract class AsyncEffectRenderer
 	Cairo.ImageSurface? dest_surface;
 
 	bool is_rendering;
-	bool cancel_render_flag;
 	bool restart_render_flag;
 	CancellationTokenSource cancellation_source;
 	int current_tile;
@@ -140,7 +140,7 @@ internal abstract class AsyncEffectRenderer
 		// If a render is already in progress, then cancel it,
 		// and start a new render.
 		if (IsRendering) {
-			cancel_render_flag = true;
+			cancellation_source.Cancel ();
 			restart_render_flag = true;
 			return;
 		}
@@ -151,16 +151,22 @@ internal abstract class AsyncEffectRenderer
 	internal void Cancel ()
 	{
 		Debug.WriteLine ("AsyncEffectRenderer.Cancel ()");
-		cancel_render_flag = true;
+
+		CancellationToken cancellationToken = cancellation_source.Token;
+		cancellation_source.Cancel ();
 		restart_render_flag = false;
 
 		if (!IsRendering)
-			HandleRenderCompletion ();
+			HandleRenderCompletion (cancellationToken);
 	}
 
-	protected abstract void OnUpdate (double progress, RectangleI updatedBounds);
+	protected abstract void OnUpdate (
+		double progress,
+		RectangleI updatedBounds);
 
-	protected abstract void OnCompletion (bool canceled, Exception[] exceptions);
+	protected abstract void OnCompletion (
+		IReadOnlyList<Exception> exceptions,
+		CancellationToken cancellationToken);
 
 	internal void Dispose ()
 	{
@@ -174,8 +180,8 @@ internal abstract class AsyncEffectRenderer
 	{
 		CancellationTokenSource newSource = new ();
 		CancellationTokenSource oldSource = cancellation_source;
-		oldSource.Cancel ();
-		oldSource.Dispose ();
+		oldSource.Cancel (); // Safe to call multiple times
+		oldSource.Dispose (); // Not safe to call multiple times, so this is the only place it should be called
 		cancellation_source = newSource;
 		return newSource.Token;
 	}
@@ -187,7 +193,6 @@ internal abstract class AsyncEffectRenderer
 		// ------------
 
 		is_rendering = true;
-		cancel_render_flag = false;
 		restart_render_flag = false;
 		is_updated = false;
 
@@ -195,9 +200,9 @@ internal abstract class AsyncEffectRenderer
 
 		current_tile = -1;
 
-		Debug.WriteLine ("AsyncEffectRenderer.Start () Render starting."); // TODO: Show some kind of ID, perhaps the address
-
 		CancellationToken cancellationToken = ReplaceCancellationSource ();
+
+		Debug.WriteLine ("AsyncEffectRenderer.Start () Render starting."); // TODO: Show some kind of ID, perhaps the address
 
 		// Start slave render threads.
 		var slaves =
@@ -209,7 +214,10 @@ internal abstract class AsyncEffectRenderer
 		Thread master = StartMasterThread (cancellationToken, slaves);
 
 		// Start timer used to periodically fire update events on the UI thread.
-		timer_tick_id = GLib.Functions.TimeoutAdd (0, (uint) settings.UpdateMillis, () => HandleTimerTick ());
+		timer_tick_id = GLib.Functions.TimeoutAdd (
+			0,
+			(uint) settings.UpdateMillis,
+			() => HandleTimerTick (cancellationToken));
 
 		// ---------------
 		// === Methods ===
@@ -243,7 +251,7 @@ internal abstract class AsyncEffectRenderer
 					0,
 					0,
 					() => {
-						HandleRenderCompletion ();
+						HandleRenderCompletion (cancellationToken);
 						return false; // don't call the timer again
 					}
 				);
@@ -259,14 +267,14 @@ internal abstract class AsyncEffectRenderer
 		while (true) {
 
 			int tileIndex = Interlocked.Increment (ref current_tile);
-			if (tileIndex >= target_tiles.Length || cancel_render_flag) return;
+			if (tileIndex >= target_tiles.Length || cancellationToken.IsCancellationRequested) return;
 
 			Exception? exception = null;
 			RectangleI tileBounds = target_tiles[tileIndex];
 
 			try {
 				// NRT - These are set in Start () before getting here
-				if (!cancel_render_flag) {
+				if (!cancellationToken.IsCancellationRequested) {
 					dest_surface!.Flush ();
 					effect!.Render (source_surface!, dest_surface, stackalloc[] { tileBounds });
 					dest_surface.MarkDirty (tileBounds);
@@ -299,7 +307,7 @@ internal abstract class AsyncEffectRenderer
 	}
 
 	// Called on the UI thread.
-	bool HandleTimerTick ()
+	bool HandleTimerTick (CancellationToken cancellationToken)
 	{
 		Debug.WriteLine (DateTime.Now.ToString ("HH:mm:ss:ffff") + " Timer tick.");
 
@@ -315,27 +323,27 @@ internal abstract class AsyncEffectRenderer
 			bounds = updated_area;
 		}
 
-		if (IsRendering && !cancel_render_flag)
+		if (IsRendering && !cancellationToken.IsCancellationRequested)
 			OnUpdate (Progress, bounds);
 
 		return true;
 	}
 
-	void HandleRenderCompletion ()
+	void HandleRenderCompletion (CancellationToken cancellationToken)
 	{
 		var exceptions =
 			render_exceptions.IsEmpty
 			? Array.Empty<Exception> ()
 			: render_exceptions.ToArray ();
 
-		HandleTimerTick ();
+		HandleTimerTick (cancellationToken);
 
 		if (timer_tick_id > 0)
 			GLib.Source.Remove (timer_tick_id);
 
 		timer_tick_id = 0;
 
-		OnCompletion (cancel_render_flag, exceptions);
+		OnCompletion (exceptions, cancellationToken);
 
 		if (restart_render_flag)
 			StartRender ();
