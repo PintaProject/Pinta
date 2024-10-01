@@ -54,7 +54,7 @@ public sealed class ActionHandlers
 			new OpenDocumentAction (actions.File, chrome, workspace, recentFiles, imageFormats),
 			new SaveDocumentAction (actions.File, workspace),
 			new SaveDocumentAsAction (actions.File, workspace),
-			new SaveDocumentImplmentationAction (actions.File, chrome, imageFormats, recentFiles, tools),
+			new SaveDocumentImplmentationAction (actions.File, actions.Image, chrome, imageFormats, recentFiles, tools),
 			new ModifyCompressionAction (actions.File),
 			//new PrintDocumentAction ();
 			new CloseDocumentAction (actions, chrome, workspace, tools),
