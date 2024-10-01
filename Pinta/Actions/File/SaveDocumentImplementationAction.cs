@@ -33,19 +33,25 @@ namespace Pinta.Actions;
 
 internal sealed class SaveDocumentImplmentationAction : IActionHandler
 {
+	const string RESPONSE_CANCEL = "cancel";
+	const string RESPONSE_FLATTEN = "flatten";
+
 	private readonly FileActions file;
+	private readonly ImageActions image;
 	private readonly ChromeManager chrome;
 	private readonly ImageConverterManager image_formats;
 	private readonly RecentFileManager recent_files;
 	private readonly ToolManager tools;
 	internal SaveDocumentImplmentationAction (
 		FileActions file,
+		ImageActions image,
 		ChromeManager chrome,
 		ImageConverterManager imageFormats,
 		RecentFileManager recentFiles,
 		ToolManager tools)
 	{
 		this.file = file;
+		this.image = image;
 		this.chrome = chrome;
 		image_formats = imageFormats;
 		recent_files = recentFiles;
@@ -96,12 +102,12 @@ internal sealed class SaveDocumentImplmentationAction : IActionHandler
 				fcd.SetCurrentFolder (dir);
 
 			// Append the default extension, producing e.g. "Unsaved Image 1.png"
-			var default_ext = image_formats.GetDefaultSaveFormat ().Extensions.First ();
+			string default_ext = image_formats.GetDefaultSaveFormat ().Extensions.First ();
 			fcd.SetCurrentName ($"{document.DisplayName}.{default_ext}");
 		}
 
 		// Add all the formats we support to the save dialog
-		var filetypes = new Dictionary<Gtk.FileFilter, FormatDescriptor> ();
+		Dictionary<Gtk.FileFilter, FormatDescriptor> filetypes = new ();
 		foreach (var format in image_formats.Formats) {
 
 			if (format.IsReadOnly ())
@@ -131,15 +137,15 @@ internal sealed class SaveDocumentImplmentationAction : IActionHandler
 		fcd.Filter = format_desc.Filter;
 
 		while (fcd.RunBlocking () == Gtk.ResponseType.Accept) {
-			var file = fcd.GetFile ()!;
+			Gio.File file = fcd.GetFile ()!;
 
 			// Note that we can't use file.GetDisplayName() because the file doesn't exist.
-			var display_name = file.GetParent ()!.GetRelativePath (file)!;
+			string displayName = file.GetParent ()!.GetRelativePath (file)!;
 
 			// Always follow the extension rather than the file type drop down
 			// ie: if the user chooses to save a "jpeg" as "foo.png", we are going
 			// to assume they just didn't update the dropdown and really want png
-			FormatDescriptor? format = image_formats.GetFormatByFile (display_name);
+			FormatDescriptor? format = image_formats.GetFormatByFile (displayName);
 			if (format is null) {
 				if (fcd.Filter is not null)
 					format = filetypes[fcd.Filter];
@@ -155,21 +161,21 @@ internal sealed class SaveDocumentImplmentationAction : IActionHandler
 				string body = Translations.GetString ("Flattening the image will merge all layers into a single layer.");
 
 				using var dialog = Adw.MessageDialog.New (chrome.MainWindow, heading, body);
-				dialog.AddResponse ("cancel", Translations.GetString ("_Cancel"));
-				dialog.AddResponse ("flatten", Translations.GetString ("Flatten"));
-				dialog.SetResponseAppearance ("flatten", Adw.ResponseAppearance.Suggested);
+				dialog.AddResponse (RESPONSE_CANCEL, Translations.GetString ("_Cancel"));
+				dialog.AddResponse (RESPONSE_FLATTEN, Translations.GetString ("Flatten"));
+				dialog.SetResponseAppearance (RESPONSE_FLATTEN, Adw.ResponseAppearance.Suggested);
 
-				dialog.CloseResponse = "cancel";
-				dialog.DefaultResponse = "flatten";
+				dialog.CloseResponse = RESPONSE_CANCEL;
+				dialog.DefaultResponse = RESPONSE_FLATTEN;
 
 				string response = dialog.RunBlocking ();
 
-				if (response == "cancel")
+				if (response == RESPONSE_CANCEL)
 					continue;
 
 				// Flatten the image
 				tools.Commit ();
-				PintaCore.Actions.Image.Flatten.Activate ();
+				image.Flatten.Activate ();
 			}
 
 			var directory = file.GetParent ();
@@ -180,7 +186,7 @@ internal sealed class SaveDocumentImplmentationAction : IActionHandler
 			// a different file type.
 			if (!SaveFile (document, file, format, chrome.MainWindow)) {
 				// Re-set the current name and directory
-				fcd.SetCurrentName (display_name);
+				fcd.SetCurrentName (displayName);
 				fcd.SetCurrentFolder (directory);
 				continue;
 			}
@@ -205,19 +211,22 @@ internal sealed class SaveDocumentImplmentationAction : IActionHandler
 		file ??= document.File;
 
 		if (file is null)
-			throw new ArgumentException ("Attempted to save a document with no associated file");
+			throw new ArgumentException ("Attempted to save a document with no associated file", nameof (file));
 
 		if (format == null) {
 			if (string.IsNullOrEmpty (document.FileType))
-				throw new ArgumentNullException ($"nameof{document.FileType} must contain value.");
+				throw new ArgumentException ($"{nameof (document.FileType)} must contain value.", nameof (document));
 
 			format = image_formats.GetFormatByExtension (document.FileType);
 		}
 
 		if (format == null || format.IsReadOnly ()) {
-			chrome.ShowMessageDialog (parent,
+
+			chrome.ShowMessageDialog (
+				parent,
 				Translations.GetString ("Pinta does not support saving images in this file format."),
 				file.GetDisplayName ());
+
 			return false;
 		}
 
