@@ -79,7 +79,7 @@ internal abstract class AsyncEffectRenderer
 	bool restart_render_flag;
 	CancellationTokenSource cancellation_source;
 	ConcurrentQueue<RectangleI> queued_tiles;
-	readonly ImmutableArray<RectangleI> target_tiles;
+	int tiles_count = 0;
 	readonly ConcurrentQueue<Exception> render_exceptions;
 
 	uint timer_tick_id;
@@ -103,10 +103,6 @@ internal abstract class AsyncEffectRenderer
 		render_exceptions = new ConcurrentQueue<Exception> ();
 
 		timer_tick_id = 0;
-		target_tiles =
-			settings.EffectIsTileable
-			? settings.RenderBounds.ToRows ().ToImmutableArray () // If effect is tileable, render each row in parallel.
-			: ImmutableArray.Create (settings.RenderBounds); // If the effect isn't tileable, there is a single tile for the entire render bounds
 
 		this.settings = settings;
 	}
@@ -115,9 +111,9 @@ internal abstract class AsyncEffectRenderer
 
 	internal double Progress {
 		get {
-			if (target_tiles.Length == 0) return 0;
-			int dequeued = target_tiles.Length - queued_tiles.Count;
-			return dequeued / (double) target_tiles.Length;
+			if (tiles_count == 0) return 0;
+			int dequeued = tiles_count - queued_tiles.Count;
+			return dequeued / (double) tiles_count;
 		}
 	}
 
@@ -196,7 +192,13 @@ internal abstract class AsyncEffectRenderer
 
 		render_exceptions.Clear ();
 
-		queued_tiles = new ConcurrentQueue<RectangleI> (target_tiles);
+		ConcurrentQueue<RectangleI> targetTiles = new (
+			settings.EffectIsTileable
+			? settings.RenderBounds.ToRows () // If effect is tileable, render each row in parallel.
+			: new[] { settings.RenderBounds }); // If the effect isn't tileable, there is a single tile for the entire render bounds
+
+		queued_tiles = targetTiles;
+		tiles_count = targetTiles.Count;
 
 		CancellationToken cancellationToken = ReplaceCancellationSource ();
 
