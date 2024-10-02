@@ -1,20 +1,19 @@
 using System;
-using Gtk;
 using Pinta.Core;
 
 namespace Pinta.Effects;
 
 public sealed class AlignmentDialog : Gtk.Dialog
 {
-	private readonly Gtk.ToggleButton topLeft;
-	private readonly Gtk.ToggleButton topCenter;
-	private readonly Gtk.ToggleButton topRight;
-	private readonly Gtk.ToggleButton centerLeft;
+	private readonly Gtk.ToggleButton top_left;
+	private readonly Gtk.ToggleButton top_center;
+	private readonly Gtk.ToggleButton top_right;
+	private readonly Gtk.ToggleButton center_left;
 	private readonly Gtk.ToggleButton center;
-	private readonly Gtk.ToggleButton centerRight;
-	private readonly Gtk.ToggleButton bottomLeft;
-	private readonly Gtk.ToggleButton bottomCenter;
-	private readonly Gtk.ToggleButton bottomRight;
+	private readonly Gtk.ToggleButton center_right;
+	private readonly Gtk.ToggleButton bottom_left;
+	private readonly Gtk.ToggleButton bottom_center;
+	private readonly Gtk.ToggleButton bottom_right;
 
 	public AlignPosition SelectedPosition { get; private set; }
 
@@ -24,7 +23,19 @@ public sealed class AlignmentDialog : Gtk.Dialog
 	{
 		const int spacing = 6;
 
-		var grid = new Gtk.Grid {
+		// --- Control creation
+
+		Gtk.ToggleButton topLeftToggle = CreateIconButton (Translations.GetString ("Top Left"), Resources.Icons.ResizeCanvasNW, AlignPosition.TopLeft);
+		Gtk.ToggleButton topCenterToggle = CreateIconButton (Translations.GetString ("Top Center"), Resources.Icons.ResizeCanvasUp, AlignPosition.TopCenter);
+		Gtk.ToggleButton topRightToggle = CreateIconButton (Translations.GetString ("Top Right"), Resources.Icons.ResizeCanvasNE, AlignPosition.TopRight);
+		Gtk.ToggleButton centerLeftToggle = CreateIconButton (Translations.GetString ("Center Left"), Resources.Icons.ResizeCanvasLeft, AlignPosition.CenterLeft);
+		Gtk.ToggleButton centerToggle = CreateIconButton (Translations.GetString ("Center"), Resources.Icons.ResizeCanvasBase, AlignPosition.Center);
+		Gtk.ToggleButton centerRightToggle = CreateIconButton (Translations.GetString ("Center Right"), Resources.Icons.ResizeCanvasRight, AlignPosition.CenterRight);
+		Gtk.ToggleButton bottomLeftToggle = CreateIconButton (Translations.GetString ("Bottom Left"), Resources.Icons.ResizeCanvasSW, AlignPosition.BottomLeft);
+		Gtk.ToggleButton bottomCenterToggle = CreateIconButton (Translations.GetString ("Bottom Center"), Resources.Icons.ResizeCanvasDown, AlignPosition.BottomCenter);
+		Gtk.ToggleButton bottomRightToggle = CreateIconButton (Translations.GetString ("Bottom Right"), Resources.Icons.ResizeCanvasSE, AlignPosition.BottomRight);
+
+		Gtk.Grid grid = new () {
 			RowSpacing = spacing,
 			ColumnSpacing = spacing,
 			RowHomogeneous = true,
@@ -32,58 +43,66 @@ public sealed class AlignmentDialog : Gtk.Dialog
 			MarginStart = 12,
 			MarginEnd = 12,
 			MarginTop = 12,
-			MarginBottom = 12
+			MarginBottom = 12,
 		};
+		grid.Attach (topLeftToggle, 0, 0, 1, 1);
+		grid.Attach (topCenterToggle, 1, 0, 1, 1);
+		grid.Attach (topRightToggle, 2, 0, 1, 1);
+		grid.Attach (centerLeftToggle, 0, 1, 1, 1);
+		grid.Attach (centerToggle, 1, 1, 1, 1);
+		grid.Attach (centerRightToggle, 2, 1, 1, 1);
+		grid.Attach (bottomLeftToggle, 0, 2, 1, 1);
+		grid.Attach (bottomCenterToggle, 1, 2, 1, 1);
+		grid.Attach (bottomRightToggle, 2, 2, 1, 1);
 
-		topLeft = CreateIconButton (Translations.GetString ("Top Left"), Resources.Icons.ResizeCanvasNW, AlignPosition.TopLeft);
-		topCenter = CreateIconButton (Translations.GetString ("Top Center"), Resources.Icons.ResizeCanvasUp, AlignPosition.TopCenter);
-		topRight = CreateIconButton (Translations.GetString ("Top Right"), Resources.Icons.ResizeCanvasNE, AlignPosition.TopRight);
-		centerLeft = CreateIconButton (Translations.GetString ("Center Left"), Resources.Icons.ResizeCanvasLeft, AlignPosition.CenterLeft);
-		center = CreateIconButton (Translations.GetString ("Center"), Resources.Icons.ResizeCanvasBase, AlignPosition.Center);
-		centerRight = CreateIconButton (Translations.GetString ("Center Right"), Resources.Icons.ResizeCanvasRight, AlignPosition.CenterRight);
-		bottomLeft = CreateIconButton (Translations.GetString ("Bottom Left"), Resources.Icons.ResizeCanvasSW, AlignPosition.BottomLeft);
-		bottomCenter = CreateIconButton (Translations.GetString ("Bottom Center"), Resources.Icons.ResizeCanvasDown, AlignPosition.BottomCenter);
-		bottomRight = CreateIconButton (Translations.GetString ("Bottom Right"), Resources.Icons.ResizeCanvasSE, AlignPosition.BottomRight);
+		// --- References to keep
 
-		// Add buttons to the grid
-		grid.Attach (topLeft, 0, 0, 1, 1);
-		grid.Attach (topCenter, 1, 0, 1, 1);
-		grid.Attach (topRight, 2, 0, 1, 1);
-		grid.Attach (centerLeft, 0, 1, 1, 1);
-		grid.Attach (center, 1, 1, 1, 1);
-		grid.Attach (centerRight, 2, 1, 1, 1);
-		grid.Attach (bottomLeft, 0, 2, 1, 1);
-		grid.Attach (bottomCenter, 1, 2, 1, 1);
-		grid.Attach (bottomRight, 2, 2, 1, 1);
+		top_left = topLeftToggle;
+		top_center = topCenterToggle;
+		top_right = topRightToggle;
+		center_left = centerLeftToggle;
+		center = centerToggle;
+		center_right = centerRightToggle;
+		bottom_left = bottomLeftToggle;
+		bottom_center = bottomCenterToggle;
+		bottom_right = bottomRightToggle;
 
-		// Set the default selection
-		SetSelectedPosition (AlignPosition.Center);
-
-		var content_area = this.GetContentAreaBox ();
-		content_area.Append (grid);
+		// --- Initialization (Gtk.Window)
 
 		Title = Translations.GetString ("Align Object");
-
 		TransientFor = chrome.MainWindow;
-
 		Modal = true;
-
 		Resizable = false;
+
+		// --- Initialization (Gtk.Dialog)
+
+		Gtk.Box content_area = this.GetContentAreaBox ();
+		content_area.Append (grid);
 
 		this.AddCancelOkButtons ();
 		this.SetDefaultResponse (Gtk.ResponseType.Ok);
 
+		// --- Initialization (AlignmentDialog)
+
+		SetSelectedPosition (AlignPosition.Center); // Set the default selection
+
+		// --- Initial behavior execution
+
 		Show ();
 	}
 
-	private Gtk.ToggleButton CreateIconButton (string tooltip, string iconName, AlignPosition position)
+	private Gtk.ToggleButton CreateIconButton (
+		string tooltip,
+		string iconName,
+		AlignPosition position)
 	{
-		var button = new Gtk.ToggleButton ();
+		Gtk.ToggleButton button = new ();
+
 		button.SetIconName (iconName);
 
 		button.TooltipText = tooltip;
 
-		button.OnClicked += (sender, args) => {
+		button.OnClicked += (_, _) => {
 			SetSelectedPosition (position);
 			PositionChanged?.Invoke (this, EventArgs.Empty);
 		};
@@ -95,23 +114,20 @@ public sealed class AlignmentDialog : Gtk.Dialog
 	{
 		SelectedPosition = position;
 
-		topLeft.SetActive (position == AlignPosition.TopLeft);
-		topCenter.SetActive (position == AlignPosition.TopCenter);
-		topRight.SetActive (position == AlignPosition.TopRight);
-		centerLeft.SetActive (position == AlignPosition.CenterLeft);
+		top_left.SetActive (position == AlignPosition.TopLeft);
+		top_center.SetActive (position == AlignPosition.TopCenter);
+		top_right.SetActive (position == AlignPosition.TopRight);
+		center_left.SetActive (position == AlignPosition.CenterLeft);
 		center.SetActive (position == AlignPosition.Center);
-		centerRight.SetActive (position == AlignPosition.CenterRight);
-		bottomLeft.SetActive (position == AlignPosition.BottomLeft);
-		bottomCenter.SetActive (position == AlignPosition.BottomCenter);
-		bottomRight.SetActive (position == AlignPosition.BottomRight);
+		center_right.SetActive (position == AlignPosition.CenterRight);
+		bottom_left.SetActive (position == AlignPosition.BottomLeft);
+		bottom_center.SetActive (position == AlignPosition.BottomCenter);
+		bottom_right.SetActive (position == AlignPosition.BottomRight);
 	}
 
 	public void RunDialog ()
 	{
 		Present ();
-
-		this.OnResponse += (sender, args) => {
-			Destroy ();
-		};
+		OnResponse += (_, _) => Destroy ();
 	}
 }
