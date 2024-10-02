@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Collections.Immutable;
 using System.ComponentModel;
 using System.Linq;
+using System.Threading.Tasks;
 using Cairo;
 using Pinta.Core;
 using Pinta.Gui.Widgets;
@@ -36,7 +37,7 @@ public sealed class VoronoiDiagramEffect : BaseEffect
 		EffectData = new VoronoiDiagramData ();
 	}
 
-	public override void LaunchConfiguration ()
+	public override Task<Gtk.ResponseType> LaunchConfiguration ()
 		=> chrome.LaunchSimpleEffectDialog (this);
 
 	private sealed record VoronoiSettings (

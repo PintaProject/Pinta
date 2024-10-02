@@ -33,6 +33,7 @@ using System.Collections.Immutable;
 using System.ComponentModel;
 using System.Linq;
 using System.Reflection;
+using System.Threading.Tasks;
 using Mono.Addins.Localization;
 using Pinta.Core;
 
@@ -85,9 +86,12 @@ public sealed class SimpleEffectDialog : Gtk.Dialog
 	/// The IAddinLocalizer provides a generic way to get translated strings both for
 	/// Pinta's effects and for effect add-ins.
 	/// </summary>
-	public static void Launch (BaseEffect effect, IAddinLocalizer localizer)
+	public static Task<Gtk.ResponseType> Launch (BaseEffect effect, IAddinLocalizer localizer)
 	{
-		ArgumentNullException.ThrowIfNull (effect.EffectData);
+		if (effect.EffectData == null)
+			throw new ArgumentException ($"{effect.EffectData} should not be null", nameof (effect));
+
+		TaskCompletionSource<Gtk.ResponseType> responseCompletion = new ();
 
 		SimpleEffectDialog dialog = new (
 			effect.Name,
@@ -96,14 +100,16 @@ public sealed class SimpleEffectDialog : Gtk.Dialog
 			localizer);
 
 		// Hookup event handling for live preview.
-		dialog.EffectDataChanged += (o, e) => effect.EffectData?.FirePropertyChanged (e.PropertyName);
+		dialog.EffectDataChanged += (o, e) => effect.EffectData.FirePropertyChanged (e.PropertyName);
 
 		dialog.OnResponse += (_, args) => {
-			effect.OnConfigDialogResponse (args.ResponseId == (int) Gtk.ResponseType.Ok);
+			responseCompletion.SetResult ((Gtk.ResponseType) args.ResponseId);
 			dialog.Destroy ();
 		};
 
 		dialog.Present ();
+
+		return responseCompletion.Task;
 	}
 
 	public event PropertyChangedEventHandler? EffectDataChanged;

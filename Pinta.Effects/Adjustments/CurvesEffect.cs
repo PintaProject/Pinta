@@ -10,6 +10,7 @@
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
+using System.Threading.Tasks;
 using Cairo;
 using Pinta.Core;
 
@@ -40,19 +41,23 @@ public sealed class CurvesEffect : BaseEffect
 		EffectData = new CurvesData ();
 	}
 
-	public override void LaunchConfiguration ()
+	public override Task<Gtk.ResponseType> LaunchConfiguration ()
 	{
+		TaskCompletionSource<Gtk.ResponseType> completionSource = new ();
+
 		CurvesDialog dialog = new (chrome, Data) {
 			Title = Name,
 			IconName = Icon,
 		};
 
 		dialog.OnResponse += (_, args) => {
-			OnConfigDialogResponse (args.ResponseId == (int) Gtk.ResponseType.Ok);
+			completionSource.SetResult ((Gtk.ResponseType) args.ResponseId);
 			dialog.Destroy ();
 		};
 
 		dialog.Present ();
+
+		return completionSource.Task;
 	}
 
 	public override void Render (ImageSurface src, ImageSurface dest, ReadOnlySpan<RectangleI> rois)

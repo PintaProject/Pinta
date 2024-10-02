@@ -8,6 +8,7 @@
 /////////////////////////////////////////////////////////////////////////////////
 
 using System;
+using System.Threading.Tasks;
 using Cairo;
 using Pinta.Core;
 using Pinta.Gui.Widgets;
@@ -49,7 +50,7 @@ public sealed class PencilSketchEffect : BaseEffect
 		color_dodge_op = new UserBlendOps.ColorDodgeBlendOp ();
 	}
 
-	public override void LaunchConfiguration ()
+	public override Task<Gtk.ResponseType> LaunchConfiguration ()
 		=> chrome.LaunchSimpleEffectDialog (this);
 
 	#region Algorithm Code Ported From PDN

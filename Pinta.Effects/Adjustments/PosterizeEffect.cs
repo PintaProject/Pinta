@@ -8,6 +8,7 @@
 /////////////////////////////////////////////////////////////////////////////////
 
 using System;
+using System.Threading.Tasks;
 using Cairo;
 using Pinta.Core;
 
@@ -38,20 +39,24 @@ public sealed class PosterizeEffect : BaseEffect
 		EffectData = new PosterizeData ();
 	}
 
-	public override void LaunchConfiguration ()
+	public override Task<Gtk.ResponseType> LaunchConfiguration ()
 	{
+		TaskCompletionSource<Gtk.ResponseType> completionSource = new ();
+
 		PosterizeDialog dialog = new (chrome) {
 			Title = Name,
 			IconName = Icon,
-			EffectData = Data
+			EffectData = Data,
 		};
 
 		dialog.OnResponse += (_, args) => {
-			OnConfigDialogResponse (args.ResponseId == (int) Gtk.ResponseType.Ok);
+			completionSource.SetResult ((Gtk.ResponseType) args.ResponseId);
 			dialog.Destroy ();
 		};
 
 		dialog.Present ();
+
+		return completionSource.Task;
 	}
 
 	public override void Render (ImageSurface src, ImageSurface dest, ReadOnlySpan<RectangleI> rois)

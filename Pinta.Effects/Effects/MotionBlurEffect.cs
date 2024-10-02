@@ -9,6 +9,7 @@
 
 using System;
 using System.Collections.Immutable;
+using System.Threading.Tasks;
 using Cairo;
 using Pinta.Core;
 using Pinta.Gui.Widgets;
@@ -43,7 +44,7 @@ public sealed class MotionBlurEffect : BaseEffect
 		EffectData = new MotionBlurData ();
 	}
 
-	public override void LaunchConfiguration ()
+	public override Task<Gtk.ResponseType> LaunchConfiguration ()
 		=> chrome.LaunchSimpleEffectDialog (this);
 
 	#region Algorithm Code Ported From PDN

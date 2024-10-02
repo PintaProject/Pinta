@@ -11,6 +11,7 @@ using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
+using System.Threading.Tasks;
 using Cairo;
 using Pinta.Core;
 using Pinta.Gui.Widgets;
@@ -50,7 +51,7 @@ public sealed class CloudsEffect : BaseEffect
 		EffectData = new CloudsData ();
 	}
 
-	public override void LaunchConfiguration ()
+	public override Task<Gtk.ResponseType> LaunchConfiguration ()
 		=> chrome.LaunchSimpleEffectDialog (this);
 
 	#region Algorithm Code Ported From PDN

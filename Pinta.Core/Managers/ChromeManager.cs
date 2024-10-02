@@ -25,15 +25,15 @@
 // THE SOFTWARE.
 
 using System;
-using Gtk;
+using System.Threading.Tasks;
 using Mono.Addins.Localization;
 
 namespace Pinta.Core;
 
 public interface IChromeService
 {
-	Window MainWindow { get; }
-	void LaunchSimpleEffectDialog (BaseEffect effect, IAddinLocalizer localizer);
+	Gtk.Window MainWindow { get; }
+	Task<Gtk.ResponseType> LaunchSimpleEffectDialog (BaseEffect effect, IAddinLocalizer localizer);
 }
 
 public sealed class ChromeManager : IChromeService
@@ -43,18 +43,18 @@ public sealed class ChromeManager : IChromeService
 
 	// NRT - These are all initialized via the Initialize* functions
 	// but it would be nice to rewrite it to provably non-null.
-	public Application Application { get; private set; } = null!;
-	public Window MainWindow { get; private set; } = null!;
-	public Widget ImageTabsNotebook { get; private set; } = null!;
+	public Gtk.Application Application { get; private set; } = null!;
+	public Gtk.Window MainWindow { get; private set; } = null!;
+	public Gtk.Widget ImageTabsNotebook { get; private set; } = null!;
 	private IProgressDialog progress_dialog = null!;
 	private ErrorDialogHandler error_dialog_handler = null!;
 	private MessageDialogHandler message_dialog_handler = null!;
 	private SimpleEffectDialogHandler simple_effect_dialog_handler = null!;
 
-	public Box? MainToolBar { get; private set; }
-	public Box ToolToolBar { get; private set; } = null!;
-	public Widget ToolBox { get; private set; } = null!;
-	public Box StatusBar { get; private set; } = null!;
+	public Gtk.Box? MainToolBar { get; private set; }
+	public Gtk.Box ToolToolBar { get; private set; } = null!;
+	public Gtk.Widget ToolBox { get; private set; } = null!;
+	public Gtk.Box StatusBar { get; private set; } = null!;
 
 	public IProgressDialog ProgressDialog => progress_dialog;
 	public Gio.Menu AdjustmentsMenu { get; private set; } = null!;
@@ -94,32 +94,32 @@ public sealed class ChromeManager : IChromeService
 		Application = application;
 	}
 
-	public void InitializeWindowShell (Window shell)
+	public void InitializeWindowShell (Gtk.Window shell)
 	{
 		MainWindow = shell;
 	}
 
-	public void InitializeToolToolBar (Box toolToolBar)
+	public void InitializeToolToolBar (Gtk.Box toolToolBar)
 	{
 		ToolToolBar = toolToolBar;
 	}
 
-	public void InitializeMainToolBar (Box mainToolBar)
+	public void InitializeMainToolBar (Gtk.Box mainToolBar)
 	{
 		MainToolBar = mainToolBar;
 	}
 
-	public void InitializeStatusBar (Box statusbar)
+	public void InitializeStatusBar (Gtk.Box statusbar)
 	{
 		StatusBar = statusbar;
 	}
 
-	public void InitializeToolBox (Widget toolbox)
+	public void InitializeToolBox (Gtk.Widget toolbox)
 	{
 		ToolBox = toolbox;
 	}
 
-	public void InitializeImageTabsNotebook (Widget notebook)
+	public void InitializeImageTabsNotebook (Gtk.Widget notebook)
 	{
 		ImageTabsNotebook = notebook;
 	}
@@ -150,12 +150,12 @@ public sealed class ChromeManager : IChromeService
 		simple_effect_dialog_handler = handler;
 	}
 
-	public void ShowErrorDialog (Window parent, string message, string body, string details)
+	public void ShowErrorDialog (Gtk.Window parent, string message, string body, string details)
 	{
 		error_dialog_handler (parent, message, body, details);
 	}
 
-	public void ShowMessageDialog (Window parent, string message, string body)
+	public void ShowMessageDialog (Gtk.Window parent, string message, string body)
 	{
 		message_dialog_handler (parent, message, body);
 	}
@@ -165,9 +165,9 @@ public sealed class ChromeManager : IChromeService
 		OnStatusBarTextChanged (text);
 	}
 
-	public void LaunchSimpleEffectDialog (BaseEffect effect, IAddinLocalizer localizer)
+	public Task<Gtk.ResponseType> LaunchSimpleEffectDialog (BaseEffect effect, IAddinLocalizer localizer)
 	{
-		simple_effect_dialog_handler (effect, localizer);
+		return simple_effect_dialog_handler (effect, localizer);
 	}
 	#endregion
 
@@ -197,6 +197,6 @@ public interface IProgressDialog
 	event EventHandler<EventArgs> Canceled;
 }
 
-public delegate void ErrorDialogHandler (Window parent, string message, string body, string details);
-public delegate void MessageDialogHandler (Window parent, string message, string body);
-public delegate void SimpleEffectDialogHandler (BaseEffect effect, IAddinLocalizer localizer);
+public delegate void ErrorDialogHandler (Gtk.Window parent, string message, string body, string details);
+public delegate void MessageDialogHandler (Gtk.Window parent, string message, string body);
+public delegate Task<Gtk.ResponseType> SimpleEffectDialogHandler (BaseEffect effect, IAddinLocalizer localizer);

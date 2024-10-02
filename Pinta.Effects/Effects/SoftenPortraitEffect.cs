@@ -34,6 +34,7 @@ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 THE SOFTWARE. 
 */
 using System;
+using System.Threading.Tasks;
 using Cairo;
 using Pinta.Core;
 using Pinta.Gui.Widgets;
@@ -73,7 +74,7 @@ public sealed class SoftenPortraitEffect : BaseEffect
 		overlay_op = new UserBlendOps.OverlayBlendOp ();
 	}
 
-	public override void LaunchConfiguration ()
+	public override Task<Gtk.ResponseType> LaunchConfiguration ()
 		=> chrome.LaunchSimpleEffectDialog (this);
 
 	private sealed record SoftenPortraitSettings (

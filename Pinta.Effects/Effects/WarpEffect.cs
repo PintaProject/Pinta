@@ -9,6 +9,7 @@
 
 using System;
 using System.Drawing;
+using System.Threading.Tasks;
 using Cairo;
 using Pinta.Core;
 using Pinta.Gui.Widgets;
@@ -48,7 +49,7 @@ public abstract class WarpEffect : BaseEffect
 		EffectData = new WarpData ();
 	}
 
-	public override void LaunchConfiguration ()
+	public override Task<Gtk.ResponseType> LaunchConfiguration ()
 		=> Chrome.LaunchSimpleEffectDialog (this);
 
 	protected double DefaultRadius { get; private set; } = 0;
