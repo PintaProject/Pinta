@@ -78,8 +78,8 @@ internal abstract class AsyncEffectRenderer
 	bool is_rendering;
 	bool restart_render_flag;
 	CancellationTokenSource cancellation_source;
-	int current_tile;
-	readonly ImmutableArray<RectangleI> target_tiles;
+	ConcurrentQueue<RectangleI> queued_tiles;
+	int tiles_count = 0;
 	readonly ConcurrentQueue<Exception> render_exceptions;
 
 	uint timer_tick_id;
@@ -99,13 +99,10 @@ internal abstract class AsyncEffectRenderer
 		cancellation_source = new ();
 		updated_lock = new object ();
 		is_updated = false;
+		queued_tiles = new ConcurrentQueue<RectangleI> ();
 		render_exceptions = new ConcurrentQueue<Exception> ();
 
 		timer_tick_id = 0;
-		target_tiles =
-			settings.EffectIsTileable
-			? settings.RenderBounds.ToRows ().ToImmutableArray () // If effect is tileable, render each row in parallel.
-			: ImmutableArray.Create (settings.RenderBounds); // If the effect isn't tileable, there is a single tile for the entire render bounds
 
 		this.settings = settings;
 	}
@@ -114,12 +111,9 @@ internal abstract class AsyncEffectRenderer
 
 	internal double Progress {
 		get {
-			if (target_tiles.Length == 0 || current_tile < 0)
-				return 0;
-			else if (current_tile < target_tiles.Length)
-				return current_tile / (double) target_tiles.Length;
-			else
-				return 1;
+			if (tiles_count == 0) return 0;
+			int dequeued = tiles_count - queued_tiles.Count;
+			return dequeued / (double) tiles_count;
 		}
 	}
 
@@ -198,7 +192,13 @@ internal abstract class AsyncEffectRenderer
 
 		render_exceptions.Clear ();
 
-		current_tile = -1;
+		ConcurrentQueue<RectangleI> targetTiles = new (
+			settings.EffectIsTileable
+			? settings.RenderBounds.ToRows () // If effect is tileable, render each row in parallel.
+			: new[] { settings.RenderBounds }); // If the effect isn't tileable, there is a single tile for the entire render bounds
+
+		queued_tiles = targetTiles;
+		tiles_count = targetTiles.Count;
 
 		CancellationToken cancellationToken = ReplaceCancellationSource ();
 
@@ -266,11 +266,10 @@ internal abstract class AsyncEffectRenderer
 		// Fetch the next tile index and render it.
 		while (true) {
 
-			int tileIndex = Interlocked.Increment (ref current_tile);
-			if (tileIndex >= target_tiles.Length || cancellationToken.IsCancellationRequested) return;
+			if (cancellationToken.IsCancellationRequested) return;
+			if (!queued_tiles.TryDequeue (out RectangleI tileBounds)) return;
 
 			Exception? exception = null;
-			RectangleI tileBounds = target_tiles[tileIndex];
 
 			try {
 				// NRT - These are set in Start () before getting here
