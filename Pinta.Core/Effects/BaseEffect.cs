@@ -92,18 +92,6 @@ public abstract class BaseEffect
 		return Task.FromResult (Gtk.ResponseType.Ok); // Placeholder
 	}
 
-	/// <summary>
-	/// Launches the standard configuration dialog for this effect.
-	/// </summary>
-	/// <param name="localizer">
-	/// The localizer for the effect add-in. This is used to fetch translations for the
-	/// strings in the dialog.
-	/// </param>
-	protected Task<Gtk.ResponseType> LaunchSimpleEffectDialog (AddinLocalizer localizer)
-	{
-		return PintaCore.Chrome.LaunchSimpleEffectDialog (this, new AddinLocalizerWrapper (localizer));
-	}
-
 	#region Overridable Render Methods
 	/// <summary>
 	/// Performs the actual work of rendering an effect. Do not call base.Render ().
