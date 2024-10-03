@@ -159,9 +159,9 @@ public sealed class ChromeManager : IChromeService
 		}
 	}
 
-	public void ShowMessageDialog (Gtk.Window parent, string message, string body)
+	public async void ShowMessageDialog (Gtk.Window parent, string message, string body)
 	{
-		message_dialog_handler (parent, message, body);
+		await message_dialog_handler (parent, message, body);
 	}
 
 	public void SetStatusBarText (string text)
@@ -199,5 +199,5 @@ public interface IProgressDialog
 }
 
 public delegate Task<string> ErrorDialogHandler (Gtk.Window parent, string message, string body, string details);
-public delegate void MessageDialogHandler (Gtk.Window parent, string message, string body);
+public delegate Task MessageDialogHandler (Gtk.Window parent, string message, string body);
 public delegate Task<bool> SimpleEffectDialogHandler (BaseEffect effect, IAddinLocalizer localizer);

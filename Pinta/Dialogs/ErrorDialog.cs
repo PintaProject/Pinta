@@ -31,20 +31,20 @@ namespace Pinta;
 
 internal static class ErrorDialog
 {
-	internal static void ShowMessage (
+	internal static Task ShowMessage (
 		Gtk.Window parent,
 		string message,
 		string body)
 	{
 		System.Console.Error.WriteLine ("Pinta: {0}\n{1}", message, body);
 
-		var dialog = Adw.MessageDialog.New (parent, message, body);
+		Adw.MessageDialog dialog = Adw.MessageDialog.New (parent, message, body);
 
 		dialog.AddResponse (nameof (DialogResponses.OK), Translations.GetString ("_OK"));
 		dialog.DefaultResponse = nameof (DialogResponses.OK);
 		dialog.CloseResponse = nameof (DialogResponses.OK);
 
-		dialog.Present ();
+		return dialog.RunAsync ();
 	}
 
 	/// <returns>
