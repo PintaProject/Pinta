@@ -81,7 +81,7 @@ public sealed class LivePreviewManager
 	public event EventHandler<LivePreviewRenderUpdatedEventArgs>? RenderUpdated;
 	public event EventHandler<LivePreviewEndedEventArgs>? Ended;
 
-	public void Start (BaseEffect effect)
+	public async void Start (BaseEffect effect)
 	{
 		if (live_preview_enabled)
 			throw new InvalidOperationException ("LivePreviewManager.Start() called while live preview is already enabled.");
@@ -137,23 +137,13 @@ public sealed class LivePreviewManager
 		renderer.Start (effect, layer.Surface, live_preview_surface);
 
 		if (effect.IsConfigurable) {
-			EventHandler<BaseEffect.ConfigDialogResponseEventArgs>? handler = null;
-			handler = (_, args) => {
-				if (!args.Accepted) {
-					chrome_manager.MainWindowBusy = true;
-					Cancel ();
-				} else {
-					chrome_manager.MainWindowBusy = true;
-					Apply ();
-				}
 
-				// Unsubscribe once we're done.
-				effect.ConfigDialogResponse -= handler;
-			};
-
-			effect.ConfigDialogResponse += handler;
-
-			effect.LaunchConfiguration ();
+			bool response = await effect.LaunchConfiguration ();
+			chrome_manager.MainWindowBusy = true;
+			if (response)
+				Apply ();
+			else
+				Cancel ();
 
 		} else {
 			chrome_manager.MainWindowBusy = true;
@@ -277,15 +267,15 @@ public sealed class LivePreviewManager
 	private sealed class Renderer : AsyncEffectRenderer
 	{
 		readonly LivePreviewManager manager;
-		readonly ChromeManager chrome_manager;
+		readonly ChromeManager chrome;
 		internal Renderer (
 			LivePreviewManager manager,
 			AsyncEffectRenderer.Settings settings,
-			ChromeManager chromeManager)
+			ChromeManager chrome)
 			: base (settings)
 		{
 			this.manager = manager;
-			this.chrome_manager = chromeManager;
+			this.chrome = chrome;
 		}
 
 		protected override void OnUpdate (
@@ -293,7 +283,7 @@ public sealed class LivePreviewManager
 			RectangleI updatedBounds)
 		{
 			Debug.WriteLine (DateTime.Now.ToString ("HH:mm:ss:ffff") + " LivePreviewManager.OnUpdate() progress: " + progress);
-			chrome_manager.ProgressDialog.Progress = progress;
+			chrome.ProgressDialog.Progress = progress;
 			manager.FireLivePreviewRenderUpdatedEvent (progress, updatedBounds);
 		}
 

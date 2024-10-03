@@ -25,7 +25,7 @@
 // THE SOFTWARE.
 
 using System;
-using System.Diagnostics;
+using System.Threading.Tasks;
 using Cairo;
 using Mono.Addins;
 using Mono.Addins.Localization;
@@ -84,10 +84,13 @@ public abstract class BaseEffect
 	/// Launches the configuration dialog for this effect/adjustment.
 	/// If IsConfigurable is true, the ConfigDialogResponse event will be invoked when the user accepts or cancels the dialog.
 	/// </summary>
-	public virtual void LaunchConfiguration ()
+	/// <returns>Whether the user's response was positive or negative</returns>
+	public virtual Task<bool> LaunchConfiguration ()
 	{
 		if (IsConfigurable)
 			throw new NotImplementedException ($"{GetType ()} is marked as configurable, but has not implemented LaunchConfiguration");
+
+		return Task.FromResult (true); // Placeholder
 	}
 
 	/// <summary>
@@ -97,22 +100,9 @@ public abstract class BaseEffect
 	/// The localizer for the effect add-in. This is used to fetch translations for the
 	/// strings in the dialog.
 	/// </param>
-	protected void LaunchSimpleEffectDialog (AddinLocalizer localizer)
+	protected Task<bool> LaunchSimpleEffectDialog (AddinLocalizer localizer)
 	{
-		PintaCore.Chrome.LaunchSimpleEffectDialog (this, new AddinLocalizerWrapper (localizer));
-	}
-
-	/// <summary>
-	/// Emitted when the configuration dialog is accepted or cancelled by the user.
-	/// </summary>
-	public event EventHandler<ConfigDialogResponseEventArgs>? ConfigDialogResponse;
-
-	/// <summary>
-	/// Notify that the configuration dialog was accepted or cancelled by the user.
-	/// </summary>
-	public void OnConfigDialogResponse (bool accepted)
-	{
-		ConfigDialogResponse?.Invoke (this, new ConfigDialogResponseEventArgs (accepted));
+		return PintaCore.Chrome.LaunchSimpleEffectDialog (this, new AddinLocalizerWrapper (localizer));
 	}
 
 	#region Overridable Render Methods
@@ -187,13 +177,6 @@ public abstract class BaseEffect
 			effect.EffectData = EffectData?.Clone ();
 
 		return effect;
-	}
-
-	public class ConfigDialogResponseEventArgs : EventArgs
-	{
-		public ConfigDialogResponseEventArgs (bool accepted) { Accepted = accepted; }
-
-		public bool Accepted { get; }
 	}
 }
 

@@ -1,4 +1,5 @@
 using System;
+using System.Threading.Tasks;
 using Cairo;
 using Pinta.Core;
 using Pinta.Gui.Widgets;
@@ -26,21 +27,27 @@ public sealed class AlignObjectEffect : BaseEffect
 		chrome = services.GetService<IChromeService> ();
 		EffectData = new AlignObjectData ();
 	}
-	public override void LaunchConfiguration ()
+	public override Task<bool> LaunchConfiguration ()
 	{
+		TaskCompletionSource<bool> completionSource = new ();
+
 		AlignmentDialog dialog = new (chrome);
 
 		// Align to the default position
 		Data.Position = dialog.SelectedPosition;
 
-		dialog.PositionChanged += (_, _) => Data.Position = dialog.SelectedPosition;
+		dialog.PositionChanged += (_, _) => {
+			Data.Position = dialog.SelectedPosition;
+		};
 
 		dialog.OnResponse += (_, args) => {
-			OnConfigDialogResponse (args.ResponseId == (int) Gtk.ResponseType.Ok);
+			completionSource.SetResult (Gtk.ResponseType.Ok == (Gtk.ResponseType) args.ResponseId);
 			dialog.Destroy ();
 		};
 
 		dialog.Present ();
+
+		return completionSource.Task;
 	}
 
 	public override void Render (ImageSurface src, ImageSurface dest, ReadOnlySpan<RectangleI> rois)

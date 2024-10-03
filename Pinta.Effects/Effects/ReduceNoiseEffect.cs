@@ -8,6 +8,7 @@
 /////////////////////////////////////////////////////////////////////////////////
 
 using System;
+using System.Threading.Tasks;
 using Cairo;
 using Pinta.Core;
 using Pinta.Gui.Widgets;
@@ -40,7 +41,7 @@ public sealed class ReduceNoiseEffect : LocalHistogramEffect
 		EffectData = new ReduceNoiseData ();
 	}
 
-	public override void LaunchConfiguration ()
+	public override Task<bool> LaunchConfiguration ()
 		=> chrome.LaunchSimpleEffectDialog (this);
 
 	#region Algorithm Code Ported From PDN

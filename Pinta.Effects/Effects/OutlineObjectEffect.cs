@@ -36,7 +36,7 @@ public sealed class OutlineObjectEffect : BaseEffect
 		EffectData = new OutlineObjectData ();
 	}
 
-	public override void LaunchConfiguration ()
+	public override Task<bool> LaunchConfiguration ()
 		=> chrome.LaunchSimpleEffectDialog (this);
 
 	protected override void Render (ImageSurface src, ImageSurface dest, RectangleI roi)
