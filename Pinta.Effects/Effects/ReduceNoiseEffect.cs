@@ -20,7 +20,7 @@ public sealed class ReduceNoiseEffect : LocalHistogramEffect
 	private int radius;
 	private double strength;
 
-	public override string Icon => Pinta.Resources.Icons.EffectsNoiseReduceNoise;
+	public override string Icon => Resources.Icons.EffectsNoiseReduceNoise;
 
 	public sealed override bool IsTileable => true;
 
@@ -47,13 +47,13 @@ public sealed class ReduceNoiseEffect : LocalHistogramEffect
 	#region Algorithm Code Ported From PDN
 	public override ColorBgra Apply (in ColorBgra color, int area, Span<int> hb, Span<int> hg, Span<int> hr, Span<int> ha)
 	{
-		ColorBgra normalized = GetPercentileOfColor (color, area, hb, hg, hr, ha);
+		ColorBgra normalized = GetPercentileOfColor (color, area, hb, hg, hr);
 		double lerp = strength * (1 - 0.75 * color.GetIntensity ());
 
 		return ColorBgra.Lerp (color, normalized, lerp);
 	}
 
-	private static ColorBgra GetPercentileOfColor (ColorBgra color, int area, Span<int> hb, Span<int> hg, Span<int> hr, Span<int> ha)
+	private static ColorBgra GetPercentileOfColor (ColorBgra color, int area, Span<int> hb, Span<int> hg, Span<int> hr)
 	{
 		int rc = 0;
 		int gc = 0;
