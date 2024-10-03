@@ -24,7 +24,6 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 // THE SOFTWARE.
 
-using System.Threading.Tasks;
 using Pinta.Core;
 
 namespace Pinta;
@@ -37,28 +36,21 @@ internal sealed class ErrorDialog
 		this.help = help;
 	}
 
-	internal static Task ShowMessage (
+	internal static void ShowMessage (
 		Gtk.Window parent,
 		string message,
 		string body)
 	{
-		TaskCompletionSource completionSource = new ();
-
 		System.Console.Error.WriteLine ("Pinta: {0}\n{1}", message, body);
 
-		Adw.MessageDialog dialog = Adw.MessageDialog.New (parent, message, body);
+		var dialog = Adw.MessageDialog.New (parent, message, body);
 
 		const string ok_response = "ok";
-
 		dialog.AddResponse (ok_response, Translations.GetString ("_OK"));
 		dialog.DefaultResponse = ok_response;
 		dialog.CloseResponse = ok_response;
 
-		dialog.OnResponse += (_, _) => completionSource.SetResult ();
-
 		dialog.Present ();
-
-		return completionSource.Task;
 	}
 
 	internal void ShowError (
