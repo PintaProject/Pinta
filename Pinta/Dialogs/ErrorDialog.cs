@@ -47,6 +47,13 @@ internal static class ErrorDialog
 		dialog.Present ();
 	}
 
+	/// <returns>
+	/// Either
+	/// <see cref="DialogResponses.OK"/>
+	/// or
+	/// <see cref="DialogResponses.Bug"/>
+	/// as a string, depending on the user's response
+	/// </returns>
 	internal static Task<string> ShowError (
 		Gtk.Window parent,
 		string message,
