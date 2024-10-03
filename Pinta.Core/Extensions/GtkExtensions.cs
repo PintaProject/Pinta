@@ -605,10 +605,12 @@ public static partial class GtkExtensions
 		attrs = new Pango.AttrList (attrs_handle);
 	}
 
-	public static async void LaunchUri (string uri)
+	public static async void LaunchUri (
+		this SystemManager system,
+		string uri)
 	{
 		// Workaround for macOS, which produces an "unsupported on current backend" error (https://gitlab.gnome.org/GNOME/gtk/-/issues/6788)
-		if (PintaCore.System.OperatingSystem == OS.Mac) {
+		if (system.OperatingSystem == OS.Mac) {
 			var process = System.Diagnostics.Process.Start ("open", uri);
 			process.WaitForExit ();
 		} else {

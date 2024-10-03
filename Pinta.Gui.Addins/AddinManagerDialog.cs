@@ -12,6 +12,7 @@ namespace Pinta.Gui.Addins;
 public sealed class AddinManagerDialog : Adw.Window
 {
 	private readonly SetupService service;
+	private readonly SystemManager system;
 
 	private readonly AddinListView installed_list;
 	private readonly AddinListView updates_list;
@@ -19,7 +20,10 @@ public sealed class AddinManagerDialog : Adw.Window
 
 	private readonly StatusProgressBar progress_bar;
 
-	public AddinManagerDialog (Gtk.Window parent, SetupService service)
+	public AddinManagerDialog (
+		Gtk.Window parent,
+		SetupService service,
+		SystemManager system)
 	{
 		// TODO - add a dialog for managing the list of repositories.
 		// TODO - support searching through the gallery
@@ -63,6 +67,7 @@ public sealed class AddinManagerDialog : Adw.Window
 		// --- References to keep
 
 		this.service = service;
+		this.system = system;
 
 		progress_bar = progressBar;
 
@@ -89,7 +94,7 @@ public sealed class AddinManagerDialog : Adw.Window
 
 	private AddinListView CreateAddinList ()
 	{
-		AddinListView result = new ();
+		AddinListView result = new (system);
 		result.OnAddinChanged += (_, _) => LoadAll ();
 		return result;
 	}

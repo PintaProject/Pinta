@@ -42,6 +42,7 @@ public sealed class ActionHandlers
 		RecentFileManager recentFiles = PintaCore.RecentFiles;
 		ImageConverterManager imageFormats = PintaCore.ImageFormats;
 		SettingsManager settings = PintaCore.Settings;
+		SystemManager system = PintaCore.System;
 		ToolManager tools = PintaCore.Tools;
 		PaletteManager palette = PintaCore.Palette;
 		string applicationVersion = PintaCore.ApplicationVersion;
@@ -66,7 +67,7 @@ public sealed class ActionHandlers
 			new PasteIntoNewLayerAction (actions, chrome, workspace, tools),
 			new PasteIntoNewImageAction (actions, chrome, workspace),
 			new ResizePaletteAction (actions.Edit, chrome, palette),
-			new AddinManagerAction (actions.Addins, chrome),
+			new AddinManagerAction (actions.Addins, chrome, system),
 
 			// Image
 			new ResizeImageAction (actions.Image, chrome, workspace),

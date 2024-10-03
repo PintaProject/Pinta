@@ -1,5 +1,4 @@
 using System;
-using Gtk;
 using Mono.Addins;
 using Mono.Addins.Setup;
 using Pinta.Core;
@@ -25,7 +24,7 @@ internal sealed class AddinListView : Adw.Bin
 	/// </summary>
 	public event EventHandler? OnAddinChanged;
 
-	public AddinListView ()
+	public AddinListView (SystemManager system)
 	{
 		model = Gio.ListStore.New (AddinListViewItem.GetGType ());
 
@@ -46,12 +45,12 @@ internal sealed class AddinListView : Adw.Bin
 		};
 
 		// TODO - have an option to group by category like the old GTK2 addin dialog.
-		list_view = ListView.New (selection_model, factory);
+		list_view = Gtk.ListView.New (selection_model, factory);
 
 		list_view_scroll = Gtk.ScrolledWindow.New ();
 		list_view_scroll.SetChild (list_view);
 		list_view_scroll.SetSizeRequest (300, 400);
-		list_view_scroll.SetPolicy (PolicyType.Automatic, PolicyType.Automatic);
+		list_view_scroll.SetPolicy (Gtk.PolicyType.Automatic, Gtk.PolicyType.Automatic);
 
 		empty_list_page = new Adw.StatusPage () {
 			IconName = StandardIcons.SystemSearch,
@@ -63,15 +62,15 @@ internal sealed class AddinListView : Adw.Bin
 		list_view_stack.Add (list_view_scroll);
 		list_view_stack.Add (empty_list_page);
 
-		info_view = new AddinInfoView ();
+		info_view = new AddinInfoView (system);
 		info_view.OnAddinChanged += (o, e) => OnAddinChanged?.Invoke (o, e);
 
 		var flap = Adw.Flap.New ();
 		flap.FoldPolicy = Adw.FlapFoldPolicy.Never;
 		flap.Locked = true;
 		flap.Content = list_view_stack;
-		flap.Separator = Gtk.Separator.New (Orientation.Vertical);
-		flap.FlapPosition = PackType.End;
+		flap.Separator = Gtk.Separator.New (Gtk.Orientation.Vertical);
+		flap.FlapPosition = Gtk.PackType.End;
 		flap.SetFlap (info_view);
 		SetChild (flap);
 	}
