@@ -62,6 +62,6 @@ internal sealed class PasteIntoNewImageAction : IActionHandler
 		if (cb_texture is not null)
 			workspace.NewDocumentFromImage (actions, cb_texture.ToSurface ());
 		else
-			await PasteAction.ShowClipboardEmptyDialog (chrome);
+			PasteAction.ShowClipboardEmptyDialog (chrome);
 	}
 }

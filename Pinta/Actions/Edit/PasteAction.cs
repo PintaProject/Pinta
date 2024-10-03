@@ -115,24 +115,24 @@ internal sealed class PasteAction : IActionHandler
 	{
 		// Create a compound history item for recording several
 		// operations so that they can all be undone/redone together.
-		string history_text = toNewLayer ? Translations.GetString ("Paste Into New Layer") : Translations.GetString ("Paste");
+		var history_text = toNewLayer ? Translations.GetString ("Paste Into New Layer") : Translations.GetString ("Paste");
 		CompoundHistoryItem paste_action = new (Resources.StandardIcons.EditPaste, history_text);
 
-		Gdk.Clipboard clipboard = GdkExtensions.GetDefaultClipboard ();
+		var cb = GdkExtensions.GetDefaultClipboard ();
 
 		// See if the current tool wants to handle the paste
 		// operation (e.g., the text tool could paste text)
 		if (!toNewLayer) {
-			if (await tools.DoHandlePaste (doc, clipboard))
+			if (await tools.DoHandlePaste (doc, cb))
 				return;
 		}
 
 		// Commit any unfinished tool actions
 		tools.Commit ();
 
-		Gdk.Texture? cb_texture = await clipboard.ReadTextureAsync ();
+		Gdk.Texture? cb_texture = await cb.ReadTextureAsync ();
 		if (cb_texture is null) {
-			await ShowClipboardEmptyDialog (chrome);
+			ShowClipboardEmptyDialog (chrome);
 			return;
 		}
 
@@ -199,11 +199,11 @@ internal sealed class PasteAction : IActionHandler
 		doc.History.PushNewItem (paste_action);
 	}
 
-	public static async Task ShowClipboardEmptyDialog (ChromeManager chrome)
+	public static void ShowClipboardEmptyDialog (ChromeManager chrome)
 	{
-		string primary = Translations.GetString ("Image cannot be pasted");
-		string secondary = Translations.GetString ("The clipboard does not contain an image.");
-		await chrome.ShowMessageDialog (chrome.MainWindow, primary, secondary);
+		var primary = Translations.GetString ("Image cannot be pasted");
+		var secondary = Translations.GetString ("The clipboard does not contain an image.");
+		chrome.ShowMessageDialog (chrome.MainWindow, primary, secondary);
 	}
 
 	public static async Task<Gtk.ResponseType> ShowExpandCanvasDialog (ChromeManager chrome)
