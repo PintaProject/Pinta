@@ -37,7 +37,7 @@ public sealed class VoronoiDiagramEffect : BaseEffect
 		EffectData = new VoronoiDiagramData ();
 	}
 
-	public override Task<Gtk.ResponseType> LaunchConfiguration ()
+	public override Task<bool> LaunchConfiguration ()
 		=> chrome.LaunchSimpleEffectDialog (this);
 
 	private sealed record VoronoiSettings (

@@ -37,7 +37,7 @@ public sealed class OilPaintingEffect : BaseEffect
 		EffectData = new OilPaintingData ();
 	}
 
-	public override Task<Gtk.ResponseType> LaunchConfiguration ()
+	public override Task<bool> LaunchConfiguration ()
 		=> chrome.LaunchSimpleEffectDialog (this);
 
 	#region Algorithm Code Ported From PDN

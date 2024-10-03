@@ -51,7 +51,7 @@ public sealed class BrightnessContrastEffect : BaseEffect
 		table_calculated = false;
 	}
 
-	public override Task<Gtk.ResponseType> LaunchConfiguration ()
+	public override Task<bool> LaunchConfiguration ()
 		=> chrome.LaunchSimpleEffectDialog (this);
 
 	public override void Render (ImageSurface src, ImageSurface dest, ReadOnlySpan<RectangleI> rois)

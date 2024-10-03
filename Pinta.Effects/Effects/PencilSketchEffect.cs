@@ -50,7 +50,7 @@ public sealed class PencilSketchEffect : BaseEffect
 		color_dodge_op = new UserBlendOps.ColorDodgeBlendOp ();
 	}
 
-	public override Task<Gtk.ResponseType> LaunchConfiguration ()
+	public override Task<bool> LaunchConfiguration ()
 		=> chrome.LaunchSimpleEffectDialog (this);
 
 	#region Algorithm Code Ported From PDN

@@ -27,19 +27,21 @@ public sealed class AlignObjectEffect : BaseEffect
 		chrome = services.GetService<IChromeService> ();
 		EffectData = new AlignObjectData ();
 	}
-	public override Task<Gtk.ResponseType> LaunchConfiguration ()
+	public override Task<bool> LaunchConfiguration ()
 	{
-		TaskCompletionSource<Gtk.ResponseType> completionSource = new ();
+		TaskCompletionSource<bool> completionSource = new ();
 
 		AlignmentDialog dialog = new (chrome);
 
 		// Align to the default position
 		Data.Position = dialog.SelectedPosition;
 
-		dialog.PositionChanged += (_, _) => Data.Position = dialog.SelectedPosition;
+		dialog.PositionChanged += (_, _) => {
+			Data.Position = dialog.SelectedPosition;
+		};
 
 		dialog.OnResponse += (_, args) => {
-			completionSource.SetResult ((Gtk.ResponseType) args.ResponseId);
+			completionSource.SetResult (Gtk.ResponseType.Ok == (Gtk.ResponseType) args.ResponseId);
 			dialog.Destroy ();
 		};
 

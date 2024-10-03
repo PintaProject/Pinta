@@ -33,7 +33,7 @@ public sealed class ReliefEffect : ColorDifferenceEffect
 
 	public override string EffectMenuCategory => Translations.GetString ("Stylize");
 
-	public override Task<Gtk.ResponseType> LaunchConfiguration ()
+	public override Task<bool> LaunchConfiguration ()
 		=> chrome.LaunchSimpleEffectDialog (this);
 
 	public override string Icon => Pinta.Resources.Icons.EffectsStylizeRelief;

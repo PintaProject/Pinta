@@ -38,7 +38,7 @@ public sealed class TileEffect : BaseEffect
 		EffectData = new TileData ();
 	}
 
-	public override Task<Gtk.ResponseType> LaunchConfiguration ()
+	public override Task<bool> LaunchConfiguration ()
 		=> chrome.LaunchSimpleEffectDialog (this);
 
 	#region Algorithm Code Ported From PDN

@@ -38,7 +38,7 @@ public sealed class RedEyeRemoveEffect : BaseEffect
 		EffectData = new RedEyeRemoveData ();
 	}
 
-	public override Task<Gtk.ResponseType> LaunchConfiguration ()
+	public override Task<bool> LaunchConfiguration ()
 		=> chrome.LaunchSimpleEffectDialog (this);
 
 	public override void Render (ImageSurface src, ImageSurface dest, ReadOnlySpan<RectangleI> rois)

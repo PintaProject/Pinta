@@ -46,7 +46,7 @@ public sealed class MandelbrotFractalEffect : BaseEffect
 		EffectData = new MandelbrotFractalData ();
 	}
 
-	public override Task<Gtk.ResponseType> LaunchConfiguration ()
+	public override Task<bool> LaunchConfiguration ()
 		=> chrome.LaunchSimpleEffectDialog (this);
 
 	#region Algorithm Code Ported From PDN

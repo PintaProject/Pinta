@@ -33,7 +33,7 @@ namespace Pinta.Core;
 public interface IChromeService
 {
 	Gtk.Window MainWindow { get; }
-	Task<Gtk.ResponseType> LaunchSimpleEffectDialog (BaseEffect effect, IAddinLocalizer localizer);
+	Task<bool> LaunchSimpleEffectDialog (BaseEffect effect, IAddinLocalizer localizer);
 }
 
 public sealed class ChromeManager : IChromeService
@@ -60,11 +60,8 @@ public sealed class ChromeManager : IChromeService
 	public Gio.Menu AdjustmentsMenu { get; private set; } = null!;
 	public Gio.Menu EffectsMenu { get; private set; } = null!;
 
-	public ChromeManager ()
-	{
-	}
+	public ChromeManager () { }
 
-	#region Public Properties
 	public PointI LastCanvasCursorPoint {
 		get => last_canvas_cursor_point;
 		set {
@@ -86,9 +83,7 @@ public sealed class ChromeManager : IChromeService
 				MainWindow.Cursor = Gdk.Cursor.NewFromName (Pinta.Resources.StandardCursors.Default, null);
 		}
 	}
-	#endregion
 
-	#region Public Methods
 	public void InitializeApplication (Gtk.Application application)
 	{
 		Application = application;
@@ -165,11 +160,10 @@ public sealed class ChromeManager : IChromeService
 		OnStatusBarTextChanged (text);
 	}
 
-	public Task<Gtk.ResponseType> LaunchSimpleEffectDialog (BaseEffect effect, IAddinLocalizer localizer)
+	public Task<bool> LaunchSimpleEffectDialog (BaseEffect effect, IAddinLocalizer localizer)
 	{
 		return simple_effect_dialog_handler (effect, localizer);
 	}
-	#endregion
 
 	private void OnLastCanvasCursorPointChanged ()
 	{
@@ -181,10 +175,8 @@ public sealed class ChromeManager : IChromeService
 		StatusBarTextChanged?.Invoke (this, new TextChangedEventArgs (text));
 	}
 
-	#region Public Events
 	public event EventHandler? LastCanvasCursorPointChanged;
 	public event EventHandler<TextChangedEventArgs>? StatusBarTextChanged;
-	#endregion
 }
 
 public interface IProgressDialog
@@ -199,4 +191,4 @@ public interface IProgressDialog
 
 public delegate void ErrorDialogHandler (Gtk.Window parent, string message, string body, string details);
 public delegate void MessageDialogHandler (Gtk.Window parent, string message, string body);
-public delegate Task<Gtk.ResponseType> SimpleEffectDialogHandler (BaseEffect effect, IAddinLocalizer localizer);
+public delegate Task<bool> SimpleEffectDialogHandler (BaseEffect effect, IAddinLocalizer localizer);

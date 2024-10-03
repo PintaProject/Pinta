@@ -41,9 +41,9 @@ public sealed class CurvesEffect : BaseEffect
 		EffectData = new CurvesData ();
 	}
 
-	public override Task<Gtk.ResponseType> LaunchConfiguration ()
+	public override Task<bool> LaunchConfiguration ()
 	{
-		TaskCompletionSource<Gtk.ResponseType> completionSource = new ();
+		TaskCompletionSource<bool> completionSource = new ();
 
 		CurvesDialog dialog = new (chrome, Data) {
 			Title = Name,
@@ -51,7 +51,7 @@ public sealed class CurvesEffect : BaseEffect
 		};
 
 		dialog.OnResponse += (_, args) => {
-			completionSource.SetResult ((Gtk.ResponseType) args.ResponseId);
+			completionSource.SetResult (Gtk.ResponseType.Ok == (Gtk.ResponseType) args.ResponseId);
 			dialog.Destroy ();
 		};
 

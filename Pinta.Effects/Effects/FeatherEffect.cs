@@ -34,7 +34,7 @@ public sealed class FeatherEffect : BaseEffect
 		EffectData = new FeatherData ();
 	}
 
-	public override Task<Gtk.ResponseType> LaunchConfiguration ()
+	public override Task<bool> LaunchConfiguration ()
 		=> chrome.LaunchSimpleEffectDialog (this);
 
 	protected override void Render (

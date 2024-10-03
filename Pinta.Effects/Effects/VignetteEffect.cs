@@ -65,7 +65,7 @@ public sealed class VignetteEffect : BaseEffect
 		EffectData = new VignetteData ();
 	}
 
-	public override Task<Gtk.ResponseType> LaunchConfiguration ()
+	public override Task<bool> LaunchConfiguration ()
 		=> chrome.LaunchSimpleEffectDialog (this);
 
 	private sealed record VignetteSettings (

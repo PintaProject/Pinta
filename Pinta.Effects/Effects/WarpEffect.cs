@@ -49,7 +49,7 @@ public abstract class WarpEffect : BaseEffect
 		EffectData = new WarpData ();
 	}
 
-	public override Task<Gtk.ResponseType> LaunchConfiguration ()
+	public override Task<bool> LaunchConfiguration ()
 		=> Chrome.LaunchSimpleEffectDialog (this);
 
 	protected double DefaultRadius { get; private set; } = 0;

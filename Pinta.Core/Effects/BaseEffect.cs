@@ -84,12 +84,13 @@ public abstract class BaseEffect
 	/// Launches the configuration dialog for this effect/adjustment.
 	/// If IsConfigurable is true, the ConfigDialogResponse event will be invoked when the user accepts or cancels the dialog.
 	/// </summary>
-	public virtual Task<Gtk.ResponseType> LaunchConfiguration ()
+	/// <returns>Whether the user's response was positive or negative</returns>
+	public virtual Task<bool> LaunchConfiguration ()
 	{
 		if (IsConfigurable)
 			throw new NotImplementedException ($"{GetType ()} is marked as configurable, but has not implemented LaunchConfiguration");
 
-		return Task.FromResult (Gtk.ResponseType.Ok); // Placeholder
+		return Task.FromResult (true); // Placeholder
 	}
 
 	/// <summary>
@@ -99,7 +100,7 @@ public abstract class BaseEffect
 	/// The localizer for the effect add-in. This is used to fetch translations for the
 	/// strings in the dialog.
 	/// </param>
-	protected Task<Gtk.ResponseType> LaunchSimpleEffectDialog (AddinLocalizer localizer)
+	protected Task<bool> LaunchSimpleEffectDialog (AddinLocalizer localizer)
 	{
 		return PintaCore.Chrome.LaunchSimpleEffectDialog (this, new AddinLocalizerWrapper (localizer));
 	}

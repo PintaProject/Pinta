@@ -41,7 +41,7 @@ public sealed class ReduceNoiseEffect : LocalHistogramEffect
 		EffectData = new ReduceNoiseData ();
 	}
 
-	public override Task<Gtk.ResponseType> LaunchConfiguration ()
+	public override Task<bool> LaunchConfiguration ()
 		=> chrome.LaunchSimpleEffectDialog (this);
 
 	#region Algorithm Code Ported From PDN

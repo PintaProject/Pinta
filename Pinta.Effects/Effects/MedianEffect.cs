@@ -40,7 +40,7 @@ public sealed class MedianEffect : LocalHistogramEffect
 		EffectData = new MedianData ();
 	}
 
-	public override Task<Gtk.ResponseType> LaunchConfiguration ()
+	public override Task<bool> LaunchConfiguration ()
 		=> chrome.LaunchSimpleEffectDialog (this);
 
 	#region Algorithm Code Ported From PDN

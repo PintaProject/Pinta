@@ -40,7 +40,7 @@ public sealed class OutlineEdgeEffect : LocalHistogramEffect
 		EffectData = new OutlineEdgeData ();
 	}
 
-	public override Task<Gtk.ResponseType> LaunchConfiguration ()
+	public override Task<bool> LaunchConfiguration ()
 		=> chrome.LaunchSimpleEffectDialog (this);
 
 	#region Algorithm Code Ported From PDN

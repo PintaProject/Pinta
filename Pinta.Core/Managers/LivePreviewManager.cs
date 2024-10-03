@@ -138,9 +138,9 @@ public sealed class LivePreviewManager
 
 		if (effect.IsConfigurable) {
 
-			Gtk.ResponseType response = await effect.LaunchConfiguration ();
+			bool response = await effect.LaunchConfiguration ();
 			chrome_manager.MainWindowBusy = true;
-			if (response == Gtk.ResponseType.Ok)
+			if (response)
 				Apply ();
 			else
 				Cancel ();

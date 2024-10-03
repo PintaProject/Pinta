@@ -25,7 +25,7 @@ public sealed class DitheringEffect : BaseEffect
 		EffectData = new DitheringData ();
 	}
 
-	public override Task<Gtk.ResponseType> LaunchConfiguration ()
+	public override Task<bool> LaunchConfiguration ()
 		=> chrome.LaunchSimpleEffectDialog (this);
 
 	private sealed record DitheringSettings (

@@ -43,7 +43,7 @@ public sealed class AddNoiseEffect : BaseEffect
 		EffectData = new NoiseData ();
 	}
 
-	public override Task<Gtk.ResponseType> LaunchConfiguration ()
+	public override Task<bool> LaunchConfiguration ()
 		=> chrome.LaunchSimpleEffectDialog (this);
 
 	#region Algorithm Code Ported From PDN

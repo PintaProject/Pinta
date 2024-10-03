@@ -39,9 +39,9 @@ public sealed class PosterizeEffect : BaseEffect
 		EffectData = new PosterizeData ();
 	}
 
-	public override Task<Gtk.ResponseType> LaunchConfiguration ()
+	public override Task<bool> LaunchConfiguration ()
 	{
-		TaskCompletionSource<Gtk.ResponseType> completionSource = new ();
+		TaskCompletionSource<bool> completionSource = new ();
 
 		PosterizeDialog dialog = new (chrome) {
 			Title = Name,
@@ -50,7 +50,7 @@ public sealed class PosterizeEffect : BaseEffect
 		};
 
 		dialog.OnResponse += (_, args) => {
-			completionSource.SetResult ((Gtk.ResponseType) args.ResponseId);
+			completionSource.SetResult (Gtk.ResponseType.Ok == (Gtk.ResponseType) args.ResponseId);
 			dialog.Destroy ();
 		};
 

@@ -44,7 +44,7 @@ public sealed class FragmentEffect : BaseEffect
 		EffectData = new FragmentData ();
 	}
 
-	public override Task<Gtk.ResponseType> LaunchConfiguration ()
+	public override Task<bool> LaunchConfiguration ()
 		=> chrome.LaunchSimpleEffectDialog (this);
 
 	#region Algorithm Code Ported From PDN

@@ -44,7 +44,7 @@ public sealed class MotionBlurEffect : BaseEffect
 		EffectData = new MotionBlurData ();
 	}
 
-	public override Task<Gtk.ResponseType> LaunchConfiguration ()
+	public override Task<bool> LaunchConfiguration ()
 		=> chrome.LaunchSimpleEffectDialog (this);
 
 	#region Algorithm Code Ported From PDN

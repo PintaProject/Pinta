@@ -51,7 +51,7 @@ public sealed class CloudsEffect : BaseEffect
 		EffectData = new CloudsData ();
 	}
 
-	public override Task<Gtk.ResponseType> LaunchConfiguration ()
+	public override Task<bool> LaunchConfiguration ()
 		=> chrome.LaunchSimpleEffectDialog (this);
 
 	#region Algorithm Code Ported From PDN

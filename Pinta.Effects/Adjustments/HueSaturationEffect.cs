@@ -35,7 +35,7 @@ public sealed class HueSaturationEffect : BaseEffect
 		EffectData = new HueSaturationData ();
 	}
 
-	public override Task<Gtk.ResponseType> LaunchConfiguration ()
+	public override Task<bool> LaunchConfiguration ()
 		=> chrome.LaunchSimpleEffectDialog (this);
 
 	private UnaryPixelOp CreateOptimalOp ()

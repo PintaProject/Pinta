@@ -86,12 +86,12 @@ public sealed class SimpleEffectDialog : Gtk.Dialog
 	/// The IAddinLocalizer provides a generic way to get translated strings both for
 	/// Pinta's effects and for effect add-ins.
 	/// </summary>
-	public static Task<Gtk.ResponseType> Launch (BaseEffect effect, IAddinLocalizer localizer)
+	public static Task<bool> Launch (BaseEffect effect, IAddinLocalizer localizer)
 	{
 		if (effect.EffectData == null)
 			throw new ArgumentException ($"{effect.EffectData} should not be null", nameof (effect));
 
-		TaskCompletionSource<Gtk.ResponseType> responseCompletion = new ();
+		TaskCompletionSource<bool> responseCompletion = new ();
 
 		SimpleEffectDialog dialog = new (
 			effect.Name,
@@ -103,7 +103,7 @@ public sealed class SimpleEffectDialog : Gtk.Dialog
 		dialog.EffectDataChanged += (o, e) => effect.EffectData.FirePropertyChanged (e.PropertyName);
 
 		dialog.OnResponse += (_, args) => {
-			responseCompletion.SetResult ((Gtk.ResponseType) args.ResponseId);
+			responseCompletion.SetResult (Gtk.ResponseType.Ok == (Gtk.ResponseType) args.ResponseId);
 			dialog.Destroy ();
 		};
 
