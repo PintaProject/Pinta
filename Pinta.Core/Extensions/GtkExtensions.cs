@@ -400,8 +400,18 @@ public static partial class GtkExtensions
 	public static Task<string> RunAsync (this Adw.MessageDialog dialog)
 	{
 		TaskCompletionSource<string> tcs = new ();
-		dialog.OnResponse += (_, args) => tcs.SetResult (args.Response);
-		dialog.Show ();
+
+		void ResponseCallback (
+			Adw.MessageDialog sender,
+			Adw.MessageDialog.ResponseSignalArgs args)
+		{
+			tcs.SetResult (args.Response);
+			dialog.OnResponse -= ResponseCallback;
+		}
+
+		dialog.OnResponse += ResponseCallback;
+		dialog.Present ();
+
 		return tcs.Task;
 	}
 

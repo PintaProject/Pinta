@@ -65,10 +65,8 @@ internal sealed class MainWindow
 		// Initialize interface things
 		_ = new ActionHandlers ();
 
-		ErrorDialog errorDialog = new (PintaCore.Actions.Help);
-
 		PintaCore.Chrome.InitializeProgessDialog (new ProgressDialog (PintaCore.Chrome));
-		PintaCore.Chrome.InitializeErrorDialogHandler (errorDialog.ShowError);
+		PintaCore.Chrome.InitializeErrorDialogHandler (ErrorDialog.ShowError);
 		PintaCore.Chrome.InitializeMessageDialog (ErrorDialog.ShowMessage);
 		PintaCore.Chrome.InitializeSimpleEffectDialog (SimpleEffectDialog.Launch);
 
