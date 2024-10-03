@@ -82,7 +82,7 @@ internal sealed class NewScreenshotAction : IActionHandler
 
 		} catch (NoHandlersForOSException e) {
 
-			await chrome.ShowMessageDialog (
+			chrome.ShowMessageDialog (
 				chrome.MainWindow,
 				e.Message,
 				string.Empty);
@@ -133,7 +133,7 @@ internal sealed class NewScreenshotAction : IActionHandler
 			}
 		);
 
-		IScreenshot portal = systemConnection.CreateProxy<IScreenshot> (
+		var portal = systemConnection.CreateProxy<IScreenshot> (
 			"org.freedesktop.portal.Desktop",
 			"/org/freedesktop/portal/desktop");
 
@@ -141,7 +141,7 @@ internal sealed class NewScreenshotAction : IActionHandler
 		// However, the necessary functions are not correctly wrapped.
 		// The empty string means that the compositor may unfortunately place the dialog wherever it pleases.
 		// https://flatpak.github.io/xdg-desktop-portal/#parent_window
-		string rootWindowID = "";
+		var rootWindowID = "";
 
 		// Enables options such as delay, specific windows, etc.
 		Dictionary<string, object> portalOptions = new () {
