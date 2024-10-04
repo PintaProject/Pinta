@@ -165,7 +165,7 @@ public sealed class CurvesDialog : Gtk.Dialog
 		// --- Initialization
 
 		EffectData = effectData;
-		ControlPoints = ComputeControlPoints (Mode);
+		ResetControlPoints ();
 	}
 
 	private Gtk.ComboBoxText CreateComboMap ()
