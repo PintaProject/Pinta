@@ -49,7 +49,7 @@ public sealed class CurvesDialog : Gtk.Dialog
 		public bool IsActive { get; set; }
 	}
 
-	
+
 	private const int SIZE = 256; // drawing area width and height
 	private const int RADIUS = 6; // Control point radius
 
@@ -165,8 +165,7 @@ public sealed class CurvesDialog : Gtk.Dialog
 		// --- Initialization
 
 		EffectData = effectData;
-
-		ResetControlPoints ();
+		ControlPoints = ComputeControlPoints(Mode);
 	}
 
 	private Gtk.ComboBoxText CreateComboMap ()
@@ -247,21 +246,27 @@ public sealed class CurvesDialog : Gtk.Dialog
 
 	private void ResetControlPoints ()
 	{
+		ControlPoints = ComputeControlPoints (Mode);
+		UpdateLivePreview (nameof (ControlPoints));
+	}
+
+	private static SortedList<int, int>[] ComputeControlPoints (ColorTransferMode mode)
+	{
 		int channels =
-			Mode == ColorTransferMode.Luminosity
+			mode == ColorTransferMode.Luminosity
 			? 1
 			: 3;
 
-		ControlPoints = new SortedList<int, int>[channels];
+		var result = new SortedList<int, int>[channels];
 
 		for (int i = 0; i < channels; i++) {
-			ControlPoints[i] = new () {
+			result[i] = new () {
 				{ 0, 0 },
 				{ SIZE - 1, SIZE - 1 }
 			};
 		}
 
-		UpdateLivePreview (nameof (ControlPoints));
+		return result;
 	}
 
 	private void HandleComboMapChanged (object? sender, EventArgs e)
