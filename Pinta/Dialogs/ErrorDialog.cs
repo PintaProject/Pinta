@@ -24,6 +24,7 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 // THE SOFTWARE.
 
+using System;
 using System.Threading.Tasks;
 using Pinta.Core;
 
@@ -40,21 +41,14 @@ internal static class ErrorDialog
 
 		Adw.MessageDialog dialog = Adw.MessageDialog.New (parent, message, body);
 
-		dialog.AddResponse (nameof (DialogResponses.OK), Translations.GetString ("_OK"));
-		dialog.DefaultResponse = nameof (DialogResponses.OK);
-		dialog.CloseResponse = nameof (DialogResponses.OK);
+		dialog.AddResponse (nameof (ErrorDialogResponse.OK), Translations.GetString ("_OK"));
+		dialog.DefaultResponse = nameof (ErrorDialogResponse.OK);
+		dialog.CloseResponse = nameof (ErrorDialogResponse.OK);
 
 		return dialog.RunAsync ();
 	}
 
-	/// <returns>
-	/// Either
-	/// <see cref="DialogResponses.OK"/>
-	/// or
-	/// <see cref="DialogResponses.Bug"/>
-	/// as a string, depending on the user's response
-	/// </returns>
-	internal static Task<string> ShowError (
+	internal static async Task<ErrorDialogResponse> ShowError (
 		Gtk.Window parent,
 		string message,
 		string body,
@@ -74,12 +68,14 @@ internal static class ErrorDialog
 
 		Adw.MessageDialog dialog = Adw.MessageDialog.New (parent, message, body);
 		dialog.SetExtraChild (expander);
-		dialog.AddResponse (nameof (DialogResponses.Bug), Translations.GetString ("Report Bug..."));
-		dialog.SetResponseAppearance (nameof (DialogResponses.Bug), Adw.ResponseAppearance.Suggested);
-		dialog.AddResponse (nameof (DialogResponses.OK), Translations.GetString ("_OK"));
-		dialog.DefaultResponse = nameof (DialogResponses.OK);
-		dialog.CloseResponse = nameof (DialogResponses.OK);
+		dialog.AddResponse (nameof (ErrorDialogResponse.Bug), Translations.GetString ("Report Bug..."));
+		dialog.SetResponseAppearance (nameof (ErrorDialogResponse.Bug), Adw.ResponseAppearance.Suggested);
+		dialog.AddResponse (nameof (ErrorDialogResponse.OK), Translations.GetString ("_OK"));
+		dialog.DefaultResponse = nameof (ErrorDialogResponse.OK);
+		dialog.CloseResponse = nameof (ErrorDialogResponse.OK);
 
-		return dialog.RunAsync ();
+		string responseText = await dialog.RunAsync ();
+
+		return Enum.Parse<ErrorDialogResponse> (responseText);
 	}
 }

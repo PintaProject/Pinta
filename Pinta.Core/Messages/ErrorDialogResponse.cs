@@ -1,6 +1,6 @@
 namespace Pinta.Core;
 
-public enum DialogResponses
+public enum ErrorDialogResponse
 {
 	OK,
 	Bug,

@@ -151,9 +151,9 @@ public sealed class ChromeManager : IChromeService
 		string body,
 		string details)
 	{
-		string response = await error_dialog_handler (parent, message, body, details);
+		ErrorDialogResponse response = await error_dialog_handler (parent, message, body, details);
 		switch (response) {
-			case nameof (DialogResponses.Bug):
+			case ErrorDialogResponse.Bug:
 				PintaCore.Actions.Help.Bugs.Activate ();
 				break;
 		}
@@ -198,6 +198,6 @@ public interface IProgressDialog
 	event EventHandler<EventArgs> Canceled;
 }
 
-public delegate Task<string> ErrorDialogHandler (Gtk.Window parent, string message, string body, string details);
+public delegate Task<ErrorDialogResponse> ErrorDialogHandler (Gtk.Window parent, string message, string body, string details);
 public delegate Task MessageDialogHandler (Gtk.Window parent, string message, string body);
 public delegate Task<bool> SimpleEffectDialogHandler (BaseEffect effect, IAddinLocalizer localizer);
