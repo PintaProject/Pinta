@@ -145,14 +145,23 @@ public sealed class ChromeManager : IChromeService
 		simple_effect_dialog_handler = handler;
 	}
 
-	public void ShowErrorDialog (Gtk.Window parent, string message, string body, string details)
+	public async void ShowErrorDialog (
+		Gtk.Window parent,
+		string message,
+		string body,
+		string details)
 	{
-		error_dialog_handler (parent, message, body, details);
+		ErrorDialogResponse response = await error_dialog_handler (parent, message, body, details);
+		switch (response) {
+			case ErrorDialogResponse.Bug:
+				PintaCore.Actions.Help.Bugs.Activate ();
+				break;
+		}
 	}
 
-	public void ShowMessageDialog (Gtk.Window parent, string message, string body)
+	public async void ShowMessageDialog (Gtk.Window parent, string message, string body)
 	{
-		message_dialog_handler (parent, message, body);
+		await message_dialog_handler (parent, message, body);
 	}
 
 	public void SetStatusBarText (string text)
@@ -189,6 +198,6 @@ public interface IProgressDialog
 	event EventHandler<EventArgs> Canceled;
 }
 
-public delegate void ErrorDialogHandler (Gtk.Window parent, string message, string body, string details);
-public delegate void MessageDialogHandler (Gtk.Window parent, string message, string body);
+public delegate Task<ErrorDialogResponse> ErrorDialogHandler (Gtk.Window parent, string message, string body, string details);
+public delegate Task MessageDialogHandler (Gtk.Window parent, string message, string body);
 public delegate Task<bool> SimpleEffectDialogHandler (BaseEffect effect, IAddinLocalizer localizer);
