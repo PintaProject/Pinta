@@ -37,13 +37,27 @@ public sealed class OraFormat : IImageImporter, IImageExporter
 {
 	private const int ThumbMaxSize = 256;
 
+	private readonly ActionManager actions;
+	private readonly ChromeManager chrome;
+	private readonly WorkspaceManager workspace;
+	internal OraFormat (
+		ActionManager actions,
+		ChromeManager chrome,
+		WorkspaceManager workspace)
+	{
+		this.actions = actions;
+		this.chrome = chrome;
+		this.workspace = workspace;
+	}
+
 	#region IImageImporter implementation
 
 	public void Import (Gio.File file, Gtk.Window parent)
 	{
-		using var stream = new GioStream (file.Read (cancellable: null));
-		using var zipfile = new ZipArchive (stream);
-		XmlDocument stackXml = new XmlDocument ();
+		using GioStream stream = new (file.Read (cancellable: null));
+		using ZipArchive zipfile = new (stream);
+
+		XmlDocument stackXml = new ();
 
 		ZipArchiveEntry stackXmlEntry = zipfile.GetEntry ("stack.xml") ?? throw new XmlException ("No 'stack.xml' found in OpenRaster file");
 		stackXml.Load (stackXmlEntry.Open ());
@@ -52,16 +66,15 @@ public sealed class OraFormat : IImageImporter, IImageExporter
 		// valid that we need to guard against.
 		XmlElement imageElement = stackXml.DocumentElement!;
 
-		Size imagesize = new Size (
+		Size imagesize = new (
 			Width: int.Parse (imageElement.GetAttribute ("w")),
-			Height: int.Parse (imageElement.GetAttribute ("h"))
-		);
+			Height: int.Parse (imageElement.GetAttribute ("h")));
 
 		// TODO: Move "activate document" part out of file format class.
 		//       The creation of the document should be separate from
 		//       its activation.
-		Document doc = PintaCore.Workspace.CreateAndActivateDocument (
-			PintaCore.Actions,
+		Document doc = workspace.CreateAndActivateDocument (
+			actions,
 			file,
 			"ora",
 			imagesize);
@@ -81,8 +94,7 @@ public sealed class OraFormat : IImageImporter, IImageExporter
 
 			PointI position = new (
 				X: int.Parse (GetAttribute (layerElement, "x", "0")),
-				Y: int.Parse (GetAttribute (layerElement, "y", "0"))
-			);
+				Y: int.Parse (GetAttribute (layerElement, "y", "0")));
 
 			string name = GetAttribute (layerElement, "name", $"Layer {i}");
 
@@ -98,7 +110,6 @@ public sealed class OraFormat : IImageImporter, IImageExporter
 
 					while (true) {
 						int len = s.Read (buffer, 0, buffer.Length);
-
 						if (len > 0)
 							stream_out.Write (buffer, 0, len);
 						else
@@ -118,7 +129,7 @@ public sealed class OraFormat : IImageImporter, IImageExporter
 				layer.BlendMode = StandardToBlendMode (GetAttribute (layerElement, "composite-op", "svg:src-over"));
 
 				var pb = GdkPixbuf.Pixbuf.NewFromFile (tmp_file)!; // NRT: only nullable when an error is thrown
-				var g = new Context (layer.Surface);
+				Context g = new (layer.Surface);
 				g.DrawPixbuf (pb, (PointD) position);
 
 				try {
@@ -127,7 +138,7 @@ public sealed class OraFormat : IImageImporter, IImageExporter
 			} catch {
 				// Translators: {0} is the name of a layer, and {1} is the path to a .ora file.
 				string details = Translations.GetString ("Could not import layer \"{0}\" from {1}", name, zipfile);
-				PintaCore.Chrome.ShowMessageDialog (PintaCore.Chrome.MainWindow, Translations.GetString ("Error"), details);
+				chrome.ShowMessageDialog (chrome.MainWindow, Translations.GetString ("Error"), details);
 			}
 		}
 	}
@@ -154,9 +165,9 @@ public sealed class OraFormat : IImageImporter, IImageExporter
 
 	private static byte[] GetLayerXmlData (IReadOnlyList<UserLayer> layers)
 	{
-		using MemoryStream ms = new MemoryStream ();
-		using XmlTextWriter writer = new XmlTextWriter (ms, System.Text.Encoding.UTF8) {
-			Formatting = Formatting.Indented
+		using MemoryStream ms = new ();
+		using XmlTextWriter writer = new (ms, System.Text.Encoding.UTF8) {
+			Formatting = Formatting.Indented,
 		};
 
 		writer.WriteStartElement ("image");
@@ -189,9 +200,9 @@ public sealed class OraFormat : IImageImporter, IImageExporter
 
 	public void Export (Document document, Gio.File file, Gtk.Window parent)
 	{
-		using var file_stream = new GioStream (file.Replace ());
+		using GioStream file_stream = new (file.Replace ());
 
-		using var archive = new ZipArchive (file_stream, ZipArchiveMode.Create);
+		using ZipArchive archive = new (file_stream, ZipArchiveMode.Create);
 
 		{
 			var mimeBytes = System.Text.Encoding.ASCII.GetBytes ("image/openraster");
