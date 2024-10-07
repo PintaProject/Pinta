@@ -298,7 +298,7 @@ public sealed class ColorPickerDialog : Gtk.Dialog
 		small_mode = isSmallMode;
 		if (isSmallMode) {
 			spacing = 2;
-			margins = 4;
+			margins = 6;
 			palette_display_size = 40;
 			picker_surface_radius = 75;
 			cps_width = 150;
@@ -341,6 +341,8 @@ public sealed class ColorPickerDialog : Gtk.Dialog
 		a_cps.SetSliderWidth (cps_width);
 
 		sliders_box.Spacing = spacing;
+
+		this.GetContentAreaBox ().SetAllMargins (margins);
 
 		DefaultWidth = 1;
 		DefaultHeight = 1;
