@@ -14,7 +14,7 @@ public static class WidgetExtensions
 	/// <returns>Whether or not mouse position is within the drawing area.</returns>
 	public static bool IsMouseInDrawingArea (this Widget widget, Widget topWidget, PointD mousePos, out PointD relPos)
 	{
-		widget.TranslateCoordinates (topWidget, 0,0, out double x, out double y);
+		widget.TranslateCoordinates (topWidget, 0, 0, out double x, out double y);
 		relPos = new PointD ((mousePos.X - x), (mousePos.Y - y));
 		if (relPos.X >= 0 && relPos.X <= widget.GetWidth () && relPos.Y >= 0 && relPos.Y <= widget.GetHeight ())
 			return true;
