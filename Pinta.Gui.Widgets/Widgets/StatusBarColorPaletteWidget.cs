@@ -82,8 +82,6 @@ public sealed class StatusBarColorPaletteWidget : Gtk.DrawingArea
 					[PintaCore.Palette.PrimaryColor, PintaCore.Palette.SecondaryColor],
 					element == WidgetElement.PrimaryColor ? 0 : 1);
 				if (colors != null) {
-					Console.WriteLine (colors[0]);
-					Console.WriteLine (colors[1]);
 					if (PintaCore.Palette.PrimaryColor != colors[0])
 						PintaCore.Palette.PrimaryColor = colors[0];
 					if (PintaCore.Palette.SecondaryColor != colors[1])
@@ -300,9 +298,7 @@ public sealed class StatusBarColorPaletteWidget : Gtk.DrawingArea
 		var response = dialog.RunBlocking ();
 		if (response == Gtk.ResponseType.Ok) {
 			Color[]? result = new Color[colors.Length];
-			Console.WriteLine ("start");
 			for (int i = 0; i < colors.Length; i++) {
-				Console.WriteLine (dialog.colors[i]);
 				result[i] = dialog.colors[i];
 			}
 
