@@ -309,7 +309,7 @@ public sealed class ColorPickerDialog : Gtk.Dialog
 			palette_display_size = 50;
 			picker_surface_radius = 100;
 			cps_width = 200;
-			if(show_swatches)
+			if (show_swatches)
 				swatch_box.Visible = true;
 		}
 
@@ -357,44 +357,44 @@ public sealed class ColorPickerDialog : Gtk.Dialog
 		// titlebar of color picker; mainly just contains the reset color button
 		#region Titlebar
 
-			title_bar = new Gtk.HeaderBar ();
-			var reset_button = new Button ();
-			reset_button.Label = Translations.GetString ("Reset Color");
-			reset_button.OnClicked += (button, args) => {
-				colors = (Color[]) original_colors.Clone ();
-				UpdateView ();
-			};
-			title_bar.PackStart (reset_button);
+		title_bar = new Gtk.HeaderBar ();
+		var reset_button = new Button ();
+		reset_button.Label = Translations.GetString ("Reset Color");
+		reset_button.OnClicked += (button, args) => {
+			colors = (Color[]) original_colors.Clone ();
+			UpdateView ();
+		};
+		title_bar.PackStart (reset_button);
 
-			var shrinkButton = new Gtk.Button ();
-			if(small_mode)
+		var shrinkButton = new Gtk.Button ();
+		if (small_mode)
+			shrinkButton.SetIconName (Resources.StandardIcons.WindowMaximize);
+		else
+			shrinkButton.SetIconName (Resources.StandardIcons.WindowMinimize);
+		shrinkButton.OnClicked += (sender, args) => {
+			var contentArea = this.GetContentAreaBox ();
+			//contentArea.RemoveAll ();
+			SetSmallMode (!small_mode);
+			if (small_mode)
 				shrinkButton.SetIconName (Resources.StandardIcons.WindowMaximize);
 			else
 				shrinkButton.SetIconName (Resources.StandardIcons.WindowMinimize);
-			shrinkButton.OnClicked += (sender, args) => {
-				var contentArea = this.GetContentAreaBox ();
-				//contentArea.RemoveAll ();
-				SetSmallMode (!small_mode);
-				if(small_mode)
-					shrinkButton.SetIconName (Resources.StandardIcons.WindowMaximize);
-				else
-					shrinkButton.SetIconName (Resources.StandardIcons.WindowMinimize);
-			};
+		};
 
-			title_bar.PackStart (shrinkButton);
+		title_bar.PackStart (shrinkButton);
 
-			Gtk.Button ok_button = new Button { Label = Translations.GetString ("OK") };
-			ok_button.OnClicked += (sender, args) => { this.Response ((int)Gtk.ResponseType.Ok); this.Close (); };
-			ok_button.AddCssClass (AdwaitaStyles.SuggestedAction);
+		Gtk.Button ok_button = new Button { Label = Translations.GetString ("OK") };
+		ok_button.OnClicked += (sender, args) => { this.Response ((int) Gtk.ResponseType.Ok); this.Close (); };
+		ok_button.AddCssClass (AdwaitaStyles.SuggestedAction);
 
-			Gtk.Button cancel_button = new Button { Label = Translations.GetString ("Cancel") };
-			cancel_button.OnClicked += (sender, args) => { this.Response ((int)Gtk.ResponseType.Ok); this.Close (); };
+		Gtk.Button cancel_button = new Button { Label = Translations.GetString ("Cancel") };
+		cancel_button.OnClicked += (sender, args) => { this.Response ((int) Gtk.ResponseType.Ok); this.Close (); };
 
-			title_bar.PackEnd (ok_button);
-			title_bar.PackEnd (cancel_button);
+		title_bar.PackEnd (ok_button);
+		title_bar.PackEnd (cancel_button);
 
-			title_bar.SetShowTitleButtons (false);
-			this.SetTitlebar (title_bar);
+		title_bar.SetShowTitleButtons (false);
+		this.SetTitlebar (title_bar);
 
 		#endregion
 
@@ -737,7 +737,7 @@ public sealed class ColorPickerDialog : Gtk.Dialog
 
 
 		mainVbox.Append (top_box);
-		if(!small_mode)
+		if (!small_mode)
 			mainVbox.Append (swatch_box);
 
 		Title = Translations.GetString (window_title);
