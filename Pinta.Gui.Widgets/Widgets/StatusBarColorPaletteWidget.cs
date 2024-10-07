@@ -79,7 +79,7 @@ public sealed class StatusBarColorPaletteWidget : Gtk.DrawingArea
 			case WidgetElement.PrimaryColor:
 			case WidgetElement.SecondaryColor:
 				var colors = GetUserChosenColor (
-					[PintaCore.Palette.PrimaryColor, PintaCore.Palette.SecondaryColor],
+					new Color[] { PintaCore.Palette.PrimaryColor, PintaCore.Palette.SecondaryColor },
 					element == WidgetElement.PrimaryColor ? 0 : 1);
 				if (colors != null) {
 					if (PintaCore.Palette.PrimaryColor != colors[0])
@@ -113,7 +113,7 @@ public sealed class StatusBarColorPaletteWidget : Gtk.DrawingArea
 				else if (button == GtkExtensions.MouseLeftButton)
 					PintaCore.Palette.PrimaryColor = PintaCore.Palette.CurrentPalette[index];
 				else {
-					var color = GetUserChosenColor ([PintaCore.Palette.CurrentPalette[index]], title: "Choose Palette Color")?[0];
+					var color = GetUserChosenColor (new Color[] { PintaCore.Palette.CurrentPalette[index] }, title: "Choose Palette Color")?[0];
 					if (color != null)
 						PintaCore.Palette.CurrentPalette[index] = color.Value;
 				}

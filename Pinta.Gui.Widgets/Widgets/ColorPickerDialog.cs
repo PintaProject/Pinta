@@ -456,7 +456,7 @@ public sealed class ColorPickerDialog : Gtk.Dialog
 			UpdateView ();
 		};
 		hue_cps.gradient.SetDrawFunc ((area, context, width, height) =>
-			ColorPickerSlider.DrawGradient (context, width, height, cps_padding_width, cps_padding_height, [
+			ColorPickerSlider.DrawGradient (context, width, height, cps_padding_width, cps_padding_height, new Color[] {
 				CurrentColor.SetHsv (hue: 0),
 				CurrentColor.SetHsv (hue: 60),
 				CurrentColor.SetHsv (hue: 120),
@@ -464,7 +464,7 @@ public sealed class ColorPickerDialog : Gtk.Dialog
 				CurrentColor.SetHsv (hue: 240),
 				CurrentColor.SetHsv (hue: 300),
 				CurrentColor.SetHsv (hue: 360)
-			]));
+			}));
 		sliders.Append (hue_cps);
 
 		sat_cps = new ColorPickerSlider (100, Translations.GetString ("Sat"), CurrentColor.GetHsv ().s * 100.0, this, cps_padding_width);
@@ -473,10 +473,10 @@ public sealed class ColorPickerDialog : Gtk.Dialog
 			UpdateView ();
 		};
 		sat_cps.gradient.SetDrawFunc ((area, context, width, height) =>
-			ColorPickerSlider.DrawGradient (context, width, height, cps_padding_width, cps_padding_height, [
+			ColorPickerSlider.DrawGradient (context, width, height, cps_padding_width, cps_padding_height, new Color[] {
 				CurrentColor.SetHsv (sat: 0),
 				CurrentColor.SetHsv (sat: 1)
-			]));
+			}));
 		sliders.Append (sat_cps);
 
 
@@ -486,10 +486,10 @@ public sealed class ColorPickerDialog : Gtk.Dialog
 			UpdateView ();
 		};
 		val_cps.gradient.SetDrawFunc ((area, context, width, height) =>
-			ColorPickerSlider.DrawGradient (context, width, height, cps_padding_width, cps_padding_height, [
+			ColorPickerSlider.DrawGradient (context, width, height, cps_padding_width, cps_padding_height, new Color[] {
 				CurrentColor.SetHsv (value: 0),
 				CurrentColor.SetHsv (value: 1)
-			]));
+			}));
 		sliders.Append (val_cps);
 
 		sliders.Append (new Gtk.Separator ());
@@ -501,7 +501,7 @@ public sealed class ColorPickerDialog : Gtk.Dialog
 		};
 		r_cps.gradient.SetDrawFunc ((area, context, width, height) =>
 			ColorPickerSlider.DrawGradient (context, width, height, cps_padding_width, cps_padding_height,
-				[CurrentColor.SetRgba (r: 0), CurrentColor.SetRgba (r: 1)]));
+				new Color[] { CurrentColor.SetRgba (r: 0), CurrentColor.SetRgba (r: 1) }));
 
 		sliders.Append (r_cps);
 		g_cps = new ColorPickerSlider (255, Translations.GetString ("Green"), CurrentColor.G * 255.0, this, cps_padding_width);
@@ -511,7 +511,7 @@ public sealed class ColorPickerDialog : Gtk.Dialog
 		};
 		g_cps.gradient.SetDrawFunc ((area, context, width, height) =>
 			ColorPickerSlider.DrawGradient (context, width, height, cps_padding_width, cps_padding_height,
-				[CurrentColor.SetRgba (g: 0), CurrentColor.SetRgba (g: 1)]));
+				new Color[] { CurrentColor.SetRgba (g: 0), CurrentColor.SetRgba (g: 1) }));
 		sliders.Append (g_cps);
 		b_cps = new ColorPickerSlider (255, Translations.GetString ("Blue"), CurrentColor.B * 255.0, this, cps_padding_width);
 		b_cps.OnValueChange += (sender, args) => {
@@ -520,7 +520,7 @@ public sealed class ColorPickerDialog : Gtk.Dialog
 		};
 		b_cps.gradient.SetDrawFunc ((area, context, width, height) =>
 			ColorPickerSlider.DrawGradient (context, width, height, cps_padding_width, cps_padding_height,
-				[CurrentColor.SetRgba (b: 0), CurrentColor.SetRgba (b: 1)]));
+				new Color[] { CurrentColor.SetRgba (b: 0), CurrentColor.SetRgba (b: 1) }));
 		sliders.Append (b_cps);
 		sliders.Append (new Gtk.Separator ());
 		a_cps = new ColorPickerSlider (255, Translations.GetString ("Alpha"), CurrentColor.A * 255.0, this, cps_padding_width);
@@ -530,7 +530,7 @@ public sealed class ColorPickerDialog : Gtk.Dialog
 		};
 		a_cps.gradient.SetDrawFunc ((area, context, width, height) =>
 			ColorPickerSlider.DrawGradient (context, width, height, cps_padding_width, cps_padding_height,
-				[CurrentColor.SetRgba (a: 0), CurrentColor.SetRgba (a: 1)]));
+				new Color[] { CurrentColor.SetRgba (a: 0), CurrentColor.SetRgba (a: 1) }));
 		sliders.Append (a_cps);
 
 		#endregion
