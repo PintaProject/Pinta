@@ -116,7 +116,7 @@ public sealed class StatusBarColorPaletteWidget : Gtk.DrawingArea
 					PintaCore.Palette.PrimaryColor = PintaCore.Palette.CurrentPalette[index];
 				else {
 					var color = GetUserChosenColor ([PintaCore.Palette.CurrentPalette[index]], title: "Choose Palette Color")?[0];
-					if (color.HasValue)
+					if (color != null)
 						PintaCore.Palette.CurrentPalette[index] = color.Value;
 				}
 
