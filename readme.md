@@ -1,5 +1,7 @@
+
 # Pinta - [Simple Gtk# Paint Program](http://pinta-project.com/)
 
+<a href='https://flathub.org/apps/com.github.PintaProject.Pinta'><img width='200' alt='Get it on Flathub' src='https://flathub.org/api/badge?locale=en'/></a>
 [![Translation status](https://hosted.weblate.org/widget/pinta/pinta/287x66-grey.png)](https://hosted.weblate.org/engage/pinta/)
 [![Build Status](https://github.com/PintaProject/Pinta/workflows/Build/badge.svg)](https://github.com/PintaProject/Pinta/actions)
 
