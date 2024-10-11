@@ -555,43 +555,43 @@ public sealed class ColorPickerDialog : Gtk.Dialog
 
 		hue_cps = new ColorPickerSlider (360, Translations.GetString ("Hue"), CurrentColor.GetHsv ().h, this, cps_padding_width, cps_width);
 		hue_cps.OnValueChange += (sender, args) => {
-			CurrentColor = CurrentColor.SetHsv (hue: args.value);
+			CurrentColor = CurrentColor.CopyHsv (hue: args.value);
 			UpdateView ();
 		};
 		hue_cps.gradient.SetDrawFunc ((area, context, width, height) =>
 			ColorPickerSlider.DrawGradient (context, width, height, cps_padding_width, cps_padding_height, new Color[] {
-				CurrentColor.SetHsv (hue: 0),
-				CurrentColor.SetHsv (hue: 60),
-				CurrentColor.SetHsv (hue: 120),
-				CurrentColor.SetHsv (hue: 180),
-				CurrentColor.SetHsv (hue: 240),
-				CurrentColor.SetHsv (hue: 300),
-				CurrentColor.SetHsv (hue: 360)
+				CurrentColor.CopyHsv (hue: 0),
+				CurrentColor.CopyHsv (hue: 60),
+				CurrentColor.CopyHsv (hue: 120),
+				CurrentColor.CopyHsv (hue: 180),
+				CurrentColor.CopyHsv (hue: 240),
+				CurrentColor.CopyHsv (hue: 300),
+				CurrentColor.CopyHsv (hue: 360)
 			}));
 		sliders_box.Append (hue_cps);
 
 		sat_cps = new ColorPickerSlider (100, Translations.GetString ("Sat"), CurrentColor.GetHsv ().s * 100.0, this, cps_padding_width, cps_width);
 		sat_cps.OnValueChange += (sender, args) => {
-			CurrentColor = CurrentColor.SetHsv (sat: args.value / 100.0);
+			CurrentColor = CurrentColor.CopyHsv (sat: args.value / 100.0);
 			UpdateView ();
 		};
 		sat_cps.gradient.SetDrawFunc ((area, context, width, height) =>
 			ColorPickerSlider.DrawGradient (context, width, height, cps_padding_width, cps_padding_height, new Color[] {
-				CurrentColor.SetHsv (sat: 0),
-				CurrentColor.SetHsv (sat: 1)
+				CurrentColor.CopyHsv (sat: 0),
+				CurrentColor.CopyHsv (sat: 1)
 			}));
 		sliders_box.Append (sat_cps);
 
 
 		val_cps = new ColorPickerSlider (100, Translations.GetString ("Value"), CurrentColor.GetHsv ().v * 100.0, this, cps_padding_width, cps_width);
 		val_cps.OnValueChange += (sender, args) => {
-			CurrentColor = CurrentColor.SetHsv (value: args.value / 100.0);
+			CurrentColor = CurrentColor.CopyHsv (value: args.value / 100.0);
 			UpdateView ();
 		};
 		val_cps.gradient.SetDrawFunc ((area, context, width, height) =>
 			ColorPickerSlider.DrawGradient (context, width, height, cps_padding_width, cps_padding_height, new Color[] {
-				CurrentColor.SetHsv (value: 0),
-				CurrentColor.SetHsv (value: 1)
+				CurrentColor.CopyHsv (value: 0),
+				CurrentColor.CopyHsv (value: 1)
 			}));
 		sliders_box.Append (val_cps);
 
@@ -599,41 +599,41 @@ public sealed class ColorPickerDialog : Gtk.Dialog
 
 		r_cps = new ColorPickerSlider (255, Translations.GetString ("Red"), CurrentColor.R * 255.0, this, cps_padding_width, cps_width);
 		r_cps.OnValueChange += (sender, args) => {
-			CurrentColor = CurrentColor.SetRgba (r: args.value / 255.0);
+			CurrentColor = CurrentColor with { R = args.value / 255.0 };
 			UpdateView ();
 		};
 		r_cps.gradient.SetDrawFunc ((area, context, width, height) =>
 			ColorPickerSlider.DrawGradient (context, width, height, cps_padding_width, cps_padding_height,
-				new Color[] { CurrentColor.SetRgba (r: 0), CurrentColor.SetRgba (r: 1) }));
+				new[] { CurrentColor with { R = 0 }, CurrentColor with { R = 1 }}));
 
 		sliders_box.Append (r_cps);
 		g_cps = new ColorPickerSlider (255, Translations.GetString ("Green"), CurrentColor.G * 255.0, this, cps_padding_width, cps_width);
 		g_cps.OnValueChange += (sender, args) => {
-			CurrentColor = CurrentColor.SetRgba (g: args.value / 255.0);
+			CurrentColor = CurrentColor with { G = args.value / 255.0 };
 			UpdateView ();
 		};
 		g_cps.gradient.SetDrawFunc ((area, context, width, height) =>
 			ColorPickerSlider.DrawGradient (context, width, height, cps_padding_width, cps_padding_height,
-				new Color[] { CurrentColor.SetRgba (g: 0), CurrentColor.SetRgba (g: 1) }));
+				new[] { CurrentColor with { G = 0 }, CurrentColor with { G = 1 }}));
 		sliders_box.Append (g_cps);
 		b_cps = new ColorPickerSlider (255, Translations.GetString ("Blue"), CurrentColor.B * 255.0, this, cps_padding_width, cps_width);
 		b_cps.OnValueChange += (sender, args) => {
-			CurrentColor = CurrentColor.SetRgba (b: args.value / 255.0);
+			CurrentColor = CurrentColor with { G = args.value / 255.0 };
 			UpdateView ();
 		};
 		b_cps.gradient.SetDrawFunc ((area, context, width, height) =>
 			ColorPickerSlider.DrawGradient (context, width, height, cps_padding_width, cps_padding_height,
-				new Color[] { CurrentColor.SetRgba (b: 0), CurrentColor.SetRgba (b: 1) }));
+				new[] { CurrentColor with { B = 0 }, CurrentColor with { B = 1 }}));
 		sliders_box.Append (b_cps);
 		sliders_box.Append (new Gtk.Separator ());
 		a_cps = new ColorPickerSlider (255, Translations.GetString ("Alpha"), CurrentColor.A * 255.0, this, cps_padding_width, cps_width);
 		a_cps.OnValueChange += (sender, args) => {
-			CurrentColor = CurrentColor.SetRgba (a: args.value / 255.0);
+			CurrentColor = CurrentColor with { A = args.value / 255.0 };
 			UpdateView ();
 		};
 		a_cps.gradient.SetDrawFunc ((area, context, width, height) =>
 			ColorPickerSlider.DrawGradient (context, width, height, cps_padding_width, cps_padding_height,
-				new Color[] { CurrentColor.SetRgba (a: 0), CurrentColor.SetRgba (a: 1) }));
+				new[] { CurrentColor with { A = 0 }, CurrentColor with { A = 1 }}));
 		sliders_box.Append (a_cps);
 
 		#endregion
@@ -942,7 +942,7 @@ public sealed class ColorPickerDialog : Gtk.Dialog
 
 			var sat = Math.Min (vecCursor.Magnitude () / picker_surface_radius, 1);
 
-			CurrentColor = CurrentColor.SetHsv (hue: hue, sat: sat);
+			CurrentColor = CurrentColor.CopyHsv (hue: hue, sat: sat);
 		} else if (picker_surface_type == ColorSurfaceType.SatAndVal) {
 			int size = picker_surface_radius * 2;
 			if (cursor.X > size - 1)
@@ -955,7 +955,7 @@ public sealed class ColorPickerDialog : Gtk.Dialog
 				cursor = cursor with { Y = 0 };
 			double s = 1f - (double) cursor.Y / (size - 1);
 			double v = (double) cursor.X / (size - 1);
-			CurrentColor = CurrentColor.SetHsv (sat: s, value: v);
+			CurrentColor = CurrentColor.CopyHsv (sat: s, value: v);
 		}
 		UpdateView ();
 	}

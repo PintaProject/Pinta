@@ -11,7 +11,7 @@ public static class ColorExtensions
 	/// </summary>
 	/// <param name="addAlpha">If false, returns in format "RRGGBB" (Alpha will not affect result).<br/>
 	/// Otherwise, returns in format "RRGGBBAA".</param>
-	public static String ToHex (this Color c, bool addAlpha = true)
+	public static string ToHex (this Color c, bool addAlpha = true)
 	{
 		int r = Convert.ToInt32 (c.R * 255.0);
 		int g = Convert.ToInt32 (c.G * 255.0);
@@ -34,13 +34,10 @@ public static class ColorExtensions
 	/// </summary>
 	/// <param name="hex">Hex color as a string.</param>
 	/// <returns>Resulting color. If null, the method could not parse it.</returns>
-	public static Color? FromHex (String hex)
+	public static Color? FromHex (string hex)
 	{
-		if (hex[0] == '#') {
-			Console.WriteLine (hex);
+		if (hex.StartsWith ("#"))
 			hex = hex.Remove (0, 1);
-			Console.WriteLine (hex);
-		}
 
 		// handle shorthand hex
 		if (hex.Length == 3)
@@ -51,16 +48,14 @@ public static class ColorExtensions
 		if (hex.Length != 6 && hex.Length != 8)
 			return null;
 		try {
+
 			int r = int.Parse (hex.Substring (0, 2), NumberStyles.HexNumber);
 			int g = int.Parse (hex.Substring (2, 2), NumberStyles.HexNumber);
 			int b = int.Parse (hex.Substring (4, 2), NumberStyles.HexNumber);
 			int a = 255;
 			if (hex.Length > 6)
-				a = int.Parse (hex.Substring (5, 2), NumberStyles.HexNumber);
-
-			Console.WriteLine ($"{r}, {g}, {b}, {a}");
-
-			return new Color ().SetRgba (r / 255.0, g / 255.0, b / 255.0, a / 255.0);
+				a = int.Parse (hex.Substring (6, 2), NumberStyles.HexNumber);
+			return new Color (r / 255.0, g / 255.0, b / 255.0, a / 255.0);
 		} catch {
 			return null;
 		}
@@ -143,25 +138,14 @@ public static class ColorExtensions
 	}
 
 	/// <summary>
-	/// Returns a copy of the original color, replacing provided RGBA components.
-	/// </summary>
-	/// <param name="r">Red component, 0 - 1</param>
-	/// <param name="g">Green component, 0 - 1</param>
-	/// <param name="b">Blue component, 0 - 1</param>
-	/// <param name="a">Alpha component, 0 - 1</param>
-	public static Color SetRgba (this Color c, double? r = null, double? g = null, double? b = null, double? a = null)
-	{
-		return new Color (r ?? c.R, g ?? c.G, b ?? c.B, a ?? c.A);
-	}
-
-	/// <summary>
 	/// Returns a copy of the original color, replacing provided HSV components.
+	/// HSV components not changed will retain their values from the original color.
 	/// </summary>
 	/// <param name="hue">Hue component, 0 - 360</param>
 	/// <param name="sat">Saturation component, 0 - 1</param>
 	/// <param name="value">Value component, 0 - 1</param>
 	/// <param name="alpha">Alpha component, 0 - 1</param>
-	public static Color SetHsv (this Color c, double? hue = null, double? sat = null, double? value = null, double? alpha = null)
+	public static Color CopyHsv (this Color c, double? hue = null, double? sat = null, double? value = null, double? alpha = null)
 	{
 		var hsv = c.GetHsv ();
 
