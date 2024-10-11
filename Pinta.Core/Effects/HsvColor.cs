@@ -40,7 +40,7 @@ public readonly struct HsvColor
 
 	public static HsvColor FromColor (Color c) => c.ToHsv ();
 	public static HsvColor FromRgb (double r, double g, double b) => new Color (r, g, b).ToHsv ();
-	public Color ToColor (double alpha = 1) => ColorExtensions.FromHsv (this);
+	public Color ToColor (double alpha = 1) => Color.FromHsv (this);
 
 	public ColorBgra ToBgra ()
 	{

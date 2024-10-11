@@ -541,7 +541,7 @@ public sealed class ColorPickerDialog : Gtk.Dialog
 		hex_entry = new Entry { Text_ = CurrentColor.ToHex (hex_entry_add_alpha.state), MaxWidthChars = 10 };
 		hex_entry.OnChanged ((o, e) => {
 			if (GetFocus ()?.Parent == hex_entry) {
-				CurrentColor = ColorExtensions.FromHex (hex_entry.GetText ()) ?? CurrentColor;
+				CurrentColor = Color.FromHex (hex_entry.GetText ()) ?? CurrentColor;
 				UpdateView ();
 			}
 		});
@@ -863,7 +863,7 @@ public sealed class ColorPickerDialog : Gtk.Dialog
 						if (picker_surface_option_draw_value.state)
 							v = CurrentColor.ToHsv ().Val;
 
-						var c = ColorExtensions.FromHsv (h, s, v);
+						var c = Color.FromHsv (h, s, v);
 
 						double a = 1;
 						var d = rad - vec.Magnitude ();
@@ -896,7 +896,7 @@ public sealed class ColorPickerDialog : Gtk.Dialog
 				double s = 1.0 - (double) y / (draw_height - 1);
 				for (int x = 0; x < draw_width; x++) {
 					double v = (double) x / (draw_width - 1);
-					var c = ColorExtensions.FromHsv (CurrentColor.ToHsv ().Hue, s, v);
+					var c = Color.FromHsv (CurrentColor.ToHsv ().Hue, s, v);
 					data[(y * stride) + (x * 3) + 0] = (byte) (c.R * 255);
 					data[(y * stride) + (x * 3) + 1] = (byte) (c.G * 255);
 					data[(y * stride) + (x * 3) + 2] = (byte) (c.B * 255);
