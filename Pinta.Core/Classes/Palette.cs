@@ -28,6 +28,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Threading.Tasks;
 using Cairo;
 using Gtk;
 
@@ -185,7 +186,7 @@ public sealed class Palette
 		saver.Save (colors, file);
 	}
 
-	private static void ShowUnsupportedFormatDialog (Window parent, string filename, string message, string errors)
+	private static Task ShowUnsupportedFormatDialog (Window parent, string filename, string message, string errors)
 	{
 		var details = new StringBuilder ();
 		details.AppendLine (Translations.GetString ("Could not open file: {0}", filename));
@@ -203,6 +204,6 @@ public sealed class Palette
 		details.AppendLine ();
 		details.AppendLine (errors);
 
-		PintaCore.Chrome.ShowMessageDialog (parent, message, details.ToString ());
+		return PintaCore.Chrome.ShowMessageDialog (parent, message, details.ToString ());
 	}
 }

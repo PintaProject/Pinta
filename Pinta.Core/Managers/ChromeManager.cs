@@ -159,9 +159,9 @@ public sealed class ChromeManager : IChromeService
 		}
 	}
 
-	public async void ShowMessageDialog (Gtk.Window parent, string message, string body)
+	public Task ShowMessageDialog (Gtk.Window parent, string message, string body)
 	{
-		await message_dialog_handler (parent, message, body);
+		return message_dialog_handler (parent, message, body);
 	}
 
 	public void SetStatusBarText (string text)

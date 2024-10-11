@@ -82,7 +82,7 @@ internal sealed class NewScreenshotAction : IActionHandler
 
 		} catch (NoHandlersForOSException e) {
 
-			chrome.ShowMessageDialog (
+			await chrome.ShowMessageDialog (
 				chrome.MainWindow,
 				e.Message,
 				string.Empty);
