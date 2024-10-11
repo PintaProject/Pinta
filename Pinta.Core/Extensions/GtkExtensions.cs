@@ -400,8 +400,18 @@ public static partial class GtkExtensions
 	public static Task<string> RunAsync (this Adw.MessageDialog dialog)
 	{
 		TaskCompletionSource<string> tcs = new ();
-		dialog.OnResponse += (_, args) => tcs.SetResult (args.Response);
-		dialog.Show ();
+
+		void ResponseCallback (
+			Adw.MessageDialog sender,
+			Adw.MessageDialog.ResponseSignalArgs args)
+		{
+			tcs.SetResult (args.Response);
+			dialog.OnResponse -= ResponseCallback;
+		}
+
+		dialog.OnResponse += ResponseCallback;
+		dialog.Present ();
+
 		return tcs.Task;
 	}
 
@@ -595,10 +605,12 @@ public static partial class GtkExtensions
 		attrs = new Pango.AttrList (attrs_handle);
 	}
 
-	public static async void LaunchUri (string uri)
+	public static async void LaunchUri (
+		this SystemManager system,
+		string uri)
 	{
 		// Workaround for macOS, which produces an "unsupported on current backend" error (https://gitlab.gnome.org/GNOME/gtk/-/issues/6788)
-		if (PintaCore.System.OperatingSystem == OS.Mac) {
+		if (system.OperatingSystem == OS.Mac) {
 			var process = System.Diagnostics.Process.Start ("open", uri);
 			process.WaitForExit ();
 		} else {

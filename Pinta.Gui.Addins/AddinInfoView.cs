@@ -24,7 +24,6 @@ internal sealed class AddinInfoView : Adw.Bin
 	private readonly Adw.Bin empty_page;
 
 	private readonly Adw.ViewStack view_stack;
-
 	private AddinListViewItem? current_item;
 
 	/// <summary>
@@ -32,7 +31,9 @@ internal sealed class AddinInfoView : Adw.Bin
 	/// </summary>
 	public event EventHandler? OnAddinChanged;
 
-	public AddinInfoView ()
+	private readonly SystemManager system;
+
+	public AddinInfoView (SystemManager system)
 	{
 		// --- Control creation
 
@@ -109,6 +110,8 @@ internal sealed class AddinInfoView : Adw.Bin
 		empty_page = emptyPage;
 
 		view_stack = viewStack;
+
+		this.system = system;
 	}
 
 	private Gtk.Switch CreateEnableSwitch ()
@@ -229,7 +232,7 @@ internal sealed class AddinInfoView : Adw.Bin
 
 	private void HandleInfoButtonClicked ()
 	{
-		GtkExtensions.LaunchUri (current_item!.Url);
+		system.LaunchUri (current_item!.Url);
 	}
 
 	private void HandleInstallButtonClicked ()

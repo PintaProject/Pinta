@@ -37,6 +37,7 @@
     <GtkFile Include="$(MinGWBinFolder)\libgraphite2.dll" />
     <GtkFile Include="$(MinGWBinFolder)\libgtk-4-1.dll" />
     <GtkFile Include="$(MinGWBinFolder)\libharfbuzz-0.dll" />
+    <GtkFile Include="$(MinGWBinFolder)\libharfbuzz-subset-0.dll" />
     <GtkFile Include="$(MinGWBinFolder)\libiconv-2.dll" />
     <GtkFile Include="$(MinGWBinFolder)\libidn2-0.dll" />
     <GtkFile Include="$(MinGWBinFolder)\libintl-8.dll" />
