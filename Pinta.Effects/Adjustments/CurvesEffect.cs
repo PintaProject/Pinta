@@ -49,11 +49,11 @@ public sealed class CurvesEffect : BaseEffect
 			IconName = Icon,
 		};
 
-		int responseId = await dialog.RunAsync ();
+		Gtk.ResponseType response = (Gtk.ResponseType) await dialog.RunAsync ();
 
 		dialog.Destroy ();
 
-		return Gtk.ResponseType.Ok == (Gtk.ResponseType) responseId;
+		return Gtk.ResponseType.Ok == response;
 	}
 
 	public override void Render (ImageSurface src, ImageSurface dest, ReadOnlySpan<RectangleI> rois)
