@@ -415,7 +415,6 @@ public static partial class GtkExtensions
 		return completionSource.Task;
 	}
 
-	/// <returns>Task whose result is the response ID</returns>
 	public static Task<Gtk.ResponseType> RunAsync (this Gtk.Dialog dialog)
 	{
 		TaskCompletionSource<Gtk.ResponseType> completionSource = new ();
