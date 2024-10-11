@@ -60,8 +60,6 @@ public sealed class ChromeManager : IChromeService
 	public Gio.Menu AdjustmentsMenu { get; private set; } = null!;
 	public Gio.Menu EffectsMenu { get; private set; } = null!;
 
-	public ChromeManager () { }
-
 	public PointI LastCanvasCursorPoint {
 		get => last_canvas_cursor_point;
 		set {
@@ -145,7 +143,7 @@ public sealed class ChromeManager : IChromeService
 		simple_effect_dialog_handler = handler;
 	}
 
-	public async void ShowErrorDialog (
+	public async Task ShowErrorDialog (
 		Gtk.Window parent,
 		string message,
 		string body,
