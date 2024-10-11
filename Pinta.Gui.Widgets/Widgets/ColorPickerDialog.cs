@@ -496,7 +496,7 @@ public sealed class ColorPickerDialog : Gtk.Dialog
 		picker_surface_cursor.SetSizeRequest (pickerSurfaceDrawSize, pickerSurfaceDrawSize);
 		picker_surface_cursor.SetDrawFunc ((area, context, width, height) => {
 			context.Antialias = Antialias.None;
-			var loc = HsvToPickerLocation (CurrentColor.GetHsv (), picker_surface_radius);
+			var loc = HsvToPickerLocation (CurrentColor.ToHsv (), picker_surface_radius);
 			loc = new PointD (loc.X + picker_surface_radius + picker_surface_padding, loc.Y + picker_surface_radius + picker_surface_padding);
 
 			context.FillRectangle (new RectangleD (loc.X - 5, loc.Y - 5, 10, 10), CurrentColor);
@@ -553,7 +553,7 @@ public sealed class ColorPickerDialog : Gtk.Dialog
 
 		sliders_box.Append (hexBox);
 
-		hue_cps = new ColorPickerSlider (360, Translations.GetString ("Hue"), CurrentColor.GetHsv ().h, this, cps_padding_width, cps_width);
+		hue_cps = new ColorPickerSlider (360, Translations.GetString ("Hue"), CurrentColor.ToHsv ().Hue, this, cps_padding_width, cps_width);
 		hue_cps.OnValueChange += (sender, args) => {
 			CurrentColor = CurrentColor.CopyHsv (hue: args.value);
 			UpdateView ();
@@ -570,7 +570,7 @@ public sealed class ColorPickerDialog : Gtk.Dialog
 			}));
 		sliders_box.Append (hue_cps);
 
-		sat_cps = new ColorPickerSlider (100, Translations.GetString ("Sat"), CurrentColor.GetHsv ().s * 100.0, this, cps_padding_width, cps_width);
+		sat_cps = new ColorPickerSlider (100, Translations.GetString ("Sat"), CurrentColor.ToHsv ().Sat * 100.0, this, cps_padding_width, cps_width);
 		sat_cps.OnValueChange += (sender, args) => {
 			CurrentColor = CurrentColor.CopyHsv (sat: args.value / 100.0);
 			UpdateView ();
@@ -583,7 +583,7 @@ public sealed class ColorPickerDialog : Gtk.Dialog
 		sliders_box.Append (sat_cps);
 
 
-		val_cps = new ColorPickerSlider (100, Translations.GetString ("Value"), CurrentColor.GetHsv ().v * 100.0, this, cps_padding_width, cps_width);
+		val_cps = new ColorPickerSlider (100, Translations.GetString ("Value"), CurrentColor.ToHsv ().Val * 100.0, this, cps_padding_width, cps_width);
 		val_cps.OnValueChange += (sender, args) => {
 			CurrentColor = CurrentColor.CopyHsv (value: args.value / 100.0);
 			UpdateView ();
@@ -793,11 +793,11 @@ public sealed class ColorPickerDialog : Gtk.Dialog
 		picker_surface.QueueDraw ();
 
 		// Redraw cps
-		var hsv = CurrentColor.GetHsv ();
+		var hsv = CurrentColor.ToHsv ();
 
-		hue_cps.SetValue (hsv.h);
-		sat_cps.SetValue (hsv.s * 100.0);
-		val_cps.SetValue (hsv.v * 100.0);
+		hue_cps.SetValue (hsv.Hue);
+		sat_cps.SetValue (hsv.Sat * 100.0);
+		val_cps.SetValue (hsv.Val * 100.0);
 
 		r_cps.SetValue (CurrentColor.R * 255.0);
 		g_cps.SetValue (CurrentColor.G * 255.0);
@@ -861,7 +861,7 @@ public sealed class ColorPickerDialog : Gtk.Dialog
 
 						double v = 1;
 						if (picker_surface_option_draw_value.state)
-							v = CurrentColor.GetHsv ().v;
+							v = CurrentColor.ToHsv ().Val;
 
 						var c = ColorExtensions.FromHsv (h, s, v);
 
@@ -896,7 +896,7 @@ public sealed class ColorPickerDialog : Gtk.Dialog
 				double s = 1.0 - (double) y / (draw_height - 1);
 				for (int x = 0; x < draw_width; x++) {
 					double v = (double) x / (draw_width - 1);
-					var c = ColorExtensions.FromHsv (CurrentColor.GetHsv ().h, s, v);
+					var c = ColorExtensions.FromHsv (CurrentColor.ToHsv ().Hue, s, v);
 					data[(y * stride) + (x * 3) + 0] = (byte) (c.R * 255);
 					data[(y * stride) + (x * 3) + 1] = (byte) (c.G * 255);
 					data[(y * stride) + (x * 3) + 2] = (byte) (c.B * 255);
@@ -910,19 +910,19 @@ public sealed class ColorPickerDialog : Gtk.Dialog
 	}
 
 	// Takes in HSV values as tuple (h,s,v) and returns the position of that color in the picker surface.
-	private PointD HsvToPickerLocation (ColorExtensions.Hsv hsv, int radius)
+	private PointD HsvToPickerLocation (HsvColor hsv, int radius)
 	{
 		if (picker_surface_type == ColorSurfaceType.HueAndSat) {
-			var rad = hsv.h * (Math.PI / 180.0);
+			var rad = hsv.Hue * (Math.PI / 180.0);
 			var mult = radius;
-			var mag = hsv.s * mult;
+			var mag = hsv.Sat * mult;
 			var x = Math.Cos (rad) * mag;
 			var y = Math.Sin (rad) * mag;
 			return new PointD (x, -y);
 		} else if (picker_surface_type == ColorSurfaceType.SatAndVal) {
 			int size = radius * 2;
-			var x = hsv.v * (size - 1);
-			var y = size - hsv.s * (size - 1);
+			var x = hsv.Val * (size - 1);
+			var y = size - hsv.Sat * (size - 1);
 			return new PointD (x - radius, y - radius);
 		}
 

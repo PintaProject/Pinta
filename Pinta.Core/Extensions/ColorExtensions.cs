@@ -62,25 +62,6 @@ public static class ColorExtensions
 	}
 
 	/// <summary>
-	/// Hue, Saturation, Value description of a color.<br/>
-	/// Hue varies from 0 - 360.<br/>
-	/// Saturation and value varies from 0 - 1.
-	/// </summary>
-	public struct Hsv
-	{
-		public readonly double h;
-		public readonly double s;
-		public readonly double v;
-
-		public Hsv (double h, double s, double v)
-		{
-			this.h = h;
-			this.s = s;
-			this.v = v;
-		}
-	}
-
-	/// <summary>
 	/// Copied from RgbColor.ToHsv<br/>
 	/// Returns the Cairo color in HSV value.
 	/// </summary>
@@ -88,7 +69,7 @@ public static class ColorExtensions
 	/// Hue varies from 0 - 360.<br/>
 	/// Saturation and value varies from 0 - 1.
 	/// </returns>
-	public static Hsv GetHsv (this Color c)
+	public static HsvColor ToHsv (this Color c)
 	{
 		// In this function, R, G, and B values must be scaled
 		// to be between 0 and 1.
@@ -134,7 +115,7 @@ public static class ColorExtensions
 
 		// Scale to the requirements of this
 		// application. All values are between 0 and 255.
-		return new Hsv (h, s, v);
+		return new HsvColor (h, s, v);
 	}
 
 	/// <summary>
@@ -147,19 +128,24 @@ public static class ColorExtensions
 	/// <param name="alpha">Alpha component, 0 - 1</param>
 	public static Color CopyHsv (this Color c, double? hue = null, double? sat = null, double? value = null, double? alpha = null)
 	{
-		var hsv = c.GetHsv ();
+		var hsv = c.ToHsv ();
 
-		double h = hue ?? hsv.h;
-		double s = sat ?? hsv.s;
-		double v = value ?? hsv.v;
+		double h = hue ?? hsv.Hue;
+		double s = sat ?? hsv.Sat;
+		double v = value ?? hsv.Val;
 		double a = alpha ?? c.A;
 
 		return FromHsv (h, s, v, a);
 	}
 
 	/// <summary>
-	/// Copied from HsvColor.ToRgb<br/>
-	/// Returns a Cairo color using the given HSV values.
+	/// Returns a RGBA Cairo color using the given HsvColor.
+	/// </summary>
+	/// <param name="alpha">Alpha of the new Cairo color, 0 - 1</param>
+	public static Color FromHsv (HsvColor hsv, double alpha = 1) => FromHsv (hsv.Hue, hsv.Sat, hsv.Val, alpha);
+
+	/// <summary>
+	/// Returns a RGBA Cairo color using the given HSV values.
 	/// </summary>
 	/// <param name="hue">Hue component, 0 - 360</param>
 	/// <param name="sat">Saturation component, 0 - 1</param>
