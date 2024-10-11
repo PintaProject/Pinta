@@ -672,7 +672,7 @@ public static class UnaryPixelOps
 			color.B = Utility.ClampToByte ((intensity * 1024 + (color.B - intensity) * sat_factor) >> 10);
 
 			HsvColor hsvColor = HsvColor.FromRgb (color.R / 255.0, color.G / 255.0, color.B / 255.0);
-			int newHue = (int)hsvColor.Hue;
+			int newHue = (int) hsvColor.Hue;
 
 			newHue += hue_delta;
 

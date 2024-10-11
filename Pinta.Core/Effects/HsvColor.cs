@@ -19,8 +19,8 @@ namespace Pinta.Core;
 public readonly struct HsvColor
 {
 	public double Hue { get; init; } // 0-360
-	public double Sat { get; init;  } // 0-1
-	public double Val { get; init;  } // 0-1
+	public double Sat { get; init; } // 0-1
+	public double Val { get; init; } // 0-1
 
 	public HsvColor (double hue, double sat, double val)
 	{
@@ -52,5 +52,5 @@ public readonly struct HsvColor
 		=> $"({Hue:2}, {Sat:2}, {Val:2})";
 
 	public override int GetHashCode ()
-		=> ((int)Hue + ((int)Sat << 8) + ((int)Val << 16)).GetHashCode ();
+		=> ((int) Hue + ((int) Sat << 8) + ((int) Val << 16)).GetHashCode ();
 }

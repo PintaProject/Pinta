@@ -604,7 +604,7 @@ public sealed class ColorPickerDialog : Gtk.Dialog
 		};
 		r_cps.gradient.SetDrawFunc ((area, context, width, height) =>
 			ColorPickerSlider.DrawGradient (context, width, height, cps_padding_width, cps_padding_height,
-				new[] { CurrentColor with { R = 0 }, CurrentColor with { R = 1 }}));
+				new[] { CurrentColor with { R = 0 }, CurrentColor with { R = 1 } }));
 
 		sliders_box.Append (r_cps);
 		g_cps = new ColorPickerSlider (255, Translations.GetString ("Green"), CurrentColor.G * 255.0, this, cps_padding_width, cps_width);
@@ -614,7 +614,7 @@ public sealed class ColorPickerDialog : Gtk.Dialog
 		};
 		g_cps.gradient.SetDrawFunc ((area, context, width, height) =>
 			ColorPickerSlider.DrawGradient (context, width, height, cps_padding_width, cps_padding_height,
-				new[] { CurrentColor with { G = 0 }, CurrentColor with { G = 1 }}));
+				new[] { CurrentColor with { G = 0 }, CurrentColor with { G = 1 } }));
 		sliders_box.Append (g_cps);
 		b_cps = new ColorPickerSlider (255, Translations.GetString ("Blue"), CurrentColor.B * 255.0, this, cps_padding_width, cps_width);
 		b_cps.OnValueChange += (sender, args) => {
@@ -623,7 +623,7 @@ public sealed class ColorPickerDialog : Gtk.Dialog
 		};
 		b_cps.gradient.SetDrawFunc ((area, context, width, height) =>
 			ColorPickerSlider.DrawGradient (context, width, height, cps_padding_width, cps_padding_height,
-				new[] { CurrentColor with { B = 0 }, CurrentColor with { B = 1 }}));
+				new[] { CurrentColor with { B = 0 }, CurrentColor with { B = 1 } }));
 		sliders_box.Append (b_cps);
 		sliders_box.Append (new Gtk.Separator ());
 		a_cps = new ColorPickerSlider (255, Translations.GetString ("Alpha"), CurrentColor.A * 255.0, this, cps_padding_width, cps_width);
@@ -633,7 +633,7 @@ public sealed class ColorPickerDialog : Gtk.Dialog
 		};
 		a_cps.gradient.SetDrawFunc ((area, context, width, height) =>
 			ColorPickerSlider.DrawGradient (context, width, height, cps_padding_width, cps_padding_height,
-				new[] { CurrentColor with { A = 0 }, CurrentColor with { A = 1 }}));
+				new[] { CurrentColor with { A = 0 }, CurrentColor with { A = 1 } }));
 		sliders_box.Append (a_cps);
 
 		#endregion
