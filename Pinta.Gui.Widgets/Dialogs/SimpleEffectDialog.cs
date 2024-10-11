@@ -100,7 +100,7 @@ public sealed class SimpleEffectDialog : Gtk.Dialog
 		// Hookup event handling for live preview.
 		dialog.EffectDataChanged += (o, e) => effect.EffectData.FirePropertyChanged (e.PropertyName);
 
-		Gtk.ResponseType response = (Gtk.ResponseType) await dialog.RunAsync ();
+		Gtk.ResponseType response = await dialog.RunAsync ();
 
 		dialog.Destroy ();
 

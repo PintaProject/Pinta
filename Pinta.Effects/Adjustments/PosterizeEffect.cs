@@ -47,7 +47,7 @@ public sealed class PosterizeEffect : BaseEffect
 			EffectData = Data, // TODO: Delegate `EffectData` changes to event handlers or similar
 		};
 
-		Gtk.ResponseType response = (Gtk.ResponseType) await dialog.RunAsync ();
+		Gtk.ResponseType response = await dialog.RunAsync ();
 
 		dialog.Destroy ();
 

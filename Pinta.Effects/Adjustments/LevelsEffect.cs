@@ -49,7 +49,7 @@ public sealed class LevelsEffect : BaseEffect
 			IconName = Icon,
 		};
 
-		Gtk.ResponseType response = (Gtk.ResponseType) await dialog.RunAsync ();
+		Gtk.ResponseType response = await dialog.RunAsync ();
 
 		dialog.Destroy ();
 

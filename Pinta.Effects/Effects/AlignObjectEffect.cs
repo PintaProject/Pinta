@@ -38,7 +38,7 @@ public sealed class AlignObjectEffect : BaseEffect
 			Data.Position = dialog.SelectedPosition;
 		};
 
-		Gtk.ResponseType response = (Gtk.ResponseType) await dialog.RunAsync ();
+		Gtk.ResponseType response = await dialog.RunAsync ();
 
 		dialog.Destroy ();
 

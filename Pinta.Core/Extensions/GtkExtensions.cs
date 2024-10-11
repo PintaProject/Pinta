@@ -416,15 +416,15 @@ public static partial class GtkExtensions
 	}
 
 	/// <returns>Task whose result is the response ID</returns>
-	public static Task<int> RunAsync (this Gtk.Dialog dialog)
+	public static Task<Gtk.ResponseType> RunAsync (this Gtk.Dialog dialog)
 	{
-		TaskCompletionSource<int> completionSource = new ();
+		TaskCompletionSource<Gtk.ResponseType> completionSource = new ();
 
 		void ResponseCallback (
 			Gtk.Dialog sender,
 			Gtk.Dialog.ResponseSignalArgs args)
 		{
-			completionSource.SetResult (args.ResponseId);
+			completionSource.SetResult ((Gtk.ResponseType) args.ResponseId);
 			dialog.OnResponse -= ResponseCallback;
 		}
 
