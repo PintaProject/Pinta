@@ -39,13 +39,17 @@ public readonly struct HsvColor
 	}
 
 	public static HsvColor FromColor (Color c) => c.ToHsv ();
-	public static HsvColor FromRgb (double r, double g, double b) => new Color (r, g, b).ToHsv ();
 	public Color ToColor (double alpha = 1) => Color.FromHsv (this);
 
+	public static HsvColor FromRgbD (double r, double g, double b) => new Color (r, g, b).ToHsv ();
+
+	public static HsvColor FromRgbI (int r, int g, int b) => new Color (r / 255.0, g / 255.0, b / 255.0).ToHsv ();
+
+	public static HsvColor FromBgra (ColorBgra c) => new Color (c.R / 255.0, c.G / 255.0, c.B / 255.0).ToHsv ();
 	public ColorBgra ToBgra ()
 	{
 		var c = this.ToColor ();
-		return ColorBgra.FromBgr ((byte) c.B, (byte) c.G, (byte) c.R);
+		return ColorBgra.FromBgr ((byte) (c.B * 255.0), (byte) (c.G * 255.0), (byte) (c.R * 255.0));
 	}
 
 	public override readonly string ToString ()
