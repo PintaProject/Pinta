@@ -399,20 +399,39 @@ public static partial class GtkExtensions
 	// TODO-GTK4 (bindings) - replace with adw_message_dialog_choose() once adwaita 1.3 is available, like in v0.4 of gir.core
 	public static Task<string> RunAsync (this Adw.MessageDialog dialog)
 	{
-		TaskCompletionSource<string> tcs = new ();
+		TaskCompletionSource<string> completionSource = new ();
 
 		void ResponseCallback (
 			Adw.MessageDialog sender,
 			Adw.MessageDialog.ResponseSignalArgs args)
 		{
-			tcs.SetResult (args.Response);
+			completionSource.SetResult (args.Response);
 			dialog.OnResponse -= ResponseCallback;
 		}
 
 		dialog.OnResponse += ResponseCallback;
 		dialog.Present ();
 
-		return tcs.Task;
+		return completionSource.Task;
+	}
+
+	/// <returns>Task whose result is the response ID</returns>
+	public static Task<int> RunAsync (this Gtk.Dialog dialog)
+	{
+		TaskCompletionSource<int> completionSource = new ();
+
+		void ResponseCallback (
+			Gtk.Dialog sender,
+			Gtk.Dialog.ResponseSignalArgs args)
+		{
+			completionSource.SetResult (args.ResponseId);
+			dialog.OnResponse -= ResponseCallback;
+		}
+
+		dialog.OnResponse += ResponseCallback;
+		dialog.Present ();
+
+		return completionSource.Task;
 	}
 
 	/// <summary>
